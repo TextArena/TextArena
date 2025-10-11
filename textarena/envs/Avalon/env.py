@@ -269,6 +269,44 @@ class Detective(Role):
             f"Win by identifying and eliminating all Mafia members.\n"
         )
 
+class AvalonParser:
+    # https://regex101.com/r/eWYQa5/1
+    vote_pattern = re.compile(r"<vote>\s*(approve|reject)\s*</vote>", re.IGNORECASE)
+
+    # https://regex101.com/r/rA2EEB/1
+    action_pattern = re.compile(r"<action>\s*(success|fail)\s*</action>", re.IGNORECASE)
+    
+    @staticmethod
+    def parse_team_vote(text: str) -> Optional[str]:
+        """
+        Parses a team proposal vote from text.
+        Returns 'approve' or 'reject', or None if not found.
+        """
+        m = AvalonParser.vote_pattern.search(text)
+        return m.group(1).lower() if m else None
+
+    @staticmethod
+    def parse_mission_action(text: str) -> Optional[str]:
+        """
+        Parses a mission action from text.
+        Returns 'success' or 'fail', or None if not found.
+        """
+        m = AvalonParser.action_pattern.search(text)
+        return m.group(1).lower() if m else None
+
+    @staticmethod
+    def process_mission_actions(mission_actions: Dict[int, str]) -> bool:
+        success = all(action == "success" for action in mission_actions.values())
+        return success
+    
+    @staticmethod
+    def process_team_votes(votes: Dict[int, str]) -> bool:
+        approve_count = sum(1 for v in votes.values() if v == "approve")
+        reject_count = len(votes) - approve_count
+
+        success = approve_count > reject_count
+        return success
+
 class VoteHandler:
     @staticmethod
     def parse(text: str) -> Optional[int]:
