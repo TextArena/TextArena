@@ -346,7 +346,7 @@ class AvalonEnv(ta.Env):
         assert MIN_PLAYERS <= num_players <= MAX_PLAYERS, f"Player count must be between {MIN_PLAYERS} and {MAX_PLAYERS}."
         self.state = ta.TeamMultiPlayerState(num_players=num_players, seed=seed)
         self._assign_roles(num_players)
-        self.phase: Phase = Phase.NIGHT_MAFIA
+        self.phase: Phase = Phase.DISCUSSION
         game_state = {
             "phase": self.phase,
             "day_number": 1,
