@@ -58,11 +58,10 @@ OBERON_NAME = "Oberon"
 EVIL_NAMES = {MINION_NAME, MORGANA_NAME, MORDRED_NAME, OBERON_NAME}
 
 class Phase(Enum):
-    NIGHT_MAFIA = "Night-Mafia"
-    NIGHT_DOCTOR = "Night-Doctor"
-    NIGHT_DETECTIVE = "Night-Detective"
-    DAY_DISCUSSION = "Day-Discussion"
-    DAY_VOTING = "Day-Voting"
+    DISCUSSION = "Discussion"
+    TEAM_PROPOSAL = "Team-Proposal"
+    VOTING = "Voting"
+    MISSION = "Mission"
 
 class Role:
     name: str = "Role"
