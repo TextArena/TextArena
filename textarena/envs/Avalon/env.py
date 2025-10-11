@@ -337,12 +337,14 @@ class AvalonEnv(ta.Env):
         self._assign_roles(num_players, special_roles=special_roles)
         self.phase: Phase = Phase.DISCUSSION
         role_pids = {role: pid for pid, role in self.player_roles.items()}
+        leader_pid = random.randint(0, num_players - 1)
         game_state = {
             "phase": self.phase,
             "mission_index": 0,
             "player_ids": list(range(num_players)),
             "player_roles": self.player_roles,
             "role_pids": role_pids,
+            "leader_pid": leader_pid,
             "num_discussion_rounds": self.discussion_rounds,
             "team_proposal": [],
             "consecutive_failed_team_proposals": 0,
