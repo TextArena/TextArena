@@ -3,6 +3,9 @@ import re, random
 from typing import Tuple, Dict, Optional, List
 import textarena as ta
 
+MIN_PLAYERS = 5
+MAX_PLAYERS = 10
+
 AVALON_RULES = """
 You are playing Avalon: The Resistance, a hidden role deduction game.  
 
@@ -341,7 +344,7 @@ class AvalonEnv(ta.Env):
         self.discussion_rounds = discussion_rounds
 
     def reset(self, num_players: int, seed: Optional[int] = None):
-        assert 6 <= num_players <= 15, "Player count must be between 5 and 15."
+        assert MIN_PLAYERS <= num_players <= MAX_PLAYERS, f"Player count must be between {MIN_PLAYERS} and {MAX_PLAYERS}."
         self.state = ta.TeamMultiPlayerState(num_players=num_players, seed=seed)
         self._assign_roles(num_players)
         self.phase: Phase = Phase.NIGHT_MAFIA
