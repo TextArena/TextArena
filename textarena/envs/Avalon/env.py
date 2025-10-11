@@ -429,14 +429,11 @@ class AvalonEnv(ta.Env):
             return
 
         # Phase complete ─ evaluate votes / killings, decide next phase, queue players
-        if self.phase == Phase.DAY_VOTING:      self._resolve_day_votes()
-        elif self.phase == Phase.NIGHT_MAFIA:   self._store_mafia_target()
-
-        # When night sequence ends (Doctor or Detective → Day)
-        if self.phase in (Phase.NIGHT_DOCTOR, Phase.NIGHT_DETECTIVE):
-            next_phase = self._compute_next_phase()
-            if next_phase == Phase.DAY_DISCUSSION:
-                self._resolve_night_outcome()
+        match self.phase:
+            case Phase.VOTING:
+                self._resolve_votes()
+            case Phase.MISSION:
+                self._resolve_mission_outcome()
 
         # Check if game has concluded
         if self.state.done: return
