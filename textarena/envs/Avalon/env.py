@@ -673,6 +673,11 @@ class AvalonEnv(ta.Env):
     def _set_evil_winners(self, reason: str):
         pids = self._evil_pids()
         self.state.set_winners(player_ids=pids, reason=reason + "\nEvil wins!")
+    
+    def _set_guess_merlin(self):
+        self.state.game_state["guess_merlin"] = True
+        self.state.add_observation(message=f"{MISSION_WIN_THRESHOLD} missions succeeded. Evil has a chance to win by correctly guessing who Merlin is", observation_type=ta.ObservationType.GAME_MESSAGE)
+
     def _check_win(self):
         alive = self.state.game_state["alive_players"]
         mafia_alive = [p for p in alive if self.player_roles[p] == "Mafia"]
