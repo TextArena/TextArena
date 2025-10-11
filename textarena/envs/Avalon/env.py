@@ -529,6 +529,11 @@ class AvalonEnv(ta.Env):
         result = f"Player {target} IS{' ' if is_mafia else ' NOT '}a Mafia member."
         self.state.add_observation(to_id=pid, message=result, observation_type=ta.ObservationType.GAME_MESSAGE)
     
+    def _is_valid_team_proposal(self, team_proposal: List[int]) -> bool:
+        team = set(team_proposal)
+        team_size = get_mission_team_size(self.state.num_players, self.state.game_state.mission_index)
+        return len(team) == team_size and 0 <= min(team) and max(team) < self.state.num_players
+    
     def _record_vote(self, pid: int, action: str):
         vote = AvalonParser.parse_team_vote(action)
         if vote is None:
@@ -691,3 +696,8 @@ def get_mission_team_size(num_players: int, mission_index: int) -> int:
         raise ValueError("Mission index must be between 0 and 4 inclusive.")
     
     return team_sizes[num_players][mission_index]
+
+def is_valid_team_proposal(team_proposal: List[int], num_players: int, mission_index: int) -> bool:
+    team = set(team_proposal)
+    team_size = get_mission_team_size(num_players, mission_index)
+    return len(team) == team_size and 0 <= min(team) and max(team) < num_players
