@@ -553,7 +553,7 @@ class AvalonEnv(ta.Env):
                     "Submit your vote within <vote> tags, e.g. <vote>approve</vote> or <vote>reject</vote>."
                 )
                 self.state.add_observation(to_id=-1, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
-                self.next_player_ids = player_ids
+                self.next_player_ids = random.shuffle(player_ids)
             case Phase.MISSION:
                 mission_team = self.state.game_state["team_proposal"]
                 message = (
