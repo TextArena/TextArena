@@ -386,6 +386,7 @@ class AvalonEnv(ta.Env):
             "alive_players": list(range(num_players)),
             "player_roles": self.player_roles,
             "num_discussion_rounds": self.discussion_rounds,
+            "consecutive_failed_team_proposals": 0,
             "votes": {},
             "mission_actions": {},
             "pending_elimination": None,
