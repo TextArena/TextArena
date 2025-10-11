@@ -96,6 +96,10 @@ class Role:
             )
         else:
             raise ValueError("Unknown team configuration")
+    
+    def evil_prompt(self, player_id: int, player_roles: Dict[int, str]) -> str:
+        return self.base_prompt(player_id, player_roles) + evil_players_prompt(player_id, player_roles)
+
 
 class Servant(Role):
     name = SERVANT_NAME
@@ -109,6 +113,11 @@ def get_evil_players(player_id: int, player_roles: Dict[int, str], include_obero
     evil_pids = get_evil_pids(player_id, player_roles, include_oberon=include_oberon)
     evil_players = [f"Player {pid}" for pid in evil_pids]
     return evil_players
+
+def evil_players_prompt(player_id: int, player_roles: Dict[int, str]) -> str:
+    has_oberon = OBERON_NAME in player_roles.values()
+    evil_players = get_evil_players(player_id, player_roles, include_oberon=False)
+    return f"The Evil players are: {', '.join(evil_players)}." + "Oberon is hidden from you.\n" if has_oberon else ""
 
 class Villager(Role):
     name = "Villager"
