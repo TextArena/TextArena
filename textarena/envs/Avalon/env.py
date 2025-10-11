@@ -571,6 +571,7 @@ class AvalonEnv(ta.Env):
 
     def _inc_consecutive_failed_team_proposals(self):
         self.state.game_state["consecutive_failed_team_proposals"] += 1
+        self._inc_leader()
         self._check_win()
 
     def _resolve_votes(self):
@@ -603,7 +604,8 @@ class AvalonEnv(ta.Env):
             self._inc_mission_failures()
             message = "Mission Failed. At least one action was fail"
         self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
-    
+        self._inc_leader()
+
     def _resolve_guess_merlin(self):
         target = tally_merlin_votes(self.state.game_state["merlin_guesses"])
         merlin_pid = self.state.game_state["role_pids"][MERLIN_NAME]
