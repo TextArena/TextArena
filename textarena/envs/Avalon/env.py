@@ -602,6 +602,17 @@ class AvalonEnv(ta.Env):
             action = DEFAULT_MISSION_ACTION
 
         self.state.game_state["mission_actions"][pid] = action
+    
+    def _record_merlin_guess(self, pid: int, guess: str):
+        guess = AvalonParser.parse_merlin_guess()
+        if guess is None:
+            fatal = self.state.set_invalid_move("Merlin guess not in valid format")
+            if not fatal:
+                return
+            # Too many invalid guesses, guess random player
+            guess = random.randint(0, self.state.num_players - 1)
+
+        self.state.game_state["merlin_guesses"][pid] = guess
 
     # def _record_vote(self, pid: int, action: str, *, broadcast_to_all=False, broadcast_to_mafia_only=False):
     #     target = VoteHandler.parse(action)
