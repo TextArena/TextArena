@@ -272,7 +272,7 @@ class Detective(Role):
 class VoteHandler:
     @staticmethod
     def parse(text: str) -> Optional[int]:
-        m = SecretMafiaEnv.voting_pattern.search(text)
+        m = AvalonEnv.voting_pattern.search(text)
         return int(m.group(1)) if m else None
     @staticmethod
     def tally(votes: Dict[int, int]) -> Optional[int]:
@@ -285,7 +285,7 @@ class VoteHandler:
         top_players = [pid for pid, c in counts.items() if c == top_score] # All players who received the top score (could be 1 or many)
         return random.choice(top_players) # Randomly resolve ties
 
-class SecretMafiaEnv(ta.Env):
+class AvalonEnv(ta.Env):
     voting_pattern = re.compile(r".*\[(?:player\s*)?(\d+)\].*", re.IGNORECASE)
     _ROLE_FACTORY = {
         "Villager":  Villager,
