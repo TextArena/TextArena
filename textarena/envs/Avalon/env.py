@@ -592,3 +592,26 @@ class AvalonEnv(ta.Env):
         elif len(mafia_alive) >= len(alive) / 2:
             mafia = [p for p in range(self.state.num_players) if self.player_roles[p] == "Mafia"]
             self.state.set_winners(player_ids=mafia, reason="Mafia reached parity with villagers. Mafia wins!")
+
+def get_side_sizes(num_players: int) -> tuple[int, int]:
+    """
+    Return (good, evil) player counts for Avalon
+    given the total number of players.
+
+    Number of players for each side from:
+    https://avalon-game.com/wiki/rules/#:~:text=Recommended%20Roles%20Setup
+    """
+    distribution = {
+        5: (3, 2),
+        6: (4, 2),
+        7: (4, 3),
+        8: (5, 3),
+        9: (6, 3),
+        10: (6, 4),
+    }
+
+    if num_players not in distribution:
+        raise ValueError("Number of players must be between 5 and 10.")
+
+    return distribution[num_players]
+
