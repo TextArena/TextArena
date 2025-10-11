@@ -576,7 +576,6 @@ class AvalonEnv(ta.Env):
 
     def _resolve_votes(self):
         vote_passed = self._vote_passed()
-        self.state.game_state["votes"].clear()
         if not vote_passed:
             self._inc_consecutive_failed_team_proposals()
             self.state.add_observation(message="No consensus - the team proposal was not passed.", observation_type=ta.ObservationType.GAME_MESSAGE)
