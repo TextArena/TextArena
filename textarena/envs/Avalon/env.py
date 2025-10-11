@@ -301,6 +301,9 @@ class AvalonParser:
     # https://regex101.com/r/rA2EEB/1
     action_pattern = re.compile(r"<action>\s*(success|fail)\s*</action>", re.IGNORECASE)
 
+    # https://regex101.com/r/stpyKo/1
+    merlin_guess_pattern = re.compile(r"<merlin_guess>\s*(\d+)\s*</merlin_guess>", re.IGNORECASE)
+
     @staticmethod
     def parse_team_proposal(text: str) -> Optional[List[int]]:
         """
@@ -329,6 +332,15 @@ class AvalonParser:
         """
         m = AvalonParser.action_pattern.search(text)
         return m.group(1).lower() if m else None
+    
+    @staticmethod
+    def parse_merlin_guess(text: str) -> Optional[int]:
+        """
+        Parses the pid of a merlin guess from text.
+        Returns pid of the merlin guess, or None if not found.
+        """
+        m = AvalonParser.action_pattern.search(text)
+        return int(m.group(1)) if m else None
 
 def is_mission_success(mission_actions: Dict[int, str]) -> bool:
     success = all(action == "success" for action in mission_actions.values())
