@@ -739,12 +739,16 @@ class AvalonEnv(ta.Env):
             # # TODO kill player off
             # others = [p for p in range(self.state.num_players) if p != pid]
             # self.state.set_winners(player_ids=others, reason=f"Player {pid} made an invalid move.")
+    
+    def _inc_consecutive_failed_team_proposals(self):
+        self.state.game_state["consecutive_failed_team_proposals"] += 1
+        self._check_win()
 
     def _resolve_votes(self):
         vote_passed = self._vote_passed()
         self.state.game_state["votes"].clear()
         if not vote_passed:
-            self.state.game_state["consecutive_failed_team_proposals"] += 1
+            self._inc_consecutive_failed_team_proposals()
             self.state.add_observation(message="No consensus - the team proposal was not passed.", observation_type=ta.ObservationType.GAME_MESSAGE)
             return
         self.state.game_state["consecutive_failed_team_proposals"] = 0
