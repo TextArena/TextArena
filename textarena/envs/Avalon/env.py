@@ -666,6 +666,13 @@ class AvalonEnv(ta.Env):
     def _evil_pids(self) -> List[int]:
         return [p for p in range(self.state.num_players) if self.player_roles[p] in EVIL_NAMES]
 
+    def _set_good_winners(self, reason: str):
+        pids = self._good_pids()
+        self.state.set_winners(player_ids=pids, reason=reason + "\nGood wins!")
+
+    def _set_evil_winners(self, reason: str):
+        pids = self._evil_pids()
+        self.state.set_winners(player_ids=pids, reason=reason + "\nEvil wins!")
     def _check_win(self):
         alive = self.state.game_state["alive_players"]
         mafia_alive = [p for p in alive if self.player_roles[p] == "Mafia"]
