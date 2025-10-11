@@ -519,13 +519,14 @@ class AvalonEnv(ta.Env):
         player_ids = gs["player_ids"]
         self.next_player_ids: List[int] = []
         base_phase_message = get_base_phase_message(self.phase, self.state.game_state["mission_index"])
+        leader_pid = self.state.game_state["leader_pid"]
 
         match self.phase:
             case Phase.DISCUSSION:
                 rounds = self.discussion_rounds
                 message = (
                     base_phase_message +
-                    f"Leader is Player {self.state.game_state["leader_pid"]}.\n"
+                    f"Leader is Player {leader_pid}.\n"
                     f"Discuss for {rounds} rounds, then the leader will propose a team that you will vote on."
                 )
                 self.state.add_observation(to_id=-1, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
@@ -539,7 +540,6 @@ class AvalonEnv(ta.Env):
                     "You must propose a team in the form of a list of player ids within <team> tags"
                     "e.g. <team>[1,2,3]</team>"
                 )
-                leader_pid = self.state.game_state["leader_pid"]
                 self.state.add_observation(to_id=leader_pid, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
                 self.next_player_ids = [leader_pid]
 
