@@ -566,6 +566,18 @@ class AvalonEnv(ta.Env):
                 for pid in mission_team:
                     self.state.add_observation(to_id=pid, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
                 self.next_player_ids = random.shuffle(mission_team)
+            case Phase.GUESS_MERLIN:
+                evil_pids = [pid for pid, role in self.player_roles.items() if role in EVIL_NAMES]
+                message = (
+                    base_phase_message +
+                    "Evil team, you have one chance to guess who Merlin is. "
+                    "Submit your guess within <merlin_guess> tags with the player id, e.g. <merlin_guess>3</merlin_guess>."
+                )
+                for pid in evil_pids:
+                    self.state.add_observation(to_id=pid, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.next_player_ids = random.shuffle(evil_pids)
+            case _:
+                raise RuntimeError("Unknown phase")
 
         if self.phase == Phase.NIGHT_MAFIA:
             mafia = [p for p in alive if self.player_roles[p] == "Mafia"]
