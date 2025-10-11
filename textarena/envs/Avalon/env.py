@@ -532,6 +532,16 @@ class AvalonEnv(ta.Env):
                 # Random discussion order which is fixed for each discussion round
                 shuffled_pids = random.shuffle(player_ids)
                 self.next_player_ids = shuffled_pids * rounds
+            case Phase.TEAM_PROPOSAL:
+                message = (
+                    base_phase_message +
+                    "You are the leader, propose a team to send for this mission. "
+                    "You must propose a team in the form of a list of player ids within <team> tags"
+                    "e.g. <team>[1,2,3]</team>"
+                )
+                leader_pid = self.state.game_state["leader_pid"]
+                self.state.add_observation(to_id=leader_pid, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.next_player_ids = [leader_pid]
 
         if self.phase == Phase.NIGHT_MAFIA:
             mafia = [p for p in alive if self.player_roles[p] == "Mafia"]
