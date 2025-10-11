@@ -532,7 +532,7 @@ class AvalonEnv(ta.Env):
             team_size = self._get_mission_team_size()
             team_proposal = list(range(team_size)) 
 
-        self.state.game_state["team_proposal"][pid] = team_proposal
+        self.state.game_state["team_proposal"] = team_proposal
         self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
     
     def _record_vote(self, pid: int, action: str):
