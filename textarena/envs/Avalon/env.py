@@ -67,6 +67,7 @@ class Phase(Enum):
     TEAM_PROPOSAL = "Team-Proposal"
     VOTING = "Voting"
     MISSION = "Mission"
+    GUESS_MERLIN = "Guess-Merlin"
 
 class Role:
     name: str = "Role"
