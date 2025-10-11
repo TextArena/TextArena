@@ -519,7 +519,8 @@ class AvalonEnv(ta.Env):
         gs = self.state.game_state
         player_ids = gs["player_ids"]
         self.next_player_ids: List[int] = []
-        base_phase_message = get_base_phase_message(self.phase, self.state.game_state["mission_index"])
+        team_size = self._get_mission_team_size()
+        base_phase_message = get_base_phase_message(self.phase, self.state.game_state["mission_index"], team_size=team_size)
         leader_pid = self.state.game_state["leader_pid"]
 
         match self.phase:
@@ -535,7 +536,6 @@ class AvalonEnv(ta.Env):
                 shuffled_pids = random.shuffle(player_ids)
                 self.next_player_ids = shuffled_pids * rounds
             case Phase.TEAM_PROPOSAL:
-                team_size = self._get_mission_team_size()
                 message = (
                     base_phase_message +
                     "You are the leader, propose a team to send for this mission. "
