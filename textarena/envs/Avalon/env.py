@@ -345,10 +345,10 @@ class AvalonEnv(ta.Env):
         self.mafia_ratio = mafia_ratio
         self.discussion_rounds = discussion_rounds
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
+    def reset(self, num_players: int, special_roles: Optional[Set[str]] = None, seed: Optional[int] = None):
         assert MIN_PLAYERS <= num_players <= MAX_PLAYERS, f"Player count must be between {MIN_PLAYERS} and {MAX_PLAYERS}."
         self.state = ta.TeamMultiPlayerState(num_players=num_players, seed=seed)
-        self._assign_roles(num_players)
+        self._assign_roles(num_players, special_roles=special_roles)
         self.phase: Phase = Phase.DISCUSSION
         game_state = {
             "phase": self.phase,
@@ -365,14 +365,11 @@ class AvalonEnv(ta.Env):
         self.state.manually_set_current_player_id(self.next_player_ids.pop())
     
 
-    def _assign_roles(self, num_players: int):
+    def _assign_roles(self, num_players: int, special_roles: Optional[Set[str]] = None):
         self.player_roles = {}
         self.roles = {}                              # <- NEW
-        num_mafia = max(1, round(num_players * self.mafia_ratio))
-        role_pool = ["Mafia"] * num_mafia + ["Doctor", "Detective"] 
-        role_pool += ["Villager"] * (num_players - len(role_pool))
-        random.shuffle(role_pool)
 
+        role_pool = generate_roles(num_players, special_roles=special_roles)
         for pid, r_name in enumerate(role_pool):
             self.player_roles[pid] = r_name
             self.roles[pid] = self._ROLE_FACTORY[r_name]()
