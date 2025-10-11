@@ -716,7 +716,7 @@ class AvalonEnv(ta.Env):
             self._set_evil_winners(reason=f"{MISSION_WIN_THRESHOLD} missions failed.")
         elif self.state.game_state["mission_successes"] >= MISSION_WIN_THRESHOLD:
             if MERLIN_NAME in self.player_roles.values():
-                self._set_guess_merlin()
+                self._set_guess_merlin_phase()
             else:
                 self._set_good_winners(reason=f"{MISSION_WIN_THRESHOLD} missions succeeded.")
 
