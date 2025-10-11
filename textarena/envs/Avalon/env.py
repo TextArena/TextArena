@@ -5,6 +5,8 @@ import textarena as ta
 
 MIN_PLAYERS = 5
 MAX_PLAYERS = 10
+DEFAULT_VOTE = "approve"
+DEFAULT_MISSION_ACTION = "success"
 
 AVALON_RULES = """
 You are playing Avalon: The Resistance, a hidden role deduction game.  
@@ -491,25 +493,48 @@ class AvalonEnv(ta.Env):
         is_mafia = self.player_roles[target] == "Mafia"
         result = f"Player {target} IS{' ' if is_mafia else ' NOT '}a Mafia member."
         self.state.add_observation(to_id=pid, message=result, observation_type=ta.ObservationType.GAME_MESSAGE)
-
-    def _record_vote(self, pid: int, action: str, *, broadcast_to_all=False, broadcast_to_mafia_only=False):
-        target = VoteHandler.parse(action)
-        if target is None or target not in self.state.game_state["alive_players"]:
-            fatal = self._mark_invalid(pid, "Vote not in valid format or invalid target.")
-            if not fatal: return
-            else: # player was eliminated by invalid move
-                self.state.made_invalid_move = False  # such that we can rotate off the player 
+    
+    def _record_vote(self, pid: int, action: str):
+        vote = AvalonParser.parse_team_vote(action)
+        if vote is None:
+            fatal = self.state.set_invalid_move("Vote not in valid format")
+            if not fatal:
                 return
+            # Too many invalid votes, use default vote
+            vote = DEFAULT_VOTE
+
+        self.state.game_state["votes"][pid] = vote
+        self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+    
+    def _record_mission_action(self, pid: int, action: str):
+        action = AvalonParser.parse_mission_action(action)
+        if action is None:
+            fatal = self.state.set_invalid_move("Mission action not in valid format")
+            if not fatal:
+                return
+            # Too many invalid actions, use default action
+            action = DEFAULT_MISSION_ACTION
+
+        self.state.game_state["mission_actions"][pid] = action
+
+    # def _record_vote(self, pid: int, action: str, *, broadcast_to_all=False, broadcast_to_mafia_only=False):
+    #     target = VoteHandler.parse(action)
+    #     if target is None or target not in self.state.game_state["alive_players"]:
+    #         fatal = self._mark_invalid(pid, "Vote not in valid format or invalid target.")
+    #         if not fatal: return
+    #         else: # player was eliminated by invalid move
+    #             self.state.made_invalid_move = False  # such that we can rotate off the player 
+    #             return
 
 
-        self.state.game_state["votes"][pid] = target
+    #     self.state.game_state["votes"][pid] = target
 
-        if broadcast_to_all:
-            self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        elif broadcast_to_mafia_only:
-            mafia = [p for p in self.state.game_state["alive_players"] if self.player_roles[p] == "Mafia"]
-            for m in mafia:
-                self.state.add_observation(from_id=pid, to_id=m, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+    #     if broadcast_to_all:
+    #         self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+    #     elif broadcast_to_mafia_only:
+    #         mafia = [p for p in self.state.game_state["alive_players"] if self.player_roles[p] == "Mafia"]
+    #         for m in mafia:
+    #             self.state.add_observation(from_id=pid, to_id=m, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
 
     def _mark_invalid(self, pid: int, reason: str):
         fatal = self.state.set_invalid_move(reason)
