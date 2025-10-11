@@ -1,4 +1,5 @@
 import ast
+from dataclasses import dataclass, field
 from enum import Enum
 import re, random
 from typing import Set, Tuple, Dict, Optional, List, Type, TypeVar
@@ -96,10 +97,24 @@ class Phase(Enum):
     MISSION = "Mission"
     GUESS_MERLIN = "Guess-Merlin"
 
+@dataclass
 class Role:
-    name: str = "Role"
-    team: str = "Unknown"
-    description: str = ""
+    name: str = field(init=False)
+    team: str = field(init=False)
+    description: str = field(init=False)
+    def __post_init__(self):
+        self.name = self.__class__.__name__
+
+        if self.name in GOOD_NAMES:
+            self.team = "Good"
+        elif self.name in EVIL_NAMES:
+            self.team = "Evil"
+        else:
+            raise ValueError(f"Team unknown for name: {self.name}")
+
+        base_role_description = BASE_ROLE_DESCRIPTIONS[self.name]
+        self.description = f"{self.name} ({self.team}):\n{base_role_description}"
+
     def get_prompt(self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int) -> str:
         return self.base_prompt(player_id, player_roles, num_players)
 
@@ -138,17 +153,9 @@ class Role:
 
 
 class Servant(Role):
-    name = SERVANT_NAME
-    team = "Good"
-    description = "You are a Loyal Servant of Arthur, a regular member of the Good side. You have no special abilities."
+    pass
 
 class Merlin(Role):
-    name = MERLIN_NAME
-    team = "Good"
-    description = (
-        "You are Merlin. You secretly know who all the Evil players are. "
-        "Guide Good subtly without revealing yourself; if Evil guesses that you are Merlin at the end, they win."
-    )
     def get_prompt(
             self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
         ) -> str:
@@ -162,10 +169,6 @@ class Merlin(Role):
 
 
 class Percival(Role):
-    name = PERCIVAL_NAME
-    team = "Good"
-    description = "You are Percival. You know who Merlin is, but Morgana may appear as Merlin to you alongside the real Merlin if they are in the game."
-
     def get_prompt(
         self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
     ) -> str:
@@ -181,10 +184,6 @@ class Percival(Role):
 
 
 class Minion(Role):
-    name = MINION_NAME
-    team = "Evil"
-    description = "You are a Minion of Mordred, a regular member of the Evil side. You have no special abilities."
-
     def get_prompt(
         self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
     ) -> str:
@@ -192,10 +191,6 @@ class Minion(Role):
 
 
 class Morgana(Role):
-    name = MORGANA_NAME
-    team = "Evil"
-    description = "You are Morgana. You appear as Merlin to Percival and work to deceive the Good."
-
     def get_prompt(
         self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
     ) -> str:
@@ -205,10 +200,6 @@ class Morgana(Role):
 
 
 class Mordred(Role):
-    name = MORDRED_NAME
-    team = "Evil"
-    description = "You are Mordred. Merlin cannot see you, making you hidden from Good."
-
     def get_prompt(
         self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
     ) -> str:
@@ -216,10 +207,6 @@ class Mordred(Role):
 
 
 class Oberon(Role):
-    name = OBERON_NAME
-    team = "Evil"
-    description = "You are Oberon. You are Evil but unknown to your teammates."
-
     def get_prompt(
         self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
     ) -> str:
