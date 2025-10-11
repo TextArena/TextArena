@@ -3,6 +3,47 @@ import re, random
 from typing import Tuple, Dict, Optional, List
 import textarena as ta
 
+AVALON_RULES = """
+You are playing Avalon: The Resistance, a hidden role deduction game.  
+
+Players are divided into two sides:
+- Good: The Loyal Servants of Arthur
+- Evil: The Minions of Mordred
+
+Only Evil players are told who each other are.
+Good players are not told the sides of other players.
+
+Gameplay Rules
+1. Team Proposal
+Each round, a Leader proposes a mission team of a certain size.  
+
+2. Voting
+Everyone votes to approve or reject the team.
+A majority is required for the proposal to be accepted. 
+If the team is rejected, leadership passes to the next player, who proposes their own team.
+If five teams in a row are rejected, Evil automatically wins.
+
+3. Mission Phase
+If a team is approved, members of the team secretly decide whether the mission passes or fails.  
+  - Good players must choose “Success”  
+  - Evil players can choose either “Success” or “Fail”  
+The actions are shuffled then revealed, players do not know which actions other players chose.
+If all are Success, the mission passes.
+If there is at least one Fail, the mission fails.
+Certain missions may require two Fails to fail, depending on the number of players in the game. You will be told when missions require two Fails to fail.
+
+Roles
+Players will be given one of the following roles:
+
+- Merlin (Good): Merlin secretly knows who all the Evil players are. The catch: if Good completes 3 missions, Evil gets one last chance to win by guessing who Merlin is. If they guess right, Evil wins instead. Merlin's job is to guide Good without being too obvious.
+- Servant (Good): A regular Good player. They don't have any extra information.
+- Minion (Evil): A regular Evil player. They know who the other Evil players are. Their job is to trick Good into trusting them, sneak onto missions, and secretly Fail them.
+
+Win conditions:
+- Good wins if they succeed in 3 out of 5 missions AND Merlin is not correctly guessed by Evil.
+- Evil wins if they fail 3 out of 5 missions OR if they correctly identify Merlin at the end.
+"""
+
 class Phase(Enum):
     NIGHT_MAFIA = "Night-Mafia"
     NIGHT_DOCTOR = "Night-Doctor"
