@@ -624,35 +624,6 @@ class AvalonEnv(ta.Env):
     def _handle_merlin_guess(self, pid: int, action: str):
         self._record_merlin_guess(pid, action)
 
-    def _handle_day_vote(self, pid: int, action: str):      self._record_vote(pid, action, broadcast_to_all=True)
-    def _handle_mafia_vote(self, pid: int, action: str):    self._record_vote(pid, action, broadcast_to_mafia_only=True)
-    def _handle_doctor_action(self, pid: int, action: str):
-        target = VoteHandler.parse(action)
-        if target is None or target not in self.state.game_state["alive_players"]:
-            fatal = self._mark_invalid(pid, "Invalid protection target.")
-            if not fatal: 
-                return
-            else: # player was eliminated by invalid move
-                self.state.made_invalid_move = False  # such that we can rotate off the player 
-                return
-
-        # save target
-        if target == self.state.game_state["pending_elimination"]:
-            self.state.game_state["pending_elimination"] = None
-        self.state.add_observation(from_id=pid, to_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-
-    def _handle_detective_action(self, pid: int, action: str):
-        target = VoteHandler.parse(action)
-        if target is None or target not in self.state.game_state["alive_players"]:
-            fatal = self._mark_invalid(pid, "Invalid investigation target.")
-            if not fatal: return
-            else:# player was eliminated by invalid move
-                self.state.made_invalid_move = False  # such that we can rotate off the player 
-                return
-        is_mafia = self.player_roles[target] == "Mafia"
-        result = f"Player {target} IS{' ' if is_mafia else ' NOT '}a Mafia member."
-        self.state.add_observation(to_id=pid, message=result, observation_type=ta.ObservationType.GAME_MESSAGE)
-    
     def _get_mission_team_size(self) -> int:
         return get_mission_team_size(self.state.num_players, self.state.game_state["mission_index"])
     
