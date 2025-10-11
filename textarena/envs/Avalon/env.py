@@ -360,7 +360,7 @@ class AvalonEnv(ta.Env):
         self.state.manually_set_current_player_id(self.next_player_ids.pop())
     
     def _inc_leader(self):
-        self.state.game_state["leader_pid"] = (self.state.game_state["leader_pid"] + 1) % self.num_players
+        self.state.game_state["leader_pid"] = (self.state.game_state["leader_pid"] + 1) % self.state.num_players
 
     def _assign_roles(self, num_players: int, special_roles: Optional[Set[str]] = None):
         self.player_roles = {}
