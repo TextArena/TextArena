@@ -535,11 +535,12 @@ class AvalonEnv(ta.Env):
                 shuffled_pids = random.shuffle(player_ids)
                 self.next_player_ids = shuffled_pids * rounds
             case Phase.TEAM_PROPOSAL:
+                team_size = self._get_mission_team_size()
                 message = (
                     base_phase_message +
                     "You are the leader, propose a team to send for this mission. "
-                    "You must propose a team in the form of a list of player ids within <team> tags"
-                    "e.g. <team>[1,2,3]</team>"
+                    f"You must propose a team of {team_size} players in the form of a list of player ids within <team> tags"
+                    f"e.g. <team>{list(range(team_size))}</team>"
                 )
                 self.state.add_observation(to_id=leader_pid, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
                 self.next_player_ids = [leader_pid]
