@@ -179,6 +179,18 @@ class Mordred(Role):
         return self.base_prompt(player_id, player_roles) + evil_players_prompt(player_id, player_roles)
 
 
+class Oberon(Role):
+    name = OBERON_NAME
+    team = "Evil"
+    description = "You are Oberon. You are Evil but unknown to your teammates."
+
+    def get_prompt(
+        self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
+    ) -> str:
+        return self.base_prompt(player_id, player_roles) + (
+            "\nYou do not know who the other Evil players are, and they do not know you.\n"
+        )
+
 def get_evil_pids(player_id: int, player_roles: Dict[int, str], include_oberon: bool = False) -> list[int]:
     evil_pids = [pid for pid, role in player_roles.items() if role in EVIL_NAMES and (include_oberon or role != OBERON_NAME) and pid != player_id]
     return evil_pids
