@@ -332,7 +332,7 @@ class AvalonEnv(ta.Env):
         self.discussion_rounds = discussion_rounds
 
     def reset(self, num_players: int, special_roles: Optional[Set[str]] = None, seed: Optional[int] = None):
-        assert MIN_PLAYERS <= num_players <= MAX_PLAYERS, f"Player count must be between {MIN_PLAYERS} and {MAX_PLAYERS}."
+        assert MIN_PLAYERS <= num_players <= MAX_PLAYERS, f"Player count must be between {MIN_PLAYERS} and {MAX_PLAYERS}. Got {num_players} players."
         self.state = ta.TeamMultiPlayerState(num_players=num_players, seed=seed)
         self._assign_roles(num_players, special_roles=special_roles)
         self.phase: Phase = Phase.DISCUSSION
