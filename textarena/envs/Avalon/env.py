@@ -1,6 +1,6 @@
 from enum import Enum
 import re, random
-from typing import Tuple, Dict, Optional, List
+from typing import Set, Tuple, Dict, Optional, List
 import textarena as ta
 
 MIN_PLAYERS = 5
@@ -592,6 +592,25 @@ class AvalonEnv(ta.Env):
         elif len(mafia_alive) >= len(alive) / 2:
             mafia = [p for p in range(self.state.num_players) if self.player_roles[p] == "Mafia"]
             self.state.set_winners(player_ids=mafia, reason="Mafia reached parity with villagers. Mafia wins!")
+
+def generate_roles(num_players: int, special_roles: Optional[Set[str]] = None) -> list[str]:
+    num_good, num_evil = get_side_sizes(num_players)
+    if special_roles is None:
+        special_roles = set()
+    for role in special_roles:
+        if role in EVIL_NAMES:
+            num_evil -= 1
+        else:
+            num_good -= 1
+    
+    if num_good < 0 or num_evil < 0:
+        raise ValueError("Too many special roles for the player count.")
+    
+    roles = list(special_roles)
+    roles.extend([SERVANT_NAME] * num_good)
+    roles.extend([MINION_NAME] * num_evil)
+    random.shuffle(roles)
+    return roles
 
 def get_side_sizes(num_players: int) -> tuple[int, int]:
     """
