@@ -435,6 +435,7 @@ class AvalonEnv(ta.Env):
             Phase.TEAM_PROPOSAL: self._handle_team_proposal,
             Phase.VOTING: self._handle_vote, 
             Phase.MISSION: self._handle_mission,
+            Phase.GUESS_MERLIN: self._handle_merlin_guess,
         }
         phase_dispatch[self.phase](pid, action)
         self._after_player_action() # rotate / advance phase
