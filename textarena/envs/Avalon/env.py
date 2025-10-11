@@ -63,7 +63,25 @@ class Role:
     name: str = "Role"
     team: str = "Unknown"
     description: str = ""
-    def get_prompt(self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int) -> str: raise NotImplementedError
+    
+    def team_prompt(self, player_roles: Dict[int, str]) -> str:
+        """Return the team's win condition message"""
+        has_merlin = "Merlin" in player_roles.values()
+
+        if self.team == "Good":
+            return (
+                "Win conditions:\n"
+                f"You win if your team succeeds in 3 out of 5 missions"
+                + (" AND Merlin is not correctly guessed by Evil" if has_merlin else "")
+            )
+        elif self.team == "Evil":
+            return (
+                "Win conditions:\n"
+                f"You win if your team fails 3 out of 5 missions"
+                + (" OR if your team correctly identifies Merlin at the end after Good succeeds 3 out of 5 missions" if has_merlin else "")
+            )
+        else:
+            raise ValueError("Unknown team configuration")
 
 class Villager(Role):
     name = "Villager"
