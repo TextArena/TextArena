@@ -453,7 +453,7 @@ class AvalonEnv(ta.Env):
                 )
                 self.state.add_observation(to_id=-1, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
                 # Random discussion order which is fixed for each discussion round
-                shuffled_pids = random.shuffle(player_ids)
+                shuffled_pids = random.sample(player_ids, len(player_ids))
                 self.next_player_ids = shuffled_pids * rounds
             case Phase.TEAM_PROPOSAL:
                 message = (
@@ -473,7 +473,7 @@ class AvalonEnv(ta.Env):
                     "Submit your vote within <vote> tags, e.g. <vote>approve</vote> or <vote>reject</vote>."
                 )
                 self.state.add_observation(to_id=-1, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
-                self.next_player_ids = random.shuffle(player_ids)
+                self.next_player_ids = random.sample(player_ids, len(player_ids))
             case Phase.MISSION:
                 mission_team = self.state.game_state["team_proposal"]
                 message = (
@@ -485,7 +485,7 @@ class AvalonEnv(ta.Env):
                 )
                 for pid in mission_team:
                     self.state.add_observation(to_id=pid, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
-                self.next_player_ids = random.shuffle(mission_team)
+                self.next_player_ids = random.sample(mission_team, len(mission_team))
             case Phase.GUESS_MERLIN:
                 evil_pids = [pid for pid, role in self.player_roles.items() if role in EVIL_NAMES]
                 message = (
@@ -495,7 +495,7 @@ class AvalonEnv(ta.Env):
                 )
                 for pid in evil_pids:
                     self.state.add_observation(to_id=pid, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
-                self.next_player_ids = random.shuffle(evil_pids)
+                self.next_player_ids = random.sample(evil_pids, len(evil_pids))
             case _:
                 raise RuntimeError("Unknown phase")
 
