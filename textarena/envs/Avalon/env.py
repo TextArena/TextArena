@@ -613,13 +613,14 @@ class AvalonEnv(ta.Env):
             # others = [p for p in range(self.state.num_players) if p != pid]
             # self.state.set_winners(player_ids=others, reason=f"Player {pid} made an invalid move.")
 
-    def _resolve_day_votes(self):
-        target = VoteHandler.tally(self.state.game_state["votes"])
+    def _resolve_votes(self):
+        vote_passed = self._vote_passed()
         self.state.game_state["votes"].clear()
-        if target is None:
-            self.state.add_observation(message="No consensus - nobody was eliminated.", observation_type=ta.ObservationType.GAME_MESSAGE)
+        if not vote_passed:
+            self.state.game_state["consecutive_failed_team_proposals"] += 1
+            self.state.add_observation(message="No consensus - the team proposal was not passed.", observation_type=ta.ObservationType.GAME_MESSAGE)
             return
-        self._eliminate_player(target, "was eliminated by vote")
+        self.state.game_state["consecutive_failed_team_proposals"] = 0
 
     def _store_mafia_target(self):
         self.state.game_state["pending_elimination"] = VoteHandler.tally(self.state.game_state["votes"])
