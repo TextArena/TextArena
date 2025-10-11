@@ -462,6 +462,9 @@ class AvalonEnv(ta.Env):
             case Phase.VOTING:
                 return Phase.MISSION if self._vote_passed() else Phase.DISCUSSION
             case Phase.MISSION:
+                # Check if Good won and evil needs to guess Merlin
+                if self.state.game_state["guess_merlin"]:
+                    return Phase.GUESS_MERLIN
                 return Phase.DISCUSSION
             case _:
                 raise RuntimeError("Unknown phase")
