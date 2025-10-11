@@ -538,6 +538,19 @@ class AvalonEnv(ta.Env):
         team_size = self._get_mission_team_size()
         return len(team) == team_size and 0 <= min(team) and max(team) < self.state.num_players
     
+    def _record_team_proposal(self, pid: int, action: str):
+        team_proposal = AvalonParser.parse_team_proposal(action)
+        if team_proposal is None or not self._is_valid_team_proposal(team_proposal):
+            fatal = self.state.set_invalid_move("Invalid team proposal")
+            if not fatal:
+                return
+            # Too many invalid attempts, use default team
+            team_size = self._get_mission_team_size()
+            team_proposal = list(range(team_size)) 
+
+        self.state.game_state["team_proposal"][pid] = team_proposal
+        self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+    
     def _record_vote(self, pid: int, action: str):
         vote = AvalonParser.parse_team_vote(action)
         if vote is None:
