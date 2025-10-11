@@ -380,8 +380,10 @@ class AvalonEnv(ta.Env):
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         pid = self.state.current_player_id
         phase_dispatch = {
-            Phase.DAY_DISCUSSION: self._handle_discussion, Phase.DAY_VOTING: self._handle_day_vote, Phase.NIGHT_MAFIA: self._handle_mafia_vote, 
-            Phase.NIGHT_DOCTOR: self._handle_doctor_action, Phase.NIGHT_DETECTIVE: self._handle_detective_action,
+            Phase.DISCUSSION: self._handle_discussion,
+            Phase.TEAM_PROPOSAL: self._handle_team_proposal,
+            Phase.VOTING: self._handle_vote, 
+            Phase.MISSION: self._handle_mission,
         }
         phase_dispatch[self.phase](pid, action)
         self._after_player_action() # rotate / advance phase
