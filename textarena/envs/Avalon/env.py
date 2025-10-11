@@ -679,15 +679,15 @@ class AvalonEnv(ta.Env):
         self.state.add_observation(message=f"{MISSION_WIN_THRESHOLD} missions succeeded. Evil has a chance to win by correctly guessing who Merlin is", observation_type=ta.ObservationType.GAME_MESSAGE)
 
     def _check_win(self):
-        alive = self.state.game_state["alive_players"]
-        mafia_alive = [p for p in alive if self.player_roles[p] == "Mafia"]
-
-        if not mafia_alive:
-            villagers = [p for p in range(self.state.num_players) if self.player_roles[p] != "Mafia"]
-            self.state.set_winners(player_ids=villagers, reason="All Mafia were eliminated. Village wins!")
-        elif len(mafia_alive) >= len(alive) / 2:
-            mafia = [p for p in range(self.state.num_players) if self.player_roles[p] == "Mafia"]
-            self.state.set_winners(player_ids=mafia, reason="Mafia reached parity with villagers. Mafia wins!")
+        if self.state.game_state["consecutive_failed_team_proposals"] >= CONSECUTIVE_PROPOSAL_FAIL_THRESHOLD:
+            self._set_evil_winners(reason=f"{CONSECUTIVE_PROPOSAL_FAIL_THRESHOLD} team proposals were rejected in a row.")
+        elif self.state.game_state["mission_failures"] >= MISSION_WIN_THRESHOLD:
+            self._set_evil_winners(reason=f"{MISSION_WIN_THRESHOLD} missions failed.")
+        elif self.state.game_state["mission_successes"] >= MISSION_WIN_THRESHOLD:
+            if MERLIN_NAME in self.player_roles.values():
+                self._set_guess_merlin()
+            else:
+                self._set_good_winners(reason=f"{MISSION_WIN_THRESHOLD} missions succeeded.")
 
 def generate_roles(num_players: int, special_roles: Optional[Set[str]] = None) -> list[str]:
     num_good, num_evil = get_side_sizes(num_players)
