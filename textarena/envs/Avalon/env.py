@@ -66,13 +66,14 @@ class Role:
     team: str = "Unknown"
     description: str = ""
     def get_prompt(self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int) -> str:
-        return self.base_prompt(player_id, player_roles)
+        return self.base_prompt(player_id, player_roles, num_players)
 
-    def base_prompt(self, player_id: int, player_roles: Dict[int, str]) -> str:
+    def base_prompt(self, player_id: int, player_roles: Dict[int, str], num_players: int) -> str:
         """Common header text used by all role prompts."""
         return (
             f"{AVALON_RULES}\n"
             f"---\n"
+            f"There are {num_players} players in this game: {', '.join([f'Player {i}' for i in range(num_players)])}\n\n"
             f"You are Player {player_id}.\n"
             f"Role: {self.name}\nTeam: {self.team}\nDescription: {self.description}\n"
             f"{self.team_prompt(player_roles)}\n"
@@ -97,8 +98,8 @@ class Role:
         else:
             raise ValueError("Unknown team configuration")
     
-    def evil_prompt(self, player_id: int, player_roles: Dict[int, str]) -> str:
-        return self.base_prompt(player_id, player_roles) + evil_players_prompt(player_id, player_roles)
+    def evil_prompt(self, player_id: int, player_roles: Dict[int, str], num_players: int) -> str:
+        return self.base_prompt(player_id, player_roles, num_players) + evil_players_prompt(player_id, player_roles)
 
 
 class Servant(Role):
@@ -119,7 +120,7 @@ class Merlin(Role):
             evil_players = get_evil_players(player_id, player_roles, include_oberon=False)
             has_mordred = MORDRED_NAME in player_roles.values()
             return (
-                self.base_prompt(player_id, player_roles) +
+                self.base_prompt(player_id, player_roles, num_players) +
                 f"\nYou secretly know the Evil players: {', '.join(evil_players)}.\n"
                 f"except you do not know who Mordred is" if has_mordred else ""
             )
@@ -141,7 +142,7 @@ class Percival(Role):
             "Morgana also appears as Merlin, so be cautious." if len(possible_merlins) > 1 else
             f"{possible_merlins[0]} is Merlin." if possible_merlins else "Merlin is not in this game."
         )
-        return self.base_prompt(player_id, player_roles) + "\n" + merlin_info + "\n"
+        return self.base_prompt(player_id, player_roles, num_players) + "\n" + merlin_info + "\n"
 
 
 class Minion(Role):
@@ -152,7 +153,7 @@ class Minion(Role):
     def get_prompt(
         self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
     ) -> str:
-        return self.evil_prompt(player_id, player_roles)
+        return self.evil_prompt(player_id, player_roles, num_players)
 
 
 class Morgana(Role):
@@ -163,7 +164,7 @@ class Morgana(Role):
     def get_prompt(
         self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
     ) -> str:
-        return self.evil_prompt(player_id, player_roles) + (
+        return self.evil_prompt(player_id, player_roles, num_players) + (
             "You appear as Merlin to Percival\n"
         )
 
@@ -176,7 +177,7 @@ class Mordred(Role):
     def get_prompt(
         self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
     ) -> str:
-        return self.base_prompt(player_id, player_roles) + evil_players_prompt(player_id, player_roles)
+        return self.base_prompt(player_id, player_roles, num_players) + evil_players_prompt(player_id, player_roles)
 
 
 class Oberon(Role):
@@ -187,7 +188,7 @@ class Oberon(Role):
     def get_prompt(
         self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
     ) -> str:
-        return self.base_prompt(player_id, player_roles) + (
+        return self.base_prompt(player_id, player_roles, num_players) + (
             "\nYou do not know who the other Evil players are, and they do not know you.\n"
         )
 
