@@ -95,6 +95,11 @@ class Role:
         else:
             raise ValueError("Unknown team configuration")
 
+class Servant(Role):
+    name = SERVANT_NAME
+    team = "Good"
+    description = "A regular member of the Good side. You have no special abilities."
+
 class Villager(Role):
     name = "Villager"
     team = "Village"
