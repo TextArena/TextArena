@@ -406,7 +406,7 @@ class AvalonEnv(ta.Env):
             "mission_actions": {},
             "mission_successes": 0,
             "mission_failures": 0,
-            "guess_merlin": False,
+            "guess_merlin_phase": False,
             "pending_elimination": None,
         }
         self.state.reset(game_state=game_state, player_prompt_function=self._prompt, secret_roles=self.player_roles)
@@ -475,7 +475,7 @@ class AvalonEnv(ta.Env):
                 return Phase.MISSION if self._vote_passed() else Phase.DISCUSSION
             case Phase.MISSION:
                 # Check if Good won and evil needs to guess Merlin
-                if self.state.game_state["guess_merlin"]:
+                if self.state.game_state["guess_merlin_phase"]:
                     return Phase.GUESS_MERLIN
                 return Phase.DISCUSSION
             case _:
@@ -689,8 +689,8 @@ class AvalonEnv(ta.Env):
         pids = self._evil_pids()
         self.state.set_winners(player_ids=pids, reason=reason + "\nEvil wins!")
     
-    def _set_guess_merlin(self):
-        self.state.game_state["guess_merlin"] = True
+    def _set_guess_merlin_phase(self):
+        self.state.game_state["guess_merlin_phase"] = True
         self.state.add_observation(message=f"{MISSION_WIN_THRESHOLD} missions succeeded. Evil has a chance to win by correctly guessing who Merlin is", observation_type=ta.ObservationType.GAME_MESSAGE)
 
     def _check_win(self):
