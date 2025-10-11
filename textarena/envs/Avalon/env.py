@@ -518,6 +518,8 @@ class AvalonEnv(ta.Env):
         gs = self.state.game_state
         player_ids = gs["player_ids"]
         self.next_player_ids: List[int] = []
+        base_phase_message = get_base_phase_message(self.phase, self.state.game_state["mission_index"])
+
 
         if self.phase == Phase.NIGHT_MAFIA:
             mafia = [p for p in alive if self.player_roles[p] == "Mafia"]
@@ -835,3 +837,7 @@ def is_valid_team_proposal(team_proposal: List[int], num_players: int, mission_i
     team = set(team_proposal)
     team_size = get_mission_team_size(num_players, mission_index)
     return len(team) == team_size and 0 <= min(team) and max(team) < num_players
+
+def get_base_phase_message(phase: Phase, mission_index: int) -> str:
+    return f"Mission: {mission_index + 1}\nPhase: {phase.value}\n"
+                
