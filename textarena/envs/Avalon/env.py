@@ -693,24 +693,6 @@ class AvalonEnv(ta.Env):
             self._set_evil_winners(reason=f"Evil correctly guessed Merlin as Player {merlin_pid}")
         else:
             self._set_good_winners(reason=f"{MISSION_WIN_THRESHOLD} missions succeeded and evil failed to correctly guess Merlin who was Player {merlin_pid}, Evil guessed Player {target}")
-        
-    def _store_mafia_target(self):
-        self.state.game_state["pending_elimination"] = VoteHandler.tally(self.state.game_state["votes"])
-        self.state.game_state["votes"].clear()
-
-    def _resolve_night_outcome(self):
-        tgt = self.state.game_state["pending_elimination"]
-        self.state.game_state["pending_elimination"] = None
-        if tgt is None:
-            self.state.add_observation(message="No one was killed tonight.", observation_type=ta.ObservationType.GAME_MESSAGE)
-        else:
-            self._eliminate_player(tgt, "was killed during the night")
-
-    def _eliminate_player(self, pid: int, reason: str):
-        if pid in self.state.game_state["alive_players"]:
-            self.state.game_state["alive_players"].remove(pid)
-        self.state.add_observation(message=f"Player {pid} {reason}.", observation_type=ta.ObservationType.GAME_MESSAGE)
-        self._check_win()
     
     def _good_pids(self) -> List[int]:
         return [p for p in range(self.state.num_players) if self.player_roles[p] not in EVIL_NAMES]
