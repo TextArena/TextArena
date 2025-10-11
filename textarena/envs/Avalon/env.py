@@ -106,6 +106,24 @@ class Servant(Role):
     team = "Good"
     description = "You are a Loyal Servant of Arthur, a regular member of the Good side. You have no special abilities."
 
+class Merlin(Role):
+    name = MERLIN_NAME
+    team = "Good"
+    description = (
+        "You are Merlin. You secretly know who all the Evil players are. "
+        "Guide Good subtly without revealing yourself; if Evil guesses that you are Merlin at the end, they win."
+    )
+    def get_prompt(
+            self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
+        ) -> str:
+            evil_players = get_evil_players(player_id, player_roles, include_oberon=False)
+            has_mordred = MORDRED_NAME in player_roles.values()
+            return (
+                self.base_prompt(player_id, player_roles) +
+                f"\nYou secretly know the Evil players: {', '.join(evil_players)}.\n"
+                f"except you do not know who Mordred is" if has_mordred else ""
+            )
+
 
 def get_evil_pids(player_id: int, player_roles: Dict[int, str], include_oberon: bool = False) -> list[int]:
     evil_pids = [pid for pid, role in player_roles.items() if role in EVIL_NAMES and (include_oberon or role != OBERON_NAME) and pid != player_id]
