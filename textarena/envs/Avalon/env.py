@@ -4,6 +4,8 @@ import re, random
 from typing import Set, Tuple, Dict, Optional, List, Type, TypeVar
 import textarena as ta
 
+MISSION_WIN_THRESHOLD = 3
+CONSECUTIVE_PROPOSAL_FAIL_THRESHOLD = 5
 MIN_PLAYERS = 5
 MAX_PLAYERS = 10
 DEFAULT_VOTE = "approve"
