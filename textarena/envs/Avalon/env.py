@@ -649,19 +649,6 @@ class AvalonEnv(ta.Env):
 
         self.state.game_state["merlin_guesses"][pid] = guess
 
-    def _mark_invalid(self, pid: int, reason: str):
-        fatal = self.state.set_invalid_move(reason)
-        if fatal: self._eliminate_player(self.state.current_player_id, "has been eliminated by making an invalid move.")
-        return fatal 
-    
-        # if self.state.set_invalid_move(reason):
-        #     # repeated invalid move by player, kill'em
-        #     self._eliminate_player(self.state.current_player_id, "has been eliminated by making an invalid move.")
-
-            # # TODO kill player off
-            # others = [p for p in range(self.state.num_players) if p != pid]
-            # self.state.set_winners(player_ids=others, reason=f"Player {pid} made an invalid move.")
-    
     def _inc_consecutive_failed_team_proposals(self):
         self.state.game_state["consecutive_failed_team_proposals"] += 1
         self._check_win()
