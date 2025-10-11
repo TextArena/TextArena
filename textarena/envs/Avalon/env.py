@@ -466,6 +466,8 @@ class AvalonEnv(ta.Env):
                 self._resolve_votes()
             case Phase.MISSION:
                 self._resolve_mission_outcome()
+            case Phase.GUESS_MERLIN:
+                self._resolve_guess_merlin()
 
         # Check if game has concluded
         if self.state.done: return
