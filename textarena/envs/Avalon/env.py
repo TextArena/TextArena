@@ -494,6 +494,8 @@ class AvalonEnv(ta.Env):
                 if self.state.game_state["guess_merlin_phase"]:
                     return Phase.GUESS_MERLIN
                 return Phase.DISCUSSION
+            case Phase.GUESS_MERLIN:
+                return Phase.GUESS_MERLIN
             case _:
                 raise RuntimeError("Unknown phase")
                 
