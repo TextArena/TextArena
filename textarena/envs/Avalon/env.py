@@ -340,7 +340,6 @@ class AvalonEnv(ta.Env):
         game_state = {
             "phase": self.phase,
             "mission_index": 0,
-            "day_number": 1,
             "player_ids": list(range(num_players)),
             "player_roles": self.player_roles,
             "role_pids": role_pids,
@@ -353,7 +352,6 @@ class AvalonEnv(ta.Env):
             "mission_successes": 0,
             "mission_failures": 0,
             "guess_merlin_phase": False,
-            "pending_elimination": None,
         }
         self.state.reset(game_state=game_state, player_prompt_function=self._prompt, secret_roles=self.player_roles)
         self._send_phase_prompts() # populate self.next_player_ids
