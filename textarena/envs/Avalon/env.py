@@ -167,6 +167,18 @@ class Morgana(Role):
             "You appear as Merlin to Percival\n"
         )
 
+
+class Mordred(Role):
+    name = MORDRED_NAME
+    team = "Evil"
+    description = "You are Mordred. Merlin cannot see you, making you hidden from Good."
+
+    def get_prompt(
+        self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
+    ) -> str:
+        return self.base_prompt(player_id, player_roles) + evil_players_prompt(player_id, player_roles)
+
+
 def get_evil_pids(player_id: int, player_roles: Dict[int, str], include_oberon: bool = False) -> list[int]:
     evil_pids = [pid for pid, role in player_roles.items() if role in EVIL_NAMES and (include_oberon or role != OBERON_NAME) and pid != player_id]
     return evil_pids
