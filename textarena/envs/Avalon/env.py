@@ -623,7 +623,10 @@ class AvalonEnv(ta.Env):
             self.state.add_observation(message="No consensus - the team proposal was not passed.", observation_type=ta.ObservationType.GAME_MESSAGE)
             return
         self.state.game_state["consecutive_failed_team_proposals"] = 0
-
+    
+    def _is_mission_success(self) -> bool:
+        return is_mission_success(self.state.game_state["mission_actions"])
+    
     def _store_mafia_target(self):
         self.state.game_state["pending_elimination"] = VoteHandler.tally(self.state.game_state["votes"])
         self.state.game_state["votes"].clear()
