@@ -328,10 +328,13 @@ class VoteHandler:
 class AvalonEnv(ta.Env):
     voting_pattern = re.compile(r".*\[(?:player\s*)?(\d+)\].*", re.IGNORECASE)
     _ROLE_FACTORY = {
-        "Villager":  Villager,
-        "Mafia":     Mafia,
-        "Doctor":    Doctor,
-        "Detective": Detective,
+        SERVANT_NAME:  Servant,
+        MERLIN_NAME:   Merlin,
+        PERCIVAL_NAME: Percival,
+        MINION_NAME:   Minion,
+        MORGANA_NAME:  Morgana,
+        MORDRED_NAME:  Mordred,
+        OBERON_NAME:   Oberon,
     }
     def __init__(self, mafia_ratio: float = 0.25, discussion_rounds: int = 3):
         """
