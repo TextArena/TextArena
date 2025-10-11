@@ -52,6 +52,8 @@ MORGANA_NAME = "Morgana"
 MORDRED_NAME = "Mordred"
 OBERON_NAME = "Oberon"
 
+EVIL_NAMES = {MINION_NAME, MORGANA_NAME, MORDRED_NAME, OBERON_NAME}
+
 class Phase(Enum):
     NIGHT_MAFIA = "Night-Mafia"
     NIGHT_DOCTOR = "Night-Doctor"
