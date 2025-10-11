@@ -649,25 +649,6 @@ class AvalonEnv(ta.Env):
 
         self.state.game_state["merlin_guesses"][pid] = guess
 
-    # def _record_vote(self, pid: int, action: str, *, broadcast_to_all=False, broadcast_to_mafia_only=False):
-    #     target = VoteHandler.parse(action)
-    #     if target is None or target not in self.state.game_state["alive_players"]:
-    #         fatal = self._mark_invalid(pid, "Vote not in valid format or invalid target.")
-    #         if not fatal: return
-    #         else: # player was eliminated by invalid move
-    #             self.state.made_invalid_move = False  # such that we can rotate off the player 
-    #             return
-
-
-    #     self.state.game_state["votes"][pid] = target
-
-    #     if broadcast_to_all:
-    #         self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-    #     elif broadcast_to_mafia_only:
-    #         mafia = [p for p in self.state.game_state["alive_players"] if self.player_roles[p] == "Mafia"]
-    #         for m in mafia:
-    #             self.state.add_observation(from_id=pid, to_id=m, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-
     def _mark_invalid(self, pid: int, reason: str):
         fatal = self.state.set_invalid_move(reason)
         if fatal: self._eliminate_player(self.state.current_player_id, "has been eliminated by making an invalid move.")
