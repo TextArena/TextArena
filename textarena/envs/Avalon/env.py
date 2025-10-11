@@ -404,12 +404,14 @@ class AvalonEnv(ta.Env):
         self.state = ta.TeamMultiPlayerState(num_players=num_players, seed=seed)
         self._assign_roles(num_players, special_roles=special_roles)
         self.phase: Phase = Phase.DISCUSSION
+        role_pids = {role: pid for pid, role in self.player_roles}
         game_state = {
             "phase": self.phase,
             "mission_index": 0,
             "day_number": 1,
             "alive_players": list(range(num_players)),
             "player_roles": self.player_roles,
+            "role_pids": role_pids,
             "num_discussion_rounds": self.discussion_rounds,
             "consecutive_failed_team_proposals": 0,
             "votes": {},
