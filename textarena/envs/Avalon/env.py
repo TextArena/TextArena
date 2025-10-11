@@ -375,7 +375,7 @@ class AvalonEnv(ta.Env):
             self.roles[pid] = self._ROLE_FACTORY[r_name]()
 
     def _prompt(self, player_id: int, game_state: dict) -> str:
-        role_obj = self.roles[player_id]
+        role_obj: Role = self.roles[player_id]
         return role_obj.get_prompt(player_id = player_id, player_roles = self.player_roles, num_players = self.state.num_players, num_discussion_rounds = self.discussion_rounds)
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
