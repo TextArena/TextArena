@@ -615,3 +615,32 @@ def get_side_sizes(num_players: int) -> tuple[int, int]:
 
     return distribution[num_players]
 
+def get_mission_team_size(num_players: int, mission_index: int) -> int:
+    """
+    Returns the team size for a given number of players and mission index.
+
+    Mission team sizes from:
+    https://avalon-game.com/wiki/rules/#:~:text=Mission%20Team%20Size
+    
+    Parameters:
+        num_players (int): Number of players (5-10)
+        mission_index (int): Mission index (0-4)
+    
+    Returns:
+        int: Team size
+    """
+    team_sizes = {
+        5: [2, 3, 2, 3, 3],
+        6: [2, 3, 4, 3, 4],
+        7: [2, 3, 3, 4, 4],
+        8: [3, 4, 4, 5, 5],
+        9: [3, 4, 4, 5, 5],
+        10: [3, 4, 4, 5, 5]
+    }
+    
+    if num_players not in team_sizes:
+        raise ValueError("Number of players must be between 5 and 10.")
+    if not 0 <= mission_index < 5:
+        raise ValueError("Mission index must be between 0 and 4 inclusive.")
+    
+    return team_sizes[num_players][mission_index]
