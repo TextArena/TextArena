@@ -44,6 +44,14 @@ Win conditions:
 - Evil wins if they fail 3 out of 5 missions OR if they correctly identify Merlin at the end.
 """
 
+SERVANT_NAME = "Servant"
+MERLIN_NAME = "Merlin"
+PERCIVAL_NAME = "Percival"
+MINION_NAME = "Minion"
+MORGANA_NAME = "Morgana"
+MORDRED_NAME = "Mordred"
+OBERON_NAME = "Oberon"
+
 class Phase(Enum):
     NIGHT_MAFIA = "Night-Mafia"
     NIGHT_DOCTOR = "Night-Doctor"
