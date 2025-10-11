@@ -381,6 +381,7 @@ class AvalonEnv(ta.Env):
         self.phase: Phase = Phase.DISCUSSION
         game_state = {
             "phase": self.phase,
+            "mission_index": 0,
             "day_number": 1,
             "alive_players": list(range(num_players)),
             "player_roles": self.player_roles,
