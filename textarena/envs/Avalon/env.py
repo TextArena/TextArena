@@ -104,6 +104,8 @@ class Role:
 class Servant(Role):
     name = SERVANT_NAME
     team = "Good"
+    description = "You are a Loyal Servant of Arthur, a regular member of the Good side. You have no special abilities."
+
 
 def get_evil_pids(player_id: int, player_roles: Dict[int, str], include_oberon: bool = False) -> list[int]:
     evil_pids = [pid for pid, role in player_roles.items() if role in EVIL_NAMES and (include_oberon or role != OBERON_NAME) and pid != player_id]
