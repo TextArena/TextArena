@@ -896,6 +896,6 @@ def is_valid_team_proposal(team_proposal: List[int], num_players: int, mission_i
     team_size = get_mission_team_size(num_players, mission_index)
     return len(team) == team_size and 0 <= min(team) and max(team) < num_players
 
-def get_base_phase_message(phase: Phase, mission_index: int) -> str:
-    return f"Mission: {mission_index + 1}\nPhase: {phase.value}\n"
+def get_base_phase_message(phase: Phase, mission_index: int, team_size: int) -> str:
+    return f"Mission: {mission_index + 1}, Team size for this mission: {team_size}\nPhase: {phase.value}\n"
                 
