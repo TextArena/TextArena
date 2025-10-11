@@ -415,17 +415,22 @@ class AvalonEnv(ta.Env):
         self.state.game_state["phase"] = self.phase
         self._send_phase_prompts()
         self.state.manually_set_current_player_id(self.next_player_ids.pop())
+    
+    def _vote_passed(self) -> bool:
+        return is_team_proposal_passed(self.state.game_state["votes"])
 
     def _compute_next_phase(self) -> Phase:
-        doctor_alive     = any(self.player_roles[p] == "Doctor"    for p in self.state.game_state["alive_players"])
-        detective_alive  = any(self.player_roles[p] == "Detective" for p in self.state.game_state["alive_players"])
         match self.phase:
-            case Phase.NIGHT_MAFIA:     return Phase.NIGHT_DOCTOR if doctor_alive else (Phase.NIGHT_DETECTIVE if detective_alive else Phase.DAY_DISCUSSION)
-            case Phase.NIGHT_DOCTOR:    return Phase.NIGHT_DETECTIVE if detective_alive else Phase.DAY_DISCUSSION
-            case Phase.NIGHT_DETECTIVE: return Phase.DAY_DISCUSSION
-            case Phase.DAY_DISCUSSION:  return Phase.DAY_VOTING
-            case Phase.DAY_VOTING:      return Phase.NIGHT_MAFIA
-            case _:                     raise RuntimeError("Unknown phase")
+            case Phase.DISCUSSION:
+                return Phase.TEAM_PROPOSAL
+            case Phase.TEAM_PROPOSAL:
+                return Phase.VOTING
+            case Phase.VOTING:
+                return Phase.MISSION if self._vote_passed() else Phase.DISCUSSION
+            case Phase.MISSION:
+                return Phase.DISCUSSION
+            case _:
+                raise RuntimeError("Unknown phase")
                 
 
     def _send_phase_prompts(self):
