@@ -1,6 +1,7 @@
+import ast
 from enum import Enum
 import re, random
-from typing import Set, Tuple, Dict, Optional, List
+from typing import Set, Tuple, Dict, Optional, List, Type, TypeVar
 import textarena as ta
 
 MIN_PLAYERS = 5
@@ -273,13 +274,41 @@ class Detective(Role):
             f"Win by identifying and eliminating all Mafia members.\n"
         )
 
+T = TypeVar("T")
+
+def parse_typed_list(list_str: str, typ: Type[T]) -> Optional[List[T]]:
+    """
+    Parses a Python-style list string (e.g. "[1, 2, 3]") into a typed Python list.
+    Returns None if parsing or type conversion fails.
+    """
+    try:
+        value = ast.literal_eval(list_str)
+        if isinstance(value, list):
+            return [typ(x) for x in value]
+    except Exception:
+        return None
+
 class AvalonParser:
+    # https://regex101.com/r/DD2CJI/1
+    team_proposal_pattern = re.compile(r"<team>\s*(.+?)\s*</team>", re.IGNORECASE)
+
     # https://regex101.com/r/eWYQa5/1
     vote_pattern = re.compile(r"<vote>\s*(approve|reject)\s*</vote>", re.IGNORECASE)
 
     # https://regex101.com/r/rA2EEB/1
     action_pattern = re.compile(r"<action>\s*(success|fail)\s*</action>", re.IGNORECASE)
-    
+
+    @staticmethod
+    def parse_team_proposal(text: str) -> Optional[List[int]]:
+        """
+        Parses a team proposal from text.
+        Returns the team proposal, or None if not found.
+        """
+        m = AvalonParser.team_proposal_pattern.search(text)
+        list_str = m.group(1)
+        team_proposal = parse_typed_list(list_str, typ=int)
+        return team_proposal
+
     @staticmethod
     def parse_team_vote(text: str) -> Optional[str]:
         """
