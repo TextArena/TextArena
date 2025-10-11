@@ -63,6 +63,15 @@ class Role:
     name: str = "Role"
     team: str = "Unknown"
     description: str = ""
+    def base_prompt(self, player_id: int, player_roles: Dict[int, str]) -> str:
+        """Common header text used by all role prompts."""
+        return (
+            f"{AVALON_RULES}\n"
+            f"---\n"
+            f"You are Player {player_id}.\n"
+            f"Role: {self.name}\nTeam: {self.team}\nDescription: {self.description}\n"
+            f"{self.team_prompt(player_roles)}\n"
+        )
     
     def team_prompt(self, player_roles: Dict[int, str]) -> str:
         """Return the team's win condition message"""
