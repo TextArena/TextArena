@@ -356,6 +356,7 @@ class AvalonEnv(ta.Env):
             "player_roles": self.player_roles,
             "num_discussion_rounds": self.discussion_rounds,
             "votes": {},
+            "mission_actions": {},
             "pending_elimination": None,
         }
         self.state.reset(game_state=game_state, player_prompt_function=self._prompt, secret_roles=self.player_roles)
