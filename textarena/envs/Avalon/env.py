@@ -315,7 +315,6 @@ def tally_merlin_votes(votes: Dict[int, int]) -> Optional[int]:
     return random.choice(top_players) # Randomly resolve ties
 
 class AvalonEnv(ta.Env):
-    voting_pattern = re.compile(r".*\[(?:player\s*)?(\d+)\].*", re.IGNORECASE)
     _ROLE_FACTORY = {
         SERVANT_NAME:  Servant,
         MERLIN_NAME:   Merlin,
