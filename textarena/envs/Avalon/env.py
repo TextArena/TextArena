@@ -504,6 +504,9 @@ class AvalonEnv(ta.Env):
     
     def _handle_vote(self, pid: int, action: str):
         self._record_vote(pid, action)
+    
+    def _handle_mission(self, pid: int, action: str):
+        self._record_mission_action(pid, action)
 
     def _handle_day_vote(self, pid: int, action: str):      self._record_vote(pid, action, broadcast_to_all=True)
     def _handle_mafia_vote(self, pid: int, action: str):    self._record_vote(pid, action, broadcast_to_mafia_only=True)
