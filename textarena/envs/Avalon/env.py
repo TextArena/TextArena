@@ -63,6 +63,32 @@ OBERON_NAME = "Oberon"
 EVIL_NAMES = {MINION_NAME, MORGANA_NAME, MORDRED_NAME, OBERON_NAME}
 GOOD_NAMES = {SERVANT_NAME, MERLIN_NAME, PERCIVAL_NAME}
 
+BASE_ROLE_DESCRIPTIONS = {
+    SERVANT_NAME: (
+        "They have no special abilities."
+    ),
+    MERLIN_NAME: (
+        "Secretly knows who all the Evil players are, except Mordred (if Mordred is in the game). "
+        "If Good wins, Evil has one chance to guess who Merlin is; if they guess correctly, Evil wins instead."
+    ),
+    PERCIVAL_NAME: (
+        "Knows who Merlin is. "
+        "If Morgana is in the game, she appears as Merlin, making it tricky to distinguish the real Merlin."
+    ),
+    MINION_NAME: (
+        "They have no special abilities."
+    ),
+    MORGANA_NAME: (
+        "Appears as Merlin to Percival."
+    ),
+    MORDRED_NAME: (
+        "Merlin cannot see that Mordred is an Evil player."
+    ),
+    OBERON_NAME: (
+        "Does not know who the other Evil players are, and they do not know that Oberon is Evil."
+    ),
+}
+
 class Phase(Enum):
     DISCUSSION = "Discussion"
     TEAM_PROPOSAL = "Team-Proposal"
