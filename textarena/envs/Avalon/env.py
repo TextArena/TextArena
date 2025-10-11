@@ -324,13 +324,11 @@ class AvalonEnv(ta.Env):
         MORDRED_NAME:  Mordred,
         OBERON_NAME:   Oberon,
     }
-    def __init__(self, mafia_ratio: float = 0.25, discussion_rounds: int = 3):
+    def __init__(self, discussion_rounds: int = 3):
         """
         Args:
-            mafia_ratio (float): Ratio of Mafia members to total players (default: 0.25)
             discussion_rounds (int): The number of discussion rounds
         """
-        self.mafia_ratio = mafia_ratio
         self.discussion_rounds = discussion_rounds
 
     def reset(self, num_players: int, special_roles: Optional[Set[str]] = None, seed: Optional[int] = None):
