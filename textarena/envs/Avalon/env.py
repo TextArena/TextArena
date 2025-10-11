@@ -752,14 +752,22 @@ class AvalonEnv(ta.Env):
     def _is_mission_success(self) -> bool:
         return is_mission_success(self.state.game_state["mission_actions"])
     
+    def _inc_mission_successes(self):
+        self.state.game_state["mission_successes"] += 1
+        self._check_win()
+
+    def _inc_mission_failures(self):
+        self.state.game_state["mission_failures"] += 1
+        self._check_win()
+    
     def _resolve_mission_outcome(self):
         success = self._is_mission_success()
         self.state.game_state["mission_actions"].clear()
         if success:
-            self.state.game_state["mission_successes"] += 1
+            self._inc_mission_successes()
             message = "Mission Succeeded. All actions were success."
         else:
-            self.state.game_state["mission_failures"] += 1
+            self._inc_mission_failures()
             message = "Mission Failed. At least one action was fail"
         self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
     
