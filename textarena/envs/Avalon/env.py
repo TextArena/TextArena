@@ -100,7 +100,15 @@ class Role:
 class Servant(Role):
     name = SERVANT_NAME
     team = "Good"
-    description = "A regular member of the Good side. You have no special abilities."
+
+def get_evil_pids(player_id: int, player_roles: Dict[int, str], include_oberon: bool = False) -> list[int]:
+    evil_pids = [pid for pid, role in player_roles.items() if role in EVIL_NAMES and (include_oberon or role != OBERON_NAME) and pid != player_id]
+    return evil_pids
+
+def get_evil_players(player_id: int, player_roles: Dict[int, str], include_oberon: bool = False) -> list[str]:
+    evil_pids = get_evil_pids(player_id, player_roles, include_oberon=include_oberon)
+    evil_players = [f"Player {pid}" for pid in evil_pids]
+    return evil_players
 
 class Villager(Role):
     name = "Villager"
