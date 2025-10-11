@@ -627,6 +627,17 @@ class AvalonEnv(ta.Env):
     def _is_mission_success(self) -> bool:
         return is_mission_success(self.state.game_state["mission_actions"])
     
+    def _resolve_mission_outcome(self):
+        success = self._is_mission_success()
+        self.state.game_state["mission_actions"].clear()
+        if success:
+            self.state.game_state["mission_successes"] += 1
+            message = "Mission Succeeded. All actions were success."
+        else:
+            self.state.game_state["mission_failures"] += 1
+            message = "Mission Failed. At least one action was fail"
+        self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
+        
     def _store_mafia_target(self):
         self.state.game_state["pending_elimination"] = VoteHandler.tally(self.state.game_state["votes"])
         self.state.game_state["votes"].clear()
