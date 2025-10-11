@@ -143,6 +143,18 @@ class Percival(Role):
         )
         return self.base_prompt(player_id, player_roles) + "\n" + merlin_info + "\n"
 
+
+class Minion(Role):
+    name = MINION_NAME
+    team = "Evil"
+    description = "You are a Minion of Mordred, a regular member of the Evil side. You have no special abilities."
+
+    def get_prompt(
+        self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
+    ) -> str:
+        return self.evil_prompt(player_id, player_roles)
+
+
 def get_evil_pids(player_id: int, player_roles: Dict[int, str], include_oberon: bool = False) -> list[int]:
     evil_pids = [pid for pid, role in player_roles.items() if role in EVIL_NAMES and (include_oberon or role != OBERON_NAME) and pid != player_id]
     return evil_pids
