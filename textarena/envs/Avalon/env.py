@@ -314,22 +314,6 @@ def tally_merlin_votes(votes: Dict[int, int]) -> Optional[int]:
     top_players = [pid for pid, c in counts.items() if c == top_score] # All players who received the top score (could be 1 or many)
     return random.choice(top_players) # Randomly resolve ties
 
-class VoteHandler:
-    @staticmethod
-    def parse(text: str) -> Optional[int]:
-        m = AvalonEnv.voting_pattern.search(text)
-        return int(m.group(1)) if m else None
-    @staticmethod
-    def tally(votes: Dict[int, int]) -> Optional[int]:
-        if not votes: return None
-        # Count votes per target
-        counts: Dict[int, int] = {}
-        for target in votes.values():
-            counts[target] = counts.get(target, 0) + 1
-        top_score = max(counts.values()) # Highest vote count
-        top_players = [pid for pid, c in counts.items() if c == top_score] # All players who received the top score (could be 1 or many)
-        return random.choice(top_players) # Randomly resolve ties
-
 class AvalonEnv(ta.Env):
     voting_pattern = re.compile(r".*\[(?:player\s*)?(\d+)\].*", re.IGNORECASE)
     _ROLE_FACTORY = {
