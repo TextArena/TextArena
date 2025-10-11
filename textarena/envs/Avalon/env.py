@@ -684,6 +684,16 @@ class AvalonEnv(ta.Env):
             self.state.game_state["mission_failures"] += 1
             message = "Mission Failed. At least one action was fail"
         self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
+    
+    def _resolve_guess_merlin(self):
+        target = tally_merlin_votes(self.state.game_state["merlin_guesses"])
+        merlin_pid = self.state.game_state["role_pids"][MERLIN_NAME]
+        if target is None:
+            self._set_good_winners(reason="No merlin guesses found. Good automatically wins.")
+        elif target == merlin_pid:
+            self._set_evil_winners(reason=f"Evil correctly guessed Merlin as Player {merlin_pid}")
+        else:
+            self._set_good_winners(reason=f"{MISSION_WIN_THRESHOLD} missions succeeded and evil failed to correctly guess Merlin who was Player {merlin_pid}, Evil guessed Player {target}")
         
     def _store_mafia_target(self):
         self.state.game_state["pending_elimination"] = VoteHandler.tally(self.state.game_state["votes"])
