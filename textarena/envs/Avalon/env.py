@@ -554,6 +554,18 @@ class AvalonEnv(ta.Env):
                 )
                 self.state.add_observation(to_id=-1, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
                 self.next_player_ids = player_ids
+            case Phase.MISSION:
+                mission_team = self.state.game_state["team_proposal"]
+                message = (
+                    base_phase_message +
+                    f"You are on the mission team consisting of players {mission_team}. "
+                    "Choose whether to succeed or fail the mission. "
+                    "Good players must choose success; Evil players can choose either. "
+                    "Submit your action within <action> tags, e.g. <action>success</action> or <action>fail</action>."
+                )
+                for pid in mission_team:
+                    self.state.add_observation(to_id=pid, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.next_player_ids = random.shuffle(mission_team)
 
         if self.phase == Phase.NIGHT_MAFIA:
             mafia = [p for p in alive if self.player_roles[p] == "Mafia"]
