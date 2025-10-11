@@ -659,6 +659,12 @@ class AvalonEnv(ta.Env):
             self.state.game_state["alive_players"].remove(pid)
         self.state.add_observation(message=f"Player {pid} {reason}.", observation_type=ta.ObservationType.GAME_MESSAGE)
         self._check_win()
+    
+    def _good_pids(self) -> List[int]:
+        return [p for p in range(self.state.num_players) if self.player_roles[p] not in EVIL_NAMES]
+
+    def _evil_pids(self) -> List[int]:
+        return [p for p in range(self.state.num_players) if self.player_roles[p] in EVIL_NAMES]
 
     def _check_win(self):
         alive = self.state.game_state["alive_players"]
