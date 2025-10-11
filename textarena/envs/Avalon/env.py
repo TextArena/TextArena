@@ -579,36 +579,6 @@ class AvalonEnv(ta.Env):
             case _:
                 raise RuntimeError("Unknown phase")
 
-        if self.phase == Phase.NIGHT_MAFIA:
-            mafia = [p for p in alive if self.player_roles[p] == "Mafia"]
-            targets = [p for p in alive if p not in mafia]
-            for p in mafia:
-                self.state.add_observation(to_id=p, message=f"Night has fallen. Mafia, agree on a victim.\nValid targets: {', '.join(f'[{t}]' for t in targets)}", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.next_player_ids = random.sample(mafia, k=len(mafia))
-
-        elif self.phase == Phase.NIGHT_DOCTOR:
-            doc = next(p for p in alive if self.player_roles[p] == "Doctor")
-            opts = ", ".join(f"[{t}]" for t in alive if t != doc)
-            self.state.add_observation(to_id=doc, message=f"Night phase - choose one player to protect: {opts}", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.next_player_ids = [doc]
-
-        elif self.phase == Phase.NIGHT_DETECTIVE:
-            det = next(p for p in alive if self.player_roles[p] == "Detective")
-            opts = ", ".join(f"[{t}]" for t in alive if t != det)
-            self.state.add_observation(to_id=det, message=f"Night phase - choose one player to investigate: {opts}", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.next_player_ids = [det]
-
-        elif self.phase == Phase.DAY_DISCUSSION:
-            rounds = self.discussion_rounds
-            self.state.add_observation(to_id=-1, message=f"Day breaks. Discuss for {rounds} rounds, then a vote will follow.", observation_type=ta.ObservationType.GAME_MESSAGE)
-            players = random.sample(alive, k=len(alive))
-            self.next_player_ids = players * rounds
-
-        elif self.phase == Phase.DAY_VOTING:
-            opts = ", ".join(f"[{p}]" for p in alive)
-            self.state.add_observation(to_id=-1, message=f"Voting phase - submit one vote in format [X]. Valid: {opts}", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.next_player_ids = random.sample(alive, k=len(alive))
-
     def _handle_discussion(self, pid: int, action: str):
         self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
     
