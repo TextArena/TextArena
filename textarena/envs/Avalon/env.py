@@ -125,6 +125,24 @@ class Merlin(Role):
             )
 
 
+class Percival(Role):
+    name = PERCIVAL_NAME
+    team = "Good"
+    description = "You are Percival. You know who Merlin is, but Morgana may appear as Merlin to you alongside the real Merlin if they are in the game."
+
+    def get_prompt(
+        self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int
+    ) -> str:
+        possible_merlins = [
+            f"Player {pid}" for pid, role in player_roles.items() if role in {MERLIN_NAME, MORGANA_NAME}
+        ]
+        merlin_info = (
+            f"One of these players is Merlin: {', '.join(possible_merlins)}.\n"
+            "Morgana also appears as Merlin, so be cautious." if len(possible_merlins) > 1 else
+            f"{possible_merlins[0]} is Merlin." if possible_merlins else "Merlin is not in this game."
+        )
+        return self.base_prompt(player_id, player_roles) + "\n" + merlin_info + "\n"
+
 def get_evil_pids(player_id: int, player_roles: Dict[int, str], include_oberon: bool = False) -> list[int]:
     evil_pids = [pid for pid, role in player_roles.items() if role in EVIL_NAMES and (include_oberon or role != OBERON_NAME) and pid != player_id]
     return evil_pids
