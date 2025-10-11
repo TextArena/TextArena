@@ -423,7 +423,7 @@ class AvalonEnv(ta.Env):
             "phase": self.phase,
             "mission_index": 0,
             "day_number": 1,
-            "alive_players": list(range(num_players)),
+            "player_ids": list(range(num_players)),
             "player_roles": self.player_roles,
             "role_pids": role_pids,
             "num_discussion_rounds": self.discussion_rounds,
@@ -516,7 +516,7 @@ class AvalonEnv(ta.Env):
 
     def _send_phase_prompts(self):
         gs = self.state.game_state
-        alive = gs["alive_players"]
+        player_ids = gs["player_ids"]
         self.next_player_ids: List[int] = []
 
         if self.phase == Phase.NIGHT_MAFIA:
