@@ -404,6 +404,7 @@ class AvalonEnv(ta.Env):
             "consecutive_failed_team_proposals": 0,
             "votes": {},
             "mission_actions": {},
+            "merlin_guesses": {},
             "mission_successes": 0,
             "mission_failures": 0,
             "guess_merlin_phase": False,
