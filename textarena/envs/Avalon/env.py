@@ -389,6 +389,8 @@ class AvalonEnv(ta.Env):
             "consecutive_failed_team_proposals": 0,
             "votes": {},
             "mission_actions": {},
+            "mission_successes": 0,
+            "mission_failures": 0,
             "pending_elimination": None,
         }
         self.state.reset(game_state=game_state, player_prompt_function=self._prompt, secret_roles=self.player_roles)
