@@ -63,6 +63,9 @@ class Role:
     name: str = "Role"
     team: str = "Unknown"
     description: str = ""
+    def get_prompt(self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int) -> str:
+        return self.base_prompt(player_id, player_roles)
+
     def base_prompt(self, player_id: int, player_roles: Dict[int, str]) -> str:
         """Common header text used by all role prompts."""
         return (
