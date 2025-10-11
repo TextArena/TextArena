@@ -544,6 +544,16 @@ class AvalonEnv(ta.Env):
                 )
                 self.state.add_observation(to_id=leader_pid, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
                 self.next_player_ids = [leader_pid]
+            case Phase.VOTING:
+                proposed_team = self.state.game_state["team_proposal"]
+                message = (
+                    base_phase_message +
+                    f"Leader {leader_pid}. Proposed the team: {proposed_team}\n"
+                    "Vote whether to approve or reject the team"
+                    "Submit your vote within <vote> tags, e.g. <vote>approve</vote> or <vote>reject</vote>."
+                )
+                self.state.add_observation(to_id=-1, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.next_player_ids = player_ids
 
         if self.phase == Phase.NIGHT_MAFIA:
             mafia = [p for p in alive if self.player_roles[p] == "Mafia"]
