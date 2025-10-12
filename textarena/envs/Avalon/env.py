@@ -2,7 +2,7 @@ import ast
 from dataclasses import dataclass, field
 from enum import Enum
 import re, random
-from typing import ClassVar, Set, Tuple, Dict, Optional, List, Type, TypeVar
+from typing import ClassVar, Set, Tuple, Dict, Optional, List, Type, TypeVar, TypedDict
 import textarena as ta
 from textarena.envs.Avalon.renderer import render_game_state
 
@@ -103,6 +103,8 @@ class Phase(Enum):
     VOTING = "Voting"
     MISSION = "Mission"
     GUESS_MERLIN = "Guess-Merlin"
+
+INITIAL_PHASE = Phase.DISCUSSION
 
 def get_team(role_name: str) -> str:
     if role_name in GOOD_NAMES:
@@ -351,6 +353,51 @@ def tally_merlin_votes(votes: Dict[int, int]) -> Optional[int]:
     top_players = [pid for pid, c in counts.items() if c == top_score] # All players who received the top score (could be 1 or many)
     return random.choice(top_players) # Randomly resolve ties
 
+class GameState(TypedDict):
+    num_players: int
+    phase: Phase
+    mission_index: int
+    player_ids: List[int]
+    player_roles: Dict[int, str]
+    role_pids: Dict[str, int]
+    leader_pid: int
+    num_discussion_rounds: int
+    team_proposal: List[int]
+    consecutive_failed_team_proposals: int
+    votes: Dict[int, str]
+    mission_actions: Dict[int, str]
+    merlin_guesses: Dict[int, int]
+    mission_successes: int
+    mission_failures: int
+    guess_merlin_phase: bool
+
+def init_game_state(
+    num_players: int,
+    player_roles: Dict[int, str],
+    discussion_rounds: int,
+) -> GameState:
+    role_pids = {role: pid for pid, role in player_roles.items()}
+    leader_pid = random.randint(0, num_players - 1)
+
+    return GameState(
+        num_players=num_players,
+        phase=INITIAL_PHASE,
+        mission_index=0,
+        player_ids=list(range(num_players)),
+        player_roles=player_roles,
+        role_pids=role_pids,
+        leader_pid=leader_pid,
+        num_discussion_rounds=discussion_rounds,
+        team_proposal=[],
+        consecutive_failed_team_proposals=0,
+        votes={},
+        mission_actions={},
+        merlin_guesses={},
+        mission_successes=0,
+        mission_failures=0,
+        guess_merlin_phase=False,
+    )
+
 class AvalonEnv(ta.Env):
     def __init__(self, discussion_rounds: int = 3):
         """
@@ -363,27 +410,12 @@ class AvalonEnv(ta.Env):
         assert MIN_PLAYERS <= num_players <= MAX_PLAYERS, f"Player count must be between {MIN_PLAYERS} and {MAX_PLAYERS}. Got {num_players} players."
         self.state = ta.TeamMultiPlayerState(num_players=num_players, seed=seed)
         self._assign_roles(num_players, special_roles=special_roles)
-        self.phase: Phase = Phase.DISCUSSION
-        role_pids = {role: pid for pid, role in self.player_roles.items()}
-        leader_pid = random.randint(0, num_players - 1)
-        game_state = {
-            "num_players": num_players,
-            "phase": self.phase,
-            "mission_index": 0,
-            "player_ids": list(range(num_players)),
-            "player_roles": self.player_roles,
-            "role_pids": role_pids,
-            "leader_pid": leader_pid,
-            "num_discussion_rounds": self.discussion_rounds,
-            "team_proposal": [],
-            "consecutive_failed_team_proposals": 0,
-            "votes": {},
-            "mission_actions": {},
-            "merlin_guesses": {},
-            "mission_successes": 0,
-            "mission_failures": 0,
-            "guess_merlin_phase": False,
-        }
+        self.phase: Phase = INITIAL_PHASE
+        game_state = init_game_state(
+            num_players=num_players,
+            player_roles=self.player_roles,
+            discussion_rounds=self.discussion_rounds,
+        )
         self.state.reset(game_state=game_state, player_prompt_function=self._prompt, secret_roles=self.player_roles)
         self._send_phase_prompts() # populate self.next_player_ids
         self.state.manually_set_current_player_id(self.next_player_ids.pop())
