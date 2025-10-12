@@ -354,6 +354,10 @@ def tally_merlin_votes(votes: Dict[int, int]) -> Optional[int]:
     top_players = [pid for pid, c in counts.items() if c == top_score] # All players who received the top score (could be 1 or many)
     return random.choice(top_players) # Randomly resolve ties
 
+class PlayerState(TypedDict):
+    pid: int
+    role: str
+
 class GameState(TypedDict):
     num_players: int
     phase: Phase
@@ -442,6 +446,14 @@ class AvalonEnv(ta.Env):
         self.state.manually_set_current_player_id(self.next_player_ids.pop())
         self._render_game_state()
         self._send_public_game_state()
+    
+    def _make_player_state(self, pid: int) -> PlayerState:
+        role = self.state.game_state["player_roles"][pid]
+        return PlayerState(
+            pid=pid,
+            role=role,
+        )
+    
 
     def _send_public_game_state(self):
         """Send the current public game state as a JSON string observation."""
