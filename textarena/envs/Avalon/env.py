@@ -442,6 +442,7 @@ class AvalonEnv(ta.Env):
             discussion_rounds=self.discussion_rounds,
         )
         self.state.reset(game_state=game_state, player_prompt_function=self._prompt, secret_roles=self.player_roles)
+        self._send_player_states()
         self._send_phase_prompts() # populate self.next_player_ids
         self.state.manually_set_current_player_id(self.next_player_ids.pop())
         self._render_game_state()
@@ -454,6 +455,21 @@ class AvalonEnv(ta.Env):
             role=role,
         )
     
+    def _send_player_state(self, pid: int):
+        """Send this player's private state as JSON wrapped in <player_state> tags."""
+        player_state_dict = self._make_player_state(pid)
+        player_state_json = json.dumps(player_state_dict)
+        message = f"<player_state>{player_state_json}</player_state>"
+
+        self.state.add_observation(
+            to_id=pid,
+            message=message,
+            observation_type=ta.ObservationType.GAME_BOARD
+        )
+    
+    def _send_player_states(self):
+        for pid in self.state.game_state["player_ids"]:
+            self._send_player_state(pid)
 
     def _send_public_game_state(self):
         """Send the current public game state as a JSON string observation."""
