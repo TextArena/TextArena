@@ -2,7 +2,7 @@ import ast
 from dataclasses import dataclass, field
 from enum import Enum
 import re, random
-from typing import Set, Tuple, Dict, Optional, List, Type, TypeVar
+from typing import ClassVar, Set, Tuple, Dict, Optional, List, Type, TypeVar
 import textarena as ta
 from textarena.envs.Avalon.renderer import render_game_state
 
@@ -129,10 +129,24 @@ class Role:
     name: str = field(init=False)
     team: str = field(init=False)
     description: str = field(init=False)
+
+    _registry: ClassVar[Dict[str, Type["Role"]]] = {}
+
     def __post_init__(self):
         self.name = self.__class__.__name__
         self.team = get_team(self.name)
         self.description = get_role_description(self.name)
+    
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
+        Role._registry[cls.__name__] = cls
+    
+    @classmethod
+    def create(cls, name: str) -> "Role":
+        try:
+            return cls._registry[name]()
+        except KeyError:
+            raise ValueError(f"Tried to create unknown role: {name}")
 
     def get_prompt(self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int) -> str:
         return self.base_prompt(player_id, player_roles, num_players)
@@ -338,15 +352,6 @@ def tally_merlin_votes(votes: Dict[int, int]) -> Optional[int]:
     return random.choice(top_players) # Randomly resolve ties
 
 class AvalonEnv(ta.Env):
-    _ROLE_FACTORY = {
-        SERVANT_NAME:  Servant,
-        MERLIN_NAME:   Merlin,
-        PERCIVAL_NAME: Percival,
-        MINION_NAME:   Minion,
-        MORGANA_NAME:  Morgana,
-        MORDRED_NAME:  Mordred,
-        OBERON_NAME:   Oberon,
-    }
     def __init__(self, discussion_rounds: int = 3):
         """
         Args:
@@ -398,7 +403,7 @@ class AvalonEnv(ta.Env):
         role_pool = generate_roles(num_players, special_roles=special_roles)
         for pid, r_name in enumerate(role_pool):
             self.player_roles[pid] = r_name
-            self.roles[pid] = self._ROLE_FACTORY[r_name]()
+            self.roles[pid] = Role.create(r_name)
 
     def _prompt(self, player_id: int, game_state: dict) -> str:
         role_obj: Role = self.roles[player_id]
