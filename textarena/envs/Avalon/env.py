@@ -111,6 +111,22 @@ class Phase(Enum):
     MISSION = "Mission"
     GUESS_MERLIN = "Guess-Merlin"
 
+def get_team(role_name: str) -> str:
+    if role_name in GOOD_NAMES:
+        team = "Good"
+    elif role_name in EVIL_NAMES:
+        team = "Evil"
+    else:
+        raise ValueError(f"Team unknown for name: {role_name}")
+    
+    return team
+
+def get_role_description(role_name: str) -> str:
+    team = get_team(role_name)
+    base_role_description = BASE_ROLE_DESCRIPTIONS[role_name]
+    description = f"{role_name} ({team}):\n{base_role_description}"
+    return description
+
 @dataclass
 class Role:
     name: str = field(init=False)
@@ -118,16 +134,8 @@ class Role:
     description: str = field(init=False)
     def __post_init__(self):
         self.name = self.__class__.__name__
-
-        if self.name in GOOD_NAMES:
-            self.team = "Good"
-        elif self.name in EVIL_NAMES:
-            self.team = "Evil"
-        else:
-            raise ValueError(f"Team unknown for name: {self.name}")
-
-        base_role_description = BASE_ROLE_DESCRIPTIONS[self.name]
-        self.description = f"{self.name} ({self.team}):\n{base_role_description}"
+        self.team = get_team(self.name)
+        self.description = get_role_description(self.name)
 
     def get_prompt(self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int) -> str:
         return self.base_prompt(player_id, player_roles, num_players)
