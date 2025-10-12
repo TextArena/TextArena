@@ -1,6 +1,7 @@
 import ast
 from dataclasses import dataclass, field
 from enum import Enum
+import json
 import re, random
 from typing import ClassVar, Set, Tuple, Dict, Optional, List, Type, TypeVar, TypedDict
 import textarena as ta
@@ -440,6 +441,19 @@ class AvalonEnv(ta.Env):
         self._send_phase_prompts() # populate self.next_player_ids
         self.state.manually_set_current_player_id(self.next_player_ids.pop())
         self._render_game_state()
+        self._send_public_game_state()
+
+    def _send_public_game_state(self):
+        """Send the current public game state as a JSON string observation."""
+        public_state = make_public_game_state(self.state.game_state)
+        public_state_str = json.dumps(public_state)
+        message = f"<game_state>{public_state_str}</game_state>"
+
+        self.state.add_observation(
+            to_id=-1,
+            message=message,
+            observation_type=ta.ObservationType.GAME_BOARD
+        )
     
     def _render_game_state(self, show_players: bool = False):
         game_state_str = render_game_state(self.state.game_state, show_players=show_players)
@@ -497,6 +511,7 @@ class AvalonEnv(ta.Env):
         self.phase = self._compute_next_phase()
         self.state.game_state["phase"] = self.phase
         self._render_game_state()
+        self._send_public_game_state()
         self._send_phase_prompts()
         self.state.manually_set_current_player_id(self.next_player_ids.pop())
     
