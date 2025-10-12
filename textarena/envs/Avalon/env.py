@@ -263,7 +263,7 @@ class AvalonParser:
         Returns the team proposal, or None if not found.
         """
         m = AvalonParser.team_proposal_pattern.search(text)
-        list_str = m.group(1)
+        list_str = m.group(1) if m else None
         team_proposal = parse_typed_list(list_str, typ=int)
         return team_proposal
 
