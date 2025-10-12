@@ -4,6 +4,7 @@ from enum import Enum
 import re, random
 from typing import Set, Tuple, Dict, Optional, List, Type, TypeVar
 import textarena as ta
+from textarena.envs.Avalon.renderer import render_game_state
 
 MISSION_WIN_THRESHOLD = 3
 CONSECUTIVE_PROPOSAL_FAIL_THRESHOLD = 5
@@ -358,6 +359,11 @@ class AvalonEnv(ta.Env):
         self.state.reset(game_state=game_state, player_prompt_function=self._prompt, secret_roles=self.player_roles)
         self._send_phase_prompts() # populate self.next_player_ids
         self.state.manually_set_current_player_id(self.next_player_ids.pop())
+        self._render_game_state()
+    
+    def _render_game_state(self, show_players: bool = False):
+        game_state_str = render_game_state(self.state.game_state, show_players=show_players)
+        self.state.add_observation(to_id=-1, message=game_state_str, observation_type=ta.ObservationType.GAME_BOARD)
     
     def _inc_leader(self):
         self.state.game_state["leader_pid"] = (self.state.game_state["leader_pid"] + 1) % self.state.num_players
@@ -410,6 +416,7 @@ class AvalonEnv(ta.Env):
         # Advance to next phase
         self.phase = self._compute_next_phase()
         self.state.game_state["phase"] = self.phase
+        self._render_game_state()
         self._send_phase_prompts()
         self.state.manually_set_current_player_id(self.next_player_ids.pop())
     
