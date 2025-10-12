@@ -24,16 +24,22 @@ Only Evil players are told who each other are.
 Good players are not told the sides of other players.
 
 Gameplay Rules
-1. Team Proposal
-Each round, a Leader proposes a mission team of a certain size.  
+1. Discussion
+Everyone has a chance to talk and discuss.
+During discussions, everything you say is automatically broadcasted to all players.
 
-2. Voting
+2. Team Proposal
+Each round, the Leader proposes a mission team of a certain size.  
+This team proposal is automatically broadcasted to all players.
+
+3. Voting
 Everyone votes to approve or reject the team.
 A majority is required for the proposal to be accepted. 
 If the team is rejected, leadership passes to the next player, who proposes their own team.
 If five teams in a row are rejected, Evil automatically wins.
+Each vote is automatically broadcasted to all players.
 
-3. Mission Phase
+4. Mission Phase
 If a team is approved, members of the team secretly decide whether the mission passes or fails.  
   - Good players must choose “Success”  
   - Evil players can choose either “Success” or “Fail”  
@@ -41,6 +47,9 @@ The actions are shuffled then revealed, players do not know which actions other 
 If all are Success, the mission passes.
 If there is at least one Fail, the mission fails.
 Certain missions may require two Fails to fail, depending on the number of players in the game. You will be told when missions require two Fails to fail.
+
+The actions (success/fail) in the mission is broadcasted to all players.
+However, the actions are shuffled so you do not know which action came from which player
 
 Roles
 Players will be given one of the following roles:
@@ -52,6 +61,10 @@ Players will be given one of the following roles:
 Win conditions:
 - Good wins if they succeed in 3 out of 5 missions AND Merlin is not correctly guessed by Evil.
 - Evil wins if they fail 3 out of 5 missions OR if they correctly identify Merlin at the end.
+
+Notes:
+For the messages that are broadcasted to all players, you have to be careful what you say
+as all the other players will receive a message containing what you said
 """
 
 SERVANT_NAME = "Servant"
