@@ -398,6 +398,26 @@ def init_game_state(
         guess_merlin_phase=False,
     )
 
+class PublicGameState(TypedDict):
+    num_players: int
+    phase: Phase
+    mission_index: int
+    player_ids: List[int]
+    leader_pid: int
+    num_discussion_rounds: int
+    team_proposal: List[int]
+    consecutive_failed_team_proposals: int
+    votes: Dict[int, str]
+    mission_actions: Dict[int, str]
+    mission_successes: int
+    mission_failures: int
+    guess_merlin_phase: bool
+
+def make_public_game_state(full_state: GameState) -> PublicGameState:
+    """Return a player-safe view of the game state."""
+    sensitive_keys = {"player_roles", "role_pids", "merlin_guesses"}
+    return {k: v for k, v in full_state.items() if k not in sensitive_keys}
+
 class AvalonEnv(ta.Env):
     def __init__(self, discussion_rounds: int = 3):
         """
