@@ -51,13 +51,6 @@ Certain missions may require two Fails to fail, depending on the number of playe
 The actions (success/fail) in the mission is broadcasted to all players.
 However, the actions are shuffled so you do not know which action came from which player
 
-Roles
-Players will be given one of the following roles:
-
-- Merlin (Good): Merlin secretly knows who all the Evil players are. The catch: if Good completes 3 missions, Evil gets one last chance to win by guessing who Merlin is. If they guess right, Evil wins instead. Merlin's job is to guide Good without being too obvious.
-- Servant (Good): A regular Good player. They don't have any extra information.
-- Minion (Evil): A regular Evil player. They know who the other Evil players are. Their job is to trick Good into trusting them, sneak onto missions, and secretly Fail them.
-
 Win conditions:
 - Good wins if they succeed in 3 out of 5 missions AND Merlin is not correctly guessed by Evil.
 - Evil wins if they fail 3 out of 5 missions OR if they correctly identify Merlin at the end.
@@ -127,6 +120,10 @@ def get_role_description(role_name: str) -> str:
     description = f"{role_name} ({team}):\n{base_role_description}"
     return description
 
+def get_role_descriptions(role_names: List[str]) -> str:
+    descriptions = [get_role_description(role) for role in role_names]
+    return "\n".join(descriptions)
+
 @dataclass
 class Role:
     name: str = field(init=False)
@@ -142,8 +139,12 @@ class Role:
 
     def base_prompt(self, player_id: int, player_roles: Dict[int, str], num_players: int) -> str:
         """Common header text used by all role prompts."""
+        unique_roles = set(player_roles.values())
+        role_descriptions = get_role_descriptions(unique_roles)
         return (
             f"{AVALON_RULES}\n"
+            "Players will be given one of the following roles:\n"
+            f"{role_descriptions}\n"
             f"---\n"
             f"There are {num_players} players in this game: {', '.join([f'Player {i}' for i in range(num_players)])}\n\n"
             f"You are Player {player_id}.\n"
