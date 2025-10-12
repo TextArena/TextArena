@@ -97,7 +97,7 @@ BASE_ROLE_DESCRIPTIONS = {
     ),
 }
 
-class Phase(Enum):
+class Phase(str, Enum):
     DISCUSSION = "Discussion"
     TEAM_PROPOSAL = "Team-Proposal"
     VOTING = "Voting"
