@@ -126,19 +126,19 @@ def get_role_descriptions(role_names: List[str]) -> str:
 
 @dataclass
 class Role:
-    name: str = field(init=False)
-    team: str = field(init=False)
-    description: str = field(init=False)
+    name: ClassVar[str]
+    team: ClassVar[str]
+    description: ClassVar[str]
 
     _registry: ClassVar[Dict[str, Type["Role"]]] = {}
 
-    def __post_init__(self):
-        self.name = self.__class__.__name__
-        self.team = get_team(self.name)
-        self.description = get_role_description(self.name)
-    
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
+
+        cls.name = cls.__name__
+        cls.team = get_team(cls.name)
+        cls.description = get_role_description(cls.name)
+
         Role._registry[cls.__name__] = cls
     
     @classmethod
