@@ -671,6 +671,7 @@ class AvalonEnv(ta.Env):
             # Too many invalid attempts, use default team
             team_size = self._get_mission_team_size()
             team_proposal = list(range(team_size)) 
+            self.state.made_invalid_move = False
 
         self.state.game_state["team_proposal"] = team_proposal
         self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
@@ -683,6 +684,7 @@ class AvalonEnv(ta.Env):
                 return
             # Too many invalid votes, use default vote
             vote = DEFAULT_VOTE
+            self.state.made_invalid_move = False
 
         self.state.game_state["votes"][pid] = vote
         self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
@@ -695,6 +697,7 @@ class AvalonEnv(ta.Env):
                 return
             # Too many invalid actions, use default action
             action = DEFAULT_MISSION_ACTION
+            self.state.made_invalid_move = False
 
         self.state.game_state["mission_actions"][pid] = action
     
@@ -706,7 +709,7 @@ class AvalonEnv(ta.Env):
                 return
             # Too many invalid guesses, guess random player
             guess = random.randint(0, self.state.num_players - 1)
-
+            self.state.made_invalid_move = False
         self.state.game_state["merlin_guesses"][pid] = guess
 
     def _inc_consecutive_failed_team_proposals(self):
