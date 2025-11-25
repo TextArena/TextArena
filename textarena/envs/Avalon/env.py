@@ -49,12 +49,22 @@ If all are Success, the mission passes.
 If there is at least one Fail, the mission fails.
 Certain missions may require two Fails to fail, depending on the number of players in the game. You will be told when missions require two Fails to fail.
 
+5. Guess Merlin Phase (end condition):
+If Good reaches 3 mission successes and Merlin is in the game, Evil gets one guess at Merlin’s identity.
+If Evil guesses correctly, Evil wins instead of Good.
+
 The actions (success/fail) in the mission is broadcasted to all players.
 However, the actions are shuffled so you do not know which action came from which player
 
 Win conditions:
 - Good wins if they succeed in 3 out of 5 missions AND Merlin is not correctly guessed by Evil.
 - Evil wins if they fail 3 out of 5 missions OR if they correctly identify Merlin at the end.
+
+Action restrictions:
+During Discussion Phase: talk only; no votes or special actions.
+During Team Proposal Phase: only the Leader proposes using the specified format.
+During Voting Phase: every player votes once per proposal.
+During Mission Phase: only team members submit actions.
 
 Notes:
 For the messages that are broadcasted to all players, you have to be careful what you say
