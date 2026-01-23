@@ -121,21 +121,20 @@ class GeminiAgent(Agent):
         self.system_prompt = system_prompt
         self.verbose = verbose
 
-        try: import google.generativeai as genai
-        except ImportError: raise ImportError("Google Generative AI package is required for GeminiAgent. Install it with: pip install google-generativeai")
+        try: from google import genai
+        except ImportError: raise ImportError("Google GenAI package is required for GeminiAgent. Install it with: pip install google-genai")
         
         # Set the Gemini API key from an environment variable
         api_key = os.getenv("GEMINI_API_KEY")
         if not api_key: raise ValueError("Gemini API key not found. Please set the GEMINI_API_KEY environment variable.")
         
         # Configure the Gemini client
-        genai.configure(api_key=api_key)
+        self.client = genai.Client(api_key=api_key)
         
         # Use default generation config if none is provided
         if generation_config is None:
-            generation_config = {"temperature": 1, "top_p": 0.95, "top_k": 40, "max_output_tokens": 8192, "response_mime_type": "text/plain"}
+            generation_config = {"temperature": 1.0, "top_p": 0.95, "top_k": 40, "max_output_tokens": 8192, "response_mime_type": "text/plain"}
         self.generation_config = generation_config
-        self.model = genai.GenerativeModel(model_name=self.model_name, generation_config=self.generation_config) # Create the Gemini model
     
     def _make_request(self, observation: str) -> str:
         """
@@ -147,7 +146,11 @@ class GeminiAgent(Agent):
         Returns:
             str: The generated response text.
         """
-        response = self.model.generate_content(f"Instructions: {self.system_prompt}\n\n{observation}")
+        response = self.client.models.generate_content(
+            model=self.model_name,
+            contents=f"Instructions: {self.system_prompt}\n\n{observation}",
+            config=self.generation_config
+        )
         if self.verbose: print(f"\nObservation: {observation}\nResponse: {response.text}")
         return response.text.strip()
     
