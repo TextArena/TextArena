@@ -129,7 +129,7 @@ class GeminiAgent(Agent):
         if not api_key: raise ValueError("Gemini API key not found. Please set the GEMINI_API_KEY environment variable.")
         
         # Configure the Gemini client
-        self.client = genai.Client(api_key=api_key)
+        self.client = genai.Client(api_key=api_key, http_options={'headers': {'x-goog-api-client': f'TextArena/{ta.__version__}'}})
         
         # Use default generation config if none is provided
         if generation_config is None:
