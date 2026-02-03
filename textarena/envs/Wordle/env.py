@@ -54,7 +54,7 @@ class WordleEnv(ta.Env):
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         player_id = self.state.current_player_id
-        self.state.add_observation(message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+        self.state.add_observation(message=action, observation_type=ta.ObservationType.PLAYER_ACTION, from_id=player_id, to_id=-1)
         match = re.search(r"\[(\w+)\]", action) # Extract the guess using regex
 
         if match is None:
