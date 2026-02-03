@@ -59,7 +59,7 @@ class ChessEnv(ta.Env):
     def _agument_observations(self):
         message = ""
         if self.is_open: message+=f"Current board:\n{self._board_with_coords(self.state.game_state['board'])}" #f"Current board:\n{str(self.state.game_state["board"])}" # display the board state
-        if self.show_valid: message+=f"\nValid moves: {', '.join([f'[{move.uci()}]' for move in self.state.game_state["board"].legal_moves])}"# show the valid moves
+        if self.show_valid: message+=f"\nValid moves: {', '.join([f'[{move.uci()}]' for move in self.state.game_state['board'].legal_moves])}"# show the valid moves
         self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_BOARD)
 
     @staticmethod
