@@ -509,11 +509,6 @@ The environment provides rewards based on the following conditions:
 
 <hr></details><details><summary><strong>LightsOut [1 Player]</strong></summary><a id="lightsout"></a><hr>
 
-## `LightsOut`
-# TODO
-
-<details><summary><strong>Lights Out [1 Player]</strong></summary><a id="lightsout"></a>
-
 ## `LightsOut`  
 **Lights Out** is a classic logic puzzle game played on a grid of lights. The objective is to turn all lights off by toggling them strategically. Pressing a light toggles its state and that of its orthogonal neighbors (up/down/left/right). The player has a limited number of moves to reach the all-off state. This environment offers full rendering, grid manipulation, and progress tracking. [Wikipedia](https://en.wikipedia.org/wiki/Lights_Out_(game))
 
