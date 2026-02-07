@@ -305,36 +305,6 @@ The environment provides rewards based on the following conditions:
 
 
 
-<hr></details><details><summary><strong>Chess [2 Player]</strong></summary><a id="chess"></a><hr>
-
-## `Chess` 
-
-**Chess** is a classic two-player strategy game contested on an 8 × 8 board. Each side commands sixteen pieces (King, Queen, Rooks, Bishops, Knights, and Pawns) and aims to **checkmate** the opponent’s King. [Wikipedia](https://en.wikipedia.org/wiki/Chess)  
-
-**Action Space:** Moves are written in Universal Chess Interface (UCI) format inside brackets: `[start end]`. For example, `[e2e4]` advances a pawn from *e2* to *e4*; `[g1f3]` moves the knight from *g1* to *f3*. Only the **first** bracketed move in any message is executed.
-
-| **Reward Setting** | **Player Role** | **Reward** |
-| ------------------ | --------------- | ---------- |
-| Checkmated enemy   | Winner          | `+1`       |
-|                    | Loser           | `-1`       |
-| Stalemate / draw   | Both            | `0`        |
-| Made an invalid move| Offending Player| `-1`       |
-
-**Env-ids**: The environment supports several variants defined by two parameters: `is_open`, which determines whether the full board is shown after each move, and `max_turns`, the turn limit before an automatic draw; `show_valid` indicates whether the valid actions are shown to the model.
-| **Env-ID**          | **is_open** | **max_turns** | **show_valid** |
-| --------------------| :---------: | :-----------: | :------------: |
-| `Chess-v0`          |   `True`    |     `100`     |     `True`     |
-| `Chess-v0-long`     |   `True`    |     `250`     |     `True`     |
-| `Chess-v0-blind`    |   `False`   |     `100`     |     `False`    |
-
-| **Full Env-ID Format**  | **Default Wrappers**                                                       |
-|-------------------------|----------------------------------------------------------------------------|
-| `Chess-v0-{...}`        | `LLMObservationWrapper`, `ActionFormattingWrapper`                         |
-| `Chess-v0-{...}-raw`    | `None`                                                                     |
-| `Chess-v0-{...}-train`  | `GameMessagesAndCurrentBoardObservationWrapper`, `ActionFormattingWrapper` |
-
-**Contact:** If you have questions or face issues with this specific environment, please reach out directly to Guertlerlo@cfar.a-star.edu.sg
-
 <hr></details><details><summary><strong>Cryptarithm [Single Player]</strong></summary><a id="cryptarithm"></a><hr>
 
 ## `Cryptarithm`
