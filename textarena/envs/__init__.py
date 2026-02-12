@@ -575,5 +575,11 @@ register_with_versions(id="ScorableGames-v0-7players",      entry_point="textare
 register_with_versions(id="ScorableGames-v0-medicalethics", entry_point="textarena.envs.ScorableGames.env:ScorableGamesEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": DEFAULT_WRAPPERS}, game_config="medical_ethics", max_rounds=80, invalid_move_default="[Accept]")
 register_with_versions(id="ScorableGames-v0-vendorretailer",entry_point="textarena.envs.ScorableGames.env:ScorableGamesEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": DEFAULT_WRAPPERS}, game_config="vendor_retailer", max_rounds=40, invalid_move_default="[Accept]")
 
+
+# Bohnanza [3-5 Players] - Bean trading game
+register_with_versions(id="Bohnanza-v0", 
+    entry_point="textarena.envs.Bohnanza.env:BohnanzaEnv", 
+    wrappers={"default": DEFAULT_WRAPPERS, "-train": DEFAULT_WRAPPERS})
+
 # UltimateTexasHoldem [1 Player]
 register_with_versions(id="UltimateTexasHoldem-v0", entry_point="textarena.envs.UltimateTexasHoldem.env:UltimateTexasHoldemEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameMessagesObservationWrapper, ActionFormattingWrapper]}, max_turns = 1000, start_chips = 1000, ante_amount = 25)
