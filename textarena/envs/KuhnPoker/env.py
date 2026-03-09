@@ -23,12 +23,13 @@ class KuhnPokerEnv(ta.Env):
     def _init_round(self):
         self.state.game_state["current_round"] += 1
         if self.state.game_state["current_round"] > self.max_rounds: # check if game is complete
-            # determine winner 
+            # determine winner
             if self.state.game_state["player_chips"][0] > self.state.game_state["player_chips"][1]: self.state.set_winner(player_id=0, reason=f"Player 0 won by having more chips at the end of all {self.max_rounds} rounds.")
             elif self.state.game_state["player_chips"][0] < self.state.game_state["player_chips"][1]: self.state.set_winner(player_id=1, reason=f"Player 1 won by having more chips at the end of all {self.max_rounds} rounds.")
             else: self.state.set_draw(reason=f"At the end of {self.max_rounds} rounds, both players had the same number of chips.")
+            return
 
-        random.shuffle(self.deck) # shuffle the deck 
+        random.shuffle(self.deck) # shuffle the deck
         self.state.game_state["player_cards"] = {0: self.deck[0], 1: self.deck[1]} # assign player cards
         # reset pot
         self.state.game_state["pot"] = self.ante * 2
@@ -80,6 +81,9 @@ class KuhnPokerEnv(ta.Env):
 
         # execute move
         self.state.add_observation(message=f"Player {self.state.current_player_id}, submitted move: '[{move}]'.", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        if move in ("bet", "call"):
+            self.state.game_state["player_chips"][self.state.current_player_id] -= self.ante
+            self.state.game_state["pot"] += self.ante
         self.state.game_state["current_legal_action_tree"] = self.state.game_state["current_legal_action_tree"][move]
         # check if round loser / showdown
         if self.state.game_state["current_legal_action_tree"] == "loser":
