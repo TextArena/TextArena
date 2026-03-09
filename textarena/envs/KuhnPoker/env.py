@@ -81,6 +81,9 @@ class KuhnPokerEnv(ta.Env):
 
         # execute move
         self.state.add_observation(message=f"Player {self.state.current_player_id}, submitted move: '[{move}]'.", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        if move in ("bet", "call"):
+            self.state.game_state["player_chips"][self.state.current_player_id] -= self.ante
+            self.state.game_state["pot"] += self.ante
         self.state.game_state["current_legal_action_tree"] = self.state.game_state["current_legal_action_tree"][move]
         # check if round loser / showdown
         if self.state.game_state["current_legal_action_tree"] == "loser":
