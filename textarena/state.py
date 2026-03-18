@@ -21,7 +21,8 @@ class SinglePlayerState(ta.State):
         self.error_allowance = error_allowance
         super().__init__(num_players=num_players, seed=seed, max_turns=max_turns)
 
-    def reset(self, game_state: Optional[Dict[str, Any]]=None, player_prompt_function: Optional[Callable]=None, role_mapping: Optional[Dict[int, str]]={0:"Player"}, secret_roles: Optional[Dict[int, str]]=None):
+    def reset(self, game_state: Optional[Dict[str, Any]]=None, player_prompt_function: Optional[Callable]=None, role_mapping: Optional[Dict[int, str]]=None, secret_roles: Optional[Dict[int, str]]=None):
+        if role_mapping is None: role_mapping = {pid: self.t("SinglePlayerState", "player", pid=pid) for pid in range(self.num_players)}
         self.standard_resets(game_state=game_state, player_prompt_function=player_prompt_function, role_mapping=role_mapping, secret_roles=secret_roles)
         self.error_count = 0
         self.made_invalid_move = False
@@ -47,7 +48,7 @@ class SinglePlayerState(ta.State):
         if self.error_allowance > self.error_count:
             self.error_count += 1 # increment error count
             self.made_invalid_move = True
-            self.add_observation(message=f"You attempted an invalid move. Reason: {reason} Please resubmit a valid move and remember to follow the game rules to avoid penalties.", observation_type=ta.ObservationType.GAME_ADMIN)
+            self.add_observation(message=self.t("SinglePlayerState", "invalid_move", reason=reason), observation_type=ta.ObservationType.GAME_ADMIN)
         else:
             self.rewards = {0: reward}
             self.game_info[0]["reason"] = f"Invalid Move: {reason}"
@@ -58,7 +59,7 @@ class SinglePlayerState(ta.State):
 class TwoPlayerState(ta.State):
     def __init__(self, num_players: int, seed: Optional[int]=None, max_turns: Optional[int]=None, error_allowance: Optional[int]=1):
         """
-        Initialize the SinglePlayerState object.
+        Initialize the TwoPlayerState object.
 
         Args:
             num_players (int): The number of players in the game (asserts to 2 here)
@@ -72,7 +73,8 @@ class TwoPlayerState(ta.State):
         self.error_allowance = error_allowance
         super().__init__(num_players=num_players, seed=seed, max_turns=max_turns)
 
-    def reset(self, game_state: Optional[Dict[str, Any]]=None, player_prompt_function: Optional[Callable]=None, role_mapping: Optional[Dict[int, str]]={0:"Player 0", 1:"Player 1"}, secret_roles: Optional[Dict[int, str]]=None):
+    def reset(self, game_state: Optional[Dict[str, Any]]=None, player_prompt_function: Optional[Callable]=None, role_mapping: Optional[Dict[int, str]]=None, secret_roles: Optional[Dict[int, str]]=None):
+        if role_mapping is None: role_mapping = {pid: self.t("MultiPlayerState", "player", pid=pid) for pid in range(self.num_players)}
         self.standard_resets(game_state=game_state, player_prompt_function=player_prompt_function, role_mapping=role_mapping, secret_roles=secret_roles)
         self.error_count = 0
         self.made_invalid_move = False
@@ -121,7 +123,7 @@ class TwoPlayerState(ta.State):
         if self.error_allowance > self.error_count:
             self.error_count += 1 # increment error count
             self.made_invalid_move = True
-            self.add_observation(to_id=self.current_player_id, message=f"Player {self.current_player_id} attempted an invalid move. Reason: {reason} Please resubmit a valid move and remember to follow the game rules to avoid penalties.", observation_type=ta.ObservationType.GAME_ADMIN)
+            self.add_observation(to_id=self.current_player_id, message=self.t("MultiPlayerState", "invalid_move", current_player_id=self.current_player_id, reason=reason), observation_type=ta.ObservationType.GAME_ADMIN)
         else:
             self.rewards = {self.current_player_id: -1, 1-self.current_player_id: 1}
             for pid in range(2): self.game_info[pid]["reason"] = reason
@@ -131,7 +133,7 @@ class TwoPlayerState(ta.State):
 class FFAMultiPlayerState(ta.State):
     def __init__(self, num_players: int, seed: Optional[int]=None, max_turns: Optional[int]=None, error_allowance: Optional[int]=1):
         """
-        Initialize the SinglePlayerState object.
+        Initialize the FFAMultiPlayerState object.
 
         Args:
             num_players (int): The number of players in the game (asserts to 2 here)
@@ -144,8 +146,7 @@ class FFAMultiPlayerState(ta.State):
         super().__init__(num_players=num_players, seed=seed, max_turns=max_turns)
 
     def reset(self, game_state: Optional[Dict[str, Any]]=None, player_prompt_function: Optional[Callable]=None, role_mapping: Optional[Dict[int, str]]=None, secret_roles: Optional[Dict[int, str]]=None):
-        if role_mapping is None:
-            role_mapping = {pid: f"Player {pid}" for pid in range(self.num_players)}
+        if role_mapping is None: role_mapping = {pid: self.t("MultiPlayerState", "player", pid=pid) for pid in range(self.num_players)}
         self.standard_resets(game_state=game_state, player_prompt_function=player_prompt_function, role_mapping=role_mapping, secret_roles=secret_roles)
         self.error_count = 0
         self.made_invalid_move = False
@@ -222,7 +223,7 @@ class FFAMultiPlayerState(ta.State):
         self.made_invalid_move = True
         if self.error_allowance > self.error_count:
             self.error_count += 1
-            self.add_observation(to_id=self.current_player_id, message=f"Player {self.current_player_id} attempted an invalid move. Reason: {reason} Please resubmit a valid move and remember to follow the game rules to avoid penalties.", observation_type=ta.ObservationType.GAME_ADMIN)
+            self.add_observation(to_id=self.current_player_id, message=self.t("MultiPlayerState", "invalid_move", current_player_id=self.current_player_id, reason=reason), observation_type=ta.ObservationType.GAME_ADMIN)
             return False
         else:
             self.elimination_order.append(self.current_player_id)
@@ -247,7 +248,7 @@ class TeamMultiPlayerState(ta.State):
         super().__init__(num_players=num_players, seed=seed, max_turns=max_turns)
 
     def reset(self, game_state: Optional[Dict[str, Any]]=None, player_prompt_function: Optional[Callable]=None, role_mapping: Optional[Dict[int, str]]=None, secret_roles: Optional[Dict[int, str]]=None):
-        if role_mapping is None: role_mapping = {pid: f"Player {pid}" for pid in range(self.num_players)}
+        if role_mapping is None: role_mapping = {pid: self.t("MultiPlayerState", "player", pid=pid) for pid in range(self.num_players)}
         self.standard_resets(game_state=game_state, player_prompt_function=player_prompt_function, role_mapping=role_mapping, secret_roles=secret_roles)
         self.error_count = 0
         self.made_invalid_move = False
@@ -285,7 +286,7 @@ class TeamMultiPlayerState(ta.State):
         self.made_invalid_move = True
         if self.error_allowance > self.error_count:
             self.error_count += 1
-            self.add_observation(to_id=self.current_player_id, message=f"Player {self.current_player_id} attempted an invalid move. Reason: {reason} Please resubmit a valid move and remember to follow the game rules to avoid penalties.", observation_type=ta.ObservationType.GAME_ADMIN)
+            self.add_observation(to_id=self.current_player_id, message=self.t("MultiPlayerState", "invalid_move", current_player_id=self.current_player_id, reason=reason), observation_type=ta.ObservationType.GAME_ADMIN)
             return False
         else: # player made repeated invalid moves. Up to the environment how this should be handled
             self.game_info[self.current_player_id]["invalid_move"] = True
@@ -296,7 +297,7 @@ class TeamMultiPlayerState(ta.State):
 class MinimalMultiPlayerState(ta.State):
     def __init__(self, num_players: int, seed: Optional[int]=None, max_turns: Optional[int]=None, error_allowance: Optional[int]=1):
         """
-        Initialize the SinglePlayerState object.
+        Initialize the MinimalMultiPlayerState object.
 
         Args:
             num_players (int): The number of players in the game (asserts to 2 here)
@@ -309,7 +310,7 @@ class MinimalMultiPlayerState(ta.State):
         super().__init__(num_players=num_players, seed=seed, max_turns=max_turns)
 
     def reset(self, game_state: Optional[Dict[str, Any]]=None, player_prompt_function: Optional[Callable]=None, role_mapping: Optional[Dict[int, str]]=None, secret_roles: Optional[Dict[int, str]]=None):
-        if role_mapping is None: role_mapping = {pid: f"Player {pid}" for pid in range(self.num_players)}
+        if role_mapping is None: role_mapping = {pid: self.t("MultiPlayerState", "player", pid=pid) for pid in range(self.num_players)}
         self.standard_resets(game_state=game_state, player_prompt_function=player_prompt_function, role_mapping=role_mapping, secret_roles=secret_roles)
         self.error_count = 0
         self.made_invalid_move = False
@@ -350,7 +351,7 @@ class MinimalMultiPlayerState(ta.State):
         self.made_invalid_move = True
         if self.error_allowance > self.error_count:
             self.error_count += 1
-            self.add_observation(to_id=self.current_player_id, message=f"Player {self.current_player_id} attempted an invalid move. Reason: {reason} Please resubmit a valid move and remember to follow the game rules to avoid penalties.", observation_type=ta.ObservationType.GAME_ADMIN)
+            self.add_observation(to_id=self.current_player_id, message=self.t("MultiPlayerState", "invalid_move", current_player_id=self.current_player_id, reason=reason), observation_type=ta.ObservationType.GAME_ADMIN)
             return False
         else:
             # self.elimination_order.append(self.current_player_id)
