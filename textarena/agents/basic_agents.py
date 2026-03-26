@@ -110,6 +110,7 @@ class OpenRouterAgent(Agent):
         track_tokens: bool = True,
         contribute_to_selfplay: bool = False,
         contribute_to_optimization: bool = False,
+        grok_reasoning_enabled: bool = False,
         **kwargs
     ):
         super().__init__()
@@ -122,6 +123,7 @@ class OpenRouterAgent(Agent):
         # role flags
         self.contribute_to_selfplay = contribute_to_selfplay
         self.contribute_to_optimization = contribute_to_optimization
+        self.grok_reasoning_enabled = grok_reasoning_enabled
 
         try:
             from openai import OpenAI
@@ -144,8 +146,24 @@ class OpenRouterAgent(Agent):
             {"role": "system", "content": self.system_prompt},
             {"role": "user", "content": observation}
         ]
+
+        call_kwargs = dict(self.kwargs)
+
+        # Prepare extra_body properly for OpenRouter
+        extra_body = call_kwargs.pop("extra_body", {}) or {}
+
+        # If model supports reasoning, set it here
+        if "grok" in self.model_name.lower():
+            extra_body["reasoning"] = {
+                "enabled": bool(self.grok_reasoning_enabled)
+            }
+
         return self.client.chat.completions.create(
-            model=self.model_name, messages=messages, n=1, **self.kwargs
+            model=self.model_name,
+            messages=messages,
+            n=1,
+            extra_body=extra_body,
+            **call_kwargs
         )
 
     def _retry_request(self, observation: str, retries: int = 10, delay: int = 5):
@@ -171,17 +189,30 @@ class OpenRouterAgent(Agent):
         text = response.choices[0].message.content.strip()
 
         use_tracking = self.track_tokens if track_tokens is None else track_tokens
+        # if use_tracking and hasattr(response, "usage"):
+        #     completion_tokens = getattr(response.usage, "completion_tokens", 0)
+
+        #     # Always increment global total
+        #     increment_tokens(completion_tokens)
+
+        #     # Role-based increments
+        #     if self.contribute_to_selfplay:
+        #         increment_self_play_tokens(completion_tokens)
+        #     if self.contribute_to_optimization:
+        #         increment_optimization_tokens(completion_tokens)
         if use_tracking and hasattr(response, "usage"):
             completion_tokens = getattr(response.usage, "completion_tokens", 0)
+            prompt_tokens = getattr(response.usage, "prompt_tokens", 0)
+            total = completion_tokens + prompt_tokens
 
             # Always increment global total
-            increment_tokens(completion_tokens)
+            increment_tokens(total)
 
             # Role-based increments
             if self.contribute_to_selfplay:
-                increment_self_play_tokens(completion_tokens)
+                increment_self_play_tokens(total)
             if self.contribute_to_optimization:
-                increment_optimization_tokens(completion_tokens)
+                increment_optimization_tokens(total)
 
         return text
 
