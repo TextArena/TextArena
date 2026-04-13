@@ -134,7 +134,6 @@ class OpenRouterAgent(Agent):
         track_tokens: bool = True,
         contribute_to_selfplay: bool = False,
         contribute_to_optimization: bool = False,
-        grok_reasoning_enabled: bool = False,
         **kwargs
     ):
         super().__init__()
@@ -146,22 +145,16 @@ class OpenRouterAgent(Agent):
 
         self.contribute_to_selfplay = contribute_to_selfplay
         self.contribute_to_optimization = contribute_to_optimization
-        self.grok_reasoning_enabled = grok_reasoning_enabled
 
         try:
             from openai import OpenAI
         except ImportError:
             raise ImportError("pip install openai")
 
-        if "grok" in self.model_name.lower():
-            api_key = os.getenv("AI_GATEWAY_API_KEY")
-            self.client = OpenAI(api_key=api_key, base_url="https://ai-gateway.vercel.sh/v1")
-        elif "gpt" in self.model_name.lower():
-            api_key = os.getenv("OPENAI_API_KEY")
-            self.client = OpenAI(api_key=api_key, base_url="https://api.openai.com/v1")
-        else:
-            api_key = os.getenv("OPENROUTER_API_KEY")
-            self.client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
+        api_key = os.getenv("OPENROUTER_API_KEY") # Set the open router api key from an environment variable
+        if not api_key:
+            raise ValueError("OpenRouter API key not found. Please set the OPENROUTER_API_KEY environment variable.")
+        self.client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
 
     def _make_request(self, observation: str):
         messages = [
@@ -171,9 +164,6 @@ class OpenRouterAgent(Agent):
 
         call_kwargs = dict(self.kwargs)
         extra_body = call_kwargs.pop("extra_body", {}) or {}
-
-        if "grok" in self.model_name.lower():
-            extra_body["reasoning"] = {"enabled": bool(self.grok_reasoning_enabled)}
 
         return self.client.chat.completions.create(
             model=self.model_name,
