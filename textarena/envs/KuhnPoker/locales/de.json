@@ -1,0 +1,38 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in einem {max_rounds}-Runden-Spiel von Kuhn Poker.",
+    "game_rules": "Spielregeln:",
+    "deck_rule": "- Kuhn Poker verwendet ein 3-Karten-Deck mit J, Q, K (J niedrigste, K höchste)",
+    "ante_rule": "- Jeder Spieler setzt {ante} Chip als Ante und erhält pro Runde 1 Karte (die Karten werden ohne Zurücklegen verteilt, daher kannst du nicht dieselbe Karte wie dein Gegner haben).",
+    "round_rule": "- Das Spiel läuft über {max_rounds} Runden",
+    "win_rule": "- Der Spieler mit den meisten Chips nach allen Runden gewinnt",
+    "action_rules": "Aktionsregeln:",
+    "check": "- '[check]': Passen ohne Einsatz (nur wenn kein Einsatz auf dem Tisch liegt)",
+    "bet": "- '[bet]': 1 Chip in den Pot legen (nur wenn kein Einsatz auf dem Tisch liegt)",
+    "call": "- '[call]': Den Einsatz des Gegners durch Hinzufügen von 1 Chip ausgleichen",
+    "fold": "- '[fold]': Deine Hand aufgeben und dem Gegner den Pot überlassen"
+  },
+  "init_round": {
+    "round_start": "### Runde {current_round} von {max_rounds} startet. Deine Karte ist: '{player_card}'",
+    "available_actions": "Deine verfügbaren Aktionen sind: "
+  },
+  "invalid_move": {
+    "wrong_format": "Aktion muss [Check], [Bet], [Call] oder [Fold] sein.",
+    "not_legal": "Aktion muss {legal_actions} sein."
+  },
+  "action": {
+    "submit_move": "Spieler {player_id}, eingereichter Zug: '[{move}]'.",
+    "valid_actions": "Deine verfügbaren Aktionen sind: {legal_actions}.",
+    "round_summary": " Aktuelle Punktestände: Spieler 0: '{player_0_chips}'; Spieler 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Spieler {winner}s {winner_card} schlägt ",
+    "loser_summary": "Spieler {loser}s {loser_card}. ",
+    "winner_summary": "Spieler {winner} gewinnt den Pot von {pot_value} Chips."
+  },
+  "outcome": {
+    "round_win": "Spieler {player_id} hat gefoldet.",
+    "winner_player0": "Spieler 0 gewann mit mehr Chips am Ende aller {max_rounds} Runden.",
+    "winner_player1": "Spieler 1 gewann mit mehr Chips am Ende aller {max_rounds} Runden."
+  }
+}

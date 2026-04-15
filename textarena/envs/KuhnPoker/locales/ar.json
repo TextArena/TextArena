@@ -1,0 +1,38 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في لعبة Kuhn Poker مكوّنة من {max_rounds} جولات.",
+    "game_rules": "قواعد اللعبة:",
+    "deck_rule": "- تستخدم اللعبة مجموعة من 3 أوراق: J و Q و K (J الأدنى و K الأعلى)",
+    "ante_rule": "- يضع كل لاعب {ante} شريحة كبداية ويحصل على ورقة واحدة في كل جولة (يتم توزيع الأوراق بدون إرجاع، لذلك لا يمكن أن تحصل على نفس ورقة خصمك).",
+    "round_rule": "- تستمر اللعبة لمدة {max_rounds} جولات",
+    "win_rule": "- اللاعب الذي يملك أكبر عدد من الشرائح في النهاية يفوز",
+    "action_rules": "قواعد الحركة:",
+    "check": "- '[check]': تمرير بدون رهان",
+    "bet": "- '[bet]': إضافة شريحة واحدة إلى الرهان",
+    "call": "- '[call]': معادلة رهان الخصم",
+    "fold": "- '[fold]': الاستسلام وترك الرهان للخصم"
+  },
+  "init_round": {
+    "round_start": "### بدء الجولة {current_round} من أصل {max_rounds}. ورقتك هي: '{player_card}'",
+    "available_actions": "الإجراءات المتاحة لك هي: "
+  },
+  "invalid_move": {
+    "wrong_format": "يجب أن تكون الحركة [Check] أو [Bet] أو [Call] أو [Fold].",
+    "not_legal": "يجب أن تكون الحركة {legal_actions}."
+  },
+  "action": {
+    "submit_move": "اللاعب {player_id} قام بالحركة: '[{move}]'.",
+    "valid_actions": "الإجراءات المتاحة لك هي: {legal_actions}.",
+    "round_summary": " النتيجة الحالية: اللاعب 0: '{player_0_chips}'; اللاعب 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "كشف الأوراق: ورقة اللاعب {winner} ({winner_card}) تتغلب على ",
+    "loser_summary": "ورقة اللاعب {loser} ({loser_card}). ",
+    "winner_summary": "اللاعب {winner} يفوز بالرهان البالغ {pot_value} شريحة."
+  },
+  "outcome": {
+    "round_win": "اللاعب {player_id} استسلم.",
+    "winner_player0": "فاز اللاعب 0 بعدد شرائح أكبر في نهاية {max_rounds} جولات.",
+    "winner_player1": "فاز اللاعب 1 بعدد شرائح أكبر في نهاية {max_rounds} جولات."
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le Joueur {player_id} dans une partie de Kuhn Poker de {max_rounds} manches.",
+    "game_rules": "Règles du jeu :",
+    "deck_rule": "- Kuhn Poker utilise un jeu de 3 cartes : J, Q, K (J la plus faible, K la plus forte)",
+    "ante_rule": "- Chaque joueur mise {ante} jeton au départ et reçoit 1 carte à chaque manche (les cartes sont distribuées sans remise, vous ne pouvez donc pas avoir la même carte que votre adversaire)",
+    "round_rule": "- La partie dure {max_rounds} manches",
+    "win_rule": "- Le joueur ayant le plus de jetons à la fin gagne",
+    "action_rules": "Règles d'action :",
+    "check": "- '[check]': Passer sans miser",
+    "bet": "- '[bet]': Ajouter 1 jeton au pot",
+    "call": "- '[call]': Suivre la mise de l'adversaire",
+    "fold": "- '[fold]': Se coucher et laisser l'adversaire gagner le pot"
+  },
+  "init_round": {
+    "round_start": "### Début de la manche {current_round} sur {max_rounds}. Votre carte est : '{player_card}'",
+    "available_actions": "Vos actions disponibles sont : "
+  },
+  "invalid_move": {
+    "wrong_format": "L'action doit être [Check], [Bet], [Call] ou [Fold].",
+    "not_legal": "L'action doit être {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Joueur {player_id}, action soumise : '[{move}]'.",
+    "valid_actions": "Vos actions disponibles sont : {legal_actions}.",
+    "round_summary": " Scores actuels : Joueur 0 : '{player_0_chips}'; Joueur 1 : '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Abattage : la carte {winner_card} du Joueur {winner} bat ",
+    "loser_summary": "la carte {loser_card} du Joueur {loser}. ",
+    "winner_summary": "Le Joueur {winner} remporte le pot de {pot_value} jetons."
+  },
+  "outcome": {
+    "round_win": "Le Joueur {player_id} s'est couché.",
+    "winner_player0": "Le Joueur 0 a gagné avec plus de jetons après {max_rounds} manches.",
+    "winner_player1": "Le Joueur 1 a gagné avec plus de jetons après {max_rounds} manches."
+  }
+}
