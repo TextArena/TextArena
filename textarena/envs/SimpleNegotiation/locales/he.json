@@ -1,0 +1,33 @@
+{
+  "player_prompt": {
+    "intro": "אתה שחקן {player_id} במשחק המשא ומתן.",
+    "objective": "יש לך מספר משאבים, והמטרה שלך היא לסחור כך שהערך הכולל של המשאבים שלך יגדל.",
+    "resources": "המשאבים והערכים הנלווים שיש לך כרגע הם:\n\t+ {resource_value_list}",
+    "turn_action": "בכל תור, אתה יכול לדבר עם היריב שלך ולהציע עסקה.",
+    "special_tokens": "השתמש בטוקנים המיוחדים הבאים לפעולות:",
+    "offer_format": "  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: משאבים מוצעים -> משאבים מבוקשים]",
+    "accept": "  - '[Accept]': לקבלת הצעה נכנסת.",
+    "deny": "  - '[Deny]': לדחיית הצעה נכנסת (ברירת מחדל).",
+    "duration": "המשחק נמשך {max_turns} תורות בסך הכול."
+  },
+
+  "invalid_move": {
+    "receiving_with_no_resource": "השחקן ניסה לקבל עסקה בלי המשאבים הנדרשים.",
+    "out_of_range": "שחקן {player_id}, פעולה לא חוקית. העמודה {col} מחוץ לטווח.",
+    "already_full": "שחקן {player_id}, פעולה לא חוקית. העמודה {col} מלאה.",
+    "proposing_with_no_resource": "שחקן {player_id} ניסה להציע עסקה בלי המשאבים הנדרשים.",
+    "incorrect_offer_format": "שחקן {player_id} הציע עסקה בפורמט שגוי.",
+    "no_new_offer": "שחקן {player_id} לא הציע עסקה חדשה."
+  },
+
+  "offers": {
+    "reject": "שחקן {player_id} דחה את הצעת העסקה.",
+    "accept": "שחקן {acceptor_id} קיבל את הצעת העסקה משחקן {proposer_id}.",
+    "proposal": "שחקן {player_id} הציע לשחקן {opponent_id} את ההצעה הבאה: {offer_details}"
+  },
+
+  "outcome": {
+    "win": "שחקן {winner_id} ניצח עם עלייה גדולה יותר בערך המלאי.",
+    "draw": "אותו שינוי בערך המלאי לכל השחקנים. תיקו."
+  }
+}

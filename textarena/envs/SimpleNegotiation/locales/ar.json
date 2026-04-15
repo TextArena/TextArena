@@ -1,0 +1,33 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في لعبة التفاوض.",
+    "objective": "لديك بعض الموارد، ومهمتك هي التبادل بحيث تزداد القيمة الإجمالية لمواردك.",
+    "resources": "الموارد والقيم المرتبطة بها التي تمتلكها حاليًا هي:\n\t+ {resource_value_list}",
+    "turn_action": "في كل دور، يمكنك التحدث مع خصمك وتقديم عرض تبادل.",
+    "special_tokens": "استخدم الرموز الخاصة التالية للإجراءات:",
+    "offer_format": "  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: الموارد المعروضة -> الموارد المطلوبة]",
+    "accept": "  - '[Accept]': لقبول عرض وارد.",
+    "deny": "  - '[Deny]': لرفض عرض وارد (افتراضي).",
+    "duration": "تستمر اللعبة لمدة {max_turns} أدوار إجمالاً."
+  },
+
+  "invalid_move": {
+    "receiving_with_no_resource": "حاول اللاعب قبول صفقة دون امتلاك الموارد اللازمة.",
+    "out_of_range": "اللاعب {player_id}، إجراء غير صالح. العمود {col} خارج النطاق.",
+    "already_full": "اللاعب {player_id}، إجراء غير صالح. العمود {col} ممتلئ.",
+    "proposing_with_no_resource": "حاول اللاعب {player_id} تقديم عرض تبادل دون امتلاك الموارد اللازمة.",
+    "incorrect_offer_format": "قدّم اللاعب {player_id} عرض تبادل بصيغة غير صحيحة.",
+    "no_new_offer": "لم يقدّم اللاعب {player_id} أي عرض تبادل جديد."
+  },
+
+  "offers": {
+    "reject": "رفض اللاعب {player_id} عرض التبادل.",
+    "accept": "قبل اللاعب {acceptor_id} عرض التبادل من اللاعب {proposer_id}.",
+    "proposal": "قدّم اللاعب {player_id} العرض التالي إلى اللاعب {opponent_id}: {offer_details}"
+  },
+
+  "outcome": {
+    "win": "فاز اللاعب {winner_id} بتحقيق زيادة أكبر في قيمة المخزون.",
+    "draw": "نفس التغيير في قيمة المخزون لجميع اللاعبين. تعادل."
+  }
+}
