@@ -28,25 +28,36 @@ class ColonelBlottoEnv(ta.Env):
             'current_round': 1, 'scores': {0: 0, 1: 0},
             'player_states': {0: copy.copy(self._player_states), 1: copy.copy(self._player_states)}
         }
-        self.state.reset(game_state=game_state, player_prompt_function=self._prompt, role_mapping={0: "Commander Alpha", 1: "Commander Beta"})
+        self.state.reset(game_state=game_state, player_prompt_function=self._prompt, role_mapping={0: self.t("player_prompt", "commander_alpha"), 1: self.t("player_prompt", "commander_beta")})
         self._render_game_state()
         # self.state.add_observation(message=f"Game started!\n{self._render_game_state()}", observation_type=ta.ObservationType.GAME_BOARD)
 
     def _render_game_state(self) -> str:
-        lines = []
-        lines.append(f"=== COLONEL BLOTTO - Round {self.state.game_state['current_round']}/{self.num_rounds} ===")
-        lines.append(f"Rounds Won - Commander Alpha: {self.state.game_state['scores'][0]}, Commander Beta: {self.state.game_state['scores'][1]}")
-        lines.append(f"Available fields: {', '.join(self.field_names)}")
-        lines.append(f"Units to allocate: {self.num_total_units}")
-        lines.append("Format: '[A4 B2 C2]'.")
-        self.state.add_observation(message="\n".join(lines), observation_type=ta.ObservationType.GAME_BOARD)
+        message = "\n".join([
+            self.t("game_state", "header_round", current_round=self.state.game_state['current_round'], num_rounds=self.num_rounds),
+            self.t("game_state", "rounds_won", alpha_score=self.state.game_state['scores'][0], beta_score=self.state.game_state['scores'][1]),
+            self.t("game_state", "available_fields", field_names=", ".join(self.field_names)),
+            self.t("game_state", "units_allocate", num_total_units=self.num_total_units),
+            self.t("game_state", "example_format")
+        ])
+        # lines = []
+        # lines.append(f"=== COLONEL BLOTTO - Round {self.state.game_state['current_round']}/{self.num_rounds} ===")
+        # lines.append(f"Rounds Won - Commander Alpha: {self.state.game_state['scores'][0]}, Commander Beta: {self.state.game_state['scores'][1]}")
+        # lines.append(f"Available fields: {', '.join(self.field_names)}")
+        # lines.append(f"Units to allocate: {self.num_total_units}")
+        # lines.append("Format: '[A4 B2 C2]'.")
+        self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_BOARD)
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        role = "Commander Alpha" if player_id == 0 else "Commander Beta"
-        return (
-            f"You are {role} in a game of ColonelBlotto. Each round, you have to allocate exactly {self.num_total_units} units across fields: {', '.join(self.field_names)}\n"
-            f"Format: '[A4 B2 C2]'\nWin the majority of fields to win the round!"
-        )
+        role = self.t("player_prompt", "commander_alpha") if player_id == 0 else self.t("player_prompt", "commander_beta")
+        return "\n".join([
+            self.t("player_prompt", "intro", role=role, num_total_units=self.num_total_units, field_names=", ".join(self.field_names)),
+            self.t("player_prompt", "format")
+        ])
+        # return (
+        #     f"You are {role} in a game of ColonelBlotto. Each round, you have to allocate exactly {self.num_total_units} units across fields: {', '.join(self.field_names)}\n"
+        #     f"Format: '[A4 B2 C2]'\nWin the majority of fields to win the round!"
+        # )
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         self.state.add_observation(from_id=self.state.current_player_id, to_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
@@ -60,7 +71,7 @@ class ColonelBlottoEnv(ta.Env):
         allocation_dict = self._parse_allocation_input(action)
         validation_result = self._validate_allocation(allocation_dict)
         
-        if validation_result != "Allocation is good.":
+        if validation_result != self.t("invalid_move", "good_allocations"):
             self.state.set_invalid_move(reason=validation_result)
             return
             
@@ -103,11 +114,11 @@ class ColonelBlottoEnv(ta.Env):
 
     def _validate_allocation(self, allocation_dict: Optional[Dict[str, int]]) -> str:
         """Validate allocation dictionary, allowing omitted fields (now 0 by default)."""
-        if allocation_dict is None:                                                 return "Invalid input format. Use: A:5, B:10, C:5"
-        if any(f not in self.field_names for f in allocation_dict):                 return f"Invalid field name(s). Valid fields: {', '.join(self.field_names)}"
-        if any(not isinstance(u, int) or u < 0 for u in allocation_dict.values()):  return "All allocations must be non-negative integers."
-        if sum(allocation_dict.values()) != self.num_total_units:                   return f"You have to allocate exactly {self.num_total_units} units. Current sum: {sum(allocation_dict.values())}"
-        return "Allocation is good."
+        if allocation_dict is None:                                                 return self.t("invalid_move", "wrong_format")
+        if any(f not in self.field_names for f in allocation_dict):                 return self.t("invalid_move", "invalid_field", field_names=", ".join(self.field_names))
+        if any(not isinstance(u, int) or u < 0 for u in allocation_dict.values()):  return self.t("invalid_move", "wrong_allocation_value")
+        if sum(allocation_dict.values()) != self.num_total_units:                   return self.t("invalid_move", "incorrect_total_units", num_total_units=self.num_total_units, current_sum=sum(allocation_dict.values()))
+        return self.t("invalid_move", "good_allocations")
 
     def _resolve_battle(self):
         """Calculate battle results and determine round winner"""
@@ -127,10 +138,15 @@ class ColonelBlottoEnv(ta.Env):
         # Add battle summary as observation
         p0_allocations = ", ".join(f"{field['name']}: {field['player_0_units']:<2}" for field in self.state.game_state["fields"])
         p1_allocations = ", ".join(f"{field['name']}: {field['player_1_units']:<2}" for field in self.state.game_state["fields"])
-        message = f"\nRound {self.state.game_state['current_round']}\nCommander Alpha allocated: {p0_allocations}\nCommander Beta allocated:  {p1_allocations}\n"
-        if p0_wins > p1_wins:   message += f"Winner: Commander Alpha";  self.state.game_state['scores'][0] += 1
-        elif p0_wins < p1_wins: message += f"Winner: Commander Beta";   self.state.game_state['scores'][1] += 1
-        else:                   message += f"Tie!"
+        
+        message = self.t("round_battle", "field_result", current_round=self.state.game_state['current_round'], p0_allocations=p0_allocations, p1_allocations=p1_allocations)
+        if p0_wins > p1_wins:   message += self.t("round_battle", "winner_alpha");  self.state.game_state['scores'][0] += 1
+        elif p0_wins < p1_wins: message += self.t("round_battle", "winner_beta");   self.state.game_state['scores'][1] += 1
+        else:                   message += self.t("round_battle", "tie")
+        # message = f"\nRound {self.state.game_state['current_round']}\nCommander Alpha allocated: {p0_allocations}\nCommander Beta allocated:  {p1_allocations}\n"
+        # if p0_wins > p1_wins:   message += f"Winner: Commander Alpha";  self.state.game_state['scores'][0] += 1
+        # elif p0_wins < p1_wins: message += f"Winner: Commander Beta";   self.state.game_state['scores'][1] += 1
+        # else:                   message += f"Tie!"
         self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
 
         # increment round counter
@@ -148,13 +164,13 @@ class ColonelBlottoEnv(ta.Env):
         
         # Check if max rounds reached
         if current_round > self.num_rounds:
-            if scores[0] > scores[1]:   self.state.set_winner(player_id=0, reason=f"Commander Alpha wins {scores[0]}-{scores[1]} after {self.num_rounds} rounds!")
-            elif scores[1] > scores[0]: self.state.set_winner(player_id=1, reason=f"Commander Beta wins {scores[1]}-{scores[0]} after {self.num_rounds} rounds!")
-            else:                       self.state.set_draw(reason=f"Game ends in a {scores[0]}-{scores[1]} tie after {self.num_rounds} rounds!")
+            if scores[0] > scores[1]:   self.state.set_winner(player_id=0, reason=self.t("outcome", "winner_alpha", score_0=scores[0], score_1=scores[1], num_rounds=self.num_rounds))
+            elif scores[1] > scores[0]: self.state.set_winner(player_id=1, reason=self.t("outcome", "winner_beta", score_1=scores[1], score_0=scores[0], num_rounds=self.num_rounds))
+            else:                       self.state.set_draw(reason=self.t("outcome", "draw", score_0=scores[0], score_1=scores[1], num_rounds=self.num_rounds))
             return
         
         # Check for early victory (majority of possible rounds)
         rounds_needed_to_win = (self.num_rounds // 2) + 1
-        if scores[0] >= rounds_needed_to_win:   self.state.set_winner(player_id=0, reason=f"Commander Alpha wins {scores[0]}-{scores[1]} (majority achieved)!")
-        elif scores[1] >= rounds_needed_to_win: self.state.set_winner(player_id=1, reason=f"Commander Beta wins {scores[1]}-{scores[0]} (majority achieved)!")
+        if scores[0] >= rounds_needed_to_win:   self.state.set_winner(player_id=0, reason=self.t("outcome", "early_winner_alpha", scores_0=scores[0], scores_1=scores[1]))
+        elif scores[1] >= rounds_needed_to_win: self.state.set_winner(player_id=1, reason=self.t("outcome", "early_winner_beta", scores_1=scores[1], scores_0=scores[0]))
         

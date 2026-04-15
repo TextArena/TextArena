@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "أنت {role} في لعبة ColonelBlotto. في كل جولة، يجب عليك توزيع {num_total_units} وحدة بالضبط على الحقول: {field_names}",
+    "format": "التنسيق: '[A4 B2 C2]'\nاربح أغلبية الحقول للفوز بالجولة!",
+    "commander_alpha": "القائد ألفا",
+    "commander_beta": "القائد بيتا"
+  },
+
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - الجولة {current_round}/{num_rounds} ===",
+    "rounds_won": "الجولات الفائزة - القائد ألفا: {alpha_score}، القائد بيتا: {beta_score}",
+    "available_fields": "الحقول المتاحة: {field_names}",
+    "units_allocate": "الوحدات المطلوب توزيعها: {num_total_units}",
+    "example_format": "التنسيق: '[A4 B2 C2]'."
+  },
+
+  "round_battle": {
+    "field_result": "\nالجولة {current_round}\nقام القائد ألفا بتوزيع: {p0_allocations}\nقام القائد بيتا بتوزيع: {p1_allocations}\n",
+    "winner_alpha": "الفائز: القائد ألفا",
+    "winner_beta": "الفائز: القائد بيتا",
+    "tie": "تعادل!"
+  },
+
+  "invalid_move": {
+    "wrong_format": "تنسيق الإدخال غير صالح. استخدم: A:5, B:10, C:5",
+    "invalid_field": "اسم (أسماء) الحقول غير صالح. الحقول الصالحة: {field_names}",
+    "wrong_allocation_value": "يجب أن تكون جميع التوزيعات أعدادًا صحيحة غير سالبة.",
+    "incorrect_total_units": "يجب عليك توزيع {num_total_units} وحدة بالضبط. المجموع الحالي: {current_sum}",
+    "good_allocations": "التوزيع صحيح."
+  },
+
+  "outcome": {
+    "winner_alpha": "يفوز القائد ألفا بنتيجة {score_0}-{score_1} بعد {num_rounds} جولات!",
+    "winner_beta": "يفوز القائد بيتا بنتيجة {score_1}-{score_0} بعد {num_rounds} جولات!",
+    "draw": "تنتهي اللعبة بالتعادل {score_0}-{score_1} بعد {num_rounds} جولات!",
+    "early_winner_alpha": "يفوز القائد ألفا {scores_0}-{scores_1} (تم تحقيق الأغلبية)!",
+    "early_winner_beta": "يفوز القائد بيتا {scores_1}-{scores_0} (تم تحقيق الأغلبية)!"
+  }
+}

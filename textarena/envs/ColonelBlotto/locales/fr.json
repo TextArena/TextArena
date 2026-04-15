@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes {role} dans une partie de ColonelBlotto. À chaque manche, vous devez répartir exactement {num_total_units} unités sur les champs : {field_names}",
+    "format": "Format : '[A4 B2 C2]'\nRemportez la majorité des champs pour gagner la manche !",
+    "commander_alpha": "Commandant Alpha",
+    "commander_beta": "Commandant Beta"
+  },
+
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Manche {current_round}/{num_rounds} ===",
+    "rounds_won": "Manches gagnées - Commandant Alpha : {alpha_score}, Commandant Beta : {beta_score}",
+    "available_fields": "Champs disponibles : {field_names}",
+    "units_allocate": "Unités à répartir : {num_total_units}",
+    "example_format": "Format : '[A4 B2 C2]'."
+  },
+
+  "round_battle": {
+    "field_result": "\nManche {current_round}\nCommandant Alpha a réparti : {p0_allocations}\nCommandant Beta a réparti : {p1_allocations}\n",
+    "winner_alpha": "Vainqueur : Commandant Alpha",
+    "winner_beta": "Vainqueur : Commandant Beta",
+    "tie": "Égalité !"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format d'entrée invalide. Utilisez : A:5, B:10, C:5",
+    "invalid_field": "Nom(s) de champ invalide(s). Champs valides : {field_names}",
+    "wrong_allocation_value": "Toutes les répartitions doivent être des entiers non négatifs.",
+    "incorrect_total_units": "Vous devez répartir exactement {num_total_units} unités. Somme actuelle : {current_sum}",
+    "good_allocations": "La répartition est valide."
+  },
+
+  "outcome": {
+    "winner_alpha": "Le Commandant Alpha gagne {score_0}-{score_1} après {num_rounds} manches !",
+    "winner_beta": "Le Commandant Beta gagne {score_1}-{score_0} après {num_rounds} manches !",
+    "draw": "La partie se termine sur une égalité {score_0}-{score_1} après {num_rounds} manches !",
+    "early_winner_alpha": "Le Commandant Alpha gagne {scores_0}-{scores_1} (majorité atteinte) !",
+    "early_winner_beta": "Le Commandant Beta gagne {scores_1}-{scores_0} (majorité atteinte) !"
+  }
+}
