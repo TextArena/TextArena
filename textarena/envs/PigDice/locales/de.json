@@ -1,0 +1,34 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} und spielst ein Spiel von Pig Dice.\n",
+    "rules_header": "Regeln:",
+    "turn_action_rule": "- In deinem Zug kannst du entweder '[roll]' oder '[hold]' wählen",
+    "roll_success_rule": "- Würfelst du eine 2-6: Addiere sie zu deiner Rundensumme",
+    "roll_fail_rule": "- Würfelst du eine 1: Verliere deine Rundensumme und beende deinen Zug",
+    "hold_rule": "- Halten: Füge deine Rundensumme zu deinem Punktestand hinzu und beende deinen Zug",
+    "win_rule": "- Wer zuerst {winning_score} Punkte erreicht, gewinnt\n",
+    "turn_info": "Wenn du am Zug bist, siehst du die aktuellen Punktestände und deine Rundensumme.",
+    "response_instruction": "Antworte mit '[roll]', um zu würfeln, oder '[hold]', um deine Punkte zu sichern."
+  },
+  "invalid_move": {
+    "invalid_action": "Ungültiges Aktionsformat. Verwende '[roll]' oder '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Spieler {player_id} hat verloren und verliert {turn_total} Punkte!",
+    "player_hold": "Spieler {player_id} hält und sichert {turn_total} Punkte."
+  },
+  "board": {
+    "current_scores": "Aktuelle Punktestände: ",
+    "current_total_scores": "Aktuelle Gesamtpunktestände: ",
+    "player": "Spieler",
+    "turn_total": "Deine aktuelle Rundensumme beträgt {turn_total}.",
+    "roll_history": "Deine Würfelhistorie für diesen Zug: {roll_history}",
+    "first_roll": "Dies ist der erste Wurf deines Zuges.",
+    "available_actions": "Verfügbare Aktionen: '[roll]' oder '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Spieler {winner_id} hat durch einen höheren Punktestand beim Zuglimit gewonnen ({scores})",
+    "winner_by_score": "Spieler {winner_id} hat gewonnen, indem er den Zielwert von {winning_score} erreicht hat!",
+    "draw": "Das Zuglimit wurde erreicht und alle Spieler haben denselben Punktestand: {scores}"
+  }
+}

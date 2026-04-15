@@ -1,0 +1,38 @@
+{
+  "player_prompt": {
+    "intro": "你是玩家 {player_id}，正在进行一局 Pig Dice 游戏。\n",
+    "rules_header": "规则：",
+    "turn_action_rule": "- 在你的回合中，你可以选择 '[roll]' 或 '[hold]'",
+    "roll_success_rule": "- 如果掷出 2-6：将点数加入你的本回合累计分数",
+    "roll_fail_rule": "- 如果掷出 1：你会失去本回合累计分数，并结束回合",
+    "hold_rule": "- 保留：将本回合累计分数加入你的总分，并结束回合",
+    "win_rule": "- 先达到 {winning_score} 分的玩家获胜\n",
+    "turn_info": "轮到你时，你会看到当前分数和你的本回合累计分数。",
+    "response_instruction": "输入 '[roll]' 来掷骰子，或输入 '[hold]' 来保留你的分数。"
+  },
+
+  "invalid_move": {
+    "invalid_action": "无效的动作格式。请使用 '[roll]' 或 '[hold]'。"
+  },
+
+  "actions": {
+    "player_busted": "玩家 {player_id} 爆掉了，失去了 {turn_total} 分！",
+    "player_hold": "玩家 {player_id} 选择保留，并存下了 {turn_total} 分。"
+  },
+
+  "board": {
+    "current_scores": "当前分数：",
+    "current_total_scores": "当前总分：",
+    "player": "玩家",
+    "turn_total": "你当前回合累计分数为 {turn_total}。",
+    "roll_history": "你本回合的掷骰记录：{roll_history}",
+    "first_roll": "这是你本回合第一次掷骰。",
+    "available_actions": "可用动作：'[roll]' 或 '[hold]'"
+  },
+
+  "outcome": {
+    "winner_by_turn_limit": "玩家 {winner_id} 因在回合上限时拥有更高分数而获胜（{scores}）",
+    "winner_by_score": "玩家 {winner_id} 率先达到目标分数 {winning_score}，获胜！",
+    "draw": "已达到回合上限，且所有玩家分数相同：{scores}"
+  }
+}
