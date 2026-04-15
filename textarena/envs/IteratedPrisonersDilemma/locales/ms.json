@@ -1,0 +1,32 @@
+{
+    "player_prompt": {
+        "intro":                    "Anda ialah Pemain {player_id} dalam Permainan Dilema Banduan Berulang selama {num_rounds} pusingan.\n",
+        "game_structure_header":    "Struktur permainan:",
+        "conversation_phase":       "- Sebelum setiap keputusan, anda mempunyai {total_conversation_rounds} giliran untuk berkomunikasi secara bebas.",
+        "decision_phase":           "- Selepas itu, kedua-dua pemain memilih [Cooperate] atau [Defect] secara serentak.\n",
+
+        "payoff_header":            "Matriks ganjaran (tetap setiap pusingan):",
+        "both_cooperate":           "- Kedua-dua bekerjasama ➜ setiap seorang mendapat {cooperate_reward}",
+        "both_defect":              "- Kedua-dua membelot ➜ setiap seorang mendapat {mutual_defect_reward}",
+        "one_defects":              "- Seorang membelot, seorang bekerjasama ➜ pembelot mendapat {defect_reward}, yang bekerjasama mendapat {sucker_reward}\n",
+
+        "how_to_play_header":       "Cara bermain:",
+        "conversation_instruction": "- Semasa perbualan: taip apa sahaja teks yang anda mahu.",
+        "decision_instruction":     "- Semasa fasa keputusan: sertakan '[Cooperate]' atau '[Defect]' (tidak sensitif huruf besar/kecil). Anda boleh tambah teks sebelum atau selepas token."
+    },
+
+    "phases": {
+        "conversation_finished":    "Perbualan tamat untuk pusingan {round}. Sila balas dengan '[Cooperate]' atau '[Defect]'.",
+        "starting_round":           "--- Memulakan Pusingan {round} ---",
+        "round_summary":            "Keputusan pusingan {round}:\n{outcome}\nPemain 0 memperoleh {r0} (jumlah {score_0}), Pemain 1 memperoleh {r1} (jumlah {score_1})."
+    },
+
+    "outcome": {
+        "winner":                   "Pemain {winner} menang {win_score} - {lose_score}.",
+        "draw":                     "Seri! Kedua-dua pemain mendapat {s0}.",
+        "round_both_cooperate":     "Kedua-dua pemain bekerjasama.",
+        "round_both_defect":        "Kedua-dua pemain membelot.",
+        "round_p0_cooperates_p1_defects": "Pemain 0 bekerjasama, Pemain 1 membelot.",
+        "round_p0_defects_p1_cooperates": "Pemain 0 membelot, Pemain 1 bekerjasama."
+    }
+}
