@@ -23,17 +23,18 @@ class ConnectFourEnv(ta.Env):
         self.state = ta.TwoPlayerState(num_players=num_players, seed=seed)
         game_state = {"board": [["." for _ in range(self.num_cols)] for _ in range(self.num_rows)]} 
         self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
-        self.state.add_observation(message=(f"Board state:\n{self._render_board()}" if self.is_open else "The game board is not visible to players."), observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(message=(f"{self.t('board', 'board_visible_state')}\n{self._render_board()}" if self.is_open else self.t('board', 'board_notvisible_state')), observation_type=ta.ObservationType.GAME_BOARD)
 
     def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
-        return (
-            f"You are Player {player_id} in Connect Four.\nYour disc symbol: {'X' if player_id == 0 else 'O'}.\n"
-            f"The game board has {self.num_rows} rows and {self.num_cols} columns.\n"
-            f"Players take turns dropping their disc into one of the columns (0 to {self.num_cols - 1}).\n"
-            "The first to connect (their own) four discs vertically, horizontally, or diagonally wins.\n"
-            "On your turn, enter the column number in squared brackets to make your move.\nFor example: '[col 4]' or '[col 1]'."
-        ) 
-    
+        symbol = "X" if player_id == 0 else "O"
+        return "\n".join([
+            self.t("player_prompt", "intro", player_id=player_id, symbol=symbol),
+            self.t("player_prompt", "board_details", num_rows=self.num_rows, num_cols=self.num_cols),
+            self.t("player_prompt", "description", end_col=self.num_cols-1),
+            self.t("player_prompt", "goal"),
+            self.t("player_prompt", "instruction"),
+        ])
+
     def _render_board(self) -> str:
         column_numbers = " ".join([str(c) for c in range(self.num_cols)])
         separator = "-" * (self.num_cols * 2 - 1)
@@ -47,20 +48,20 @@ class ConnectFourEnv(ta.Env):
         else:
             row = self._get_available_row(col) # place the disc
             player_symbol = "X" if self.state.current_player_id == 0 else "O"
-            self.state.add_observation(message=f"Player {self.state.current_player_id} dropped their disk ({player_symbol}) into column {col}.", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+            self.state.add_observation(message=self.t("action", "dropped_disk", player_id=self.state.current_player_id, player_symbol=player_symbol, col=col), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
             self.state.game_state["board"][row][col] = player_symbol # insert disc
-            if self._check_win(row, col): self.state.set_winner(player_id=self.state.current_player_id, reason=f"Player {self.state.current_player_id} wins by connecting four!")
-            elif self._check_draw(): self.state.set_draw(reason="Game ended in a draw.")
+            if self._check_win(row, col): self.state.set_winner(player_id=self.state.current_player_id, reason=self.t("outcome", "win", player_id=self.state.current_player_id))
+            elif self._check_draw(): self.state.set_draw(reason=self.t("outcome", "draw"))
             else: # update board state 
-                if self.is_open: self.state.add_observation(message=f"Board state:\n{self._render_board()}", observation_type=ta.ObservationType.GAME_BOARD)
+                if self.is_open: self.state.add_observation(message=f"{self.t('board', 'board_visible_state')}\n{self._render_board()}", observation_type=ta.ObservationType.GAME_BOARD)
         return self.state.step()
 
     def _validate_action(self, action: str) -> Tuple[bool, Optional[int], Optional[str]]:
         match = re.compile(r'.*\[(?:col\s*)?(\d+)\].*', re.IGNORECASE).search(action)
-        if not match: return False, None, f"Player {self.state.current_player_id}, Invalid action format. Expected format: '[col x]'."
+        if not match: return False, None, self.t("invalid_move", "wrong_format", player_id=self.state.current_player_id)
         col = int(match.group(1))
-        if not (0 <= col < self.num_cols): return False, None, f"Player {self.state.current_player_id}, Invalid action. Column {col} is out of bounds."
-        if self.state.game_state["board"][0][col] != ".": return False, None, f"Player {self.state.current_player_id}, Invalid action. Column {col} is full."
+        if not (0 <= col < self.num_cols): return False, None, self.t("invalid_move", "out_of_range", player_id=self.state.current_player_id, col=col)
+        if self.state.game_state["board"][0][col] != ".": return False, None, self.t("invalid_move", "already_full", player_id=self.state.current_player_id, col=col)
         return True, col, None 
 
     def _get_available_row(self, col: int) -> int:

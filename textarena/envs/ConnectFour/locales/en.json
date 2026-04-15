@@ -1,0 +1,29 @@
+{
+    "player_prompt": {
+        "intro":            "You are Player {player_id} in Connect Four.\nYour disc symbol: {symbol}.",
+        "board_details":    "The game board has {num_rows} rows and {num_cols} columns.",
+        "description":      "Players take turns dropping their disc into one of the columns (0 to {end_col}).",
+        "goal":             "The first to connect (their own) four discs vertically, horizontally, or diagonally wins.",
+        "instruction":      "On your turn, enter the column number in squared brackets to make your move.\nFor example: '[col 4]' or '[col 1]'."
+    },
+
+    "board": {
+        "board_visible_state":      "Board state:",
+        "board_notvisible_state":   "The game board is not visible to players."
+    },
+
+    "invalid_move" :{
+        "wrong_format":     "Player {player_id}, Invalid action format. Expected format: '[col x]'.",
+        "out_of_range":     "Player {player_id}, Invalid action. Column {col} is out of bounds.",
+        "already_full":     "Player {player_id}, Invalid action. Column {col} is full."
+    },
+
+    "action": {
+        "dropped_disk":     "Player {player_id} dropped their disk ({player_symbol}) into column {col}."
+    },
+
+    "outcome": {
+        "win":              "Player {player_id} wins by connecting four!",
+        "draw":             "Game ended in a draw."
+    }
+}
