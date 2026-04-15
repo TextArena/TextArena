@@ -1,0 +1,23 @@
+{
+    "player_prompt": {
+        "intro":            "Welcome to Nim, Player {player_id}!\nRules:\n- On your turn, remove at least one object from exactly one pile.\n",
+        "instruction":      "- Remove objects with the format '[pile quantity]', e.g. '[0 3]'.\n- Whoever takes the last object(s) wins!"
+    },
+    "state": {
+        "pile":             "pile",
+        "current_pile":     "Current Pile:"
+    },
+    "invalid_move" :{
+        "wrong_format":     "No valid move format found. Use '[pile quantity]'.",
+        "correct_format_wrong_fields":     "Player {player_id}, Invalid action. Column {col} is out of bounds.",
+        "out_of_range":     "Pile index {pile_index} is out of range.",
+        "non_positive":     "Must remove at least 1 object.",
+        "exceeds_pile":     "Cannot remove {quantity} from pile {pile_index} (only {pile_count} left)."
+    },
+    "observation": {
+        "removed_from_piles":     "Player {player_id} removed {quantity} from pile {pile_index}."
+    },
+    "outcome": {
+        "win":              "Player {player_id} took the last object(s)!"
+    }
+}

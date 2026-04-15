@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "¡Bienvenido a Nim, Jugador {player_id}!\nReglas:\n- En tu turno, elimina al menos un objeto de exactamente una pila.\n",
+    "instruction": "- Elimina objetos con el formato '[pila cantidad]', por ejemplo '[0 3]'.\n- ¡Quien tome el/los último(s) objeto(s) gana!"
+  },
+  "state": {
+    "pile": "pila",
+    "current_pile": "Pila actual:"
+  },
+  "invalid_move": {
+    "wrong_format": "No se encontró un formato de movimiento válido. Usa '[pila cantidad]'.",
+    "correct_format_wrong_fields": "Jugador {player_id}, acción inválida. La columna {col} está fuera de rango.",
+    "out_of_range": "El índice de pila {pile_index} está fuera de rango.",
+    "non_positive": "Debes eliminar al menos 1 objeto.",
+    "exceeds_pile": "No se pueden eliminar {quantity} de la pila {pile_index} (solo quedan {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "El jugador {player_id} eliminó {quantity} de la pila {pile_index}."
+  },
+  "outcome": {
+    "win": "¡El jugador {player_id} tomó el/los último(s) objeto(s)!"
+  }
+}

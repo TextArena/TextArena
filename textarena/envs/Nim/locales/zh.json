@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "欢迎来到 Nim，玩家 {player_id}！\n规则：\n- 在你的回合中，从且仅从一个堆中移除至少一个物体。\n",
+    "instruction": "- 使用格式 '[堆 数量]' 移除物体，例如 '[0 3]'。\n- 拿走最后一个（或最后几个）物体的玩家获胜！"
+  },
+  "state": {
+    "pile": "堆",
+    "current_pile": "当前堆："
+  },
+  "invalid_move": {
+    "wrong_format": "未找到有效的移动格式。请使用 '[堆 数量]'。",
+    "correct_format_wrong_fields": "玩家 {player_id}，无效操作。列 {col} 超出范围。",
+    "out_of_range": "堆索引 {pile_index} 超出范围。",
+    "non_positive": "至少必须移除 1 个物体。",
+    "exceeds_pile": "无法从堆 {pile_index} 中移除 {quantity} 个（当前仅剩 {pile_count} 个）。"
+  },
+  "observation": {
+    "removed_from_piles": "玩家 {player_id} 从堆 {pile_index} 中移除了 {quantity} 个。"
+  },
+  "outcome": {
+    "win": "玩家 {player_id} 拿走了最后一个（或最后几个）物体！"
+  }
+}

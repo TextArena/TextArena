@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "Bienvenue à Nim, Joueur {player_id} !\nRègles :\n- À votre tour, retirez au moins un objet d’une seule pile.\n",
+    "instruction": "- Retirez les objets au format '[pile quantité]', par ex. '[0 3]'.\n- Celui qui prend le(s) dernier(s) objet(s) gagne !"
+  },
+  "state": {
+    "pile": "pile",
+    "current_pile": "Pile actuelle :"
+  },
+  "invalid_move": {
+    "wrong_format": "Aucun format de coup valide trouvé. Utilisez '[pile quantité]'.",
+    "correct_format_wrong_fields": "Joueur {player_id}, action invalide. La colonne {col} est hors limites.",
+    "out_of_range": "L’indice de pile {pile_index} est hors limites.",
+    "non_positive": "Vous devez retirer au moins 1 objet.",
+    "exceeds_pile": "Impossible de retirer {quantity} de la pile {pile_index} (il n’en reste que {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "Le joueur {player_id} a retiré {quantity} de la pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Le joueur {player_id} a pris le(s) dernier(s) objet(s) !"
+  }
+}

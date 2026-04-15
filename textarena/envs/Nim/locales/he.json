@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "ברוך הבא לנים, שחקן {player_id}!\nחוקים:\n- בתורך, הסר לפחות חפץ אחד מערימה אחת בלבד.\n",
+    "instruction": "- הסר חפצים בפורמט '[ערימה כמות]', לדוגמה '[0 3]'.\n- מי שלוקח את החפץ האחרון מנצח!"
+  },
+  "state": {
+    "pile": "ערימה",
+    "current_pile": "הערימה הנוכחית:"
+  },
+  "invalid_move": {
+    "wrong_format": "לא נמצא פורמט מהלך תקין. השתמש ב-'[ערימה כמות]'.",
+    "correct_format_wrong_fields": "שחקן {player_id}, מהלך לא חוקי. העמודה {col} מחוץ לטווח.",
+    "out_of_range": "אינדקס הערימה {pile_index} מחוץ לטווח.",
+    "non_positive": "יש להסיר לפחות חפץ אחד.",
+    "exceeds_pile": "לא ניתן להסיר {quantity} מערימה {pile_index} (נותרו רק {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "שחקן {player_id} הסיר {quantity} מערימה {pile_index}."
+  },
+  "outcome": {
+    "win": "שחקן {player_id} לקח את החפץ האחרון!"
+  }
+}
