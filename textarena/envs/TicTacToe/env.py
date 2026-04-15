@@ -5,8 +5,7 @@ import textarena as ta
 from textarena.envs.TicTacToe.renderer import create_board_str
 
 class TicTacToeEnv(ta.Env):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self):
         self.cell_mapping = {i * 3 + j: (i, j) for i in range(3) for j in range(3)}
 
     def get_board_str(self): return create_board_str(board=self.state.game_state["board"])
@@ -55,7 +54,7 @@ class TicTacToeEnv(ta.Env):
                     elif all(cell != '' for row in self.state.game_state["board"] for cell in row):
                         self.state.set_draw(reason=self.t("outcome", "draw"))
                 else:
-                    self.state.set_invalid_move(reason=self.t("invalid_move", "cell_occupied", cell=cell))
+                    self.state.set_invalid_move(reason=self.t("invalid_move", "already_occupied", cell=cell))
         self._observer_current_state()
         return self.state.step()
 
