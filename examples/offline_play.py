@@ -5,7 +5,7 @@ import textarena as ta
 
 agents = {
     0: ta.agents.HumanAgent(),
-    1: ta.agents.OpenRouterAgent(model_name="moonshotai/kimi-k2:free"), 
+    1: ta.agents.OpenRouterAgent(model_name="google/gemma-3-27b-it:free"), 
 }
 
 # initialize the environment

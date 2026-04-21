@@ -144,8 +144,8 @@ class Wrapper(Env):
     def __getattr__(self, name):
         return getattr(self.env, name)
 
-    def reset(self, num_players: int , seed: Optional[int] = None):
-        return self.env.reset(num_players=num_players, seed=seed)
+    def reset(self, num_players: int, seed: Optional[int] = None, **kwargs: Any):
+        return self.env.reset(num_players=num_players, seed=seed, **kwargs)
 
     def step(self, action: str) -> Tuple[bool, Info]:
         return self.env.step(action=action)
@@ -188,9 +188,9 @@ class RenderWrapper(Wrapper):
     def step(self, action: str) -> Tuple[bool, Optional[Info]]:
         return self.env.step(action=action)
     
-    def reset(self, num_players: int , seed: Optional[int] = None):
+    def reset(self, num_players: int, seed: Optional[int] = None, **kwargs: Any):
         self.reset_render()
-        return self.env.reset(num_players=num_players, seed=seed)
+        return self.env.reset(num_players=num_players, seed=seed, **kwargs)
 
     def reset_render(self):
         raise NotImplementedError

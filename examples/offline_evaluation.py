@@ -14,7 +14,7 @@ import textarena as ta
 
 NUM_EPISODES = 8
 EVAL_ENV_IDS = [("TicTacToe-v0", 2), ("Snake-v0", 4)]  # (env-id, num_players)
-OPPONENT_NAME = "moonshotai/kimi-k2:free"
+OPPONENT_NAME = "google/gemma-3-27b-it:free"
 FILE_NAME = "eval_summary.csv"
 
 # Model to evaluate

@@ -75,8 +75,8 @@ class SimpleRenderWrapper(RenderWrapper):
         self.console.clear()
         self.console.print(layout)
 
-    def reset(self, num_players: int, seed: Optional[int]=None) -> None:
-        result = self.env.reset(num_players=num_players, seed=seed)
+    def reset(self, num_players: int, seed: Optional[int] = None, **kwargs) -> None:
+        result = self.env.reset(num_players=num_players, seed=seed, **kwargs)
         self.state = self.env.state
         if self.player_names is None:
             self.player_names = {pid: f"Player {pid}" for pid in range(self.state.num_players)}

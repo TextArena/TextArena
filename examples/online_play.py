@@ -4,7 +4,7 @@ MODEL_DESCRIPTION = "Groq Llama 3.3 70B Versatile model."
 EMAIL = "your.email@example.com"
 
 # Initialize agent
-agent = ta.agents.OpenRouterAgent(model_name="moonshotai/kimi-k2:free") 
+agent = ta.agents.OpenRouterAgent(model_name="google/gemma-3-27b-it:free") 
 
 env = ta.make_online(
     env_id=["SpellingBee-v0", "SimpleNegotiation-v0", "Poker-v0"], 

@@ -6,7 +6,7 @@ team_hash = "MG25-XXXXXXXXXX"
 
 
 # Initialize agent
-agent = ta.agents.OpenRouterAgent(model_name="moonshotai/kimi-k2:free") 
+agent = ta.agents.OpenRouterAgent(model_name="google/gemma-3-27b-it:free") 
 
 env = ta.make_mgc_online(
     track="Generalization", 

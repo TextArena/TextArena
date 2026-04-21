@@ -1,3 +1,7 @@
+# Must match ``CONSECUTIVE_REJECTS_BEFORE_TEAM_AUTO_APPROVED`` in ``env.py`` (display only).
+_REJECTS_BEFORE_FIFTH_AUTO = 4
+
+
 def render_players_list(player_roles: dict) -> str:
     """Render the player list in a clean, text-friendly format."""
     role_icons = {
@@ -30,7 +34,10 @@ def render_mission_summary(game_state: dict) -> str:
     lines.append("🏰 **Mission Progress**")
     lines.append(f"  ✅ Successes: {mission_successes}")
     lines.append(f"  ❌ Failures: {mission_failures}")
-    lines.append(f"  🚫 Failed team proposals: {consecutive_fails}/5")
+    lines.append(
+        f"  🚫 Rejected team proposals (this mission): {consecutive_fails}/"
+        f"{_REJECTS_BEFORE_FIFTH_AUTO} (next forces approval)"
+    )
     if leader_pid is not None:
         lines.append(f"  👑 Current Leader: Player {leader_pid}")
     return "\n".join(lines)

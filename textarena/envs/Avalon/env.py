@@ -8,7 +8,8 @@ import textarena as ta
 from textarena.envs.Avalon.renderer import render_game_state
 
 MISSION_WIN_THRESHOLD = 3
-CONSECUTIVE_PROPOSAL_FAIL_THRESHOLD = 5
+# After this many rejected team votes on the **same mission**, the next proposed team is auto-approved (no vote).
+CONSECUTIVE_REJECTS_BEFORE_TEAM_AUTO_APPROVED = 4
 MIN_PLAYERS = 5
 MAX_PLAYERS = 10
 DEFAULT_VOTE = "approve"
@@ -37,7 +38,7 @@ This team proposal is automatically broadcasted to all players.
 Everyone votes to approve or reject the team.
 A majority is required for the proposal to be accepted. 
 If the team is rejected, leadership passes to the next player, who proposes their own team.
-If five teams in a row are rejected, Evil automatically wins.
+If four teams in a row are rejected on the same mission, the fifth proposed team is automatically approved (no vote).
 Each vote is automatically broadcasted to all players.
 
 4. Mission Phase
@@ -561,6 +562,13 @@ class AvalonEnv(ta.Env):
             case Phase.DISCUSSION:
                 return Phase.TEAM_PROPOSAL
             case Phase.TEAM_PROPOSAL:
+                # Standard rule: after four rejected votes on this mission, the fifth proposal is approved without a vote.
+                if (
+                    self.state.game_state["consecutive_failed_team_proposals"]
+                    >= CONSECUTIVE_REJECTS_BEFORE_TEAM_AUTO_APPROVED
+                ):
+                    self._apply_fifth_team_proposal_auto_accept()
+                    return Phase.MISSION
                 return Phase.VOTING
             case Phase.VOTING:
                 return Phase.MISSION if self._vote_passed() else Phase.DISCUSSION
@@ -702,7 +710,7 @@ class AvalonEnv(ta.Env):
         self.state.game_state["mission_actions"][pid] = action
     
     def _record_merlin_guess(self, pid: int, guess: str):
-        guess = AvalonParser.parse_merlin_guess()
+        guess = AvalonParser.parse_merlin_guess(guess)
         if guess is None:
             fatal = self.state.set_invalid_move("Merlin guess not in valid format")
             if not fatal:
@@ -716,6 +724,18 @@ class AvalonEnv(ta.Env):
         self.state.game_state["consecutive_failed_team_proposals"] += 1
         self._inc_leader()
         self._check_win()
+
+    def _apply_fifth_team_proposal_auto_accept(self) -> None:
+        """Fourth rejection already recorded; this is the fifth proposal — send it on the mission without voting."""
+        self.state.game_state["consecutive_failed_team_proposals"] = 0
+        self.state.game_state["votes"] = {}
+        self.state.add_observation(
+            message=(
+                "Four team proposals were rejected in a row on this mission. "
+                "The fifth proposed team is automatically approved."
+            ),
+            observation_type=ta.ObservationType.GAME_MESSAGE,
+        )
 
     def _resolve_votes(self):
         vote_passed = self._vote_passed()
@@ -747,6 +767,8 @@ class AvalonEnv(ta.Env):
             message = "Mission Failed. At least one action was fail"
         self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
         self._inc_leader()
+        # Align with mission_successes + mission_failures so team size matches the next quest (was stuck at 0).
+        self.state.game_state["mission_index"] = min(self.state.game_state["mission_index"] + 1, 4)
 
     def _resolve_guess_merlin(self):
         target = tally_merlin_votes(self.state.game_state["merlin_guesses"])
@@ -777,9 +799,7 @@ class AvalonEnv(ta.Env):
         self.state.add_observation(message=f"{MISSION_WIN_THRESHOLD} missions succeeded. Evil has a chance to win by correctly guessing who Merlin is", observation_type=ta.ObservationType.GAME_MESSAGE)
 
     def _check_win(self):
-        if self.state.game_state["consecutive_failed_team_proposals"] >= CONSECUTIVE_PROPOSAL_FAIL_THRESHOLD:
-            self._set_evil_winners(reason=f"{CONSECUTIVE_PROPOSAL_FAIL_THRESHOLD} team proposals were rejected in a row.")
-        elif self.state.game_state["mission_failures"] >= MISSION_WIN_THRESHOLD:
+        if self.state.game_state["mission_failures"] >= MISSION_WIN_THRESHOLD:
             self._set_evil_winners(reason=f"{MISSION_WIN_THRESHOLD} missions failed.")
         elif self.state.game_state["mission_successes"] >= MISSION_WIN_THRESHOLD:
             if MERLIN_NAME in self.player_roles.values():
