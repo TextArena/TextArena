@@ -1,33 +1,45 @@
 """
 deeprole_llm.py — support layer for DeepRoleLLMAgent.
 
-Key design choices
-------------------
-* Minimal prompt: the LLM receives only the raw game facts it cannot deduce
-  itself (mission score, phase, team, votes, player count). DeepRole's belief
-  vector is deliberately withheld from the system prompt to prevent the model
-  from simply echoing CFR numbers back; the evil-probability hint is passed as
-  a *soft* background note, not as a directive.
+LLM backend
+-----------
+Uses a locally-loaded HuggingFace / TRL-trained model for inference.
+TRL produces standard AutoModelForCausalLM checkpoints (full fine-tune or
+PEFT/LoRA adapters); this backend loads either form and runs generation via
+transformers.generate() with output_scores=True, giving native per-token
+logprobs without any external API.
 
-* Logprobs: both _TinkerLLMBackend and _OpenAILLMBackend request
-  logprobs=True / top_logprobs=5 from the API. The raw logprob data for every
-  generated token is returned alongside the text so callers can visualise
-  token-level confidence (especially useful for the `belief` float tokens).
+Logprobs
+--------
+generate() returns a tuple `scores` of length T (one tensor per generated
+token, shape [batch, vocab]).  For each position we:
+  1. log_softmax the raw logits → log-probabilities over the vocab
+  2. take the argmax (= the chosen token) and record its logprob
+  3. take the top-K alternatives via torch.topk
 
-  Returned as: LLMResult(text, logprobs)
-  where logprobs is a list of TokenLogprob(token, logprob, top_logprobs).
+The result is stored as List[TokenLogprob] in LLMResult.logprobs and
+exposed as agent.last_logprobs after every call.
+
+Prompt format
+-------------
+Minimal — only raw game facts, no DeepRole strategy dump, no observation
+excerpt.  Evil-probability hint is included as a soft background label with
+an explicit instruction to form an independent view.
 
 Public surface used by basic_agents.py
 ---------------------------------------
   _InstrumentedDeepRoleIntegrator
-  _dr_make_llm_backend(provider, model, max_tokens, temperature)
+  _TRLLLMBackend
+  _dr_make_llm_backend(provider, model_name_or_path, max_new_tokens,
+                        temperature, *, adapter_path, device, load_in_8bit,
+                        load_in_4bit, top_logprobs)
   _dr_build_hidden_state_table()
   _dr_player_evil_probs(belief, id_to_hid)
   _dr_strategy_summary(node, player, perspective)
   _dr_format_strategy(summary)
   _dr_build_llm_prompt(*, player_id, role, phase, game_state,
                          player_evil_probs, dr_action, observation_text)
-  _dr_parse_llm_result(result)  -> (belief, message)
+  dr_parse_llm_result(result)   -> (belief, message)
   _dr_is_game_action(text)
   LLMResult
   TokenLogprob
@@ -36,6 +48,7 @@ Public surface used by basic_agents.py
 from __future__ import annotations
 
 import json
+import math
 import os
 import re
 from dataclasses import dataclass, field
@@ -52,20 +65,19 @@ from textarena.agents.deeprole_integrator import (
 # ---------------------------------------------------------------------------
 
 _NUM_PLAYERS       = 5
-_NUM_HIDDEN_STATES = 60  # 5 × 4 × 3 ordered (merlin, assassin, minion) assignments
-_TINKER_BASE_URL   = "https://tinker.thinkingmachines.dev/services/tinker-prod/oai/api/v1"
-_TOP_LOGPROBS      = 5   # how many alternative tokens to record at each position
+_NUM_HIDDEN_STATES = 60   # 5 × 4 × 3 ordered (merlin, assassin, minion)
+_DEFAULT_TOP_K     = 5    # top-K alternative tokens to record per position
 
 
 # ---------------------------------------------------------------------------
-# Logprob data types
+# Logprob / result data types
 # ---------------------------------------------------------------------------
 
 @dataclass
 class TokenLogprob:
     """Logprob data for a single generated token."""
-    token:       str
-    logprob:     float
+    token:        str
+    logprob:      float                          # log-probability of chosen token
     top_logprobs: List[Tuple[str, float]] = field(default_factory=list)
     """Top-K (token, logprob) alternatives at this position."""
 
@@ -75,7 +87,7 @@ class LLMResult:
     """Return value from every backend .call()."""
     text:     str
     logprobs: List[TokenLogprob] = field(default_factory=list)
-    """Per-token logprob data; empty list when the API does not support it."""
+    """Per-token logprob data; empty when the model does not provide scores."""
 
 
 # ---------------------------------------------------------------------------
@@ -84,7 +96,7 @@ class LLMResult:
 
 class _InstrumentedDeepRoleIntegrator(DeepRoleIntegrator):
     """
-    Thin subclass of DeepRoleIntegrator that mirrors its private state into
+    Thin subclass that mirrors DeepRoleIntegrator's private state into
     public attributes after every __call__.
 
     exposed_belief      : list[float]   60-dim normalised belief vector
@@ -97,12 +109,12 @@ class _InstrumentedDeepRoleIntegrator(DeepRoleIntegrator):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.exposed_belief:      List[float]       = [1.0 / _NUM_HIDDEN_STATES] * _NUM_HIDDEN_STATES
-        self.exposed_perspective: int               = 0
-        self.exposed_node:        Dict[str, Any]    = {}
-        self.exposed_player:      int               = 0
-        self.exposed_role:        str               = "servant"
-        self.exposed_dr_action:   Optional[str]     = None
+        self.exposed_belief:      List[float]    = [1.0 / _NUM_HIDDEN_STATES] * _NUM_HIDDEN_STATES
+        self.exposed_perspective: int            = 0
+        self.exposed_node:        Dict[str, Any] = {}
+        self.exposed_player:      int            = 0
+        self.exposed_role:        str            = "servant"
+        self.exposed_dr_action:   Optional[str]  = None
 
     def __call__(self, observation: Union[str, list, tuple]) -> str:
         result                   = super().__call__(observation)
@@ -116,134 +128,240 @@ class _InstrumentedDeepRoleIntegrator(DeepRoleIntegrator):
 
 
 # ---------------------------------------------------------------------------
-# LLM backends
+# TRL / transformers local inference backend
 # ---------------------------------------------------------------------------
 
-def _extract_logprobs(choice) -> List[TokenLogprob]:
+class _TRLLLMBackend:
     """
-    Convert an OpenAI-compatible choice.logprobs into List[TokenLogprob].
-    Returns [] safely when the API omits logprob data.
+    Local inference backend for TRL-trained (or any HuggingFace) models.
+
+    Loads the model once at construction time using AutoModelForCausalLM
+    (full fine-tune) or PeftModel (LoRA/adapter checkpoints produced by TRL's
+    SFTTrainer / GRPOTrainer / etc.).  Generation uses transformers.generate()
+    with output_scores=True so native per-token logprobs are available.
+
+    Parameters
+    ----------
+    model_name_or_path : str
+        HuggingFace Hub name (e.g. "Qwen/Qwen3-0.6B") or local directory
+        path to the fine-tuned / TRL-trained model checkpoint.
+    max_new_tokens : int
+        Maximum tokens to generate (default 128).
+    temperature : float
+        Sampling temperature (default 0.7).  Set to 0.0 for greedy decoding.
+    adapter_path : str | None
+        Path to a PEFT/LoRA adapter directory produced by TRL.  When set, the
+        base model at model_name_or_path is loaded first, then the adapter is
+        applied on top via PeftModel.from_pretrained().
+    device : str
+        "cuda", "cpu", or "auto" (default "auto" — uses GPU if available).
+    load_in_8bit : bool
+        Load the base model in 8-bit via bitsandbytes (reduces VRAM).
+    load_in_4bit : bool
+        Load in 4-bit (QLoRA style).  Takes priority over load_in_8bit.
+    top_logprobs : int
+        Number of top alternative tokens to record per position (default 5).
     """
-    try:
-        content = choice.logprobs.content  # list of ChatCompletionTokenLogprob
-        if not content:
-            return []
-        out = []
-        for tok in content:
-            tops = []
-            if tok.top_logprobs:
-                tops = [(t.token, t.logprob) for t in tok.top_logprobs]
-            out.append(TokenLogprob(token=tok.token, logprob=tok.logprob, top_logprobs=tops))
-        return out
-    except Exception:
-        return []
 
-
-class _TinkerLLMBackend:
-    """
-    Tinker OpenAI-compatible inference backend with logprobs support.
-
-    Auth  : TINKER_API_KEY env var.
-    Model : a Tinker sampler weight path, e.g.
-            "tinker://UUID:train:0/sampler_weights/000080"
-    Docs  : https://tinker-docs.thinkingmachines.ai/tinker/compatible-apis/openai/
-    """
-
-    def __init__(self, model: str, max_tokens: int, temperature: float):
+    def __init__(
+        self,
+        model_name_or_path: str,
+        max_new_tokens: int  = 128,
+        temperature: float   = 0.7,
+        adapter_path: Optional[str] = None,
+        device: str          = "auto",
+        load_in_8bit: bool   = False,
+        load_in_4bit: bool   = False,
+        top_logprobs: int    = _DEFAULT_TOP_K,
+    ):
         try:
-            from openai import OpenAI
+            import torch
+            from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
         except ImportError:
-            raise ImportError("pip install openai")
-        api_key = os.getenv("TINKER_API_KEY")
-        if not api_key:
-            raise ValueError(
-                "TINKER_API_KEY not set. "
-                "See https://tinker-docs.thinkingmachines.ai/tinker/quickstart/"
+            raise ImportError(
+                "transformers and torch are required for _TRLLLMBackend.\n"
+                "Install with: pip install transformers torch"
             )
-        self.client      = OpenAI(base_url=_TINKER_BASE_URL, api_key=api_key)
-        self.model       = model
-        self.max_tokens  = max_tokens
-        self.temperature = temperature
+
+        self.max_new_tokens = max_new_tokens
+        self.temperature    = temperature
+        self.top_logprobs   = top_logprobs
+        self._torch         = torch
+
+        # --- resolve device ------------------------------------------------
+        if device == "auto":
+            self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        else:
+            self.device = device
+
+        # --- quantisation config -------------------------------------------
+        bnb_config = None
+        if load_in_4bit or load_in_8bit:
+            try:
+                from transformers import BitsAndBytesConfig as BnB
+                if load_in_4bit:
+                    bnb_config = BnB(load_in_4bit=True, bnb_4bit_compute_dtype=torch.float16)
+                else:
+                    bnb_config = BnB(load_in_8bit=True)
+            except Exception as e:
+                raise ImportError(
+                    f"bitsandbytes is required for quantisation. "
+                    f"Install with: pip install bitsandbytes\nOriginal error: {e}"
+                )
+
+        # --- load tokenizer ------------------------------------------------
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_name_or_path, padding_side="left"
+        )
+        if self.tokenizer.pad_token is None:
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+
+        # --- load base model -----------------------------------------------
+        model_kwargs: Dict[str, Any] = {"quantization_config": bnb_config} if bnb_config else {}
+        if bnb_config:
+            # BnB handles placement; don't also set device_map to a plain string
+            model_kwargs["device_map"] = "auto"
+        else:
+            model_kwargs["device_map"] = self.device
+
+        self.model = AutoModelForCausalLM.from_pretrained(
+            model_name_or_path, **model_kwargs
+        )
+
+        # --- optionally apply PEFT/LoRA adapter ----------------------------
+        if adapter_path:
+            try:
+                from peft import PeftModel
+            except ImportError:
+                raise ImportError(
+                    "peft is required to load LoRA adapters.\n"
+                    "Install with: pip install peft"
+                )
+            self.model = PeftModel.from_pretrained(self.model, adapter_path)
+
+        self.model.eval()
+
+    # ------------------------------------------------------------------
+    # Chat template helpers
+    # ------------------------------------------------------------------
+
+    def _build_input_ids(self, system: str, user: str):
+        """
+        Apply the model's chat template (if available) or fall back to a
+        simple system + user concatenation.
+        Returns (input_ids tensor on self.device, attention_mask tensor).
+        """
+        messages = [
+            {"role": "system",  "content": system},
+            {"role": "user",    "content": user},
+        ]
+        if getattr(self.tokenizer, "chat_template", None):
+            text = self.tokenizer.apply_chat_template(
+                messages, tokenize=False, add_generation_prompt=True
+            )
+        else:
+            text = f"{system}\n\nUser: {user}\nAssistant:"
+
+        enc = self.tokenizer(text, return_tensors="pt", padding=True)
+        input_ids      = enc["input_ids"].to(self.device)
+        attention_mask = enc["attention_mask"].to(self.device)
+        return input_ids, attention_mask
+
+    # ------------------------------------------------------------------
+    # Core call
+    # ------------------------------------------------------------------
 
     def call(self, system: str, user: str) -> LLMResult:
-        resp = self.client.chat.completions.create(
-            model=self.model,
-            max_tokens=self.max_tokens,
-            temperature=self.temperature,
-            logprobs=True,
-            top_logprobs=_TOP_LOGPROBS,
-            messages=[
-                {"role": "system", "content": system},
-                {"role": "user",   "content": user},
-            ],
+        import torch
+        import torch.nn.functional as F
+
+        input_ids, attention_mask = self._build_input_ids(system, user)
+        prompt_len = input_ids.shape[1]
+
+        gen_kwargs: Dict[str, Any] = dict(
+            attention_mask      = attention_mask,
+            max_new_tokens      = self.max_new_tokens,
+            do_sample           = self.temperature > 0.0,
+            output_scores       = True,
+            return_dict_in_generate = True,
+            pad_token_id        = self.tokenizer.pad_token_id,
         )
-        choice = resp.choices[0]
-        return LLMResult(
-            text=choice.message.content.strip(),
-            logprobs=_extract_logprobs(choice),
-        )
+        if self.temperature > 0.0:
+            gen_kwargs["temperature"] = self.temperature
+
+        with torch.no_grad():
+            outputs = self.model.generate(input_ids, **gen_kwargs)
+
+        # Decode only the newly generated tokens
+        generated_ids = outputs.sequences[0][prompt_len:]
+        text = self.tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
+
+        # Build logprob list from outputs.scores
+        # scores: tuple of T tensors, each shape [1, vocab_size] (raw logits)
+        logprobs: List[TokenLogprob] = []
+        for step_idx, (token_id, score_tensor) in enumerate(
+            zip(generated_ids.tolist(), outputs.scores)
+        ):
+            log_probs = F.log_softmax(score_tensor[0], dim=-1)   # [vocab]
+
+            chosen_lp = float(log_probs[token_id].item())
+            chosen_tok = self.tokenizer.decode([token_id])
+
+            # top-K alternatives
+            topk_lp, topk_ids = torch.topk(log_probs, k=min(self.top_logprobs, log_probs.shape[0]))
+            tops = [
+                (self.tokenizer.decode([tid.item()]), float(lp.item()))
+                for tid, lp in zip(topk_ids, topk_lp)
+            ]
+
+            logprobs.append(TokenLogprob(
+                token        = chosen_tok,
+                logprob      = chosen_lp,
+                top_logprobs = tops,
+            ))
+
+        return LLMResult(text=text, logprobs=logprobs)
 
 
-class _OpenAILLMBackend:
-    """Standard OpenAI Chat Completions backend with logprobs support."""
-
-    def __init__(self, model: str, max_tokens: int, temperature: float):
-        try:
-            from openai import OpenAI
-        except ImportError:
-            raise ImportError("pip install openai")
-        api_key = os.getenv("OPENAI_API_KEY")
-        if not api_key:
-            raise ValueError("OPENAI_API_KEY not set.")
-        self.client      = OpenAI(api_key=api_key)
-        self.model       = model
-        self.max_tokens  = max_tokens
-        self.temperature = temperature
-
-    def call(self, system: str, user: str) -> LLMResult:
-        resp = self.client.chat.completions.create(
-            model=self.model,
-            max_tokens=self.max_tokens,
-            temperature=self.temperature,
-            logprobs=True,
-            top_logprobs=_TOP_LOGPROBS,
-            messages=[
-                {"role": "system", "content": system},
-                {"role": "user",   "content": user},
-            ],
-        )
-        choice = resp.choices[0]
-        return LLMResult(
-            text=choice.message.content.strip(),
-            logprobs=_extract_logprobs(choice),
-        )
-
+# ---------------------------------------------------------------------------
+# Factory
+# ---------------------------------------------------------------------------
 
 def _dr_make_llm_backend(
-    provider: str,
-    model: Optional[str],
-    max_tokens: int,
-    temperature: float,
-) -> Union[_TinkerLLMBackend, _OpenAILLMBackend]:
+    model_name_or_path: str,
+    max_new_tokens: int  = 128,
+    temperature: float   = 0.7,
+    adapter_path: Optional[str] = None,
+    device: str          = "auto",
+    load_in_8bit: bool   = False,
+    load_in_4bit: bool   = False,
+    top_logprobs: int    = _DEFAULT_TOP_K,
+) -> _TRLLLMBackend:
     """
-    Return the appropriate LLM backend.
+    Construct and return a _TRLLLMBackend.
 
-    provider : "tinker" (default) | "openai"
-    model    : for Tinker, a required sampler weight path
-               "tinker://UUID:train:0/sampler_weights/NNNNNN";
-               for OpenAI, a model name (defaults to "gpt-4o-mini").
+    Parameters
+    ----------
+    model_name_or_path : str
+        HuggingFace Hub name or local path to any TRL-trained (or base) model.
+    max_new_tokens : int    Max tokens to generate (default 128).
+    temperature : float     Sampling temperature (default 0.7; 0 = greedy).
+    adapter_path : str|None Path to a PEFT/LoRA adapter directory (optional).
+    device : str            "cuda" | "cpu" | "auto" (default).
+    load_in_8bit : bool     8-bit BnB quantisation.
+    load_in_4bit : bool     4-bit QLoRA quantisation (takes priority).
+    top_logprobs : int      Top-K alternatives to record per token (default 5).
     """
-    if provider == "tinker":
-        if model is None:
-            raise ValueError(
-                "A Tinker sampler weight path is required when llm_provider='tinker'. "
-                "Example: model='tinker://UUID:train:0/sampler_weights/000080'\n"
-                "See https://tinker-docs.thinkingmachines.ai/tinker/compatible-apis/openai/"
-            )
-        return _TinkerLLMBackend(model, max_tokens, temperature)
-    if provider == "openai":
-        return _OpenAILLMBackend(model or "gpt-4o-mini", max_tokens, temperature)
-    raise ValueError(f"Unknown provider {provider!r}. Use 'tinker' or 'openai'.")
+    return _TRLLLMBackend(
+        model_name_or_path = model_name_or_path,
+        max_new_tokens     = max_new_tokens,
+        temperature        = temperature,
+        adapter_path       = adapter_path,
+        device             = device,
+        load_in_8bit       = load_in_8bit,
+        load_in_4bit       = load_in_4bit,
+        top_logprobs       = top_logprobs,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -263,7 +381,7 @@ def _dr_player_evil_probs(
     belief: List[float],
     id_to_hid: List[Tuple[str, ...]],
 ) -> List[float]:
-    """Marginalise the 60-dim belief vector to P(player_i is Evil) for i in 0..4."""
+    """Marginalise the 60-dim belief → P(player_i is Evil) for i in 0..4."""
     probs = [0.0] * _NUM_PLAYERS
     for idx, prob in enumerate(belief):
         if prob <= 0.0:
@@ -279,7 +397,6 @@ def _dr_strategy_summary(
     player: int,
     perspective: int,
 ) -> Dict[str, Any]:
-    """Return {phase, options:[{label, prob}]} for the active CFR node."""
     summary: Dict[str, Any] = {"phase": node.get("type", "unknown"), "options": []}
     if "propose_strat" in node and "propose_options" in node:
         for sp, bits in zip(node["propose_strat"][perspective], node["propose_options"]):
@@ -313,7 +430,7 @@ def _dr_format_strategy(summary: Dict[str, Any]) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Minimal prompt construction
+# Minimal prompt
 # ---------------------------------------------------------------------------
 
 def _dr_build_llm_prompt(
@@ -324,21 +441,14 @@ def _dr_build_llm_prompt(
     game_state: Dict[str, Any],
     player_evil_probs: List[float],
     dr_action: Optional[str],
-    observation_text: str,         # kept in signature for API compat, not used in prompt
+    observation_text: str,       # kept in signature for API compat, not injected
 ) -> Tuple[str, str]:
     """
-    Build the minimal (system_prompt, user_prompt) pair.
+    Build a minimal (system_prompt, user_prompt) pair.
 
-    Design principles
-    -----------------
-    * Only raw game facts go in — no DeepRole strategy text, no observation
-      dump, no action recommendation. This forces the LLM to reason from the
-      game state rather than parroting CFR outputs.
-    * Evil-probability numbers are included as a *soft background hint*
-      (labelled as "prior estimates") but the system prompt explicitly tells
-      the model to form its own assessment.
-    * Output is constrained to a small JSON object: {belief, message}.
-      belief is the LLM's own probability that the current team contains Evil.
+    Only raw game facts are included.  The evil-probability vector is provided
+    as a labelled background hint but the system prompt instructs the model not
+    to echo it — forcing independent reasoning.
     """
     proposal   = game_state.get("team_proposal") or []
     votes_raw  = game_state.get("votes") or {}
@@ -350,18 +460,16 @@ def _dr_build_llm_prompt(
         "  ".join(f"P{k}:{v}" for k, v in sorted(votes_raw.items()))
         if votes_raw else "—"
     )
-    # Evil probs as a compact background hint only — not a directive.
-    evil_hint = "  ".join(f"P{i}:{v:.2f}" for i, v in enumerate(player_evil_probs))
+    evil_hint  = "  ".join(f"P{i}:{v:.2f}" for i, v in enumerate(player_evil_probs))
 
     system_prompt = (
         f"You are playing Avalon as player P{player_id} (role: {role.capitalize()}).\n"
-        "Your goal: estimate whether the proposed mission team contains Evil, "
-        "and share a brief in-character thought.\n\n"
+        "Estimate whether the proposed team contains Evil and share a brief in-character thought.\n\n"
         "Rules:\n"
-        "  - Reason from the game facts below. Do NOT just repeat the prior estimates.\n"
+        "  - Reason from the facts below. Do NOT simply echo the prior estimates.\n"
         "  - `belief` is YOUR probability (0–1) that the team contains at least one Evil player.\n"
-        "  - `message` is 1–2 sentences, in character, referencing players by number.\n\n"
-        "Respond with VALID JSON only, no markdown:\n"
+        "  - `message` is 1–2 sentences in character, referencing players by number.\n\n"
+        "Respond with valid JSON only, no markdown:\n"
         '  {"belief": <float 0-1>, "message": "<string>"}'
     )
 
@@ -379,11 +487,8 @@ def _dr_build_llm_prompt(
 # Response parsing
 # ---------------------------------------------------------------------------
 
-def _dr_parse_llm_result(result: LLMResult) -> Tuple[float, str]:
-    """
-    Parse an LLMResult into (belief, message).
-    Falls back gracefully on malformed JSON; returns (0.5, "") as last resort.
-    """
+def dr_parse_llm_result(result: LLMResult) -> Tuple[float, str]:
+    """Parse LLMResult → (belief, message).  Graceful fallback on bad JSON."""
     raw     = result.text
     cleaned = re.sub(r"```(?:json)?|```", "", raw).strip()
     try:

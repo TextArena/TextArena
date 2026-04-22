@@ -15,61 +15,25 @@ from textarena.agents.deeprole_integrator import (
 )
 from textarena.agents.deeprole_llm import (
     _InstrumentedDeepRoleIntegrator,
+    _TRLLLMBackend,
     _dr_make_llm_backend,
     _dr_build_hidden_state_table,
     _dr_player_evil_probs,
     _dr_strategy_summary,
     _dr_format_strategy,
     _dr_build_llm_prompt,
-    _dr_parse_llm_result,
+    dr_parse_llm_result,
     LLMResult,
     TokenLogprob,
 )
 
-# Shared LLM client cache — reused across DeepRoleLLMAgent instances with
-# identical (provider, model, max_tokens, temperature) settings.
-_DR_LLM_BACKEND_CACHE: Dict[Tuple[str, Optional[str], int, float], Any] = {}
+# Shared backend cache — avoids reloading the same model weights into GPU
+# memory when multiple DeepRoleLLMAgent instances share the same settings.
+_DR_LLM_BACKEND_CACHE: Dict[Tuple, Any] = {}
 
-# Lighter CFR budgets used when fast_deeprole=True and the caller does not
-# override iterations / wait_iterations explicitly.
+# Lighter CFR budgets for DeepRoleLLMAgent when fast_deeprole=True
 _DEEPROLE_LLM_DEFAULT_FAST_ITERATIONS      = 50
 _DEEPROLE_LLM_DEFAULT_FAST_WAIT_ITERATIONS = 25
-
-
-def _deeprole_llm_error_should_fail_fast(exc: BaseException) -> bool:
-    """
-    True for client/auth errors that will not succeed on retry (401/403/404, etc.).
-    Avoids sleeping through useless retries when TINKER_MODEL is wrong or forbidden.
-    """
-    sc = getattr(exc, "status_code", None)
-    if isinstance(sc, int) and sc in (400, 401, 403, 404, 422):
-        return True
-    try:
-        from openai import (
-            APIStatusError,
-            AuthenticationError,
-            BadRequestError,
-            NotFoundError,
-            PermissionDeniedError,
-        )
-
-        if isinstance(
-            exc,
-            (AuthenticationError, PermissionDeniedError, NotFoundError, BadRequestError),
-        ):
-            return True
-        if isinstance(exc, APIStatusError) and getattr(exc, "status_code", None) in (
-            400,
-            401,
-            403,
-            404,
-            422,
-        ):
-            return True
-    except ImportError:
-        pass
-    return False
-
 
 __all__ = [
     "HumanAgent", "OpenRouterAgent", "GeminiAgent", "OpenAIAgent", "HFLocalAgent", "CerebrasAgent",
@@ -449,28 +413,26 @@ class DeepRoleAgent(Agent):
 
 
 # ===========================================================================
-# DeepRoleLLMAgent — DeepRole CFR + Tinker LLM belief/commentary layer
+# DeepRoleLLMAgent — DeepRole CFR + TRL/local-model belief/commentary layer
 # All supporting helpers live in deeprole_llm.py
 # ===========================================================================
 
 class DeepRoleLLMAgent(Agent):
     """
-    Avalon (5-player) agent combining DeepRole CFR with Tinker LLM reasoning.
+    Avalon (5-player) agent combining DeepRole CFR with a locally-run
+    TRL-trained (or any HuggingFace) language model.
 
     On every turn:
       1. DeepRole computes the game-theoretically optimal action via CFR.
       2. Its 60-dim belief vector is marginalised to per-player P(Evil).
-      3. A Tinker LLM (or OpenAI fallback) receives a minimal game-state
-         prompt — phase, score, team, votes, and a soft evil-probability
-         hint — and returns:
-           belief  float[0,1] : LLM's own estimate that the team contains Evil
+      3. The local LLM receives a minimal game-state prompt and returns:
+           belief  float[0,1] : its own probability that the team has Evil
            message str        : short in-character reasoning
-         The LLM is explicitly told NOT to simply echo the prior estimates.
-      4. The API is called with logprobs=True so token-level confidence is
-         available for analysis / visualisation after each call.
+         The model is explicitly told not to echo the prior estimates.
+      4. Generation runs with output_scores=True so native per-token logprobs
+         are captured and stored in agent.last_logprobs after every call.
       5. On game-mechanical turns (vote/propose/mission/merlin), DeepRole's
-         action is returned and LLM outputs are stored as attributes.
-         On discussion/unknown turns, the LLM's message is returned directly.
+         action is returned. On discussion turns, the LLM's message is used.
 
     Post-call attributes
     --------------------
@@ -480,57 +442,66 @@ class DeepRoleLLMAgent(Agent):
     last_strategy          : dict                – CFR strategy summary
     last_player_evil_probs : list[float]         – per-player P(Evil) from CFR
     last_logprobs          : list[TokenLogprob]  – per-token logprob data
-                                                   (empty if API unsupported)
 
     Parameters
     ----------
-    llm_provider  : "tinker" (default) | "openai"
-    model         : Tinker sampler weight path (required for "tinker"), e.g.
-                    "tinker://UUID:train:0/sampler_weights/000080";
-                    or OpenAI model name (optional, defaults to "gpt-4o-mini").
-                    Docs: https://tinker-docs.thinkingmachines.ai/tinker/compatible-apis/openai/
-    max_tokens    : LLM token budget (default 128 — belief + short message)
-    temperature   : LLM temperature (default 0.7)
-    verbose       : print per-turn debug summary to stdout
+    model_name_or_path : str
+        HuggingFace Hub name or local path to any TRL-trained model, e.g.
+        "Qwen/Qwen3-0.6B" or "/checkpoints/my-grpo-run/checkpoint-500".
+    adapter_path : str | None
+        Path to a PEFT/LoRA adapter directory produced by TRL's SFTTrainer /
+        GRPOTrainer etc.  Applied on top of model_name_or_path.
+    device : str
+        "cuda" | "cpu" | "auto" (default — uses GPU if available).
+    load_in_8bit : bool
+        8-bit bitsandbytes quantisation (reduces VRAM).
+    load_in_4bit : bool
+        4-bit QLoRA quantisation (takes priority over load_in_8bit).
+    max_new_tokens : int
+        Token budget for generation (default 128).
+    temperature : float
+        Sampling temperature (default 0.7; set 0.0 for greedy decoding).
+    top_logprobs : int
+        Top-K alternative tokens to record per position (default 5).
+    verbose : bool
+        Print per-turn debug summary including truncated logprobs.
     nn_folder, binary, no_zero, iterations, wait_iterations
-                  : forwarded to DeepRoleIntegrator
-    llm_retries   : retry attempts on LLM failure (default 2)
-    llm_retry_delay : seconds between retries (default 5.0)
-    skip_llm_for_mechanical : skip LLM on vote/propose/mission turns
-                              (LLM called only for discussion phases)
-    fast_deeprole : use lighter CFR budgets (50/25) when iterations not set
-    share_llm_backend : reuse LLM client across agents with same settings
-
-    Environment variables
-    ---------------------
-    TINKER_API_KEY  – required when llm_provider="tinker"
-    OPENAI_API_KEY  – required when llm_provider="openai"
-
-    Profiling
-    ---------
-    Set TEXTARENA_TIMING=1 to print one line per agent call with wall-clock
-    splits: DeepRole CFR vs LLM (helps explain slow ``avalon_play`` runs).
+        Forwarded to DeepRoleIntegrator.
+    llm_retries : int
+        Retry attempts on generation failure (default 2).
+    llm_retry_delay : float
+        Seconds between retries (default 5.0).
+    skip_llm_for_mechanical : bool
+        If True, skip LLM on vote/propose/mission turns; call only for
+        discussion phases (saves compute).
+    fast_deeprole : bool
+        Use lighter CFR budgets (50/25) when iterations not set explicitly.
+    share_llm_backend : bool
+        Reuse the loaded model across agents with identical settings (avoids
+        double-loading weights when running multiple agents in the same process).
     """
-
-    _timing_seq: int = 0
 
     def __init__(
         self,
-        llm_provider: str = "tinker",
-        model: Optional[str] = None,
-        max_tokens: int = 128,
-        temperature: float = 0.7,
-        verbose: bool = False,
-        nn_folder: str = "deeprole_zeroing_winprobs",
-        binary: str = "deeprole",
-        no_zero: bool = False,
-        iterations: Optional[int] = None,
+        model_name_or_path: str,
+        adapter_path: Optional[str]  = None,
+        device: str                  = "auto",
+        load_in_8bit: bool           = False,
+        load_in_4bit: bool           = False,
+        max_new_tokens: int          = 128,
+        temperature: float           = 0.7,
+        top_logprobs: int            = 5,
+        verbose: bool                = False,
+        nn_folder: str               = "deeprole_zeroing_winprobs",
+        binary: str                  = "deeprole",
+        no_zero: bool                = False,
+        iterations: Optional[int]    = None,
         wait_iterations: Optional[int] = None,
-        llm_retries: int = 2,
-        llm_retry_delay: float = 5.0,
+        llm_retries: int             = 2,
+        llm_retry_delay: float       = 5.0,
         skip_llm_for_mechanical: bool = False,
-        fast_deeprole: bool = True,
-        share_llm_backend: bool = True,
+        fast_deeprole: bool          = True,
+        share_llm_backend: bool      = True,
     ):
         super().__init__()
         eff_iterations = iterations if iterations is not None else (
@@ -543,12 +514,24 @@ class DeepRoleLLMAgent(Agent):
             nn_folder=nn_folder, binary=binary, no_zero=no_zero,
             iterations=eff_iterations, wait_iterations=eff_wait,
         )
-        self._llm_provider            = llm_provider
-        self._llm_model               = model
-        self._llm_max_tokens          = max_tokens
-        self._llm_temperature         = temperature
+
+        # Backend params stored for lazy/cached init
+        self._backend_key = (
+            model_name_or_path, adapter_path, device,
+            load_in_8bit, load_in_4bit, max_new_tokens, temperature, top_logprobs,
+        )
+        self._backend_kwargs = dict(
+            model_name_or_path = model_name_or_path,
+            adapter_path       = adapter_path,
+            device             = device,
+            load_in_8bit       = load_in_8bit,
+            load_in_4bit       = load_in_4bit,
+            max_new_tokens     = max_new_tokens,
+            temperature        = temperature,
+            top_logprobs       = top_logprobs,
+        )
         self._share_llm_backend       = share_llm_backend
-        self._llm: Optional[Any]      = None  # lazy; see _ensure_llm_backend
+        self._llm: Optional[Any]      = None  # lazy init
         self._verbose                 = verbose
         self._llm_retries             = llm_retries
         self._llm_retry_delay         = llm_retry_delay
@@ -556,22 +539,18 @@ class DeepRoleLLMAgent(Agent):
         self._id_to_hid               = _dr_build_hidden_state_table()
 
         # Public post-call state
-        self.last_belief:            Optional[float]      = None
-        self.last_message:           Optional[str]        = None
-        self.last_dr_action:         Optional[str]        = None
-        self.last_strategy:          Dict[str, Any]       = {}
-        self.last_player_evil_probs: List[float]          = [0.0] * 5
-        self.last_logprobs:          List[TokenLogprob]   = []
+        self.last_belief:            Optional[float]    = None
+        self.last_message:           Optional[str]      = None
+        self.last_dr_action:         Optional[str]      = None
+        self.last_strategy:          Dict[str, Any]     = {}
+        self.last_player_evil_probs: List[float]        = [0.0] * 5
+        self.last_logprobs:          List[TokenLogprob] = []
 
     def __call__(self, observation: Union[str, list, tuple]) -> str:
-        _timing = os.environ.get("TEXTARENA_TIMING", "").strip() in ("1", "true", "True", "yes", "YES")
-        _t0 = time.perf_counter()
         text = dr_normalize_observation(observation)
 
         # Step 1 — DeepRole optimal action
-        _t_dr0 = time.perf_counter()
         dr_result = self._integrator(text)
-        _t_dr_ms = (time.perf_counter() - _t_dr0) * 1000.0
 
         # Step 2 — extract DeepRole internals
         belief_vec  = self._integrator.exposed_belief
@@ -592,42 +571,22 @@ class DeepRoleLLMAgent(Agent):
         is_mechanical   = dr_action is not None
         should_call_llm = not (self._skip_llm_for_mechanical and is_mechanical)
 
-        snaps = dr_parse_game_states(text)
-        gs    = snaps[-1] if snaps else {}
-        phase = dr_phase_str(gs) if gs else "unknown"
-
-        _t_llm_ms = 0.0
         if should_call_llm:
+            snaps = dr_parse_game_states(text)
+            gs    = snaps[-1] if snaps else {}
+            phase = dr_phase_str(gs) if gs else "unknown"
             sys_p, usr_p = _dr_build_llm_prompt(
                 player_id=player, role=role, phase=phase, game_state=gs,
                 player_evil_probs=evil_probs, dr_action=dr_action,
                 observation_text=text,
             )
-            _t_llm0 = time.perf_counter()
             belief, message, logprobs = self._call_llm_with_retry(sys_p, usr_p)
-            _t_llm_ms = (time.perf_counter() - _t_llm0) * 1000.0
             self.last_logprobs = logprobs
         else:
             belief, message = 0.5, ""
 
         self.last_belief  = belief
         self.last_message = message
-
-        if _timing:
-            DeepRoleLLMAgent._timing_seq += 1
-            _total_ms = (time.perf_counter() - _t0) * 1000.0
-            print(
-                "[TEXTARENA_TIMING] "
-                f"step={DeepRoleLLMAgent._timing_seq} "
-                f"player={player} "
-                f"phase={phase} "
-                f"mechanical={is_mechanical} "
-                f"call_llm={should_call_llm} "
-                f"deeprole_ms={_t_dr_ms:.1f} "
-                f"llm_ms={_t_llm_ms:.1f} "
-                f"total_ms={_total_ms:.1f}",
-                flush=True,
-            )
 
         if self._verbose:
             self._print_debug(player, role, dr_action, belief, message, evil_probs, strat)
@@ -638,21 +597,17 @@ class DeepRoleLLMAgent(Agent):
         return message if message else dr_result
 
     def _ensure_llm_backend(self) -> Any:
+        """Lazily load the model; reuse from cache when share_llm_backend=True."""
         if self._llm is not None:
             return self._llm
-        key = (self._llm_provider, self._llm_model, self._llm_max_tokens, self._llm_temperature)
         if self._share_llm_backend:
-            if key not in _DR_LLM_BACKEND_CACHE:
-                _DR_LLM_BACKEND_CACHE[key] = _dr_make_llm_backend(
-                    self._llm_provider, self._llm_model,
-                    self._llm_max_tokens, self._llm_temperature,
+            if self._backend_key not in _DR_LLM_BACKEND_CACHE:
+                _DR_LLM_BACKEND_CACHE[self._backend_key] = _dr_make_llm_backend(
+                    **self._backend_kwargs
                 )
-            self._llm = _DR_LLM_BACKEND_CACHE[key]
+            self._llm = _DR_LLM_BACKEND_CACHE[self._backend_key]
         else:
-            self._llm = _dr_make_llm_backend(
-                self._llm_provider, self._llm_model,
-                self._llm_max_tokens, self._llm_temperature,
-            )
+            self._llm = _dr_make_llm_backend(**self._backend_kwargs)
         return self._llm
 
     def _call_llm_with_retry(
@@ -660,36 +615,19 @@ class DeepRoleLLMAgent(Agent):
     ) -> Tuple[float, str, List[TokenLogprob]]:
         llm      = self._ensure_llm_backend()
         last_exc: Optional[Exception] = None
-        _timing = os.environ.get("TEXTARENA_TIMING", "").strip() in ("1", "true", "True", "yes", "YES")
         for attempt in range(1, self._llm_retries + 2):
             try:
                 result  = llm.call(system, user)
-                belief, message = _dr_parse_llm_result(result)
+                belief, message = dr_parse_llm_result(result)
                 return belief, message, result.logprobs
             except Exception as exc:
                 last_exc = exc
                 if self._verbose:
                     print(f"[DeepRoleLLMAgent] LLM attempt {attempt} failed: {exc}")
-                if _deeprole_llm_error_should_fail_fast(exc):
-                    if _timing or self._verbose:
-                        print(
-                            "[DeepRoleLLMAgent] Non-retryable API error — fix "
-                            "TINKER_MODEL / API key / account access, or use "
-                            "llm_provider='openai'. Raising.",
-                            flush=True,
-                        )
-                    raise
                 if attempt <= self._llm_retries:
-                    if _timing:
-                        print(
-                            "[TEXTARENA_TIMING] LLM attempt failed; "
-                            f"retry in {self._llm_retry_delay}s "
-                            f"(attempt {attempt}/{self._llm_retries + 1}): {exc}",
-                            flush=True,
-                        )
                     time.sleep(self._llm_retry_delay)
         if self._verbose:
-            print(f"[DeepRoleLLMAgent] All LLM retries exhausted: {last_exc}")
+            print(f"[DeepRoleLLMAgent] All retries exhausted: {last_exc}")
         return 0.5, "", []
 
     def _print_debug(self, player, role, dr_action, belief, message, evil_probs, strat):
@@ -704,12 +642,11 @@ class DeepRoleLLMAgent(Agent):
         print(f"  LLM message : {message}")
         print(f"  strategy    :\n{_dr_format_strategy(strat)}")
         if self.last_logprobs:
-            print(f"  logprobs    : ", end="")
-            parts = []
-            for t in self.last_logprobs:
-                prob_pct = math.exp(t.logprob) * 100
-                parts.append(f"'{t.token}'({prob_pct:.0f}%)")
-            print("  ".join(parts[:12]))  # first 12 tokens
+            parts = [
+                f"'{t.token}'({math.exp(t.logprob)*100:.0f}%)"
+                for t in self.last_logprobs[:12]
+            ]
+            print(f"  logprobs    : {'  '.join(parts)}")
         print(sep)
 
 
