@@ -1,5 +1,26 @@
-"""Run multiple TextArena games in parallel and write one JSON file per game under
-``results/multi_play_<timestamp>/game_logs/`` (plus ``summary.json`` in the run folder)."""
+"""Run multiple TextArena Avalon games in parallel and write one JSON file per game under
+``results/multi_play_<timestamp>/game_logs/`` (plus ``summary.json`` in the run folder).
+
+Agent modes
+-----------
+  --agent deeprole        (default) Five plain DeepRoleAgent players — no GPU required.
+  --agent deeprole-llm    Five DeepRoleLLMAgent players backed by a local TRL/HF model.
+                          Requires --hf-model (Hub name or local checkpoint path).
+
+Example — plain DeepRole, 20 games, 4 parallel workers:
+    python multi_play.py --games 20 --workers 4
+
+Example — DeepRole-LLM with a TRL checkpoint:
+    python multi_play.py --games 8 --agent deeprole-llm \\
+        --hf-model /checkpoints/avalon-grpo/checkpoint-500 \\
+        --load-in-4bit --skip-llm-mechanical
+
+Example — DeepRole-LLM with a LoRA adapter:
+    python multi_play.py --games 4 --agent deeprole-llm \\
+        --hf-model meta-llama/Llama-3.2-1B \\
+        --adapter-path /checkpoints/avalon-lora \\
+        --device cuda
+"""
 
 from __future__ import annotations
 
@@ -15,10 +36,11 @@ from typing import Any, Dict, List, Optional, Tuple
 
 _GAME_STATE_RE = re.compile(r"<game_state>\s*(.*?)\s*</game_state>", re.DOTALL | re.IGNORECASE)
 
-# Valid ``special_roles`` names for ``AvalonEnv.reset`` (see ``textarena.envs.Avalon.env``).
 _AVALON_SPECIAL_ROLE_NAMES = frozenset(
     {"Servant", "Merlin", "Percival", "Minion", "Morgana", "Mordred", "Oberon"}
 )
+
+_AGENT_CHOICES = ("deeprole", "deeprole-llm")
 
 
 def _repo_root() -> Path:
@@ -65,8 +87,11 @@ def _load_env_file(path: Path) -> None:
         os.environ[key] = value
 
 
+# ---------------------------------------------------------------------------
+# Log / game-state helpers (unchanged)
+# ---------------------------------------------------------------------------
+
 def extract_game_states_from_log_messages(logs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Parse every ``<game_state>`` JSON blob from log entries in order."""
     out: List[Dict[str, Any]] = []
     for entry in logs:
         msg = entry.get("message", "")
@@ -83,13 +108,11 @@ def _normalize_votes(votes: Dict[Any, Any]) -> Dict[int, str]:
 
 
 def _vote_passed(votes: Dict[int, str]) -> bool:
-    """Same rule as ``Avalon.env.is_team_proposal_passed``."""
     approve_count = sum(1 for v in votes.values() if v == "approve")
     return approve_count > (len(votes) - approve_count)
 
 
 def extract_avalon_vote_events(game_states: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """One entry per completed team vote (5 votes, non-empty team), deduping repeated broadcasts."""
     events: List[Dict[str, Any]] = []
     seen_sig: Optional[Tuple[Any, ...]] = None
     for gs in game_states:
@@ -137,13 +160,11 @@ def _reward_value(rw: Dict[str, Any], pid: int) -> Optional[int]:
     return int(val)
 
 
-# Matches ``textarena.envs.Avalon.env`` — used for per-game utility without importing the env at load time.
 _AVALON_GOOD_ROLES = frozenset({"Servant", "Merlin", "Percival"})
 _AVALON_EVIL_ROLES = frozenset({"Minion", "Morgana", "Mordred", "Oberon"})
 
 
 def _per_game_utility(role: Optional[str], env_reward: Optional[int]) -> Optional[float]:
-    """Map win/loss and Good/Evil team to utility; falls back to env reward if role is unknown or missing."""
     if env_reward is None:
         return None
     won = env_reward > 0
@@ -155,7 +176,6 @@ def _per_game_utility(role: Optional[str], env_reward: Optional[int]) -> Optiona
 
 
 def aggregate_summary_stats(runs: List[Dict[str, Any]], num_players: int = 5) -> Dict[str, Any]:
-    """Win counts/rates, cumulative reward (utility), per-role win rates, and voting totals."""
     n = len(runs)
     num_players = _infer_num_players(runs, default=num_players)
     wins: Dict[int, int] = {pid: 0 for pid in range(num_players)}
@@ -199,18 +219,18 @@ def aggregate_summary_stats(runs: List[Dict[str, Any]], num_players: int = 5) ->
         for role in sorted(role_games[pid].keys()):
             g = role_games[pid][role]
             w = role_wins[pid].get(role, 0)
-            by_role[role] = {
-                "games": g,
-                "wins": w,
-                "win_rate": (w / g if g else 0.0),
-            }
+            by_role[role] = {"games": g, "wins": w, "win_rate": (w / g if g else 0.0)}
         agent_win_rate_by_role[str(pid)] = by_role
 
     return {
         "agent_wins": {str(pid): wins[pid] for pid in range(num_players)},
         "agent_win_rates": {str(pid): (wins[pid] / n if n else 0.0) for pid in range(num_players)},
         "utility_summary": {
-            "note": "Cumulative per-game utility per agent (e.g. Avalon: +0.4 good win, -0.4 good loss, +0.6 bad win, -0.6 bad loss per game; raw env reward if role is unknown).",
+            "note": (
+                "Cumulative per-game utility per agent "
+                "(Avalon: +0.4 good win, -0.4 good loss, +0.6 bad win, -0.6 bad loss; "
+                "raw env reward if role is unknown)."
+            ),
             "per_agent_total": {str(pid): total_utility[pid] for pid in range(num_players)},
             "per_agent_mean_per_game": {
                 str(pid): (total_utility[pid] / n if n else 0.0) for pid in range(num_players)
@@ -225,27 +245,66 @@ def aggregate_summary_stats(runs: List[Dict[str, Any]], num_players: int = 5) ->
     }
 
 
+# ---------------------------------------------------------------------------
+# Agent factory
+# ---------------------------------------------------------------------------
+
+def _build_agents(payload: Dict[str, Any], ta: Any) -> Dict[int, Any]:
+    """
+    Construct the five agents for one game worker process.
+
+    For ``deeprole-llm``, all five share one loaded model instance via
+    ``share_llm_backend=True`` (avoids loading weights 5× per process).
+    """
+    agent_type = payload.get("agent", "deeprole")
+    num_players = payload.get("num_players", 5)
+
+    if agent_type == "deeprole":
+        return {i: ta.agents.DeepRoleAgent() for i in range(num_players)}
+
+    if agent_type == "deeprole-llm":
+        hf_model = payload.get("hf_model")
+        if not hf_model:
+            raise ValueError(
+                "agent='deeprole-llm' requires hf_model to be set. "
+                "Pass --hf-model on the command line or set HF_MODEL in your environment."
+            )
+        llm_kwargs: Dict[str, Any] = dict(
+            model_name_or_path      = hf_model,
+            adapter_path            = payload.get("adapter_path") or None,
+            device                  = payload.get("device", "auto"),
+            load_in_4bit            = bool(payload.get("load_in_4bit", False)),
+            load_in_8bit            = bool(payload.get("load_in_8bit", False)),
+            max_new_tokens          = int(payload.get("max_new_tokens", 128)),
+            temperature             = float(payload.get("temperature", 0.7)),
+            fast_deeprole           = True,
+            share_llm_backend       = True,   # one model instance per worker process
+            skip_llm_for_mechanical = bool(payload.get("skip_llm_for_mechanical", True)),
+        )
+        return {i: ta.agents.DeepRole_LLM(**llm_kwargs) for i in range(num_players)}
+
+    raise ValueError(f"Unknown agent type {agent_type!r}. Choose from: {_AGENT_CHOICES}")
+
+
+# ---------------------------------------------------------------------------
+# Worker
+# ---------------------------------------------------------------------------
+
 def _run_one_game(payload: Dict[str, Any]) -> Dict[str, Any]:
     """Executed in a worker process. Returns metadata plus paths written."""
     repo_root = Path(payload["repo_root"])
     if str(repo_root) not in sys.path:
         sys.path.insert(0, str(repo_root))
 
-    import textarena as ta  # noqa: WPS433 — after sys.path
+    import textarena as ta  # noqa: WPS433
 
     run_index = int(payload["run_index"])
-    seed = payload.get("seed")
-    env_id = str(payload["env_id"])
-    out_path = Path(payload["out_path"])
+    seed      = payload.get("seed")
+    env_id    = str(payload["env_id"])
+    out_path  = Path(payload["out_path"])
 
-    # Same agent setup as ``examples/avalon_play.py``.
-    agents = {
-        0: ta.agents.DeepRoleAgent(),
-        1: ta.agents.DeepRoleAgent(),
-        2: ta.agents.DeepRoleAgent(),
-        3: ta.agents.DeepRoleAgent(),
-        4: ta.agents.DeepRoleAgent(),
-    }
+    agents = _build_agents(payload, ta)
+
     env = ta.make(env_id=env_id)
     special_roles = payload.get("special_roles")
     if special_roles:
@@ -262,90 +321,170 @@ def _run_one_game(payload: Dict[str, Any]) -> Dict[str, Any]:
     rewards, game_info = env.close()
 
     logs = getattr(env.state, "logs", [])
-    serializable_logs: List[Dict[str, Any]] = []
-    for from_id, message in logs:
-        serializable_logs.append({"from": from_id, "message": message})
+    serializable_logs: List[Dict[str, Any]] = [
+        {"from": from_id, "message": message} for from_id, message in logs
+    ]
 
     game_states = extract_game_states_from_log_messages(serializable_logs)
     vote_events = extract_avalon_vote_events(game_states)
 
     record: Dict[str, Any] = {
-        "run_index": run_index,
-        "seed": seed,
-        "env_id": env_id,
+        "run_index":    run_index,
+        "seed":         seed,
+        "env_id":       env_id,
+        "agent":        payload.get("agent", "deeprole"),
         "special_roles": sorted(special_roles) if special_roles else None,
-        "agents": "DeepRoleAgent x5 (matches examples/avalon_play.py)",
-        "rewards": rewards,
-        "game_info": game_info,
-        "vote_events": vote_events,
-        "logs": serializable_logs,
+        "rewards":      rewards,
+        "game_info":    game_info,
+        "vote_events":  vote_events,
+        "logs":         serializable_logs,
     }
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(record, indent=2, ensure_ascii=False), encoding="utf-8")
 
     return {
-        "run_index": run_index,
-        "seed": seed,
-        "out_path": str(out_path),
-        "rewards": rewards,
-        "game_info": game_info,
+        "run_index":    run_index,
+        "seed":         seed,
+        "out_path":     str(out_path),
+        "agent":        payload.get("agent", "deeprole"),
+        "rewards":      rewards,
+        "game_info":    game_info,
         "special_roles": sorted(special_roles) if special_roles else None,
-        "vote_events": vote_events,
-        "ok": True,
+        "vote_events":  vote_events,
+        "ok":           True,
     }
 
 
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Run many TextArena games in parallel; save per-game JSON under results/<run>/game_logs/."
+        description=(
+            "Run many TextArena Avalon games in parallel; "
+            "save per-game JSON under results/<run>/game_logs/."
+        ),
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
-    parser.add_argument("--games", type=int, default=4, help="Number of games to run.")
-    parser.add_argument("--workers", type=int, default=None, help="Process pool size (default: min(8, games)).")
-    parser.add_argument("--seed-base", type=int, default=0, help="Seeds are seed_base + run_index.")
-    parser.add_argument("--env", type=str, default="Avalon-v0", help="Registered TextArena env id.")
-    parser.add_argument(
-        "--special-roles",
-        type=str,
-        default="Merlin,Morgana",
-        metavar="ROLES",
-        help="Comma-separated Avalon roles passed to env.reset(special_roles=...). "
-        "Use 'none' or 'vanilla' for default 3 Servants / 2 Minions. "
-        "Default: Merlin,Morgana (Merlin + guess-Merlin; 5p adds Morgana + 1 Minion + 2 Servants).",
-    )
-    parser.add_argument(
-        "--out-dir",
-        type=str,
-        default=None,
-        help="Output directory (default: <repo>/results/multi_play_<UTC timestamp>).",
-    )
-    args = parser.parse_args()
-    special_roles_list = _parse_special_roles_csv(args.special_roles)
 
+    # --- game / parallelism ------------------------------------------------
+    parser.add_argument("--games",      type=int,  default=4,    help="Number of games to run.")
+    parser.add_argument("--workers",    type=int,  default=None, help="Process pool size (default: min(8, games)).")
+    parser.add_argument("--seed-base",  type=int,  default=0,    help="Seeds are seed_base + run_index.")
+    parser.add_argument("--env",        type=str,  default="Avalon-v0", help="Registered TextArena env id.")
+    parser.add_argument(
+        "--special-roles", type=str, default="Merlin,Morgana", metavar="ROLES",
+        help=(
+            "Comma-separated Avalon roles passed to env.reset(special_roles=...). "
+            "Use 'none' or 'vanilla' for default 3 Servants / 2 Minions."
+        ),
+    )
+    parser.add_argument("--out-dir", type=str, default=None,
+                        help="Output directory (default: <repo>/results/multi_play_<UTC timestamp>).")
+
+    # --- agent selection ---------------------------------------------------
+    parser.add_argument(
+        "--agent", type=str, default="deeprole", choices=_AGENT_CHOICES,
+        help=(
+            "'deeprole' — plain DeepRoleAgent, no GPU needed. "
+            "'deeprole-llm' — DeepRoleLLMAgent backed by a local TRL/HF model (requires --hf-model)."
+        ),
+    )
+
+    # --- DeepRole-LLM options (only used when --agent deeprole-llm) --------
+    llm_group = parser.add_argument_group(
+        "DeepRole-LLM options",
+        "Only relevant when --agent deeprole-llm.",
+    )
+    llm_group.add_argument(
+        "--hf-model", type=str, default=None, metavar="NAME_OR_PATH",
+        help=(
+            "HuggingFace Hub name (e.g. 'Qwen/Qwen3-0.6B') or local path to a "
+            "TRL-trained checkpoint. Also read from HF_MODEL env var / .env file."
+        ),
+    )
+    llm_group.add_argument(
+        "--adapter-path", type=str, default=None, metavar="PATH",
+        help="Path to a PEFT/LoRA adapter directory produced by TRL (optional).",
+    )
+    llm_group.add_argument(
+        "--device", type=str, default="auto",
+        help="Inference device: 'auto' (GPU if available), 'cuda', or 'cpu'.",
+    )
+    llm_group.add_argument("--load-in-4bit", action="store_true", help="QLoRA 4-bit quantisation (bitsandbytes).")
+    llm_group.add_argument("--load-in-8bit", action="store_true", help="8-bit quantisation (bitsandbytes).")
+    llm_group.add_argument("--max-new-tokens", type=int, default=128, help="Max tokens to generate per LLM call.")
+    llm_group.add_argument("--temperature", type=float, default=0.7, help="LLM sampling temperature.")
+    llm_group.add_argument(
+        "--skip-llm-mechanical", action="store_true", default=True,
+        help=(
+            "Skip the LLM on vote/propose/mission turns (DeepRole handles those); "
+            "call LLM only on discussion phases. Default: True — saves GPU compute."
+        ),
+    )
+    llm_group.add_argument(
+        "--no-skip-llm-mechanical", dest="skip_llm_mechanical", action="store_false",
+        help="Call the LLM on every turn, including mechanical phases.",
+    )
+
+    args = parser.parse_args()
+
+    # Validate deeprole-llm requirements early
+    if args.agent == "deeprole-llm":
+        hf_model = args.hf_model or os.getenv("HF_MODEL")
+        if not hf_model:
+            repo_root_env = _repo_root()
+            _load_env_file(repo_root_env / ".env")
+            hf_model = os.getenv("HF_MODEL")
+        if not hf_model:
+            parser.error(
+                "--agent deeprole-llm requires --hf-model (or HF_MODEL in .env / environment).\n"
+                "Example: --hf-model Qwen/Qwen3-0.6B"
+            )
+        args.hf_model = hf_model   # normalise so payload always has it
+
+    special_roles_list = _parse_special_roles_csv(args.special_roles)
     repo_root = _repo_root()
     _load_env_file(repo_root / ".env")
 
-    games = max(1, args.games)
+    games   = max(1, args.games)
     workers = args.workers if args.workers is not None else min(8, games)
 
-    ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    ts      = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     out_dir = Path(args.out_dir) if args.out_dir else (repo_root / "results" / f"multi_play_{ts}")
     out_dir = out_dir.resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    # Build per-game payloads
     payloads: List[Dict[str, Any]] = []
     for i in range(games):
-        payloads.append(
-            {
-                "repo_root": str(repo_root),
-                "run_index": i,
-                "seed": args.seed_base + i,
-                "env_id": args.env,
-                "special_roles": special_roles_list,
-                "out_path": str(out_dir / "game_logs" / f"game_{i:04d}.json"),
-            }
-        )
+        p: Dict[str, Any] = {
+            "repo_root":    str(repo_root),
+            "run_index":    i,
+            "seed":         args.seed_base + i,
+            "env_id":       args.env,
+            "special_roles": special_roles_list,
+            "out_path":     str(out_dir / "game_logs" / f"game_{i:04d}.json"),
+            "num_players":  5,
+            "agent":        args.agent,
+        }
+        # Attach LLM settings (ignored by worker when agent == "deeprole")
+        if args.agent == "deeprole-llm":
+            p.update(
+                hf_model               = args.hf_model,
+                adapter_path           = args.adapter_path,
+                device                 = args.device,
+                load_in_4bit           = args.load_in_4bit,
+                load_in_8bit           = args.load_in_8bit,
+                max_new_tokens         = args.max_new_tokens,
+                temperature            = args.temperature,
+                skip_llm_for_mechanical= args.skip_llm_mechanical,
+            )
+        payloads.append(p)
 
+    # Run games
     summary: List[Dict[str, Any]] = []
     with ProcessPoolExecutor(max_workers=workers) as ex:
         futures = [ex.submit(_run_one_game, p) for p in payloads]
@@ -353,21 +492,44 @@ def main() -> None:
             summary.append(fut.result())
 
     summary.sort(key=lambda x: x["run_index"])
+
+    # Write manifest
     manifest_path = out_dir / "summary.json"
+    agent_desc = (
+        f"DeepRole_LLM x5 (model={args.hf_model})"
+        if args.agent == "deeprole-llm"
+        else "DeepRoleAgent x5"
+    )
     manifest: Dict[str, Any] = {
-        "created_utc": ts,
-        "repo_root": str(repo_root),
-        "env_id": args.env,
+        "created_utc":  ts,
+        "repo_root":    str(repo_root),
+        "env_id":       args.env,
         "special_roles": special_roles_list,
-        "agents": "Defined in avalon_play",
-        "games": games,
-        "workers": workers,
-        "seed_base": args.seed_base,
+        "agent":        args.agent,
+        "agent_desc":   agent_desc,
+        "games":        games,
+        "workers":      workers,
+        "seed_base":    args.seed_base,
     }
+    if args.agent == "deeprole-llm":
+        manifest["llm_config"] = {
+            "hf_model":               args.hf_model,
+            "adapter_path":           args.adapter_path,
+            "device":                 args.device,
+            "load_in_4bit":           args.load_in_4bit,
+            "load_in_8bit":           args.load_in_8bit,
+            "max_new_tokens":         args.max_new_tokens,
+            "temperature":            args.temperature,
+            "skip_llm_for_mechanical": args.skip_llm_mechanical,
+        }
     manifest.update(aggregate_summary_stats(summary))
     manifest["runs"] = summary
     manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"Wrote {games} game JSON files under:\n  {out_dir / 'game_logs'}\nand summary:\n  {out_dir / 'summary.json'}")
+
+    print(
+        f"Wrote {games} game JSON files under:\n  {out_dir / 'game_logs'}\n"
+        f"and summary:\n  {manifest_path}"
+    )
 
 
 if __name__ == "__main__":
