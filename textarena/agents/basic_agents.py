@@ -32,6 +32,8 @@ from textarena.agents.deeprole_llm import (
     _dr_build_merlin_guess_prompt,
     dr_parse_merlin_guess,
     _dr_heuristic_merlin_guess,
+    _dr_is_belief_informative,
+    _dr_parse_teammate_from_obs,
 )
 
 # Shared backend cache — avoids reloading the same model weights into GPU
@@ -592,7 +594,9 @@ class DeepRoleLLMAgent(Agent):
         # empty, malformed, or a self-targeted tag. _decide_merlin_guess
         # enforces the self + teammate exclusion and guarantees a valid tag.
         if is_merlin_guess:
-            return self._decide_merlin_guess(player, role, belief_vec, gs_early)
+            return self._decide_merlin_guess(
+                player, role, belief_vec, gs_early, text
+            )
 
         # Step 3 — optionally call LLM
         is_mechanical   = dr_action is not None
@@ -631,86 +635,114 @@ class DeepRoleLLMAgent(Agent):
         role: str,
         belief_vec: List[float],
         game_state: Dict[str, Any],
+        observation_text: str = "",
     ) -> str:
-        """Guess-Merlin handler: LLM-first with retry, heuristic fallback.
+        """Guess-Merlin handler. Rare — runs once per game — so we spend the
+        tokens to call the LLM unconditionally (``skip_llm_for_mechanical``
+        still applies to routine votes/proposals/missions).
 
-        Every failure path (LLM crash, backend load failure, prompt build
-        error) funnels into the heuristic, and a final sanity check
-        guarantees the returned tag is well-formed and targets a legal
-        candidate (not self, not teammate, in 0..4).
+        Teammate identification uses the most reliable signal available:
+        DeepRole's posterior if it's actually informative, otherwise we
+        parse the observation text directly. When nothing works, we
+        exclude only ``self`` — wrongly excluding a teammate is safer
+        than wrongly excluding the actual Merlin.
+
+        Every failure path funnels into a heuristic, then a last-ditch
+        first-legal-candidate, so the returned tag is always well-formed
+        and targets a legal player.
         """
-        # --- Compute exclusion set and priors (safe — pure belief math) ---
-        try:
-            teammate = _dr_get_evil_teammate(belief_vec, self._id_to_hid, player)
-        except Exception:
-            teammate = None
+        import random  # local — used only in the uniform-belief fallback
+
+        # --- Teammate identification ----------------------------------
+        teammate: Optional[int] = None
+        belief_ok = _dr_is_belief_informative(belief_vec)
+        if belief_ok:
+            try:
+                teammate = _dr_get_evil_teammate(belief_vec, self._id_to_hid, player)
+            except Exception:
+                teammate = None
+        if teammate is None:
+            try:
+                teammate = _dr_parse_teammate_from_obs(observation_text, player)
+            except Exception:
+                teammate = None
+
+        # --- Build exclusion + candidate set --------------------------
         exclude    = {player} | ({teammate} if teammate is not None else set())
         candidates = [p for p in range(5) if p not in exclude]
+
+        # --- Posterior over Merlin (only meaningful if belief is ok) --
         try:
             merlin_probs = _dr_player_merlin_probs(belief_vec, self._id_to_hid)
         except Exception:
             merlin_probs = [0.0] * 5
 
         pid: Optional[int] = None
-        
-        print(f"[MG P{player}] role={role} teammate={teammate} candidates={candidates} "
-            f"merlin_probs={[f'{p:.2f}' for p in merlin_probs]}")
 
-        # --- LLM attempt (guarded end-to-end) --------------------------
-        if not self._skip_llm_for_mechanical:
-            try:
-                sys_p, usr_p = _dr_build_merlin_guess_prompt(
-                    player_id=player, role=role, teammate_id=teammate,
-                    candidates=candidates, merlin_probs=merlin_probs,
-                    game_state=game_state,
-                )
-                llm = self._ensure_llm_backend()
-                for attempt in range(1, self._llm_retries + 2):
-                    try:
-                        result = llm.call(sys_p, usr_p)
-                        print(f"[MG P{player}] attempt {attempt} raw LLM text: {result.text!r}")
-                        self.last_logprobs = result.logprobs
-                        pid = dr_parse_merlin_guess(result.text, 5, exclude)
-                        print(f"[MG P{player}] parsed pid={pid} (exclude={exclude})")
-                        if pid is not None:
-                            self.last_message = result.text.strip()
-                            break
-                        # Corrective retry with the bad output shown back.
-                        usr_p = (
-                            f"Your previous response was:\n{result.text[:200]}\n\n"
-                            f"That did not contain a valid "
-                            f"<merlin_guess>N</merlin_guess> with N in "
-                            f"{candidates}. Output ONLY the tag now, e.g. "
-                            f"<merlin_guess>{candidates[0]}</merlin_guess>."
-                        )
-                    except Exception as exc:
-                        if self._verbose:
-                            print(f"[DeepRoleLLMAgent] Merlin-guess LLM "
-                                  f"attempt {attempt} failed: {exc}")
-                        if attempt <= self._llm_retries:
-                            time.sleep(self._llm_retry_delay)
-            except Exception as exc:
-                if self._verbose:
-                    print(f"[DeepRoleLLMAgent] Merlin-guess LLM path aborted: {exc}")
+        print(f"[MG P{player}] role={role} teammate={teammate} "
+              f"belief_informative={belief_ok} candidates={candidates} "
+              f"merlin_probs={[f'{p:.2f}' for p in merlin_probs]}")
+
+        # --- LLM attempt — ALWAYS run, regardless of skip flag --------
+        # Merlin-guess is 1 turn/game; compute cost is negligible and the
+        # LLM is the only path that can actually reason from game history.
+        try:
+            sys_p, usr_p = _dr_build_merlin_guess_prompt(
+                player_id=player, role=role, teammate_id=teammate,
+                candidates=candidates, merlin_probs=merlin_probs,
+                game_state=game_state,
+                observation_text=observation_text,
+            )
+            llm = self._ensure_llm_backend()
+            for attempt in range(1, self._llm_retries + 2):
+                try:
+                    result = llm.call(sys_p, usr_p)
+                    print(f"[MG P{player}] attempt {attempt} raw LLM text: "
+                          f"{result.text!r}")
+                    self.last_logprobs = result.logprobs
+                    pid = dr_parse_merlin_guess(result.text, 5, exclude)
+                    print(f"[MG P{player}] parsed pid={pid} (exclude={exclude})")
+                    if pid is not None:
+                        self.last_message = result.text.strip()
+                        break
+                    # Corrective retry with the bad output shown back.
+                    usr_p = (
+                        f"Your previous response was:\n{result.text[:200]}\n\n"
+                        f"That did not contain a valid "
+                        f"<merlin_guess>N</merlin_guess> with N in "
+                        f"{candidates}. Output ONLY the tag now, e.g. "
+                        f"<merlin_guess>"
+                        f"{candidates[0] if candidates else 0}"
+                        f"</merlin_guess>."
+                    )
+                except Exception as exc:
+                    print(f"[MG P{player}] LLM attempt {attempt} failed: {exc}")
+                    if attempt <= self._llm_retries:
+                        time.sleep(self._llm_retry_delay)
+        except Exception as exc:
+            print(f"[MG P{player}] LLM path aborted: {exc}")
 
         # --- Heuristic fallback ---------------------------------------
+        # If belief is informative, argmax of P(Merlin|candidate) is the
+        # right thing. If it's uniform, argmax is a deterministic P0 —
+        # random among candidates distributes the error and stops the
+        # degenerate 'always guess P0' pattern.
         if pid is None:
             try:
-                pid = _dr_heuristic_merlin_guess(merlin_probs, exclude)
+                if belief_ok:
+                    pid = _dr_heuristic_merlin_guess(merlin_probs, exclude)
+                    src = "argmax"
+                else:
+                    pid = random.choice(candidates) if candidates else player
+                    src = "random (uniform belief)"
+                print(f"[MG P{player}] heuristic fallback → P{pid}  [{src}]")
             except Exception:
                 pid = None
 
-        # --- Final sanity check: enforce a legal pid no matter what ---
+        # --- Final sanity check: guarantee a legal pid ---------------
         if pid is None or not (0 <= pid < 5) or pid in exclude:
             pid = candidates[0] if candidates else (player + 1) % 5
-            if self._verbose:
-                print(f"[DeepRoleLLMAgent] Merlin-guess last-ditch → P{pid}")
-        elif self._verbose:
-            probs_str = "  ".join(
-                f"P{i}:{merlin_probs[i]:.3f}" for i in candidates
-            )
-            print(f"[DeepRoleLLMAgent] Merlin-guess → P{pid}  "
-                  f"(candidates: {probs_str})")
+            print(f"[MG P{player}] last-ditch → P{pid}")
 
         action = f"<merlin_guess>{pid}</merlin_guess>"
         self.last_dr_action = action

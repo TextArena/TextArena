@@ -646,12 +646,16 @@ def _dr_build_merlin_guess_prompt(
     candidates: List[int],
     merlin_probs: List[float],
     game_state: Dict[str, Any],
+    observation_text: str = "",
 ) -> Tuple[str, str]:
     """Dedicated system/user prompt for the Guess-Merlin turn.
 
     The system prompt enumerates valid candidates so the model can only pick
     Good players that are not itself and not its teammate; it also shows the
-    required output format with a concrete example.
+    required output format with a concrete example. When ``observation_text``
+    is supplied, a trimmed game-history summary is included so the model has
+    something concrete to reason about — without it the LLM falls back on
+    the (often uniform) CFR prior and the answer is effectively random.
     """
     mission_s = game_state.get("mission_successes", 3)
     mission_f = game_state.get("mission_failures",  0)
@@ -659,23 +663,153 @@ def _dr_build_merlin_guess_prompt(
     team_line = f"You are P{player_id} (Evil, role: {role.capitalize()})."
     if teammate_id is not None:
         team_line += f" Your Evil teammate is P{teammate_id}."
+    else:
+        team_line += " You could not identify your teammate from game state."
 
     prior_line = "  ".join(f"P{pid}:{merlin_probs[pid]:.2f}" for pid in candidates)
+    history = _dr_extract_history_for_merlin(observation_text)
 
     system_prompt = (
         f"{team_line}\n"
         f"Good succeeded {mission_s} missions ({mission_f} failed). "
         f"Evil gets ONE guess at Merlin.\n"
-        f"Valid candidates (Good players, not you, not your teammate): "
-        f"{candidates}.\n\n"
+        f"Valid candidates: {candidates}.\n\n"
+        "Merlin knows who Evil is and tends to: reject teams that include "
+        "Evil players, approve clean teams, and avoid being too obvious. "
+        "Look for the Good player whose votes best fit that pattern.\n\n"
         "Respond with EXACTLY this format and nothing else:\n"
         "<merlin_guess>N</merlin_guess>\n"
         f"where N is one of {candidates}.\n\n"
-        "Example: <merlin_guess>2</merlin_guess>"
+        f"Example: <merlin_guess>{candidates[0] if candidates else 0}</merlin_guess>"
     )
     user_prompt = (
-        f"Prior P(Merlin) from CFR belief: {prior_line}\n"
-        "Pick the candidate most likely to be Merlin. "
-        "Output ONLY the <merlin_guess> tag."
+        f"Prior P(Merlin) from CFR: {prior_line}\n\n"
+        f"Game history:\n{history}\n\n"
+        f"Pick from {candidates}. Output ONLY the <merlin_guess> tag."
     )
     return system_prompt, user_prompt
+
+
+def _dr_is_belief_informative(
+    belief: List[float],
+    tolerance: float = 1e-3,
+) -> bool:
+    """True if the belief is meaningfully non-uniform.
+
+    DeepRole's initial prior is 1/60 spread across 60 hidden states. When
+    the integrator has not successfully updated the belief (binary missing,
+    skipped phases, etc.), it stays uniform and any quantity derived from
+    it — teammate inference, P(Merlin) argmax — just picks whichever
+    permutation happens to come first. Treat those as noise and route
+    around them.
+    """
+    if not belief:
+        return False
+    n = len(belief)
+    if n == 0:
+        return False
+    uniform = 1.0 / n
+    return max(abs(float(b) - uniform) for b in belief) > tolerance
+
+
+def _dr_parse_teammate_from_obs(
+    obs_text: str,
+    self_pid: int,
+) -> Optional[int]:
+    """Best-effort teammate extraction from the observation string.
+
+    Tries, in order:
+      1. Multiple ``<player_state>`` tags — if the observation contains
+         another tag for a player with an Evil role, that's the teammate.
+      2. Prose mentions ('Your teammate is Player N', 'Minion is P3', ...).
+      3. Bracketed lists ('Other Evil players: [3]', 'Evil team: [1,3]').
+
+    Returns None if no signal is found. A None return is treated by the
+    caller as 'teammate unknown — only exclude self,' which is strictly
+    safer than excluding a wrongly-guessed teammate (since that could
+    remove the real Merlin from the candidate set).
+    """
+    if not obs_text:
+        return None
+    evil_roles = {"morgana", "mordred", "minion", "assassin", "oberon"}
+
+    # (1) Additional <player_state> tags with an Evil role.
+    for m in re.finditer(
+        r"<player_state>\s*(\{.*?\})\s*</player_state>",
+        obs_text, re.IGNORECASE | re.DOTALL
+    ):
+        try:
+            data = json.loads(m.group(1))
+            pid = int(data.get("pid", -1))
+            rname = str(data.get("role", "")).lower()
+            if pid != self_pid and rname in evil_roles:
+                return pid
+        except (json.JSONDecodeError, ValueError, TypeError):
+            continue
+
+    # (2) Prose mentions.
+    for pat in (
+        r"teammates?[^\n]*?(?:player\s+|p\s*#?\s*)(\d+)",
+        r"(?:fellow|other)\s+evil[^\n]*?(?:player\s+|p\s*#?\s*)(\d+)",
+        r"(?:morgana|minion|mordred|assassin)\s+is\s+(?:player\s+|p\s*#?\s*)(\d+)",
+    ):
+        for m in re.finditer(pat, obs_text, re.IGNORECASE):
+            try:
+                pid = int(m.group(1))
+                if 0 <= pid < 10 and pid != self_pid:
+                    return pid
+            except ValueError:
+                continue
+
+    # (3) Bracketed lists.
+    m = re.search(
+        r"(?:other\s+evil|evil\s+(?:players?|team)|fellow\s+minions?)"
+        r"[^\[\]]*\[([\d,\s]+)\]",
+        obs_text, re.IGNORECASE
+    )
+    if m:
+        for num_str in m.group(1).split(","):
+            try:
+                pid = int(num_str.strip())
+                if pid != self_pid:
+                    return pid
+            except ValueError:
+                continue
+
+    return None
+
+
+def _dr_extract_history_for_merlin(
+    obs_text: str,
+    max_len: int = 2000,
+) -> str:
+    """Produce a trimmed, LLM-readable game-history summary from the obs.
+
+    Keeps lines that mention team proposals, votes, and mission outcomes;
+    drops the rules boilerplate and large JSON state blobs. Tail-trimmed
+    to ``max_len`` chars so the most recent events survive when the obs
+    exceeds the budget.
+    """
+    if not obs_text:
+        return "(no history available)"
+
+    keep: List[str] = []
+    for ln in obs_text.splitlines():
+        ln = ln.strip()
+        if not ln:
+            continue
+        if ln.startswith("<game_state>") or ln.startswith("<player_state>"):
+            continue
+        if "Gameplay Rules" in ln or "Guess Merlin Phase (end condition)" in ln:
+            continue
+        lo = ln.lower()
+        if any(kw in lo for kw in (
+            "team", "vote", "mission", "proposal", "approve", "reject",
+            "success", "fail", "leader", "player"
+        )):
+            keep.append(ln)
+
+    summary = "\n".join(keep)
+    if len(summary) > max_len:
+        summary = summary[-max_len:]
+    return summary or "(no relevant history)"
