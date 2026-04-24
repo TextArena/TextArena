@@ -639,7 +639,6 @@ class DeepRoleLLMAgent(Agent):
         guarantees the returned tag is well-formed and targets a legal
         candidate (not self, not teammate, in 0..4).
         """
-        print("MERLIN HANDLER ENTERED", player)
         # --- Compute exclusion set and priors (safe — pure belief math) ---
         try:
             teammate = _dr_get_evil_teammate(belief_vec, self._id_to_hid, player)
@@ -653,6 +652,9 @@ class DeepRoleLLMAgent(Agent):
             merlin_probs = [0.0] * 5
 
         pid: Optional[int] = None
+        
+        print(f"[MG P{player}] role={role} teammate={teammate} candidates={candidates} "
+            f"merlin_probs={[f'{p:.2f}' for p in merlin_probs]}")
 
         # --- LLM attempt (guarded end-to-end) --------------------------
         if not self._skip_llm_for_mechanical:
@@ -666,8 +668,10 @@ class DeepRoleLLMAgent(Agent):
                 for attempt in range(1, self._llm_retries + 2):
                     try:
                         result = llm.call(sys_p, usr_p)
+                        print(f"[MG P{player}] attempt {attempt} raw LLM text: {result.text!r}")
                         self.last_logprobs = result.logprobs
                         pid = dr_parse_merlin_guess(result.text, 5, exclude)
+                        print(f"[MG P{player}] parsed pid={pid} (exclude={exclude})")
                         if pid is not None:
                             self.last_message = result.text.strip()
                             break
@@ -713,6 +717,7 @@ class DeepRoleLLMAgent(Agent):
         self.last_belief    = merlin_probs[pid] if 0 <= pid < 5 else 0.0
         if self.last_message is None:
             self.last_message = action
+        print(f"[MG P{player}] FINAL OUTPUT: {action}")
         return action
 
     # ------------------------------------------------------------------
