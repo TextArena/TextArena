@@ -43,6 +43,15 @@ Public surface used by basic_agents.py
   _dr_is_game_action(text)
   LLMResult
   TokenLogprob
+
+Guess-Merlin additions
+----------------------
+  _dr_is_guess_merlin_phase(game_state, observation_text)
+  _dr_player_merlin_probs(belief, id_to_hid)
+  _dr_get_evil_teammate(belief, id_to_hid, self_pid)
+  _dr_build_merlin_guess_prompt(...)
+  dr_parse_merlin_guess(raw, num_players, exclude)
+  _dr_heuristic_merlin_guess(merlin_probs, exclude)
 """
 
 from __future__ import annotations
@@ -502,3 +511,159 @@ def dr_parse_llm_result(result: LLMResult) -> Tuple[float, str]:
         belief  = max(0.0, min(1.0, float(m.group(1)))) if m else 0.5
         message = m2.group(1) if m2 else raw[:200]
         return belief, message
+
+
+# ---------------------------------------------------------------------------
+# Merlin-guess phase: detection, marginalisation, prompt, lenient parser,
+# heuristic fallback. All scoped to keep the generic belief+message path
+# above untouched.
+# ---------------------------------------------------------------------------
+
+def _dr_is_guess_merlin_phase(
+    game_state: Dict[str, Any],
+    observation_text: str = "",
+) -> bool:
+    """True if the turn is the Guess-Merlin end-game."""
+    if game_state.get("guess_merlin_phase") is True:
+        return True
+    phase = (game_state.get("phase") or "").lower()
+    if "guess" in phase and "merlin" in phase:
+        return True
+    text_lc = (observation_text or "").lower()
+    return "guess-merlin" in text_lc or "guess merlin" in text_lc
+
+
+def _dr_player_merlin_probs(
+    belief: List[float],
+    id_to_hid: List[Tuple[str, ...]],
+) -> List[float]:
+    """Marginalise the 60-dim belief → P(player_i is Merlin)."""
+    probs = [0.0] * _NUM_PLAYERS
+    for idx, prob in enumerate(belief):
+        if prob <= 0.0:
+            continue
+        hs = id_to_hid[idx]
+        for pid, role in enumerate(hs):
+            if role == "merlin":
+                probs[pid] += prob
+                break
+    return probs
+
+
+def _dr_get_evil_teammate(
+    belief: List[float],
+    id_to_hid: List[Tuple[str, ...]],
+    self_pid: int,
+) -> Optional[int]:
+    """From Evil's filtered belief, return the teammate pid (or None).
+
+    DeepRole filters an Evil player's belief to hidden states consistent with
+    their own knowledge, so every nonzero state agrees on who the teammate is.
+    """
+    for idx, prob in enumerate(belief):
+        if prob <= 0.0:
+            continue
+        for pid, role in enumerate(id_to_hid[idx]):
+            if pid != self_pid and role in _DEEPROLE_EVIL:
+                return pid
+        break
+    return None
+
+
+_MERLIN_GUESS_PATTERNS: List[str] = [
+    r"<merlin[_\s-]?guess>\s*(\d+)\s*</merlin[_\s-]?guess>",   # spec
+    r"<guess>\s*(\d+)\s*</guess>",                              # wrong tag
+    r"merlin[_\s-]?guess[:\s=]+(\d+)",                          # "merlin_guess: 3"
+    r"merlin\s+is\s+(?:player|p)?\s*#?\s*(\d+)",                # "Merlin is P3"
+    r"(?:player|p)\s*#?\s*(\d+)\s*(?:is|=|:)\s*merlin",         # "P3 is Merlin"
+    r"(?:my\s+)?(?:final\s+)?(?:guess|answer)[:\s=]+(?:player|p)?\s*#?\s*(\d+)",
+    r"\bp(?:layer)?\s*#?\s*(\d+)\b",                            # "Player 3"
+    r"^\s*(\d+)\s*$",                                           # bare "3"
+]
+
+
+def dr_parse_merlin_guess(
+    raw: str,
+    num_players: int = _NUM_PLAYERS,
+    exclude: Optional[set] = None,
+) -> Optional[int]:
+    """Extract a valid player id from raw LLM text. Returns None if none found.
+
+    Patterns are tried in order of specificity so the canonical
+    <merlin_guess> tag wins when present, and looser phrasings act as
+    fallbacks for a 4-bit model that drops structure.
+    """
+    if not raw:
+        return None
+    exclude = exclude or set()
+    for pat in _MERLIN_GUESS_PATTERNS:
+        for m in re.finditer(pat, raw, re.IGNORECASE | re.MULTILINE):
+            try:
+                pid = int(m.group(1))
+            except (ValueError, IndexError):
+                continue
+            if 0 <= pid < num_players and pid not in exclude:
+                return pid
+    return None
+
+
+def _dr_heuristic_merlin_guess(
+    merlin_probs: List[float],
+    exclude: Optional[set] = None,
+) -> int:
+    """Argmax of P(Merlin) over non-excluded players; uniform tiebreak."""
+    exclude = exclude or set()
+    best_pid, best_prob = -1, -1.0
+    for pid, prob in enumerate(merlin_probs):
+        if pid in exclude:
+            continue
+        if prob > best_prob:
+            best_prob, best_pid = prob, pid
+    if best_pid == -1:
+        for pid in range(len(merlin_probs)):
+            if pid not in exclude:
+                return pid
+    return best_pid
+
+
+def _dr_build_merlin_guess_prompt(
+    *,
+    player_id: int,
+    role: str,
+    teammate_id: Optional[int],
+    candidates: List[int],
+    merlin_probs: List[float],
+    game_state: Dict[str, Any],
+) -> Tuple[str, str]:
+    """Dedicated system/user prompt for the Guess-Merlin turn.
+
+    The system prompt enumerates valid candidates so the model can only pick
+    Good players that are not itself and not its teammate; it also shows the
+    required output format with a concrete example.
+    """
+    mission_s = game_state.get("mission_successes", 3)
+    mission_f = game_state.get("mission_failures",  0)
+
+    team_line = f"You are P{player_id} (Evil, role: {role.capitalize()})."
+    if teammate_id is not None:
+        team_line += f" Your Evil teammate is P{teammate_id}."
+
+    prior_line = "  ".join(f"P{pid}:{merlin_probs[pid]:.2f}" for pid in candidates)
+
+    system_prompt = (
+        f"{team_line}\n"
+        f"Good succeeded {mission_s} missions ({mission_f} failed). "
+        f"Evil gets ONE guess at Merlin.\n"
+        f"Valid candidates (Good players, not you, not your teammate): "
+        f"{candidates}.\n\n"
+        "Respond with EXACTLY this format and nothing else:\n"
+        "<merlin_guess>N</merlin_guess>\n"
+        f"where N is one of {candidates}.\n\n"
+        "Example: <merlin_guess>2</merlin_guess>"
+    )
+    user_prompt = (
+        f"Prior P(Merlin) from CFR belief: {prior_line}\n"
+        "Pick the candidate most likely to be Merlin. "
+        "Output ONLY the <merlin_guess> tag."
+    )
+    return system_prompt, user_prompt

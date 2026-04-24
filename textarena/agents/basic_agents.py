@@ -25,6 +25,13 @@ from textarena.agents.deeprole_llm import (
     dr_parse_llm_result,
     LLMResult,
     TokenLogprob,
+    # Merlin-guess additions
+    _dr_is_guess_merlin_phase,
+    _dr_player_merlin_probs,
+    _dr_get_evil_teammate,
+    _dr_build_merlin_guess_prompt,
+    dr_parse_merlin_guess,
+    _dr_heuristic_merlin_guess,
 )
 
 # Shared backend cache — avoids reloading the same model weights into GPU
@@ -434,6 +441,11 @@ class DeepRoleLLMAgent(Agent):
       5. On game-mechanical turns (vote/propose/mission/merlin), DeepRole's
          action is returned. On discussion turns, the LLM's message is used.
 
+    Guess-Merlin phase is handled separately: a dedicated format-restricted
+    prompt, a lenient regex parser, and a fallback that picks argmax of
+    P(Merlin) marginalised from DeepRole's own belief. Self- and teammate-
+    guesses are excluded by construction.
+
     Post-call attributes
     --------------------
     last_belief            : float | None        – LLM team-evil probability
@@ -473,7 +485,8 @@ class DeepRoleLLMAgent(Agent):
         Seconds between retries (default 5.0).
     skip_llm_for_mechanical : bool
         If True, skip LLM on vote/propose/mission turns; call only for
-        discussion phases (saves compute).
+        discussion phases (saves compute). Guess-Merlin is still routed
+        through its dedicated handler.
     fast_deeprole : bool
         Use lighter CFR budgets (50/25) when iterations not set explicitly.
     share_llm_backend : bool
@@ -549,7 +562,13 @@ class DeepRoleLLMAgent(Agent):
     def __call__(self, observation: Union[str, list, tuple]) -> str:
         text = dr_normalize_observation(observation)
 
-        # Step 1 — DeepRole optimal action
+        # Pre-parse game state so we can detect end-game phases before
+        # deciding which code path to take.
+        snaps    = dr_parse_game_states(text)
+        gs_early = snaps[-1] if snaps else {}
+        is_merlin_guess = _dr_is_guess_merlin_phase(gs_early, text)
+
+        # Step 1 — DeepRole optimal action (always run; we need its belief).
         dr_result = self._integrator(text)
 
         # Step 2 — extract DeepRole internals
@@ -567,16 +586,22 @@ class DeepRoleLLMAgent(Agent):
         self.last_dr_action         = dr_action
         self.last_logprobs          = []
 
+        # Guess-Merlin short-circuit: dedicated prompt + lenient parse +
+        # belief-based fallback. Prevents self-guess and malformed tags.
+        # If DeepRole itself already emitted a valid <merlin_guess>, trust it.
+        if is_merlin_guess:
+            if dr_action and dr_parse_merlin_guess(dr_action) is not None:
+                return dr_action
+            return self._decide_merlin_guess(player, role, belief_vec, gs_early)
+
         # Step 3 — optionally call LLM
         is_mechanical   = dr_action is not None
         should_call_llm = not (self._skip_llm_for_mechanical and is_mechanical)
 
         if should_call_llm:
-            snaps = dr_parse_game_states(text)
-            gs    = snaps[-1] if snaps else {}
-            phase = dr_phase_str(gs) if gs else "unknown"
+            phase = dr_phase_str(gs_early) if gs_early else "unknown"
             sys_p, usr_p = _dr_build_llm_prompt(
-                player_id=player, role=role, phase=phase, game_state=gs,
+                player_id=player, role=role, phase=phase, game_state=gs_early,
                 player_evil_probs=evil_probs, dr_action=dr_action,
                 observation_text=text,
             )
@@ -595,6 +620,82 @@ class DeepRoleLLMAgent(Agent):
         if is_mechanical:
             return dr_result
         return message if message else dr_result
+
+    # ------------------------------------------------------------------
+    # Guess-Merlin handler
+    # ------------------------------------------------------------------
+
+    def _decide_merlin_guess(
+        self,
+        player: int,
+        role: str,
+        belief_vec: List[float],
+        game_state: Dict[str, Any],
+    ) -> str:
+        """Guess-Merlin handler: LLM-first with retry, heuristic fallback.
+
+        The LLM sees a format-restricted prompt. Output is parsed with a
+        lenient regex; on failure we retry once with corrective feedback,
+        then fall back to argmax of P(Merlin|candidate) marginalised from
+        DeepRole's belief. Self and teammate are always excluded.
+        """
+        teammate = _dr_get_evil_teammate(belief_vec, self._id_to_hid, player)
+        exclude  = {player} | ({teammate} if teammate is not None else set())
+        candidates   = [p for p in range(5) if p not in exclude]
+        merlin_probs = _dr_player_merlin_probs(belief_vec, self._id_to_hid)
+
+        pid: Optional[int] = None
+
+        # Attempt the LLM unless the user explicitly suppressed mechanical
+        # LLM calls; Guess-Merlin is rare so it's worth burning a few tokens.
+        if not self._skip_llm_for_mechanical:
+            sys_p, usr_p = _dr_build_merlin_guess_prompt(
+                player_id=player, role=role, teammate_id=teammate,
+                candidates=candidates, merlin_probs=merlin_probs,
+                game_state=game_state,
+            )
+            llm = self._ensure_llm_backend()
+            for attempt in range(1, self._llm_retries + 2):
+                try:
+                    result = llm.call(sys_p, usr_p)
+                    self.last_logprobs = result.logprobs
+                    pid = dr_parse_merlin_guess(result.text, 5, exclude)
+                    if pid is not None:
+                        self.last_message = result.text.strip()
+                        break
+                    # Corrective retry with the bad output shown back.
+                    usr_p = (
+                        f"Your previous response was:\n{result.text[:200]}\n\n"
+                        f"That did not contain a valid <merlin_guess>N</merlin_guess> "
+                        f"with N in {candidates}. Output ONLY the tag now, "
+                        f"e.g. <merlin_guess>{candidates[0]}</merlin_guess>."
+                    )
+                except Exception as exc:
+                    if self._verbose:
+                        print(f"[DeepRoleLLMAgent] Merlin-guess LLM attempt "
+                              f"{attempt} failed: {exc}")
+                    if attempt <= self._llm_retries:
+                        time.sleep(self._llm_retry_delay)
+
+        if pid is None:
+            pid = _dr_heuristic_merlin_guess(merlin_probs, exclude)
+            if self._verbose:
+                probs_str = "  ".join(
+                    f"P{i}:{merlin_probs[i]:.3f}" for i in candidates
+                )
+                print(f"[DeepRoleLLMAgent] Merlin-guess fallback → P{pid}  "
+                      f"(candidates: {probs_str})")
+
+        action = f"<merlin_guess>{pid}</merlin_guess>"
+        self.last_dr_action = action
+        self.last_belief    = merlin_probs[pid] if 0 <= pid < len(merlin_probs) else 0.0
+        if self.last_message is None:
+            self.last_message = action
+        return action
+
+    # ------------------------------------------------------------------
+    # Internal helpers
+    # ------------------------------------------------------------------
 
     def _ensure_llm_backend(self) -> Any:
         """Lazily load the model; reuse from cache when share_llm_backend=True."""
