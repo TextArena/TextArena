@@ -639,6 +639,7 @@ class DeepRoleLLMAgent(Agent):
         guarantees the returned tag is well-formed and targets a legal
         candidate (not self, not teammate, in 0..4).
         """
+        print("MERLIN HANDLER ENTERED", player)
         # --- Compute exclusion set and priors (safe — pure belief math) ---
         try:
             teammate = _dr_get_evil_teammate(belief_vec, self._id_to_hid, player)
