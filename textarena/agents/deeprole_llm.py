@@ -523,14 +523,26 @@ def _dr_is_guess_merlin_phase(
     game_state: Dict[str, Any],
     observation_text: str = "",
 ) -> bool:
-    """True if the turn is the Guess-Merlin end-game."""
+    """True if the turn is the Guess-Merlin end-game.
+
+    Priority: trust the parsed game_state signal when we have it. Fall back
+    to the observation text ONLY by matching the exact phase-label line
+    emitted by the engine ('Phase: Guess-Merlin') — an earlier, looser
+    check for the substring 'guess merlin' matched the rules-header text
+    ('5. Guess Merlin Phase (end condition):') that is present on every
+    turn, which caused this function to return True everywhere and broke
+    voting, proposal, and mission phases.
+    """
     if game_state.get("guess_merlin_phase") is True:
         return True
     phase = (game_state.get("phase") or "").lower()
     if "guess" in phase and "merlin" in phase:
         return True
-    text_lc = (observation_text or "").lower()
-    return "guess-merlin" in text_lc or "guess merlin" in text_lc
+    # Engine-emitted phase line, lower-cased. Uses a regex anchor so it
+    # cannot match inside prose (e.g. the rules header).
+    return bool(
+        re.search(r"(?im)^\s*phase\s*:\s*guess-merlin\s*$", observation_text or "")
+    )
 
 
 def _dr_player_merlin_probs(
