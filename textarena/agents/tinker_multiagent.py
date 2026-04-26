@@ -79,35 +79,9 @@ from typing import Any, Dict, List, Optional, Tuple
 # Path setup — prefer local textarena/ over site-packages
 # ---------------------------------------------------------------------------
 
-# Script lives at <repo>/textarena/agents/tinker_multiagent.py.
-# parent.parent.parent = <repo>
-_REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+_REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
-
-
-def _load_env_file(path: Path) -> None:
-    """Set os.environ from KEY=value lines; does not override existing vars."""
-    if not path.is_file():
-        return
-    text = path.read_text(encoding="utf-8")
-    if text.startswith("\ufeff"):
-        text = text[1:]
-    for line in text.splitlines():
-        line = line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        key, _, value = line.partition("=")
-        key = key.strip()
-        if not key or key in os.environ:
-            continue
-        value = value.strip()
-        if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
-            value = value[1:-1]
-        os.environ[key] = value
-
-
-_load_env_file(_REPO_ROOT / ".env")
 
 
 # ---------------------------------------------------------------------------
@@ -603,10 +577,11 @@ async def rl_train(cfg: TrainerConfig) -> None:
     try:
         import tinker  # noqa: F401 — types referenced below
         from tinker_cookbook.renderers import get_renderer
+        from transformers import AutoTokenizer
     except ImportError as e:
         raise ImportError(
-            "tinker and tinker_cookbook are required.  Install:\n"
-            "    pip install 'tinker-cookbook[multiplayer-rl]'\n"
+            "tinker, tinker_cookbook, and transformers are required.  Install:\n"
+            "    pip install 'tinker-cookbook[multiplayer-rl]' transformers\n"
             f"Original error: {e}"
         )
 
@@ -620,14 +595,17 @@ async def rl_train(cfg: TrainerConfig) -> None:
     log.info(f"Run dir: {out_dir}")
 
     # ------------------------------------------------------------------
-    # Tinker clients
+    # Tinker clients (use async variants — we are inside asyncio.run)
     # ------------------------------------------------------------------
     service_client  = tinker.ServiceClient()
-    training_client = service_client.create_lora_training_client(
+    training_client = await service_client.create_lora_training_client_async(
         base_model = cfg.base_model,
         rank       = cfg.lora_rank,
     )
-    renderer = get_renderer(cfg.renderer_name)
+    # Renderer needs a tokenizer matching the base model so prompts/output
+    # tokens align with what the training client expects.
+    tokenizer = AutoTokenizer.from_pretrained(cfg.base_model)
+    renderer  = get_renderer(cfg.renderer_name, tokenizer)
 
     # ------------------------------------------------------------------
     # Cheat sheet (used for both SFT context and RL-time prompts)
@@ -655,7 +633,7 @@ async def rl_train(cfg: TrainerConfig) -> None:
         log.info(f"--- step {step+1}/{cfg.steps} ---")
 
         # Fresh sampler from current weights.
-        sampling_client = training_client.save_weights_and_get_sampling_client()
+        sampling_client = await training_client.save_weights_and_get_sampling_client_async()
 
         # G parallel games.
         envs = [
