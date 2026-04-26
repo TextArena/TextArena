@@ -433,10 +433,10 @@ class NPlayerCoordinator:
         """
         Sample one assistant turn from the shared policy via Tinker.
 
-        VERIFY: cookbook versions sometimes wrap sampling in a higher-level
-        ``MessageCompleter`` and sometimes expose ``sample_async`` directly.
-        Pattern A (preferred when available) goes through the high-level
-        wrapper; pattern B falls back to the low-level token API.
+        TinkerMessageCompleter exposes ``async __call__(messages) -> Message``
+        per the cookbook docs; we invoke it via the standard call syntax.
+        Falls back to the low-level ``sample_async`` only if the cookbook
+        completer is unavailable.
         """
         # Pattern A — MessageCompleter (cookbook >= 0.2)
         try:
@@ -447,7 +447,9 @@ class NPlayerCoordinator:
                 max_tokens      = self.max_new_tokens,
                 temperature     = self.temperature,
             )
-            reply = await completer.complete(messages)
+            reply = await completer(messages)   # __call__, not .complete
+            # Reply is a Message dataclass with a `content` field; fall back
+            # to str() in case the cookbook ever changes the shape.
             return reply.content if hasattr(reply, "content") else str(reply)
         except ImportError:
             pass
