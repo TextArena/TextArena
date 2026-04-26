@@ -79,9 +79,40 @@ from typing import Any, Dict, List, Optional, Tuple
 # Path setup — prefer local textarena/ over site-packages
 # ---------------------------------------------------------------------------
 
+# Script lives at <repo>/textarena/agents/tinker_multiagent.py.
+# parent.parent.parent walks up to the repo root so the local textarena/
+# package wins over any site-packages install (PyPI builds omit Avalon-v0).
 _REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
+
+
+# ---------------------------------------------------------------------------
+# .env loader (stdlib only — no python-dotenv required)
+# ---------------------------------------------------------------------------
+
+def _load_env_file(path: Path) -> None:
+    """Set os.environ from KEY=value lines; does not override existing vars."""
+    if not path.is_file():
+        return
+    text = path.read_text(encoding="utf-8")
+    if text.startswith("\ufeff"):
+        text = text[1:]
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        if not key or key in os.environ:
+            continue
+        value = value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+            value = value[1:-1]
+        os.environ[key] = value
+
+
+_load_env_file(_REPO_ROOT / ".env")
 
 
 # ---------------------------------------------------------------------------
@@ -756,7 +787,7 @@ async def rl_train(cfg: TrainerConfig) -> None:
             n            = len(target_ids)
 
             tt = np.asarray(target_ids, dtype=np.int64)
-            wt = np.asarray(mask,       dtype=np.float32)
+            mk = np.asarray(mask,       dtype=np.float32)
             # Sampling-time logprobs (zeros for now — see comment above).
             lp = np.zeros(n,                       dtype=np.float32)
             # Advantage broadcast across all completion positions; zero on
@@ -770,10 +801,14 @@ async def rl_train(cfg: TrainerConfig) -> None:
             datums.append(types.Datum(
                 model_input    = types.ModelInput.from_ints(tokens=input_ids),
                 loss_fn_inputs = {
+                    # Key names match tinker_cookbook/rl/data_processing.py:
+                    # importance_sampling / ppo / cispo expect target_tokens,
+                    # logprobs, advantages, and `mask` (NOT `weights` — that's
+                    # the SFT key).
                     "target_tokens": TensorData.from_numpy(tt),
-                    "weights":       TensorData.from_numpy(wt),
                     "logprobs":      TensorData.from_numpy(lp),
                     "advantages":    TensorData.from_numpy(ad),
+                    "mask":          TensorData.from_numpy(mk),
                 },
             ))
 
