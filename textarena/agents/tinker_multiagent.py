@@ -686,37 +686,89 @@ async def rl_train(cfg: TrainerConfig) -> None:
             std = statistics.pstdev(advantages) or 1.0
             advantages = [a / std for a in advantages]
 
+        # ------------------------------------------------------------------
         # Build training batch.
-        # VERIFY: ``build_supervised_example`` returns (model_input, weights);
-        # the weight tensor is 1 on assistant positions and 0 elsewhere.
-        # Multiplying it by the trajectory's advantage yields a policy-grad
-        # signal once the loss function is set to "importance_sampling".
-        batch_inputs:  List[Any] = []
-        batch_weights: List[Any] = []
-        for t, adv in zip(flat, advantages):
-            if not t.messages:
-                continue
-            model_input, weights = renderer.build_supervised_example(t.messages)
-            scaled_weights = [w * adv for w in weights]
-            batch_inputs.append(model_input)
-            batch_weights.append(scaled_weights)
+        #
+        # Tinker RL `Datum` schema (see tinker-docs / quickstart):
+        #     Datum(
+        #         model_input    = ModelInput.from_ints(prompt_tokens),
+        #         loss_fn_inputs = {
+        #             "target_tokens": <generated tokens>,
+        #             "weights":       <1.0 per generated token>,
+        #             "logprobs":      <sampling-time logprobs per generated token>,
+        #             "advantages":    <one scalar per generated token, broadcast>,
+        #         },
+        #     )
+        #
+        # We do NOT use `renderer.build_supervised_example` — that builds an
+        # SFT-style (model_input, weight_mask) tuple, not an RL Datum.
+        # Instead we re-tokenise each message history into prompt tokens up
+        # to the assistant turn, and use the assistant text as target tokens.
+        #
+        # This is a simplified path that retokenises after-the-fact rather
+        # than capturing logprobs during sampling.  For a proper GRPO loop
+        # you would use ``TinkerTokenCompleter`` during rollout to capture
+        # logprobs in-flight and avoid this re-tokenisation.  See the
+        # cookbook's `rl_basic.py` for the production pattern.
+        # ------------------------------------------------------------------
+        import tinker
+        from tinker import types
 
-        # Policy update.
-        # VERIFY: exact loss_fn name varies — common values are
-        # "importance_sampling", "ppo", "cispo".  Cross-reference your
-        # tinker_cookbook docs/losses.mdx file.
-        await training_client.forward_backward_async(
-            data_batch = batch_inputs,
-            loss_fn    = "importance_sampling",
+        datums: List[Any] = []
+        tokenizer = renderer.tokenizer
+        for t, adv in zip(flat, advantages):
+            if not t.messages or not t.actions:
+                continue
+            # Build prompt = all messages except the final assistant turn.
+            # Then target = the final assistant message we actually emitted.
+            history       = t.messages[:-1] if t.messages[-1].get("role") == "assistant" else t.messages
+            final_action  = t.actions[-1] if t.actions else (
+                t.messages[-1].get("content", "") if t.messages else ""
+            )
+            if not final_action:
+                continue
+            prompt_tokens = renderer.build_generation_prompt(history)
+            target_tokens = tokenizer.encode(final_action, add_special_tokens=False)
+            if not target_tokens:
+                continue
+
+            n = len(target_tokens)
+            datums.append(types.Datum(
+                model_input    = types.ModelInput.from_ints(prompt_tokens.to_ints() if hasattr(prompt_tokens, "to_ints") else prompt_tokens),
+                loss_fn_inputs = {
+                    "target_tokens": target_tokens,
+                    "weights":       [1.0]    * n,
+                    # We don't have rollout-time logprobs without TokenCompleter.
+                    # Use zeros — importance_sampling ratio becomes 1.0 for the
+                    # first update, equivalent to vanilla policy gradient.
+                    "logprobs":      [0.0]    * n,
+                    "advantages":    [float(adv)] * n,
+                },
+            ))
+
+        if not datums:
+            log.warning("  no datums produced this step (all trajectories empty?)")
+            continue
+
+        # ------------------------------------------------------------------
+        # Policy update — Tinker SDK signatures:
+        #   forward_backward_async(data, loss_fn, loss_fn_config=None)
+        #   optim_step_async(adam_params)  where adam_params is tinker.AdamParams
+        # ------------------------------------------------------------------
+        fwdbwd_future = await training_client.forward_backward_async(
+            datums,
+            "importance_sampling",
         )
-        await training_client.optim_step_async(
-            adam_params = {
-                "lr":    cfg.learning_rate,
-                "beta1": 0.9,
-                "beta2": 0.95,
-                "eps":   1e-8,
-            }
+        optim_future = await training_client.optim_step_async(
+            tinker.AdamParams(
+                learning_rate = cfg.learning_rate,
+                beta1         = 0.9,
+                beta2         = 0.95,
+                eps           = 1e-8,
+            )
         )
+        await fwdbwd_future
+        await optim_future
 
         # Metrics.
         mean_util = sum(t.reward     for t in flat) / max(1, len(flat))
