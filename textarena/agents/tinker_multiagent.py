@@ -711,8 +711,10 @@ async def rl_train(cfg: TrainerConfig) -> None:
         # logprobs in-flight and avoid this re-tokenisation.  See the
         # cookbook's `rl_basic.py` for the production pattern.
         # ------------------------------------------------------------------
+        import numpy as np
         import tinker
         from tinker import types
+        from tinker.types import TensorData
 
         datums: List[Any] = []
         tokenizer = renderer.tokenizer
@@ -733,16 +735,29 @@ async def rl_train(cfg: TrainerConfig) -> None:
                 continue
 
             n = len(target_tokens)
+
+            # loss_fn_inputs must be TensorData (numpy- or torch-backed).
+            # int64 for token ids, float32 for the per-token signals.
+            tt = np.asarray(target_tokens, dtype=np.int64)
+            wt = np.ones(n,                 dtype=np.float32)
+            # Without a TokenCompleter during rollout we don't have real
+            # sampling logprobs; using zeros means importance ratio = 1.0,
+            # which on the first update is equivalent to vanilla policy
+            # gradient.  See cookbook rl/data_processing.py for the proper
+            # production pattern.
+            lp = np.zeros(n,                dtype=np.float32)
+            ad = np.full(n, float(adv),     dtype=np.float32)
+
+            mi = types.ModelInput.from_ints(
+                tokens = prompt_tokens.to_ints() if hasattr(prompt_tokens, "to_ints") else prompt_tokens
+            )
             datums.append(types.Datum(
-                model_input    = types.ModelInput.from_ints(prompt_tokens.to_ints() if hasattr(prompt_tokens, "to_ints") else prompt_tokens),
+                model_input    = mi,
                 loss_fn_inputs = {
-                    "target_tokens": target_tokens,
-                    "weights":       [1.0]    * n,
-                    # We don't have rollout-time logprobs without TokenCompleter.
-                    # Use zeros — importance_sampling ratio becomes 1.0 for the
-                    # first update, equivalent to vanilla policy gradient.
-                    "logprobs":      [0.0]    * n,
-                    "advantages":    [float(adv)] * n,
+                    "target_tokens": TensorData.from_numpy(tt),
+                    "weights":       TensorData.from_numpy(wt),
+                    "logprobs":      TensorData.from_numpy(lp),
+                    "advantages":    TensorData.from_numpy(ad),
                 },
             ))
 
