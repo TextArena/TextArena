@@ -721,38 +721,54 @@ async def rl_train(cfg: TrainerConfig) -> None:
         for t, adv in zip(flat, advantages):
             if not t.messages or not t.actions:
                 continue
-            # Build prompt = all messages except the final assistant turn.
-            # Then target = the final assistant message we actually emitted.
             history       = t.messages[:-1] if t.messages[-1].get("role") == "assistant" else t.messages
             final_action  = t.actions[-1] if t.actions else (
                 t.messages[-1].get("content", "") if t.messages else ""
             )
             if not final_action:
                 continue
+
             prompt_tokens = renderer.build_generation_prompt(history)
-            target_tokens = tokenizer.encode(final_action, add_special_tokens=False)
-            if not target_tokens:
+            if hasattr(prompt_tokens, "to_ints"):
+                prompt_ids = list(prompt_tokens.to_ints())
+            else:
+                prompt_ids = list(prompt_tokens)
+
+            completion_ids = tokenizer.encode(final_action, add_special_tokens=False)
+            if not completion_ids or not prompt_ids:
                 continue
 
-            n = len(target_tokens)
+            # Tinker expects:
+            #   model_input length == target_tokens length == weights length
+            # The standard SFT/RL pattern is to feed all tokens shifted by 1:
+            #   tokens   = prompt + completion
+            #   input    = tokens[:-1]
+            #   target   = tokens[1:]
+            #   weights  = [0]*len(prompt) + [1]*len(completion); weights[1:]
+            # This way the model is asked to predict the *next* token at every
+            # position; the weight mask zeros out positions inside the prompt
+            # so only completion tokens contribute to the loss.
+            all_tokens   = prompt_ids + completion_ids
+            input_ids    = all_tokens[:-1]
+            target_ids   = all_tokens[1:]
+            mask         = ([0.0] * len(prompt_ids)) + ([1.0] * len(completion_ids))
+            mask         = mask[1:]                       # align with target shift
+            n            = len(target_ids)
 
-            # loss_fn_inputs must be TensorData (numpy- or torch-backed).
-            # int64 for token ids, float32 for the per-token signals.
-            tt = np.asarray(target_tokens, dtype=np.int64)
-            wt = np.ones(n,                 dtype=np.float32)
-            # Without a TokenCompleter during rollout we don't have real
-            # sampling logprobs; using zeros means importance ratio = 1.0,
-            # which on the first update is equivalent to vanilla policy
-            # gradient.  See cookbook rl/data_processing.py for the proper
-            # production pattern.
-            lp = np.zeros(n,                dtype=np.float32)
-            ad = np.full(n, float(adv),     dtype=np.float32)
-
-            mi = types.ModelInput.from_ints(
-                tokens = prompt_tokens.to_ints() if hasattr(prompt_tokens, "to_ints") else prompt_tokens
+            tt = np.asarray(target_ids, dtype=np.int64)
+            wt = np.asarray(mask,       dtype=np.float32)
+            # Sampling-time logprobs (zeros for now — see comment above).
+            lp = np.zeros(n,                       dtype=np.float32)
+            # Advantage broadcast across all completion positions; zero on
+            # prompt positions so they don't contribute (mask multiplies in
+            # the loss).
+            ad = np.asarray(
+                [float(adv) if m > 0 else 0.0 for m in mask],
+                dtype=np.float32,
             )
+
             datums.append(types.Datum(
-                model_input    = mi,
+                model_input    = types.ModelInput.from_ints(tokens=input_ids),
                 loss_fn_inputs = {
                     "target_tokens": TensorData.from_numpy(tt),
                     "weights":       TensorData.from_numpy(wt),
