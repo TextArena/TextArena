@@ -14,6 +14,7 @@ from textarena.agents.basic_agents import (
     DeepRoleAgent,
     DeepRoleLLMAgent,
     DeepRole_LLM,
+    TinkerDistilAgent,
 )
 
 __all__ = [
@@ -31,4 +32,5 @@ __all__ = [
     "DeepRoleAgent",
     "DeepRoleLLMAgent",
     "DeepRole_LLM",
+    "TinkerDistilAgent",
 ]

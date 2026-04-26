@@ -1,25 +1,21 @@
-"""Run TextArena Avalon locally with five DeepRole-LLM agents backed by a
-TRL-trained (or any HuggingFace) model.
+"""Run TextArena Avalon locally with five TinkerDistilAgent players backed
+by a Tinker-hosted LoRA checkpoint (typically one produced by
+``tinker_multiagent.py``).
 
 Quick start
 -----------
 1. Install dependencies:
-       pip install textarena transformers torch peft bitsandbytes
+       pip install textarena openai
 
-2. Set the model in .env (or export in your shell):
-       HF_MODEL=Qwen/Qwen3-0.6B          # HF Hub name  (downloaded on first run)
-       # -- OR --
-       HF_MODEL=/checkpoints/my-grpo-run/checkpoint-500   # local TRL checkpoint
+2. Set the Tinker config in .env (or export in your shell):
+       TINKER_API_KEY=<your-key>
+       TINKER_MODEL=tinker://UUID:train:0/sampler_weights/000080
 
-   Optional PEFT/LoRA adapter produced by TRL:
-       ADAPTER_PATH=/checkpoints/my-lora-adapter
-
-   Optional quantisation to reduce VRAM (pick one):
-       LOAD_IN_4BIT=1    # QLoRA  (takes priority)
-       LOAD_IN_8BIT=1    # 8-bit bitsandbytes
+   The TINKER_MODEL value is logged by tinker_multiagent.py at every
+   checkpoint — pick one from results/tinker_avalon/<run>/checkpoints.jsonl.
 
 3. Run:
-       python avalon_play.py
+       python avalon_play_tinker.py
 """
 
 import os
@@ -64,42 +60,46 @@ _load_env_file(_REPO_ROOT / ".env")
 
 
 # ---------------------------------------------------------------------------
-# Resolve model settings from environment
+# Resolve Tinker settings from environment
 # ---------------------------------------------------------------------------
 
-model_name_or_path = os.getenv("HF_MODEL")
-if not model_name_or_path:
+if not os.getenv("TINKER_API_KEY"):
     raise SystemExit(
-        "HF_MODEL is not set.\n"
-        "Set it to a HuggingFace Hub name or local checkpoint path, e.g.:\n"
-        "  HF_MODEL=Qwen/Qwen3-0.6B\n"
-        "  HF_MODEL=/checkpoints/my-grpo-run/checkpoint-500\n"
-        "Add it to .env or export it in your shell."
+        "TINKER_API_KEY is not set.\n"
+        "Get a key at https://tinker-docs.thinkingmachines.ai/tinker/quickstart/\n"
+        "Add TINKER_API_KEY=... to .env or export it in your shell."
     )
 
-adapter_path  = os.getenv("ADAPTER_PATH") or None   # optional PEFT/LoRA adapter
-load_in_4bit  = os.getenv("LOAD_IN_4BIT",  "0").strip() not in ("0", "", "false", "False")
-load_in_8bit  = os.getenv("LOAD_IN_8BIT",  "0").strip() not in ("0", "", "false", "False")
+tinker_model_path = os.getenv("TINKER_MODEL")
+if not tinker_model_path:
+    raise SystemExit(
+        "TINKER_MODEL is not set.\n"
+        "Set it to a Tinker sampler weight path, e.g.:\n"
+        "  TINKER_MODEL=tinker://UUID:train:0/sampler_weights/000080\n"
+        "Paths are logged by tinker_multiagent.py in checkpoints.jsonl."
+    )
 
 # ---------------------------------------------------------------------------
 # Build agents
 # ---------------------------------------------------------------------------
-
-# All five players share the same loaded model weights (share_llm_backend=True
-# avoids loading the checkpoint into GPU memory five separate times).
+#
+# All five players share the same Tinker checkpoint.  Unlike DeepRole_LLM,
+# there's no local-weight sharing flag here — Tinker hosts the model and
+# every call goes over the network, so a per-agent OpenAI client is
+# sufficient (and is what TinkerDistilAgent's internal _TinkerSamplerBackend
+# already provides; see textarena/agents/basic_agents.py).
+#
 # skip_llm_for_mechanical=True means the LLM is only called on discussion
-# turns; DeepRole handles vote/propose/mission mechanically, saving inference.
+# turns; DeepRole handles vote/propose/mission mechanically, saving inference
+# tokens (and Tinker API quota).
+
 _agent_kwargs = dict(
-    model_name_or_path     = model_name_or_path,
-    adapter_path           = adapter_path,
-    load_in_4bit           = load_in_4bit,
-    load_in_8bit           = load_in_8bit,
-    fast_deeprole          = True,
-    share_llm_backend      = True,
-    skip_llm_for_mechanical= True,
+    tinker_model_path        = tinker_model_path,
+    fast_deeprole            = True,
+    skip_llm_for_mechanical  = True,
 )
 
-agents = {i: ta.agents.DeepRole_LLM(**_agent_kwargs) for i in range(5)}
+agents = {i: ta.agents.TinkerDistilAgent(**_agent_kwargs) for i in range(5)}
 
 # ---------------------------------------------------------------------------
 # Environment

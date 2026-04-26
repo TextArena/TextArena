@@ -48,6 +48,7 @@ __all__ = [
     "HumanAgent", "OpenRouterAgent", "GeminiAgent", "OpenAIAgent", "HFLocalAgent", "CerebrasAgent",
     "AWSBedrockAgent", "AnthropicAgent", "GroqAgent", "OllamaAgent", "LlamaCppAgent",
     "DeepRoleAgent", "DeepRoleLLMAgent", "DeepRole_LLM",
+    "TinkerDistilAgent",
 ]
 
 STANDARD_GAME_PROMPT = "You are a competitive game player. Make sure you read the game instructions carefully, and always follow the required format."
@@ -812,3 +813,196 @@ class DeepRoleLLMAgent(Agent):
 
 # Alias so callers can use either name
 DeepRole_LLM = DeepRoleLLMAgent
+
+
+# ===========================================================================
+# TinkerDistilAgent — Avalon agent backed by a Tinker-hosted LoRA checkpoint
+# ===========================================================================
+#
+# Subclass of DeepRoleLLMAgent that swaps the local-HF _TRLLLMBackend for a
+# _TinkerSamplerBackend (OpenAI-compatible client pointing at Tinker's hosted
+# sampling endpoint).  Inherits everything else unchanged: DeepRole CFR
+# integrator, the Merlin-guess handler, and the prompt builders from
+# deeprole_llm.  This guarantees the deployment distribution matches the
+# distribution the model was trained on by tinker_multiagent.py.
+#
+# Tinker docs:
+#   https://tinker-docs.thinkingmachines.ai/tinker/compatible-apis/openai/
+
+_TINKER_BASE_URL = "https://tinker.thinkingmachines.dev/services/tinker-prod/oai/api/v1"
+
+
+def _td_extract_logprobs(choice: Any) -> List[TokenLogprob]:
+    """Convert OpenAI-shaped ``choice.logprobs.content`` into TokenLogprob list."""
+    out: List[TokenLogprob] = []
+    try:
+        content = choice.logprobs.content   # may be None
+        if not content:
+            return out
+        for tok in content:
+            tops: List[Tuple[str, float]] = []
+            if getattr(tok, "top_logprobs", None):
+                tops = [(t.token, float(t.logprob)) for t in tok.top_logprobs]
+            out.append(TokenLogprob(
+                token        = tok.token,
+                logprob      = float(tok.logprob),
+                top_logprobs = tops,
+            ))
+    except Exception:
+        # OpenAI client objects can vary slightly between versions; missing
+        # logprobs is non-fatal — just lose the visualisation signal.
+        return out
+    return out
+
+
+class _TinkerSamplerBackend:
+    """
+    Inference-only backend for Tinker-hosted models.  Mirrors
+    ``call(system, user) -> LLMResult`` so it drops in transparently for
+    DeepRoleLLMAgent's call sites (including the Guess-Merlin retry loop).
+
+    The ``model`` argument must be a Tinker sampler weight path of the form
+    ``tinker://UUID:train:0/sampler_weights/NNNNNN``, produced by
+    ``training_client.save_weights_for_sampler_async(name=...)`` during
+    tinker_multiagent.py training.
+    """
+
+    def __init__(
+        self,
+        model: str,
+        max_new_tokens: int = 128,
+        temperature: float  = 0.7,
+        top_logprobs: int   = 5,
+    ):
+        try:
+            from openai import OpenAI
+        except ImportError:
+            raise ImportError(
+                "openai package required for _TinkerSamplerBackend.\n"
+                "Install: pip install openai"
+            )
+
+        api_key = os.getenv("TINKER_API_KEY")
+        if not api_key:
+            raise ValueError(
+                "TINKER_API_KEY not set.\n"
+                "Get a key at https://tinker-docs.thinkingmachines.ai/tinker/quickstart/"
+            )
+
+        self.client         = OpenAI(base_url=_TINKER_BASE_URL, api_key=api_key)
+        self.model          = model
+        self.max_new_tokens = max_new_tokens
+        self.temperature    = temperature
+        self.top_logprobs   = top_logprobs
+
+    def call(self, system: str, user: str) -> LLMResult:
+        """One blocking sampling call.  Returns text + per-token logprobs."""
+        resp = self.client.chat.completions.create(
+            model        = self.model,
+            messages     = [
+                {"role": "system", "content": system},
+                {"role": "user",   "content": user},
+            ],
+            max_tokens   = self.max_new_tokens,
+            temperature  = self.temperature,
+            logprobs     = True,
+            top_logprobs = self.top_logprobs,
+        )
+        choice = resp.choices[0]
+        text   = (choice.message.content or "").strip()
+        return LLMResult(text=text, logprobs=_td_extract_logprobs(choice))
+
+
+class TinkerDistilAgent(DeepRoleLLMAgent):
+    """
+    Avalon (5-player) agent using a Tinker-hosted LoRA checkpoint at
+    inference time.  Identical behaviour to ``DeepRoleLLMAgent`` except the
+    LLM backend is a Tinker sampler instead of a local HF model.
+
+    Parameters
+    ----------
+    tinker_model_path : str
+        Tinker sampler weight path produced by tinker_multiagent.py training,
+        e.g. ``"tinker://UUID:train:0/sampler_weights/000080"``.
+    max_new_tokens, temperature, top_logprobs
+        LLM generation params (forwarded to Tinker's chat-completions call).
+    nn_folder, binary, no_zero, iterations, wait_iterations, fast_deeprole
+        Forwarded to the DeepRole CFR integrator (same semantics as the
+        parent class).
+    skip_llm_for_mechanical, llm_retries, llm_retry_delay, verbose
+        Same semantics as ``DeepRoleLLMAgent``.
+
+    Notes
+    -----
+    No ``model_name_or_path`` / ``adapter_path`` / ``device`` / ``load_in_4bit``
+    / ``load_in_8bit`` / ``share_llm_backend`` parameters — those are local-HF
+    concepts.  Tinker manages weights server-side.
+
+    Reads ``TINKER_API_KEY`` from the environment.
+    """
+
+    def __init__(
+        self,
+        tinker_model_path: str,
+        max_new_tokens: int  = 128,
+        temperature: float   = 0.7,
+        top_logprobs: int    = 5,
+        verbose: bool        = False,
+        nn_folder: str       = "deeprole_zeroing_winprobs",
+        binary: str          = "deeprole",
+        no_zero: bool        = False,
+        iterations: Optional[int]    = None,
+        wait_iterations: Optional[int] = None,
+        llm_retries: int     = 2,
+        llm_retry_delay: float = 5.0,
+        skip_llm_for_mechanical: bool = False,
+        fast_deeprole: bool  = True,
+    ):
+        if not tinker_model_path:
+            raise ValueError(
+                "tinker_model_path is required, e.g. "
+                "'tinker://UUID:train:0/sampler_weights/000080'."
+            )
+
+        # Initialise the parent with placeholder local-model settings so its
+        # constructor does NOT actually load a HF model.  We override
+        # ``_ensure_llm_backend`` below so the placeholder is never used.
+        super().__init__(
+            model_name_or_path      = "PLACEHOLDER_NEVER_LOADED",
+            adapter_path            = None,
+            device                  = "cpu",
+            load_in_8bit            = False,
+            load_in_4bit            = False,
+            max_new_tokens          = max_new_tokens,
+            temperature             = temperature,
+            top_logprobs            = top_logprobs,
+            verbose                 = verbose,
+            nn_folder               = nn_folder,
+            binary                  = binary,
+            no_zero                 = no_zero,
+            iterations              = iterations,
+            wait_iterations         = wait_iterations,
+            llm_retries             = llm_retries,
+            llm_retry_delay         = llm_retry_delay,
+            skip_llm_for_mechanical = skip_llm_for_mechanical,
+            fast_deeprole           = fast_deeprole,
+            share_llm_backend       = False,   # Tinker has its own caching
+        )
+
+        self._tinker_model_path = tinker_model_path
+        self._tinker_kwargs = dict(
+            model          = tinker_model_path,
+            max_new_tokens = max_new_tokens,
+            temperature    = temperature,
+            top_logprobs   = top_logprobs,
+        )
+        self._llm = None
+
+    def _ensure_llm_backend(self) -> Any:
+        """Override — return a cached ``_TinkerSamplerBackend`` instance."""
+        if self._llm is None:
+            self._llm = _TinkerSamplerBackend(**self._tinker_kwargs)
+        return self._llm
+
+    def __repr__(self) -> str:
+        return f"TinkerDistilAgent(model='{self._tinker_model_path}')"
