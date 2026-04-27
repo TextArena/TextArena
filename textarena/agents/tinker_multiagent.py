@@ -742,11 +742,10 @@ async def rl_train(cfg: TrainerConfig) -> None:
         # logprobs in-flight and avoid this re-tokenisation.  See the
         # cookbook's `rl_basic.py` for the production pattern.
         # ------------------------------------------------------------------
-        import numpy as np
         import torch
         import tinker
         from tinker import types
-        from tinker.types import TensorData
+        from tinker import TensorData
 
         datums: List[Any] = []
         tokenizer = renderer.tokenizer
@@ -770,39 +769,51 @@ async def rl_train(cfg: TrainerConfig) -> None:
             if not completion_ids or not prompt_ids:
                 continue
 
-            # Standard next-token-prediction layout (matches cookbook):
-            #   tokens   = prompt + completion
-            #   input    = tokens[:-1]
-            #   target   = tokens[1:]
-            #   mask     = [0]*len(prompt) + [1]*len(completion); then [1:]
-            all_tokens   = prompt_ids + completion_ids
-            input_ids    = all_tokens[:-1]
-            target_ids   = all_tokens[1:]
-            mask_full    = ([0.0] * len(prompt_ids)) + ([1.0] * len(completion_ids))
-            mask_arr     = mask_full[1:]
-            n            = len(target_ids)
+            # Standard next-token-prediction layout (matches the GSM8K
+            # tutorial in the Tinker docs):
+            #   model_input = full sequence of prompt+completion tokens
+            #   target_tokens = same sequence shifted left by 1
+            # The model is asked to predict each next token; we zero out
+            # advantages on prompt positions so only completion tokens
+            # contribute to the gradient.
+            all_token_ids   = prompt_ids + completion_ids
+            n_prompt        = len(prompt_ids)
+            n_complete      = len(completion_ids)
 
-            # Tinker accepts numpy or torch.  We use torch to mirror the
-            # cookbook's `data_processing.py` reference path exactly — the
-            # server's array-record decoder is known-good against this form.
-            tt = torch.tensor(target_ids, dtype=torch.int64)
-            mk = torch.tensor(mask_arr,   dtype=torch.float32)
-            lp = torch.zeros(n,           dtype=torch.float32)
-            ad = torch.tensor(
-                [float(adv) if m > 0 else 0.0 for m in mask_arr],
-                dtype=torch.float32,
+            # input  = all[:-1]                length = n_prompt + n_complete - 1
+            # target = all[ 1:]                length = same
+            input_token_ids = all_token_ids[:-1]
+            target_ids      = all_token_ids[1:]
+            n               = len(target_ids)
+
+            # Advantage broadcast: 0 over (shifted) prompt positions, adv
+            # over completion positions.  After the shift, prompt positions
+            # are indices 0 .. n_prompt-2, completion positions are
+            # n_prompt-1 .. end.
+            adv_arr = (
+                [0.0] * max(0, n_prompt - 1)
+                + [float(adv)] * (n - max(0, n_prompt - 1))
+            )
+            # Sampling-time logprobs zeros (vanilla policy gradient on
+            # first update; importance ratio = 1).  Production GRPO needs
+            # real rollout logprobs from TinkerTokenCompleter.
+            lp_arr = [0.0] * n
+
+            assert len(target_ids) == len(adv_arr) == len(lp_arr) == n, (
+                f"length mismatch: target={len(target_ids)} adv={len(adv_arr)} "
+                f"lp={len(lp_arr)} n={n}"
             )
 
-            datums.append(types.Datum(
-                model_input    = types.ModelInput.from_ints(tokens=input_ids),
+            # Match official Tinker docs example exactly (losses.mdx):
+            #   loss_fn_inputs has three keys for importance_sampling/ppo:
+            #   target_tokens, logprobs, advantages.  No "mask" key —
+            #   zeroing advantages on prompt positions is sufficient.
+            datums.append(tinker.Datum(
+                model_input    = types.ModelInput.from_ints(tokens=input_token_ids),
                 loss_fn_inputs = {
-                    # Key names match tinker_cookbook/rl/data_processing.py:
-                    # importance_sampling / ppo / cispo expect
-                    # target_tokens, logprobs, advantages, mask.
-                    "target_tokens": TensorData.from_torch(tt),
-                    "logprobs":      TensorData.from_torch(lp),
-                    "advantages":    TensorData.from_torch(ad),
-                    "mask":          TensorData.from_torch(mk),
+                    "target_tokens": TensorData.from_torch(torch.tensor(target_ids, dtype=torch.int64)),
+                    "logprobs":      TensorData.from_torch(torch.tensor(lp_arr,    dtype=torch.float32)),
+                    "advantages":    TensorData.from_torch(torch.tensor(adv_arr,   dtype=torch.float32)),
                 },
             ))
 
@@ -810,14 +821,35 @@ async def rl_train(cfg: TrainerConfig) -> None:
             log.warning("  no datums produced this step (all trajectories empty?)")
             continue
 
+        # Debug: log shape/dtype of what we're about to send.  If the server
+        # rejects this batch we want to know exactly what the request looked
+        # like, since the server's "Could not convert loss function inputs to
+        # array record" message is generic.
+        d0 = datums[0]
+        log.info(f"[debug] sending {len(datums)} datums; first datum:")
+        log.info(f"[debug]   model_input.length = {d0.model_input.length}")
+        for k, v in d0.loss_fn_inputs.items():
+            try:
+                t = v.to_torch() if hasattr(v, "to_torch") else None
+                log.info(
+                    f"[debug]   loss_fn_inputs[{k!r}]: "
+                    f"type={type(v).__name__} "
+                    f"shape={tuple(t.shape) if t is not None else None} "
+                    f"dtype={t.dtype if t is not None else None}"
+                )
+            except Exception as e:
+                log.info(f"[debug]   loss_fn_inputs[{k!r}]: introspection failed: {e}")
+
         # ------------------------------------------------------------------
-        # Policy update — Tinker SDK signatures:
-        #   forward_backward_async(data, loss_fn, loss_fn_config=None)
-        #   optim_step_async(adam_params)  where adam_params is tinker.AdamParams
+        # Policy update — exact form from Tinker docs (losses.mdx):
+        #   await training_client.forward_backward_async([datum], loss_fn="importance_sampling")
+        #   await training_client.optim_step_async(tinker.AdamParams(...))
+        # AGENTS.md guidance: submit forward_backward_async and
+        # optim_step_async back-to-back, then await both.
         # ------------------------------------------------------------------
         fwdbwd_future = await training_client.forward_backward_async(
             datums,
-            "importance_sampling",
+            loss_fn = "importance_sampling",
         )
         optim_future = await training_client.optim_step_async(
             tinker.AdamParams(
@@ -847,7 +879,10 @@ async def rl_train(cfg: TrainerConfig) -> None:
         # Periodic checkpoint.
         if (step + 1) % cfg.save_every == 0 or (step + 1) == cfg.steps:
             ckpt_name = f"step_{step+1:05d}"
-            save_resp = await training_client.save_weights_for_sampler_async(name=ckpt_name)
+            # save_weights_for_sampler_async returns an AwaitableConcurrentFuture;
+            # awaiting it yields the actual response object with `.path`.
+            save_future = await training_client.save_weights_for_sampler_async(name=ckpt_name)
+            save_resp   = await save_future
             sampler_path = getattr(save_resp, "path", "") or str(save_resp)
             (out_dir / "checkpoints.jsonl").open("a").write(
                 json.dumps({
