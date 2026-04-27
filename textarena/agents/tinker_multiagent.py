@@ -441,7 +441,25 @@ class NPlayerCoordinator:
             hist.append({"role": "assistant", "content": action_text})
             trajectories[active].actions.append(action_text)
 
-            next_pid, next_obs, done, terminal_rewards = await self.env.step(action_text)
+            try:
+                next_pid, next_obs, done, terminal_rewards = await self.env.step(action_text)
+            except Exception as exc:
+                # Bad LLM output (unparseable action, wrong tag, etc).
+                # Treat as an immediate game termination with zero reward.
+                # The textarena env raises various ValueError / IndexError
+                # subclasses on malformed actions; rather than crashing the
+                # whole training step we log and bail out of this game.
+                log.warning(
+                    f"  env.step crashed on action from P{active}: "
+                    f"{type(exc).__name__}: {exc} | action={action_text!r}"
+                )
+                roles = self.env.roles()
+                for pid, traj in trajectories.items():
+                    traj.role       = roles.get(pid, "")
+                    traj.env_reward = 0.0
+                    traj.reward     = 0.0
+                    traj.messages   = list(self._histories[pid])
+                break
 
             if done:
                 roles = self.env.roles()
@@ -691,9 +709,22 @@ async def rl_train(cfg: TrainerConfig) -> None:
             )
             for e in envs
         ]
-        all_trajs: List[List[PlayerTrajectory]] = await asyncio.gather(
-            *(c.rollout() for c in coordinators)
+        # Use return_exceptions=True so one bad game (e.g. an LLM emitting
+        # gibberish that the env's parser can't handle) doesn't kill the
+        # whole training step.  Failed rollouts are logged and skipped.
+        gather_results = await asyncio.gather(
+            *(c.rollout() for c in coordinators),
+            return_exceptions=True,
         )
+        all_trajs: List[List[PlayerTrajectory]] = []
+        for g, res in enumerate(gather_results):
+            if isinstance(res, BaseException):
+                log.warning(f"  rollout {g} failed: {type(res).__name__}: {res}")
+                continue
+            all_trajs.append(res)
+        if not all_trajs:
+            log.warning("  all rollouts failed this step — skipping update")
+            continue
 
         # Flatten: 5G trajectories total.
         flat: List[PlayerTrajectory] = [t for g in all_trajs for t in g]
