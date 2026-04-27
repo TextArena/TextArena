@@ -743,6 +743,7 @@ async def rl_train(cfg: TrainerConfig) -> None:
         # cookbook's `rl_basic.py` for the production pattern.
         # ------------------------------------------------------------------
         import numpy as np
+        import torch
         import tinker
         from tinker import types
         from tinker.types import TensorData
@@ -769,46 +770,39 @@ async def rl_train(cfg: TrainerConfig) -> None:
             if not completion_ids or not prompt_ids:
                 continue
 
-            # Tinker expects:
-            #   model_input length == target_tokens length == weights length
-            # The standard SFT/RL pattern is to feed all tokens shifted by 1:
+            # Standard next-token-prediction layout (matches cookbook):
             #   tokens   = prompt + completion
             #   input    = tokens[:-1]
             #   target   = tokens[1:]
-            #   weights  = [0]*len(prompt) + [1]*len(completion); weights[1:]
-            # This way the model is asked to predict the *next* token at every
-            # position; the weight mask zeros out positions inside the prompt
-            # so only completion tokens contribute to the loss.
+            #   mask     = [0]*len(prompt) + [1]*len(completion); then [1:]
             all_tokens   = prompt_ids + completion_ids
             input_ids    = all_tokens[:-1]
             target_ids   = all_tokens[1:]
-            mask         = ([0.0] * len(prompt_ids)) + ([1.0] * len(completion_ids))
-            mask         = mask[1:]                       # align with target shift
+            mask_full    = ([0.0] * len(prompt_ids)) + ([1.0] * len(completion_ids))
+            mask_arr     = mask_full[1:]
             n            = len(target_ids)
 
-            tt = np.asarray(target_ids, dtype=np.int64)
-            mk = np.asarray(mask,       dtype=np.float32)
-            # Sampling-time logprobs (zeros for now — see comment above).
-            lp = np.zeros(n,                       dtype=np.float32)
-            # Advantage broadcast across all completion positions; zero on
-            # prompt positions so they don't contribute (mask multiplies in
-            # the loss).
-            ad = np.asarray(
-                [float(adv) if m > 0 else 0.0 for m in mask],
-                dtype=np.float32,
+            # Tinker accepts numpy or torch.  We use torch to mirror the
+            # cookbook's `data_processing.py` reference path exactly — the
+            # server's array-record decoder is known-good against this form.
+            tt = torch.tensor(target_ids, dtype=torch.int64)
+            mk = torch.tensor(mask_arr,   dtype=torch.float32)
+            lp = torch.zeros(n,           dtype=torch.float32)
+            ad = torch.tensor(
+                [float(adv) if m > 0 else 0.0 for m in mask_arr],
+                dtype=torch.float32,
             )
 
             datums.append(types.Datum(
                 model_input    = types.ModelInput.from_ints(tokens=input_ids),
                 loss_fn_inputs = {
                     # Key names match tinker_cookbook/rl/data_processing.py:
-                    # importance_sampling / ppo / cispo expect target_tokens,
-                    # logprobs, advantages, and `mask` (NOT `weights` — that's
-                    # the SFT key).
-                    "target_tokens": TensorData.from_numpy(tt),
-                    "logprobs":      TensorData.from_numpy(lp),
-                    "advantages":    TensorData.from_numpy(ad),
-                    "mask":          TensorData.from_numpy(mk),
+                    # importance_sampling / ppo / cispo expect
+                    # target_tokens, logprobs, advantages, mask.
+                    "target_tokens": TensorData.from_torch(tt),
+                    "logprobs":      TensorData.from_torch(lp),
+                    "advantages":    TensorData.from_torch(ad),
+                    "mask":          TensorData.from_torch(mk),
                 },
             ))
 
