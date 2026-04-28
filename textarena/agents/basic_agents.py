@@ -906,7 +906,6 @@ class _TinkerSamplerBackend:
             max_tokens   = self.max_new_tokens,
             temperature  = self.temperature,
             logprobs     = True,
-            top_logprobs = self.top_logprobs,
         )
         choice = resp.choices[0]
         text   = (choice.message.content or "").strip()
