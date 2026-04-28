@@ -3,23 +3,26 @@
 
 Agent modes
 -----------
-  --agent deeprole        (default) Five plain DeepRoleAgent players — no GPU required.
-  --agent deeprole-llm    Five DeepRoleLLMAgent players backed by a local TRL/HF model.
-                          Requires --hf-model (Hub name or local checkpoint path).
+  --agent deeprole         (default) Five plain DeepRoleAgent players — no GPU required.
+  --agent deeprole-llm     Five DeepRoleLLMAgent players backed by a local TRL/HF model.
+                           Requires --hf-model (Hub name or local checkpoint path).
+  --agent tinker-distil    Five TinkerDistilAgent players backed by a Tinker-hosted LoRA
+                           checkpoint (typically one produced by tinker_multiagent.py).
+                           Requires --tinker-model (or TINKER_MODEL in .env).
 
-Example — plain DeepRole, 20 games, 4 parallel workers:
+Examples
+--------
+Plain DeepRole, 20 games, 4 parallel workers:
     python multi_play.py --games 20 --workers 4
 
-Example — DeepRole-LLM with a TRL checkpoint:
+DeepRole-LLM with a local TRL checkpoint:
     python multi_play.py --games 8 --agent deeprole-llm \\
         --hf-model /checkpoints/avalon-grpo/checkpoint-500 \\
         --load-in-4bit --skip-llm-mechanical
 
-Example — DeepRole-LLM with a LoRA adapter:
-    python multi_play.py --games 4 --agent deeprole-llm \\
-        --hf-model meta-llama/Llama-3.2-1B \\
-        --adapter-path /checkpoints/avalon-lora \\
-        --device cuda
+Tinker-distil evaluation against a trained checkpoint:
+    python multi_play.py --games 20 --workers 4 --agent tinker-distil \\
+        --tinker-model tinker://UUID:train:0/sampler_weights/step_00020
 """
 
 from __future__ import annotations
@@ -40,7 +43,7 @@ _AVALON_SPECIAL_ROLE_NAMES = frozenset(
     {"Servant", "Merlin", "Percival", "Minion", "Morgana", "Mordred", "Oberon"}
 )
 
-_AGENT_CHOICES = ("deeprole", "deeprole-llm")
+_AGENT_CHOICES = ("deeprole", "deeprole-llm", "tinker-distil")
 
 
 def _repo_root() -> Path:
@@ -88,7 +91,7 @@ def _load_env_file(path: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Log / game-state helpers (unchanged)
+# Log / game-state helpers
 # ---------------------------------------------------------------------------
 
 def extract_game_states_from_log_messages(logs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -222,6 +225,28 @@ def aggregate_summary_stats(runs: List[Dict[str, Any]], num_players: int = 5) ->
             by_role[role] = {"games": g, "wins": w, "win_rate": (w / g if g else 0.0)}
         agent_win_rate_by_role[str(pid)] = by_role
 
+    # Also compute team-level stats — most useful for Tinker eval where you want
+    # to know "did Good or Evil win more often" rather than per-seat win rates.
+    team_games = {"good": 0, "evil": 0}
+    team_wins  = {"good": 0, "evil": 0}
+    for run in runs:
+        rw = run.get("rewards") or {}
+        gi = run.get("game_info") or {}
+        for pid in range(num_players):
+            val = _reward_value(rw, pid)
+            pinfo = gi.get(str(pid)) if gi.get(str(pid)) is not None else gi.get(pid)
+            role  = pinfo.get("role") if isinstance(pinfo, dict) else None
+            if not isinstance(role, str):
+                continue
+            if role in _AVALON_GOOD_ROLES:
+                team_games["good"] += 1
+                if val is not None and val > 0:
+                    team_wins["good"] += 1
+            elif role in _AVALON_EVIL_ROLES:
+                team_games["evil"] += 1
+                if val is not None and val > 0:
+                    team_wins["evil"] += 1
+
     return {
         "agent_wins": {str(pid): wins[pid] for pid in range(num_players)},
         "agent_win_rates": {str(pid): (wins[pid] / n if n else 0.0) for pid in range(num_players)},
@@ -237,6 +262,14 @@ def aggregate_summary_stats(runs: List[Dict[str, Any]], num_players: int = 5) ->
             },
         },
         "agent_win_rate_by_role": agent_win_rate_by_role,
+        "team_summary": {
+            "good_role_seats": team_games["good"],
+            "good_role_wins":  team_wins["good"],
+            "good_win_rate":   (team_wins["good"] / team_games["good"]) if team_games["good"] else 0.0,
+            "evil_role_seats": team_games["evil"],
+            "evil_role_wins":  team_wins["evil"],
+            "evil_win_rate":   (team_wins["evil"] / team_games["evil"]) if team_games["evil"] else 0.0,
+        },
         "voting_summary": {
             "total_vote_rounds": total_vote_rounds,
             "proposals_passed": proposals_passed,
@@ -255,8 +288,12 @@ def _build_agents(payload: Dict[str, Any], ta: Any) -> Dict[int, Any]:
 
     For ``deeprole-llm``, all five share one loaded model instance via
     ``share_llm_backend=True`` (avoids loading weights 5× per process).
+
+    For ``tinker-distil``, each agent has its own OpenAI client pointed at
+    the same Tinker checkpoint URL — no local weight sharing is needed since
+    Tinker hosts the model server-side.
     """
-    agent_type = payload.get("agent", "deeprole")
+    agent_type  = payload.get("agent", "deeprole")
     num_players = payload.get("num_players", 5)
 
     if agent_type == "deeprole":
@@ -278,10 +315,26 @@ def _build_agents(payload: Dict[str, Any], ta: Any) -> Dict[int, Any]:
             max_new_tokens          = int(payload.get("max_new_tokens", 128)),
             temperature             = float(payload.get("temperature", 0.7)),
             fast_deeprole           = True,
-            share_llm_backend       = True,   # one model instance per worker process
+            share_llm_backend       = True,
             skip_llm_for_mechanical = bool(payload.get("skip_llm_for_mechanical", True)),
         )
         return {i: ta.agents.DeepRole_LLM(**llm_kwargs) for i in range(num_players)}
+
+    if agent_type == "tinker-distil":
+        tinker_model = payload.get("tinker_model")
+        if not tinker_model:
+            raise ValueError(
+                "agent='tinker-distil' requires tinker_model to be set. "
+                "Pass --tinker-model on the command line or set TINKER_MODEL in .env / environment."
+            )
+        td_kwargs: Dict[str, Any] = dict(
+            tinker_model_path       = tinker_model,
+            max_new_tokens          = int(payload.get("max_new_tokens", 128)),
+            temperature             = float(payload.get("temperature", 0.7)),
+            fast_deeprole           = True,
+            skip_llm_for_mechanical = bool(payload.get("skip_llm_for_mechanical", True)),
+        )
+        return {i: ta.agents.TinkerDistilAgent(**td_kwargs) for i in range(num_players)}
 
     raise ValueError(f"Unknown agent type {agent_type!r}. Choose from: {_AGENT_CHOICES}")
 
@@ -295,6 +348,12 @@ def _run_one_game(payload: Dict[str, Any]) -> Dict[str, Any]:
     repo_root = Path(payload["repo_root"])
     if str(repo_root) not in sys.path:
         sys.path.insert(0, str(repo_root))
+
+    # Worker processes don't inherit the parent's process-level os.environ
+    # changes when started by ProcessPoolExecutor with the spawn start method.
+    # Re-load .env so TINKER_API_KEY (and friends) are available in the
+    # worker's environment for tinker-distil's _TinkerSamplerBackend.
+    _load_env_file(repo_root / ".env")
 
     import textarena as ta  # noqa: WPS433
 
@@ -388,8 +447,10 @@ def main() -> None:
     parser.add_argument(
         "--agent", type=str, default="deeprole", choices=_AGENT_CHOICES,
         help=(
-            "'deeprole' — plain DeepRoleAgent, no GPU needed. "
-            "'deeprole-llm' — DeepRoleLLMAgent backed by a local TRL/HF model (requires --hf-model)."
+            "'deeprole'       — plain DeepRoleAgent, no GPU needed.\n"
+            "'deeprole-llm'   — DeepRoleLLMAgent backed by a local TRL/HF model (--hf-model).\n"
+            "'tinker-distil'  — TinkerDistilAgent backed by a Tinker-hosted checkpoint "
+            "(--tinker-model)."
         ),
     )
 
@@ -415,39 +476,70 @@ def main() -> None:
     )
     llm_group.add_argument("--load-in-4bit", action="store_true", help="QLoRA 4-bit quantisation (bitsandbytes).")
     llm_group.add_argument("--load-in-8bit", action="store_true", help="8-bit quantisation (bitsandbytes).")
-    llm_group.add_argument("--max-new-tokens", type=int, default=128, help="Max tokens to generate per LLM call.")
-    llm_group.add_argument("--temperature", type=float, default=0.7, help="LLM sampling temperature.")
-    llm_group.add_argument(
+
+    # --- Tinker-distil options (only used when --agent tinker-distil) ------
+    tinker_group = parser.add_argument_group(
+        "Tinker-distil options",
+        "Only relevant when --agent tinker-distil.  Requires TINKER_API_KEY in environment.",
+    )
+    tinker_group.add_argument(
+        "--tinker-model", type=str, default=None, metavar="PATH",
+        help=(
+            "Tinker sampler weight path, e.g. 'tinker://UUID:train:0/sampler_weights/step_00020'. "
+            "Also read from TINKER_MODEL env var / .env file."
+        ),
+    )
+
+    # --- shared LLM-call options (used by both deeprole-llm and tinker-distil) ---
+    shared_llm = parser.add_argument_group(
+        "Shared LLM options",
+        "Used by both --agent deeprole-llm and --agent tinker-distil.",
+    )
+    shared_llm.add_argument("--max-new-tokens", type=int, default=128, help="Max tokens to generate per LLM call.")
+    shared_llm.add_argument("--temperature", type=float, default=0.7, help="LLM sampling temperature.")
+    shared_llm.add_argument(
         "--skip-llm-mechanical", action="store_true", default=True,
         help=(
             "Skip the LLM on vote/propose/mission turns (DeepRole handles those); "
-            "call LLM only on discussion phases. Default: True — saves GPU compute."
+            "call LLM only on discussion phases. Default: True."
         ),
     )
-    llm_group.add_argument(
+    shared_llm.add_argument(
         "--no-skip-llm-mechanical", dest="skip_llm_mechanical", action="store_false",
         help="Call the LLM on every turn, including mechanical phases.",
     )
 
     args = parser.parse_args()
 
-    # Validate deeprole-llm requirements early
+    # Load .env early so we can resolve env-var fallbacks below.
+    repo_root = _repo_root()
+    _load_env_file(repo_root / ".env")
+
+    # Validate per-agent requirements.
     if args.agent == "deeprole-llm":
         hf_model = args.hf_model or os.getenv("HF_MODEL")
-        if not hf_model:
-            repo_root_env = _repo_root()
-            _load_env_file(repo_root_env / ".env")
-            hf_model = os.getenv("HF_MODEL")
         if not hf_model:
             parser.error(
                 "--agent deeprole-llm requires --hf-model (or HF_MODEL in .env / environment).\n"
                 "Example: --hf-model Qwen/Qwen3-0.6B"
             )
-        args.hf_model = hf_model   # normalise so payload always has it
+        args.hf_model = hf_model
+
+    if args.agent == "tinker-distil":
+        tinker_model = args.tinker_model or os.getenv("TINKER_MODEL")
+        if not tinker_model:
+            parser.error(
+                "--agent tinker-distil requires --tinker-model "
+                "(or TINKER_MODEL in .env / environment).\n"
+                "Example: --tinker-model tinker://UUID:train:0/sampler_weights/step_00020"
+            )
+        if not os.getenv("TINKER_API_KEY"):
+            parser.error(
+                "--agent tinker-distil requires TINKER_API_KEY to be set in .env or environment."
+            )
+        args.tinker_model = tinker_model
 
     special_roles_list = _parse_special_roles_csv(args.special_roles)
-    repo_root = _repo_root()
-    _load_env_file(repo_root / ".env")
 
     games   = max(1, args.games)
     workers = args.workers if args.workers is not None else min(8, games)
@@ -457,7 +549,7 @@ def main() -> None:
     out_dir = out_dir.resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    # Build per-game payloads
+    # Build per-game payloads.
     payloads: List[Dict[str, Any]] = []
     for i in range(games):
         p: Dict[str, Any] = {
@@ -470,7 +562,6 @@ def main() -> None:
             "num_players":  5,
             "agent":        args.agent,
         }
-        # Attach LLM settings (ignored by worker when agent == "deeprole")
         if args.agent == "deeprole-llm":
             p.update(
                 hf_model               = args.hf_model,
@@ -482,9 +573,16 @@ def main() -> None:
                 temperature            = args.temperature,
                 skip_llm_for_mechanical= args.skip_llm_mechanical,
             )
+        elif args.agent == "tinker-distil":
+            p.update(
+                tinker_model           = args.tinker_model,
+                max_new_tokens         = args.max_new_tokens,
+                temperature            = args.temperature,
+                skip_llm_for_mechanical= args.skip_llm_mechanical,
+            )
         payloads.append(p)
 
-    # Run games
+    # Run games.
     summary: List[Dict[str, Any]] = []
     with ProcessPoolExecutor(max_workers=workers) as ex:
         futures = [ex.submit(_run_one_game, p) for p in payloads]
@@ -493,13 +591,15 @@ def main() -> None:
 
     summary.sort(key=lambda x: x["run_index"])
 
-    # Write manifest
+    # Write manifest.
     manifest_path = out_dir / "summary.json"
-    agent_desc = (
-        f"DeepRole_LLM x5 (model={args.hf_model})"
-        if args.agent == "deeprole-llm"
-        else "DeepRoleAgent x5"
-    )
+    if args.agent == "deeprole-llm":
+        agent_desc = f"DeepRole_LLM x5 (model={args.hf_model})"
+    elif args.agent == "tinker-distil":
+        agent_desc = f"TinkerDistilAgent x5 (model={args.tinker_model})"
+    else:
+        agent_desc = "DeepRoleAgent x5"
+
     manifest: Dict[str, Any] = {
         "created_utc":  ts,
         "repo_root":    str(repo_root),
@@ -522,13 +622,25 @@ def main() -> None:
             "temperature":            args.temperature,
             "skip_llm_for_mechanical": args.skip_llm_mechanical,
         }
+    elif args.agent == "tinker-distil":
+        manifest["tinker_config"] = {
+            "tinker_model":           args.tinker_model,
+            "max_new_tokens":         args.max_new_tokens,
+            "temperature":            args.temperature,
+            "skip_llm_for_mechanical": args.skip_llm_mechanical,
+        }
     manifest.update(aggregate_summary_stats(summary))
     manifest["runs"] = summary
     manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
 
+    # Print a concise headline so the user knows immediately how the run went.
+    team = manifest.get("team_summary", {})
     print(
         f"Wrote {games} game JSON files under:\n  {out_dir / 'game_logs'}\n"
-        f"and summary:\n  {manifest_path}"
+        f"and summary:\n  {manifest_path}\n"
+        f"\n"
+        f"Headline: agent={args.agent}  good_wr={team.get('good_win_rate', 0):.2%}  "
+        f"evil_wr={team.get('evil_win_rate', 0):.2%}"
     )
 
 
