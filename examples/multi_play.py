@@ -43,7 +43,7 @@ _AVALON_SPECIAL_ROLE_NAMES = frozenset(
     {"Servant", "Merlin", "Percival", "Minion", "Morgana", "Mordred", "Oberon"}
 )
 
-_AGENT_CHOICES = ("deeprole", "deeprole-llm", "tinker-distil")
+_AGENT_CHOICES = ("deeprole", "deeprole-llm", "tinker-distil", "openrouter")
 
 
 def _parse_seat_agents_csv(raw: Optional[str], num_players: int = 5) -> Optional[List[str]]:
@@ -350,6 +350,25 @@ def _build_one_agent(agent_type: str, payload: Dict[str, Any], ta: Any):
             skip_llm_for_mechanical = bool(payload.get("skip_llm_for_mechanical", True)),
         )
 
+    if agent_type == "openrouter":
+        openrouter_model = payload.get("openrouter_model")
+        if not openrouter_model:
+            raise ValueError(
+                "openrouter seat requires openrouter_model to be set. "
+                "Pass --openrouter-model on the command line or set OPENROUTER_MODEL "
+                "in .env / environment."
+            )
+        # OpenRouterAgent reads OPENROUTER_API_KEY from os.environ on construction.
+        # Note: OpenRouterAgent emits raw observation -> raw response (no DeepRole
+        # CFR layer); the agent doesn't know game-mechanical actions like
+        # <vote>approve</vote>, so it relies entirely on whatever the model
+        # produces.  This is a different paradigm from deeprole-llm /
+        # tinker-distil, where DeepRole handles all mechanical decisions.
+        return ta.agents.OpenRouterAgent(
+            model_name = openrouter_model,
+            verbose    = bool(payload.get("verbose", False)),
+        )
+
     raise ValueError(f"Unknown agent type {agent_type!r}. Choose from: {_AGENT_CHOICES}")
 
 
@@ -552,6 +571,20 @@ def main() -> None:
         ),
     )
 
+    # --- OpenRouter options (only used when --agent openrouter) ------------
+    openrouter_group = parser.add_argument_group(
+        "OpenRouter options",
+        "Only relevant when --agent openrouter.  Requires OPENROUTER_API_KEY in environment.",
+    )
+    openrouter_group.add_argument(
+        "--openrouter-model", type=str, default=None, metavar="MODEL",
+        help=(
+            "OpenRouter model name, e.g. 'openai/gpt-4o-mini' or "
+            "'anthropic/claude-3.5-sonnet'.  Also read from OPENROUTER_MODEL "
+            "env var / .env file."
+        ),
+    )
+
     # --- shared LLM-call options (used by both deeprole-llm and tinker-distil) ---
     shared_llm = parser.add_argument_group(
         "Shared LLM options",
@@ -607,6 +640,20 @@ def main() -> None:
             )
         args.tinker_model = tinker_model
 
+    if "openrouter" in seat_types_present:
+        openrouter_model = args.openrouter_model or os.getenv("OPENROUTER_MODEL")
+        if not openrouter_model:
+            parser.error(
+                "openrouter seat requires --openrouter-model "
+                "(or OPENROUTER_MODEL in .env / environment).\n"
+                "Example: --openrouter-model openai/gpt-4o-mini"
+            )
+        if not os.getenv("OPENROUTER_API_KEY"):
+            parser.error(
+                "openrouter seat requires OPENROUTER_API_KEY to be set in .env or environment."
+            )
+        args.openrouter_model = openrouter_model
+
     special_roles_list = _parse_special_roles_csv(args.special_roles)
 
     games   = max(1, args.games)
@@ -648,6 +695,10 @@ def main() -> None:
             p.update(
                 tinker_model           = args.tinker_model,
             )
+        if "openrouter" in seat_types_present:
+            p.update(
+                openrouter_model       = args.openrouter_model,
+            )
         # Shared LLM-call options apply to any LLM-backed seat.
         if {"deeprole-llm", "tinker-distil"} & seat_types_present:
             p.update(
@@ -676,6 +727,8 @@ def main() -> None:
             agent_desc = f"DeepRole_LLM x5 (model={args.hf_model})"
         elif only == "tinker-distil":
             agent_desc = f"TinkerDistilAgent x5 (model={args.tinker_model})"
+        elif only == "openrouter":
+            agent_desc = f"OpenRouterAgent x5 (model={args.openrouter_model})"
         else:
             agent_desc = "DeepRoleAgent x5"
         legacy_agent_field = only
@@ -716,6 +769,10 @@ def main() -> None:
             "max_new_tokens":         args.max_new_tokens,
             "temperature":            args.temperature,
             "skip_llm_for_mechanical": args.skip_llm_mechanical,
+        }
+    if "openrouter" in seat_types_present:
+        manifest["openrouter_config"] = {
+            "openrouter_model":       args.openrouter_model,
         }
     manifest.update(aggregate_summary_stats(summary))
     manifest["runs"] = summary
