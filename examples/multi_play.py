@@ -46,6 +46,33 @@ _AVALON_SPECIAL_ROLE_NAMES = frozenset(
 _AGENT_CHOICES = ("deeprole", "deeprole-llm", "tinker-distil")
 
 
+def _parse_seat_agents_csv(raw: Optional[str], num_players: int = 5) -> Optional[List[str]]:
+    """
+    Parse ``--seat-agents`` (e.g. ``"deeprole-llm,deeprole-llm,deeprole-llm,deeprole-llm,tinker-distil"``)
+    into a length-``num_players`` list of agent-type strings.  Returns ``None`` if no
+    spec is given, in which case the caller should fall back to the
+    single ``--agent`` value broadcast to every seat.
+    """
+    if not raw:
+        return None
+    s = raw.strip()
+    if not s:
+        return None
+    parts = [p.strip() for p in s.split(",") if p.strip()]
+    if len(parts) != num_players:
+        raise SystemExit(
+            f"--seat-agents must list exactly {num_players} entries (one per seat); "
+            f"got {len(parts)}: {parts}"
+        )
+    unknown = [p for p in parts if p not in _AGENT_CHOICES]
+    if unknown:
+        raise SystemExit(
+            f"--seat-agents contains unknown agent type(s) {unknown}. "
+            f"Valid: {', '.join(_AGENT_CHOICES)}"
+        )
+    return parts
+
+
 def _repo_root() -> Path:
     return Path(__file__).resolve().parent.parent
 
@@ -282,31 +309,20 @@ def aggregate_summary_stats(runs: List[Dict[str, Any]], num_players: int = 5) ->
 # Agent factory
 # ---------------------------------------------------------------------------
 
-def _build_agents(payload: Dict[str, Any], ta: Any) -> Dict[int, Any]:
-    """
-    Construct the five agents for one game worker process.
-
-    For ``deeprole-llm``, all five share one loaded model instance via
-    ``share_llm_backend=True`` (avoids loading weights 5× per process).
-
-    For ``tinker-distil``, each agent has its own OpenAI client pointed at
-    the same Tinker checkpoint URL — no local weight sharing is needed since
-    Tinker hosts the model server-side.
-    """
-    agent_type  = payload.get("agent", "deeprole")
-    num_players = payload.get("num_players", 5)
+def _build_one_agent(agent_type: str, payload: Dict[str, Any], ta: Any):
+    """Build a single agent instance of the given type, drawing config from payload."""
 
     if agent_type == "deeprole":
-        return {i: ta.agents.DeepRoleAgent() for i in range(num_players)}
+        return ta.agents.DeepRoleAgent()
 
     if agent_type == "deeprole-llm":
         hf_model = payload.get("hf_model")
         if not hf_model:
             raise ValueError(
-                "agent='deeprole-llm' requires hf_model to be set. "
+                "deeprole-llm seat requires hf_model to be set. "
                 "Pass --hf-model on the command line or set HF_MODEL in your environment."
             )
-        llm_kwargs: Dict[str, Any] = dict(
+        return ta.agents.DeepRole_LLM(
             model_name_or_path      = hf_model,
             adapter_path            = payload.get("adapter_path") or None,
             device                  = payload.get("device", "auto"),
@@ -315,28 +331,60 @@ def _build_agents(payload: Dict[str, Any], ta: Any) -> Dict[int, Any]:
             max_new_tokens          = int(payload.get("max_new_tokens", 128)),
             temperature             = float(payload.get("temperature", 0.7)),
             fast_deeprole           = True,
-            share_llm_backend       = True,
+            share_llm_backend       = True,   # shared across all deeprole-llm seats
             skip_llm_for_mechanical = bool(payload.get("skip_llm_for_mechanical", True)),
         )
-        return {i: ta.agents.DeepRole_LLM(**llm_kwargs) for i in range(num_players)}
 
     if agent_type == "tinker-distil":
         tinker_model = payload.get("tinker_model")
         if not tinker_model:
             raise ValueError(
-                "agent='tinker-distil' requires tinker_model to be set. "
+                "tinker-distil seat requires tinker_model to be set. "
                 "Pass --tinker-model on the command line or set TINKER_MODEL in .env / environment."
             )
-        td_kwargs: Dict[str, Any] = dict(
+        return ta.agents.TinkerDistilAgent(
             tinker_model_path       = tinker_model,
             max_new_tokens          = int(payload.get("max_new_tokens", 128)),
             temperature             = float(payload.get("temperature", 0.7)),
             fast_deeprole           = True,
             skip_llm_for_mechanical = bool(payload.get("skip_llm_for_mechanical", True)),
         )
-        return {i: ta.agents.TinkerDistilAgent(**td_kwargs) for i in range(num_players)}
 
     raise ValueError(f"Unknown agent type {agent_type!r}. Choose from: {_AGENT_CHOICES}")
+
+
+def _build_agents(payload: Dict[str, Any], ta: Any) -> Dict[int, Any]:
+    """
+    Construct one agent per seat for one game.
+
+    The payload's ``seat_agents`` field is a list of agent-type strings, one
+    per seat (e.g. ``["deeprole-llm", "deeprole-llm", "deeprole-llm",
+    "deeprole-llm", "tinker-distil"]``).  All other config fields
+    (``hf_model``, ``tinker_model``, etc.) are shared across seats — there's
+    only one HF checkpoint per worker process, only one Tinker model URL,
+    etc.  If you need different HF models or different Tinker checkpoints
+    per seat, you'd extend the payload with per-seat config dicts.
+
+    For ``deeprole-llm`` seats, the underlying ``DeepRoleLLMAgent`` uses
+    ``share_llm_backend=True`` so multiple deeprole-llm seats in the same
+    worker share one set of model weights.
+    """
+    seat_agents: List[str] = payload.get("seat_agents") or []
+    num_players = payload.get("num_players", 5)
+
+    # Backwards-compatibility: if seat_agents wasn't provided, fall back to
+    # the legacy single ``agent`` field broadcast to all seats.
+    if not seat_agents:
+        agent_type = payload.get("agent", "deeprole")
+        seat_agents = [agent_type] * num_players
+
+    if len(seat_agents) != num_players:
+        raise ValueError(
+            f"seat_agents has {len(seat_agents)} entries but num_players={num_players}; "
+            "expected one agent type per seat."
+        )
+
+    return {i: _build_one_agent(seat_agents[i], payload, ta) for i in range(num_players)}
 
 
 # ---------------------------------------------------------------------------
@@ -392,6 +440,7 @@ def _run_one_game(payload: Dict[str, Any]) -> Dict[str, Any]:
         "seed":         seed,
         "env_id":       env_id,
         "agent":        payload.get("agent", "deeprole"),
+        "seat_agents":  payload.get("seat_agents") or [payload.get("agent", "deeprole")] * 5,
         "special_roles": sorted(special_roles) if special_roles else None,
         "rewards":      rewards,
         "game_info":    game_info,
@@ -447,10 +496,23 @@ def main() -> None:
     parser.add_argument(
         "--agent", type=str, default="deeprole", choices=_AGENT_CHOICES,
         help=(
+            "All-seats agent type (broadcast to every seat).\n"
             "'deeprole'       — plain DeepRoleAgent, no GPU needed.\n"
             "'deeprole-llm'   — DeepRoleLLMAgent backed by a local TRL/HF model (--hf-model).\n"
             "'tinker-distil'  — TinkerDistilAgent backed by a Tinker-hosted checkpoint "
-            "(--tinker-model)."
+            "(--tinker-model).\n"
+            "Ignored when --seat-agents is given."
+        ),
+    )
+    parser.add_argument(
+        "--seat-agents", type=str, default=None, metavar="SEAT0,SEAT1,SEAT2,SEAT3,SEAT4",
+        help=(
+            "Comma-separated list of 5 agent types — one per seat. Overrides --agent. "
+            "Lets you mix agents in one game, e.g. "
+            "'deeprole-llm,deeprole-llm,deeprole-llm,deeprole-llm,tinker-distil'. "
+            "All seats of a given type share the same model config "
+            "(--hf-model is the same for every deeprole-llm seat in a worker, "
+            "--tinker-model the same for every tinker-distil seat)."
         ),
     )
 
@@ -515,27 +577,33 @@ def main() -> None:
     repo_root = _repo_root()
     _load_env_file(repo_root / ".env")
 
-    # Validate per-agent requirements.
-    if args.agent == "deeprole-llm":
+    # Resolve seat list — explicit --seat-agents overrides --agent.
+    seat_agents_list = _parse_seat_agents_csv(args.seat_agents, num_players=5)
+    if seat_agents_list is None:
+        seat_agents_list = [args.agent] * 5
+    seat_types_present = set(seat_agents_list)
+
+    # Validate per-agent-type requirements based on which types are present.
+    if "deeprole-llm" in seat_types_present:
         hf_model = args.hf_model or os.getenv("HF_MODEL")
         if not hf_model:
             parser.error(
-                "--agent deeprole-llm requires --hf-model (or HF_MODEL in .env / environment).\n"
+                "deeprole-llm seat requires --hf-model (or HF_MODEL in .env / environment).\n"
                 "Example: --hf-model Qwen/Qwen3-0.6B"
             )
         args.hf_model = hf_model
 
-    if args.agent == "tinker-distil":
+    if "tinker-distil" in seat_types_present:
         tinker_model = args.tinker_model or os.getenv("TINKER_MODEL")
         if not tinker_model:
             parser.error(
-                "--agent tinker-distil requires --tinker-model "
+                "tinker-distil seat requires --tinker-model "
                 "(or TINKER_MODEL in .env / environment).\n"
                 "Example: --tinker-model tinker://UUID:train:0/sampler_weights/step_00020"
             )
         if not os.getenv("TINKER_API_KEY"):
             parser.error(
-                "--agent tinker-distil requires TINKER_API_KEY to be set in .env or environment."
+                "tinker-distil seat requires TINKER_API_KEY to be set in .env or environment."
             )
         args.tinker_model = tinker_model
 
@@ -560,22 +628,29 @@ def main() -> None:
             "special_roles": special_roles_list,
             "out_path":     str(out_dir / "game_logs" / f"game_{i:04d}.json"),
             "num_players":  5,
-            "agent":        args.agent,
+            "seat_agents":  list(seat_agents_list),
+            # Legacy ``agent`` field for record-keeping in per-game JSONs;
+            # set to "mixed" if seats are heterogeneous, else the single type.
+            "agent":        seat_agents_list[0]
+                            if len(seat_types_present) == 1
+                            else "mixed",
         }
-        if args.agent == "deeprole-llm":
+        # Attach config relevant to whichever seat types are present.
+        if "deeprole-llm" in seat_types_present:
             p.update(
                 hf_model               = args.hf_model,
                 adapter_path           = args.adapter_path,
                 device                 = args.device,
                 load_in_4bit           = args.load_in_4bit,
                 load_in_8bit           = args.load_in_8bit,
-                max_new_tokens         = args.max_new_tokens,
-                temperature            = args.temperature,
-                skip_llm_for_mechanical= args.skip_llm_mechanical,
             )
-        elif args.agent == "tinker-distil":
+        if "tinker-distil" in seat_types_present:
             p.update(
                 tinker_model           = args.tinker_model,
+            )
+        # Shared LLM-call options apply to any LLM-backed seat.
+        if {"deeprole-llm", "tinker-distil"} & seat_types_present:
+            p.update(
                 max_new_tokens         = args.max_new_tokens,
                 temperature            = args.temperature,
                 skip_llm_for_mechanical= args.skip_llm_mechanical,
@@ -593,25 +668,38 @@ def main() -> None:
 
     # Write manifest.
     manifest_path = out_dir / "summary.json"
-    if args.agent == "deeprole-llm":
-        agent_desc = f"DeepRole_LLM x5 (model={args.hf_model})"
-    elif args.agent == "tinker-distil":
-        agent_desc = f"TinkerDistilAgent x5 (model={args.tinker_model})"
+
+    # Compose a human-readable agent description.
+    if len(seat_types_present) == 1:
+        only = next(iter(seat_types_present))
+        if only == "deeprole-llm":
+            agent_desc = f"DeepRole_LLM x5 (model={args.hf_model})"
+        elif only == "tinker-distil":
+            agent_desc = f"TinkerDistilAgent x5 (model={args.tinker_model})"
+        else:
+            agent_desc = "DeepRoleAgent x5"
+        legacy_agent_field = only
     else:
-        agent_desc = "DeepRoleAgent x5"
+        # Build a compact "x4 deeprole-llm + x1 tinker-distil" style description.
+        from collections import Counter
+        counts = Counter(seat_agents_list)
+        parts = [f"x{n} {name}" for name, n in counts.most_common()]
+        agent_desc = " + ".join(parts)
+        legacy_agent_field = "mixed"
 
     manifest: Dict[str, Any] = {
         "created_utc":  ts,
         "repo_root":    str(repo_root),
         "env_id":       args.env,
         "special_roles": special_roles_list,
-        "agent":        args.agent,
+        "agent":        legacy_agent_field,
         "agent_desc":   agent_desc,
+        "seat_agents":  seat_agents_list,
         "games":        games,
         "workers":      workers,
         "seed_base":    args.seed_base,
     }
-    if args.agent == "deeprole-llm":
+    if "deeprole-llm" in seat_types_present:
         manifest["llm_config"] = {
             "hf_model":               args.hf_model,
             "adapter_path":           args.adapter_path,
@@ -622,7 +710,7 @@ def main() -> None:
             "temperature":            args.temperature,
             "skip_llm_for_mechanical": args.skip_llm_mechanical,
         }
-    elif args.agent == "tinker-distil":
+    if "tinker-distil" in seat_types_present:
         manifest["tinker_config"] = {
             "tinker_model":           args.tinker_model,
             "max_new_tokens":         args.max_new_tokens,
@@ -639,7 +727,8 @@ def main() -> None:
         f"Wrote {games} game JSON files under:\n  {out_dir / 'game_logs'}\n"
         f"and summary:\n  {manifest_path}\n"
         f"\n"
-        f"Headline: agent={args.agent}  good_wr={team.get('good_win_rate', 0):.2%}  "
+        f"Seats:    {' | '.join(f'P{i}={t}' for i, t in enumerate(seat_agents_list))}\n"
+        f"Headline: {agent_desc}  good_wr={team.get('good_win_rate', 0):.2%}  "
         f"evil_wr={team.get('evil_win_rate', 0):.2%}"
     )
 
