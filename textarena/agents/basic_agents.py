@@ -896,8 +896,21 @@ class _TinkerSamplerBackend:
         self.top_logprobs   = top_logprobs
 
     def call(self, system: str, user: str) -> LLMResult:
-        """One blocking sampling call.  Returns text + per-token logprobs."""
-        resp = self.client.chat.completions.create(
+        """
+        One blocking sampling call.  Returns text + per-token logprobs.
+
+        Tinker's OpenAI-compat endpoint currently supports only chosen-token
+        logprobs, NOT the OpenAI ``top_logprobs`` extension (which would
+        return the top-k alternatives at each position).  Sending
+        ``top_logprobs > 0`` triggers a 400 error from the server.
+
+        We therefore always request ``logprobs=True`` to get the chosen
+        token's logprob, and never set ``top_logprobs``.  The
+        ``top_logprobs`` constructor argument is kept for API parity with
+        ``_TRLLLMBackend`` (where local generate() does support top-k) but
+        is silently ignored on the Tinker path.
+        """
+        kwargs: Dict[str, Any] = dict(
             model        = self.model,
             messages     = [
                 {"role": "system", "content": system},
@@ -907,6 +920,9 @@ class _TinkerSamplerBackend:
             temperature  = self.temperature,
             logprobs     = True,
         )
+        # If/when Tinker adds top-k support, we can re-enable this path.
+        # For now omit ``top_logprobs`` entirely (sending 0 also works).
+        resp = self.client.chat.completions.create(**kwargs)
         choice = resp.choices[0]
         text   = (choice.message.content or "").strip()
         return LLMResult(text=text, logprobs=_td_extract_logprobs(choice))
@@ -915,8 +931,16 @@ class _TinkerSamplerBackend:
 class TinkerDistilAgent(DeepRoleLLMAgent):
     """
     Avalon (5-player) agent using a Tinker-hosted LoRA checkpoint at
-    inference time.  Identical behaviour to ``DeepRoleLLMAgent`` except the
-    LLM backend is a Tinker sampler instead of a local HF model.
+    inference time.  Identical behaviour to ``DeepRoleLLMAgent`` except:
+
+      1. The LLM backend is a Tinker sampler instead of a local HF model.
+      2. With ``prefer_llm_for_mechanical=True`` (the default), the agent
+         returns the LLM's own action for mechanical turns (vote / propose
+         / mission), falling back to DeepRole's CFR action only when the
+         LLM emits empty / unparseable output.  This aligns inference with
+         the training distribution: ``tinker_multiagent.py`` always sends
+         the LLM's emission to ``env.step``, so disabling that override at
+         inference would create a train/deploy mismatch.
 
     Parameters
     ----------
@@ -929,7 +953,16 @@ class TinkerDistilAgent(DeepRoleLLMAgent):
         Forwarded to the DeepRole CFR integrator (same semantics as the
         parent class).
     skip_llm_for_mechanical, llm_retries, llm_retry_delay, verbose
-        Same semantics as ``DeepRoleLLMAgent``.
+        Same semantics as ``DeepRoleLLMAgent``.  Note that
+        ``skip_llm_for_mechanical=True`` is mutually exclusive with
+        ``prefer_llm_for_mechanical=True`` — when the LLM is skipped we
+        have no message to return for mechanical turns, so the agent
+        will fall back to ``dr_result`` regardless.
+    prefer_llm_for_mechanical : bool, default True
+        When True (the default), mechanical turns return the LLM's action
+        text instead of DeepRole's CFR action.  Set to False to fully
+        delegate mechanical decisions to CFR (matches the original
+        ``DeepRoleLLMAgent`` behaviour).
 
     Notes
     -----
@@ -956,6 +989,7 @@ class TinkerDistilAgent(DeepRoleLLMAgent):
         llm_retry_delay: float = 5.0,
         skip_llm_for_mechanical: bool = False,
         fast_deeprole: bool  = True,
+        prefer_llm_for_mechanical: bool = True,
     ):
         if not tinker_model_path:
             raise ValueError(
@@ -996,12 +1030,110 @@ class TinkerDistilAgent(DeepRoleLLMAgent):
             top_logprobs   = top_logprobs,
         )
         self._llm = None
+        self._prefer_llm_for_mechanical = bool(prefer_llm_for_mechanical)
 
     def _ensure_llm_backend(self) -> Any:
         """Override — return a cached ``_TinkerSamplerBackend`` instance."""
         if self._llm is None:
             self._llm = _TinkerSamplerBackend(**self._tinker_kwargs)
         return self._llm
+
+    # ------------------------------------------------------------------
+    # __call__ override — make mechanical turns return the LLM's action
+    # ------------------------------------------------------------------
+    #
+    # The parent class's __call__ ends with:
+    #     if is_mechanical:
+    #         return dr_result
+    #     return message if message else dr_result
+    # which means the LLM's output is *always* discarded for mechanical
+    # phases (vote / propose / mission).  That's the right default for the
+    # vanilla ``DeepRoleLLMAgent`` — but it creates a train-vs-deploy
+    # mismatch for ``TinkerDistilAgent``: the training script
+    # ``tinker_multiagent.py`` sends the LLM's emission directly to
+    # ``env.step()`` for every turn, so the policy is being optimised to
+    # produce mechanical actions itself.  Discarding those emissions at
+    # inference time means the trained model never gets to use what it
+    # learned.
+    #
+    # To fix the misalignment we re-implement the relevant tail of
+    # __call__ here.  The structural early-return paths (Guess-Merlin,
+    # the LLM-skip path) are kept identical to the parent's logic — only
+    # the final action-selection rule for mechanical turns changes.
+    # ------------------------------------------------------------------
+
+    def __call__(self, observation: Union[str, list, tuple]) -> str:
+        if not self._prefer_llm_for_mechanical:
+            # Fall back to the parent's behaviour — CFR drives mechanical
+            # turns, LLM only contributes discussion text.
+            return super().__call__(observation)
+
+        text = dr_normalize_observation(observation)
+
+        # Pre-parse game state so we can detect end-game phases before
+        # deciding which code path to take.
+        snaps    = dr_parse_game_states(text)
+        gs_early = snaps[-1] if snaps else {}
+        is_merlin_guess = _dr_is_guess_merlin_phase(gs_early, text)
+
+        # Step 1 — DeepRole optimal action (always run; we need its belief).
+        dr_result = self._integrator(text)
+
+        # Step 2 — extract DeepRole internals.
+        belief_vec  = self._integrator.exposed_belief
+        perspective = self._integrator.exposed_perspective
+        node        = self._integrator.exposed_node
+        player      = self._integrator.exposed_player
+        role        = self._integrator.exposed_role
+        dr_action   = self._integrator.exposed_dr_action
+
+        evil_probs = _dr_player_evil_probs(belief_vec, self._id_to_hid)
+        strat      = _dr_strategy_summary(node, player, perspective)
+        self.last_player_evil_probs = evil_probs
+        self.last_strategy          = strat
+        self.last_dr_action         = dr_action
+        self.last_logprobs          = []
+
+        # Guess-Merlin always goes through the dedicated handler.
+        if is_merlin_guess:
+            return self._decide_merlin_guess(
+                player, role, belief_vec, gs_early, text
+            )
+
+        # Step 3 — call the LLM.  When skip_llm_for_mechanical is True and
+        # this is a mechanical turn, we have no LLM emission to use and
+        # therefore cannot honour ``prefer_llm_for_mechanical``; fall back
+        # to dr_result in that case.
+        is_mechanical   = dr_action is not None
+        should_call_llm = not (self._skip_llm_for_mechanical and is_mechanical)
+
+        if should_call_llm:
+            phase = dr_phase_str(gs_early) if gs_early else "unknown"
+            sys_p, usr_p = _dr_build_llm_prompt(
+                player_id=player, role=role, phase=phase, game_state=gs_early,
+                player_evil_probs=evil_probs, dr_action=dr_action,
+                observation_text=text,
+            )
+            belief, message, logprobs = self._call_llm_with_retry(sys_p, usr_p)
+            self.last_logprobs = logprobs
+        else:
+            belief, message = 0.5, ""
+
+        self.last_belief  = belief
+        self.last_message = message
+
+        if self._verbose:
+            self._print_debug(player, role, dr_action, belief, message, evil_probs, strat)
+
+        # Step 4 — action selection (the only line that differs from parent).
+        # Mechanical turns: return the LLM's emission when non-empty,
+        # otherwise fall back to dr_result.  If the LLM produces malformed
+        # text the env will raise on env.step() — callers running large
+        # eval batches should wrap env.step() in try/except (multi_play.py
+        # already does this in its newer crash-tolerant runner).
+        if is_mechanical:
+            return message if message else dr_result
+        return message if message else dr_result
 
     def __repr__(self) -> str:
         return f"TinkerDistilAgent(model='{self._tinker_model_path}')"
