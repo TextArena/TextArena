@@ -332,7 +332,7 @@ class AvalonParser:
         Parses a mission action from text.
         Returns 'success' or 'fail', or None if not found.
         """
-        m = AvalonParser.action_pattern.search(text)
+        m = AvalonParser.merlin_guess_pattern.search(text)
         return m.group(1).lower() if m else None
     
     @staticmethod
@@ -341,7 +341,7 @@ class AvalonParser:
         Parses the pid of a merlin guess from text.
         Returns pid of the merlin guess, or None if not found.
         """
-        m = AvalonParser.action_pattern.search(text)
+        m = AvalonParser.merlin_guess_pattern.search(text)
         return int(m.group(1)) if m else None
 
 def is_mission_success(mission_actions: Dict[int, str]) -> bool:
