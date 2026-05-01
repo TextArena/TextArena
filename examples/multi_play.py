@@ -708,14 +708,44 @@ def main() -> None:
             )
         payloads.append(p)
 
-    # Run games.
+    # Run games — tolerate per-game failures so one crash doesn't kill 1000 games.
+    # Common causes: a worker raises during an LLM API call (rate limit,
+    # transient network error, OpenAI SDK version mismatch when decoding a
+    # non-200 response, etc.); the env raises on a malformed action that the
+    # game state parser can't handle.  Either way we log the failure with the
+    # run_index so it can be reproduced and continue with the rest.
     summary: List[Dict[str, Any]] = []
+    failed:  List[Dict[str, Any]] = []
     with ProcessPoolExecutor(max_workers=workers) as ex:
-        futures = [ex.submit(_run_one_game, p) for p in payloads]
-        for fut in as_completed(futures):
-            summary.append(fut.result())
+        # Pair each future with its payload so we can identify which game
+        # crashed even when the worker dies before returning anything.
+        future_to_idx = {
+            ex.submit(_run_one_game, p): i
+            for i, p in enumerate(payloads)
+        }
+        for fut in as_completed(future_to_idx):
+            idx = future_to_idx[fut]
+            try:
+                summary.append(fut.result())
+            except Exception as exc:
+                failed.append({
+                    "run_index": idx,
+                    "seed":      payloads[idx].get("seed"),
+                    "error":     f"{type(exc).__name__}: {exc}",
+                })
+                print(
+                    f"[multi_play] game {idx} failed: "
+                    f"{type(exc).__name__}: {exc}",
+                    flush=True,
+                )
 
     summary.sort(key=lambda x: x["run_index"])
+    if failed:
+        print(
+            f"[multi_play] {len(failed)} of {len(payloads)} games failed; "
+            f"continuing with {len(summary)} successful games.",
+            flush=True,
+        )
 
     # Write manifest.
     manifest_path = out_dir / "summary.json"
@@ -776,6 +806,10 @@ def main() -> None:
         }
     manifest.update(aggregate_summary_stats(summary))
     manifest["runs"] = summary
+    if failed:
+        manifest["failed_games"] = failed
+        manifest["games_succeeded"] = len(summary)
+        manifest["games_failed"]    = len(failed)
     manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
 
     # Print a concise headline so the user knows immediately how the run went.
