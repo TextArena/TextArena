@@ -415,15 +415,48 @@ _REJECT_FORMS: frozenset = frozenset({
 })
 
 
+def _vote_class(token_text: str) -> Optional[str]:
+    """
+    Map a single token's text to "approve" / "reject" / None.
+
+    Handles the common BPE quirks for the LLMs we use:
+    * leading-space variants (" approve", " Approve")
+    * casing variants ("Approve", "APPROVE", "Reject")
+    * exact match against the curated surface forms in _APPROVE_FORMS / _REJECT_FORMS
+
+    Anything else returns None — we deliberately do NOT do prefix matching on
+    short fragments like "ap" or "re" because that produces too many false
+    positives on common English words.
+    """
+    if not token_text:
+        return None
+    t = token_text.lower()
+    if t in _APPROVE_FORMS or t.strip() in _APPROVE_FORMS:
+        return "approve"
+    if t in _REJECT_FORMS or t.strip() in _REJECT_FORMS:
+        return "reject"
+    return None
+
+
 def _extract_vote_logprobs(
     logprobs: list,
+    max_scan: Optional[int] = None,
 ) -> Optional[Tuple[int, str, float, float, float]]:
     """
-    Scan the first 8 generated tokens for an approve / reject vote token.
+    Scan generated tokens for an approve / reject vote token and return its
+    position + the local two-class distribution.
 
     Returns ``(token_index, sampled_vote, student_logprob, log_p_approve,
-    log_p_reject)`` for the position the vote was emitted, or ``None`` when no
-    vote class appears in the top alternatives.
+    log_p_reject)`` for the FIRST position where the sampled token matches a
+    vote class AND the alternative class also appears in that position's
+    ``top_logprobs``.
+
+    ``max_scan`` defaults to ``None`` (scan the whole response).  Earlier
+    versions of this function scanned only the first 8 tokens, which fails
+    for any LLM that emits a reasoning prefix before voting (which is most
+    of them above ~3B params).  Pass an int to limit scanning.
+
+    Returns ``None`` if no qualifying position is found.
 
     * ``sampled_vote`` ∈ {"approve", "reject"} — what the LLM actually chose.
     * ``student_logprob`` is the LLM's logprob for the sampled token (used for
@@ -432,31 +465,33 @@ def _extract_vote_logprobs(
       (used for entropy / monitoring; harvested from ``top_logprobs``).
     """
     NEG_INF = float("-inf")
+    scan_limit = len(logprobs) if max_scan is None else min(max_scan, len(logprobs))
 
-    for idx, tok in enumerate(logprobs[:8]):
-        sampled_lower = (tok.token or "").lower()
-        is_approve = sampled_lower in _APPROVE_FORMS
-        is_reject  = sampled_lower in _REJECT_FORMS
-        if not (is_approve or is_reject):
-            continue  # not a vote token — keep scanning
+    for idx in range(scan_limit):
+        tok = logprobs[idx]
+        sampled_class = _vote_class(tok.token or "")
+        if sampled_class is None:
+            continue  # not a vote token at this position
 
-        sampled_vote     = "approve" if is_approve else "reject"
-        student_logprob  = float(tok.logprob)
+        student_logprob = float(tok.logprob)
 
-        log_p_approve: float = student_logprob if is_approve else NEG_INF
-        log_p_reject:  float = student_logprob if is_reject  else NEG_INF
+        log_p_approve: float = student_logprob if sampled_class == "approve" else NEG_INF
+        log_p_reject:  float = student_logprob if sampled_class == "reject"  else NEG_INF
 
         for alt_tok, alt_lp in (tok.top_logprobs or []):
-            alt_lower = (alt_tok or "").lower()
-            if alt_lower in _APPROVE_FORMS:
+            alt_class = _vote_class(alt_tok)
+            if alt_class == "approve":
                 log_p_approve = max(log_p_approve, float(alt_lp))
-            elif alt_lower in _REJECT_FORMS:
+            elif alt_class == "reject":
                 log_p_reject = max(log_p_reject, float(alt_lp))
 
         if log_p_approve == NEG_INF or log_p_reject == NEG_INF:
-            return None
+            # Found a vote token but the alternative class isn't in top-K —
+            # we don't have enough signal for the local KL.  Skip and keep
+            # scanning in case the model votes again later in the response.
+            continue
 
-        return (idx, sampled_vote, student_logprob, log_p_approve, log_p_reject)
+        return (idx, sampled_class, student_logprob, log_p_approve, log_p_reject)
 
     return None
 
@@ -549,6 +584,14 @@ class NPlayerCoordinator:
         # Accumulated on-policy distillation datums for this rollout.
         # Each entry corresponds to one vote turn the student took.
         self._distill_datums: List[OnPolicyDistillDatum] = []
+        # Diagnostic counters — populated during rollout, logged at game end
+        # so we can debug why distillation captured zero datums (the most
+        # common failure mode is that the LLM never emits an approve/reject
+        # token in a recoverable position).
+        self._distill_attempts: int       = 0   # turns where dr_action was a vote
+        self._distill_no_vote_meta: int   = 0   # turns where vote_meta was None
+        self._distill_no_cfr_target: int  = 0   # turns where dr_action wasn't approve/reject
+        self._distill_failed_examples: List[str] = []  # first few responses for inspection
 
         # One DeepRole integrator per game — drives belief / strategy / role.
         self._integrator = _InstrumentedDeepRoleIntegrator(
@@ -708,75 +751,93 @@ class NPlayerCoordinator:
             # advantage  w(o,r) · [log π_CFR(a) − log π_θ(a)]  at the action
             # token position.
             # ------------------------------------------------------------------
-            if self.cfr_distill_enabled and vote_logprob_meta is not None:
+            if self.cfr_distill_enabled:
                 dr_action = self._integrator.exposed_dr_action
                 cfr_target = _cfr_action_to_target(
                     dr_action, sharpness=self.cfr_distill_sharpness
                 )
-                if cfr_target is not None:
-                    from textarena.agents.deeprole_integrator import dr_parse_game_states, dr_phase_str
-                    snaps  = dr_parse_game_states(obs)
-                    gs     = snaps[-1] if snaps else {}
-                    phase  = dr_phase_str(gs) if gs else "unknown"
-                    role   = self._integrator.exposed_role or ""
-                    side   = _role_side(role)
+                if cfr_target is None:
+                    # Not a vote phase (Merlin guess, mission action, etc.).
+                    # Don't count this against the distill diagnostics.
+                    self._distill_no_cfr_target += 1
+                else:
+                    # This IS a vote phase, so we expect to capture a datum.
+                    self._distill_attempts += 1
 
-                    # Continuous belief b ∈ [0,1] from the integrator's
-                    # exposed_belief vector — collapse to scalar via the
-                    # player_evil_probs utility (suspicion of teammate).
-                    belief_vec = self._integrator.exposed_belief
-                    try:
-                        from textarena.agents.deeprole_llm import _dr_player_evil_probs
-                        evil_probs = _dr_player_evil_probs(
-                            belief_vec, self._id_to_hid
-                        )
-                        # Scalar belief = max suspicion over teammates on the
-                        # currently-proposed team.  When team unknown, mean.
-                        b = float(sum(evil_probs) / max(1, len(evil_probs)))
-                    except Exception:
-                        b = 0.5
-                    bb = _belief_bucket(b)
-
-                    # π_CFR^m for the message-style decision.  Only meaningful
-                    # for Evil players; Good is forced to {honest: 1.0}.  The
-                    # integrator does not expose a message strategy directly,
-                    # so we use a sharpness-soft prior matching the spec:
-                    # Evil low-belief → mostly deceptive; Evil high-belief →
-                    # mostly honest (the CFR plot in cfr_progress.png shows
-                    # this is what the tabular CFR converges to).
-                    if side == "Evil":
-                        if bb == "low":
-                            msg_target = {"deceptive": self.cfr_distill_sharpness,
-                                          "honest":    1.0 - self.cfr_distill_sharpness}
-                        else:
-                            msg_target = {"deceptive": 1.0 - self.cfr_distill_sharpness,
-                                          "honest":    self.cfr_distill_sharpness}
+                    if vote_logprob_meta is None:
+                        # The model voted but we couldn't parse a vote token
+                        # from its top-K logprobs.  Most common cause: the
+                        # response doesn't contain "approve"/"reject"/"yes"/
+                        # "no" anywhere, or the alternative class isn't in
+                        # top-K.  Save the first few responses for inspection.
+                        self._distill_no_vote_meta += 1
+                        if len(self._distill_failed_examples) < 3:
+                            preview = (action_text or "").replace("\n", "↵")[:200]
+                            self._distill_failed_examples.append(preview)
                     else:
-                        msg_target = None
+                        from textarena.agents.deeprole_integrator import dr_parse_game_states, dr_phase_str
+                        snaps  = dr_parse_game_states(obs)
+                        gs     = snaps[-1] if snaps else {}
+                        phase  = dr_phase_str(gs) if gs else "unknown"
+                        role   = self._integrator.exposed_role or ""
+                        side   = _role_side(role)
 
-                    (idx_in_lp, sampled_vote, student_lp,
-                     log_p_app, log_p_rej) = vote_logprob_meta
+                        # Continuous belief b ∈ [0,1] from the integrator's
+                        # exposed_belief vector — collapse to scalar via the
+                        # player_evil_probs utility (suspicion of teammate).
+                        belief_vec = self._integrator.exposed_belief
+                        try:
+                            from textarena.agents.deeprole_llm import _dr_player_evil_probs
+                            evil_probs = _dr_player_evil_probs(
+                                belief_vec, self._id_to_hid
+                            )
+                            # Scalar belief = mean suspicion across players;
+                            # used only as a coarse high/low bucket label.
+                            b = float(sum(evil_probs) / max(1, len(evil_probs)))
+                        except Exception:
+                            b = 0.5
+                        bb = _belief_bucket(b)
 
-                    self._distill_datums.append(OnPolicyDistillDatum(
-                        prompt_messages       = list(hist),
-                        response_text         = action_text,
-                        response_token_ids    = list(response_token_ids),
-                        sampling_logprobs     = list(sampling_logprobs),
-                        vote_token_index      = idx_in_lp,
-                        sampled_vote          = sampled_vote,
-                        student_logprob       = student_lp,
-                        student_log_p_approve = log_p_app,
-                        student_log_p_reject  = log_p_rej,
-                        cfr_target            = cfr_target,
-                        msg_target            = msg_target,
-                        role                  = role,
-                        role_side             = side,
-                        won                   = False,    # filled in at game end
-                        phase                 = phase,
-                        player_id             = active,
-                        belief_continuous     = b,
-                        belief_bucket         = bb,
-                    ))
+                        # π_CFR^m for the message-style decision.  Only meaningful
+                        # for Evil players; Good is forced to {honest: 1.0}.  The
+                        # integrator does not expose a message strategy directly,
+                        # so we use a sharpness-soft prior matching the spec:
+                        # Evil low-belief → mostly deceptive; Evil high-belief →
+                        # mostly honest (the CFR plot in cfr_progress.png shows
+                        # this is what the tabular CFR converges to).
+                        if side == "Evil":
+                            if bb == "low":
+                                msg_target = {"deceptive": self.cfr_distill_sharpness,
+                                              "honest":    1.0 - self.cfr_distill_sharpness}
+                            else:
+                                msg_target = {"deceptive": 1.0 - self.cfr_distill_sharpness,
+                                              "honest":    self.cfr_distill_sharpness}
+                        else:
+                            msg_target = None
+
+                        (idx_in_lp, sampled_vote, student_lp,
+                         log_p_app, log_p_rej) = vote_logprob_meta
+
+                        self._distill_datums.append(OnPolicyDistillDatum(
+                            prompt_messages       = list(hist),
+                            response_text         = action_text,
+                            response_token_ids    = list(response_token_ids),
+                            sampling_logprobs     = list(sampling_logprobs),
+                            vote_token_index      = idx_in_lp,
+                            sampled_vote          = sampled_vote,
+                            student_logprob       = student_lp,
+                            student_log_p_approve = log_p_app,
+                            student_log_p_reject  = log_p_rej,
+                            cfr_target            = cfr_target,
+                            msg_target            = msg_target,
+                            role                  = role,
+                            role_side             = side,
+                            won                   = False,    # filled in at game end
+                            phase                 = phase,
+                            player_id             = active,
+                            belief_continuous     = b,
+                            belief_bucket         = bb,
+                        ))
 
             hist.append({"role": "assistant", "content": action_text})
             trajectories[active].actions.append(action_text)
@@ -810,13 +871,16 @@ class NPlayerCoordinator:
                     traj.env_reward = float(terminal_rewards.get(pid, 0.0))
                     traj.reward     = role_aware_reward(traj.role, traj.env_reward)
                     traj.messages   = list(self._histories[pid])
-                # Stamp outcome on every captured datum and attach the list
-                # to trajectories[0] (game-level, not per-player).  ``won`` is
-                # used for w(o, r) inside the distill step.
+                # Stamp outcome on every captured datum and attach the list +
+                # diagnostic counters to trajectories[0] (game-level).
                 if self._distill_datums:
                     for d in self._distill_datums:
                         d.won = trajectories[d.player_id].env_reward > 0
-                    trajectories[0]._distill_datums = list(self._distill_datums)  # type: ignore[attr-defined]
+                trajectories[0]._distill_datums         = list(self._distill_datums)        # type: ignore[attr-defined]
+                trajectories[0]._distill_attempts       = self._distill_attempts            # type: ignore[attr-defined]
+                trajectories[0]._distill_no_vote_meta   = self._distill_no_vote_meta        # type: ignore[attr-defined]
+                trajectories[0]._distill_no_cfr_target  = self._distill_no_cfr_target       # type: ignore[attr-defined]
+                trajectories[0]._distill_failed_examples= list(self._distill_failed_examples)  # type: ignore[attr-defined]
                 break
 
             player_id, obs = next_pid, next_obs
@@ -1962,6 +2026,40 @@ async def rl_train(cfg: TrainerConfig) -> None:
             for t in flat:
                 all_distill.extend(getattr(t, "_distill_datums", []))
 
+            # Aggregate diagnostic counters from coordinators.  These are
+            # attached to trajectories[0] alongside _distill_datums so we can
+            # explain WHY the capture rate looks the way it does.
+            attempts        = sum(getattr(t, "_distill_attempts",       0) for t in flat)
+            no_vote_meta    = sum(getattr(t, "_distill_no_vote_meta",   0) for t in flat)
+            no_cfr_target   = sum(getattr(t, "_distill_no_cfr_target",  0) for t in flat)
+            failed_examples = []
+            for t in flat:
+                failed_examples.extend(getattr(t, "_distill_failed_examples", []))
+
+            log.info(
+                f"  distill capture: {len(all_distill)}/{attempts} vote turns "
+                f"(non-vote turns skipped: {no_cfr_target})"
+            )
+            if attempts > 0 and len(all_distill) == 0:
+                # Zero-capture: this is the "everything looked fine but
+                # nothing was learned" failure.  Surface why.
+                log.warning(
+                    f"  distill captured 0/{attempts} vote turns — "
+                    f"{no_vote_meta} had no parseable approve/reject token in "
+                    f"top-K logprobs."
+                )
+                if failed_examples:
+                    log.warning("  example responses where vote-token extraction failed:")
+                    for ex in failed_examples[:3]:
+                        log.warning(f"    | {ex!r}")
+                    log.warning(
+                        "  → if these contain 'approve'/'reject' but extraction "
+                        "still fails, the SDK may not be returning top_logprobs; "
+                        "if they don't contain a vote word at all, the prompt "
+                        "format may be eliciting free-form text and "
+                        "_dr_build_llm_prompt should be tightened."
+                    )
+
             # JSONL self-distillation export (§"Self Distillation").  Run
             # before the gradient update so the file reflects the policy
             # distribution at this step exactly.
@@ -1974,7 +2072,6 @@ async def rl_train(cfg: TrainerConfig) -> None:
                 )
                 log.info(f"  self-distill: wrote {n_jsonl} tuples to {jsonl_path}")
 
-            if all_distill:
                 counts = await _on_policy_cfr_distill_step(
                     training_client = training_client,
                     renderer        = renderer,
