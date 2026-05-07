@@ -184,11 +184,42 @@ result = tma._extract_vote_logprobs(toks)
 assert result is None, f"expected None, got {result}"
 ok("_extract_vote_logprobs: returns None when no vote signal")
 
-# Case D: only one class found in top_logprobs (insufficient signal)
+# Case D: only one class found in top_logprobs — should keep scanning, not return early
 toks = [FakeTok("approve", -0.3, [("approve", -0.3), ("the", -1.5)])]
 result = tma._extract_vote_logprobs(toks)
 assert result is None, f"expected None when only one class found, got {result}"
 ok("_extract_vote_logprobs: returns None when alternative class missing")
+
+# Case E: vote token is BEYOND position 8 (the old bug — Qwen's reasoning prefix)
+toks = (
+    [FakeTok(f"word{i}", -1.0, []) for i in range(15)]   # 15 reasoning tokens
+    + [FakeTok("approve", -0.3, [("approve", -0.3), ("reject", -1.2)])]
+)
+result = tma._extract_vote_logprobs(toks)
+assert result is not None, "should now find vote past position 8"
+idx, vote, _, _, _ = result
+assert idx == 15 and vote == "approve"
+ok("_extract_vote_logprobs: scans whole response (vote at position 15)")
+
+# Case F: max_scan limits the scan window
+toks = [FakeTok(f"x{i}", -1.0, []) for i in range(5)] + [
+    FakeTok("approve", -0.3, [("approve", -0.3), ("reject", -1.2)]),
+]
+result = tma._extract_vote_logprobs(toks, max_scan=3)
+assert result is None, "max_scan=3 should not find vote at position 5"
+result = tma._extract_vote_logprobs(toks, max_scan=10)
+assert result is not None and result[0] == 5
+ok("_extract_vote_logprobs: max_scan parameter limits scan window")
+
+# _vote_class helper
+assert tma._vote_class("approve") == "approve"
+assert tma._vote_class(" Approve") == "approve"
+assert tma._vote_class("REJECT") == "reject"
+assert tma._vote_class("not") is None        # critical: don't confuse with "no"
+assert tma._vote_class("hello") is None
+assert tma._vote_class("") is None
+assert tma._vote_class(None) is None         # type: ignore[arg-type]
+ok("_vote_class: case/space-insensitive, no false positives on 'not'/'hello'")
 
 # OnPolicyDistillDatum can be instantiated
 d = tma.OnPolicyDistillDatum(
@@ -329,8 +360,16 @@ if args.network:
                 else:
                     warn("first record missing student_pi_a — check JSONL export")
             else:
-                warn("smoke test ran but self_distill.jsonl is empty")
-                warn("→ likely SamplingParams.logprobs unsupported; check §3 above")
+                # Don't guess at the cause — the training log already printed
+                # diagnostics ("distill capture: 0/N vote turns ...") that say
+                # exactly which step failed.  Direct the user there instead.
+                warn("smoke test ran to completion but produced no self-distill tuples")
+                warn("→ scroll up in the log for a 'distill capture: X/Y' line")
+                warn("→ if X=0 and Y=0: no vote phases occurred (rollout may have crashed)")
+                warn("→ if X=0 and Y>0: model isn't emitting parseable vote tokens")
+                warn("                   (look for 'example responses where ...' lines)")
+                warn("→ if no 'distill capture' line appeared: rollout never finished")
+                errors.append("smoke test produced no datums")
         except Exception as e:
             fail(f"smoke test crashed: {type(e).__name__}: {e}")
             traceback.print_exc()
