@@ -473,13 +473,14 @@ def _dr_build_llm_prompt(
 
     system_prompt = (
         f"You are playing Avalon as player P{player_id} (role: {role.capitalize()}).\n"
-        "Estimate whether the proposed team contains Evil and share a brief in-character thought.\n\n"
+        "Vote on the proposed team and share a brief in-character thought.\n\n"
         "Rules:\n"
-        "  - Reason from the facts below. Do NOT simply echo the prior estimates.\n"
+        "  - `vote` is exactly one of: \"approve\" or \"reject\". No other values.\n"
         "  - `belief` is YOUR probability (0–1) that the team contains at least one Evil player.\n"
-        "  - `message` is 1–2 sentences in character, referencing players by number.\n\n"
-        "Respond with valid JSON only, no markdown:\n"
-        '  {"belief": <float 0-1>, "message": "<string>"}'
+        "  - `message` is 1–2 sentences in character, referencing players by number.\n"
+        "  - Reason from the facts below. Do NOT simply echo the prior estimates.\n\n"
+        "Respond with valid JSON only, no markdown.  Use this key order:\n"
+        '  {"vote": "approve" | "reject", "belief": <float 0-1>, "message": "<string>"}'
     )
 
     user_prompt = (

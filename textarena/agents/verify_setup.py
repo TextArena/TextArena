@@ -231,7 +231,18 @@ assert tma._vote_class("not") is None        # critical: don't confuse with "no"
 assert tma._vote_class("hello") is None
 assert tma._vote_class("") is None
 assert tma._vote_class(None) is None         # type: ignore[arg-type]
-ok("_vote_class: case/space-insensitive, no false positives on 'not'/'hello'")
+# JSON-quoted variants — exactly what BPE produces for {"vote": "approve"}:
+assert tma._vote_class('"approve"') == "approve",  '"approve" should match'
+assert tma._vote_class('"approve')   == "approve",  '"approve  (open quote) should match'
+assert tma._vote_class('approve"')   == "approve",  'approve" (close quote) should match'
+assert tma._vote_class('"approve",') == "approve",  'with trailing comma should match'
+assert tma._vote_class(' "reject')   == "reject",   'leading space + open quote should match'
+assert tma._vote_class('"reject":')  == "reject",   'with trailing colon should match'
+# But adjacent-word false positives must still be rejected:
+assert tma._vote_class("Approveed") is None,  "no prefix matching on longer words"
+assert tma._vote_class("rejection") is None,  "no prefix matching on rejection"
+assert tma._vote_class("note") is None,       "note shouldn't match no"
+ok("_vote_class: handles JSON quoting + still rejects 'not'/'note'/'rejection'")
 
 # OnPolicyDistillDatum can be instantiated
 d = tma.OnPolicyDistillDatum(

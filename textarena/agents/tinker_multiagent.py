@@ -420,21 +420,33 @@ def _vote_class(token_text: str) -> Optional[str]:
     """
     Map a single token's text to "approve" / "reject" / None.
 
-    Handles the common BPE quirks for the LLMs we use:
+    Handles BPE / JSON quoting noise:
     * leading-space variants (" approve", " Approve")
     * casing variants ("Approve", "APPROVE", "Reject")
-    * exact match against the curated surface forms in _APPROVE_FORMS / _REJECT_FORMS
+    * JSON quote variants (' "approve', 'approve"', '"approve"')
+    * any combination of surrounding non-alphabetic characters
 
-    Anything else returns None — we deliberately do NOT do prefix matching on
-    short fragments like "ap" or "re" because that produces too many false
-    positives on common English words.
+    The matcher strips everything but ASCII letters before comparing, so
+    "\"approve\",", " 'reject'", and "Approve" all normalise to "approve" /
+    "reject".  We deliberately do NOT do prefix matching — that would
+    misclassify "Approveed" or "rejection" — only exact post-strip matches
+    against a small whitelist count.
+
+    The whitelist is intentionally tight: "no" matches reject (since the
+    LLM may use "yes"/"no" as informal vote synonyms) but "not", "none",
+    "node", etc. don't, because their alphabetic-only forms differ.
     """
     if not token_text:
         return None
-    t = token_text.lower()
-    if t in _APPROVE_FORMS or t.strip() in _APPROVE_FORMS:
+    # Strip non-alphabetic characters (quotes, commas, colons, whitespace,
+    # leading/trailing punctuation) and lower-case.  This collapses BPE
+    # variants like "\"approve\"" → "approve".
+    t_clean = "".join(c for c in token_text.lower() if c.isalpha())
+    if not t_clean:
+        return None
+    if t_clean in {"approve", "yes", "accept", "support", "agree"}:
         return "approve"
-    if t in _REJECT_FORMS or t.strip() in _REJECT_FORMS:
+    if t_clean in {"reject", "no", "deny", "oppose", "disagree"}:
         return "reject"
     return None
 
