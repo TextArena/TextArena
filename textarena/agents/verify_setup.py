@@ -143,7 +143,15 @@ assert tma._role_side("Servant")  == "Good"
 assert tma._role_side("Merlin")   == "Good"
 assert tma._role_side("Morgana")  == "Evil"
 assert tma._role_side("Assassin") == "Evil"
-ok("_role_side: Good/Evil factions correct")
+# Lowercase forms — the integrator's exposed_role uses these, and the
+# previous version of _role_side returned "other" for all of them, causing
+# good_datums=0 / evil_datums=0 in every CFR distill log line.
+assert tma._role_side("servant")  == "Good", "lowercase 'servant' regression"
+assert tma._role_side("morgana")  == "Evil", "lowercase 'morgana' regression"
+assert tma._role_side("MINION")   == "Evil", "uppercase regression"
+assert tma._role_side("")         == "other"
+assert tma._role_side("unknown")  == "other"
+ok("_role_side: case-insensitive, handles servant/morgana/MINION")
 
 # _cfr_action_to_target
 t = tma._cfr_action_to_target("approve", sharpness=0.85)
@@ -442,10 +450,14 @@ if args.network:
             print(f"  max_new_tokens = {cfg.max_new_tokens}")
             print(f"  this will take ~30–120s depending on model size")
             asyncio.run(tma.rl_train(cfg))
-            jsonl = Path(cfg.out_dir) / "self_distill.jsonl"
-            if jsonl.exists() and jsonl.stat().st_size > 0:
+            # Search for self_distill.jsonl anywhere under out_dir — the
+            # actual run dir is out_dir/run_name/ which the verifier doesn't
+            # need to reconstruct manually.
+            candidates = sorted(Path(cfg.out_dir).rglob("self_distill.jsonl"))
+            jsonl = candidates[-1] if candidates else None   # latest match
+            if jsonl is not None and jsonl.stat().st_size > 0:
                 lines = jsonl.read_text().strip().splitlines()
-                ok(f"smoke test wrote {len(lines)} self-distill tuples")
+                ok(f"smoke test wrote {len(lines)} self-distill tuples → {jsonl}")
                 # Spot-check the first record to confirm π_θ^a came through.
                 import json as _j
                 first = _j.loads(lines[0])
@@ -456,6 +468,14 @@ if args.network:
                        f"reject:{pa['reject']:.3f}}}")
                 else:
                     warn("first record missing student_pi_a — check JSONL export")
+                # Cross-check role-side breakdown — if good=0 and evil=0 we
+                # silently mis-bucketed every Good/Evil role.
+                roles_seen = {_j.loads(L).get("role_side", "?") for L in lines}
+                if roles_seen == {"other"}:
+                    warn("every datum has role_side='other' — _role_side() "
+                         "may be receiving role names in unexpected casing")
+                else:
+                    ok(f"role_side distribution: {sorted(roles_seen)}")
             else:
                 # Don't guess at the cause — the training log already printed
                 # diagnostics ("distill capture: 0/N vote turns ...") that say

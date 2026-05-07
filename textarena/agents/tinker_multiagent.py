@@ -579,10 +579,21 @@ def _belief_bucket(b: float) -> str:
 
 
 def _role_side(role: str) -> str:
-    """Map a specific role to its faction for w(o, r) computation."""
-    if role in _GOOD_ROLES:
+    """
+    Map a specific role to its faction for w(o, r) computation.
+
+    Case-insensitive — the DeepRole integrator's ``exposed_role`` is lower-case
+    ("servant", "minion") but the _GOOD_ROLES / _EVIL_ROLES frozensets at the
+    top of the file use capitalised names ("Servant", "Minion") for legacy
+    reasons.  We capitalise the input rather than the frozensets to avoid
+    breaking other callers that rely on the existing casing.
+    """
+    if not role:
+        return "other"
+    role_cap = role.capitalize()
+    if role_cap in _GOOD_ROLES:
         return "Good"
-    if role in _EVIL_ROLES:
+    if role_cap in _EVIL_ROLES:
         return "Evil"
     return "other"
 
