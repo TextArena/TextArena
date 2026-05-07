@@ -196,11 +196,24 @@ result = tma._extract_vote_logprobs(toks)
 assert result is None, f"expected None, got {result}"
 ok("_extract_vote_logprobs: returns None when no vote signal")
 
-# Case D: only one class found in top_logprobs — should keep scanning, not return early
-toks = [FakeTok("approve", -0.3, [("approve", -0.3), ("the", -1.5)])]
+# Case D: alternative class NOT in top_logprobs — we now use a fallback
+# instead of returning None (the gradient only needs the sampled logprob).
+# This is the case Qwen-8B-Base actually hits in production: when forced by
+# the prompt to emit "vote": "X, the model is very confident and the top-5
+# alternatives at that position are all approve-variants (or all reject-
+# variants), with the opposite class outside top-K.
+toks = [FakeTok("approve", -0.3, [("approve", -0.3), ("Approve", -2.5),
+                                   ("APPROVE", -3.1), ("appr", -3.5),
+                                   ("ap", -4.0)])]
 result = tma._extract_vote_logprobs(toks)
-assert result is None, f"expected None when only one class found, got {result}"
-ok("_extract_vote_logprobs: returns None when alternative class missing")
+assert result is not None, "should NOT return None when only one vote class in top-K"
+idx, vote, slp, lpa, lpr = result
+assert vote == "approve" and abs(slp - (-0.3)) < 1e-6
+assert abs(lpa - (-0.3)) < 1e-6, f"lpa should be exact for sampled class, got {lpa}"
+# Fallback for reject: one nat below smallest visible top-K logprob (-4.0)
+assert lpr < lpa, f"fallback lpr {lpr} should be < lpa {lpa}"
+assert abs(lpr - (-5.0)) < 1e-6, f"fallback should be min_top - 1.0 = -5.0, got {lpr}"
+ok("_extract_vote_logprobs: uses min_top_lp − 1.0 fallback when alt class missing")
 
 # Case E: vote token is BEYOND position 8 (the old bug — Qwen's reasoning prefix)
 toks = (

@@ -491,18 +491,31 @@ def _extract_vote_logprobs(
         log_p_approve: float = student_logprob if sampled_class == "approve" else NEG_INF
         log_p_reject:  float = student_logprob if sampled_class == "reject"  else NEG_INF
 
+        all_top_lps: List[float] = []
         for alt_tok, alt_lp in (tok.top_logprobs or []):
+            all_top_lps.append(float(alt_lp))
             alt_class = _vote_class(alt_tok)
             if alt_class == "approve":
                 log_p_approve = max(log_p_approve, float(alt_lp))
             elif alt_class == "reject":
                 log_p_reject = max(log_p_reject, float(alt_lp))
 
+        # When the alternative class isn't in top-K, use a conservative
+        # fallback: one nat below the smallest visible top-K logprob.  By
+        # construction the alternative must be at least that unlikely (else
+        # it would have been in top-K).  This matters for π_θ^a in the JSONL
+        # export — the gradient itself uses only the sampled-class logprob,
+        # so the REINFORCE-form reverse-KL update is unaffected by this
+        # fallback's exact value.
         if log_p_approve == NEG_INF or log_p_reject == NEG_INF:
-            # Found a vote token but the alternative class isn't in top-K —
-            # we don't have enough signal for the local KL.  Skip and keep
-            # scanning in case the model votes again later in the response.
-            continue
+            if all_top_lps:
+                fallback = min(all_top_lps) - 1.0
+            else:
+                fallback = student_logprob - 10.0    # nothing visible at all
+            if log_p_approve == NEG_INF:
+                log_p_approve = fallback
+            if log_p_reject == NEG_INF:
+                log_p_reject = fallback
 
         return (idx, sampled_class, student_logprob, log_p_approve, log_p_reject)
 
@@ -739,6 +752,11 @@ class NPlayerCoordinator:
 
         while not done and step_count < MAX_STEPS:
             step_count += 1
+            # Heartbeat — without this, the rollout is silent for 3–5 minutes
+            # while ~30 sequential Tinker sampling calls run.  DEBUG level so
+            # it doesn't spam normal training runs; set log level to DEBUG to
+            # see it (or change to log.info if you always want it).
+            log.debug(f"  turn {step_count}: sampling for active player...")
 
             sys_p, usr_p, role, active = self._build_prompt_for_turn(obs)
 
@@ -772,6 +790,11 @@ class NPlayerCoordinator:
 
             action_text, response_token_ids, sampling_logprobs, vote_logprob_meta = (
                 await self._sample_action_with_logprobs(hist)
+            )
+            log.debug(
+                f"  turn {step_count}: P{active} ({role}) → "
+                f"{action_text[:60].replace(chr(10), ' ')!r}"
+                + (" [vote captured]" if vote_logprob_meta else "")
             )
 
             # ------------------------------------------------------------------
