@@ -59,6 +59,39 @@ NOTE: Tinker's ``Env`` / coordinator / loss-function API has minor version
 drift between cookbook releases.  Lines marked ``# VERIFY:`` are where
 integration bugs are most likely; cross-reference with your installed
 tinker_cookbook version when first running.
+
+KNOWN GAPS vs. the §"On-Policy Distillation" specification
+==========================================================
+The spec calls for a multi-component per-turn loss::
+
+    L(s) = w(o, r) · [ L_b + L_vote + λ_msg · L_msg
+                       + λ_prop · L_prop + λ_sus · L_sus ]
+
+Implemented here:
+
+    [x]  L_vote   reverse KL on the vote distribution, REINFORCE-form
+                  estimator at the action token position
+    [x]  L_msg    reverse KL on Evil message-style {deceptive, honest},
+                  scaled by λ_msg
+    [x]  w(o, r)  outcome weighting (1.0 if won, 0.5 otherwise)
+    [x]  Self-distillation JSONL export (§"Self Distillation")
+
+Not yet implemented:
+
+    [ ]  Two separate LoRAs (π_θ^Good / π_θ^Evil).  This file uses a single
+         shared LoRA; Good- and Evil-side gradients currently co-mingle.
+         Proper two-policy support needs two ``training_client`` instances
+         and runtime-switched ``sampling_client``s per player role.
+    [ ]  L_b   (BCE on belief b̂)         — LLM doesn't emit a scalar belief
+                                            head; would need response-JSON
+                                            parsing or auxiliary heads.
+    [ ]  L_prop (BCE on proposal vector p̂) — same.
+    [ ]  L_sus  (MSE on suspicion ût)       — same.
+
+These four gaps match the multi-head ``TrainableAgent`` from
+``trainable_agent.py``; porting them onto an LLM requires either structured
+prompting + parsing, or auxiliary heads bolted onto the LoRA adapter — both
+out of scope for this scaffolding.
 """
 
 from __future__ import annotations
@@ -186,6 +219,26 @@ class TrainerConfig:
     memory_path:      str   = "results/reflection_memory.json"
     cheat_sheet_k:    int   = 5
 
+    # ----- On-policy CFR distillation -----
+    # Implements §"On-Policy Distillation" of the spec.  The combined per-turn
+    # loss is::
+    #
+    #     L(s) = w(o, r) · [ L_b + L_vote + λ_msg · L_msg
+    #                        + λ_prop · L_prop + λ_sus · L_sus ]
+    #
+    # with reverse-KL  L_vote = KL(π_θ(·|s) || π_CFR(·|r, ̃b))  (mode-seeking,
+    # collapses onto the teacher's dominant action).  Currently active terms:
+    # L_vote (always) and L_msg (Evil players only).  The auxiliary head terms
+    # (L_b / L_prop / L_sus) need scalar / vector outputs the LLM does not
+    # natively emit; left as TODO.  See KNOWN GAPS in module docstring.
+    cfr_distill_enabled:   bool  = False
+    cfr_distill_lr:        float = 5e-6      # typically lower than RL lr
+    cfr_distill_every:     int   = 1         # run distill every N RL steps
+    cfr_distill_sharpness: float = 0.85      # CFR target distribution sharpness
+    lambda_msg:            float = 0.5       # message-style loss coefficient
+    lambda_prop:           float = 0.3       # proposal loss coefficient (TODO)
+    lambda_sus:            float = 0.3       # suspicion loss coefficient (TODO)
+
     # ----- Experiential RL (ERL; arXiv 2602.13949) -----
     # When erl_enabled is True, each step does:
     #   1. First-attempt rollout  (πθ self-play)
@@ -297,6 +350,163 @@ class PlayerTrajectory:
     env_reward:   float                = 0.0
 
 
+@dataclass
+class OnPolicyDistillDatum:
+    """
+    One turn's on-policy distillation datum (CFR teacher grading LLM student).
+
+    Captures everything needed to compute the per-decision **reverse KL**
+    update from §"On-Policy Distillation" of the spec:
+
+        L_vote(s) = KL( π_θ(·|s) || π_CFR(·|r, ̃b) )
+                  = Σ_a  π_θ(a|s) · [ log π_θ(a|s) - log π_CFR(a|r, ̃b) ]
+
+    plus the outcome weight  w(o, r) ∈ {1.0, 0.5}.
+
+    Implementation note (REINFORCE form for reverse KL)
+    ---------------------------------------------------
+    A practical estimator for the reverse-KL gradient using a *single sampled*
+    action a ~ π_θ is::
+
+        ∇L ≈  −[ log π_CFR(a) − log π_θ(a) ] · ∇ log π_θ(a)
+
+    so we drive the policy gradient with::
+
+        advantage = w(o, r) · [ log π_CFR(a_sampled) − log π_θ(a_sampled) ]
+
+    placed at the position of the sampled action token in the assistant turn
+    (zeros elsewhere).  This is fed to Tinker's ``importance_sampling`` loss,
+    matching the on-policy distillation recipe from the Thinking Machines blog
+    (advantage = −reverse_KL).
+    """
+    prompt_messages:        List[Dict[str, str]]   # full history fed to the LLM
+    response_text:          str                    # full assistant turn the LLM produced
+    response_token_ids:     List[int]              # tokenised response
+    sampling_logprobs:      List[float]            # per-token logprobs from the sampler
+    vote_token_index:       int                    # position of the approve/reject token
+    sampled_vote:           str                    # "approve" or "reject"
+    student_logprob:        float                  # log π_θ(a_sampled) at that position
+    student_log_p_approve:  float                  # log π_θ(approve) — for π_θ^a in JSONL
+    student_log_p_reject:   float                  # log π_θ(reject)  — for π_θ^a in JSONL
+    cfr_target:             Dict[str, float]       # π_CFR(·|r, ̃b)
+    msg_target:             Optional[Dict[str, float]]  # π_CFR^m for Evil; None for Good
+    role:                   str                    # "Good"/"Evil" or specific role
+    role_side:              str                    # "Good" / "Evil" / "other"  (for w(o,r))
+    won:                    bool                   # whether this player won the game
+    phase:                  str
+    player_id:              int
+    belief_continuous:      float                  # b ∈ [0,1]
+    belief_bucket:          str                    # ̃b ∈ {"low", "high"}
+
+
+# ---------------------------------------------------------------------------
+# Token-level helpers for extracting approve/reject signal from LLM logprobs
+# ---------------------------------------------------------------------------
+
+# Surface forms the LLM might use for each action.  We match lower-cased
+# token text so this handles both " approve" and "Approve" etc.
+_APPROVE_FORMS: frozenset = frozenset({
+    "approve", " approve", "yes", " yes", "accept", " accept",
+    "✓", "support", " support",
+})
+_REJECT_FORMS: frozenset = frozenset({
+    "reject", " reject", "no", " no", "deny", " deny",
+    "✗", "oppose", " oppose",
+})
+
+
+def _extract_vote_logprobs(
+    logprobs: list,
+) -> Optional[Tuple[int, str, float, float, float]]:
+    """
+    Scan the first 8 generated tokens for an approve / reject vote token.
+
+    Returns ``(token_index, sampled_vote, student_logprob, log_p_approve,
+    log_p_reject)`` for the position the vote was emitted, or ``None`` when no
+    vote class appears in the top alternatives.
+
+    * ``sampled_vote`` ∈ {"approve", "reject"} — what the LLM actually chose.
+    * ``student_logprob`` is the LLM's logprob for the sampled token (used for
+      the REINFORCE-form reverse-KL advantage).
+    * ``log_p_approve`` / ``log_p_reject`` give the local two-class distribution
+      (used for entropy / monitoring; harvested from ``top_logprobs``).
+    """
+    NEG_INF = float("-inf")
+
+    for idx, tok in enumerate(logprobs[:8]):
+        sampled_lower = (tok.token or "").lower()
+        is_approve = sampled_lower in _APPROVE_FORMS
+        is_reject  = sampled_lower in _REJECT_FORMS
+        if not (is_approve or is_reject):
+            continue  # not a vote token — keep scanning
+
+        sampled_vote     = "approve" if is_approve else "reject"
+        student_logprob  = float(tok.logprob)
+
+        log_p_approve: float = student_logprob if is_approve else NEG_INF
+        log_p_reject:  float = student_logprob if is_reject  else NEG_INF
+
+        for alt_tok, alt_lp in (tok.top_logprobs or []):
+            alt_lower = (alt_tok or "").lower()
+            if alt_lower in _APPROVE_FORMS:
+                log_p_approve = max(log_p_approve, float(alt_lp))
+            elif alt_lower in _REJECT_FORMS:
+                log_p_reject = max(log_p_reject, float(alt_lp))
+
+        if log_p_approve == NEG_INF or log_p_reject == NEG_INF:
+            return None
+
+        return (idx, sampled_vote, student_logprob, log_p_approve, log_p_reject)
+
+    return None
+
+
+def _cfr_action_to_target(
+    dr_action: Optional[str],
+    sharpness: float = 0.85,
+) -> Optional[Dict[str, float]]:
+    """
+    Approximate π_CFR(·|r, ̃b) over {approve, reject} from the integrator's
+    recommended action string.
+
+    Properly speaking the spec wants the *full* CFR strategy at infoset
+    (r, ̃b), e.g. via ``cfr.get_average_strategy((role, bucket))``.  The
+    DeepRole integrator only exposes the argmax recommendation here, so we
+    soften it with ``sharpness`` (default 0.85 / 0.15).  When integrator
+    support for raw strategy lookup is added, replace this with a direct
+    table read.
+
+    Returns ``None`` when ``dr_action`` is not a recognised vote action.
+    """
+    if not dr_action:
+        return None
+    a = dr_action.lower().strip()
+    if a in _APPROVE_FORMS:
+        return {"approve": sharpness, "reject": 1.0 - sharpness}
+    if a in _REJECT_FORMS:
+        return {"approve": 1.0 - sharpness, "reject": sharpness}
+    return None
+
+
+def _belief_bucket(b: float) -> str:
+    """ ̃b — high if b ≥ 0.5, low otherwise (from §Teacher-Student Model)."""
+    return "high" if b >= 0.5 else "low"
+
+
+def _role_side(role: str) -> str:
+    """Map a specific role to its faction for w(o, r) computation."""
+    if role in _GOOD_ROLES:
+        return "Good"
+    if role in _EVIL_ROLES:
+        return "Evil"
+    return "other"
+
+
+def _outcome_weight(won: bool) -> float:
+    """w(o, r) = 1.0 if won, 0.5 otherwise (coarse advantage from §3)."""
+    return 1.0 if won else 0.5
+
+
 class NPlayerCoordinator:
     """
     Drives one ``AvalonEnv`` to completion by sampling from a shared policy.
@@ -320,18 +530,25 @@ class NPlayerCoordinator:
         temperature:     float = 0.9,
         cfr_iterations:      Optional[int] = 50,
         cfr_wait_iterations: Optional[int] = 25,
+        cfr_distill_enabled:   bool  = False,
+        cfr_distill_sharpness: float = 0.85,
     ):
         from textarena.agents.deeprole_llm import (
             _InstrumentedDeepRoleIntegrator,
             _dr_build_hidden_state_table,
         )
 
-        self.env             = env
-        self.sampling_client = sampling_client
-        self.renderer        = renderer
-        self.cheat_sheet     = cheat_sheet
-        self.max_new_tokens  = max_new_tokens
-        self.temperature     = temperature
+        self.env                    = env
+        self.sampling_client        = sampling_client
+        self.renderer               = renderer
+        self.cheat_sheet            = cheat_sheet
+        self.max_new_tokens         = max_new_tokens
+        self.temperature            = temperature
+        self.cfr_distill_enabled    = cfr_distill_enabled
+        self.cfr_distill_sharpness  = cfr_distill_sharpness
+        # Accumulated on-policy distillation datums for this rollout.
+        # Each entry corresponds to one vote turn the student took.
+        self._distill_datums: List[OnPolicyDistillDatum] = []
 
         # One DeepRole integrator per game — drives belief / strategy / role.
         self._integrator = _InstrumentedDeepRoleIntegrator(
@@ -475,7 +692,91 @@ class NPlayerCoordinator:
                 hist.append({"role": "system", "content": sys_p})
             hist.append({"role": "user", "content": usr_p})
 
-            action_text = await self._sample_action(hist)
+            action_text, response_token_ids, sampling_logprobs, vote_logprob_meta = (
+                await self._sample_action_with_logprobs(hist)
+            )
+
+            # ------------------------------------------------------------------
+            # On-policy CFR distillation: capture the CFR target for this turn.
+            #
+            # The student just acted from its own policy (on-policy).  The CFR
+            # teacher then grades the infoset (r, ̃b) the student visited
+            # *after the fact* — the student never sees the CFR output as
+            # input, preserving the on-policy property.
+            #
+            # We capture everything needed downstream to compute the reverse-KL
+            # advantage  w(o,r) · [log π_CFR(a) − log π_θ(a)]  at the action
+            # token position.
+            # ------------------------------------------------------------------
+            if self.cfr_distill_enabled and vote_logprob_meta is not None:
+                dr_action = self._integrator.exposed_dr_action
+                cfr_target = _cfr_action_to_target(
+                    dr_action, sharpness=self.cfr_distill_sharpness
+                )
+                if cfr_target is not None:
+                    from textarena.agents.deeprole_integrator import dr_parse_game_states, dr_phase_str
+                    snaps  = dr_parse_game_states(obs)
+                    gs     = snaps[-1] if snaps else {}
+                    phase  = dr_phase_str(gs) if gs else "unknown"
+                    role   = self._integrator.exposed_role or ""
+                    side   = _role_side(role)
+
+                    # Continuous belief b ∈ [0,1] from the integrator's
+                    # exposed_belief vector — collapse to scalar via the
+                    # player_evil_probs utility (suspicion of teammate).
+                    belief_vec = self._integrator.exposed_belief
+                    try:
+                        from textarena.agents.deeprole_llm import _dr_player_evil_probs
+                        evil_probs = _dr_player_evil_probs(
+                            belief_vec, self._id_to_hid
+                        )
+                        # Scalar belief = max suspicion over teammates on the
+                        # currently-proposed team.  When team unknown, mean.
+                        b = float(sum(evil_probs) / max(1, len(evil_probs)))
+                    except Exception:
+                        b = 0.5
+                    bb = _belief_bucket(b)
+
+                    # π_CFR^m for the message-style decision.  Only meaningful
+                    # for Evil players; Good is forced to {honest: 1.0}.  The
+                    # integrator does not expose a message strategy directly,
+                    # so we use a sharpness-soft prior matching the spec:
+                    # Evil low-belief → mostly deceptive; Evil high-belief →
+                    # mostly honest (the CFR plot in cfr_progress.png shows
+                    # this is what the tabular CFR converges to).
+                    if side == "Evil":
+                        if bb == "low":
+                            msg_target = {"deceptive": self.cfr_distill_sharpness,
+                                          "honest":    1.0 - self.cfr_distill_sharpness}
+                        else:
+                            msg_target = {"deceptive": 1.0 - self.cfr_distill_sharpness,
+                                          "honest":    self.cfr_distill_sharpness}
+                    else:
+                        msg_target = None
+
+                    (idx_in_lp, sampled_vote, student_lp,
+                     log_p_app, log_p_rej) = vote_logprob_meta
+
+                    self._distill_datums.append(OnPolicyDistillDatum(
+                        prompt_messages       = list(hist),
+                        response_text         = action_text,
+                        response_token_ids    = list(response_token_ids),
+                        sampling_logprobs     = list(sampling_logprobs),
+                        vote_token_index      = idx_in_lp,
+                        sampled_vote          = sampled_vote,
+                        student_logprob       = student_lp,
+                        student_log_p_approve = log_p_app,
+                        student_log_p_reject  = log_p_rej,
+                        cfr_target            = cfr_target,
+                        msg_target            = msg_target,
+                        role                  = role,
+                        role_side             = side,
+                        won                   = False,    # filled in at game end
+                        phase                 = phase,
+                        player_id             = active,
+                        belief_continuous     = b,
+                        belief_bucket         = bb,
+                    ))
 
             hist.append({"role": "assistant", "content": action_text})
             trajectories[active].actions.append(action_text)
@@ -498,6 +799,8 @@ class NPlayerCoordinator:
                     traj.env_reward = 0.0
                     traj.reward     = 0.0
                     traj.messages   = list(self._histories[pid])
+                if self._distill_datums:
+                    trajectories[0]._distill_datums = list(self._distill_datums)  # type: ignore[attr-defined]
                 break
 
             if done:
@@ -507,6 +810,13 @@ class NPlayerCoordinator:
                     traj.env_reward = float(terminal_rewards.get(pid, 0.0))
                     traj.reward     = role_aware_reward(traj.role, traj.env_reward)
                     traj.messages   = list(self._histories[pid])
+                # Stamp outcome on every captured datum and attach the list
+                # to trajectories[0] (game-level, not per-player).  ``won`` is
+                # used for w(o, r) inside the distill step.
+                if self._distill_datums:
+                    for d in self._distill_datums:
+                        d.won = trajectories[d.player_id].env_reward > 0
+                    trajectories[0]._distill_datums = list(self._distill_datums)  # type: ignore[attr-defined]
                 break
 
             player_id, obs = next_pid, next_obs
@@ -519,43 +829,111 @@ class NPlayerCoordinator:
 
     async def _sample_action(self, messages: List[Dict[str, str]]) -> str:
         """
-        Sample one assistant turn from the shared policy via Tinker.
-
-        TinkerMessageCompleter exposes ``async __call__(messages) -> Message``
-        per the cookbook docs; we invoke it via the standard call syntax.
-        Falls back to the low-level ``sample_async`` only if the cookbook
-        completer is unavailable.
+        Backwards-compat wrapper around ``_sample_action_with_logprobs`` that
+        returns only the decoded text (used in code paths that don't need the
+        sampling logprobs, e.g. ERL reflection generation).
         """
-        # Pattern A — MessageCompleter (cookbook >= 0.2)
-        try:
-            from tinker_cookbook.completers import TinkerMessageCompleter  # noqa: WPS433
-            completer = TinkerMessageCompleter(
-                sampling_client = self.sampling_client,
-                renderer        = self.renderer,
-                max_tokens      = self.max_new_tokens,
-                temperature     = self.temperature,
-            )
-            reply = await completer(messages)   # __call__, not .complete
-            # Reply is a Message dataclass with a `content` field; fall back
-            # to str() in case the cookbook ever changes the shape.
-            return reply.content if hasattr(reply, "content") else str(reply)
-        except ImportError:
-            pass
+        text, _toks, _lps, _meta = await self._sample_action_with_logprobs(messages)
+        return text
 
-        # Pattern B — low-level sample_async
+    async def _sample_action_with_logprobs(
+        self, messages: List[Dict[str, str]],
+    ) -> Tuple[str, List[int], List[float], Optional[Tuple[int, str, float, float, float]]]:
+        """
+        Sample one assistant turn from the shared policy and return:
+            (decoded_text, token_ids, per_token_sampling_logprobs, vote_meta)
+
+        ``vote_meta`` is the output of ``_extract_vote_logprobs`` evaluated
+        over the per-token alternatives (or None if no vote token was found
+        in the first 8 positions).  These are the inputs the on-policy CFR
+        distillation step needs to compute the reverse-KL advantage at the
+        action token position.
+
+        We use the low-level ``sample_async`` path so the response sequence
+        carries per-token logprob data (Tinker exposes ``logprobs`` and
+        ``top_logprobs`` on the returned sequence object).  The
+        ``TinkerMessageCompleter`` wrapper drops these, so we bypass it for
+        rollouts that need the dense distillation signal.
+        """
         import tinker
         prompt_tokens   = self.renderer.build_generation_prompt(messages)
+        # Request top-K alternatives at each position so we can recover both
+        # log π_θ(approve) and log π_θ(reject) regardless of which one was
+        # sampled — this is what _extract_vote_logprobs needs.
         sampling_params = tinker.types.SamplingParams(
-            max_tokens  = self.max_new_tokens,
-            temperature = self.temperature,
+            max_tokens   = self.max_new_tokens,
+            temperature  = self.temperature,
+            logprobs     = True,
+            top_logprobs = 5,
         )
-        sample_resp = await self.sampling_client.sample_async(
-            prompt          = tinker.types.ModelInput.from_ints(prompt_tokens),
-            sampling_params = sampling_params,
-            num_samples     = 1,
+        try:
+            sample_resp = await self.sampling_client.sample_async(
+                prompt          = tinker.types.ModelInput.from_ints(prompt_tokens),
+                sampling_params = sampling_params,
+                num_samples     = 1,
+            )
+        except TypeError:
+            # Older Tinker SDKs may not accept logprobs on SamplingParams; fall
+            # back to text-only and signal "no vote meta" so the distillation
+            # step skips this turn.
+            sampling_params = tinker.types.SamplingParams(
+                max_tokens  = self.max_new_tokens,
+                temperature = self.temperature,
+            )
+            sample_resp = await self.sampling_client.sample_async(
+                prompt          = tinker.types.ModelInput.from_ints(prompt_tokens),
+                sampling_params = sampling_params,
+                num_samples     = 1,
+            )
+
+        seq          = sample_resp.sequences[0]
+        out_tokens   = list(seq.tokens)
+        decoded      = self.renderer.tokenizer.decode(
+            out_tokens, skip_special_tokens=True
         )
-        out_tokens = sample_resp.sequences[0].tokens
-        return self.renderer.tokenizer.decode(out_tokens, skip_special_tokens=True)
+
+        # Per-token logprobs of the *sampled* tokens (not top-K).  Used as the
+        # importance-sampling "old logprobs" in the Tinker datum.
+        per_tok_lps: List[float] = []
+        token_top:   List[List[Tuple[str, float]]] = []
+        try:
+            raw_lps = getattr(seq, "logprobs", None) or []
+            for entry in raw_lps:
+                # Entry shape varies: try a few common Tinker SDK shapes.
+                lp = float(getattr(entry, "logprob", 0.0))
+                per_tok_lps.append(lp)
+                tops = []
+                top_obj = getattr(entry, "top_logprobs", None) or []
+                for t in top_obj:
+                    tt = getattr(t, "token", None) or self.renderer.tokenizer.decode(
+                        [getattr(t, "token_id", 0)], skip_special_tokens=True
+                    )
+                    tops.append((tt, float(getattr(t, "logprob", 0.0))))
+                token_top.append(tops)
+        except Exception:
+            per_tok_lps = [0.0] * len(out_tokens)
+            token_top   = [[] for _ in out_tokens]
+
+        # Build a list of TokenLogprob-shaped objects for _extract_vote_logprobs.
+        class _Tok:
+            __slots__ = ("token", "logprob", "top_logprobs")
+            def __init__(self, token, logprob, top_logprobs):
+                self.token, self.logprob, self.top_logprobs = token, logprob, top_logprobs
+
+        decoded_tokens = []
+        for i, tid in enumerate(out_tokens):
+            try:
+                t_text = self.renderer.tokenizer.decode(
+                    [tid], skip_special_tokens=True
+                )
+            except Exception:
+                t_text = ""
+            lp = per_tok_lps[i] if i < len(per_tok_lps) else 0.0
+            tops = token_top[i] if i < len(token_top) else []
+            decoded_tokens.append(_Tok(t_text, lp, tops))
+
+        vote_meta = _extract_vote_logprobs(decoded_tokens)
+        return decoded, out_tokens, per_tok_lps, vote_meta
 
 
 # ===========================================================================
@@ -820,6 +1198,262 @@ async def _erl_generate_reflections(
     return out
 
 
+async def _on_policy_cfr_distill_step(
+    *,
+    training_client:  Any,
+    renderer:         Any,
+    distill_datums:   List[OnPolicyDistillDatum],
+    learning_rate:    float,
+    lambda_msg:       float = 0.5,
+) -> Dict[str, int]:
+    """
+    On-policy distillation update: dense per-decision **reverse KL** signal.
+
+    For every vote turn the student took during the rollout, this function
+    submits a single Tinker policy-gradient datum whose advantage at the
+    sampled action token implements one term of the reverse-KL gradient::
+
+        ∇L_vote(s) ≈ −[ log π_CFR(a) − log π_θ(a) ] · ∇ log π_θ(a)
+
+    so we set::
+
+        advantage[t_vote] = w(o, r) · [ log π_CFR(a_sampled) − log π_θ(a_sampled) ]
+
+    on the action token position and 0 elsewhere.  The Tinker
+    ``importance_sampling`` loss with these inputs gives a REINFORCE-form
+    estimator of the reverse-KL gradient — mode-seeking, exactly as specified
+    in §"On-Policy Distillation".
+
+    For Evil players we additionally place an advantage at any message-style
+    token (deceptive/honest) found in the response, weighted by ``lambda_msg``,
+    matching::
+
+        L = w(o, r) · [ L_vote + λ_msg · L_msg ]
+
+    Auxiliary losses for belief / proposal / suspicion (L_b, L_prop, L_sus
+    in the spec) are NOT implemented here — they assume the multi-head student
+    architecture from ``trainable_agent.py`` (BCE / MSE on scalar/vector
+    outputs).  The Qwen3-8B-Base LLM emits free text, so those terms would
+    require parsing structured fields from the response and scoring them with
+    a separate loss.  See KNOWN GAPS at module top.
+
+    Returns counts ``{"vote_datums", "msg_datums", "good_datums", "evil_datums"}``
+    for logging.
+    """
+    import math
+    import torch
+    import tinker
+    from tinker import types, TensorData
+
+    counts = {"vote_datums": 0, "msg_datums": 0, "good_datums": 0, "evil_datums": 0}
+    if not distill_datums:
+        return counts
+
+    tokenizer = renderer.tokenizer
+    submitted: List[Any] = []
+
+    for datum in distill_datums:
+        # ----- compute per-token advantages -----
+        n_resp = len(datum.response_token_ids)
+        if n_resp == 0:
+            continue
+
+        adv = [0.0] * n_resp
+
+        # Vote advantage at the action token position.
+        # advantage = w(o,r) · [log π_CFR(a) − log π_θ(a)]
+        cfr_p = datum.cfr_target.get(datum.sampled_vote, 1e-6)
+        cfr_p = max(min(cfr_p, 1.0 - 1e-6), 1e-6)
+        log_p_cfr  = math.log(cfr_p)
+        log_p_stud = datum.student_logprob
+        w          = _outcome_weight(datum.won)
+        vote_adv   = w * (log_p_cfr - log_p_stud)
+
+        if 0 <= datum.vote_token_index < n_resp:
+            adv[datum.vote_token_index] = vote_adv
+            counts["vote_datums"] += 1
+
+        # Message-style advantage (Evil only).  We scan the response tokens
+        # for an honest/deceptive class word and place a weighted advantage
+        # at that position.  Skip silently when no message token is found —
+        # not all turns carry a message-style choice.
+        if datum.role_side == "Evil" and datum.msg_target is not None:
+            HONEST_WORDS    = {"honest", "truth", "trust", "trustworthy"}
+            DECEPTIVE_WORDS = {"deceptive", "lie", "bluff", "deceive"}
+            decoded_lower = datum.response_text.lower()
+            chosen_msg = None
+            if any(w in decoded_lower for w in DECEPTIVE_WORDS):
+                chosen_msg = "deceptive"
+            elif any(w in decoded_lower for w in HONEST_WORDS):
+                chosen_msg = "honest"
+            if chosen_msg is not None:
+                # Approximate position: scan tokens for the class word; if not
+                # found pick the last response token as a fallback.
+                msg_idx = n_resp - 1
+                for i, tid in enumerate(datum.response_token_ids):
+                    try:
+                        tt = tokenizer.decode([tid], skip_special_tokens=True).lower()
+                    except Exception:
+                        continue
+                    if any(w in tt for w in (HONEST_WORDS | DECEPTIVE_WORDS)):
+                        msg_idx = i
+                        break
+                cfr_pm = datum.msg_target.get(chosen_msg, 1e-6)
+                cfr_pm = max(min(cfr_pm, 1.0 - 1e-6), 1e-6)
+                # We don't have a per-class student logprob for the message
+                # word, so we use the sampled token's logprob from the
+                # sampler (carried in sampling_logprobs).
+                stud_msg_lp = (
+                    datum.sampling_logprobs[msg_idx]
+                    if msg_idx < len(datum.sampling_logprobs) else 0.0
+                )
+                msg_adv = lambda_msg * w * (math.log(cfr_pm) - stud_msg_lp)
+                # Add (don't overwrite) in case msg_idx == vote_idx for tiny responses.
+                adv[msg_idx] += msg_adv
+                counts["msg_datums"] += 1
+
+        # ----- assemble the importance-sampling Tinker datum -----
+        prompt_tokens = renderer.build_generation_prompt(datum.prompt_messages)
+        if hasattr(prompt_tokens, "to_ints"):
+            prompt_ids = list(prompt_tokens.to_ints())
+        else:
+            prompt_ids = list(prompt_tokens)
+        if not prompt_ids:
+            continue
+
+        # Sequence layout matches the existing GRPO datum (see lines 1218–1258
+        # of the original file): full sequence is prompt+completion, with the
+        # left-shift used for next-token prediction.  Prompt positions get
+        # zero advantage.
+        all_tokens = prompt_ids + datum.response_token_ids
+        input_ids  = all_tokens[:-1]
+        target_ids = all_tokens[1:]
+        n          = len(target_ids)
+        n_prompt   = len(prompt_ids)
+
+        # Advantages: zero across (shifted) prompt, then our per-response-token
+        # adv list, truncated/padded to fit.  After shift, response position i
+        # corresponds to global position (n_prompt - 1) + i.
+        adv_arr = [0.0] * n
+        for i, a in enumerate(adv):
+            pos = (n_prompt - 1) + i
+            if 0 <= pos < n:
+                adv_arr[pos] = a
+
+        # Sampling-time logprobs: zero on prompt positions, the captured
+        # per-token logprobs on response positions.  Tinker's
+        # importance_sampling loss uses these as π_θ_old(a).
+        lp_arr = [0.0] * n
+        for i, lp in enumerate(datum.sampling_logprobs[:len(datum.response_token_ids)]):
+            pos = (n_prompt - 1) + i
+            if 0 <= pos < n:
+                lp_arr[pos] = float(lp)
+
+        submitted.append(tinker.Datum(
+            model_input    = types.ModelInput.from_ints(tokens=input_ids),
+            loss_fn_inputs = {
+                "target_tokens": TensorData.from_torch(
+                    torch.tensor(target_ids, dtype=torch.int64)
+                ),
+                "logprobs": TensorData.from_torch(
+                    torch.tensor(lp_arr, dtype=torch.float32)
+                ),
+                "advantages": TensorData.from_torch(
+                    torch.tensor(adv_arr, dtype=torch.float32)
+                ),
+            },
+        ))
+
+        if datum.role_side == "Good":
+            counts["good_datums"] += 1
+        elif datum.role_side == "Evil":
+            counts["evil_datums"] += 1
+
+    if not submitted:
+        return counts
+
+    fwdbwd_future = await training_client.forward_backward_async(
+        submitted,
+        loss_fn = "importance_sampling",
+    )
+    optim_future = await training_client.optim_step_async(
+        tinker.AdamParams(
+            learning_rate = learning_rate,
+            beta1         = 0.9,
+            beta2         = 0.95,
+            eps           = 1e-8,
+        )
+    )
+    await fwdbwd_future
+    await optim_future
+    return counts
+
+
+# ---------------------------------------------------------------------------
+# Self-distillation JSONL export (§"Self Distillation")
+# ---------------------------------------------------------------------------
+
+def _self_distill_export_jsonl(
+    *,
+    out_path:        Path,
+    distill_datums:  List[OnPolicyDistillDatum],
+    step:            int,
+) -> int:
+    """
+    Append per-turn tuples ``(r, d, b̂, π_θ^a, π_θ^m, g, o)`` to a JSONL file
+    so an offline SFT pass can fine-tune the LoRA on the agent's own best
+    outputs.
+
+    Per the spec these tuples include "the in-character message that was
+    actually sent" so the model also learns to predict its own contemporaneous
+    response style.  Targets are the agent's own outputs at decision time —
+    so this self-distillation pulls in the same direction as the online RL
+    update rather than competing with it.
+
+    Returns the number of tuples written.
+    """
+    import math
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    n = 0
+    with out_path.open("a", encoding="utf-8") as f:
+        for d in distill_datums:
+            # Reconstruct π_θ^a from the two-class student logprobs captured at
+            # the vote token position.  Subtract the max for numerical stability
+            # before normalising.
+            la, lr = d.student_log_p_approve, d.student_log_p_reject
+            mx = max(la, lr)
+            a_unnorm, r_unnorm = math.exp(la - mx), math.exp(lr - mx)
+            z = a_unnorm + r_unnorm
+            student_pi_a = {
+                "approve": a_unnorm / z if z > 0 else 0.5,
+                "reject":  r_unnorm / z if z > 0 else 0.5,
+            }
+            tup = {
+                "step":            step,
+                "role":            d.role,
+                "role_side":       d.role_side,
+                "won":             bool(d.won),
+                "phase":           d.phase,
+                "player_id":       d.player_id,
+                "belief_b":        d.belief_continuous,
+                "belief_bb":       d.belief_bucket,
+                "sampled_vote":    d.sampled_vote,
+                "student_logprob": d.student_logprob,
+                "student_pi_a":    student_pi_a,            # π_θ^a from spec
+                "cfr_target":      d.cfr_target,            # π_CFR(·|r, ̃b)
+                "msg_target":      d.msg_target,            # π_CFR^m
+                "response":        d.response_text,         # in-character message
+                # The "g" structured-context vector from the spec is encoded
+                # implicitly in the prompt text (mission/successes/fails are
+                # rendered inside the system prompt by _dr_build_llm_prompt),
+                # so we save the full prompt for offline reconstruction.
+                "prompt":          d.prompt_messages,
+            }
+            f.write(json.dumps(tup, ensure_ascii=False) + "\n")
+            n += 1
+    return n
+
+
 async def _erl_distill_step(
     *,
     training_client: Any,
@@ -1066,14 +1700,16 @@ async def rl_train(cfg: TrainerConfig) -> None:
             ]
             coordinators_local = [
                 NPlayerCoordinator(
-                    env                 = e,
-                    sampling_client     = sampling_client,
-                    renderer            = renderer,
-                    cheat_sheet         = cheat_sheet,
-                    max_new_tokens      = cfg.max_new_tokens,
-                    temperature         = cfg.temperature,
-                    cfr_iterations      = cfg.cfr_iterations,
-                    cfr_wait_iterations = cfg.cfr_wait_iterations,
+                    env                  = e,
+                    sampling_client      = sampling_client,
+                    renderer             = renderer,
+                    cheat_sheet          = cheat_sheet,
+                    max_new_tokens       = cfg.max_new_tokens,
+                    temperature          = cfg.temperature,
+                    cfr_iterations       = cfg.cfr_iterations,
+                    cfr_wait_iterations  = cfg.cfr_wait_iterations,
+                    cfr_distill_enabled  = cfg.cfr_distill_enabled,
+                    cfr_distill_sharpness= cfg.cfr_distill_sharpness,
                 )
                 for e in envs_local
             ]
@@ -1302,6 +1938,44 @@ async def rl_train(cfg: TrainerConfig) -> None:
         await fwdbwd_future
         await optim_future
 
+        # ----- On-policy CFR distillation (reverse KL, dense per-decision) -----
+        # Implements §"On-Policy Distillation":
+        #   L = w(o,r) · [ L_b + L_vote + λ_msg L_msg + λ_prop L_prop + λ_sus L_sus ]
+        # Currently active terms: L_vote (full reverse KL), L_msg (Evil only).
+        # KNOWN GAPS: L_b / L_prop / L_sus require structured-output parsing
+        # from the LLM that this scaffolding does not yet expose; see
+        # tinker_distil_agent.py docstring for the rationale.
+        if cfg.cfr_distill_enabled and (step + 1) % max(1, cfg.cfr_distill_every) == 0:
+            all_distill: List[OnPolicyDistillDatum] = []
+            for t in flat:
+                all_distill.extend(getattr(t, "_distill_datums", []))
+
+            # JSONL self-distillation export (§"Self Distillation").  Run
+            # before the gradient update so the file reflects the policy
+            # distribution at this step exactly.
+            if all_distill:
+                jsonl_path = out_dir / "self_distill.jsonl"
+                n_jsonl = _self_distill_export_jsonl(
+                    out_path       = jsonl_path,
+                    distill_datums = all_distill,
+                    step           = step,
+                )
+                log.info(f"  self-distill: wrote {n_jsonl} tuples to {jsonl_path}")
+
+            if all_distill:
+                counts = await _on_policy_cfr_distill_step(
+                    training_client = training_client,
+                    renderer        = renderer,
+                    distill_datums  = all_distill,
+                    learning_rate   = cfg.cfr_distill_lr,
+                    lambda_msg      = cfg.lambda_msg,
+                )
+                log.info(
+                    f"  CFR distill (reverse-KL): vote={counts['vote_datums']}  "
+                    f"msg={counts['msg_datums']}  "
+                    f"good={counts['good_datums']}  evil={counts['evil_datums']}"
+                )
+
         # ----- ERL: internalization SFT + memory persistence -----
         if cfg.erl_enabled and flat_attempt2:
             # Persist reflections that improved outcome on attempt 2.
@@ -1425,6 +2099,28 @@ def parse_args(argv: Optional[List[str]] = None) -> TrainerConfig:
     p.add_argument("--sft-epochs",     type=int,   default=1)
     p.add_argument("--sft-lr",         type=float, default=1e-5)
 
+    # On-policy CFR distillation
+    p.add_argument(
+        "--cfr-distill", dest="cfr_distill_enabled", action="store_true",
+        help=(
+            "Enable on-policy CFR distillation: for every vote turn the "
+            "student takes, the CFR teacher grades the infoset after the "
+            "fact and we minimise forward KL from the CFR target. Gives "
+            "dense per-decision signal on top of the sparse GRPO reward."
+        ),
+    )
+    p.add_argument("--cfr-distill-lr",        type=float, default=5e-6)
+    p.add_argument("--cfr-distill-every",     type=int,   default=1,
+                   help="Run CFR distillation every N RL steps (default: 1).")
+    p.add_argument("--cfr-distill-sharpness", type=float, default=0.85,
+                   help="Sharpness of CFR soft target distribution (default: 0.85).")
+    p.add_argument("--lambda-msg",  type=float, default=0.5,
+                   help="Message-style loss coefficient λ_msg (Evil only).")
+    p.add_argument("--lambda-prop", type=float, default=0.3,
+                   help="Proposal loss coefficient λ_prop (TODO: not yet wired).")
+    p.add_argument("--lambda-sus",  type=float, default=0.3,
+                   help="Suspicion loss coefficient λ_sus (TODO: not yet wired).")
+
     # Experiential RL (ERL; arXiv 2602.13949)
     p.add_argument(
         "--erl", dest="erl_enabled", action="store_true",
@@ -1471,6 +2167,13 @@ def parse_args(argv: Optional[List[str]] = None) -> TrainerConfig:
         skip_sft             = args.skip_sft,
         sft_epochs           = args.sft_epochs,
         sft_lr               = args.sft_lr,
+        cfr_distill_enabled  = args.cfr_distill_enabled,
+        cfr_distill_lr       = args.cfr_distill_lr,
+        cfr_distill_every    = args.cfr_distill_every,
+        cfr_distill_sharpness= args.cfr_distill_sharpness,
+        lambda_msg           = args.lambda_msg,
+        lambda_prop          = args.lambda_prop,
+        lambda_sus           = args.lambda_sus,
         erl_enabled          = args.erl_enabled,
         erl_distill_lr       = args.erl_distill_lr,
         erl_distill_every    = args.erl_distill_every,

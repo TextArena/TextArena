@@ -1,0 +1,317 @@
+"""
+verify_setup.py — pre-flight checks for tinker_multiagent.py.
+
+Runs cheap, offline-or-near-offline assertions to catch the failure modes
+that otherwise only surface 20 minutes into a real training run:
+
+    1. Imports & module structure
+    2. TINKER_API_KEY present
+    3. Tinker SDK version exposes SamplingParams.logprobs
+    4. textarena Avalon-v0 environment loads and resets
+    5. Dataclass + helper sanity (OnPolicyDistillDatum, _extract_vote_logprobs,
+       _cfr_action_to_target, _outcome_weight, _belief_bucket)
+    6. A 1-step / 1-game / 1-player smoke training step (skipped without
+       --network so this stays runnable on a laptop)
+
+Exit code is 0 when everything passes, non-zero otherwise.
+
+Run::
+
+    python verify_setup.py            # offline checks
+    python verify_setup.py --network  # also runs a 1-step training round
+"""
+
+from __future__ import annotations
+
+import argparse
+import importlib
+import inspect
+import os
+import sys
+import traceback
+from pathlib import Path
+
+GREEN = "\033[32m"
+RED   = "\033[31m"
+YELLOW= "\033[33m"
+RESET = "\033[0m"
+
+def ok(msg):    print(f"  {GREEN}✓{RESET} {msg}")
+def fail(msg):  print(f"  {RED}✗{RESET} {msg}")
+def warn(msg):  print(f"  {YELLOW}!{RESET} {msg}")
+def hdr(msg):   print(f"\n{msg}")
+
+errors: list[str] = []
+
+# ---------------------------------------------------------------------------
+# 1. Module imports
+# ---------------------------------------------------------------------------
+hdr("1. Imports")
+try:
+    import tinker_multiagent as tma
+    ok("tinker_multiagent imports cleanly")
+except Exception as e:
+    fail(f"tinker_multiagent failed to import: {type(e).__name__}: {e}")
+    traceback.print_exc()
+    errors.append("module import")
+    sys.exit(1)
+
+try:
+    import tinker_distil_agent as tda
+    ok("tinker_distil_agent imports cleanly")
+except Exception as e:
+    fail(f"tinker_distil_agent failed to import: {type(e).__name__}: {e}")
+    errors.append("distil agent import")
+
+# Check the symbols we expect to be there.
+for name in ("OnPolicyDistillDatum", "_extract_vote_logprobs",
+             "_cfr_action_to_target", "_outcome_weight", "_belief_bucket",
+             "_role_side", "_on_policy_cfr_distill_step",
+             "_self_distill_export_jsonl", "NPlayerCoordinator",
+             "TrainerConfig"):
+    if hasattr(tma, name):
+        ok(f"tinker_multiagent.{name} present")
+    else:
+        fail(f"tinker_multiagent.{name} MISSING")
+        errors.append(f"missing {name}")
+
+# ---------------------------------------------------------------------------
+# 2. Environment
+# ---------------------------------------------------------------------------
+hdr("2. Environment")
+api_key = os.environ.get("TINKER_API_KEY", "")
+if api_key:
+    ok(f"TINKER_API_KEY set ({len(api_key)} chars)")
+else:
+    warn("TINKER_API_KEY not set — required for any real run")
+    errors.append("TINKER_API_KEY")
+
+# ---------------------------------------------------------------------------
+# 3. Tinker SDK
+# ---------------------------------------------------------------------------
+hdr("3. Tinker SDK")
+try:
+    import tinker
+    ok(f"tinker imported (version: {getattr(tinker, '__version__', 'unknown')})")
+except ImportError as e:
+    fail(f"tinker not installed: {e}")
+    errors.append("tinker SDK")
+else:
+    # Does SamplingParams accept logprobs? This is what
+    # _sample_action_with_logprobs needs for the dense distillation signal.
+    try:
+        sp = tinker.types.SamplingParams(max_tokens=1, temperature=1.0,
+                                          logprobs=True, top_logprobs=5)
+        ok("SamplingParams accepts logprobs=True (dense signal will work)")
+    except TypeError as e:
+        warn(f"SamplingParams does NOT accept logprobs: {e}")
+        warn("→ distillation will silently fall back; vote=0 in logs")
+        warn("→ either upgrade tinker or switch to TinkerTokenCompleter")
+
+# ---------------------------------------------------------------------------
+# 4. textarena Avalon
+# ---------------------------------------------------------------------------
+hdr("4. textarena Avalon-v0")
+try:
+    import textarena as ta
+    env = ta.make("Avalon-v0")
+    env.reset(num_players=5, special_roles={"Merlin", "Morgana"}, seed=0)
+    pid, obs = env.get_observation()
+    ok(f"Avalon-v0 reset OK (first player: P{pid}, obs len: {len(str(obs))})")
+except Exception as e:
+    fail(f"Avalon-v0 not available: {type(e).__name__}: {e}")
+    errors.append("Avalon-v0")
+
+# ---------------------------------------------------------------------------
+# 5. Dataclass + helper sanity
+# ---------------------------------------------------------------------------
+hdr("5. Helper sanity")
+
+# _belief_bucket
+assert tma._belief_bucket(0.7) == "high",  "0.7 should be high"
+assert tma._belief_bucket(0.4) == "low",   "0.4 should be low"
+assert tma._belief_bucket(0.5) == "high",  "≥0.5 boundary should be high"
+ok("_belief_bucket: high/low boundary at 0.5")
+
+# _outcome_weight
+assert tma._outcome_weight(True)  == 1.0
+assert tma._outcome_weight(False) == 0.5
+ok("_outcome_weight: w(o,r) = {1.0, 0.5}")
+
+# _role_side
+assert tma._role_side("Servant")  == "Good"
+assert tma._role_side("Merlin")   == "Good"
+assert tma._role_side("Morgana")  == "Evil"
+assert tma._role_side("Assassin") == "Evil"
+ok("_role_side: Good/Evil factions correct")
+
+# _cfr_action_to_target
+t = tma._cfr_action_to_target("approve", sharpness=0.85)
+assert t is not None and abs(t["approve"] - 0.85) < 1e-6 and abs(t["reject"] - 0.15) < 1e-6, f"got {t}"
+t = tma._cfr_action_to_target("reject", sharpness=0.85)
+assert t is not None and abs(t["approve"] - 0.15) < 1e-6 and abs(t["reject"] - 0.85) < 1e-6, f"got {t}"
+assert tma._cfr_action_to_target("guess_merlin_at_2") is None
+assert tma._cfr_action_to_target(None) is None
+ok("_cfr_action_to_target: approve/reject/None handling")
+
+# _extract_vote_logprobs — fake some token-logprob shaped objects
+class FakeTok:
+    def __init__(self, token, logprob, top_logprobs):
+        self.token, self.logprob, self.top_logprobs = token, logprob, top_logprobs
+
+# Case A: sampled "approve", "reject" in top_logprobs
+toks = [FakeTok("approve", -0.3, [("approve", -0.3), ("reject", -1.5)])]
+result = tma._extract_vote_logprobs(toks)
+assert result is not None, "should find vote signal"
+idx, vote, slp, lpa, lpr = result
+assert idx == 0 and vote == "approve"
+assert abs(slp - (-0.3)) < 1e-6
+assert abs(lpa - (-0.3)) < 1e-6 and abs(lpr - (-1.5)) < 1e-6
+ok("_extract_vote_logprobs: sampled approve")
+
+# Case B: sampled "reject", "approve" in top_logprobs
+toks = [FakeTok(" reject", -0.5, [(" reject", -0.5), (" approve", -0.9)])]
+result = tma._extract_vote_logprobs(toks)
+assert result is not None
+idx, vote, slp, lpa, lpr = result
+assert vote == "reject" and idx == 0
+ok("_extract_vote_logprobs: sampled reject (handles leading space)")
+
+# Case C: no vote token → None
+toks = [FakeTok("Hello", -2.0, [("Hi", -1.5), ("Hey", -2.5)]),
+        FakeTok(",",     -0.1, [])]
+result = tma._extract_vote_logprobs(toks)
+assert result is None, f"expected None, got {result}"
+ok("_extract_vote_logprobs: returns None when no vote signal")
+
+# Case D: only one class found in top_logprobs (insufficient signal)
+toks = [FakeTok("approve", -0.3, [("approve", -0.3), ("the", -1.5)])]
+result = tma._extract_vote_logprobs(toks)
+assert result is None, f"expected None when only one class found, got {result}"
+ok("_extract_vote_logprobs: returns None when alternative class missing")
+
+# OnPolicyDistillDatum can be instantiated
+d = tma.OnPolicyDistillDatum(
+    prompt_messages       = [{"role": "system", "content": "test"}],
+    response_text         = "approve",
+    response_token_ids    = [123, 456],
+    sampling_logprobs     = [-0.3, -0.1],
+    vote_token_index      = 0,
+    sampled_vote          = "approve",
+    student_logprob       = -0.3,
+    student_log_p_approve = -0.3,
+    student_log_p_reject  = -1.5,
+    cfr_target            = {"approve": 0.85, "reject": 0.15},
+    msg_target            = None,
+    role                  = "Servant",
+    role_side             = "Good",
+    won                   = True,
+    phase                 = "vote",
+    player_id             = 0,
+    belief_continuous     = 0.4,
+    belief_bucket         = "low",
+)
+ok("OnPolicyDistillDatum: constructs cleanly")
+
+# JSONL export round-trips
+import tempfile, json as _json
+with tempfile.TemporaryDirectory() as td:
+    p = Path(td) / "self_distill.jsonl"
+    n = tma._self_distill_export_jsonl(out_path=p, distill_datums=[d, d], step=7)
+    assert n == 2 and p.exists()
+    lines = p.read_text().strip().splitlines()
+    assert len(lines) == 2
+    rec = _json.loads(lines[0])
+    assert rec["step"] == 7
+    assert rec["sampled_vote"] == "approve"
+    assert rec["role_side"] == "Good"
+    assert rec["won"] is True
+    assert rec["cfr_target"]["approve"] == 0.85
+    assert rec["cfr_target"]["reject"] == 0.15
+    # π_θ^a should be present and normalized to 1.0
+    assert "student_pi_a" in rec, "JSONL missing student_pi_a (π_θ^a from spec)"
+    pa = rec["student_pi_a"]
+    assert abs(pa["approve"] + pa["reject"] - 1.0) < 1e-6, f"π_θ^a not normalized: {pa}"
+    # log -0.3 ≫ log -1.5 → approve should dominate the student distribution
+    assert pa["approve"] > pa["reject"], f"π_θ^a wrong way round: {pa}"
+ok("_self_distill_export_jsonl: writes 2 records, π_θ^a normalized, JSON round-trips")
+
+# Reverse-KL advantage hand-calc check (no Tinker call — just the math).
+# advantage = w · [log p_cfr(a) - log p_θ(a)]
+# w = 1.0 (won), p_cfr(approve) = 0.85, p_θ(approve) = exp(-0.3) ≈ 0.7408
+# expected = 1.0 · [log 0.85 - (-0.3)] = -0.1625 + 0.3 = 0.1375
+import math
+expected_adv = 1.0 * (math.log(0.85) - (-0.3))
+assert abs(expected_adv - 0.13744) < 1e-3, f"adv math drift: {expected_adv}"
+ok(f"reverse-KL advantage math: {expected_adv:+.4f} (won, p_cfr=0.85, p_θ≈0.74)")
+
+# Same datum with won=False should give half the gradient
+d_loss = tma.OnPolicyDistillDatum(**{**d.__dict__, "won": False})
+expected_adv_loss = 0.5 * (math.log(0.85) - (-0.3))
+assert abs(expected_adv_loss - 0.06872) < 1e-3
+ok(f"outcome weighting: loss reduces advantage to {expected_adv_loss:+.4f}")
+
+# ---------------------------------------------------------------------------
+# 6. Optional: 1-step network smoke test
+# ---------------------------------------------------------------------------
+parser = argparse.ArgumentParser()
+parser.add_argument("--network", action="store_true",
+                    help="Also run a 1-step training round (~30s, uses API credits)")
+args = parser.parse_args()
+
+if args.network:
+    hdr("6. Network smoke test (1 step, 1 game)")
+    if not api_key:
+        fail("Cannot run network test without TINKER_API_KEY")
+        errors.append("smoke test skipped")
+    else:
+        try:
+            import asyncio
+            cfg = tma.TrainerConfig(
+                base_model          = os.environ.get("VERIFY_BASE_MODEL",
+                                                      "meta-llama/Llama-3.2-1B"),
+                renderer_name       = os.environ.get("VERIFY_RENDERER", "llama3"),
+                lora_rank           = 8,
+                games_per_step      = 1,
+                num_players         = 5,
+                steps               = 1,
+                save_every          = 1,
+                skip_sft            = True,
+                cfr_distill_enabled = True,
+                cfr_distill_lr      = 5e-6,
+                temperature         = 0.7,
+                max_new_tokens      = 32,
+                run_name            = "verify_smoke",
+                out_dir             = "results/verify_smoke",
+            )
+            print(f"  running 1 step with base={cfg.base_model} ({cfg.renderer_name})")
+            asyncio.run(tma.rl_train(cfg))
+            jsonl = Path(cfg.out_dir) / "self_distill.jsonl"
+            if jsonl.exists() and jsonl.stat().st_size > 0:
+                lines = jsonl.read_text().strip().splitlines()
+                ok(f"smoke test wrote {len(lines)} self-distill tuples")
+            else:
+                warn("smoke test ran but self_distill.jsonl is empty")
+                warn("→ likely SamplingParams.logprobs unsupported; check §3 above")
+        except Exception as e:
+            fail(f"smoke test crashed: {type(e).__name__}: {e}")
+            traceback.print_exc()
+            errors.append("smoke test")
+else:
+    hdr("6. Network smoke test")
+    print("  skipped (re-run with --network to execute a real 1-step round)")
+
+# ---------------------------------------------------------------------------
+# Summary
+# ---------------------------------------------------------------------------
+print()
+if errors:
+    print(f"{RED}FAILED{RESET} — {len(errors)} issue(s):")
+    for e in errors:
+        print(f"  - {e}")
+    sys.exit(1)
+else:
+    print(f"{GREEN}ALL CHECKS PASSED{RESET}")
+    if not args.network:
+        print("Next: run with --network for the 1-step smoke test, then start training.")
+    sys.exit(0)

@@ -125,7 +125,9 @@ class _TinkerSamplerBackend:
         )
         choice = resp.choices[0]
         text   = (choice.message.content or "").strip()
-        return LLMResult(text=text, logprobs=_extract_logprobs(choice))
+        lps    = _extract_logprobs(choice)
+        self._last_logprobs = lps          # exposed via TinkerDistilAgent.last_logprobs
+        return LLMResult(text=text, logprobs=lps)
 
 
 def _extract_logprobs(choice: Any) -> list:
@@ -162,6 +164,22 @@ class TinkerDistilAgent(DeepRoleLLMAgent):
     inference time.  Identical behaviour to ``DeepRoleLLMAgent`` except the
     LLM backend is swapped to ``_TinkerSamplerBackend``.
 
+    The checkpoint may have been produced by any combination of training
+    objectives in ``tinker_multiagent.py``:
+
+    * **GRPO self-play** — on-policy, sparse terminal reward.
+    * **ERL internalization SFT** — off-policy dense distillation from
+      reflection-augmented second attempts (``_erl_distill_step``).
+    * **On-policy CFR distillation** — on-policy dense distillation: every
+      vote turn the student took is graded by the CFR teacher after the fact,
+      minimising forward KL from the CFR target distribution
+      (``_on_policy_cfr_distill_step``).  Enabled with ``--cfr-distill`` at
+      training time.
+
+    Prompt distribution alignment is preserved: both the rollout coordinator
+    and this agent use the same ``_dr_build_llm_prompt`` /
+    ``_dr_build_merlin_guess_prompt`` builders from ``deeprole_llm.py``.
+
     Parameters
     ----------
     tinker_model_path : str
@@ -182,6 +200,11 @@ class TinkerDistilAgent(DeepRoleLLMAgent):
       / ``load_in_8bit``, or ``share_llm_backend`` parameters — those are
       local-HF concepts.  Tinker handles weight management itself.
     * Reads ``TINKER_API_KEY`` from the environment.
+    * The ``last_logprobs`` attribute (set after every call) exposes the
+      per-token logprobs from the most recent LLM call, mirroring the
+      ``top_logprobs`` captured during training.  Useful for offline analysis
+      and for verifying that the deployed model's vote entropy matches the
+      training distribution.
     """
 
     def __init__(
@@ -253,6 +276,56 @@ class TinkerDistilAgent(DeepRoleLLMAgent):
         if self._llm is None:
             self._llm = _TinkerSamplerBackend(**self._tinker_kwargs)
         return self._llm
+
+    # ------------------------------------------------------------------
+    # Distillation-analysis helpers
+    # ------------------------------------------------------------------
+
+    @property
+    def last_logprobs(self) -> list:
+        """
+        Per-token logprobs from the most recent LLM call (list of
+        ``TokenLogprob``).  Set by ``_TinkerSamplerBackend.call``; empty
+        list before the first call.
+
+        Mirrors the logprobs captured in ``NPlayerCoordinator._sample_action``
+        during training.  Useful for verifying at deploy time that the model's
+        vote-token entropy matches what was seen during CFR distillation.
+        """
+        backend = self._llm
+        if backend is None:
+            return []
+        return getattr(backend, "_last_logprobs", [])
+
+    def vote_entropy(self) -> Optional[float]:
+        """
+        Approximate entropy (nats) of the model's approve/reject distribution
+        from the most recent call, computed from ``last_logprobs``.
+
+        Returns ``None`` when no vote-token signal is found (e.g. the last
+        call was a Merlin-guess rather than a vote).
+
+        This mirrors the dense signal used by ``_on_policy_cfr_distill_step``
+        during training and is useful for sanity-checking that the deployed
+        model is uncertain in the right situations.
+        """
+        import math
+        from tinker_multiagent import _extract_vote_logprobs
+        result = _extract_vote_logprobs(self.last_logprobs)
+        if result is None:
+            return None
+        log_p_approve, log_p_reject = result
+        # Normalise to a proper distribution
+        max_lp = max(log_p_approve, log_p_reject)
+        p_approve = math.exp(log_p_approve - max_lp)
+        p_reject  = math.exp(log_p_reject  - max_lp)
+        z = p_approve + p_reject
+        p_approve /= z
+        p_reject  /= z
+        # H = -sum(p * log(p))
+        def h(p: float) -> float:
+            return 0.0 if p < 1e-10 else -p * math.log(p)
+        return h(p_approve) + h(p_reject)
 
     # ------------------------------------------------------------------
     # Identity / repr
