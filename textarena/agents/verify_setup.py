@@ -256,11 +256,36 @@ ok(f"outcome weighting: loss reduces advantage to {expected_adv_loss:+.4f}")
 # ---------------------------------------------------------------------------
 parser = argparse.ArgumentParser()
 parser.add_argument("--network", action="store_true",
-                    help="Also run a 1-step training round (~30s, uses API credits)")
+                    help="Also run a 1-step training round (uses API credits)")
+parser.add_argument("--base-model", type=str,
+                    default=os.environ.get("VERIFY_BASE_MODEL",
+                                            "meta-llama/Llama-3.2-1B"),
+                    help="Base model for smoke test "
+                         "(e.g. 'Qwen/Qwen3-8B-Base', 'meta-llama/Llama-3.2-1B').")
+parser.add_argument("--renderer-name", type=str,
+                    default=os.environ.get("VERIFY_RENDERER", "llama3"),
+                    help="Tinker renderer matching the base model family "
+                         "('qwen3' for Qwen, 'llama3' for Llama).")
+parser.add_argument("--lora-rank", type=int, default=8,
+                    help="LoRA rank for the smoke-test LoRA (default 8 — small, "
+                         "since this is just a wiring check).")
+parser.add_argument("--max-new-tokens", type=int, default=None,
+                    help="Override max_new_tokens (default 32 for ≤1B models, "
+                         "64 for larger).")
 args = parser.parse_args()
 
 if args.network:
-    hdr("6. Network smoke test (1 step, 1 game)")
+    # Auto-tune max_new_tokens for the model size: small models can vote in
+    # ~32 tokens, but Qwen-8B-Base tends to ramble and you want to give it
+    # enough room to actually emit an action token before truncation.
+    if args.max_new_tokens is None:
+        is_big = any(s in args.base_model.lower()
+                     for s in ("8b", "7b", "13b", "70b"))
+        max_new_tokens = 64 if is_big else 32
+    else:
+        max_new_tokens = args.max_new_tokens
+
+    hdr(f"6. Network smoke test (1 step, 1 game, {args.base_model})")
     if not api_key:
         fail("Cannot run network test without TINKER_API_KEY")
         errors.append("smoke test skipped")
@@ -268,10 +293,9 @@ if args.network:
         try:
             import asyncio
             cfg = tma.TrainerConfig(
-                base_model          = os.environ.get("VERIFY_BASE_MODEL",
-                                                      "meta-llama/Llama-3.2-1B"),
-                renderer_name       = os.environ.get("VERIFY_RENDERER", "llama3"),
-                lora_rank           = 8,
+                base_model          = args.base_model,
+                renderer_name       = args.renderer_name,
+                lora_rank           = args.lora_rank,
                 games_per_step      = 1,
                 num_players         = 5,
                 steps               = 1,
@@ -280,16 +304,30 @@ if args.network:
                 cfr_distill_enabled = True,
                 cfr_distill_lr      = 5e-6,
                 temperature         = 0.7,
-                max_new_tokens      = 32,
+                max_new_tokens      = max_new_tokens,
                 run_name            = "verify_smoke",
                 out_dir             = "results/verify_smoke",
             )
-            print(f"  running 1 step with base={cfg.base_model} ({cfg.renderer_name})")
+            print(f"  base_model     = {cfg.base_model}")
+            print(f"  renderer       = {cfg.renderer_name}")
+            print(f"  lora_rank      = {cfg.lora_rank}")
+            print(f"  max_new_tokens = {cfg.max_new_tokens}")
+            print(f"  this will take ~30–120s depending on model size")
             asyncio.run(tma.rl_train(cfg))
             jsonl = Path(cfg.out_dir) / "self_distill.jsonl"
             if jsonl.exists() and jsonl.stat().st_size > 0:
                 lines = jsonl.read_text().strip().splitlines()
                 ok(f"smoke test wrote {len(lines)} self-distill tuples")
+                # Spot-check the first record to confirm π_θ^a came through.
+                import json as _j
+                first = _j.loads(lines[0])
+                if "student_pi_a" in first:
+                    pa = first["student_pi_a"]
+                    ok(f"first record: sampled={first['sampled_vote']}  "
+                       f"π_θ^a={{approve:{pa['approve']:.3f}, "
+                       f"reject:{pa['reject']:.3f}}}")
+                else:
+                    warn("first record missing student_pi_a — check JSONL export")
             else:
                 warn("smoke test ran but self_distill.jsonl is empty")
                 warn("→ likely SamplingParams.logprobs unsupported; check §3 above")
