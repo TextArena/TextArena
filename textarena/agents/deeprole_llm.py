@@ -474,6 +474,12 @@ def _dr_build_llm_prompt(
     system_prompt = (
         f"You are playing Avalon as player P{player_id} (role: {role.capitalize()}).\n"
         "Vote on the proposed team and share a brief in-character thought.\n\n"
+        "IMPORTANT — public vs. private information:\n"
+        "  - Your `vote` and `message` are PUBLIC. Every other player will read them.\n"
+        "  - Your role is PRIVATE. Never name your role, hint at it, or reveal\n"
+        "    role-specific knowledge in your message.\n"
+        "  - Always speak as if you are loyal to Good and trying to identify Evil.\n"
+        "    Even if you ARE Evil, your public messaging must read as Good.\n\n"
         "Rules:\n"
         "  - `vote` is exactly one of: \"approve\" or \"reject\". No other values.\n"
         "  - `belief` is YOUR probability (0–1) that the team contains at least one Evil player.\n"

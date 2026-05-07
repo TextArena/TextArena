@@ -239,6 +239,8 @@ class TrainerConfig:
     lambda_msg:            float = 0.5       # message-style loss coefficient
     lambda_prop:           float = 0.3       # proposal loss coefficient (TODO)
     lambda_sus:            float = 0.3       # suspicion loss coefficient (TODO)
+    cfr_leakage_penalty:   float = 1.0       # negative advantage per token of
+                                              # role-revealing content (set 0 to disable)
 
     # ----- Experiential RL (ERL; arXiv 2602.13949) -----
     # When erl_enabled is True, each step does:
@@ -588,6 +590,149 @@ def _role_side(role: str) -> str:
 def _outcome_weight(won: bool) -> float:
     """w(o, r) = 1.0 if won, 0.5 otherwise (coarse advantage from §3)."""
     return 1.0 if won else 0.5
+
+
+# ---------------------------------------------------------------------------
+# Role-leakage shaper
+# ---------------------------------------------------------------------------
+#
+# An LLM playing a hidden-role game will sometimes write things like
+# "As a Minion, I must ensure..." or "I am Merlin and I see Evil." in the
+# public message field.  These are catastrophic self-outs in Avalon — the
+# entire game collapses around the leaked info — but the existing distill
+# loss only grades the *vote* token, never the *message* content.  GRPO's
+# terminal reward does penalise these (self-outs → losses → tokens get
+# slightly negative advantage), but the signal is weak because it's spread
+# across thousands of tokens.
+#
+# This shaper adds a direct, dense penalty: regex against role-revealing
+# phrases, and apply a constant negative advantage at the offending tokens.
+# Stacks on top of the reverse-KL vote distillation.
+#
+# Patterns are role-conditional:
+#   * Evil players (Morgana, Mordred, Assassin, Oberon, Minion): leak when
+#     they name themselves as Evil / a Minion / a specific Evil role, or use
+#     "fellow Minion" / "we Evil" plurals that out the team.
+#   * Merlin: leaks when self-claimed (Merlin's value comes from staying
+#     hidden — Assassin wins by guessing Merlin at game end).
+#   * Percival: similar, leaks when self-claimed (Percival distinguishes
+#     Merlin from Morgana, so revealing Percival narrows the search).
+#   * Servants: NOT penalised for claiming "Servant" — that's standard
+#     Avalon cover and shouldn't be discouraged.
+# ---------------------------------------------------------------------------
+
+# Self-identification patterns for Evil players.  Matches phrases that
+# explicitly tag the speaker as Evil / a Minion / a specific Evil role.
+_EVIL_LEAK_PATTERNS: Tuple[re.Pattern, ...] = tuple(
+    re.compile(p, re.IGNORECASE) for p in [
+        r"\bi\s*['']?\s*m\s+evil\b",
+        r"\bi\s+am\s+evil\b",
+        r"\bi\s*['']?\s*m\s+(?:a\s+|the\s+)?minion\b",
+        r"\bi\s+am\s+(?:a\s+|the\s+)?minion\b",
+        r"\bas\s+(?:a\s+|the\s+)?minion\b",
+        r"\bas\s+(?:morgana|mordred|the\s+assassin|oberon)\b",
+        r"\bi\s+am\s+(?:morgana|mordred|the\s+assassin|oberon)\b",
+        r"\bi\s*['']?\s*m\s+(?:morgana|mordred|the\s+assassin|oberon)\b",
+        r"\bfellow\s+(?:minion|minions|evil|spy|spies)\b",
+        r"\bmy\s+fellow\s+(?:minion|minions|evil|spy|spies)\b",
+        r"\bwe\s+(?:are\s+)?(?:the\s+)?evil\b",
+        r"\bwe\s+(?:are\s+)?(?:the\s+)?minions?\b",
+        r"\bevil\s+team['']?s\s+(?:survival|victory|win)\b",
+        r"\bensure\s+the\s+evil\s+team\b",
+        r"\bfor\s+the\s+evil\s+team\b",
+    ]
+)
+
+# Self-identification patterns for Merlin.
+_MERLIN_LEAK_PATTERNS: Tuple[re.Pattern, ...] = tuple(
+    re.compile(p, re.IGNORECASE) for p in [
+        r"\bi\s*['']?\s*m\s+merlin\b",
+        r"\bi\s+am\s+merlin\b",
+        r"\bas\s+(?:a\s+|the\s+)?merlin\b",
+        r"\bi\s+see\s+(?:the\s+)?evil\b",      # only Merlin literally sees Evil
+        r"\bi\s+know\s+who\s+(?:the\s+)?evil\b",
+        r"\bi\s+can\s+see\s+evil\b",
+    ]
+)
+
+# Self-identification patterns for Percival.
+_PERCIVAL_LEAK_PATTERNS: Tuple[re.Pattern, ...] = tuple(
+    re.compile(p, re.IGNORECASE) for p in [
+        r"\bi\s*['']?\s*m\s+percival\b",
+        r"\bi\s+am\s+percival\b",
+        r"\bas\s+(?:a\s+|the\s+)?percival\b",
+    ]
+)
+
+
+def _detect_role_leakage(
+    text: str, role: Optional[str],
+) -> List[Tuple[int, int]]:
+    """
+    Scan ``text`` for role-revealing phrases conditional on the player's role.
+
+    Returns a list of ``(start, end)`` character spans where leakage was
+    detected.  Empty list when no leakage or when ``role`` doesn't have
+    associated patterns (e.g. Servant, which is fine to claim publicly).
+
+    The role string is the integrator's exposed role (lower-case), e.g.
+    "merlin" / "morgana" / "minion" / "servant".
+    """
+    if not text or not role:
+        return []
+    role_lower = role.lower().strip()
+
+    patterns: List[re.Pattern] = []
+    if role_lower in {"morgana", "mordred", "assassin", "oberon", "minion"}:
+        patterns.extend(_EVIL_LEAK_PATTERNS)
+    if role_lower == "merlin":
+        patterns.extend(_MERLIN_LEAK_PATTERNS)
+    if role_lower == "percival":
+        patterns.extend(_PERCIVAL_LEAK_PATTERNS)
+
+    spans: List[Tuple[int, int]] = []
+    for pat in patterns:
+        for m in pat.finditer(text):
+            spans.append((m.start(), m.end()))
+    return spans
+
+
+def _find_leak_token_indices(
+    token_ids: List[int],
+    leak_spans: List[Tuple[int, int]],
+    tokenizer: Any,
+) -> List[int]:
+    """
+    Map character spans (in the decoded response) to token indices.
+
+    Returns a sorted list of token positions that overlap with any leak span,
+    suitable for placing per-token negative advantages on.
+
+    Implementation: decode tokens one-by-one and accumulate the running char
+    offset.  This isn't byte-perfect under all BPE edge cases (whitespace
+    handling can drift by ±1 char), but for the leak penalty's purpose
+    "approximately the right tokens" is fine — the gradient still teaches
+    the model not to emit those phrases.
+    """
+    if not leak_spans or not token_ids:
+        return []
+
+    leak_idxs: set = set()
+    char_pos = 0
+    for tok_idx, tid in enumerate(token_ids):
+        try:
+            tok_text = tokenizer.decode([tid], skip_special_tokens=True)
+        except Exception:
+            tok_text = ""
+        tok_start = char_pos
+        tok_end   = char_pos + len(tok_text)
+        for span_start, span_end in leak_spans:
+            # Overlap test: token range [tok_start, tok_end) intersects span?
+            if tok_end > span_start and tok_start < span_end:
+                leak_idxs.add(tok_idx)
+                break
+        char_pos = tok_end
+    return sorted(leak_idxs)
 
 
 class NPlayerCoordinator:
@@ -1339,9 +1484,11 @@ async def _on_policy_cfr_distill_step(
     distill_datums:   List[OnPolicyDistillDatum],
     learning_rate:    float,
     lambda_msg:       float = 0.5,
+    leakage_penalty:  float = 1.0,
 ) -> Dict[str, int]:
     """
-    On-policy distillation update: dense per-decision **reverse KL** signal.
+    On-policy distillation update: dense per-decision **reverse KL** signal,
+    plus a content-side **role-leakage shaper**.
 
     For every vote turn the student took during the rollout, this function
     submits a single Tinker policy-gradient datum whose advantage at the
@@ -1364,6 +1511,14 @@ async def _on_policy_cfr_distill_step(
 
         L = w(o, r) · [ L_vote + λ_msg · L_msg ]
 
+    **Role-leakage shaping**: in addition to the spec's loss terms, we scan
+    each response for role-revealing phrases (e.g. "As a Minion, ..." from
+    an Evil player) using ``_detect_role_leakage`` and place a negative
+    advantage of magnitude ``leakage_penalty`` at every token covered by a
+    matched span.  This penalises self-outs directly, instead of relying on
+    the sparse GRPO terminal-reward gradient to discover them.  Set
+    ``leakage_penalty=0.0`` to disable.
+
     Auxiliary losses for belief / proposal / suspicion (L_b, L_prop, L_sus
     in the spec) are NOT implemented here — they assume the multi-head student
     architecture from ``trainable_agent.py`` (BCE / MSE on scalar/vector
@@ -1371,15 +1526,19 @@ async def _on_policy_cfr_distill_step(
     require parsing structured fields from the response and scoring them with
     a separate loss.  See KNOWN GAPS at module top.
 
-    Returns counts ``{"vote_datums", "msg_datums", "good_datums", "evil_datums"}``
-    for logging.
+    Returns counts ``{"vote_datums", "msg_datums", "good_datums", "evil_datums",
+    "leaks_detected", "leak_tokens_penalised"}`` for logging.
     """
     import math
     import torch
     import tinker
     from tinker import types, TensorData
 
-    counts = {"vote_datums": 0, "msg_datums": 0, "good_datums": 0, "evil_datums": 0}
+    counts = {
+        "vote_datums": 0, "msg_datums": 0,
+        "good_datums": 0, "evil_datums": 0,
+        "leaks_detected": 0, "leak_tokens_penalised": 0,
+    }
     if not distill_datums:
         return counts
 
@@ -1445,6 +1604,25 @@ async def _on_policy_cfr_distill_step(
                 # Add (don't overwrite) in case msg_idx == vote_idx for tiny responses.
                 adv[msg_idx] += msg_adv
                 counts["msg_datums"] += 1
+
+        # ----- role-leakage shaper -----
+        # Scan the response for role-revealing phrases conditional on the
+        # speaker's role, and apply a constant negative advantage at every
+        # token covered by a matched span.  This is the "content-side"
+        # signal — the reverse-KL distillation only grades the vote token.
+        if leakage_penalty > 0:
+            leak_spans = _detect_role_leakage(datum.response_text, datum.role)
+            if leak_spans:
+                counts["leaks_detected"] += 1
+                leak_token_idxs = _find_leak_token_indices(
+                    datum.response_token_ids, leak_spans, tokenizer,
+                )
+                for tok_idx in leak_token_idxs:
+                    if 0 <= tok_idx < n_resp:
+                        # Subtract — leakage tokens get a NEGATIVE advantage,
+                        # pushing the policy away from emitting them.
+                        adv[tok_idx] -= leakage_penalty
+                        counts["leak_tokens_penalised"] += 1
 
         # ----- assemble the importance-sampling Tinker datum -----
         prompt_tokens = renderer.build_generation_prompt(datum.prompt_messages)
@@ -2136,12 +2314,19 @@ async def rl_train(cfg: TrainerConfig) -> None:
                     distill_datums  = all_distill,
                     learning_rate   = cfg.cfr_distill_lr,
                     lambda_msg      = cfg.lambda_msg,
+                    leakage_penalty = cfg.cfr_leakage_penalty,
                 )
                 log.info(
                     f"  CFR distill (reverse-KL): vote={counts['vote_datums']}  "
                     f"msg={counts['msg_datums']}  "
                     f"good={counts['good_datums']}  evil={counts['evil_datums']}"
                 )
+                if counts["leaks_detected"] > 0:
+                    log.info(
+                        f"  leakage shaper: {counts['leaks_detected']} responses "
+                        f"with role leakage, {counts['leak_tokens_penalised']} "
+                        f"tokens penalised"
+                    )
 
         # ----- ERL: internalization SFT + memory persistence -----
         if cfg.erl_enabled and flat_attempt2:
@@ -2287,6 +2472,10 @@ def parse_args(argv: Optional[List[str]] = None) -> TrainerConfig:
                    help="Proposal loss coefficient λ_prop (TODO: not yet wired).")
     p.add_argument("--lambda-sus",  type=float, default=0.3,
                    help="Suspicion loss coefficient λ_sus (TODO: not yet wired).")
+    p.add_argument("--cfr-leakage-penalty", type=float, default=1.0,
+                   help="Negative advantage per token of role-revealing "
+                        "content in the response (e.g. 'As a Minion, ...'). "
+                        "Set 0 to disable. Default 1.0.")
 
     # Experiential RL (ERL; arXiv 2602.13949)
     p.add_argument(
@@ -2341,6 +2530,7 @@ def parse_args(argv: Optional[List[str]] = None) -> TrainerConfig:
         lambda_msg           = args.lambda_msg,
         lambda_prop          = args.lambda_prop,
         lambda_sus           = args.lambda_sus,
+        cfr_leakage_penalty  = args.cfr_leakage_penalty,
         erl_enabled          = args.erl_enabled,
         erl_distill_lr       = args.erl_distill_lr,
         erl_distill_every    = args.erl_distill_every,

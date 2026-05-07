@@ -318,6 +318,67 @@ expected_adv_loss = 0.5 * (math.log(0.85) - (-0.3))
 assert abs(expected_adv_loss - 0.06872) < 1e-3
 ok(f"outcome weighting: loss reduces advantage to {expected_adv_loss:+.4f}")
 
+# Role-leakage detector — uses the EXACT response from the user's smoke test
+# log so this catches regressions of the live-traffic case.
+real_leak = (
+    '{"vote": "reject", "belief": 0.67, "message": "As a Minion, I must '
+    'ensure the Evil team\'s survival. The proposed team lacks at least '
+    'one Evil member, so I reject it."}'
+)
+spans = tma._detect_role_leakage(real_leak, role="minion")
+assert len(spans) >= 1, f"should detect leakage in real Minion self-out, got {spans}"
+matched_substrings = [real_leak[s:e].lower() for s, e in spans]
+assert any("minion" in m for m in matched_substrings), \
+    f"should match 'As a Minion', got {matched_substrings}"
+ok(f"_detect_role_leakage: real Minion self-out → {len(spans)} matches")
+
+# False positive checks — Evil player accusing OTHER players is fine.
+clean = '{"vote": "reject", "belief": 0.8, "message": "I think P3 looks Evil based on the failed mission."}'
+assert tma._detect_role_leakage(clean, role="minion") == [], \
+    f"accusing others is not leakage, got {tma._detect_role_leakage(clean, role='minion')}"
+ok("_detect_role_leakage: 'I think P3 is Evil' is NOT a leak (accusation, not self-ID)")
+
+# Servant claiming "Servant" should NOT be penalised — common cover.
+servant_text = '{"vote": "approve", "belief": 0.2, "message": "As a loyal Servant, I trust the team."}'
+assert tma._detect_role_leakage(servant_text, role="servant") == [], \
+    "Servant claiming Servant is normal cover, not leakage"
+ok("_detect_role_leakage: Servant cover is not penalised")
+
+# Merlin self-out
+merlin_leak = '{"vote": "reject", "belief": 0.9, "message": "I am Merlin. I see Evil on this team."}'
+spans = tma._detect_role_leakage(merlin_leak, role="merlin")
+assert len(spans) >= 1, "should detect Merlin self-out"
+ok(f"_detect_role_leakage: Merlin self-out → {len(spans)} matches")
+
+# An Evil player saying "I'm Good" is fine (deception, expected behaviour).
+evil_pretending = '{"vote": "approve", "belief": 0.3, "message": "I am Good and I trust this team."}'
+assert tma._detect_role_leakage(evil_pretending, role="morgana") == [], \
+    "Evil claiming Good is intended deception, not leakage"
+ok("_detect_role_leakage: Evil claiming Good is not penalised (intended deception)")
+
+# Empty / None handling
+assert tma._detect_role_leakage("", "minion") == []
+assert tma._detect_role_leakage("test", None) == []
+assert tma._detect_role_leakage("test", "") == []
+ok("_detect_role_leakage: empty inputs handled")
+
+# _find_leak_token_indices — fake tokenizer for the test
+class FakeTokenizer:
+    """Minimal tokenizer that decodes ints as themselves separated by spaces."""
+    _vocab = {1: "As", 2: " a", 3: " Minion", 4: ",", 5: " I", 6: " must", 7: " act"}
+    def decode(self, ids, skip_special_tokens=False):
+        return "".join(self._vocab.get(i, "?") for i in ids)
+ftok = FakeTokenizer()
+# Tokens decode to: "As a Minion, I must act"
+# Char positions:    0  2  4 10 11 13 18
+# Span "As a Minion" = (0, 11)
+token_ids = [1, 2, 3, 4, 5, 6, 7]
+leak_idxs = tma._find_leak_token_indices(token_ids, [(0, 11)], ftok)
+assert 0 in leak_idxs and 1 in leak_idxs and 2 in leak_idxs, \
+    f"should mark first 3 tokens (As, a, Minion), got {leak_idxs}"
+assert 6 not in leak_idxs, "trailing tokens should not be marked"
+ok(f"_find_leak_token_indices: maps char span (0,11) → tokens {leak_idxs}")
+
 # ---------------------------------------------------------------------------
 # 6. Optional: 1-step network smoke test
 # ---------------------------------------------------------------------------
