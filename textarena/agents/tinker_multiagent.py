@@ -101,6 +101,7 @@ import asyncio
 import json
 import logging
 import os
+import re
 import statistics
 import sys
 from dataclasses import dataclass, field
@@ -504,23 +505,45 @@ def _cfr_action_to_target(
     Approximate π_CFR(·|r, ̃b) over {approve, reject} from the integrator's
     recommended action string.
 
+    DeepRole emits game actions wrapped in XML tags (see
+    ``deeprole_llm._dr_is_game_action``)::
+
+        "<vote>approve</vote>"
+        "<vote>reject</vote>"
+        "<team>0,2</team>"
+        "<action>pass</action>"
+        "<merlin_guess>3</merlin_guess>"
+
+    We only distill on **vote** actions here; ``<team>`` / ``<action>`` /
+    ``<merlin_guess>`` return ``None`` so callers skip them.
+
     Properly speaking the spec wants the *full* CFR strategy at infoset
     (r, ̃b), e.g. via ``cfr.get_average_strategy((role, bucket))``.  The
     DeepRole integrator only exposes the argmax recommendation here, so we
     soften it with ``sharpness`` (default 0.85 / 0.15).  When integrator
     support for raw strategy lookup is added, replace this with a direct
     table read.
-
-    Returns ``None`` when ``dr_action`` is not a recognised vote action.
     """
     if not dr_action:
         return None
-    a = dr_action.lower().strip()
-    if a in _APPROVE_FORMS:
+
+    # Strip XML wrapper if present:  "<vote>approve</vote>" → "approve".
+    # Anchored on <vote>...</vote> only — other action tags (team / action /
+    # merlin_guess) are not binary votes and should fall through to None.
+    m = _VOTE_TAG_RE.search(dr_action)
+    if m:
+        inner = m.group(1).lower().strip()
+    else:
+        inner = dr_action.lower().strip()
+
+    if inner in _APPROVE_FORMS or inner.strip() in _APPROVE_FORMS:
         return {"approve": sharpness, "reject": 1.0 - sharpness}
-    if a in _REJECT_FORMS:
+    if inner in _REJECT_FORMS or inner.strip() in _REJECT_FORMS:
         return {"approve": 1.0 - sharpness, "reject": sharpness}
     return None
+
+
+_VOTE_TAG_RE = re.compile(r"<vote>\s*(.*?)\s*</vote>", re.IGNORECASE | re.DOTALL)
 
 
 def _belief_bucket(b: float) -> str:

@@ -150,9 +150,21 @@ t = tma._cfr_action_to_target("approve", sharpness=0.85)
 assert t is not None and abs(t["approve"] - 0.85) < 1e-6 and abs(t["reject"] - 0.15) < 1e-6, f"got {t}"
 t = tma._cfr_action_to_target("reject", sharpness=0.85)
 assert t is not None and abs(t["approve"] - 0.15) < 1e-6 and abs(t["reject"] - 0.85) < 1e-6, f"got {t}"
+# XML-wrapped form (DeepRole's actual output format — this was the bug
+# behind "0/0 vote turns"):
+t = tma._cfr_action_to_target("<vote>approve</vote>", sharpness=0.85)
+assert t is not None and abs(t["approve"] - 0.85) < 1e-6, f"XML-wrapped approve: {t}"
+t = tma._cfr_action_to_target("<vote>reject</vote>", sharpness=0.85)
+assert t is not None and abs(t["reject"] - 0.85) < 1e-6, f"XML-wrapped reject: {t}"
+t = tma._cfr_action_to_target("<VOTE>Approve</VOTE>", sharpness=0.85)
+assert t is not None and abs(t["approve"] - 0.85) < 1e-6, f"case-insensitive XML: {t}"
+# Non-vote actions should return None (so the distill loop skips them):
+assert tma._cfr_action_to_target("<team>0,2,4</team>") is None, "team tag must skip"
+assert tma._cfr_action_to_target("<action>pass</action>") is None, "action tag must skip"
+assert tma._cfr_action_to_target("<merlin_guess>3</merlin_guess>") is None, "merlin tag must skip"
 assert tma._cfr_action_to_target("guess_merlin_at_2") is None
 assert tma._cfr_action_to_target(None) is None
-ok("_cfr_action_to_target: approve/reject/None handling")
+ok("_cfr_action_to_target: bare + XML-wrapped + skips non-vote tags")
 
 # _extract_vote_logprobs — fake some token-logprob shaped objects
 class FakeTok:
