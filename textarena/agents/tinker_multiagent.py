@@ -856,7 +856,19 @@ class NPlayerCoordinator:
         rollouts that need the dense distillation signal.
         """
         import tinker
-        prompt_tokens   = self.renderer.build_generation_prompt(messages)
+        # build_generation_prompt may return either a ModelInput (newer Tinker)
+        # or a raw list of ints (older); normalise to ints, then wrap once.
+        # This idiom matches the GRPO loop's prompt assembly elsewhere in the
+        # file — wrapping twice is a Pydantic ValidationError on EncodedTextChunk
+        # because the inner ``tokens`` field must be Sequence[int], not a
+        # ModelInput.
+        prompt_raw = self.renderer.build_generation_prompt(messages)
+        if hasattr(prompt_raw, "to_ints"):
+            prompt_ids = list(prompt_raw.to_ints())
+        else:
+            prompt_ids = list(prompt_raw)
+        prompt_input = tinker.types.ModelInput.from_ints(prompt_ids)
+
         # Request top-K alternatives at each position so we can recover both
         # log π_θ(approve) and log π_θ(reject) regardless of which one was
         # sampled — this is what _extract_vote_logprobs needs.
@@ -868,7 +880,7 @@ class NPlayerCoordinator:
         )
         try:
             sample_resp = await self.sampling_client.sample_async(
-                prompt          = tinker.types.ModelInput.from_ints(prompt_tokens),
+                prompt          = prompt_input,
                 sampling_params = sampling_params,
                 num_samples     = 1,
             )
@@ -881,7 +893,7 @@ class NPlayerCoordinator:
                 temperature = self.temperature,
             )
             sample_resp = await self.sampling_client.sample_async(
-                prompt          = tinker.types.ModelInput.from_ints(prompt_tokens),
+                prompt          = prompt_input,
                 sampling_params = sampling_params,
                 num_samples     = 1,
             )
