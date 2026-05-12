@@ -1,39 +1,34 @@
 {
-  "player_prompt": {
-    "intro": "Du bist {role} in einem Spiel von ColonelBlotto. In jeder Runde musst du genau {num_total_units} Einheiten auf die Felder verteilen: {field_names}",
-    "format": "Format: '[A4 B2 C2]'\nGewinne die Mehrheit der Felder, um die Runde zu gewinnen!",
-    "commander_alpha": "Kommandant Alpha",
-    "commander_beta": "Kommandant Beta"
-  },
+    "player_prompt": {
+        "intro": "Du bist {role} in einem Spiel von Colonel Blotto. In jeder Runde musst du genau {num_total_units} Einheiten auf die folgenden Felder verteilen: {field_names}\nFormat: '[A7 B7 C6]'\nGewinne die Mehrheit der Felder, um die Runde zu gewinnen!",
+        "commander_alpha": "Kommandant Alpha",
+        "commander_beta": "Kommandant Beta"
+    },
 
-  "game_state": {
-    "header_round": "=== COLONEL BLOTTO - Runde {current_round}/{num_rounds} ===",
-    "rounds_won": "Gewonnene Runden - Kommandant Alpha: {alpha_score}, Kommandant Beta: {beta_score}",
-    "available_fields": "Verfügbare Felder: {field_names}",
-    "units_allocate": "Zu verteilende Einheiten: {num_total_units}",
-    "example_format": "Format: '[A4 B2 C2]'."
-  },
+    "game_state": {
+        "header_round": "=== COLONEL BLOTTO - Runde {current_round}/{num_rounds} ===\nGewonnene Runden - Kommandant Alpha: {alpha_score}, Kommandant Beta: {beta_score}"
+    },
 
-  "round_battle": {
-    "field_result": "\nRunde {current_round}\nKommandant Alpha hat verteilt: {p0_allocations}\nKommandant Beta hat verteilt: {p1_allocations}\n",
-    "winner_alpha": "Sieger: Kommandant Alpha",
-    "winner_beta": "Sieger: Kommandant Beta",
-    "tie": "Unentschieden!"
-  },
+    "round_battle": {
+        "field_result": "\nRunde {current_round}\nKommandant Alpha hat verteilt: {p0_allocations}\nKommandant Beta hat verteilt: {p1_allocations}\n",
+        "winner_alpha": "{message}Gewinner: Kommandant Alpha",
+        "winner_beta": "{message}Gewinner: Kommandant Beta",
+        "tie": "{message}Unentschieden!"
+    },
 
-  "invalid_move": {
-    "wrong_format": "Ungültiges Eingabeformat. Verwende: A:5, B:10, C:5",
-    "invalid_field": "Ungültige Feldnamen. Gültige Felder: {field_names}",
-    "wrong_allocation_value": "Alle Zuweisungen müssen nicht-negative ganze Zahlen sein.",
-    "incorrect_total_units": "Du musst genau {num_total_units} Einheiten verteilen. Aktuelle Summe: {current_sum}",
-    "good_allocations": "Verteilung ist gültig."
-  },
+    "invalid_move": {
+        "wrong_format": "Ungültiges Eingabeformat. Verwende: A:5, B:10, C:5",
+        "invalid_field": "Ungültige(r) Feldname(n). Gültige Felder: {field_names}",
+        "wrong_allocation_value": "Alle Zuweisungen müssen nicht-negative ganze Zahlen sein.",
+        "incorrect_total_units": "Du musst genau {num_total_units} Einheiten verteilen. Aktuelle Summe: {current_sum}",
+        "good_allocations": "Zuweisung ist korrekt."
+    },
 
-  "outcome": {
-    "winner_alpha": "Kommandant Alpha gewinnt {score_0}-{score_1} nach {num_rounds} Runden!",
-    "winner_beta": "Kommandant Beta gewinnt {score_1}-{score_0} nach {num_rounds} Runden!",
-    "draw": "Das Spiel endet mit einem {score_0}-{score_1} Unentschieden nach {num_rounds} Runden!",
-    "early_winner_alpha": "Kommandant Alpha gewinnt {scores_0}-{scores_1} (Mehrheit erreicht)!",
-    "early_winner_beta": "Kommandant Beta gewinnt {scores_1}-{scores_0} (Mehrheit erreicht)!"
-  }
+    "outcome": {
+        "winner_alpha": "Kommandant Alpha gewinnt {score_0}-{score_1} nach {num_rounds} Runden!",
+        "winner_beta": "Kommandant Beta gewinnt {score_1}-{score_0} nach {num_rounds} Runden!",
+        "draw": "Das Spiel endet unentschieden {score_0}-{score_1} nach {num_rounds} Runden!",
+        "early_winner_alpha": "Kommandant Alpha gewinnt {scores_0}-{scores_1} (Mehrheit erreicht)!",
+        "early_winner_beta": "Kommandant Beta gewinnt {scores_1}-{scores_0} (Mehrheit erreicht)!"
+    }
 }

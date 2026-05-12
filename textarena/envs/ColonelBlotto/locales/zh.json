@@ -1,39 +1,34 @@
 {
-  "player_prompt": {
-    "intro": "你是 ColonelBlotto 游戏中的 {role}。每一轮你必须将恰好 {num_total_units} 个单位分配到以下战场：{field_names}",
-    "format": "格式：'[A4 B2 C2]'\n赢得多数战场即可赢得本轮！",
-    "commander_alpha": "Alpha 指挥官",
-    "commander_beta": "Beta 指挥官"
-  },
+    "player_prompt": {
+        "intro": "你是 {role}，正在进行一场 Colonel Blotto 游戏。在每一轮中，你必须将恰好 {num_total_units} 个单位分配到以下战场：{field_names}\n格式：'[A7 B7 C6]'\n赢得多数战场即可赢得该轮！",
+        "commander_alpha": "阿尔法指挥官",
+        "commander_beta": "贝塔指挥官"
+    },
 
-  "game_state": {
-    "header_round": "=== COLONEL BLOTTO - 第 {current_round}/{num_rounds} 轮 ===",
-    "rounds_won": "已赢轮数 - Alpha 指挥官：{alpha_score}，Beta 指挥官：{beta_score}",
-    "available_fields": "可用战场：{field_names}",
-    "units_allocate": "可分配单位数：{num_total_units}",
-    "example_format": "格式：'[A4 B2 C2]'。"
-  },
+    "game_state": {
+        "header_round": "=== COLONEL BLOTTO - 第 {current_round}/{num_rounds} 轮 ===\n已赢轮数 - 阿尔法指挥官：{alpha_score}，贝塔指挥官：{beta_score}"
+    },
 
-  "round_battle": {
-    "field_result": "\n第 {current_round} 轮\nAlpha 指挥官分配：{p0_allocations}\nBeta 指挥官分配：{p1_allocations}\n",
-    "winner_alpha": "胜者：Alpha 指挥官",
-    "winner_beta": "胜者：Beta 指挥官",
-    "tie": "平局！"
-  },
+    "round_battle": {
+        "field_result": "\n第 {current_round} 轮\n阿尔法指挥官分配：{p0_allocations}\n贝塔指挥官分配：{p1_allocations}\n",
+        "winner_alpha": "{message}胜者：阿尔法指挥官",
+        "winner_beta": "{message}胜者：贝塔指挥官",
+        "tie": "{message}平局！"
+    },
 
-  "invalid_move": {
-    "wrong_format": "输入格式无效。请使用：A:5, B:10, C:5",
-    "invalid_field": "战场名称无效。有效战场：{field_names}",
-    "wrong_allocation_value": "所有分配值必须是非负整数。",
-    "incorrect_total_units": "你必须恰好分配 {num_total_units} 个单位。当前总和：{current_sum}",
-    "good_allocations": "分配有效。"
-  },
+    "invalid_move": {
+        "wrong_format": "输入格式无效。请使用：A:5, B:10, C:5",
+        "invalid_field": "战场名称无效。有效战场：{field_names}",
+        "wrong_allocation_value": "所有分配必须为非负整数。",
+        "incorrect_total_units": "你必须恰好分配 {num_total_units} 个单位。当前总和：{current_sum}",
+        "good_allocations": "分配有效。"
+    },
 
-  "outcome": {
-    "winner_alpha": "Alpha 指挥官在 {num_rounds} 轮后以 {score_0}-{score_1} 获胜！",
-    "winner_beta": "Beta 指挥官在 {num_rounds} 轮后以 {score_1}-{score_0} 获胜！",
-    "draw": "游戏在 {num_rounds} 轮后以 {score_0}-{score_1} 平局结束！",
-    "early_winner_alpha": "Alpha 指挥官获胜 {scores_0}-{scores_1}（已取得多数）！",
-    "early_winner_beta": "Beta 指挥官获胜 {scores_1}-{scores_0}（已取得多数）！"
-  }
+    "outcome": {
+        "winner_alpha": "阿尔法指挥官以 {score_0}-{score_1} 在 {num_rounds} 轮后获胜！",
+        "winner_beta": "贝塔指挥官以 {score_1}-{score_0} 在 {num_rounds} 轮后获胜！",
+        "draw": "游戏在 {num_rounds} 轮后以 {score_0}-{score_1} 平局结束！",
+        "early_winner_alpha": "阿尔法指挥官以 {scores_0}-{scores_1} 提前获胜（已取得多数）！",
+        "early_winner_beta": "贝塔指挥官以 {scores_1}-{scores_0} 提前获胜（已取得多数）！"
+    }
 }

@@ -1,24 +1,19 @@
 {
     "player_prompt": {
-        "intro":            "You are {role} in a game of ColonelBlotto. Each round, you have to allocate exactly {num_total_units} units across fields: {field_names}",
-        "format":           "Format: '[A4 B2 C2]'\nWin the majority of fields to win the round!",
+        "intro":            "You are {role} in a game of ColonelBlotto. Each round, you have to allocate exactly {num_total_units} units across fields: {field_names}\nFormat: '[A7 B7 C6]'\nWin the majority of fields to win the round!",
         "commander_alpha":  "Commander Alpha",
         "commander_beta":   "Commander Beta"
     },
 
     "game_state": {
-        "header_round":     "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===",
-        "rounds_won":       "Rounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}",
-        "available_fields": "Available fields: {field_names}",
-        "units_allocate":   "Units to allocate: {num_total_units}",
-        "example_format":   "Format: '[A4 B2 C2]'."
+        "header_round":     "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
     },
 
     "round_battle": {
         "field_result":     "\nRound {current_round}\nCommander Alpha allocated: {p0_allocations}\nCommander Beta allocated: {p1_allocations}\n",
-        "winner_alpha":     "Winner: Commander Alpha",
-        "winner_beta":      "Winner: Commander Beta",
-        "tie":              "Tie!"
+        "winner_alpha":     "{message}Winner: Commander Alpha",
+        "winner_beta":      "{message}Winner: Commander Beta",
+        "tie":              "{message}Tie!"
     },
 
     "invalid_move" :{
