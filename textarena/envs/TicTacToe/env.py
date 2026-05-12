@@ -19,34 +19,28 @@ class TicTacToeEnv(ta.Env):
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
         symbol = 'X' if player_id == 1 else 'O'
         opponent_symbol = 'O' if player_id == 1 else 'X'
-        return "\n".join([
-            self.t("player_prompt", "intro",        player_id=player_id),
-            self.t("player_prompt", "goal"),
-            self.t("player_prompt", "instruction"),
-            self.t("player_prompt", "example"),
-            self.t("player_prompt", "symbol_info",  player_id=player_id, symbol=symbol, opponent_symbol=opponent_symbol),
-        ])
+        return self.m("player_prompt", "intro", player_id=player_id, symbol=symbol, opponent_symbol=opponent_symbol)
 
     def _observer_current_state(self):
         available_moves = [f"'[{str(r*3+c)}]'" for r in range(3) for c in range(3) if self.state.game_state["board"][r][c] == '']
-        self.state.add_observation(message=f"{self.t('board', 'current_board')}\n\n{self._render_board()}\n\n{self.t('board', 'available_moves')} {', '.join(available_moves)}", observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(message=self.m('board', 'current_board', board=self._render_board(), moves=', '.join(available_moves)), observation_type=ta.ObservationType.GAME_BOARD)
 
     def step(self,action:str)->Tuple[bool,ta.Info]:
         self.current_player = 'X' if self.state.current_player_id == 1 else 'O'
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
         match = re.compile(r"\[\s*(\d+)\s*\]").search(action)
         if match is None: # Invalid format
-            self.state.set_invalid_move(reason=self.t("invalid_move", "wrong_format"))
+            self.state.set_invalid_move(reason=self.m("invalid_move", "wrong_format"))
         else:
             cell = int(match.group(1))
             if cell not in self.cell_mapping: # Ensure the cell is within 0–8
-                self.state.set_invalid_move(reason=self.t("invalid_move", "out_of_range", cell=cell))
+                self.state.set_invalid_move(reason=self.m("invalid_move", "out_of_range", cell=cell))
             else:
                 row, col = self.cell_mapping[cell]
                 if self.state.game_state["board"][row][col] == '':
                     self.state.game_state["board"][row][col] = self.current_player # Make the move
                     self.state.add_observation(
-                        message=self.t("game_action", "placed", player_id=self.state.current_player_id, symbol=self.current_player, cell=cell),
+                        message=self.m("game_action", "placed", player_id=self.state.current_player_id, symbol=self.current_player, cell=cell),
                         observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION
                     )
                     if self._check_winner(): # Check for winner or draw
@@ -54,7 +48,7 @@ class TicTacToeEnv(ta.Env):
                     elif all(cell != '' for row in self.state.game_state["board"] for cell in row):
                         self.state.set_draw(reason=self.t("outcome", "draw"))
                 else:
-                    self.state.set_invalid_move(reason=self.t("invalid_move", "already_occupied", cell=cell))
+                    self.state.set_invalid_move(reason=self.m("invalid_move", "already_occupied", cell=cell))
         self._observer_current_state()
         return self.state.step()
 
