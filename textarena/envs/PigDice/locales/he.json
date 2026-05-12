@@ -1,38 +1,28 @@
 {
-  "player_prompt": {
-    "intro": "אתה שחקן {player_id} במשחק Pig Dice.\n",
-    "rules_header": "חוקים:",
-    "turn_action_rule": "- בתורך, אתה יכול לבחור '[roll]' או '[hold]'",
-    "roll_success_rule": "- אם יצא 2-6: הוסף את התוצאה לסך התור שלך",
-    "roll_fail_rule": "- אם יצא 1: אתה מאבד את סך התור שלך והתור מסתיים",
-    "hold_rule": "- שמור: הוסף את סך התור שלך לניקוד שלך וסיים את התור",
-    "win_rule": "- הראשון שמגיע ל-{winning_score} נקודות מנצח\n",
-    "turn_info": "כאשר תורך, תראה את הניקוד הנוכחי ואת סך התור שלך.",
-    "response_instruction": "השב עם '[roll]' כדי לגלגל את הקובייה או '[hold]' כדי לשמור את הנקודות שלך."
-  },
+    "player_prompt": {
+        "intro": "אתה שחקן {player_id} במשחק Pig Dice.\n\nחוקים:\n- בתורך, אתה יכול לבחור '[roll]' או '[hold]'\n- אם יצא 2-6: הוסף לתוצאה המצטברת של התור\n- אם יצא 1: אתה מאבד את סכום התור והתור מסתיים\n- Hold: הוסף את סכום התור לניקוד שלך וסיים את התור\n- הראשון שמגיע ל-{winning_score} נקודות מנצח\n\nכאשר תורך מגיע, תראה את הניקוד הנוכחי ואת סכום התור שלך.\nהשב עם '[roll]' כדי לגלגל את הקובייה או '[hold]' כדי לשמור את הנקודות."
+    },
 
-  "invalid_move": {
-    "invalid_action": "פורמט פעולה לא תקין. השתמש ב-'[roll]' או '[hold]'."
-  },
+    "invalid_move": {
+        "invalid_action": "פורמט פעולה לא חוקי. השתמש ב-'[roll]' או '[hold]'."
+    },
 
-  "actions": {
-    "player_busted": "השחקן {player_id} איבד {turn_total} נקודות!",
-    "player_hold": "השחקן {player_id} שמר וצבר {turn_total} נקודות."
-  },
+    "actions": {
+        "player_busted": "שחקן {player_id} נפסל ואיבד {turn_total} נקודות!",
+        "player_hold": "שחקן {player_id} עוצר ושומר {turn_total} נקודות."
+    },
 
-  "board": {
-    "current_scores": "ניקוד נוכחי: ",
-    "current_total_scores": "סך כל הניקוד הנוכחי: ",
-    "player": "שחקן",
-    "turn_total": "סך התור הנוכחי שלך הוא {turn_total}.",
-    "roll_history": "היסטוריית ההטלות שלך בתור הזה: {roll_history}",
-    "first_roll": "זו ההטלה הראשונה של התור שלך.",
-    "available_actions": "פעולות זמינות: '[roll]' או '[hold]'"
-  },
+    "board": {
+        "player": "שחקן 0: '{score_0}'; שחקן 1: '{score_1}'",
+        "current_total_scores": "סך הניקוד הנוכחי: {scores}\nסכום התור הנוכחי שלך הוא {turn_total}.",
+        "roll_history": "{observation}\nהיסטוריית ההטלות שלך בתור זה: {roll_history}",
+        "first_roll": "{observation}\nזו ההטלה הראשונה בתור שלך.",
+        "available_actions": "{observation}\nפעולות זמינות: '[roll]' או '[hold]'"
+    },
 
-  "outcome": {
-    "winner_by_turn_limit": "השחקן {winner_id} ניצח בזכות ניקוד גבוה יותר במגבלת התורים ({scores})",
-    "winner_by_score": "השחקן {winner_id} ניצח לאחר שהגיע לניקוד היעד של {winning_score}!",
-    "draw": "מגבלת התורים הושגה ולכל השחקנים אותו ניקוד: {scores}"
-  }
+    "outcome": {
+        "winner_by_turn_limit": "שחקן {winner_id} ניצח בכך שהיה לו ניקוד גבוה יותר במגבלת התורות ({scores})",
+        "winner_by_score": "שחקן {winner_id} ניצח בהגעה ל-{winning_score} נקודות!",
+        "draw": "הושגה מגבלת התורות וכל השחקנים עם אותו ניקוד: {scores}"
+    }
 }

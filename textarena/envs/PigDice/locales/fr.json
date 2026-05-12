@@ -1,34 +1,28 @@
 {
-  "player_prompt": {
-    "intro": "Vous êtes le joueur {player_id} dans une partie de Pig Dice.\n",
-    "rules_header": "Règles :",
-    "turn_action_rule": "- À votre tour, vous pouvez choisir '[roll]' ou '[hold]'",
-    "roll_success_rule": "- Si vous obtenez 2-6 : ajoutez-le à votre total du tour",
-    "roll_fail_rule": "- Si vous obtenez 1 : perdez votre total du tour et terminez le tour",
-    "hold_rule": "- Conserver : ajoutez le total du tour à votre score et terminez le tour",
-    "win_rule": "- Le premier à atteindre {winning_score} points gagne\n",
-    "turn_info": "Quand c'est votre tour, vous verrez les scores actuels et le total du tour.",
-    "response_instruction": "Répondez avec '[roll]' pour lancer le dé ou '[hold]' pour conserver vos points."
-  },
-  "invalid_move": {
-    "invalid_action": "Format d'action invalide. Utilisez '[roll]' ou '[hold]'."
-  },
-  "actions": {
-    "player_busted": "Le joueur {player_id} a perdu {turn_total} points !",
-    "player_hold": "Le joueur {player_id} conserve et encaisse {turn_total} points."
-  },
-  "board": {
-    "current_scores": "Scores actuels : ",
-    "current_total_scores": "Scores totaux actuels : ",
-    "player": "Joueur",
-    "turn_total": "Votre total actuel du tour est de {turn_total}.",
-    "roll_history": "Historique de vos lancers pour ce tour : {roll_history}",
-    "first_roll": "Ceci est le premier lancer de votre tour.",
-    "available_actions": "Actions disponibles : '[roll]' ou '[hold]'"
-  },
-  "outcome": {
-    "winner_by_turn_limit": "Le joueur {winner_id} a gagné avec le meilleur score à la limite des tours ({scores})",
-    "winner_by_score": "Le joueur {winner_id} a gagné en atteignant le score cible de {winning_score} !",
-    "draw": "La limite des tours a été atteinte et tous les joueurs ont le même score : {scores}"
-  }
+    "player_prompt": {
+        "intro": "Vous êtes le joueur {player_id} dans une partie de Pig Dice.\n\nRègles :\n- À votre tour, vous pouvez choisir '[roll]' ou '[hold]'\n- Si vous obtenez 2 à 6 : ajoutez le résultat à votre total de tour\n- Si vous obtenez 1 : vous perdez le total de tour et votre tour se termine\n- Hold : ajoutez le total de tour à votre score et terminez votre tour\n- Le premier à atteindre {winning_score} points gagne\n\nLorsque c’est votre tour, vous verrez les scores actuels et votre total de tour.\nRépondez avec '[roll]' pour lancer le dé ou '[hold]' pour sécuriser vos points."
+    },
+
+    "invalid_move": {
+        "invalid_action": "Format d’action invalide. Utilisez '[roll]' ou '[hold]'."
+    },
+
+    "actions": {
+        "player_busted": "Le joueur {player_id} a fait un échec et perd {turn_total} points !",
+        "player_hold": "Le joueur {player_id} s’arrête et sécurise {turn_total} points."
+    },
+
+    "board": {
+        "player": "Joueur 0 : '{score_0}' ; Joueur 1 : '{score_1}'",
+        "current_total_scores": "Scores totaux actuels : {scores}\nVotre total de tour actuel est {turn_total}.",
+        "roll_history": "{observation}\nHistorique des lancers pour ce tour : {roll_history}",
+        "first_roll": "{observation}\nCeci est le premier lancer de votre tour.",
+        "available_actions": "{observation}\nActions disponibles : '[roll]' ou '[hold]'"
+    },
+
+    "outcome": {
+        "winner_by_turn_limit": "Le joueur {winner_id} a gagné en ayant un score plus élevé à la limite de tours ({scores})",
+        "winner_by_score": "Le joueur {winner_id} a gagné en atteignant {winning_score} points !",
+        "draw": "La limite de tours a été atteinte et tous les joueurs ont le même score : {scores}"
+    }
 }

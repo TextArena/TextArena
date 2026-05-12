@@ -1,38 +1,28 @@
 {
-  "player_prompt": {
-    "intro": "Anda ialah Pemain {player_id} dalam permainan Pig Dice.\n",
-    "rules_header": "Peraturan:",
-    "turn_action_rule": "- Pada giliran anda, anda boleh memilih '[roll]' atau '[hold]'",
-    "roll_success_rule": "- Jika mendapat 2-6: tambah pada jumlah giliran anda",
-    "roll_fail_rule": "- Jika mendapat 1: anda kehilangan jumlah giliran anda dan giliran tamat",
-    "hold_rule": "- Simpan: tambah jumlah giliran anda kepada skor anda dan tamatkan giliran",
-    "win_rule": "- Pemain pertama yang mencapai {winning_score} mata menang\n",
-    "turn_info": "Apabila tiba giliran anda, anda akan melihat skor semasa dan jumlah giliran anda.",
-    "response_instruction": "Balas dengan '[roll]' untuk membaling dadu atau '[hold]' untuk menyimpan mata anda."
-  },
+    "player_prompt": {
+        "intro": "Anda ialah Pemain {player_id} dalam permainan Pig Dice.\n\nPeraturan:\n- Pada giliran anda, anda boleh memilih '[roll]' atau '[hold]'\n- Jika mendapat 2-6: tambah pada jumlah giliran anda\n- Jika mendapat 1: anda kehilangan jumlah giliran dan giliran tamat\n- Hold: tambah jumlah giliran ke skor anda dan tamatkan giliran\n- Pemain pertama yang mencapai {winning_score} mata menang\n\nApabila giliran anda, anda akan melihat skor semasa dan jumlah giliran anda.\nBalas dengan '[roll]' untuk membaling dadu atau '[hold]' untuk menyimpan mata anda."
+    },
 
-  "invalid_move": {
-    "invalid_action": "Format tindakan tidak sah. Gunakan '[roll]' atau '[hold]'."
-  },
+    "invalid_move": {
+        "invalid_action": "Format tindakan tidak sah. Gunakan '[roll]' atau '[hold]'."
+    },
 
-  "actions": {
-    "player_busted": "Pemain {player_id} kehilangan {turn_total} mata!",
-    "player_hold": "Pemain {player_id} menyimpan dan mengumpul {turn_total} mata."
-  },
+    "actions": {
+        "player_busted": "Pemain {player_id} gagal dan kehilangan {turn_total} mata!",
+        "player_hold": "Pemain {player_id} berhenti dan menyimpan {turn_total} mata."
+    },
 
-  "board": {
-    "current_scores": "Skor semasa: ",
-    "current_total_scores": "Jumlah skor semasa: ",
-    "player": "Pemain",
-    "turn_total": "Jumlah giliran semasa anda ialah {turn_total}.",
-    "roll_history": "Sejarah balingan anda untuk giliran ini: {roll_history}",
-    "first_roll": "Ini ialah balingan pertama dalam giliran anda.",
-    "available_actions": "Tindakan yang tersedia: '[roll]' atau '[hold]'"
-  },
+    "board": {
+        "player": "Pemain 0: '{score_0}'; Pemain 1: '{score_1}'",
+        "current_total_scores": "Jumlah skor semasa: {scores}\nJumlah giliran anda sekarang ialah {turn_total}.",
+        "roll_history": "{observation}\nSejarah balingan anda untuk giliran ini: {roll_history}",
+        "first_roll": "{observation}\nIni adalah balingan pertama giliran anda.",
+        "available_actions": "{observation}\nTindakan tersedia: '[roll]' atau '[hold]'"
+    },
 
-  "outcome": {
-    "winner_by_turn_limit": "Pemain {winner_id} menang kerana mempunyai skor lebih tinggi pada had giliran ({scores})",
-    "winner_by_score": "Pemain {winner_id} menang dengan mencapai skor sasaran {winning_score}!",
-    "draw": "Had giliran telah dicapai dan semua pemain mempunyai skor yang sama: {scores}"
-  }
+    "outcome": {
+        "winner_by_turn_limit": "Pemain {winner_id} menang kerana mempunyai skor lebih tinggi pada had giliran ({scores})",
+        "winner_by_score": "Pemain {winner_id} menang dengan mencapai {winning_score} mata!",
+        "draw": "Had giliran telah dicapai dan semua pemain mempunyai skor yang sama: {scores}"
+    }
 }
