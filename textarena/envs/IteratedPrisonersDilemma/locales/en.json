@@ -1,18 +1,6 @@
 {
     "player_prompt": {
-        "intro":                    "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n",
-        "game_structure_header":    "Game Structure:",
-        "conversation_phase":       "- Before each decision you have {total_conversation_rounds} turns to communicate freely.",
-        "decision_phase":           "- After that, both players simultaneously choose [Cooperate] or [Defect].\n",
-
-        "payoff_header":            "Payoff Matrix (fixed each round):",
-        "both_cooperate":           "- Both Cooperate ➜ each {cooperate_reward}",
-        "both_defect":              "- Both Defect ➜ each {mutual_defect_reward}",
-        "one_defects":              "- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n",
-
-        "how_to_play_header":       "How to Play:",
-        "conversation_instruction": "- During conversation: type any text you wish.",
-        "decision_instruction":     "- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+        "intro":                    "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose [Cooperate] or [Defect].\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
     },
 
     "phases": {

@@ -1,32 +1,20 @@
 {
     "player_prompt": {
-        "intro":                    "Vous êtes le Joueur {player_id} dans un dilemme du prisonnier itéré sur {num_rounds} manches.\n",
-        "game_structure_header":    "Structure du jeu :",
-        "conversation_phase":       "- Avant chaque décision, vous disposez de {total_conversation_rounds} tours pour communiquer librement.",
-        "decision_phase":           "- Ensuite, les deux joueurs choisissent simultanément [Cooperate] ou [Defect].\n",
-
-        "payoff_header":            "Matrice des gains (fixe à chaque manche) :",
-        "both_cooperate":           "- Les deux coopèrent ➜ chacun reçoit {cooperate_reward}",
-        "both_defect":              "- Les deux font défaut ➜ chacun reçoit {mutual_defect_reward}",
-        "one_defects":              "- L'un fait défaut, l'autre coopère ➜ le défecteur reçoit {defect_reward}, le coopérant reçoit {sucker_reward}\n",
-
-        "how_to_play_header":       "Comment jouer :",
-        "conversation_instruction": "- Pendant la conversation : tapez le texte de votre choix.",
-        "decision_instruction":     "- Pendant la phase de décision : incluez '[Cooperate]' ou '[Defect]' (insensible à la casse). Vous pouvez ajouter du texte avant ou après le token."
+        "intro": "Vous êtes le joueur {player_id} dans un dilemme du prisonnier itéré sur {num_rounds} manches.\n\nStructure du jeu :\n- Avant chaque décision, vous disposez de {total_conversation_rounds} tours pour communiquer librement.\n- Ensuite, les deux joueurs choisissent simultanément [Cooperate] ou [Defect].\n\nMatrice des gains (identique à chaque manche) :\n- Les deux coopèrent ➜ chacun reçoit {cooperate_reward}\n- Les deux font défaut ➜ chacun reçoit {mutual_defect_reward}\n- Un fait défaut, l’autre coopère ➜ le défecteur reçoit {defect_reward}, le coopérant reçoit {sucker_reward}\n\nComment jouer :\n- Pendant la phase de communication : écrivez le texte de votre choix.\n- Pendant la phase de décision : incluez '[Cooperate]' ou '[Defect]' (insensible à la casse). Vous pouvez ajouter du texte avant ou après."
     },
 
     "phases": {
-        "conversation_finished":    "Conversation terminée pour la manche {round}. Veuillez répondre avec '[Cooperate]' ou '[Defect]'.",
-        "starting_round":           "--- Début de la manche {round} ---",
-        "round_summary":            "Résultats de la manche {round} :\n{outcome}\nLe Joueur 0 a gagné {r0} (total {score_0}), le Joueur 1 a gagné {r1} (total {score_1})."
+        "conversation_finished": "La phase de communication de la manche {round} est terminée. Veuillez répondre avec '[Cooperate]' ou '[Defect]'.",
+        "starting_round": "--- Début de la manche {round} ---",
+        "round_summary": "Résultats de la manche {round} :\n{outcome}\nLe joueur 0 a obtenu {r0} (total {score_0}), le joueur 1 a obtenu {r1} (total {score_1})."
     },
 
     "outcome": {
-        "winner":                   "Le Joueur {winner} gagne {win_score} - {lose_score}.",
-        "draw":                     "Égalité ! Les deux joueurs ont obtenu {s0}.",
-        "round_both_cooperate":     "Les deux joueurs ont coopéré.",
-        "round_both_defect":        "Les deux joueurs ont fait défaut.",
-        "round_p0_cooperates_p1_defects": "Le Joueur 0 a coopéré, le Joueur 1 a fait défaut.",
-        "round_p0_defects_p1_cooperates": "Le Joueur 0 a fait défaut, le Joueur 1 a coopéré."
+        "winner": "Le joueur {winner} gagne {win_score} - {lose_score}.",
+        "draw": "Égalité ! Les deux joueurs ont obtenu {s0}.",
+        "round_both_cooperate": "Les deux joueurs ont coopéré.",
+        "round_both_defect": "Les deux joueurs ont fait défaut.",
+        "round_p0_cooperates_p1_defects": "Le joueur 0 a coopéré et le joueur 1 a fait défaut.",
+        "round_p0_defects_p1_cooperates": "Le joueur 0 a fait défaut et le joueur 1 a coopéré."
     }
 }

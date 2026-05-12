@@ -1,32 +1,20 @@
 {
     "player_prompt": {
-        "intro":                    "你是玩家 {player_id}，正在进行一场共 {num_rounds} 轮的重复囚徒困境游戏。\n",
-        "game_structure_header":    "游戏结构：",
-        "conversation_phase":       "- 在每次决策前，你有 {total_conversation_rounds} 回合可以自由交流。",
-        "decision_phase":           "- 之后，双方玩家同时选择 [Cooperate] 或 [Defect]。\n",
-
-        "payoff_header":            "收益矩阵（每轮固定）：",
-        "both_cooperate":           "- 双方都合作 ➜ 每人获得 {cooperate_reward}",
-        "both_defect":              "- 双方都背叛 ➜ 每人获得 {mutual_defect_reward}",
-        "one_defects":              "- 一方背叛，一方合作 ➜ 背叛者获得 {defect_reward}，合作方获得 {sucker_reward}\n",
-
-        "how_to_play_header":       "玩法说明：",
-        "conversation_instruction": "- 在交流阶段：你可以输入任何文字。",
-        "decision_instruction":     "- 在决策阶段：请输入 '[Cooperate]' 或 '[Defect]'（不区分大小写）。你也可以在 token 前后添加其他文字。"
+        "intro": "你是玩家 {player_id}，正在进行一场持续 {num_rounds} 轮的重复囚徒困境游戏。\n\n游戏结构：\n- 在每次做出决策之前，你有 {total_conversation_rounds} 个回合可以自由交流。\n- 之后，双方同时选择 [Cooperate] 或 [Defect]。\n\n收益矩阵（每轮固定）：\n- 双方合作 ➜ 每人获得 {cooperate_reward}\n- 双方背叛 ➜ 每人获得 {mutual_defect_reward}\n- 一方背叛、一方合作 ➜ 背叛者获得 {defect_reward}，合作者获得 {sucker_reward}\n\n玩法说明：\n- 在交流阶段：可以输入任意文本。\n- 在决策阶段：必须包含 '[Cooperate]' 或 '[Defect]'（不区分大小写）。你可以在前后添加其他文本。"
     },
 
     "phases": {
-        "conversation_finished":    "第 {round} 轮交流结束。请回复 '[Cooperate]' 或 '[Defect]'。",
-        "starting_round":           "--- 开始第 {round} 轮 ---",
-        "round_summary":            "第 {round} 轮结果：\n{outcome}\n玩家 0 获得 {r0}（总计 {score_0}），玩家 1 获得 {r1}（总计 {score_1}）。"
+        "conversation_finished": "第 {round} 轮的交流阶段已结束。请回复 '[Cooperate]' 或 '[Defect]'。",
+        "starting_round": "--- 第 {round} 轮开始 ---",
+        "round_summary": "第 {round} 轮结果：\n{outcome}\n玩家 0 获得 {r0}（总计 {score_0}），玩家 1 获得 {r1}（总计 {score_1}）。"
     },
 
     "outcome": {
-        "winner":                   "玩家 {winner} 以 {win_score} - {lose_score} 获胜。",
-        "draw":                     "平局！双方玩家都得到 {s0}。",
-        "round_both_cooperate":     "双方玩家都选择了合作。",
-        "round_both_defect":        "双方玩家都选择了背叛。",
-        "round_p0_cooperates_p1_defects": "玩家 0 合作，玩家 1 背叛。",
-        "round_p0_defects_p1_cooperates": "玩家 0 背叛，玩家 1 合作。"
+        "winner": "玩家 {winner} 以 {win_score} - {lose_score} 获胜。",
+        "draw": "平局！双方得分均为 {s0}。",
+        "round_both_cooperate": "双方均选择了合作。",
+        "round_both_defect": "双方均选择了背叛。",
+        "round_p0_cooperates_p1_defects": "玩家 0 选择合作，玩家 1 选择背叛。",
+        "round_p0_defects_p1_cooperates": "玩家 0 选择背叛，玩家 1 选择合作。"
     }
 }
