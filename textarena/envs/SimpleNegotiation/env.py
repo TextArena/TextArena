@@ -47,17 +47,7 @@ class SimpleNegotiationEnv(ta.Env):
         resource_value_list = "\n\t+ ".join(
             [f"{f'[{res}]':{' '}<8}  Qty: {game_state['player_resources'][player_id][res]:{' '}<2}   Value: {game_state['player_values'][player_id][res]}" for res in game_state['player_resources'][player_id].keys()]
         )
-        return "\n".join([
-            self.t("player_prompt", "intro", player_id=player_id),
-            self.t("player_prompt", "objective"),
-            self.t("player_prompt", "resources", resource_value_list=resource_value_list),
-            self.t("player_prompt", "turn_action"),
-            self.t("player_prompt", "special_tokens"),
-            self.t("player_prompt", "offer_format"),
-            self.t("player_prompt", "accept"),
-            self.t("player_prompt", "deny"),
-            self.t("player_prompt", "duration", max_turns=self.max_turns)
-        ])
+        return self.m("player_prompt", "intro", player_id=player_id, resource_value_list=resource_value_list, max_turns=self.max_turns)
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
@@ -71,7 +61,7 @@ class SimpleNegotiationEnv(ta.Env):
         if self.state.game_state["current_offer"] and self.accept_pattern.search(action): 
             self._attempt_to_execute_trade(player_id=player_id, action=action)
         elif self.state.game_state["current_offer"]:
-            self.state.add_observation(message=self.t("offers", "reject", player_id=self.state.current_player_id), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+            self.state.add_observation(message=self.m("offers", "reject", player_id=self.state.current_player_id), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
         else: 
             self.state.game_state["current_offer"] = None  # make sure the offer is reset
 
@@ -91,7 +81,7 @@ class SimpleNegotiationEnv(ta.Env):
             for resource, qty in current_offer["requested_resources"].items():
                 self.state.game_state["player_resources"][acceptor_id][resource] -= qty
                 self.state.game_state["player_resources"][proposer_id][resource] += qty
-            self.state.add_observation(message=self.t("offers", "accept", proposer_id=proposer_id, acceptor_id=acceptor_id), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+            self.state.add_observation(message=self.m("offers", "accept", proposer_id=proposer_id, acceptor_id=acceptor_id), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
             # Update trade history with outcome
             self.state.game_state["trade_history"].append({
@@ -101,7 +91,7 @@ class SimpleNegotiationEnv(ta.Env):
 
             self._update_inventory_values() # Update player inventory value
             self.state.game_state["current_offer"] = None # Reset trade offer
-        else: self.state.set_invalid_move(reason=self.t("invalid_move", "receiving_with_no_resource")) # If not, throw invalid move
+        else: self.state.set_invalid_move(reason=self.m("invalid_move", "receiving_with_no_resource")) # If not, throw invalid move
 
     def _check_if_sufficient_resources(self, trade_resources: Dict[str, int], player_resources: Dict[str, int]) -> bool:
         """ Check if a player has sufficient resources for a trade """
@@ -130,10 +120,11 @@ class SimpleNegotiationEnv(ta.Env):
                             "from_player": player_id, "to_player": 1 - player_id, "offered_resources": parsed_offer["offered_resources"],
                             "requested_resources": parsed_offer["requested_resources"], "outcome": None  # To be updated upon acceptance
                         })
-                        self.state.add_observation(message=self.t("offers", "proposal", player_id=player_id, opponent_id=1 - player_id, offer_details=self._offer_to_str(parsed_offer)), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-                    else: self.state.set_invalid_move(reason=self.t("invalid_move", "proposing_with_no_resource")) # If not, throw invalid move
-                else: self.state.set_invalid_move(reason=self.t("invalid_move", "incorrect_offer_format")) # If offer format is incorrect, throw invalid move
-            else: self.state.add_observation(message=self.t("invalid_move", "no_new_offer", player_id=player_id), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+                        offered, requested = self._offer_to_str(parsed_offer)
+                        self.state.add_observation(message=self.m("offers", "proposal", player_id=player_id, opponent_id=1 - player_id, offered=offered, requested=requested), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+                    else: self.state.set_invalid_move(reason=self.m("invalid_move", "proposing_with_no_resource")) # If not, throw invalid move
+                else: self.state.set_invalid_move(reason=self.m("invalid_move", "incorrect_offer_format")) # If offer format is incorrect, throw invalid move
+            else: self.state.add_observation(message=self.m("invalid_move", "no_new_offer", player_id=player_id), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
     def _parse_offer(self, offer_str: str) -> Optional[Dict[str, Dict[str, int]]]:
         """Parse a trade offer string into a structured dictionary"""
@@ -165,15 +156,15 @@ class SimpleNegotiationEnv(ta.Env):
     def _offer_to_str(self, parsed_offer: Dict[str, Dict[str, int]]) -> str:
         offered = ", ".join(f"{qty} {res}" for res, qty in parsed_offer["offered_resources"].items())
         requested = ", ".join(f"{qty} {res}" for res, qty in parsed_offer["requested_resources"].items())
-        return f"Offered items: {offered} -> Requested items: {requested}"
+        return offered, requested
 
     def _determine_winner(self):
         if not self.state.done:
             if self.state.game_state["inventory_value"][0]["change"] == self.state.game_state["inventory_value"][1]["change"]:
-                self.state.set_draw(reason=self.t("outcome", "draw"))
+                self.state.set_draw(reason=self.m("outcome", "draw"))
             else:
                 winner_id = 0 if (self.state.game_state["inventory_value"][0]["change"] > self.state.game_state["inventory_value"][1]["change"]) else 1
-                self.state.set_winner(player_id=winner_id, reason=self.t("outcome", "win", winner_id=winner_id))
+                self.state.set_winner(player_id=winner_id, reason=self.m("outcome", "win", winner_id=winner_id))
 
     def _update_inventory_values(self):
         for player_id in range(self.state.num_players):

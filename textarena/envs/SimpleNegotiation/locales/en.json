@@ -1,14 +1,6 @@
 {
     "player_prompt": {
-        "intro":           "You are Player {player_id} in the Negotiation Game.",
-        "objective":       "You have some resources, and your task is to trade such that the total value of your resources increases.",
-        "resources":       "The resources and associated values you currently have are:\n\t+ {resource_value_list}",
-        "turn_action":     "At each turn, you can talk to your opponent and make a trade offer.",
-        "special_tokens":  "Use the following special tokens for actions:",
-        "offer_format":    "  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]",
-        "accept":          "  - '[Accept]': To accept an incoming offer.",
-        "deny":            "  - '[Deny]': To deny an incoming offer (default).",
-        "duration":        "The game lasts for {max_turns} turns in total."
+        "intro":  "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
     },
 
     "invalid_move" :{
@@ -23,7 +15,7 @@
     "offers": {
         "reject":     "Player {player_id} rejected the trade offer.",
         "accept":     "Player {acceptor_id} accepted the trade offer from Player {proposer_id}.",
-        "proposal":   "Player {player_id} made the following offer to Player {opponent_id}: {offer_details}"
+        "proposal":   "Player {player_id} made the following offer to Player {opponent_id}: Offered items: {offered} -> Requested items: {requested}"
     },
 
     "outcome": {

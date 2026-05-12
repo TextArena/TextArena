@@ -1,14 +1,6 @@
 {
   "player_prompt": {
-    "intro": "Du bist Spieler {player_id} im Verhandlungsspiel.",
-    "objective": "Du besitzt einige Ressourcen, und deine Aufgabe ist es, so zu handeln, dass der Gesamtwert deiner Ressourcen steigt.",
-    "resources": "Die Ressourcen und zugehörigen Werte, die du derzeit besitzt, sind:\n\t+ {resource_value_list}",
-    "turn_action": "In jeder Runde kannst du mit deinem Gegner sprechen und ein Handelsangebot machen.",
-    "special_tokens": "Verwende die folgenden speziellen Aktions-Tokens:",
-    "offer_format": "  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Angebotene Ressourcen -> Angeforderte Ressourcen]",
-    "accept": "  - '[Accept]': Um ein eingehendes Angebot anzunehmen.",
-    "deny": "  - '[Deny]': Um ein eingehendes Angebot abzulehnen (Standard).",
-    "duration": "Das Spiel dauert insgesamt {max_turns} Runden."
+    "intro": "Du bist Spieler {player_id} im Verhandlungsspiel.\nDu besitzt einige Ressourcen, und deine Aufgabe ist es, so zu handeln, dass der Gesamtwert deiner Ressourcen steigt.\nDie Ressourcen und zugehörigen Werte, die du derzeit hast, sind:\n\t+ {resource_value_list}\nIn jedem Zug kannst du mit deinem Gegner sprechen und ein Handelsangebot machen.\nVerwende die folgenden speziellen Tokens für Aktionen:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Angebotene Ressourcen -> Angeforderte Ressourcen]\n  - '[Accept]': Um ein eingehendes Angebot anzunehmen.\n  - '[Deny]': Um ein eingehendes Angebot abzulehnen (Standard).\nDas Spiel dauert insgesamt {max_turns} Züge."
   },
   "invalid_move": {
     "receiving_with_no_resource": "Spieler hat versucht, einen Handel anzunehmen, ohne die notwendigen Ressourcen zu besitzen.",
@@ -21,7 +13,7 @@
   "offers": {
     "reject": "Spieler {player_id} hat das Handelsangebot abgelehnt.",
     "accept": "Spieler {acceptor_id} hat das Handelsangebot von Spieler {proposer_id} angenommen.",
-    "proposal": "Spieler {player_id} hat Spieler {opponent_id} folgendes Angebot gemacht: {offer_details}"
+    "proposal": "Spieler {player_id} hat Spieler {opponent_id} folgendes Angebot gemacht: Angebotene Gegenstände: {offered} -> Angeforderte Gegenstände: {requested}"
   },
   "outcome": {
     "win": "Spieler {winner_id} gewann durch einen größeren Wertzuwachs im Inventar.",

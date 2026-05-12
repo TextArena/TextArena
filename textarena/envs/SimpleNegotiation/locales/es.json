@@ -1,14 +1,6 @@
 {
   "player_prompt": {
-    "intro": "Eres el Jugador {player_id} en el Juego de Negociación.",
-    "objective": "Tienes algunos recursos, y tu tarea es intercambiar de forma que aumente el valor total de tus recursos.",
-    "resources": "Los recursos y valores asociados que tienes actualmente son:\n\t+ {resource_value_list}",
-    "turn_action": "En cada turno, puedes hablar con tu oponente y hacer una oferta de intercambio.",
-    "special_tokens": "Usa los siguientes tokens especiales para acciones:",
-    "offer_format": "  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Recursos Ofrecidos -> Recursos Solicitados]",
-    "accept": "  - '[Accept]': Para aceptar una oferta entrante.",
-    "deny": "  - '[Deny]': Para rechazar una oferta entrante (por defecto).",
-    "duration": "El juego dura un total de {max_turns} turnos."
+    "intro": "Eres el jugador {player_id} en el Juego de Negociación.\nTienes algunos recursos, y tu tarea es comerciar de forma que aumente el valor total de tus recursos.\nLos recursos y valores asociados que tienes actualmente son:\n\t+ {resource_value_list}\nEn cada turno, puedes hablar con tu oponente y hacer una oferta de intercambio.\nUsa los siguientes tokens especiales para las acciones:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Recursos ofrecidos -> Recursos solicitados]\n  - '[Accept]': Para aceptar una oferta recibida.\n  - '[Deny]': Para rechazar una oferta recibida (predeterminado).\nEl juego dura {max_turns} turnos en total."
   },
   "invalid_move": {
     "receiving_with_no_resource": "El jugador intentó aceptar un intercambio sin tener los recursos necesarios.",
@@ -21,7 +13,7 @@
   "offers": {
     "reject": "El jugador {player_id} rechazó la oferta.",
     "accept": "El jugador {acceptor_id} aceptó la oferta del jugador {proposer_id}.",
-    "proposal": "El jugador {player_id} hizo la siguiente oferta al jugador {opponent_id}: {offer_details}"
+    "proposal": "El jugador {player_id} hizo la siguiente oferta al jugador {opponent_id}: Objetos ofrecidos: {offered} -> Objetos solicitados: {requested}"
   },
   "outcome": {
     "win": "El jugador {winner_id} ganó al obtener una mayor ganancia en el valor del inventario.",

@@ -1,14 +1,6 @@
 {
   "player_prompt": {
-    "intro": "Vous êtes le Joueur {player_id} dans le Jeu de Négociation.",
-    "objective": "Vous avez certaines ressources, et votre tâche est d’échanger de manière à augmenter la valeur totale de vos ressources.",
-    "resources": "Les ressources et leurs valeurs associées que vous possédez actuellement sont :\n\t+ {resource_value_list}",
-    "turn_action": "À chaque tour, vous pouvez parler à votre adversaire et faire une offre d’échange.",
-    "special_tokens": "Utilisez les jetons spéciaux suivants pour les actions :",
-    "offer_format": "  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Ressources offertes -> Ressources demandées]",
-    "accept": "  - '[Accept]': Pour accepter une offre reçue.",
-    "deny": "  - '[Deny]': Pour refuser une offre reçue (par défaut).",
-    "duration": "Le jeu dure {max_turns} tours au total."
+    "intro": "Vous êtes le joueur {player_id} dans le jeu de négociation.\nVous disposez de certaines ressources, et votre tâche consiste à effectuer des échanges afin d’augmenter la valeur totale de vos ressources.\nLes ressources et les valeurs associées que vous possédez actuellement sont :\n\t+ {resource_value_list}\nÀ chaque tour, vous pouvez parler à votre adversaire et faire une offre d’échange.\nUtilisez les jetons spéciaux suivants pour les actions :\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]' : [Offer: Ressources offertes -> Ressources demandées]\n  - '[Accept]' : Pour accepter une offre reçue.\n  - '[Deny]' : Pour refuser une offre reçue (par défaut).\nLe jeu dure {max_turns} tours au total."
   },
   "invalid_move": {
     "receiving_with_no_resource": "Le joueur a essayé d’accepter un échange sans avoir les ressources nécessaires.",
@@ -21,7 +13,7 @@
   "offers": {
     "reject": "Le joueur {player_id} a refusé l’offre.",
     "accept": "Le joueur {acceptor_id} a accepté l’offre du joueur {proposer_id}.",
-    "proposal": "Le joueur {player_id} a fait l’offre suivante au joueur {opponent_id} : {offer_details}"
+    "proposal": "Le joueur {player_id} a fait l’offre suivante au joueur {opponent_id} : Objets offerts : {offered} -> Objets demandés : {requested}"
   },
   "outcome": {
     "win": "Le joueur {winner_id} a gagné en obtenant un plus grand gain de valeur d’inventaire.",

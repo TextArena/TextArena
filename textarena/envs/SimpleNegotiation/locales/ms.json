@@ -1,14 +1,6 @@
 {
   "player_prompt": {
-    "intro": "Anda ialah Pemain {player_id} dalam Permainan Rundingan.",
-    "objective": "Anda mempunyai beberapa sumber, dan tugas anda ialah berdagang supaya jumlah nilai sumber anda meningkat.",
-    "resources": "Sumber dan nilai berkaitan yang anda miliki sekarang ialah:\n\t+ {resource_value_list}",
-    "turn_action": "Pada setiap giliran, anda boleh bercakap dengan lawan anda dan membuat tawaran dagangan.",
-    "special_tokens": "Gunakan token khas berikut untuk tindakan:",
-    "offer_format": "  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Sumber Ditawarkan -> Sumber Diminta]",
-    "accept": "  - '[Accept]': Untuk menerima tawaran masuk.",
-    "deny": "  - '[Deny]': Untuk menolak tawaran masuk (lalai).",
-    "duration": "Permainan berlangsung selama {max_turns} giliran secara keseluruhan."
+    "intro": "Anda ialah Pemain {player_id} dalam Permainan Rundingan.\nAnda mempunyai beberapa sumber, dan tugas anda adalah untuk berdagang supaya jumlah nilai sumber anda meningkat.\nSumber dan nilai berkaitan yang anda miliki sekarang ialah:\n\t+ {resource_value_list}\nPada setiap giliran, anda boleh bercakap dengan lawan anda dan membuat tawaran dagangan.\nGunakan token khas berikut untuk tindakan:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Sumber yang Ditawarkan -> Sumber yang Diminta]\n  - '[Accept]': Untuk menerima tawaran yang masuk.\n  - '[Deny]': Untuk menolak tawaran yang masuk (lalai).\nPermainan berlangsung selama {max_turns} giliran secara keseluruhan."
   },
   "invalid_move": {
     "receiving_with_no_resource": "Pemain cuba menerima dagangan tanpa mempunyai sumber yang diperlukan.",
@@ -21,7 +13,7 @@
   "offers": {
     "reject": "Pemain {player_id} menolak tawaran dagangan.",
     "accept": "Pemain {acceptor_id} menerima tawaran dagangan daripada Pemain {proposer_id}.",
-    "proposal": "Pemain {player_id} membuat tawaran berikut kepada Pemain {opponent_id}: {offer_details}"
+    "proposal": "Pemain {player_id} membuat tawaran berikut kepada Pemain {opponent_id}: Item yang ditawarkan: {offered} -> Item yang diminta: {requested}"
   },
   "outcome": {
     "win": "Pemain {winner_id} menang dengan pertambahan nilai inventori yang lebih besar.",

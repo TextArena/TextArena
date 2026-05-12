@@ -1,14 +1,6 @@
 {
   "player_prompt": {
-    "intro": "你是谈判游戏中的玩家 {player_id}。",
-    "objective": "你拥有一些资源，你的任务是通过交易提升资源总价值。",
-    "resources": "你当前拥有的资源及其对应价值如下：\n\t+ {resource_value_list}",
-    "turn_action": "在每一回合中，你可以与对手交流并提出交易。",
-    "special_tokens": "请使用以下特殊动作标记：",
-    "offer_format": "  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: 提供资源 -> 请求资源]",
-    "accept": "  - '[Accept]': 接受收到的报价。",
-    "deny": "  - '[Deny]': 拒绝收到的报价（默认）。",
-    "duration": "游戏总共持续 {max_turns} 回合。"
+    "intro": "你是谈判游戏中的玩家 {player_id}。\n你拥有一些资源，你的任务是通过交易提高你所拥有资源的总价值。\n你当前拥有的资源及其对应价值如下：\n\t+ {resource_value_list}\n每个回合，你可以与对手交谈并提出交易报价。\n请使用以下特殊标记来执行行动：\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]'：[Offer: 提供的资源 -> 请求的资源]\n  - '[Accept]'：接受收到的报价。\n  - '[Deny]'：拒绝收到的报价（默认）。\n游戏总共持续 {max_turns} 个回合。"
   },
   "invalid_move": {
     "receiving_with_no_resource": "玩家尝试在没有足够资源的情况下接受交易。",
@@ -21,7 +13,7 @@
   "offers": {
     "reject": "玩家 {player_id} 拒绝了该交易。",
     "accept": "玩家 {acceptor_id} 接受了玩家 {proposer_id} 的交易。",
-    "proposal": "玩家 {player_id} 向玩家 {opponent_id} 提出了以下报价：{offer_details}"
+    "proposal": "玩家 {player_id} 向玩家 {opponent_id} 提出了以下报价：提供物品：{offered} -> 请求物品：{requested}"
   },
   "outcome": {
     "win": "玩家 {winner_id} 因库存价值增长更高而获胜。",
