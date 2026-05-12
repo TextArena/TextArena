@@ -1,11 +1,9 @@
 {
   "player_prompt": {
-    "intro": "¡Bienvenido a Nim, Jugador {player_id}!\nReglas:\n- En tu turno, elimina al menos un objeto de exactamente una pila.\n",
-    "instruction": "- Elimina objetos con el formato '[pila cantidad]', por ejemplo '[0 3]'.\n- ¡Quien tome el/los último(s) objeto(s) gana!"
+    "intro": "¡Bienvenido a Nim, Jugador {player_id}!\nReglas:\n- En tu turno, elimina al menos un objeto de exactamente una pila.\n- Usa el formato '[pila cantidad]' para eliminar objetos, por ejemplo '[0 3]'.\n- ¡Quien tome el/los último(s) objeto(s) gana!"
   },
   "state": {
-    "pile": "pila",
-    "current_pile": "Pila actual:"
+    "current_pile": "Pila actual:\n  pila 0: {pile_0}\n  pila 1: {pile_1}\n  pila 2: {pile_2}"
   },
   "invalid_move": {
     "wrong_format": "No se encontró un formato de movimiento válido. Usa '[pila cantidad]'.",

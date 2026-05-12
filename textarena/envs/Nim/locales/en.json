@@ -1,11 +1,9 @@
 {
     "player_prompt": {
-        "intro":            "Welcome to Nim, Player {player_id}!\nRules:\n- On your turn, remove at least one object from exactly one pile.\n",
-        "instruction":      "- Remove objects with the format '[pile quantity]', e.g. '[0 3]'.\n- Whoever takes the last object(s) wins!"
+        "intro":            "Welcome to Nim, Player {player_id}!\nRules:\n- On your turn, remove at least one object from exactly one pile.\n- Remove objects with the format '[pile quantity]', e.g. '[0 3]'.\n- Whoever takes the last object(s) wins!"
     },
     "state": {
-        "pile":             "pile",
-        "current_pile":     "Current Pile:"
+        "current_pile":     "Current Pile:\n  pile 0: {pile_0}\n  pile 1: {pile_1}\n  pile 2: {pile_2}"
     },
     "invalid_move" :{
         "wrong_format":     "No valid move format found. Use '[pile quantity]'.",

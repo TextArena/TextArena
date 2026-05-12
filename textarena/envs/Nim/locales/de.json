@@ -1,11 +1,9 @@
 {
   "player_prompt": {
-    "intro": "Willkommen bei Nim, Spieler {player_id}!\nRegeln:\n- Entferne in deinem Zug mindestens ein Objekt aus genau einem Stapel.\n",
-    "instruction": "- Entferne Objekte im Format '[Stapel Anzahl]', z. B. '[0 3]'.\n- Wer das/die letzte(n) Objekt(e) nimmt, gewinnt!"
+    "intro": "Willkommen bei Nim, Spieler {player_id}!\nRegeln:\n- Entferne in deinem Zug mindestens ein Objekt aus genau einem Stapel.\n- Verwende das Format '[Stapel Anzahl]', um Objekte zu entfernen, z. B. '[0 3]'.\n- Wer das/die letzte(n) Objekt(e) nimmt, gewinnt!"
   },
   "state": {
-    "pile": "Stapel",
-    "current_pile": "Aktueller Stapel:"
+    "current_pile": "Aktueller Haufen:\n  Haufen 0: {pile_0}\n  Haufen 1: {pile_1}\n  Haufen 2: {pile_2}"
   },
   "invalid_move": {
     "wrong_format": "Kein gültiges Zugformat gefunden. Verwende '[Stapel Anzahl]'.",

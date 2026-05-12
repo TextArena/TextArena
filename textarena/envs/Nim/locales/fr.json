@@ -1,11 +1,9 @@
 {
   "player_prompt": {
-    "intro": "Bienvenue à Nim, Joueur {player_id} !\nRègles :\n- À votre tour, retirez au moins un objet d’une seule pile.\n",
-    "instruction": "- Retirez les objets au format '[pile quantité]', par ex. '[0 3]'.\n- Celui qui prend le(s) dernier(s) objet(s) gagne !"
+    "intro": "Bienvenue à Nim, Joueur {player_id} !\nRègles :\n- À votre tour, retirez au moins un objet d’une seule pile.\n- Utilisez le format '[pile quantité]' pour retirer des objets, par ex. '[0 3]'.\n- Celui qui prend le(s) dernier(s) objet(s) gagne !"
   },
   "state": {
-    "pile": "pile",
-    "current_pile": "Pile actuelle :"
+    "current_pile": "Tas actuel :\n  tas 0 : {pile_0}\n  tas 1 : {pile_1}\n  tas 2 : {pile_2}"
   },
   "invalid_move": {
     "wrong_format": "Aucun format de coup valide trouvé. Utilisez '[pile quantité]'.",
