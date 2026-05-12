@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from enum import Enum, auto
 from typing import Any, Dict, List, Tuple, Optional, Callable
 
-from textarena.utils.locales import build_locale
+from textarena.utils.locales import LocalizedMessage, build_locale
 
 class ObservationType(Enum):
     PROMPT = auto() # the player prompts
@@ -31,9 +31,12 @@ class State:
 
         self._locale = build_locale(lang=self.lang)
 
-    def t(self, *keys, **kwargs) -> str:
+    def t(self, *keys, _pid: int = None, **kwargs) -> str:
         assert self._locale is not None, f"{self.__class__.__name__} has no locales/ folder."
-        return self._locale.t(*keys, **kwargs)
+        return self._locale.t(*keys, _pid=_pid, **kwargs)
+    
+    def m(self, *keys, **kwargs):
+        return LocalizedMessage(key=keys, kwargs=kwargs, loader=self._locale)
 
     def check_turn_limit(self):
         return self.turn >= self.max_turns and self.done == False
@@ -72,16 +75,45 @@ class State:
             for player_id in range(self.num_players):
                 self.add_observation(to_id=player_id, message=player_prompt_function(player_id=player_id, game_state=self.game_state), observation_type=ObservationType.PROMPT)
 
-    def add_observation(self, message: str, observation_type: ObservationType, from_id: int=GAME_ID, to_id: int=-1):
-        if observation_type==ObservationType.PLAYER_ACTION:
-            for role_tag in self.role_mapping.values(): message = message.replace(f"[{role_tag}]", "") # filter out role tags from message
-        self.logs.append((from_id, message))
-        if to_id == -1:
-            for pid in range(self.num_players):
-                self.observations[pid].append((from_id, message, observation_type))
-        else:
-            assert to_id in self.observations, f"The provided 'to_id' {to_id} does not exists. ({list(self.observations.keys())})"
-            self.observations[to_id].append((from_id, message, observation_type))
+    def add_observation(self, message, observation_type: ObservationType,
+                        from_id: int = GAME_ID, to_id: int = -1):
+        recipients = range(self.num_players) if to_id == -1 else [to_id]
+        if to_id != -1:
+            assert to_id in self.observations, (
+                f"The provided 'to_id' {to_id} does not exist. "
+                f"({list(self.observations.keys())})"
+            )
+
+        for pid in recipients:
+            rendered = self._resolve_message(message, recipient_id=pid,
+                                            from_id=from_id,
+                                            observation_type=observation_type)
+            if observation_type == ObservationType.PLAYER_ACTION:
+                for role_tag in self.role_mapping.values():
+                    rendered = rendered.replace(f"[{role_tag}]", "")
+            self.observations[pid].append((from_id, rendered, observation_type))
+
+        # Logs: one canonical entry. Use sender's language for player actions,
+        # default language otherwise. Choose what's most useful for replay/debug.
+        log_text = self._resolve_message(
+            message,
+            recipient_id=from_id if observation_type == ObservationType.PLAYER_ACTION else None,
+            from_id=from_id,
+            observation_type=observation_type,
+        )
+        if observation_type == ObservationType.PLAYER_ACTION:
+            for role_tag in self.role_mapping.values():
+                log_text = log_text.replace(f"[{role_tag}]", "")
+        self.logs.append((from_id, log_text))
+
+
+    # core.py — inside class State
+    def _resolve_message(self, message, recipient_id, from_id, observation_type) -> str:
+        from textarena.utils.locales import LocalizedMessage
+        if not isinstance(message, LocalizedMessage):
+            return message
+        pid_for_lang = from_id if observation_type == ObservationType.PLAYER_ACTION else recipient_id
+        return message.render(_pid=pid_for_lang)   # <-- not self._locale.t(...)
 
     def get_current_player_observation(self):
         current_player_observation = self.observations[self.current_player_id]
@@ -118,10 +150,13 @@ class Env(ABC):
         State.lang = lang
         Agent.lang = lang
 
-    def t(self, *keys: str, **kwargs: Any) -> str:
+    def t(self, *keys: str, _pid: int = None, **kwargs: Any) -> str:
         if self._locale is None:
             raise ValueError(f"Environment {self.__class__.__name__} has no locale data. Cannot call t() for translation. Please ensure there is a locales/ directory with the appropriate language files, or set lang='en' to use the default (which is just the keys).")
-        return self._locale.t(*keys, **kwargs)
+        return self._locale.t(*keys, _pid=_pid, **kwargs)
+    
+    def m(self, *keys, **kwargs):
+        return LocalizedMessage(key=keys, kwargs=kwargs, loader=self._locale)
 
     @abstractmethod
     def reset(self, num_players: int, seed: Optional[int]=None):
@@ -167,9 +202,12 @@ class Wrapper(Env):
         self.lang = env.lang
         self._locale = build_locale(lang=self.lang)
 
-    def t(self, *keys, **kwargs) -> str:
+    def t(self, *keys, _pid: int = None, **kwargs) -> str:
         assert self._locale is not None, f"{self.__class__.__name__} has no locales/ folder."
-        return self._locale.t(*keys, **kwargs)
+        return self._locale.t(*keys, _pid=_pid, **kwargs)
+    
+    def m(self, *keys, **kwargs):
+        return LocalizedMessage(key=keys, kwargs=kwargs, loader=self._locale)
 
     def __getattr__(self, name):
         return getattr(self.env, name)

@@ -1,1 +1,1 @@
-from .localeloader import LocaleLoader, build_locale
+from .localeloader import LocalizedMessage, LocaleLoader, build_locale

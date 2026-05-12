@@ -2,6 +2,7 @@ import random, copy
 from typing import List, Dict, Tuple, Any, Optional, Callable
 
 import textarena as ta
+from textarena.utils.locales.localeloader import LocalizedMessage
 
 
 class SinglePlayerState(ta.State):
@@ -104,29 +105,22 @@ class TwoPlayerState(ta.State):
 
     def set_winner(self, player_id: int, reason: str):
         self.rewards = {player_id: 1, 1-player_id: -1}
-        for pid in range(2): self.game_info[pid]["reason"] = reason
-        self.done = True
-
-    def set_winners(self, player_ids: List[int], reason: str):
-        self.rewards = {pid: (1 if pid in player_ids else -1) for pid in range(self.num_players)}
-        self.info["reason"] = reason
-        self.info["turn_count"] = self.turn + 1 # finished on the (n+1)th turn
-        self.info["end_by_invalid"] = False
+        for pid in range(2): self.game_info[pid]["reason"] = reason.render(_pid=pid) if isinstance(reason, LocalizedMessage) else reason
         self.done = True
 
     def set_draw(self, reason: str):
         self.rewards = {0: 0, 1: 0}
-        for pid in range(2): self.game_info[pid]["reason"] = reason
+        for pid in range(2): self.game_info[pid]["reason"] = reason.render(_pid=pid) if isinstance(reason, LocalizedMessage) else reason
         self.done = True
 
     def set_invalid_move(self, reason: str):
         if self.error_allowance > self.error_count:
             self.error_count += 1 # increment error count
             self.made_invalid_move = True
-            self.add_observation(to_id=self.current_player_id, message=self.t("MultiPlayerState", "invalid_move", current_player_id=self.current_player_id, reason=reason), observation_type=ta.ObservationType.GAME_ADMIN)
+            self.add_observation(to_id=self.current_player_id, message=self.t("MultiPlayerState", "invalid_move", current_player_id=self.current_player_id, reason=reason, _pid=self.current_player_id), observation_type=ta.ObservationType.GAME_ADMIN)
         else:
             self.rewards = {self.current_player_id: -1, 1-self.current_player_id: 1}
-            for pid in range(2): self.game_info[pid]["reason"] = reason
+            for pid in range(2): self.game_info[pid]["reason"] = reason.render(_pid=pid) if isinstance(reason, LocalizedMessage) else reason
             self.game_info[self.current_player_id]["invalid_move"] = True
             self.done = True
 

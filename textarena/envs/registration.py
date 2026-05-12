@@ -86,6 +86,8 @@ def make(env_id: Union[str, List[str]], lang: str = "en", **kwargs) -> Any:
     # Dynamically attach the env_id
     env.env_id = env_id
     env.entry_point = env_spec.entry_point
+    if lang is None:
+        lang = "en"
     env.set_lang(lang) # Set the language for the environment
 
     # wrap the environment
