@@ -1,38 +1,32 @@
 {
-  "player_prompt": {
-    "intro": "Eres el Jugador {player_id} en una partida de Kuhn Poker de {max_rounds} rondas.",
-    "game_rules": "Reglas del juego:",
-    "deck_rule": "- Kuhn Poker usa una baraja de 3 cartas con J, Q, K (J la más baja, K la más alta)",
-    "ante_rule": "- Cada jugador apuesta {ante} ficha inicialmente y recibe 1 carta en cada ronda (ten en cuenta que las cartas se reparten sin reemplazo, por lo que no puedes tener la misma carta que tu oponente).",
-    "round_rule": "- El juego continúa durante {max_rounds} rondas",
-    "win_rule": "- El jugador con más fichas al final de todas las rondas gana",
-    "action_rules": "Reglas de acción:",
-    "check": "- '[check]': Pasar sin apostar (solo si no hay apuesta en la mesa)",
-    "bet": "- '[bet]': Añadir 1 ficha al bote (solo si no hay apuesta en la mesa)",
-    "call": "- '[call]': Igualar la apuesta del oponente añadiendo 1 ficha al bote",
-    "fold": "- '[fold]': Rendirse y dejar que tu oponente gane el bote"
-  },
-  "init_round": {
-    "round_start": "### Comenzando ronda {current_round} de {max_rounds}. Tu carta es: '{player_card}'",
-    "available_actions": "Tus acciones disponibles son: "
-  },
-  "invalid_move": {
-    "wrong_format": "La acción debe ser [Check], [Bet], [Call] o [Fold].",
-    "not_legal": "La acción debe ser {legal_actions}."
-  },
-  "action": {
-    "submit_move": "Jugador {player_id}, movimiento enviado: '[{move}]'.",
-    "valid_actions": "Tus acciones disponibles son: {legal_actions}.",
-    "round_summary": " Puntuaciones actuales: Jugador 0: '{player_0_chips}'; Jugador 1: '{player_1_chips}'"
-  },
-  "showdown": {
-    "showdown_summary": "Revelación final: la {winner_card} del Jugador {winner} vence a ",
-    "loser_summary": "la {loser_card} del Jugador {loser}. ",
-    "winner_summary": "El Jugador {winner} gana un bote de {pot_value} fichas."
-  },
-  "outcome": {
-    "round_win": "El Jugador {player_id} se ha retirado.",
-    "winner_player0": "El Jugador 0 ganó por tener más fichas al final de las {max_rounds} rondas.",
-    "winner_player1": "El Jugador 1 ganó por tener más fichas al final de las {max_rounds} rondas."
-  }
+    "player_prompt": {
+        "intro": "Eres el jugador {player_id} en una partida de Kuhn Poker de {max_rounds} rondas.\nReglas del juego:\n- Kuhn Poker usa una baraja de 3 cartas: J, Q, K (J es la más baja, K la más alta)\n- Cada jugador aporta {ante} ficha y recibe 1 carta en cada ronda (nota: las cartas se reparten sin reemplazo, por lo que no puedes tener la misma carta que tu oponente)\n- El juego continúa durante {max_rounds} rondas\n- El jugador con más fichas al final de todas las rondas gana\nReglas de acciones:\n- '[check]': Pasar sin apostar (solo si no hay apuesta en la mesa)\n- '[bet]': Añadir 1 ficha al bote (solo si no hay apuesta en la mesa)\n- '[call]': Igualar la apuesta del oponente añadiendo 1 ficha\n- '[fold]': Retirarse y dejar que el oponente gane el bote"
+    },
+
+    "init_round": {
+        "round_start": "### Comenzando la ronda {current_round} de {max_rounds}. Tu carta es: '{player_card}'",
+        "available_actions": "Tus acciones disponibles son: {available_actions}"
+    },
+
+    "invalid_move": {
+        "wrong_format": "La acción debe ser [Check], [Bet], [Call] o [Fold].",
+        "not_legal": "La acción debe ser una de las siguientes: {legal_actions}."
+    },
+
+    "action": {
+        "submit_move": "Jugador {player_id} ha realizado la acción: '[{move}]'.",
+        "valid_actions": "Tus acciones disponibles son: {legal_actions}.",
+        "round_summary": "{reason} Marcador actual: Jugador 0: '{player_0_chips}'; Jugador 1: '{player_1_chips}'"
+    },
+
+    "showdown": {
+        "showdown_summary": "Enfrentamiento: la carta de {winner} ({winner_card}) vence a la de {loser} ({loser_card}). El jugador {winner} gana el bote de {pot_value} fichas."
+    },
+
+    "outcome": {
+        "draw": "Al final de {max_rounds} rondas, ambos jugadores tenían la misma cantidad de fichas.",
+        "round_win": "El jugador {player_id} se ha retirado.",
+        "winner_player0": "El jugador 0 ganó al tener más fichas al final de las {max_rounds} rondas.",
+        "winner_player1": "El jugador 1 ganó al tener más fichas al final de las {max_rounds} rondas."
+    }
 }

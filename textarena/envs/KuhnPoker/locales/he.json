@@ -1,38 +1,32 @@
 {
-  "player_prompt": {
-    "intro": "אתה שחקן {player_id} במשחק Kuhn Poker בן {max_rounds} סיבובים.",
-    "game_rules": "חוקי המשחק:",
-    "deck_rule": "- המשחק משתמש בחפיסה של 3 קלפים: J, Q, K (J הנמוך ביותר, K הגבוה ביותר)",
-    "ante_rule": "- כל שחקן שם {ante} צ'יפ כהימור פתיחה ומקבל קלף אחד בכל סיבוב (הקלפים מחולקים ללא החזרה, לכן לא ייתכן שיהיה לך אותו קלף כמו ליריב).",
-    "round_rule": "- המשחק נמשך {max_rounds} סיבובים",
-    "win_rule": "- השחקן עם הכי הרבה צ'יפים בסוף כל הסיבובים מנצח",
-    "action_rules": "חוקי הפעולות:",
-    "check": "- '[check]': בדיקה ללא הימור",
-    "bet": "- '[bet]': הוסף צ'יפ אחד לקופה",
-    "call": "- '[call]': השווה את ההימור של היריב",
-    "fold": "- '[fold]': וותר על היד ותן ליריב לזכות בקופה"
-  },
-  "init_round": {
-    "round_start": "### מתחיל סיבוב {current_round} מתוך {max_rounds}. הקלף שלך הוא: '{player_card}'",
-    "available_actions": "הפעולות הזמינות שלך הן: "
-  },
-  "invalid_move": {
-    "wrong_format": "הפעולה חייבת להיות [Check], [Bet], [Call] או [Fold].",
-    "not_legal": "הפעולה חייבת להיות {legal_actions}."
-  },
-  "action": {
-    "submit_move": "שחקן {player_id} ביצע את המהלך: '[{move}]'.",
-    "valid_actions": "הפעולות הזמינות שלך הן: {legal_actions}.",
-    "round_summary": " ניקוד נוכחי: שחקן 0: '{player_0_chips}'; שחקן 1: '{player_1_chips}'"
-  },
-  "showdown": {
-    "showdown_summary": "חשיפת קלפים: הקלף {winner_card} של שחקן {winner} מנצח את ",
-    "loser_summary": "הקלף {loser_card} של שחקן {loser}. ",
-    "winner_summary": "שחקן {winner} זוכה בקופה של {pot_value} צ'יפים."
-  },
-  "outcome": {
-    "round_win": "שחקן {player_id} פרש.",
-    "winner_player0": "שחקן 0 ניצח עם יותר צ'יפים בסוף {max_rounds} הסיבובים.",
-    "winner_player1": "שחקן 1 ניצח עם יותר צ'יפים בסוף {max_rounds} הסיבובים."
-  }
+    "player_prompt": {
+        "intro": "אתה שחקן {player_id} במשחק Kuhn Poker בן {max_rounds} סיבובים.\nחוקי המשחק:\n- Kuhn Poker משתמש בחפיסה של 3 קלפים: J, Q, K (J הנמוך ביותר, K הגבוה ביותר)\n- כל שחקן שם {ante} צ'יפ כהימור פתיחה ומקבל קלף אחד בכל סיבוב (הערה: הקלפים מחולקים ללא החזרה, לכן לא ייתכן שיהיה לך אותו קלף כמו היריב)\n- המשחק נמשך {max_rounds} סיבובים\n- השחקן עם הכי הרבה צ'יפים בסוף כל הסיבובים מנצח\nחוקי פעולות:\n- '[check]': בדיקה ללא הימור (רק אם אין הימור על השולחן)\n- '[bet]': הוספת צ'יפ אחד לקופה (רק אם אין הימור על השולחן)\n- '[call]': השוואת הימור של היריב על ידי הוספת צ'יפ אחד\n- '[fold]': פרישה מהיד ומתן הזכייה בקופה ליריב"
+    },
+
+    "init_round": {
+        "round_start": "### התחלת סיבוב {current_round} מתוך {max_rounds}. הקלף שלך הוא: '{player_card}'",
+        "available_actions": "הפעולות הזמינות שלך הן: {available_actions}"
+    },
+
+    "invalid_move": {
+        "wrong_format": "הפעולה חייבת להיות [Check], [Bet], [Call] או [Fold].",
+        "not_legal": "הפעולה חייבת להיות אחת מהבאות: {legal_actions}."
+    },
+
+    "action": {
+        "submit_move": "שחקן {player_id} ביצע את הפעולה: '[{move}]'.",
+        "valid_actions": "הפעולות הזמינות שלך הן: {legal_actions}.",
+        "round_summary": "{reason} מצב נוכחי: שחקן 0: '{player_0_chips}'; שחקן 1: '{player_1_chips}'"
+    },
+
+    "showdown": {
+        "showdown_summary": "חשיפת קלפים: הקלף של שחקן {winner} ({winner_card}) מנצח את הקלף של שחקן {loser} ({loser_card}). שחקן {winner} זוכה בקופה של {pot_value} צ'יפים."
+    },
+
+    "outcome": {
+        "draw": "בסוף {max_rounds} סבבים, לשני השחקנים היה אותו מספר של צ׳יפים.",
+        "round_win": "שחקן {player_id} פרש.",
+        "winner_player0": "שחקן 0 ניצח בכך שהיו לו יותר צ'יפים בסוף כל {max_rounds} הסיבובים.",
+        "winner_player1": "שחקן 1 ניצח בכך שהיו לו יותר צ'יפים בסוף כל {max_rounds} הסיבובים."
+    }
 }

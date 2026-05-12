@@ -1,38 +1,32 @@
 {
-  "player_prompt": {
-    "intro": "你是玩家 {player_id}，正在进行一场共 {max_rounds} 轮的 Kuhn Poker 游戏。",
-    "game_rules": "游戏规则：",
-    "deck_rule": "- Kuhn Poker 使用 3 张牌：J、Q、K（J 最小，K 最大）",
-    "ante_rule": "- 每位玩家先下注 {ante} 筹码，每轮获得 1 张牌（发牌不放回，因此你不可能和对手拿到相同的牌）",
-    "round_rule": "- 游戏共进行 {max_rounds} 轮",
-    "win_rule": "- 所有轮结束后筹码最多的玩家获胜",
-    "action_rules": "操作规则：",
-    "check": "- '[check]': 不下注过牌",
-    "bet": "- '[bet]': 向底池增加 1 个筹码",
-    "call": "- '[call]': 跟注对手的下注",
-    "fold": "- '[fold]': 弃牌并让对手赢得底池"
-  },
-  "init_round": {
-    "round_start": "### 开始第 {current_round} / {max_rounds} 轮。你的牌是：'{player_card}'",
-    "available_actions": "你可执行的操作有："
-  },
-  "invalid_move": {
-    "wrong_format": "操作必须是 [Check]、[Bet]、[Call] 或 [Fold]。",
-    "not_legal": "操作必须是 {legal_actions}。"
-  },
-  "action": {
-    "submit_move": "玩家 {player_id} 提交了操作：'[{move}]'。",
-    "valid_actions": "你可执行的操作有：{legal_actions}。",
-    "round_summary": " 当前分数：玩家 0: '{player_0_chips}'; 玩家 1: '{player_1_chips}'"
-  },
-  "showdown": {
-    "showdown_summary": "摊牌：玩家 {winner} 的 {winner_card} 击败 ",
-    "loser_summary": "玩家 {loser} 的 {loser_card}。 ",
-    "winner_summary": "玩家 {winner} 赢得 {pot_value} 筹码底池。"
-  },
-  "outcome": {
-    "round_win": "玩家 {player_id} 已弃牌。",
-    "winner_player0": "玩家 0 在 {max_rounds} 轮结束后以更多筹码获胜。",
-    "winner_player1": "玩家 1 在 {max_rounds} 轮结束后以更多筹码获胜。"
-  }
+    "player_prompt": {
+        "intro": "你是玩家 {player_id}，正在进行一场共 {max_rounds} 轮的 Kuhn Poker 游戏。\n游戏规则：\n- Kuhn Poker 使用一副只有 3 张牌的牌组：J、Q、K（J 最小，K 最大）\n- 每位玩家先投入 {ante} 个筹码作为底注，并在每一轮获得 1 张牌（注意：牌是不放回发放的，因此你不可能与对手拿到相同的牌）\n- 游戏共进行 {max_rounds} 轮\n- 所有轮结束后，筹码最多的玩家获胜\n行动规则：\n- '[check]'：过牌（仅当桌面上没有下注时）\n- '[bet]'：下注，向底池增加 1 个筹码（仅当桌面上没有下注时）\n- '[call]'：跟注，对手下注后投入 1 个筹码进行匹配\n- '[fold]'：弃牌，放弃本局并让对手赢得底池"
+    },
+
+    "init_round": {
+        "round_start": "### 开始第 {current_round} / {max_rounds} 轮。你的手牌是：'{player_card}'",
+        "available_actions": "你可执行的操作有：{available_actions}"
+    },
+
+    "invalid_move": {
+        "wrong_format": "操作必须是 [Check]、[Bet]、[Call] 或 [Fold]。",
+        "not_legal": "操作必须属于以下之一：{legal_actions}。"
+    },
+
+    "action": {
+        "submit_move": "玩家 {player_id} 执行了操作：'[{move}]'。",
+        "valid_actions": "你可执行的操作有：{legal_actions}。",
+        "round_summary": "{reason} 当前分数：玩家 0：'{player_0_chips}'；玩家 1：'{player_1_chips}'"
+    },
+
+    "showdown": {
+        "showdown_summary": "摊牌：玩家 {winner} 的 {winner_card} 战胜了玩家 {loser} 的 {loser_card}。玩家 {winner} 赢得了 {pot_value} 个筹码。"
+    },
+
+    "outcome": {
+        "draw": "在 {max_rounds} 轮结束时，两名玩家拥有相同数量的筹码。",
+        "round_win": "玩家 {player_id} 已弃牌。",
+        "winner_player0": "玩家 0 在所有 {max_rounds} 轮结束后拥有更多筹码，获得胜利。",
+        "winner_player1": "玩家 1 在所有 {max_rounds} 轮结束后拥有更多筹码，获得胜利。"
+    }
 }
