@@ -8,7 +8,12 @@ agents = {
 }
 
 # initialize the environment
-env = ta.make(env_id="TicTacToe-v0", lang={0: "en", 1: "zh"})
+env = ta.make(env_id="TicTacToe-v0")
+# for multilingual environments (TicTacToe, ColonelBlotto, KuhnPoker, IteratedPrisonersDilemma,
+# PigDice, Nim, SimpleNegotiation, ConnectFour), you can specify the language for each player. 
+# For example, if player 0 speaks English and player 1 speaks Chinese, you can do:
+# Available languages - en, zh, fr, de, es, ms, he, ar
+# env = ta.make(env_id="TicTacToe-v0", lang={0: "en", 1: "zh"})
 env.reset(num_players=len(agents))
 
 # main game loop
