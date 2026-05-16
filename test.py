@@ -5,15 +5,10 @@ import textarena as ta
 agents = {
     0: ta.agents.HumanAgent(),
     1: ta.agents.HumanAgent(),
-
-    # 1: ta.agents.OpenRouterAgent(model_name="google/gemini-2.0-flash-001"),
 }
 
 # initialize the environment
-env = ta.make(env_id="TicTacToe-v0-raw", lang="zh")
-env = ta.wrappers.LLMObservationWrapper(env)
-env = ta.wrappers.ActionFormattingWrapper(env)
-# env = ta.wrappers.SimpleRenderWrapper(env=env) #, render_mode="standard")
+env = ta.make(env_id="TicTacToe-v0", lang={0: "en", 1: "zh"})
 env.reset(num_players=len(agents))
 
 # main game loop
