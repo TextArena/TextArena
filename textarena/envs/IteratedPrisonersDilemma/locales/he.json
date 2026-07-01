@@ -1,20 +1,18 @@
 {
-    "player_prompt": {
-        "intro": "אתה שחקן {player_id} בדילמת האסיר החוזרת הנמשכת {num_rounds} סיבובים.\n\nמבנה המשחק:\n- לפני כל החלטה יש לך {total_conversation_rounds} תורות לתקשר בחופשיות.\n- לאחר מכן, שני השחקנים בוחרים בו-זמנית [Cooperate] או [Defect].\n\nמטריצת התשלומים (קבועה בכל סיבוב):\n- אם שני השחקנים משתפים פעולה ➜ כל אחד מקבל {cooperate_reward}\n- אם שני השחקנים בוגדים ➜ כל אחד מקבל {mutual_defect_reward}\n- אם אחד בוגד והשני משתף פעולה ➜ הבוגד מקבל {defect_reward}, והמשתף פעולה מקבל {sucker_reward}\n\nאיך לשחק:\n- במהלך שלב התקשורת: כתוב כל טקסט שתרצה.\n- במהלך שלב ההחלטה: יש לכלול '[Cooperate]' או '[Defect]' (לא תלוי באותיות גדולות/קטנות). ניתן להוסיף טקסט לפני או אחרי."
-    },
-
-    "phases": {
-        "conversation_finished": "שלב התקשורת עבור סיבוב {round} הסתיים. אנא השב עם '[Cooperate]' או '[Defect]'.",
-        "starting_round": "--- תחילת סיבוב {round} ---",
-        "round_summary": "תוצאות סיבוב {round}:\n{outcome}\nשחקן 0 קיבל {r0} (סה\"כ {score_0}), שחקן 1 קיבל {r1} (סה\"כ {score_1})."
-    },
-
-    "outcome": {
-        "winner": "שחקן {winner} ניצח {win_score} - {lose_score}.",
-        "draw": "תיקו! שני השחקנים קיבלו {s0}.",
-        "round_both_cooperate": "שני השחקנים שיתפו פעולה.",
-        "round_both_defect": "שני השחקנים בגדו.",
-        "round_p0_cooperates_p1_defects": "שחקן 0 שיתף פעולה, שחקן 1 בגד.",
-        "round_p0_defects_p1_cooperates": "שחקן 0 בגד, שחקן 1 שיתף פעולה."
-    }
+  "player_prompt": {
+    "intro": "אתה שחקן {player_id} במשחק דילמת האסיר החוזרת, הנמשך {num_rounds} סיבובים.\n\nמבנה המשחק:\n- לפני כל החלטה יש לך {total_conversation_rounds} תורות לתקשר בחופשיות.\n- לאחר מכן, שני השחקנים בוחרים בו-זמנית אם לשתף פעולה או לערוק.\n\nמטריצת התשלומים, קבועה בכל סיבוב:\n- שני השחקנים משתפים פעולה ➜ כל אחד מקבל {cooperate_reward}\n- שני השחקנים עורקים ➜ כל אחד מקבל {mutual_defect_reward}\n- אחד עורק ואחד משתף פעולה ➜ העורק מקבל {defect_reward}, המשתף פעולה מקבל {sucker_reward}\n\nכיצד לשחק:\n- במהלך שלב השיחה: כתוב כל טקסט שתרצה.\n- במהלך שלב ההחלטה: כלול '[Cooperate]' או '[Defect]', ללא תלות באותיות גדולות או קטנות. ניתן להוסיף טקסט נוסף לפני הטוקן או אחריו."
+  },
+  "phases": {
+    "conversation_finished": "השיחה הסתיימה עבור סיבוב {round}. אנא השב עם '[Cooperate]' או '[Defect]' בתוך \\boxed{{}}.",
+    "starting_round": "--- תחילת סיבוב {round} ---",
+    "round_summary": "תוצאות סיבוב {round}:\n{outcome}\nשחקן 0 קיבל {r0} סך הכול {score_0}, שחקן 1 קיבל {r1} סך הכול {score_1}."
+  },
+  "outcome": {
+    "winner": "שחקן {winner} מנצח {win_score} - {lose_score}.",
+    "draw": "תיקו! שני השחקנים קיבלו {s0}.",
+    "round_both_cooperate": "שני השחקנים שיתפו פעולה.",
+    "round_both_defect": "שני השחקנים ערקו.",
+    "round_p0_cooperates_p1_defects": "שחקן 0 שיתף פעולה, שחקן 1 ערק.",
+    "round_p0_defects_p1_cooperates": "שחקן 0 ערק, שחקן 1 שיתף פעולה."
+  }
 }

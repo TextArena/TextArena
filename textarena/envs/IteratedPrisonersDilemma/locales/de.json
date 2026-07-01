@@ -1,20 +1,18 @@
 {
-    "player_prompt": {
-        "intro": "Du bist Spieler {player_id} in einem iterierten Gefangenendilemma über {num_rounds} Runden.\n\nSpielstruktur:\n- Vor jeder Entscheidung hast du {total_conversation_rounds} Runden, um frei zu kommunizieren.\n- Danach wählen beide Spieler gleichzeitig [Cooperate] oder [Defect].\n\nAuszahlungsmatrix (in jeder Runde gleich):\n- Beide kooperieren ➜ jeder erhält {cooperate_reward}\n- Beide defectieren ➜ jeder erhält {mutual_defect_reward}\n- Einer defectiert, einer kooperiert ➜ der Defektor erhält {defect_reward}, der Kooperierende erhält {sucker_reward}\n\nSpielweise:\n- Während der Kommunikationsphase: schreibe beliebigen Text.\n- Während der Entscheidungsphase: füge '[Cooperate]' oder '[Defect]' ein (Groß-/Kleinschreibung egal). Du kannst zusätzlichen Text davor oder danach hinzufügen."
-    },
-
-    "phases": {
-        "conversation_finished": "Die Kommunikationsphase für Runde {round} ist beendet. Bitte antworte mit '[Cooperate]' oder '[Defect]'.",
-        "starting_round": "--- Runde {round} beginnt ---",
-        "round_summary": "Ergebnisse von Runde {round}:\n{outcome}\nSpieler 0 erhielt {r0} (gesamt {score_0}), Spieler 1 erhielt {r1} (gesamt {score_1})."
-    },
-
-    "outcome": {
-        "winner": "Spieler {winner} gewinnt {win_score} - {lose_score}.",
-        "draw": "Unentschieden! Beide Spieler erzielten {s0}.",
-        "round_both_cooperate": "Beide Spieler haben kooperiert.",
-        "round_both_defect": "Beide Spieler haben defectiert.",
-        "round_p0_cooperates_p1_defects": "Spieler 0 kooperierte, Spieler 1 defectierte.",
-        "round_p0_defects_p1_cooperates": "Spieler 0 defectierte, Spieler 1 kooperierte."
-    }
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in einem iterierten Gefangenendilemma über {num_rounds} Runden.\n\nSpielstruktur:\n- Vor jeder Entscheidung hast du {total_conversation_rounds} Züge, um frei zu kommunizieren.\n- Danach wählen beide Spieler gleichzeitig, ob sie kooperieren oder defektieren.\n\nAuszahlungsmatrix, in jeder Runde fest:\n- Beide kooperieren ➜ jeder erhält {cooperate_reward}\n- Beide defektieren ➜ jeder erhält {mutual_defect_reward}\n- Einer defektiert, einer kooperiert ➜ Defektor erhält {defect_reward}, Kooperator erhält {sucker_reward}\n\nSpielanleitung:\n- Während der Gesprächsphase: Gib beliebigen Text ein.\n- Während der Entscheidungsphase: Füge '[Cooperate]' oder '[Defect]' ein, unabhängig von Groß- und Kleinschreibung. Du darfst zusätzlichen Text vor oder nach dem Token hinzufügen."
+  },
+  "phases": {
+    "conversation_finished": "Gespräch für Runde {round} beendet. Bitte antworte mit '[Cooperate]' oder '[Defect]' innerhalb von \\boxed{{}}.",
+    "starting_round": "--- Runde {round} beginnt ---",
+    "round_summary": "Ergebnisse von Runde {round}:\n{outcome}\nSpieler 0 erhielt {r0} insgesamt {score_0}, Spieler 1 erhielt {r1} insgesamt {score_1}."
+  },
+  "outcome": {
+    "winner": "Spieler {winner} gewinnt {win_score} - {lose_score}.",
+    "draw": "Unentschieden! Beide Spieler erzielten {s0}.",
+    "round_both_cooperate": "Beide Spieler kooperierten.",
+    "round_both_defect": "Beide Spieler defektierten.",
+    "round_p0_cooperates_p1_defects": "Spieler 0 kooperierte, Spieler 1 defektierte.",
+    "round_p0_defects_p1_cooperates": "Spieler 0 defektierte, Spieler 1 kooperierte."
+  }
 }

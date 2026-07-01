@@ -87,9 +87,9 @@ class ColonelBlottoEnv(ta.Env):
             try: units = int(m.group(2))
             except ValueError: return None
             allocations[field] = units
-        leftovers = token_re.sub("", s)
-        leftovers = re.sub(r"[\s,]+", "", leftovers)
-        if leftovers: return None
+        # leftovers = token_re.sub("", s)
+        # leftovers = re.sub(r"[\s,]+", "", leftovers)
+        # if leftovers: return None
         for fname in self.field_names: allocations.setdefault(fname, 0)
         return allocations
 

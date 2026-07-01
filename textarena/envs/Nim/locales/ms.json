@@ -1,21 +1,21 @@
 {
-  "player_prompt": {
-    "intro": "Selamat datang ke Nim, Pemain {player_id}!\nPeraturan:\n- Pada giliran anda, buang sekurang-kurangnya satu objek daripada tepat satu timbunan.\n- Gunakan format '[timbunan kuantiti]' untuk membuang objek, contohnya '[0 3]'.\n- Sesiapa yang mengambil objek terakhir akan menang!"
-  },
-  "state": {
-    "current_pile": "Longgokan Semasa:\n  longgokan 0: {pile_0}\n  longgokan 1: {pile_1}\n  longgokan 2: {pile_2}"
-  },
-  "invalid_move": {
-    "wrong_format": "Format langkah tidak sah. Gunakan '[timbunan kuantiti]'.",
-    "correct_format_wrong_fields": "Pemain {player_id}, tindakan tidak sah. Lajur {col} berada di luar julat.",
-    "out_of_range": "Indeks timbunan {pile_index} berada di luar julat.",
-    "non_positive": "Mesti buang sekurang-kurangnya 1 objek.",
-    "exceeds_pile": "Tidak boleh buang {quantity} dari timbunan {pile_index} (hanya tinggal {pile_count})."
-  },
-  "observation": {
-    "removed_from_piles": "Pemain {player_id} membuang {quantity} dari timbunan {pile_index}."
-  },
-  "outcome": {
-    "win": "Pemain {player_id} mengambil objek terakhir!"
-  }
+    "player_prompt": {
+        "intro": "Anda ialah Pemain {player_id} dalam Nim.\nMatlamat anda adalah untuk mengambil objek terakhir yang masih berbaki.\nPada setiap giliran, pilih tepat satu longgokan dan keluarkan satu atau lebih objek daripadanya.\nGunakan format '[pile quantity]', dengan pile ialah indeks longgokan dan quantity ialah bilangan objek yang hendak dikeluarkan.\nSebagai contoh, '[0 3]' mengeluarkan 3 objek daripada longgokan 0."
+    },
+    "state": {
+        "current_pile": "Longgokan semasa:\n  longgokan 0: {pile_0}\n  longgokan 1: {pile_1}\n  longgokan 2: {pile_2}"
+    },
+    "invalid_move": {
+        "wrong_format": "Tiada format gerakan yang sah ditemui. Gunakan '[pile quantity]'.",
+        "correct_format_wrong_fields": "Pemain {player_id}, tindakan tidak sah. Lajur {col} berada di luar julat.",
+        "out_of_range": "Indeks longgokan {pile_index} berada di luar julat.",
+        "non_positive": "Mesti keluarkan sekurang-kurangnya 1 objek.",
+        "exceeds_pile": "Tidak boleh mengeluarkan {quantity} objek daripada longgokan {pile_index} (hanya {pile_count} yang tinggal)."
+    },
+    "observation": {
+        "removed_from_piles": "Pemain {player_id} memainkan [{pile_index} {quantity}], lalu mengeluarkan {quantity} objek daripada longgokan {pile_index}."
+    },
+    "outcome": {
+        "win": "Pemain {player_id} mengambil objek terakhir!"
+    }
 }

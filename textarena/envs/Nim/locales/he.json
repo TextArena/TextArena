@@ -1,21 +1,21 @@
 {
-  "player_prompt": {
-    "intro": "ברוך הבא לנים, שחקן {player_id}!\nחוקים:\n- בתורך, הסר לפחות חפץ אחד מערימה אחת בלבד.\n- השתמש בפורמט '[ערימה כמות]' כדי להסיר חפצים, לדוגמה '[0 3]'.\n- מי שלוקח את החפץ האחרון מנצח!"
-  },
-  "state": {
-    "current_pile": "ערימת האבנים הנוכחית:\n  ערימה 0: {pile_0}\n  ערימה 1: {pile_1}\n  ערימה 2: {pile_2}"
-  },
-  "invalid_move": {
-    "wrong_format": "לא נמצא פורמט מהלך תקין. השתמש ב-'[ערימה כמות]'.",
-    "correct_format_wrong_fields": "שחקן {player_id}, מהלך לא חוקי. העמודה {col} מחוץ לטווח.",
-    "out_of_range": "אינדקס הערימה {pile_index} מחוץ לטווח.",
-    "non_positive": "יש להסיר לפחות חפץ אחד.",
-    "exceeds_pile": "לא ניתן להסיר {quantity} מערימה {pile_index} (נותרו רק {pile_count})."
-  },
-  "observation": {
-    "removed_from_piles": "שחקן {player_id} הסיר {quantity} מערימה {pile_index}."
-  },
-  "outcome": {
-    "win": "שחקן {player_id} לקח את החפץ האחרון!"
-  }
+    "player_prompt": {
+        "intro": "אתה שחקן {player_id} במשחק נים.\nהמטרה שלך היא לקחת את העצם האחרון שנותר.\nבכל תור, בחר בדיוק ערימה אחת והסר ממנה עצם אחד או יותר.\nהשתמש בפורמט '[pile quantity]', כאשר pile הוא אינדקס הערימה ו-quantity הוא מספר העצמים שיש להסיר.\nלדוגמה, '[0 3]' מסיר 3 עצמים מערימה 0."
+    },
+    "state": {
+        "current_pile": "הערימות הנוכחיות:\n  ערימה 0: {pile_0}\n  ערימה 1: {pile_1}\n  ערימה 2: {pile_2}"
+    },
+    "invalid_move": {
+        "wrong_format": "לא נמצא פורמט מהלך תקין. השתמש ב-'[pile quantity]'.",
+        "correct_format_wrong_fields": "שחקן {player_id}, פעולה לא חוקית. העמודה {col} מחוץ לטווח.",
+        "out_of_range": "אינדקס הערימה {pile_index} מחוץ לטווח.",
+        "non_positive": "יש להסיר לפחות עצם אחד.",
+        "exceeds_pile": "לא ניתן להסיר {quantity} עצמים מערימה {pile_index} (נותרו בה רק {pile_count})."
+    },
+    "observation": {
+        "removed_from_piles": "שחקן {player_id} שיחק [{pile_index} {quantity}], והסיר {quantity} עצם/עצמים מערימה {pile_index}."
+    },
+    "outcome": {
+        "win": "שחקן {player_id} לקח את העצם או העצמים האחרונים!"
+    }
 }

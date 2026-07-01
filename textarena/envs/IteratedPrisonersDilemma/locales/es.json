@@ -1,20 +1,18 @@
 {
-    "player_prompt": {
-        "intro": "Eres el Jugador {player_id} en un Dilema del Prisionero Iterado que se desarrolla durante {num_rounds} rondas.\n\nEstructura del juego:\n- Antes de cada decisión tienes {total_conversation_rounds} turnos para comunicarte libremente.\n- Después, ambos jugadores eligen simultáneamente [Cooperate] o [Defect].\n\nMatriz de pagos (fija en cada ronda):\n- Ambos cooperan ➜ cada uno recibe {cooperate_reward}\n- Ambos traicionan ➜ cada uno recibe {mutual_defect_reward}\n- Uno traiciona y el otro coopera ➜ el traidor recibe {defect_reward}, el cooperador recibe {sucker_reward}\n\nCómo jugar:\n- Durante la fase de comunicación: escribe cualquier texto que desees.\n- Durante la fase de decisión: incluye '[Cooperate]' o '[Defect]' (no distingue entre mayúsculas y minúsculas). Puedes añadir texto antes o después."
-    },
-
-    "phases": {
-        "conversation_finished": "La fase de comunicación para la ronda {round} ha terminado. Por favor responde con '[Cooperate]' o '[Defect]'.",
-        "starting_round": "--- Comenzando la ronda {round} ---",
-        "round_summary": "Resultados de la ronda {round}:\n{outcome}\nJugador 0 obtuvo {r0} (total {score_0}), Jugador 1 obtuvo {r1} (total {score_1})."
-    },
-
-    "outcome": {
-        "winner": "El jugador {winner} gana {win_score} - {lose_score}.",
-        "draw": "¡Empate! Ambos jugadores obtuvieron {s0}.",
-        "round_both_cooperate": "Ambos jugadores cooperaron.",
-        "round_both_defect": "Ambos jugadores traicionaron.",
-        "round_p0_cooperates_p1_defects": "El jugador 0 cooperó y el jugador 1 traicionó.",
-        "round_p0_defects_p1_cooperates": "El jugador 0 traicionó y el jugador 1 cooperó."
-    }
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id} en un Dilema del Prisionero iterado que dura {num_rounds} rondas.\n\nEstructura del juego:\n- Antes de cada decisión tienes {total_conversation_rounds} turnos para comunicarte libremente.\n- Después, ambos jugadores eligen simultáneamente cooperar o traicionar.\n\nMatriz de pagos, fija en cada ronda:\n- Ambos cooperan ➜ cada uno recibe {cooperate_reward}\n- Ambos traicionan ➜ cada uno recibe {mutual_defect_reward}\n- Uno traiciona y el otro coopera ➜ quien traiciona recibe {defect_reward}, quien coopera recibe {sucker_reward}\n\nCómo jugar:\n- Durante la conversación: escribe cualquier texto que quieras.\n- Durante la fase de decisión: incluye '[Cooperate]' o '[Defect]', sin importar mayúsculas o minúsculas. Puedes añadir texto adicional antes o después del token."
+  },
+  "phases": {
+    "conversation_finished": "La conversación terminó para la ronda {round}. Responde con '[Cooperate]' o '[Defect]' dentro de \\boxed{{}}.",
+    "starting_round": "--- Comienza la ronda {round} ---",
+    "round_summary": "Resultados de la ronda {round}:\n{outcome}\nEl Jugador 0 obtuvo {r0} total {score_0}, el Jugador 1 obtuvo {r1} total {score_1}."
+  },
+  "outcome": {
+    "winner": "El Jugador {winner} gana {win_score} - {lose_score}.",
+    "draw": "¡Empate! Ambos jugadores obtuvieron {s0}.",
+    "round_both_cooperate": "Ambos jugadores cooperaron.",
+    "round_both_defect": "Ambos jugadores traicionaron.",
+    "round_p0_cooperates_p1_defects": "El Jugador 0 cooperó, el Jugador 1 traicionó.",
+    "round_p0_defects_p1_cooperates": "El Jugador 0 traicionó, el Jugador 1 cooperó."
+  }
 }

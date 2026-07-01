@@ -1,6 +1,6 @@
 {
     "player_prompt": {
-        "intro":            "Welcome to Nim, Player {player_id}!\nRules:\n- On your turn, remove at least one object from exactly one pile.\n- Remove objects with the format '[pile quantity]', e.g. '[0 3]'.\n- Whoever takes the last object(s) wins!"
+        "intro":            "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
     },
     "state": {
         "current_pile":     "Current Pile:\n  pile 0: {pile_0}\n  pile 1: {pile_1}\n  pile 2: {pile_2}"
@@ -13,7 +13,7 @@
         "exceeds_pile":     "Cannot remove {quantity} from pile {pile_index} (only {pile_count} left)."
     },
     "observation": {
-        "removed_from_piles":     "Player {player_id} removed {quantity} from pile {pile_index}."
+        "removed_from_piles":     "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
     },
     "outcome": {
         "win":              "Player {player_id} took the last object(s)!"
