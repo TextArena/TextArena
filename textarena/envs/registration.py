@@ -56,7 +56,7 @@ def check_env_exists(env_id: str):
     else:
         print(f"Environment {env_id} is registered.")
 
-def make(env_id: Union[str, List[str]], lang: str = "en", **kwargs) -> Any:
+def make(env_id: Union[str, List[str]], **kwargs) -> Any:
     """Create an environment instance using the registered ID."""
     # If env_id is a list, randomly select one environment ID
     if isinstance(env_id, list):
@@ -86,9 +86,6 @@ def make(env_id: Union[str, List[str]], lang: str = "en", **kwargs) -> Any:
     # Dynamically attach the env_id
     env.env_id = env_id
     env.entry_point = env_spec.entry_point
-    if lang is None:
-        lang = "en"
-    env.set_lang(lang) # Set the language for the environment
 
     # wrap the environment
     if env_spec.default_wrappers is not None and len(env_spec.default_wrappers) > 0:
