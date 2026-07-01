@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le joueur {player_id}. Vous jouez à Devinez le Nombre.\nVous devez deviner le nombre compris entre {min_number} et {max_number} en moins de {max_turns} tours.\nLorsque vous saisissez votre proposition, le jeu vous donne des indices tels que « plus grand » ou « plus petit ».\nVous pouvez formuler votre réponse comme vous le souhaitez. Seul le nombre placé entre crochets sera considéré comme votre proposition. Par exemple, [5].\nAu cours de la partie, l’historique de vos propositions sera ajouté ci-dessous. Utilisez ces informations pour terminer la partie avant d’épuiser vos essais.\nEntrez votre proposition."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format de coup invalide. Le joueur {player_id} n’a pas répondu avec un format « [nombre] » valide.",
+    "out_of_range": "Coup invalide. Le joueur {player_id} a proposé un nombre en dehors de l’intervalle spécifié.",
+    "already_guessed": "Coup invalide. Le joueur {player_id} a déjà proposé ce nombre."
+  },
+
+  "game_message": {
+    "target_higher": "Le nombre cible est plus grand.",
+    "target_lower": "Le nombre cible est plus petit."
+  },
+
+  "outcome": {
+    "win": "Félicitations ! Vous avez trouvé le bon nombre.",
+    "turn_limit": "La limite de tours a été atteinte. Proposition : {guess}, Cible : {target}"
+  }
+}

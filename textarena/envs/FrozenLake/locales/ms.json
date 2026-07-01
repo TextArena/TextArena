@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro":            "Selamat datang ke Frozen Lake!\n\nAnda diwakili oleh 'P' pada grid.\nSimbol grid:\n  ' ' = Permukaan beku (selamat untuk berjalan)\n  'H' = Lubang (jatuh ke dalamnya dan anda kalah!)\n  'G' = Matlamat (capai tempat ini untuk menang!)\n  'P' = Kedudukan semasa anda\n\nTindakan yang tersedia: up, down, left, right (atau w, a, s, d)\nTaip tindakan anda seperti berikut: [up], [down], [left], [right] atau [w], [a], [s], [d]\n\nObjektif: Bergerak dari titik permulaan di sudut kiri atas ke matlamat di sudut kanan bawah tanpa terjatuh ke dalam mana-mana lubang!\n"
+  },
+
+  "board": {
+    "current_board":    "Papan Semasa:\n\n{board}\n\nTindakan yang Tersedia: {actions}"
+  },
+
+  "invalid_move": {
+    "wrong_format":     "Format tindakan tidak sah. Gunakan [up], [down], [left], [right] atau [w], [a], [s], [d].",
+    "unknown_action":   "Tindakan '{action}' tidak dikenali. Gunakan up, down, left, right atau w, a, s, d.",
+    "hit_wall":         "Anda cuba bergerak ke arah {action}, tetapi terlanggar dinding!"
+  },
+
+  "game_action": {
+    "moved":            "Anda bergerak ke arah {action} ke kedudukan ({row}, {col})."
+  },
+
+  "outcome": {
+    "win":              "Tahniah! Anda telah sampai ke matlamat!",
+    "fell_in_hole":     "Anda terjatuh ke dalam lubang! Permainan tamat. Anda telah melengkapkan {pct}% perjalanan ke matlamat.",
+    "turn_limit":       "Anda telah mencapai had giliran! Permainan tamat. Anda telah melengkapkan {pct}% perjalanan ke matlamat."
+  }
+}

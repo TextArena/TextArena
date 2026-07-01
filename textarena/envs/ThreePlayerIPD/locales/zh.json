@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "你是三人迭代囚徒困境中的玩家 {player_id}。比赛共进行 {num_rounds} 个回合。\n回合结构：\n• {conv_rounds} 轮自由聊天\n• 1 轮决策——针对每位对手提交一个标记：'[<对手编号> cooperate]' 或 '[<对手编号> defect]'（例如 '[1 defect] [2 cooperate]'；默认选择为 'cooperate'）。\n两两收益矩阵（适用于每一对无序玩家组合）：\n  - 双方都合作  ->  {reward}\n  - 双方都背叛  ->  {punishment}\n  - 你背叛，对方合作 -> {temptation}\n  - 你合作，对方背叛 -> {sucker}\n所有回合结束后，得分最高的玩家获胜。"
+  },
+
+  "round": {
+    "start": "─── 第 {round} 回合开始 ───\t接下来的 {conv_rounds} 轮中，你可以自由交流。",
+    "chat_finished": "第 {round} 回合的聊天已结束。请提交你的决策，针对每位对手提交一个标记：`[pid cooperate]` 或 `[pid defect]`。"
+  },
+
+  "results": {
+    "header": "### 第 {round} 回合——结果：",
+    "pair_line": "{observation}\n\t 玩家 {i} 与玩家 {j} 分别选择了 {choice_i} 和 {choice_j}（玩家 {i} 获得 {gain_i} 分，玩家 {j} 获得 {gain_j} 分）",
+    "scores_open": "{observation}\n-> 当前得分：",
+    "score_first": "{observation}玩家 {player_id}（{score}）",
+    "score_next": "{observation}；玩家 {player_id}（{score}）",
+    "finalize": "{observation}\n"
+  },
+
+  "outcome": {
+    "final": "最终得分：{scores}。排名分组（最差→最佳）：{groups}"
+  }
+}

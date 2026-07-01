@@ -44,9 +44,9 @@ class TicTacToeEnv(ta.Env):
                         observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION
                     )
                     if self._check_winner(): # Check for winner or draw
-                        self.state.set_winner(player_id=self.state.current_player_id, reason=self.t("outcome", "win", player_id=self.state.current_player_id))
+                        self.state.set_winner(player_id=self.state.current_player_id, reason=self.m("outcome", "win", player_id=self.state.current_player_id))
                     elif all(cell != '' for row in self.state.game_state["board"] for cell in row):
-                        self.state.set_draw(reason=self.t("outcome", "draw"))
+                        self.state.set_draw(reason=self.m("outcome", "draw"))
                 else:
                     self.state.set_invalid_move(reason=self.m("invalid_move", "already_occupied", cell=cell))
         self._observer_current_state()

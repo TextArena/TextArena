@@ -11,7 +11,6 @@ class FrozenLakeEnv(ta.Env):
             size (int): The size of the NxN grid (default 4).
             num_holes (int): The exact number of holes to place on the grid (default 3).
         """
-        super().__init__()
         self.size = size
         self.num_holes = num_holes
         self.cell_mapping = {i: (i // size, i % size) for i in range(size * size)}
@@ -137,22 +136,11 @@ class FrozenLakeEnv(ta.Env):
         return grid
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"Welcome to Frozen Lake!\n\n"
-            f"You are represented by 'P' on the grid.\n"
-            f"Grid symbols:\n"
-            f"  ' ' = Frozen surface (safe to walk on)\n"
-            f"  'H' = Hole (fall in and lose!)\n"
-            f"  'G' = Goal (reach this to win!)\n"
-            f"  'P' = Your current position\n\n"
-            f"Available actions: up, down, left, right (or w, a, s, d)\n"
-            f"Type your action as: [up], [down], [left], [right] or [w], [a], [s], [d]\n\n"
-            f"Objective: Navigate from the start (top-left) to the goal (bottom-right) "
-            f"without falling into any holes!\n"
-        )
+        return self.m("player_prompt", "intro")
 
     def _observe_current_state(self) -> None:
-        self.state.add_observation(message=f"Current Board:\n\n{self._render_board()}\n\nAvailable Actions: " + ", ".join(["[up]", "[down]", "[left]", "[right]", "[w]", "[a]", "[s]", "[d]"]), observation_type=ta.ObservationType.GAME_BOARD)
+        available_actions = ", ".join(["[up]", "[down]", "[left]", "[right]", "[w]", "[a]", "[s]", "[d]"])
+        self.state.add_observation(message=self.m("board", "current_board", board=self._render_board(), actions=available_actions), observation_type=ta.ObservationType.GAME_BOARD)
 
     def _render_board(self) -> str:
         grid = self.state.game_state["grid"]
@@ -189,17 +177,17 @@ class FrozenLakeEnv(ta.Env):
         """Process a player action and update the game state."""
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION) # Log the player's action
         match = re.compile(r"\[\s*(up|down|left|right|w|a|s|d)\s*\]", re.IGNORECASE).search(action) # Parse the action - accept both words and WASD keys
-        if match is None: self.state.set_invalid_move(reward=self._get_percentage_completion(), reason="Invalid action format. Use [up], [down], [left], [right] or [w], [a], [s], [d].")
+        if match is None: self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "wrong_format"))
         else:               
             raw_action = match.group(1).lower()
             wasd_mapping = {'w': 'up', 'a': 'left', 's': 'down', 'd': 'right'}  # Map WASD to directional words
             action_name = wasd_mapping.get(raw_action, raw_action)
-            if action_name not in self.actions: self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"Unknown action '{raw_action}'. Use up, down, left, right, or w, a, s, d.")
+            if action_name not in self.actions: self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "unknown_action", action=raw_action))
             else:                               self._execute_move(action_name) # Execute the move
         self._observe_current_state() # Update observations
         if self.state.check_turn_limit():
             completion_pct = self._get_percentage_completion()
-            self.state.set_outcome(reward=completion_pct, reason=f"You reached the turn limit! Game over. You completed {round(completion_pct * 100)}% of the journey to the goal.")
+            self.state.set_outcome(reward=completion_pct, reason=self.m("outcome", "turn_limit", pct=round(completion_pct * 100)))
         return self.state.step()
 
     def _execute_move(self, action_name: str) -> None:
@@ -211,7 +199,7 @@ class FrozenLakeEnv(ta.Env):
         
         # Check bounds
         if not (0 <= new_r < self.size and 0 <= new_c < self.size):
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"You tried to move {action_name} but hit a wall!")
+            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "hit_wall", action=action_name))
             return
         
         # Move to new position
@@ -222,10 +210,9 @@ class FrozenLakeEnv(ta.Env):
         grid = self.state.game_state["grid"]
         cell_type = grid[new_r][new_c]
         
-        self.state.add_observation(message=f"You moved {action_name} to position ({new_r}, {new_c}).", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-        if cell_type == 'H':    self.state.set_outcome(reward=self._get_percentage_completion(), reason=f"You fell into a hole! Game over. You completed {round(self._get_percentage_completion() * 100)}% of the journey to the goal.") # Fell into a hole - game over with completion percentage
-        elif cell_type == 'G':  self.state.set_outcome(reward=1.0, reason="Congratulations! You reached the goal!") # Reached the goal - win!
-        elif cell_type == 'F':  self.state.add_observation(message="You're on safe ice. Keep going!", observation_type=ta.ObservationType.GAME_MESSAGE) # Safe move, continue playing
+        self.state.add_observation(message=self.m("game_action", "moved", action=action_name, row=new_r, col=new_c), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        if cell_type == 'H':    self.state.set_outcome(reward=self._get_percentage_completion(), reason=self.m("outcome", "fell_in_hole", pct=round(self._get_percentage_completion() * 100))) # Fell into a hole - game over with completion percentage
+        elif cell_type == 'G':  self.state.set_outcome(reward=1.0, reason=self.m("outcome", "win")) # Reached the goal - win!
     
     def _get_percentage_completion(self) -> float:
         """

@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "你正在玩一个包含 {num_disks} 个圆盘的汉诺塔游戏。\n你需要将所有圆盘从 A 塔移动到 C 塔。\n要移动圆盘，请输入源塔和目标塔，例如 '[A C]'。\n请注意，你每次只能移动一座塔最上方的圆盘，并且不能将较大的圆盘放在较小的圆盘上。\n每个回合请提交一步操作。"
+  },
+
+  "board": {
+    "current_board": "当前状态：\n{board}。"
+  },
+
+  "invalid_move": {
+    "wrong_format": "你的回答不符合有效的 '[源塔] [目标塔]' 格式。",
+    "invalid_tower": "你指定了无效的源塔或目标塔。",
+    "empty_tower": "你试图从空塔中移动圆盘。",
+    "same_tower": "你试图将圆盘移动到同一座塔。",
+    "larger_on_smaller": "你试图将较大的圆盘放在较小的圆盘上。"
+  },
+
+  "game_action": {
+    "moved": "你将圆盘 {disk} 从 {source} 移动到了 {target}。"
+  },
+
+  "outcome": {
+    "win": "恭喜！你成功解开了汉诺塔谜题。",
+    "turn_limit": "已达到回合上限。你已将 {pct}% 的圆盘正确放置在 C 塔上。"
+  }
+}

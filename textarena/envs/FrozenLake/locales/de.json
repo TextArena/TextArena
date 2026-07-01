@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro":            "Willkommen bei Frozen Lake!\n\nDu wirst auf dem Spielfeld durch 'P' dargestellt.\nSymbole auf dem Spielfeld:\n  ' ' = Gefrorene Oberfläche (sicher begehbar)\n  'H' = Loch (hineinfallen bedeutet verlieren!)\n  'G' = Ziel (erreiche es, um zu gewinnen!)\n  'P' = Deine aktuelle Position\n\nVerfügbare Aktionen: up, down, left, right (oder w, a, s, d)\nGib deine Aktion wie folgt ein: [up], [down], [left], [right] oder [w], [a], [s], [d]\n\nZiel: Navigiere vom Startpunkt oben links zum Ziel unten rechts, ohne in ein Loch zu fallen!\n"
+  },
+
+  "board": {
+    "current_board":    "Aktuelles Spielfeld:\n\n{board}\n\nVerfügbare Aktionen: {actions}"
+  },
+
+  "invalid_move": {
+    "wrong_format":     "Ungültiges Aktionsformat. Verwende [up], [down], [left], [right] oder [w], [a], [s], [d].",
+    "unknown_action":   "Unbekannte Aktion '{action}'. Verwende up, down, left, right oder w, a, s, d.",
+    "hit_wall":         "Du hast versucht, dich in Richtung {action} zu bewegen, bist aber gegen eine Wand gestoßen!"
+  },
+
+  "game_action": {
+    "moved":            "Du hast dich in Richtung {action} zur Position ({row}, {col}) bewegt."
+  },
+
+  "outcome": {
+    "win":              "Herzlichen Glückwunsch! Du hast das Ziel erreicht!",
+    "fell_in_hole":     "Du bist in ein Loch gefallen! Das Spiel ist vorbei. Du hast {pct}% des Weges zum Ziel zurückgelegt.",
+    "turn_limit":       "Du hast das Rundenlimit erreicht! Das Spiel ist vorbei. Du hast {pct}% des Weges zum Ziel zurückgelegt."
+  }
+}

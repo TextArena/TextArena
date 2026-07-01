@@ -45,10 +45,10 @@ class NimEnv(ta.Env):
 
     def _check_game_over(self) -> None:
         if all(pile == 0 for pile in self.state.game_state["piles"]):
-            self.state.set_winner(player_id=self.state.current_player_id, reason=self.t("outcome", "win", player_id=self.state.current_player_id))
+            self.state.set_winner(player_id=self.state.current_player_id, reason=self.m("outcome", "win", player_id=self.state.current_player_id))
 
     def _render_piles(self) -> str:
         lines = []
         for i, amt in enumerate(self.state.game_state["piles"]):
-            lines.append(f"  {self.t('state', 'pile')} {i}: {amt}")
+            lines.append(f"  {self.m('state', 'pile')} {i}: {amt}")
         return "\n".join(lines)
