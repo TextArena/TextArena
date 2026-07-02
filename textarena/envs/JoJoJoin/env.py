@@ -1,30 +1,3 @@
-"""
-JoJoJoin — a 5x5 grid game for eval use.
-
-Skill tested: line-completion strategy — build toward a line of four while
-blocking your opponent — on a board/name/ruleset distinct from tic-tac-toe.
-
-Rules:
-  - 5x5 board, cells 0-24. Edges do NOT wrap.
-  - Each turn, place your mark on any empty cell.
-  - You WIN by getting FOUR of your marks in a row: horizontally, vertically,
-    or diagonally (four consecutive cells; the board is 5 wide, so a line of
-    four can sit in several positions along each row/column/diagonal).
-
-Balance: NOT exactly solved (the 5x5 state space is too large to brute-force).
-Random self-play (30k games) gives first ~53% / second ~40% / draw ~7%: mostly
-decisive with a modest first-mover edge. Four-in-a-row keeps forks hard, so it
-does not collapse into a first-player win the way 5x5 THREE-in-a-row would.
-ALTERNATE the starting player across games.
-
-Drop-in placement (mirror the TicTacToe env):
-    textarena/envs/JoJoJoin/env.py      <- this file
-    textarena/envs/JoJoJoin/en.json     <- the locale file
-    textarena/envs/JoJoJoin/__init__.py
-Register it exactly the way TicTacToe is registered in your textarena build
-(copy that line rather than trusting a guessed API).
-"""
-
 import re
 from typing import Optional, Dict, Tuple, Any
 

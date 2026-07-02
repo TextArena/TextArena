@@ -1,24 +1,24 @@
 {
   "player_prompt": {
-    "intro": "Vous êtes le joueur {player_id} dans JoJoJoin, qui se joue sur une grille de 4×4 dont les cases sont numérotées de 0 à 15.\nÀ votre tour, placez votre symbole dans n’importe quelle case vide, par exemple '[6]'.\nVOUS GAGNEZ en alignant TROIS de vos symboles — horizontalement, verticalement ou en diagonale.\nEn tant que joueur {player_id}, vous êtes '{symbol}' ; votre adversaire est '{opponent_symbol}'."
+    "intro": "Vous êtes le joueur {player_id} dans JoJoJoin, qui se joue sur un plateau de 5×5 dont les cases sont numérotées de 0 à 24.\nÀ votre tour, placez votre symbole dans n’importe quelle case vide, par exemple '[12]'.\nVOUS GAGNEZ en alignant QUATRE de vos symboles — quatre cases consécutives horizontalement, verticalement ou en diagonale.\nEn tant que joueur {player_id}, votre symbole est '{symbol}' ; celui de votre adversaire est '{opponent_symbol}'."
   },
 
   "board": {
-    "current_board": "Grille actuelle :\n\n{board}\n\nCoups disponibles : {moves}"
+    "current_board": "Plateau actuel :\n\n{board}\n\nCoups disponibles : {moves}"
   },
 
   "invalid_move": {
-    "wrong_format": "Le coup soumis ne respecte pas le format attendu.",
-    "out_of_range": "{cell} n’est pas une case valide. Le numéro doit être compris entre 0 et 15.",
+    "wrong_format":     "Le coup soumis ne respecte pas le format correct.",
+    "out_of_range":     "{cell} n’est pas une case valide. La valeur doit être comprise entre 0 et 24.",
     "already_occupied": "La case {cell} est déjà occupée."
   },
 
   "game_action": {
-    "placed": "Le joueur {player_id} a placé son symbole ({symbol}) dans la case {cell}."
+    "placed":           "Le joueur {player_id} a placé son symbole ({symbol}) dans la case {cell}."
   },
 
   "outcome": {
-    "win": "Le joueur {player_id} a gagné !",
+    "win":  "Le joueur {player_id} a gagné !",
     "draw": "La partie se termine par un match nul !"
   }
 }
