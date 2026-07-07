@@ -116,15 +116,15 @@ class KlondikeEnv(ta.Env):
                     self.state.set_outcome(
                         reward=52, reason="Congratulations! You've won Klondike Solitaire!"
                     )
-            elif self.state.game_state["turn_count"] >= self.max_turns:
-                # Partial reward based on cards in foundations (1 point per card)
-                cards_in_foundations = sum(
-                    len(pile) for pile in self.klondike.foundations
-                )
-                self.state.set_outcome(
-                    reward=cards_in_foundations,
-                    reason=f"Game over! You reached the maximum of {self.max_turns} turns. Score: {cards_in_foundations} cards in foundations.",
-                )
+                elif self.state.game_state["turn_count"] >= self.max_turns:
+                    # Partial reward based on cards in foundations (1 point per card)
+                    cards_in_foundations = sum(
+                        len(pile) for pile in self.klondike.foundations
+                    )
+                    self.state.set_outcome(
+                        reward=cards_in_foundations,
+                        reason=f"Game over! You reached the maximum of {self.max_turns} turns. Score: {cards_in_foundations} cards in foundations.",
+                    )
 
             # Update board observation
             self._observe_state()
