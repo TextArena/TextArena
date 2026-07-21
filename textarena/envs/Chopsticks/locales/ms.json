@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam Chopsticks. Pada giliran anda, pilih salah satu daripada berikut:\n  + Serang: '[attack M O]', dengan M=tangan anda (0 atau 1), O=tangan lawan (0 atau 1).\n    - Bilangan tangan lawan bertambah mengikut tangan anda; jika menjadi >=5, nilainya menjadi 0.\n  + Bahagi: '[split L R]' untuk mengagihkan semula jumlah jari anda kepada L dan R (L+R = jumlah anda).\nBalas dengan tepat salah satu daripada arahan tersebut."
+  },
+  "board": {
+    "current_board": "Papan Semasa:\nPemain 0: {hands_0}\nPemain 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Tangan anda {my_idx} sudah mati.",
+    "opp_hand_dead": "Tangan lawan {opp_idx} sudah mati.",
+    "split_sum": "Jumlah pembahagian mestilah {total}.",
+    "split_no_change": "Pembahagian mesti mengubah agihan tangan anda.",
+    "invalid_command": "Langkah tidak sah. Gunakan “[attack M O]” atau “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} menyerang tangan {opp_idx} milik P{opp_id}: nilainya berubah daripada {opp_val} kepada {new_val}.",
+    "split": "P{player_id} membahagikan kepada [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Kedua-dua tangan lawan telah mati.",
+    "draw": "Had giliran telah dicapai."
+  }
+}

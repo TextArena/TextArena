@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "אתה שחקן {player_id} ({piece}). היריב הוא ({opp}). שלח מהלכים בפורמט '[b1 c3]' (מ- → אל). כל הכלים נעים כמו פרשים בשחמט.\nכל לכידה מעניקה {score_per_capture} נקודה. המשחק מסתיים לאחר {max_moves} מהלכים או כאשר לשחקן אין מהלך חוקי / אין כלים. השחקן בעל הניקוד הגבוה יותר מנצח."
+  },
+  "board": {
+    "current_board": "מהלך #{move_count}\n\n{board}\n\nמהלכים זמינים: {moves}"
+  },
+  "invalid_move": {
+    "bad_format": "פורמט שגוי. השתמש ב-'[b1 c3]'.",
+    "unknown_square": "משבצת לא מוכרת.",
+    "not_your_piece": "במשבצת המקור לא נמצא כלי שלך.",
+    "own_piece": "אי אפשר לנחות על כלי שלך.",
+    "not_knight": "זה אינו מהלך של פרש."
+  },
+  "game_action": {
+    "moved": "שחקן {player_id} העביר את הכלי שלו מ-{frm} אל {to}.",
+    "capture": "{observation} כלי נלכד! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "לשחקן {player_id} אין כלים.",
+    "cannot_move": "שחקן {player_id} אינו יכול לזוז.",
+    "higher_score": "ניקוד לכידות גבוה יותר.",
+    "move_limit": "הגעת למגבלת המהלכים."
+  }
+}

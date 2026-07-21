@@ -155,21 +155,21 @@ general todos:
 Two-Player
 | # | Game | Players | Multilingual | Comments |
 |--:|------|:-------:|:------------:|----------|
-| 1 | [Alquerque](#alquerque) | 2 | | |
-| 2 | [Battleship](#battleship) | 2 | | |
-| 3 | [Breakthrough](#breakthrough) | 2 | | |
-| 4 | [Checkers](#checkers) | 2 | | |
-| 5 | [Chess](#chess) | 2 | | |
-| 6 | [Chopsticks](#chopsticks) | 2 | | |
+| 1 | [Alquerque](#alquerque) | 2 | 🌐 | |
+| 2 | [Battleship](#battleship) | 2 | 🌐 | |
+| 3 | [Breakthrough](#breakthrough) | 2 | 🌐 | |
+| 4 | [Checkers](#checkers) | 2 | 🌐 | |
+| 5 | [Chess](#chess) | 2 | 🌐 | |
+| 6 | [Chopsticks](#chopsticks) | 2 | 🌐 | |
 | 7 | [ColonelBlotto](#colonelblotto) | 2 | 🌐 | |
 | 8 | [ConnectFour](#connectfour) | 2 | 🌐 | |
-| 9 | [Crusade](#crusade) | 2 | | |
+| 9 | [Crusade](#crusade) | 2 | 🌐 | |
 | 10 | [Debate](#debate) | 2 | | |
 | 11 | [DontSayIt](#dontsayit) | 2 | | |
 | 12 | [GameOfPureStrategy](#gameofpurestrategy) | 2 | | |
 | 13 | [GermanWhist](#germanwhist) | 2 | | |
 | 14 | [HighSociety](#highsociety) | 2 | | |
-| 15 | [IndianPoker](#indianpoker) | 2 | | |
+| 15 | [IndianPoker](#indianpoker) | 2 | 🌐 | |
 | 16 | [IteratedMatchingPennies](#iteratedmatchingpennies) | 2 | | |
 | 17 | [IteratedPrisonersDilemma](#iteratedprisonersdilemma) | 2 | 🌐 | |
 | 18 | [IteratedRockPaperScissors](#iteratedrockpaperscissors) | 2 | | |

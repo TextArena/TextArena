@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in Chopsticks. Wähle in deinem Zug eine der folgenden Aktionen:\n  + Angriff: '[attack M O]', wobei M=deine Hand (0 oder 1) und O=die gegnerische Hand (0 oder 1) ist.\n    - Die Anzahl der gegnerischen Hand erhöht sich um die Anzahl deiner Hand; wenn sie >=5 ist, wird sie zu 0.\n  + Aufteilen: '[split L R]', um deine Gesamtzahl an Fingern auf L und R neu zu verteilen (L+R = deine Gesamtzahl).\nAntworte mit genau einem dieser Befehle."
+  },
+  "board": {
+    "current_board": "Aktuelles Spielfeld:\nSpieler 0: {hands_0}\nSpieler 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Deine Hand {my_idx} ist tot.",
+    "opp_hand_dead": "Die gegnerische Hand {opp_idx} ist bereits tot.",
+    "split_sum": "Die Aufteilung muss in der Summe {total} ergeben.",
+    "split_no_change": "Die Aufteilung muss die Verteilung deiner Hände verändern.",
+    "invalid_command": "Ungültiger Zug. Verwende “[attack M O]” oder “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} greift Hand {opp_idx} von P{opp_id} an: Sie verändert sich von {opp_val} zu {new_val}.",
+    "split": "P{player_id} teilt in [{L}, {R}] auf."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Beide Hände des Gegners sind tot.",
+    "draw": "Das Zuglimit wurde erreicht."
+  }
+}

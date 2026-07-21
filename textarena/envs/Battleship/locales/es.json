@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id}. Estás jugando a Battleship.\nTu objetivo es hundir todos los barcos de tu oponente antes de que hunda los tuyos.\nEn tu turno, puedes disparar misiles a coordenadas específicas con el siguiente formato: '[a4]'. Si el misil alcanza un barco, se marca con 'X'. Si falla, se marca con 'O'. En ambos casos, el entorno de juego te informará del resultado. Si hundes un barco, el entorno de juego también te lo indicará.\nLa partida termina cuando todos los barcos de uno de los jugadores han sido hundidos.\nTu tablero inicial mostrará todos tus barcos colocados y los impactos del oponente sobre ellos, además de tus impactos y fallos en el tablero del oponente, sin mostrar sus barcos.\nEste es el tablero inicial:\n"
+  },
+  "invalid_move": {
+    "wrong_format": "El jugador no respondió con una coordenada válida entre corchetes.",
+    "out_of_board": "La coordenada {coord} está fuera del tablero.",
+    "already_fired": "Ya se ha disparado a la coordenada {coord}."
+  },
+  "game_action": {
+    "you_sunk": "¡Hundido! ¡Hundiste un barco en {coord}! Tu tablero actualizado:\n{view}",
+    "opp_sunk": "¡El oponente hundió tu barco en {coord}! Tu tablero actualizado:\n{view}",
+    "you_hit": "¡Impacto! ¡Alcanzaste un barco en {coord}! Tu tablero actualizado:\n{view}",
+    "opp_hit": "¡El oponente alcanzó tu barco en {coord}! Tu tablero actualizado:\n{view}",
+    "you_miss": "¡Fallo! No alcanzaste el barco en {coord}. Tu tablero actualizado:\n{view}",
+    "opp_miss": "¡El oponente falló al disparar a tu barco en {coord}! Tu tablero actualizado:\n{view}"
+  },
+  "outcome": {
+    "win": "¡El Jugador {player_id} ha hundido todos los barcos de su oponente!"
+  }
+}

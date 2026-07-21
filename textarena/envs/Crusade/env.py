@@ -54,10 +54,7 @@ class CrusadeEnv(ta.Env):
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
         piece = 'W' if player_id == 0 else 'B'
         opp = 'B' if player_id == 0 else 'W'
-        return (
-            f"You are Player {player_id} ({piece}). Opponent is ({opp}). Submit moves as '[b1 c3]' (from → to). All pieces move like chess knights.\n"
-            f"Each capture scores {self.SCORE_PER_CAPTURE} point. Game ends after {self.MAX_MOVES} moves or when a player has no legal move / no pieces. Higher score wins."
-        )
+        return self.m("player_prompt", "intro", player_id=player_id, piece=piece, opp=opp, score_per_capture=self.SCORE_PER_CAPTURE, max_moves=self.MAX_MOVES)
 
     def _render_board(self) -> str:
         rows = []
@@ -71,7 +68,7 @@ class CrusadeEnv(ta.Env):
     def _observe_current_state(self, player_id: int):
         self.state.add_observation(
             to_id=player_id, 
-            message=f"Move #{self.state.game_state['move_count']}\n\n{self._render_board()}\n\nAvailable Moves: " + ", ".join(self._legal_moves_for_player(player_id)), 
+            message=self.m("board", "current_board", move_count=self.state.game_state['move_count'], board=self._render_board(), moves=", ".join(self._legal_moves_for_player(player_id))), 
             observation_type=ta.ObservationType.GAME_BOARD
         )
 
@@ -87,25 +84,25 @@ class CrusadeEnv(ta.Env):
 
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
         m = self.MOVE_RE.search(action)
-        if not m: self.state.set_invalid_move(reason="Bad format. Use '[b1 c3]'."); return self.state.step()
+        if not m: self.state.set_invalid_move(reason=self.m("invalid_move", "bad_format")); return self.state.step()
 
         frm = self._txt_to_cell(m.group(1))
         to  = self._txt_to_cell(m.group(2))
-        if frm is None or to is None: self.state.set_invalid_move(reason="Unknown square."); return self.state.step()
+        if frm is None or to is None: self.state.set_invalid_move(reason=self.m("invalid_move", "unknown_square")); return self.state.step()
 
         fr, fc = self.CELL_TO_RC[frm]
         tr, tc = self.CELL_TO_RC[to]
         dr, dc = tr - fr, tc - fc
 
-        if self.state.game_state["board"][fr][fc] != piece: self.state.set_invalid_move(reason="Source is not your piece.");    return self.state.step()
-        if self.state.game_state["board"][tr][tc] == piece: self.state.set_invalid_move(reason="Cannot land on own piece.");    return self.state.step()
-        if (dr, dc) not in self.KNIGHT_DIRS:                self.state.set_invalid_move(reason="Not a knight move.");           return self.state.step()
+        if self.state.game_state["board"][fr][fc] != piece: self.state.set_invalid_move(reason=self.m("invalid_move", "not_your_piece"));    return self.state.step()
+        if self.state.game_state["board"][tr][tc] == piece: self.state.set_invalid_move(reason=self.m("invalid_move", "own_piece"));    return self.state.step()
+        if (dr, dc) not in self.KNIGHT_DIRS:                self.state.set_invalid_move(reason=self.m("invalid_move", "not_knight"));           return self.state.step()
 
         # Handle capture
-        message = f"Player {self.state.current_player_id} moved their piece from {m.group(1)} to {m.group(2)}."
+        message = self.m("game_action", "moved", player_id=self.state.current_player_id, frm=m.group(1), to=m.group(2))
         if self.state.game_state["board"][tr][tc] == ('B' if self.state.current_player_id == 0 else 'W'):
             self.state.game_state["score"][self.state.current_player_id] += self.SCORE_PER_CAPTURE
-            message += f" Capturing a piece! (+{self.SCORE_PER_CAPTURE})"
+            message = self.m("game_action", "capture", observation=message, score_per_capture=self.SCORE_PER_CAPTURE)
         self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
         self.state.game_state["board"][tr][tc], self.state.game_state["board"][fr][fc] = piece, ''
         self._after_move()
@@ -116,13 +113,13 @@ class CrusadeEnv(ta.Env):
 
         for pid in (0, 1):
             piece = 'W' if pid == 0 else 'B'
-            if not any(piece in row for row in self.state.game_state["board"]): self.state.set_winner(1 - pid, reason=f"Player {pid} has no pieces.");  return
-            if not self._legal_moves_for_player(pid):                           self.state.set_winner(1 - pid, reason=f"Player {pid} cannot move.");    return
+            if not any(piece in row for row in self.state.game_state["board"]): self.state.set_winner(1 - pid, reason=self.m("outcome", "no_pieces", player_id=pid));  return
+            if not self._legal_moves_for_player(pid):                           self.state.set_winner(1 - pid, reason=self.m("outcome", "cannot_move", player_id=pid));    return
 
         if self.state.game_state["move_count"] >= self.MAX_MOVES:
             s0, s1 = self.state.game_state["score"]
-            if   s0 > s1: self.state.set_winner(0, reason="Higher capture score.")
-            elif s1 > s0: self.state.set_winner(1, reason="Higher capture score.")
-            else:         self.state.set_draw(reason="Move limit reached.")
+            if   s0 > s1: self.state.set_winner(0, reason=self.m("outcome", "higher_score"))
+            elif s1 > s0: self.state.set_winner(1, reason=self.m("outcome", "higher_score"))
+            else:         self.state.set_draw(reason=self.m("outcome", "move_limit"))
 
         self._observe_current_state(1-self.state.current_player_id)

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le Joueur {player_id}. Vous jouez à Battleship.\nVotre objectif est de couler tous les navires de votre adversaire avant qu'il ne coule les vôtres.\nÀ votre tour, vous pouvez tirer des missiles sur des coordonnées précises au format suivant : '[a4]'. Si le missile touche un navire, l'impact est marqué par 'X'. S'il le manque, il est marqué par 'O'. Dans les deux cas, l'environnement de jeu vous informera du résultat. Si vous coulez un navire, l'environnement de jeu vous le signalera également !\nLa partie se termine lorsque tous les navires d'un joueur ont été coulés.\nVotre plateau initial affichera tous vos navires placés et les tirs de votre adversaire contre vous, ainsi que vos tirs réussis et manqués sur le plateau adverse, sans afficher les navires de votre adversaire.\nVoici le plateau initial :\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Le joueur n'a pas répondu avec une coordonnée valide entre crochets.",
+    "out_of_board": "La coordonnée {coord} se trouve hors du plateau.",
+    "already_fired": "Un tir a déjà été effectué sur la coordonnée {coord}."
+  },
+  "game_action": {
+    "you_sunk": "Coulé ! Vous avez coulé un navire en {coord} ! Votre plateau mis à jour :\n{view}",
+    "opp_sunk": "L'adversaire a coulé votre navire en {coord} ! Votre plateau mis à jour :\n{view}",
+    "you_hit": "Touché ! Vous avez touché un navire en {coord} ! Votre plateau mis à jour :\n{view}",
+    "opp_hit": "L'adversaire a touché votre navire en {coord} ! Votre plateau mis à jour :\n{view}",
+    "you_miss": "Manqué ! Vous avez manqué le navire en {coord} ! Votre plateau mis à jour :\n{view}",
+    "opp_miss": "L'adversaire a manqué votre navire en {coord} ! Votre plateau mis à jour :\n{view}"
+  },
+  "outcome": {
+    "win": "Le Joueur {player_id} a coulé tous les navires de son adversaire !"
+  }
+}

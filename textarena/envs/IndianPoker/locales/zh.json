@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "你是 Indian Poker 游戏中的玩家 {player_id}。\n- 使用一副 52 张牌的牌组；你只能看到对手的牌。\n- 每轮支付 {ante} 枚筹码作为底注，共进行 {max_rounds} 轮。\n- 合法动作：'[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  （X 为正整数，且 <= 你的筹码数。）\n- 摊牌时，隐藏牌面较高者赢得底池。\n"
+  },
+  "round": {
+    "announce": "### 第 {current_round}/{max_rounds} 轮\n对手的牌是：{card}"
+  },
+  "invalid_move": {
+    "ambiguous": "请只提供一个用方括号括起的动作，例如 '[check]'、'[bet 2]'、'[call]'、'[raise 3]' 或 '[fold]'。",
+    "cannot_check": "不能使用 [check] - 你正面对下注。",
+    "amount_min": "Bet / Raise 的金额必须 ≥ 1。",
+    "cannot_bet": "不能使用 [bet] - 必须使用 [call] / [raise] / [fold]。",
+    "nothing_to_call": "当前无需跟注；你可以改用 [check]。",
+    "no_bet_to_raise": "请使用 [bet X] 开始下注；当前没有可加注的下注。",
+    "insufficient": "筹码不足，无法执行该动作。"
+  },
+  "game_action": {
+    "action": "玩家 {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]'、'[bet X]'",
+    "actions_facing_bet": "'[call]'（花费 {to_call}）、'[raise X]'、'[fold]'",
+    "possible_actions": "你可以执行的动作：{legal}"
+  },
+  "message": {
+    "round_result": "{reason}  底池 {pot} → 玩家 {winner}。（筹码余额 P0:{p0}，P1:{p1}）",
+    "folded": "玩家 {player_id} 已弃牌。",
+    "showdown_win": "摊牌：{card_win} 击败 {card_lose}。",
+    "showdown_tie": "摊牌平局：双方都是 {card}。底池平分 – 每人获得 {split}。"
+  },
+  "outcome": {
+    "p0_wins": "玩家 0 获胜（{bank0} > {bank1}）",
+    "p1_wins": "玩家 1 获胜（{bank1} > {bank0}）",
+    "draw": "所有轮次结束后筹码数相同"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "אתה שחקן {player_id} במשחק Indian Poker.\n- חפיסה של 52 קלפים; אתה רואה רק את הקלף של היריב.\n- הימור התחלתי של {ante} אסימון/ים בכל סיבוב, ובסך הכול {max_rounds} סיבוב/ים.\n- מהלכים חוקיים: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X הוא מספר שלם חיובי <= למספר האסימונים שלך.)\n- הקלף החבוי הגבוה ביותר זוכה בקופה בעת חשיפת הקלפים.\n"
+  },
+  "round": {
+    "announce": "### סיבוב {current_round}/{max_rounds}\nהקלף של היריב שלך הוא: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "יש לספק בדיוק פעולה אחת בתוך סוגריים מרובעים, לדוגמה '[check]', '[bet 2]', '[call]', '[raise 3]' או '[fold]'.",
+    "cannot_check": "לא ניתן להשתמש ב-[check] - אתה מתמודד עם הימור.",
+    "amount_min": "סכום ה-Bet / Raise חייב להיות ≥ 1.",
+    "cannot_bet": "לא ניתן להשתמש ב-[bet] - יש להשתמש ב-[call] / [raise] / [fold].",
+    "nothing_to_call": "אין הימור להשוות; ניתן להשתמש ב-[check] במקום זאת.",
+    "no_bet_to_raise": "השתמש ב-[bet X] כדי לפתוח; אין הימור שניתן להעלות.",
+    "insufficient": "אין מספיק אסימונים לפעולה זו."
+  },
+  "game_action": {
+    "action": "שחקן {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (עלות {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "הפעולות האפשריות שלך: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  קופה {pot} → שחקן {winner}. (מאזנים P0:{p0}, P1:{p1})",
+    "folded": "שחקן {player_id} פרש.",
+    "showdown_win": "חשיפת קלפים: {card_win} גובר על {card_lose}.",
+    "showdown_tie": "תיקו בחשיפת הקלפים: לשניהם {card}. הקופה מתחלקת – כל אחד מקבל {split}."
+  },
+  "outcome": {
+    "p0_wins": "שחקן 0 מנצח ({bank0} > {bank1})",
+    "p1_wins": "שחקן 1 מנצח ({bank1} > {bank0})",
+    "draw": "מספר אסימונים שווה לאחר כל הסיבובים"
+  }
+}

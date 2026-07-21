@@ -41,12 +41,10 @@ class AlquerqueEnv(ta.Env):
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
         piece = 'R' if player_id == 0 else 'B'
         opp   = 'B' if player_id == 0 else 'R'
-        return (
-            f"You are Player {player_id} ({piece}). Opponent is ({opp}).\nSubmit moves as '[a2 a3]' (from → to).\n"
-            "- A normal move is one forward step to an adjacent empty vertex.\n"
-            "- A capture is a jump over an adjacent enemy piece landing on the empty node beyond.\n"
-            f"Each capture yields {self.SCORE_PER_CAPTURE} points.\n"
-            f"Game ends after {self.MAX_MOVES} moves or when a player has no legal move."
+        return self.m(
+            "player_prompt", "intro",
+            player_id=player_id, piece=piece, opp=opp,
+            score_per_capture=self.SCORE_PER_CAPTURE, max_moves=self.MAX_MOVES,
         )
 
     def _render_board(self) -> str:
@@ -60,7 +58,7 @@ class AlquerqueEnv(ta.Env):
         return "\n".join(rows)
 
     def _observe_current_state(self):
-        self.state.add_observation(message=f"Move #{self.state.game_state['move_count']}\n\n{self._render_board()}", observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(message=self.m("board", "current_board", move_count=self.state.game_state['move_count'], board=self._render_board()), observation_type=ta.ObservationType.GAME_BOARD)
 
     def _txt_to_cell(self, txt: str) -> Optional[int]:
         """Accept either numeric id or chess-style coord; return cell id or None."""
@@ -77,11 +75,11 @@ class AlquerqueEnv(ta.Env):
 
         self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
         m = self.move_re.search(action)
-        if not m: self.state.set_invalid_move(reason="Bad format. Use '[a2 a3]'."); return self.state.step()
+        if not m: self.state.set_invalid_move(reason=self.m("invalid_move", "bad_format")); return self.state.step()
 
         frm = self._txt_to_cell(m.group(1))
         to  = self._txt_to_cell(m.group(2))
-        if frm is None or to is None: self.state.set_invalid_move(reason="Unknown square."); return self.state.step()
+        if frm is None or to is None: self.state.set_invalid_move(reason=self.m("invalid_move", "unknown_square")); return self.state.step()
 
         board = self.state.game_state["board"]
         fr, fc = self.cell_to_rc[frm]
@@ -89,8 +87,8 @@ class AlquerqueEnv(ta.Env):
         dr, dc = tr - fr, tc - fc
 
         # Basic legality checks
-        if board[fr][fc] != piece:  self.state.set_invalid_move(reason="Source is not your piece.");    return self.state.step()
-        if board[tr][tc] != '':     self.state.set_invalid_move(reason="Destination not empty.");       return self.state.step()
+        if board[fr][fc] != piece:  self.state.set_invalid_move(reason=self.m("invalid_move", "not_your_piece"));    return self.state.step()
+        if board[tr][tc] != '':     self.state.set_invalid_move(reason=self.m("invalid_move", "dest_not_empty"));       return self.state.step()
 
         # ── Forward step
         if (dr, dc) in self.forward_dirs[pid]:
@@ -105,11 +103,11 @@ class AlquerqueEnv(ta.Env):
                 board[tr][tc], board[fr][fc]  = piece, ''
                 board[mid_r][mid_c]           = ''
                 self.state.game_state["score"][pid] += self.SCORE_PER_CAPTURE
-                self.state.add_observation(message=f"Player {pid} captured a piece! (+{self.SCORE_PER_CAPTURE})", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+                self.state.add_observation(message=self.m("game_action", "captured", player_id=pid, score_per_capture=self.SCORE_PER_CAPTURE), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
                 self._after_move()
                 return self.state.step()
 
-        self.state.set_invalid_move(reason="Illegal move.")
+        self.state.set_invalid_move(reason=self.m("invalid_move", "illegal"))
         return self.state.step()
 
     def _after_move(self):
@@ -119,15 +117,15 @@ class AlquerqueEnv(ta.Env):
         # Win / stalemate checks
         for pid in (0, 1):
             piece = 'R' if pid == 0 else 'B'
-            if not any(piece in row for row in gs["board"]):    self.state.set_winner(1 - pid, reason=f"Player {pid} has no pieces.");  return
-            if not self._has_legal_move(pid):                   self.state.set_winner(1 - pid, reason=f"Player {pid} cannot move.");    return
+            if not any(piece in row for row in gs["board"]):    self.state.set_winner(1 - pid, reason=self.m("outcome", "no_pieces", player_id=pid));  return
+            if not self._has_legal_move(pid):                   self.state.set_winner(1 - pid, reason=self.m("outcome", "cannot_move", player_id=pid));    return
 
         # Move-limit check
         if gs["move_count"] >= self.MAX_MOVES:
             s0, s1 = gs["score"]
-            if   s0 > s1: self.state.set_winner(0, reason="Higher capture score.")
-            elif s1 > s0: self.state.set_winner(1, reason="Higher capture score.")
-            else:         self.state.set_draw(reason="Move limit reached.")
+            if   s0 > s1: self.state.set_winner(0, reason=self.m("outcome", "higher_score"))
+            elif s1 > s0: self.state.set_winner(1, reason=self.m("outcome", "higher_score"))
+            else:         self.state.set_draw(reason=self.m("outcome", "move_limit"))
 
         self._observe_current_state()
 
