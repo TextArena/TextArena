@@ -123,29 +123,29 @@ general todos:
 
 | # | Game | Players | Multilingual | Comments |
 |--:|------|:-------:|:------------:|----------|
-| 1 | [2048](#2048) | 1 | | |
+| 1 | [2048](#2048) | 1 | 🌐 | |
 | 2 | [BabyAiText](#babyaitext) | 1 | | |
-| 3 | [Bandit](#bandit) | 1 | | |
-| 4 | [Blackjack](#blackjack) | 1 | | |
-| 5 | [Countdown](#countdown) | 1 | | |
+| 3 | [Bandit](#bandit) | 1 | 🌐 | |
+| 4 | [Blackjack](#blackjack) | 1 | 🌐 | |
+| 5 | [Countdown](#countdown) | 1 | 🌐 | |
 | 6 | [Crosswords](#crosswords) | 1 | | |
 | 7 | [Cryptarithm](#cryptarithm) | 1 | | |
-| 8 | [FifteenPuzzle](#fifteenpuzzle) | 1 | | |
+| 8 | [FifteenPuzzle](#fifteenpuzzle) | 1 | 🌐 | |
 | 9 | [FrozenLake](#frozenlake) | 1 | 🌐 | |
-| 10 | [GuessTheNumber](#guessthenumber) | 1 | | |
+| 10 | [GuessTheNumber](#guessthenumber) | 1 | 🌐 | |
 | 11 | [GuessWho](#guesswho) | 1 | | |
 | 12 | [Hangman](#hangman) | 1 | | |
-| 13 | [LightsOut](#lightsout) | 1 | | |
+| 13 | [LightsOut](#lightsout) | 1 | 🌐 | |
 | 14 | [LogicPuzzle](#logicpuzzle) | 1 | | |
-| 15 | [Mastermind](#mastermind) | 1 | | |
-| 16 | [Minesweeper](#minesweeper) | 1 | | |
-| 17 | [PegJump](#pegjump) | 1 | | |
-| 18 | [RushHour](#rushhour) | 1 | | |
-| 19 | [Secretary](#secretary) | 1 | | |
-| 20 | [Slitherlink](#slitherlink) | 1 | | |
-| 21 | [Sokoban](#sokoban) | 1 | | |
-| 22 | [Sudoku](#sudoku) | 1 | | |
-| 23 | [ThreeCardMonte](#threecardmonte) | 1 | | |
+| 15 | [Mastermind](#mastermind) | 1 | 🌐 | |
+| 16 | [Minesweeper](#minesweeper) | 1 | 🌐 | |
+| 17 | [PegJump](#pegjump) | 1 | 🌐 | |
+| 18 | [RushHour](#rushhour) | 1 | 🌐 | |
+| 19 | [Secretary](#secretary) | 1 | 🌐 | |
+| 20 | [Slitherlink](#slitherlink) | 1 | 🌐 | |
+| 21 | [Sokoban](#sokoban) | 1 | 🌐 | |
+| 22 | [Sudoku](#sudoku) | 1 | 🌐 | |
+| 23 | [ThreeCardMonte](#threecardmonte) | 1 | 🌐 | |
 | 24 | [TowerOfHanoi](#towerofhanoi) | 1 | 🌐 | |
 | 25 | [TwentyQuestions](#twentyquestions) | 1 | | |
 | 26 | [WordLadder](#wordladder) | 1 | | |
