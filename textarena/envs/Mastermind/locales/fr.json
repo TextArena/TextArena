@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Vous jouez à Mastermind.\nVous devez trouver le code composé de {code_length} chiffres, chaque chiffre étant compris entre 1 et {num_numbers}, {repeats}.\nDans votre réponse, vous pouvez soumettre votre proposition au format suivant : '[2 1 4 5]'.\nAprès chaque proposition, vous recevrez un retour sous forme de pions noirs et blancs.\nUn pion noir indique un chiffre correct à la bonne position, tandis qu'un pion blanc indique un chiffre correct à la mauvaise position.\nVous disposez de {max_turns} tours pour deviner le code.\n",
+    "with_repeats": "avec des répétitions possibles",
+    "no_duplicates": "sans chiffres en double"
+  },
+  "invalid_move": {
+    "wrong_format": "Vous n'avez pas répondu avec une liste de nombres séparés par des espaces et entourée de crochets.",
+    "not_integers": "Toutes les entrées doivent être des nombres entiers valides.",
+    "wrong_length": "La proposition doit contenir exactement {code_length} nombres.",
+    "out_of_range": "Tous les nombres doivent être compris entre 1 et {num_numbers}.",
+    "duplicates_not_allowed": "Les nombres en double ne sont pas autorisés.",
+    "repeated_guess": "Vous avez déjà proposé {guess}. Veuillez essayer une proposition différente."
+  },
+  "game_action": {
+    "feedback": "[{guess}] soumis. Retour : {black_pegs} pion(s) noir(s), {white_pegs} pion(s) blanc(s)."
+  },
+  "outcome": {
+    "win": "Vous avez découvert le code en trouvant correctement {black_pegs} pions sur {code_length}",
+    "turn_limit": "La limite de tours a été atteinte. Vous avez correctement deviné {percent} pour cent des nombres."
+  }
+}

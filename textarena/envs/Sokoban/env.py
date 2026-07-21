@@ -16,20 +16,10 @@ class SokobanEnv(ta.Env):
         self.action_space = ['up', 'down', 'left', 'right']
         
     def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
-        return """You are solving the Sokoban puzzle. You are the player and you need to push all boxes to targets.
-        When you are right next to a box, you can push it by moving in the same direction.
-        You cannot push a box through a wall, and you cannot pull a box.
-        On the board, objects are represented as: 
-        - The player (you) appears as 'P' 
-        - Walls are represented with '#' 
-        - Boxes are marked as 'X' 
-        - Empty goals are shown with a 'O'
-        - Boxes on goals are visualized with '√'
-        You can also use [w] for up, [a] for left, [s] for down, and [d] for right.
-        """
+        return self.m("player_prompt", "intro")
     
     def _observe_current_state(self):
-        board_str = f"Current Board:\n\n{self.create_board_str(self.room_state)}\nAvailable Moves: " + ", ".join(self.action_space)
+        board_str = self.m("board", "current_board", board=self.create_board_str(self.room_state), moves=", ".join(self.action_space))
         self.state.add_observation(message=board_str, observation_type=ta.ObservationType.GAME_BOARD)
 
     def get_board_str(self):
@@ -59,7 +49,7 @@ class SokobanEnv(ta.Env):
         if matches is None:
             self.state.set_invalid_move(
                 reward=self._get_percentage_completion(), 
-                reason="The submitted move does not follow the correct format. Use [up], [down], [left], [right] or [w], [a], [s], [d]."
+                reason=self.m("invalid_move", "wrong_format")
             )
         else:
             raw_action = matches.group(1).lower()
@@ -69,12 +59,12 @@ class SokobanEnv(ta.Env):
             if action not in self.action_space:
                 self.state.set_invalid_move(
                     reward=self._get_percentage_completion(), 
-                    reason="The submitted move is not a valid action."
+                    reason=self.m("invalid_move", "not_valid_action")
                 )
             elif self._would_collide_with_wall(action):
                 self.state.set_invalid_move(
                     reward=self._get_percentage_completion(), 
-                    reason="You cannot move into a wall!"
+                    reason=self.m("invalid_move", "wall_collision")
                 )
             else:
                 move_successful, box_pushed = self._push(action)
@@ -82,13 +72,14 @@ class SokobanEnv(ta.Env):
                 if not move_successful:
                     self.state.set_invalid_move(
                         reward=self._get_percentage_completion(), 
-                        reason="Invalid move - cannot move to that position."
+                        reason=self.m("invalid_move", "invalid_position")
                     )
                 else:
-                    msg = f"You {'pushed a box while' if box_pushed else ''} moved [{action}]."
+                    pushed = self.m("game_message", "pushed_prefix") if box_pushed else ""
+                    msg = self.m("game_message", "moved", pushed=pushed, action=action)
                     self.state.add_observation(message=msg, observation_type=ta.ObservationType.GAME_MESSAGE)
 
-                    board_str = f"Current Board:\n\n{self.create_board_str(self.room_state)}\nAvailable Moves: " + ", ".join(self.action_space)
+                    board_str = self.m("board", "current_board", board=self.create_board_str(self.room_state), moves=", ".join(self.action_space))
                     self.state.add_observation(
                         from_id=-1, 
                         to_id=self.state.current_player_id, 
@@ -98,9 +89,9 @@ class SokobanEnv(ta.Env):
 
                     boxes_on_targets, all_boxes_on_targets = self._check_if_all_boxes_on_target()
                     if all_boxes_on_targets:
-                        self.state.set_outcome(reward=1, reason="Congratulations! You have solved the Sokoban puzzle!")
+                        self.state.set_outcome(reward=1, reason=self.m("outcome", "win"))
                     elif self.state.turn >= self.max_turns:
-                        self.state.set_outcome(reward=self._get_percentage_completion(), reason="The turn limit has been reached. You did not solve the puzzle.")
+                        self.state.set_outcome(reward=self._get_percentage_completion(), reason=self.m("outcome", "turn_limit"))
 
         return self.state.step()
 

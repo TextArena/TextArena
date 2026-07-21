@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Bienvenue dans Lights Out ! Vous disposez d'une grille de lumières de {size}×{size}.\nVotre objectif est d'ÉTEINDRE toutes les lumières (représentées par '.').\nLorsque vous appuyez sur une lumière, elle change d'état, ainsi que ses voisines adjacentes (haut/bas/gauche/droite).\nSaisissez [row col] pour appuyer sur une lumière (les indices commencent à 0, la plage valide est donc 0-{max_index}).\nVous disposez de {max_turns} mouvements au maximum pour résoudre le puzzle.\nLégende : 'O' = lumière ALLUMÉE, '.' = lumière ÉTEINTE"
+  },
+  "board": {
+    "current_state": "État actuel de la grille (Mouvement {moves_made}, {moves_left} mouvements restants, {completion}% terminé) :\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'action doit respecter le format [row col], où row et col sont des entiers compris entre 0 et {max_index}.",
+    "out_of_range": "Les coordonnées doivent être comprises entre 0 et {max_index}. Vous avez saisi [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Félicitations ! Vous avez résolu le puzzle en {moves_used} mouvements !",
+    "loss": "Partie terminée ! Vous avez utilisé les {max_turns} mouvements sans résoudre le puzzle. Progression finale : {completion}%\nÉtat final :\n{grid}"
+  }
+}

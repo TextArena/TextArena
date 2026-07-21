@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Anda sedang bermain permainan Minesweeper.\nObjektif permainan ini adalah untuk mendedahkan semua petak yang tidak mengandungi periuk api.\nUntuk membuat langkah, nyatakan sahaja koordinat baris dan lajur petak yang ingin anda dedahkan menggunakan format berikut:\n- `[row col]`: Dedahkan petak pada baris dan lajur yang ditentukan.\nContohnya:\n- `[3 2]` untuk mendedahkan petak pada Baris 3, Lajur 2.\n- `[5 6]` untuk mendedahkan petak pada Baris 5, Lajur 6.\nPada langkah pertama anda, kawasan di sekitar petak yang anda pilih akan didedahkan untuk memastikan permulaan yang selamat.\nSusun atur papan semasa ditunjukkan di bawah. Petak yang belum didedahkan diwakili oleh titik ('.'), manakala nombor yang didedahkan menunjukkan bilangan periuk api bersebelahan.\nPastikan anda tidak memilih petak yang telah didedahkan.\nBerikut ialah susun atur papan semasa:\n"
+  },
+  "board": {
+    "game_board": "Papan Permainan:\n\n{board}",
+    "current_board": "Papan Semasa:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Anda tidak memberikan koordinat yang sah dalam kurungan siku.",
+    "out_of_bounds": "Koordinat baris dan lajur yang ditentukan berada di luar sempadan.",
+    "already_revealed": "Petak pada ({row}, {col}) telah pun didedahkan.",
+    "hit_mine": "Anda terkena periuk api pada ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Anda telah mendedahkan petak pada ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Tahniah! Anda telah berjaya membersihkan papan Minesweeper.",
+    "turn_limit": "Had giliran telah dicapai. Anda berjaya mendedahkan {percent}% petak selamat."
+  }
+}

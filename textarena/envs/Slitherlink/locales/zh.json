@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "你正在一个 {R}×{C} 的网格上玩 Slitherlink！\n画出一条连续且唯一的闭环，使每个带数字的格子周围恰好有对应数量的边。\n使用以下指令切换边：\n  [h r c] - 切换第 r 行、第 c 列点上方的水平边\n  [v r c] - 切换第 r 行、第 c 列点左侧的垂直边\n数字表示所需的边数，'.' 表示没有限制。\n你最多可以使用 {max_turns} 次移动来解开谜题。"
+  },
+  "board": {
+    "current_board": "{board}\n已满足线索：{progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "操作格式错误。请使用 [h row col] 或 [v row col]。",
+    "out_of_bounds": "该边超出棋盘范围。"
+  },
+  "outcome": {
+    "win": "🎉 你形成了一条完整闭环！谜题已解开！",
+    "turn_limit": "已达到移动上限。谜题尚未完成。"
+  }
+}

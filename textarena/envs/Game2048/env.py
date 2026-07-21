@@ -31,10 +31,7 @@ class Game2048Env(ta.Env):
         self._observe_state()
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are playing 2048 on a {self.board_size}x{self.board_size} board. Your goal is to reach a {self.target_tile} tile by sliding identical numbers together!\n"
-            "Valid moves: [Up], [Down], [Left], [Right]. Tiles combine when they collide, doubling their value.\n"
-        )
+        return self.m("player_prompt", "intro", board_size=self.board_size, target_tile=self.target_tile)
 
     def _observe_state(self):
         board = self.state.game_state["board"]
@@ -42,26 +39,26 @@ class Game2048Env(ta.Env):
         rows = [" ".join(make_cell(v) for v in row) for row in board]
         horiz = "+" + "-" * (len(rows[0])) + "+"
         framed = [horiz] + [f"|{r}|" for r in rows] + [horiz]
-        self.state.add_observation(message=f"Score: {self.state.game_state['score']}\n" + "\n".join(framed), observation_type=ta.ObservationType.GAME_BOARD,)
+        self.state.add_observation(message=self.m("board", "current_board", score=self.state.game_state['score'], board="\n".join(framed)), observation_type=ta.ObservationType.GAME_BOARD,)
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
         dir_idx = self._parse_action(action)
         if dir_idx is None:
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason="Invalid action. Use '[Up]'/'[Down]'/'[Left]'/'[Right]'.",)
+            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "invalid_action"),)
             return self.state.step()
 
         moved, gained = self._apply_move(dir_idx)
         if not moved: # Move had no effect – treat as invalid but continue the episode.
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason="Board did not change - choose a different direction.")
+            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "no_change"))
             return self.state.step()
 
         self.state.game_state["score"] += gained
         self._spawn_tile(self.state.game_state["board"])
 
         status = self._check_status()
-        if status == "win":     self.state.set_outcome(reward=1.0, reason=f"Congratulations, you reached {self.target_tile}! Final score {self.state.game_state['score']}.")
-        elif status == "lose":  self.state.set_outcome(reward=self._get_percentage_completion(), reason=f"No moves left. Max tile {self._max_tile()} - final score {self.state.game_state['score']}.")
+        if status == "win":     self.state.set_outcome(reward=1.0, reason=self.m("outcome", "win", target_tile=self.target_tile, score=self.state.game_state['score']))
+        elif status == "lose":  self.state.set_outcome(reward=self._get_percentage_completion(), reason=self.m("outcome", "lose", max_tile=self._max_tile(), score=self.state.game_state['score']))
         else:                   self._observe_state()
 
         return self.state.step()
@@ -169,5 +166,3 @@ class Game2048Env(ta.Env):
                     if 0 <= nr < self.board_size and 0 <= nc < self.board_size and board[nr][nc] == v:
                         return "ongoing"
         return "lose"
-
-        

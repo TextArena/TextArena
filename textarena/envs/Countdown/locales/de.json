@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Du spielst das Countdown-Zahlenspiel!\nZiel: Kombiniere Zahlen mit +, -, *, /, um die Zielzahl zu erreichen.\nAktionsformat: [i j op], wobei i und j Indizes sind und op die Rechenoperation ist.\nBeispiel: [0 2 *] multipliziert die Zahl an Index 0 mit der Zahl an Index 2.\nDivisionen dürfen nur ganze Zahlen ergeben."
+  },
+
+  "board": {
+    "header": "ZIEL: {target}\n\nVerfügbare Zahlen:\n{numbers}",
+    "best": "{observation}\n\nBisher bestes Ergebnis: {best_value} (Abstand: {distance})\nBester Ausdruck: {best_expression}",
+    "history": "{observation}\n\nZugverlauf:\n{moves}",
+    "progress": "{observation}\nAktueller Fortschrittswert: {progress}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Ungültiges Aktionsformat. Verwende `[i j op]`, wobei i und j Indizes sind und op +,-,*,/ ist",
+    "invalid_indices": "Ungültige Indizes. Sie müssen verschieden sein und im Bereich 0-{max_index} liegen",
+    "invalid_operation": "Ungültige Operation (Division durch null oder nicht ganzzahliges Ergebnis)"
+  },
+
+  "outcome": {
+    "win": "Perfekt! Zielzahl exakt erreicht: {target}",
+    "no_moves": "Keine weiteren Züge möglich. Bestes Ergebnis: {best_value} (Ziel: {target})",
+    "turn_limit": "Zuglimit erreicht. Bestes Ergebnis: {best_value} (Ziel: {target})"
+  }
+}

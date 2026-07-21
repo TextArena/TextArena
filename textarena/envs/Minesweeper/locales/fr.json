@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Vous jouez au Démineur.\nL'objectif du jeu est de révéler toutes les cases qui ne contiennent pas de mines.\nPour effectuer un mouvement, indiquez simplement les coordonnées de ligne et de colonne de la case que vous souhaitez révéler en utilisant le format suivant :\n- `[row col]` : Révélez la case située à la ligne et à la colonne indiquées.\nPar exemple :\n- `[3 2]` pour révéler la case de la Ligne 3, Colonne 2.\n- `[5 6]` pour révéler la case de la Ligne 5, Colonne 6.\nLors de votre premier mouvement, une zone autour de la case choisie sera révélée afin de garantir un départ sûr.\nLa disposition actuelle du plateau est affichée ci-dessous. Les cases non révélées sont représentées par un point ('.') ; les nombres révélés indiquent le nombre de mines adjacentes.\nVeillez à ne pas sélectionner de cases déjà révélées.\nVoici la disposition actuelle du plateau :\n"
+  },
+  "board": {
+    "game_board": "Plateau de jeu :\n\n{board}",
+    "current_board": "Plateau actuel :\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Vous n'avez pas répondu avec des coordonnées valides entre crochets.",
+    "out_of_bounds": "Les coordonnées de ligne et de colonne indiquées sont hors limites.",
+    "already_revealed": "La case située en ({row}, {col}) a déjà été révélée.",
+    "hit_mine": "Vous avez touché une mine en ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Vous avez révélé la case située en ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Félicitations ! Vous avez réussi à nettoyer le plateau de Démineur.",
+    "turn_limit": "La limite de tours a été atteinte. Vous avez découvert avec succès {percent}% des cases sûres."
+  }
+}

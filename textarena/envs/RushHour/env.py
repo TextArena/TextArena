@@ -286,9 +286,7 @@ class RushHourEnv(ta.Env):
             # Make sure puzzle is solvable but not already solved
             if (self._is_solvable(self.initial_layout) and 
                 not self._is_solved_state(vehicles_dict)):
-                print(f"Generated puzzle in {attempt + 1} attempts")
                 break
-            print(f"Attempt {attempt + 1}: Generated invalid puzzle, retrying...")
         else:
             print("Warning: Using potentially invalid puzzle after max attempts")
         
@@ -298,10 +296,7 @@ class RushHourEnv(ta.Env):
         self._observe_state()
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are playing a {self.difficulty} RushHour puzzle. Slide cars to free the red car [X] and drive it out the right edge.\n"
-            "Actions: [A+], [B-], etc.  (+ = forward, - = backward)."
-        )
+        return self.m("player_prompt", "intro", difficulty=self.difficulty)
 
     def _render_board(self) -> str:
         board = [["."] * self.BOARD_SIZE for _ in range(self.BOARD_SIZE)]
@@ -324,7 +319,7 @@ class RushHourEnv(ta.Env):
 
         match = self.ACTION_RE.fullmatch(action.strip())
         if not match:
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason="Invalid action. Use format [A+] / [B-].")
+            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "wrong_format"))
             return self.state.step()
 
         car_id = match.group("id").upper()
@@ -332,18 +327,18 @@ class RushHourEnv(ta.Env):
 
         vehicles: Dict[str, _Vehicle] = self.state.game_state["vehicles"]
         if car_id not in vehicles:
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"No car '{car_id}' on the board.")
+            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "no_car", car_id=car_id))
             return self.state.step()
 
         moved = self._try_move(vehicles[car_id], forward)
         if not moved:
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason="Move blocked.")
+            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "blocked"))
             return self.state.step()
 
         # Check win condition
         if self._is_solved():
-            self.state.add_observation(message="The red car zooms out! You solved the puzzle.", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.state.set_outcome(reward=1.0, reason="Puzzle solved!")
+            self.state.add_observation(message=self.m("game_message", "solved"), observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.set_outcome(reward=1.0, reason=self.m("outcome", "win"))
         else:
             self._observe_state()
 

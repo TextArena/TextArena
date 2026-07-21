@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le Joueur {player_id}. Vous jouez au Sudoku.\nVoici l'état actuel de la grille de Sudoku. Chaque ligne est numérotée de 1 à 9, et chaque colonne est également numérotée de 1 à 9.\nLes cases vides sont représentées par '.', et les cases préremplies contiennent des chiffres de 1 à 9.\n\nGrille de Sudoku actuelle :\nVotre objectif est de remplir les cases vides de la grille 9x9 avec des chiffres de 1 à 9 de sorte que :\n1. Chaque ligne contienne tous les chiffres de 1 à 9 sans répétition.\n2. Chaque colonne contienne tous les chiffres de 1 à 9 sans répétition.\n3. Chacune des neuf sous-grilles 3x3 contienne tous les chiffres de 1 à 9 sans répétition.\n\nRègles et instructions :\n1. **N'écrasez pas** les nombres initialement fournis dans la grille.\n2. **Remplissez uniquement** les cases vides représentées par '.'.\n3. Vous pouvez répondre de la manière que vous préférez, mais assurez-vous que votre réponse comprend le format '[row column number]'.\n4. **Assurez-vous** que votre mouvement ne viole pas les règles du Sudoku. Les mouvements invalides entraîneront des pénalités.\nExemples :\n- **Mouvement valide** :\n  - Extrait de la grille avant le mouvement :\n  \n  - Mouvement : `[5 3 7]`\n  - Explication : Placer un 7 à la ligne 5, colonne 3 ne viole aucune règle du Sudoku.\n\n- **Mouvement invalide** (écrasement d'une case préremplie) :\n  - Extrait de la grille avant le mouvement :\n  \n  - Mouvement : `[1 1 9]`\n  - Explication : La case (1,1) contient déjà un 5. Vous ne pouvez pas l'écraser.\n\n- **Mouvement invalide** (violation des règles du Sudoku) :\n  - Extrait de la grille avant le mouvement :\n  \n  - Mouvement : `[1 3 5]`\n  - Explication : Placer un 5 à la ligne 1, colonne 3 viole la règle, car un 5 existe déjà dans la ligne 1.\n\nL'historique de vos mouvements et réflexions sera ajouté au fur et à mesure des manches. Utilisez cet historique pour améliorer vos décisions en évitant les mouvements déjà essayés. Bonne chance !\n\n"
+  },
+  "board": {
+    "game_board": "Plateau de jeu :\n{board}",
+    "board_state": "État du plateau : \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de mouvement invalide. Le Joueur {player_id} n'a pas répondu avec un format valide de type 'row column number'.",
+    "out_of_bounds": "Mouvement invalide. Le Joueur {player_id} a tenté de placer {num} en ({row}, {col}), une position hors limites.",
+    "overwrite": "Mouvement invalide. Le Joueur {player_id} a tenté d'écraser une case préremplie en ({row}, {col}).",
+    "violates_rules": "Mouvement invalide. Le Joueur {player_id} a tenté de placer {num} en ({row}, {col}), ce qui viole les règles du Sudoku."
+  },
+  "outcome": {
+    "win": "Félicitations ! Le Joueur {player_id} a terminé le Sudoku.",
+    "turn_limit": "La limite de tours a été atteinte. Vous avez correctement rempli {percent}% des cases vides."
+  }
+}
