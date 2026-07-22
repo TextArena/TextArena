@@ -69,6 +69,19 @@ GAMES = {
             "already_occupied": ["[4 0]", "[0 0]", "[0 0]"],
         },
     },
+    "IteratedRockPaperScissors": {
+        "entry": "textarena.envs.IteratedRockPaperScissors.env:IteratedRockPaperScissorsEnv",
+        "num_players": 2,
+        "seed": 42,
+        "scenarios": {
+            # R1 P0 win, R2 draw, R3 P1 win, R4 P0 win, R5 draw -> P0 wins overall.
+            "mixed_with_invalid": ["bad", "[rock]", "[scissors]", "[rock]", "[rock]",
+                                   "[scissors]", "[rock]", "[rock]", "[scissors]", "[rock]", "[rock]"],
+            # 1 P0 win, 1 P1 win, 3 draws -> overall draw.
+            "overall_draw": ["[rock]", "[scissors]", "[scissors]", "[rock]",
+                             "[rock]", "[rock]", "[rock]", "[rock]", "[rock]", "[rock]"],
+        },
+    },
     "IteratedMatchingPennies": {
         "entry": "textarena.envs.IteratedMatchingPennies.env:IteratedMatchingPenniesEnv",
         "num_players": 2,

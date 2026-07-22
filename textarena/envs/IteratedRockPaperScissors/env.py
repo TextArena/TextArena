@@ -16,10 +16,7 @@ class IteratedRockPaperScissorsEnv(ta.Env):
         self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
 
     def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are Player {player_id} in a {self.num_rounds}-round Rock-Paper-Scissors game.\nYour goal is to win as many rounds as possible.\n"
-            "In each round, respond with one of: '[rock]', '[paper]', or '[scissors]'.\nYou may also use '[r]', '[p]', or '[s]' as shorthand.\n"
-        )
+        return self.m("player_prompt", "intro", player_id=player_id, num_rounds=self.num_rounds)
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         player_id = self.state.current_player_id
@@ -27,10 +24,10 @@ class IteratedRockPaperScissorsEnv(ta.Env):
 
         move = self._parse_action(action)
         if move not in {"rock", "paper", "scissors"}:
-            self.state.set_invalid_move(reason=f"Move not recognized. Use [rock], [paper], or [scissors].")
+            self.state.set_invalid_move(reason=self.m("invalid_move", "wrong_format"))
         else:
             self.state.game_state["moves"][player_id] = move
-            self.state.add_observation(from_id=player_id, to_id=player_id, message=f"Player {player_id} selects move {move}.", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+            self.state.add_observation(from_id=player_id, to_id=player_id, message=self.m("game_action", "selects", player_id=player_id, move=move), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
             
             if self.state.game_state["moves"][1-player_id] != None: # Resolve the round
                 p0_move = self.state.game_state["moves"][0]
@@ -40,17 +37,17 @@ class IteratedRockPaperScissorsEnv(ta.Env):
                 self.state.game_state["round"] += 1
                 self.state.game_state["moves"] = {0:None, 1:None}
 
-                if result == 0: 
-                    self.state.add_observation(message="Round result: Draw", observation_type=ta.ObservationType.GAME_MESSAGE)
+                if result == 0:
+                    self.state.add_observation(message=self.m("round", "draw"), observation_type=ta.ObservationType.GAME_MESSAGE)
                 else:
-                    self.state.add_observation(message=f"Round result: Player {result-1} wins!", observation_type=ta.ObservationType.GAME_MESSAGE)
+                    self.state.add_observation(message=self.m("round", "win", winner=result-1), observation_type=ta.ObservationType.GAME_MESSAGE)
                     self.state.game_state["points"][result-1] += 1
 
                 if self.state.game_state["round"] > self.num_rounds: # Check end condition
                     wins = self.state.game_state.get("points", {0: 0, 1: 0})
-                    if wins[0] > wins[1]:   self.state.set_winner(player_id=0, reason="Player 0 won the most rounds!")
-                    elif wins[1] > wins[0]: self.state.set_winner(player_id=1, reason="Player 1 won the most rounds!")
-                    else:                   self.state.set_draw("The match is a draw!")
+                    if wins[0] > wins[1]:   self.state.set_winner(player_id=0, reason=self.m("outcome", "win", player_id=0))
+                    elif wins[1] > wins[0]: self.state.set_winner(player_id=1, reason=self.m("outcome", "win", player_id=1))
+                    else:                   self.state.set_draw(self.m("outcome", "draw"))
         
         return self.state.step()
 
