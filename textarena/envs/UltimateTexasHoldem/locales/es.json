@@ -1,0 +1,88 @@
+{
+  "_comment": "Archivo de idioma de Ultimate Texas Hold'em. NO traduzcas las claves (lado izquierdo). Traduce solo los valores (lado derecho). Mantén cada {placeholder} exactamente igual. Nunca traduzcas los tokens de acción ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), las etiquetas/palos de las cartas (p. ej. 'A♠', 'K♥', '10♦'), las etiquetas de fase pasadas en {phase}, ni ninguna cantidad numérica de fichas/apuestas/pagos. Los fragmentos literales escapados '${{...}}' de la tabla de pagos en las reglas reproducen textualmente un error de visualización preexistente y deben mantenerse exactamente igual (las llaves dobles son intencionales).",
+  "_slots": {
+    "{start_chips}": "Cantidad inicial de fichas, p. ej. 1000",
+    "{ante}": "El importe de la apuesta ante/blind, p. ej. 25",
+    "{ante4}": "Cuatro veces el ante, p. ej. 100",
+    "{ante2}": "Dos veces el ante, p. ej. 50",
+    "{round}": "El número de ronda actual",
+    "{chips}": "La cantidad actual de fichas del jugador",
+    "{hand}": "Una lista separada por comas de etiquetas de cartas, p. ej. 'A♠, K♥', o el texto localizado de sin cartas",
+    "{phase}": "El token de etiqueta de la fase actual (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Una lista separada por comas de tokens de acción entre corchetes, p. ej. '[play_bet_4x], [check]'",
+    "{available}": "Una lista separada por comas de los tokens de acción entre corchetes actualmente legales",
+    "{blind}": "El importe de la apuesta blind",
+    "{play}": "El importe de la apuesta play",
+    "{cards}": "Una lista separada por comas de etiquetas de cartas, p. ej. 'Q♣, 7♦, 2♠'",
+    "{name}": "Un nombre localizado de mano de póker, insertado tal cual",
+    "{amount}": "Una cantidad de fichas",
+    "{net}": "El cambio neto de fichas de la ronda (puede ser negativo)",
+    "{max_turns}": "El número máximo de rondas",
+    "{winner_rounds}": "El número de rondas completadas"
+  },
+
+  "player_prompt": {
+    "no_cards": "Todavía no hay cartas",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Un jugador contra el crupier\n\n📖 RESUMEN DEL JUEGO:\n• Comienzas con {start_chips} fichas\n• Una sola baraja de 52 cartas (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Juegas contra el crupier (la casa)\n• Cada ronda sigue la estructura de Ultimate Texas Hold'em: colocas las apuestas ANTE y BLIND, recibes 2 cartas privadas, decides sobre apuestas PLAY opcionales a lo largo de las fases de apuestas, y luego revelas las cartas comunitarias y comparas tu mejor mano de 5 cartas con la del crupier. Tu objetivo es maximizar tus ganancias (cuando tienes la mejor mano) y minimizar tus pérdidas (cuando tienes la peor mano).\n• El juego termina cuando llegas a 0 fichas o menos al inicio de una ronda (DERROTA) o completas 1000 rondas con fichas (VICTORIA)\n\n💰 ESTRUCTURA DE APUESTAS:\n• ANTE: Apuesta obligatoria de ${ante} en cada ronda\n• BLIND: Apuesta obligatoria de ${ante} en cada ronda\n• PLAY: Apuesta opcional durante el juego. A lo largo de la ronda, puedes elegir SOLO UNA de las siguientes: (${ante4} si se hace en PRE-FLOP, ${ante2} si se hace en FLOP, o ${ante} si se hace en RIVER. También puedes retirarte en el river, abandonando la mano y sin realizar ninguna apuesta.)\n\n🎴 REPARTO DE CARTAS:\n• Recibes 2 cartas boca arriba (tus cartas privadas)\n• El crupier recibe 2 cartas boca abajo (ocultas para ti)\n• Se reparten inicialmente 5 cartas comunitarias boca abajo\n• Las cartas comunitarias se revelan progresivamente a lo largo de las fases del juego\n\n🏆 CALIFICACIÓN DEL CRUPIER:\n• El crupier debe tener al menos una PAREJA (2 cartas del mismo rango) para calificar, usando las 2 cartas de su mano y las 5 cartas comunitarias.\n• La calificación del crupier afecta a los resultados de las apuestas, como se explicará más adelante.\n\n🎮 FASES DEL JUEGO Y ACCIONES:\n📋 PRE-FLOP:\n  • Acciones: [4x] (${ante4}) o [check]\n  • [4x]: Coloca una apuesta PLAY de ${ante4}, revela las primeras 3 cartas comunitarias\n  • [check]: Sin apuesta adicional, revela las primeras 3 cartas comunitarias\n\n📋 FLOP:\n  • Si se colocó la apuesta 4x: Solo está disponible [skip] (revela automáticamente las últimas 2 cartas comunitarias)\n  • Si no hay apuesta 4x: [2x] (${ante2}) o [check]\n  • [2x]: Coloca una apuesta PLAY de ${ante2}, revela las últimas 2 cartas comunitarias\n  • [check]: Sin apuesta adicional, revela las últimas 2 cartas comunitarias\n\n📋 RIVER:\n  • Si se colocó la apuesta 4x o 2x: Solo está disponible [skip] (avanza automáticamente al showdown)\n  • Si no hay apuesta PLAY previa: [1x] (${ante}) o [fold]\n  • [1x]: Coloca una apuesta PLAY de ${ante}, avanza al showdown\n  • [fold]: Abandona la mano, pierde las apuestas ANTE y BLIND\n\n📋 SHOWDOWN:\n  • Todas las cartas se revelan y se evalúan\n  • Mejor mano de 5 cartas de las 7 (2 privadas + 5 comunitarias)\n  • Las apuestas se liquidan según las reglas de pago\n\n💎 PAGOS DE LAS APUESTAS:\n📊 APUESTA ANTE:\n  • El crupier no califica: PUSH (se devuelve la apuesta)\n  • El crupier califica y ganas: pago 1:1 (apuesta + ganancias)\n  • El crupier califica y pierdes: apuesta perdida\n  • Empate: PUSH (se devuelve la apuesta)\n\n📊 APUESTA BLIND:\n  • No se ve afectada por la calificación del crupier\n  • Ganas: se devuelve la apuesta y un pago adicional según la fuerza de tu mano\n  • Pierdes: apuesta perdida\n  • Empate: PUSH (se devuelve la apuesta)\n\n📊 TABLA DE PAGOS DE LA APUESTA BLIND:\n  • Escalera Real: 500:1 (${{self.ante_amount * 500}})\n  • Escalera de Color: 50:1 (${{self.ante_amount * 50}})\n  • Póker: 10:1 (${{self.ante_amount * 10}})\n  • Full: 3:1 (${{self.ante_amount * 3}})\n  • Color: 3:1 (${{self.ante_amount * 3}})\n  • Escalera: 1:1 (${{self.ante_amount * 1}})\n  • Menos que Escalera: Sin pago adicional\n\n📊 APUESTA PLAY:\n  • No se ve afectada por la calificación del crupier\n  • Comparación directa: tu mejor mano contra la mejor mano del crupier\n  • Ganas: pago 1:1 (apuesta + ganancias)\n  • Pierdes: apuesta perdida\n  • Empate: PUSH (se devuelve la apuesta)\n\n🎯 CLASIFICACIÓN DE MANOS DE PÓKER (De mejor a peor):\n  1. Escalera Real: A-K-Q-J-10 del mismo palo\n  2. Escalera de Color: 5 cartas consecutivas del mismo palo\n  3. Póker: 4 cartas del mismo rango\n  4. Full: trío + pareja\n  5. Color: 5 cartas del mismo palo\n  6. Escalera: 5 cartas consecutivas\n  7. Trío: 3 cartas del mismo rango\n  8. Doble Pareja: 2 parejas de rangos diferentes\n  9. Pareja: 2 cartas del mismo rango\n  10. Carta Alta: gana la carta más alta\n\n⌨️  COMANDOS DE ACCIÓN:\n• [4x] o [play bet 4x]: Coloca una apuesta PLAY de ${{self.ante_amount*4}}\n• [2x] o [play bet 2x]: Coloca una apuesta PLAY de ${{self.ante_amount*2}}\n• [1x] o [play bet 1x]: Coloca una apuesta PLAY de ${{self.ante_amount*1}}\n• [check] o [c]: Pasar (sin apuesta adicional)\n• [fold] o [f]: Retirarse (abandonar la mano)\n• [skip] o [s]: Saltar a la siguiente fase (cuando no se requiere ninguna acción)\n\n💡 CONSEJOS DE ESTRATEGIA:\n• Las manos iniciales fuertes (parejas, cartas altas) a menudo justifican apuestas 4x\n• Ten en cuenta la calificación del crupier: las manos débiles pueden hacer push si el crupier no califica\n• La apuesta BLIND puede ser muy rentable con manos fuertes (¡Escalera Real = 500:1!)\n• ¡Vigila tu montón de fichas! Si llega a 0 o menos al inicio de una ronda, pierdes.\n\n⚠️  NOTAS IMPORTANTES:\n• Las apuestas ANTE y BLIND son obligatorias en cada ronda\n• Las apuestas PLAY son opcionales y estratégicas\n• Asegúrate de introducir la acción correcta, y solo una acción a la vez.\n\n",
+    "state": "🎯 RONDA {round}\n💰 Fichas: {chips}\n🎴 Tu mano: {hand}\n📊 Apuestas actuales: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fase: {phase}\n🎯 Acciones disponibles: {actions}\n\n"
+  },
+
+  "board": {
+    "round_start": "🎮 ¡Ronda {round} iniciada! Apuestas: ANTE ${ante}, BLIND ${blind}. Te quedan {chips} fichas.",
+    "your_hand": "🎴 Tu mano: {hand}",
+    "flop_revealed": "🃏 FLOP revelado: {cards}",
+    "river_revealed": "🃏 RIVER revelado: {cards}"
+  },
+
+  "invalid_move": {
+    "reason": "Acción no válida para la fase actual. Acciones disponibles: {available}",
+    "message": "❌ ¡Acción no válida! Acciones disponibles: {available}"
+  },
+
+  "action": {
+    "folded": "🃏 Te retiraste."
+  },
+
+  "showdown": {
+    "dealer_hand": "🏁 ¡SHOWDOWN! Mano del crupier: {cards}",
+    "community_cards": "🃏 Cartas comunitarias: {cards}",
+    "player_best": "🎴 Mejor mano del jugador: {name} ({cards})",
+    "dealer_best": "🎴 Mejor mano del crupier: {name} ({cards})",
+    "ante_lost_folded": "❌ ¡Apuesta ANTE PERDIDA! -${ante} (retirado)",
+    "blind_lost_folded": "❌ ¡Apuesta BLIND PERDIDA! -${blind} (retirado)",
+    "ante_won": "✅ ¡Apuesta ANTE GANADA! +${amount}",
+    "ante_pushed": "🔄 ¡Apuesta ANTE en PUSH! ${ante} devueltos",
+    "ante_lost": "❌ ¡Apuesta ANTE PERDIDA! -${ante}",
+    "blind_won": "✅ ¡Apuesta BLIND GANADA! +${amount}",
+    "blind_pushed": "🔄 ¡Apuesta BLIND en PUSH! ${blind} devueltos",
+    "blind_lost": "❌ ¡Apuesta BLIND PERDIDA! -${blind}",
+    "play_won": "✅ ¡Apuesta PLAY GANADA! +${amount}",
+    "play_pushed": "🔄 ¡Apuesta PLAY en PUSH! ${play} devueltos",
+    "play_lost": "❌ ¡Apuesta PLAY PERDIDA! -${play}",
+    "net_gain": "🎉 ¡Ronda {round} completada! Ganancia neta: +${net}",
+    "net_loss": "💸 ¡Ronda {round} completada! Pérdida neta: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+
+  "outcome": {
+    "game_over_win": "🏁 ¡FIN DEL JUEGO! {max_turns} rondas completadas. Tienes ${chips} fichas - ¡GANAS!",
+    "game_over_lose": "🏁 ¡FIN DEL JUEGO! Te has quedado sin fichas. ¡Gana el crupier!",
+    "reward_win": "El jugador completó {winner_rounds} rondas con ${chips} fichas",
+    "reward_lose": "El jugador se quedó sin fichas en la ronda {round}",
+    "reward_win_max": "El jugador completó {max_turns} rondas con ${chips} fichas"
+  },
+
+  "hand_names": {
+    "royal_flush": "Escalera Real",
+    "straight_flush": "Escalera de Color",
+    "four_of_a_kind": "Póker",
+    "full_house": "Full",
+    "flush": "Color",
+    "straight": "Escalera",
+    "three_of_a_kind": "Trío",
+    "two_pair": "Doble Pareja",
+    "one_pair": "Pareja",
+    "high_card": "Carta Alta",
+    "unknown": "Mano Desconocida"
+  }
+}

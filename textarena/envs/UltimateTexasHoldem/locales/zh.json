@@ -1,0 +1,88 @@
+{
+  "_comment": "Ultimate Texas Hold'em（终极德州扑克）语言文件。请勿翻译键（左侧）。只翻译值（右侧）。保持每个 {placeholder} 完全不变。切勿翻译动作标记（'[4x]'、'[2x]'、'[1x]'、'[check]'、'[c]'、'[fold]'、'[f]'、'[skip]'、'[s]'、'[play bet 4x]' 等）、牌面标签/花色（例如 'A♠'、'K♥'、'10♦'）、{phase} 中传入的阶段标签，或任何筹码/下注/赔付的数字金额。规则赔付表中转义的字面片段 '${{...}}' 逐字复现了一个既有的显示缺陷，必须原样保留（双大括号是有意为之）。",
+  "_slots": {
+    "{start_chips}": "起始筹码数量，例如 1000",
+    "{ante}": "底注/盲注下注金额，例如 25",
+    "{ante4}": "底注的四倍，例如 100",
+    "{ante2}": "底注的两倍，例如 50",
+    "{round}": "当前回合编号",
+    "{chips}": "玩家当前的筹码数量",
+    "{hand}": "以逗号分隔的牌面标签列表，例如 'A♠, K♥'，或本地化的无牌文本",
+    "{phase}": "当前阶段标签标记（PRE-ROUND、PRE-FLOP、FLOP、RIVER、SHOWDOWN）",
+    "{actions}": "以逗号分隔的括号动作标记列表，例如 '[play_bet_4x], [check]'",
+    "{available}": "以逗号分隔的当前合法括号动作标记列表",
+    "{blind}": "盲注下注金额",
+    "{play}": "游戏注（Play）下注金额",
+    "{cards}": "以逗号分隔的牌面标签列表，例如 'Q♣, 7♦, 2♠'",
+    "{name}": "本地化的扑克牌型名称，原样插入",
+    "{amount}": "筹码数量",
+    "{net}": "该回合的净筹码变化（可能为负）",
+    "{max_turns}": "最大回合数",
+    "{winner_rounds}": "已完成的回合数"
+  },
+
+  "player_prompt": {
+    "no_cards": "暂无手牌",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - 单人对战庄家\n\n📖 游戏概述：\n• 你以 {start_chips} 筹码开始\n• 单副 52 张牌（2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣）\n• 你与庄家（庄）对战\n• 每回合遵循终极德州扑克的结构：你先下 ANTE（底注）和 BLIND（盲注），获得 2 张底牌，在各下注阶段决定是否下可选的 PLAY（游戏注），然后翻开公共牌并将你的最佳 5 张牌与庄家的进行比较。你的目标是最大化你的赢利（当你牌型更好时），同时最小化你的损失（当你牌型更差时）。\n• 当你在回合开始时筹码降至 0 或以下（失败），或带着筹码完成 1000 回合（胜利）时，游戏结束\n\n💰 下注结构：\n• ANTE（底注）：每回合强制下注 ${ante}\n• BLIND（盲注）：每回合强制下注 ${ante}\n• PLAY（游戏注）：游戏过程中的可选下注。在整个回合中，你只能选择以下其中一项：（在 PRE-FLOP 时下则为 ${ante4}，在 FLOP 时下则为 ${ante2}，或在 RIVER 时下则为 ${ante}。也可以在河牌圈弃牌，放弃这手牌，不下任何注。）\n\n🎴 发牌：\n• 你获得 2 张正面朝上的牌（你的底牌）\n• 庄家获得 2 张正面朝下的牌（对你隐藏）\n• 5 张公共牌初始正面朝下发出\n• 公共牌随游戏阶段逐步揭示\n\n🏆 庄家资格：\n• 庄家必须至少拥有一对（2 张同点数的牌）才能获得资格，使用其手中的 2 张牌和 5 张公共牌判定。\n• 庄家是否获得资格会影响下注结果，稍后会说明。\n\n🎮 游戏阶段与动作：\n📋 PRE-FLOP：\n  • 动作：[4x]（${ante4}）或 [check]\n  • [4x]：下 ${ante4} 的 PLAY 注，揭示前 3 张公共牌\n  • [check]：不追加下注，揭示前 3 张公共牌\n\n📋 FLOP：\n  • 若已下 4x 注：仅可用 [skip]（自动揭示最后 2 张公共牌）\n  • 若未下 4x 注：[2x]（${ante2}）或 [check]\n  • [2x]：下 ${ante2} 的 PLAY 注，揭示最后 2 张公共牌\n  • [check]：不追加下注，揭示最后 2 张公共牌\n\n📋 RIVER：\n  • 若已下 4x 或 2x 注：仅可用 [skip]（自动进入摊牌）\n  • 若之前未下 PLAY 注：[1x]（${ante}）或 [fold]\n  • [1x]：下 ${ante} 的 PLAY 注，进入摊牌\n  • [fold]：放弃这手牌，输掉 ANTE 和 BLIND 注\n\n📋 SHOWDOWN：\n  • 所有牌揭示并评估\n  • 从 7 张牌（2 张底牌 + 5 张公共牌）中选出最佳 5 张牌\n  • 按赔付规则结算下注\n\n💎 下注赔付：\n📊 ANTE 注：\n  • 庄家无资格：PUSH（退回下注）\n  • 庄家有资格且你赢：1:1 赔付（下注 + 赢利）\n  • 庄家有资格且你输：输掉下注\n  • 平局：PUSH（退回下注）\n\n📊 BLIND 注：\n  • 不受庄家资格影响\n  • 你赢：退回下注并根据你的牌型强度获得额外赔付\n  • 你输：输掉下注\n  • 平局：PUSH（退回下注）\n\n📊 BLIND 注赔付表：\n  • Royal Flush（皇家同花顺）：500:1（${{self.ante_amount * 500}}）\n  • Straight Flush（同花顺）：50:1（${{self.ante_amount * 50}}）\n  • Four of a Kind（四条）：10:1（${{self.ante_amount * 10}}）\n  • Full House（葫芦）：3:1（${{self.ante_amount * 3}}）\n  • Flush（同花）：3:1（${{self.ante_amount * 3}}）\n  • Straight（顺子）：1:1（${{self.ante_amount * 1}}）\n  • 小于顺子：无额外赔付\n\n📊 PLAY 注：\n  • 不受庄家资格影响\n  • 直接比较：你的最佳牌型对庄家的最佳牌型\n  • 你赢：1:1 赔付（下注 + 赢利）\n  • 你输：输掉下注\n  • 平局：PUSH（退回下注）\n\n🎯 扑克牌型排名（从最佳到最差）：\n  1. Royal Flush（皇家同花顺）：同花色的 A-K-Q-J-10\n  2. Straight Flush（同花顺）：同花色的 5 张连续牌\n  3. Four of a Kind（四条）：4 张同点数的牌\n  4. Full House（葫芦）：三条 + 一对\n  5. Flush（同花）：5 张同花色的牌\n  6. Straight（顺子）：5 张连续牌\n  7. Three of a Kind（三条）：3 张同点数的牌\n  8. Two Pair（两对）：2 组不同点数的对子\n  9. One Pair（一对）：2 张同点数的牌\n  10. High Card（高牌）：以最大的牌取胜\n\n⌨️  动作命令：\n• [4x] 或 [play bet 4x]：下 ${{self.ante_amount*4}} 的 PLAY 注\n• [2x] 或 [play bet 2x]：下 ${{self.ante_amount*2}} 的 PLAY 注\n• [1x] 或 [play bet 1x]：下 ${{self.ante_amount*1}} 的 PLAY 注\n• [check] 或 [c]：过牌（不追加下注）\n• [fold] 或 [f]：弃牌（放弃这手牌）\n• [skip] 或 [s]：跳至下一阶段（当无需动作时）\n\n💡 策略提示：\n• 强起手牌（对子、大牌）通常值得下 4x 注\n• 考虑庄家资格——若庄家无资格，弱牌可能会 push\n• 强牌时 BLIND 注可能非常有利可图（皇家同花顺 = 500:1！）\n• 注意你的筹码堆！如果在回合开始时降至 0 或以下，你就输了。\n\n⚠️  重要提示：\n• ANTE 和 BLIND 注每回合都是强制的\n• PLAY 注是可选且具有策略性的\n• 确保输入正确的动作，且每次只输入一个动作。\n\n",
+    "state": "🎯 回合 {round}\n💰 筹码：{chips}\n🎴 你的手牌：{hand}\n📊 当前下注：底注 ${ante}，盲注 ${blind}，游戏注 ${play}\n📋 阶段：{phase}\n🎯 可用动作：{actions}\n\n"
+  },
+
+  "board": {
+    "round_start": "🎮 回合 {round} 开始！下注：ANTE ${ante}，BLIND ${blind}。你还剩 {chips} 筹码。",
+    "your_hand": "🎴 你的手牌：{hand}",
+    "flop_revealed": "🃏 FLOP 揭示：{cards}",
+    "river_revealed": "🃏 RIVER 揭示：{cards}"
+  },
+
+  "invalid_move": {
+    "reason": "当前阶段的动作无效。可用动作：{available}",
+    "message": "❌ 无效动作！可用动作：{available}"
+  },
+
+  "action": {
+    "folded": "🃏 你弃牌了。"
+  },
+
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN！庄家的手牌：{cards}",
+    "community_cards": "🃏 公共牌：{cards}",
+    "player_best": "🎴 玩家的最佳牌型：{name}（{cards}）",
+    "dealer_best": "🎴 庄家的最佳牌型：{name}（{cards}）",
+    "ante_lost_folded": "❌ ANTE 注输掉！-${ante}（弃牌）",
+    "blind_lost_folded": "❌ BLIND 注输掉！-${blind}（弃牌）",
+    "ante_won": "✅ ANTE 注赢了！+${amount}",
+    "ante_pushed": "🔄 ANTE 注 PUSH！退回 ${ante}",
+    "ante_lost": "❌ ANTE 注输掉！-${ante}",
+    "blind_won": "✅ BLIND 注赢了！+${amount}",
+    "blind_pushed": "🔄 BLIND 注 PUSH！退回 ${blind}",
+    "blind_lost": "❌ BLIND 注输掉！-${blind}",
+    "play_won": "✅ PLAY 注赢了！+${amount}",
+    "play_pushed": "🔄 PLAY 注 PUSH！退回 ${play}",
+    "play_lost": "❌ PLAY 注输掉！-${play}",
+    "net_gain": "🎉 回合 {round} 完成！净收益：+${net}",
+    "net_loss": "💸 回合 {round} 完成！净损失：${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+
+  "outcome": {
+    "game_over_win": "🏁 游戏结束！已完成 {max_turns} 回合。你拥有 ${chips} 筹码——你赢了！",
+    "game_over_lose": "🏁 游戏结束！你的筹码用尽了。庄家获胜！",
+    "reward_win": "玩家带着 ${chips} 筹码完成了 {winner_rounds} 回合",
+    "reward_lose": "玩家在第 {round} 回合筹码用尽",
+    "reward_win_max": "玩家带着 ${chips} 筹码完成了 {max_turns} 回合"
+  },
+
+  "hand_names": {
+    "royal_flush": "皇家同花顺",
+    "straight_flush": "同花顺",
+    "four_of_a_kind": "四条",
+    "full_house": "葫芦",
+    "flush": "同花",
+    "straight": "顺子",
+    "three_of_a_kind": "三条",
+    "two_pair": "两对",
+    "one_pair": "一对",
+    "high_card": "高牌",
+    "unknown": "未知牌型"
+  }
+}
