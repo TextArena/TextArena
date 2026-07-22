@@ -1,0 +1,23 @@
+{
+  "_comment": "Fichier de langue ThreePlayerTicTacToe en français. Ne traduisez PAS les clés, uniquement les valeurs. Conservez chaque {placeholder} tel quel.",
+  "_slots": {
+    "{player_id}": "Le numéro du joueur, par exemple 0, 1 ou 2",
+    "{symbol}": "Le symbole du joueur, A, B ou C",
+    "{cell}": "Le numéro d’une case",
+    "{max_cell}": "Le numéro de case valide le plus élevé",
+    "{row}": "L’indice de ligne du symbole placé",
+    "{col}": "L’indice de colonne du symbole placé",
+    "{board}": "Le plateau ASCII affiché (ne pas traduire)",
+    "{moves}": "La liste des coups disponibles séparés par des virgules comme '[4]' (ne pas traduire)"
+  },
+  "player_prompt": { "intro": "Vous êtes le joueur {player_id} au Morpion à trois joueurs.\nVotre symbole est '{symbol}'.\nÀ tour de rôle, vous placez votre symbole sur un plateau 5x5 pour former une ligne de quatre.\nLes lignes peuvent être horizontales, verticales ou diagonales.\nSoumettez votre coup au format '[4]' pour marquer la case 4." },
+  "board": { "current_board": "Plateau actuel :\n\n{board}\n\nCoups disponibles : {moves}" },
+  "invalid_move": {
+    "wrong_format": "Format de coup invalide. Utilisez '[case]' où case est 0-{max_cell}.",
+    "out_of_range": "Numéro de case invalide : {cell}. Doit être entre 0 et {max_cell}.",
+    "already_occupied": "La case {cell} est déjà occupée.",
+    "made_invalid": "Le joueur {player_id} a fait un coup invalide"
+  },
+  "game_action": { "placed": "Le joueur {player_id} place son symbole ({symbol}) dans la case ({row}, {col})." },
+  "outcome": { "win": "Le joueur {player_id} ({symbol}) gagne !", "draw": "La partie se termine par un match nul !" }
+}

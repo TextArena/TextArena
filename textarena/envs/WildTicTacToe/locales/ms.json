@@ -1,0 +1,33 @@
+{
+  "_comment": "Fail bahasa WildTicTacToe — Bahasa Melayu. JANGAN terjemahkan kunci (sebelah kiri). Terjemahkan nilai sahaja (sebelah kanan). Kekalkan setiap {placeholder} seadanya.",
+  "_slots": {
+    "{player_id}": "Nombor pemain, contoh 0 atau 1",
+    "{mark}": "Tanda yang diletakkan, X atau O",
+    "{cell}": "Nombor kotak papan, antara 0 hingga 8",
+    "{board}": "Papan ASCII yang dipaparkan (jangan terjemah)",
+    "{moves}": "Senarai langkah tersedia dipisahkan koma seperti '[X 4]' (jangan terjemah)"
+  },
+
+  "player_prompt": {
+    "intro":            "Anda ialah Pemain {player_id} dalam Tic Tac Toe Liar.\nPada giliran anda, anda boleh meletakkan sama ada 'X' atau 'O' di kotak kosong.\nAnda menang dengan menyusun tiga tanda yang sama (X atau O) dalam satu baris.\nAnda boleh menang dengan mana-mana simbol.\nPilih langkah anda menggunakan format '[X 4]' untuk meletakkan X di tengah.\n"
+  },
+
+  "board": {
+    "current_board":    "Papan Semasa:\n\n{board}\n\nLangkah Tersedia: {moves}"
+  },
+
+  "invalid_move": {
+    "wrong_format":     "Format langkah tidak sah. Gunakan format '[X 4]' atau '[O 2]'.",
+    "out_of_range":     "Nombor kotak tidak sah: {cell}. Mesti antara 0 dan 8.",
+    "already_occupied": "Langkah tidak sah. Kotak {cell} telah diduduki."
+  },
+
+  "game_action": {
+    "placed":           "Pemain {player_id} meletakkan tanda ({mark}) di kotak {cell}"
+  },
+
+  "outcome": {
+    "win":              "Pemain {player_id} menang dengan {mark}!",
+    "draw":             "Permainan tamat seri!"
+  }
+}

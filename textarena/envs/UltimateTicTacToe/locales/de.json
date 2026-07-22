@@ -1,0 +1,28 @@
+{
+  "_comment": "UltimateTicTacToe Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel, nur die Werte. Behalte jeden {platzhalter} genau bei.",
+  "_slots": {
+    "{player_id}": "Die Spielernummer, 0 oder 1",
+    "{symbol}": "Das Symbol des Spielers, X oder O",
+    "{macro}": "Der Mini-Brett-Index (0-8)",
+    "{micro}": "Der Feld-Index (0-8) im Mini-Brett",
+    "{row}": "Die Zeile im Mini-Brett",
+    "{col}": "Die Spalte im Mini-Brett",
+    "{opponent_id}": "Die Spielernummer des Gegners",
+    "{next_target}": "Ein Ausdruck, der angibt, wo der Gegner als Nächstes spielen muss",
+    "{n}": "Ein Mini-Brett-Index, in den der Gegner gezwungen wird",
+    "{board}": "Das gerenderte ASCII-Brett (nicht übersetzen)"
+  },
+  "player_prompt": { "intro": "Du bist Spieler {player_id} bei **Ultimate Tic Tac Toe**.\nGib deinen Zug als **[makro  mikro]** ein (zwei Zahlen 0-8):\n• *makro*  = in welchem Mini-Brett du spielst\n• *mikro* = welches Feld innerhalb dieses Mini-Bretts\nBeispiel `[7 8]` ➜ setze deine Marke in Mini-Brett 7, Feld 8, und\nzwinge deinen Gegner, als Nächstes in Mini-Brett 8 zu spielen.\n\nDu bist `{symbol}`.\n" },
+  "board": { "current": "Aktuelles Brett:\n{board}" },
+  "invalid_move": {
+    "wrong_format": "Der Zug muss die Form [makro mikro] mit Zahlen 0-8 haben.",
+    "out_of_range": "Beide Indizes müssen zwischen 0 und 8 liegen.",
+    "range_recheck": "Mini-Brett, Zeile oder Spalte liegt außerhalb des Bereichs.",
+    "already_occupied": "Das Feld ist bereits besetzt.",
+    "wrong_board": "Der Spieler muss im nächsten Mini-Brett spielen.",
+    "board_won": "Das Mini-Brett ist bereits gewonnen."
+  },
+  "next_target": { "any": "einem beliebigen Mini-Brett", "specific": "Mini-Brett {n}" },
+  "game_action": { "played": "Spieler {player_id} hat in Mini-Brett {macro}, Feld {micro} (Zeile {row}, Spalte {col}) gespielt. Spieler {opponent_id} muss nun in {next_target} spielen." },
+  "outcome": { "win": "Spieler {player_id} gewinnt Ultimate Tic Tac Toe!", "draw": "Das Spiel endet unentschieden!" }
+}

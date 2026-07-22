@@ -1,0 +1,25 @@
+{
+  "_comment": "ReverseTicTacToe 简体中文语言包。请勿翻译键名，只翻译值。请原样保留每个 {占位符}。",
+  "_slots": {
+    "{player_id}": "玩家编号，例如 0 或 1",
+    "{symbol}": "玩家自己的标记，X 或 O",
+    "{opponent_symbol}": "对手的标记，X 或 O",
+    "{cell}": "棋盘格子编号，0 到 8 之间",
+    "{board}": "渲染的 ASCII 棋盘（请勿翻译）",
+    "{moves}": "以逗号分隔的可用落子位置列表，如 '[4]'（请勿翻译）"
+  },
+  "player_prompt": {
+    "intro": "你是逆向井字棋游戏中的玩家 {player_id}。你的标记是 '{symbol}'。\n目标是避免连成三个（横向、纵向或对角线）。\n如果你连成三个，你就输了。\n请使用格式 '[4]' 提交落子，将你的标记放入格子 4。\n作为玩家 {player_id}，你是 '{symbol}'，你的对手是 '{opponent_symbol}'。"
+  },
+  "board": { "current_board": "当前棋盘：\n\n{board}\n\n可用落子位置：{moves}" },
+  "invalid_move": {
+    "wrong_format": "落子格式不正确。请使用 '[格子]'。",
+    "invalid_cell": "无效的格子索引。",
+    "already_occupied": "格子 {cell} 已被占用。"
+  },
+  "game_action": { "placed": "玩家 {player_id} 将标记（{symbol}）放入格子 {cell}。" },
+  "outcome": {
+    "lose": "玩家 {player_id} 因连成一线而输掉！",
+    "draw": "平局！没有人输。"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "_comment": "ReverseTicTacToe Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel, nur die Werte. Behalte jeden {platzhalter} genau bei.",
+  "_slots": {
+    "{player_id}": "Die Spielernummer, z. B. 0 oder 1",
+    "{symbol}": "Das eigene Symbol, entweder X oder O",
+    "{opponent_symbol}": "Das Symbol des Gegners, entweder X oder O",
+    "{cell}": "Eine Feldnummer zwischen 0 und 8",
+    "{board}": "Das gerenderte ASCII-Spielfeld (nicht übersetzen)",
+    "{moves}": "Die durch Kommas getrennte Liste verfügbarer Zug-Token wie '[4]' (nicht übersetzen)"
+  },
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in einer Partie Umgekehrtes Tic Tac Toe. Dein Symbol ist '{symbol}'.\nDas Ziel ist es, KEINE drei in einer Reihe zu bekommen (horizontal, vertikal oder diagonal).\nWenn du drei in einer Reihe machst, VERLIERST du.\nGib deinen Zug im Format '[4]' ein, um dein Symbol in Feld 4 zu setzen.\nAls Spieler {player_id} bist du '{symbol}' und dein Gegner ist '{opponent_symbol}'."
+  },
+  "board": { "current_board": "Aktuelles Spielfeld:\n\n{board}\n\nVerfügbare Züge: {moves}" },
+  "invalid_move": {
+    "wrong_format": "Ungültiges Zugformat. Verwende '[Feld]'.",
+    "invalid_cell": "Ungültiger Feldindex.",
+    "already_occupied": "Feld {cell} ist bereits besetzt."
+  },
+  "game_action": { "placed": "Spieler {player_id} hat sein Symbol ({symbol}) in Feld {cell} gesetzt." },
+  "outcome": {
+    "lose": "Spieler {player_id} verliert, weil er eine Reihe vervollständigt hat!",
+    "draw": "Unentschieden! Niemand hat verloren."
+  }
+}

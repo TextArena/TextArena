@@ -1,0 +1,23 @@
+{
+  "_comment": "ThreePlayerTicTacToe 简体中文语言包。请勿翻译键名，只翻译值。请原样保留每个 {占位符}。",
+  "_slots": {
+    "{player_id}": "玩家编号，例如 0、1 或 2",
+    "{symbol}": "玩家的标记，A、B 或 C 之一",
+    "{cell}": "棋盘格子编号",
+    "{max_cell}": "最大的有效格子编号",
+    "{row}": "所放标记的行索引",
+    "{col}": "所放标记的列索引",
+    "{board}": "渲染的 ASCII 棋盘（请勿翻译）",
+    "{moves}": "以逗号分隔的可用落子位置列表，如 '[4]'（请勿翻译）"
+  },
+  "player_prompt": { "intro": "你是三人井字棋游戏中的玩家 {player_id}。\n你的标记是 '{symbol}'。\n你们轮流在 5x5 的棋盘上放置标记，以连成四子一线。\n连线可以是横向、纵向或对角线。\n请使用格式 '[4]' 提交落子，标记格子 4。" },
+  "board": { "current_board": "当前棋盘：\n\n{board}\n\n可用落子位置：{moves}" },
+  "invalid_move": {
+    "wrong_format": "落子格式不正确。请使用 '[格子]'，其中格子为 0-{max_cell}。",
+    "out_of_range": "无效的格子编号：{cell}。必须在 0 到 {max_cell} 之间。",
+    "already_occupied": "格子 {cell} 已被占用。",
+    "made_invalid": "玩家 {player_id} 做出了无效的操作"
+  },
+  "game_action": { "placed": "玩家 {player_id} 将标记（{symbol}）放入位置（第 {row} 行，第 {col} 列）。" },
+  "outcome": { "win": "玩家 {player_id}（{symbol}）获胜！", "draw": "游戏平局！" }
+}

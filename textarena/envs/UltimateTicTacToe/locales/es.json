@@ -1,0 +1,28 @@
+{
+  "_comment": "Archivo de idioma de UltimateTicTacToe en español. NO traduzcas las claves, solo los valores. Mantén cada {marcador} tal cual.",
+  "_slots": {
+    "{player_id}": "El número del jugador, 0 o 1",
+    "{symbol}": "La marca del jugador, X u O",
+    "{macro}": "El índice del mini-tablero (0-8)",
+    "{micro}": "El índice de casilla (0-8) dentro del mini-tablero",
+    "{row}": "La fila dentro del mini-tablero",
+    "{col}": "La columna dentro del mini-tablero",
+    "{opponent_id}": "El número del jugador oponente",
+    "{next_target}": "Una frase que indica dónde debe jugar el oponente a continuación",
+    "{n}": "El índice de mini-tablero al que se obliga al oponente",
+    "{board}": "El tablero ASCII renderizado (no traducir)"
+  },
+  "player_prompt": { "intro": "Eres el jugador {player_id} en **Tres en Raya Definitivo**.\nEnvía tu jugada como **[macro  micro]** (dos números 0-8):\n• *macro*  = en qué mini-tablero juegas\n• *micro* = qué casilla dentro de ese mini-tablero\nEjemplo `[7 8]` ➜ coloca tu marca en el mini-tablero 7, casilla 8, y\nobliga a tu oponente a jugar en el mini-tablero 8 a continuación.\n\nEres `{symbol}`.\n" },
+  "board": { "current": "Tablero actual:\n{board}" },
+  "invalid_move": {
+    "wrong_format": "La jugada debe tener la forma [macro micro] con números 0-8.",
+    "out_of_range": "Cada índice debe estar entre 0 y 8.",
+    "range_recheck": "El mini-tablero, la fila o la columna está fuera de rango.",
+    "already_occupied": "La casilla ya está ocupada.",
+    "wrong_board": "El jugador debe jugar en el siguiente mini-tablero.",
+    "board_won": "El mini-tablero ya está ganado."
+  },
+  "next_target": { "any": "cualquier mini-tablero", "specific": "el mini-tablero {n}" },
+  "game_action": { "played": "El jugador {player_id} jugó en el mini-tablero {macro}, casilla {micro} (fila {row}, columna {col}). El jugador {opponent_id} ahora debe jugar en {next_target}." },
+  "outcome": { "win": "¡El jugador {player_id} gana el Tres en Raya Definitivo!", "draw": "¡La partida terminó en empate!" }
+}
