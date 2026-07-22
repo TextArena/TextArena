@@ -69,4 +69,16 @@ GAMES = {
             "already_occupied": ["[4 0]", "[0 0]", "[0 0]"],
         },
     },
+    "IteratedMatchingPennies": {
+        "entry": "textarena.envs.IteratedMatchingPennies.env:IteratedMatchingPenniesEnv",
+        "num_players": 2,
+        "seed": 42,
+        # 5 rounds (odd) -> a numeric draw is impossible; 'outcome.draw' is covered
+        # by check_locales only. Each round: P0 then P1 submit.
+        "scenarios": {
+            "p0_sweep_match": ["[heads]", "[heads]"] * 5,
+            "p1_sweep_mismatch_with_invalid":
+                ["bad"] + ["[heads]", "[tails]"] * 5,
+        },
+    },
 }

@@ -1,0 +1,22 @@
+{
+  "_comment": "Archivo de idioma de IteratedMatchingPennies en español. NO traduzcas las claves, solo los valores. Mantén cada {marcador}; no traduzcas los tokens de jugada [heads]/[tails]/[h]/[t].",
+  "_slots": {
+    "{player_id}": "El número del jugador, 0 o 1",
+    "{role}": "El nombre de rol mostrado (Concordante / Discordante)",
+    "{num_rounds}": "Número total de rondas",
+    "{p0_choice}": "Jugada del jugador 0, 'heads' o 'tails' (no traducir)",
+    "{p1_choice}": "Jugada del jugador 1, 'heads' o 'tails' (no traducir)",
+    "{verdict}": "La frase de resultado de la ronda mostrada"
+  },
+  "roles": { "matcher": "Concordante", "mismatcher": "Discordante" },
+  "player_prompt": {
+    "intro": "Eres el jugador {player_id} ({role}) en una partida de Matching Pennies de {num_rounds} rondas.\n- Cada ronda, envía [heads] o [tails] (o [h], [t]).\n- Si tu elección coincide con la de tu oponente, el jugador 0 gana la ronda; de lo contrario, gana el jugador 1.\nResponde con tu elección en el formato '[heads]' o '[tails]'.\n"
+  },
+  "invalid_move": { "wrong_format": "Formato no válido; por favor envía '[heads]' o '[tails]'." },
+  "round": {
+    "result": "El jugador 0 eligió {p0_choice}; el jugador 1 eligió {p1_choice}. {verdict}",
+    "verdict_match": "Coincidencia -> gana el jugador 0",
+    "verdict_mismatch": "Sin coincidencia -> gana el jugador 1."
+  },
+  "outcome": { "win": "El jugador {player_id} ganó más rondas.", "draw": "La partida termina en empate." }
+}

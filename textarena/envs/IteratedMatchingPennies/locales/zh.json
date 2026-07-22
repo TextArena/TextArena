@@ -1,0 +1,22 @@
+{
+  "_comment": "IteratedMatchingPennies 简体中文语言包。请勿翻译键名，只翻译值。保留每个 {占位符}；不要翻译走子记号 [heads]/[tails]/[h]/[t]。",
+  "_slots": {
+    "{player_id}": "玩家编号，0 或 1",
+    "{role}": "显示的角色名（配对者 / 错配者）",
+    "{num_rounds}": "总回合数",
+    "{p0_choice}": "玩家 0 的选择，'heads' 或 'tails'（请勿翻译）",
+    "{p1_choice}": "玩家 1 的选择，'heads' 或 'tails'（请勿翻译）",
+    "{verdict}": "显示的回合结果短语"
+  },
+  "roles": { "matcher": "配对者", "mismatcher": "错配者" },
+  "player_prompt": {
+    "intro": "你是配硬币博弈中的玩家 {player_id}（{role}），共 {num_rounds} 回合。\n- 每回合提交 [heads] 或 [tails]（或 [h]、[t]）。\n- 如果你的选择与对手相同，玩家 0 赢得该回合；否则玩家 1 获胜。\n请用 '[heads]' 或 '[tails]' 的格式回复你的选择。\n"
+  },
+  "invalid_move": { "wrong_format": "格式无效；请提交 '[heads]' 或 '[tails]'。" },
+  "round": {
+    "result": "玩家 0 选择了 {p0_choice}；玩家 1 选择了 {p1_choice}。{verdict}",
+    "verdict_match": "配对成功 -> 玩家 0 获胜",
+    "verdict_mismatch": "配对失败 -> 玩家 1 获胜。"
+  },
+  "outcome": { "win": "玩家 {player_id} 赢得了更多回合。", "draw": "整场游戏平局。" }
+}
