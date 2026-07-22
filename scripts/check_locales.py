@@ -143,7 +143,22 @@ def code_keys(env_path):
 def check_game(game_dir, required_langs):
     errors, warnings = [], []
     loc_dir = os.path.join(game_dir, "locales")
-    present = sorted(f[:-5] for f in os.listdir(loc_dir) if f.endswith(".json"))
+    # Files starting with "_" are metadata (e.g. _supported_langs.json), not locales.
+    present = sorted(
+        f[:-5] for f in os.listdir(loc_dir)
+        if f.endswith(".json") and not f.startswith("_")
+    )
+
+    # A game may support only a subset of the 8 languages (e.g. per-letter games
+    # exclude logographic zh). An optional locales/_supported_langs.json (JSON
+    # list) narrows the required set for this game.
+    supported_path = os.path.join(loc_dir, "_supported_langs.json")
+    if os.path.exists(supported_path):
+        try:
+            declared = load_json(supported_path)
+            required_langs = [l for l in required_langs if l in declared]
+        except (json.JSONDecodeError, ValueError) as e:
+            errors.append(f"_supported_langs.json: {e}")
 
     missing_langs = [l for l in required_langs if l not in present]
     extra_langs = [l for l in present if l not in required_langs]

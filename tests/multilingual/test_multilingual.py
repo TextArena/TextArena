@@ -34,6 +34,22 @@ def golden_path(game):
     return os.path.join(GOLDEN_DIR, f"{game}.en.json")
 
 
+def langs_for(game):
+    """Languages to smoke-test for a game.
+
+    A game may support a subset of the 8 (e.g. per-letter games exclude
+    logographic zh). textarena/envs/<game>/locales/_supported_langs.json (a JSON
+    list) narrows the set; absent -> all 8.
+    """
+    supported = os.path.join(REPO_ROOT, "textarena", "envs", game, "locales", "_supported_langs.json")
+    if os.path.exists(supported):
+        import json
+        with open(supported, encoding="utf-8") as f:
+            declared = json.load(f)
+        return [l for l in LANGS if l in declared]
+    return LANGS
+
+
 def _selected(games):
     if not games:
         return sorted(GAMES)
@@ -73,14 +89,15 @@ def verify(games=None):
 
         # 2. Cross-lingual smoke: mixed mapping + every non-en language
         n = spec.get("num_players", 2)
-        mixed = {i: LANGS[i % len(LANGS)] for i in range(n)}
+        game_langs = langs_for(game)
+        mixed = {i: game_langs[i % len(game_langs)] for i in range(n)}
         try:
-            for lang in LANGS:
+            for lang in game_langs:
                 run_game(spec, lang)
             EnvCls = load_env(spec["entry"])
             for name, actions in spec["scenarios"].items():
                 run_scenario(EnvCls, actions, dict(mixed), num_players=n, seed=spec.get("seed", 42))
-            print(f"OK   {game}: cross-lingual smoke ({len(LANGS)} langs + mixed) no errors")
+            print(f"OK   {game}: cross-lingual smoke ({len(game_langs)} langs + mixed) no errors")
         except Exception as e:  # noqa: BLE001
             print(f"FAIL {game}: cross-lingual smoke raised {type(e).__name__}: {e}")
             failures += 1

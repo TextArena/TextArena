@@ -3,6 +3,7 @@
 import importlib.resources
 import re
 from collections import defaultdict
+from typing import Optional
 
 # Load NLTK word list
 import nltk
@@ -197,6 +198,11 @@ class EnglishDictionary:
         word = word.lower()
         return word in self.uk_words or word in self.us_words or word in self.nltk_words
 
+    # Uniform-interface alias shared with the multilingual dictionary below.
+    def is_valid(self, word: str) -> bool:
+        """Language-agnostic validity check (English backend)."""
+        return self.is_english_word(word)
+
     def get_all_words(self) -> set[str]:
         """Get all words in the dictionary as a set"""
         return self.uk_words | self.us_words | self.nltk_words
@@ -204,3 +210,78 @@ class EnglishDictionary:
     def get_basic_words(self) -> set[str]:
         """Get all words in the basic NLTK dictionary as a set"""
         return self.nltk_basic_words
+
+
+# --------------------------------------------------------------------------
+# Multilingual support (optional `wordfreq` backend)
+# --------------------------------------------------------------------------
+# Bundling multilingual word data in-repo would pull in GPL / CC-BY-SA sources
+# incompatible with TextArena's MIT license, so non-English word games rely on
+# the OPTIONAL `wordfreq` package (Apache-2.0 code; installed separately, never
+# added to the main requirements):  pip install textarena[wordgames]
+# English keeps its bundled Hunspell/NLTK path (EnglishDictionary) unchanged and
+# needs no extra install.
+
+# Zipf frequency (0..~8) at/above which a token counts as a "real word".
+# ~2.5 keeps reasonably common words while rejecting typos/gibberish (Zipf 0.0).
+DEFAULT_MIN_ZIPF = 2.5
+
+# Scripts that are not letter-based; excluded from per-letter games (Wordle,
+# Hangman, SpellingBee) where "a word of N letters" / letter guessing is
+# meaningless. Documented per game.
+NON_ALPHABETIC_LANGS = {"zh"}
+
+
+class WordFreqDictionary:
+    """Word validity + sampling backed by the optional `wordfreq` package."""
+
+    def __init__(self, lang: str, min_zipf: float = DEFAULT_MIN_ZIPF, pool_size: int = 40000):
+        try:
+            import wordfreq
+        except ImportError as e:  # pragma: no cover - depends on optional extra
+            raise RuntimeError(
+                f"Word games in language '{lang}' require the optional 'wordfreq' "
+                f"package. Install it with:  pip install textarena[wordgames]  "
+                f"(or: pip install wordfreq). English needs no extra install."
+            ) from e
+        if lang not in wordfreq.available_languages():
+            raise ValueError(f"wordfreq has no word data for language '{lang}'.")
+        self._wf = wordfreq
+        self.lang = lang
+        self.min_zipf = min_zipf
+        self.pool_size = pool_size
+        self._pool = None  # lazily built alphabetic token set
+
+    def is_valid(self, word: str) -> bool:
+        """A token is valid if its wordfreq Zipf frequency clears the threshold."""
+        return self._wf.zipf_frequency(word.lower(), self.lang) >= self.min_zipf
+
+    def get_all_words(self) -> set[str]:
+        """The set of frequent, single-token alphabetic words for this language."""
+        if self._pool is None:
+            self._pool = {
+                w.lower()
+                for w in self._wf.top_n_list(self.lang, self.pool_size)
+                if w.isalpha()
+            }
+        return self._pool
+
+    def sample_pool(self, length: Optional[int] = None) -> list:
+        """Candidate words to sample a secret/start word from (optionally by length)."""
+        pool = self.get_all_words()
+        if length is not None:
+            return [w for w in pool if len(w) == length]
+        return list(pool)
+
+
+def get_dictionary(lang: str, **english_kwargs):
+    """Return a word dictionary for `lang`.
+
+    English uses the bundled EnglishDictionary (unchanged; no extra deps); every
+    other language uses the optional wordfreq-backed dictionary. Both expose the
+    same `is_valid` / `get_all_words` interface (WordFreqDictionary adds
+    `sample_pool`).
+    """
+    if lang == "en":
+        return EnglishDictionary(**english_kwargs)
+    return WordFreqDictionary(lang)

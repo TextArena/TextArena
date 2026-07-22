@@ -20,10 +20,20 @@ several auction/bargaining games.
 > were left as-is (pre-existing).
 
 ## 2. Language-core games
-Games where the **language itself is the gameplay**, or whose **core content is generated English
-text**. Localizing only the UI while the puzzle/content stays English would be misleading — these
-belong on a separate per-language-content track (needs per-language word lists / generators).
+Games where the **language itself is the gameplay**. Localizing only the UI while the puzzle
+content stayed English would be misleading — these need per-language *word data*, not just string
+translation. They are now being localized on the **word-games track** using the optional
+`wordfreq` backend for word validity/sampling (see `textarena/envs/utils/word_lists.py`;
+`pip install textarena[wordgames]`). Word games are **single-content-language per episode** (the
+secret/target word is in one language; per-player UI language still varies). Per-letter games
+(Wordle, Hangman, SpellingBee) exclude logographic **zh** — declared per game via
+`locales/_supported_langs.json`.
 
-Examples: Wordle, WordChains, WordLadder, WordSearch, Crosswords, Hangman, SpellingBee,
-LetterAuction, Codenames, Taboo, GuessWho, DontSayIt, LogicPuzzle (generated English clue
-sentences), BabyAiText (generated English navigation missions).
+Done: **Wordle** (7 langs: ar de en es fr he ms — no zh).
+
+Still to do on this track: WordChains, WordLadder, Hangman (Tier 1); Codenames, Taboo, GuessWho,
+DontSayIt (Tier 2, curated per-language banks); WordSearch, Crosswords, SpellingBee, Anagram,
+LetterAuction (Tier 3, generation/letter-frequency).
+
+Still genuinely deferred (content is *generated English sentences/missions*, not word data —
+needs per-language generators, out of scope here): LogicPuzzle, BabyAiText.

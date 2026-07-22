@@ -37,7 +37,7 @@ general todos:
 | 24 | [TowerOfHanoi](#towerofhanoi) | Single | 1 | 🌐 | |
 | 25 | [TwentyQuestions](#twentyquestions) | Single | 1 | | |
 | 26 | [WordLadder](#wordladder) | Single | 1 | | |
-| 27 | [Wordle](#wordle) | Single | 1 | | |
+| 27 | [Wordle](#wordle) | Single | 1 | 🌐 | |
 | 28 | [WordSearch](#wordsearch) | Single | 1 | | |
 | 29 | [Alquerque](#alquerque) | Two | 2 | | |
 | 30 | [Battleship](#battleship) | Two | 2 | | |

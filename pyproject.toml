@@ -17,5 +17,9 @@ dependencies = ["openai", "rich", "nltk", "chess", "python-dotenv", "requests", 
 
 [project.optional-dependencies]
 all = ["sympy", "latex2sympy", "openai", "google-genai", "transformers", "cerebras-cloud-sdk", "boto3", "anthropic"]
+# Word games in non-English languages need per-language word data. wordfreq
+# (Apache-2.0) covers all supported languages; it is optional so the core
+# install stays lean and English word games work with no extra dependency.
+wordgames = ["wordfreq"]
 
 
