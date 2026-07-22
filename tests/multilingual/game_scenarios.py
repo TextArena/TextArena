@@ -80,6 +80,18 @@ GAMES = {
                              "[60]", "[60]", "[60]", "[60]"],
         },
     },
+    "Cryptarithm": {
+        "entry": "textarena.envs.Cryptarithm.env:CryptarithmEnv",
+        "num_players": 1,
+        "seed": 42,
+        # Default puzzle SEND + MORE = MONEY. error_allowance=1: interleave each
+        # invalid with a valid move so the episode doesn't end on a 2nd error.
+        "scenarios": {
+            "solve":              ["[S 9]", "[E 5]", "[N 6]", "[D 7]", "[M 1]", "[O 0]", "[R 8]", "[Y 2]"],
+            "incorrect_complete": ["[S 1]", "[E 2]", "[N 3]", "[D 4]", "[M 5]", "[O 6]", "[R 7]", "[Y 8]"],
+            "invalids":           ["garbage", "[S 9]", "[Z 1]", "[E 5]", "[M 0]", "[N 6]", "[E 9]"],
+        },
+    },
     "IteratedRockPaperScissors": {
         "entry": "textarena.envs.IteratedRockPaperScissors.env:IteratedRockPaperScissorsEnv",
         "num_players": 2,
