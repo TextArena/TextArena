@@ -1,0 +1,89 @@
+{
+  "_comment": "German Whist locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (2..10, J, Q, K, A), the suit symbols (the {suit}/{trump}/{card} slots), or numeric counts/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, 0 or 1",
+    "{trump_suit}": "The trump suit symbol - do not translate",
+    "{trump_card}": "The trump card label, e.g. 'K♣' - do not translate",
+    "{card}": "A played card label, e.g. '10♠' - do not translate",
+    "{suit}": "A suit symbol - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{phase_info}": "The pre-rendered phase description line",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "A number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{next_card}": "The pre-rendered next-card line",
+    "{scores}": "The pre-rendered score line",
+    "{phase}": "The pre-rendered phase line",
+    "{winner}": "The player number who won the trick or game",
+    "{s0}": "Player 0's trick count",
+    "{s1}": "Player 1's trick count",
+    "{total}": "Total tricks played",
+    "{summary}": "The pre-rendered final summary block",
+    "{wtricks}": "The winning player's trick count",
+    "{remaining}": "Number of cards left in the deck"
+  },
+
+  "game": {
+    "start": "German Whist game started!\nTrump suit: {trump_suit} (Trump card: {trump_card})\n\nLEARNING PHASE: Win tricks to get the face-up card from the deck. The winner sees the next card, the loser gets it blind."
+  },
+
+  "prompt": {
+    "phase_learning": "LEARNING PHASE: Win tricks to get the visible next card. You can see what you're competing for!",
+    "phase_playing": "PLAYING PHASE: No more cards to draw. Win as many tricks as possible!",
+    "intro": "You are playing German Whist - Player {player_id}.\n{phase_info}\nGoal: Win the majority of tricks (14+ out of 26 total).\nCard Power: A > K > Q > J > 10 > 9 > 8 > 7 > 6 > 5 > 4 > 3 > 2\nTrump cards beat non-trump cards. You must follow suit if possible.\n\nAction: '[play X]' where X is the position (1-{max_pos}) of the card in your hand\n"
+  },
+
+  "hand": {
+    "none": "No cards",
+    "empty": "No cards in hand",
+    "header": "Your hand:",
+    "suit_line": "  {suit}{trump_mark}:",
+    "card_line": "    {pos}. {card}",
+    "trump_mark": " (TRUMP)"
+  },
+
+  "trick": {
+    "empty": "No cards played yet this trick.",
+    "header": "Current trick:",
+    "line": "  Player {player_id}: {card}{trump_mark}"
+  },
+
+  "next_card": {
+    "playing": "PLAYING PHASE: No more cards to draw from deck.",
+    "empty": "No more cards in deck.",
+    "info": "Next card for trick winner: {card}{trump_mark}"
+  },
+
+  "turn": {
+    "scores": "Tricks won - Player 0: {s0} | Player 1: {s1}",
+    "phase": "Phase: {phase}",
+    "phase_learning": "Phase: {phase} ({remaining} cards left in deck)",
+    "board": "{hand}\n\n{trick}\n\n{next_card}\n\n{scores}\n{phase}\n\nPlay a card using [play X]",
+    "learning": "LEARNING",
+    "playing": "PLAYING",
+    "finished": "FINISHED"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Use [play X] where X is the card position (1, 2, 3, etc.)",
+    "out_of_range": "Invalid card position. You have {count} cards (1-{count})",
+    "follow_suit": "You must follow suit ({suit}) if you have cards of that suit!"
+  },
+
+  "action": {
+    "played": "Player {player_id} played {card}",
+    "trick_win": "Player {winner} wins the trick with {card}!",
+    "learning_complete": "LEARNING PHASE COMPLETE! No more cards to draw.\nPLAYING PHASE: Win as many tricks as possible with your current hand!",
+    "won_card": "You won the trick and received: {card}",
+    "face_down": "You received a face-down card: {card}",
+    "next_visible": "Next card available (you can see this because you won): {card}"
+  },
+
+  "outcome": {
+    "summary_head": "Game Over! Total tricks played: {total}\n\nFinal Score:\nPlayer 0: {s0} tricks\nPlayer 1: {s1} tricks\n\n",
+    "win": "{summary}Player {winner} wins with {wtricks} tricks!",
+    "draw": "{summary}It's a tie!"
+  }
+}

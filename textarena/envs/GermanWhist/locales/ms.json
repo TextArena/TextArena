@@ -1,0 +1,89 @@
+{
+  "_comment": "Fail bahasa German Whist. JANGAN terjemah kunci (sebelah kiri). Terjemah nilai sahaja (sebelah kanan). Kekalkan setiap {placeholder} betul-betul seperti asal. Jangan sekali-kali terjemah token tindakan '[play X]', label kad (2..10, J, Q, K, A), simbol sut (slot {suit}/{trump}/{card}) atau kiraan/skor berangka. Teks penanda '(TRUMP)' boleh disetempatkan.",
+  "_slots": {
+    "{player_id}": "Nombor pemain, 0 atau 1",
+    "{trump_suit}": "Simbol sut trump - jangan terjemah",
+    "{trump_card}": "Label kad trump, cth. 'K♣' - jangan terjemah",
+    "{card}": "Label kad yang dimainkan, cth. '10♠' - jangan terjemah",
+    "{suit}": "Simbol sut - jangan terjemah",
+    "{trump_mark}": "Penanda '(TRUMP)' yang telah dipaparkan, atau kosong",
+    "{phase_info}": "Baris huraian fasa yang telah dipaparkan",
+    "{max_pos}": "Kedudukan kad sah tertinggi dalam tangan pemain",
+    "{count}": "Bilangan kad yang dipegang pemain",
+    "{pos}": "Nombor kedudukan kad dalam tangan",
+    "{hand}": "Senarai tangan berbilang baris yang telah dipaparkan",
+    "{trick}": "Senarai pusingan semasa yang telah dipaparkan",
+    "{next_card}": "Baris kad seterusnya yang telah dipaparkan",
+    "{scores}": "Baris skor yang telah dipaparkan",
+    "{phase}": "Baris fasa yang telah dipaparkan",
+    "{winner}": "Nombor pemain yang memenangi pusingan atau permainan",
+    "{s0}": "Bilangan pusingan dimenangi pemain 0",
+    "{s1}": "Bilangan pusingan dimenangi pemain 1",
+    "{total}": "Jumlah pusingan yang dimainkan",
+    "{summary}": "Blok ringkasan akhir yang telah dipaparkan",
+    "{wtricks}": "Bilangan pusingan pemain yang menang",
+    "{remaining}": "Bilangan kad yang tinggal dalam dek"
+  },
+
+  "game": {
+    "start": "Permainan German Whist bermula!\nSut trump: {trump_suit} (Kad trump: {trump_card})\n\nFASA PEMBELAJARAN: Menang pusingan untuk mendapatkan kad terbuka dari dek. Pemenang melihat kad seterusnya, yang kalah menerimanya secara buta."
+  },
+
+  "prompt": {
+    "phase_learning": "FASA PEMBELAJARAN: Menang pusingan untuk mendapatkan kad seterusnya yang kelihatan. Anda boleh melihat apa yang diperebutkan!",
+    "phase_playing": "FASA PERMAINAN: Tiada lagi kad untuk diambil. Menang seberapa banyak pusingan yang mungkin!",
+    "intro": "Anda bermain German Whist - Pemain {player_id}.\n{phase_info}\nMatlamat: Menang majoriti pusingan (14+ daripada 26 keseluruhan).\nKekuatan Kad: A > K > Q > J > 10 > 9 > 8 > 7 > 6 > 5 > 4 > 3 > 2\nKad trump mengalahkan kad bukan trump. Anda mesti mengikut sut jika boleh.\n\nTindakan: '[play X]', dengan X ialah kedudukan (1-{max_pos}) kad dalam tangan anda\n"
+  },
+
+  "hand": {
+    "none": "Tiada kad",
+    "empty": "Tiada kad di tangan",
+    "header": "Tangan anda:",
+    "suit_line": "  {suit}{trump_mark}:",
+    "card_line": "    {pos}. {card}",
+    "trump_mark": " (TRUF)"
+  },
+
+  "trick": {
+    "empty": "Tiada kad dimainkan lagi dalam pusingan ini.",
+    "header": "Pusingan semasa:",
+    "line": "  Pemain {player_id}: {card}{trump_mark}"
+  },
+
+  "next_card": {
+    "playing": "FASA PERMAINAN: Tiada lagi kad untuk diambil dari dek.",
+    "empty": "Tiada lagi kad dalam dek.",
+    "info": "Kad seterusnya untuk pemenang pusingan: {card}{trump_mark}"
+  },
+
+  "turn": {
+    "scores": "Pusingan dimenangi - Pemain 0: {s0} | Pemain 1: {s1}",
+    "phase": "Fasa: {phase}",
+    "phase_learning": "Fasa: {phase} ({remaining} kad tinggal dalam dek)",
+    "board": "{hand}\n\n{trick}\n\n{next_card}\n\n{scores}\n{phase}\n\nMainkan kad menggunakan [play X]",
+    "learning": "PEMBELAJARAN",
+    "playing": "PERMAINAN",
+    "finished": "TAMAT"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Gunakan [play X], dengan X ialah kedudukan kad (1, 2, 3, dsb.)",
+    "out_of_range": "Kedudukan kad tidak sah. Anda mempunyai {count} kad (1-{count})",
+    "follow_suit": "Anda mesti mengikut sut ({suit}) jika anda mempunyai kad sut itu!"
+  },
+
+  "action": {
+    "played": "Pemain {player_id} memainkan {card}",
+    "trick_win": "Pemain {winner} memenangi pusingan dengan {card}!",
+    "learning_complete": "FASA PEMBELAJARAN SELESAI! Tiada lagi kad untuk diambil.\nFASA PERMAINAN: Menang seberapa banyak pusingan yang mungkin dengan tangan semasa anda!",
+    "won_card": "Anda memenangi pusingan dan menerima: {card}",
+    "face_down": "Anda menerima kad tertutup: {card}",
+    "next_visible": "Kad seterusnya tersedia (anda boleh melihat ini kerana anda menang): {card}"
+  },
+
+  "outcome": {
+    "summary_head": "Permainan Tamat! Jumlah pusingan dimainkan: {total}\n\nSkor Akhir:\nPemain 0: {s0} pusingan\nPemain 1: {s1} pusingan\n\n",
+    "win": "{summary}Pemain {winner} menang dengan {wtricks} pusingan!",
+    "draw": "{summary}Seri!"
+  }
+}

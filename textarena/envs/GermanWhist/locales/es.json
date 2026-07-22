@@ -1,0 +1,89 @@
+{
+  "_comment": "Archivo de idioma de German Whist. NO traduzcas las claves (lado izquierdo). Traduce solo los valores (lado derecho). Mantén cada {placeholder} exactamente igual. Nunca traduzcas el token de acción '[play X]', las etiquetas de las cartas (2..10, J, Q, K, A), los símbolos de palo (los slots {suit}/{trump}/{card}) ni los recuentos/puntuaciones numéricos. El texto del marcador '(TRUMP)' puede localizarse.",
+  "_slots": {
+    "{player_id}": "Un número de jugador, 0 o 1",
+    "{trump_suit}": "El símbolo del palo de triunfo - no traducir",
+    "{trump_card}": "La etiqueta de la carta de triunfo, p. ej. 'K♣' - no traducir",
+    "{card}": "Una etiqueta de carta jugada, p. ej. '10♠' - no traducir",
+    "{suit}": "Un símbolo de palo - no traducir",
+    "{trump_mark}": "El marcador '(TRUMP)' ya renderizado, o vacío",
+    "{phase_info}": "La línea de descripción de fase ya renderizada",
+    "{max_pos}": "La posición de carta legal más alta en la mano del jugador",
+    "{count}": "El número de cartas que tiene un jugador",
+    "{pos}": "El número de posición de una carta en la mano",
+    "{hand}": "El listado de la mano ya renderizado, de varias líneas",
+    "{trick}": "El listado de la baza actual ya renderizado",
+    "{next_card}": "La línea de la siguiente carta ya renderizada",
+    "{scores}": "La línea de puntuación ya renderizada",
+    "{phase}": "La línea de fase ya renderizada",
+    "{winner}": "El número del jugador que gana la baza o la partida",
+    "{s0}": "Número de bazas del jugador 0",
+    "{s1}": "Número de bazas del jugador 1",
+    "{total}": "Total de bazas jugadas",
+    "{summary}": "El bloque de resumen final ya renderizado",
+    "{wtricks}": "El número de bazas del jugador ganador",
+    "{remaining}": "Número de cartas que quedan en el mazo"
+  },
+
+  "game": {
+    "start": "¡Partida de German Whist iniciada!\nPalo de triunfo: {trump_suit} (Carta de triunfo: {trump_card})\n\nFASE DE APRENDIZAJE: Gana bazas para obtener la carta boca arriba del mazo. El ganador ve la siguiente carta, el perdedor la recibe a ciegas."
+  },
+
+  "prompt": {
+    "phase_learning": "FASE DE APRENDIZAJE: Gana bazas para obtener la siguiente carta visible. ¡Puedes ver por qué compites!",
+    "phase_playing": "FASE DE JUEGO: No quedan cartas para robar. ¡Gana tantas bazas como puedas!",
+    "intro": "Estás jugando a German Whist - Jugador {player_id}.\n{phase_info}\nObjetivo: Gana la mayoría de las bazas (14+ de 26 en total).\nFuerza de las cartas: A > K > Q > J > 10 > 9 > 8 > 7 > 6 > 5 > 4 > 3 > 2\nLas cartas de triunfo vencen a las que no lo son. Debes seguir el palo si es posible.\n\nAcción: '[play X]', donde X es la posición (1-{max_pos}) de la carta en tu mano\n"
+  },
+
+  "hand": {
+    "none": "Sin cartas",
+    "empty": "Sin cartas en la mano",
+    "header": "Tu mano:",
+    "suit_line": "  {suit}{trump_mark}:",
+    "card_line": "    {pos}. {card}",
+    "trump_mark": " (TRIUNFO)"
+  },
+
+  "trick": {
+    "empty": "Aún no se han jugado cartas en esta baza.",
+    "header": "Baza actual:",
+    "line": "  Jugador {player_id}: {card}{trump_mark}"
+  },
+
+  "next_card": {
+    "playing": "FASE DE JUEGO: No quedan cartas para robar del mazo.",
+    "empty": "No quedan cartas en el mazo.",
+    "info": "Siguiente carta para el ganador de la baza: {card}{trump_mark}"
+  },
+
+  "turn": {
+    "scores": "Bazas ganadas - Jugador 0: {s0} | Jugador 1: {s1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Fase: {phase} ({remaining} cartas restantes en el mazo)",
+    "board": "{hand}\n\n{trick}\n\n{next_card}\n\n{scores}\n{phase}\n\nJuega una carta usando [play X]",
+    "learning": "APRENDIZAJE",
+    "playing": "JUEGO",
+    "finished": "TERMINADA"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Usa [play X], donde X es la posición de la carta (1, 2, 3, etc.)",
+    "out_of_range": "Posición de carta inválida. Tienes {count} cartas (1-{count})",
+    "follow_suit": "¡Debes seguir el palo ({suit}) si tienes cartas de ese palo!"
+  },
+
+  "action": {
+    "played": "El jugador {player_id} jugó {card}",
+    "trick_win": "¡El jugador {winner} gana la baza con {card}!",
+    "learning_complete": "¡FASE DE APRENDIZAJE COMPLETADA! No quedan cartas para robar.\nFASE DE JUEGO: ¡Gana tantas bazas como puedas con tu mano actual!",
+    "won_card": "Ganaste la baza y recibiste: {card}",
+    "face_down": "Recibiste una carta boca abajo: {card}",
+    "next_visible": "Siguiente carta disponible (puedes verla porque ganaste): {card}"
+  },
+
+  "outcome": {
+    "summary_head": "¡Fin de la partida! Total de bazas jugadas: {total}\n\nPuntuación final:\nJugador 0: {s0} bazas\nJugador 1: {s1} bazas\n\n",
+    "win": "{summary}¡El jugador {winner} gana con {wtricks} bazas!",
+    "draw": "{summary}¡Es un empate!"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "Santorini 简体中文语言文件。不要翻译键名，只翻译值。保留每个 {占位符}。切勿翻译 ASCII {board}、作为 {color}/{winner_color}/等 传入的颜色名（Navy/White/Grey）、工人标签（N1、N2、W1、W2、G1、G2）、走法记号格式 [worker_id source dest build] / 如 [N1C1C2B2] 的示例、棋盘坐标（A-E、1-5）或等级数字。",
+  "_slots": {
+    "{color}": "玩家的颜色/角色名（Navy、White 或 Grey）- 不要翻译",
+    "{color_initial}": "颜色的首字母，用于走法记号（N、W 或 G）- 不要翻译",
+    "{board}": "渲染后的 ASCII 棋盘 - 原样插入，不要翻译",
+    "{valid_moves}": "以逗号分隔的合法走法记号列表 - 不要翻译",
+    "{expected_color}": "被指涉工人的颜色 - 不要翻译",
+    "{player_color}": "行动玩家自己的颜色 - 不要翻译",
+    "{worker_num}": "工人编号，1 或 2",
+    "{source}": "起始坐标，例如 C2 - 不要翻译",
+    "{dest}": "目标坐标，例如 C3 - 不要翻译",
+    "{build}": "建造坐标，例如 B2 - 不要翻译",
+    "{player_id}": "玩家编号，例如 0 或 1",
+    "{winner_id}": "获胜玩家的编号",
+    "{winner_color}": "获胜玩家的颜色 - 不要翻译",
+    "{loser_id}": "落败玩家的编号",
+    "{loser_color}": "落败玩家的颜色 - 不要翻译"
+  },
+
+  "player_prompt": {
+    "intro":       "你在一局 Santorini 中扮演 {color}。\n\n游戏规则：\n1. 移动：\n   - 工人只能移动到相邻的格子（包括对角线）\n   - 不能移动到被其他工人或圆顶占据的格子\n   - 最多可向上移动一层，但可向下移动任意层数\n\n2. 建造：\n   - 必须在你工人移动到的格子相邻处建造\n   - 不能在有工人站立的格子建造\n   - 不能在圆顶（第 4 层）之上建造\n   - 建造会增加一层（或在第 3 层上造出圆顶）\n\n3. 获胜条件：\n   - 将一名工人移动到第 3 层即获胜\n   - 若对手没有合法走法即获胜\n\n请以 [worker_id source dest build] 格式行动\n示例：[{color_initial}1C1C2B2] 表示将 {color} 的工人 1 从 C1 移动到 C2 并在 B2 建造\n你可以在消息中包含额外文字，但只能提及一次合法的走法记号。\n",
+    "board_state": "\n当前棋盘状态：\n{board}\n",
+    "valid_moves": "\n合法走法：{valid_moves}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "走法格式无效。期望格式：[worker_id source dest build]，例如 [N1C1C2B2]",
+    "wrong_player": "无法移动 {expected_color} 的工人（你是 {player_color}）",
+    "no_worker":    "位置 {source} 没有工人 {worker_num}",
+    "bad_move":     "从 {source} 到 {dest} 的移动无效",
+    "bad_build":    "在 {build} 的建造无效"
+  },
+
+  "game_action": {
+    "moved":        "玩家 {player_id}（{color}）将工人 {worker_num} 从 {source} 移动到 {dest} 并在 {build} 建造"
+  },
+
+  "outcome": {
+    "win_level3":   "玩家 {winner_id}（{winner_color}）将一名工人移动到第 3 层，获胜！",
+    "no_moves":     "玩家 {loser_id}（{loser_color}）没有合法走法。玩家 {winner_id}（{winner_color}）获胜！"
+  }
+}
