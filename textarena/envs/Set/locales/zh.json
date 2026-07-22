@@ -1,5 +1,5 @@
 {
-  "_comment": "Set 的中文语言文件。请勿翻译键（左侧），只翻译值（右侧）。请完全保留每个 {占位符}。请勿翻译示例中的卡牌属性词（one/two/three、red/green/purple、open/striped/solid、oval/diamond/squiggle）、方括号示例如 [1, 4, 11] / [2, 4, 8] / [card1, card2, card3]、ASCII 标题 '=== 卡牌 ==='，也不要翻译作为游戏/术语名称的 'Set'。牌桌行（{rows}）由游戏生成且保持中性。",
+  "_comment": "Set 的中文语言文件。请勿翻译键（左侧），只翻译值（右侧）。请完全保留每个 {占位符}。请勿翻译示例中的卡牌属性词（one/two/three、red/green/purple、open/striped/solid、oval/diamond/squiggle）、方括号示例如 [1, 4, 11] / [2, 4, 8] / [card1, card2, card3]、ASCII 标题 '=== BOARD ==='，也不要翻译作为游戏/术语名称的 'Set'。牌桌行（{rows}）由游戏生成且保持中性。",
   "_slots": {
     "{rows}": "由游戏生成的中性编号卡牌列表（每行 'index: number color fill shape'）；请勿翻译",
     "{cards_dealt}": "额外发出的卡牌数量（一个整数）",
@@ -9,7 +9,7 @@
     "intro": "你正在玩单人游戏 Set。你的目标是在 20 个回合内找到尽可能多的 Set，同时不犯错误。牌桌上有一份编号列表，包含 12 张或更多卡牌，每张标注（数字、颜色、填充、形状）。一个 Set 是 3 张卡牌的组合，其中每个属性要么 3 张全部相同，要么 3 张全部不同。例如，'one red open squiggle'、'two green open squiggle'、'three purple open squiggle' 就构成一个 Set。每个回合，你按编号从牌桌上选择一组 3 张卡牌。例如 \"[1, 4, 11]\"。如果它是一个 Set，你得分并且这些卡牌会被替换。如果它不是一个 Set，则该回合被浪费。当你用完回合数时游戏结束。你必须用方括号返回你的卡牌，如 [2, 4, 8]，否则将无法解析。"
   },
   "board": {
-    "state": "=== 卡牌 ==={rows}"
+    "state": "=== BOARD ==={rows}"
   },
   "game_message": {
     "dealt_cards": "牌桌上未找到有效的 Set。已额外发出 {cards_dealt} 张卡牌。",

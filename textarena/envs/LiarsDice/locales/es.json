@@ -23,7 +23,7 @@
   },
 
   "player_prompt": {
-    "intro": "Eres el Jugador {player_id} en una partida de Liar's Dice de {num_players} jugadores.\nReglas:\n- En tu turno, puedes:\n  1) Hacer una nueva puja con mayor cantidad o mayor cara (o ambas) que la puja actual; es decir, '[Bid: 3, 4]',\n  2) Reclamar la última puja escribiendo '[Call]'.\n\nSi reclamas:\n  - Si el recuento real de ese valor de cara entre todos los dados es menor que la puja, el último pujador pierde un dado.\n  - De lo contrario, quien reclama pierde un dado.\nUn jugador que llega a 0 dados queda eliminado. El último jugador que quede gana."
+    "intro": "Eres el Jugador {player_id} en una partida de Liar's Dice de {num_players} jugadores.\nReglas:\n- En tu turno, puedes:\n  1) Hacer una nueva puja con mayor cantidad o mayor cara (o ambas) que la puja actual; es decir, '[Bid: 3, 4]',\n  2) Dudar de la última puja escribiendo '[Call]'.\n\nSi dudas:\n  - Si el recuento real de ese valor de cara entre todos los dados es menor que la puja, el último pujador pierde un dado.\n  - De lo contrario, quien duda pierde un dado.\nUn jugador que llega a 0 dados queda eliminado. El último jugador que quede gana."
   },
 
   "board": {
@@ -32,8 +32,8 @@
   },
 
   "call": {
-    "bidder_loses":     "¡El Jugador {current_player_id} reclama! El recuento real de la cara {face_value} es {count}, que es MENOR que {quantity}.\nEl Jugador {loser_id} (el último pujador) pierde un dado.",
-    "caller_loses":     "¡El Jugador {current_player_id} reclama! El recuento real de la cara {face_value} es {count}, que es >= {quantity}.\nEl Jugador {loser_id} (quien reclama) pierde un dado."
+    "bidder_loses":     "¡El Jugador {current_player_id} duda! El recuento real de la cara {face_value} es {count}, que es MENOR que {quantity}.\nEl Jugador {loser_id} (el último pujador) pierde un dado.",
+    "caller_loses":     "¡El Jugador {current_player_id} duda! El recuento real de la cara {face_value} es {count}, que es >= {quantity}.\nEl Jugador {loser_id} (quien duda) pierde un dado."
   },
 
   "action": {
@@ -41,7 +41,7 @@
   },
 
   "invalid_move": {
-    "call_no_bid":      "Se reclamó sin una puja previa.",
+    "call_no_bid":      "Se dudó sin una puja previa.",
     "invalid_bid":      "Puja inválida: {reason}",
     "not_recognized":   "La acción no se reconoce como un '[Bid: X, Y]' o '[Call]' válido. Acción enviada: {action}"
   },
