@@ -129,7 +129,7 @@ general todos:
 | 4 | [Blackjack](#blackjack) | 1 | 🌐 | |
 | 5 | [Countdown](#countdown) | 1 | 🌐 | |
 | 6 | [Crosswords](#crosswords) | 1 | | |
-| 7 | [Cryptarithm](#cryptarithm) | 1 | | |
+| 7 | [Cryptarithm](#cryptarithm) | 1 | 🌐 | |
 | 8 | [FifteenPuzzle](#fifteenpuzzle) | 1 | 🌐 | |
 | 9 | [FrozenLake](#frozenlake) | 1 | 🌐 | |
 | 10 | [GuessTheNumber](#guessthenumber) | 1 | 🌐 | |
@@ -166,34 +166,34 @@ Two-Player
 | 9 | [Crusade](#crusade) | 2 | 🌐 | |
 | 10 | [Debate](#debate) | 2 | | |
 | 11 | [DontSayIt](#dontsayit) | 2 | | |
-| 12 | [GameOfPureStrategy](#gameofpurestrategy) | 2 | | |
-| 13 | [GermanWhist](#germanwhist) | 2 | | |
-| 14 | [HighSociety](#highsociety) | 2 | | |
+| 12 | [GameOfPureStrategy](#gameofpurestrategy) | 2 | 🌐 | |
+| 13 | [GermanWhist](#germanwhist) | 2 | 🌐 | |
+| 14 | [HighSociety](#highsociety) | 2 | 🌐 | |
 | 15 | [IndianPoker](#indianpoker) | 2 | 🌐 | |
-| 16 | [IteratedMatchingPennies](#iteratedmatchingpennies) | 2 | | |
+| 16 | [IteratedMatchingPennies](#iteratedmatchingpennies) | 2 | 🌐 | |
 | 17 | [IteratedPrisonersDilemma](#iteratedprisonersdilemma) | 2 | 🌐 | |
-| 18 | [IteratedRockPaperScissors](#iteratedrockpaperscissors) | 2 | | |
-| 19 | [IteratedTwoThirdsAverage](#iteratedtwothirdsaverage) | 2 | | |
+| 18 | [IteratedRockPaperScissors](#iteratedrockpaperscissors) | 2 | 🌐 | |
+| 19 | [IteratedTwoThirdsAverage](#iteratedtwothirdsaverage) | 2 | 🌐 | |
 | 20 | [IteratedStagHunt](#iteratedstaghunt) | 2 | | |
 | 21 | [KuhnPoker](#kuhnpoker) | 2 | 🌐 | |
-| 22 | [LeducHoldem](#leducholdem) | 2 | | |
-| 23 | [LeTruc](#letruc) | 2 | | |
-| 24 | [LinesOfAction](#linesofaction) | 2 | | |
+| 22 | [LeducHoldem](#leducholdem) | 2 | 🌐 | |
+| 23 | [LeTruc](#letruc) | 2 | 🌐 | |
+| 24 | [LinesOfAction](#linesofaction) | 2 | 🌐 | |
 | 25 | [LetterAuction](#letterauction) | 2 | | |
-| 26 | [MemoryGame](#memorygame) | 2 | | |
+| 26 | [MemoryGame](#memorygame) | 2 | 🌐 | |
 | 27 | [Nim](#nim) | 2 | 🌐 | |
-| 28 | [Othello](#othello) | 2 | | |
+| 28 | [Othello](#othello) | 2 | 🌐 | |
 | 29 | [PigDice](#pigdice) | 2 | 🌐 | |
-| 30 | [QuantumTicTacToe](#quantumtictactoe) | 2 | | |
+| 30 | [QuantumTicTacToe](#quantumtictactoe) | 2 | 🌐 | |
 | 31 | [ReverseTicTacToe](#reversetictactoe) | 2 | 🌐 | |
 | 32 | [ScenarioPlanning](#scenarioplanning) | 2 | | |
 | 33 | [SimpleBlindAuction](#simpleblindauction) | 2 | | |
 | 34 | [SimpleNegotiation](#simplenegotiation) | 2 | 🌐 | |
 | 35 | [SimpleTak](#simpletak) | 2 | 🌐 | |
 | 36 | [SpellingBee](#spellingbee) | 2 | | |
-| 37 | [SpiteAndMalice](#spiteandmalice) | 2 | | |
-| 38 | [Stratego](#stratego) | 2 | | |
-| 39 | [Tak](#tak) | 2 | | |
+| 37 | [SpiteAndMalice](#spiteandmalice) | 2 | 🌐 | |
+| 38 | [Stratego](#stratego) | 2 | 🌐 | |
+| 39 | [Tak](#tak) | 2 | 🌐 | |
 | 40 | [TicTacToe](#tictactoe) | 2 | 🌐 | |
 | 41 | [TruthAndDeception](#truthanddeception) | 2 | | |
 | 42 | [TwoDollar](#twodollar) | 2 | | |
@@ -205,13 +205,13 @@ Two-Player
 | # | Game | Players | Multilingual | Comments |
 |--:|------|:-------:|:------------:|----------|
 | 1 | [Coup](#coup) | 2–6 | | |
-| 2 | [LiarsDice](#liarsdice) | 2–15 | | |
-| 3 | [Poker](#poker) | 2–15 | | |
-| 4 | [Santorini](#santorini) | 2–3 | | |
-| 5 | [Snake](#snake) | 2–15 | | |
-| 6 | [Surround](#surround) | 2–15 | | |
+| 2 | [LiarsDice](#liarsdice) | 2–15 | 🌐 | |
+| 3 | [Poker](#poker) | 2–15 | 🌐 | |
+| 4 | [Santorini](#santorini) | 2–3 | 🌐 | |
+| 5 | [Snake](#snake) | 2–15 | 🌐 | |
+| 6 | [Surround](#surround) | 2–15 | 🌐 | |
 | 7 | [Briscola](#briscola) | 2–4 | | |
-| 8 | [Golf](#golf) | 2–4 | | |
+| 8 | [Golf](#golf) | 2–4 | 🌐 | |
 | 9 | [Negotiation](#negotiation) | 2–15 | | |
 | 10 | [CharacterConclave](#characterconclave) | 3–15 | | |
 | 11 | [Codenames](#codenames) | 4 | | |
@@ -219,7 +219,7 @@ Two-Player
 | 13 | [BlindAuction](#blindauction) | 3–15 | | |
 | 14 | [SecretMafia](#secretmafia) | 6–15 | | |
 | 15 | [Taboo](#taboo) | 4–8 | | |
-| 16 | [ThreePlayerGOPS](#threeplayergops) | 3 | | |
+| 16 | [ThreePlayerGOPS](#threeplayergops) | 3 | 🌐 | |
 | 17 | [ThreePlayerTicTacToe](#threeplayertictactoe) | 3 | 🌐 | |
 | 18 | [ThreePlayerIPD](#threeplayeripd) | 3 | 🌐 | |
 | 19 | [TwoRoomsAndABoom](#tworoomsandaboom) | 6–20 | | |
@@ -229,17 +229,17 @@ Two-Player
 
 | # | Game | Mode | Players | Multilingual | Comments |
 |--:|------|:----:|:-------:|:------------:|----------|
-| 1 | [Hanabi](#hanabi) | ? | ? | | |
+| 1 | [Hanabi](#hanabi) | ? | 🌐 | | |
 | 2 | [ImTheBoss](#imtheboss) | ? | ? | | |
 | 3 | [IteratedUltimatumGame](#iteratedultimatumgame) | ? | ? | | |
-| 4 | [Klondike](#klondike) | ? | ? | | |
+| 4 | [Klondike](#klondike) | ? | 🌐 | | |
 | 5 | [MarketEntryGame](#marketentrygame) | ? | ? | | |
 | 6 | [NewRecruit](#newrecruit) | ? | ? | | |
 | 7 | [PublicGoodsGame](#publicgoodsgame) | ? | ? | | |
 | 8 | [ScorableGames](#scorablegames) | ? | ? | | |
-| 9 | [Set](#set) | ? | ? | | |
+| 9 | [Set](#set) | ? | 🌐 | | |
 | 10 | [SettlersOfCatan](#settlersofcatan) | ? | ? | | |
-| 11 | [UltimateTexasHoldem](#ultimatetexasholdem) | ? | ? | | |
+| 11 | [UltimateTexasHoldem](#ultimatetexasholdem) | ? | 🌐 | | |
 | 12 | [UsedCarNegotiation](#usedcarnegotiation) | ? | ? | | |
 | 13 | [VendorNegotiation](#vendornegotiation) | ? | ? | | |
 | 14 | [WinAsMuchAsYouCan](#winasmuchasyoucan) | ? | ? | | |
