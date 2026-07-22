@@ -105,6 +105,20 @@ GAMES = {
                              "[rock]", "[rock]", "[rock]", "[rock]", "[rock]", "[rock]"],
         },
     },
+    "HighSociety": {
+        "entry": "textarena.envs.HighSociety.env:HighSocietyEnv",
+        "num_players": 2,
+        "seed": 42,
+        # First bidder alternates each auction (P0,P1,P0,...). Loser keeps their
+        # money card, so P1 can bid [1] every auction and P0 wins with distinct
+        # cards 2..11. Draw is unreachable deterministically -> check_locales only.
+        "scenarios": {
+            "p0_sweeps_10_auctions": ["[2]", "[1]", "[1]", "[3]", "[4]", "[1]", "[1]", "[5]",
+                                      "[6]", "[1]", "[1]", "[7]", "[8]", "[1]", "[1]", "[9]",
+                                      "[10]", "[1]", "[1]", "[11]"],
+            "tie_and_invalids": ["bad", "[5]", "[5]", "[6]", "[3]", "[1]", "[6]", "[7]"],
+        },
+    },
     "IteratedMatchingPennies": {
         "entry": "textarena.envs.IteratedMatchingPennies.env:IteratedMatchingPenniesEnv",
         "num_players": 2,

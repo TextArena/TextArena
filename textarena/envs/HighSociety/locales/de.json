@@ -1,0 +1,9 @@
+{
+  "_comment": "HighSociety Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel. Behalte {platzhalter}, Bid-Token wie '[7]', {cards} sowie ** * ### • und Pfeile bei.",
+  "_slots": { "{player_id}": "Spielernummer", "{round}": "Auktionsnummer 1-10", "{prize}": "Wert der Prestigekarte", "{cards}": "Geldkarten-Token des Spielers (nicht übersetzen)", "{bid0}": "Gebot Spieler 0", "{bid1}": "Gebot Spieler 1", "{winner}": "Nummer des Auktionssiegers", "{total}": "Gesamtprestige des Siegers", "{high}": "höheres Nettovermögen", "{low}": "niedrigeres Nettovermögen", "{nw}": "Gleichstandswert" },
+  "player_prompt": { "intro": "Du bist Spieler {player_id} in einem Spiel HighSociety (2-Spieler-Version).\nSpielablauf:  Zehn Prestigekarten werden nacheinander versteigert.\nBieten:       Wähle in jeder Auktion heimlich eine Geldkarte 1-11 und decke sie auf.\n            • Das höhere Gebot gewinnt die Prestigekarte und wirft diese Geldkarte ab.\n            • Das niedrigere Gebot behält seine Geldkarte.\n            • Gleichstand -> beide Gebote kommen zurück und dieselbe Prestigekarte wird erneut versteigert.\nWertung:      Addiere nach allen zehn Auktionen **verbleibendes Geld + Prestigepunkte**.\n            Das höhere *Nettovermögen* gewinnt (exakter Gleichstand -> Unentschieden).\n\n**Aktionssyntax**  →  biete eine einzelne Karte wie '[7]' oder '[11]'." },
+  "board": { "auction_header": "\n### Auktion {round}/10  |  Prestigekarte: {prize}", "money_cards": "Deine verbleibenden Geldkarten: {cards}" },
+  "invalid_move": { "wrong_format": "Muss genau eine Geldkarte [X] enthalten.", "no_such_card": "Du hast diese Geldkarte nicht mehr." },
+  "round": { "tie": "Gleichstand - Gebote zurückgegeben. Neu bieten!", "result": "Spieler 0 bot {bid0}, Spieler 1 bot {bid1}. Spieler {winner} gewinnt Prestige {prize} (gesamt {total})." },
+  "outcome": { "win": "Nettovermögen {high} > {low}", "draw": "Beide Nettovermögen {nw} – exakter Gleichstand." }
+}
