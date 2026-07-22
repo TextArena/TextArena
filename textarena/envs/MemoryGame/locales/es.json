@@ -1,0 +1,42 @@
+{
+  "_comment": "Archivo de idioma del Juego de Memoria en español. Los tokens de jugada como [0 1 1 0], los números de fila/columna, las etiquetas de las cartas (A, B, ...) y el tablero ASCII son NEUTRALES: se pasan como marcadores y nunca deben traducirse.",
+  "_slots": {
+    "player_id": "identificador entero del jugador que actúa (0 o 1)",
+    "winner_id": "identificador entero del jugador ganador (0 o 1)",
+    "board": "tablero ASCII ya renderizado, se pasa literalmente (no traducir)",
+    "r1": "fila de la primera carta seleccionada (entero)",
+    "c1": "columna de la primera carta seleccionada (entero)",
+    "r2": "fila de la segunda carta seleccionada (entero)",
+    "c2": "columna de la segunda carta seleccionada (entero)",
+    "pos1": "etiqueta de la carta revelada en la primera posición (p. ej. H); neutral, no traducir",
+    "pos2": "etiqueta de la carta revelada en la segunda posición (p. ej. B); neutral, no traducir",
+    "score0": "puntuación final del jugador 0 (entero)",
+    "score1": "puntuación final del jugador 1 (entero)",
+    "reason": "frase de límite de turnos anidada que se pasa al mensaje de victoria por límite de turnos"
+  },
+  "prompt": {
+    "intro": "Eres el jugador {player_id}. Estás jugando al Juego de Memoria.\nTu objetivo es emparejar más pares de cartas del tablero que tu oponente.\nEn tu turno, selecciona dos cartas para voltear introduciendo los números de fila y columna de la primera y la segunda carta respectivamente, como '[0 1 1 0]', donde la primera carta está en la fila 0 y la columna 1, y la segunda carta está en la fila 1 y la columna 0.\nSi las dos cartas coinciden, ganas un punto y las cartas permanecen boca arriba. Si no coinciden, las cartas se vuelven a poner boca abajo, p. ej. '.'.\nLa partida termina cuando se han emparejado todos los pares."
+  },
+  "board": {
+    "initial": "Tablero actual:\n{board}",
+    "current": "Tablero de juego actual:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de jugada no válido. El jugador {player_id} no respondió con una indicación válida entre corchetes.",
+    "out_of_bounds": "Jugada no válida. El jugador {player_id} seleccionó una posición fuera de los límites.",
+    "same_card": "Jugada no válida. El jugador {player_id} seleccionó la misma carta dos veces.",
+    "already_matched": "Jugada no válida. El jugador {player_id} seleccionó una o ambas cartas que ya han sido emparejadas."
+  },
+  "game_message": {
+    "match": "¡Las cartas seleccionadas por el jugador {player_id} en las posiciones [{r1} {c1}] y [{r2} {c2}] coinciden!",
+    "no_match": "Las cartas seleccionadas por el jugador {player_id} no coinciden. Las cartas en las posiciones [{r1} {c1}] y [{r2} {c2}] son {pos1} y {pos2} respectivamente."
+  },
+  "outcome": {
+    "win": "¡El jugador {winner_id} ha ganado!",
+    "draw": "Ambos jugadores emparejaron el mismo número de pares de cartas."
+  },
+  "turn_limit": {
+    "reached": "Se ha alcanzado el límite de turnos. La partida ha terminado. El jugador 0 obtuvo {score0} puntos, el jugador 1 obtuvo {score1} puntos.",
+    "win": "{reason} ¡El jugador {winner_id} ha ganado!"
+  }
+}

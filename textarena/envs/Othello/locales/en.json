@@ -1,0 +1,57 @@
+{
+  "_comment": "Othello locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate coordinates, the piece letters B/W, the move format '[row, col]', or the ASCII board. Anchor terminology to the sibling board games (board, valid moves, wins, draw).",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{pid}": "The player's number, 0 or 1",
+    "{colour}": "The player's rendered colour name (Black / White)",
+    "{piece}": "The player's piece letter, either B or W (do not translate)",
+    "{board}": "The pre-rendered ASCII board (do not translate)",
+    "{valid}": "The pre-rendered valid-moves / no-valid-moves line (may be empty)",
+    "{moves}": "Neutral comma-separated list of legal moves like '[2, 3]', '[3, 2]' (do not translate)",
+    "{valid_list}": "Neutral Python-list repr of the legal moves (do not translate)",
+    "{black}": "Number of Black pieces on the board",
+    "{white}": "Number of White pieces on the board",
+    "{r}": "The row coordinate of the played move (do not translate)",
+    "{c}": "The column coordinate of the played move (do not translate)",
+    "{flipped}": "Number of opponent pieces flipped by the move",
+    "{b}": "Final Black piece count",
+    "{w}": "Final White piece count"
+  },
+
+  "pieces": {
+    "black": "Black",
+    "white": "White"
+  },
+
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+
+  "board": {
+    "observation_initial": "Game Board:\n{board}{valid}\nCurren Scores - Black: {black}, White: {white}\n",
+    "observation": "Game Board:\n{board}{valid}\nScores - Black: {black}, White: {white}\n",
+    "valid_moves": "\nValid moves: {moves}",
+    "no_valid_moves_skip": "\nNo valid moves - you may have to skip.",
+    "no_valid_moves_skip_endash": "\nNo valid moves – you may have to skip."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Move must be of the form [row, col].",
+    "illegal": "Illegal move. Valid moves: {valid_list}"
+  },
+
+  "game_action": {
+    "skip_turn": "Player {pid} had to skip their turn",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+
+  "game_message": {
+    "must_skip": "Player {pid} ({piece}) has no valid moves and must skip."
+  },
+
+  "outcome": {
+    "black_wins": "Black wins {b}-{w}.",
+    "white_wins": "White wins {w}-{b}.",
+    "draw": "Draw {b}-{w}."
+  }
+}

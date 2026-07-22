@@ -1,0 +1,57 @@
+{
+  "_comment": "Othello 简体中文语言包。请勿翻译键名（左侧），只翻译值（右侧）。请完整保留每个 {placeholder}。切勿翻译坐标、棋子字母 B/W、落子格式 '[row, col]' 或 ASCII 棋盘。术语请对齐相关的棋盘游戏（棋盘、合法落子、获胜、平局）。",
+  "_slots": {
+    "{player_id}": "玩家编号，0 或 1",
+    "{pid}": "玩家编号，0 或 1",
+    "{colour}": "玩家显示的颜色名称（黑方 / 白方）",
+    "{piece}": "玩家的棋子字母，B 或 W（请勿翻译）",
+    "{board}": "预渲染的 ASCII 棋盘（请勿翻译）",
+    "{valid}": "预渲染的合法落子／无合法落子行（可能为空）",
+    "{moves}": "以逗号分隔的合法落子中性列表，如 '[2, 3]', '[3, 2]'（请勿翻译）",
+    "{valid_list}": "合法落子的中性 Python 列表表示（请勿翻译）",
+    "{black}": "棋盘上黑棋的数量",
+    "{white}": "棋盘上白棋的数量",
+    "{r}": "所下落子的行坐标（请勿翻译）",
+    "{c}": "所下落子的列坐标（请勿翻译）",
+    "{flipped}": "该落子翻转的对手棋子数量",
+    "{b}": "黑棋最终数量",
+    "{w}": "白棋最终数量"
+  },
+
+  "pieces": {
+    "black": "黑方",
+    "white": "白方"
+  },
+
+  "player_prompt": {
+    "intro": "你是黑白棋（Othello）游戏中的玩家 {player_id}，执{colour}（{piece}）。\n你的目标是在游戏结束时让棋盘上你方颜色的棋子更多。\n轮到你时，放置一枚棋子，使其在任意方向（横向、纵向或对角线）上，在你新落的棋子与你已有的另一枚棋子之间夹住一枚或多枚对手棋子。所有被夹住的对手棋子都会翻转为你的颜色。\n请以 '[row, col]' 的格式给出你的落子。"
+  },
+
+  "board": {
+    "observation_initial": "游戏棋盘：\n{board}{valid}\n当前比分 - 黑方：{black}，白方：{white}\n",
+    "observation": "游戏棋盘：\n{board}{valid}\n比分 - 黑方：{black}，白方：{white}\n",
+    "valid_moves": "\n合法落子：{moves}",
+    "no_valid_moves_skip": "\n无合法落子 - 你可能必须跳过。",
+    "no_valid_moves_skip_endash": "\n无合法落子 – 你可能必须跳过。"
+  },
+
+  "invalid_move": {
+    "wrong_format": "落子必须为 [row, col] 格式。",
+    "illegal": "非法落子。合法落子：{valid_list}"
+  },
+
+  "game_action": {
+    "skip_turn": "玩家 {pid} 不得不跳过其回合",
+    "played": "玩家 {pid}（{piece}）落子 [{r}, {c}]，翻转了 {flipped} 枚棋子"
+  },
+
+  "game_message": {
+    "must_skip": "玩家 {pid}（{piece}）没有合法落子，必须跳过。"
+  },
+
+  "outcome": {
+    "black_wins": "黑方以 {b}-{w} 获胜。",
+    "white_wins": "白方以 {w}-{b} 获胜。",
+    "draw": "平局 {b}-{w}。"
+  }
+}

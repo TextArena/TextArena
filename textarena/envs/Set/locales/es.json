@@ -1,0 +1,26 @@
+{
+  "_comment": "Archivo de idioma de Set en español. NO traduzcas las claves, solo los valores. Mantén cada {marcador} exactamente igual. NO traduzcas las palabras de atributos de las cartas (one/two/three, red/green/purple, open/striped/solid, oval/diamond/squiggle) de los ejemplos, los ejemplos entre corchetes como [1, 4, 11] / [2, 4, 8] / [card1, card2, card3], la cabecera ASCII '=== TABLERO ===' ni la palabra 'Set' como nombre/término del juego. Las filas del tablero ({rows}) las genera el juego y son neutrales.",
+  "_slots": {
+    "{rows}": "Lista numerada de cartas generada por el juego y neutral (cada línea 'index: number color fill shape'); no traducir",
+    "{cards_dealt}": "Número de cartas adicionales repartidas (un entero)",
+    "{max_idx}": "El índice de carta válido más alto en el tablero (un entero)"
+  },
+  "player_prompt": {
+    "intro": "Estás jugando una partida de Set para un solo jugador. Tu objetivo es encontrar tantos Sets como puedas en 20 turnos, sin cometer errores. El tablero contiene una lista numerada de 12 o más cartas con (número, color, relleno, forma). Un Set es un conjunto de 3 cartas en el que, para cada atributo, las 3 son iguales o las 3 son diferentes. Por ejemplo, 'one red open squiggle', 'two green open squiggle', 'three purple open squiggle' serían un Set. En cada turno, seleccionas una lista de 3 cartas del tablero por su índice numerado. Por ejemplo, \"[1, 4, 11]\". Si es un Set, puntúas y las cartas se reemplazan. Si no es un Set, ese turno se desperdició. La partida termina cuando te quedas sin turnos. DEBES indicar tus cartas entre corchetes, como [2, 4, 8], o no se analizarán."
+  },
+  "board": {
+    "state": "=== TABLERO ==={rows}"
+  },
+  "game_message": {
+    "dealt_cards": "No se encontraron Sets válidos en el tablero. Se repartieron {cards_dealt} cartas adicionales.",
+    "found_set": "¡Has encontrado un Set! ¡+1 punto!",
+    "not_a_set": "Eso no es un Set. No hay punto para ti."
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de acción no válido. Indica una lista de enteros, como [card1, card2, card3].",
+    "out_of_range": "Acción no válida. Los índices de las cartas deben estar entre 1 y {max_idx}."
+  },
+  "outcome": {
+    "game_over": "Has jugado 20 turnos. La partida ha terminado."
+  }
+}

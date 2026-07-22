@@ -1,0 +1,57 @@
+{
+  "_comment": "Archivo de idioma de Othello en español. NO traduzcas las claves (lado izquierdo), solo los valores (lado derecho). Conserva cada {placeholder} exactamente igual. Nunca traduzcas las coordenadas, las letras de las fichas B/W, el formato de jugada '[row, col]' ni el tablero ASCII. Usa la terminología de los juegos de tablero afines (tablero, jugadas válidas, gana, empate).",
+  "_slots": {
+    "{player_id}": "El número del jugador, 0 o 1",
+    "{pid}": "El número del jugador, 0 o 1",
+    "{colour}": "El nombre de color mostrado del jugador (Negras / Blancas)",
+    "{piece}": "La letra de la ficha del jugador, B o W (no traducir)",
+    "{board}": "El tablero ASCII ya renderizado (no traducir)",
+    "{valid}": "La línea ya renderizada de jugadas válidas / sin jugadas válidas (puede estar vacía)",
+    "{moves}": "Lista neutral separada por comas de jugadas válidas como '[2, 3]', '[3, 2]' (no traducir)",
+    "{valid_list}": "Representación neutral de lista de Python de las jugadas válidas (no traducir)",
+    "{black}": "Número de fichas negras en el tablero",
+    "{white}": "Número de fichas blancas en el tablero",
+    "{r}": "La coordenada de fila de la jugada realizada (no traducir)",
+    "{c}": "La coordenada de columna de la jugada realizada (no traducir)",
+    "{flipped}": "Número de fichas del rival volteadas por la jugada",
+    "{b}": "Recuento final de fichas negras",
+    "{w}": "Recuento final de fichas blancas"
+  },
+
+  "pieces": {
+    "black": "Negras",
+    "white": "Blancas"
+  },
+
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id} y juegas con {colour} ({piece}) en una partida de Othello.\nTu objetivo es tener más fichas de tu color en el tablero al final de la partida.\nEn tu turno, coloca una ficha de modo que flanquee una o más fichas del rival en cualquier dirección (horizontal, vertical o diagonal) entre tu nueva ficha y otra de tus fichas existentes. Todas las fichas del rival flanqueadas se voltearán a tu color.\nIndica tu jugada en el formato '[row, col]'."
+  },
+
+  "board": {
+    "observation_initial": "Tablero de juego:\n{board}{valid}\nPuntuación actual - Negras: {black}, Blancas: {white}\n",
+    "observation": "Tablero de juego:\n{board}{valid}\nPuntuación - Negras: {black}, Blancas: {white}\n",
+    "valid_moves": "\nJugadas válidas: {moves}",
+    "no_valid_moves_skip": "\nSin jugadas válidas - es posible que debas pasar.",
+    "no_valid_moves_skip_endash": "\nSin jugadas válidas – es posible que debas pasar."
+  },
+
+  "invalid_move": {
+    "wrong_format": "La jugada debe tener el formato [row, col].",
+    "illegal": "Jugada ilegal. Jugadas válidas: {valid_list}"
+  },
+
+  "game_action": {
+    "skip_turn": "El Jugador {pid} tuvo que pasar su turno",
+    "played": "El Jugador {pid} ({piece}) jugó [{r}, {c}] volteando {flipped} ficha(s)"
+  },
+
+  "game_message": {
+    "must_skip": "El Jugador {pid} ({piece}) no tiene jugadas válidas y debe pasar."
+  },
+
+  "outcome": {
+    "black_wins": "Negras ganan {b}-{w}.",
+    "white_wins": "Blancas ganan {w}-{b}.",
+    "draw": "Empate {b}-{w}."
+  }
+}

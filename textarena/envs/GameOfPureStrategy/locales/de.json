@@ -1,0 +1,45 @@
+{
+  "_comment": "GameOfPureStrategy Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel, nur die Werte. Behalte jeden {platzhalter} exakt bei. Übersetze niemals die Karten-Token in eckigen Klammern (z. B. [A], [10], [Q], [K]) oder die Markierung '### ' und das Symbol '->'.",
+  "_slots": {
+    "{player_id}": "Die Spielernummer, 0 oder 1",
+    "{round}": "Die aktuelle Rundennummer, 1..13",
+    "{prize}": "Der Kartenwert der aufgedeckten Preiskarte (A, 2..10, J, Q, K) - nicht übersetzen",
+    "{worth}": "Der Gesamtwert des Preises einschließlich eines übertragenen Pots",
+    "{hand}": "Die verbleibenden Karten des Spielers, dargestellt als Token in eckigen Klammern wie '[A]' '[2]' - nicht übersetzen",
+    "{bid0}": "Der Kartenwert der von Spieler 0 gespielten Karte - nicht übersetzen",
+    "{bid1}": "Der Kartenwert der von Spieler 1 gespielten Karte - nicht übersetzen",
+    "{outcome}": "Der angezeigte Rundenausgang (wer gewonnen hat oder das Unentschieden-Ergebnis)",
+    "{pot}": "Der in dieser Runde vergebene oder übertragene Pot-Wert",
+    "{s0}": "Gesamtpunktzahl von Spieler 0",
+    "{s1}": "Gesamtpunktzahl von Spieler 1",
+    "{s}": "Der gleiche Endstand, den beide Spieler erreicht haben"
+  },
+
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in einer Partie GameOfPureStrategy.\n- Du hältst die 13 Karten A-K; jede kann einmal verwendet werden.\n- In jeder Runde wird eine Preiskarte aufgedeckt. Spiele genau EINE Karte, indem du etwas schreibst, das ein Token in eckigen Klammern enthält, wie '[Q]', '[10]', '[2]' ...\n- Die höhere Karte gewinnt den Preis (plus Übertrag). Bei Gleichstand wandert der Preis in den Pot für die nächste Runde.\n- Die höchste Gesamtsumme nach 13 Runden gewinnt."
+  },
+
+  "round": {
+    "header": "### Runde {round}/13 - Preis: {prize}  (Wert {worth})",
+    "hand":   "Deine verbleibende Hand: {hand}"
+  },
+
+  "reveal": {
+    "bids":    "Gebote: P0 {bid0} vs P1 {bid1} - {outcome}",
+    "p0_wins": "Spieler 0 gewinnt {pot}.",
+    "p1_wins": "Spieler 1 gewinnt {pot}.",
+    "tie":     "Gleichstand -> Pot jetzt {pot}.",
+    "scores":  "Punkte -> P0:{s0}  P1:{s1}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Die Aktion muss genau EIN Karten-Token in eckigen Klammern enthalten.",
+    "no_card":      "Du hast diese Karte nicht mehr."
+  },
+
+  "outcome": {
+    "win_p0": "P0 {s0} gegen P1 {s1}",
+    "win_p1": "P1 {s1} gegen P0 {s0}",
+    "draw":   "Beide erreichten {s}"
+  }
+}

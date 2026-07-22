@@ -1,0 +1,45 @@
+{
+  "_comment": "Archivo de idioma de GameOfPureStrategy en español. NO traduzcas las claves, solo los valores. Conserva cada {marcador} exactamente igual. Nunca traduzcas los tokens de carta entre corchetes (p. ej. [A], [10], [Q], [K]) ni la marca '### ' ni el símbolo '->'.",
+  "_slots": {
+    "{player_id}": "El número del jugador, 0 o 1",
+    "{round}": "El número de la ronda actual, 1..13",
+    "{prize}": "La etiqueta de la carta premio revelada (A, 2..10, J, Q, K) - no traducir",
+    "{worth}": "El valor total del premio incluyendo cualquier bote acumulado",
+    "{hand}": "Las cartas restantes del jugador, mostradas como tokens entre corchetes como '[A]' '[2]' - no traducir",
+    "{bid0}": "La etiqueta de la carta jugada por el jugador 0 - no traducir",
+    "{bid1}": "La etiqueta de la carta jugada por el jugador 1 - no traducir",
+    "{outcome}": "La frase de resultado de la ronda (quién ganó o el resultado de empate)",
+    "{pot}": "El valor del bote otorgado o acumulado en esta ronda",
+    "{s0}": "Puntuación total del jugador 0",
+    "{s1}": "Puntuación total del jugador 1",
+    "{s}": "La puntuación final empatada que ambos jugadores alcanzaron"
+  },
+
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id} en una partida de GameOfPureStrategy.\n- Tienes las 13 cartas A-K; cada una se puede usar una vez.\n- En cada ronda se revela una carta premio. Juega exactamente UNA carta escribiendo algo que contenga un token entre corchetes como '[Q]', '[10]', '[2]' ...\n- La carta más alta gana el premio (más el acumulado). Los empates pasan el premio al bote para la siguiente ronda.\n- Gana el total más alto tras 13 rondas."
+  },
+
+  "round": {
+    "header": "### Ronda {round}/13 - Premio: {prize}  (vale {worth})",
+    "hand":   "Tu mano restante: {hand}"
+  },
+
+  "reveal": {
+    "bids":    "Apuestas: P0 {bid0} vs P1 {bid1} - {outcome}",
+    "p0_wins": "El Jugador 0 gana {pot}.",
+    "p1_wins": "El Jugador 1 gana {pot}.",
+    "tie":     "Empate -> bote ahora {pot}.",
+    "scores":  "Puntuaciones -> P0:{s0}  P1:{s1}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "La acción debe contener exactamente UN token de carta entre corchetes.",
+    "no_card":      "Ya no tienes esa carta."
+  },
+
+  "outcome": {
+    "win_p0": "P0 {s0} contra P1 {s1}",
+    "win_p1": "P1 {s1} contra P0 {s0}",
+    "draw":   "Ambos anotaron {s}"
+  }
+}

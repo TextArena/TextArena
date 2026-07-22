@@ -1,0 +1,57 @@
+{
+  "_comment": "Fail bahasa Othello dalam bahasa Melayu. JANGAN terjemah kunci (sebelah kiri), hanya nilai (sebelah kanan). Kekalkan setiap {placeholder} tepat seperti asal. Jangan sekali-kali terjemah koordinat, huruf buah B/W, format gerakan '[row, col]' atau papan ASCII. Selaraskan istilah dengan permainan papan seakar (papan, gerakan sah, menang, seri).",
+  "_slots": {
+    "{player_id}": "Nombor pemain, 0 atau 1",
+    "{pid}": "Nombor pemain, 0 atau 1",
+    "{colour}": "Nama warna pemain yang dipaparkan (Hitam / Putih)",
+    "{piece}": "Huruf buah pemain, sama ada B atau W (jangan terjemah)",
+    "{board}": "Papan ASCII yang telah dipaparkan (jangan terjemah)",
+    "{valid}": "Baris gerakan sah / tiada gerakan sah yang telah dipaparkan (boleh kosong)",
+    "{moves}": "Senarai neutral dipisahkan koma bagi gerakan sah seperti '[2, 3]', '[3, 2]' (jangan terjemah)",
+    "{valid_list}": "Perwakilan senarai Python neutral bagi gerakan sah (jangan terjemah)",
+    "{black}": "Bilangan buah hitam di atas papan",
+    "{white}": "Bilangan buah putih di atas papan",
+    "{r}": "Koordinat baris bagi gerakan yang dimainkan (jangan terjemah)",
+    "{c}": "Koordinat lajur bagi gerakan yang dimainkan (jangan terjemah)",
+    "{flipped}": "Bilangan buah lawan yang diterbalikkan oleh gerakan",
+    "{b}": "Jumlah akhir buah hitam",
+    "{w}": "Jumlah akhir buah putih"
+  },
+
+  "pieces": {
+    "black": "Hitam",
+    "white": "Putih"
+  },
+
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} yang bermain {colour} ({piece}) dalam permainan Othello.\nMatlamat anda adalah untuk mempunyai lebih banyak buah warna anda di atas papan pada akhir permainan.\nPada giliran anda, letakkan sebuah buah supaya ia mengapit satu atau lebih buah lawan dalam mana-mana arah (mendatar, menegak atau menyerong) antara buah baharu anda dan sebuah lagi buah sedia ada anda. Semua buah lawan yang diapit akan diterbalikkan kepada warna anda.\nBerikan gerakan anda dalam format '[row, col]'."
+  },
+
+  "board": {
+    "observation_initial": "Papan Permainan:\n{board}{valid}\nMarkah Semasa - Hitam: {black}, Putih: {white}\n",
+    "observation": "Papan Permainan:\n{board}{valid}\nMarkah - Hitam: {black}, Putih: {white}\n",
+    "valid_moves": "\nGerakan sah: {moves}",
+    "no_valid_moves_skip": "\nTiada gerakan sah - anda mungkin terpaksa melangkau.",
+    "no_valid_moves_skip_endash": "\nTiada gerakan sah – anda mungkin terpaksa melangkau."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Gerakan mesti dalam format [row, col].",
+    "illegal": "Gerakan tidak sah. Gerakan sah: {valid_list}"
+  },
+
+  "game_action": {
+    "skip_turn": "Pemain {pid} terpaksa melangkau giliran mereka",
+    "played": "Pemain {pid} ({piece}) memainkan [{r}, {c}] menerbalikkan {flipped} buah"
+  },
+
+  "game_message": {
+    "must_skip": "Pemain {pid} ({piece}) tiada gerakan sah dan mesti melangkau."
+  },
+
+  "outcome": {
+    "black_wins": "Hitam menang {b}-{w}.",
+    "white_wins": "Putih menang {w}-{b}.",
+    "draw": "Seri {b}-{w}."
+  }
+}

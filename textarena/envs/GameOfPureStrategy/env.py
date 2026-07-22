@@ -31,11 +31,7 @@ class GameOfPureStrategyEnv(ta.Env):
         self._start_round()
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are Player {player_id} in a match of GameOfPureStrategy.\n- You hold the 13 cards A-K; each can be used once.\n- Each round a prize card is revealed. Play exactly ONE card "
-            f"by writing something that contains a bracketed token like '[Q]', '[10]', '[2]' ...\n- Higher card wins the prize (plus carry-over). Ties roll prize "
-            f"into the pot for next round.\n- Highest total after 13 rounds wins."
-        )
+        return self.m("player_prompt", "intro", player_id=player_id)
 
     def _start_round(self):
         gs = self.state.game_state
@@ -43,9 +39,9 @@ class GameOfPureStrategyEnv(ta.Env):
 
         if gs["round"] > 13:
             s0, s1 = gs["player_scores"].values()
-            if s0 > s1:     self.state.set_winner(0, f"P0 {s0} vs P1 {s1}")
-            elif s1 > s0:   self.state.set_winner(1, f"P1 {s1} vs P0 {s0}")
-            else:           self.state.set_draw(f"Both scored {s0}")
+            if s0 > s1:     self.state.set_winner(0, self.m("outcome", "win_p0", s0=s0, s1=s1))
+            elif s1 > s0:   self.state.set_winner(1, self.m("outcome", "win_p1", s0=s0, s1=s1))
+            else:           self.state.set_draw(self.m("outcome", "draw", s=s0))
             return
 
         gs["current_prize"] = gs["prize_deck"][gs["round"] - 1]
@@ -55,8 +51,8 @@ class GameOfPureStrategyEnv(ta.Env):
 
         for pid in (0, 1):
             hand_str = " ".join(f"'[{self._val_to_face(c)}]'" for c in gs["player_hands"][pid])
-            self.state.add_observation(to_id=pid, message=f"### Round {gs['round']}/13 - Prize: {self._val_to_face(gs['current_prize'])}  (worth {gs['current_prize'] + gs['carry_pot']})", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.state.add_observation(to_id=pid, message=f"Your remaining hand: {hand_str}", observation_type=ta.ObservationType.GAME_BOARD)
+            self.state.add_observation(to_id=pid, message=self.m("round", "header", round=gs['round'], prize=self._val_to_face(gs['current_prize']), worth=gs['current_prize'] + gs['carry_pot']), observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(to_id=pid, message=self.m("round", "hand", hand=hand_str), observation_type=ta.ObservationType.GAME_BOARD)
 
     def step(self, action: str) -> Tuple[bool, Dict[str, Any]]:
         pid = self.state.current_player_id
@@ -64,14 +60,14 @@ class GameOfPureStrategyEnv(ta.Env):
         self.state.add_observation(from_id=pid, to_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
 
         tokens = self.action_space.findall(action.lower())
-        if len(tokens) != 1 or len(gs["pending_bids"]) >= 2: 
-            self.state.set_invalid_move(reason="Action must contain exactly ONE bracketed card token.")
+        if len(tokens) != 1 or len(gs["pending_bids"]) >= 2:
+            self.state.set_invalid_move(reason=self.m("invalid_move", "wrong_format"))
             return self.state.step()
 
         face = tokens[0]
         bid_val = self._face_to_val(face)
         if bid_val not in gs["player_hands"][pid]:
-            self.state.set_invalid_move(reason="You no longer have that card.")
+            self.state.set_invalid_move(reason=self.m("invalid_move", "no_card"))
             return self.state.step()
 
         # record bid secretly
@@ -85,12 +81,11 @@ class GameOfPureStrategyEnv(ta.Env):
         pot_value  = gs["current_prize"] + gs["carry_pot"]
         gs["carry_pot"] = 0
 
-        reveal = (f"Bids: P0 {self._val_to_face(bid0)} vs P1 {self._val_to_face(bid1)} - ")
-        if bid0 > bid1:     gs["player_scores"][0] += pot_value;    reveal += f"Player 0 wins {pot_value}."
-        elif bid1 > bid0:   gs["player_scores"][1] += pot_value;    reveal += f"Player 1 wins {pot_value}."
-        else:               gs["carry_pot"] += pot_value;           reveal += f"Tie -> pot now {gs['carry_pot']}."
-        self.state.add_observation(message=reveal, observation_type=ta.ObservationType.GAME_MESSAGE)
-        self.state.add_observation(message=f"Scores -> P0:{gs['player_scores'][0]}  P1:{gs['player_scores'][1]}", observation_type=ta.ObservationType.GAME_MESSAGE)
+        if bid0 > bid1:     gs["player_scores"][0] += pot_value;    outcome = self.m("reveal", "p0_wins", pot=pot_value)
+        elif bid1 > bid0:   gs["player_scores"][1] += pot_value;    outcome = self.m("reveal", "p1_wins", pot=pot_value)
+        else:               gs["carry_pot"] += pot_value;           outcome = self.m("reveal", "tie", pot=gs['carry_pot'])
+        self.state.add_observation(message=self.m("reveal", "bids", bid0=self._val_to_face(bid0), bid1=self._val_to_face(bid1), outcome=outcome), observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(message=self.m("reveal", "scores", s0=gs['player_scores'][0], s1=gs['player_scores'][1]), observation_type=ta.ObservationType.GAME_MESSAGE)
 
         self._start_round()
         return self.state.step(rotate_player=False)
