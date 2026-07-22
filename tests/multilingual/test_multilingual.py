@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+"""Multilingual regression + smoke test for localized envs.
+
+For every game in game_scenarios.GAMES:
+  * GOLDEN IDENTITY - the English transcript must byte-match the committed
+    goldens/<Game>.en.json (proves later edits don't silently change output).
+  * CROSS-LINGUAL SMOKE - the game runs to completion under a mixed-language
+    mapping and every non-English language without raising (catches format/slot
+    crashes the English path can't reveal).
+
+Run:
+    python3 tests/multilingual/test_multilingual.py            # verify
+    python3 tests/multilingual/test_multilingual.py --update   # (re)write goldens
+
+Exit code 0 = pass. No third-party deps.
+"""
+import argparse
+import os
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(os.path.dirname(HERE))
+sys.path.insert(0, REPO_ROOT)   # so `import textarena` resolves
+sys.path.insert(0, HERE)        # so sibling test modules resolve
+
+from golden_runner import run_game, canonical, load_env, run_scenario  # noqa: E402
+from game_scenarios import GAMES  # noqa: E402
+
+GOLDEN_DIR = os.path.join(HERE, "goldens")
+LANGS = ["ar", "de", "en", "es", "fr", "he", "ms", "zh"]
+
+
+def golden_path(game):
+    return os.path.join(GOLDEN_DIR, f"{game}.en.json")
+
+
+def update_goldens():
+    os.makedirs(GOLDEN_DIR, exist_ok=True)
+    for game, spec in GAMES.items():
+        text = canonical(run_game(spec, "en"))
+        with open(golden_path(game), "w", encoding="utf-8") as f:
+            f.write(text + "\n")
+        print(f"wrote {golden_path(game)}")
+
+
+def verify():
+    failures = 0
+    for game, spec in GAMES.items():
+        # 1. English golden identity
+        path = golden_path(game)
+        if not os.path.exists(path):
+            print(f"FAIL {game}: no committed golden ({path}); run --update")
+            failures += 1
+            continue
+        with open(path, encoding="utf-8") as f:
+            committed = f.read().rstrip("\n")
+        produced = canonical(run_game(spec, "en"))
+        if produced == committed:
+            print(f"OK   {game}: english golden identical")
+        else:
+            print(f"FAIL {game}: english transcript differs from committed golden")
+            failures += 1
+
+        # 2. Cross-lingual smoke: mixed mapping + every non-en language
+        n = spec.get("num_players", 2)
+        mixed = {i: LANGS[i % len(LANGS)] for i in range(n)}
+        try:
+            for lang in LANGS:
+                run_game(spec, lang)
+            EnvCls = load_env(spec["entry"])
+            for name, actions in spec["scenarios"].items():
+                run_scenario(EnvCls, actions, dict(mixed), num_players=n, seed=spec.get("seed", 42))
+            print(f"OK   {game}: cross-lingual smoke ({len(LANGS)} langs + mixed) no errors")
+        except Exception as e:  # noqa: BLE001
+            print(f"FAIL {game}: cross-lingual smoke raised {type(e).__name__}: {e}")
+            failures += 1
+
+    print()
+    if failures:
+        print(f"FAILED: {failures} check(s) failed.")
+        return 1
+    print(f"PASSED: {len(GAMES)} game(s).")
+    return 0
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--update", action="store_true", help="regenerate committed goldens")
+    args = ap.parse_args()
+    if args.update:
+        update_goldens()
+        return 0
+    return verify()
+
+
+if __name__ == "__main__":
+    sys.exit(main())

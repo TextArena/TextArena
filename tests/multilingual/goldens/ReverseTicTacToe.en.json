@@ -1,0 +1,1346 @@
+{
+  "already_occupied": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 loses by completing a line!",
+        "role": "Player 0",
+        "turn_count": 3
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 loses by completing a line!",
+        "role": "Player 1",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a game of Reverse Tic Tac Toe. Your symbol is 'O'.\nThe goal is to avoid getting three in a row (horizontally, vertically, or diagonally).\nIf you make three in a row, you LOSE.\nSubmit your move using the format '[4]' to place your symbol in cell 4.\nAs Player 0, you are 'O' and your opponent is 'X'.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a game of Reverse Tic Tac Toe. Your symbol is 'X'.\nThe goal is to avoid getting three in a row (horizontally, vertically, or diagonally).\nIf you make three in a row, you LOSE.\nSubmit your move using the format '[4]' to place your symbol in cell 4.\nAs Player 1, you are 'X' and your opponent is 'O'.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 0.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 attempted an invalid move. Reason: Cell 0 is already occupied. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 1,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 0.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 3.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 3.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 1.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 1.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 4.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | 2 \n---+---+---\n X | X | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[2]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 2.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | O \n---+---+---\n X | X | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[5]', '[6]', '[7]', '[8]'",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": -1,
+      "1": 1
+    }
+  },
+  "draw": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "It's a draw! No one lost.",
+        "role": "Player 0",
+        "turn_count": 5
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "It's a draw! No one lost.",
+        "role": "Player 1",
+        "turn_count": 4
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a game of Reverse Tic Tac Toe. Your symbol is 'O'.\nThe goal is to avoid getting three in a row (horizontally, vertically, or diagonally).\nIf you make three in a row, you LOSE.\nSubmit your move using the format '[4]' to place your symbol in cell 4.\nAs Player 0, you are 'O' and your opponent is 'X'.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a game of Reverse Tic Tac Toe. Your symbol is 'X'.\nThe goal is to avoid getting three in a row (horizontally, vertically, or diagonally).\nIf you make three in a row, you LOSE.\nSubmit your move using the format '[4]' to place your symbol in cell 4.\nAs Player 1, you are 'X' and your opponent is 'O'.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 0.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 0.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 2.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | X \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 2.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | X \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 1.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | X \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 1.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | X \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 3.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | X \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 3.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | X \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 5.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | X \n---+---+---\n X | 4 | O \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[4]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 5.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | X \n---+---+---\n X | 4 | O \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[4]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 4.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | X \n---+---+---\n X | X | O \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[6]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[4]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 4.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | X \n---+---+---\n X | X | O \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[6]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 6.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | X \n---+---+---\n X | X | O \n---+---+---\n O | 7 | 8 \n\nAvailable Moves: '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[7]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[6]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 6.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | X \n---+---+---\n X | X | O \n---+---+---\n O | 7 | 8 \n\nAvailable Moves: '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[7]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 7.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | X \n---+---+---\n X | X | O \n---+---+---\n O | X | 8 \n\nAvailable Moves: '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[8]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[8]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 8.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | X \n---+---+---\n X | X | O \n---+---+---\n O | X | O \n\nAvailable Moves: ",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": 0,
+      "1": 0
+    }
+  },
+  "invalid_cell": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 loses by completing a line!",
+        "role": "Player 0",
+        "turn_count": 3
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 loses by completing a line!",
+        "role": "Player 1",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a game of Reverse Tic Tac Toe. Your symbol is 'O'.\nThe goal is to avoid getting three in a row (horizontally, vertically, or diagonally).\nIf you make three in a row, you LOSE.\nSubmit your move using the format '[4]' to place your symbol in cell 4.\nAs Player 0, you are 'O' and your opponent is 'X'.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[99]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[99]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid cell index. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a game of Reverse Tic Tac Toe. Your symbol is 'X'.\nThe goal is to avoid getting three in a row (horizontally, vertically, or diagonally).\nIf you make three in a row, you LOSE.\nSubmit your move using the format '[4]' to place your symbol in cell 4.\nAs Player 1, you are 'X' and your opponent is 'O'.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[99]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 0.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 0.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 3.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 3.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 1.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 1.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 4.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | 2 \n---+---+---\n X | X | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[2]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 2.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | O \n---+---+---\n X | X | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[5]', '[6]', '[7]', '[8]'",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": -1,
+      "1": 1
+    }
+  },
+  "lose_by_line": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 loses by completing a line!",
+        "role": "Player 0",
+        "turn_count": 3
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 loses by completing a line!",
+        "role": "Player 1",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a game of Reverse Tic Tac Toe. Your symbol is 'O'.\nThe goal is to avoid getting three in a row (horizontally, vertically, or diagonally).\nIf you make three in a row, you LOSE.\nSubmit your move using the format '[4]' to place your symbol in cell 4.\nAs Player 0, you are 'O' and your opponent is 'X'.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a game of Reverse Tic Tac Toe. Your symbol is 'X'.\nThe goal is to avoid getting three in a row (horizontally, vertically, or diagonally).\nIf you make three in a row, you LOSE.\nSubmit your move using the format '[4]' to place your symbol in cell 4.\nAs Player 1, you are 'X' and your opponent is 'O'.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 0.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 0.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 3.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 3.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 1.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 1.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 4.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | 2 \n---+---+---\n X | X | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[2]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 2.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | O \n---+---+---\n X | X | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[5]', '[6]', '[7]', '[8]'",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": -1,
+      "1": 1
+    }
+  },
+  "wrong_format": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 loses by completing a line!",
+        "role": "Player 0",
+        "turn_count": 3
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 loses by completing a line!",
+        "role": "Player 1",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a game of Reverse Tic Tac Toe. Your symbol is 'O'.\nThe goal is to avoid getting three in a row (horizontally, vertically, or diagonally).\nIf you make three in a row, you LOSE.\nSubmit your move using the format '[4]' to place your symbol in cell 4.\nAs Player 0, you are 'O' and your opponent is 'X'.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "bad",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "bad",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid move format. Use '[cell]'. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a game of Reverse Tic Tac Toe. Your symbol is 'X'.\nThe goal is to avoid getting three in a row (horizontally, vertically, or diagonally).\nIf you make three in a row, you LOSE.\nSubmit your move using the format '[4]' to place your symbol in cell 4.\nAs Player 1, you are 'X' and your opponent is 'O'.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "bad",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 0.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 0.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 3.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 3.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | 1 | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[1]', '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 1.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 1.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | 2 \n---+---+---\n X | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[2]', '[4]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol (X) in cell 4.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | 2 \n---+---+---\n X | X | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[2]', '[5]', '[6]', '[7]', '[8]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol (O) in cell 2.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n O | O | O \n---+---+---\n X | X | 5 \n---+---+---\n 6 | 7 | 8 \n\nAvailable Moves: '[5]', '[6]', '[7]', '[8]'",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": -1,
+      "1": 1
+    }
+  }
+}

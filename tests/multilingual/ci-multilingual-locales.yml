@@ -1,0 +1,38 @@
+# TEMPLATE — move this file to .github/workflows/multilingual-locales.yml to activate.
+# (It ships here rather than under .github/workflows/ because the PR was pushed with a
+# token lacking GitHub's `workflow` scope; the content is ready to use as-is.)
+name: multilingual-locales
+
+# Validates localized envs: locale-file integrity + English golden identity +
+# cross-lingual smoke. Scoped to locale/tooling paths so it does not overlap with
+# other CI.
+on:
+  pull_request:
+    paths:
+      - "textarena/envs/**/locales/**"
+      - "textarena/utils/locales/**"
+      - "scripts/check_locales.py"
+      - "tests/multilingual/**"
+      - ".github/workflows/multilingual-locales.yml"
+  push:
+    paths:
+      - "textarena/envs/**/locales/**"
+      - "tests/multilingual/**"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install package
+        run: python -m pip install -e .
+      - name: Locale integrity (games covered by this suite)
+        run: |
+          GAMES=$(PYTHONPATH=tests/multilingual python -c "from game_scenarios import GAMES; print(' '.join(GAMES))")
+          echo "Checking: $GAMES"
+          python scripts/check_locales.py $GAMES
+      - name: Golden identity + cross-lingual smoke
+        run: python tests/multilingual/test_multilingual.py
