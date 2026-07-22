@@ -1,0 +1,53 @@
+{
+  "_comment": "Fichier de langue de Stratego en français. NE traduis PAS les clés, seulement les valeurs. Conserve chaque {marqueur} exactement tel quel. Ne traduis jamais les coordonnées du plateau comme A0/B0, les noms de grade passés dans les slots ({attacker}/{target}), le format de coup '[A0 B0]', les abréviations des pièces (MN, MS, ...), le symbole de lac '~' ni le plateau ASCII {board}.",
+  "_slots": {
+    "{player_id}": "Le numéro du joueur, 0 ou 1",
+    "{source}": "La coordonnée de départ d'un coup, p. ex. A0 (ne pas traduire)",
+    "{dest}": "La coordonnée d'arrivée d'un coup, p. ex. B0 (ne pas traduire)",
+    "{attacker}": "Le nom du grade de la pièce attaquante en anglais, p. ex. Scout, Miner, Marshal (ne pas traduire)",
+    "{target}": "Le nom du grade de la pièce défenseuse en anglais, p. ex. Bomb, Flag, Marshal (ne pas traduire)",
+    "{board}": "Le plateau ASCII pré-rendu (ne pas traduire)",
+    "{moves}": "Liste neutre séparée par des virgules des coups légaux comme [A0 B0], [D2 E2] (ne pas traduire)",
+    "{winner}": "Le numéro du joueur gagnant, 0 ou 1",
+    "{loser}": "Le numéro du joueur perdant, 0 ou 1"
+  },
+  "player_prompt": {
+    "intro": "Tu es le Joueur {player_id} dans Stratego.\nTon objectif est de capturer le Drapeau de ton adversaire ou d'éliminer toutes ses pièces mobiles.\nTon armée a été placée pour toi sur le plateau, y compris ton Drapeau, tes Bombes et d'autres pièces de grades variés.\n\n### Instructions de jeu\n1. **Règles de déplacement :**\n   - À ton tour, tu peux déplacer une pièce d'une case vers une case adjacente (haut, bas, gauche ou droite) qui n'est pas déjà occupée par tes pièces.\n   - Exemple : une pièce peut se déplacer de A1 à B1 ou de A1 à A2 si B1 et A2 ne sont pas occupées par les pièces du joueur.\n   - Si la pièce sélectionnée est une Bombe ou un Drapeau, elle ne peut pas être déplacée.\n2. **Batailles :**\n   - Si tu te déplaces sur une case occupée par une pièce adverse, une bataille se produit :\n     - La pièce du grade le plus élevé gagne et élimine la pièce adverse.\n     - Si les grades sont égaux, les deux pièces sont retirées du plateau.\n     - **Cas particuliers :**\n       - Les Bombes éliminent la plupart des pièces attaquantes, sauf les Démineurs, qui désamorcent les Bombes.\n       - Les Espions peuvent vaincre le Maréchal si l'Espion attaque en premier, mais perdent contre toutes les autres pièces.\n3. **Objectifs stratégiques :**\n   - Identifie les pièces de ton adversaire grâce à leurs déplacements et à leurs batailles.\n   - Protège ton Drapeau tout en essayant de capturer le Drapeau de ton adversaire.\n   - Utilise les Éclaireurs de manière stratégique pour obtenir des informations sur les pièces de ton adversaire et attaquer les plus faibles.\n\n### Comment jouer un coup :\n1. Indique les coordonnées de la pièce que tu veux déplacer et sa destination.\n2. Utilise le format : [A0 B0], où A0 est la position de départ et B0 la destination.\n   - Exemple : pour déplacer une pièce de la ligne 0, colonne 0 vers la ligne 1, colonne 0, saisis [A0 B0].\n3. Assure-toi que la destination est valide selon les règles de déplacement ci-dessus.\n\n### Remarques importantes :\n- Le plateau affichera tes pièces et leurs positions, p. ex. MN, MS.\n- Le plateau affichera aussi les positions connues des pièces de ton adversaire sans révéler leurs grades, p. ex. ?.\n- Les cases avec ~ sont des lacs et on ne peut pas s'y déplacer.\n- Comme suggestion, commence ta partie en déplaçant tes pièces de la ligne de front pour obtenir des informations sur les pièces de ton adversaire. Les lignes de front du Joueur 0 et du Joueur 1 sont respectivement la ligne D et la ligne G.\n\nVoici l'état actuel du plateau :\n"
+  },
+  "board": {
+    "current_board": "Plateau actuel :\n\n{board}\nCoups disponibles : {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format d'action invalide. Le Joueur {player_id} n'a pas saisi de coup au format [A0 B0].",
+    "invalid_coords": "Format d'action invalide. Le Joueur {player_id} n'a pas saisi de coordonnées valides.",
+    "not_own_piece": "Format d'action invalide. Le Joueur {player_id} doit déplacer l'une de ses propres pièces.",
+    "scout_through": "Format d'action invalide. Le Joueur {player_id} ne peut pas déplacer un éclaireur à travers d'autres pièces.",
+    "scout_diagonal": "Format d'action invalide. Le Joueur {player_id} ne peut pas déplacer un éclaireur en diagonale.",
+    "not_scout_one_square": "Format d'action invalide. Les pièces, à l'exception des éclaireurs, ne peuvent se déplacer que d'une case à la fois.",
+    "into_lake": "Format d'action invalide. Le Joueur {player_id} ne peut pas se déplacer dans le lac.",
+    "onto_own": "Format d'action invalide. Le Joueur {player_id} ne peut pas se déplacer sur l'une de ses propres pièces.",
+    "bomb_or_flag": "Format d'action invalide. Le Joueur {player_id} ne peut pas déplacer une bombe ou un drapeau."
+  },
+  "game_action": {
+    "moved_self": "Tu as déplacé ta pièce de {source} à {dest}.",
+    "moved_opp": "Le Joueur {player_id} a déplacé une pièce de {source} à {dest}."
+  },
+  "battle": {
+    "equal_self": "Tu as déplacé ta pièce de {source} à {dest}. La pièce attaquante était {attacker} et la pièce de destination était {target}. Comme les grades sont identiques, les deux pièces sont perdues.",
+    "equal_opp": "Le Joueur {player_id} a déplacé une pièce de {source} à {dest}. La pièce attaquante était {attacker} et la pièce de destination était {target}. Comme les grades sont identiques, les deux pièces sont perdues.",
+    "miner_defuse_self": "Tu as déplacé ta pièce de {source} à {dest}. La pièce attaquante était {attacker} et la pièce de destination était {target}. Comme les démineurs peuvent désamorcer les bombes, tu as gagné la bataille.",
+    "miner_defuse_opp": "Le Joueur {player_id} a déplacé une pièce de {source} à {dest}. La pièce attaquante était {attacker} et la pièce de destination était {target}. Comme les démineurs peuvent désamorcer les bombes, tu as perdu la bataille.",
+    "bomb_self": "Tu as déplacé ta pièce de {source} à {dest}. La pièce attaquante était {attacker} et la pièce de destination était {target}. Comme l'attaquant n'est pas un démineur, tu as perdu la bataille.",
+    "bomb_opp": "Le Joueur {player_id} a déplacé une pièce de {source} à {dest}. La pièce attaquante était {attacker} et la pièce de destination était {target}. Comme l'attaquant n'est pas un démineur, tu as gagné la bataille.",
+    "spy_marshal_self": "Tu as déplacé ta pièce de {source} à {dest}. La pièce attaquante était {attacker} et la pièce de destination était {target}. Comme l'attaquant est un espion et la destination un maréchal, tu as gagné la bataille.",
+    "spy_marshal_opp": "Le Joueur {player_id} a déplacé une pièce de {source} à {dest}. La pièce attaquante était {attacker} et la pièce de destination était {target}. Comme l'attaquant est un espion et la destination un maréchal, tu as perdu la bataille.",
+    "higher_self": "Tu as déplacé ta pièce de {source} à {dest}. La pièce attaquante était {attacker} et la pièce de destination était {target}. Comme l'attaquant a un grade plus élevé que la destination, tu as gagné la bataille.",
+    "higher_opp": "Le Joueur {player_id} a déplacé une pièce de {source} à {dest}. La pièce attaquante était {attacker} et la pièce de destination était {target}. Comme l'attaquant a un grade plus élevé que la destination, tu as perdu la bataille.",
+    "lower_self": "Tu as déplacé ta pièce de {source} à {dest}. La pièce attaquante était {attacker} et la pièce de destination était {target}. Comme l'attaquant a un grade plus bas que la destination, tu as perdu la bataille.",
+    "lower_opp": "Le Joueur {player_id} a déplacé une pièce de {source} à {dest}. La pièce attaquante était {attacker} et la pièce de destination était {target}. Comme l'attaquant a un grade plus bas que la destination, tu as gagné la bataille."
+  },
+  "outcome": {
+    "flag_captured": "Le Joueur {player_id} a capturé le drapeau de l'adversaire !",
+    "no_movable_pieces": "Le Joueur {winner} gagne ! Le Joueur {loser} n'a plus de pièces mobiles."
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "_comment": "Fail lokal Hanabi dalam bahasa Melayu. JANGAN terjemahkan kekunci (bahagian kiri); terjemahkan nilai sahaja. Kekalkan setiap {placeholder} tepat seperti asal. Jangan sekali-kali terjemahkan token tindakan ('[Reveal]', '[Play]', '[Discard]'), format input literal 'player N card X color C' dan sebagainya, atau pangkat/bilangan token berangka. Perkataan warna kad ('white', 'yellow', 'green', 'blue', 'red') muncul sebagai prosa dan PATUT diterjemahkan melalui blok 'color'; kekalkan konsisten di mana-mana warna muncul (label bunga api, penerangan kad, senarai warna sah). Dalam senarai warna sah, perkataan kekal dalam bahasa Inggeris kerana ia adalah input yang dibenarkan.",
+  "_slots": {
+    "{player_id}": "Nombor pemain (indeks), contohnya 0 atau 1",
+    "{num_players}": "Jumlah bilangan pemain dalam permainan",
+    "{pid}": "Nombor pemain (indeks)",
+    "{player}": "Nombor pemain (indeks) yang dirujuk dalam petunjuk, dikekalkan sebagai nombor neutral",
+    "{color}": "Perkataan warna kad, atau rentetan warna mentah yang ditaip pemain (dikekalkan seadanya untuk input tidak sah)",
+    "{rank}": "Pangkat kad 1-5, atau rentetan pangkat mentah yang ditaip pemain",
+    "{card}": "Penerangan kad yang dipaparkan, contohnya 'a white card with rank 4'",
+    "{idx}": "Indeks kedudukan kad dalam tangan",
+    "{card_index}": "Indeks kedudukan kad",
+    "{fuse}": "Bilangan token fius yang tinggal",
+    "{info}": "Bilangan token info yang tinggal",
+    "{fuse_tokens}": "Bilangan token fius yang tinggal selepas langkah gagal",
+    "{fw_white}": "Kemajuan bunga api (0-5) untuk warna putih",
+    "{fw_yellow}": "Kemajuan bunga api untuk warna kuning",
+    "{fw_green}": "Kemajuan bunga api untuk warna hijau",
+    "{fw_blue}": "Kemajuan bunga api untuk warna biru",
+    "{fw_red}": "Kemajuan bunga api untuk warna merah",
+    "{c_white}": "Perkataan warna terjemahan untuk putih (bersarang)",
+    "{c_yellow}": "Perkataan warna terjemahan untuk kuning (bersarang)",
+    "{c_green}": "Perkataan warna terjemahan untuk hijau (bersarang)",
+    "{c_blue}": "Perkataan warna terjemahan untuk biru (bersarang)",
+    "{c_red}": "Perkataan warna terjemahan untuk merah (bersarang)",
+    "{visible_cards}": "Blok pra-papar yang menyenaraikan kad rakan sepasukan yang kelihatan",
+    "{discard_pile}": "Blok pra-papar yang menyenaraikan kad yang dibuang",
+    "{count}": "Bilangan langkah tidak sah yang dibuat berturut-turut",
+    "{max_player}": "Indeks pemain sah tertinggi (num_players - 1)",
+    "{max_card}": "Indeks kad sah tertinggi (hand_size - 1)"
+  },
+
+  "color": {
+    "white": "putih",
+    "yellow": "kuning",
+    "green": "hijau",
+    "blue": "biru",
+    "red": "merah"
+  },
+
+  "card": {
+    "desc": "sebuah kad {color} dengan pangkat {rank}"
+  },
+
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam permainan Hanabi {num_players} pemain. Hanabi ialah permainan kad koperatif di mana pemain bekerjasama untuk mencipta satu siri bunga api dengan memainkan kad mengikut susunan berangka menaik bermula dari 1. Setiap pemain memegang kad mereka menghadap ke luar supaya semua pemain dapat melihat kad orang lain tetapi bukan kad mereka sendiri.\n\nObjektif:\nObjektifnya adalah untuk memainkan kad mengikut urutan (1 hingga 5) bagi setiap warna tanpa membuat kesilapan. Terdapat 5 warna berbeza dan setiap warna mempunyai kad bernombor 1 hingga 5.\n\nPeraturan Utama:\nPada giliran anda, anda mempunyai tiga jenis tindakan yang mungkin:\n1. Beri Petunjuk (Reveal): Berikan petunjuk kepada pemain lain tentang kad mereka, dengan menyatakan sama ada warna atau nombor yang ada dalam tangan mereka. Petunjuk mestilah tepat dan hanya boleh mendedahkan kedudukan kad yang sepadan dengan petunjuk.\n2. Buang Kad: Buang salah satu kad anda sendiri untuk berkemungkinan memperoleh token Info.\n3. Main Kad: Cuba mainkan kad dari tangan anda. Jika dimainkan dengan betul mengikut urutan, ia ditambah kepada bunga api; jika tidak, ia mengurangkan satu token fius.\n\nToken:\nToken Fius: Ditolak apabila kad yang salah dimainkan.\nToken Info: Digunakan untuk memberi petunjuk.\n\nLangkah Tidak Sah:\nMemainkan kad yang tidak dapat diletakkan dengan betul akan mengurangkan satu token fius. Jika token fius mencapai sifar, permainan berakhir dengan kegagalan.\n\nTamat Permainan:\nPermainan berakhir apabila semua bunga api telah lengkap (skor sempurna 25), atau apabila dek telah habis dan setiap pemain telah mengambil satu giliran terakhir, atau apabila pemain kehabisan token fius.\n\nPerwakilan Keadaan:\nKeadaan permainan diwakili dengan butiran berikut:\nToken fius: Bilangan token fius yang tinggal.\nToken info: Bilangan token maklumat yang ada.\nBunga api: Kemajuan semasa pada setiap warna bunga api.\nBuangan: Kad yang telah dibuang.\n\nPeranan Anda:\nAnda ialah salah seorang pemain, bekerjasama dengan yang lain untuk memaksimumkan jumlah skor bunga api (bilangan kad yang dimainkan dengan betul mengikut urutan).\nWalaupun anda tidak dapat melihat kad anda sendiri, anda dapat melihat kad dalam tangan rakan sepasukan anda.\nGunakan petunjuk, buangan, dan langkah secara strategik untuk membimbing pasukan ke arah urutan yang berjaya.\nApabila tiba giliran anda, output anda hendaklah dalam salah satu format berikut antara tanda petikan:\n\n'[Reveal] player N card X color C', untuk memberi petunjuk tentang warna C bagi kad X kepada pemain di indeks N.\n'[Reveal] player N card X rank R', untuk memberi petunjuk tentang pangkat R bagi kad X kepada pemain di indeks N.\n'[Play] X', untuk memainkan kad di kedudukan X dari tangan anda.\n'[Discard] X', untuk membuang kad di kedudukan X dari tangan anda.\n\nIngat, komunikasi terhad kepada petunjuk tentang warna atau nombor sahaja, dan berkongsi maklumat yang tidak sah atau berlebihan tidak dibenarkan. Bekerjasamalah, patuhi peraturan, dan hala tuju ke arah skor koperatif setinggi mungkin!\n\n"
+  },
+
+  "state": {
+    "description": "Anda ialah pemain {pid}. \n\nKeadaan permainan semasa:\nToken fius: terdapat {fuse} token fius yang tinggal.\nToken info: terdapat {info} token info yang tinggal.\n\nBunga api: Kemajuan semasa pada setiap warna bunga api ialah:\n\t{c_white}: {fw_white}.\n\t{c_yellow}: {fw_yellow}.\n\t{c_green}: {fw_green}.\n\t{c_blue}: {fw_blue}.\n\t{c_red}: {fw_red}.\n\nRakan sepasukan anda mempunyai kad berikut dalam tangan mereka:\n{visible_cards}\nBuangan: Kad berikut telah dibuang:\n{discard_pile}\n",
+    "player_cards_header": "- Pemain {pid} mempunyai kad:\n",
+    "card_line": "\tkad {idx}: {card}\n"
+  },
+
+  "reveal": {
+    "hint_color": "Kad {card_index} daripada pemain {player} ialah {color}.",
+    "hint_rank": "Kad {card_index} daripada pemain {player} mempunyai pangkat {rank}."
+  },
+
+  "play": {
+    "success": "Pemain {pid} cuba memainkan {card}. Kad itu berjaya dimainkan.",
+    "fail": "Pemain {pid} cuba memainkan {card}. Kad itu tidak sepadan dengan keadaan semasa bunga api. Ini mengurangkan satu token fius. Terdapat {fuse_tokens} token fius yang tinggal."
+  },
+
+  "discard": {
+    "replenished": "Pemain {pid} membuang {card}. Ini mengisi semula satu token info.",
+    "cap_reached": "Pemain {pid} membuang {card}. Ini tidak mengisi semula token info kerana had token telah dicapai."
+  },
+
+  "skip_turn": "Pemain {pid} membuat {count} langkah tidak sah berturut-turut, melangkau satu giliran. ",
+  "final_round": "Tiada kad lagi yang tinggal dalam dek. Ini ialah pusingan terakhir.",
+
+  "invalid": {
+    "generic_action_reason": "Pemain memberikan tindakan yang tidak sah. Pemain hanya boleh '[reveal]', '[play]' atau '[discard]'.",
+    "reveal_no_info_reason": "Pemain cuba memberi petunjuk tanpa mempunyai sebarang token info.",
+    "reveal_own_reason": "Pemain cuba mendedahkan maklumat tentang kad mereka sendiri.",
+    "reveal_own_detail": "Anda cuba mendedahkan maklumat tentang kad anda sendiri. Ini tidak dibenarkan.",
+    "reveal_bad_teammate_reason": "Pemain cuba mendedahkan maklumat tentang rakan sepasukan yang tidak wujud.",
+    "reveal_bad_teammate_detail": "Anda cuba mendedahkan maklumat tentang rakan sepasukan yang tidak wujud. Sila pertimbangkan rakan sepasukan antara 0 dan {max_player} (Termasuk). Ambil perhatian bahawa anda tidak boleh mendedahkan maklumat tentang diri anda sendiri, anda ialah pemain {pid}.",
+    "reveal_bad_card_reason": "Pemain cuba mendedahkan maklumat tentang kad yang tidak wujud.",
+    "reveal_bad_card_detail": "Anda cuba mendedahkan maklumat tentang kad yang tidak wujud. Indeks kad hendaklah antara 0 dan {max_card} (termasuk). Anda memberikan {card_index}. ",
+    "reveal_bad_color_reason": "Pemain memberikan warna yang tiada dalam permainan.",
+    "reveal_bad_color_detail": "Anda memberikan warna yang tidak sah. Warna yang sah ialah 'white', 'yellow', 'green', 'red' dan 'blue'. Anda cuba: '{color}'.",
+    "reveal_bad_rank_reason": "Pemain memberikan pangkat yang tidak sah.",
+    "reveal_bad_rank_detail": "Anda memberikan pangkat yang tidak sah. Pangkat yang sah adalah antara 1 dan 5 (termasuk). Anda memberikan: '{rank}'.",
+    "reveal_bad_rank_format_reason": "Pemain memberikan format pangkat yang tidak sah.",
+    "reveal_bad_rank_format_detail": "Anda memberikan format pangkat yang tidak sah. Pangkat yang sah adalah antara 1 dan 5 (termasuk). Anda memberikan: '{rank}'.",
+    "reveal_incomplete_reason": "Pemain memberikan petunjuk yang tidak lengkap.",
+    "reveal_incomplete_detail": "Anda memberikan tindakan yang tidak sah. Jika anda ingin mendedahkan kad, taip:\n '[Reveal] player N card X color C', untuk memberi petunjuk tentang warna C bagi kad X kepada pemain di indeks N.\natau\n'[Reveal] player N card X rank R', untuk memberi petunjuk tentang pangkat R bagi kad X kepada pemain di indeks N.\n\nContohnya: '[Reveal] player 0 card 0 color green' mendedahkan bahawa kad 0 daripada pemain 0 ialah green.",
+    "play_nonexist_reason": "Pemain cuba memainkan kad yang tidak wujud.",
+    "play_nonexist_detail": "Anda cuba memainkan kad yang tidak wujud. Sila pertimbangkan kad antara 0 dan {max_card} (Termasuk). Anda memberikan {card_index}.",
+    "play_parse_reason": "Pemain memberikan tindakan yang tidak sah.",
+    "play_parse_detail": "Anda memberikan tindakan yang tidak sah. Jika anda ingin memainkan kad, taip:\n '[Play] X', untuk memainkan kad di kedudukan X dari tangan anda. Contohnya: '[Play] 0' memainkan kad di kedudukan 0.",
+    "discard_nonexist_reason": "Pemain cuba membuang kad yang tidak wujud.",
+    "discard_nonexist_detail": "Anda cuba membuang kad yang tidak wujud. Sila pertimbangkan kad antara 0 dan {max_card} (Termasuk). Anda memberikan {card_index}.",
+    "discard_parse_reason": "Pemain memberikan tindakan yang tidak sah.",
+    "discard_parse_detail": "Anda memberikan tindakan yang tidak sah. Jika anda ingin membuang kad, taip:\n '[Discard] X', untuk membuang kad di kedudukan X dari tangan anda. Contohnya: '[Discard] 0' membuang kad di kedudukan 0."
+  },
+
+  "outcome": {
+    "deck_empty": "Dek telah kehabisan.",
+    "fuse_empty": "Pasukan telah kehabisan token fius.",
+    "win": "Semua kad 5 telah berjaya dimainkan."
+  }
+}

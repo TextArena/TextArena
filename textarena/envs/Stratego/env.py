@@ -49,47 +49,7 @@ class StrategoEnv(ta.Env):
             player_id (int): The ID of the current player.
             game_state (Dict[str, Any]): The current game state.
         """
-        prompt = (
-            f"You are Player {player_id} in Stratego.\n"
-            "Your goal is to capture your opponent's Flag or eliminate all of their movable pieces.\n"
-            "Your army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n"
-            "\n"
-            "### Gameplay Instructions\n"
-            "1. **Movement Rules:**\n"
-            "   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n"
-            "   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n"
-            "   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n"
-            # "   - **Scout Movement:** Scouts, on the other hand, can move multiple steps in a straight line (horizontally or vertically), but strictly only on one condition.\n"
-            # "       - The condition is that Scouts cannot jump over any piece (your own or your opponent's).\n"
-            # "       - Example: If there is a piece between the Scout and its destination, the Scout cannot move to the destination.\n"
-            # "       - This will be indicated as an invalid move which makes you lose the game.\n"
-            "2. **Battles:**\n"
-            "   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n"
-            "     - The piece with the higher rank wins and eliminates the opponent's piece.\n"
-            "     - If the ranks are equal, both pieces are removed from the board.\n"
-            "     - **Special Cases:**\n"
-            "       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n"
-            "       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n"
-            "3. **Strategic Goals:**\n"
-            "   - Identify your opponent's pieces through their movements and battles.\n"
-            "   - Protect your Flag while attempting to capture your opponent's Flag.\n"
-            "   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n"
-            "\n"
-            "### How to Make a Move:\n"
-            "1. Specify the coordinates of the piece you want to move and its destination.\n"
-            "2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n"
-            "   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n"
-            "3. Ensure the destination is valid according to the movement rules above.\n"
-            "\n"
-            "### Important Notes:\n"
-            "- The board will show your pieces and their positions, e.g. MN, MS.\n"
-            "- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n"
-            "- Grids with ~ are lakes and cannot be moved onto.\n"
-            "- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n"
-            "\n"
-            "Here is the current board state:\n"
-        )
-        return prompt
+        return self.m("player_prompt", "intro", player_id=player_id)
 
     def _observe_current_state(self):
         """
@@ -146,7 +106,7 @@ class StrategoEnv(ta.Env):
                                     available_moves.append(f"[{chr(row + 65)}{col} {chr(new_row + 65)}{new_col}]")
 
         self.state.add_observation(
-            message=f"Current Board:\n\n{self._render_board(player_id=player_id, full_board=False)}\nAvailable Moves: " + ", ".join(available_moves),
+            message=self.m("board", "current_board", board=self._render_board(player_id=player_id, full_board=False), moves=", ".join(available_moves)),
             observation_type=ta.ObservationType.GAME_BOARD
         )
     
@@ -272,7 +232,7 @@ class StrategoEnv(ta.Env):
         match = action_search_pattern.search(action)
 
         if match is None:
-            reason=f"Invalid action format. Player {player_id} did not input a move in the format [A0 B0]."
+            reason=self.m("invalid_move", "wrong_format", player_id=player_id)
             self.state.set_invalid_move(reason=reason)
         
         else:
@@ -298,10 +258,10 @@ class StrategoEnv(ta.Env):
                     self.player_pieces[player_id].append((dest_row, dest_col))
                     
                     ## add the observation to both players separately
-                    message=f"You have moved your piece from {source} to {dest}."
+                    message=self.m("game_action", "moved_self", source=source, dest=dest)
                     self.state.add_observation(from_id=-1, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-                    message=f"Player {player_id} has moved a piece from {source} to {dest}."
+                    message=self.m("game_action", "moved_opp", player_id=player_id, source=source, dest=dest)
                     self.state.add_observation(from_id=-1, to_id=1-player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
                 else:
@@ -316,10 +276,10 @@ class StrategoEnv(ta.Env):
                         self.player_pieces[1 - player_id].remove((dest_row, dest_col))
 
                         ## add the observation to both players separately
-                        message=f"You have moved your piece from {source} to {dest}. The attacking piece was {attacking_piece['rank']} and the destination piece was {target_piece['rank']}. As the ranks are the same, both pieces lost."
+                        message=self.m("battle", "equal_self", source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-                        message=f"Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_piece['rank']} and the destination piece was {target_piece['rank']}. As the ranks are the same, both pieces lost."
+                        message=self.m("battle", "equal_opp", player_id=player_id, source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=1 - player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
                     elif target_piece['rank'] == 'Bomb':
@@ -331,10 +291,10 @@ class StrategoEnv(ta.Env):
                             self.player_pieces[player_id].append((dest_row, dest_col))
 
                             ## add the observation to both players separately
-                            message=f"You have moved your piece from {source} to {dest}. The attacking piece was {attacking_piece['rank']} and the destination piece was {target_piece['rank']}. As miners can defuse bombs, you won the battle."
+                            message=self.m("battle", "miner_defuse_self", source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
                             self.state.add_observation(from_id=-1, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-                            message=f"Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_piece['rank']} and the destination piece was {target_piece['rank']}. As miners can defuse bombs, you lost the battle."
+                            message=self.m("battle", "miner_defuse_opp", player_id=player_id, source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
                             self.state.add_observation(from_id=-1, to_id=1-player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
                         else:
@@ -343,10 +303,10 @@ class StrategoEnv(ta.Env):
                             self.player_pieces[player_id].remove((src_row, src_col))
 
                             ## add the observation to both players separately
-                            message=f"You have moved your piece from {source} to {dest}. The attacking piece was {attacking_piece['rank']} and the destination piece was {target_piece['rank']}. As the attacker is not a miner, you lost the battle."
+                            message=self.m("battle", "bomb_self", source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
                             self.state.add_observation(from_id=-1, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-                            message=f"Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_piece['rank']} and the destination piece was {target_piece['rank']}. As the attacker is not a miner, you won the battle."
+                            message=self.m("battle", "bomb_opp", player_id=player_id, source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
                             self.state.add_observation(from_id=-1, to_id=1-player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
                     elif target_piece['rank'] == 'Flag':
@@ -356,7 +316,7 @@ class StrategoEnv(ta.Env):
                         self.player_pieces[player_id].append((dest_row, dest_col))
                         self.player_pieces[1 - player_id].remove((dest_row, dest_col))
                         ## game over
-                        self.state.set_winner(player_id=player_id,reason=[f"Player {player_id} has captured the opponent's flag!"])
+                        self.state.set_winner(player_id=player_id,reason=self.m("outcome", "flag_captured", player_id=player_id))
                     elif attacking_piece['rank'] == 'Spy' and target_piece['rank'] == 'Marshal':
                         ## Spy beats Marshal only if spy attacks first
                         self.board[dest_row][dest_col] = attacking_piece
@@ -366,10 +326,10 @@ class StrategoEnv(ta.Env):
                         self.player_pieces[1 - player_id].remove((dest_row, dest_col))
 
                         ## add the observation to both players separately
-                        message=f"You have moved your piece from {source} to {dest}. The attacking piece was {attacking_piece['rank']} and the destination piece was {target_piece['rank']}. As the attacker is a spy and the destination is a marshall, you won the battle."
+                        message=self.m("battle", "spy_marshal_self", source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-                        message=f"Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_piece['rank']} and the destination piece was {target_piece['rank']}. As the attacker is a spy and the destination is a marshall, you lost the battle."
+                        message=self.m("battle", "spy_marshal_opp", player_id=player_id, source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=1-player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
                     elif attacking_rank > target_rank:
@@ -381,10 +341,10 @@ class StrategoEnv(ta.Env):
                         self.player_pieces[1 - player_id].remove((dest_row, dest_col))
 
                         ## add the observation to both players separately
-                        message=f"You have moved your piece from {source} to {dest}. The attacking piece was {attacking_piece['rank']} and the destination piece was {target_piece['rank']}. As the attacker is a higher rank than the destination, you won the battle."
+                        message=self.m("battle", "higher_self", source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-                        message=f"Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_piece['rank']} and the destination piece was {target_piece['rank']}. As the attacker is a higher rank than the destination, you lost the battle."
+                        message=self.m("battle", "higher_opp", player_id=player_id, source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=1-player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
                     else:
@@ -393,15 +353,15 @@ class StrategoEnv(ta.Env):
                         self.player_pieces[player_id].remove((src_row, src_col))
 
                         ## add the observation to both players separately
-                        message=f"You have moved your piece from {source} to {dest}. The attacking piece was {attacking_piece['rank']} and the destination piece was {target_piece['rank']}. As the attacker is a lower rank than the destination, you lost the battle."
+                        message=self.m("battle", "lower_self", source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-                        message=f"Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_piece['rank']} and the destination piece was {target_piece['rank']}. As the attacker is a lower rank than the destination, you won the battle."
+                        message=self.m("battle", "lower_opp", player_id=player_id, source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=1-player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
         ## check if the game is over
         if self._check_winner():
-            reason=f"Player {self._check_winner()} wins! Player {1 - self._check_winner()} has no more movable pieces."
+            reason=self.m("outcome", "no_movable_pieces", winner=self._check_winner(), loser=1 - self._check_winner())
             self.state.set_winner(player_id=self._check_winner(), reason=reason)
 
         ## update the rendered board
@@ -423,12 +383,12 @@ class StrategoEnv(ta.Env):
             dest_col (int): The column of the destination position.
         """
         if not (0 <= src_row < 10 and 0 <= src_col < 10 and 0 <= dest_row < 10 and 0 <= dest_col < 10):
-            reason=f"Invalid action format. Player {player_id} did not input valid coordinates."
+            reason=self.m("invalid_move", "invalid_coords", player_id=player_id)
             self.state.set_invalid_move(reason=reason)
             return False
         
         if self.board[src_row][src_col] is None or self.board[src_row][src_col]['player'] != player_id:
-            reason=f"Invalid action format. Player {player_id} must move one of their own pieces."
+            reason=self.m("invalid_move", "not_own_piece", player_id=player_id)
             self.state.set_invalid_move(reason=reason)
             return False
         
@@ -437,39 +397,39 @@ class StrategoEnv(ta.Env):
             if src_row == dest_row:
                 for col in range(min(src_col, dest_col) + 1, max(src_col, dest_col)):
                     if self.board[src_row][col] is not None:
-                        reason=f"Invalid action format. Player {player_id} cannot move a scout through other pieces."
+                        reason=self.m("invalid_move", "scout_through", player_id=player_id)
                         self.state.set_invalid_move(reason=reason)
                         return False
             elif src_col == dest_col:
                 for row in range(min(src_row, dest_row) + 1, max(src_row, dest_row)):
                     if self.board[row][src_col] is not None:
-                        reason=f"Invalid action format. Player {player_id} cannot move a scout through other pieces."
+                        reason=self.m("invalid_move", "scout_through", player_id=player_id)
                         self.state.set_invalid_move(reason=reason)
                         return False
             else:
-                reason=f"Invalid action format. Player {player_id} cannot move a scout diagonally."
+                reason=self.m("invalid_move", "scout_diagonal", player_id=player_id)
                 self.state.set_invalid_move(reason=reason)
                 return False
             
         if abs(src_row - dest_row) + abs(src_col - dest_col) != 1 and self.board[src_row][src_col]['rank'].lower() != 'scout':
             ## !  - by right, only scouts can move more than one square at a time but we are not implementing that yet
-            reason=f"Invalid action format. Pieces, apart from scouts, can only move one square at a time."
+            reason=self.m("invalid_move", "not_scout_one_square")
             self.state.set_invalid_move(reason=reason)
             return False
         
         if self.board[dest_row][dest_col] is not None:
             if (dest_row, dest_col) in self.lakes:
-                reason=f"Invalid action format. Player {player_id} cannot move into the lake."
+                reason=self.m("invalid_move", "into_lake", player_id=player_id)
                 self.state.set_invalid_move(reason=reason)
                 return False
             
             elif self.board[dest_row][dest_col]['player'] == player_id:
-                reason=f"Invalid action format. Player {player_id} cannot move onto their own piece."
+                reason=self.m("invalid_move", "onto_own", player_id=player_id)
                 self.state.set_invalid_move(reason=reason)
                 return False
         
         if self.board[src_row][src_col]['rank'].lower() in ['bomb','flag']:
-            reason=f"Invalid action format. Player {player_id} cannot move a bomb or flag."
+            reason=self.m("invalid_move", "bomb_or_flag", player_id=player_id)
             self.state.set_invalid_move(reason=reason)
             return False
         
