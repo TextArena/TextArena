@@ -47,7 +47,7 @@ general todos:
 | 34 | [Chopsticks](#chopsticks) | Two | 2 | | |
 | 35 | [ColonelBlotto](#colonelblotto) | Two | 2 | 🌐 | |
 | 36 | [ConnectFour](#connectfour) | Two | 2 | 🌐 | |
-| 37 | [Coup](#coup) | Multi | 2–6 | | |
+| 37 | [Coup](#coup) | Multi | 2–6 | 🌐 | |
 | 38 | [Crusade](#crusade) | Two | 2 | | |
 | 39 | [Debate](#debate) | Two | 2 | | |
 | 40 | [DontSayIt](#dontsayit) | Two | 2 | | |
