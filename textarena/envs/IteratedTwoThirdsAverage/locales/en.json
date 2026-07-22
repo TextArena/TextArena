@@ -1,0 +1,33 @@
+{
+  "_comment": "IteratedTwoThirdsAverage locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the move-format token [<number>].",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{num_rounds}": "Total number of rounds",
+    "{min_guess}": "Minimum allowed guess (a number)",
+    "{max_guess}": "Maximum allowed guess (a number)",
+    "{p0_guess}": "Player 0's numeric guess",
+    "{p1_guess}": "Player 1's numeric guess",
+    "{target}": "The computed target value (formatted number)",
+    "{winner}": "The player number that won the round"
+  },
+
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a {num_rounds}-round of IteratedTwoThirdsAverage.\nEach round, guess a number between {min_guess} and {max_guess}.\nAfter both guesses, the target is (2/3)x(average of both guesses),\nand the player whose guess is closest to the target wins that round.\nReply with your guess in the format '[<number>]'."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Invalid format; please submit your guess as “[<number>]”.",
+    "out_of_range": "Guess must be between {min_guess} and {max_guess}."
+  },
+
+  "round": {
+    "result": "Player 0 guessed {p0_guess}; Player 1 guessed {p1_guess}. Thus the Target is: {target}.",
+    "draw":   "Round is a draw.",
+    "win":    "Player {winner} wins the round!"
+  },
+
+  "outcome": {
+    "win":  "Player {player_id} won more rounds.",
+    "draw": "Overall game is a draw."
+  }
+}

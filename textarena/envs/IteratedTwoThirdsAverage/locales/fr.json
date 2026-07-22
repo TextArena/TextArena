@@ -1,0 +1,19 @@
+{
+  "_comment": "Fichier de langue IteratedTwoThirdsAverage en français. Ne traduisez PAS les clés, uniquement les valeurs. Conservez chaque {placeholder} ; ne traduisez pas le jeton de format [<number>].",
+  "_slots": {
+    "{player_id}": "Le numéro du joueur, 0 ou 1", "{num_rounds}": "Nombre total de manches",
+    "{min_guess}": "Proposition minimale autorisée", "{max_guess}": "Proposition maximale autorisée",
+    "{p0_guess}": "Proposition du joueur 0", "{p1_guess}": "Proposition du joueur 1",
+    "{target}": "La valeur cible calculée", "{winner}": "Le numéro du joueur ayant gagné la manche"
+  },
+  "player_prompt": { "intro": "Vous êtes le joueur {player_id} dans une partie des Deux-Tiers-de-la-Moyenne de {num_rounds} manches.\nÀ chaque manche, devinez un nombre entre {min_guess} et {max_guess}.\nAprès les deux propositions, la cible est (2/3)×(moyenne des deux propositions),\net le joueur dont la proposition est la plus proche de la cible gagne la manche.\nRépondez avec votre proposition au format '[<number>]'." },
+  "invalid_move": {
+    "wrong_format": "Format invalide ; veuillez soumettre votre proposition sous la forme “[<number>]”.",
+    "out_of_range": "La proposition doit être comprise entre {min_guess} et {max_guess}."
+  },
+  "round": {
+    "result": "Le joueur 0 a proposé {p0_guess} ; le joueur 1 a proposé {p1_guess}. La cible est donc : {target}.",
+    "draw": "La manche est nulle.", "win": "Le joueur {winner} gagne la manche !"
+  },
+  "outcome": { "win": "Le joueur {player_id} a gagné plus de manches.", "draw": "La partie se termine par un match nul." }
+}

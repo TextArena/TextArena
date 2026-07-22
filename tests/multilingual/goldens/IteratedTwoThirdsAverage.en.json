@@ -1,0 +1,408 @@
+{
+  "mixed_with_invalids": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 won more rounds.",
+        "role": "Player 0",
+        "turn_count": 5
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 won more rounds.",
+        "role": "Player 1",
+        "turn_count": 5
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a 5-round of IteratedTwoThirdsAverage.\nEach round, guess a number between 0.0 and 100.0.\nAfter both guesses, the target is (2/3)x(average of both guesses),\nand the player whose guess is closest to the target wins that round.\nReply with your guess in the format '[<number>]'.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "action": "abc",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid format; please submit your guess as “[<number>]”. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a 5-round of IteratedTwoThirdsAverage.\nEach round, guess a number between 0.0 and 100.0.\nAfter both guesses, the target is (2/3)x(average of both guesses),\nand the player whose guess is closest to the target wins that round.\nReply with your guess in the format '[<number>]'.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "action": "[150]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 1 attempted an invalid move. Reason: Guess must be between 0.0 and 100.0. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 1,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[60]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 0.0; Player 1 guessed 60.0. Thus the Target is: 20.00.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 wins the round!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[60]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 0.0; Player 1 guessed 60.0. Thus the Target is: 20.00.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 wins the round!",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[60]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 60.0; Player 1 guessed 60.0. Thus the Target is: 40.00.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Round is a draw.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[60]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 60.0; Player 1 guessed 60.0. Thus the Target is: 40.00.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Round is a draw.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 60.0; Player 1 guessed 0.0. Thus the Target is: 20.00.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 wins the round!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 60.0; Player 1 guessed 0.0. Thus the Target is: 20.00.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 wins the round!",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[60]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 0.0; Player 1 guessed 60.0. Thus the Target is: 20.00.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 wins the round!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[60]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 0.0; Player 1 guessed 60.0. Thus the Target is: 20.00.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 wins the round!",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[60]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 60.0; Player 1 guessed 60.0. Thus the Target is: 40.00.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Round is a draw.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": {
+      "0": 1,
+      "1": -1
+    }
+  },
+  "overall_draw": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Overall game is a draw.",
+        "role": "Player 0",
+        "turn_count": 5
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Overall game is a draw.",
+        "role": "Player 1",
+        "turn_count": 5
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a 5-round of IteratedTwoThirdsAverage.\nEach round, guess a number between 0.0 and 100.0.\nAfter both guesses, the target is (2/3)x(average of both guesses),\nand the player whose guess is closest to the target wins that round.\nReply with your guess in the format '[<number>]'.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "action": "[0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a 5-round of IteratedTwoThirdsAverage.\nEach round, guess a number between 0.0 and 100.0.\nAfter both guesses, the target is (2/3)x(average of both guesses),\nand the player whose guess is closest to the target wins that round.\nReply with your guess in the format '[<number>]'.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "action": "[60]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 0.0; Player 1 guessed 60.0. Thus the Target is: 20.00.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 wins the round!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[60]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 0.0; Player 1 guessed 60.0. Thus the Target is: 20.00.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 wins the round!",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 60.0; Player 1 guessed 0.0. Thus the Target is: 20.00.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 wins the round!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[60]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 60.0; Player 1 guessed 0.0. Thus the Target is: 20.00.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 wins the round!",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[60]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 60.0; Player 1 guessed 60.0. Thus the Target is: 40.00.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Round is a draw.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[60]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 60.0; Player 1 guessed 60.0. Thus the Target is: 40.00.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Round is a draw.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[60]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 60.0; Player 1 guessed 60.0. Thus the Target is: 40.00.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Round is a draw.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[60]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 60.0; Player 1 guessed 60.0. Thus the Target is: 40.00.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Round is a draw.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[60]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 guessed 60.0; Player 1 guessed 60.0. Thus the Target is: 40.00.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Round is a draw.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": {
+      "0": 0,
+      "1": 0
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "_comment": "IteratedTwoThirdsAverage Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel, nur die Werte. Behalte jeden {platzhalter}; übersetze die Zug-Formatvorgabe [<number>] nicht.",
+  "_slots": {
+    "{player_id}": "Die Spielernummer, 0 oder 1",
+    "{num_rounds}": "Gesamtzahl der Runden",
+    "{min_guess}": "Kleinste erlaubte Schätzung",
+    "{max_guess}": "Größte erlaubte Schätzung",
+    "{p0_guess}": "Schätzung von Spieler 0",
+    "{p1_guess}": "Schätzung von Spieler 1",
+    "{target}": "Der berechnete Zielwert",
+    "{winner}": "Die Spielernummer, die die Runde gewann"
+  },
+  "player_prompt": { "intro": "Du bist Spieler {player_id} in einer {num_rounds}-Runden-Partie von Zwei-Drittel-des-Durchschnitts.\nRate in jeder Runde eine Zahl zwischen {min_guess} und {max_guess}.\nNach beiden Schätzungen ist das Ziel (2/3)x(Durchschnitt beider Schätzungen),\nund der Spieler, dessen Schätzung dem Ziel am nächsten ist, gewinnt die Runde.\nAntworte mit deiner Schätzung im Format '[<number>]'." },
+  "invalid_move": {
+    "wrong_format": "Ungültiges Format; bitte gib deine Schätzung als “[<number>]” ab.",
+    "out_of_range": "Die Schätzung muss zwischen {min_guess} und {max_guess} liegen."
+  },
+  "round": {
+    "result": "Spieler 0 schätzte {p0_guess}; Spieler 1 schätzte {p1_guess}. Somit ist das Ziel: {target}.",
+    "draw": "Die Runde endet unentschieden.",
+    "win": "Spieler {winner} gewinnt die Runde!"
+  },
+  "outcome": { "win": "Spieler {player_id} hat mehr Runden gewonnen.", "draw": "Das Spiel endet insgesamt unentschieden." }
+}

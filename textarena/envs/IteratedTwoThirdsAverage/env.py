@@ -14,10 +14,7 @@ class IteratedTwoThirdsAverageEnv(ta.Env):
         self.state.reset(game_state={"round": 1, "points": {0:0, 1:0}, "guesses": {}, "history": []}, player_prompt_function=self._prompt)
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are Player {player_id} in a {self.num_rounds}-round of IteratedTwoThirdsAverage.\nEach round, guess a number between {self.min_guess} and {self.max_guess}.\n"
-            "After both guesses, the target is (2/3)x(average of both guesses),\nand the player whose guess is closest to the target wins that round.\nReply with your guess in the format '[<number>]'."
-        )
+        return self.m("player_prompt", "intro", player_id=player_id, num_rounds=self.num_rounds, min_guess=self.min_guess, max_guess=self.max_guess)
 
     def get_board_str(self) -> str:
         s = f"Round {self.state.game_state['round']}/{self.num_rounds}\n"
@@ -29,10 +26,10 @@ class IteratedTwoThirdsAverageEnv(ta.Env):
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         pid = self.state.current_player_id
         m = re.compile(r"\[\s*([0-9]+(?:\.[0-9]*)?)\s*\]").search(action)
-        if not m: self.state.set_invalid_move(reason="Invalid format; please submit your guess as “[<number>]”.")
+        if not m: self.state.set_invalid_move(reason=self.m("invalid_move", "wrong_format"))
         else:
             guess = float(m.group(1))
-            if not (self.min_guess <= guess <= self.max_guess): self.state.set_invalid_move(reason=f"Guess must be between {self.min_guess} and {self.max_guess}.")
+            if not (self.min_guess <= guess <= self.max_guess): self.state.set_invalid_move(reason=self.m("invalid_move", "out_of_range", min_guess=self.min_guess, max_guess=self.max_guess))
             else: # accept guess
                 self.state.game_state["guesses"][pid] = guess
                 if len(self.state.game_state["guesses"]) == 2:
@@ -41,15 +38,15 @@ class IteratedTwoThirdsAverageEnv(ta.Env):
                     target = (2.0 / 3.0) * avg
                     d0 = abs(guesses[0] - target); d1 = abs(guesses[1] - target) # compute distances
                     self.state.game_state["history"].append(guesses.copy()) # update history
-                    self.state.add_observation(message=f"Player 0 guessed {guesses[0]}; Player 1 guessed {guesses[1]}. Thus the Target is: {target:.2f}.", observation_type=ta.ObservationType.GAME_MESSAGE)
+                    self.state.add_observation(message=self.m("round", "result", p0_guess=guesses[0], p1_guess=guesses[1], target=f"{target:.2f}"), observation_type=ta.ObservationType.GAME_MESSAGE)
                     # decide round winner
                     if d0 < d1:     winner = 0
                     elif d1 < d0:   winner = 1
                     else:           winner = None
-                    if winner is None: self.state.add_observation(message="Round is a draw.", observation_type=ta.ObservationType.GAME_MESSAGE)
+                    if winner is None: self.state.add_observation(message=self.m("round", "draw"), observation_type=ta.ObservationType.GAME_MESSAGE)
                     else:
                         self.state.game_state["points"][winner] += 1
-                        self.state.add_observation(message=f"Player {winner} wins the round!", observation_type=ta.ObservationType.GAME_MESSAGE)
+                        self.state.add_observation(message=self.m("round", "win", winner=winner), observation_type=ta.ObservationType.GAME_MESSAGE)
                     # prepare next round
                     self.state.game_state["round"] += 1
                     self.state.game_state["guesses"].clear()
@@ -57,7 +54,7 @@ class IteratedTwoThirdsAverageEnv(ta.Env):
                     if self.state.game_state["round"] > self.num_rounds:
                         p0 = self.state.game_state["points"][0]
                         p1 = self.state.game_state["points"][1]
-                        if p0 > p1:     self.state.set_winner(player_id=0, reason="Player 0 won more rounds.")
-                        elif p1 > p0:   self.state.set_winner(player_id=1, reason="Player 1 won more rounds.")
-                        else:           self.state.set_draw(reason="Overall game is a draw.")
+                        if p0 > p1:     self.state.set_winner(player_id=0, reason=self.m("outcome", "win", player_id=0))
+                        elif p1 > p0:   self.state.set_winner(player_id=1, reason=self.m("outcome", "win", player_id=1))
+                        else:           self.state.set_draw(reason=self.m("outcome", "draw"))
         return self.state.step()

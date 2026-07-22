@@ -69,6 +69,17 @@ GAMES = {
             "already_occupied": ["[4 0]", "[0 0]", "[0 0]"],
         },
     },
+    "IteratedTwoThirdsAverage": {
+        "entry": "textarena.envs.IteratedTwoThirdsAverage.env:IteratedTwoThirdsAverageEnv",
+        "num_players": 2,
+        "seed": 42,
+        "scenarios": {
+            "mixed_with_invalids": ["abc", "[0]", "[150]", "[60]", "[60]", "[60]",
+                                    "[60]", "[0]", "[0]", "[60]", "[60]", "[60]"],
+            "overall_draw": ["[0]", "[60]", "[60]", "[0]", "[60]", "[60]",
+                             "[60]", "[60]", "[60]", "[60]"],
+        },
+    },
     "IteratedRockPaperScissors": {
         "entry": "textarena.envs.IteratedRockPaperScissors.env:IteratedRockPaperScissorsEnv",
         "num_players": 2,

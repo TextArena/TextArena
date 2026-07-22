@@ -1,0 +1,24 @@
+{
+  "_comment": "Archivo de idioma de IteratedTwoThirdsAverage en español. NO traduzcas las claves, solo los valores. Mantén cada {marcador}; no traduzcas el formato de jugada [<number>].",
+  "_slots": {
+    "{player_id}": "El número del jugador, 0 o 1",
+    "{num_rounds}": "Número total de rondas",
+    "{min_guess}": "Conjetura mínima permitida",
+    "{max_guess}": "Conjetura máxima permitida",
+    "{p0_guess}": "Conjetura del jugador 0",
+    "{p1_guess}": "Conjetura del jugador 1",
+    "{target}": "El valor objetivo calculado",
+    "{winner}": "El número del jugador que ganó la ronda"
+  },
+  "player_prompt": { "intro": "Eres el jugador {player_id} en una partida de {num_rounds} rondas de Dos Tercios del Promedio.\nCada ronda, adivina un número entre {min_guess} y {max_guess}.\nTras ambas conjeturas, el objetivo es (2/3)x(promedio de ambas conjeturas),\ny el jugador cuya conjetura esté más cerca del objetivo gana esa ronda.\nResponde con tu conjetura en el formato '[<number>]'." },
+  "invalid_move": {
+    "wrong_format": "Formato no válido; por favor envía tu conjetura como “[<number>]”.",
+    "out_of_range": "La conjetura debe estar entre {min_guess} y {max_guess}."
+  },
+  "round": {
+    "result": "El jugador 0 adivinó {p0_guess}; el jugador 1 adivinó {p1_guess}. Por lo tanto, el objetivo es: {target}.",
+    "draw": "La ronda es un empate.",
+    "win": "¡El jugador {winner} gana la ronda!"
+  },
+  "outcome": { "win": "El jugador {player_id} ganó más rondas.", "draw": "La partida termina en empate." }
+}

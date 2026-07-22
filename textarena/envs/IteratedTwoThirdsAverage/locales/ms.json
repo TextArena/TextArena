@@ -1,0 +1,19 @@
+{
+  "_comment": "Fail bahasa IteratedTwoThirdsAverage — Bahasa Melayu. JANGAN terjemahkan kunci. Terjemahkan nilai sahaja. Kekalkan setiap {placeholder}; jangan terjemah token format [<number>].",
+  "_slots": {
+    "{player_id}": "Nombor pemain, 0 atau 1", "{num_rounds}": "Jumlah pusingan",
+    "{min_guess}": "Tekaan minimum dibenarkan", "{max_guess}": "Tekaan maksimum dibenarkan",
+    "{p0_guess}": "Tekaan Pemain 0", "{p1_guess}": "Tekaan Pemain 1",
+    "{target}": "Nilai sasaran yang dikira", "{winner}": "Nombor pemain yang menang pusingan"
+  },
+  "player_prompt": { "intro": "Anda ialah Pemain {player_id} dalam permainan Dua-Pertiga-Purata {num_rounds} pusingan.\nSetiap pusingan, teka satu nombor antara {min_guess} dan {max_guess}.\nSelepas kedua-dua tekaan, sasaran ialah (2/3)×(purata kedua-dua tekaan),\ndan pemain yang tekaannya paling hampir dengan sasaran menang pusingan itu.\nBalas dengan tekaan anda dalam format '[<number>]'." },
+  "invalid_move": {
+    "wrong_format": "Format tidak sah; sila hantar tekaan anda sebagai “[<number>]”.",
+    "out_of_range": "Tekaan mesti antara {min_guess} dan {max_guess}."
+  },
+  "round": {
+    "result": "Pemain 0 meneka {p0_guess}; Pemain 1 meneka {p1_guess}. Maka sasaran ialah: {target}.",
+    "draw": "Pusingan ini seri.", "win": "Pemain {winner} menang pusingan!"
+  },
+  "outcome": { "win": "Pemain {player_id} memenangi lebih banyak pusingan.", "draw": "Permainan berakhir seri." }
+}
