@@ -1,0 +1,80 @@
+{
+  "_comment": "克翁代克接龙的中文语言文件。请勿翻译键（左侧），只翻译值（右侧）。完整保留每个 {占位符}。绝不要翻译牌面/花色标签（例如 A、10、K、♣️、♦️、♥️、♠️）、牌堆标记 W、F1-F4、T1-T7、{board} 中的 ASCII 牌面，或命令 'draw'、'move'、'forfeit'、'all'。方括号语法如 'move W T1' 必须保持拉丁字母原样。",
+  "_slots": {
+    "{n}": "以逗号分隔的命令中动作的序号，从 1 开始",
+    "{msg}": "每个动作的嵌套结果消息（已本地化）",
+    "{count}": "被移动的正面朝上牌数",
+    "{src}": "源列牌堆编号，从 1 开始",
+    "{dst}": "目标牌堆编号，从 1 开始",
+    "{cmd}": "玩家输入的未知命令（不要翻译）",
+    "{max_turns}": "游戏结束前的最大回合数",
+    "{score}": "当前在基础牌堆中的牌数",
+    "{board}": "渲染的 ASCII 牌面（绝不翻译）",
+    "{turn}": "当前回合数",
+    "{stock}": "牌库中剩余的牌数",
+    "{waste}": "废牌堆顶部的牌，若为空则为 '--'（绝不翻译）",
+    "{cards}": "某牌堆中的牌，以中性标签表示，若为空则为 '--'（绝不翻译）"
+  },
+
+  "player_prompt": {
+    "intro": "你正在玩克翁代克接龙。你的目标是把所有牌移到基础牌堆。\n\n游戏规则：\n- 基础牌堆（F1-F4）：按花色从 A 到 K 递增叠放\n- 列牌堆（T1-T7）：按颜色交替递减叠放（红压黑，黑压红）\n- 牌库：从牌库抽牌到废牌堆\n- 废牌堆（W）：顶部的牌可供出牌\n\n命令：\n- 'draw' - 从牌库抽牌到废牌堆\n- 'move <source> <destination> [count]' - 在牌堆之间移动牌\n  示例：'move W T1'、'move T1 F2'、'move T3 T5 2'。count 也可以是 'all'，将尝试移动所有正面朝上的牌。\n- 'forfeit' - 立即结束游戏并锁定你当前的分数\n- 牌堆名称：W（废牌堆）、F1-F4（基础牌堆）、T1-T7（列牌堆）\n\n你可以在一个回合中用逗号分隔来执行多个动作：\n  示例：'draw, move W T1, move T2 F1'\n\n只有 K 才能放在空的列牌堆上。\n动作按顺序执行——如果其中一个失败，其余动作将被跳过。\n如果你认为游戏无法获胜，请使用 'forfeit'。"
+  },
+
+  "format_error": {
+    "no_brackets": "动作格式无效。动作应放在方括号中。",
+    "no_closing_bracket": "动作格式无效。缺少右方括号 ']'",
+    "empty_command": "命令为空。请输入 'draw' 或 'move <source> <destination> [count]'",
+    "empty_action": "空动作",
+    "move_needs_args": "move 命令需要源和目标。用法：'move <source> <destination> [count]'",
+    "count_positive": "count 必须为正数或 'all'",
+    "count_invalid": "count 无效。请使用数字或 'all'",
+    "unknown_command": "未知命令 '{cmd}'。请使用 'draw'、'move <source> <destination> [count]' 或 'forfeit'",
+    "wrapped": "动作 {n}：{msg}"
+  },
+
+  "action_result": {
+    "success": "动作 {n}：{msg}",
+    "before_failure": "在失败前执行了 {n} 个动作。",
+    "failed": "动作 {n} 失败：{msg}"
+  },
+
+  "move_result": {
+    "drew": "已从牌库抽牌到废牌堆。",
+    "cannot_draw": "无法抽牌。牌库和废牌堆都为空。",
+    "invalid_pile": "牌堆名称无效。请使用 W、F1-F4 或 T1-T7",
+    "foundation_one_card": "每次只能向基础牌堆移动 1 张牌",
+    "waste_to_foundation_ok": "已将一张牌从废牌堆移到基础牌堆 F{dst}",
+    "waste_to_foundation_bad": "无法将废牌堆的牌移到该基础牌堆",
+    "tableau_to_foundation_ok": "已将一张牌从列牌堆 T{src} 移到基础牌堆 F{dst}",
+    "tableau_to_foundation_bad": "无法将列牌堆的牌移到该基础牌堆",
+    "foundation_to_foundation": "无法从基础牌堆移到基础牌堆",
+    "waste_to_tableau_one_card": "每次只能将 1 张牌从废牌堆移到列牌堆",
+    "waste_to_tableau_ok": "已将一张牌从废牌堆移到列牌堆 T{dst}",
+    "waste_to_tableau_bad": "无法将废牌堆的牌放到该列牌堆上",
+    "no_face_up": "没有正面朝上的牌可供移动",
+    "tableau_to_tableau_ok": "已将 {count} 张牌从列牌堆 T{src} 移到 T{dst}",
+    "tableau_to_tableau_bad": "无法将 {count} 张牌从 T{src} 移到 T{dst}",
+    "foundation_to_tableau_one_card": "每次只能将 1 张牌从基础牌堆移到列牌堆",
+    "foundation_empty": "基础牌堆 F{src} 为空",
+    "foundation_to_tableau_ok": "已将一张牌从基础牌堆 F{src} 移到列牌堆 T{dst}",
+    "foundation_to_tableau_bad": "无法将基础牌堆的牌放到列牌堆 T{dst} 上",
+    "to_waste_or_stock": "无法移到废牌堆或牌库"
+  },
+
+  "outcome": {
+    "forfeit": "游戏已认输。最终分数：基础牌堆中有 {score} 张牌。",
+    "won": "恭喜！你赢得了克翁代克接龙！",
+    "turn_limit": "游戏结束！你已达到 {max_turns} 回合的上限。分数：基础牌堆中有 {score} 张牌。"
+  },
+
+  "board": {
+    "title": "=== 克朗代克纸牌 ===",
+    "turn": "回合：{turn}/{max_turns}",
+    "stock": "牌库：{stock} 张牌",
+    "waste": "废牌堆（W）：{waste}",
+    "foundations_header": "基础牌堆：",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "列牌堆：",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}
