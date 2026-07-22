@@ -5,7 +5,16 @@ branch (prompt, board, each invalid-move reason, win, draw). When adding a game,
 design scenarios so that every self.m()/self.t() key is reachable — otherwise a
 per-language slot bug in an unexercised branch would go unseen by the golden
 (check_locales.py still catches structural problems statically).
+
+Specs live in two places, both merged into GAMES:
+  * the inline dict below (original games), and
+  * one JSON file per game under scenarios/<Game>.json — used so parallel
+    conversions never edit a shared file. Each JSON is a full spec:
+    {"entry": "...:Cls", "num_players": N, "seed": 42, "scenarios": {name: [actions]}}.
 """
+import glob as _glob
+import json as _json
+import os as _os
 
 GAMES = {
     "WildTicTacToe": {
@@ -132,3 +141,14 @@ GAMES = {
         },
     },
 }
+
+# Merge per-game JSON specs (scenarios/<Game>.json). Robust to a concurrently
+# half-written file: a bad/partial JSON is skipped, not fatal.
+_SCEN_DIR = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "scenarios")
+for _p in sorted(_glob.glob(_os.path.join(_SCEN_DIR, "*.json"))):
+    _name = _os.path.splitext(_os.path.basename(_p))[0]
+    try:
+        with open(_p, encoding="utf-8") as _f:
+            GAMES[_name] = _json.load(_f)
+    except (ValueError, OSError):
+        continue

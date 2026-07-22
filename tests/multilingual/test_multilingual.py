@@ -34,18 +34,28 @@ def golden_path(game):
     return os.path.join(GOLDEN_DIR, f"{game}.en.json")
 
 
-def update_goldens():
+def _selected(games):
+    if not games:
+        return sorted(GAMES)
+    missing = [g for g in games if g not in GAMES]
+    if missing:
+        raise SystemExit(f"unknown game(s): {', '.join(missing)}")
+    return list(games)
+
+
+def update_goldens(games=None):
     os.makedirs(GOLDEN_DIR, exist_ok=True)
-    for game, spec in GAMES.items():
-        text = canonical(run_game(spec, "en"))
+    for game in _selected(games):
+        text = canonical(run_game(GAMES[game], "en"))
         with open(golden_path(game), "w", encoding="utf-8") as f:
             f.write(text + "\n")
         print(f"wrote {golden_path(game)}")
 
 
-def verify():
+def verify(games=None):
     failures = 0
-    for game, spec in GAMES.items():
+    for game in _selected(games):
+        spec = GAMES[game]
         # 1. English golden identity
         path = golden_path(game)
         if not os.path.exists(path):
@@ -79,18 +89,19 @@ def verify():
     if failures:
         print(f"FAILED: {failures} check(s) failed.")
         return 1
-    print(f"PASSED: {len(GAMES)} game(s).")
+    print(f"PASSED: {len(_selected(games))} game(s).")
     return 0
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--update", action="store_true", help="regenerate committed goldens")
+    ap.add_argument("games", nargs="*", help="restrict to these game names (default: all)")
     args = ap.parse_args()
     if args.update:
-        update_goldens()
+        update_goldens(args.games)
         return 0
-    return verify()
+    return verify(args.games)
 
 
 if __name__ == "__main__":
