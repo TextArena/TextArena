@@ -1,0 +1,37 @@
+{
+  "_comment": "Fail bahasa Le Truc. JANGAN terjemahkan kunci (sebelah kiri). Terjemahkan nilai sahaja (sebelah kanan). Kekalkan setiap {placeholder} betul-betul seperti asal. Jangan sekali-kali terjemahkan token tindakan ('[play]', '[raise]', '[accept]', '[fold]'), label kad/simbol daun (cth. 3♠, A♥, K♦), label pemain (P0, P1) atau nilai mata berangka.",
+  "_slots": {
+    "{pid}": "Nombor pemain, 0 atau 1",
+    "{winner}": "Nombor pemain yang memenangi pusingan kad",
+    "{points}": "Nilai mata tangan, cth. 1 atau 2",
+    "{cards}": "Senarai dipisahkan ruang bagi label kad pemain, cth. 'A♦ 3♠ A♥'",
+    "{card}": "Satu label kad tunggal, cth. '3♠'"
+  },
+
+  "player_prompt": {
+    "intro": "ringkasan peraturan permainan"
+  },
+
+  "board": {
+    "new_hand": "### Tangan baharu bernilai {points} mata\nKad anda: {cards}"
+  },
+
+  "invalid_move": {
+    "unrecognised":       "Tindakan tidak dikenali.",
+    "already_raised":     "Sudah dinaikkan.",
+    "no_raise_to_accept": "Tiada kenaikan untuk diterima.",
+    "cannot_fold":        "Tidak boleh lipat sekarang.",
+    "wrong_rank":         "Anda tidak memegang pangkat itu (simbol daun diabaikan dalam input)."
+  },
+
+  "action": {
+    "raise": "P{pid} menaikkan - tangan kini {points} mata. Lawan mesti '[accept]' atau '[fold]'.",
+    "lead":  "P{pid} membuka dengan {card}.",
+    "play":  "P{pid} bermain {card}. Pusingan kepada P{winner}."
+  },
+
+  "outcome": {
+    "folded":         "Lawan melipat.",
+    "reached_twelve": "Mencapai 12 mata."
+  }
+}

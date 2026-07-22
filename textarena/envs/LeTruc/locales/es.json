@@ -1,0 +1,37 @@
+{
+  "_comment": "Archivo de idioma de Le Truc. NO traduzcas las claves (lado izquierdo). Traduce solo los valores (lado derecho). Mantén cada {placeholder} exactamente igual. Nunca traduzcas los tokens de acción ('[play]', '[raise]', '[accept]', '[fold]'), las etiquetas de las cartas/palos (p. ej. 3♠, A♥, K♦), las etiquetas de jugador (P0, P1) ni los valores numéricos de puntos.",
+  "_slots": {
+    "{pid}": "Un número de jugador, 0 o 1",
+    "{winner}": "El número del jugador que ganó la baza",
+    "{points}": "Un valor de puntos de la mano, p. ej. 1 o 2",
+    "{cards}": "Una lista separada por espacios de las etiquetas de las cartas del jugador, p. ej. 'A♦ 3♠ A♥'",
+    "{card}": "Una única etiqueta de carta, p. ej. '3♠'"
+  },
+
+  "player_prompt": {
+    "intro": "un resumen de las reglas del juego"
+  },
+
+  "board": {
+    "new_hand": "### Nueva mano que vale {points} pto(s)\nTus cartas: {cards}"
+  },
+
+  "invalid_move": {
+    "unrecognised":       "Acción no reconocida.",
+    "already_raised":     "Ya se subió.",
+    "no_raise_to_accept": "No hay ninguna subida que aceptar.",
+    "cannot_fold":        "No se puede retirar ahora.",
+    "wrong_rank":         "No tienes ese rango (los palos se ignoran en la entrada)."
+  },
+
+  "action": {
+    "raise": "P{pid} sube - la mano ahora vale {points} ptos. El oponente debe '[accept]' o '[fold]'.",
+    "lead":  "P{pid} abre con {card}.",
+    "play":  "P{pid} juega {card}. Baza para P{winner}."
+  },
+
+  "outcome": {
+    "folded":         "El oponente se retiró.",
+    "reached_twelve": "Se alcanzaron 12 puntos."
+  }
+}
