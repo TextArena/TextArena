@@ -1,0 +1,60 @@
+{
+  "_comment": "Archivo de idioma de Spite and Malice. NO traduzcas las claves (lado izquierdo). Traduce solo los valores (lado derecho). Mantén cada {placeholder} exactamente igual. Nunca traduzcas los tokens de acción ('[draw]', '[play A♠ 0]', '[discard A♠ 1]', '[action card center_index]'), las etiquetas de las cartas (A/2-9/J/Q/K con palos ♠♥♦♣), el contenido de las pilas/listas ni los índices y longitudes numéricas de las pilas.",
+  "_slots": {
+    "{player_id}": "Un número de jugador, 0 o 1",
+    "{other}": "El número del otro jugador, 0 o 1",
+    "{card}": "Una etiqueta de carta, p. ej. A♠, K♣, 2♦",
+    "{index}": "Un índice de pila, 0-3",
+    "{i}": "Un índice de pila central, 0-3",
+    "{top}": "La carta superior de la pila de pago, o la palabra traducida para una pila vacía",
+    "{length}": "Número de cartas restantes en la pila de pago",
+    "{hand}": "Una lista neutral de etiquetas de cartas, p. ej. ['3♦', '6♦']",
+    "{discard}": "Una lista neutral de pilas de descarte, p. ej. [[], ['3♦'], [], []]",
+    "{p0}": "Lista neutral de cartas en la pila central 0",
+    "{p1}": "Lista neutral de cartas en la pila central 1",
+    "{p2}": "Lista neutral de cartas en la pila central 2",
+    "{p3}": "Lista neutral de cartas en la pila central 3",
+    "{center}": "La sección de pilas centrales pre-renderizada",
+    "{view0}": "La vista del jugador pre-renderizada (primera)",
+    "{view1}": "La vista del jugador pre-renderizada (segunda) o vacía",
+    "{board}": "El tablero pre-renderizado",
+    "{moves}": "Una lista neutral separada por comas de los tokens de movimiento disponibles"
+  },
+
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id} en una partida de dos jugadores de Spite and Malice. Tu objetivo es ser el primero en vaciar tu pila de pago.\n\n### Resumen del juego:\n- El objetivo es despejar tu pila de pago jugando cartas en las pilas centrales.\n- Puedes jugar cartas desde tres fuentes:\n  1. Tu **mano** (empiezas cada turno con hasta 5 cartas en la mano).\n  2. La **carta superior de tu pila de pago**.\n  3. La **carta superior de cualquiera de tus pilas de descarte**.\n\n### Reglas de juego:\n- Puedes jugar una carta en una pila central si es **un rango más alta** que la carta superior de esa pila (las pilas centrales empiezan con el As y suben hasta la Reina; los Reyes son comodines - pueden jugarse sobre cualquier carta pero no cambian la secuencia de rangos. Esto significa que si un Rey se usa después de un 4, ese Rey tiene rango 5 y la siguiente carta debe ser un 6).\n- Si no puedes jugar más cartas, debes **descartar una carta** en una de tus pilas de descarte para terminar tu turno.\n- Si una pila central llega a la Reina, se despejará automáticamente.\n- El orden de rango es: A=1, 2=2, ..., 9=9, J=10, Q=11, K como comodín.\n\n### Acciones:\n1. **Robar**: Al inicio de tu turno, roba cartas para completar tu mano hasta 5 cartas. Introduce **[draw]** para empezar.\n2. **Jugar una carta**: Para jugar una carta, especifica la carta y la pila central así: **[play A♠ 0]** (donde 'A♠' es la carta y '0' es el índice de la pila central).\n3. **Descartar**: Si no puedes jugar más cartas, descarta una carta de tu mano en una pila de descarte para terminar tu turno. Introduce **[discard A♠ 1]** (donde 'A♠' es la carta y '1' es el índice de la pila de descarte). Ten en cuenta que no puedes descartar ninguna carta de la pila de pago. Solo puedes descartar las cartas de tu mano.\n\n"
+  },
+
+  "board": {
+    "empty": "Vacía",
+    "center": "--- Pilas Centrales ---\nPila 0: {p0}\nPila 1: {p1}\nPila 2: {p2}\nPila 3: {p3}\n",
+    "player_view": "\n--- Vista del Jugador {player_id} ---\nPila de Pago (carta superior): {top}, Longitud de la pila de pago: {length}\nMano: {hand}\nPilas de Descarte: {discard}\n",
+    "wrapper": "{center}{view0}{view1}",
+    "current": "Tablero Actual:\n\n{board}\nMovimientos Disponibles: {moves}"
+  },
+
+  "message": {
+    "no_more_cards": "No quedan más cartas para robar. Recuerda que puedes jugar cartas desde estas fuentes:\n  1. Tu **mano**.\n  2. La **carta superior de tu pila de pago**.\n  3. La **carta superior de cualquiera de tus pilas de descarte**.\n\n",
+    "drew_self": "Has robado cartas.",
+    "drew_other": "El Jugador {player_id} ha robado cartas.",
+    "played_self": "Has jugado {card} en la pila central {index}.",
+    "played_other": "El Jugador {player_id} ha jugado {card} en la pila central {index}.",
+    "discarded_self": "Has descartado {card} en la pila de descarte {index}, lo que también significa que has terminado tu turno. No se considerará ninguna otra acción tuya en este turno. El Jugador {other} irá a continuación.",
+    "discarded_other": "El Jugador {player_id} descartó {card} en la pila de descarte {index}, lo que también significa que terminó su turno. No se considerará ninguna otra acción del Jugador {player_id} en este turno. Jugador {other}, tú irás a continuación. Por favor, introduce tu acción en el formato [action card center_index]."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Formato de movimiento inválido. El Jugador {player_id} no respondió con un movimiento válido entre corchetes.",
+    "bad_play": "Jugada inválida. El Jugador {player_id} intentó jugar {card} en la pila central {index}.",
+    "discard_from_payoff": "Descarte inválido. El Jugador {player_id} intentó descartar una carta de la pila de pago.",
+    "discard_not_in_hand": "Descarte inválido. El Jugador {player_id} intentó descartar una carta que no está en la mano.",
+    "bad_move_type": "Tipo de movimiento inválido. El Jugador {player_id} no respondió con un tipo de movimiento válido."
+  },
+
+  "outcome": {
+    "payoff_win": "¡El Jugador {player_id} ha terminado su pila de pago! ¡El Jugador {player_id} gana!",
+    "deadlock_p0": "¡Punto muerto alcanzado! El Jugador 0 gana con {p0} cartas restantes frente a las {p1} cartas del Jugador 1.",
+    "deadlock_p1": "¡Punto muerto alcanzado! El Jugador 1 gana con {p1} cartas restantes frente a las {p0} cartas del Jugador 0.",
+    "deadlock_tie": "¡Punto muerto alcanzado con empate! Ambos jugadores tienen {p0} cartas restantes. El Jugador {player_id} gana por defecto."
+  }
+}

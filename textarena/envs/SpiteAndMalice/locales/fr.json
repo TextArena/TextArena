@@ -1,0 +1,60 @@
+{
+  "_comment": "Fichier de langue de Spite and Malice. NE traduisez PAS les clés (côté gauche). Traduisez uniquement les valeurs (côté droit). Conservez chaque {placeholder} exactement tel quel. Ne traduisez jamais les jetons d'action ('[draw]', '[play A♠ 0]', '[discard A♠ 1]', '[action card center_index]'), les étiquettes des cartes (A/2-9/J/Q/K avec les couleurs ♠♥♦♣), le contenu des piles/listes ni les index et longueurs numériques des piles.",
+  "_slots": {
+    "{player_id}": "Un numéro de joueur, 0 ou 1",
+    "{other}": "Le numéro de l'autre joueur, 0 ou 1",
+    "{card}": "Une étiquette de carte, p. ex. A♠, K♣, 2♦",
+    "{index}": "Un index de pile, 0-3",
+    "{i}": "Un index de pile centrale, 0-3",
+    "{top}": "La carte du dessus de la pile de paiement, ou le mot traduit pour une pile vide",
+    "{length}": "Nombre de cartes restantes dans la pile de paiement",
+    "{hand}": "Une liste neutre d'étiquettes de cartes, p. ex. ['3♦', '6♦']",
+    "{discard}": "Une liste neutre de piles de défausse, p. ex. [[], ['3♦'], [], []]",
+    "{p0}": "Liste neutre des cartes de la pile centrale 0",
+    "{p1}": "Liste neutre des cartes de la pile centrale 1",
+    "{p2}": "Liste neutre des cartes de la pile centrale 2",
+    "{p3}": "Liste neutre des cartes de la pile centrale 3",
+    "{center}": "La section des piles centrales pré-rendue",
+    "{view0}": "La vue du joueur pré-rendue (première)",
+    "{view1}": "La vue du joueur pré-rendue (seconde) ou vide",
+    "{board}": "Le plateau pré-rendu",
+    "{moves}": "Une liste neutre séparée par des virgules des jetons de coups disponibles"
+  },
+
+  "player_prompt": {
+    "intro": "Vous êtes le Joueur {player_id} dans une partie à deux joueurs de Spite and Malice. Votre objectif est d'être le premier à vider votre pile de paiement.\n\n### Aperçu du jeu :\n- L'objectif est de vider votre pile de paiement en jouant des cartes sur les piles centrales.\n- Vous pouvez jouer des cartes depuis trois sources :\n  1. Votre **main** (vous commencez chaque tour avec jusqu'à 5 cartes en main).\n  2. La **carte du dessus de votre pile de paiement**.\n  3. La **carte du dessus de l'une de vos piles de défausse**.\n\n### Règles du jeu :\n- Vous pouvez jouer une carte sur une pile centrale si elle est **d'un rang supérieur** à la carte du dessus de cette pile (les piles centrales commencent par l'As et montent jusqu'à la Dame ; les Rois sont des jokers - ils peuvent être joués sur n'importe quelle carte mais ne changent pas la séquence des rangs. Cela signifie que si un Roi est utilisé après un 4, ce Roi a le rang 5 et la carte suivante doit être un 6).\n- Si vous ne pouvez plus jouer de cartes, vous devez **défausser une carte** sur l'une de vos piles de défausse pour terminer votre tour.\n- Si une pile centrale atteint la Dame, elle sera vidée automatiquement.\n- L'ordre des rangs est : A=1, 2=2, ..., 9=9, J=10, Q=11, K comme joker.\n\n### Actions :\n1. **Piocher** : Au début de votre tour, piochez des cartes pour compléter votre main jusqu'à 5 cartes. Entrez **[draw]** pour commencer.\n2. **Jouer une carte** : Pour jouer une carte, indiquez la carte et la pile centrale ainsi : **[play A♠ 0]** (où 'A♠' est la carte et '0' l'index de la pile centrale).\n3. **Défausser** : Si vous ne pouvez plus jouer de cartes, défaussez une carte de votre main sur une pile de défausse pour terminer votre tour. Entrez **[discard A♠ 1]** (où 'A♠' est la carte et '1' l'index de la pile de défausse). Notez que vous ne pouvez défausser aucune carte de la pile de paiement. Vous ne pouvez défausser que les cartes de votre main.\n\n"
+  },
+
+  "board": {
+    "empty": "Vide",
+    "center": "--- Piles Centrales ---\nPile 0 : {p0}\nPile 1 : {p1}\nPile 2 : {p2}\nPile 3 : {p3}\n",
+    "player_view": "\n--- Vue du Joueur {player_id} ---\nPile de Paiement (carte du dessus) : {top}, Longueur de la pile de paiement : {length}\nMain : {hand}\nPiles de Défausse : {discard}\n",
+    "wrapper": "{center}{view0}{view1}",
+    "current": "Plateau Actuel :\n\n{board}\nCoups Disponibles : {moves}"
+  },
+
+  "message": {
+    "no_more_cards": "Il n'y a plus de cartes à piocher. N'oubliez pas que vous pouvez jouer des cartes depuis ces sources :\n  1. Votre **main**.\n  2. La **carte du dessus de votre pile de paiement**.\n  3. La **carte du dessus de l'une de vos piles de défausse**.\n\n",
+    "drew_self": "Vous avez pioché des cartes.",
+    "drew_other": "Le Joueur {player_id} a pioché des cartes.",
+    "played_self": "Vous avez joué {card} sur la pile centrale {index}.",
+    "played_other": "Le Joueur {player_id} a joué {card} sur la pile centrale {index}.",
+    "discarded_self": "Vous avez défaussé {card} sur la pile de défausse {index}, ce qui signifie aussi que vous avez terminé votre tour. Aucune autre action de votre part n'est prise en compte pour ce tour. Le Joueur {other} jouera ensuite.",
+    "discarded_other": "Le Joueur {player_id} a défaussé {card} sur la pile de défausse {index}, ce qui signifie aussi qu'il a terminé son tour. Aucune autre action du Joueur {player_id} n'est prise en compte pour ce tour. Joueur {other}, vous jouerez ensuite. Veuillez entrer votre action au format [action card center_index]."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format de coup invalide. Le Joueur {player_id} n'a pas répondu avec un coup valide entre crochets.",
+    "bad_play": "Coup invalide. Le Joueur {player_id} a essayé de jouer {card} sur la pile centrale {index}.",
+    "discard_from_payoff": "Défausse invalide. Le Joueur {player_id} a essayé de défausser une carte de la pile de paiement.",
+    "discard_not_in_hand": "Défausse invalide. Le Joueur {player_id} a essayé de défausser une carte qui n'est pas en main.",
+    "bad_move_type": "Type de coup invalide. Le Joueur {player_id} n'a pas répondu avec un type de coup valide."
+  },
+
+  "outcome": {
+    "payoff_win": "Le Joueur {player_id} a terminé sa pile de paiement ! Le Joueur {player_id} gagne !",
+    "deadlock_p0": "Impasse atteinte ! Le Joueur 0 gagne avec {p0} cartes restantes contre {p1} cartes pour le Joueur 1.",
+    "deadlock_p1": "Impasse atteinte ! Le Joueur 1 gagne avec {p1} cartes restantes contre {p0} cartes pour le Joueur 0.",
+    "deadlock_tie": "Impasse atteinte avec égalité ! Les deux joueurs ont {p0} cartes restantes. Le Joueur {player_id} gagne par défaut."
+  }
+}

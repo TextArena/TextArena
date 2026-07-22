@@ -1,0 +1,60 @@
+{
+  "_comment": "Fail bahasa Spite and Malice. JANGAN terjemahkan kunci (sebelah kiri). Terjemahkan nilai sahaja (sebelah kanan). Kekalkan setiap {placeholder} betul-betul seperti asal. Jangan sekali-kali terjemahkan token tindakan ('[draw]', '[play A♠ 0]', '[discard A♠ 1]', '[action card center_index]'), label kad (A/2-9/J/Q/K dengan simbol ♠♥♦♣), kandungan longgokan/senarai atau indeks dan panjang longgokan berangka.",
+  "_slots": {
+    "{player_id}": "Nombor pemain, 0 atau 1",
+    "{other}": "Nombor pemain yang lain, 0 atau 1",
+    "{card}": "Label kad, cth. A♠, K♣, 2♦",
+    "{index}": "Indeks longgokan, 0-3",
+    "{i}": "Indeks longgokan tengah, 0-3",
+    "{top}": "Kad teratas longgokan bayaran, atau perkataan terjemahan untuk longgokan kosong",
+    "{length}": "Bilangan kad yang tinggal dalam longgokan bayaran",
+    "{hand}": "Senarai neutral label kad, cth. ['3♦', '6♦']",
+    "{discard}": "Senarai neutral longgokan buang, cth. [[], ['3♦'], [], []]",
+    "{p0}": "Senarai neutral kad pada longgokan tengah 0",
+    "{p1}": "Senarai neutral kad pada longgokan tengah 1",
+    "{p2}": "Senarai neutral kad pada longgokan tengah 2",
+    "{p3}": "Senarai neutral kad pada longgokan tengah 3",
+    "{center}": "Bahagian longgokan tengah yang telah dipaparkan",
+    "{view0}": "Paparan pemain yang telah disediakan (pertama)",
+    "{view1}": "Paparan pemain yang telah disediakan (kedua) atau kosong",
+    "{board}": "Papan yang telah dipaparkan",
+    "{moves}": "Senarai neutral dipisah koma token gerakan yang tersedia"
+  },
+
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam permainan dua pemain Spite and Malice. Matlamat anda adalah menjadi yang pertama mengosongkan longgokan bayaran anda.\n\n### Gambaran Permainan:\n- Objektifnya adalah untuk mengosongkan longgokan bayaran anda dengan bermain kad ke longgokan tengah.\n- Anda boleh bermain kad daripada tiga sumber:\n  1. **Tangan** anda (anda memulakan setiap giliran dengan sehingga 5 kad di tangan).\n  2. **Kad teratas longgokan bayaran anda**.\n  3. **Kad teratas mana-mana longgokan buang anda**.\n\n### Peraturan Bermain:\n- Anda boleh bermain kad ke longgokan tengah jika ia **satu pangkat lebih tinggi** daripada kad teratas pada longgokan itu (longgokan tengah bermula dengan Ace dan naik sehingga Queen; King adalah liar - ia boleh dimainkan atas mana-mana kad tetapi tidak mengubah urutan pangkat. Ini bermakna jika King digunakan selepas 4, maka King itu berpangkat 5 dan kad seterusnya mesti 6).\n- Jika anda tidak boleh bermain lagi kad, anda mesti **membuang kad** ke salah satu longgokan buang anda untuk menamatkan giliran anda.\n- Jika longgokan tengah mencapai Queen, ia akan dikosongkan secara automatik.\n- Urutan pangkat ialah: A=1, 2=2, ..., 9=9, J=10, Q=11, K sebagai liar.\n\n### Tindakan:\n1. **Cabut**: Pada permulaan giliran anda, cabut kad untuk memenuhkan tangan anda sehingga 5 kad. Masukkan **[draw]** untuk bermula.\n2. **Main Kad**: Untuk bermain kad, nyatakan kad dan longgokan tengah seperti ini: **[play A♠ 0]** (di mana 'A♠' ialah kad dan '0' ialah indeks longgokan tengah).\n3. **Buang**: Jika anda tidak boleh bermain lagi kad, buang satu kad dari tangan anda ke longgokan buang untuk menamatkan giliran anda. Masukkan **[discard A♠ 1]** (di mana 'A♠' ialah kad dan '1' ialah indeks longgokan buang). Perhatikan bahawa anda tidak boleh membuang sebarang kad dari longgokan bayaran. Anda hanya boleh membuang kad dari tangan anda.\n\n"
+  },
+
+  "board": {
+    "empty": "Kosong",
+    "center": "--- Longgokan Tengah ---\nLonggokan 0: {p0}\nLonggokan 1: {p1}\nLonggokan 2: {p2}\nLonggokan 3: {p3}\n",
+    "player_view": "\n--- Paparan Pemain {player_id} ---\nLonggokan Bayaran (Kad Teratas): {top}, Panjang Longgokan Bayaran: {length}\nTangan: {hand}\nLonggokan Buang: {discard}\n",
+    "wrapper": "{center}{view0}{view1}",
+    "current": "Papan Semasa:\n\n{board}\nGerakan Tersedia: {moves}"
+  },
+
+  "message": {
+    "no_more_cards": "Tiada lagi kad untuk dicabut. Ingat bahawa anda boleh bermain kad daripada sumber ini:\n  1. **Tangan** anda.\n  2. **Kad teratas longgokan bayaran anda**.\n  3. **Kad teratas mana-mana longgokan buang anda**.\n\n",
+    "drew_self": "Anda telah mencabut kad.",
+    "drew_other": "Pemain {player_id} telah mencabut kad.",
+    "played_self": "Anda telah bermain {card} pada longgokan tengah {index}.",
+    "played_other": "Pemain {player_id} telah bermain {card} pada longgokan tengah {index}.",
+    "discarded_self": "Anda telah membuang {card} ke longgokan buang {index}, yang juga bermakna anda telah menamatkan giliran anda. Tiada tindakan anda yang lain dipertimbangkan untuk giliran ini. Pemain {other} akan bermain seterusnya.",
+    "discarded_other": "Pemain {player_id} membuang {card} ke longgokan buang {index}, yang juga bermakna mereka telah menamatkan giliran mereka. Tiada tindakan Pemain {player_id} yang lain dipertimbangkan untuk giliran ini. Pemain {other}, anda akan bermain seterusnya. Sila masukkan tindakan anda dalam format [action card center_index]."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format gerakan tidak sah. Pemain {player_id} tidak membalas dengan gerakan yang sah dalam kurungan segi empat.",
+    "bad_play": "Permainan tidak sah. Pemain {player_id} cuba bermain {card} pada longgokan tengah {index}.",
+    "discard_from_payoff": "Buangan tidak sah. Pemain {player_id} cuba membuang kad dari longgokan bayaran.",
+    "discard_not_in_hand": "Buangan tidak sah. Pemain {player_id} cuba membuang kad yang tiada di tangan.",
+    "bad_move_type": "Jenis gerakan tidak sah. Pemain {player_id} tidak membalas dengan jenis gerakan yang sah."
+  },
+
+  "outcome": {
+    "payoff_win": "Pemain {player_id} telah menghabiskan longgokan bayaran mereka! Pemain {player_id} menang!",
+    "deadlock_p0": "Kebuntuan dicapai! Pemain 0 menang dengan {p0} kad berbaki berbanding {p1} kad Pemain 1.",
+    "deadlock_p1": "Kebuntuan dicapai! Pemain 1 menang dengan {p1} kad berbaki berbanding {p0} kad Pemain 0.",
+    "deadlock_tie": "Kebuntuan dicapai dengan seri! Kedua-dua pemain mempunyai {p0} kad berbaki. Pemain {player_id} menang secara lalai."
+  }
+}

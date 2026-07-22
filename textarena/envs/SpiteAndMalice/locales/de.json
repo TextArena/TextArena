@@ -1,0 +1,60 @@
+{
+  "_comment": "Spite and Malice Sprachdatei. Übersetze KEINE Schlüssel (linke Seite). Übersetze nur die Werte (rechte Seite). Behalte jeden {placeholder} exakt bei. Übersetze niemals die Aktions-Tokens ('[draw]', '[play A♠ 0]', '[discard A♠ 1]', '[action card center_index]'), die Kartenbezeichnungen (A/2-9/J/Q/K mit Farben ♠♥♦♣), Stapelinhalte/Listen oder die numerischen Stapelindizes und -längen.",
+  "_slots": {
+    "{player_id}": "Eine Spielernummer, 0 oder 1",
+    "{other}": "Die Nummer des anderen Spielers, 0 oder 1",
+    "{card}": "Eine Kartenbezeichnung, z. B. A♠, K♣, 2♦",
+    "{index}": "Ein Stapelindex, 0-3",
+    "{i}": "Ein Index eines mittleren Stapels, 0-3",
+    "{top}": "Die oberste Karte des Auszahlungsstapels oder das übersetzte Wort für einen leeren Stapel",
+    "{length}": "Anzahl der verbleibenden Karten im Auszahlungsstapel",
+    "{hand}": "Eine neutrale Liste von Kartenbezeichnungen, z. B. ['3♦', '6♦']",
+    "{discard}": "Eine neutrale Liste der Ablagestapel, z. B. [[], ['3♦'], [], []]",
+    "{p0}": "Neutrale Liste der Karten auf dem mittleren Stapel 0",
+    "{p1}": "Neutrale Liste der Karten auf dem mittleren Stapel 1",
+    "{p2}": "Neutrale Liste der Karten auf dem mittleren Stapel 2",
+    "{p3}": "Neutrale Liste der Karten auf dem mittleren Stapel 3",
+    "{center}": "Der vorgefertigte Abschnitt der mittleren Stapel",
+    "{view0}": "Die vorgefertigte Spieleransicht (erste)",
+    "{view1}": "Die vorgefertigte Spieleransicht (zweite) oder leer",
+    "{board}": "Das vorgefertigte Spielfeld",
+    "{moves}": "Eine neutrale, durch Kommas getrennte Liste der verfügbaren Zug-Tokens"
+  },
+
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in einem Zwei-Spieler-Spiel von Spite and Malice. Dein Ziel ist es, als Erster deinen Auszahlungsstapel zu leeren.\n\n### Spielübersicht:\n- Das Ziel ist es, deinen Auszahlungsstapel zu leeren, indem du Karten auf die mittleren Stapel legst.\n- Du kannst Karten aus drei Quellen spielen:\n  1. Deine **Hand** (du beginnst jeden Zug mit bis zu 5 Karten auf der Hand).\n  2. Die **oberste Karte deines Auszahlungsstapels**.\n  3. Die **oberste Karte eines deiner Ablagestapel**.\n\n### Spielregeln:\n- Du darfst eine Karte auf einen mittleren Stapel legen, wenn sie **einen Rang höher** ist als die oberste Karte auf diesem Stapel (mittlere Stapel beginnen mit Ass und gehen bis Dame; Könige sind Joker - sie können auf jede Karte gelegt werden, ändern aber die Rangfolge nicht. Das bedeutet: Wird ein König nach einer 4 verwendet, hat dieser König den Rang 5 und die nächste Karte muss eine 6 sein).\n- Wenn du keine Karten mehr spielen kannst, musst du eine **Karte ablegen** auf einen deiner Ablagestapel, um deinen Zug zu beenden.\n- Wenn ein mittlerer Stapel die Dame erreicht, wird er automatisch geleert.\n- Die Rangfolge ist: A=1, 2=2, ..., 9=9, J=10, Q=11, K als Joker.\n\n### Aktionen:\n1. **Ziehen**: Zu Beginn deines Zuges ziehst du Karten, um deine Hand auf 5 Karten aufzufüllen. Gib **[draw]** ein, um zu beginnen.\n2. **Eine Karte spielen**: Um eine Karte zu spielen, gib die Karte und den mittleren Stapel so an: **[play A♠ 0]** (wobei 'A♠' die Karte und '0' der Index des mittleren Stapels ist).\n3. **Ablegen**: Wenn du keine Karten mehr spielen kannst, lege eine Karte von deiner Hand auf einen Ablagestapel, um deinen Zug zu beenden. Gib **[discard A♠ 1]** ein (wobei 'A♠' die Karte und '1' der Index des Ablagestapels ist). Beachte, dass du keine Karte vom Auszahlungsstapel ablegen darfst. Du darfst nur Karten von deiner Hand ablegen.\n\n"
+  },
+
+  "board": {
+    "empty": "Leer",
+    "center": "--- Mittlere Stapel ---\nStapel 0: {p0}\nStapel 1: {p1}\nStapel 2: {p2}\nStapel 3: {p3}\n",
+    "player_view": "\n--- Ansicht von Spieler {player_id} ---\nAuszahlungsstapel (oberste Karte): {top}, Länge des Auszahlungsstapels: {length}\nHand: {hand}\nAblagestapel: {discard}\n",
+    "wrapper": "{center}{view0}{view1}",
+    "current": "Aktuelles Spielfeld:\n\n{board}\nVerfügbare Züge: {moves}"
+  },
+
+  "message": {
+    "no_more_cards": "Es gibt keine Karten mehr zum Ziehen. Denke daran, dass du Karten aus diesen Quellen spielen kannst:\n  1. Deiner **Hand**.\n  2. Der **obersten Karte deines Auszahlungsstapels**.\n  3. Der **obersten Karte eines deiner Ablagestapel**.\n\n",
+    "drew_self": "Du hast Karten gezogen.",
+    "drew_other": "Spieler {player_id} hat Karten gezogen.",
+    "played_self": "Du hast {card} auf den mittleren Stapel {index} gelegt.",
+    "played_other": "Spieler {player_id} hat {card} auf den mittleren Stapel {index} gelegt.",
+    "discarded_self": "Du hast {card} auf den Ablagestapel {index} abgelegt, was auch bedeutet, dass du deinen Zug beendet hast. Es werden keine weiteren Aktionen von dir in diesem Zug berücksichtigt. Spieler {other} ist als Nächstes an der Reihe.",
+    "discarded_other": "Spieler {player_id} hat {card} auf den Ablagestapel {index} abgelegt, was auch bedeutet, dass er seinen Zug beendet hat. Es werden keine weiteren Aktionen von Spieler {player_id} in diesem Zug berücksichtigt. Spieler {other}, du bist als Nächstes an der Reihe. Bitte gib deine Aktion im Format [action card center_index] ein."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Ungültiges Zugformat. Spieler {player_id} hat nicht mit einem gültigen Zug in eckigen Klammern geantwortet.",
+    "bad_play": "Ungültiger Zug. Spieler {player_id} hat versucht, {card} auf den mittleren Stapel {index} zu legen.",
+    "discard_from_payoff": "Ungültiges Ablegen. Spieler {player_id} hat versucht, eine Karte vom Auszahlungsstapel abzulegen.",
+    "discard_not_in_hand": "Ungültiges Ablegen. Spieler {player_id} hat versucht, eine Karte abzulegen, die nicht auf der Hand ist.",
+    "bad_move_type": "Ungültiger Zugtyp. Spieler {player_id} hat nicht mit einem gültigen Zugtyp geantwortet."
+  },
+
+  "outcome": {
+    "payoff_win": "Spieler {player_id} hat seinen Auszahlungsstapel geleert! Spieler {player_id} gewinnt!",
+    "deadlock_p0": "Patt erreicht! Spieler 0 gewinnt mit {p0} verbleibenden Karten gegenüber {p1} Karten von Spieler 1.",
+    "deadlock_p1": "Patt erreicht! Spieler 1 gewinnt mit {p1} verbleibenden Karten gegenüber {p0} Karten von Spieler 0.",
+    "deadlock_tie": "Patt mit Gleichstand erreicht! Beide Spieler haben {p0} verbleibende Karten. Spieler {player_id} gewinnt standardmäßig."
+  }
+}
