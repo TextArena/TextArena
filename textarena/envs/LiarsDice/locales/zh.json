@@ -1,0 +1,63 @@
+{
+  "_comment": "Liar's Dice 面向玩家的文本。方括号动作标记（'[Bid: X, Y]'、'[Call]'）、玩家编号、骰子点数、数量与计数都是中性占位符，绝不可翻译。",
+  "_slots": {
+    "player_id": "玩家索引（整数）",
+    "num_players": "游戏中的玩家数量（整数）",
+    "dice_summary": "已用 '; ' 连接的每位玩家剩余骰子数",
+    "your_dice": "已生成的、以逗号分隔的该玩家骰子点数列表",
+    "p": "玩家索引（整数）",
+    "d": "该玩家剩余骰子数（整数）",
+    "current_player_id": "发起质疑的玩家索引（整数）",
+    "face_value": "被计数的骰子点数（1-6）",
+    "count": "实际匹配的骰子数量（整数）",
+    "quantity": "叫价数量（整数）",
+    "loser_id": "失去一颗骰子的玩家索引（整数）",
+    "new_quantity": "刚提交的叫价数量（整数）",
+    "current_quantity": "当前叫价数量（整数）",
+    "new_face_value": "刚提交的叫价点数（整数）",
+    "current_face_value": "当前叫价点数（整数）",
+    "action": "玩家提交的原始动作字符串",
+    "reason": "嵌套的叫价拒绝原因",
+    "winner": "获胜玩家索引（整数）",
+    "final_ranking": "从最先被淘汰者到获胜者的玩家索引列表"
+  },
+
+  "player_prompt": {
+    "intro": "你是这场 {num_players} 人 Liar's Dice 游戏中的玩家 {player_id}。\n规则：\n- 轮到你时，你可以选择：\n  1) 做出比当前叫价更高数量或更高点数（或两者皆是）的新叫价；即 '[Bid: 3, 4]'，\n  2) 输入 '[Call]' 来质疑上一次叫价。\n\n如果你质疑：\n  - 如果所有骰子中该点数的实际数量少于叫价，则上一位叫价者失去一颗骰子。\n  - 否则，质疑者失去一颗骰子。\n骰子数降到 0 的玩家被淘汰。最后剩下的玩家获胜。"
+  },
+
+  "board": {
+    "per_player":       "\t玩家 {p}: {d}",
+    "new_round":        "\n新一轮 - 剩余骰子: {dice_summary}\n你当前的骰子是: {your_dice}"
+  },
+
+  "call": {
+    "bidder_loses":     "玩家 {current_player_id} 发起质疑！点数 {face_value} 的实际数量为 {count}，少于 {quantity}。\n玩家 {loser_id}（上一位叫价者）失去一颗骰子。",
+    "caller_loses":     "玩家 {current_player_id} 发起质疑！点数 {face_value} 的实际数量为 {count}，>= {quantity}。\n玩家 {loser_id}（质疑者）失去一颗骰子。"
+  },
+
+  "action": {
+    "bid_announce":     "玩家 {player_id} 叫价 {quantity} 个点数 {face_value}。"
+  },
+
+  "invalid_move": {
+    "call_no_bid":      "在没有先前叫价的情况下发起了质疑。",
+    "invalid_bid":      "无效叫价：{reason}",
+    "not_recognized":   "该动作无法识别为有效的 '[Bid: X, Y]' 或 '[Call]'。已提交的动作：{action}"
+  },
+
+  "bid_reason": {
+    "quantity_lower":   "新数量 {new_quantity} 低于当前的 {current_quantity}。",
+    "face_lower":       "新点数 {new_face_value} 低于当前的 {current_face_value}。",
+    "identical":        "叫价与当前叫价完全相同。",
+    "face_range":       "点数必须介于 1 到 6 之间。"
+  },
+
+  "message": {
+    "eliminated_invalid": "玩家 {player_id} 因无效动作被淘汰。"
+  },
+
+  "outcome": {
+    "win":              "玩家 {winner} 获胜！最终排名：{final_ranking}"
+  }
+}

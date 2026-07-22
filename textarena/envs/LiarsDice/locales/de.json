@@ -1,0 +1,63 @@
+{
+  "_comment": "Benutzerseitige Texte für Liar's Dice. Aktions-Token in Klammern ('[Bid: X, Y]', '[Call]'), Spieler-IDs, Würfelwerte, Anzahlen und Zählungen sind neutrale Platzhalter und dürfen niemals übersetzt werden.",
+  "_slots": {
+    "player_id": "Spielerindex (Ganzzahl)",
+    "num_players": "Anzahl der Spieler im Spiel (Ganzzahl)",
+    "dice_summary": "vorgerenderte, mit '; ' verbundene verbleibende Würfelzahlen pro Spieler",
+    "your_dice": "vorgerenderte, durch Komma getrennte Liste der Würfelwerte dieses Spielers",
+    "p": "Spielerindex (Ganzzahl)",
+    "d": "Anzahl der verbleibenden Würfel dieses Spielers (Ganzzahl)",
+    "current_player_id": "Index des Spielers, der angefochten hat (Ganzzahl)",
+    "face_value": "gezählter Würfelwert (1-6)",
+    "count": "tatsächliche Anzahl passender Würfel (Ganzzahl)",
+    "quantity": "Gebotsanzahl (Ganzzahl)",
+    "loser_id": "Index des Spielers, der einen Würfel verliert (Ganzzahl)",
+    "new_quantity": "gerade abgegebene Gebotsanzahl (Ganzzahl)",
+    "current_quantity": "aktuelle Gebotsanzahl (Ganzzahl)",
+    "new_face_value": "gerade abgegebener Gebots-Würfelwert (Ganzzahl)",
+    "current_face_value": "aktueller Gebots-Würfelwert (Ganzzahl)",
+    "action": "die vom Spieler eingereichte Roh-Aktion",
+    "reason": "ein verschachtelter Ablehnungsgrund für das Gebot",
+    "winner": "Index des Spielers, der gewinnt (Ganzzahl)",
+    "final_ranking": "Liste der Spielerindizes vom zuerst ausgeschiedenen bis zum Gewinner"
+  },
+
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in einem Liar's-Dice-Spiel mit {num_players} Spielern.\nRegeln:\n- In deinem Zug kannst du entweder:\n  1) ein neues Gebot mit höherer Anzahl oder höherem Würfelwert (oder beidem) als das aktuelle Gebot abgeben, d. h. '[Bid: 3, 4]',\n  2) das letzte Gebot anfechten, indem du '[Call]' eingibst.\n\nWenn du anfechtest:\n  - Wenn die tatsächliche Anzahl dieses Würfelwerts über alle Würfel hinweg kleiner als das Gebot ist, verliert der letzte Bieter einen Würfel.\n  - Andernfalls verliert der Anfechtende einen Würfel.\nEin Spieler, der 0 Würfel erreicht, scheidet aus. Der letzte verbleibende Spieler gewinnt."
+  },
+
+  "board": {
+    "per_player":       "\tSpieler {p}: {d}",
+    "new_round":        "\nNeue Runde - Verbleibende Würfel: {dice_summary}\nDeine aktuellen Würfel sind: {your_dice}"
+  },
+
+  "call": {
+    "bidder_loses":     "Spieler {current_player_id} fechtet an! Die tatsächliche Anzahl von Würfelwert {face_value} ist {count}, was WENIGER als {quantity} ist.\nSpieler {loser_id} (der letzte Bieter) verliert einen Würfel.",
+    "caller_loses":     "Spieler {current_player_id} fechtet an! Die tatsächliche Anzahl von Würfelwert {face_value} ist {count}, was >= {quantity} ist.\nSpieler {loser_id} (der Anfechtende) verliert einen Würfel."
+  },
+
+  "action": {
+    "bid_announce":     "Spieler {player_id} bietet {quantity} von Würfelwert {face_value}."
+  },
+
+  "invalid_move": {
+    "call_no_bid":      "Angefochten, ohne dass ein vorheriges Gebot vorliegt.",
+    "invalid_bid":      "Ungültiges Gebot: {reason}",
+    "not_recognized":   "Aktion nicht als gültiges '[Bid: X, Y]' oder '[Call]' erkannt. Eingereichte Aktion: {action}"
+  },
+
+  "bid_reason": {
+    "quantity_lower":   "Neue Anzahl {new_quantity} ist niedriger als aktuell {current_quantity}.",
+    "face_lower":       "Neuer Würfelwert {new_face_value} ist niedriger als aktuell {current_face_value}.",
+    "identical":        "Gebot ist identisch mit dem aktuellen Gebot.",
+    "face_range":       "Würfelwert muss zwischen 1 und 6 liegen."
+  },
+
+  "message": {
+    "eliminated_invalid": "Spieler {player_id} wurde durch einen ungültigen Zug ausgeschieden."
+  },
+
+  "outcome": {
+    "win":              "Spieler {winner} gewinnt! Endplatzierung: {final_ranking}"
+  }
+}

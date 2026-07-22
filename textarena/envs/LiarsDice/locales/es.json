@@ -1,0 +1,63 @@
+{
+  "_comment": "Textos visibles para el jugador de Liar's Dice. Los tokens de acción entre corchetes ('[Bid: X, Y]', '[Call]'), los identificadores de jugador, los valores de las caras del dado, las cantidades y los recuentos son marcadores neutrales y nunca deben traducirse.",
+  "_slots": {
+    "player_id": "índice del jugador (entero)",
+    "num_players": "número de jugadores en la partida (entero)",
+    "dice_summary": "recuento de dados restantes por jugador ya unido con '; '",
+    "your_dice": "lista ya generada, separada por comas, de los valores de los dados de este jugador",
+    "p": "índice del jugador (entero)",
+    "d": "recuento de dados restantes de ese jugador (entero)",
+    "current_player_id": "índice del jugador que hizo la llamada (entero)",
+    "face_value": "valor de la cara del dado que se cuenta (1-6)",
+    "count": "número real de dados coincidentes (entero)",
+    "quantity": "cantidad de la puja (entero)",
+    "loser_id": "índice del jugador que pierde un dado (entero)",
+    "new_quantity": "cantidad de la puja recién enviada (entero)",
+    "current_quantity": "cantidad de la puja actual (entero)",
+    "new_face_value": "valor de la cara de la puja recién enviada (entero)",
+    "current_face_value": "valor de la cara de la puja actual (entero)",
+    "action": "la cadena de acción sin procesar que envió el jugador",
+    "reason": "un motivo anidado de rechazo de la puja",
+    "winner": "índice del jugador que gana (entero)",
+    "final_ranking": "lista de índices de jugadores desde el primer eliminado hasta el ganador"
+  },
+
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id} en una partida de Liar's Dice de {num_players} jugadores.\nReglas:\n- En tu turno, puedes:\n  1) Hacer una nueva puja con mayor cantidad o mayor cara (o ambas) que la puja actual; es decir, '[Bid: 3, 4]',\n  2) Reclamar la última puja escribiendo '[Call]'.\n\nSi reclamas:\n  - Si el recuento real de ese valor de cara entre todos los dados es menor que la puja, el último pujador pierde un dado.\n  - De lo contrario, quien reclama pierde un dado.\nUn jugador que llega a 0 dados queda eliminado. El último jugador que quede gana."
+  },
+
+  "board": {
+    "per_player":       "\tJugador {p}: {d}",
+    "new_round":        "\nNueva ronda - Dados restantes: {dice_summary}\nTus dados actuales son: {your_dice}"
+  },
+
+  "call": {
+    "bidder_loses":     "¡El Jugador {current_player_id} reclama! El recuento real de la cara {face_value} es {count}, que es MENOR que {quantity}.\nEl Jugador {loser_id} (el último pujador) pierde un dado.",
+    "caller_loses":     "¡El Jugador {current_player_id} reclama! El recuento real de la cara {face_value} es {count}, que es >= {quantity}.\nEl Jugador {loser_id} (quien reclama) pierde un dado."
+  },
+
+  "action": {
+    "bid_announce":     "El Jugador {player_id} puja {quantity} de la cara {face_value}."
+  },
+
+  "invalid_move": {
+    "call_no_bid":      "Se reclamó sin una puja previa.",
+    "invalid_bid":      "Puja inválida: {reason}",
+    "not_recognized":   "La acción no se reconoce como un '[Bid: X, Y]' o '[Call]' válido. Acción enviada: {action}"
+  },
+
+  "bid_reason": {
+    "quantity_lower":   "La nueva cantidad {new_quantity} es menor que la actual {current_quantity}.",
+    "face_lower":       "El nuevo valor de cara {new_face_value} es menor que el actual {current_face_value}.",
+    "identical":        "La puja es idéntica a la puja actual.",
+    "face_range":       "El valor de la cara debe estar entre 1 y 6."
+  },
+
+  "message": {
+    "eliminated_invalid": "El Jugador {player_id} fue eliminado por un movimiento inválido."
+  },
+
+  "outcome": {
+    "win":              "¡El Jugador {winner} gana! Clasificación final: {final_ranking}"
+  }
+}
