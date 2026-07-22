@@ -1,0 +1,47 @@
+{
+  "_comment": "IteratedUltimatumGame 简体中文语言包。请勿翻译键名（左侧），只翻译值（右侧）。完整保留每个 {占位符}；不要翻译动作记号 [Offer: $X] / [Accept] / [Reject]。保留货币符号 '$' 和所有数字。",
+  "_slots": {
+    "{player_id}": "玩家编号，0 或 1",
+    "{other_id}": "另一名玩家的编号，1 或 0",
+    "{num_rounds}": "总回合数",
+    "{pool}": "每回合可分配的金额（数字）",
+    "{round_number}": "当前回合编号",
+    "{proposer_id}": "提议方玩家编号，0 或 1",
+    "{responder_id}": "回应方玩家编号，0 或 1",
+    "{offer}": "提议的金额（数字）",
+    "{keep}": "提议方保留的金额（数字）",
+    "{proposer_gain}": "提议方本回合获得的金额（数字）",
+    "{responder_gain}": "回应方本回合获得的金额（数字）",
+    "{total_0}": "玩家 0 的累计总额（数字）",
+    "{total_1}": "玩家 1 的累计总额（数字）",
+    "{winner}": "获胜玩家的编号",
+    "{loser}": "落败玩家的编号",
+    "{winner_total}": "获胜方的总金额（数字）",
+    "{loser_total}": "落败方的总金额（数字）",
+    "{total}": "双方并列的最终总额（数字）"
+  },
+
+  "player_prompt": {
+    "intro": "你是玩家 {player_id}，正在进行 {num_rounds} 回合的重复最后通牒博弈。\n本回合你有 ${pool} 可在你和玩家 {other_id} 之间分配。\n\n提议方：\n  - 提出报价：[Offer: $X]（0 <= X <= pool）\n  - 若被接受 → 你获得 $(pool - X)，另一名玩家获得 $X\n  - 若被拒绝 → 双方均获得 $0\n  - 示例：[Offer: $3]  或  '我觉得这样公平。[Offer: $5]'\n\n回应方：\n  - 用 [Accept] 或 [Reject] 对报价作出决定\n  - 示例：'这看起来合理。[Accept]'\n            '太不公平了。[Reject]'\n"
+  },
+
+  "round": {
+    "begins":   "--- 第 {round_number} 回合开始！ ---\n玩家 {proposer_id} 是提议方，玩家 {responder_id} 是回应方。",
+    "offer":    "第 {round_number} 回合：玩家 {proposer_id} 向玩家 {responder_id} 报价 ${offer}（保留 ${keep}）。",
+    "accepted": "玩家 {responder_id} 接受了！第 {round_number} 回合收益：玩家 {proposer_id} +${proposer_gain}，玩家 {responder_id} +${responder_gain}。新的总额：玩家 0：${total_0}，玩家 1：${total_1}。",
+    "rejected": "玩家 {responder_id} 拒绝了报价！第 {round_number} 回合收益：双方均 +$0。总额保持不变：玩家 0：${total_0}，玩家 1：${total_1}。"
+  },
+
+  "invalid_move": {
+    "no_offer_format":  "提议方必须使用格式 [Offer: $X] 来提出报价。",
+    "bad_integer":      "报价金额必须是有效的整数。",
+    "out_of_range":     "报价必须介于 $0 和 ${pool} 之间。",
+    "no_current_offer": "当前没有可回应的报价。",
+    "accept_or_reject": "回应方必须用 [Accept] 接受或 [Reject] 拒绝报价。"
+  },
+
+  "outcome": {
+    "win":  "玩家 {winner} 以总额 ${winner_total} 战胜玩家 {loser} 的 ${loser_total} 获胜。",
+    "draw": "平局！双方最终均以总额 ${total} 结束。"
+  }
+}

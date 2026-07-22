@@ -1,0 +1,1121 @@
+{
+  "draw": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Draw! Both players finished with $10 total.",
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Draw! Both players finished with $10 total.",
+        "role": "Player 1",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0, playing 2 rounds of Iterated Ultimatum Game.\nYou have $10 to split this round between yourself and Player 1.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 1 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Offer: $5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1, playing 2 rounds of Iterated Ultimatum Game.\nYou have $10 to split this round between yourself and Player 0.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 1 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 1: Player 0 offers $5 to Player 1 (keeping $5).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Accept]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 1: Player 0 offers $5 to Player 1 (keeping $5).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 1 gains: Player 0 +$5, Player 1 +$5. New totals: Player 0: $5, Player 1: $5.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 2 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Offer: $5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 1 gains: Player 0 +$5, Player 1 +$5. New totals: Player 0: $5, Player 1: $5.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 2 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 2: Player 0 offers $5 to Player 1 (keeping $5).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Accept]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 2 gains: Player 0 +$5, Player 1 +$5. New totals: Player 0: $10, Player 1: $10.",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      }
+    ],
+    "rewards": {
+      "0": 0,
+      "1": 0
+    }
+  },
+  "invalid_offer_range": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 won with $14 total vs Player 1's $6.",
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 won with $14 total vs Player 1's $6.",
+        "role": "Player 1",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0, playing 2 rounds of Iterated Ultimatum Game.\nYou have $10 to split this round between yourself and Player 1.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 1 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Offer: $99]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $99]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Offer must be between $0 and $10. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[Offer: $3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1, playing 2 rounds of Iterated Ultimatum Game.\nYou have $10 to split this round between yourself and Player 0.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 1 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $99]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 1: Player 0 offers $3 to Player 1 (keeping $7).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Accept]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 1: Player 0 offers $3 to Player 1 (keeping $7).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 1 gains: Player 0 +$7, Player 1 +$3. New totals: Player 0: $7, Player 1: $3.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 2 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Offer: $3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 1 gains: Player 0 +$7, Player 1 +$3. New totals: Player 0: $7, Player 1: $3.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 2 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 2: Player 0 offers $3 to Player 1 (keeping $7).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Accept]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 2 gains: Player 0 +$7, Player 1 +$3. New totals: Player 0: $14, Player 1: $6.",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      }
+    ],
+    "rewards": {
+      "0": 1,
+      "1": -1
+    }
+  },
+  "invalid_proposer_format": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 won with $14 total vs Player 1's $6.",
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 won with $14 total vs Player 1's $6.",
+        "role": "Player 1",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0, playing 2 rounds of Iterated Ultimatum Game.\nYou have $10 to split this round between yourself and Player 1.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 1 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "bad move",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "bad move",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Proposer must make an offer using the format [Offer: $X]. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[Offer: $3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1, playing 2 rounds of Iterated Ultimatum Game.\nYou have $10 to split this round between yourself and Player 0.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 1 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "bad move",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 1: Player 0 offers $3 to Player 1 (keeping $7).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Accept]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 1: Player 0 offers $3 to Player 1 (keeping $7).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 1 gains: Player 0 +$7, Player 1 +$3. New totals: Player 0: $7, Player 1: $3.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 2 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Offer: $3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 1 gains: Player 0 +$7, Player 1 +$3. New totals: Player 0: $7, Player 1: $3.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 2 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 2: Player 0 offers $3 to Player 1 (keeping $7).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Accept]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 2 gains: Player 0 +$7, Player 1 +$3. New totals: Player 0: $14, Player 1: $6.",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      }
+    ],
+    "rewards": {
+      "0": 1,
+      "1": -1
+    }
+  },
+  "invalid_responder": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 won with $14 total vs Player 1's $6.",
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 won with $14 total vs Player 1's $6.",
+        "role": "Player 1",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0, playing 2 rounds of Iterated Ultimatum Game.\nYou have $10 to split this round between yourself and Player 1.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 1 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Offer: $3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1, playing 2 rounds of Iterated Ultimatum Game.\nYou have $10 to split this round between yourself and Player 0.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 1 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 1: Player 0 offers $3 to Player 1 (keeping $7).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "maybe",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "maybe",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 attempted an invalid move. Reason: Responder must either [Accept] or [Reject] the offer. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 1,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[Accept]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 1: Player 0 offers $3 to Player 1 (keeping $7).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "maybe",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 1 gains: Player 0 +$7, Player 1 +$3. New totals: Player 0: $7, Player 1: $3.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 2 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Offer: $3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 1 gains: Player 0 +$7, Player 1 +$3. New totals: Player 0: $7, Player 1: $3.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 2 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 2: Player 0 offers $3 to Player 1 (keeping $7).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Accept]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 2 gains: Player 0 +$7, Player 1 +$3. New totals: Player 0: $14, Player 1: $6.",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      }
+    ],
+    "rewards": {
+      "0": 1,
+      "1": -1
+    }
+  },
+  "p0_wins": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 won with $16 total vs Player 1's $4.",
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 won with $16 total vs Player 1's $4.",
+        "role": "Player 1",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0, playing 2 rounds of Iterated Ultimatum Game.\nYou have $10 to split this round between yourself and Player 1.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 1 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Offer: $2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1, playing 2 rounds of Iterated Ultimatum Game.\nYou have $10 to split this round between yourself and Player 0.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 1 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 1: Player 0 offers $2 to Player 1 (keeping $8).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Accept]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 1: Player 0 offers $2 to Player 1 (keeping $8).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 1 gains: Player 0 +$8, Player 1 +$2. New totals: Player 0: $8, Player 1: $2.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 2 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Offer: $2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 1 gains: Player 0 +$8, Player 1 +$2. New totals: Player 0: $8, Player 1: $2.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 2 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 2: Player 0 offers $2 to Player 1 (keeping $8).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Accept]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 2 gains: Player 0 +$8, Player 1 +$2. New totals: Player 0: $16, Player 1: $4.",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      }
+    ],
+    "rewards": {
+      "0": 1,
+      "1": -1
+    }
+  },
+  "p1_wins": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 1 won with $16 total vs Player 0's $4.",
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 1 won with $16 total vs Player 0's $4.",
+        "role": "Player 1",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0, playing 2 rounds of Iterated Ultimatum Game.\nYou have $10 to split this round between yourself and Player 1.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 1 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Offer: $8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1, playing 2 rounds of Iterated Ultimatum Game.\nYou have $10 to split this round between yourself and Player 0.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 1 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $8]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 1: Player 0 offers $8 to Player 1 (keeping $2).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Accept]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $8]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 1: Player 0 offers $8 to Player 1 (keeping $2).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 1 gains: Player 0 +$2, Player 1 +$8. New totals: Player 0: $2, Player 1: $8.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 2 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Offer: $8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 1 gains: Player 0 +$2, Player 1 +$8. New totals: Player 0: $2, Player 1: $8.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 2 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $8]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 2: Player 0 offers $8 to Player 1 (keeping $2).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Accept]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 2 gains: Player 0 +$2, Player 1 +$8. New totals: Player 0: $4, Player 1: $16.",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      }
+    ],
+    "rewards": {
+      "0": -1,
+      "1": 1
+    }
+  },
+  "reject": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 won with $6 total vs Player 1's $4.",
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 won with $6 total vs Player 1's $4.",
+        "role": "Player 1",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0, playing 2 rounds of Iterated Ultimatum Game.\nYou have $10 to split this round between yourself and Player 1.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 1 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Offer: $3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1, playing 2 rounds of Iterated Ultimatum Game.\nYou have $10 to split this round between yourself and Player 0.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 1 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 1: Player 0 offers $3 to Player 1 (keeping $7).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Reject]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 1: Player 0 offers $3 to Player 1 (keeping $7).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[Reject]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 rejected the offer! Round 1 gains: Both players +$0. Totals remain: Player 0: $0, Player 1: $0.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 2 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Offer: $4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Reject]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 rejected the offer! Round 1 gains: Both players +$0. Totals remain: Player 0: $0, Player 1: $0.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "--- Round 2 begins! ---\nPlayer 0 is the proposer, Player 1 is the responder.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[Offer: $4]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Round 2: Player 0 offers $4 to Player 1 (keeping $6).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Accept]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Accept]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 accepted! Round 2 gains: Player 0 +$6, Player 1 +$4. New totals: Player 0: $6, Player 1: $4.",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      }
+    ],
+    "rewards": {
+      "0": 1,
+      "1": -1
+    }
+  }
+}
