@@ -185,7 +185,7 @@ Two-Player
 | 28 | [Othello](#othello) | 2 | | |
 | 29 | [PigDice](#pigdice) | 2 | 🌐 | |
 | 30 | [QuantumTicTacToe](#quantumtictactoe) | 2 | | |
-| 31 | [ReverseTicTacToe](#reversetictactoe) | 2 | | |
+| 31 | [ReverseTicTacToe](#reversetictactoe) | 2 | 🌐 | |
 | 32 | [ScenarioPlanning](#scenarioplanning) | 2 | | |
 | 33 | [SimpleBlindAuction](#simpleblindauction) | 2 | | |
 | 34 | [SimpleNegotiation](#simplenegotiation) | 2 | 🌐 | |
@@ -197,8 +197,8 @@ Two-Player
 | 40 | [TicTacToe](#tictactoe) | 2 | 🌐 | |
 | 41 | [TruthAndDeception](#truthanddeception) | 2 | | |
 | 42 | [TwoDollar](#twodollar) | 2 | | |
-| 43 | [UltimateTicTacToe](#ultimatetictactoe) | 2 | | |
-| 44 | [WildTicTacToe](#wildtictactoe) | 2 | | |
+| 43 | [UltimateTicTacToe](#ultimatetictactoe) | 2 | 🌐 | |
+| 44 | [WildTicTacToe](#wildtictactoe) | 2 | 🌐 | |
 | 45 | [WordChains](#wordchains) | 2 | | |
 
 # Multi-PLayer
@@ -220,7 +220,7 @@ Two-Player
 | 14 | [SecretMafia](#secretmafia) | 6–15 | | |
 | 15 | [Taboo](#taboo) | 4–8 | | |
 | 16 | [ThreePlayerGOPS](#threeplayergops) | 3 | | |
-| 17 | [ThreePlayerTicTacToe](#threeplayertictactoe) | 3 | | |
+| 17 | [ThreePlayerTicTacToe](#threeplayertictactoe) | 3 | 🌐 | |
 | 18 | [ThreePlayerIPD](#threeplayeripd) | 3 | 🌐 | |
 | 19 | [TwoRoomsAndABoom](#tworoomsandaboom) | 6–20 | | |
 
