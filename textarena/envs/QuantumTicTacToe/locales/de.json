@@ -1,0 +1,41 @@
+{
+  "_comment": "QuantumTicTacToe Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel (linke Seite), nur die Werte (rechte Seite). Behalte jeden {placeholder} exakt bei. Zug-Token wie '[a,b]', Feldkoordinaten wie (0, 1), Markierungslabel wie 'X1 / X1', die Symbole X und O sowie das ASCII-Spielfeld werden NICHT übersetzt.",
+  "_slots": {
+    "{player_id}": "Die Spielernummer, 0 oder 1",
+    "{symbol}": "Das Symbol des Spielers, X oder O",
+    "{parity}": "Das Wort für die Parität der Zugnummern, entweder 'odd' (ungerade) oder 'even' (gerade)",
+    "{board}": "Das gerenderte ASCII-Spielfeld (nicht übersetzen)",
+    "{pos_a}": "Ein Feldkoordinatenpaar wie (0, 1) (nicht übersetzen)",
+    "{pos_b}": "Ein Feldkoordinatenpaar wie (0, 2) (nicht übersetzen)",
+    "{cell}": "Ein Feldkoordinatenpaar wie (1, 2) (nicht übersetzen)"
+  },
+
+  "player_prompt": {
+    "intro":            "Du bist Spieler {player_id} in Quantum Tic Tac Toe.\nDein Symbol ist '{symbol}', und deine Zugnummern sind immer {parity} (z. B. X1, X3 oder O2, O4).\n\nZiel: Gewinne, indem du eine Reihe aus drei klassischen Markierungen bildest (aus Superpositionen verfestigt).\n\nSpielablauf:\n- Setze in jedem Zug eine spukhafte Markierung in zwei verschiedene leere Felder im Format '[a,b]'.\n- Diese Markierungen sind verschränkt und werden wie 'X1 / X1' oder 'O4 / O4' beschriftet.\n- Du kannst keine spukhaften Markierungen in ein Feld setzen, das bereits kollabiert (verfestigt) ist.\n\nKollaps-Regel:\n- Wenn dein Zug einen Zyklus im Verschränkungsgraphen erzeugt, kollabiert er automatisch.\n- Jede spukhafte Markierung im Zyklus wird zu einer klassischen Markierung in einer ihrer beiden Positionen.\n- Alle abhängigen spukhaften Markierungen kollabieren ebenfalls.\n\nSieg:\n- Das Spiel endet, wenn ein Spieler drei klassische Markierungen in einer Reihe hat.\n- Wenn beide Spieler während desselben Kollapses eine Reihe erzielen, gewinnt derjenige mit der niedrigeren höchsten Zugnummer.\n\nBeispielzug: '[0,4]' setzt eine spukhafte Markierung in die Felder 0 und 4."
+  },
+
+  "board": {
+    "current_board":    "Quantum Tic Tac Toe Spielfeld:\n\n{board}\n\nGib deinen Zug als '[a,b]' ein, um eine Quantenmarkierung an zwei Stellen zu setzen."
+  },
+
+  "invalid_move": {
+    "wrong_format":     "Ungültiges Format. Verwende '[a,b]'.",
+    "bad_indices":      "Ungültige oder doppelte Feldindizes.",
+    "already_solid":    "Eines der Felder ist bereits verfestigt."
+  },
+
+  "game_action": {
+    "placed":           "Spieler {player_id} hat sein Symbol in eine Superposition zwischen den Feldern {pos_a} und {pos_b} gesetzt."
+  },
+
+  "collapse": {
+    "resolved":         "Superposition aufgelöst. Feld {cell} ist jetzt {symbol}.",
+    "dependent":        "Abhängige Superposition aufgelöst. Feld {cell} ist jetzt {symbol}.",
+    "last_cell":        "Superposition für das letzte Feld aufgelöst. Feld {cell} ist jetzt {symbol}."
+  },
+
+  "outcome": {
+    "win":              "Spieler {player_id} gewinnt mit verfestigten Markierungen!",
+    "draw":             "Das Spiel endet unentschieden!"
+  }
+}

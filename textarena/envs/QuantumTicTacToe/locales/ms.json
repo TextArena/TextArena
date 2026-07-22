@@ -1,0 +1,41 @@
+{
+  "_comment": "Fail bahasa QuantumTicTacToe dalam bahasa Melayu. JANGAN terjemahkan kunci (sebelah kiri), hanya nilai (sebelah kanan). Kekalkan setiap {placeholder} tepat seperti asal. Token gerakan seperti '[a,b]', koordinat petak seperti (0, 1), label tanda seperti 'X1 / X1', simbol X dan O serta papan ASCII TIDAK diterjemahkan.",
+  "_slots": {
+    "{player_id}": "Nombor pemain, 0 atau 1",
+    "{symbol}": "Tanda pemain, X atau O",
+    "{parity}": "Perkataan untuk pariti nombor gerakan, 'odd' (ganjil) atau 'even' (genap)",
+    "{board}": "Papan ASCII yang dipaparkan (jangan terjemah)",
+    "{pos_a}": "Sepasang koordinat petak seperti (0, 1) (jangan terjemah)",
+    "{pos_b}": "Sepasang koordinat petak seperti (0, 2) (jangan terjemah)",
+    "{cell}": "Sepasang koordinat petak seperti (1, 2) (jangan terjemah)"
+  },
+
+  "player_prompt": {
+    "intro":            "Anda ialah Pemain {player_id} dalam Quantum Tic Tac Toe.\nSimbol anda ialah '{symbol}', dan nombor gerakan anda sentiasa {parity} (cth., X1, X3 atau O2, O4).\n\nMatlamat: Menang dengan membentuk satu barisan tiga tanda klasik (dipejalkan daripada superposisi).\n\nCara Bermain:\n- Pada setiap giliran, letakkan tanda hantu pada dua petak kosong yang berbeza menggunakan format '[a,b]'.\n- Tanda-tanda ini terjerat, dan dilabelkan seperti 'X1 / X1' atau 'O4 / O4'.\n- Anda tidak boleh meletakkan tanda hantu pada petak yang telah runtuh (dipejalkan).\n\nPeraturan Keruntuhan:\n- Jika gerakan anda mewujudkan kitaran dalam graf keterjeratan, ia akan runtuh secara automatik.\n- Setiap tanda hantu dalam kitaran bertukar menjadi tanda klasik pada salah satu daripada dua kedudukannya.\n- Sebarang tanda hantu bergantung juga akan runtuh.\n\nKemenangan:\n- Permainan tamat apabila seorang pemain mempunyai tiga tanda klasik dalam satu barisan.\n- Jika kedua-dua pemain mendapat satu barisan semasa keruntuhan yang sama, pemain dengan nombor gerakan maksimum yang lebih rendah menang.\n\nContoh gerakan: '[0,4]' meletakkan tanda hantu pada petak 0 dan 4."
+  },
+
+  "board": {
+    "current_board":    "Papan Quantum Tic Tac Toe:\n\n{board}\n\nHantar gerakan anda sebagai '[a,b]' untuk meletakkan tanda kuantum pada dua lokasi."
+  },
+
+  "invalid_move": {
+    "wrong_format":     "Format tidak sah. Gunakan '[a,b]'.",
+    "bad_indices":      "Indeks petak tidak sah atau berulang.",
+    "already_solid":    "Salah satu petak telah pun dipejalkan."
+  },
+
+  "game_action": {
+    "placed":           "Pemain {player_id} meletakkan simbolnya dalam superposisi antara petak {pos_a} dan {pos_b}."
+  },
+
+  "collapse": {
+    "resolved":         "Superposisi diselesaikan. Petak {cell} kini {symbol}.",
+    "dependent":        "Superposisi bergantung diselesaikan. Petak {cell} kini {symbol}.",
+    "last_cell":        "Superposisi untuk petak terakhir diselesaikan. Petak {cell} kini {symbol}."
+  },
+
+  "outcome": {
+    "win":              "Pemain {player_id} menang dengan tanda yang dipejalkan!",
+    "draw":             "Permainan ini seri!"
+  }
+}

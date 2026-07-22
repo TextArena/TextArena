@@ -1,0 +1,41 @@
+{
+  "_comment": "Fichier de langue QuantumTicTacToe en français. NE traduisez PAS les clés (côté gauche), seulement les valeurs (côté droit). Conservez chaque {placeholder} exactement tel quel. Les jetons de coup comme '[a,b]', les coordonnées de case comme (0, 1), les étiquettes de marques comme 'X1 / X1', les symboles X et O et le plateau ASCII ne sont PAS traduits.",
+  "_slots": {
+    "{player_id}": "Le numéro du joueur, 0 ou 1",
+    "{symbol}": "La marque du joueur, X ou O",
+    "{parity}": "Le mot pour la parité des numéros de coup, 'odd' (impair) ou 'even' (pair)",
+    "{board}": "Le plateau ASCII rendu (ne pas traduire)",
+    "{pos_a}": "Une paire de coordonnées de case comme (0, 1) (ne pas traduire)",
+    "{pos_b}": "Une paire de coordonnées de case comme (0, 2) (ne pas traduire)",
+    "{cell}": "Une paire de coordonnées de case comme (1, 2) (ne pas traduire)"
+  },
+
+  "player_prompt": {
+    "intro":            "Vous êtes le Joueur {player_id} dans Quantum Tic Tac Toe.\nVotre symbole est '{symbol}', et vos numéros de coup sont toujours {parity} (par ex. X1, X3 ou O2, O4).\n\nObjectif : Gagnez en formant une ligne de trois marques classiques (solidifiées à partir de superpositions).\n\nComment jouer :\n- À chaque tour, placez une marque fantôme dans deux cases vides différentes au format '[a,b]'.\n- Ces marques sont intriquées et étiquetées comme 'X1 / X1' ou 'O4 / O4'.\n- Vous ne pouvez pas placer de marques fantômes dans une case déjà effondrée (solidifiée).\n\nRègle d'effondrement :\n- Si votre coup crée un cycle dans le graphe d'intrication, il s'effondre automatiquement.\n- Chaque marque fantôme du cycle devient une marque classique dans l'une de ses deux positions.\n- Toutes les marques fantômes dépendantes s'effondrent également.\n\nVictoire :\n- La partie se termine lorsqu'un joueur a trois marques classiques alignées.\n- Si les deux joueurs obtiennent une ligne lors du même effondrement, celui qui a le plus petit numéro de coup maximal gagne.\n\nCoup d'exemple : '[0,4]' place une marque fantôme dans les cases 0 et 4."
+  },
+
+  "board": {
+    "current_board":    "Plateau de Quantum Tic Tac Toe :\n\n{board}\n\nSoumettez votre coup au format '[a,b]' pour placer une marque quantique à deux emplacements."
+  },
+
+  "invalid_move": {
+    "wrong_format":     "Format invalide. Utilisez '[a,b]'.",
+    "bad_indices":      "Indices de case invalides ou en double.",
+    "already_solid":    "Une des cases est déjà solidifiée."
+  },
+
+  "game_action": {
+    "placed":           "Le Joueur {player_id} a placé son symbole dans une superposition entre les cases {pos_a} et {pos_b}."
+  },
+
+  "collapse": {
+    "resolved":         "Superposition résolue. La case {cell} est maintenant {symbol}.",
+    "dependent":        "Superposition dépendante résolue. La case {cell} est maintenant {symbol}.",
+    "last_cell":        "Superposition de la dernière case résolue. La case {cell} est maintenant {symbol}."
+  },
+
+  "outcome": {
+    "win":              "Le Joueur {player_id} gagne avec des marques solidifiées !",
+    "draw":             "La partie est nulle !"
+  }
+}
