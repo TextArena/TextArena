@@ -81,14 +81,10 @@ class SnakeEnv(ta.Env):
         self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
         self.pending_actions = {pid: None for pid in range(num_players)}
         game_state["board_state"] = self._get_board_string(snakes, apples)
-        self.state.add_observation(f"Current Board:\n{game_state['board_state']}", observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(self.m("board", "current", board=game_state['board_state']), observation_type=ta.ObservationType.GAME_BOARD)
 
     def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"{self.state.num_players}-Player Snake on a {self.width}×{self.height} grid.\n"
-            f"You control snake {player_id}. Valid moves: '[up]'/'[down]'/'[left]'/'[right]' (or w/s/a/d).\n"
-            f"Objective: survive longest or be the longest and get the highest score (turn limit {self.max_turns} turns)."
-        )
+        return self.m("player_prompt", "intro", num_players=self.state.num_players, width=self.width, height=self.height, player_id=player_id, max_turns=self.max_turns)
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         snakes = self.state.game_state["snakes"]
@@ -102,7 +98,7 @@ class SnakeEnv(ta.Env):
                 snake.alive = False
                 snake.death_reason = "invalid move"
                 self.state.game_state["death_turn"][pid] = self.state.turn
-                self.state.add_observation(f"Snake {pid} died due to invalid move.", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(self.m("game_action", "invalid_death", player_id=pid), observation_type=ta.ObservationType.GAME_MESSAGE)
 
             self.pending_actions[pid] = None  # clear any stale action
         else: self.pending_actions[pid] = action
@@ -120,14 +116,14 @@ class SnakeEnv(ta.Env):
 
     def _check_turn_limit(self):
         if not self.state.done and self.state.turn >= self.state.max_turns:
-            self._finalise_rewards("Turn limit reached - best score wins tie-break.")
+            self._finalise_rewards(self.m("outcome", "turn_limit"))
 
     def _rotate_players(self):
         if self.state.done:
             return
         alive = {pid for pid, s in self.state.game_state["snakes"].items() if s.alive}
         if len(alive) <= 1:
-            self._finalise_rewards("Player outlived all others." if alive else "All snakes dead.")
+            self._finalise_rewards(self.m("outcome", "outlived") if alive else self.m("outcome", "all_dead"))
             return
         nxt = (self.state.current_player_id + 1) % self.state.num_players
         while nxt not in alive:
@@ -174,7 +170,7 @@ class SnakeEnv(ta.Env):
                 r = -1.0 + 2.0 * g_idx / (G - 1)         # linear scale
                 for pid in g: reward_dict[pid] = r
         # 5) finish
-        self.state.set_game_outcome(reward_dict=reward_dict, reason=f"{reason} Final ranking groups (worst→best): {groups}")
+        self.state.set_game_outcome(reward_dict=reward_dict, reason=self.m("outcome", "ranking", reason=reason, groups=groups))
 
 
 
@@ -265,15 +261,15 @@ class SnakeEnv(ta.Env):
         
         # 8. Update board state and broadcast (always do this)
         self.state.game_state["board_state"] = self._get_board_string(snakes, apples)
-        self.state.add_observation(from_id=ta.GAME_ID, to_id=-1, message=f"Current Board State:\n{self.state.game_state['board_state']}", observation_type=ta.ObservationType.GAME_BOARD)
-        
+        self.state.add_observation(from_id=ta.GAME_ID, to_id=-1, message=self.m("board", "after_moves", board=self.state.game_state['board_state']), observation_type=ta.ObservationType.GAME_BOARD)
+
         # 9. Check for end-of-game conditions
         alive = [pid for pid, s in snakes.items() if s.alive]
         if len(alive) <= 1:
-            self._finalise_rewards(f"Player {alive[0]} survived; all others perished." if alive else "All snakes died simultaneously.")
+            self._finalise_rewards(self.m("outcome", "survived_win", player_id=alive[0]) if alive else self.m("outcome", "all_dead_simul"))
             self.state.step(rotate_player=False)  # propagate terminal transition
             return
         # 7 broadcast
         self.state.game_state["board_state"] = self._get_board_string(snakes, apples)
-        self.state.add_observation(f"Current Board:\n{self.state.game_state['board_state']}", observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(self.m("board", "current", board=self.state.game_state['board_state']), observation_type=ta.ObservationType.GAME_BOARD)
 
