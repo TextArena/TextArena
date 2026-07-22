@@ -1,0 +1,31 @@
+{
+  "entry": "textarena.envs.Tak.env:TakEnv",
+  "num_players": 2,
+  "seed": 42,
+  "board_size": 4,
+  "stones": 15,
+  "capstones": 1,
+  "scenarios": {
+    "win_column": [
+      "[place () {(0,0): [F0]}]",
+      "[place () {(0,3): [F1]}]",
+      "[place () {(1,0): [F0]}]",
+      "[place () {(1,3): [F1]}]",
+      "[place () {(2,0): [F0]}]",
+      "[place () {(2,3): [F1]}]",
+      "[place () {(3,0): [F0]}]"
+    ],
+    "valid_move": [
+      "[place () {(0,0): [F0]}]",
+      "[place () {(0,3): [F1]}]",
+      "[move (0,0) {(1,0): [F0]}]"
+    ],
+    "invalid_format": ["not a move"],
+    "invalid_placement": ["[place () {(9,9): [F0]}]"],
+    "invalid_movement": [
+      "[place () {(0,0): [F0]}]",
+      "[place () {(0,3): [F1]}]",
+      "[move (0,0) {(3,3): [F0]}]"
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+    "_comment": "Lokalisierte Zeichenketten für die Tak-Umgebung. Halte alle {placeholders} unverändert. Steintoken (F/W/C + Spieler-ID), Rasterkoordinaten wie (2,2), das Aktionsformat [ACTION SOURCE ALLOCATION] und das ASCII-Brett sind neutral und dürfen nicht übersetzt werden.",
+    "_slots": {
+        "player_id": "Spielernummer (0 oder 1)",
+        "current_player_id": "Spielernummer des handelnden Spielers",
+        "board": "vorgerendertes ASCII-Brett (neutral, nicht übersetzen)",
+        "flat_stones": "Anzahl der dem aktuellen Spieler verfügbaren flachen Steine",
+        "capstones": "Anzahl der dem aktuellen Spieler verfügbaren Capstones",
+        "cells": "neutrale Liste von Zielkoordinaten, z. B. [(0, 0)]",
+        "source": "neutrales Quellkoordinaten-Tupel, z. B. (0, 0)",
+        "targets": "neutrale Liste von Zielkoordinaten, z. B. [(1, 0)]"
+    },
+
+    "player_prompt": {
+        "intro": "Du bist Spieler {player_id} in Tak.\nDein Ziel ist es, zwei gegenüberliegende Ränder des Bretts mit deinen Steinen zu verbinden, um eine Straße zu bilden, und deinen Gegner daran zu hindern, dasselbe zu tun.\nIn deinem Zug kannst du folgende Aktionen ausführen:\n- Einen Stein auf ein leeres Feld platzieren.\n- Einen Stapel Steine von einem Feld auf ein oder mehrere Felder bewegen. Du kannst deine Steine auf andere Steine des Zielfelds stapeln. Der oberste Stein bestimmt die Zugehörigkeit des Stapels.\n- Einen Stapel Steine in zwei oder mehr Stapel aufteilen und auf angrenzende Felder verteilen.\n- Einen Wandstein mit deinem Capstone zu einem flachen Stein umlegen.\n- Einen Capstone auf ein leeres Feld platzieren.\n- Einen Capstone von einem Feld auf ein oder mehrere Felder bewegen. Ein Capstone kann während seines Zugs auch einen Wandstein umlegen.\n\nÜbermittle deine Aktion bei jedem Zug im folgenden Format:\n[ACTION SOURCE ALLOCATION]\n- ACTION: Die Art des Zugs, den du machst ('place' oder 'move').\n- SOURCE: Die Rasterkoordinaten, von denen die Steine stammen. Verwende () für 'place'.\n- ALLOCATION: Ein Dictionary, dessen Schlüssel die Ziel-Rasterkoordinaten sind und dessen Werte die Steine oder Figuren sind, die bewegt oder platziert werden.\n\nSteintypen und ihre Fähigkeiten:\n- Flacher Stein ('F'):\n  - Bildet einen Teil einer Straße (dient dazu, die Ränder des Bretts zu verbinden).\n  - Kann auf andere Steine gestapelt werden oder von anderen Steinen überstapelt werden.\n  - Kann als Teil eines Stapels oder einzeln bewegt werden.\n\n- Wandstein ('W'):\n  - Blockiert Straßen und verhindert, dass Gegner ihre Verbindungen vollenden.\n  - Kann nicht Teil einer Straße sein.\n  - Kann von einem Capstone zu einem flachen Stein umgelegt werden.\n\n- Capstone ('C'):\n  - Wirkt wie ein flacher Stein und kann Teil einer Straße sein.\n  - Kann Wandsteine umlegen und deren blockierende Wirkung aufheben.\n  - Kann nicht von anderen Steinen bedeckt werden und bleibt stets oben auf dem Stapel.\n  - Ist ein mächtiges Werkzeug sowohl für den Straßenbau als auch für das Durchkreuzen der Pläne deines Gegners.\n\nDie Steine werden vom Spieler wie folgt gekennzeichnet:\n- Flacher Stein für Spieler 0: 'F0'\n- Wandstein für Spieler 1: 'W1'\n- Capstone für Spieler 1: 'C1'\n\nBeispiele:\n- Um einen Capstone auf (3,2) zu platzieren:\n  [place () {{(3,2): [C0]}}]\n- Um alle Steine von (2,2) nach (2,3) zu bewegen:\n  [move (2,2) {{(2,3): [F0]}}]\n- Um einen Stapel aus 5 Steinen von (2,2) auf zwei Felder aufzuteilen:\n  [move (2,2) {{(2,3): [F0, F0], (2,4): [W0, F0, C0]}}]\n- Um einen Stein von (2,2) zu bewegen und auf einen bestehenden Stapel bei (2,3) zu stapeln:\n  [move (2,2) {{(2,3): [F0]}}]\n\nDenke beim Übermitteln deines Zugs strategisch über deine Ziele beim Straßenbau und die möglichen Züge deines Gegners nach.\n"
+    },
+
+    "board": {
+        "current_state": "Aktuelles Brett:\n\n{board}\nVerfügbare flache Steine: {flat_stones}, Verfügbare Capstones: {capstones}\n"
+    },
+
+    "invalid_move": {
+        "invalid_format": "Ungültiges Zugformat. Spieler {current_player_id} hat nicht mit einem gültigen Zug in eckigen Klammern geantwortet.",
+        "invalid_placement": "Ungültige Platzierung. Spieler {current_player_id} hat versucht, einen Stein auf ein ungültiges Feld zu setzen.",
+        "invalid_movement": "Ungültige Bewegung. Spieler {current_player_id} hat versucht, Steine auf ungültige Weise zu bewegen.",
+        "invalid_action": "Ungültige Aktion. Spieler {current_player_id} hat versucht, eine unbekannte Aktion auszuführen."
+    },
+
+    "action": {
+        "placement": "Spieler {current_player_id} hat einen Stein auf ({cells}) platziert.",
+        "movement": "Spieler {current_player_id} hat Steine von {source} nach {targets} bewegt."
+    },
+
+    "outcome": {
+        "winner": "Spieler {current_player_id} hat zwei gegenüberliegende Ränder des Bretts verbunden."
+    }
+}

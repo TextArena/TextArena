@@ -1,0 +1,41 @@
+{
+  "_comment": "LinesOfAction Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel, nur die Werte. Übersetze niemals Brettkoordinaten (a-h, 1-8), Figurbuchstaben (O, X), das Zugformat-Token oder das {board}-ASCII-Gitter.",
+  "_slots": {
+    "{player_id}": "Die Spielernummer, entweder 0 oder 1",
+    "{side}": "Der Figurbuchstabe des Spielers, entweder O oder X",
+    "{other}": "Der Figurbuchstabe des Gegners, entweder O oder X",
+    "{board}": "Die ASCII-Darstellung des Bretts; unverändert lassen",
+    "{coord}": "Eine Brettkoordinate wie b1 oder a3",
+    "{from}": "Die Startkoordinate eines Zugs, z. B. b1",
+    "{to}": "Die Zielkoordinate eines Zugs, z. B. b3"
+  },
+
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} im Spiel LinesOfAction.\nDeine Figuren sind '{side}', gegnerische Figuren sind '{other}'.\nZugformat: `[b1b3]` (Von-Koordinate Zu-Koordinate). Ein gültiger Zug bewegt sich horizontal, vertikal oder diagonal um so viele Felder wie die Gesamtzahl der Figuren (beliebiger Farbe) in dieser Linie. Du darfst über eigene Figuren springen, aber nicht über gegnerische; das Landen auf einer gegnerischen Figur schlägt sie.  Du gewinnst, wenn alle deine Figuren über 8 Nachbarn verbunden sind."
+  },
+
+  "board": {
+    "current_board": "Brett:\n\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Das Format muss e2e4 sein (Von-, Zu-Koordinaten).",
+    "no_piece": "Keine {side}-Figur auf {coord}.",
+    "identical": "Start und Ziel sind identisch.",
+    "not_straight_or_diagonal": "Der Zug muss gerade oder diagonal sein.",
+    "wrong_distance": "Die Distanz muss der Figurenzahl in der Linie entsprechen.",
+    "enemy_blocks": "Eine gegnerische Figur blockiert den Weg.",
+    "destination_own": "Ziel von eigener Figur besetzt."
+  },
+
+  "game_action": {
+    "moved": "Spieler {player_id} zog {from} -> {to}",
+    "captured_suffix": "Spieler {player_id} zog {from} -> {to} und schlug eine gegnerische Figur."
+  },
+
+  "outcome": {
+    "win": "Alle Figuren verbunden.",
+    "draw_no_capture": "60 Züge ohne Schlagen.",
+    "draw_repetition": "Stellung dreimal wiederholt."
+  }
+}

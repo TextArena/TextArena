@@ -1,0 +1,677 @@
+{
+  "invalid_format": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Tak.\nYour goal is to connect two opposite edges of the board with your pieces to form a road while blocking your opponent from doing the same.\nYou can perform the following actions on your turn:\n- Place a piece on an empty square.\n- Move a stack of pieces from one square to one or more squares. You can stack your pieces on top of other pieces on the target square. The topmost piece determines ownership of the stack.\n- Split a stack of pieces into two or more stacks and distribute them to adjacent squares.\n- Flatten a wall stone into a flat stone using your capstone.\n- Place a Capstone on an empty square.\n- Move a Capstone from one square to one or more squares. A capstone can also flatten a wall stone during its move.\n\nFor each move, submit your action using the format:\n[ACTION SOURCE ALLOCATION]\n- ACTION: The type of move you are making ('place' or 'move').\n- SOURCE: The grid coordinates where the stones originate. Use () for 'place'.\n- ALLOCATION: A dictionary where keys are target grid coordinates and values are the stones or pieces being moved or placed.\n\nStone Types and Their Abilities:\n- Flat Stone ('F'):\n  - Forms part of a road (used to connect edges of the board).\n  - Can be stacked on top of other pieces or have other pieces stacked on it.\n  - Can be moved as part of a stack or individually.\n\n- Wall Stone ('W'):\n  - Blocks roads and prevents opponents from completing their connections.\n  - Cannot be part of a road.\n  - Can be flattened into a flat stone by a capstone.\n\n- Capstone ('C'):\n  - Acts as a flat stone and can form part of a road.\n  - Can flatten wall stones, removing their blocking effect.\n  - Cannot be covered by other pieces, always remains on top of the stack.\n  - Is a powerful tool for both road-building and disrupting your opponent's plans.\n\nThe stones will be identified by the player as follows:\n- Flat Stone for Player 0: 'F0'\n- Wall Stone for Player 1: 'W1'\n- Capstone for Player 1: 'C1'\n\nExamples:\n- To place a capstone on (3,2):\n  [place () {(3,2): [C0]}]\n- To move all pieces from (2,2) to (2,3):\n  [move (2,2) {(2,3): [F0]}]\n- To split a stack of 5 pieces from (2,2) into two squares:\n  [move (2,2) {(2,3): [F0, F0], (2,4): [W0, F0, C0]}]\n- To move and stack one piece from (2,2) onto an existing stack at (2,3):\n  [move (2,2) {(2,3): [F0]}]\n\nWhen submitting your move, think strategically about your road-building goals and your opponent's potential moves.\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0       1       2       3  \n     -------------------------------\n  0 |       |       |       |       |\n     -------------------------------\n  1 |       |       |       |       |\n     -------------------------------\n  2 |       |       |       |       |\n     -------------------------------\n  3 |       |       |       |       |\n     -------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "not a move",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "not a move",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid move format. Player 0 did not respond with a valid move in square brackets. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0       1       2       3  \n     -------------------------------\n  0 |       |       |       |       |\n     -------------------------------\n  1 |       |       |       |       |\n     -------------------------------\n  2 |       |       |       |       |\n     -------------------------------\n  3 |       |       |       |       |\n     -------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "invalid_movement": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 1
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Tak.\nYour goal is to connect two opposite edges of the board with your pieces to form a road while blocking your opponent from doing the same.\nYou can perform the following actions on your turn:\n- Place a piece on an empty square.\n- Move a stack of pieces from one square to one or more squares. You can stack your pieces on top of other pieces on the target square. The topmost piece determines ownership of the stack.\n- Split a stack of pieces into two or more stacks and distribute them to adjacent squares.\n- Flatten a wall stone into a flat stone using your capstone.\n- Place a Capstone on an empty square.\n- Move a Capstone from one square to one or more squares. A capstone can also flatten a wall stone during its move.\n\nFor each move, submit your action using the format:\n[ACTION SOURCE ALLOCATION]\n- ACTION: The type of move you are making ('place' or 'move').\n- SOURCE: The grid coordinates where the stones originate. Use () for 'place'.\n- ALLOCATION: A dictionary where keys are target grid coordinates and values are the stones or pieces being moved or placed.\n\nStone Types and Their Abilities:\n- Flat Stone ('F'):\n  - Forms part of a road (used to connect edges of the board).\n  - Can be stacked on top of other pieces or have other pieces stacked on it.\n  - Can be moved as part of a stack or individually.\n\n- Wall Stone ('W'):\n  - Blocks roads and prevents opponents from completing their connections.\n  - Cannot be part of a road.\n  - Can be flattened into a flat stone by a capstone.\n\n- Capstone ('C'):\n  - Acts as a flat stone and can form part of a road.\n  - Can flatten wall stones, removing their blocking effect.\n  - Cannot be covered by other pieces, always remains on top of the stack.\n  - Is a powerful tool for both road-building and disrupting your opponent's plans.\n\nThe stones will be identified by the player as follows:\n- Flat Stone for Player 0: 'F0'\n- Wall Stone for Player 1: 'W1'\n- Capstone for Player 1: 'C1'\n\nExamples:\n- To place a capstone on (3,2):\n  [place () {(3,2): [C0]}]\n- To move all pieces from (2,2) to (2,3):\n  [move (2,2) {(2,3): [F0]}]\n- To split a stack of 5 pieces from (2,2) into two squares:\n  [move (2,2) {(2,3): [F0, F0], (2,4): [W0, F0, C0]}]\n- To move and stack one piece from (2,2) onto an existing stack at (2,3):\n  [move (2,2) {(2,3): [F0]}]\n\nWhen submitting your move, think strategically about your road-building goals and your opponent's potential moves.\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0       1       2       3  \n     -------------------------------\n  0 |       |       |       |       |\n     -------------------------------\n  1 |       |       |       |       |\n     -------------------------------\n  2 |       |       |       |       |\n     -------------------------------\n  3 |       |       |       |       |\n     -------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[place () {(0,0): [F0]}]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in Tak.\nYour goal is to connect two opposite edges of the board with your pieces to form a road while blocking your opponent from doing the same.\nYou can perform the following actions on your turn:\n- Place a piece on an empty square.\n- Move a stack of pieces from one square to one or more squares. You can stack your pieces on top of other pieces on the target square. The topmost piece determines ownership of the stack.\n- Split a stack of pieces into two or more stacks and distribute them to adjacent squares.\n- Flatten a wall stone into a flat stone using your capstone.\n- Place a Capstone on an empty square.\n- Move a Capstone from one square to one or more squares. A capstone can also flatten a wall stone during its move.\n\nFor each move, submit your action using the format:\n[ACTION SOURCE ALLOCATION]\n- ACTION: The type of move you are making ('place' or 'move').\n- SOURCE: The grid coordinates where the stones originate. Use () for 'place'.\n- ALLOCATION: A dictionary where keys are target grid coordinates and values are the stones or pieces being moved or placed.\n\nStone Types and Their Abilities:\n- Flat Stone ('F'):\n  - Forms part of a road (used to connect edges of the board).\n  - Can be stacked on top of other pieces or have other pieces stacked on it.\n  - Can be moved as part of a stack or individually.\n\n- Wall Stone ('W'):\n  - Blocks roads and prevents opponents from completing their connections.\n  - Cannot be part of a road.\n  - Can be flattened into a flat stone by a capstone.\n\n- Capstone ('C'):\n  - Acts as a flat stone and can form part of a road.\n  - Can flatten wall stones, removing their blocking effect.\n  - Cannot be covered by other pieces, always remains on top of the stack.\n  - Is a powerful tool for both road-building and disrupting your opponent's plans.\n\nThe stones will be identified by the player as follows:\n- Flat Stone for Player 0: 'F0'\n- Wall Stone for Player 1: 'W1'\n- Capstone for Player 1: 'C1'\n\nExamples:\n- To place a capstone on (3,2):\n  [place () {(3,2): [C0]}]\n- To move all pieces from (2,2) to (2,3):\n  [move (2,2) {(2,3): [F0]}]\n- To split a stack of 5 pieces from (2,2) into two squares:\n  [move (2,2) {(2,3): [F0, F0], (2,4): [W0, F0, C0]}]\n- To move and stack one piece from (2,2) onto an existing stack at (2,3):\n  [move (2,2) {(2,3): [F0]}]\n\nWhen submitting your move, think strategically about your road-building goals and your opponent's potential moves.\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0       1       2       3  \n     -------------------------------\n  0 |       |       |       |       |\n     -------------------------------\n  1 |       |       |       |       |\n     -------------------------------\n  2 |       |       |       |       |\n     -------------------------------\n  3 |       |       |       |       |\n     -------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[place () {(0,0): [F0]}]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed a piece on ([(0, 0)]).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        |        |\n     -----------------------------------\n  1 |        |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[place () {(0,3): [F1]}]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[place () {(0,0): [F0]}]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed a piece on ([(0, 0)]).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        |        |\n     -----------------------------------\n  1 |        |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[place () {(0,3): [F1]}]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed a piece on ([(0, 3)]).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  1 |        |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 14, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move (0,0) {(3,3): [F0]}]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move (0,0) {(3,3): [F0]}]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid movement. Player 0 tried to move pieces in an invalid way. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  1 |        |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 14, Available Capstones: 1\n",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "invalid_placement": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Tak.\nYour goal is to connect two opposite edges of the board with your pieces to form a road while blocking your opponent from doing the same.\nYou can perform the following actions on your turn:\n- Place a piece on an empty square.\n- Move a stack of pieces from one square to one or more squares. You can stack your pieces on top of other pieces on the target square. The topmost piece determines ownership of the stack.\n- Split a stack of pieces into two or more stacks and distribute them to adjacent squares.\n- Flatten a wall stone into a flat stone using your capstone.\n- Place a Capstone on an empty square.\n- Move a Capstone from one square to one or more squares. A capstone can also flatten a wall stone during its move.\n\nFor each move, submit your action using the format:\n[ACTION SOURCE ALLOCATION]\n- ACTION: The type of move you are making ('place' or 'move').\n- SOURCE: The grid coordinates where the stones originate. Use () for 'place'.\n- ALLOCATION: A dictionary where keys are target grid coordinates and values are the stones or pieces being moved or placed.\n\nStone Types and Their Abilities:\n- Flat Stone ('F'):\n  - Forms part of a road (used to connect edges of the board).\n  - Can be stacked on top of other pieces or have other pieces stacked on it.\n  - Can be moved as part of a stack or individually.\n\n- Wall Stone ('W'):\n  - Blocks roads and prevents opponents from completing their connections.\n  - Cannot be part of a road.\n  - Can be flattened into a flat stone by a capstone.\n\n- Capstone ('C'):\n  - Acts as a flat stone and can form part of a road.\n  - Can flatten wall stones, removing their blocking effect.\n  - Cannot be covered by other pieces, always remains on top of the stack.\n  - Is a powerful tool for both road-building and disrupting your opponent's plans.\n\nThe stones will be identified by the player as follows:\n- Flat Stone for Player 0: 'F0'\n- Wall Stone for Player 1: 'W1'\n- Capstone for Player 1: 'C1'\n\nExamples:\n- To place a capstone on (3,2):\n  [place () {(3,2): [C0]}]\n- To move all pieces from (2,2) to (2,3):\n  [move (2,2) {(2,3): [F0]}]\n- To split a stack of 5 pieces from (2,2) into two squares:\n  [move (2,2) {(2,3): [F0, F0], (2,4): [W0, F0, C0]}]\n- To move and stack one piece from (2,2) onto an existing stack at (2,3):\n  [move (2,2) {(2,3): [F0]}]\n\nWhen submitting your move, think strategically about your road-building goals and your opponent's potential moves.\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0       1       2       3  \n     -------------------------------\n  0 |       |       |       |       |\n     -------------------------------\n  1 |       |       |       |       |\n     -------------------------------\n  2 |       |       |       |       |\n     -------------------------------\n  3 |       |       |       |       |\n     -------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[place () {(9,9): [F0]}]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[place () {(9,9): [F0]}]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid placement. Player 0 tried to place a piece on an invalid square. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0       1       2       3  \n     -------------------------------\n  0 |       |       |       |       |\n     -------------------------------\n  1 |       |       |       |       |\n     -------------------------------\n  2 |       |       |       |       |\n     -------------------------------\n  3 |       |       |       |       |\n     -------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "valid_move": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 1
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Tak.\nYour goal is to connect two opposite edges of the board with your pieces to form a road while blocking your opponent from doing the same.\nYou can perform the following actions on your turn:\n- Place a piece on an empty square.\n- Move a stack of pieces from one square to one or more squares. You can stack your pieces on top of other pieces on the target square. The topmost piece determines ownership of the stack.\n- Split a stack of pieces into two or more stacks and distribute them to adjacent squares.\n- Flatten a wall stone into a flat stone using your capstone.\n- Place a Capstone on an empty square.\n- Move a Capstone from one square to one or more squares. A capstone can also flatten a wall stone during its move.\n\nFor each move, submit your action using the format:\n[ACTION SOURCE ALLOCATION]\n- ACTION: The type of move you are making ('place' or 'move').\n- SOURCE: The grid coordinates where the stones originate. Use () for 'place'.\n- ALLOCATION: A dictionary where keys are target grid coordinates and values are the stones or pieces being moved or placed.\n\nStone Types and Their Abilities:\n- Flat Stone ('F'):\n  - Forms part of a road (used to connect edges of the board).\n  - Can be stacked on top of other pieces or have other pieces stacked on it.\n  - Can be moved as part of a stack or individually.\n\n- Wall Stone ('W'):\n  - Blocks roads and prevents opponents from completing their connections.\n  - Cannot be part of a road.\n  - Can be flattened into a flat stone by a capstone.\n\n- Capstone ('C'):\n  - Acts as a flat stone and can form part of a road.\n  - Can flatten wall stones, removing their blocking effect.\n  - Cannot be covered by other pieces, always remains on top of the stack.\n  - Is a powerful tool for both road-building and disrupting your opponent's plans.\n\nThe stones will be identified by the player as follows:\n- Flat Stone for Player 0: 'F0'\n- Wall Stone for Player 1: 'W1'\n- Capstone for Player 1: 'C1'\n\nExamples:\n- To place a capstone on (3,2):\n  [place () {(3,2): [C0]}]\n- To move all pieces from (2,2) to (2,3):\n  [move (2,2) {(2,3): [F0]}]\n- To split a stack of 5 pieces from (2,2) into two squares:\n  [move (2,2) {(2,3): [F0, F0], (2,4): [W0, F0, C0]}]\n- To move and stack one piece from (2,2) onto an existing stack at (2,3):\n  [move (2,2) {(2,3): [F0]}]\n\nWhen submitting your move, think strategically about your road-building goals and your opponent's potential moves.\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0       1       2       3  \n     -------------------------------\n  0 |       |       |       |       |\n     -------------------------------\n  1 |       |       |       |       |\n     -------------------------------\n  2 |       |       |       |       |\n     -------------------------------\n  3 |       |       |       |       |\n     -------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[place () {(0,0): [F0]}]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in Tak.\nYour goal is to connect two opposite edges of the board with your pieces to form a road while blocking your opponent from doing the same.\nYou can perform the following actions on your turn:\n- Place a piece on an empty square.\n- Move a stack of pieces from one square to one or more squares. You can stack your pieces on top of other pieces on the target square. The topmost piece determines ownership of the stack.\n- Split a stack of pieces into two or more stacks and distribute them to adjacent squares.\n- Flatten a wall stone into a flat stone using your capstone.\n- Place a Capstone on an empty square.\n- Move a Capstone from one square to one or more squares. A capstone can also flatten a wall stone during its move.\n\nFor each move, submit your action using the format:\n[ACTION SOURCE ALLOCATION]\n- ACTION: The type of move you are making ('place' or 'move').\n- SOURCE: The grid coordinates where the stones originate. Use () for 'place'.\n- ALLOCATION: A dictionary where keys are target grid coordinates and values are the stones or pieces being moved or placed.\n\nStone Types and Their Abilities:\n- Flat Stone ('F'):\n  - Forms part of a road (used to connect edges of the board).\n  - Can be stacked on top of other pieces or have other pieces stacked on it.\n  - Can be moved as part of a stack or individually.\n\n- Wall Stone ('W'):\n  - Blocks roads and prevents opponents from completing their connections.\n  - Cannot be part of a road.\n  - Can be flattened into a flat stone by a capstone.\n\n- Capstone ('C'):\n  - Acts as a flat stone and can form part of a road.\n  - Can flatten wall stones, removing their blocking effect.\n  - Cannot be covered by other pieces, always remains on top of the stack.\n  - Is a powerful tool for both road-building and disrupting your opponent's plans.\n\nThe stones will be identified by the player as follows:\n- Flat Stone for Player 0: 'F0'\n- Wall Stone for Player 1: 'W1'\n- Capstone for Player 1: 'C1'\n\nExamples:\n- To place a capstone on (3,2):\n  [place () {(3,2): [C0]}]\n- To move all pieces from (2,2) to (2,3):\n  [move (2,2) {(2,3): [F0]}]\n- To split a stack of 5 pieces from (2,2) into two squares:\n  [move (2,2) {(2,3): [F0, F0], (2,4): [W0, F0, C0]}]\n- To move and stack one piece from (2,2) onto an existing stack at (2,3):\n  [move (2,2) {(2,3): [F0]}]\n\nWhen submitting your move, think strategically about your road-building goals and your opponent's potential moves.\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0       1       2       3  \n     -------------------------------\n  0 |       |       |       |       |\n     -------------------------------\n  1 |       |       |       |       |\n     -------------------------------\n  2 |       |       |       |       |\n     -------------------------------\n  3 |       |       |       |       |\n     -------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[place () {(0,0): [F0]}]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed a piece on ([(0, 0)]).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        |        |\n     -----------------------------------\n  1 |        |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[place () {(0,3): [F1]}]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[place () {(0,0): [F0]}]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed a piece on ([(0, 0)]).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        |        |\n     -----------------------------------\n  1 |        |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[place () {(0,3): [F1]}]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed a piece on ([(0, 3)]).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  1 |        |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 14, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move (0,0) {(1,0): [F0]}]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[place () {(0,3): [F1]}]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed a piece on ([(0, 3)]).",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  1 |        |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 14, Available Capstones: 1\n",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[move (0,0) {(1,0): [F0]}]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 moved pieces from (0, 0) to [(1, 0)].",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 |        |        |        | (1) F1 |\n     -----------------------------------\n  1 | (1) F0 |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 14, Available Capstones: 1\n",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "win_column": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 has connected two opposite edges of the board.",
+        "role": "Player 0",
+        "turn_count": 4
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 has connected two opposite edges of the board.",
+        "role": "Player 1",
+        "turn_count": 3
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Tak.\nYour goal is to connect two opposite edges of the board with your pieces to form a road while blocking your opponent from doing the same.\nYou can perform the following actions on your turn:\n- Place a piece on an empty square.\n- Move a stack of pieces from one square to one or more squares. You can stack your pieces on top of other pieces on the target square. The topmost piece determines ownership of the stack.\n- Split a stack of pieces into two or more stacks and distribute them to adjacent squares.\n- Flatten a wall stone into a flat stone using your capstone.\n- Place a Capstone on an empty square.\n- Move a Capstone from one square to one or more squares. A capstone can also flatten a wall stone during its move.\n\nFor each move, submit your action using the format:\n[ACTION SOURCE ALLOCATION]\n- ACTION: The type of move you are making ('place' or 'move').\n- SOURCE: The grid coordinates where the stones originate. Use () for 'place'.\n- ALLOCATION: A dictionary where keys are target grid coordinates and values are the stones or pieces being moved or placed.\n\nStone Types and Their Abilities:\n- Flat Stone ('F'):\n  - Forms part of a road (used to connect edges of the board).\n  - Can be stacked on top of other pieces or have other pieces stacked on it.\n  - Can be moved as part of a stack or individually.\n\n- Wall Stone ('W'):\n  - Blocks roads and prevents opponents from completing their connections.\n  - Cannot be part of a road.\n  - Can be flattened into a flat stone by a capstone.\n\n- Capstone ('C'):\n  - Acts as a flat stone and can form part of a road.\n  - Can flatten wall stones, removing their blocking effect.\n  - Cannot be covered by other pieces, always remains on top of the stack.\n  - Is a powerful tool for both road-building and disrupting your opponent's plans.\n\nThe stones will be identified by the player as follows:\n- Flat Stone for Player 0: 'F0'\n- Wall Stone for Player 1: 'W1'\n- Capstone for Player 1: 'C1'\n\nExamples:\n- To place a capstone on (3,2):\n  [place () {(3,2): [C0]}]\n- To move all pieces from (2,2) to (2,3):\n  [move (2,2) {(2,3): [F0]}]\n- To split a stack of 5 pieces from (2,2) into two squares:\n  [move (2,2) {(2,3): [F0, F0], (2,4): [W0, F0, C0]}]\n- To move and stack one piece from (2,2) onto an existing stack at (2,3):\n  [move (2,2) {(2,3): [F0]}]\n\nWhen submitting your move, think strategically about your road-building goals and your opponent's potential moves.\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0       1       2       3  \n     -------------------------------\n  0 |       |       |       |       |\n     -------------------------------\n  1 |       |       |       |       |\n     -------------------------------\n  2 |       |       |       |       |\n     -------------------------------\n  3 |       |       |       |       |\n     -------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[place () {(0,0): [F0]}]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in Tak.\nYour goal is to connect two opposite edges of the board with your pieces to form a road while blocking your opponent from doing the same.\nYou can perform the following actions on your turn:\n- Place a piece on an empty square.\n- Move a stack of pieces from one square to one or more squares. You can stack your pieces on top of other pieces on the target square. The topmost piece determines ownership of the stack.\n- Split a stack of pieces into two or more stacks and distribute them to adjacent squares.\n- Flatten a wall stone into a flat stone using your capstone.\n- Place a Capstone on an empty square.\n- Move a Capstone from one square to one or more squares. A capstone can also flatten a wall stone during its move.\n\nFor each move, submit your action using the format:\n[ACTION SOURCE ALLOCATION]\n- ACTION: The type of move you are making ('place' or 'move').\n- SOURCE: The grid coordinates where the stones originate. Use () for 'place'.\n- ALLOCATION: A dictionary where keys are target grid coordinates and values are the stones or pieces being moved or placed.\n\nStone Types and Their Abilities:\n- Flat Stone ('F'):\n  - Forms part of a road (used to connect edges of the board).\n  - Can be stacked on top of other pieces or have other pieces stacked on it.\n  - Can be moved as part of a stack or individually.\n\n- Wall Stone ('W'):\n  - Blocks roads and prevents opponents from completing their connections.\n  - Cannot be part of a road.\n  - Can be flattened into a flat stone by a capstone.\n\n- Capstone ('C'):\n  - Acts as a flat stone and can form part of a road.\n  - Can flatten wall stones, removing their blocking effect.\n  - Cannot be covered by other pieces, always remains on top of the stack.\n  - Is a powerful tool for both road-building and disrupting your opponent's plans.\n\nThe stones will be identified by the player as follows:\n- Flat Stone for Player 0: 'F0'\n- Wall Stone for Player 1: 'W1'\n- Capstone for Player 1: 'C1'\n\nExamples:\n- To place a capstone on (3,2):\n  [place () {(3,2): [C0]}]\n- To move all pieces from (2,2) to (2,3):\n  [move (2,2) {(2,3): [F0]}]\n- To split a stack of 5 pieces from (2,2) into two squares:\n  [move (2,2) {(2,3): [F0, F0], (2,4): [W0, F0, C0]}]\n- To move and stack one piece from (2,2) onto an existing stack at (2,3):\n  [move (2,2) {(2,3): [F0]}]\n\nWhen submitting your move, think strategically about your road-building goals and your opponent's potential moves.\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0       1       2       3  \n     -------------------------------\n  0 |       |       |       |       |\n     -------------------------------\n  1 |       |       |       |       |\n     -------------------------------\n  2 |       |       |       |       |\n     -------------------------------\n  3 |       |       |       |       |\n     -------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[place () {(0,0): [F0]}]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed a piece on ([(0, 0)]).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        |        |\n     -----------------------------------\n  1 |        |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[place () {(0,3): [F1]}]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[place () {(0,0): [F0]}]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed a piece on ([(0, 0)]).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        |        |\n     -----------------------------------\n  1 |        |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 15, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[place () {(0,3): [F1]}]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed a piece on ([(0, 3)]).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  1 |        |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 14, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[place () {(1,0): [F0]}]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[place () {(0,3): [F1]}]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed a piece on ([(0, 3)]).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  1 |        |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 14, Available Capstones: 1\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[place () {(1,0): [F0]}]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed a piece on ([(1, 0)]).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  1 | (1) F0 |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 14, Available Capstones: 1\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[place () {(1,3): [F1]}]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[place () {(1,0): [F0]}]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed a piece on ([(1, 0)]).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  1 | (1) F0 |        |        |        |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 14, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[place () {(1,3): [F1]}]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed a piece on ([(1, 3)]).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  1 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 13, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[place () {(2,0): [F0]}]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[place () {(1,3): [F1]}]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed a piece on ([(1, 3)]).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  1 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  2 |        |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 13, Available Capstones: 1\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[place () {(2,0): [F0]}]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed a piece on ([(2, 0)]).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  1 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  2 | (1) F0 |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 13, Available Capstones: 1\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[place () {(2,3): [F1]}]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[place () {(2,0): [F0]}]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed a piece on ([(2, 0)]).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  1 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  2 | (1) F0 |        |        |        |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 13, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[place () {(2,3): [F1]}]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed a piece on ([(2, 3)]).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  1 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  2 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  3 |        |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 12, Available Capstones: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[place () {(3,0): [F0]}]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[place () {(3,0): [F0]}]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed a piece on ([(3, 0)]).",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n        0        1        2        3   \n     -----------------------------------\n  0 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  1 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  2 | (1) F0 |        |        | (1) F1 |\n     -----------------------------------\n  3 | (1) F0 |        |        |        |\n     -----------------------------------\nAvailable Flat Stones: 11, Available Capstones: 1\n",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": 1,
+      "1": -1
+    }
+  }
+}
