@@ -1,0 +1,88 @@
+{
+  "_comment": "Archivo de idioma de Texas Hold'em Poker. NO traduzcas las claves (lado izquierdo). Traduce solo los valores (lado derecho). Mantén cada {placeholder} exactamente igual. Nunca traduzcas los tokens de acción ('[Check]', '[Call]', '[Fold]', '[Bet N]', '[Raise N]'), las etiquetas de las cartas (rangos 2-10/J/Q/K/A y palos ♠/♥/♦/♣), las abreviaturas de ciegas SB/BB ni las cantidades numéricas de fichas/bote/apuesta.",
+  "_slots": {
+    "{player_id}": "Un número de jugador",
+    "{pid}": "Un número de jugador",
+    "{winner}": "El número del jugador que gana",
+    "{num_players}": "Número total de jugadores en la mesa",
+    "{num_rounds}": "Número total de manos en la partida",
+    "{starting_chips}": "Pila inicial de fichas, p. ej. 1000",
+    "{small_blind}": "Cantidad de la ciega pequeña, p. ej. 10",
+    "{big_blind}": "Cantidad de la ciega grande, p. ej. 20",
+    "{round}": "Número de mano actual",
+    "{street}": "Nombre de la ronda de apuestas actual (Pre-flop/Flop/Turn/River), pre-localizado",
+    "{pot}": "Tamaño actual del bote",
+    "{current_bet}": "La apuesta actual a igualar",
+    "{comm}": "Cartas comunitarias visibles separadas por comas, p. ej. '6♥, 4♥, 3♥'",
+    "{lines}": "Líneas de estado por jugador unidas por saltos de línea, pre-localizadas",
+    "{hole0}": "La primera carta de mano del jugador, p. ej. '3♣'",
+    "{hole1}": "La segunda carta de mano del jugador, p. ej. '9♠'",
+    "{role_txt}": "Anotación de rol pre-localizada entre paréntesis, o vacía",
+    "{chips}": "Una cantidad de fichas con dos decimales, p. ej. '990.00'",
+    "{bet}": "Una cantidad de apuesta con dos decimales, p. ej. '10.00'",
+    "{status}": "Estado del jugador pre-localizado (activo/retirado/all-in)",
+    "{amount}": "Una cantidad de fichas",
+    "{total}": "La apuesta total comprometida por un jugador",
+    "{c0}": "Una carta de mano revelada, p. ej. '3♣'",
+    "{c1}": "Una carta de mano revelada, p. ej. '9♠'",
+    "{reveals}": "Líneas de revelación del showdown por jugador unidas por saltos de línea, pre-localizadas",
+    "{community}": "Cartas comunitarias separadas por comas",
+    "{winners}": "Una lista de números de jugadores ganadores empatados, p. ej. [0, 1]",
+    "{share}": "La porción de fichas que recibe cada ganador empatado",
+    "{ranking}": "La clasificación final de números de jugadores, de menor a mayor"
+  },
+
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id} en una partida de Texas Hold'em Poker de {num_players} jugadores.\nInformación de la partida:\n- {num_rounds} manos en total\n- Pila inicial: {starting_chips} fichas\n- Ciegas: {small_blind}/{big_blind}\n\nAcciones disponibles (tokens exactos):\n  '[Check]'  - cuando no hay apuesta activa\n  '[Call]'   - igualar la apuesta actual\n  '[Fold]'   - descartar tu mano\n  '[Bet N]'  - abrir por N fichas\n  '[Raise N]'- subir en N fichas\n"
+  },
+
+  "game": {
+    "start": "Comenzando una nueva partida de Texas Hold'em de {num_rounds} rondas con {num_players} jugadores."
+  },
+
+  "board": {
+    "panel": "===== Mano {round} / {num_rounds} - {street} =====\nBote: {pot} | Apuesta actual: {current_bet}\nMesa visible: [{comm}]\n{lines}\nTu mano: {hole0}, {hole1}\n==============================================",
+    "player_line": "P{pid}{role_txt}: {chips} fichas | apuesta {bet} | {status}",
+    "street_preflop": "Pre‑flop",
+    "street_flop": "Flop",
+    "street_turn": "Turn",
+    "street_river": "River",
+    "role_dealer": "Repartidor",
+    "role_sb": "SB",
+    "role_bb": "BB",
+    "status_active": "activo",
+    "status_folded": "retirado",
+    "status_all_in": "all-in"
+  },
+
+  "invalid_move": {
+    "wrong_action":     "Acción de póker inválida.",
+    "check_facing_bet": "No se puede pasar frente a una apuesta.",
+    "raise_too_small":  "La subida debe superar la apuesta actual.",
+    "game_complete":    "La partida ya ha terminado."
+  },
+
+  "message": {
+    "eliminated_invalid": "El Jugador {pid} fue eliminado por un movimiento inválido."
+  },
+
+  "action": {
+    "fold":  "El Jugador {pid} se retira.",
+    "check": "El Jugador {pid} pasa.",
+    "call":  "El Jugador {pid} iguala {amount}.",
+    "bet":   "El Jugador {pid} apuesta hasta {total}.",
+    "raise": "El Jugador {pid} sube hasta {total}."
+  },
+
+  "showdown": {
+    "fold_win":    "El Jugador {winner} gana el bote de {pot} fichas (todos los demás se retiraron).",
+    "reveal_line": "Jugador {pid}: {c0} {c1}",
+    "reveal":      "Showdown ronda {round}:\n{reveals}\nCartas comunitarias: {community}",
+    "win":         "El Jugador {winner} gana el bote de {pot} fichas.",
+    "tie":         "Empate entre los jugadores {winners}. Cada uno recibe {share} fichas."
+  },
+
+  "outcome": {
+    "final": "Clasificación final (menor→mayor): {ranking}. Ganador: Jugador {winner}"
+  }
+}

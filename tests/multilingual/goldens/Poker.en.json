@@ -1,0 +1,1826 @@
+{
+  "all_in_bust_game_over": {
+    "game_info": {
+      "0": {
+        "invalid_move": true,
+        "role": "Player 0",
+        "turn_count": 4
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 4
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a 2-player Texas Hold'em Poker game.\nGame Information:\n- 10 hands total\n- Starting stack: 1000 chips\n- Blinds: 10/20\n\nAvailable actions (exact tokens):\n  '[Check]'  - when no bet is live\n  '[Call]'   - match the current bet\n  '[Fold]'   - discard your hand\n  '[Bet N]'  - open for N chips\n  '[Raise N]'- raise by N chips\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Starting a new 10-round Texas Hold'em game with 2 players.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Pre‑flop =====\nPot: 30 | Current bet: 20\nVisible board: []\nP0 (Dealer/BB): 990.00 chips | bet 10.00 | active\nP1 (SB): 980.00 chips | bet 20.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[bet 980]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a 2-player Texas Hold'em Poker game.\nGame Information:\n- 10 hands total\n- Starting stack: 1000 chips\n- Blinds: 10/20\n\nAvailable actions (exact tokens):\n  '[Check]'  - when no bet is live\n  '[Call]'   - match the current bet\n  '[Fold]'   - discard your hand\n  '[Bet N]'  - open for N chips\n  '[Raise N]'- raise by N chips\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Starting a new 10-round Texas Hold'em game with 2 players.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[bet 980]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bets to 980.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Pre‑flop =====\nPot: 1000 | Current bet: 980\nVisible board: []\nP0 (Dealer/BB): 20.00 chips | bet 980.00 | active\nP1 (SB): 980.00 chips | bet 20.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[call]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[call]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 calls 960.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 1960 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 20.00 chips | bet 0.00 | active\nP1 (SB): 20.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[bet 980]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bets to 980.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[call]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 calls 960.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 1960 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 20.00 chips | bet 0.00 | active\nP1 (SB): 20.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Turn =====\nPot: 1960 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠]\nP0 (Dealer/BB): 20.00 chips | bet 0.00 | active\nP1 (SB): 20.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Turn =====\nPot: 1960 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠]\nP0 (Dealer/BB): 20.00 chips | bet 0.00 | active\nP1 (SB): 20.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - River =====\nPot: 1960 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠, 8♠]\nP0 (Dealer/BB): 20.00 chips | bet 0.00 | active\nP1 (SB): 20.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - River =====\nPot: 1960 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠, 8♠]\nP0 (Dealer/BB): 20.00 chips | bet 0.00 | active\nP1 (SB): 20.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Showdown round 1:\nPlayer 0: 3♣ 9♠\nPlayer 1: 3♠ 10♣\nCommunity cards: 6♥, 4♥, 3♥, 10♠, 8♠",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 wins the pot of 1960 chips.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Showdown round 2:\nPlayer 0: K♥ 7♠\nPlayer 1: J♦ 7♥\nCommunity cards: 3♣, 2♣, Q♥, Q♦, A♠",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 wins the pot of 30 chips.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 3 / 10 - Pre‑flop =====\nPot: 30 | Current bet: 20\nVisible board: []\nP0 (Dealer/BB): 20.00 chips | bet 10.00 | active\nP1 (SB): 1950.00 chips | bet 20.00 | active\nYour hole: 2♥, Q♦\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 3 / 10 - Pre‑flop =====\nPot: 30 | Current bet: 20\nVisible board: []\nP0 (Dealer/BB): 20.00 chips | bet 10.00 | active\nP1 (SB): 1950.00 chips | bet 20.00 | active\nYour hole: 2♥, Q♦\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Cannot check facing a bet. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Cannot check facing a bet. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      }
+    ],
+    "rewards": null
+  },
+  "bet_and_fold_win": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a 2-player Texas Hold'em Poker game.\nGame Information:\n- 10 hands total\n- Starting stack: 1000 chips\n- Blinds: 10/20\n\nAvailable actions (exact tokens):\n  '[Check]'  - when no bet is live\n  '[Call]'   - match the current bet\n  '[Fold]'   - discard your hand\n  '[Bet N]'  - open for N chips\n  '[Raise N]'- raise by N chips\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Starting a new 10-round Texas Hold'em game with 2 players.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Pre‑flop =====\nPot: 30 | Current bet: 20\nVisible board: []\nP0 (Dealer/BB): 990.00 chips | bet 10.00 | active\nP1 (SB): 980.00 chips | bet 20.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[call]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a 2-player Texas Hold'em Poker game.\nGame Information:\n- 10 hands total\n- Starting stack: 1000 chips\n- Blinds: 10/20\n\nAvailable actions (exact tokens):\n  '[Check]'  - when no bet is live\n  '[Call]'   - match the current bet\n  '[Fold]'   - discard your hand\n  '[Bet N]'  - open for N chips\n  '[Raise N]'- raise by N chips\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Starting a new 10-round Texas Hold'em game with 2 players.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[call]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 calls 10.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[call]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 calls 10.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[bet 40]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[bet 40]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bets to 40.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 80 | Current bet: 40\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 940.00 chips | bet 40.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[fold]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[bet 40]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bets to 40.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[fold]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 folds.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 wins the pot of 80 chips (all others folded).",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 2 / 10 - Pre‑flop =====\nPot: 30 | Current bet: 20\nVisible board: []\nP0 (SB): 1000.00 chips | bet 20.00 | active\nP1 (Dealer/BB): 970.00 chips | bet 10.00 | active\nYour hole: K♥, 7♠\n==============================================",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "call_check_to_showdown": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 4
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 4
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a 2-player Texas Hold'em Poker game.\nGame Information:\n- 10 hands total\n- Starting stack: 1000 chips\n- Blinds: 10/20\n\nAvailable actions (exact tokens):\n  '[Check]'  - when no bet is live\n  '[Call]'   - match the current bet\n  '[Fold]'   - discard your hand\n  '[Bet N]'  - open for N chips\n  '[Raise N]'- raise by N chips\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Starting a new 10-round Texas Hold'em game with 2 players.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Pre‑flop =====\nPot: 30 | Current bet: 20\nVisible board: []\nP0 (Dealer/BB): 990.00 chips | bet 10.00 | active\nP1 (SB): 980.00 chips | bet 20.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[call]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a 2-player Texas Hold'em Poker game.\nGame Information:\n- 10 hands total\n- Starting stack: 1000 chips\n- Blinds: 10/20\n\nAvailable actions (exact tokens):\n  '[Check]'  - when no bet is live\n  '[Call]'   - match the current bet\n  '[Fold]'   - discard your hand\n  '[Bet N]'  - open for N chips\n  '[Raise N]'- raise by N chips\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Starting a new 10-round Texas Hold'em game with 2 players.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[call]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 calls 10.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[call]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 calls 10.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Turn =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Turn =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - River =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠, 8♠]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - River =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠, 8♠]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Showdown round 1:\nPlayer 0: 3♣ 9♠\nPlayer 1: 3♠ 10♣\nCommunity cards: 6♥, 4♥, 3♥, 10♠, 8♠",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 wins the pot of 40 chips.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 2 / 10 - Pre‑flop =====\nPot: 30 | Current bet: 20\nVisible board: []\nP0 (SB): 960.00 chips | bet 20.00 | active\nP1 (Dealer/BB): 1010.00 chips | bet 10.00 | active\nYour hole: K♥, 7♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Showdown round 1:\nPlayer 0: 3♣ 9♠\nPlayer 1: 3♠ 10♣\nCommunity cards: 6♥, 4♥, 3♥, 10♠, 8♠",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 wins the pot of 40 chips.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 2 / 10 - Pre‑flop =====\nPot: 30 | Current bet: 20\nVisible board: []\nP0 (SB): 960.00 chips | bet 20.00 | active\nP1 (Dealer/BB): 1010.00 chips | bet 10.00 | active\nYour hole: J♦, 7♥\n==============================================",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 2 / 10 - Pre‑flop =====\nPot: 30 | Current bet: 20\nVisible board: []\nP0 (SB): 960.00 chips | bet 20.00 | active\nP1 (Dealer/BB): 1010.00 chips | bet 10.00 | active\nYour hole: J♦, 7♥\n==============================================",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "cannot_check_facing_bet": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 1
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a 2-player Texas Hold'em Poker game.\nGame Information:\n- 10 hands total\n- Starting stack: 1000 chips\n- Blinds: 10/20\n\nAvailable actions (exact tokens):\n  '[Check]'  - when no bet is live\n  '[Call]'   - match the current bet\n  '[Fold]'   - discard your hand\n  '[Bet N]'  - open for N chips\n  '[Raise N]'- raise by N chips\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Starting a new 10-round Texas Hold'em game with 2 players.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Pre‑flop =====\nPot: 30 | Current bet: 20\nVisible board: []\nP0 (Dealer/BB): 990.00 chips | bet 10.00 | active\nP1 (SB): 980.00 chips | bet 20.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Cannot check facing a bet. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[call]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a 2-player Texas Hold'em Poker game.\nGame Information:\n- 10 hands total\n- Starting stack: 1000 chips\n- Blinds: 10/20\n\nAvailable actions (exact tokens):\n  '[Check]'  - when no bet is live\n  '[Call]'   - match the current bet\n  '[Fold]'   - discard your hand\n  '[Bet N]'  - open for N chips\n  '[Raise N]'- raise by N chips\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Starting a new 10-round Texas Hold'em game with 2 players.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[call]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 calls 10.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[call]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 calls 10.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "invalid_action": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 1
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a 2-player Texas Hold'em Poker game.\nGame Information:\n- 10 hands total\n- Starting stack: 1000 chips\n- Blinds: 10/20\n\nAvailable actions (exact tokens):\n  '[Check]'  - when no bet is live\n  '[Call]'   - match the current bet\n  '[Fold]'   - discard your hand\n  '[Bet N]'  - open for N chips\n  '[Raise N]'- raise by N chips\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Starting a new 10-round Texas Hold'em game with 2 players.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Pre‑flop =====\nPot: 30 | Current bet: 20\nVisible board: []\nP0 (Dealer/BB): 990.00 chips | bet 10.00 | active\nP1 (SB): 980.00 chips | bet 20.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "hello",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "hello",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid poker action. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[call]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a 2-player Texas Hold'em Poker game.\nGame Information:\n- 10 hands total\n- Starting stack: 1000 chips\n- Blinds: 10/20\n\nAvailable actions (exact tokens):\n  '[Check]'  - when no bet is live\n  '[Call]'   - match the current bet\n  '[Fold]'   - discard your hand\n  '[Bet N]'  - open for N chips\n  '[Raise N]'- raise by N chips\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Starting a new 10-round Texas Hold'em game with 2 players.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "hello",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[call]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 calls 10.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[call]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 calls 10.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "raise_and_call": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 5
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 4
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a 2-player Texas Hold'em Poker game.\nGame Information:\n- 10 hands total\n- Starting stack: 1000 chips\n- Blinds: 10/20\n\nAvailable actions (exact tokens):\n  '[Check]'  - when no bet is live\n  '[Call]'   - match the current bet\n  '[Fold]'   - discard your hand\n  '[Bet N]'  - open for N chips\n  '[Raise N]'- raise by N chips\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Starting a new 10-round Texas Hold'em game with 2 players.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Pre‑flop =====\nPot: 30 | Current bet: 20\nVisible board: []\nP0 (Dealer/BB): 990.00 chips | bet 10.00 | active\nP1 (SB): 980.00 chips | bet 20.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[call]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a 2-player Texas Hold'em Poker game.\nGame Information:\n- 10 hands total\n- Starting stack: 1000 chips\n- Blinds: 10/20\n\nAvailable actions (exact tokens):\n  '[Check]'  - when no bet is live\n  '[Call]'   - match the current bet\n  '[Fold]'   - discard your hand\n  '[Bet N]'  - open for N chips\n  '[Raise N]'- raise by N chips\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Starting a new 10-round Texas Hold'em game with 2 players.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[call]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 calls 10.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[call]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 calls 10.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[bet 40]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[bet 40]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bets to 40.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 80 | Current bet: 40\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 940.00 chips | bet 40.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[raise 40]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[bet 40]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bets to 40.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[raise 40]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 raises to 80.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 160 | Current bet: 80\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 940.00 chips | bet 40.00 | active\nP1 (SB): 900.00 chips | bet 80.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[call]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[raise 40]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 raises to 80.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[call]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 calls 40.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Turn =====\nPot: 200 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠]\nP0 (Dealer/BB): 900.00 chips | bet 0.00 | active\nP1 (SB): 900.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[call]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 calls 40.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Turn =====\nPot: 200 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠]\nP0 (Dealer/BB): 900.00 chips | bet 0.00 | active\nP1 (SB): 900.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - River =====\nPot: 200 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠, 8♠]\nP0 (Dealer/BB): 900.00 chips | bet 0.00 | active\nP1 (SB): 900.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - River =====\nPot: 200 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠, 8♠]\nP0 (Dealer/BB): 900.00 chips | bet 0.00 | active\nP1 (SB): 900.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Showdown round 1:\nPlayer 0: 3♣ 9♠\nPlayer 1: 3♠ 10♣\nCommunity cards: 6♥, 4♥, 3♥, 10♠, 8♠",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 wins the pot of 200 chips.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 2 / 10 - Pre‑flop =====\nPot: 30 | Current bet: 20\nVisible board: []\nP0 (SB): 880.00 chips | bet 20.00 | active\nP1 (Dealer/BB): 1090.00 chips | bet 10.00 | active\nYour hole: K♥, 7♠\n==============================================",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "raise_must_exceed": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 3
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 4
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a 2-player Texas Hold'em Poker game.\nGame Information:\n- 10 hands total\n- Starting stack: 1000 chips\n- Blinds: 10/20\n\nAvailable actions (exact tokens):\n  '[Check]'  - when no bet is live\n  '[Call]'   - match the current bet\n  '[Fold]'   - discard your hand\n  '[Bet N]'  - open for N chips\n  '[Raise N]'- raise by N chips\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Starting a new 10-round Texas Hold'em game with 2 players.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Pre‑flop =====\nPot: 30 | Current bet: 20\nVisible board: []\nP0 (Dealer/BB): 990.00 chips | bet 10.00 | active\nP1 (SB): 980.00 chips | bet 20.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[call]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a 2-player Texas Hold'em Poker game.\nGame Information:\n- 10 hands total\n- Starting stack: 1000 chips\n- Blinds: 10/20\n\nAvailable actions (exact tokens):\n  '[Check]'  - when no bet is live\n  '[Call]'   - match the current bet\n  '[Fold]'   - discard your hand\n  '[Bet N]'  - open for N chips\n  '[Raise N]'- raise by N chips\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Starting a new 10-round Texas Hold'em game with 2 players.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[call]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 calls 10.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[call]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 calls 10.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 40 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 980.00 chips | bet 0.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[bet 40]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[bet 40]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bets to 40.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Flop =====\nPot: 80 | Current bet: 40\nVisible board: [6♥, 4♥, 3♥]\nP0 (Dealer/BB): 940.00 chips | bet 40.00 | active\nP1 (SB): 980.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[raise 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[raise 0]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 attempted an invalid move. Reason: Raise must exceed current bet. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 1,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[call]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[call]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 calls 40.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Turn =====\nPot: 120 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠]\nP0 (Dealer/BB): 940.00 chips | bet 0.00 | active\nP1 (SB): 940.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[bet 40]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bets to 40.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[raise 0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "[call]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 calls 40.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - Turn =====\nPot: 120 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠]\nP0 (Dealer/BB): 940.00 chips | bet 0.00 | active\nP1 (SB): 940.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - River =====\nPot: 120 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠, 8♠]\nP0 (Dealer/BB): 940.00 chips | bet 0.00 | active\nP1 (SB): 940.00 chips | bet 0.00 | active\nYour hole: 3♠, 10♣\n==============================================",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[check]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[check]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 checks.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[check]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 checks.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "===== Hand 1 / 10 - River =====\nPot: 120 | Current bet: 0\nVisible board: [6♥, 4♥, 3♥, 10♠, 8♠]\nP0 (Dealer/BB): 940.00 chips | bet 0.00 | active\nP1 (SB): 940.00 chips | bet 0.00 | active\nYour hole: 3♣, 9♠\n==============================================",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  }
+}

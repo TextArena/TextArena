@@ -1,0 +1,88 @@
+{
+  "_comment": "德州扑克 Texas Hold'em 语言文件。请勿翻译键（左侧）。只翻译值（右侧）。保持每个 {placeholder} 完全不变。切勿翻译动作标记（'[Check]'、'[Call]'、'[Fold]'、'[Bet N]'、'[Raise N]'）、牌面标签（点数 2-10/J/Q/K/A 与花色 ♠/♥/♦/♣）、盲注缩写 SB/BB 或筹码/底池/下注的数字金额。",
+  "_slots": {
+    "{player_id}": "玩家编号",
+    "{pid}": "玩家编号",
+    "{winner}": "获胜的玩家编号",
+    "{num_players}": "牌桌上的玩家总数",
+    "{num_rounds}": "整局游戏的总手数",
+    "{starting_chips}": "初始筹码量，例如 1000",
+    "{small_blind}": "小盲金额，例如 10",
+    "{big_blind}": "大盲金额，例如 20",
+    "{round}": "当前手牌编号",
+    "{street}": "当前下注轮的名称（Pre-flop/Flop/Turn/River），已预先本地化",
+    "{pot}": "当前底池大小",
+    "{current_bet}": "需要跟注的当前下注额",
+    "{comm}": "以逗号分隔的可见公共牌，例如 '6♥, 4♥, 3♥'",
+    "{lines}": "以换行连接的各玩家状态行，已预先本地化",
+    "{hole0}": "玩家的第一张底牌，例如 '3♣'",
+    "{hole1}": "玩家的第二张底牌，例如 '9♠'",
+    "{role_txt}": "括号中已预先本地化的角色标注，或为空",
+    "{chips}": "带两位小数的筹码数量，例如 '990.00'",
+    "{bet}": "带两位小数的下注数量，例如 '10.00'",
+    "{status}": "已预先本地化的玩家状态（活跃/弃牌/全押）",
+    "{amount}": "筹码数量",
+    "{total}": "玩家已投入的总下注额",
+    "{c0}": "已亮出的底牌，例如 '3♣'",
+    "{c1}": "已亮出的底牌，例如 '9♠'",
+    "{reveals}": "以换行连接的各玩家摊牌亮牌行，已预先本地化",
+    "{community}": "以逗号分隔的公共牌",
+    "{winners}": "并列获胜玩家编号列表，例如 [0, 1]",
+    "{share}": "每位并列获胜者获得的筹码份额",
+    "{ranking}": "玩家编号的最终排名，从低到高"
+  },
+
+  "player_prompt": {
+    "intro": "你是 {num_players} 人德州扑克游戏中的玩家 {player_id}。\n游戏信息：\n- 共 {num_rounds} 手牌\n- 初始筹码：{starting_chips} 筹码\n- 盲注：{small_blind}/{big_blind}\n\n可用动作（精确标记）：\n  '[Check]'  - 当前无下注时过牌\n  '[Call]'   - 跟上当前下注\n  '[Fold]'   - 弃掉你的手牌\n  '[Bet N]'  - 开注 N 筹码\n  '[Raise N]'- 加注 N 筹码\n"
+  },
+
+  "game": {
+    "start": "开始一局 {num_rounds} 轮的德州扑克游戏，共 {num_players} 名玩家。"
+  },
+
+  "board": {
+    "panel": "===== 第 {round} / {num_rounds} 手 - {street} =====\n底池：{pot} | 当前下注：{current_bet}\n可见公共牌：[{comm}]\n{lines}\n你的底牌：{hole0}, {hole1}\n==============================================",
+    "player_line": "P{pid}{role_txt}：{chips} 筹码 | 下注 {bet} | {status}",
+    "street_preflop": "翻牌前",
+    "street_flop": "翻牌",
+    "street_turn": "转牌",
+    "street_river": "河牌",
+    "role_dealer": "庄家",
+    "role_sb": "SB",
+    "role_bb": "BB",
+    "status_active": "活跃",
+    "status_folded": "弃牌",
+    "status_all_in": "全押"
+  },
+
+  "invalid_move": {
+    "wrong_action":     "无效的扑克动作。",
+    "check_facing_bet": "面对下注时不能过牌。",
+    "raise_too_small":  "加注必须超过当前下注。",
+    "game_complete":    "游戏已经结束。"
+  },
+
+  "message": {
+    "eliminated_invalid": "玩家 {pid} 因无效操作被淘汰。"
+  },
+
+  "action": {
+    "fold":  "玩家 {pid} 弃牌。",
+    "check": "玩家 {pid} 过牌。",
+    "call":  "玩家 {pid} 跟注 {amount}。",
+    "bet":   "玩家 {pid} 下注至 {total}。",
+    "raise": "玩家 {pid} 加注至 {total}。"
+  },
+
+  "showdown": {
+    "fold_win":    "玩家 {winner} 赢得 {pot} 筹码的底池（其他人全部弃牌）。",
+    "reveal_line": "玩家 {pid}：{c0} {c1}",
+    "reveal":      "第 {round} 手摊牌：\n{reveals}\n公共牌：{community}",
+    "win":         "玩家 {winner} 赢得 {pot} 筹码的底池。",
+    "tie":         "玩家 {winners} 平局。每人获得 {share} 筹码。"
+  },
+
+  "outcome": {
+    "final": "最终排名（从低到高）：{ranking}。获胜者：玩家 {winner}"
+  }
+}
