@@ -10,10 +10,15 @@ they can't understand each other's messages — so these need *same-language enf
 language-mismatch warning. That's a deliberate product change we don't want to bolt onto core
 TextArena yet.
 
-Examples: IteratedStagHunt, Negotiation, VendorNegotiation, UsedCarNegotiation, TwoDollar,
-NewRecruit, Debate, Diplomacy, SecretMafia, TwoRoomsAndABoom, CharacterConclave,
-ScenarioPlanning, ScorableGames, SettlersOfCatan, TruthAndDeception, and (pending per-env vetting)
-several auction/bargaining games.
+All remaining unlocalized games were vetted per-env (looking at whether raw player text is relayed
+between players, e.g. a "conversation phase" or `{message}` action). Confirmed Level-2:
+IteratedStagHunt, Negotiation, VendorNegotiation, UsedCarNegotiation, TwoDollar, NewRecruit,
+Debate, Diplomacy, SecretMafia, TwoRoomsAndABoom, CharacterConclave, ScenarioPlanning,
+ScorableGames, SettlersOfCatan, TruthAndDeception, and the auction/economic games
+**BlindAuction, SimpleBlindAuction, PublicGoodsGame, MarketEntryGame, WinAsMuchAsYouCan** (each has
+an explicit free-text communication phase alongside its structured bids/decisions).
+
+> `ImTheBoss` is an empty stub (`env.py` is 0 bytes) — not implemented, nothing to localize.
 
 > Note: `SimpleNegotiation`, `IteratedPrisonersDilemma`, and `ThreePlayerIPD` were already
 > localized on this branch before this policy was set; they are Level-2 by this definition but

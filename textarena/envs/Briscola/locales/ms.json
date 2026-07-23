@@ -1,0 +1,65 @@
+{
+  "_comment": "Fail bahasa Briscola. JANGAN terjemahkan kunci (sebelah kiri). Terjemahkan nilai sahaja (sebelah kanan). Kekalkan setiap {placeholder} seadanya. Jangan sekali-kali terjemahkan token tindakan '[play X]', label kad (A, 2..7, J, Q, K), simbol sut (dibawa dalam slot {card}/{trump_card}) atau kiraan/mata/skor berangka. Teks penanda '(TRUMP)' boleh disetempatkan.",
+  "_slots": {
+    "{player_id}": "Nombor pemain, cth. 0 atau 1",
+    "{trump_suit}": "Simbol sut trump (♠♥♦♣) - jangan terjemah",
+    "{trump_card}": "Label kad trump, cth. '7♠' - jangan terjemah",
+    "{card}": "Label kad, cth. 'A♥' - jangan terjemah",
+    "{trump_mark}": "Penanda '(TRUMP)' yang telah dipaparkan, atau kosong",
+    "{max_pos}": "Kedudukan kad sah tertinggi dalam tangan pemain",
+    "{count}": "Bilangan kad yang dipegang pemain",
+    "{pos}": "Nombor kedudukan kad dalam tangan",
+    "{points}": "Bilangan mata (nilai kad atau skor terkumpul)",
+    "{hand}": "Senarai tangan yang telah dipaparkan, berbilang baris",
+    "{trick}": "Senarai pusingan semasa yang telah dipaparkan",
+    "{scores}": "Baris skor yang telah dipaparkan, atau blok skor akhir setiap pemain",
+    "{trump_info}": "Baris sut trump / kiraan dek yang telah dipaparkan",
+    "{winner}": "Nombor pemain yang memenangi pusingan atau permainan",
+    "{tricks}": "Bilangan pusingan yang dimenangi pemain",
+    "{deck_count}": "Bilangan kad yang tinggal dalam dek"
+  },
+
+  "game": {
+    "start": "Permainan Briscola bermula! Sut trump: {trump_suit} (Kad trump: {trump_card})"
+  },
+
+  "prompt": {
+    "intro": "Anda sedang bermain Briscola - Pemain {player_id}.\nMatlamat: Menangi pusingan dan kumpul mata terbanyak (120 mata keseluruhan dalam dek).\nMata Kad: A=11, 3=10, K=4, Q=3, J=2, lain-lain=0\nKekuatan Kad: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKad trump mengatasi kad bukan trump tanpa mengira kekuatan.\n\nTindakan: '[play X]' di mana X ialah kedudukan (1-{max_pos}) kad dalam tangan anda\n"
+  },
+
+  "hand": {
+    "none": "Tiada kad",
+    "empty": "Tiada kad di tangan",
+    "header": "Tangan anda:",
+    "card_line": "  {pos}. {card} [{points} mata]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+
+  "trick": {
+    "empty": "Belum ada kad dimainkan dalam pusingan ini.",
+    "header": "Pusingan semasa:",
+    "line": "  Pemain {player_id}: {card}{trump_mark}"
+  },
+
+  "turn": {
+    "score_entry": "Pemain {player_id}: {points} mata",
+    "trump_info": "Sut trump: {trump_suit}",
+    "trump_info_deck": "Sut trump: {trump_suit} | Kad tinggal dalam dek: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nSkor: {scores}\n{trump_info}\n\nMainkan kad menggunakan [play X]"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Gunakan [play X] di mana X ialah kedudukan kad (1, 2, 3, dsb.)",
+    "out_of_range": "Kedudukan kad tidak sah. Anda mempunyai {count} kad (1-{count})"
+  },
+
+  "action": {
+    "played": "Pemain {player_id} memainkan {card}",
+    "trick_win": "Pemain {winner} memenangi pusingan dengan {card} dan memperoleh {points} mata!"
+  },
+
+  "outcome": {
+    "head": "Permainan Tamat! Pemain {winner} menang dengan {points} mata!\n\nSkor Akhir:\n{scores}",
+    "player_line": "Pemain {player_id}: {points} mata ({tricks} pusingan)\n"
+  }
+}

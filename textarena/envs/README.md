@@ -90,7 +90,7 @@ general todos:
 | 77 | [UltimateTicTacToe](#ultimatetictactoe) | Two | 2 | | |
 | 78 | [WildTicTacToe](#wildtictactoe) | Two | 2 | | |
 | 79 | [WordChains](#wordchains) | Two | 2 | 🌐 | |
-| 80 | [Briscola](#briscola) | Multi | 2–4 | | |
+| 80 | [Briscola](#briscola) | Multi | 2–4 | 🌐 | |
 | 81 | [Golf](#golf) | Multi | 2–4 | | |
 | 82 | [Negotiation](#negotiation) | Multi | 2–15 | | |
 | 83 | [CharacterConclave](#characterconclave) | Multi | 3–15 | | |
@@ -210,7 +210,7 @@ Two-Player
 | 4 | [Santorini](#santorini) | 2–3 | 🌐 | |
 | 5 | [Snake](#snake) | 2–15 | 🌐 | |
 | 6 | [Surround](#surround) | 2–15 | 🌐 | |
-| 7 | [Briscola](#briscola) | 2–4 | | |
+| 7 | [Briscola](#briscola) | 2–4 | 🌐 | |
 | 8 | [Golf](#golf) | 2–4 | 🌐 | |
 | 9 | [Negotiation](#negotiation) | 2–15 | | |
 | 10 | [CharacterConclave](#characterconclave) | 3–15 | | |

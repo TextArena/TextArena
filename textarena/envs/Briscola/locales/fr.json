@@ -1,0 +1,65 @@
+{
+  "_comment": "Fichier de langue de Briscola. NE traduisez PAS les clés (côté gauche). Traduisez uniquement les valeurs (côté droit). Conservez chaque {placeholder} tel quel. Ne traduisez jamais le jeton d'action '[play X]', les étiquettes de carte (A, 2..7, J, Q, K), les symboles de couleur (portés par les slots {card}/{trump_card}) ni les décomptes/points/scores numériques. Le texte du marqueur '(TRUMP)' peut être localisé.",
+  "_slots": {
+    "{player_id}": "Un numéro de joueur, p. ex. 0 ou 1",
+    "{trump_suit}": "Le symbole de la couleur d'atout (♠♥♦♣) - ne pas traduire",
+    "{trump_card}": "L'étiquette de la carte d'atout, p. ex. '7♠' - ne pas traduire",
+    "{card}": "Une étiquette de carte, p. ex. 'A♥' - ne pas traduire",
+    "{trump_mark}": "Le marqueur '(TRUMP)' déjà rendu, ou vide",
+    "{max_pos}": "La position de carte légale la plus élevée dans la main du joueur",
+    "{count}": "Le nombre de cartes que possède un joueur",
+    "{pos}": "Le numéro de position d'une carte dans la main",
+    "{points}": "Un nombre de points (valeur de la carte ou score cumulé)",
+    "{hand}": "La liste de la main déjà rendue, sur plusieurs lignes",
+    "{trick}": "La liste du pli en cours déjà rendue",
+    "{scores}": "La ligne de score déjà rendue, ou le bloc de score final par joueur",
+    "{trump_info}": "La ligne couleur d'atout / nombre de cartes du talon déjà rendue",
+    "{winner}": "Le numéro du joueur qui remporte le pli ou la partie",
+    "{tricks}": "Un nombre de plis remportés par un joueur",
+    "{deck_count}": "Nombre de cartes restantes dans le talon"
+  },
+
+  "game": {
+    "start": "Partie de Briscola lancée ! Couleur d'atout : {trump_suit} (Carte d'atout : {trump_card})"
+  },
+
+  "prompt": {
+    "intro": "Vous jouez à Briscola - Joueur {player_id}.\nObjectif : Remportez des plis et rassemblez le plus de points (120 points au total dans le jeu).\nPoints des cartes : A=11, 3=10, K=4, Q=3, J=2, autres=0\nForce des cartes : A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nLes cartes d'atout battent les cartes non-atout quelle que soit leur force.\n\nAction : '[play X]', où X est la position (1-{max_pos}) de la carte dans votre main\n"
+  },
+
+  "hand": {
+    "none": "Aucune carte",
+    "empty": "Aucune carte en main",
+    "header": "Votre main :",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": " (ATOUT)"
+  },
+
+  "trick": {
+    "empty": "Aucune carte encore jouée dans ce pli.",
+    "header": "Pli en cours :",
+    "line": "  Joueur {player_id} : {card}{trump_mark}"
+  },
+
+  "turn": {
+    "score_entry": "Joueur {player_id} : {points} pts",
+    "trump_info": "Couleur d'atout : {trump_suit}",
+    "trump_info_deck": "Couleur d'atout : {trump_suit} | Cartes restantes dans le talon : {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nScores : {scores}\n{trump_info}\n\nJouez une carte avec [play X]"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Utilisez [play X], où X est la position de la carte (1, 2, 3, etc.)",
+    "out_of_range": "Position de carte invalide. Vous avez {count} cartes (1-{count})"
+  },
+
+  "action": {
+    "played": "Le joueur {player_id} a joué {card}",
+    "trick_win": "Le joueur {winner} remporte le pli avec {card} et gagne {points} points !"
+  },
+
+  "outcome": {
+    "head": "Partie terminée ! Le joueur {winner} gagne avec {points} points !\n\nScores finaux :\n{scores}",
+    "player_line": "Joueur {player_id} : {points} points ({tricks} plis)\n"
+  }
+}
