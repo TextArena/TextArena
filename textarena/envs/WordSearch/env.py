@@ -1,8 +1,12 @@
 import re, random, copy, string
-from typing import Any, Dict, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
 from textarena.envs.WordSearch.renderer import create_board_str
+from textarena.envs.utils.word_lists import (
+    WordFreqDictionary,
+    NON_ALPHABETIC_LANGS,
+)
 
 import nltk
 from nltk.corpus import words
@@ -10,6 +14,14 @@ nltk.download('words')
 
 class WordSearchEnv(ta.Env):
     """ Word Search environment """
+
+    # For non-English content languages the wordfreq pool holds up to ~40k words.
+    # We only keep words whose length fits comfortably on the grid, then cap the
+    # candidate pool to the most-frequent N (and LOG it) so grid generation stays
+    # fast. English keeps its (already small) NLTK basic/hardcore list unchanged.
+    _ML_MIN_WORD_LEN = 3
+    _ML_MAX_WORD_LEN = 8
+    _ML_POOL_CAP = 2000
 
     def __init__(self, hardcore: Optional[bool] = False, max_turns: int = 20):
         """
@@ -24,8 +36,74 @@ class WordSearchEnv(ta.Env):
         self.num_words = 5
         self.num_incorrect_tries = 20
 
-        ## load the word list
+        ## load the word list (English path, unchanged: no new deps, byte-identical)
         self.word_list = words.words("en") if self.hardcore else words.words("en-basic")
+        # Per-language cache of (candidate word pool, fill-letter alphabet). Built
+        # lazily via the optional wordfreq backend for non-English languages.
+        self._ml_cache: Dict[str, Tuple[List[str], List[str]]] = {}
+        # Active resources for the current episode (set in reset()).
+        self._word_pool = self.word_list
+        self._fill_letters = string.ascii_uppercase
+
+    def _content_lang(self) -> str:
+        """The single language the hidden words are drawn from for this episode.
+
+        Word games are single-content-language (all hidden words share one
+        language); per-player UI language still varies via the locale layer. When
+        players request different languages we take player 0's as the content
+        language.
+        """
+        lang = getattr(self, "lang", "en")
+        if isinstance(lang, dict):
+            values = set(lang.values())
+            return next(iter(values)) if len(values) == 1 else lang.get(0, "en")
+        return lang or "en"
+
+    def _prepare_language(self, lang: str) -> None:
+        """Select the hidden-word pool and grid fill-letters for the content lang.
+
+        English keeps its NLTK word list and A-Z fillers exactly as before.
+        Non-English languages draw words from the optional wordfreq backend and
+        fill empty cells from that language's own alphabet (e.g. Arabic/Hebrew
+        letters instead of A-Z). Results are cached per language.
+        """
+        if lang == "en":
+            self._word_pool = self.word_list
+            self._fill_letters = string.ascii_uppercase
+            return
+        if lang in NON_ALPHABETIC_LANGS:
+            raise ValueError(
+                f"Word Search is a per-letter grid game and does not support the "
+                f"non-alphabetic language '{lang}'."
+            )
+        if lang not in self._ml_cache:
+            d = WordFreqDictionary(lang)
+            pool = [
+                w for w in d.sample_pool()
+                if self._ML_MIN_WORD_LEN <= len(w) <= self._ML_MAX_WORD_LEN
+            ]
+            if len(pool) > self._ML_POOL_CAP:
+                pool.sort(key=lambda w: d._wf.zipf_frequency(w, lang), reverse=True)
+                pool = pool[: self._ML_POOL_CAP]
+                print(
+                    f"[WordSearch] capped '{lang}' candidate word pool to the "
+                    f"{self._ML_POOL_CAP} most-frequent words for performance."
+                )
+            if len(pool) < self.num_words:
+                raise ValueError(
+                    f"Not enough words to build a Word Search grid for language "
+                    f"'{lang}' (found {len(pool)}, need {self.num_words})."
+                )
+            # Fill letters: this language's alphabet, most-frequent first,
+            # uppercased (a no-op for caseless scripts), deduped in order.
+            letters, seen = [], set()
+            for ch in d.alphabet():
+                u = ch.upper()
+                if u not in seen:
+                    seen.add(u)
+                    letters.append(u)
+            self._ml_cache[lang] = (pool, letters)
+        self._word_pool, self._fill_letters = self._ml_cache[lang]
 
     def get_board_str(self):
         return create_board_str(game_state=self.state.game_state)
@@ -33,6 +111,7 @@ class WordSearchEnv(ta.Env):
     def reset(self, num_players: int, seed: Optional[int] = None):
         """ Reset the environment """
         self.state = ta.SinglePlayerState(num_players=num_players, seed=seed, max_turns=self.max_turns) ## initialise the game state
+        self._prepare_language(self._content_lang()) ## select hidden-word pool + fill letters for the content language
         self.game_board, self.placed_words = self._generate_word_search() ## load the game board
         ## reset the state
         game_state = {"board": copy.deepcopy(self.game_board), "rendered_board": self._render_board(self.game_board),}
@@ -41,25 +120,8 @@ class WordSearchEnv(ta.Env):
 
     def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
         """ Generate the player prompt """
-        prompt = (
-            f"You are Player {player_id}, and you are participating in a Word Search challenge "
-            f"modeled as {'Hardcore' if self.hardcore else 'Basic'}. The objective is to find and highlight hidden words "
-            f"on the grid below. The rows and columns are numbered for your reference.\n\n"
-            "Here is the current state of the Word Search board:\n"
-            "----------------------------------------\n"
-            "Words you have already found are marked in square brackets [ ]. Each row and column is numbered for clarity.\n"
-        )
-        prompt += (
-            "\n\nTo locate a word, specify the row and column of its start and end letters. Note that words are either across or down.\n"
-            "You may type your response and thoughts in any manner. But you may only submit one submission at a time. For your submissions, use the format '[start_row start_col end_row end_col]'.\n"
-            "For instance, if you want to find the word 'HELLO' starting at row 1, column 1 and ending at row 1, column 5, enter '[1 1 1 5]'.\n"
-            "\nGuidelines:\n"
-            "- Each guess must be unique; you cannot repeat the same guess.\n"
-            "- You have a total of 20 incorrect attempts remaining.\n"
-            "- The history of your attempts will be recorded below.\n\n"
-            "Make your guesses carefully and strategically. Good luck, Player {player_id}! Let's see how many words you can find!\n"
-        )
-        return prompt
+        mode = self.m("prompt", "mode_hardcore") if self.hardcore else self.m("prompt", "mode_basic")
+        return self.m("prompt", "intro", player_id=player_id, mode=mode, tries=self.num_incorrect_tries)
     
     def _observe_current_state(self) -> None:
         """
@@ -67,9 +129,12 @@ class WordSearchEnv(ta.Env):
         This includes the current board, placed words, and any incorrect attempts.
         """
         self.state.add_observation(
-            message=f"Current Board:\n\n{self._render_board(self.state.game_state['board'], show_words=True)}\n"
-                    f"Placed Words: {', '.join(self.placed_words.keys())}\n"
-                    f"Incorrect Attempts Remaining: {self.num_incorrect_tries}",
+            message=self.m(
+                "board", "state",
+                board=self._render_board(self.state.game_state['board'], show_words=True),
+                words=', '.join(self.placed_words.keys()),
+                tries=self.num_incorrect_tries,
+            ),
             observation_type=ta.ObservationType.GAME_BOARD
         )
     
@@ -83,7 +148,7 @@ class WordSearchEnv(ta.Env):
 
         """
         ## sample the words
-        self.words = random.sample(self.word_list, self.num_words)
+        self.words = random.sample(self._word_pool, self.num_words)
         self.words = [word.upper() for word in self.words]
         self.words = sorted(self.words, key=lambda w: len(w), reverse=True)
         self.directions = {word: random.choice(["across", "down"]) for word in self.words}
@@ -263,7 +328,7 @@ class WordSearchEnv(ta.Env):
         for row in range(len(grid)):
             for col in range(len(grid[0])):
                 if grid[row][col] == ".":
-                    grid[row][col] = random.choice(string.ascii_uppercase)
+                    grid[row][col] = random.choice(self._fill_letters)
 
     def _validate_and_replace_unintended_words(self, grid, words):
         """
@@ -507,34 +572,30 @@ class WordSearchEnv(ta.Env):
 
         if not matches:
             ## invalid action
-            reason=f"Invalid move format. Player {player_id} did not respond with valid 'start_row, start_col, end_row, end_col'."
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=reason)
+            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid", "wrong_format", player_id=player_id))
         else:
             for match in matches:
                 print("Checking match:", match)
                 start_row, start_col, end_row, end_col = [int(x) for x in match]
-                if not (0 <= start_row < len(self.state.game_state["board"]) 
-                        and 0 <= start_col < len(self.state.game_state["board"][0]) 
-                        and 0 <= end_row < len(self.state.game_state["board"]) 
+                coords = f"{start_row} {start_col} {end_row} {end_col}"
+                if not (0 <= start_row < len(self.state.game_state["board"])
+                        and 0 <= start_col < len(self.state.game_state["board"][0])
+                        and 0 <= end_row < len(self.state.game_state["board"])
                         and 0 <= end_col < len(self.state.game_state["board"][0])):
                     ## action out of bounds
-                    reason=f"Invalid move format. Player {player_id} did not respond with valid 'start_row, start_col, end_row, end_col'."
-                    self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=reason)
+                    self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid", "out_of_range", player_id=player_id))
                     break
                 elif (start_row, start_col, end_row, end_col) in self.incorrect_attempts:
                     ## action already attempted
-                    reason=f"Invalid move. The action has already been attempted."
-                    self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=reason)
+                    self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid", "already_attempted"))
                     break
                 elif not self._check_word(self.state.game_state["board"], start_row, start_col, end_row, end_col):
                     ## action is incorrect
                     self.num_incorrect_tries -= 1
-                    message=f"[{start_row} {start_col} {end_row} {end_col}] is an incorrect attempt. {self.num_incorrect_tries} incorrect tries remaining."
-                    self.state.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
+                    self.state.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=self.m("feedback", "incorrect", coords=coords, tries=self.num_incorrect_tries), observation_type=ta.ObservationType.GAME_MESSAGE)
                     if self.num_incorrect_tries == 0:
                         reward = round(len(self.correct_words) / len(self.placed_words), 3)
-                        reason = f"No more incorrect tries remaining. You found {len(self.correct_words)} out of {len(self.placed_words)} words ({round(reward * 100)}%)."
-                        self.state.set_outcome(reward=reward, reason=reason)
+                        self.state.set_outcome(reward=reward, reason=self.m("outcome", "no_tries", found=len(self.correct_words), total=len(self.placed_words), pct=round(reward * 100)))
                     break
                 else:
                     ## action is correct
@@ -542,17 +603,16 @@ class WordSearchEnv(ta.Env):
                     if word_found:
                         self.correct_words.add(word_found)
                         self._highlight_word(start_row, start_col, end_row, end_col)
-                        message = f"[{start_row} {start_col} {end_row} {end_col}] is a correct attempt. You found the word '{word_found}'."
+                        message = self.m("feedback", "correct", coords=coords, word=word_found)
                     else:
-                        message = f"[{start_row} {start_col} {end_row} {end_col}] is a correct attempt, but the word was not found in the placed words."
+                        message = self.m("feedback", "correct_unknown", coords=coords)
                     self.state.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
-            
+
             ## update the game board
             self.state.game_state["rendered_board"] = self._render_board(self.state.game_state["board"], show_words=True)
 
         if len(self.correct_words) == len(self.placed_words):
-            reason = f"Congratulations! You completed the Word Search puzzle."
-            self.state.set_outcome(reward=1.0, reason=reason)
+            self.state.set_outcome(reward=1.0, reason=self.m("outcome", "win"))
 
         self._observe_current_state()  # Update the current state observation
         return self.state.step()

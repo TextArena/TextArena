@@ -38,7 +38,7 @@ general todos:
 | 25 | [TwentyQuestions](#twentyquestions) | Single | 1 | | |
 | 26 | [WordLadder](#wordladder) | Single | 1 | 🌐 | |
 | 27 | [Wordle](#wordle) | Single | 1 | 🌐 | |
-| 28 | [WordSearch](#wordsearch) | Single | 1 | | |
+| 28 | [WordSearch](#wordsearch) | Single | 1 | 🌐 | |
 | 29 | [Alquerque](#alquerque) | Two | 2 | | |
 | 30 | [Battleship](#battleship) | Two | 2 | | |
 | 31 | [Breakthrough](#breakthrough) | Two | 2 | | |
@@ -64,7 +64,7 @@ general todos:
 | 51 | [LeducHoldem](#leducholdem) | Two | 2 | | |
 | 52 | [LeTruc](#letruc) | Two | 2 | | |
 | 53 | [LinesOfAction](#linesofaction) | Two | 2 | | |
-| 54 | [LetterAuction](#letterauction) | Two | 2 | | |
+| 54 | [LetterAuction](#letterauction) | Two | 2 | 🌐 | |
 | 55 | [LiarsDice](#liarsdice) | Multi | 2–15 | | |
 | 56 | [MemoryGame](#memorygame) | Two | 2 | | |
 | 57 | [Nim](#nim) | Two | 2 | 🌐 | |
@@ -79,7 +79,7 @@ general todos:
 | 66 | [SimpleNegotiation](#simplenegotiation) | Two | 2 | 🌐 | |
 | 67 | [SimpleTak](#simpletak) | Two | 2 | 🌐 | |
 | 68 | [Snake](#snake) | Multi | 2–15 | | |
-| 69 | [SpellingBee](#spellingbee) | Two | 2 | | |
+| 69 | [SpellingBee](#spellingbee) | Two | 2 | 🌐 | |
 | 70 | [SpiteAndMalice](#spiteandmalice) | Two | 2 | | |
 | 71 | [Stratego](#stratego) | Two | 2 | | |
 | 72 | [Surround](#surround) | Multi | 2–15 | | |
@@ -179,7 +179,7 @@ Two-Player
 | 22 | [LeducHoldem](#leducholdem) | 2 | 🌐 | |
 | 23 | [LeTruc](#letruc) | 2 | 🌐 | |
 | 24 | [LinesOfAction](#linesofaction) | 2 | 🌐 | |
-| 25 | [LetterAuction](#letterauction) | 2 | | |
+| 25 | [LetterAuction](#letterauction) | 2 | 🌐 | |
 | 26 | [MemoryGame](#memorygame) | 2 | 🌐 | |
 | 27 | [Nim](#nim) | 2 | 🌐 | |
 | 28 | [Othello](#othello) | 2 | 🌐 | |
@@ -190,7 +190,7 @@ Two-Player
 | 33 | [SimpleBlindAuction](#simpleblindauction) | 2 | | |
 | 34 | [SimpleNegotiation](#simplenegotiation) | 2 | 🌐 | |
 | 35 | [SimpleTak](#simpletak) | 2 | 🌐 | |
-| 36 | [SpellingBee](#spellingbee) | 2 | | |
+| 36 | [SpellingBee](#spellingbee) | 2 | 🌐 | |
 | 37 | [SpiteAndMalice](#spiteandmalice) | 2 | 🌐 | |
 | 38 | [Stratego](#stratego) | 2 | 🌐 | |
 | 39 | [Tak](#tak) | 2 | 🌐 | |

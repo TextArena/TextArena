@@ -1,0 +1,337 @@
+{
+  "all_branches": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 4
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 3
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in the Spelling Bee Game.\nAllowed Letters: adhnrtv\nEach word must be at least as long as the previous word.\nRepeated words are not allowed.\nWrap your word in square brackets, e.g., '[example]'.\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "action": "[rat]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in the Spelling Bee Game.\nAllowed Letters: adhnrtv\nEach word must be at least as long as the previous word.\nRepeated words are not allowed.\nWrap your word in square brackets, e.g., '[example]'.\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "[rat]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 submitted the word: rat",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[hand]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[rat]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 submitted the word: rat",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[hand]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 submitted the word: hand",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "not brackets here",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "not brackets here",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: The submitted word does not follow the proper format. Please make sure to use squared brackets. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[dart]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[hand]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 submitted the word: hand",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 0,
+        "text": "not brackets here",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[dart]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 submitted the word: dart",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[tan]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[tan]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 attempted an invalid move. Reason: The submitted word is shorter than the previous word. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 1,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[hart]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[dart]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 submitted the word: dart",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[tan]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "[hart]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 submitted the word: hart",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[hand]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[hand]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: The submitted word has been submitted before. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[tart]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[hart]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 submitted the word: hart",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 0,
+        "text": "[hand]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[tart]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 submitted the word: tart",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[rtnd]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[rtnd]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 attempted an invalid move. Reason: The submitted word is not a valid english word. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 1,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[rant]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[tart]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 submitted the word: tart",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[rtnd]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "[rant]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 submitted the word: rant",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[started]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[started]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: The submitted word contains illegal characters. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[avatar]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[rant]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 submitted the word: rant",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 0,
+        "text": "[started]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[avatar]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 submitted the word: avatar",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      }
+    ],
+    "rewards": null
+  }
+}

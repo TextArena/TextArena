@@ -29,11 +29,20 @@ secret/target word is in one language; per-player UI language still varies). Per
 (Wordle, Hangman, SpellingBee) exclude logographic **zh** — declared per game via
 `locales/_supported_langs.json`.
 
-Done (Tier 1, all 7 langs ar de en es fr he ms — no zh): **Wordle, Hangman, WordChains, WordLadder**.
+Done (all 7 langs ar de en es fr he ms — no zh, since these are per-letter games): **Wordle,
+Hangman, WordChains, WordLadder, SpellingBee, LetterAuction, WordSearch**. Per-language alphabets
+and letter frequencies for SpellingBee/LetterAuction/WordSearch are derived from each language's
+own wordfreq pool (`WordFreqDictionary.alphabet()` / `.letter_frequencies()`), so no extra
+letter-frequency resource is bundled.
 
-Still to do on this track: Codenames, Taboo, GuessWho, DontSayIt (Tier 2, curated per-language
-banks); WordSearch, Crosswords, SpellingBee, Anagram, LetterAuction (Tier 3,
-generation/letter-frequency).
+The remaining word games are NOT localized here, for principled reasons:
+- **Codenames, Taboo, DontSayIt** — Level-2 communication games (clues / descriptions / free chat
+  are player-authored and relayed between players). Belong on the Level-2 track (section 1).
+- **GuessWho** — the player asks free-text yes/no questions that a gamemaster must *understand*;
+  needs natural-language comprehension in the target language, not just word data.
+- **Crosswords** — its content is English clue *sentences* (definitions like "Acquiring knowledge
+  or skills…"); localizing needs per-language clue generation (no permissive resource).
+- **LogicPuzzle, BabyAiText** — content is generated English sentences / navigation missions.
 
 Still genuinely deferred (content is *generated English sentences/missions*, not word data —
 needs per-language generators, out of scope here): LogicPuzzle, BabyAiText.
