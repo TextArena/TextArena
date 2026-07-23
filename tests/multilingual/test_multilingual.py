@@ -98,6 +98,14 @@ def verify(games=None):
             for name, actions in spec["scenarios"].items():
                 run_scenario(EnvCls, actions, dict(mixed), num_players=n, seed=spec.get("seed", 42))
             print(f"OK   {game}: cross-lingual smoke ({len(game_langs)} langs + mixed) no errors")
+        except RuntimeError as e:  # optional word-data backend not installed
+            if "wordfreq" in str(e):
+                # English golden identity above still validated the en path; only
+                # the non-English smoke needs the optional extra. Skip, don't fail.
+                print(f"SKIP {game}: cross-lingual smoke (optional 'wordfreq' not installed)")
+            else:
+                print(f"FAIL {game}: cross-lingual smoke raised {type(e).__name__}: {e}")
+                failures += 1
         except Exception as e:  # noqa: BLE001
             print(f"FAIL {game}: cross-lingual smoke raised {type(e).__name__}: {e}")
             failures += 1
