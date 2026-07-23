@@ -1,5 +1,5 @@
 
-import re, numpy
+import re, random
 from typing import Optional, Tuple, Dict, Any, List
 
 import textarena as ta
@@ -64,26 +64,39 @@ class SpellingBeeEnv(ta.Env):
         self.state = ta.TwoPlayerState(num_players=num_players, seed=seed)
         lang = self._content_lang()
         self._active_dictionary = self._lang_dictionary(lang)
-        self.state.reset(game_state={"allowed_letters": self._generate_allowed_letters(lang, seed), "word_history": []}, player_prompt_function=self._prompt)
+        self.state.reset(game_state={"allowed_letters": self._generate_allowed_letters(lang), "word_history": []}, player_prompt_function=self._prompt)
 
     def _prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
         return self.m("prompt", "intro", player_id=player_id, allowed_letters=''.join(sorted(game_state['allowed_letters'])))
 
-    def _generate_allowed_letters(self, lang: str, seed: Optional[int]) -> set:
+    def _generate_allowed_letters(self, lang: str) -> set:
         assert self.num_letters <= 26, "num_letters cannot exceed 26."
-        # Seed numpy from the game seed so the allowed-letter set is reproducible
-        # run-to-run (previously it used the global numpy RNG state).
-        if seed is not None:
-            numpy.random.seed(seed)
+        # Frequency-weighted sample WITHOUT replacement, using the stdlib `random`
+        # module (seeded by the game's State from `seed`, so it is reproducible).
+        # This replaces a numpy dependency (numpy is not a core requirement, so
+        # the original `import numpy` broke SpellingBee on a clean install).
         if lang == "en":
             letter_frequencies = _EN_LETTER_FREQUENCIES
         else:
             letter_frequencies = self._active_dictionary.letter_frequencies()
         letters = list(letter_frequencies.keys())
-        total = sum(letter_frequencies.values())
-        probs = [w / total for w in letter_frequencies.values()]  # Convert weights to probabilities that sum to 1.
+        weights = [float(w) for w in letter_frequencies.values()]
         n = min(self.num_letters, len(letters))
-        return set(numpy.random.choice(letters, size=n, replace=False, p=probs))
+        chosen = []
+        for _ in range(n):
+            total = sum(weights)
+            r = random.uniform(0, total)
+            upto = 0.0
+            for i, w in enumerate(weights):
+                upto += w
+                if upto >= r:
+                    chosen.append(letters.pop(i))
+                    weights.pop(i)
+                    break
+            else:  # floating-point fallback: take the last remaining
+                chosen.append(letters.pop())
+                weights.pop()
+        return set(chosen)
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
