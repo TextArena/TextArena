@@ -273,6 +273,26 @@ class WordFreqDictionary:
             return [w for w in pool if len(w) == length]
         return list(pool)
 
+    def letter_frequencies(self) -> "dict":
+        """Per-letter counts derived from this language's word pool.
+
+        Lets letter-based games (SpellingBee) pick plausible allowed letters for
+        any language without a bundled per-language letter-frequency table.
+        """
+        from collections import Counter
+        counter = Counter()
+        for w in self.get_all_words():
+            counter.update(w)
+        return dict(counter)
+
+    def alphabet(self) -> list:
+        """Distinct letters used by this language, most-frequent first.
+
+        Used to fill word-search grids and drive letter auctions in the correct
+        script (e.g. Arabic/Hebrew letters instead of A-Z)."""
+        freqs = self.letter_frequencies()
+        return [ch for ch, _ in sorted(freqs.items(), key=lambda kv: (-kv[1], kv[0]))]
+
 
 def get_dictionary(lang: str, **english_kwargs):
     """Return a word dictionary for `lang`.
