@@ -4,17 +4,24 @@ name: multilingual-locales
 # cross-lingual smoke. Scoped to locale/tooling paths so it does not overlap with
 # other CI.
 on:
+  # The suite exercises localized env code + the word-data backend, not just the
+  # locale JSON, so trigger on env/tooling/deps changes too (not only locales/**).
   pull_request:
     paths:
-      - "textarena/envs/**/locales/**"
+      - "textarena/envs/**"
       - "textarena/utils/locales/**"
       - "scripts/check_locales.py"
       - "tests/multilingual/**"
+      - "pyproject.toml"
       - ".github/workflows/multilingual-locales.yml"
   push:
     paths:
-      - "textarena/envs/**/locales/**"
+      - "textarena/envs/**"
+      - "textarena/utils/locales/**"
+      - "scripts/check_locales.py"
       - "tests/multilingual/**"
+      - "pyproject.toml"
+      - ".github/workflows/multilingual-locales.yml"
 
 jobs:
   check:
