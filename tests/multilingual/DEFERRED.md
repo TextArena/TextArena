@@ -29,11 +29,11 @@ secret/target word is in one language; per-player UI language still varies). Per
 (Wordle, Hangman, SpellingBee) exclude logographic **zh** — declared per game via
 `locales/_supported_langs.json`.
 
-Done: **Wordle** (7 langs: ar de en es fr he ms — no zh).
+Done (Tier 1, all 7 langs ar de en es fr he ms — no zh): **Wordle, Hangman, WordChains, WordLadder**.
 
-Still to do on this track: WordChains, WordLadder, Hangman (Tier 1); Codenames, Taboo, GuessWho,
-DontSayIt (Tier 2, curated per-language banks); WordSearch, Crosswords, SpellingBee, Anagram,
-LetterAuction (Tier 3, generation/letter-frequency).
+Still to do on this track: Codenames, Taboo, GuessWho, DontSayIt (Tier 2, curated per-language
+banks); WordSearch, Crosswords, SpellingBee, Anagram, LetterAuction (Tier 3,
+generation/letter-frequency).
 
 Still genuinely deferred (content is *generated English sentences/missions*, not word data —
 needs per-language generators, out of scope here): LogicPuzzle, BabyAiText.

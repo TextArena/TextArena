@@ -1,0 +1,39 @@
+{
+  "_comment": "Locale française pour Word Ladder. Les clés (à gauche) sont fixes ; ne traduisez que les valeurs (à droite). Conservez chaque {placeholder} tel quel. Les jetons de mot ({start_word}, {target_word}, {word}, {current}, {ladder}) sont des mots neutres du jeu et ne doivent pas être traduits. Conservez l'exemple entre crochets `[word]` tel quel.",
+  "_slots": {
+    "{player_id}": "Numéro du joueur (entier)",
+    "{start_word}": "Le mot de départ de l'échelle (jeton neutre)",
+    "{target_word}": "Le mot cible à atteindre (jeton neutre)",
+    "{word}": "Le mot que le joueur vient de soumettre (jeton neutre)",
+    "{current}": "Le mot actuel du joueur (jeton neutre)",
+    "{target}": "Le mot cible (jeton neutre)",
+    "{target_len}": "Longueur du mot cible (entier)",
+    "{ladder}": "L'historique des coups reliés par ' -> ' (jetons neutres)",
+    "{history}": "La ligne d'historique affichée (déjà localisée ; ne pas traduire)",
+    "{pct}": "Pourcentage de lettres partagées avec la cible (entier)"
+  },
+
+  "prompt": {
+    "intro": "Vous êtes le Joueur {player_id}.  Votre but est d'atteindre le mot cible en changeant **une lettre à la fois**.\n- Mot de départ :  **{start_word}**\n- Mot cible : **{target_word}**\nSoumettez chaque coup entre crochets, par ex.  `[word]`.\nL'historique apparaît ci-dessous au fil du jeu.  Bonne chance !\n"
+  },
+
+  "invalid": {
+    "wrong_format": "Format invalide. Placez votre mot entre crochets, par ex. `[word]`.",
+    "wrong_length": "`{word}` a une longueur incorrecte ; la cible comporte {target_len} lettres.",
+    "not_a_word": "`{word}` n'est pas un mot reconnu.",
+    "not_one_different": "`{word}` ne diffère pas d'exactement une lettre de `{current}`."
+  },
+
+  "board": {
+    "history": "Historique de Word Ladder : {ladder}.  Mot cible : {target}\n"
+  },
+
+  "feedback": {
+    "progress": "Bien ! Continuez.\n{history}"
+  },
+
+  "outcome": {
+    "win": "Félicitations ! Vous avez atteint le mot cible.",
+    "turn_limit": "La limite de tours a été atteinte. Vous avez atteint `{current}`, qui partage {pct}% de ses lettres avec la cible `{target}`."
+  }
+}

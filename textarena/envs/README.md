@@ -22,7 +22,7 @@ general todos:
 | 9 | [FrozenLake](#frozenlake) | Single | 1 | 🌐 | |
 | 10 | [GuessTheNumber](#guessthenumber) | Single | 1 | | |
 | 11 | [GuessWho](#guesswho) | Single | 1 | | |
-| 12 | [Hangman](#hangman) | Single | 1 | | |
+| 12 | [Hangman](#hangman) | Single | 1 | 🌐 | |
 | 13 | [LightsOut](#lightsout) | Single | 1 | | |
 | 14 | [LogicPuzzle](#logicpuzzle) | Single | 1 | | |
 | 15 | [Mastermind](#mastermind) | Single | 1 | | |
@@ -36,7 +36,7 @@ general todos:
 | 23 | [ThreeCardMonte](#threecardmonte) | Single | 1 | | |
 | 24 | [TowerOfHanoi](#towerofhanoi) | Single | 1 | 🌐 | |
 | 25 | [TwentyQuestions](#twentyquestions) | Single | 1 | | |
-| 26 | [WordLadder](#wordladder) | Single | 1 | | |
+| 26 | [WordLadder](#wordladder) | Single | 1 | 🌐 | |
 | 27 | [Wordle](#wordle) | Single | 1 | 🌐 | |
 | 28 | [WordSearch](#wordsearch) | Single | 1 | | |
 | 29 | [Alquerque](#alquerque) | Two | 2 | | |
@@ -89,7 +89,7 @@ general todos:
 | 76 | [TwoDollar](#twodollar) | Two | 2 | | |
 | 77 | [UltimateTicTacToe](#ultimatetictactoe) | Two | 2 | | |
 | 78 | [WildTicTacToe](#wildtictactoe) | Two | 2 | | |
-| 79 | [WordChains](#wordchains) | Two | 2 | | |
+| 79 | [WordChains](#wordchains) | Two | 2 | 🌐 | |
 | 80 | [Briscola](#briscola) | Multi | 2–4 | | |
 | 81 | [Golf](#golf) | Multi | 2–4 | | |
 | 82 | [Negotiation](#negotiation) | Multi | 2–15 | | |

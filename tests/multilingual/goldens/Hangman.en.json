@@ -1,0 +1,160 @@
+{
+  "win_with_invalids": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Congratulations! You have completed the Hangman puzzle.",
+        "role": "Player 0",
+        "turn_count": 5
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Hangman. The objective of the game is to guess the word by providing one letter guesses or the entire word.\nEach column is numbered. The cells that need to be populated with letters are represented by '_'.\n\nThere are two ways you can answer. You can provide one letter guesses in the format of '[L]', or you can guess the entire word in the format of '[LIGHT]'.\nIf the given letter is in the word, it will be revealed in the grid.\nIf the given word is correct, you win.\nAs you play, the history of your choices will be appended below. Use the information to figure out the word and win.\nYou have 6 incorrect tries before the game ends.\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current board:\n\nC00 C01 C02 C03 C04 C05\n  _   _   _   _   _   _ \nYou have 6 tries left.\nGuessed letters: ",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[S]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[S]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Your guess of S is in the word",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\nC00 C01 C02 C03 C04 C05\n  S   _   _   _   _   _ ",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "notbrackets",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "notbrackets",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Invalid move format. You did not respond with a valid 'letter' or 'word'. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[I]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[I]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Your guess of I is in the word",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\nC00 C01 C02 C03 C04 C05\n  S   I   _   _   _   _ ",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[S]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[S]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: You guessed the letter 'S' which has already been guessed. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[Z]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Z]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Your guess of Z is not in the word. You have 5 lives left.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\nC00 C01 C02 C03 C04 C05\n  S   I   _   _   _   _ ",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[HOUSE]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[HOUSE]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Your guess of 'HOUSE' is not the target word.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[SILVER]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[SILVER]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      }
+    ],
+    "rewards": {
+      "0": 1
+    }
+  }
+}
