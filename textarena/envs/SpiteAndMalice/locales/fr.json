@@ -1,0 +1,47 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le joueur {player_id} dans une partie de Spite and Malice à deux joueurs. Votre objectif est d'être le premier à vider votre pile objectif.\n\n### Présentation du jeu :\n- L'objectif est de vider votre pile objectif en jouant des cartes sur les piles centrales.\n- Vous pouvez jouer des cartes provenant de trois sources :\n  1. Votre **main** (vous commencez chaque tour avec un maximum de 5 cartes en main).\n  2. La **carte supérieure de votre pile objectif**.\n  3. La **carte supérieure de n'importe laquelle de vos piles de défausse**.\n\n### Règles du jeu :\n- Vous pouvez jouer une carte sur une pile centrale si elle est **exactement d'un rang supérieur** à la carte supérieure de cette pile (les piles centrales commencent par un as et montent jusqu'à la dame ; les rois sont des jokers : ils peuvent être joués sur n'importe quelle carte, mais ne modifient pas la suite des rangs. Cela signifie que si un roi est utilisé après un 4, ce roi compte comme un 5 et la carte suivante doit être un 6).\n- Si vous ne pouvez plus jouer de cartes, vous devez **défausser une carte** sur l'une de vos piles de défausse pour terminer votre tour.\n- Si une pile centrale atteint la dame, elle est automatiquement retirée.\n- L'ordre des rangs est le suivant : A=1, 2=2, ..., 9=9, J=10, Q=11 et K comme joker.\n\n### Actions :\n1. **Piocher** : Au début de votre tour, piochez des cartes jusqu'à avoir 5 cartes en main. Saisissez **[draw]** pour commencer.\n2. **Jouer une carte** : Pour jouer une carte, indiquez la carte et la pile centrale comme ceci : **[play A♠ 0]** (où 'A♠' est la carte et '0' l'indice de la pile centrale).\n3. **Défausser** : Si vous ne pouvez plus jouer de cartes, défaussez une carte de votre main sur une pile de défausse pour terminer votre tour. Saisissez **[discard A♠ 1]** (où 'A♠' est la carte et '1' l'indice de la pile de défausse). Notez que vous ne pouvez pas défausser une carte de la pile objectif. Vous ne pouvez défausser que les cartes de votre main.\n\n"
+  },
+
+  "board": {
+    "current_board": "Plateau actuel :\n\n{board}\nCoups disponibles : {moves}"
+  },
+
+  "render": {
+    "center_piles_header": "--- Piles centrales ---\n",
+    "pile": "{observation}Pile {i} : {pile}\n",
+    "player_view_header": "{observation}\n--- Vue du joueur {player_id} ---\n",
+    "payoff": "{observation}Pile objectif (carte supérieure) : {top_card}, taille de la pile objectif : {payoff_length}\n",
+    "hand": "{observation}Main : {hand}\n",
+    "discard": "{observation}Piles de défausse : {discard}\n",
+    "empty": "Vide"
+  },
+
+  "game_message": {
+    "no_cards_left": "Il ne reste plus de cartes à piocher. N'oubliez pas que vous pouvez jouer des cartes provenant des sources suivantes :\n  1. Votre **main**.\n  2. La **carte supérieure de votre pile objectif**.\n  3. La **carte supérieure de n'importe laquelle de vos piles de défausse**.\n\n"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format de coup invalide. Le joueur {player_id} n'a pas répondu avec un coup valide entre crochets.",
+    "invalid_play": "Coup invalide. Le joueur {player_id} a essayé de jouer {card} sur la pile centrale {index}.",
+    "discard_from_payoff": "Défausse invalide. Le joueur {player_id} a essayé de défausser une carte de la pile objectif.",
+    "discard_not_in_hand": "Défausse invalide. Le joueur {player_id} a essayé de défausser une carte qui ne se trouve pas dans sa main.",
+    "wrong_move_type": "Type de coup invalide. Le joueur {player_id} n'a pas répondu avec un type de coup valide."
+  },
+
+  "game_action": {
+    "you_drew": "Vous avez pioché des cartes.",
+    "opponent_drew": "Le joueur {player_id} a pioché des cartes.",
+    "you_played": "Vous avez joué {card} sur la pile centrale {index}.",
+    "opponent_played": "Le joueur {player_id} a joué {card} sur la pile centrale {index}.",
+    "you_discarded": "Vous avez défaussé {card} sur la pile de défausse {index}, ce qui signifie également que vous avez terminé votre tour. Aucune autre action de votre part ne sera prise en compte pendant ce tour. Le joueur {next_player_id} jouera ensuite.",
+    "opponent_discarded": "Le joueur {player_id} a défaussé {card} sur la pile de défausse {index}, ce qui signifie également qu'il a terminé son tour. Aucune autre action du joueur {player_id} ne sera prise en compte pendant ce tour. Joueur {next_player_id}, vous jouerez ensuite. Veuillez saisir votre action au format [action card center_index]."
+  },
+
+  "outcome": {
+    "payoff_cleared": "Le joueur {current_player} a vidé sa pile objectif ! Le joueur {current_player} gagne !",
+    "deadlock_player_0": "Blocage atteint ! Le joueur 0 gagne avec {player_0_payoff} cartes restantes, contre {player_1_payoff} cartes restantes pour le joueur 1.",
+    "deadlock_player_1": "Blocage atteint ! Le joueur 1 gagne avec {player_1_payoff} cartes restantes, contre {player_0_payoff} cartes restantes pour le joueur 0.",
+    "deadlock_tie": "Blocage atteint avec une égalité ! Les deux joueurs ont encore {player_0_payoff} cartes. Le joueur {current_player} gagne par défaut."
+  }
+}

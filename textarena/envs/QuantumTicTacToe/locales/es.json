@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Eres el jugador {player_id} en una partida de tres en raya cuántico.\nTu símbolo es '{symbol}' y los números de tus movimientos siempre son {parity}, por ejemplo, X1 y X3 u O2 y O4.\n\nObjetivo: ganar formando una línea de tres marcas clásicas, solidificadas a partir de superposiciones.\n\nCómo jugar:\n- En cada turno, coloca una marca fantasmal en dos casillas vacías diferentes utilizando el formato '[a,b]'.\n- Estas marcas están entrelazadas y se etiquetan como 'X1 / X1' u 'O4 / O4'.\n- No puedes colocar marcas fantasmales en una casilla que ya haya colapsado y se haya solidificado.\n\nRegla de colapso:\n- Si tu movimiento crea un ciclo en el grafo de entrelazamiento, este colapsa automáticamente.\n- Cada marca fantasmal del ciclo se convierte en una marca clásica en una de sus dos posiciones.\n- Todas las marcas fantasmales dependientes también colapsan.\n\nVictoria:\n- La partida termina cuando un jugador consigue tres marcas clásicas en línea.\n- Si ambos jugadores forman una línea durante el mismo colapso, gana quien tenga el menor número máximo de movimiento.\n\nEjemplo de movimiento: '[0,4]' coloca una marca fantasmal en las celdas 0 y 4."
+  },
+
+  "board": {
+    "current_board": "Tablero de tres en raya cuántico:\n\n{board}\n\nEnvía tu movimiento como '[a,b]' para colocar una marca cuántica en dos posiciones."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Formato no válido. Utiliza '[a,b]'.",
+    "invalid_cells": "Los índices de las celdas no son válidos o están duplicados.",
+    "already_solidified": "Una de las celdas ya está solidificada."
+  },
+
+  "game_action": {
+    "placed": "El jugador {player_id} colocó su símbolo en una superposición entre las celdas {pos_a} y {pos_b}."
+  },
+
+  "game_message": {
+    "dependent_resolved": "Se resolvió la superposición dependiente. La celda ({r}, {c}) ahora es {symbol}.",
+    "last_cell_resolved": "Se resolvió la superposición de la última celda. La celda ({r}, {c}) ahora es {symbol}.",
+    "superposition_resolved": "Se resolvió la superposición. La celda ({r}, {c}) ahora es {symbol}."
+  },
+
+  "outcome": {
+    "win": "¡El jugador {player_id} gana con sus marcas solidificadas!",
+    "draw": "¡La partida termina en empate!"
+  }
+}

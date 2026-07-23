@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "你是玩家 {player_id}。你正在进行记忆配对游戏。\n你的目标是在棋盘上配对出比对手更多的卡牌组合。\n在你的回合中，请输入第一张和第二张卡牌各自的行号和列号，以选择两张要翻开的卡牌，例如 '[0 1 1 0]'。其中，第一张卡牌位于第 0 行第 1 列，第二张卡牌位于第 1 行第 0 列。\n如果两张卡牌相同，你将获得一分，并且它们会保持正面朝上。如果两张卡牌不同，它们将重新翻回背面朝上，例如显示为 '.'。\n当所有卡牌组合均已配对时，游戏结束。"
+  },
+
+  "board": {
+    "current_board": "当前棋盘：\n{board}",
+    "current_game_board": "当前游戏棋盘：\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "移动格式无效。玩家 {player_id} 未在方括号中提供有效的方向。",
+    "out_of_bounds": "无效移动。玩家 {player_id} 选择了超出棋盘边界的位置。",
+    "same_card_twice": "无效移动。玩家 {player_id} 两次选择了同一张卡牌。",
+    "already_matched": "无效移动。玩家 {player_id} 选择的一张或两张卡牌已经完成配对。"
+  },
+
+  "game_message": {
+    "cards_match": "玩家 {player_id} 在位置 [{r1} {c1}] 和 [{r2} {c2}] 选择的卡牌相同！",
+    "cards_no_match": "玩家 {player_id} 选择的卡牌不同。位置 [{r1} {c1}] 和 [{r2} {c2}] 上的卡牌分别是 {pos1} 和 {pos2}。"
+  },
+
+  "outcome": {
+    "draw": "两名玩家配对出了相同数量的卡牌组合。",
+    "win": "玩家 {winner_id} 获胜！",
+    "turn_limit": "已达到回合上限。游戏结束。玩家 0 获得了 {score_0} 分，玩家 1 获得了 {score_1} 分。",
+    "turn_limit_win": "{reason} 玩家 {winner_id} 获胜！"
+  }
+}

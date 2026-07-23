@@ -1,0 +1,43 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le joueur {player_id} dans une partie de Stratego.\nVotre objectif est de capturer le Drapeau de votre adversaire ou d'éliminer toutes ses pièces mobiles.\nVotre armée a été placée sur le plateau pour vous, y compris votre Drapeau, vos Bombes et d'autres pièces de rangs différents.\n\n### Instructions de jeu\n1. **Règles de déplacement :**\n   - Pendant votre tour, vous pouvez déplacer une pièce d'une case vers une case adjacente (en haut, en bas, à gauche ou à droite) qui est déjà occupée par vos pièces.\n   - Exemple : une pièce peut se déplacer de A1 à B1 ou de A1 à A2 si B1 et A2 ne sont pas occupées par les propres pièces du joueur.\n   - Si la pièce sélectionnée est une Bombe ou un Drapeau, elle ne peut pas être déplacée.\n2. **Combats :**\n   - Si vous vous déplacez sur une case occupée par une pièce adverse, un combat aura lieu :\n     - La pièce ayant le rang le plus élevé gagne et élimine la pièce adverse.\n     - Si les rangs sont identiques, les deux pièces sont retirées du plateau.\n     - **Cas particuliers :**\n       - Les Bombes éliminent la plupart des pièces attaquantes, à l'exception des Démineurs, qui désamorcent les Bombes.\n       - Les Espions peuvent vaincre le Maréchal si l'Espion attaque en premier, mais perdent contre toutes les autres pièces.\n3. **Objectifs stratégiques :**\n   - Identifiez les pièces de votre adversaire grâce à leurs déplacements et à leurs combats.\n   - Protégez votre Drapeau tout en essayant de capturer celui de votre adversaire.\n   - Utilisez les Éclaireurs de manière stratégique pour obtenir des informations sur les pièces de votre adversaire et attaquer les plus faibles.\n\n### Comment effectuer un déplacement :\n1. Indiquez les coordonnées de la pièce que vous souhaitez déplacer et celles de sa destination.\n2. Utilisez le format [A0 B0], où A0 est la position de départ et B0 la destination.\n   - Exemple : pour déplacer une pièce de la ligne 0, colonne 0 vers la ligne 1, colonne 0, saisissez [A0 B0].\n3. Assurez-vous que la destination est valide selon les règles de déplacement ci-dessus.\n\n### Remarques importantes :\n- Le plateau affichera vos pièces et leurs positions, par exemple MN et MS.\n- Le plateau affichera également les positions connues des pièces de votre adversaire sans révéler leur rang, par exemple ?.\n- Les cases contenant ~ sont des lacs et il est impossible de s'y déplacer.\n- Il est conseillé de commencer la partie en déplaçant les pièces situées sur votre ligne de front afin d'obtenir des informations sur les pièces de votre adversaire. Les lignes de front des joueurs 0 et 1 sont respectivement les lignes D et G.\n\nVoici l'état actuel du plateau :\n"
+  },
+
+  "board": {
+    "current_board": "Plateau actuel :\n\n{board}\nDéplacements disponibles : {moves}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format d'action non valide. Le joueur {player_id} n'a pas saisi un déplacement au format [A0 B0].",
+    "invalid_coordinates": "Format d'action non valide. Le joueur {player_id} n'a pas saisi de coordonnées valides.",
+    "not_own_piece": "Format d'action non valide. Le joueur {player_id} doit déplacer l'une de ses propres pièces.",
+    "scout_through_pieces": "Format d'action non valide. Le joueur {player_id} ne peut pas déplacer un Éclaireur à travers d'autres pièces.",
+    "scout_diagonal": "Format d'action non valide. Le joueur {player_id} ne peut pas déplacer un Éclaireur en diagonale.",
+    "non_scout_multi_square": "Format d'action non valide. Les pièces, à l'exception des Éclaireurs, ne peuvent se déplacer que d'une case à la fois.",
+    "move_into_lake": "Format d'action non valide. Le joueur {player_id} ne peut pas se déplacer dans le lac.",
+    "move_onto_own_piece": "Format d'action non valide. Le joueur {player_id} ne peut pas se déplacer sur l'une de ses propres pièces.",
+    "move_bomb_or_flag": "Format d'action non valide. Le joueur {player_id} ne peut pas déplacer une Bombe ou un Drapeau."
+  },
+
+  "game_action": {
+    "you_moved": "Vous avez déplacé votre pièce de {source} vers {dest}.",
+    "opponent_moved": "Le joueur {player_id} a déplacé une pièce de {source} vers {dest}.",
+    "you_equal_ranks": "Vous avez déplacé votre pièce de {source} vers {dest}. La pièce attaquante était {attacking_rank} et la pièce située à destination était {target_rank}. Les rangs étant identiques, les deux pièces ont été éliminées.",
+    "opponent_equal_ranks": "Le joueur {player_id} a déplacé une pièce de {source} vers {dest}. La pièce attaquante était {attacking_rank} et la pièce située à destination était {target_rank}. Les rangs étant identiques, les deux pièces ont été éliminées.",
+    "you_miner_defused": "Vous avez déplacé votre pièce de {source} vers {dest}. La pièce attaquante était {attacking_rank} et la pièce située à destination était {target_rank}. Comme les Démineurs peuvent désamorcer les Bombes, vous avez remporté le combat.",
+    "opponent_miner_defused": "Le joueur {player_id} a déplacé une pièce de {source} vers {dest}. La pièce attaquante était {attacking_rank} et la pièce située à destination était {target_rank}. Comme les Démineurs peuvent désamorcer les Bombes, vous avez perdu le combat.",
+    "you_bomb_lost": "Vous avez déplacé votre pièce de {source} vers {dest}. La pièce attaquante était {attacking_rank} et la pièce située à destination était {target_rank}. Comme l'attaquant n'était pas un Démineur, vous avez perdu le combat.",
+    "opponent_bomb_won": "Le joueur {player_id} a déplacé une pièce de {source} vers {dest}. La pièce attaquante était {attacking_rank} et la pièce située à destination était {target_rank}. Comme l'attaquant n'était pas un Démineur, vous avez remporté le combat.",
+    "you_spy_won": "Vous avez déplacé votre pièce de {source} vers {dest}. La pièce attaquante était {attacking_rank} et la pièce située à destination était {target_rank}. Comme l'attaquant était un Espion et que la pièce à destination était un Maréchal, vous avez remporté le combat.",
+    "opponent_spy_lost": "Le joueur {player_id} a déplacé une pièce de {source} vers {dest}. La pièce attaquante était {attacking_rank} et la pièce située à destination était {target_rank}. Comme l'attaquant était un Espion et que la pièce à destination était un Maréchal, vous avez perdu le combat.",
+    "you_higher_won": "Vous avez déplacé votre pièce de {source} vers {dest}. La pièce attaquante était {attacking_rank} et la pièce située à destination était {target_rank}. Comme l'attaquant avait un rang supérieur à la pièce située à destination, vous avez remporté le combat.",
+    "opponent_higher_lost": "Le joueur {player_id} a déplacé une pièce de {source} vers {dest}. La pièce attaquante était {attacking_rank} et la pièce située à destination était {target_rank}. Comme l'attaquant avait un rang supérieur à la pièce située à destination, vous avez perdu le combat.",
+    "you_lower_lost": "Vous avez déplacé votre pièce de {source} vers {dest}. La pièce attaquante était {attacking_rank} et la pièce située à destination était {target_rank}. Comme l'attaquant avait un rang inférieur à la pièce située à destination, vous avez perdu le combat.",
+    "opponent_lower_won": "Le joueur {player_id} a déplacé une pièce de {source} vers {dest}. La pièce attaquante était {attacking_rank} et la pièce située à destination était {target_rank}. Comme l'attaquant avait un rang inférieur à la pièce située à destination, vous avez remporté le combat."
+  },
+
+  "outcome": {
+    "flag_captured": "Le joueur {player_id} a capturé le drapeau de l'adversaire !",
+    "no_movable_pieces": "Le joueur {winner_id} gagne ! Le joueur {loser_id} n'a plus aucune pièce mobile."
+  }
+}

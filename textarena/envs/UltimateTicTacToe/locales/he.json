@@ -1,0 +1,32 @@
+{
+  "player_prompt": {
+    "intro": "אתה שחקן {player_id} במשחק **Ultimate Tic Tac Toe**.\nשלח את המהלך שלך בפורמט **[macro  micro]**, כלומר שני מספרים מ-0 עד 8:\n• *macro* = הלוח הקטן שבו תשחק\n• *micro* = המשבצת בתוך אותו לוח קטן\nלדוגמה: `[7 8]` ➜ הצב את הסמל שלך בלוח הקטן 7, במשבצת 8,\nוחייב את היריב לשחק בתור הבא בלוח הקטן 8.\n\nהסמל שלך הוא `{symbol}`.\n"
+  },
+
+  "board": {
+    "current_board": "הלוח הנוכחי:\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "המהלך חייב להיות בפורמט [macro micro], עם מספרים מ-0 עד 8.",
+    "out_of_range": "כל אחד מהאינדקסים חייב להיות בין 0 ל-8.",
+    "index_out_of_range": "ה-micro_board, השורה או העמודה נמצאים מחוץ לטווח.",
+    "cell_occupied": "המשבצת כבר תפוסה.",
+    "wrong_micro_board": "השחקן חייב לשחק בלוח הקטן הבא שנקבע.",
+    "micro_board_won": "הלוח הקטן הזה כבר הוכרע."
+  },
+
+  "next_board": {
+    "any": "כל לוח קטן",
+    "specific": "הלוח הקטן {nxt}"
+  },
+
+  "game_action": {
+    "played": "שחקן {player_id} שיחק בלוח הקטן {macro_idx}, במשבצת {micro_idx} (שורה {row}, עמודה {col}). שחקן {opponent_id} חייב כעת לשחק ב{nxt_txt}."
+  },
+
+  "outcome": {
+    "win": "שחקן {player_id} מנצח ב-Ultimate Tic Tac Toe!",
+    "draw": "המשחק הסתיים בתיקו!"
+  }
+}

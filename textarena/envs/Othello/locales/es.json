@@ -1,0 +1,34 @@
+{
+  "player_prompt": {
+    "intro": "Eres el jugador {player_id} y juegas con el color {colour} ({piece}) en una partida de Othello.\nTu objetivo es tener más fichas de tu color en el tablero al final de la partida.\nEn tu turno, coloca una ficha de manera que encierre una o más fichas de tu oponente, en cualquier dirección horizontal, vertical o diagonal, entre tu nueva ficha y otra ficha tuya que ya esté en el tablero. Todas las fichas rivales encerradas se voltearán y pasarán a ser de tu color.\nIndica tu movimiento con el formato '[row, col]'."
+  },
+
+  "board": {
+    "game_board": "Tablero de juego:\n{board}",
+    "valid_moves": "{observation}\nMovimientos válidos: {moves}",
+    "no_valid_moves_reset": "{observation}\nNo hay movimientos válidos - puede que tengas que pasar.",
+    "no_valid_moves_step": "{observation}\nNo hay movimientos válidos – puede que tengas que pasar.",
+    "scores_reset": "{observation}\nPuntuaciones actuales - Negro: {black_count}, Blanco: {white_count}\n",
+    "scores_step": "{observation}\nPuntuaciones - Negro: {black_count}, Blanco: {white_count}\n"
+  },
+
+  "invalid_move": {
+    "wrong_format": "El movimiento debe tener el formato [row, col].",
+    "illegal": "Movimiento ilegal. Movimientos válidos: {valid}"
+  },
+
+  "game_action": {
+    "skipped": "El jugador {pid} tuvo que pasar su turno",
+    "played": "El jugador {pid} ({piece}) jugó en [{r}, {c}] y volteó {flipped} ficha(s)"
+  },
+
+  "game_message": {
+    "must_skip": "El jugador {pid} ({piece}) no tiene movimientos válidos y debe pasar."
+  },
+
+  "outcome": {
+    "black_wins": "Negro gana {black_count}-{white_count}.",
+    "white_wins": "Blanco gana {white_count}-{black_count}.",
+    "draw": "Empate {black_count}-{white_count}."
+  }
+}

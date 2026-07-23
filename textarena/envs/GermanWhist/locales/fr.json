@@ -1,0 +1,88 @@
+{
+  "game_start": {
+    "intro": "La partie commence. Couleur d'atout : {trump_suit} (carte d'atout : {trump_str}).",
+    "no_trump_card": "aucune"
+  },
+
+  "player_prompt": {
+    "intro": "Vous êtes le joueur {player_id} dans une partie de German Whist.\n{phase_info}\nVous avez {hand_size} cartes.\nJouez une carte avec '[play N]', où N correspond à sa position dans votre main, par exemple '[play 3]'.",
+    "phase_learning": "PHASE D'APPRENTISSAGE : le gagnant de chaque pli prend la carte visible et le perdant pioche la carte suivante. Les plis remportés pendant cette phase ne comptent pas pour la victoire.",
+    "phase_playing": "PHASE DE JEU : la pioche est épuisée. À partir de maintenant, chaque pli compte pour la victoire."
+  },
+
+  "next_card": {
+    "playing_phase": "Aucune carte n'est proposée - la phase de jeu a commencé.",
+    "deck_empty": "La pioche est vide - aucune carte n'est proposée.",
+    "available": "Carte proposée : {card}",
+    "available_trump": "Carte proposée : {card} (ATOUT)"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format de coup invalide. Utilisez '[play N]' pour jouer la Nième carte de votre main.",
+    "bad_position": "Cette position de carte n'existe pas. Vous avez {hand_size} cartes.",
+    "must_follow_suit": "Vous devez fournir à la couleur et jouer une carte de {lead_suit}.",
+    "invalid_play": "Cette carte ne peut pas être jouée."
+  },
+
+  "game_action": {
+    "played": "Le joueur {player_id} a joué {card}."
+  },
+
+  "trick": {
+    "won": "Le joueur {winner_id} remporte le pli avec {card}.",
+    "won_learning": "Le joueur {winner_id} remporte le pli avec {card} et prend la carte visible."
+  },
+
+  "phase": {
+    "learning_complete": "La pioche est épuisée. La phase d'apprentissage est terminée - tous les plis restants comptent pour la victoire."
+  },
+
+  "draw": {
+    "winner_received": "Vous avez remporté le pli et reçu {card}.",
+    "loser_received": "Vous avez perdu le pli et pioché {card}.",
+    "winner_preview": "La prochaine carte proposée est {card}."
+  },
+
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Plis remportés jusqu'à présent - Joueur 0 : {tricks0}, Joueur 1 : {tricks1}",
+    "scores_playing": "Plis comptabilisés - Joueur 0 : {tricks0}, Joueur 1 : {tricks1}",
+    "phase": "Phase : {phase}",
+    "phase_learning": "Phase : {phase} ({remaining_cards} cartes restantes dans la pioche)"
+  },
+
+  "hand": {
+    "no_cards": "Aucune carte",
+    "no_cards_in_hand": "Aucune carte en main",
+    "header": "Votre main :",
+    "trump_indicator": " (ATOUT)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+
+  "trick_view": {
+    "empty": "Aucune carte n'a encore été jouée dans ce pli.",
+    "header": "Pli actuel :",
+    "trump_indicator": " (ATOUT)",
+    "card_line": "{observation}\n  Joueur {player_id} : {card}{trump_indicator}"
+  },
+
+  "board_str": {
+    "not_started": "La partie n'a pas commencé",
+    "header": "=== PARTIE DE GERMAN WHIST ===",
+    "phase": "{observation}\nPhase : {phase}",
+    "trump_suit": "{observation}\nCouleur d'atout : {trump_suit}",
+    "trump_card": "{observation}\nCarte d'atout : {card}",
+    "cards_left": "{observation}\nCartes restantes dans la pioche : {count}",
+    "next_card": "{observation}\nProchaine carte pour le gagnant : {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nPli actuel :",
+    "trump_indicator": " (ATOUT)",
+    "trick_line": "{observation}\n  Joueur {player_id} : {card}{trump_indicator}",
+    "player_line": "{observation}\nJoueur {player_id} : {scoring} plis comptabilisés ({tricks} au total), {hand_size} cartes en main"
+  },
+
+  "outcome": {
+    "summary": "Phase d'apprentissage - Joueur 0 : {l0}, Joueur 1 : {l1}. Phase de jeu - Joueur 0 : {p0}, Joueur 1 : {p1}. Le joueur {winner_id} gagne avec {winner_tricks} plis comptabilisés !"
+  }
+}

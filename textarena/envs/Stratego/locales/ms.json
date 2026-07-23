@@ -1,0 +1,43 @@
+{
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam Stratego.\nMatlamat anda adalah untuk menawan Bendera pihak lawan atau menghapuskan semua buah mereka yang boleh bergerak.\nTentera anda telah diletakkan pada papan untuk anda, termasuk Bendera, Bom dan buah lain dengan pelbagai pangkat.\n\n### Arahan Permainan\n1. **Peraturan Pergerakan:**\n   - Pada giliran anda, anda boleh menggerakkan satu buah sebanyak satu petak ke petak bersebelahan (atas, bawah, kiri atau kanan) yang telah diduduki oleh buah anda.\n   - Contoh: Satu buah boleh bergerak dari A1 ke B1 atau dari A1 ke A2 jika B1 dan A2 tidak diduduki oleh buah pemain sendiri.\n   - Jika buah yang dipilih ialah Bom atau Bendera, buah tersebut tidak boleh digerakkan.\n2. **Pertempuran:**\n   - Jika anda bergerak ke petak yang diduduki oleh buah pihak lawan, pertempuran akan berlaku:\n     - Buah dengan pangkat lebih tinggi menang dan menghapuskan buah pihak lawan.\n     - Jika pangkat adalah sama, kedua-dua buah akan dikeluarkan daripada papan.\n     - **Kes Khas:**\n       - Bom menghapuskan kebanyakan buah yang menyerang kecuali Pelombong, yang boleh menjinakkan Bom.\n       - Perisik boleh mengalahkan Marsyal jika Perisik menyerang terlebih dahulu, tetapi kalah kepada semua buah lain.\n3. **Matlamat Strategik:**\n   - Kenal pasti buah pihak lawan melalui pergerakan dan pertempuran mereka.\n   - Lindungi Bendera anda sambil cuba menawan Bendera pihak lawan.\n   - Gunakan Peninjau secara strategik untuk mendapatkan maklumat tentang buah pihak lawan dan menyerang buah yang lemah.\n\n### Cara Membuat Pergerakan:\n1. Nyatakan koordinat buah yang ingin anda gerakkan dan destinasinya.\n2. Gunakan format [A0 B0], dengan A0 sebagai kedudukan asal dan B0 sebagai destinasi.\n   - Contoh: Untuk menggerakkan buah dari baris 0, lajur 0 ke baris 1, lajur 0, masukkan [A0 B0].\n3. Pastikan destinasi adalah sah berdasarkan peraturan pergerakan di atas.\n\n### Nota Penting:\n- Papan akan menunjukkan buah anda dan kedudukannya, contohnya MN dan MS.\n- Papan juga akan menunjukkan kedudukan buah pihak lawan yang diketahui tanpa mendedahkan pangkatnya, contohnya ?.\n- Petak dengan ~ ialah tasik dan tidak boleh dimasuki.\n- Sebagai cadangan, mulakan permainan dengan menggerakkan buah yang berada di barisan hadapan untuk mendapatkan maklumat tentang buah pihak lawan. Barisan hadapan Pemain 0 dan Pemain 1 masing-masing ialah baris D dan G.\n\nBerikut ialah keadaan papan semasa:\n"
+  },
+
+  "board": {
+    "current_board": "Papan Semasa:\n\n{board}\nPergerakan Tersedia: {moves}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format tindakan tidak sah. Pemain {player_id} tidak memasukkan pergerakan dalam format [A0 B0].",
+    "invalid_coordinates": "Format tindakan tidak sah. Pemain {player_id} tidak memasukkan koordinat yang sah.",
+    "not_own_piece": "Format tindakan tidak sah. Pemain {player_id} mesti menggerakkan salah satu buah mereka sendiri.",
+    "scout_through_pieces": "Format tindakan tidak sah. Pemain {player_id} tidak boleh menggerakkan Peninjau melalui buah lain.",
+    "scout_diagonal": "Format tindakan tidak sah. Pemain {player_id} tidak boleh menggerakkan Peninjau secara menyerong.",
+    "non_scout_multi_square": "Format tindakan tidak sah. Buah selain Peninjau hanya boleh bergerak satu petak pada satu-satu masa.",
+    "move_into_lake": "Format tindakan tidak sah. Pemain {player_id} tidak boleh bergerak ke dalam tasik.",
+    "move_onto_own_piece": "Format tindakan tidak sah. Pemain {player_id} tidak boleh bergerak ke petak yang diduduki oleh buah sendiri.",
+    "move_bomb_or_flag": "Format tindakan tidak sah. Pemain {player_id} tidak boleh menggerakkan Bom atau Bendera."
+  },
+
+  "game_action": {
+    "you_moved": "Anda telah menggerakkan buah anda dari {source} ke {dest}.",
+    "opponent_moved": "Pemain {player_id} telah menggerakkan satu buah dari {source} ke {dest}.",
+    "you_equal_ranks": "Anda telah menggerakkan buah anda dari {source} ke {dest}. Buah yang menyerang ialah {attacking_rank} dan buah di destinasi ialah {target_rank}. Oleh sebab pangkatnya sama, kedua-dua buah telah tersingkir.",
+    "opponent_equal_ranks": "Pemain {player_id} telah menggerakkan satu buah dari {source} ke {dest}. Buah yang menyerang ialah {attacking_rank} dan buah di destinasi ialah {target_rank}. Oleh sebab pangkatnya sama, kedua-dua buah telah tersingkir.",
+    "you_miner_defused": "Anda telah menggerakkan buah anda dari {source} ke {dest}. Buah yang menyerang ialah {attacking_rank} dan buah di destinasi ialah {target_rank}. Oleh sebab Pelombong boleh menjinakkan Bom, anda memenangi pertempuran.",
+    "opponent_miner_defused": "Pemain {player_id} telah menggerakkan satu buah dari {source} ke {dest}. Buah yang menyerang ialah {attacking_rank} dan buah di destinasi ialah {target_rank}. Oleh sebab Pelombong boleh menjinakkan Bom, anda kalah dalam pertempuran.",
+    "you_bomb_lost": "Anda telah menggerakkan buah anda dari {source} ke {dest}. Buah yang menyerang ialah {attacking_rank} dan buah di destinasi ialah {target_rank}. Oleh sebab penyerang bukan Pelombong, anda kalah dalam pertempuran.",
+    "opponent_bomb_won": "Pemain {player_id} telah menggerakkan satu buah dari {source} ke {dest}. Buah yang menyerang ialah {attacking_rank} dan buah di destinasi ialah {target_rank}. Oleh sebab penyerang bukan Pelombong, anda memenangi pertempuran.",
+    "you_spy_won": "Anda telah menggerakkan buah anda dari {source} ke {dest}. Buah yang menyerang ialah {attacking_rank} dan buah di destinasi ialah {target_rank}. Oleh sebab penyerang ialah Perisik dan buah di destinasi ialah Marsyal, anda memenangi pertempuran.",
+    "opponent_spy_lost": "Pemain {player_id} telah menggerakkan satu buah dari {source} ke {dest}. Buah yang menyerang ialah {attacking_rank} dan buah di destinasi ialah {target_rank}. Oleh sebab penyerang ialah Perisik dan buah di destinasi ialah Marsyal, anda kalah dalam pertempuran.",
+    "you_higher_won": "Anda telah menggerakkan buah anda dari {source} ke {dest}. Buah yang menyerang ialah {attacking_rank} dan buah di destinasi ialah {target_rank}. Oleh sebab penyerang mempunyai pangkat lebih tinggi daripada buah di destinasi, anda memenangi pertempuran.",
+    "opponent_higher_lost": "Pemain {player_id} telah menggerakkan satu buah dari {source} ke {dest}. Buah yang menyerang ialah {attacking_rank} dan buah di destinasi ialah {target_rank}. Oleh sebab penyerang mempunyai pangkat lebih tinggi daripada buah di destinasi, anda kalah dalam pertempuran.",
+    "you_lower_lost": "Anda telah menggerakkan buah anda dari {source} ke {dest}. Buah yang menyerang ialah {attacking_rank} dan buah di destinasi ialah {target_rank}. Oleh sebab penyerang mempunyai pangkat lebih rendah daripada buah di destinasi, anda kalah dalam pertempuran.",
+    "opponent_lower_won": "Pemain {player_id} telah menggerakkan satu buah dari {source} ke {dest}. Buah yang menyerang ialah {attacking_rank} dan buah di destinasi ialah {target_rank}. Oleh sebab penyerang mempunyai pangkat lebih rendah daripada buah di destinasi, anda memenangi pertempuran."
+  },
+
+  "outcome": {
+    "flag_captured": "Pemain {player_id} telah menawan bendera pihak lawan!",
+    "no_movable_pieces": "Pemain {winner_id} menang! Pemain {loser_id} tidak lagi mempunyai buah yang boleh bergerak."
+  }
+}

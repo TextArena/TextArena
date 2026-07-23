@@ -55,12 +55,7 @@ class SpiteAndMaliceEnv(ta.Env):
             self.players[player_id]["hand"].append(self.deck.pop())
         
         if not self.deck and len(self.players[player_id]["hand"]) < 5:
-            message=(
-                "There are no more cards to draw from. Remember that you can play cards from these sources:\n"
-                "  1. Your **hand**.\n"
-                "  2. The **top card of your payoff pile**.\n"
-                "  3. The **top card of any of your discard piles**.\n\n"
-            )
+            message=self.m("game_message", "no_cards_left")
             self.state.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
 
     def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
@@ -73,27 +68,7 @@ class SpiteAndMaliceEnv(ta.Env):
         Returns:
             str: Player prompt.
         """
-        prompt = (
-            f"You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n"
-            
-            "### Game Overview:\n"
-            "- The objective is to clear your payoff pile by playing cards to the center piles.\n"
-            "- You can play cards from three sources:\n"
-            "  1. Your **hand** (you start each turn with up to 5 cards in hand).\n"
-            "  2. The **top card of your payoff pile**.\n"
-            "  3. The **top card of any of your discard piles**.\n\n"
-            
-            "### Playing Rules:\n"
-            "- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n"
-            "- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n"
-            "- If a center pile reaches Queen, it will be cleared automatically.\n"
-            "- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n"
-            
-            "### Actions:\n"
-            "1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n"
-            "2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n"
-            "3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
-        )
+        prompt = self.m("player_prompt", "intro", player_id=player_id)
 
         return prompt
 
@@ -125,7 +100,7 @@ class SpiteAndMaliceEnv(ta.Env):
                 available_moves.append(f"[discard {card} {i}]")
 
         # Add to observation
-        self.state.add_observation(to_id=player_id, message=f"Current Board:\n\n{self._render_board(player_id=player_id)}\nAvailable Moves: " + ", ".join(available_moves), observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(to_id=player_id, message=self.m("board", "current_board", board=self._render_board(player_id=player_id), moves=", ".join(available_moves)), observation_type=ta.ObservationType.GAME_BOARD)
 
     
     def _play_card(self, player_id: int, card: str, center_index: int):
@@ -274,7 +249,7 @@ class SpiteAndMaliceEnv(ta.Env):
         # Check if current player won
         if self._check_win(current_player):
             if len(self.players[current_player]["payoff"]) == 0:
-                reason = f"Player {current_player} has finished their payoff pile! Player {current_player} wins!"
+                reason = self.m("outcome", "payoff_cleared", current_player=current_player)
                 self.state.set_winner(player_id=current_player, reason=reason)
             else:
                 # Deadlock situation
@@ -283,13 +258,13 @@ class SpiteAndMaliceEnv(ta.Env):
                 
                 if player_0_payoff < player_1_payoff:
                     winner = 0
-                    reason = f"Deadlock reached! Player 0 wins with {player_0_payoff} cards remaining vs Player 1's {player_1_payoff} cards."
+                    reason = self.m("outcome", "deadlock_player_0", player_0_payoff=player_0_payoff, player_1_payoff=player_1_payoff)
                 elif player_1_payoff < player_0_payoff:
                     winner = 1
-                    reason = f"Deadlock reached! Player 1 wins with {player_1_payoff} cards remaining vs Player 0's {player_0_payoff} cards."
+                    reason = self.m("outcome", "deadlock_player_1", player_1_payoff=player_1_payoff, player_0_payoff=player_0_payoff)
                 else:
                     winner = current_player
-                    reason = f"Deadlock reached with tie! Both players have {player_0_payoff} cards remaining. Player {current_player} wins by default."
+                    reason = self.m("outcome", "deadlock_tie", player_0_payoff=player_0_payoff, current_player=current_player)
                 
                 self.state.set_winner(player_id=winner, reason=reason)
             return True
@@ -321,7 +296,7 @@ class SpiteAndMaliceEnv(ta.Env):
         rotate_player  = False
 
         if not matches:
-            reason=f"Invalid move format. Player {player_id} did not respond with a valid move in square brackets."
+            reason=self.m("invalid_move", "wrong_format", player_id=player_id)
             self.state.set_invalid_move(reason=reason)
             rotate_player  = True
         else:
@@ -330,43 +305,43 @@ class SpiteAndMaliceEnv(ta.Env):
                 action_type, card, index = match
                 if action_type == "draw":
                     self._draw_cards(player_id)
-                    message=f"You drew cards."
+                    message=self.m("game_action", "you_drew")
                     self.state.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-                    message=f"Player {player_id} drew cards."
+                    message=self.m("game_action", "opponent_drew", player_id=player_id)
                     self.state.add_observation(from_id=ta.GAME_ID, to_id=1-player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
                 elif action_type == "play":
                     ## check if the player has the card in hand or payoff pile or discard pile
                     if self._play_card(player_id, card, int(index)):
-                        message=f"You played {card} on center pile {index}."
+                        message=self.m("game_action", "you_played", card=card, index=index)
                         self.state.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-                        message=f"Player {player_id} played {card} on center pile {index}."
+                        message=self.m("game_action", "opponent_played", player_id=player_id, card=card, index=index)
                         self.state.add_observation(from_id=ta.GAME_ID, to_id=1-player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
                     else:
-                        reason=f"Invalid play. Player {player_id} tried to play {card} on center pile {index}."
+                        reason=self.m("invalid_move", "invalid_play", player_id=player_id, card=card, index=index)
                         self.state.set_invalid_move(reason=reason)
                         break
                 elif action_type == "discard":
                     ## player is discarding a card, which also ends the players turn
                     if card == self.players[player_id]["payoff"][-1] and card not in self.players[player_id]["hand"]:
-                        reason=f"Invalid discard. Player {player_id} tried to discard a card from the payoff pile."
+                        reason=self.m("invalid_move", "discard_from_payoff", player_id=player_id)
                         self.state.set_invalid_move(reason=reason)
                         break
                     elif card not in self.players[player_id]["hand"]:
-                        reason=f"Invalid discard. Player {player_id} tried to discard a card that is not in hand."
+                        reason=self.m("invalid_move", "discard_not_in_hand", player_id=player_id)
                         self.state.set_invalid_move(reason=reason)
                         break
                     else:
                         self._discard_card(player_id, card, int(index))
-                        message=f"You have discarded {card} to discard pile {index}, which also means you have finished their turn. No further actions of yours is considered for this turn. Player {1 - player_id} will go next."
+                        message=self.m("game_action", "you_discarded", card=card, index=index, next_player_id=1 - player_id)
                         self.state.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-                        message=f"Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {1 - player_id}, you will go next. Please enter your action in the format [action card center_index]." # TODO - can probably improve this message.
+                        message=self.m("game_action", "opponent_discarded", player_id=player_id, card=card, index=index, next_player_id=1 - player_id) # TODO - can probably improve this message.
                         self.state.add_observation(from_id=ta.GAME_ID, to_id=-1, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
                         rotate_player  = True
                         self.state.game_state["player_turn"] = 1 - player_id
                         break
                 else:
-                    reason=f"Invalid move type. Player {player_id} did not respond with a valid move type."
+                    reason=self.m("invalid_move", "wrong_move_type", player_id=player_id)
                     self.state.set_invalid_move(reason=reason)
                     break
         
@@ -382,20 +357,20 @@ class SpiteAndMaliceEnv(ta.Env):
     
     def _render_board(self, player_id: Optional[int] = None) -> str:
         """ Render the game board """
-        board = "--- Center Piles ---\n"
+        board = self.m("render", "center_piles_header")
         for i, pile in enumerate(self.center_piles):
-            board += f"Pile {i}: {pile}\n"
+            board = self.m("render", "pile", observation=board, i=i, pile=pile)
         
         if player_id is not None:
-            board += f"\n--- Player {player_id}'s View ---\n"
-            board += f"Payoff Pile (Top Card): {self.players[player_id]['payoff'][-1] if self.players[player_id]['payoff'] else 'Empty'}, Payoff Pile Length: {len(self.players[player_id]['payoff'])}\n"
-            board += f"Hand: {self.players[player_id]['hand']}\n"
-            board += f"Discard Piles: {self.players[player_id]['discard']}\n"
+            board = self.m("render", "player_view_header", observation=board, player_id=player_id)
+            board = self.m("render", "payoff", observation=board, top_card=self.players[player_id]['payoff'][-1] if self.players[player_id]['payoff'] else self.m("render", "empty"), payoff_length=len(self.players[player_id]['payoff']))
+            board = self.m("render", "hand", observation=board, hand=self.players[player_id]['hand'])
+            board = self.m("render", "discard", observation=board, discard=self.players[player_id]['discard'])
 
         else: 
             for player in self.players:
-                board += f"\n--- Player {player}'s View ---\n"
-                board += f"Payoff Pile (Top Card): {self.players[player]['payoff'][-1] if self.players[player]['payoff'] else 'Empty'}, Payoff Pile Length: {len(self.players[player]['payoff'])}\n"
-                board += f"Hand: {self.players[player]['hand']}\n"
-                board += f"Discard Piles: {self.players[player]['discard']}\n"
+                board = self.m("render", "player_view_header", observation=board, player_id=player)
+                board = self.m("render", "payoff", observation=board, top_card=self.players[player]['payoff'][-1] if self.players[player]['payoff'] else self.m("render", "empty"), payoff_length=len(self.players[player]['payoff']))
+                board = self.m("render", "hand", observation=board, hand=self.players[player]['hand'])
+                board = self.m("render", "discard", observation=board, discard=self.players[player]['discard'])
         return board

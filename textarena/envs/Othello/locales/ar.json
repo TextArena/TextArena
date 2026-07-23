@@ -1,0 +1,34 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} وتلعب باللون {colour} ({piece}) في لعبة أوثيلو.\nهدفك هو أن يكون لديك عدد أكبر من القطع بلونك على اللوحة عند نهاية اللعبة.\nفي دورك، ضع قطعة بحيث تحاصر قطعة واحدة أو أكثر من قطع خصمك، في أي اتجاه أفقي أو رأسي أو قطري، بين قطعتك الجديدة وقطعة أخرى من قطعك الموجودة بالفعل. ستُقلب جميع قطع الخصم المحاصرة إلى لونك.\nقدّم حركتك بالصيغة '[row, col]'."
+  },
+
+  "board": {
+    "game_board": "لوحة اللعبة:\n{board}",
+    "valid_moves": "{observation}\nالحركات الصالحة: {moves}",
+    "no_valid_moves_reset": "{observation}\nلا توجد حركات صالحة - قد تضطر إلى تخطي دورك.",
+    "no_valid_moves_step": "{observation}\nلا توجد حركات صالحة – قد تضطر إلى تخطي دورك.",
+    "scores_reset": "{observation}\nالنقاط الحالية - الأسود: {black_count}، الأبيض: {white_count}\n",
+    "scores_step": "{observation}\nالنقاط - الأسود: {black_count}، الأبيض: {white_count}\n"
+  },
+
+  "invalid_move": {
+    "wrong_format": "يجب أن تكون الحركة بالصيغة [row, col].",
+    "illegal": "حركة غير قانونية. الحركات الصالحة: {valid}"
+  },
+
+  "game_action": {
+    "skipped": "اضطر اللاعب {pid} إلى تخطي دوره",
+    "played": "لعب اللاعب {pid} ({piece}) في [{r}, {c}] وقلب {flipped} قطعة"
+  },
+
+  "game_message": {
+    "must_skip": "لا توجد حركات صالحة للاعب {pid} ({piece}) ويجب عليه تخطي دوره."
+  },
+
+  "outcome": {
+    "black_wins": "فاز الأسود بنتيجة {black_count}-{white_count}.",
+    "white_wins": "فاز الأبيض بنتيجة {white_count}-{black_count}.",
+    "draw": "تعادل بنتيجة {black_count}-{white_count}."
+  }
+}

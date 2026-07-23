@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le joueur {player_id} dans une partie de morpion quantique.\nVotre symbole est '{symbol}' et les numéros de vos coups sont toujours {parity}, par exemple X1 et X3, ou O2 et O4.\n\nObjectif : gagner en formant une ligne de trois symboles classiques, solidifiés à partir de superpositions.\n\nComment jouer :\n- À chaque tour, placez un symbole fantôme dans deux cases vides différentes en utilisant le format '[a,b]'.\n- Ces symboles sont intriqués et portent une étiquette telle que 'X1 / X1' ou 'O4 / O4'.\n- Vous ne pouvez pas placer de symbole fantôme dans une case qui s'est déjà effondrée et solidifiée.\n\nRègle d'effondrement :\n- Si votre coup crée un cycle dans le graphe d'intrication, celui-ci s'effondre automatiquement.\n- Chaque symbole fantôme du cycle devient un symbole classique dans l'une de ses deux positions.\n- Tous les symboles fantômes qui en dépendent s'effondrent également.\n\nVictoire :\n- La partie se termine lorsqu'un joueur aligne trois symboles classiques.\n- Si les deux joueurs obtiennent une ligne pendant le même effondrement, celui dont le numéro de coup maximal est le plus faible gagne.\n\nExemple de coup : '[0,4]' place un symbole fantôme dans les cases 0 et 4."
+  },
+
+  "board": {
+    "current_board": "Plateau de morpion quantique :\n\n{board}\n\nSoumettez votre coup sous la forme '[a,b]' pour placer un symbole quantique à deux emplacements."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format non valide. Utilisez '[a,b]'.",
+    "invalid_cells": "Indices de cases non valides ou identiques.",
+    "already_solidified": "L'une des cases est déjà solidifiée."
+  },
+
+  "game_action": {
+    "placed": "Le joueur {player_id} a placé son symbole en superposition entre les cases {pos_a} et {pos_b}."
+  },
+
+  "game_message": {
+    "dependent_resolved": "La superposition dépendante a été résolue. La case ({r}, {c}) contient désormais {symbol}.",
+    "last_cell_resolved": "La superposition de la dernière case a été résolue. La case ({r}, {c}) contient désormais {symbol}.",
+    "superposition_resolved": "La superposition a été résolue. La case ({r}, {c}) contient désormais {symbol}."
+  },
+
+  "outcome": {
+    "win": "Le joueur {player_id} gagne grâce à ses symboles solidifiés !",
+    "draw": "La partie se termine par un match nul !"
+  }
+}

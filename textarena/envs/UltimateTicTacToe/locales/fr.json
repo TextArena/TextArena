@@ -1,0 +1,32 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le joueur {player_id} dans une partie de **Ultimate Tic Tac Toe**.\nSoumettez votre coup sous la forme **[macro  micro]**, avec deux nombres de 0 à 8 :\n• *macro* = le miniplateau dans lequel vous jouez\n• *micro* = la case dans ce miniplateau\nExemple : `[7 8]` ➜ placez votre symbole dans le miniplateau 7, sur la case 8, et\nobligez votre adversaire à jouer ensuite dans le miniplateau 8.\n\nVous jouez avec le symbole `{symbol}`.\n"
+  },
+
+  "board": {
+    "current_board": "Plateau actuel :\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Le coup doit être au format [macro micro], avec des nombres de 0 à 8.",
+    "out_of_range": "Chaque indice doit être compris entre 0 et 8.",
+    "index_out_of_range": "Le micro_board, la ligne ou la colonne est hors limites.",
+    "cell_occupied": "La case est déjà occupée.",
+    "wrong_micro_board": "Le joueur doit jouer dans le prochain miniplateau imposé.",
+    "micro_board_won": "Ce miniplateau a déjà été remporté."
+  },
+
+  "next_board": {
+    "any": "n'importe quel miniplateau",
+    "specific": "le miniplateau {nxt}"
+  },
+
+  "game_action": {
+    "played": "Le joueur {player_id} a joué dans le miniplateau {macro_idx}, sur la case {micro_idx} (ligne {row}, colonne {col}). Le joueur {opponent_id} doit maintenant jouer dans {nxt_txt}."
+  },
+
+  "outcome": {
+    "win": "Le joueur {player_id} remporte Ultimate Tic Tac Toe !",
+    "draw": "La partie se termine par un match nul !"
+  }
+}

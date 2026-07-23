@@ -166,39 +166,39 @@ Two-Player
 | 9 | [Crusade](#crusade) | 2 | 🌐 | |
 | 10 | [Debate](#debate) | 2 | | |
 | 11 | [DontSayIt](#dontsayit) | 2 | | |
-| 12 | [GameOfPureStrategy](#gameofpurestrategy) | 2 | | |
-| 13 | [GermanWhist](#germanwhist) | 2 | | |
-| 14 | [HighSociety](#highsociety) | 2 | | |
+| 12 | [GameOfPureStrategy](#gameofpurestrategy) | 2 | 🌐 | |
+| 13 | [GermanWhist](#germanwhist) | 2 | 🌐 | |
+| 14 | [HighSociety](#highsociety) | 2 | 🌐 | |
 | 15 | [IndianPoker](#indianpoker) | 2 | 🌐 | |
-| 16 | [IteratedMatchingPennies](#iteratedmatchingpennies) | 2 | | |
+| 16 | [IteratedMatchingPennies](#iteratedmatchingpennies) | 2 | 🌐 | |
 | 17 | [IteratedPrisonersDilemma](#iteratedprisonersdilemma) | 2 | 🌐 | |
-| 18 | [IteratedRockPaperScissors](#iteratedrockpaperscissors) | 2 | | |
-| 19 | [IteratedTwoThirdsAverage](#iteratedtwothirdsaverage) | 2 | | |
-| 20 | [IteratedStagHunt](#iteratedstaghunt) | 2 | | |
+| 18 | [IteratedRockPaperScissors](#iteratedrockpaperscissors) | 2 | 🌐 | |
+| 19 | [IteratedTwoThirdsAverage](#iteratedtwothirdsaverage) | 2 | 🌐 | |
+| 20 | [IteratedStagHunt](#iteratedstaghunt) | 2 | 🌐 | |
 | 21 | [KuhnPoker](#kuhnpoker) | 2 | 🌐 | |
 | 22 | [LeducHoldem](#leducholdem) | 2 | | |
 | 23 | [LeTruc](#letruc) | 2 | | |
 | 24 | [LinesOfAction](#linesofaction) | 2 | | |
 | 25 | [LetterAuction](#letterauction) | 2 | | |
-| 26 | [MemoryGame](#memorygame) | 2 | | |
+| 26 | [MemoryGame](#memorygame) | 2 | 🌐 | |
 | 27 | [Nim](#nim) | 2 | 🌐 | |
-| 28 | [Othello](#othello) | 2 | | |
+| 28 | [Othello](#othello) | 2 | 🌐 | |
 | 29 | [PigDice](#pigdice) | 2 | 🌐 | |
-| 30 | [QuantumTicTacToe](#quantumtictactoe) | 2 | | |
-| 31 | [ReverseTicTacToe](#reversetictactoe) | 2 | | |
+| 30 | [QuantumTicTacToe](#quantumtictactoe) | 2 | 🌐 | |
+| 31 | [ReverseTicTacToe](#reversetictactoe) | 2 | 🌐 | |
 | 32 | [ScenarioPlanning](#scenarioplanning) | 2 | | |
 | 33 | [SimpleBlindAuction](#simpleblindauction) | 2 | | |
 | 34 | [SimpleNegotiation](#simplenegotiation) | 2 | 🌐 | |
 | 35 | [SimpleTak](#simpletak) | 2 | 🌐 | |
 | 36 | [SpellingBee](#spellingbee) | 2 | | |
-| 37 | [SpiteAndMalice](#spiteandmalice) | 2 | | |
-| 38 | [Stratego](#stratego) | 2 | | |
+| 37 | [SpiteAndMalice](#spiteandmalice) | 2 | 🌐 | |
+| 38 | [Stratego](#stratego) | 2 | 🌐 | |
 | 39 | [Tak](#tak) | 2 | | |
 | 40 | [TicTacToe](#tictactoe) | 2 | 🌐 | |
 | 41 | [TruthAndDeception](#truthanddeception) | 2 | | |
 | 42 | [TwoDollar](#twodollar) | 2 | | |
-| 43 | [UltimateTicTacToe](#ultimatetictactoe) | 2 | | |
-| 44 | [WildTicTacToe](#wildtictactoe) | 2 | | |
+| 43 | [UltimateTicTacToe](#ultimatetictactoe) | 2 | 🌐 | |
+| 44 | [WildTicTacToe](#wildtictactoe) | 2 | 🌐 | |
 | 45 | [WordChains](#wordchains) | 2 | | |
 
 # Multi-PLayer

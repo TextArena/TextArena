@@ -1,0 +1,88 @@
+{
+  "game_start": {
+    "intro": "המשחק מתחיל. סדרת שליט: {trump_suit} (קלף שליט: {trump_str}).",
+    "no_trump_card": "אין"
+  },
+
+  "player_prompt": {
+    "intro": "אתה שחקן {player_id} במשחק German Whist.\n{phase_info}\nיש בידך {hand_size} קלפים.\nשחק קלף באמצעות '[play N]', כאשר N הוא מיקומו בידך, לדוגמה '[play 3]'.",
+    "phase_learning": "שלב הלמידה: המנצח בכל לקיחה מקבל את הקלף הגלוי, והמפסיד שולף את הקלף הבא מהחפיסה. לקיחות שבהן זוכים בשלב זה אינן נחשבות לצורך הניצחון.",
+    "phase_playing": "שלב המשחק: החפיסה התרוקנה. מעתה כל לקיחה נחשבת לצורך הניצחון."
+  },
+
+  "next_card": {
+    "playing_phase": "אין קלף מוצע - שלב המשחק החל.",
+    "deck_empty": "החפיסה ריקה - אין קלף מוצע.",
+    "available": "הקלף המוצע: {card}",
+    "available_trump": "הקלף המוצע: {card} (שליט)"
+  },
+
+  "invalid_move": {
+    "wrong_format": "מבנה המהלך אינו תקין. השתמש ב-'[play N]' כדי לשחק את הקלף ה-N בידך.",
+    "bad_position": "מיקום הקלף הזה אינו קיים. יש בידך {hand_size} קלפים.",
+    "must_follow_suit": "עליך לעקוב אחר הסדרה ולשחק קלף מסדרת {lead_suit}.",
+    "invalid_play": "לא ניתן לשחק את הקלף הזה."
+  },
+
+  "game_action": {
+    "played": "שחקן {player_id} שיחק {card}."
+  },
+
+  "trick": {
+    "won": "שחקן {winner_id} זוכה בלקיחה עם {card}.",
+    "won_learning": "שחקן {winner_id} זוכה בלקיחה עם {card} ומקבל את הקלף הגלוי."
+  },
+
+  "phase": {
+    "learning_complete": "החפיסה התרוקנה. שלב הלמידה הסתיים - כל הלקיחות שנותרו נחשבות לצורך הניצחון."
+  },
+
+  "draw": {
+    "winner_received": "זכית בלקיחה וקיבלת את {card}.",
+    "loser_received": "הפסדת בלקיחה ושלפת את {card} מהחפיסה.",
+    "winner_preview": "הקלף הבא המוצע הוא {card}."
+  },
+
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "לקיחות שהושגו עד כה - שחקן 0: {tricks0}, שחקן 1: {tricks1}",
+    "scores_playing": "לקיחות נספרות - שחקן 0: {tricks0}, שחקן 1: {tricks1}",
+    "phase": "שלב: {phase}",
+    "phase_learning": "שלב: {phase} ({remaining_cards} קלפים נותרו בחפיסה)"
+  },
+
+  "hand": {
+    "no_cards": "אין קלפים",
+    "no_cards_in_hand": "אין קלפים ביד",
+    "header": "היד שלך:",
+    "trump_indicator": " (שליט)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+
+  "trick_view": {
+    "empty": "עדיין לא שוחקו קלפים בלקיחה זו.",
+    "header": "הלקיחה הנוכחית:",
+    "trump_indicator": " (שליט)",
+    "card_line": "{observation}\n  שחקן {player_id}: {card}{trump_indicator}"
+  },
+
+  "board_str": {
+    "not_started": "המשחק טרם התחיל",
+    "header": "=== משחק GERMAN WHIST ===",
+    "phase": "{observation}\nשלב: {phase}",
+    "trump_suit": "{observation}\nסדרת שליט: {trump_suit}",
+    "trump_card": "{observation}\nקלף שליט: {card}",
+    "cards_left": "{observation}\nקלפים שנותרו בחפיסה: {count}",
+    "next_card": "{observation}\nהקלף הבא למנצח: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nהלקיחה הנוכחית:",
+    "trump_indicator": " (שליט)",
+    "trick_line": "{observation}\n  שחקן {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nשחקן {player_id}: {scoring} לקיחות נספרות ({tricks} בסך הכול), {hand_size} קלפים ביד"
+  },
+
+  "outcome": {
+    "summary": "שלב הלמידה - שחקן 0: {l0}, שחקן 1: {l1}. שלב המשחק - שחקן 0: {p0}, שחקן 1: {p1}. שחקן {winner_id} מנצח עם {winner_tricks} לקיחות נספרות!"
+  }
+}
