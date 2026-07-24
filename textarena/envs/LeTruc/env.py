@@ -32,7 +32,7 @@ class LeTrucEnv(ta.Env):
         self._deal_hand()
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return self.m("player_prompt", "intro")
+        return "a summary of the game rules"
     
 
     def _deal_hand(self):
@@ -46,7 +46,7 @@ class LeTrucEnv(ta.Env):
         self.state.manually_set_current_player_id(0)
 
         for pid in (0, 1):
-            self.state.add_observation(to_id=pid, message=self.m("board", "new_hand", points=gs['hand_points'], cards=' '.join(gs['hands'][pid])), observation_type=ta.ObservationType.GAME_BOARD)
+            self.state.add_observation(to_id=pid, message=f"### New hand worth {gs['hand_points']} pt(s)\nYour cards: {' '.join(gs['hands'][pid])}", observation_type=ta.ObservationType.GAME_BOARD)
 
     def _rank_idx(self, card: str) -> int: return self.order.index(card[:-1])
 
@@ -56,22 +56,22 @@ class LeTrucEnv(ta.Env):
         self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
 
         m = self.action_space.search(action)
-        if not m: self.state.set_invalid_move(reason=self.m("invalid_move", "unrecognised")); return self.state.step()
+        if not m: self.state.set_invalid_move(reason="Unrecognised action."); return self.state.step()
         verb  = m.group("verb").lower()
         if verb == "raise":
             if gs.get("raiser") is not None:
-                self.state.set_invalid_move(self.m("invalid_move", "already_raised"))
+                self.state.set_invalid_move("Already raised.")
                 return self.state.step()
 
             gs["hand_points"] += 1
             gs["raiser"] = pid
             self.state.current_player_id = 1 - pid
-            self.state.add_observation(message=self.m("action", "raise", pid=pid, points=gs['hand_points']), observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=f"P{pid} raises - hand now {gs['hand_points']} pts. Opponent must '[accept]' or '[fold]'.", observation_type=ta.ObservationType.GAME_MESSAGE)
             return self.state.step()
 
         if verb == "accept":
             if gs.get("raiser") is None or pid == gs["raiser"]:
-                self.state.set_invalid_move(reason=self.m("invalid_move", "no_raise_to_accept"))
+                self.state.set_invalid_move(reason="No raise to accept.")
                 return self.state.step()
 
             gs["raiser"] = None
@@ -81,12 +81,12 @@ class LeTrucEnv(ta.Env):
 
         if verb == "fold":
             if gs.get("raiser") is None or pid == gs["raiser"]:
-                self.state.set_invalid_move(reason=self.m("invalid_move", "cannot_fold"))
+                self.state.set_invalid_move(reason="Cannot fold now.")
                 return self.state.step()
 
             winner = 1 - pid
             gs["match_points"][winner] += gs["hand_points"]
-            self.state.set_winner(winner, reason=self.m("outcome", "folded"))
+            self.state.set_winner(winner, reason="Opponent folded.")
             return self.state.step()
 
         if verb == "play":
@@ -94,7 +94,7 @@ class LeTrucEnv(ta.Env):
 
             # ensure player owns that rank (ignore suits in input)
             if rank not in [c[:-1] for c in gs["hands"][pid]]:
-                self.state.set_invalid_move(reason=self.m("invalid_move", "wrong_rank"))
+                self.state.set_invalid_move(reason="You don't hold that rank (suits ignored in input).")
                 return self.state.step()
 
             # pick the first matching suit in hand
@@ -106,21 +106,21 @@ class LeTrucEnv(ta.Env):
                 gs["led_card"] = (pid, card_str)
                 gs["led_to"]   = 1 - pid
                 self.state.current_player_id = 1 - pid
-                self.state.add_observation(message=self.m("action", "lead", pid=pid, card=card_str), observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=f"P{pid} leads {card_str}.", observation_type=ta.ObservationType.GAME_MESSAGE)
             else:
                 # follow, decide trick winner
                 lead_pid, lead_card = gs["led_card"]
                 win_pid = pid if self._rank_idx(card_str) > self._rank_idx(lead_card) else lead_pid
 
                 gs["tricks"].append(win_pid)
-                self.state.add_observation(message=self.m("action", "play", pid=pid, card=card_str, winner=win_pid), observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=f"P{pid} plays {card_str}. Trick to P{win_pid}.", observation_type=ta.ObservationType.GAME_MESSAGE)
 
                 gs["led_card"] = None
                 if len(gs["tricks"]) == 3:                                  # hand over
                     winner = 0 if gs["tricks"].count(0) > 1 else 1
                     gs["match_points"][winner] += gs["hand_points"]
                     if gs["match_points"][winner] >= 12:                    # match over
-                        self.state.set_winner(winner, self.m("outcome", "reached_twelve"))
+                        self.state.set_winner(winner, "Reached 12 points.")
                         return self.state.step()
 
                     # new hand
@@ -130,5 +130,5 @@ class LeTrucEnv(ta.Env):
                 self.state.current_player_id = win_pid
             return self.state.step(rotate_player=False)
         # should never reach here
-        self.state.set_invalid_move(self.m("invalid_move", "unrecognised"))
+        self.state.set_invalid_move("Unrecognised action.")
         return self.state.step()

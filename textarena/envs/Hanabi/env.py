@@ -86,11 +86,62 @@ class HanabiEnv(ta.Env):
         return create_board_str(game_state=self.state.game_state)
 
     def _initial_prompt(self, player_id: int, game_state: dict) -> str:
-        return self.m("player_prompt", "intro", player_id=player_id, num_players=self.state.num_players)
+        return (
+        f"You are Player {player_id} in an {self.state.num_players}-player Hanabi game. "
+        f"Hanabi is a cooperative card game where players work together to create a series of fireworks by playing "
+        f"cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all "
+        f"players can see everyone else's cards but not their own.\n\n"
+        
+        f"Objective:\n"
+        f"The objective is to play cards in sequence (1 through 5) for each color without making mistakes. "
+        f"There are 5 different colors and each color has cards numbered 1 to 5.\n\n"
 
-    def _card(self, card: "Card"):
-        """Return a localized description of a card (color word localized, rank kept numeric)."""
-        return self.m("card", "desc", color=self.m("color", card.suit.value), rank=card.rank)
+        f"Key Rules:\n"
+        "On your turn, you have three types of possible actions:\n"
+
+        "1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a"
+            " number present in their hand. Hints must be accurate and can only reveal positions of cards matching the "
+            "hint.\n"
+        "2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n"
+        "3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the "
+            "fireworks; if not, it reduces one fuse token.\n\n"
+
+        "Tokens:\n"
+        "Fuse Tokens: Deducted when a wrong card is played.\n"
+        "Info Tokens: Used to give clues.\n\n"
+        
+        "Illegal Moves:\n"
+        "Playing a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in "
+        "failure.\n\n"
+        
+        "Game End:\n" 
+        "The game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted "
+        "and each player has taken one final turn, or when the players run out of fuse tokens.\n\n"
+
+        "State Representation:\n"
+        "The game state is represented with the following details:\n"
+
+        "Fuse tokens: Number of remaining fuse tokens.\n"
+        "Info tokens: Number of available information tokens.\n"
+        "Fireworks: Current progress on each firework color.\n"
+        "Discards: Cards that have been discarded.\n\n"
+
+        "Your Role:\n"
+        "You are one of the players, cooperating with others to maximize the total score of the fireworks "
+        "(the number of cards correctly played in sequence).\n"
+        "Although you cannot see your own cards, you can see the cards in the hands of your teammates.\n"
+        "Use hints, discards, and plays strategically to guide the team towards successful sequences.\n"
+        
+        "When it's your turn, your output should be in one of the following formats between quotes:\n\n" 
+
+        "'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n"
+        "'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n"
+        "'[Play] X', to play the card in position X from your hand.\n"
+        "'[Discard] X', to discard the card in position X from your hand.\n\n"
+
+        "Remember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous "
+        "information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n"
+        )
 
     def _state_description(self):
         """
@@ -99,33 +150,33 @@ class HanabiEnv(ta.Env):
         Returns:
             str: a description of the current game state.
         """
-        pid = self.state.current_player_id
-        discard_pile = "".join(
-            self._card(card).render(_pid=pid) + "\n" for card in self.state.game_state['discard_pile']
-        )
+        discard_pile = "".join(str(card) + "\n" for card in self.state.game_state['discard_pile'])
         visible_cards = ""
 
         for player_id in range(self.num_players):
             if player_id == self.state.current_player_id:
                 continue
             else:
-                visible_cards += self.m("state", "player_cards_header", pid=player_id).render(_pid=pid)
+                visible_cards += f"- Player {player_id} has cards:\n"
                 for i, card in enumerate(self.state.game_state['player_hands'][player_id]):
                     if card is not None:
-                        visible_cards += self.m("state", "card_line", idx=i, card=self._card(card)).render(_pid=pid)
+                        visible_cards += f"\tcard {i}: {card}\n"
 
-        return self.m(
-            "state", "description",
-            pid=self.state.current_player_id,
-            fuse=self.state.game_state['fuse_tokens'],
-            info=self.state.game_state['info_tokens'],
-            c_white=self.m("color", Suit.WHITE.value), fw_white=self.state.game_state['fireworks'][Suit.WHITE],
-            c_yellow=self.m("color", Suit.YELLOW.value), fw_yellow=self.state.game_state['fireworks'][Suit.YELLOW],
-            c_green=self.m("color", Suit.GREEN.value), fw_green=self.state.game_state['fireworks'][Suit.GREEN],
-            c_blue=self.m("color", Suit.BLUE.value), fw_blue=self.state.game_state['fireworks'][Suit.BLUE],
-            c_red=self.m("color", Suit.RED.value), fw_red=self.state.game_state['fireworks'][Suit.RED],
-            visible_cards=visible_cards,
-            discard_pile=discard_pile,
+        return (
+            f"You are player {self.state.current_player_id}. \n\n"
+            f"Current game state:\n"
+            f"Fuse tokens: there are {self.state.game_state['fuse_tokens']} fuse tokens remaining.\n"
+            f"Info tokens: there are {self.state.game_state['info_tokens']} info tokens remaining.\n\n"
+            f"Fireworks: The current progress on each firework color is:\n"
+            f"\t{Suit.WHITE.value}: {self.state.game_state['fireworks'][Suit.WHITE]}.\n"
+            f"\t{Suit.YELLOW.value}: {self.state.game_state['fireworks'][Suit.YELLOW]}.\n"
+            f"\t{Suit.GREEN.value}: {self.state.game_state['fireworks'][Suit.GREEN]}.\n"
+            f"\t{Suit.BLUE.value}: {self.state.game_state['fireworks'][Suit.BLUE]}.\n"
+            f"\t{Suit.RED.value}: {self.state.game_state['fireworks'][Suit.RED]}.\n\n"
+            f"Your teammates have the following cards in their hand:\n"
+            f"{visible_cards}\n"
+            f"Discards: The following cards have been discarded:\n"
+            f"{discard_pile}\n"
         )
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
@@ -150,15 +201,16 @@ class HanabiEnv(ta.Env):
             self._handle_discard(action)
 
         else: # Invalid action
-            self.state.set_invalid_move(reason=self.m("invalid", "generic_action_reason"))
+            reason = r"The player provided an invalid action. Players can only '[reveal]', '[play]' or '[discard]'."
+            self.state.set_invalid_move(reason=reason)
 
         # Check whether the game has ended
         self._check_game_end()
 
         # The player needs to skip a round because of making invalid moves
         if self.state.game_info[self.state.current_player_id]["invalid_move"]:
-            message = self.m("skip_turn", pid=self.state.current_player_id,
-                             count=self.state.error_allowance + 1)
+            message = (f"Player {self.state.current_player_id} made {self.state.error_allowance + 1} "
+                       f"invalid moves in a row, skipping a turn. ")
             self.state.add_observation(from_id=self.state.current_player_id, to_id=-1, message=message,
                                        observation_type=ta.ObservationType.GAME_MESSAGE)
             # Include the player for the next round
@@ -185,11 +237,14 @@ class HanabiEnv(ta.Env):
         if card_idx:
             try:
                 card = self.state.game_state['player_hands'][self.state.current_player_id].pop(int(card_idx[0]))
+                action = f"Player {self.state.current_player_id} discards {str(card)}."
             except IndexError:
-                self.state.set_invalid_move(reason=self.m("invalid", "discard_nonexist_reason"))
+                reason = "The player attempts to discard a non-existing card."
+                self.state.set_invalid_move(reason=reason)
                 self.state.add_observation(from_id=GAME_ID, to_id=self.state.current_player_id,
-                                           message=self.m("invalid", "discard_nonexist_detail",
-                                                          max_card=self.hand_size - 1, card_index=card_idx[0]),
+                                           message=f"You attempted to discard a non-existing card. "
+                                                   f"Please consider cards between 0 and {self.hand_size - 1} "
+                                                   f"(Including). You provided {card_idx[0]}.",
                                            observation_type=ta.ObservationType.GAME_MESSAGE)
                 return
 
@@ -200,13 +255,13 @@ class HanabiEnv(ta.Env):
             # Replenish an info token
             if self.state.game_state['info_tokens'] < 8:
                 self.state.game_state['info_tokens'] += 1
-                message = self.m("discard", "replenished", pid=self.state.current_player_id, card=self._card(card))
+                action += " This replenishes an info token."
 
             else:
-                message = self.m("discard", "cap_reached", pid=self.state.current_player_id, card=self._card(card))
+                action += " This does not replenish an info token as the token cap is reached."
 
             # Inform players
-            self.state.add_observation(from_id=self.state.current_player_id, to_id=-1, message=message,
+            self.state.add_observation(from_id=self.state.current_player_id, to_id=-1, message=action,
                                        observation_type=ta.ObservationType.GAME_MESSAGE)
 
             # Draw a new card
@@ -216,9 +271,12 @@ class HanabiEnv(ta.Env):
             self.state.game_state['player_hands'][self.state.current_player_id].append(card)
 
         else:  # could not parse the action
-            self.state.set_invalid_move(reason=self.m("invalid", "discard_parse_reason"))
+            reason = "The player provided an invalid action."
+            self.state.set_invalid_move(reason=reason)
             self.state.add_observation(from_id=GAME_ID, to_id=self.state.current_player_id,
-                                       message=self.m("invalid", "discard_parse_detail"),
+                                       message="You provided an invalid action. If you want to discard a card, type:\n "
+                                               "'[Discard] X', to discard the card in position X from your hand. "
+                                               "For example: '[Discard] 0' discards the card at position 0.",
                                        observation_type=ta.ObservationType.GAME_MESSAGE)
 
     def _handle_play(self, action: str) -> None:
@@ -235,25 +293,29 @@ class HanabiEnv(ta.Env):
         if card_idx:
             try:
                 card = self.state.game_state['player_hands'][self.state.current_player_id].pop(int(card_idx[0]))
+                action = f"Player {self.state.current_player_id} attempts to play {str(card)}."
             except IndexError:
-                self.state.set_invalid_move(reason=self.m("invalid", "play_nonexist_reason"))
+                reason = "The player attempts to play a non-existing card."
+                self.state.set_invalid_move(reason=reason)
                 self.state.add_observation(from_id=GAME_ID, to_id=self.state.current_player_id,
-                                           message=self.m("invalid", "play_nonexist_detail",
-                                                          max_card=self.hand_size - 1, card_index=card_idx[0]),
+                                           message=f"You attempted to play a non-existing card. "
+                                                   f"Please consider cards between 0 and {self.hand_size - 1} "
+                                                   f"(Including). You provided {card_idx[0]}.",
                                            observation_type=ta.ObservationType.GAME_MESSAGE)
                 return
 
 
             # Check validity
             if self._play(card):
-                message = self.m("play", "success", pid=self.state.current_player_id, card=self._card(card))
+                message = action + " " + "The card was played successfully."
                 self.state.add_observation(from_id=self.state.current_player_id, to_id=-1, message=message,
                                            observation_type=ta.ObservationType.GAME_MESSAGE)
 
             else:  # Invalid!
+                message = action + " " + ("The card did not match the current state of the fireworks."
+                                          " This costs one fuse token.")
                 self.state.game_state['fuse_tokens'] -= 1
-                message = self.m("play", "fail", pid=self.state.current_player_id, card=self._card(card),
-                                 fuse_tokens=self.state.game_state['fuse_tokens'])
+                message += f" There are {self.state.game_state['fuse_tokens']} fuse tokens remaining."
                 self.state.add_observation(from_id=self.state.current_player_id, to_id=-1, message=message,
                                            observation_type=ta.ObservationType.GAME_MESSAGE)
 
@@ -267,9 +329,12 @@ class HanabiEnv(ta.Env):
             self.state.game_state['player_hands'][self.state.current_player_id].append(card)
 
         else:  # Could not parse the action
-            self.state.set_invalid_move(reason=self.m("invalid", "play_parse_reason"))
+            reason = "The player provided an invalid action."
+            self.state.set_invalid_move(reason=reason)
             self.state.add_observation(from_id=GAME_ID, to_id=self.state.current_player_id,
-                                       message=self.m("invalid", "play_parse_detail"),
+                                       message="You provided an invalid action. If you want to play a card, type:\n "
+                                               "'[Play] X', to play the card in position X from your hand. "
+                                               "For example: '[Play] 0' plays the card at position 0.",
                                        observation_type=ta.ObservationType.GAME_MESSAGE)
 
     def _handle_reveal(self, action: str) -> None:
@@ -284,7 +349,8 @@ class HanabiEnv(ta.Env):
         """
         # Token handling
         if self.state.game_state['info_tokens'] == 0:  # Invalid action, no info tokens left
-            self.state.set_invalid_move(reason=self.m("invalid", "reveal_no_info_reason"))
+            reason = "Player attempted to give a hint without having any info tokens."
+            self.state.set_invalid_move(reason=reason)
 
         else:  # Parse the message and send it to the selected player
             card_index, color, player, rank = self._parse_hint(action)
@@ -295,11 +361,10 @@ class HanabiEnv(ta.Env):
             # Parse the hint into a nice format for broadcasting,
             # removing all additional information provided to prevent cheating
             if color:  # The player gave a hint about the suit
-                hint = self.m("reveal", "hint_color", card_index=card_index[0], player=player[0],
-                              color=self.m("color", color[0]))
+                hint = f"Card {card_index[0]} from player {player[0]} is {color[0]}."
 
             else:  # The player gave a hint about the rank
-                hint = self.m("reveal", "hint_rank", card_index=card_index[0], player=player[0], rank=rank[0])
+                hint = f"Card {card_index[0]} from player {player[0]} has rank {rank[0]}."
 
             self.state.game_state['info_tokens'] = self.state.game_state['info_tokens'] - 1
             self.state.add_observation(from_id=self.state.current_player_id, to_id=-1, message=hint,
@@ -320,33 +385,48 @@ class HanabiEnv(ta.Env):
 
         """
         if player == [] or card_index == [] or (color == [] and rank == []):  # Incomplete answer
-            self.state.set_invalid_move(reason=self.m("invalid", "reveal_incomplete_reason"))
+            reason = "The player provided an incomplete hint."
+            self.state.set_invalid_move(reason=reason)
             self.state.add_observation(from_id=GAME_ID, to_id=self.state.current_player_id,
-                                    message=self.m("invalid", "reveal_incomplete_detail"),
+                                    message="You provided an invalid action. If you want to reveal a card,"
+                                            " type:\n "
+                                            "'[Reveal] player N card X color C', to give a hint about color C of"
+                                            " card X to the player at index N.\n"
+                                            "or\n"
+                                            "'[Reveal] player N card X rank R', to give hint about rank R of card"
+                                            " X to the player at index N.\n\n"
+                                            "For example: '[Reveal] player 0 card 0 color green' "
+                                            "Reveals that card 0 from player 0 is green.",
                                     observation_type=ta.ObservationType.GAME_MESSAGE)
             return False
 
         if int(player[0]) == self.state.current_player_id:
-            self.state.set_invalid_move(reason=self.m("invalid", "reveal_own_reason"))
+            reason = "The player attempts to reveal information about their own cards."
+            self.state.set_invalid_move(reason=reason)
             self.state.add_observation(from_id=GAME_ID, to_id=self.state.current_player_id,
-                                    message=self.m("invalid", "reveal_own_detail"),
+                                    message=f"You attempted to reveal information about your own cards. "
+                                            f"This is not allowed.",
                                     observation_type=ta.ObservationType.GAME_MESSAGE)
             return False
 
         elif int(player[0]) < 0 or int(player[0]) >= self.num_players:
-            self.state.set_invalid_move(reason=self.m("invalid", "reveal_bad_teammate_reason"))
+            reason = "The player attempts to reveal information about a non-existing teammate."
+            self.state.set_invalid_move(reason=reason)
             self.state.add_observation(from_id=GAME_ID, to_id=self.state.current_player_id,
-                                    message=self.m("invalid", "reveal_bad_teammate_detail",
-                                                   max_player=self.num_players - 1,
-                                                   pid=self.state.current_player_id),
+                                    message=f"You attempted to reveal information about a non-existing teammate. "
+                                            f"Please consider teammates between 0 and {self.num_players - 1} "
+                                            f"(Including). Note that you cannot reveal information about "
+                                            f"yourself, you are player {self.state.current_player_id}.",
                                     observation_type=ta.ObservationType.GAME_MESSAGE)
             return False
 
         if int(card_index[0]) < 0 or int(card_index[0]) >= self.hand_size:
-            self.state.set_invalid_move(reason=self.m("invalid", "reveal_bad_card_reason"))
+            reason = "The player attempts to reveal information about a non-existing card."
+            self.state.set_invalid_move(reason=reason)
             self.state.add_observation(from_id=GAME_ID, to_id=self.state.current_player_id,
-                                    message=self.m("invalid", "reveal_bad_card_detail",
-                                                   max_card=self.hand_size - 1, card_index=card_index[0]),
+                                    message=f"You attempted to reveal information about a non-existing card. "
+                                            f"The card index should be between 0 and {self.hand_size - 1} "
+                                            f"(including). You provided {card_index[0]}. ",
                                     observation_type=ta.ObservationType.GAME_MESSAGE)
             return False
 
@@ -355,9 +435,11 @@ class HanabiEnv(ta.Env):
             try:
                 Suit(color[0])
             except ValueError:
-                self.state.set_invalid_move(reason=self.m("invalid", "reveal_bad_color_reason"))
+                reason = "The player provided a color that is not in the game."
+                self.state.set_invalid_move(reason=reason)
                 self.state.add_observation(from_id=GAME_ID, to_id=self.state.current_player_id,
-                                        message=self.m("invalid", "reveal_bad_color_detail", color=color[0]),
+                                        message=f"You provided an invalid color. Valid colors are 'white', 'yellow', "
+                                                f"'green', 'red' and 'blue'. You tried: '{color[0]}'.",
                                         observation_type=ta.ObservationType.GAME_MESSAGE)
                 return False
 
@@ -366,15 +448,19 @@ class HanabiEnv(ta.Env):
             try:
                 rank_value = int(rank[0])
                 if rank_value < 1 or rank_value > 5:
-                    self.state.set_invalid_move(reason=self.m("invalid", "reveal_bad_rank_reason"))
+                    reason = "The player provided an invalid rank."
+                    self.state.set_invalid_move(reason=reason)
                     self.state.add_observation(from_id=GAME_ID, to_id=self.state.current_player_id,
-                                            message=self.m("invalid", "reveal_bad_rank_detail", rank=rank[0]),
+                                            message=f"You provided an invalid rank. Valid ranks are between 1 and 5"
+                                                    f" (including). You provided: '{rank[0]}'.",
                                             observation_type=ta.ObservationType.GAME_MESSAGE)
                     return False
             except ValueError:
-                self.state.set_invalid_move(reason=self.m("invalid", "reveal_bad_rank_format_reason"))
+                reason = "The player provided an invalid rank format."
+                self.state.set_invalid_move(reason=reason)
                 self.state.add_observation(from_id=GAME_ID, to_id=self.state.current_player_id,
-                                        message=self.m("invalid", "reveal_bad_rank_format_detail", rank=rank[0]),
+                                        message=f"You provided an invalid rank format. Valid ranks are between 1 and 5"
+                                                f" (including). You provided: '{rank[0]}'.",
                                         observation_type=ta.ObservationType.GAME_MESSAGE)
                 return False
 
@@ -432,23 +518,24 @@ class HanabiEnv(ta.Env):
         # Losing conditions
         if len(self.state.game_state['deck']) == 0:  # The deck has run out
             if self.state.game_state['last_round'] == -1:  # Start the last round
-                self.state.add_observation(from_id=-1, to_id=-1, message=self.m("final_round"),
+                self.state.add_observation(from_id=-1, to_id=-1, message="There are no cards left in the deck. "
+                                                                         "This is the final round.",
                                            observation_type=ta.ObservationType.GAME_MESSAGE)
                 self.state.game_state['last_round'] = self.state.current_player_id
 
             elif self.state.game_state['last_round'] == self.state.current_player_id:  # End the last round
-                self.state.set_draw(reason=self.m("outcome", "deck_empty"))
+                self.state.set_draw(reason="The deck has run out.")
                 rewards = self._calculate_scores()
                 self.rewards = {pid: rewards for pid in range(self.num_players)}
 
         if self.state.game_state['fuse_tokens'] < 0:  # There are no fuse tokens left
-            self.state.set_draw(reason=self.m("outcome", "fuse_empty"))
+            self.state.set_draw(reason="The team ran out of fuse tokens.")
             rewards = self._calculate_scores()
             self.rewards = {pid: rewards for pid in range(self.num_players)}
 
         # Winning conditions
         if self._completed_fireworks():
-            self.state.set_winners(list(range(self.num_players)), reason=self.m("outcome", "win"))
+            self.state.set_winners(list(range(self.num_players)), reason="All 5s have been played successfully.")
             rewards = self._calculate_scores()
             self.rewards = {pid: rewards for pid in range(self.num_players)}
 

@@ -56,7 +56,18 @@ class SetEnv(ta.Env):
         self._observe_state()
 
     def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return self.m("player_prompt", "intro")
+        return (
+            "You are playing a single-player game of Set. "
+            "Your goal is to find as many Sets as you can in 20 turns, without making mistakes. "
+            "The board contains a numbered list of 12 or more cards with (number, color, fill, shape). "
+            "A Set is a set of 3 cards where, for each attribute, they're all 3 the same, "
+            "or all 3 different. For instance, 'one red open squiggle', "
+            "'two green open squiggle', 'three purple open squiggle' would be a Set. "
+            "Each turn, you select a list of 3 cards from the board by their numbered index. "
+            'For example, "[1, 4, 11]". If it is a Set, you score and the cards are replaced. '
+            'If it is not a Set, that turn was wasted. The game ends when you run out of turns. '
+            'You MUST return your cards in brackets, like [2, 4, 8], or they will not be parsed.'
+        )
 
     def _parse_action(self, action: str) -> Tuple[int, int, int] | None:
         if "[" not in action:
@@ -91,22 +102,22 @@ class SetEnv(ta.Env):
                 cards_dealt += 1
             
             if cards_dealt > 0:
-                self.state.add_observation(self.m("game_message", "dealt_cards", cards_dealt=cards_dealt), observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(f"No valid sets found on board. Dealt {cards_dealt} additional cards.", observation_type=ta.ObservationType.GAME_MESSAGE)
                 # Update the board observation so AI can see the new cards
                 self._observe_state()
         
         board = self.state.game_state["board"] # type: ignore
         max_idx = len(board)
         if not parsed:
-            self.state.set_invalid_move(reward=0, reason=self.m("invalid_move", "wrong_format"))
+            self.state.set_invalid_move(reward=0, reason=f"Invalid action format. Return a list of ints like [card1, card2, card3].")
         elif min(parsed) < 1 or max(parsed) > max_idx:
-            self.state.set_invalid_move(reward=0, reason=self.m("invalid_move", "out_of_range", max_idx=max_idx))
+            self.state.set_invalid_move(reward=0, reason=f"Invalid action. Card indices must be between 1 and {max_idx}.")
         else:
             self.state.game_state["num_turns"] += 1 # type: ignore
             cards = board[parsed[0]-1], board[parsed[1]-1], board[parsed[2]-1]
             if _is_set(cards):
                 # add message
-                self.state.add_observation(self.m("game_message", "found_set"), observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(f"You found a Set! +1 point!", observation_type=ta.ObservationType.GAME_MESSAGE)
 
                 # score
                 self.state.game_state["score"] += 1 # type: ignore
@@ -123,22 +134,22 @@ class SetEnv(ta.Env):
                 # Update board observation after refilling
                 self._observe_state()
             else:
-                self.state.add_observation(self.m("game_message", "not_a_set"), observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(f"That is not a Set. No point for you.", observation_type=ta.ObservationType.GAME_MESSAGE)
 
 
         # finish if 20 turns completed
         if self.state.game_state["num_turns"] >= 20: # type: ignore
-            self.state.set_outcome(reward=self.state.game_state["score"], reason=self.m("outcome", "game_over")) # type: ignore
+            self.state.set_outcome(reward=self.state.game_state["score"], reason="You've taken 20 turns. The game is over.") # type: ignore
 
         return self.state.step()
 
     def _observe_state(self):
         gs = self.state.game_state
         assert gs, "no game state"
-        rows = ""
+        board = "=== BOARD ==="
         for idx, card in enumerate(gs['board']):
-            rows += f"\n{idx+1}: {' '.join(card)}"
-        self.state.add_observation(to_id=-1, message=self.m("board", "state", rows=rows), observation_type=ta.ObservationType.GAME_BOARD)
+            board += f"\n{idx+1}: {' '.join(card)}"
+        self.state.add_observation(to_id=-1, message=board, observation_type=ta.ObservationType.GAME_BOARD)
 
     def get_board_str(self) -> str:
         """Return the current board state as a string for rendering."""

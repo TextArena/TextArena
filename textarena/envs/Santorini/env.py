@@ -90,13 +90,31 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
     def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
         """Generate the initial prompt for a player."""
         color = self.PLAYER_COLORS[player_id]
-        prompt = self.t("player_prompt", "intro", color=color, color_initial=color[0], _pid=player_id)
+        prompt = (
+            f"You are playing {color} in a game of Santorini.\n\n"
+            "Game Rules:\n"
+            "1. Movement:\n"
+            "   - Workers can only move to adjacent squares (including diagonals)\n"
+            "   - Cannot move to squares occupied by other workers or domes\n"
+            "   - Can move up maximum one level, but can move down any number of levels\n\n"
+            "2. Building:\n"
+            "   - Must build in a square adjacent to where your worker moved to\n"
+            "   - Cannot build where any worker is standing\n"
+            "   - Cannot build on top of a dome (level 4)\n"
+            "   - Building adds one level (or creates a dome on level 3)\n\n"
+            "3. Win Conditions:\n"
+            "   - Win by moving a worker to level 3\n"
+            "   - Win if opponent has no valid moves\n\n"
+            "Make your move in the format [worker_id source dest build]\n"
+            f"Example: [{color[0]}1C1C2B2] means move {color} worker 1 from C1 to C2 and build at B2\n"
+            "You can include additional text in your messages, but you must only mention the valid move pattern once.\n"
+        )
 
         if self.is_open:
-            prompt += self.t("player_prompt", "board_state", board=create_board_str(self.board), _pid=player_id)
+            prompt += f"\nCurrent board state:\n{create_board_str(self.board)}\n"
 
         if self.show_valid:
-            prompt += self.t("player_prompt", "valid_moves", valid_moves=game_state['valid_moves'], _pid=player_id)
+            prompt += f"\nValid moves: {game_state['valid_moves']}"
 
         return prompt
 
@@ -259,7 +277,7 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
         # Check if a move was provided
         if match is None:
             self.state.set_invalid_move(
-                reason=self.m("invalid_move", "wrong_format")
+                reason=f"Invalid move format. Expected format: [worker_id source dest build], e.g. [N1C1C2B2]"
             )
             return False
         
@@ -275,7 +293,7 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
         # Validate player is moving their own worker
         if player_id != expected_player:
             self.state.set_invalid_move(
-                reason=self.m("invalid_move", "wrong_player", expected_color=self.PLAYER_COLORS[expected_player], player_color=self.PLAYER_COLORS[player_id])
+                reason=f"Cannot move {self.PLAYER_COLORS[expected_player]} worker (you are {self.PLAYER_COLORS[player_id]})"
             )
             return False
         source = match.group(2).upper()
@@ -293,7 +311,7 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
         # Validate worker ownership
         if self.board[source_row][source_col][1] != (player_id, worker_num):
             self.state.set_invalid_move(
-                reason=self.m("invalid_move", "no_worker", worker_num=worker_num, source=source)
+                reason=f"No worker {worker_num} at position {source}"
             )
             return False
 
@@ -304,7 +322,7 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
         if not self._is_valid_move(source_row, source_col, dest_row, dest_col):
             # print("Move validation failed")
             self.state.set_invalid_move(
-                reason=self.m("invalid_move", "bad_move", source=source, dest=dest)
+                reason=f"Invalid move from {source} to {dest}"
             )
             return False
 
@@ -323,7 +341,7 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
                                     build_row, build_col):
             # print("Build validation failed")
             self.state.set_invalid_move(
-                reason=self.m("invalid_move", "bad_build", build=build)
+                reason=f"Invalid build at {build}"
             )
             return False
 
@@ -343,7 +361,7 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
             self.board[build_row][build_col] = (build_height + 1, None)
 
         # Log the move
-        message = self.m("game_action", "moved", player_id=player_id, color=self.PLAYER_COLORS[player_id], worker_num=worker_num, source=source, dest=dest, build=build)
+        message = f"Player {player_id} ({self.PLAYER_COLORS[player_id]}) moved worker {worker_num} from {source} to {dest} and built at {build}"
         self.state.add_observation(from_id=ta.GAME_ID, to_id=-1, message=message, observation_type = ta.ObservationType.GAME_ACTION_DESCRIPTION)
         
         return True
@@ -365,7 +383,7 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
                     winner_id = self.board[row][col][1][0]  # Get player_id of the worker
                     self.state.set_winners(
                         player_ids=[winner_id],
-                        reason=self.m("outcome", "win_level3", winner_id=winner_id, winner_color=self.PLAYER_COLORS[winner_id])
+                        reason=f"Player {winner_id} ({self.PLAYER_COLORS[winner_id]}) won by moving a worker to level 3!"
                     )
                     return
 
@@ -377,7 +395,8 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
             next_player = (player_id + 1) % self.state.num_players
             self.state.set_winners(
                 player_ids=[next_player],
-                reason=self.m("outcome", "no_moves", loser_id=player_id, loser_color=self.PLAYER_COLORS[player_id], winner_id=next_player, winner_color=self.PLAYER_COLORS[next_player])
+                reason=f"Player {player_id} ({self.PLAYER_COLORS[player_id]}) has no valid moves. " \
+                       f"Player {next_player} ({self.PLAYER_COLORS[next_player]}) wins!"
             )
             return
 
@@ -389,6 +408,7 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
             # Next player has no moves, current player wins
             self.state.set_winners(
                 player_ids=[player_id],
-                reason=self.m("outcome", "no_moves", loser_id=next_player, loser_color=self.PLAYER_COLORS[next_player], winner_id=player_id, winner_color=self.PLAYER_COLORS[player_id])
+                reason=f"Player {next_player} ({self.PLAYER_COLORS[next_player]}) has no valid moves. " \
+                       f"Player {player_id} ({self.PLAYER_COLORS[player_id]}) wins!"
             )
             return
