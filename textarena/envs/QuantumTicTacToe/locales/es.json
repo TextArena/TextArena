@@ -1,41 +1,30 @@
 {
-  "_comment": "Archivo de idioma de QuantumTicTacToe en español. NO traduzcas las claves (lado izquierdo), solo los valores (lado derecho). Conserva cada {placeholder} exactamente igual. Los tokens de jugada como '[a,b]', las coordenadas de casilla como (0, 1), las etiquetas de marcas como 'X1 / X1', los símbolos X y O y el tablero ASCII NO se traducen.",
-  "_slots": {
-    "{player_id}": "El número del jugador, 0 o 1",
-    "{symbol}": "La marca del jugador, X u O",
-    "{parity}": "La palabra para la paridad de los números de jugada, 'odd' (impar) o 'even' (par)",
-    "{board}": "El tablero ASCII renderizado (no traducir)",
-    "{pos_a}": "Un par de coordenadas de casilla como (0, 1) (no traducir)",
-    "{pos_b}": "Un par de coordenadas de casilla como (0, 2) (no traducir)",
-    "{cell}": "Un par de coordenadas de casilla como (1, 2) (no traducir)"
-  },
-
   "player_prompt": {
-    "intro":            "Eres el Jugador {player_id} en Quantum Tic Tac Toe.\nTu símbolo es '{symbol}', y tus números de jugada son siempre {parity} (p. ej., X1, X3 u O2, O4).\n\nObjetivo: Gana formando una línea de tres marcas clásicas (solidificadas a partir de superposiciones).\n\nCómo jugar:\n- En cada turno, coloca una marca fantasmal en dos casillas vacías distintas usando el formato '[a,b]'.\n- Estas marcas están entrelazadas y se etiquetan como 'X1 / X1' u 'O4 / O4'.\n- No puedes colocar marcas fantasmales en una casilla que ya ha colapsado (solidificado).\n\nRegla de colapso:\n- Si tu jugada crea un ciclo en el grafo de entrelazamiento, colapsa automáticamente.\n- Cada marca fantasmal del ciclo se convierte en una marca clásica en una de sus dos posiciones.\n- Cualquier marca fantasmal dependiente también colapsa.\n\nVictoria:\n- El juego termina cuando un jugador tiene tres marcas clásicas en línea.\n- Si ambos jugadores obtienen una línea durante el mismo colapso, gana el que tenga el número de jugada máximo más bajo.\n\nJugada de ejemplo: '[0,4]' coloca una marca fantasmal en las casillas 0 y 4."
+    "intro": "Eres el jugador {player_id} en una partida de tres en raya cuántico.\nTu símbolo es '{symbol}' y los números de tus movimientos siempre son {parity}, por ejemplo, X1 y X3 u O2 y O4.\n\nObjetivo: ganar formando una línea de tres marcas clásicas, solidificadas a partir de superposiciones.\n\nCómo jugar:\n- En cada turno, coloca una marca fantasmal en dos casillas vacías diferentes utilizando el formato '[a,b]'.\n- Estas marcas están entrelazadas y se etiquetan como 'X1 / X1' u 'O4 / O4'.\n- No puedes colocar marcas fantasmales en una casilla que ya haya colapsado y se haya solidificado.\n\nRegla de colapso:\n- Si tu movimiento crea un ciclo en el grafo de entrelazamiento, este colapsa automáticamente.\n- Cada marca fantasmal del ciclo se convierte en una marca clásica en una de sus dos posiciones.\n- Todas las marcas fantasmales dependientes también colapsan.\n\nVictoria:\n- La partida termina cuando un jugador consigue tres marcas clásicas en línea.\n- Si ambos jugadores forman una línea durante el mismo colapso, gana quien tenga el menor número máximo de movimiento.\n\nEjemplo de movimiento: '[0,4]' coloca una marca fantasmal en las celdas 0 y 4."
   },
 
   "board": {
-    "current_board":    "Tablero de Quantum Tic Tac Toe:\n\n{board}\n\nEnvía tu jugada como '[a,b]' para colocar una marca cuántica en dos ubicaciones."
+    "current_board": "Tablero de tres en raya cuántico:\n\n{board}\n\nEnvía tu movimiento como '[a,b]' para colocar una marca cuántica en dos posiciones."
   },
 
   "invalid_move": {
-    "wrong_format":     "Formato inválido. Usa '[a,b]'.",
-    "bad_indices":      "Índices de casilla inválidos o duplicados.",
-    "already_solid":    "Una de las casillas ya está solidificada."
+    "wrong_format": "Formato no válido. Utiliza '[a,b]'.",
+    "invalid_cells": "Los índices de las celdas no son válidos o están duplicados.",
+    "already_solidified": "Una de las celdas ya está solidificada."
   },
 
   "game_action": {
-    "placed":           "El Jugador {player_id} colocó su símbolo en una superposición entre las casillas {pos_a} y {pos_b}."
+    "placed": "El jugador {player_id} colocó su símbolo en una superposición entre las celdas {pos_a} y {pos_b}."
   },
 
-  "collapse": {
-    "resolved":         "Superposición resuelta. La casilla {cell} ahora es {symbol}.",
-    "dependent":        "Superposición dependiente resuelta. La casilla {cell} ahora es {symbol}.",
-    "last_cell":        "Superposición de la última casilla resuelta. La casilla {cell} ahora es {symbol}."
+  "game_message": {
+    "dependent_resolved": "Se resolvió la superposición dependiente. La celda ({r}, {c}) ahora es {symbol}.",
+    "last_cell_resolved": "Se resolvió la superposición de la última celda. La celda ({r}, {c}) ahora es {symbol}.",
+    "superposition_resolved": "Se resolvió la superposición. La celda ({r}, {c}) ahora es {symbol}."
   },
 
   "outcome": {
-    "win":              "¡El Jugador {player_id} gana con marcas solidificadas!",
-    "draw":             "¡El juego termina en empate!"
+    "win": "¡El jugador {player_id} gana con sus marcas solidificadas!",
+    "draw": "¡La partida termina en empate!"
   }
 }

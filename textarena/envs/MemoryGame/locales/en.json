@@ -1,42 +1,29 @@
 {
-  "_comment": "User-facing strings for the Memory Game. Move tokens like [0 1 1 0], row/column numbers, card labels (A, B, ...) and the ASCII board are NEUTRAL: they are passed in as slots and must never be translated.",
-  "_slots": {
-    "player_id": "integer id of the acting player (0 or 1)",
-    "winner_id": "integer id of the winning player (0 or 1)",
-    "board": "pre-rendered ASCII board grid, passed through verbatim (do not translate)",
-    "r1": "row of the first selected card (integer)",
-    "c1": "column of the first selected card (integer)",
-    "r2": "row of the second selected card (integer)",
-    "c2": "column of the second selected card (integer)",
-    "pos1": "card label revealed at the first position (e.g. H); neutral, do not translate",
-    "pos2": "card label revealed at the second position (e.g. B); neutral, do not translate",
-    "score0": "Player 0's final score (integer)",
-    "score1": "Player 1's final score (integer)",
-    "reason": "nested turn-limit sentence passed into the turn-limit win message"
+  "player_prompt": {
+    "intro":            "You are Player {player_id}. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched."
   },
-  "prompt": {
-    "intro": "You are Player {player_id}. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched."
-  },
+
   "board": {
-    "initial": "Current board:\n{board}",
-    "current": "Current Game Board:\n{board}"
+    "current_board":      "Current board:\n{board}",
+    "current_game_board": "Current Game Board:\n{board}"
   },
+
   "invalid_move": {
-    "wrong_format": "Invalid move format. Player {player_id} did not respond with a valid direction in square brackets.",
-    "out_of_bounds": "Invalid move. Player {player_id} selected an out-of-bounds position.",
-    "same_card": "Invalid move. Player {player_id} selected the same card twice.",
-    "already_matched": "Invalid move. Player {player_id} selected one or both cards that have already been matched."
+    "wrong_format":     "Invalid move format. Player {player_id} did not respond with a valid direction in square brackets.",
+    "out_of_bounds":    "Invalid move. Player {player_id} selected an out-of-bounds position.",
+    "same_card_twice":  "Invalid move. Player {player_id} selected the same card twice.",
+    "already_matched":  "Invalid move. Player {player_id} selected one or both cards that have already been matched."
   },
+
   "game_message": {
-    "match": "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
-    "no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+    "cards_match":      "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
+    "cards_no_match":   "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
   },
+
   "outcome": {
-    "win": "Player {winner_id} has won!",
-    "draw": "Both players matched the same number of pairs of cards."
-  },
-  "turn_limit": {
-    "reached": "The turn limit has been reached. The game is over. Player 0 scored {score0} points, Player 1 scored {score1} points.",
-    "win": "{reason} Player {winner_id} has won!"
+    "draw":             "Both players matched the same number of pairs of cards.",
+    "win":              "Player {winner_id} has won!",
+    "turn_limit":       "The turn limit has been reached. The game is over. Player 0 scored {score_0} points, Player 1 scored {score_1} points.",
+    "turn_limit_win":   "{reason} Player {winner_id} has won!"
   }
 }

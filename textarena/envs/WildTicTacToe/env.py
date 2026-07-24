@@ -31,7 +31,7 @@ class WildTicTacToeEnv(ta.Env):
         else:
             mark = match.group(1).upper()
             cell = int(match.group(2))
-            if cell not in self.cell_mapping: self.state.set_invalid_move(reason=self.m("invalid_move", "out_of_range", cell=cell))
+            if cell not in self.cell_mapping: self.state.set_invalid_move(reason=self.m("invalid_move", "invalid_cell", cell=cell))
             else:
                 row, col = self.cell_mapping[cell]
                 if self.state.game_state["board"][row][col] == '':

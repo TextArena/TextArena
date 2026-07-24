@@ -1,28 +1,32 @@
 {
-  "_comment": "Fail bahasa UltimateTicTacToe — Bahasa Melayu. JANGAN terjemahkan kunci. Terjemahkan nilai sahaja. Kekalkan setiap {placeholder} seadanya.",
-  "_slots": {
-    "{player_id}": "Nombor pemain, 0 atau 1",
-    "{symbol}": "Tanda pemain, X atau O",
-    "{macro}": "Indeks papan mini (0-8)",
-    "{micro}": "Indeks petak (0-8) dalam papan mini",
-    "{row}": "Baris dalam papan mini",
-    "{col}": "Lajur dalam papan mini",
-    "{opponent_id}": "Nombor pemain lawan",
-    "{next_target}": "Frasa yang menyatakan di mana lawan mesti bermain seterusnya",
-    "{n}": "Indeks papan mini yang dipaksa ke atas lawan",
-    "{board}": "Papan ASCII yang dipaparkan (jangan terjemah)"
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam **Ultimate Tic Tac Toe**.\nHantar langkah anda sebagai **[macro  micro]**, iaitu dua nombor dari 0 hingga 8:\n• *macro* = papan kecil tempat anda bermain\n• *micro* = petak di dalam papan kecil tersebut\nContoh: `[7 8]` ➜ letakkan simbol anda pada papan kecil 7, petak 8, dan\npaksa pihak lawan bermain pada papan kecil 8 seterusnya.\n\nSimbol anda ialah `{symbol}`.\n"
   },
-  "player_prompt": { "intro": "Anda ialah Pemain {player_id} dalam **Tic Tac Toe Ultimate**.\nHantar langkah anda sebagai **[makro  mikro]** (dua nombor 0-8):\n• *makro*  = papan mini mana anda bermain\n• *mikro* = petak mana di dalam papan mini itu\nContoh `[7 8]` ➜ letakkan tanda anda di papan mini 7, petak 8, dan\npaksa lawan anda bermain di papan mini 8 seterusnya.\n\nAnda ialah `{symbol}`.\n" },
-  "board": { "current": "Papan semasa:\n{board}" },
+
+  "board": {
+    "current_board": "Papan semasa:\n{board}"
+  },
+
   "invalid_move": {
-    "wrong_format": "Langkah mesti dalam bentuk [makro mikro] dengan nombor 0-8.",
-    "out_of_range": "Setiap indeks mesti antara 0 dan 8.",
-    "range_recheck": "Papan mini, baris atau lajur berada di luar julat.",
-    "already_occupied": "Petak itu telah diduduki.",
-    "wrong_board": "Pemain mesti bermain di papan mini seterusnya.",
-    "board_won": "Papan mini itu telah dimenangi."
+    "wrong_format": "Langkah mesti dalam bentuk [macro micro] dengan nombor dari 0 hingga 8.",
+    "out_of_range": "Setiap indeks mestilah antara 0 dengan 8.",
+    "index_out_of_range": "micro_board, baris atau lajur berada di luar julat.",
+    "cell_occupied": "Petak tersebut sudah diisi.",
+    "wrong_micro_board": "Pemain mesti bermain dalam papan kecil seterusnya yang ditetapkan.",
+    "micro_board_won": "Papan kecil tersebut sudah dimenangi."
   },
-  "next_target": { "any": "mana-mana papan mini", "specific": "papan mini {n}" },
-  "game_action": { "played": "Pemain {player_id} bermain di papan mini {macro}, petak {micro} (baris {row}, lajur {col}). Pemain {opponent_id} kini mesti bermain di {next_target}." },
-  "outcome": { "win": "Pemain {player_id} memenangi Tic Tac Toe Ultimate!", "draw": "Permainan tamat seri!" }
+
+  "next_board": {
+    "any": "mana-mana papan kecil",
+    "specific": "papan kecil {nxt}"
+  },
+
+  "game_action": {
+    "played": "Pemain {player_id} bermain pada papan kecil {macro_idx}, petak {micro_idx} (baris {row}, lajur {col}). Pemain {opponent_id} kini mesti bermain dalam {nxt_txt}."
+  },
+
+  "outcome": {
+    "win": "Pemain {player_id} memenangi Ultimate Tic Tac Toe!",
+    "draw": "Permainan berakhir dengan seri!"
+  }
 }

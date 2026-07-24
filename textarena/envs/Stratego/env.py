@@ -49,7 +49,8 @@ class StrategoEnv(ta.Env):
             player_id (int): The ID of the current player.
             game_state (Dict[str, Any]): The current game state.
         """
-        return self.m("player_prompt", "intro", player_id=player_id)
+        prompt = self.m("player_prompt", "intro", player_id=player_id)
+        return prompt
 
     def _observe_current_state(self):
         """
@@ -258,10 +259,10 @@ class StrategoEnv(ta.Env):
                     self.player_pieces[player_id].append((dest_row, dest_col))
                     
                     ## add the observation to both players separately
-                    message=self.m("game_action", "moved_self", source=source, dest=dest)
+                    message=self.m("game_action", "you_moved", source=source, dest=dest)
                     self.state.add_observation(from_id=-1, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-                    message=self.m("game_action", "moved_opp", player_id=player_id, source=source, dest=dest)
+                    message=self.m("game_action", "opponent_moved", player_id=player_id, source=source, dest=dest)
                     self.state.add_observation(from_id=-1, to_id=1-player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
                 else:
@@ -276,10 +277,10 @@ class StrategoEnv(ta.Env):
                         self.player_pieces[1 - player_id].remove((dest_row, dest_col))
 
                         ## add the observation to both players separately
-                        message=self.m("battle", "equal_self", source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
+                        message=self.m("game_action", "you_equal_ranks", source=source, dest=dest, attacking_rank=attacking_piece['rank'], target_rank=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-                        message=self.m("battle", "equal_opp", player_id=player_id, source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
+                        message=self.m("game_action", "opponent_equal_ranks", player_id=player_id, source=source, dest=dest, attacking_rank=attacking_piece['rank'], target_rank=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=1 - player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
                     elif target_piece['rank'] == 'Bomb':
@@ -291,10 +292,10 @@ class StrategoEnv(ta.Env):
                             self.player_pieces[player_id].append((dest_row, dest_col))
 
                             ## add the observation to both players separately
-                            message=self.m("battle", "miner_defuse_self", source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
+                            message=self.m("game_action", "you_miner_defused", source=source, dest=dest, attacking_rank=attacking_piece['rank'], target_rank=target_piece['rank'])
                             self.state.add_observation(from_id=-1, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-                            message=self.m("battle", "miner_defuse_opp", player_id=player_id, source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
+                            message=self.m("game_action", "opponent_miner_defused", player_id=player_id, source=source, dest=dest, attacking_rank=attacking_piece['rank'], target_rank=target_piece['rank'])
                             self.state.add_observation(from_id=-1, to_id=1-player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
                         else:
@@ -303,10 +304,10 @@ class StrategoEnv(ta.Env):
                             self.player_pieces[player_id].remove((src_row, src_col))
 
                             ## add the observation to both players separately
-                            message=self.m("battle", "bomb_self", source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
+                            message=self.m("game_action", "you_bomb_lost", source=source, dest=dest, attacking_rank=attacking_piece['rank'], target_rank=target_piece['rank'])
                             self.state.add_observation(from_id=-1, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-                            message=self.m("battle", "bomb_opp", player_id=player_id, source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
+                            message=self.m("game_action", "opponent_bomb_won", player_id=player_id, source=source, dest=dest, attacking_rank=attacking_piece['rank'], target_rank=target_piece['rank'])
                             self.state.add_observation(from_id=-1, to_id=1-player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
                     elif target_piece['rank'] == 'Flag':
@@ -316,7 +317,7 @@ class StrategoEnv(ta.Env):
                         self.player_pieces[player_id].append((dest_row, dest_col))
                         self.player_pieces[1 - player_id].remove((dest_row, dest_col))
                         ## game over
-                        self.state.set_winner(player_id=player_id,reason=self.m("outcome", "flag_captured", player_id=player_id))
+                        self.state.set_winner(player_id=player_id,reason=[self.m("outcome", "flag_captured", player_id=player_id)])
                     elif attacking_piece['rank'] == 'Spy' and target_piece['rank'] == 'Marshal':
                         ## Spy beats Marshal only if spy attacks first
                         self.board[dest_row][dest_col] = attacking_piece
@@ -326,10 +327,10 @@ class StrategoEnv(ta.Env):
                         self.player_pieces[1 - player_id].remove((dest_row, dest_col))
 
                         ## add the observation to both players separately
-                        message=self.m("battle", "spy_marshal_self", source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
+                        message=self.m("game_action", "you_spy_won", source=source, dest=dest, attacking_rank=attacking_piece['rank'], target_rank=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-                        message=self.m("battle", "spy_marshal_opp", player_id=player_id, source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
+                        message=self.m("game_action", "opponent_spy_lost", player_id=player_id, source=source, dest=dest, attacking_rank=attacking_piece['rank'], target_rank=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=1-player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
                     elif attacking_rank > target_rank:
@@ -341,10 +342,10 @@ class StrategoEnv(ta.Env):
                         self.player_pieces[1 - player_id].remove((dest_row, dest_col))
 
                         ## add the observation to both players separately
-                        message=self.m("battle", "higher_self", source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
+                        message=self.m("game_action", "you_higher_won", source=source, dest=dest, attacking_rank=attacking_piece['rank'], target_rank=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-                        message=self.m("battle", "higher_opp", player_id=player_id, source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
+                        message=self.m("game_action", "opponent_higher_lost", player_id=player_id, source=source, dest=dest, attacking_rank=attacking_piece['rank'], target_rank=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=1-player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
                     else:
@@ -353,15 +354,15 @@ class StrategoEnv(ta.Env):
                         self.player_pieces[player_id].remove((src_row, src_col))
 
                         ## add the observation to both players separately
-                        message=self.m("battle", "lower_self", source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
+                        message=self.m("game_action", "you_lower_lost", source=source, dest=dest, attacking_rank=attacking_piece['rank'], target_rank=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-                        message=self.m("battle", "lower_opp", player_id=player_id, source=source, dest=dest, attacker=attacking_piece['rank'], target=target_piece['rank'])
+                        message=self.m("game_action", "opponent_lower_won", player_id=player_id, source=source, dest=dest, attacking_rank=attacking_piece['rank'], target_rank=target_piece['rank'])
                         self.state.add_observation(from_id=-1, to_id=1-player_id, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
         ## check if the game is over
         if self._check_winner():
-            reason=self.m("outcome", "no_movable_pieces", winner=self._check_winner(), loser=1 - self._check_winner())
+            reason=self.m("outcome", "no_movable_pieces", winner_id=self._check_winner(), loser_id=1 - self._check_winner())
             self.state.set_winner(player_id=self._check_winner(), reason=reason)
 
         ## update the rendered board
@@ -383,7 +384,7 @@ class StrategoEnv(ta.Env):
             dest_col (int): The column of the destination position.
         """
         if not (0 <= src_row < 10 and 0 <= src_col < 10 and 0 <= dest_row < 10 and 0 <= dest_col < 10):
-            reason=self.m("invalid_move", "invalid_coords", player_id=player_id)
+            reason=self.m("invalid_move", "invalid_coordinates", player_id=player_id)
             self.state.set_invalid_move(reason=reason)
             return False
         
@@ -397,13 +398,13 @@ class StrategoEnv(ta.Env):
             if src_row == dest_row:
                 for col in range(min(src_col, dest_col) + 1, max(src_col, dest_col)):
                     if self.board[src_row][col] is not None:
-                        reason=self.m("invalid_move", "scout_through", player_id=player_id)
+                        reason=self.m("invalid_move", "scout_through_pieces", player_id=player_id)
                         self.state.set_invalid_move(reason=reason)
                         return False
             elif src_col == dest_col:
                 for row in range(min(src_row, dest_row) + 1, max(src_row, dest_row)):
                     if self.board[row][src_col] is not None:
-                        reason=self.m("invalid_move", "scout_through", player_id=player_id)
+                        reason=self.m("invalid_move", "scout_through_pieces", player_id=player_id)
                         self.state.set_invalid_move(reason=reason)
                         return False
             else:
@@ -413,23 +414,23 @@ class StrategoEnv(ta.Env):
             
         if abs(src_row - dest_row) + abs(src_col - dest_col) != 1 and self.board[src_row][src_col]['rank'].lower() != 'scout':
             ## !  - by right, only scouts can move more than one square at a time but we are not implementing that yet
-            reason=self.m("invalid_move", "not_scout_one_square")
+            reason=self.m("invalid_move", "non_scout_multi_square")
             self.state.set_invalid_move(reason=reason)
             return False
         
         if self.board[dest_row][dest_col] is not None:
             if (dest_row, dest_col) in self.lakes:
-                reason=self.m("invalid_move", "into_lake", player_id=player_id)
+                reason=self.m("invalid_move", "move_into_lake", player_id=player_id)
                 self.state.set_invalid_move(reason=reason)
                 return False
             
             elif self.board[dest_row][dest_col]['player'] == player_id:
-                reason=self.m("invalid_move", "onto_own", player_id=player_id)
+                reason=self.m("invalid_move", "move_onto_own_piece", player_id=player_id)
                 self.state.set_invalid_move(reason=reason)
                 return False
         
         if self.board[src_row][src_col]['rank'].lower() in ['bomb','flag']:
-            reason=self.m("invalid_move", "bomb_or_flag", player_id=player_id)
+            reason=self.m("invalid_move", "move_bomb_or_flag", player_id=player_id)
             self.state.set_invalid_move(reason=reason)
             return False
         
@@ -443,4 +444,3 @@ class StrategoEnv(ta.Env):
             if all([self.board[row][col]['rank'] in ['Bomb', 'Flag'] for row, col in self.player_pieces[player]]):
                 return 1 - player
         return None
-    

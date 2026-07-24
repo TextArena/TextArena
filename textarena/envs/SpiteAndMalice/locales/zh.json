@@ -1,60 +1,47 @@
 {
-  "_comment": "Spite and Malice 语言文件。请勿翻译键（左侧）。只翻译值（右侧）。保持每个 {placeholder} 完全不变。切勿翻译动作标记（'[draw]'、'[play A♠ 0]'、'[discard A♠ 1]'、'[action card center_index]'）、牌面标签（A/2-9/J/Q/K 及花色 ♠♥♦♣）、牌堆/列表内容，或数字牌堆索引和长度。",
-  "_slots": {
-    "{player_id}": "玩家编号，0 或 1",
-    "{other}": "另一位玩家的编号，0 或 1",
-    "{card}": "牌面标签，例如 A♠、K♣、2♦",
-    "{index}": "牌堆索引，0-3",
-    "{i}": "中央牌堆索引，0-3",
-    "{top}": "补偿牌堆的顶牌，或表示空牌堆的翻译词",
-    "{length}": "补偿牌堆中剩余的牌数",
-    "{hand}": "中性的牌面标签列表，例如 ['3♦', '6♦']",
-    "{discard}": "中性的弃牌堆列表，例如 [[], ['3♦'], [], []]",
-    "{p0}": "中央牌堆 0 上牌的中性列表",
-    "{p1}": "中央牌堆 1 上牌的中性列表",
-    "{p2}": "中央牌堆 2 上牌的中性列表",
-    "{p3}": "中央牌堆 3 上牌的中性列表",
-    "{center}": "预先渲染的中央牌堆部分",
-    "{view0}": "预先渲染的玩家视图（第一个）",
-    "{view1}": "预先渲染的玩家视图（第二个）或为空",
-    "{board}": "预先渲染的牌桌",
-    "{moves}": "以逗号分隔的可用动作标记的中性列表"
-  },
-
   "player_prompt": {
-    "intro": "你是双人游戏 Spite and Malice 中的玩家 {player_id}。你的目标是率先清空你的补偿牌堆。\n\n### 游戏概述：\n- 目标是通过将牌打到中央牌堆来清空你的补偿牌堆。\n- 你可以从三个来源打出牌：\n  1. 你的**手牌**（每回合开始时你手中最多有 5 张牌）。\n  2. **你补偿牌堆的顶牌**。\n  3. **你任意弃牌堆的顶牌**。\n\n### 出牌规则：\n- 如果一张牌比中央牌堆顶牌**高一个等级**，你就可以将它打到该牌堆（中央牌堆从 A 开始，一直到 Q；K 是万能牌 - 它可以打在任何牌上，但不改变等级顺序。这意味着如果一张 K 打在 4 之后，那么这张 K 的等级为 5，下一张牌必须是 6）。\n- 如果你无法再打出任何牌，你必须**弃掉一张牌**到你的某个弃牌堆以结束你的回合。\n- 如果中央牌堆达到 Q，它将被自动清空。\n- 等级顺序为：A=1，2=2，...，9=9，J=10，Q=11，K 为万能牌。\n\n### 动作：\n1. **抽牌**：在你回合开始时，抽牌以将手牌补足到 5 张。输入 **[draw]** 开始。\n2. **打出一张牌**：要打出一张牌，请像这样指定牌和中央牌堆：**[play A♠ 0]**（其中 'A♠' 是牌，'0' 是中央牌堆索引）。\n3. **弃牌**：如果你无法再打出任何牌，从你的手牌中弃一张牌到弃牌堆以结束你的回合。输入 **[discard A♠ 1]**（其中 'A♠' 是牌，'1' 是弃牌堆索引）。请注意，你不能从补偿牌堆弃任何牌。你只能弃手中的牌。\n\n"
+    "intro": "你是双人 Spite and Malice 游戏中的玩家 {player_id}。你的目标是成为第一个清空自己目标牌堆的玩家。\n\n### 游戏概述：\n- 游戏目标是通过将牌打到中央牌堆，清空你的目标牌堆。\n- 你可以从三个来源出牌：\n  1. 你的**手牌**（每个回合开始时，你的手牌最多补至 5 张）。\n  2. 你的**目标牌堆顶部的牌**。\n  3. 你的**任意弃牌堆顶部的牌**。\n\n### 出牌规则：\n- 当一张牌的点数比某个中央牌堆顶部的牌**正好高一级**时，你可以将其打到该中央牌堆上（中央牌堆从 Ace 开始，依次上升至 Queen；King 是万能牌，可以打在任何牌上，但不会改变点数序列。这意味着，如果在 4 之后使用 King，该 King 会被视为 5，下一张牌必须是 6）。\n- 当你无法继续出牌时，必须将一张牌**弃置**到你的一个弃牌堆中，以结束你的回合。\n- 当中央牌堆达到 Queen 时，该牌堆会被自动清空。\n- 点数顺序为：A=1、2=2、...、9=9、J=10、Q=11，K 为万能牌。\n\n### 操作：\n1. **抽牌**：在你的回合开始时，抽牌直到手中有 5 张牌。输入 **[draw]** 开始。\n2. **出牌**：要打出一张牌，请按以下格式指定牌和中央牌堆：**[play A♠ 0]**（其中 'A♠' 是牌，'0' 是中央牌堆索引）。\n3. **弃牌**：如果你无法继续出牌，请将一张手牌弃置到一个弃牌堆中，以结束你的回合。输入 **[discard A♠ 1]**（其中 'A♠' 是牌，'1' 是弃牌堆索引）。请注意，你不能弃置目标牌堆中的牌。你只能弃置手牌中的牌。\n\n"
   },
 
   "board": {
-    "empty": "空",
-    "center": "--- 中央牌堆 ---\n牌堆 0：{p0}\n牌堆 1：{p1}\n牌堆 2：{p2}\n牌堆 3：{p3}\n",
-    "player_view": "\n--- 玩家 {player_id} 的视图 ---\n补偿牌堆（顶牌）：{top}，补偿牌堆长度：{length}\n手牌：{hand}\n弃牌堆：{discard}\n",
-    "wrapper": "{center}{view0}{view1}",
-    "current": "当前牌桌：\n\n{board}\n可用动作：{moves}"
+    "current_board": "当前游戏面板：\n\n{board}\n可用操作：{moves}"
   },
 
-  "message": {
-    "no_more_cards": "没有更多的牌可抽了。请记住你可以从这些来源打出牌：\n  1. 你的**手牌**。\n  2. **你补偿牌堆的顶牌**。\n  3. **你任意弃牌堆的顶牌**。\n\n",
-    "drew_self": "你抽了牌。",
-    "drew_other": "玩家 {player_id} 抽了牌。",
-    "played_self": "你将 {card} 打到了中央牌堆 {index}。",
-    "played_other": "玩家 {player_id} 将 {card} 打到了中央牌堆 {index}。",
-    "discarded_self": "你已将 {card} 弃到弃牌堆 {index}，这也意味着你已结束回合。本回合不再考虑你的其他动作。玩家 {other} 将接下来行动。",
-    "discarded_other": "玩家 {player_id} 将 {card} 弃到弃牌堆 {index}，这也意味着他们已结束回合。本回合不再考虑玩家 {player_id} 的其他动作。玩家 {other}，你将接下来行动。请以 [action card center_index] 的格式输入你的动作。"
+  "render": {
+    "center_piles_header": "--- 中央牌堆 ---\n",
+    "pile": "{observation}牌堆 {i}：{pile}\n",
+    "player_view_header": "{observation}\n--- 玩家 {player_id} 的视角 ---\n",
+    "payoff": "{observation}目标牌堆（顶部牌）：{top_card}，目标牌堆长度：{payoff_length}\n",
+    "hand": "{observation}手牌：{hand}\n",
+    "discard": "{observation}弃牌堆：{discard}\n",
+    "empty": "空"
+  },
+
+  "game_message": {
+    "no_cards_left": "已经没有牌可以抽取。请记住，你可以从以下来源出牌：\n  1. 你的**手牌**。\n  2. 你的**目标牌堆顶部的牌**。\n  3. 你的**任意弃牌堆顶部的牌**。\n\n"
   },
 
   "invalid_move": {
-    "wrong_format": "无效的动作格式。玩家 {player_id} 没有用方括号中的有效动作作答。",
-    "bad_play": "无效的出牌。玩家 {player_id} 试图将 {card} 打到中央牌堆 {index}。",
-    "discard_from_payoff": "无效的弃牌。玩家 {player_id} 试图从补偿牌堆弃一张牌。",
-    "discard_not_in_hand": "无效的弃牌。玩家 {player_id} 试图弃一张不在手中的牌。",
-    "bad_move_type": "无效的动作类型。玩家 {player_id} 没有用有效的动作类型作答。"
+    "wrong_format": "操作格式无效。玩家 {player_id} 未使用方括号提交有效操作。",
+    "invalid_play": "出牌无效。玩家 {player_id} 尝试将 {card} 打到中央牌堆 {index}。",
+    "discard_from_payoff": "弃牌无效。玩家 {player_id} 尝试弃置目标牌堆中的牌。",
+    "discard_not_in_hand": "弃牌无效。玩家 {player_id} 尝试弃置一张不在手中的牌。",
+    "wrong_move_type": "操作类型无效。玩家 {player_id} 未提交有效的操作类型。"
+  },
+
+  "game_action": {
+    "you_drew": "你抽取了牌。",
+    "opponent_drew": "玩家 {player_id} 抽取了牌。",
+    "you_played": "你将 {card} 打到了中央牌堆 {index}。",
+    "opponent_played": "玩家 {player_id} 将 {card} 打到了中央牌堆 {index}。",
+    "you_discarded": "你已将 {card} 弃置到弃牌堆 {index}，这也表示你的回合已经结束。本回合中你之后提交的任何操作都不会被考虑。接下来由玩家 {next_player_id} 行动。",
+    "opponent_discarded": "玩家 {player_id} 将 {card} 弃置到弃牌堆 {index}，这也表示其回合已经结束。本回合中玩家 {player_id} 之后提交的任何操作都不会被考虑。玩家 {next_player_id}，接下来由你行动。请按 [action card center_index] 格式输入操作。"
   },
 
   "outcome": {
-    "payoff_win": "玩家 {player_id} 已清空补偿牌堆！玩家 {player_id} 获胜！",
-    "deadlock_p0": "陷入僵局！玩家 0 以剩余 {p0} 张牌获胜，玩家 1 剩余 {p1} 张牌。",
-    "deadlock_p1": "陷入僵局！玩家 1 以剩余 {p1} 张牌获胜，玩家 0 剩余 {p0} 张牌。",
-    "deadlock_tie": "陷入僵局且平局！双方玩家均剩余 {p0} 张牌。玩家 {player_id} 按默认获胜。"
+    "payoff_cleared": "玩家 {current_player} 已清空目标牌堆！玩家 {current_player} 获胜！",
+    "deadlock_player_0": "游戏陷入僵局！玩家 0 剩余 {player_0_payoff} 张牌，少于玩家 1 剩余的 {player_1_payoff} 张牌，因此玩家 0 获胜。",
+    "deadlock_player_1": "游戏陷入僵局！玩家 1 剩余 {player_1_payoff} 张牌，少于玩家 0 剩余的 {player_0_payoff} 张牌，因此玩家 1 获胜。",
+    "deadlock_tie": "游戏陷入僵局且双方平局！两位玩家都剩余 {player_0_payoff} 张牌。玩家 {current_player} 默认获胜。"
   }
 }

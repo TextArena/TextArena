@@ -1,53 +1,43 @@
 {
-  "_comment": "Stratego-Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel, nur die Werte. Behalte jeden {platzhalter} exakt bei. Übersetze niemals Brettkoordinaten wie A0/B0, die in Slots übergebenen Rangnamen ({attacker}/{target}), das Zugformat '[A0 B0]', die Figurenkürzel (MN, MS, ...), das Seenzeichen '~' oder das ASCII-Brett {board}.",
-  "_slots": {
-    "{player_id}": "Die Spielernummer, 0 oder 1",
-    "{source}": "Die Startkoordinate eines Zugs, z. B. A0 (nicht übersetzen)",
-    "{dest}": "Die Zielkoordinate eines Zugs, z. B. B0 (nicht übersetzen)",
-    "{attacker}": "Der Rangname der angreifenden Figur auf Englisch, z. B. Scout, Miner, Marshal (nicht übersetzen)",
-    "{target}": "Der Rangname der verteidigenden Figur auf Englisch, z. B. Bomb, Flag, Marshal (nicht übersetzen)",
-    "{board}": "Das vorgerenderte ASCII-Brett (nicht übersetzen)",
-    "{moves}": "Neutrale, kommagetrennte Liste zulässiger Züge wie [A0 B0], [D2 E2] (nicht übersetzen)",
-    "{winner}": "Die Nummer des Gewinners, 0 oder 1",
-    "{loser}": "Die Nummer des Verlierers, 0 oder 1"
-  },
   "player_prompt": {
-    "intro": "Du bist Spieler {player_id} in Stratego.\nDein Ziel ist es, die Flagge deines Gegners zu erobern oder alle seine beweglichen Figuren auszuschalten.\nDeine Armee wurde für dich auf dem Brett aufgestellt, einschließlich deiner Flagge, Bomben und weiterer Figuren unterschiedlicher Ränge.\n\n### Spielanleitung\n1. **Bewegungsregeln:**\n   - Du kannst in deinem Zug eine Figur um ein Feld auf ein angrenzendes Feld (oben, unten, links oder rechts) bewegen, das nicht bereits mit deinen eigenen Figuren belegt ist.\n   - Beispiel: Eine Figur kann von A1 nach B1 oder von A1 nach A2 ziehen, wenn B1 und A2 nicht mit eigenen Figuren des Spielers belegt sind.\n   - Ist die gewählte Figur eine Bombe oder eine Flagge, kann sie nicht bewegt werden.\n2. **Kämpfe:**\n   - Ziehst du auf ein Feld, das von einer gegnerischen Figur besetzt ist, kommt es zu einem Kampf:\n     - Die Figur mit dem höheren Rang gewinnt und schaltet die gegnerische Figur aus.\n     - Sind die Ränge gleich, werden beide Figuren vom Brett entfernt.\n     - **Sonderfälle:**\n       - Bomben schalten die meisten angreifenden Figuren aus, außer Mineure, die Bomben entschärfen.\n       - Spione können den Marschall besiegen, wenn der Spion zuerst angreift, verlieren aber gegen alle anderen Figuren.\n3. **Strategische Ziele:**\n   - Erkenne die Figuren deines Gegners anhand ihrer Bewegungen und Kämpfe.\n   - Schütze deine Flagge, während du versuchst, die Flagge deines Gegners zu erobern.\n   - Setze Späher strategisch ein, um Informationen über die Figuren deines Gegners zu gewinnen und schwache anzugreifen.\n\n### So machst du einen Zug:\n1. Gib die Koordinaten der Figur, die du bewegen möchtest, und ihres Ziels an.\n2. Verwende das Format: [A0 B0], wobei A0 die Startposition und B0 das Ziel ist.\n   - Beispiel: Um eine Figur von Reihe 0, Spalte 0 nach Reihe 1, Spalte 0 zu bewegen, gib [A0 B0] ein.\n3. Stelle sicher, dass das Ziel gemäß den obigen Bewegungsregeln gültig ist.\n\n### Wichtige Hinweise:\n- Das Brett zeigt deine Figuren und ihre Positionen, z. B. MN, MS.\n- Das Brett zeigt außerdem bekannte Positionen der gegnerischen Figuren, ohne ihre Ränge preiszugeben, z. B. ?.\n- Felder mit ~ sind Seen und können nicht betreten werden.\n- Als Tipp: Beginne dein Spiel, indem du deine Figuren an der Frontlinie bewegst, um Informationen über die Figuren deines Gegners zu gewinnen. Die Frontlinien von Spieler 0 und Spieler 1 sind Reihe D bzw. G.\n\nHier ist der aktuelle Brettzustand:\n"
+    "intro": "Du bist Spieler {player_id} in Stratego.\nDein Ziel ist es, die Fahne deines Gegners zu erobern oder alle seine beweglichen Figuren auszuschalten.\nDeine Armee wurde bereits für dich auf dem Spielbrett aufgestellt, einschließlich deiner Fahne, Bomben und anderer Figuren mit verschiedenen Rängen.\n\n### Spielanleitung\n1. **Bewegungsregeln:**\n   - Wenn du am Zug bist, kannst du eine Figur um ein Feld auf ein angrenzendes Feld bewegen (nach oben, unten, links oder rechts), das bereits von deinen Figuren besetzt ist.\n   - Beispiel: Eine Figur kann von A1 nach B1 oder von A1 nach A2 bewegt werden, sofern B1 und A2 nicht mit eigenen Figuren des Spielers besetzt sind.\n   - Handelt es sich bei der ausgewählten Figur um eine Bombe oder die Fahne, kann sie nicht bewegt werden.\n2. **Kämpfe:**\n   - Wenn du dich auf ein Feld bewegst, das von einer gegnerischen Figur besetzt ist, kommt es zu einem Kampf:\n     - Die Figur mit dem höheren Rang gewinnt und entfernt die gegnerische Figur.\n     - Sind die Ränge gleich, werden beide Figuren vom Spielbrett entfernt.\n     - **Sonderfälle:**\n       - Bomben besiegen die meisten angreifenden Figuren, außer Mineure, die Bomben entschärfen können.\n       - Spione können den Marschall besiegen, wenn der Spion zuerst angreift, verlieren jedoch gegen alle anderen Figuren.\n3. **Strategische Ziele:**\n   - Ermittle die Figuren deines Gegners anhand ihrer Bewegungen und Kämpfe.\n   - Beschütze deine Fahne, während du versuchst, die Fahne deines Gegners zu erobern.\n   - Setze Aufklärer strategisch ein, um Informationen über die Figuren deines Gegners zu erhalten und schwache Figuren anzugreifen.\n\n### So führst du einen Zug aus:\n1. Gib die Koordinaten der Figur an, die du bewegen möchtest, sowie ihr Ziel.\n2. Verwende das Format [A0 B0], wobei A0 die Ausgangsposition und B0 das Ziel ist.\n   - Beispiel: Um eine Figur von Reihe 0, Spalte 0 nach Reihe 1, Spalte 0 zu bewegen, gib [A0 B0] ein.\n3. Stelle sicher, dass das Ziel gemäß den oben genannten Bewegungsregeln gültig ist.\n\n### Wichtige Hinweise:\n- Das Spielbrett zeigt deine Figuren und ihre Positionen an, z. B. MN und MS.\n- Das Spielbrett zeigt auch bekannte Positionen der gegnerischen Figuren an, ohne deren Ränge aufzudecken, z. B. ?.\n- Felder mit ~ sind Seen und können nicht betreten werden.\n- Es wird empfohlen, das Spiel zu beginnen, indem du deine Figuren an der Front bewegst, um Informationen über die Figuren deines Gegners zu erhalten. Die Frontlinien von Spieler 0 und Spieler 1 sind die Reihen D beziehungsweise G.\n\nHier ist der aktuelle Zustand des Spielbretts:\n"
   },
+
   "board": {
-    "current_board": "Aktuelles Brett:\n\n{board}\nVerfügbare Züge: {moves}"
+    "current_board": "Aktuelles Spielbrett:\n\n{board}\nVerfügbare Züge: {moves}"
   },
+
   "invalid_move": {
     "wrong_format": "Ungültiges Aktionsformat. Spieler {player_id} hat keinen Zug im Format [A0 B0] eingegeben.",
-    "invalid_coords": "Ungültiges Aktionsformat. Spieler {player_id} hat keine gültigen Koordinaten eingegeben.",
-    "not_own_piece": "Ungültiges Aktionsformat. Spieler {player_id} muss eine seiner eigenen Figuren bewegen.",
-    "scout_through": "Ungültiges Aktionsformat. Spieler {player_id} kann einen Späher nicht durch andere Figuren ziehen.",
-    "scout_diagonal": "Ungültiges Aktionsformat. Spieler {player_id} kann einen Späher nicht diagonal ziehen.",
-    "not_scout_one_square": "Ungültiges Aktionsformat. Figuren außer Spähern können sich nur ein Feld pro Zug bewegen.",
-    "into_lake": "Ungültiges Aktionsformat. Spieler {player_id} kann nicht in den See ziehen.",
-    "onto_own": "Ungültiges Aktionsformat. Spieler {player_id} kann nicht auf eine eigene Figur ziehen.",
-    "bomb_or_flag": "Ungültiges Aktionsformat. Spieler {player_id} kann eine Bombe oder Flagge nicht bewegen."
+    "invalid_coordinates": "Ungültiges Aktionsformat. Spieler {player_id} hat keine gültigen Koordinaten eingegeben.",
+    "not_own_piece": "Ungültiges Aktionsformat. Spieler {player_id} muss eine eigene Figur bewegen.",
+    "scout_through_pieces": "Ungültiges Aktionsformat. Spieler {player_id} kann einen Aufklärer nicht durch andere Figuren hindurchbewegen.",
+    "scout_diagonal": "Ungültiges Aktionsformat. Spieler {player_id} kann einen Aufklärer nicht diagonal bewegen.",
+    "non_scout_multi_square": "Ungültiges Aktionsformat. Figuren können sich mit Ausnahme von Aufklärern jeweils nur um ein Feld bewegen.",
+    "move_into_lake": "Ungültiges Aktionsformat. Spieler {player_id} kann sich nicht in einen See bewegen.",
+    "move_onto_own_piece": "Ungültiges Aktionsformat. Spieler {player_id} kann sich nicht auf eine eigene Figur bewegen.",
+    "move_bomb_or_flag": "Ungültiges Aktionsformat. Spieler {player_id} kann keine Bombe oder Fahne bewegen."
   },
+
   "game_action": {
-    "moved_self": "Du hast deine Figur von {source} nach {dest} bewegt.",
-    "moved_opp": "Spieler {player_id} hat eine Figur von {source} nach {dest} bewegt."
+    "you_moved": "Du hast deine Figur von {source} nach {dest} bewegt.",
+    "opponent_moved": "Spieler {player_id} hat eine Figur von {source} nach {dest} bewegt.",
+    "you_equal_ranks": "Du hast deine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacking_rank} und die Figur auf dem Zielfeld war {target_rank}. Da die Ränge gleich waren, wurden beide Figuren entfernt.",
+    "opponent_equal_ranks": "Spieler {player_id} hat eine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacking_rank} und die Figur auf dem Zielfeld war {target_rank}. Da die Ränge gleich waren, wurden beide Figuren entfernt.",
+    "you_miner_defused": "Du hast deine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacking_rank} und die Figur auf dem Zielfeld war {target_rank}. Da Mineure Bomben entschärfen können, hast du den Kampf gewonnen.",
+    "opponent_miner_defused": "Spieler {player_id} hat eine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacking_rank} und die Figur auf dem Zielfeld war {target_rank}. Da Mineure Bomben entschärfen können, hast du den Kampf verloren.",
+    "you_bomb_lost": "Du hast deine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacking_rank} und die Figur auf dem Zielfeld war {target_rank}. Da der Angreifer kein Mineur war, hast du den Kampf verloren.",
+    "opponent_bomb_won": "Spieler {player_id} hat eine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacking_rank} und die Figur auf dem Zielfeld war {target_rank}. Da der Angreifer kein Mineur war, hast du den Kampf gewonnen.",
+    "you_spy_won": "Du hast deine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacking_rank} und die Figur auf dem Zielfeld war {target_rank}. Da der Angreifer ein Spion und die Figur auf dem Zielfeld ein Marschall war, hast du den Kampf gewonnen.",
+    "opponent_spy_lost": "Spieler {player_id} hat eine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacking_rank} und die Figur auf dem Zielfeld war {target_rank}. Da der Angreifer ein Spion und die Figur auf dem Zielfeld ein Marschall war, hast du den Kampf verloren.",
+    "you_higher_won": "Du hast deine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacking_rank} und die Figur auf dem Zielfeld war {target_rank}. Da der Angreifer einen höheren Rang als die Zielfigur hatte, hast du den Kampf gewonnen.",
+    "opponent_higher_lost": "Spieler {player_id} hat eine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacking_rank} und die Figur auf dem Zielfeld war {target_rank}. Da der Angreifer einen höheren Rang als die Zielfigur hatte, hast du den Kampf verloren.",
+    "you_lower_lost": "Du hast deine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacking_rank} und die Figur auf dem Zielfeld war {target_rank}. Da der Angreifer einen niedrigeren Rang als die Zielfigur hatte, hast du den Kampf verloren.",
+    "opponent_lower_won": "Spieler {player_id} hat eine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacking_rank} und die Figur auf dem Zielfeld war {target_rank}. Da der Angreifer einen niedrigeren Rang als die Zielfigur hatte, hast du den Kampf gewonnen."
   },
-  "battle": {
-    "equal_self": "Du hast deine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacker} und die Zielfigur war {target}. Da die Ränge gleich sind, sind beide Figuren verloren.",
-    "equal_opp": "Spieler {player_id} hat eine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacker} und die Zielfigur war {target}. Da die Ränge gleich sind, sind beide Figuren verloren.",
-    "miner_defuse_self": "Du hast deine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacker} und die Zielfigur war {target}. Da Mineure Bomben entschärfen können, hast du den Kampf gewonnen.",
-    "miner_defuse_opp": "Spieler {player_id} hat eine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacker} und die Zielfigur war {target}. Da Mineure Bomben entschärfen können, hast du den Kampf verloren.",
-    "bomb_self": "Du hast deine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacker} und die Zielfigur war {target}. Da der Angreifer kein Mineur ist, hast du den Kampf verloren.",
-    "bomb_opp": "Spieler {player_id} hat eine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacker} und die Zielfigur war {target}. Da der Angreifer kein Mineur ist, hast du den Kampf gewonnen.",
-    "spy_marshal_self": "Du hast deine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacker} und die Zielfigur war {target}. Da der Angreifer ein Spion und das Ziel ein Marschall ist, hast du den Kampf gewonnen.",
-    "spy_marshal_opp": "Spieler {player_id} hat eine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacker} und die Zielfigur war {target}. Da der Angreifer ein Spion und das Ziel ein Marschall ist, hast du den Kampf verloren.",
-    "higher_self": "Du hast deine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacker} und die Zielfigur war {target}. Da der Angreifer einen höheren Rang als das Ziel hat, hast du den Kampf gewonnen.",
-    "higher_opp": "Spieler {player_id} hat eine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacker} und die Zielfigur war {target}. Da der Angreifer einen höheren Rang als das Ziel hat, hast du den Kampf verloren.",
-    "lower_self": "Du hast deine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacker} und die Zielfigur war {target}. Da der Angreifer einen niedrigeren Rang als das Ziel hat, hast du den Kampf verloren.",
-    "lower_opp": "Spieler {player_id} hat eine Figur von {source} nach {dest} bewegt. Die angreifende Figur war {attacker} und die Zielfigur war {target}. Da der Angreifer einen niedrigeren Rang als das Ziel hat, hast du den Kampf gewonnen."
-  },
+
   "outcome": {
-    "flag_captured": "Spieler {player_id} hat die Flagge des Gegners erobert!",
-    "no_movable_pieces": "Spieler {winner} gewinnt! Spieler {loser} hat keine beweglichen Figuren mehr."
+    "flag_captured": "Spieler {player_id} hat die gegnerische Fahne erobert!",
+    "no_movable_pieces": "Spieler {winner_id} gewinnt! Spieler {loser_id} hat keine beweglichen Figuren mehr."
   }
 }

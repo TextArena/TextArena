@@ -1,28 +1,32 @@
 {
-  "_comment": "UltimateTicTacToe 简体中文语言包。请勿翻译键名，只翻译值。请原样保留每个 {占位符}。",
-  "_slots": {
-    "{player_id}": "玩家编号，0 或 1",
-    "{symbol}": "玩家的标记，X 或 O",
-    "{macro}": "迷你棋盘索引（0-8）",
-    "{micro}": "迷你棋盘内的方格索引（0-8）",
-    "{row}": "迷你棋盘内的行",
-    "{col}": "迷你棋盘内的列",
-    "{opponent_id}": "对手的玩家编号",
-    "{next_target}": "说明对手下一步必须在何处落子的短语",
-    "{n}": "对手被迫落子的迷你棋盘索引",
-    "{board}": "渲染的 ASCII 棋盘（请勿翻译）"
+  "player_prompt": {
+    "intro": "你是 **Ultimate Tic Tac Toe** 对局中的玩家 {player_id}。\n请以 **[macro  micro]** 的格式提交你的落子，即两个 0 至 8 的数字：\n• *macro* = 你要落子的小棋盘\n• *micro* = 该小棋盘内的格子\n示例：`[7 8]` ➜ 将你的棋子放在小棋盘 7 的格子 8，并\n迫使对手下一步在小棋盘 8 中落子。\n\n你的棋子是 `{symbol}`。\n"
   },
-  "player_prompt": { "intro": "你是**终极井字棋**中的玩家 {player_id}。\n请以 **[大格  小格]** 的形式提交落子（两个 0-8 的数字）：\n• *大格*  = 你要下的迷你棋盘\n• *小格* = 该迷你棋盘内的方格\n示例 `[7 8]` ➜ 将你的标记放在迷你棋盘 7 的方格 8，并\n迫使对手接下来必须在迷你棋盘 8 落子。\n\n你是 `{symbol}`。\n" },
-  "board": { "current": "当前棋盘：\n{board}" },
+
+  "board": {
+    "current_board": "当前棋盘：\n{board}"
+  },
+
   "invalid_move": {
-    "wrong_format": "落子必须为 [大格 小格] 的形式，数字为 0-8。",
-    "out_of_range": "每个索引都必须在 0 到 8 之间。",
-    "range_recheck": "迷你棋盘、行或列超出范围。",
-    "already_occupied": "该方格已被占用。",
-    "wrong_board": "玩家必须在下一个迷你棋盘落子。",
-    "board_won": "该迷你棋盘已被赢下。"
+    "wrong_format": "落子必须采用 [macro micro] 格式，并使用 0 至 8 的数字。",
+    "out_of_range": "两个索引都必须介于 0 和 8 之间。",
+    "index_out_of_range": "micro_board、行号或列号超出范围。",
+    "cell_occupied": "该格子已被占用。",
+    "wrong_micro_board": "玩家必须在指定的下一个小棋盘中落子。",
+    "micro_board_won": "该小棋盘已经分出胜负。"
   },
-  "next_target": { "any": "任意迷你棋盘", "specific": "迷你棋盘 {n}" },
-  "game_action": { "played": "玩家 {player_id} 在迷你棋盘 {macro} 的方格 {micro}（第 {row} 行，第 {col} 列）落子。玩家 {opponent_id} 现在必须在{next_target}落子。" },
-  "outcome": { "win": "玩家 {player_id} 赢得终极井字棋！", "draw": "游戏平局！" }
+
+  "next_board": {
+    "any": "任意小棋盘",
+    "specific": "小棋盘 {nxt}"
+  },
+
+  "game_action": {
+    "played": "玩家 {player_id} 在小棋盘 {macro_idx} 的格子 {micro_idx} 落子（行 {row}，列 {col}）。玩家 {opponent_id} 现在必须在{nxt_txt}中落子。"
+  },
+
+  "outcome": {
+    "win": "玩家 {player_id} 赢得 Ultimate Tic Tac Toe！",
+    "draw": "本局游戏平局！"
+  }
 }

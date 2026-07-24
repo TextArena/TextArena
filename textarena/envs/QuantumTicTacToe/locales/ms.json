@@ -1,41 +1,30 @@
 {
-  "_comment": "Fail bahasa QuantumTicTacToe dalam bahasa Melayu. JANGAN terjemahkan kunci (sebelah kiri), hanya nilai (sebelah kanan). Kekalkan setiap {placeholder} tepat seperti asal. Token gerakan seperti '[a,b]', koordinat petak seperti (0, 1), label tanda seperti 'X1 / X1', simbol X dan O serta papan ASCII TIDAK diterjemahkan.",
-  "_slots": {
-    "{player_id}": "Nombor pemain, 0 atau 1",
-    "{symbol}": "Tanda pemain, X atau O",
-    "{parity}": "Perkataan untuk pariti nombor gerakan, 'odd' (ganjil) atau 'even' (genap)",
-    "{board}": "Papan ASCII yang dipaparkan (jangan terjemah)",
-    "{pos_a}": "Sepasang koordinat petak seperti (0, 1) (jangan terjemah)",
-    "{pos_b}": "Sepasang koordinat petak seperti (0, 2) (jangan terjemah)",
-    "{cell}": "Sepasang koordinat petak seperti (1, 2) (jangan terjemah)"
-  },
-
   "player_prompt": {
-    "intro":            "Anda ialah Pemain {player_id} dalam Quantum Tic Tac Toe.\nSimbol anda ialah '{symbol}', dan nombor gerakan anda sentiasa {parity} (cth., X1, X3 atau O2, O4).\n\nMatlamat: Menang dengan membentuk satu barisan tiga tanda klasik (dipejalkan daripada superposisi).\n\nCara Bermain:\n- Pada setiap giliran, letakkan tanda hantu pada dua petak kosong yang berbeza menggunakan format '[a,b]'.\n- Tanda-tanda ini terjerat, dan dilabelkan seperti 'X1 / X1' atau 'O4 / O4'.\n- Anda tidak boleh meletakkan tanda hantu pada petak yang telah runtuh (dipejalkan).\n\nPeraturan Keruntuhan:\n- Jika gerakan anda mewujudkan kitaran dalam graf keterjeratan, ia akan runtuh secara automatik.\n- Setiap tanda hantu dalam kitaran bertukar menjadi tanda klasik pada salah satu daripada dua kedudukannya.\n- Sebarang tanda hantu bergantung juga akan runtuh.\n\nKemenangan:\n- Permainan tamat apabila seorang pemain mempunyai tiga tanda klasik dalam satu barisan.\n- Jika kedua-dua pemain mendapat satu barisan semasa keruntuhan yang sama, pemain dengan nombor gerakan maksimum yang lebih rendah menang.\n\nContoh gerakan: '[0,4]' meletakkan tanda hantu pada petak 0 dan 4."
+    "intro": "Anda ialah Pemain {player_id} dalam permainan Tic Tac Toe Kuantum.\nSimbol anda ialah '{symbol}', dan nombor langkah anda sentiasa {parity}, contohnya X1 dan X3 atau O2 dan O4.\n\nMatlamat: Menang dengan membentuk satu garisan yang terdiri daripada tiga tanda klasik yang telah dimuktamadkan daripada superposisi.\n\nCara Bermain:\n- Pada setiap giliran, letakkan satu tanda bayangan pada dua petak kosong yang berbeza menggunakan format '[a,b]'.\n- Tanda-tanda ini terbelit dan dilabel seperti 'X1 / X1' atau 'O4 / O4'.\n- Anda tidak boleh meletakkan tanda bayangan pada petak yang telah runtuh dan dimuktamadkan.\n\nPeraturan Keruntuhan:\n- Jika langkah anda menghasilkan satu kitaran dalam graf keterbelitan, graf tersebut akan runtuh secara automatik.\n- Setiap tanda bayangan dalam kitaran akan menjadi tanda klasik pada salah satu daripada dua kedudukannya.\n- Semua tanda bayangan yang bergantung padanya juga akan runtuh.\n\nKemenangan:\n- Permainan berakhir apabila seorang pemain mempunyai tiga tanda klasik dalam satu garisan.\n- Jika kedua-dua pemain memperoleh satu garisan semasa keruntuhan yang sama, pemain yang mempunyai nombor langkah maksimum yang lebih rendah akan menang.\n\nContoh langkah: '[0,4]' meletakkan satu tanda bayangan pada sel 0 dan 4."
   },
 
   "board": {
-    "current_board":    "Papan Quantum Tic Tac Toe:\n\n{board}\n\nHantar gerakan anda sebagai '[a,b]' untuk meletakkan tanda kuantum pada dua lokasi."
+    "current_board": "Papan Tic Tac Toe Kuantum:\n\n{board}\n\nHantar langkah anda sebagai '[a,b]' untuk meletakkan satu tanda kuantum pada dua lokasi."
   },
 
   "invalid_move": {
-    "wrong_format":     "Format tidak sah. Gunakan '[a,b]'.",
-    "bad_indices":      "Indeks petak tidak sah atau berulang.",
-    "already_solid":    "Salah satu petak telah pun dipejalkan."
+    "wrong_format": "Format tidak sah. Gunakan '[a,b]'.",
+    "invalid_cells": "Indeks sel tidak sah atau berulang.",
+    "already_solidified": "Salah satu sel telah dimuktamadkan."
   },
 
   "game_action": {
-    "placed":           "Pemain {player_id} meletakkan simbolnya dalam superposisi antara petak {pos_a} dan {pos_b}."
+    "placed": "Pemain {player_id} meletakkan simbolnya dalam keadaan superposisi antara sel {pos_a} dan {pos_b}."
   },
 
-  "collapse": {
-    "resolved":         "Superposisi diselesaikan. Petak {cell} kini {symbol}.",
-    "dependent":        "Superposisi bergantung diselesaikan. Petak {cell} kini {symbol}.",
-    "last_cell":        "Superposisi untuk petak terakhir diselesaikan. Petak {cell} kini {symbol}."
+  "game_message": {
+    "dependent_resolved": "Superposisi bersandar telah diselesaikan. Sel ({r}, {c}) kini ialah {symbol}.",
+    "last_cell_resolved": "Superposisi bagi sel terakhir telah diselesaikan. Sel ({r}, {c}) kini ialah {symbol}.",
+    "superposition_resolved": "Superposisi telah diselesaikan. Sel ({r}, {c}) kini ialah {symbol}."
   },
 
   "outcome": {
-    "win":              "Pemain {player_id} menang dengan tanda yang dipejalkan!",
-    "draw":             "Permainan ini seri!"
+    "win": "Pemain {player_id} menang dengan tanda yang telah dimuktamadkan!",
+    "draw": "Permainan berakhir dengan keputusan seri!"
   }
 }

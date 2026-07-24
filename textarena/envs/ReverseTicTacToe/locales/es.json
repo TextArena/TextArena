@@ -1,25 +1,24 @@
 {
-  "_comment": "Archivo de idioma de ReverseTicTacToe en español. NO traduzcas las claves, solo los valores. Mantén cada {marcador} tal cual.",
-  "_slots": {
-    "{player_id}": "El número del jugador, por ejemplo 0 o 1",
-    "{symbol}": "La marca propia del jugador, X u O",
-    "{opponent_symbol}": "La marca del oponente, X u O",
-    "{cell}": "Un número de casilla entre 0 y 8",
-    "{board}": "El tablero ASCII renderizado (no traducir)",
-    "{moves}": "La lista separada por comas de movimientos disponibles como '[4]' (no traducir)"
-  },
   "player_prompt": {
-    "intro": "Eres el jugador {player_id} en una partida de Tres en Raya Inverso. Tu símbolo es '{symbol}'.\nEl objetivo es evitar conseguir tres en línea (horizontal, vertical o diagonal).\nSi haces tres en línea, PIERDES.\nEnvía tu jugada con el formato '[4]' para colocar tu símbolo en la casilla 4.\nComo jugador {player_id}, eres '{symbol}' y tu oponente es '{opponent_symbol}'."
+    "intro": "Eres el jugador {player_id} en una partida de tres en raya inverso. Tu símbolo es '{symbol}'.\nEl objetivo es evitar formar una línea de tres símbolos, ya sea horizontal, vertical o diagonalmente.\nSi formas una línea de tres, PIERDES.\nEnvía tu movimiento con el formato '[4]' para colocar tu símbolo en la celda 4.\nComo jugador {player_id}, eres '{symbol}' y tu oponente es '{opponent_symbol}'."
   },
-  "board": { "current_board": "Tablero actual:\n\n{board}\n\nMovimientos disponibles: {moves}" },
+
+  "board": {
+    "current_board": "Tablero actual:\n\n{board}\n\nMovimientos disponibles: {moves}"
+  },
+
   "invalid_move": {
-    "wrong_format": "Formato de jugada no válido. Usa '[casilla]'.",
-    "invalid_cell": "Índice de casilla no válido.",
-    "already_occupied": "La casilla {cell} ya está ocupada."
+    "wrong_format": "Formato de movimiento no válido. Utiliza '[cell]'.",
+    "invalid_cell": "Índice de celda no válido.",
+    "already_occupied": "La celda {cell} ya está ocupada."
   },
-  "game_action": { "placed": "El jugador {player_id} colocó su símbolo ({symbol}) en la casilla {cell}." },
+
+  "game_action": {
+    "placed": "El jugador {player_id} colocó su símbolo ({symbol}) en la celda {cell}."
+  },
+
   "outcome": {
-    "lose": "¡El jugador {player_id} pierde por completar una línea!",
+    "loss": "¡El jugador {player_id} pierde al completar una línea!",
     "draw": "¡Es un empate! Nadie perdió."
   }
 }

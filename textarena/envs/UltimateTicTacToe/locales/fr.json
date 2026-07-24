@@ -1,28 +1,32 @@
 {
-  "_comment": "Fichier de langue UltimateTicTacToe en français. Ne traduisez PAS les clés, uniquement les valeurs. Conservez chaque {placeholder} tel quel.",
-  "_slots": {
-    "{player_id}": "Le numéro du joueur, 0 ou 1",
-    "{symbol}": "Le symbole du joueur, X ou O",
-    "{macro}": "L’indice du mini-plateau (0-8)",
-    "{micro}": "L’indice de case (0-8) dans le mini-plateau",
-    "{row}": "La ligne dans le mini-plateau",
-    "{col}": "La colonne dans le mini-plateau",
-    "{opponent_id}": "Le numéro du joueur adverse",
-    "{next_target}": "Une phrase indiquant où l’adversaire doit jouer ensuite",
-    "{n}": "Un indice de mini-plateau imposé à l’adversaire",
-    "{board}": "Le plateau ASCII affiché (ne pas traduire)"
+  "player_prompt": {
+    "intro": "Vous êtes le joueur {player_id} dans une partie de **Ultimate Tic Tac Toe**.\nSoumettez votre coup sous la forme **[macro  micro]**, avec deux nombres de 0 à 8 :\n• *macro* = le miniplateau dans lequel vous jouez\n• *micro* = la case dans ce miniplateau\nExemple : `[7 8]` ➜ placez votre symbole dans le miniplateau 7, sur la case 8, et\nobligez votre adversaire à jouer ensuite dans le miniplateau 8.\n\nVous jouez avec le symbole `{symbol}`.\n"
   },
-  "player_prompt": { "intro": "Vous êtes le joueur {player_id} au **Morpion Ultime**.\nSoumettez votre coup sous la forme **[macro  micro]** (deux nombres 0-8) :\n• *macro*  = dans quel mini-plateau vous jouez\n• *micro* = quelle case dans ce mini-plateau\nExemple `[7 8]` ➜ placez votre marque dans le mini-plateau 7, case 8, et\nforcez votre adversaire à jouer dans le mini-plateau 8 ensuite.\n\nVous êtes `{symbol}`.\n" },
-  "board": { "current": "Plateau actuel :\n{board}" },
+
+  "board": {
+    "current_board": "Plateau actuel :\n{board}"
+  },
+
   "invalid_move": {
-    "wrong_format": "Le coup doit être de la forme [macro micro] avec des nombres 0-8.",
+    "wrong_format": "Le coup doit être au format [macro micro], avec des nombres de 0 à 8.",
     "out_of_range": "Chaque indice doit être compris entre 0 et 8.",
-    "range_recheck": "Le mini-plateau, la ligne ou la colonne est hors limites.",
-    "already_occupied": "La case est déjà occupée.",
-    "wrong_board": "Le joueur doit jouer dans le prochain mini-plateau.",
-    "board_won": "Le mini-plateau est déjà gagné."
+    "index_out_of_range": "Le micro_board, la ligne ou la colonne est hors limites.",
+    "cell_occupied": "La case est déjà occupée.",
+    "wrong_micro_board": "Le joueur doit jouer dans le prochain miniplateau imposé.",
+    "micro_board_won": "Ce miniplateau a déjà été remporté."
   },
-  "next_target": { "any": "n’importe quel mini-plateau", "specific": "le mini-plateau {n}" },
-  "game_action": { "played": "Le joueur {player_id} a joué dans le mini-plateau {macro}, case {micro} (ligne {row}, colonne {col}). Le joueur {opponent_id} doit maintenant jouer dans {next_target}." },
-  "outcome": { "win": "Le joueur {player_id} gagne le Morpion Ultime !", "draw": "La partie se termine par un match nul !" }
+
+  "next_board": {
+    "any": "n'importe quel miniplateau",
+    "specific": "le miniplateau {nxt}"
+  },
+
+  "game_action": {
+    "played": "Le joueur {player_id} a joué dans le miniplateau {macro_idx}, sur la case {micro_idx} (ligne {row}, colonne {col}). Le joueur {opponent_id} doit maintenant jouer dans {nxt_txt}."
+  },
+
+  "outcome": {
+    "win": "Le joueur {player_id} remporte Ultimate Tic Tac Toe !",
+    "draw": "La partie se termine par un match nul !"
+  }
 }

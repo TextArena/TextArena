@@ -1,42 +1,29 @@
 {
-  "_comment": "Fichier de langue du Jeu de Mémoire en français. Les jetons de coup comme [0 1 1 0], les numéros de ligne/colonne, les étiquettes des cartes (A, B, ...) et le plateau ASCII sont NEUTRES : ils sont passés comme placeholders et ne doivent jamais être traduits.",
-  "_slots": {
-    "player_id": "identifiant entier du joueur qui agit (0 ou 1)",
-    "winner_id": "identifiant entier du joueur gagnant (0 ou 1)",
-    "board": "plateau ASCII déjà rendu, transmis tel quel (ne pas traduire)",
-    "r1": "ligne de la première carte sélectionnée (entier)",
-    "c1": "colonne de la première carte sélectionnée (entier)",
-    "r2": "ligne de la seconde carte sélectionnée (entier)",
-    "c2": "colonne de la seconde carte sélectionnée (entier)",
-    "pos1": "étiquette de la carte révélée à la première position (par ex. H) ; neutre, ne pas traduire",
-    "pos2": "étiquette de la carte révélée à la seconde position (par ex. B) ; neutre, ne pas traduire",
-    "score0": "score final du joueur 0 (entier)",
-    "score1": "score final du joueur 1 (entier)",
-    "reason": "phrase de limite de tours imbriquée passée dans le message de victoire par limite de tours"
+  "player_prompt": {
+    "intro": "Vous êtes le joueur {player_id}. Vous jouez au jeu de mémoire.\nVotre objectif est de former davantage de paires de cartes sur le plateau que votre adversaire.\nÀ votre tour, sélectionnez deux cartes à retourner en saisissant les numéros de ligne et de colonne de la première puis de la deuxième carte, comme dans '[0 1 1 0]'. La première carte se trouve alors à la ligne 0 et à la colonne 1, tandis que la deuxième se trouve à la ligne 1 et à la colonne 0.\nSi les deux cartes correspondent, vous marquez un point et elles restent face visible. Si elles ne correspondent pas, elles sont de nouveau retournées face cachée, par exemple sous la forme '.'.\nLa partie se termine lorsque toutes les paires ont été trouvées."
   },
-  "prompt": {
-    "intro": "Vous êtes le joueur {player_id}. Vous jouez au Jeu de Mémoire.\nVotre objectif est d'associer plus de paires de cartes sur le plateau que votre adversaire.\nÀ votre tour, sélectionnez deux cartes à retourner en saisissant les numéros de ligne et de colonne de la première et de la seconde carte respectivement, comme '[0 1 1 0]', où la première carte est en ligne 0 et colonne 1, et la seconde carte est en ligne 1 et colonne 0.\nSi les deux cartes correspondent, vous gagnez un point et les cartes restent face visible. Si elles ne correspondent pas, les cartes sont retournées face cachée, par ex. '.'.\nLa partie se termine lorsque toutes les paires ont été associées."
-  },
+
   "board": {
-    "initial": "Plateau actuel :\n{board}",
-    "current": "Plateau de jeu actuel :\n{board}"
+    "current_board": "Plateau actuel :\n{board}",
+    "current_game_board": "Plateau de jeu actuel :\n{board}"
   },
+
   "invalid_move": {
-    "wrong_format": "Format de coup invalide. Le joueur {player_id} n'a pas répondu avec une indication valide entre crochets.",
-    "out_of_bounds": "Coup invalide. Le joueur {player_id} a sélectionné une position hors limites.",
-    "same_card": "Coup invalide. Le joueur {player_id} a sélectionné deux fois la même carte.",
-    "already_matched": "Coup invalide. Le joueur {player_id} a sélectionné une ou les deux cartes déjà associées."
+    "wrong_format": "Format de coup non valide. Le joueur {player_id} n'a pas répondu avec une direction valide entre crochets.",
+    "out_of_bounds": "Coup non valide. Le joueur {player_id} a sélectionné une position située hors des limites.",
+    "same_card_twice": "Coup non valide. Le joueur {player_id} a sélectionné deux fois la même carte.",
+    "already_matched": "Coup non valide. Le joueur {player_id} a sélectionné une ou deux cartes appartenant déjà à une paire trouvée."
   },
+
   "game_message": {
-    "match": "Les cartes sélectionnées par le joueur {player_id} aux positions [{r1} {c1}] et [{r2} {c2}] correspondent !",
-    "no_match": "Les cartes sélectionnées par le joueur {player_id} ne correspondent pas. Les cartes aux positions [{r1} {c1}] et [{r2} {c2}] sont {pos1} et {pos2} respectivement."
+    "cards_match": "Les cartes sélectionnées par le joueur {player_id} aux positions [{r1} {c1}] et [{r2} {c2}] correspondent !",
+    "cards_no_match": "Les cartes sélectionnées par le joueur {player_id} ne correspondent pas. Les cartes aux positions [{r1} {c1}] et [{r2} {c2}] sont respectivement {pos1} et {pos2}."
   },
+
   "outcome": {
+    "draw": "Les deux joueurs ont trouvé le même nombre de paires de cartes.",
     "win": "Le joueur {winner_id} a gagné !",
-    "draw": "Les deux joueurs ont associé le même nombre de paires de cartes."
-  },
-  "turn_limit": {
-    "reached": "La limite de tours a été atteinte. La partie est terminée. Le joueur 0 a marqué {score0} points, le joueur 1 a marqué {score1} points.",
-    "win": "{reason} Le joueur {winner_id} a gagné !"
+    "turn_limit": "La limite de tours a été atteinte. La partie est terminée. Le joueur 0 a marqué {score_0} points et le joueur 1 a marqué {score_1} points.",
+    "turn_limit_win": "{reason} Le joueur {winner_id} a gagné !"
   }
 }

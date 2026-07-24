@@ -1,25 +1,24 @@
 {
-  "_comment": "ReverseTicTacToe 简体中文语言包。请勿翻译键名，只翻译值。请原样保留每个 {占位符}。",
-  "_slots": {
-    "{player_id}": "玩家编号，例如 0 或 1",
-    "{symbol}": "玩家自己的标记，X 或 O",
-    "{opponent_symbol}": "对手的标记，X 或 O",
-    "{cell}": "棋盘格子编号，0 到 8 之间",
-    "{board}": "渲染的 ASCII 棋盘（请勿翻译）",
-    "{moves}": "以逗号分隔的可用落子位置列表，如 '[4]'（请勿翻译）"
-  },
   "player_prompt": {
-    "intro": "你是逆向井字棋游戏中的玩家 {player_id}。你的标记是 '{symbol}'。\n目标是避免连成三个（横向、纵向或对角线）。\n如果你连成三个，你就输了。\n请使用格式 '[4]' 提交落子，将你的标记放入格子 4。\n作为玩家 {player_id}，你是 '{symbol}'，你的对手是 '{opponent_symbol}'。"
+    "intro": "你是反向井字棋中的玩家 {player_id}。你的符号是 '{symbol}'。\n目标是避免形成一条由三个符号组成的直线，无论是水平、垂直还是对角线方向。\n如果你形成了一条三连线，你就输了。\n请使用 '[4]' 格式提交移动，将你的符号放置在格子 4 中。\n作为玩家 {player_id}，你的符号是 '{symbol}'，对手的符号是 '{opponent_symbol}'。"
   },
-  "board": { "current_board": "当前棋盘：\n\n{board}\n\n可用落子位置：{moves}" },
+
+  "board": {
+    "current_board": "当前棋盘：\n\n{board}\n\n可用移动：{moves}"
+  },
+
   "invalid_move": {
-    "wrong_format": "落子格式不正确。请使用 '[格子]'。",
-    "invalid_cell": "无效的格子索引。",
+    "wrong_format": "移动格式无效。请使用 '[cell]'。",
+    "invalid_cell": "格子索引无效。",
     "already_occupied": "格子 {cell} 已被占用。"
   },
-  "game_action": { "placed": "玩家 {player_id} 将标记（{symbol}）放入格子 {cell}。" },
+
+  "game_action": {
+    "placed": "玩家 {player_id} 将其符号（{symbol}）放置在格子 {cell} 中。"
+  },
+
   "outcome": {
-    "lose": "玩家 {player_id} 因连成一线而输掉！",
+    "loss": "玩家 {player_id} 因完成一条直线而失败！",
     "draw": "平局！没有人输。"
   }
 }

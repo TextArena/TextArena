@@ -41,15 +41,14 @@ class OthelloEnv(ta.Env):
         game_state={"board": self.board, "rendered_board": self._render_board(), "black_count": b_count, "white_count": w_count, "valid_moves": valid_moves}
         self.state.reset(game_state=game_state, player_prompt_function=self._prompt, role_mapping={0: "Black", 1: "White"})
 
+        obs = self.m("board", "game_board", board=self.state.game_state['rendered_board'])
         if self.show_valid:
-            valid_part = self.m("board", "valid_moves", moves=", ".join([f"'{vm}'" for vm in valid_moves])) if valid_moves else self.m("board", "no_valid_moves_skip")
-        else:
-            valid_part = ""
-        obs = self.m("board", "observation_initial", board=self.state.game_state['rendered_board'], valid=valid_part, black=self.state.game_state['black_count'], white=self.state.game_state['white_count'])
+            obs = self.m("board", "valid_moves", observation=obs, moves=", ".join([f"'{vm}'" for vm in valid_moves])) if valid_moves else self.m("board", "no_valid_moves_reset", observation=obs)
+        obs = self.m("board", "scores_reset", observation=obs, black_count=self.state.game_state['black_count'], white_count=self.state.game_state['white_count'])
         self.state.add_observation(message=obs, observation_type=ta.ObservationType.GAME_BOARD)
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        piece, colour = (BLACK, self.m("pieces", "black")) if player_id == 0 else (WHITE, self.m("pieces", "white"))
+        piece, colour = (BLACK, "Black") if player_id == 0 else (WHITE, "White")
         return self.m("player_prompt", "intro", player_id=player_id, colour=colour, piece=piece)
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
@@ -61,7 +60,7 @@ class OthelloEnv(ta.Env):
         valid = self._valid_moves(piece)
         if not valid:
             self._handle_skip(pid, piece, opp)
-            obs = self.m("game_action", "skip_turn", pid=pid)
+            obs = self.m("game_action", "skipped", pid=pid)
         else:
             match = re.compile(r"\[\s*(\d+)\s*,?\s*(\d+)\s*\]").search(action)
             if match is None:
@@ -70,24 +69,23 @@ class OthelloEnv(ta.Env):
 
             r, c = map(int, match.groups())
             if [r, c] not in valid:
-                self.state.set_invalid_move(reason=self.m("invalid_move", "illegal", valid_list=valid))
+                self.state.set_invalid_move(reason=self.m("invalid_move", "illegal", valid=valid))
                 return self.state.step(rotate_player=False)
 
             flipped = self._place_and_flip(r, c, piece)
             obs = self.m("game_action", "played", pid=pid, piece=piece, r=r, c=c, flipped=flipped)
-
-
+            
+            
         self.state.add_observation(message=obs, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
         next_valid = self._valid_moves(opp)
         self.state.game_state["valid_moves"] = next_valid
         self._push_gamestate()
 
+        obs = self.m("board", "game_board", board=self.state.game_state['rendered_board'])
         if self.show_valid:
-            valid_part = self.m("board", "valid_moves", moves=", ".join([f"'{vm}'" for vm in next_valid])) if next_valid else self.m("board", "no_valid_moves_skip_endash")
-        else:
-            valid_part = ""
-        obs = self.m("board", "observation", board=self.state.game_state['rendered_board'], valid=valid_part, black=self.state.game_state['black_count'], white=self.state.game_state['white_count'])
+            obs = self.m("board", "valid_moves", observation=obs, moves=", ".join([f"'{vm}'" for vm in next_valid])) if next_valid else self.m("board", "no_valid_moves_step", observation=obs)
+        obs = self.m("board", "scores_step", observation=obs, black_count=self.state.game_state['black_count'], white_count=self.state.game_state['white_count'])
         self.state.add_observation(message=obs, observation_type=ta.ObservationType.GAME_BOARD)
 
         if self._game_over(): self._declare_winner()
@@ -147,7 +145,6 @@ class OthelloEnv(ta.Env):
 
     def _declare_winner(self):
         b, w = self._counts()
-        if b > w: self.state.set_winner(player_id=0, reason=self.m("outcome", "black_wins", b=b, w=w))
-        elif w > b: self.state.set_winner(player_id=1, reason=self.m("outcome", "white_wins", w=w, b=b))
-        else: self.state.set_draw(reason=self.m("outcome", "draw", b=b, w=w))
-
+        if b > w: self.state.set_winner(player_id=0, reason=self.m("outcome", "black_wins", black_count=b, white_count=w))
+        elif w > b: self.state.set_winner(player_id=1, reason=self.m("outcome", "white_wins", white_count=w, black_count=b))
+        else: self.state.set_draw(reason=self.m("outcome", "draw", black_count=b, white_count=w))

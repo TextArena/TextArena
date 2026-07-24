@@ -1,42 +1,29 @@
 {
-  "_comment": "Sprachdatei für das Memory-Spiel auf Deutsch. Zug-Token wie [0 1 1 0], Zeilen-/Spaltennummern, Kartenbeschriftungen (A, B, ...) und das ASCII-Brett sind NEUTRAL: Sie werden als Slots übergeben und dürfen nie übersetzt werden.",
-  "_slots": {
-    "player_id": "Ganzzahlige ID des handelnden Spielers (0 oder 1)",
-    "winner_id": "Ganzzahlige ID des Gewinners (0 oder 1)",
-    "board": "vorgerendertes ASCII-Brett, wird wörtlich übernommen (nicht übersetzen)",
-    "r1": "Zeile der ersten gewählten Karte (Ganzzahl)",
-    "c1": "Spalte der ersten gewählten Karte (Ganzzahl)",
-    "r2": "Zeile der zweiten gewählten Karte (Ganzzahl)",
-    "c2": "Spalte der zweiten gewählten Karte (Ganzzahl)",
-    "pos1": "an der ersten Position aufgedeckte Kartenbeschriftung (z. B. H); neutral, nicht übersetzen",
-    "pos2": "an der zweiten Position aufgedeckte Kartenbeschriftung (z. B. B); neutral, nicht übersetzen",
-    "score0": "Endpunktzahl von Spieler 0 (Ganzzahl)",
-    "score1": "Endpunktzahl von Spieler 1 (Ganzzahl)",
-    "reason": "eingebetteter Zuglimit-Satz, der in die Zuglimit-Siegmeldung übergeben wird"
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id}. Du spielst das Memory-Spiel.\nDein Ziel ist es, mehr Kartenpaare auf dem Spielfeld aufzudecken als dein Gegner.\nWähle in deinem Zug zwei Karten zum Aufdecken aus, indem du die Zeilen- und Spaltennummern der ersten und zweiten Karte in dieser Reihenfolge eingibst, zum Beispiel '[0 1 1 0]'. Dabei befindet sich die erste Karte in Zeile 0 und Spalte 1 und die zweite Karte in Zeile 1 und Spalte 0.\nWenn die beiden Karten übereinstimmen, erhältst du einen Punkt und die Karten bleiben aufgedeckt. Wenn sie nicht übereinstimmen, werden sie wieder verdeckt, zum Beispiel als '.'.\nDas Spiel endet, sobald alle Paare gefunden wurden."
   },
-  "prompt": {
-    "intro": "Du bist Spieler {player_id}. Du spielst das Memory-Spiel.\nDein Ziel ist es, mehr Kartenpaare auf dem Brett zu finden als dein Gegner.\nWähle in deinem Zug zwei Karten zum Umdrehen, indem du die Zeilen- und Spaltennummer der ersten und der zweiten Karte eingibst, z. B. '[0 1 1 0]', wobei die erste Karte in Zeile 0 und Spalte 1 und die zweite Karte in Zeile 1 und Spalte 0 liegt.\nWenn die beiden Karten übereinstimmen, erhältst du einen Punkt und die Karten bleiben aufgedeckt. Wenn sie nicht übereinstimmen, werden die Karten wieder umgedreht, z. B. '.'.\nDas Spiel endet, wenn alle Paare gefunden wurden."
-  },
+
   "board": {
-    "initial": "Aktuelles Brett:\n{board}",
-    "current": "Aktuelles Spielbrett:\n{board}"
+    "current_board": "Aktuelles Spielfeld:\n{board}",
+    "current_game_board": "Aktuelles Spielbrett:\n{board}"
   },
+
   "invalid_move": {
-    "wrong_format": "Ungültiges Zugformat. Spieler {player_id} hat nicht mit einer gültigen Angabe in eckigen Klammern geantwortet.",
-    "out_of_bounds": "Ungültiger Zug. Spieler {player_id} hat eine Position außerhalb des Bretts gewählt.",
-    "same_card": "Ungültiger Zug. Spieler {player_id} hat dieselbe Karte zweimal gewählt.",
-    "already_matched": "Ungültiger Zug. Spieler {player_id} hat eine oder beide bereits gefundene Karten gewählt."
+    "wrong_format": "Ungültiges Zugformat. Spieler {player_id} hat keine gültige Richtung in eckigen Klammern angegeben.",
+    "out_of_bounds": "Ungültiger Zug. Spieler {player_id} hat eine Position außerhalb des Spielfelds ausgewählt.",
+    "same_card_twice": "Ungültiger Zug. Spieler {player_id} hat dieselbe Karte zweimal ausgewählt.",
+    "already_matched": "Ungültiger Zug. Spieler {player_id} hat eine oder beide Karten ausgewählt, die bereits als Paar gefunden wurden."
   },
+
   "game_message": {
-    "match": "Die von Spieler {player_id} gewählten Karten an den Positionen [{r1} {c1}] und [{r2} {c2}] stimmen überein!",
-    "no_match": "Die von Spieler {player_id} gewählten Karten stimmen nicht überein. Die Karten an den Positionen [{r1} {c1}] und [{r2} {c2}] sind {pos1} bzw. {pos2}."
+    "cards_match": "Die von Spieler {player_id} an den Positionen [{r1} {c1}] und [{r2} {c2}] ausgewählten Karten stimmen überein!",
+    "cards_no_match": "Die von Spieler {player_id} ausgewählten Karten stimmen nicht überein. Die Karten an den Positionen [{r1} {c1}] und [{r2} {c2}] sind {pos1} beziehungsweise {pos2}."
   },
+
   "outcome": {
+    "draw": "Beide Spieler haben gleich viele Kartenpaare gefunden.",
     "win": "Spieler {winner_id} hat gewonnen!",
-    "draw": "Beide Spieler haben die gleiche Anzahl an Kartenpaaren gefunden."
-  },
-  "turn_limit": {
-    "reached": "Das Zuglimit wurde erreicht. Das Spiel ist vorbei. Spieler 0 erzielte {score0} Punkte, Spieler 1 erzielte {score1} Punkte.",
-    "win": "{reason} Spieler {winner_id} hat gewonnen!"
+    "turn_limit": "Das Zuglimit wurde erreicht. Das Spiel ist beendet. Spieler 0 erzielte {score_0} Punkte und Spieler 1 erzielte {score_1} Punkte.",
+    "turn_limit_win": "{reason} Spieler {winner_id} hat gewonnen!"
   }
 }

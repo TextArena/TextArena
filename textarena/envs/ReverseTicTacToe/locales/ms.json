@@ -1,25 +1,24 @@
 {
-  "_comment": "Fail bahasa ReverseTicTacToe — Bahasa Melayu. JANGAN terjemahkan kunci. Terjemahkan nilai sahaja. Kekalkan setiap {placeholder} seadanya.",
-  "_slots": {
-    "{player_id}": "Nombor pemain, contoh 0 atau 1",
-    "{symbol}": "Tanda pemain sendiri, X atau O",
-    "{opponent_symbol}": "Tanda lawan, X atau O",
-    "{cell}": "Nombor kotak papan, antara 0 hingga 8",
-    "{board}": "Papan ASCII yang dipaparkan (jangan terjemah)",
-    "{moves}": "Senarai langkah tersedia dipisahkan koma seperti '[4]' (jangan terjemah)"
-  },
   "player_prompt": {
-    "intro": "Anda ialah Pemain {player_id} dalam permainan Tic Tac Toe Songsang. Simbol anda ialah '{symbol}'.\nMatlamatnya adalah untuk mengelakkan tiga tanda berturut-turut (mendatar, menegak, atau pepenjuru).\nJika anda membuat tiga berturut-turut, anda KALAH.\nHantar langkah anda menggunakan format '[4]' untuk meletakkan simbol anda di kotak 4.\nSebagai Pemain {player_id}, anda ialah '{symbol}' dan lawan anda ialah '{opponent_symbol}'."
+    "intro": "Anda ialah Pemain {player_id} dalam permainan Tic Tac Toe Terbalik. Simbol anda ialah '{symbol}'.\nMatlamatnya adalah untuk mengelakkan daripada membentuk tiga simbol dalam satu garisan, sama ada secara mendatar, menegak atau menyerong.\nJika anda membentuk tiga simbol dalam satu garisan, anda KALAH.\nHantar langkah anda menggunakan format '[4]' untuk meletakkan simbol anda dalam sel 4.\nSebagai Pemain {player_id}, anda ialah '{symbol}' dan lawan anda ialah '{opponent_symbol}'."
   },
-  "board": { "current_board": "Papan Semasa:\n\n{board}\n\nLangkah Tersedia: {moves}" },
+
+  "board": {
+    "current_board": "Papan semasa:\n\n{board}\n\nLangkah tersedia: {moves}"
+  },
+
   "invalid_move": {
-    "wrong_format": "Format langkah tidak sah. Gunakan '[kotak]'.",
-    "invalid_cell": "Indeks kotak tidak sah.",
-    "already_occupied": "Kotak {cell} telah diduduki."
+    "wrong_format": "Format langkah tidak sah. Gunakan '[cell]'.",
+    "invalid_cell": "Indeks sel tidak sah.",
+    "already_occupied": "Sel {cell} telah diduduki."
   },
-  "game_action": { "placed": "Pemain {player_id} meletakkan simbolnya ({symbol}) di kotak {cell}." },
+
+  "game_action": {
+    "placed": "Pemain {player_id} meletakkan simbolnya ({symbol}) dalam sel {cell}."
+  },
+
   "outcome": {
-    "lose": "Pemain {player_id} kalah kerana melengkapkan satu baris!",
-    "draw": "Seri! Tiada siapa yang kalah."
+    "loss": "Pemain {player_id} kalah kerana melengkapkan satu garisan!",
+    "draw": "Permainan seri! Tiada sesiapa yang kalah."
   }
 }

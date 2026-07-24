@@ -1,42 +1,28 @@
 {
-  "_comment": "UltimateTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Move tokens like [7 8] and the board are not translated.",
-  "_slots": {
-    "{player_id}": "The player's number, 0 or 1",
-    "{symbol}": "The player's mark, X or O",
-    "{macro}": "The mini-board index (0-8) played in",
-    "{micro}": "The square index (0-8) inside the mini-board",
-    "{row}": "The row inside the mini-board",
-    "{col}": "The column inside the mini-board",
-    "{opponent_id}": "The opponent's player number",
-    "{next_target}": "A rendered phrase naming where the opponent must play next",
-    "{n}": "A mini-board index the opponent is forced into",
-    "{board}": "The rendered ASCII board (do not translate)"
-  },
-
   "player_prompt": {
     "intro":            "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
   },
 
   "board": {
-    "current":          "Current board:\n{board}"
+    "current_board":    "Current board:\n{board}"
   },
 
   "invalid_move": {
-    "wrong_format":     "Move must be in the form [macro micro] with numbers 0-8.",
-    "out_of_range":     "Indices must each be between 0 and 8.",
-    "range_recheck":    "The micro_board, row, or col is out of range.",
-    "already_occupied": "The cell is already occupied.",
-    "wrong_board":      "The player must play in the next micro board.",
-    "board_won":        "The micro board is already won."
+    "wrong_format":        "Move must be in the form [macro micro] with numbers 0-8.",
+    "out_of_range":        "Indices must each be between 0 and 8.",
+    "index_out_of_range":  "The micro_board, row, or col is out of range.",
+    "cell_occupied":       "The cell is already occupied.",
+    "wrong_micro_board":   "The player must play in the next micro board.",
+    "micro_board_won":     "The micro board is already won."
   },
 
-  "next_target": {
+  "next_board": {
     "any":              "any micro board",
-    "specific":         "micro board {n}"
+    "specific":         "micro board {nxt}"
   },
 
   "game_action": {
-    "played":           "Player {player_id} played in micro board {macro}, cell {micro} (row {row}, col {col}). Player {opponent_id} must now play in {next_target}."
+    "played":           "Player {player_id} played in micro board {macro_idx}, cell {micro_idx} (row {row}, col {col}). Player {opponent_id} must now play in {nxt_txt}."
   },
 
   "outcome": {

@@ -1,48 +1,25 @@
 {
-  "_comment": "Othello Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel (linke Seite), nur die Werte (rechte Seite). Behalte jeden {placeholder} exakt bei. Übersetze niemals Koordinaten, die Steinbuchstaben B/W, das Zugformat '[row, col]' oder das ASCII-Spielfeld. Orientiere dich an den verwandten Brettspielen (Spielfeld, gültige Züge, gewinnt, unentschieden).",
-  "_slots": {
-    "{player_id}": "Die Spielernummer, 0 oder 1",
-    "{pid}": "Die Spielernummer, 0 oder 1",
-    "{colour}": "Der dargestellte Farbname des Spielers (Schwarz / Weiß)",
-    "{piece}": "Der Steinbuchstabe des Spielers, entweder B oder W (nicht übersetzen)",
-    "{board}": "Das vorgerenderte ASCII-Spielfeld (nicht übersetzen)",
-    "{valid}": "Die vorgerenderte Zeile mit gültigen/keinen gültigen Zügen (kann leer sein)",
-    "{moves}": "Neutrale, durch Kommas getrennte Liste gültiger Züge wie '[2, 3]', '[3, 2]' (nicht übersetzen)",
-    "{valid_list}": "Neutrale Python-Listendarstellung der gültigen Züge (nicht übersetzen)",
-    "{black}": "Anzahl der schwarzen Steine auf dem Spielfeld",
-    "{white}": "Anzahl der weißen Steine auf dem Spielfeld",
-    "{r}": "Die Zeilenkoordinate des gespielten Zuges (nicht übersetzen)",
-    "{c}": "Die Spaltenkoordinate des gespielten Zuges (nicht übersetzen)",
-    "{flipped}": "Anzahl der durch den Zug umgedrehten gegnerischen Steine",
-    "{b}": "Endgültige Anzahl schwarzer Steine",
-    "{w}": "Endgültige Anzahl weißer Steine"
-  },
-
-  "pieces": {
-    "black": "Schwarz",
-    "white": "Weiß"
-  },
-
   "player_prompt": {
-    "intro": "Du bist Spieler {player_id} und spielst {colour} ({piece}) in einer Partie Othello.\nDein Ziel ist es, am Ende des Spiels mehr Steine deiner Farbe auf dem Spielfeld zu haben.\nSetze in deinem Zug einen Stein so, dass er einen oder mehrere gegnerische Steine in beliebiger Richtung (horizontal, vertikal oder diagonal) zwischen deinem neuen Stein und einem deiner bestehenden Steine einschließt. Alle eingeschlossenen gegnerischen Steine werden in deine Farbe umgedreht.\nGib deinen Zug im Format '[row, col]' an."
+    "intro": "Du bist Spieler {player_id} und spielst in einer Partie Othello mit {colour} ({piece}).\nDein Ziel ist es, am Ende des Spiels mehr Spielsteine deiner Farbe auf dem Brett zu haben.\nSetze in deinem Zug einen Spielstein so, dass er einen oder mehrere gegnerische Spielsteine in beliebiger Richtung, horizontal, vertikal oder diagonal, zwischen deinem neuen Spielstein und einem deiner bereits vorhandenen Spielsteine einschließt. Alle eingeschlossenen gegnerischen Spielsteine werden auf deine Farbe umgedreht.\nGib deinen Zug im Format '[row, col]' an."
   },
 
   "board": {
-    "observation_initial": "Spielfeld:\n{board}{valid}\nAktuelle Punkte - Schwarz: {black}, Weiß: {white}\n",
-    "observation": "Spielfeld:\n{board}{valid}\nPunkte - Schwarz: {black}, Weiß: {white}\n",
-    "valid_moves": "\nGültige Züge: {moves}",
-    "no_valid_moves_skip": "\nKeine gültigen Züge - du musst eventuell aussetzen.",
-    "no_valid_moves_skip_endash": "\nKeine gültigen Züge – du musst eventuell aussetzen."
+    "game_board": "Spielbrett:\n{board}",
+    "valid_moves": "{observation}\nGültige Züge: {moves}",
+    "no_valid_moves_reset": "{observation}\nKeine gültigen Züge - möglicherweise musst du aussetzen.",
+    "no_valid_moves_step": "{observation}\nKeine gültigen Züge – möglicherweise musst du aussetzen.",
+    "scores_reset": "{observation}\nAktueller Punktestand - Schwarz: {black_count}, Weiß: {white_count}\n",
+    "scores_step": "{observation}\nPunktestand - Schwarz: {black_count}, Weiß: {white_count}\n"
   },
 
   "invalid_move": {
     "wrong_format": "Der Zug muss das Format [row, col] haben.",
-    "illegal": "Ungültiger Zug. Gültige Züge: {valid_list}"
+    "illegal": "Ungültiger Zug. Gültige Züge: {valid}"
   },
 
   "game_action": {
-    "skip_turn": "Spieler {pid} musste seinen Zug aussetzen",
-    "played": "Spieler {pid} ({piece}) spielte [{r}, {c}] und drehte {flipped} Stein(e) um"
+    "skipped": "Spieler {pid} musste seinen Zug aussetzen",
+    "played": "Spieler {pid} ({piece}) setzte auf [{r}, {c}] und drehte {flipped} Spielstein(e) um"
   },
 
   "game_message": {
@@ -50,8 +27,8 @@
   },
 
   "outcome": {
-    "black_wins": "Schwarz gewinnt {b}-{w}.",
-    "white_wins": "Weiß gewinnt {w}-{b}.",
-    "draw": "Unentschieden {b}-{w}."
+    "black_wins": "Schwarz gewinnt {black_count}-{white_count}.",
+    "white_wins": "Weiß gewinnt {white_count}-{black_count}.",
+    "draw": "Unentschieden {black_count}-{white_count}."
   }
 }

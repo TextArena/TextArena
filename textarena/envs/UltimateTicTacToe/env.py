@@ -16,10 +16,10 @@ class UltimateTicTacToeEnv(ta.Env):
         self.state = ta.TwoPlayerState(num_players=num_players, seed=seed)
         game_state={"board": [[[' ' for _ in range(3)] for _ in range(3)] for _ in range(9)], "macro_board": [[' ' for _ in range(3)] for _ in range(3)], "next_micro_board": None}
         self.state.reset(game_state=game_state, player_prompt_function=self._prompt)
-        self.state.add_observation(message=self.m("board", "current", board=self._render_board()), observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(message=self.m("board", "current_board", board=self._render_board()), observation_type=ta.ObservationType.GAME_BOARD)
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        symbol = 'X' if player_id == 1 else 'O'
+        symbol = 'X' if player_id==1 else 'O'
         return self.m("player_prompt", "intro", player_id=player_id, symbol=symbol)
 
     def _render_board(self) -> str:
@@ -72,18 +72,22 @@ class UltimateTicTacToeEnv(ta.Env):
             self._make_move(macro_idx, row, col)
 
             nxt = self.state.game_state["next_micro_board"]
-            next_target = self.m("next_target", "any") if nxt is None else self.m("next_target", "specific", n=nxt)
+            nxt_txt = self.m("next_board", "any") if nxt is None else self.m("next_board", "specific", nxt=nxt)
 
             self.state.add_observation(
                 message=self.m(
                     "game_action", "played",
-                    player_id=self.state.current_player_id, macro=macro_idx, micro=micro_idx,
-                    row=row, col=col, opponent_id=1 - self.state.current_player_id,
-                    next_target=next_target,
+                    player_id=self.state.current_player_id,
+                    macro_idx=macro_idx,
+                    micro_idx=micro_idx,
+                    row=row,
+                    col=col,
+                    opponent_id=1 - self.state.current_player_id,
+                    nxt_txt=nxt_txt,
                 ),
                 observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION,
             )
-            self.state.add_observation(message=self.m("board", "current", board=self._render_board()), observation_type=ta.ObservationType.GAME_BOARD)
+            self.state.add_observation(message=self.m("board", "current_board", board=self._render_board()), observation_type=ta.ObservationType.GAME_BOARD)
 
             # winner / draw checks
             if self._check_winner(self.state.game_state["macro_board"]):
@@ -141,13 +145,13 @@ class UltimateTicTacToeEnv(ta.Env):
         """Check if a move is valid."""
         reason = None
         ## check if the micro_board, row, and col are within the valid range
-        if micro_board < 0 or micro_board > 8 or row < 0 or row > 2 or col < 0 or col > 2: reason=self.m("invalid_move", "range_recheck")
+        if micro_board < 0 or micro_board > 8 or row < 0 or row > 2 or col < 0 or col > 2: reason=self.m("invalid_move", "index_out_of_range")
         ## check if the cell is empty
-        elif self.state.game_state["board"][micro_board][row][col] != ' ': reason=self.m("invalid_move", "already_occupied")
+        elif self.state.game_state["board"][micro_board][row][col] != ' ': reason=self.m("invalid_move", "cell_occupied")
         ## check if the next micro board is not won but the player is playing in a different micro board
-        elif self.state.game_state['next_micro_board'] is not None and micro_board != self.state.game_state['next_micro_board']: reason=self.m("invalid_move", "wrong_board")
+        elif self.state.game_state['next_micro_board'] is not None and micro_board != self.state.game_state['next_micro_board']: reason=self.m("invalid_move", "wrong_micro_board")
         ## check if the micro board is won and the player is still playing in it.
-        elif self.state.game_state['macro_board'][micro_board // 3][micro_board % 3] != ' ': reason=self.m("invalid_move", "board_won")
+        elif self.state.game_state['macro_board'][micro_board // 3][micro_board % 3] != ' ': reason=self.m("invalid_move", "micro_board_won")
         if reason: self.state.set_invalid_move(reason=reason); return False
         else: return self.state.game_state["board"][micro_board][row][col] == ' '
 

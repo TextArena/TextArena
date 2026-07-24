@@ -1,57 +1,34 @@
 {
-  "_comment": "Fichier de langue d'Othello en français. NE traduis PAS les clés (côté gauche), seulement les valeurs (côté droit). Conserve chaque {placeholder} exactement. Ne traduis jamais les coordonnées, les lettres des pions B/W, le format de coup '[row, col]' ni le plateau ASCII. Aligne la terminologie sur les jeux de plateau apparentés (plateau, coups valides, gagne, match nul).",
-  "_slots": {
-    "{player_id}": "Le numéro du joueur, 0 ou 1",
-    "{pid}": "Le numéro du joueur, 0 ou 1",
-    "{colour}": "Le nom de couleur affiché du joueur (Noir / Blanc)",
-    "{piece}": "La lettre du pion du joueur, B ou W (ne pas traduire)",
-    "{board}": "Le plateau ASCII déjà rendu (ne pas traduire)",
-    "{valid}": "La ligne déjà rendue des coups valides / aucun coup valide (peut être vide)",
-    "{moves}": "Liste neutre séparée par des virgules des coups valides comme '[2, 3]', '[3, 2]' (ne pas traduire)",
-    "{valid_list}": "Représentation neutre en liste Python des coups valides (ne pas traduire)",
-    "{black}": "Nombre de pions noirs sur le plateau",
-    "{white}": "Nombre de pions blancs sur le plateau",
-    "{r}": "La coordonnée de ligne du coup joué (ne pas traduire)",
-    "{c}": "La coordonnée de colonne du coup joué (ne pas traduire)",
-    "{flipped}": "Nombre de pions adverses retournés par le coup",
-    "{b}": "Nombre final de pions noirs",
-    "{w}": "Nombre final de pions blancs"
-  },
-
-  "pieces": {
-    "black": "Noir",
-    "white": "Blanc"
-  },
-
   "player_prompt": {
-    "intro": "Tu es le Joueur {player_id} et tu joues {colour} ({piece}) dans une partie d'Othello.\nTon objectif est d'avoir plus de pions de ta couleur sur le plateau à la fin de la partie.\nÀ ton tour, place un pion de manière à encadrer un ou plusieurs pions adverses dans n'importe quelle direction (horizontale, verticale ou diagonale) entre ton nouveau pion et un autre de tes pions existants. Tous les pions adverses encadrés seront retournés à ta couleur.\nIndique ton coup au format '[row, col]'."
+    "intro": "Vous êtes le joueur {player_id} et jouez avec les {colour} ({piece}) dans une partie d'Othello.\nVotre objectif est d'avoir davantage de pions de votre couleur sur le plateau à la fin de la partie.\nÀ votre tour, placez un pion de manière à encadrer un ou plusieurs pions adverses, dans n'importe quelle direction horizontale, verticale ou diagonale, entre votre nouveau pion et un autre de vos pions déjà présents. Tous les pions adverses ainsi encadrés seront retournés et prendront votre couleur.\nIndiquez votre coup au format '[row, col]'."
   },
 
   "board": {
-    "observation_initial": "Plateau de jeu :\n{board}{valid}\nScores actuels - Noir : {black}, Blanc : {white}\n",
-    "observation": "Plateau de jeu :\n{board}{valid}\nScores - Noir : {black}, Blanc : {white}\n",
-    "valid_moves": "\nCoups valides : {moves}",
-    "no_valid_moves_skip": "\nAucun coup valide - tu devras peut-être passer.",
-    "no_valid_moves_skip_endash": "\nAucun coup valide – tu devras peut-être passer."
+    "game_board": "Plateau de jeu :\n{board}",
+    "valid_moves": "{observation}\nCoups valides : {moves}",
+    "no_valid_moves_reset": "{observation}\nAucun coup valide - vous devrez peut-être passer votre tour.",
+    "no_valid_moves_step": "{observation}\nAucun coup valide – vous devrez peut-être passer votre tour.",
+    "scores_reset": "{observation}\nScores actuels - Noir : {black_count}, Blanc : {white_count}\n",
+    "scores_step": "{observation}\nScores - Noir : {black_count}, Blanc : {white_count}\n"
   },
 
   "invalid_move": {
     "wrong_format": "Le coup doit être au format [row, col].",
-    "illegal": "Coup illégal. Coups valides : {valid_list}"
+    "illegal": "Coup illégal. Coups valides : {valid}"
   },
 
   "game_action": {
-    "skip_turn": "Le Joueur {pid} a dû passer son tour",
-    "played": "Le Joueur {pid} ({piece}) a joué [{r}, {c}] en retournant {flipped} pion(s)"
+    "skipped": "Le joueur {pid} a dû passer son tour",
+    "played": "Le joueur {pid} ({piece}) a joué en [{r}, {c}] et retourné {flipped} pion(s)"
   },
 
   "game_message": {
-    "must_skip": "Le Joueur {pid} ({piece}) n'a aucun coup valide et doit passer."
+    "must_skip": "Le joueur {pid} ({piece}) n'a aucun coup valide et doit passer son tour."
   },
 
   "outcome": {
-    "black_wins": "Noir gagne {b}-{w}.",
-    "white_wins": "Blanc gagne {w}-{b}.",
-    "draw": "Match nul {b}-{w}."
+    "black_wins": "Les Noirs gagnent {black_count}-{white_count}.",
+    "white_wins": "Les Blancs gagnent {white_count}-{black_count}.",
+    "draw": "Match nul {black_count}-{white_count}."
   }
 }

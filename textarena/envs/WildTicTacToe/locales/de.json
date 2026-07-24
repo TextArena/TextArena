@@ -1,33 +1,24 @@
 {
-  "_comment": "WildTicTacToe Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel, nur die Werte. Behalte jeden {platzhalter} genau bei.",
-  "_slots": {
-    "{player_id}": "Die Spielernummer, z. B. 0 oder 1",
-    "{mark}": "Das gesetzte Symbol, entweder X oder O",
-    "{cell}": "Eine Feldnummer zwischen 0 und 8",
-    "{board}": "Das gerenderte ASCII-Spielfeld (nicht übersetzen)",
-    "{moves}": "Die durch Kommas getrennte Liste verfügbarer Zug-Token wie '[X 4]' (nicht übersetzen)"
-  },
-
   "player_prompt": {
-    "intro":            "Du bist Spieler {player_id} bei Wildem Tic Tac Toe.\nIn deinem Zug kannst du entweder ein 'X' oder ein 'O' in ein leeres Feld setzen.\nDu gewinnst, indem du drei gleiche Symbole (X oder O) in einer Reihe platzierst.\nDu kannst mit beiden Symbolen gewinnen.\nWähle deinen Zug im Format '[X 4]', um X in die Mitte zu setzen.\n"
+    "intro": "Du bist Spieler {player_id} in Wild Tic Tac Toe.\nIn deinem Zug kannst du entweder ein 'X' oder ein 'O' auf ein leeres Feld setzen.\nDu gewinnst, indem du drei gleiche Zeichen, X oder O, in einer Reihe anordnest.\nDu kannst mit beiden Zeichen gewinnen.\nWähle deinen Zug im Format '[X 4]', um ein X in die Mitte zu setzen.\n"
   },
 
   "board": {
-    "current_board":    "Aktuelles Spielfeld:\n\n{board}\n\nVerfügbare Züge: {moves}"
+    "current_board": "Aktuelles Spielfeld:\n\n{board}\n\nVerfügbare Züge: {moves}"
   },
 
   "invalid_move": {
-    "wrong_format":     "Ungültiges Zugformat. Verwende das Format '[X 4]' oder '[O 2]'.",
-    "out_of_range":     "Ungültige Feldnummer: {cell}. Muss zwischen 0 und 8 liegen.",
-    "already_occupied": "Ungültiger Zug. Feld {cell} ist bereits besetzt."
+    "wrong_format": "Ungültiges Zugformat. Verwende das Format '[X 4]' oder '[O 2]'.",
+    "invalid_cell": "Ungültige Feldnummer: {cell}. Sie muss zwischen 0 und 8 liegen.",
+    "already_occupied": "Ungültiger Zug. Feld {cell} ist bereits belegt."
   },
 
   "game_action": {
-    "placed":           "Spieler {player_id} hat sein Symbol ({mark}) in Feld {cell} gesetzt"
+    "placed": "Spieler {player_id} setzte sein Zeichen ({mark}) auf Feld {cell}"
   },
 
   "outcome": {
-    "win":              "Spieler {player_id} gewinnt mit {mark}!",
-    "draw":             "Das Spiel endet unentschieden!"
+    "win": "Spieler {player_id} gewinnt mit {mark}!",
+    "draw": "Das Spiel endet unentschieden!"
   }
 }
