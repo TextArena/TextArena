@@ -1,0 +1,55 @@
+{
+  "_comment": "Liar's Dice のユーザー向け文字列。括弧内のアクショントークン（'[Bid: X, Y]', '[Call]'）、プレイヤーID、サイコロの目、数量、カウントは中立的なスロットであり、翻訳してはなりません。",
+  "_slots": {
+    "player_id": "プレイヤーの番号（整数）",
+    "num_players": "ゲームのプレイヤー数（整数）",
+    "dice_summary": "プレイヤーごとの残りのサイコロ数を'; 'で連結した文字列",
+    "your_dice": "このプレイヤーのサイコロの目をカンマで連結した文字列",
+    "p": "プレイヤーの番号（整数）",
+    "d": "そのプレイヤーの残りのサイコロ数（整数）",
+    "current_player_id": "コールしたプレイヤーの番号（整数）",
+    "face_value": "カウントされるサイコロの目（1-6）",
+    "count": "一致するサイコロの実際の数（整数）",
+    "quantity": "入札数量（整数）",
+    "loser_id": "サイコロを1つ失うプレイヤーの番号（整数）",
+    "new_quantity": "新たに提出された入札数量（整数）",
+    "current_quantity": "現在の入札数量（整数）",
+    "new_face_value": "新たに提出された入札のサイコロの目（整数）",
+    "current_face_value": "現在の入札のサイコロの目（整数）",
+    "action": "プレイヤーが提出した原始的なアクション文字列",
+    "reason": "入札拒否の理由",
+    "winner": "勝利したプレイヤーの番号（整数）",
+    "final_ranking": "最初に脱落したプレイヤーから勝者までのプレイヤー番号のリスト"
+  },
+  "player_prompt": {
+    "intro": "あなたは {num_players} 人のプレイヤーが参加する Liar's Dice のプレイヤー {player_id} です。\nルール:\n- あなたの番になったら、次のいずれかの行動を選択できます:\n  1) 現在の入札よりも高い数量または高いサイコロの目（または両方）で新しい入札を行う; つまり、'[Bid: 3, 4]',\n  2) 最後の入札をコールするには '[Call]' と入力します。\n\nコールした場合:\n  - すべてのサイコロの目が入札数未満の場合、最後に入札したプレイヤーが1つのサイコロを失います。\n  - それ以外の場合、コールしたプレイヤーが1つのサイコロを失います。\nサイコロが0になったプレイヤーは脱落します。最後まで残ったプレイヤーが勝利します。"
+  },
+  "board": {
+    "per_player": "\tプレイヤー {p}: {d}",
+    "new_round": "\n新しいラウンド - 残りのサイコロ: {dice_summary}\nあなたの現在のサイコロ: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "プレイヤー {current_player_id} がコールします！サイコロの目 {face_value} の実際の数は {count} で、これは {quantity} よりも少ないです。\nプレイヤー {loser_id}（最後に入札したプレイヤー）が1つのサイコロを失います。",
+    "caller_loses": "プレイヤー {current_player_id} がコールします！サイコロの目 {face_value} の実際の数は {count} で、これは {quantity} 以上です。\nプレイヤー {loser_id}（コールしたプレイヤー）が1つのサイコロを失います。"
+  },
+  "action": {
+    "bid_announce": "プレイヤー {player_id} が {quantity} 個のサイコロの目 {face_value} を入札します。"
+  },
+  "invalid_move": {
+    "call_no_bid": "入札が行われていない状態でコールが行われました。",
+    "invalid_bid": "無効な入札: {reason}",
+    "not_recognized": "アクションが有効な '[Bid: X, Y]' または '[Call]' として認識されませんでした。提出されたアクション: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "新しい数量 {new_quantity} は現在の {current_quantity} よりも少ないです。",
+    "face_lower": "新しいサイコロの目 {new_face_value} は現在の {current_face_value} よりも少ないです。",
+    "identical": "入札が現在の入札と同一です。",
+    "face_range": "サイコロの目は1から6の間でなければなりません。"
+  },
+  "message": {
+    "eliminated_invalid": "プレイヤー {player_id} が無効な手で脱落しました。"
+  },
+  "outcome": {
+    "win": "プレイヤー {winner} が勝利しました！最終順位: {final_ranking}"
+  }
+}

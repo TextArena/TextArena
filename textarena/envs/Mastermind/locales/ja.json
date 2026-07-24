@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "あなたは Mastermind をプレイしています。\n{code_length}桁のコードを見つける必要があります。各桁は1から{num_numbers}の数字で、{repeats}です。\n回答では、次の形式で推測を提出できます: '[2 1 4 5]'。\n各推測後、黒と白のピンの形でフィードバックを受け取ります。\n黒いピンは正しい桁と位置を、白いピンは正しい桁だが位置が異なることを示します。\nコードを推測するには{max_turns}ターンがあります。\n",
+    "with_repeats": "重複あり",
+    "no_duplicates": "重複なし"
+  },
+  "invalid_move": {
+    "wrong_format": "角括弧で囲まれたスペース区切りの数字のリストで回答していません。",
+    "not_integers": "すべてのエントリは有効な整数でなければなりません。",
+    "wrong_length": "推測は正確に{code_length}個の数字を含む必要があります。",
+    "out_of_range": "すべての数字は1から{num_numbers}の間でなければなりません。",
+    "duplicates_not_allowed": "重複する数字は許されません。",
+    "repeated_guess": "すでに{guess}を推測しています。異なる推測をお試しください。"
+  },
+  "game_action": {
+    "feedback": "提出 [{guess}]。フィードバック: {black_pegs} 黒いピン、{white_pegs} 白いピン。"
+  },
+  "outcome": {
+    "win": "コードを解読しました。{black_pegs}個のピンを{code_length}個中正解しました。",
+    "turn_limit": "ターン制限に達しました。{percent}パーセントの数字を正解しました。"
+  }
+}
