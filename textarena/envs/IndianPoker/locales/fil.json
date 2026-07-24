@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa isang laro ng Indian Poker.\n- 52-card deck; nakikita mo lamang ang card ng kalaban.\n- Ante {ante} chip(s) bawat round, {max_rounds} round(s) kabuuan.\n- Mga wastong pagkilos: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ay isang positibong integer <= iyong chip count.)\n- Ang pinakamataas na hidden card ay nanalo ng pot sa showdown.\n"
+  },
+  "round": {
+    "announce": "### Round {current_round}/{max_rounds}\nAng card ng iyong kalaban ay: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Magbigay ng eksaktong ISANG bracketed action, hal. '[check]', '[bet 2]', '[call]', '[raise 3]', o '[fold]'.",
+    "cannot_check": "Hindi pwede [check] - nakaharap ka sa isang bet.",
+    "amount_min": "Ang halaga ng Bet / Raise ay dapat ≥ 1.",
+    "cannot_bet": "Hindi pwede [bet] - dapat [call] / [raise] / [fold].",
+    "nothing_to_call": "Walang tawag; pwede kang [check] sa halip.",
+    "no_bet_to_raise": "Gumamit ng [bet X] upang buksan; walang bet na itataas.",
+    "insufficient": "Kulang ang chips para sa pagkilos na iyon."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (gastos {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Mga posibleng pagkilos mo: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Player {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Ang Player {player_id} ay nag-fold.",
+    "showdown_win": "Showdown: {card_win} tinalo ang {card_lose}.",
+    "showdown_tie": "Showdown tie: parehong {card}. Pot split – bawat isa ay nakatanggap ng {split}."
+  },
+  "outcome": {
+    "p0_wins": "Ang Player 0 ay nanalo ({bank0} > {bank1})",
+    "p1_wins": "Ang Player 1 ay nanalo ({bank1} > {bank0})",
+    "draw": "Parehong chips pagkatapos ng lahat ng rounds"
+  }
+}

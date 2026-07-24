@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa isang 3-manlalarong Iterated Prisoner's Dilemma. Ang laban ay tumatagal ng {num_rounds} rounds.\nIstruktura ng round:\n• {conv_rounds} libreng pag-uusap na mga pagkakataon\n• 1 pagpapasya na pagkakataon - magsumite ng isang token kada kalaban: '[<opp-id> cooperate]' o '[<opp-id> defect]' (hal. '[1 defect] [2 cooperate]'; ang default ay 'cooperate'). \nPair-wise payoff matrix (inilapat sa bawat unordered na pares):\n  - Parehong mag-cooperate  ->  {reward}\n  - Parehong mag-defect     ->  {punishment}\n  - Ikaw ay mag-defect, sila ay mag-cooperate -> {temptation}\n  - Ikaw ay mag-cooperate, sila ay mag-defect -> {sucker}\nAng manlalaro na may pinakamataas na iskor sa pagtatapos ng lahat ng rounds ay mananalo."
+  },
+  "round": {
+    "start": "─── Nagsisimula ang Round {round} ───\tMaaari kang makipag-usap nang libre sa susunod na {conv_rounds} rounds.",
+    "chat_finished": "Natapos ang pag-uusap para sa round {round}. Magsumite ng iyong mga desisyon, isang token kada kalaban: `[pid cooperate]` o `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Mga Resulta:",
+    "pair_line": "{observation}\n\t Ang Player {i} at Player {j} ay nagpasya na {choice_i} at {choice_j} ayon sa pagkakabanggit (Ang Player {i} ay nakakuha ng {gain_i}, Ang Player {j} ay nakakuha ng {gain_j})",
+    "scores_open": "{observation}\n-> Kasalukuyang mga iskor: ",
+    "score_first": "{observation}Ang Player {player_id} ({score})",
+    "score_next": "{observation}; Ang Player {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Pangwakas na mga iskor: {scores}.  Mga grupo ng ranggo (pinakamahina→pinakamahusay): {groups}"
+  }
+}

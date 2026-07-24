@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa isang laro ng dalawang manlalaro ng Spite at Malice. Ang iyong layunin ay maging ang unang manlalaro na maubos ang iyong payoff pile.\n\n### Pangkalahatang-ideya ng Laro:\n- Ang layunin ay alisin ang iyong payoff pile sa pamamagitan ng paglaro ng mga kard sa mga gitnang pile.\n- Maaari kang maglaro ng mga kard mula sa tatlong pinagkukunan:\n  1. Ang iyong **kamay** (nagsisimula ka sa bawat pagkakataon na may hanggang 5 kard sa kamay).\n  2. Ang **nangungunang kard ng iyong payoff pile**.\n  3. Ang **nangungunang kard ng anumang iyong discard pile**.\n\n### Mga Patakaran ng Paglaro:\n- Maaari kang maglaro ng isang kard sa isang gitnang pile kung ito ay **isang ranggo na mas mataas** kaysa sa nangungunang kard sa pile na iyon (ang mga gitnang pile ay nagsisimula sa Ace at umaabot sa Queen; ang mga Hari ay wild - maaari silang maglaro sa anumang kard ngunit hindi nagbabago ang pagkakasunud-sunod ng ranggo. Ito ay nangangahulugan na kung ang isang Hari ay ginamit pagkatapos ng 4, ang Hari na iyon ay may ranggong 5 at ang susunod na kard ay dapat na 6).\n- Kung hindi ka na makapaglaro ng anumang kard, kailangan mong **magtapon ng isang kard** sa isa sa iyong mga discard pile upang tapusin ang iyong pagkakataon.\n- Kung ang isang gitnang pile ay nakarating sa Queen, ito ay awtomatikong malilinis.\n- Ang pagkakasunud-sunod ng ranggo ay: A=1, 2=2, ..., 9=9, J=10, Q=11, K bilang wild.\n\n### Mga Pagkilos:\n1. **Gumawa**: Sa simula ng iyong pagkakataon, gumawa ng mga kard upang mapunan ang iyong kamay hanggang 5 kard. Ipasok ang **[draw]** upang simulan.\n2. **Maglaro ng isang Kard**: Upang maglaro ng isang kard, itukoy ang kard at ang gitnang pile tulad nito: **[play A♠ 0]** (kung saan 'A♠' ay ang kard at '0' ay ang index ng gitnang pile).\n3. **Itapon**: Kung hindi ka na makapaglaro ng anumang kard, itapon ang isang kard mula sa iyong kamay sa isang discard pile upang tapusin ang iyong pagkakataon. Ipasok ang **[discard A♠ 1]** (kung saan 'A♠' ay ang kard at '1' ay ang index ng discard pile). Tandaan na hindi ka maaaring magtapon ng anumang kard mula sa payoff pile. Maaari mo lamang itapon ang mga kard mula sa iyong kamay.\n\n"
+  },
+  "board": {
+    "current_board": "Kasalukuyang Board:\n\n{board}\nMga Pagkilos na Magagamit: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Mga Gitnang Pile ---\n",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Tanawin ng Player {player_id} ---\n",
+    "payoff": "{observation}Payoff Pile (Nangungunang Kard): {top_card}, Haba ng Payoff Pile: {payoff_length}\n",
+    "hand": "{observation}Kamay: {hand}\n",
+    "discard": "{observation}Mga Discard Pile: {discard}\n",
+    "empty": "Walang laman"
+  },
+  "game_message": {
+    "no_cards_left": "Walang mga kard na natitira upang gumawa. Tandaan na maaari kang maglaro ng mga kard mula sa mga sumusunod na pinagkukunan:\n  1. Ang iyong **kamay**.\n  2. Ang **nangungunang kard ng iyong payoff pile**.\n  3. Ang **nangungunang kard ng anumang iyong discard pile**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Hindi wastong format ng pagkilos. Ang Player {player_id} ay hindi tumugon ng isang wastong pagkilos sa loob ng mga panaklong.",
+    "invalid_play": "Hindi wastong paglaro. Ang Player {player_id} ay sumubok na maglaro ng {card} sa gitnang pile {index}.",
+    "discard_from_payoff": "Hindi wastong pagtapon. Ang Player {player_id} ay sumubok na magtapon ng isang kard mula sa payoff pile.",
+    "discard_not_in_hand": "Hindi wastong pagtapon. Ang Player {player_id} ay sumubok na magtapon ng isang kard na hindi nasa kamay.",
+    "wrong_move_type": "Hindi wastong uri ng pagkilos. Ang Player {player_id} ay hindi tumugon ng isang wastong uri ng pagkilos."
+  },
+  "game_action": {
+    "you_drew": "Gumawa ka ng mga kard.",
+    "opponent_drew": "Ang Player {player_id} ay gumawa ng mga kard.",
+    "you_played": "Naglaro ka ng {card} sa gitnang pile {index}.",
+    "opponent_played": "Ang Player {player_id} ay naglaro ng {card} sa gitnang pile {index}.",
+    "you_discarded": "Itinapon mo ang {card} sa discard pile {index}, na nangangahulugan na tapos na ang iyong pagkakataon. Walang karagdagang aksyon mo ang isasaalang-alang para sa pagkakataong ito. Ang Player {next_player_id} ay susunod.",
+    "opponent_discarded": "Ang Player {player_id} ay nagtapon ng {card} sa discard pile {index}, na nangangahulugan na tapos na ang kanilang pagkakataon. Walang karagdagang aksyon ng Player {player_id} ang isasaalang-alang para sa pagkakataong ito. Ang Player {next_player_id}, ikaw ay susunod. Mangyaring ipasok ang iyong pagkilos sa format na [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Ang Player {current_player} ay nakatapos ng kanilang payoff pile! Ang Player {current_player} ay nanalo!",
+    "deadlock_player_0": "Nakatapos ang deadlock! Ang Player 0 ay nanalo na may {player_0_payoff} kard na natitira laban sa {player_1_payoff} kard ng Player 1.",
+    "deadlock_player_1": "Nakatapos ang deadlock! Ang Player 1 ay nanalo na may {player_1_payoff} kard na natitira laban sa {player_0_payoff} kard ng Player 0.",
+    "deadlock_tie": "Nakatapos ang deadlock na may tie! Parehong mga manlalaro ay may {player_0_payoff} kard na natitira. Ang Player {current_player} ay nanalo sa pamamagitan ng default."
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Nagsisimula ang laro. Trump suit: {trump_suit} (trump card: {trump_str}).",
+    "no_trump_card": "wala"
+  },
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa German Whist.\n{phase_info}\nMay hawak kang {hand_size} na mga karta.\nMaglaro ng isang karta gamit ang '[play N]', kung saan N ay ang posisyon nito sa iyong kamay (halimbawa '[play 3]').",
+    "phase_learning": "PHASE NG PAG-AARAL: ang nagwagi sa bawat trick ay kukuha ng face-up card at ang talunan ay kukuha ng susunod na karta mula sa deck. Ang mga trick na nanalo sa phase na ito ay hindi binibilang sa tagumpay.",
+    "phase_playing": "PHASE NG PAGLALARO: naubos na ang deck. Ang bawat trick mula ngayon ay binibilang sa tagumpay."
+  },
+  "next_card": {
+    "playing_phase": "Walang karta ang inaalok - nagsimula na ang phase ng paglalaro.",
+    "deck_empty": "Naubos na ang deck - walang karta ang inaalok.",
+    "available": "Karta na inaalok: {card}",
+    "available_trump": "Karta na inaalok: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Maling format ng pagkilos. Gamitin ang '[play N]' upang maglaro ng Nth na karta sa iyong kamay.",
+    "bad_position": "Ang posisyon ng karta na iyon ay hindi umiiral. May hawak kang {hand_size} na mga karta.",
+    "must_follow_suit": "Dapat mong sundin ang suit at maglaro ng isang {lead_suit} na karta.",
+    "invalid_play": "Ang karta na iyon ay hindi maaaring maglaro."
+  },
+  "game_action": {
+    "played": "Player {player_id} ay naglaro ng {card}."
+  },
+  "trick": {
+    "won": "Player {winner_id} ay nanalo ng trick na may {card}.",
+    "won_learning": "Player {winner_id} ay nanalo ng trick na may {card} at kumuha ng face-up card."
+  },
+  "phase": {
+    "learning_complete": "Naubos na ang deck. Ang phase ng pag-aaral ay tapos na - ang bawat natitirang trick ay binibilang sa tagumpay."
+  },
+  "draw": {
+    "winner_received": "Ikaw ay nanalo ng trick at nakatanggap ng {card}.",
+    "loser_received": "Ikaw ay natalo ng trick at kumuha ng {card} mula sa deck.",
+    "winner_preview": "Ang susunod na karta na inaalok ay {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Mga trick na nanalo hanggang ngayon - Player 0: {tricks0}, Player 1: {tricks1}",
+    "scores_playing": "Mga trick na binibilang - Player 0: {tricks0}, Player 1: {tricks1}",
+    "phase": "Phase: {phase}",
+    "phase_learning": "Phase: {phase} ({remaining_cards} na mga karta ang natitira sa deck)"
+  },
+  "hand": {
+    "no_cards": "Walang mga karta",
+    "no_cards_in_hand": "Walang mga karta sa kamay",
+    "header": "Ang iyong kamay:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Walang mga karta na nilalaro pa sa trick na ito.",
+    "header": "Kasalukuyang trick:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Laro hindi pa nagsimula",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nTrump suit: {trump_suit}",
+    "trump_card": "{observation}\nTrump card: {card}",
+    "cards_left": "{observation}\nMga karta na natitira sa deck: {count}",
+    "next_card": "{observation}\nSusunod na karta para sa nagwagi: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nKasalukuyang trick:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPlayer {player_id}: {scoring} na mga trick na binibilang ({tricks} kabuuan), {hand_size} na mga karta sa kamay"
+  },
+  "outcome": {
+    "summary": "Phase ng pag-aaral - Player 0: {l0}, Player 1: {l1}. Phase ng paglalaro - Player 0: {p0}, Player 1: {p1}. Player {winner_id} ay nanalo na may {winner_tricks} na mga trick na binibilang!"
+  }
+}

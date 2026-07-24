@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame file ng lokasyon. HUWAG isalin ang mga susi (kaliwang bahagi). Isalin lamang ang mga halaga (kanang bahagi).",
+  "_slots": {
+    "{player_id}": "Ang numero ng manlalaro, 0 o 1",
+    "{other_id}": "Ang numero ng ibang manlalaro, 1 o 0",
+    "{num_rounds}": "Kabuuang bilang ng mga round",
+    "{pool}": "Halaga ng pera na magagamit sa bawat round (isang numero)",
+    "{round_number}": "Ang kasalukuyang numero ng round",
+    "{proposer_id}": "Ang numero ng manlalaro na nagmumungkahi, 0 o 1",
+    "{responder_id}": "Ang numero ng manlalaro na tumutugon, 0 o 1",
+    "{offer}": "Ang halaga na inaalok (isang numero)",
+    "{keep}": "Ang halaga na itinatago ng nagmumungkahi (isang numero)",
+    "{proposer_gain}": "Pera na nakamit ng nagmumungkahi sa round na ito (isang numero)",
+    "{responder_gain}": "Pera na nakamit ng tumutugon sa round na ito (isang numero)",
+    "{total_0}": "Ang kabuuang nakamit ng Manlalaro 0 (isang numero)",
+    "{total_1}": "Ang kabuuang nakamit ng Manlalaro 1 (isang numero)",
+    "{winner}": "Ang numero ng manlalaro na nagwagi",
+    "{loser}": "Ang numero ng manlalaro na natalo",
+    "{winner_total}": "Ang kabuuang pera ng nagwagi (isang numero)",
+    "{loser_total}": "Ang kabuuang pera ng natalo (isang numero)",
+    "{total}": "Ang kabuuang pera ng bawat manlalaro sa tabla (isang numero)"
+  },
+  "player_prompt": {
+    "intro": "Ikaw ay Manlalaro {player_id}, naglalaro ng {num_rounds} rounds ng Iterated Ultimatum Game.\nMayroon kang $ {pool} na mahahati sa round na ito sa pagitan mo at Manlalaro {other_id}.\n\nNagmumungkahi:\n  - Gumawa ng isang alok: [Offer: $X] (0 <= X <= pool)\n  - Kung tinanggap → Makakakuha ka ng $(pool - X), ang ibang manlalaro ay makakakuha ng $X\n  - Kung tinanggihan → Parehong makakakuha ng $0\n  - Halimbawa: [Offer: $3]  o  'Sa tingin ko ay patas ito. [Offer: $5]'\n\nTumutugon:\n  - Magpasya sa alok na may [Accept] o [Reject]\n  - Halimbawa: 'Mukhang makatuwiran. [Accept]'\n            'Masyadong hindi patas. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Ang Round {round_number} ay nagsisimula! ---\nAng Manlalaro {proposer_id} ay ang nagmumungkahi, ang Manlalaro {responder_id} ay ang tumutugon.",
+    "offer": "Round {round_number}: Ang Manlalaro {proposer_id} ay nag-alok ng ${offer} sa Manlalaro {responder_id} (itinatago ang ${keep}).",
+    "accepted": "Ang Manlalaro {responder_id} ay tumanggap! Ang mga nakamit sa Round {round_number}: Manlalaro {proposer_id} +${proposer_gain}, Manlalaro {responder_id} +${responder_gain}. Ang mga bagong kabuuang: Manlalaro 0: ${total_0}, Manlalaro 1: ${total_1}.",
+    "rejected": "Ang Manlalaro {responder_id} ay tinanggihan ang alok! Ang mga nakamit sa Round {round_number}: Parehong manlalaro +$0. Ang mga kabuuang nanatiling: Manlalaro 0: ${total_0}, Manlalaro 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Ang nagmumungkahi ay dapat gumawa ng isang alok gamit ang format [Offer: $X].",
+    "bad_integer": "Ang halaga ng alok ay dapat isang wastong integer.",
+    "out_of_range": "Ang alok ay dapat nasa pagitan ng $0 at ${pool}.",
+    "no_current_offer": "Walang kasalukuyang alok na matutugunan.",
+    "accept_or_reject": "Ang tumutugon ay dapat magpasya sa [Accept] o [Reject] ang alok."
+  },
+  "outcome": {
+    "win": "Ang Manlalaro {winner} ay nagwagi na may kabuuang ${winner_total} laban sa Manlalaro {loser} na may ${loser_total}.",
+    "draw": "Tabla! Parehong manlalaro ay nagtapos na may kabuuang ${total}."
+  }
+}

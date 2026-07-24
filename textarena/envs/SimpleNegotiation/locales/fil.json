@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa Laro ng Negosasyon.\nMayroon kang ilang mga yaman, at ang iyong gawain ay makipagkalakalan upang ang kabuuang halaga ng iyong mga yaman ay dumami.\nAng mga yaman at kaugnay na mga halaga na mayroon ka ngayon ay:\n\t+ {resource_value_list}\nSa bawat pagkakataon, maaari kang makipag-usap sa iyong kalaban at gumawa ng alok sa kalakalan.\nGumamit ng mga sumusunod na espesyal na token para sa mga pagkilos:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Inaalok na Yaman -> Hinihiling na Yaman]\n  - '[Accept]': Upang tanggapin ang isang paparating na alok.\n  - '[Deny]': Upang tanggihan ang isang paparating na alok (default).\nAng laro ay tumatagal ng {max_turns} pagkakataon sa kabuuan."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Ang manlalaro ay sumubok na tanggapin ang kalakalan nang walang kinakailangang yaman.",
+    "out_of_range": "Player {player_id}, Hindi wastong pagkilos. Ang hanay {col} ay labas ng saklaw.",
+    "already_full": "Player {player_id}, Hindi wastong pagkilos. Ang hanay {col} ay puno na.",
+    "proposing_with_no_resource": "Ang Player {player_id} ay sumubok na gumawa ng alok sa kalakalan nang walang kinakailangang yaman.",
+    "incorrect_offer_format": "Ang Player {player_id} ay gumawa ng alok sa kalakalan sa isang hindi wastong format.",
+    "no_new_offer": "Ang Player {player_id} ay walang bagong alok sa kalakalan."
+  },
+  "offers": {
+    "reject": "Ang Player {player_id} ay tumanggi sa alok sa kalakalan.",
+    "accept": "Ang Player {acceptor_id} ay tumanggap sa alok sa kalakalan mula sa Player {proposer_id}.",
+    "proposal": "Ang Player {player_id} ay gumawa ng sumusunod na alok sa Player {opponent_id}: Inaalok na mga bagay: {offered} -> Hinihiling na mga bagay: {requested}"
+  },
+  "outcome": {
+    "win": "Ang Player {winner_id} ay nanalo sa pamamagitan ng pagkakaroon ng mas malaking pagtaas sa halaga ng imbentaryo.",
+    "draw": "Magkatulad na pagbabago sa halaga ng imbentaryo para sa lahat ng mga manlalaro. Tabla."
+  }
+}
