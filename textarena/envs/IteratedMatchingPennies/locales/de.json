@@ -1,22 +1,20 @@
 {
-  "_comment": "IteratedMatchingPennies Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel, nur die Werte. Behalte jeden {platzhalter} bei; übersetze die Zug-Token [heads]/[tails]/[h]/[t] nicht.",
-  "_slots": {
-    "{player_id}": "Die Spielernummer, 0 oder 1",
-    "{role}": "Der angezeigte Rollenname (Gleichmacher / Abweichler)",
-    "{num_rounds}": "Gesamtzahl der Runden",
-    "{p0_choice}": "Zug von Spieler 0, 'heads' oder 'tails' (nicht übersetzen)",
-    "{p1_choice}": "Zug von Spieler 1, 'heads' oder 'tails' (nicht übersetzen)",
-    "{verdict}": "Der angezeigte Rundenausgang"
-  },
-  "roles": { "matcher": "Gleichmacher", "mismatcher": "Abweichler" },
   "player_prompt": {
-    "intro": "Du bist Spieler {player_id} ({role}) in einem Matching-Pennies-Spiel über {num_rounds} Runden.\n- Sende in jeder Runde [heads] oder [tails] (oder [h], [t]).\n- Stimmt deine Wahl mit der deines Gegners überein, gewinnt Spieler 0 die Runde; andernfalls gewinnt Spieler 1.\nAntworte mit deiner Wahl im Format '[heads]' oder '[tails]'.\n"
+    "intro": "Du bist Spieler {player_id} ({role}) in einem Matching-Pennies-Spiel über {num_rounds} Runden.\n- Gib in jeder Runde [heads] oder [tails] ein. Alternativ kannst du [h] oder [t] verwenden.\n- Stimmt deine Wahl mit der deines Gegners überein, gewinnt Spieler 0 die Runde; andernfalls gewinnt Spieler 1.\nAntworte mit deiner Wahl im Format '[heads]' oder '[tails]'.\n"
   },
-  "invalid_move": { "wrong_format": "Ungültiges Format; bitte sende '[heads]' oder '[tails]'." },
-  "round": {
-    "result": "Spieler 0 wählte {p0_choice}; Spieler 1 wählte {p1_choice}. {verdict}",
-    "verdict_match": "Übereinstimmung -> Spieler 0 gewinnt",
-    "verdict_mismatch": "Keine Übereinstimmung -> Spieler 1 gewinnt."
+
+  "invalid_move": {
+    "wrong_format": "Ungültiges Format; bitte gib '[heads]' oder '[tails]' ein."
   },
-  "outcome": { "win": "Spieler {player_id} hat mehr Runden gewonnen.", "draw": "Das Spiel endet insgesamt unentschieden." }
+
+  "message": {
+    "round_match": "Spieler 0 wählte {choice0}; Spieler 1 wählte {choice1}. Übereinstimmung -> Spieler 0 gewinnt",
+    "round_mismatch": "Spieler 0 wählte {choice0}; Spieler 1 wählte {choice1}. Keine Übereinstimmung -> Spieler 1 gewinnt."
+  },
+
+  "outcome": {
+    "p0_wins": "Spieler 0 gewann mehr Runden.",
+    "p1_wins": "Spieler 1 gewann mehr Runden.",
+    "draw": "Das gesamte Spiel endet unentschieden."
+  }
 }

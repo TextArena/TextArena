@@ -38,15 +38,15 @@ class IteratedTwoThirdsAverageEnv(ta.Env):
                     target = (2.0 / 3.0) * avg
                     d0 = abs(guesses[0] - target); d1 = abs(guesses[1] - target) # compute distances
                     self.state.game_state["history"].append(guesses.copy()) # update history
-                    self.state.add_observation(message=self.m("round", "result", p0_guess=guesses[0], p1_guess=guesses[1], target=f"{target:.2f}"), observation_type=ta.ObservationType.GAME_MESSAGE)
+                    self.state.add_observation(message=self.m("message", "round_guesses", guess0=guesses[0], guess1=guesses[1], target=f"{target:.2f}"), observation_type=ta.ObservationType.GAME_MESSAGE)
                     # decide round winner
                     if d0 < d1:     winner = 0
                     elif d1 < d0:   winner = 1
                     else:           winner = None
-                    if winner is None: self.state.add_observation(message=self.m("round", "draw"), observation_type=ta.ObservationType.GAME_MESSAGE)
+                    if winner is None: self.state.add_observation(message=self.m("message", "round_draw"), observation_type=ta.ObservationType.GAME_MESSAGE)
                     else:
                         self.state.game_state["points"][winner] += 1
-                        self.state.add_observation(message=self.m("round", "win", winner=winner), observation_type=ta.ObservationType.GAME_MESSAGE)
+                        self.state.add_observation(message=self.m("message", "round_win", winner=winner), observation_type=ta.ObservationType.GAME_MESSAGE)
                     # prepare next round
                     self.state.game_state["round"] += 1
                     self.state.game_state["guesses"].clear()
@@ -54,7 +54,7 @@ class IteratedTwoThirdsAverageEnv(ta.Env):
                     if self.state.game_state["round"] > self.num_rounds:
                         p0 = self.state.game_state["points"][0]
                         p1 = self.state.game_state["points"][1]
-                        if p0 > p1:     self.state.set_winner(player_id=0, reason=self.m("outcome", "win", player_id=0))
-                        elif p1 > p0:   self.state.set_winner(player_id=1, reason=self.m("outcome", "win", player_id=1))
+                        if p0 > p1:     self.state.set_winner(player_id=0, reason=self.m("outcome", "p0_wins"))
+                        elif p1 > p0:   self.state.set_winner(player_id=1, reason=self.m("outcome", "p1_wins"))
                         else:           self.state.set_draw(reason=self.m("outcome", "draw"))
         return self.state.step()

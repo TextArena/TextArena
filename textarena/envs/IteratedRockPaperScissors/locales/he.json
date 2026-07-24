@@ -1,14 +1,24 @@
 {
-  "_comment": "קובץ שפה למשחק אבן-נייר-ומספריים בעברית. אין לתרגם את המפתחות, רק את הערכים. יש לשמור כל placeholder; אין לתרגם את [rock]/[paper]/[scissors]/[r]/[p]/[s] או {move}.",
-  "_slots": {
-    "{player_id}": "מספר השחקן, 0 או 1",
-    "{num_rounds}": "מספר הסיבובים הכולל",
-    "{move}": "אסימון המהלך שנבחר, 'rock'/'paper'/'scissors' (אין לתרגם)",
-    "{winner}": "מספר השחקן שניצח בסיבוב"
+  "player_prompt": {
+    "intro": "אתה שחקן {player_id} במשחק Rock-Paper-Scissors בן {num_rounds} סיבובים.\nמטרתך היא לנצח בכמה שיותר סיבובים.\nבכל סיבוב, השב עם אחת מהאפשרויות הבאות: '[rock]', '[paper]' או '[scissors]'.\nניתן גם להשתמש בקיצורים '[r]', '[p]' או '[s]'.\n"
   },
-  "player_prompt": { "intro": "אתה שחקן {player_id} במשחק אבן-נייר-ומספריים בן {num_rounds} סיבובים.\nהמטרה שלך היא לנצח בכמה שיותר סיבובים.\nבכל סיבוב, השב באחד מ: '[rock]', '[paper]' או '[scissors]'.\nאפשר גם להשתמש ב-'[r]', '[p]' או '[s]' כקיצור.\n" },
-  "invalid_move": { "wrong_format": "המהלך לא זוהה. השתמש ב-[rock], [paper] או [scissors]." },
-  "game_action": { "selects": "שחקן {player_id} בוחר את המהלך {move}." },
-  "round": { "draw": "תוצאת הסיבוב: תיקו", "win": "תוצאת הסיבוב: שחקן {winner} מנצח!" },
-  "outcome": { "win": "שחקן {player_id} ניצח בהכי הרבה סיבובים!", "draw": "המשחק הסתיים בתיקו!" }
+
+  "invalid_move": {
+    "wrong_format": "המהלך לא זוהה. יש להשתמש ב-[rock], ב-[paper] או ב-[scissors]."
+  },
+
+  "game_action": {
+    "selects": "שחקן {player_id} בוחר במהלך {move}."
+  },
+
+  "message": {
+    "round_draw": "תוצאת הסיבוב: תיקו",
+    "round_win": "תוצאת הסיבוב: שחקן {winner} מנצח!"
+  },
+
+  "outcome": {
+    "p0_wins": "שחקן 0 ניצח במספר הסיבובים הגדול ביותר!",
+    "p1_wins": "שחקן 1 ניצח במספר הסיבובים הגדול ביותר!",
+    "draw": "המשחק הסתיים בתיקו!"
+  }
 }

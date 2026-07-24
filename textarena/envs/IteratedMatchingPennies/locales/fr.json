@@ -1,22 +1,20 @@
 {
-  "_comment": "Fichier de langue IteratedMatchingPennies en français. Ne traduisez PAS les clés, uniquement les valeurs. Conservez chaque {placeholder} ; ne traduisez pas les jetons de coup [heads]/[tails]/[h]/[t].",
-  "_slots": {
-    "{player_id}": "Le numéro du joueur, 0 ou 1",
-    "{role}": "Le nom de rôle affiché (Concordant / Discordant)",
-    "{num_rounds}": "Nombre total de manches",
-    "{p0_choice}": "Coup du joueur 0, 'heads' ou 'tails' (ne pas traduire)",
-    "{p1_choice}": "Coup du joueur 1, 'heads' ou 'tails' (ne pas traduire)",
-    "{verdict}": "La phrase de résultat de la manche affichée"
-  },
-  "roles": { "matcher": "Concordant", "mismatcher": "Discordant" },
   "player_prompt": {
-    "intro": "Vous êtes le joueur {player_id} ({role}) dans une partie de Matching Pennies de {num_rounds} manches.\n- À chaque manche, soumettez [heads] ou [tails] (ou [h], [t]).\n- Si votre choix correspond à celui de votre adversaire, le joueur 0 gagne la manche ; sinon, le joueur 1 gagne.\nRépondez avec votre choix au format '[heads]' ou '[tails]'.\n"
+    "intro": "Vous êtes le joueur {player_id} ({role}) dans une partie de Matching Pennies en {num_rounds} manches.\n- À chaque manche, envoyez [heads] ou [tails], ou bien [h] ou [t].\n- Si votre choix correspond à celui de votre adversaire, le joueur 0 remporte la manche ; sinon, le joueur 1 la remporte.\nRépondez avec votre choix au format '[heads]' ou '[tails]'.\n"
   },
-  "invalid_move": { "wrong_format": "Format invalide ; veuillez soumettre '[heads]' ou '[tails]'." },
-  "round": {
-    "result": "Le joueur 0 a choisi {p0_choice} ; le joueur 1 a choisi {p1_choice}. {verdict}",
-    "verdict_match": "Correspondance -> le joueur 0 gagne",
-    "verdict_mismatch": "Pas de correspondance -> le joueur 1 gagne."
+
+  "invalid_move": {
+    "wrong_format": "Format non valide ; veuillez envoyer '[heads]' ou '[tails]'."
   },
-  "outcome": { "win": "Le joueur {player_id} a gagné plus de manches.", "draw": "La partie se termine par un match nul." }
+
+  "message": {
+    "round_match": "Le joueur 0 a choisi {choice0} ; le joueur 1 a choisi {choice1}. Choix identiques -> le joueur 0 gagne",
+    "round_mismatch": "Le joueur 0 a choisi {choice0} ; le joueur 1 a choisi {choice1}. Choix différents -> le joueur 1 gagne."
+  },
+
+  "outcome": {
+    "p0_wins": "Le joueur 0 a remporté davantage de manches.",
+    "p1_wins": "Le joueur 1 a remporté davantage de manches.",
+    "draw": "La partie se termine par un match nul."
+  }
 }

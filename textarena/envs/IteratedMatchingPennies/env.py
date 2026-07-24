@@ -15,7 +15,7 @@ class IteratedMatchingPenniesEnv(ta.Env):
         self.state.reset(game_state=game_state, player_prompt_function=self._make_prompt)
 
     def _make_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        role = self.m("roles", "matcher") if player_id == 0 else self.m("roles", "mismatcher")
+        role = "Matcher" if player_id == 0 else "Mismatcher"
         return self.m("player_prompt", "intro", player_id=player_id, role=role, num_rounds=self.num_rounds)
 
     def get_board_str(self) -> str:
@@ -40,14 +40,15 @@ class IteratedMatchingPenniesEnv(ta.Env):
                 same = (moves[0] == moves[1])
                 winner = 0 if same else 1
                 self.state.game_state["history"].append(moves.copy())
-                verdict = self.m("round", "verdict_match") if same else self.m("round", "verdict_mismatch")
-                self.state.add_observation(message=self.m("round", "result", p0_choice=moves[0], p1_choice=moves[1], verdict=verdict), observation_type=ta.ObservationType.GAME_MESSAGE)
+                if same: message = self.m("message", "round_match", choice0=self.state.game_state['moves'][0], choice1=self.state.game_state['moves'][1])
+                else:    message = self.m("message", "round_mismatch", choice0=self.state.game_state['moves'][0], choice1=self.state.game_state['moves'][1])
+                self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
                 self.state.game_state["points"][winner] += 1
                 self.state.game_state["round"] += 1
                 self.state.game_state["moves"].clear()
                 if self.state.game_state["round"] > self.num_rounds:
                     p0, p1 = self.state.game_state["points"][0], self.state.game_state["points"][1]
-                    if p0 > p1:     self.state.set_winner(0, reason=self.m("outcome", "win", player_id=0))
-                    elif p1 > p0:   self.state.set_winner(1, reason=self.m("outcome", "win", player_id=1))
+                    if p0 > p1:     self.state.set_winner(0, reason=self.m("outcome", "p0_wins"))
+                    elif p1 > p0:   self.state.set_winner(1, reason=self.m("outcome", "p1_wins"))
                     else:           self.state.set_draw(reason=self.m("outcome", "draw"))
         return self.state.step()

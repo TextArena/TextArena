@@ -1,14 +1,24 @@
 {
-  "_comment": "IteratedRockPaperScissors Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel, nur die Werte. Behalte jeden {platzhalter}; übersetze die Zug-Token [rock]/[paper]/[scissors]/[r]/[p]/[s] und {move} nicht.",
-  "_slots": {
-    "{player_id}": "Die Spielernummer, 0 oder 1",
-    "{num_rounds}": "Gesamtzahl der Runden",
-    "{move}": "Das gewählte Zug-Token, 'rock'/'paper'/'scissors' (nicht übersetzen)",
-    "{winner}": "Die Spielernummer, die die Runde gewann"
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in einem Rock-Paper-Scissors-Spiel über {num_rounds} Runden.\nDein Ziel ist es, so viele Runden wie möglich zu gewinnen.\nAntworte in jeder Runde mit einer der folgenden Optionen: '[rock]', '[paper]' oder '[scissors]'.\nDu kannst auch '[r]', '[p]' oder '[s]' als Abkürzung verwenden.\n"
   },
-  "player_prompt": { "intro": "Du bist Spieler {player_id} in einem Schere-Stein-Papier-Spiel über {num_rounds} Runden.\nDein Ziel ist es, so viele Runden wie möglich zu gewinnen.\nAntworte in jeder Runde mit einem von: '[rock]', '[paper]' oder '[scissors]'.\nDu kannst auch '[r]', '[p]' oder '[s]' als Kurzform verwenden.\n" },
-  "invalid_move": { "wrong_format": "Zug nicht erkannt. Verwende [rock], [paper] oder [scissors]." },
-  "game_action": { "selects": "Spieler {player_id} wählt den Zug {move}." },
-  "round": { "draw": "Rundenergebnis: Unentschieden", "win": "Rundenergebnis: Spieler {winner} gewinnt!" },
-  "outcome": { "win": "Spieler {player_id} hat die meisten Runden gewonnen!", "draw": "Das Match endet unentschieden!" }
+
+  "invalid_move": {
+    "wrong_format": "Zug nicht erkannt. Verwende [rock], [paper] oder [scissors]."
+  },
+
+  "game_action": {
+    "selects": "Spieler {player_id} wählt den Zug {move}."
+  },
+
+  "message": {
+    "round_draw": "Rundenergebnis: Unentschieden",
+    "round_win": "Rundenergebnis: Spieler {winner} gewinnt!"
+  },
+
+  "outcome": {
+    "p0_wins": "Spieler 0 hat die meisten Runden gewonnen!",
+    "p1_wins": "Spieler 1 hat die meisten Runden gewonnen!",
+    "draw": "Das Spiel endet unentschieden!"
+  }
 }

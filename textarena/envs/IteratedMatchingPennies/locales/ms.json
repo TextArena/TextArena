@@ -1,22 +1,20 @@
 {
-  "_comment": "Fail bahasa IteratedMatchingPennies — Bahasa Melayu. JANGAN terjemahkan kunci. Terjemahkan nilai sahaja. Kekalkan setiap {placeholder}; jangan terjemah token gerakan [heads]/[tails]/[h]/[t].",
-  "_slots": {
-    "{player_id}": "Nombor pemain, 0 atau 1",
-    "{role}": "Nama peranan dipaparkan (Penyama / Pembeza)",
-    "{num_rounds}": "Jumlah pusingan",
-    "{p0_choice}": "Gerakan Pemain 0, 'heads' atau 'tails' (jangan terjemah)",
-    "{p1_choice}": "Gerakan Pemain 1, 'heads' atau 'tails' (jangan terjemah)",
-    "{verdict}": "Frasa keputusan pusingan yang dipaparkan"
-  },
-  "roles": { "matcher": "Penyama", "mismatcher": "Pembeza" },
   "player_prompt": {
-    "intro": "Anda ialah Pemain {player_id} ({role}) dalam permainan Matching Pennies {num_rounds} pusingan.\n- Setiap pusingan, hantar [heads] atau [tails] (atau [h], [t]).\n- Jika pilihan anda sepadan dengan pilihan lawan, Pemain 0 menang pusingan itu; jika tidak, Pemain 1 menang.\nBalas dengan pilihan anda dalam format '[heads]' atau '[tails]'.\n"
+    "intro": "Anda ialah Pemain {player_id} ({role}) dalam permainan Matching Pennies sebanyak {num_rounds} pusingan.\n- Dalam setiap pusingan, hantar [heads] atau [tails], atau gunakan [h] atau [t].\n- Jika pilihan anda sepadan dengan pilihan lawan, Pemain 0 memenangi pusingan; jika tidak, Pemain 1 menang.\nBalas dengan pilihan anda dalam format '[heads]' atau '[tails]'.\n"
   },
-  "invalid_move": { "wrong_format": "Format tidak sah; sila hantar '[heads]' atau '[tails]'." },
-  "round": {
-    "result": "Pemain 0 memilih {p0_choice}; Pemain 1 memilih {p1_choice}. {verdict}",
-    "verdict_match": "Sepadan -> Pemain 0 menang",
-    "verdict_mismatch": "Tidak sepadan -> Pemain 1 menang."
+
+  "invalid_move": {
+    "wrong_format": "Format tidak sah; sila hantar '[heads]' atau '[tails]'."
   },
-  "outcome": { "win": "Pemain {player_id} memenangi lebih banyak pusingan.", "draw": "Permainan berakhir seri." }
+
+  "message": {
+    "round_match": "Pemain 0 memilih {choice0}; Pemain 1 memilih {choice1}. Sepadan -> Pemain 0 menang",
+    "round_mismatch": "Pemain 0 memilih {choice0}; Pemain 1 memilih {choice1}. Tidak sepadan -> Pemain 1 menang."
+  },
+
+  "outcome": {
+    "p0_wins": "Pemain 0 memenangi lebih banyak pusingan.",
+    "p1_wins": "Pemain 1 memenangi lebih banyak pusingan.",
+    "draw": "Permainan keseluruhan berakhir seri."
+  }
 }

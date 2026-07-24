@@ -37,16 +37,16 @@ class IteratedRockPaperScissorsEnv(ta.Env):
                 self.state.game_state["round"] += 1
                 self.state.game_state["moves"] = {0:None, 1:None}
 
-                if result == 0:
-                    self.state.add_observation(message=self.m("round", "draw"), observation_type=ta.ObservationType.GAME_MESSAGE)
+                if result == 0: 
+                    self.state.add_observation(message=self.m("message", "round_draw"), observation_type=ta.ObservationType.GAME_MESSAGE)
                 else:
-                    self.state.add_observation(message=self.m("round", "win", winner=result-1), observation_type=ta.ObservationType.GAME_MESSAGE)
+                    self.state.add_observation(message=self.m("message", "round_win", winner=result-1), observation_type=ta.ObservationType.GAME_MESSAGE)
                     self.state.game_state["points"][result-1] += 1
 
                 if self.state.game_state["round"] > self.num_rounds: # Check end condition
                     wins = self.state.game_state.get("points", {0: 0, 1: 0})
-                    if wins[0] > wins[1]:   self.state.set_winner(player_id=0, reason=self.m("outcome", "win", player_id=0))
-                    elif wins[1] > wins[0]: self.state.set_winner(player_id=1, reason=self.m("outcome", "win", player_id=1))
+                    if wins[0] > wins[1]:   self.state.set_winner(player_id=0, reason=self.m("outcome", "p0_wins"))
+                    elif wins[1] > wins[0]: self.state.set_winner(player_id=1, reason=self.m("outcome", "p1_wins"))
                     else:                   self.state.set_draw(self.m("outcome", "draw"))
         
         return self.state.step()
