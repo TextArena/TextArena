@@ -1,0 +1,30 @@
+{
+  "_comment": "Arquivo de localização do Cryptarithm. NÃO traduza as chaves (lado esquerdo). Traduza apenas os valores (lado direito). Mantenha cada {placeholder} exatamente como está; não traduza o token de atribuição `[A 5]`, letras únicas ou dígitos.",
+  "_slots": {
+    "{letter}": "Uma letra do quebra-cabeça, por exemplo, S ou E",
+    "{digit}": "Um dígito de 0 a 9",
+    "{used_letter}": "A letra que já reivindicou um dígito",
+    "{assigned}": "Quantas letras estão mapeadas até agora",
+    "{total}": "Número total de letras distintas",
+    "{pct}": "Progresso como uma string de porcentagem, por exemplo, 50%"
+  },
+  "player_prompt": {
+    "intro": "Mapeie cada letra para um dígito único para que a aritmética seja válida.\nAtribua com `[A 5]`, reatribua a qualquer momento.\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de ação inválido. Use `[A 5]`.",
+    "letter_not_in_puzzle": "A letra {letter} não está no quebra-cabeça.",
+    "digit_used": "O dígito {digit} já está sendo usado por {used_letter}.",
+    "leading_zero": "O dígito inicial de uma palavra não pode ser 0."
+  },
+  "outcome": {
+    "correct": "Correto! Equação satisfeita.",
+    "incorrect": "Mapeamento completo, mas equação incorreta.",
+    "limit": "Limite de movimentos alcançado."
+  },
+  "board": {
+    "mapping_header": "Mapeamento:",
+    "none_yet": "  (nenhum ainda)",
+    "assigned": "\nAtribuído: {assigned}/{total} ({pct})"
+  }
+}

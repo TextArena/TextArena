@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Você está jogando o jogo de números Countdown!\nObjetivo: Combine números usando +, -, *, / para alcançar o alvo.\nFormato de ação: [i j op] onde i,j são índices e op é a operação.\nExemplo: [0 2 *] multiplica o número no índice 0 pelo número no índice 2.\nA divisão deve resultar apenas em números inteiros."
+  },
+  "board": {
+    "header": "ALVO: {target}\n\nNúmeros disponíveis:\n{numbers}",
+    "best": "{observation}\n\nMelhor até agora: {best_value} (distância: {distance})\nMelhor expressão: {best_expression}",
+    "history": "{observation}\n\nHistórico de movimentos:\n{moves}",
+    "progress": "{observation}\nPontuação de progresso atual: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de ação inválido. Use `[i j op]` onde i,j são índices e op é +,-,*,/",
+    "invalid_indices": "Índices inválidos. Devem ser diferentes e estar no intervalo 0-{max_index}",
+    "invalid_operation": "Operação inválida (divisão por zero ou resultado não inteiro)"
+  },
+  "outcome": {
+    "win": "Perfeito! Encontrou o alvo exato: {target}",
+    "no_moves": "Sem mais movimentos. Melhor resultado: {best_value} (alvo: {target})",
+    "turn_limit": "Limite de turnos alcançado. Melhor resultado: {best_value} (alvo: {target})"
+  }
+}

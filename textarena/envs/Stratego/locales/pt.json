@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id} no Stratego.\nSeu objetivo é capturar a bandeira do seu oponente ou eliminar todas as peças móveis dele.\nSeu exército foi colocado no tabuleiro para você, incluindo sua bandeira, bombas e outras peças de diferentes patentes.\n\n### Instruções de Jogo\n1. **Regras de Movimento:**\n   - Em sua vez, você pode mover uma peça por um passo para um quadrado adjacente (para cima, para baixo, para a esquerda ou para a direita) que já esteja ocupado com suas peças.\n   - Exemplo: Uma peça pode se mover de A1 para B1 ou A1 para A2 se B1 e A2 não estiverem ocupados com as peças do jogador.\n   - Se a peça selecionada for uma bomba ou uma bandeira, ela não pode ser movida.\n2. **Batalhas:**\n   - Se você se mover para um quadrado ocupado por uma peça do oponente, então uma batalha ocorrerá:\n     - A peça com a patente mais alta vence e elimina a peça do oponente.\n     - Se as patentes forem iguais, ambas as peças são removidas do tabuleiro.\n     - **Casos Especiais:**\n       - Bombas eliminam a maioria das peças atacantes, exceto os mineradores, que desativam as bombas.\n       - Espiões podem derrotar o marechal se o espião atacar primeiro, mas perdem para todas as outras peças.\n3. **Objetivos Estratégicos:**\n   - Identifique as peças do seu oponente através de seus movimentos e batalhas.\n   - Proteja sua bandeira enquanto tenta capturar a bandeira do seu oponente.\n   - Use os batedores estrategicamente para obter informações sobre as peças do seu oponente e atacar as mais fracas.\n\n### Como Fazer um Movimento:\n1. Especifique as coordenadas da peça que você deseja mover e seu destino.\n2. Use o formato: [A0 B0], onde A0 é a posição de origem e B0 é o destino.\n   - Exemplo: Para mover uma peça da linha 0, coluna 0 para a linha 1, coluna 0, insira [A0 B0].\n3. Certifique-se de que o destino é válido de acordo com as regras de movimento acima.\n\n### Notas Importantes:\n- O tabuleiro mostrará suas peças e suas posições, por exemplo, MN, MS.\n- O tabuleiro também mostrará as posições conhecidas das peças do seu oponente sem revelar suas patentes, por exemplo, ?.\n- Grades com ~ são lagos e não podem ser movidas para lá.\n- Como sugestão, comece seu jogo movendo as peças que estão na linha de frente para obter informações sobre as peças do seu oponente. A linha de frente do jogador 0 e do jogador 1 são as linhas D e G, respectivamente.\n\nAqui está o estado atual do tabuleiro:\n"
+  },
+  "board": {
+    "current_board": "Tabuleiro Atual:\n\n{board}\nMovimentos Disponíveis: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de ação inválido. O jogador {player_id} não inseriu um movimento no formato [A0 B0].",
+    "invalid_coordinates": "Formato de ação inválido. O jogador {player_id} não inseriu coordenadas válidas.",
+    "not_own_piece": "Formato de ação inválido. O jogador {player_id} deve mover uma de suas próprias peças.",
+    "scout_through_pieces": "Formato de ação inválido. O jogador {player_id} não pode mover um batedor através de outras peças.",
+    "scout_diagonal": "Formato de ação inválido. O jogador {player_id} não pode mover um batedor diagonalmente.",
+    "non_scout_multi_square": "Formato de ação inválido. Peças, exceto batedores, podem se mover apenas um quadrado de cada vez.",
+    "move_into_lake": "Formato de ação inválido. O jogador {player_id} não pode se mover para o lago.",
+    "move_onto_own_piece": "Formato de ação inválido. O jogador {player_id} não pode se mover para uma de suas próprias peças.",
+    "move_bomb_or_flag": "Formato de ação inválido. O jogador {player_id} não pode mover uma bomba ou uma bandeira."
+  },
+  "game_action": {
+    "you_moved": "Você moveu sua peça de {source} para {dest}.",
+    "opponent_moved": "O jogador {player_id} moveu uma peça de {source} para {dest}.",
+    "you_equal_ranks": "Você moveu sua peça de {source} para {dest}. A peça atacante era {attacking_rank} e a peça de destino era {target_rank}. Como as patentes são iguais, ambas as peças perderam.",
+    "opponent_equal_ranks": "O jogador {player_id} moveu uma peça de {source} para {dest}. A peça atacante era {attacking_rank} e a peça de destino era {target_rank}. Como as patentes são iguais, ambas as peças perderam.",
+    "you_miner_defused": "Você moveu sua peça de {source} para {dest}. A peça atacante era {attacking_rank} e a peça de destino era {target_rank}. Como os mineradores podem desativar bombas, você venceu a batalha.",
+    "opponent_miner_defused": "O jogador {player_id} moveu uma peça de {source} para {dest}. A peça atacante era {attacking_rank} e a peça de destino era {target_rank}. Como os mineradores podem desativar bombas, você perdeu a batalha.",
+    "you_bomb_lost": "Você moveu sua peça de {source} para {dest}. A peça atacante era {attacking_rank} e a peça de destino era {target_rank}. Como o atacante não é um minerador, você perdeu a batalha.",
+    "opponent_bomb_won": "O jogador {player_id} moveu uma peça de {source} para {dest}. A peça atacante era {attacking_rank} e a peça de destino era {target_rank}. Como o atacante não é um minerador, você venceu a batalha.",
+    "you_spy_won": "Você moveu sua peça de {source} para {dest}. A peça atacante era {attacking_rank} e a peça de destino era {target_rank}. Como o atacante é um espião e o destino é um marechal, você venceu a batalha.",
+    "opponent_spy_lost": "O jogador {player_id} moveu uma peça de {source} para {dest}. A peça atacante era {attacking_rank} e a peça de destino era {target_rank}. Como o atacante é um espião e o destino é um marechal, você perdeu a batalha.",
+    "you_higher_won": "Você moveu sua peça de {source} para {dest}. A peça atacante era {attacking_rank} e a peça de destino era {target_rank}. Como o atacante é de patente mais alta que o destino, você venceu a batalha.",
+    "opponent_higher_lost": "O jogador {player_id} moveu uma peça de {source} para {dest}. A peça atacante era {attacking_rank} e a peça de destino era {target_rank}. Como o atacante é de patente mais alta que o destino, você perdeu a batalha.",
+    "you_lower_lost": "Você moveu sua peça de {source} para {dest}. A peça atacante era {attacking_rank} e a peça de destino era {target_rank}. Como o atacante é de patente mais baixa que o destino, você perdeu a batalha.",
+    "opponent_lower_won": "O jogador {player_id} moveu uma peça de {source} para {dest}. A peça atacante era {attacking_rank} e a peça de destino era {target_rank}. Como o atacante é de patente mais baixa que o destino, você venceu a batalha."
+  },
+  "outcome": {
+    "flag_captured": "O jogador {player_id} capturou a bandeira do oponente!",
+    "no_movable_pieces": "O jogador {winner_id} venceu! O jogador {loser_id} não tem mais peças móveis."
+  }
+}

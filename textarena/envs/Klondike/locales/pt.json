@@ -1,0 +1,74 @@
+{
+  "_comment": "Arquivo de localização do Klondike Solitaire. NÃO traduza as chaves (lado esquerdo). Traduza apenas os valores (lado direito). Mantenha todos os {placeholders} exatamente como estão.",
+  "_slots": {
+    "{n}": "Índice de ação dentro de um comando separado por vírgulas, baseado em 1",
+    "{msg}": "Uma mensagem de resultado de ação aninhada (já localizada)",
+    "{count}": "Número de cartas viradas para cima sendo movidas",
+    "{src}": "Número da pilha de origem do tableau, baseado em 1",
+    "{dst}": "Número da pilha de destino, baseado em 1",
+    "{cmd}": "O comando desconhecido que o jogador digitou (não traduzido)",
+    "{max_turns}": "O número máximo de turnos antes do fim do jogo",
+    "{score}": "Número de cartas atualmente nas pilhas de fundação",
+    "{board}": "O tabuleiro ASCII renderizado (nunca traduzir)",
+    "{turn}": "Número do turno atual",
+    "{stock}": "Número de cartas restantes no estoque",
+    "{waste}": "A carta superior do lixo, ou '--' se estiver vazia (nunca traduzir)",
+    "{cards}": "As cartas em uma pilha como rótulos neutros, ou '--' se estiver vazia (nunca traduzir)"
+  },
+  "player_prompt": {
+    "intro": "Você está jogando Klondike Solitaire. Seu objetivo é mover todas as cartas para as pilhas de fundação.\n\nRegras do Jogo:\n- Pilhas de fundação (F1-F4): Construa do Ás ao Rei no mesmo naipe\n- Pilhas de tableau (T1-T7): Construa para baixo alternando cores (vermelho sobre preto, preto sobre vermelho)\n- Estoque: Compre cartas para a pilha de lixo\n- Lixo (W): Carta superior disponível para jogar\n\nComandos:\n- 'draw' - Compre cartas do estoque para o lixo\n- 'move <origem> <destino> [count]' - Mova cartas entre pilhas\n  Exemplos: 'move W T1', 'move T1 F2', 'move T3 T5 2'. A contagem também pode ser 'all', que tentará mover todas as cartas viradas para cima.\n- 'forfeit' - Termine o jogo imediatamente e bloqueie sua pontuação atual\n- Nomes de pilhas: W (lixo), F1-F4 (fundação), T1-T7 (tableau)\n\nVocê pode executar várias ações em um turno separando-as com vírgulas:\n  Exemplo: 'draw, move W T1, move T2 F1'\n\nApenas Reis podem ser colocados em pilhas de tableau vazias.\nAções executam em ordem - se uma falhar, as ações restantes são ignoradas.\nUse 'forfeit' se você acreditar que o jogo é impossível de ganhar."
+  },
+  "format_error": {
+    "no_brackets": "Formato de ação inválido. A ação deve estar entre colchetes.",
+    "no_closing_bracket": "Formato de ação inválido. Falta o colchete de fechamento ']'",
+    "empty_command": "Comando vazio. Digite 'draw' ou 'move <origem> <destino> [count]'",
+    "empty_action": "Ação vazia",
+    "move_needs_args": "O comando 'move' requer origem e destino. Uso: 'move <origem> <destino> [count]'",
+    "count_positive": "A contagem deve ser positiva ou 'all'",
+    "count_invalid": "Contagem inválida. Use um número ou 'all'",
+    "unknown_command": "Comando desconhecido '{cmd}'. Use 'draw', 'move <origem> <destino> [count]', ou 'forfeit'",
+    "wrapped": "Ação {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Ação {n}: {msg}",
+    "before_failure": "Executou {n} ação(ões) antes da falha.",
+    "failed": "Ação {n} falhou: {msg}"
+  },
+  "move_result": {
+    "drew": "Comprou cartas do estoque para o lixo.",
+    "cannot_draw": "Não é possível comprar. O estoque e o lixo estão vazios.",
+    "invalid_pile": "Nome de pilha inválido. Use W, F1-F4 ou T1-T7",
+    "foundation_one_card": "Só é possível mover 1 carta para a fundação",
+    "waste_to_foundation_ok": "Moveu carta do lixo para a fundação F{dst}",
+    "waste_to_foundation_bad": "Não é possível mover carta do lixo para essa pilha de fundação",
+    "tableau_to_foundation_ok": "Moveu carta do tableau T{src} para a fundação F{dst}",
+    "tableau_to_foundation_bad": "Não é possível mover carta do tableau para essa pilha de fundação",
+    "foundation_to_foundation": "Não é possível mover de fundação para fundação",
+    "waste_to_tableau_one_card": "Só é possível mover 1 carta do lixo para o tableau",
+    "waste_to_tableau_ok": "Moveu carta do lixo para o tableau T{dst}",
+    "waste_to_tableau_bad": "Não é possível colocar carta do lixo nessa pilha de tableau",
+    "no_face_up": "Nenhuma carta virada para cima para mover",
+    "tableau_to_tableau_ok": "Moveu {count} carta(s) do tableau T{src} para T{dst}",
+    "tableau_to_tableau_bad": "Não é possível mover {count} carta(s) de T{src} para T{dst}",
+    "foundation_to_tableau_one_card": "Só é possível mover 1 carta da fundação para o tableau",
+    "foundation_empty": "A fundação F{src} está vazia",
+    "foundation_to_tableau_ok": "Moveu carta da fundação F{src} para o tableau T{dst}",
+    "foundation_to_tableau_bad": "Não é possível colocar carta da fundação no tableau T{dst}",
+    "to_waste_or_stock": "Não é possível mover para o lixo ou estoque"
+  },
+  "outcome": {
+    "forfeit": "Jogo desistido. Pontuação final: {score} cartas nas fundações.",
+    "won": "Parabéns! Você venceu o Klondike Solitaire!",
+    "turn_limit": "Jogo terminado! Você atingiu o máximo de {max_turns} turnos. Pontuação: {score} cartas nas fundações."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Turno: {turn}/{max_turns}",
+    "stock": "Estoque: {stock} cartas",
+    "waste": "Lixo (W): {waste}",
+    "foundations_header": "Fundação:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

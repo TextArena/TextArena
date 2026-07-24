@@ -1,0 +1,39 @@
+{
+  "_comment": "Arquivo de localização do ThreePlayerGOPS. NÃO traduza as chaves (lado esquerdo). Traduza apenas os valores (lado direito).",
+  "_slots": {
+    "{player_id}": "O número do jogador, 0, 1 ou 2",
+    "{round}": "O número da rodada atual, 1..13",
+    "{prize}": "O rótulo da carta de prêmio revelada (A, 2..10, J, Q, K) - não traduzir",
+    "{worth}": "O valor total do prêmio, incluindo qualquer valor acumulado",
+    "{hand}": "As cartas restantes do jogador, renderizadas como tokens entre colchetes, como '[A]' '[2]' - não traduzir",
+    "{bids}": "A lista neutra e separada por vírgulas das cartas jogadas, como 'P0:10, P1:J, P2:Q' - não traduzir",
+    "{winner}": "O número do jogador que venceu a rodada",
+    "{pot}": "O valor do pote concedido ou acumulado nesta rodada",
+    "{scoreline}": "A pontuação em execução neutra, como 'P0:0  P1:0  P2:11' - não traduzir",
+    "{pid}": "O número do jogador que foi eliminado",
+    "{scores}": "As pontuações finais como um mapeamento bruto de número de jogador para pontuação - não traduzir"
+  },
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id} no Three-Player GOPS.\n- Você tem as 13 cartas A-K (cada uma exatamente uma vez).\n- Em cada rodada, um prêmio é revelado. Submeta UMA carta como `[Q]`, `[10]`, `[2]` …\n- A carta mais alta vence o prêmio (+ qualquer valor acumulado). Empates rolam o prêmio para a próxima rodada.\n- Após 13 rodadas, o total mais alto vence. Movimentos inválidos = eliminação."
+  },
+  "round": {
+    "header": "### Rodada {round}/13 - Prêmio: {prize} (vale {worth})",
+    "hand": "Sua mão restante: {hand}"
+  },
+  "reveal": {
+    "win": "Lances » {bids} - Jogador {winner} vence {pot}.",
+    "tie": "Lances » {bids} - empate, pote agora {pot}.",
+    "scores": "Pontuações → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "ação precisa de uma carta entre colchetes, como '[Q]'",
+    "bad_card": "carta já usada ou inválida"
+  },
+  "elimination": {
+    "player": "Jogador {pid} eliminado após movimentos inválidos repetidos."
+  },
+  "outcome": {
+    "auto_win": "Dois jogadores eliminados - vitória automática.",
+    "final": "Pontuações finais: {scores}"
+  }
+}
