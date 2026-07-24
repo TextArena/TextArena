@@ -1,0 +1,31 @@
+{
+  "_comment": "File di localizzazione di Snake. NON tradurre le chiavi (lato sinistro). Tradurre solo i valori (lato destro). Mantieni ogni {placeholder} esattamente com'è.",
+  "_slots": {
+    "{num_players}": "Numero di giocatori nella partita",
+    "{width}": "Larghezza della tavola in celle",
+    "{height}": "Altezza della tavola in celle",
+    "{max_turns}": "Limite di turni per la partita",
+    "{player_id}": "Numero del giocatore (a partire da 0)",
+    "{board}": "La griglia ASCII renderizzata; mantieni neutrale, non tradurre i suoi caratteri",
+    "{reason}": "La frase di fine partita renderizzata",
+    "{groups}": "Dati di classifica neutri (un elenco di gruppi di ID giocatore, dal peggiore al migliore); non tradurre"
+  },
+  "player_prompt": {
+    "intro": "Snake con {num_players} giocatori su una griglia {width}×{height}.\nControlli il serpente {player_id}. Mosse valide: '[up]'/'[down]'/'[left]'/'[right]' (o w/s/a/d).\nObiettivo: sopravvivere più a lungo o essere il più lungo e ottenere il punteggio più alto (limite di turni {max_turns} turni)."
+  },
+  "board": {
+    "current": "Tavola attuale:\n{board}",
+    "after_moves": "Stato attuale della tavola:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Il serpente {player_id} è morto a causa di una mossa non valida."
+  },
+  "outcome": {
+    "survived_win": "Il giocatore {player_id} è sopravvissuto; tutti gli altri sono periti.",
+    "all_dead_simul": "Tutti i serpenti sono morti simultaneamente.",
+    "outlived": "Il giocatore ha sopravvissuto a tutti gli altri.",
+    "all_dead": "Tutti i serpenti sono morti.",
+    "turn_limit": "Raggiunto il limite di turni - il miglior punteggio vince in caso di parità.",
+    "ranking": "{reason} Gruppi di classifica finali (dal peggiore al migliore): {groups}"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "File di localizzazione di Golf (gioco di carte). NON tradurre le chiavi (lato sinistro). Tradurre solo i valori (lato destro).",
+  "_slots": {
+    "{player_id}": "Il numero del giocatore, ad esempio 0 o 1",
+    "{pid}": "Il numero del giocatore, ad esempio 0 o 1",
+    "{winner}": "Il numero del giocatore con il punteggio più basso",
+    "{score}": "Un totale di punti numerici",
+    "{card}": "Un'etichetta di carta come A♠, 10♥, K♦ o Q♣",
+    "{new}": "L'etichetta della carta che è stata inserita nella griglia",
+    "{old}": "L'etichetta della carta che è stata rimossa dalla griglia",
+    "{row}": "Un numero di riga",
+    "{col}": "Un numero di colonna",
+    "{max_row}": "Il numero di riga valido più grande",
+    "{max_col}": "Il numero di colonna valido più grande",
+    "{reason}": "Una frase pre-renderizzata che descrive perché è iniziato l'ultimo round",
+    "{n}": "Un numero di riga mostrato all'inizio di una riga di griglia",
+    "{cards}": "Le celle pre-renderizzate di una riga di griglia",
+    "{hand}": "Il blocco di griglia del giocatore pre-renderizzato",
+    "{discard}": "L'etichetta della carta in cima alla pila di scarto o la parola 'nessuna'",
+    "{options}": "La linea pre-renderizzata che elenca le azioni disponibili",
+    "{scores}": "L'elenco pre-renderizzato dei punteggi finali per giocatore"
+  },
+  "player_prompt": {
+    "intro": "Stai giocando a Golf (Gioco di Carte) - Giocatore {player_id}.\nObiettivo: ottenere il punteggio totale più basso in questo singolo round. Se le colonne condividono lo stesso valore, vengono sommate come 0.\nValori delle carte: A=1, 2-10=valore nominale, J/Q=10, K=0\n\nAzioni (usa parentesi esatte):\n- '[draw]' - Pesca dal mazzo\n- '[take]' - Prendi dalla pila di scarto\n- '[swap X Y]' - Scambia la carta pescata con la posizione X (riga) Y (colonna)\n- '[discard]' - Scarta la carta pescata\n"
+  },
+  "board": {
+    "drew": "Hai pescato: {card}\nOra devi [swap X Y] o [discard] la carta.",
+    "took": "Hai preso: {card} dalla pila di scarto\nDevi [swap X Y] con essa (non puoi scartarla).",
+    "peeked": "Hai guardato la posizione ({row},{col}): {card}",
+    "turn_view": "La tua mano:\n{hand}\nPila di scarto: {discard}\n{options}",
+    "none": "Nessuna"
+  },
+  "options": {
+    "final_turns": "Ultimi turni! Le tue opzioni: [draw], [take], [peek X Y]",
+    "draw": "Le tue opzioni: [draw], [take]",
+    "must_swap": "Devi: [swap X Y] (non puoi scartare carte dalla pila di scarto)",
+    "swap_or_discard": "Devi: [swap X Y] o [discard]"
+  },
+  "hand": {
+    "no_cards": "Nessuna carta",
+    "header": "  Col:   1    2    3",
+    "row": "Riga {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Il giocatore {pid} ha scambiato {new} con {old} nella posizione ({row},{col})",
+    "discarded": "Il giocatore {pid} ha scartato {card}"
+  },
+  "message": {
+    "deck_empty": "Il mazzo è vuoto! Il gioco finisce immediatamente.",
+    "knocked": "Il giocatore {pid} ha bussato! Ogni altro giocatore ha un altro turno.",
+    "final_round": "Il giocatore {pid} {reason}! Ogni altro giocatore ha un altro turno."
+  },
+  "reason": {
+    "all_revealed": "ha tutte le carte rivelate"
+  },
+  "invalid": {
+    "wrong_action": "Usa esattamente UN'azione tra parentesi: [draw], [take], [swap X Y], [discard], [knock], o [peek X Y]",
+    "discard_empty": "La pila di scarto è vuota!",
+    "must_draw_first": "Devi prima [draw], [take], [knock], o [peek X Y]",
+    "cannot_discard_taken": "Non puoi scartare una carta presa dalla pila di scarto. Devi scambiarla.",
+    "have_drawn_card": "Hai una carta pescata. Devi [swap X Y] o [discard] la carta.",
+    "need_drawn_swap": "Hai bisogno di una carta pescata per scambiarla.",
+    "need_drawn_discard": "Hai bisogno di una carta pescata per scartarla.",
+    "out_of_bounds": "Posizione fuori dai limiti. Usa riga 1-{max_row}, colonna 1-{max_col}",
+    "knock_with_card": "Non puoi bussare con una carta pescata. Completa il tuo turno prima.",
+    "already_knocked": "Qualcuno ha già bussato questo round.",
+    "already_revealed": "Quella carta è già stata rivelata!"
+  },
+  "summary": {
+    "full": "Gioco finito! Il giocatore {winner} vince con un punteggio di {score} punti!\n\nPunteggi finali:\n{scores}",
+    "line": "Giocatore {pid}: {score} punti\n"
+  },
+  "board_str": {
+    "title": "=== GIOCO DI GOLF ===",
+    "discard": "Pila di scarto: {card}",
+    "knocked": "Il giocatore {pid} ha bussato!",
+    "player_header": "Giocatore {pid} (Punteggio: {score}):"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id}. Stai giocando al gioco del 15-Puzzle.\nL'obiettivo del gioco è disporre le tessere numerate in ordine ascendente da 1 a 15, con lo spazio vuoto situato nell'angolo in basso a destra.\nPer fare una mossa, puoi far scorrere una tessera nello spazio vuoto (rappresentato da un doppio trattino basso, ad esempio __) utilizzando uno dei seguenti comandi:\n- 'up': Sposta la tessera sotto lo spazio vuoto verso l'alto.\n- 'down': Sposta la tessera sopra lo spazio vuoto verso il basso.\n- 'left': Sposta la tessera a destra dello spazio vuoto verso sinistra.\n- 'right': Sposta la tessera a sinistra dello spazio vuoto verso destra.\nPer inviare la tua mossa, digita la direzione (ad esempio, 'up', 'down', 'left' o 'right') tra parentesi quadre, ad esempio [up].\nLa disposizione attuale della tavola è mostrata di seguito. Utilizza le informazioni per risolvere il puzzle.\n"
+  },
+  "board": {
+    "current_board": "Tavola attuale:\n\n{board}\nMosse disponibili: {moves}",
+    "game_board": "Tavola di gioco:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato di mossa non valido. Il giocatore {player_id} non ha risposto con una direzione valida tra parentesi quadre.",
+    "illegal_move": "Mossa non valida. La tessera non può essere spostata nella direzione specificata."
+  },
+  "outcome": {
+    "win": "Congratulazioni! Il giocatore {player_id} ha risolto con successo il 15-Puzzle.",
+    "turn_limit": "È stato raggiunto il limite di turni. Il modello ha completato il {percent} percento del puzzle"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "File di localizzazione di LinesOfAction. NON tradurre le chiavi (lato sinistro). Tradurre solo i valori (lato destro). Non tradurre mai le coordinate della tavola (a-h, 1-8), le lettere dei pezzi (O, X), il token del formato di mossa o la griglia ASCII {board}.",
+  "_slots": {
+    "{player_id}": "Il numero del giocatore, 0 o 1",
+    "{side}": "La lettera del pezzo del giocatore, O o X",
+    "{other}": "La lettera del pezzo dell'avversario, O o X",
+    "{board}": "La rappresentazione ASCII della tavola; lasciare invariata",
+    "{coord}": "Una coordinata della tavola come b1 o a3",
+    "{from}": "La coordinata di origine di una mossa, come b1",
+    "{to}": "La coordinata di destinazione di una mossa, come b3"
+  },
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in una partita di LinesOfAction.\nI tuoi pezzi sono '{side}', i pezzi dell'avversario sono '{other}'.\nFormato di mossa: `[b1b3]` (da-coordinata a-coordinata). Una mossa legale si sposta orizzontalmente, verticalmente o diagonalmente di un numero di caselle pari al totale dei pezzi (di qualsiasi colore) in quella linea. Puoi saltare i tuoi pezzi, ma non quelli dell'avversario; atterrare su un avversario lo cattura. Vinci quando tutti i tuoi pezzi sono connessi in un gruppo di 8 vicini."
+  },
+  "board": {
+    "current_board": "Tavola:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Il formato deve essere e2e4 (coordinate da,a).",
+    "no_piece": "Nessun pezzo {side} sulla coordinata {coord}.",
+    "identical": "Origine e destinazione identiche.",
+    "not_straight_or_diagonal": "La mossa deve essere retta o diagonale.",
+    "wrong_distance": "Deve muoversi di una distanza pari ai pezzi in linea.",
+    "enemy_blocks": "Un pezzo nemico blocca il percorso.",
+    "destination_own": "La destinazione è occupata da un pezzo proprio."
+  },
+  "game_action": {
+    "moved": "Il Giocatore {player_id} ha mosso {from} -> {to}",
+    "captured_suffix": "Il Giocatore {player_id} ha mosso {from} -> {to} catturando un nemico."
+  },
+  "outcome": {
+    "win": "Tutti i pezzi connessi.",
+    "draw_no_capture": "60 mosse senza cattura.",
+    "draw_repetition": "Posizione ripetuta tre volte."
+  }
+}
