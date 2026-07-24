@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "شما بازیکن {player_id} در Nim هستید.\nهدف شما برداشتن آخرین شیء باقی‌مانده است.\nدر هر نوبت، دقیقاً یک پشته را انتخاب کنید و یک یا چند شیء را از آن حذف کنید.\nاز فرمت '[pile quantity]' استفاده کنید، که در آن پشته، شاخص پشته و quantity، تعداد اشیاء برای حذف است.\nبه عنوان مثال، '[0 3]' سه شیء را از پشته 0 حذف می‌کند."
+  },
+  "state": {
+    "current_pile": "پشته فعلی:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "هیچ فرمت حرکت معتبر یافت نشد. از '[pile quantity]' استفاده کنید.",
+    "correct_format_wrong_fields": "بازیکن {player_id}، عمل نامعتبر است. ستون {col} خارج از محدوده است.",
+    "out_of_range": "شاخص پشته {pile_index} خارج از محدوده است.",
+    "non_positive": "باید حداقل یک شیء را حذف کنید.",
+    "exceeds_pile": "نمی‌توان {quantity} را از پشته {pile_index} حذف کرد (فقط {pile_count} باقی مانده است)."
+  },
+  "observation": {
+    "removed_from_piles": "بازیکن {player_id} بازی کرد [{pile_index} {quantity}] و {quantity} شیء را از پشته {pile_index} حذف کرد."
+  },
+  "outcome": {
+    "win": "بازیکن {player_id} آخرین شیء(ها) را برداشت!"
+  }
+}
