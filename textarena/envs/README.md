@@ -176,10 +176,10 @@ Two-Player
 | 19 | [IteratedTwoThirdsAverage](#iteratedtwothirdsaverage) | 2 | 🌐 | |
 | 20 | [IteratedStagHunt](#iteratedstaghunt) | 2 | | |
 | 21 | [KuhnPoker](#kuhnpoker) | 2 | 🌐 | |
-| 22 | [LeducHoldem](#leducholdem) | 2 | 🌐 | |
-| 23 | [LeTruc](#letruc) | 2 | 🌐 | |
+| 22 | [LeducHoldem](#leducholdem) | 2 | | |
+| 23 | [LeTruc](#letruc) | 2 | | |
 | 24 | [LinesOfAction](#linesofaction) | 2 | 🌐 | |
-| 25 | [LetterAuction](#letterauction) | 2 | 🌐 | |
+| 25 | [LetterAuction](#letterauction) | 2 | | |
 | 26 | [MemoryGame](#memorygame) | 2 | 🌐 | |
 | 27 | [Nim](#nim) | 2 | 🌐 | |
 | 28 | [Othello](#othello) | 2 | 🌐 | |
@@ -190,10 +190,10 @@ Two-Player
 | 33 | [SimpleBlindAuction](#simpleblindauction) | 2 | | |
 | 34 | [SimpleNegotiation](#simplenegotiation) | 2 | 🌐 | |
 | 35 | [SimpleTak](#simpletak) | 2 | 🌐 | |
-| 36 | [SpellingBee](#spellingbee) | 2 | 🌐 | |
+| 36 | [SpellingBee](#spellingbee) | 2 | | |
 | 37 | [SpiteAndMalice](#spiteandmalice) | 2 | 🌐 | |
 | 38 | [Stratego](#stratego) | 2 | 🌐 | |
-| 39 | [Tak](#tak) | 2 | 🌐 | |
+| 39 | [Tak](#tak) | 2 | | |
 | 40 | [TicTacToe](#tictactoe) | 2 | 🌐 | |
 | 41 | [TruthAndDeception](#truthanddeception) | 2 | | |
 | 42 | [TwoDollar](#twodollar) | 2 | | |
@@ -206,8 +206,8 @@ Two-Player
 |--:|------|:-------:|:------------:|----------|
 | 1 | [Coup](#coup) | 2–6 | | |
 | 2 | [LiarsDice](#liarsdice) | 2–15 | 🌐 | |
-| 3 | [Poker](#poker) | 2–15 | 🌐 | |
-| 4 | [Santorini](#santorini) | 2–3 | 🌐 | |
+| 3 | [Poker](#poker) | 2–15 | | |
+| 4 | [Santorini](#santorini) | 2–3 | | |
 | 5 | [Snake](#snake) | 2–15 | 🌐 | |
 | 6 | [Surround](#surround) | 2–15 | 🌐 | |
 | 7 | [Briscola](#briscola) | 2–4 | 🌐 | |
@@ -229,17 +229,17 @@ Two-Player
 
 | # | Game | Mode | Players | Multilingual | Comments |
 |--:|------|:----:|:-------:|:------------:|----------|
-| 1 | [Hanabi](#hanabi) | ? | 🌐 | | |
+| 1 | [Hanabi](#hanabi) | ? | | | |
 | 2 | [ImTheBoss](#imtheboss) | ? | ? | | |
 | 3 | [IteratedUltimatumGame](#iteratedultimatumgame) | ? | ? | | |
-| 4 | [Klondike](#klondike) | ? | 🌐 | | |
+| 4 | [Klondike](#klondike) | ? | | | |
 | 5 | [MarketEntryGame](#marketentrygame) | ? | ? | | |
 | 6 | [NewRecruit](#newrecruit) | ? | ? | | |
 | 7 | [PublicGoodsGame](#publicgoodsgame) | ? | ? | | |
 | 8 | [ScorableGames](#scorablegames) | ? | ? | | |
-| 9 | [Set](#set) | ? | 🌐 | | |
+| 9 | [Set](#set) | ? | | | |
 | 10 | [SettlersOfCatan](#settlersofcatan) | ? | ? | | |
-| 11 | [UltimateTexasHoldem](#ultimatetexasholdem) | ? | 🌐 | | |
+| 11 | [UltimateTexasHoldem](#ultimatetexasholdem) | ? | | | |
 | 12 | [UsedCarNegotiation](#usedcarnegotiation) | ? | ? | | |
 | 13 | [VendorNegotiation](#vendornegotiation) | ? | ? | | |
 | 14 | [WinAsMuchAsYouCan](#winasmuchasyoucan) | ? | ? | | |
