@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Вы — {role} в Полковнике Блотто.\nВаша цель — выиграть больше раундов, чем ваш противник.\nВ каждом раунде распределите ровно {num_total_units} единиц по полям {field_names}.\nИгрок, который распределяет больше единиц на поле, выигрывает это поле, и игрок, который выигрывает больше полей, выигрывает раунд.\nНапример, '[A7 B7 C6]' распределяет 7 единиц на поле A, 7 на поле B и 6 на поле C.",
+    "commander_alpha": "Командир Альфа",
+    "commander_beta": "Командир Бета"
+  },
+  "game_state": {
+    "header_round": "=== ПОЛКОВНИК БЛОТТО - Раунд {current_round}/{num_rounds} ===\nВыигранные раунды - Командир Альфа: {alpha_score}, Командир Бета: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nРаунд {current_round}\nКомандир Альфа распределил: {p0_allocations}\nКомандир Бета распределил: {p1_allocations}\n",
+    "winner_alpha": "{message}Победитель: Командир Альфа",
+    "winner_beta": "{message}Победитель: Командир Бета",
+    "tie": "{message}Ничья!"
+  },
+  "invalid_move": {
+    "wrong_format": "Неправильный формат ввода. Используйте: A:5, B:10, C:5",
+    "invalid_field": "Неправильное имя поля. Допустимые поля: {field_names}",
+    "wrong_allocation_value": "Все распределения должны быть неотрицательными целыми числами.",
+    "incorrect_total_units": "Вы должны распределить ровно {num_total_units} единиц. Текущая сумма: {current_sum}",
+    "good_allocations": "Распределение правильное."
+  },
+  "outcome": {
+    "winner_alpha": "Командир Альфа выигрывает {score_0}-{score_1} после {num_rounds} раундов!",
+    "winner_beta": "Командир Бета выигрывает {score_1}-{score_0} после {num_rounds} раундов!",
+    "draw": "Игра заканчивается вничью {score_0}-{score_1} после {num_rounds} раундов!",
+    "early_winner_alpha": "Командир Альфа выигрывает {scores_0}-{scores_1} (достигнуто большинство)!",
+    "early_winner_beta": "Командир Бета выигрывает {scores_1}-{scores_0} (достигнуто большинство)!"
+  }
+}
