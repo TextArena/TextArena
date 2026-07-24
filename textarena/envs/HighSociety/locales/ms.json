@@ -1,9 +1,29 @@
 {
-  "_comment": "Fail bahasa HighSociety — Bahasa Melayu. JANGAN terjemahkan kunci. Kekalkan {placeholder}, token bidaan seperti '[7]', {cards} serta ** * ### • dan anak panah.",
-  "_slots": { "{player_id}": "nombor pemain", "{round}": "nombor lelongan 1-10", "{prize}": "nilai kad prestij", "{cards}": "token kad wang pemain (jangan terjemah)", "{bid0}": "bidaan Pemain 0", "{bid1}": "bidaan Pemain 1", "{winner}": "nombor pemenang lelongan", "{total}": "jumlah prestij pemenang", "{high}": "nilai bersih lebih tinggi", "{low}": "nilai bersih lebih rendah", "{nw}": "nilai seri" },
-  "player_prompt": { "intro": "Anda ialah Pemain {player_id} dalam permainan HighSociety (versi 2 pemain).\nAliran permainan:  Sepuluh kad prestij dilelong satu demi satu.\nBidaan:            Setiap lelongan, pilih secara rahsia satu kad wang 1-11 dan dedahkannya.\n            • Bidaan lebih tinggi memenangi kad prestij dan membuang kad wang itu.\n            • Bidaan lebih rendah mengekalkan kad wangnya.\n            • Seri -> kedua-dua bidaan dikembalikan dan kad prestij yang sama dilelong semula.\nPemarkahan:        Selepas sepuluh lelongan, tambah **baki wang + mata prestij**.\n            *Nilai bersih* tertinggi menang (seri tepat -> seri).\n\n**Sintaks tindakan**  →  bida satu kad seperti '[7]' atau '[11]'." },
-  "board": { "auction_header": "\n### Lelongan {round}/10  |  Kad prestij: {prize}", "money_cards": "Kad wang anda yang berbaki: {cards}" },
-  "invalid_move": { "wrong_format": "Mesti mengandungi tepat satu kad wang [X].", "no_such_card": "Anda tidak lagi memiliki kad wang itu." },
-  "round": { "tie": "Seri - bidaan dikembalikan. Bida semula!", "result": "Pemain 0 membida {bid0}, Pemain 1 membida {bid1}. Pemain {winner} memenangi prestij {prize} (jumlah {total})." },
-  "outcome": { "win": "Nilai bersih {high} > {low}", "draw": "Nilai bersih kedua-duanya {nw} – seri tepat." }
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam permainan HighSociety versi 2 pemain.\nAliran permainan:  Sepuluh kad prestij dilelong satu demi satu.\nBidaan:            Dalam setiap lelongan, pilih secara rahsia satu kad wang antara 1 hingga 11, kemudian dedahkannya.\n                   • Bidaan yang lebih tinggi memenangi kad prestij dan membuang kad wang yang digunakan.\n                   • Bidaan yang lebih rendah menyimpan kad wangnya.\n                   • Jika seri, kedua-dua kad bidaan dikembalikan dan kad prestij yang sama dilelong semula.\nPemarkahan:        Selepas kesemua sepuluh lelongan, jumlahkan **wang yang berbaki + mata prestij**.\n                   Pemain dengan *nilai bersih* yang lebih tinggi menang. Nilai yang sama tepat menghasilkan keputusan seri.\n\n**Sintaks tindakan**  →  bida satu kad sahaja, seperti '[7]' atau '[11]'."
+  },
+
+  "auction": {
+    "announce": "\n### Lelongan {round}/10  |  Kad prestij: {prize}"
+  },
+
+  "board": {
+    "money_cards": "Kad wang anda yang masih berbaki: {money}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Mesti mengandungi tepat satu kad wang dalam format [X].",
+    "card_not_held": "Anda tidak lagi mempunyai kad wang itu."
+  },
+
+  "message": {
+    "tie": "Seri, kad bidaan dikembalikan. Bida semula!",
+    "auction_result": "P0 membida {bid0}, P1 membida {bid1}. Pemain {winner} memenangi prestij {prize}, dengan jumlah {total}."
+  },
+
+  "outcome": {
+    "p0_wins": "Nilai bersih {nw0} > {nw1}",
+    "p1_wins": "Nilai bersih {nw1} > {nw0}",
+    "draw": "Kedua-duanya mempunyai nilai bersih {nw0}, seri tepat."
+  }
 }

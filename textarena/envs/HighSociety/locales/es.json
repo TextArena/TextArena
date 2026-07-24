@@ -1,9 +1,29 @@
 {
-  "_comment": "Archivo de idioma de HighSociety en español. NO traduzcas las claves. Mantén {marcador}, tokens de puja como '[7]', {cards} y los signos ** * ### • y las flechas.",
-  "_slots": { "{player_id}": "número del jugador", "{round}": "número de subasta 1-10", "{prize}": "valor de la carta de prestigio", "{cards}": "tokens de cartas de dinero (no traducir)", "{bid0}": "puja del jugador 0", "{bid1}": "puja del jugador 1", "{winner}": "número del ganador de la subasta", "{total}": "prestigio total del ganador", "{high}": "patrimonio neto mayor", "{low}": "patrimonio neto menor", "{nw}": "valor del empate" },
-  "player_prompt": { "intro": "Eres el jugador {player_id} en una partida de HighSociety (versión para 2 jugadores).\nDesarrollo:  Se subastan diez cartas de prestigio una tras otra.\nPujas:       En cada subasta, elige en secreto una carta de dinero 1-11 y revélala.\n            • La puja más alta gana la carta de prestigio y descarta esa carta de dinero.\n            • La puja más baja conserva su carta de dinero.\n            • Empate -> ambas pujas se devuelven y la misma carta de prestigio se vuelve a subastar.\nPuntuación:  Tras las diez subastas, suma **el dinero restante + los puntos de prestigio**.\n            Gana el mayor *patrimonio neto* (empate exacto -> tablas).\n\n**Sintaxis de acción**  →  puja una sola carta como '[7]' o '[11]'." },
-  "board": { "auction_header": "\n### Subasta {round}/10  |  Carta de prestigio: {prize}", "money_cards": "Tus cartas de dinero restantes: {cards}" },
-  "invalid_move": { "wrong_format": "Debe incluir exactamente una carta de dinero [X].", "no_such_card": "Ya no tienes esa carta de dinero." },
-  "round": { "tie": "Empate - pujas devueltas. ¡Vuelve a pujar!", "result": "El jugador 0 pujó {bid0}, el jugador 1 pujó {bid1}. El jugador {winner} gana prestigio {prize} (total {total})." },
-  "outcome": { "win": "Patrimonio neto {high} > {low}", "draw": "Ambos patrimonios netos {nw} – empate exacto." }
+  "player_prompt": {
+    "intro": "Eres el jugador {player_id} en una partida de HighSociety para 2 jugadores.\nDesarrollo:  Se subastan diez cartas de prestigio, una tras otra.\nPujas:       En cada subasta, elige en secreto una carta de dinero del 1 al 11 y revélala.\n            • La puja más alta gana la carta de prestigio y descarta la carta de dinero utilizada.\n            • La puja más baja conserva su carta de dinero.\n            • En caso de empate, ambas pujas se devuelven y la misma carta de prestigio vuelve a subastarse.\nPuntuación:  Después de las diez subastas, suma **el dinero restante + los puntos de prestigio**.\n            Gana quien tenga el *patrimonio neto* más alto. Un empate exacto termina en empate.\n\n**Sintaxis de la acción**  →  puja una sola carta, como '[7]' o '[11]'."
+  },
+
+  "auction": {
+    "announce": "\n### Subasta {round}/10  |  Carta de prestigio: {prize}"
+  },
+
+  "board": {
+    "money_cards": "Tus cartas de dinero restantes: {money}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Debes incluir exactamente una carta de dinero con el formato [X].",
+    "card_not_held": "Ya no tienes esa carta de dinero."
+  },
+
+  "message": {
+    "tie": "Empate: se devuelven las pujas. ¡Vuelvan a pujar!",
+    "auction_result": "J0 pujó {bid0} y J1 pujó {bid1}. El jugador {winner} gana el prestigio {prize}, con un total de {total}."
+  },
+
+  "outcome": {
+    "p0_wins": "Patrimonio neto {nw0} > {nw1}",
+    "p1_wins": "Patrimonio neto {nw1} > {nw0}",
+    "draw": "Ambos tienen un patrimonio neto de {nw0}: empate exacto."
+  }
 }

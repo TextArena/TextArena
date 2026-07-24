@@ -1,89 +1,88 @@
 {
-  "_comment": "German Whist 语言文件。不要翻译键（左侧）。只翻译值（右侧）。完全保留每个 {placeholder}。绝不要翻译动作标记 '[play X]'、牌面标签（2..10、J、Q、K、A）、花色符号（{suit}/{trump}/{card} 槽位）或数字计数/分数。标记文本 '(TRUMP)' 可以本地化。",
-  "_slots": {
-    "{player_id}": "玩家编号，0 或 1",
-    "{trump_suit}": "将牌花色符号 - 不要翻译",
-    "{trump_card}": "将牌标签，例如 'K♣' - 不要翻译",
-    "{card}": "所打出的牌的标签，例如 '10♠' - 不要翻译",
-    "{suit}": "花色符号 - 不要翻译",
-    "{trump_mark}": "已渲染的 '(TRUMP)' 标记，或为空",
-    "{phase_info}": "已渲染的阶段说明行",
-    "{max_pos}": "玩家手中最大的合法出牌位置",
-    "{count}": "玩家持有的牌数",
-    "{pos}": "手中某张牌的位置编号",
-    "{hand}": "已渲染的多行手牌列表",
-    "{trick}": "已渲染的当前一墩列表",
-    "{next_card}": "已渲染的下一张牌行",
-    "{scores}": "已渲染的比分行",
-    "{phase}": "已渲染的阶段行",
-    "{winner}": "赢得该墩或整局的玩家编号",
-    "{s0}": "玩家 0 赢得的墩数",
-    "{s1}": "玩家 1 赢得的墩数",
-    "{total}": "已打出的总墩数",
-    "{summary}": "已渲染的最终总结块",
-    "{wtricks}": "获胜玩家的墩数",
-    "{remaining}": "牌堆中剩余的牌数"
+  "game_start": {
+    "intro": "游戏开始。王牌花色：{trump_suit}（王牌：{trump_str}）。",
+    "no_trump_card": "无"
   },
 
-  "game": {
-    "start": "German Whist 游戏开始！\n将牌花色：{trump_suit}（将牌：{trump_card}）\n\n学习阶段：赢得墩以获得牌堆中正面朝上的牌。赢家能看到下一张牌，输家则盲抽。"
-  },
-
-  "prompt": {
-    "phase_learning": "学习阶段：赢得墩以获得可见的下一张牌。你能看到自己在争夺什么！",
-    "phase_playing": "出牌阶段：没有更多牌可抽。尽可能多地赢得墩！",
-    "intro": "你正在玩 German Whist —— 玩家 {player_id}。\n{phase_info}\n目标：赢得多数的墩（26 墩中至少 14 墩）。\n牌力：A > K > Q > J > 10 > 9 > 8 > 7 > 6 > 5 > 4 > 3 > 2\n将牌胜过非将牌。若有同花色的牌则必须跟牌。\n\n动作：'[play X]'，其中 X 是牌在你手中的位置（1-{max_pos}）\n"
-  },
-
-  "hand": {
-    "none": "没有牌",
-    "empty": "手中没有牌",
-    "header": "你的手牌：",
-    "suit_line": "  {suit}{trump_mark}：",
-    "card_line": "    {pos}. {card}",
-    "trump_mark": "（将牌）"
-  },
-
-  "trick": {
-    "empty": "本墩尚未打出任何牌。",
-    "header": "当前一墩：",
-    "line": "  玩家 {player_id}：{card}{trump_mark}"
+  "player_prompt": {
+    "intro": "你是 German Whist 中的玩家 {player_id}。\n{phase_info}\n你持有 {hand_size} 张牌。\n使用 '[play N]' 打出一张牌，其中 N 是该牌在你手中的位置，例如 '[play 3]'。",
+    "phase_learning": "学习阶段：每墩的获胜者获得正面朝上的牌，失败者从牌堆抽取下一张牌。在此阶段赢得的墩不计入胜负。",
+    "phase_playing": "正式比赛阶段：牌堆已耗尽。从现在开始，每一墩都会计入胜负。"
   },
 
   "next_card": {
-    "playing": "出牌阶段：牌堆中没有更多牌可抽。",
-    "empty": "牌堆中没有更多牌。",
-    "info": "本墩赢家可获得的下一张牌：{card}{trump_mark}"
-  },
-
-  "turn": {
-    "scores": "已赢墩数 —— 玩家 0：{s0} | 玩家 1：{s1}",
-    "phase": "阶段：{phase}",
-    "phase_learning": "阶段：{phase}（牌堆中还剩 {remaining} 张牌）",
-    "board": "{hand}\n\n{trick}\n\n{next_card}\n\n{scores}\n{phase}\n\n使用 [play X] 打出一张牌",
-    "learning": "学习",
-    "playing": "出牌",
-    "finished": "结束"
+    "playing_phase": "当前没有可争夺的牌 - 正式比赛阶段已经开始。",
+    "deck_empty": "牌堆为空 - 当前没有可争夺的牌。",
+    "available": "可争夺的牌：{card}",
+    "available_trump": "可争夺的牌：{card}（王牌）"
   },
 
   "invalid_move": {
-    "wrong_format": "使用 [play X]，其中 X 是牌的位置（1、2、3 等）",
-    "out_of_range": "牌的位置无效。你有 {count} 张牌（1-{count}）",
-    "follow_suit": "如果你有该花色（{suit}）的牌，就必须跟牌！"
+    "wrong_format": "操作格式无效。请使用 '[play N]' 打出手中的第 N 张牌。",
+    "bad_position": "该卡牌位置不存在。你持有 {hand_size} 张牌。",
+    "must_follow_suit": "你必须跟随首出花色，打出一张 {lead_suit} 花色的牌。",
+    "invalid_play": "无法打出这张牌。"
   },
 
-  "action": {
-    "played": "玩家 {player_id} 打出了 {card}",
-    "trick_win": "玩家 {winner} 以 {card} 赢得本墩！",
-    "learning_complete": "学习阶段结束！没有更多牌可抽。\n出牌阶段：用你当前的手牌尽可能多地赢得墩！",
-    "won_card": "你赢得了本墩并获得：{card}",
-    "face_down": "你获得了一张正面朝下的牌：{card}",
-    "next_visible": "可获得的下一张牌（因为你赢了所以能看到）：{card}"
+  "game_action": {
+    "played": "玩家 {player_id} 打出了 {card}。"
+  },
+
+  "trick": {
+    "won": "玩家 {winner_id} 使用 {card} 赢得本墩。",
+    "won_learning": "玩家 {winner_id} 使用 {card} 赢得本墩，并获得正面朝上的牌。"
+  },
+
+  "phase": {
+    "learning_complete": "牌堆已耗尽。学习阶段结束 - 剩余的每一墩都会计入胜负。"
+  },
+
+  "draw": {
+    "winner_received": "你赢得了本墩，并获得 {card}。",
+    "loser_received": "你输掉了本墩，并从牌堆抽取了 {card}。",
+    "winner_preview": "下一张可争夺的牌是 {card}。"
+  },
+
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "目前赢得的墩数 - 玩家 0：{tricks0}，玩家 1：{tricks1}",
+    "scores_playing": "计分墩数 - 玩家 0：{tricks0}，玩家 1：{tricks1}",
+    "phase": "阶段：{phase}",
+    "phase_learning": "阶段：{phase}（牌堆中还剩 {remaining_cards} 张牌）"
+  },
+
+  "hand": {
+    "no_cards": "没有卡牌",
+    "no_cards_in_hand": "手中没有卡牌",
+    "header": "你的手牌：",
+    "trump_indicator": "（王牌）",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+
+  "trick_view": {
+    "empty": "本墩尚未打出任何牌。",
+    "header": "当前一墩：",
+    "trump_indicator": "（王牌）",
+    "card_line": "{observation}\n  玩家 {player_id}：{card}{trump_indicator}"
+  },
+
+  "board_str": {
+    "not_started": "游戏尚未开始",
+    "header": "=== GERMAN WHIST 游戏 ===",
+    "phase": "{observation}\n阶段：{phase}",
+    "trump_suit": "{observation}\n王牌花色：{trump_suit}",
+    "trump_card": "{observation}\n王牌：{card}",
+    "cards_left": "{observation}\n牌堆中剩余的卡牌：{count}",
+    "next_card": "{observation}\n获胜者将获得的下一张牌：{card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\n当前一墩：",
+    "trump_indicator": "（王牌）",
+    "trick_line": "{observation}\n  玩家 {player_id}：{card}{trump_indicator}",
+    "player_line": "{observation}\n玩家 {player_id}：{scoring} 个计分墩（共 {tricks} 墩），手中有 {hand_size} 张牌"
   },
 
   "outcome": {
-    "summary_head": "游戏结束！已打出的总墩数：{total}\n\n最终比分：\n玩家 0：{s0} 墩\n玩家 1：{s1} 墩\n\n",
-    "win": "{summary}玩家 {winner} 以 {wtricks} 墩获胜！",
-    "draw": "{summary}平局！"
+    "summary": "学习阶段 - 玩家 0：{l0}，玩家 1：{l1}。正式比赛阶段 - 玩家 0：{p0}，玩家 1：{p1}。玩家 {winner_id} 以 {winner_tricks} 个计分墩获胜！"
   }
 }

@@ -1,45 +1,32 @@
 {
-  "_comment": "GameOfPureStrategy locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]) or the '### ' markdown and '->' symbols.",
-  "_slots": {
-    "{player_id}": "The player's number, 0 or 1",
-    "{round}": "The current round number, 1..13",
-    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
-    "{worth}": "The prize's total value including any carried-over pot",
-    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
-    "{bid0}": "Player 0's played card face label - do not translate",
-    "{bid1}": "Player 1's played card face label - do not translate",
-    "{outcome}": "The rendered round-outcome phrase (who won or the tie result)",
-    "{pot}": "The pot value awarded or carried over this round",
-    "{s0}": "Player 0's total score",
-    "{s1}": "Player 1's total score",
-    "{s}": "The tied final score both players reached"
-  },
-
   "player_prompt": {
-    "intro": "You are Player {player_id} in a match of GameOfPureStrategy.\n- You hold the 13 cards A-K; each can be used once.\n- Each round a prize card is revealed. Play exactly ONE card by writing something that contains a bracketed token like '[Q]', '[10]', '[2]' ...\n- Higher card wins the prize (plus carry-over). Ties roll prize into the pot for next round.\n- Highest total after 13 rounds wins."
+    "intro":            "You are Player {player_id} in a match of GameOfPureStrategy.\n- You hold the 13 cards A-K; each can be used once.\n- Each round a prize card is revealed. Play exactly ONE card by writing something that contains a bracketed token like '[Q]', '[10]', '[2]' ...\n- Higher card wins the prize (plus carry-over). Ties roll prize into the pot for next round.\n- Highest total after 13 rounds wins."
   },
 
   "round": {
-    "header": "### Round {round}/13 - Prize: {prize}  (worth {worth})",
-    "hand":   "Your remaining hand: {hand}"
+    "announce":         "### Round {round}/13 - Prize: {prize}  (worth {worth})"
   },
 
-  "reveal": {
-    "bids":    "Bids: P0 {bid0} vs P1 {bid1} - {outcome}",
-    "p0_wins": "Player 0 wins {pot}.",
-    "p1_wins": "Player 1 wins {pot}.",
-    "tie":     "Tie -> pot now {pot}.",
-    "scores":  "Scores -> P0:{s0}  P1:{s1}"
+  "board": {
+    "hand":             "Your remaining hand: {hand}"
   },
 
   "invalid_move": {
-    "wrong_format": "Action must contain exactly ONE bracketed card token.",
-    "no_card":      "You no longer have that card."
+    "wrong_format":     "Action must contain exactly ONE bracketed card token.",
+    "card_not_held":    "You no longer have that card."
+  },
+
+  "message": {
+    "bids":             "Bids: P0 {card0} vs P1 {card1} - ",
+    "p0_wins":          "{observation}Player 0 wins {pot_value}.",
+    "p1_wins":          "{observation}Player 1 wins {pot_value}.",
+    "tie":              "{observation}Tie -> pot now {carry_pot}.",
+    "scores":           "Scores -> P0:{score0}  P1:{score1}"
   },
 
   "outcome": {
-    "win_p0": "P0 {s0} vs P1 {s1}",
-    "win_p1": "P1 {s1} vs P0 {s0}",
-    "draw":   "Both scored {s}"
+    "p0_wins":          "P0 {s0} vs P1 {s1}",
+    "p1_wins":          "P1 {s1} vs P0 {s0}",
+    "draw":             "Both scored {s0}"
   }
 }

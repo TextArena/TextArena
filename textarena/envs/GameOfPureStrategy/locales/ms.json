@@ -1,45 +1,32 @@
 {
-  "_comment": "Fail bahasa GameOfPureStrategy dalam bahasa Melayu. JANGAN terjemahkan kunci, hanya nilai. Kekalkan setiap {placeholder} sama seperti asal. Jangan sekali-kali terjemahkan token kad dalam kurungan siku (cth. [A], [10], [Q], [K]) atau penanda '### ' dan simbol '->'.",
-  "_slots": {
-    "{player_id}": "Nombor pemain, 0 atau 1",
-    "{round}": "Nombor pusingan semasa, 1..13",
-    "{prize}": "Label kad hadiah yang didedahkan (A, 2..10, J, Q, K) - jangan terjemah",
-    "{worth}": "Jumlah nilai hadiah termasuk sebarang pot yang dibawa ke hadapan",
-    "{hand}": "Kad pemain yang berbaki, dipaparkan sebagai token dalam kurungan siku seperti '[A]' '[2]' - jangan terjemah",
-    "{bid0}": "Label kad yang dimainkan oleh Pemain 0 - jangan terjemah",
-    "{bid1}": "Label kad yang dimainkan oleh Pemain 1 - jangan terjemah",
-    "{outcome}": "Frasa keputusan pusingan (siapa menang atau keputusan seri)",
-    "{pot}": "Nilai pot yang dianugerahkan atau dibawa ke hadapan pusingan ini",
-    "{s0}": "Jumlah mata Pemain 0",
-    "{s1}": "Jumlah mata Pemain 1",
-    "{s}": "Mata akhir seri yang dicapai oleh kedua-dua pemain"
-  },
-
   "player_prompt": {
-    "intro": "Anda ialah Pemain {player_id} dalam perlawanan GameOfPureStrategy.\n- Anda memegang 13 kad A-K; setiap satu boleh digunakan sekali.\n- Setiap pusingan sekeping kad hadiah didedahkan. Mainkan tepat SATU kad dengan menulis sesuatu yang mengandungi token dalam kurungan siku seperti '[Q]', '[10]', '[2]' ...\n- Kad yang lebih tinggi memenangi hadiah (tambah bawaan). Seri membawa hadiah ke dalam pot untuk pusingan seterusnya.\n- Jumlah tertinggi selepas 13 pusingan menang."
+    "intro": "Anda ialah Pemain {player_id} dalam perlawanan GameOfPureStrategy.\n- Anda memegang 13 kad daripada A hingga K; setiap kad hanya boleh digunakan sekali.\n- Dalam setiap pusingan, satu kad hadiah akan didedahkan. Mainkan tepat SATU kad dengan menulis sesuatu yang mengandungi token kad dalam kurungan siku, seperti '[Q]', '[10]', '[2]' ...\n- Kad yang lebih tinggi memenangi hadiah, termasuk pot yang dibawa ke hadapan. Jika seri, hadiah akan dimasukkan ke dalam pot untuk pusingan seterusnya.\n- Pemain dengan jumlah mata tertinggi selepas 13 pusingan menang."
   },
 
   "round": {
-    "header": "### Pusingan {round}/13 - Hadiah: {prize}  (bernilai {worth})",
-    "hand":   "Baki tangan anda: {hand}"
+    "announce": "### Pusingan {round}/13 - Hadiah: {prize}  (bernilai {worth})"
   },
 
-  "reveal": {
-    "bids":    "Bidaan: P0 {bid0} vs P1 {bid1} - {outcome}",
-    "p0_wins": "Pemain 0 menang {pot}.",
-    "p1_wins": "Pemain 1 menang {pot}.",
-    "tie":     "Seri -> pot kini {pot}.",
-    "scores":  "Mata -> P0:{s0}  P1:{s1}"
+  "board": {
+    "hand": "Kad yang masih berada dalam tangan anda: {hand}"
   },
 
   "invalid_move": {
     "wrong_format": "Tindakan mesti mengandungi tepat SATU token kad dalam kurungan siku.",
-    "no_card":      "Anda tidak lagi memiliki kad itu."
+    "card_not_held": "Anda tidak lagi mempunyai kad itu."
+  },
+
+  "message": {
+    "bids": "Bidaan: P0 {card0} lawan P1 {card1} - ",
+    "p0_wins": "{observation}Pemain 0 memenangi {pot_value}.",
+    "p1_wins": "{observation}Pemain 1 memenangi {pot_value}.",
+    "tie": "{observation}Seri -> pot kini bernilai {carry_pot}.",
+    "scores": "Mata -> P0:{score0}  P1:{score1}"
   },
 
   "outcome": {
-    "win_p0": "P0 {s0} lwn P1 {s1}",
-    "win_p1": "P1 {s1} lwn P0 {s0}",
-    "draw":   "Kedua-duanya mendapat {s}"
+    "p0_wins": "P0 {s0} lawan P1 {s1}",
+    "p1_wins": "P1 {s1} lawan P0 {s0}",
+    "draw": "Kedua-duanya memperoleh {s0}"
   }
 }

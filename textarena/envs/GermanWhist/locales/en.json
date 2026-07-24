@@ -1,89 +1,88 @@
 {
-  "_comment": "German Whist locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (2..10, J, Q, K, A), the suit symbols (the {suit}/{trump}/{card} slots), or numeric counts/scores. The '(TRUMP)' marker text may be localized.",
-  "_slots": {
-    "{player_id}": "A player number, 0 or 1",
-    "{trump_suit}": "The trump suit symbol - do not translate",
-    "{trump_card}": "The trump card label, e.g. 'K♣' - do not translate",
-    "{card}": "A played card label, e.g. '10♠' - do not translate",
-    "{suit}": "A suit symbol - do not translate",
-    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
-    "{phase_info}": "The pre-rendered phase description line",
-    "{max_pos}": "The highest legal card position in the player's hand",
-    "{count}": "A number of cards a player holds",
-    "{pos}": "A card's position number in the hand",
-    "{hand}": "The pre-rendered, multi-line hand listing",
-    "{trick}": "The pre-rendered current-trick listing",
-    "{next_card}": "The pre-rendered next-card line",
-    "{scores}": "The pre-rendered score line",
-    "{phase}": "The pre-rendered phase line",
-    "{winner}": "The player number who won the trick or game",
-    "{s0}": "Player 0's trick count",
-    "{s1}": "Player 1's trick count",
-    "{total}": "Total tricks played",
-    "{summary}": "The pre-rendered final summary block",
-    "{wtricks}": "The winning player's trick count",
-    "{remaining}": "Number of cards left in the deck"
+  "game_start": {
+    "intro":            "The game begins. Trump suit: {trump_suit} (trump card: {trump_str}).",
+    "no_trump_card":    "none"
   },
 
-  "game": {
-    "start": "German Whist game started!\nTrump suit: {trump_suit} (Trump card: {trump_card})\n\nLEARNING PHASE: Win tricks to get the face-up card from the deck. The winner sees the next card, the loser gets it blind."
-  },
-
-  "prompt": {
-    "phase_learning": "LEARNING PHASE: Win tricks to get the visible next card. You can see what you're competing for!",
-    "phase_playing": "PLAYING PHASE: No more cards to draw. Win as many tricks as possible!",
-    "intro": "You are playing German Whist - Player {player_id}.\n{phase_info}\nGoal: Win the majority of tricks (14+ out of 26 total).\nCard Power: A > K > Q > J > 10 > 9 > 8 > 7 > 6 > 5 > 4 > 3 > 2\nTrump cards beat non-trump cards. You must follow suit if possible.\n\nAction: '[play X]' where X is the position (1-{max_pos}) of the card in your hand\n"
-  },
-
-  "hand": {
-    "none": "No cards",
-    "empty": "No cards in hand",
-    "header": "Your hand:",
-    "suit_line": "  {suit}{trump_mark}:",
-    "card_line": "    {pos}. {card}",
-    "trump_mark": " (TRUMP)"
-  },
-
-  "trick": {
-    "empty": "No cards played yet this trick.",
-    "header": "Current trick:",
-    "line": "  Player {player_id}: {card}{trump_mark}"
+  "player_prompt": {
+    "intro":            "You are Player {player_id} in German Whist.\n{phase_info}\nYou hold {hand_size} cards.\nPlay a card with '[play N]', where N is its position in your hand (for example '[play 3]').",
+    "phase_learning":   "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing":    "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
   },
 
   "next_card": {
-    "playing": "PLAYING PHASE: No more cards to draw from deck.",
-    "empty": "No more cards in deck.",
-    "info": "Next card for trick winner: {card}{trump_mark}"
-  },
-
-  "turn": {
-    "scores": "Tricks won - Player 0: {s0} | Player 1: {s1}",
-    "phase": "Phase: {phase}",
-    "phase_learning": "Phase: {phase} ({remaining} cards left in deck)",
-    "board": "{hand}\n\n{trick}\n\n{next_card}\n\n{scores}\n{phase}\n\nPlay a card using [play X]",
-    "learning": "LEARNING",
-    "playing": "PLAYING",
-    "finished": "FINISHED"
+    "playing_phase":    "No card is on offer - the playing phase has begun.",
+    "deck_empty":       "The deck is empty - no card is on offer.",
+    "available":        "Card on offer: {card}",
+    "available_trump":  "Card on offer: {card} (TRUMP)"
   },
 
   "invalid_move": {
-    "wrong_format": "Use [play X] where X is the card position (1, 2, 3, etc.)",
-    "out_of_range": "Invalid card position. You have {count} cards (1-{count})",
-    "follow_suit": "You must follow suit ({suit}) if you have cards of that suit!"
+    "wrong_format":     "Invalid move format. Use '[play N]' to play the Nth card in your hand.",
+    "bad_position":     "That card position does not exist. You hold {hand_size} cards.",
+    "must_follow_suit": "You must follow suit and play a {lead_suit} card.",
+    "invalid_play":     "That card cannot be played."
   },
 
-  "action": {
-    "played": "Player {player_id} played {card}",
-    "trick_win": "Player {winner} wins the trick with {card}!",
-    "learning_complete": "LEARNING PHASE COMPLETE! No more cards to draw.\nPLAYING PHASE: Win as many tricks as possible with your current hand!",
-    "won_card": "You won the trick and received: {card}",
-    "face_down": "You received a face-down card: {card}",
-    "next_visible": "Next card available (you can see this because you won): {card}"
+  "game_action": {
+    "played":           "Player {player_id} played {card}."
+  },
+
+  "trick": {
+    "won":              "Player {winner_id} wins the trick with {card}.",
+    "won_learning":     "Player {winner_id} wins the trick with {card} and takes the face-up card."
+  },
+
+  "phase": {
+    "learning_complete": "The deck is exhausted. The learning phase is over - every remaining trick counts towards victory."
+  },
+
+  "draw": {
+    "winner_received":  "You won the trick and received {card}.",
+    "loser_received":   "You lost the trick and drew {card} from the deck.",
+    "winner_preview":   "The next card on offer is {card}."
+  },
+
+  "turn": {
+    "board":            "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning":  "Tricks won so far - Player 0: {tricks0}, Player 1: {tricks1}",
+    "scores_playing":   "Scoring tricks - Player 0: {tricks0}, Player 1: {tricks1}",
+    "phase":            "Phase: {phase}",
+    "phase_learning":   "Phase: {phase} ({remaining_cards} cards left in the deck)"
+  },
+
+  "hand": {
+    "no_cards":         "No cards",
+    "no_cards_in_hand": "No cards in hand",
+    "header":           "Your hand:",
+    "trump_indicator":  " (TRUMP)",
+    "suit_line":        "{observation}\n  {suit}{trump_indicator}:",
+    "card_line":        "{observation}\n    {index}. {card}"
+  },
+
+  "trick_view": {
+    "empty":            "No cards played yet this trick.",
+    "header":           "Current trick:",
+    "trump_indicator":  " (TRUMP)",
+    "card_line":        "{observation}\n  Player {player_id}: {card}{trump_indicator}"
+  },
+
+  "board_str": {
+    "not_started":      "Game not started",
+    "header":           "=== GERMAN WHIST GAME ===",
+    "phase":            "{observation}\nPhase: {phase}",
+    "trump_suit":       "{observation}\nTrump suit: {trump_suit}",
+    "trump_card":       "{observation}\nTrump card: {card}",
+    "cards_left":       "{observation}\nCards left in deck: {count}",
+    "next_card":        "{observation}\nNext card for winner: {card}",
+    "blank":            "{observation}\n",
+    "current_trick":    "{observation}\nCurrent trick:",
+    "trump_indicator":  " (TRUMP)",
+    "trick_line":       "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line":      "{observation}\nPlayer {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} cards in hand"
   },
 
   "outcome": {
-    "summary_head": "Game Over! Total tricks played: {total}\n\nFinal Score:\nPlayer 0: {s0} tricks\nPlayer 1: {s1} tricks\n\n",
-    "win": "{summary}Player {winner} wins with {wtricks} tricks!",
-    "draw": "{summary}It's a tie!"
+    "summary":          "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
   }
 }

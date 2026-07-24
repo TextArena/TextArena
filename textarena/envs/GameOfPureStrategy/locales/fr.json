@@ -1,45 +1,32 @@
 {
-  "_comment": "Fichier de langue de GameOfPureStrategy en français. NE traduis PAS les clés, uniquement les valeurs. Conserve chaque {marqueur} exactement tel quel. Ne traduis jamais les jetons de carte entre crochets (p. ex. [A], [10], [Q], [K]) ni la marque '### ' ni le symbole '->'.",
-  "_slots": {
-    "{player_id}": "Le numéro du joueur, 0 ou 1",
-    "{round}": "Le numéro de la manche en cours, 1..13",
-    "{prize}": "L'étiquette de la carte prix révélée (A, 2..10, J, Q, K) - ne pas traduire",
-    "{worth}": "La valeur totale du prix, y compris toute cagnotte reportée",
-    "{hand}": "Les cartes restantes du joueur, affichées sous forme de jetons entre crochets comme '[A]' '[2]' - ne pas traduire",
-    "{bid0}": "L'étiquette de la carte jouée par le joueur 0 - ne pas traduire",
-    "{bid1}": "L'étiquette de la carte jouée par le joueur 1 - ne pas traduire",
-    "{outcome}": "La phrase de résultat de la manche (qui a gagné ou le résultat d'égalité)",
-    "{pot}": "La valeur de la cagnotte attribuée ou reportée cette manche",
-    "{s0}": "Score total du joueur 0",
-    "{s1}": "Score total du joueur 1",
-    "{s}": "Le score final à égalité atteint par les deux joueurs"
-  },
-
   "player_prompt": {
-    "intro": "Tu es le Joueur {player_id} dans une partie de GameOfPureStrategy.\n- Tu détiens les 13 cartes A-K ; chacune ne peut être utilisée qu'une fois.\n- À chaque manche, une carte prix est révélée. Joue exactement UNE carte en écrivant quelque chose qui contient un jeton entre crochets comme '[Q]', '[10]', '[2]' ...\n- La carte la plus haute remporte le prix (plus le report). En cas d'égalité, le prix passe dans la cagnotte pour la manche suivante.\n- Le total le plus élevé après 13 manches l'emporte."
+    "intro": "Vous êtes le joueur {player_id} dans une partie de GameOfPureStrategy.\n- Vous possédez les 13 cartes de A à K ; chacune ne peut être utilisée qu'une seule fois.\n- À chaque manche, une carte de récompense est révélée. Jouez exactement UNE carte en écrivant quelque chose contenant un symbole de carte entre crochets, comme '[Q]', '[10]', '[2]' ...\n- La carte la plus forte remporte la récompense, ainsi que toute cagnotte reportée. En cas d'égalité, la récompense est ajoutée à la cagnotte de la manche suivante.\n- Le joueur ayant le score total le plus élevé après 13 manches gagne."
   },
 
   "round": {
-    "header": "### Manche {round}/13 - Prix : {prize}  (vaut {worth})",
-    "hand":   "Ta main restante : {hand}"
+    "announce": "### Manche {round}/13 - Récompense : {prize}  (valeur {worth})"
   },
 
-  "reveal": {
-    "bids":    "Mises : P0 {bid0} vs P1 {bid1} - {outcome}",
-    "p0_wins": "Le Joueur 0 remporte {pot}.",
-    "p1_wins": "Le Joueur 1 remporte {pot}.",
-    "tie":     "Égalité -> cagnotte désormais {pot}.",
-    "scores":  "Points -> P0:{s0}  P1:{s1}"
+  "board": {
+    "hand": "Vos cartes restantes : {hand}"
   },
 
   "invalid_move": {
-    "wrong_format": "L'action doit contenir exactement UN jeton de carte entre crochets.",
-    "no_card":      "Tu n'as plus cette carte."
+    "wrong_format": "L'action doit contenir exactement UN symbole de carte entre crochets.",
+    "card_not_held": "Vous ne possédez plus cette carte."
+  },
+
+  "message": {
+    "bids": "Cartes jouées : J0 {card0} contre J1 {card1} - ",
+    "p0_wins": "{observation}Le joueur 0 remporte {pot_value}.",
+    "p1_wins": "{observation}Le joueur 1 remporte {pot_value}.",
+    "tie": "{observation}Égalité -> la cagnotte vaut maintenant {carry_pot}.",
+    "scores": "Scores -> J0 : {score0}  J1 : {score1}"
   },
 
   "outcome": {
-    "win_p0": "P0 {s0} contre P1 {s1}",
-    "win_p1": "P1 {s1} contre P0 {s0}",
-    "draw":   "Les deux ont marqué {s}"
+    "p0_wins": "J0 {s0} contre J1 {s1}",
+    "p1_wins": "J1 {s1} contre J0 {s0}",
+    "draw": "Les deux joueurs ont obtenu {s0}"
   }
 }

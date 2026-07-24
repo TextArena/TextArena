@@ -1,40 +1,29 @@
 {
-  "_comment": "HighSociety locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate bid tokens like '[7]' or the {cards} list.",
-  "_slots": {
-    "{player_id}": "The player's number, 0 or 1",
-    "{round}": "The current auction number (1-10)",
-    "{prize}": "The prestige card value being auctioned",
-    "{cards}": "The player's remaining money-card tokens, e.g. '[1]' '[2]' (do not translate)",
-    "{bid0}": "Player 0's bid",
-    "{bid1}": "Player 1's bid",
-    "{winner}": "The player number that won the auction",
-    "{total}": "The winner's total prestige",
-    "{high}": "The higher net-worth",
-    "{low}": "The lower net-worth",
-    "{nw}": "The tied net-worth value"
+  "player_prompt": {
+    "intro":            "You are Player {player_id} in a game of HighSociety (2-player version).\nGame flow:  Ten prestige cards are auctioned one after another.\nBidding:    Each auction, secretly choose a money card 1-11 and reveal.\n            • Higher bid wins the prestige card and discards that money card.\n            • Lower bid keeps their money card.\n            • Tie -> both bids are returned and the same prestige card is re-auctioned.\nScoring:    After all ten auctions, add **remaining cash + prestige points**.\n            Higher *net-worth* wins (exact tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'."
   },
 
-  "player_prompt": {
-    "intro": "You are Player {player_id} in a game of HighSociety (2-player version).\nGame flow:  Ten prestige cards are auctioned one after another.\nBidding:    Each auction, secretly choose a money card 1-11 and reveal.\n            • Higher bid wins the prestige card and discards that money card.\n            • Lower bid keeps their money card.\n            • Tie -> both bids are returned and the same prestige card is re-auctioned.\nScoring:    After all ten auctions, add **remaining cash + prestige points**.\n            Higher *net-worth* wins (exact tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'."
+  "auction": {
+    "announce":         "\n### Auction {round}/10  |  Prestige card: {prize}"
   },
 
   "board": {
-    "auction_header": "\n### Auction {round}/10  |  Prestige card: {prize}",
-    "money_cards":    "Your remaining money cards: {cards}"
+    "money_cards":      "Your remaining money cards: {money}"
   },
 
   "invalid_move": {
-    "wrong_format":  "Must include exactly one [X] money card.",
-    "no_such_card":  "You no longer have that money card."
+    "wrong_format":     "Must include exactly one [X] money card.",
+    "card_not_held":    "You no longer have that money card."
   },
 
-  "round": {
-    "tie":    "Tie - bids returned. Rebid!",
-    "result": "P0 bid {bid0}, P1 bid {bid1}. Player {winner} wins prestige {prize} (total {total})."
+  "message": {
+    "tie":              "Tie - bids returned. Rebid!",
+    "auction_result":   "P0 bid {bid0}, P1 bid {bid1}. Player {winner} wins prestige {prize} (total {total})."
   },
 
   "outcome": {
-    "win":  "Net-worth {high} > {low}",
-    "draw": "Both net-worth {nw} – exact tie."
+    "p0_wins":          "Net-worth {nw0} > {nw1}",
+    "p1_wins":          "Net-worth {nw1} > {nw0}",
+    "draw":             "Both net-worth {nw0} – exact tie."
   }
 }
