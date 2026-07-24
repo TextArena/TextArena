@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Ви сте играч {player_id} који игра {colour} ({piece}) у игри Othello.\nВаш циљ је да имате више фигура ваше боје на табли до краја игре.\nНа вашем потезу, поставите фигуру тако да она фланкира једну или више противничких фигура - у било ком смеру (хоризонтално, вертикално или дијагонално) - између ваше нове фигуре и друге ваше постојеће фигуре. Све фланкиране противничке фигуре ће бити окренуте у вашу боју.\nНаведите ваш потез у формату '[ред, кол]'."
+  },
+  "board": {
+    "game_board": "Табла игре:\n{board}",
+    "valid_moves": "{observation}\nВажећи потези: {moves}",
+    "no_valid_moves_reset": "{observation}\nНема важећих потеза - можда морате да прескочите.",
+    "no_valid_moves_step": "{observation}\nНема важећих потеза – можда морате да прескочите.",
+    "scores_reset": "{observation}\nТренутни резултати - Црни: {black_count}, Бели: {white_count}\n",
+    "scores_step": "{observation}\nРезултати - Црни: {black_count}, Бели: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Потез мора бити у облику [ред, кол].",
+    "illegal": "Неважећи потез. Важећи потези: {valid}"
+  },
+  "game_action": {
+    "skipped": "Играч {pid} је морао да прескочи свој потез",
+    "played": "Играч {pid} ({piece}) је одиграо [{r}, {c}] и окренуо {flipped} фигуру(е)"
+  },
+  "game_message": {
+    "must_skip": "Играч {pid} ({piece}) нема важећих потеза и мора да прескочи."
+  },
+  "outcome": {
+    "black_wins": "Црни побеђује {black_count}-{white_count}.",
+    "white_wins": "Бели побеђује {white_count}-{black_count}.",
+    "draw": "Нерешено {black_count}-{white_count}."
+  }
+}
