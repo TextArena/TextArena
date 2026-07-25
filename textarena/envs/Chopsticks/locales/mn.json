@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Та бол Chopsticks-ийн тоглогч {player_id}. Таны эргэлтэд: + Attack: '[attack M O]-ийн аль нэгг сонгох. Энд M= чиний гар (0 эсвэл 1), O= өрсөлдөгчийн гар (0 эсвэл 1). - Өрсөлдөгчийн гар тоо толгой таны гаргаар нэмэгдэнэ; хэрэв >=5, энэ нь 0 болно. + Split: '[split L R]' гэсэн үгтэй бол таны нийт бармагуудыг L болон R (L+R = таны нийт) болгон дахин хувааж өгнө. Эдгээр тушаалнуудын аль нэгээр хариул."
+  },
+  "board": {
+    "current_board": "Одоогийн тамирчин: 0 тоглогч: {hands_0} 1 тоглогч: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Таны гар {my_idx} үхсэн байна.",
+    "opp_hand_dead": "Нөрсөлдөгчийн гар {opp_idx} аль хэдийн үхсэн байна.",
+    "split_sum": "Split must sum to {total}.",
+    "split_no_change": "Сплит таны гарны хуваарилалтыг өөрчилнө.",
+    "invalid_command": "Хууль бус хөдөлгөөн. [attack M O] эсвэл [split L R] ашиглана."
+  },
+  "game_action": {
+    "attack": "P{player_id} нь P{opp_id}-ийн гарыг {opp_idx} халдаж, {opp_val}-аас {new_val}-д шилжинэ.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Хоёр талын гар ч үхсэн.",
+    "draw": "Хаалганы хязгаар хүрчээ."
+  }
+}

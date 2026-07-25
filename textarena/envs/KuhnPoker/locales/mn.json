@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Та бол Kuhn Poker-ийн {max_rounds} тойргийн тоглолтын {player_id} тоглогч. Тоглоомын дүрэм: - Kuhn Poker нь J, Q, K (J хамгийн бага, K хамгийн өндөр) - 3 карттай багц ашигладаг. - Тоглоомын бүр нэг тоглогч ante {ante} чип, тусад нь 1 карт авдаг (картууд нь өөрчлөхгүйгээр хуваагдана, тиймээс та өрсөлдөгчийнхээ адил карттай байж чадахгүй). - Тоглоомын үргэлжлэх нь {max_rounds} тойргийн турш үргэлжилнэ. - Бүх тойргийн дараа хамгийн олон чиптэй тоглогч ялалт байгуулна. Үйл ажиллагааны дүрэм: - '[check]': Тоглоомын дараа шилжүүлэггүйгээр шилжүүлэг (хэрэгтээ ямар ч бооцоо тавилан дээр байхгүй бол) - '[bet]': 1 чиптэй сав нэмэх (хэрэгтээ ямар ч бооцоо тавилан дээр байхгүй бол) - '[call]': Бүрсгүйн 1 нэмснээр өрсөлдөгчийн бооцоо тохируулна. - '[fold]': Гар бууж, өрсөлдөгч чинь сав ялах"
+  },
+  "init_round": {
+    "round_start": "### {current_round}-р эгнээ эхэлж байна {max_rounds} эгнээний дотор. Танай карт: '{player_card}'",
+    "available_actions": "Таны хийж чадах үйл ажиллагаа нь: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Үйл ажиллагаа нь [Check], [Bet], [Call], эсвэл [Fold] байх ёстой.",
+    "not_legal": "Үйл ажиллагаа нь {legal_actions} байх ёстой."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Таны хийх боломжтой үйлдлүүд нь: {legal_actions}.",
+    "round_summary": "{reason} Одоогийн оноо: 0 тоглогч: \"{player_0_chips}\"; 1 тоглогч: \"{player_1_chips}\""
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "{max_rounds} тойргийн төгсгөлд хоёр тоглогч ижил тооны чипстэй байв.",
+    "round_win": "Тоглогч {player_id} буулт хийлээ.",
+    "winner_player0": "0 тоглогч нь бүх {max_rounds} тойргийн төгсгөлд илүү их чипстэй байж ялалт байгуулсан.",
+    "winner_player1": "1-р тоглогч бүх {max_rounds} тойргийн төгсгөлд илүү их чипстэй байж ялалт байгуулсан."
+  }
+}

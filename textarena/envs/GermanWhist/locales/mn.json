@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Тоглолт эхэлнэ. Трамп хувцас: {trump_suit} (трамп карт: {trump_str}).",
+    "no_trump_card": "байхгүй"
+  },
+  "player_prompt": {
+    "intro": "Та бол Германы Уистийн тоглогч {player_id}. {phase_info} Та {hand_size} карт барьж байна. \"[play N]\"тэй карт тоглож, энд N нь таны гар дахь байрлал нь (жишээ нь \"[play 3]\").",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "Ямар ч карт санал болгож байгаагүй - тоглоомын үе шат эхэлжээ.",
+    "deck_empty": "Хүрэлсүх нь хоосон - ямар ч карт санал болгож байна.",
+    "available": "Карт санал болгож байна: {card}",
+    "available_trump": "Карт санал болгож байна: {card} (ТРУМП)"
+  },
+  "invalid_move": {
+    "wrong_format": "Хөдөлгөөний хэлбэр нь хүчингүй. '[play N]' -ийг ашиглаж, гартаа байгаа Nth картыг тоглож үзээрэй.",
+    "bad_position": "That card position does not exist. You hold {hand_size} cards.",
+    "must_follow_suit": "You must follow suit and play a {lead_suit} card.",
+    "invalid_play": "Энэ картыг тоглох боломжгүй."
+  },
+  "game_action": {
+    "played": "Тоглогч {player_id} тоглосон {card}."
+  },
+  "trick": {
+    "won": "{winner_id} тоглогч {card} тоглолтонд түрүүлж байна.",
+    "won_learning": "{winner_id} тоглогч {card}-тай тоглолтонд түрүүлж, нүүрээ илрүүлсэн картыг авч байна."
+  },
+  "phase": {
+    "learning_complete": "Суралцах үе шат дууссан - үлдсэн бүх арга нь ялалтын төлөө тооцогддог."
+  },
+  "draw": {
+    "winner_received": "You won the trick and received {card}.",
+    "loser_received": "You lost the trick and drew {card} from the deck.",
+    "winner_preview": "Дараагийн карт нь {card} юм."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "Одоогийн байдлаар авсан хяналт - Тоглогч 0: {tricks0}, Тоглогч 1: {tricks1}",
+    "scores_playing": "Scoring tricks - Player 0: {tricks0}, Player 1: {tricks1}",
+    "phase": "Фаз: {phase}",
+    "phase_learning": "Фаз: {phase} ({remaining_cards} карт нь ханан дээр үлдсэн)"
+  },
+  "hand": {
+    "no_cards": "Карт байхгүй",
+    "no_cards_in_hand": "Гар дээр нь карт байхгүй",
+    "header": "Таны гар:",
+    "trump_indicator": "(ТРАМП)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "No cards played yet this trick.",
+    "header": "Одоогийн арга:",
+    "trump_indicator": "(ТРАМП)",
+    "card_line": "{observation} Тоглоогч {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Тоглолт эхлээгүй",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation} Фаз: {phase}",
+    "trump_suit": "{observation}\nTrump suit: {trump_suit}",
+    "trump_card": "{observation} Трамп карт: {card}",
+    "cards_left": "{observation} Төлөвт үлдсэн карт: {count}",
+    "next_card": "{observation} Дараагийн карт: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Одоогийн арга:",
+    "trump_indicator": "(ТРАМП)",
+    "trick_line": "{observation} Тоглоогч {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} Тоглоогч {player_id}: {scoring} оноо авах арга ({tricks} нийт), {hand_size} гар дээр байгаа карт"
+  },
+  "outcome": {
+    "summary": "Суралцах үе шат - Тоглогч 0: {l0}, Тоглогч 1: {l1}. Тоглоомын үе шат - Тоглогч 0: {p0}, Тоглогч 1: {p1}. Тоглогч {winner_id} нь {winner_tricks} оноо авах аргаар ялалт байгуулж байна!"
+  }
+}

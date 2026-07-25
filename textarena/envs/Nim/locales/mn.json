@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Та Nim-д Тоглогч {player_id} байна.\nТаны зорилго нь сүүлчийн үлдсэн объектыг авах.\nТус бүртгэлд, жишээ нь, зөвхөн нэг баган эсвэл нэгээс олон объектыг авах.\n'[pile quantity]' хэлбэрийг ашиглана уу, үүнд баганы индекс болон авах объектын тоо байна.\nЖишээ нь, '[0 3]' 0 дугаар баганаас 3 объектыг авна."
+  },
+  "state": {
+    "current_pile": "Одоогийн Барилгын тоо: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Хувьсгалт хэлбэр олдоогүй. \"[pile quantity]\" ашиглана.",
+    "correct_format_wrong_fields": "Тоглогч {player_id}, Буруу үйлдэл. Багана {col} хязгаарлах байдалтай байна.",
+    "out_of_range": "Бараг {pile_index} тооны индекс нь хүрээний гадагш байна.",
+    "non_positive": "Ядаж нэг зүйл хасах ёстой.",
+    "exceeds_pile": "{quantity}-ийг {pile_index}-ийн (сайн {pile_count}-г үлдсэн) халааснаас гаргаж чадахгүй."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Player {player_id} took the last object(s)!"
+  }
+}

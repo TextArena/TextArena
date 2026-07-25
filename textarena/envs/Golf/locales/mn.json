@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Та гольф тоглоод байна. - Тоглогч {player_id}. Зорилго: Энэ нэг тойргийн хамгийн бага нийт оноо авах. Хэрэв суудлууд ижил үнэ цэнийг хуваалцаж байвал тэдгээрийг 0 гэж тооцно. Картын үнэ цэнэ: A = 1, 2-10 = нэр үнэ цэнэ, J / Q = 10, K = 0 Үйл ажиллагаа (зөв дугуйгаар ашигла): - '[draw]' - Төлмөрөөс татаж авах - '[take]' - Татаж хаясан цуунаас авах - '[swap X Y]' - X (хүүр) Y (хүүр) - '[discard] байрлалаар татаж авсан картыг солих"
+  },
+  "board": {
+    "drew": "Та: {card} одоо та [swap X Y] эсвэл [discard] нь байх ёстой.",
+    "took": "Та: {card} хаягдал хоолоос авч [swap X Y] түүнтэй хамт (асууруулахгүй) байх ёстой.",
+    "peeked": "Та байрлалд ({row},{col}) хараад байна: {card}",
+    "turn_view": "Таны гар: {hand} Хөрөнгийн хоолой: {discard} {options}",
+    "none": "Ямар ч байхгүй"
+  },
+  "options": {
+    "final_turns": "Эцсийн эргэлт! Таны сонголт: [draw], [take], [peek X Y]",
+    "draw": "Таны сонголт: [draw], [take]",
+    "must_swap": "Та: [swap X Y] (ашиглахгүй хуудаснуудаас хуудаснуудыг хаяж болохгүй)",
+    "swap_or_discard": "Та: [swap X Y] эсвэл [discard]"
+  },
+  "hand": {
+    "no_cards": "Карт байхгүй",
+    "header": "Хүрэлсүх: 1 2 3",
+    "row": "Эгнээ {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Тоглогч {pid} ({row},{col}) байрлалд {new}-г {old}-тай солилцсон",
+    "discarded": "Тоглогч {pid} хаягдлаа {card}"
+  },
+  "message": {
+    "deck_empty": "Тоглолт шууд дуусна.",
+    "knocked": "Тоглогч {pid} цохисон! Бусад тоглогчид нэгээр нэмэгдүүлнэ.",
+    "final_round": "Тоглогч {pid} {reason}! Бусад тоглогч бүр нэг удаа тоглох боломжтой."
+  },
+  "reason": {
+    "all_revealed": "бүх карт илэрсэн байна уу"
+  },
+  "invalid": {
+    "wrong_action": "Зөвхөн нэг дугаартай үйлдлийг ашигла: [draw], [take], [swap X Y], [discard], [knock], эсвэл [peek X Y]",
+    "discard_empty": "Хөдөлмөрийн хог хаягдал хоосон байна!",
+    "must_draw_first": "Та эхлээд [draw], [take], [knock], эсвэл [peek X Y]",
+    "cannot_discard_taken": "Та хаясан хуудаснаас авсан картыг хаяж болохгүй. Та түүнийг солих ёстой.",
+    "have_drawn_card": "Та цохиогдсон карт хэвлээрэй. Та [swap X Y] эсвэл [discard] хийх ёстой.",
+    "need_drawn_swap": "Та солилцохын тулд тагнуултай карт хэрэгтэй.",
+    "need_drawn_discard": "Та нар хаяхад тагнуулын карт хэрэгтэй.",
+    "out_of_bounds": "Хилээс гадуур байршил. 1-р эгнээнд 1-{max_row}, 1-р суудалд 1-{max_col}",
+    "knock_with_card": "Та гараагүй карттайгаар цохиж болохгүй.",
+    "already_knocked": "Хэн нэгэн энэ тойрогт аль хэдийнэ зодог тайлсан.",
+    "already_revealed": "Тэр карт аль хэдийн ил болсон!"
+  },
+  "summary": {
+    "full": "Тоглолт дууссан! {winner} тоглогч {score} оноо авч ялалт байгуулсан! Эцсийн оноо: {scores}",
+    "line": "Тоглогч {pid}: {score} оноо "
+  },
+  "board_str": {
+    "title": "=== Гольф тоглоом ===",
+    "discard": "Хөрсөө хаях: {card}",
+    "knocked": "Тоглогч {pid} нь цохисон!",
+    "player_header": "Тоглогч {pid} (Бүсэл: {score}):"
+  }
+}

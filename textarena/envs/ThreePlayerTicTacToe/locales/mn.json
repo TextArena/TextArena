@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Та гурван тоглогчийн Tic Tac Toe тоглолтын тоглогч {player_id}. Таны тэмдэгт бол '{symbol}'. Та өөрийн тэмдэгтийг 5х5 ширхэгийн дээр байрлуулж, дөрвөн шугамаар хэлбэрлэж болно. Шугамууд нь урд, урд, эсвэл сүүл булантай байж болно. Та өөрийн хөдөлгөөнийг 4 дугаар хуудсыг тэмдэглэхэд '[4]' форматтайгаар илгээх хэрэгтэй."
+  },
+  "board": {
+    "current_board": "Одоогийн зөвлөл: {board} Оролцох хөдөлгөөн: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Хөдөлгөөний хэлбэр нь хүчингүй. 0-{max_cell} гэж байгаа өрөөг \"[cell]\" гэж бичнэ.",
+    "out_of_range": "Хөрсний дугаар: {cell}. 0-ээс {max_cell} хооронд байх ёстой.",
+    "already_occupied": "Хэл {cell} дээр өмнө нь эзэмшсэн байна.",
+    "made_invalid": "Тоглогч {player_id} хүчингүй хөдөлгөөн хийжээ"
+  },
+  "game_action": {
+    "placed": "Тоглогч {player_id} өөрийн бэлгэ тэмдэг ({symbol}) -ийг ({row}, {col}) талбайд байрлуулдаг."
+  },
+  "outcome": {
+    "win": "Тоглогч {player_id} ({symbol}) ялалт байгууллаа!",
+    "draw": "Тоглолт тэнцсэн!"
+  }
+}
