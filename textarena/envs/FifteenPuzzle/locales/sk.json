@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id}. Hrajete hru 15-Puzzle.\nCieľom hry je zoradiť číslované dlaždice v vzostupnom poradí od 1 do 15, s prázdnom priestorom umiestneným v pravom dolnom rohu.\nNa vykonanie ťahu môžete posunúť dlaždicu do prázdneho priestoru (zobrazeného pomocou dvoch podčiarknutí, napr. __) pomocou jedného z nasledujúcich príkazov:\n- 'up': Presuňte dlaždicu pod prázdny priestor nahor.\n- 'down': Presuňte dlaždicu nad prázdny priestor nadol.\n- 'left': Presuňte dlaždicu napravo od prázdneho priestoru doľava.\n- 'right': Presuňte dlaždicu naľavo od prázdneho priestoru doprava.\nNa odoslanie vášho ťahu zadajte smer (napr. 'up', 'down', 'left' alebo 'right') v hranatých zátvorkách, napr. [up].\nAktuálna rozloženie dosky je zobrazené nižšie. Použite tieto informácie na vyriešenie hádanky.\n"
+  },
+  "board": {
+    "current_board": "Aktuálna doska:\n\n{board}\nDostupné ťahy: {moves}",
+    "game_board": "Herná doska:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát ťahu. Hráč {player_id} neodpovedal s platným smerom v hranatých zátvorkách.",
+    "illegal_move": "Neplatný ťah. Dlaždica sa nedá presunúť v špecifikovanom smere."
+  },
+  "outcome": {
+    "win": "Gratulujeme! Hráč {player_id} úspešne vyriešil 15-Puzzle.",
+    "turn_limit": "Bol dosiahnutý limit ťahov. Model dokončil {percent} percent hádanky."
+  }
+}

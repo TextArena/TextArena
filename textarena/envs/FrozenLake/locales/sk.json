@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Vitajte na zamrznutom jazere!\n\nSte reprezentovaný písmenom 'P' na mriežke.\nSymboly mriežky:\n  ' ' = Zamrznutý povrch (bezpečné pre chôdzu)\n  'H' = Diera (padnete a prehrajete!)\n  'G' = Cieľ (dosiahnite to a vyhrajte!)\n  'P' = Vaša aktuálna pozícia\n\nDostupné akcie: hore, dolu, vľavo, vpravo (alebo w, a, s, d)\nNapíšte svoju akciu ako: [up], [down], [left], [right] alebo [w], [a], [s], [d]\n\nCieľ: Navigujte od štartu (horne vľavo) k cieľu (dole vpravo) bez pádu do akejkoľvek diery!\n"
+  },
+  "board": {
+    "current_board": "Aktuálna doska:\n\n{board}\n\nDostupné akcie: {actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát akcie. Použite [up], [down], [left], [right] alebo [w], [a], [s], [d].",
+    "unknown_action": "Neznáma akcia '{action}'. Použite hore, dolu, vľavo, vpravo alebo w, a, s, d.",
+    "hit_wall": "Skúsili ste sa pohnúť {action}, ale narazili ste na stenu!"
+  },
+  "game_action": {
+    "moved": "Pohnuli ste sa {action} na pozíciu ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Gratulujeme! Dosiahli ste cieľ!",
+    "fell_in_hole": "Padli ste do diery! Hra skončila. Dokončili ste {pct}% cesty k cieľu.",
+    "turn_limit": "Dosiahli ste limit ťahov! Hra skončila. Dokončili ste {pct}% cesty k cieľu."
+  }
+}

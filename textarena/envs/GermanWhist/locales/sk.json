@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Hra začína. Farba trumfov: {trump_suit} (trumfová karta: {trump_str}).",
+    "no_trump_card": "žiadna"
+  },
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} v Nemeckom Whiste.\n{phase_info}\nDržíte {hand_size} kariet.\nZahrajte kartu pomocou '[play N]', kde N je jej pozícia vo vašej ruke (napríklad '[play 3]').",
+    "phase_learning": "FÁZA UČENIA: víťaz každého triku vezme otočenú kartu a porazený ťahá ďalšiu kartu z balíčka. Triky vyhrané v tejto fáze sa nepočítajú do víťazstva.",
+    "phase_playing": "FÁZA HRY: balíček je vyčerpaný. Každý trik odteraz sa počítajú do víťazstva."
+  },
+  "next_card": {
+    "playing_phase": "Žiadna karta nie je na ponuku - hra začala.",
+    "deck_empty": "Balíček je prázdny - žiadna karta nie je na ponuku.",
+    "available": "Karta na ponuku: {card}",
+    "available_trump": "Karta na ponuku: {card} (TRUMF)"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát ťahu. Použite '[play N]' pre zahranie N-tej karty vo vašej ruke.",
+    "bad_position": "Táto pozícia karty neexistuje. Držíte {hand_size} kariet.",
+    "must_follow_suit": "Musíte nasledovať farbu a zahrať {lead_suit} kartu.",
+    "invalid_play": "Túto kartu nemožno zahrať."
+  },
+  "game_action": {
+    "played": "Hráč {player_id} zahral {card}."
+  },
+  "trick": {
+    "won": "Hráč {winner_id} víťazí v triku s {card}.",
+    "won_learning": "Hráč {winner_id} víťazí v triku s {card} a vezme otočenú kartu."
+  },
+  "phase": {
+    "learning_complete": "Balíček je vyčerpaný. Fáza učenia je ukončená - každý zostávajúci trik sa počítajú do víťazstva."
+  },
+  "draw": {
+    "winner_received": "Vyhráli ste trik a dostali ste {card}.",
+    "loser_received": "Prehrali ste trik a ťahali ste {card} z balíčka.",
+    "winner_preview": "Ďalšia karta na ponuku je {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Triky vyhrané doteraz - Hráč 0: {tricks0}, Hráč 1: {tricks1}",
+    "scores_playing": "Triky počítajúce do víťazstva - Hráč 0: {tricks0}, Hráč 1: {tricks1}",
+    "phase": "Fáza: {phase}",
+    "phase_learning": "Fáza: {phase} ({remaining_cards} kariet zostáva v balíčku)"
+  },
+  "hand": {
+    "no_cards": "Žiadne karty",
+    "no_cards_in_hand": "Žiadne karty v ruke",
+    "header": "Vaša ruka:",
+    "trump_indicator": " (TRUMF)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Žiadne karty zahrané v tomto triku.",
+    "header": "Aktuálny trik:",
+    "trump_indicator": " (TRUMF)",
+    "card_line": "{observation}\n  Hráč {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Hra nezačala",
+    "header": "=== NEMECKÝ WHIST ===",
+    "phase": "{observation}\nFáza: {phase}",
+    "trump_suit": "{observation}\nFarba trumfov: {trump_suit}",
+    "trump_card": "{observation}\nTrumfová karta: {card}",
+    "cards_left": "{observation}\nKariet zostáva v balíčku: {count}",
+    "next_card": "{observation}\nĎalšia karta pre víťaza: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nAktuálny trik:",
+    "trump_indicator": " (TRUMF)",
+    "trick_line": "{observation}\n  Hráč {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nHráč {player_id}: {scoring} počítajúce triky ({tricks} celkom), {hand_size} kariet v ruke"
+  },
+  "outcome": {
+    "summary": "Fáza učenia - Hráč 0: {l0}, Hráč 1: {l1}. Fáza hry - Hráč 0: {p0}, Hráč 1: {p1}. Hráč {winner_id} víťazí s {winner_tricks} počítajúcimi trikami!"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_comment": "Súbor lokalizácie ThreePlayerGOPS. NEPREKLADAJTE kľúče (ľavá strana). Prekladajte iba hodnoty (pravá strana).",
+  "_slots": {
+    "{player_id}": "Číslo hráča, 0, 1 alebo 2",
+    "{round}": "Aktuálne kolo, číslo 1..13",
+    "{prize}": "Odkrytá cena karty, označenie líca (A, 2..10, J, Q, K) - neprekladať",
+    "{worth}": "Celková hodnota ceny vrátane akéhokoľvek preneseného banku",
+    "{hand}": "Zostávajúce karty hráča, vykreslené ako hranaté tokeny ako '[A]' '[2]' - neprekladať",
+    "{bids}": "Neutrálny zoznam odohraných kariet oddelených čiarkami ako 'P0:10, P1:J, P2:Q' - neprekladať",
+    "{winner}": "Číslo hráča, ktorý vyhral kolo",
+    "{pot}": "Hodnota banku udeleného alebo preneseného v tomto kole",
+    "{scoreline}": "Neutrálny bežiaci scoreboard ako 'P0:0  P1:0  P2:11' - neprekladať",
+    "{pid}": "Číslo hráča, ktorý bol eliminovaný",
+    "{scores}": "Finálny skóre ako surové mapovanie čísla hráča na skóre - neprekladať"
+  },
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} v Three-Player GOPS.\n- Držíte 13 kariet A-K (každú práve raz).\n- Každé kolo sa odkryje cena. Odoslať jednu kartu ako `[Q]`, `[10]`, `[2]` …\n- Najvyššia karta vyhrá cenu (+ akýkoľvek prenesený bank). Remízy prenesú cenu do ďalšieho kola.\n- Po 13 kolách vyhrá najvyšší celkový výsledok. Neplatné ťahy = eliminácia."
+  },
+  "round": {
+    "header": "### Kolo {round}/13 - Cena: {prize} (hodnota {worth})",
+    "hand": "Vaša zostávajúca ruka: {hand}"
+  },
+  "reveal": {
+    "win": "Ponuky » {bids} - Hráč {winner} vyhrá {pot}.",
+    "tie": "Ponuky » {bids} - remíza, bank je teraz {pot}.",
+    "scores": "Skóre → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "akcia potrebuje hranatú kartu ako '[Q]'",
+    "bad_card": "karta už bola použitá alebo je neplatná"
+  },
+  "elimination": {
+    "player": "Hráč {pid} bol eliminovaný po opakovaných neplatných ťahoch."
+  },
+  "outcome": {
+    "auto_win": "Dvaja hráči boli eliminovaní - automatické víťazstvo.",
+    "final": "Finálne skóre: {scores}"
+  }
+}

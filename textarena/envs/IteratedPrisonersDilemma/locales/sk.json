@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} v opakovanej dileme väzňa, ktorá sa rozťažne cez {num_rounds} kôl.\n\nŠtruktúra hry:\n- Pred každým rozhodnutím máte {total_conversation_rounds} ťahov na voľnú komunikáciu.\n- Potom si obaja hráči zároveň zvolia, či budú spolupracovať alebo podvádzať.\n\nMatice odmien (pevná každého kola):\n- Obaja spolupracujú ➜ každý {cooperate_reward}\n- Obaja podvádzať ➜ každý {mutual_defect_reward}\n- Jeden podvádza, druhý spolupracuje ➜ podvodník {defect_reward}, spolupracovník {sucker_reward}\n\nAko hrať:\n- Počas konverzácie: napíšte ľubovoľný text.\n- Počas rozhodovacej fázy: zahrňte '[Cooperate]' alebo '[Defect]' (nezávislé na veľkých a malých písmenách). Môžete pridať extra text pred/za token."
+  },
+  "phases": {
+    "conversation_finished": "Konverzácia bola dokončená pre kolo {round}. Odpovedajte prosím s '[Cooperate]' alebo '[Defect]' v rámci \\boxed{{}}.",
+    "starting_round": "--- Začiatok kola {round} ---",
+    "round_summary": "Výsledky kola {round}:\n{outcome}\nHráč 0 zarobil {r0} (celkom {score_0}), Hráč 1 zarobil {r1} (celkom {score_1})."
+  },
+  "outcome": {
+    "winner": "Hráč {winner} zvíťazil {win_score} - {lose_score}.",
+    "draw": "Remíza! Obaja hráči dosiahli {s0}.",
+    "round_both_cooperate": "Obaja hráči spolupracovali.",
+    "round_both_defect": "Obaja hráči podvádzali.",
+    "round_p0_cooperates_p1_defects": "Hráč 0 spolupracoval, Hráč 1 podvádzal.",
+    "round_p0_defects_p1_cooperates": "Hráč 0 podvádzal, Hráč 1 spolupracoval."
+  }
+}

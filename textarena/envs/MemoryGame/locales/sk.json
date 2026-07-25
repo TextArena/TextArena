@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id}. Hrajete Memory Game.\nVašim cieľom je nájsť viac párov kariet na doske ako váš súper.\nPočas svojej ťahy vyberte dve karty, ktoré chcete otočiť, zadajúc číslo riadku a stĺpca prvej a druhej karty ako '[0 1 1 0]', kde prvá karta je v riadku 0 a stĺpci 1 a druhá karta je v riadku 1 a stĺpci 0.\nAk dve karty zhodujú, získate bod a karty zostanú otočené. Ak nezodpovedajú, karty sa otočia späť lícom dolu, napr. '.'.\nHra skončí, keď všetky páry budú nájdené."
+  },
+  "board": {
+    "current_board": "Aktuálna doska:\n{board}",
+    "current_game_board": "Aktuálna herná doska:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát ťahu. Hráč {player_id} neodpovedal platným smerom v hranatých zátvorkách.",
+    "out_of_bounds": "Neplatný ťah. Hráč {player_id} vybral pozíciu mimo dosky.",
+    "same_card_twice": "Neplatný ťah. Hráč {player_id} vybral tú istú kartu dvakrát.",
+    "already_matched": "Neplatný ťah. Hráč {player_id} vybral jednu alebo obe karty, ktoré už boli nájdené."
+  },
+  "game_message": {
+    "cards_match": "Karty vybrané Hráčom {player_id} na pozíciách [{r1} {c1}] a [{r2} {c2}] zhodujú!",
+    "cards_no_match": "Karty vybrané Hráčom {player_id} nezodpovedajú. Karty na pozíciách [{r1} {c1}] a [{r2} {c2}] sú {pos1} a {pos2}."
+  },
+  "outcome": {
+    "draw": "Obaja hráči našli rovnaký počet párov kariet.",
+    "win": "Hráč {winner_id} vyhral!",
+    "turn_limit": "Bol dosiahnutý limit ťahov. Hra skončila. Hráč 0 získal {score_0} bodov, Hráč 1 získal {score_1} bodov.",
+    "turn_limit_win": "{reason} Hráč {winner_id} vyhral!"
+  }
+}
