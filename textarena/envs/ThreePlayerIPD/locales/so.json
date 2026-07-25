@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Waxaad ugu yeereysan Player {player_id} ee 3-players Iterated Prisoner's Dilemma. Ciyaarta waxay socdaa {num_rounds} rounds.\nDhabbaaldegga guud ahaan:\n• {conv_rounds} xarifo chat\n• 1 xarifo go'aan - soo geli token kasta oo la ogaalay: '[<opp-id> cooperate]' ama '[<opp-id> defect]' (sawirka ah '[1 defect] [2 cooperate]'; tan ugu horaysa waa 'iskaashi'). \nMatrikka faa'iido ee joogtooreysan (loo baahan yahay kasta oo aan kuwan la odhan):\n  - Labadaba iskaashiga  ->  {reward}\n  - Labadaba dagaal  ->  {punishment}\n  - Aad dagaal, iyaga iskaashiga -> {temptation}\n  - Aad iskaashiga, iyaga dagaal -> {sucker}\nCimaha(cimuhu) ugu sareeya ee ugu dambeeyay guud ahaan wuxuu guuleysan."
+  },
+  "round": {
+    "start": "─── Wareegga Bilowga {round} ─── Waxaad si xor ah ugala hadli kartaa wareegga soo socda {conv_rounds}.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Wareega {round} - Natiijooyinka:",
+    "pair_line": "{observation} Ciyaaryahanka {i} vs Ciyaaryahanka {j} wuxuu doortay {choice_i} iyo {choice_j} siday u kala horreeyaan (Ciyaaryahanka {i} wuxuu helay {gain_i}, Ciyaaryahanka {j} wuxuu helay {gain_j})",
+    "scores_open": "{observation} -> Dhibcaha hadda jira: ",
+    "score_first": "{observation} Ciyaaryahan {player_id} ({score})",
+    "score_next": "{observation}; Ciyaaryahan {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Dhibcaha ugu dambeeya: {scores}. Kooxaha darajooyinka (ugu xun→ugu fiican): {groups}"
+  }
+}

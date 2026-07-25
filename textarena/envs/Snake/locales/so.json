@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Player Moos on a {width}×{height} grid.\nAd waxaad u direysaa mooska {player_id}. Guulaysiyada saxda ah: '[up]'/'[down]'/'[left]'/'[right]' (ama w/s/a/d).\nHaddaftirka: nolosha ugu dheer ama ugu dheer iyo ugu sarreeya oo ugu sarreeya (xaddig dhiman {max_turns} xaddig)."
+  },
+  "board": {
+    "current": "Guddiga hadda jira: {board}",
+    "after_moves": "Xaaladda Guddiga hadda: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Moos {player_id} wuu ku dhintay sababtoo ah guulaysi aan caadi ahayn."
+  },
+  "outcome": {
+    "survived_win": "Ciyaaryahanka {player_id} wuu badbaaday; dhammaan kuwa kale way dhinteen.",
+    "all_dead_simul": "Masaska oo dhan waxay u dhinteen si isku mar ah.",
+    "outlived": "Player outlived all others.",
+    "all_dead": "Dhamaan masku waa dhinteen.",
+    "turn_limit": "Xadka wareega ayaa la gaaray - dhibcaha ugu fiican ayaa ku guuleysta isku dheelitirka.",
+    "ranking": "{reason} Kooxaha darajooyinka ugu dambeeya (ugu xun→ugu fiican): {groups}"
+  }
+}

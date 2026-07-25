@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Guddiga hadda jira: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Guuritaanka waa inuu ahaadaa nooca [macro micro] oo leh tirooyinka 0-8.",
+    "out_of_range": "Indices must each be between 0 and 8.",
+    "index_out_of_range": "Baarka yar, safka ama tiirka waa ka baxsan yihiin.",
+    "cell_occupied": "The cell is already occupied.",
+    "wrong_micro_board": "Ciyaaryahanka waa inuu ku ciyaaraa shaxda mikro-ka xiga.",
+    "micro_board_won": "The micro board is already won."
+  },
+  "next_board": {
+    "any": "wax kasta oo micro board ah",
+    "specific": "guddiga micro {nxt}"
+  },
+  "game_action": {
+    "played": "Ciyaaryahanka {player_id} wuxuu ku ciyaaray micro board {macro_idx}, cell {micro_idx} (row {row}, col {col}). Ciyaaryahanka {opponent_id} waa inuu hadda ku ciyaaraa {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Ciyaaryahanka {player_id} ayaa ku guuleysta Ultimate Tic Tac Toe!",
+    "draw": "Ciyaarta waa barbaro!"
+  }
+}

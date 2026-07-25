@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Waxaad tahay ciyaaryahanka {player_id} ee ciyaarta Liar's Dice ee {num_players} ciyaaryahan. Xeerarka: - Marka aad soo wareegto, waxaad: 1) ku bixin kartaa dalab cusub oo leh tiro ka badan ama waji ka sareeya (ama labadaba) marka loo eego dalabka hadda jira; ie '[Bid: 3, 4]', 2) Wac dalabkii ugu dambeeyay adoo qoraya '[Call]'. Haddii aad wacdo: - Haddii tirada dhabta ah ee qiimaha wajiga ee dhammaan lacagaha ay ka yar yihiin dalabka, kan ugu dambeeya ee bixiya ayaa luminaya hal lacagaha. - Haddii kale, kan wacaya ayaa luminaya hal lacagaha. Ciyaaryahankii gaadha 0 lacagaha ayaa la tirtirayaa. Ciyaaryahankii ugu dambeeyay ee haray ayaa guuleysta."
+  },
+  "board": {
+    "per_player": "Ciyaaryahanka {p}: {d}",
+    "new_round": "\nNew round - Remaining dice: {dice_summary}\nYour current Dice are: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Ciyaaryahanka {current_player_id} ayaa wacaya! Tirada dhabta ah ee wajiga {face_value} waa {count}, taas oo ka yar {quantity}. Ciyaaryahanka {loser_id} (qofka ugu dambeeya ee bixiya) ayaa lumiya hal dhimasho.",
+    "caller_loses": "Ciyaaryahanka {current_player_id} ayaa wacaya! Tirada dhabta ah ee wajiga {face_value} waa {count}, taas oo ah >= {quantity}. Ciyaaryahanka {loser_id} (wixii wacaya) ayaa lumiya hal dhimasho."
+  },
+  "action": {
+    "bid_announce": "Player {player_id} bids {quantity} of face {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Wicitaan la sameeyay iyada oo aan la soo bandhigin wax dalab ah.",
+    "invalid_bid": "Bixinta aan ansax ahayn: {reason}",
+    "not_recognized": "Dacwad aan loo aqoonsanayn mid sax ah \"[Bid: X, Y]\" ama \"[Call]\". Dacwad la gudbiyay: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Tirada cusub {new_quantity} waa ka yar tahay tirada hadda jirta {current_quantity}.",
+    "face_lower": "Qiimaha cusub ee magaca ah {new_face_value} waa ka hooseeyaa kan hadda jira {current_face_value}.",
+    "identical": "Lacagta la bixiyay waa la mid.",
+    "face_range": "Qiimaha muuqaalka waa inuu u dhaxeeya 1 iyo 6."
+  },
+  "message": {
+    "eliminated_invalid": "Ciyaaryahanka {player_id} waxaa lagu saaray ciyaar aan ansax ahayn."
+  },
+  "outcome": {
+    "win": "Ciyaaryahanka {winner} ayaa guuleysta! Darajada ugu dambeysa: {final_ranking}"
+  }
+}

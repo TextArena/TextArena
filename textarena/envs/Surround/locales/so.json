@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Ciyaaryahanka ku hareereysan shabakad {width}x{height}. Waxaad tahay ciyaaryahan {player_id}. Dhaqdhaqaaqyada saxda ah: '[up]' '[down]' '[left]' [right]' ama w / s / a / d. Ujeedada: ka badbaado qof walba. Wadooyinka waa kuwo dilaa ah; derbiga ayaa dilaa; shil madaxa ah ayaa dilaa labadaba."
+  },
+  "board": {
+    "current": "Guddiga hadda jira: {board}",
+    "after_moves": "Guddiga ka dib isku mar la dhaqaaqo: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Ciyaaryahanka {player_id} ayaa u dhintay sabab la xiriirta dhaqaaq aan ansax ahayn."
+  },
+  "outcome": {
+    "survived_win": "Ciyaaryahanka {player_id} wuu badbaaday; dhammaan kuwa kale way burbureen.",
+    "all_crashed": "Dhamaan ciyaartoydu waxay ku burbureen isla waqtigaas.",
+    "outlived": "Ciyaaryahanka ayaa ka badbaaday kuwa kale oo dhan.",
+    "all_dead": "Dhamaan ciyaartooyda waa dhiman yihiin.",
+    "turn_limit": "Xadka wareega ayaa la gaaray - qofka ugu dheer ee badbaada ayaa guuleysta.",
+    "ranking": "{reason} Kooxaha darajooyinka ugu dambeeya (ugu fiican→ugu xun): {groups}"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Waxaad tahay Player {player_id} ee Stratego.\nWaxa aad u baahan tahay inaad qabsato calanka laacibka aad u wadaagaan ama inaad xasilo dhammaan qaybaha ay ugu cararaan.\nCiidankaagu wuxuu si toos ah ugu dhigay buurta, oo ay ku jiraan calankaaga, Alabamada, iyo qaybo kale oo isku duuban.\n\n### Hadiyaha Ciyaaraha\n1. **Sharciga Gudbinka:**\n   - Goortaan wuxuu ku guulaysan karaa qayb ka mid ah buurta adigoo ugu daray meel kale oo buurta ah (kor, hoos, bidix, ama midig).\n   - Tusaale: Qayb waxay ku guulaysan karaa meel u dhow buurta adigoo ugu daray meel kale oo buurta ah.\n   - Haddii qaybka la doonayo in lagu gudbo ay tahay Alabaam ama Calan, waxay diidan karaan in lagu gudbo.\n2. **Dagaal:**\n   - Haddii aad gudbiso meel buurta la degay qayb ka mid ah laacibka aad u wadaagaan, dagaal wuxuu dhacaa:\n     - Qaybka ugu sareyska ah waxay guuleysaa iyo qaybka laacibka aad u wadaagaan waxay xasilin.\n     - Haddii qaybaha isku duuban tahay, labada qayb waxay ka baxaan buurta.\n     - **Waxyaabaha Khaas:**\n       - Alabamada waxay xasilaan inta badan qaybaha soo gudbisa oo aan ahayn Miner, oo ah qayb ugu guulaysa Alabamada.\n       - Spy-gu waxay guuleysaa Marshal haddii Spy-gu ugu horaysa gudbiso, laakiin waxay ku guulaysaa qaybaha kale.\n3. **Waxyaabaha Stratijiga:**\n   - Qaybaha laacibka aad u wadaagaan waxaad ogaataan khadka iyo dagaalka.\n   - Calankaaga ka ilaali adigoo u dhaqanaya calanka laacibka aad u wadaagaan.\n   - Scout-ka waxaad u isticmaashaa si loogu ogaado qaybaha laacibka aad u wadaagaan iyo kuwa ugu yaraan.\n\n### Sida loo Gudbiyaa:\n1. Xogta qaybka aad doonaysaan inaad gudbiso iyo meherada ugu yimaada.\n2. Waxaad isticmaashaa foomka: [A0 B0], halka A0 uu yahay meherada hore, iyo B0 uu yahay meherada ugu dambeeyay.\n   - Tusaale: Gudbinta qaybka ka mid ah saf 0, column 0 ilaa saf 1, column 0, gali [A0 B0].\n3. Meherada ugu dambeeyay waxay tahay inay ku waafaqaan sharciga gudbinka kor ku xusan.\n\n### Waxyaabaha Muhiimka:\n- Buurta waxay muujinaya qaybahaaga iyo meheradooda, s.b. MN, MS.\n- Buurta waxay muujinaysa meheradka la ogaaday qaybaha laacibka aad u wadaagaan bilaashka ah, s.b. ?.\n- Grid-ka ~ waa biyo iyo waxaad ku gudbisaan.\n- Waxaad ugu mahadsan tahay inaad bilaabaan ciyaaraha adigoo gudbisa qaybaha aad u wadaagaan oo ah buurta koowaad. Player 0 iyo player 1-ka buurta koowaad waa saf D iyo G respectively.\n\nHalkan waa xaalada buurta hadda:\n"
+  },
+  "board": {
+    "current_board": "Guddiga hadda jira: {board} Dhaqdhaqaaqyada la heli karo: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Qaabka ficil aan sax ahayn. Ciyaaryahanka {player_id} ma uusan gelin talaabo qaab [A0 B0] ah.",
+    "invalid_coordinates": "Invalid action format. Player {player_id} did not input valid coordinates.",
+    "not_own_piece": "Qaabka ficil aan ansax ahayn. Ciyaaryahanka {player_id} waa inuu dhaqaajiyaa mid ka mid ah jajabkiisa.",
+    "scout_through_pieces": "Qaabka ficil aan sax ahayn. Ciyaaryahanka {player_id} ma dhaqaajin karo indha indheynta iyada oo loo marayo qaybo kale.",
+    "scout_diagonal": "Qaabka ficil aan sax ahayn. Ciyaaryahanka {player_id} ma dhaqaajin karo indha indheynta.",
+    "non_scout_multi_square": "Qaabka ficilku waa mid aan sax ahayn. Qalabka, marka laga reebo indha indheeyayaasha, waxay kaliya dhaqaajin karaan hal boos mar.",
+    "move_into_lake": "Qaabka ficil aan sax ahayn. Ciyaaryahanka {player_id} ma guuri karo harada.",
+    "move_onto_own_piece": "Qaabka ficil aan sax ahayn. Ciyaaryahanka {player_id} ma guuri karo gacantooda.",
+    "move_bomb_or_flag": "Qaabka ficil aan ansax ahayn. Ciyaaryahanka {player_id} ma dhaqaajin karo bam ama calan."
+  },
+  "game_action": {
+    "you_moved": "You have moved your piece from {source} to {dest}.",
+    "opponent_moved": "Ciyaaryahanka {player_id} ayaa ka dhaqaajiyay {source} ilaa {dest}.",
+    "you_equal_ranks": "Waxaad ka guurisay gabalkaaga {source} ilaa {dest}. Gabigii weerarka ahaa wuxuu ahaa {attacking_rank} iyo gabalkii loo socday wuxuu ahaa {target_rank}. Maadaama darajooyinku isku mid yihiin, labada gabal ayaa lumay.",
+    "opponent_equal_ranks": "Ciyaaryahanka {player_id} ayaa ka dhaqaajiyay gabal {source} ilaa {dest}. Gabigii weerarka ahaa wuxuu ahaa {attacking_rank} iyo gabalkii loo socday wuxuu ahaa {target_rank}. Maadaama darajooyinku isku mid yihiin, labada gabal ayaa lumay.",
+    "you_miner_defused": "Waxaad ka guurisay gabalkaaga {source} ilaa {dest}. Gabigii weerarka ahaa {attacking_rank} iyo gabalkii loo socday {target_rank}. Maadaama macdan qodayaashu ay qarxin karaan bambooyinka, waxaad ku guuleysatay dagaalka.",
+    "opponent_miner_defused": "Ciyaaryahanka {player_id} wuxuu ka dhaqaajiyay gabal {source} ilaa {dest}. Gabigii weerarka ahaa {attacking_rank} iyo gabalkii loo socday {target_rank}. Maaddaama macdan qodayaashu ay qarxin karaan bambooyinka, waxaad lumisay dagaalka.",
+    "you_bomb_lost": "Waxaad ka guurisay gabalkaaga {source} ilaa {dest}. Gabigii weerarka ahaa wuxuu ahaa {attacking_rank} iyo gabalkii loo socday wuxuu ahaa {target_rank}. Maadaama qofka weerarka geysanaya uusan aheyn macdan qodayaal, waxaad lumisay dagaalka.",
+    "opponent_bomb_won": "Ciyaaryahanka {player_id} wuxuu ka dhaqaajiyay gabal {source} ilaa {dest}. Gabigii weerarka ahaa wuxuu ahaa {attacking_rank} iyo gabalkii loo socday wuxuu ahaa {target_rank}. Maadaama qofka weerarka geysanaya uusan aheyn macdan qodayaal, waxaad ku guuleysatay dagaalka.",
+    "you_spy_won": "Waxaad ka guurisay {source} oo aad u guurisay {dest}. Dhinaca weerarka ahaa {attacking_rank} iyo qayb ka ah bartilmaameedka ahaa {target_rank}. Sida weeraryahanka waa basaas iyo bartilmaameedka waa marshall ah, aad ku guuleystay dagaalka.",
+    "opponent_spy_lost": "Ciyaaryahanka {player_id} wuxuu ka dhaqaajiyay gabal {source} ilaa {dest}. Gabigii weerarka ahaa wuxuu ahaa {attacking_rank} iyo gabalkii loo socday wuxuu ahaa {target_rank}. Maadaama uu weeraryahanku yahay basaas iyo bartilmaameedku waa marshall, waxaad lumisay dagaalka.",
+    "you_higher_won": "Waxaad ka guurisay gabalkaaga {source} ilaa {dest}. Gabigii weerarka ahaa wuxuu ahaa {attacking_rank} iyo gabalkii loo socday wuxuu ahaa {target_rank}. Maadaama uu weeraryahanku ka sarreeyo darajada loo socdo, waxaad ku guuleysatay dagaalka.",
+    "opponent_higher_lost": "Ciyaaryahanka {player_id} wuxuu ka dhaqaajiyay gabal {source} ilaa {dest}. Gabigii weerarka ahaa wuxuu ahaa {attacking_rank} iyo gabalkii loo socday wuxuu ahaa {target_rank}. Maadaama uu weeraryahanku ka sarreeyo darajada loo socdo, waxaad lumisay dagaalka.",
+    "you_lower_lost": "Waxaad ka guurisay gabalkaaga {source} ilaa {dest}. Gabigii weerarka ahaa wuxuu ahaa {attacking_rank} iyo gabalkii loo socday wuxuu ahaa {target_rank}. Maadaama uu weeraryahanku ka hooseeyo darajada loo socdo, waxaad lumisay dagaalka.",
+    "opponent_lower_won": "Ciyaaryahanka {player_id} wuxuu ka dhaqaajiyay gabal {source} ilaa {dest}. Gabigii weerarka ahaa wuxuu ahaa {attacking_rank} iyo gabalkii loo socday wuxuu ahaa {target_rank}. Maadaama uu weeraryahanku ka hooseeyo darajada loo socdo, waxaad ku guuleysatay dagaalka."
+  },
+  "outcome": {
+    "flag_captured": "Ciyaaryahanka {player_id} wuxuu qabsaday calanka kooxda ka soo horjeeda!",
+    "no_movable_pieces": "Ciyaaryahanka {winner_id} ayaa guuleysta! Ciyaaryahanka {loser_id} ma laha wax goobo ah oo la dhaqaajin karo."
+  }
+}
