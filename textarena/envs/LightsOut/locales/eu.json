@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Ongi etorri Lights Out-ra! {size}x{size} argi-sarea duzu.\nZure helburua argi GUZTIAK ITZALTZEAN datza (puntua izenarekin adierazita)\nArgi bat sakatzean, bere burua eta aldameneko auzokideak (gora/behea/ezkerra/eskuina) aldatzen ditu.\n[row col] sakatu argi bat sakatzeko (0-indizatua, beraz, balio-barrutia 0-{max_index} da).\nPuslekuaren konponketa lortzeko {max_turns} mugimendu dituzu.\nLegenda: 'O' = argia PIZTUA, '.' = argia ITZALIA"
+  },
+  "board": {
+    "current_state": "Egungo sarearen egoera (Move {moves_made}, {moves_left} mugimenduak geratzen dira, {completion} % osatuta): {grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Akzioa [row col] formatuan izan behar da, non errenkada eta zutabea 0tik {max_index} arteko zenbaki osoak diren.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Zorte on! Puslekuaren konponketa {moves_used} mugimendutan lortu duzu!",
+    "loss": "Jokoaren amaiera! {max_turns} mugimendu guztiak erabili dituzu puzzleari irtenbiderik eman gabe. Azken osatzea: {completion}% Azken egoera: {grid}"
+  }
+}

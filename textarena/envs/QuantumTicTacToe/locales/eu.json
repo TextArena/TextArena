@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Quantum Tic Tac Toe.\nYour symbol is '{symbol}', and your move numbers are always {parity} (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4."
+  },
+  "board": {
+    "current_board": "Tic Tac Toe Kuantikoaren Taula: {board} Zure mugimendua \"[a,b]\" gisa aurkeztu, bi lekutan marka kuantikoa jartzeko."
+  },
+  "invalid_move": {
+    "wrong_format": "Formatu ezegokia. Erabili \"[a,b]\".",
+    "invalid_cells": "Zelula-indize ezegonkorrak edo bikoiztuak.",
+    "already_solidified": "Zelula bakarrak fusio bat jasaten du."
+  },
+  "game_action": {
+    "placed": "{player_id} jokalariak bere ikurra {pos_a} eta {pos_b} gelaxken artean superposatu zuen."
+  },
+  "game_message": {
+    "dependent_resolved": "Dependent superposition resolved. Cell ({r}, {c}) is now {symbol}.",
+    "last_cell_resolved": "Superposition for last cell resolved. Cell ({r}, {c}) is now {symbol}.",
+    "superposition_resolved": "Superposition resolved. Cell ({r}, {c}) is now {symbol}."
+  },
+  "outcome": {
+    "win": "Player {player_id} wins with solidified marks!",
+    "draw": "Partida berdinduta dago!"
+  }
+}

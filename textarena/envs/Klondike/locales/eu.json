@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Klondike Solitaire jokatzen ari zara. Zure helburua karta guztiak oinarri-pilakara mugitzea da.\n\nJoko Arauak:\n- Oinarri pilak (F1-F4): Eraiki Ace-tik Errege-ra kolore berean\n- Mahai pilak (T1-T7): Eraiki behera kolore alternatiboak (gorria beltzaren gainean, beltza gorriaren gainean)\n- Stock: Kartaak ateratzeko pilara\n- Pilaketa (W): Goiko karta jokatzeko eskuragarri\n\nAginduak:\n- 'draw' - Kartaak stock-etik pilaketa-ra ateratzea\n- 'move <jatorria> <helmuga> [count]' - Kartaak pilen artean mugitzea\n  Adibideak: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Zenbatekoa 'all' ere izan daiteke, guztira aurpegiko karta guztiak mugitzeko saiatuko da.\n- 'forfeit' - Jokoa amaitu eta zure gaurko puntuazioa berretsi\n- Pilen izenak: W (pilaketa), F1-F4 (oinarriak), T1-T7 (mahaiak)\n\nEkintza bat baino gehiago egin ditzakezu iraultza bakar batean komatxen bidez bereizita:\n  Adibidez: 'draw, move W T1, move T2 F1'\n\nBakarrik Erregeak jar daitezke mahai pilen hutsak dauden lekuetan.\nEkintzak ordenan exekutatzen dira - bat huts egiten badu, gainerako ekintzak baztertzen dira.\n'Forfeit' erabili zure ustez jokoa irabaztezin dela uste baduzu."
+  },
+  "format_error": {
+    "no_brackets": "Invalid action format. Action should be in brackets.",
+    "no_closing_bracket": "Ekintza-formatu ezegokia.",
+    "empty_command": "Komando hutsa. Idatzi \"draw\" edo \"move <source> <destination> [count]\"",
+    "empty_action": "Ekintza hutsa",
+    "move_needs_args": "Move komandoak jatorria eta helmuga behar ditu. Erabilera: 'move <jatorria> <helmuga> [count]'",
+    "count_positive": "Zenbaketa positiboa edo \"guztiak\" izan behar da.",
+    "count_invalid": "Ez dago zenbakirik, beraz zenbaki bat edo \"guztiak\" erabili",
+    "unknown_command": "Ezagutzen ez den komandoa \"{cmd}\". Erabili \"draw\", \"move <source> <destination> [count]\", edo \"forfeit\"",
+    "wrapped": "Ekintza {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Ekintza {n}: {msg}",
+    "before_failure": "{n} ekintza(k) exekutatu dira hutsaren aurretik.",
+    "failed": "Ekintza {n} huts egin du: {msg}"
+  },
+  "move_result": {
+    "drew": "Drew card(s) from stock to waste.",
+    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "invalid_pile": "Pila ezaren izena ez da balio. W, F1-F4 edo T1-T7 erabili",
+    "foundation_one_card": "Bakarrik karta bat mugitu ahal izango duzu.",
+    "waste_to_foundation_ok": "Hondakinetatik fundaziora mugitutako txartela F{dst}",
+    "waste_to_foundation_bad": "Ezin duzu zure txartela horra eraman.",
+    "tableau_to_foundation_ok": "T T taulan T{src}tik F{dst} oinarrira mugitu zen karta",
+    "tableau_to_foundation_bad": "Ezin da taulak batetik bestera mugitu.",
+    "foundation_to_foundation": "Ezin da eraikinetik eraikinera joan.",
+    "waste_to_tableau_one_card": "Txartela bat bakarrik mugitu daiteke deskargatutako tokitik mahaira.",
+    "waste_to_tableau_ok": "Txartela T{dst} koadroan sartu da",
+    "waste_to_tableau_bad": "Ezin dut kartela txartelik gabe utzi.",
+    "no_face_up": "Ez dago txartelik mugitzeko.",
+    "tableau_to_tableau_ok": "T{src} taulan T{dst} karta batetik {count} karta batetara mugitu da",
+    "tableau_to_tableau_bad": "Ezin da {count} karta ((s) mugitu T{src}etik T{dst}era.",
+    "foundation_to_tableau_one_card": "Bakarrik karta bat mugitu daitekeela, oinarritik taulara.",
+    "foundation_empty": "F{src} fundazioa hutsik dago",
+    "foundation_to_tableau_ok": "F{src} oinarritik T{dst} taulara mugitu zen karta",
+    "foundation_to_tableau_bad": "Ezin da oinarrizko txartel bat T taulan jarri {dst}",
+    "to_waste_or_stock": "Cannot move to waste or stock"
+  },
+  "outcome": {
+    "forfeit": "Partida galduta, azken emaitza: {score} karten oinarriak.",
+    "won": "Zorionak, Klondikea irabazi duzu!",
+    "turn_limit": "Jokoaren amaiera! {max_turns} txanda gehien lortu duzu. Puntuazioa: {score} karta fundazioetan."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Itzuli: {turn}/{max_turns}",
+    "stock": "Stock: {stock} karta",
+    "waste": "Hondakinak (W): {waste}",
+    "foundations_header": "Fundazioak:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Taula eta hau dena:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

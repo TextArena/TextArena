@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Zu zara Jokalari {player_id} Iterated Prisoner's Dilemmaren batean {num_rounds} itzuliak irauten duena.\n\nJoko Egitura:\n- Erabaki bakoitzaren aurretik, {total_conversation_rounds} itzuliak dituzu komunikatzeko aske.\n- Ondoren, bi jokalariek aldi berean aukeratzen dute elkarrekin lan egitea edo traizionatzea.\n\nOrdainketa Matrizea (finkoa itzuli bakoitzean):\n- Biak elkarrekin lan egiten badute ➜ bakoitzak {cooperate_reward}\n- Biak traizionatzen badute ➜ bakoitzak {mutual_defect_reward}\n- Bat traizionatzen badu eta bestea elkarrekin lan egiten badu ➜ Traizionatzaileak {defect_reward}, Elkarrekin lan egiteak {sucker_reward}\n\nNola jokatu:\n- Elkarraldian: idatzi testu oro nahi duzuna.\n- Erabaki fasen: sartu '[Cooperate]' edo '[Defect]' (kasu sentikorrik gabe). Testu gehigarria gehi dezakezu tokenaren aurretik/ondoren."
+  },
+  "phases": {
+    "conversation_finished": "Conversation finished for round {round}. Please reply with '[Cooperate]' or '[Defect]' within \\boxed{{}}.",
+    "starting_round": "--- {round} itzulia hasten ---",
+    "round_summary": "{round} itzuliaren emaitzak:\n{outcome}\nJokalari 0k {r0} irabazi du (gua {score_0}), Jokalari 1k {r1} irabazi du (gua {score_1})."
+  },
+  "outcome": {
+    "winner": "{winner} jokalariak irabazten du {win_score} - {lose_score}.",
+    "draw": "Berdinketa! Bi jokalariek {s0} puntuazioa lortu dute.",
+    "round_both_cooperate": "Bi jokalariak elkarlanean aritu ziren.",
+    "round_both_defect": "Biek ihes egin dute.",
+    "round_p0_cooperates_p1_defects": "Player 0 cooperated, Player 1 defected.",
+    "round_p0_defects_p1_cooperates": "Player 0 defected, Player 1 cooperated."
+  }
+}

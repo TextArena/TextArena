@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte locale file. DO NOT translate keys (left side). Only translate values (right side).",
+  "_slots": {
+    "{line}": "The rendered row of cups",
+    "{step}": "The current shuffle step number",
+    "{steps}": "The total number of shuffle steps",
+    "{i}": "The first cup index involved in a swap",
+    "{j}": "The second cup index involved in a swap",
+    "{prompt}": "The localized prompt fragment appended after the cups",
+    "{max_index}": "The highest valid cup index, i.e. num_cups-1",
+    "{ball_pos}": "The cup index the ball is under"
+  },
+  "player_prompt": {
+    "intro": "Track the hidden ball 'X' while the cups are shuffled.\nAfter shuffling, guess its location with `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Baloia hasi da: {line}",
+    "shuffle": "Nahastu {step}/{steps}: kopa {i} eta {j} trukatu dira.",
+    "cups": "Kopa: {line} {prompt}",
+    "guess_now": "(Guess NOW!)",
+    "reveal": "(Aurki: bola azpian {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Bad action. Use `[k]`.",
+    "out_of_range": "Index out of range 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Ondo da, aurkitu duzu baloia.",
+    "lose": " Pilota edalontzi azpian zegoen {ball_pos}."
+  }
+}

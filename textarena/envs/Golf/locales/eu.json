@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "You are playing Golf (Card Game) - Player {player_id}.\nGoal: Get the lowest total score in this single round. If columns share the same value, they are summed as 0.\nCard Values: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (use exact brackets):\n- '[draw]' - Draw from deck\n- '[take]' - Take from discard pile\n- '[swap X Y]' - Swap drawn card with position X (row) Y (column)\n- '[discard]' - Discard the drawn card\n"
+  },
+  "board": {
+    "drew": "Zoriatu duzu: {card}\nOrain [swap X Y] egin behar duzu edo [discard]",
+    "took": "You took: {card} from discard pile\nYou must [swap X Y] with it (cannot discard).",
+    "peeked": "You peeked at position ({row},{col}): {card}",
+    "turn_view": "Zure eskua: {hand} Galtzeko piloa: {discard} {options}",
+    "none": "Ez dago"
+  },
+  "options": {
+    "final_turns": "Itzuli bukaerakoak! Zure aukerak: [draw], [take], [peek X Y]",
+    "draw": "Zure aukerak: [draw], [take]",
+    "must_swap": "You must: [swap X Y] (cannot discard cards from discard pile)",
+    "swap_or_discard": "Hau egin behar duzu: [swap X Y] edo [discard]"
+  },
+  "hand": {
+    "no_cards": "Ez dago txartelik.",
+    "header": "  Col:   1    2    3",
+    "row": "lerroa {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Jokalariak {pid} eta {new} trukatu zituen {old}-rekin ({row},{col}) posizioan.",
+    "discarded": "Jokalari {pid} baztertua {card}"
+  },
+  "message": {
+    "deck_empty": "Deck is empty! Game ends immediately.",
+    "knocked": "Jokalari {pid}-k kolpea jo du! Gainontzeko jokalariek itzuli bat gehiago dute.",
+    "final_round": "Jokalari {pid}-k {reason}! Gainontzeko jokalariek itzuli bat gehiago dute."
+  },
+  "reason": {
+    "all_revealed": "Karta guztiak irekiak daude?"
+  },
+  "invalid": {
+    "wrong_action": "Use exactly ONE bracketed action: [draw], [take], [swap X Y], [discard], [knock], or [peek X Y]",
+    "discard_empty": "The discard pile is empty!",
+    "must_draw_first": "You must first [draw], [take], [knock], or [peek X Y]",
+    "cannot_discard_taken": "Ezin duzu bota kartatxoa, aldatu egin behar da.",
+    "have_drawn_card": "You have a drawn card. You must [swap X Y] or [discard] it.",
+    "need_drawn_swap": "You need a drawn card to swap.",
+    "need_drawn_discard": "You need a drawn card to discard.",
+    "out_of_bounds": "Posizioa muga gainetik dago. Erabili {max_row}-1 lerrotik, {max_col}-1 zutabetik",
+    "knock_with_card": "You cannot knock with a drawn card. Complete your turn first.",
+    "already_knocked": "Norbaitek irabazi du dagoeneko.",
+    "already_revealed": "That card is already revealed!"
+  },
+  "summary": {
+    "full": "Jokoa amaitu da! Jokalari {winner}-k irabazten du {score} puntuuko puntuazioarekin!\n\nAzken puntuazioak:\n{scores}",
+    "line": "Jokalariaren {pid}: {score} puntuak "
+  },
+  "board_str": {
+    "title": "=== GOLF GAME ===",
+    "discard": "Bota ezazu pila: {card}",
+    "knocked": "Player {pid} has knocked!",
+    "player_header": "Jokalariaren {pid} (Puntuazioa: {score}):"
+  }
+}

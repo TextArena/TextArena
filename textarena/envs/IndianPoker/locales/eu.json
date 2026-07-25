@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Indian Poker jokoan jokalari {player_id} zara. - 52 karta-maila; aurkariaren karta bakarrik ikusten duzu. - Ante {ante} fitxa (ak) txanda bakoitzean, {max_rounds} txanda (ak) guztira. - Mugimendu baliozkoak: '[check] ' [bet X] ' [call] ' [raise X] ' [fold] (X zenbaki oso positiboa da <= zure fitxa kopurua.) - Gorde txartela altuenak irabazten du pot-a showdown-ean. "
+  },
+  "round": {
+    "announce": "### Bidegurutze {current_round}/{max_rounds} Zure aurkariaren karta da: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Supply exactly ONE bracketed action, e.g. '[check]', '[bet 2]', '[call]', '[raise 3]', or '[fold]'.",
+    "cannot_check": "Ezin [check] - apustu bat aurrez aurre daukazu.",
+    "amount_min": "Bet / Raise amount must be ≥ 1.",
+    "cannot_bet": "Ezin [bet] - behar [call] / [raise] / [fold].",
+    "nothing_to_call": "Ez dago deitzeko ezer; egin dezakezu [check] ordez.",
+    "no_bet_to_raise": "Irekitzeko [bet X] erabili; ez dago igoera-apusterik.",
+    "insufficient": "Insufficient chips for that action."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "\"[check]\", \"[bet X]\"",
+    "actions_facing_bet": "'[call]' (kostua {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Zure ekintza posibleak: {legal}"
+  },
+  "message": {
+    "round_result": "{reason} Pot {pot} → Jokalari {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Jokalariak {player_id} erretiratu egin da.",
+    "showdown_win": "Showdown: {card_win} jotzen du {card_lose}-ren aurretik.",
+    "showdown_tie": "Showdown berdinketa: bi {card}. Pot zatitu  bakoitzak jasotzen {split}."
+  },
+  "outcome": {
+    "p0_wins": "0 jokalariak irabazten du ({bank0} > {bank1})",
+    "p1_wins": "Lehenengoak irabazten du ({bank1} > {bank0})",
+    "draw": "Txip berdinak."
+  }
+}

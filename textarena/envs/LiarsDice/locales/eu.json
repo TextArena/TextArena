@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Jokalari {player_id} zara {num_players} jokalari arteko gezurtiaren dado joko batean. Arauak: - Zure txandan, honako hauek egin ditzakezu: 1) Eskaintza berri bat egin oraingo eskaintza baino kantitate handiagoa edo aurpegi handiagoa (edo biak) duena; hau da, '[Bid: 3, 4]', 2) Azken eskaintza deitu '[Call] ' idatziz."
+  },
+  "board": {
+    "per_player": "Jokalari {p}: {d}",
+    "new_round": "Giro berria - Gainerako dadoak: {dice_summary} Zure oraingo dadoak dira: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Jokalariak {current_player_id}-ek deitu du! {face_value}-en aurpegien benetako kopurua {count}-a da, hau da, {quantity}-a baino BEHEREN. {loser_id} jokalariak (azken eskaintza egin duenak) dado bat galtzen du.",
+    "caller_loses": "Player {current_player_id} calls! The actual count of face {face_value} is {count}, which is >= {quantity}.\nPlayer {loser_id} (the caller) loses one die."
+  },
+  "action": {
+    "bid_announce": "Jokalariak {player_id} aurpegiaren eskaintzak {quantity} egiten ditu {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Call made with no prior bid.",
+    "invalid_bid": "Eskaintza ez-baliozkoa: {reason}",
+    "not_recognized": "Ekintza ez da onartzen '[Bid: X, Y]' edo '[Call]' baliozko gisa. Aurkeztutako ekintza: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "{new_quantity} kopuru berria oraingo {current_quantity} kopurua baino txikiagoa da.",
+    "face_lower": "Aurpegiko balio berria {new_face_value} gaur egungo {current_face_value} baino txikiagoa da.",
+    "identical": "Oraingo eskaintzaren berdina da.",
+    "face_range": "Balio nominala 1 eta 6 artekoa izango da."
+  },
+  "message": {
+    "eliminated_invalid": "Jokalari {player_id} mugimendu ezegokiagatik kanporatu zen."
+  },
+  "outcome": {
+    "win": "Jokalariak {winner} irabazten du! Azken sailkapena: {final_ranking}"
+  }
+}

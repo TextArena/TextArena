@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Zu zara Jokalari {player_id} Hiru Jokalariko Tic Tac Toean.\nZure sinboloa '{symbol}' da.\nZure sinboloa 5x5 taulan jarrita, lau lerroz osatzen duzu.\nLerroak horizontala, bertikala edo diagonalak izan daitezke.\nBidali zure mugimendua '[4]' formatuan cell 4 markatzeko."
+  },
+  "board": {
+    "current_board": "Egungo taula: {board} Eskainitako mugimenduak: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Mugimenduaren formatu ezegokia. Erabili \"[cell]\" non zelula 0-{max_cell} den.",
+    "out_of_range": "Zelula baliogabea: {cell}. 0 eta {max_cell} artean egon behar du.",
+    "already_occupied": "Gelaxka {cell} dagoeneko okupatuta dago.",
+    "made_invalid": "Jokalariak {player_id} jokaldi ezegokia egin du"
+  },
+  "game_action": {
+    "placed": "{player_id} jokalariak bere ikurra ({symbol}) jartzen du ({row}, {col}) eremuan."
+  },
+  "outcome": {
+    "win": "Jokalari {player_id} ({symbol}) irabazten du!",
+    "draw": "Partida berdinduta dago!"
+  }
+}
