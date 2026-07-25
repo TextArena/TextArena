@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert að spila {color} í leik Breakthrough. Þú færð {direction} á {board_size}x{board_size} borði.\nÍ þinni rönd getur þú fært einn leikmann einn skref fram eða á skálínu fram.\nLeikmaður getur aðeins færð á skálínu ef andstæðingsleikmaður er þar, og aðeins fært inn í slíkan framskrefinn reit á skálínu.\nÞegar þú færð inn í reit með andstæðingsleikmann, náir þú honum og andstæðingsleikmaðurinn er fjarlægður varanlega af borðinu.\nNotaðu UCI-líkt táknmál í svigum, t.d. [a2a3] til að færa frá a2 til a3.\n* 'a' samsvarar vinstrasta dálki, '1' er neðsta röð (frá Hvíta sjónarhorni).\n* Svarta heimröð er efsta röð (röð 8 fyrir 8x8). Hvíta heimröð er neðsta röð (röð 1 fyrir 8x8).\nFyrsti leikmaður sem nær andstæðingsleikmanns heimröð vinnur. Ef allir leikmannir þínir eru náðir, tapar þú."
+  },
+  "invalid_move": {
+    "wrong_format": "Notaðu svigað algebraískt táknmál eins og [a2a3].",
+    "out_of_bounds": "Færsla er utan borðamörka.",
+    "illegal": "Þessi færsla fylgir ekki Breakthrough-reglum eða er ekki þinn leikmaður."
+  },
+  "game_action": {
+    "moved": "Leikmaður {player_id} færir {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Hvíti náði Svarta heimröð.",
+    "black_reached": "Svarti náði Hvíta heimröð.",
+    "white_captured": "Allir Hvítir leikmannir náðir.",
+    "black_captured": "Allir Svartir leikmannir náðir.",
+    "no_moves": "Leikmaður {player_id} hefur engar fleiri færslur."
+  }
+}

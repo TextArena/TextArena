@@ -1,0 +1,55 @@
+{
+  "_comment": "Notendavænt strengir fyrir Liar's Dice. Klammur í aðgerðartökum ('[Bid: X, Y]', '[Call]'), leikmannsnúmer, teningaásar, fjöldi og teljari eru hlutlausir reitir og mega aldrei vera þýddir.",
+  "_slots": {
+    "player_id": "Leikmannsnúmer (heiltala)",
+    "num_players": "Fjöldi leikmanna í leiknum (heiltala)",
+    "dice_summary": "Forsniðinn '; '-samsettur teljari eftirstandandi teninga fyrir hverjann leikmann",
+    "your_dice": "Forsniðinn komma-samsettur listi yfir teningaásar þessa leikmanns",
+    "p": "Leikmannsnúmer (heiltala)",
+    "d": "Eftirstandandi teningafjöldi fyrir þann leikmann (heiltala)",
+    "current_player_id": "Leikmannsnúmer þess sem kallaði (heiltala)",
+    "face_value": "Teningaás sem er verið að telja (1-6)",
+    "count": "Raunverulegur fjöldi samsvarandi teninga (heiltala)",
+    "quantity": "Boðfjöldi (heiltala)",
+    "loser_id": "Leikmannsnúmer þess sem missir teningu (heiltala)",
+    "new_quantity": "Boðfjöldi sem var nýlega sendur inn (heiltala)",
+    "current_quantity": "Núverandi boðfjöldi (heiltala)",
+    "new_face_value": "Teningaás sem var nýlega sendur inn (heiltala)",
+    "current_face_value": "Núverandi teningaás (heiltala)",
+    "action": "Aðgerðarstrengurinn sem leikmaður sendi inn",
+    "reason": "Nestið boðhafnarástæða",
+    "winner": "Leikmannsnúmer þess sem vinnur (heiltala)",
+    "final_ranking": "Listi yfir leikmannsnúmer frá fyrsta útsláttum til sigurvegara"
+  },
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í {num_players}-leikmannaleik Liar's Dice.\nReglur:\n- Á þinni rönd getur þú annað hvort:\n  1) Gert nýtt boð með hærra fjölda eða hærra teningaás (eða bæði) en núverandi boð; t.d. '[Bid: 3, 4]',\n  2) Kallað síðasta boð með því að skrifa '[Call]'.\n\nEf þú kallar:\n  - Ef raunverulegur teljari þeirrar teningaásar meðal allra teninga er lægri en boðið, missir síðasti boðandi einn tening.\n  - Annars missir kallandi einn tening.\nLeikmaður sem nær 0 teningum er útsláttur. Síðasti leikmaðurinn sem eftir er vinnur."
+  },
+  "board": {
+    "per_player": "\tLeikmaður {p}: {d}",
+    "new_round": "\nNýr umferð - Eftirstandandi teningar: {dice_summary}\nNúverandi teningar þínir eru: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Leikmaður {current_player_id} kallar! Raunverulegur teljari teningaásar {face_value} er {count}, sem er LÆGRI en {quantity}.\nLeikmaður {loser_id} (síðasti boðandi) missir einn tening.",
+    "caller_loses": "Leikmaður {current_player_id} kallar! Raunverulegur teljari teningaásar {face_value} er {count}, sem er >= {quantity}.\nLeikmaður {loser_id} (kallandi) missir einn tening."
+  },
+  "action": {
+    "bid_announce": "Leikmaður {player_id} býður {quantity} af teningaás {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Kall var gert án fyrri boða.",
+    "invalid_bid": "Ógilt boð: {reason}",
+    "not_recognized": "Aðgerð ekki viðurkennd sem annað hvort gilt '[Bid: X, Y]' eða '[Call]'. Innisend aðgerð: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nýr boðfjöldi {new_quantity} er lægri en núverandi {current_quantity}.",
+    "face_lower": "Ný teningaás {new_face_value} er lægri en núverandi {current_face_value}.",
+    "identical": "Boð er eins og núverandi boð.",
+    "face_range": "Teningaás verður að vera á milli 1 og 6."
+  },
+  "message": {
+    "eliminated_invalid": "Leikmaður {player_id} var útsláttur vegna ógildrar aðgerðar."
+  },
+  "outcome": {
+    "win": "Leikmaður {winner} vinnur! Lokaúrslit: {final_ranking}"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í leiknum Pig Dice.\n\nReglur:\n- Á þinni rönd getur þú annað hvort valið '[roll]' eða '[hold]'\n- Rúllaðu 2-6: Bættu við umferðartölu þinni\n- Rúllaðu 1: Missaðu umferðartölu þinni og endaðu umferð\n- Halda: Bættu umferðartölu þinni við stigagjöld þín og endaðu umferð\n- Fyrstur að {winning_score} stigum vinnur\n\nÞegar það er umferð þín, muntu sjá núverandi stigagjöld og umferðartölu.\nSvaraðu með '[roll]' til að rúlla teningnum eða '[hold]' til að banka stigum þínum."
+  },
+  "invalid_move": {
+    "invalid_action": "Ógilt aðgerðarsnið. Notaðu '[roll]' eða '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Leikmaður {player_id} sprakk, missti {turn_total} stig!",
+    "player_hold": "Leikmaður {player_id} heldur og bankar {turn_total} stig."
+  },
+  "board": {
+    "player": "Leikmaður 0: '{score_0}'; Leikmaður 1: '{score_1}'",
+    "current_total_scores": "Núverandi Heildarstig: {scores}\nNúverandi umferðartala þín er {turn_total}.",
+    "roll_history": "{observation}\nRúllusaga þín fyrir þessa umferð: {roll_history}",
+    "first_roll": "{observation}\nÞetta er fyrsta rúllan í umferðinni þinni.",
+    "available_actions": "{observation}\nÍ boði eru aðgerðir: '[roll]' eða '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Leikmaður {winner_id} vann með hærra stigagjald við umferðarmörk ({scores})",
+    "winner_by_score": "Leikmaður {winner_id} vann með að ná markstigi {winning_score}!",
+    "draw": "Umferðarmörk hafa verið náð og allir leikmenn hafa sama stigagjald: {scores}"
+  }
+}

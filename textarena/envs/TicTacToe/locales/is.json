@@ -1,0 +1,27 @@
+{
+  "_comment": "TicTacToe staðfærslu skrá. ÞÝÐA EKKI lykla (vinstri hlið). Þýða aðeins gildi (hægri hlið).",
+  "_slots": {
+    "{player_id}": "Leikmannsnúmer, t.d. 0 eða 1",
+    "{symbol}": "Leikmannsmerki, annað hvort X eða O",
+    "{opponent_symbol}": "Andstæðingsmerki, annað hvort X eða O",
+    "{cell}": "Borðreitur á milli 0 og 8"
+  },
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í Tic Tac Toe.\nMarkmið þitt er að vinna þrjú í röð (lárétt, lóðrétt eða á skálínu) á borðinu.\nÁ þinni rönd skalt þú velja númer reits (0-8) sem þú vilt setja merki þitt í næst.\nTil dæmis, '[4]' setur merki þitt í miðju borðsins.\nSem Leikmaður {player_id} verður þú '{symbol}', en andstæðingur þinn verður '{opponent_symbol}'."
+  },
+  "board": {
+    "current_board": "Núverandi Borð:\n\n{board}\n\nLausir Leikir: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Innsendur leikur fylgir ekki réttu sniði.",
+    "out_of_range": "{cell} er ekki gilt borðreitur. Verður að vera á milli 0 og 8.",
+    "already_occupied": "Borðreitur {cell} er þegar átt."
+  },
+  "game_action": {
+    "placed": "Leikmaður {player_id} setti merki sitt ({symbol}) í reit {cell}."
+  },
+  "outcome": {
+    "win": "Leikmaður {player_id} hefur unnið!",
+    "draw": "Leikurinn er jafntefli!"
+  }
+}

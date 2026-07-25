@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround staðfærslu skrá. ÞÝÐA EKKI lykla (vinstri hlið). Þýða aðeins gildi (hægri hlið). Halda hverju {placeholder} nákvæmlega eins og er. Ekki þýða leik/förustuken (t.d. [up], [down], [left], [right], w, s, a, d) eða ASCII borðið sem er teiknað í {board}.",
+  "_slots": {
+    "{num_players}": "Fjöldi leikmanna í leiknum",
+    "{width}": "Breidd borðsins í reitum",
+    "{height}": "Hæð borðsins í reitum",
+    "{player_id}": "Leikmannsnúmer (byggt á 0)",
+    "{board}": "Teiknað ASCII grind; halda hlutlaust, aldrei þýða stafina",
+    "{reason}": "Teiknað orsakalag lokunar leiksins",
+    "{groups}": "Hlutlaust gögn um röðun (lista af hópum leikmannsnúmera, bestur til versta); ekki þýða"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Leikmanna Surround á {width}x{height} grind.\nÞú ert leikmaður {player_id}. Gildir leikir: '[up]' '[down]' '[left]' '[right]' eða w/s/a/d.\nMarkmið: lifa lengur en allir aðrir. Slóðir eru banvænar; veggjahögg drepa; árekstrar á höfuð drepa báða."
+  },
+  "board": {
+    "current": "Núverandi Borð:\n{board}",
+    "after_moves": "Borð eftir samtíma leiki:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Leikmaður {player_id} dó vegna ógilds leiks."
+  },
+  "outcome": {
+    "survived_win": "Leikmaður {player_id} lifði af; allir aðrir rákust.",
+    "all_crashed": "Allir leikmenn rákust samtímis.",
+    "outlived": "Leikmaður lifði lengur en allir aðrir.",
+    "all_dead": "Allir leikmenn dauðir.",
+    "turn_limit": "Takmörk um leikraðir náð - sá sem lifir lengst vinnur.",
+    "ranking": "{reason} Lokalag röðunarhópa (bestur→verstur): {groups}"
+  }
+}
