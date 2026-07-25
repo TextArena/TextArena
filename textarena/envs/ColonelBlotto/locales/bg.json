@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Вие сте {role} във Военачалник Блото.\nВашата цел е да спечелите повече рундове от опонента си.\nНа всеки рунд, разпределете точно {num_total_units} единици през полета {field_names}.\nИграчът, който разпредели повече единици в едно поле, печели това поле, а играчът, който печели повече полета, печели рунда.\nНапример, '[A7 B7 C6]' разпределя 7 единици в A, 7 в B и 6 в C.",
+    "commander_alpha": "Военачалник Алфа",
+    "commander_beta": "Военачалник Бета"
+  },
+  "game_state": {
+    "header_round": "=== ВОЕНАЧАЛНИК БЛОТО - Рунд {current_round}/{num_rounds} ===\nРундове, спечелени от Военачалник Алфа: {alpha_score}, Военачалник Бета: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nРунд {current_round}\nВоеначалник Алфа разпределил: {p0_allocations}\nВоеначалник Бета разпределил: {p1_allocations}\n",
+    "winner_alpha": "{message}Победител: Военачалник Алфа",
+    "winner_beta": "{message}Победител: Военачалник Бета",
+    "tie": "{message}Равенство!"
+  },
+  "invalid_move": {
+    "wrong_format": "Невалиден формат на входа. Използвайте: A:5, B:10, C:5",
+    "invalid_field": "Невалидно име на поле. Валидни полета: {field_names}",
+    "wrong_allocation_value": "Всички разпределения трябва да бъдат неотрицателни цели числа.",
+    "incorrect_total_units": "Трябва да разпределите точно {num_total_units} единици. Текуща сума: {current_sum}",
+    "good_allocations": "Разпределението е добро."
+  },
+  "outcome": {
+    "winner_alpha": "Военачалник Алфа печели {score_0}-{score_1} след {num_rounds} рунда!",
+    "winner_beta": "Военачалник Бета печели {score_1}-{score_0} след {num_rounds} рунда!",
+    "draw": "Играта завършва с равенство {score_0}-{score_1} след {num_rounds} рунда!",
+    "early_winner_alpha": "Военачалник Алфа печели {scores_0}-{scores_1} (постигнато мнозинство)!",
+    "early_winner_beta": "Военачалник Бета печели {scores_1}-{scores_0} (постигнато мнозинство)!"
+  }
+}
