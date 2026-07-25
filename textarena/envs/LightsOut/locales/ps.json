@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "د څراغونو په لړ کې ښه راغلاست! تاسو د {size}x{size} د څراغونو شبکه لرئ. ستاسو هدف دا دی چې ټولې څراغونه وتړئ (د '.' لخوا استازیتوب کیږي) کله چې تاسو د ر lightا فشار ورکړئ ، نو دا پخپله او د هغې ګاونډیان (پورته / ښکته / کی left / ښیې) بدلوي. د ر lightا فشارولو لپاره [row col] ټایپ کړئ (د 0 - شاخص شوی ، نو معتبر حد 0 - {max_index} دی). تاسو د پزل حل کولو لپاره تر {max_turns} پورې حرکتونه لرئ. افسانه: 'O' = ر lightا ON ، '.' = ر lightا OFF"
+  },
+  "board": {
+    "current_state": "د اوسني شبکې حالت (مخ {moves_made}، {moves_left} پاتې حرکتونه، {completion}٪ بشپړ شوی): {grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "عمل باید په [row col] بڼه وي چېرته چې قطار او کالم د 0 څخه تر {max_index} پورې بشپړ شمیرې وي.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "مبارک شه! تاسو په {moves_used} حرکتونو کې پزل حل کړ!",
+    "loss": "د لوبې پای! تاسو ټول {max_turns} حرکتونه کارولي پرته له دې چې پزل حل کړئ. وروستی بشپړول: {completion}٪ وروستی حالت: {grid}"
+  }
+}

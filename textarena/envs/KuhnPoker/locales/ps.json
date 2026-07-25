@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a {max_rounds} round game of Kuhn Poker.\nGame Rules:\n- Kuhn Poker uses a 3-card deck with J, Q, K (J lowest, K highest)\n- Each player antes {ante} chip and receives 1 card each round (note that the cards are dealt without replacement, so you cannot have the same card as your opponent).\n- Game continues for {max_rounds} rounds\n- The player with the most chips after all rounds wins\nAction Rules:\n- '[check]': Pass without betting (only if no bet is on the table)\n- '[bet]': Add 1 chip to the pot (only if no bet is on the table)\n- '[call]': Match an opponent's bet by adding 1 chip to the pot\n- '[fold]': Surrender your hand and let your opponent win the pot"
+  },
+  "init_round": {
+    "round_start": "### د {max_rounds} دورو څخه {current_round} دور پیل کړئ. ستاسو کارت دی: {player_card}",
+    "available_actions": "ستاسو د لاسرسي وړ کړنې دا دي: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "عمل باید [Check]، [Bet]، [Call]، یا [Fold] وي.",
+    "not_legal": "عمل باید {legal_actions} وي."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "ستاسو د لاسرسي وړ کړنې دا دي: {legal_actions}.",
+    "round_summary": "{reason} اوسني نمرې: لوبغاړی 0: \"{player_0_chips}\"; لوبغاړی 1: \"{player_1_chips}\""
+  },
+  "showdown": {
+    "showdown_summary": "د لوبې پړاو: د لوبغاړي {winner} {winner_card} د لوبغاړي {loser} {loser_card} ماتوي. لوبغاړی {winner} د {pot_value} چپسونو پوټ ګټي."
+  },
+  "outcome": {
+    "draw": "د {max_rounds} دورې په پای کې ، دواړه لوبغاړي ورته شمیر چپس درلودل.",
+    "round_win": "Player {player_id} has folded.",
+    "winner_player0": "لوبغاړی 0 د ټولو {max_rounds} دورونو په پای کې د ډیرو چپسونو درلودو سره وګټله.",
+    "winner_player1": "لوبغاړي 1 د ټولو {max_rounds} دورونو په پای کې د ډیرو چپسونو درلودو سره وګټله."
+  }
+}

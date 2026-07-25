@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "اوسنی بورډ: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "حرکت باید د [macro micro] په شکل کې وي چې شمیرې یې له ۰ څخه تر ۸ پورې وي.",
+    "out_of_range": "هر شاخص باید د 0 او 8 ترمنځ وي.",
+    "index_out_of_range": "د مایکرو بورډ، قطار، یا کالم له حد څخه بهر دی.",
+    "cell_occupied": "The cell is already occupied.",
+    "wrong_micro_board": "لوبغاړی باید په راتلونکي مایکرو بورډ کې لوبې وکړي.",
+    "micro_board_won": "د مایکرو بورډ لا دمخه ګټل شوی دی."
+  },
+  "next_board": {
+    "any": "هر ډول مایکرو بورډ",
+    "specific": "د مایکرو بورډ {nxt}"
+  },
+  "game_action": {
+    "played": "لوبغاړی {player_id} په مایکرو بورډ کې لوبیدلی {macro_idx}، حجره {micro_idx} (صف {row}، کالم {col}). لوبغاړی {opponent_id} اوس باید په {nxt_txt} کې لوبې وکړي."
+  },
+  "outcome": {
+    "win": "لوبغاړی {player_id} د الټیمټیک ټیک ټو ګټونکی دی!",
+    "draw": "لوبه مساوي ده!"
+  }
+}
