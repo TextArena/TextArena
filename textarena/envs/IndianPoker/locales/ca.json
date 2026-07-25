@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} en un joc d'Indian Poker.\n- Baralla de 52 cartes; només veus la carta de l'oponent.\n- Aposta {ante} fitxa(s) cada ronda, {max_rounds} ronda(s) en total.\n- Moviments vàlids: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X és un enter positiu ≤ el teu compte de fitxes.)\n- La carta oculta més alta guanya el pot al final.\n"
+  },
+  "round": {
+    "announce": "### Ronda {current_round}/{max_rounds}\nLa carta del teu oponent és: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Proporciona exactament UNA acció entre claudàtors, per exemple '[check]', '[bet 2]', '[call]', '[raise 3]' o '[fold]'.",
+    "cannot_check": "No pots [check] - estàs davant d'una aposta.",
+    "amount_min": "L'import de l'aposta / augment ha de ser ≥ 1.",
+    "cannot_bet": "No pots [bet] - has de [call] / [raise] / [fold].",
+    "nothing_to_call": "No hi ha res per cridar; pots [check] en comptes.",
+    "no_bet_to_raise": "Utilitza [bet X] per obrir; no hi ha cap aposta per augmentar.",
+    "insufficient": "No tens prou fitxes per a aquesta acció."
+  },
+  "game_action": {
+    "action": "Jugador {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Les teves accions possibles: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Jugador {winner}. (Bancs P0:{p0}, P1:{p1})",
+    "folded": "El Jugador {player_id} s'ha retirat.",
+    "showdown_win": "Enfrontament: {card_win} supera {card_lose}.",
+    "showdown_tie": "Empat en l'enfrontament: tots dos {card}. Pot dividit – cada un rep {split}."
+  },
+  "outcome": {
+    "p0_wins": "El Jugador 0 guanya ({bank0} > {bank1})",
+    "p1_wins": "El Jugador 1 guanya ({bank1} > {bank0})",
+    "draw": "Fitxes iguals després de totes les rondes"
+  }
+}

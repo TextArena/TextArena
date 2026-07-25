@@ -1,0 +1,43 @@
+{
+  "_comment": "Fitxer de localització d'IteratedUltimatumGame. NO tradueixis les claus (costat esquerre). Només tradueix els valors (costat dret). Mantén cada {placeholder} exactament com està; no tradueixis els tokens d'acció [Offer: $X] / [Accept] / [Reject]. Mantén el símbol de moneda '$' i tots els números tal com estan.",
+  "_slots": {
+    "{player_id}": "El número del jugador, 0 o 1",
+    "{other_id}": "El número de l'altre jugador, 1 o 0",
+    "{num_rounds}": "Nombre total de rondes",
+    "{pool}": "Quantitat de diners disponible cada ronda (un número)",
+    "{round_number}": "El número de la ronda actual",
+    "{proposer_id}": "El número del jugador proposador, 0 o 1",
+    "{responder_id}": "El número del jugador responent, 0 o 1",
+    "{offer}": "La quantitat oferta (un número)",
+    "{keep}": "La quantitat que es queda el proposador (un número)",
+    "{proposer_gain}": "Diners guanyats pel proposador en aquesta ronda (un número)",
+    "{responder_gain}": "Diners guanyats pel responent en aquesta ronda (un número)",
+    "{total_0}": "Total acumulat del jugador 0 (un número)",
+    "{total_1}": "Total acumulat del jugador 1 (un número)",
+    "{winner}": "El número del jugador guanyador",
+    "{loser}": "El número del jugador perdedor",
+    "{winner_total}": "El total de diners del guanyador (un número)",
+    "{loser_total}": "El total de diners del perdedor (un número)",
+    "{total}": "El total final empatat de cada jugador (un número)"
+  },
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id}, jugant {num_rounds} rondes d'Iterated Ultimatum Game.\nTens ${pool} per dividir en aquesta ronda entre tu i el Jugador {other_id}.\n\nProposador:\n  - Fes una oferta: [Offer: $X] (0 <= X <= pool)\n  - Si s'accepta → Tu reps $(pool - X), l'altre jugador rep $X\n  - Si es rebutja → Tots dos rebeu $0\n  - Exemple: [Offer: $3]  o  'Crec que això és just. [Offer: $5]'\n\nResponent:\n  - Decideix sobre l'oferta amb [Accept] o [Reject]\n  - Exemple: 'Sembla raonable. [Accept]'\n            'Massa injust. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- La ronda {round_number} comença! ---\nEl Jugador {proposer_id} és el proposador, el Jugador {responder_id} és el responent.",
+    "offer": "Ronda {round_number}: El Jugador {proposer_id} ofereix ${offer} al Jugador {responder_id} (guardant ${keep}).",
+    "accepted": "El Jugador {responder_id} ha acceptat! Guanys de la ronda {round_number}: Jugador {proposer_id} +${proposer_gain}, Jugador {responder_id} +${responder_gain}. Nous totals: Jugador 0: ${total_0}, Jugador 1: ${total_1}.",
+    "rejected": "El Jugador {responder_id} ha rebutjat l'oferta! Guanys de la ronda {round_number}: Tots dos jugadors +$0. Els totals romanen: Jugador 0: ${total_0}, Jugador 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "El proposador ha de fer una oferta utilitzant el format [Offer: $X].",
+    "bad_integer": "La quantitat de l'oferta ha de ser un enter vàlid.",
+    "out_of_range": "L'oferta ha de ser entre $0 i ${pool}.",
+    "no_current_offer": "No hi ha cap oferta actual per respondre.",
+    "accept_or_reject": "El responent ha de [Accept] o [Reject] l'oferta."
+  },
+  "outcome": {
+    "win": "El Jugador {winner} ha guanyat amb un total de ${winner_total} contra ${loser_total} del Jugador {loser}.",
+    "draw": "Empat! Tots dos jugadors han acabat amb un total de ${total}."
+  }
+}

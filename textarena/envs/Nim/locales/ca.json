@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} a Nim.\nEl teu objectiu és prendre l'últim objecte restant.\nA cada torn, tria exactament una pila i elimina un o més objectes d'ella.\nUtilitza el format '[pila quantitat]', on pila és l'índex de la pila i quantitat és el nombre d'objectes a eliminar.\nPer exemple, '[0 3]' elimina 3 objectes de la pila 0."
+  },
+  "state": {
+    "current_pile": "Pila actual:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "No s'ha trobat un format de moviment vàlid. Utilitza '[pila quantitat]'.",
+    "correct_format_wrong_fields": "Jugador {player_id}, acció invàlida. La columna {col} està fora dels límits.",
+    "out_of_range": "L'índex de pila {pile_index} està fora de rang.",
+    "non_positive": "Cal eliminar almenys 1 objecte.",
+    "exceeds_pile": "No es pot eliminar {quantity} de la pila {pile_index} (només queden {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "El Jugador {player_id} ha jugat [{pile_index} {quantity}], eliminant {quantity} objecte(s) de la pila {pile_index}."
+  },
+  "outcome": {
+    "win": "El Jugador {player_id} ha pres l'últim objecte(s)!"
+  }
+}

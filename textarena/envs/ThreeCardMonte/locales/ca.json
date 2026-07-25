@@ -1,0 +1,31 @@
+{
+  "_comment": "Fitxer de localització de ThreeCardMonte. NO tradueixis les claus (costat esquerre). Només tradueix els valors (costat dret).",
+  "_slots": {
+    "{line}": "La fila de tasses renderitzada",
+    "{step}": "El número actual de pas de barreja",
+    "{steps}": "El nombre total de passos de barreja",
+    "{i}": "L'índex de la primera tassa implicada en un intercanvi",
+    "{j}": "L'índex de la segona tassa implicada en un intercanvi",
+    "{prompt}": "El fragment de prompt localitzat afegit després de les tasses",
+    "{max_index}": "L'índex màxim vàlid de tassa, és a dir, num_cups-1",
+    "{ball_pos}": "L'índex de la tassa on hi ha la pilota"
+  },
+  "player_prompt": {
+    "intro": "Segueix la pilota oculta 'X' mentre les tasses es barregen.\nDesprés de barrejar, endevina la seva ubicació amb `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "La pilota comença: {line}",
+    "shuffle": "Barreja {step}/{steps}: s'han intercanviat les tasses {i} i {j}.",
+    "cups": "Tasses: {line}  {prompt}",
+    "guess_now": "(Endevina ara!)",
+    "reveal": "(Revelació: pilota sota {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Acció incorrecta. Utilitza `[k]`.",
+    "out_of_range": "Índex fora de rang 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Correcte! Has trobat la pilota.",
+    "lose": "Incorrecte — la pilota era sota la tassa {ball_pos}."
+  }
+}

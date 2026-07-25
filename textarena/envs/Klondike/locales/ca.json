@@ -1,0 +1,74 @@
+{
+  "_comment": "Fitxer de localització de Klondike Solitaire. NO tradueixis les claus (costat esquerre). Només tradueix els valors (costat dret).",
+  "_slots": {
+    "{n}": "Índex d'acció dins d'un comando separat per comes, basat en 1",
+    "{msg}": "Un missatge de resultat d'acció niuada (ja localitzat)",
+    "{count}": "Nombre de cartes cara amunt que es mouen",
+    "{src}": "Número de pila de taula d'origen, basat en 1",
+    "{dst}": "Número de pila de destinació, basat en 1",
+    "{cmd}": "El comando desconegut que el jugador va escriure (no traduït)",
+    "{max_turns}": "El nombre màxim de torns abans que el joc acabi",
+    "{score}": "Nombre de cartes actualment a les piles de fonamentació",
+    "{board}": "El tauler ASCII renderitzat (mai traduït)",
+    "{turn}": "Número de torn actual",
+    "{stock}": "Nombre de cartes que queden a l'estoc",
+    "{waste}": "L'etiqueta de la carta de residus superior, o '--' si està buida (mai traduïda)",
+    "{cards}": "Les cartes d'una pila com a etiquetes neutrals, o '--' si està buida (mai traduïdes)"
+  },
+  "player_prompt": {
+    "intro": "Estàs jugant al Klondike Solitaire. El teu objectiu és moure totes les cartes a les piles de fonamentació.\n\nRegles del joc:\n- Piles de fonamentació (F1-F4): Construeix des de l'As fins al Rei del mateix pal\n- Piles de taula (T1-T7): Construeix cap avall alternant colors (vermell sobre negre, negre sobre vermell)\n- Estoc: Treu cartes a la pila de residus\n- Residus (W): La carta superior disponible per jugar\n\nComandos:\n- 'draw' - Treu cartes de l'estoc a la pila de residus\n- 'move <origen> <destinació> [compte]' - Mou cartes entre piles\n  Exemples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. El compte també pot ser 'all', que intentarà moure totes les cartes cara amunt.\n- 'forfeit' - Acaba el joc immediatament i bloqueja la teva puntuació actual\n- Noms de pila: W (residus), F1-F4 (fonamentacions), T1-T7 (taula)\n\nPots executar múltiples accions en un torn separant-les amb comes:\n  Exemple: 'draw, move W T1, move T2 F1'\n\nNomés els Reis poden ser col·locats a les piles de taula buides.\nLes accions s'executen en ordre - si una falla, les accions restants s'ometen.\nUtilitza 'forfeit' si creus que el joc és impossible de guanyar."
+  },
+  "format_error": {
+    "no_brackets": "Format d'acció invàlid. L'acció hauria d'estar entre claus.",
+    "no_closing_bracket": "Format d'acció invàlid. Falta la clau de tancament ']'",
+    "empty_command": "Comando buit. Escriu 'draw' o 'move <origen> <destinació> [compte]'",
+    "empty_action": "Acció buida",
+    "move_needs_args": "El comando 'move' requereix origen i destinació. Ús: 'move <origen> <destinació> [compte]'",
+    "count_positive": "El compte ha de ser positiu o 'all'",
+    "count_invalid": "Compte invàlid. Utilitza un número o 'all'",
+    "unknown_command": "Comando desconegut '{cmd}'. Utilitza 'draw', 'move <origen> <destinació> [compte]', o 'forfeit'",
+    "wrapped": "Acció {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Acció {n}: {msg}",
+    "before_failure": "S'han executat {n} acció(ns) abans del fracàs.",
+    "failed": "Acció {n} fallida: {msg}"
+  },
+  "move_result": {
+    "drew": "S'han tret cartes de l'estoc a la pila de residus.",
+    "cannot_draw": "No es pot treure. Tant l'estoc com la pila de residus estan buits.",
+    "invalid_pile": "Nom de pila invàlid. Utilitza W, F1-F4, o T1-T7",
+    "foundation_one_card": "Només es pot moure 1 carta a la fonamentació",
+    "waste_to_foundation_ok": "S'ha mogut la carta de la pila de residus a la fonamentació F{dst}",
+    "waste_to_foundation_bad": "No es pot moure la carta de la pila de residus a aquesta fonamentació",
+    "tableau_to_foundation_ok": "S'ha mogut la carta de la taula T{src} a la fonamentació F{dst}",
+    "tableau_to_foundation_bad": "No es pot moure la carta de la taula a aquesta fonamentació",
+    "foundation_to_foundation": "No es pot moure de la fonamentació a la fonamentació",
+    "waste_to_tableau_one_card": "Només es pot moure 1 carta de la pila de residus a la taula",
+    "waste_to_tableau_ok": "S'ha mogut la carta de la pila de residus a la taula T{dst}",
+    "waste_to_tableau_bad": "No es pot col·locar la carta de la pila de residus a aquesta taula",
+    "no_face_up": "No hi ha cartes cara amunt per moure",
+    "tableau_to_tableau_ok": "S'han mogut {count} carta(s) de la taula T{src} a T{dst}",
+    "tableau_to_tableau_bad": "No es pot moure {count} carta(s) de T{src} a T{dst}",
+    "foundation_to_tableau_one_card": "Només es pot moure 1 carta de la fonamentació a la taula",
+    "foundation_empty": "La fonamentació F{src} està buida",
+    "foundation_to_tableau_ok": "S'ha mogut la carta de la fonamentació F{src} a la taula T{dst}",
+    "foundation_to_tableau_bad": "No es pot col·locar la carta de la fonamentació a la taula T{dst}",
+    "to_waste_or_stock": "No es pot moure a la pila de residus o a l'estoc"
+  },
+  "outcome": {
+    "forfeit": "Joc abandonat. Puntuació final: {score} cartes a les fonamentacions.",
+    "won": "Felicitats! Has guanyat el Klondike Solitaire!",
+    "turn_limit": "Joc acabat! Has assolit el màxim de {max_turns} torns. Puntuació: {score} cartes a les fonamentacions."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Torn: {turn}/{max_turns}",
+    "stock": "Estoc: {stock} cartes",
+    "waste": "Residus (W): {waste}",
+    "foundations_header": "Fonamentacions:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Taula:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

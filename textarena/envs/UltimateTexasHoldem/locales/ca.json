@@ -1,0 +1,81 @@
+{
+  "_comment": "Fitxer de localització d'Ultimate Texas Hold'em. NO tradueixis les claus (costat esquerre). Només tradueix els valors (costat dret).",
+  "_slots": {
+    "{start_chips}": "Nombre inicial de fitxes, per exemple 1000",
+    "{ante}": "Import de l'aposta obligatòria, per exemple 25",
+    "{ante4}": "Quatre vegades l'aposta obligatòria, per exemple 100",
+    "{ante2}": "Dues vegades l'aposta obligatòria, per exemple 50",
+    "{round}": "Número de ronda actual",
+    "{chips}": "Nombre actual de fitxes del jugador",
+    "{hand}": "Llista de cartes separades per comes, per exemple 'A♠, K♥', o el text de cap carta",
+    "{phase}": "Etiqueta de la fase actual (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Llista d'accions disponibles separades per comes, per exemple '[play_bet_4x], [check]'",
+    "{available}": "Llista d'accions disponibles separades per comes",
+    "{blind}": "Import de l'aposta cega",
+    "{play}": "Import de l'aposta de joc",
+    "{cards}": "Llista de cartes separades per comes, per exemple 'Q♣, 7♦, 2♠'",
+    "{name}": "Nom de la mà de pòquer, inserit tal com està",
+    "{amount}": "Import de fitxes",
+    "{net}": "Canvi net de fitxes per la ronda (pot ser negatiu)",
+    "{max_turns}": "Nombre màxim de rondes",
+    "{winner_rounds}": "Nombre de rondes completades"
+  },
+  "player_prompt": {
+    "no_cards": "Encara no hi ha cartes",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Un jugador contra el crupier\n\n📖 RESUM DEL JOC:\n• Comences amb {start_chips} fitxes\n• Baralla única de 52 cartes (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Jugues contra el crupier (casa)\n• Cada ronda segueix l'estructura d'Ultimate Texas Hold'em: fas una aposta obligatòria (ANTE) i una aposta cega (BLIND), reps dues cartes, decideixes si fer una aposta de joc (PLAY) en les diferents fases, revel·les les cartes comunitàries i compares la teva millor mà de 5 cartes amb la del crupier.\n• L'objectiu és maximitzar les teves guanys (quan tens la millor mà) i minimitzar les teves pèrdues (quan tens la pitjor mà).\n• El joc acaba quan arribes a 0 fitxes o menys al començament de la ronda (DERROTA) o completes 1000 rondes amb fitxes (VICTÒRIA)\n\n💰 ESTRUCTURA D'APUESTES:\n• ANTE: Aposta obligatòria de ${ante} cada ronda\n• BLIND: Aposta cega obligatòria de ${ante} cada ronda\n• PLAY: Aposta de joc opcional durant el joc. Al llarg de la ronda, pots triar només una de les següents: (${ante4} si es fa a PRE-FLOP, ${ante2} si es fa a FLOP, o ${ante} si es fa a RIVER. També pots plegar a RIVER, renunciant a la mà i no fent cap aposta.)\n\n🎴 REPARTICIÓ DE CARTES:\n• Reps dues cartes descobertes (les teves cartes)\n• El crupier rep dues cartes tapades (amagades per a tu)\n• Es reparteixen 5 cartes comunitàries tapades inicialment\n• Les cartes comunitàries es revel·len progressivament al llarg de les fases del joc\n\n🏆 QUALIFICACIÓ DEL CRUPIER:\n• El crupier ha de tenir almenys un parell (dues cartes del mateix rang) per qualificar-se, utilitzant les dues cartes de la seva mà i les 5 cartes comunitàries.\n• La qualificació del crupier afecta els resultats de les apostes, com s'explicarà més endavant.\n\n🎮 FASES DEL JOC I ACCIONS:\n📋 PRE-FLOP:\n  • Accions: [4x] (${ante4}) o [check]\n  • [4x]: Fes una aposta de joc de ${ante4}, revel·la les primeres 3 cartes comunitàries\n  • [check]: No facis cap aposta addicional, revel·la les primeres 3 cartes comunitàries\n\n📋 FLOP:\n  • Si s'ha fet una aposta de 4x: només [skip] disponible (revel·la automàticament les dues últimes cartes comunitàries)\n  • Si no s'ha fet cap aposta de 4x: [2x] (${ante2}) o [check]\n  • [2x]: Fes una aposta de joc de ${ante2}, revel·la les dues últimes cartes comunitàries\n  • [check]: No facis cap aposta addicional, revel·la les dues últimes cartes comunitàries\n\n📋 RIVER:\n  • Si s'ha fet una aposta de 4x o 2x: només [skip] disponible (procedeix automàticament al xou)\n  • Si no s'ha fet cap aposta de joc: [1x] (${ante}) o [fold]\n  • [1x]: Fes una aposta de joc de ${ante}, procedeix al xou\n  • [fold]: Renuncia a la mà, perd l'aposta obligatòria i la cega\n\n📋 SHOWDOWN:\n  • Es revel·len totes les cartes i es valoren\n  • Millor mà de 5 cartes de les 7 cartes (2 cartes + 5 cartes comunitàries)\n  • Les apostes es resolen segons les regles de pagament\n\n💎 PAGAMENT D'APUESTES:\n📊 ANTE:\n  • El crupier no es qualifica: EMPAT (aposta retornada)\n  • El crupier es qualifica i guanyes: pagament 1:1 (aposta + guanys)\n  • El crupier es qualifica i perds: aposta perduda\n  • Empat: EMPAT (aposta retornada)\n\n📊 BLIND:\n  • No afectat per la qualificació del crupier\n  • Guanyes: aposta retornada i pagament addicional segons la força de la mà\n  • Perds: aposta perduda\n  • Empat: EMPAT (aposta retornada)\n\n📊 TAULA DE PAGAMENT DE BLIND:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Menys de Straight: cap pagament addicional\n\n📊 PLAY:\n  • No afectat per la qualificació del crupier\n  • Comparació directa: la teva millor mà contra la millor mà del crupier\n  • Guanyes: pagament 1:1 (aposta + guanys)\n  • Perds: aposta perduda\n  • Empat: EMPAT (aposta retornada)\n\n🎯 RÀNKINGS DE MANS DE PÒQUER (Millor a Pitjor):\n  1. Royal Flush: A-K-Q-J-10 del mateix pal\n  2. Straight Flush: 5 cartes consecutives del mateix pal\n  3. Four of a Kind: 4 cartes del mateix rang\n  4. Full House: 3 cartes del mateix rang + 2 cartes del mateix rang\n  5. Flush: 5 cartes del mateix pal\n  6. Straight: 5 cartes consecutives\n  7. Three of a Kind: 3 cartes del mateix rang\n  8. Two Pair: 2 parells de diferent rang\n  9. One Pair: 2 cartes del mateix rang\n  10. High Card: la carta més alta guanya\n\n⌨️ COMANDES D'ACCIÓ:\n• [4x] o [play bet 4x]: fes una aposta de joc de ${{self.ante_amount*4}}\n• [2x] o [play bet 2x]: fes una aposta de joc de ${{self.ante_amount*2}}\n• [1x] o [play bet 1x]: fes una aposta de joc de ${{self.ante_amount*1}}\n• [check] o [c]: comprova (no facis cap aposta addicional)\n• [fold] o [f]: renuncia a la mà\n• [skip] o [s]: salta a la següent fase (quan no cal cap acció)\n\n💡 CONSELLS D'ESTRATÈGIA:\n• Les mans fortes (parells, cartes altes) sovint justifiquen apostes de 4x\n• Considera la qualificació del crupier - les mans febles poden empatar si el crupier no es qualifica\n• L'aposta cega pot ser molt rendible amb mans fortes (Royal Flush = 500:1!)\n• Vigila el teu compte de fitxes! Si arriba a 0 o menys al començament de la ronda, perds.\n\n⚠️ NOTES IMPORTANTES:\n• Les apostes obligatòries (ANTE i BLIND) són obligatòries cada ronda\n• Les apostes de joc (PLAY) són opcionals i estratègiques\n• Assegura't d'introduir l'acció correcta i només una acció a la vegada.\n\n",
+    "state": "🎯 RONDA {round}\n💰 Fitxes: {chips}\n🎴 La teva mà: {hand}\n📊 Apostes actuals: Ante ${ante}, Cega ${blind}, Joc ${play}\n📋 Fase: {phase}\n🎯 Accions disponibles: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Ronda {round} començada! Apostes: ANTE ${ante}, CEGA ${blind}. Tens {chips} fitxes restants.",
+    "your_hand": "🎴 La teva mà: {hand}",
+    "flop_revealed": "🃏 FLOP revelat: {cards}",
+    "river_revealed": "🃏 RIVER revelat: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Acció invàlida per a la fase actual. Accions disponibles: {available}",
+    "message": "❌ Acció invàlida! Accions disponibles: {available}"
+  },
+  "action": {
+    "folded": "🃏 Has renunciat a la mà."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 XOU! Mà del crupier: {cards}",
+    "community_cards": "🃏 Cartes comunitàries: {cards}",
+    "player_best": "🎴 Millor mà del jugador: {name} ({cards})",
+    "dealer_best": "🎴 Millor mà del crupier: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE perduda! -${ante} (renunciat)",
+    "blind_lost_folded": "❌ CEGA perduda! -${blind} (renunciat)",
+    "ante_won": "✅ ANTE guanyada! +${amount}",
+    "ante_pushed": "🔄 ANTE empatada! ${ante} retornada",
+    "ante_lost": "❌ ANTE perduda! -${ante}",
+    "blind_won": "✅ CEGA guanyada! +${amount}",
+    "blind_pushed": "🔄 CEGA empatada! ${blind} retornada",
+    "blind_lost": "❌ CEGA perduda! -${blind}",
+    "play_won": "✅ JOC guanyat! +${amount}",
+    "play_pushed": "🔄 JOC empatat! ${play} retornat",
+    "play_lost": "❌ JOC perdut! -${play}",
+    "net_gain": "🎉 Ronda {round} completada! Guany net: +${net}",
+    "net_loss": "💸 Ronda {round} completada! Pèrdua neta: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 JOC ACABAT! {max_turns} rondes completades. Tens ${chips} fitxes - GUANYES!",
+    "game_over_lose": "🏁 JOC ACABAT! Has quedat sense fitxes. El crupier guanya!",
+    "reward_win": "Jugador ha completat {winner_rounds} rondes amb ${chips} fitxes",
+    "reward_lose": "Jugador ha quedat sense fitxes a la ronda {round}",
+    "reward_win_max": "Jugador ha completat {max_turns} rondes amb ${chips} fitxes"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Quatre del mateix",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Tres del mateix",
+    "two_pair": "Dos parells",
+    "one_pair": "Un parell",
+    "high_card": "Carta alta",
+    "unknown": "Mà desconeguda"
+  }
+}
