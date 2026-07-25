@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} grającym w grę w Kości Świni.\n\nZasady:\n- W swojej turze możesz albo '[roll]' albo '[hold]'\n- Wyrzuć 2-6: Dodaj do swojego wyniku w turze\n- Wyrzuć 1: Utracisz wynik w turze i zakończysz turę\n- Hold: Dodaj wynik w turze do swojego wyniku i zakończ turę\n- Pierwszy, kto zdobędzie {winning_score} punktów, wygrywa\n\nGdy przyjdzie twoja kolej, zobaczysz aktualne wyniki i wynik w turze.\nOdpowiedz '[roll]', aby rzucić kością lub '[hold]', aby zabezpieczyć swoje punkty."
+  },
+  "invalid_move": {
+    "invalid_action": "Nieprawidłowy format akcji. Użyj '[roll]' lub '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Gracz {player_id} przegrał, tracąc {turn_total} punktów!",
+    "player_hold": "Gracz {player_id} zatrzymuje się i bankuje {turn_total} punktów."
+  },
+  "board": {
+    "player": "Gracz 0: '{score_0}'; Gracz 1: '{score_1}'",
+    "current_total_scores": "Aktualne wyniki ogólne: {scores}\nTwój aktualny wynik w turze to {turn_total}.",
+    "roll_history": "{observation}\nHistoria twoich rzutów w tej turze: {roll_history}",
+    "first_roll": "{observation}\nTo jest pierwszy rzut w twojej turze.",
+    "available_actions": "{observation}\nDostępne akcje: '[roll]' lub '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Gracz {winner_id} wygrał, mając wyższy wynik przy limicie tur ({scores})",
+    "winner_by_score": "Gracz {winner_id} wygrał, osiągając docelowy wynik {winning_score}!",
+    "draw": "Osiągnięto limit tur i wszyscy gracze mają ten sam wynik: {scores}"
+  }
+}

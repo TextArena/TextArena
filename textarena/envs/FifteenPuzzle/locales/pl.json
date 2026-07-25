@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id}. Grajesz w grę 15-Puzzle.\nCelem gry jest ułożenie numerowanych kafelków w kolejności rosnącej od 1 do 15, z pustą przestrzenią zlokalizowaną w prawym dolnym rogu.\nAby wykonać ruch, możesz przesunąć kafelek do pustej przestrzeni (reprezentowanej przez podwójne podkreślenie, np. __) za pomocą jednej z następujących komend:\n- 'up': Przesuń kafelek poniżej pustej przestrzeni w górę.\n- 'down': Przesuń kafelek powyżej pustej przestrzeni w dół.\n- 'left': Przesuń kafelek po prawej stronie pustej przestrzeni w lewo.\n- 'right': Przesuń kafelek po lewej stronie pustej przestrzeni w prawo.\nAby przesłać swój ruch, wpisz kierunek (np. 'up', 'down', 'left' lub 'right') w nawiasach kwadratowych, np. [up].\nAktualny układ planszy jest pokazany poniżej. Użyj informacji, aby rozwiązać zagadkę.\n"
+  },
+  "board": {
+    "current_board": "Aktualna plansza:\n\n{board}\nDostępne ruchy: {moves}",
+    "game_board": "Plansza gry:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nieprawidłowy format ruchu. Gracz {player_id} nie odpowiedział ważnym kierunkiem w nawiasach kwadratowych.",
+    "illegal_move": "Nieprawidłowy ruch. Kafelek nie może być przesunięty w określonym kierunku."
+  },
+  "outcome": {
+    "win": "Gratulacje! Gracz {player_id} pomyślnie rozwiązał zagadkę 15-Puzzle.",
+    "turn_limit": "Osiągnięto limit tur. Model ukończył {percent} procent zagadki"
+  }
+}
