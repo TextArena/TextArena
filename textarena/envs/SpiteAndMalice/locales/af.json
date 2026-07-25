@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in 'n twee-speler spel van Spite en Malice. Jou doel is om eerste jou afbetaalhoop te leeg te maak.\n\n### Spel Oorsig:\n- Die doel is om jou afbetaalhoop te skoon te maak deur kaarte na die middelhope te speel.\n- Jy kan kaarte speel van drie bronne:\n  1. Jou **hand** (jy begin elke beurt met tot 5 kaarte in die hand).\n  2. Die **bo-kaart van jou afbetaalhoop**.\n  3. Die **bo-kaart van enige van jou weggooi hope**.\n\n### Speelreëls:\n- Jy mag 'n kaart speel op 'n middelhoop as dit **een rang hoër** is as die bo-kaart op daardie hoop (middelhope begin met Aas en gaan tot Koningin; Konings is wild - hulle kan op enige kaart gespeel word, maar verander nie die rangvolgorde. Dit beteken as 'n Koning gebruik word na 4, dan is daardie Koning gerangskik as 5 en die volgende kaart moet 'n 6 wees).\n- As jy nie meer kaarte kan speel nie, moet jy **'n kaart weggooi** na een van jou weggooi hope om jou beurt te eindig.\n- As 'n middelhoop Koningin bereik, sal dit outomaties skoongemaak word.\n- Die rangorde is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Aksies:\n1. **Trek**: Aan die begin van jou beurt, trek kaarte om jou hand tot 5 kaarte te vul. Voer **[draw]** in om te begin.\n2. **Speel 'n Kaart**: Om 'n kaart te speel, spesifiseer die kaart en die middelhoop soos hierdie: **[play A♠ 0]** (waar 'A♠' die kaart is en '0' die middelhoop indeks is).\n3. **Weggooi**: As jy nie meer kaarte kan speel nie, weggooi 'n kaart van jou hand na 'n weggooi hoop om jou beurt te eindig. Voer **[discard A♠ 1]** in (waar 'A♠' die kaart is en '1' die weggooi hoop indeks is). Let op dat jy nie enige kaart van die afbetaalhoop kan weggooi nie. Jy mag slegs kaarte van jou hand weggooi.\n\n"
+  },
+  "board": {
+    "current_board": "Huidige Bord:\n\n{board}\nBeskikbare Skuiwe: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Middelhope ---\n",
+    "pile": "{observation}Hoop {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Speler {player_id} se Uitsig ---\n",
+    "payoff": "{observation}Afbetaalhoop (Bo-Kaart): {top_card}, Afbetaalhoop Lengte: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Weggooi Hope: {discard}\n",
+    "empty": "Leeg"
+  },
+  "game_message": {
+    "no_cards_left": "Daar is geen kaarte meer om te trek nie. Onthou dat jy kaarte kan speel van hierdie bronne:\n  1. Jou **hand**.\n  2. Die **bo-kaart van jou afbetaalhoop**.\n  3. Die **bo-kaart van enige van jou weggooi hope**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldige skuif formaat. Speler {player_id} het nie met 'n geldige skuif in vierkante hakies geantwoord nie.",
+    "invalid_play": "Ongeldige spel. Speler {player_id} het probeer om {card} op middelhoop {index} te speel.",
+    "discard_from_payoff": "Ongeldige weggooi. Speler {player_id} het probeer om 'n kaart van die afbetaalhoop te weggooi.",
+    "discard_not_in_hand": "Ongeldige weggooi. Speler {player_id} het probeer om 'n kaart te weggooi wat nie in die hand is nie.",
+    "wrong_move_type": "Ongeldige skuif tipe. Speler {player_id} het nie met 'n geldige skuif tipe geantwoord nie."
+  },
+  "game_action": {
+    "you_drew": "Jy het kaarte getrek.",
+    "opponent_drew": "Speler {player_id} het kaarte getrek.",
+    "you_played": "Jy het {card} op middelhoop {index} gespeel.",
+    "opponent_played": "Speler {player_id} het {card} op middelhoop {index} gespeel.",
+    "you_discarded": "Jy het {card} na weggooi hoop {index} weggooi, wat ook beteken dat jy jou beurt geëindig het. Geen verdere aksies van jou sal vir hierdie beurt oorweeg word nie. Speler {next_player_id} sal volgende gaan.",
+    "opponent_discarded": "Speler {player_id} het {card} na weggooi hoop {index} weggooi, wat ook beteken dat hulle hulle beurt geëindig het. Geen verdere aksies van Speler {player_id} sal vir hierdie beurt oorweeg word nie. Speler {next_player_id}, jy sal volgende gaan. Voer asseblief jou aksie in die formaat [aksie kaart middelhoop indeks] in."
+  },
+  "outcome": {
+    "payoff_cleared": "Speler {current_player} het hulle afbetaalhoop voltooi! Speler {current_player} wen!",
+    "deadlock_player_0": "Doodpunt bereik! Speler 0 wen met {player_0_payoff} kaarte oor teen Speler 1 se {player_1_payoff} kaarte.",
+    "deadlock_player_1": "Doodpunt bereik! Speler 1 wen met {player_1_payoff} kaarte oor teen Speler 0 se {player_0_payoff} kaarte.",
+    "deadlock_tie": "Doodpunt bereik met gelykop! Beide spelers het {player_0_payoff} kaarte oor. Speler {current_player} wen by verstek."
+  }
+}

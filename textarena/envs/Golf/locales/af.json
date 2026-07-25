@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (kaartspel) lokaalleêr. MAAK NIE sleutels (linkerkant) oor nie. Vertaal net waardes (regterkant). Hou elke {plekhouer} presies soos dit is. Vertaal nooit die aksietokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), die kaartetikette (A, 2-10, J, Q, K), die pak simbole, die letters X/Y gebruik as ry/kolom plekhouers in tokens, of numeriese tellings/posisies. Hou die ASCII-roosteruitleg (spasie, kolomnommers, '?', 'Kol', 'Ry' uitlyn) intakt sodat die bord leesbaar bly.",
+  "_slots": {
+    "{player_id}": " 'n Speler nommer, bv. 0 of 1",
+    "{pid}": " 'n Speler nommer, bv. 0 of 1",
+    "{winner}": "Die speler nommer met die laagste telling",
+    "{score}": " 'n Numeriese puntetotaal",
+    "{card}": " 'n Kaartetiket soos A♠, 10♥, K♦ of Q♣",
+    "{new}": "Die kaartetiket wat in die rooster geplaas is",
+    "{old}": "Die kaartetiket wat uit die rooster verwyder is",
+    "{row}": " 'n Ry nommer",
+    "{col}": " 'n Kolom nommer",
+    "{max_row}": "Die grootste geldige ry nommer",
+    "{max_col}": "Die grootste geldige kolom nommer",
+    "{reason}": " 'n Vooraf gerenderde frase wat beskryf hoekom die finale ronde begin het",
+    "{n}": " 'n Ry nommer wat aan die begin van 'n rooster ry getoon word",
+    "{cards}": "Die vooraf gerenderde, uitlegsensitiewe selle van een rooster ry",
+    "{hand}": "Die vooraf gerenderde speler rooster blok",
+    "{discard}": "Die kaartetiket bo-op die weggooihoop, of die woord vir 'geen'",
+    "{options}": "Die vooraf gerenderde lyn wat beskikbare aksies lys",
+    "{scores}": "Die vooraf gerenderde per-speler lys van finale tellings"
+  },
+  "player_prompt": {
+    "intro": "Jy speel Golf (Kaartspel) - Speler {player_id}.\nDoel: Kry die laagste totale telling in hierdie enkele ronde. As kolomme dieselfde waarde deel, word hulle as 0 saamgetel.\nKaartwaardes: A=1, 2-10=gesigwaarde, J/Q=10, K=0\n\nAksies (gebruik presiese hakies):\n- '[draw]' - Trek van die pak\n- '[take]' - Neem van die weggooihoop\n- '[swap X Y]' - Ruil getrekte kaart met posisie X (ry) Y (kolom)\n- '[discard]' - Gooi die getrekte kaart weg\n"
+  },
+  "board": {
+    "drew": "Jy het getrek: {card}\nNou moet jy [swap X Y] of [discard] dit.",
+    "took": "Jy het geneem: {card} van die weggooihoop\nJy moet [swap X Y] daarmee (kan nie weggooi nie).",
+    "peeked": "Jy het gekyk na posisie ({row},{col}): {card}",
+    "turn_view": "Jou hand:\n{hand}\nWeggooihoop: {discard}\n{options}",
+    "none": "Geen"
+  },
+  "options": {
+    "final_turns": "Finale beurte! Jou opsies: [draw], [take], [peek X Y]",
+    "draw": "Jou opsies: [draw], [take]",
+    "must_swap": "Jy moet: [swap X Y] (kan nie kaarte van die weggooihoop weggooi nie)",
+    "swap_or_discard": "Jy moet: [swap X Y] of [discard]"
+  },
+  "hand": {
+    "no_cards": "Geen kaarte",
+    "header": "  Kol:   1    2    3",
+    "row": "Ry {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Speler {pid} het {new} geruil met {old} by posisie ({row},{col})",
+    "discarded": "Speler {pid} het {card} weggegooi"
+  },
+  "message": {
+    "deck_empty": "Die pak is leeg! Die spel eindig onmiddellik.",
+    "knocked": "Speler {pid} het geklop! Elke ander speler kry nog een beurt.",
+    "final_round": "Speler {pid} {reason}! Elke ander speler kry nog een beurt."
+  },
+  "reason": {
+    "all_revealed": "het alle kaarte onthul"
+  },
+  "invalid": {
+    "wrong_action": "Gebruik presies EEN gehakte aksie: [draw], [take], [swap X Y], [discard], [knock], of [peek X Y]",
+    "discard_empty": "Die weggooihoop is leeg!",
+    "must_draw_first": "Jy moet eers [draw], [take], [knock], of [peek X Y]",
+    "cannot_discard_taken": "Jy kan nie 'n kaart wat van die weggooihoop geneem is weggooi nie. Jy moet dit ruil.",
+    "have_drawn_card": "Jy het 'n getrekte kaart. Jy moet [swap X Y] of [discard] dit.",
+    "need_drawn_swap": "Jy het 'n getrekte kaart nodig om te ruil.",
+    "need_drawn_discard": "Jy het 'n getrekte kaart nodig om weg te gooi.",
+    "out_of_bounds": "Posisie buite perke. Gebruik ry 1-{max_row}, kolom 1-{max_col}",
+    "knock_with_card": "Jy kan nie klop met 'n getrekte kaart nie. Voltooi jou beurt eers.",
+    "already_knocked": "Iemand het reeds geklop in hierdie ronde.",
+    "already_revealed": "Daardie kaart is reeds onthul!"
+  },
+  "summary": {
+    "full": "Spel Oor! Speler {winner} wen met 'n telling van {score} punte!\n\nFinale Tellings:\n{scores}",
+    "line": "Speler {pid}: {score} punte\n"
+  },
+  "board_str": {
+    "title": "=== GOLF SPEL ===",
+    "discard": "Weggooihoop: {card}",
+    "knocked": "Speler {pid} het geklop!",
+    "player_header": "Speler {pid} (Telling: {score}):"
+  }
+}

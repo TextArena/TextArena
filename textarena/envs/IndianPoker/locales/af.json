@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in 'n spel van Indiese Poker.\n- 52-kaartpak; jy sien net die teenstander se kaart.\n- Ante {ante} skyfie(s) elke ronde, {max_rounds} ronde(s) in totaal.\n- Geldige skuiwe: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X is 'n positiewe heelgetal ≤ jou skyfietelling.)\n- Die hoogste verborge kaart wen die pot by showdown.\n"
+  },
+  "round": {
+    "announce": "### Ronde {current_round}/{max_rounds}\nJou teenstander se kaart is: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Verskaf presies EEN aksie tussen hakies, bv. '[check]', '[bet 2]', '[call]', '[raise 3]', of '[fold]'.",
+    "cannot_check": "Kan nie [check] nie - jy staar 'n weddenskap in die gesig.",
+    "amount_min": "Weddenskap / Verhoog-bedrag moet ≥ 1 wees.",
+    "cannot_bet": "Kan nie [bet] nie - moet [call] / [raise] / [fold].",
+    "nothing_to_call": "Niks om te bel; jy mag [check] in plaas daarvan.",
+    "no_bet_to_raise": "Gebruik [bet X] om te open; daar is geen weddenskap om te verhoog nie.",
+    "insufficient": "Onvoldoende skyfies vir daardie aksie."
+  },
+  "game_action": {
+    "action": "Speler {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (koste {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Jou moontlike aksies: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Speler {winner}. (Bankrolle P0:{p0}, P1:{p1})",
+    "folded": "Speler {player_id} het opgevou.",
+    "showdown_win": "Showdown: {card_win} klop {card_lose}.",
+    "showdown_tie": "Showdown-gelykop: albei {card}. Pot verdeel – elk ontvang {split}."
+  },
+  "outcome": {
+    "p0_wins": "Speler 0 wen ({bank0} > {bank1})",
+    "p1_wins": "Speler 1 wen ({bank1} > {bank0})",
+    "draw": "Gelyke skyfies na alle rondes"
+  }
+}

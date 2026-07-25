@@ -1,0 +1,55 @@
+{
+  "_comment": "Gebruiker-gerigte stringe vir Liar's Dice. Gebruik die terme van TicTacToe-lokaalleêr.",
+  "_slots": {
+    "player_id": "Speler se nommer (heelgetal)",
+    "num_players": "Aantal spelers in die spel (heelgetal)",
+    "dice_summary": "Vooraf gerenderde '; '-verbonde per-speler oorblywende dobbelsteen tellings",
+    "your_dice": "Vooraf gerenderde komma-verbonde lys van hierdie speler se dobbelsteenwaardes",
+    "p": "Speler se nommer (heelgetal)",
+    "d": "Oorblywende dobbelsteen telling vir daardie speler (heelgetal)",
+    "current_player_id": "Speler se nommer wie geroep het (heelgetal)",
+    "face_value": "Dobbelsteenwaarde wat getel word (1-6)",
+    "count": "Werklike aantal ooreenstemmende dobbelstene (heelgetal)",
+    "quantity": "Bodhoeveelheid (heelgetal)",
+    "loser_id": "Speler se nommer wie 'n dobbelsteen verloor (heelgetal)",
+    "new_quantity": "Bodhoeveelheid wat net ingedien is (heelgetal)",
+    "current_quantity": "Huidige bodhoeveelheid (heelgetal)",
+    "new_face_value": "Bodgesigwaarde wat net ingedien is (heelgetal)",
+    "current_face_value": "Huidige bodgesigwaarde (heelgetal)",
+    "action": "Die rou aksiestring wat die speler ingedien het",
+    "reason": " 'n Geneste bod-verwerping rede",
+    "winner": "Speler se nommer wie wen (heelgetal)",
+    "final_ranking": "Lys van speler nommers van eerste uitgeskakel tot wenner"
+  },
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in 'n {num_players}-speler Liar's Dice spel.\nReëls:\n- Op jou beurt, mag jy óf:\n  1) 'n Nuwe bod maak met 'n hoër hoeveelheid of hoër gesig (of albei) as die huidige bod; d.w.s. '[Bid: 3, 4]',\n  2) Die laaste bod roep deur '[Call]' in te tik.\n\nAs jy roep:\n  - As die werklike telling van daardie gesigwaarde onder alle dobbelstene minder as die bod is, verloor die laaste bieder een dobbelsteen.\n  - Andersins verloor die roeper een dobbelsteen.\n 'n Speler wat 0 dobbelstene bereik, word uitgeskakel. Die laaste oorblywende speler wen."
+  },
+  "board": {
+    "per_player": "\tSpeler {p}: {d}",
+    "new_round": "\nNuwe ronde - Oorblywende dobbelstene: {dice_summary}\nJou huidige dobbelstene is: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Speler {current_player_id} roep! Die werklike telling van gesig {face_value} is {count}, wat MINDER as {quantity} is.\nSpeler {loser_id} (die laaste bieder) verloor een dobbelsteen.",
+    "caller_loses": "Speler {current_player_id} roep! Die werklike telling van gesig {face_value} is {count}, wat >= {quantity} is.\nSpeler {loser_id} (die roeper) verloor een dobbelsteen."
+  },
+  "action": {
+    "bid_announce": "Speler {player_id} bied {quantity} van gesig {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Oproep gemaak sonder 'n vorige bod.",
+    "invalid_bid": "Ongeldige bod: {reason}",
+    "not_recognized": "Aksie nie herken as óf 'n geldige '[Bid: X, Y]' of '[Call]'. Ingediende aksie: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nuwe hoeveelheid {new_quantity} is laer as huidige {current_quantity}.",
+    "face_lower": "Nuwe gesigwaarde {new_face_value} is laer as huidige {current_face_value}.",
+    "identical": "Bod is identies aan die huidige bod.",
+    "face_range": "Gesigwaarde moet tussen 1 en 6 wees."
+  },
+  "message": {
+    "eliminated_invalid": "Speler {player_id} is uitgeskakel deur 'n ongeldige skuif."
+  },
+  "outcome": {
+    "win": "Speler {winner} wen! Finale ranglys: {final_ranking}"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame-lokaalleêr. MAAK NIE sleutels (linkerkant) oor nie. Vertaal net waardes (regterkant).",
+  "_slots": {
+    "{player_id}": "Die speler se nommer, 0 of 1",
+    "{other_id}": "Die ander speler se nommer, 1 of 0",
+    "{num_rounds}": "Totale aantal rondtes",
+    "{pool}": "Bedrag geld beskikbaar elke rondte ( 'n getal)",
+    "{round_number}": "Die huidige rondte nommer",
+    "{proposer_id}": "Die voorsteller speler se nommer, 0 of 1",
+    "{responder_id}": "Die reageerder speler se nommer, 0 of 1",
+    "{offer}": "Die bedrag aangebied ( 'n getal)",
+    "{keep}": "Die bedrag die voorsteller behou ( 'n getal)",
+    "{proposer_gain}": "Geld die voorsteller hierdie rondte verdien het ( 'n getal)",
+    "{responder_gain}": "Geld die reageerder hierdie rondte verdien het ( 'n getal)",
+    "{total_0}": "Speler 0 se opgeboude totaal ( 'n getal)",
+    "{total_1}": "Speler 1 se opgeboude totaal ( 'n getal)",
+    "{winner}": "Die wennende speler se nommer",
+    "{loser}": "Die verloorde speler se nommer",
+    "{winner_total}": "Die wennende speler se totale geld ( 'n getal)",
+    "{loser_total}": "Die verloorde speler se totale geld ( 'n getal)",
+    "{total}": "Elke speler se gelyke finale totaal ( 'n getal)"
+  },
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id}, wat {num_rounds} rondtes van Iterated Ultimatum Game speel.\nJy het $ {pool} om hierdie rondte tussen jouself en Speler {other_id} te verdeel.\n\nVoorsteller:\n  - Maak 'n aanbod: [Offer: $X] (0 <= X <= pool)\n  - As aanvaar → Jy kry $(pool - X), ander speler kry $X\n  - As verwerp → Albei kry $0\n  - Voorbeeld: [Offer: $3]  of  'Ek dink dit is billik. [Offer: $5]'\n\nReageerder:\n  - Besluit oor die aanbod met óf [Accept] óf [Reject]\n  - Voorbeeld: 'Dit lyk redelik. [Accept]'\n            'Te onbillik. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Rondte {round_number} begin! ---\nSpeler {proposer_id} is die voorsteller, Speler {responder_id} is die reageerder.",
+    "offer": "Rondte {round_number}: Speler {proposer_id} bied $ {offer} aan Speler {responder_id} aan (en behou $ {keep}).",
+    "accepted": "Speler {responder_id} het aanvaar! Rondte {round_number} wins: Speler {proposer_id} +$ {proposer_gain}, Speler {responder_id} +$ {responder_gain}. Nuwe totale: Speler 0: $ {total_0}, Speler 1: $ {total_1}.",
+    "rejected": "Speler {responder_id} het die aanbod verwerp! Rondte {round_number} wins: Albei spelers +$0. Totale bly: Speler 0: $ {total_0}, Speler 1: $ {total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Voorsteller moet 'n aanbod maak met die formaat [Offer: $X].",
+    "bad_integer": "Aanbodbedrag moet 'n geldige heelgetal wees.",
+    "out_of_range": "Aanbod moet tussen $0 en $ {pool} wees.",
+    "no_current_offer": "Geen huidige aanbod om op te reageer.",
+    "accept_or_reject": "Reageerder moet óf [Accept] óf [Reject] die aanbod."
+  },
+  "outcome": {
+    "win": "Speler {winner} het gewen met $ {winner_total} totaal vs Speler {loser} se $ {loser_total}.",
+    "draw": "Gelykop! Albei spelers het met $ {total} totaal geëindig."
+  }
+}
