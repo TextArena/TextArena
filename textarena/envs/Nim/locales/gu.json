@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "તમે નિમ માં ખેલાડી {player_id} છો. તમારો ધ્યેય છેલ્લી બાકીની વસ્તુ લેવાનું છે. દરેક વળાંક પર, બરાબર એક ખૂંટો પસંદ કરો અને તેમાંથી એક અથવા વધુ વસ્તુઓ દૂર કરો. ફોર્મેટ '[pile quantity]' નો ઉપયોગ કરો, જ્યાં ખૂંટો ખૂંટો અનુક્રમણિકા છે અને જથ્થો દૂર કરવા માટેની વસ્તુઓની સંખ્યા છે. ઉદાહરણ તરીકે, '[0 3]' ખૂંટો 0 માંથી 3 વસ્તુઓ દૂર કરે છે."
+  },
+  "state": {
+    "current_pile": "વર્તમાન પાઇલઃ {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "કોઈ માન્ય ખસેડો ફોર્મેટ મળ્યું નથી. '[pile quantity]' વાપરો.",
+    "correct_format_wrong_fields": "ખેલાડી {player_id}, અમાન્ય ક્રિયા. કૉલમ {col} બાહ્ય છે.",
+    "out_of_range": "પાયલ ઇન્ડેક્સ {pile_index} શ્રેણીની બહાર છે.",
+    "non_positive": "ઓછામાં ઓછી 1 વસ્તુ દૂર કરવી જોઈએ.",
+    "exceeds_pile": "{quantity}ને {pile_index}ના ખૂંટોમાંથી દૂર કરી શકાતું નથી (ફક્ત {pile_count} જ બાકી છે)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "ખેલાડી {player_id} છેલ્લી વસ્તુ લઇ ગયો!"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "તમે ભારતીય પોકર રમતમાં ખેલાડી {player_id} છો. - 52-કાર્ડ ડેક; તમે ફક્ત વિરોધીના કાર્ડને જુઓ છો. - એન્ટ {ante} ચિપ દરેક રાઉન્ડ, {max_rounds} રાઉન્ડ કુલ. - માન્ય ચાલઃ '[check]' │ '[bet X]' │ '[call]' │ '[raise X] │ '[fold]' (એક્સ પોઝિટિવ પૂર્ણાંક છે <= તમારી ચિપ ગણતરી) - સૌથી વધુ છુપાયેલા કાર્ડ શોડાઉન પર પોટ જીતે છે. "
+  },
+  "round": {
+    "announce": "### રાઉન્ડ {current_round}/{max_rounds} તમારા વિરોધીનું કાર્ડ છેઃ {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "બરાબર એક કૌંસમાં ક્રિયા પૂરી પાડો, ઉદાહરણ તરીકે \"[check]\", \"[bet 2]\", \"[call]\", \"[raise 3]\", અથવા \"[fold]\".",
+    "cannot_check": "ન કરી શકો [check] - તમે એક શરતનો સામનો કરી રહ્યા છો.",
+    "amount_min": "બીઇટી / ઉછેરની રકમ ≥ 1 હોવી જોઈએ.",
+    "cannot_bet": "ન કરી શકે [bet] - જ જોઈએ [call] / [raise] / [fold].",
+    "nothing_to_call": "કૉલ કરવા માટે કંઈ નથી; તમે તેના બદલે [check] કરી શકો છો.",
+    "no_bet_to_raise": "ખોલવા માટે [bet X] નો ઉપયોગ કરો; વધારવા માટે કોઈ બીઇટી નથી.",
+    "insufficient": "તે ક્રિયા માટે અપૂરતી ચિપ્સ."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "\"[check]\", \"[bet X]\"",
+    "actions_facing_bet": "'[call]' (ખર્ચ {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "તમારા સંભવિત ક્રિયાઓ: {legal}"
+  },
+  "message": {
+    "round_result": "{reason} પોટ {pot} → પ્લેયર {winner}. (બેન્કરોલ્સ પી0:{p0}, પી1:{p1})",
+    "folded": "ખેલાડી {player_id} ફોલ્ડ કરે છે.",
+    "showdown_win": "શોડાઉનઃ {card_win} બીટ્સ {card_lose}.",
+    "showdown_tie": "શોડાઉન ટાઇઃ બંને {card}. પોટ સ્પ્લિટ  દરેકને {split} મળે છે."
+  },
+  "outcome": {
+    "p0_wins": "ખેલાડી 0 જીતે છે ({bank0} > {bank1})",
+    "p1_wins": "ખેલાડી 1 જીતે છે ({bank1} > {bank0})",
+    "draw": "બધા રાઉન્ડ પછી સમાન ચિપ્સ"
+  }
+}

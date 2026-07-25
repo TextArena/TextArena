@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "વર્તમાન બોર્ડઃ {board} ઉપલબ્ધ ચાલઃ {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "અમાન્ય ક્રિયા બંધારણ. ખેલાડી {player_id} એ [A0 B0] બંધારણમાં ચાલ દાખલ કરી નથી.",
+    "invalid_coordinates": "અમાન્ય ક્રિયા ફોર્મેટ. ખેલાડી {player_id} માન્ય સંકલન દાખલ કર્યો નથી.",
+    "not_own_piece": "અમાન્ય ક્રિયા ફોર્મેટ. ખેલાડી {player_id}એ પોતાના ટુકડાઓમાંથી એક ખસેડવું જોઈએ.",
+    "scout_through_pieces": "અમાન્ય ક્રિયા ફોર્મેટ. ખેલાડી {player_id} અન્ય ટુકડાઓ દ્વારા સ્કાઉટને ખસેડી શકતો નથી.",
+    "scout_diagonal": "અમાન્ય ક્રિયા ફોર્મેટ. ખેલાડી {player_id} સ્કાઉટને ડાયગોનલ રીતે ખસેડી શકતો નથી.",
+    "non_scout_multi_square": "અમાન્ય ક્રિયા ફોર્મેટ. સ્કાઉટ્સ સિવાયના ટુકડાઓ, એક સમયે માત્ર એક ચોરસ ખસેડી શકે છે.",
+    "move_into_lake": "અમાન્ય ક્રિયા ફોર્મેટ. ખેલાડી {player_id} તળાવમાં ખસેડી શકતા નથી.",
+    "move_onto_own_piece": "અમાન્ય ક્રિયા ફોર્મેટ. ખેલાડી {player_id} પોતાના ભાગ પર ખસેડી શકતા નથી.",
+    "move_bomb_or_flag": "અમાન્ય ક્રિયા ફોર્મેટ. ખેલાડી {player_id} બોમ્બ અથવા ધ્વજને ખસેડી શકતા નથી."
+  },
+  "game_action": {
+    "you_moved": "તમે તમારા ટુકડાને {source} થી {dest} ખસેડ્યા છે.",
+    "opponent_moved": "ખેલાડી {player_id}એ એક ટુકડો {source}થી {dest}માં ખસેડ્યો છે.",
+    "you_equal_ranks": "તમે તમારા ટુકડાને {source} થી {dest} ખસેડ્યા છે. હુમલો કરનાર ટુકડો {attacking_rank} હતો અને લક્ષ્ય ટુકડો {target_rank} હતો. રેન્ક સમાન હોવાથી, બંને ટુકડાઓ ગુમાવી હતી.",
+    "opponent_equal_ranks": "ખેલાડી {player_id}એ એક ટુકડો {source}થી {dest}માં ખસેડ્યો છે. હુમલો કરનાર ટુકડો {attacking_rank} હતો અને લક્ષ્ય ટુકડો {target_rank} હતો. ક્રમ સમાન હોવાથી, બંને ટુકડાઓ ગુમાવ્યા.",
+    "you_miner_defused": "તમે તમારા ટુકડાને {source} થી {dest} માં ખસેડ્યા છે. હુમલો ટુકડો {attacking_rank} હતો અને લક્ષ્ય ટુકડો {target_rank} હતો. કારણ કે ખાણકામ બોમ્બને નિષ્ક્રિય કરી શકે છે, તમે યુદ્ધ જીતી લીધું છે.",
+    "opponent_miner_defused": "ખેલાડી {player_id}એ એક ટુકડો {source}થી {dest}માં ખસેડ્યો છે. હુમલો કરનાર ટુકડો {attacking_rank} હતો અને લક્ષ્ય ટુકડો {target_rank} હતો. કારણ કે ખાણકામ બોમ્બને નિષ્ક્રિય કરી શકે છે, તમે યુદ્ધ ગુમાવ્યું છે.",
+    "you_bomb_lost": "તમે તમારા ટુકડાને {source} થી {dest} માં ખસેડ્યા છે. હુમલો કરનાર ટુકડો {attacking_rank} હતો અને લક્ષ્ય ટુકડો {target_rank} હતો. કારણ કે હુમલો કરનાર ખાણિયો નથી, તમે યુદ્ધ ગુમાવ્યું છે.",
+    "opponent_bomb_won": "ખેલાડી {player_id}એ એક ટુકડો {source}થી {dest}માં ખસેડ્યો છે. હુમલો કરનાર ટુકડો {attacking_rank} હતો અને લક્ષ્ય ટુકડો {target_rank} હતો. હુમલો કરનાર ખાણિયો ન હોવાથી, તમે યુદ્ધ જીત્યું.",
+    "you_spy_won": "તમે તમારા ટુકડાને {source} થી {dest} માં ખસેડ્યા છે. હુમલો કરનાર ટુકડો {attacking_rank} હતો અને લક્ષ્યસ્થાન ટુકડો {target_rank} હતો. કારણ કે હુમલો કરનાર એક જાસૂસ છે અને લક્ષ્યસ્થાન માર્શલ છે, તમે યુદ્ધ જીત્યું છે.",
+    "opponent_spy_lost": "ખેલાડી {player_id}એ એક ટુકડો {source}થી {dest}માં ખસેડ્યો છે. હુમલો કરનાર ટુકડો {attacking_rank} હતો અને લક્ષ્ય ટુકડો {target_rank} હતો. કારણ કે હુમલો કરનાર એક જાસૂસ છે અને લક્ષ્ય માર્શલ છે, તમે યુદ્ધ ગુમાવ્યું છે.",
+    "you_higher_won": "તમે તમારા ટુકડાને {source} થી {dest} માં ખસેડ્યા છે. હુમલો કરનાર ટુકડો {attacking_rank} હતો અને લક્ષ્યસ્થાન ટુકડો {target_rank} હતો. કારણ કે હુમલો કરનાર લક્ષ્યસ્થાન કરતાં ઉચ્ચ ક્રમાંક છે, તમે યુદ્ધ જીત્યું છે.",
+    "opponent_higher_lost": "ખેલાડી {player_id}એ એક ટુકડો {source}થી {dest}માં ખસેડ્યો છે. હુમલો કરનાર ટુકડો {attacking_rank} હતો અને લક્ષ્ય ટુકડો {target_rank} હતો. કારણ કે હુમલો કરનાર લક્ષ્ય કરતાં ઊંચી રેન્ક ધરાવે છે, તમે યુદ્ધ ગુમાવ્યું છે.",
+    "you_lower_lost": "તમે તમારા ટુકડાને {source} થી {dest} ખસેડ્યા છે. હુમલો કરનાર ટુકડો {attacking_rank} હતો અને લક્ષ્યસ્થાન ટુકડો {target_rank} હતો. કારણ કે હુમલો કરનાર લક્ષ્યસ્થાન કરતાં નીચલા ક્રમાંકનો છે, તમે યુદ્ધ ગુમાવ્યું છે.",
+    "opponent_lower_won": "ખેલાડી {player_id}એ એક ટુકડો {source}થી {dest}માં ખસેડ્યો છે. હુમલો કરનાર ટુકડો {attacking_rank} હતો અને લક્ષ્યસ્થાન ટુકડો {target_rank} હતો. કારણ કે હુમલો કરનાર લક્ષ્યસ્થાન કરતાં નીચલા ક્રમાંકનો છે, તમે યુદ્ધ જીત્યું છે."
+  },
+  "outcome": {
+    "flag_captured": "ખેલાડી {player_id}એ વિરોધીના ધ્વજને કબજે કર્યો છે!",
+    "no_movable_pieces": "ખેલાડી {winner_id} જીતે છે! ખેલાડી {loser_id} પાસે કોઈ વધુ ચલિત ટુકડાઓ નથી."
+  }
+}

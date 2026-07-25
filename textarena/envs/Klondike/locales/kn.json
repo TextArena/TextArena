@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "ನೀವು ಕ್ಲೋಂಡೈಕ್ ಸಾಲಿಟೇರ್ ಆಡುತ್ತಿದ್ದೀರಿ. ನಿಮ್ಮ ಗುರಿ ಎಲ್ಲಾ ಕಾರ್ಡುಗಳನ್ನು ಫೌಂಡೇಶನ್ ರಾಶಿಗೆ ಸರಿಸುವುದು. ಆಟದ ನಿಯಮಗಳು: - ಫೌಂಡೇಶನ್ ರಾಶಿಗಳು (ಎಫ್1-ಎಫ್4): ಸೂಟ್ನಲ್ಲಿ ಏಸ್ನಿಂದ ಕಿಂಗ್ಗೆ ನಿರ್ಮಿಸಿ - ಟೇಬಲ್ ರಾಶಿಗಳು (ಟಿ1-ಟಿ7): ಪರ್ಯಾಯ ಬಣ್ಣಗಳನ್ನು (ಕೆಂಪು ಕಪ್ಪು, ಕಪ್ಪು ಕೆಂಪು) ನಿರ್ಮಿಸಿ - ಸ್ಟಾಕ್: ಕಾರ್ಡುಗಳನ್ನು ತ್ಯಾಜ್ಯ ರಾಶಿಗೆ ಎಳೆಯಿರಿ - ತ್ಯಾಜ್ಯ (ಡಬ್ಲ್ಯೂ): ಆಟಕ್ಕೆ ಲಭ್ಯವಿರುವ ಉನ್ನತ ಕಾರ್ಡ್ ಆಜ್ಞೆಗಳುಃ - 'ಎಳೆಯಿರಿ' - ಸ್ಟಾಕ್ನಿಂದ ಕಾರ್ಡುಗಳನ್ನು ತ್ಯಾಜ್ಯಕ್ಕೆ ಎಳೆಯಿರಿ - 'ಚಲಿಸಿ <ಮೂಲ> <ಗಮ್ಯಸ್ಥಾನ> [count]' - ರಾಶಿಗಳ ನಡುವೆ ಕಾರ್ಡುಗಳನ್ನು ಸರಿಸಿ ಉದಾಹರಣೆಗಳುಃ 'ಚಲಿಸಿ W1', 'ಚಲಿಸಿ T1 F2', 'ಚಲಿಸಿ T3 T5 2'. ಎಣಿಸಲು ಸಹ 'ಎಲ್ಲಾ' ಆಗಿರಬಹುದು, ಇದು ಎಲ್ಲಾ ಮುಖಾಮುಖಿ ಕಾರ್ಡುಗಳನ್ನು ತಕ್ಷಣವೇ ಸರಿಸಲು ಪ್ರಯತ್ನಿಸುತ್ತದೆ. - 'ಫಾರ್ ಫಾರ್ ಫೈಟ್' - ಆಟವನ್ನು ಕೊನೆಗೊಳಿಸಿ ಮತ್ತು ನಿಮ್ಮ ಪ್ರಸ್ತುತ ಅಂಕದಲ್ಲಿ ಲಾಕ್ ಮಾಡಿ - ಪೈಲ್ ಹೆಸರುಗಳುಃ ಪಿ (ಕೇಲ್), ಎಫ್1-ಎಫ್4-ಎಫ್ (ಕೌಂಡ್), ಟೇಬಲ್ ರಾಶನ್ ರಾಶಿಗಳು (ಟಿ-ಟಿ-ಟಿ), ಟೇಬಲ್ ರಾಶಿಗಳು (ಕೆಟ್ ಕಪ್ಪು ಮೇಲೆ ಕಪ್ಪು) - ಟೇಬಲ್ನಲ್ಲಿ ಅನೇಕ ರಾಶಗಳನ್ನು ಎಳೆಯಿರಿ (ಕೆಟ್) - ತ್ಯಾ ಬಣ್ಣಗಳನ್ನು ಎಳೆಯಿರಿ - ತ್ಯಾಗಿಸಿ - ಆಟಕ್ಕೆ ಲಭ್ಯವಿರುವ ಉನ್ನತ ಕಾರ್ಡುಗಳು - ಆಟಕ್ಕೆ ಲಭ್ಯವಿರುವ ಉನ್ನತ ಕಾರ್ಡುಗಳಲ್ಲಿ ತ್ಯಾಜ್ಞೆಗಳುಃ 'ಡನ್ನು ಎಳೆಯಿರಿ - 'ಡನ್ನು ಎಳೆಯಿರಿ' ಎಳೆಯಿರಿ - 'ಡನ್ನು ಎಳೆಯಿರಿ' ಎಳೆಯಿರಿ - 'ಡಿಸಿ' ಎಳೆಯಿರಿ' ಎಣಿಸಿ, ಒಂದು ರಾಶದಿಂದ ಕಾರ್ಡು, ಒಂದು ರಾಶದಿಂದ ಕಾರ್ಡುಗಳನ್ನು ಎಳೆಯಿರಿ, ಒಂದು ರಾಶವನ್ನು ಎಳೆಯಿರಿ, ಒಂದು ರಾಶದಲ್ಲಿ ಎಣಿಸಿದರೆ, ಉಳಿದಿರುವ ಕಾರ್ಡುಗಳನ್ನು ಎಣಿಸಿ, ಒಂದು ರಾಶವನ್ನು ಎಳೆಯಿರಿ, ಒಂದು ರಾಶನ್ನು ಎಳೆಯಿರಿ, ಒಂದು ರಾಶದಲ್ಲಿ ಎಣಿಸಲು ಮಾತ್ರ ನೀವು ಅವುಗಳನ್ನು ಎಳೆಯಿರಿ, ಎಳೆಯಿರಿ, ಎಳೆಯಿರಿ, ಎಣಿಸಲು ಪ್ರಯತ್ನಿಸಿದರೆ"
+  },
+  "format_error": {
+    "no_brackets": "ಅಮಾನ್ಯ ಕ್ರಿಯೆ ಸ್ವರೂಪ. ಕ್ರಿಯೆಯು ಆವರಣದಲ್ಲಿರಬೇಕು.",
+    "no_closing_bracket": "ಅಮಾನ್ಯ ಕ್ರಿಯೆಯ ಸ್ವರೂಪ. ಮುಚ್ಚುವ ಬ್ರಾಕೆಟ್ ಕಾಣೆಯಾಗಿದೆ ']'",
+    "empty_command": "ಖಾಲಿ ಆಜ್ಞೆ. 'draw' ಅಥವಾ 'move <source> <destination> [count]' ಎಂದು ಟೈಪ್ ಮಾಡಿ",
+    "empty_action": "ಖಾಲಿ ಕ್ರಮ",
+    "move_needs_args": "ಚಲಿಸುವ ಆಜ್ಞೆಯು ಮೂಲ ಮತ್ತು ಗಮ್ಯಸ್ಥಾನವನ್ನು ಬಯಸುತ್ತದೆ. ಬಳಕೆಃ 'move <source> <destination> [count]'",
+    "count_positive": "ಎಣಿಕೆ ಸಕಾರಾತ್ಮಕವಾಗಿರಬೇಕು ಅಥವಾ 'ಎಲ್ಲ'",
+    "count_invalid": "ಅಮಾನ್ಯ ಎಣಿಕೆ. ಒಂದು ಸಂಖ್ಯೆಯನ್ನು ಅಥವಾ 'ಎಲ್ಲ'ವನ್ನು ಬಳಸಿ",
+    "unknown_command": "ಅಜ್ಞಾತ ಆಜ್ಞೆ '{cmd}'. 'draw', 'move <source> <destination> [count]', ಅಥವಾ 'forfeit' ಅನ್ನು ಬಳಸಿ",
+    "wrapped": "ಕ್ರಿಯೆ {n}: {msg}"
+  },
+  "action_result": {
+    "success": "ಕ್ರಿಯೆ {n}: {msg}",
+    "before_failure": "ವಿಫಲವಾಗುವ ಮೊದಲು ಕಾರ್ಯಗತಗೊಳಿಸಿದ {n} ಕ್ರಮಗಳು.",
+    "failed": "ಕ್ರಮ {n} ವಿಫಲವಾಗಿದೆ: {msg}"
+  },
+  "move_result": {
+    "drew": "ಕಾರ್ಡ್ (ಗಳು) ಗಳನ್ನು ಸ್ಟಾಕ್ನಿಂದ ತ್ಯಾಜ್ಯಕ್ಕೆ ಎಳೆದರು.",
+    "cannot_draw": "ಎಳೆಯಲು ಸಾಧ್ಯವಿಲ್ಲ. ಸ್ಟಾಕ್ ಮತ್ತು ತ್ಯಾಜ್ಯ ಎರಡೂ ಖಾಲಿಯಾಗಿದೆ.",
+    "invalid_pile": "ಅಮಾನ್ಯ ರಾಶಿಯ ಹೆಸರು. W, F1-F4, ಅಥವಾ T1-T7 ಅನ್ನು ಬಳಸಿ",
+    "foundation_one_card": "ಕೇವಲ 1 ಕಾರ್ಡ್ ಅನ್ನು ಫೌಂಡೇಶನ್ಗೆ ಸರಿಸಬಹುದು",
+    "waste_to_foundation_ok": "ಕಾರ್ಡ್ ಅನ್ನು ತ್ಯಾಜ್ಯದಿಂದ ಅಡಿಪಾಯಕ್ಕೆ ಸ್ಥಳಾಂತರಿಸಲಾಗಿದೆ F{dst}",
+    "waste_to_foundation_bad": "ಅಡಿಪಾಯ ರಾಶಿಗೆ ತ್ಯಾಜ್ಯ ಕಾರ್ಡ್ ಅನ್ನು ಸರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ",
+    "tableau_to_foundation_ok": "ಟೇಬಲ್ T{src} ನಿಂದ ಫೌಂಡೇಶನ್ F{dst} ಗೆ ಕಾರ್ಡ್ ಸರಿಸಲಾಗಿದೆ",
+    "tableau_to_foundation_bad": "ಆ ಅಡಿಪಾಯ ರಾಶಿಗೆ ಟೇಬಲ್ ಕಾರ್ಡ್ ಅನ್ನು ಸರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ",
+    "foundation_to_foundation": "ಅಡಿಪಾಯದಿಂದ ಅಡಿಪಾಯಕ್ಕೆ ಚಲಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ",
+    "waste_to_tableau_one_card": "ತ್ಯಾಜ್ಯದಿಂದ ಟೇಬಲ್ಗೆ ಕೇವಲ 1 ಕಾರ್ಡ್ ಅನ್ನು ಮಾತ್ರ ಸರಿಸಬಹುದು",
+    "waste_to_tableau_ok": "ಕಾರ್ಡ್ ಅನ್ನು ತ್ಯಾಜ್ಯದಿಂದ ಟೇಬಲ್ T {dst} ಗೆ ಸರಿಸಲಾಗಿದೆ",
+    "waste_to_tableau_bad": "ಆ ಟೇಬಲ್ ಪೈಲ್ನಲ್ಲಿ ತ್ಯಾಜ್ಯ ಕಾರ್ಡ್ ಅನ್ನು ಇರಿಸಲಾಗುವುದಿಲ್ಲ",
+    "no_face_up": "ಚಲಿಸಲು ಯಾವುದೇ ಮುಖದ ಕಾರ್ಡ್ಗಳಿಲ್ಲ",
+    "tableau_to_tableau_ok": "ಟೇಬಲ್ T{src} ನಿಂದ T{dst} ಗೆ {count} ಕಾರ್ಡ್ಗಳನ್ನು ಸರಿಸಲಾಗಿದೆ",
+    "tableau_to_tableau_bad": "T {src} ನಿಂದ T{dst} ಗೆ {count} ಕಾರ್ಡ್ ((s) ಅನ್ನು ಸರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ",
+    "foundation_to_tableau_one_card": "ಕೇವಲ 1 ಕಾರ್ಡ್ ಅನ್ನು ಫೌಂಡೇಶನ್ನಿಂದ ಟೇಬಲ್ಗೆ ಸರಿಸಬಹುದು",
+    "foundation_empty": "ಫೌಂಡೇಶನ್ F{src} ಖಾಲಿಯಾಗಿದೆ",
+    "foundation_to_tableau_ok": "ಕಾರ್ಡ್ ಅನ್ನು ಫೌಂಡೇಶನ್ F{src} ನಿಂದ ಟೇಬಲ್ T{dst} ಗೆ ಸರಿಸಲಾಗಿದೆ",
+    "foundation_to_tableau_bad": "ಟೇಬಲ್ T{dst} ಮೇಲೆ ಫೌಂಡೇಶನ್ ಕಾರ್ಡ್ ಅನ್ನು ಇರಿಸಲಾಗುವುದಿಲ್ಲ",
+    "to_waste_or_stock": "ತ್ಯಾಜ್ಯ ಅಥವಾ ಸ್ಟಾಕ್ಗೆ ಸರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"
+  },
+  "outcome": {
+    "forfeit": "ಆಟವನ್ನು ಕೈಬಿಡಲಾಯಿತು. ಅಂತಿಮ ಸ್ಕೋರ್ಃ {score} ಕಾರ್ಡ್ಗಳು ಅಡಿಪಾಯಗಳಲ್ಲಿ.",
+    "won": "ಅಭಿನಂದನೆಗಳು! ನೀವು ಕ್ಲೋಂಡೈಕ್ ಸೋಲಿಟೇರ್ ಗೆದ್ದಿದ್ದೀರಿ!",
+    "turn_limit": "ಆಟ ಮುಗಿದಿದೆ! ನೀವು ಗರಿಷ್ಠ {max_turns} ತಿರುವುಗಳನ್ನು ತಲುಪಿದ್ದೀರಿ. ಸ್ಕೋರ್ಃ ಅಡಿಪಾಯಗಳಲ್ಲಿ {score} ಕಾರ್ಡ್ಗಳು."
+  },
+  "board": {
+    "title": "=== ಕ್ಲೋಂಡಿಕ್ ಸೋಲಿಟೇರ್ ===",
+    "turn": "ತಿರುವು: {turn}/{max_turns}",
+    "stock": "ಸ್ಟಾಕ್: {stock} ಕಾರ್ಡುಗಳು",
+    "waste": "ತ್ಯಾಜ್ಯ (W): {waste}",
+    "foundations_header": "ಅಡಿಪಾಯಗಳು:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "ಟಿ {n}: {cards}"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Вы гуляеце ў гольф (картачная гульня) - гулец {player_id}. Мэта: Атрымаць самы нізкі агульны бал у гэтым раўндзе. Калі слупкі маюць аднолькавае значэнне, яны складваюцца на 0. Значэнне карт: А=1, 2-10=назва, J/Q=10, К=0 Дзеянні (выкарыстоўвайце дакладныя дужкі): - \"[draw]\" - Выцягнуць з палукі - \"[take]\" - Выцягнуць з адкінутай кучы - \"[swap X Y]\" - Замяніць выцягнутую карту з пазіцыяй X (рад) Y (кола) - \"[discard]\" - Выкінуць выцягнутую карту "
+  },
+  "board": {
+    "drew": "Вы намалявалі: {card} Цяпер вы павінны [swap X Y] або [discard] гэта.",
+    "took": "Вы ўзялі: {card} з адкідаюць кучу Вы павінны [swap X Y] з ім (не можа адкінуць).",
+    "peeked": "Вы зазірнулі ў становішча ({row},{col}): {card}",
+    "turn_view": "Ваша рука: {hand} Выкід кучы: {discard} {options}",
+    "none": "Ніякіх"
+  },
+  "options": {
+    "final_turns": "Апошнія павароты! Вашы варыянты: [draw], [take], [peek X Y]",
+    "draw": "Вашы варыянты: [draw], [take]",
+    "must_swap": "Вы павінны: [swap X Y] (не можа адкінуць карты з адкінуць кучы)",
+    "swap_or_discard": "Вы павінны: [swap X Y] або [discard]"
+  },
+  "hand": {
+    "no_cards": "Ніякіх карт",
+    "header": "Коль: 1 2 3",
+    "row": "Рэйд {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Гулец {pid} абмяняў {new} з {old} на пазіцыі ({row},{col})",
+    "discarded": "Гулец {pid} выкінуты {card}"
+  },
+  "message": {
+    "deck_empty": "Палуба пустая! Гульня заканчваецца неадкладна.",
+    "knocked": "Гулец {pid} выбіты! Кожны другі гулец атрымлівае яшчэ адзін паварот.",
+    "final_round": "Гулец {pid} {reason}! Кожны іншы гулец атрымлівае яшчэ адзін паварот."
+  },
+  "reason": {
+    "all_revealed": "мае ўсе карты раскрытыя"
+  },
+  "invalid": {
+    "wrong_action": "Выкарыстоўвайце роўна АДНУ акцыю ў дужках: [draw], [take], [swap X Y], [discard], [knock], або [peek X Y]",
+    "discard_empty": "Купа адкідаў пусты!",
+    "must_draw_first": "Вы павінны спачатку [draw], [take], [knock], або [peek X Y]",
+    "cannot_discard_taken": "Вы не можаце адкінуць карту, узятую з кучы адкінутых карт. Вы павінны яе замяніць.",
+    "have_drawn_card": "У вас ёсць карта, якую вы павінны [swap X Y] або [discard] гэта.",
+    "need_drawn_swap": "Вам патрэбна карта, каб абмяняцца.",
+    "need_drawn_discard": "Каб адкінуць карту, патрэбна выцягнуць карту.",
+    "out_of_bounds": "Пазіцыя па-за межамі. Выкарыстоўвайце радок 1-{max_row}, калонку 1-{max_col}",
+    "knock_with_card": "Вы не можаце стукаць з выцягнутай карты. Завяршыце свой паварот першым.",
+    "already_knocked": "Хто-то ўжо стукнуў гэты раўнд.",
+    "already_revealed": "Гэтая карта ўжо раскрыта!"
+  },
+  "summary": {
+    "full": "Гульня скончана! Гулец {winner} перамагае з {score} баламі! Канчатковы лік: {scores}",
+    "line": "Гулец {pid}: {score} балаў "
+  },
+  "board_str": {
+    "title": "=== Гульня ў гольф ===",
+    "discard": "Выкід кучы: {card}",
+    "knocked": "Гулец {pid} стукнуў!",
+    "player_header": "Гулец {pid} (Санкцыя: {score}):"
+  }
+}

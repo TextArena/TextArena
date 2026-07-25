@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Цяперашні савет: {board} Даступныя ходы: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Цэнтральныя кучы --- ",
+    "pile": "{observation}Сіра {i}: {pile} ",
+    "player_view_header": "{observation} --- Глядка гульца {player_id} --- ",
+    "payoff": "{observation}Пайф-паў (верхняя карта): {top_card}, Пэйф-паў даўжыня: {payoff_length} ",
+    "hand": "{observation}Рука: {hand} ",
+    "discard": "{observation}Выкід кучы: {discard} ",
+    "empty": "Пусты"
+  },
+  "game_message": {
+    "no_cards_left": "Там няма больш карт, каб выцягнуць з. Памятаеце, што вы можаце гуляць карты з гэтых крыніц: 1. Ваша рука. 2. верхняя карта вашай выйгрышнай кучы. 3. верхняя карта любога з вашай адкінуць кучы."
+  },
+  "invalid_move": {
+    "wrong_format": "Несапраўдны фармат ходу. Гулец {player_id} не адказаў на правільны ход у квадратных дужках.",
+    "invalid_play": "Гулец {player_id} спрабаваў гуляць {card} на цэнтральнай кучы {index}.",
+    "discard_from_payoff": "Несапраўдны адкід. Гулец {player_id} спрабаваў адкінуць карту з кучы выплат.",
+    "discard_not_in_hand": "Несапраўдны адкід. Гулец {player_id} спрабаваў адкінуць карту, якая не знаходзіцца ў руцэ.",
+    "wrong_move_type": "Несапраўдны тып ходу. Гулец {player_id} не адказаў сапраўдным тыпам ходу."
+  },
+  "game_action": {
+    "you_drew": "Вы звярнулі карты.",
+    "opponent_drew": "Гулец {player_id} здымаў карты.",
+    "you_played": "Вы гулялі {card} на цэнтральнай кучы {index}.",
+    "opponent_played": "Гулец {player_id} гуляў {card} на цэнтральнай кучы {index}.",
+    "you_discarded": "Вы адкінулі {card} адкінуць кучу {index}, што таксама азначае, што вы скончылі свой паварот. Ніякіх далейшых вашых дзеянняў не разглядаецца для гэтага павароту. Гулец {next_player_id} будзе наступным.",
+    "opponent_discarded": "Гулец {player_id} адкінуў {card} адкінуць кучу {index}, што таксама азначае, што яны скончылі свой паварот. Ніякіх далейшых дзеянняў гульца {player_id} не разглядаецца для гэтага павароту. Гулец {next_player_id}, вы будзеце наступным. Калі ласка, увядзіце сваю дзеянне ў фармаце [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Гулец {current_player} скончыў свой набор выплат! Гулец {current_player} выйграў!",
+    "deadlock_player_0": "Дэдлок дасягнуты! Гулец 0 выйграе з {player_0_payoff} карты засталіся супраць гульца 1 {player_1_payoff} карты.",
+    "deadlock_player_1": "Дэдлок дасягнуты! Гулец 1 выйграе з {player_1_payoff} карты засталіся супраць гульца 0 {player_0_payoff} карты.",
+    "deadlock_tie": "Дзік дасягнуты з раўнапраўя! У абодвух гульцоў засталіся {player_0_payoff} карты. Гулец {current_player} выйграе па змаўчанні."
+  }
+}

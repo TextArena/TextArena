@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "તમે ત્રણ ખેલાડી ટિક ટક ટોમાં ખેલાડી {player_id} છો. તમારો પ્રતીક '{symbol} છે. તમે તમારા પ્રતીકને 5x5 બોર્ડ પર મૂકીને ચારની લાઇન બનાવવા માટે ફેરબદલ કરો છો. રેખાઓ આડી, ઊભી અથવા કર્ણ હોઈ શકે છે. સેલ 4 ને ચિહ્નિત કરવા માટે ફોર્મેટ '[4] ' નો ઉપયોગ કરીને તમારી ચાલ સબમિટ કરો."
+  },
+  "board": {
+    "current_board": "વર્તમાન બોર્ડઃ {board} ઉપલબ્ધ ચાલઃ {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "અમાન્ય ખસેડો ફોર્મેટ. જ્યાં કોષ 0-{max_cell} છે ત્યાં \"[cell] \" નો ઉપયોગ કરો.",
+    "out_of_range": "અમાન્ય સેલ નંબરઃ {cell}. 0 અને {max_cell} ની વચ્ચે હોવો જોઈએ.",
+    "already_occupied": "સેલ {cell} પહેલેથી જ કબજો છે.",
+    "made_invalid": "ખેલાડી {player_id} અમાન્ય ચાલ કરે છે"
+  },
+  "game_action": {
+    "placed": "ખેલાડી {player_id} ક્ષેત્ર ({row}, {col}) માં તેમના પ્રતીક ({symbol}) મૂકે છે."
+  },
+  "outcome": {
+    "win": "ખેલાડી {player_id} ({symbol}) જીતે છે!",
+    "draw": "આ રમત ડ્રો છે!"
+  }
+}

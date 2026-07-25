@@ -105,3 +105,19 @@ If you have any questions at all, feel free to reach out on discord. The below i
 - Make RushHour board generation algorithmic
 - extend Fifteenpuzzel to arbitrary sizes
 - Add a nice end-of-game screen to the SimpleRenderWrapper visualizations
+
+<!-- BEGIN trackb-low-resource -->
+
+### Low-resource community localizations
+
+In addition to the human-reviewed languages, TextArena ships **3 additional low-resource UI localizations** produced with open machine-translation models and certified by an automatic, *reader-free* verifier: each string is translated, independently back-translated by two other models, and an LLM judges faithfulness against the English source. No claim is made of native-review quality — instead every language carries an explicit **confidence tier** and, where relevant, a list of games flagged for review. Confirmed mistranslations are reverted to English so no known-wrong string ships.
+
+| Language | Tier | Confidence | Flagged games |
+|---|---|---|---|
+| Kannada (`kn`) | CERTIFIED_FLAGGED | verified; a few games flagged | Breakthrough, Briscola, ColonelBlotto, ConnectFour +6 more |
+| Gujarati (`gu`) | CERTIFIED_FLAGGED | verified; a few games flagged | Alquerque, Breakthrough, Briscola, Crusade +14 more |
+| Belarusian (`be`) | CERTIFIED_FLAGGED | verified; a few games flagged | Battleship, Breakthrough, Briscola, Chopsticks +16 more |
+
+The machine-readable source is [`_trackb_confidence.json`](textarena/utils/locales/_trackb_confidence.json); `textarena.utils.locales.language_confidence` exposes it at runtime (`warn_if_flagged(lang)` emits a caveat for non-certified locales). Languages are added here as they clear certification.
+
+<!-- END trackb-low-resource -->

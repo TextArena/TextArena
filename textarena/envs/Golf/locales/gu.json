@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "તમે ગોલ્ફ (કાર્ડ ગેમ) રમી રહ્યા છો - ખેલાડી {player_id}. ધ્યેયઃ આ એક રાઉન્ડમાં સૌથી નીચો કુલ સ્કોર મેળવો. જો કૉલમ સમાન મૂલ્ય ધરાવે છે, તો તે 0 તરીકે સરખાવવામાં આવે છે. કાર્ડ મૂલ્યોઃ એ = 1, 2-10 = ચહેરો મૂલ્ય, જે / ક્યૂ = 10, કે = 0 ક્રિયાઓ (સચોટ કૌંસનો ઉપયોગ કરો): - '[draw]' - ડેકમાંથી ડ્રો - '[take]' - ડિસ્કાઉન્ટ ખૂંટોમાંથી લો - '[swap X Y]' - પોઝિશન X (પંક્તિ) Y (કોલમ) સાથે ડ્રો કાર્ડ સ્વેપ કરો - '[discard]' - ડ્રો કાર્ડને નકારી કાઢો "
+  },
+  "board": {
+    "drew": "તમે દોર્યુંઃ {card} હવે તમારે તેને [swap X Y] અથવા [discard] કરવું પડશે.",
+    "took": "તમે લીધોઃ {card} નિકાલ પાયે તમે તેની સાથે [swap X Y] જ જોઈએ (નિકાલ કરી શકતા નથી).",
+    "peeked": "તમે સ્થિતિ ({row},{col}) પર ઝલક કર્યુંઃ {card}",
+    "turn_view": "તમારું હાથઃ {hand} નિકાલ કરોઃ {discard} {options}",
+    "none": "કોઈ નહીં"
+  },
+  "options": {
+    "final_turns": "અંતિમ વારા! તમારા વિકલ્પોઃ [draw], [take], [peek X Y]",
+    "draw": "તમારા વિકલ્પોઃ [draw], [take]",
+    "must_swap": "તમારેઃ [swap X Y] (બહાર ફેંકવાની ખૂંટોમાંથી કાર્ડ નકારી શકાય નહીં)",
+    "swap_or_discard": "તમારે: [swap X Y] અથવા [discard]"
+  },
+  "hand": {
+    "no_cards": "કોઈ કાર્ડ્સ",
+    "header": "કોલ: 1 2 3",
+    "row": "પંક્તિ {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "ખેલાડી {pid}એ ({row},{col}) પોઝિશન પર {new}ને {old} સાથે સ્વેપ કર્યું",
+    "discarded": "ખેલાડી {pid} નિકાલ {card}"
+  },
+  "message": {
+    "deck_empty": "ડેક ખાલી છે! રમત તરત જ સમાપ્ત થાય છે.",
+    "knocked": "ખેલાડી {pid} નોક! દરેક અન્ય ખેલાડીને વધુ એક વળાંક મળે છે.",
+    "final_round": "ખેલાડી {pid} {reason}! દરેક અન્ય ખેલાડીને એક વધુ વળાંક મળે છે."
+  },
+  "reason": {
+    "all_revealed": "બધા કાર્ડ જાહેર કર્યા છે"
+  },
+  "invalid": {
+    "wrong_action": "બરાબર એક કૌંસમાં ક્રિયાનો ઉપયોગ કરોઃ [draw], [take], [swap X Y], [discard], [knock], અથવા [peek X Y]",
+    "discard_empty": "નિકાલનો ઢગલો ખાલી છે!",
+    "must_draw_first": "તમારે પ્રથમ [draw], [take], [knock], અથવા [peek X Y]",
+    "cannot_discard_taken": "તમે નકામા ખૂંટોમાંથી લેવામાં આવેલા કાર્ડને નકારી શકતા નથી. તમારે તેને સ્વેપ કરવું જ જોઇએ.",
+    "have_drawn_card": "તમારી પાસે એક ડ્રોન કાર્ડ છે. તમારે તેને [swap X Y] અથવા [discard] કરવું જોઈએ.",
+    "need_drawn_swap": "તમારે સ્વેપ કરવા માટે એક ડ્રો કાર્ડની જરૂર છે.",
+    "need_drawn_discard": "તમારે ડ્રોન કાર્ડને નિકાલ કરવાની જરૂર છે.",
+    "out_of_bounds": "સીમાની બહારની સ્થિતિ. પંક્તિ 1-{max_row}, સ્તંભ 1-{max_col} નો ઉપયોગ કરો",
+    "knock_with_card": "તમે ડ્રો કાર્ડ સાથે કઠણ કરી શકતા નથી. પ્રથમ તમારા વળાંક પૂર્ણ કરો.",
+    "already_knocked": "કોઈએ આ રાઉન્ડને પહેલેથી જ હરાવ્યું છે.",
+    "already_revealed": "તે કાર્ડ પહેલેથી જ જાહેર કરવામાં આવ્યું છે!"
+  },
+  "summary": {
+    "full": "ગેમ ઓવર! ખેલાડી {winner} {score} પોઈન્ટના સ્કોર સાથે જીતે છે! અંતિમ સ્કોર્સઃ {scores}",
+    "line": "ખેલાડી {pid}: {score} પોઈન્ટ "
+  },
+  "board_str": {
+    "title": "=== ગોલ્ફ ગેમ ===",
+    "discard": "નિકાલ પાયેઃ {card}",
+    "knocked": "ખેલાડી {pid}એ ત્રાટક્યું છે!",
+    "player_header": "ખેલાડી {pid} (સ્કોરઃ {score}):"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "ನೀವು ಗಾಲ್ಫ್ ಆಡುತ್ತಿದ್ದೀರಿ - ಆಟಗಾರ {player_id}. ಗುರಿ: ಈ ಒಂದು ಸುತ್ತಿನಲ್ಲಿ ಕಡಿಮೆ ಒಟ್ಟು ಸ್ಕೋರ್ ಪಡೆಯಿರಿ. ಕಾಲಮ್ಗಳು ಒಂದೇ ಮೌಲ್ಯವನ್ನು ಹಂಚಿಕೊಂಡರೆ, ಅವುಗಳನ್ನು 0 ಎಂದು ಸೇರಿಸಲಾಗುತ್ತದೆ. ಕಾರ್ಡ್ ಮೌಲ್ಯಗಳುಃ ಎ = 1, 2-10 = ಮುಖದ ಮೌಲ್ಯ, ಜೆ / ಕ್ಯೂ = 10, ಕೆ = 0 ಕ್ರಿಯೆಗಳು (ನಿಖರವಾದ ಆವರಣಗಳನ್ನು ಬಳಸಿ): - '[draw]' - ಡೆಕ್ನಿಂದ ಡ್ರಾ - '[take]' - ಡಿಸ್ಕಾರ್ಡ್ ರಾಶಿಯಿಂದ ತೆಗೆದುಕೊಳ್ಳಿ - '[swap X Y]' - ಸ್ಥಾನ X (ಸಾಲಿನಲ್ಲಿ) Y (ಕಾಲಮ್) ನೊಂದಿಗೆ ಡ್ರಾ ಕಾರ್ಡ್ ಅನ್ನು ಸ್ವ್ಯಾಪ್ ಮಾಡಿ - '[discard]' - ಡ್ರಾ ಕಾರ್ಡ್ ಅನ್ನು ತಿರಸ್ಕರಿಸಿ "
+  },
+  "board": {
+    "drew": "ನೀವು ಸೆಳೆಯಿತುಃ {card} ಈಗ ನೀವು [swap X Y] ಅಥವಾ [discard] ಮಾಡಬೇಕು.",
+    "took": "ನೀವು ತೆಗೆದುಕೊಂಡದ್ದು: {card} ಕೈಬಿಡುವ ರಾಶಿಯಿಂದ ನೀವು ಅದರೊಂದಿಗೆ [swap X Y] ಮಾಡಬೇಕು (ಬಿಸಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ).",
+    "peeked": "ನೀವು ಸ್ಥಾನದಲ್ಲಿ ಗೂಢಾಚಾರಿಕೆ ({row},{col}): {card}",
+    "turn_view": "ನಿಮ್ಮ ಕೈ: {hand} ಎಸೆಯುವ ರಾಶಿ: {discard} {options}",
+    "none": "ಯಾವುದೂ ಇಲ್ಲ"
+  },
+  "options": {
+    "final_turns": "ಅಂತಿಮ ತಿರುವುಗಳು! ನಿಮ್ಮ ಆಯ್ಕೆಗಳು: [draw], [take], [peek X Y]",
+    "draw": "ನಿಮ್ಮ ಆಯ್ಕೆಗಳು: [draw], [take]",
+    "must_swap": "ನೀವು: [swap X Y] (ಬಿಸಾಡಬಹುದಾದ ರಾಶಿಯಿಂದ ಕಾರ್ಡ್ಗಳನ್ನು ತಿರಸ್ಕರಿಸಲಾಗುವುದಿಲ್ಲ)",
+    "swap_or_discard": "ನೀವು [swap X Y] ಅಥವಾ [discard]"
+  },
+  "hand": {
+    "no_cards": "No cards",
+    "header": "ಕೊಲೊನ್: 1 2 3",
+    "row": "ಸಾಲು {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "ಆಟಗಾರ {pid} ಸ್ಥಾನದಲ್ಲಿ ({row},{col}) {new} ನೊಂದಿಗೆ {old} ನೊಂದಿಗೆ ವಿನಿಮಯ ಮಾಡಿಕೊಂಡರು",
+    "discarded": "ಆಟಗಾರ {pid} ಕೈಬಿಡಲಾಗಿದೆ {card}"
+  },
+  "message": {
+    "deck_empty": "ಡೆಕ್ ಖಾಲಿಯಾಗಿದೆ! ಆಟವು ತಕ್ಷಣವೇ ಕೊನೆಗೊಳ್ಳುತ್ತದೆ.",
+    "knocked": "ಆಟಗಾರ {pid} ನಾಕ್! ಪ್ರತಿಯೊಬ್ಬ ಆಟಗಾರನಿಗೆ ಒಂದು ತಿರುವು ಸಿಗುತ್ತದೆ.",
+    "final_round": "ಆಟಗಾರ {pid} {reason}! ಪ್ರತಿಯೊಬ್ಬ ಆಟಗಾರನಿಗೆ ಒಂದು ತಿರುವು ಸಿಗುತ್ತದೆ."
+  },
+  "reason": {
+    "all_revealed": "ಎಲ್ಲಾ ಕಾರ್ಡುಗಳನ್ನು ಬಹಿರಂಗಪಡಿಸಿದೆ"
+  },
+  "invalid": {
+    "wrong_action": "ನಿಖರವಾಗಿ ಒಂದು ಬ್ರಾಕೆಟ್ ಕ್ರಿಯೆಯನ್ನು ಬಳಸಿಃ [draw], [take], [swap X Y], [discard], [knock], ಅಥವಾ [peek X Y]",
+    "discard_empty": "ತಿರಸ್ಕರಿಸಿದ ರಾಶಿಯು ಖಾಲಿಯಾಗಿದೆ!",
+    "must_draw_first": "ನೀವು ಮೊದಲು [draw], [take], [knock], ಅಥವಾ [peek X Y]",
+    "cannot_discard_taken": "ನೀವು ತಿರಸ್ಕರಿಸಿದ ರಾಶಿಯಿಂದ ತೆಗೆದುಕೊಂಡ ಕಾರ್ಡ್ ಅನ್ನು ತಿರಸ್ಕರಿಸಲಾಗುವುದಿಲ್ಲ. ನೀವು ಅದನ್ನು ವಿನಿಮಯ ಮಾಡಿಕೊಳ್ಳಬೇಕು.",
+    "have_drawn_card": "ನೀವು ಒಂದು ಡ್ರಾ ಕಾರ್ಡ್ ಹೊಂದಿವೆ. ನೀವು [swap X Y] ಅಥವಾ [discard] ಮಾಡಬೇಕು.",
+    "need_drawn_swap": "ನೀವು ವಿನಿಮಯ ಒಂದು ಡ್ರಾ ಕಾರ್ಡ್ ಅಗತ್ಯವಿದೆ.",
+    "need_drawn_discard": "ನೀವು ಎಸೆದು ಒಂದು ಡ್ರಾ ಕಾರ್ಡ್ ಅಗತ್ಯವಿದೆ.",
+    "out_of_bounds": "ಗಡಿಯ ಹೊರಗೆ ಸ್ಥಾನ. ಸಾಲು 1-{max_row}, ಕಾಲಮ್ 1-{max_col} ಬಳಸಿ",
+    "knock_with_card": "ನೀವು ಡ್ರಾ ಕಾರ್ಡ್ನೊಂದಿಗೆ ನಾಕ್ ಮಾಡಲಾಗುವುದಿಲ್ಲ. ನಿಮ್ಮ ಸರದಿ ಮೊದಲು ಪೂರ್ಣಗೊಳಿಸಿ.",
+    "already_knocked": "ಯಾರೋ ಈಗಾಗಲೇ ಈ ಸುತ್ತಿನಲ್ಲಿ ಹೊಡೆದು.",
+    "already_revealed": "ಆ ಕಾರ್ಡ್ ಈಗಾಗಲೇ ಬಹಿರಂಗವಾಗಿದೆ!"
+  },
+  "summary": {
+    "full": "ಆಟ ಮುಗಿದಿದೆ! ಆಟಗಾರ {winner} {score} ಅಂಕಗಳೊಂದಿಗೆ ಗೆಲ್ಲುತ್ತಾನೆ! ಅಂತಿಮ ಅಂಕಗಳು: {scores}",
+    "line": "ಆಟಗಾರ {pid}: {score} ಅಂಕಗಳು "
+  },
+  "board_str": {
+    "title": "=== ಗಾಲ್ಫ್ ಆಟ ===",
+    "discard": "{card}",
+    "knocked": "Player {pid} has knocked!",
+    "player_header": "ಆಟಗಾರ {pid} (ಪಾಯಿಂಟ್ಃ {score}):"
+  }
+}
