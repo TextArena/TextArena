@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are playing the Minesweeper game.\nThe objective of the game is to reveal all cells that do not contain mines.\nTo make a move, simply specify the row and column coordinates you want to reveal using the format:\n- `[row col]`: Reveal the cell at the specified row and column.\nFor example:\n- `[3 2]` to reveal the cell in Row 3, Column 2.\n- `[5 6]` to reveal the cell in Row 5, Column 6.\nOn your first move, you will reveal an area around the cell you choose to ensure a safe start.\nThe current board layout is shown below. Cells that are unrevealed are represented by a dot ('.'), revealed numbers show the count of adjacent mines.\nBe mindful not to choose already revealed cells.\nHere is the current board layout:\n"
+  },
+  "board": {
+    "game_board": "Оюн тактасы: {board}",
+    "current_board": "Учурдагы кеңеш: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Сиз квадрат дубалдардын ичиндеги туура координаталар менен жооп берген жоксуз.",
+    "out_of_bounds": "Белгиленген сап жана тилке координаттары чектен чыгып кетти.",
+    "already_revealed": "({row}, {col}) уячасы ачылган.",
+    "hit_mine": "Сиз ({row}, {col}) боюнча минага туш келдиңиз."
+  },
+  "game_action": {
+    "revealed": "Сиз ({row}, {col}) -чакырыкты ачыктадыңыз."
+  },
+  "outcome": {
+    "win": "Куттуктайм, сиз \"Мина сүртгүч\" тактасын ийгиликтүү тазаладыңыз.",
+    "turn_limit": "The turn limit has been reached. You successfully uncovered {percent}% of the safe cells."
+  }
+}

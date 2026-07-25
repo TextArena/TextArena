@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Welcome to Lights Out! You have a {size}x{size} grid of lights.\nYour goal is to turn ALL lights OFF (represented by '.')\nWhen you press a light, it toggles itself AND its adjacent neighbors (up/down/left/right).\nType [row col] to press a light (0-indexed, so valid range is 0-{max_index}).\nYou have up to {max_turns} moves to solve the puzzle.\nLegend: 'O' = light ON, '.' = light OFF"
+  },
+  "board": {
+    "current_state": "Учурдагы сетканын абалы (Көчүрүү {moves_made}, {moves_left} калган көчүрүүлөр, {completion}% аяктады): {grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Амал [row col] форматында болушу керек, анда сап жана тилке 0дөн {max_index} чейинки бүтүн сандар.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Куттуктайм! Сиз {moves_used} кыймылдарында табышмакты чечтиңиз!",
+    "loss": "Оюн бүттү! Сиз {max_turns} жылдырууларды пазлды чыгарбай колдондуңуз. Туура аяктыш: {completion}%\nАкыркы абал:\n{grid}"
+  }
+}

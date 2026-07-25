@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Сиз оюнчусу {player_id} болуп Chopsticks. Сиздин кезегинде, бир тандоо: + чабуул: '[attack M O]' кайда M=сиздин колу (0 же 1), O=каршылаш колу (0 же 1). - Каршылашынын колун саноо сиздин колуңузга көбөйөт; эгерде >=5, ал 0 болуп калат. + Split: '[split L R] сиздин жалпы манжаларыңызды L жана R (L + R = сиздин жалпыңыз) кылып бөлүштүрүү үчүн. Ошол буйруктардын бири менен жооп бериңиз."
+  },
+  "board": {
+    "current_board": "Учурдагы такта: Оюнчу 0: {hands_0} Оюнчу 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Сенин колуң {my_idx} өлүк.",
+    "opp_hand_dead": "Каршылашынын колу {opp_idx} мурда эле өлүп калган.",
+    "split_sum": "Бөлүнгөн сумма {total} болушу керек.",
+    "split_no_change": "Сплит сиздин колуңузду бөлүштүрүүсүн өзгөртөт.",
+    "invalid_command": "Жараксыз кадам. [attack M O] же [split L R] колдонуңуз."
+  },
+  "game_action": {
+    "attack": "P{player_id} кол салат P{opp_id} колуна {opp_idx}: ал {opp_val}ден {new_val}ге чейин барат.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "П{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Эки кол тең өлөт.",
+    "draw": "The turn limit has been reached."
+  }
+}

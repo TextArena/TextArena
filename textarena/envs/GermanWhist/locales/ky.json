@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Оюн башталат. Трамп костюму: {trump_suit} (трамп картасы: {trump_str}).",
+    "no_trump_card": "жок"
+  },
+  "player_prompt": {
+    "intro": "Сиз Германиянын Whist боюнча оюнчусу {player_id}. {phase_info} Сиз кардарларды {hand_size} кармайсыз. \"[play N]\" менен карта ойноңуз, анда N сиздин колуңуздагы абалы (мисалы, \"[play 3]\").",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "Карталар сунушталбайт - оюн башталды.",
+    "deck_empty": "Карталар жок.",
+    "available": "Карта сунушталууда: {card}",
+    "available_trump": "Карта сунушталууда: {card} (ТРУМП)"
+  },
+  "invalid_move": {
+    "wrong_format": "Колдо бар Nth картаны ойнотуу үчүн \"[play N]\" колдонуңуз.",
+    "bad_position": "Бул картанын орду жок. Сизде {hand_size} карталар бар.",
+    "must_follow_suit": "Сиз да ушундай кадамга барышыңыз керек жана {lead_suit} картасын ойношуңуз керек.",
+    "invalid_play": "Бул картаны ойноого болбойт."
+  },
+  "game_action": {
+    "played": "Оюнчу {player_id} ойноду {card}."
+  },
+  "trick": {
+    "won": "{winner_id} оюнчусу {card} менен жеңишке жетишет.",
+    "won_learning": "{winner_id} оюнчу {card} менен жеңип, ачык картаны алат."
+  },
+  "phase": {
+    "learning_complete": "Окуп-үйрөнүү мезгили аяктады - ар бир калган трюк жеңишке жетүү үчүн эсептелет."
+  },
+  "draw": {
+    "winner_received": "Сиз {card} менен жеңип алдыңыз.",
+    "loser_received": "You lost the trick and drew {card} from the deck.",
+    "winner_preview": "Кийинки карта {card}."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "Ушул кезге чейин утуп алган трюктар - Оюнчу 0: {tricks0}, Оюнчу 1: {tricks1}",
+    "scores_playing": "Оюнчу 0: {tricks0}, Оюнчу 1: {tricks1}",
+    "phase": "Фаза: {phase}",
+    "phase_learning": "Фаза: {phase} ({remaining_cards} карталар палубада калган)"
+  },
+  "hand": {
+    "no_cards": "Карталар жок",
+    "no_cards_in_hand": "Карталар жок",
+    "header": "Сиздин колуңуз:",
+    "trump_indicator": "(ТРУМП)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Бул оюнда азырынча эч кандай карталар ойнотулган эмес.",
+    "header": "Учурдагы ыкма:",
+    "trump_indicator": "(ТРУМП)",
+    "card_line": "{observation} Оюнчу {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Оюн башталган жок",
+    "header": "=== Германиялык WHIST оюну ===",
+    "phase": "{observation} Фаза: {phase}",
+    "trump_suit": "{observation} Трамптын костюму: {trump_suit}",
+    "trump_card": "{observation} Тромп картасы: {card}",
+    "cards_left": "{observation} Капкакта калган карталар: {count}",
+    "next_card": "{observation} Жеңүүчү үчүн кийинки карта: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Азыркы ыкма:",
+    "trump_indicator": "(ТРУМП)",
+    "trick_line": "{observation} Оюнчу {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} Оюнчу {player_id}: {scoring} упай топтоо ({tricks} жалпы), {hand_size} колдо болгон карталар"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

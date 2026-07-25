@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Сиз Nim оюнундагы оюнчусу {player_id}. Сиздин максатыңыз акыркы калган буюмду алуу. Ар бир кезек боюнча, так бир топту тандап, андан бир же бир нече буюмдарды алып салыңыз. Форматты '[pile quantity]' колдонуңуз, анда топ топтун индекси болуп саналат жана сан алып салынуучу буюмдардын саны. Мисалы, '[0 3]' 0 топтон 3 буюмду алып салат."
+  },
+  "state": {
+    "current_pile": "Учурдагы топ: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Жарактуу көчүрүү форматы табылган жок. '[pile quantity]' колдонуңуз.",
+    "correct_format_wrong_fields": "Player {player_id}, Invalid action. Column {col} is out of bounds.",
+    "out_of_range": "{pile_index} топтомунун индекси диапазондон тышкары.",
+    "non_positive": "Жок дегенде бир объектти алып салуу керек.",
+    "exceeds_pile": "{quantity} топтомунан {pile_index} алып салууга болбойт (бир гана {pile_count} калды)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Оюнчу {player_id} акыркы буюмду алып кетти!"
+  }
+}
