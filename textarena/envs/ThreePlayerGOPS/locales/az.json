@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS yerli faylı. Açarları (sol tərəf) tərcümə etməyin. Yalnız dəyərləri (sağ tərəf) tərcümə edin.",
+  "_slots": {
+    "{player_id}": "Oyunçunun nömrəsi, 0, 1 və ya 2",
+    "{round}": "Cari raundun nömrəsi, 1..13",
+    "{prize}": "Açılan mükafat kartının üz qeydəsi (A, 2..10, J, Q, K) - tərcümə etməyin",
+    "{worth}": "Mükafatın ümumi dəyəri, o cümlədən hər hansı daşınan qazanç",
+    "{hand}": "Oyunçunun qalan kartları, kvadrat mötərizələrdəki tokenlar kimi '[A]' '[2]' - tərcümə etməyin",
+    "{bids}": "Bitərəf vergülərlə ayrılmış oynanmış kartların siyahısı kimi 'P0:10, P1:J, P2:Q' - tərcümə etməyin",
+    "{winner}": "Raundu qazanan oyunçunun nömrəsi",
+    "{pot}": "Bu raundda mükafat olaraq verilən və ya daşınan qazancın dəyəri",
+    "{scoreline}": "Bitərəf davam edən hesab cədvəli kimi 'P0:0  P1:0  P2:11' - tərcümə etməyin",
+    "{pid}": "Aradan qaldırılan oyunçunun nömrəsi",
+    "{scores}": "Son hesablar xam oyunçu-nömrə ilə hesab xəritəsi kimi - tərcümə etməyin"
+  },
+  "player_prompt": {
+    "intro": "Siz Three-Player GOPS-da Oyunçu {player_id}-siniz.\n- Siz 13 kartı A-K (hər biri dəqiq bir dəfə) tutursunuz.\n- Hər raundda bir mükafat açılır. Bir kart göndərin, məsələn `[Q]`, `[10]`, `[2]` …\n- Ən yüksək kart mükafatı (+ hər hansı daşınan qazanc) qazanır. Berabərliklər mükafatı növbəti raunda çevirir.\n- 13 raunddan sonra ən yüksək ümumi hesab qazanır. Etibarsız hərəkətlər = aradan qaldırma."
+  },
+  "round": {
+    "header": "### Raund {round}/13 - Mükafat: {prize} (dəyəri {worth})",
+    "hand": "Qalan əliniz: {hand}"
+  },
+  "reveal": {
+    "win": "Təkliflər » {bids} - Oyunçu {winner} {pot} qazanır.",
+    "tie": "Təkliflər » {bids} - berabərlik, qazanc indi {pot}.",
+    "scores": "Hesablar → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "hərəkət kvadrat mötərizədə kart tələb edir, məsələn '[Q]'",
+    "bad_card": "kart artıq istifadə edilib və ya etibarsızdır"
+  },
+  "elimination": {
+    "player": "Oyunçu {pid} təkrarlanan etibarsız hərəkətlərdən sonra aradan qaldırıldı."
+  },
+  "outcome": {
+    "auto_win": "İki oyunçu aradan qaldırıldı - avtomatik qələbə.",
+    "final": "Son hesablar: {scores}"
+  }
+}

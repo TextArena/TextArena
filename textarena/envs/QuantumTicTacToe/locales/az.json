@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Siz Quantum Tic Tac Toe-da Oyunçu {player_id}-siniz.\nSizin simvolunuz '{symbol}'-dır və hərəkət nömrələriniz həmişə {parity} olur (məsələn, X1, X3 və ya O2, O4).\n\nHədəf: Üç klassik işarədən ibarət bir xətt formalaşdırmaqla qazanmaq (superpozisiyalardan bərkişdirilib).\n\nNecə Oynamaq:\n- Hər gedişdə, '[a,b]' formatını istifadə edərək iki fərqli boş kvadratda bir qorxulu işarə qoyun.\n- Bu işarələr qarışıqdır və 'X1 / X1' və ya 'O4 / O4' kimi etiketlənir.\n- Artıq çökmüş (bərkişmiş) kvadratda qorxulu işarə qoya bilməzsiniz.\n\nÇökmə Qaydası:\n- Əgər hərəkətiniz entanqlement qrafında bir dövr yaradır, o, avtomatik olaraq çökür.\n- Hər bir qorxulu işarə dövrdə iki mövqedən birində klassik işarəyə çevrilir.\n- İstifadədə olan qorxulu işarələr də çökür.\n\nQələbə:\n- Oyun, bir oyunçunun üç klassik işarəsini bir sırada yerləşdirdiyi zaman bitir.\n- Əgər hər iki oyunçu eyni çökmədə xətt əldə edərsə, daha aşağı maksimum hərəkət nömrəsi olan oyunçu qazanır.\n\nMəsələn, '[0,4]' 0 və 4 hücrələrində bir qorxulu işarə qoyur."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Taxtası:\n\n{board}\n\nHərəkətinizi '[a,b]' formatında göndərin ki, iki mövqedə kvant işarəsi qoyun."
+  },
+  "invalid_move": {
+    "wrong_format": "Yanlış format. '[a,b]' formatını istifadə edin.",
+    "invalid_cells": "Yanlış və ya dublikat hücrə indeksləri.",
+    "already_solidified": "Hücrələrdən biri artıq bərkişib."
+  },
+  "game_action": {
+    "placed": "Oyunçu {player_id} simvolunu {pos_a} və {pos_b} hücrələri arasında superpozisiyada yerləşdirdi."
+  },
+  "game_message": {
+    "dependent_resolved": "Asılı superpozisiya həll edildi. ({r}, {c}) hücrəsi indi {symbol}-dir.",
+    "last_cell_resolved": "Son hücrə üçün superpozisiya həll edildi. ({r}, {c}) hücrəsi indi {symbol}-dir.",
+    "superposition_resolved": "Superpozisiya həll edildi. ({r}, {c}) hücrəsi indi {symbol}-dir."
+  },
+  "outcome": {
+    "win": "Oyunçu {player_id} bərkişmiş işarələrlə qazandı!",
+    "draw": "Oyun heç-heçədir!"
+  }
+}

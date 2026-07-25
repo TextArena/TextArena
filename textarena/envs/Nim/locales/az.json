@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Siz Nim-də Oyunçu {player_id}-siniz.\nHədəfiniz son qalan obyekti götürməkdir.\nHər gedişdə, dəqiq bir yığını seçin və ondan bir və ya daha çox obyekti çıxarın.\nFormatı '[yığın miqdarı]' istifadə edin, burada yığın yığın indeksidir və miqdarı çıxarılacaq obyektlərin sayını göstərir.\nMəsələn, '[0 3]' 0-cı yığından 3 obyekti çıxarır."
+  },
+  "state": {
+    "current_pile": "Cari Yığın:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Heç bir etibarlı hərəkət formatı tapılmadı. '[yığın miqdarı]' formatını istifadə edin.",
+    "correct_format_wrong_fields": "Oyunçu {player_id}, etibarsız hərəkət. {col} sütunu sərhədlərdən kənarda.",
+    "out_of_range": "{pile_index} yığın indeksi sərhədlərdən kənarda.",
+    "non_positive": "Ən azı 1 obyekt çıxarmalısınız.",
+    "exceeds_pile": "{pile_index} yığından {quantity} obyekti çıxarmaq mümkün deyil (yalnız {pile_count} qaldı)."
+  },
+  "observation": {
+    "removed_from_piles": "Oyunçu {player_id} [{pile_index} {quantity}] oynadı, {quantity} obyekti {pile_index} yığından çıxardı."
+  },
+  "outcome": {
+    "win": "Oyunçu {player_id} son obyekti götürdü!"
+  }
+}

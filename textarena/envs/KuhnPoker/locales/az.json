@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Siz {max_rounds} raundluq Kuhn Poker oyununda Oyunçu {player_id}-siniz.\nOyun Qaydaları:\n- Kuhn Poker 3-kartlı bir kolleksiyadan istifadə edir: J, Q, K (ən aşağı J, ən yüksək K)\n- Hər oyunçu {ante} çipini ödəyir və hər raundda 1 kart alır (kartlar əvəz olunmadan paylanır, beləliklə, siz rəqibinizle eyni kartı ala bilməzsiniz).\n- Oyun {max_rounds} raund davam edir\n- Bütün raundlar sonra ən çox çipi olan oyunçu qazanır\nHərəkət Qaydaları:\n- '[check]': Heç bir mərc olmadan keçmək (yalnız masa üzərində mərc yoxdursa)\n- '[bet]': Mərclə 1 çip əlavə etmək (yalnız masa üzərində mərc yoxdursa)\n- '[call]': Rəqibin mərcini 1 çip əlavə edərək uyğunlaşdırmaq\n- '[fold]': Əlinizi təslim etmək və rəqibinizin qazanmasına icazə vermək"
+  },
+  "init_round": {
+    "round_start": "### {max_rounds} raunddan {current_round} raunduna başlamaq. Sizin kartınız: '{player_card}'",
+    "available_actions": "Sizin mövcud hərəkətləriniz: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hərəkət [Check], [Bet], [Call], və ya [Fold] olmalıdır.",
+    "not_legal": "Hərəkət {legal_actions} olmalıdır."
+  },
+  "action": {
+    "submit_move": "Oyunçu {player_id}, hərəkətini təqdim etdi: '[{move}]'.",
+    "valid_actions": "Sizin mövcud hərəkətləriniz: {legal_actions}.",
+    "round_summary": "{reason} Cari hesab: Oyunçu 0: '{player_0_chips}'; Oyunçu 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Qarşılaşma: Oyunçu {winner}'in {winner_card} kartı Oyunçu {loser}'in {loser_card} kartını məğlub edir. Oyunçu {winner} {pot_value} çip qazanır."
+  },
+  "outcome": {
+    "draw": "{max_rounds} raundun sonunda hər iki oyunçu eyni sayda çipə sahib idi.",
+    "round_win": "Oyunçu {player_id} əlini təslim etdi.",
+    "winner_player0": "Oyunçu 0 bütün {max_rounds} raundun sonunda daha çox çipə sahib olaraq qazandı.",
+    "winner_player1": "Oyunçu 1 bütün {max_rounds} raundun sonunda daha çox çipə sahib olaraq qazandı."
+  }
+}
