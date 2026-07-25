@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Siz muzokaralar o'yinida {player_id} o'yinchisiz. Sizda ba'zi resurslar bor va sizning vazifangiz resurslaringizning umumiy qiymati oshishi uchun savdo qilishdir. Hozirda sizda mavjud bo'lgan resurslar va tegishli qiymatlar: + {resource_value_list} Har bir aylanmada raqibingiz bilan gaplashishingiz va savdo taklifini qilishingiz mumkin. Harakatlar uchun quyidagi maxsus tokenlardan foydalaning: - '[Taklif: 3 Qo'y, 2 Ore -> 5 Brick, 2 Qo'y]': [Taklif: Taklif qilingan resurslar -> So'ralgan resurslar] - '[Accept]': Kiruvchi taklifni qabul qilish. - '[Deny]': Kiruvchi taklifni rad etish (standart). O'yin jami {max_turns} aylanmalar davom etadi."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "O'yinchi zarur resurslarga ega bo'lmay turib, savdo-sotiqni qabul qilishga harakat qildi.",
+    "out_of_range": "O'yinchi {player_id}, Noto'g'ri harakat. {col} ustun chegaradan tashqarida.",
+    "already_full": "O'yinchi {player_id}, Bekor harakat. {col} ustun to'ldirilgan.",
+    "proposing_with_no_resource": "O'yinchi {player_id} zarur resurslarga ega bo'lmay turib savdo taklifini berishga harakat qildi.",
+    "incorrect_offer_format": "O'yinchi {player_id} noto'g'ri formatda savdo taklifi berdi.",
+    "no_new_offer": "O'yinchi {player_id} yangi savdo taklifi kiritmadi."
+  },
+  "offers": {
+    "reject": "O'yinchi {player_id} savdo taklifini rad etdi.",
+    "accept": "O'yinchi {acceptor_id} o'yinchi {proposer_id} ning savdo taklifini qabul qildi.",
+    "proposal": "O'yinchi {player_id} o'yinchi {opponent_id}ga quyidagi taklifni qildi: Taklif qilingan narsalar: {offered} -> So'ralgan narsalar: {requested}"
+  },
+  "outcome": {
+    "win": "O'yinchi {winner_id} inventar qiymatida katta foyda ko'rgan holda g'olib bo'ldi.",
+    "draw": "Barcha o'yinchilar uchun inventarizatsiya qiymatida bir xil o'zgarish."
+  }
+}

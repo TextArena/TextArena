@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Siz Hindiston poker o'yinida o'yinchi {player_id}siz. - 52 ta karta to'plami; siz faqat raqibning kartasini ko'rasiz. - Ante {ante} chiplar har bir raundda, {max_rounds} raundlar jami. - To'g'ri harakatlar: '[check] ' │ '[bet X] ' │ '[call] ' │ '[raise X] │ '[fold] (X musbat butun son <= sizning chiplar soni.) - Eng yuqori yashirilgan karta potni g'alaba qozonadi."
+  },
+  "round": {
+    "announce": "### Raund {current_round}/{max_rounds} Raqibingizning kartasi: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "To'g'ri BIR parantezda yozilgan amalni, masalan, \"[check]\", \"[bet 2]\", \"[call]\", \"[raise 3]\" yoki \"[fold]\"ni taqdim eting.",
+    "cannot_check": "mumkin emas [check] - siz garovga duch kelyapsiz.",
+    "amount_min": "O'yin / tikish miqdori ≥ 1 bo'lishi kerak.",
+    "cannot_bet": "mumkin emas [bet] - kerak [call] / [raise] / [fold].",
+    "nothing_to_call": "Qo'ng'iroq qilish uchun hech narsa yo'q; buning o'rniga [check] qilishingiz mumkin.",
+    "no_bet_to_raise": "Ochiqlash uchun [bet X] dan foydalaning; oshirish uchun hech qanday pul tikish yo'q.",
+    "insufficient": "Bunday harakat uchun yetarli chiplar yo'q."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "\"[check]\", \"[bet X]\"",
+    "actions_facing_bet": "\"[call]\" (narxi {to_call}), \"[raise X]\", \"[fold]\"",
+    "possible_actions": "Sizning mumkin boʻlgan harakatlaringiz: {legal}"
+  },
+  "message": {
+    "round_result": "{reason} Pot {pot} → Player {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "O'yinchi {player_id} to'xtadi.",
+    "showdown_win": "Showdown: {card_win} beats {card_lose}.",
+    "showdown_tie": "Showdown teng: ikkalasi ham {card}. Pot bo'linadi  har biri {split} oladi."
+  },
+  "outcome": {
+    "p0_wins": "0 o'yinchi g'alaba qozonadi ({bank0} > {bank1})",
+    "p1_wins": "1-o'yinchi g'alaba qozonadi ({bank1} > {bank0})",
+    "draw": "Barcha turlardan keyin teng chipslar"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Chopsticks. On your turn, choose one of:\n  + Attack:  '[attack M O]'  where M=your hand (0 or 1), O=opponent hand (0 or 1).\n    - Opponent's hand count increases by your hand; if >=5, it becomes 0.\n  + Split:   '[split L R]'  to redistribute your total fingers into L and R (L+R = your total).\nReply with exactly one of those commands."
+  },
+  "board": {
+    "current_board": "Joriy taxt: 0 o'yinchi: {hands_0} 1 o'yinchi: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Qo'lingiz {my_idx} o'lik.",
+    "opp_hand_dead": "Raqibning qo'li {opp_idx} allaqachon o'lik.",
+    "split_sum": "Bo'linish summasi {total} bo'lishi kerak.",
+    "split_no_change": "Split sizning qo'lingizni taqsimlashni o'zgartirishi kerak.",
+    "invalid_command": "Noto'g'ri harakat. [attack M O] yoki [split L R] ishlating."
+  },
+  "game_action": {
+    "attack": "P{player_id} P{opp_id}ning qo'liga hujum qiladi {opp_idx}: u {opp_val}dan {new_val}ga o'tadi.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Raqibning ikkala qo'li ham o'lik.",
+    "draw": "Burilish chegarasiga yetildi."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Joriy boshqaruv: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Harakat 0-8 raqamlari bilan [macro micro] shaklida bo'lishi kerak.",
+    "out_of_range": "Har bir indeks 0 va 8 orasida bo'lishi kerak.",
+    "index_out_of_range": "Mikro_panel, satr yoki ustun masofadan tashqarida.",
+    "cell_occupied": "Bu xona allaqachon band.",
+    "wrong_micro_board": "O'yinchi keyingi mikro taxtada o'ynashi kerak.",
+    "micro_board_won": "Mikro panelda g'alaba qozonilgan."
+  },
+  "next_board": {
+    "any": "har qanday mikro taxtadan",
+    "specific": "mikro taxtasi {nxt}"
+  },
+  "game_action": {
+    "played": "O'yinchi {player_id} mikrokartonda {macro_idx}, hujayrada {micro_idx} (satr {row}, ustun {col}) o'ynagan. O'yinchi {opponent_id} endi {nxt_txt}da o'ynashi kerak."
+  },
+  "outcome": {
+    "win": "O'yinchi {player_id} Ultimate Tic Tac Toe-da g'olib bo'ldi!",
+    "draw": "O'yin teng bo'lib chiqdi!"
+  }
+}
