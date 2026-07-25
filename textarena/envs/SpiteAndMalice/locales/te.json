@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "ప్రస్తుత బోర్డు: {board} అందుబాటులో ఉన్న కదలికలు: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- సెంటర్ పైల్స్ --- ",
+    "pile": "{observation} పైల్ {i}: {pile} ",
+    "player_view_header": "{observation} --- ఆటగాడి అభిప్రాయం {player_id} --- ",
+    "payoff": "{observation} చెల్లింపు పైల్ (టాప్ కార్డ్): {top_card}, చెల్లింపు పైల్ పొడవు: {payoff_length} ",
+    "hand": "{observation}చేయి: {hand} ",
+    "discard": "{observation}ప్యాలెస్ లను విస్మరించు: {discard} ",
+    "empty": "ఖాళీగా"
+  },
+  "game_message": {
+    "no_cards_left": "డ్రా చేయటానికి ఇక కార్డులు లేవు. మీరు ఈ మూలాల నుండి కార్డులను ప్లే చేయవచ్చని గుర్తుంచుకోండిః 1. మీ ** చేతి **. 2. మీ చెల్లింపు స్టాక్ యొక్క ** టాప్ కార్డ్ **. 3. మీ డిస్కాస్ స్టాక్లలో ఏదైనా ** టాప్ కార్డ్ **."
+  },
+  "invalid_move": {
+    "wrong_format": "చెల్లుబాటు కాని తరలింపు ఫార్మాట్. ఆటగాడు {player_id} చదరపు బ్రాకెట్లలో చెల్లుబాటు అయ్యే తరలింపుతో స్పందించలేదు.",
+    "invalid_play": "ఆటగాడు {player_id} సెంటర్ పైల్ {index} పై {card} ఆడటానికి ప్రయత్నించాడు.",
+    "discard_from_payoff": "చెల్లని విస్మరణ. ఆటగాడు {player_id} చెల్లింపు స్టాక్ నుండి కార్డును విస్మరించడానికి ప్రయత్నించాడు.",
+    "discard_not_in_hand": "చెల్లని విస్మరణ. ఆటగాడు {player_id} చేతిలో లేని కార్డును విస్మరించడానికి ప్రయత్నించాడు.",
+    "wrong_move_type": "చెల్లుబాటు కాని తరలింపు రకం. ఆటగాడు {player_id} చెల్లుబాటు అయ్యే తరలింపు రకంతో స్పందించలేదు."
+  },
+  "game_action": {
+    "you_drew": "మీరు కార్డులు డ్రా.",
+    "opponent_drew": "ఆటగాడు {player_id} కార్డులు గీసాడు.",
+    "you_played": "మీరు సెంటర్ పైల్ {index}లో {card}ను ఆడాడు.",
+    "opponent_played": "ఆటగాడు {player_id} సెంటర్ పైల్ {index}లో {card} ఆడాడు.",
+    "you_discarded": "మీరు {card}ను {index}ని విస్మరించడానికి విస్మరించారు, అంటే మీరు వారి మలుపును పూర్తి చేసారు. ఈ మలుపు కోసం మీ తదుపరి చర్యలు పరిగణించబడవు. ఆటగాడు {next_player_id} తదుపరి వెళ్తాడు.",
+    "opponent_discarded": "ఆటగాడు {player_id} {card} లను {index} లను విస్మరించడానికి విస్మరించాడు, అంటే వారు తమ మలుపును పూర్తి చేశారని అర్థం. ఆటగాడు {player_id} యొక్క తదుపరి చర్యలు ఈ మలుపు కోసం పరిగణించబడవు. ఆటగాడు {next_player_id}, మీరు తదుపరి వెళ్తారు. దయచేసి మీ చర్యను [action card center_index] ఆకృతిలో నమోదు చేయండి."
+  },
+  "outcome": {
+    "payoff_cleared": "ఆటగాడు {current_player} వారి చెల్లింపు స్టాక్ను పూర్తి చేసాడు! ఆటగాడు {current_player} గెలుస్తాడు!",
+    "deadlock_player_0": "Deadlock reached! Player 0 wins with {player_0_payoff} cards remaining vs Player 1's {player_1_payoff} cards.",
+    "deadlock_player_1": "Deadlock reached! Player 1 wins with {player_1_payoff} cards remaining vs Player 0's {player_0_payoff} cards.",
+    "deadlock_tie": "డెడ్లాక్ టైతో చేరుకుంది! రెండు ఆటగాళ్ళకు {player_0_payoff} కార్డులు మిగిలి ఉన్నాయి. ఆటగాడు {current_player} అప్రమేయంగా గెలుస్తాడు."
+  }
+}

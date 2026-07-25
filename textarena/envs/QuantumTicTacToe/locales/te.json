@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Quantum Tic Tac Toe.\nYour symbol is '{symbol}', and your move numbers are always {parity} (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4."
+  },
+  "board": {
+    "current_board": "క్వాంటం టిక్ టాక్ టో బోర్డు: {board} రెండు ప్రదేశాలలో క్వాంటం మార్క్ ఉంచడానికి మీ కదలికను \"[a,b] \" గా సమర్పించండి."
+  },
+  "invalid_move": {
+    "wrong_format": "చెల్లని ఫార్మాట్. '[a,b]' ను వాడండి.",
+    "invalid_cells": "చెల్లుబాటు కాని లేదా నకిలీ సెల్ సూచికలు.",
+    "already_solidified": "కణాలలో ఒకటి ఇప్పటికే ఘనీభవిస్తుంది."
+  },
+  "game_action": {
+    "placed": "ఆటగాడు {player_id} తన చిహ్నాన్ని కణాలు {pos_a} మరియు {pos_b} మధ్య ఒక సూపర్పోజిషన్లో ఉంచాడు."
+  },
+  "game_message": {
+    "dependent_resolved": "ఆధారపడిన సూపర్పోజిషన్ పరిష్కరించబడింది. సెల్ ({r}, {c}) ఇప్పుడు {symbol}.",
+    "last_cell_resolved": "చివరి సెల్ కోసం సూపర్పోజిషన్ పరిష్కరించబడింది. సెల్ ({r}, {c}) ఇప్పుడు {symbol}.",
+    "superposition_resolved": "సూపర్పోజిషన్ పరిష్కరించబడింది. సెల్ ({r}, {c}) ఇప్పుడు {symbol}."
+  },
+  "outcome": {
+    "win": "ఆటగాడు {player_id} ఘనీభవించిన మార్కులతో గెలుస్తాడు!",
+    "draw": "ఆట డ్రా ఉంది!"
+  }
+}

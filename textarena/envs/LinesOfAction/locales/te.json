@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "బోర్డు: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ఫార్మాట్ e2e4 (నుండి,నుండి కోఆర్డినేట్లు) గా ఉండాలి.",
+    "no_piece": "{side} నంబర్ {coord} పై ముక్క.",
+    "identical": "మూలం మరియు గమ్యం ఒకేలా ఉన్నాయి.",
+    "not_straight_or_diagonal": "కదలిక నేరుగా లేదా వికర్ణంగా ఉండాలి.",
+    "wrong_distance": "ఒక వరుసలో ముక్కలు సమాన దూరం తరలించాలి.",
+    "enemy_blocks": "శత్రువు ముక్క మార్గం బ్లాక్.",
+    "destination_own": "గమ్యం సొంత ముక్క ఆక్రమించిన."
+  },
+  "game_action": {
+    "moved": "ఆటగాడు {player_id} తరలించబడింది {from} -> {to}",
+    "captured_suffix": "ఆటగాడు {player_id} {from} -> {to} కదిలి శత్రువును పట్టుకున్నాడు."
+  },
+  "outcome": {
+    "win": "అన్ని ముక్కలు కనెక్ట్.",
+    "draw_no_capture": "60 moves without capture.",
+    "draw_repetition": "స్థానం మూడు సార్లు పునరావృతం."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "మీరు కౌంట్డౌన్ సంఖ్యల ఆట ఆడుతున్నారు! లక్ష్యం: లక్ష్యాన్ని చేరుకోవడానికి +, -, *, / ఉపయోగించి సంఖ్యలను కలపండి. చర్య ఫార్మాట్: [i j op] ఇక్కడ i, j సూచికలు మరియు op ఆపరేషన్. ఉదాహరణః [0 2 *] సూచిక 0 వద్ద సంఖ్యను సూచిక 2 వద్ద సంఖ్యతో గుణించాలి. విభజన మొత్తం సంఖ్యలకు మాత్రమే దారి తీస్తుంది."
+  },
+  "board": {
+    "header": "TARGET: {target} అందుబాటులో ఉన్న నంబర్లు: {numbers}",
+    "best": "{observation} ఇప్పటివరకు ఉత్తమమైనది: {best_value} (దూరం: {distance}) ఉత్తమ వ్యక్తీకరణః {best_expression}",
+    "history": "{observation} తరలింపు చరిత్ర: {moves}",
+    "progress": "{observation} ప్రస్తుత పురోగతి స్కోరు: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "చెల్లుబాటు కాని సూచికలు. 0-{max_index} పరిధిలో భిన్నంగా ఉండాలి",
+    "invalid_operation": "Invalid operation (division by zero or non-integer result)"
+  },
+  "outcome": {
+    "win": "పరిపూర్ణ! ఖచ్చితమైన లక్ష్యాన్ని కనుగొన్నారు: {target}",
+    "no_moves": "ఇకపై కదలికలు లేవు. ఉత్తమ ఫలితంః {best_value} (లక్ష్యంః {target})",
+    "turn_limit": "మలుపు పరిమితి చేరుకుంది. ఉత్తమ ఫలితంః {best_value} (లక్ష్యంః {target})"
+  }
+}

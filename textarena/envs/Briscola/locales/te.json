@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "బ్రిస్కోలా ఆట ప్రారంభమైంది! ట్రంప్ సూట్: {trump_suit} (ట్రంప్ కార్డు: {trump_card})"
+  },
+  "prompt": {
+    "intro": "మీరు బ్రిస్కోలా - ప్లేయర్ {player_id} ఆడుతున్నారు. లక్ష్యంః ట్రిక్స్ గెలుచుకోండి మరియు ఎక్కువ పాయింట్లు సేకరించండి (డెక్లో మొత్తం 120 పాయింట్లు). కార్డ్ పాయింట్లుః A = 11, 3 = 10, K = 4, Q = 3, J = 2, ఇతరులు = 0 కార్డ్ పవర్ః A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2 ట్రంప్ కార్డులు శక్తితో సంబంధం లేకుండా ట్రంప్ కాని కార్డులను కొట్టాయి. చర్యః '[play X] ' ఇక్కడ X అనేది మీ చేతిలో ఉన్న కార్డు యొక్క స్థానం (1-{max_pos}) "
+  },
+  "hand": {
+    "none": "కార్డులు లేవు",
+    "empty": "చేతిలో కార్డులు లేవు",
+    "header": "మీ చేతి:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(ట్రంప్)"
+  },
+  "trick": {
+    "empty": "ఇంకా ఈ ట్రిక్ ఏ కార్డులు ఆడాడు.",
+    "header": "ప్రస్తుత ట్రిక్:",
+    "line": "ఆటగాడు {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "ఆటగాడు {player_id}: {points} pts",
+    "trump_info": "ట్రంప్ దావా: {trump_suit}",
+    "trump_info_deck": "ట్రంప్ దావా: {trump_suit} │ డెక్లో మిగిలి ఉన్న కార్డులు: {deck_count}",
+    "board": "{hand} {trick} స్కోర్లుః {scores} {trump_info} [play X] ఉపయోగించి కార్డును ప్లే చేయండి"
+  },
+  "invalid_move": {
+    "wrong_format": "Use [play X] where X is the card position (1, 2, 3, etc.)",
+    "out_of_range": "చెల్లని కార్డు స్థానం. మీకు {count} కార్డులు (1-{count}) ఉన్నాయి"
+  },
+  "action": {
+    "played": "ఆటగాడు {player_id} ఆడాడు {card}",
+    "trick_win": "ఆటగాడు {winner} {card} తో ట్రిక్ గెలుస్తాడు మరియు {points} పాయింట్లు పొందుతాడు!"
+  },
+  "outcome": {
+    "head": "ఆట ముగిసింది! ఆటగాడు {winner} {points} పాయింట్లతో గెలుస్తాడు! తుది స్కోర్లుః {scores}",
+    "player_line": "ఆటగాడు {player_id}: {points} పాయింట్లు ({tricks} ట్రిక్స్) "
+  }
+}
