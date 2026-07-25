@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} nun xogo de HighSociety (versión de 2 xogadores).\nFluxo do xogo: Dez cartas de prestixio son poxadas unha despois da outra.\nPoxa: Cada poxa, escolle secretamente unha carta de diñeiro do 1 ao 11 e revela.\n• A poxa máis alta gaña a carta de prestixio e descarta esa carta de diñeiro.\n• A poxa máis baixa mantén a súa carta de diñeiro.\n• Empate → ambas as poxas son devoltas e a mesma carta de prestixio é repoxada.\nPuntuación: Despois das dez poxas, suma **o diñeiro restante + puntos de prestixio**.\n• O *patrimonio neto* máis alto gaña (empate exacto → empate).\n\n**Sintaxe de acción** → poxa unha carta única como '[7]' ou '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Poxa {round}/10  |  Carta de prestixio: {prize}"
+  },
+  "board": {
+    "money_cards": "As túas cartas de diñeiro restantes: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Debe incluír exactamente unha carta de diñeiro [X].",
+    "card_not_held": "Xa non tes esa carta de diñeiro."
+  },
+  "message": {
+    "tie": "Empate - poxas devoltas. Repoxa!",
+    "auction_result": "P0 poxou {bid0}, P1 poxou {bid1}. O xogador {winner} gaña o prestixio {prize} (total {total})."
+  },
+  "outcome": {
+    "p0_wins": "Patrimonio neto {nw0} > {nw1}",
+    "p1_wins": "Patrimonio neto {nw1} > {nw0}",
+    "draw": "Ambos patrimonios netos {nw0} – empate exacto."
+  }
+}

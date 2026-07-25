@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id}. Estás xogando ao Xogo da Memoria.\nO teu obxectivo é emparellar máis pares de cartas no taboleiro que o teu opoñente.\nNo teu turno, selecciona dúas cartas para darlle a volta introducindo os números de fila e columna da primeira e segunda carta, respectivamente, como '[0 1 1 0]', onde a primeira carta está na fila 0 e columna 1, e a segunda carta está na fila 1 e columna 0.\nSe as dúas cartas coinciden, gañas un punto e as cartas permanecen boca arriba. Se non coinciden, as cartas volven boca abaixo, por exemplo, '.'.\nO xogo remata cando todos os pares foron emparellados."
+  },
+  "board": {
+    "current_board": "Taboleiro actual:\n{board}",
+    "current_game_board": "Taboleiro do Xogo Actual:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movemento incorrecto. O Xogador {player_id} non respondeu cunha dirección válida entre corchetes.",
+    "out_of_bounds": "Movemento incorrecto. O Xogador {player_id} seleccionou unha posición fóra dos límites.",
+    "same_card_twice": "Movemento incorrecto. O Xogador {player_id} seleccionou a mesma carta dúas veces.",
+    "already_matched": "Movemento incorrecto. O Xogador {player_id} seleccionou unha ou ambas cartas que xa foron emparelladas."
+  },
+  "game_message": {
+    "cards_match": "As cartas seleccionadas polo Xogador {player_id} nas posicións [{r1} {c1}] e [{r2} {c2}] coinciden!",
+    "cards_no_match": "As cartas seleccionadas polo Xogador {player_id} non coinciden. As cartas nas posicións [{r1} {c1}] e [{r2} {c2}] son {pos1} e {pos2}, respectivamente."
+  },
+  "outcome": {
+    "draw": "Ambos xogadores emparellaron o mesmo número de pares de cartas.",
+    "win": "O Xogador {winner_id} gañou!",
+    "turn_limit": "Llegouse ao límite de turnos. O xogo rematou. O Xogador 0 puntuou {score_0} puntos, o Xogador 1 puntuou {score_1} puntos.",
+    "turn_limit_win": "{reason} O Xogador {winner_id} gañou!"
+  }
+}

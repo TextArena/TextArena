@@ -1,0 +1,81 @@
+{
+  "_comment": "Ficheiro de localización de Ultimate Texas Hold'em. NON traduzas as claves (lado esquerdo). Só traduce os valores (lado dereito).",
+  "_slots": {
+    "{start_chips}": "Conta inicial de fichas, por exemplo, 1000",
+    "{ante}": "Aposta de ante/cega, por exemplo, 25",
+    "{ante4}": "Catro veces a aposta de ante, por exemplo, 100",
+    "{ante2}": "Dúas veces a aposta de ante, por exemplo, 50",
+    "{round}": "Número da rolda actual",
+    "{chips}": "Conta actual de fichas do xogador",
+    "{hand}": "Lista de cartas separadas por comas, por exemplo, 'A♠, K♥', ou o texto de non ter cartas",
+    "{phase}": "Etiqueta da fase actual (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Lista de accións entre corchetes separadas por comas, por exemplo, '[play_bet_4x], [check]'",
+    "{available}": "Lista de accións entre corchetes separadas por comas dispoñibles actualmente",
+    "{blind}": "Aposta de cega",
+    "{play}": "Aposta de xogo",
+    "{cards}": "Lista de cartas separadas por comas, por exemplo, 'Q♣, 7♦, 2♠'",
+    "{name}": "Nome da man da poker, insertado textualmente",
+    "{amount}": "Cantidade de fichas",
+    "{net}": "Cambio neto de fichas para a rolda (pode ser negativo)",
+    "{max_turns}": "Número máximo de roldas",
+    "{winner_rounds}": "Número de roldas completadas"
+  },
+  "player_prompt": {
+    "no_cards": "Aínda non hai cartas",
+    "rules": "🎯 TEXAS HOLD'EM DEFINITIVO - Un xogador contra o repartidor\n\n📖 VISIÓN XERAL DO XOGO:\n• Comezas con {start_chips} fichas\n• Baralla única de 52 cartas (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Xogas contra o repartidor (banca)\n• Cada rolda segue a estrutura do Ultimate Texas Hold'em: publicas apostas ANTE e BLIND, recibes 2 cartas ocultas, decides sobre apostas PLAY opcionais nas fases de aposta, logo revelas as cartas comunitarias e comparas a mellor man de 5 cartas contra a do repartidor. O teu obxectivo é maximizar as túas ganancias (cando tes a mellor man), minimizando as túas perdas (cando tes a peor man).\n• O xogo remata cando chegas a 0 fichas ou menos ao comezo da rolda (DERROTA) ou cumples 1000 roldas con fichas (VITORIA)\n\n💰 ESTRUTURA DE APOSTAS:\n• ANTE: Aposta obrigatoria de ${ante} cada rolda\n• BLIND: Aposta obrigatoria de ${ante} cada rolda\n• XOGAR: Aposta opcional durante o xogo. Ao longo da rolda, só podes elixir UNHA das seguintes: (${ante4} se se fai no PRE-FLOP, ${ante2} se se fai no FLOP, ou ${ante} se se fai no RIVER. Tamén podes [fold] no river, renunciando á man e sen facer ningunha aposta.)\n\n🎴 REPARTICIÓN DE CARTAS:\n• Recibes 2 cartas boca arriba (as túas cartas ocultas)\n• O repartidor recibe 2 cartas boca abaixo (ocultas para ti)\n• 5 cartas comunitarias son repartidas boca abaixo inicialmente\n• As cartas comunitarias son reveladas progresivamente ao longo das fases do xogo\n\n🏆 CALIFICACIÓN DO REPARTIDOR:\n• O repartidor debe ter polo menos unha PARELLA (2 cartas do mesmo rango) para calificar, utilizando as 2 cartas na súa man e as 5 cartas comunitarias.\n• A calificación do repartidor afecta os resultados das apostas, como se explicará máis adiante.\n\n🎮 FASES DO XOGO E ACCIÓNS:\n📋 PRE-FLOP:\n  • Accións: [4x] (${ante4}) ou [check]\n  • [4x]: Coloca a aposta de xogo de ${ante4}, revela as 3 primeiras cartas comunitarias\n  • [check]: Sen aposta adicional, revela as 3 primeiras cartas comunitarias\n\n📋 FLOP:\n  • Se se realiza unha aposta de 4x: Só está dispoñible [skip] (revela automaticamente as dúas últimas cartas comunitarias)\n  • Se non hai aposta de 4x: [2x] (${ante2}) ou [check]\n  • [2x]: Coloca unha aposta de xogo de ${ante2} PLAY, revela as dúas últimas cartas comunitarias\n  • [check]: Sen aposta adicional, revela as dúas últimas cartas comunitarias\n\n📋 RIVER:\n  • Se apostouse 4x ou 2x: Só está dispoñible [skip] (prosegue automaticamente ao showdown)\n  • Se non hai unha aposta PLAY previa: [1x] (${ante}) ou [fold]\n  • [1x]: Coloca unha aposta PLAY de ${ante}, prosegue ao showdown\n  • [fold]: Rende a man, perde as apostas ANTE e BLIND\n\n📋 SHOWDOWN:\n  • Revelanse e evalúanse todas as cartas\n  • Mellor man de 5 cartas de 7 cartas (2 ocultas + 5 comunitarias)\n  • As apostas resólvense segundo as regras de pago\n\n💎 PAGOS DA APOSTA:\n📊 APOSTA ANTE:\n  • O repartidor non se cualifica: PUSH (aposta devolta)\n  • O repartidor se cualifica e ti gañas: pago 1:1 (aposta + gañancias)\n  • O repartidor se cualifica e ti perdes: Aposta perdida\n  • Empate: PUSH (aposta devolta)\n\n📊 APOSTA CEGA:\n  • Non afectada pola cualificación do repartidor\n  • Gañas: Aposta devolta e pago adicional baseado na forza da túa man\n  • Perdes: Aposta perdida\n  • Empate: PUSH (aposta devolta)\n\n📊 TABOA DE PAGAMENTO DA APOSTA CEGA:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Catro do mesmo: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Menos que Straight: Sen pago adicional\n\n📊 XOGA APOSTA:\n  • Non afectada pola cualificación do repartidor\n  • Comparación directa: A túa mellor man vs A mellor man do repartidor\n  • Ti gañas: Pago 1:1 (aposta + gañancias)\n  • Ti perdes: Aposta perdida\n  • Empate: PUSH (aposta devolta)\n\n🎯 CLASIFICACIÓN DAS MANS DE PÓKER (De mellor a peor):\n  1. Royal Flush: A-K-Q-J-10 da mesma cor\n  2. Straight Flush: 5 cartas consecutivas da mesma cor\n  3. Catro do mesmo: 4 cartas do mesmo rango\n  4. Full House: 3 do mesmo + 2 do mesmo\n  5. Flush: 5 cartas da mesma cor\n  6. Straight: 5 cartas consecutivas\n  7. Tres do mesmo: 3 cartas do mesmo rango\n  8. Dúas parellas: 2 parellas de rangos diferentes\n  9. Unha parella: 2 cartas do mesmo rango\n  10. Carta alta: Gaña a carta máis alta\n\n⌨️  COMANDOS DE ACCIÓN:\n• [4x] ou [play bet 4x]: Coloca ${{self.ante_amount*4}} aposta de PLAY\n• [2x] ou [play bet 2x]: Coloca ${{self.ante_amount*2}} aposta de PLAY\n• [1x] ou [play bet 1x]: Coloca ${{self.ante_amount*1}} aposta de PLAY\n• [check] ou [c]: Comprobar (sen aposta adicional)\n• [fold] ou [f]: Rendirse (abandonar a man)\n• [skip] ou [s]: Saltar á seguinte fase (cando non se require acción)\n\n💡 CONSELLOS DE ESTRATEXIA:\n• As mans fortes iniciais (parellas, cartas altas) xustifican a miúdo apostas de 4x\n• Considera a cualificación do repartidor - as mans débiles poden empuxar se o repartidor non se cualifica\n• A aposta CEGA pode ser moi rendible con mans fortes (Royal Flush = 500:1!)\n• Vixía a túa morea de fichas! Se vai a 0 ou abaixo ao comezo da rolda, perdes.\n\n⚠️  NOTAS IMPORTANTES:\n• As apostas ANTE e BLIND son obrigatorias en cada rolda\n• As apostas PLAY son opcionais e estratéxicas\n• Asegúrate de introducir a acción correcta, e só unha acción á vez.\n\n",
+    "state": "🎯 ROLDA {round}\n💰 Fichas: {chips}\n🎴 A túa man: {hand}\n📊 Apostas actuais: Ante ${ante}, Cega ${blind}, Xogo ${play}\n📋 Fase: {phase}\n🎯 Accións dispoñibles: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 ROLDA {round} comezou! Apostas: ANTE ${ante}, CEGA ${blind}. Tes {chips} fichas restantes.",
+    "your_hand": "🎴 A túa man: {hand}",
+    "flop_revealed": "🃏 FLOP revelado: {cards}",
+    "river_revealed": "🃏 RIVER revelado: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Acción inválida para a fase actual. Accións dispoñibles: {available}",
+    "message": "❌ Acción inválida! Accións dispoñibles: {available}"
+  },
+  "action": {
+    "folded": "🃏 Dobraches."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Man do repartidor: {cards}",
+    "community_cards": "🃏 Cartas comunitarias: {cards}",
+    "player_best": "🎴 Mellor man do xogador: {name} ({cards})",
+    "dealer_best": "🎴 Mellor man do repartidor: {name} ({cards})",
+    "ante_lost_folded": "❌ Aposta de ANTE PERDIDA! -${ante} (dobrada)",
+    "blind_lost_folded": "❌ Aposta de CEGA PERDIDA! -${blind} (dobrada)",
+    "ante_won": "✅ Aposta de ANTE GANADA! +${amount}",
+    "ante_pushed": "🔄 Aposta de ANTE EMPATADA! ${ante} devolta",
+    "ante_lost": "❌ Aposta de ANTE PERDIDA! -${ante}",
+    "blind_won": "✅ Aposta de CEGA GANADA! +${amount}",
+    "blind_pushed": "🔄 Aposta de CEGA EMPATADA! ${blind} devolta",
+    "blind_lost": "❌ Aposta de CEGA PERDIDA! -${blind}",
+    "play_won": "✅ Aposta de XOGO GANADA! +${amount}",
+    "play_pushed": "🔄 Aposta de XOGO EMPATADA! ${play} devolta",
+    "play_lost": "❌ Aposta de XOGO PERDIDA! -${play}",
+    "net_gain": "🎉 ROLDA {round} completada! Ganancia neta: +${net}",
+    "net_loss": "💸 ROLDA {round} completada! Perda neta: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 XOGO REMATADO! {max_turns} roldas completadas. Tes ${chips} fichas - GANACHES!",
+    "game_over_lose": "🏁 XOGO REMATADO! Estás sen fichas. O repartidor gaña!",
+    "reward_win": "Xogador completou {winner_rounds} roldas con ${chips} fichas",
+    "reward_lose": "Xogador quedou sen fichas na rolda {round}",
+    "reward_win_max": "Xogador completou {max_turns} roldas con ${chips} fichas"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Cuatro do mesmo",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Tres do mesmo",
+    "two_pair": "Dúas parellas",
+    "one_pair": "Unha parella",
+    "high_card": "Carta alta",
+    "unknown": "Man descoñecida"
+  }
+}

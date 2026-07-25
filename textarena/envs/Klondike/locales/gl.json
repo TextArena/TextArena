@@ -1,0 +1,74 @@
+{
+  "_comment": "Ficheiro de localización de Klondike Solitaire. NON traduzas as claves (lado esquerdo). Só traduce os valores (lado dereito).",
+  "_slots": {
+    "{n}": "Índice de acción dentro dun comando separado por comas, baseado en 1",
+    "{msg}": "Unha mensaxe de resultado de acción anidada (xa localizada)",
+    "{count}": "Número de cartas boca arriba que se están movendo",
+    "{src}": "Número da pila de orixe, baseado en 1",
+    "{dst}": "Número da pila de destino, baseado en 1",
+    "{cmd}": "O comando descoñecido que o xogador escribiu (non traducido)",
+    "{max_turns}": "O número máximo de xogadas antes de que o xogo remate",
+    "{score}": "Número de cartas actualmente nas pilas de fundación",
+    "{board}": "O taboleiro ASCII renderizado (nunca traducir)",
+    "{turn}": "Número de xogada actual",
+    "{stock}": "Número de cartas que quedan no stock",
+    "{waste}": "A etiqueta da carta superior do waste, ou '--' se está baleiro (nunca traducir)",
+    "{cards}": "As cartas nunha pila como etiquetas neutras, ou '--' se está baleiro (nunca traducir)"
+  },
+  "player_prompt": {
+    "intro": "Estás xogando ao Klondike Solitaire. O teu obxectivo é mover todas as cartas ás pilas de fundación.\n\nRegras do xogo:\n- Pilas de fundación (F1-F4): Constrúe desde o As ata o Rei do mesmo pau\n- Pilas de tableau (T1-T7): Constrúe cara abaixo alternando cores (vermello sobre negro, negro sobre vermello)\n- Stock: Debuxa cartas á pila de waste\n- Waste (W): A carta superior está dispoñible para xogar\n\nComandos:\n- 'draw' - Debuxa cartas do stock ao waste\n- 'move <orixe> <destino> [count]' - Move cartas entre pilas\n  Exemplos: 'move W T1', 'move T1 F2', 'move T3 T5 2'. O count tamén pode ser 'all', que intentará mover todas as cartas boca arriba.\n- 'forfeit' - Remata o xogo inmediatamente e bloquea a túa puntuación actual\n- Nomes de pilas: W (waste), F1-F4 (fundacións), T1-T7 (tableau)\n\nPodes executar accións múltiples nunha xogada separándoas con comas:\n  Exemplo: 'draw, move W T1, move T2 F1'\n\nSó os Reis poden ser colocados en pilas de tableau baleiras.\nAs accións execútanse en orde - se unha falla, as accións restantes son omitidas.\nUsa 'forfeit' se crés que o xogo é imposible de gañar."
+  },
+  "format_error": {
+    "no_brackets": "Formato de acción non válido. A acción debe estar entre corchetes.",
+    "no_closing_bracket": "Formato de acción non válido. Falta o corchete de peche ']'",
+    "empty_command": "Comando baleiro. Escribe 'draw' ou 'move <orixe> <destino> [count]'",
+    "empty_action": "Acción baleira",
+    "move_needs_args": "O comando move require orixe e destino. Uso: 'move <orixe> <destino> [count]'",
+    "count_positive": "O count debe ser positivo ou 'all'",
+    "count_invalid": "Count non válido. Usa un número ou 'all'",
+    "unknown_command": "Comando descoñecido '{cmd}'. Usa 'draw', 'move <orixe> <destino> [count]', ou 'forfeit'",
+    "wrapped": "Acción {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Acción {n}: {msg}",
+    "before_failure": "Executouse {n} acción(s) antes do fallo.",
+    "failed": "Acción {n} fallou: {msg}"
+  },
+  "move_result": {
+    "drew": "Debuxouse carta(s) do stock ao waste.",
+    "cannot_draw": "Non se pode debuxar. Tanto o stock como o waste están baleiros.",
+    "invalid_pile": "Nome de pila non válido. Usa W, F1-F4, ou T1-T7",
+    "foundation_one_card": "Só se pode mover 1 carta á fundación",
+    "waste_to_foundation_ok": "Moveuse carta do waste á fundación F{dst}",
+    "waste_to_foundation_bad": "Non se pode mover carta do waste a esa pila de fundación",
+    "tableau_to_foundation_ok": "Moveuse carta do tableau T{src} á fundación F{dst}",
+    "tableau_to_foundation_bad": "Non se pode mover carta do tableau a esa pila de fundación",
+    "foundation_to_foundation": "Non se pode mover de fundación a fundación",
+    "waste_to_tableau_one_card": "Só se pode mover 1 carta do waste ao tableau",
+    "waste_to_tableau_ok": "Moveuse carta do waste ao tableau T{dst}",
+    "waste_to_tableau_bad": "Non se pode colocar carta do waste nesa pila de tableau",
+    "no_face_up": "Non hai cartas boca arriba para mover",
+    "tableau_to_tableau_ok": "Moveuse {count} carta(s) do tableau T{src} ao T{dst}",
+    "tableau_to_tableau_bad": "Non se pode mover {count} carta(s) do T{src} ao T{dst}",
+    "foundation_to_tableau_one_card": "Só se pode mover 1 carta da fundación ao tableau",
+    "foundation_empty": "A fundación F{src} está baleira",
+    "foundation_to_tableau_ok": "Moveuse carta da fundación F{src} ao tableau T{dst}",
+    "foundation_to_tableau_bad": "Non se pode colocar carta da fundación no tableau T{dst}",
+    "to_waste_or_stock": "Non se pode mover ao waste ou stock"
+  },
+  "outcome": {
+    "forfeit": "Xogo abandonado. Puntuación final: {score} cartas en fundacións.",
+    "won": "Parabéns! Gañaches o Klondike Solitaire!",
+    "turn_limit": "Xogo rematado! Chegaches ao máximo de {max_turns} xogadas. Puntuación: {score} cartas en fundacións."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Xogada: {turn}/{max_turns}",
+    "stock": "Stock: {stock} cartas",
+    "waste": "Waste (W): {waste}",
+    "foundations_header": "Fundacións:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

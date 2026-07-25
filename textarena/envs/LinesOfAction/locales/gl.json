@@ -1,0 +1,36 @@
+{
+  "_comment": "Ficheiro de localización de LinesOfAction. NON traduzas as claves (lado esquerdo). Só traduce os valores (lado dereito). Nunca traduzas as coordenadas do taboleiro (a-h, 1-8), as letras das pezas (O, X), o token de formato de movemento ou a grella ASCII {board}.",
+  "_slots": {
+    "{player_id}": "O número do xogador, 0 ou 1",
+    "{side}": "A letra da peza do xogador, O ou X",
+    "{other}": "A letra da peza do opoñente, O ou X",
+    "{board}": "A representación ASCII do taboleiro; mantén como está",
+    "{coord}": "Unha coordenada do taboleiro como b1 ou a3",
+    "{from}": "A coordenada de orixe dun movemento, como b1",
+    "{to}": "A coordenada de destino dun movemento, como b3"
+  },
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} no xogo de LinesOfAction.\nAs túas pezas son '{side}', as pezas do opoñente son '{other}'.\nFormato de movemento: `[b1b3]` (de coordenada a coordenada). Un movemento legal viaxa horizontalmente, verticalmente ou diagonalmente un número de cadrados igual ao total de pezas (de calquera cor) nesa liña. Podes saltar sobre as túas propias pezas, pero non sobre as pezas do opoñente; aterrar sobre un opoñente captúrao.  Gaña cando todas as túas pezas estean conectadas en 8 veciños."
+  },
+  "board": {
+    "current_board": "Taboleiro:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "O formato debe ser e2e4 (coordenadas de, para).",
+    "no_piece": "Non hai peza {side} en {coord}.",
+    "identical": "A orixe e o destino son idénticos.",
+    "not_straight_or_diagonal": "O movemento debe ser recto ou diagonal.",
+    "wrong_distance": "Debe moverse unha distancia igual ao número de pezas na liña.",
+    "enemy_blocks": "Unha peza inimiga bloquea o camiño.",
+    "destination_own": "O destino está ocupado pola túa propia peza."
+  },
+  "game_action": {
+    "moved": "O Xogador {player_id} moveu {from} -> {to}",
+    "captured_suffix": "O Xogador {player_id} moveu {from} -> {to} capturando un inimigo."
+  },
+  "outcome": {
+    "win": "Todas as pezas están conectadas.",
+    "draw_no_capture": "60 movementos sen captura.",
+    "draw_repetition": "A posición repetiuse tres veces."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "Cadeas orientadas ao usuario para Liar's Dice. Os tokens de acción entre corchetes ('[Bid: X, Y]', '[Call]'), os identificadores de xogador, os valores das caras dos dados, as cantidades e os contadores son slots neutrais e nunca deben traducirse.",
+  "_slots": {
+    "player_id": "índice do xogador (inteiro)",
+    "num_players": "número de xogadores no xogo (inteiro)",
+    "dice_summary": "conto pre-renderizado de dados restantes por xogador, unidos por '; '",
+    "your_dice": "lista pre-renderizada de valores das caras dos dados deste xogador, unidos por comas",
+    "p": "índice do xogador (inteiro)",
+    "d": "conto de dados restantes para ese xogador (inteiro)",
+    "current_player_id": "índice do xogador que chamou (inteiro)",
+    "face_value": "valor da cara do dado que se está contando (1-6)",
+    "count": "número real de dados coincidentes (inteiro)",
+    "quantity": "cantidade de oferta (inteiro)",
+    "loser_id": "índice do xogador que perde un dado (inteiro)",
+    "new_quantity": "cantidade de oferta que se acaba de enviar (inteiro)",
+    "current_quantity": "cantidade de oferta actual (inteiro)",
+    "new_face_value": "valor da cara do dado que se acaba de enviar (inteiro)",
+    "current_face_value": "valor da cara do dado actual (inteiro)",
+    "action": "cadea de acción raw que o xogador enviou",
+    "reason": "razón anidada de rexeitamento de oferta",
+    "winner": "índice do xogador que gaña (inteiro)",
+    "final_ranking": "lista de índices de xogadores desde o primeiro eliminado até o gañador"
+  },
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} nun xogo de Liar's Dice de {num_players} xogadores.\nRegras:\n- No teu turno, podes:\n  1) Facer unha nova oferta cunha cantidade maior ou un valor de cara maior (ou ambos) que a oferta actual; por exemplo, '[Bid: 3, 4]',\n  2) Chamar a última oferta escribindo '[Call]'.\n\nSe chamas:\n  - Se o conto real dese valor de cara entre todos os dados é menor que a oferta, o último ofertante perde un dado.\n  - De outro xeito, o que chama perde un dado.\nUn xogador que chega a 0 dados é eliminado. O último xogador restante gaña."
+  },
+  "board": {
+    "per_player": "\tXogador {p}: {d}",
+    "new_round": "\nNova rolda - Dados restantes: {dice_summary}\nOs teus dados actuais son: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "O Xogador {current_player_id} chama! O conto real do valor de cara {face_value} é {count}, que é MENOR que {quantity}.\nO Xogador {loser_id} (o último ofertante) perde un dado.",
+    "caller_loses": "O Xogador {current_player_id} chama! O conto real do valor de cara {face_value} é {count}, que é >= {quantity}.\nO Xogador {loser_id} (o que chama) perde un dado."
+  },
+  "action": {
+    "bid_announce": "O Xogador {player_id} ofrece {quantity} do valor de cara {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Chamada feita sen oferta previa.",
+    "invalid_bid": "Oferta inválida: {reason}",
+    "not_recognized": "Acción non recoñecida como unha oferta válida '[Bid: X, Y]' ou '[Call]'. Acción enviada: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "A nova cantidade {new_quantity} é menor que a actual {current_quantity}.",
+    "face_lower": "O novo valor de cara {new_face_value} é menor que o actual {current_face_value}.",
+    "identical": "A oferta é idéntica á oferta actual.",
+    "face_range": "O valor de cara debe estar entre 1 e 6."
+  },
+  "message": {
+    "eliminated_invalid": "O Xogador {player_id} foi eliminado por movemento inválido."
+  },
+  "outcome": {
+    "win": "O Xogador {winner} gaña! Clasificación final: {final_ranking}"
+  }
+}
