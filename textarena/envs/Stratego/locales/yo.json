@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "O jẹ Ọṣẹré {player_id} ni Stratego.\nOjuṣe rẹ jẹ ki o mu Flagu ti ọṣẹré ọṣẹ ati ki o pa gbogbo awọn ọna ti wọn.\nAṣẹ rẹ ti a ti ṣe fun ọ si lori bọọdu, pẹlu Flagu rẹ, Bombu, ati awọn ọna miiran ti iru.\n\n### Awọn ọrọ aṣẹ\n1. **Awọn ọrọ iṣẹ:**\n   - Ni ọjọ rẹ, o le gbe ọna kan ni ọna kan si ọna ti o wọ si (ẹgbẹ, ẹsẹ, otun, tabi osi) ti a ti ṣe fun ọ.\n   - Aṣẹ: Ọna kan le gbe lati A1 si B1 tabi A1 si A2 ti B1 ati A2 ko ti ṣe fun ọṣẹré rẹ.\n   - Ti ọna ti a yan jẹ Bombu tabi Flagu, ko le gbe.\n2. **Iṣẹ:**\n   - Ti o gbe si ọna ti ọṣẹré ọṣẹ, iṣẹ yẹẹ.\n     - Ọna pẹlu iru kekere yẹẹ.\n     - Ti iru wọn jẹ aṣẹ, ọna wọnyi padà si oju-ọna.\n     - **Awọn ọrọ pataki:**\n       - Bombu pa ọna ti n ṣe aṣẹ, ṣugbọn oni-mina le defuse Bombu.\n       - Oni-ẹṣẹ le yẹẹ marshalli ti o ṣe aṣẹ akọkọ ṣugbọn o pa si ọna miiran.\n3. **Awọn ojuṣe aṣẹ:**\n   - Ṣe ọṣẹré ọṣẹ pẹlu iṣẹ wọn ati awọn iṣẹ.\n   - Mu Flagu ti ọṣẹré ọṣẹ ṣugbọn ṣe ọna rẹ.\n   - Ṣe Scoutu ni aṣẹ lati gba ọrọ pẹlu ọṣẹré ọṣẹ ati ki o yẹẹ ọna ti o ṣe aṣẹ.\n\n### Bawo ni o ṣe aṣẹ:\n1. Ṣe aṣẹ ọna ti o fe gbe ati ọna ti o si wọ si.\n2. Ṣe aṣẹ ni formati: [A0 B0], nibiti A0 jẹ ọna ti a ti ṣe fun ọ ati B0 jẹ ọna ti o si wọ si.\n   - Aṣẹ: Latiti gbe ọna kan lati ẹgbẹ 0, osi 0 si ẹgbẹ 1, osi 0, ṣe aṣẹ [A0 B0].\n3. Ṣe ọna ti o si wọ si jẹ aṣẹ pẹlu awọn ọrọ iṣẹ lọwọ.\n\n### Awọn ọrọ pataki:\n- Bọọdu yẹẹ ọna rẹ ati awọn ipo wọn, gẹgẹbi MN, MS.\n- Bọọdu yẹẹ ipo ti ọṣẹré ọṣẹ pẹlu awọn ọna wọn ṣugbọn ko ṣe aṣẹ iru wọn, gẹgẹbi ?.\n- Gridi pẹlu ~ jẹ odo ati ko le gbe si.\n- Gẹgẹbi aṣẹ, bẹrẹ ọjọ rẹ ni ọna ti o wọ si lori awọn ọna ti o ṣe aṣẹ lati gba ọrọ pẹlu ọṣẹré ọṣẹ. Ọṣẹré 0 ati ọṣẹré 1 lori awọn ọna ti wọn ni ẹgbẹ D ati G ṣeẹṣẹ.\n\nEyi jẹ ipo bọọdu lọwọ:\n"
+  },
+  "board": {
+    "current_board": "Current Board:\n\n{board}\nAvailable Moves: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Àdàkọ ìgbésẹ̀ tí kò bágbà mu. Olùṣeré {player_id} kò tẹ ìgbésẹ̀ kan sínú àdàkọ [A0 B0].",
+    "invalid_coordinates": "Àdàkọ ìgbésẹ̀ tí kò bágbà mu. Olùṣeré {player_id} kò tẹ àwọn àpapọ̀ ìsọfúnni tó bágbà mu wọlé.",
+    "not_own_piece": "Àdàkọ ìgbésẹ̀ tí kò bágbà mu. Ẹnìkan {player_id} gbọdọ̀ yí òkan nínú àwọn ẹ̀yà ara rẹ̀.",
+    "scout_through_pieces": "Invalid action format. Player {player_id} cannot move a scout through other pieces.",
+    "scout_diagonal": "Invalid action format. Player {player_id} cannot move a scout diagonally.",
+    "non_scout_multi_square": "Àkọlé ìgbésẹ̀ tí kò bágbà mu. Àwọn ẹyọ, àyàfi àwọn aṣojú, lè ṣí àlàfo kan ní ẹ̀ẹ̀kan.",
+    "move_into_lake": "Àdàkọ ìgbésẹ̀ tí kò bágbà mu. Ẹ̀yà eré {player_id} kò lè lọ sínú adágún.",
+    "move_onto_own_piece": "Aṣẹ aṣẹ ko ṣe aṣẹ. Ọṣẹré {player_id} ko le gbe si ọna rẹ.",
+    "move_bomb_or_flag": "Aṣẹ aṣẹ ko ṣe aṣẹ. Ọṣẹré {player_id} ko le gbe bombu tabi flagu."
+  },
+  "game_action": {
+    "you_moved": "O ti gbe nkan rẹ lati {source} si {dest}.",
+    "opponent_moved": "Ẹ̀yà tí {player_id} ti gbé láti {source} sí {dest}.",
+    "you_equal_ranks": "O ti gbe nkan rẹ lati {source} si {dest}. Ẹya ikọlu jẹ {attacking_rank} ati pe nkan ti o lọ si jẹ {target_rank}. Bi awọn ipo naa ṣe jẹ kanna, awọn nkan mejeeji padanu.",
+    "opponent_equal_ranks": "Ọṣẹré {player_id} ti gbe ọna kan lati {source} si {dest}. Ọna ti n ṣe aṣẹ yìí jẹ {attacking_rank} ati pe ọna ti o si wọ si jẹ {target_rank}. Nigba ti iru wọn jẹ aṣẹ, ọna wọnyi padà si oju-ọna.",
+    "you_miner_defused": "O ti gbe nkan rẹ lati {source} si {dest}. Ẹya ikọlu jẹ {attacking_rank} ati pe nkan ti o wa ni {target_rank}. Bi awọn oniwakiri le ṣe imukuro awọn bombu, o ṣẹgun ogun naa.",
+    "opponent_miner_defused": "Ọṣẹré {player_id} ti gbe ọna kan lati {source} si {dest}. Ọna ti n ṣe aṣẹ yìí jẹ {attacking_rank} ati pe ọna ti o si wọ si jẹ {target_rank}. Nigba ti oni-mina le defuse bombu, o gbeja ṣaṣẹ na.",
+    "you_bomb_lost": "O ti gbe nkan rẹ lati {source} si {dest}. Ẹya ikọlu jẹ {attacking_rank} ati pe nkan ti o wa ni {target_rank}. Bi o ṣe jẹ pe ikọlu kii ṣe oniwakiri, o padanu ogun naa.",
+    "opponent_bomb_won": "Ọṣẹré {player_id} ti gbe ọna kan lati {source} si {dest}. Ọna ti n ṣe aṣẹ yìí jẹ {attacking_rank} ati pe ọna ti o si wọ si jẹ {target_rank}. Nigba ti aṣẹ ti n ṣe aṣẹ ko jẹ oni-mina, o gbeja ṣaṣẹ na.",
+    "you_spy_won": "O ti gbe nkan rẹ lati {source} si {dest}. Ẹya ikọlu jẹ {attacking_rank} ati pe ibi-afẹde jẹ {target_rank}. Bi o ṣe jẹ pe ikọlu jẹ amí ati ibi-afẹde jẹ marshall, o ṣẹgun ogun naa.",
+    "opponent_spy_lost": "Ọṣẹré {player_id} ti gbe ọna kan lati {source} si {dest}. Ọna ti n ṣe aṣẹ yìí jẹ {attacking_rank} ati pe ọna ti o si wọ si jẹ {target_rank}. Nigba ti aṣẹ ti n ṣe aṣẹ jẹ oni-ẹṣẹ ati pe ọna ti o si wọ si jẹ marshalli, o gbeja ṣaṣẹ na.",
+    "you_higher_won": "O ti gbe nkan rẹ lati {source} si {dest}. Ẹya ikọlu jẹ {attacking_rank} ati pe nkan ti o lọ si jẹ {target_rank}. Bi o ṣe jẹ pe ikọlu jẹ ipo ti o ga julọ ju ibi ti o lọ, o ṣẹgun ogun naa.",
+    "opponent_higher_lost": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a higher rank than the destination, you lost the battle.",
+    "you_lower_lost": "O ti gbe nkan rẹ lati {source} si {dest}. Ẹya ikọlu jẹ {attacking_rank} ati pe nkan ti o lọ si jẹ {target_rank}. Bi o ṣe jẹ pe ikọlu jẹ ipo kekere ju ibi ti o lọ, o padanu ogun naa.",
+    "opponent_lower_won": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a lower rank than the destination, you won the battle."
+  },
+  "outcome": {
+    "flag_captured": "Ẹ̀yin òṣèré {player_id} ti gba àsíá àwọn alátakò!",
+    "no_movable_pieces": "Ẹnìkan {winner_id} ló borí! Ẹnìkan {loser_id} kò ní àwọn ẹyọ tí ó ṣeé yí padà mọ́."
+  }
+}

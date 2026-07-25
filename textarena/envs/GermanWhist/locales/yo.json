@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Ìdárayá náà bẹ̀rẹ̀. Àwo Trump: {trump_suit} (àwo Trump: {trump_str}).",
+    "no_trump_card": "kò sí"
+  },
+  "player_prompt": {
+    "intro": "O jẹ Player {player_id} ni German Whist. {phase_info} O ni awọn kaadi {hand_size}. Mu kaadi kan pẹlu '[play N]', nibiti N jẹ ipo rẹ ni ọwọ rẹ (fun apẹẹrẹ '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "ÌGBÀ ÌṢÉ: Àpótí náà ti tán. Gbogbo ẹ̀tàn láti ìsinsìnyí lọ yóò ṣe pàtàkì fún ìṣẹ́gun."
+  },
+  "next_card": {
+    "playing_phase": "Kò sí káàdì kankan tí wọ́n ń fúnni - apá tí wọ́n ń fi tajútajú tajútajú ti bẹ̀rẹ̀.",
+    "deck_empty": "Kò sí káàdì kankan nínú àpò náà.",
+    "available": "Kaadi ti a funni: {card}",
+    "available_trump": "Kaadi ti a funni: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Àdàkọ ìyípò tí kò bá bófin mu. Lo '[play N]' láti fi kaadi Nth tí o ní sí ọwọ́ rẹ.",
+    "bad_position": "Àyè kàrátì náà kò sí. O ní kàrátì {hand_size}.",
+    "must_follow_suit": "O gbọdọ tẹ̀lé àpẹẹrẹ wọn, kí o sì fi káàdì {lead_suit} ṣeré.",
+    "invalid_play": "A ò lè fi káàdì yẹn ṣeré."
+  },
+  "game_action": {
+    "played": "Olùṣeré {player_id} ń ṣeré {card}."
+  },
+  "trick": {
+    "won": "Ẹnìkan tí ó bá ní {winner_id} yóò gba ẹ̀bùn náà pẹ̀lú {card}.",
+    "won_learning": "Ẹnìkan tí ó bá ní {winner_id} yóò gba ẹ̀bùn náà pẹ̀lú {card} yóò sì gba káàdì tí ó wà ní ojú."
+  },
+  "phase": {
+    "learning_complete": "Àpótí náà ti tán. Ìpele ìkọ́nilẹ́kọ̀ọ́ náà ti parí - gbogbo ọgbọ́n tó kù ló ṣe pàtàkì fún ìṣẹ́gun."
+  },
+  "draw": {
+    "winner_received": "O gba ẹ̀tan náà o sì gba {card}.",
+    "loser_received": "O pàdánù ẹ̀tàn náà o sì fa {card} láti inú àgbá náà.",
+    "winner_preview": "Kaadi ti o tẹle ti a fun ni ni {card}."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "Àwọn ẹ̀tàn tí a ti ṣẹ́gun títí di àkókò yìí - Ẹ̀yà 0: {tricks0}, Ẹ̀yà 1: {tricks1}",
+    "scores_playing": "Àwọn ẹ̀tàn tí ó ń mú kí wọ́n gba àmì - Ẹ̀yà 0: {tricks0}, Ẹ̀yà 1: {tricks1}",
+    "phase": "Ìpele: {phase}",
+    "phase_learning": "Ìpele: {phase} ({remaining_cards} àwọn káàdì tí ó kù nínú àpò)"
+  },
+  "hand": {
+    "no_cards": "Kò sí káàdì",
+    "no_cards_in_hand": "Kò sí káàdì kankan ní ọwọ́",
+    "header": "Ọwọ́ rẹ:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation} {suit} {trump_indicator}: ì ì ì ì ì ì ì ì ì",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Kò tíì sí ẹni tó ń fi káàdì ṣeré yìí.",
+    "header": "Ìdánwò òde òní:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation} Olùṣeré {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Ìdárayá kò bẹ̀rẹ̀",
+    "header": "=== ÌDÁKÒTÓ ÀWỌN JẸ́Ẹ́MÁN ===",
+    "phase": "{observation} Ìpele: {phase}",
+    "trump_suit": "{observation} Àwo Trump: {trump_suit}",
+    "trump_card": "{observation}\nTrump card: {card}",
+    "cards_left": "{observation} Àwọn káàdì tí ó kù nínú àgbá: {count}",
+    "next_card": "{observation} Kaadi tó tẹ̀lé fún olùborí: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Ìdánwò tó wà nísinsìnyí:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation} Olùṣeré {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} Olùṣeré {player_id}: {scoring} ìkópa ẹ̀tàn ({tricks} lapapọ), {hand_size} káàdì ní ọwọ́"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

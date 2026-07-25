@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "O n ṣere Solitaire Klondike. Ọna re ni lati mu kaadi gbogbo lo si ipile ifowopamo.\n\nOfin Ẹrọ:\n- Ipile ifowopamo (F1-F4): Gba lati Ace de King ninu agbada\n- Ipile itable (T1-T7): Gba sori ni awon okun irawo (bulu lonu dudu, dudu lonu funfun)\n- Ifowopamo: Sa kaadi lo si ipile ikoko\n- Ikoko (W): Kaadi to ga julọ ti o wa fun ṣere\n\nAṣẹ:\n- 'sa' - Sa kaadi lati ifowopamo lo si ikoko\n- 'mu <ori> <ipade> [count]' - Mu kaadi laarin awon ipile\n  Aṣẹ: 'mu W T1', 'mu T1 F2', 'mu T3 T5 2'. iye kaadi ti o le 'gbogbo', ti yio ṣe atunṣe gbogbo awon kaadi to ga julọ.\n- 'yọ' - Pari ẹrọ naa gbangba ati ṣeto ọna re yẹẹ.\n- Oruko ipile: W (ikoko), F1-F4 (ifowopamo), T1-T7 (itable)\n\nO le ṣe amọṣẹ multiple ninu ọkan ṣe pẹlu kọmọṣẹ:\n  Aṣẹ: 'sa, mu W T1, mu T2 F1'\n\nBakanna ni ṣọṣọ ti a le fi si ipile itable to kẹhìn.\nAṣẹ ṣe ni ọdọ - ti eyi ko ṣe alẹ, awon aṣẹ miiran yio ṣọṣọ.\nAmọ ṣe 'yọ' ti o ba gbagbo pe ẹrọ naa ko ṣe ṣeṣe lati gba."
+  },
+  "format_error": {
+    "no_brackets": "Àkọlé ìgbésẹ̀ tí kò bá tọ́. Ìgbésẹ̀ náà gbọ́dọ̀ wà nínú àlàfo.",
+    "no_closing_bracket": "Àkọlé ìṣe tí kò bágbà mu. Àkọlé ìparí tí kò sí ']'",
+    "empty_command": "Àṣẹ òfo. Kọ 'fa' tabi 'fi <orísun> <ibi tí a ti ń lọ> [count]'",
+    "empty_action": "Ìṣe tí kò ní nǹkan",
+    "move_needs_args": "Àṣẹ gbigbe nílò orísun àti ibi tí ó ń lọ. Ìlò: 'move <orísun> <ibi tí ó ń lọ> [count]'",
+    "count_positive": "Ìṣírò náà gbọ́dọ̀ jẹ́ èyí tó dára tàbí \"gbogbo\"",
+    "count_invalid": "Àkójọ tí kò bágbà mu. Lo iye kan tàbí 'gbogbo'",
+    "unknown_command": "Àṣẹ tí a kò mọ̀ '{cmd}'. Lo 'fa', 'fi <orísun> <ibi tí ó lọ> [count]', tàbí 'fi'",
+    "wrapped": "Ìṣe {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Ìṣe {n}: {msg}",
+    "before_failure": "Ti ṣe {n} iṣẹ(yi) ṣaaju ki o ṣe alẹ.",
+    "failed": "Ìpè {n} kò kẹ́sẹ járí: {msg}"
+  },
+  "move_result": {
+    "drew": "Ó fa káàdì ìdìbò láti ìsọ̀ǹbáyé sí ìdọ̀tí.",
+    "cannot_draw": "Kò lè fa nǹkan, kò sí nǹkan kan nínú àpò ìgbọ́kọ̀sí àti ìdọ̀tí.",
+    "invalid_pile": "Orukọ àpò kò léwu. Lo W, F1-F4, tabi T1-T7",
+    "foundation_one_card": "O le gbe kaadi kan ṣoṣo lọ sí ìpilẹ̀ṣẹ̀",
+    "waste_to_foundation_ok": "Kaadi ti a gbe lati ibi idalẹnu lọ si ipilẹ F{dst}",
+    "waste_to_foundation_bad": "Kò lè gbé káàdì ìdọ̀tí sí ìdìpọ̀ ìpìlẹ̀ yẹn",
+    "tableau_to_foundation_ok": "Kaadi ti a gbe lati tabili T{src} si ipilẹ F{dst}",
+    "tableau_to_foundation_bad": "Kò lè gbé káàdì àpapọ̀ lọ sí ìdìpọ̀ ìpìlẹ̀ náà",
+    "foundation_to_foundation": "Kò lè yí láti ìpìlẹ̀ kan sí ìpìlẹ̀ mìíràn",
+    "waste_to_tableau_one_card": "O le gbe kaadi kan ṣoṣo lati inú àlàfo lọ sí àtẹ",
+    "waste_to_tableau_ok": "A gbe kaadi lati ibi ìfipamọ lọ sí tabili T{dst}",
+    "waste_to_tableau_bad": "Kò lè fi káàdì ìparun sí orí ìdìpọ̀ tábìlì yẹn",
+    "no_face_up": "Kò sí káàdì tí a fi ojú rẹ̀ rí láti gbé",
+    "tableau_to_tableau_ok": "A gbe {count} kaadi ((s) lati tabili T{src} si T{dst}",
+    "tableau_to_tableau_bad": "Kò lè yí {count} káàdì ((s) padà láti T{src} sí T{dst}",
+    "foundation_to_tableau_one_card": "O le gbe kaadi kan ṣoṣo lati ipilẹ si tabili",
+    "foundation_empty": "Foundation F{src} jẹ ofo",
+    "foundation_to_tableau_ok": "A gbe kaadi lati ipilẹ F{src} si tabili T{dst}",
+    "foundation_to_tableau_bad": "Kò lè fi kaadi ìpìlẹ̀ sí orí tábìlì T{dst}",
+    "to_waste_or_stock": "Kò lè lọ sí ìdọ̀tí tàbí ìkóhun-ìní"
+  },
+  "outcome": {
+    "forfeit": "Ìdárayá ti jáwọ́. Ìṣirò ìkẹyìn: {score} àwọn káàdì nínú àwọn ìpìlẹ̀.",
+    "won": "Ẹ kú ìkíni, ẹ ti gba ife ẹyẹ Klondike Solitaire!",
+    "turn_limit": "Ìdárayá parí! O ti dé iye tí ó pọ̀ jùlọ nínú {max_turns} ìyí. Ìṣirò: {score} káàdì nínú àwọn ìpìlẹ̀."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE === Ìròyìn nípa àwọn ọmọ ogun",
+    "turn": "Yíyí: {turn}/{max_turns}",
+    "stock": "Àkójọ: {stock} àwọn káàdì",
+    "waste": "Àkúrekú (W): {waste}",
+    "foundations_header": "Àwọn ìpìlẹ̀:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Àtẹ:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

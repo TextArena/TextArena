@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "O jẹ Player {player_id} ni Awọn ẹrọ orin mẹta Tic Tac Toe. aami rẹ ni '{symbol}'. O gba ni iyipada fifi aami rẹ sori igbimọ 5x5 lati ṣe ila ti mẹrin. Awọn ila le jẹ onigun, inaro, tabi diagonal. Fi igbiyanju rẹ silẹ nipa lilo ọna kika '[4] lati samisi sẹẹli 4."
+  },
+  "board": {
+    "current_board": "Àwòrán: {board} Àwọn ìgbésẹ̀ tí ó wà: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Àdàkọ ìyípòpò tí kò bá tọ́. Lo \"[cell]\" níbi tí sẹẹli jẹ́ 0-{max_cell}.",
+    "out_of_range": "Nọmba sẹẹli ti ko wulo: {cell}. O gbọdọ wa laarin 0 ati {max_cell}.",
+    "already_occupied": "Ojú-ìwòye {cell} ti wà ní ìmúṣẹ.",
+    "made_invalid": "Ẹ̀yà eré {player_id} ṣe ìgbésẹ̀ tí kò lẹ́sẹ̀ nílẹ̀"
+  },
+  "game_action": {
+    "placed": "Ẹ̀yin olùdíje {player_id} fi àmì ({symbol}) sí àlàfo ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Ẹnìkan tí ó ń jẹ́ {player_id} ({symbol}) ló borí!",
+    "draw": "The game is a draw!"
+  }
+}
