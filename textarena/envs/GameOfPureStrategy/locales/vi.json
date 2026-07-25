@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong một trận đấu của GameOfPureStrategy.\n- Bạn giữ 13 lá bài từ A đến K; mỗi lá chỉ được sử dụng một lần.\n- Mỗi vòng, một lá bài thưởng được lật. Hãy chơi chính xác MỘT lá bài bằng cách viết một điều gì đó chứa một token trong ngoặc vuông như '[Q]', '[10]', '[2]' ...\n- Lá bài cao hơn sẽ thắng giải thưởng (cộng với số dư). Trường hợp hòa, giải thưởng sẽ được cộng vào pot cho vòng tiếp theo.\n- Người có tổng điểm cao nhất sau 13 vòng sẽ thắng."
+  },
+  "round": {
+    "announce": "### Vòng {round}/13 - Giải thưởng: {prize}  (trị giá {worth})"
+  },
+  "board": {
+    "hand": "Bài còn lại của bạn: {hand}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hành động phải chứa chính xác MỘT token bài trong ngoặc vuông.",
+    "card_not_held": "Bạn không còn lá bài đó."
+  },
+  "message": {
+    "bids": "Cược: P0 {card0} vs P1 {card1} - ",
+    "p0_wins": "{observation}Người chơi 0 thắng {pot_value}.",
+    "p1_wins": "{observation}Người chơi 1 thắng {pot_value}.",
+    "tie": "{observation}Hòa -> pot hiện tại {carry_pot}.",
+    "scores": "Điểm số -> P0:{score0}  P1:{score1}"
+  },
+  "outcome": {
+    "p0_wins": "P0 {s0} vs P1 {s1}",
+    "p1_wins": "P1 {s1} vs P0 {s0}",
+    "draw": "Cả hai đều đạt {s0} điểm"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id}. Bạn đang chơi trò chơi 15-Puzzle.\nMục tiêu của trò chơi là sắp xếp các ô số theo thứ tự tăng dần từ 1 đến 15, với ô trống nằm ở góc dưới bên phải.\nĐể di chuyển, bạn có thể trượt một ô vào ô trống (được biểu thị bằng hai dấu gạch dưới, ví dụ: __) bằng cách sử dụng một trong các lệnh sau:\n- 'up': Di chuyển ô dưới ô trống lên.\n- 'down': Di chuyển ô trên ô trống xuống.\n- 'left': Di chuyển ô bên phải ô trống sang trái.\n- 'right': Di chuyển ô bên trái ô trống sang phải.\nĐể gửi nước đi của bạn, hãy gõ hướng (ví dụ: 'up', 'down', 'left', hoặc 'right') trong dấu ngoặc vuông, ví dụ: [up].\nBố cục bàn cờ hiện tại được hiển thị bên dưới. Sử dụng thông tin này để giải đố.\n"
+  },
+  "board": {
+    "current_board": "Bàn cờ hiện tại:\n\n{board}\nCác nước đi có thể thực hiện: {moves}",
+    "game_board": "Bàn cờ trò chơi:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Định dạng nước đi không hợp lệ. Người chơi {player_id} không trả lời bằng hướng hợp lệ trong dấu ngoặc vuông.",
+    "illegal_move": "Nước đi không hợp lệ. Ô không thể di chuyển theo hướng đã chỉ định."
+  },
+  "outcome": {
+    "win": "Chúc mừng! Người chơi {player_id} đã giải thành công đố 15-Puzzle.",
+    "turn_limit": "Hạn chế lượt đã đạt đến. Mô hình đã hoàn thành {percent} phần trăm của đố."
+  }
+}

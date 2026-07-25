@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong trò Kuhn Poker gồm {max_rounds} vòng.\nLuật Trò Chơi:\n- Kuhn Poker sử dụng bộ bài 3 lá với J, Q, K (J thấp nhất, K cao nhất)\n- Mỗi người chơi đặt cược {ante} chip và nhận 1 lá bài mỗi vòng (lưu ý rằng các lá bài được chia không thay thế, vì vậy bạn không thể có cùng lá bài với đối thủ).\n- Trò chơi tiếp tục trong {max_rounds} vòng\n- Người chơi có nhiều chip nhất sau tất cả các vòng sẽ thắng\nLuật Hành Động:\n- '[check]': Bỏ qua mà không đặt cược (chỉ khi không có cược trên bàn)\n- '[bet]': Thêm 1 chip vào pot (chỉ khi không có cược trên bàn)\n- '[call]': Đáp ứng cược của đối thủ bằng cách thêm 1 chip vào pot\n- '[fold]': Bỏ bài và để đối thủ thắng pot"
+  },
+  "init_round": {
+    "round_start": "### Bắt đầu vòng {current_round} trong {max_rounds} vòng. Lá bài của bạn là: '{player_card}'",
+    "available_actions": "Các hành động có thể thực hiện của bạn: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hành động phải là [Check], [Bet], [Call], hoặc [Fold].",
+    "not_legal": "Hành động phải là {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Người chơi {player_id}, đã thực hiện hành động: '[{move}]'.",
+    "valid_actions": "Các hành động có thể thực hiện của bạn: {legal_actions}.",
+    "round_summary": "{reason} Điểm hiện tại: Người chơi 0: '{player_0_chips}'; Người chơi 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "So bài: Lá bài của Người chơi {winner} {winner_card} mạnh hơn lá bài của Người chơi {loser} {loser_card}. Người chơi {winner} thắng pot {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "Sau {max_rounds} vòng, cả hai người chơi đều có số chip bằng nhau.",
+    "round_win": "Người chơi {player_id} đã bỏ bài.",
+    "winner_player0": "Người chơi 0 thắng bằng cách có nhiều chip hơn sau tất cả {max_rounds} vòng.",
+    "winner_player1": "Người chơi 1 thắng bằng cách có nhiều chip hơn sau tất cả {max_rounds} vòng."
+  }
+}

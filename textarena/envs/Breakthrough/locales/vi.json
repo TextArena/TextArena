@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Bạn đang chơi {color} trong trò Breakthrough. Bạn di chuyển {direction} trên bàn cờ {board_size}x{board_size}.\nTrong lượt của bạn, bạn có thể di chuyển một quân cờ một bước về phía trước hoặc chéo về phía trước.\nMột quân cờ chỉ có thể di chuyển chéo nếu có quân cờ đối phương ở đó, và chỉ di chuyển vào ô đã bị chiếm trong một bước chéo.\nKhi di chuyển vào ô có quân cờ đối phương, bạn bắt quân đó và quân cờ đối phương bị loại vĩnh viễn khỏi bàn cờ.\nSử dụng ký hiệu đại số trong ngoặc vuông, ví dụ [a2a3] để di chuyển từ a2 đến a3.\n* 'a' tương ứng với cột bên trái nhất, '1' là hàng dưới cùng (từ góc nhìn của White).\n* Hàng nhà của Black là hàng trên cùng (hàng 8 cho bàn cờ 8x8). Hàng nhà của White là hàng dưới cùng (hàng 1 cho bàn cờ 8x8).\nNgười chơi đầu tiên đưa quân cờ đến hàng nhà của đối phương sẽ thắng. Nếu tất cả quân cờ của bạn bị bắt, bạn thua."
+  },
+  "invalid_move": {
+    "wrong_format": "Hãy sử dụng ký hiệu đại số trong ngoặc vuông như [a2a3].",
+    "out_of_bounds": "Nước đi nằm ngoài giới hạn của bàn cờ.",
+    "illegal": "Nước đi này không tuân theo quy tắc của Breakthrough hoặc không phải quân cờ của bạn."
+  },
+  "game_action": {
+    "moved": "Người chơi {player_id} di chuyển {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "White đã đến hàng nhà của Black.",
+    "black_reached": "Black đã đến hàng nhà của White.",
+    "white_captured": "Tất cả quân cờ của White bị bắt.",
+    "black_captured": "Tất cả quân cờ của Black bị bắt.",
+    "no_moves": "Người chơi {player_id} không còn nước đi nào."
+  }
+}

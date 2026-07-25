@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id}. Bạn đang chơi Trò chơi Ký ức.\nMục tiêu của bạn là ghép được nhiều cặp thẻ trên bàn cờ hơn đối thủ của bạn.\nTrong lượt của bạn, hãy chọn hai thẻ để lật bằng cách nhập số hàng và cột của thẻ đầu tiên và thẻ thứ hai theo thứ tự như '[0 1 1 0]', trong đó thẻ đầu tiên ở hàng 0 và cột 1, và thẻ thứ hai ở hàng 1 và cột 0.\nNếu hai thẻ khớp, bạn sẽ được một điểm và các thẻ sẽ giữ nguyên mặt lên. Nếu chúng không khớp, các thẻ sẽ được lật lại mặt xuống, ví dụ '.'.\nTrò chơi kết thúc khi tất cả các cặp đã được ghép."
+  },
+  "board": {
+    "current_board": "Bàn cờ hiện tại:\n{board}",
+    "current_game_board": "Bàn cờ hiện tại:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Định dạng nước đi không hợp lệ. Người chơi {player_id} không phản hồi với một hướng hợp lệ trong dấu ngoặc vuông.",
+    "out_of_bounds": "Nước đi không hợp lệ. Người chơi {player_id} đã chọn một vị trí ngoài giới hạn.",
+    "same_card_twice": "Nước đi không hợp lệ. Người chơi {player_id} đã chọn cùng một thẻ hai lần.",
+    "already_matched": "Nước đi không hợp lệ. Người chơi {player_id} đã chọn một hoặc cả hai thẻ đã được ghép."
+  },
+  "game_message": {
+    "cards_match": "Các thẻ được Người chơi {player_id} chọn tại vị trí [{r1} {c1}] và [{r2} {c2}] khớp!",
+    "cards_no_match": "Các thẻ được Người chơi {player_id} chọn không khớp. Thẻ tại vị trí [{r1} {c1}] và [{r2} {c2}] là {pos1} và {pos2} tương ứng."
+  },
+  "outcome": {
+    "draw": "Cả hai người chơi đều ghép được cùng số lượng cặp thẻ.",
+    "win": "Người chơi {winner_id} đã thắng!",
+    "turn_limit": "Hạn chế lượt đã đạt đến. Trò chơi kết thúc. Người chơi 0 đạt {score_0} điểm, Người chơi 1 đạt {score_1} điểm.",
+    "turn_limit_win": "{reason} Người chơi {winner_id} đã thắng!"
+  }
+}

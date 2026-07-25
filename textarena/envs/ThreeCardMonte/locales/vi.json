@@ -1,0 +1,31 @@
+{
+  "_comment": "Tệp ngôn ngữ ThreeCardMonte. KHÔNG được dịch các khóa (bên trái). Chỉ dịch các giá trị (bên phải).",
+  "_slots": {
+    "{line}": "Dòng cốc được hiển thị",
+    "{step}": "Số bước trộn hiện tại",
+    "{steps}": "Tổng số bước trộn",
+    "{i}": "Chỉ số cốc đầu tiên tham gia hoán đổi",
+    "{j}": "Chỉ số cốc thứ hai tham gia hoán đổi",
+    "{prompt}": "Phần nhắc nhở được địa phương hóa thêm vào sau các cốc",
+    "{max_index}": "Chỉ số cốc hợp lệ cao nhất, tức là num_cups-1",
+    "{ball_pos}": "Chỉ số cốc chứa bóng"
+  },
+  "player_prompt": {
+    "intro": "Theo dõi bóng ẩn 'X' trong khi các cốc được trộn.\nSau khi trộn, đoán vị trí của nó bằng `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Bóng bắt đầu: {line}",
+    "shuffle": "Trộn {step}/{steps}: hoán đổi cốc {i} và {j}.",
+    "cups": "Cốc: {line}  {prompt}",
+    "guess_now": "(Đoán NGAY!)",
+    "reveal": "(Tiết lộ: bóng dưới cốc {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Hành động không hợp lệ. Sử dụng `[k]`.",
+    "out_of_range": "Chỉ số nằm ngoài phạm vi 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Đúng! Bạn đã tìm thấy bóng.",
+    "lose": "Sai — bóng ở dưới cốc {ball_pos}."
+  }
+}

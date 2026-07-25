@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} chơi {colour} ({piece}) trong trò Othello.\nMục tiêu của bạn là có nhiều quân cờ màu của bạn hơn trên bàn cờ vào cuối trò chơi.\nTrong lượt của bạn, hãy đặt một quân cờ sao cho nó chặn một hoặc nhiều quân cờ của đối thủ - ở bất kỳ hướng nào (ngang, dọc hoặc chéo) - giữa quân cờ mới của bạn và một quân cờ khác của bạn. Tất cả các quân cờ của đối thủ bị chặn sẽ được lật sang màu của bạn.\nCung cấp nước đi của bạn theo định dạng '[row, col]'."
+  },
+  "board": {
+    "game_board": "Bàn cờ:\n{board}",
+    "valid_moves": "{observation}\nCác nước đi hợp lệ: {moves}",
+    "no_valid_moves_reset": "{observation}\nKhông có nước đi hợp lệ - bạn có thể phải bỏ qua lượt.",
+    "no_valid_moves_step": "{observation}\nKhông có nước đi hợp lệ – bạn có thể phải bỏ qua lượt.",
+    "scores_reset": "{observation}\nĐiểm hiện tại - Đen: {black_count}, Trắng: {white_count}\n",
+    "scores_step": "{observation}\nĐiểm - Đen: {black_count}, Trắng: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Nước đi phải có dạng [row, col].",
+    "illegal": "Nước đi không hợp lệ. Các nước đi hợp lệ: {valid}"
+  },
+  "game_action": {
+    "skipped": "Người chơi {pid} phải bỏ qua lượt",
+    "played": "Người chơi {pid} ({piece}) đã đặt [{r}, {c}] và lật {flipped} quân cờ"
+  },
+  "game_message": {
+    "must_skip": "Người chơi {pid} ({piece}) không có nước đi hợp lệ và phải bỏ qua."
+  },
+  "outcome": {
+    "black_wins": "Đen thắng {black_count}-{white_count}.",
+    "white_wins": "Trắng thắng {white_count}-{black_count}.",
+    "draw": "Hòa {black_count}-{white_count}."
+  }
+}

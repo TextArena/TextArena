@@ -1,0 +1,31 @@
+{
+  "_comment": "Tệp ngôn ngữ Snake. KHÔNG được dịch các khóa (bên trái). Chỉ dịch các giá trị (bên phải). Giữ nguyên mọi {placeholder}. KHÔNG dịch các token di chuyển/hướng mà người chơi nhập ([up], [down], [left], [right], w, s, a, d) hoặc bảng ASCII được hiển thị trong {board}.",
+  "_slots": {
+    "{num_players}": "Số lượng người chơi trong trận đấu",
+    "{width}": "Chiều rộng của bàn cờ (số ô)",
+    "{height}": "Chiều cao của bàn cờ (số ô)",
+    "{max_turns}": "Giới hạn lượt chơi cho trận đấu",
+    "{player_id}": "Số thứ tự của người chơi (bắt đầu từ 0)",
+    "{board}": "Bảng ASCII được hiển thị; giữ trung lập, không dịch các ký tự của nó",
+    "{reason}": "Lý do kết thúc trò chơi được hiển thị",
+    "{groups}": "Dữ liệu xếp hạng trung lập (danh sách các nhóm người chơi từ kém đến tốt); không dịch"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Người chơi Snake trên lưới {width}×{height}.\nBạn điều khiển rắn {player_id}. Các nước đi hợp lệ: '[up]'/'[down]'/'[left]'/'[right]' (hoặc w/s/a/d).\nMục tiêu: sống sót lâu nhất hoặc trở thành rắn dài nhất và đạt điểm cao nhất (giới hạn lượt {max_turns} lượt)."
+  },
+  "board": {
+    "current": "Bàn cờ hiện tại:\n{board}",
+    "after_moves": "Trạng thái bàn cờ hiện tại:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Rắn {player_id} chết do nước đi không hợp lệ."
+  },
+  "outcome": {
+    "survived_win": "Người chơi {player_id} sống sót; tất cả người chơi khác đã chết.",
+    "all_dead_simul": "Tất cả các rắn chết cùng lúc.",
+    "outlived": "Người chơi sống sót lâu hơn tất cả người chơi khác.",
+    "all_dead": "Tất cả các rắn đã chết.",
+    "turn_limit": "Đạt giới hạn lượt - điểm cao nhất thắng.",
+    "ranking": "{reason} Xếp hạng cuối cùng (kém→tốt): {groups}"
+  }
+}
