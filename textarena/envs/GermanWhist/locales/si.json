@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "ක් රීඩාව ආරම්භ වේ. ත් රිපිටක ඇඳුම: {trump_suit} (ත් රිපිටක කාඩ්පත: {trump_str}).",
+    "no_trump_card": "කිසිවක් නැත"
+  },
+  "player_prompt": {
+    "intro": "ඔබ ජර්මානු විස්ට් හි ක් රීඩකයා {player_id} ය. {phase_info} ඔබ {hand_size} කාඩ්පත් තබා ගනී. '[play N]' සහිත කාඩ්පතක් වාදනය කරන්න, එහිදී N යනු ඔබේ අතේ ඇති ස්ථානයයි (නිදසුනක් ලෙස '[play 3]').",
+    "phase_learning": "ඉගෙනීමේ අදියර: සෑම උපක් රමයකම ජයග් රාහකයා මුහුණට මුහුණ ලා ඇති කාඩ්පත ලබා ගන්නා අතර පරාජිතයා තට්ටුවෙන් ඊළඟ කාඩ්පත ඇද ගනී. මෙම අදියරේදී දිනාගත් උපක් රම ජයග් රහණයට ගණන් නොගනී.",
+    "phase_playing": "මේ මොහොතේ සිට සෑම උපක් රමයක්ම ජයග් රහණය සඳහා වැදගත් වේ."
+  },
+  "next_card": {
+    "playing_phase": "කාඩ්පත් නෑ - සෙල්ලම් කිරීමේ අදියර පටන් අරගෙන.",
+    "deck_empty": "තට්ටුව හිස් - කාඩ්පත් කිසිවක් ඉදිරිපත් නොවේ.",
+    "available": "කාඩ්පතක් ඉදිරිපත් කරනවා: {card}",
+    "available_trump": "කාඩ් එක ඉදිරිපත් කරනවා: {card} (ට් රම්ප්)"
+  },
+  "invalid_move": {
+    "wrong_format": "අක් රීය චලන ආකෘතිය. ඔබේ අතේ ඇති Nth කාඩ්පත සෙල්ලම් කිරීමට '[play N]' භාවිතා කරන්න.",
+    "bad_position": "ඒ කාඩ් ස්ථානය නැහැ. ඔයා ගාව {hand_size} කාඩ් තියනවා.",
+    "must_follow_suit": "You must follow suit and play a {lead_suit} card.",
+    "invalid_play": "ඒ කාඩ් එක සෙල්ලම් කරන්න බෑ."
+  },
+  "game_action": {
+    "played": "ක් රීඩකයා {player_id} ක් රීඩා කළේ {card}."
+  },
+  "trick": {
+    "won": "Player {winner_id} wins the trick with {card}.",
+    "won_learning": "Player {winner_id} wins the trick with {card} and takes the face-up card."
+  },
+  "phase": {
+    "learning_complete": "තට්ටුව ඉවරයි. ඉගෙනීමේ අදියර ඉවරයි - ඉතිරිව ඇති සෑම උපක් රමයක්ම ජයග් රහණයට වැදගත් වේ."
+  },
+  "draw": {
+    "winner_received": "ඔයා දිනුවා {card}",
+    "loser_received": "ඔයා ට් රික් එක පැරදුනා, තට්ටුවෙන් {card} ඇදලා ගත්තා.",
+    "winner_preview": "ඊලඟ කාඩ් එක තමයි {card}."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "මෙතෙක් දිනාගත් උපක් රම - ක් රීඩකයා 0: {tricks0}, ක් රීඩකයා 1: {tricks1}",
+    "scores_playing": "ලකුණු ලබා ගැනීමේ උපක් රම - ක් රීඩකයා 0: {tricks0}, ක් රීඩකයා 1: {tricks1}",
+    "phase": "අදියර: {phase}",
+    "phase_learning": "අදියර: {phase} ({remaining_cards} තට්ටුවේ ඉතිරිව ඇති කාඩ්පත්)"
+  },
+  "hand": {
+    "no_cards": "කාඩ් නෑ.",
+    "no_cards_in_hand": "අතේ කාඩ් නෑ.",
+    "header": "ඔයාගේ අත:",
+    "trump_indicator": "(ට් රම්ප්)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "මේ ට් රික් එක තාම කාඩ් වලින් සෙල්ලම් කරලා නෑ.",
+    "header": "වර්තමාන උපක් රමය:",
+    "trump_indicator": "(ට් රම්ප්)",
+    "card_line": "{observation} ක් රීඩකයා {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "ක් රීඩාව ආරම්භ කර නැහැ",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation} අදියර: {phase}",
+    "trump_suit": "{observation} ට් රම්ප් ඇඳුම: {trump_suit}",
+    "trump_card": "{observation}\nTrump card: {card}",
+    "cards_left": "{observation} තට්ටුවේ ඉතිරිව ඇති කාඩ්පත්: {count}",
+    "next_card": "{observation} ඊලඟ කාඩ් එක දිනුම්: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} දැනට තියෙන උපක් රමය:",
+    "trump_indicator": "(ට් රම්ප්)",
+    "trick_line": "{observation} ක් රීඩකයා {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} ක් රීඩකයා {player_id}: {scoring} ලකුණු උපක් රම ({tricks} සමස්ත), {hand_size} අතේ ඇති කාඩ්පත්"
+  },
+  "outcome": {
+    "summary": "ඉගෙනීමේ අදියර - ක් රීඩකයා 0: {l0}, ක් රීඩකයා 1: {l1}. ක් රීඩා අදියර - ක් රීඩකයා 0: {p0}, ක් රීඩකයා 1: {p1}. ක් රීඩකයා {winner_id} {winner_tricks} ලකුණු ලබා ගැනීමේ උපක් රම සමඟ ජයග් රහණය කරයි!"
+  }
+}

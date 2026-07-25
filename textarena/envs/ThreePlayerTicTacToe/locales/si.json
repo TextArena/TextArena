@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "ඔබ තුන් ක් රීඩක ටික් ටැක් ටෝ ක් රීඩාවේ {player_id} ක් රීඩකයා වේ. ඔබේ සංකේතය '{symbol}' වේ. ඔබ ඔබේ සංකේතය 5x5 පුවරුවක තබා හතරේ රේඛාවක් සෑදීමට හැරී යයි. රේඛා තිරස්, සිරස් හෝ විකර්ණ විය හැකිය. සෛල 4 සලකුණු කිරීම සඳහා '[4]' ආකෘතිය භාවිතා කරමින් ඔබේ පියවර ඉදිරිපත් කරන්න."
+  },
+  "board": {
+    "current_board": "වර්තමාන මණ්ඩලය: {board} ලබා ගත හැකි චලනයන්: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "අක් රීය චලන ආකෘතිය. සෛල 0-{max_cell} වන විට \"[cell]\" භාවිතා කරන්න.",
+    "out_of_range": "වලංගු නොවන ජංගම අංකය: {cell}. 0 ත් {max_cell} ත් අතර විය යුතුය.",
+    "already_occupied": "{cell} සෛලය දැනටමත් හිමිව ඇත.",
+    "made_invalid": "Player {player_id} made an invalid move"
+  },
+  "game_action": {
+    "placed": "ක් රීඩකයා {player_id} ක්ෂේත් රය තුළ ({row}, {col}) ඔවුන්ගේ සංකේතය ({symbol}) තබයි."
+  },
+  "outcome": {
+    "win": "Player {player_id} ({symbol}) ජයග්‍රහණය කරයි!",
+    "draw": "තරඟය සමයි!"
+  }
+}

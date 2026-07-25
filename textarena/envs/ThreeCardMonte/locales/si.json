@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte locale file. DO NOT translate keys (left side). Only translate values (right side).",
+  "_slots": {
+    "{line}": "The rendered row of cups",
+    "{step}": "The current shuffle step number",
+    "{steps}": "The total number of shuffle steps",
+    "{i}": "The first cup index involved in a swap",
+    "{j}": "The second cup index involved in a swap",
+    "{prompt}": "The localized prompt fragment appended after the cups",
+    "{max_index}": "The highest valid cup index, i.e. num_cups-1",
+    "{ball_pos}": "The cup index the ball is under"
+  },
+  "player_prompt": {
+    "intro": "Track the hidden ball 'X' while the cups are shuffled.\nAfter shuffling, guess its location with `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "පන්දුව පටන් ගන්නවා: {line}",
+    "shuffle": "{step}/{steps}: හුවමාරු කළ කෝප්ප {i} සහ {j}.",
+    "cups": "කෝප්ප: {line} {prompt}",
+    "guess_now": "(දැන්ම අනුමාන කරන්න!)",
+    "reveal": "(පන්දුව {ball_pos} යටතේ ඇති බව පෙන්වන්න)"
+  },
+  "invalid_move": {
+    "wrong_format": "Bad action. Use `[k]`.",
+    "out_of_range": "දර්ශකය 0-{max_index} පරාසයෙන් පිටත."
+  },
+  "outcome": {
+    "win": "හරි, ඔයා බෝලය හොයාගත්තා.",
+    "lose": "වැරදි — බෝලය {ball_pos} යට තිබුණි."
+  }
+}

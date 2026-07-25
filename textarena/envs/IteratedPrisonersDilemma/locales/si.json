@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "ඔබ {player_id} ක්‍රීඩකයා ඉතිරි {num_rounds} වට සඳහා පුනරාවර්ත තාවකාලික දඬුවම් ක්‍රීඩාවේ.\n\nක්‍රීඩා ප්‍රබන්ධය:\n- ඔබ තීරණය කිරීමට පෙර {total_conversation_rounds} වාර ඔබට නොමේරට සංකේත සඳහා.\n- ඊට පසු, දෙදෙනාම සමාන්තරව සහයෝගය හෝ ද්‍රෝහි බව තෝරන්න.\n\nපාරිතෝෂික මේට්‍රික්ස් (සෑම වටයකදීම ස්ථිර වේ):\n- දෙදෙනාම සහයෝගය ➜ පළමු {cooperate_reward}\n- දෙදෙනාම ද්‍රෝහි ➜ පළමු {mutual_defect_reward}\n- එක් අයෙක් ද්‍රෝහි, අනෙක් අය සහයෝගය ➜ ද්‍රෝහි {defect_reward}, සහයෝගී {sucker_reward}\n\nක්‍රීඩා කිරීමට ආකාරය:\n- සංකේත අතර: ඔබ කැමති ඕනෑම පාඨය ටයිප් කරන්න.\n- තීරණ අදියරේදී: '[Cooperate]' හෝ '[Defect]' (ප්‍රස්තුත නොසලකා) ඇතුළත් කරන්න. ඔබට අතිරේක පාඨ ටොකනයට පෙර/පසුව එකතු කළ හැක."
+  },
+  "phases": {
+    "conversation_finished": "සංවාදය අවසන් {round} වටය සඳහා. කරුණාකර පිළිතුරු දෙන්න \"[Cooperate]\" හෝ \"[Defect]\" තුළ \\boxed{{}}.",
+    "starting_round": "--- ආරම්භක වටය {round} ---",
+    "round_summary": "වටයේ {round} ප් රතිඵල: {outcome} ක් රීඩකයා 0 {r0} (මුළු {score_0}), ක් රීඩකයා 1 {r1} (මුළු {score_1}) ලබා ගත්තේය."
+  },
+  "outcome": {
+    "winner": "ක් රීඩකයා {winner} දිනයි {win_score} - {lose_score}.",
+    "draw": "Draw! Both players scored {s0}.",
+    "round_both_cooperate": "ක් රීඩකයන් දෙදෙනාම සහයෝගයෙන් කටයුතු කළා.",
+    "round_both_defect": "ක් රීඩකයන් දෙදෙනාම පලා ගියා.",
+    "round_p0_cooperates_p1_defects": "ක් රීඩකයා 0 සහයෝගය දැක්වූවා, ක් රීඩකයා 1 පලා ගියා.",
+    "round_p0_defects_p1_cooperates": "ක් රීඩකයා 0 පලා ගියා, ක් රීඩකයා 1 සහයෝගය දුන්නා."
+  }
+}

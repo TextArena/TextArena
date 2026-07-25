@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "ඔබ Player {player_id} කුහ්න් පොකර් හි {max_rounds} වටයක තරගයකයි.\nගේම් නියමයන්:\n- කුහ්න් පොකර් J, Q, K (J අඩුම, K ඉහළම) සහිත 3-කාඩ් ඩෙක් භාවිතා කරයි\n- සෑම ක්රීඩකයෙක්ම {ante} චිප් දමා සහ සෑම වටයකදී එක් කාඩ් ලබා ගනී (ඔබ සතුරා සමාන කාඩ් නොමැති බව සටහන් කර ගන්න, එය නිකුත් නොකරන ලද බැවිනි)\n- තරගය {max_rounds} වට දක්වා පැවැතේ\n- සියලු වට අවසානයේ වඩාත් චිප් සහිත ක්රීඩකයා ජයග්රහණය කරයි\nක්රියා නියමයන්:\n- '[check]': දංගයක් නොමැති විට පසුබැසීම (වේදිකාවේ දංගයක් නොමැති විට)\n- '[bet]': පොටේ චිප් 1ක් එක් කිරීම (වේදිකාවේ දංගයක් නොමැති විට)\n- '[call]': ප්රතිවාදියෙකුගේ දංගය පොටේ චිප් 1ක් එක් කිරීමෙන් සමතුල් කිරීම\n- '[fold]': ඔබගේ අත භාර දීම සහ ඔබගේ ප්රතිවාදියා පොට ජයග්රහණය කරන ලෙස"
+  },
+  "init_round": {
+    "round_start": "### ආරම්භක වටය {current_round} {max_rounds} වට වලින්. ඔබේ කාඩ්පත: '{player_card}'",
+    "available_actions": "ඔබේ ක් රියාමාර්ග පහත පරිදි වේ: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "ක් රියාව [Check], [Bet], [Call] හෝ [Fold] විය යුතුය.",
+    "not_legal": "ක් රියාව {legal_actions} විය යුතුයි."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "ඔබේ ක් රියාකාරකම් පහත පරිදි වේ: {legal_actions}.",
+    "round_summary": "{reason} වර්තමාන ලකුණු: ක් රීඩකයා 0: \"{player_0_chips}\"; ක් රීඩකයා 1: \"{player_1_chips}\""
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "{max_rounds} වටය අවසානයේදී, ක් රීඩකයන් දෙදෙනාටම සමාන චිප්ස් ප් රමාණයක් තිබුණි.",
+    "round_win": "ක් රීඩකයා {player_id} පරාජය වී ඇත.",
+    "winner_player0": "0 ක් රීඩකයා ජයග් රහණය කළේ සියලුම {max_rounds} වටවල අවසානයේ වැඩි චිප්ස් ප් රමාණයක් තිබීමෙනි.",
+    "winner_player1": "ක් රීඩකයා 1 ජයග් රහණය කළේ සියලුම {max_rounds} වටවල අවසානයේ වැඩි චිප්ස් ප් රමාණයක් තිබීමෙනි."
+  }
+}

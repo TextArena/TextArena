@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "වර්තමාන මණ්ඩලය: {board} ලබා ගත හැකි චලනයන්: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "ක් රියාකාරී ආකෘතිය අවලංගුයි. ක් රීඩකයා {player_id} [A0 B0] ආකෘතියෙන් පියවරක් ඇතුළත් කළේ නැත.",
+    "invalid_coordinates": "ක් රියාකාරී ආකෘතිය අවලංගුයි. {player_id} ක් රීඩකයා වලංගු ඛණ්ඩාංක ඇතුලත් කළේ නැත.",
+    "not_own_piece": "ක් රියාකාරී ආකෘතිය අවලංගුයි. ක් රීඩකයා {player_id} තමන්ගේම කැබැල්ලක් ගෙනියන්න ඕන.",
+    "scout_through_pieces": "ක් රියාකාරී ආකෘතිය අවලංගුයි. {player_id} ක් රීඩකයාට වෙනත් කැබලි හරහා ස්කවුට් එකක් ගෙන යා නොහැක.",
+    "scout_diagonal": "ක් රියාකාරී ආකෘතිය අවලංගුයි. {player_id} ක් රීඩකයාට ස්කවුට් එකක් විකර්ණව ගෙනියන්න බැහැ.",
+    "non_scout_multi_square": "ක් රියාකාරී ආකෘතිය අවලංගුයි. කැබලි වලට, ස්කවුට්ස් හැර, එක් වරකට එක් චතුරස්රයක් පමණක් චලනය කළ හැකිය.",
+    "move_into_lake": "ක් රියාකාරී ආකෘතිය අවලංගුයි. ක් රීඩකයාට {player_id} වැවට යා නොහැක.",
+    "move_onto_own_piece": "ක් රියාකාරී ආකෘතිය අවලංගුයි. ක් රීඩකයාට {player_id} තමන්ගේම කොටසට යා නොහැක.",
+    "move_bomb_or_flag": "ක් රියාකාරී ආකෘතිය අවලංගුයි. {player_id} ක් රීඩකයාට බෝම්බයක් හෝ ධජයක් ගෙනයාමට නොහැකිය."
+  },
+  "game_action": {
+    "you_moved": "ඔයා ඔයාගේ කෑල්ල {source} සිට {dest}ට ගෙනිච්චා.",
+    "opponent_moved": "{player_id} ක් රීඩකයා {source} සිට {dest} දක්වා කැබැල්ලක් ගෙන ගොස් ඇත.",
+    "you_equal_ranks": "ඔබ ඔබේ කැබැල්ල {source} සිට {dest} වෙත ගෙන ගොස් ඇත. පහර දෙන කැබැල්ල {attacking_rank} සහ ගමනාන්ත කැබැල්ල {target_rank} විය. ශ් රේණිගත කිරීම් සමාන බැවින්, කැබැලි දෙකම අහිමි විය.",
+    "opponent_equal_ranks": "ක් රීඩකයා {player_id} විසින් {source} සිට {dest} දක්වා කැබැල්ලක් ගෙන ගොස් ඇත. පහර දෙන කැබැල්ල {attacking_rank} වන අතර ගමනාන්ත කැබැල්ල {target_rank} වේ. ශ් රේණිගත කිරීම් සමාන බැවින්, කැබැලි දෙකම අහිමි වේ.",
+    "you_miner_defused": "ඔබ ඔබේ කැබැල්ල {source} සිට {dest} වෙත ගෙන ගියා. පහර දෙන කැබැල්ල {attacking_rank} සහ ගමනාන්ත කැබැල්ල {target_rank} විය. පතල් කම්කරුවන්ට බෝම්බ නිෂ්ක් රීය කළ හැකි බැවින් ඔබ සටන ජය ගත්තේය.",
+    "opponent_miner_defused": "ක් රීඩකයා {player_id} කැබැල්ලක් {source} සිට {dest} වෙත ගෙන ගොස් ඇත. පහර දෙන කැබැල්ල {attacking_rank} වන අතර ගමනාන්ත කැබැල්ල {target_rank} වේ. පතල් කම්කරුවන්ට බෝම්බ නිෂ්ක් රීය කළ හැකි බැවින්, ඔබට සටන අහිමි විය.",
+    "you_bomb_lost": "ඔබ ඔබේ කැබැල්ල {source} සිට {dest} වෙත ගෙන ගියා. පහර දෙන කැබැල්ල {attacking_rank} සහ ගමනාන්ත කැබැල්ල {target_rank} විය. පහර දෙන තැනැත්තා පතල් කම්කරුවෙකු නොවන බැවින්, ඔබ සටන පරාජය කළා.",
+    "opponent_bomb_won": "{player_id} ක් රීඩකයා {source} සිට {dest} දක්වා කැබැල්ලක් ගෙන ගොස් ඇත. පහර දෙන කැබැල්ල {attacking_rank} වන අතර ගමනාන්ත කැබැල්ල {target_rank} වේ. පහර දෙන තැනැත්තා පතල් කම්කරුවෙකු නොවන බැවින් ඔබ සටන ජය ගත්තේය.",
+    "you_spy_won": "ඔබ ඔබේ කැබැල්ල {source} සිට {dest} වෙත ගෙන ගියා. පහර දෙන කැබැල්ල {attacking_rank} සහ ගමනාන්ත කැබැල්ල {target_rank} විය. පහර දෙන තැනැත්තා ඔත්තුකරුවෙකු වන අතර ගමනාන්තය මාෂල්වරයෙකු වන බැවින් ඔබ සටන ජය ගත්තේය.",
+    "opponent_spy_lost": "{player_id} ක් රීඩකයා {source} සිට {dest} දක්වා කැබැල්ලක් ගෙන ගොස් ඇත. පහර දෙන කැබැල්ල {attacking_rank} වන අතර ගමනාන්තය {target_rank} වේ. පහර දෙන තැනැත්තා ඔත්තුකරුවෙකු වන අතර ගමනාන්තය මාෂල් කෙනෙකු වන බැවින් ඔබට සටන අහිමි විය.",
+    "you_higher_won": "ඔබ ඔබේ කැබැල්ල {source} සිට {dest} වෙත ගෙන ගියා. පහර දෙන කැබැල්ල {attacking_rank} සහ ගමනාන්ත කැබැල්ල {target_rank} විය. පහර දෙන තැනැත්තා ගමනාන්තයට වඩා ඉහළ ශ් රේණියක් ඇති බැවින් ඔබ සටන ජය ගත්තේය.",
+    "opponent_higher_lost": "{player_id} ක් රීඩකයා {source} සිට {dest} දක්වා කැබැල්ලක් ගෙන ගොස් ඇත. පහර දෙන කැබැල්ල {attacking_rank} වන අතර ගමනාන්තය {target_rank} වේ. පහර දෙන තැනැත්තා ගමනාන්තයට වඩා ඉහළ ශ් රේණියේ සිටින බැවින්, ඔබ සටන පරාජය කළේය.",
+    "you_lower_lost": "ඔබ ඔබේ කැබැල්ල {source} සිට {dest} වෙත ගෙන ගියා. පහර දෙන කැබැල්ල {attacking_rank} සහ ගමනාන්ත කැබැල්ල {target_rank} විය. පහර දෙන තැනැත්තා ගමනාන්තයට වඩා පහත් ශ් රේණියක් ඇති බැවින්, ඔබ සටන පරාජය කළා.",
+    "opponent_lower_won": "{player_id} ක් රීඩකයා {source} සිට {dest} දක්වා කැබැල්ලක් ගෙන ගොස් ඇත. පහර දෙන කැබැල්ල {attacking_rank} වන අතර ගමනාන්තය {target_rank} වේ. පහර දෙන තැනැත්තා ගමනාන්තයට වඩා පහත් ශ් රේණියේ බැවින් ඔබ සටන ජය ගත්තේය."
+  },
+  "outcome": {
+    "flag_captured": "ක් රීඩකයා {player_id} ප් රතිවාදියාගේ ධජය අල්ලාගෙන ඇත!",
+    "no_movable_pieces": "{winner_id} ක් රීඩකයා දිනයි! {loser_id} ක් රීඩකයාට තවත් චලනය කළ හැකි කැබලි නොමැත."
+  }
+}

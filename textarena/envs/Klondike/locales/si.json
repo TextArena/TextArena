@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "ක් රියාව අක් රියයි. ක් රියාව කුටි තුළ තිබිය යුතුයි.",
+    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "empty_command": "හිස් විධානය. ටයිප් කරන්න 'draw' හෝ 'move <source> <destination> [count]'",
+    "empty_action": "හිස් ක් රියාව",
+    "move_needs_args": "මාරු විධානය මූලාශ් රය සහ ගමනාන්තය අවශ් යයි. භාවිතය: 'move <source> <destination> [count]'",
+    "count_positive": "ගණනය ධනාත්මක හෝ \"සියලු\" විය යුතුය",
+    "count_invalid": "Invalid count. Use a number or 'all'",
+    "unknown_command": "නොදන්නා විධානය '{cmd}'. 'draw', 'move <source> <destination> [count]', හෝ 'forfeit' භාවිතා කරන්න",
+    "wrapped": "ක් රියාමාර්ගය {n}: {msg}"
+  },
+  "action_result": {
+    "success": "ක් රියාමාර්ගය {n}: {msg}",
+    "before_failure": "{n} ක් රියාවන් ක් රියාත්මක කිරීමේදී අසාර්ථක වීමට පෙර.",
+    "failed": "Action {n} failed: {msg}"
+  },
+  "move_result": {
+    "drew": "Drew card(s) from stock to waste.",
+    "cannot_draw": "අදින්න බෑ, බඩු සහ අපද් රව් ය දෙකම හිස්.",
+    "invalid_pile": "අක් රීය තොග නාමය. W, F1-F4 හෝ T1-T7 භාවිතා කරන්න",
+    "foundation_one_card": "පදනමට ගෙනියන්න පුළුවන් එක කාඩ් එකක් විතරයි.",
+    "waste_to_foundation_ok": "කාඩ්පත අපද් රව් ය වලින් පදනමට ගෙනයාම F{dst}",
+    "waste_to_foundation_bad": "මේ පදනම ගොඩට කාඩ් එක ගෙනියන්න බෑ",
+    "tableau_to_foundation_ok": "කාඩ්පත T{src} සිට පදනම F{dst} වෙත ගෙනයනු ලැබීය",
+    "tableau_to_foundation_bad": "මේස කාඩ්පත අර පදනම ගොඩට ගෙනියන්න බෑ",
+    "foundation_to_foundation": "පදනමකින් පදනමට යන්න බෑ",
+    "waste_to_tableau_one_card": "කාඩ් එකක් විතරයි කාඩ් එකකට මාරු කරන්න පුළුවන්.",
+    "waste_to_tableau_ok": "කාඩ්පත අපද් රව් ය වලින් T{dst} වගුව වෙත ගෙනයනු ලැබේ",
+    "waste_to_tableau_bad": "කාඩ්පත් ප් රතික්ෂේප කරන්න බෑ.",
+    "no_face_up": "උඩට හැරෙන්න කාඩ් නෑ.",
+    "tableau_to_tableau_ok": "{count} කාඩ්පත 〔s 〕 T{src} සිට T{dst} දක්වා මාරු කර ඇත.",
+    "tableau_to_tableau_bad": "T {src} සිට T {dst} දක්වා {count} කාඩ්පත ගෙනයාමට නොහැක.",
+    "foundation_to_tableau_one_card": "පදනමේ සිට තහඩුවට ගෙනියන්න පුළුවන් එක කාඩ් එකක් විතරයි.",
+    "foundation_empty": "පදනම F{src} හිස්",
+    "foundation_to_tableau_ok": "පදනම F{src} සිට T{dst} වගුව වෙත ගෙනයන ලද කාඩ්පත",
+    "foundation_to_tableau_bad": "T{dst} තහඩුවට පදනම කාඩ් තැබීමට නොහැක",
+    "to_waste_or_stock": "අපද් රව් ය හෝ තොගයට ගෙනියන්න බෑ."
+  },
+  "outcome": {
+    "forfeit": "ක් රීඩාව අහිමි විය. අවසාන ලකුණු: {score} පදනම් වල කාඩ්පත්.",
+    "won": "සුභ පැතුම්, ඔයා ක්ලොන්ඩයික් සෝලිටේර් දිනුවා!",
+    "turn_limit": "ක් රීඩාව අවසන්! ඔබ උපරිම {max_turns} හැරීම් කරා ළඟා වී ඇත. ලකුණු: {score} පදනම් වල කාඩ්පත්."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "හැරීම: {turn}/{max_turns}",
+    "stock": "Stock: {stock} cards",
+    "waste": "අපද් රව් ය (W): {waste}",
+    "foundations_header": "පදනම්:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}
