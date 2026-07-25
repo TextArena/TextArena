@@ -27,7 +27,7 @@ from golden_runner import run_game, canonical, load_env, run_scenario  # noqa: E
 from game_scenarios import GAMES  # noqa: E402
 
 GOLDEN_DIR = os.path.join(HERE, "goldens")
-LANGS = ["ar", "de", "en", "es", "fr", "he", "ms", "pt", "zh", "it", "ru", "ja", "fa", "sr", "fil", "ko", "hi"]
+LANGS = ["ar", "de", "en", "es", "fr", "he", "ms", "pt", "zh", "it", "ru", "ja", "fa", "sr", "fil", "ko", "hi", "bn"]
 _LANG_OVERRIDE = None  # set by --langs to smoke a subset (e.g. adding one new language)
 
 

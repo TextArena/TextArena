@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "আপনি ইন্ডিয়ান পোকারের খেলোয়াড় {player_id}।\n- 52-কার্ডের ডেক; আপনি শুধুমাত্র প্রতিপক্ষের কার্ড দেখতে পারেন।\n- প্রতি রাউন্ডে {ante} চিপ(স), মোট {max_rounds} রাউন্ড।\n- বৈধ চাল: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X হল একটি ধনাত্মক পূর্ণসংখ্যা <= আপনার চিপ সংখ্যা।)\n- সর্বোচ্চ লুকানো কার্ড শোডাউনে পট জিতে নেয়।\n"
+  },
+  "round": {
+    "announce": "### রাউন্ড {current_round}/{max_rounds}\nআপনার প্রতিপক্ষের কার্ড হল: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "ঠিক একটি বন্ধনীযুক্ত কর্ম সরবরাহ করুন, যেমন '[check]', '[bet 2]', '[call]', '[raise 3]', বা '[fold]'।",
+    "cannot_check": "পারবেন না [check] - আপনি একটি বাজির সম্মুখীন হচ্ছেন।",
+    "amount_min": "বাজি / বাড়ানোর পরিমাণ অবশ্যই ≥ 1 হতে হবে।",
+    "cannot_bet": "পারবেন না [bet] - অবশ্যই [call] / [raise] / [fold]।",
+    "nothing_to_call": "কিছুই কল করার নেই; আপনি পরিবর্তে [check] করতে পারেন।",
+    "no_bet_to_raise": "[bet X] ব্যবহার করে খুলুন; বাড়ানোর জন্য কোন বাজি নেই।",
+    "insufficient": "সেই কর্মের জন্য অপর্যাপ্ত চিপ।"
+  },
+  "game_action": {
+    "action": "খেলোয়াড় {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (খরচ {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "আপনার সম্ভাব্য কর্ম: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  পট {pot} → খেলোয়াড় {winner}। (ব্যাঙ্করোল P0:{p0}, P1:{p1})",
+    "folded": "খেলোয়াড় {player_id} ভাঁজ করেছেন।",
+    "showdown_win": "শোডাউন: {card_win} {card_lose} কে পরাজিত করেছে।",
+    "showdown_tie": "শোডাউন টাই: উভয় {card}। পট বিভক্ত – প্রত্যেকে {split} পায়।"
+  },
+  "outcome": {
+    "p0_wins": "খেলোয়াড় 0 জিতেছে ({bank0} > {bank1})",
+    "p1_wins": "খেলোয়াড় 1 জিতেছে ({bank1} > {bank0})",
+    "draw": "সমস্ত রাউন্ডের পরে সমান চিপ"
+  }
+}
