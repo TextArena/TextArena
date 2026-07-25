@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Uyisithende {player_id} esigabeni saseStratego.\nInhloso yakho iyakukwazisa iflegi yakho yokulwa noma ukhwelwe wonke amapieces ayomuthanda.\nImpi yakho ibekwe kuwe ngokwakho emapahleni, ikubeka iflegi yakho, ibhomu, namapieces amaningi anemindeni eyahlukene.\n\n### Izinkulungwane Zempilo\n1. **Izinkulungwane Zokuthamba:**\n   - Ngexesha lakho, ungathamba inqwelo elinye ngqo kuye kwenye indawo edingekayo (phezulu, phansi, kwesokunxele, noma kwesokoqelela) eyadungwe ngamapieces akho.\n   - Umbhalo: Inqwelo ingathamba kusuka A1 kuB1 noma A1 kuA2 uma B1 na A2 azidungwe ngamapieces akho.\n   - Uma inqwelo elikhethiwe iyibhomu noma iflegi, ayikwazi ukuthambwa.\n2. **Imiphi yomzabalazo:**\n   - Uma uthamba kwenye indawo edingekayo egameni lemiphi yokulwa, kuzoba nezabalazo:\n     - Inqwelo enemindeni efana neyokulwa ithola iphinde ikhwelwe inqwelo yokulwa.\n     - Uma amindeni ahluke, zonke izinqwelo zingapheli emapahleni.\n     - **Izinhlobo Zesikhathi:**\n       - Amabhomu akhwelwa wonke amapieces akuthamba isiphothule Miners, abafaka amabhomu.\n       - Abasebenzi bangaphinde bathathe uMengameli uma besebenza kwanza kodwa baphinde bakhwelwe yonke imiphi.\n3. **Izinhloso Zomphakathi:**\n   - Bamba amapieces akho yokulwa ngokuthamba kwazo nemizabalazo yazo.\n   - Linda iflegi yakho uma usathatha iflegi yakho yokulwa.\n   - Sebenzisa abadlali beScouts ngokuceleba ukuthola ulwazi mayelana namapieces akho yokulwa kanye nethambo liphume kuzo.\n\n### Kanjani Ukuthamba:\n1. Bamba amacoordinate yakho inqwelo usithanda ukuthamba kanye nendawo yakho.\n2. Sebenzisa uhlobo: [A0 B0], lapho A0 iyindawo yokuthamba, B0 iyindawo yokufika.\n   - Umbhalo: Ukuthamba inqwelo kusuka sakhi 0, kolumi 0 kurow 1, kolumi 0, uqale [A0 B0].\n3. Sinikeza ukuthi indawo yakho iyadinga ngokwemigaqo yokuthamba ngaphezulu.\n\n### Izinqumo Ezidinga:\n- Umpahla uzokubonisa amapieces akho kanye nemindeni yazo, e.g. MN, MS.\n- Umpahla uzobonisa namapieces akho yokulwa akadaliwe ngokuthi awakwazi ukubonisa amindeni yazo, e.g. ?.\n- Izigidi zisekelwe ~ zilake kanye azikwazi ukuthambwa.\n- Ngokwesikhathi, qala igemu lakho ngokuthamba amapieces akho asempumalanga ukuthola ulwazi mayelana namapieces akho yokulwa. Abadlali 0 na 1 abasebenzela empumalanga sakhi D na G kuleyo.\n\nLona keleli lakho lokuhlala kwempahla:\n"
+  },
+  "board": {
+    "current_board": "Ibhodi yamanje: {board} Ukuhamba okukhona: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ifomethi yesenzo engavumelekile. Umdlali {player_id} akazange afake isinyathelo ngefomethi [A0 B0].",
+    "invalid_coordinates": "Ifomethi yesenzo engavumelekile. Umdlali {player_id} akazange afake izixhumanisi ezivumelekile.",
+    "not_own_piece": "Ifomethi yesenzo engavumelekile. Umdlali {player_id} kufanele ahambise enye yezingcezu zakhe.",
+    "scout_through_pieces": "Ifomethi yesenzo engavumelekile. Umdlali {player_id} akakwazi ukuhambisa i-scout kwezinye izingcezu.",
+    "scout_diagonal": "Invalid action format. Player {player_id} cannot move a scout diagonally.",
+    "non_scout_multi_square": "Ifomethi yesenzo engalungile. Izingcezu, ngaphandle kwama-scouts, zingashintsha isikwele esisodwa ngesikhathi.",
+    "move_into_lake": "Ifomethi yesenzo engavumelekile. Umdlali {player_id} akakwazi ukungena echibini.",
+    "move_onto_own_piece": "Ifomethi yesenzo engavumelekile. Umdlali {player_id} akakwazi ukuhambisa isenzo sakhe.",
+    "move_bomb_or_flag": "Ifomethi yesenzo engavumelekile. Umdlali {player_id} akakwazi ukuhambisa ibhomu noma ifulegi."
+  },
+  "game_action": {
+    "you_moved": "Ususe uhlamvu lwakho kusuka ku- {source} kuya ku- {dest}.",
+    "opponent_moved": "Umdlali {player_id} ususe iqhosha kusuka {source} kuya {dest}.",
+    "you_equal_ranks": "Ususe i-piece yakho kusuka ku- {source} kuya ku- {dest}. I-piece yokuhlasela yayingu- {attacking_rank} futhi i-piece yokuya kuyo yayingu- {target_rank}. Njengoba amazinga afanayo, zombili izingcezu zilahlekile.",
+    "opponent_equal_ranks": "Umdlali {player_id} ususe iqhosha kusuka {source} kuya {dest}. Iqhosha elihlaselayo lalingu {attacking_rank} kanti iqhosha eliya kulo lalingu {target_rank}. Njengoba izikhundla zifana, zombili lezi zidalwa zalahleka.",
+    "you_miner_defused": "Ushiye i-piece yakho kusuka ku- {source} kuya ku- {dest}. I-piece yokuhlasela yayingu- {attacking_rank} futhi i-piece yokuya kuyo yayingu- {target_rank}. Njengoba abavukuzi bekwazi ukucisha amabhomu, uwine impi.",
+    "opponent_miner_defused": "Umdlali {player_id} ususe i-piece kusuka {source} kuya {dest}. I-piece yokuhlasela yayingu {attacking_rank} futhi i-piece yokuya kuyo yayingu {target_rank}. Njengoba abavukuzi bekwazi ukucisha amabhomu, ulahlekelwe yimpi.",
+    "you_bomb_lost": "Uhambise ucezu lwakho kusuka ku- {source} kuya ku- {dest}. Ucezu lokuhlasela lwalungu- {attacking_rank} kanti ucezu lokuya kulo lwalungu- {target_rank}. Njengoba umhlaseli engeyena umvukuzi, ulahlekelwe impi.",
+    "opponent_bomb_won": "Umdlali {player_id} ususe i-piece kusuka {source} kuya {dest}. I-piece yokuhlasela yayingu {attacking_rank} futhi i-piece yokuya kuyo yayingu {target_rank}. Njengoba umhlaseli engeyona imayini, uwine impi.",
+    "you_spy_won": "You have moved your piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a spy and the destination is a marshall, you won the battle.",
+    "opponent_spy_lost": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a spy and the destination is a marshall, you lost the battle.",
+    "you_higher_won": "Uhambise ucezu lwakho kusuka ku- {source} kuya ku- {dest}. Ucezu lokuhlasela lwalungu- {attacking_rank} kanti ucezu lokuya kulo lwalungu- {target_rank}. Njengoba umhlaseli enesikhundla esiphakeme kunendawo okuyiwa kuyo, uwine impi.",
+    "opponent_higher_lost": "Umdlali {player_id} ususe isiqeshana kusuka {source} kuya {dest}. Isiqeshana esihlaselayo sasingu {attacking_rank} kanti isiqeshana esiya kuso kwaku {target_rank}. Njengoba umhlaseli enesikhundla esiphakeme kunesiqephu esiya kuso, ulahlekelwe impi.",
+    "you_lower_lost": "Uhambise ucezu lwakho kusuka ku- {source} kuya ku- {dest}. Ucezu lokuhlasela lwalungu- {attacking_rank} kanti ucezu lokuya kulo lwalungu- {target_rank}. Njengoba umhlaseli enesikhundla esiphansi kunesokuya kulo, ulahlekelwe impi.",
+    "opponent_lower_won": "Umdlali {player_id} ususe isiqeshana kusuka {source} kuya {dest}. Isiqeshana esihlaselayo sasingu {attacking_rank} kanti isiqeshana esiya kuso kwaku {target_rank}. Njengoba umhlaseli enesikhundla esiphansi kunesiqephu esiya kuso, uwine impi."
+  },
+  "outcome": {
+    "flag_captured": "Umdlali {player_id} uthumbe ifulegi lomphikisi!",
+    "no_movable_pieces": "Umdlali {winner_id} uyawina! Umdlali {loser_id} akasenazo izingcezu ezihambayo."
+  }
+}

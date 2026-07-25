@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a {max_rounds} round game of Kuhn Poker.\nGame Rules:\n- Kuhn Poker uses a 3-card deck with J, Q, K (J lowest, K highest)\n- Each player antes {ante} chip and receives 1 card each round (note that the cards are dealt without replacement, so you cannot have the same card as your opponent).\n- Game continues for {max_rounds} rounds\n- The player with the most chips after all rounds wins\nAction Rules:\n- '[check]': Pass without betting (only if no bet is on the table)\n- '[bet]': Add 1 chip to the pot (only if no bet is on the table)\n- '[call]': Match an opponent's bet by adding 1 chip to the pot\n- '[fold]': Surrender your hand and let your opponent win the pot"
+  },
+  "init_round": {
+    "round_start": "### Ukuqala umjikelezo {current_round} ngaphandle {max_rounds} imijikelezo. Ikhadi lakho liyi: '{player_card}'",
+    "available_actions": "Izinyathelo zakho ezikhona yilezi: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Isenzo kufanele sibe [Check], [Bet], [Call], noma [Fold].",
+    "not_legal": "Isenzo kufanele sibe {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Izinyathelo zakho ezikhona yilezi: {legal_actions}.",
+    "round_summary": "{reason} Amaphuzu amanje: Umdlali 0: \"{player_0_chips}\"; Umdlali 1: \"{player_1_chips}\""
+  },
+  "showdown": {
+    "showdown_summary": "Ukubhekana: Umdlali {winner} {winner_card} ushaya uMdlali {loser} {loser_card}. Umdlali {winner} uwina i-pot yama-chips {pot_value}."
+  },
+  "outcome": {
+    "draw": "Ekupheleni kwemijikelezo {max_rounds}, bobabili abadlali babenenani elifanayo lama-chips.",
+    "round_win": "Umdlali {player_id} uhoxile.",
+    "winner_player0": "Umdlali 0 uwine ngokuba nama-chips amaningi ekupheleni kwawo wonke ama-rundo {max_rounds}.",
+    "winner_player1": "Umdlali 1 uwine ngokuba nama-chips amaningi ekupheleni kwawo wonke ama-rundo {max_rounds}."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Wena ungumdlali {player_id}, udlala {num_rounds} imizuliswano ye-Iterated Ultimatum Game. Unama-${pool} ukuze uhlukanise lo mjuliswano phakathi kwakho noMdlali {other_id}. Ophakamisa: - Yenza isipho: [Offer: $X] (0 <= X <= pool) - Uma samukelwa → Uthola $(pool - X), omunye umdlali uthola $X - Uma senqatshelwe → Bobabili bathola $0 - Isibonelo: [Offer: $3] noma 'Ngicabanga ukuthi lokhu kulungile. [Offer: $5]' Ophendulayo: - Nquma ngesipho noma nge [Accept] noma [Reject] - Isibonelo: 'Lokho kubonakala kunengqondo. [Accept]' 'Akulungile kakhulu. [Reject]' "
+  },
+  "round": {
+    "begins": "--- Umjikelezo {round_number} uyaqala! --- Umdlali {proposer_id} uyena owenza isiphakamiso, Umdlali {responder_id} uyena ophendulayo.",
+    "offer": "Umjikelezo {round_number}: Umdlali {proposer_id} unikeza ${offer} kuMdlali {responder_id} (ugcina ${keep}).",
+    "accepted": "Umdlali {responder_id} wamukelwa! Umjikelezo {round_number} uzuza: Umdlali {proposer_id} + ${proposer_gain}, Umdlali {responder_id} + ${responder_gain}. Amanani amasha: Umdlali 0: ${total_0}, Umdlali 1: ${total_1}.",
+    "rejected": "Umdlali {responder_id} wenqaba ukunikezwa! Umjikelezo {round_number} uzuza: Bobabili abadlali + $ 0. Amanani ahlala: Umdlali 0: ${total_0}, Umdlali 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Umfakisicelo kufanele enze isicelo sokukhishwa kwesicelo esebenzisa ifomethi [Offer: $X].",
+    "bad_integer": "Inani lomnikelo kufanele libe yinombolo ephelele evumelekile.",
+    "out_of_range": "Umnikelo kufanele ube phakathi kuka-$0 no-${pool}.",
+    "no_current_offer": "Akukho sipho samanje okufanele sisabele kuso.",
+    "accept_or_reject": "Umphenduli kufanele noma [Accept] noma [Reject] ukunikezwa."
+  },
+  "outcome": {
+    "win": "Umdlali {winner} unqobe ngo- ${winner_total} isiyonke vs Umdlali {loser} ngo- ${loser_total}.",
+    "draw": "Bobabili abadlali baqeda ngo- ${total} isiyonke."
+  }
+}

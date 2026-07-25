@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Wena ungumdlali {player_id} emdlalweni wabadlali abathathu we-Iterated Prisoner's Dilemma. Umdlalo uthatha imizuliswano {num_rounds}. Isakhiwo somjikelezo: • {conv_rounds} ukuphenduka kwamahhala kwezingxoxo • 1 ukuphenduka kokunquma - thumela ithokheni elilodwa kumphikisi ngamunye: '[<opp-id> cooperate]' noma '[<opp-id> defect]' (okungukuthi '[1 defect] [2 cooperate]'; okuzenzakalelayo 'bambisana'). I-matrix yokukhokha ngokuhlakanipha kwe-pair (esetshenziswa kulowo nalowo mbhangqwana ongalungiswanga): - Bobabili babambisana -> {reward} - Bobabili banamaphutha -> {punishment} - Uyahluleka, bayabambisana -> {temptation} - Uyabambisana, bayaphutha -> {sucker} Umdlali) onamaphuzu aphezulu ekugcineni kwayo yonke imizuliswano uyaphumelela."
+  },
+  "round": {
+    "start": "─── Ukuqala Umjikelezo {round} ─── Ungakhuluma ngokukhululeka emizuzwini elandelayo {conv_rounds}.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Imiphumela:",
+    "pair_line": "{observation} Umdlali {i} vs Umdlali {j} ukhethe {choice_i} no {choice_j} ngokulandelana (Umdlali {i} uthole {gain_i}, Umdlali {j} uthole {gain_j})",
+    "scores_open": "{observation} -> Izikolo zamanje: ",
+    "score_first": "{observation}Umdlali {player_id} ({score})",
+    "score_next": "{observation}; Umdlali {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Amaphuzu okugcina: {scores}. Amaqembu okubalwa (okubi kakhulu→okuhle kakhulu): {groups}"
+  }
+}

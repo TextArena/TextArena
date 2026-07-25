@@ -34,7 +34,7 @@ import sys
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ENVS_DIR = os.path.join(REPO_ROOT, "textarena", "envs")
-DEFAULT_LANGS = ["ar", "de", "es", "fr", "he", "ms", "zh", "kn", "be", "gu", "pa", "mr", "ps", "te", "sd", "ne", "lo", "uz", "ml"]  # en is the source
+DEFAULT_LANGS = ["ar", "de", "es", "fr", "he", "ms", "zh", "kn", "be", "gu", "pa", "mr", "ps", "te", "sd", "ne", "lo", "uz", "ml", "zu"]  # en is the source
 LANG_NAMES = {
     "ar": "Arabic", "de": "German", "es": "Spanish", "fr": "French",
     "he": "Hebrew", "ms": "Malay", "zh": "Simplified Chinese",
@@ -50,6 +50,7 @@ LANG_NAMES = {
     "lo": "Lao",
     "uz": "Uzbek",
     "ml": "Malayalam",
+    "zu": "Zulu",
 }
 
 SYSTEM = (

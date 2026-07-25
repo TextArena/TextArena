@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Udlala iGolf (Umdlalo wamakhadi) - Umdlali {player_id}. Umgomo: Thola amaphuzu aphansi kunawo wonke kulo mjikelezo owodwa. Uma amakholomu enenani elifanayo, afinyelelwa ku-0. Amanani amakhadi: A = 1, 2-10 = inani elibonakalayo, J / Q = 10, K = 0 Izenzo (sebenzisa amakhethini aqondile): - '[draw]' - Dweba kusuka kumgqomo - '[take]' - Thatha kusuka enqwabeni elahliwe - '[swap X Y]' - Shintshanisa ikhadi elidwetshwe ngesikhundla X (umugqa) Y (ikholomu) - '[discard]' - Lahla ikhadi elidwetshwe "
+  },
+  "board": {
+    "drew": "Wadonsa: {card} Manje kumelwe [swap X Y] noma [discard] it.",
+    "took": "Uthathe: {card} kusuka enqwabeni yokulahla Kufanele [swap X Y] nayo (awukwazi ukulahla).",
+    "peeked": "Ubheke endaweni ({row},{col}): {card}",
+    "turn_view": "Isandla sakho: {hand} Ukulahla inqwaba: {discard} {options}",
+    "none": "Ayikho"
+  },
+  "options": {
+    "final_turns": "Izinketho zakho: [draw], [take], [peek X Y]",
+    "draw": "Izinketho zakho: [draw], [take]",
+    "must_swap": "You must: [swap X Y] (cannot discard cards from discard pile)",
+    "swap_or_discard": "Kumele: [swap X Y] noma [discard]"
+  },
+  "hand": {
+    "no_cards": "Awekho amakhadi",
+    "header": "Umbala: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Umdlali {pid} ushintshe {new} no {old} endaweni ({row},{col})",
+    "discarded": "Umdlali {pid} ulahliwe {card}"
+  },
+  "message": {
+    "deck_empty": "Umdlalo uphela ngokushesha.",
+    "knocked": "Umdlali {pid} u-knocked! Umdlali ngamunye uthola ithuba elilodwa.",
+    "final_round": "Umdlali {pid} {reason}! Omunye nomunye umdlali uthola ithuba elilodwa."
+  },
+  "reason": {
+    "all_revealed": "Ingabe wonke amakhadi avezwe"
+  },
+  "invalid": {
+    "wrong_action": "Sebenzisa isenzo esisodwa esifakwe phakathi kwemishayo: [draw], [take], [swap X Y], [discard], [knock], noma [peek X Y]",
+    "discard_empty": "Inqwaba yokulahla ayinalutho!",
+    "must_draw_first": "Kumele uqale [draw], [take], [knock], noma [peek X Y]",
+    "cannot_discard_taken": "Awukwazi ukulahla ikhadi elithathwe enqwabeni yokulahla. Kumelwe ulitshintshe.",
+    "have_drawn_card": "Unekhadi elidonswayo. Kumelwe [swap X Y] noma [discard] lona.",
+    "need_drawn_swap": "Udinga ikhadi eliqoshiwe ukuze ushintshe.",
+    "need_drawn_discard": "Udinga ikhadi eliqoshiwe ukuze ulilahle.",
+    "out_of_bounds": "Isikhundla esingaphandle kwemingcele. Sebenzisa umugqa 1-{max_row}, ikholomu 1-{max_col}",
+    "knock_with_card": "Awukwazi ukushaya ngekhadi eliqoshiwe. Qedela ukuphenduka kwakho kuqala.",
+    "already_knocked": "Othile useyishaye kakade le round.",
+    "already_revealed": "Lelobuciko selidaluliwe kakade!"
+  },
+  "summary": {
+    "full": "Umdlalo Uphelile! Umdlali {winner} uyaphumelela ngesilinganiso samaphuzu {score}! Amaphuzu Okugcina: {scores}",
+    "line": "Umdlali {pid}: {score} amaphuzu "
+  },
+  "board_str": {
+    "title": "=== IGOLF GAME === Umdlalo weGoli",
+    "discard": "Ukulahla inqwaba: {card}",
+    "knocked": "Umdlali {pid} ushaye!",
+    "player_header": "Umdlali {pid} (Isilinganiso: {score}):"
+  }
+}
