@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Spillet begynner. Trumpf-farge: {trump_suit} (trumpfkort: {trump_str}).",
+    "no_trump_card": "ingen"
+  },
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i tysk Whist.\n{phase_info}\nDu holder {hand_size} kort.\nSpill et kort med '[play N]', hvor N er posisjonen i din hånd (for eksempel '[play 3]').",
+    "phase_learning": "LÆRINGSFASE: vinneren av hver stikk tar det åpne kortet og taperen trekker neste kort fra bunken. Stikk vunnet i denne fasen teller ikke mot seier.",
+    "phase_playing": "SPILLFASE: bunken er tom. Hvert stikk fra nå av teller mot seier."
+  },
+  "next_card": {
+    "playing_phase": "Ingen kort er tilgjengelig - spillfasen har begynt.",
+    "deck_empty": "Bunken er tom - ingen kort er tilgjengelig.",
+    "available": "Kort tilgjengelig: {card}",
+    "available_trump": "Kort tilgjengelig: {card} (TRUMPF)"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldig trekkformat. Bruk '[play N]' for å spille N-te kortet i din hånd.",
+    "bad_position": "Den kortposisjonen eksisterer ikke. Du holder {hand_size} kort.",
+    "must_follow_suit": "Du må følge farge og spille et {lead_suit}-kort.",
+    "invalid_play": "Det kortet kan ikke spilles."
+  },
+  "game_action": {
+    "played": "Spiller {player_id} spilte {card}."
+  },
+  "trick": {
+    "won": "Spiller {winner_id} vinner stikket med {card}.",
+    "won_learning": "Spiller {winner_id} vinner stikket med {card} og tar det åpne kortet."
+  },
+  "phase": {
+    "learning_complete": "Bunken er tom. Læringsfasen er over - hvert gjenværende stikk teller mot seier."
+  },
+  "draw": {
+    "winner_received": "Du vant stikket og mottok {card}.",
+    "loser_received": "Du tapte stikket og trakk {card} fra bunken.",
+    "winner_preview": "Neste kort tilgjengelig er {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Stikk vunnet så langt - Spiller 0: {tricks0}, Spiller 1: {tricks1}",
+    "scores_playing": "Poenggivende stikk - Spiller 0: {tricks0}, Spiller 1: {tricks1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Fase: {phase} ({remaining_cards} kort igjen i bunken)"
+  },
+  "hand": {
+    "no_cards": "Ingen kort",
+    "no_cards_in_hand": "Ingen kort i hånden",
+    "header": "Din hånd:",
+    "trump_indicator": " (TRUMPF)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Ingen kort spilt ennå i dette stikket.",
+    "header": "Nåværende stikk:",
+    "trump_indicator": " (TRUMPF)",
+    "card_line": "{observation}\n  Spiller {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Spillet ikke startet",
+    "header": "=== TYSK WHIST-SPIILL ===",
+    "phase": "{observation}\nFase: {phase}",
+    "trump_suit": "{observation}\nTrumpf-farge: {trump_suit}",
+    "trump_card": "{observation}\nTrumpfkort: {card}",
+    "cards_left": "{observation}\nKort igjen i bunken: {count}",
+    "next_card": "{observation}\nNeste kort for vinner: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nNåværende stikk:",
+    "trump_indicator": " (TRUMPF)",
+    "trick_line": "{observation}\n  Spiller {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nSpiller {player_id}: {scoring} poenggivende stikk ({tricks} totalt), {hand_size} kort i hånden"
+  },
+  "outcome": {
+    "summary": "Læringsfase - Spiller 0: {l0}, Spiller 1: {l1}. Spillfase - Spiller 0: {p0}, Spiller 1: {p1}. Spiller {winner_id} vinner med {winner_tricks} poenggivende stikk!"
+  }
+}

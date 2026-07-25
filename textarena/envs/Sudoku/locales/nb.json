@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id}. Du spiller Sudoku.\nHer er den nåværende tilstanden til Sudokurutenettet. Hver rad er nummerert fra 1 til 9, og hver kolonne er også nummerert fra 1 til 9.\nTomme celler representeres av '.', og forhåndsutfylte celler inneholder siffer fra 1 til 9.\n\nNåværende Sudokurutenett:\nDitt mål er å fylle de tomme cellene i 9x9-rutenettet med siffer fra 1 til 9 slik at:\n1. Hver rad inneholder alle siffer fra 1 til 9 uten gjentagelse.\n2. Hver kolonne inneholder alle siffer fra 1 til 9 uten gjentagelse.\n3. Hver av de ni 3x3-undernettene inneholder alle siffer fra 1 til 9 uten gjentagelse.\n\nRegler og instruksjoner:\n1. **Ikke overskriv** de opprinnelige tallene som er gitt i rutenettet.\n2. **Fyll bare** tomme celler som representeres av '.'.\n3. Du kan svare på hvilken som helst måte du foretrekker, men sørg for at svaret ditt inkluderer formatet '[rad kolonne tall]'.\n4. **Sørg for** at trekket ditt ikke bryter Sudokureglene. Ugyldige trekk vil resultere i straff.\nEksempler:\n- **Gyldig trekk**:\n  - Rutenett-snippet før trekk:\n  \n  - Trekk: `[5 3 7]`\n  - Forklaring: Plassering av 7 på rad 5, kolonne 3 bryter ikke noen Sudokuregler.\n\n- **Ugyldig trekk** (Overskriving av en forhåndsutfylt celle):\n  - Rutenett-snippet før trekk:\n  \n  - Trekk: `[1 1 9]`\n  - Forklaring: Celle (1,1) er allerede fylt med 5. Du kan ikke overskrive den.\n\n- **Ugyldig trekk** (Bryter Sudokuregler):\n  - Rutenett-snippet før trekk:\n  \n  - Trekk: `[1 3 5]`\n  - Forklaring: Plassering av 5 på rad 1, kolonne 3 bryter regelen siden 5 allerede eksisterer på rad 1.\n\nHistorien over dine trekk og tanker vil bli lagt til etter hvert som du spiller flere runder. Bruk historien over dine trekk til å forbedre dine beslutninger ved å unngå trekkene du har prøvd. Lykke til!\n\n"
+  },
+  "board": {
+    "game_board": "Spillebrett:\n{board}",
+    "board_state": "Brettets tilstand: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldig trekkformat. Spiller {player_id} svarte ikke med gyldig 'rad kolonne tall'.",
+    "out_of_bounds": "Ugyldig trekk. Spiller {player_id} forsøkte å plassere {num} på ({row}, {col}), som er utenfor grensene.",
+    "overwrite": "Ugyldig trekk. Spiller {player_id} forsøkte å overskrive en forhåndsutfylt celle ({row}, {col}).",
+    "violates_rules": "Ugyldig trekk. Spiller {player_id} forsøkte å plassere {num} på ({row}, {col}), som bryter Sudokuregler."
+  },
+  "outcome": {
+    "win": "Gratulerer! Spiller {player_id} fullførte Sudokugåten.",
+    "turn_limit": "Tidsbegrensningen er nådd. Du fylte korrekt {percent}% av de tomme cellene."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Du spiller Countdown-tallspillet!\nMål: Kombiner tall ved å bruke +, -, *, / for å nå målet.\nHandlingformat: [i j op] hvor i,j er indekser og op er operasjonen.\nEksempel: [0 2 *] multipliserer tallet på indeks 0 med tallet på indeks 2.\nDivisjon må resultere i hele tall bare."
+  },
+  "board": {
+    "header": "MÅL: {target}\n\nTilgjengelige tall:\n{numbers}",
+    "best": "{observation}\n\nBeste så langt: {best_value} (avstand: {distance})\nBeste uttrykk: {best_expression}",
+    "history": "{observation}\n\nTrekkhistorikk:\n{moves}",
+    "progress": "{observation}\nGjeldende fremdriftsscore: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldig handlingformat. Bruk `[i j op]` hvor i,j er indekser og op er +,-,*,/",
+    "invalid_indices": "Ugyldige indekser. Må være forskjellige og innenfor området 0-{max_index}",
+    "invalid_operation": "Ugyldig operasjon (divisjon med null eller ikke-heltallresultat)"
+  },
+  "outcome": {
+    "win": "Perfekt! Fant eksakt mål: {target}",
+    "no_moves": "Ingen flere trekk. Beste resultat: {best_value} (mål: {target})",
+    "turn_limit": "Trekkgrense nådd. Beste resultat: {best_value} (mål: {target})"
+  }
+}

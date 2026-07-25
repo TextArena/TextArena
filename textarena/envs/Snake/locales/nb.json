@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake-lokaliseringsfil. OVERSETT IKKE nøkler (venstre side). Oversett bare verdier (høyre side). Behold hver {placeholder} eksakt som den er.",
+  "_slots": {
+    "{num_players}": "Antall spillere i kampen",
+    "{width}": "Brettets bredde i celler",
+    "{height}": "Brettets høyde i celler",
+    "{max_turns}": "Tidsbegrensning for kampen",
+    "{player_id}": "En spillers nummer (0-basert)",
+    "{board}": "Det tegnede ASCII-rutenettet; behold nøytralt, oversett aldri tegnene",
+    "{reason}": "Den tegnede slutten-av-spill årsaksfrasen",
+    "{groups}": "Nøytral rangeringsdata (en liste over spiller-id-grupper, dårligst til beste); oversett ikke"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-spillers Slange på et {width}×{height}-rutenett.\nDu kontrollerer slange {player_id}. Gyldige trekk: '[up]'/'[down]'/'[left]'/'[right]' (eller w/s/a/d).\nMål: overlev lengst eller vær den lengste og få den høyeste poengsummen (tidsbegrensning på {max_turns} trekk)."
+  },
+  "board": {
+    "current": "Nåværende brett:\n{board}",
+    "after_moves": "Nåværende brettstatus:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Slange {player_id} døde på grunn av ugyldig trekk."
+  },
+  "outcome": {
+    "survived_win": "Spiller {player_id} overlevde; alle andre omkom.",
+    "all_dead_simul": "Alle slangene døde samtidig.",
+    "outlived": "Spilleren overlevde alle andre.",
+    "all_dead": "Alle slangene er døde.",
+    "turn_limit": "Tidsbegrensningen er nådd - beste poengsum vinner ved uavgjort.",
+    "ranking": "{reason} Endelig rangeringsgrupper (dårligst→best): {groups}"
+  }
+}
