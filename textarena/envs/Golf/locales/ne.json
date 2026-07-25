@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "तपाईं गोल्फ (कार्ड खेल) - खेलाडी {player_id} खेलिरहेको हुनुहुन्छ।\nलक्ष्य: यस एकल राउन्डमा सबभन्दा कम जम्मा स्कोर प्राप्त गर्नुहोस्। यदि कॉलमहरूले एकै मान साझा गर्छन्, तिनीहरू ० को रूपमा योग गरिन्छन्।\nकार्ड मानहरू: ए = १, २-१० = मुख मान, जे/क्यू = १०, के = ०\n\nक्रियाहरू (सही वाक्यांश प्रयोग गर्नुहोस्):\n- '[draw]' - डेकबाट खिच्नुहोस्\n- '[take]' - त्याग गरिएको ढेरबाट लिनुहोस्\n- '[swap X Y]' - तानिएको कार्डलाई स्थान X (पंक्ति) Y (कॉलम) साथ अदानप्रदान गर्नुहोस्\n- '[discard]' - तानिएको कार्ड त्याग गर्नुहोस्"
+  },
+  "board": {
+    "drew": "तपाईं आकर्षितः {card} अब तपाईं [swap X Y] वा [discard] यो हुनुपर्छ.",
+    "took": "तपाईंले लिनुभयोः {card} बर्खास्त ढेरबाट तपाईंले [swap X Y] सँग लिनुपर्दछ (बन्द गर्न सकिदैन) ।",
+    "peeked": "तपाईंले स्थिति ({row},{col}) मा हेर्नुभयोः {card}",
+    "turn_view": "तपाईंको हात: {hand} खारेज ढेर: {discard} {options}",
+    "none": "None"
+  },
+  "options": {
+    "final_turns": "अन्तिम पालो! तपाईँका विकल्पहरू: [draw], [take], [peek X Y]",
+    "draw": "तपाईँका विकल्पहरू: [draw], [take]",
+    "must_swap": "तपाईंले: [swap X Y] (डिस्काउड ढेरबाट कार्डहरू हटाउन सक्नुहुन्न)",
+    "swap_or_discard": "तपाईंले: [swap X Y] वा [discard]"
+  },
+  "hand": {
+    "no_cards": "कुनै कार्डहरू छैनन्",
+    "header": "कोल: १ २ ३",
+    "row": "पङ्क्ति {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "खेलाडी {pid} स्थानमा {new} सँग {old} स्थानमा {row},{col}",
+    "discarded": "खेलाडी {pid} खारेज {card}"
+  },
+  "message": {
+    "deck_empty": "डेक खाली छ खेल तुरुन्तै समाप्त हुन्छ।",
+    "knocked": "खेलाडी {pid} खट्यो! प्रत्येक अन्य खेलाडीले एक पटक पालो पाउँछ।",
+    "final_round": "खेलाडी {pid} {reason}! प्रत्येक अन्य खेलाडीले एक पटक पालो पाउँछ।"
+  },
+  "reason": {
+    "all_revealed": "सबै कार्डहरू प्रकट भएको छ"
+  },
+  "invalid": {
+    "wrong_action": "ठीक एक ब्रैकेट कार्य प्रयोग गर्नुहोस्ः [draw], [take], [swap X Y], [discard], [knock], वा [peek X Y]",
+    "discard_empty": "फोहोरको थुप्रो खाली छ!",
+    "must_draw_first": "तपाईंले पहिले [draw], [take], [knock], वा [peek X Y]",
+    "cannot_discard_taken": "तपाईंले नचाहिने कार्डको थुप्रोबाट लिइएको कार्डलाई नछोड्न सक्नुहुन्छ। तपाईंले त्यसलाई बदल्नुपर्छ।",
+    "have_drawn_card": "तपाईँसँग एउटा ड्र गरिएको कार्ड छ। तपाईँले यसलाई [swap X Y] वा [discard] गर्नुपर्छ।",
+    "need_drawn_swap": "तपाईँलाई कार्डहरू बदल्नको लागि एउटा कार्ड चाहिन्छ।",
+    "need_drawn_discard": "तपाईंलाई हटाउनको लागि एउटा कार्ड चाहिन्छ।",
+    "out_of_bounds": "सीमा बाहिरको स्थिति. पङ्क्ति १-{max_row}, स्तम्भ १-{max_col} प्रयोग गर्नुहोस्",
+    "knock_with_card": "तपाईँले पत्ता लगाएर ढक्ढक्याउन सक्नुहुन्न।",
+    "already_knocked": "कसैले यो राउन्ड पहिले नै हराइसकेको छ।",
+    "already_revealed": "त्यो कार्ड पहिले नै प्रकट गरिएको छ!"
+  },
+  "summary": {
+    "full": "खेल समाप्त भयो! खेलाडी {winner} {score} अंकको स्कोरको साथ जीत! अन्तिम स्कोरहरूः {scores}",
+    "line": "खेलाडी {pid}: {score} अंक "
+  },
+  "board_str": {
+    "title": "=== गोल्फ खेल ===",
+    "discard": "निकासको ढेर: {card}",
+    "knocked": "खेलाडी {pid}ले ढकढक्यायो!",
+    "player_header": "खेलाडी {pid} (स्कोर: {score}):"
+  }
+}

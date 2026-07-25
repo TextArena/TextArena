@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "तपाईं काउन्टडाउन नम्बर खेल खेल्दै हुनुहुन्छ! लक्ष्यः लक्ष्यमा पुग्न +, -, *, / प्रयोग गरेर नम्बरहरू मिलाउनुहोस्। कार्य ढाँचाः [i j op] जहाँ i,j सूचकांक हो र op अपरेशन हो। उदाहरणः [0 2 *] सूचकांक ० मा नम्बरलाई सूचकांक २ मा नम्बरसँग गुणा गर्दछ। विभाजनले केवल पूर्णांकमा परिणाम दिनुपर्दछ।"
+  },
+  "board": {
+    "header": "TARGET: {target} उपलब्ध नम्बरहरू: {numbers}",
+    "best": "{observation} सर्वश्रेष्ठ अहिलेसम्म: {best_value} (दूरीः {distance}) सर्वश्रेष्ठ अभिव्यक्ति: {best_expression}",
+    "history": "{observation}\n\nMove history:\n{moves}",
+    "progress": "{observation} हालको प्रगति स्कोर: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "अमान्य सूचकांकहरू. भिन्न हुनुपर्छ र दायरा ०-{max_index} भित्र",
+    "invalid_operation": "अवैध परिचालन (शून्य वा गैर-पूर्णांक परिणाम द्वारा भाग)"
+  },
+  "outcome": {
+    "win": "सही लक्ष्य भेटियो: {target}",
+    "no_moves": "कुनै थप चालहरू छैनन्. सर्वश्रेष्ठ परिणामः {best_value} (लक्ष्यः {target})",
+    "turn_limit": "टर्न लिमिट पुगेको छ। सर्वश्रेष्ठ परिणाम: {best_value} (लक्ष्य: {target})"
+  }
+}
