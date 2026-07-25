@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v Igre Pogajanj.\nImate nekaj virov, in vaša naloga je, da trgujete tako, da se skupna vrednost vaših virov poveča.\nViri in povezane vrednosti, ki jih trenutno imate, so:\n\t+ {resource_value_list}\nNa vsakem koraku lahko govorite s svojim nasprotnikom in naredite ponudbo za trgovanje.\nUporabite naslednje posebne žetone za akcije:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Ponujeni viri -> Zahtevani viri]\n  - '[Accept]': Za sprejetje vhodne ponudbe.\n  - '[Deny]': Za zavrnitev vhodne ponudbe (privzeto).\nIgra traja {max_turns} korakov skupaj."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Igralec je poskušal sprejeti trgovanje brez potrebnih virov.",
+    "out_of_range": "Igralec {player_id}, Neveljavna akcija. Stolpec {col} je zunaj meja.",
+    "already_full": "Igralec {player_id}, Neveljavna akcija. Stolpec {col} je poln.",
+    "proposing_with_no_resource": "Igralec {player_id} je poskušal narediti ponudbo za trgovanje brez potrebnih virov.",
+    "incorrect_offer_format": "Igralec {player_id} je naredil ponudbo za trgovanje v napačnem formatu.",
+    "no_new_offer": "Igralec {player_id} ni naredil nobene nove ponudbe za trgovanje."
+  },
+  "offers": {
+    "reject": "Igralec {player_id} je zavrnil ponudbo za trgovanje.",
+    "accept": "Igralec {acceptor_id} je sprejel ponudbo za trgovanje od Igralca {proposer_id}.",
+    "proposal": "Igralec {player_id} je naredil naslednjo ponudbo Igralcu {opponent_id}: Ponujeni predmeti: {offered} -> Zahtevani predmeti: {requested}"
+  },
+  "outcome": {
+    "win": "Igralec {winner_id} je zmagal z večjim pridobitvom vrednosti inventarja.",
+    "draw": "Enaka sprememba vrednosti inventarja za vse igralce. Neodločeno."
+  }
+}

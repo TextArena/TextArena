@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v igri Indijski Poker.\n- 52-kartni kup; vidite samo karto nasprotnika.\n- Ante {ante} žeton(a) vsako rundo, {max_rounds} rundo(a) skupno.\n- Veljavne poteze: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X je pozitivno celo število ≤ vaše število žetonov.)\n- Najvišja skrita karta zmaga pot pri odločitvi.\n"
+  },
+  "round": {
+    "announce": "### Runda {current_round}/{max_rounds}\nKarta vašega nasprotnika je: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Podajte točno ENO potezo v oglatih oklepajih, npr. '[check]', '[bet 2]', '[call]', '[raise 3]' ali '[fold]'.",
+    "cannot_check": "Ne morete [check] - soočate se s stavko.",
+    "amount_min": "Znesek stave / dviga mora biti ≥ 1.",
+    "cannot_bet": "Ne morete [bet] - morate [call] / [raise] / [fold].",
+    "nothing_to_call": "Ničesar za klicati; lahko namesto tega [check].",
+    "no_bet_to_raise": "Uporabite [bet X] za odpiranje; ni stavke za dvig.",
+    "insufficient": "Nedostatek žetonov za to dejanje."
+  },
+  "game_action": {
+    "action": "Igralec {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (stane {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Vaše možne poteze: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Igralec {winner}. (Bankrolli P0:{p0}, P1:{p1})",
+    "folded": "Igralec {player_id} je prekinil.",
+    "showdown_win": "Odločitev: {card_win} premaga {card_lose}.",
+    "showdown_tie": "Izenačena odločitev: obe {card}. Pot razdeljen – vsak prejme {split}."
+  },
+  "outcome": {
+    "p0_wins": "Igralec 0 zmaga ({bank0} > {bank1})",
+    "p1_wins": "Igralec 1 zmaga ({bank1} > {bank0})",
+    "draw": "Enake žetone po vseh rundah"
+  }
+}

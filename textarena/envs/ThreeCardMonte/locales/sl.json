@@ -1,0 +1,31 @@
+{
+  "_comment": "Datoteka s prevodom za ThreeCardMonte. NE PREVADIJ ključev (levo), samo vrednosti (desno).",
+  "_slots": {
+    "{line}": "Vrstica s prikazanimi čašami",
+    "{step}": "Trenutni korak štetja",
+    "{steps}": "Skupno število korakov štetja",
+    "{i}": "Indeks prve čaše, ki je vključena v menjavo",
+    "{j}": "Indeks druge čaše, ki je vključena v menjavo",
+    "{prompt}": "Lokalizirani promptni fragment, dodan za čaše",
+    "{max_index}": "Najvišji veljaven indeks čaše, tj. num_cups-1",
+    "{ball_pos}": "Indeks čaše, pod katero je žoga"
+  },
+  "player_prompt": {
+    "intro": "Sledi skriti žogi 'X', medtem ko se čaše mešajo.\nPo mešanju uganite njeno lokacijo z `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Žoga začne: {line}",
+    "shuffle": "Mešanje {step}/{steps}: zamenjane čaše {i} in {j}.",
+    "cups": "Čaše: {line}  {prompt}",
+    "guess_now": "(Ugani ZDAJ!)",
+    "reveal": "(Razkrij: žoga pod {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Napačna poteza. Uporabite `[k]`.",
+    "out_of_range": "Indeks izven obsega 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Pravilno! Našli ste žogo.",
+    "lose": "Napačno — žoga je bila pod čašo {ball_pos}."
+  }
+}

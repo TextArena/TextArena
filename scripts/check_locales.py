@@ -41,7 +41,7 @@ import sys
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ENVS_DIR = os.path.join(REPO_ROOT, "textarena", "envs")
-DEFAULT_LANGS = ["ar", "de", "en", "es", "fr", "he", "ms", "pt", "zh", "it", "ru", "ja", "fa", "sr", "fil", "ko", "hi", "bn", "ta", "sw", "af", "bg", "az", "ca", "cs", "da", "el", "et", "fi", "hr", "gl", "hu", "id", "is", "lt", "lv", "mk", "nb", "nl", "pl", "ro", "sk"]
+DEFAULT_LANGS = ["ar", "de", "en", "es", "fr", "he", "ms", "pt", "zh", "it", "ru", "ja", "fa", "sr", "fil", "ko", "hi", "bn", "ta", "sw", "af", "bg", "az", "ca", "cs", "da", "el", "et", "fi", "hr", "gl", "hu", "id", "is", "lt", "lv", "mk", "nb", "nl", "pl", "ro", "sk", "sl"]
 
 SLOT_RE = re.compile(r"{[^{}]*}")
 ALPHA_RE = re.compile(r"[^\W\d_]", re.UNICODE)  # any unicode letter

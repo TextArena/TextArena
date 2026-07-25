@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v ponavljajoči se dilemi zapornika, ki zajema {num_rounds} krogov.\n\nStruktura igre:\n- Pred vsako odločitvijo imate {total_conversation_rounds} potez za prosto komunikacijo.\n- Potem oba igralca istočasno izbereta, ali bosta sodelovala ali prevarala.\n\nMatrika plačil (fiksna za vsak krog):\n- Oba sodelujeta ➜ vsak {cooperate_reward}\n- Oba prevarata ➜ vsak {mutual_defect_reward}\n- Eden prevara, eden sodeluje ➜ prevarant {defect_reward}, sodelavec {sucker_reward}\n\nKako igrati:\n- Med pogovorom: vpišite poljuben tekst.\n- Med fazo odločitve: vključite '[Cooperate]' ali '[Defect]' (neobčutljivo na velikost črk). Lahko dodate dodaten tekst pred/po žetonu."
+  },
+  "phases": {
+    "conversation_finished": "Pogovor za krog {round} je končan. Prosim, odgovorite z '[Cooperate]' ali '[Defect]' znotraj \\boxed{{}}.",
+    "starting_round": "--- Začetek kroga {round} ---",
+    "round_summary": "Rezultati kroga {round}:\n{outcome}\nIgralec 0 je zaslužil {r0} (skupaj {score_0}), Igralec 1 je zaslužil {r1} (skupaj {score_1})."
+  },
+  "outcome": {
+    "winner": "Igralec {winner} zmaga {win_score} - {lose_score}.",
+    "draw": "Neodločeno! Oba igralca sta dosegla {s0}.",
+    "round_both_cooperate": "Oba igralca sta sodelovala.",
+    "round_both_defect": "Oba igralca sta prevarala.",
+    "round_p0_cooperates_p1_defects": "Igralec 0 je sodeloval, Igralec 1 je prevaral.",
+    "round_p0_defects_p1_cooperates": "Igralec 0 je prevaral, Igralec 1 je sodeloval."
+  }
+}

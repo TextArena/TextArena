@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v **Ultimativnem Tic Tac Toeju**.\nOddajte svojo potezo kot **[makro  mikro]** (dve številki 0-8):\n• *makro*  = v kateri mini-plošči igrate\n• *mikro* = v katerem kvadratu znotraj te mini-plošče\nPrimer `[7 8]` ➜ postavite svoj znak v mini-plošči 7, kvadratu 8, in\nprisilite nasprotnika, da igra v mini-plošči 8 naslednjič.\n\nVi ste `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Trenutna plošča:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Poteza mora biti v obliki [makro mikro] s številkami 0-8.",
+    "out_of_range": "Indeksi morajo biti vsak med 0 in 8.",
+    "index_out_of_range": "Mikro-plošča, vrstica ali stolpec je zunaj dosega.",
+    "cell_occupied": "Celica je že zasedena.",
+    "wrong_micro_board": "Igralec mora igrati v naslednji mikro-plošči.",
+    "micro_board_won": "Mikro-plošča je že osvojena."
+  },
+  "next_board": {
+    "any": "katera koli mikro-plošča",
+    "specific": "mikro-plošča {nxt}"
+  },
+  "game_action": {
+    "played": "Igralec {player_id} je igral v mikro-plošči {macro_idx}, celici {micro_idx} (vrstica {row}, stolpec {col}). Igralec {opponent_id} mora zdaj igrati v {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Igralec {player_id} zmaga v Ultimativnem Tic Tac Toeju!",
+    "draw": "Igra je neodločena!"
+  }
+}
