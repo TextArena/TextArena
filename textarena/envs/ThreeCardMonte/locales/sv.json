@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte-lokaliseringsfil. ÖVERSÄTT INTE nycklar (vänster sida). Översätt endast värden (höger sida).",
+  "_slots": {
+    "{line}": "Den återgivna raden med koppar",
+    "{step}": "Det aktuella stegnumret i omrörningen",
+    "{steps}": "Det totala antalet omrörningssteg",
+    "{i}": "Indexet för den första koppen som är involverad i ett byte",
+    "{j}": "Indexet för den andra koppen som är involverad i ett byte",
+    "{prompt}": "Den lokaliseringsspecifika promptdelen som läggs till efter kopparna",
+    "{max_index}": "Det högsta giltiga koppindexet, d.v.s. num_cups-1",
+    "{ball_pos}": "Indexet för den kopp som bollen ligger under"
+  },
+  "player_prompt": {
+    "intro": "Följ den dolda bollen 'X' medan kopparna omrörs.\nEfter omrörningen, gissa dess plats med `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Bollen börjar: {line}",
+    "shuffle": "Omrörning {step}/{steps}: bytte koppar {i} och {j}.",
+    "cups": "Koppar: {line}  {prompt}",
+    "guess_now": "(Gissa NU!)",
+    "reveal": "(Avslöja: bollen under {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Felaktig åtgärd. Använd `[k]`.",
+    "out_of_range": "Index utanför området 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Rätt! Du hittade bollen.",
+    "lose": "Fel — bollen låg under kopp {ball_pos}."
+  }
+}

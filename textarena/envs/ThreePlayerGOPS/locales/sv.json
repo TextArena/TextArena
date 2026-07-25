@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS-lokaliseringsfil. ÖVERSÄTT INTE nycklar (vänster sida). Översätt endast värden (höger sida).",
+  "_slots": {
+    "{player_id}": "Spelarens nummer, 0, 1 eller 2",
+    "{round}": "Aktuell rondnummer, 1..13",
+    "{prize}": "Den avslöjade priskortets ansiktsmärkning (A, 2..10, J, Q, K) - översätt inte",
+    "{worth}": "Prisets totala värde inklusive eventuell överförd pott",
+    "{hand}": "Spelarens återstående kort, återgivna som hakparenteserade token som '[A]' '[2]' - översätt inte",
+    "{bids}": "Den neutrala kommaavgränsade listan över spelade kort som 'P0:10, P1:J, P2:Q' - översätt inte",
+    "{winner}": "Spelarens nummer som vann ronden",
+    "{pot}": "Pottvärdet som tilldelades eller fördes över denna rond",
+    "{scoreline}": "Den neutrala löpande poängtavlan som 'P0:0  P1:0  P2:11' - översätt inte",
+    "{pid}": "Spelarens nummer som eliminerades",
+    "{scores}": "De slutliga poängerna som en rå spelarnummer-till-poängmappning - översätt inte"
+  },
+  "player_prompt": {
+    "intro": "Du är Spelare {player_id} i Tre-spelar-GOPS.\n- Du håller de 13 korten A-K (varje exakt en gång).\n- Varje rond avslöjas ett pris. Skicka ETT kort som `[Q]`, `[10]`, `[2]` …\n- Högsta kort vinner priset (+ eventuell överförd pott). Oavgjort rullar priset in i nästa rond.\n- Efter 13 ronder vinner högsta total. Ogiltiga drag = eliminering."
+  },
+  "round": {
+    "header": "### Rond {round}/13 - Pris: {prize} (värt {worth})",
+    "hand": "Din återstående hand: {hand}"
+  },
+  "reveal": {
+    "win": "Bud » {bids} - Spelare {winner} vinner {pot}.",
+    "tie": "Bud » {bids} - oavgjort, pott nu {pot}.",
+    "scores": "Poäng → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "åtgärden behöver ett hakparenteserat kort som '[Q]'",
+    "bad_card": "kort redan använt eller ogiltigt"
+  },
+  "elimination": {
+    "player": "Spelare {pid} eliminerad efter upprepade ogiltiga drag."
+  },
+  "outcome": {
+    "auto_win": "Två spelare eliminerade - automatisk vinst.",
+    "final": "Slutliga poäng: {scores}"
+  }
+}

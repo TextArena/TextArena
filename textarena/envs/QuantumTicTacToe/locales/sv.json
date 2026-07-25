@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Du är spelare {player_id} i Quantum Tic Tac Toe.\nDin symbol är '{symbol}', och dina dragnummer är alltid {parity} (t.ex. X1, X3 eller O2, O4).\n\nMål: Vinn genom att bilda en linje med tre klassiska markeringar (som har solidifierats från superpositioner).\n\nHur man spelar:\n- På varje tur placerar du en spöklik markering i två olika tomma rutor med formatet '[a,b]'.\n- Dessa markeringar är sammanflätade och märkta som 'X1 / X1' eller 'O4 / O4'.\n- Du kan inte placera spöklika markeringar i en ruta som redan har kollapsat (solidifierats).\n\nKollapsregel:\n- Om ditt drag skapar en cykel i sammanflätningsgrafen kollapsar den automatiskt.\n- Varje spöklik markering i cykeln förvandlas till en klassisk markering i en av dess två positioner.\n- Eventuella beroende spöklika markeringar kollapsar också.\n\nSeger:\n- Spelet slutar när en spelare har tre klassiska markeringar i rad.\n- Om båda spelarna får en linje under samma kollaps vinner den med det lägre maxdragnumret.\n\nExempeldrag: '[0,4]' placerar en spöklik markering i cellerna 0 och 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe-bräde:\n\n{board}\n\nSkicka in ditt drag som '[a,b]' för att placera en kvantmarkering på två platser."
+  },
+  "invalid_move": {
+    "wrong_format": "Ogiltigt format. Använd '[a,b]'.",
+    "invalid_cells": "Ogiltiga eller dubblettcellindex.",
+    "already_solidified": "En av cellerna är redan solidifierad."
+  },
+  "game_action": {
+    "placed": "Spelare {player_id} placerade sin symbol i en superposition mellan cellerna {pos_a} och {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Beroende superposition löst. Cell ({r}, {c}) är nu {symbol}.",
+    "last_cell_resolved": "Superposition för sista cellen löst. Cell ({r}, {c}) är nu {symbol}.",
+    "superposition_resolved": "Superposition löst. Cell ({r}, {c}) är nu {symbol}."
+  },
+  "outcome": {
+    "win": "Spelare {player_id} vinner med solidifierade markeringar!",
+    "draw": "Spelet är oavgjort!"
+  }
+}

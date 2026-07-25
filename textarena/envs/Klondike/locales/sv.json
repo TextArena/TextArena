@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire-lokaliseringsfil. ÖVERSÄTT INTE nycklar (vänster sida). Översätt endast värden (höger sida).",
+  "_slots": {
+    "{n}": "Åtgärdsindex inom en kommaavgränsad kommando, 1-baserad",
+    "{msg}": "Ett kapslat resultatmeddelande per åtgärd (redan lokaliserat)",
+    "{count}": "Antal synliga kort som flyttas",
+    "{src}": "Källtabellnummer, 1-baserad",
+    "{dst}": "Måltabellnummer, 1-baserad",
+    "{cmd}": "Det okända kommandot som spelaren skrev in (inte översatt)",
+    "{max_turns}": "Det maximala antalet turer innan spelet slutar",
+    "{score}": "Antal kort som för närvarande ligger i grundpilarna",
+    "{board}": "Den återgivna ASCII-brädet (aldrig översätts)",
+    "{turn}": "Aktuell tur",
+    "{stock}": "Antal kort kvar i lagret",
+    "{waste}": "Det översta avfallskortets etikett, eller '--' om det är tomt (aldrig översätts)",
+    "{cards}": "Korten i en hög som neutrala etiketter, eller '--' om det är tomt (aldrig översätts)"
+  },
+  "player_prompt": {
+    "intro": "Du spelar Klondike Solitaire. Ditt mål är att flytta alla kort till grundpilarna.\n\nSpelregler:\n- Grundpilar (F1-F4): Bygg upp från Ess till Kung i färg\n- Tabellpilar (T1-T7): Bygg ned med alternerande färger (rött på svart, svart på rött)\n- Lager: Dra kort till avfallshögen\n- Avfall (W): Översta kortet är tillgängligt för spel\n\nKommandon:\n- 'draw' - Dra kort från lager till avfall\n- 'move <källa> <mål> [antal]' - Flytta kort mellan högar\n  Exempel: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Antal kan också vara 'all', som kommer att försöka flytta alla synliga kort.\n- 'forfeit' - Avsluta spelet omedelbart och lås in din nuvarande poäng\n- Högnamn: W (avfall), F1-F4 (grundpilar), T1-T7 (tabellpilar)\n\nDu kan utföra flera åtgärder i en tur genom att separera dem med kommatecken:\n  Exempel: 'draw, move W T1, move T2 F1'\n\nEndast Kungar kan placeras på tomma tabellpilar.\nÅtgärder utförs i ordning - om en misslyckas, hoppas de återstående åtgärderna över.\nAnvänd 'forfeit' om du tror att spelet är omöjligt att vinna."
+  },
+  "format_error": {
+    "no_brackets": "Ogiltigt åtgärdsformat. Åtgärden bör vara inom hakparenteser.",
+    "no_closing_bracket": "Ogiltigt åtgärdsformat. Saknar avslutande hakparentes ']'",
+    "empty_command": "Tomt kommando. Skriv 'draw' eller 'move <källa> <mål> [antal]'",
+    "empty_action": "Tom åtgärd",
+    "move_needs_args": "Flyttningskommandot kräver källa och mål. Användning: 'move <källa> <mål> [antal]'",
+    "count_positive": "Antal måste vara positivt eller 'all'",
+    "count_invalid": "Ogiltigt antal. Använd ett nummer eller 'all'",
+    "unknown_command": "Okänt kommando '{cmd}'. Använd 'draw', 'move <källa> <mål> [antal]' eller 'forfeit'",
+    "wrapped": "Åtgärd {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Åtgärd {n}: {msg}",
+    "before_failure": "Utförde {n} åtgärd(er) innan misslyckandet.",
+    "failed": "Åtgärd {n} misslyckades: {msg}"
+  },
+  "move_result": {
+    "drew": "Drog kort från lager till avfall.",
+    "cannot_draw": "Kan inte dra. Både lager och avfall är tomma.",
+    "invalid_pile": "Ogiltigt högnamn. Använd W, F1-F4 eller T1-T7",
+    "foundation_one_card": "Kan endast flytta 1 kort till grundpilen",
+    "waste_to_foundation_ok": "Flyttade kort från avfall till grundpilen F{dst}",
+    "waste_to_foundation_bad": "Kan inte flytta avfallskort till den grundpilen",
+    "tableau_to_foundation_ok": "Flyttade kort från tabellpilen T{src} till grundpilen F{dst}",
+    "tableau_to_foundation_bad": "Kan inte flytta tabellkort till den grundpilen",
+    "foundation_to_foundation": "Kan inte flytta från grundpilen till grundpilen",
+    "waste_to_tableau_one_card": "Kan endast flytta 1 kort från avfall till tabellpilen",
+    "waste_to_tableau_ok": "Flyttade kort från avfall till tabellpilen T{dst}",
+    "waste_to_tableau_bad": "Kan inte placera avfallskort på den tabellpilen",
+    "no_face_up": "Inga synliga kort att flytta",
+    "tableau_to_tableau_ok": "Flyttade {count} kort från tabellpilen T{src} till T{dst}",
+    "tableau_to_tableau_bad": "Kan inte flytta {count} kort från T{src} till T{dst}",
+    "foundation_to_tableau_one_card": "Kan endast flytta 1 kort från grundpilen till tabellpilen",
+    "foundation_empty": "Grundpilen F{src} är tom",
+    "foundation_to_tableau_ok": "Flyttade kort från grundpilen F{src} till tabellpilen T{dst}",
+    "foundation_to_tableau_bad": "Kan inte placera grundpilkort på tabellpilen T{dst}",
+    "to_waste_or_stock": "Kan inte flytta till avfall eller lager"
+  },
+  "outcome": {
+    "forfeit": "Spelet avbröts. Slutpoäng: {score} kort i grundpilarna.",
+    "won": "Grattis! Du har vunnit Klondike Solitaire!",
+    "turn_limit": "Spelet är slut! Du har nått det maximala antalet turer på {max_turns}. Poäng: {score} kort i grundpilarna."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Tur: {turn}/{max_turns}",
+    "stock": "Lager: {stock} kort",
+    "waste": "Avfall (W): {waste}",
+    "foundations_header": "Grundpilar:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabellpilar:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}
