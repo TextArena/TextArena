@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "कुहन पोकरच्या {max_rounds} फेरीच्या खेळामध्ये आपण खेळाडू {player_id} आहात. खेळाचे नियम: - कुहन पोकर जे, क्यू, के (जे सर्वात कमी, के सर्वाधिक) सह 3-कार्ड डेक वापरते - प्रत्येक खेळाडू एंटिस {ante} चिप वापरतो आणि प्रत्येक फेरीमध्ये 1 कार्ड प्राप्त करतो (लक्षात ठेवा की कार्डे बदलल्याशिवाय दिली जातात, म्हणून आपल्या प्रतिस्पर्ध्यासारखे कार्ड आपल्याकडे असू शकत नाही). - खेळ {max_rounds} फेऱ्यांसाठी सुरू राहतो - सर्व फेऱ्यांनंतर सर्वाधिक चिप्स असलेला खेळाडू जिंकतो कृती नियमः - '[check]': पास न करता पैज लावणे (केवळ जर पैज टेबलवर नसेल तर) - '[bet]': भांड्यात 1 चिप जोडा (केवळ जर पैज टेबलवर नसेल तर) - '[call]': भांड्यात 1 जोडून प्रतिस्पर्ध्याच्या पैजशी जुळवा - [fold]: आपला हात सोडवा आणि आपल्या प्रतिस्पर्ध्याला भांड्यात विजय मिळवा"
+  },
+  "init_round": {
+    "round_start": "### सुरुवातीचा फेरा {current_round} {max_rounds} फेऱ्यांमधून. तुमचं कार्ड आहे: '{player_card}'",
+    "available_actions": "तुमच्या उपलब्ध कृती पुढीलप्रमाणे: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "कृती [Check], [Bet], [Call], किंवा [Fold] असावी.",
+    "not_legal": "कृती {legal_actions} असावी."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "तुमच्या उपलब्ध कृती पुढीलप्रमाणे: {legal_actions}.",
+    "round_summary": "{reason} सध्याचे गुण: खेळाडू ०: \"{player_0_chips}\"; खेळाडू १: \"{player_1_chips}\""
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "{max_rounds} फेरीच्या शेवटी, दोन्ही खेळाडूंकडे चिप्सची संख्या समान होती.",
+    "round_win": "Player {player_id} has folded.",
+    "winner_player0": "खेळाडू ० ने सर्व {max_rounds} फेऱ्यांच्या शेवटी अधिक चिप्स मिळवून जिंकले.",
+    "winner_player1": "खेळाडू १ ने सर्व {max_rounds} फेऱ्यांच्या शेवटी अधिक चिप्स मिळवून जिंकले."
+  }
+}
