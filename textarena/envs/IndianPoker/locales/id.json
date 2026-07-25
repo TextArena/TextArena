@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam permainan Indian Poker.\n- 52 kartu; Anda hanya melihat kartu lawan.\n- Ante {ante} chip setiap ronde, {max_rounds} ronde total.\n- Gerakan yang valid: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X adalah bilangan bulat positif <= jumlah chip Anda.)\n- Kartu tersembunyi tertinggi memenangkan pot pada showdown.\n"
+  },
+  "round": {
+    "announce": "### Ronde {current_round}/{max_rounds}\nKartu lawan Anda adalah: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Berikan tepat SATU tindakan dalam tanda kurung siku, misalnya '[check]', '[bet 2]', '[call]', '[raise 3]', atau '[fold]'.",
+    "cannot_check": "Tidak bisa [check] - Anda menghadapi taruhan.",
+    "amount_min": "Jumlah taruhan / kenaikan harus ≥ 1.",
+    "cannot_bet": "Tidak bisa [bet] - harus [call] / [raise] / [fold].",
+    "nothing_to_call": "Tidak ada yang bisa dipanggil; Anda bisa [check] sebagai gantinya.",
+    "no_bet_to_raise": "Gunakan [bet X] untuk membuka; tidak ada taruhan yang bisa dinaikkan.",
+    "insufficient": "Chip tidak cukup untuk tindakan tersebut."
+  },
+  "game_action": {
+    "action": "Pemain {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (biaya {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Gerakan yang mungkin: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Pemain {winner}. (Saldo P0:{p0}, P1:{p1})",
+    "folded": "Pemain {player_id} mundur.",
+    "showdown_win": "Showdown: {card_win} mengalahkan {card_lose}.",
+    "showdown_tie": "Showdown seri: keduanya {card}. Pot dibagi – masing-masing menerima {split}."
+  },
+  "outcome": {
+    "p0_wins": "Pemain 0 menang ({bank0} > {bank1})",
+    "p1_wins": "Pemain 1 menang ({bank1} > {bank0})",
+    "draw": "Chip sama setelah semua ronde"
+  }
+}

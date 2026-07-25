@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam Iterated Prisoner's Dilemma 3-pemain. Pertandingan berlangsung selama {num_rounds} putaran.\nStruktur putaran:\n• {conv_rounds} putaran obrolan bebas\n• 1 putaran keputusan - kirim satu token per lawan: '[<opp-id> cooperate]' atau '[<opp-id> defect]' (misalnya '[1 defect] [2 cooperate]'; default adalah 'cooperate'). \nMatriks pembayaran pasangan (diterapkan pada setiap pasangan tidak berurutan):\n  - Keduanya bekerja sama  ->  {reward}\n  - Keduanya mengkhianati ->  {punishment}\n  - Anda mengkhianati, mereka bekerja sama -> {temptation}\n  - Anda bekerja sama, mereka mengkhianati -> {sucker}\nPemain dengan skor tertinggi di akhir semua putaran menang."
+  },
+  "round": {
+    "start": "─── Memulai Putaran {round} ───\tAnda dapat berbicara bebas selama {conv_rounds} putaran berikutnya.",
+    "chat_finished": "Obrolan selesai untuk putaran {round}. Kirim keputusan Anda, satu token per lawan: `[pid cooperate]` atau `[pid defect]`."
+  },
+  "results": {
+    "header": "### Putaran {round} - Hasil:",
+    "pair_line": "{observation}\n\t Pemain {i} vs Pemain {j} memilih untuk {choice_i} dan {choice_j} masing-masing (Pemain {i} mendapatkan {gain_i}, Pemain {j} mendapatkan {gain_j})",
+    "scores_open": "{observation}\n-> Skor saat ini: ",
+    "score_first": "{observation}Pemain {player_id} ({score})",
+    "score_next": "{observation}; Pemain {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Skor akhir: {scores}.  Grup peringkat (terburuk→terbaik): {groups}"
+  }
+}

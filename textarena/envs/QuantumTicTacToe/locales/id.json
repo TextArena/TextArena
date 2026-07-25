@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam Quantum Tic Tac Toe.\nSimbol Anda adalah '{symbol}', dan nomor gerakan Anda selalu {parity} (misalnya, X1, X3 atau O2, O4).\n\nTujuan: Menang dengan membentuk garis tiga tanda klasik (mengeras dari superposisi).\n\nCara Bermain:\n- Pada setiap giliran, tempatkan tanda mistis di dua kotak kosong yang berbeda dengan format '[a,b]'.\n- Tanda-tanda ini saling terkait, dan dilabeli seperti 'X1 / X1' atau 'O4 / O4'.\n- Anda tidak dapat menempatkan tanda mistis di kotak yang sudah runtuh (mengeras).\n\nAturan Runtuh:\n- Jika gerakan Anda membuat siklus dalam grafik terkait, itu akan runtuh secara otomatis.\n- Setiap tanda mistis dalam siklus berubah menjadi tanda klasik di salah satu dari dua posisinya.\n- Tanda mistis yang bergantung juga runtuh.\n\nKemenangan:\n- Permainan berakhir ketika seorang pemain memiliki tiga tanda klasik dalam satu baris.\n- Jika kedua pemain mendapatkan garis selama runtuh yang sama, yang memiliki nomor gerakan maksimum lebih rendah menang.\n\nContoh gerakan: '[0,4]' menempatkan tanda mistis di sel 0 dan 4."
+  },
+  "board": {
+    "current_board": "Papan Quantum Tic Tac Toe:\n\n{board}\n\nKirim gerakan Anda sebagai '[a,b]' untuk menempatkan tanda kuantum di dua lokasi."
+  },
+  "invalid_move": {
+    "wrong_format": "Format tidak valid. Gunakan '[a,b]'.",
+    "invalid_cells": "Indeks sel tidak valid atau duplikat.",
+    "already_solidified": "Salah satu sel sudah mengeras."
+  },
+  "game_action": {
+    "placed": "Pemain {player_id} menempatkan simbol mereka dalam superposisi antara sel {pos_a} dan {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposisi bergantung terpecahkan. Sel ({r}, {c}) sekarang {symbol}.",
+    "last_cell_resolved": "Superposisi untuk sel terakhir terpecahkan. Sel ({r}, {c}) sekarang {symbol}.",
+    "superposition_resolved": "Superposisi terpecahkan. Sel ({r}, {c}) sekarang {symbol}."
+  },
+  "outcome": {
+    "win": "Pemain {player_id} menang dengan tanda yang mengeras!",
+    "draw": "Permainan seri!"
+  }
+}

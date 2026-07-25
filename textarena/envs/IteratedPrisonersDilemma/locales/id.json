@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam Iterated Prisoner's Dilemma yang berlangsung selama {num_rounds} putaran.\n\nStruktur Permainan:\n- Sebelum setiap keputusan, Anda memiliki {total_conversation_rounds} giliran untuk berkomunikasi secara bebas.\n- Setelah itu, kedua pemain secara bersamaan memilih untuk bekerja sama atau mengkhianati.\n\nMatriks Imbalan (tetap setiap putaran):\n- Keduanya Bekerja Sama ➜ masing-masing {cooperate_reward}\n- Keduanya Mengkhianati ➜ masing-masing {mutual_defect_reward}\n- Satu Mengkhianati, satu Bekerja Sama ➜ Pengkhianat {defect_reward}, Pekerja Sama {sucker_reward}\n\nCara Bermain:\n- Selama percakapan: ketik teks apa pun yang Anda inginkan.\n- Selama fase keputusan: sertakan '[Cooperate]' atau '[Defect]' (tidak peka huruf besar/kecil). Anda dapat menambahkan teks tambahan sebelum/ sesudah token."
+  },
+  "phases": {
+    "conversation_finished": "Percakapan selesai untuk putaran {round}. Harap balas dengan '[Cooperate]' atau '[Defect]' dalam \\boxed{{}}.",
+    "starting_round": "--- Memulai Putaran {round} ---",
+    "round_summary": "Hasil Putaran {round}:\n{outcome}\nPemain 0 mendapatkan {r0} (total {score_0}), Pemain 1 mendapatkan {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Pemain {winner} menang {win_score} - {lose_score}.",
+    "draw": "Seri! Kedua pemain mendapatkan {s0}.",
+    "round_both_cooperate": "Kedua pemain bekerja sama.",
+    "round_both_defect": "Kedua pemain mengkhianati.",
+    "round_p0_cooperates_p1_defects": "Pemain 0 bekerja sama, Pemain 1 mengkhianati.",
+    "round_p0_defects_p1_cooperates": "Pemain 0 mengkhianati, Pemain 1 bekerja sama."
+  }
+}

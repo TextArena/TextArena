@@ -1,0 +1,39 @@
+{
+  "_comment": "Berkas lokal ThreePlayerGOPS. JANGAN menerjemahkan kunci (sisi kiri). Hanya terjemahkan nilai (sisi kanan). Simpan setiap {placeholder} persis seperti yang ada. Jangan menerjemahkan token kartu yang berada dalam kurung siku (misalnya [A], [10], [Q], [K]), fragmen penawaran/skor netral seperti 'P0:10', tanda markdown '### ', atau simbol '»' dan '→'.",
+  "_slots": {
+    "{player_id}": "Nomor pemain, 0, 1 atau 2",
+    "{round}": "Nomor ronde saat ini, 1..13",
+    "{prize}": "Label wajah kartu hadiah yang terungkap (A, 2..10, J, Q, K) - jangan diterjemahkan",
+    "{worth}": "Nilai total hadiah termasuk pot yang dibawa",
+    "{hand}": "Kartu-kartu pemain yang tersisa, ditampilkan sebagai token dalam kurung siku seperti '[A]' '[2]' - jangan diterjemahkan",
+    "{bids}": "Daftar kartu yang dimainkan dalam format koma-terpisah seperti 'P0:10, P1:J, P2:Q' - jangan diterjemahkan",
+    "{winner}": "Nomor pemain yang memenangkan ronde",
+    "{pot}": "Nilai pot yang diberikan atau dibawa ke ronde berikutnya",
+    "{scoreline}": "Papan skor berjalan dalam format netral seperti 'P0:0  P1:0  P2:11' - jangan diterjemahkan",
+    "{pid}": "Nomor pemain yang disingkirkan",
+    "{scores}": "Skor akhir sebagai pemetaan nomor pemain ke skor - jangan diterjemahkan"
+  },
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam Three-Player GOPS.\n- Anda memiliki 13 kartu A-K (setiap kartu tepat satu kali).\n- Setiap ronde sebuah hadiah terungkap. Serahkan SATU kartu seperti `[Q]`, `[10]`, `[2]` …\n- Kartu tertinggi memenangkan hadiah (+ pot yang dibawa). Seri akan memindahkan hadiah ke ronde berikutnya.\n- Setelah 13 ronde, total tertinggi memenangkan permainan. Gerakan tidak valid = disingkirkan."
+  },
+  "round": {
+    "header": "### Ronde {round}/13 - Hadiah: {prize} (nilai {worth})",
+    "hand": "Sisa kartu Anda: {hand}"
+  },
+  "reveal": {
+    "win": "Penawaran » {bids} - Pemain {winner} memenangkan {pot}.",
+    "tie": "Penawaran » {bids} - seri, pot sekarang {pot}.",
+    "scores": "Skor → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "aksi memerlukan kartu dalam kurung siku seperti '[Q]'",
+    "bad_card": "kartu sudah digunakan atau tidak valid"
+  },
+  "elimination": {
+    "player": "Pemain {pid} disingkirkan setelah gerakan tidak valid berulang."
+  },
+  "outcome": {
+    "auto_win": "Dua pemain disingkirkan - kemenangan otomatis.",
+    "final": "Skor akhir: {scores}"
+  }
+}
