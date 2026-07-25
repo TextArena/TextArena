@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Chopsticks oyununda Oyuncu {player_id}'siniz. Sıranızda, aşağıdaki seçeneklerden birini seçmelisiniz:\n  + Saldırı: '[attack M O]'  burada M=sizin eliniz (0 veya 1), O=rakibin eli (0 veya 1).\n    - Rakibin elindeki sayı sizin elinizdeki sayı kadar artar; eğer >=5 ise, 0 olur.\n  + Böl:   '[split L R]'  toplam parmak sayınızı L ve R olarak yeniden dağıtmak için (L+R = sizin toplamınız).\nYalnızca bu komutlardan biriyle yanıt verin."
+  },
+  "board": {
+    "current_board": "Mevcut Tahta:\nOyuncu 0: {hands_0}\nOyuncu 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Sizin eliniz {my_idx} ölü.",
+    "opp_hand_dead": "Rakibin eli {opp_idx} zaten ölü.",
+    "split_sum": "Bölme toplamı {total} olmalıdır.",
+    "split_no_change": "Bölme el dağılımınızı değiştirmelidir.",
+    "invalid_command": "Geçersiz hamle. '[attack M O]' veya '[split L R]' kullanın."
+  },
+  "game_action": {
+    "attack": "P{player_id}, P{opp_id}'nin eli {opp_idx}'e saldırıyor: {opp_val}'den {new_val}'ye gidiyor.",
+    "split": "P{player_id}, [{L}, {R}] olarak bölüyor."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Rakibin her iki eli de ölü.",
+    "draw": "Tur sınırına ulaşıldı."
+  }
+}

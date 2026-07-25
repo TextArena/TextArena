@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Pig Dice oyununu oynayan Oyuncu {player_id}'siniz.\n\nKurallar:\n- Sıranızda, '[roll]' veya '[hold]' yapabilirsiniz.\n- 2-6 atın: Tur toplamınıza ekleyin\n- 1 atın: Tur toplamınızı kaybedin ve turu bitirin\n- Bekletin: Tur toplamınızı skorunuza ekleyin ve turu bitirin\n- İlk {winning_score} puana ulaşan kazanır\n\nSıranız geldiğinde, mevcut skorları ve tur toplamını göreceksiniz.\n'[roll]' ile zar atmak veya '[hold]' ile puanlarınızı bankaya aktarmak için yanıt verin."
+  },
+  "invalid_move": {
+    "invalid_action": "Geçersiz eylem formatı. '[roll]' veya '[hold]' kullanın."
+  },
+  "actions": {
+    "player_busted": "Oyuncu {player_id} battı, {turn_total} puan kaybediyor!",
+    "player_hold": "Oyuncu {player_id} bekliyor ve {turn_total} puanı bankaya aktarıyor."
+  },
+  "board": {
+    "player": "Oyuncu 0: '{score_0}'; Oyuncu 1: '{score_1}'",
+    "current_total_scores": "Mevcut Toplam Skorlar: {scores}\nMevcut tur toplamınız {turn_total}.",
+    "roll_history": "{observation}\nBu turdaki zar atma geçmişiniz: {roll_history}",
+    "first_roll": "{observation}\nBu turun ilk zar atışı.",
+    "available_actions": "{observation}\nMevcut eylemler: '[roll]' veya '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Oyuncu {winner_id}, tur sınırında daha yüksek bir skora sahip olarak kazandı ({scores})",
+    "winner_by_score": "Oyuncu {winner_id}, {winning_score} hedef skoruna ulaşarak kazandı!",
+    "draw": "Tur sınırına ulaşıldı ve tüm oyuncular aynı skora sahip: {scores}"
+  }
+}

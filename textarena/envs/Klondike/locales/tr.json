@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire dil dosyası. Anahtarları (sol taraf) çevirme. Yalnızca değerleri (sağ taraf) çevir.",
+  "_slots": {
+    "{n}": "Virgülle ayrılmış komutta eylem dizini, 1 tabanlı",
+    "{msg}": "Yerel olarak zaten çevrilmiş bir eylem sonucu iletisi",
+    "{count}": "Yüzü açık kartların taşınan sayısı",
+    "{src}": "Kaynak tablo yığını numarası, 1 tabanlı",
+    "{dst}": "Hedef yığın numarası, 1 tabanlı",
+    "{cmd}": "Oyuncunun girdiği bilinmeyen komut (çevrilmez)",
+    "{max_turns}": "Oyunun bitmesinden önce maksimum tur sayısı",
+    "{score}": "Şu anda temel yığınlarında bulunan kart sayısı",
+    "{board}": "Oluşturulan ASCII tahtası (asla çevirilmez)",
+    "{turn}": "Şimdiki tur numarası",
+    "{stock}": "Stokta kalan kart sayısı",
+    "{waste}": "Atık yığınının en üstündeki kart etiketi, veya boşsa '--' (asla çevirilmez)",
+    "{cards}": "Bir yığın içindeki kartlar tarafsız etiketler olarak, veya boşsa '--' (asla çevirilmez)"
+  },
+  "player_prompt": {
+    "intro": "Klondike Solitaire oynuyorsunuz. Hedefiniz tüm kartları temel yığınlarına taşımaktır.\n\nOyun Kuralları:\n- Temel yığınları (F1-F4): As'tan K'a kadar aynı renkte inşa edin\n- Tablo yığınları (T1-T7): Siyah ve kırmızı renkleri alternatif olarak aşağı doğru inşa edin\n- Stok: Kartları atık yığına çekin\n- Atık (W): En üstteki kart oynanabilir\n\nKomutlar:\n- 'draw' - Stoktan atık yığına kart çekin\n- 'move <kaynak> <hedef> [sayı]' - Kartları yığınlar arasında taşıyın\n  Örnekler: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Sayı 'all' da olabilir, bu tüm yüzü açık kartları taşımaya çalışacaktır.\n- 'forfeit' - Oyunu hemen bitirin ve mevcut puanınızı kilitleyin\n- Yığın adları: W (atık), F1-F4 (temeller), T1-T7 (tablo)\n\nBirden fazla eylemi bir turda virgülle ayırarak gerçekleştirebilirsiniz:\n  Örnek: 'draw, move W T1, move T2 F1'\n\nSadece Krallar boş tablo yığınlarına yerleştirilebilir.\nEylemler sırayla yürütülür - biri başarısız olursa, kalan eylemler atlanır.\nOyunun kazanılmasının imkansız olduğuna inanırsanız 'forfeit' kullanın."
+  },
+  "format_error": {
+    "no_brackets": "Geçersiz eylem formatı. Eylem köşeli parantez içinde olmalıdır.",
+    "no_closing_bracket": "Geçersiz eylem formatı. Kapanış parantezi ']' eksik.",
+    "empty_command": "Boş komut. 'draw' veya 'move <kaynak> <hedef> [sayı]' yazın",
+    "empty_action": "Boş eylem",
+    "move_needs_args": "Taşıma komutu kaynak ve hedef gerektirir. Kullanım: 'move <kaynak> <hedef> [sayı]'",
+    "count_positive": "Sayı pozitif veya 'all' olmalıdır",
+    "count_invalid": "Geçersiz sayı. Bir sayı veya 'all' kullanın",
+    "unknown_command": "Bilinmeyen komut '{cmd}'. 'draw', 'move <kaynak> <hedef> [sayı]', veya 'forfeit' kullanın",
+    "wrapped": "Eylem {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Eylem {n}: {msg}",
+    "before_failure": "{n} eylem(ler)i başarısızlıktan önce yürütüldü.",
+    "failed": "Eylem {n} başarısız: {msg}"
+  },
+  "move_result": {
+    "drew": "Stoktan atık yığına kart(lar) çekildi.",
+    "cannot_draw": "Çekilemez. Hem stok hem de atık yığı boş.",
+    "invalid_pile": "Geçersiz yığın adı. W, F1-F4, veya T1-T7 kullanın",
+    "foundation_one_card": "Temel yığına sadece 1 kart taşınabilir",
+    "waste_to_foundation_ok": "Atık yığından temel yığına F{dst} kartı taşındı",
+    "waste_to_foundation_bad": "Atık yığından o temel yığına kart taşınamaz",
+    "tableau_to_foundation_ok": "Tablo yığından T{src} temel yığına F{dst} kartı taşındı",
+    "tableau_to_foundation_bad": "Tablo yığından o temel yığına kart taşınamaz",
+    "foundation_to_foundation": "Temel yığından temel yığına kart taşınamaz",
+    "waste_to_tableau_one_card": "Atık yığından tablo yığına sadece 1 kart taşınabilir",
+    "waste_to_tableau_ok": "Atık yığından tablo yığına T{dst} kartı taşındı",
+    "waste_to_tableau_bad": "Atık yığından o tablo yığına kart yerleştirilemez",
+    "no_face_up": "Yüzü açık kart taşınacak yok",
+    "tableau_to_tableau_ok": "Tablo yığından T{count} tablo yığına T{src} {dst} kart(lar)ı taşındı",
+    "tableau_to_tableau_bad": "Tablo yığından T{count} tablo yığına T{src} {dst} kart(lar)ı taşınamaz",
+    "foundation_to_tableau_one_card": "Temel yığından tablo yığına sadece 1 kart taşınabilir",
+    "foundation_empty": "Temel yığı F{src} boş",
+    "foundation_to_tableau_ok": "Temel yığından F{src} tablo yığına T{dst} kartı taşındı",
+    "foundation_to_tableau_bad": "Temel yığından kart tablo yığına T{dst} yerleştirilemez",
+    "to_waste_or_stock": "Atık yığına veya stoka kart taşınamaz"
+  },
+  "outcome": {
+    "forfeit": "Oyun terk edildi. Nihai puan: {score} temel yığınlarında kart",
+    "won": "Tebrikler! Klondike Solitaire'i kazandınız!",
+    "turn_limit": "Oyun bitti! Maksimum {max_turns} tur sınırına ulaştınız. Puan: {score} temel yığınlarında kart"
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Tur: {turn}/{max_turns}",
+    "stock": "Stok: {stock} kart",
+    "waste": "Atık (W): {waste}",
+    "foundations_header": "Temeller:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tablo:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

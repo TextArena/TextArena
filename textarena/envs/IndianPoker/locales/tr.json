@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Hindistan Pokeri oyununda Oyuncu {player_id}'siniz.\n- 52 kartlık deste; sadece rakibin kartını görüyorsunuz.\n- Her turda {ante} jeton(lar) ante veriliyor, toplam {max_rounds} tur.\n- Geçerli hamleler: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X, jeton sayınızdan küçük veya eşit pozitif bir tam sayıdır.)\n- Gösterimde en yüksek gizli kart potu kazanır.\n"
+  },
+  "round": {
+    "announce": "### Tur {current_round}/{max_rounds}\nRakibinizin kartı: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Tam olarak BİR parantezli eylem sağlayın, örneğin '[check]', '[bet 2]', '[call]', '[raise 3]' veya '[fold]'.",
+    "cannot_check": "[check] yapılamaz - bir bahisle karşı karşıyasınız.",
+    "amount_min": "Bahis / Artırma miktarı ≥ 1 olmalıdır.",
+    "cannot_bet": "[bet] yapılamaz - [call] / [raise] / [fold] yapılmalıdır.",
+    "nothing_to_call": "Çağıracak bir şey yok; bunun yerine [check] yapabilirsiniz.",
+    "no_bet_to_raise": "Açmak için [bet X] kullanın; artırılacak bir bahis yok.",
+    "insufficient": "Bu eylem için yeterli jeton yok."
+  },
+  "game_action": {
+    "action": "Oyuncu {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (maliyet {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Mümkün olan eylemleriniz: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Oyuncu {winner}. (Bankalar P0:{p0}, P1:{p1})",
+    "folded": "Oyuncu {player_id} vazgeçti.",
+    "showdown_win": "Gösterim: {card_win} {card_lose}'yi yener.",
+    "showdown_tie": "Gösterim berabere: her ikisi de {card}. Pot bölündü – her biri {split} alır."
+  },
+  "outcome": {
+    "p0_wins": "Oyuncu 0 kazanır ({bank0} > {bank1})",
+    "p1_wins": "Oyuncu 1 kazanır ({bank1} > {bank0})",
+    "draw": "Tüm turlardan sonra eşit jeton"
+  }
+}

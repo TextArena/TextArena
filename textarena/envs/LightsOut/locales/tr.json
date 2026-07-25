@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Işıkları Söndür'e hoş geldiniz! {size}x{size} ızgaranız var.\nHedefiniz TÜM ışıkları söndürmek ('.' ile gösterilir)\nBir ışığa bastığınızda, kendisi VE komşuları (yukarı/aşağı/sol/sağ) değişir.\nIşığı açmak için [satır sütun] yazın (0-tabanlı, yani geçerli aralık 0-{max_index}).\nBulmacayı çözmek için {max_turns} hamleye kadar sahipsiniz.\nAçıklama: 'O' = ışık AÇIK, '.' = ışık KAPALI"
+  },
+  "board": {
+    "current_state": "Mevcut ızgara durumu (Hamle {moves_made}, {moves_left} hamle kaldı, {completion}% tamamlandı):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Eylem [satır sütun] formatında olmalıdır; burada satır ve sütun 0 ile {max_index} arasındaki tam sayılardır.",
+    "out_of_range": "Koordinatlar 0 ile {max_index} arasında olmalıdır. [{row},{col}] girdiniz."
+  },
+  "outcome": {
+    "win": "Tebrikler! Bulmacayı {moves_used} hamlede çözdünüz!",
+    "loss": "Oyun bitti! {max_turns} hamle kullanarak bulmacayı çözemediniz. Son tamamlanma: {completion}%\nSon durum:\n{grid}"
+  }
+}

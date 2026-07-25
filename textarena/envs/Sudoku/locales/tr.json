@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Oyuncu {player_id}'siniz. Sudoku oynuyorsunuz.\nAşağıda Sudoku ızgarasının mevcut durumu yer almaktadır. Her satır 1'den 9'a kadar numaralandırılmıştır ve her sütun da 1'den 9'a kadar numaralandırılmıştır.\nBoş hücreler '.' ile temsil edilir ve önceden doldurulmuş hücreler 1'den 9'a kadar rakamlar içerir.\n\nMevcut Sudoku Izgarası:\nHedefiniz, 9x9 ızgarasındaki boş hücreleri 1'den 9'a kadar rakamlarla doldurmak şekilde:\n1. Her satır 1'den 9'a kadar tüm rakamları tekrarsız içerir.\n2. Her sütun 1'den 9'a kadar tüm rakamları tekrarsız içerir.\n3. Dokuz 3x3 alt ızgaranın her biri 1'den 9'a kadar tüm rakamları tekrarsız içerir.\n\nKurallar ve Talimatlar:\n1. **İlk verilen sayıları** ızgaradaki sayıları geçersiz kılma.\n2. **Sadece** boş hücreleri '.' ile temsil edilen doldurun.\n3. İstediğiniz şekilde yanıt verebilirsiniz, ancak yanıtınızın '[satır sütun numara]' formatını içerdiğinden emin olun.\n4. **Sudoku kurallarını ihlal etmediğinden** emin olun. Geçersiz hamleler cezaya neden olacaktır.\nÖrnekler:\n- **Geçerli Hamle**:\n  - Izgara Parçası Hamleden Önce:\n  \n  - Hamle: `[5 3 7]`\n  - Açıklama: 7'yi 5. satır, 3. sütuna koymak Sudoku kurallarını ihlal etmez.\n\n- **Geçersiz Hamle** (Önceden doldurulmuş bir hücreyi geçersiz kılma):\n  - Izgara Parçası Hamleden Önce:\n  \n  - Hamle: `[1 1 9]`\n  - Açıklama: Hücre (1,1) zaten 5 ile doldurulmuş. Onu geçersiz kılma.\n\n- **Geçersiz Hamle** (Sudoku kurallarını ihlal etme):\n  - Izgara Parçası Hamleden Önce:\n  \n  - Hamle: `[1 3 5]`\n  - Açıklama: 5'i 1. satır, 3. sütuna koymak kuralları ihlal eder, çünkü 5 zaten 1. satırda var.\n\nHamlelerinizin ve düşüncelerinizin geçmişi, daha fazla tur oynadıkça eklenecektir. Karar verme sürecinizi geliştirmek için hamlelerinizin geçmişini kullanın. İyi şans!\n\n"
+  },
+  "board": {
+    "game_board": "Oyun Tahtası:\n{board}",
+    "board_state": "Tahta Durumu: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Geçersiz hamle formatı. Oyuncu {player_id} geçerli 'satır sütun numara' ile yanıt vermedi.",
+    "out_of_bounds": "Geçersiz hamle. Oyuncu {player_id} ({row}, {col}) konumuna {num} koymaya çalıştı, ancak bu konum sınırların dışında.",
+    "overwrite": "Geçersiz hamle. Oyuncu {player_id} önceden doldurulmuş bir hücreyi ({row}, {col}) geçersiz kılmaya çalıştı.",
+    "violates_rules": "Geçersiz hamle. Oyuncu {player_id} ({row}, {col}) konumuna {num} koymaya çalıştı, ancak bu Sudoku kurallarını ihlal eder."
+  },
+  "outcome": {
+    "win": "Tebrikler! Oyuncu {player_id} Sudoku bulmacasını tamamladı.",
+    "turn_limit": "Tur sınırına ulaşıldı. Boş hücrelerin %{percent}'ini doğru bir şekilde doldurduğunu."
+  }
+}

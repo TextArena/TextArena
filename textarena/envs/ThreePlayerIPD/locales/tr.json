@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "3 oyunculu Tekrarlanan Mahkum İkileminde Oyuncu {player_id}'siniz. Maç {num_rounds} tur sürer.\nTur yapısı:\n• {conv_rounds} serbest sohbet turu\n• 1 karar turu - her rakip için bir token gönderin: '[<opp-id> cooperate]' veya '[<opp-id> defect]' (örneğin '[1 defect] [2 cooperate]'; varsayılan 'işbirliği'). \nİkili ödeme matrisi (her sıralanmamış çift için uygulanır):\n  - Her ikisi de işbirliği yaparsa -> {reward}\n  - Her ikisi de ihanet ederse -> {punishment}\n  - Siz ihanet ederseniz, onlar işbirliği yaparsa -> {temptation}\n  - Siz işbirliği yaparsanız, onlar ihanet ederse -> {sucker}\nTüm turların sonunda en yüksek puanı alan oyuncu(lar) kazanır."
+  },
+  "round": {
+    "start": "─── {round}. Tur Başlıyor ───\tSonraki {conv_rounds} tur için serbestçe sohbet edebilirsiniz.",
+    "chat_finished": "{round}. tur için sohbet sona erdi. Kararlarınızı, her rakip için bir token olarak gönderin: `[pid cooperate]` veya `[pid defect]`."
+  },
+  "results": {
+    "header": "### {round}. Tur - Sonuçlar:",
+    "pair_line": "{observation}\n\t Oyuncu {i} ve Oyuncu {j} sırasıyla {choice_i} ve {choice_j} seçtiler (Oyuncu {i} {gain_i} kazandı, Oyuncu {j} {gain_j} kazandı)",
+    "scores_open": "{observation}\n-> Mevcut puanlar: ",
+    "score_first": "{observation}Oyuncu {player_id} ({score})",
+    "score_next": "{observation}; Oyuncu {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Nihai puanlar: {scores}.  Sıralama grupları (en kötü→en iyi): {groups}"
+  }
+}
