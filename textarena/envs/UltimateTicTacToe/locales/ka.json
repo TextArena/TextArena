@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "მიმდინარე ბორდი: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "გადაადგილება უნდა იყოს ფორმით [macro micro] ნომრებით 0-8.",
+    "out_of_range": "ინდექსები უნდა იყოს 0-დან 8-მდე.",
+    "index_out_of_range": "მიკრო_ბორდი, რიგები ან სვეტები არ არის მოქმედების არეალში.",
+    "cell_occupied": "კსლარა ვ ჟსმჲ ოაკუპანტვნ.",
+    "wrong_micro_board": "მოთამაშე უნდა ითამაშოს შემდეგ მიკრო დაფაზე.",
+    "micro_board_won": "მაიკრო ბჲპეჲრ ვ ოჲგლვდნა."
+  },
+  "next_board": {
+    "any": "ნებისმიერი მიკრო დაფა",
+    "specific": "მიკრო დაფა {nxt}"
+  },
+  "game_action": {
+    "played": "მოთამაშე {player_id} თამაშობდა მიკრო დაფაზე {macro_idx}, უჯრედში {micro_idx} (რიგი {row}, სვეტი {col}). მოთამაშე {opponent_id} ახლა უნდა ითამაშოს {nxt_txt}-ში."
+  },
+  "outcome": {
+    "win": "მოთამაშე {player_id} იგებს ულტიმეტ ტიქ ტაკ ტო!",
+    "draw": "მატჩი ფრედ დასრულდა!"
+  }
+}

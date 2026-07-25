@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "თქვენ ხართ მოთამაშე {player_id} 3-მხრივი იტერირებული პატიმრის დილემაში. მატჩი გრძელდება {num_rounds} რაუნდი. რაუნდის სტრუქტურა: • {conv_rounds} უფასო ჩატის რგოლები • 1 გადაწყვეტილების რგოლი - შეიტანეთ ერთი ტოკენი მეტოქეზე: \"[<opp-id> cooperate]\" ან \"[<opp-id> defect]\" (ანუ \"[1 defect] [2 cooperate]\"; ნაგულისხმევი არის \"თანამშრომლობა\"). წყვილის მიხედვით ანაზღაურების მატრიცა (გამოიყენება თითოეულ ურიგო წყვილზე): - ორივე თანამშრომლობს -> {reward} - ორივე დეფექტი -> {punishment} - თქვენ დეფექტით თანამშრომლობთ -> {temptation} - თქვენ თანამშრომლობთ, ისინი დეფექტით -> {sucker} ყველა რაუნდის ბოლოს ყველაზე მაღალი ქულის მქონე მოთამაშე იმარჯვებს."
+  },
+  "round": {
+    "start": "─── დაწყების რაუნდი {round} ─── თქვენ შეგიძლიათ თავისუფლად ისაუბროთ შემდეგი {conv_rounds} რაუნდების დროს.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### რაუნდი {round} - შედეგები:",
+    "pair_line": "{observation} მოთამაშე {i} vs მოთამაშე {j} აირჩია {choice_i} და {choice_j} შესაბამისად (მოთამაშე {i} მიიღო {gain_i}, მოთამაშე {j} მიიღო {gain_j})",
+    "scores_open": "{observation} -> მიმდინარე ქულები: ",
+    "score_first": "{observation}თამაშის {player_id} ({score})",
+    "score_next": "{observation}; მოთამაშე {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "საბოლოო ქულები: {scores}. რეიტინგის ჯგუფები (ყველაზე ცუდი→საუკეთესო): {groups}"
+  }
+}

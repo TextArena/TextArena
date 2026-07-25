@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "მიმდინარე ბორდი: {board} ხელმისაწვდომი გადაადგილებები: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "მოთამაშემ {player_id} არ შეიტანა მოძრაობა ფორმატში [A0 B0].",
+    "invalid_coordinates": "მოთამაშემ {player_id} არ შეიტანა სწორი კოორდინატები.",
+    "not_own_piece": "მოთამაშე {player_id} უნდა გადაიტანოს საკუთარი ფიგურა.",
+    "scout_through_pieces": "მოთამაშეს {player_id} არ შეუძლია გადაიტანოს სკაუტი სხვა ფიგურებში.",
+    "scout_diagonal": "მოთამაშეს {player_id} არ შეუძლია სკაუტის დიაგონალურად გადაადგილება.",
+    "non_scout_multi_square": "არასწორი ფორმატი. ფიგურებს, სკაუტების გარდა, შეუძლიათ მხოლოდ ერთი კვადრატის მოძრაობა.",
+    "move_into_lake": "მოთამაშის {player_id} არ შეუძლია გადაადგილება ტბაში.",
+    "move_onto_own_piece": "მოთამაშეს {player_id} არ შეუძლია გადავიდეს საკუთარ ქანდაკებაზე.",
+    "move_bomb_or_flag": "მოთამაშეს {player_id} არ შეუძლია ბომბის ან დროშის გადატანა."
+  },
+  "game_action": {
+    "you_moved": "თქვენ გადაიტანეთ თქვენი ფიგურა {source}-დან {dest}-ში.",
+    "opponent_moved": "მოთამაშემ {player_id} გადაიტანა ფიგურა {source}-დან {dest}-მდე.",
+    "you_equal_ranks": "თქვენ გადაიტანეთ თქვენი ფირფიტა {source}-დან {dest}-მდე. თავდამსხმელი ფირფიტა იყო {attacking_rank} და დანიშნულების ფირფიტა იყო {target_rank}. რადგან რიგები ერთნაირია, ორივე ფირფიტა დაკარგულია.",
+    "opponent_equal_ranks": "მოთამაშემ {player_id} გადაიტანა ფირფიტა {source}-დან {dest}-მდე. თავდამსხმელი ფირფიტა იყო {attacking_rank} და დანიშნულების ფირფიტა იყო {target_rank}. რადგან რიგები ერთნაირია, ორივე ფირფიტა დამარცხდა.",
+    "you_miner_defused": "თქვენ გადაიტანეთ თქვენი ქანდაკება {source}-დან {dest}-მდე. თავდამსხმელი ქანდაკება იყო {attacking_rank} და დანიშნულების ქანდაკება იყო {target_rank}. რადგან მეშახტეებს შეუძლიათ ბომბების განადგურება, თქვენ მოიგეთ ბრძოლა.",
+    "opponent_miner_defused": "მოთამაშე {player_id} გადაიტანა ფირფიტა {source}-დან {dest}-მდე. თავდამსხმელი ფირფიტა იყო {attacking_rank} და დანიშნულების ფირფიტა იყო {target_rank}. რადგან მაღაროელებს შეუძლიათ ბომბების გაუმკლავება, თქვენ წააგეთ ბრძოლა.",
+    "you_bomb_lost": "თქვენ გადაიტანეთ თქვენი ქანდაკება {source}-დან {dest}-მდე. თავდამსხმელი ქანდაკება იყო {attacking_rank} და დანიშნულების ქანდაკება იყო {target_rank}. რადგან თავდამსხმელი არ არის მაღაროელი, თქვენ წააგეთ ბრძოლა.",
+    "opponent_bomb_won": "მოთამაშე {player_id} გადაიტანა ფირფიტა {source}-დან {dest}-მდე. თავდამსხმელი ფირფიტა იყო {attacking_rank} და დანიშნულების ფირფიტა იყო {target_rank}. ვინაიდან თავდამსხმელი არ არის მეშახტე, თქვენ მოიგეთ ბრძოლა.",
+    "you_spy_won": "თქვენ გადაიტანეთ თქვენი ფიგურა {source}-დან {dest}-მდე. თავდამსხმელი ფიგურა იყო {attacking_rank} და დანიშნულების ფიგურა იყო {target_rank}. ვინაიდან თავდამსხმელი ჯაშუშია და დანიშნულება მარშალია, თქვენ მოიგეთ ბრძოლა.",
+    "opponent_spy_lost": "მოთამაშე {player_id} გადაიტანა ფირფიტა {source}-დან {dest}-მდე. თავდამსხმელი ფირფიტა იყო {attacking_rank} და დანიშნულების ფირფიტა იყო {target_rank}. ვინაიდან თავდამსხმელი ჯაშუშია და დანიშნულება მარშალია, თქვენ წააგეთ ბრძოლა.",
+    "you_higher_won": "თქვენ გადაიტანეთ თქვენი ქანდაკება {source}-დან {dest}-მდე. თავდამსხმელი ქანდაკება იყო {attacking_rank} და დანიშნულების ქანდაკება იყო {target_rank}. ვინაიდან თავდამსხმელი უფრო მაღალი რანგისაა, ვიდრე დანიშნულება, თქვენ მოიგეთ ბრძოლა.",
+    "opponent_higher_lost": "მოთამაშე {player_id} გადაიტანა ფირფიტა {source}-დან {dest}-მდე. თავდამსხმელი ფირფიტა იყო {attacking_rank} და დანიშნულების ფირფიტა იყო {target_rank}. ვინაიდან თავდამსხმელი უფრო მაღალი რანგისაა, ვიდრე დანიშნულება, თქვენ წააგეთ ბრძოლა.",
+    "you_lower_lost": "თქვენ გადაიტანეთ თქვენი ქანდაკება {source}-დან {dest}-მდე. თავდამსხმელი ქანდაკება იყო {attacking_rank} და დანიშნულების ქანდაკება იყო {target_rank}. რადგან თავდამსხმელი დანიშნულების ქანდაკებაზე დაბალი რანგისაა, თქვენ წააგეთ ბრძოლა.",
+    "opponent_lower_won": "მოთამაშე {player_id} გადაიტანა ფირფიტა {source}-დან {dest}-მდე. თავდამსხმელი ფირფიტა იყო {attacking_rank} და დანიშნულების ფირფიტა იყო {target_rank}. ვინაიდან თავდამსხმელი დანიშნულების ფირფიტაზე დაბალი რანგის არის, თქვენ მოიგეთ ბრძოლა."
+  },
+  "outcome": {
+    "flag_captured": "მოთამაშე {player_id} დაიჭირა მეტოქის დროშა!",
+    "no_movable_pieces": "მოთამაშე {winner_id} იგებს! მოთამაშე {loser_id}-ს აღარ აქვს მოძრავი ფიგურები."
+  }
+}

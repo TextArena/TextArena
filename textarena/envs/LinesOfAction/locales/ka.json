@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "საბჭო: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ფორმატი უნდა იყოს e2e4 (coordinates-დან,to-მდე).",
+    "no_piece": "No {side} ნაჭერი {coord}-ზე.",
+    "identical": "თჱჲბნწრა თ დსმვნრთგარა იდენტთკა.",
+    "not_straight_or_diagonal": "მოძრაობა უნდა იყოს სწორი ან დიაგონალური.",
+    "wrong_distance": "რპვბა ეა ჟვ გყპნვ ჲრკპთვჟრგა, კჲწრჲ ვ ჟსმჲ ნა ნაფთნ.",
+    "enemy_blocks": "მტრის ნაწილის ბლოკირება.",
+    "destination_own": "დესთნანტთწ ჟჲ ჟჲბჲგარა ჟრანთ."
+  },
+  "game_action": {
+    "moved": "მოთამაშე {player_id} გადავიდა {from} -> {to}",
+    "captured_suffix": "მოთამაშე {player_id} გადავიდა {from} -> {to} და დაიჭირა მტერი."
+  },
+  "outcome": {
+    "win": "გჟთფკთ პაჟა ჟს ჲბღჲპვნთ.",
+    "draw_no_capture": "60 წრფა ნვ ჟსმ ჟპველთ.",
+    "draw_repetition": "პოზიცია სამჯერ განმეორდა."
+  }
+}

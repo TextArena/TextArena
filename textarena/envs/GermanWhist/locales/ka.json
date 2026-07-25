@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "თამაში იწყება. ტრამპის კოსტიუმი: {trump_suit} (ტრამპის ბარათი: {trump_str}).",
+    "no_trump_card": "არცერთი"
+  },
+  "player_prompt": {
+    "intro": "თქვენ ხართ მოთამაშე {player_id} გერმანულ ფისტში. {phase_info} თქვენ ფლობთ {hand_size} ბარათებს. ითამაშეთ ბარათი \"[play N]\", სადაც N არის მისი პოზიცია თქვენს ხელში (მაგალითად \"[play 3]\").",
+    "phase_learning": "სწავლის ფაზა: თითოეული ტრიკის გამარჯვებული იღებს ღია კარტს, ხოლო დამარცხებული იღებს შემდეგ კარტს დეკიდან. ამ ფაზაში მოგებული ტრიკები არ ითვლება გამარჯვებისთვის.",
+    "phase_playing": "ყოველი ხრიკი გამარჯვებისთვის ითვლება."
+  },
+  "next_card": {
+    "playing_phase": "კარტი არ არის შეთავაზებული - სათამაშო ფაზა დაიწყო.",
+    "deck_empty": "თარგი ცარიელია - არ არის არცერთი ბარათი.",
+    "available": "ბარათი შეთავაზებაში: {card}",
+    "available_trump": "კარტი შემოთავაზებაშია: {card} (ტრამპი)"
+  },
+  "invalid_move": {
+    "wrong_format": "მოძრაობის ფორმატი არასწორია. გამოიყენეთ \"[play N]\" თქვენი ხელის N-ე ბარათის გასაშვებად.",
+    "bad_position": "ეს ბარათის პოზიცია არ არსებობს. თქვენ ფლობთ {hand_size} ბარათებს.",
+    "must_follow_suit": "You must follow suit and play a {lead_suit} card.",
+    "invalid_play": "ნვ მჲზვ ეა ჟვ თჱდლვეა."
+  },
+  "game_action": {
+    "played": "მოთამაშე {player_id} თამაშობდა {card}-ს."
+  },
+  "trick": {
+    "won": "მოთამაშე {winner_id} {card}-ით იგებს ტრიკს.",
+    "won_learning": "მოთამაშე {winner_id} {card}-ით იგებს და იღებს კარტს."
+  },
+  "phase": {
+    "learning_complete": "დეკები ამოწურულია. სწავლის ფაზა დასრულებულია - ყოველი დარჩენილი ხრიკი ითვლება გამარჯვებისთვის."
+  },
+  "draw": {
+    "winner_received": "შენ მოიგე ტრიკი და მიიღე {card}.",
+    "loser_received": "თქვენ დაკარგეთ ტრიუკი და {card}-ს მოხსენიება გააკეთეთ.",
+    "winner_preview": "შემდეგი ბარათი {card}."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "აქამდე მოგებული ტრიუკები - მოთამაშე 0: {tricks0}, მოთამაშე 1: {tricks1}",
+    "scores_playing": "ქულების მოპოვების ტრიუკები - მოთამაშე 0: {tricks0}, მოთამაშე 1: {tricks1}",
+    "phase": "ფაზა: {phase}",
+    "phase_learning": "ფაზა: {phase} ({remaining_cards} კარტები დარჩენილი დეკში)"
+  },
+  "hand": {
+    "no_cards": "კარტებს არ ვცემ.",
+    "no_cards_in_hand": "კარტები არ არის ხელში.",
+    "header": "Your hand:",
+    "trump_indicator": "(ტრამპი)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "ნვ ვ ჟსმ ჟსმ ჟსმ ჟჲ კაპთრვ.",
+    "header": "ჟლვევნ თთრიკ:",
+    "trump_indicator": "(ტრამპი)",
+    "card_line": "{observation} მოთამაშე {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "თამაში არ დაწყებულა",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation} ფაზა: {phase}",
+    "trump_suit": "{observation} ტრამპის კოსტიუმი: {trump_suit}",
+    "trump_card": "{observation} ტრამპის ბარათი: {card}",
+    "cards_left": "{observation} კარტები დარჩენილი დეკში: {count}",
+    "next_card": "{observation} მომდევნო კარტი გამარჯვებულისთვის: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} ამჟამინდელი ხრიკი:",
+    "trump_indicator": "(ტრამპი)",
+    "trick_line": "{observation} მოთამაშე {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} მოთამაშე {player_id}: {scoring} ქულების გატანა ({tricks} ჯამში), {hand_size} ხელში ბარათები"
+  },
+  "outcome": {
+    "summary": "სწავლის ფაზა - მოთამაშე 0: {l0}, მოთამაშე 1: {l1}. თამაშის ფაზა - მოთამაშე 0: {p0}, მოთამაშე 1: {p1}. მოთამაშე {winner_id} იმარჯვებს {winner_tricks} ქულების გატანის ტრიუკებით!"
+  }
+}

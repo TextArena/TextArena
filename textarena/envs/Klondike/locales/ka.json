@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "თამაშობთ კლონდაიკის სოლიტერს. თქვენი მიზანია ყველა ბანქთის გადატანა ფონდის ბანქთებში.\n\nთამაშის წესები:\n- ფონდის ბანქთები (F1-F4): აშენება ტფისგან მეფემდე კარის მიხედვით\n- მაგიდის ბანქთები (T1-T7): აშენება ფერების მორიგეობით (წითელი შავზე, შავი წითელზე)\n- საწყობი: ბანქთების გამოტანა ნაგვის ბანქთში\n- ნაგვი (W): ზედა ბანქა თამაშში მონაწილეობისთვის\n\nბრძანებები:\n- 'draw' - ბანქთების გამოტანა საწყობიდან ნაგვის ბანქთში\n- 'move <source> <destination> [count]' - ბანქთების გადატანა ერთი ბანქთიდან მეორეში\n  მაგალითები: 'move W T1', 'move T1 F2', 'move T3 T5 2'. რაოდენობა შეიძლება იყოს 'all', რაც ცდილობს ყველა ღია ბანქის გადატანას.\n- 'forfeit' - თამაშის დამთავრება და ანგარიშის შენახვა\n- ბანქთების სახელები: W (ნაგვი), F1-F4 (ფონდი), T1-T7 (მაგიდა)\n\nშეგიძლიათ რამდენიმე ქმედების შესრულება ერთ ტურში მათ გამოყოფით მძვლით:\n  მაგალითი: 'draw, move W T1, move T2 F1'\n\nმხოლოდ მეფეები შეიძლება განთავსდნენ ცარიელ მაგიდის ბანქთებზე.\nქმედებები სრულდება თანმიმდევრობით - თუ ერთი ქმედება ვერ შესრულდება, დარჩენილი ქმედებები გამოტოვება.\nგამოიყენეთ 'forfeit', თუ მიგაჩნიათ, რომ თამაში გამარჯვებადი არ არის."
+  },
+  "format_error": {
+    "no_brackets": "ქმედების ფორმატი არასწორია. ქმედებები უნდა იყოს კრეტებში.",
+    "no_closing_bracket": "შეუსრულებელი მოქმედების ფორმატი. აკლია დახურვის კრამიტი ']'",
+    "empty_command": "ცარიელი ბრძანება. აკრიფეთ \"draw\" ან \"move <source> <destination> [count]\"",
+    "empty_action": "Empty action",
+    "move_needs_args": "გადაადგილების ბრძანება მოითხოვს წყაროს და დანიშნულების ადგილს. გამოყენება: \"გადაადგილება <წყარო> <დანიშნულების ადგილი> [count]\"",
+    "count_positive": "რიცხვი უნდა იყოს დადებითი ან \"ყველა\"",
+    "count_invalid": "არასწორი დათვლა. გამოიყენეთ რიცხვი ან \"ყველა\"",
+    "unknown_command": "უცნობი ბრძანება \"{cmd}\". გამოიყენეთ \"draw\", \"move <source> <destination> [count]\", ან \"forfeit\"",
+    "wrapped": "მოქმედება {n}: {msg}"
+  },
+  "action_result": {
+    "success": "მოქმედება {n}: {msg}",
+    "before_failure": "შესრულებული {n} ქმედება (((s) წარუმატებლობის წინ.",
+    "failed": "სარჩელი {n} წარუმატებელი: {msg}"
+  },
+  "move_result": {
+    "drew": "Drew card(s) from stock to waste.",
+    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "invalid_pile": "არასწორი ქვაბის სახელი. გამოიყენეთ W, F1-F4 ან T1-T7",
+    "foundation_one_card": "მხოლოდ ერთი ბარათის გადატანა შეიძლება ფონადში.",
+    "waste_to_foundation_ok": "გადატანილი ბარათი ნარჩენებიდან ფონდში F{dst}",
+    "waste_to_foundation_bad": "არ შეიძლება ნაგვის ბარათის გადატანა ფონდის ურნაში",
+    "tableau_to_foundation_ok": "გადატანილი ბარათი მაგიდა T{src}-დან ფონდ F{dst}-ში",
+    "tableau_to_foundation_bad": "ვერ გადაიტანთ მაგიდის ბარათს ფონდის მუყაოს",
+    "foundation_to_foundation": "არ შეიძლება გადაადგილება ფონდიდან ფონდში",
+    "waste_to_tableau_one_card": "მხოლოდ 1 ბარათის გადატანა ნარჩენიდან ტაბულაში",
+    "waste_to_tableau_ok": "გადატანილი ბარათი ნარჩენებიდან T{dst} ცხრილში",
+    "waste_to_tableau_bad": "ვერ დადებთ ბარათს ამ ტაბულეს ურნაზე",
+    "no_face_up": "No face-up cards to move",
+    "tableau_to_tableau_ok": "გადატანილია {count} ბარათი (ები) ცხრილიდან T{src}-დან T{dst}-მდე",
+    "tableau_to_tableau_bad": "არ შეიძლება გადატანა {count} ბარათი (s) T{src}-დან T{dst}-მდე",
+    "foundation_to_tableau_one_card": "მხოლოდ ერთი ბარათის გადატანა შეიძლება ფონდიდან ტაბლოზე.",
+    "foundation_empty": "ფონდი F{src} ცარიელია",
+    "foundation_to_tableau_ok": "გადატანილი ბარათი ფონდიდან F{src} ცხრილიდან T{dst}",
+    "foundation_to_tableau_bad": "ვერ მოათავსებს ფონდის ბარათს T{dst} მაგიდაზე",
+    "to_waste_or_stock": "არ შეიძლება გადავიდეს ნარჩენებში ან მარაგში"
+  },
+  "outcome": {
+    "forfeit": "თამაში დათმობილია. საბოლოო ქულა: {score} კარტები ფონდებში.",
+    "won": "გჟთფკჲ ვ გპვმვ, ჟლსფაგაქ გ კლსჲნდაიკ სოლთეაპ!",
+    "turn_limit": "თამაშის დასასრული! თქვენ მიაღწიეთ მაქსიმუმს {max_turns} რგოლებში. ქულა: {score} კარტები ფონდებში."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "მარაგი: {stock} ბარათები",
+    "waste": "ნარჩენები (W): {waste}",
+    "foundations_header": "ფონდები:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "მაგიდა:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}
