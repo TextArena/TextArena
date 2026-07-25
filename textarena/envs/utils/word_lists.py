@@ -229,7 +229,7 @@ DEFAULT_MIN_ZIPF = 2.5
 # Scripts that are not letter-based; excluded from per-letter games (Wordle,
 # Hangman, SpellingBee) where "a word of N letters" / letter guessing is
 # meaningless. Documented per game.
-NON_ALPHABETIC_LANGS = {"zh", "ko"}
+NON_ALPHABETIC_LANGS = {"zh", "ko", "hi"}
 
 
 class WordFreqDictionary:
