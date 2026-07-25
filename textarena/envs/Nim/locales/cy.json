@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Rydych chi'n chwaraewr {player_id} yn Nim. Eich nod yw cymryd yr eitem olaf sydd ar ôl. Ar bob tro, dewiswch un pil yn union a thynnu un neu fwy o eitemau ohono. Defnyddiwch y fformat '[pile quantity]', lle mae'r pil yn y canllaw pil a'r nifer yn nifer yr eitemau i'w dynnu. Er enghraifft, mae '[0 3]' yn dileu 3 o eitemau o'r pila 0."
+  },
+  "state": {
+    "current_pile": "Pêl presennol: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nid oes fformat symud dilys wedi'i ddarganfod. Defnyddiwch '[pile quantity]'.",
+    "correct_format_wrong_fields": "Player {player_id}, Invalid action. Column {col} is out of bounds.",
+    "out_of_range": "Mae'r canfyddiad {pile_index} yn y tu allan i'r ystod.",
+    "non_positive": "Rhaid symud o leiaf un gwrthrych.",
+    "exceeds_pile": "Ni ellir tynnu {quantity} o'r pentwr {pile_index} (dim ond {pile_count} ar ôl)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Cymerodd chwaraewr {player_id} yr eitem olaf ((s)!"
+  }
+}

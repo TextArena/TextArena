@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Mastermind.\nYou need to find the code that is {code_length} digits long, each digit from 1 to {num_numbers}, {repeats}.\nIn your response, you can submit your guess in the following format: '[2 1 4 5]'.\nAfter each guess, you will receive feedback in the form of black and white pegs.\nA black peg indicates a correct digit in the correct position, while a white peg indicates a correct digit in the wrong position.\nYou have {max_turns} turns to guess the code.\n",
+    "with_repeats": "with possible repeats",
+    "no_duplicates": "heb ddyblygiadau"
+  },
+  "invalid_move": {
+    "wrong_format": "Nid ydych wedi ymateb gyda rhestr o rifau wedi'u gwahanu gan spaces wedi'u hamgylchu mewn braced sgwâr.",
+    "not_integers": "Rhaid i'r holl gofnodion fod yn rhifau cyfanrheidiol dilys.",
+    "wrong_length": "Dylai'r tybiad gynnwys union {code_length} rhifau.",
+    "out_of_range": "Rhaid i bob rhif fod rhwng 1 a {num_numbers}.",
+    "duplicates_not_allowed": "Nid yw rhifau dyblygu'n cael eu caniatáu.",
+    "repeated_guess": "Rydych chi eisoes wedi tybio {guess}. Rhowch gynnig ar dyfalu gwahanol."
+  },
+  "game_action": {
+    "feedback": "Submitted [{guess}]. Feedback: {black_pegs} black peg(s), {white_pegs} white peg(s)."
+  },
+  "outcome": {
+    "win": "Rydych wedi cracio'r cod, datrys {black_pegs} allan o {code_length} pegs yn gywir",
+    "turn_limit": "Turn limit reached. You guessed {percent} percent of the numbers correctly."
+  }
+}

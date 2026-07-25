@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Rydych chi'n chwarae Solitaire Klondike. Eich nod yw symud pob card i'r pileiau sylfaen.\n\nRheolau'r Gêm:\n- Pileiau sylfaen (F1-F4): Adeiladu i fyny o As i Frenin mewn siwt\n- Pileiau tabl (T1-T7): Adeiladu i lawr mewn lliwiau sy'n amrywio (coch ar ddu, du ar goch)\n- Stoc: Tynnu cardiau i'r pile wastraff\n- Gwastraff (W): Y card uchaf ar gael i'w chwarae\n\nGorchmynion:\n- 'tynnu' - Tynnu cardiau o'r stoc i'r wastraff\n- 'symud <ffynhonnell> <man cyrchfan> [count]' - Symud cardiau rhwng pileiau\n  Enghreifftiau: 'symud W T1', 'symud T1 F2', 'symud T3 T5 2'. gall y cyfrif hefyd fod 'i gyd', a bydd yn ceisio symud pob card wyneb-i-fyny.\n- 'ymddiswyddo' - Diweddu'r gêm ar unwaith a'i gloi eich sgor presennol\n- Enwau pileiau: W (gwastraff), F1-F4 (sylfeini), T1-T7 (tabl)\n\nGallwch chi gyflawni gweithredoedd lluosog mewn un tro gan eu gwahanu â chommau:\n  Enghraifft: 'tynnu, symud W T1, symud T2 F1'\n\nDim ond y Brenhinoedd a all gael eu rhoi ar pileiau tabl gwag.\nMae gweithredoedd yn cael eu cyflawni mewn trefn - os mae un yn methu, caiff y gweithredoedd sy'n weddill eu hepgor.\nDefnyddiwch 'ymddiswyddo' os ydych chi'n credu bod y gêm yn amhosibl i'w ennill."
+  },
+  "format_error": {
+    "no_brackets": "Fformat gweithredu afradlon. Dylai gweithredu fod mewn bracs.",
+    "no_closing_bracket": "Fformat gweithredu annheg. Brentist cloi braced ']'",
+    "empty_command": "Gorchymyn gwag. Tybed 'tynn' neu ' symud <rhyd> <ddestun> [count]'",
+    "empty_action": "Gweithredu gwag",
+    "move_needs_args": "Mae'r gorchymyn symud yn gofyn am ffynhonnell a man cyrchfan. Defnydd: 'symud <ffynhonnell> <man cyrchfan> [count]'",
+    "count_positive": "Rhaid i'r cyfrif fod yn bositif neu 'all'",
+    "count_invalid": "Cyfrifiad anghywir. Defnyddiwch rhif neu 'all'",
+    "unknown_command": "Gorchymyn anhysbys '{cmd}'. Defnyddiwch 'draw', 'move <source> <destination> [count]', neu 'forfeit'",
+    "wrapped": "Gweithredu {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Gweithredu {n}: {msg}",
+    "before_failure": "Gweithrediad {n} a weithredwyd cyn methiant.",
+    "failed": "Gwrthodwyd yr achos {n}: {msg}"
+  },
+  "move_result": {
+    "drew": "Tynnwyd cardiau o stoc i wastraff.",
+    "cannot_draw": "Ni all dynnu. Mae'r stoc a'r gwastraff yn wag.",
+    "invalid_pile": "Enw pîl anghywir. Defnyddiwch W, F1-F4, neu T1-T7",
+    "foundation_one_card": "Dim ond gall symud un cerdyn i sylfaen",
+    "waste_to_foundation_ok": "Cerdyn a symudwyd o wastraff i sylfaen F{dst}",
+    "waste_to_foundation_bad": "Ni all symud cerdyn gwastraff i'r pentwr sylfaen",
+    "tableau_to_foundation_ok": "Symudodd cerdyn o'r tabl T{src} i'r sylfaen F{dst}",
+    "tableau_to_foundation_bad": "Ni ellir symud cerdyn taflen i'r pentwr sylfaen hwnnw",
+    "foundation_to_foundation": "Ni ellir symud o sylfaen i sylfaen",
+    "waste_to_tableau_one_card": "Gall symud dim ond un cerdyn o'r gwastraff i'r tabl",
+    "waste_to_tableau_ok": "Cerdyn wedi'i symud o'r gwastraff i'r tabl T{dst}",
+    "waste_to_tableau_bad": "Ni ellir gosod cerdyn gwastraff ar y pentwr tableau",
+    "no_face_up": "Dim cardiau wyneb i fyny i'w symud",
+    "tableau_to_tableau_ok": "Symudodd {count} cerdyn ((s) o'r tabl T{src} i T{dst}",
+    "tableau_to_tableau_bad": "Ni ellir symud {count} cerdyn ((s) o T{src} i T{dst}",
+    "foundation_to_tableau_one_card": "Gall symud dim ond un cerdyn o sylfaen i tableau",
+    "foundation_empty": "Mae'r sylfaen F{src} yn wag",
+    "foundation_to_tableau_ok": "Symudodd cerdyn o sylfaen F{src} i tabl T{dst}",
+    "foundation_to_tableau_bad": "Ni ellir gosod cerdyn sylfaen ar y tabl T{dst}",
+    "to_waste_or_stock": "Ni ellir ei symud i wastraff neu stoc"
+  },
+  "outcome": {
+    "forfeit": "Gêm wedi'i gollwng. Sgôr terfynol: {score} cardiau mewn sylfaen.",
+    "won": "Llongyfarchiadau! Rydych wedi ennill Solitaire Klondike!",
+    "turn_limit": "Gêm drosodd! Rydych chi wedi cyrraedd y uchafswm o {max_turns} droi. Sgôr: {score} cardiau mewn sylfaen."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stoc: cardiau {stock}",
+    "waste": "Gweithgaredd (W): {waste}",
+    "foundations_header": "Sefydliadau:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Tabl:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

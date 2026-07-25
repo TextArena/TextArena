@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Rydych yn Chwaraewr {player_id} mewn gêm rownd {max_rounds} o Kuhn Poker. Rheolau Gêm: - Mae Kuhn Poker yn defnyddio deic o dri card gyda J, Q, K (J isaf, K uchaf) - Mae pob chwaraewr yn ante {ante} cip ac yn derbyn 1 cerdyn bob rownd (nodwch fod y cardiau'n cael eu delio heb eu disodli, felly ni allwch gael yr un cerdyn â'ch gwrthwynebydd). - Mae'r gêm yn parhau am rowndiau {max_rounds} - Mae'r chwaraewr sydd â'r mwyaf o sglodion ar ôl pob rownd yn ennill Rheolau Gweithredu: - '[check]': pasio heb betio (dim ond os nad oes bet ar y bwrdd) - '[bet]': ychwanegu 1 sglodion i'r pot (dim ond os nad oes bet ar y bwrdd) - '[call]': Cyd-fynd betiau gwrthwynebydd trwy ychwanegu 1 at y pot - [fold]': Surrender eich llaw a gadewch i'ch gwrthwynebydd ennill y pot"
+  },
+  "init_round": {
+    "round_start": "### Dechrau rownd {current_round} allan o {max_rounds} rowndiau. Eich cerdyn yw: '{player_card}'",
+    "available_actions": "Eich camau gweithredu sydd ar gael yw: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Rhaid i weithred fod yn [Check], [Bet], [Call], neu [Fold].",
+    "not_legal": "Rhaid i weithred fod yn {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Eich camau gweithredu sydd ar gael yw: {legal_actions}.",
+    "round_summary": "{reason} Sgôr presennol: Chwaraewr 0: \"{player_0_chips}\"; Chwaraewr 1: \"{player_1_chips}\""
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: {winner_card} Chwaraewr {winner} yn guro {loser_card} Chwaraewr {loser}. Chwaraewr {winner} yn ennill pot o {pot_value} chipiau."
+  },
+  "outcome": {
+    "draw": "Ar ddiwedd rowndiau {max_rounds}, roedd gan y ddau chwaraewr yr un nifer o sglodion.",
+    "round_win": "Player {player_id} has folded.",
+    "winner_player0": "Enillodd chwaraewr 0 drwy gael mwy o sglodion ar ddiwedd pob rownd {max_rounds}.",
+    "winner_player1": "Enillodd chwaraewr 1 drwy gael mwy o sglodion ar ddiwedd pob rownd {max_rounds}."
+  }
+}

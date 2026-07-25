@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} ({piece}). Opponent is ({opp}).\nSubmit moves as '[a2 a3]' (from → to).\n- A normal move is one forward step to an adjacent empty vertex.\n- A capture is a jump over an adjacent enemy piece landing on the empty node beyond.\nEach capture yields {score_per_capture} points.\nGame ends after {max_moves} moves or when a player has no legal move."
+  },
+  "board": {
+    "current_board": "Symud #{move_count} {board}"
+  },
+  "invalid_move": {
+    "bad_format": "Fformat anghywir. Defnyddiwch '[a2 a3]'.",
+    "unknown_square": "Unknown square.",
+    "not_your_piece": "Nid yw'r ffynhonnell yn eich darn.",
+    "dest_not_empty": "Destination nid yn wag.",
+    "illegal": "Symud anghyfreithlon."
+  },
+  "game_action": {
+    "captured": "Mae chwaraewr {player_id} wedi dal darn! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Nid oes gan chwaraewr {player_id} unrhyw ddarnau.",
+    "cannot_move": "Ni all chwaraewr {player_id} symud.",
+    "higher_score": "Higher capture score.",
+    "move_limit": "Cyfyngiad symud wedi'i gyrraedd."
+  }
+}

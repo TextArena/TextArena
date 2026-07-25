@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Rwyt ti'n Chwaraewr {player_id} yn Stratego.\nEich nod yw cipio Faner eich gwrthwynebydd neu ddileu pob un o'i darnau symudol.\nMae eich byddin wedi'i osod ar eich rhan ar y bwrdd, gan gynnwys eich Faner, Bomiau, a darnau eraill o wahanol reng.\n\n### Cyfarwyddiadau Chwarae\n1. **Rheolau Symud:**\n   - Ar eich tro, gallwch symud un darn un cam i sgwâr cyfagos (i fyny, i lawr, i'r chwith, neu i'r dde) sydd eisoes wedi'i meddiannu gan eich darnau.\n   - Enghraifft: Gall darn symud o A1 i B1 neu A1 i A2 os nad yw B1 ac A2 wedi'u gosod gyda darnau eich gwrthwynebydd.\n   - Os yw'r darn a ddewiswyd yn Fom neu Faner, ni ellir ei symud.\n2. **Brwydrau:**\n   - Os byddwch yn symud i sgwâr a feddiannwyd gan darn eich gwrthwynebydd, yna bydd brwydr yn digwydd:\n     - Mae'r darn â'r reng uchaf yn ennill a dileu darn eich gwrthwynebydd.\n     - Os yw'r rengau yn gyfartal, mae'r ddau darn yn cael eu dileu o'r bwrdd.\n     - **Achau Arbennig:**\n       - Mae Bomiau yn dileu'r rhan fwyaf o ddarnau ymosodol heblaw Miners, sy'n difa Bomiau.\n       - Gall Spies drechu'r Marshal os yw'r Spy yn ymosod yn gyntaf ond colli i bob darn arall.\n3. **Nodau Strategol:**\n   - Adnabod darnau eich gwrthwynebydd drwy eu symudiadau a brwydrau.\n   - Amddiffyn eich Faner tra ceisio cipio Faner eich gwrthwynebydd.\n   - Defnyddiwch Scouts yn strategol i gael gwybodaeth am darnau eich gwrthwynebydd a ymosod ar rai gwan.\n\n### Sut i Wneud Symud:\n1. Nodwch y cyfesurynnau o'r darn rydych am ei symud a'i destyn.\n2. Defnyddiwch y fformat: [A0 B0], lle mae A0 y safle ffynhonnell, a B0 y safle destyn.\n   - Enghraifft: I symud darn o row 0, colofn 0 i row 1, colofn 0, nodwch [A0 B0].\n3. Sicrhewch bod y destyn yn ddilys yn ôl y rheolau symud uchod.\n\n### Nodiadau Pwysig:\n- Bydd y bwrdd yn dangos eich darnau a'u safleoedd, e.e. MN, MS.\n- Bydd y bwrdd hefyd yn dangos safleoedd cyfarwydd eich gwrthwynebydd heb ddatgelu eu reng, e.e. ?.\n- Grids â ~ yw llynnoedd ac ni ellir eu symud.\n- Fel awgrym, dechreuwch eich gêm drwy symud eich darnau sydd ar y rheng flaen i gael gwybodaeth am darnau eich gwrthwynebydd. Mae rheng flaen chwaraewr 0 a chwaraewr 1 yn row D a G yn ôl eu trefn.\n\nDyma yw cyflwr presennol y bwrdd:\n"
+  },
+  "board": {
+    "current_board": "Bwrdd presennol: {board} Symudiadau ar gael: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Fformat gweithredu afraddig. Nid yw chwaraewr {player_id} wedi rhoi symudiad yn y fformat [A0 B0].",
+    "invalid_coordinates": "Fformat gweithredu anghywir. Nid yw chwaraewr {player_id} wedi rhoi cydlyniadau dilys.",
+    "not_own_piece": "Fformat gweithredu afraddig. Rhaid i chwaraewr {player_id} symud un o'i ddarnau ei hun.",
+    "scout_through_pieces": "Fformat gweithredu afraddig. Ni all chwaraewr {player_id} symud sgwyt trwy ddarnau eraill.",
+    "scout_diagonal": "Fformat gweithredu annheg. Ni all chwaraewr {player_id} symud scout yn diagonol.",
+    "non_scout_multi_square": "Fformat gweithredu afraddig. Gall darnau, ar wahân i arwyr, symud un cae yn unig ar y tro.",
+    "move_into_lake": "Fformat gweithredu annheg. Ni all chwaraewr {player_id} symud i mewn i'r llyn.",
+    "move_onto_own_piece": "Fformat gweithredu afraddig. Ni all chwaraewr {player_id} symud i'w ddarn ei hun.",
+    "move_bomb_or_flag": "Fformat gweithredu annheg. Ni all chwaraewr {player_id} symud bom na baner."
+  },
+  "game_action": {
+    "you_moved": "Rydych wedi symud eich darn o {source} i {dest}.",
+    "opponent_moved": "Mae chwaraewr {player_id} wedi symud darn o {source} i {dest}.",
+    "you_equal_ranks": "Rydych wedi symud eich darn o {source} i {dest}. Y darn ymosodol oedd {attacking_rank} a'r darn cyrchfan oedd {target_rank}. Gan fod y safonau'n yr un fath, mae'r ddau ddarn yn colli.",
+    "opponent_equal_ranks": "Mae chwaraewr {player_id} wedi symud darn o {source} i {dest}. Y darn ymosodol oedd {attacking_rank} a'r darn cyrchfan oedd {target_rank}. Gan fod y safonau'n yr un fath, mae'r ddau ddarn yn colli.",
+    "you_miner_defused": "Rydych wedi symud eich darn o {source} i {dest}. Yr darn ymosodol oedd {attacking_rank} a'r darn cyrchfan oedd {target_rank}. Gan fod mwyngloddio yn gallu dadfeilio bomiau, rydych wedi ennill y frwydr.",
+    "opponent_miner_defused": "Mae chwaraewr {player_id} wedi symud darn o {source} i {dest}. Y darn ymosodol oedd {attacking_rank} a'r darn cyrchfan oedd {target_rank}. Gan fod mwyngloddio yn gallu dadfeilio bomiau, rydych wedi colli'r frwydr.",
+    "you_bomb_lost": "Rydych wedi symud eich darn o {source} i {dest}. Yr darn ymosodol oedd {attacking_rank} a'r darn cyrchfan oedd {target_rank}. Gan nad yw'r ymosodwr yn ffin, rydych wedi colli'r frwydr.",
+    "opponent_bomb_won": "Mae chwaraewr {player_id} wedi symud darn o {source} i {dest}. Y darn ymosodol oedd {attacking_rank} a'r darn cyrchfan oedd {target_rank}. Gan nad yw'r ymosodwr yn fwyn, rydych chi wedi ennill y frwydr.",
+    "you_spy_won": "Rydych wedi symud eich darn o {source} i {dest}. Yr darn ymosodwr oedd {attacking_rank} a'r darn cyrchfan oedd {target_rank}. Gan fod y ymosodwr yn spio a'r cyrchfan yn marshall, rydych wedi ennill y frwydr.",
+    "opponent_spy_lost": "Mae chwaraewr {player_id} wedi symud darn o {source} i {dest}. Y darn ymosodol oedd {attacking_rank} a'r darn cyrchfan oedd {target_rank}. Gan fod y ymosodwr yn spio a'r cyrchfan yn marshall, rydych chi wedi colli'r frwydr.",
+    "you_higher_won": "Rydych wedi symud eich darn o {source} i {dest}. Yr darn ymosodwr oedd {attacking_rank} a'r darn cyrchfan oedd {target_rank}. Gan fod y ymosodwr yn raddau uwch na'r cyrchfan, rydych wedi ennill y frwydr.",
+    "opponent_higher_lost": "Mae chwaraewr {player_id} wedi symud darn o {source} i {dest}. Y darn ymosodol oedd {attacking_rank} a'r darn cyrchfan oedd {target_rank}. Gan fod y ymosodwr yn rango uwch na'r cyrchfan, rydych chi wedi colli'r frwydr.",
+    "you_lower_lost": "Rydych wedi symud eich darn o {source} i {dest}. Yr darn ymosodwr oedd {attacking_rank} a'r darn cyrchfan oedd {target_rank}. Gan fod y ymosodwr yn radd is na'r cyrchfan, rydych wedi colli'r frwydr.",
+    "opponent_lower_won": "Mae chwaraewr {player_id} wedi symud darn o {source} i {dest}. Y darn ymosodol oedd {attacking_rank} a'r darn cyrchfan oedd {target_rank}. Gan fod y ymosodwr yn radd is na'r cyrchfan, rydych chi wedi ennill y frwydr."
+  },
+  "outcome": {
+    "flag_captured": "Mae chwaraewr {player_id} wedi dal faner y gwrthwynebydd!",
+    "no_movable_pieces": "Mae chwaraewr {winner_id} yn ennill! Nid oes gan chwaraewr {loser_id} unrhyw ddarnau symudol mwyach."
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Mae'r gêm yn dechrau. Suits trwmp: {trump_suit} (card trwmp: {trump_str}).",
+    "no_trump_card": "dim un"
+  },
+  "player_prompt": {
+    "intro": "Rydych yn Chwaraewr {player_id} yn y Gymraeg. {phase_info} Mae gennych chi {hand_size} cardiau. Chwarae cerdyn gyda '[play N]', lle mae N yn ei le yn eich llaw (er enghraifft '[play 3]').",
+    "phase_learning": "Y CYFGYR: mae'r enillydd pob trick yn cymryd y cerdyn wyneb i fyny ac mae'r gollwr yn tynnu'r cerdyn nesaf o'r deic. Nid yw triciau a enillwyd yn y cam hwn yn cyfrif tuag at fuddugoliaeth.",
+    "phase_playing": "Mae pob cam o hyn ymlaen yn cyfrif tuag at fuddugoliaeth."
+  },
+  "next_card": {
+    "playing_phase": "Nid oes unrhyw gerdyn ar gael - mae'r cyfnod chwarae wedi dechrau.",
+    "deck_empty": "Mae'r deic yn wag - nid oes unrhyw gerdyn ar gael.",
+    "available": "Cerdyn ar gael: {card}",
+    "available_trump": "Card ar gynnig: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Use '[play N]' to play the Nth card in your hand.",
+    "bad_position": "Nid yw'r safle cerdyn hwnnw'n bodoli. Mae gennych chi {hand_size} cardiau.",
+    "must_follow_suit": "You must follow suit and play a {lead_suit} card.",
+    "invalid_play": "Ni ellir chwarae'r cerdyn hwnnw."
+  },
+  "game_action": {
+    "played": "Chwaraeodd chwaraewr {player_id} {card}."
+  },
+  "trick": {
+    "won": "Mae chwaraewr {winner_id} yn ennill y siwrnai gyda {card}.",
+    "won_learning": "Mae chwaraewr {winner_id} yn ennill y siwrnai gyda {card} ac yn cymryd y cerdyn wyneb i fyny."
+  },
+  "phase": {
+    "learning_complete": "Mae'r deic wedi ei ddiflannu. Mae'r cyfnod dysgu wedi dod i ben - mae pob trick sy'n weddill yn cyfrif tuag at fuddugoliaeth."
+  },
+  "draw": {
+    "winner_received": "Rydych chi wedi ennill y trick ac wedi derbyn {card}.",
+    "loser_received": "Rydych chi wedi colli'r trick a dynnu {card} o'r deic.",
+    "winner_preview": "Y cerdyn nesaf sydd ar gael yw {card}."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "Triciau a enillwyd hyd yn hyn - Chwaraewr 0: {tricks0}, Chwaraewr 1: {tricks1}",
+    "scores_playing": "Triciau sgorio - Chwaraewr 0: {tricks0}, Chwaraewr 1: {tricks1}",
+    "phase": "Cyfnod: {phase}",
+    "phase_learning": "Cyfnod: {phase} ({remaining_cards} cardiau a adawyd yn y deic)"
+  },
+  "hand": {
+    "no_cards": "Dim cardiau",
+    "no_cards_in_hand": "Dim cardiau yn y llaw",
+    "header": "Eich llaw:",
+    "trump_indicator": "(TRUMP)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Nid oes unrhyw gardiau chwarae eto y trick hwn.",
+    "header": "Trick cyfredol:",
+    "trump_indicator": "(TRUMP)",
+    "card_line": "{observation} Chwaraewr {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Nid yw'r gêm wedi dechrau",
+    "header": "=== Gêm GIG GERMAN ===",
+    "phase": "{observation} Cam: {phase}",
+    "trump_suit": "{observation} Siwtim Trump: {trump_suit}",
+    "trump_card": "{observation} Cerdyn trwmp: {card}",
+    "cards_left": "{observation} Cerdynnau a adawyd yn y deic: {count}",
+    "next_card": "{observation} Cerdyn nesaf i enillydd: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Tric presennol:",
+    "trump_indicator": "(TRUMP)",
+    "trick_line": "{observation} Chwaraewr {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} Chwaraewr {player_id}: {scoring} sgorio triciau ({tricks} cyfanswm), {hand_size} cardiau yn y llaw"
+  },
+  "outcome": {
+    "summary": "Cyfnod dysgu - Chwaraewr 0: {l0}, Chwaraewr 1: {l1}. Cyfnod chwarae - Chwaraewr 0: {p0}, Chwaraewr 1: {p1}. Chwaraewr {winner_id} yn ennill gyda {winner_tricks} triciau sgorio!"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Rydych chi'n Chwaraewr {player_id}, yn chwarae rowndiau {num_rounds} o Gêm Ultimatum Aethrog. Mae gennych ${pool} i rannu'r rownd hwn rhyngoch chi a Chwaraewr {other_id}. Cynigydd: - Gwnewch gynnig: [Offer: $X] (0 <= X <= pwll) - Os caiff ei dderbyn → Rydych chi'n cael $( pwll - X, mae'r chwaraewr arall yn cael $X - Os caiff ei wrthod → Mae'r ddau yn cael $0 - Er enghraifft: [Offer: $3] neu 'Rwy'n credu bod hyn yn deg. [Offer: $5]' Atebolwr: - Penderfynu ar y cynnig gyda naill ai [Accept] neu [Reject] - Er enghraifft: 'Mae'n ymddangos yn rhesymol. [Accept] 'Rwy'n rhy annheg. [Reject]'"
+  },
+  "round": {
+    "begins": "--- Mae rownd {round_number} yn dechrau! --- Chwaraewr {proposer_id} yw'r cynnigwr, Chwaraewr {responder_id} yw'r atebwr.",
+    "offer": "Cyfnod {round_number}: Mae Chwaraewr {proposer_id} yn cynnig ${offer} i Chwaraewr {responder_id} (gan gadw ${keep}).",
+    "accepted": "Chwaraewr {responder_id} a dderbyniwyd! Cyflymder rownd {round_number}: Chwaraewr {proposer_id} + ${proposer_gain}, Chwaraewr {responder_id} + ${responder_gain}. Cyfanswm newydd: Chwaraewr 0: ${total_0}, Chwaraewr 1: ${total_1}.",
+    "rejected": "Player {responder_id} rejected the offer! Round {round_number} gains: Both players +$0. Totals remain: Player 0: ${total_0}, Player 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Rhaid i'r cynnigwr wneud cynnig gan ddefnyddio'r fformat [Offer: $X].",
+    "bad_integer": "Rhaid i swm y cynnig fod yn rhif cyfanwal dilys.",
+    "out_of_range": "Rhaid i'r cynnig fod rhwng $0 a ${pool}.",
+    "no_current_offer": "Dim cynnig presennol i ymateb iddo.",
+    "accept_or_reject": "Rhaid i'r atebydd naill ai [Accept] neu [Reject] y cynnig."
+  },
+  "outcome": {
+    "win": "Enillodd chwaraewr {winner} gyda chyfanswm ${winner_total} yn erbyn ${loser_total} chwaraewr {loser} .",
+    "draw": "Tynnwch! Ar ddiwedd y gêm, roedd y ddau chwaraewr wedi ennill ${total} yn gyfanswm."
+  }
+}

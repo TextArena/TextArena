@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "Bwrdd: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Rhaid i'r fformat fod yn e2e4 (o,i gydlyniadau).",
+    "no_piece": "Dim {side} darn ar {coord}.",
+    "identical": "Gwreiddiol a chyflawni yr un fath.",
+    "not_straight_or_diagonal": "Rhaid i'r symudiad fod yn syth neu'n draeth.",
+    "wrong_distance": "Rhaid symud pellter sy'n hafal i ddarnau mewn llinell.",
+    "enemy_blocks": "Mae darn gelyn yn rhwystro'r llwybr.",
+    "destination_own": "Destination a feddiannwyd gan ei hun yn ei ddarn."
+  },
+  "game_action": {
+    "moved": "Chwaraewr {player_id} symudodd {from} -> {to}",
+    "captured_suffix": "Chwaraewr {player_id} symudodd {from} -> {to} gan ddal gelyn."
+  },
+  "outcome": {
+    "win": "Mae'r holl ddarnau'n gysylltiedig.",
+    "draw_no_capture": "60 yn symud heb dal.",
+    "draw_repetition": "Ailadroddodd y sefyllfa dair gwaith."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Rwyt ti'n Chwiler {player_id} yn Tic Tac Toe Cwantwm.\nEich symbol chi yw '{symbol}', a'ch rhifau symud chi yw bob amser {parity} (e.e., X1, X3 neu O2, O4).\n\nNod: Ennill trwy ffurfio llinell o drigolion clasurol (a solidwyd o uwch-leoliadau).\n\nSut i Chwarae:\n- Ar bob tro, rho gwniad swynol mewn dwy sgwâr wag gwahanol gan ddefnyddio'r fformat '[a,b]'.\n- Mae'r rhain yn gynghoriedig, ac wedi'u labelu fel 'X1 / X1' neu 'O4 / O4'.\n- Ni allwch chi roi gwniad swynol mewn sgwâr sydd eisoes wedi colli'i swyn (solidwyd).\n\nDeddf Colli'r Swyn:\n- Os yw eich symud yn creu cylch yn y graff entanglement, mae'n colli swyn yn awtomatig.\n- Mae pob gwniad swynol yn y cylch yn troi'n drigolyn clasurol yn un o'i ddau safle.\n- Mae gwniad swynol dibynnol hefyd yn colli swyn.\n\nFuddugoliaeth:\n- Mae'r gêm yn dod i ben pan fo chwiler wedi cael tri drigolyn clasurol mewn rhes.\n- Os bydd y ddau chwiler yn cael llinell yn ystod yr un colli swyn, mae'r un â'r rhif symud uchaf is yn ennill.\n\nEnghraifft symud: '[0,4]' yn rhoi gwniad swynol mewn cell 0 a 4."
+  },
+  "board": {
+    "current_board": "Bwrdd Tic Tac Toe Quantum: {board} Cyflwynwch eich symudiad fel \"[a,b]\" i roi marc quantum mewn dau leoliad."
+  },
+  "invalid_move": {
+    "wrong_format": "Fformat annheg. Defnyddiwch '[a,b]'.",
+    "invalid_cells": "Invalid or duplicate cell indices.",
+    "already_solidified": "Mae un o'r celloedd eisoes wedi cryfhau."
+  },
+  "game_action": {
+    "placed": "Mae chwaraewr {player_id} wedi gosod ei symbol mewn gorosodiad rhwng celloedd {pos_a} a {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Mae'r goruchwyliaeth ddibynnol wedi'i ddatrys. Mae celloedd ({r}, {c}) bellach yn {symbol}.",
+    "last_cell_resolved": "Mae'r gell ({r}, {c}) bellach yn {symbol}.",
+    "superposition_resolved": "Mae'r gell ({r}, {c}) bellach yn {symbol}."
+  },
+  "outcome": {
+    "win": "Mae chwaraewr {player_id} yn ennill gyda phriodiau cryf!",
+    "draw": "Mae'r gêm yn gwatwar!"
+  }
+}

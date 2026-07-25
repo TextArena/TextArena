@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Three-Player Tic Tac Toe.\nYour symbol is '{symbol}'.\nYou take turns placing your symbol on a 5x5 board to form a line of four.\nLines can be horizontal, vertical, or diagonal.\nSubmit your move using the format '[4]' to mark cell 4."
+  },
+  "board": {
+    "current_board": "Bwrdd presennol: {board} Symudiadau ar gael: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Fformat symud anghywir. Defnyddiwch \"[cell]\" lle mae celloedd yn 0-{max_cell}.",
+    "out_of_range": "Rhif celloedd anghywir: {cell}. Rhaid iddo fod rhwng 0 a {max_cell}.",
+    "already_occupied": "Mae celloedd {cell} eisoes wedi'u meddiannu.",
+    "made_invalid": "Gwnaeth chwaraewr {player_id} symudiad anghywir"
+  },
+  "game_action": {
+    "placed": "Mae chwaraewr {player_id} yn gosod ei symbol ({symbol}) yn y maes ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Mae chwaraewr {player_id} ({symbol}) yn ennill!",
+    "draw": "The game is a draw!"
+  }
+}
