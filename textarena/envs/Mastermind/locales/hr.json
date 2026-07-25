@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Igrate Mastermind.\nTrebaš pronaći kod koji je dug {code_length} znamenki, svaka znamenka od 1 do {num_numbers}, {repeats}.\nU svom odgovoru, možeš predati svoju pogodbu u sljedećem formatu: '[2 1 4 5]'.\nNakon svake pogodbe, primati ćete povratne informacije u obliku crnih i bijelih klinova.\nCrni klin označava točnu znamenku na točnom mjestu, dok bijeli klin označava točnu znamenku na pogrešnom mjestu.\nImate {max_turns} poteza da pogodite kod.\n",
+    "with_repeats": "s mogućim ponavljanjima",
+    "no_duplicates": "bez duplikata"
+  },
+  "invalid_move": {
+    "wrong_format": "Niste odgovorili s popisom brojeva koji su odvojeni razmakom i zatvoreni u uglate zagrade.",
+    "not_integers": "Sve upisane vrijednosti moraju biti valjani cijeli brojevi.",
+    "wrong_length": "Pogodba bi trebala sadržavati točno {code_length} brojeva.",
+    "out_of_range": "Svi brojevi moraju biti između 1 i {num_numbers}.",
+    "duplicates_not_allowed": "Duplikati brojeva nisu dopušteni.",
+    "repeated_guess": "Već ste pogodili {guess}. Molimo pokušajte drugu pogodbu."
+  },
+  "game_action": {
+    "feedback": "Predano [{guess}]. Povratne informacije: {black_pegs} crni klin(ovi), {white_pegs} bijeli klin(ovi)."
+  },
+  "outcome": {
+    "win": "Razbili ste kod, riješivši {black_pegs} od {code_length} klinova točno",
+    "turn_limit": "Dosegnut je limit poteza. Pogodili ste {percent} posto brojeva točno."
+  }
+}

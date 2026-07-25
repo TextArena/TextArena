@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id}. Igrate igru 15-Puzzle.\nCilj igre je poredati numerirane pločice u uzlaznom redu od 1 do 15, s praznim prostorom koji se nalazi u donjem desnom kutu.\nDa biste napravili potez, možete kliznuti pločicu u prazni prostor (koji je predstavljen dvostrukim podcrtanjem, npr. __) koristeći jednu od sljedećih naredbi:\n- 'up': Pomaknite pločicu ispod praznog prostora gore.\n- 'down': Pomaknite pločicu iznad praznog prostora dolje.\n- 'left': Pomaknite pločicu desno od praznog prostora lijevo.\n- 'right': Pomaknite pločicu lijevo od praznog prostora desno.\nDa biste predali svoj potez, upišite smjer (npr. 'up', 'down', 'left' ili 'right') u uglatim zagradama, npr. [up].\nTrenutni raspored ploče prikazan je ispod. Koristite informacije da biste riješili slagalicu.\n"
+  },
+  "board": {
+    "current_board": "Trenutna ploča:\n\n{board}\nDostupni potezi: {moves}",
+    "game_board": "Ploča igre:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neispravan format poteza. Igrač {player_id} nije odgovorio s važećim smjerom u uglatim zagradama.",
+    "illegal_move": "Neispravan potez. Pločica se ne može pomaknuti u navedenom smjeru."
+  },
+  "outcome": {
+    "win": "Čestitamo! Igrač {player_id} je uspješno riješio 15-Puzzle.",
+    "turn_limit": "Dosegnuta je granica poteza. Model je završio {percent} posto slagalice"
+  }
+}

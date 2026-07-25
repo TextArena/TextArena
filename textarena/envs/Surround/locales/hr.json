@@ -1,0 +1,30 @@
+{
+  "_comment": "Datoteka s lokalizacijom za Surround. NE PREVODITE ključeve (lijeva strana). Samo prevodite vrijednosti (desna strana). Zadržite svaki {placeholder} točno kao što jest.",
+  "_slots": {
+    "{num_players}": "Broj igrača u meču",
+    "{width}": "Širina ploče u ćelijama",
+    "{height}": "Visina ploče u ćelijama",
+    "{player_id}": "Broj igrača (0-baziran)",
+    "{board}": "Iscrtana ASCII mreža; zadržite neutralno, nikad ne prevodite njene znakove",
+    "{reason}": "Iscrtani razlog kraja igre",
+    "{groups}": "Neutralni podaci o rangiranju (popis grupa igrača, od najboljih do najgorih); ne prevodite"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Igrački Surround na {width}x{height} mreži.\nVi ste igrač {player_id}. Valjani potezi: '[up]' '[down]' '[left]' '[right]' ili w/s/a/d.\nCilj: nadživjeti sve ostale. Tragovi su smrtonosni; udarci u zid ubijaju; frontalni sudari ubijaju oba igrača."
+  },
+  "board": {
+    "current": "Trenutna ploča:\n{board}",
+    "after_moves": "Ploča nakon istovremenih poteza:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Igrač {player_id} je umro zbog nevaljane poteza."
+  },
+  "outcome": {
+    "survived_win": "Igrač {player_id} je preživio; svi ostali su se srušili.",
+    "all_crashed": "Svi igrači su se srušili istovremeno.",
+    "outlived": "Igrač je nadživio sve ostale.",
+    "all_dead": "Svi igrači su mrtvi.",
+    "turn_limit": "Dosegnuta je granica poteza - najdulji preživjeli pobjeđuje.",
+    "ranking": "{reason} Konačne grupe rangiranja (najbolji→najgori): {groups}"
+  }
+}
