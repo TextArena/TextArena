@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos, aki {colour} ({piece}) színnel játszik az Othello játékban.\nCélja, hogy a játék végére több saját színű darabot helyezzen el a táblán, mint az ellenfele.\nA következő lépésnél úgy helyezzen el egy darabot, hogy az ellenfél egy vagy több darabja bármely irányban (vízszintesen, függőlegesen vagy átlósan) a saját új darabja és egy másik, már meglévő darabja közé kerüljön. Az ellenfél összes körülvett darabja a saját színére fog változni.\nAdja meg a lépését a '[sor, oszlop]' formátumban."
+  },
+  "board": {
+    "game_board": "Játéktábla:\n{board}",
+    "valid_moves": "{observation}\nÉrvényes lépések: {moves}",
+    "no_valid_moves_reset": "{observation}\nNincs érvényes lépés - esetleg kihagynia kell.",
+    "no_valid_moves_step": "{observation}\nNincs érvényes lépés – esetleg kihagynia kell.",
+    "scores_reset": "{observation}\nAktuális eredmények - Fekete: {black_count}, Fehér: {white_count}\n",
+    "scores_step": "{observation}\nEredmények - Fekete: {black_count}, Fehér: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "A lépésnek '[sor, oszlop]' formátumban kell lennie.",
+    "illegal": "Érvénytelen lépés. Érvényes lépések: {valid}"
+  },
+  "game_action": {
+    "skipped": "{pid}. játékosnak kihagynia kellett a lépését",
+    "played": "{pid}. játékos ({piece}) játszott [{r}, {c}] és {flipped} darabot forgatott meg"
+  },
+  "game_message": {
+    "must_skip": "{pid}. játékos ({piece}) nincs érvényes lépése és kihagynia kell."
+  },
+  "outcome": {
+    "black_wins": "Fekete nyer {black_count}-{white_count}.",
+    "white_wins": "Fehér nyer {white_count}-{black_count}.",
+    "draw": "Döntetlen {black_count}-{white_count}."
+  }
+}

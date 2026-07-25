@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos az Indiai Pókerben.\n- 52 lapos pakli; csak az ellenfél lapját látja.\n- Minden körben {ante} zseton(t) kell tenni, összesen {max_rounds} kör.\n- Érvényes lépések: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X egy pozitív egész szám, amely nem haladja meg a zsetonjainak számát.)\n- A legmagasabb rejtett lap nyeri a potot a bemutatáskor.\n"
+  },
+  "round": {
+    "announce": "### {current_round}/{max_rounds}. kör\nAz ellenfél lapja: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Pontosan EGY zárójeles akciót adjon meg, pl. '[check]', '[bet 2]', '[call]', '[raise 3]', vagy '[fold]'.",
+    "cannot_check": "Nem lehet [check] - egy tétet kell megadnia.",
+    "amount_min": "A tét / emelés összege ≥ 1 kell legyen.",
+    "cannot_bet": "Nem lehet [bet] - [call] / [raise] / [fold] kell.",
+    "nothing_to_call": "Nincs mit megadni; [check] helyett.",
+    "no_bet_to_raise": "Használja a [bet X] lehetőséget a nyitáshoz; nincs tét, amit emelni lehetne.",
+    "insufficient": "Nincs elég zseton ehhez a lépéshez."
+  },
+  "game_action": {
+    "action": "{player_id}. játékos -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (költség: {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Lehetséges lépések: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → {winner}. játékos. (Bankroll P0:{p0}, P1:{p1})",
+    "folded": "{player_id}. játékos bedobta.",
+    "showdown_win": "Bemutatás: {card_win} legyőzi {card_lose}.",
+    "showdown_tie": "Bemutatás döntetlen: mindkét {card}. A pot megosztva – mindenki {split} kap."
+  },
+  "outcome": {
+    "p0_wins": "0. játékos nyer ({bank0} > {bank1})",
+    "p1_wins": "1. játékos nyer ({bank1} > {bank0})",
+    "draw": "Egyenlő zsetonok az összes kör után"
+  }
+}

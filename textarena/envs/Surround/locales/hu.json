@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround nyelvi fájl. NE fordítsa le a kulcsokat (bal oldal). Csak a értékeket fordítsa le (jobb oldal). Tartsa meg minden {placeholder}-t pontosan úgy, ahogy van. NE fordítsa le a játékos által beírt lépés/irány tokeneket ([up], [down], [left], [right], w, s, a, d) vagy az ASCII táblát, amely a {board}-ba van beillesztve.",
+  "_slots": {
+    "{num_players}": "A mérkőzésben részt vevő játékosok száma",
+    "{width}": "A tábla szélessége cellákban",
+    "{height}": "A tábla magassága cellákban",
+    "{player_id}": "A játékos száma (0-alapú)",
+    "{board}": "A megjelenített ASCII rács; tartsa semlegesnek, soha ne fordítsa le karaktereit",
+    "{reason}": "A játék végének okát megjelenítő kifejezés",
+    "{groups}": "Semleges rangsorolási adatok (a játékos-azonosító csoportok listája, legjobbtól a legrosszabbig); ne fordítsa le"
+  },
+  "player_prompt": {
+    "intro": "{num_players} játékosos Surround egy {width}x{height} méretű rácsban.\nÖn a {player_id}. játékos. Érvényes lépések: '[up]' '[down]' '[left]' '[right]' vagy w/s/a/d.\nCél: túlélje mindenki mást. A nyomok halálosak; a falnak ütközés megöl; a frontális ütközés mindkét játékost megöli."
+  },
+  "board": {
+    "current": "Aktuális tábla:\n{board}",
+    "after_moves": "Tábla a szimultán lépések után:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "A {player_id}. játékos érvénytelen lépés miatt meghalt."
+  },
+  "outcome": {
+    "survived_win": "A {player_id}. játékos túlélte; mindenki más összeütközött.",
+    "all_crashed": "Minden játékos egyidejűleg összeütközött.",
+    "outlived": "A játékos túlélte mindenki mást.",
+    "all_dead": "Minden játékos meghalt.",
+    "turn_limit": "Lépésszám korlát elérve - a leghosszabb ideig túlélő játékos nyer.",
+    "ranking": "{reason} Végső rangsorolási csoportok (legjobbtól a legrosszabbig): {groups}"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte nyelvi fájl. NE fordítsa le a kulcsokat (bal oldal). Csak a értékeket fordítsa le (jobb oldal).",
+  "_slots": {
+    "{line}": "A megjelenített csészesor",
+    "{step}": "Az aktuális keverési lépés száma",
+    "{steps}": "A keverési lépések összes száma",
+    "{i}": "Az első csésze indexe, amely részt vesz a cserében",
+    "{j}": "A második csésze indexe, amely részt vesz a cserében",
+    "{prompt}": "A lokalizált felszólítás, amely a csészék után jelenik meg",
+    "{max_index}": "A legmagasabb érvényes csészeindex, azaz a csészék száma mínusz egy",
+    "{ball_pos}": "A csésze indexe, amely alatt a labda van"
+  },
+  "player_prompt": {
+    "intro": "Kövesse nyomon az elrejtett 'X' labdát, miközben a csészéket keverik.\nA keverés után találja ki a helyét a `[k]` paranccsal."
+  },
+  "game_message": {
+    "ball_starts": "A labda kezdő pozíciója: {line}",
+    "shuffle": "Keverés {step}/{steps}: a {i} és {j} csészéket cserélték.",
+    "cups": "Csészék: {line}  {prompt}",
+    "guess_now": "(Tippeljen MOST!)",
+    "reveal": "(Felfedés: a labda a {ball_pos} csésze alatt van)"
+  },
+  "invalid_move": {
+    "wrong_format": "Rossz művelet. Használja a `[k]` parancsot.",
+    "out_of_range": "Index túl van a 0-{max_index} tartományon."
+  },
+  "outcome": {
+    "win": "Helyes! Megtalálta a labdát.",
+    "lose": "Rossz — a labda a {ball_pos} csésze alatt volt."
+  }
+}

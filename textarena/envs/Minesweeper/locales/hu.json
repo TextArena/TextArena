@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Az Aknakereső játékot játssza.\nA játék célja, hogy felfedje az összes olyan cellát, amely nem tartalmaz aknát.\nLépés megtételekor egyszerűen adja meg a sor és oszlop koordinátáit, amelyeket felfedni szeretne a következő formátumban:\n- `[sor oszlop]`: Felfedi a megadott sorban és oszlopban lévő cellát.\nPéldául:\n- `[3 2]` a 3. sor 2. oszlopában lévő cella felfedéséhez.\n- `[5 6]` az 5. sor 6. oszlopában lévő cella felfedéséhez.\nAz első lépésnél egy területet fog felfedni a kiválasztott cella körül, hogy biztonságos kezdést biztosítson.\nA jelenlegi tábla elrendezése alább látható. A felfedetlen cellák ponttal ('.') vannak jelölve, a felfedett számok az aknák számát mutatják.\nÜgyeljen arra, hogy ne válasszon már felfedett cellákat.\nItt látható a jelenlegi tábla elrendezése:\n"
+  },
+  "board": {
+    "game_board": "Játéktábla:\n\n{board}",
+    "current_board": "Aktuális tábla:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nem válaszolt érvényes koordinátákkal szögletes zárójelekben.",
+    "out_of_bounds": "A megadott sor és oszlop koordinátái túl vannak a határokon.",
+    "already_revealed": "A ({row}, {col}) cellát már felfedték.",
+    "hit_mine": "Egy aknát talált a ({row}, {col}) cellában."
+  },
+  "game_action": {
+    "revealed": "Felfedte a ({row}, {col}) cellát."
+  },
+  "outcome": {
+    "win": "Gratulálunk! Sikeresen kitisztította az Aknakereső táblát.",
+    "turn_limit": "A lépésszám korlátja elérve. Sikeresen feltárta a biztonságos cellák {percent}%-át."
+  }
+}

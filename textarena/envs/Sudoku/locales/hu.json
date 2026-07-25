@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos. Ön Sudoku-t játszik.\nItt látható a Sudoku rács jelenlegi állapota. Minden sor 1-től 9-ig van számozva, és minden oszlop is 1-től 9-ig van számozva.\nAz üres cellák '.' karakterrel vannak jelölve, és az előre kitöltött cellák 1-től 9-ig tartalmaznak számokat.\n\nAktuális Sudoku Rács:\nAz Ön célja, hogy az üres cellákat a 9x9-es rácsban 1-től 9-ig tartó számokkal töltse ki úgy, hogy:\n1. Minden sor tartalmazza az 1-től 9-ig tartó számokat ismétlés nélkül.\n2. Minden oszlop tartalmazza az 1-től 9-ig tartó számokat ismétlés nélkül.\n3. A kilenc 3x3-as részrács mindegyike tartalmazza az 1-től 9-ig tartó számokat ismétlés nélkül.\n\nSzabályok és utasítások:\n1. **Ne írja felül** a rácsban megadott kezdeti számokat.\n2. **Csak töltsön ki** üres cellákat, amelyeket '.' karakterrel jelöltek.\n3. Válaszolhat bármilyen módon, de győződjön meg arról, hogy válasza tartalmazza a '[sor oszlop szám]' formátumot.\n4. **Győződjön meg arról**, hogy lépése nem sérti a Sudoku szabályait. Érvénytelen lépések büntetést eredményeznek.\nPéldák:\n- **Érvényes lépés**:\n  - Rács részlet a lépés előtt:\n  \n  - Lépés: `[5 3 7]`\n  - Magyarázat: A 7-es szám elhelyezése az 5. sorban, 3. oszlopban nem sérti a Sudoku szabályait.\n\n- **Érvénytelen lépés** (Előre kitöltött cella felülírása):\n  - Rács részlet a lépés előtt:\n  \n  - Lépés: `[1 1 9]`\n  - Magyarázat: A (1,1) cella már kitöltve van 5-tel. Nem lehet felülírni.\n\n- **Érvénytelen lépés** (Sudoku szabályok megsértése):\n  - Rács részlet a lépés előtt:\n  \n  - Lépés: `[1 3 5]`\n  - Magyarázat: Az 5-ös szám elhelyezése az 1. sorban, 3. oszlopban megsérti a szabályt, mivel az 5-ös szám már létezik az 1. sorban.\n\nA lépéseinek és gondolatainak története hozzá lesz fűzve, ahogy több kört játszik. Használja a lépéseinek történetét a döntéshozatal javítására azáltal, hogy elkerüli a már megpróbált lépéseket. Sok szerencsét!\n\n"
+  },
+  "board": {
+    "game_board": "Játék Rács:\n{board}",
+    "board_state": "Rács állapota: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Érvénytelen lépés formátum. A {player_id}. játékos nem válaszolt érvényes 'sor oszlop szám' formátummal.",
+    "out_of_bounds": "Érvénytelen lépés. A {player_id}. játékos megpróbálta elhelyezni a {num} számot a ({row}, {col}) pozícióban, amely a rács határain kívül esik.",
+    "overwrite": "Érvénytelen lépés. A {player_id}. játékos megpróbálta felülírni egy előre kitöltött cellát ({row}, {col}).",
+    "violates_rules": "Érvénytelen lépés. A {player_id}. játékos megpróbálta elhelyezni a {num} számot a ({row}, {col}) pozícióban, amely megsérti a Sudoku szabályait."
+  },
+  "outcome": {
+    "win": "Gratulálunk! A {player_id}. játékos befejezte a Sudoku rejtvényt.",
+    "turn_limit": "A lépésszám határa elérve. Ön helyesen kitöltötte a {percent}%-át az üres celláknak."
+  }
+}
