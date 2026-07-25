@@ -27,7 +27,7 @@ from golden_runner import run_game, canonical, load_env, run_scenario  # noqa: E
 from game_scenarios import GAMES  # noqa: E402
 
 GOLDEN_DIR = os.path.join(HERE, "goldens")
-LANGS = ["ar", "de", "en", "es", "fr", "he", "ms", "zh", "kn", "be", "gu", "pa", "mr", "ps", "te", "sd", "ne", "lo", "uz", "ml", "zu", "as", "km", "hy", "cy", "si", "kk", "or", "my", "so", "mg", "ky", "ka", "ha"]
+LANGS = ["ar", "de", "en", "es", "fr", "he", "ms", "zh", "kn", "be", "gu", "pa", "mr", "ps", "te", "sd", "ne", "lo", "uz", "ml", "zu", "as", "km", "hy", "cy", "si", "kk", "or", "my", "so", "mg", "ky", "ka", "ha", "ig"]
 
 
 def golden_path(game):

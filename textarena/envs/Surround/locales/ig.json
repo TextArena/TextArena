@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Onye na-egwu egwu gburugburu na {width}x{height} grid. Ị bụ onye ọkpụkpọ {player_id}. Mgbanwe ndị dị irè: '[up]' '[down]' '[left]' '[right]' ma ọ bụ w / s / a / d. Ihe mgbaru ọsọ: dị ndụ karịa onye ọ bụla ọzọ. Ụzọ ndị dị egwu; mgbidi na-egbu egbu; ihu ihu na-egbu ma."
+  },
+  "board": {
+    "current": "Kọmitii ugbu a: {board}",
+    "after_moves": "Board mgbe ọ na-agagharị n'otu oge: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Onye na-egwu egwu {player_id} nwụrụ n'ihi na ọ bụ ihe na-abaghị uru."
+  },
+  "outcome": {
+    "survived_win": "Onye na-egwu egwu {player_id} lanarịrị; ndị ọzọ niile dara.",
+    "all_crashed": "Ndị egwuregwu nile dara n'otu oge.",
+    "outlived": "Onye na-egwu egwu dị ndụ karịa ndị ọzọ niile.",
+    "all_dead": "Ndị egwuregwu niile nwụrụ.",
+    "turn_limit": "E ruola oke ntụgharị - onye ka dị ndụ ruo ogologo oge na-emeri.",
+    "ranking": "{reason} Ndị otu ikpeazụ (kacha mma→kacha njọ): {groups}"
+  }
+}

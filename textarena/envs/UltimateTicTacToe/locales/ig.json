@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Current board:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Move must be in the form [macro micro] with numbers 0-8.",
+    "out_of_range": "Ihe ndekọ ọ bụla ga-adị n'etiti 0 na 8.",
+    "index_out_of_range": "The micro_board, row, or col is out of range.",
+    "cell_occupied": "E jiworị cell ahụ.",
+    "wrong_micro_board": "Onye na-egwu egwu ga-egwu na bọọdụ micro ọzọ.",
+    "micro_board_won": "A na-emeriworị bọọdụ micro."
+  },
+  "next_board": {
+    "any": "ọ bụla micro board",
+    "specific": "micro board {nxt}"
+  },
+  "game_action": {
+    "played": "Onye ọkpụkpọ {player_id} na-egwu na micro board {macro_idx}, cell {micro_idx} (row {row}, col {col}). Onye ọkpụkpọ {opponent_id} ga-egwu ugbu a na {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Onye na-egwu {player_id} na-emeri Ultimate Tic Tac Toe!",
+    "draw": "The game is a draw!"
+  }
+}

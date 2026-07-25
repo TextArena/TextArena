@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ị bụ Egwuregwu {player_id} n'egwuregwu abụọ nke Spite na Malice. Ebumnuche gị bụ ịbụ onye mbụ ịsa ahụ payoff pile gị.\n\n### Ndọrọ ndọrọ Ọchịchị:\n- Ebumnuche bụ ịsa ahụ payoff pile gị site n'ịkpọ kaadi na center piles.\n- Ị nwere ike ịkpọ kaadi site na isi mmalite atọ:\n  1. **Akụ gị** (ị malite otu mgbe ọ bụla na kaadi anọ na akụ).\n  2. **Kaadi elu nke payoff pile gị**.\n  3. **Kaadi elu nke discard pile ọ bụla gị**.\n\n### Ụkpụrụ Egwuregwu:\n- Ị nwere ike ịkpọ kaadi na center pile ma ọ bụrụ na ọ bụ **otu ọkwa elu** karịa kaadi elu na ahịrị nke pile (center piles malite na Ace na ruo Queen; Kings bụ wild - ha nwere ike ịkpọta na kaadi ọ bụla kamakwa adịghị agbanwe usoro ọkwa. Nke a pụtara ma ọ bụrụ na a King eji mgbe 4 gasịrị, mgbe ahụ King ahụ nwere ọkwa 5 na kaadi ọzọ ga-abụ 6).\n- Ọ bụrụ na ị naghịzi ịkpọ kaadi ọzọ, ị ga-**kpọ kaadi** na otu n'ime discard piles gị ịkwụsị mgbe gị.\n- Ọ bụrụ na center pile ruo Queen, ọ ga-ejighị n'aka ọzọ.\n- Usoro ọkwa bụ: A=1, 2=2, ..., 9=9, J=10, Q=11, K dị ka wild.\n\n### Ụzọ Ọrụ:\n1. **Dee**: Na mmalite nke mgbe gị, dee kaadi ịkpụ akụ gị ruo kaadi anọ. Tinye **[draw]** ịmalite.\n2. **Kpọ Kaadi**: Iji kpọ kaadi, kọwaa kaadi na center pile dị ka: **[play A♠ 0]** (ebe 'A♠' bụ kaadi na '0' bụ center pile index).\n3. **Kpọ**: Ọ bụrụ na ị naghịzi ịkpọ kaadi ọzọ, kpọ kaadi site na akụ gị na discard pile ịkwụsị mgbe gị. Tinye **[discard A♠ 1]** (ebe 'A♠' bụ kaadi na '1' bụ discard pile index). Kwa mkpụrụ obi, ị naghịzi ịkpọ kaadi ọ bụla site na payoff pile. Ị nwere ike ịkpọ kaadi naanị site na akụ gị.\n\n"
+  },
+  "board": {
+    "current_board": "Board ugbu a: {board} Nkeji na-aga: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Ogwe etiti --- ",
+    "pile": "{observation}Igwu {i}: {pile} ",
+    "player_view_header": "{observation} --- Onye na-egwu egwu {player_id}'s View --- ",
+    "payoff": "{observation}Otu Nkwụnye ego (Kaadị elu): {top_card}, Ogologo Nkwụnye ego: {payoff_length} ",
+    "hand": "{observation}Aka: {hand} ",
+    "discard": "{observation}Iwepu Akụ: {discard} ",
+    "empty": "E nweghị ihe dị na ya"
+  },
+  "game_message": {
+    "no_cards_left": "Enweghị kaadị ndị ọzọ ị ga-esi na ha. Cheta na ị nwere ike igwu kaadị site na isi mmalite ndị a: 1. aka gị. 2. kaadị elu nke nchịkọta ụgwọ ọrụ gị. 3. kaadị elu nke ọ bụla n'ime nchịkọta gị."
+  },
+  "invalid_move": {
+    "wrong_format": "Ọkpụkpọ na-abaghị uru. Onye ọkpụkpọ {player_id} azaghị na ọpụpụ ziri ezi na brackets square.",
+    "invalid_play": "Egwuregwu na-abaghị uru. Onye ọkpụkpọ {player_id} gbalịrị igwu {card} na etiti etiti {index}.",
+    "discard_from_payoff": "Nkwụsị na-abaghị uru. Onye ọkpụkpọ {player_id} gbalịrị ịhapụ kaadị site na nchịkọta ụgwọ ọrụ.",
+    "discard_not_in_hand": "Nkwụsị na-abaghị uru. Onye ọkpụkpọ {player_id} gbalịrị ịhapụ kaadị na-adịghị n'aka.",
+    "wrong_move_type": "Ụdị mmegharị na-abaghị uru. Onye ọkpụkpọ {player_id} azaghị ụdị mmegharị ziri ezi."
+  },
+  "game_action": {
+    "you_drew": "I sere kaadị.",
+    "opponent_drew": "Onye na-egwu egwu {player_id} na-adọta kaadị.",
+    "you_played": "Ị na-egwu {card} na etiti etiti {index}.",
+    "opponent_played": "Onye na-egwu egwu {player_id} na-egwu {card} na etiti etiti {index}.",
+    "you_discarded": "Ị tụfuru {card} iji tụfuo ụyọkọ {index}, nke pụtakwara na ị gwụchara oge ha. A gaghị atụle ihe ọ bụla ọzọ ị na-eme maka oge a. Onye ọkpụkpọ {next_player_id} ga-esote.",
+    "opponent_discarded": "Onye na-egwu egwu {player_id} tụfuru {card} iji tụfuo nchịkọta {index}, nke pụtakwara na ha agwụla. A naghị atụle ihe ọ bụla ọzọ nke Onye na-egwu egwu {player_id} maka oge a. Onye na-egwu egwu {next_player_id}, ị ga-esote. Biko tinye ihe ị na-eme na usoro [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Onye ọkpụkpọ {current_player} emechaala nchịkọta ụgwọ ọrụ ha! Onye ọkpụkpọ {current_player} meriri!",
+    "deadlock_player_0": "Onye na-egwu egwu 0 meriri na {player_0_payoff} kaadị fọdụrụ vs Player 1 si {player_1_payoff} kaadị.",
+    "deadlock_player_1": "A na-enweta ihe nkwụsị! Onye ọkpụkpọ 1 na-emeri na {player_1_payoff} kaadị fọdụrụnụ vs Player 0 si {player_0_payoff} kaadị.",
+    "deadlock_tie": "Deadlock reached with tie! Both players have {player_0_payoff} cards remaining. Player {current_player} wins by default."
+  }
+}

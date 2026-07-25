@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Enweghị kaadị ma",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Single Player vs Dealer\n\n📖 NKOWA EGWUREGWU:\n• Ị malite na {start_chips} chips\n• Deck otu nke 52 kaadi (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Ị na-egwuri egwu megide diiler (ụlọ)\n• Ola egwuregwu na-eso usoro Ultimate Texas Hold'em: ị na-ebute ANTE na BLIND bets, inata 2 hole kaadi, kpebie na optional PLAY bets gburugburu oge betting, mgbe ahụ kpesa community kaadi na kọmpara kaadị ị kacha mma 5-kaadị megide diiler. Ebumnuche gị bụ ịkwado ụgwọ gị (mgbe ị nwere kaadị kacha mma), ebe ị na-ebelata ụgwọ gị (mgbe ị nwere kaadị njọ)\n• Egwuregwu ahụ gwụsịrị mgbe ị ruru 0 chips ma ọlị ma ọ bụ karịa na mmalite nke egwuregwu (LOSS) ma ọ bụ kọńsị 1000 egwuregwu na chips (WIN)\n\n💰 USORO BETTING:\n• ANTE: Bet dị mkpa ${ante} kwa egwuregwu\n• BLIND: Bet dị mkpa ${ante} kwa egwuregwu\n• PLAY: Bet a na-ahọrọ n'oge egwuregwu. N'ozuzu egwuregwu, ị nwere ike ịhọrọ NAANỊ nke ndịa: (${ante4} ị bụrụ na ị mere ya na PRE-FLOP, ${ante2} ị bụrụ na ị mere ya na FLOP, ma ọ bụ ${ante} ị bụrụ na ị mere ya na RIVER. Ị nwere ike ịkpọpụ ikpe na ọbara, ịhapụ akụkụ ahụ, ma ị meghị bet.)\n\n🎴 KAADỊ DEALING:\n• Ị natara 2 face-up kaadi (kaadị hole gị)\n• Diiler natara 2 face-down kaadi (ndị a na-echi gị)\n• 5 community kaadi na-ebu na face-down mbụ\n• Community kaadi na-egosi gburugburu site na egwuregwu fases\n\n🏆 NKEMDỊ DIILER:\n• Diiler kwesịrị ịnwe kaadị PAIR (2 kaadi nke otu ọkwa) ịkwalite, na-eji 2 kaadi na aka ha na 5 community kaadi.\n• Nkemdị diiler na-emetụta mpebetọ betting, dị ka ị ga-ekwu mgbe e mesịrị.\n\n🎮 EGWUREGWU FASES & ACTIONS:\n📋 PRE-FLOP:\n  • Actions: [4x] (${ante4}) ma ọ bụ [check]\n  • [4x]: Wee ${ante4} PLAY bet, kpesa mbụ 3 community kaadi\n  • [check]: Enweghị bet ọzọ, kpesa mbụ 3 community kaadi\n\n📋 FLOP:\n  • Ị bụrụ na ị tọọ bet 4x: Naanị [skip] dịnụ (auto-reveals ikpeazụ 2 community kaadi)\n  • Ị bụrụ na ị tọọghị bet 4x: [2x] (${ante2}) ma ọ bụ [check]\n  • [2x]: Wee ${ante2} PLAY bet, kpesa ikpeazụ 2 community kaadi\n  • [check]: Enweghị bet ọzọ, kpesa ikpeazụ 2 community kaadi\n\n📋 RIVER:\n  • Ị bụrụ na ị tọọ bet 4x ma ọ bụ 2x: Naanị [skip] dịnụ (auto-proceeds gaa na ikpeazụ)\n  • Ị bụrụ na ị tọọghị bet PLAY: [1x] (${ante}) ma ọ bụ [fold]\n  • [1x]: Wee ${ante} PLAY bet, gaa na ikpeazụ\n  • [fold]: Hapụ akụkụ ahụ, hapụ ANTE na BLIND bets\n\n📋 SHOWDOWN:\n  • Kaadị ziri ezi na ịkọwapụta\n  • Kaadị 5 kacha mma site na 7 kaadi (2 hole + 5 community)\n  • Bets na-akwụnye ụgwọ ya dị ka ụkpụrụ ụgwọ\n\n💎 BET PAYOUTS:\n📊 ANTE BET:\n  • Diiler adịghị ịkwalite: PUSH (bet ebufnụ)\n  • Diiler ịkwalite & ị merie: 1:1 ụgwọ (bet + ụgwọ)\n  • Diiler ịkwalite & ị hapụ: Bet efu\n  • Tie: PUSH (bet ebufnụ)\n\n📊 BLIND BET:\n  • Enweghị mmetụta site na nkemdị diiler\n  • Ị merie: Bet ebufnụ na ụgwọ ọzọ dabere na ọdịdị kaadị gị\n  • Ị hapụ: Bet efu\n  • Tie: PUSH (bet ebufnụ)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Enweghị ụgwọ ọzọ\n\n📊 PLAY BET:\n  • Enweghị mmetụta site na nkemdị diiler\n  • Kọmpara ziri ezi: Kaadị ị kacha mma vs Diiler kacha mma\n  • Ị merie: 1:1 ụgwọ (bet + ụgwọ)\n  • Ị hapụ: Bet efu\n  • Tie: PUSH (bet ebufnụ)\n\n🎯 NKOWA KAADỊ POKER (Kacha mma gaa na njọ):\n  1. Royal Flush: A-K-Q-J-10 nke otu suit\n  2. Straight Flush: 5 kaadi ọzọ nke otu suit\n  3. Four of a Kind: 4 kaadi nke otu ọkwa\n  4. Full House: 3 nke otu + 2 nke otu\n  5. Flush: 5 kaadi nke otu suit\n  6. Straight: 5 kaadi ọzọ\n  7. Three of a Kind: 3 kaadi nke otu ọkwa\n  8. Two Pair: 2 jo nke ọdịdị ọdịdị\n  9. One Pair: 2 kaadi nke otu ọkwa\n  10. High Card: Kaadị kacha elu merie\n\n⌨️  COMMANDS ACTION:\n• [4x] ma ọ bụ [play bet 4x]: Wee ${{self.ante_amount*4}} PLAY bet\n• [2x] ma ọ bụ [play bet 2x]: Wee ${{self.ante_amount*2}} PLAY bet\n• [1x] ma ọ bụ [play bet 1x]: Wee ${{self.ante_amount*1}} PLAY bet\n• [check] ma ọ bụ [c]: Kọwaa (enweghị bet ọzọ)\n• [fold] ma ọ bụ [f]: Fold (hapụ akụkụ ahụ)\n• [skip] ma ọ bụ [s]: Gaa na egwuregwu ọzọ (mgbe enweghị omume dị mkpa)\n\n💡 STRATEGY TIPS:\n• Kaadị malite kacha mma (jo, kaadị elu) na-akwado bets 4x\n• Kọwaa nkemdị diiler - kaadị njọ nwere ike ịkụnye ịkwalite diiler\n• BLIND bet nwere ike ịkwado ụgwọ dị elu na kaadị kacha mma (Royal Flush = 500:1!)\n• Lelee ọnụ ọgụgụ chip gị! Ọ bụrụ na ọ ruru 0 ma ọlị ma ọ bụ karịa na mmalite nke egwuregwu, ị hapụ.\n\n⚠️  NOTES IMPORTANT:\n• ANTE na BLIND bets dị mkpa kwa egwuregwu\n• PLAY bets dị na-ahọrọ na usoro\n• Kpebie ịnyefe omume ziri ezi, na naanị omume otu oge.\n\n",
+    "state": " GBAGBA {round}  Chips: {chips}  Aka gị: {hand}  Nzọ nzọ ugbu a: Ante ${ante}, Blind ${blind}, Play ${play}  Oge: {phase}  Omume ndị dịnụ: {actions} "
+  },
+  "board": {
+    "round_start": " Gburugburu {round} amalitela! nzọ: ANTE ${ante}, BLIND ${blind}. I nwere {chips} ibe fọdụrụ.",
+    "your_hand": " Aka gị: {hand}",
+    "flop_revealed": " FLOP kpughere: {cards}",
+    "river_revealed": "🃏 RIVER revealed: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Invalid action for current phase. Available actions: {available}",
+    "message": "❌ Invalid action! Available actions: {available}"
+  },
+  "action": {
+    "folded": "🃏 You folded."
+  },
+  "showdown": {
+    "dealer_hand": " Gosi! Aka onye na-ere ahịa: {cards}",
+    "community_cards": " Kaadị Community: {cards}",
+    "player_best": " Aka kacha mma nke onye ọkpụkpọ: {name} ({cards})",
+    "dealer_best": " Aka kacha mma nke onye na-ere ahịa: {name} ({cards})",
+    "ante_lost_folded": " ANTE nzọ furu efu! -${ante} (apịaji)",
+    "blind_lost_folded": "❌ BLIND bet LOST! -${blind} (folded)",
+    "ante_won": "✅ ANTE nzọ merie! + ${amount}",
+    "ante_pushed": " ANTE nzọ PUSHED! ${ante} laghachiri",
+    "ante_lost": " ANTE nzọ furu efu! -${ante}",
+    "blind_won": "✅ Bịaruo nzọ ahụ n'isi! +${amount}",
+    "blind_pushed": " BET BLOIND PUSHED! ${blind} laghachiri",
+    "blind_lost": "❌ BLIND bet LOST! -${blind}",
+    "play_won": "✅ PLAY nzọ merie! + ${amount}",
+    "play_pushed": " PLAY nzọ PUSHED! ${play} laghachiri",
+    "play_lost": "❌ PLAY bet LOST! -${play}",
+    "net_gain": " Gburugburu {round} emechara! Net uru: + ${net}",
+    "net_loss": " Gburugburu {round} emechara! Net Loss: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": " GAME OVER! {max_turns} agba agwụla. I nwere ${chips} ibe - I meriri!",
+    "game_over_lose": " GAME OVER! I nweghịzi mkpụrụ ego. Onye na-ere ahịa na-emeri!",
+    "reward_win": "Onye ọkpụkpọ ahụ mezue {winner_rounds} agba na ${chips} ibe",
+    "reward_lose": "Player ran out of chips in round {round}",
+    "reward_win_max": "Onye ọkpụkpọ ahụ mezue {max_turns} agba na ${chips} ibe"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Anọ Dị n'Ụdị Ha",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Atọ Ndị Dị n'Otu",
+    "two_pair": "Abụọ Abụọ",
+    "one_pair": "Otu Di na Nwunye",
+    "high_card": "Kaadị dị elu",
+    "unknown": "Aka A Na-amaghị Ama"
+  }
+}
