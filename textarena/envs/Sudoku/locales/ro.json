@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id}. Jucați Sudoku.\nIată starea actuală a grilei Sudoku. Fiecare rând este numerotat de la 1 la 9, iar fiecare coloană este de asemenea numerotată de la 1 la 9.\nCelulele goale sunt reprezentate de '.', iar celulele precompletate conțin cifre de la 1 la 9.\n\nGrila Sudoku curentă:\nObiectivul dvs. este de a umple celulele goale din grila 9x9 cu cifre de la 1 la 9 astfel încât:\n1. Fiecare rând să conțină toate cifrele de la 1 la 9 fără repetiție.\n2. Fiecare coloană să conțină toate cifrele de la 1 la 9 fără repetiție.\n3. Fiecare dintre cele nouă subgrile 3x3 să conțină toate cifrele de la 1 la 9 fără repetiție.\n\nReguli și instrucțiuni:\n1. **Nu suprascrieți** numerele inițiale furnizate în grilă.\n2. **Completați doar** celulele goale reprezentate de '.'.\n3. Puteți răspunde în orice mod doriți, dar asigurați-vă că răspunsul dvs. include formatul '[rând coloană număr]'.\n4. **Asigurați-vă** că mutarea dvs. nu încalcă regulile Sudoku. Mutările nevalide vor rezulta în penalizări.\nExemple:\n- **Mutare validă**:\n  - Fragment de grilă înainte de mutare:\n  \n  - Mutare: `[5 3 7]`\n  - Explicație: Plasarea lui 7 la rândul 5, coloana 3 nu încalcă nicio regulă Sudoku.\n\n- **Mutare nevalidă** (Suprascrierea unei celule precompletate):\n  - Fragment de grilă înainte de mutare:\n  \n  - Mutare: `[1 1 9]`\n  - Explicație: Celula (1,1) este deja completată cu 5. Nu o puteți suprascrie.\n\n- **Mutare nevalidă** (Încălcarea regulilor Sudoku):\n  - Fragment de grilă înainte de mutare:\n  \n  - Mutare: `[1 3 5]`\n  - Explicație: Plasarea lui 5 în rândul 1, coloana 3 încalcă regula deoarece 5 există deja în rândul 1.\n\nIstoria mutărilor și gândurilor dvs. va fi adăugată pe măsură ce jucați mai multe runde. Folosiți istoria mutărilor dvs. pentru a îmbunătăți procesul de luare a deciziilor evitând mutările pe care le-ați încercat. Mult noroc!\n\n"
+  },
+  "board": {
+    "game_board": "Tablă de joc:\n{board}",
+    "board_state": "Starea tablei: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de mutare nevalid. Jucătorul {player_id} nu a răspuns cu 'rând coloană număr' valid.",
+    "out_of_bounds": "Mutare nevalidă. Jucătorul {player_id} a încercat să plaseze {num} la ({row}, {col}), care este în afara limitelor.",
+    "overwrite": "Mutare nevalidă. Jucătorul {player_id} a încercat să suprascrie o celulă precompletată ({row}, {col}).",
+    "violates_rules": "Mutare nevalidă. Jucătorul {player_id} a încercat să plaseze {num} la ({row}, {col}), care încalcă regulile Sudoku."
+  },
+  "outcome": {
+    "win": "Felicitări! Jucătorul {player_id} a completat puzzle-ul Sudoku.",
+    "turn_limit": "Limita de mutări a fost atinsă. Ați completat corect {percent}% din celulele goale."
+  }
+}

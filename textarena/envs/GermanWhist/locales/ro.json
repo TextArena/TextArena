@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Jocul începe. Culoarea de atu: {trump_suit} (cartea de atu: {trump_str}).",
+    "no_trump_card": "niciuna"
+  },
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} în Whist german.\n{phase_info}\nDețineți {hand_size} cărți.\nJucați o carte cu '[play N]', unde N este poziția sa în mâna dvs. (de exemplu '[play 3]').",
+    "phase_learning": "FAZA DE ÎNVĂȚARE: câștigătorul fiecărui tur ia cartea cu fața în sus și învinsul trage următoarea carte din pachet. Tururile câștigate în această fază nu contează pentru victorie.",
+    "phase_playing": "FAZA DE JOC: pachetul este epuizat. Fiecare tur de acum înainte contează pentru victorie."
+  },
+  "next_card": {
+    "playing_phase": "Nu există nicio carte disponibilă - faza de joc a început.",
+    "deck_empty": "Pachetul este gol - nu există nicio carte disponibilă.",
+    "available": "Carte disponibilă: {card}",
+    "available_trump": "Carte disponibilă: {card} (ATU)"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de mutare invalid. Utilizați '[play N]' pentru a juca a N-a carte din mâna dvs.",
+    "bad_position": "Poziția acestei cărți nu există. Dețineți {hand_size} cărți.",
+    "must_follow_suit": "Trebuie să urmați culoarea și să jucați o carte de {lead_suit}.",
+    "invalid_play": "Această carte nu poate fi jucată."
+  },
+  "game_action": {
+    "played": "Jucătorul {player_id} a jucat {card}."
+  },
+  "trick": {
+    "won": "Jucătorul {winner_id} câștigă turul cu {card}.",
+    "won_learning": "Jucătorul {winner_id} câștigă turul cu {card} și ia cartea cu fața în sus."
+  },
+  "phase": {
+    "learning_complete": "Pachetul este epuizat. Faza de învățare s-a încheiat - fiecare tur rămas contează pentru victorie."
+  },
+  "draw": {
+    "winner_received": "Ați câștigat turul și ați primit {card}.",
+    "loser_received": "Ați pierdut turul și ați tras {card} din pachet.",
+    "winner_preview": "Următoarea carte disponibilă este {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tururi câștigate până acum - Jucător 0: {tricks0}, Jucător 1: {tricks1}",
+    "scores_playing": "Tururi de punctaj - Jucător 0: {tricks0}, Jucător 1: {tricks1}",
+    "phase": "Fază: {phase}",
+    "phase_learning": "Fază: {phase} ({remaining_cards} cărți rămase în pachet)"
+  },
+  "hand": {
+    "no_cards": "Nicio carte",
+    "no_cards_in_hand": "Nicio carte în mână",
+    "header": "Mâna dvs.:",
+    "trump_indicator": " (ATU)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Nicio carte jucată încă în acest tur.",
+    "header": "Turul curent:",
+    "trump_indicator": " (ATU)",
+    "card_line": "{observation}\n  Jucător {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Jocul nu a început",
+    "header": "=== JOC DE WHIST GERMAN ===",
+    "phase": "{observation}\nFază: {phase}",
+    "trump_suit": "{observation}\nCuloarea de atu: {trump_suit}",
+    "trump_card": "{observation}\nCartea de atu: {card}",
+    "cards_left": "{observation}\nCărți rămase în pachet: {count}",
+    "next_card": "{observation}\nUrmătoarea carte pentru câștigător: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nTurul curent:",
+    "trump_indicator": " (ATU)",
+    "trick_line": "{observation}\n  Jucător {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nJucător {player_id}: {scoring} tururi de punctaj ({tricks} total), {hand_size} cărți în mână"
+  },
+  "outcome": {
+    "summary": "Fază de învățare - Jucător 0: {l0}, Jucător 1: {l1}. Fază de joc - Jucător 0: {p0}, Jucător 1: {p1}. Jucătorul {winner_id} câștigă cu {winner_tricks} tururi de punctaj!"
+  }
+}

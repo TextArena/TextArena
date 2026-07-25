@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} în Stratego.\nScopul dvs. este să capturați steagul adversarului sau să eliminați toate piesele lor mobile.\nArmata dvs. a fost plasată pentru dvs. pe tablă, inclusiv steagul, bombele și alte piese de ranguri diferite.\n\n### Instrucțiuni de joc\n1. **Reguli de mișcare:**\n   - În rândul dvs., puteți muta o piesă cu un pas într-un pătrat adiacent (sus, jos, stânga sau dreapta) care este deja ocupat cu piesele dvs.\n   - Exemplu: O piesă poate muta de la A1 la B1 sau A1 la A2 dacă B1 și A2 nu sunt plasate cu piesele proprii ale jucătorului.\n   - Dacă piesa selectată este o bombă sau un steag, aceasta nu poate fi mutată.\n2. **Bătălii:**\n   - Dacă vă mutați pe un pătrat ocupat de o piesă a adversarului, atunci va avea loc o bătălie:\n     - Piesa cu rangul mai mare câștigă și elimină piesa adversarului.\n     - Dacă rangurile sunt egale, ambele piese sunt eliminate de pe tablă.\n     - **Cazuri speciale:**\n       - Bombele elimină majoritatea pieselor atacatoare, cu excepția minerilor, care dezamorsează bombele.\n       - Spionii pot învinge mareșalul dacă spionul atacă primul, dar pierd în fața tuturor celorlalte piese.\n3. **Obiective strategice:**\n   - Identificați piesele adversarului prin mișcările și bătăliile lor.\n   - Protejați-vă steagul în timp ce încercați să capturați steagul adversarului.\n   - Utilizați cercetașii în mod strategic pentru a obține informații despre piesele adversarului și atacați pe cele slabe.\n\n### Cum să faceți o mișcare:\n1. Specificați coordonatele piesei pe care doriți să o mutați și destinația acesteia.\n2. Utilizați formatul: [A0 B0], unde A0 este poziția sursă, iar B0 este destinația.\n   - Exemplu: Pentru a muta o piesă de la rândul 0, coloana 0 la rândul 1, coloana 0, introduceți [A0 B0].\n3. Asigurați-vă că destinația este validă conform regulilor de mișcare de mai sus.\n\n### Note importante:\n- Tabla va arăta piesele dvs. și pozițiile lor, de exemplu MN, MS.\n- Tabla va arăta și pozițiile cunoscute ale pieselor adversarului fără a dezvălui rangurile lor, de exemplu ?.\n- Grilele cu ~ sunt lacuri și nu pot fi mutate pe ele.\n- Ca sugestie, începeți jocul mutând piesele care sunt pe linia frontului pentru a obține informații despre piesele adversarului. Linia frontului a jucătorului 0 și a jucătorului 1 sunt rândurile D și G, respectiv.\n\nIată starea actuală a tablei:\n"
+  },
+  "board": {
+    "current_board": "Tablă curentă:\n\n{board}\nMișcări disponibile: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de acțiune invalid. Jucătorul {player_id} nu a introdus o mișcare în formatul [A0 B0].",
+    "invalid_coordinates": "Format de acțiune invalid. Jucătorul {player_id} nu a introdus coordonate valide.",
+    "not_own_piece": "Format de acțiune invalid. Jucătorul {player_id} trebuie să mute una dintre piesele sale.",
+    "scout_through_pieces": "Format de acțiune invalid. Jucătorul {player_id} nu poate muta un cercetaș prin alte piese.",
+    "scout_diagonal": "Format de acțiune invalid. Jucătorul {player_id} nu poate muta un cercetaș diagonal.",
+    "non_scout_multi_square": "Format de acțiune invalid. Piesele, în afară de cercetași, pot muta doar un pătrat la un moment dat.",
+    "move_into_lake": "Format de acțiune invalid. Jucătorul {player_id} nu poate muta în lac.",
+    "move_onto_own_piece": "Format de acțiune invalid. Jucătorul {player_id} nu poate muta pe una dintre piesele sale.",
+    "move_bomb_or_flag": "Format de acțiune invalid. Jucătorul {player_id} nu poate muta o bombă sau un steag."
+  },
+  "game_action": {
+    "you_moved": "Ați mutat piesa dvs. de la {source} la {dest}.",
+    "opponent_moved": "Jucătorul {player_id} a mutat o piesă de la {source} la {dest}.",
+    "you_equal_ranks": "Ați mutat piesa dvs. de la {source} la {dest}. Piesa atacatoare a fost {attacking_rank} și piesa de destinație a fost {target_rank}. Deoarece rangurile sunt egale, ambele piese au pierdut.",
+    "opponent_equal_ranks": "Jucătorul {player_id} a mutat o piesă de la {source} la {dest}. Piesa atacatoare a fost {attacking_rank} și piesa de destinație a fost {target_rank}. Deoarece rangurile sunt egale, ambele piese au pierdut.",
+    "you_miner_defused": "Ați mutat piesa dvs. de la {source} la {dest}. Piesa atacatoare a fost {attacking_rank} și piesa de destinație a fost {target_rank}. Deoarece minerii pot dezamorsa bombele, ați câștigat bătălia.",
+    "opponent_miner_defused": "Jucătorul {player_id} a mutat o piesă de la {source} la {dest}. Piesa atacatoare a fost {attacking_rank} și piesa de destinație a fost {target_rank}. Deoarece minerii pot dezamorsa bombele, ați pierdut bătălia.",
+    "you_bomb_lost": "Ați mutat piesa dvs. de la {source} la {dest}. Piesa atacatoare a fost {attacking_rank} și piesa de destinație a fost {target_rank}. Deoarece atacatorul nu este un miner, ați pierdut bătălia.",
+    "opponent_bomb_won": "Jucătorul {player_id} a mutat o piesă de la {source} la {dest}. Piesa atacatoare a fost {attacking_rank} și piesa de destinație a fost {target_rank}. Deoarece atacatorul nu este un miner, ați câștigat bătălia.",
+    "you_spy_won": "Ați mutat piesa dvs. de la {source} la {dest}. Piesa atacatoare a fost {attacking_rank} și piesa de destinație a fost {target_rank}. Deoarece atacatorul este un spion și destinația este un mareșal, ați câștigat bătălia.",
+    "opponent_spy_lost": "Jucătorul {player_id} a mutat o piesă de la {source} la {dest}. Piesa atacatoare a fost {attacking_rank} și piesa de destinație a fost {target_rank}. Deoarece atacatorul este un spion și destinația este un mareșal, ați pierdut bătălia.",
+    "you_higher_won": "Ați mutat piesa dvs. de la {source} la {dest}. Piesa atacatoare a fost {attacking_rank} și piesa de destinație a fost {target_rank}. Deoarece atacatorul are un rang mai mare decât destinația, ați câștigat bătălia.",
+    "opponent_higher_lost": "Jucătorul {player_id} a mutat o piesă de la {source} la {dest}. Piesa atacatoare a fost {attacking_rank} și piesa de destinație a fost {target_rank}. Deoarece atacatorul are un rang mai mare decât destinația, ați pierdut bătălia.",
+    "you_lower_lost": "Ați mutat piesa dvs. de la {source} la {dest}. Piesa atacatoare a fost {attacking_rank} și piesa de destinație a fost {target_rank}. Deoarece atacatorul are un rang mai mic decât destinația, ați pierdut bătălia.",
+    "opponent_lower_won": "Jucătorul {player_id} a mutat o piesă de la {source} la {dest}. Piesa atacatoare a fost {attacking_rank} și piesa de destinație a fost {target_rank}. Deoarece atacatorul are un rang mai mic decât destinația, ați câștigat bătălia."
+  },
+  "outcome": {
+    "flag_captured": "Jucătorul {player_id} a capturat steagul adversarului!",
+    "no_movable_pieces": "Jucătorul {winner_id} câștigă! Jucătorul {loser_id} nu mai are piese mobile."
+  }
+}

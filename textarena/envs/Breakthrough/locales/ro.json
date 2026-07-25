@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți {color} într-un joc de Breakthrough. Vă deplasați {direction} pe o tablă de {board_size}x{board_size}.\nÎn rândul dvs., puteți muta o singură piesă un pas înainte sau diagonal înainte.\nO piesă poate să se deplaseze doar diagonal dacă există o piesă a adversarului acolo și doar poate să se deplaseze într-un astfel de pătrat preocupat într-un pas diagonal.\nCând vă deplasați într-un pătrat cu o piesă a adversarului, o capturați și piesa adversarului este eliminată permanent de pe tablă.\nFolosiți notația UCI în paranteze, de exemplu [a2a3] pentru a muta de la a2 la a3.\n* 'a' corespunde coloanei celei mai din stânga, '1' este rândul de jos (din perspectiva lui Alb).\n* Rândul de acasă al lui Negru este rândul de sus (rândul 8 pentru o tablă de 8x8). Rândul de acasă al lui Alb este rândul de jos (rândul 1 pentru o tablă de 8x8).\nPrimul jucător al cărui piesă ajunge la rândul de acasă al adversarului câștigă. Dacă toate piesele dvs. sunt capturate, pierdeți."
+  },
+  "invalid_move": {
+    "wrong_format": "Vă rugăm să folosiți notația algebrică între paranteze, de exemplu [a2a3].",
+    "out_of_bounds": "Mutarea este în afara limitelor tablei.",
+    "illegal": "Această mutare nu urmează regulile Breakthrough sau nu este piesa dvs."
+  },
+  "game_action": {
+    "moved": "Jucătorul {player_id} mută {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Alb a ajuns la rândul de acasă al lui Negru.",
+    "black_reached": "Negru a ajuns la rândul de acasă al lui Alb.",
+    "white_captured": "Toate piesele lui Alb au fost capturate.",
+    "black_captured": "Toate piesele lui Negru au fost capturate.",
+    "no_moves": "Jucătorul {player_id} nu mai are mutări."
+  }
+}

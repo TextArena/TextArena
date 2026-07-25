@@ -1,0 +1,79 @@
+{
+  "_comment": "Fișier de localizare pentru Golf (joc de cărți). NU traduceți cheile (partea stângă). Traduceți doar valorile (partea dreaptă). Păstrați fiecare {placeholder} exact așa cum este.",
+  "_slots": {
+    "{player_id}": "Numărul jucătorului, de exemplu 0 sau 1",
+    "{pid}": "Numărul jucătorului, de exemplu 0 sau 1",
+    "{winner}": "Numărul jucătorului cu cel mai mic scor",
+    "{score}": "Un total de puncte numerice",
+    "{card}": "O etichetă de carte, cum ar fi A♠, 10♥, K♦ sau Q♣",
+    "{new}": "Eticheta cărții care a fost plasată în grilă",
+    "{old}": "Eticheta cărții care a fost îndepărtată din grilă",
+    "{row}": "Un număr de rând",
+    "{col}": "Un număr de coloană",
+    "{max_row}": "Cel mai mare număr de rând valid",
+    "{max_col}": "Cel mai mare număr de coloană valid",
+    "{reason}": "O frază pre-redată care descrie de ce a început runda finală",
+    "{n}": "Un număr de rând afișat la începutul unui rând de grilă",
+    "{cards}": "Celulele pre-redate, sensibile la aspect, ale unui rând de grilă",
+    "{hand}": "Blocul pre-redat al grilei jucătorului",
+    "{discard}": "Eticheta cărții de pe vârful grămezii de cărți eliminate, sau cuvântul pentru 'niciuna'",
+    "{options}": "Linia pre-redată care listează acțiunile disponibile",
+    "{scores}": "Lista pre-redată a scorurilor finale pentru fiecare jucător"
+  },
+  "player_prompt": {
+    "intro": "Sunteți jucătorul {player_id} în Golf (Joc de Cărți).\nObiectiv: Obțineți cel mai mic scor total în acest tur. Dacă coloanele au aceeași valoare, ele sunt însumate ca 0.\nValori ale cărților: A=1, 2-10=valoare nominală, J/Q=10, K=0\n\nAcțiuni (utilizați exact parantezele):\n- '[draw]' - Trageți din pachet\n- '[take]' - Luați din grămada de cărți eliminate\n- '[swap X Y]' - Schimbați cartea trasă cu poziția X (rând) Y (coloană)\n- '[discard]' - Eliminați cartea trasă\n"
+  },
+  "board": {
+    "drew": "Ați tras: {card}\nAcum trebuie să [swap X Y] sau să [discard] cartea.",
+    "took": "Ați luat: {card} din grămada de cărți eliminate\nTrebuie să [swap X Y] cu ea (nu puteți elimina cărți din grămada de cărți eliminate).",
+    "peeked": "Ați văzut la poziția ({row},{col}): {card}",
+    "turn_view": "Mâna dvs.:\n{hand}\nGrămada de cărți eliminate: {discard}\n{options}",
+    "none": "Niciuna"
+  },
+  "options": {
+    "final_turns": "Ture finale! Opțiunile dvs.: [draw], [take], [peek X Y]",
+    "draw": "Opțiunile dvs.: [draw], [take]",
+    "must_swap": "Trebuie să: [swap X Y] (nu puteți elimina cărți din grămada de cărți eliminate)",
+    "swap_or_discard": "Trebuie să: [swap X Y] sau [discard]"
+  },
+  "hand": {
+    "no_cards": "Nicio carte",
+    "header": "  Coloană:   1    2    3",
+    "row": "Rând {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Jucătorul {pid} a schimbat {new} cu {old} la poziția ({row},{col})",
+    "discarded": "Jucătorul {pid} a eliminat {card}"
+  },
+  "message": {
+    "deck_empty": "Pachetul este gol! Jocul se termină imediat.",
+    "knocked": "Jucătorul {pid} a bătut! Fiecare alt jucător primește încă un tur.",
+    "final_round": "Jucătorul {pid} {reason}! Fiecare alt jucător primește încă un tur."
+  },
+  "reason": {
+    "all_revealed": "are toate cărțile dezvăluite"
+  },
+  "invalid": {
+    "wrong_action": "Utilizați exact o acțiune între paranteze: [draw], [take], [swap X Y], [discard], [knock], sau [peek X Y]",
+    "discard_empty": "Grămada de cărți eliminate este goală!",
+    "must_draw_first": "Trebuie să trageți mai întâi [draw], [take], [knock], sau [peek X Y]",
+    "cannot_discard_taken": "Nu puteți elimina o carte luată din grămada de cărți eliminate. Trebuie să o schimbați.",
+    "have_drawn_card": "Aveți o carte trasă. Trebuie să [swap X Y] sau să [discard] cartea.",
+    "need_drawn_swap": "Aveți nevoie de o carte trasă pentru a schimba.",
+    "need_drawn_discard": "Aveți nevoie de o carte trasă pentru a elimina.",
+    "out_of_bounds": "Poziție în afara limitelor. Utilizați rândul 1-{max_row}, coloana 1-{max_col}",
+    "knock_with_card": "Nu puteți bate cu o carte trasă. Completați mai întâi tura.",
+    "already_knocked": "Cineva a bătut deja în acest tur.",
+    "already_revealed": "Cartea este deja dezvăluită!"
+  },
+  "summary": {
+    "full": "Jocul s-a terminat! Jucătorul {winner} câștigă cu un scor de {score} puncte!\n\nScoruri finale:\n{scores}",
+    "line": "Jucătorul {pid}: {score} puncte\n"
+  },
+  "board_str": {
+    "title": "=== JOC DE GOLF ===",
+    "discard": "Grămada de cărți eliminate: {card}",
+    "knocked": "Jucătorul {pid} a bătut!",
+    "player_header": "Jucătorul {pid} (Scor: {score}):"
+  }
+}

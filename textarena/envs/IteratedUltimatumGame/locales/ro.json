@@ -1,0 +1,43 @@
+{
+  "_comment": "Fișier de localizare pentru IteratedUltimatumGame. NU traduceți cheile (partea stângă). Traduceți doar valorile (partea dreaptă). Păstrați fiecare {placeholder} exact așa cum este; nu traduceți tokenurile de acțiune [Offer: $X] / [Accept] / [Reject]. Păstrați simbolul valutar '$' și toate numerele exact așa cum sunt.",
+  "_slots": {
+    "{player_id}": "Numărul jucătorului, 0 sau 1",
+    "{other_id}": "Numărul celuilalt jucător, 1 sau 0",
+    "{num_rounds}": "Numărul total de runde",
+    "{pool}": "Suma de bani disponibilă în fiecare rundă (un număr)",
+    "{round_number}": "Numărul rundei curente",
+    "{proposer_id}": "Numărul jucătorului care face propunerea, 0 sau 1",
+    "{responder_id}": "Numărul jucătorului care răspunde, 0 sau 1",
+    "{offer}": "Suma oferită (un număr)",
+    "{keep}": "Suma pe care o păstrează jucătorul care face propunerea (un număr)",
+    "{proposer_gain}": "Banii câștigați de jucătorul care face propunerea în această rundă (un număr)",
+    "{responder_gain}": "Banii câștigați de jucătorul care răspunde în această rundă (un număr)",
+    "{total_0}": "Totalul acumulat de jucătorul 0 (un număr)",
+    "{total_1}": "Totalul acumulat de jucătorul 1 (un număr)",
+    "{winner}": "Numărul jucătorului câștigător",
+    "{loser}": "Numărul jucătorului care pierde",
+    "{winner_total}": "Totalul banilor jucătorului câștigător (un număr)",
+    "{loser_total}": "Totalul banilor jucătorului care pierde (un număr)",
+    "{total}": "Totalul final egal al fiecărui jucător (un număr)"
+  },
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id}, jucând {num_rounds} runde de Iterated Ultimatum Game.\nAveți ${pool} de împărțit în această rundă între dumneavoastră și Jucătorul {other_id}.\n\nPropunător:\n  - Faceți o ofertă: [Offer: $X] (0 <= X <= pool)\n  - Dacă este acceptată → Obțineți $(pool - X), celălalt jucător obține $X\n  - Dacă este respinsă → Ambii obțineți $0\n  - Exemplu: [Offer: $3]  sau  'Cred că este corect. [Offer: $5]'\n\nResponder:\n  - Decideți asupra ofertei cu [Accept] sau [Reject]\n  - Exemplu: 'Mi se pare rezonabil. [Accept]'\n            'Prea nedrept. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Runda {round_number} începe! ---\nJucătorul {proposer_id} este propunătorul, Jucătorul {responder_id} este responderul.",
+    "offer": "Runda {round_number}: Jucătorul {proposer_id} oferă ${offer} Jucătorului {responder_id} (păstrând ${keep}).",
+    "accepted": "Jucătorul {responder_id} a acceptat! Runda {round_number} câștiguri: Jucătorul {proposer_id} +${proposer_gain}, Jucătorul {responder_id} +${responder_gain}. Noi totale: Jucătorul 0: ${total_0}, Jucătorul 1: ${total_1}.",
+    "rejected": "Jucătorul {responder_id} a respins oferta! Runda {round_number} câștiguri: Ambii jucători +$0. Totalele rămân: Jucătorul 0: ${total_0}, Jucătorul 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Propunătorul trebuie să facă o ofertă folosind formatul [Offer: $X].",
+    "bad_integer": "Suma oferită trebuie să fie un număr întreg valid.",
+    "out_of_range": "Oferta trebuie să fie între $0 și ${pool}.",
+    "no_current_offer": "Nu există o ofertă curentă la care să se răspundă.",
+    "accept_or_reject": "Responderul trebuie să [Accept] sau să [Reject] oferta."
+  },
+  "outcome": {
+    "win": "Jucătorul {winner} a câștigat cu ${winner_total} total vs Jucătorul {loser} cu ${loser_total}.",
+    "draw": "Remiză! Ambii jucători au terminat cu ${total} total."
+  }
+}

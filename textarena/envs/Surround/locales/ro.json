@@ -1,0 +1,30 @@
+{
+  "_comment": "Fișier de localizare pentru Surround. NU traduceți cheile (partea stângă). Traduceți doar valorile (partea dreaptă). Păstrați fiecare {placeholder} exact așa cum este.",
+  "_slots": {
+    "{num_players}": "Numărul de jucători în meci",
+    "{width}": "Lățimea tablei în celule",
+    "{height}": "Înălțimea tablei în celule",
+    "{player_id}": "Numărul jucătorului (bazat pe 0)",
+    "{board}": "Grila ASCII redată; păstrați-o neutră, nu o traduceți",
+    "{reason}": "Frază de motiv de sfârșit de joc redată",
+    "{groups}": "Date de clasament neutre (o listă de grupuri de ID-uri de jucător, de la cel mai bun la cel mai slab); nu traduceți"
+  },
+  "player_prompt": {
+    "intro": "Surround cu {num_players} jucători pe o grilă de {width}x{height}.\nSunteți jucătorul {player_id}. Mișcări valide: '[up]' '[down]' '[left]' '[right]' sau w/s/a/d.\nObiectiv: supraviețuiți tuturor celorlalți. Urmele sunt mortale; loviturile în perete ucid; ciocnirile frontale ucid ambii."
+  },
+  "board": {
+    "current": "Tablă curentă:\n{board}",
+    "after_moves": "Tablă după mișcări simultane:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Jucătorul {player_id} a murit din cauza unei mișcări nevalide."
+  },
+  "outcome": {
+    "survived_win": "Jucătorul {player_id} a supraviețuit; toți ceilalți s-au prăbușit.",
+    "all_crashed": "Toți jucătorii s-au prăbușit simultan.",
+    "outlived": "Jucătorul a supraviețuit tuturor celorlalți.",
+    "all_dead": "Toți jucătorii sunt morți.",
+    "turn_limit": "Limita de ture a fost atinsă - cel mai lung supraviețuitor câștigă.",
+    "ranking": "{reason} Grupuri de clasament finale (de la cel mai bun la cel mai slab): {groups}"
+  }
+}

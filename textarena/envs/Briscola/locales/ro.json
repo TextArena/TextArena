@@ -1,0 +1,57 @@
+{
+  "_comment": "Fișier de localizare pentru Briscola. NU traduceți cheile (partea stângă). Traduceți doar valorile (partea dreaptă). Păstrați fiecare {placeholder} exact așa cum este. Nu traduceți tokenul de acțiune '[play X]', etichetele cărților (A, 2..7, J, Q, K), simbolurile culorilor (transportate în sloturile {card}/{trump_card}) sau numărătorile/ punctele/scorurile numerice. Textul markerului '(TRUMP)' poate fi localizat.",
+  "_slots": {
+    "{player_id}": "Numărul jucătorului, de exemplu 0 sau 1",
+    "{trump_suit}": "Simbolul culorii de atu (♠♥♦♣) - nu traduceți",
+    "{trump_card}": "Eticheta cărții de atu, de exemplu '7♠' - nu traduceți",
+    "{card}": "Eticheta unei cărți, de exemplu 'A♥' - nu traduceți",
+    "{trump_mark}": "Markerul pre-renderizat '(TRUMP)', sau gol",
+    "{max_pos}": "Poziția cea mai mare a unei cărți în mâna jucătorului",
+    "{count}": "Numărul de cărți pe care le deține un jucător",
+    "{pos}": "Numărul poziției unei cărți în mână",
+    "{points}": "Numărul de puncte (valoarea cărții sau scorul acumulat)",
+    "{hand}": "Lista pre-renderizată, multi-linie a mâinii",
+    "{trick}": "Lista pre-renderizată a trucului curent",
+    "{scores}": "Linia pre-renderizată a scorului, sau blocul final de scoruri per jucător",
+    "{trump_info}": "Linia pre-renderizată a culorii de atu / numărului de cărți din pachet",
+    "{winner}": "Numărul jucătorului care a câștigat trucul sau jocul",
+    "{tricks}": "Numărul de trucuri câștigate de un jucător",
+    "{deck_count}": "Numărul de cărți rămase în pachet"
+  },
+  "game": {
+    "start": "Jocul de Briscola a început! Culoarea de atu: {trump_suit} (Cartea de atu: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Sunteți în jocul de Briscola - Jucător {player_id}.\nScopul: Câștigați trucuri și colectați cele mai multe puncte (120 puncte totale în pachet).\nPuncte cărți: A=11, 3=10, K=4, Q=3, J=2, altele=0\nPuterea cărților: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nCărțile de atu bat cărțile ne-atu indiferent de putere.\n\nAcțiune: '[play X]' unde X este poziția (1-{max_pos}) a cărții din mâna dvs.\n"
+  },
+  "hand": {
+    "none": "Nicio carte",
+    "empty": "Nicio carte în mână",
+    "header": "Mâna dvs.:",
+    "card_line": "  {pos}. {card} [{points} pct]{trump_mark}",
+    "trump_mark": " (ATU)"
+  },
+  "trick": {
+    "empty": "Nicio carte jucată încă în acest truc.",
+    "header": "Trucul curent:",
+    "line": "  Jucător {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Jucător {player_id}: {points} pct",
+    "trump_info": "Culoarea de atu: {trump_suit}",
+    "trump_info_deck": "Culoarea de atu: {trump_suit} | Cărți rămase în pachet: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nScoruri: {scores}\n{trump_info}\n\nJucați o carte folosind [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Folosiți [play X] unde X este poziția cărții (1, 2, 3, etc.)",
+    "out_of_range": "Poziție de carte invalidă. Aveți {count} cărți (1-{count})"
+  },
+  "action": {
+    "played": "Jucător {player_id} a jucat {card}",
+    "trick_win": "Jucător {winner} câștigă trucul cu {card} și obține {points} puncte!"
+  },
+  "outcome": {
+    "head": "Jocul s-a terminat! Jucător {winner} câștigă cu {points} puncte!\n\nScoruri finale:\n{scores}",
+    "player_line": "Jucător {player_id}: {points} puncte ({tricks} trucuri)\n"
+  }
+}

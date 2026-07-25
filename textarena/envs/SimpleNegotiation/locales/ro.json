@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} în Jocul de Negociere.\nAveți anumite resurse, iar sarcina dvs. este să faceți schimburi astfel încât valoarea totală a resurselor dvs. să crească.\nResursele și valorile asociate pe care le aveți în prezent sunt:\n\t+ {resource_value_list}\nLa fiecare tură, puteți vorbi cu adversarul dvs. și faceți o ofertă de schimb.\nUtilizați următoarele tokenuri speciale pentru acțiuni:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Resurse oferite -> Resurse solicitate]\n  - '[Accept]': Pentru a accepta o ofertă primită.\n  - '[Deny]': Pentru a refuza o ofertă primită (implicit).\nJocul durează {max_turns} ture în total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Jucătorul a încercat să accepte un schimb fără a avea resursele necesare.",
+    "out_of_range": "Jucătorul {player_id}, Acțiune invalidă. Coloana {col} este în afara limitelor.",
+    "already_full": "Jucătorul {player_id}, Acțiune invalidă. Coloana {col} este plină.",
+    "proposing_with_no_resource": "Jucătorul {player_id} a încercat să facă o ofertă de schimb fără a avea resursele necesare.",
+    "incorrect_offer_format": "Jucătorul {player_id} a făcut o ofertă de schimb într-un format incorect.",
+    "no_new_offer": "Jucătorul {player_id} nu a făcut nicio ofertă de schimb nouă."
+  },
+  "offers": {
+    "reject": "Jucătorul {player_id} a respins oferta de schimb.",
+    "accept": "Jucătorul {acceptor_id} a acceptat oferta de schimb de la Jucătorul {proposer_id}.",
+    "proposal": "Jucătorul {player_id} a făcut următoarea ofertă către Jucătorul {opponent_id}: Obiecte oferite: {offered} -> Obiecte solicitate: {requested}"
+  },
+  "outcome": {
+    "win": "Jucătorul {winner_id} a câștigat având o creștere mai mare a valorii inventarului.",
+    "draw": "Aceeași schimbare a valorii inventarului pentru toți jucătorii. Remiză."
+  }
+}
