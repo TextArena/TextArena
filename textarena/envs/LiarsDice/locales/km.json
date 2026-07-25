@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "អ្នកជា Player {player_id} ក្នុងការលេង Liar's Dice របស់ {num_players}-player. ច្បាប់: - នៅលើកំណាត់របស់អ្នកអ្នកអាច: 1) ធ្វើការដាក់ប្រាក់ថ្មីដែលមានចំនួនច្រើនជាងឬមុខខ្ពស់ជាង (ឬទាំងពីរ) ជាងការដាក់ប្រាក់បច្ចុប្បន្ន; គឺថា '[Bid: 3, 4]', 2) ហៅការដាក់ប្រាក់ចុងក្រោយដោយសរសេរ '[Call]'. ប្រសិនបើអ្នកហៅ: - ប្រសិនបើការរាប់ពិតនៃតម្លៃមុខនោះក្នុងចំណោមដាវទាំងអស់តិចជាងការដាក់ប្រាក់, អ្នកដាក់ប្រាក់ចុងក្រោយបាត់បង់ដាវមួយ - បើមិនដូច្នេះទេ, អ្នកហៅបាត់បង់ដាវមួយ. កីឡាករដែលឈានដល់ដាវ 0 ត្រូវបានលុបចោល. កីឡាករចុងក្រោយដែលនៅសល់ឈ្នះ."
+  },
+  "board": {
+    "per_player": "កីឡាករ {p}: {d}",
+    "new_round": "\nNew round - Remaining dice: {dice_summary}\nYour current Dice are: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "កីឡាករ {current_player_id} ហៅ! ចំនួនពិតនៃមុខ {face_value} គឺ {count} ដែលមានតិចជាង {quantity} កីឡាករ {loser_id} (អ្នកដាក់ប្រាក់ចុងក្រោយ) ចាញ់មួយដុំ។",
+    "caller_loses": "កីឡាករ {current_player_id} ហៅ! ចំនួនពិតនៃមុខ {face_value} គឺ {count} ដែលជា >= {quantity} កីឡាករ {loser_id} (អ្នកហៅ) ចាញ់មួយដុំ។"
+  },
+  "action": {
+    "bid_announce": "កីឡាករ {player_id} បង់ប្រាក់ {quantity} នៃមុខ {face_value} ។"
+  },
+  "invalid_move": {
+    "call_no_bid": "ការហៅដោយគ្មានការដាក់ប្រាក់មុន។",
+    "invalid_bid": "ការដាក់ប្រាក់មិនត្រឹមត្រូវ: {reason}",
+    "not_recognized": "ការប្តឹងមិនត្រូវបានទទួលស្គាល់ថាជា \"[Bid: X, Y]\" ឬ \"[Call]\" ដែលមានប្រសិទ្ធភាព។ ការប្តឹងដែលបានដាក់: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "បរិមាណថ្មី {new_quantity} គឺទាបជាងបរិមាណបច្ចុប្បន្ន {current_quantity} ។",
+    "face_lower": "តម្លៃមុខថ្មី {new_face_value} គឺទាបជាងតម្លៃបច្ចុប្បន្ន {current_face_value} ។",
+    "identical": "ការដាក់ប្រាក់គឺដូចគ្នាទៅនឹងការដាក់ប្រាក់បច្ចុប្បន្ន។",
+    "face_range": "តម្លៃស្លាកសញ្ញាត្រូវស្ថិតនៅចន្លោះពី 1 និង 6 ។"
+  },
+  "message": {
+    "eliminated_invalid": "កីឡាករ {player_id} ត្រូវបានបញ្ឈប់ដោយការធ្វើដំណើរមិនត្រឹមត្រូវ។"
+  },
+  "outcome": {
+    "win": "កីឡាករ {winner} ឈ្នះ! លំដាប់ទីបំផុត: {final_ranking}"
+  }
+}

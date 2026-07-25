@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "ក្រុមប្រឹក្សា: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "រូបមន្តត្រូវតែជា e2e4 (ពី,ទៅតំបន់) ។",
+    "no_piece": "គ្មាន {side} ផ្នែក នៅ {coord} ។",
+    "identical": "ប្រភព និង គោលដៅ ដូចគ្នា ។",
+    "not_straight_or_diagonal": "ចលនាត្រូវធ្វើដោយត្រង់ ឬទទឹង។",
+    "wrong_distance": "ត្រូវតែធ្វើចលនាបានចម្ងាយស្មើនឹងតំណាងដែលស្ថិតក្នុងជួរ។",
+    "enemy_blocks": "កាំភ្លើងសត្រូវបានបិទផ្លូវ",
+    "destination_own": "គោលដៅដែលត្រូវបានកាន់កាប់ដោយសាច់ដុំផ្ទាល់ខ្លួន។"
+  },
+  "game_action": {
+    "moved": "កីឡាករ {player_id} បានផ្លាស់ទី {from} -> {to}",
+    "captured_suffix": "កីឡាករ {player_id} បានចល័ត {from} -> {to} ចាប់បានសត្រូវ។"
+  },
+  "outcome": {
+    "win": "ទាំងអស់នេះបានភ្ជាប់គ្នា។",
+    "draw_no_capture": "ចលនា ៦០ ដោយគ្មានការចាប់បាន។",
+    "draw_repetition": "តំណែងត្រូវបានធ្វើឡើងបីដង។"
+  }
+}

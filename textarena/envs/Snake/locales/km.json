@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-កីឡាករ Snake លើបណ្តាញ {width}×{height}。\nអ្នកគ្រប់គ្រងពស់ {player_id}។ ចលនា​ស្រប​គ្នា​: '[up]'/'[down]'/'[left]'/'[right]' (ឬ w/s/a/d)。\nគោលដៅ​: រស់រានមានជីវិត​យូរ​ជាង​គេ ឬ​មាន​ប្រវែង​ច្រើន​ជាង​គេ និង​ទទួល​បាន​ពិន្ទុ​ខ្ពស់​បំផុត (កន្លែង​កំណត់​{max_turns} បត់)។"
+  },
+  "board": {
+    "current": "ក្រុមប្រឹក្សាភិបាលបច្ចុប្បន្ន: {board}",
+    "after_moves": "រដ្ឋបាលបច្ចុប្បន្ន: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Snake {player_id} បានស្លាប់ដោយសារតែការផ្លាស់ប្តូរមិនត្រឹមត្រូវ។"
+  },
+  "outcome": {
+    "survived_win": "កីឡាករ {player_id} បានរស់រានមានជីវិត; អ្នកដទៃបានស្លាប់។",
+    "all_dead_simul": "ពស់ ទាំង អស់ បាន ស្លាប់ ភ្លាម ៗ",
+    "outlived": "អ្នកលេងបានរស់រានមានជីវិតជាងអ្នកដទៃ។",
+    "all_dead": "ពស់ ទាំង អស់ សុទ្ធ តែ ស្លាប់",
+    "turn_limit": "លទ្ធផលល្អបំផុតឈ្នះការបំបែកបំបាក់។",
+    "ranking": "{reason} ក្រុមចំណាត់ថ្នាក់ចុងក្រោយ (អាក្រក់បំផុត→ល្អបំផុត): {groups}"
+  }
+}

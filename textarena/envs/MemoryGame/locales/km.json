@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id}. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched."
+  },
+  "board": {
+    "current_board": "បន្ទប់បច្ចុប្បន្ន: {board}",
+    "current_game_board": "បន្ទប់លេងហ្គេមបច្ចុប្បន្ន: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "រូបមន្តចលនាមិនត្រឹមត្រូវ. កីឡាករ {player_id} មិនបានឆ្លើយតបជាមួយទិសដៅត្រឹមត្រូវនៅក្នុងកញ្ចប់បួនជាន់។",
+    "out_of_bounds": "ការផ្លាស់ប្តូរមិនត្រឹមត្រូវ. កីឡាករ {player_id} បានជ្រើសរើសជំហានក្រៅព្រំដែន។",
+    "same_card_twice": "ល្បឿនមិនត្រឹមត្រូវ: កីឡាករ {player_id} បានជ្រើសរើសកាតដដែលពីរដង។",
+    "already_matched": "ល្បឿនមិនត្រឹមត្រូវ: កីឡាករ {player_id} បានជ្រើសរើសកាតមួយឬទាំងពីរដែលត្រូវបានផ្ទៀងផ្ទាត់រួចមកហើយ ។"
+  },
+  "game_message": {
+    "cards_match": "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
+    "cards_no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+  },
+  "outcome": {
+    "draw": "Both players matched the same number of pairs of cards.",
+    "win": "អ្នកលេង {winner_id} បានឈ្នះ!",
+    "turn_limit": "កំណត់ត្រាបានមកដល់ហើយ ការប្រកួតបានបញ្ចប់ កីឡាករ 0 បានចំណាត់ថ្នាក់ {score_0} ពិន្ទុ កីឡាករ 1 បានចំណាត់ថ្នាក់ {score_1} ពិន្ទុ",
+    "turn_limit_win": "{reason} កីឡាករ {winner_id} បានឈ្នះ!"
+  }
+}

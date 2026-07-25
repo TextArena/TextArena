@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "បន្ទប់បច្ចុប្បន្ន: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ការផ្លាស់ប្តូរត្រូវមាននៅក្នុងទម្រង់ [macro micro] ជាមួយនឹងលេខ 0-8 ។",
+    "out_of_range": "សន្ទស្សន៍ទាំងអស់ត្រូវស្ថិតនៅចន្លោះ 0 និង 8 ។",
+    "index_out_of_range": "micro_board, row, ឬ col គឺស្ថិតនៅក្រៅប្រវែង។",
+    "cell_occupied": "បន្ទប់នេះត្រូវបានគេយកទៅហើយ",
+    "wrong_micro_board": "អ្នកលេងត្រូវលេងនៅក្នុងបន្ទាត់ micro បន្ទាប់។",
+    "micro_board_won": "តុ micro បានឈ្នះរួចហើយ"
+  },
+  "next_board": {
+    "any": "any micro board",
+    "specific": "micro board {nxt}"
+  },
+  "game_action": {
+    "played": "កីឡាករ {player_id} បានលេងនៅក្នុង micro board {macro_idx}, cell {micro_idx} (row {row}, col {col}) ។ កីឡាករ {opponent_id} ឥឡូវនេះត្រូវលេងនៅក្នុង {nxt_txt} ។"
+  },
+  "outcome": {
+    "win": "កីឡាករ {player_id} ឈ្នះ Ultimate Tic Tac Toe!",
+    "draw": "ការប្រកួតគឺស្មើគ្នា!"
+  }
+}

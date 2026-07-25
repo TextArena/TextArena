@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "ក្រុមប្រឹក្សា បច្ចុប្បន្ន: {board} មានចលនា: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "ទម្រង់សកម្មភាពមិនត្រឹមត្រូវ. កីឡាករ {player_id} មិនបានបញ្ចូលចលនានៅក្នុងទម្រង់ [A0 B0] ។",
+    "invalid_coordinates": "ទម្រង់សកម្មភាពមិនត្រឹមត្រូវ. កីឡាករ {player_id} មិនបានបញ្ចូលតួអង្គត្រឹមត្រូវទេ។",
+    "not_own_piece": "ទម្រង់សកម្មភាពមិនត្រឹមត្រូវ: កីឡាករ {player_id} ត្រូវចល័តមួយនៃតំណាងរបស់ខ្លួន។",
+    "scout_through_pieces": "Invalid action format. Player {player_id} cannot move a scout through other pieces.",
+    "scout_diagonal": "Invalid action format. Player {player_id} cannot move a scout diagonally.",
+    "non_scout_multi_square": "ទម្រង់សកម្មភាពមិនត្រឹមត្រូវ តំណាងរាស្ត្រ ក្រៅពីអ្នកស្វែងរក អាចចល័តបានតែមួយតំណាងរាស្ត្រក្នុងពេលតែមួយ។",
+    "move_into_lake": "ទម្រង់សកម្មភាពមិនត្រឹមត្រូវ. កីឡាករ {player_id} មិនអាចចល័តចូលទៅក្នុងបឹងបានទេ។",
+    "move_onto_own_piece": "ទម្រង់សកម្មភាពមិនត្រឹមត្រូវ: កីឡាករ {player_id} មិនអាចដើរទៅលើតំណាងរបស់ខ្លួនបានទេ។",
+    "move_bomb_or_flag": "ទម្រង់សកម្មភាពមិនត្រឹមត្រូវ. កីឡាករ {player_id} មិនអាចជំរុញគ្រាប់បែកឬទង់ជាតិបានទេ។"
+  },
+  "game_action": {
+    "you_moved": "អ្នកបានផ្លាស់ប្តូរតំណាងរបស់អ្នកពី {source} ទៅ {dest}",
+    "opponent_moved": "កីឡាករ {player_id} បានផ្លាស់ប្តូរតំណាក់ពី {source} ទៅ {dest} ។",
+    "you_equal_ranks": "អ្នកបានផ្លាស់ប្តូរតំណាក់របស់អ្នកពី {source} ទៅ {dest} តំណាក់ដែលវាយប្រហារគឺ {attacking_rank} និងតំណាក់គោលដៅគឺ {target_rank} ដោយសារជួរដូចគ្នា, តំណាក់ទាំងពីរបានបាត់បង់។",
+    "opponent_equal_ranks": "កីឡាករ {player_id} បាន ផ្លាស់ ប្តូរ ផ្ទាំង មួយ ពី {source} ទៅ {dest} ផ្ទាំង វាយ ប្រហារ គឺ {attacking_rank} និង ផ្ទាំង គោល ដៅ គឺ {target_rank} ដោយសារ តែ ចំណាត់ ថ្នាក់ ដូច គ្នា នោះ ផ្ទាំង ទាំង ពីរ ត្រូវ បាន បាត់ បង់។",
+    "you_miner_defused": "អ្នកបានផ្លាស់ប្តូរតំណាក់របស់អ្នកពី {source} ទៅ {dest} តំណាក់ដែលវាយប្រហារគឺ {attacking_rank} និងតំណាក់គោលដៅគឺ {target_rank} ដោយសារអ្នករុករកអាចបំបាត់គ្រាប់បែកបានអ្នកឈ្នះសង្គ្រាម។",
+    "opponent_miner_defused": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As miners can defuse bombs, you lost the battle.",
+    "you_bomb_lost": "អ្នកបានផ្លាស់ប្តូរតំណាងរបស់អ្នកពី {source} ទៅ {dest} តំណាងដែលវាយប្រហារគឺ {attacking_rank} និងតំណាងគោលដៅគឺ {target_rank} ដោយសារអ្នកវាយប្រហារមិនមែនជាអ្នករុករករ៉ែអ្នកបានចាញ់សង្គ្រាម។",
+    "opponent_bomb_won": "កីឡាករ {player_id} បានផ្លាស់ប្តូរតំណាក់មួយពី {source} ទៅ {dest} តំណាក់ដែលវាយប្រហារគឺ {attacking_rank} និងតំណាក់គោលដៅគឺ {target_rank} ដោយសារអ្នកវាយប្រហារមិនមែនជាអ្នករុករករ៉ែអ្នកឈ្នះសង្គ្រាម។",
+    "you_spy_won": "អ្នកបានផ្លាស់ប្តូរតំណាក់របស់អ្នកពី {source} ទៅ {dest} តំណាក់ដែលវាយប្រហារគឺ {attacking_rank} និងតំណាក់គោលដៅគឺ {target_rank} ដោយសារអ្នកវាយប្រហារជាអ្នកលួចលាក់និងគោលដៅជាមេឃុំអ្នកឈ្នះសង្គ្រាម។",
+    "opponent_spy_lost": "កីឡាករ {player_id} បានផ្លាស់ប្តូរតំណាក់មួយពី {source} ទៅ {dest} តំណាក់ដែលវាយប្រហារគឺ {attacking_rank} និងតំណាក់គោលដៅគឺ {target_rank} ដោយសារអ្នកវាយប្រហារជាអ្នកលួចលាក់និងគោលដៅជាមេឃុំអ្នកចាញ់សង្គ្រាម។",
+    "you_higher_won": "អ្នកបានផ្លាស់ប្តូរតំណាងរបស់អ្នកពី {source} ទៅ {dest} តំណាងដែលវាយប្រហារគឺ {attacking_rank} និងតំណាងគោលដៅគឺ {target_rank} ដោយសារអ្នកវាយប្រហារមានជួរខ្ពស់ជាងគោលដៅអ្នកបានឈ្នះសង្គ្រាម។",
+    "opponent_higher_lost": "កីឡាករ {player_id} បានផ្លាស់ប្តូរតំណាក់មួយពី {source} ទៅ {dest} តំណាក់ដែលវាយប្រហារគឺ {attacking_rank} និងតំណាក់គោលដៅគឺ {target_rank} ដោយសារអ្នកវាយប្រហារមានជួរខ្ពស់ជាងគោលដៅ, អ្នកបានចាញ់សង្គ្រាម។",
+    "you_lower_lost": "អ្នកបានផ្លាស់ប្តូរតំណាងរបស់អ្នកពី {source} ទៅ {dest} តំណាងដែលវាយប្រហារគឺ {attacking_rank} និងតំណាងគោលដៅគឺ {target_rank} ដោយសារអ្នកវាយប្រហារមានជួរទាបជាងគោលដៅអ្នកបានចាញ់សង្គ្រាម។",
+    "opponent_lower_won": "កីឡាករ {player_id} បាន ផ្លាស់ ប្តូរ ផ្ទាំង មួយ ពី {source} ទៅ {dest} ផ្ទាំង វាយ ប្រហារ គឺ {attacking_rank} និង ផ្ទាំង គោលដៅ គឺ {target_rank} ដោយសារ តែ អ្នក វាយ ប្រហារ មាន ចំណាត់ ថ្នាក់ ទាប ជាង គោលដៅ អ្នក បាន ឈ្នះ ការ ប្រយុទ្ធ។"
+  },
+  "outcome": {
+    "flag_captured": "កីឡាករ {player_id} បានចាប់ទង់ជាតិរបស់គូប្រកួត!",
+    "no_movable_pieces": "កីឡាករ {winner_id} ឈ្នះ! កីឡាករ {loser_id} គ្មាន តំណាង ដែល អាច ផ្លាស់ប្តូរ បាន ទៀត ទេ ។"
+  }
+}
