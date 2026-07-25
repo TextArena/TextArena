@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në një Dilemë të Përsëritur të të Burgosurit që mbulon {num_rounds} raunde.\n\nStruktura e Lojës:\n- Para çdo vendimi, keni {total_conversation_rounds} radhë për të komunikuar lirisht.\n- Pas kësaj, të dy lojtarët zgjedhin njëkohësisht të bashkëpunojnë ose të tradhtojnë.\n\nMatrica e Shpërblimit (fiks për çdo raund):\n- Të dy Bashkëpunojnë ➜ secili {cooperate_reward}\n- Të dy Tradhtojnë ➜ secili {mutual_defect_reward}\n- Njëri Tradhton, njëri Bashkëpunon ➜ Tradhtuesi {defect_reward}, Bashkëpunuesi {sucker_reward}\n\nSi të Luani:\n- Gjatë bisedës: shkruani çdo tekst që dëshironi.\n- Gjatë fazës së vendimit: përfshini '[Cooperate]' ose '[Defect]' (pa ndryshuar shkronjat). Mund të shtoni tekst shtesë para/dhe pas tokenit."
+  },
+  "phases": {
+    "conversation_finished": "Biseda u mbyll për raundin {round}. Ju lutemi të përgjigjeni me '[Cooperate]' ose '[Defect]' brenda \\boxed{{}}.",
+    "starting_round": "--- Fillimi i Raundit {round} ---",
+    "round_summary": "Rezultatet e Raundit {round}:\n{outcome}\nLojtari 0 fitoi {r0} (total {score_0}), Lojtari 1 fitoi {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Lojtari {winner} fiton {win_score} - {lose_score}.",
+    "draw": "Barazim! Të dy lojtarët shënuan {s0}.",
+    "round_both_cooperate": "Të dy lojtarët bashkëpunuan.",
+    "round_both_defect": "Të dy lojtarët tradhtuan.",
+    "round_p0_cooperates_p1_defects": "Lojtari 0 bashkëpunoi, Lojtari 1 tradhtoi.",
+    "round_p0_defects_p1_cooperates": "Lojtari 0 tradhtoi, Lojtari 1 bashkëpunoi."
+  }
+}

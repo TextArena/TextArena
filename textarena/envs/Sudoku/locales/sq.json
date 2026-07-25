@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id}. Ju po luani Sudoku.\nJa gjendja aktuale e rrjetës së Sudoku. Çdo rresht është i numëruar nga 1 në 9, dhe çdo kolonë është gjithashtu e numëruar nga 1 në 9.\nQelizat bosh përfaqësohen nga '.', dhe qelizat e paracaktuara përmbajnë shifra nga 1 në 9.\n\nRrjeta aktuale e Sudoku:\nObjektivi juaj është të mbushni qelizat bosh në rrjetën 9x9 me shifra nga 1 në 9 në mënyrë që:\n1. Çdo rresht të përmbajë të gjitha shifrat nga 1 në 9 pa përsëritje.\n2. Çdo kolonë të përmbajë të gjitha shifrat nga 1 në 9 pa përsëritje.\n3. Çdo nga nëntë nën-rrjetat 3x3 të përmbajë të gjitha shifrat nga 1 në 9 pa përsëritje.\n\nRregullat dhe udhëzimet:\n1. **Mos e shkruani mbi** numrat fillestare të dhënë në rrjetë.\n2. **Mbushni vetëm** qelizat bosh të përfaqësuara nga '.'.\n3. Mund të përgjigjeni në çdo mënyrë që preferoni, por sigurohuni që përgjigja juaj të përfshijë formatin e '[rresht kolonë numër]'.\n4. **Sigurohuni** që lëvizja juaj të mos shkelë rregullat e Sudoku. Lëvizjet e pavlefshme do të rezultojnë në penalitete.\nShembuj:\n- **Lëvizje e vlefshme**:\n  - Fragment i rrjetës përpara lëvizjes:\n  \n  - Lëvizje: `[5 3 7]`\n  - Shpjegim: Vënia e 7 në rreshtin 5, kolonën 3 nuk shkel asnjë rregull të Sudoku.\n\n- **Lëvizje e pavlefshme** (Shkrim mbi një qelizë të paracaktuar):\n  - Fragment i rrjetës përpara lëvizjes:\n  \n  - Lëvizje: `[1 1 9]`\n  - Shpjegim: Qeliza (1,1) është tashmë e mbushur me 5. Nuk mund ta shkruani mbi të.\n\n- **Lëvizje e pavlefshme** (Shkelja e rregullave të Sudoku):\n  - Fragment i rrjetës përpara lëvizjes:\n  \n  - Lëvizje: `[1 3 5]`\n  - Shpjegim: Vënia e 5 në rreshtin 1, kolonën 3 shkel rregullin pasi 5 ekziston tashmë në rreshtin 1.\n\nHistoria e lëvizjeve dhe mendimeve tuaja do të shtohet ndërsa luani më shumë raunde. Përdorni historinë e lëvizjeve tuaja për të përmirësuar vendimmarrjen tuaj duke shmangur lëvizjet që keni provuar. Fat të mirë!\n\n"
+  },
+  "board": {
+    "game_board": "Bordi i lojës:\n{board}",
+    "board_state": "Gjendja e bordit: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format i pavlefshëm i lëvizjes. Lojtari {player_id} nuk u përgjigj me 'rresht kolonë numër' të vlefshëm.",
+    "out_of_bounds": "Lëvizje e pavlefshme. Lojtari {player_id} u përpoq të vendoste {num} në ({row}, {col}), e cila është jashtë kufijve.",
+    "overwrite": "Lëvizje e pavlefshme. Lojtari {player_id} u përpoq të shkruante mbi një qelizë të paracaktuar ({row}, {col}).",
+    "violates_rules": "Lëvizje e pavlefshme. Lojtari {player_id} u përpoq të vendoste {num} në ({row}, {col}), e cila shkel rregullat e Sudoku."
+  },
+  "outcome": {
+    "win": "Urime! Lojtari {player_id} përfundoi enigmën e Sudoku.",
+    "turn_limit": "Limiti i radhës është arritur. Ju mbushët saktë {percent}% të qelizave bosh."
+  }
+}

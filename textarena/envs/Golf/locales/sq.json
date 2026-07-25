@@ -1,0 +1,79 @@
+{
+  "_comment": "Skedari i lokalizimit për Golf (lojë me letra). MOS përkthej çelësat (ana e majtë). Përkthej vetëm vlerat (ana e djathtë). Mbaj çdo {placeholder} saktësisht ashtu siç është. Mos përkthej tokenet e veprimeve ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), etiketat e letrave (A, 2-10, J, Q, K), simbolet e ngjyrave, shkronjat X/Y të përdorura si vendmbajtëse për rreshta/kolona në tokena, ose pikët/pozicionet numerike. Mbaj layout-in e rrjetës ASCII (hapësira, numrat e kolonave, '?', 'Col', 'Row' në përputhje) të paprekur që bordi të mbetet i lexueshëm.",
+  "_slots": {
+    "{player_id}": "Numri i lojtarit, p.sh. 0 ose 1",
+    "{pid}": "Numri i lojtarit, p.sh. 0 ose 1",
+    "{winner}": "Numri i lojtarit me pikët më të ulta",
+    "{score}": "Totali i pikëve numerike",
+    "{card}": "Etiketa e letrës, si A♠, 10♥, K♦ ose Q♣",
+    "{new}": "Etiketa e letrës që u vendos në rrjetë",
+    "{old}": "Etiketa e letrës që u hoq nga rrjetë",
+    "{row}": "Numri i rreshtit",
+    "{col}": "Numri i kolonës",
+    "{max_row}": "Numri më i madh i rreshtit të vlefshëm",
+    "{max_col}": "Numri më i madh i kolonës së vlefshme",
+    "{reason}": "Frazë e parapërgatitur që përshkruan pse filloi raundi final",
+    "{n}": "Numri i rreshtit të shfaqur në fillim të një rreshti të rrjetës",
+    "{cards}": "Qelizat e parapërgatitura të një rreshti të rrjetës",
+    "{hand}": "Blloku i parapërgatitur i rrjetës së lojtarit",
+    "{discard}": "Etiketa e letrës në majë të pirgut të hedhur, ose fjala për 'asnjë'",
+    "{options}": "Rreshti i parapërgatitur që liston veprimet e disponueshme",
+    "{scores}": "Lista e parapërgatitur për çdo lojtar të pikëve finale"
+  },
+  "player_prompt": {
+    "intro": "Ju po luani Golf (Lojë me Letra) - Lojtari {player_id}.\nQëllimi: Merrni totalin më të ulët të pikëve në këtë raund të vetëm. Nëse kolonat ndajnë të njëjtën vlerë, ato shumëzohen si 0.\nVlerat e letrave: A=1, 2-10=vlera nominale, J/Q=10, K=0\n\nVeprimet (përdorni kllapat e sakta):\n- '[draw]' - Merni nga paketa\n- '[take]' - Merni nga pirgu i hedhur\n- '[swap X Y]' - Shkëmbeni letrën e marrë me pozicionin X (rresht) Y (kolonë)\n- '[discard]' - Hidhni letrën e marrë\n"
+  },
+  "board": {
+    "drew": "Ju morët: {card}\nTani duhet të [swap X Y] ose [discard] atë.",
+    "took": "Ju morët: {card} nga pirgu i hedhur\nDuhet të [swap X Y] me të (nuk mund të hidhni).",
+    "peeked": "Ju shikuat në pozicionin ({row},{col}): {card}",
+    "turn_view": "Dora juaj:\n{hand}\nPirgu i hedhur: {discard}\n{options}",
+    "none": "Asnjë"
+  },
+  "options": {
+    "final_turns": "Raundet finale! Opcionet tuaja: [draw], [take], [peek X Y]",
+    "draw": "Opcionet tuaja: [draw], [take]",
+    "must_swap": "Duhet të: [swap X Y] (nuk mund të hidhni letra nga pirgu i hedhur)",
+    "swap_or_discard": "Duhet të: [swap X Y] ose [discard]"
+  },
+  "hand": {
+    "no_cards": "Pa letra",
+    "header": "  Kol:   1    2    3",
+    "row": "Rreshti {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Lojtari {pid} shkëmbeu {new} me {old} në pozicionin ({row},{col})",
+    "discarded": "Lojtari {pid} hodhi {card}"
+  },
+  "message": {
+    "deck_empty": "Paketa është bosh! Loja mbaron menjëherë.",
+    "knocked": "Lojtari {pid} trokiti! Çdo lojtar tjetër merr një raund të mëtejshëm.",
+    "final_round": "Lojtari {pid} {reason}! Çdo lojtar tjetër merr një raund të mëtejshëm."
+  },
+  "reason": {
+    "all_revealed": "ka të gjitha letrat të zbuluara"
+  },
+  "invalid": {
+    "wrong_action": "Përdorni saktësisht NJË veprim të kllapësuar: [draw], [take], [swap X Y], [discard], [knock], ose [peek X Y]",
+    "discard_empty": "Pirgu i hedhur është bosh!",
+    "must_draw_first": "Duhet të merrni më parë [draw], [take], [knock], ose [peek X Y]",
+    "cannot_discard_taken": "Nuk mund të hidhni një letrë të marrë nga pirgu i hedhur. Duhet të shkëmbeni.",
+    "have_drawn_card": "Keni një letrë të marrë. Duhet të [swap X Y] ose [discard] atë.",
+    "need_drawn_swap": "Keni nevojë për një letrë të marrë për të shkëmbyer.",
+    "need_drawn_discard": "Keni nevojë për një letrë të marrë për të hedhur.",
+    "out_of_bounds": "Pozicioni është jashtë kufijve. Përdorni rreshtin 1-{max_row}, kolonën 1-{max_col}",
+    "knock_with_card": "Nuk mund të trokiti me një letrë të marrë. Përfundojnë raundin tuaj më parë.",
+    "already_knocked": "Dikush tashmë ka trokitur në këtë raund.",
+    "already_revealed": "Lëtra është tashmë e zbuluar!"
+  },
+  "summary": {
+    "full": "Loja Mbaroi! Lojtari {winner} fiton me një rezultat prej {score} pikësh!\n\nRezultatet Finale:\n{scores}",
+    "line": "Lojtari {pid}: {score} pikë\n"
+  },
+  "board_str": {
+    "title": "=== LOJA E GOLF ===",
+    "discard": "Pirgu i hedhur: {card}",
+    "knocked": "Lojtari {pid} ka trokitur!",
+    "player_header": "Lojtari {pid} (Rezultat: {score}):"
+  }
+}

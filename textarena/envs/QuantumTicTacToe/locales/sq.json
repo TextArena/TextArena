@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në Tic Tac Toe Kuantik.\nShenja juaj është '{symbol}', dhe numrat e lëvizjeve tuaja janë gjithmonë {parity} (p.sh., X1, X3 ose O2, O4).\n\nQëllimi: Fitoni duke formuar një linjë të tre shenjave klasike (të ngurtësuara nga superpozicionet).\n\nSi të Luani:\n- Në çdo radhë, vendosni një shenjë të frikshme në dy katrorë të ndryshëm të zbrazët duke përdorur formatin '[a,b]'.\n- Këto shenja janë të ngatërruara, dhe të etiketuara si 'X1 / X1' ose 'O4 / O4'.\n- Nuk mund të vendosni shenja të frikshme në një katror që është tashmë i ngurtësuar (i solidifikuar).\n\nRregulla e Ngurtësimit:\n- Nëse lëvizja juaj krijon një cikël në grafikun e ngatërrimit, ajo ngurtësohet automatikisht.\n- Çdo shenjë e frikshme në cikël shndërrohet në një shenjë klasike në njërën nga dy pozicionet e saj.\n- Çdo shenjë e frikshme e varur ngurtësohet gjithashtu.\n\nFitore:\n- Loja mbaron kur një lojtar ka tre shenja klasike në një rresht.\n- Nëse të dy lojtarët fitojnë një linjë gjatë të njëjtës ngurtësim, ai me numrin më të ulët të lëvizjes maksimale fiton.\n\nShembull lëvizje: '[0,4]' vendos një shenjë të frikshme në qelizat 0 dhe 4."
+  },
+  "board": {
+    "current_board": "Bordi i Tic Tac Toe Kuantik:\n\n{board}\n\nDërgoni lëvizjen tuaj si '[a,b]' për të vendosur një shenjë kuantike në dy lokacione."
+  },
+  "invalid_move": {
+    "wrong_format": "Format i pavlefshëm. Përdorni '[a,b]'.",
+    "invalid_cells": "Indekse të pavlefshme ose të dyfishta të qelizave.",
+    "already_solidified": "Një nga qelizat është tashmë e ngurtësuar."
+  },
+  "game_action": {
+    "placed": "Lojtari {player_id} vendosi shenjën e tyre në një superpozicion midis qelizave {pos_a} dhe {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superpozicioni i varur u zgjidh. Qeliza ({r}, {c}) tani është {symbol}.",
+    "last_cell_resolved": "Superpozicioni për qelizën e fundit u zgjidh. Qeliza ({r}, {c}) tani është {symbol}.",
+    "superposition_resolved": "Superpozicioni u zgjidh. Qeliza ({r}, {c}) tani është {symbol}."
+  },
+  "outcome": {
+    "win": "Lojtari {player_id} fiton me shenja të ngurtësuara!",
+    "draw": "Loja është një barazim!"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Loja fillon. Lloji i kartës së Trump: {trump_suit} (karta Trump: {trump_str}).",
+    "no_trump_card": "asnjë"
+  },
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në Whist Gjerman.\n{phase_info}\nJu mbani {hand_size} karta.\nLuaj një kartë me '[play N]', ku N është pozicioni i saj në dorën tuaj (për shembull '[play 3]').",
+    "phase_learning": "FAZA E MËSIMIT: fituesi i çdo truku merr kartën e fytyrës së hapur dhe humbësi merr kartën e radhës nga paketa. Truket e fituara në këtë fazë nuk llogariten për fitore.",
+    "phase_playing": "FAZA E LUJTJES: paketa është e shterur. Çdo truk nga tani në vazhdim llogaritet për fitore."
+  },
+  "next_card": {
+    "playing_phase": "Nuk ka kartë në ofertë - faza e luajtjes ka filluar.",
+    "deck_empty": "Paketa është bosh - nuk ka kartë në ofertë.",
+    "available": "Karta në ofertë: {card}",
+    "available_trump": "Karta në ofertë: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Format i gabuar i lëvizjes. Përdorni '[play N]' për të luajtur kartën e N-të në dorën tuaj.",
+    "bad_position": "Pozicioni i kartës nuk ekziston. Ju mbani {hand_size} karta.",
+    "must_follow_suit": "Duhet të ndiqni llojin e kartës dhe të luani një kartë {lead_suit}.",
+    "invalid_play": "Karta nuk mund të luhet."
+  },
+  "game_action": {
+    "played": "Lojtari {player_id} luajti {card}."
+  },
+  "trick": {
+    "won": "Lojtari {winner_id} fiton trukun me {card}.",
+    "won_learning": "Lojtari {winner_id} fiton trukun me {card} dhe merr kartën e fytyrës së hapur."
+  },
+  "phase": {
+    "learning_complete": "Paketa është e shterur. Faza e mësimit është mbaruar - çdo truk i mbetur llogaritet për fitore."
+  },
+  "draw": {
+    "winner_received": "Ju fituat trukun dhe morët {card}.",
+    "loser_received": "Ju humbët trukun dhe morët {card} nga paketa.",
+    "winner_preview": "Karta e radhës në ofertë është {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Truket e fituara deri tani - Lojtari 0: {tricks0}, Lojtari 1: {tricks1}",
+    "scores_playing": "Truket e llogaritura - Lojtari 0: {tricks0}, Lojtari 1: {tricks1}",
+    "phase": "Faza: {phase}",
+    "phase_learning": "Faza: {phase} ({remaining_cards} karta të mbetura në paketë)"
+  },
+  "hand": {
+    "no_cards": "Nuk ka karta",
+    "no_cards_in_hand": "Nuk ka karta në dorë",
+    "header": "Dora juaj:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Nuk ka karta të luajtura ende në këtë truk.",
+    "header": "Truku aktual:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Lojtari {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Loja nuk është filluar",
+    "header": "=== LOJA E WHIST GJERMAN ===",
+    "phase": "{observation}\nFaza: {phase}",
+    "trump_suit": "{observation}\nLloji i kartës së Trump: {trump_suit}",
+    "trump_card": "{observation}\nKarta Trump: {card}",
+    "cards_left": "{observation}\nKartat e mbetura në paketë: {count}",
+    "next_card": "{observation}\nKarta e radhës për fituesin: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nTruku aktual:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Lojtari {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nLojtari {player_id}: {scoring} truket e llogaritura ({tricks} gjithsej), {hand_size} karta në dorë"
+  },
+  "outcome": {
+    "summary": "Faza e mësimit - Lojtari 0: {l0}, Lojtari 1: {l1}. Faza e luajtjes - Lojtari 0: {p0}, Lojtari 1: {p1}. Lojtari {winner_id} fiton me {winner_tricks} truket e llogaritura!"
+  }
+}

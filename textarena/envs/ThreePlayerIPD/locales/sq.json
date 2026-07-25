@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në një Dilemë të Burgosurit të Përsëritur për 3 lojtarë. Ndeshja zgjat {num_rounds} raunde.\nStruktura e raundit:\n• {conv_rounds} raunde bisede të lira\n• 1 raund vendimi - dërgoni një token për kundërshtar: '[<opp-id> cooperate]' ose '[<opp-id> defect]' (p.sh. '[1 defect] [2 cooperate]'; parazgjedhja është 'bashkëpuno'). \nMatrica e shpërblimit çift (zbatohet për çdo çift të parrenditur):\n  - Të dy bashkëpunojnë  ->  {reward}\n  - Të dy tradhtojnë     ->  {punishment}\n  - Ju tradhtoni, ata bashkëpunojnë -> {temptation}\n  - Ju bashkëpunojnë, ata tradhtojnë -> {sucker}\nLojtari (të) me rezultatin më të lartë në fund të të gjitha raundeve fiton."
+  },
+  "round": {
+    "start": "─── Fillimi i Raundit {round} ───\tJu mund të bisedoni lirisht për {conv_rounds} raunde të ardhshme.",
+    "chat_finished": "Biseda përfundoi për raundin {round}. Dërgoni vendimet tuaja, një token për kundërshtar: `[pid cooperate]` ose `[pid defect]`."
+  },
+  "results": {
+    "header": "### Raundi {round} - Rezultatet:",
+    "pair_line": "{observation}\n\t Lojtari {i} kundër Lojtarit {j} zgjodhi të {choice_i} dhe {choice_j} përkatësisht (Lojtari {i} fitoi {gain_i}, Lojtari {j} fitoi {gain_j})",
+    "scores_open": "{observation}\n-> Rezultatet aktuale: ",
+    "score_first": "{observation}Lojtari {player_id} ({score})",
+    "score_next": "{observation}; Lojtari {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Rezultatet përfundimtare: {scores}.  Grupet e renditjes (më e keqja → më e mira): {groups}"
+  }
+}

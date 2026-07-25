@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në Nim.\nQëllimi juaj është të merrni objektin e fundit të mbetur.\nNë çdo radhë, zgjidhni saktësisht një grumbull dhe hiqni një ose më shumë objekte nga ai.\nPërdorni formatin '[grumbull sasi]', ku grumbulli është indeksi i grumbullit dhe sasia është numri i objekteve për të hequr.\nPër shembull, '[0 3]' heq 3 objekte nga grumbulli 0."
+  },
+  "state": {
+    "current_pile": "Grumbulli aktual:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nuk u gjet format lëvizjeje e vlefshme. Përdorni '[grumbull sasi]'.",
+    "correct_format_wrong_fields": "Lojtari {player_id}, Veprim i pavlefshëm. Kolona {col} është jashtë kufijve.",
+    "out_of_range": "Indeksi i grumbullit {pile_index} është jashtë diapazonit.",
+    "non_positive": "Duhet të hiqni të paktën 1 objekt.",
+    "exceeds_pile": "Nuk mund të hiqni {quantity} nga grumbulli {pile_index} (vetëm {pile_count} të mbetur)."
+  },
+  "observation": {
+    "removed_from_piles": "Lojtari {player_id} luajti [{pile_index} {quantity}], duke hequr {quantity} objekt(e) nga grumbulli {pile_index}."
+  },
+  "outcome": {
+    "win": "Lojtari {player_id} mori objektin(e) e fundit!"
+  }
+}
