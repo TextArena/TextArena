@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "ທ່ານເປັນ Player {player_id} ໃນ Chopsticks. ໃນເວລາຂອງທ່ານ, ເລືອກເອົາ ຫນຶ່ງ ໃນ: + Attack: '[attack M O]' ບ່ອນທີ່ M = ມືຂອງທ່ານ (0 ຫຼື 1), O = ມືຂອງຄູ່ແຂ່ງ (0 ຫຼື 1). - ການນັບມືຂອງຄູ່ແຂ່ງເພີ່ມຂື້ນໂດຍມືຂອງທ່ານ; ຖ້າ > = 5, ມັນຈະກາຍເປັນ 0. + Split: '[split L R] 'ເພື່ອແຈກຢາຍນິ້ວມືທັງ ຫມົດ ຂອງທ່ານໃຫ້ເປັນ L ແລະ R (L + R = ລວມຂອງທ່ານ). ຕອບກັບຢ່າງຖືກຕ້ອງ ຫນຶ່ງ ໃນ ຄໍາ ສັ່ງເຫລົ່ານັ້ນ."
+  },
+  "board": {
+    "current_board": "ກະດານປັດຈຸບັນ: ຜູ້ນ 0: {hands_0} ຜູ້ນ 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "ມືຂອງທ່ານ {my_idx} ແມ່ນຕາຍ.",
+    "opp_hand_dead": "ມືຂອງຄູ່ແຂ່ງ {opp_idx} ແມ່ນຕາຍແລ້ວ.",
+    "split_sum": "ແບ່ງອອກຕ້ອງລວມເປັນ {total}.",
+    "split_no_change": "Split ຕ້ອງປ່ຽນການແຈກຢາຍມືຂອງທ່ານ.",
+    "invalid_command": "ການເຄື່ອນໄຫວທີ່ບໍ່ຖືກຕ້ອງ ໃຊ້ [attack M O] ຫຼື [split L R]."
+  },
+  "game_action": {
+    "attack": "P{player_id} ໂຈມຕີມື P{opp_id} {opp_idx}: ມັນຈາກ {opp_val} ໄປຫາ {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "ມືຄູ່ແຂ່ງທັງສອງຕາຍ.",
+    "draw": "ຂີດຈໍາກັດການຫັນໄດ້ບັນລຸ."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "ທ່ານເປັນ Player {player_id} ໃນເກມ Kuhn Poker ຮອບ {max_rounds}. ກົດລະບຽບເກມ: - Kuhn Poker ໃຊ້ກະຕ່າ 3 ບັດທີ່ມີ J, Q, K (J ຕ່ ໍາ ສຸດ, K ສູງສຸດ) - ແຕ່ລະຜູ້ນ antes {ante} ຊິບແລະໄດ້ຮັບບັດ 1 ໃນແຕ່ລະຮອບ (ສັງເກດວ່າບັດຖືກແບ່ງອອກໂດຍບໍ່ມີການທົດແທນ, ສະນັ້ນທ່ານບໍ່ສາມາດມີບັດດຽວກັນກັບຄູ່ແຂ່ງຂອງທ່ານ). - ເກມສືບຕໍ່ເປັນຮອບ {max_rounds} - ຜູ້ນທີ່ມີຊິບຫຼາຍທີ່ສຸດຫຼັງຈາກຮອບທັງ ຫມົດ ຊະນະກົດລະບຽບການປະຕິບັດ: - '[check]': ຜ່ານໂດຍບໍ່ຕ້ອງວາງເດີມພັນ (ພຽງແຕ່ຖ້າບໍ່ມີການພະນັນຢູ່ເທິງໂຕະ) - '[bet]': ເພີ່ມຊິບ 1 ເຂົ້າໃນຊອງ (ພຽງແຕ່ຖ້າບໍ່ມີການພະນັນຢູ່ເທິງໂຕະ) - '[call]': ປຽບທຽບກັບການພະນັນຂອງຄູ່ແຂ່ງໂດຍການເພີ່ມ 1 ເຂົ້າໃນຊອງ - [fold]': ຍອມຮັບມືຂອງທ່ານແລະໃຫ້ຄູ່ແຂ່ງຂອງທ່ານຊະນະຊອງ"
+  },
+  "init_round": {
+    "round_start": "### ເລີ່ມຕົ້ນຮອບ {current_round} ອອກຈາກ {max_rounds} ຮອບ ບັດຂອງທ່ານແມ່ນ: '{player_card}'",
+    "available_actions": "ການກະທໍາຂອງທ່ານແມ່ນ: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "ການກະ ທໍາ ຕ້ອງເປັນ [Check], [Bet], [Call], ຫຼື [Fold].",
+    "not_legal": "ການກະທໍາຕ້ອງເປັນ {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "ການກະທໍາຂອງທ່ານແມ່ນ: {legal_actions}.",
+    "round_summary": "{reason} ຄະແນນປະຈຸບັນ: ຜູ້ນ 0: \"{player_0_chips}\"; ຜູ້ນ 1: \"{player_1_chips}\""
+  },
+  "showdown": {
+    "showdown_summary": "ການສະແດງ: ຜູ້ນ {winner} ຂອງ {winner_card} ເອົາຊະນະ ຜູ້ນ {loser} ຂອງ {loser_card} ຜູ້ນ {winner} ຊະນະ ຫມໍ້ ຂອງ {pot_value} ຊິບ."
+  },
+  "outcome": {
+    "draw": "ໃນຕອນທ້າຍຂອງຮອບ {max_rounds}, ທັງສອງຜູ້ຫຼິ້ນມີ ຈໍາ ນວນຊິບເທົ່າທຽມກັນ.",
+    "round_win": "Player {player_id} has folded.",
+    "winner_player0": "Player 0 ຊະນະເທິງຈານມີຈິບຫຼາຍຈາກທຸກ {max_rounds} ຮອບ.",
+    "winner_player1": "Player 1 ຊະນະເທິງຈານມີຈິບຫຼາຍຈາກທຸກ {max_rounds} ຮອບ."
+  }
+}

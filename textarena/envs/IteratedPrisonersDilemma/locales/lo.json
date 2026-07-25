@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "ການສົນທະນາ ສໍາເລັດ ສໍາ ລັບຮອບ {round}. ກະລຸນາຕອບດ້ວຍ \"[Cooperate]\" ຫຼື \"[Defect]\" ພາຍໃນ \\boxed{{}}.",
+    "starting_round": "--- ການເລີ່ມຕົ້ນຮອບ {round} ---",
+    "round_summary": "ຜົນການແຂ່ງຂັນຮອບ {round}: {outcome} ຜູ້ນ 0 ໄດ້ {r0} (ລວມ {score_0}), ຜູ້ນ 1 ໄດ້ {r1} (ລວມ {score_1})."
+  },
+  "outcome": {
+    "winner": "ຜູ້ນ {winner} ຊະນະ {win_score} - {lose_score}.",
+    "draw": "ແຕ່ງ! ນັກເຕະທັງສອງໄດ້ຄະແນນ {s0}.",
+    "round_both_cooperate": "ນັກເຕະທັງສອງໄດ້ຮ່ວມມືກັນ.",
+    "round_both_defect": "ນັກເຕະທັງສອງໄດ້ຫຼົບຫນີ.",
+    "round_p0_cooperates_p1_defects": "ຜູ້ນ 0 ຮ່ວມມື, ຜູ້ນ 1 ໄດ້ຫຼົບຫນີ.",
+    "round_p0_defects_p1_cooperates": "ຜູ້ນ 0 ໄດ້ຫຼົບຫນີ, ຜູ້ນ 1 ໄດ້ຮ່ວມມືກັນ."
+  }
+}

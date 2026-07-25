@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "ທ່ານເປັນ Player {player_id} ໃນເກມຂອງ Poker ອິນເດຍ. - 52-ບັດ deck; ທ່ານເຫັນພຽງແຕ່ບັດຂອງ opponent ຂອງ. - Ante {ante} chip ((s) ແຕ່ລະຮອບ, {max_rounds}ຮອບ ((s) ລວມ. - ຍ້າຍຖືກຕ້ອງ: '[check]' │ '[bet X]' │ '[call]' │ '[raise X] │ '[fold]' (X ແມ່ນຕົວເລກເຕັມບວກ <= ຈໍາ ນວນ chip ຂອງທ່ານ.) - ບັດທີ່ຖືກເຊື່ອງສູງສຸດຊະນະ ຫມໍ້ ໃນເວລາສະແດງ. │"
+  },
+  "round": {
+    "announce": "### ຮອບ {current_round}/{max_rounds} ບັດຂອງຄູ່ແຂ່ງຂອງທ່ານແມ່ນ: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "ໃຫ້ຂໍ້ມູນຢ່າງຖືກຕ້ອງຫນຶ່ງຄໍາທີ່ຖືກກໍານົດໄວ້ໃນແຖບ, ເຊັ່ນ: \"[check]\", \"[bet 2]\", \"[call]\", \"[raise 3]\", ຫຼື \"[fold]\".",
+    "cannot_check": "ບໍ່ສາມາດ [check] - ທ່ານກໍາລັງປະເຊີນກັບການພະນັນ.",
+    "amount_min": "ຈໍາ ນວນເງິນ / ການຍົກສູງຕ້ອງມີ ≥ 1.",
+    "cannot_bet": "Cannot [bet] - must [call] / [raise] / [fold].",
+    "nothing_to_call": "ບໍ່ມີຫນ່ຳເພື່ອແຈ້ງ; ທ່ານອາດ [check] ບົນ.",
+    "no_bet_to_raise": "ໃຊ້ [bet X] ເພື່ອເປີດ; ບໍ່ມີການພະນັນທີ່ຈະຍົກຂຶ້ນ.",
+    "insufficient": "ບໍ່ພຽງພໍກັບຊິບສໍາລັບການກະທໍາດັ່ງກ່າວ."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "\"[check]\", \"[bet X]\"",
+    "actions_facing_bet": "\"[call]\" (ຄ່າໃຊ້ຈ່າຍ {to_call}), \"[raise X]\", \"[fold]\"",
+    "possible_actions": "ການກະທໍາທີ່ເປັນໄປໄດ້ຂອງທ່ານ: {legal}"
+  },
+  "message": {
+    "round_result": "{reason} Pot {pot} → Player {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "ນັກເຕະ {player_id} folded.",
+    "showdown_win": "ການສະແດງ: {card_win} ຕີ {card_lose}.",
+    "showdown_tie": "ການສະແດງອອກ: ທັງສອງ {card}. ຫມໍ້ ແບ່ງ  ແຕ່ລະຄົນໄດ້ຮັບ {split}."
+  },
+  "outcome": {
+    "p0_wins": "ຜູ້ນ 0 ຊະນະ ({bank0} > {bank1})",
+    "p1_wins": "ຜູ້ນ 1 ຊະນະ ({bank1} > {bank0})",
+    "draw": "Chips ເທົ່າທຽມກັນຫຼັງຈາກຮອບທັງຫມົດ"
+  }
+}

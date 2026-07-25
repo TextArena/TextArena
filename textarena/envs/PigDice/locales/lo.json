@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "ທ່ານແມ່ນ Player {player_id} ເປີດແຜນຫາການສະແຫວ Pig Dice.\n\nກົດຫົນ: \n- ໃນຄັ້ງທ່ານ ທ່ານສາມາດ '[roll]' ຫຼື '[hold]'\n- ປະມານ 2-6: ບວກເພີ່ມສູນຄັ້ງທ່ານ \n- ປະມານ 1: ສູນຄັ້ງທ່ານ ແລະ ສິ້ນສຸດຄັ້ງ \n- ຈັບ: ບວກສູນຄັ້ງທ່ານ ແລະ ສິ້ນສຸດຄັ້ງ \n- ຄົນທີ່ມີ {winning_score} ຈຸດ ໄດ້ຊະນະ \n\nໃນເວລາທີ່ແມ່ນຄັ້ງທ່ານ ທ່ານຈະເຫັນສະແຫວງສະເຫວ ແລະ ສູນຄັ້ງ. \nຕອບສະຫນອງ '[roll]' ເພື່ອປະມານ ຫຼື '[hold]' ເພື່ອຈັບສະແຫວ."
+  },
+  "invalid_move": {
+    "invalid_action": "ຮູບແບບການກະ ທໍາ ທີ່ບໍ່ຖືກຕ້ອງ. ໃຊ້ \"[roll]\" ຫຼື \"[hold]\"."
+  },
+  "actions": {
+    "player_busted": "ນັກເຕະ {player_id} ຖືກຈັບ, ເສຍ {turn_total} ຄະແນນ!",
+    "player_hold": "ຜູ້ນ {player_id} ຖືແລະທະນາຄານ {turn_total} ຈຸດ."
+  },
+  "board": {
+    "player": "ນັກເຕະ 0: \"{score_0}\"; ນັກເຕະ 1: \"{score_1}\"",
+    "current_total_scores": "ຄະແນນລວມໃນປະຈຸບັນ: {scores} ລວມການປ່ຽນໃນປະຈຸບັນຂອງທ່ານແມ່ນ {turn_total}.",
+    "roll_history": "{observation} ປະຫວັດການຖີ້ມຂອງທ່ານໃນຮອບນີ້: {roll_history}",
+    "first_roll": "{observation} ນີ້ແມ່ນການຖິ້ມຄັ້ງທໍາອິດຂອງເວລາຂອງທ່ານ.",
+    "available_actions": "{observation} ການກະທໍາທີ່ມີຢູ່: \"[roll]\" ຫຼື \"[hold]\""
+  },
+  "outcome": {
+    "winner_by_turn_limit": "ຜູ້ນ {winner_id} ຊະນະໂດຍມີຄະແນນສູງກວ່າໃນຂອບເຂດ ({scores})",
+    "winner_by_score": "ຜູ້ນ {winner_id} ຊະນະໂດຍການບັນລຸຄະແນນເປົ້າ ຫມາຍ ຂອງ {winning_score}!",
+    "draw": "ຂີດ ຈໍາ ກັດການຫັນໄດ້ບັນລຸແລະຜູ້ຫຼີ້ນທຸກຄົນມີຄະແນນເທົ່າທຽມກັນ: {scores}"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "ທ່ານເປັນຜູ້ຫຼິ້ນ {player_id} ໃນ Nim. ເປົ້າຫມາຍຂອງທ່ານແມ່ນເພື່ອເອົາວັດຖຸທີ່ເຫຼືອສຸດທ້າຍ. ໃນແຕ່ລະຄັ້ງ, ເລືອກເອົາຄົບຖ້ວນຢ່າງແນ່ນອນແລະເອົາວັດຖຸ ຫນຶ່ງ ຫຼືຫຼາຍຢ່າງອອກຈາກມັນ. ໃຊ້ຮູບແບບ '[pile quantity]', ບ່ອນທີ່ຄົບຖ້ວນແມ່ນດັດຊະນີຄົບຖ້ວນແລະປະລິມານແມ່ນ ຈໍາ ນວນວັດຖຸທີ່ຈະເອົາອອກ. ຍົກຕົວຢ່າງ, '[0 3]' ກໍາ ຈັດວັດຖຸ 3 ຈາກຄົບຖ້ວນ 0."
+  },
+  "state": {
+    "current_pile": "ປະຈຸບັນ Pile: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "ບໍ່ມີຮູບແບບການຍ້າຍທີ່ຖືກຕ້ອງທີ່ພົບເຫັນ. ໃຊ້ '[pile quantity]'.",
+    "correct_format_wrong_fields": "ຜູ້ນ {player_id}, ການກະ ທໍາ ທີ່ບໍ່ມີຜົນ. ເສັ້ນ {col} ແມ່ນອອກຈາກຂອບເຂດ.",
+    "out_of_range": "ດັດຊະນີຂອງ stack {pile_index} ແມ່ນອອກຈາກຂອບເຂດ.",
+    "non_positive": "ຕ້ອງເອົາສິ່ງຂອງຢ່າງຫນ້ອຍ 1 ຢ່າງ.",
+    "exceeds_pile": "ບໍ່ສາມາດເອົາ {quantity} ອອກຈາກ stack {pile_index} (ພຽງແຕ່ {pile_count} ຊ້າຍ)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "ຜູ້ນ {player_id} ໄດ້ເອົາວັດຖຸສຸດທ້າຍ (((s)!"
+  }
+}
