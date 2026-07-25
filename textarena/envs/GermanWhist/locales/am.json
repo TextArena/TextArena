@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "ጨዋታው ይጀምራል. ትራምፕ ሱት: {trump_suit} (ትራምፕ ካርድ: {trump_str}).",
+    "no_trump_card": "none"
+  },
+  "player_prompt": {
+    "intro": "አንተ ተጫዋች {player_id} በጀርመን ዊስት ነዎት.\n{phase_info}\n{hand_size} ካርዶችን ታያላለህ.\nካርድን በ '[play N]' በማጫት ከእጅህ አውራ (ለምሳሌ እንደ '[play 3]').",
+    "phase_learning": "የመማር ደረጃ: በእያንዳንዱ ዘዴ አሸናፊው የፊት ለፊቱ ካርዱን ይወስዳል እና ተሸናፊውም ቀጣዩን ካርድ ከዴክ ላይ ይሳባል. በዚህ ደረጃ የተገኙ ብልሃቶች ወደ ድል አይቆጠሩም ።",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "የጨዋታ ደረጃው ተጀምሯል።",
+    "deck_empty": "የቁማር መደርደሪያው ባዶ ነው - ምንም ካርድ አይሰጥም።",
+    "available": "የተሰጠ ካርድ: {card}",
+    "available_trump": "ካርድ በጨረታ ላይ: {card} (ትራምፕ)"
+  },
+  "invalid_move": {
+    "wrong_format": "ልክ ያልሆነ የሂደት ቅርጸት. በእጅዎ ውስጥ ያለውን n ኛ ካርድ ለመጫወት '[play N]' ይጠቀሙ ።",
+    "bad_position": "የካርድ ቦታ አለመኖሩ. {hand_size} ካርዶችን ታያላለህ.",
+    "must_follow_suit": "አንተም እንደ እነሱ {lead_suit} ካርድ መጫወት አለብህ።",
+    "invalid_play": "ይህ ካርድ ሊጫወት አይችልም።"
+  },
+  "game_action": {
+    "played": "ተጫዋች {player_id} ተጫውቷል {card}."
+  },
+  "trick": {
+    "won": "ተጫዋች {winner_id} {card}ን በማሸነፍ ትሪክን ይገባል.",
+    "won_learning": "ተጫዋች {winner_id} {card}ን በማሸነፍ ትሪክን ይገባል እና ኤሌማን ካርድን ይወስዳል."
+  },
+  "phase": {
+    "learning_complete": "የዴክ መጨረስ። የመማር ደረጃው አልቋል - እያንዳንዱ ቀሪ ዘዴ ለድል ይቆጠራል።"
+  },
+  "draw": {
+    "winner_received": "{card} አሸንፈሃል እና ተቀብለሃል።",
+    "loser_received": "አንተም {card}ን ከዴክ ላይ በመውሰድ ትራኩን አጣህ።",
+    "winner_preview": "የሚቀጥለው ካርድ {card} ነው።"
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "ትሪክስ በማሸነፍ እስካሁን - ተጫዋች 0: {tricks0}, ተጫዋች 1: {tricks1}",
+    "scores_playing": "ማሸነፍ ትሪክስ - ተጫዋች 0: {tricks0}, ተጫዋች 1: {tricks1}",
+    "phase": "ደረጃ: {phase}",
+    "phase_learning": "ዘመን: {phase} ({remaining_cards} ካርዶች በድስት ላይ ቀረው)"
+  },
+  "hand": {
+    "no_cards": "ካርዶች የሉም",
+    "no_cards_in_hand": "ምንም ካርዶች በእጅ ውስጥ የለም",
+    "header": "እጅህ፦",
+    "trump_indicator": "(ትራምፕ)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "እስካሁን ምንም ካርዶች ይህን ዘዴ ተጫውቷል.",
+    "header": "የአሁኑ ዘዴ:",
+    "trump_indicator": "(ትራምፕ)",
+    "card_line": "{observation}\n  ተጫዋች {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "ጨዋታ አልተጀመረም",
+    "header": "=== የጀርመን ዊስት ጨዋታ===",
+    "phase": "{observation}\nዘመን: {phase}",
+    "trump_suit": "{observation}\nትራምፕ ሱት: {trump_suit}",
+    "trump_card": "{observation}\nትራምፕ ካርድ: {card}",
+    "cards_left": "{observation}\nካርዱ በድስት ላይ ቀረው: {count}",
+    "next_card": "{observation}\nሚቀጥለው ካርድ ለዳሪ: {card}",
+    "blank": "{observation}  የኤች.",
+    "current_trick": "{observation} የአሁኑ ዘዴ:",
+    "trump_indicator": "(ትራምፕ)",
+    "trick_line": "{observation}\n  ተጫዋች {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nተጫዋች {player_id}: {scoring} ማሸነፍ ትሪክስ ({tricks} በሙሉ), {hand_size} ካርዶች በእጅ"
+  },
+  "outcome": {
+    "summary": "በማስተማር ዘመን - ተጫዋች 0: {l0}, ተጫዋች 1: {l1}. በመጫወት ዘመን - ተጫዋች 0: {p0}, ተጫዋች 1: {p1}. ተጫዋች {winner_id} {winner_tricks} ማሸነፍ ትሪክስ ያሸንፋል!"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte locale file. DO NOT translate keys (left side). Only translate values (right side).",
+  "_slots": {
+    "{line}": "The rendered row of cups",
+    "{step}": "The current shuffle step number",
+    "{steps}": "The total number of shuffle steps",
+    "{i}": "The first cup index involved in a swap",
+    "{j}": "The second cup index involved in a swap",
+    "{prompt}": "The localized prompt fragment appended after the cups",
+    "{max_index}": "The highest valid cup index, i.e. num_cups-1",
+    "{ball_pos}": "The cup index the ball is under"
+  },
+  "player_prompt": {
+    "intro": "Track the hidden ball 'X' while the cups are shuffled.\nAfter shuffling, guess its location with `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "ኳስ ይጀምራል: {line}",
+    "shuffle": "ተሳስተው ያዙት {step}/{steps}: ጠብስ ቁሳቁሶች {i} እና {j} ተቀዋወረ.",
+    "cups": "የጠብስ ቁሳቁሶች: {line}  {prompt}",
+    "guess_now": "(አሁን ገምቱ!",
+    "reveal": "(የተገለጠ: ኳስ ከ {ball_pos} በታች)"
+  },
+  "invalid_move": {
+    "wrong_format": "Bad action. Use `[k]`.",
+    "out_of_range": "ኢንዴክስ ከ 0-{max_index} ክልል ውጭ ነው ።"
+  },
+  "outcome": {
+    "win": "ትክክል ነው! ኳሱን አገኘኸው.",
+    "lose": "የተሳሳተ  ኳስ በሻንጣው ስር ነበር {ball_pos}."
+  }
+}

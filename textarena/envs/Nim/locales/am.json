@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "እንኪያስ ኤሌሞን �{player_id} በኒም አስተሳሰብ ላይ ነው.\nየእንኪያስ ግብ እንደ መጨረሻ ቀረ አካል እንዲወሰድ ነው.\nበአንድ ማረጋገጫ ላይ, አንድ ስብስብን ብቻ እና ከስብስቡ አንድ ወይም ከአንድ በላይ አካል አስወጣ.\nበምሳሌ ጽሑፍ '[pile quantity]' እንደ ስብስብ አንቀፅ እና ብዛት እንደ አካል ብዛት አስጠብቂ.\nምሳሌ ለምሳሌ, '[0 3]' ከስብስብ 0 ላይ 3 አካል አስወጣ."
+  },
+  "state": {
+    "current_pile": "የአሁኑ ፒል: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "ምንም ትክክለኛ የመንቀሳቀስ ቅርጸት አልተገኘም። '[pile quantity]' ይጠቀሙ።",
+    "correct_format_wrong_fields": "ኤሌሞን �{player_id}, ትክክለኛ አይነት ነው ግን ማስተላለፊያ መስፈርቶች በአጠቃላይ አስፈላጊ ናቸው. ኮሎም �{col} ከቅድመ አቀማመጥ ውጪ ነው.",
+    "out_of_range": "የቁጥር {pile_index} ከክልል ውጭ ነው።",
+    "non_positive": "ቢያንስ 1 ነገር ማስወገድ አለበት.",
+    "exceeds_pile": "Cannot remove {quantity} from pile {pile_index} (only {pile_count} left)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "ተጫዋቹ {player_id} የመጨረሻውን ነገር ወስዷል!"
+  }
+}

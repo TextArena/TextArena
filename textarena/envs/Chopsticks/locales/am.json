@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "አንተ ተጫዋች {player_id} በእጅ አዛዥ አማካይነት ነው. በራስህ ጊዜ አንዱን ይምረጥ:\n  + ጥቃት:  '[attack M O]'  እንጂ M=እጅህ (0 ወይም 1), O=ተጫዋች እጅ (0 ወይም 1).\n    - ተጫዋች እጅ ቁጥር በእጅህ ቁጥር እየጨመረ ሄዶ ከ5 በላይ ከሆነ መቶ ሆኖ ይጀምራል.\n  + ክፍል:   '[split L R]'  ለራስህ እጅ ቁጥሮችን በሁለት እጅ ላይ እንዲካፈል ለማድረስ.\nአንዱን ብቻ አስተላልፍ."
+  },
+  "board": {
+    "current_board": "የአሁን ቻርት:\nተጫዋች 0: {hands_0}\nተጫዋች 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "እጅህ {my_idx} ሞቷል።",
+    "opp_hand_dead": "ተቃዋሚ እጅ {opp_idx} ቀድሞውኑ ሞቷል ።",
+    "split_sum": "የተከፈለበት ድምር {total} መሆን አለበት።",
+    "split_no_change": "ስፕሊት የእጅህን ስርጭት መቀየር አለበት።",
+    "invalid_command": "በአይነት ስራ. \"[attack M O]\" ወይም \"[split L R]\"ን ጠቀም."
+  },
+  "game_action": {
+    "attack": "P{player_id} ተጫዋችን P{opp_id}ን የእጅ ላይ {opp_idx}: ከ{opp_val} ወደ {new_val} ይሄዳል.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "ሁለቱም የተቃዋሚዎች እጆች ሞተዋል።",
+    "draw": "የመዞሪያ ገደቡ ደርሷል።"
+  }
+}

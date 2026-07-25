@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "ልክ ያልሆነ የድርጊት ቅርጸት። ድርጊቱ በአጠገብ መሆን አለበት።",
+    "no_closing_bracket": "ልክ ያልሆነ የድርጊት ቅርጸት ፣ የመዝጋት ቅንፍ ጠፋ ']'",
+    "empty_command": "ባዶ ትዕዛዝ \"draw\" ወይም \"move <source><destination> [count]\" የሚለውን ይተይቡ ።",
+    "empty_action": "ባዶ እርምጃ",
+    "move_needs_args": "የዝውውር ትዕዛዙ ምንጭ እና መድረሻ ይጠይቃል. አጠቃቀም: 'move <source> <destination> [count]'",
+    "count_positive": "ቆጠራው አዎንታዊ መሆን አለበት ወይም \"ሁሉም\" ነው ።",
+    "count_invalid": "ልክ ያልሆነ ቆጠራ። ቁጥር ወይም 'all' ይጠቀሙ",
+    "unknown_command": "Unknown command '{cmd}'. Use 'draw', 'move <source> <destination> [count]', or 'forfeit'",
+    "wrapped": "እቅድ {n}: {msg}"
+  },
+  "action_result": {
+    "success": "እቅድ {n}: {msg}",
+    "before_failure": "የተፈጸመ {n} እርምጃዎች ከከሸፉ በፊት.",
+    "failed": "እቅድ {n} አልተረጋገጠም: {msg}"
+  },
+  "move_result": {
+    "drew": "ካርድ ከቁሳቁስ ወደ ቆሻሻዎች አወጣ ።",
+    "cannot_draw": "ማስገባት አይቻልም. ክምችት እና ቆሻሻ ሁለቱም ባዶ ናቸው.",
+    "invalid_pile": "ልክ ያልሆነ የክምችት ስም። W፣ F1-F4 ወይም T1-T7 ይጠቀሙ",
+    "foundation_one_card": "ወደ መሰረቱ አንድ ካርድ ብቻ ማንቀሳቀስ ይችላል",
+    "waste_to_foundation_ok": "ካርድ ከቆሻሻ ወደ ፋውንዴሽን ተወስዷል F{dst}",
+    "waste_to_foundation_bad": "የካርድ ቆሻሻን ወደዚያ የመሠረት ክምር ማንቀሳቀስ አይቻልም",
+    "tableau_to_foundation_ok": "ካርድን ከታበሌዩ T{src} ወደ መሰረታ F{dst} አዛወረ",
+    "tableau_to_foundation_bad": "የቦርድ ካርድ ወደዚያ የመሠረት ክምር ማንቀሳቀስ አይቻልም",
+    "foundation_to_foundation": "ከመስረት ወደ መሰረተ ልማት መንቀሳቀስ አይቻልም",
+    "waste_to_tableau_one_card": "ከቆሻሻ ወደ ታቦር አንድ ካርድ ብቻ ማንቀሳቀስ ይችላል",
+    "waste_to_tableau_ok": "ካርድን ከጥራት ወደ ታበሌዩ T{dst} አዛወረ",
+    "waste_to_tableau_bad": "የካርድ ቆሻሻን በዚያ የጠረጴዛ ክምር ላይ ማስቀመጥ አይቻልም",
+    "no_face_up": "የሚንቀሳቀሱ ካርዶች የሉም",
+    "tableau_to_tableau_ok": "{count} ካርድ(ስ)ን ከታበሌዩ T{src} ወደ T{dst} አዛወረ",
+    "tableau_to_tableau_bad": "{count} ካርድ(ስ)ን ከ T{src} ወደ T{dst} አትንቀሳቀስም",
+    "foundation_to_tableau_one_card": "ከፋውንዴሽን ወደ ታቦር አንድ ካርድ ብቻ ማንቀሳቀስ ይችላል",
+    "foundation_empty": "ፋውንዴሽን F{src} ባዶ ነው ።",
+    "foundation_to_tableau_ok": "ካርድን ከመሰረታ F{src} ወደ ታበሌዩ T{dst} አዛወረ",
+    "foundation_to_tableau_bad": "መሰረታ ካርድን ለታበሌዩ T{dst} ላይ አትተካለም",
+    "to_waste_or_stock": "ወደ ቆሻሻ ወይም ክምችት ሊዛወር አይችልም ።"
+  },
+  "outcome": {
+    "forfeit": "ጨዋታው ተሰርዟል። የመጨረሻ ውጤት: {score} ካርዶች በመሠረቶች ውስጥ።",
+    "won": "እንኳን ደስ አላችሁ! የክሎንዳይክ ሶሊቴየር አሸናፊ ሆናችኋል!",
+    "turn_limit": "ጨዋታ ስራ አለ፤ እቅድ ማረጋገጫን በ{max_turns} አስረጃህ። መርጫ: {score} ካርዶች በመሰረታዎች"
+  },
+  "board": {
+    "title": "=== የክሎንድኪ ሶሊቴይር===",
+    "turn": "ማረጋገጫ: {turn}/{max_turns}",
+    "stock": "ክምችት: {stock} ካርዶች",
+    "waste": "ቆሻሻ (W): {waste}",
+    "foundations_header": "መሠረቶች:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "ሰንጠረዥ:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

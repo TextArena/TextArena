@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "You are playing Golf (Card Game) - Player {player_id}.\nGoal: Get the lowest total score in this single round. If columns share the same value, they are summed as 0.\nCard Values: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (use exact brackets):\n- '[draw]' - Draw from deck\n- '[take]' - Take from discard pile\n- '[swap X Y]' - Swap drawn card with position X (row) Y (column)\n- '[discard]' - Discard the drawn card\n"
+  },
+  "board": {
+    "drew": "እርስዎ ጨረሰው: �{card}\nአሁን እርስዎ መልሰው �[swap X Y] ወይም ጨረሱዋት �[discard]",
+    "took": "You took: {card} from discard pile\nYou must [swap X Y] with it (cannot discard).",
+    "peeked": "እርስዎ አየው በማዕዘን ({row},{col}): �{card}",
+    "turn_view": "እርስዎ እጅ:\n{hand}\nአስወጡ ማዕዘን: �{discard}\n{options}",
+    "none": "የለም"
+  },
+  "options": {
+    "final_turns": "መጨረሻ እንቅስቃሴ! እርስዎ እይታ: ጨረስ መስራት አስፈልጋል �[draw], ቦታ መለወጥ መስራት አስፈልጋል �[take], አስወጡ መስራት አስፈልጋል �[peek X Y]",
+    "draw": "እርስዎ እይታ: ጨረስ መስራት አስፈልጋል �[draw], ቦታ መለወጥ መስራት አስፈልጋል �[take]",
+    "must_swap": "አንተ: [swap X Y] (የተጣሉ ክምር ከ ካርዶች መጣል አይችልም)",
+    "swap_or_discard": "You must: [swap X Y] or [discard]"
+  },
+  "hand": {
+    "no_cards": "ካርዶች የሉም",
+    "header": "ኮል: 1 2 3",
+    "row": "መስመር �{n}: �{cards}"
+  },
+  "action_desc": {
+    "swapped": "ኤሌሞን �{pid} ጨረሰ �{new} ከ �{old} በማዕዘን ({row},{col})",
+    "discarded": "ኤሌሞን �{pid} አስወጥቶዋል �{card}"
+  },
+  "message": {
+    "deck_empty": "የመርከቧ መርከብ ባዶ ነው! ጨዋታው ወዲያውኑ ያበቃል።",
+    "knocked": "ተጫዋች {pid} ተደበደበ! እያንዳንዱ ሌላ ተጫዋች አንድ ተጨማሪ ተራ ያገኛል.",
+    "final_round": "Player {pid} {reason}! Each other player gets one more turn."
+  },
+  "reason": {
+    "all_revealed": "ካርዶቹ በሙሉ ተገለጡ?"
+  },
+  "invalid": {
+    "wrong_action": "አንድ ብቻ በቅደም ተከተል እርስዎ አክሽን ይጠቀሙ: ጨረስ መስራት አስፈልጋል �[draw], ቦታ መለወጥ መስራት አስፈልጋል �[take], አስወጡ መስራት አስፈልጋል �[swap X Y], ጨረስ መስራት አስፈልጋል �[discard], ቦታ መለወጥ መስራት አስፈልጋል �[knock], ወይም አስወጡ መስራት አስፈልጋል �[peek X Y]",
+    "discard_empty": "የቁሳቁስ ክምር ባዶ ነው!",
+    "must_draw_first": "እርስዎ በመጀመሪያ መለስ መስራት አስፈልጋል, ጨረስ መስራት አስፈልጋል, ቦታ መለወጥ መስራት አስፈልጋል, ወይም አስወጡ መስራት አስፈልጋል �[draw], ጨረስ መስራት አስፈልጋል �[take], ቦታ መለወጥ መስራት አስፈልጋል �[knock], ወይም አስወጡ መስራት አስፈልጋል �[peek X Y]",
+    "cannot_discard_taken": "You cannot discard a card taken from the discard pile. You must swap it.",
+    "have_drawn_card": "እርስዎ ካርድ ጨረሱዋት. እርስዎ መልሰው ማድረግ ያስፈልጋል ወይም ጨረሱዋት �[swap X Y] ወይም ጨረሱዋት �[discard]",
+    "need_drawn_swap": "You need a drawn card to swap.",
+    "need_drawn_discard": "You need a drawn card to discard.",
+    "out_of_bounds": "Position out of bounds. Use row 1-{max_row}, column 1-{max_col}",
+    "knock_with_card": "You cannot knock with a drawn card. Complete your turn first.",
+    "already_knocked": "አንድ ሰው ይህን ዙር ቀድሞውኑ አንኳኩቷል.",
+    "already_revealed": "ይህ ካርድ ቀድሞውኑ ተገልጧል!"
+  },
+  "summary": {
+    "full": "Game Over! Player {winner} wins with a score of {score} points!\n\nFinal Scores:\n{scores}",
+    "line": "Player {pid}: {score} points\n"
+  },
+  "board_str": {
+    "title": "=== የጎልፍ ጨዋታ===",
+    "discard": "የተጣራ ክምር: {card}",
+    "knocked": "ተጫዋቹ {pid} አንኳኩ!",
+    "player_header": "ኤሌሞን �{pid} (ደረጃ: �{score}):"
+  }
+}
