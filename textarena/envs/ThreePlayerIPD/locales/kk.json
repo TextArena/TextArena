@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Сіз 3 ойыншыдан тұратын Итерацияланған тұтқынның дилеммасында ойыншы {player_id}сіз. Ойын {num_rounds}раундқа созылады. Раундтың құрылымы: • {conv_rounds} тегін әңгімелесу кезеңі • 1 шешім кезеңі - қарсыласқа бір жеребе тапсыру: \"[<opp-id> cooperate]\" немесе \"[<opp-id> defect]\" (яғни \"[1 defect] [2 cooperate]\"; әдеттегісі \"қосқанда жұмыс істеу\"). Жұптық төлем матрицасы (әрбір реттелмеген жұпқа қолданылады): - Екеуі де ынтымақтасады -> {reward} - Екеуі де дефект -> {punishment} - Сіз дефект, олар ынтымақтасады -> {temptation} - Сіз ынтымақтастық, олар дефект -> {sucker} Барлық раундтардың соңында ең жоғары ұпай жинаған ойыншы жеңіп шығады."
+  },
+  "round": {
+    "start": "─── Басталу кезеңі {round} ─── Келесі {conv_rounds} кезеңдерде еркін сөйлесе аласыз.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Сөйлем {round} - Нәтижелер:",
+    "pair_line": "{observation} Ойыншы {i} мен Ойыншы {j} сәйкесінше {choice_i} және {choice_j} (Ойыншы {i} {gain_i}, Ойыншы {j} {gain_j}) таңдады.",
+    "scores_open": "{observation} -> Қазіргі ұпайлар: ",
+    "score_first": "{observation}Ойыншы {player_id} ({score})",
+    "score_next": "{observation}; Ойыншы {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Қорытынды балл: {scores}. Рейтингтік топтар (ең нашар→ең жақсы): {groups}"
+  }
+}

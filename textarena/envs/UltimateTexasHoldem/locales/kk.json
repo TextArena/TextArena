@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "No cards yet",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Single Player vs Dealer\n\n📖 GAME OVERVIEW:\n• You start with {start_chips} chips\n• Single deck of 52 cards (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• You play against the dealer (house)\n• Each round follows the Ultimate Texas Hold'em structure: you post ANTE and BLIND bets, receive 2 hole cards, decide on optional PLAY bets across the betting phases, then reveal community cards and compare your best 5-card hand against the dealer’s. Your goal is to maximize your winnings (when you have the better hand), while minimizing your losses (when you have the worse hand).\n• Game ends when you reach 0 chips or below at start of round (LOSS) or complete 1000 rounds with chips (WIN)\n\n💰 BETTING STRUCTURE:\n• ANTE: Mandatory ${ante} bet every round\n• BLIND: Mandatory ${ante} bet every round\n• PLAY: Optional bet during gameplay. Throughout the round, you may choose ONLY ONE of the following: (${ante4} if done at PRE-FLOP, ${ante2} if done at FLOP, or ${ante} if done at RIVER. Can also fold at river, giving up on the hand, and making no bet.)\n\n🎴 CARD DEALING:\n• You receive 2 face-up cards (your hole cards)\n• Dealer receives 2 face-down cards (hidden from you)\n• 5 community cards are dealt face-down initially\n• Community cards are revealed progressively through the game phases\n\n🏆 DEALER QUALIFICATION:\n• Dealer must have at least a PAIR (2 cards of same rank) to qualify, using the 2 cards in their hand and the 5 community cards.\n• Dealer qualification affects the betting outcomes, as will be explained later.\n\n🎮 GAME PHASES & ACTIONS:\n📋 PRE-FLOP:\n  • Actions: [4x] (${ante4}) or [check]\n  • [4x]: Place ${ante4} PLAY bet, reveals first 3 community cards\n  • [check]: No additional bet, reveals first 3 community cards\n\n📋 FLOP:\n  • If 4x bet placed: Only [skip] available (auto-reveals last 2 community cards)\n  • If no 4x bet: [2x] (${ante2}) or [check]\n  • [2x]: Place ${ante2} PLAY bet, reveals last 2 community cards\n  • [check]: No additional bet, reveals last 2 community cards\n\n📋 RIVER:\n  • If 4x or 2x bet placed: Only [skip] available (auto-proceeds to showdown)\n  • If no prior PLAY bet: [1x] (${ante}) or [fold]\n  • [1x]: Place ${ante} PLAY bet, proceeds to showdown\n  • [fold]: Give up hand, lose ANTE and BLIND bets\n\n📋 SHOWDOWN:\n  • All cards revealed and evaluated\n  • Best 5-card hand from 7 cards (2 hole + 5 community)\n  • Bets settled according to payout rules\n\n💎 BET PAYOUTS:\n📊 ANTE BET:\n  • Dealer doesn't qualify: PUSH (bet returned)\n  • Dealer qualifies & you win: 1:1 payout (bet + winnings)\n  • Dealer qualifies & you lose: Bet lost\n  • Tie: PUSH (bet returned)\n\n📊 BLIND BET:\n  • Unaffected by dealer qualification\n  • You win: Bet returned and additional payout based on your hand strength\n  • You lose: Bet lost\n  • Tie: PUSH (bet returned)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: No additional payout\n\n📊 PLAY BET:\n  • Unaffected by dealer qualification\n  • Direct comparison: Your best hand vs Dealer's best hand\n  • You win: 1:1 payout (bet + winnings)\n  • You lose: Bet lost\n  • Tie: PUSH (bet returned)\n\n🎯 POKER HAND RANKINGS (Best to Worst):\n  1. Royal Flush: A-K-Q-J-10 of same suit\n  2. Straight Flush: 5 consecutive cards of same suit\n  3. Four of a Kind: 4 cards of same rank\n  4. Full House: 3 of a kind + 2 of a kind\n  5. Flush: 5 cards of same suit\n  6. Straight: 5 consecutive cards\n  7. Three of a Kind: 3 cards of same rank\n  8. Two Pair: 2 pairs of different ranks\n  9. One Pair: 2 cards of same rank\n  10. High Card: Highest card wins\n\n⌨️  ACTION COMMANDS:\n• [4x] or [play bet 4x]: Place ${{self.ante_amount*4}} PLAY bet\n• [2x] or [play bet 2x]: Place ${{self.ante_amount*2}} PLAY bet\n• [1x] or [play bet 1x]: Place ${{self.ante_amount*1}} PLAY bet\n• [check] or [c]: Check (no additional bet)\n• [fold] or [f]: Fold (give up hand)\n• [skip] or [s]: Skip to next phase (when no action needed)\n\n💡 STRATEGY TIPS:\n• Strong starting hands (pairs, high cards) often justify 4x bets\n• Consider dealer qualification - weak hands may push if dealer doesn't qualify\n• BLIND bet can be very profitable with strong hands (Royal Flush = 500:1!)\n• Watch your chip stack! If it goes to 0 or below at start of round, you lose.\n\n⚠️  IMPORTANT NOTES:\n• ANTE and BLIND bets are mandatory every round\n• PLAY bets are optional and strategic\n• Make sure you input the correct action, and only one action at a time.\n\n",
+    "state": " РАУНД {round}  Чиптер: {chips}  Сіздің қолыңыз: {hand}  Қазіргі ставкалар: Анте ${ante}, Блинд ${blind}, Ойын ${play}  Фаза: {phase}  Қол жетімді әрекеттер: {actions} "
+  },
+  "board": {
+    "round_start": " Раунд {round} басталды! Беттер: ANTE ${ante}, BLIND ${blind}. Сізде {chips} фишкалар қалды.",
+    "your_hand": " Сіздің қолыңыз: {hand}",
+    "flop_revealed": " ФЛОП ашылды: {cards}",
+    "river_revealed": " RIVER ашылды: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Ағымдағы кезең үшін жарамсыз іс-қимыл. Қол жетімді іс-қимылдар: {available}",
+    "message": " Амал жарамсыз! Қол жетімді іс-әрекеттер: {available}"
+  },
+  "action": {
+    "folded": "- Сіз бұзылдыңыз."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Dealer's hand: {cards}",
+    "community_cards": " Қоғамдық карталар: {cards}",
+    "player_best": " Ойыншының ең жақсы қолы: {name} ({cards})",
+    "dealer_best": " Дилердің ең жақсы қолы: {name} ({cards})",
+    "ante_lost_folded": " ANTE ставкасы жоғалды! - ${ante} (жұйылған)",
+    "blind_lost_folded": " БЛИНД ставкасы жоғалды! - ${blind} (жұйылған)",
+    "ante_won": "✅ БЕЙІНДЕГІ БЕЙІНДЕГІ БЕЙІНДЕ! +${amount}",
+    "ante_pushed": " ANTE ставкасы PUSHED! ${ante} қайтарылды",
+    "ante_lost": "❌ ANTE bet LOST! -${ante}",
+    "blind_won": "✅ БЛИНД ставкасы жеңді! +${amount}",
+    "blind_pushed": " БЛИНД ставкасы КӨТІРІЛДІ! ${blind} қайтарылды",
+    "blind_lost": "❌ BLIND bet LOST! -${blind}",
+    "play_won": "✅ PLAY bet WON! +${amount}",
+    "play_pushed": " PLAY ставкасы PUSHED! ${play} қайтарылды",
+    "play_lost": "❌ PLAY bet LOST! -${play}",
+    "net_gain": "🎉 Round {round} completed! Net gain: +${net}",
+    "net_loss": "💸 Round {round} completed! Net loss: ${net}",
+    "separator": "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+  },
+  "outcome": {
+    "game_over_win": " ОЙЫН АРТЫ! {max_turns} айналымдар аяқталды. Сізде ${chips} фишкалар бар - СІЗ ЖЕҢЕЙСІЗ!",
+    "game_over_lose": "Ойын аяқталды! Сізде фишкалар бітті. Дилер жеңді!",
+    "reward_win": "Ойыншы ${chips} фишкалармен {winner_rounds} раундты аяқтады",
+    "reward_lose": "Ойыншы раундта фишкаларын жоғалтты {round}",
+    "reward_win_max": "Ойыншы ${chips} фишкалармен {max_turns} раундты аяқтады"
+  },
+  "hand_names": {
+    "royal_flush": "Патшалық флеш",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Four of a Kind",
+    "full_house": "Толық үй",
+    "flush": "Flush",
+    "straight": "Тікелей",
+    "three_of_a_kind": "Three of a Kind",
+    "two_pair": "Екі жұп",
+    "one_pair": "Бір жұп",
+    "high_card": "Жоғары карта",
+    "unknown": "Бейтаныс қол"
+  }
+}

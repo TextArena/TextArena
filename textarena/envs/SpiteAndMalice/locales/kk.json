@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Қазіргі тақта: {board} Қол жетімді қимылдар: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Орталық үйірмелер --- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation} --- Ойыншының {player_id} пікірі --- ",
+    "payoff": "{observation}Payoff Pile (Top Card): {top_card}, Payoff Pile Length: {payoff_length}\n",
+    "hand": "{observation}Қол: {hand} ",
+    "discard": "{observation}Қалқымалы үйірмелер: {discard} ",
+    "empty": "Бос"
+  },
+  "game_message": {
+    "no_cards_left": "Енді карталар жоқ. Мыналардан карталарды ойнауға болатынын ұмытпаңыз: 1. Сіздің қолыңыз. 2. Сіздің төлемақы үйірмесінің ең жоғарғы картасы. 3. Сіздің тастап тастау үйірмесінің ең жоғарғы картасы."
+  },
+  "invalid_move": {
+    "wrong_format": "Жарамсыз қимыл форматы. Ойыншы {player_id} квадрат жақшадағы жарамды қимылмен жауап бермеді.",
+    "invalid_play": "Ойын жарамсыз. Ойыншы {player_id} орталық топта {card} ойнауға тырысты {index}.",
+    "discard_from_payoff": "Жарамсыз тастау. Ойыншы {player_id} төлем үйірмесінен картаны тастауға тырысты.",
+    "discard_not_in_hand": "Жарамсыз тастау. Ойыншы {player_id} қолындағы емес картаны тастауға тырысты.",
+    "wrong_move_type": "Жарамсыз қимыл түрі. Ойыншы {player_id} жарамды қимыл түрімен жауап бермеді."
+  },
+  "game_action": {
+    "you_drew": "Сіз карта тарттыңыз.",
+    "opponent_drew": "Ойыншы {player_id} карта тартты.",
+    "you_played": "Сіз ортадағы {card} топта ойнадыңыз {index}.",
+    "opponent_played": "Ойыншы {player_id} ортадағы {card} тақтада ойнады {index}.",
+    "you_discarded": "Сіз {card}ді тастап, {index}ді тастап тастадыңыз, бұл сіз олардың кезегін аяқтадыңыз дегенді білдіреді. Бұл кезек үшін сіздің басқа әрекеттеріңіз ескерілмейді. Ойыншы {next_player_id} келесі болады.",
+    "opponent_discarded": "Ойыншы {player_id} тастап тастады {card} тастап тастауға үйір {index}, бұл олардың кезегі аяқталғанын білдіреді. Ойыншы {player_id}-тің басқа әрекеттері осы кезек үшін қарастырылмайды. Ойыншы {next_player_id}, сіз келесі боласыз. Өз әрекетіңізді [action card center_index] форматында енгізіңіз."
+  },
+  "outcome": {
+    "payoff_cleared": "Ойыншы {current_player} өздерінің төлемдерін аяқтады! Ойыншы {current_player} жеңді!",
+    "deadlock_player_0": "Блок-сөз аяқталды! 0 ойыншы қалған {player_0_payoff} карталарымен 1-ші ойыншының {player_1_payoff} карталарына қарсы жеңіске жетті.",
+    "deadlock_player_1": "Блок-сөз аяқталды! 1-ші ойыншы қалған {player_1_payoff} карталарымен ойыншы 0-дің {player_0_payoff} карталарына қарсы жеңіске жетті.",
+    "deadlock_tie": "Бетке тұрып, теңдікке қол жеткізілді! Екі ойыншының {player_0_payoff} карталары қалды. Ойыншы {current_player} әдетте жеңіп шығады."
+  }
+}
