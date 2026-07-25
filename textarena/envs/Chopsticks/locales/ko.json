@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "당신은 채프스틱스의 플레이어 {player_id}입니다. 차례가 되면 다음 중 하나를 선택하세요:\n  + 공격:  '[attack M O]'  여기서 M=당신의 손(0 또는 1), O=상대방의 손(0 또는 1).\n    - 상대방의 손 개수는 당신의 손 개수만큼 증가하며, 5 이상이 되면 0으로 됩니다.\n  + 분배:   '[split L R]'  당신의 총 손가락 수를 L과 R로 재분배합니다 (L+R = 당신의 총 손가락 수).\n정확히 하나의 명령어로 답하세요."
+  },
+  "board": {
+    "current_board": "현재 보드:\n플레이어 0: {hands_0}\n플레이어 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "당신의 손 {my_idx}은 이미 죽었습니다.",
+    "opp_hand_dead": "상대방의 손 {opp_idx}은 이미 죽었습니다.",
+    "split_sum": "분배 합계는 {total}이어야 합니다.",
+    "split_no_change": "분배는 손가락 분포를 변경해야 합니다.",
+    "invalid_command": "잘못된 수입니다. '[attack M O]' 또는 '[split L R]'를 사용하세요."
+  },
+  "game_action": {
+    "attack": "P{player_id}가 P{opp_id}의 손 {opp_idx}을 공격합니다: {opp_val}에서 {new_val}로 변합니다.",
+    "split": "P{player_id}가 [{L}, {R}]로 분배합니다."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "상대방의 두 손이 모두 죽었습니다.",
+    "draw": "턴 제한이 도달했습니다."
+  }
+}

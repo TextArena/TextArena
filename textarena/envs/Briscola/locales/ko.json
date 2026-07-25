@@ -1,0 +1,57 @@
+{
+  "_comment": "브리스콜라 지역화 파일. 키(왼쪽)는 번역하지 마세요. 값(오른쪽)만 번역하세요. 모든 {placeholder}를 그대로 유지하세요. 행동 토큰 '[play X]', 카드 라벨(A, 2..7, J, Q, K), 무늬 기호(♠♥♦♣) 및 숫자 카운트/점수/스코어는 번역하지 마세요. '(TRUMP)' 마커 텍스트는 로컬라이즈할 수 있습니다.",
+  "_slots": {
+    "{player_id}": "플레이어 번호, 예: 0 또는 1",
+    "{trump_suit}": "트럼프 무늬 기호 (♠♥♦♣) - 번역하지 마세요",
+    "{trump_card}": "트럼프 카드 라벨, 예: '7♠' - 번역하지 마세요",
+    "{card}": "카드 라벨, 예: 'A♥' - 번역하지 마세요",
+    "{trump_mark}": "미리 렌더링된 '(TRUMP)' 마커, 또는 빈 문자열",
+    "{max_pos}": "플레이어의 핸드에서 가장 높은 합법적인 카드 위치",
+    "{count}": "플레이어가 가지고 있는 카드 수",
+    "{pos}": "핸드에서 카드의 위치 번호",
+    "{points}": "점수 (카드 값 또는 누적 점수)",
+    "{hand}": "미리 렌더링된, 여러 줄의 핸드 목록",
+    "{trick}": "미리 렌더링된 현재 트릭 목록",
+    "{scores}": "미리 렌더링된 점수 줄, 또는 최종 플레이어별 점수 블록",
+    "{trump_info}": "미리 렌더링된 트럼프 무늬 / 덱 카운트 줄",
+    "{winner}": "트릭 또는 게임을 이긴 플레이어 번호",
+    "{tricks}": "플레이어가 이긴 트릭 수",
+    "{deck_count}": "덱에 남은 카드 수"
+  },
+  "game": {
+    "start": "브리스콜라 게임 시작! 트럼프 무늬: {trump_suit} (트럼프 카드: {trump_card})"
+  },
+  "prompt": {
+    "intro": "브리스콜라를 플레이 중입니다 - 플레이어 {player_id}.\n목표: 트릭을 이기고 가장 많은 점수를 얻는 것 (덱의 총 120점).\n카드 점수: A=11, 3=10, K=4, Q=3, J=2, 나머지=0\n카드 파워: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\n트럼프 카드는 파워와 상관없이 비트럼프 카드를 이깁니다.\n\n행동: '[play X]' 여기서 X는 핸드에서 카드의 위치 (1-{max_pos})\n"
+  },
+  "hand": {
+    "none": "카드가 없습니다",
+    "empty": "핸드에 카드가 없습니다",
+    "header": "당신의 핸드:",
+    "card_line": "  {pos}. {card} [{points} 점]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "아직 이 트릭에 카드가 없습니다.",
+    "header": "현재 트릭:",
+    "line": "  플레이어 {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "플레이어 {player_id}: {points} 점",
+    "trump_info": "트럼프 무늬: {trump_suit}",
+    "trump_info_deck": "트럼프 무늬: {trump_suit} | 덱에 남은 카드: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\n점수: {scores}\n{trump_info}\n\n카드를 사용하여 [play X]를 플레이하세요"
+  },
+  "invalid_move": {
+    "wrong_format": "카드 위치 (1, 2, 3 등)를 사용하여 [play X]를 사용하세요",
+    "out_of_range": "잘못된 카드 위치. 당신은 {count}장의 카드를 가지고 있습니다 (1-{count})"
+  },
+  "action": {
+    "played": "플레이어 {player_id}가 {card}를 플레이했습니다",
+    "trick_win": "플레이어 {winner}가 {card}로 트릭을 이기고 {points}점을 얻었습니다!"
+  },
+  "outcome": {
+    "head": "게임 종료! 플레이어 {winner}가 {points}점으로 이겼습니다!\n\n최종 점수:\n{scores}",
+    "player_line": "플레이어 {player_id}: {points}점 ({tricks} 트릭)\n"
+  }
+}

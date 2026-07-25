@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "당신은 GameOfPureStrategy의 플레이어 {player_id}입니다.\n- 당신은 A-K의 13장의 카드를 가지고 있습니다. 각 카드는 한 번만 사용할 수 있습니다.\n- 각 라운드마다 상금 카드가 공개됩니다. 예를 들어 '[Q]', '[10]', '[2]'와 같은 괄호 안의 토큰을 포함하는 것을 작성하여 정확히 한 장의 카드를 냅니다.\n- 높은 카드가 상금을 얻습니다 (플러스 이월). 무승부일 경우 상금은 다음 라운드의 포트로 이동됩니다.\n- 13라운드 후 가장 높은 총점으로 승리합니다."
+  },
+  "round": {
+    "announce": "### 라운드 {round}/13 - 상금: {prize} (가치 {worth})"
+  },
+  "board": {
+    "hand": "남은 카드: {hand}"
+  },
+  "invalid_move": {
+    "wrong_format": "행동은 정확히 하나의 괄호 안의 카드 토큰을 포함해야 합니다.",
+    "card_not_held": "당신은 더 이상 그 카드를 가지고 있지 않습니다."
+  },
+  "message": {
+    "bids": "입찰: P0 {card0} vs P1 {card1} - ",
+    "p0_wins": "{observation}플레이어 0이 {pot_value}를 얻습니다.",
+    "p1_wins": "{observation}플레이어 1이 {pot_value}를 얻습니다.",
+    "tie": "{observation}무승부 -> 포트는 이제 {carry_pot}입니다.",
+    "scores": "점수 -> P0:{score0}  P1:{score1}"
+  },
+  "outcome": {
+    "p0_wins": "P0 {s0} vs P1 {s1}",
+    "p1_wins": "P1 {s1} vs P0 {s0}",
+    "draw": "두 플레이어 모두 {s0}점을 얻었습니다."
+  }
+}

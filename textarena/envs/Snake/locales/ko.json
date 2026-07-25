@@ -1,0 +1,31 @@
+{
+  "_comment": "스네이크 지역화 파일. 키(왼쪽)는 번역하지 마세요. 값(오른쪽)만 번역하세요. 모든 {placeholder}는 그대로 유지하세요. 플레이어가 입력하는 방향 토큰([up], [down], [left], [right], w, s, a, d)이나 {board}에 렌더링된 ASCII 보드는 번역하지 마세요.",
+  "_slots": {
+    "{num_players}": "매치에 참여하는 플레이어 수",
+    "{width}": "보드의 너비(셀 단위)",
+    "{height}": "보드의 높이(셀 단위)",
+    "{max_turns}": "매치의 턴 제한",
+    "{player_id}": "플레이어 번호(0부터 시작)",
+    "{board}": "렌더링된 ASCII 그리드; 중립적으로 유지, 문자 번역 금지",
+    "{reason}": "게임 종료 이유 문구",
+    "{groups}": "중립적인 순위 데이터(가장 나쁜 순부터 가장 좋은 순까지의 플레이어-id 그룹 목록); 번역 금지"
+  },
+  "player_prompt": {
+    "intro": "{num_players}명 플레이어 스네이크, {width}×{height} 그리드에서 진행됩니다.\n당신은 뱀 {player_id}를 조종합니다. 유효한 이동: '[up]'/'[down]'/'[left]'/'[right]' (또는 w/s/a/d).\n목표: 가장 오래 생존하거나 가장 긴 뱀이 되어 가장 높은 점수를 얻는 것(턴 제한 {max_turns} 턴)."
+  },
+  "board": {
+    "current": "현재 보드:\n{board}",
+    "after_moves": "현재 보드 상태:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "뱀 {player_id}가 유효하지 않은 이동으로 사망했습니다."
+  },
+  "outcome": {
+    "survived_win": "플레이어 {player_id}가 생존; 모든 다른 플레이어가 사망했습니다.",
+    "all_dead_simul": "모든 뱀이 동시에 사망했습니다.",
+    "outlived": "플레이어가 모든 다른 플레이어보다 오래 생존했습니다.",
+    "all_dead": "모든 뱀이 사망했습니다.",
+    "turn_limit": "턴 제한 도달 - 가장 높은 점수가 승리합니다.",
+    "ranking": "{reason} 최종 순위 그룹 (가장 나쁜→가장 좋은): {groups}"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "라이트 아웃에 오신 것을 환영합니다! {size}x{size} 크기의 라이트 그리드가 있습니다.\n당신의 목표는 모든 라이트를 끄는 것입니다(꺼진 라이트는 '.'로 표시됨).\n라이트를 누르면 해당 라이트와 그 주변 라이트(위/아래/좌/우)가 전환됩니다.\n라이트를 누르려면 [row col]을 입력하세요(0부터 시작하므로 유효 범위는 0-{max_index}입니다).\n퍼즐을 해결하기 위해 {max_turns}번까지 움직일 수 있습니다.\n전설: 'O' = 라이트 켜짐, '.' = 라이트 꺼짐"
+  },
+  "board": {
+    "current_state": "현재 그리드 상태 (움직임 {moves_made}, {moves_left}번 남음, {completion}% 완료):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "액션은 [row col] 형식이어야 합니다. row와 col은 0부터 {max_index}까지의 정수여야 합니다.",
+    "out_of_range": "좌표는 0과 {max_index} 사이여야 합니다. 입력하신 좌표: [{row},{col}]."
+  },
+  "outcome": {
+    "win": "축하합니다! {moves_used}번의 움직임으로 퍼즐을 해결했습니다!",
+    "loss": "게임 오버! {max_turns}번의 움직임을 모두 사용했지만 퍼즐을 해결하지 못했습니다. 최종 완료도: {completion}%\n최종 상태:\n{grid}"
+  }
+}
