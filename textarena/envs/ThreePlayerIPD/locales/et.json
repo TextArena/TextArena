@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Oled mängija {player_id} 3-mängija Iterated Prisoner's Dilemma mängus. Mäng kestab {num_rounds} vooru.\nVooru struktuur:\n• {conv_rounds} vaba vestluse käiku\n• 1 otsuse käik - esita üks žeton vastase kohta: '[<opp-id> cooperate]' või '[<opp-id> defect]' (nt '[1 defect] [2 cooperate]'; vaikimisi on 'koostöö'). \nPaarikaupa tasumise maatriks (rakendatud igale järjestamata paarile):\n  - Mõlemad koostööd  ->  {reward}\n  - Mõlemad reetmine     ->  {punishment}\n  - Sa reedad, nemad koostööd -> {temptation}\n  - Sa koostööd, nemad reetavad -> {sucker}\nMängija(d) kõrgeima skooriga kõigi voorude lõpus võidab."
+  },
+  "round": {
+    "start": "─── Alustame vooru {round} ───\tSaad vabalt vestelda järgmised {conv_rounds} voorud.",
+    "chat_finished": "Vestlus vooru {round} jaoks on lõppenud. Esita oma otsused, üks žeton vastase kohta: `[pid cooperate]` või `[pid defect]`."
+  },
+  "results": {
+    "header": "### Vooru {round} tulemused:",
+    "pair_line": "{observation}\n\t Mängija {i} vs Mängija {j} valisid vastavalt {choice_i} ja {choice_j} (Mängija {i} teenis {gain_i}, Mängija {j} teenis {gain_j})",
+    "scores_open": "{observation}\n-> Praegused skoorid: ",
+    "score_first": "{observation}Mängija {player_id} ({score})",
+    "score_next": "{observation}; Mängija {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Lõplikud skoorid: {scores}.  Reitingu grupid (halvim→parim): {groups}"
+  }
+}

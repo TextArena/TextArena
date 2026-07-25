@@ -1,0 +1,32 @@
+{
+  "_comment": "KolmeMängijaTicTacToe keelefail. ÄRGE tõlgige võtmeid (vasak pool). Tõlgige ainult väärtused (parem pool).",
+  "_slots": {
+    "{player_id}": "Mängija number, näiteks 0, 1 või 2",
+    "{symbol}": "Mängija märk, kas A, B või C",
+    "{cell}": "Laua ruudu number",
+    "{max_cell}": "Kõrgeim kehtiv ruudu number (laua suurus^2 - 1)",
+    "{row}": "Laua rea indeks, kuhu märk on paigutatud",
+    "{col}": "Laua veeru indeks, kuhu märk on paigutatud",
+    "{board}": "Renderdatud ASCII laud (ära tõlgi)",
+    "{moves}": "Komaga eraldatud loetelu saadaolevatest käigutest, näiteks '[4]' (ära tõlgi)"
+  },
+  "player_prompt": {
+    "intro": "Oled mängija {player_id} Kolme-Mängija Tic Tac Toe mängus.\nSinu sümbol on '{symbol}'.\nTeete kordamööda oma sümboli 5x5 lauale, et moodustada nelja järjestikust sümbolit.\nRead võivad olla horisontaalsed, vertikaalsed või diagonaalsed.\nEsita oma käik kasutades vormingut '[4]', et märgistada ruut 4."
+  },
+  "board": {
+    "current_board": "Praegune laud:\n\n{board}\n\nSaadaolevad käigud: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Vigane käigu vorming. Kasuta '[ruut]', kus ruut on 0-{max_cell}.",
+    "out_of_range": "Vigane ruudu number: {cell}. Peab olema vahemikus 0 ja {max_cell}.",
+    "already_occupied": "Ruut {cell} on juba hõivatud.",
+    "made_invalid": "Mängija {player_id} tegi vigase käigu"
+  },
+  "game_action": {
+    "placed": "Mängija {player_id} paigutas oma sümboli ({symbol}) väljale ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Mängija {player_id} ({symbol}) võitis!",
+    "draw": "Mäng on viik!"
+  }
+}

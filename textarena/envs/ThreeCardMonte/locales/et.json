@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte keelefail. ÄRGE tõlgige võtmeid (vasak pool). Tõlgige ainult väärtused (parem pool).",
+  "_slots": {
+    "{line}": "Renditud rida karikatest",
+    "{step}": "Praegune segamise samm",
+    "{steps}": "Segamise samme kokku",
+    "{i}": "Esimene karika indeks, mis on vahetusel",
+    "{j}": "Teine karika indeks, mis on vahetusel",
+    "{prompt}": "Lokaliseeritud küsimuse fragment, mis lisatakse karikate järele",
+    "{max_index}": "Kõrgeim kehtiv karika indeks, st karikate arv minus 1",
+    "{ball_pos}": "Karika indeks, mille all on pall"
+  },
+  "player_prompt": {
+    "intro": "Jälgi peidetud palli 'X', kui karikad segatakse.\nPärast segamist arva selle asukoht käsuga `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Pall algab: {line}",
+    "shuffle": "Segamine {step}/{steps}: vahetati karikad {i} ja {j}.",
+    "cups": "Karikad: {line}  {prompt}",
+    "guess_now": "(Arva NÜÜD!)",
+    "reveal": "(Ilmutus: pall on karika {ball_pos} all)"
+  },
+  "invalid_move": {
+    "wrong_format": "Vale tegevus. Kasuta `[k]`.",
+    "out_of_range": "Indeks väljaspool vahemikku 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Õige! Leidsid palli.",
+    "lose": "Vale — pall oli karika {ball_pos} all."
+  }
+}

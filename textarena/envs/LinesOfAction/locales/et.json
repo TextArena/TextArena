@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction keelefail. ÄRGE tõlgige võtmeid (vasak pool). Tõlgige ainult väärtused (parem pool). Ärge tõlgige laua koordinaate (a-h, 1-8), tükilehti (O, X), käiguformaadi sõnet või {board} ASCII võrku.",
+  "_slots": {
+    "{player_id}": "Mängija number, kas 0 või 1",
+    "{side}": "Mängija tükileht, kas O või X",
+    "{other}": "Vastase tükileht, kas O või X",
+    "{board}": "Laua ASCII kujutis; jätke muutmata",
+    "{coord}": "Laua koordinaat, näiteks b1 või a3",
+    "{from}": "Käigu lähtekoordinaat, näiteks b1",
+    "{to}": "Käigu sihtkoordinaat, näiteks b3"
+  },
+  "player_prompt": {
+    "intro": "Oled mängija {player_id} LinesOfAction mängus.\nSinu tükid on '{side}', vastase tükid on '{other}'.\nKäigu formaat: `[b1b3]` (lähtekoordinaat sihtkoordinaat). Seaduslik käik liigub horisontaalselt, vertikaalselt või diagonaalselt ruutude arvu võrra, mis on võrdne sellel joonel olevate tükkide (ükskõik mis värvi) arvuga. Sa võid hüpata üle oma tükkide, kuid mitte vastase tükkide; maandumine vastase tükile vallutab selle. Võida, kui kõik sinu tükid on 8-naabri ühendatud."
+  },
+  "board": {
+    "current_board": "Laud:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formaat peab olema e2e4 (lähtekoordinaat, sihtkoordinaat).",
+    "no_piece": "Pole {side} tükki {coord} koordinaadil.",
+    "identical": "Lähtekoordinaat ja sihtkoordinaat on identsed.",
+    "not_straight_or_diagonal": "Käik peab olema sirge või diagonaalne.",
+    "wrong_distance": "Peab liikuma kaugusega, mis on võrdne tükkide arvuga joonel.",
+    "enemy_blocks": "Vastase tükk blokeerib teed.",
+    "destination_own": "Sihtkoordinaat on hõivatud oma tükiga."
+  },
+  "game_action": {
+    "moved": "Mängija {player_id} liikus {from} -> {to}",
+    "captured_suffix": "Mängija {player_id} liikus {from} -> {to} vallutades vastase."
+  },
+  "outcome": {
+    "win": "Kõik tükid on ühendatud.",
+    "draw_no_capture": "60 käiku ilma vallutamata.",
+    "draw_repetition": "Positsioon kordub kolm korda."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Mängid Countdown numbrite mängu!\nEesmärk: Kombineeri numbreid kasutades +, -, *, /, et jõuda sihtmärgini.\nTegevuse vorming: [i j op], kus i, j on indeksid ja op on operatsioon.\nNäide: [0 2 *] korrutab numbri indeksil 0 numbri indeksil 2.\nJagamine peab tulema ainult täisarvudena."
+  },
+  "board": {
+    "header": "SIHTMÄRK: {target}\n\nSaadaolevad numbrid:\n{numbers}",
+    "best": "{observation}\n\nPraegu parim: {best_value} (kaugus: {distance})\nParim avaldis: {best_expression}",
+    "history": "{observation}\n\nKäigu ajalugu:\n{moves}",
+    "progress": "{observation}\nPraegune edenemise skoor: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Vigane tegevuse vorming. Kasuta `[i j op]`, kus i, j on indeksid ja op on +, -, *, /",
+    "invalid_indices": "Vigased indeksid. Peavad olema erinevad ja vahemikus 0-{max_index}",
+    "invalid_operation": "Vigane operatsioon (jagamine nulliga või mittetäisarv tulemus)"
+  },
+  "outcome": {
+    "win": "Täiuslik! Leidsid täpse sihtmärgi: {target}",
+    "no_moves": "Pole enam käike. Parim tulemus: {best_value} (sihtmärk: {target})",
+    "turn_limit": "Käigu limiit on täis. Parim tulemus: {best_value} (sihtmärk: {target})"
+  }
+}

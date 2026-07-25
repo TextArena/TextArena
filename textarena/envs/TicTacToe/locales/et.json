@@ -1,0 +1,27 @@
+{
+  "_comment": "TicTacToe keelefail. ÄRGE tõlgige võtmeid (vasak pool). Tõlgige ainult väärtused (parem pool).",
+  "_slots": {
+    "{player_id}": "Mängija number, näiteks 0 või 1",
+    "{symbol}": "Mängija märk, kas X või O",
+    "{opponent_symbol}": "Vastase märk, kas X või O",
+    "{cell}": "Laua ruudu number vahemikus 0-8"
+  },
+  "player_prompt": {
+    "intro": "Oled mängija {player_id} Tic Tac Toe mängus.\nSinu eesmärk on võita kolm järjestikust ruutu (horisontaalselt, vertikaalselt või diagonaalselt) laual.\nOma käigu ajal peaksid valima ruudu numbri (0-8), kuhu soovid oma märgi panna järgmisena.\nNäiteks, '[4]' paneb sinu märgi laua keskel asuvasse ruutu.\nMängijana {player_id} oled '{symbol}', kui vastane on '{opponent_symbol}'."
+  },
+  "board": {
+    "current_board": "Praegune laud:\n\n{board}\n\nSaadaolevad käigud: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Esitatud käik ei järgi õiget vormingut.",
+    "out_of_range": "{cell} ei ole kehtiv ruut. Peab olema vahemikus 0-8.",
+    "already_occupied": "Ruut {cell} on juba hõivatud."
+  },
+  "game_action": {
+    "placed": "Mängija {player_id} paigutas oma sümboli ({symbol}) ruutu {cell}."
+  },
+  "outcome": {
+    "win": "Mängija {player_id} on võitnud!",
+    "draw": "Mäng on viik!"
+  }
+}
