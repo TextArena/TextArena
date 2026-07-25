@@ -110,7 +110,7 @@ If you have any questions at all, feel free to reach out on discord. The below i
 
 ### Low-resource community localizations
 
-Beyond the human-reviewed languages, TextArena includes **30 additional low-resource UI localizations** produced with open machine-translation models and checked by an automatic, *reader-free* verifier: each string is translated, independently back-translated by two other models, and an LLM judges faithfulness against the English source. **No claim is made of native-review quality.** Every back-translation-confirmed divergence is **reverted to English**, so no *known*-wrong string ships; the counts below are how many leaves were reverted (a proxy for residual risk). Each language carries an explicit **confidence tier**. At runtime, `textarena.utils.locales.language_confidence.warn_if_flagged(lang)` emits a `UserWarning` for any non-certified locale; the machine-readable source is [`_trackb_confidence.json`](textarena/utils/locales/_trackb_confidence.json).
+Beyond the human-reviewed languages, TextArena includes **31 additional low-resource UI localizations** produced with open machine-translation models and checked by an automatic, *reader-free* verifier: each string is translated, independently back-translated by two other models, and an LLM judges faithfulness against the English source. **No claim is made of native-review quality.** Every back-translation-confirmed divergence is **reverted to English**, so no *known*-wrong string ships; the counts below are how many leaves were reverted (a proxy for residual risk). Each language carries an explicit **confidence tier**. At runtime, `textarena.utils.locales.language_confidence.warn_if_flagged(lang)` emits a `UserWarning` for any non-certified locale; the machine-readable source is [`_trackb_confidence.json`](textarena/utils/locales/_trackb_confidence.json).
 
 **Certified-flagged** (4) — verified; a few games flagged:
 
@@ -121,7 +121,7 @@ Beyond the human-reviewed languages, TextArena includes **30 additional low-reso
 | Gujarati (`gu`) | CERTIFIED_FLAGGED | 22 | Alquerque, Breakthrough, Briscola, Crusade +14 more |
 | Belarusian (`be`) | CERTIFIED_FLAGGED | 26 | Battleship, Breakthrough, Briscola, Chopsticks +16 more |
 
-> ⚠️ **Experimental** (26) — structurally valid and playable, but the prose is **not certified** and likely contains further errors the verifier missed. Use for coverage/research, not as a reference translation:
+> ⚠️ **Experimental** (27) — structurally valid and playable, but the prose is **not certified** and likely contains further errors the verifier missed. Use for coverage/research, not as a reference translation:
 
 | Language | Tier | Confirmed (reverted) | Flagged games |
 |---|---|---|---|
@@ -143,6 +143,7 @@ Beyond the human-reviewed languages, TextArena includes **30 additional low-reso
 | Odia (`or`) | EXPERIMENTAL | 70 | Alquerque, Briscola, Checkers, Chess +36 more |
 | Burmese (`my`) | EXPERIMENTAL | 70 | Alquerque, Briscola, ColonelBlotto, Countdown +30 more |
 | Somali (`so`) | EXPERIMENTAL | 71 | Alquerque, Bandit, Battleship, Breakthrough +37 more |
+| Amharic (`am`) | EXPERIMENTAL | 71 | Alquerque, Blackjack, Breakthrough, Briscola +32 more |
 | Malagasy (`mg`) | EXPERIMENTAL | 80 | Bandit, Blackjack, Breakthrough, Briscola +42 more |
 | Kyrgyz (`ky`) | EXPERIMENTAL | 82 | Alquerque, Battleship, Blackjack, Breakthrough +44 more |
 | Georgian (`ka`) | EXPERIMENTAL | 101 | Alquerque, Bandit, Battleship, Breakthrough +41 more |
