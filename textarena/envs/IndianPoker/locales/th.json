@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "คุณคือผู้เล่นหมายเลข {player_id} ในเกม Indian Poker.\n- สำรับไพ่ 52 ใบ; คุณเห็นเฉพาะไพ่ของคู่แข่ง.\n- วางเดิมพัน {ante} ชิปในแต่ละรอบ รวม {max_rounds} รอบ.\n- การเคลื่อนไหวที่ถูกต้อง: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X คือจำนวนเต็มบวกที่ไม่เกินจำนวนชิปของคุณ)\n- ไพ่ที่ซ่อนอยู่สูงสุดจะชนะกองกลางเมื่อเปิดไพ่.\n"
+  },
+  "round": {
+    "announce": "### รอบ {current_round}/{max_rounds}\nไพ่ของคู่แข่งคือ: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "ต้องระบุการกระทำในวงเล็บเหลี่ยมเพียงหนึ่งครั้ง เช่น '[check]', '[bet 2]', '[call]', '[raise 3]', หรือ '[fold]'.",
+    "cannot_check": "ไม่สามารถ [check] ได้ - คุณกำลังเผชิญกับการเดิมพัน.",
+    "amount_min": "จำนวนการเดิมพัน / เพิ่มเดิมพันต้อง ≥ 1.",
+    "cannot_bet": "ไม่สามารถ [bet] ได้ - ต้อง [call] / [raise] / [fold].",
+    "nothing_to_call": "ไม่มีการเดิมพันให้เรียก; คุณอาจ [check] แทน.",
+    "no_bet_to_raise": "ใช้ [bet X] เพื่อเปิด; ไม่มีการเดิมพันให้เพิ่ม.",
+    "insufficient": "ชิปไม่เพียงพอสำหรับการกระทำนั้น."
+  },
+  "game_action": {
+    "action": "ผู้เล่น {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "การเคลื่อนไหวที่สามารถทำได้: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  กองกลาง {pot} → ผู้เล่น {winner}. (จำนวนชิป P0:{p0}, P1:{p1})",
+    "folded": "ผู้เล่น {player_id} ยอมแพ้.",
+    "showdown_win": "เปิดไพ่: {card_win} ชนะ {card_lose}.",
+    "showdown_tie": "เปิดไพ่เสมอ: ทั้งสองฝ่าย {card}. กองกลางแบ่งกัน - แต่ละฝ่ายได้รับ {split}."
+  },
+  "outcome": {
+    "p0_wins": "ผู้เล่น 0 ชนะ ({bank0} > {bank1})",
+    "p1_wins": "ผู้เล่น 1 ชนะ ({bank1} > {bank0})",
+    "draw": "จำนวนชิปเท่ากันหลังจากทุกรอบ"
+  }
+}

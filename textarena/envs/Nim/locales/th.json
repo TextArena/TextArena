@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "คุณคือผู้เล่นหมายเลข {player_id} ในเกม Nim.\nเป้าหมายของคุณคือการหยิบวัตถุชิ้นสุดท้าย.\nในแต่ละรอบ ให้เลือกวัตถุจากกองใดกองหนึ่งและหยิบวัตถุหนึ่งชิ้นหรือมากกว่าออกจากกองนั้น.\nใช้รูปแบบ '[pile quantity]' โดยที่ pile คือดัชนีของกอง และ quantity คือจำนวนวัตถุที่ต้องการหยิบ.\nตัวอย่างเช่น '[0 3]' หมายความว่าหยิบวัตถุ 3 ชิ้นจากกอง 0."
+  },
+  "state": {
+    "current_pile": "กองปัจจุบัน:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "ไม่พบรูปแบบการเคลื่อนไหวที่ถูกต้อง ใช้ '[pile quantity]'.",
+    "correct_format_wrong_fields": "ผู้เล่น {player_id}, การกระทำไม่ถูกต้อง คอลัมน์ {col} อยู่นอกขอบเขต.",
+    "out_of_range": "ดัชนีกอง {pile_index} อยู่นอกขอบเขต.",
+    "non_positive": "ต้องหยิบวัตถุอย่างน้อย 1 ชิ้น.",
+    "exceeds_pile": "ไม่สามารถหยิบวัตถุ {quantity} ชิ้นจากกอง {pile_index} (เหลืออยู่ {pile_count} ชิ้น)."
+  },
+  "observation": {
+    "removed_from_piles": "ผู้เล่น {player_id} ได้เล่น [{pile_index} {quantity}] โดยหยิบวัตถุ {quantity} ชิ้นจากกอง {pile_index}."
+  },
+  "outcome": {
+    "win": "ผู้เล่น {player_id} หยิบวัตถุชิ้นสุดท้าย!"
+  }
+}
