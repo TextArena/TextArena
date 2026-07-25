@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Milalao Golf ianao - Mpilalao {player_id}. Tanjona: Mahazo isa ambany indrindra amin'ity fihodinana tokana ity. Raha mitovy ny sandan'ny tsanganana dia miampy 0. Sandan'ny karatra: A = 1, 2-10 = sandan'ny tarehy, J / Q = 10, K = 0 Hetsika (mampiasa fononteny marina): - '[draw] ' - Misintona avy amin'ny tokotanin-tsambo - '[take]' - Raiso avy amin'ny antontam-bato - '[swap X Y] ' - Manakalo karatra nalaina miaraka amin'ny toerana X (laharana) Y (tsanganana) - '[discard] ' - Ario ny karatra nalaina "
+  },
+  "board": {
+    "drew": "Nosoratanareo: {card} Ankehitriny dia tsy maintsy [swap X Y] na [discard] izany.",
+    "took": "Noraisinao: {card} avy amin'ny antontam-pako Tsy maintsy [swap X Y] miaraka aminy ianao (tsy afaka manipy).",
+    "peeked": "Nijery ny toerana ({row},{col}) ianao: {card}",
+    "turn_view": "Your hand:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Tsy misy"
+  },
+  "options": {
+    "final_turns": "Fihodinana farany! Ny safidinao: [draw], [take], [peek X Y]",
+    "draw": "Ny safidinao: [draw], [take]",
+    "must_swap": "Tsy maintsy: [swap X Y] (tsy afaka manilika karatra avy amin'ny antontam-pamonoana)",
+    "swap_or_discard": "Tsy maintsy: [swap X Y] na [discard]"
+  },
+  "hand": {
+    "no_cards": "Tsy misy karatra",
+    "header": "Kol: 1 2 3",
+    "row": "Andalana {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Mpilalao {pid} nifanakalo {new} tamin'ny {old} teo amin'ny toerana ({row},{col})",
+    "discarded": "Mpilalao {pid} voaroaka {card}"
+  },
+  "message": {
+    "deck_empty": "Tsy misy na inona na inona intsony ao amin'ny tokotanin-tsambo!",
+    "knocked": "Mpilalao {pid} voadona! Samy mahazo fihodinana iray hafa ny mpilalao hafa.",
+    "final_round": "Mpilalao {pid} {reason}! Samy mahazo fihodinana iray fanampiny ny mpilalao hafa."
+  },
+  "reason": {
+    "all_revealed": "efa hita daholo ve ny karatra rehetra"
+  },
+  "invalid": {
+    "wrong_action": "Ampiasao ny hetsika iray ao anaty fononteny: [draw], [take], [swap X Y], [discard], [knock], na [peek X Y]",
+    "discard_empty": "Tsy misy intsony ny zavatra rehetra!",
+    "must_draw_first": "Tsy maintsy aloha ianao [draw], [take], [knock], na [peek X Y]",
+    "cannot_discard_taken": "Tsy afaka manilika karatra nalaina tao amin'ny antontam-bato tsy azo ampiasaina ianao. Tsy maintsy manakalo izany ianao.",
+    "have_drawn_card": "Manana karatra voasarika ianao. Tsy maintsy [swap X Y] na [discard] izany.",
+    "need_drawn_swap": "Mila karatra voasarika ianao mba hifanakalozana.",
+    "need_drawn_discard": "Mila karatra voasarika ianao mba hahafahanao manilika azy.",
+    "out_of_bounds": "Toerana ivelan'ny faritry ny toerana. Ampiasao ny laharana 1-{max_row}, ny tsanganana 1-{max_col}",
+    "knock_with_card": "Tsy afaka mandondona amin'ny karatra voasarika ianao.",
+    "already_knocked": "Efa nisy nandondona io fihodinana io.",
+    "already_revealed": "Efa hita sahady io karatra io!"
+  },
+  "summary": {
+    "full": "Game Over! Player {winner} wins with a score of {score} points!\n\nFinal Scores:\n{scores}",
+    "line": "Mpilalao {pid}: {score} isa "
+  },
+  "board_str": {
+    "title": "=== Lalao GOLF ===",
+    "discard": "Discard pile: {card}",
+    "knocked": "Nampiditra ny mpilalao {pid}!",
+    "player_header": "Mpilalao {pid} (Score: {score}):"
+  }
+}

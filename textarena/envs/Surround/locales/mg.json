@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}- Mpilalao manodidina eo amin'ny {width}x{height} grids. Ianao no mpilalao {player_id}. Mihetsika manan-kery: '[up]' '[down]' '[left]' '[right]' na w / s / a / d. Tanjona: mihoatra ny olon-drehetra. Ny lalana dia mahafaty; ny rindrina mamono; ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lohan'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny lo'ny"
+  },
+  "board": {
+    "current": "Birao ankehitriny: {board}",
+    "after_moves": "Birao taorian'ny hetsika nifanindry: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Maty noho ny hetsika tsy mety ny mpilalao {player_id}."
+  },
+  "outcome": {
+    "survived_win": "Ny mpilalao {player_id} no tafavoaka velona; ny hafa rehetra kosa nianjera.",
+    "all_crashed": "Nianjera tamin'ny fotoana iray daholo ny mpilalao rehetra.",
+    "outlived": "Player outlived all others.",
+    "all_dead": "Maty avokoa ny mpilalao rehetra.",
+    "turn_limit": "Tapitra ny fetran'ny fihodinana - mandresy izay velona ela indrindra.",
+    "ranking": "{reason} Vondrona farany (tsara indrindra→ratsy indrindra): {groups}"
+  }
+}

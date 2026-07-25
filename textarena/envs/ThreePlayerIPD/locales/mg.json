@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a 3-player Iterated Prisoner's Dilemma. The match lasts {num_rounds} rounds.\nRound structure:\n• {conv_rounds} free-chat turns\n• 1 decision turn - submit one token per opponent: '[<opp-id> cooperate]' or '[<opp-id> defect]' (i.e. '[1 defect] [2 cooperate]'; the default is 'cooperate'). \nPair-wise payoff matrix (applied to each unordered pair):\n  - Both cooperate  ->  {reward}\n  - Both defect     ->  {punishment}\n  - You defect, they cooperate -> {temptation}\n  - You cooperate, they defect -> {sucker}\nThe player(s) with the highest score at the end of all rounds wins."
+  },
+  "round": {
+    "start": "─── Manomboka ny fihodinana {round} ─── Afaka miresaka malalaka ianao mandritra ny fihodinana {conv_rounds} manaraka.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Fihodinana {round} - Valin'ny:",
+    "pair_line": "{observation} Mpilalao {i} vs Mpilalao {j} nifidy {choice_i} sy {choice_j} tsirairay avy (Mpilalao {i} nahazo {gain_i}, Mpilalao {j} nahazo {gain_j})",
+    "scores_open": "{observation} -> Ny isa ankehitriny: ",
+    "score_first": "{observation}Mpilalao {player_id} ({score})",
+    "score_next": "{observation}; Mpilalao {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Final scores: {scores}.  Ranking groups (worst→best): {groups}"
+  }
+}

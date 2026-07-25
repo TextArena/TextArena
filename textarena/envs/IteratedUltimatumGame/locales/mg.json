@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Ianao no mpilalao {player_id}, milalao {num_rounds} fihodinana amin'ny Lalao Ultimatum miverimberina. Manana ${pool} ianao mba hizara ity fihodinana ity eo aminao sy ny mpilalao {other_id}. Mpanao tolo-kevitra: - Manolora tolotra: [Offer: $X] (0 <= X <= pool) - Raha ekena → Mahazo $ ((pool - X), ny mpilalao hafa mahazo $ X - Raha nolavina → Samy mahazo $ 0 - Ohatra: [Offer: $3] na 'Heveriko fa rariny izany. [Offer: $5]' Mpamaly: - Manapaha hevitra momba ny tolotra miaraka amin'ny [Accept] na [Reject] - Ohatra: 'Toa tsy rariny izany. [Accept]' [Reject]' "
+  },
+  "round": {
+    "begins": "--- Manomboka ny fihodinana {round_number}! --- Ny mpilalao {proposer_id} no manolotra, ny mpilalao {responder_id} no mamaly.",
+    "offer": "Fihodinana {round_number}: Ny mpilalao {proposer_id} dia manolotra ${offer} ho an'ny mpilalao {responder_id} (mihazona ${keep}).",
+    "accepted": "Mpilalao {responder_id} ekena! Fifaninanana fihodinana {round_number}: Mpilalao {proposer_id} +${proposer_gain}, Mpilalao {responder_id} +${responder_gain}. Total vaovao: Mpilalao 0: ${total_0}, Mpilalao 1: ${total_1}.",
+    "rejected": "Player {responder_id} nanafoana ny fanirihana! Round {round_number} gains: Both players +$0. Totals remain: Player 0: ${total_0}, Player 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Ny mpangataka dia tsy maintsy manao tolotra amin'ny fampiasana ny endrika [Offer: $X].",
+    "bad_integer": "Ny vola atolotra dia tsy maintsy isa iray manan-kery.",
+    "out_of_range": "Tokony ho eo anelanelan'ny $0 sy ${pool} ny tolotra.",
+    "no_current_offer": "Tsy misy tolotra amin'izao fotoana izao tokony hamaliana.",
+    "accept_or_reject": "Tsy maintsy [Accept] na [Reject] ny tolotra."
+  },
+  "outcome": {
+    "win": "Ny mpilalao {winner} nahazo ${winner_total} amin'ny fitambarany vs ny ${loser_total} an'ny mpilalao {loser} .",
+    "draw": "Samy nahazo ${total} ny mpilalao roa tonta."
+  }
+}
