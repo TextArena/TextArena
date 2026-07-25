@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i Forhandlingspillet.\nDu har nogle ressourcer, og din opgave er at handle således, at den samlede værdi af dine ressourcer øges.\nRessourcerne og de tilhørende værdier, du har i øjeblikket, er:\n\t+ {resource_value_list}\nI hver tur kan du tale med din modstander og fremsætte et handelstilbud.\nBrug følgende specielte tokens til handlinger:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Tilbudte Ressourcer -> Anmodede Ressourcer]\n  - '[Accept]': For at acceptere et indgående tilbud.\n  - '[Deny]': For at afvise et indgående tilbud (standard).\nSpillet varer {max_turns} ture i alt."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Spilleren forsøgte at acceptere en handel uden at have de nødvendige ressourcer.",
+    "out_of_range": "Spiller {player_id}, Ugyldig handling. Kolonne {col} er uden for grænserne.",
+    "already_full": "Spiller {player_id}, Ugyldig handling. Kolonne {col} er fuld.",
+    "proposing_with_no_resource": "Spiller {player_id} forsøgte at fremsætte et handelstilbud uden at have de nødvendige ressourcer.",
+    "incorrect_offer_format": "Spiller {player_id} fremsatte et handelstilbud i et forkert format.",
+    "no_new_offer": "Spiller {player_id} fremsatte intet nyt handelstilbud."
+  },
+  "offers": {
+    "reject": "Spiller {player_id} afviste handelstilbuddet.",
+    "accept": "Spiller {acceptor_id} accepterede handelstilbuddet fra Spiller {proposer_id}.",
+    "proposal": "Spiller {player_id} fremsatte følgende tilbud til Spiller {opponent_id}: Tilbudte genstande: {offered} -> Anmodede genstande: {requested}"
+  },
+  "outcome": {
+    "win": "Spiller {winner_id} vandt ved at have en større gevinst i lagerets værdi.",
+    "draw": "Samme ændring i lagerets værdi for alle spillere. Uafgjort."
+  }
+}

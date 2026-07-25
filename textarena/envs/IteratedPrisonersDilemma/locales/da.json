@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i et gentaget Fange-dilemma, der strækker sig over {num_rounds} runder.\n\nSpillets struktur:\n- Før hver beslutning har du {total_conversation_rounds} ture til at kommunikere frit.\n- Efter det vælger begge spillere samtidig at samarbejde eller svigte.\n\nUdbyttematrix (fast hver runde):\n- Begge samarbejder ➜ hver {cooperate_reward}\n- Begge svigter ➜ hver {mutual_defect_reward}\n- Én svigter, én samarbejder ➜ Svigteren {defect_reward}, Samarbejderen {sucker_reward}\n\nHvordan man spiller:\n- Under samtale: skriv den tekst, du ønsker.\n- Under beslutningsfasen: inkluder '[Cooperate]' eller '[Defect]' (stor-/småbogstaver er ligegyldigt). Du kan tilføje ekstra tekst før/efter tokenet."
+  },
+  "phases": {
+    "conversation_finished": "Samtalen er afsluttet for runde {round}. Svar venligst med '[Cooperate]' eller '[Defect]' inden for \\boxed{{}}.",
+    "starting_round": "--- Runde {round} starter ---",
+    "round_summary": "Resultater for runde {round}:\n{outcome}\nSpiller 0 tjente {r0} (total {score_0}), Spiller 1 tjente {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Spiller {winner} vinder {win_score} - {lose_score}.",
+    "draw": "Uafgjort! Begge spillere scorede {s0}.",
+    "round_both_cooperate": "Begge spillere samarbejdede.",
+    "round_both_defect": "Begge spillere svigtede.",
+    "round_p0_cooperates_p1_defects": "Spiller 0 samarbejdede, Spiller 1 svigtede.",
+    "round_p0_defects_p1_cooperates": "Spiller 0 svigtede, Spiller 1 samarbejdede."
+  }
+}

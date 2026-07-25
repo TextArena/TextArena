@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Du spiller Minesweeper-spillet.\nMålet med spillet er at afsløre alle celler, der ikke indeholder miner.\nFor at foretage et træk skal du blot angive række- og kolonnekoordinaterne, du vil afsløre, ved hjælp af følgende format:\n- `[row col]`: Afslør cellen på den angivne række og kolonne.\nFor eksempel:\n- `[3 2]` for at afsløre cellen i Række 3, Kolonne 2.\n- `[5 6]` for at afsløre cellen i Række 5, Kolonne 6.\nPå dit første træk vil du afsløre et område omkring den celle, du vælger, for at sikre en sikker start.\nDen aktuelle brætlayout vises nedenfor. Celler, der ikke er afsløret, repræsenteres af en prik ('.'), afslørede tal viser antallet af tilstødende miner.\nVær opmærksom på ikke at vælge allerede afslørede celler.\nHer er den aktuelle brætlayout:\n"
+  },
+  "board": {
+    "game_board": "Spilbræt:\n\n{board}",
+    "current_board": "Aktuelt bræt:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Du svarede ikke med gyldige koordinater i firkantede parenteser.",
+    "out_of_bounds": "De angivne række- og kolonnekoordinater er uden for grænserne.",
+    "already_revealed": "Cellen på ({row}, {col}) er allerede blevet afsløret.",
+    "hit_mine": "Du ramte en mine på ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Du afslørede cellen på ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Tillykke! Du har med succes ryddet Minesweeper-brættet.",
+    "turn_limit": "Tidsgrænsen er nået. Du afslørede med succes {percent}% af de sikre celler."
+  }
+}

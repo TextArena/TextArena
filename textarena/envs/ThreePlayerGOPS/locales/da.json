@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS lokalisationsfil. Oversæt ikke nøgler (venstre side). Oversæt kun værdier (højre side).",
+  "_slots": {
+    "{player_id}": "Spillerens nummer, 0, 1 eller 2",
+    "{round}": "Den aktuelle runde nummer, 1..13",
+    "{prize}": "Det afslørede præmiekorts ansigtsetiket (A, 2..10, J, Q, K) - oversæt ikke",
+    "{worth}": "Præmiens samlede værdi inklusive eventuel overført pulje",
+    "{hand}": "Spillerens resterende kort, gengivet som bracketede tokens som '[A]' '[2]' - oversæt ikke",
+    "{bids}": "Den neutrale komma-separerede liste af spillede kort som 'P0:10, P1:J, P2:Q' - oversæt ikke",
+    "{winner}": "Spiller nummeret, der vandt runden",
+    "{pot}": "Puljeværdien, der blev tildelt eller overført denne runde",
+    "{scoreline}": "Den neutrale løbende scoreboard som 'P0:0  P1:0  P2:11' - oversæt ikke",
+    "{pid}": "Spiller nummeret, der blev elimineret",
+    "{scores}": "De endelige scores som en rå spiller-nummer til score mapping - oversæt ikke"
+  },
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i Tre-Spiller GOPS.\n- Du holder de 13 kort A-K (hvert præcis én gang).\n- Hver runde afsløres en præmie. Indsend ét kort som `[Q]`, `[10]`, `[2]` …\n- Højeste kort vinder præmien (+ eventuel overført pulje). Uafgjorte runder ruller præmien over i næste runde.\n- Efter 13 runder vinder den højeste samlede score. Ugyldige træk = elimination."
+  },
+  "round": {
+    "header": "### Runde {round}/13 - Præmie: {prize} (værd {worth})",
+    "hand": "Dine resterende kort: {hand}"
+  },
+  "reveal": {
+    "win": "Bud » {bids} - Spiller {winner} vinder {pot}.",
+    "tie": "Bud » {bids} - uafgjort, puljen nu {pot}.",
+    "scores": "Scores → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "aktionen kræver et bracketet kort som '[Q]'",
+    "bad_card": "kort allerede brugt eller ugyldigt"
+  },
+  "elimination": {
+    "player": "Spiller {pid} elimineret efter gentagne ugyldige træk."
+  },
+  "outcome": {
+    "auto_win": "To spillere elimineret - automatisk sejr.",
+    "final": "Endelige scores: {scores}"
+  }
+}
