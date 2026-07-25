@@ -1,0 +1,31 @@
+{
+  "_comment": "Čūskas lokalizācijas fails. NEtulkojiet atslēgas (kreisā puse). Tulkojiet tikai vērtības (labā puse).",
+  "_slots": {
+    "{num_players}": "Spēlētāju skaits mačā",
+    "{width}": "Galdiņa platums šūnās",
+    "{height}": "Galdiņa augstums šūnās",
+    "{max_turns}": "Gājienu limits mačam",
+    "{player_id}": "Spēlētāja numurs (0-bāzēts)",
+    "{board}": "Renderētā ASCII režģis; saglabājiet neitrālu, nekad netulkot tā rakstzīmes",
+    "{reason}": "Renderētā spēles beigu iemesla frāze",
+    "{groups}": "Neitrāli rangi dati (spēlētāju ID grupu saraksts, no sliktākajiem līdz labākajiem); netulkot"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-spēlētāju Čūska uz {width}×{height} režģa.\nJūs kontrolējat čūsku {player_id}. Derīgie gājieni: '[up]'/'[down]'/'[left]'/'[right]' (vai w/s/a/d).\nMērķis: izdzīvot visilgāk vai būt visgarākajam un iegūt augstāko punktu skaitu (gājienu limits {max_turns} gājieni)."
+  },
+  "board": {
+    "current": "Pašreizējais galdiņš:\n{board}",
+    "after_moves": "Pašreizējais galdiņa stāvoklis:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Čūska {player_id} nomira nepareiza gājiena dēļ."
+  },
+  "outcome": {
+    "survived_win": "Spēlētājs {player_id} izdzīvoja; visi citi nomira.",
+    "all_dead_simul": "Visas čūskas nomira vienlaicīgi.",
+    "outlived": "Spēlētājs izdzīvoja visus citus.",
+    "all_dead": "Visas čūskas mirušas.",
+    "turn_limit": "Gājienu limits sasniegts - labākais punktu skaita uzvarētājs tie-break.",
+    "ranking": "{reason} Galīgā rangi grupu sadalījums (no sliktākajiem līdz labākajiem): {groups}"
+  }
+}

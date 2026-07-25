@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} Indijas Pokera spēlē.\n- 52-karšu kava; jūs redzat tikai pretinieka karti.\n- Ante {ante} žetonu(-i) katrā kārtā, {max_rounds} kārta(-s) kopā.\n- Derīgie gājieni: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ir pozitīvs vesels skaitlis ≤ jūsu žetonu skaits.)\n- Augstākā paslēptā karte uzvar bankā piešķiršanas laikā.\n"
+  },
+  "round": {
+    "announce": "### Kārta {current_round}/{max_rounds}\nJūsu pretinieka karte ir: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Norādiet tieši VIENU iekavās ierakstītu darbību, piemēram, '[check]', '[bet 2]', '[call]', '[raise 3]', vai '[fold]'.",
+    "cannot_check": "Nevar [check] - jūs esat pretī likmei.",
+    "amount_min": "Likmes / Paaugstināšanas summa ir jābūt ≥ 1.",
+    "cannot_bet": "Nevar [bet] - jāizvēlas [call] / [raise] / [fold].",
+    "nothing_to_call": "Nav ko likt; jūs varat [check] tā vietā.",
+    "no_bet_to_raise": "Izmantojiet [bet X], lai atvērtu; nav likmes, ko paaugstināt.",
+    "insufficient": "Nepietiek žetonu šai darbībai."
+  },
+  "game_action": {
+    "action": "Spēlētājs {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (izmaksas {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Jūsu iespējamās darbības: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Bankā {pot} → Spēlētājs {winner}. (Bankrotē P0:{p0}, P1:{p1})",
+    "folded": "Spēlētājs {player_id} atmetis.",
+    "showdown_win": "Piešķiršana: {card_win} uzvar {card_lose}.",
+    "showdown_tie": "Piešķiršanas neizšķirts: abi {card}. Banka tiek sadalīta – katrs saņem {split}."
+  },
+  "outcome": {
+    "p0_wins": "Spēlētājs 0 uzvar ({bank0} > {bank1})",
+    "p1_wins": "Spēlētājs 1 uzvar ({bank1} > {bank0})",
+    "draw": "Vienādi žetoni pēc visām kārtām"
+  }
+}

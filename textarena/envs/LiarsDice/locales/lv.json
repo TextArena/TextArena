@@ -1,0 +1,55 @@
+{
+  "_comment": "Lietotāja saskarņas virknes Liar's Dice spēlei. Iekavās ievietoti darbības tokeni ('[Bid: X, Y]', '[Call]'), spēlētāju indeksi, kauliņu seju vērtības, daudzumi un skaitļi ir neitrāli sloti un nedrīkst tulkot.",
+  "_slots": {
+    "player_id": "spēlētāja indekss (vesels skaitlis)",
+    "num_players": "spēlētāju skaits spēlē (vesels skaitlis)",
+    "dice_summary": "priekšā sagatavots '; '-savienots katra spēlētāja atlikušo kauliņu skaits",
+    "your_dice": "priekšā sagatavots komats-savienots šī spēlētāja kauliņu seju vērtību saraksts",
+    "p": "spēlētāja indekss (vesels skaitlis)",
+    "d": "atlikušais kauliņu skaits šim spēlētājam (vesels skaitlis)",
+    "current_player_id": "spēlētāja indekss, kurš izsauc (vesels skaitlis)",
+    "face_value": "kauliņa sejas vērtība, kas tiek skaitīta (1-6)",
+    "count": "faktiskais sakritošo kauliņu skaits (vesels skaitlis)",
+    "quantity": "solījuma daudzums (vesels skaitlis)",
+    "loser_id": "spēlētāja indekss, kurš zaudē kauliņu (vesels skaitlis)",
+    "new_quantity": "tikko iesniegtais solījuma daudzums (vesels skaitlis)",
+    "current_quantity": "pašreizējais solījuma daudzums (vesels skaitlis)",
+    "new_face_value": "tikko iesniegtā kauliņa sejas vērtība (vesels skaitlis)",
+    "current_face_value": "pašreizējā kauliņa sejas vērtība (vesels skaitlis)",
+    "action": "spēlētāja iesniegtā darbības virkne",
+    "reason": "iepakļauta solījuma noraidīšanas iemesla",
+    "winner": "spēlētāja indekss, kurš uzvar (vesels skaitlis)",
+    "final_ranking": "spēlētāju indeksu saraksts no pirmā izslēgtā līdz uzvarētājam"
+  },
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} {num_players}-spēlētāju Liar's Dice spēlē.\nNoteikumi:\n- Jūsu gājienā jūs varat vai nu:\n  1) Izdarīt jaunu solījumu ar lielāku daudzumu vai augstāku seju (vai abus) nekā pašreizējais solījums; piemēram, '[Bid: 3, 4]',\n  2) Izsauciet pēdējo solījumu, rakstot '[Call]'.\n\nJa jūs izsauciet:\n  - Ja faktiskais skaitītais kauliņu skaits ir mazāks nekā solījums, pēdējais solītājs zaudē vienu kauliņu.\n  - Pretējā gadījumā, izsaucējs zaudē vienu kauliņu.\nSpēlētājs, kurš sasniedz 0 kauliņus, tiek izslēgts. Pēdējais palikušais spēlētājs uzvar."
+  },
+  "board": {
+    "per_player": "\tSpēlētājs {p}: {d}",
+    "new_round": "\nJauna kārta - Atlikušie kauliņi: {dice_summary}\nJūsu pašreizējie kauliņi ir: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Spēlētājs {current_player_id} izsauc! Faktiskais skaitītais kauliņu skaits ar seju {face_value} ir {count}, kas ir MAZĀK nekā {quantity}.\nSpēlētājs {loser_id} (pēdējais solītājs) zaudē vienu kauliņu.",
+    "caller_loses": "Spēlētājs {current_player_id} izsauc! Faktiskais skaitītais kauliņu skaits ar seju {face_value} ir {count}, kas ir >= {quantity}.\nSpēlētājs {loser_id} (izsaucējs) zaudē vienu kauliņu."
+  },
+  "action": {
+    "bid_announce": "Spēlētājs {player_id} solījās {quantity} kauliņus ar seju {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Izsaukums tika veikts bez iepriekšēja solījuma.",
+    "invalid_bid": "Nederīgs solījums: {reason}",
+    "not_recognized": "Darbība netika atpazīta kā derīgs '[Bid: X, Y]' vai '[Call]'. Iesniegtā darbība: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Jaunais daudzums {new_quantity} ir mazāks nekā pašreizējais {current_quantity}.",
+    "face_lower": "Jaunā sejas vērtība {new_face_value} ir mazāka nekā pašreizējā {current_face_value}.",
+    "identical": "Solījums ir identisks pašreizējam solījumam.",
+    "face_range": "Sejas vērtībai jābūt starp 1 un 6."
+  },
+  "message": {
+    "eliminated_invalid": "Spēlētājs {player_id} tika izslēgts ar nederīgu gājienu."
+  },
+  "outcome": {
+    "win": "Spēlētājs {winner} uzvar! Galīgais rangs: {final_ranking}"
+  }
+}

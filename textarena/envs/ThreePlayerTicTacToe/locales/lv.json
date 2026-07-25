@@ -1,0 +1,32 @@
+{
+  "_comment": "Trīs spēlētāju Tic Tac Toe lokalizācijas fails. NEtulkojiet atslēgas (kreisā puse). Tulkojiet tikai vērtības (labā puse).",
+  "_slots": {
+    "{player_id}": "Spēlētāja numurs, piemēram, 0, 1 vai 2",
+    "{symbol}": "Spēlētāja zīme, viena no A, B vai C",
+    "{cell}": "Galdiņa šūnas numurs",
+    "{max_cell}": "Augstākais derīgais šūnas numurs (galdiņa_izmērs^2 - 1)",
+    "{row}": "Galdiņa rindas indekss, kurā novietota zīme",
+    "{col}": "Galdiņa kolonnas indekss, kurā novietota zīme",
+    "{board}": "Renderētais ASCII galdiņš (netulkojiet)",
+    "{moves}": "Pieejamo gājienu saraksts, atdalīts ar komatiem, piemēram, '[4]' (netulkojiet)"
+  },
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} trīs spēlētāju Tic Tac Toe spēlē.\nJūsu zīme ir '{symbol}'.\nJūs pārmaiņus novietojat savu zīmi uz 5x5 galdiņa, lai izveidotu četru secīgu rindu.\nRindas var būt horizontālas, vertikālas vai diagonālas.\nIesniedziet savu gājienu, izmantojot formātu '[4]', lai atzīmētu šūnu 4."
+  },
+  "board": {
+    "current_board": "Pašreizējais galdiņš:\n\n{board}\n\nPieejamie gājieni: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nederīgs gājienu formāts. Izmantojiet '[šūna]', kur šūna ir 0-{max_cell}.",
+    "out_of_range": "Nederīgs šūnas numurs: {cell}. Jābūt starp 0 un {max_cell}.",
+    "already_occupied": "Šūna {cell} jau ir aizņemta.",
+    "made_invalid": "Spēlētājs {player_id} izdarīja nederīgu gājienu"
+  },
+  "game_action": {
+    "placed": "Spēlētājs {player_id} novietoja savu zīmi ({symbol}) laukā ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Spēlētājs {player_id} ({symbol}) uzvarēja!",
+    "draw": "Spēle ir neizšķirta!"
+  }
+}

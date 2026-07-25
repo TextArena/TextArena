@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction lokalizācijas fails. NEtulkojiet atslēgas (kreisā puse). Tulkojiet tikai vērtības (labā puse).",
+  "_slots": {
+    "{player_id}": "Spēlētāja numurs, vai nu 0 vai 1",
+    "{side}": "Spēlētāja figūras burts, vai nu O vai X",
+    "{other}": "Pretinieka figūras burts, vai nu O vai X",
+    "{board}": "Galdiņa ASCII attēlojums; atstājiet tāpat",
+    "{coord}": "Galdiņa koordināte, piemēram, b1 vai a3",
+    "{from}": "Gājiena sākuma koordināte, piemēram, b1",
+    "{to}": "Gājiena galamērķa koordināte, piemēram, b3"
+  },
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} LinesOfAction spēlē.\nJūsu figūras ir '{side}', pretinieka figūras ir '{other}'.\nGājiena formāts: `[b1b3]` (no-koordināte uz-koordināte). Legāls gājiens ceļo horizontāli, vertikāli vai diagonāli kvadrātu skaitu, kas vienāds ar kopējo figūru skaitu (jebkura krāsa) šajā līnijā. Jūs varat pārlēkt pāri savām figūrām, bet ne pretinieka figūrām; nosēšanās uz pretinieka figūras to sagrābj. Uzvarēt, kad visas jūsu figūras ir 8-kaimiņu savienotas."
+  },
+  "board": {
+    "current_board": "Galdiņš:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formāts jābūt e2e4 (no,uz koordinātes).",
+    "no_piece": "Nav {side} figūras uz {coord}.",
+    "identical": "Sākuma un galamērķa koordinātes ir vienādas.",
+    "not_straight_or_diagonal": "Gājiens jābūt taisns vai diagonāls.",
+    "wrong_distance": "Jāpārvietojas attālumā, kas vienāds ar figūru skaitu līnijā.",
+    "enemy_blocks": "Pretinieka figūra bloķē ceļu.",
+    "destination_own": "Galamērķis aizņemts ar savu figūru."
+  },
+  "game_action": {
+    "moved": "Spēlētājs {player_id} pārvietoja {from} -> {to}",
+    "captured_suffix": "Spēlētājs {player_id} pārvietoja {from} -> {to}, sagrābjot pretinieku."
+  },
+  "outcome": {
+    "win": "Visas figūras savienotas.",
+    "draw_no_capture": "60 gājieni bez sagrābšanas.",
+    "draw_repetition": "Pozīcija atkārtota trīs reizes."
+  }
+}

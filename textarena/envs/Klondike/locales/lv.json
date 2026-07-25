@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire lokalizācijas fails. NEtulkojiet atslēgas (kreisā puse). Tulkojiet tikai vērtības (labā puse).",
+  "_slots": {
+    "{n}": "Darbības indekss komandā ar komatiem atdalītiem elementiem, sākot no 1",
+    "{msg}": "Iekļauta ziņa par katru darbību (jau lokalizēta)",
+    "{count}": "Skaitlis ar sejas uz augšu esošām kartīm, kas tiek pārvietotas",
+    "{src}": "Avota tablo šķirņa numurs, sākot no 1",
+    "{dst}": "Mērķa šķirņa numurs, sākot no 1",
+    "{cmd}": "Nezināma komanda, ko ievadīja spēlētājs (netulkota)",
+    "{max_turns}": "Maksimālais gājienu skaits pirms spēles beigām",
+    "{score}": "Kartīšu skaits pamatā esošajās šķirņās",
+    "{board}": "Renderētā ASCII galdiņa (nekad netulkojiet)",
+    "{turn}": "Pašreizējais gājiens",
+    "{stock}": "Kartīšu skaits atlikušajā kaudzē",
+    "{waste}": "Augšējā kartīte no atkritumu kaudzes, vai '--' ja tā ir tukša (nekad netulkojiet)",
+    "{cards}": "Kartītes kaudzē kā neitrāli nosaukumi, vai '--' ja tā ir tukša (nekad netulkojiet)"
+  },
+  "player_prompt": {
+    "intro": "Jūs spēlējat Klondike Solitaire. Jūsu mērķis ir pārvietot visas kartītes uz pamatā esošajām šķirņām.\n\nSpēles noteikumi:\n- Pamata šķirņas (F1-F4): Uzbūvēt no Āzena līdz Karalim pēc mastiem\n- Tablo šķirņas (T1-T7): Uzbūvēt lejup, maiņā krāsas (sarkana uz melnu, melna uz sarkanu)\n- Kaudze: Izvilkt kartītes no kaudzes uz atkritumu kaudzi\n- Atkritumu kaudze (W): Augšējā kartīte pieejama spēlei\n\nKomandas:\n- 'draw' - Izvilkt kartītes no kaudzes uz atkritumu kaudzi\n- 'move <avots> <mērķis> [skaits]' - Pārvietot kartītes starp šķirņām\n  Piemēri: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Skaits var būt arī 'all', kas mēģinās pārvietot visas sejas uz augšu esošās kartītes.\n- 'forfeit' - Beigt spēli nekavējoties un fiksēt pašreizējo rezultātu\n- Šķirņu nosaukumi: W (atkritumu kaudze), F1-F4 (pamata šķirņas), T1-T7 (tablo šķirņas)\n\nJūs varat izpildīt vairākas darbības vienā gājienā, atdalot tās ar komatiem:\n  Piemērs: 'draw, move W T1, move T2 F1'\n\nTikai Karalis var tikt novietots uz tukšas tablo šķirņas.\nDarbības tiek izpildītas secīgi - ja viena no tām neizdodas, atlikušās darbības tiek izlaistas.\nIzmantojiet 'forfeit', ja uzskatāt, ka spēle ir neiespējama uzvarēt."
+  },
+  "format_error": {
+    "no_brackets": "Nederīgs darbības formāts. Darbībai vajadzētu būt iekavās.",
+    "no_closing_bracket": "Nederīgs darbības formāts. Trūkst aizverošās iekavas ']'",
+    "empty_command": "Tukša komanda. Ievadiet 'draw' vai 'move <avots> <mērķis> [skaits]'",
+    "empty_action": "Tukša darbība",
+    "move_needs_args": "Pārvietošanas komandai nepieciešams avots un mērķis. Izmantojiet: 'move <avots> <mērķis> [skaits]'",
+    "count_positive": "Skaits jābūt pozitīvam vai 'all'",
+    "count_invalid": "Nederīgs skaits. Izmantojiet skaitli vai 'all'",
+    "unknown_command": "Nezināma komanda '{cmd}'. Izmantojiet 'draw', 'move <avots> <mērķis> [skaits]', vai 'forfeit'",
+    "wrapped": "Darbība {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Darbība {n}: {msg}",
+    "before_failure": "Izpildīja {n} darbību(-as) pirms neizdošanās.",
+    "failed": "Darbība {n} neizdevās: {msg}"
+  },
+  "move_result": {
+    "drew": "Izvilka kartīti(-es) no kaudzes uz atkritumu kaudzi.",
+    "cannot_draw": "Nevar izvilkt. Abas kaudzes ir tukšas.",
+    "invalid_pile": "Nederīgs šķirņas nosaukums. Izmantojiet W, F1-F4, vai T1-T7",
+    "foundation_one_card": "Var pārvietot tikai 1 kartīti uz pamata šķirņu",
+    "waste_to_foundation_ok": "Pārvietoja kartīti no atkritumu kaudzes uz pamata šķirņu F{dst}",
+    "waste_to_foundation_bad": "Nevar pārvietot kartīti no atkritumu kaudzes uz šo pamata šķirņu",
+    "tableau_to_foundation_ok": "Pārvietoja kartīti no tablo šķirņas T{src} uz pamata šķirņu F{dst}",
+    "tableau_to_foundation_bad": "Nevar pārvietot kartīti no tablo šķirņas uz šo pamata šķirņu",
+    "foundation_to_foundation": "Nevar pārvietot no pamata šķirņas uz pamata šķirņu",
+    "waste_to_tableau_one_card": "Var pārvietot tikai 1 kartīti no atkritumu kaudzes uz tablo šķirņu",
+    "waste_to_tableau_ok": "Pārvietoja kartīti no atkritumu kaudzes uz tablo šķirņu T{dst}",
+    "waste_to_tableau_bad": "Nevar novietot kartīti no atkritumu kaudzes uz šo tablo šķirņu",
+    "no_face_up": "Nav sejas uz augšu esošu kartīšu, ko pārvietot",
+    "tableau_to_tableau_ok": "Pārvietoja {count} kartīti(-es) no tablo šķirņas T{src} uz T{dst}",
+    "tableau_to_tableau_bad": "Nevar pārvietot {count} kartīti(-es) no T{src} uz T{dst}",
+    "foundation_to_tableau_one_card": "Var pārvietot tikai 1 kartīti no pamata šķirņas uz tablo šķirņu",
+    "foundation_empty": "Pamata šķirņa F{src} ir tukša",
+    "foundation_to_tableau_ok": "Pārvietoja kartīti no pamata šķirņas F{src} uz tablo šķirņu T{dst}",
+    "foundation_to_tableau_bad": "Nevar novietot kartīti no pamata šķirņas uz tablo šķirņu T{dst}",
+    "to_waste_or_stock": "Nevar pārvietot uz atkritumu kaudzi vai kaudzi"
+  },
+  "outcome": {
+    "forfeit": "Spēle atcelta. Galīgais rezultāts: {score} kartītes pamatā esošajās šķirņās.",
+    "won": "Apsveicam! Jūs uzvarējāt Klondike Solitaire!",
+    "turn_limit": "Spēle beigusies! Jūs sasniedzāt maksimālo {max_turns} gājienu skaitu. Rezultāts: {score} kartītes pamatā esošajās šķirņās."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Gājiens: {turn}/{max_turns}",
+    "stock": "Kaudze: {stock} kartītes",
+    "waste": "Atkritumu kaudze (W): {waste}",
+    "foundations_header": "Pamata šķirņas:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tablo šķirņas:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}
