@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Είστε ο {role} στο Colonel Blotto.\nΟ στόχος σας είναι να κερδίσετε περισσότερους γύρους από τον αντίπαλο σας.\nΣε κάθε γύρο, κατανείμετε ακριβώς {num_total_units} μονάδες σε πεδία {field_names}.\nΟ παίκτης που κατανείμει περισσότερες μονάδες σε ένα πεδίο κερδίζει αυτό το πεδίο, και ο παίκτης που κερδίζει περισσότερα πεδία κερδίζει τον γύρο.\nΓια παράδειγμα, '[A7 B7 C6]' κατανείμει 7 μονάδες στο A, 7 στο B και 6 στο C.",
+    "commander_alpha": "Διοικητής Άλφα",
+    "commander_beta": "Διοικητής Βήτα"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Γύρος {current_round}/{num_rounds} ===\nΓύροι Κερδισμένοι - Διοικητής Άλφα: {alpha_score}, Διοικητής Βήτα: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nΓύρος {current_round}\nΔιοικητής Άλφα κατανείμει: {p0_allocations}\nΔιοικητής Βήτα κατανείμει: {p1_allocations}\n",
+    "winner_alpha": "{message}Νικητής: Διοικητής Άλφα",
+    "winner_beta": "{message}Νικητής: Διοικητής Βήτα",
+    "tie": "{message}Ισοπαλία!"
+  },
+  "invalid_move": {
+    "wrong_format": "Μη έγκυρη μορφή εισαγωγής. Χρησιμοποιήστε: A:5, B:10, C:5",
+    "invalid_field": "Μη έγκυρα ονόματα πεδίων. Έγκυρα πεδία: {field_names}",
+    "wrong_allocation_value": "Όλες οι κατανομές πρέπει να είναι μη αρνητικοί ακέραιοι.",
+    "incorrect_total_units": "Πρέπει να κατανείμετε ακριβώς {num_total_units} μονάδες. Τρέχουσα άθροισμα: {current_sum}",
+    "good_allocations": "Η κατανομή είναι καλή."
+  },
+  "outcome": {
+    "winner_alpha": "Ο Διοικητής Άλφα κερδίζει {score_0}-{score_1} μετά από {num_rounds} γύρους!",
+    "winner_beta": "Ο Διοικητής Βήτα κερδίζει {score_1}-{score_0} μετά από {num_rounds} γύρους!",
+    "draw": "Το παιχνίδι τελειώνει με {score_0}-{score_1} ισοπαλία μετά από {num_rounds} γύρους!",
+    "early_winner_alpha": "Ο Διοικητής Άλφα κερδίζει {scores_0}-{scores_1} (επιτεύχθηκε πλειοψηφία)!",
+    "early_winner_beta": "Ο Διοικητής Βήτα κερδίζει {scores_1}-{scores_0} (επιτεύχθηκε πλειοψηφία)!"
+  }
+}
