@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "നിലവിലെ ബോർഡ്: {board} ലഭ്യമായ നീക്കങ്ങൾ: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "അസാധുവായ നടപടി ഫോർമാറ്റ്. കളിക്കാരൻ {player_id} [A0 B0] ഫോർമാറ്റിൽ ഒരു നീക്കം നൽകിയിട്ടില്ല.",
+    "invalid_coordinates": "അസാധുവായ പ്രവർത്തന ഫോർമാറ്റ്. കളിക്കാരൻ {player_id} സാധുവായ കോർഡിനേറ്റുകൾ നൽകിയിട്ടില്ല.",
+    "not_own_piece": "അസാധുവായ പ്രവർത്തന ഫോർമാറ്റ്. കളിക്കാരൻ {player_id} സ്വന്തം കഷണങ്ങളിലൊന്ന് നീക്കണം.",
+    "scout_through_pieces": "അസാധുവായ പ്രവർത്തന ഫോർമാറ്റ്. കളിക്കാരന് {player_id} മറ്റ് കഷണങ്ങളിലൂടെ ഒരു സ്കൌട്ടിനെ നീക്കാൻ കഴിയില്ല.",
+    "scout_diagonal": "അസാധുവായ പ്രവർത്തന ഫോർമാറ്റ്. കളിക്കാരന് {player_id} ഒരു സ്കൌട്ടിനെ ഡയഗണലായി നീക്കാൻ കഴിയില്ല.",
+    "non_scout_multi_square": "അസാധുവായ ആക്ഷൻ ഫോർമാറ്റ്. സ്കൌട്ടുകൾ ഒഴികെ, കഷണങ്ങൾക്ക് ഒരു സമയത്ത് ഒരു ചതുരം മാത്രമേ നീക്കാൻ കഴിയൂ.",
+    "move_into_lake": "അസാധുവായ ആക്ഷൻ ഫോർമാറ്റ്. കളിക്കാരന് {player_id} തടാകത്തിലേക്ക് നീങ്ങാൻ കഴിയില്ല.",
+    "move_onto_own_piece": "അസാധുവായ പ്രവർത്തന ഫോർമാറ്റ്. കളിക്കാരന് {player_id} സ്വന്തം കഷണത്തിലേക്ക് നീങ്ങാൻ കഴിയില്ല.",
+    "move_bomb_or_flag": "അസാധുവായ ആക്ഷൻ ഫോർമാറ്റ്. കളിക്കാരന് {player_id} ഒരു ബോംബോ പതാകയോ നീക്കാൻ കഴിയില്ല."
+  },
+  "game_action": {
+    "you_moved": "നിങ്ങളുടെ കഷണം {source} ൽ നിന്നും {dest} ലേക്ക് നീക്കി.",
+    "opponent_moved": "കളിക്കാരൻ {player_id} {source} ൽ നിന്ന് {dest} ലേക്ക് ഒരു കഷണം നീക്കി.",
+    "you_equal_ranks": "നിങ്ങൾ നിങ്ങളുടെ കഷണം {source} ൽ നിന്ന് {dest} ലേക്ക് നീക്കി. ആക്രമണ കഷണം {attacking_rank} ആയിരുന്നു, ലക്ഷ്യ കഷണം {target_rank} ആയിരുന്നു. റാങ്കുകൾ ഒന്നുതന്നെയായതിനാൽ, രണ്ട് കഷണങ്ങളും നഷ്ടപ്പെട്ടു.",
+    "opponent_equal_ranks": "കളിക്കാരൻ {player_id} {source} ൽ നിന്ന് {dest} ലേക്ക് ഒരു കഷണം നീക്കി. ആക്രമണ കഷണം {attacking_rank} ഉം ലക്ഷ്യ കഷണം {target_rank} ഉം ആയിരുന്നു. റാങ്കുകൾ തുല്യമായതിനാൽ, രണ്ട് കഷണങ്ങളും നഷ്ടപ്പെട്ടു.",
+    "you_miner_defused": "നിങ്ങൾ നിങ്ങളുടെ കഷണം {source} ൽ നിന്ന് {dest} ലേക്ക് നീക്കി. ആക്രമണ കഷണം {attacking_rank} ആയിരുന്നു, ലക്ഷ്യ കഷണം {target_rank} ആയിരുന്നു. ഖനിത്തൊഴിലാളികൾക്ക് ബോംബുകൾ നിർവീര്യമാക്കാൻ കഴിയുന്നതിനാൽ, നിങ്ങൾ യുദ്ധം നേടി.",
+    "opponent_miner_defused": "കളിക്കാരൻ {player_id} {source} ൽ നിന്ന് {dest} ലേക്ക് ഒരു കഷണം നീക്കി. ആക്രമണ കഷണം {attacking_rank} ആയിരുന്നു, ലക്ഷ്യ കഷണം {target_rank} ആയിരുന്നു. ഖനിത്തൊഴിലാളികൾക്ക് ബോംബുകൾ നിർവീര്യമാക്കാൻ കഴിയുന്നതിനാൽ, നിങ്ങൾ യുദ്ധം നഷ്ടപ്പെട്ടു.",
+    "you_bomb_lost": "നിങ്ങൾ നിങ്ങളുടെ കഷണം {source} ൽ നിന്ന് {dest} ലേക്ക് നീക്കി. ആക്രമണ കഷണം {attacking_rank} ആയിരുന്നു, ലക്ഷ്യ കഷണം {target_rank} ആയിരുന്നു. ആക്രമണകാരി ഒരു ഖനിത്തൊഴിലാളിയല്ലാത്തതിനാൽ, നിങ്ങൾ യുദ്ധം തോറ്റു.",
+    "opponent_bomb_won": "കളിക്കാരൻ {player_id} {source} ൽ നിന്ന് {dest} ലേക്ക് ഒരു കഷണം നീക്കി. ആക്രമണ കഷണം {attacking_rank} ആയിരുന്നു, ലക്ഷ്യ കഷണം {target_rank} ആയിരുന്നു. ആക്രമണകാരി ഒരു ഖനിത്തൊഴിലാളിയല്ലാത്തതിനാൽ, നിങ്ങൾ യുദ്ധം നേടി.",
+    "you_spy_won": "നിങ്ങൾ നിങ്ങളുടെ കഷണം {source} ൽ നിന്ന് {dest} ലേക്ക് നീക്കി. ആക്രമണ കഷണം {attacking_rank} ആയിരുന്നു, ലക്ഷ്യ കഷണം {target_rank} ആയിരുന്നു. ആക്രമണകാരി ഒരു ചാരനും ലക്ഷ്യസ്ഥാനം ഒരു മാർഷലും ആയതിനാൽ, നിങ്ങൾ യുദ്ധം നേടി.",
+    "opponent_spy_lost": "കളിക്കാരൻ {player_id} ഒരു കഷണം {source} ൽ നിന്ന് {dest} ലേക്ക് നീക്കി. ആക്രമണ കഷണം {attacking_rank} ആയിരുന്നു, ലക്ഷ്യ കഷണം {target_rank} ആയിരുന്നു. ആക്രമണകാരി ഒരു ചാരനാണെന്നും ലക്ഷ്യസ്ഥാനം ഒരു മാർഷൽ ആണെന്നും നിങ്ങൾ യുദ്ധം നഷ്ടപ്പെട്ടു.",
+    "you_higher_won": "നിങ്ങൾ നിങ്ങളുടെ കഷണം {source} ൽ നിന്ന് {dest} ലേക്ക് നീക്കി. ആക്രമണ കഷണം {attacking_rank} ആയിരുന്നു, ലക്ഷ്യസ്ഥാനം {target_rank} ആയിരുന്നു. ആക്രമണകാരി ലക്ഷ്യസ്ഥാനത്തേക്കാൾ ഉയർന്ന റാങ്കുള്ളതിനാൽ, നിങ്ങൾ യുദ്ധം നേടി.",
+    "opponent_higher_lost": "കളിക്കാരൻ {player_id} ഒരു കഷണം {source} ൽ നിന്ന് {dest} ലേക്ക് നീക്കി. ആക്രമണ കഷണം {attacking_rank} ആയിരുന്നു, ലക്ഷ്യ കഷണം {target_rank} ആയിരുന്നു. ആക്രമണകാരി ലക്ഷ്യസ്ഥാനത്തേക്കാൾ ഉയർന്ന റാങ്കുള്ളതിനാൽ, നിങ്ങൾ യുദ്ധം നഷ്ടപ്പെട്ടു.",
+    "you_lower_lost": "നിങ്ങൾ നിങ്ങളുടെ കഷണം {source} ൽ നിന്ന് {dest} ലേക്ക് നീക്കി. ആക്രമണ കഷണം {attacking_rank} ആയിരുന്നു, ലക്ഷ്യ കഷണം {target_rank} ആയിരുന്നു. ആക്രമണകാരി ലക്ഷ്യസ്ഥാനത്തേക്കാൾ താഴ്ന്ന റാങ്കുള്ളതിനാൽ, നിങ്ങൾ യുദ്ധം നഷ്ടപ്പെട്ടു.",
+    "opponent_lower_won": "കളിക്കാരൻ {player_id} ഒരു കഷണം {source} ൽ നിന്ന് {dest} ലേക്ക് നീക്കി. ആക്രമണ കഷണം {attacking_rank} ആയിരുന്നു, ലക്ഷ്യ കഷണം {target_rank} ആയിരുന്നു. ആക്രമണകാരി ലക്ഷ്യസ്ഥാനത്തേക്കാൾ താഴ്ന്ന റാങ്കുള്ളതിനാൽ, നിങ്ങൾ യുദ്ധം നേടി."
+  },
+  "outcome": {
+    "flag_captured": "Player {player_id} has captured the opponent's flag!",
+    "no_movable_pieces": "Player {winner_id} wins! Player {loser_id} has no more movable pieces."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "ബ്രിസ്ക്കോള കളി തുടങ്ങി! ട്രംപ് സ്യൂട്ട്: {trump_suit} (ട്രംപ് കാർഡ്: {trump_card})"
+  },
+  "prompt": {
+    "intro": "നിങ്ങൾ ബ്രിസ്കോള - പ്ലെയർ {player_id} കളിക്കുന്നു. ലക്ഷ്യംഃ ട്രിക്കുകൾ നേടി ഏറ്റവും കൂടുതൽ പോയിന്റുകൾ ശേഖരിക്കുക (ഡെക്കിലെ മൊത്തം 120 പോയിന്റുകൾ). കാർഡ് പോയിന്റുകൾഃ എ = 11, 3 = 10, കെ = 4, ക്യു = 3, ജെ = 2, മറ്റുള്ളവ = 0 കാർഡ് പവർഃ എ > 3 > കെ > ക്യു > ജെ > 7 > 6 > 5 > 4 > 2 ട്രംപ് കാർഡുകൾ പവർ പരിഗണിക്കാതെ നോൺ-ട്രംപ് കാർഡുകളെ തോൽപ്പിക്കുന്നു. പ്രവർത്തനംഃ '[play X] 'എക്സ് നിങ്ങളുടെ കൈയിലുള്ള കാർഡിന്റെ സ്ഥാനം (1-{max_pos}) ആണ് "
+  },
+  "hand": {
+    "none": "കാർഡുകളില്ല.",
+    "empty": "കൈയ്യിൽ കാർഡുകളില്ല",
+    "header": "നിങ്ങളുടെ കൈ:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "ഈ തന്ത്രം ഇതുവരെ ആരും കളിച്ചിട്ടില്ല.",
+    "header": "നിലവിലെ തന്ത്രം:",
+    "line": "കളിക്കാരൻ {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "കളിക്കാരൻ {player_id}: {points} pts",
+    "trump_info": "ട്രംപ് സ്യൂട്ട്: {trump_suit}",
+    "trump_info_deck": "ട്രംപ് സ്യൂട്ട്: {trump_suit} ∙ ഡെക്കിൽ അവശേഷിക്കുന്ന കാർഡുകൾ: {deck_count}",
+    "board": "{hand} {trick} സ്കോറുകൾ: {scores} {trump_info} [play X] ഉപയോഗിച്ച് ഒരു കാർഡ് കളിക്കുക"
+  },
+  "invalid_move": {
+    "wrong_format": "[play X] ഉപയോഗിക്കുക, അവിടെ X എന്നത് കാർഡ് സ്ഥാനം (1, 2, 3, മുതലായവ) ആണ്.",
+    "out_of_range": "അസാധുവായ കാർഡ് സ്ഥാനം. നിങ്ങൾക്ക് {count} കാർഡുകൾ ഉണ്ട് (1-{count})"
+  },
+  "action": {
+    "played": "കളിക്കാരൻ {player_id} കളിച്ചു {card}",
+    "trick_win": "{winner} എന്ന കളിക്കാരന് {card} എന്ന തന്ത്രം വിജയിക്കുകയും {points} പോയിന്റുകൾ നേടുകയും ചെയ്യുന്നു!"
+  },
+  "outcome": {
+    "head": "ഗെയിം ഓവർ! {winner} കളിക്കാരൻ {points} പോയിന്റുകൾ നേടി വിജയിക്കുന്നു! അന്തിമ സ്കോർ: {scores}",
+    "player_line": "കളിക്കാരൻ {player_id}: {points} പോയിന്റുകൾ ({tricks} തന്ത്രങ്ങൾ) "
+  }
+}

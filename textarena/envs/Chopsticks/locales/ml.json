@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Chopsticks. On your turn, choose one of:\n  + Attack:  '[attack M O]'  where M=your hand (0 or 1), O=opponent hand (0 or 1).\n    - Opponent's hand count increases by your hand; if >=5, it becomes 0.\n  + Split:   '[split L R]'  to redistribute your total fingers into L and R (L+R = your total).\nReply with exactly one of those commands."
+  },
+  "board": {
+    "current_board": "നിലവിലെ ബോർഡ്ഃ കളിക്കാരൻ 0: {hands_0} കളിക്കാരൻ 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "നിങ്ങളുടെ കൈ {my_idx} മരിച്ചിരിക്കുന്നു.",
+    "opp_hand_dead": "എതിരാളിയുടെ കൈ {opp_idx} ഇതിനകം മരിച്ചു.",
+    "split_sum": "{total} എന്ന സംഖ്യയാണ് വിഭജിക്കേണ്ടത്.",
+    "split_no_change": "സ്പ്ലിറ്റ് നിങ്ങളുടെ കൈകളുടെ വിതരണം മാറ്റും.",
+    "invalid_command": "അസാധുവായ നീക്കം. [attack M O] അല്ലെങ്കിൽ [split L R] ഉപയോഗിക്കുക."
+  },
+  "game_action": {
+    "attack": "പി {player_id} പി {opp_id} ന്റെ കൈയെ {opp_idx} ആക്രമിക്കുന്നു: ഇത് {opp_val} മുതൽ {new_val} വരെ പോകുന്നു.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "പി {player_id} {desc}"
+  },
+  "outcome": {
+    "win": "എതിരാളിയുടെ രണ്ടു കൈകളും മരിച്ചു.",
+    "draw": "ടേൺ പരിധി എത്തിയിരിക്കുന്നു."
+  }
+}

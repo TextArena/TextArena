@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "നിങ്ങൾ കേണൽ ബ്ലോട്ടോയിൽ {role} ആണ്. നിങ്ങളുടെ എതിരാളിയെക്കാൾ കൂടുതൽ റൌണ്ടുകൾ വിജയിക്കുക എന്നതാണ് നിങ്ങളുടെ ലക്ഷ്യം. ഓരോ റൌണ്ടിലും, ഫീൽഡുകളിലുടനീളം കൃത്യമായി {num_total_units} യൂണിറ്റുകൾ അനുവദിക്കുക {field_names}. ഒരു ഫീൽഡിലേക്ക് കൂടുതൽ യൂണിറ്റുകൾ അനുവദിക്കുന്ന കളിക്കാരൻ ആ ഫീൽഡ് വിജയിക്കുന്നു, കൂടുതൽ ഫീൽഡുകൾ നേടുന്ന കളിക്കാരൻ റൌണ്ട് വിജയിക്കുന്നു. ഉദാഹരണത്തിന്, '[A7 B7 C6] 7 യൂണിറ്റുകൾ എ, 7 ബി, 6 സി എന്നിവയ്ക്ക് അനുവദിക്കുന്നു.",
+    "commander_alpha": "കമാൻഡർ ആൽഫ",
+    "commander_beta": "കമാൻഡർ ബീറ്റ"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "റൌണ്ട് {current_round} കമാൻഡർ ആൽഫ അനുവദിച്ചു: {p0_allocations} കമാൻഡർ ബീറ്റ അനുവദിച്ചു: {p1_allocations} ",
+    "winner_alpha": "{message}വിജയി: കമാൻഡർ ആൽഫ",
+    "winner_beta": "{message}വിജയി: കമാൻഡർ ബീറ്റ",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "അസാധുവായ ഇൻപുട്ട് ഫോർമാറ്റ് ഉപയോഗിക്കുക: A:5, B: 10, C: 5",
+    "invalid_field": "അസാധുവായ ഫീൽഡ് നാമം. സാധുവായ ഫീൽഡുകൾ: {field_names}",
+    "wrong_allocation_value": "എല്ലാ അലോക്കേഷനുകളും നെഗറ്റീവ് അല്ലാത്ത സംഖ്യകളായിരിക്കണം.",
+    "incorrect_total_units": "നിങ്ങൾ കൃത്യമായി {num_total_units} യൂണിറ്റുകൾ അനുവദിക്കണം. നിലവിലെ തുക: {current_sum}",
+    "good_allocations": "വിഹിതം നല്ലതാണ്."
+  },
+  "outcome": {
+    "winner_alpha": "കമാൻഡർ ആൽഫ വിജയിക്കുന്നു {score_0}-{score_1} {num_rounds} റൗണ്ടുകൾക്ക് ശേഷം!",
+    "winner_beta": "കമാൻഡർ ബീറ്റ വിജയിക്കുന്നു {score_1}-{score_0} {num_rounds} റൗണ്ടുകൾക്ക് ശേഷം!",
+    "draw": "ഗെയിം {num_rounds} റൗണ്ടുകൾക്ക് ശേഷം {score_0}-{score_1} ടൈയിൽ അവസാനിക്കുന്നു!",
+    "early_winner_alpha": "കമാൻഡർ ആൽഫ വിജയിച്ചു {scores_0}-{scores_1} (ഭൂരിപക്ഷം നേടി)!",
+    "early_winner_beta": "കമാൻഡർ ബീറ്റ വിജയിച്ചു {scores_1}-{scores_0} (ഭൂരിപക്ഷം നേടി)!"
+  }
+}

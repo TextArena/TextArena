@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "ബോർഡ്: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ഫോർമാറ്റ് e2e4 ആയിരിക്കണം (കോര് ഡിനേറ്റുകള് മുതൽ, വരെ).",
+    "no_piece": "No {side} piece on {coord}.",
+    "identical": "ഉത്ഭവവും ലക്ഷ്യസ്ഥാനവും ഒന്നാണ്.",
+    "not_straight_or_diagonal": "നീക്കം നേരായതോ ഡയഗണലായോ ആയിരിക്കണം.",
+    "wrong_distance": "ഒരു വരിയിൽ തുല്യമായ ദൂരം നീങ്ങണം.",
+    "enemy_blocks": "ശത്രുവിന് റെ കഷണം വഴി തടഞ്ഞു.",
+    "destination_own": "Destination occupied by own piece."
+  },
+  "game_action": {
+    "moved": "കളിക്കാരൻ {player_id} നീക്കി {from} -> {to}",
+    "captured_suffix": "കളിക്കാരൻ {player_id} നീക്കി {from} -> {to} ഒരു ശത്രുവിനെ പിടികൂടുന്നു."
+  },
+  "outcome": {
+    "win": "എല്ലാ ഭാഗങ്ങളും ഒന്നിച്ചു ചേര് ന്നു.",
+    "draw_no_capture": "60 നീക്കങ്ങൾ ഒരു പിടി കിട്ടാതെ.",
+    "draw_repetition": "സ്ഥാനം മൂന്നു പ്രാവശ്യം ആവർത്തിച്ചു."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "നിങ്ങൾ {player_id} കളിക്കാരനാണ് 3-പേർ ഉൾപ്പെടുന്ന ആവർത്തിച്ചുള്ള തടവുകാരന്റെ ഡൈലെമ്മയിൽ. മത്സരം {num_rounds} റൗണ്ടുകൾ നീണ്ടുനിൽക്കും.\nറൗണ്ട് ഘടന:\n• {conv_rounds} സ്വതന്ത്ര-ചാറ്റ് ടേണുകൾ\n• 1 തീരുമാന ടേൺ - ഒരു എതിരാളിക്കെതിരെ ഒരു ടോക്കൺ സമർപ്പിക്കുക: '[<opp-id> cooperate]' അല്ലെങ്കിൽ '[<opp-id> defect]' (അതായത് '[1 defect] [2 cooperate]'; സ്വതേ 'സഹകരിക്കുക' ആണ്). \nജോടിയായ പേയോഫ് മാട്രിക്സ് (ഓരോ അനുക്രമമില്ലാത്ത ജോടിക്കും പ്രയോഗിക്കുന്നു):\n  - രണ്ടും സഹകരിക്കുക  ->  {reward}\n  - രണ്ടും തടയുക     ->  {punishment}\n  - നിങ്ങൾ തടയുക, അവർ സഹകരിക്കുക -> {temptation}\n  - നിങ്ങൾ സഹകരിക്കുക, അവർ തടയുക -> {sucker}\nഎല്ലാ റൗണ്ടുകളുടെയും അവസാനത്തെ ഏറ്റവും ഉയർന്ന സ്കോർ ഉള്ള കളിക്കാരന്(കൾ) ജയിക്കും."
+  },
+  "round": {
+    "start": "തുടക്ക റൌണ്ട് {round} {conv_rounds} റൌണ്ടുകളിൽ നിങ്ങൾക്ക് സ്വതന്ത്രമായി സംസാരിക്കാം.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### റൌണ്ട് {round} - ഫലം:",
+    "pair_line": "{observation} കളിക്കാരൻ {i} vs കളിക്കാരൻ {j} യഥാക്രമം {choice_i} ഉം {choice_j} ഉം തിരഞ്ഞെടുത്തു (കളിക്കാരൻ {i} നേടിയത് {gain_i}, കളിക്കാരൻ {j} നേടിയത് {gain_j})",
+    "scores_open": "{observation} -> നിലവിലെ സ്കോറുകൾ: ",
+    "score_first": "{observation} കളിക്കാരൻ {player_id} ({score})",
+    "score_next": "{observation}; കളിക്കാരൻ {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "അവസാന സ്കോറുകൾ: {scores}. റാങ്കിംഗ് ഗ്രൂപ്പുകൾ (മോശം → മികച്ചത്): {groups}"
+  }
+}
