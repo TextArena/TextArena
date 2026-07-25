@@ -1,0 +1,55 @@
+{
+  "_comment": "Mistari ya mtumiaji kwa Liar's Dice. Vitendo vya kuchukua hatua vilivyowekwa mabano ('[Bid: X, Y]', '[Call]'), viambajengo vya wachezaji, thamani za uso wa faini, kiasi na hesabu ni nafasi zisizoegemea upande wowote na hazipaswi kamwe kutafsiriwa.",
+  "_slots": {
+    "player_id": "nambari ya mchezaji (integer)",
+    "num_players": "idadi ya wachezaji katika mchezo (integer)",
+    "dice_summary": "hesabu zilizosalia za faini kwa kila mchezaji zilizounganishwa kwa '; '",
+    "your_dice": "thamani za uso wa faini za mchezaji huyu zilizounganishwa kwa alama ya mkato",
+    "p": "nambari ya mchezaji (integer)",
+    "d": "hesabu ya faini iliyobaki kwa mchezaji huyu (integer)",
+    "current_player_id": "nambari ya mchezaji aliyetoa wito (integer)",
+    "face_value": "thamani ya uso wa faini inayohesabiwa (1-6)",
+    "count": "nambari halisi ya faini zinazolingana (integer)",
+    "quantity": "kiasi cha ofa (integer)",
+    "loser_id": "nambari ya mchezaji anayepoteza faini (integer)",
+    "new_quantity": "kiasi cha ofa kilichowasilishwa (integer)",
+    "current_quantity": "kiasi cha ofa cha sasa (integer)",
+    "new_face_value": "thamani ya uso wa faini iliyowasilishwa (integer)",
+    "current_face_value": "thamani ya uso wa faini ya sasa (integer)",
+    "action": "kitendo cha msingi kilichowasilishwa na mchezaji",
+    "reason": "sababu ya kukataa ofa",
+    "winner": "nambari ya mchezaji anayeshinda (integer)",
+    "final_ranking": "orodha ya viambajengo vya wachezaji kutoka kwanza kuondolewa hadi mshindi"
+  },
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika mchezo wa Liar's Dice wa wachezaji {num_players}.\nSheria:\n- Katika zamu yako, unaweza ama:\n  1) Fanya ofa mpya yenye kiasi kikubwa zaidi au uso wa juu (au zote mbili) kuliko ofa ya sasa; yaani '[Bid: 3, 4]',\n  2) Toa wito wa ofa ya mwisho kwa kuandika '[Call]'.\n\nIkiwa unatoa wito:\n  - Ikiwa hesabu halisi ya thamani ya uso wa faini miongoni mwa faini zote ni chini ya ofa, mtoa ofa wa mwisho anapoteza faini moja.\n  - Vinginevyo, mtoa wito anapoteza faini moja.\nMchezaji anayefikia faini 0 huondolewa. Mchezaji wa mwisho anayebaki anashinda."
+  },
+  "board": {
+    "per_player": "\tMchezaji {p}: {d}",
+    "new_round": "\nMzunguko mpya - Faini zilizobaki: {dice_summary}\nFaini zako za sasa ni: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Mchezaji {current_player_id} anatoa wito! Hesabu halisi ya uso {face_value} ni {count}, ambayo ni CHINI ya {quantity}.\nMchezaji {loser_id} (mtoa ofa wa mwisho) anapoteza faini moja.",
+    "caller_loses": "Mchezaji {current_player_id} anatoa wito! Hesabu halisi ya uso {face_value} ni {count}, ambayo ni >= {quantity}.\nMchezaji {loser_id} (mtoa wito) anapoteza faini moja."
+  },
+  "action": {
+    "bid_announce": "Mchezaji {player_id} anatoa ofa ya {quantity} ya uso {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Wito ulifanywa bila ofa ya awali.",
+    "invalid_bid": "Ofa batili: {reason}",
+    "not_recognized": "Kitendo hakikutambuliwa kama ama '[Bid: X, Y]' au '[Call]' halali. Kitendo kilichowasilishwa: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Kiasi kipya {new_quantity} ni chini ya {current_quantity} ya sasa.",
+    "face_lower": "Thamani mpya ya uso {new_face_value} ni chini ya {current_face_value} ya sasa.",
+    "identical": "Ofa ni sawa na ofa ya sasa.",
+    "face_range": "Thamani ya uso lazima iwe kati ya 1 na 6."
+  },
+  "message": {
+    "eliminated_invalid": "Mchezaji {player_id} aliondolewa kwa sababu ya kitendo batili."
+  },
+  "outcome": {
+    "win": "Mchezaji {winner} anashinda! Mpangilio wa mwisho: {final_ranking}"
+  }
+}

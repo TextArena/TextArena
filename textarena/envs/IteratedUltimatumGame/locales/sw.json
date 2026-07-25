@@ -1,0 +1,43 @@
+{
+  "_comment": "Faili ya lugha ya IteratedUltimatumGame. USITAFSIRI funguo (upande wa kushoto). Tafsiri maadili tu (upande wa kulia).",
+  "_slots": {
+    "{player_id}": "Nambari ya mchezaji, 0 au 1",
+    "{other_id}": "Nambari ya mchezaji mwingine, 1 au 0",
+    "{num_rounds}": "Jumla ya raundi",
+    "{pool}": "Kiasi cha pesa kinachopatikana kila raundi (nambari)",
+    "{round_number}": "Nambari ya raundi ya sasa",
+    "{proposer_id}": "Nambari ya mchezaji anayetoa mapendekezo, 0 au 1",
+    "{responder_id}": "Nambari ya mchezaji anayejibu, 0 au 1",
+    "{offer}": "Kiasi kilichotolewa (nambari)",
+    "{keep}": "Kiasi ambacho mchezaji anayetoa mapendekezo anakihifadhi (nambari)",
+    "{proposer_gain}": "Pesa ambazo mchezaji anayetoa mapendekezo alipata raundi hii (nambari)",
+    "{responder_gain}": "Pesa ambazo mchezaji anayejibu alipata raundi hii (nambari)",
+    "{total_0}": "Jumla ya mchezaji 0 (nambari)",
+    "{total_1}": "Jumla ya mchezaji 1 (nambari)",
+    "{winner}": "Nambari ya mchezaji aliyeshinda",
+    "{loser}": "Nambari ya mchezaji aliyeshindwa",
+    "{winner_total}": "Jumla ya pesa za mchezaji aliyeshinda (nambari)",
+    "{loser_total}": "Jumla ya pesa za mchezaji aliyeshindwa (nambari)",
+    "{total}": "Jumla ya mwisho ya kila mchezaji (nambari)"
+  },
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id}, ukicheza {num_rounds} raundi za Iterated Ultimatum Game.\nUna $ {pool} kugawanya raundi hii kati yako na Mchezaji {other_id}.\n\nMchezaji anayetoa mapendekezo:\n  - Fanya mapendekezo: [Offer: $X] (0 <= X <= pool)\n  - Ikiwa imekubaliwa → Unapata $(pool - X), mchezaji mwingine anapata $X\n  - Ikiwa imekataliwa → Wote wawili wanapata $0\n  - Mfano: [Offer: $3]  au  'Nadhani hii ni haki. [Offer: $5]'\n\nMchezaji anayejibu:\n  - Amua kuhusu mapendekezo kwa kutumia ama [Accept] au [Reject]\n  - Mfano: 'Hii inaonekana kuwa ya haki. [Accept]'\n            'Sio haki. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Raundi {round_number} inaanza! ---\nMchezaji {proposer_id} ndiye anayetoa mapendekezo, Mchezaji {responder_id} ndiye anayejibu.",
+    "offer": "Raundi {round_number}: Mchezaji {proposer_id} anatoa mapendekezo ya ${offer} kwa Mchezaji {responder_id} (akihifadhi ${keep}).",
+    "accepted": "Mchezaji {responder_id} alikubali! Raundi {round_number} faida: Mchezaji {proposer_id} +${proposer_gain}, Mchezaji {responder_id} +${responder_gain}. Jumla mpya: Mchezaji 0: ${total_0}, Mchezaji 1: ${total_1}.",
+    "rejected": "Mchezaji {responder_id} alikataa mapendekezo! Raundi {round_number} faida: Wote wawili +$0. Jumla zinasalia: Mchezaji 0: ${total_0}, Mchezaji 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Mchezaji anayetoa mapendekezo lazima afanye mapendekezo kwa kutumia muundo [Offer: $X].",
+    "bad_integer": "Kiasi cha mapendekezo lazima kiwe nambari halali.",
+    "out_of_range": "Mapendekezo lazima yawe kati ya $0 na ${pool}.",
+    "no_current_offer": "Hakuna mapendekezo ya sasa ya kujibu.",
+    "accept_or_reject": "Mchezaji anayejibu lazima atumie ama [Accept] au [Reject] kwa mapendekezo."
+  },
+  "outcome": {
+    "win": "Mchezaji {winner} alishinda kwa ${winner_total} jumla dhidi ya Mchezaji {loser} aliyekuwa na ${loser_total}.",
+    "draw": "Sare! Wote wawili walimaliza kwa ${total} jumla."
+  }
+}

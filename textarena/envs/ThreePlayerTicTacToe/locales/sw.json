@@ -1,0 +1,32 @@
+{
+  "_comment": "Faili ya lugha ya ThreePlayerTicTacToe. USITAFSIRI funguo (upande wa kushoto). Tafsiri maadili tu (upande wa kulia).",
+  "_slots": {
+    "{player_id}": "Nambari ya mchezaji, mfano 0, 1 au 2",
+    "{symbol}": "Alama ya mchezaji, moja ya A, B au C",
+    "{cell}": "Nambari ya seli ya ubao",
+    "{max_cell}": "Nambari ya juu ya seli halali (ukubwa_wa_ubao^2 - 1)",
+    "{row}": "Kiwango cha safu ya ubao cha alama iliyowekwa",
+    "{col}": "Kiwango cha safu wima ya ubao cha alama iliyowekwa",
+    "{board}": "Ubao wa ASCII uliotolewa (usitafsiri)",
+    "{moves}": "Orodha ya vitendo vinavyopatikana vilivyotenganishwa na alama ya koma kama vile '[4]' (usitafsiri)"
+  },
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Tic Tac Toe ya Wachezaji Watatu.\nAlama yako ni '{symbol}'.\nUnabadilishana kuweka alama yako kwenye ubao wa 5x5 ili kuunda mstari wa nne.\nMistari inaweza kuwa mlalo, wima, au diagonal.\nWasilisha hatua yako kwa kutumia muundo '[4]' ili kuweka alama kwenye seli 4."
+  },
+  "board": {
+    "current_board": "Ubao wa Sasa:\n\n{board}\n\nMichezo Inayopatikana: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Muundo wa hatua si sahihi. Tumia '[selli]' ambapo seli ni 0-{max_cell}.",
+    "out_of_range": "Nambari ya seli si sahihi: {cell}. Lazima iwe kati ya 0 na {max_cell}.",
+    "already_occupied": "Seli {cell} tayari imekaliwa.",
+    "made_invalid": "Mchezaji {player_id} alifanya hatua isiyo sahihi"
+  },
+  "game_action": {
+    "placed": "Mchezaji {player_id} anaweka alama yake ({symbol}) kwenye uwanja ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Mchezaji {player_id} ({symbol}) ameshinda!",
+    "draw": "Mchezo ni sare!"
+  }
+}
