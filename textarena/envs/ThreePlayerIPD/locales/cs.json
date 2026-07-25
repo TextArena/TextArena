@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} ve 3-hráčské Iterované dilemě vězně. Zápas trvá {num_rounds} kol.\nStruktura kola:\n• {conv_rounds} volných chatovacích tahů\n• 1 rozhodovací tah - odeslat jeden token na soupeře: '[<opp-id> cooperate]' nebo '[<opp-id> defect]' (tj. '[1 defect] [2 cooperate]'; výchozí je 'spolupracovat'). \nPárová výplatní matice (použita pro každou neuspořádanou dvojici):\n  - Oba spolupracují  ->  {reward}\n  - Oba podvádějí     ->  {punishment}\n  - Vy podvádíte, oni spolupracují -> {temptation}\n  - Vy spolupracujete, oni podvádějí -> {sucker}\nHráč(i) s nejvyšším skóre na konci všech kol vyhrává."
+  },
+  "round": {
+    "start": "─── Začíná kolo {round} ───\tMůžete volně konverzovat po dobu {conv_rounds} kol.",
+    "chat_finished": "Chat pro kolo {round} skončil. Odešlete svá rozhodnutí, jeden token na soupeře: `[pid cooperate]` nebo `[pid defect]`."
+  },
+  "results": {
+    "header": "### Kolo {round} - Výsledky:",
+    "pair_line": "{observation}\n\t Hráč {i} vs Hráč {j} se rozhodl {choice_i} a {choice_j} (Hráč {i} získal {gain_i}, Hráč {j} získal {gain_j})",
+    "scores_open": "{observation}\n-> Aktuální skóre: ",
+    "score_first": "{observation}Hráč {player_id} ({score})",
+    "score_next": "{observation}; Hráč {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Konečné skóre: {scores}.  Skupiny pořadí (nejhorší→nejlepší): {groups}"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Soubor lokalizace pro ThreeCardMonte. NEpřekládávejte klíče (levá strana). Překládávejte pouze hodnoty (pravá strana).",
+  "_slots": {
+    "{line}": "Vykreslený řádek šálků",
+    "{step}": "Aktuální číslo kroku míchání",
+    "{steps}": "Celkový počet kroků míchání",
+    "{i}": "Index prvního šálku zapojeného do výměny",
+    "{j}": "Index druhého šálku zapojeného do výměny",
+    "{prompt}": "Lokalizovaná část výzvy připojená za šálky",
+    "{max_index}": "Nejvyšší platný index šálku, tj. num_cups-1",
+    "{ball_pos}": "Index šálku, pod kterým je míček"
+  },
+  "player_prompt": {
+    "intro": "Sledujte skrytý míček 'X', zatímco se šálky míchají.\nPo míchání uhodněte jeho umístění pomocí `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Míček začíná: {line}",
+    "shuffle": "Míchání {step}/{steps}: prohozeny šálky {i} a {j}.",
+    "cups": "Šálky: {line}  {prompt}",
+    "guess_now": "(Hádejte TEĎ!)",
+    "reveal": "(Odhalení: míček pod {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Špatná akce. Použijte `[k]`.",
+    "out_of_range": "Index mimo rozsah 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Správně! Našli jste míček.",
+    "lose": "Špatně — míček byl pod šálkem {ball_pos}."
+  }
+}

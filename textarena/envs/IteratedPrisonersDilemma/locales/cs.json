@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} v opakovném vězňově dilematu, které se táhne {num_rounds} kol.\n\nStruktura hry:\n- Před každým rozhodnutím máte {total_conversation_rounds} tahů na volnou komunikaci.\n- Poté oba hráči současně zvolí, zda budou spolupracovat nebo podvádět.\n\nMatice odměn (pevná pro každé kolo):\n- Oba spolupracují ➜ každý {cooperate_reward}\n- Oba podvádějí ➜ každý {mutual_defect_reward}\n- Jeden podvádí, druhý spolupracuje ➜ podvodník {defect_reward}, spolupracovník {sucker_reward}\n\nJak hrát:\n- Během konverzace: zadejte jakýkoli text, který chcete.\n- Během rozhodovací fáze: zahrňte '[Cooperate]' nebo '[Defect]' (nezáleží na velikosti písmen). Můžete přidat další text před nebo za token."
+  },
+  "phases": {
+    "conversation_finished": "Konverzace pro kolo {round} skončila. Odpovězte prosím s '[Cooperate]' nebo '[Defect]' v \\boxed{{}}.",
+    "starting_round": "--- Začíná kolo {round} ---",
+    "round_summary": "Výsledky kola {round}:\n{outcome}\nHráč 0 získal {r0} (celkem {score_0}), hráč 1 získal {r1} (celkem {score_1})."
+  },
+  "outcome": {
+    "winner": "Hráč {winner} vyhrál {win_score} - {lose_score}.",
+    "draw": "Remíza! Oba hráči získali {s0}.",
+    "round_both_cooperate": "Oba hráči spolupracovali.",
+    "round_both_defect": "Oba hráči podváděli.",
+    "round_p0_cooperates_p1_defects": "Hráč 0 spolupracoval, hráč 1 podváděl.",
+    "round_p0_defects_p1_cooperates": "Hráč 0 podváděl, hráč 1 spolupracoval."
+  }
+}

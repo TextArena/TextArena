@@ -1,0 +1,74 @@
+{
+  "_comment": "Soubor lokalizace pro Klondike Solitaire. NEpřekládávejte klíče (levá strana). Překládávejte pouze hodnoty (pravá strana).",
+  "_slots": {
+    "{n}": "Index akce v rámci příkazu odděleného čárkami, 1-založený",
+    "{msg}": "Vnořená zpráva o výsledku akce (již lokalizovaná)",
+    "{count}": "Počet otočených karet, které se přesouvají",
+    "{src}": "Číslo zdrojové hromádky, 1-založené",
+    "{dst}": "Číslo cílové hromádky, 1-založené",
+    "{cmd}": "Neznámý příkaz, který hráč zadal (nepřeložený)",
+    "{max_turns}": "Maximální počet tahů před koncem hry",
+    "{score}": "Počet karet aktuálně ve základních hromádkách",
+    "{board}": "Zobrazená ASCII deska (nepřekládá se)",
+    "{turn}": "Aktuální číslo tahu",
+    "{stock}": "Počet karet zbývajících v zásobě",
+    "{waste}": "Horní karta odpadkové hromádky, nebo '--' pokud je prázdná (nepřekládá se)",
+    "{cards}": "Karty v hromádce jako neutrální popisky, nebo '--' pokud je prázdná (nepřekládá se)"
+  },
+  "player_prompt": {
+    "intro": "Hrajete Klondike Solitaire. Vaším cílem je přesunout všechny karty do základních hromádek.\n\nPravidla hry:\n- Základní hromádky (F1-F4): Stavějte od esa po krále v barvě\n- Hromádky na stole (T1-T7): Stavějte dolů střídavě barev (červená na černou, černá na červenou)\n- Zásoba: Tahujte karty do odpadkové hromádky\n- Odpadková hromádka (W): Horní karta je k dispozici pro hru\n\nPříkazy:\n- 'draw' - Tahujte karty ze zásoby do odpadkové hromádky\n- 'move <zdroj> <cíl> [počet]' - Přesouvejte karty mezi hromádkami\n  Příklady: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Počet může být také 'all', který se pokusí přesunout všechny otočené karty.\n- 'forfeit' - Ukončete hru okamžitě a uzamkněte aktuální skóre\n- Jména hromádek: W (odpadková hromádka), F1-F4 (základní hromádky), T1-T7 (hromádky na stole)\n\nMůžete provádět několik akcí v jednom tahu oddělením je čárkami:\n  Příklad: 'draw, move W T1, move T2 F1'\n\nPouze králové mohou být umístěni na prázdné hromádky na stole.\nAkce se provádějí v pořadí - pokud jedna selže, zbývající akce se přeskočí.\nPoužijte 'forfeit', pokud si myslíte, že hra je nemožná vyhrát."
+  },
+  "format_error": {
+    "no_brackets": "Neplatný formát akce. Akce by měla být v závorkách.",
+    "no_closing_bracket": "Neplatný formát akce. Chybí uzavírací závorka ']'",
+    "empty_command": "Prázdný příkaz. Zadejte 'draw' nebo 'move <zdroj> <cíl> [počet]'",
+    "empty_action": "Prázdná akce",
+    "move_needs_args": "Příkaz move vyžaduje zdroj a cíl. Použití: 'move <zdroj> <cíl> [počet]'",
+    "count_positive": "Počet musí být kladný nebo 'all'",
+    "count_invalid": "Neplatný počet. Použijte číslo nebo 'all'",
+    "unknown_command": "Neznámý příkaz '{cmd}'. Použijte 'draw', 'move <zdroj> <cíl> [počet]', nebo 'forfeit'",
+    "wrapped": "Akce {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Akce {n}: {msg}",
+    "before_failure": "Provedeno {n} akcí před selháním.",
+    "failed": "Akce {n} selhala: {msg}"
+  },
+  "move_result": {
+    "drew": "Tahovány karty ze zásoby do odpadkové hromádky.",
+    "cannot_draw": "Nelze tahovat. Obojí zásoba i odpadková hromádka jsou prázdné.",
+    "invalid_pile": "Neplatné jméno hromádky. Použijte W, F1-F4, nebo T1-T7",
+    "foundation_one_card": "Můžete přesunout pouze 1 kartu do základní hromádky",
+    "waste_to_foundation_ok": "Přesunuta karta z odpadkové hromádky do základní hromádky F{dst}",
+    "waste_to_foundation_bad": "Nelze přesunout kartu z odpadkové hromádky do této základní hromádky",
+    "tableau_to_foundation_ok": "Přesunuta karta z hromádky na stole T{src} do základní hromádky F{dst}",
+    "tableau_to_foundation_bad": "Nelze přesunout kartu z hromádky na stole do této základní hromádky",
+    "foundation_to_foundation": "Nelze přesunout z základní hromádky do základní hromádky",
+    "waste_to_tableau_one_card": "Můžete přesunout pouze 1 kartu z odpadkové hromádky na hromádku na stole",
+    "waste_to_tableau_ok": "Přesunuta karta z odpadkové hromádky na hromádku na stole T{dst}",
+    "waste_to_tableau_bad": "Nelze umístit kartu z odpadkové hromádky na tuto hromádku na stole",
+    "no_face_up": "Žádné otočené karty k přesunutí",
+    "tableau_to_tableau_ok": "Přesunuto {count} karet z hromádky na stole T{src} na T{dst}",
+    "tableau_to_tableau_bad": "Nelze přesunout {count} karet z T{src} na T{dst}",
+    "foundation_to_tableau_one_card": "Můžete přesunout pouze 1 kartu z základní hromádky na hromádku na stole",
+    "foundation_empty": "Základní hromádka F{src} je prázdná",
+    "foundation_to_tableau_ok": "Přesunuta karta z základní hromádky F{src} na hromádku na stole T{dst}",
+    "foundation_to_tableau_bad": "Nelze umístit kartu z základní hromádky na hromádku na stole T{dst}",
+    "to_waste_or_stock": "Nelze přesunout do odpadkové hromádky nebo zásoby"
+  },
+  "outcome": {
+    "forfeit": "Hra byla vzdána. Konečné skóre: {score} karet v základních hromádkách.",
+    "won": "Gratulujeme! Vyhráli jste Klondike Solitaire!",
+    "turn_limit": "Hra skončila! Dosáhli jste maximálního počtu {max_turns} tahů. Skóre: {score} karet v základních hromádkách."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Tah: {turn}/{max_turns}",
+    "stock": "Zásoba: {stock} karet",
+    "waste": "Odpadková hromádka (W): {waste}",
+    "foundations_header": "Základní hromádky:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Hromádky na stole:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}
