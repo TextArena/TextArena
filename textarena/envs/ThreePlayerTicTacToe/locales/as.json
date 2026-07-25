@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "আপুনি তিনিজনীয়া টিক টক টু খেলত খেলুৱৈ {player_id}। আপোনাৰ চিহ্নটো হ'ল '{symbol}'। আপুনি আপোনাৰ চিহ্নটো ৫x৫ বৰ্ডত চাৰিটা লাইনৰ এটা লাইন গঠনৰ বাবে স্থানান্তৰিত কৰে। লাইনবোৰ অনুভূমিক, উলম্ব বা তৰংগ হ'ব পাৰে। চেল ৪ চিহ্নিত কৰিবলৈ '[4]' ফৰ্মেট ব্যৱহাৰ কৰি আপোনাৰ পদক্ষেপ দাখিল কৰক।"
+  },
+  "board": {
+    "current_board": "বৰ্তমানৰ বোৰ্ডঃ {board} উপলব্ধ চলনসমূহঃ {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "অবৈধ স্থানান্তৰ বিন্যাস। '[cell]' ব্যৱহাৰ কৰক য'ত কোষটো 0-{max_cell}।",
+    "out_of_range": "অবৈধ চেল নম্বৰঃ {cell}। 0 আৰু {max_cell}ৰ মাজত থাকিব লাগিব।",
+    "already_occupied": "কোষ {cell} ইতিমধ্যে ভৰপূৰ।",
+    "made_invalid": "খেলুৱৈ {player_id}য়ে অবৈধ পদক্ষেপ গ্ৰহণ কৰে"
+  },
+  "game_action": {
+    "placed": "খেলুৱৈ {player_id} য়ে নিজৰ চিহ্ন ({symbol}) ৰ ক্ষেত্ৰত ({row}, {col}) ৰ ভিতৰত ৰাখে।"
+  },
+  "outcome": {
+    "win": "খেলুৱৈ {player_id} ({symbol}) বিজয়ী!",
+    "draw": "খেলখন ড্ৰ হৈছে!"
+  }
+}

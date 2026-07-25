@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "আপুনি খেলোয়াড় {player_id} একটি ৩-খেলোয়াড় পুনরাবৃত্তি করা বন্দীর দ্বিধায়। ম্যাচটি {num_rounds} রাউন্ড স্থায়ী হয়।\nরাউন্ড কাঠামো:\n• {conv_rounds} ফ্রি-চ্যাট টার্ন\n• ১ সিদ্ধান্ত টার্ন - প্রতিটি প্রতিপক্ষের জন্য একটি টোকেন জমা দিন: '[<opp-id> cooperate]' বা '[<opp-id> defect]' (অর্থাৎ '[1 defect] [2 cooperate]'; ডিফল্ট হল 'সহযোগিতা করুন')। \nজোড়া-বিশিষ্ট পে-অফ ম্যাট্রিক্স (প্রতিটি অ-সাজানো জোড়ার জন্য প্রয়োগ করা হয়):\n  - উভয়ই সহযোগিতা করে  ->  {reward}\n  - উভয়ই বিশ্বাসঘাতকতা করে     ->  {punishment}\n  - আপনি বিশ্বাসঘাতকতা করেন, তারা সহযোগিতা করে -> {temptation}\n  - আপনি সহযোগিতা করেন, তারা বিশ্বাসঘাতকতা করে -> {sucker}\nসকল রাউন্ডের শেষে সর্বোচ্চ স্কোর থাকা খেলোয়াড়(গণ) জয়ী হয়।"
+  },
+  "round": {
+    "start": "─── আৰম্ভণি ৰাউণ্ড {round} ─── পৰৱৰ্তী {conv_rounds} ৰাউণ্ডত আপুনি মুক্তভাৱে কথা পাতিব পাৰে।",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### ৰাউণ্ড {round} - ফলাফলঃ",
+    "pair_line": "{observation} খেলুৱৈ {i} বনাম খেলুৱৈ {j} ক্ৰমে {choice_i} আৰু {choice_j} বাছনি কৰে (খেলুৱৈ {i} লাভ কৰে {gain_i}, খেলুৱৈ {j} লাভ কৰে {gain_j})",
+    "scores_open": "{observation} -> বৰ্তমানৰ স্ক'ৰঃ ",
+    "score_first": "{observation}প্লেয়াৰ {player_id} ({score})",
+    "score_next": "{observation}; খেলুৱৈ {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "চূড়ান্ত স্ক'ৰঃ {scores}। ৰেংকিং গোট (শ্ৰেষ্ঠৰ পৰা সৰ্বশ্ৰেষ্ঠলৈ): {groups}"
+  }
+}

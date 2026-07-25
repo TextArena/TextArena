@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "আপুনি খেলোয়াড় {player_id}। আপুনি মেমোরি গেম খেলিছেন。\nআপুনার লক্ষ্য হল বোর্ডে আরো বেশি কার্ডের জোড়া মেলানো, আপুনার প্রতিপক্ষের চেয়ে।\nআপুনার পালায়, দুটি কার্ড নির্বাচন করুন যাতে সেগুলিকে উল্টানো যায় প্রথম আরু দ্বিতীয় কার্ডের সারি আরু কলাম সংখ্যা প্রবেশ করিয়ে '[0 1 1 0]' এর মতো, যেখানে প্রথম কার্ডটি সারি 0 আরু কলাম 1 এ, আরু দ্বিতীয় কার্ডটি সারি 1 আরু কলাম 0 এ।\nযদি দুটি কার্ড মিলে, আপনি একটি পয়েন্ট পান আরু কার্ডগুলি মুখোমুখি থাকে। যদি সেগুলি মিলে না, কার্ডগুলি মুখোমুখি হয়ে যায় না, যেমন '.'।\nখেলাটি শেষ হয় যখন সমস্ত জোড়া মেলানো হয়।"
+  },
+  "board": {
+    "current_board": "বৰ্তমানৰ বোৰ্ডঃ {board}",
+    "current_game_board": "বৰ্তমানৰ খেলৰ বোৰ্ডঃ {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "অবৈধ পদক্ষেপ বিন্যাস. খেলুৱৈ {player_id}য়ে বৰ্গাকৃতিৰ বন্ধকত বৈধ দিশৰ সৈতে উত্তৰ দিয়া নাছিল।",
+    "out_of_bounds": "অবৈধ পদক্ষেপ. খেলুৱৈ {player_id}য়ে আউট-অফ-ব'ণ্ডাৰ অৱস্থান নিৰ্বাচন কৰে।",
+    "same_card_twice": "অবৈধ পদক্ষেপ. খেলুৱৈ {player_id}য়ে একেখন কাৰ্ড দুবাৰ বাছনি কৰে।",
+    "already_matched": "অবৈধ পদক্ষেপ। খেলুৱৈ {player_id} এজনে ইতিমধ্যে মিলিত হোৱা এখন বা দুয়োখন কাৰ্ড বাছনি কৰে।"
+  },
+  "game_message": {
+    "cards_match": "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
+    "cards_no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+  },
+  "outcome": {
+    "draw": "Both players matched the same number of pairs of cards.",
+    "win": "খেলুৱৈ {winner_id} বিজয়ী হৈছে!",
+    "turn_limit": "খেলুৱৈ ০ ৰ {score_0} পইণ্ট, খেলুৱৈ ১ ৰ {score_1} পইণ্ট।",
+    "turn_limit_win": "{reason} খেলুৱৈ {winner_id} বিজয়ী হৈছে!"
+  }
+}

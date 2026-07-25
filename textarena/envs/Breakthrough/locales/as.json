@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are playing {color} in a game of Breakthrough. You move {direction} on an {board_size}x{board_size} board.\nIn your turn you can move a single piece one step forward or diagonally forward.\nA piece may only move diagonally if an opponent piece is there, and only move into such a preoccupied square in a diagonal step.\nWhen stepping into a square with an opponent piece, you capture it and the opponent's piece is removed permanently from the board.\nUse UCI-like notation in brackets, e.g. [a2a3] to move from a2 to a3.\n* 'a' corresponds to the leftmost column, '1' is the bottom row (from White's perspective).\n* Blacks's home row is the top row (row 8 for an 8x8). White's home row is the bottom row (row 1 for an 8x8).\nThe first player whose piece reaches the opponent's home row wins. If your pieces are all captured, you lose."
+  },
+  "invalid_move": {
+    "wrong_format": "অনুগ্ৰহ কৰি [a2a3]ৰ দৰে বন্ধনীযুক্ত বীজগণিতীয় সংকেত ব্যৱহাৰ কৰক।",
+    "out_of_bounds": "এই স্থানান্তৰ বোৰ্ডৰ সীমাৰ বাহিৰত।",
+    "illegal": "সেই পদক্ষেপটো ব্ৰেকথ্ৰ'ৰ নিয়ম অনুসৰণ নকৰে বা আপোনাৰ কাম নহয়।"
+  },
+  "game_action": {
+    "moved": "খেলুৱৈ {player_id}য়ে {move_str} ({piece}) ক প্ৰহাৰ কৰে।"
+  },
+  "outcome": {
+    "white_reached": "বগা ৰঙে ব্লেকৰ হোম ৰ'ডত প্ৰৱেশ কৰে।",
+    "black_reached": "ব্লেকে হোৱাইটৰ হোম ৰ'ডত প্ৰৱেশ কৰে।",
+    "white_captured": "সকলো বগা টুকুৰা ধৰা পেলোৱা হৈছে।",
+    "black_captured": "সকলো ব্লেক প্লেট ধৰা পেলোৱা হৈছে।",
+    "no_moves": "খেলুৱৈ {player_id}ৰ হাতত আৰু কোনো পদক্ষেপ নাই।"
+  }
+}

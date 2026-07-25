@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "আপনি কর্নেল ব্লট্টোতে {role}।\nআপনার লক্ষ্য হল আপনার প্রতিপক্ষের চেয়ে বেশি রাউন্ড জিততে।\nপ্রতিটি রাউন্ডে, ঠিক {num_total_units} ইউনিটগুলিকে {field_names} ক্ষেত্রগুলিতে বরাদ্দ করুন।\nযে খেলোয়াড় একটি ক্ষেত্রে বেশি ইউনিট বরাদ্দ করে সেই ক্ষেত্রটি জিতে নেয়, আর যে খেলোয়াড় বেশি ক্ষেত্র জিতে নেয় সেই রাউন্ডটি জিতে নেয়।\nউদাহরণস্বরূপ, '[A7 B7 C6]'  A তে ৭ ইউনিট,  B তে ৭ এবং  C তে ৬ বরাদ্দ করে।",
+    "commander_alpha": "কমাণ্ডাৰ আলফা",
+    "commander_beta": "কমাণ্ডাৰ বেটা"
+  },
+  "game_state": {
+    "header_round": "=== কৰ্ণেল ব্ল'ট্টো - ৰাউণ্ড {current_round}/{num_rounds} === ৰাউণ্ড জয় - কমাণ্ডাৰ আলফা: {alpha_score}, কমাণ্ডাৰ বিটা: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "ৰাউণ্ড {current_round} কমাণ্ডাৰ আলফা আৱণ্টন কৰা হৈছেঃ {p0_allocations} কমাণ্ডাৰ বিটা আৱণ্টন কৰা হৈছেঃ {p1_allocations} ",
+    "winner_alpha": "{message}বিজয়ীঃ কমাণ্ডাৰ আলফা",
+    "winner_beta": "{message}বিজয়ীঃ কমাণ্ডাৰ বেটা",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "অবৈধ ইনপুট বিন্যাস ব্যৱহাৰ কৰকঃ A:5, B:10, C:5",
+    "invalid_field": "অবৈধ ক্ষেত্ৰৰ নাম (ক) বৈধ ক্ষেত্ৰসমূহঃ {field_names}",
+    "wrong_allocation_value": "সকলো বণ্টন অ-নেগেটিভ ইণ্টিজাৰৰ হ'ব লাগিব।",
+    "incorrect_total_units": "আপুনি ঠিকমতে {num_total_units} ইউনিট আৱণ্টন কৰিব লাগিব। বৰ্তমানৰ সমষ্টিঃ {current_sum}",
+    "good_allocations": "বণ্টন ভাল হৈছে।"
+  },
+  "outcome": {
+    "winner_alpha": "কমান্ডার আলফা {score_0}-{score_1} জিতেছে {num_rounds} রাউন্ডের পর!",
+    "winner_beta": "কমান্ডার বিটা {score_1}-{score_0} জিতেছে {num_rounds} রাউন্ডের পর!",
+    "draw": "Game ends in a {score_0}-{score_1} tie after {num_rounds} rounds!",
+    "early_winner_alpha": "কমাণ্ডাৰ আলফাই জয়লাভ কৰে {scores_0}-{scores_1} (বৃহৎ সংখ্যাগৰিষ্ঠতা লাভ) ।",
+    "early_winner_beta": "কমাণ্ডাৰ বেটা বিজয়ী {scores_1}-{scores_0} (বৃহৎ সংখ্যাগৰিষ্ঠতা লাভ)!"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing a game of Pig Dice.\n\nRules:\n- On your turn, you can either '[roll]' or '[hold]'\n- Roll a 2-6: Add to your turn total\n- Roll a 1: Lose turn total and end turn\n- Hold: Add turn total to your score and end turn\n- First to {winning_score} points wins\n\nWhen it's your turn, you'll see the current scores and turn total.\nRespond with '[roll]' to roll the die or '[hold]' to bank your points."
+  },
+  "invalid_move": {
+    "invalid_action": "অবৈধ ক্ৰিয়াৰ বিন্যাস। \"[roll]\" বা \"[hold]\" ব্যৱহাৰ কৰক।"
+  },
+  "actions": {
+    "player_busted": "খেলোয়াড় {player_id} হারিয়েছে, {turn_total} পয়েন্ট হারাচ্ছে!",
+    "player_hold": "খেলুৱৈ {player_id}য়ে ৰাখে আৰু বেংক কৰে {turn_total}পইণ্ট।"
+  },
+  "board": {
+    "player": "খেলুৱৈ ০ঃ \"{score_0}\"; খেলুৱৈ ১ঃ \"{score_1}\"",
+    "current_total_scores": "বৰ্তমানৰ মুঠ স্ক'ৰঃ {scores} আপোনাৰ বৰ্তমানৰ মুঠ টাৰ্ণ হৈছে {turn_total}।",
+    "roll_history": "{observation} এই টাৰ্ণটোৰ বাবে আপোনাৰ ৰোল হিষ্টৰীঃ {roll_history}",
+    "first_roll": "{observation} এইটো তোমাৰ প্রথম ৰোল।",
+    "available_actions": "{observation} উপলব্ধ কাৰ্য্যসমূহঃ \"[roll]\" বা \"[hold]\""
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Player {winner_id} won by having a higher score at the turn limit ({scores})",
+    "winner_by_score": "খেলুৱৈ {winner_id}য়ে {winning_score}ৰ লক্ষ্য স্ক'ৰত উপনীত হৈ জয়ী হয়!",
+    "draw": "পালা সীমা পৌঁছেছে এবং সমস্ত খেলোয়াড়ের একই স্কোর আছে: {scores}"
+  }
+}

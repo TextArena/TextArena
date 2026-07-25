@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "বৰ্তমানৰ বোৰ্ডঃ {board} উপলব্ধ চলনসমূহঃ {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- কেন্দ্ৰীয় স্তূপসমূহ --- ",
+    "pile": "{observation}পাইল {i}: {pile} ",
+    "player_view_header": "{observation} --- খেলুৱৈ {player_id}ৰ মতামত --- ",
+    "payoff": "{observation}পে'অফ পাইল (উচ্চতম কাৰ্ড): {top_card}, পে'অফ পাইলৰ দৈৰ্ঘ্যঃ {payoff_length} ",
+    "hand": "{observation}হাতঃ {hand} ",
+    "discard": "{observation}আৱৰ্জনাৰ স্তূপসমূহঃ {discard} ",
+    "empty": "খালী"
+  },
+  "game_message": {
+    "no_cards_left": "আপোনাৰ হাতত আৰু কাৰ্ড নাই, মনত ৰাখিব যে আপুনি এই কাৰ্ডবোৰ খেলিব পাৰেঃ আপোনাৰ হাতৰ কাৰ্ড, আপোনাৰ উপাৰ্জনকাৰী স্তূপৰ শীৰ্ষ কাৰ্ড, আপোনাৰ বাতিল স্তূপৰ শীৰ্ষ কাৰ্ড।"
+  },
+  "invalid_move": {
+    "wrong_format": "অবৈধ পদক্ষেপ বিন্যাস. খেলুৱৈ {player_id}য়ে বৰ্গাকৃতিৰ বন্ধনত বৈধ পদক্ষেপৰ সৈতে প্ৰতিক্ৰিয়া কৰা নাছিল।",
+    "invalid_play": "খেলুৱৈ {player_id}য়ে কেন্দ্ৰীয় স্তম্ভ {index}ত {card} খেলিবলৈ চেষ্টা কৰিছিল।",
+    "discard_from_payoff": "অবৈধ বাতিল. খেলুৱৈ {player_id}য়ে পে'ডফ পাইলৰ পৰা কাৰ্ড এটা বাতিল কৰিবলৈ চেষ্টা কৰিছিল।",
+    "discard_not_in_hand": "অবৈধ বাতিল. খেলুৱৈ {player_id} হাতত নথকা কাৰ্ড এটা বাতিল কৰিবলৈ চেষ্টা কৰে।",
+    "wrong_move_type": "অবৈধ পদক্ষেপৰ প্ৰকাৰঃ খেলুৱৈ {player_id}য়ে কোনো বৈধ পদক্ষেপৰ প্ৰকাৰৰ সৈতে প্ৰতিক্ৰিয়া কৰা নাই।"
+  },
+  "game_action": {
+    "you_drew": "তুমি কাৰ্ড আঁকিছিলা।",
+    "opponent_drew": "খেলুৱৈ {player_id}য়ে কাৰ্ড টানিলে।",
+    "you_played": "আপুনি কেন্দ্ৰীয় স্তম্ভ {index}ত {card} খেলিছিল।",
+    "opponent_played": "খেলোয়াড় {player_id} কেন্দ্রীয় পাইল {index} এ {card} খেলেছেন।",
+    "you_discarded": "আপুনি {card} নিক্ষেপ কৰিলে {index} নিক্ষেপ কৰিবলৈ, যাৰ অৰ্থ হৈছে আপুনি তেওঁলোকৰ পাল শেষ কৰিছে। আপোনাৰ কোনো পৰৱৰ্তী কাৰ্য্য এই পালৰ বাবে বিবেচনা কৰা নহয়। খেলুৱৈ {next_player_id} পৰৱৰ্তী হৈ যাব।",
+    "opponent_discarded": "খেলুৱৈ {player_id}য়ে {card}ক পৰিত্যাগ কৰি {index}ক পৰিত্যাগ কৰে, যাৰ অৰ্থ হৈছে তেওঁলোকৰ পাল শেষ হৈছে। খেলুৱৈ {player_id}ৰ কোনো পৰৱৰ্তী ক্ৰিয়া এই পালৰ বাবে বিবেচনা কৰা নহয়। খেলুৱৈ {next_player_id}, আপুনি পৰৱৰ্তী। অনুগ্ৰহ কৰি আপোনাৰ ক্ৰিয়া [action card center_index]ৰ বিন্যাসত প্ৰবিষ্ট কৰক।"
+  },
+  "outcome": {
+    "payoff_cleared": "খেলুৱৈ {current_player}য়ে তেওঁলোকৰ পে'ড-আফ পিক সম্পূৰ্ণ কৰিছে! খেলুৱৈ {current_player}ই জয়ী হৈছে!",
+    "deadlock_player_0": "খেলুৱৈ ০ ৰ হাতত {player_0_payoff} কাৰ্ড বাকী থকা অৱস্থাত খেলুৱৈ ১ ৰ {player_1_payoff} কাৰ্ডৰ বিৰুদ্ধে জয়ী হয়।",
+    "deadlock_player_1": "খেলুৱৈ ১ ৰ হাতত {player_1_payoff} কাৰ্ড বাকী থকা অৱস্থাত খেলুৱৈ ০ ৰ {player_0_payoff} কাৰ্ডৰ বিপৰীতে জয়ী হয়।",
+    "deadlock_tie": "Deadlock reached with tie! Both players have {player_0_payoff} cards remaining. Player {current_player} wins by default."
+  }
+}
