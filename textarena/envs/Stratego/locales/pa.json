@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "ਮੌਜੂਦਾ ਬੋਰਡ: {board} ਉਪਲਬਧ ਚਾਲਾਂਃ {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "ਅਵੈਧ ਐਕਸ਼ਨ ਫਾਰਮੈਟ. ਖਿਡਾਰੀ {player_id} ਨੇ ਫਾਰਮੈਟ [A0 B0] ਵਿੱਚ ਇੱਕ ਚਾਲ ਨਹੀਂ ਕੀਤੀ।",
+    "invalid_coordinates": "ਅਵੈਧ ਐਕਸ਼ਨ ਫਾਰਮੈਟ. ਖਿਡਾਰੀ {player_id} ਨੇ ਵੈਧ ਕੋਆਰਡੀਨੇਟ ਨਹੀਂ ਦਿੱਤੇ।",
+    "not_own_piece": "ਅਵੈਧ ਐਕਸ਼ਨ ਫਾਰਮੈਟ. ਖਿਡਾਰੀ {player_id} ਨੂੰ ਆਪਣੇ ਹੀ ਟੁਕੜਿਆਂ ਵਿੱਚੋਂ ਇੱਕ ਨੂੰ ਹਿਲਾਉਣਾ ਚਾਹੀਦਾ ਹੈ.",
+    "scout_through_pieces": "ਅਵੈਧ ਐਕਸ਼ਨ ਫਾਰਮੈਟ. ਖਿਡਾਰੀ {player_id} ਕਿਸੇ ਹੋਰ ਟੁਕੜੇ ਰਾਹੀਂ ਸਕਾਊਟ ਨੂੰ ਨਹੀਂ ਭੇਜ ਸਕਦਾ।",
+    "scout_diagonal": "Invalid action format. Player {player_id} cannot move a scout diagonally.",
+    "non_scout_multi_square": "ਅਵੈਧ ਐਕਸ਼ਨ ਫਾਰਮੈਟ. ਸਕਾਊਟਸ ਤੋਂ ਇਲਾਵਾ, ਟੁਕੜੇ ਇੱਕ ਸਮੇਂ ਵਿੱਚ ਸਿਰਫ ਇੱਕ ਹੀ ਵਰਗ ਨੂੰ ਹਿਲਾ ਸਕਦੇ ਹਨ.",
+    "move_into_lake": "ਅਵੈਧ ਐਕਸ਼ਨ ਫਾਰਮੈਟ. ਖਿਡਾਰੀ {player_id} ਝੀਲ ਵਿੱਚ ਨਹੀਂ ਜਾ ਸਕਦਾ.",
+    "move_onto_own_piece": "ਅਵੈਧ ਐਕਸ਼ਨ ਫਾਰਮੈਟ. ਖਿਡਾਰੀ {player_id} ਆਪਣੇ ਟੁਕੜੇ 'ਤੇ ਨਹੀਂ ਜਾ ਸਕਦਾ.",
+    "move_bomb_or_flag": "ਅਵੈਧ ਐਕਸ਼ਨ ਫਾਰਮੈਟ. ਖਿਡਾਰੀ {player_id} ਬੰਬ ਜਾਂ ਝੰਡਾ ਨਹੀਂ ਹਿਲਾ ਸਕਦਾ."
+  },
+  "game_action": {
+    "you_moved": "ਤੁਸੀਂ ਆਪਣੇ ਟੁਕੜੇ ਨੂੰ {source} ਤੋਂ {dest} ਵਿੱਚ ਭੇਜਿਆ ਹੈ।",
+    "opponent_moved": "ਖਿਡਾਰੀ {player_id} ਨੇ ਇੱਕ ਟੁਕੜਾ {source} ਤੋਂ {dest} ਤੱਕ ਭੇਜਿਆ ਹੈ।",
+    "you_equal_ranks": "ਤੁਸੀਂ ਆਪਣੇ ਟੁਕੜੇ ਨੂੰ {source} ਤੋਂ {dest} ਵਿੱਚ ਭੇਜਿਆ ਹੈ। ਹਮਲਾ ਕਰਨ ਵਾਲਾ ਟੁਕੜਾ {attacking_rank} ਸੀ ਅਤੇ ਮੰਜ਼ਿਲ ਟੁਕੜਾ {target_rank} ਸੀ। ਕਿਉਂਕਿ ਰੈਂਕ ਇਕੋ ਜਿਹੇ ਹਨ, ਦੋਵੇਂ ਟੁਕੜੇ ਗੁਆਚ ਗਏ ਹਨ।",
+    "opponent_equal_ranks": "ਖਿਡਾਰੀ {player_id} ਨੇ ਇੱਕ ਟੁਕੜਾ {source} ਤੋਂ {dest} ਤੱਕ ਭੇਜਿਆ ਹੈ। ਹਮਲਾਵਰ ਟੁਕੜਾ {attacking_rank} ਸੀ ਅਤੇ ਮੰਜ਼ਿਲ ਟੁਕੜਾ {target_rank} ਸੀ। ਕਿਉਂਕਿ ਰੈਂਕ ਇਕੋ ਜਿਹੇ ਹਨ, ਦੋਵੇਂ ਟੁਕੜੇ ਗੁਆਚ ਗਏ ਹਨ।",
+    "you_miner_defused": "ਤੁਸੀਂ ਆਪਣੇ ਟੁਕੜੇ ਨੂੰ {source} ਤੋਂ {dest} ਵਿੱਚ ਭੇਜਿਆ ਹੈ। ਹਮਲਾ ਕਰਨ ਵਾਲਾ ਟੁਕੜਾ {attacking_rank} ਸੀ ਅਤੇ ਮੰਜ਼ਿਲ ਟੁਕੜਾ {target_rank} ਸੀ। ਕਿਉਂਕਿ ਮਾਈਨਰ ਬੰਬਾਂ ਨੂੰ ਅਸਮਰੱਥ ਕਰ ਸਕਦੇ ਹਨ, ਤੁਸੀਂ ਲੜਾਈ ਜਿੱਤੀ ਹੈ।",
+    "opponent_miner_defused": "ਖਿਡਾਰੀ {player_id} ਨੇ ਇੱਕ ਟੁਕੜਾ {source} ਤੋਂ {dest} ਤੱਕ ਭੇਜਿਆ ਹੈ। ਹਮਲਾ ਕਰਨ ਵਾਲਾ ਟੁਕੜਾ {attacking_rank} ਸੀ ਅਤੇ ਮੰਜ਼ਿਲ ਟੁਕੜਾ {target_rank} ਸੀ। ਕਿਉਂਕਿ ਮਾਈਨਰ ਬੰਬਾਂ ਨੂੰ ਅਸਮਰੱਥ ਕਰ ਸਕਦੇ ਹਨ, ਤੁਸੀਂ ਲੜਾਈ ਹਾਰ ਗਏ ਹੋ।",
+    "you_bomb_lost": "ਤੁਸੀਂ ਆਪਣੇ ਟੁਕੜੇ ਨੂੰ {source} ਤੋਂ {dest} ਵਿੱਚ ਭੇਜਿਆ ਹੈ। ਹਮਲਾ ਕਰਨ ਵਾਲਾ ਟੁਕੜਾ {attacking_rank} ਸੀ ਅਤੇ ਮੰਜ਼ਿਲ ਟੁਕੜਾ {target_rank} ਸੀ। ਕਿਉਂਕਿ ਹਮਲਾਵਰ ਇੱਕ ਮਾਈਨਰ ਨਹੀਂ ਹੈ, ਤੁਸੀਂ ਲੜਾਈ ਹਾਰ ਗਏ ਹੋ।",
+    "opponent_bomb_won": "ਖਿਡਾਰੀ {player_id} ਨੇ ਇੱਕ ਟੁਕੜਾ {source} ਤੋਂ {dest} ਤੱਕ ਭੇਜਿਆ ਹੈ। ਹਮਲਾ ਕਰਨ ਵਾਲਾ ਟੁਕੜਾ {attacking_rank} ਸੀ ਅਤੇ ਮੰਜ਼ਿਲ ਟੁਕੜਾ {target_rank} ਸੀ। ਕਿਉਂਕਿ ਹਮਲਾਵਰ ਇੱਕ ਮਾਈਨਰ ਨਹੀਂ ਹੈ, ਤੁਸੀਂ ਲੜਾਈ ਜਿੱਤੀ।",
+    "you_spy_won": "ਤੁਸੀਂ ਆਪਣੇ ਟੁਕੜੇ ਨੂੰ {source} ਤੋਂ {dest} ਵਿੱਚ ਭੇਜਿਆ ਹੈ। ਹਮਲਾ ਕਰਨ ਵਾਲਾ ਟੁਕੜਾ {attacking_rank} ਸੀ ਅਤੇ ਮੰਜ਼ਿਲ ਟੁਕੜਾ {target_rank} ਸੀ। ਕਿਉਂਕਿ ਹਮਲਾਵਰ ਇੱਕ ਜਾਸੂਸ ਹੈ ਅਤੇ ਮੰਜ਼ਿਲ ਇੱਕ ਮਾਰਸ਼ਲ ਹੈ, ਤੁਸੀਂ ਲੜਾਈ ਜਿੱਤੀ ਹੈ।",
+    "opponent_spy_lost": "ਖਿਡਾਰੀ {player_id} ਨੇ ਇੱਕ ਟੁਕੜਾ {source} ਤੋਂ {dest} ਤੱਕ ਭੇਜਿਆ ਹੈ। ਹਮਲਾ ਕਰਨ ਵਾਲਾ ਟੁਕੜਾ {attacking_rank} ਸੀ ਅਤੇ ਮੰਜ਼ਿਲ ਟੁਕੜਾ {target_rank} ਸੀ। ਕਿਉਂਕਿ ਹਮਲਾਵਰ ਇੱਕ ਜਾਸੂਸ ਹੈ ਅਤੇ ਮੰਜ਼ਿਲ ਇੱਕ ਮਾਰਸ਼ਲ ਹੈ, ਤੁਸੀਂ ਲੜਾਈ ਹਾਰ ਗਏ ਹੋ।",
+    "you_higher_won": "ਤੁਸੀਂ ਆਪਣੇ ਟੁਕੜੇ ਨੂੰ {source} ਤੋਂ {dest} ਵਿੱਚ ਭੇਜਿਆ ਹੈ। ਹਮਲਾ ਕਰਨ ਵਾਲਾ ਟੁਕੜਾ {attacking_rank} ਸੀ ਅਤੇ ਮੰਜ਼ਿਲ ਦਾ ਟੁਕੜਾ {target_rank} ਸੀ। ਕਿਉਂਕਿ ਹਮਲਾਵਰ ਮੰਜ਼ਿਲ ਨਾਲੋਂ ਉੱਚਾ ਰੈਂਕ ਹੈ, ਤੁਸੀਂ ਲੜਾਈ ਜਿੱਤੀ ਹੈ।",
+    "opponent_higher_lost": "ਖਿਡਾਰੀ {player_id} ਨੇ ਇੱਕ ਟੁਕੜਾ {source} ਤੋਂ {dest} ਤੱਕ ਭੇਜਿਆ ਹੈ। ਹਮਲਾ ਕਰਨ ਵਾਲਾ ਟੁਕੜਾ {attacking_rank} ਸੀ ਅਤੇ ਮੰਜ਼ਿਲ ਟੁਕੜਾ {target_rank} ਸੀ। ਕਿਉਂਕਿ ਹਮਲਾਵਰ ਮੰਜ਼ਿਲ ਤੋਂ ਉੱਚਾ ਰੈਂਕ ਹੈ, ਤੁਸੀਂ ਲੜਾਈ ਹਾਰ ਗਏ ਹੋ।",
+    "you_lower_lost": "ਤੁਸੀਂ ਆਪਣੇ ਟੁਕੜੇ ਨੂੰ {source} ਤੋਂ {dest} ਵਿੱਚ ਭੇਜਿਆ ਹੈ। ਹਮਲਾ ਕਰਨ ਵਾਲਾ ਟੁਕੜਾ {attacking_rank} ਸੀ ਅਤੇ ਮੰਜ਼ਿਲ ਦਾ ਟੁਕੜਾ {target_rank} ਸੀ। ਕਿਉਂਕਿ ਹਮਲਾਵਰ ਮੰਜ਼ਿਲ ਨਾਲੋਂ ਘੱਟ ਰੈਂਕ ਵਾਲਾ ਹੈ, ਤੁਸੀਂ ਲੜਾਈ ਹਾਰ ਗਏ ਹੋ।",
+    "opponent_lower_won": "ਖਿਡਾਰੀ {player_id} ਨੇ ਇੱਕ ਟੁਕੜਾ {source} ਤੋਂ {dest} ਤੱਕ ਭੇਜਿਆ ਹੈ। ਹਮਲਾ ਕਰਨ ਵਾਲਾ ਟੁਕੜਾ {attacking_rank} ਸੀ ਅਤੇ ਮੰਜ਼ਿਲ ਦਾ ਟੁਕੜਾ {target_rank} ਸੀ। ਕਿਉਂਕਿ ਹਮਲਾਵਰ ਮੰਜ਼ਿਲ ਨਾਲੋਂ ਘੱਟ ਰੈਂਕ ਦਾ ਹੈ, ਤੁਸੀਂ ਲੜਾਈ ਜਿੱਤੀ।"
+  },
+  "outcome": {
+    "flag_captured": "ਖਿਡਾਰੀ {player_id} ਨੇ ਵਿਰੋਧੀ ਦੇ ਝੰਡੇ ਨੂੰ ਫੜ ਲਿਆ ਹੈ!",
+    "no_movable_pieces": "ਖਿਡਾਰੀ {winner_id} ਜਿੱਤਦਾ ਹੈ! ਖਿਡਾਰੀ {loser_id} ਕੋਲ ਹੋਰ ਚਾਲੂ ਟੁਕੜੇ ਨਹੀਂ ਹਨ."
+  }
+}

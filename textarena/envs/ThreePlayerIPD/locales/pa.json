@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "ਤੁਸੀਂ 3 ਖਿਡਾਰੀਆਂ ਦੇ ਇਟੇਰੇਟਿਡ ਕੈਦੀ ਦੀ ਦੁਚਿੱਤੀ ਵਿਚ ਖਿਡਾਰੀ {player_id} ਹੋ. ਮੈਚ {num_rounds} ਦੌਰ ਤੱਕ ਚਲਦਾ ਹੈ. ਦੌਰ ਦਾ ਢਾਂਚਾਃ • {conv_rounds} ਮੁਫਤ-ਚੈਟ ਵਾਰੀ • 1 ਫੈਸਲਾ ਕਰਨ ਦੀ ਵਾਰੀ - ਪ੍ਰਤੀ ਵਿਰੋਧੀ ਇਕ ਟੋਕਨ ਜਮ੍ਹਾ ਕਰੋਃ '[<opp-id> cooperate]' ਜਾਂ '[<opp-id> defect]' (ਭਾਵ '[1 defect] [2 cooperate]; ਡਿਫਾਲਟ 'ਸਹਿਕਾਰਤਾ' ਹੈ) ਜੋੜਾ-ਬੁੱਧੀਮਾਨ ਭੁਗਤਾਨ ਮੈਟ੍ਰਿਕਸ (ਹਰੇਕ ਗੈਰ-ਕ੍ਰਮਬੱਧ ਜੋੜੇ ਤੇ ਲਾਗੂ): - ਦੋਵੇਂ ਸਹਿਯੋਗ -> {reward} - ਦੋਵੇਂ ਨੁਕਸ -> {punishment} - ਤੁਸੀਂ ਨੁਕਸ, ਉਹ ਸਹਿਯੋਗ -> {temptation} - ਤੁਸੀਂ ਸਹਿਯੋਗ, ਉਹ ਨੁਕਸ -> {sucker} ਸਾਰੇ ਦੌਰ ਦੇ ਅੰਤ ਵਿਚ ਸਭ ਤੋਂ ਵੱਧ ਸਕੋਰ ਵਾਲਾ ਖਿਡਾਰੀ ਜਿੱਤਦਾ ਹੈ."
+  },
+  "round": {
+    "start": "─── ਸ਼ੁਰੂਆਤੀ ਦੌਰ {round} ─── ਤੁਸੀਂ ਅਗਲੇ {conv_rounds} ਦੌਰਾਂ ਲਈ ਖੁੱਲ੍ਹ ਕੇ ਗੱਲਬਾਤ ਕਰ ਸਕਦੇ ਹੋ।",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### ਗੋਲ {round} - ਨਤੀਜੇ:",
+    "pair_line": "{observation} ਖਿਡਾਰੀ {i} ਬਨਾਮ ਖਿਡਾਰੀ {j} ਨੇ ਕ੍ਰਮਵਾਰ {choice_i} ਅਤੇ {choice_j} ਚੁਣਿਆ (ਖਿਡਾਰੀ {i} ਨੇ {gain_i}, ਖਿਡਾਰੀ {j} ਨੇ {gain_j})",
+    "scores_open": "{observation} -> ਮੌਜੂਦਾ ਸਕੋਰਃ ",
+    "score_first": "{observation}ਪਲੇਅਰ {player_id} ({score})",
+    "score_next": "{observation}; ਖਿਡਾਰੀ {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "ਅੰਤਮ ਅੰਕ: {scores}. ਰੈਂਕਿੰਗ ਗਰੁੱਪ (ਸਭ ਤੋਂ ਬੁਰਾ→ਸਭ ਤੋਂ ਵਧੀਆ): {groups}"
+  }
+}

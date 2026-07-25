@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are playing {color} in a game of Breakthrough. You move {direction} on an {board_size}x{board_size} board.\nIn your turn you can move a single piece one step forward or diagonally forward.\nA piece may only move diagonally if an opponent piece is there, and only move into such a preoccupied square in a diagonal step.\nWhen stepping into a square with an opponent piece, you capture it and the opponent's piece is removed permanently from the board.\nUse UCI-like notation in brackets, e.g. [a2a3] to move from a2 to a3.\n* 'a' corresponds to the leftmost column, '1' is the bottom row (from White's perspective).\n* Blacks's home row is the top row (row 8 for an 8x8). White's home row is the bottom row (row 1 for an 8x8).\nThe first player whose piece reaches the opponent's home row wins. If your pieces are all captured, you lose."
+  },
+  "invalid_move": {
+    "wrong_format": "ਕਿਰਪਾ ਕਰਕੇ [a2a3] ਵਰਗੇ ਬ੍ਰੈਕਟ ਵਾਲੇ ਅਲਜਬਰਾਇਕ ਸੰਕੇਤ ਦੀ ਵਰਤੋਂ ਕਰੋ।",
+    "out_of_bounds": "ਚਾਲ ਬੋਰਡ ਦੀਆਂ ਹੱਦਾਂ ਤੋਂ ਬਾਹਰ ਹੈ।",
+    "illegal": "ਇਹ ਚਾਲ ਜਾਂ ਤਾਂ ਬ੍ਰੇਕਥ੍ਰੂ ਨਿਯਮਾਂ ਦੀ ਪਾਲਣਾ ਨਹੀਂ ਕਰਦੀ ਜਾਂ ਇਹ ਤੁਹਾਡਾ ਟੁਕੜਾ ਨਹੀਂ ਹੈ।"
+  },
+  "game_action": {
+    "moved": "ਖਿਡਾਰੀ {player_id} ਚਾਲਾਂ {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "ਚਿੱਟੇ ਕਾਲੇ ਦੀ ਘਰੇਲੂ ਕਤਾਰ ਤੱਕ ਪਹੁੰਚ ਗਏ।",
+    "black_reached": "ਕਾਲੇ ਚਿੱਟੇ ਦੀ ਘਰੇਲੂ ਕਤਾਰ ਤੱਕ ਪਹੁੰਚ ਗਏ।",
+    "white_captured": "ਸਾਰੇ ਚਿੱਟੇ ਟੁਕੜੇ ਫੜੇ ਗਏ ਹਨ।",
+    "black_captured": "ਸਾਰੇ ਕਾਲੇ ਟੁਕੜੇ ਫੜੇ ਗਏ।",
+    "no_moves": "ਖਿਡਾਰੀ {player_id} ਕੋਲ ਹੋਰ ਚਾਲਾਂ ਨਹੀਂ ਹਨ।"
+  }
+}

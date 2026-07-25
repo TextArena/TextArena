@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "ਤੁਸੀਂ ਗੋਲਫ ਖੇਡ ਰਹੇ ਹੋ - ਖਿਡਾਰੀ {player_id}. ਟੀਚਾਃ ਇਸ ਇਕੋ ਗੇੜ ਵਿਚ ਸਭ ਤੋਂ ਘੱਟ ਕੁੱਲ ਸਕੋਰ ਪ੍ਰਾਪਤ ਕਰੋ. ਜੇ ਕਾਲਮ ਇਕੋ ਮੁੱਲ ਸਾਂਝੇ ਕਰਦੇ ਹਨ, ਤਾਂ ਉਨ੍ਹਾਂ ਨੂੰ 0. ਦੇ ਰੂਪ ਵਿਚ ਜੋੜਿਆ ਜਾਂਦਾ ਹੈ ਕਾਰਡ ਮੁੱਲਃ ਏ = 1, 2-10 = ਮੁੱਲ, ਜੇ / ਕਿ = 10, ਕੇ = 0 ਕਾਰਵਾਈਆਂ (ਸਹੀ ਬਰੈਕਟ ਦੀ ਵਰਤੋਂ ਕਰੋ): - '[draw]' - ਡੈਕ ਤੋਂ ਖਿੱਚੋ - '[take]' - ਡਿਸਕੌਡ ਪਾਈਲ ਤੋਂ ਲਓ - '[swap X Y]' - ਸਥਿਤੀ X (ਕਤਾਰ) Y (ਕਾਲਮ) ਦੇ ਨਾਲ ਖਿੱਚੇ ਗਏ ਕਾਰਡ ਨੂੰ ਸਵੈਪ ਕਰੋ - '[discard]' - ਖਿੱਚੇ ਗਏ ਕਾਰਡ ਨੂੰ ਸੁੱਟ ਦਿਓ "
+  },
+  "board": {
+    "drew": "ਤੁਸੀਂ ਖਿੱਚਿਆਃ {card} ਹੁਣ ਤੁਹਾਨੂੰ [swap X Y] ਜਾਂ [discard] ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ.",
+    "took": "ਤੁਸੀਂ ਲਿਆਃ {card} ਡਿਸਕਾਸਟ ਪਾਈਲ ਤੋਂ ਤੁਹਾਨੂੰ ਇਸ ਦੇ ਨਾਲ [swap X Y] ਲੈਣਾ ਚਾਹੀਦਾ ਹੈ (ਡਿਸਕਾਸਟ ਨਹੀਂ ਕਰ ਸਕਦਾ).",
+    "peeked": "ਤੁਸੀਂ ਸਥਿਤੀ ({row},{col}) 'ਤੇ ਨਜ਼ਰ ਮਾਰਿਆਃ {card}",
+    "turn_view": "ਤੁਹਾਡਾ ਹੱਥ: {hand} ਡਿਸਚਾਰਜ ਪਾਈਲ: {discard} {options}",
+    "none": "ਕੋਈ ਨਹੀਂ"
+  },
+  "options": {
+    "final_turns": "ਆਖਰੀ ਵਾਰੀ! ਤੁਹਾਡੇ ਵਿਕਲਪਃ [draw], [take], [peek X Y]",
+    "draw": "ਤੁਹਾਡੇ ਵਿਕਲਪਃ [draw], [take]",
+    "must_swap": "ਤੁਹਾਨੂੰ ਚਾਹੀਦਾ ਹੈਃ [swap X Y] (ਰੱਦ ਕਰਨ ਦੇ ਢੇਰ ਤੋਂ ਕਾਰਡ ਨਹੀਂ ਸੁੱਟ ਸਕਦੇ)",
+    "swap_or_discard": "ਤੁਹਾਨੂੰ ਚਾਹੀਦਾ ਹੈਃ [swap X Y] ਜਾਂ [discard]"
+  },
+  "hand": {
+    "no_cards": "ਕੋਈ ਕਾਰਡ ਨਹੀਂ",
+    "header": "ਕਾਲ: 1 2 3",
+    "row": "ਕਤਾਰ {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "ਖਿਡਾਰੀ {pid} ਨੇ ਸਥਿਤੀ ({row},{col}) ਤੇ {new} ਨੂੰ {old} ਨਾਲ ਬਦਲਿਆ",
+    "discarded": "ਖਿਡਾਰੀ {pid} ਸੁੱਟਿਆ ਗਿਆ {card}"
+  },
+  "message": {
+    "deck_empty": "ਡੈੱਕ ਖਾਲੀ ਹੈ! ਖੇਡ ਤੁਰੰਤ ਖ਼ਤਮ ਹੁੰਦੀ ਹੈ।",
+    "knocked": "ਖਿਡਾਰੀ {pid} ਖੜਕਾਇਆ! ਹਰੇਕ ਦੂਜੇ ਖਿਡਾਰੀ ਨੂੰ ਇੱਕ ਹੋਰ ਵਾਰੀ ਮਿਲਦੀ ਹੈ.",
+    "final_round": "ਖਿਡਾਰੀ {pid} {reason}! ਹਰੇਕ ਦੂਜੇ ਖਿਡਾਰੀ ਨੂੰ ਇੱਕ ਹੋਰ ਵਾਰੀ ਮਿਲਦੀ ਹੈ।"
+  },
+  "reason": {
+    "all_revealed": "ਕੀ ਸਾਰੇ ਕਾਰਡ ਪ੍ਰਗਟ ਕੀਤੇ ਗਏ ਹਨ"
+  },
+  "invalid": {
+    "wrong_action": "ਬਿਲਕੁਲ ਇੱਕ ਬ੍ਰੈਕਟ ਐਕਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋਃ [draw], [take], [swap X Y], [discard], [knock], ਜਾਂ [peek X Y]",
+    "discard_empty": "ਸੁੱਟਣ ਦਾ ਢੇਰ ਖਾਲੀ ਹੈ!",
+    "must_draw_first": "ਤੁਹਾਨੂੰ ਪਹਿਲਾਂ [draw], [take], [knock], ਜਾਂ [peek X Y]",
+    "cannot_discard_taken": "ਤੁਸੀਂ ਰੱਦ ਕੀਤੇ ਗਏ ਢੇਰ ਵਿੱਚੋਂ ਲਿਆ ਗਿਆ ਕਾਰਡ ਨਹੀਂ ਸੁੱਟ ਸਕਦੇ। ਤੁਹਾਨੂੰ ਇਸ ਨੂੰ ਬਦਲਣਾ ਚਾਹੀਦਾ ਹੈ।",
+    "have_drawn_card": "ਤੁਹਾਡੇ ਕੋਲ ਇੱਕ ਡਰਾਅ ਕਾਰਡ ਹੈ. ਤੁਹਾਨੂੰ [swap X Y] ਜਾਂ [discard] ਇਸ ਨੂੰ ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ.",
+    "need_drawn_swap": "ਤੁਹਾਨੂੰ ਬਦਲੀ ਕਰਨ ਲਈ ਇੱਕ ਡਰਾਇੰਗ ਕਾਰਡ ਦੀ ਲੋੜ ਹੈ।",
+    "need_drawn_discard": "ਤੁਹਾਨੂੰ ਡਿਸਚਾਰਜ ਕਰਨ ਲਈ ਇੱਕ ਡਰਾਇੰਗ ਕਾਰਡ ਦੀ ਲੋੜ ਹੈ।",
+    "out_of_bounds": "ਸੀਮਾਵਾਂ ਤੋਂ ਬਾਹਰ ਸਥਿਤੀ. ਕਤਾਰ 1-{max_row}, ਕਾਲਮ 1-{max_col} ਦੀ ਵਰਤੋਂ ਕਰੋ",
+    "knock_with_card": "ਤੁਸੀਂ ਇੱਕ ਡਰਾਅ ਕਾਰਡ ਨਾਲ ਖੜਕਾ ਨਹੀਂ ਸਕਦੇ। ਆਪਣੀ ਵਾਰੀ ਪਹਿਲਾਂ ਪੂਰੀ ਕਰੋ।",
+    "already_knocked": "ਕਿਸੇ ਨੇ ਪਹਿਲਾਂ ਹੀ ਇਸ ਗੇੜ ਨੂੰ ਖੜਕਾਇਆ ਹੈ।",
+    "already_revealed": "ਇਹ ਕਾਰਡ ਪਹਿਲਾਂ ਹੀ ਪ੍ਰਗਟ ਕੀਤਾ ਜਾ ਚੁੱਕਾ ਹੈ!"
+  },
+  "summary": {
+    "full": "ਗੇਮ ਓਵਰ! ਖਿਡਾਰੀ {winner} {score} ਅੰਕ ਦੇ ਸਕੋਰ ਨਾਲ ਜਿੱਤਦਾ ਹੈ! ਫਾਈਨਲ ਸਕੋਰਃ {scores}",
+    "line": "ਖਿਡਾਰੀ {pid}: {score} ਅੰਕ "
+  },
+  "board_str": {
+    "title": "=== ਗੋਲਫ ਗੇਮ ===",
+    "discard": "ਸੁੱਟਣ ਦਾ ਢੇਰ: {card}",
+    "knocked": "ਖਿਡਾਰੀ {pid} ਨੇ ਦਸਤਕ ਦਿੱਤੀ ਹੈ!",
+    "player_header": "ਖਿਡਾਰੀ {pid} (ਸਕੋਰ: {score}):"
+  }
+}

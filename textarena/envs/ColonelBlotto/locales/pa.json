@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "ਤੁਸੀਂ ਕਰਨਲ ਬਲੋਟੋ ਵਿੱਚ {role} ਹੋ। ਤੁਹਾਡਾ ਟੀਚਾ ਆਪਣੇ ਵਿਰੋਧੀ ਨਾਲੋਂ ਵਧੇਰੇ ਗੇੜ ਜਿੱਤਣਾ ਹੈ। ਹਰੇਕ ਗੇੜ ਵਿੱਚ, ਖੇਤਰਾਂ ਵਿੱਚ {num_total_units} ਯੂਨਿਟਾਂ ਨੂੰ ਬਿਲਕੁਲ ਨਿਰਧਾਰਤ ਕਰੋ {field_names}। ਜੋ ਖਿਡਾਰੀ ਇੱਕ ਖੇਤਰ ਵਿੱਚ ਵਧੇਰੇ ਯੂਨਿਟਾਂ ਦੀ ਵੰਡ ਕਰਦਾ ਹੈ ਉਹ ਖੇਤਰ ਜਿੱਤਦਾ ਹੈ, ਅਤੇ ਜੋ ਖਿਡਾਰੀ ਵਧੇਰੇ ਖੇਤਰਾਂ ਨੂੰ ਜਿੱਤਦਾ ਹੈ ਉਹ ਗੇੜ ਜਿੱਤਦਾ ਹੈ। ਉਦਾਹਰਣ ਲਈ, '[A7 B7 C6]' ਏ ਨੂੰ 7 ਯੂਨਿਟ, ਬੀ ਨੂੰ 7 ਅਤੇ ਸੀ ਨੂੰ 6 ਯੂਨਿਟ ਨਿਰਧਾਰਤ ਕਰਦਾ ਹੈ।",
+    "commander_alpha": "ਕਮਾਂਡਰ ਅਲਫ਼ਾ",
+    "commander_beta": "ਕਮਾਂਡਰ ਬੀਟਾ"
+  },
+  "game_state": {
+    "header_round": "=== ਕਲੋਨਲ ਬਲੌਟੋ - ਰਾਊਂਡ {current_round}/{num_rounds} === ਰਾਊਂਡ ਜਿੱਤੇ - ਕਮਾਂਡਰ ਅਲਫ਼ਾ: {alpha_score}, ਕਮਾਂਡਰ ਬੀਟਾ: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "ਰਾਊਂਡ {current_round} ਕਮਾਂਡਰ ਅਲਫ਼ਾ ਨਿਰਧਾਰਤ ਕੀਤਾ ਗਿਆਃ {p0_allocations} ਕਮਾਂਡਰ ਬੀਟਾ ਨਿਰਧਾਰਤ ਕੀਤਾ ਗਿਆਃ {p1_allocations} ",
+    "winner_alpha": "{message}ਜੇਤੂਃ ਕਮਾਂਡਰ ਅਲਫ਼ਾ",
+    "winner_beta": "{message}ਜੇਤੂਃ ਕਮਾਂਡਰ ਬੀਟਾ",
+    "tie": "{message}ਟਾਈ!"
+  },
+  "invalid_move": {
+    "wrong_format": "ਅਵੈਧ ਇਨਪੁਟ ਫਾਰਮੈਟ. ਵਰਤੋਂਃ A:5, B:10, C:5",
+    "invalid_field": "ਅਵੈਧ ਖੇਤਰ ਦਾ ਨਾਮ (). ਵੈਧ ਖੇਤਰਃ {field_names}",
+    "wrong_allocation_value": "ਸਾਰੇ ਅਲਾਟਮੈਂਟ ਗੈਰ-ਨਕਾਰਾਤਮਕ ਪੂਰਨ ਅੰਕ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ।",
+    "incorrect_total_units": "ਤੁਹਾਨੂੰ ਬਿਲਕੁਲ {num_total_units} ਯੂਨਿਟਾਂ ਨੂੰ ਵੰਡਣਾ ਪਵੇਗਾ. ਮੌਜੂਦਾ ਰਕਮ: {current_sum}",
+    "good_allocations": "ਅਲਾਟਮੈਂਟ ਚੰਗੀ ਹੈ।"
+  },
+  "outcome": {
+    "winner_alpha": "ਕਮਾਂਡਰ ਅਲਫਾ ਜੀਤਦਾ ਹੈ {score_0}-{score_1} {num_rounds} ਰਾਊਂਡਾਂ ਤੋਂ ਬਾਅਦ!",
+    "winner_beta": "ਕਮਾਂਡਰ ਬੀਟਾ ਜੀਤਦਾ ਹੈ {score_1}-{score_0} {num_rounds} ਰਾਊਂਡਾਂ ਤੋਂ ਬਾਅਦ!",
+    "draw": "ਗੇਮ {score_0}-{score_1} ਗੇੜਾਂ ਦੇ ਬਾਅਦ ਇੱਕ {num_rounds} ਬਰਾਬਰੀ ਵਿੱਚ ਖਤਮ ਹੁੰਦੀ ਹੈ!",
+    "early_winner_alpha": "ਕਮਾਂਡਰ ਅਲਫ਼ਾ ਜਿੱਤਿਆ {scores_0}-{scores_1} (ਬਹੁਗਿਣਤੀ ਪ੍ਰਾਪਤ ਕੀਤੀ ਗਈ)!",
+    "early_winner_beta": "ਕਮਾਂਡਰ ਬੀਟਾ ਜਿੱਤਦਾ ਹੈ {scores_1}-{scores_0} (ਬਹੁਗਿਣਤੀ ਪ੍ਰਾਪਤ ਕੀਤੀ ਗਈ)!"
+  }
+}

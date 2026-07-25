@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "ਖੇਡ ਸ਼ੁਰੂ ਹੁੰਦੀ ਹੈ. ਟਰੰਪ ਸੂਟ: {trump_suit} (ਟਰੰਪ ਕਾਰਡ: {trump_str}).",
+    "no_trump_card": "ਕੋਈ ਨਹੀਂ"
+  },
+  "player_prompt": {
+    "intro": "ਤੁਸੀਂ ਜਰਮਨ ਵਿਸਟ ਵਿਚ ਖਿਡਾਰੀ {player_id} ਹੋ। {phase_info} ਤੁਹਾਡੇ ਕੋਲ {hand_size} ਕਾਰਡ ਹਨ। '[play N]' ਵਾਲਾ ਇੱਕ ਕਾਰਡ ਖੇਡੋ, ਜਿੱਥੇ N ਤੁਹਾਡੇ ਹੱਥ ਵਿੱਚ ਇਸ ਦੀ ਸਥਿਤੀ ਹੈ (ਉਦਾਹਰਣ ਵਜੋਂ '[play 3]') ।",
+    "phase_learning": "ਸਿੱਖਣ ਦਾ ਪੜਾਅ: ਹਰੇਕ ਚਾਲ ਦਾ ਜੇਤੂ ਚਿਹਰੇ ਦਾ ਕਾਰਡ ਲੈਂਦਾ ਹੈ ਅਤੇ ਹਾਰਨ ਵਾਲਾ ਡੈਕ ਤੋਂ ਅਗਲਾ ਕਾਰਡ ਖਿੱਚਦਾ ਹੈ. ਇਸ ਪੜਾਅ ਵਿੱਚ ਜਿੱਤੀਆਂ ਚਾਲਾਂ ਜਿੱਤ ਲਈ ਗਿਣੀਆਂ ਨਹੀਂ ਜਾਂਦੀਆਂ.",
+    "phase_playing": "ਖੇਡਣ ਦਾ ਪੜਾਅ: ਡੈਕ ਖਤਮ ਹੋ ਗਿਆ ਹੈ. ਹੁਣ ਤੋਂ ਹਰ ਚਾਲ ਜਿੱਤ ਵੱਲ ਗਿਣਦੀ ਹੈ."
+  },
+  "next_card": {
+    "playing_phase": "ਕੋਈ ਕਾਰਡ ਨਹੀਂ ਹੈ - ਖੇਡਣ ਦਾ ਪੜਾਅ ਸ਼ੁਰੂ ਹੋ ਗਿਆ ਹੈ।",
+    "deck_empty": "ਡੈਕ ਖਾਲੀ ਹੈ - ਕੋਈ ਕਾਰਡ ਪੇਸ਼ ਨਹੀਂ ਕੀਤਾ ਗਿਆ ਹੈ।",
+    "available": "ਪੇਸ਼ਕਸ਼ 'ਤੇ ਕਾਰਡ: {card}",
+    "available_trump": "ਕਾਰਡ ਦੀ ਪੇਸ਼ਕਸ਼ਃ {card} (ਟਰੰਪ)"
+  },
+  "invalid_move": {
+    "wrong_format": "ਗਲਤ ਚਾਲ ਫਾਰਮੈਟ. ਆਪਣੇ ਹੱਥ ਵਿੱਚ Nth ਕਾਰਡ ਖੇਡਣ ਲਈ '[play N]' ਦੀ ਵਰਤੋਂ ਕਰੋ.",
+    "bad_position": "ਉਹ ਕਾਰਡ ਸਥਿਤੀ ਮੌਜੂਦ ਨਹੀਂ ਹੈ. ਤੁਹਾਡੇ ਕੋਲ {hand_size} ਕਾਰਡ ਹਨ।",
+    "must_follow_suit": "ਤੁਹਾਨੂੰ ਇਸ ਦੀ ਪਾਲਣਾ ਕਰਨੀ ਚਾਹੀਦੀ ਹੈ ਅਤੇ ਇੱਕ {lead_suit} ਕਾਰਡ ਖੇਡਣਾ ਚਾਹੀਦਾ ਹੈ।",
+    "invalid_play": "ਇਹ ਕਾਰਡ ਖੇਡਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ।"
+  },
+  "game_action": {
+    "played": "ਖਿਡਾਰੀ {player_id} ਨੇ {card} ਖੇਡਿਆ।"
+  },
+  "trick": {
+    "won": "ਖਿਡਾਰੀ {winner_id} {card} ਨਾਲ ਚਾਲ ਜਿੱਤਦਾ ਹੈ।",
+    "won_learning": "ਖਿਡਾਰੀ {winner_id} {card} ਨਾਲ ਚਾਲ ਜਿੱਤਦਾ ਹੈ ਅਤੇ ਫੇਸ-ਅੱਪ ਕਾਰਡ ਲੈਂਦਾ ਹੈ।"
+  },
+  "phase": {
+    "learning_complete": "ਡੈਕ ਖਤਮ ਹੋ ਗਿਆ ਹੈ. ਸਿੱਖਣ ਦਾ ਪੜਾਅ ਖਤਮ ਹੋ ਗਿਆ ਹੈ - ਹਰ ਬਾਕੀ ਬਚੀ ਚਾਲ ਜਿੱਤ ਲਈ ਗਿਣਦੀ ਹੈ."
+  },
+  "draw": {
+    "winner_received": "ਤੁਸੀਂ ਚਾਲ ਜਿੱਤੀ ਅਤੇ {card} ਪ੍ਰਾਪਤ ਕੀਤਾ.",
+    "loser_received": "ਤੁਸੀਂ ਚਾਲ ਗੁਆ ਦਿੱਤੀ ਅਤੇ ਡੈਕ ਤੋਂ {card} ਖਿੱਚਿਆ.",
+    "winner_preview": "ਅਗਲਾ ਕਾਰਡ {card} ਹੈ।"
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "ਹੁਣ ਤੱਕ ਜਿੱਤੀਆਂ ਚਾਲਾਂ - ਖਿਡਾਰੀ 0: {tricks0}, ਖਿਡਾਰੀ 1: {tricks1}",
+    "scores_playing": "ਸਕੋਰਿੰਗ ਟ੍ਰਿਕਸ - ਖਿਡਾਰੀ 0: {tricks0}, ਖਿਡਾਰੀ 1: {tricks1}",
+    "phase": "ਪੜਾਅ: {phase}",
+    "phase_learning": "ਪੜਾਅਃ {phase} ({remaining_cards} ਡੈਕ ਵਿੱਚ ਬਚੇ ਕਾਰਡ)"
+  },
+  "hand": {
+    "no_cards": "ਕੋਈ ਕਾਰਡ ਨਹੀਂ",
+    "no_cards_in_hand": "ਹੱਥ ਵਿੱਚ ਕੋਈ ਕਾਰਡ ਨਹੀਂ",
+    "header": "ਤੁਹਾਡਾ ਹੱਥ:",
+    "trump_indicator": "(ਟਰੰਪ)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "ਅਜੇ ਤੱਕ ਕੋਈ ਵੀ ਕਾਰਡ ਇਸ ਚਾਲ ਨੂੰ ਨਹੀਂ ਖੇਡਿਆ।",
+    "header": "ਵਰਤਮਾਨ ਚਾਲ:",
+    "trump_indicator": "(ਟਰੰਪ)",
+    "card_line": "{observation} ਖਿਡਾਰੀ {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "ਖੇਡ ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਈ",
+    "header": "=== ਜਰਮਨ ਵ੍ਹਿਸਟ ਗੇਮ ===",
+    "phase": "{observation} ਪੜਾਅ: {phase}",
+    "trump_suit": "{observation} ਟਰੰਪ ਸੂਟ: {trump_suit}",
+    "trump_card": "{observation} ਟਰੰਪ ਕਾਰਡ: {card}",
+    "cards_left": "{observation} ਡੈਕ ਵਿੱਚ ਬਚੇ ਕਾਰਡਃ {count}",
+    "next_card": "{observation} ਜੇਤੂ ਲਈ ਅਗਲਾ ਕਾਰਡਃ {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} ਮੌਜੂਦਾ ਚਾਲ:",
+    "trump_indicator": "(ਟਰੰਪ)",
+    "trick_line": "{observation} ਖਿਡਾਰੀ {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} ਖਿਡਾਰੀ {player_id}: {scoring} ਸਕੋਰਿੰਗ ਟ੍ਰਿਕਸ ({tricks} ਕੁੱਲ), {hand_size} ਹੱਥ ਵਿੱਚ ਕਾਰਡ"
+  },
+  "outcome": {
+    "summary": "ਸਿੱਖਣ ਦਾ ਪੜਾਅ - ਖਿਡਾਰੀ 0: {l0}, ਖਿਡਾਰੀ 1: {l1}. ਖੇਡਣ ਦਾ ਪੜਾਅ - ਖਿਡਾਰੀ 0: {p0}, ਖਿਡਾਰੀ 1: {p1}. ਖਿਡਾਰੀ {winner_id} {winner_tricks} ਸਕੋਰਿੰਗ ਚਾਲਾਂ ਨਾਲ ਜਿੱਤਦਾ ਹੈ!"
+  }
+}
