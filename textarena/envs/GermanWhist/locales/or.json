@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "ଖେଳ ଆରମ୍ଭ ହେଲା । ଟ୍ରମ୍ପ ସୁଟ୍: {trump_suit} (ଟ୍ରମ୍ପ କାର୍ଡ: {trump_str}) ।",
+    "no_trump_card": "କୌଣସି ନାହିଁ"
+  },
+  "player_prompt": {
+    "intro": "ଜର୍ମାନ୍ ୱିଷ୍ଟରେ ତୁମେ ପ୍ଲେୟାର {player_id} । {phase_info} ତୁମେ {hand_size} କାର୍ଡ ଧରିଛ । '[play N]' ଥିବା ଏକ କାର୍ଡ ଖେଳ, ଯେଉଁଠାରେ N ହେଉଛି ତୁମ ହାତରେ ଏହାର ସ୍ଥିତି (ଉଦାହରଣ ସ୍ୱରୂପ '[play 3]') ।",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "ଖେଳର ପର୍ଯ୍ୟାୟ: ଡେକ୍ ଶେଷ ହୋଇଯାଇଛି । ବର୍ତ୍ତମାନ ଠାରୁ ପ୍ରତ୍ୟେକ କୌଶଳ ବିଜୟ ପାଇଁ ଗଣନା କରାଯାଏ ।"
+  },
+  "next_card": {
+    "playing_phase": "କୌଣସି କାର୍ଡ ଦିଆଯାଉନାହିଁ - ଖେଳ ପର୍ଯ୍ୟାୟ ଆରମ୍ଭ ହୋଇଛି ।",
+    "deck_empty": "ଡେକ୍ ଖାଲି ଅଛି - କୌଣସି କାର୍ଡ ଦିଆଯାଉନାହିଁ ।",
+    "available": "କାର୍ଡର ଅଫର: {card}",
+    "available_trump": "କାର୍ଡ ଅଫର: {card} (ଟ୍ରମ୍ପ୍)"
+  },
+  "invalid_move": {
+    "wrong_format": "ଅଚଳ ଚାଲ ଫର୍ମାଟ. ଆପଣଙ୍କ ହାତରେ ଥିବା ନଂ-ଥ କାର୍ଡ ଖେଳିବା ପାଇଁ '[play N]' ବ୍ୟବହାର କରନ୍ତୁ.",
+    "bad_position": "ସେହି କାର୍ଡର ସ୍ଥିତି ନାହିଁ । ଆପଣଙ୍କ ପାଖରେ {hand_size} କାର୍ଡ ଅଛି ।",
+    "must_follow_suit": "You must follow suit and play a {lead_suit} card.",
+    "invalid_play": "ସେହି କାର୍ଡକୁ ଖେଳାଯାଇପାରିବ ନାହିଁ ।"
+  },
+  "game_action": {
+    "played": "ଖେଳାଳି {player_id} {card} ଖେଳିଥିଲେ ।"
+  },
+  "trick": {
+    "won": "{winner_id} ଖେଳାଳି {card} ସହିତ କୌଶଳ ଜିତିଥାଏ ।",
+    "won_learning": "{winner_id} ଖେଳାଳି {card} ସହିତ କୌଶଳ ଜିତନ୍ତି ଏବଂ ମୁହଁ ଉପରକୁ ଥିବା କାର୍ଡ ନିଅନ୍ତି ।"
+  },
+  "phase": {
+    "learning_complete": "ଏହି ଡେକ୍ ଶେଷ ହୋଇଯାଇଛି, ଶିକ୍ଷା ପର୍ଯ୍ୟାୟ ଶେଷ ହୋଇଛି, ପ୍ରତ୍ୟେକ ଅବଶିଷ୍ଟ କୌଶଳ ବିଜୟ ପାଇଁ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ।"
+  },
+  "draw": {
+    "winner_received": "ଆପଣ ଜିତିଛନ୍ତି ଏବଂ {card} ପାଇଛନ୍ତି ।",
+    "loser_received": "ଆପଣ ତନ୍ତ୍ର ହାରିଗଲେ ଏବଂ {card} ଡେକ୍ ରୁ ଟାଣି ଆଣିଲେ ।",
+    "winner_preview": "ପରବର୍ତ୍ତୀ କାର୍ଡ ହେଉଛି {card} ।"
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "ବର୍ତ୍ତମାନ ପର୍ଯ୍ୟନ୍ତ ଜିତିଥିବା ଟ୍ରିକ୍ - ଖେଳାଳି ୦: {tricks0}, ଖେଳାଳି ୧: {tricks1}",
+    "scores_playing": "ସ୍କୋରିଂ ଟ୍ରିକ୍ - ଖେଳାଳି ୦: {tricks0}, ଖେଳାଳି ୧: {tricks1}",
+    "phase": "ପର୍ଯ୍ୟାୟ: {phase}",
+    "phase_learning": "ପର୍ଯ୍ୟାୟ: {phase} ({remaining_cards} କାର୍ଡ ଡେକରେ ରହିଗଲା)"
+  },
+  "hand": {
+    "no_cards": "କୌଣସି କାର୍ଡ ନାହିଁ",
+    "no_cards_in_hand": "ହାତରେ କୌଣସି କାର୍ଡ ନାହିଁ",
+    "header": "ଆପଣଙ୍କ ହାତ:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "ଏହି କୌଶଳ ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି କାର୍ଡରେ ଖେଳାଯାଇନାହିଁ ।",
+    "header": "ବର୍ତ୍ତମାନର କୌଶଳ:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation} ଖେଳାଳି {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "ଖେଳ ଆରମ୍ଭ ହୋଇନାହିଁ",
+    "header": "=== ଜର୍ମାନ୍ ୱିଷ୍ଟ୍ ଗେମ୍ ===",
+    "phase": "{observation} ପର୍ଯ୍ୟାୟ: {phase}",
+    "trump_suit": "{observation}\nTrump suit: {trump_suit}",
+    "trump_card": "{observation} ଟ୍ରମ୍ପ କାର୍ଡ: {card}",
+    "cards_left": "{observation} ଡେକରେ ଥିବା କାର୍ଡ: {count}",
+    "next_card": "{observation} ପରବର୍ତ୍ତୀ କାର୍ଡ ବିଜେତା ପାଇଁ: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} ବର୍ତ୍ତମାନର କୌଶଳ:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation} ଖେଳାଳି {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} ଖେଳାଳି {player_id}: {scoring} ସ୍କୋରିଂ ଟ୍ରିକ୍ ({tricks} ସମୁଦାୟ), {hand_size} ହାତରେ ଥିବା କାର୍ଡ"
+  },
+  "outcome": {
+    "summary": "ଶିକ୍ଷଣ ପର୍ଯ୍ୟାୟ - ଖେଳାଳି ୦: {l0}, ଖେଳାଳି ୧: {l1}. ଖେଳିବା ପର୍ଯ୍ୟାୟ - ଖେଳାଳି ୦: {p0}, ଖେଳାଳି ୧: {p1}. ଖେଳାଳି {winner_id} ବିଜୟୀ {winner_tricks} ସ୍କୋରିଂ କୌଶଳ ସହିତ!"
+  }
+}

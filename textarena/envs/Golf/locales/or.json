@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "ଆପଣ ଗଲ୍ଫ ଖେଳୁଛନ୍ତି - ଖେଳାଳି {player_id}. ଲକ୍ଷ୍ୟ: ଏହି ଗୋଟିଏ ରାଉଣ୍ଡରେ ସର୍ବନିମ୍ନ ମୋଟ ସ୍କୋର ପ୍ରାପ୍ତ କରନ୍ତୁ _ ଯଦି ସ୍ତମ୍ଭଗୁଡିକ ସମାନ ମୂଲ୍ୟ ବାଣ୍ଟିଥାନ୍ତି, ତେବେ ସେଗୁଡିକ ୦ ଭାବରେ ଯୋଗ କରାଯାଏ _ କାର୍ଡ ମୂଲ୍ୟଃ A = 1, 2-10 = ନାମ ମୂଲ୍ୟ, J / Q = 10, K = 0 କାର୍ଯ୍ୟଗୁଡିକ (ସଠିକ୍ ବନ୍ଧନୀ ବ୍ୟବହାର କରନ୍ତୁ): - '[draw]' - ଡେକରୁ ଟାଣନ୍ତୁ - '[take]' - ଡିସକ୍ରିପ୍ଟ ପିଲ୍ - '[swap X Y]' - ସ୍ଥାନ X (ଶୃଙ୍ଖଳା) Y (ସ୍ତମ୍ଭ) ସହିତ ଟାଣ ହୋଇଥିବା କାର୍ଡକୁ ସ୍ୱାପ କରନ୍ତୁ - '[discard]' - ଟାଣ ହୋଇଥିବା କାର୍ଡକୁ ଡିସକ୍ରିପ୍ଟ କରନ୍ତୁ _"
+  },
+  "board": {
+    "drew": "ଆପଣ {card} ଟାଣିଛନ୍ତି, ବର୍ତ୍ତମାନ ଆପଣଙ୍କୁ [swap X Y] କିମ୍ବା [discard] କରିବାକୁ ହେବ.",
+    "took": "ତୁମେ ନେଇଛଃ {card} ଅଳିଆ ଗଦାରୁ ତୁମେ [swap X Y] ନେଇଛ (ଅଳିଆ ଗଦାକୁ ବାହାର କରି ପାରିବ ନାହିଁ) ।",
+    "peeked": "You peeked at position ({row},{col}): {card}",
+    "turn_view": "Your hand:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "କିଛି ନାହିଁ"
+  },
+  "options": {
+    "final_turns": "ଶେଷ ଥର ପାଇଁ ! ଆପଣଙ୍କ ବିକଳ୍ପ: [draw], [take], [peek X Y]",
+    "draw": "ଆପଣଙ୍କର ବିକଳ୍ପ: [draw], [take]",
+    "must_swap": "ଆପଣ [swap X Y] (ଅପସାରଣ ଖଣ୍ଡରୁ କାର୍ଡ ବାହାର କରିପାରିବେ ନାହିଁ)",
+    "swap_or_discard": "ଆପଣଙ୍କୁ [swap X Y] କିମ୍ବା [discard]"
+  },
+  "hand": {
+    "no_cards": "କୌଣସି କାର୍ଡ ନାହିଁ",
+    "header": "  Col:   1    2    3",
+    "row": "ଧାଡ଼ି {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "ଖେଳାଳି {pid} ସ୍ଥାନ ({row},{col}) ରେ {new} ସହ {old} ସ୍ଥାନ ବଦଳାଇ ଦେଇଥିଲେ ।",
+    "discarded": "ଖେଳାଳି {pid} ରଦ୍ଦ {card}"
+  },
+  "message": {
+    "deck_empty": "ଡେକ୍ ଖାଲି ଅଛି! ଖେଳ ତୁରନ୍ତ ଶେଷ ହୁଏ.",
+    "knocked": "ଖେଳାଳି {pid} ନକଆଉଟ ! ଅନ୍ୟ ଖେଳାଳିଙ୍କୁ ଆଉ ଗୋଟିଏ ପାଳି ମିଳିଥାଏ ।",
+    "final_round": "ଖେଳାଳି {pid} {reason}! ଅନ୍ୟ ଖେଳାଳିଙ୍କୁ ଆଉ ଗୋଟିଏ ପାଳି ମିଳିଥାଏ ।"
+  },
+  "reason": {
+    "all_revealed": "has all cards revealed"
+  },
+  "invalid": {
+    "wrong_action": "ଗୋଟିଏ ବ୍ରେକେଟରେ ଥିବା କାର୍ଯ୍ୟକୁ ବ୍ୟବହାର କରନ୍ତୁ: [draw], [take], [swap X Y], [discard], [knock], କିମ୍ବା [peek X Y]",
+    "discard_empty": "The discard pile is empty!",
+    "must_draw_first": "ଆପଣ ପ୍ରଥମେ [draw], [take], [knock], କିମ୍ବା [peek X Y]",
+    "cannot_discard_taken": "ଆପଣ ଅଦରକାରୀ ଖଣ୍ଡରୁ ନିଆଯାଇଥିବା କାର୍ଡକୁ ଅଦରକାରୀ କରିପାରିବେ ନାହିଁ । ଆପଣ ଏହାକୁ ବଦଳାଇ ଦେବା ଉଚିତ ।",
+    "have_drawn_card": "ଆପଣଙ୍କ ପାଖରେ ଏକ ଡ୍ରଇଂ କାର୍ଡ ଅଛି । ଆପଣଙ୍କୁ [swap X Y] କିମ୍ବା [discard] କରିବାକୁ ହେବ ।",
+    "need_drawn_swap": "ଆପଣ ଏକ ଡ୍ରଇଂ କାର୍ଡ ଆବଶ୍ୟକ କରନ୍ତି ।",
+    "need_drawn_discard": "ତ୍ୟାଗ କରିବା ପାଇଁ ଏକ ଅଙ୍କିତ କାର୍ଡର ଆବଶ୍ୟକତା ରହିଛି ।",
+    "out_of_bounds": "ପରିସର ବାହାରେ ସ୍ଥିତି. ଧାଡ଼ି 1-{max_row}, ସ୍ତମ୍ଭ 1-{max_col} ବ୍ୟବହାର କରନ୍ତୁ",
+    "knock_with_card": "ଆପଣ ଏକ ଡ୍ର କାର୍ଡ ସହିତ କ୍ଲକ୍ କରିପାରିବେ ନାହିଁ। ପ୍ରଥମେ ଆପଣଙ୍କର ପାଳିକୁ ସମ୍ପୂର୍ଣ୍ଣ କରନ୍ତୁ।",
+    "already_knocked": "କେହି ଜଣେ ଏହି ରାଉଣ୍ଡକୁ ପୂର୍ବରୁ ହିଁ ମାରି ସାରିଛି ।",
+    "already_revealed": "ସେହି କାର୍ଡ ପୂର୍ବରୁ ହିଁ ପ୍ରକାଶିତ ହୋଇସାରିଛି!"
+  },
+  "summary": {
+    "full": "ଖେଳ ଶେଷ ହେଲା {winner} ପ୍ଲେୟାର {score} ପଏଣ୍ଟ ପାଇ ବିଜୟୀ ହେଲା {scores}",
+    "line": "ଖେଳାଳି {pid}: {score} ପଏଣ୍ଟ "
+  },
+  "board_str": {
+    "title": "=== ଗଲ୍ଫ ଖେଳ ===",
+    "discard": "Discard pile: {card}",
+    "knocked": "ଖେଳାଳି {pid} କବାଟ ବାଡେଇଛନ୍ତି!",
+    "player_header": "ଖେଳାଳି {pid} (ସ୍କୋର: {score}):"
+  }
+}

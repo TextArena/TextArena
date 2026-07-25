@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a game of HighSociety (2-player version).\nGame flow:  Ten prestige cards are auctioned one after another.\nBidding:    Each auction, secretly choose a money card 1-11 and reveal.\n            • Higher bid wins the prestige card and discards that money card.\n            • Lower bid keeps their money card.\n            • Tie -> both bids are returned and the same prestige card is re-auctioned.\nScoring:    After all ten auctions, add **remaining cash + prestige points**.\n            Higher *net-worth* wins (exact tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'."
+  },
+  "auction": {
+    "announce": "### ନିଲାମ {round}/10 {prize} ପ୍ରତିଷ୍ଠିତ କାର୍ଡ:"
+  },
+  "board": {
+    "money_cards": "ଆପଣଙ୍କର ବାକି ଥିବା ଟଙ୍କା କାର୍ଡ: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "ଏଥିରେ ଗୋଟିଏ ହିଁ [X] ମନି କାର୍ଡ ରହିବା ଦରକାର ।",
+    "card_not_held": "ଆପଣଙ୍କ ପାଖରେ ଆଉ ସେହି କାର୍ଡ ନାହିଁ ।"
+  },
+  "message": {
+    "tie": "ଟାଇ-ବିକଳ୍ପ ଫେରାଇ ଦିଆଗଲା ।",
+    "auction_result": "ପ୍ ୦ ବିଡ୍ {bid0}, ପ୍ ୧ ବିଡ୍ {bid1}. ଖେଳାଳି {winner} ସମ୍ମାନ {prize} (ସମସ୍ତ {total}) ଜିତିଛନ୍ତି ।"
+  },
+  "outcome": {
+    "p0_wins": "ସଞ୍ଚିତ ସମ୍ପତ୍ତି {nw0} > {nw1}",
+    "p1_wins": "ସଞ୍ଚିତ ସମ୍ପତ୍ତି {nw1} > {nw0}",
+    "draw": "ଉଭୟଙ୍କ ନେଟ-ୱର୍ଥ {nw0}  ସମାନ ।"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "ବ୍ରିସ୍କୋଲା ଖେଳ ଆରମ୍ଭ ହେଲା! ଟ୍ରମ୍ପ ସୁଟ୍: {trump_suit} (ଟ୍ରମ୍ପ କାର୍ଡ: {trump_card})"
+  },
+  "prompt": {
+    "intro": "ଆପଣ ବ୍ରିସ୍କୋଲା ଖେଳୁଛନ୍ତି - ଖେଳାଳି {player_id}. ଲକ୍ଷ୍ୟ: କୌଶଳ ଜିତନ୍ତୁ ଏବଂ ସର୍ବାଧିକ ପଏଣ୍ଟ ସଂଗ୍ରହ କରନ୍ତୁ (ଡେକରେ ସମୁଦାୟ 120 ପଏଣ୍ଟ) । କାର୍ଡ ପଏଣ୍ଟଃ A = 11, 3 = 10, K = 4, Q = 3, J = 2, ଅନ୍ୟମାନେ = 0 କାର୍ଡ ଶକ୍ତି: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2 ଟ୍ରମ୍ପ କାର୍ଡଗୁଡିକ ଶକ୍ତି ନିର୍ବିଶେଷରେ ଅଣ-ଟ୍ରମ୍ପ କାର୍ଡକୁ ପରାସ୍ତ କରନ୍ତି । କାର୍ଯ୍ୟଃ '[play X] ' ଯେଉଁଠାରେ X ହେଉଛି ଆପଣଙ୍କ ହାତରେ ଥିବା କାର୍ଡର (1-{max_pos}) ସ୍ଥିତି "
+  },
+  "hand": {
+    "none": "କୌଣସି କାର୍ଡ ନାହିଁ",
+    "empty": "ହାତରେ କୌଣସି କାର୍ଡ ନାହିଁ",
+    "header": "ଆପଣଙ୍କ ହାତ:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "ଏହି କୌଶଳ ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି କାର୍ଡରେ ଖେଳାଯାଇନାହିଁ ।",
+    "header": "ବର୍ତ୍ତମାନର କୌଶଳ:",
+    "line": "ଖେଳାଳି {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "ଖେଳାଳି {player_id}: {points} ପୃଷ୍ଠା",
+    "trump_info": "ଟ୍ରମ୍ପଙ୍କ ପୋଷାକ: {trump_suit}",
+    "trump_info_deck": "ଟ୍ରମ୍ପ ସୁଟ୍: {trump_suit} │ କାର୍ଡ ଗୁଡିକ ଡେକରେ ରହିଗଲା: {deck_count}",
+    "board": "{hand} {trick} ସ୍କୋର: {scores} {trump_info} [play X] ବ୍ୟବହାର କରି ଏକ କାର୍ଡ ଖେଳନ୍ତୁ"
+  },
+  "invalid_move": {
+    "wrong_format": "[play X] ବ୍ୟବହାର କରନ୍ତୁ ଯେଉଁଠାରେ X ହେଉଛି କାର୍ଡର ସ୍ଥିତି (1, 2, 3, ଇତ୍ୟାଦି)",
+    "out_of_range": "ଅବୈଧ କାର୍ଡ ସ୍ଥିତି. ଆପଣଙ୍କ ପାଖରେ {count} କାର୍ଡ ଅଛି (1-{count})"
+  },
+  "action": {
+    "played": "ଖେଳାଳି {player_id} ଖେଳିଥିଲେ {card}",
+    "trick_win": "{winner} ଖେଳାଳି {card} ସହିତ କୌଶଳ ଜିତନ୍ତି ଏବଂ {points} ପଏଣ୍ଟ ପାଇଥାନ୍ତି!"
+  },
+  "outcome": {
+    "head": "Game Over! Player {winner} wins with {points} points!\n\nFinal Scores:\n{scores}",
+    "player_line": "ଖେଳାଳି {player_id}: {points} ପଏଣ୍ଟ ({tricks} ଟ୍ରିକ୍) "
+  }
+}
