@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id}. U speelt het Memory Spel.\nUw doel is om meer paren kaarten op het bord te vinden dan uw tegenstander.\nOp uw beurt selecteert u twee kaarten om om te draaien door de rij- en kolomnummers van de eerste en tweede kaart in te voeren, zoals '[0 1 1 0]', waarbij de eerste kaart in rij 0 en kolom 1 staat en de tweede kaart in rij 1 en kolom 0 staat.\nAls de twee kaarten overeenkomen, krijgt u een punt en blijven de kaarten met de voorkant naar boven liggen. Als ze niet overeenkomen, worden de kaarten weer met de voorkant naar beneden gedraaid, bijv. '.'.\nHet spel eindigt wanneer alle paren zijn gevonden."
+  },
+  "board": {
+    "current_board": "Huidig bord:\n{board}",
+    "current_game_board": "Huidig Spelbord:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldig formaat voor de zet. Speler {player_id} heeft geen geldige richting in vierkante haken ingevoerd.",
+    "out_of_bounds": "Ongeldige zet. Speler {player_id} heeft een positie buiten de grenzen geselecteerd.",
+    "same_card_twice": "Ongeldige zet. Speler {player_id} heeft dezelfde kaart twee keer geselecteerd.",
+    "already_matched": "Ongeldige zet. Speler {player_id} heeft één of beide kaarten geselecteerd die al zijn gematcht."
+  },
+  "game_message": {
+    "cards_match": "De kaarten geselecteerd door Speler {player_id} op posities [{r1} {c1}] en [{r2} {c2}] komen overeen!",
+    "cards_no_match": "De kaarten geselecteerd door Speler {player_id} komen niet overeen. Kaarten op posities [{r1} {c1}] en [{r2} {c2}] zijn respectievelijk {pos1} en {pos2}."
+  },
+  "outcome": {
+    "draw": "Beide spelers hebben hetzelfde aantal paren kaarten gevonden.",
+    "win": "Speler {winner_id} heeft gewonnen!",
+    "turn_limit": "De limiet voor het aantal beurten is bereikt. Het spel is afgelopen. Speler 0 heeft {score_0} punten gescoord, Speler 1 heeft {score_1} punten gescoord.",
+    "turn_limit_win": "{reason} Speler {winner_id} heeft gewonnen!"
+  }
+}

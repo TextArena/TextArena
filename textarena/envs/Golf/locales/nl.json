@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (kaartspel) localebestand. Vertaal GEEN sleutels (linkerkant). Vertaal alleen waarden (rechterkant). Houd elke {placeholder} exact zoals het is. Vertaal nooit de actietokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), de kaartlabels (A, 2-10, J, Q, K), de symboolsuites, de letters X/Y gebruikt als rij/kolomplaatsaanduidingen in tokens, of numerieke scores/posities. Houd de ASCII-gridindeling (spaties, kolomnummers, '?', 'Col', 'Row'-uitlijning) intact zodat het bord leesbaar blijft.",
+  "_slots": {
+    "{player_id}": "Een spelernummer, bijv. 0 of 1",
+    "{pid}": "Een spelernummer, bijv. 0 of 1",
+    "{winner}": "Het spelernummer met de laagste score",
+    "{score}": "Een numerieke puntentotaal",
+    "{card}": "Een kaartlabel zoals A♠, 10♥, K♦ of Q♣",
+    "{new}": "Het kaartlabel dat in het raster is geplaatst",
+    "{old}": "Het kaartlabel dat uit het raster is verwijderd",
+    "{row}": "Een rijnummer",
+    "{col}": "Een kolomnummer",
+    "{max_row}": "Het grootste geldige rijnummer",
+    "{max_col}": "Het grootste geldige kolomnummer",
+    "{reason}": "Een vooraf gerenderde zin die beschrijft waarom de laatste ronde is gestart",
+    "{n}": "Een rijnummer weergegeven aan het begin van een rasterrij",
+    "{cards}": "De vooraf gerenderde, lay-outgevoelige cellen van één rasterrij",
+    "{hand}": "Het vooraf gerenderde spelergridblok",
+    "{discard}": "Het kaartlabel bovenop de aflegstapel, of het woord voor 'geen'",
+    "{options}": "De vooraf gerenderde regel met beschikbare acties",
+    "{scores}": "De vooraf gerenderde per-spelerlijst met eindscores"
+  },
+  "player_prompt": {
+    "intro": "U speelt Golf (Kaartspel) - Speler {player_id}.\nDoel: Krijg de laagste totaalscore in deze ene ronde. Als kolommen dezelfde waarde delen, worden ze opgeteld als 0.\nKaartwaarden: A=1, 2-10=gezichtswaarde, J/Q=10, K=0\n\nActies (gebruik exacte haken):\n- '[draw]' - Trek uit de stapel\n- '[take]' - Neem uit de aflegstapel\n- '[swap X Y]' - Wissel de getrokken kaart met positie X (rij) Y (kolom)\n- '[discard]' - Leg de getrokken kaart af"
+  },
+  "board": {
+    "drew": "U trok: {card}\nNu moet u [swap X Y] of [discard] gebruiken.",
+    "took": "U nam: {card} uit de aflegstapel\nU moet [swap X Y] gebruiken (kan niet afleggen).",
+    "peeked": "U keek naar positie ({row},{col}): {card}",
+    "turn_view": "Uw hand:\n{hand}\nAflegstapel: {discard}\n{options}",
+    "none": "Geen"
+  },
+  "options": {
+    "final_turns": "Laatste beurten! Uw opties: [draw], [take], [peek X Y]",
+    "draw": "Uw opties: [draw], [take]",
+    "must_swap": "U moet: [swap X Y] (kan geen kaarten afleggen uit de aflegstapel)",
+    "swap_or_discard": "U moet: [swap X Y] of [discard]"
+  },
+  "hand": {
+    "no_cards": "Geen kaarten",
+    "header": "  Kol:   1    2    3",
+    "row": "Rij {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Speler {pid} wisselde {new} met {old} op positie ({row},{col})",
+    "discarded": "Speler {pid} legde {card} af"
+  },
+  "message": {
+    "deck_empty": "De stapel is leeg! Het spel eindigt onmiddellijk.",
+    "knocked": "Speler {pid} klopte! Elke andere speler krijgt nog één beurt.",
+    "final_round": "Speler {pid} {reason}! Elke andere speler krijgt nog één beurt."
+  },
+  "reason": {
+    "all_revealed": "heeft alle kaarten onthuld"
+  },
+  "invalid": {
+    "wrong_action": "Gebruik exact één actie tussen haken: [draw], [take], [swap X Y], [discard], [knock], of [peek X Y]",
+    "discard_empty": "De aflegstapel is leeg!",
+    "must_draw_first": "U moet eerst [draw], [take], [knock], of [peek X Y] gebruiken",
+    "cannot_discard_taken": "U kunt geen kaart afleggen die uit de aflegstapel is genomen. U moet deze wisselen.",
+    "have_drawn_card": "U hebt een getrokken kaart. U moet [swap X Y] of [discard] gebruiken.",
+    "need_drawn_swap": "U hebt een getrokken kaart nodig om te wisselen.",
+    "need_drawn_discard": "U hebt een getrokken kaart nodig om af te leggen.",
+    "out_of_bounds": "Positie buiten de grenzen. Gebruik rij 1-{max_row}, kolom 1-{max_col}",
+    "knock_with_card": "U kunt niet kloppen met een getrokken kaart. Voltooi eerst uw beurt.",
+    "already_knocked": "Iemand heeft al geklopt in deze ronde.",
+    "already_revealed": "Die kaart is al onthuld!"
+  },
+  "summary": {
+    "full": "Spel afgelopen! Speler {winner} wint met een score van {score} punten!\n\nEindscores:\n{scores}",
+    "line": "Speler {pid}: {score} punten\n"
+  },
+  "board_str": {
+    "title": "=== GOLF SPEL ===",
+    "discard": "Aflegstapel: {card}",
+    "knocked": "Speler {pid} heeft geklopt!",
+    "player_header": "Speler {pid} (Score: {score}):"
+  }
+}

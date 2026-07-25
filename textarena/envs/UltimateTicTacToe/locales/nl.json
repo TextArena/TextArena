@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in **Ultimate Tic Tac Toe**.\nGeef uw zet op als **[macro  micro]** (twee nummers 0-8):\n• *macro*  = in welk mini-bord u speelt\n• *micro* = welk vierkant binnen dat mini-bord\nVoorbeeld `[7 8]` ➜ plaats uw teken in mini-bord 7, vierkant 8, en\nforceer uw tegenstander om in mini-bord 8 te spelen.\n\nU bent `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Huidig bord:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "De zet moet in de vorm [macro micro] zijn met nummers 0-8.",
+    "out_of_range": "De indices moeten elk tussen 0 en 8 liggen.",
+    "index_out_of_range": "Het mini-bord, de rij of de kolom is buiten bereik.",
+    "cell_occupied": "De cel is al bezet.",
+    "wrong_micro_board": "De speler moet in het volgende mini-bord spelen.",
+    "micro_board_won": "Het mini-bord is al gewonnen."
+  },
+  "next_board": {
+    "any": "een willekeurig mini-bord",
+    "specific": "mini-bord {nxt}"
+  },
+  "game_action": {
+    "played": "Speler {player_id} speelde in mini-bord {macro_idx}, cel {micro_idx} (rij {row}, kolom {col}). Speler {opponent_id} moet nu spelen in {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Speler {player_id} wint Ultimate Tic Tac Toe!",
+    "draw": "Het spel is gelijk!"
+  }
+}

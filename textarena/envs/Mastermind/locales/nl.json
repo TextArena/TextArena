@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "U speelt Mastermind.\nU moet de code vinden die {code_length} cijfers lang is, elk cijfer van 1 tot {num_numbers}, {repeats}.\nIn uw antwoord kunt u uw gok indienen in het volgende formaat: '[2 1 4 5]'.\nNa elke gok ontvangt u feedback in de vorm van zwarte en witte pinnen.\nEen zwarte pin geeft aan dat een cijfer correct is en op de juiste positie staat, terwijl een witte pin aangeeft dat een cijfer correct is, maar op de verkeerde positie staat.\nU heeft {max_turns} beurten om de code te raden.\n",
+    "with_repeats": "met mogelijke herhalingen",
+    "no_duplicates": "zonder dubbele cijfers"
+  },
+  "invalid_move": {
+    "wrong_format": "U hebt niet gereageerd met een lijst van nummers gescheiden door spaties en omgeven door vierkante haken.",
+    "not_integers": "Alle ingangen moeten geldige gehele getallen zijn.",
+    "wrong_length": "De gok moet exact {code_length} nummers bevatten.",
+    "out_of_range": "Alle nummers moeten tussen 1 en {num_numbers} liggen.",
+    "duplicates_not_allowed": "Dubbele nummers zijn niet toegestaan.",
+    "repeated_guess": "U hebt al {guess} geraden. Probeer een andere gok."
+  },
+  "game_action": {
+    "feedback": "Ingediend [{guess}]. Feedback: {black_pegs} zwarte pin(nen), {white_pegs} witte pin(nen)."
+  },
+  "outcome": {
+    "win": "U hebt de code gekraakt en {black_pegs} van de {code_length} pinnen correct opgelost",
+    "turn_limit": "Beurtenlimiet bereikt. U hebt {percent} procent van de nummers correct geraden."
+  }
+}

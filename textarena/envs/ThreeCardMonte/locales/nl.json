@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte-localebestand. Vertaal GEEN sleutels (linkerkant). Vertaal alleen waarden (rechterkant).",
+  "_slots": {
+    "{line}": "De weergegeven rij bekers",
+    "{step}": "Het huidige stapnummer van de schuifbeweging",
+    "{steps}": "Het totale aantal schuifstappen",
+    "{i}": "De index van de eerste beker die betrokken is bij een swap",
+    "{j}": "De index van de tweede beker die betrokken is bij een swap",
+    "{prompt}": "Het gelokaliseerde promptfragment dat wordt toegevoegd na de bekers",
+    "{max_index}": "De hoogste geldige bekerindex, d.w.z. num_bekers-1",
+    "{ball_pos}": "De index van de beker waar de bal onder ligt"
+  },
+  "player_prompt": {
+    "intro": "Volg de verborgen bal 'X' terwijl de bekers worden geschud.\nNa het schudden, raad de locatie met `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Bal begint: {line}",
+    "shuffle": "Schud {step}/{steps}: bekers {i} en {j} verwisseld.",
+    "cups": "Bekers: {line}  {prompt}",
+    "guess_now": "(Raad NU!)",
+    "reveal": "(Onthul: bal onder {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Foute actie. Gebruik `[k]`.",
+    "out_of_range": "Index buiten bereik 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Correct! Je hebt de bal gevonden.",
+    "lose": "Fout — bal lag onder beker {ball_pos}."
+  }
+}

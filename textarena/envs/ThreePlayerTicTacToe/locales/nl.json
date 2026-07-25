@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe-localebestand. Vertaal GEEN sleutels (linkerkant). Vertaal alleen waarden (rechterkant).",
+  "_slots": {
+    "{player_id}": "Het nummer van de speler, bijv. 0, 1 of 2",
+    "{symbol}": "Het teken van de speler, een van A, B of C",
+    "{cell}": "Een celnummer op het bord",
+    "{max_cell}": "Het hoogste geldige celnummer (bordgrootte^2 - 1)",
+    "{row}": "De rij-index van het bord waar het teken is geplaatst",
+    "{col}": "De kolom-index van het bord waar het teken is geplaatst",
+    "{board}": "Het gerenderde ASCII-bord (niet vertalen)",
+    "{moves}": "De komma-gescheiden lijst van beschikbare zetten zoals '[4]' (niet vertalen)"
+  },
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in Drie-Speler Tic Tac Toe.\nUw teken is '{symbol}'.\nU neemt om de beurt uw teken op een 5x5 bord om een lijn van vier te vormen.\nLijnen kunnen horizontaal, verticaal of diagonaal zijn.\nGeef uw zet op in het formaat '[4]' om cel 4 te markeren."
+  },
+  "board": {
+    "current_board": "Huidig bord:\n\n{board}\n\nBeschikbare zetten: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldig formaat voor de zet. Gebruik '[cel]' waar cel 0-{max_cell} is.",
+    "out_of_range": "Ongeldig celnummer: {cell}. Moet tussen 0 en {max_cell} liggen.",
+    "already_occupied": "Cel {cell} is al bezet.",
+    "made_invalid": "Speler {player_id} heeft een ongeldige zet gemaakt"
+  },
+  "game_action": {
+    "placed": "Speler {player_id} plaatst hun teken ({symbol}) in veld ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Speler {player_id} ({symbol}) wint!",
+    "draw": "Het spel is gelijk!"
+  }
+}
