@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Wasan ya fara. Trump kwat da wando: {trump_suit} (katin nasara: {trump_str}).",
+    "no_trump_card": "babu"
+  },
+  "player_prompt": {
+    "intro": "Kai ne Mai kunnawa {player_id} a cikin Jamusanci Whist. {phase_info} Kuna riƙe da {hand_size} katunan. Kun kunna katin da '[play N]', inda N shine matsayinsa a hannunku (misali '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "Babu katin da aka bayar - an fara wasan.",
+    "deck_empty": "Ƙungiyar ta zama fanko - babu katin da aka bayar.",
+    "available": "Katin da aka bayar: {card}",
+    "available_trump": "Katin da aka bayar: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Tsarin motsawa mara inganci. Yi amfani da '[play N]' don kunna katin Nth a hannunka.",
+    "bad_position": "Wannan katin ba ya wanzu. Kuna riƙe da {hand_size} katunan.",
+    "must_follow_suit": "Dole ne ku bi sahu kuma ku buga katin {lead_suit}.",
+    "invalid_play": "Ba za a iya yin amfani da wannan katin ba."
+  },
+  "game_action": {
+    "played": "Mai kunnawa {player_id} ya buga {card}."
+  },
+  "trick": {
+    "won": "Mai kunnawa {winner_id} ya ci nasara da dabarar tare da {card} .",
+    "won_learning": "Mai kunnawa {winner_id} ya ci nasara tare da {card} kuma ya ɗauki katin fuska."
+  },
+  "phase": {
+    "learning_complete": "The deck is exhausted. The learning phase is over - every remaining trick counts towards victory."
+  },
+  "draw": {
+    "winner_received": "Kun ci nasara kuma kun sami {card}.",
+    "loser_received": "Ka rasa dabarar kuma ka zana {card} daga bene.",
+    "winner_preview": "Katin na gaba da aka bayar shine {card}."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "Tricks da aka ci nasara har yanzu - Mai kunnawa 0: {tricks0}, Mai kunnawa 1: {tricks1}",
+    "scores_playing": "Ƙididdigar ƙididdiga - Mai kunnawa 0: {tricks0}, Mai kunnawa 1: {tricks1}",
+    "phase": "Yanayi: {phase}",
+    "phase_learning": "Mataki: {phase} ({remaining_cards} katunan da aka bari a cikin bene)"
+  },
+  "hand": {
+    "no_cards": "Babu katunan",
+    "no_cards_in_hand": "Babu katunan a hannu",
+    "header": "Hannunka:",
+    "trump_indicator": "(TRUMP) Ya yi murna da wannan.",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Babu katunan da aka buga har yanzu wannan abin zamba.",
+    "header": "Ƙa'idar yanzu:",
+    "trump_indicator": "(TRUMP) Ya yi murna da wannan.",
+    "card_line": "{observation} Mai kunnawa {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Wasan ba a fara ba",
+    "header": "=== Wasan Jamusanci na WASAN ===",
+    "phase": "{observation} Yanayi: {phase}",
+    "trump_suit": "{observation} Trump ya yi amfani da shi: {trump_suit}",
+    "trump_card": "{observation} Katin ƙaho: {card}",
+    "cards_left": "{observation} Katunan da aka bari a cikin bene: {count}",
+    "next_card": "{observation} Katin na gaba don mai nasara: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Dabarar da ake yi yanzu:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation} Mai kunnawa {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} Mai kunnawa {player_id}: {scoring} yin kwallo ({tricks} duka), {hand_size} katunan da ke hannunsa"
+  },
+  "outcome": {
+    "summary": "Mataki na koyo - Mai kunnawa 0: {l0}, Mai kunnawa 1: {l1}. Mataki na wasa - Mai kunnawa 0: {p0}, Mai kunnawa 1: {p1}. Mai kunnawa {winner_id} ya ci nasara tare da {winner_tricks} dabarun cin kwallaye!"
+  }
+}

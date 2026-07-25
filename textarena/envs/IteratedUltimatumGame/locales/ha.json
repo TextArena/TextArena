@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Kai ne Mai kunnawa {player_id}, yana wasa da zagaye {num_rounds} na Iterated Ultimatum Game. Kuna da ${pool} don raba wannan zagaye tsakanin ku da Mai kunnawa {other_id}. Mai ba da shawara: - Yi tayin: [Offer: $X] (0 <= X <= pool) - Idan an karɓa → Kuna samun $ ((pool - X), wani ɗan wasan yana samun $ X - Idan an ƙi → Dukansu suna samun $ 0 - Misali: [Offer: $3] ko 'Ina tsammanin wannan daidai ne. [Offer: $5]' Mai amsawa: - yanke shawara game da tayin tare da ko dai [Accept] ko [Reject] - Misali: 'Wannan yana da kyau. [Accept]' 'Ba daidai ba ne. [Reject]' "
+  },
+  "round": {
+    "begins": "--- Zagaye {round_number} ya fara! --- Mai kunnawa {proposer_id} shine mai ba da shawara, Mai kunnawa {responder_id} shine mai amsawa.",
+    "offer": "Zagaye {round_number}: Mai kunnawa {proposer_id} yana ba da ${offer} ga Mai kunnawa {responder_id} (yana riƙe da ${keep}).",
+    "accepted": "Mai kunnawa {responder_id} an karɓa! Zagaye {round_number} ya samu: Mai kunnawa {proposer_id} + ${proposer_gain}, Mai kunnawa {responder_id} + ${responder_gain}. Sabbin jimloli: Mai kunnawa 0: ${total_0}, Mai kunnawa 1: ${total_1}.",
+    "rejected": "Mai kunnawa {responder_id} ya ƙi tayin! Zagaye {round_number} ya samu: 'Yan wasa biyu + $ 0. Jimlar ta kasance: Mai kunnawa 0: ${total_0}, Mai kunnawa 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Mai ba da shawara dole ne ya yi tayin ta amfani da tsari [Offer: $X].",
+    "bad_integer": "Adadin tayin dole ne ya zama cikakkiyar lamba.",
+    "out_of_range": "Dole ne tayin ya kasance tsakanin $ 0 da ${pool}.",
+    "no_current_offer": "Babu wani tayin da za a amsa a yanzu.",
+    "accept_or_reject": "Dole ne mai amsawa ya [Accept] ko [Reject] tayin."
+  },
+  "outcome": {
+    "win": "Mai kunnawa {winner} ya ci nasara tare da ${winner_total} jimlar vs Mai kunnawa {loser} na ${loser_total} .",
+    "draw": "Duka 'yan wasan sun gama da $ {total} duka."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Kai ne Player {player_id} a cikin Stratego.\nBurinku shi ne ku kama Flag din da ke tare da kishiyan ki ko kaɗaɗa duka kayan da za su iya motsi.\nSojojin ki sun bazu a kan bado, ciki har da Flag, Bombs, da sauran kayan da ke da daraja daban-daban.\n\n### Bayanai Game\n1. **Movement Rules:**\n   - A kan zagayarku, za ku iya motsa kayan daya ta hanyar matakai daya zuwa murabba'i mai kusa (hauta, dama, hagu, ko dama) wanda ake da shi tare da kayan ki.\n   - Misali: Kayan zai iya motsa daga A1 zuwa B1 ko A1 zuwa A2 idan B1 da A2 ba a baza tare da kayan dan wasa.\n   - Idan kayan da aka zaɓa shi Bomb ko Flag, ba za a iya motsa shi.\n2. **Yaƙe-yaƙe:**\n   - Idan ku motsa zuwa murabba'i wanda ke da kayan kishiya, to amma yaƙi zai faru:\n     - Kayan da ke da daraja mafi girma zai yi nasara kuma yaɗe kayan kishiya.\n     - Idan darajarsu suke daidai, duka kayan za a cire su daga bado.\n     - **Hali Mai Kwanan:**\n       - Bombs suna ɗaure kayan da ke kai hari, ban da Miners, waɗanda ke ɗaukar Bombs.\n       - Spies zasu iya cin nasara Marshal idan Spy ya kai hari na farko amma ya sha kashi a hannun sauran kayan.\n3. **Manufofin Raba:**\n   - Gano kayan kishiya ta hanyar motsi da yaƙe-yaƙe.\n   - Kare Flag din ki yayin da kuke ƙoƙarin kama Flag din kishiya.\n   - Amfani da Scouts don samun bayani game da kayan kishiya kuma kai hari ga wanda bai yi koshin lafiya ba.\n\n### Yadda ake Yin Motsi:\n1. Bayyana koordinate na kayan da kike so ku motsa shi da inda zai je.\n2. Amfani da tsarin: [A0 B0], inda A0 shine matsayin asali, kuma B0 shine inda zai je.\n   - Misali: Don motsa kayan daga layi 0, shafin 0 zuwa layi 1, shafin 0, shigar da [A0 B0].\n3. tabbatar da cewa inda zai je yana da inganci bisa ga ka'idojin motsi da ke sama.\n\n### Bayanai Muhimmi:\n- Bado zai nuna kayan ki da matsayinsu, kamar yadda MN, MS.\n- Bado kuma zai nuna matsayin da aka sani na kayan kishiya ba tare da bayyana darajarsu ba, kamar yadda ?.\n- Grids da ke da ~ suna nuna teku kuma ba za a iya motsa zuwa gare su.\n- A matsayin shawara, fara wasan ki ta hanyar motsa kayan da ke kan layin gaba don samun bayani game da kayan kishiya. Layin gaba na dan wasa 0 da dan wasa 1 shine layi D da G bi da bi.\n\nHona yake matsayin bado na yanzu:\n"
+  },
+  "board": {
+    "current_board": "Kwamitin yanzu: {board} Akwai Matsayi: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Tsarin aiki mara inganci. Mai kunnawa {player_id} bai shigar da motsi a cikin tsarin [A0 B0] ba.",
+    "invalid_coordinates": "Invalid action format. Player {player_id} did not input valid coordinates.",
+    "not_own_piece": "Tsarin aiki mara inganci. Dole ne dan wasa {player_id} ya motsa ɗayan kayan aikinsa.",
+    "scout_through_pieces": "Tsarin aiki mara inganci. Mai kunnawa {player_id} ba zai iya motsa ɗan leƙen asirin ba ta hanyar wasu ɓangarori.",
+    "scout_diagonal": "Tsarin aiki mara inganci. Mai kunnawa {player_id} ba zai iya motsa ɗan leƙen asirin ƙasa ba.",
+    "non_scout_multi_square": "Tsarin aiki mara inganci. Abubuwa, banda masu bincike, na iya motsawa ɗaya kawai a lokaci guda.",
+    "move_into_lake": "Tsarin aiki mara inganci. Mai kunnawa {player_id} ba zai iya motsawa cikin tafkin ba.",
+    "move_onto_own_piece": "Tsarin aiki mara inganci. Mai kunnawa {player_id} ba zai iya matsawa zuwa nasu yanki ba.",
+    "move_bomb_or_flag": "Tsarin aiki mara inganci. Mai kunnawa {player_id} ba zai iya motsa bam ko tuta ba."
+  },
+  "game_action": {
+    "you_moved": "Ka motsa ka yanki daga {source} zuwa {dest}.",
+    "opponent_moved": "Mai kunnawa {player_id} ya motsa yanki daga {source} zuwa {dest}.",
+    "you_equal_ranks": "Ka motsa ka yanki daga {source} zuwa {dest}. The kai hari yanki ya {attacking_rank} da kuma manufa yanki ya {target_rank}. Kamar yadda darajoji ne guda, biyu guda rasa.",
+    "opponent_equal_ranks": "Mai kunnawa {player_id} ya motsa yanki daga {source} zuwa {dest}. Yankin da ke kai hari shine {attacking_rank} kuma yanki na manufa shine {target_rank}. Kamar yadda darajoji iri ɗaya ne, duka ɓangarorin sun ɓace.",
+    "you_miner_defused": "Ka motsa kayan aikinka daga {source} zuwa {dest}. Kashi mai kai hari shine {attacking_rank} kuma yanki mai zuwa shine {target_rank}. Kamar yadda masu hakar gwal zasu iya kashe bama-bamai, kun ci yaƙin.",
+    "opponent_miner_defused": "Mai kunnawa {player_id} ya motsa wani yanki daga {source} zuwa {dest}. Kashi mai kai hari shine {attacking_rank} kuma yanki mai zuwa shine {target_rank}. Kamar yadda masu hakar gwal zasu iya kashe bama-bamai, kun rasa yaƙin.",
+    "you_bomb_lost": "Ka motsa ka yanki daga {source} zuwa {dest}. The kai hari yanki ya {attacking_rank} da kuma manufa yanki ya {target_rank}. Kamar yadda attacker ba mai hakar ma'adinai, ka rasa yaƙi.",
+    "opponent_bomb_won": "Mai kunnawa {player_id} ya motsa wani yanki daga {source} zuwa {dest}. Kashi mai kai hari shine {attacking_rank} kuma yanki mai zuwa shine {target_rank}. Kamar yadda mai kai hari ba ma'adinai bane, kun ci yaƙin.",
+    "you_spy_won": "Ka motsa ka yanki daga {source} zuwa {dest}. The kai hari yanki ya {attacking_rank} da kuma manufa yanki ya {target_rank}. Kamar yadda attacker ne mai leken asiri da kuma manufa ne a Marshal, ka lashe yaƙi.",
+    "opponent_spy_lost": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a spy and the destination is a marshall, you lost the battle.",
+    "you_higher_won": "Ka motsa ka yanki daga {source} zuwa {dest}. The kai hari yanki ya {attacking_rank} da kuma manufa yanki ya {target_rank}. Kamar yadda attacker ne mafi girma a rank fiye da manufa, ka lashe yaƙi.",
+    "opponent_higher_lost": "Mai kunnawa {player_id} ya motsa wani yanki daga {source} zuwa {dest}. Yankin da ke kai hari shine {attacking_rank} kuma yanki na manufa shine {target_rank}. Kamar yadda mai kai hari ya fi matsayi fiye da manufa, kun rasa yaƙin.",
+    "you_lower_lost": "Ka motsa ka yanki daga {source} zuwa {dest}. The kai hari yanki ya {attacking_rank} da kuma manufa yanki ya {target_rank}. Kamar yadda attacker ne a ƙananan rank fiye da manufa, ka rasa yaƙi.",
+    "opponent_lower_won": "Mai kunnawa {player_id} ya motsa wani yanki daga {source} zuwa {dest}. Yankin da ke kai hari shine {attacking_rank} kuma yanki na manufa shine {target_rank}. Kamar yadda mai kai hari ya kasance ƙasa da matsayi fiye da manufa, kun ci yaƙin."
+  },
+  "outcome": {
+    "flag_captured": "Mai kunnawa {player_id} ya kama tutar abokin hamayya!",
+    "no_movable_pieces": "Mai kunnawa {winner_id} ya ci nasara! Mai kunnawa {loser_id} ba shi da sauran sassan motsi."
+  }
+}

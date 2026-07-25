@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Game Board:\n{board}",
+    "valid_moves": "{observation}\nValid moves: {moves}",
+    "no_valid_moves_reset": "{observation} Babu halattaccen motsi - ƙila za ku tsallake.",
+    "no_valid_moves_step": "{observation}\nNo valid moves – you may have to skip.",
+    "scores_reset": "{observation}\nCurren Scores - Black: {black_count}, White: {white_count}\n",
+    "scores_step": "{observation} Abubuwan da aka samu - Black: {black_count}, White: {white_count} "
+  },
+  "invalid_move": {
+    "wrong_format": "Move must be of the form [row, col].",
+    "illegal": "Illegal move. Valid moves: {valid}"
+  },
+  "game_action": {
+    "skipped": "Mai kunnawa {pid} ya tsallake jujjuyawar su",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Mai kunnawa {pid} ({piece}) ba shi da ingantattun motsi kuma dole ne ya tsallake."
+  },
+  "outcome": {
+    "black_wins": "Baƙar fata ta ci nasara {black_count}-{white_count}.",
+    "white_wins": "White ya lashe {white_count}-{black_count}.",
+    "draw": "Draw {black_count}-{white_count}."
+  }
+}

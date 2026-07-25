@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Babu katunan har yanzu",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Single Player vs Dealer\n\n📖 TAFSIRI GAME:\n• Ka fara da {start_chips} chips\n• Deck daya na 52 cards (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Ka taka leda da dealer (house)\n• Kowace zagaye ya biya Ultimate Texas Hold'em structure: ka ajiye ANTE da BLIND bets, ka karbi 2 hole cards, ka yanke shawara kan optional PLAY bets a ko'ina cikin matakin betting, sannan ka nuna community cards da kisa da mafi kyawun 5-card hand da ke daidai da na dealer. Burinka shine ya fi ko na kasa (idankaka ka na mafi kyawun hand), yayin da kake rage asarar (idankaka ka na mafi muni hand).\n• Wasan ya ƙare lokacin da ka kai 0 chips ko ƙasa a farkon zagaye (ASARA) ko kammala 1000 rounds tare da chips (NASARA)\n\n💰 TSARIN BETTING:\n• ANTE: Mandatory ${ante} bet a kowace zagaye\n• BLIND: Mandatory ${ante} bet a kowace zagaye\n• PLAY: Optional bet a lokacin wasa. A tsawon zagaye, za ka iya zaɓa DAKA ɗaya daga cikin waɗannan: (${ante4} idan an yi shi a PRE-FLOP, ${ante2} idan an yi shi a FLOP, ko ${ante} idan an yi shi a RIVER. Kuma za ka iya yanke shawara a kogin, kawo ƙarshen ga hannu, kuma ba za ka yi bet ba.)\n\n🎴 CARD DEALING:\n• Ka karbi 2 face-up cards (hole cards naka)\n• Dealer ya karbi 2 face-down cards (an boye su daga gare ka)\n• 5 community cards an yi su face-down a farkon wasa\n• Community cards suna bayyana a hankali ta hanyar matakin wasa\n\n🏆 DEALER QUALIFICATION:\n• Dealer ya kamata ya na PAIR (2 cards na mahaɗa) ya cancanta, ta amfani da 2 cards a hannunta da 5 community cards.\n• Cancantar dealer tana shafar sakamako na betting, kamar yadda za a bayyana yanzu.\n\n🎮 GAME PHASES & ACTIONS:\n📋 PRE-FLOP:\n  • Ayyuka: [4x] (${ante4}) ko [check]\n  • [4x]: Ajiye ${ante4} PLAY bet, nuna first 3 community cards\n  • [check]: Babu bet ɗin sauran, nuna first 3 community cards\n\n📋 FLOP:\n  • Idan an yi 4x bet: Kawai [skip] ya samu (auto-reveals last 2 community cards)\n  • Idan babu 4x bet: [2x] (${ante2}) ko [check]\n  • [2x]: Ajiye ${ante2} PLAY bet, nuna last 2 community cards\n  • [check]: Babu bet ɗin sauran, nuna last 2 community cards\n\n📋 RIVER:\n  • Idan an yi 4x ko 2x bet: Kawai [skip] ya samu (auto-proceeds zuwa showdown)\n  • Idan babu bet na PLAY: [1x] (${ante}) ko [fold]\n  • [1x]: Ajiye ${ante} PLAY bet, ci gaba zuwa showdown\n  • [fold]: Bari hannu, asara ANTE da BLIND bets\n\n📋 SHOWDOWN:\n  • Duk cards an nuna su da kuma ayyana su\n  • Mafi kyawun 5-card hand daga 7 cards (2 hole + 5 community)\n  • Bets an sulule su bisa ga ka'idojin biya\n\n💎 BET PAYOUTS:\n📊 ANTE BET:\n  • Dealer bai cancanta ba: PUSH (bet an dawo)\n  • Dealer ya cancanta & ka na nasara: 1:1 payout (bet + nasara)\n  • Dealer ya cancanta & ka na asara: Bet an asara\n  • Tie: PUSH (bet an dawo)\n\n📊 BLIND BET:\n  • Ba a shafa shi da cancantar dealer\n  • Ka na nasara: Bet an dawo da kuma nasara ɗaya\n  • Ka na asara: Bet an asara\n  • Tie: PUSH (bet an dawo)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Babu nasara ɗaya\n\n📊 PLAY BET:\n  • Ba a shafa shi da cancantar dealer\n  • Direct comparison: Mafi kyawun hand naka vs Mafi kyawun hand na dealer\n  • Ka na nasara: 1:1 payout (bet + nasara)\n  • Ka na asara: Bet an asara\n  • Tie: PUSH (bet an dawo)\n\n🎯 POKER HAND RANKINGS (Mafi kyawu zuwa Mafi muni):\n  1. Royal Flush: A-K-Q-J-10 na mahaɗa\n  2. Straight Flush: 5 consecutive cards na mahaɗa\n  3. Four of a Kind: 4 cards na mahaɗa\n  4. Full House: 3 na mahaɗa + 2 na mahaɗa\n  5. Flush: 5 cards na mahaɗa\n  6. Straight: 5 consecutive cards\n  7. Three of a Kind: 3 cards na mahaɗa\n  8. Two Pair: 2 pairs na mahaɗa\n  9. One Pair: 2 cards na mahaɗa\n  10. High Card: Mafi girma card ya yi nasara\n\n⌨️  ACTION COMMANDS:\n• [4x] ko [play bet 4x]: Ajiye ${{self.ante_amount*4}} PLAY bet\n• [2x] ko [play bet 2x]: Ajiye ${{self.ante_amount*2}} PLAY bet\n• [1x] ko [play bet 1x]: Ajiye ${{self.ante_amount*1}} PLAY bet\n• [check] ko [c]: Check (babu bet ɗin sauran)\n• [fold] ko [f]: Fold (bari hannu)\n• [skip] ko [s]: Skip zuwa zagaye mai zuwa (idan babu aiki)\n\n💡 STRATEGY TIPS:\n• Strong starting hands (pairs, high cards) galibi suna ba da hujja ga 4x bets\n• Ka yi la'akari da cancantar dealer - weak hands na iya push idan dealer bai cancanta ba\n• BLIND bet na iya zama mai riba sosai tare da strong hands (Royal Flush = 500:1!)\n• Ka kula da chip stack naka! Idan ya kai 0 ko ƙasa a farkon zagaye, ka na asara.\n\n⚠️  MAHIMMAN BAYANAI:\n• ANTE da BLIND bets suna tilasta a kowace zagaye\n• PLAY bets suna zaɓi da kuma ƙwararru\n• Ka tabbatar ka shigar da aiki mai kyau, kuma kawai aiki ɗaya a lokaci ɗaya.\n\n",
+    "state": " ZAMAN {round}  Chips: {chips}  Hannunka: {hand}  Fare na yanzu: Ante ${ante}, Blind ${blind}, Play ${play}  Yanayi: {phase}  Ayyukan da ake da su: {actions} "
+  },
+  "board": {
+    "round_start": " Zagaye {round} ya fara! Fare: ANTE ${ante}, BLIND ${blind}. Kuna da kwakwalwan {chips} da suka rage.",
+    "your_hand": " Hannunka: {hand}",
+    "flop_revealed": " FLOP ya bayyana: {cards}",
+    "river_revealed": " RIVER ya bayyana: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Invalid action for current phase. Available actions: {available}",
+    "message": "❌ Invalid action! Available actions: {available}"
+  },
+  "action": {
+    "folded": "🃏 You folded."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Hannun dillali: {cards}",
+    "community_cards": " Katunan Ƙungiyar: {cards}",
+    "player_best": " Mafi kyawun hannun mai kunnawa: {name} ({cards})",
+    "dealer_best": " Mafi kyawun hannun dillali: {name} ({cards})",
+    "ante_lost_folded": " ANTE fare ya ɓace! - $ {ante} (an ninka)",
+    "blind_lost_folded": "❌ BLIND bet LOST! -${blind} (folded)",
+    "ante_won": "✅ ANTE fare ya ci nasara! + $ {amount}",
+    "ante_pushed": " ANTE fare PUSHED! ${ante} ya dawo",
+    "ante_lost": " ANTE fare ya yi hasara! -${ante}",
+    "blind_won": "✅ BLIND bet WON! +${amount}",
+    "blind_pushed": " BIND fare ya tura! ${blind} ya dawo",
+    "blind_lost": " BIND fare ya yi asara! -${blind}",
+    "play_won": "✅ Wasan Wasan WIN! + $ {amount}",
+    "play_pushed": " Wasan caca ya tura! ${play} ya dawo",
+    "play_lost": " Wasan caca ya yi asara! - ${play}",
+    "net_gain": " Zagaye {round} ya kammala! Gwanin kuɗi: + ${net}",
+    "net_loss": " Zagaye {round} ya kammala! Rashin asarar kuɗi: ${net}",
+    "separator": "Kuma lalle ne, haƙĩƙa, Munã ganin ka a cikin kõwane abu mai kyau."
+  },
+  "outcome": {
+    "game_over_win": " WASANNI! {max_turns} zagaye ya kammala. Kuna da kwakwalwan kwamfuta ${chips} - KA YI GASKIYA!",
+    "game_over_lose": "Wasan ya ƙare, babu sauran kwakwalwan kwamfuta, dillalin ya ci nasara!",
+    "reward_win": "Mai kunnawa ya kammala zagaye {winner_rounds} tare da kwakwalwan kwamfuta ${chips}",
+    "reward_lose": "Mai kunnawa ya ƙare daga kwakwalwan kwamfuta a zagaye {round}",
+    "reward_win_max": "Mai kunnawa ya kammala zagaye {max_turns} tare da kwakwalwan kwamfuta ${chips}"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Hudu na Irinsa",
+    "full_house": "Cikakken Gida",
+    "flush": "Fashewa",
+    "straight": "A tsaye",
+    "three_of_a_kind": "Uku na Irinsa",
+    "two_pair": "Biyu Biyu",
+    "one_pair": "Ɗaya daga cikin Ma'aurata",
+    "high_card": "Babban Katin",
+    "unknown": "Hannun da ba a sani ba"
+  }
+}

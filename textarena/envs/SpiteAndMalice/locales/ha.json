@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Current Board:\n\n{board}\nAvailable Moves: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Cibiyar Gidajen --- ",
+    "pile": "{observation}Taka {i}: {pile} ",
+    "player_view_header": "{observation}\n--- Player {player_id}'s View ---\n",
+    "payoff": "{observation}Kayan biyan kuɗi (Katin Sama): {top_card}, Tsawon Gwanin Biyan Kuɗi: {payoff_length} ",
+    "hand": "{observation}Hand: {hand} ",
+    "discard": "{observation}Kashe Tarin: {discard} ",
+    "empty": "Babu komai"
+  },
+  "game_message": {
+    "no_cards_left": "Babu sauran katunan da za a zana daga. Ka tuna cewa za ka iya wasa da katunan daga wadannan kafofin: 1. Your ** hannun **. 2. ** Top katin na payoff tari **. 3. ** Top katin na wani daga cikin zubar tari **."
+  },
+  "invalid_move": {
+    "wrong_format": "Tsarin motsawa mara inganci. Mai kunnawa {player_id} bai amsa da ingantaccen motsi a cikin masu kare murabba'i ba.",
+    "invalid_play": "Mai kunnawa {player_id} yayi ƙoƙarin wasa {card} a kan tsakiya na tsakiya {index} .",
+    "discard_from_payoff": "Rashin amfani da kuskure. Mai kunnawa {player_id} yayi ƙoƙarin yin watsi da katin daga tarin biya.",
+    "discard_not_in_hand": "Rashin amfani da kuskure. Mai kunnawa {player_id} yayi ƙoƙarin yin watsi da katin da ba a hannunsa ba.",
+    "wrong_move_type": "Nau'in motsawa mara inganci. Mai kunnawa {player_id} bai amsa da nau'in motsawa mai inganci ba."
+  },
+  "game_action": {
+    "you_drew": "Ka yi wasa da katin.",
+    "opponent_drew": "Mai kunnawa {player_id} ya zana katunan.",
+    "you_played": "Kun buga {card} a kan tsakiyar tsakiya {index} .",
+    "opponent_played": "Mai kunnawa {player_id} ya buga {card} a kan tsakiya ta tsakiya {index} .",
+    "you_discarded": "Ka yi watsi da {card} don yin watsi da tari {index}, wanda kuma yana nufin kun gama jujjuyawar su. Ba a ƙara yin la'akari da ayyukanku na wannan jujjuyawar ba. Mai kunnawa {next_player_id} zai ci gaba.",
+    "opponent_discarded": "Mai kunnawa {player_id} ya watsar da {card} don watsar da tari {index}, wanda kuma yana nufin sun gama jujjuyawar su. Babu ƙarin ayyukan Mai kunnawa {player_id} da ake la'akari da wannan juzu'i. Mai kunnawa {next_player_id}, za ku ci gaba. Da fatan za a shigar da aikinku a cikin tsari [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mai kunnawa {current_player} ya gama tarin kuɗin su! Mai kunnawa {current_player} ya ci nasara!",
+    "deadlock_player_0": "An kai ga kulle! Mai kunnawa 0 ya ci nasara tare da {player_0_payoff} katunan da suka rage vs. Mai kunnawa 1 {player_1_payoff} katunan.",
+    "deadlock_player_1": "An kai ga kulle! Mai kunnawa 1 ya ci nasara tare da {player_1_payoff} katunan da suka rage vs. Mai kunnawa 0's {player_0_payoff} katunan.",
+    "deadlock_tie": "An kai ga kulle tare da daidaitawa! 'Yan wasan biyu suna da {player_0_payoff} katunan da suka rage. Mai kunnawa {current_player} ya ci nasara ta tsohuwa."
+  }
+}

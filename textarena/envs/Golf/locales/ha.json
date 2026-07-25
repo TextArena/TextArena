@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Kuna wasa Golf (Katin Wasanni) - Mai kunnawa {player_id}. Goal: Samu mafi ƙarancin jimillar maki a cikin wannan zagaye ɗaya. Idan ginshiƙai suna da darajar iri ɗaya, ana haɗa su da 0. Card Values: A = 1, 2-10 = face value, J / Q = 10, K = 0 Ayyuka (amfani da madaidaitan ƙuƙwalwa): - '[draw]' - Zana daga bene - '[take]' - Ɗauki daga tarin da aka watsar - '[swap X Y]' - Swap da aka zana katin tare da matsayi X ( jere) Y (shafi) - '[discard]' - Yi watsi da katin da aka zana "
+  },
+  "board": {
+    "drew": "Ka zana: {card} Yanzu dole ne ka [swap X Y] ko [discard] shi.",
+    "took": "Kun ɗauki: {card} daga tarin zubar da ku Dole ne ku [swap X Y] tare da shi (ba za ku iya zubar da shi ba).",
+    "peeked": "Ka duba a matsayin ({row},{col}): {card}",
+    "turn_view": "Hannunka: {hand} Kashe tarin: {discard} {options}",
+    "none": "Babu"
+  },
+  "options": {
+    "final_turns": "Zaɓuɓɓukanku: [draw], [take], [peek X Y]",
+    "draw": "Zaɓuɓɓukanku: [draw], [take]",
+    "must_swap": "Dole ne ku: [swap X Y] (ba za ku iya yin watsi da katunan daga tarin da aka yi watsi da su ba)",
+    "swap_or_discard": "Dole ne ku: [swap X Y] ko [discard]"
+  },
+  "hand": {
+    "no_cards": "Babu katunan",
+    "header": "Ƙungiyar: 1 2 3",
+    "row": "Layin {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Mai kunnawa {pid} ya canza {new} tare da {old} a matsayi ({row},{col})",
+    "discarded": "Mai kunnawa {pid} an watsar {card}"
+  },
+  "message": {
+    "deck_empty": "Dakin ya zama babu kowa, wasan ya ƙare nan take.",
+    "knocked": "Mai kunnawa {pid} ya buga! Kowane ɗan wasa yana da ƙarin juyi ɗaya.",
+    "final_round": "Mai kunnawa {pid} {reason}! Kowane ɗan wasa yana samun ƙarin juyi ɗaya."
+  },
+  "reason": {
+    "all_revealed": "ya bayyana duk katunan"
+  },
+  "invalid": {
+    "wrong_action": "Use exactly ONE bracketed action: [draw], [take], [swap X Y], [discard], [knock], or [peek X Y]",
+    "discard_empty": "Gidan da aka zubar ba shi da kome!",
+    "must_draw_first": "Dole ne ku fara [draw], [take], [knock], ko [peek X Y]",
+    "cannot_discard_taken": "Ba za ka iya yin watsi da katin da aka dauka daga tarin da aka watsar ba. Dole ne ka musanya shi.",
+    "have_drawn_card": "Kana da katin da aka zana. Dole ne ka [swap X Y] ko [discard] shi.",
+    "need_drawn_swap": "Kana bukatar katin da aka zana don musayar.",
+    "need_drawn_discard": "Kana bukatar katin da aka zana don ka watsar.",
+    "out_of_bounds": "Matsayi daga cikin iyakoki. Yi amfani da jere 1-{max_row}, shafi 1-{max_col}",
+    "knock_with_card": "Ba za ka iya buga tare da katin da aka zana ba. Ka kammala juyawarka da farko.",
+    "already_knocked": "Wani ya riga ya buga wannan zagaye.",
+    "already_revealed": "An riga an bayyana wannan katin!"
+  },
+  "summary": {
+    "full": "Game Over! Mai kunnawa {winner} ya ci nasara tare da maki {score} maki! Sakamakon karshe: {scores}",
+    "line": "Mai kunnawa {pid}: {score} maki "
+  },
+  "board_str": {
+    "title": "=== Wasan GOLF ===",
+    "discard": "Gidan da aka watsar: {card}",
+    "knocked": "Mai kunnawa {pid} ya buga!",
+    "player_header": "Mai kunnawa {pid} (Score: {score}):"
+  }
+}
