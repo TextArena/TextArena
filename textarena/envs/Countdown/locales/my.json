@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "TARGET: {target} ရရှိနိုင်သော နံပါတ်များ: {numbers}",
+    "best": "{observation}\n\nလက်ရှိအကောင်းဆုံး: {best_value} (အကွာအဝေး: {distance})\nအကောင်းဆုံး ဖော်ပြချက်: {best_expression}",
+    "history": "{observation} ရွှေ့ပြောင်းသမိုင်း: {moves}",
+    "progress": "{observation}\nလက်ရှိ တိုးတက်မှု သင်္ကေတ: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "မမှန်သောညွှန်းကိန်းများ။ မတူညီ၍ ၀-{max_index}အကြားရှိရမည်။",
+    "invalid_operation": "မမှန်သော လုပ်ဆောင်ချက် (သုညသို့မဟုတ် ကိန်းပြည့်မဟုတ်သော ရလဒ်ဖြင့် ခွဲခြမ်းခြင်း)"
+  },
+  "outcome": {
+    "win": "အကောင်းဆုံး! တိကျတဲ့ပစ်မှတ်ကိုတွေ့တယ်: {target}",
+    "no_moves": "အကောင်းဆုံးရလဒ်: {best_value} (ပစ်မှတ်: {target})",
+    "turn_limit": "အလှည့်အပြောင်းအကန့်သတ်ကို ရောက်ရှိသည်။ အကောင်းဆုံးရလဒ်: {best_value} (ပစ်မှတ်: {target})"
+  }
+}

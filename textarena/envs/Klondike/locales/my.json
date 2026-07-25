@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "သင်က Klondike Solitaire ကစားနေသည်။ သင့်ရည်ရွယ်ချက်က ကဒ်အားလုံးကို အခြေခံပုံများသို့ ရွှေ့ရန်ဖြစ်သည်။ ဂိမ်းစည်းမျဉ်းများ: - အခြေခံပုံများ (F1-F4): အက်စ်မှ ဘုရင်အထိ အလိုက်ဖက်စွာ တည်ဆောက်ပါ။ Tableau piles (T1-T7): အပြောင်းအလဲအရောင်များ (နီရောင်ပေါ်တွင် အနက်ရောင်၊ အနက်ရောင်ပေါ်တွင် အနီရောင်) - စတော့ကို တည်ဆောက်ပါ။ ကဒ်များကို အမှိုက်ပုံသို့ ဆွဲပါ။ အမှိုက် (W): ကစားရန်အထက်ဆုံးကဒ်ရရှိနိုင်သည်။ Commands: - 'draw' - စတော့မှ အမှိုက်ပုံသို့ ကဒ်များကို ဆွဲပါ။ 'move <source> <destination> [count]' - piles များအကြား ကဒ်များကို ရွှေ့ပါ။ ဥပမာ: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count ကို 'all' ဟုလည်းခေါ်နိုင်သည်။ ၎င်းသည် မျက်နှာပြင်ပေါ်က ကဒ်အားလုံးကို ချက်ချင်းရွှေ့ရန် ကြိုးစားလိမ့်မည်။ - 'forfeit' - ဂိမ်းကို အဆုံးသတ်ပြီး သင့်လက်ရှိမှတ်ကို lock လုပ်ပါ။ - Pile (ဖြုတ်) W (ဆုံးရှုံး), F1-F4 (တွေ့ရှိသည်) -T1-T7 (အမှအမှောင်ဆုံးအနီရောင်ပေါ်တွင် အညို) - အမှ အမှောင်များအားဖြုတ် - အမှောင်များ (အမှိုင်းများ) - အမှ အမှ အမှတစ်ဆင့် - အမှိုင်းများ (အမှိုင်းများ (W): အမှိုင်းများ) အမှဆုံးကဒ်များအားထုတ်ယူရန်အတွက် ကဒ်များထုတ်ယူပါရှိသည် - ထိပ်ဆုံးကဒ်များကို ဆွဲပါ။ ဂိမ်းအတွက်ရရှိနိုင်ရန်အတွက် ကဒ်များကို အသုံးပြုနိုင်သည်။"
+  },
+  "format_error": {
+    "no_brackets": "မမှန်သော လုပ်ဆောင်ချက်ပုံစံ၊ လုပ်ဆောင်ချက်သည် ကန့်လန့်ဖြတ်အကွက်များတွင်ရှိရမည်။",
+    "no_closing_bracket": "မမှန်သော လုပ်ဆောင်ချက်ပုံစံ၊ ပိတ်သိမ်းသည့် ကန့်လန့်ဖြတ်ကွက် ပျောက်နေသည် ']'",
+    "empty_command": "အလွတ် command ကို။ type ကို \"ဆွဲ\" သို့မဟုတ် \"ရွှေ့ <ရင်းမြစ်> <ပန်းတိုင်> [count]\"",
+    "empty_action": "အလွတ်လုပ်ဆောင်မှု",
+    "move_needs_args": "ရွှေ့ပြောင်းအမိန့်သည်ရင်းမြစ်နှင့်ခရီးသွားနေရာကိုလိုအပ်သည်။ အသုံးပြုမှု: 'move <source> <destination> [count]'",
+    "count_positive": "Count သည်အပြုသဘောဖြစ်ရမည် သို့မဟုတ် 'all' ဖြစ်ရမည်။",
+    "count_invalid": "မမှန်သောရေတွက်ချက်မှု။ နံပါတ်တစ်ခု သို့မဟုတ် 'အားလုံး' ကိုသုံးပါ",
+    "unknown_command": "မသိသော command '{cmd}'။ 'draw', 'move <source> <destination> [count]', or 'forfeit' ကိုသုံးပါ",
+    "wrapped": "လုပ်ဆောင်ချက် {n}: {msg}"
+  },
+  "action_result": {
+    "success": "လုပ်ဆောင်ချက် {n}: {msg}",
+    "before_failure": "မအောင်မြင်မီ {n} action(s) ကို လုပ်ဆောင်ခဲ့သည်။",
+    "failed": "အယူခံ {n} မအောင်မြင်: {msg}"
+  },
+  "move_result": {
+    "drew": "Drew card(s) from stock to waste.",
+    "cannot_draw": "မဆွဲနိုင်ဘူး။ စွန့်ပစ်ပစ္စည်းတွေရော စွန့်ပစ်ပစ္စည်းတွေရော လစ်လပ်သွားပြီ။",
+    "invalid_pile": "မမှန်သောပုံအမည်။ W၊ F1-F4 သို့မဟုတ် T1-T7 ကိုသုံးပါ",
+    "foundation_one_card": "ဖောင်ဒေးရှင်းကို ကဒ် ၁ ကဒ်ပဲ ရွှေ့လို့ရတယ်။",
+    "waste_to_foundation_ok": "အမှိုက်မှ ဖောင်ဒေးရှင်းသို့ ကတ်ပြားပြောင်းရွှေ့ခြင်း F{dst}",
+    "waste_to_foundation_bad": "အမှိုက်ကဒ်ကို အောက်ခြေပုံထဲ ရွှေ့လို့မရဘူး",
+    "tableau_to_foundation_ok": "တယ်လီယူ {src} မှ ကတ်ကို ဖောင်ဒေးရှင်း F{dst} သို့ ရွှေ့ပြောင်းခဲ့သည်",
+    "tableau_to_foundation_bad": "အခြေခံပုံပေါ်သို့ tableau ကဒ်ကို ရွှေ့၍ မရနိုင်",
+    "foundation_to_foundation": "အောက်ခြေမှ အောက်ခြေသို့ ရွှေ့လို့မရ",
+    "waste_to_tableau_one_card": "အမှိုက်ကနေ ကတ် ၁ ကတ်ပဲ tableau ကို ရွှေ့လို့ရတယ်။",
+    "waste_to_tableau_ok": "အမှိုက်ကနေ T{dst} ဇယားထဲကို ကဒ်ကို ရွှေ့လိုက်တယ်။",
+    "waste_to_tableau_bad": "waste card ကို ထို tableau pile ပေါ်တွင် မထားနိုင်ပါ",
+    "no_face_up": "မျက်နှာပြင်ပေါ်က ကဒ်တွေကို ရွှေ့စရာ မလိုပါ။",
+    "tableau_to_tableau_ok": "{count} ကတ် (များ) ကို ဇယား T{src} မှ T{dst} သို့ ရွှေ့ခဲ့သည်",
+    "tableau_to_tableau_bad": "T{src} မှ T{dst} သို့ {count} ကတ် (များ) ကို ရွှေ့၍ မရပါ။",
+    "foundation_to_tableau_one_card": "အခြေခံကနေ ကတ် ၁ ကတ်ပဲ tableau ကို ရွှေ့လို့ရတယ်။",
+    "foundation_empty": "Foundation F{src} သည်အလွတ်ဖြစ်သည်",
+    "foundation_to_tableau_ok": "ဖောင်ဒေးရှင်း F{src} မှ tableau T{dst} သို့ ကတ်ပြားကို ရွှေ့ခဲ့သည်",
+    "foundation_to_tableau_bad": "ဖောင်ဒေးရှင်းကဒ်ကို tableau T {dst} ပေါ်တွင် မထားနိုင်ပါ။",
+    "to_waste_or_stock": "အမှိုက် (သို့) စတော့အဖြစ် မပြောင်းနိုင်"
+  },
+  "outcome": {
+    "forfeit": "ဂိမ်းကို အရှုံးပေးခံရသည်။ နောက်ဆုံးရမှတ်: {score} ဖောင်ဒေးရှင်းများတွင် ကဒ်များ။",
+    "won": "ဝမ်းသာတယ်၊ Klondike Solitaire ကို သင်နိုင်ခဲ့တယ်။",
+    "turn_limit": "ဂိမ်း ပြီးဆုံး! သင်သည် {max_turns} ပုံကြမ်း အများဆုံး ကို ရောက်ရှိခဲ့သည်။ အဆင့်: {score} ကတ်များ ဖောင်ဒေးရှင်းများတွင်"
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE === ကို ပြန်လည်ဆန်းစစ်ခြင်း",
+    "turn": "အလှည့်: {turn}/{max_turns}",
+    "stock": "အရင်းအမြစ်: {stock} ကတ်ပြားများ",
+    "waste": "အမှိုက် (W): {waste}",
+    "foundations_header": "ဖောင်ဒေးရှင်းများ",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "ဇယား:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "လက်ရှိဘုတ်အဖွဲ့: {board} လက်ရှိပြောင်းရွှေ့မှုများ: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- ဗဟိုအပုံများ --- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation} --- ကစားသမား {player_id} ၏ အမြင် --- ",
+    "payoff": "{observation}အပိုဆုများ (အထက်ကဒ်): {top_card}, အပိုဆုများ အပိုဆုအရှည်: {payoff_length} ",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}စွန့်ပစ်ရန် အပုံများ: {discard} ",
+    "empty": "ဘာမှမရှိဘူး။"
+  },
+  "game_message": {
+    "no_cards_left": "ထီထိုးဖို့ ကဒ်တွေ မရှိတော့ဘူး။ ဒီအရင်းအမြစ်တွေက ကဒ်တွေ ကစားနိုင်တာ မှတ်ထားပါ။"
+  },
+  "invalid_move": {
+    "wrong_format": "မမှန်ကန်သောလှုပ်ရှားမှုပုံစံ။ ကစားသမား {player_id} သည် စတုရန်း ကန့်လန့်ဖြတ်ထားသော မှန်ကန်သောလှုပ်ရှားမှုဖြင့် တုံ့ပြန်ခြင်းမရှိပါ။",
+    "invalid_play": "လုပ်ရန် မမှန်ကန်ပါ။ Player {player_id} က {card} ကို ဗဟို pile {index} ပေါ်တွင် လုပ်ရန် ကြိုးပမ်းခဲ့သည်။",
+    "discard_from_payoff": "မမှန်ကန်သော ပစ်ချခြင်း။ ကစားသမား {player_id} သည် ဆုပေးပုံမှ ကတ်တစ်ကဒ်ကို ပစ်ချရန် ကြိုးစားခဲ့သည်။",
+    "discard_not_in_hand": "မမှန်ကန်သော စွန့်ပစ်ခြင်း။ ကစားသမား {player_id} သည် လက်တွင်မရှိသော ကတ်ကို စွန့်ပစ်ရန် ကြိုးစားခဲ့သည်။",
+    "wrong_move_type": "မမှန်ကန်သောလှုပ်ရှားမှုအမျိုးအစား။ ကစားသမား {player_id} သည် မှန်ကန်သောလှုပ်ရှားမှုအမျိုးအစားဖြင့် တုံ့ပြန်ခြင်းမရှိပါ။"
+  },
+  "game_action": {
+    "you_drew": "သင်ဟာ ကဒ်တွေဆွဲတယ်။",
+    "opponent_drew": "ကစားသမား {player_id} က ကဒ်တွေ ဆွဲတယ်။",
+    "you_played": "သင်က အလယ်က {card}ကို {index}မှာ ကစားခဲ့တယ်။",
+    "opponent_played": "Player {player_id} က {card} ကို ဗဟို pile {index} ပေါ်တွင် လုပ်ခဲ့သည်။",
+    "you_discarded": "သင်က {card}ကို {index}ကို စွန့်ပစ်ဖို့ စွန့်ပစ်ထားတယ်၊ ဆိုလိုတာက သင်ဟာ သူတို့လှည့်မှုကို ပြီးဆုံးပြီ၊ ဒီလှည့်ခြင်းအတွက် သင့်ရဲ့ နောက်ထပ် လုပ်ဆောင်ချက်တွေကို ထည့်သွင်းစဉ်းစားမှာမဟုတ်ဘူး။ ကစားသမား {next_player_id}က နောက်တစ်လှည့်ပါ။",
+    "opponent_discarded": "ကစားသမား {player_id} သည် {card} ကို {index} ကို ပစ်ချရန် ပစ်ချခဲ့သည်၊ ဆိုလိုသည်မှာ ၎င်းတို့သည် ၎င်းတို့၏ အလှည့်ကို ပြီးစီးခဲ့သည်ဟုလည်း ဆိုလိုသည်။ ဤလှည့်အတွက် ကစားသမား {player_id} ၏ နောက်ထပ်လုပ်ဆောင်ချက်များကို ထည့်သွင်းစဉ်းစားခြင်းမရှိပါ။ ကစားသမား {next_player_id}၊ သင်သည် နောက်တစ်ကြိမ်သွားမည်။ ကျေးဇူးပြု၍ သင်၏လုပ်ဆောင်ချက်ကို ပုံစံ [action card center_index] တွင် ထည့်သွင်းပါ။"
+  },
+  "outcome": {
+    "payoff_cleared": "ကစားသမား {current_player} က သူ႕ေငြေၾကးအတံုးကို ၿပီးသြားၿပီ! ကစားသမား {current_player} က အႏိုင္ရသြားၿပီ!",
+    "deadlock_player_0": "Deadlock reached! Player 0 wins with {player_0_payoff} cards remaining vs Player 1's {player_1_payoff} cards.",
+    "deadlock_player_1": "Deadlock ရောက်ပြီ! ကစားသမား ၁ က ကစားသမား ၀ ရဲ့ {player_0_payoff} ကဒ်တွေ အပေါ် ကျန်တဲ့ {player_1_payoff} ကဒ်တွေနဲ့ နိုင်တယ်။",
+    "deadlock_tie": "Deadlock ကို tie ဖြင့်ရောက်ရှိသည်! နှစ်ဦးစလုံးကစားသမားများမှာ {player_0_payoff} ကတ်ကျန်ရှိနေသည်။ ကစားသမား {current_player} သည်အလိုအလျောက်နိုင်သည်။"
+  }
+}

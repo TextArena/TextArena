@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "သင်ဟာ Nim မှာ ကစားသမား {player_id} ဖြစ်တယ်။ သင့်ရည်ရွယ်ချက်က နောက်ဆုံးကျန်တဲ့ အရာဝတ္ထုကိုယူဖို့ပါ။ တစ်လှည့်စီမှာ တစ်ပုံတစ်လုံးတိတိကိုရွေးပြီး တစ်ခု (သို့) ဒါထက်ပိုတဲ့ အရာဝတ္ထုတွေကို ဖယ်ရှားပါ။ pile သည် pile index ဖြစ်ပြီး ပမာဏသည် ဖယ်ရှားရမယ့် အရာဝတ္ထုအရေအတွက်ဖြစ်သော '[pile quantity]' ပုံစံကိုသုံးပါ။ ဥပမာ၊ '[0 3]' သည် pile 0 မှ အရာဝတ္ထု ၃ ခုကိုဖယ်ရှားသည်။"
+  },
+  "state": {
+    "current_pile": "လက်ရှိပုံ: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "ခိုင်လုံသော ရွှေ့ပြောင်းပုံစံကို မတွေ့ရှိပါ။ '[pile quantity]' ကို အသုံးပြုပါ။",
+    "correct_format_wrong_fields": "ကစားသမား {player_id}၊ မမှန်သော လုပ်ဆောင်ချက်၊ တိုင် {col} သည် ကန့်သတ်ချက်များပြင်ပတွင်ရှိသည်။",
+    "out_of_range": "အပုံလိုက်ညွှန်းကိန်း {pile_index} သည်အကန့်အသတ်ပြင်ပတွင်ရှိသည်။",
+    "non_positive": "အနည်းဆုံး ပစ္စည်းတစ်ခု ဖယ်ရှားရပါမယ်။",
+    "exceeds_pile": "{quantity} ကို {pile_index} အပုံမှ ဖယ်ရှား၍မရ (၂ {pile_count} သာ ကျန်ရစ်သည်။)"
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "ကစားသမား {player_id} က နောက်ဆုံးအရာဝတ္ထုကို ယူသွားတယ်။"
+  }
+}

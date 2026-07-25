@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are playing the Minesweeper game.\nThe objective of the game is to reveal all cells that do not contain mines.\nTo make a move, simply specify the row and column coordinates you want to reveal using the format:\n- `[row col]`: Reveal the cell at the specified row and column.\nFor example:\n- `[3 2]` to reveal the cell in Row 3, Column 2.\n- `[5 6]` to reveal the cell in Row 5, Column 6.\nOn your first move, you will reveal an area around the cell you choose to ensure a safe start.\nThe current board layout is shown below. Cells that are unrevealed are represented by a dot ('.'), revealed numbers show the count of adjacent mines.\nBe mindful not to choose already revealed cells.\nHere is the current board layout:\n"
+  },
+  "board": {
+    "game_board": "ဂိမ်းဘုတ်: {board}",
+    "current_board": "လက်ရှိအဖွဲ့: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "သင်ဟာ လေးထောင့် ကန့်လန့်ဖြတ် အဝင်မှာ တည်နေရာတွေကို မတုံ့ပြန်ခဲ့ဘူး။",
+    "out_of_bounds": "သတ်မှတ်ထားသော အတန်းနှင့်တိုင် ကိုဩဒိနိတ်များသည် အကန့်အသတ်များပြင်ပတွင် ရှိသည်။",
+    "already_revealed": "({row}, {col}) ရှိ ကွက်လပ်ကို ဖော်ပြပြီးပါပြီ။",
+    "hit_mine": "({row}၊ {col}) မှာ မိုင်းတစ်လုံးနဲ့ ဝင်တိုက်မိတယ်။"
+  },
+  "game_action": {
+    "revealed": "သင် ({row}, {col}) တွင်ရှိသော ဆဲလ်ကို ဖွင့်ပြသခဲ့သည်။"
+  },
+  "outcome": {
+    "win": "မင်္ဂလာပါ၊ သင်ဟာ မိုင်းသုတ်သင်္ဘော ပျဉ်ပြားကို အောင်မြင်စွာ ရှင်းလင်းနိုင်ခဲ့တယ်။",
+    "turn_limit": "The turn limit has been reached. You successfully uncovered {percent}% of the safe cells."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "သင်သည် Player {player_id} ဖြစ်ပြီး {max_rounds} ပွဲတွဲ Kuhn Poker ဗားရှင်း ကစားနေပါသည်။\nကစားနည်း စည်းမျဉ်းများ:\n- Kuhn Poker 3 ကတ် ဒက်ခ် ဖြင့် J, Q, K (J အနိမ့်ဆုံး, K အမြင့်ဆုံး) သုံးပါသည်\n- ကစားသမား တိုင်း  {ante} ချစ်ပ်ပြား တင်ပြီး တစ်ကြိမ် 1 ကတ် ချပေးပါသည် (သင်၏ လိုက်စားသူ နှင့် တူညီသော ကတ် မရှိနိုင် ကြောင်း သတိပြုပါ)\n-  {max_rounds} ပွဲများ ကစားရန် စီစဉ်ထားပါသည်\n- ပွဲများ ပြီးဆုံးပြီးနောက် အများဆုံး ချစ်ပ်ပြား ရှိသူ အနိုင်ရသည်\nလှုပ်ရှားမှု စည်းမျဉ်းများ:\n- '[check]': လှုပ်ရှားမှု မရှိဘဲ လွှဲပြောင်း (စားပွဲပေါ် လှုပ်ရှားမှု မရှိလျှင် သာ)\n- '[bet]': ချစ်ပ်ပြား 1 ပုံး ထဲသို့ ထည့်ပါ (စားပွဲပေါ် လှုပ်ရှားမှု မရှိလျှင် သာ)\n- '[call]': လိုက်စားသူ၏ လှုပ်ရှားမှု နှုန်း 1 ချစ်ပ်ပြား ပုံး ထဲသို့ ထည့်၍ လိုက်ပါ\n- '[fold]': လက်ရှိ လှုပ်ရှားမှု လွှတ်ပါ။ လိုက်စားသူ အနိုင်ရသည်"
+  },
+  "init_round": {
+    "round_start": "### Starting round {current_round} out of {max_rounds} rounds. Your card is: '{player_card}'",
+    "available_actions": "Your available actions are: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "လုပ်ဆောင်ချက်သည် [Check]၊ [Bet]၊ [Call] သို့မဟုတ် [Fold] ဖြစ်ရမည်။",
+    "not_legal": "လုပ်ဆောင်ချက်မှာ {legal_actions} ဖြစ်ရပါမယ်။"
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "သင်လုပ်ဆောင်နိုင်သော လုပ်ဆောင်ချက်များမှာ {legal_actions} ဖြစ်သည်။",
+    "round_summary": "{reason} လက်ရှိရမှတ်များ: ကစားသမား ၀: \"{player_0_chips}\"; ကစားသမား ၁: \"{player_1_chips}\""
+  },
+  "showdown": {
+    "showdown_summary": "ပြိုင်ပွဲ: ကစားသမား {winner} ၏ {winner_card} သည် ကစားသမား {loser} ၏ {loser_card} ကို အနိုင်ရသည်။ ကစားသမား {winner} သည် {pot_value} ချစ်ပ်များဖြင့် အိုးကို အနိုင်ရသည်။"
+  },
+  "outcome": {
+    "draw": "{max_rounds} ပွဲများ ပြီးဆုံးသည့်အခါ ကစားသမား နှစ်ဦးစလုံး ချစ်ပ်ပြား အရေအတွက် တူညီသည်။",
+    "round_win": "Player {player_id} has folded.",
+    "winner_player0": "Player 0 က ချစ်ပ်ပြား ပိုများခြင်းကြောင့် {max_rounds} ပွဲများ ပြီးဆုံးသည့်အခါ အနိုင်ရသည်။",
+    "winner_player1": "Player 1 က ချစ်ပ်ပြား ပိုများခြင်းကြောင့် {max_rounds} ပွဲများ ပြီးဆုံးသည့်အခါ အနိုင်ရသည်။"
+  }
+}

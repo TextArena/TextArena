@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "လက်ရှိဘုတ်အဖွဲ့: {board} လက်ရှိပြောင်းရွှေ့မှုများ: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "မမှန်သော လှုပ်ရှားမှုပုံစံ။ ကစားသမား {player_id} သည် ပုံစံ [A0 B0] တွင် လှုပ်ရှားမှုတစ်ခုကို မထည့်သွင်းခဲ့ပါ။",
+    "invalid_coordinates": "မမှန်သော လုပ်ဆောင်ချက်ပုံစံ။ ကစားသမား {player_id} သည် မှန်ကန်သော ညွှန်ပြကိန်းများကို မထည့်သွင်းခဲ့ပါ။",
+    "not_own_piece": "မမှန်သော လှုပ်ရှားမှုပုံစံ။ ကစားသမား {player_id} သည် ၎င်း၏ ကိုယ်ပိုင်အရုပ်တစ်ခု ရွှေ့ရသည်။",
+    "scout_through_pieces": "Invalid action format. Player {player_id} cannot move a scout through other pieces.",
+    "scout_diagonal": "မမှန်သော လုပ်ဆောင်မှုပုံစံ။ ကစားသမား {player_id} သည် စကော့ကို ထောင့်ဖြတ် ရွေ့လျားခွင့်မရှိပါ။",
+    "non_scout_multi_square": "မမှန်တဲ့ လှုပ်ရှားမှုပုံစံပါ။ ကင်းထောက်တွေအပြင် အခြားအရာတွေဟာ တစ်ကြိမ်မှာ တစ်ကွက်ကိုသာ ရွှေ့နိုင်တာပါ။",
+    "move_into_lake": "မမှန်သော လုပ်ဆောင်မှုပုံစံ။ ကစားသမား {player_id} သည် ကန်ထဲသို့ မဝင်နိုင်ပါ။",
+    "move_onto_own_piece": "မမှန်သော လှုပ်ရှားမှုပုံစံ။ ကစားသမား {player_id} သည် မိမိ၏ အပိုင်းကို မပြောင်းနိုင်ပါ။",
+    "move_bomb_or_flag": "မမှန်သော လုပ်ဆောင်မှုပုံစံ။ ကစားသမား {player_id} သည် ဗုံး သို့မဟုတ် အလံကို ရွှေ့၍ မရပါ။"
+  },
+  "game_action": {
+    "you_moved": "ခင်ဗျားရဲ့ အပိုင်းကို {source} ကနေ {dest} ကို ရွှေ့လိုက်ပြီ။",
+    "opponent_moved": "ကစားသမား {player_id} သည် အပိုင်းတစ်ပိုင်းကို {source} မှ {dest} သို့ ရွှေ့လိုက်သည်။",
+    "you_equal_ranks": "သင်ဟာ {source} ကနေ {dest} ကို ရွှေ့လိုက်တယ်။ တိုက်ခိုက်တဲ့ အပိုင်းက {attacking_rank} နဲ့ ပန်းတိုင် အပိုင်းက {target_rank} ပါ။ အဆင့်တူဖြစ်တာကြောင့် နှစ်ခုစလုံး ဆုံးရှုံးတယ်။",
+    "opponent_equal_ranks": "ကစားသမား {player_id} သည် အပိုင်းတစ်ပိုင်းကို {source} မှ {dest} သို့ ရွှေ့ခဲ့သည် တိုက်ခိုက်သည့် အပိုင်းမှာ {attacking_rank} ဖြစ်ပြီး ပန်းတိုင် အပိုင်းမှာ {target_rank} ဖြစ်သည်။ အဆင့်တူညီသောကြောင့် အပိုင်းနှစ်ပိုင်းလုံး ဆုံးရှုံးရသည်။",
+    "you_miner_defused": "သင်ဟာ {source} ကနေ {dest} ကို ရွှေ့လိုက်တယ်။ တိုက်ခိုက်တဲ့ အပိုင်းက {attacking_rank} နဲ့ ပန်းတိုင် အပိုင်းက {target_rank} ပါ။ မိုင်းလုပ်သားတွေက ဗုံးတွေကို ဖျက်ပစ်နိုင်တာကြောင့် သင်ဟာ တိုက်ပွဲကို နိုင်တယ်။",
+    "opponent_miner_defused": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As miners can defuse bombs, you lost the battle.",
+    "you_bomb_lost": "သင်ဟာ {source} ကနေ {dest} ကို ရွှေ့လိုက်တယ်။ တိုက်ခိုက်တဲ့ အပိုင်းက {attacking_rank} နဲ့ ပန်းတိုင် အပိုင်းက {target_rank} ပါ။ တိုက်ခိုက်သူဟာ မိုင်းသမား မဟုတ်တာကြောင့် သင်ဟာ တိုက်ပွဲကို ရှုံးတယ်။",
+    "opponent_bomb_won": "ကစားသမား {player_id} သည် အပိုင်းတစ်ပိုင်းကို {source} မှ {dest} သို့ ရွှေ့ခဲ့သည် တိုက်ခိုက်သည့် အပိုင်းမှာ {attacking_rank} ဖြစ်ပြီး ပန်းတိုင် အပိုင်းမှာ {target_rank} ဖြစ်သည်။ တိုက်ခိုက်သူသည် သတ္တုတွင်းသမားမဟုတ်သောကြောင့် သင်က တိုက်ပွဲကို နိုင်သည်။",
+    "you_spy_won": "သင်ဟာ {source} ကနေ {dest} ကို ရွှေ့လိုက်တယ်။ တိုက်ခိုက်တဲ့ အပိုင်းက {attacking_rank} နဲ့ ပန်းတိုင် အပိုင်းက {target_rank} ပါ။ တိုက်ခိုက်သူက သူလျှိုဖြစ်ပြီး ပန်းတိုင်က စစ်မှုထမ်းဆိုတော့ သင်တိုက်ပွဲကို နိုင်တယ်။",
+    "opponent_spy_lost": "ကစားသမား {player_id} သည် အပိုင်းတစ်ပိုင်းကို {source} မှ {dest} သို့ ရွှေ့ခဲ့သည် တိုက်ခိုက်သည့် အပိုင်းမှာ {attacking_rank} ဖြစ်ပြီး ပန်းတိုင် အပိုင်းမှာ {target_rank} ဖြစ်သည်။ တိုက်ခိုက်သူသည် သူလျှိုဖြစ်ပြီး ပန်းတိုင်သည် မားရှယ်ဖြစ်သောကြောင့် သင်တိုက်ပွဲကို ရှုံးသည်။",
+    "you_higher_won": "သင်သည်သင်၏လက်ရာကို {source} မှ {dest} သို့ပြောင်းရွှေ့ခဲ့သည်။ တိုက်ခိုက်သည့်လက်ရာသည် {attacking_rank} ဖြစ်ပြီး ပန်းတိုင်လက်ရာသည် {target_rank} ဖြစ်ခဲ့သည်။ တိုက်ခိုက်သူသည် ပန်းတိုင်ထက် အဆင့်မြင့်သောကြောင့် သင်တိုက်ပွဲတွင်နိုင်ခဲ့သည်။",
+    "opponent_higher_lost": "ကစားသမား {player_id} သည် အပိုင်းတစ်ပိုင်းကို {source} မှ {dest} သို့ ရွှေ့ခဲ့သည် တိုက်ခိုက်သည့် အပိုင်းမှာ {attacking_rank} ဖြစ်ပြီး ပန်းတိုင် အပိုင်းမှာ {target_rank} ဖြစ်သည်။ တိုက်ခိုက်သူသည် ပန်းတိုင်ထက် အဆင့်မြင့်သောကြောင့် သင်တိုက်ပွဲကို ရှုံးနိမ့်ခဲ့သည်။",
+    "you_lower_lost": "သင်သည်သင်၏လက်ရာကို {source} မှ {dest} သို့ပြောင်းရွှေ့ခဲ့သည်။ တိုက်ခိုက်သည့်လက်ရာသည် {attacking_rank} ဖြစ်ပြီး ပန်းတိုင်လက်ရာသည် {target_rank} ဖြစ်ခဲ့သည်။ တိုက်ခိုက်သူသည် ပန်းတိုင်ထက် အဆင့်နိမ့်သောကြောင့် သင်တိုက်ပွဲရှုံးခဲ့သည်။",
+    "opponent_lower_won": "ကစားသမား {player_id} သည် ပန်းတိုင်ကို {source} မှ {dest} သို့ ရွှေ့ခဲ့သည် တိုက်ခိုက်သည့် ပန်းတိုင်မှာ {attacking_rank} ဖြစ်ပြီး ပန်းတိုင် ပန်းတိုင်မှာ {target_rank} ဖြစ်သည်။ တိုက်ခိုက်သူသည် ပန်းတိုင်ထက် အဆင့်နိမ့်သောကြောင့် သင်တိုက်ပွဲကိုနိုင်သည်။"
+  },
+  "outcome": {
+    "flag_captured": "ကစားသမား {player_id} က ပြိုင်ဘက်ရဲ့ အလံကို သိမ်းပိုက်လိုက်ပြီ။",
+    "no_movable_pieces": "ကစားသမား {winner_id} နိုင်တယ်။ ကစားသမား {loser_id} မှာ ရွေ့ရှားနိုင်တဲ့ အပိုင်းတွေ မရှိတော့ဘူး။"
+  }
+}
