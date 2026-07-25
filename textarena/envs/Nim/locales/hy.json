@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Դուք Խաղացող {player_id} եք Nim-ում:\nԴուք ձեր նպատակն է վերցնել մնացած վերջին օբյեկտը:\nԱմեն մի քայլի ընթացքում, ընտրեք ճիշտ մեկ կույտ և հեռացրեք մեկ կամ ավելի օբյեկտներ այնտեղից:\nՕգտագործեք '[pile quantity]' ձևաչափը, որտեղ կույտն է կույտի ինդեքսը, և քանակը հեռացված օբյեկտների քանակն է:\nՕրինակ, '[0 3]' հեռացնում է 3 օբյեկտ կույտ 0-ից:"
+  },
+  "state": {
+    "current_pile": "Ներկա կուտակային: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Չի գտնվել վավեր տեղափոխման ձեւաչափ: Օգտագործեք \"[pile quantity]\"",
+    "correct_format_wrong_fields": "Խաղացող {player_id}, Անհնար գործողություն: Հորիզոնականի {col} սյունակը դուրս է սահմաններից:",
+    "out_of_range": "Pile index {pile_index} is out of range.",
+    "non_positive": "Պետք է հեռացնել առնվազն 1 առարկա:",
+    "exceeds_pile": "Չի կարող հեռացնել {quantity}-ը {pile_index}-ից (միայն {pile_count}-ն է մնացել):"
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Խաղացողը {player_id} վերցրեց վերջին օբյեկտը (((s)!"
+  }
+}

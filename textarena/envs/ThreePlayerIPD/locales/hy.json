@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Դուք խաղացող {player_id} եք 3 խաղացողների հետ Iterated Prisoner's Dilemma խաղում: Մրցույթը տեւում է {num_rounds} փուլ: • {conv_rounds} ազատ զրույցի շրջադարձներ • 1 որոշման շրջադարձ - մեկ թղթադրամ ուղարկեք յուրաքանչյուր հակառակորդի համար: \"[<opp-id> cooperate] \" կամ \"[<opp-id> defect] \" (այսինքն ՝ \"[1 defect] [2 cooperate] \": նախնական կարգը \"գործակցել է \") ։ Խաղացողների զույգերի վճարման մաթրիսը (կիրառվում է յուրաքանչյուր չկանոնավորված զույգի վրա): - Երկուսն էլ համագործակցում են -> {reward} - Երկուսն էլ թերություն ունեն -> {punishment} - Դուք թերություն ունեք, նրանք համագործակցում են -> {temptation} - Դուք համագործակցում եք, նրանք թերություն ունեն -> {sucker} Բոլոր փուլերի ավարտին ամենաբարձր միավորը հաղթում է:"
+  },
+  "round": {
+    "start": "─── Սկիզբի շրջան {round} ─── Դուք կարող եք ազատ զրուցել հաջորդ {conv_rounds} շրջանների համար:",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Շրջան {round} - Արդյունքներ:",
+    "pair_line": "{observation} Խաղացողը {i} vs Խաղացողը {j} ընտրել է համապատասխանաբար {choice_i} եւ {choice_j} (խաղացողը {i} ստացել է {gain_i}, խաղացողը {j} ստացել է {gain_j})",
+    "scores_open": "{observation} -> Ներկայիս գնահատականները: ",
+    "score_first": "{observation}Խաղացողը {player_id} ({score})",
+    "score_next": "{observation}; Խաղացողը {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Վերջնական գնահատականներ: {scores}. Վարկանիշային խմբեր (վատագույն→լավագույն): {groups}"
+  }
+}

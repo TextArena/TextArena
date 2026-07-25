@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Խաղը սկսվում է: Թրամփի հագուստը: {trump_suit} (թրամփի քարտը: {trump_str}) ։",
+    "no_trump_card": "ոչ մեկը"
+  },
+  "player_prompt": {
+    "intro": "Դուք խաղացողը եք {player_id} գերմանական վիստում: {phase_info} Դուք ունեք {hand_size} քարտեր: Խաղացեք քարտը '[play N]' -ով, որտեղ N-ը ձեր ձեռքի դիրքն է (օրինակ '[play 3] '):",
+    "phase_learning": "Սովորելու փուլ. յուրաքանչյուր հնարքի հաղթողը վերցնում է բացված քարտը, իսկ պարտվողը վերցնում է տախտակից հաջորդ քարտը: Այս փուլում ձեռք բերված հնարքները չեն հաշվարկվում հաղթանակի համար:",
+    "phase_playing": "Խաղային փուլ. դեկը սպառված է: Այժմ ամեն մի հնարք հաշվում է հաղթանակի համար:"
+  },
+  "next_card": {
+    "playing_phase": "No card is on offer - the playing phase has begun.",
+    "deck_empty": "Դեկը դատարկ է, ոչ մի քարտ չի առաջարկվում:",
+    "available": "Առաջարկվող քարտը: {card}",
+    "available_trump": "Քարտը առաջարկվում է: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Անհամապատասխան շարժման ձեւաչափ: Օգտագործեք \"[play N]\" ՝ ձեր ձեռքի N-րդ քարտը խաղալու համար:",
+    "bad_position": "Այդ քարտի դիրքը գոյություն չունի: Դուք ունեք {hand_size} քարտեր:",
+    "must_follow_suit": "Դուք պետք է հետեւեք այդ օրինակին եւ խաղաք {lead_suit} քարտ:",
+    "invalid_play": "Այդ քարտը չի կարող խաղալ:"
+  },
+  "game_action": {
+    "played": "Խաղացողը {player_id} խաղում էր {card}:"
+  },
+  "trick": {
+    "won": "Խաղացողը {winner_id} հաղթում է {card}-ով:",
+    "won_learning": "Խաղացողը {winner_id} հաղթում է {card}-ով եւ վերցնում է բաց քարտը:"
+  },
+  "phase": {
+    "learning_complete": "Դեկը սպառված է: Սովորելու փուլը ավարտված է. յուրաքանչյուր մնացած հնարք հաշվում է հաղթանակի համար:"
+  },
+  "draw": {
+    "winner_received": "Դուք հաղթեցիք եւ ստացաք {card}:",
+    "loser_received": "Դուք կորցրել եք հնարքը եւ դեկից հանել եք {card}:",
+    "winner_preview": "Առաջարկվող հաջորդ քարտը {card} է:"
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "Մինչեւ հիմա հաղթած հնարքները - 0-րդ խաղացող: {tricks0}, 1-րդ խաղացող: {tricks1}",
+    "scores_playing": "Գլխավոր հնարքներ - 0-րդ խաղացող: {tricks0}, 1-րդ խաղացող: {tricks1}",
+    "phase": "Դեպք: {phase}",
+    "phase_learning": "Դեպի {phase} ({remaining_cards} քարտեր, որոնք մնացել են տախտակում)"
+  },
+  "hand": {
+    "no_cards": "Ոչ մի քարտ",
+    "no_cards_in_hand": "Ոչ մի քարտ ձեռքում",
+    "header": "Ձեր ձեռքը:",
+    "trump_indicator": "(Թրամփ)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Ոչ մի քարտ խաղացել է դեռ այս հնարքը.",
+    "header": "Ներկայիս հնարքը.",
+    "trump_indicator": "(Թրամփ)",
+    "card_line": "{observation} Խաղացողը {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Խաղը չի սկսվել",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation} Փուլ: {phase}",
+    "trump_suit": "{observation} Թրամփի հագուստը: {trump_suit}",
+    "trump_card": "{observation} Թրամփի քարտը: {card}",
+    "cards_left": "{observation} Կարտերը մնացել են տախտակում: {count}",
+    "next_card": "{observation} Հաջորդ քարտը հաղթողի համար: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Ներկայիս հնարքը.",
+    "trump_indicator": "(Թրամփ)",
+    "trick_line": "{observation} Խաղացողը {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} Խաղացողը {player_id}: {scoring} գոլերի հավաքում ({tricks} ընդհանուր), {hand_size} քարտեր ձեռքում"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}
