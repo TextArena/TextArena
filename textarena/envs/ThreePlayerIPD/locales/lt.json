@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} 3 žaidėjų pakartotinėje Kalėjimo dilemoje. Mačas trunka {num_rounds} raundų.\nRaundo struktūra:\n• {conv_rounds} laisvų pokalbių ėjimų\n• 1 sprendimo ėjimas - pateikite po vieną ženklą kiekvienam priešininkui: '[<opp-id> cooperate]' arba '[<opp-id> defect]' (t. y. '[1 defect] [2 cooperate]'; numatytasis yra 'bendradarbiauti'). \nPorinė atpildo matrica (taikoma kiekvienai nepasirinktai porai):\n  - Abiejų bendradarbiavimas  ->  {reward}\n  - Abiejų išdavimas     ->  {punishment}\n  - Jūs išduodate, jie bendradarbiauja -> {temptation}\n  - Jūs bendradarbiaujate, jie išduoda -> {sucker}\nŽaidėjas (-ai) su aukščiausiu rezultatu visų raundų pabaigoje laimi."
+  },
+  "round": {
+    "start": "─── Pradedamas raundas {round} ───\tJūs galite laisvai pokalbiuoti kitus {conv_rounds} raundus.",
+    "chat_finished": "Pokalbis baigtas raundui {round}. Pateikite savo sprendimus, po vieną ženklą kiekvienam priešininkui: `[pid cooperate]` arba `[pid defect]`."
+  },
+  "results": {
+    "header": "### Raundas {round} - Rezultatai:",
+    "pair_line": "{observation}\n\t Žaidėjas {i} prieš Žaidėją {j} pasirinko {choice_i} ir {choice_j} atitinkamai (Žaidėjas {i} gavo {gain_i}, Žaidėjas {j} gavo {gain_j})",
+    "scores_open": "{observation}\n-> Dabartiniai rezultatai: ",
+    "score_first": "{observation}Žaidėjas {player_id} ({score})",
+    "score_next": "{observation}; Žaidėjas {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Galutiniai rezultatai: {scores}.  Rangų grupės (blogiausia→geriausia): {groups}"
+  }
+}

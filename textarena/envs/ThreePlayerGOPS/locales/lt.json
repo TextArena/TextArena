@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS lokalizacijos failas. NERVERSIKITE raktažodžių (kairėje pusėje). Vertimo tik reikšmes (dešinėje pusėje). Palikite kiekvieną {placeholder} lygiai taip, kaip yra. NERVERSIKITE kortų žetonų su laužtiniais skliaustais (pvz. [A], [10], [Q], [K]), neutralius pasiūlymo/punktų fragmentus kaip 'P0:10', '### ' markdown arba '»' ir '→' simbolius.",
+  "_slots": {
+    "{player_id}": "Žaidėjo numeris, 0, 1 ar 2",
+    "{round}": "Dabartinis raundas, 1..13",
+    "{prize}": "Atskleista prizo kortos veidas (A, 2..10, J, Q, K) - nerversikite",
+    "{worth}": "Prizo bendra vertė, įskaitant bet kokią perneštąją piniginę",
+    "{hand}": "Žaidėjo likęs kortų rinkinys, vaizduojamas kaip žetonai su laužtiniais skliaustais, pvz. '[A]' '[2]' - nerversikite",
+    "{bids}": "Neutralus, su kableliais atskirtas, žaistų kortų sąrašas, pvz. 'P0:10, P1:J, P2:Q' - nerversikite",
+    "{winner}": "Žaidėjo numeris, kuris laimėjo raundą",
+    "{pot}": "Piniginė, skirta arba pernešta šiame raunde",
+    "{scoreline}": "Neutralus rezultatų lentelė, pvz. 'P0:0  P1:0  P2:11' - nerversikite",
+    "{pid}": "Žaidėjo numeris, kuris buvo pašalintas",
+    "{scores}": "Galutiniai rezultatai kaip žaidėjo numerio ir rezultato žemėlapis - nerversikite"
+  },
+  "player_prompt": {
+    "intro": "Jūs esate Žaidėjas {player_id} Three-Player GOPS žaidime.\n- Jūs turite 13 kortų A-K (kiekvieną tik kartą).\n- Kiekvieną raundą atskleidžiamas prizas. Pateikite VIENĄ kortą, pvz. `[Q]`, `[10]`, `[2]` …\n- Aukščiausia korta laimi prizą (+ bet kokią perneštąją piniginę). Lygiosios perkelia prizą į kitą raundą.\n- Po 13 raundų, aukščiausias bendras laimėjimas. Netinkami ėjimai = pašalinimas."
+  },
+  "round": {
+    "header": "### Raundas {round}/13 - Prizas: {prize} (vertė {worth})",
+    "hand": "Jūsų likęs rinkinys: {hand}"
+  },
+  "reveal": {
+    "win": "Pasiūlymai » {bids} - Žaidėjas {winner} laimi {pot}.",
+    "tie": "Pasiūlymai » {bids} - lygiosios, piniginė dabar {pot}.",
+    "scores": "Rezultatai → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "veiksmui reikia kortos su laužtiniais skliaustais, pvz. '[Q]'",
+    "bad_card": "korta jau panaudota arba netinkama"
+  },
+  "elimination": {
+    "player": "Žaidėjas {pid} pašalintas po kelių netinkamų ėjimų."
+  },
+  "outcome": {
+    "auto_win": "Du žaidėjai pašalinti - automatinė pergalė.",
+    "final": "Galutiniai rezultatai: {scores}"
+  }
+}

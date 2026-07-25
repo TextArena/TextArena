@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} kvantinėje Tic Tac Toe.\nJūsų simbolis yra '{symbol}', ir jūsų ėjimo numeriai visada yra {parity} (pvz., X1, X3 arba O2, O4).\n\nTikslas: laimėti suformuojant liniją iš trijų klasikinių ženklų (susiformavusių iš superpozicijų).\n\nKaip žaisti:\n- Kiekvieną kartą, įdėkite baisų ženklą į du skirtingus tuščius kvadratus naudodami formatą '[a,b]'.\n- Šie ženklai yra susipynę, ir žymėti kaip 'X1 / X1' arba 'O4 / O4'.\n- Jūs negalite įdėti baisų ženklų į kvadratą, kuris jau yra susiformavęs (susiformavęs).\n\nKolapso taisyklė:\n- Jei jūsų ėjimas sukuria ciklą susipynimo grafe, jis kolapsuoja automatiškai.\n- Kiekvienas baisas ženklas cikle virsta klasikiniu ženklu vienoje iš dviejų pozicijų.\n- Bet kokie priklausomi baisi ženklai taip pat kolapsuoja.\n\nPergalė:\n- Žaidimas baigiasi, kai žaidėjas turi tris klasikinius ženklus eilėje.\n- Jei abu žaidėjai gauna liniją per tą patį kolapsą, tas, kurio didžiausias ėjimo numeris yra mažesnis, laimi.\n\nPavyzdinis ėjimas: '[0,4]' įdeda baisą ženklą į ląsteles 0 ir 4."
+  },
+  "board": {
+    "current_board": "Kvantinė Tic Tac Toe lenta:\n\n{board}\n\nPateikite savo ėjimą kaip '[a,b]', kad įdėtumėte kvantinį ženklą į dvi vietas."
+  },
+  "invalid_move": {
+    "wrong_format": "Neteisingas formatas. Naudokite '[a,b]'.",
+    "invalid_cells": "Neteisingi arba dubliuojantys ląstelių indeksai.",
+    "already_solidified": "Viena iš ląstelių jau yra susiformavusi."
+  },
+  "game_action": {
+    "placed": "Žaidėjas {player_id} įdėjo savo simbolį į superpoziciją tarp ląstelių {pos_a} ir {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Priklausoma superpozicija išsprendžiama. Ląstelė ({r}, {c}) dabar yra {symbol}.",
+    "last_cell_resolved": "Superpozicija paskutinės ląstelės išsprendžiama. Ląstelė ({r}, {c}) dabar yra {symbol}.",
+    "superposition_resolved": "Superpozicija išsprendžiama. Ląstelė ({r}, {c}) dabar yra {symbol}."
+  },
+  "outcome": {
+    "win": "Žaidėjas {player_id} laimi su susiformavusiais ženklais!",
+    "draw": "Žaidimas yra lygus!"
+  }
+}

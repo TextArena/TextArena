@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire lokalizacijos failas. NERVERSIKITE raktažodžių (kairėje pusėje). Vertikite tik reikšmes (dešinėje pusėje). Palikite kiekvieną {placeholder} lygiai taip pat, kaip yra. NIEKADA neversikite kortų etikečių/švarkų (pvz., A, 10, K, ♣️, ♦️, ♥️, ♠️), krūvelės žetonų W, F1-F4, T1-T7, ASCII lentos {board} arba komandų 'draw', 'move', 'forfeit', 'all'. Skliaustų sintaksė, pvz., 'move W T1', turi likti lotyniška, kaip yra.",
+  "_slots": {
+    "{n}": "Veiksmo indeksas kablelio atskirtame komandoje, 1-bazė",
+    "{msg}": "Įdėta kiekvieno veiksmo rezultato žinutė (jau lokalizuota)",
+    "{count}": "Atverstų kortų, kurios yra perkeliamos, skaičius",
+    "{src}": "Šaltinio krūvelės numeris, 1-bazė",
+    "{dst}": "Paskirties krūvelės numeris, 1-bazė",
+    "{cmd}": "Nežinoma komanda, kurią įvedė žaidėjas (neverta)",
+    "{max_turns}": "Maksimalus ėjimų skaičius prieš žaidimo pabaigą",
+    "{score}": "Kortų skaičius, kurios šiuo metu yra pamato krūvelėse",
+    "{board}": "Atvaizduota ASCII lenta (niekada neverta)",
+    "{turn}": "Dabartinis ėjimo numeris",
+    "{stock}": "Kortų skaičius, kurios liko atsargose",
+    "{waste}": "Viršutinės atliekų kortos etiketė, arba '--', jei tuščia (niekada neverta)",
+    "{cards}": "Kortos krūvelėje kaip neutralios etiketės, arba '--', jei tuščia (niekada neverta)"
+  },
+  "player_prompt": {
+    "intro": "Žaidite Klondike Solitaire. Jūsų tikslas yra perkelti visas kortas į pamato krūveles.\n\nŽaidimo taisyklės:\n- Pamato krūvelės (F1-F4): Statykite nuo Tūzo iki Karaliaus pagal švarką\n- Krūvelės (T1-T7): Statykite žemyn, keisdami spalvas (raudona ant juodos, juoda ant raudonos)\n- Atsargos: Traukite kortas į atliekas\n- Atliekos (W): Viršutinė korta prieinama žaidimui\n\nKomandos:\n- 'draw' - Traukite kortas iš atsargų į atliekas\n- 'move <šaltinis> <paskirtis> [skaičius]' - Perkelkite kortas tarp krūvelių\n  Pavyzdžiai: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Skaičius taip pat gali būti 'all', kuris bandys perkelti visas atverstas kortas.\n- 'forfeit' - Baikite žaidimą nedelsiant ir užfiksuokite dabartinį rezultatą\n- Krūvelių pavadinimai: W (atliekos), F1-F4 (pamatas), T1-T7 (krūvelės)\n\nGalite vykdyti kelias komandas vienu ėjimu, atskirdami jas kableliais:\n  Pavyzdys: 'draw, move W T1, move T2 F1'\n\nTik Karaliai gali būti dedami ant tuščių krūvelių.\nVeiksmai vykdomi eilės tvarka - jei vienas nepavyksta, likę veiksmai yra praleidžiami.\nNaudokite 'forfeit', jei manote, kad žaidimas yra neįmanomas laimėti."
+  },
+  "format_error": {
+    "no_brackets": "Neteisingas veiksmo formatas. Veiksmas turėtų būti skliaustuose.",
+    "no_closing_bracket": "Neteisingas veiksmo formatas. Trūksta uždaromojo skliausto ']'",
+    "empty_command": "Tuščia komanda. Įveskite 'draw' arba 'move <šaltinis> <paskirtis> [skaičius]'",
+    "empty_action": "Tuščias veiksmas",
+    "move_needs_args": "Perkelimo komanda reikalauja šaltinio ir paskirties. Naudojimas: 'move <šaltinis> <paskirtis> [skaičius]'",
+    "count_positive": "Skaičius turi būti teigiamas arba 'all'",
+    "count_invalid": "Neteisingas skaičius. Naudokite skaičių arba 'all'",
+    "unknown_command": "Nežinoma komanda '{cmd}'. Naudokite 'draw', 'move <šaltinis> <paskirtis> [skaičius]', arba 'forfeit'",
+    "wrapped": "Veiksmas {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Veiksmas {n}: {msg}",
+    "before_failure": "Vykdyti {n} veiksmą (-us) prieš nepavykimą.",
+    "failed": "Veiksmas {n} nepavyko: {msg}"
+  },
+  "move_result": {
+    "drew": "Traukė kortą (-as) iš atsargų į atliekas.",
+    "cannot_draw": "Negalima traukti. Abi atsargos ir atliekos yra tuščios.",
+    "invalid_pile": "Neteisingas krūvelės pavadinimas. Naudokite W, F1-F4, arba T1-T7",
+    "foundation_one_card": "Gali perkelti tik 1 kortą į pamatą",
+    "waste_to_foundation_ok": "Perkėlė kortą iš atliekų į pamatą F{dst}",
+    "waste_to_foundation_bad": "Negalima perkelti atliekų kortos į tą pamato krūvelę",
+    "tableau_to_foundation_ok": "Perkėlė kortą iš krūvelės T{src} į pamatą F{dst}",
+    "tableau_to_foundation_bad": "Negalima perkelti krūvelės kortos į tą pamato krūvelę",
+    "foundation_to_foundation": "Negalima perkelti iš pamato į pamatą",
+    "waste_to_tableau_one_card": "Gali perkelti tik 1 kortą iš atliekų į krūvelę",
+    "waste_to_tableau_ok": "Perkėlė kortą iš atliekų į krūvelę T{dst}",
+    "waste_to_tableau_bad": "Negalima dėti atliekų kortos ant tos krūvelės",
+    "no_face_up": "Nėra atverstų kortų, kurias galima perkelti",
+    "tableau_to_tableau_ok": "Perkėlė {count} kortą (-as) iš krūvelės T{src} į T{dst}",
+    "tableau_to_tableau_bad": "Negalima perkelti {count} kortos (-ų) iš T{src} į T{dst}",
+    "foundation_to_tableau_one_card": "Gali perkelti tik 1 kortą iš pamato į krūvelę",
+    "foundation_empty": "Pamato krūvelė F{src} yra tuščia",
+    "foundation_to_tableau_ok": "Perkėlė kortą iš pamato F{src} į krūvelę T{dst}",
+    "foundation_to_tableau_bad": "Negalima dėti pamato kortos ant krūvelės T{dst}",
+    "to_waste_or_stock": "Negalima perkelti į atliekas arba atsargas"
+  },
+  "outcome": {
+    "forfeit": "Žaidimas atšauktas. Galutinis rezultatas: {score} kortos pamate.",
+    "won": "Sveikiname! Jūs laimėjote Klondike Solitaire!",
+    "turn_limit": "Žaidimas baigtas! Pasiekėte maksimalų {max_turns} ėjimų skaičių. Rezultatas: {score} kortos pamate."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Ėjimas: {turn}/{max_turns}",
+    "stock": "Atsargos: {stock} kortos",
+    "waste": "Atliekos (W): {waste}",
+    "foundations_header": "Pamatas:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Krūvelės:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

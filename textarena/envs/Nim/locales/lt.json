@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} žaidime Nim.\nJūsų tikslas – paimti paskutinį likusį objektą.\nKiekvieną ėjimą pasirinkite tik vieną krūvą ir pašalinkite vieną ar daugiau objektų iš jos.\nNaudokite formatą '[krūva kiekis]', kur krūva yra krūvos indeksas, o kiekis – objektų, kuriuos reikia pašalinti, skaičius.\nPavyzdžiui, '[0 3]' pašalina 3 objektus iš krūvos 0."
+  },
+  "state": {
+    "current_pile": "Dabartinė krūva:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nerastas galiojantis ėjimo formatas. Naudokite '[krūva kiekis]'.",
+    "correct_format_wrong_fields": "Žaidėjas {player_id}, neteisingas veiksmas. Stulpelis {col} yra už ribų.",
+    "out_of_range": "Krūvos indeksas {pile_index} yra už ribų.",
+    "non_positive": "Privaloma pašalinti bent 1 objektą.",
+    "exceeds_pile": "Negalima pašalinti {quantity} iš krūvos {pile_index} (liko tik {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "Žaidėjas {player_id} sužaidė [{pile_index} {quantity}], pašalindamas {quantity} objektą (-us) iš krūvos {pile_index}."
+  },
+  "outcome": {
+    "win": "Žaidėjas {player_id} paėmė paskutinį objektą (-us)!"
+  }
+}

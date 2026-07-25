@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate {role} Žaidime Karininkas Blotto.\nJūsų tikslas yra laimėti daugiau raundų nei jūsų varžovas.\nKiekviename raunde, paskirstykite tiksliai {num_total_units} vienetų per laukus {field_names}.\nŽaidėjas, kuris paskirsto daugiau vienetų į lauką, laimi tą lauką, o žaidėjas, kuris laimi daugiau laukų, laimi raundą.\nPavyzdžiui, '[A7 B7 C6]' paskirsto 7 vienetus į A, 7 į B ir 6 į C.",
+    "commander_alpha": "Karininkas Alfa",
+    "commander_beta": "Karininkas Beta"
+  },
+  "game_state": {
+    "header_round": "=== KARININKAS BLOTTO - Raundas {current_round}/{num_rounds} ===\nLaimėti Raundai - Karininkas Alfa: {alpha_score}, Karininkas Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRaundas {current_round}\nKarininkas Alfa paskirstė: {p0_allocations}\nKarininkas Beta paskirstė: {p1_allocations}\n",
+    "winner_alpha": "{message}Nugalėtojas: Karininkas Alfa",
+    "winner_beta": "{message}Nugalėtojas: Karininkas Beta",
+    "tie": "{message}Lygiosios!"
+  },
+  "invalid_move": {
+    "wrong_format": "Neteisingas įvesties formatas. Naudokite: A:5, B:10, C:5",
+    "invalid_field": "Neteisingas lauko pavadinimas. Galimi laukai: {field_names}",
+    "wrong_allocation_value": "Visos paskirstymo reikšmės turi būti neigiami sveiki skaičiai.",
+    "incorrect_total_units": "Jūs turite paskirstyti tiksliai {num_total_units} vienetų. Dabartinė suma: {current_sum}",
+    "good_allocations": "Paskirstymas yra geras."
+  },
+  "outcome": {
+    "winner_alpha": "Karininkas Alfa laimi {score_0}-{score_1} po {num_rounds} raundų!",
+    "winner_beta": "Karininkas Beta laimi {score_1}-{score_0} po {num_rounds} raundų!",
+    "draw": "Žaidimas baigiasi {score_0}-{score_1} lygiosiomis po {num_rounds} raundų!",
+    "early_winner_alpha": "Karininkas Alfa laimi {scores_0}-{scores_1} (pasiekta dauguma)!",
+    "early_winner_beta": "Karininkas Beta laimi {scores_1}-{scores_0} (pasiekta dauguma)!"
+  }
+}
