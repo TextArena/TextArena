@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are playing {color} in a game of Breakthrough. You move {direction} on an {board_size}x{board_size} board.\nIn your turn you can move a single piece one step forward or diagonally forward.\nA piece may only move diagonally if an opponent piece is there, and only move into such a preoccupied square in a diagonal step.\nWhen stepping into a square with an opponent piece, you capture it and the opponent's piece is removed permanently from the board.\nUse UCI-like notation in brackets, e.g. [a2a3] to move from a2 to a3.\n* 'a' corresponds to the leftmost column, '1' is the bottom row (from White's perspective).\n* Blacks's home row is the top row (row 8 for an 8x8). White's home row is the bottom row (row 1 for an 8x8).\nThe first player whose piece reaches the opponent's home row wins. If your pieces are all captured, you lose."
+  },
+  "invalid_move": {
+    "wrong_format": "مهرباني ڪري برائٽ ۾ الجبرئي نشاني استعمال ڪريو جهڙوڪ [a2a3].",
+    "out_of_bounds": "حرڪت بورڊ جي حد کان ٻاهر آهي.",
+    "illegal": "اها حرڪت يا ته بريڪ هرو قاعدن جي پيروي نه ڪندي يا اها تنهنجي ٽوڪري نه هوندي."
+  },
+  "game_action": {
+    "moved": "پليئر {player_id} هلندو آهي {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "اڇو ڪاري جي گهر واري قطار تائين پهتو.",
+    "black_reached": "ڪاريون اڇي جي گهر واري قطار تائين پهتيون.",
+    "white_captured": "سڀ اڇا ٽڪرا پڪڙيا ويا.",
+    "black_captured": "سڀ ڪاريون ٽڪرا پڪڙجي ويون.",
+    "no_moves": "پليئر {player_id} وڌيڪ حرڪت نه ڪئي آهي."
+  }
+}

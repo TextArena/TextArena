@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "توهان ڳڻپ ڳڻپ واري راند کيڏندا آهيو! مقصد: نمبرن کي گڏ ڪريو + ، - ، * ، / استعمال ڪندي ٽارگيٽ تائين پهچڻ لاءِ. عمل جو فارميٽ: [i j op] جتي آئون ، ج انڊيڪس آهن ۽ آپريشن آهي. مثال: [0 2 *] انڊيڪس 0 تي نمبر نمبر سان انڊيڪس 2 تي ضرب ڪندو آهي. ڊويزن کي صرف س wholeي نمبرن جو نتيجو هجڻ گهرجي."
+  },
+  "board": {
+    "header": "ٽارگيٽ: {target} دستياب نمبر: {numbers}",
+    "best": "{observation} بهترين تا به حال: {best_value} (فاصلو: {distance}) بهترين اظهار: {best_expression}",
+    "history": "{observation}\n\nMove history:\n{moves}",
+    "progress": "{observation} موجوده ترقي جو اسڪور: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "غلط انڊيڪس. مختلف هجڻ گھرجي ۽ حد ۾ 0-{max_index}",
+    "invalid_operation": "غلط آپريشن (صفر يا غير انٽيگر نتيجو جي ذريعي ورهائڻ)"
+  },
+  "outcome": {
+    "win": "مڪمل! صحيح مقصد مليو: {target}",
+    "no_moves": "وڌيڪ حرڪت نه ڪئي وئي. بهترين نتيجو: {best_value} (هدف: {target})",
+    "turn_limit": "ٽوڙڻ جي حد تائين پهچي وئي. بهترين نتيجو: {best_value} (هدف: {target})"
+  }
+}

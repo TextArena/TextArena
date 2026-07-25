@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "توهان گولف (ڪارڊ گيم) کيڏيو ٿا - پليئر {player_id}. مقصد: هن هڪ ئي دور ۾ گهٽ ۾ گهٽ مجموعي سکور حاصل ڪريو. جيڪڏهن ڪالمن ۾ ساڳيو قدر آهي ، اهي 0 جي برابر آهن ڪارڊ جا قدر: اي = 1 ، 2-10 = نالي جي قيمت ، ج / ق = 10 ، ڪي = 0 ڪارناما (صحيح قوسين کي استعمال ڪريو): - '[draw]' - ڊيڪ مان ڪ Drawو - '[take]' - رڪارڊ واري اسٽيڪ مان وٺو - '[swap X Y]' - پوزيشن ايڪس سان گڏ ڊرا ٿيل ڪارڊ کي مٽايو (صف) Y (ڪالم) - '[discard]' - ڊرا ٿيل ڪارڊ کي رد ڪريو "
+  },
+  "board": {
+    "drew": "توهان کي ڪڍيو: {card} هاڻي توهان کي اهو [swap X Y] يا [discard] ڪرڻو پوندو.",
+    "took": "توهان ورتو: {card} کان ڪ discardڻ واري پيل توهان کي [swap X Y] ان سان گڏ (ڪين ڪري سگهو ٿا)",
+    "peeked": "توهان پوزيشن تي peeked ({row}،{col}): {card}",
+    "turn_view": "توهان جو هٿ: {hand} اڇلايو پيس: {discard} {options}",
+    "none": "ڪوبه نه"
+  },
+  "options": {
+    "final_turns": "آخري موڙ! توهان جا اختيار: [draw]، [take]، [peek X Y]",
+    "draw": "توهان جا اختيار: [draw]، [take]",
+    "must_swap": "توهان کي لازمي طور تي: [swap X Y] (بند ٿيل اسٽيڪ مان ڪارڊ رد نه ڪري سگھندا)",
+    "swap_or_discard": "توھان کي لازمي طور تي: [swap X Y] يا [discard]"
+  },
+  "hand": {
+    "no_cards": "ڪارڊ نه",
+    "header": "ڪول: 1 2 3",
+    "row": "قطار {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "پليئر {pid} پوزيشن تي {new} کي {old} سان تبديل ڪيو ({row}،{col})",
+    "discarded": "پليئر {pid} ڪ discardedي ڇڏيو {card}"
+  },
+  "message": {
+    "deck_empty": "ڊيڪ خالي آهي! راند فوري طور تي ختم ٿي وئي.",
+    "knocked": "پليئر {pid} ٽوڙي ڇڏيو! هر ٻئي پليئر کي هڪ وڌيڪ موڙ ملي ٿو.",
+    "final_round": "پليئر {pid} {reason}! هر ٻئي پليئر کي هڪ وڌيڪ موڙ ملي ٿو."
+  },
+  "reason": {
+    "all_revealed": "سڀ ڪارڊ ظاهر ڪيا آهن"
+  },
+  "invalid": {
+    "wrong_action": "استعمال ڪريو بلڪل ھڪڙو بند ٿيل عمل: [draw]، [take]، [swap X Y]، [discard]، [knock]، يا [peek X Y]",
+    "discard_empty": "The discard pile is empty!",
+    "must_draw_first": "توھان کي پھريون [draw]، [take]، [knock]، يا [peek X Y]",
+    "cannot_discard_taken": "توهان کي رد ڪرڻ واري پيل مان ورتو ڪارڊ رد نه ٿو ڪري سگھجي. توهان کي ان کي مٽائڻ گهرجي.",
+    "have_drawn_card": "توهان کي اک کڍي وئي آهي. توهان کي [swap X Y] يا [discard] ڪري ٿو.",
+    "need_drawn_swap": "توهان کي تبديل ڪرڻ لاءِ هڪ ڇڪيل ڪارڊ جي ضرورت آهي.",
+    "need_drawn_discard": "توهان کي هڪ ڇڪيل ڪارڊ جي ضرورت آهي.",
+    "out_of_bounds": "حد کان ٻاهر پوزيشن. قطار 1-{max_row} استعمال ڪريو، ڪالم 1-{max_col}",
+    "knock_with_card": "توهان هڪ ڇڪيل ڪارڊ سان نه ٿا ڪري سگهو. توهان جي موڙ پهرين مڪمل.",
+    "already_knocked": "ڪنهن ماڻهو اڳ ۾ ئي هن دور کي ڇڪيو آهي.",
+    "already_revealed": "اهو ڪارڊ اڳ ئي ظاهر ٿي چڪو آهي!"
+  },
+  "summary": {
+    "full": "راند ختم ٿي وئي! پليئر {winner} {score} پوائنٽس جي اسڪور سان کٽي ٿو! آخري اسڪور: {scores}",
+    "line": "پليئر {pid}: {score} پوائنٽون "
+  },
+  "board_str": {
+    "title": "=== گولف جي راند ===",
+    "discard": "اڇلائي ڇڏڻ واري پيل: {card}",
+    "knocked": "پليئر {pid} ٽڪرا ٽڪرا ڪري ڇڏيو آهي!",
+    "player_header": "پليئر {pid} (اسکور: {score}):"
+  }
+}
