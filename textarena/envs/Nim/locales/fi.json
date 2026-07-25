@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} Nim-pelissä.\nTavoitteesi on ottaa viimeinen jäljellä oleva esine.\nJokaisella vuorolla valitse tasan yksi pino ja poista siitä yksi tai useampi esine.\nKäytä muotoa '[pino määrä]', jossa pino on pinon indeksi ja määrä on poistettavien esineiden lukumäärä.\nEsimerkiksi '[0 3]' poistaa 3 esinettä pinosta 0."
+  },
+  "state": {
+    "current_pile": "Nykyinen pino:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ei kelvollista siirtomuotoa löydetty. Käytä '[pino määrä]'.",
+    "correct_format_wrong_fields": "Pelaaja {player_id}, Virheellinen toiminto. Sarake {col} on ulkona rajoista.",
+    "out_of_range": "Pinon indeksi {pile_index} on ulkona rajoista.",
+    "non_positive": "Tulee poistaa vähintään 1 esine.",
+    "exceeds_pile": "Ei voida poistaa {quantity} pinosta {pile_index} (vain {pile_count} jäljellä)."
+  },
+  "observation": {
+    "removed_from_piles": "Pelaaja {player_id} pelasi [{pile_index} {quantity}], poistaen {quantity} esinettä pinosta {pile_index}."
+  },
+  "outcome": {
+    "win": "Pelaaja {player_id} otti viimeisen esineen!"
+  }
+}

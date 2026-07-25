@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte-lokaalitiedosto. ÄLÄ käännä avaimia (vasen puoli). Käännä vain arvot (oikea puoli).",
+  "_slots": {
+    "{line}": "Kuppien rivi",
+    "{step}": "Nykyinen sekoitusvaihe",
+    "{steps}": "Sekoitusvaiheiden kokonaismäärä",
+    "{i}": "Ensimmäisen vaihdettavan kupin indeksi",
+    "{j}": "Toisen vaihdettavan kupin indeksi",
+    "{prompt}": "Lokalisoitu kehote, joka liitetään kuppien jälkeen",
+    "{max_index}": "Korkein kelvollinen kupin indeksi, ts. kuppien lukumäärä - 1",
+    "{ball_pos}": "Kupin indeksi, jonka alla pallo on"
+  },
+  "player_prompt": {
+    "intro": "Seuraa piilotettua palloa 'X', kun kupit sekoitetaan.\nSekoituksen jälkeen arvaa sen sijainti komennolla `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Pallo alkaa: {line}",
+    "shuffle": "Sekoitus {step}/{steps}: vaihdettiin kupit {i} ja {j}.",
+    "cups": "Kupit: {line}  {prompt}",
+    "guess_now": "(Arvaa NYT!)",
+    "reveal": "(Paljasta: pallo kupin {ball_pos} alla)"
+  },
+  "invalid_move": {
+    "wrong_format": "Virheellinen toiminto. Käytä `[k]`.",
+    "out_of_range": "Indeksi ulkona alueelta 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Oikein! Löysit pallon.",
+    "lose": "Väärin — pallo oli kupin {ball_pos} alla."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Tervetuloa Jääjärvelle!\n\nSinut edustaa 'P' ruudukossa.\nRuudukon symbolit:\n  ' ' = Jääpinta (turvallinen kävellä)\n  'H' = Reikä (pudota ja häviä!)\n  'G' = Maali (tavoita tämä voittaaksesi!)\n  'P' = Nykyinen sijaintisi\n\nKäytettävissä olevat toiminnot: ylös, alas, vasemmalle, oikealle (tai w, a, s, d)\nKirjoita toimintasi muodossa: [up], [down], [left], [right] tai [w], [a], [s], [d]\n\nTavoite: Navigoi aloituksesta (ylävasen) maaliin (alaoikea) ilman, että putoat reikiin!\n"
+  },
+  "board": {
+    "current_board": "Nykyinen pelilauta:\n\n{board}\n\nKäytettävissä olevat toiminnot: {actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Virheellinen toimintamuoto. Käytä [up], [down], [left], [right] tai [w], [a], [s], [d].",
+    "unknown_action": "Tuntematon toiminta '{action}'. Käytä ylös, alas, vasemmalle, oikealle tai w, a, s, d.",
+    "hit_wall": "Yritit liikkua {action}, mutta osuit seinään!"
+  },
+  "game_action": {
+    "moved": "Liikuin {action} sijaintiin ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Onnittelut! Saavutit maalin!",
+    "fell_in_hole": "Putosit reikään! Peli päättyi. Saavutit {pct}% matkasta maaliin.",
+    "turn_limit": "Saavutit vuoron rajan! Peli päättyi. Saavutit {pct}% matkasta maaliin."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} HighSociety-pelissä (2 pelaajan versio).\nPelin kulku: Kymmenen arvokorttia huutokaupataan yksi toisensa jälkeen.\nTarjous: Jokaisessa huutokaupassa valitse salaisesti rahakortti 1-11 ja paljasta.\n            • Korkeampi tarjous voittaa arvokortin ja hävittää rahakortin.\n            • Alempi tarjous pitää rahakorttinsa.\n            • Tasapeli -> molemmat tarjoukset palautetaan ja sama arvokortti huutokaupataan uudelleen.\nPistelasku: Kaikkien kymmenen huutokaupan jälkeen lisää **jäljellä oleva käteinen + arvopisteet**.\n            Korkeampi *nettoarvo* voittaa (tasan -> tasapeli).\n\n**Toimintosyntaxi**  →  tarjoa yksittäinen kortti kuten '[7]' tai '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Huutokauppa {round}/10  |  Arvokortti: {prize}"
+  },
+  "board": {
+    "money_cards": "Jäljellä olevat rahakorttisi: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Täytyy sisältää täsmälleen yhden [X] rahakortin.",
+    "card_not_held": "Sinulla ei ole enää kyseistä rahakorttia."
+  },
+  "message": {
+    "tie": "Tasapeli - tarjoukset palautetaan. Tarjoa uudelleen!",
+    "auction_result": "P0 tarjosi {bid0}, P1 tarjosi {bid1}. Pelaaja {winner} voittaa arvon {prize} (yhteensä {total})."
+  },
+  "outcome": {
+    "p0_wins": "Nettoarvo {nw0} > {nw1}",
+    "p1_wins": "Nettoarvo {nw1} > {nw0}",
+    "draw": "Molempien nettoarvo {nw0} – tasan."
+  }
+}

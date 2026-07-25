@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id}. Pelit 15-Palapeliä.\nPelin tavoite on järjestää numeroituja laattoja nousevaan järjestykseen 1:stä 15:een, tyhjä tila sijaitsee oikeassa alakulmassa.\nVoit tehdä siirron liu'uttamalla laattaa tyhjään tilaan (jota edustaa kaksi alaviivaa, esim. __) käyttämällä jotakin seuraavista komennoista:\n- 'up': Siirrä laatta tyhjän tilan alapuolella ylös.\n- 'down': Siirrä laatta tyhjän tilan yläpuolella alas.\n- 'left': Siirrä laatta tyhjän tilan oikealla puolella vasemmalle.\n- 'right': Siirrä laatta tyhjän tilan vasemmalla puolella oikealle.\nLähetä siirtosi kirjoittamalla suunta (esim. 'up', 'down', 'left' tai 'right') hakasuluissa, esim. [up].\nNykyinen pelilauta näytetään alla. Käytä tietoa ratkaistaksesi pulman.\n"
+  },
+  "board": {
+    "current_board": "Nykyinen Pelilauta:\n\n{board}\nSaatavilla olevat siirrot: {moves}",
+    "game_board": "Pelilauta:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Virheellinen siirtomuoto. Pelaaja {player_id} ei vastannut kelvollisella suunnalla hakasuluissa.",
+    "illegal_move": "Virheellinen siirto. Laattaa ei voi siirtää määritetyssä suunnassa."
+  },
+  "outcome": {
+    "win": "Onneksi olkoon! Pelaaja {player_id} on onnistuneesti ratkaissut 15-Palapelin.",
+    "turn_limit": "Vuororaja on saavutettu. Malli täytti {percent} prosenttia pulmasta"
+  }
+}
