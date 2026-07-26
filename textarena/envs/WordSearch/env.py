@@ -83,7 +83,10 @@ class WordSearchEnv(ta.Env):
                 if self._ML_MIN_WORD_LEN <= len(w) <= self._ML_MAX_WORD_LEN
             ]
             if len(pool) > self._ML_POOL_CAP:
-                pool.sort(key=lambda w: d._wf.zipf_frequency(w, lang), reverse=True)
+                # Rank by frequency via the dictionary's alias-resolved helper, not the
+                # raw UI code: aliased langs (sr/hr -> sh) would otherwise trigger a
+                # per-word wordfreq "nearest match" warning across the whole pool.
+                pool.sort(key=lambda w: d.zipf(w), reverse=True)
                 pool = pool[: self._ML_POOL_CAP]
                 print(
                     f"[WordSearch] capped '{lang}' candidate word pool to the "

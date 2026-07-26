@@ -92,8 +92,10 @@ class WordLadderEnv(ta.Env):
         word_list, _ = self._ml_word_universe(lang)
         bucket = [w for w in word_list if len(w) == length]
         if len(bucket) > self._ML_BUCKET_CAP:
-            wf = self._ml_dicts[lang]._wf
-            bucket.sort(key=lambda w: wf.zipf_frequency(w, lang), reverse=True)
+            # Rank via the alias-resolved helper (sr/hr -> sh) so aliased langs don't
+            # emit a per-word wordfreq "nearest match" warning during the sort.
+            d = self._ml_dicts[lang]
+            bucket.sort(key=lambda w: d.zipf(w), reverse=True)
             bucket = bucket[: self._ML_BUCKET_CAP]
         return bucket
 

@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """Multilingual regression + smoke test for localized envs.
 
-For every game in game_scenarios.GAMES that ships a `locales/` folder (games
-without one are not multilingual targets and are skipped, matching
-scripts/check_locales.py):
+For every game in game_scenarios.GAMES:
   * GOLDEN IDENTITY - the English transcript must byte-match the committed
     goldens/<Game>.en.json (proves later edits don't silently change output).
   * CROSS-LINGUAL SMOKE - the game runs to completion under a mixed-language
@@ -29,23 +27,12 @@ from golden_runner import run_game, canonical, load_env, run_scenario  # noqa: E
 from game_scenarios import GAMES  # noqa: E402
 
 GOLDEN_DIR = os.path.join(HERE, "goldens")
-LANGS = ["ar", "de", "en", "es", "fr", "he", "ms", "zh", "kn", "be", "gu", "pa", "mr", "ps", "te", "sd", "ne", "lo", "uz", "ml", "zu", "as", "km", "hy", "cy", "si", "kk", "or", "my", "so", "mg", "ky", "ka", "ha", "ig", "mn", "eu", "yo", "am", "ceb", "bjn", "ars", "arz", "acq", "crh", "apc", "ajp", "bho", "ace", "acm", "ary", "ckb", "aeb", "ast", "bug", "ayr", "bam", "bem", "cjk", "ban", "awa", "bak", "azb", "bod", "aka", "epo", "gla", "fur", "gle", "fao", "fij", "grn", "gaz", "ewe", "fuv", "dzo", "dik", "fon", "dyu", "jav", "hat", "lmo", "lim", "ltz", "hne", "mai", "mag", "kmr", "ilo", "lij", "kas", "lus", "kin", "ltg", "kea", "lin", "lug", "luo", "lua", "kac", "kik", "kab", "kon", "knc", "kbp", "kmb", "kam", "sun", "scn", "pap", "oci", "sot", "min", "nya", "sna", "srd", "smo", "szl", "mri", "mlt", "nno", "pag", "mni", "tat", "nso", "ssw", "san", "run", "shn", "sat", "quy", "nus", "sag", "mos", "taq", "vec", "ydd", "tgk", "xho", "war", "uig", "tir", "tso", "tuk", "tsn", "tpi", "tum", "tzm", "twi", "wol", "umb"]
+LANGS = ["ar", "de", "en", "es", "fr", "he", "ms", "pt", "zh", "it", "ru", "ja", "fa", "sr", "fil", "ko", "hi", "bn", "ta", "sw", "af", "bg", "az", "ca", "cs", "da", "el", "et", "fi", "hr", "gl", "hu", "id", "is", "lt", "lv", "mk", "nb", "nl", "pl", "ro", "sk", "sl", "sq", "sv", "th", "tr", "uk", "vi", "ur", "kn", "be", "gu", "pa", "mr", "ps", "te", "sd", "ne", "lo", "uz", "ml", "zu", "as", "km", "hy", "cy", "si", "kk", "or", "my", "so", "mg", "ky", "ka", "ha", "ig", "mn", "eu", "yo", "am", "ceb", "bjn", "ars", "arz", "acq", "crh", "apc", "ajp", "bho", "ace", "acm", "ary", "ckb", "aeb", "ast", "bug", "ayr", "bam", "bem", "cjk", "ban", "awa", "bak", "azb", "bod", "aka", "epo", "gla", "fur", "gle", "fao", "fij", "grn", "gaz", "ewe", "fuv", "dzo", "dik", "fon", "dyu", "jav", "hat", "lmo", "lim", "ltz", "hne", "mai", "mag", "kmr", "ilo", "lij", "kas", "lus", "kin", "ltg", "kea", "lin", "lug", "luo", "lua", "kac", "kik", "kab", "kon", "knc", "kbp", "kmb", "kam", "sun", "scn", "pap", "oci", "sot", "min", "nya", "sna", "srd", "smo", "szl", "mri", "mlt", "nno", "pag", "mni", "tat", "nso", "ssw", "san", "run", "shn", "sat", "quy", "nus", "sag", "mos", "taq", "vec", "ydd", "tgk", "xho", "war", "uig", "tir", "tso", "tuk", "tsn", "tpi", "tum", "tzm", "twi", "wol", "umb"]
+_LANG_OVERRIDE = None  # set by --langs to smoke a subset (e.g. adding one new language)
 
 
 def golden_path(game):
     return os.path.join(GOLDEN_DIR, f"{game}.en.json")
-
-
-def has_locales(game):
-    """A game is a multilingual target iff it ships a `locales/` folder.
-
-    Mirrors scripts/check_locales.py, which only validates games with a
-    locales/ folder. Games without one (e.g. de-scoped from the multilingual
-    effort, their env.py reverted to a monolingual state) are not localized and
-    are skipped here too, so this suite stays consistent with the locale gate
-    instead of crashing on an env that never opted in.
-    """
-    return os.path.isdir(os.path.join(REPO_ROOT, "textarena", "envs", game, "locales"))
 
 
 def langs_for(game):
@@ -55,13 +42,14 @@ def langs_for(game):
     logographic zh). textarena/envs/<game>/locales/_supported_langs.json (a JSON
     list) narrows the set; absent -> all 8.
     """
+    base = _LANG_OVERRIDE if _LANG_OVERRIDE is not None else LANGS
     supported = os.path.join(REPO_ROOT, "textarena", "envs", game, "locales", "_supported_langs.json")
     if os.path.exists(supported):
         import json
         with open(supported, encoding="utf-8") as f:
             declared = json.load(f)
-        return [l for l in LANGS if l in declared]
-    return LANGS
+        return [l for l in base if l in declared]
+    return base
 
 
 def _selected(games):
@@ -76,9 +64,6 @@ def _selected(games):
 def update_goldens(games=None):
     os.makedirs(GOLDEN_DIR, exist_ok=True)
     for game in _selected(games):
-        if not has_locales(game):
-            print(f"SKIP {game}: no locales/ folder (not a multilingual target)")
-            continue
         text = canonical(run_game(GAMES[game], "en"))
         with open(golden_path(game), "w", encoding="utf-8") as f:
             f.write(text + "\n")
@@ -87,12 +72,7 @@ def update_goldens(games=None):
 
 def verify(games=None):
     failures = 0
-    skipped = 0
     for game in _selected(games):
-        if not has_locales(game):
-            print(f"SKIP {game}: no locales/ folder (not a multilingual target)")
-            skipped += 1
-            continue
         spec = GAMES[game]
         # 1. English golden identity
         path = golden_path(game)
@@ -136,17 +116,24 @@ def verify(games=None):
     if failures:
         print(f"FAILED: {failures} check(s) failed.")
         return 1
-    tested = len(_selected(games)) - skipped
-    suffix = f" ({skipped} skipped: no locales/)" if skipped else ""
-    print(f"PASSED: {tested} game(s){suffix}.")
+    print(f"PASSED: {len(_selected(games))} game(s).")
     return 0
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--update", action="store_true", help="regenerate committed goldens")
+    ap.add_argument("--langs", help="comma-separated language subset to smoke (e.g. en,pt); "
+                                    "English golden identity always runs. Default: all 8.")
     ap.add_argument("games", nargs="*", help="restrict to these game names (default: all)")
     args = ap.parse_args()
+    if args.langs:
+        global _LANG_OVERRIDE
+        want = [l.strip() for l in args.langs.split(",") if l.strip()]
+        _LANG_OVERRIDE = [l for l in want if l in LANGS] or None
+        unknown = [l for l in want if l not in LANGS]
+        if unknown:
+            print(f"note: ignoring languages not in LANGS (add them there first): {unknown}")
     if args.update:
         update_goldens(args.games)
         return 0
