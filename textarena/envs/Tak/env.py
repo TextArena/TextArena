@@ -4,21 +4,45 @@ from typing import Dict, Optional, List, Tuple
 import textarena as ta
 
 class TakEnv(ta.Env):
+    """Tak (simplified variant).
+
+    Two players build stacks of Flat stones ('F'), Wall stones ('W') and a
+    Capstone ('C') on a square board. The game ends when:
+
+      * a player connects two opposite edges with a road of their own flats /
+        capstones (walls do NOT count) -- that player wins; or
+      * the board fills up, or a player runs out of pieces -- then whoever has
+        the most flat stones showing on top of stacks wins the "flat count"
+        (walls and capstones don't count); an equal flat count is a draw.
+
+    A turn limit is enforced purely as a safeguard against non-terminating
+    move-shuffling play; if it is reached the flat count decides the result.
+
+    Faithful to standard Tak: placement, road wins, the capstone flattening
+    walls (and never being covered), the carry limit (at most `board_size`
+    pieces may be lifted from a stack), and the flat-count endgame. **Simplified:**
+    multi-square stack moves are validated by requiring each successive drop to
+    lie one step further (Manhattan distance) from the origin rather than along a
+    strictly straight line, so some non-linear drop paths are accepted. This is
+    why the class is a simplified Tak variant; the player prompt says so too.
     """
-    Tak environment.
-    """
-    def __init__(self, board_size=4, stones=15, capstones=1):
-        """
-        Initialize the Tak game environment
-        
+    def __init__(self, board_size: int = 4, stones: int = 15, capstones: int = 1, max_turns: int = 100):
+        """Initialize the Tak game environment.
+
         Args:
-            difficulty: Difficulty of the game. Can be "easy", "medium", "hard".
+            board_size: Side length of the square board.
+            stones: Flat/Wall stones each player starts with.
+            capstones: Capstones each player starts with.
+            max_turns: Safeguard turn cap; on reaching it the flat count decides
+                the result (real Tak has no turn limit, but move-only play can
+                otherwise continue forever).
         """
 
         self.board_size = board_size
         self.stones = stones
         self.capstones = capstones
-        
+        self.max_turns = max_turns
+
         self.players = None
         self.board = None
 
@@ -34,7 +58,7 @@ class TakEnv(ta.Env):
             seed: Seed for the random number generator.
         """
         ## initialize the game state
-        self.state = ta.TwoPlayerState(num_players=num_players, seed=seed)
+        self.state = ta.TwoPlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
 
         ## initialize the board
         self.board = self._generate_board()
@@ -179,15 +203,49 @@ class TakEnv(ta.Env):
             
             self.state.game_state["rendered_board"] = self._render_board() ## update the rendered board
 
-        
-        if self._check_win(self.state.current_player_id): ## check if the game is over
-            ## game is over
-            reason=self.m("outcome", "winner", current_player_id=self.state.current_player_id)
-            self.state.set_winner(player_id=self.state.current_player_id, reason=reason)
+        ## Terminal checks run only after a valid move (an invalid move leaves the
+        ## board unchanged and may already have ended the game on a repeat error).
+        if not self.state.made_invalid_move and not self.state.done:
+            cur = self.state.current_player_id      # step() has not rotated yet: this is the mover
+            opp = 1 - cur
+            if self._check_win(cur):                # the mover completed their own road
+                self.state.set_winner(player_id=cur, reason=self.m("outcome", "winner", current_player_id=cur))
+            elif self._check_win(opp):              # a move can complete the opponent's road (e.g. flattening a wall)
+                self.state.set_winner(player_id=opp, reason=self.m("outcome", "winner", current_player_id=opp))
+            elif self._board_full() or self._out_of_pieces(0) or self._out_of_pieces(1):
+                self._resolve_flat_count(capped=False)   # board full / a player ran out -> flat count
+            elif self.state.turn + 1 >= self.state.max_turns:
+                self._resolve_flat_count(capped=True)    # safeguard cap -> flat count
 
         result = self.state.step()
         self._observe_current_state()
         return result
+
+    def _flat_counts(self) -> Dict[int, int]:
+        """Flat stones showing on top of stacks, per player (walls/capstones don't count)."""
+        counts = {0: 0, 1: 0}
+        for row in self.board:
+            for cell in row:
+                if cell and cell[-1][0] == "F":
+                    counts[int(cell[-1][-1])] += 1
+        return counts
+
+    def _board_full(self) -> bool:
+        return all(cell for row in self.board for cell in row)
+
+    def _out_of_pieces(self, player_id: int) -> bool:
+        return self.players[player_id]["stones"] == 0 and self.players[player_id]["capstones"] == 0
+
+    def _resolve_flat_count(self, capped: bool = False) -> None:
+        """End the game by flat count (board full / out of pieces / turn cap)."""
+        c = self._flat_counts()
+        if c[0] == c[1]:
+            key = "draw_capped" if capped else "draw"
+            self.state.set_draw(reason=self.m("outcome", key, flats0=c[0], flats1=c[1]))
+        else:
+            winner = 0 if c[0] > c[1] else 1
+            key = "flat_win_capped" if capped else "flat_win"
+            self.state.set_winner(player_id=winner, reason=self.m("outcome", key, winner=winner, flats0=c[0], flats1=c[1]))
 
     def _check_win(self, player_id):
         """
@@ -371,6 +429,9 @@ class TakEnv(ta.Env):
         
         source_stack = self.board[source_row][source_col]
         pieces_to_move = [value for values in allocation.values() for value in values]
+
+        if len(pieces_to_move) > self.board_size: ## carry limit: at most board_size pieces may be lifted from a stack
+            return False
 
         if pieces_to_move != source_stack[-len(pieces_to_move):]: ## pieces to move must match the top of the stack in order
             return False
