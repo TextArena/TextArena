@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Du bis Spiller {player_id} a Stratego.\nDäi Zil ass et, déi Fändel vun däim Géigner oder all seng zougänglech Deeler auszuschalten.\nDäi Arméi ass scho fir dich um Bord placéiert ginn, inklusiv déi Fändel, Bomben an aner Deeler vu verschiddene Räng.\n\n### Spillugaben\n1. **Beweegungsregelen:**\n   - Um däin Tour, kanns du een Deel vu een Schratt op en Nopeschschwanz (uewen, ënnen, lénks oder riets) beweegen, deen scho vun däine Deeler besat ass.\n   - Beispill: E Deel kann sech vu A1 op B1 oder A1 op A2 beweegen, wa B1 an A2 net mat däine Deeler besat sinn.\n   - Wa de selektéierte Deel eng Bom oder eng Fändel ass, kann et net bewegt ginn.\n2. **Kämpf:**\n   - Wa du op enger Plaz, déi vun engem Géignersdeel besat ass, ukommst, daass en Kampf ausbrécht:\n     - De Deel mat dem héchste Rang gewënnt an eliminéiert de Géignersdeel.\n     - Wa déi Räng gläich sinn, ginn déi zwee Deeler vum Bord geholl.\n     - **Spezialfäll:**\n       - Bomben eliminéieren déi meescht ugräifend Deeler, ausser Minieren, déi Bomben entschäerfen.\n       - Spione kënnen de Marschall besiegen, wa de Spion als éischten ugräift, mä verléieren géint all aner Deeler.\n3. **Strategesch Ziler:**\n   - Identifizéier déi Deeler vun däim Géigner duerch hir Beweegungen an Kämpf.\n   - Schütz déi Fändel, wärend du versichs, déi Fändel vun däim Géigner ze erfassen.\n   - Benotz Scouten strategesch, fir Informatiounen iwwer déi Deeler vun däim Géigner ze kréien an schwach Deeler unzegräifen.\n\n### Wéi een Zuch maachen:\n1. Gitt déi Koordinaten vum Deel, deen du beweegen möchtes, an déi vun der Bestimmungsplaz uginn.\n2. Benotz déi Format: [A0 B0], wou A0 déi Quellplaz ass, an B0 déi Bestimmungsplaz ass.\n   - Beispill: Fir e Deel vu Rei 0, Spalte 0 op Rei 1, Spalte 0 ze beweegen, gitt [A0 B0] uginn.\n3. Sécherst du, datt d'Bestimmungsplaz gültig ass, geméiss de Beweegungsregelen uewen.\n\n### Wichteg Notizen:\n- De Bord weist däi Deeler an hir Plazen un, z. B. MN, MS.\n- De Bord weist och déi bekannt Plazen vun däim Géignersdeeler un, ouni hir Räng ze reveeléieren, z. B. ?.\n- Gitteren mat ~ sinn Séien a kënnen net ugräift ginn.\n- Als Suggestioun, fänk déi Spill un, andeems du däi Deeler, déi op der Frontlinie stinn, beweegs, fir Informatiounen iwwer déi Deeler vun däim Géigner ze kréien. Spiller 0 an Spiller 1 seng Frontlinie sinn Rei D an G.\n\nHei ass den aktuelle Bordzoustand:\n"
+  },
+  "board": {
+    "current_board": "Aktuell Bord:\n\n{board}\nVerfëgbar Zich: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongülteg Aktioun Format. Spiller {player_id} huet net e Schrëtt am Format aginn [A0 B0] .",
+    "invalid_coordinates": "Ongülteg Aktioun Format. Spiller {player_id} huet keng gülteg Koordinaten aginn.",
+    "not_own_piece": "Ongülteg Aktioun Format. Spiller {player_id} muss eng vun hiren eegene Stécker bewegen.",
+    "scout_through_pieces": "Ongülteg Aktioun Format. Spiller {player_id} kann net e Scout duerch aner Stécker bewegen.",
+    "scout_diagonal": "Ongülteg Aktioun Format. Spiller {player_id} kann net e Scout diagonal bewegen.",
+    "non_scout_multi_square": "Aktioun Format ongëlteg. Stécker, ausser Scouten, kann nëmmen eng Plaz gläichzäiteg bewegen.",
+    "move_into_lake": "Ongülteg Aktioun Format. Spiller {player_id} kann net an de Séi bewegen.",
+    "move_onto_own_piece": "Ongülteg Aktioun Format. Spiller {player_id} kann net op hir eegen Stéck goen.",
+    "move_bomb_or_flag": "Ongülteg Aktioun Format. Spiller {player_id} kann net eng Bomm oder Fändel bewegen."
+  },
+  "game_action": {
+    "you_moved": "Du hues deen Deel vu {source} op {dest} gezunn.",
+    "opponent_moved": "Spiller {player_id} huet en Deel vu {source} op {dest} gezunn.",
+    "you_equal_ranks": "Du hues deen Deel vu {source} op {dest} gezunn. Deen ugräifende Deel war {attacking_rank} an de Bestimmungsdeel war {target_rank}. Well déi Räng sinn déi selwecht, hu béid Deeler verluer.",
+    "opponent_equal_ranks": "Spiller {player_id} huet en Deel vu {source} op {dest} gezunn. Deen ugräifende Deel war {attacking_rank} an de Bestimmungsdeel war {target_rank}. Well déi Räng sinn déi selwecht, hu béid Deeler verluer.",
+    "you_miner_defused": "You have moved your piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As miners can defuse bombs, you won the battle.",
+    "opponent_miner_defused": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As miners can defuse bombs, you lost the battle.",
+    "you_bomb_lost": "Du hues deen Deel vu {source} op {dest} gezunn. Deen ugräifende Deel war {attacking_rank} an de Bestimmungsdeel war {target_rank}. Well deen ugräifenden net e Minier ass, huet dir de Kampf verluer.",
+    "opponent_bomb_won": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is not a miner, you won the battle.",
+    "you_spy_won": "Du hues deen Deel vu {source} op {dest} gezunn. Deen ugräifende Deel war {attacking_rank} an de Bestimmungsdeel war {target_rank}. Well deen ugräifenden e Spion ass an de Bestimmungsdeel e Marschall ass, huet dir de Kampf gewonnen.",
+    "opponent_spy_lost": "Spiller {player_id} huet en Deel vu {source} op {dest} gezunn. Deen ugräifende Deel war {attacking_rank} an de Bestimmungsdeel war {target_rank}. Well deen ugräifenden e Spion ass an de Bestimmungsdeel e Marschall ass, huet dir de Kampf verluer.",
+    "you_higher_won": "Du hues deen Deel vu {source} op {dest} gezunn. Deen ugräifende Deel war {attacking_rank} an de Bestimmungsdeel war {target_rank}. Well deen ugräifenden eng héichere Rang wéi de Bestimmungsdeel huet, huet dir de Kampf gewonnen.",
+    "opponent_higher_lost": "Spiller {player_id} huet en Deel vu {source} op {dest} gezunn. Deen ugräifende Deel war {attacking_rank} an de Bestimmungsdeel war {target_rank}. Well deen ugräifenden eng héichere Rang wéi de Bestimmungsdeel huet, huet dir de Kampf verluer.",
+    "you_lower_lost": "Du hues deen Deel vu {source} op {dest} gezunn. Deen ugräifende Deel war {attacking_rank} an de Bestimmungsdeel war {target_rank}. Well deen ugräifenden en déifere Rang wéi de Bestimmungsdeel huet, huet dir de Kampf verluer.",
+    "opponent_lower_won": "Spiller {player_id} huet en Deel vu {source} op {dest} gezunn. Deen ugräifende Deel war {attacking_rank} an de Bestimmungsdeel war {target_rank}. Well deen ugräifenden en déifere Rang wéi de Bestimmungsdeel huet, huet dir de Kampf gewonnen."
+  },
+  "outcome": {
+    "flag_captured": "De Spiller {player_id} huet d'Flagge vum Géigner ageholl!",
+    "no_movable_pieces": "Spiller {winner_id} gewënnt! Spiller {loser_id} huet keng zougänglech Deeler méi."
+  }
+}

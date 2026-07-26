@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Dir sidd Spiller {player_id} an enger iteréierter Prisoner's Dilemma déi {num_rounds} Ronne spillt.\n\nSpillstruktur:\n- Éier der entscheedung hutt dir {total_conversation_rounds} Réien fir fräi ze kommunizéieren.\n- Duerno wëllen béid Spiller gläichzäiteg cooperéieren oder ofhiewen.\n\nPayoff-Matrix (fest all Ronn):\n- Beid Cooperéieren ➜ all Kéier {cooperate_reward}\n- Beid Ofhiewen ➜ all Kéier {mutual_defect_reward}\n- Eent huet ofgewieent, een huet cooperéiert ➜ Ofhiewer {defect_reward}, Cooperéierer {sucker_reward}\n\nWéi spillt een:\n- Wärend der Konversatioun: schreift all Text, deen dir wëllt.\n- Wärend der Entscheedungsphas: schreift '[Cooperate]' oder '[Defect]' (onofhängeg vun der Schreifweis). Dir kënnt extra Text virun oder no der Markéierung schreiwen."
+  },
+  "phases": {
+    "conversation_finished": "Konversatioun fir Ronn {round} ass fäerdeg. Äntwert w.e.g. mat '[Cooperate]' oder '[Defect]' an \boxed{{}}.",
+    "starting_round": "--- Start Ronn {round} ---",
+    "round_summary": "Resultater vun der Ronn {round}:\n{outcome}\nSpiller 0 huet {r0} gewonnen (Gesamtwert {score_0}), Spiller 1 huet {r1} gewonnen (Gesamtwert {score_1})."
+  },
+  "outcome": {
+    "winner": "Spiller {winner} gewënnt {win_score} - {lose_score}.",
+    "draw": "Remis! Beid Spiller hun {s0} erreecht.",
+    "round_both_cooperate": "Déi zwee Spiller hunn zesumme geschafft.",
+    "round_both_defect": "Déi zwee Spiller hunn iwwergaang.",
+    "round_p0_cooperates_p1_defects": "Spiller 0 huet kooperéiert, Spiller 1 ass iwwergaang.",
+    "round_p0_defects_p1_cooperates": "Spiller 0 huet iwwergaang, Spiller 1 kooperéiert."
+  }
+}

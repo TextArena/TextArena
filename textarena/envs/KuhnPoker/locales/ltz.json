@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Dir sidd Spiller {player_id} an engem {max_rounds}-Ronne-Spill vum Kuhn Poker.\nSpillregelen:\n- Kuhn Poker benotzt e 3-Kaarte-Deck mat J, Q, K (J ënnefst, K héchst)\n- Jeden Spiller setzt {ante} Chip an kritt 1 Kaart all Ronn (merk op, datt d'Kaarten ouni Ersetzung ausgeteilt ginn, sou datt dir net déi selwecht Kaart wéi Är Géigner hunn)\n- Spill geet weider fir {max_rounds} Ronnen\n- De Spiller mat de meeschte Chipen no alle Ronnen gewënnt\nAktiounsregelen:\n- '[check]': Pass ouni Wett (nëmmen wann keng Wett op dem Dësch ass)\n- '[bet]': Füügt 1 Chip zum Pot (nëmmen wann keng Wett op dem Dësch ass)\n- '[call]': Gleicht en Gegner seng Wett duerch Hinzufügen vun 1 Chip zum Pot\n- '[fold]': Gitt Är Hand op an léisst Äre Géigner de Pot gewannen"
+  },
+  "init_round": {
+    "round_start": "### Ufank vun Ronn {current_round} vun {max_rounds} Ronnen. Äre Kaart ass: '{player_card}'",
+    "available_actions": "Är verfügbare Aktiounen sinn: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aktioun muss [Check], [Bet], [Call] oder [Fold] sinn.",
+    "not_legal": "D'Aktioun muss {legal_actions} sinn."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Är verfügbare Aktiounen sinn: {legal_actions}.",
+    "round_summary": "{reason} Aktuell Punkte: Spiller 0: '{player_0_chips}'; Spiller 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Um Enn vun {max_rounds} Ronn haten déi zwee Spiller déiselwecht Zuel vu Chips.",
+    "round_win": "De Spiller {player_id} huet gefall.",
+    "winner_player0": "De Spiller 0 huet gewonnen, andeems hien am Ende vun allen {max_rounds} Ronn méi Chips hat.",
+    "winner_player1": "De Spiller 1 huet gewonnen andeems hien am Ende vun allen {max_rounds} Ronn méi Chips hat."
+  }
+}

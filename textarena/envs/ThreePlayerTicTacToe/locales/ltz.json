@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Dir sidd Spiller {player_id} am Dräi-Spiller-Tic-Tac-Toe.\nDäi Symbol ass '{symbol}'.\nDir huecht ënnereneen Ären Symbol op enger 5x5-Plat ze setze fir eng Linn vun véier ze bilden.\nLinne kënnen horizontal, vertikal oder diagonal sinn.\nÄre Zuch äreechen Sie mat der Format '[4]' fir Zell 4 ze markéieren."
+  },
+  "board": {
+    "current_board": "Aktuell Schachbriet:\n\n{board}\n\nVerfëgbar Zich: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Falschen Zuchformat. Benotzt '[cell]' wou Zell 0-{max_cell} ass.",
+    "out_of_range": "Ongëlteg Zellnummer: {cell}. Muss tëscht 0 an {max_cell} sinn.",
+    "already_occupied": "D'Zell {cell} ass scho besat.",
+    "made_invalid": "De Spiller {player_id} huet en ongültegt Spill gemaach."
+  },
+  "game_action": {
+    "placed": "Spiller {player_id} setzt säi Symbol ({symbol}) an der Plaz ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Spiller {player_id} ({symbol}) gewënnt!",
+    "draw": "The game is a draw!"
+  }
+}
