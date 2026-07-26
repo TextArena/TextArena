@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a 3-player Iterated Prisoner's Dilemma. The match lasts {num_rounds} rounds.\nRound structure:\n• {conv_rounds} free-chat turns\n• 1 decision turn - submit one token per opponent: '[<opp-id> cooperate]' or '[<opp-id> defect]' (i.e. '[1 defect] [2 cooperate]'; the default is 'cooperate'). \nPair-wise payoff matrix (applied to each unordered pair):\n  - Both cooperate  ->  {reward}\n  - Both defect     ->  {punishment}\n  - You defect, they cooperate -> {temptation}\n  - You cooperate, they defect -> {sucker}\nThe player(s) with the highest score at the end of all rounds wins."
+  },
+  "round": {
+    "start": "─── राउंड {round} शुरू हो रहा है ───\tआप अगले {conv_rounds} राउंड्स के लिए स्वतंत्र रूप से बातचीत कर सकते हैं।",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### राउंड {round} - रिजल्ट्स:",
+    "pair_line": "{observation}\n\t Player {i} बनाम Player {j} ने {choice_i} और {choice_j} का चयन किया (खिलाड़ी {i} को {gain_i} मिला, खिलाड़ी {j} को {gain_j} मिला)",
+    "scores_open": "{observation} -> करंट स्कोर्स: ",
+    "score_first": "{observation}प्लेयर {player_id} ({score})",
+    "score_next": "{observation}; प्लेयर {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Final scores: {scores}.  Ranking groups (worst→best): {groups}"
+  }
+}

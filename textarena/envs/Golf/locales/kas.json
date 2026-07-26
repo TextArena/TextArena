@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "تم Golf (Card Game) کھیل رہے ہو - Player {player_id}.\nمقصد: اس واحد راؤنڈ میں کم سے کم کل اسکور حاصل کریں۔ اگر کالم ایک ہی قیمت شیئر کرتے ہیں، تو وہ 0 کے طور پر جمع ہوتے ہیں.\nکارد کی قیمت: A=1, 2-10=چہرہ کی قیمت, J/Q=10, K=0\n\nایکشن (بریکٹس کا استعمال کریں):\n- '[draw]' - ڈیک سے کھینچو\n- '[take]' - ڈسکارڈ پائل سے لیں\n- '[swap X Y]' - کھینچی ہوئی کارڈ کو پوزیشن X (سطر) Y (کالم) کے ساتھ تبدیل کریں\n- '[discard]' - کھینچی ہوئی کارڈ کو ڈسکارڈ کریں"
+  },
+  "board": {
+    "drew": "तमے drew: {card}\nअब تمےں [swap X Y] یا [discard] کرنا ہے۔",
+    "took": "You took: {card} from discard pile\nYou must [swap X Y] with it (cannot discard).",
+    "peeked": "تمےں نے position ({row},{col}) کو دیکھا: {card}",
+    "turn_view": "تمہاری ہاتھ:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "None"
+  },
+  "options": {
+    "final_turns": "آخری موڑ! تمہارے اختیارات: [draw], [take], [peek X Y]",
+    "draw": "تمہارے اختیارات: [draw], [take]",
+    "must_swap": "तुह्य़ गछः [swap X Y] (कार्ड नॆ हिकि डसर्प करान)",
+    "swap_or_discard": "تمےں: [swap X Y] یا [discard] کرنا ہے"
+  },
+  "hand": {
+    "no_cards": "नो कार्ड्स अस",
+    "header": "कोलः 1 2 3 कॉलोनी: 12 4",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} swapped {new} with {old} at position ({row},{col})",
+    "discarded": "Player {pid} discarded {card}"
+  },
+  "message": {
+    "deck_empty": "डेक छू रिक्त! गेम इ छी ख़तम गासन.",
+    "knocked": "प्लेयर {pid} छूटे! हर दूसरे खिलाड़ी को एक छेद मिलते हैं।",
+    "final_round": "Player {pid} {reason}! ہر دوسرے کھلاڑی کو ایک اور موڑ ملے گا"
+  },
+  "reason": {
+    "all_revealed": "क्या छू तमाम कार्ड ज़ाहिर?"
+  },
+  "invalid": {
+    "wrong_action": "Use exactly ONE bracketed action: [draw], [take], [swap X Y], [discard], [knock], or [peek X Y]",
+    "discard_empty": "डिस्पोजेबल ढेर छू रिक्त!",
+    "must_draw_first": "تمےں پہلے [draw], [take], [knock], یا [peek X Y] کرنا ہے",
+    "cannot_discard_taken": "You cannot discard a card taken from the discard pile. You must swap it.",
+    "have_drawn_card": "تمےں پاس ایک drawn card ہے۔ تمےں اسے [swap X Y] یا [discard] کرنا ہے",
+    "need_drawn_swap": "तुमको तब्दीली खातिर छू अख ड्राई कार्ड ज़रूरी.",
+    "need_drawn_discard": "You need a drawn card to discard.",
+    "out_of_bounds": "Position out of bounds. تم row 1-{max_row}, column 1-{max_col} استعمال کریں",
+    "knock_with_card": "You cannot knock with a drawn card. Complete your turn first.",
+    "already_knocked": "Someone has already knocked this round.",
+    "already_revealed": "That card is already revealed!"
+  },
+  "summary": {
+    "full": "کھیل ختم ہو گیا! Player {winner} {score} پوائنٹس کے ساتھ جیتتا ہے!\n\nآخری اسکور:\n{scores}",
+    "line": "Player {pid}: {score} پوائنٹس\n"
+  },
+  "board_str": {
+    "title": "=== गोल्फ गेम===",
+    "discard": "डिस्कस पाइल: {card}",
+    "knocked": "प्लेयर {pid} छू गया!",
+    "player_header": "Player {pid} (Score: {score}):"
+  }
+}

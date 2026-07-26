@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "لائٹس آؤٹ وچ آپکا استقبال ہے! تُسے {size}x{size} گرڈ لائٹس ہن۔\nتُسے سارے لائٹس آف (نقطے دے ذریعے نمائش) کرنے ہن۔\nجب تُسیں لائٹ دباؤ، ایہ اپنے آپ نوں تے اپنے آس پاس دے پڑوسیاں (اوپر/تھلے/کھبے/سجے) نوں تبدیل کر دیتا ہے۔\nلائٹ دباو لئی [row col] ٹائپ کر۔ (0-انڈیکسڈ، اس لئی درست سीमا 0-{max_index} ہے)\nتُسے پہیلی حل کرن لئی {max_turns} چالیں تک ہن۔\nمہر: 'O' = لائٹ آن، '.' = لائٹ آف"
+  },
+  "board": {
+    "current_state": "موجودہ گرڈ ریاست (چال {moves_made}، {moves_left} چالیں باقی، {completion}% مکمل):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "عمل [row col] فارمیٹ وچ ہونا چاہیے جتھے سارے تے کول 0 توں {max_index} تک دے اکھڑے نمبر ہونے چاہیدے۔",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "बधाई. तुं पहेली {moves_used} चालमां सुलझववा माटे!",
+    "loss": "Game over! You used all {max_turns} moves without solving the puzzle. Final completion: {completion}%\nFinal state:\n{grid}"
+  }
+}

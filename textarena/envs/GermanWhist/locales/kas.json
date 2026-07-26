@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "The game begins. Trump suit: {trump_suit} (trump card: {trump_str}).",
+    "no_trump_card": "छान - नाह"
+  },
+  "player_prompt": {
+    "intro": "تہٕ پلےئر {player_id} چھُ جرمن وِسٹس مَنٛز.\n{phase_info}\nتہٕ {hand_size} کآرڈز ہولد کرتھہٕ.\nکآرڈ کھیلہٕ '[play N]'، جۆبہٕ N تہٕ تہٕ ہاتھس مَنٛز پوزیشن ہہ (مِثال '[play 3]')",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "प्लेइंग फेज: डेक छू ख़तम गासन. हर ट्रिक अज़ पेठ विजयी खातिर मोजो करने येवा."
+  },
+  "next_card": {
+    "playing_phase": "कुंते कार्डस छान एवं हवन -खेल छी शुरू गासन.",
+    "deck_empty": "डेक छू रिक्त -कुन ते कार्ड छुं एवं पेश करने.",
+    "available": "कार्ड ऑन ऑफरः {card}",
+    "available_trump": "कार्ड ऑफ़र: {card} (ट्रम्प)"
+  },
+  "invalid_move": {
+    "wrong_format": "अवैध चाल फॉर्मेट. [play N] इस्तिमाल करिथ छुस पन्नि हाथन मंज़ नवीं कार्ड खेवान।",
+    "bad_position": "युस ये कार्ड छी इ छान आसान ,तुमन हैज़ {hand_size}कार्ड",
+    "must_follow_suit": "तुमो करोख फॉलो त बै खेलो {lead_suit} कार्ड.",
+    "invalid_play": "ये कार्ड हक़ ने असिथ इस्तेमाल करने."
+  },
+  "game_action": {
+    "played": "प्लेयर {player_id} छू लिया {card}।"
+  },
+  "trick": {
+    "won": "پلےئر {winner_id} ٹرک جیتتھہٕ {card}",
+    "won_learning": "پلےئر {winner_id} ٹرک جیتتھہٕ {card} تہٕ چہہ مُکھ نِکَلنہٕ کآرڈ لیتھہٕ"
+  },
+  "phase": {
+    "learning_complete": "डेक छू ख़तम.लर्निंग फेज छू खत्म-हर बाक़ी ट्रिक गाछ जीत खातिर मोजुद येवा करने."
+  },
+  "draw": {
+    "winner_received": "तुमो त्रिक जीत्यो त तुमन {card} लखियो।",
+    "loser_received": "तुह्सीन हक़ीक़त खोदें ते डेक पेठ {card} ड्रॉ.",
+    "winner_preview": "{card} छे अने कार्ड पेश करीने."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "ٹرکس جیتنہٕ تہٕ کہِ - پلےئر 0: {tricks0}، پلےئر 1: {tricks1}",
+    "scores_playing": "اسکورنگ ٹرکس - پلےئر 0: {tricks0}، پلےئر 1: {tricks1}",
+    "phase": "फेज: {phase}",
+    "phase_learning": "فیز: {phase} ({remaining_cards} کآرڈز ڈیکس مَنٛز بچھنہٕ)"
+  },
+  "hand": {
+    "no_cards": "नो कार्ड्स अस",
+    "no_cards_in_hand": "नो कार्ड्स इन हेंड,",
+    "header": "तेरे हाथः छू , छू, छू. . .",
+    "trump_indicator": "(ट्रम्प) - ये क्या?",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "नो कार्ड्स प्लेड अवे अस थिस ट्रिक.",
+    "header": "करंट ट्रिक:",
+    "trump_indicator": "(ट्रम्प) - ये क्या?",
+    "card_line": "{observation}\n  پلےئر {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "गेम छुं सुरू कराः ।",
+    "header": "=== जर्मन व्हिस्ट गेम===",
+    "phase": "{observation} फेजः {phase}",
+    "trump_suit": "{observation}\nٹرمپ سوٹ: {trump_suit}",
+    "trump_card": "{observation}\nٹرمپ کآرڈ: {card}",
+    "cards_left": "{observation}\nکآرڈ Remaining ڈیکس مَنٛز: {count}",
+    "next_card": "{observation}\nاگلی کآرڈ جیتنے والے کس ٹہٕ: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} करंट ट्रिक:",
+    "trump_indicator": "(ट्रम्प) - ये क्या?",
+    "trick_line": "{observation}\n  پلےئر {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nپلےئر {player_id}: {scoring} اسکورنگ ٹرکس ({tricks} کل)، {hand_size} کآرڈز ہاتھس مَنٛز"
+  },
+  "outcome": {
+    "summary": "لرننگ فیز - پلےئر 0: {l0}، پلےئر 1: {l1}. پلیئنگ فیز - پلےئر 0: {p0}، پلےئر 1: {p1}. پلےئر {winner_id} جیتتھہٕ {winner_tricks} اسکورنگ ٹرکس!"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id}. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched."
+  },
+  "board": {
+    "current_board": "करंट बोर्ड: {board}",
+    "current_game_board": "करंट गेम बोर्ड: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "अवैध चाल प्रारूप. प्लेयर {player_id} स्क्वायर ब्रैकेट मंज़ वैलिड डायरेक्शन सेत जवाब नी दें.",
+    "out_of_bounds": "अमान्य चाल. प्लेयर {player_id} छू आउट ऑफ़ बाउंड पोजीशन चुनें.",
+    "same_card_twice": "अमान्य चाल. प्लेयर {player_id} छू दोन वारी अख कार्ड सिलेकश्न करमस.",
+    "already_matched": "Invalid move. Player {player_id} selected one or both cards that have already been matched."
+  },
+  "game_message": {
+    "cards_match": "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
+    "cards_no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+  },
+  "outcome": {
+    "draw": "दुनवई प्लेयर क्र कार्डक एवा नंबर मैच.",
+    "win": "प्लेयर {winner_id} छी जीतनी !",
+    "turn_limit": "टर्न सीमा प्राप्त हो गई है। खेल समाप्त हो गया है। प्लेयर 0 ने {score_0} अंक प्राप्त किए, प्लेयर 1 ने {score_1} अंक प्राप्त किए।",
+    "turn_limit_win": "{reason} प्लेयर {winner_id} ने जीत हासिल की है!"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Mastermind.\nYou need to find the code that is {code_length} digits long, each digit from 1 to {num_numbers}, {repeats}.\nIn your response, you can submit your guess in the following format: '[2 1 4 5]'.\nAfter each guess, you will receive feedback in the form of black and white pegs.\nA black peg indicates a correct digit in the correct position, while a white peg indicates a correct digit in the wrong position.\nYou have {max_turns} turns to guess the code.\n",
+    "with_repeats": "मुमकिन रिपीट्स सेत.",
+    "no_duplicates": "ड्युप्लिकेटस न' साथ।"
+  },
+  "invalid_move": {
+    "wrong_format": "तुहुं ने जवाब दीच स्पेस सेपरेड लिस्ट साथ युस नंबर छी एम् आय लपेट कारण स्क्वायर ब्रैकेट मंज़",
+    "not_integers": "सलीम एंट्रीज छू वैलिड इंटेजर असा.",
+    "wrong_length": "The guess should contain exactly {code_length} numbers.",
+    "out_of_range": "सलीम नंबर छू 1 ते {num_numbers} दरमियान असा.",
+    "duplicates_not_allowed": "डुप्लिकेट नंबर छी ने एवं ेमो साथ इस्तेमाल करने",
+    "repeated_guess": "You have already guessed {guess}. Please try a different guess."
+  },
+  "game_action": {
+    "feedback": "Submitted [{guess}]. Feedback: {black_pegs} black peg(s), {white_pegs} white peg(s)."
+  },
+  "outcome": {
+    "win": "You have cracked the code, solving {black_pegs} out of {code_length} pegs correctly",
+    "turn_limit": "Turn limit reached. You guessed {percent} percent of the numbers correctly."
+  }
+}

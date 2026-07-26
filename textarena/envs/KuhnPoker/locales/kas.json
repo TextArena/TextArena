@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a {max_rounds} round game of Kuhn Poker.\nGame Rules:\n- Kuhn Poker uses a 3-card deck with J, Q, K (J lowest, K highest)\n- Each player antes {ante} chip and receives 1 card each round (note that the cards are dealt without replacement, so you cannot have the same card as your opponent).\n- Game continues for {max_rounds} rounds\n- The player with the most chips after all rounds wins\nAction Rules:\n- '[check]': Pass without betting (only if no bet is on the table)\n- '[bet]': Add 1 chip to the pot (only if no bet is on the table)\n- '[call]': Match an opponent's bet by adding 1 chip to the pot\n- '[fold]': Surrender your hand and let your opponent win the pot"
+  },
+  "init_round": {
+    "round_start": "### राउंड {current_round} शुरू हो रहा है {max_rounds} राउंड्स में से. आपका कार्ड है: '{player_card}'",
+    "available_actions": "तुह्य़ हेकिव यिथः {available_actions} कारकरदगी।"
+  },
+  "invalid_move": {
+    "wrong_format": "एक्शन [Check], [Bet], [Call], या [Fold] होना चाहिए.",
+    "not_legal": "एक्शन मट {legal_actions}।"
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "तुह्य़ हेकिव यिथ कनि कारः। {legal_actions} ।",
+    "round_summary": "{reason} हाल के स्कोर: प्लेयर 0: '{player_0_chips}'; प्लेयर 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "शोडाउन: प्लेयर {winner} का {winner_card} प्लेयर {loser} का {loser_card} को हराता है. प्लेयर {winner} {pot_value} चिप्स का पॉट जीतता है."
+  },
+  "outcome": {
+    "draw": "{max_rounds} राउंड्स किस आखिरस पेठ, दुनवई प्लेयर आस बराबर नंबर चिप्स.",
+    "round_win": "प्लेयर {player_id} छूटे।",
+    "winner_player0": "प्लेयर 0 गेन बिथ मोरे चिप्स इन थे एंड ऑफ़ आल {max_rounds} राउंड्स.",
+    "winner_player1": "प्लेयर 1 गेन बिथ मोरे चिप्स इन एन्ड ऑफ़ आल {max_rounds} राउंड्स."
+  }
+}

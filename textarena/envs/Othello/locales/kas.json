@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "गेम बोर्डः {board}",
+    "valid_moves": "{observation}\nवैध चालें: {moves}",
+    "no_valid_moves_reset": "{observation} नो वैलिड मूव्स - यू मई बी स्किप.",
+    "no_valid_moves_step": "{observation} नो वैलिड मूव्स तुम होल्ड कर सकते हैं।",
+    "scores_reset": "{observation}\nहाल के स्कोर - काला: {black_count}, सफेद: {white_count}\n",
+    "scores_step": "{observation}\nस्कोर - काला: {black_count}, सफेद: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "मूव मच अस ऑफ़ थे फॉर्म [row, col].",
+    "illegal": "गैरकानूनी चाल. वैध चालः {valid}"
+  },
+  "game_action": {
+    "skipped": "प्लेयर {pid} आव पानें मोड़ पेठ बाज राला.",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "खिलाड़ी {pid} ({piece}) के पास कोई वैध चाल नहीं है और उन्हें छोड़ना होगा。"
+  },
+  "outcome": {
+    "black_wins": "ब्लैक विनस {black_count}-{white_count}.",
+    "white_wins": "सफेद {white_count}-{black_count} से जीतता है।",
+    "draw": "{black_count}-{white_count} त्राव करो।"
+  }
+}

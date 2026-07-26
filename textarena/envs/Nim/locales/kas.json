@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "تُسی Player {player_id} ہو Nim وچ۔\nتہاڈا مقصد آخری بچیا वसتا لینا ہے۔\nہر واری، سِر्फ اک پائل چنیں تے اس توں اک یا اک توں زیادہ वसتاں ہٹاؤ۔\nفارمیٹ '[pile quantity]' ورتیں، جتھے پائل پائل انڈیکس ہے تے مقدار ہٹائی گئی वसتوں دی گنتی ہے۔\nउदाहरण دے لئی، '[0 3]' پائل 0 توں 3 वसتاں ہٹا دیندی ہے۔"
+  },
+  "state": {
+    "current_pile": "करंट पाइल: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "No valid move format found. Use '[pile quantity]'. कुनि वैलिड मोव फॉर्मेट वुछुन न आमुत। \"[[1]]\" इस्तेमाल करिथ।",
+    "correct_format_wrong_fields": "Player {player_id}, اہل نہیں۔ سٹونب {col} حدوں سے باہر ہے۔",
+    "out_of_range": "पाइल इंडेक्स {pile_index} छू रेंज नेबर.",
+    "non_positive": "Must remove at least 1 object.",
+    "exceeds_pile": "پائل {pile_index} توں {quantity} ہٹایا نہیں جاسکدا (فقط {pile_count} بچے ہوئے ہن)۔"
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "प्लेयर {player_id} ने आखरी ऑब्जेक्ट ले लिया!"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "बातचीत समाप्त हो गई {round} राउंड के लिए। कृपया '[Cooperate]' या '[Defect]' के साथ उत्तर दें {{}} में।",
+    "starting_round": "--- स्टार्टिंग राउंड {round} --- आसान तरीका ----- 1 .",
+    "round_summary": "राउंड {round} के परिणाम:\n{outcome}\nखिलाड़ी 0 ने {r0} अर्जित किया (कुल {score_0}), खिलाड़ी 1 ने {r1} अर्जित किया (कुल {score_1})।"
+  },
+  "outcome": {
+    "winner": "खिलाड़ी {winner} {win_score} - {lose_score} जीतता है।",
+    "draw": "ड्रा! दोनों खिलाड़ियों ने {s0} स्कोर किया।",
+    "round_both_cooperate": "दुनवई प्लेयर क्र मदद.",
+    "round_both_defect": "Both players defected.",
+    "round_p0_cooperates_p1_defects": "प्लेयर 0 क्र कोऑपरेट,प्लेअर 1 डिफेर्टेड.",
+    "round_p0_defects_p1_cooperates": "प्लेयर 0 डिफेक्ट, प्लेयर 1 कोऑपरेट."
+  }
+}
