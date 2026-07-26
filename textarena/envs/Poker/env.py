@@ -101,6 +101,7 @@ class PokerEnv(ta.Env):
             amt = min(amount, gs["player_chips"][pid])
             gs["player_chips"][pid] -= amt
             gs["player_bets"][pid]  += amt
+            gs["contributions"][pid] += amt
             gs["pot"] += amt
             if gs["player_chips"][pid] == 0: gs["all_in_players"].add(pid)
             return amt
@@ -201,6 +202,7 @@ class PokerEnv(ta.Env):
         def pay(player: int, chips: int):
             gs["player_chips"][player] -= chips
             gs["player_bets"][player]  += chips
+            gs["contributions"][player] += chips
             gs["pot"] += chips
             self._check_and_eliminate(player)
 
@@ -361,26 +363,67 @@ class PokerEnv(ta.Env):
         community_cards = ", ".join(f'{card["rank"]}{card["suit"]}' for card in gs['community_cards'])
         self.state.add_observation(message=self.m("showdown", "reveal", round=self.state.game_state["round"], reveals="\n".join(reveal), community=community_cards), observation_type=ta.ObservationType.GAME_MESSAGE)
 
-        # Evaluate best 5-card hand for each player
+        # Evaluate best 5-card hand for each player still in the hand
         scores = {pid: self._evaluate_hand(gs["player_hands"][pid] + gs["community_cards"]) for pid in active}
-        best_score = max(scores.values())
-        winners = [pid for pid, sc in scores.items() if sc == best_score]
 
-        # 3)  Award the pot ---------------------------------------------
-        pot = gs["pot"]
-        if len(winners) == 1:
-            gs["player_chips"][winners[0]] += pot
-            self.state.add_observation(message=self.m("showdown", "win", winner=winners[0], pot=pot), observation_type=ta.ObservationType.GAME_MESSAGE)
-        else:
-            share = pot // len(winners)
-            for w in winners: gs["player_chips"][w] += share
-            # house rule: odd chip (if any) to first winner
-            remainder = pot - share * len(winners)
-            if remainder: gs["player_chips"][winners[0]] += remainder
-            self.state.add_observation(message=self.m("showdown", "tie", winners=winners, share=share), observation_type=ta.ObservationType.GAME_MESSAGE)
+        # 3)  Award the pot(s) ------------------------------------------
+        # Split the hand's total contributions into main/side pots so an all-in
+        # short stack can only win the chips it actually matched (and any uncalled
+        # excess returns to its sole contributor). With no all-ins -- always the
+        # case heads-up -- this yields a single pot and is identical to a plain
+        # whole-pot award.
+        for amount, eligible in self._build_side_pots(gs["contributions"], gs["folded_players"]):
+            contenders = [pid for pid in eligible if pid in scores]
+            if not contenders:
+                continue
+            best_score = max(scores[pid] for pid in contenders)
+            winners = [pid for pid in contenders if scores[pid] == best_score]
+            if len(winners) == 1:
+                gs["player_chips"][winners[0]] += amount
+                self.state.add_observation(message=self.m("showdown", "win", winner=winners[0], pot=amount), observation_type=ta.ObservationType.GAME_MESSAGE)
+            else:
+                share = amount // len(winners)
+                for w in winners: gs["player_chips"][w] += share
+                # house rule: odd chip (if any) to the first (lowest-id) winner
+                remainder = amount - share * len(winners)
+                if remainder: gs["player_chips"][winners[0]] += remainder
+                self.state.add_observation(message=self.m("showdown", "tie", winners=winners, share=share), observation_type=ta.ObservationType.GAME_MESSAGE)
 
         gs["pot"] = 0
         self._eliminate_busted_players()
+
+    def _build_side_pots(self, contributions: Dict[int, int], folded: set) -> List[Tuple[int, List[int]]]:
+        """Split total contributed chips into main/side pots (standard hold'em).
+
+        At each distinct contribution level, every player who reached it puts in
+        the delta since the previous level; only players still in the hand (not
+        folded) are eligible to win that layer. Because the eligible set only ever
+        shrinks as the level rises, layers contested by the same players are
+        adjacent and get merged -- so a hand with no all-ins collapses to one pot.
+
+        Args:
+            contributions: total chips each player put in this hand (incl. folded).
+            folded: player ids that folded (contribute chips but cannot win).
+
+        Returns:
+            [(amount, eligible_pids), ...] ordered main pot first. The amounts sum
+            to the total contributed.
+        """
+        pots: List[Tuple[int, List[int]]] = []
+        prev = 0
+        for level in sorted({c for c in contributions.values() if c > 0}):
+            contributors = [pid for pid, c in contributions.items() if c >= level]
+            amount = (level - prev) * len(contributors)
+            prev = level
+            if amount == 0:
+                continue
+            eligible = [pid for pid in contributors if pid not in folded]
+            # Fold an orphan layer (all its contributors folded) into the prior pot.
+            if pots and (set(pots[-1][1]) == set(eligible) or not eligible):
+                pots[-1] = (pots[-1][0] + amount, pots[-1][1])
+            else:
+                pots.append((amount, eligible))
+        return pots
 
     def _evaluate_hand(self, cards: List[Dict[str, str]]) -> Tuple[int, List[int]]:
         """Return (category_rank, tiebreak_list).  Higher tuple wins."""
