@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-oplayer ilan bir {width}×{height} şəbəkədə.\nSiz ilan {player_id} idarə edirsiniz. Etibarlı hərəkətlər: '[up]'/'[down]'/'[left]'/'[right]' (və ya w/s/a/d).\nMəqsəd: ən uzun müddət yaşamaq və ya ən uzun olmaq və ən yüksək xal (turn limiti {max_turns} turn) almaq."
+  },
+  "board": {
+    "current": "حاضرداکی هیئت: {board}",
+    "after_moves": "Current Board State:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "مار {player_id} یئرلی حرکت سببین دن اؤلدو."
+  },
+  "outcome": {
+    "survived_win": "اویونچو {player_id} جانینی قورتاردی؛ باشقالاری دا هلاک اولدو.",
+    "all_dead_simul": "بوتون ائلانلار بیر آندا اؤلوبلر.",
+    "outlived": "اویونچو هامیسیندان داها چوخ یاشادی.",
+    "all_dead": "بوتون ائلانلار اؤلوب.",
+    "turn_limit": "دؤنوش حدینه چاتدی - ان یاخشی نومره لی اویونچولار تای-برئکده قالیرلار.",
+    "ranking": "{reason} نۆی final قروپلار (پیچیندن->یاخشییا): {groups}"
+  }
+}

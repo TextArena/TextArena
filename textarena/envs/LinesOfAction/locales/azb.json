@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "هیئت مدیره: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "فورمات e2e4 اولمالیدیر (کوردیناتلاردان،کوئوردئناتا).",
+    "no_piece": "〕 {side} fiquru {coord} üzərində yoxdur.",
+    "identical": "Source and destination identical.",
+    "not_straight_or_diagonal": "Move must be straight or diagonal.",
+    "wrong_distance": "Must move distance equal to pieces in line.",
+    "enemy_blocks": "دوشمن پارچاسي يولو باغلايير.",
+    "destination_own": "مقصد اؤزونون تکجه ایشله دیی بیر یئر."
+  },
+  "game_action": {
+    "moved": "Oyuncu {player_id} {from} -> {to} hərəkət etdi",
+    "captured_suffix": "Oyuncu {player_id} {from} -> {to} hərəkət etdi və düşmənə məxsus bir fiquru ələ keçirdi."
+  },
+  "outcome": {
+    "win": "بوتون پارچالار باغليدير.",
+    "draw_no_capture": "60 حرکت، توتولماز.",
+    "draw_repetition": "پوزيشن اوچ دفه تکرار اولونور."
+  }
+}

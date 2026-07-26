@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "HƏDƏF: {target}\n\nMövcud rəqəmlər:\n{numbers}",
+    "best": "{observation}\n\nƏn yaxşı nəticə: {best_value} (məsafə: {distance})\nƏn yaxşı ifadə: {best_expression}",
+    "history": "{observation}\n\nAddım tarixi:\n{moves}",
+    "progress": "{observation}\nCari irəliləyiş xalı: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "یالنیز ایندیکسلر. فرقلی اولمالیدیر و 0-{max_index} آرالیغیندا گرک اولسون.",
+    "invalid_operation": "غلط عملیات (صفرله بؤلوش و یا ساییسی اولمایان نتیجه)"
+  },
+  "outcome": {
+    "win": "عالی! دقیق هدف تاپدی: {target}",
+    "no_moves": "Daha heç bir hərəkət yoxdur. Ən yaxşı nəticə: {best_value} (hədəf: {target})",
+    "turn_limit": "Hərəkət limiti çatıldı. Ən yaxşı nəticə: {best_value} (hədəf: {target})"
+  }
+}

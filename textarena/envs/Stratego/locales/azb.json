@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "Current Board:\n\n{board}\nAvailable Moves: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Geçersiz eylem formatı. Oyuncu {player_id} [A0 B0] formatında bir hamle girmediniz.",
+    "invalid_coordinates": "یالنیز بیر حرکت فورماتی. اویونچو {player_id} صحیح کووردیناتلارینی ایچمه دی.",
+    "not_own_piece": "غیر معتبر حرکت فورماتی. اویونچو {player_id} اؤز تئلئفونلارینین بیریندن حرکته کئچمه لی دیر.",
+    "scout_through_pieces": "یالنیز بیر اویون فورماتی. {player_id} اوینایجی، ایشچی نی باشقا پارچالاردا حرکت ائتدیره بیلمیر.",
+    "scout_diagonal": "غیر معتبر حرکت فورماتی. اویونچو {player_id} بیر آچیقلاما ایشینی دیاقونا لیک یئرینه قویابیلمز.",
+    "non_scout_multi_square": "غیر معتبر حرکت فورماتی. اویونلار، آکائوستلاردان باشقا، بیر دفعه ده یالنیز بئر مربع کؤچوره بیلر.",
+    "move_into_lake": "غیر معتبر حرکت فورماتی. اویونچو {player_id} گؤله گئده بیلمز.",
+    "move_onto_own_piece": "یالنیز بیر حرکت فورماتی. اویونچو {player_id} اؤز تکه سینده حرکت ائده بیلمیر.",
+    "move_bomb_or_flag": "غیر معتبر حرکت فورماتی. اویونچو {player_id} بیر بومبا و یا بایراق یئرینه قویا بیلمز."
+  },
+  "game_action": {
+    "you_moved": "Siz parçanızı {source} den {dest} ye taşadınız.",
+    "opponent_moved": "Oyuncu {player_id} bir parçayı {source} den {dest} ye taşadı.",
+    "you_equal_ranks": "Siz parçanızı {source} den {dest} ye taşadınız. Hücum eden parça {attacking_rank} ve varış parçası {target_rank} idi. Rütbe aynı olduğundan, her iki parça da kaybedildi.",
+    "opponent_equal_ranks": "Oyuncu {player_id} bir parçayı {source} den {dest} ye taşadı. Hücum eden parça {attacking_rank} ve varış parçası {target_rank} idi. Rütbe aynı olduğundan, her iki parça da kaybedildi.",
+    "you_miner_defused": "Siz parçanızı {source} den {dest} ye taşadınız. Hücum eden parça {attacking_rank} ve varış parçası {target_rank} idi. Madenciler bombaları devre dışı bırakabildiğinden, siz savaşı kazandınız.",
+    "opponent_miner_defused": "Oyuncu {player_id} bir parçayı {source} den {dest} ye taşadı. Hücum eden parça {attacking_rank} ve varış parçası {target_rank} idi. Madenciler bombaları devre dışı bırakabildiğinden, siz savaşı kaybettiniz.",
+    "you_bomb_lost": "Siz parçanızı {source} den {dest} ye taşadınız. Hücum eden parça {attacking_rank} ve varış parçası {target_rank} idi. Saldırgan bir madenci olmadığından, siz savaşı kaybettiniz.",
+    "opponent_bomb_won": "Oyuncu {player_id} bir parçayı {source} dan {dest} ye taşadı. Hücum eden parça {attacking_rank} ve varış parçası {target_rank} idi. Saldırgan bir madenci olmadığından, siz savaşı kazandınız.",
+    "you_spy_won": "Siz parçanızı {source} den {dest} ye taşadınız. Hücum eden parça {attacking_rank} ve varış parçası {target_rank} idi. Saldırgan bir casus ve varış noktası bir mareşal olduğundan, siz savaşı kazandınız.",
+    "opponent_spy_lost": "Oyuncu {player_id} bir parçayı {source} den {dest} ye taşadı. Hücum eden parça {attacking_rank} ve varış parçası {target_rank} idi. Saldırgan bir casus ve varış noktası bir mareşal olduğundan, siz savaşı kaybettiniz.",
+    "you_higher_won": "Siz parçanızı {source} den {dest} ye taşadınız. Hücum eden parça {attacking_rank} ve varış parçası {target_rank} idi. Saldırgan varış noktasından daha yüksek rütbeli olduğundan, siz savaşı kazandınız.",
+    "opponent_higher_lost": "Oyuncu {player_id} bir parçayı {source} den {dest} ye taşadı. Hücum eden parça {attacking_rank} ve varış parçası {target_rank} idi. Saldırgan varış noktasından daha yüksek rütbeli olduğundan, siz savaşı kaybettiniz.",
+    "you_lower_lost": "Siz parçanızı {source} den {dest} ye taşadınız. Hücum eden parça {attacking_rank} ve varış parçası {target_rank} idi. Saldırgan varış noktasından daha düşük rütbeli olduğundan, siz savaşı kaybettiniz.",
+    "opponent_lower_won": "Oyuncu {player_id} bir parçayı {source} den {dest} ye taşadı. Hücum eden parça {attacking_rank} ve varış parçası {target_rank} idi. Saldırgan varış noktasından daha düşük rütbeli olduğundan, siz savaşı kazandınız."
+  },
+  "outcome": {
+    "flag_captured": "اویونچو {player_id} رقیبین بایراغینی توتدو!",
+    "no_movable_pieces": "Oyuncu {winner_id} kazandı! Oyuncu {loser_id} artık taşınabilir parçaları kalmadı."
+  }
+}

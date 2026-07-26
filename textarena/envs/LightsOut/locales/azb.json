@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Lights Out-a xoş gəlmisiniz! Siz {size}x{size} işıq şəbəkəsinə sahibsiniz.\nSizin məqsədiniz HƏRƏNİ işıqları SÖNDÜRMƏK-dir (nöqtə ilə təmsil olunur)\nSiz işığı sıxdığınız zaman, o özü və onun yaxın qonşuları (yuxarı/aşağı/sol/sağ) dəyişir.\nİşığı sıxmaq üçün [row col] yazın (0-indeksli, yəni etibarlı diapazon 0-{max_index}-dir).\nSiz puzzle-ı həll etmək üçün {max_turns} hərəkətə sahibsiniz.\nQeyd: 'O' = işıq YANIB, '.' = işıq SÖNDÜRÜB"
+  },
+  "board": {
+    "current_state": "Carı hal-hazırda şəbəkə vəziyyəti (Hərəkət {moves_made}, {moves_left} hərəkət qalıb, {completion}% tamamlanıb):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Fəaliyyət [row col] formatında olmalıdır, burada sətir və sütun 0-dan {max_index}-ə qədər olan ədədlərdir.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Congratulations! You solved the puzzle in {moves_used} moves!",
+    "loss": "Game over! You used all {max_turns} moves without solving the puzzle. Final completion: {completion}%\nFinal state:\n{grid}"
+  }
+}

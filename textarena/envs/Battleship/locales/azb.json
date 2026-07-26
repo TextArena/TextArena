@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id}. You are playing the Battleship game.\nYour goal is to sink all of your opponent's ships before they sink yours.\nOn your turn, you can fire missiles at specific coordinates in teh following format: '[a4]'. If the missile hits a ship, it is marked with 'X'. If it misses, it is marked with 'O'. In either scenarios, the game environment will inform you of your hits. If you have sunk a boat, the game environment will tell you!\nThe game ends when all of one player's ships have been sunk.\nYour initial board will show all of your ships placed and your opponent's hits on you, and your hits and misses on your opponent's board without showing your opponent's ships.\nHere is the initial board:\n"
+  },
+  "invalid_move": {
+    "wrong_format": "اویونچو، قوس قوللوقلارین ایچینده معتبر بیر کووردئناتلا جاواب وئرمه دی.",
+    "out_of_board": "مختصات {coord} خارج از تخته است.",
+    "already_fired": "مختصات {coord} قبلاً شلیک شده است."
+  },
+  "game_action": {
+    "you_sunk": "غرق شد! شما یک کشتی را در {coord} غرق کردید! تخته به روز شده شما:\n{view}",
+    "opp_sunk": "رقیب کشتی شما را در {coord} غرق کرد! تخته به روز شده شما:\n{view}",
+    "you_hit": "هدف را زدید! شما یک کشتی را در {coord} زدید! تخته به روز شده شما:\n{view}",
+    "opp_hit": "رقیب شما را در {coord} زد! تخته به روز شده شما:\n{view}",
+    "you_miss": "Miss! You missed the ship at {coord}! Your updated board:\n{view}",
+    "opp_miss": "رقیب شما را در {coord} از دست داد! تخته به روز شده شما:\n{view}"
+  },
+  "outcome": {
+    "win": "اویونچو {player_id} بوتون رقیبین گمی لرینی باتدیریب!"
+  }
+}

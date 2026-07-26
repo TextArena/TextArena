@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "Söhbət {round} turu üçün bitdi. Zəhmət olmasa \\boxed{{}} daxilində '[Cooperate]' və ya '[Defect]' ilə cavab verin.",
+    "starting_round": "--- باشلانغیج دورو {round} ----",
+    "round_summary": "Tur {round} nəticələri:\n{outcome}\nOyuncu 0, {r0} (cəmi {score_0}) qazandı, Oyuncu 1, {r1} (cəmi {score_1}) qazandı."
+  },
+  "outcome": {
+    "winner": "Oyuncu {winner} {win_score} - {lose_score} qazandı.",
+    "draw": "قرعه! هر ایکی اویونچو {s0} گل قازاندی.",
+    "round_both_cooperate": "ایکی اویونچو دا امکداشلیق ائدیردی.",
+    "round_both_defect": "هر ایکی اویونچو ده قاچدی.",
+    "round_p0_cooperates_p1_defects": "اویونچو 0 ایش بیرلیگی گؤستردی، اویونونجو 1 قاچدی.",
+    "round_p0_defects_p1_cooperates": "Player 0 defected, Player 1 cooperated."
+  }
+}
