@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Сез Нимда Уенчы {player_id} сез.\nСезнең максатыңыз соңгы калган объектны алу.\nҺәр чиратта, төгәл бер төен сайлагыз һәм аныңнан бер яки күп объектларны алыгыз.\n'[pile quantity]' форматын кулланыгыз, биредә төен - төен индексы, quantity - алынган объектлар саны.\nМисал өчен, '[0 3]' 0-нчы төеннән 3 объектны ала."
+  },
+  "state": {
+    "current_pile": "Хәзерге куыш: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Дөрес күчерү форматы табылмады. \"[pile quantity]\" кулланыгыз.",
+    "correct_format_wrong_fields": "Player {player_id}, Invalid action. Column {col} is out of bounds.",
+    "out_of_range": "{pile_index} багана индексы диапазоннан тыш.",
+    "non_positive": "Берәр әйберне алып куярга кирәк.",
+    "exceeds_pile": "Cannot remove {quantity} from pile {pile_index} (only {pile_count} left)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Уенчы {player_id} соңгы объектны алды!"
+  }
+}

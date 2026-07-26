@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Lights Out ка рәхим итегез! Сез {size}x{size} яктырткычлар рәшәткәсенә иясеңез.\nСезнең максатыңыз - БАРЛИК яктырткычларны СӨНДЕРЕҮ (нөктә белән күрсәтелгән)\nСез яктырткычны басканда, ул үзен һәм янындагы күрше яктырткычларны (өстән/астын/сул/уң) алмаштыра.\nЯктырткычны басыр өчен [row col] тип теркәгез (0 индекслы, шуңа күрә дөрес диапазон 0-{max_index}).\nСез пазлны хәл итәр өчен {max_turns} хәрәкәтләргә иясеңез.\nЛегенда: 'O' = яктырткыч ЯНА, '.' = яктырткыч СӨНДЕРЕЛГӘН"
+  },
+  "board": {
+    "current_state": "Хәзерге тәртип (Этап {moves_made}, {moves_left} хәрәкәт калды, {completion}% тәмам):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action must be in format [row col] where row and col are integers from 0 to {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Котлыйбыз! Сез {moves_used} хәрәкәтләре белән табышмакны чиштегез!",
+    "loss": "Уен тәмам! Сез {max_turns} хәрәкәтләрне пазлны хәл итмичә кулландыз. Тәмамлау: {completion}%\nТәмам хәле:\n{grid}"
+  }
+}

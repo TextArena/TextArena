@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Сез {player_id} уенчысыз 3 уенчылы Итерацияләнгән Төрмә Дилеммасында. Матч {num_rounds} раунд дәвам итә.\nРаунд структурасы:\n• {conv_rounds} ирекле чат борылышлары\n• 1 карар борылышы - оппонентларыңа бер токен тәкъдим итү: '[<opp-id> cooperate]' яки '[<opp-id> defect]' (яни '[1 defect] [2 cooperate]'; стандарт 'хезмәттәшлек'). \nПарлы payoff матрицасы (һәр бер тәртипсез парга кулланыла):\n  - Икесе дә хезмәттәшлек итә  ->  {reward}\n  - Икесе дә баш тарталар     ->  {punishment}\n  - Сез баш тартасыз, алар хезмәттәшлек итә -> {temptation}\n  - Сез хезмәттәшлек итәсез, алар баш тарталар -> {sucker}\nУенчыларның (уенчыларның) иң югары баллы барлык раундлар ахырында җиңү."
+  },
+  "round": {
+    "start": "─── {round} Раунд башлануы ───\tСез ирекле рәвештә киләчәк {conv_rounds} раундларда сөйләшә аласыз.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Раунд {round} - Нәтиҗәләр:",
+    "pair_line": "{observation}\n\t Player {i} vs Player {j} chose to {choice_i} and {choice_j} respectively (Player {i} gained {gain_i}, Player {j} gained {gain_j})",
+    "scores_open": "{observation} -> Хәзерге баллар: ",
+    "score_first": "{observation}Уенчы {player_id} ({score})",
+    "score_next": "{observation}; Уенчы {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Төп баллар: {scores}.  Төркемнәр рейтингы (иң начар→иң яхшы): {groups}"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Сез Golf (Карта Уены) уенын уйныйсыз - Уенчы {player_id}.\nМаксат: Бер турда иң түбән гомуми баллны алу. Әгәр колонкалар бер үк кыйммәтне бүлешсәләр, алар 0 дип санала.\nКарта кыйммәтләре: A=1, 2-10=йөз кыйммәте, J/Q=10, K=0\n\nГамәлләр (төгәл калыткаларны кулланыгыз):\n- '[draw]' - Колодадан чыгару\n- '[take]' - Бирдеткән урыныннан алу\n- '[swap X Y]' - Чыгарылган картаны X (рәт) Y (колонка) урыны белән алыштыру\n- '[discard]' - Чыгарылган картаны бирдеткәү"
+  },
+  "board": {
+    "drew": "Сез {card} чыгардыгыз:\nХәзер сез [swap X Y] яки [discard] кылырга тиеш",
+    "took": "Сез {card} алыгыз бирдеткән урыныннан\nСез аны [swap X Y] белән кулланырга тиеш (бирдеткә алмагыз)",
+    "peeked": "Сез ({row},{col}) урынын карадыгыз: {card}",
+    "turn_view": "Your hand:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Беркем дә юк ."
+  },
+  "options": {
+    "final_turns": "Ахыргы хөкемнәр! Сезнең вариантларыгыз: [draw], [take], [peek X Y]",
+    "draw": "Сезнең вариантларыгыз: [draw], [take]",
+    "must_swap": "You must: [swap X Y] (cannot discard cards from discard pile)",
+    "swap_or_discard": "Сез: [swap X Y] яки [discard] кылырга тиеш"
+  },
+  "hand": {
+    "no_cards": "Карталар юк .",
+    "header": "1 2 3 саны буенча:",
+    "row": "Рәт {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Уенчы {pid} {new} белән {old} алыштырды (урын: ({row},{col}))",
+    "discarded": "Уенчы {pid} {card} атты бирдеткән"
+  },
+  "message": {
+    "deck_empty": "Уен шунда ук тәмамлана.",
+    "knocked": "Уенчы {pid} тубыкланды! Һәр башка уенчыга бер өстәмә хөкем",
+    "final_round": "Уенчы {pid} {reason}! Һәр башка уенчыга бер өстәмә хөкем"
+  },
+  "reason": {
+    "all_revealed": "Барлык карталар ачылганмы ?"
+  },
+  "invalid": {
+    "wrong_action": "Тик бер калыткалы гамәлне кулланыгыз: [draw], [take], [swap X Y], [discard], [knock], яки [peek X Y]",
+    "discard_empty": "Чүпләр өеме буш!",
+    "must_draw_first": "Сез беренче [draw], [take], [knock], яки [peek X Y] кылырга тиеш",
+    "cannot_discard_taken": "Сез ташланган картаны кире кага алмыйсыз. Аны алыштырырга кирәк.",
+    "have_drawn_card": "Сез чыгарылган картаныңыз бар. Сез аны [swap X Y] яки [discard] кылырга тиеш",
+    "need_drawn_swap": "Смена өчен карта кирәк.",
+    "need_drawn_discard": "Бушлай картаны ташлар өчен, сезгә бер уенчы кирәк.",
+    "out_of_bounds": "Урын чикләрендә түгел. Рәт 1-{max_row}, колонка 1-{max_col} кулланыгыз",
+    "knock_with_card": "Карта белән кул чабып булмый. Башта үз чиратыңны тәмамла.",
+    "already_knocked": "Кемдер бу раундны инде узган.",
+    "already_revealed": "Бу карта инде ачылган!"
+  },
+  "summary": {
+    "full": "Уен тәмам! Уенчы {winner} {score} балл белән җиңде!\n\nАхыргы баллар:\n{scores}",
+    "line": "Уенчы {pid}: {score} балл"
+  },
+  "board_str": {
+    "title": "=== Гольф уены===",
+    "discard": "Кулдан ычкындыру: {card}",
+    "knocked": "Уенчы {pid} шакыды!",
+    "player_header": "Уенчы {pid} (Балл: {score}):"
+  }
+}

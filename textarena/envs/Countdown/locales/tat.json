@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "ТУГЫЗУ: {target}\n\nҖыелган саннар:\n{numbers}",
+    "best": "{observation}\n\nШулай булырга кадәр иң яхшы: {best_value} (аралык: {distance})\nИң яхшы тәртип: {best_expression}",
+    "history": "{observation}\n\nЭлекке чиратлар:\n{moves}",
+    "progress": "{observation}\nХәзерге алдынгылык баллы: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Хаксыз индекслар. 0-{max_index} аралыгында булырга тиешләр",
+    "invalid_operation": "Дөрес булмаган операция (нулгә бүлү яки бөтен саннан башка нәтиҗә)"
+  },
+  "outcome": {
+    "win": "Максатны таптык: {target}",
+    "no_moves": "Чиратлар бетте. Иң яхшы нәтиҗә: {best_value} (тугызу: {target})",
+    "turn_limit": "Чират чиге җитте. Иң яхшы нәтиҗә: {best_value} (тугызу: {target})"
+  }
+}
