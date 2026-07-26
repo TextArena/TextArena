@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Nang ai Hkum {player_id} la Three-Player Tic Tac Toe na.\nNang shi ai '{symbol}'.\nNang hkum shingrai na ga htung ra ai 5x5 hkum hta na, shi htung ga ai hkru hkra 4.\nHkru hkra ga ai, hkum hta, hkum hkrang, hkum shingrai na ga ai.\nNang shingrai na ga ai '[4]' ga ai, hkum shingrai 4 na htung ra ai."
+  },
+  "board": {
+    "current_board": "Hkum Hta Bra: \n\n{board}\n\nShingrai Hta: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hkum shingrai htung ra ai. '[cell]' ga ai, hkum shingrai 0-{max_cell} na ga htung ra ai.",
+    "out_of_range": "Hkum shingrai na mat wa ai: {cell}. Hkum shingrai 0-{max_cell} na ga htung ra ai.",
+    "already_occupied": "Cell {cell} gaw masha ni nga sai.",
+    "made_invalid": "Player {player_id} gaw n htuk ai shamu shamawt lam galaw sai."
+  },
+  "game_action": {
+    "placed": "Hkum {player_id} shi htu ai ({symbol}) htung ga ai ({row}, {col}) na."
+  },
+  "outcome": {
+    "win": "Player {player_id} ({symbol}) wins!",
+    "draw": "The game is a draw!"
+  }
+}

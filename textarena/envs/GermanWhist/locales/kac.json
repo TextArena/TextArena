@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "ဂိမ်း စတင္တယ္. တရာ အမျိုးအစား: {trump_suit} (တရာ ကတ်: {trump_str}).",
+    "no_trump_card": "n nga ai"
+  },
+  "player_prompt": {
+    "intro": "သင္ ကစားသမား {player_id} က ဂျာမန္ ဝစ္ ဂိမ္းမ်ားမ်ား. \n{phase_info}\nသင္ လက္ထဲ ကတ် {hand_size} ပဲ ရိုက္တယ္. \n'[play N]' နဲ့ ကတ် ကစားလိုက္ (ဥပမာ '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "No card is on offer - the playing phase has begun.",
+    "deck_empty": "Dai hta, hpa mung n lawm ai.",
+    "available": "Card jaw da ai lam: {card}",
+    "available_trump": "Card jaw da ai: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "N jaw ai shamu shamawt hkrang. Na a lata hta nga ai Nth card hpe ginsup na matu '[play N]' hpe lang u.",
+    "bad_position": "Dai card shara gaw n nga ai. Nang hta {hand_size} cards rawng ai.",
+    "must_follow_suit": "Dai zawn galaw nna, {lead_suit} hpe ginsup ra ai.",
+    "invalid_play": "Dai gaw n mai galaw ai."
+  },
+  "game_action": {
+    "played": "ကစားသမား {player_id} က {card} ကတ် ကစားလိုက္တယ္."
+  },
+  "trick": {
+    "won": "ကစားသမား {winner_id} {card} နဲ့ တရာ အနိုင္ရတယ္.",
+    "won_learning": "ကစားသမား {winner_id} {card} နဲ့ တရာ အနိုင္ရတယ္ နဲ့ မျက်နှာ ဖွင့္ ကတ် ယူလိုက္တယ္."
+  },
+  "phase": {
+    "learning_complete": "The deck is exhausted. The learning phase is over - every remaining trick counts towards victory."
+  },
+  "draw": {
+    "winner_received": "Nang awng dang nna {card} lu wa ai.",
+    "loser_received": "Nang gaw hkalem hkalau ai lam hpe sum mat nna, {card} ngu ai lawu na sumla kaw nna lata dat u.",
+    "winner_preview": "Hpang na card gaw {card} re."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "တရာ အနိုင္ရတဲ့ အရည် - ကစားသမား 0: {tricks0}, ကစားသမား 1: {tricks1}",
+    "scores_playing": "ရမည့္ တရာ - ကစားသမား 0: {tricks0}, ကစားသမား 1: {tricks1}",
+    "phase": "Daw: {phase}",
+    "phase_learning": "Phase: {phase} ({remaining_cards} deck hta ngam nga ai card ni)"
+  },
+  "hand": {
+    "no_cards": "No cards",
+    "no_cards_in_hand": "No cards in hand",
+    "header": "Na a lata:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "No cards played yet this trick.",
+    "header": "Current trick:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  ကစားသမား {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Game n hpang sai.",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nတရာ အမျိုးအစား: {trump_suit}",
+    "trump_card": "{observation}\nတရာ ကတ်: {card}",
+    "cards_left": "{observation}\nကတ် ဒေတာ အတြင္း ကျန်တဲ့ အရည်တယ္: {count}",
+    "next_card": "{observation}\nအနိုင္ရှင် အောက်မ်း ကတ်: {card}",
+    "blank": "{observation}  hpe mu lu ai.",
+    "current_trick": "{observation}\nCurrent trick:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  ကစားသမား {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nကစားသမား {player_id}: {scoring} ရမည့္ တရာ ({tricks} စုစုေပါင္း), {hand_size} လက္ထဲ ကတ်"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

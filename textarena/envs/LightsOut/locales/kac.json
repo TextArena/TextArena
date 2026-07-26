@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Lights Out! gaw shani hkum hkra! Nga {size}x{size} hkum hpe gaw hkra ai. \nNga hkum hpe gaw shani hkum sha gaw na re (hkum sha hkra '.') \nNga hkum hpe gaw hkra ai, hkum sha hkra ai na hkum sha gaw hkra ai (up/down/left/right). \nType [row col] hkum hpe gaw hkra ai (0-indexed, valid range 0-{max_index}). \nNga {max_turns} hte galaw ai puzzle hkum sha gaw na re. \nLegend: 'O' = light ON, '.' = light OFF"
+  },
+  "board": {
+    "current_state": "Hkum hpe gaw shani (Move {moves_made}, {moves_left} hte galaw ai, {completion}% shada): \n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hkum hpe gaw shani hkum sha ai [row col] ya ai, ci row col hkum sha 0 na {max_index} ya ai.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Nga hpaji! Nga {moves_used} hte galaw ai puzzle hkum sha gaw re.",
+    "loss": "Game over! You used all {max_turns} moves without solving the puzzle. Final completion: {completion}%\nFinal state:\n{grid}"
+  }
+}

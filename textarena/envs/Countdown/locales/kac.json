@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Nang Countdown numbers game kaw na ai!\nGoal: Htawng shi kaw +, -, *, / kaw na target kaw tsang ai.\nHkawhkam tsang kaba: [i j op] i, j htawng shi, op htawng operation.\nExample: [0 2 *] 0 kaw 2 kaw htawng shi kaw *.\nDivision kaw whole numbers kaw tsang ai."
+  },
+  "board": {
+    "header": "TARGET: {target}\n\nAvailable numbers:\n{numbers}",
+    "best": "{observation}\n\nHkum tsang ai: {best_value} (htawng: {distance})\nHkum tsang shi: {best_expression}",
+    "history": "{observation}\n\nMove history:\n{moves}",
+    "progress": "{observation}\nHkum tsang shaga ai: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "N jaw ai index ni. n bung hkat ra nna 0-{max_index} brawng hta nga na rai nga ai.",
+    "invalid_operation": "N jaw ai bungli (zero hte garan nna lu la ai, n hkum sumhpa re ai)"
+  },
+  "outcome": {
+    "win": "Perfect! Found exact target: {target}",
+    "no_moves": "Hkum tsang kaba ai. Hkum tsang shi: {best_value} (target: {target})",
+    "turn_limit": "Turn limit reached. Best result: {best_value} (target: {target})"
+  }
+}

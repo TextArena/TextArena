@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Hpungtau gaw, ra ai lam ni n nga tim hpaga ga sadi hpe hkap la na matu shakut wa ai.",
+    "out_of_range": "Player {player_id}, မဲ့စားခြင်း။ Column {col} နေရာမရှိပါ။",
+    "already_full": "Player {player_id}, မဲ့စားခြင်း။ Column {col} ပြည့်နေပါသည်။",
+    "proposing_with_no_resource": "Player {player_id} gaw ra ai resource n lu shi yang trade offer jaw na shakut wa sai.",
+    "incorrect_offer_format": "Player {player_id} gaw n jaw ai hkrang hte trade offer galaw dat sai.",
+    "no_new_offer": "Player {player_id} gaw hpa mung n jaw ai."
+  },
+  "offers": {
+    "reject": "Player {player_id} rejected the trade offer.",
+    "accept": "Player {acceptor_id} က Player {proposer_id} မှ ကုန်သွယ်ရေး တင်ဒါကို လက်ခံပါသည်။",
+    "proposal": "Player {player_id} က Player {opponent_id} ကို ဤသို့ တင်ဒါတင်ပါသည်။ တင်ဒါပစ္စည်းများ။ {offered} -> တောင်းဆိုပစ္စည်းများ။ {requested}"
+  },
+  "outcome": {
+    "win": "Player {winner_id} won by having a larger gain in inventory value.",
+    "draw": "Same change in inventory value for all players. Draw."
+  }
+}

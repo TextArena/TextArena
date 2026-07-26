@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "သင်သည် Player {player_id} ဖြစ်၍ Pig Dice ကစားနေပါသည်။\n\nစည်းမျဉ်းများ:\n- သင့် လုပ်ဆောင်ချိန်တွင်၊ သင် '[roll]' သို့ '[hold]' ကို ရွေးချယ်နိုင်ပါသည်\n- 2-6 ကို ရိုက်ချိန်: သင့် လုပ်ဆောင်ချိန် စုစုပေါင်း တွင် ထပ်ခြင်း\n- 1 ကို ရိုက်ချိန်: သင့် လုပ်ဆောင်ချိန် စုစုပေါင်း ဆုံးရှုံး၍ လုပ်ဆောင်ချိန် ပြီးဆုံး\n- ထိန်းသိမ်း: သင့် လုပ်ဆောင်ချိန် စုစုပေါင်း ကို သင့် မှတ်စုံ တွင် ထပ်၍ လုပ်ဆောင်ချိန် ပြီးဆုံး\n- {winning_score} မှတ်စုံ ရရှိသူ အနိုင်ရသည်\n\nသင့် လုပ်ဆောင်ချိန် တွင်၊ သင့်အား လက်ရှိ မှတ်စုံ များ နှင့် လုပ်ဆောင်ချိန် စုစုပေါင်း ကို မြင်နိုင်မည်။\n'[roll]' ကို ရိုက်ချိန် အတွက် သို့ '[hold]' ကို သင့် မှတ်စုံ ကို ဘဏ်တွင် ထားရှိချိန် အတွက် တုံ့ပြန်ပါ။"
+  },
+  "invalid_move": {
+    "invalid_action": "လုပ်ဆောင်မှု ဖွဲ့စည်းပုံ မှားယွင်း။ '[roll]' သို့ '[hold]' ကို အသုံးပြုပါ။"
+  },
+  "actions": {
+    "player_busted": "Player {player_id} busted, losing {turn_total} points!",
+    "player_hold": "Player {player_id} ထိန်းသိမ်း၍ {turn_total} မှတ်စုံ ဘဏ်တွင် ထားရှိခဲ့။"
+  },
+  "board": {
+    "player": "Player 0: '{score_0}'; Player 1: '{score_1}'",
+    "current_total_scores": "Current Total Scores: {scores}\nYour current turn total is {turn_total}.",
+    "roll_history": "{observation}\nသင့် လှည့် မှတ်တမ်း အတွက်: {roll_history}",
+    "first_roll": "{observation}\nသင့် လုပ်ဆောင်ချိန်၏ ပထမ လှည့်",
+    "available_actions": "{observation}\nလုပ်ဆောင်နိုင်သော အရာများ: '[roll]' သို့ '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Player {winner_id} won by having a higher score at the turn limit ({scores})",
+    "winner_by_score": "Player {winner_id} သည် {winning_score} မှတ်စုံ ရရှိခြင်း ဖြင့် အနိုင်ရခဲ့!",
+    "draw": "Turn limit hpe dep sai rai nna, ginsup ai ni yawng a score gaw bung nga ai: {scores}"
+  }
+}

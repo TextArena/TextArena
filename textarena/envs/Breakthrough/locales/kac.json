@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are playing {color} in a game of Breakthrough. You move {direction} on an {board_size}x{board_size} board.\nIn your turn you can move a single piece one step forward or diagonally forward.\nA piece may only move diagonally if an opponent piece is there, and only move into such a preoccupied square in a diagonal step.\nWhen stepping into a square with an opponent piece, you capture it and the opponent's piece is removed permanently from the board.\nUse UCI-like notation in brackets, e.g. [a2a3] to move from a2 to a3.\n* 'a' corresponds to the leftmost column, '1' is the bottom row (from White's perspective).\n* Blacks's home row is the top row (row 8 for an 8x8). White's home row is the bottom row (row 1 for an 8x8).\nThe first player whose piece reaches the opponent's home row wins. If your pieces are all captured, you lose."
+  },
+  "invalid_move": {
+    "wrong_format": "Algebraic notation hpe gaw [a2a3] zawn re ai bracketed hku ka u.",
+    "out_of_bounds": "Move is out of board bounds.",
+    "illegal": "Dai zawn galaw ai gaw, Breakthrough tara ni hpe n hkan sa na matu re. (sh) nang hte seng nna n rai yang she mai byin ai."
+  },
+  "game_action": {
+    "moved": "Player {player_id} hkrang {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "White reached Black's home row.",
+    "black_reached": "Black reached White's home row.",
+    "white_captured": "Hpraw ni yawng hpe lu rim la sai.",
+    "black_captured": "Hkum shan n kaja ai ni yawng hpe rim la lu sai.",
+    "no_moves": "Player {player_id} gaw htawt lu na n re."
+  }
+}

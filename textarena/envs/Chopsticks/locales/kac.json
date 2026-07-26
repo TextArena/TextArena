@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Chopsticks. On your turn, choose one of:\n  + Attack:  '[attack M O]'  where M=your hand (0 or 1), O=opponent hand (0 or 1).\n    - Opponent's hand count increases by your hand; if >=5, it becomes 0.\n  + Split:   '[split L R]'  to redistribute your total fingers into L and R (L+R = your total).\nReply with exactly one of those commands."
+  },
+  "board": {
+    "current_board": "Current Board:\nPlayer 0: {hands_0}\nPlayer 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Your hand {my_idx} is dead.",
+    "opp_hand_dead": "Ninghkap ai lata {opp_idx} gaw si mat sai.",
+    "split_sum": "Daw lahkawng garan yang sum gaw {total} rai ra ai.",
+    "split_no_change": "Split gaw na a lata hpe galai kau ra ai.",
+    "invalid_command": "Invalid move. Use “[attack M O]” or “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} attacks P{opp_id}’s hand {opp_idx}: it goes from {opp_val} to {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Hkap gasat ai wa a lata lahkawng yan si mat sai.",
+    "draw": "Hpang jahtum na matu, dai hpe galaw u."
+  }
+}

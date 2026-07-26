@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Game Board: {board} (Jinghpaw hku gaw, JINGHPAWNG)",
+    "valid_moves": "{observation}\nHkum Hkaw Htaung: {moves}",
+    "no_valid_moves_reset": "{observation} Hkam kaja ai lam n nga yang, lai kau ra na re.",
+    "no_valid_moves_step": "{observation} Hkam kaja ai lam n nga yang, nang lai kau ra na re.",
+    "scores_reset": "{observation}\nHkum Hkaw Htaung - Black: {black_count}, White: {white_count}\n",
+    "scores_step": "{observation}\nHkum Hkaw Htaung - Black: {black_count}, White: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Shara gaw [row, col] re.",
+    "illegal": "Illegal move. Valid moves: {valid}"
+  },
+  "game_action": {
+    "skipped": "Player {pid} gaw shi a turn hpe lai kau ra ai.",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "N Hkap {pid} ({piece}) htai hkum htaung kaw na matu sha ai."
+  },
+  "outcome": {
+    "black_wins": "Black gaw awng dang ai {black_count}-{white_count}.",
+    "white_wins": "Hpraw ni dang ai {white_count}-{black_count}.",
+    "draw": "Nhtoi {black_count}-{white_count}."
+  }
+}
