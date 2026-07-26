@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Selamat datang di Lights Out! Anda memiliki grid cahaya {size}x{size}.\nTujuan Anda adalah mematikan SEMUA cahaya (direpresentasikan oleh '.')\nKetika Anda menekan cahaya, itu akan mengubah dirinya SENDIRI dan tetangga yang berdekatan (atas/bawah/kiri/kanan).\nKetik [row col] untuk menekan cahaya (0-indeks, sehingga rentang yang valid adalah 0-{max_index}).\nAnda memiliki hingga {max_turns} gerakan untuk memecahkan teka-teki.\nLegenda: 'O' = cahaya NYALA, '.' = cahaya MATI"
+  },
+  "board": {
+    "current_state": "Keadaan grid saat ini (Gerakan {moves_made}, {moves_left} gerakan tersisa, {completion}% lengkap):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Tindakan harus dalam format [row col] di mana baris wan kolom adalah bilangan bulat dari 0 sampai dengan {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Selamat! Kamu sudah memecahkan teka-teki dalam gerakan {moves_used}! (bahasa Inggris: \"You have solved the puzzle in [0]) moves!\"",
+    "loss": "Permainan berakhir! Anda menggunakan semua {max_turns} gerakan tanpa memecahkan teka-teki. Penyelesaian akhir: {completion}%\nKeadaan akhir:\n{grid}"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Kamu adalah Pemain {player_id} dalam Iterated Prisoner's Dilemma nang bajalan {num_rounds} ronde.\n\nStruktur Gim:\n- Sabalum tiap keputusan kamu punya {total_conversation_rounds} giliran gasan berkomunikasi bebas.\n- Imbah itu, kedua pemain sacara serentak memilih gasan kerjasama atau menghianati.\n\nMatriks Pembayaran (tetap saban ronde):\n- Kaduanya Kerjasama ➜ masing-masing {cooperate_reward}\n- Kaduanya Menghianati ➜ masing-masing {mutual_defect_reward}\n- Sabuting Menghianati, sabuting Kerjasama ➜ Penghianat {defect_reward}, Pekerja sama {sucker_reward}\n\nCara Bermain:\n- Saat pembicaraan: ketik teks apa saja kamu kehendaki.\n- Saat fase keputusan: cantumkan '[Cooperate]' atau '[Defect]' (tanpa memandang huruf besar/kecil). Kamu boleh menambahkan teks tambahan sabalum/sesudah token."
+  },
+  "phases": {
+    "conversation_finished": "Pembicaraan sudah rampung gasan ronde {round}. Silakan jawab lawan '[Cooperate]' atau '[Defect]' dalam \\boxed{{}}.",
+    "starting_round": "--- Mulai putaran {round} --- mulai dari urutan pertama (pembagian) ----> akhir babak kedua (pembagian)",
+    "round_summary": "Hasil ronde {round}:\n{outcome}\nPemain 0 dapatkan {r0} (jumlah {score_0}), Pemain 1 dapatkan {r1} (jumlah {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "Draw! Kadua pamain mancetak {s0}.",
+    "round_both_cooperate": "Kadua pamain itu bagawi basamaan.",
+    "round_both_defect": "Kadua pamain maninggal.",
+    "round_p0_cooperates_p1_defects": "Pamuter 0 bagawi, pamutar 1 manyarang.",
+    "round_p0_defects_p1_cooperates": "Pamuter 0 manyimpang, pamutar 1 bakarajo."
+  }
+}

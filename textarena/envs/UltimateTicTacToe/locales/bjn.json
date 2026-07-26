@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Papan nang wahini: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Pindah harus dalam bentuk [macro micro] lawan angka 0-8.",
+    "out_of_range": "Indeks masing-masing harus antara 0 wan 8.",
+    "index_out_of_range": "Papan mikro, baris atawa kolom kada dalam jangkauan.",
+    "cell_occupied": "Selnya sudah ditempati.",
+    "wrong_micro_board": "Pamain harus bamainan di papan mikro nang sebelah.",
+    "micro_board_won": "Papan mikro sudah dimenangkan."
+  },
+  "next_board": {
+    "any": "apa jua papan mikro",
+    "specific": "papan mikro {nxt} (simbol nang lain)"
+  },
+  "game_action": {
+    "played": "Pamain {player_id} mamain di papan halus {macro_idx}, sel {micro_idx} (baris {row}, kolom {col}). Pamain {opponent_id} kini harus mamain di {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Pamain {player_id} manang di Ultimate Tic Tac Toe!",
+    "draw": "Permainan ini imbang!"
+  }
+}

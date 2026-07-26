@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an {num_players}-player Liar's Dice game.\nRules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\nIf you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins."
+  },
+  "board": {
+    "per_player": "\tPemain {p}: {d}",
+    "new_round": "\nRonde baru - Dadu sisa: {dice_summary}\nDadu kamu saat ini adalah: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Player {current_player_id} calls! The actual count of face {face_value} is {count}, which is LESS than {quantity}.\nPlayer {loser_id} (the last bidder) loses one die.",
+    "caller_loses": "Pemain {current_player_id} manyampaikan panggilan! Jumlah aktual wajah {face_value} adalah {count}, yang >= {quantity}.\nPemain {loser_id} (panggil) kehilangan satu dadu."
+  },
+  "action": {
+    "bid_announce": "Pemain {player_id} manyampaikan tawaran {quantity} lawan wajah {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Panggilan nang digawi tanpa tawaran sabalumnya.",
+    "invalid_bid": "Penawaran kada sah: {reason}",
+    "not_recognized": "Tindakan tidak dikenali sebagai '[Bid: X, Y]' atau '[Call]' yang valid. Tindakan yang dikirim: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Kuantitas hanyar {new_quantity} labih randah pada kuantitas nang ada {current_quantity}.",
+    "face_lower": "Nilai nominal hanyar {new_face_value} labih randah dari nilai arus {current_face_value}.",
+    "identical": "Penawaran sama lawan penawaran saat ini.",
+    "face_range": "Nilai nominal harus antara 1 lawan 6."
+  },
+  "message": {
+    "eliminated_invalid": "Pamain {player_id} dihilangakan ulih pamindahan nang kada sah."
+  },
+  "outcome": {
+    "win": "Pemain {winner} menang! Peringkat akhir: {final_ranking}"
+  }
+}

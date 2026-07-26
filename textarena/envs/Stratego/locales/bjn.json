@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Kamu adalah Pemain {player_id} di Stratego.\nTujuanmu adalah menangkap Bendera lawan atau menghilangkan semua pièce lawan yang dapat digérakkan.\nPasukanmu sudah ditempatkan untukmu di papan, termasuk Bendera, Bom, dan pièce lainnya dengan pangkat yang bervariasi.\n\n### Instruksi Permainan\n1. **Aturan Gérakan:**\n   - Pada giliranmu, kamu dapat menggérakkan satu pièce dengan satu langkah ke kotak yang berdekatan (atas, bawah, kiri, atau kanan) yang sudah ditempati oleh pièce-mu.\n   - Contoh: Sebuah pièce dapat digérakkan dari A1 ke B1 atau A1 ke A2 jika B1 dan A2 tidak ditempati oleh pièce pemain yang sama.\n   - Jika pièce yang dipilih adalah Bom atau Bendera, maka tidak dapat digérakkan.\n2. **Pertempuran:**\n   - Jika kamu menggérakkan pièce ke kotak yang ditempati oleh pièce lawan, maka pertempuran akan terjadi:\n     - Pièce dengan pangkat yang lebih tinggi menang dan menghilangkan pièce lawan.\n     - Jika pangkatnya sama, maka kedua pièce dihilangkan dari papan.\n     - **Kasus Khusus:**\n       - Bom menghilangkan pièce penyerang kecuali Penambang, yang dapat mematikan Bom.\n       - Mata-mata dapat mengalahkan Marsyal jika Mata-mata menyerang lebih dulu, tetapi kalah dengan pièce lainnya.\n3. **Tujuan Strategis:**\n   - Identifikasi pièce lawan melalui gérakan dan pertempuran.\n   - Lindungi Bendera-mu sambil mencoba menangkap Bendera lawan.\n   - Gunakan Pengintai secara strategis untuk mendapatkan informasi tentang pièce lawan dan menyerang yang lemah.\n\n### Cara Membuat Gérakan:\n1. Tentukan koordinat pièce yang ingin kamu gérakkan dan tujuannya.\n2. Gunakan format: [A0 B0], di mana A0 adalah posisi sumber, dan B0 adalah tujuan.\n   - Contoh: Untuk menggérakkan sebuah pièce dari baris 0, kolom 0 ke baris 1, kolom 0, masukkan [A0 B0].\n3. Pastikan tujuan adalah valid sesuai dengan aturan gérakan di atas.\n\n### Catatan Penting:\n- Papan akan menampilkan pièce-mu dan posisinya, misalnya MN, MS.\n- Papan juga akan menampilkan posisi pièce lawan yang diketahui tanpa mengungkapkan pangkatnya, misalnya ?.\n- Grid dengan ~ adalah danau dan tidak dapat digérakkan.\n- Sebagai saran, mulailah permainan dengan menggérakkan pièce-mu yang berada di garis depan untuk mendapatkan informasi tentang pièce lawan. Garis depan Pemain 0 dan Pemain 1 adalah baris D dan G masing-masing.\n\nBerikut adalah keadaan papan saat ini:\n"
+  },
+  "board": {
+    "current_board": "Papan Saarang:\n\n{board}\nGérakkan Tersedia: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format aksi kada sah. Pamain {player_id} indak mamasuakan langkah dalam format [A0 B0].",
+    "invalid_coordinates": "Format aksi kada sah. Pamain {player_id} indak mamasuakan koordinat nan valid.",
+    "not_own_piece": "Format aksi kada sah. Pamain {player_id} harus ma'alihi salah satu pilahnya surang.",
+    "scout_through_pieces": "Format aksi kada sah. Pamain {player_id} kada kawa mamindahakan pamariksa malalui potongan lain.",
+    "scout_diagonal": "Format aksi kada sah. Pamain {player_id} kada kawa mamindahakan pamandiran sacara diagonal.",
+    "non_scout_multi_square": "Invalid action format. Pieces, apart from scouts, can only move one square at a time.",
+    "move_into_lake": "Format aksi kada sah. Pamain {player_id} kada kawa bapindah ka danau.",
+    "move_onto_own_piece": "Format aksi kada sah. Pamain {player_id} kada kawa bapindah ka palihnya surang.",
+    "move_bomb_or_flag": "Format aksi kada sah. Pamain {player_id} kada kawa mamindahakan bom atawa bendera."
+  },
+  "game_action": {
+    "you_moved": "Kamu sudah menggérakkan pièce-mu dari {source} ka {dest}.",
+    "opponent_moved": "Pamain {player_id} sudah mamindahakan sabuting buah matan {source} ka {dest}.",
+    "you_equal_ranks": "Kamu sudah menggérakkan pièce-mu dari {source} ka {dest}. Pièce panarungannya adalah {attacking_rank} dan tujuan pièce adalah {target_rank}. Sabab pangkatnya sama, kaduwa pièce kalah.",
+    "opponent_equal_ranks": "Pemain {player_id} sudah menggérakkan siji pièce dari {source} ka {dest}. Pièce panarungannya adalah {attacking_rank} dan tujuan pièce adalah {target_rank}. Sabab pangkatnya sama, kaduwa pièce kalah.",
+    "you_miner_defused": "Kamu sudah menggérakkan pièce-mu dari {source} ka {dest}. Pièce panarungannya adalah {attacking_rank} dan tujuan pièce adalah {target_rank}. Sabab penambang dapat mematikan bom, kamu menang pertempuran.",
+    "opponent_miner_defused": "Pemain {player_id} sudah menggérakkan siji pièce dari {source} ka {dest}. Pièce panarungannya adalah {attacking_rank} dan tujuan pièce adalah {target_rank}. Sabab penambang dapat mematikan bom, kamu kalah pertempuran.",
+    "you_bomb_lost": "Kamu sudah menggérakkan pièce-mu dari {source} ka {dest}. Pièce panarungannya adalah {attacking_rank} dan tujuan pièce adalah {target_rank}. Sabab panarungannya bukanlah penambang, kamu kalah pertempuran.",
+    "opponent_bomb_won": "Pemain {player_id} sudah menggérakkan siji pièce dari {source} ka {dest}. Pièce panarungannya adalah {attacking_rank} dan tujuan pièce adalah {target_rank}. Sabab panarungannya bukanlah penambang, kamu menang pertempuran.",
+    "you_spy_won": "Kamu sudah menggérakkan pièce-mu dari {source} ka {dest}. Pièce panarungannya adalah {attacking_rank} dan tujuan pièce adalah {target_rank}. Sabab panarungannya adalah mata-mata dan tujuan adalah marsyal, kamu menang pertempuran.",
+    "opponent_spy_lost": "Pemain {player_id} sudah menggérakkan siji pièce dari {source} ka {dest}. Pièce panarungannya adalah {attacking_rank} dan tujuan pièce adalah {target_rank}. Sabab panarungannya adalah mata-mata dan tujuan adalah marsyal, kamu kalah pertempuran.",
+    "you_higher_won": "Kamu sudah menggérakkan pièce-mu dari {source} ka {dest}. Pièce panarungannya adalah {attacking_rank} dan tujuan pièce adalah {target_rank}. Sabab panarungannya adalah pangkat tinggi daripada tujuan, kamu menang pertempuran.",
+    "opponent_higher_lost": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a higher rank than the destination, you lost the battle.",
+    "you_lower_lost": "Kamu sudah menggérakkan pièce-mu dari {source} ka {dest}. Pièce panarungannya adalah {attacking_rank} dan tujuan pièce adalah {target_rank}. Sabab panarungannya adalah pangkat randah daripada tujuan, kamu kalah pertempuran.",
+    "opponent_lower_won": "Pemain {player_id} sudah menggérakkan siji pièce dari {source} ka {dest}. Pièce panarungannya adalah {attacking_rank} dan tujuan pièce adalah {target_rank}. Sabab panarungannya adalah pangkat randah daripada tujuan, kamu menang pertempuran."
+  },
+  "outcome": {
+    "flag_captured": "Pamain {player_id} sudah manangkap bendera lawan!",
+    "no_movable_pieces": "Pemain {winner_id} menang! Pemain {loser_id} tidak memiliki pièce yang dapat digérakkan."
+  }
+}

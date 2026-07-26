@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Kamu adalah {role} di Colonel Blotto.\nTujuanmu adalah menang lebih banyak ronde daripada lawanmu.\nDi setiap ronde, mambagi tepat {num_total_units} unit di lapangan {field_names}.\nPemain yang mambagi lebih banyak unit di lapangan akan menang di lapangan itu, dan pemain yang menang lebih banyak lapangan akan menang ronde.\nContohnya, '[A7 B7 C6]' mambagi 7 unit ke A, 7 ke B, dan 6 ke C.",
+    "commander_alpha": "Commander Alpha",
+    "commander_beta": "Panglima Beta: \"Siapa nang tahu?\""
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Ronde {current_round}/{num_rounds} ===\nRonde Dimenangkeun - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRonde {current_round}\nCommander Alpha mambagi: {p0_allocations}\nCommander Beta mambagi: {p1_allocations}\n",
+    "winner_alpha": "{message}Pemenang: Panglima Alpha",
+    "winner_beta": "{message}Pemenang: Panglima Beta",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "Format masukan kada sah. Gunaakan: A:5, B:10, C:5",
+    "invalid_field": "Ngaran bidang kada sah. Lapangan nang valid: {field_names}",
+    "wrong_allocation_value": "Semua alokasi harus bilangan bulat non-negatif.",
+    "incorrect_total_units": "Kamu kena mambagi tepat {num_total_units} unit. Jumlah saarang: {current_sum}",
+    "good_allocations": "Alokasi nang baik."
+  },
+  "outcome": {
+    "winner_alpha": "Commander Alpha menang {score_0}-{score_1} sasudah {num_rounds} ronde!",
+    "winner_beta": "Commander Beta menang {score_1}-{score_0} sasudah {num_rounds} ronde!",
+    "draw": "Pamanangan akhirnya seri {score_0}-{score_1} sasudah {num_rounds} ronde!",
+    "early_winner_alpha": "Commander Alpha menang {scores_0}-{scores_1} (mayoritas dicapai)!",
+    "early_winner_beta": "Commander Beta menang {scores_1}-{scores_0} (mayoritas dicapai)!"
+  }
+}
