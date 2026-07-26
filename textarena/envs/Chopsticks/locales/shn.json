@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Chopsticks. On your turn, choose one of:\n  + Attack:  '[attack M O]'  where M=your hand (0 or 1), O=opponent hand (0 or 1).\n    - Opponent's hand count increases by your hand; if >=5, it becomes 0.\n  + Split:   '[split L R]'  to redistribute your total fingers into L and R (L+R = your total).\nReply with exactly one of those commands."
+  },
+  "board": {
+    "current_board": "လက်ရွေးစင်ကြည့်မည်:\nPlayer 0: {hands_0}\nPlayer 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "မိုဝ်းသူ {my_idx} တၢႆၵႂႃႇယဝ်ႉ။",
+    "opp_hand_dead": "ၶႅပ်းမိုဝ်းၽူႈၶဵၼ် {opp_idx} ၼၼ်ႉ လႆႈလူႉလႅဝ်ၵႂႃႇယဝ်ႉ။",
+    "split_sum": "လွင်ႈၸႅၵ်ႇၽႄၼႆႉ တေလႆႈပဵၼ် {total} ၼၼ်ႉယဝ်ႉ။",
+    "split_no_change": "လွင်ႈၸႅၵ်ႇၽႄၼႆႉ တေလႆႈဝႃႈ လႅၵ်ႈလၢႆႈလွင်ႈ ၸႅၵ်ႇမဵဝ်းမိုဝ်းၶွင် သူဝႆႉယူႇယဝ်ႉ။",
+    "invalid_command": "မှားယွင်းသော လှုပ်ရှားမှု. \"[attack M O]\" သို့ \"[split L R]\" ကို အသုံးပြုပါ."
+  },
+  "game_action": {
+    "attack": "P{player_id} တိုက်ခိုက်တယ် P{opp_id}၏ လက် {opp_idx}: သူ့ကို {opp_val} မှ {new_val} သို့ ပြောင်းလဲစေတယ်.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "မိုဝ်းဢၼ်ၶတ်းၵၼ်တင်းသွင်ၽၢႆႇၼၼ်ႉ လႆႈလူႉလႅဝ်ၵႂႃႇယဝ်ႉ။",
+    "draw": "The turn limit has been reached."
+  }
+}

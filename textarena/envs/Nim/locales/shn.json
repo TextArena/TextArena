@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "ယၢမ်းလဵဝ်ၼႆႉ ပဵၼ် {piles} Pile (Pile) ယဝ်ႉ။"
+  },
+  "invalid_move": {
+    "wrong_format": "ဢမ်ႇလႆႈႁၼ် ပိူင်ၶၢႆႉဢၼ်မၢၼ်ႇမႅၼ်ႈ။ ၸႂ်ႉ \"[pile quantity]\" တႃႉ။",
+    "correct_format_wrong_fields": "Player {player_id}, Invalid action. Column {col} is out of bounds.",
+    "out_of_range": "လွင်ႈမၵ်းမၢႆ ႁၢင်ႈထႅဝ် {pile_index} ၼႆႉ ဢွၵ်ႇပႃႈၼွၵ်ႈၵႄႈ။",
+    "non_positive": "တေလႆႈဢဝ် ၶူဝ်းၶွင်ဢၼ်ဢမ်ႇယွမ်း 1 ဢၼ်။",
+    "exceeds_pile": "ၸၢင်ႈဢဝ် {quantity} ဢဝ်တီႈ pile {pile_index} (ႁူဝ်ပၢၵ်ႇ ၼမ်ႉမၼ်း ၸွမ်း {pile_count} သေ တေႃႇထိုင်)။"
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "ၽူႈလဵၼ်ႈ {player_id} ဢဝ် ၶူဝ်းၶွင်ဢၼ်သုတ်းၵႂႃႇ (s)!"
+  }
+}
