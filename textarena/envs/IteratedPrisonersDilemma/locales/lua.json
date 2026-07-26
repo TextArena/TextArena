@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "Luzingu lwa mazungumzo lwa mzunguko {round} lumanyika. Tafadhali jibu kwa '[Cooperate]' au '[Defect]' ndani ya masanduku {{}}.",
+    "starting_round": "--- Tshikondo tshia ntuadijilu {round} ---",
+    "round_summary": "Matokeo ya mzunguko {round}:\n{outcome}\nMwana 0 alipata {r0} (jumla {score_0}), Mwana 1 alipata {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "Draw! Both players scored {s0}.",
+    "round_both_cooperate": "Bamue ba kudibu bakenza mudimu pamue.",
+    "round_both_defect": "Bamue ba kudibu bakanyema.",
+    "round_p0_cooperates_p1_defects": "Muena manaya 0 wakenza mudimu, muena manayi 1 wakabenga.",
+    "round_p0_defects_p1_cooperates": "Muena manaya 0 wakanyema, muena manaya 1 uvua wenza mudimu."
+  }
+}

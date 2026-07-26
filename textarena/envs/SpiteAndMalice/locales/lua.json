@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Uko Mwana {player_id} katika mchezo wa wachezaji wawili wa Spite na Malice. Lengo lako ni kuwa wa kwanza kuondoa chungu cha malipo.\n\n### Muhtasari wa Mchezo:\n- Lengo ni kuondoa chungu cha malipo kwa kucheza kadi kwenye chungu cha kati.\n- Unaweza kucheza kadi kutoka vyanzo vitatu:\n  1. **Mkono wako** (unapoanza kila mchezo na kadi hadi 5 kwenye mkono).\n  2. **Kadi ya juu ya chungu cha malipo**.\n  3. **Kadi ya juu ya chungu chochote cha kuikwa**.\n\n### Kanuni za Kucheza:\n- Unaweza kucheza kadi kwenye chungu cha kati ikiwa ni **daraja moja juu** ya kadi ya juu kwenye chungu hicho (chungu cha kati huanza na Ace na kwenda hadi Queen; Kings ni wa kawaida - wanaweza kucheza kwenye kadi yoyote lakini hawabadilishi mlolongo wa daraja. Hii ina maana ikiwa King inatumiwa baada ya 4, basi King hiyo ina daraja la 5 na kadi inayofuata lazima iwe 6).\n- Ikiwa hauwezi kucheza kadi zaidi, lazima **uikwe kadi** kwenye chungu cha kuikwa ili kumaliza mchezo wako.\n- Ikiwa chungu cha kati kinafikia Queen, kitatolewa kiotomatiki.\n- Mpangilio wa daraja ni: A=1, 2=2, ..., 9=9, J=10, Q=11, K kama wa kawaida.\n\n### Hatua:\n1. **Chora**: Mwanzoni mwa mchezo wako, chora kadi ili kujaza mkono wako hadi kadi 5. Ingiza **[draw]** ili kuanza.\n2. **Cheza Kadi**: Ili kucheza kadi, tambua kadi na chungu cha kati kama hii: **[play A♠ 0]** (ambapo 'A♠' ni kadi na '0' ni nambari ya chungu cha kati).\n3. **Ikwa**: Ikiwa hauwezi kucheza kadi zaidi, ikwa kadi kutoka mkono wako kwenye chungu cha kuikwa ili kumaliza mchezo wako. Ingiza **[discard A♠ 1]** (ambapo 'A♠' ni kadi na '1' ni nambari ya chungu cha kuikwa). Kumbuka kwamba hauwezi kuikwa kadi yoyote kutoka chungu cha malipo. Unaweza tu kuikwa kadi kutoka mkono wako.\n\n"
+  },
+  "board": {
+    "current_board": "Bopilo bwa Bokasi:\n\n{board}\nMabongo ya Kufika: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Tshimanu tshia mu tshibungi tshinene (Center Piles) --- ",
+    "pile": "{observation}Chungu {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Muonekano wa Mwana {player_id} ---\n",
+    "payoff": "{observation}Chungu cha Malipo (Kadi ya Juu): {top_card}, Urefu wa Chungu cha Malipo: {payoff_length}\n",
+    "hand": "{observation}Mkono: {hand}\n",
+    "discard": "{observation}Vichugu vya Kuikwa: {discard}\n",
+    "empty": "Mpudi"
+  },
+  "game_message": {
+    "no_cards_left": "Kuena kabidi ne karte ka kuela to. Vuluka bua udi mua kufila tuarte tudi mu mishindu eyi: 1. **tshianza tshiebe** 2. **kaleta kanene ka mu mulongo wa makuta audi upeta** 3. **kalata kanene kadibu bapesha muntu yonso uudi ujimija.* "
+  },
+  "invalid_move": {
+    "wrong_format": "Muena manaya {player_id} kavua muandamune ne tshienzedi tshimpe tshidibu bafunde ku nseke ibidi.",
+    "invalid_play": "Mchezo usio halali. Mwana {player_id} alijaribu kucheza {card} kwenye chungu cha kati {index}.",
+    "discard_from_payoff": "Muena manaya {player_id} uvua ukeba bua kuimansha karte kampanda mu mulongo wa makuta.",
+    "discard_not_in_hand": "Invalid discard. Player {player_id} tried to discard a card that is not in hand.",
+    "wrong_move_type": "Invalid move type. Player {player_id} did not respond with a valid move type."
+  },
+  "game_action": {
+    "you_drew": "Uvua muele karte.",
+    "opponent_drew": "Muena manaya {player_id} uvua ukoka karte.",
+    "you_played": "You played {card} on center pile {index}.",
+    "opponent_played": "Player {player_id} played {card} on center pile {index}.",
+    "you_discarded": "You have discarded {card} to discard pile {index}, which also means you have finished their turn. No further actions of yours is considered for this turn. Player {next_player_id} will go next.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mwana {current_player} amemaliza chungu cha malipo! Mwana {current_player} anashinda!",
+    "deadlock_player_0": "Deadlock reached! Player 0 wins with {player_0_payoff} cards remaining vs Player 1's {player_1_payoff} cards.",
+    "deadlock_player_1": "Deadlock reached! Player 1 wins with {player_1_payoff} cards remaining vs Player 0's {player_0_payoff} cards.",
+    "deadlock_tie": "Deadlock reached with tie! Both players have {player_0_payoff} cards remaining. Player {current_player} wins by default."
+  }
+}

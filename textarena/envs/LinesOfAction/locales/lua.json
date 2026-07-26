@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "Kabadi: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Tshikebelu tshidi ne bua kuikala e2e4 (ku, too ne ku) muinshi mua bikadilu.",
+    "no_piece": "Kakuena mukanda {side} mu tshibejibeji tshia {coord} to.",
+    "identical": "Tshia kufila ne tshia kuya nabi bidi bifuanangane.",
+    "not_straight_or_diagonal": "Udi ne bua kuya buludiludi anyi mu diagon.",
+    "wrong_distance": "Udi ne bua kuya mutantshi mule mu mulongo umue.",
+    "enemy_blocks": "Baluishi badi bakanga njila.",
+    "destination_own": "Muaba wa kuya uvua ne muntu muende."
+  },
+  "game_action": {
+    "moved": "Mwadi {player_id} akwisa {from} -> {to}",
+    "captured_suffix": "Mwadi {player_id} akwisa {from} -> {to} akwisha muntu wa musangidi."
+  },
+  "outcome": {
+    "win": "Malu onso adi mu diumvuangana.",
+    "draw_no_capture": "60 moves without capture.",
+    "draw_repetition": "Bimanyinu ebi biakavulangana misangu isatu."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Chopsticks. On your turn, choose one of:\n  + Attack:  '[attack M O]'  where M=your hand (0 or 1), O=opponent hand (0 or 1).\n    - Opponent's hand count increases by your hand; if >=5, it becomes 0.\n  + Split:   '[split L R]'  to redistribute your total fingers into L and R (L+R = your total).\nReply with exactly one of those commands."
+  },
+  "board": {
+    "current_board": "Lubanza lwa Bwalo:\nMwadi 0: {hands_0}\nMwadi 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Tshianza tshiebe {my_idx} ntshifue.",
+    "opp_hand_dead": "Tshianza tshia muluishi {opp_idx} ntshifue.",
+    "split_sum": "Dibuejakaja didi ne bua kuikala {total}.",
+    "split_no_change": "Split udi ne bua kushintulula mushindu uudi utamba kufila bintu.",
+    "invalid_command": "Invalid move. Use “[attack M O]” or “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} akoya P{opp_id}’s luwa {opp_idx}: inaenda kutoka {opp_val} hadi {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Bianza bionso bibidi bia muluishi bidi bifua.",
+    "draw": "Tudi bafike ku tshipiminu tshia dikudimuka."
+  }
+}

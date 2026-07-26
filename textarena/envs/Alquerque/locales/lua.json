@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} ({piece}). Opponent is ({opp}).\nSubmit moves as '[a2 a3]' (from → to).\n- A normal move is one forward step to an adjacent empty vertex.\n- A capture is a jump over an adjacent enemy piece landing on the empty node beyond.\nEach capture yields {score_per_capture} points.\nGame ends after {max_moves} moves or when a player has no legal move."
+  },
+  "board": {
+    "current_board": "Suka #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "Dienza dia malu mabi. Kuata mudimu ne \"[a2 a3]\".",
+    "unknown_square": "Tshisumbu tshia bantu ki mmumanyike to.",
+    "not_your_piece": "Tshisese ki ntshiena bualu buebe to.",
+    "dest_not_empty": "Kuvua muaba wa kuya to.",
+    "illegal": "Kuenza bualu bua tshianana."
+  },
+  "game_action": {
+    "captured": "Mwana {player_id} akakwata kipande! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Muena manaya {player_id} kena ne biamu to.",
+    "cannot_move": "Muena manaya {player_id} kena mua kuya to.",
+    "higher_score": "Higher capture score.",
+    "move_limit": "Bungi bua bintu bidibu mua kuenza bukadi bufike."
+  }
+}

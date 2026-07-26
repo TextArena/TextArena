@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Muena manaya eu uvua musue kuitaba bua kumuanyangana nende kayi ne bintu bivua bikengela.",
+    "out_of_range": "Mwana {player_id}, Nketo te. Lumbu {col} i zingila kuna.",
+    "already_full": "Mwana {player_id}, Nketo te. Lumbu {col} i zeanza.",
+    "proposing_with_no_resource": "Muena manaya {player_id} uvua ukeba bua kupingaja makuta kayi ne bintu bivua bikengela.",
+    "incorrect_offer_format": "Muena manaya {player_id} uvua mufile dilomba dia kusumba bintu ne mushindu mubi.",
+    "no_new_offer": "Muena manaya {player_id} kavua mufile dilomba dikuabu dia kusumba to."
+  },
+  "offers": {
+    "reject": "Muena manaya {player_id} wakabenga dilomba dia kusumba.",
+    "accept": "Muena manaya {acceptor_id} wakitaba dilomba dia kunshintulula kudi muena manayi {proposer_id}.",
+    "proposal": "Mwana {player_id} akelaki nketo kwa Mwana {opponent_id}: Bizali bimponenekela: {offered} -> Bizali bimponenaki: {requested}"
+  },
+  "outcome": {
+    "win": "Muena manaya {winner_id} uvua mupete difutu dia bungi bualu bavua bapatule bintu bia mushinga mukole.",
+    "draw": "Badi bashintuluka mushindu umue mu mushinga wa bintu bia banayi bonso."
+  }
+}
