@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are playing {color} in a game of Breakthrough. You move {direction} on an {board_size}x{board_size} board.\nIn your turn you can move a single piece one step forward or diagonally forward.\nA piece may only move diagonally if an opponent piece is there, and only move into such a preoccupied square in a diagonal step.\nWhen stepping into a square with an opponent piece, you capture it and the opponent's piece is removed permanently from the board.\nUse UCI-like notation in brackets, e.g. [a2a3] to move from a2 to a3.\n* 'a' corresponds to the leftmost column, '1' is the bottom row (from White's perspective).\n* Blacks's home row is the top row (row 8 for an 8x8). White's home row is the bottom row (row 1 for an 8x8).\nThe first player whose piece reaches the opponent's home row wins. If your pieces are all captured, you lose."
+  },
+  "invalid_move": {
+    "wrong_format": "Faamolemole ia faaaoga le faailoga algebraic bracketed pei [a2a3].",
+    "out_of_bounds": "E lē mafai ona e alu i se isi nofoaga.",
+    "illegal": "O lenā gaoioiga e lē o mulimuli i tulafono a le Breakthrough pe e lē sau foʻi lau fasi pepa."
+  },
+  "game_action": {
+    "moved": "Tagata taʻalo {player_id} sau {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Ua oo atu le papaʻe i le laina o loo iai tagata uli.",
+    "black_reached": "Na oo atu le lanu uli i le laina o loo iai tagata papaʻe.",
+    "white_captured": "Ua maua uma fasi papaʻe.",
+    "black_captured": "Ua maua uma fasi tagata uli.",
+    "no_moves": "E leai se isi gaoioiga a le tagata taalo {player_id}."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an {num_players}-player Liar's Dice game.\nRules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\nIf you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins."
+  },
+  "board": {
+    "per_player": "\tTagata taʻalo {p}: {d}",
+    "new_round": "\nRaunou fou - Taunu o loʻo toe: {dice_summary}\nO au taunu e teu nei: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Player {current_player_id} calls! The actual count of face {face_value} is {count}, which is LESS than {quantity}.\nPlayer {loser_id} (the last bidder) loses one die.",
+    "caller_loses": "Tagata taʻalo {current_player_id} e valaʻau! O le numera moni o le mata {face_value} o loʻo iai {count}, lea e >= {quantity}.\nTagata taʻalo {loser_id} (o le valaʻau) e leai se taunu."
+  },
+  "action": {
+    "bid_announce": "O le tagata taalo {player_id} e faia se tauofoga o foliga {quantity} ma mata {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "O se valaauga na faia e aunoa ma ni tauofoga muamua.",
+    "invalid_bid": "Faʻatauga le aoga: {reason}",
+    "not_recognized": "Le faʻagauga le iloa e pei o se '[Bid: X, Y]' poʻo se '[Call]' faʻamaoni. Faʻagauga na tuʻuina atu: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "O le aofaʻi fou {new_quantity} e laʻititi ifo nai lo le taimi nei {current_quantity}.",
+    "face_lower": "O le tau fou {new_face_value} e maualalo ifo nai lo le taimi nei {current_face_value}.",
+    "identical": "E tutusa le tauofoga ma le tau o loo iai nei.",
+    "face_range": "O le tau e tatau ona i ai i le va o le 1 ma le 6."
+  },
+  "message": {
+    "eliminated_invalid": "O le tagata taalo {player_id} na faʻateʻaina e ala i se gaioiga le aoga."
+  },
+  "outcome": {
+    "win": "Tagata taʻalo {winner} manumalo! Faʻaiʻuga o le faʻasologa: {final_ranking}"
+  }
+}

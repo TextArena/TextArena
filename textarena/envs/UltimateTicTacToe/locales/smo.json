@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Current board:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "E tatau ona faia le fesuiaiga i se pepa [macro micro] ma fuainumera 0-8.",
+    "out_of_range": "O faasino taʻitasi e tatau ona i le va o le 0 ma le 8.",
+    "index_out_of_range": "O le micro_board, laina, po o col ua i fafo atu o tulaga.",
+    "cell_occupied": "Ua uma ona nofoia le potu.",
+    "wrong_micro_board": "E tatau ona taaalo le tagata taʻaʻalo i le isi laupapa laitiiti.",
+    "micro_board_won": "Ua uma ona manumalo le laupapa o loo iai nei."
+  },
+  "next_board": {
+    "any": "so o se laupapa micro",
+    "specific": "laupapa Laiti {nxt}"
+  },
+  "game_action": {
+    "played": "O le tagata taʻalo {player_id} na taʻalo i luga o le papa laiti {macro_idx}, selo {micro_idx} (lili {row}, kolasi {col}). O le a tatou toe taʻalo ai le tagata taʻalo {opponent_id} i totonu o {nxt_txt}."
+  },
+  "outcome": {
+    "win": "O le tagata taalo {player_id} e manumalo i le Ultimate Tic Tac Toe!",
+    "draw": "The game is a draw!"
+  }
+}

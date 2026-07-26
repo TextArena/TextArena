@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "Faʻamatalaga e le aoga. E tatau ona i totonu o puipui faapipii gaioiga.",
+    "no_closing_bracket": "Faʻataʻitaʻiga le saʻo o gaioiga. Leai se puipui faaiu ']'",
+    "empty_command": "Poloaiga gaogao. ituaiga 'toso' po o le \"siitia <puna> <taunuuga> [count]\"",
+    "empty_action": "Gaoioiga gaogao",
+    "move_needs_args": "O le faatonuga o le siitia atu e manaomia ai se punavai ma se taunuuga. Faaaogaina: 'move <source> <destination> [count]'",
+    "count_positive": "E tatau ona lelei le faitauga po o \"uma\"",
+    "count_invalid": "Faitau lē saʻo. Faaaoga se numera po o le \"tasi\"",
+    "unknown_command": "Unknown command '{cmd}'. Use 'draw', 'move <source> <destination> [count]', or 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Faatinoina {n} gaoioiga (s) i luma o le toilalo.",
+    "failed": "Action {n} failed: {msg}"
+  },
+  "move_result": {
+    "drew": "Na ia tosoina le pepa mai i se fale teu oloa e fai ma otaota.",
+    "cannot_draw": "E lē mafai ona toso mai, ua leai ni mea o iai ma e leʻi toe maua.",
+    "invalid_pile": "Igoa o le faaputuga e lē sa'o. Faaaoga W, F1-F4, poʻo T1-T7",
+    "foundation_one_card": "E mafai ona na o le 1 pepa e siitia atu i faavae.",
+    "waste_to_foundation_ok": "Faʻaliliuina o le kata mai otaota i faʻavae F{dst}",
+    "waste_to_foundation_bad": "E le mafai ona siitia pepa otaota i lena faaputuga faavae",
+    "tableau_to_foundation_ok": "Saili kaati mai tableau T{src} i foundation F{dst}",
+    "tableau_to_foundation_bad": "E le mafai ona siitia pepa laulau i lena faaputuga faavae",
+    "foundation_to_foundation": "E le mafai ona siitia mai faavae i lea faʻavae.",
+    "waste_to_tableau_one_card": "E mafai ona na o le 1 pepa e siitia mai i otaota i laulau.",
+    "waste_to_tableau_ok": "Faʻaliliuina le kata mai otaota i le laulau T{dst}",
+    "waste_to_tableau_bad": "E le mafai ona tuu pepa otaota i luga o lena faaputuga tableau",
+    "no_face_up": "E leai ni pepa e faasaga i luga e siitia ai.",
+    "tableau_to_tableau_ok": "Saili {count} kaati mai tableau T{src} i T{dst}",
+    "tableau_to_tableau_bad": "E mafai ona saili {count} kaati mai T{src} i T{dst}",
+    "foundation_to_tableau_one_card": "E mafai ona na o le 1 pepa e siitia mai faavae i tableau",
+    "foundation_empty": "Faʻavae F{src} e leai se mea.",
+    "foundation_to_tableau_ok": "Saili kaati mai foundation F{src} i tableau T{dst}",
+    "foundation_to_tableau_bad": "E le mafai ona tuu pepa faavae i luga o laulau T{dst}",
+    "to_waste_or_stock": "E lē mafai ona ave i otaota po o oloa e teu ai meafaitino."
+  },
+  "outcome": {
+    "forfeit": "O le taʻaloga ua faʻamavae. Faaiuga mulimuli: {score} kata i faavae.",
+    "won": "Faamalo, ua e manumalo i le taaloga o Klondike Solitaire!",
+    "turn_limit": "Faʻaiʻu le taaloga! E te oʻo atu i le maualuga o {max_turns} turn. Skoa: {score} kaati i fonotaga."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== O le a ou toe foʻi i tua.",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Faʻasoa: {stock} kata",
+    "waste": "Oloa (W): {waste}",
+    "foundations_header": "Faavae:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Faʻataʻitaʻiga:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

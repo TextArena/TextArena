@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "E te taʻalo Golf (Kāti Taʻaloga) - Player {player_id}.\nMalia: Pulea le scori e tatau i lenei faʻataʻitaʻiga. Afai e faʻaopoopo le tulaga, latou te faʻaopoopo e pei o le 0.\nKāti Values: A=1, 2-10=faʻaalia, J/Q=10, K=0\n\nGaoioiga (faʻaaoga le bracketed): \n- '[draw]' - Sau mai le deck \n- '[take]' - Sau mai le pile o discards \n- '[swap X Y]' - Palasi le kāti saunia ma le tulaga X (row) Y (column) \n- '[discard]' - Discard le kāti saunia "
+  },
+  "board": {
+    "drew": "Na e sau: {card}\nO lou filifiliga o [swap X Y] poʻo [discard]",
+    "took": "You took: {card} from discard pile\nYou must [swap X Y] with it (cannot discard).",
+    "peeked": "Na e vaʻai i le tulaga ({row},{col}): {card}",
+    "turn_view": "Lou lima:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Leai se tasi."
+  },
+  "options": {
+    "final_turns": "Faʻaiuga o faʻataʻitaʻiga! Ou filifiliga: [draw], [take], [peek X Y]",
+    "draw": "Ou filifiliga: [draw], [take]",
+    "must_swap": "E tatau ona: [swap X Y] (e lē mafai ona lafoaʻi pepa mai le faaputuga o mea e te lafoaia)",
+    "swap_or_discard": "E tatau ona e: [swap X Y] poʻo [discard]"
+  },
+  "hand": {
+    "no_cards": "E leai ni kata.",
+    "header": "Kol: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} palasi {new} ma {old} i le tulaga ({row},{col})",
+    "discarded": "Player {pid} sauni e {card}"
+  },
+  "message": {
+    "deck_empty": "Ua leai se isi i luga o le laupapa! E vave ona faaiʻu le taaloga.",
+    "knocked": "Player {pid} knocked! Ia tagata taʻalo uma e mafai ona toe faia se tasi",
+    "final_round": "Player {pid} {reason}! Ia tagata taʻalo uma e mafai ona toe faia se tasi"
+  },
+  "reason": {
+    "all_revealed": "ua faaalia uma ai pepa o loo iai?"
+  },
+  "invalid": {
+    "wrong_action": "Faʻaaoga le tasi le bracketed action: [draw], [take], [swap X Y], [discard], [knock], poʻo [peek X Y]",
+    "discard_empty": "Ua leai se mea o loo iai i le faaputuga e lafoaʻi!",
+    "must_draw_first": "E tatau ona e muamua [draw], [take], [knock], poʻo [peek X Y]",
+    "cannot_discard_taken": "E lē mafai ona e lafoaʻia se pepa mai le faaputuga o kata ua uma ona ave, ae ia sui.",
+    "have_drawn_card": "E iai lou kāti kāti. E tatau ona e [swap X Y] poʻo [discard]",
+    "need_drawn_swap": "E manaʻomia se pepa e tusi ai le taulima ina ia mafai ona faafesuiaʻi.",
+    "need_drawn_discard": "E manaʻomia se pepa ua tusia e lafoaʻi.",
+    "out_of_bounds": "Tulaga i fafo o le paepae. Faʻaaoga le row 1-{max_row}, column 1-{max_col}",
+    "knock_with_card": "E lē mafai ona e tuʻituʻi atu i se pepa ua uma ona tāina. Ia faauma muamua lau vili.",
+    "already_knocked": "Ua uma ona faia e se tasi lenei taamilosaga.",
+    "already_revealed": "Ua uma ona faailoa mai lenā kata!"
+  },
+  "summary": {
+    "full": "Taʻaloga Faʻaiʻu! Player {winner} manumalo ma le scori o {score} points!\n\nScori Faʻaiʻu:\n{scores}",
+    "line": "Player {pid}: {score} points\n"
+  },
+  "board_str": {
+    "title": "=== GOLF GAMING=== O le a ou taʻalo i se taaloga e lua.",
+    "discard": "Faʻatauga faʻaalu: {card}",
+    "knocked": "Ua tuʻituʻi mai le tagata taalo {pid}!",
+    "player_header": "Player {pid} (Scoring: {score}):"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "E te Pila {player_id}, e taʻalo {num_rounds} lapataʻi o le Iterated Ultimatum Game.\nO loʻo i ai ${pool} e faʻasolo ina ia mafai ona tuʻuina atu i le tasi lenei lapataʻi i a te oe ma Pila {other_id}.\n\nFaʻatonu:\n  - Faia se avano: [Offer: $X] (0 <= X <= pool)\n  - Afai e tuʻuina atu → E te maua $(pool - X), pila isi e maua $X\n  - Afai e teteʻe → E maua e lua $0\n  - Faʻataʻitaʻiga: [Offer: $3]  poʻo  'Ou te manatu e talafeagai lenei. [Offer: $5]'\n\nFaʻaali:\n  - Faʻatonu i luga o le avano ma [Accept] poʻo [Reject]\n  - Faʻataʻitaʻiga: 'Ona talafeagai lenei. [Accept]'\n            'Ona leaga tele. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Lapataʻi {round_number} amata! ---\nPila {proposer_id} o le faʻatonu, Pila {responder_id} o le faʻaali.",
+    "offer": "Lapataʻi {round_number}: Pila {proposer_id} avano ${offer} i Pila {responder_id} (tau mai ${keep}).",
+    "accepted": "Pila {responder_id} na tuʻuina atu! Lapataʻi {round_number} mau: Pila {proposer_id} +${proposer_gain}, Pila {responder_id} +${responder_gain}. O totogi fou: Pila 0: ${total_0}, Pila 1: ${total_1}.",
+    "rejected": "Pila {responder_id} na teteʻe le avano! Lapataʻi {round_number} mau: Pila e lua +$0. Totogi tuʻu: Pila 0: ${total_0}, Pila 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "O le tagata talosaga e tatau ona faia se ofo i le faiga [Offer: $X].",
+    "bad_integer": "O le aofaiga o loʻo ofoina atu e tatau ona avea ma se numera saʻo.",
+    "out_of_range": "O le tauofoga e tatau ona i ai i le va o $0 ma le ${pool}.",
+    "no_current_offer": "E leai se ofo o loo iai i le taimi nei e tali atu ai.",
+    "accept_or_reject": "Responder must either [Accept] or [Reject] the offer."
+  },
+  "outcome": {
+    "win": "Pila {winner} na manumalo ma ${winner_total} i totonu i le tasi ma Pila {loser} ${loser_total}.",
+    "draw": "Na maua uma e tagata taaalo le ${total} i le aofaiga."
+  }
+}

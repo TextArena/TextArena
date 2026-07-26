@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Briscola ta'alafaga amata! Suiti Trump: {trump_suit} (Kaata Trump: {trump_card})"
+  },
+  "prompt": {
+    "intro": "E ta'aalo Briscola - Tagata ta'aalo {player_id}.\nFa'amoemoe: Manumalo i tricks ma maua puna tele (120 puna i totonu o le deck).\nPuna o Kaata: A=11, 3=10, K=4, Q=3, J=2, isi=0\nMalia o Kaata: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKaata Trump e fa'aleagaina kaata leai o Trump pe a lelei.\n\nGaoioiga: '[play X]' i le fa'ai'uga X o le nofoaga (1-{max_pos}) o le kaata i lou lima\n"
+  },
+  "hand": {
+    "none": "E leai ni kata.",
+    "empty": "E leai ni kata i le lima.",
+    "header": "O lou lima:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP) O le mea moni, o loo iai se isi auala e mafai ona faia ai faapea."
+  },
+  "trick": {
+    "empty": "E leai se pepa e taaalo ai i lenei togafiti.",
+    "header": "Current trick:",
+    "line": "  Tagata ta'aalo {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Tagata ta'aalo {player_id}: {points} puna",
+    "trump_info": "O le ofu o Trump: {trump_suit}",
+    "trump_info_deck": "Suiti Trump: {trump_suit} | Kaata toeititi i totonu o le deck: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nToega: {scores}\n{trump_info}\n\nTa'aalo se kaata e ala i [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Faaaoga le [play X] pe afai o X, e faasino i tulaga (1, 2, 3, ma isi mea faapena) o se kata.",
+    "out_of_range": "Nofoaga kaata leaga. E {count} kaata sau (1-{count})"
+  },
+  "action": {
+    "played": "Tagata ta'aalo {player_id} na ta'aalo {card}",
+    "trick_win": "Tagata ta'aalo {winner} manumalo i le trick ma {card} ma maua {points} puna!"
+  },
+  "outcome": {
+    "head": "Ta'alafaga fa'aiu! Tagata ta'aalo {winner} manumalo ma {points} puna!\n\nToega o Fa'ai'uga:\n{scores}",
+    "player_line": "Tagata ta'aalo {player_id}: {points} puna ({tricks} tricks)\n"
+  }
+}

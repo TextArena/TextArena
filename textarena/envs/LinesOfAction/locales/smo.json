@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "Komiti Faatino: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "O le faatulagaga e tatau ona avea ma e2e4 (mai,i faʻamaopoopoga).",
+    "no_piece": "Leai se {side} fasi pepa i luga o le {coord}.",
+    "identical": "E tutusa le mea e sau ai ma le nofoaga o loo taunuu i ai.",
+    "not_straight_or_diagonal": "Move must be straight or diagonal.",
+    "wrong_distance": "E tatau ona ōgatusa le mamao e alu ai ma fasi i se laina.",
+    "enemy_blocks": "Ua punitia le auala e se vaega o fili.",
+    "destination_own": "O le mea e taunuu i ai o loo nofoia lava e se tasi."
+  },
+  "game_action": {
+    "moved": "Pulega {player_id} saunia {from} -> {to}",
+    "captured_suffix": "Pulega {player_id} saunia {from} -> {to} ma faʻatau se pulega o le fili."
+  },
+  "outcome": {
+    "win": "Ua fesootaʻi uma vaega.",
+    "draw_no_capture": "E 60 gaoioiga e leʻi maua.",
+    "draw_repetition": "Toe fai faatolu le tulaga."
+  }
+}

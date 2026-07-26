@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "O oe o le Tagata Taʻalo {player_id} i se Taʻaloga a 3 Tagata Taʻalo o le Prisoner's Dilemma Faʻaauau. O le taʻaloga umia {num_rounds} ripoti.\nFaʻagasologa o le Ripoti:\n• {conv_rounds} faʻamalosi taʻaloga chat\n• 1 faʻaiʻuga turn - tuʻuina atu se token mo tagata teteʻe: '[<opp-id> cooperate]' poʻo '[<opp-id> defect]' (e manaʻomia '[1 defect] [2 cooperate]'; o le faʻaiʻuga e 'cooperate'). \nFaʻavae o le faʻamaumauga (faʻaaogaina i tagata teteʻe uma):\n  - Olu i faʻatasi  ->  {reward}\n  - Olu i faʻaleagaina     ->  {punishment}\n  - E faʻaleagaina e oe, ma faʻatasi mai i latou -> {temptation}\n  - E faʻatasi e oe, ma faʻaleagaina e i latou -> {sucker}\nO tagata taʻalo (s) ma le faʻaiʻuga sili atu i le faʻaiʻuga o ripoti uma e fai ma faʻaiʻu."
+  },
+  "round": {
+    "start": "─── Amataina Ripoti {round} ───\tE mafai ona e talanoa faʻalelei mo le {conv_rounds} ripoti i luma.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Faʻataʻamilosaga {round} - Iuga:",
+    "pair_line": "{observation}\n\t Tagata Taʻalo {i} vs Tagata Taʻalo {j} filifilia e {choice_i} ma {choice_j} (Tagata Taʻalo {i} faʻauma {gain_i}, Tagata Taʻalo {j} faʻauma {gain_j})",
+    "scores_open": "{observation} -> Faʻailoga o loʻo iai nei: ",
+    "score_first": "{observation}Tagata Taʻalo {player_id} ({score})",
+    "score_next": "{observation}; Tagata Taʻalo {player_id} ({score})",
+    "finalize": "{observation}  ua i ai se isi mea e fai?"
+  },
+  "outcome": {
+    "final": "Faʻamaumauga Faʻaiʻu: {scores}.  Vaega o gataifale (sili ona leaga→sili lea): {groups}"
+  }
+}

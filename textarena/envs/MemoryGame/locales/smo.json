@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id}. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched."
+  },
+  "board": {
+    "current_board": "Komiti Faatino o loʻo iai nei: {board}",
+    "current_game_board": "Taaloga o le taimi nei: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Player {player_id} did not respond with a valid direction in square brackets.",
+    "out_of_bounds": "E lē saʻo le taalo. Na filifilia e le tagata taaalo {player_id} se tulaga i fafo atu o tapulaa.",
+    "same_card_twice": "E lē saʻo le taalo. Na filifilia faalua e le tagata taaalo {player_id} se kata lava lea e tasi.",
+    "already_matched": "Invalid move. Player {player_id} selected one or both cards that have already been matched."
+  },
+  "game_message": {
+    "cards_match": "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
+    "cards_no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+  },
+  "outcome": {
+    "draw": "Na tutusa uma le numera o paʻu pepa na maua e tagata taaalo.",
+    "win": "Ua manumalo le tagata taalo {winner_id}!",
+    "turn_limit": "Ua oʻo i le taimi o le turn. O le mea ua mavae le taaloga. Na faʻaopoopo e le Pila 0 {score_0} fuainumera, na faʻaopoopo e le Pila 1 {score_1} fuainumera.",
+    "turn_limit_win": "{reason} O le Pila {winner_id} na manumalo!"
+  }
+}

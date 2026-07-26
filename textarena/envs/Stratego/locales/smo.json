@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "O oe o tagata taʻalo {player_id} i Stratego.\nLaau taumafaiga o oe o le faʻaogaina o le fuʻa a lau tagata taʻalo poʻo le aʻoaʻo o ana peʻa e mafai ona faʻaogaina.\nLaau army o oe ua faʻatupeina mo oe i luga o le poloaiga, e aofia ai lau fuʻa, bombs, ma peʻa e eseese tulaga.\n\n### Faʻatonuga o le taʻaloga\n1. **Faʻatonuga o le faʻaogaina:**\n   - I lau taimi, e mafai ona e faʻaogaina se peʻa e tasi i se faʻasoaʻi i se nofoaga e tatau i luga o le poloaiga (i luga, i lalo, i le tauagavale, poʻo i le tafaʻi) e aofia ai lau peʻa.\n   - Faʻataʻitaʻiga: Se peʻa e mafai ona faʻaogaina mai A1 i B1 poʻo A1 i A2 pe a B1 ma A2 e le aofia ai lau peʻa.\n   - Pe a faʻaogaina e oe se bomb poʻo se fuʻa, e le mafai ona faʻaogaina.\n2. **Tau:**\n   - Pe a e faʻaogaina i se nofoaga e aofia ai se peʻa a lau tagata taʻalo, ona faʻaauau lea o se tau:\n     - O le peʻa e sili atu tulaga o le tau e manumalo ma faʻaumatia le peʻa a lau tagata taʻalo.\n     - Pe a faʻasameaina le tulaga o le peʻa, ona gase le peʻa e lua.\n     - **Faʻaletonu:**\n       - Bombs e faʻaumatia ai peʻa e tele, e aofia ai miners, e mafai ona fuaina le bomb.\n       - Spies e mafai ona faʻaumatia le marshal pe a latou te faʻaogaina muamua, ae latou te leʻi manumalo i peʻa e tele.\n3. **Faʻamoemoega:**\n   - Faʻaliliuina peʻa a lau tagata taʻalo i lalo o lona faʻaogaina ma tau.\n   - Puipuia lau fuʻa i le taimi e te faʻaogaina ai lau tagata taʻalo fuʻa.\n   - Faʻaogaina Scouts i se auala faʻapitoa e faʻaliliuina peʻa a lau tagata taʻalo ma faʻaumatia peʻa e lelei.\n\n### Faʻafefea ona faʻaogaina se peʻa:\n1. Faʻaali lau peʻa ma lona nofoaga.\n2. Faʻaogaina le faʻasoaʻi: [A0 B0], lea e A0 ai le nofoaga o le peʻa, ma B0 ai le nofoaga o le faʻamoemoe.\n   - Faʻataʻitaʻiga: Pe a e faʻaogaina se peʻa mai le faʻasoaʻi 0, 0 i le faʻasoaʻi 1, 0, faʻaali [A0 B0].\n3. Faʻaali lau nofoaga e tatau i faʻatonuga o le faʻaogaina i luga.\n\n### Faʻamatalaga:\n- O le poloaiga o le a faʻaali lau peʻa ma lona nofoaga, faʻataʻitaʻiga, MN, MS.\n- O le poloaiga o le a faʻaali foi nofoaga lau tagata taʻalo peʻa e le aofia ai lona tulaga, faʻataʻitaʻiga, ?.\n- Grids e aofia ai ~ e lakes ma e le mafai ona faʻaogaina.\n- O se fautuaga, amata lau taʻaloga e faʻaogaina lau peʻa i le faʻasoaʻi muamua e faʻaliliuina peʻa a lau tagata taʻalo. Tagata taʻalo 0 ma tagata taʻalo 1 faʻasoaʻi muamua o le faʻasoaʻi D ma G faʻatasi.\n\nO le poloaiga o le a faʻaali mai nei:"
+  },
+  "board": {
+    "current_board": "Poloaiga o le poloaiga faʻaleleia:\n\n{board}\nMouve e mafai: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Faʻasalaga le aoga. E leai se gaioiga na faia e le tagata taalo {player_id} i totonu o le faatulagaga [A0 B0] .",
+    "invalid_coordinates": "Faʻamatalaga le saʻo o gaioiga. E leai ni faʻamaumauga talafeagai na tuʻuina mai e le tagata taalo {player_id} .",
+    "not_own_piece": "E lē o talafeagai le faiga e fai ai se gaoioiga. O tagata taaalo {player_id}, e tatau ona siitia atu lana lava fasi pepa taʻitasi.",
+    "scout_through_pieces": "Faʻasalaga le aoga. Tagata taalo {player_id} e le mafai ona siitia se scout i isi fasi pepa.",
+    "scout_diagonal": "Faʻasalaga le aoga. Tagata taalo {player_id} e le mafai ona siitia se scout diagonally.",
+    "non_scout_multi_square": "E lē o talafeagai le faatulagaga, e na o se sikuea taʻitasi e mafai ona siitia i taimi uma.",
+    "move_into_lake": "E lē mafai ona alu le tagata taalo {player_id} i totonu o le vaituloto.",
+    "move_onto_own_piece": "E lē mafai e le tagata taalo {player_id} ona alu i luga o lana lava fasi pepa.",
+    "move_bomb_or_flag": "Faʻatonuga leaga. Tagata taʻalo {player_id} e le mafai ona faʻaogaina se bomb poʻo se fuʻa."
+  },
+  "game_action": {
+    "you_moved": "E te faʻaogaina lau peʻa mai {source} i {dest}.",
+    "opponent_moved": "Tagata taʻalo {player_id} ua faʻaogaina se peʻa mai {source} i {dest}.",
+    "you_equal_ranks": "E te faʻaogaina lau peʻa mai {source} i {dest}. O le peʻa na faʻaaogaina e lau o {attacking_rank} ma le peʻa i le nofoaga o {target_rank}. Ona o le tulaga o le peʻa na faʻaaogaina e lau ma le peʻa i le nofoaga o le same, na o gase le peʻa e lua.",
+    "opponent_equal_ranks": "Tagata taʻalo {player_id} ua faʻaogaina se peʻa mai {source} i {dest}. O le peʻa na faʻaaogaina e le tagata taʻalo o {attacking_rank} ma le peʻa i le nofoaga o {target_rank}. Ona o le tulaga o le peʻa na faʻaaogaina e le tagata taʻalo ma le peʻa i le nofoaga o le same, na o gase le peʻa e lua.",
+    "you_miner_defused": "E te faʻaogaina lau peʻa mai {source} i {dest}. O le peʻa na faʻaaogaina e lau o {attacking_rank} ma le peʻa i le nofoaga o {target_rank}. Ona o le miner e mafai ona fuaina le bomb, na e manaʻomia le tau.",
+    "opponent_miner_defused": "Tagata taʻalo {player_id} ua faʻaogaina se peʻa mai {source} i {dest}. O le peʻa na faʻaaogaina e le tagata taʻalo o {attacking_rank} ma le peʻa i le nofoaga o {target_rank}. Ona o le miner e mafai ona fuaina le bomb, na e le manaʻomia le tau.",
+    "you_bomb_lost": "E te faʻaogaina lau peʻa mai {source} i {dest}. O le peʻa na faʻaaogaina e lau o {attacking_rank} ma le peʻa i le nofoaga o {target_rank}. Ona o le peʻa na faʻaaogaina e lau e le o se miner, na e le manaʻomia le tau.",
+    "opponent_bomb_won": "Tagata taʻalo {player_id} ua faʻaogaina se peʻa mai {source} i {dest}. O le peʻa na faʻaaogaina e le tagata taʻalo o {attacking_rank} ma le peʻa i le nofoaga o {target_rank}. Ona o le peʻa na faʻaaogaina e le tagata taʻalo e le o se miner, na e manaʻomia le tau.",
+    "you_spy_won": "E te faʻaogaina lau peʻa mai {source} i {dest}. O le peʻa na faʻaaogaina e lau o {attacking_rank} ma le peʻa i le nofoaga o {target_rank}. Ona o le spy na faʻaaogaina e lau ma le marshal i le nofoaga, na e manaʻomia le tau.",
+    "opponent_spy_lost": "Tagata taʻalo {player_id} ua faʻaogaina se peʻa mai {source} i {dest}. O le peʻa na faʻaaogaina e le tagata taʻalo o {attacking_rank} ma le peʻa i le nofoaga o {target_rank}. Ona o le spy na faʻaaogaina e le tagata taʻalo ma le marshal i le nofoaga, na e le manaʻomia le tau.",
+    "you_higher_won": "E te faʻaogaina lau peʻa mai {source} i {dest}. O le peʻa na faʻaaogaina e lau o {attacking_rank} ma le peʻa i le nofoaga o {target_rank}. Ona o le peʻa na faʻaaogaina e lau e sili atu nai lo le peʻa i le nofoaga, na e manaʻomia le tau.",
+    "opponent_higher_lost": "Tagata taʻalo {player_id} ua faʻaogaina se peʻa mai {source} i {dest}. O le peʻa na faʻaaogaina e le tagata taʻalo o {attacking_rank} ma le peʻa i le nofoaga o {target_rank}. Ona o le peʻa na faʻaaogaina e le tagata taʻalo e sili atu nai lo le peʻa i le nofoaga, na e le manaʻomia le tau.",
+    "you_lower_lost": "E te faʻaogaina lau peʻa mai {source} i {dest}. O le peʻa na faʻaaogaina e lau o {attacking_rank} ma le peʻa i le nofoaga o {target_rank}. Ona o le peʻa na faʻaaogaina e lau e le o sili atu nai lo le peʻa i le nofoaga, na e le manaʻomia le tau.",
+    "opponent_lower_won": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a lower rank than the destination, you won the battle."
+  },
+  "outcome": {
+    "flag_captured": "Ua puʻe e le tagata taalo {player_id} le fuʻa a lona fili!",
+    "no_movable_pieces": "Tagata taʻalo {winner_id} manumalo! Tagata taʻalo {loser_id} e leai se peʻa e mafai ona faʻaogaina."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Taaloga Komiti Faatino: {board}",
+    "valid_moves": "{observation}\nValid moves: {moves}",
+    "no_valid_moves_reset": "{observation} E leai ni gaoioiga talafeagai - atonu e tatau ona e faia se isi mea.",
+    "no_valid_moves_step": "{observation} E leai ni gaoioiga talafeagai e mafai ona faia, atonu o le a lē tatau ai ona fai.",
+    "scores_reset": "{observation}\nCurren Scores - Black: {black_count}, White: {white_count}\n",
+    "scores_step": "{observation}\nScores - Black: {black_count}, White: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Move must be of the form [row, col].",
+    "illegal": "Illegal move. Valid moves: {valid}"
+  },
+  "game_action": {
+    "skipped": "E tatau i le tagata taalo {pid} ona lē faia lana vaega e fai ai se isi taaloga.",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Tagata taʻalo {pid} ({piece}) e leai ni mouve e talafeagai ma e tatau ona tuʻu."
+  },
+  "outcome": {
+    "black_wins": "Ua manumalo le lanu uliuli {black_count}-{white_count}.",
+    "white_wins": "Ua manumalo le paʻepaʻe {white_count}-{black_count}.",
+    "draw": "Draw {black_count}-{white_count}."
+  }
+}

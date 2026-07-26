@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Player Surround on a {width}x{height} grid.\nYou are player {player_id}. Valid moves: '[up]' '[down]' '[left]' '[right]' or w/s/a/d.\nObjective: outlive everyone else. Trails are deadly; wall hits kill; head-on crashes kill both."
+  },
+  "board": {
+    "current": "Komiti Faatino o loʻo iai nei: {board}",
+    "after_moves": "Komiti Faatino ina ua uma ona siitia i le taimi e tasi: {board}"
+  },
+  "game_action": {
+    "invalid_death": "O le tagata taalo {player_id} na maliu ona o se gaoioiga lē saʻo."
+  },
+  "outcome": {
+    "survived_win": "Na sao mai le tagata taalo {player_id}; na paʻu uma isi.",
+    "all_crashed": "Na feoti uma tagata taaalo i le taimi e tasi.",
+    "outlived": "Na ola le tagata taalo i isi uma.",
+    "all_dead": "Ua maliliu tagata taaalo uma.",
+    "turn_limit": "Ua oo i le tapulaa o taimi e liliu ai - ua manumalo lē na ola umi.",
+    "ranking": "{reason} Faʻaiʻuga mulimuli o vaega (sili→leaga): {groups}"
+  }
+}
