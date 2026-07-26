@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a {max_rounds} round game of Kuhn Poker.\nGame Rules:\n- Kuhn Poker uses a 3-card deck with J, Q, K (J lowest, K highest)\n- Each player antes {ante} chip and receives 1 card each round (note that the cards are dealt without replacement, so you cannot have the same card as your opponent).\n- Game continues for {max_rounds} rounds\n- The player with the most chips after all rounds wins\nAction Rules:\n- '[check]': Pass without betting (only if no bet is on the table)\n- '[bet]': Add 1 chip to the pot (only if no bet is on the table)\n- '[call]': Match an opponent's bet by adding 1 chip to the pot\n- '[fold]': Surrender your hand and let your opponent win the pot"
+  },
+  "init_round": {
+    "round_start": "### Tsalo ya kgwedi {current_round} ya {max_rounds} dipalo tsa kgwedi. Karte ya gago ke: '{player_card}'",
+    "available_actions": "Ditiro tse o ka di dirang ke: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action ke [Check], [Bet], [Call], or [Fold].",
+    "not_legal": "Kgato e tshwanetse go nna {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Ditiro tse o ka di dirang ke: {legal_actions}.",
+    "round_summary": "{reason} Dipalo tsa kgwedi: Player 0: '{player_0_chips}'; Player 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Kwa bokhutlong jwa {max_rounds} raundi, batshameki ka bobedi ba ne ba na le palo e e tshwanang ya ditšhipi.",
+    "round_win": "Motshameki {player_id} o ne a latlhela bolo.",
+    "winner_player0": "Motshameki 0 o ne a fenya ka go nna le ditšhipisi tse dintsi kwa bokhutlong jwa {max_rounds} raundi.",
+    "winner_player1": "Motshameki wa 1 o ne a fenya ka go nna le ditšhipi tse dintsi kwa bokhutlong jwa {max_rounds} raundi."
+  }
+}

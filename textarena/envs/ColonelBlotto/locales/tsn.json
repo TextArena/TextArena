@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "Molaodi Alpha",
+    "commander_beta": "Commander Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nMafelo a afitileng - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRound {current_round}\nCommander Alpha o alafaditse: {p0_allocations}\nCommander Beta o alafaditse: {p1_allocations}\n",
+    "winner_alpha": "{message}Mofenyi: Molaodi Alpha",
+    "winner_beta": "{message}Winner: Commander Beta",
+    "tie": "{message}Tie! Go go go!"
+  },
+  "invalid_move": {
+    "wrong_format": "Mokgwa o sa siamang wa go tsenya tshedimosetso. Dirisa: A:5, B:10, C:5",
+    "invalid_field": "Leina la tshimo le sa amogelesegang. Dikgwa tse di maleba: {field_names}",
+    "wrong_allocation_value": "All allocations must be non-negative integers.",
+    "incorrect_total_units": "O tshwanetse go alafaka dibiri tse {num_total_units} ka mafela. Ya kgwetho ya gompieno: {current_sum}",
+    "good_allocations": "Allocation is good."
+  },
+  "outcome": {
+    "winner_alpha": "Commander Alpha a fenya {score_0}-{score_1} ka morago ga {num_rounds} mafelo!",
+    "winner_beta": "Commander Beta a fenya {score_1}-{score_0} ka morago ga {num_rounds} mafelo!",
+    "draw": "Pati e fela ka {score_0}-{score_1} kgang kgatlhanong ka {num_rounds} mafelo!",
+    "early_winner_alpha": "Commander Alpha a fenya {scores_0}-{scores_1} (puso e e tswelelang)!",
+    "early_winner_beta": "Commander Beta a fenya {scores_1}-{scores_0} (puso e e tswelelang)!"
+  }
+}

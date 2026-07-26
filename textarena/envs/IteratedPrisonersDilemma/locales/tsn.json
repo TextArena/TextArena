@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "O mmoki {player_id} mo kgweding ya Iterated Prisoner's Dilemma e e tsamayanang {num_rounds} rounds.\n\nTsamaiso ya Kgwebo:\n- Pele ga tsela e nngwe o na le {total_conversation_rounds} matshelo a go araba ka boikokobetso.\n- Morago ga moo, barati ba babedi ba tla kopa go tsaya tsela ka nako e le nngwe.\n\nMekgwa ya Go Kwala (e e isang botlhokwa mo kgweding e nngwe):\n- Barati ba babedi ba tsaya tsela ➜ ngwe le ngwe {cooperate_reward}\n- Barati ba babedi ba tsaya tsela ya go kgalema ➜ ngwe le ngwe {mutual_defect_reward}\n- Mmoki a le mongwe a tsaya tsela ya go kgalema, a mongwe a tsaya tsela ➜ Mmoki a tsayang tsela ya go kgalema {defect_reward}, Mmoki a tsayang tsela {sucker_reward}\n\nTsela ya go tlhoma:\n- Ka nako ya pitso: o ngwale maele a o ka ratang.\n- Ka nako ya tsela: o ngwale '[Cooperate]' kgotsa '[Defect]' (e e seng sa tsebe). O ka oketsa maele a mangwe pele kgotsa morago ga tokana."
+  },
+  "phases": {
+    "conversation_finished": "Pitso e fetilwe ka round {round}. Le ka araba '[Cooperate]' kgotsa '[Defect]' ka nako ya \\boxed{{}}.",
+    "starting_round": "--- Go simolola Motshameko {round} ---",
+    "round_summary": "Dikamano tsa round {round}:\n{outcome}\nMmoki 0 o ile a kwala {r0} (kwa bongwe {score_0}), Mmoki 1 o ile a kwala {r1} (kwa bongwe {score_1})."
+  },
+  "outcome": {
+    "winner": "Mmoki {winner} a fenya {win_score} - {lose_score}.",
+    "draw": "Draw! Both players scored {s0}.",
+    "round_both_cooperate": "Badiri ka bobedi ba ne ba dirisana mmogo.",
+    "round_both_defect": "Batshameki ka bobedi ba ne ba ngwega.",
+    "round_p0_cooperates_p1_defects": "Motshameki 0 o ne a dirisana mmogo, mme motshameki 1 ene ga a ka a dira jalo.",
+    "round_p0_defects_p1_cooperates": "Motshameki 0 o ne a fapoga, mme motshameki 1 ene o ne e le modirimmogo."
+  }
+}

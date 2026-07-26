@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Welcome to Frozen Lake!\n\nYou are represented by 'P' on the grid.\nGrid symbols:\n  ' ' = Frozen surface (safe to walk on)\n  'H' = Hole (fall in and lose!)\n  'G' = Goal (reach this to win!)\n  'P' = Your current position\n\nAvailable actions: up, down, left, right (or w, a, s, d)\nType your action as: [up], [down], [left], [right] or [w], [a], [s], [d]\n\nObjective: Navigate from the start (top-left) to the goal (bottom-right) without falling into any holes!\n"
+  },
+  "board": {
+    "current_board": "Boro ya kgwele ya tshwane:\n\n{board}\n\nTswelelo ya dikgetho: {actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Tswelelo e seng wa kwa molao. Tswelela [up], [down], [left], [right] gape [w], [a], [s], [d].",
+    "unknown_action": "Tiragatso e sa itsiweng '{action}'. Dirisa godimo, tlase, molemeng, mojeng kgotsa w, a, s, d.",
+    "hit_wall": "O ne wa leka go tsamaya {action} mme o ne wa thula lebota!"
+  },
+  "game_action": {
+    "moved": "O ile wa tswelela {action} go ya kwa poso ({row}, {col})."
+  },
+  "outcome": {
+    "win": "O fitlheletse mokgele wa gago!",
+    "fell_in_hole": "O wetse mo mosimeng! Motshameko o fedile. O weditse {pct}% ya loeto go fitlha kwa mokgeleng.",
+    "turn_limit": "O fitlheletse tekanyetso ya go retologa! Motshameko o fedile. O weditse {pct}% ya loeto lwa gago go fitlha kwa mokgeleng."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Boro ya kgwedi:\n\n{board}\nDitshelelo tse di kwagalelang: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Dipilara tsa Bogare --- ",
+    "pile": "{observation}Lepateng {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Tshelelo ya Modiri {player_id} ---\n",
+    "payoff": "{observation}Lepateng la Tshwaro (Pino ya Godimo): {top_card}, Bolelelwang bja Lepateng la Tshwaro: {payoff_length}\n",
+    "hand": "{observation}Lepata: {hand}\n",
+    "discard": "{observation}Dipileng tse di Tshwarwang: {discard}\n",
+    "empty": "Ga go na sepe mo teng ga yone."
+  },
+  "game_message": {
+    "no_cards_left": "Ga go na dikarata tse dingwe gape tsa go goga. Gakologelwa gore o ka tshameka dikarata mo metsweding e: 1. Letsogo la gago 2. Karata ya kwa godimo ga mokoa wa madi a gago 3. Kharata ya fa pele ya mongwe le mongwe wa mekgobo ya gago ya go latlha.  Go tswa foo, dira tiro eno mme o boele morago gangwe fela ke gone o tla bonang karata eo."
+  },
+  "invalid_move": {
+    "wrong_format": "Mokgweleo o sa amogelesegang. Motshameki {player_id} ga a araba ka motsamao wa boammaaruri mo dikhurumelong tsa sekwere.",
+    "invalid_play": "Tshelelo e si sa kgonega. Modiri {player_id} o ile a tsaya tshelelo la {card} mo center pile {index}.",
+    "discard_from_payoff": "Go latlha go sa amogelesege.Motshameki {player_id} o ne a leka go latlhela karata e nngwe mo mokgokoloseng wa tuelo.",
+    "discard_not_in_hand": "Go latlha go sa amogelesege.Motshameki {player_id} o ne a leka go latlhela karata e e seng mo seatleng.",
+    "wrong_move_type": "Invalid move type. Player {player_id} did not respond with a valid move type."
+  },
+  "game_action": {
+    "you_drew": "You drew cards.",
+    "opponent_drew": "Motshameki {player_id} o ne a goga dikarata.",
+    "you_played": "O ne wa tshameka {card} mo moleng o mogolo {index}.",
+    "opponent_played": "Motshameki {player_id} o ne a tshameka {card} mo moleng wa bogare {index}.",
+    "you_discarded": "O ile wa tshwara {card} go ya go tshwarwa mo dipileng {index}, mme seo gape se bolela gore o fetile turn ya gago. Ga go na tshelelo e nngwe ya gago e ye e kgathwiwiwa mo turn eno. Modiri {next_player_id} o tlaa tsena a go ya ka morago.",
+    "opponent_discarded": "Modiri {player_id} o ile a tshwara {card} go ya go tshwarwa mo dipileng {index}, mme seo gape se bolela gore o fetile turn ya gagwe. Ga go na tshelelo e nngwe ya Modiri {player_id} e ye e kgathwiwiwa mo turn eno. Modiri {next_player_id}, o tlaa tsena a go ya ka morago. Tswela ka aksi yotlhe ka tsela [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Modiri {current_player} o ile a fetsa dipino tsa gagwe tse di salelang! Modiri {current_player} o a fenya!",
+    "deadlock_player_0": "Deadlock e fitlhile! Modiri 0 o a fenya le {player_0_payoff} dipino tse di salelang vs Modiri 1's {player_1_payoff} dipino.",
+    "deadlock_player_1": "Deadlock e fitlhile! Modiri 1 o a fenya le {player_1_payoff} dipino tse di salelang vs Modiri 0's {player_0_payoff} dipino.",
+    "deadlock_tie": "Deadlock e fitlhile le tie! Batsheli ba babedi ba na {player_0_payoff} dipino tse di salelang. Modiri {current_player} o a fenya ka fa tlase."
+  }
+}

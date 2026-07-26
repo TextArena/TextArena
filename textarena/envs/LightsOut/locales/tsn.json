@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Amogele wa go Lights Out! O na le gridi ya {size}x{size} ya maswe.\nYeo e nneleng ya gago ke go tlhoka maswe OTLHE (e bopilwe ke '.')\nFa o batla maswe, o a tlhoka yona YA ENA le ba bangwe ba yona (kwa ntle/kwa borwa/morago/molema).\nNgwana [row col] go batla maswe (0-indeksed, kwa hoo, kgetho e ntshe ya 0-{max_index}).\nO na le dikgetho tse {max_turns} tsa go o hloile puzzle.\nTaolo: 'O' = maswe a tsamaya, '.' = maswe a tlhokafala"
+  },
+  "board": {
+    "current_state": "Tsheko ya grido ya tshimologo (Lekgetho {moves_made}, {moves_left} dikgetho di shileng, {completion}% e feletswe):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kgato e tshwanetse go nna ka sebopego sa [row col] fa mola le kholomo di le dipalo tse di feletseng tsa 0 go ya kwa {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Congratulations! You solved the puzzle in {moves_used} moves!",
+    "loss": "Papadi e fedile! O ile oa dula dikgetho tsotlhe {max_turns} bonyane ba o o hloile puzzle. Phephetso ya boraro: {completion}%\nPhephetso ya boraro:\n{grid}"
+  }
+}

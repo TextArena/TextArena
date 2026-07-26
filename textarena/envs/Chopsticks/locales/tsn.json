@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Chopsticks. On your turn, choose one of:\n  + Attack:  '[attack M O]'  where M=your hand (0 or 1), O=opponent hand (0 or 1).\n    - Opponent's hand count increases by your hand; if >=5, it becomes 0.\n  + Split:   '[split L R]'  to redistribute your total fingers into L and R (L+R = your total).\nReply with exactly one of those commands."
+  },
+  "board": {
+    "current_board": "Boro ya kgwele ya tshwane:\nPlayer 0: {hands_0}\nPlayer 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Seatla sa gago {my_idx} se sule.",
+    "opp_hand_dead": "Opponent hand {opp_idx} is already dead.",
+    "split_sum": "Palo ya dipalo tse di kgaoganngwang e tshwanetse go nna {total}.",
+    "split_no_change": "Go kgaoganya go tshwanetse ga fetola tsela e o dirisang diatla tsa gago ka yone.",
+    "invalid_command": "Invalid move. Use “[attack M O]” or “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} e tlhabanya letsogo la P{opp_id} {opp_idx}: le tsamaya go tswa {opp_val} go ya {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Both opponent hands dead.",
+    "draw": "The turn limit has been reached."
+  }
+}
