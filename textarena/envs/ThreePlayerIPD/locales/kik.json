@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Prisoner's Dilemma iliyopimwa mara 3. Mchezo huu utadumu {num_rounds} raundi.\nMuundo wa Raundi:\n• {conv_rounds} mizunguko ya mazungumzo huru\n• 1 mzunguko wa uamuzi - wasilisha token moja kwa kila mpinzani: '[<opp-id> cooperate]' au '[<opp-id> defect]' (kwa mfano '[1 defect] [2 cooperate]'; kwa kawaida ni 'ushirikiano'). \nMatrixi ya malipo kwa jozi (inayotumika kwa kila jozi isiyo na mpangilio):\n  - Wote wanaushirikiana  ->  {reward}\n  - Wote wanakataa     ->  {punishment}\n  - Wewe unakataa, wao wanaushirikiana -> {temptation}\n  - Wewe unashirikiana, wao wanakataa -> {sucker}\nMchezaji(mchezaji) aliye na alama ya juu zaidi mwishoni mwa raundi zote anashinda."
+  },
+  "round": {
+    "start": "─── Starting Round {round} ───\tYou can converse freely for the next {conv_rounds} rounds.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Results:",
+    "pair_line": "{observation}\n\t Player {i} vs Player {j} chose to {choice_i} and {choice_j} respectively (Player {i} gained {gain_i}, Player {j} gained {gain_j})",
+    "scores_open": "{observation} -> Ngathĩti cia mahinda maya: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Mabeki ya mwisho: {scores}.  Vikundi vya uwekaji alama (mbaya→bora): {groups}"
+  }
+}

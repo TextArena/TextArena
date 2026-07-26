@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "The game begins. Trump suit: {trump_suit} (trump card: {trump_str}).",
+    "no_trump_card": "gũtirĩ o na ũmwe"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in German Whist.\n{phase_info}\nYou hold {hand_size} cards.\nPlay a card with '[play N]', where N is its position in your hand (for example '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "Gũtirĩ kaarĩ kahingũririo - mũbira wa gũcaria nĩ wambĩrĩirie.",
+    "deck_empty": "Gĩcunjĩ kĩu gĩtirĩ kĩndũ - gũtirĩ kandi ĩheanĩtwo.",
+    "available": "Kaarĩ ka kũrutwo: {card}",
+    "available_trump": "Kaarĩ ka kũrutwo: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Gũthaka gũtiagĩrĩire. Hũthĩra '[play N]' gũthaka karati ya Nth ĩrĩa ũrĩ nayo guoko-inĩ gwaku.",
+    "bad_position": "Kaarĩ kau gatirĩ ho. Ũkoragwo na kaarĩ {hand_size}",
+    "must_follow_suit": "No mũhaka wĩke o taguo na ũhũthagĩre kadi ya {lead_suit}.",
+    "invalid_play": "That card cannot be played."
+  },
+  "game_action": {
+    "played": "Player {player_id} played {card}."
+  },
+  "trick": {
+    "won": "Player {winner_id} wins the trick with {card}.",
+    "won_learning": "Player {winner_id} wins the trick with {card} and takes the face-up card."
+  },
+  "phase": {
+    "learning_complete": "The deck is exhausted. The learning phase is over - every remaining trick counts towards victory."
+  },
+  "draw": {
+    "winner_received": "Nĩ ũhootanĩte kĩgeranio na ũkĩheo {card}.",
+    "loser_received": "Ũrĩ o hĩndĩ ũrahĩirũo nĩ mũtego na ũkĩruta {card} kuuma gĩthũri-inĩ.",
+    "winner_preview": "Kaarĩ ka kerĩ karutagwo nĩ {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tricks won so far - Player 0: {tricks0}, Player 1: {tricks1}",
+    "scores_playing": "Scoring tricks - Player 0: {tricks0}, Player 1: {tricks1}",
+    "phase": "Kĩrathi: {phase}",
+    "phase_learning": "Mzunguko: {phase} (〕{remaining_cards} kadi zimesalia katika sitaha)"
+  },
+  "hand": {
+    "no_cards": "Gũtirĩ kaarĩ.",
+    "no_cards_in_hand": "Gũtirĩ kaarĩ moko-inĩ maku.",
+    "header": "Guoko gwaku:",
+    "trump_indicator": "(TRUMP) Nĩ ngenaga mũno.",
+    "suit_line": "{observation}\n  {suit}〕{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Gũtirĩ ihengere cia kũina irĩ na kĩene kĩu.",
+    "header": "Kĩgeranio kĩa ũmũthĩ:",
+    "trump_indicator": "(TRUMP) Nĩ ngenaga mũno.",
+    "card_line": "{observation}\n  Mchezaji {player_id}: {card}〕{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Gĩkundi gĩtiambĩrĩirie",
+    "header": "=== GĨTŨMBA KĨA NJARIMANI=== Mũrango wa mũico:",
+    "phase": "{observation}\nMzunguko: {phase}",
+    "trump_suit": "{observation}\nTrump suit: {trump_suit}",
+    "trump_card": "{observation}\nKadi ya trump: {card}",
+    "cards_left": "{observation}\nKadi zimesalia: {count}",
+    "next_card": "{observation}\nNext card for winner: {card}",
+    "blank": "{observation}  nĩ ũndũ wa gũkua gwakwa.",
+    "current_trick": "{observation} Ũrĩa ũramenya rĩu:",
+    "trump_indicator": "(TRUMP) Nĩ ngenaga mũno.",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPlayer {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} cards in hand"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

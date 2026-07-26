@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Gĩcunjĩ kĩa mũbira: {board}",
+    "valid_moves": "{observation}\nMikaro igai: {moves}",
+    "no_valid_moves_reset": "{observation}\nNo valid moves - you may have to skip.",
+    "no_valid_moves_step": "{observation}\nNo valid moves – you may have to skip.",
+    "scores_reset": "{observation}\nMakaro mang'ea - Mweusi: {black_count}, Mweru: {white_count}\n",
+    "scores_step": "{observation}\nMakaro - Mweusi: {black_count}, Mweru: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Gũthiĩ no mũhaka gũkorũo kũrĩ [row, col].",
+    "illegal": "Kũhĩtũkĩra watho: {valid}"
+  },
+  "game_action": {
+    "skipped": "Mũthaaki {pid} nĩ aagire gũkinya ihinda rĩake.",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Player {pid} ({piece}) has no valid moves and must skip."
+  },
+  "outcome": {
+    "black_wins": "Mbarĩ njirũ nĩ ĩhootanĩte {black_count}-{white_count}.",
+    "white_wins": "Mbarĩ ya rangi mwerũ nĩ ĩhootanĩte {white_count}-{black_count}.",
+    "draw": "Gũthondekithia {black_count}-{white_count}."
+  }
+}

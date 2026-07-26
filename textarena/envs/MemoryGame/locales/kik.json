@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id}. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched."
+  },
+  "board": {
+    "current_board": "Kĩbungo kĩa rĩu: {board}",
+    "current_game_board": "Gĩcunjĩ kĩa rĩu: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Player {player_id} did not respond with a valid direction in square brackets.",
+    "out_of_bounds": "Mũgambo ũtarĩ wa kĩhooto. Mwĩroreri {player_id} nĩ athuurĩte handũ hatarĩ harĩa hohoteka.",
+    "same_card_twice": "Invalid move. Player {player_id} selected the same card twice.",
+    "already_matched": "Mwĩyandĩkithia ũtarĩ wa kĩhooto. Mũgambo {player_id} nĩ agũthuurĩte karati ĩmwe kana cierĩ iria ciarĩ cia kũringithania mbere ĩyo."
+  },
+  "game_message": {
+    "cards_match": "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
+    "cards_no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+  },
+  "outcome": {
+    "draw": "Athaki acio erĩ maiganaga kaarĩ o kamwe.",
+    "win": "Mũthaaki {winner_id} nĩ aatooranĩtie!",
+    "turn_limit": "Mipaka ya mzunguko imeridhika. Mchezo umemaliza. Mchezaji 0 amepata {score_0} pointi, Mchezaji 1 amepata {score_1} pointi.",
+    "turn_limit_win": "{reason} Player {winner_id} has won!"
+  }
+}
