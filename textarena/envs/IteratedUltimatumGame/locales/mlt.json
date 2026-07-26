@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Inti Player {player_id}, qed tilgħab {num_rounds} rawnds tal-Iterated Ultimatum Game.\nGħandek ${pool} li għandek taqsimu dan ir-rawnd bejnek u Player {other_id}.\n\nProposer:\n  - Għamel offerta: [Offer: $X] (0 <= X <= pool)\n  - Jekk aċċettat → Inti tirċievi $(pool - X), l-ieħor player jirċievi $X\n  - Jekk irrifjutat → It-tnejn jirċievu $0\n  - Eżempju: [Offer: $3]  jew  'Nħoss li dan hu ġust. [Offer: $5]'\n\nResponder:\n  - Iddisiema dwar l-offerta b' [Accept] jew [Reject]\n  - Eżempju: 'Dan jidher ragonevoli. [Accept]'\n            'Wisq ingjust. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Rawnd {round_number} tibda! ---\nPlayer {proposer_id} huwa l-proponiment, Player {responder_id} huwa r-rispondent.",
+    "offer": "Rawnd {round_number}: Player {proposer_id} joffri ${offer} lil Player {responder_id} (żamm ${keep}).",
+    "accepted": "Player {responder_id} aċċetta! Rawnd {round_number} rebħ: Player {proposer_id} +${proposer_gain}, Player {responder_id} +${responder_gain}. Totals ġodda: Player 0: ${total_0}, Player 1: ${total_1}.",
+    "rejected": "Player {responder_id} irrifjuta l-offerta! Rawnd {round_number} rebħ: It-tnejn players +$0. Totals jibqgħu: Player 0: ${total_0}, Player 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Il-proponent għandu jagħmel offerta bl-użu tal-format [Offer: $X].",
+    "bad_integer": "L-ammont tal-offerta għandu jkun numru sħiħ validu.",
+    "out_of_range": "L-offerta għandha tkun bejn $0 u ${pool}.",
+    "no_current_offer": "L-ebda offerta attwali li tista' tirrispondi għaliha.",
+    "accept_or_reject": "Ir-rispondent irid jagħmel [Accept] jew [Reject] l-offerta."
+  },
+  "outcome": {
+    "win": "Player {winner} rebaħ bi ${winner_total} total kontra ${loser_total} ta' Player {loser}.",
+    "draw": "It-tnejn li huma spiċċaw b'total ta '$ {total}."
+  }
+}

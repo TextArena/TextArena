@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Inti Player {player_id} f'Dilemma tal-Prigunier Iterat li jkopri {num_rounds} rounds.\n\nStruttura tal-Logħba:\n- Qabel kull deċiżjoni int għandek {total_conversation_rounds} drabi biex tikkomunika b'xejn.\n- Wara dik, ż-żewġ plejers jagħmlu għażla simultanja biex jaħdmu flimkien jew jikkontradixxu.\n\nMatrizza tal-Ġid (fissa kull round):\n- Ż-żewġna jaħdmu flimkien ➜ kull wieħed {cooperate_reward}\n- Ż-żewġna jikkontradixxu ➜ kull wieħed {mutual_defect_reward}\n- Wieħed jikkontradixxi, wieħed jaħdem flimkien ➜ Kontradittur {defect_reward}, Kooperatur {sucker_reward}\n\nKif tibqa' tilgħab:\n- Matul il-konversazzjoni: tikteb test ikollok bżonn.\n- Matul fażi tad-deċiżjoni: tiklut '[Cooperate]' jew '[Defect]' (insensittiv għall-kapitali). Tista' żid test eċċedenti qabel/u wara t-token."
+  },
+  "phases": {
+    "conversation_finished": "Konversazzjoni spiċċat għar-round {round}. Jekk jogħġbok irrispondi bil-'[Cooperate]' jew '[Defect]' ġo \boxed{{}}.",
+    "starting_round": "--- Starting Round {round} ---",
+    "round_summary": "Riżultati tar-round {round}:\n{outcome}\nPlayer 0 ikiseb {r0} (total {score_0}), Player 1 ikiseb {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} jirbaħ {win_score} - {lose_score}.",
+    "draw": "Żieda! Iż-żewġ plejers skorjaw {s0}.",
+    "round_both_cooperate": "Iż- żewġ plejers kkooperaw.",
+    "round_both_defect": "Iż- żewġ plejers ċedew.",
+    "round_p0_cooperates_p1_defects": "Player 0 cooperated, Player 1 defected.",
+    "round_p0_defects_p1_cooperates": "Il-plejer 0 ċeda, il-plejers 1 kkooperaw."
+  }
+}

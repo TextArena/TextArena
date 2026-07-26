@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Il-logħba tibda. Suit trump: {trump_suit} (karta trump: {trump_str}).",
+    "no_trump_card": "ebda waħda"
+  },
+  "player_prompt": {
+    "intro": "Inti Player {player_id} fil-Whist Ġermaniż.\n{phase_info}\nInt għandek {hand_size} karti.\nLagħab karta bil-'[play N]', fejn N huwa l-pożizzjoni tagħha fl-idejk (pereżempju '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "Kull trick minn issa 'l quddiem jgħodd għall-rebħa."
+  },
+  "next_card": {
+    "playing_phase": "M'hemm l-ebda karta offruta - il-fażi tal-logħob bdiet.",
+    "deck_empty": "Il- gverta hija vojta - m'hemm l- ebda karta offruta.",
+    "available": "Karta offruta: {card}",
+    "available_trump": "Il-karta offruta: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Format ta 'mover invalidu. Uża' [play N] 'biex tilgħab l-Nth karta f'idejk.",
+    "bad_position": "Dik il-pożizzjoni tal-karta ma teżistix. Għandek {hand_size} karti f'idejk.",
+    "must_follow_suit": "Għandek issegwi l-eżempju u tilgħab karta {lead_suit}.",
+    "invalid_play": "Din il- karta ma tistax tintlagħab."
+  },
+  "game_action": {
+    "played": "Player {player_id} lagħab {card}."
+  },
+  "trick": {
+    "won": "Player {winner_id} wins the trick with {card}.",
+    "won_learning": "Player {winner_id} wins the trick with {card} and takes the face-up card."
+  },
+  "phase": {
+    "learning_complete": "Il-gverta hija eżawrita. L-istadju tat-tagħlim huwa fuq - kull trick li jibqa 'jgħodd lejn ir-rebħa."
+  },
+  "draw": {
+    "winner_received": "Int rebħet it-truc u rċevejt {card}.",
+    "loser_received": "You lost the trick and drew {card} from the deck.",
+    "winner_preview": "Il-karta li jmiss offruta hija {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Trikqliet rebħu sal-lum - Player 0: {tricks0}, Player 1: {tricks1}",
+    "scores_playing": "Trikqliet ta' skor - Player 0: {tricks0}, Player 1: {tricks1}",
+    "phase": "Fażi: {phase}",
+    "phase_learning": "Fażi: {phase} ({remaining_cards} karti baqgħu fil-ġabra)"
+  },
+  "hand": {
+    "no_cards": "Ebda karti.",
+    "no_cards_in_hand": "Ebda karti f'idejn.",
+    "header": "Idek:",
+    "trump_indicator": "(TRUMP) Għaliex?",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "L-ebda karti lagħbu din il-trick.",
+    "header": "Trick attwali:",
+    "trump_indicator": "(TRUMP) Għaliex?",
+    "card_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Il- logħba ma bdietx .",
+    "header": "=== ĠERMAN WHIST logħba ===",
+    "phase": "{observation}\nFażi: {phase}",
+    "trump_suit": "{observation}\nSuit trump: {trump_suit}",
+    "trump_card": "{observation}\nTrump card: {card}",
+    "cards_left": "{observation}\nKarti li baqgħu fil-ġabra: {count}",
+    "next_card": "{observation}\nKarta li jmiss għar-rebbieħ: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Trick attwali:",
+    "trump_indicator": "(TRUMP) Għaliex?",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPlayer {player_id}: {scoring} triqqliet ({tricks} total), {hand_size} karti fl-idejn"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}
