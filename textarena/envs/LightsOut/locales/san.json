@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "लाइट्स आउट में आपका स्वागत है! आपके पास {size}x{size} प्रकाश ग्रिड है।\nआपका लक्ष्य सभी प्रकाश बंद करना है (बिंदु द्वारा दर्शाया गया है)\nजब आप एक प्रकाश पर क्लिक करते हैं, तो यह स्वयं और अपने आसपास के पड़ोसियों (ऊपर/नीचे/बाएं/दाएं) को टॉगल करता है।\nप्रकाश दबाने के लिए [row col] टाइप करें (0-索डेक्स्ड, इसलिए वैध श्रेणी 0-{max_index} है)।\nआपके पास पहेली को हल करने के लिए अधिकतम {max_turns} चालें हैं।\nकिंवदंती: 'ओ' = प्रकाश चालू, '.' = प्रकाश बंद"
+  },
+  "board": {
+    "current_state": "वर्तमान ग्रिड अवस्था (चाल {moves_made}, {moves_left} चालें शेष, {completion}% पूर्ण):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action must be in format [row col] where row and col are integers from 0 to {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "अभिनन्दनम्! भवता {moves_used}-चरणैः पहेलिनः हलः कृतः।",
+    "loss": "गेम समाप्त! आपने सभी {max_turns} चालें पूरी कीं बिना पहेली का समाधान किए। अंतिम पूर्णता: {completion}%\nअंतिम अवस्था:\n{grid}"
+  }
+}

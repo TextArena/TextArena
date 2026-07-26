@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "आप मास्टरमाइंड खेल रहे हैं।\nआपको वह कोड ढूंढना होगा जो {code_length} अंकों का लंबा है, प्रत्येक अंक 1 से {num_numbers} तक, {repeats}.\nआपके उत्तर में, आप '[2 1 4 5]' के रूप में अपना अनुमान प्रस्तुत कर सकते हैं।\nप्रत्येक अनुमान के बाद, आपको काले और सफेद पेग्स के रूप में प्रतिक्रिया प्राप्त होगी।\nएक काला पेग एक सही अंक को सही स्थिति में दर्शाता है, जबकि एक सफेद पेग एक सही अंक को गलत स्थिति में दर्शाता है।\nआपके पास {max_turns} मोड़ हैं कोड का अनुमान लगाने के लिए।\n",
+    "with_repeats": "पुनरावृत्त्यभावः।",
+    "no_duplicates": "with no duplicates"
+  },
+  "invalid_move": {
+    "wrong_format": "You did not respond with a space-separated list of numbers wrapped in square brackets.",
+    "not_integers": "सर्वेषु प्रविष्टेष्वपि वैधं पूर्णाङ्कं भवितुम् अर्हति ।",
+    "wrong_length": "अनुमानस्य अन्तर्गतं {code_length}संख्याः भवितव्या ।",
+    "out_of_range": "सर्वेषां संख्यायाः अन्तरालम् 1 तः {num_numbers} यावत् भवेत् ।",
+    "duplicates_not_allowed": "द्वित्वं संख्यायां न अनुमतम्।",
+    "repeated_guess": "भवन्तः अगोचरं {guess} अनुमानम् कृतवन्त। कृपया अन्यः अनुमानं प्रयतन्तु ।"
+  },
+  "game_action": {
+    "feedback": "Submitted [{guess}]. Feedback: {black_pegs} black peg(s), {white_pegs} white peg(s)."
+  },
+  "outcome": {
+    "win": "आपने कोड को तोड़ दिया है, {black_pegs} में से {code_length} पेग्स को सही ढंग से हल किया",
+    "turn_limit": "वक्र-सीमा आगता। भवन् तः {percent} प्रतिशतं संख्यायां उचितम् अवगच्छत् ।"
+  }
+}

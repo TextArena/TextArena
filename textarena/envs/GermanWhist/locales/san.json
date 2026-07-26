@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "खेल शुरू होता है। ट्रम्प सूट: {trump_suit} (ट्रम्प कार्ड: {trump_str})।",
+    "no_trump_card": "न किञ्चिदपि ।"
+  },
+  "player_prompt": {
+    "intro": "आप जर्मन व्हिस्ट में प्लेयर {player_id} हैं।\n{phase_info}\nआपके पास {hand_size} कार्ड हैं।\n'[play N]' के साथ एक कार्ड खेलें, जहां एन आपके हाथ में इसकी स्थिति है (उदाहरण के लिए '[play 3]')।",
+    "phase_learning": "शिक्षणाध्यायः प्रत्येकं षड्विंशतितमं चरणम् विजित्य विजयी मुखपृष्ठे स्थितं कार्डं गृहीत्वा पराजयिन्यः च अग्रेषु चार्टानि गच्छति। अस्य चरणस्य प्राप्ताणि शस्त्रक्रियायाः विजयार्थं गणना न भवति ।",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "न च कार्डो दीयते - क्रीडायाः चरणः आरब्धम् अस्ति ।",
+    "deck_empty": "न च कार्डं प्रदत्तम् अस्ति।",
+    "available": "कार्डः {card}",
+    "available_trump": "कार्डः {card} (ट्रम्प)"
+  },
+  "invalid_move": {
+    "wrong_format": "अमान्य गतिः स्वरूपम्. '[play N]' इत्यनेन अस्मिन् हस्ते विद्यमानस्य नतुमकार्डं प्रयुज्यताम् ।",
+    "bad_position": "न च तत्कार्थस्थाने अस्ति। भवतः {hand_size}कार्डः वर्तते ।",
+    "must_follow_suit": "भवन्तः अपि अनुकरणं कर्तुम्, तथा {lead_suit}कार्डम् क्रीडन्तु।",
+    "invalid_play": "तत्कारणं कर्त्तुं न शक्यते।"
+  },
+  "game_action": {
+    "played": "खिलाड़ी {player_id} ने {card} खेला।"
+  },
+  "trick": {
+    "won": "प्लेयर {winner_id} {card} के साथ ट्रिक जीतता है।",
+    "won_learning": "प्लेयर {winner_id} {card} के साथ ट्रिक जीतता है और चेहरा-उप कार्ड लेता है।"
+  },
+  "phase": {
+    "learning_complete": "न चैवं, यदि सः स् वशब्देन \"अभिनन्दनीयः\" इति वदति तर्हि तस्य अर्थम् अयमस्ति यत् अस् य पदानि अपि उपयुज्यन्ते।"
+  },
+  "draw": {
+    "winner_received": "भवता {card} प्राप्तः।",
+    "loser_received": "भवता षड्विधः गुणेन {card} इति सङ्ख्या प्राप्ता।",
+    "winner_preview": "अग्रे प्रदत्तं कार्डम् {card} अस्ति ।"
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tricks won so far - Player 0: {tricks0}, Player 1: {tricks1}",
+    "scores_playing": "स्कोरिंग ट्रिक्स - प्लेयर 0: {tricks0}, प्लेयर 1: {tricks1}",
+    "phase": "चरणः {phase}",
+    "phase_learning": "प्रावस्था: {phase} ({remaining_cards} कार्ड्स डेक में बचे हैं)"
+  },
+  "hand": {
+    "no_cards": "न च कार्डं।",
+    "no_cards_in_hand": "न च कार्डं हस्तस्य मध्ये अस्ति।",
+    "header": "तव हस्तेन:",
+    "trump_indicator": "(ट्रम्पः)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "No cards played yet this trick.",
+    "header": "वर्तमानस्य युक्त्याः।",
+    "trump_indicator": "(ट्रम्पः)",
+    "card_line": "{observation}\n  प्लेयर {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "क्रीडा आरम्भः न अभवत् ।",
+    "header": "=== जर्मन् विस्ट् गेम्===",
+    "phase": "{observation}\nप्रावस्था: {phase}",
+    "trump_suit": "{observation}\nट्रम्प सूट: {trump_suit}",
+    "trump_card": "{observation}\nट्रम्प कार्ड: {card}",
+    "cards_left": "{observation}\nकार्ड्स वामदेव: {count}",
+    "next_card": "{observation}\nअग्रिम कार्ड विजेता के लिए: {card}",
+    "blank": "{observation} ।",
+    "current_trick": "{observation} अद्यतनं युक्तिमन्त्रः:",
+    "trump_indicator": "(ट्रम्पः)",
+    "trick_line": "{observation}\n  खिलाड़ी {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nखिलाड़ी {player_id}: {scoring} स्कोरिंग ट्रिक्स ({tricks} कुल), {hand_size} कार्ड हाथ में"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

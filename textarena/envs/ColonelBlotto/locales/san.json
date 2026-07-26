@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "आधिपत्यं अल्फा।",
+    "commander_beta": "कमाण्डर बेटाः"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nराउंड {current_round}\nकमांडर अल्फा ने आवंटित किया: {p0_allocations}\nकमांडर बीटा ने आवंटित किया: {p1_allocations}\n",
+    "winner_alpha": "{message}विजेताः कमाण्डर् अल्फाः",
+    "winner_beta": "{message}विजेताः कमाण्डर् बेटाः",
+    "tie": "{message}तत्!"
+  },
+  "invalid_move": {
+    "wrong_format": "अमान्य इनपुट स्वरूपः उपयोग: A:5 , B:10 , C:5",
+    "invalid_field": "अमान्य क्षेत्रनाम (असत्य) । वैधक्षेत्रेः {field_names}",
+    "wrong_allocation_value": "सर्वेषु विनियोगेषु न ऋणात्मकं पूर्णाङ्कं भवेत् ।",
+    "incorrect_total_units": "You have to allocate exactly {num_total_units} units. Current sum: {current_sum}",
+    "good_allocations": "आवंटनं सुकरम् अस्ति।"
+  },
+  "outcome": {
+    "winner_alpha": "कमांडर अल्फा जीतता है {score_0}-{score_1} {num_rounds} राउंड के बाद!",
+    "winner_beta": "कमांडर बीटा जीतता है {score_1}-{score_0} {num_rounds} राउंड के बाद!",
+    "draw": "गेम {score_0}-{score_1} टाई में समाप्त होता है {num_rounds} राउंड के बाद!",
+    "early_winner_alpha": "कमांडर अल्फा जीतता है {scores_0}-{scores_1} (बहुमत प्राप्त किया गया)!",
+    "early_winner_beta": "कमांडर बीटा जीतता है {scores_1}-{scores_0} (बहुमत प्राप्त किया गया)!"
+  }
+}

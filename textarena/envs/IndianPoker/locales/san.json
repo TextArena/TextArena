@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a game of Indian Poker.\n- 52-card deck; you see only the opponent's card.\n- Ante {ante} chip(s) each round, {max_rounds} round(s) total.\n- Valid moves: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X is a positive integer <= your chip count.)\n- Highest hidden card wins the pot at showdown.\n"
+  },
+  "round": {
+    "announce": "### राउंड {current_round}/{max_rounds}\nआपके विरोधी का कार्ड है: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "एक ही विकल्प दें, जैसे कि '[check]', '[bet 2]', '[call]', '[raise 3]', या '[fold]'.",
+    "cannot_check": "न शक्नोति [check] - भवद्भिः शर्तेः सम्मुखं स्थितम् अस्ति।",
+    "amount_min": "निक्षेप/उद्धरणं मात्रा ≥ १ भवितुम् अर्हति ।",
+    "cannot_bet": "[bet] नहीं कर सकते - [call] / [raise] / [fold] करना होगा.",
+    "nothing_to_call": "न किञ्चिदपि कथयितुम्; भवन् [check] एव कर्तुं शक्नुवन्ति।",
+    "no_bet_to_raise": "Use [bet X] to open; there is no bet to raise.",
+    "insufficient": "अपर्याप्तं चिप् तत्क्रियायाम्।"
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (व्यय {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "भवद्भिः सम्भाव्य क्रियाः {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  पॉट {pot} → खिलाड़ी {winner}. (बैंकरोल P0:{p0}, P1:{p1})",
+    "folded": "क्रीडकः {player_id} निपातितः।",
+    "showdown_win": "{card_win} धड़काः {card_lose}।",
+    "showdown_tie": "शोडाउन टाई: दोनों {card}. पॉट विभाजित - प्रत्येक को {split} मिलता है."
+  },
+  "outcome": {
+    "p0_wins": "खिलाड़ी 0 जीतता है ({bank0} > {bank1})",
+    "p1_wins": "खिलाड़ी 1 जीतता है ({bank1} > {bank0})",
+    "draw": "सर्वेषां राण्डानां पश्चाद् समानं चिप् भवति ।"
+  }
+}

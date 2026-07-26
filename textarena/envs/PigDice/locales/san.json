@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "आप खिलाड़ी {player_id} हैं जो पिग डाइस का खेल खेल रहे हैं।\n\nनियम:\n- अपनी बारी में, आप या तो '[roll]' या '[hold]'\n- 2-6 रोल करें: अपने टर्न कुल में जोड़ें\n- 1 रोल करें: टर्न कुल खो दें और टर्न समाप्त करें\n- रोकें: टर्न कुल को अपने स्कोर में जोड़ें और टर्न समाप्त करें\n- {winning_score} अंक तक पहुंचने वाला पहला विजेता\n\nजब आपकी बारी होगी, तो आप वर्तमान स्कोर और टर्न कुल देखेंगे।\n'[roll]' के साथ प्रतिक्रिया दें डाइस रोल करने के लिए या '[hold]' अपने अंक बैंक करने के लिए।"
+  },
+  "invalid_move": {
+    "invalid_action": "अमान्य क्रिया प्रारूप। '[roll]' या '[hold]' का उपयोग करें।"
+  },
+  "actions": {
+    "player_busted": "Player {player_id} busted, losing {turn_total} points!",
+    "player_hold": "Player {player_id} holds and banks {turn_total} points."
+  },
+  "board": {
+    "player": "खिलाड़ी 0: '{score_0}'; खिलाड़ी 1: '{score_1}'",
+    "current_total_scores": "Current Total Scores: {scores}\nYour current turn total is {turn_total}.",
+    "roll_history": "{observation}\nआपका इस टर्न के लिए रोल इतिहास: {roll_history}",
+    "first_roll": "{observation} अयं तव प्रथमः प्रहरो भवति।",
+    "available_actions": "{observation}\nउपलब्ध क्रियाएं: '[roll]' या '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "खिलाड़ी {winner_id} ने टर्न सीमा ({scores}) पर उच्च स्कोर होने पर जीत हासिल की",
+    "winner_by_score": "Player {winner_id} won by reaching the target score of {winning_score}!",
+    "draw": "The turn limit has been reached and all players have the same score: {scores}"
+  }
+}

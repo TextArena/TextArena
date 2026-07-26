@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an {num_players}-player Liar's Dice game.\nRules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\nIf you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins."
+  },
+  "board": {
+    "per_player": "\tखिलाड़ी {p}: {d}",
+    "new_round": "\nनया दौर - शेष पासे: {dice_summary}\nआपके वर्तमान पासे हैं: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "खिलाड़ी {current_player_id} कॉल करता है! मुखमंडळ {face_value} की वास्तविक गणना {count} है, जो {quantity} से कम है।\nखिलाड़ी {loser_id} (अंतिम बिडर) एक पासा खो देता है।",
+    "caller_loses": "खिलाड़ी {current_player_id} कॉल करता है! मुखमंडळ {face_value} की वास्तविक गणना {count} है, जो {quantity} से >= है।\nखिलाड़ी {loser_id} (कॉलर) एक पासा खो देता है।"
+  },
+  "action": {
+    "bid_announce": "खिलाड़ी {player_id} {quantity} मुखमंडळ {face_value} का दांव लगाता है।"
+  },
+  "invalid_move": {
+    "call_no_bid": "Call made with no prior bid.",
+    "invalid_bid": "अमान्यम् निवेदः {reason}",
+    "not_recognized": "कार्रवाई को न तो वैध '[Bid: X, Y]' और न ही '[Call]' के रूप में मान्यता प्राप्त है। जमा की गई कार्रवाई: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "नया मात्रा {new_quantity} वर्तमान {current_quantity} से कम है।",
+    "face_lower": "नया मुखमंडळ मूल्य {new_face_value} वर्तमान {current_face_value} से कम है।",
+    "identical": "अधुना प्रदत्तं निवेद्य समानम् अस्ति।",
+    "face_range": "नाममात्रं मूल्यम् १ तः ६ यावत् भवेत् ।"
+  },
+  "message": {
+    "eliminated_invalid": "{player_id} इति क्रीडाकारः अवैधं कदमम् अकरोत् ।"
+  },
+  "outcome": {
+    "win": "खिलाड़ी {winner} जीतता है! अंतिम रैंकिंग: {final_ranking}"
+  }
+}

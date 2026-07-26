@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "लक्ष्य: {target}\n\nउपलब्ध संख्याएं:\n{numbers}",
+    "best": "{observation}\n\nइतःपर्यन्तं श्रेष्ठ: {best_value} (दूरी: {distance})\nश्रेष्ठ अभिव्यक्ति: {best_expression}",
+    "history": "{observation}\n\nचाल इतिहास:\n{moves}",
+    "progress": "{observation}\nवर्तमान प्रगति स्कोर: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "अमान्यम् अनुक्रमणिकाः भिन्नं भवेत्, 0-{max_index} इत्यन्तर्गतस्य च।",
+    "invalid_operation": "अमान्यक्रिया (शून्यद्वारा वा न पूर्णाङ्कः परिणयः)"
+  },
+  "outcome": {
+    "win": "उत्तमम्! लक्ष्यं प्राप्तवान्: {target}",
+    "no_moves": "कोई और चाल नहीं। श्रेष्ठ परिणाम: {best_value} (लक्ष्य: {target})",
+    "turn_limit": "मोड़ सीमा पहुंच गई। श्रेष्ठ परिणाम: {best_value} (लक्ष्य: {target})"
+  }
+}

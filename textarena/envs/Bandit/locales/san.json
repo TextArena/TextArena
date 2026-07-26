@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "You are in a room with {num_buttons} buttons: {buttons}. Each button is associated with a Bernoulli distribution with a fixed but unknown mean; the means for the buttons could be different.\nFor each button, when you press it, you will get a reward that is sampled from associated distribution.\nYou have {num_turns} time steps and, on each time step, you can choose any button and receive the reward.\nYour goal is to strategically choose buttons at each time step to collect information about their reward distribution, that will let you choose the button with the highest mean reward correctly at the end of {num_turns} turns."
+  },
+  "board": {
+    "stat_line": "{button}: {reward} ({count} वार खेला गया)",
+    "summary": "सारांशः {stats}"
+  },
+  "invalid_move": {
+    "wrong_format": "क्रीडाकारः वैधं क्रिया-रूपेण उत्तरम् न दत्तवान् ।",
+    "invalid_button": "अमान्य बटनं चयनितम् ।"
+  },
+  "game_action": {
+    "pressed": "आपके द्वारा {button} बटन दबाया गया और {reward} का पुरस्कार प्राप्त हुआ।"
+  },
+  "game_message": {
+    "final_decision": "भवन् तः नानाविधानि विकल्पान् प्रयत्नेन, तेषां फलं अवलोकयितुं च स् व बजेट् यं उपेक्षयाम् । इदानीं उत्तमः निर्णयः कः इति निश् चितुं शक् नुयुः।"
+  },
+  "outcome": {
+    "win": "अभिनन्दनम्! भवता उचितं बटनमभिधीयते।",
+    "lose": "भवन् अप्राप्तं बटनम् अदत्तवान्।"
+  }
+}

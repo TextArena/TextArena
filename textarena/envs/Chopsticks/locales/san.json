@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "आप चॉपस्टिक्स में प्लेयर {player_id} हैं। अपनी बारी में, निम्नलिखित में से एक चुनें:\n  + आक्रमण:  '[attack M O]'  जहां एम = आपका हाथ (० या १), ओ = विरोधी हाथ (० या १).\n    - विरोधी के हाथ की गिनती आपके हाथ से बढ़ जाती है; यदि ५ या अधिक है, तो यह ० हो जाता है।\n  + विभाजन:   '[split L R]'  अपनी कुल उंगलियों को एल और आर (एल + आर = आपकी कुल) में पुनर्वितरित करने के लिए。\nएक ही कमांड के साथ उत्तर दें।"
+  },
+  "board": {
+    "current_board": "वर्तमानबोर्ड:\nप्लेयर ०: {hands_0}\nप्लेयर १: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Your hand {my_idx} is dead.",
+    "opp_hand_dead": "विपक्षस्य {opp_idx} हस्तः मृतं भवति।",
+    "split_sum": "विभक्ते {total} इत्यनेन योगः भवति ।",
+    "split_no_change": "स्प्लिट्-नगरे भवता हस्तानां वितरणं परिवर्तितव्यम् ।",
+    "invalid_command": "अमान्य चाल। “[attack M O]” या “[split L R]” का उपयोग करें।"
+  },
+  "game_action": {
+    "attack": "P{player_id} attacks P{opp_id}’s hand {opp_idx}: it goes from {opp_val} to {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "द्वयोः प्रतिपक्षस्य हस्तेन मृतः।",
+    "draw": "वक्रस्य सीमां प्राप्ता।"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "वर्तमानः पाइल: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "No valid move format found. Use '[pile quantity]'.",
+    "correct_format_wrong_fields": "खिलाड़ी {player_id}, अमान्य क्रिया। स्तंभ {col} सीमा से बाहर है।",
+    "out_of_range": "पिल्-सूचकः {pile_index} इत्यस्य दायरे बहिः अस्ति ।",
+    "non_positive": "कतमपि एकं वस्तु नश्यति।",
+    "exceeds_pile": "Cannot remove {quantity} from pile {pile_index} (only {pile_count} left)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "{player_id} इति क्रीडाकारः अन्तिमं वस्तु गृहीतः!"
+  }
+}
