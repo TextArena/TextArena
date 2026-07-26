@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "قائد ألفا.",
+    "commander_beta": "قائد بيتا."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - الجولة {current_round}/{num_rounds} ===\nالجولات الفوز - القائد ألفا: {alpha_score}، القائد بيتا: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nالجولة {current_round}\nالقائد ألفا خصص: {p0_allocations}\nالقائد بيتا خصص: {p1_allocations}\n",
+    "winner_alpha": "{message}الفائز: القائد ألفا",
+    "winner_beta": "{message}الفائز: القائد بيتا",
+    "tie": "{message}تعادل!"
+  },
+  "invalid_move": {
+    "wrong_format": "شكل مدخل غير صالح. استخدم: A:5، B:10 ، C:5",
+    "invalid_field": "اسم الحقل غير صالح. حقول صحيحة: {field_names}",
+    "wrong_allocation_value": "كل التخصيصات لازم تكون عدد صحيح غير سالب.",
+    "incorrect_total_units": "يجب تخصيص {num_total_units} وحدة بدقة. المجموع الحالي: {current_sum}",
+    "good_allocations": "التوزيع حلو."
+  },
+  "outcome": {
+    "winner_alpha": "يفوز القائد ألفا {score_0}-{score_1} بعد {num_rounds} جولات!",
+    "winner_beta": "يفوز القائد بيتا {score_1}-{score_0} بعد {num_rounds} جولات!",
+    "draw": "ينتهي اللعبة بالتعادل {score_0}-{score_1} بعد {num_rounds} جولات!",
+    "early_winner_alpha": "يفوز القائد ألفا {scores_0}-{scores_1} (الاغلبية تحققت)!",
+    "early_winner_beta": "يفوز القائد بيتا {scores_1}-{scores_0} (الاغلبية تحققت)!"
+  }
+}

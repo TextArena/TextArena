@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "اللوحة الحالية: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "التقدم لازم يكون على شكل [macro micro] مع ارقام من 0 لـ 8.",
+    "out_of_range": "كل مؤشر لازم يكون بين 0 و 8.",
+    "index_out_of_range": "الميكرو_بورد، الصف أو العمود خارج النطاق.",
+    "cell_occupied": "الزنزانة دي لسه مأخوذة.",
+    "wrong_micro_board": "الممثل لازم يلعب على اللوحة الصغيرة الجاية.",
+    "micro_board_won": "الميكرو بورد هوي ربح."
+  },
+  "next_board": {
+    "any": "أي لوح صغير.",
+    "specific": "لوحة ميكرو {nxt}"
+  },
+  "game_action": {
+    "played": "اللاعب {player_id} لعب في لوحة ميكرو {macro_idx}، خلية {micro_idx} (صف {row}، عمود {col}). يجب على اللاعب {opponent_id} الآن اللعب في {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Player {player_id} wins Ultimate Tic Tac Toe!",
+    "draw": "المباراة تعادل!"
+  }
+}

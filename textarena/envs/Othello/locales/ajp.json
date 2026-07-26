@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} تلعب {colour} ({piece}) في لعبة أوتيلو.\nهدفك هو الحصول على المزيد من القطع بلونك على اللوحة بنهاية اللعبة.\nفي دورك، ضع قطعة بحيث تكون بين قطعة جديدة وقطعة موجودة من قطعك - في أي اتجاه (أفقي أو رأسي أو قطري). سيتم قلب جميع القطع المقابلة للمعارض إلى لونك.\nأدخل حركتك بالتنسيق '[row, col]'."
+  },
+  "board": {
+    "game_board": "لوحة اللعبة: {board}",
+    "valid_moves": "{observation}\nالحركات الصحيحة: {moves}",
+    "no_valid_moves_reset": "{observation} ما في حركات صالحة، ممكن تكون لازم تتخطى.",
+    "no_valid_moves_step": "{observation} ما في حركات صالحة، ممكن تخطيها.",
+    "scores_reset": "{observation}\nCurren Scores - Black: {black_count}, White: {white_count}\n",
+    "scores_step": "{observation}\nScores - Black: {black_count}, White: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "التنقل لازم يكون من شكل [row, col].",
+    "illegal": "حركات مش قانونية. تحركات صالحة: {valid}"
+  },
+  "game_action": {
+    "skipped": "اللاعب {pid} لازم يتخطى دورة اللعبة.",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "اللاعب {pid} ({piece}) ليس لديه حركات صحيحة ويتعين عليه التخطي."
+  },
+  "outcome": {
+    "black_wins": "الأسود يفوز {black_count}-{white_count}.",
+    "white_wins": "الأبيض يفوز {white_count}-{black_count}.",
+    "draw": "ارسم {black_count}-{white_count}."
+  }
+}
