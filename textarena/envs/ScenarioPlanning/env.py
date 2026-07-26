@@ -48,7 +48,7 @@ class ScenarioPlanningEnv(ta.Env):
         if all(strategy is not None for strategy in self.state.game_state["strategies"].values()): # check if both players have submitted their strategies
             votes = self._evaluate_strategies() # Conduct judging
             self.state.game_state["votes"] = {0: {"Votes": votes["Player 0"]}, 1: {"Votes": votes["Player 1"]}}
-            if votes["Player 0"] == votes["Player 1"]: self.state.set_draw(reson="An equal number of judges voted for each option.") # check for draw first
+            if votes["Player 0"] == votes["Player 1"]: self.state.set_draw(reason="An equal number of judges voted for each option.") # check for draw first
             else:
                 winner_id = 0 if votes["Player 0"] > votes["Player 1"] else 1 # get winner id
                 self.state.set_winner(player_id=winner_id, reason=f"Player {winner_id} wins by convincing the judges.")
