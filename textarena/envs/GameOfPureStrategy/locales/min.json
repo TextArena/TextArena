@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a match of GameOfPureStrategy.\n- You hold the 13 cards A-K; each can be used once.\n- Each round a prize card is revealed. Play exactly ONE card by writing something that contains a bracketed token like '[Q]', '[10]', '[2]' ...\n- Higher card wins the prize (plus carry-over). Ties roll prize into the pot for next round.\n- Highest total after 13 rounds wins."
+  },
+  "round": {
+    "announce": "### Ronde {round}/13 - Hadiah: {prize}  (bagian {worth})"
+  },
+  "board": {
+    "hand": "Tangan nan tasisa: {hand}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksi harus mampunyoi sabananyo SATU token kartu nan dikakok.",
+    "card_not_held": "Awak indak punyo kartu tu lai."
+  },
+  "message": {
+    "bids": "Tawaran: P0 {card0} vs P1 {card1} - ",
+    "p0_wins": "{observation}Player 0 wins {pot_value}.",
+    "p1_wins": "{observation}Player 1 wins {pot_value}.",
+    "tie": "{observation}Tie -> pot now {carry_pot}. (Sanyo nan ado)",
+    "scores": "Skor -> P0:{score0}  P1:{score1}"
+  },
+  "outcome": {
+    "p0_wins": "P0 {s0} vs P1 {s1}",
+    "p1_wins": "P1 {s1} vs P0 {s0}",
+    "draw": "Both scored {s0}"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Pamainan dimulai. Jenis truf: {trump_suit} (kartu truf: {trump_str}).",
+    "no_trump_card": "indak ado"
+  },
+  "player_prompt": {
+    "intro": "Kamu adolah Pamain {player_id} di German Whist.\n{phase_info}\nKamu pegang {hand_size} kartu.\nMainkan kartu dengan '[play N]', di mano N adolah posisi kartu di tangan kamu (contoh '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "Satiok trik dari kini ka ateh dapek mancapai kemenangan."
+  },
+  "next_card": {
+    "playing_phase": "Indak ado kartu nan ditawar-i - fase pamainan alah dimulai.",
+    "deck_empty": "The deck is empty - no card is on offer.",
+    "available": "Kad nan ditawarkan: {card}",
+    "available_trump": "Kad nan ditabikan: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Format pajuangan indak sah. Gunak '[play N]' untuak maadoan kartu Nth di tangan awak.",
+    "bad_position": "Posisi kartu tu indak ado. Awak mamegang {hand_size} kartu.",
+    "must_follow_suit": "Awak harus maikuik-i dan mamakai kartu {lead_suit}.",
+    "invalid_play": "Kad tu indak dapek dimainan."
+  },
+  "game_action": {
+    "played": "Pamain {player_id} dimainan jo {card}."
+  },
+  "trick": {
+    "won": "Pamain {winner_id} manang jo trik nan digunokan dek {card}.",
+    "won_learning": "Pamain {winner_id} manang jo kartu nan digunokan untuak malakukan trik, iyolah {card} dan inyo mandapekkan kad muko-nyo."
+  },
+  "phase": {
+    "learning_complete": "Dek lah capek. Tahap baraja alah salasai - satiok trik nan tasisa dihitung untuak kauntungan."
+  },
+  "draw": {
+    "winner_received": "Awak menang trik dan menerima {card}.",
+    "loser_received": "Awak kalah jo trik dan manarik {card} dari dek.",
+    "winner_preview": "Kartu nan dipasaran barikuiknyo adolah {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Trik nan dimenangkan sacaro gia - Pamain 0: {tricks0}, Pamain 1: {tricks1}",
+    "scores_playing": "Trik skor - Pamain 0: {tricks0}, Pamain 1: {tricks1}",
+    "phase": "Phase: {phase}",
+    "phase_learning": "Fase: {phase} ({remaining_cards} kartu tasisa di dek)"
+  },
+  "hand": {
+    "no_cards": "Indak ado kartu.",
+    "no_cards_in_hand": "Indak ado kartu di tangan.",
+    "header": "Tangan awak:",
+    "trump_indicator": "(TRUMP) nan manyalasaikannyo.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Indak ado kartu nan dimainan lai trik iko.",
+    "header": "Trik nan ado:",
+    "trump_indicator": "(TRUMP) nan manyalasaikannyo.",
+    "card_line": "{observation}\n  Pamain {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Game indak dimulai",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nFase: {phase}",
+    "trump_suit": "{observation}\nJenis truf: {trump_suit}",
+    "trump_card": "{observation}\nKartu truf: {card}",
+    "cards_left": "{observation}\nKartu nan tasisa di dek: {count}",
+    "next_card": "{observation}\nKartu barikuik untuak pamanang: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Trik kini:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Pamain {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPamain {player_id}: {scoring} skor trik ({tricks} total), {hand_size} kartu di tangan"
+  },
+  "outcome": {
+    "summary": "Fase balajar - Pamain 0: {l0}, Pamain 1: {l1}. Fase bamain - Pamain 0: {p0}, Pamain 1: {p1}. Pamain {winner_id} manang dengan {winner_tricks} skor trik!"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Kamu adolah Pamain {player_id} dalam Iterated Prisoner's Dilemma nan bajalan {num_rounds} putaran.\n\nStruktur Game:\n- Sabalun tiok keputusan kamu punyo {total_conversation_rounds} giliran untuak barkomunikasi sacaro bebas.\n- Satalah tu, kadua pamain sacaro serentak mamilih untuak bakooperasi atau mambangkang.\n\nMatriks Payoff (tetap tiok putaran):\n- Kaduanya Bakooperasi ➜ masiang-masiang {cooperate_reward}\n- Kaduanya Mambangkang ➜ masiang-masiang {mutual_defect_reward}\n- Ciek Mambangkang, ciek Bakooperasi ➜ Pembangkang {defect_reward}, Pakooperasi {sucker_reward}\n\nCara Bermain:\n- Pado maso pembicaraan: ketik teks apo sajo kamu kehendaki.\n- Pado fase keputusan: tamasuk '[Cooperate]' atau '[Defect]' (tidak babedo bedo huruf). Kamu dapek manambahkan teks tambahan sabalun/sasudah token."
+  },
+  "phases": {
+    "conversation_finished": "Pembicaraan alah salasai untuak putaran {round}. Silakan balas jo '[Cooperate]' atau '[Defect]' dalam \\boxed{{}}.",
+    "starting_round": "--- Babak partamo {round} ---",
+    "round_summary": "Hasil putaran {round}:\n{outcome}\nPamain 0 mandapek {r0} (total {score_0}), Pamain 1 mandapek {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Pamain {winner} manang {win_score} - {lose_score}.",
+    "draw": "Draw! Kaduo pamain mancetak {s0}.",
+    "round_both_cooperate": "Kaduo pamain ko bakarajo basamo.",
+    "round_both_defect": "Kaduo pamain tu manyimpang.",
+    "round_p0_cooperates_p1_defects": "Pamain 0 bakarajo basamo, pamain 1 manyarang.",
+    "round_p0_defects_p1_cooperates": "Pamain 0 manyarang, pamain 1 bakarajo basamo."
+  }
+}

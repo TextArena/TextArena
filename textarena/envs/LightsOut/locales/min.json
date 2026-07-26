@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Welcome to Lights Out! You have a {size}x{size} grid of lights.\nYour goal is to turn ALL lights OFF (represented by '.')\nWhen you press a light, it toggles itself AND its adjacent neighbors (up/down/left/right).\nType [row col] to press a light (0-indexed, so valid range is 0-{max_index}).\nYou have up to {max_turns} moves to solve the puzzle.\nLegend: 'O' = light ON, '.' = light OFF"
+  },
+  "board": {
+    "current_state": "Keadaan grid saat ini (Langkah {moves_made}, {moves_left} langkah tersisa, {completion}% selesai):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksi harus dalam format [row col] di mano baris jo kolom adolah bilangan bulat dari 0 sampai {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Tahniah! Awak lah manyalasaian teka-teki dalam {moves_used} langkah!",
+    "loss": "Permainan berakhir! Anda menggunakan semua {max_turns} langkah tanpa memecahkan teka-teki. Penyelesaian akhir: {completion}%\nKeadaan akhir:\n{grid}"
+  }
+}
