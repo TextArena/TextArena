@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Anjeun nyaéta Pamaén {player_id} dina permainan Kuhn Poker {max_rounds} ronde.\nAturan Permainan:\n- Kuhn Poker ngagunakeun dék 3-kartu jeung J, Q, K (J paling handap, K paling luhur)\n- Unggal pamaén méré {ante} cip jeung nampa 1 kartu unggal ronde (perhatos yén kartu dibagikeun tanpa panggantian, jadi anjeun teu bisa boga kartu anu sama jeung lawan).\n- Permainan teruskeun salila {max_rounds} ronde\n- Pamaén anu boga cip paling loba sanggeus sakabéh ronde meunang\nAturan Aksi:\n- '[check]': Léwat tanpa taruhan (ngan saukur teu aya taruhan di meja)\n- '[bet]': Tambahkeun 1 cip kana pot (ngan saukur teu aya taruhan di meja)\n- '[call]': Nyocékkéun taruhan lawan ku cara nambahkeun 1 cip kana pot\n- '[fold]': Nyéräh ka lemah jeung ngabulkeun kameunangan pot ka lawan"
+  },
+  "init_round": {
+    "round_start": "### Ngamimitian ronde {current_round} tina {max_rounds} ronde. Kartu anjeun: '{player_card}'",
+    "available_actions": "Peta nu sadia nyaéta: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksi kudu [Check], [Bet], [Call], atau [Fold].",
+    "not_legal": "Aksi kudu {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Peta anu sadia nyaéta: {legal_actions}.",
+    "round_summary": "{reason} Skor saiki: Pamaén 0: '{player_0_chips}'; Pamaén 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Pertarungan: {winner_card} Pamaén {winner} ngéléhkeun {loser_card} Pamaén {loser}. Pamaén {winner} meunang pot {pot_value} cip."
+  },
+  "outcome": {
+    "draw": "Dina ahir {max_rounds} putaran, duanana pamaén miboga jumlah chip anu sarua.",
+    "round_win": "Pamaén {player_id} geus teu bisa maén.",
+    "winner_player0": "Pamaén 0 meunang ku ngabogaan leuwih chip di ahir sadaya {max_rounds} putaran.",
+    "winner_player1": "Pamaén 1 meunang ku ngabogaan leuwih chip di ahir sadaya {max_rounds} putaran."
+  }
+}

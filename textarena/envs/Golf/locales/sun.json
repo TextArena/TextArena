@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Anjeun keur maén Golf (Kartu) - Pamaén {player_id}.\nTujuan: Meunang skor total panghandapna dina giliran tunggal ieu. Upami kolom boga nilai nu sarua, maranéhna dijumlahkeun jadi 0.\nNilai Kartu: A=1, 2-10=nilai éta sorangan, J/Q=10, K=0\n\nAksinya (gunakan tanda kurung nu éksak):\n- '[draw]' - Ngunduh tina dék\n- '[take]' - Ngambil tina gundukan bebéwaran\n- '[swap X Y]' - Ngaganti kartu nu geus diunduh jeung posisi X (baris) Y (kolom)\n- '[discard]' - Ngabéwarakeun kartu nu geus diunduh"
+  },
+  "board": {
+    "drew": "Anjeun ngunduh: {card}\nAyeuna anjeun kudu [swap X Y] atawa [discard]",
+    "took": "Anjeun ngambil: {card} tina gundukan bebéwaran\nAnjeun kudu [swap X Y] jeung éta (teu bisa dibéwarakeun)",
+    "peeked": "Anjeun ngintip di posisi ({row},{col}): {card}",
+    "turn_view": "Kartu anjeun:\n{hand}\nGundukan bebéwaran: {discard}\n{options}",
+    "none": "Teu aya."
+  },
+  "options": {
+    "final_turns": "Giliran pamungkas! Pilihan anjeun: [draw], [take], [peek X Y]",
+    "draw": "Pilihan anjeun: [draw], [take]",
+    "must_swap": "Anjeun kudu: [swap X Y] (teu bisa miceun kartu ti tumpukan dipiceun)",
+    "swap_or_discard": "Anjeun kudu: [swap X Y] atawa [discard]"
+  },
+  "hand": {
+    "no_cards": "Teu aya kartu.",
+    "header": "Kol: 1 2 3 (dina basa Inggris)",
+    "row": "Baris {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Pamaén {pid} ngaganti {new} jeung {old} di posisi ({row},{col})",
+    "discarded": "Pamaén {pid} ngabéwarakeun {card}"
+  },
+  "message": {
+    "deck_empty": "Dek kosong! Kaulinan réngsé langsung.",
+    "knocked": "Pamaén {pid} diketok! Unggal pamaén séjén meunang hiji giliran deui.",
+    "final_round": "Pamaén {pid} {reason}! Unggal pamaén séjénna meunang sakali deui"
+  },
+  "reason": {
+    "all_revealed": "geus kabéh kartu dikedalkeun"
+  },
+  "invalid": {
+    "wrong_action": "Gunakan aksinya nu dibeureumkeun: [draw], [take], [swap X Y], [discard], [knock], atawa [peek X Y]",
+    "discard_empty": "Tumpukan barang-barang geus kosong!",
+    "must_draw_first": "Anjeun kudu mimitian [draw], [take], [knock], atawa [peek X Y]",
+    "cannot_discard_taken": "You cannot discard a card taken from the discard pile. You must swap it.",
+    "have_drawn_card": "Anjeun geus ngunduh kartu. Anjeun kudu [swap X Y] atawa [discard] éta",
+    "need_drawn_swap": "Anjeun kudu kartu digambar swap.",
+    "need_drawn_discard": "Anjeun kudu kartu digambar pikeun miceun.",
+    "out_of_bounds": "Posisi di luar wates. Gunakan baris 1-{max_row}, kolom 1-{max_col}",
+    "knock_with_card": "Anjeun teu bisa ngetok jeung kartu digambar. ngalengkepan giliran anjeun mimiti.",
+    "already_knocked": "Aya nu geus ngagolérkeun.",
+    "already_revealed": "Kartu éta geus kabuka!"
+  },
+  "summary": {
+    "full": "Pamaénan Rampung! Pamaén {winner} meunang jeung skor {score} poin!\n\nSkor Ahir:\n{scores}",
+    "line": "Pamaén {pid}: {score} poin\n"
+  },
+  "board_str": {
+    "title": "=== GOLF Game=== (Puteran: Ngarobah)",
+    "discard": "Tumpukan anu dipiceun: {card}",
+    "knocked": "Pamaén {pid} geus ngetok!",
+    "player_header": "Pamaén {pid} (Skor: {score}):"
+  }
+}

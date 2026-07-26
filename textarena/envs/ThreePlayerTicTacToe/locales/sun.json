@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Anjeun nyaéta Pamaen {player_id} dina Tic Tac Toe Tilu Pamaen.\nSimbol anjeun nyaéta '{symbol}'.\nAnjeun gantian ngasahkeun simbol anjeun dina papan 5x5 pikeun ngawangun garis opat.\nGaris bisa horizontal, vertikal, atawa diagonal.\nAsupkeun langkah anjeun maké format '[4]' pikeun ngabérékan sel 4."
+  },
+  "board": {
+    "current_board": "Papan Saiki:\n\n{board}\n\nLangkah nu Tersedia: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format move teu valid. Paké \"[cell]\" di mana sél nyaéta 0-{max_cell}.",
+    "out_of_range": "Nomer sél anu teu valid: {cell}. Kudu antara 0 jeung {max_cell}.",
+    "already_occupied": "Sél {cell} geus aya nu boga.",
+    "made_invalid": "Pamaén {player_id} nyieun move anu teu sah."
+  },
+  "game_action": {
+    "placed": "Pamaen {player_id} ngasahkeun simbolna ({symbol}) dina lapang ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Pamaen {player_id} ({symbol}) meunang!",
+    "draw": "Kaulinan ieu draw!"
+  }
+}

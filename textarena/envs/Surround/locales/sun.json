@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Player Surround di {width}x{height} grid.\nAnjeun pemain {player_id}. Langkah sah: '[up]' '[down]' '[left]' '[right]' atawa w/s/a/d.\nTujuan: salamet ti batan sadaya. Jejak bisa mematikan; tabrakan dinding bisa mematikan; tabrakan kepala-ke-kepala bisa mematikan duaan."
+  },
+  "board": {
+    "current": "Dewan ayeuna: {board}",
+    "after_moves": "Papan sanggeus gerakan simultan: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Pamaén {player_id} maot alatan move anu teu valid."
+  },
+  "outcome": {
+    "survived_win": "Pamaén {player_id} salamet; nu séjénna kacilakaan.",
+    "all_crashed": "Sadaya pamaén nabrak sakaligus.",
+    "outlived": "Pamaén nu hirup leuwih lila ti batur.",
+    "all_dead": "Kabéh pamaén paeh.",
+    "turn_limit": "Wates giliran ngahontal - nu pangpanjangna salamet meunang.",
+    "ranking": "{reason} Peringkat akhir grup (paling baik→paling buruk): {groups}"
+  }
+}
