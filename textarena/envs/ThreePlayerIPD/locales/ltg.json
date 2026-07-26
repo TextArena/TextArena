@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} 3 spēlētāju atkārtotajā cieņas spēlē. Mačs ilgst {num_rounds} raundus.\nRaunda struktūra:\n• {conv_rounds} brīvas sarunas gājieni\n• 1 lēmuma gājiens - iesniegt vienu tokenu pretiniekiem: '[<opp-id> cooperate]' vai '[<opp-id> defect]' (t.i. '[1 defect] [2 cooperate]'; noklusējums ir 'sadarboties'). \nPāra veiktspējas matrica (piemērotai katram neorganizētam pārim):\n  - Abi sadarbojas  ->  {reward}\n  - Abi nodevējas     ->  {punishment}\n  - Jūs nodevejāties, viņi sadarbojās -> {temptation}\n  - Jūs sadarbojāties, viņi nodevejās -> {sucker}\nSpēlētājs(arī) ar augstāko rezultātu visu raundu beigās uzvar."
+  },
+  "round": {
+    "start": "─── Sākas raunds {round} ───\tJūs varat brīvi sarunāties nākamajos {conv_rounds} raundos.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### raunda {round} - rezultati:",
+    "pair_line": "{observation}\n\t Spēlētājs {i} vs Spēlētājs {j} izvēlējās {choice_i} un {choice_j} attiecīgi (Spēlētājs {i} ieguva {gain_i}, Spēlētājs {j} ieguva {gain_j})",
+    "scores_open": "{observation} -> Myusu dīnu rezultati: ",
+    "score_first": "{observation}Spēlētājs {player_id} ({score})",
+    "score_next": "{observation}; Spēlētājs {player_id} ({score})",
+    "finalize": "{observation}  īnstrukturejis:"
+  },
+  "outcome": {
+    "final": "Rezultatu finale: {scores}.  Grupu sarīkojums (sliktākais→labākais): {groups}"
+  }
+}

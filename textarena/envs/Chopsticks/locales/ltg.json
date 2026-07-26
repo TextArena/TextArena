@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} Čopstikos. Savā gājienā, izvēlieties vienu no:\n  + Uzbrūk:  '[attack M O]'  kur M=jūsu roka (0 vai 1), O=pretinieka roka (0 vai 1).\n    - Pretinieka rokas skaitlis palielinās par jūsu roku; ja >=5, tā kļūst par 0.\n  + Sadalīt:   '[split L R]'  lai pārdalītu jūsu kopējo fingeru skaitu uz L un R (L+R = jūsu kopējais).\nAtbildēt ar tieši vienu no šiem komandām."
+  },
+  "board": {
+    "current_board": "Pašreizējā tabula:\nSpēlētājs 0: {hands_0}\nSpēlētājs 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Jūsu roka {my_idx} ir mirusi.",
+    "opp_hand_dead": "Pretinīka rūka {opp_idx} jau ir nūmiruse.",
+    "split_sum": "Daleibai juobyut {total}.",
+    "split_no_change": "Splitam juomaina tavs rūku sadalejums.",
+    "invalid_command": "Nederīgs gājiens. Lietojiet „[attack M O]” vai „[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} uzbrūk P{opp_id} rokas {opp_idx}: tā mainās no {opp_val} uz {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Obejis pretinīku rūkas nūmiris.",
+    "draw": "Izapleidzis rūbežs ir sasnāgts."
+  }
+}

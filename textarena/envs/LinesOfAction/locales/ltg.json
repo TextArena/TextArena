@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "Bolva: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formats ir e2e4 (nu koordinatu leidz).",
+    "no_piece": "Na {side} dorba iz {coord}.",
+    "identical": "Izceļsme i mierķa vīnnūzeimeiga.",
+    "not_straight_or_diagonal": "Puorguoju taisnai voi diagonāli.",
+    "wrong_distance": "Must move distance equal to pieces in line.",
+    "enemy_blocks": "Pretinīka kūks blokej ceļu.",
+    "destination_own": "Destinats īkuortuots ar sovu kūpu."
+  },
+  "game_action": {
+    "moved": "Spelejs {player_id} pārvietoja {from} -> {to}",
+    "captured_suffix": "Player {player_id} moved {from} -> {to} capturing an enemy."
+  },
+  "outcome": {
+    "win": "Vysi kūpeigī lūcekli ir saisteiti.",
+    "draw_no_capture": "60 kusteibys bez īgivis.",
+    "draw_repetition": "Poziceja atsakuortuota treis reizis."
+  }
+}

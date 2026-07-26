@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "Naatbylstūšs darbeibys formats. Darbeibai juobyut īkōršonūs.",
+    "no_closing_bracket": "Naatbylstūšs darbeibys formats. Izmyra beigšonys īrūbežuojums \"]\"",
+    "empty_command": "Vylka komanda. Rokstit \"draw\" voi \"move <source> <destination> [count]\".",
+    "empty_action": "Nūteiktuos darbeibys vuordi:",
+    "move_needs_args": "Puorceļšonys komandai ir vajadzeigs olūts i mierki. lītuošona: \"pūst <alku> <mierka> [count]\"",
+    "count_positive": "Skaiteibai juobyut pozitivai voi \"vysam\"",
+    "count_invalid": "Navaleigs skaitiejums. Lītuot ciparu voi \"visus\"",
+    "unknown_command": "Nezināma komanda '{cmd}'. Lieto 'izvelies', 'pārvietot <avots> <mērķis> [count]', vai 'pieņemts'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Izpiļdeita {n} darbeiba (s) pyrma naveiksmis.",
+    "failed": "Action {n} failed: {msg}"
+  },
+  "move_result": {
+    "drew": "Izvuoreita karteņa (s) nu kruojuma iz atkrytumu.",
+    "cannot_draw": "Navar izjimt. Gon rezervi, gon atkrytumis ir tukšys.",
+    "invalid_pile": "Navaleigs kuopnis nūsaukums. Lītuot W, F1-F4 voi T1-T7",
+    "foundation_one_card": "Var puorvītuot tik 1 karteiti iz pamatni.",
+    "waste_to_foundation_ok": "Puordūta karte nu atkrytumu iz pamatni F{dst}",
+    "waste_to_foundation_bad": "Navar puorvītuot atkrytumu karteņu iz tū pamatkuortu. 🔍",
+    "tableau_to_foundation_ok": "Pārvietots kārts no tablo T{src} uz pamata F{dst}",
+    "tableau_to_foundation_bad": "Navar puorceļt tabulys karteņu iz ituos pamatkuopnis kuopu. 🔍",
+    "foundation_to_foundation": "Navar puorsavītuot nu pamata iz pamatu.",
+    "waste_to_tableau_one_card": "Var puorvītuot tik 1 karteņu nu atkrytumu iz tabulu.",
+    "waste_to_tableau_ok": "Puornesuse karte nu atkrytumim iz tabelei T{dst}",
+    "waste_to_tableau_bad": "Navar īlikt atkrytumu karteņu iz tū tabulys kuopu. 🔍",
+    "no_face_up": "Nav ni puori izaugtuos kartis, kū puorvītuot.",
+    "tableau_to_tableau_ok": "Pārvietots {count} kārts no tablo T{src} uz T{dst}",
+    "tableau_to_tableau_bad": "Nevar pārvietot {count} kārtis no T{src} uz T{dst}",
+    "foundation_to_tableau_one_card": "Var puorvītuot tik 1 karteiti nu pamatnes iz tabulu.",
+    "foundation_empty": "Fonda F{src} ir tukša,",
+    "foundation_to_tableau_ok": "Pārvietots kārts no pamata F{src} uz tablo T{dst}",
+    "foundation_to_tableau_bad": "Navar izlikt pamatkarti tabelei T{dst}",
+    "to_waste_or_stock": "Navar puorvītuot iz atkrytumim voi kryumim."
+  },
+  "outcome": {
+    "forfeit": "Game forfeited. Final score: {score} cards in foundations.",
+    "won": "Apsveicu, tu esi uzvariejs Klondikys pasis!",
+    "turn_limit": "Spēle beigusies! Jūs sasniedzāt maksimālo {max_turns} gājienus. Rezultāts: {score} kārtis fondos."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== \"Klondike\" ir spūžs, bet skaists roksts.",
+    "turn": "Gājiens: {turn}/{max_turns}",
+    "stock": "Stokā: {stock} karteņis",
+    "waste": "Atkritumi (W): {waste}",
+    "foundations_header": "Fonda atbolsta:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabula:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

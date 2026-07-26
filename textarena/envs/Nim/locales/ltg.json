@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēletājs {player_id} Nimā.\nJūsu mērķis ir aizņemt pēdējo atlikušo objektu.\nKatrā gājienā, izvēlieties tieši vienu krājumu un noņemiet no tā vienu vai vairākus objektus.\nIzmantojiet formātu '[pile quantity]', kur krājums ir krājuma indekss, bet daudzums ir objektu skaits, ko noņemt.\nPiemēram, '[0 3]' noņem 3 objektus no krājuma 0."
+  },
+  "state": {
+    "current_pile": "Niuīnis kuopne: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nav atroduots dereigs puorvītuošonys formats. Lata \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Spēletājs {player_id}, Nederīga darbība. Kolonna {col} ir ārpus robežām.",
+    "out_of_range": "Pīļaunamais indekss {pile_index} ir uorpus diapazona.",
+    "non_positive": "Vajag nūjimt vysmoz vīnu objektu.",
+    "exceeds_pile": "Nevar noņemt {quantity} no krājuma {pile_index} (atlikušie ir tikai {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Spālātuojs {player_id} pajims pādejuo objekta (((s)!"
+  }
+}

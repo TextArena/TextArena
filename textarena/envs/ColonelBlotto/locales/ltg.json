@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat {role} Kolonela Blotto spēlē.\nJūsu mērķis ir uzvarēt vairāk reitus nekā jūsu pretinieks.\nKatrā reitā, jāsadala tieši {num_total_units} vienības starp laukiem {field_names}.\nSpēlētājs, kas sadala vairāk vienību uz lauka, uzvar šo lauku, un spēlētājs, kas uzvar vairāk laukus, uzvar reitu.\nPiemēram, '[A7 B7 C6]' sadala 7 vienības uz A, 7 uz B un 6 uz C.",
+    "commander_alpha": "Komanders Alfa! -Kū jius dareit?",
+    "commander_beta": "Komanders Beta! - Nu, nu."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Reits {current_round}/{num_rounds} ===\nReiti uzvārēti - Komandieris Alpha: {alpha_score}, Komandieris Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nReits {current_round}\nKomandieris Alpha sadalīja: {p0_allocations}\nKomandieris Beta sadalīja: {p1_allocations}\n",
+    "winner_alpha": "{message} uzvarātuojs: komanders Alfa",
+    "winner_beta": "{message} uzvarātuojs: komanders Beta",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "Navaleigs īejis formats. lītuošona: A:5, B:10, C:5",
+    "invalid_field": "Navaleigs lauku nūsaukums (..) dereigi lauki: {field_names}",
+    "wrong_allocation_value": "Vysim sadaleišonom ir juobyut naenegalim vasalī skaitļim.",
+    "incorrect_total_units": "Jūs jāsadala tieši {num_total_units} vienības. Pašreizējā summa: {current_sum}",
+    "good_allocations": "Allocation is good."
+  },
+  "outcome": {
+    "winner_alpha": "Komandieris Alpha uzvar {score_0}-{score_1} pēc {num_rounds} reitus!",
+    "winner_beta": "Komandieris Beta uzvar {score_1}-{score_0} pēc {num_rounds} reitus!",
+    "draw": "Spēle beidzas ar {score_0}-{score_1} neizšķirtu pēc {num_rounds} reitus!",
+    "early_winner_alpha": "Komandieris Alpha uzvar {scores_0}-{scores_1} (vairākums sasniegts)!",
+    "early_winner_beta": "Komandieris Beta uzvar {scores_1}-{scores_0} (vairākums sasniegts)!"
+  }
+}

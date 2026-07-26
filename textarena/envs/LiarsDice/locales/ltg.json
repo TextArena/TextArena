@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Jūs esat spēletajs {player_id} {num_players}-spēlētāju melu kauliņu spēlē.\nNoteikumi:\n- Jūsu kārtā jūs varat izvēlēties:\n  1) Izlicot jaunu licījumu ar augstāku daudzumu vai augstāku sejas vērtību (vai abus) nekā pašreizējais licījums; piem., '[Bid: 3, 4]',\n  2) Izsaucot pēdējo licījumu, ierakstot '[Call]'.\n\nJa jūs izsaucat:\n  - Ja faktiskais sejas vērtības skaits visos kauliņos ir mazāks par licījumu, pēdējais licējs zaudē vienu kauliņu.\n  - Citādi, izsauces zaudē vienu kauliņu.\nSpēletājs, kuram ir sasniegts 0 kauliņu skaits, ir izslēgts. Pēdējais atlikušais spēlētājs uzvar."
+  },
+  "board": {
+    "per_player": "\tSpēletajs {p}: {d}",
+    "new_round": "\nJauns raunds - Atlikušie kauliņi: {dice_summary}\nJūsu pašreizējie kauliņi ir: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Spēletajs {current_player_id} izsauc! Faktiskais sejas vērtības {face_value} skaits ir {count}, kas ir MAZĀK par {quantity}.\nSpēletajs {loser_id} (pēdējais licējs) zaudē vienu kauliņu.",
+    "caller_loses": "Spēletajs {current_player_id} izsauc! Faktiskais sejas vērtības {face_value} skaits ir {count}, kas ir >= {quantity}.\nSpēletajs {loser_id} (izsauces) zaudē vienu kauliņu."
+  },
+  "action": {
+    "bid_announce": "Spēletajs {player_id} licas {quantity} ar sejas vērtību {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Sazvaneja bez īprīkšejis bolvys.",
+    "invalid_bid": "Naatbylstūšs bolvys pīduovuojums: {reason}",
+    "not_recognized": "Action not recognized as either a valid '[Bid: X, Y]' or '[Call]'. Submitted action: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Jaunā daudzuma {new_quantity} ir zemāka par pašreizējo {current_quantity}.",
+    "face_lower": "Jaunuos nominancis vierteiba {new_face_value} ir zamuoka par īstatiejušū {current_face_value}.",
+    "identical": "Bolva ir identiska ar tagadejū bolvu.",
+    "face_range": "Nominalū vierteibu juobyut storp 1 i 6."
+  },
+  "message": {
+    "eliminated_invalid": "Player {player_id} was eliminated by invalid move."
+  },
+  "outcome": {
+    "win": "Spēletajs {winner} uzvar! Finālējā rangs: {final_ranking}"
+  }
+}

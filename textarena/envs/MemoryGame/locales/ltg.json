@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id}. Jūs spēlējat Atmiņas spēli.\nJūsu mērķis ir sakritīgāk pāru kartīšu dēļ, nekā jūsu oponentam.\nJūsu gājienā, izvēlieties divas kartes, lai pagrieztu, ievadot pirmās un otrās kartes rindas un kolonnas numurus attiecīgi, piemēram, '[0 1 1 0]', kur pirmā karte atrodas rindā 0 un kolonnā 1, un otrā karte atrodas rindā 1 un kolonnā 0.\nJa divas kartes sakrīt, jūs saņemat punktu un kartes paliek vaiga uz augšu. Ja tās nesakrīt, kartes tiek pagrieztas atpakaļ vaiga lejā, piemēram, '.'.\nSpēle beidzas, kad visas pāras ir sakritušas."
+  },
+  "board": {
+    "current_board": "Niu pastuovūšuo biroja {board}",
+    "current_game_board": "Niu izmontuotuo spēlis tabulā: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Naatbylstūšs sūļa formats. {player_id} spēlētājs nasasaceja ar dereigu vierzīni kvadratūs korpusā.",
+    "out_of_bounds": "Nūteikts sūļs. {player_id} spēlētājs izavēlēja uorpus rūbeža poziceju.",
+    "same_card_twice": "Naatbylstūšs sūļs. {player_id} spēlētājs divreiz izavielieja vīnu i tū pošu karteņu.",
+    "already_matched": "Naatbylstūšs sūļs. {player_id} spēlētājs ir īvieliejs vīnu voi obejis kartis, kas jau beja saskaņuotys."
+  },
+  "game_message": {
+    "cards_match": "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
+    "cards_no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+  },
+  "outcome": {
+    "draw": "Obeji spēlētāji sasadorbuoja ar vīnu i tū pošu puoru karteņu skaitu.",
+    "win": "Spālātuojs {winner_id} ir uzvariejs!",
+    "turn_limit": "Ir sasniegts gājienu limits. Spēle beigusies. Spēlētājs 0 guva {score_0} punktus, Spēlētājs 1 guva {score_1} punktus.",
+    "turn_limit_win": "{reason} Spēlētājs {winner_id} ir uzvarējis!"
+  }
+}

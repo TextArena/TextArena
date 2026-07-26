@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat spēlētājs {player_id} Kvanta Tic Tac Toe.\nJūsu simbols ir '{symbol}', un jūsu gājienu numuri ir vienmēr {parity} (piem., X1, X3 vai O2, O4).\n\nMērķis: Uzvarēt, veidojot līniju no trim klasiskām zīmēm (no superpozīcijām).\n\nKā spēlēt:\n- Katrā gājienā ievietojiet brīnu zīmi divos dažādos tukšos laukumos, izmantojot formātu '[a,b]'.\n- Šīs zīmes ir saistītas, un marķētas kā 'X1 / X1' vai 'O4 / O4'.\n- Jūs nevarat ievietot brīnu zīmes laukumā, kas jau ir sabrukcis (cietināts).\n\nSabrukšanas noteikums:\n- Ja jūsu gājiens rada ciklu saistību grafā, tas sabrūk automātiski.\n- Katra brīna zīme ciklā pārvēršas par klasisku zīmi vienā no divām atrašanās vietām.\n- Jebkuras atkarīgās brīnas zīmes arī sabrūk.\n\nUzvara:\n- Spēle beidzas, kad spēlētājam ir trīs klasiskās zīmes pēc kārtas.\n- Ja abi spēlētāji iegūst līniju vienā un tai pašā sabrukšanā, uzvarētājs ir tas, kam ir zemākais maksimālais gājienu numurs.\n\nParauga gājiens: '[0,4]' ievieto brīnu zīmi šūnās 0 un 4."
+  },
+  "board": {
+    "current_board": "Kvanta Tic Tac Toe Board:\n\n{board}\n\nIeteik jūsu gājienu kā '[a,b]', lai ievietotu kvantu zīmi divās atrašanās vietās."
+  },
+  "invalid_move": {
+    "wrong_format": "Navaleigs formats. Izmontoj \"[a,b]\".",
+    "invalid_cells": "Naatbylstūši voi dublikati šyunu indeksi.",
+    "already_solidified": "Vīna šyuna jau ir nūcītynuota."
+  },
+  "game_action": {
+    "placed": "Spēlētājs {player_id} ievietoja savu simbolu superpozīcijā starp šūnām {pos_a} un {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Atkarīgā superpozīcija ir atrisināta. Šūna ({r}, {c}) tagad ir {symbol}.",
+    "last_cell_resolved": "Superpozīcija pēdējai šūnai ir atrisināta. Šūna ({r}, {c}) tagad ir {symbol}.",
+    "superposition_resolved": "Superposition resolved. Cell ({r}, {c}) is now {symbol}."
+  },
+  "outcome": {
+    "win": "Spālātuojs {player_id} uzvar ar styprynuotu vierteibu!",
+    "draw": "Spēle ir bez rezultata!"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat spēlētājs {player_id} Stratego spēlē.\nJūsu mērķis ir sagūstīt otrā spēlētāja karogu vai iznīcināt visas viņa pārvietojamas daļiņas.\nJūsu armija ir izvietota tabulā, ieskaitot jūsu karogu, bumbas un citas daļiņas ar dažādiem rangiem.\n\n### Spēles instrukcijas\n1. **Soļa noteikumi:**\n   - Katrā jūsu gājienā varat pārvietot vienu daļiņu par vienu soļu uz blakus esošu laukumu (augšup, lejup, kreisā vai labā).\n   - Piemērs: Daļiņa var pārvietoties no A1 uz B1 vai no A1 uz A2, ja B1 un A2 nav aizņemti ar jūsu paša daļiņām.\n   - Ja izvēlētā daļiņa ir bumba vai karogs, to nevar pārvietot.\n2. **Kaujas:**\n   - Ja pārvietojaties uz laukumu, kurā atrodas otrā spēlētāja daļiņa, notiek kauja:\n     - Daļiņa ar augstāku rangiem uzvar un iznīcina otrā spēlētāja daļiņu.\n     - Ja rangi ir vienādi, abas daļiņas tiek noņemtas no tabulas.\n     - **Speciāli gadījumi:**\n       - Bumbas iznīcina lielāko daļu uzbrūkošo daļiņu, izņemot minerus, kas var defuzēt bumbas.\n       - Spiegi var uzvarēt maršalu, ja spieds uzbrūk pirmā, bet zaudē citām daļiņām.\n3. **Stratēģiskie mērķi:**\n   - Atklājiet otrā spēlētāja daļiņas, izmantojot to kustības un kaujas.\n   - Aizsargājiet savu karogu, mēģinot sagūstīt otrā spēlētāja karogu.\n   - Izmantot skautus stratēģiski, lai iegūtu informāciju par otrā spēlētāja daļiņām un uzbrūkt vājām daļiņām.\n\n### Kā veikt soļu:\n1. Norādiet daļiņas koordinātes, kuru vēlaties pārvietot, un tās galamērķi.\n2. Izmantot formātu: [A0 B0], kur A0 ir sākumpozīcija, bet B0 ir galamērķa pozīcija.\n   - Piemērs: Lai pārvietotu daļiņu no rindas 0, kolonnas 0 uz rindu 1, kolonnu 0, ievadiet [A0 B0].\n3. Pārliecinieties, ka galamērķa pozīcija ir derīga saskaņā ar augstāk minētajiem soļa noteikumiem.\n\n### Svarīgi piezīmes:\n- Tabula rādīs jūsu daļiņas un to pozīcijas, piemēram, MN, MS.\n- Tabula arī rādīs zināmās otrā spēlētāja daļiņu pozīcijas bez to rangiem atklāšanas, piemēram, ?.\n- Šķēršļi ar ~ ir ezeri un uz tiem nevar pārvietoties.\n- Ieteikums: Sāciet spēli, pārvietojot savas daļiņas, kas atrodas frontē, lai iegūtu informāciju par otrā spēlētāja daļiņām. Spēlētāja 0 un spēlētāja 1 frontes ir attiecīgi rinda D un G.\n\nŠeit ir pašreizējā tabulas stāvoklis:\n"
+  },
+  "board": {
+    "current_board": "Pašreizējā tabula:\n\n{board}\nPieejamie soļi: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nepareizs soļa formāts. Spēlētājs {player_id} neievadīja soļu formātā [A0 B0].",
+    "invalid_coordinates": "Naatbylstūšs darbeibu formats. {player_id} spēlētājs nav īvītuojs pareizys koordinatis.",
+    "not_own_piece": "Naatbylstūšs darbeibu formats. {player_id} spēlnīkam ir juosuoc vīns nu sovom lūceklim.",
+    "scout_through_pieces": "Naatbylstūšs darbeibu formats. {player_id} spēlētājs navar puorvītuot skautu caur cytim kūkim.",
+    "scout_diagonal": "Naatbylstūšs akcejis formats. {player_id} spēlētājs navar puorvītuot skautu diagonaluo.",
+    "non_scout_multi_square": "Naatbylstūšs akcejis formats. Kūki, izjamūt skautuojus, var puorvītuot tikai vīnu kvadratu reizē.",
+    "move_into_lake": "Naatbylstūšs akcejis formats. {player_id} spēlētājs navar puorīt iz azaru.",
+    "move_onto_own_piece": "Naatbylstūšs darbeibu formats. {player_id} spēlētājs navar puorīt iz sovu lūku.",
+    "move_bomb_or_flag": "Naatbylstūšs akcejis formats. {player_id} spēlētājs navar puorvītuot bombys voi karogu."
+  },
+  "game_action": {
+    "you_moved": "Jūs esat pārvietojis savu daļiņu no {source} uz {dest}.",
+    "opponent_moved": "Spēlētājs {player_id} ir pārvietojis savu daļiņu no {source} uz {dest}.",
+    "you_equal_ranks": "Jūs esat pārvietojis savu daļiņu no {source} uz {dest}. Uzbrūkošā daļiņa bija {attacking_rank}, bet galamērķa daļiņa bija {target_rank}. Jo abu daļiņu rangu ir vienāds, abas daļiņas zaudēja.",
+    "opponent_equal_ranks": "Spēlētājs {player_id} ir pārvietojis savu daļiņu no {source} uz {dest}. Uzbrūkošā daļiņa bija {attacking_rank}, bet galamērķa daļiņa bija {target_rank}. Jo abu daļiņu rangu ir vienāds, abas daļiņas zaudēja.",
+    "you_miner_defused": "Jūs esat pārvietojis savu daļiņu no {source} uz {dest}. Uzbrūkošā daļiņa bija {attacking_rank}, bet galamērķa daļiņa bija {target_rank}. Jo mineri var defuzēt bumbas, jūs uzvarējāt kaujā.",
+    "opponent_miner_defused": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As miners can defuse bombs, you lost the battle.",
+    "you_bomb_lost": "Jūs esat pārvietojis savu daļiņu no {source} uz {dest}. Uzbrūkošā daļiņa bija {attacking_rank}, bet galamērķa daļiņa bija {target_rank}. Jo uzbrūkošā daļiņa nav miners, jūs zaudējāt kaujā.",
+    "opponent_bomb_won": "Spēlētājs {player_id} ir pārvietojis savu daļiņu no {source} uz {dest}. Uzbrūkošā daļiņa bija {attacking_rank}, bet galamērķa daļiņa bija {target_rank}. Jo uzbrūkošā daļiņa nav miners, jūs uzvarējāt kaujā.",
+    "you_spy_won": "Jūs esat pārvietojis savu daļiņu no {source} uz {dest}. Uzbrūkošā daļiņa bija {attacking_rank}, bet galamērķa daļiņa bija {target_rank}. Jo uzbrūkošā daļiņa ir spieds un galamērķa daļiņa ir maršals, jūs uzvarējāt kaujā.",
+    "opponent_spy_lost": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a spy and the destination is a marshall, you lost the battle.",
+    "you_higher_won": "Jūs esat pārvietojis savu daļiņu no {source} uz {dest}. Uzbrūkošā daļiņa bija {attacking_rank}, bet galamērķa daļiņa bija {target_rank}. Jo uzbrūkošā daļiņa ir augstāka par galamērķa daļiņu, jūs uzvarējāt kaujā.",
+    "opponent_higher_lost": "Spēlētājs {player_id} ir pārvietojis savu daļiņu no {source} uz {dest}. Uzbrūkošā daļiņa bija {attacking_rank}, bet galamērķa daļiņa bija {target_rank}. Jo uzbrūkošā daļiņa ir augstāka par galamērķa daļiņu, jūs zaudējāt kaujā.",
+    "you_lower_lost": "Jūs esat pārvietojis savu daļiņu no {source} uz {dest}. Uzbrūkošā daļiņa bija {attacking_rank}, bet galamērķa daļiņa bija {target_rank}. Jo uzbrūkošā daļiņa ir zemāka par galamērķa daļiņu, jūs zaudējāt kaujā.",
+    "opponent_lower_won": "Spēlētājs {player_id} ir pārvietojis savu daļiņu no {source} uz {dest}. Uzbrūkošā daļiņa bija {attacking_rank}, bet galamērķa daļiņa bija {target_rank}. Jo uzbrūkošā daļiņa ir zemāka par galamērķa daļiņu, jūs uzvarējāt kaujā."
+  },
+  "outcome": {
+    "flag_captured": "Spālātuojs {player_id} ir īgivis pretinīka karogu!",
+    "no_movable_pieces": "Spēlētājs {winner_id} uzvar! Spēlētājam {loser_id} vairs nav pārvietojamu daļiņu."
+  }
+}

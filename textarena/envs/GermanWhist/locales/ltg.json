@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Spēle sākas. Trumpa kārts: {trump_suit} (trumpa karte: {trump_str}).",
+    "no_trump_card": "nivīns"
+  },
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} Vācu Visā.\n{phase_info}\nJūs turat {hand_size} kartes.\nIzspēlējiet kārti ar '[play N]', kur N ir tās pozīcija jūsu rokā (piemēram '[play 3]').",
+    "phase_learning": "Apvuiceibu pūsms: kotra trika uzvarātuojs pajam izlūzis kartis, bet zaudiejs atjem nuokušuos karteitis. Itamā pūsmā īgiutī trikumi nateik skaiteiti par uzvaru.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "Nivīna karte nav pīduovuota - suocēs spēlis pūsms.",
+    "deck_empty": "Kuors ir tukšs - nav pīduovuota nikaida karte.",
+    "available": "Kartis pīduovuojums: {card}",
+    "available_trump": "Kartis pīduovuojums: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Naatbylstūšs sūļa formats. Lītojit \"[play N]\" , kab izspālātu n-u karteņu sovā rūkā.",
+    "bad_position": "Taida karteņa poziceja naeksistej. Tev ir {hand_size} kartenis.",
+    "must_follow_suit": "Tev ir juoatbolsta i juodora {lead_suit} karte.",
+    "invalid_play": "Tū karteņu navar izspēļuot."
+  },
+  "game_action": {
+    "played": "Spālātuojs {player_id} spēlēja {card}."
+  },
+  "trick": {
+    "won": "Spēlētājs {winner_id} uzvar trikā ar {card}.",
+    "won_learning": "Spēlētājs {winner_id} uzvar trikā ar {card} un paņem atvērto kārti."
+  },
+  "phase": {
+    "learning_complete": "Pylns kuorms ir iztukšs, vuiceibu pūsmys beigsīs - kotrs atstuots triks nūzeimoj uzvaru."
+  },
+  "draw": {
+    "winner_received": "Tu uzvarēji triku i sajiuti {card}.",
+    "loser_received": "Tu zaudēji triku i iztaiseji {card} nu kuortu.",
+    "winner_preview": "Nuokušuo karte, kas teik pīduovuota ir {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Uzvarētās trikas līdz šim - Spēlētājs 0: {tricks0}, Spēlētājs 1: {tricks1}",
+    "scores_playing": "Vērtējošās trikas - Spēlētājs 0: {tricks0}, Spēlētājs 1: {tricks1}",
+    "phase": "Faza: {phase}",
+    "phase_learning": "Fāze: {phase} ({remaining_cards} kartes atlikušas klātī)"
+  },
+  "hand": {
+    "no_cards": "Bez kartis.",
+    "no_cards_in_hand": "Nivīna karteņa rūkā.",
+    "header": "Tava rūka:",
+    "trump_indicator": "(TRUMP) \"Es asu vīna nu jūs.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Nivīns kartis vēļ nav izspālējis itū triku.",
+    "header": "Myusu dīnu triks:",
+    "trump_indicator": "(TRUMP) \"Es asu vīna nu jūs.",
+    "card_line": "{observation}\n  Spēlētājs {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Spēle nav suokta.",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nFāze: {phase}",
+    "trump_suit": "{observation}\nTrumpa kārts: {trump_suit}",
+    "trump_card": "{observation}\nTrumpa karte: {card}",
+    "cards_left": "{observation}\nKaru atlikuši klātī: {count}",
+    "next_card": "{observation}\nNākamā karte uzvarētājam: {card}",
+    "blank": "{observation}  īnstrukturejis:",
+    "current_trick": "{observation} Myusu dīnu triks:",
+    "trump_indicator": "(TRUMP) \"Es asu vīna nu jūs.",
+    "trick_line": "{observation}\n  Spēlētājs {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nSpēlētājs {player_id}: {scoring} vērtējošas trikas ({tricks} kopā), {hand_size} kartes rokā"
+  },
+  "outcome": {
+    "summary": "Mācīšanās fāze - Spēlētājs 0: {l0}, Spēlētājs 1: {l1}. Spēles fāze - Spēlētājs 0: {p0}, Spēlētājs 1: {p1}. Spēlētājs {winner_id} uzvar ar {winner_tricks} vērtējošām trikām!"
+  }
+}
