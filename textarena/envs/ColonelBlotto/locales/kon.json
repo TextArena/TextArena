@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "Komanda Alfa.",
+    "commander_beta": "Komanda Beta."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRound {current_round}\nCommander Alpha allocated: {p0_allocations}\nCommander Beta allocated: {p1_allocations}\n",
+    "winner_alpha": "{message}Muntu yina me nunga: Komanda Alpha",
+    "winner_beta": "{message}Muntu yina me nunga: Komanda Beta",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "Mutindu ya kusonika yina kele mbote ve. Sadila: A:5, B:10, C:5",
+    "invalid_field": "Zina ya kisika kele mbote ve. Bisika ke na mfunu: {field_names}",
+    "wrong_allocation_value": "All allocations must be non-negative integers.",
+    "incorrect_total_units": "O weza kukabidila makasi {num_total_units} kasi. Jumla ya sasa: {current_sum}",
+    "good_allocations": "Allocation is good."
+  },
+  "outcome": {
+    "winner_alpha": "Commander Alpha ekola {score_0}-{score_1} lava {num_rounds} mvula!",
+    "winner_beta": "Commander Beta ekola {score_1}-{score_0} lava {num_rounds} mvula!",
+    "draw": "Meci ikoma na {score_0}-{score_1} tie lava {num_rounds} mvula!",
+    "early_winner_alpha": "Commander Alpha ekola {scores_0}-{scores_1} (kuna majority ilando)!",
+    "early_winner_beta": "Commander Beta ekola {scores_1}-{scores_0} (kuna majority ilando)!"
+  }
+}
