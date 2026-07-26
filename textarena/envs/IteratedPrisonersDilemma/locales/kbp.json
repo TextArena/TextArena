@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "Kɔvɛrɩsɩ kɩlɩ wayɩ mbʊ yɔ round {round}. Pɩlɩna '[Cooperate]' mbʊ yɔ '[Defect]' ɖɔnɛ ɛzɩma \\boxed{{}}.",
+    "starting_round": "--- Kpaɣtʋ kpɩtaʋ {round} ---",
+    "round_summary": "Round {round} results:\n{outcome}\nPlayer 0 earned {r0} (total {score_0}), Player 1 earned {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "Pa-naalɛ pakpaɣ kɩmaŋ {s0}.",
+    "round_both_cooperate": "Pa-naalɛ palabɩ nɔɔ kʋɖʋmaɣ.",
+    "round_both_defect": "Pa-naalɛ pɛlɛɣzɩ pa-lɩmaɣza.",
+    "round_p0_cooperates_p1_defects": "Aleɣya laɖʋ 0 ɖʋ ɛ-taa, aleewaa 1 ñese.",
+    "round_p0_defects_p1_cooperates": "Aleɣya laɖʋ 0 kʋyɩ nɛ ɛɖɛɛ, aleewaa 1 ñalabɩ nɔɔ kʋɖʋmaɣ."
+  }
+}
