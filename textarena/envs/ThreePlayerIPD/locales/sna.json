@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Uri Player {player_id} mumhango wemauswa weIterated Prisoner's Dilemma ina wanhu 3. Mhango huu unodura {num_rounds} mizungu.\nMudungano wemhango:\n• {conv_rounds} mizungu inotumika kujadwiza\n• 1 mgawo wa kufanya maamuliyo - wasikiliza tokeni 1 kwa adui: '[<opp-id> cooperate]' kana '[<opp-id> defect]' (kwa maana '[1 defect] [2 cooperate]'; iliyowekwa ni 'kushirikiana'). \nTafuta matrix ya usawa kwa jozi (inotumika kwa kila jozi isiyo na mpangilio):\n  - Washirikiane wote  ->  {reward}\n  - Wote kudanganya     ->  {punishment}\n  - Unadanganya, wao washirikiana -> {temptation}\n  - Unashirikiana, wao wanadanganya -> {sucker}\nMwanamhango (wanamhango) aliye na alama ya juu zaidi mwisho wa mizungu yote anayesha."
+  },
+  "round": {
+    "start": "─── Kuanza Mhango {round} ───\tUnaweza kujadwiza kwa uhuru kwa mizungu inayokuja {conv_rounds}.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Zvabuda:",
+    "pair_line": "{observation}\n\t Player {i} vs Player {j} akachagua {choice_i} na {choice_j} mtawaliwa (Player {i} akapata {gain_i}, Player {j} akapata {gain_j})",
+    "scores_open": "{observation} -> Zviverengero zvazvino: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Mashores enyu: {scores}.  Makundi erangano (mambo ose→mambo mazvi): {groups}"
+  }
+}

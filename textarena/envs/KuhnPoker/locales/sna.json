@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a {max_rounds} round game of Kuhn Poker.\nGame Rules:\n- Kuhn Poker uses a 3-card deck with J, Q, K (J lowest, K highest)\n- Each player antes {ante} chip and receives 1 card each round (note that the cards are dealt without replacement, so you cannot have the same card as your opponent).\n- Game continues for {max_rounds} rounds\n- The player with the most chips after all rounds wins\nAction Rules:\n- '[check]': Pass without betting (only if no bet is on the table)\n- '[bet]': Add 1 chip to the pot (only if no bet is on the table)\n- '[call]': Match an opponent's bet by adding 1 chip to the pot\n- '[fold]': Surrender your hand and let your opponent win the pot"
+  },
+  "init_round": {
+    "round_start": "### Kuanza raundi {current_round} kubva pa {max_rounds} raundi. Kadi yako ni: '{player_card}'",
+    "available_actions": "Zviito zvako zviripo ndeizvi: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Shanda iri lazima iwe [Check], [Bet], [Call], kana [Fold].",
+    "not_legal": "Chiito chinofanira kuva {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Zviito zvako zviripo ndeizvi: {legal_actions}.",
+    "round_summary": "{reason} Mafairo akutanga: Mwari 0: '{player_0_chips}'; Mwari 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Mashindano: Mwari {winner} '{winner_card}' anashinda Mwari {loser} '{loser_card}'. Mwari {winner} anashinda poti ya {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "Pakupera {max_rounds} kutenderera, vatambi vose vaiva nenhamba yakaenzana yechips.",
+    "round_win": "Mutambi {player_id} akasiya.",
+    "winner_player0": "Mutambi 0 akahwina nokuva nemachips akawanda pakupera kwedzose {max_rounds} dzorwendo.",
+    "winner_player1": "Mutambi 1 akahwina nokuva nemachips akawanda pakupera kwamarunduru ose {max_rounds}."
+  }
+}

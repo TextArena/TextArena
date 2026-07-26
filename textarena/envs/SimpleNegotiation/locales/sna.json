@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Wiri Player {player_id} muNegotiation Game.\nUnenge wachiwanika nezvinhu, na chakuitika chako kufungidza kutengeserana zvinhu izvi kuti jumla ya thamani yezvinhu yako ipendeke.\nZvinhu na maadhi anowana kwa sasa zvinhu izvi:\n\t+ {resource_value_list}\nPa kila turn, unogona kungwerengera na mwana weoponendi na kubatsira offer.\nTengai tokens zidziro zvinotevema kwa ajensi:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Zvinhu zvakabatsirwa -> Zvinhu zvakadzorwa]\n  - '[Accept]': Kudzorera offer inotuma.\n  - '[Deny]': Kukana offer inotuma (default).\nGame ino ina miguu {max_turns} yose."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Mutambi akaedza kugamuchira kutengeserana asina kuva nezvinhu zvinodiwa.",
+    "out_of_range": "Player {player_id}, Action isingafungi. Colomnde {col} iri kunze kwe mipaka.",
+    "already_full": "Player {player_id}, Action isingafungi. Colomnde {col} yapinda.",
+    "proposing_with_no_resource": "Mutambi {player_id} akaedza kuita chipo chokutengeserana asina kuva nemari inodiwa.",
+    "incorrect_offer_format": "Mutambi {player_id} akaita chipo chokutsinhanisa nenzira isina kururama.",
+    "no_new_offer": "Mutambi {player_id} haana kupa chimwe chipo chitsva chokutsinhanisa."
+  },
+  "offers": {
+    "reject": "Mutambi {player_id} akaramba kutengeserana.",
+    "accept": "Player {acceptor_id} akagamuchira kutengeserana kubva kuMutambi {proposer_id}.",
+    "proposal": "Player {player_id} akabatsira offer kuPlayer {opponent_id}: Zvinhu zvakabatsirwa: {offered} -> Zvinhu zvakanga zvakadzorwa: {requested}"
+  },
+  "outcome": {
+    "win": "Mutambi {winner_id} akahwina nokuwana mari yakawanda.",
+    "draw": "Kuchinja kumwe chete mukukosha kwezvokushandisa nokuda kwavatambi vose."
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Game rinotanga. Suti yenzi: {trump_suit} (kadi yenzi: {trump_str}).",
+    "no_trump_card": "hapana kana mumwe chete"
+  },
+  "player_prompt": {
+    "intro": "Iwe Mufambi {player_id} muGerman Whist.\n{phase_info}\nIna {hand_size} makadi.\nCheza kadi na '[play N]', apo N ni nhande yake munhande (kwa mfano '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "Hapana kadhi riri kupiwa - nhambo yokutamba yatanga.",
+    "deck_empty": "Dheketi harina chinhu - hapana kadhi riri kupiwa.",
+    "available": "Kadhi riri kupiwa: {card}",
+    "available_trump": "Kadhi riri kupiwa: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Shandisa '[play N]' kutamba Nth kadhi riri muruoko rwako.",
+    "bad_position": "Nzvimbo iyoyo yekadhi haipo. Une makadhi {hand_size}.",
+    "must_follow_suit": "Unofanira kutevera muenzaniso uye kutamba kadhi {lead_suit}.",
+    "invalid_play": "Kadhi iroro harigoni kuridzwa."
+  },
+  "game_action": {
+    "played": "Mutambi {player_id} akaridza {card}."
+  },
+  "trick": {
+    "won": "Mutambi {winner_id} anokunda chiito na {card}.",
+    "won_learning": "Mufambi {winner_id} anotonga cherecheso na {card} na kuchukua kadi yakatizira."
+  },
+  "phase": {
+    "learning_complete": "The deck is exhausted. The learning phase is over - every remaining trick counts towards victory."
+  },
+  "draw": {
+    "winner_received": "Makakunda muedzo uye makagamuchira {card}.",
+    "loser_received": "Wakarasikirwa nechitsotsi ndokuwana {card} kubva mudanga.",
+    "winner_preview": "Kadhi rinotevera riri kupiwa ndi {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Macherecheso anotonga kusvika sasa - Mufambi 0: {tricks0}, Mufambi 1: {tricks1}",
+    "scores_playing": "Macherecheso anotonga - Mufambi 0: {tricks0}, Mufambi 1: {tricks1}",
+    "phase": "Chikamu: {phase}",
+    "phase_learning": "Mhando: {phase} ({remaining_cards} makadi dzeshanda munyika)"
+  },
+  "hand": {
+    "no_cards": "Hapana makadhi.",
+    "no_cards_in_hand": "Hapana makadhi ari muruoko",
+    "header": "Ruoko rwako:",
+    "trump_indicator": "(TRUMP) Kutaura chokwadi,",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Hapana makadhi akatamba chiito ichi.",
+    "header": "Current trick:",
+    "trump_indicator": "(TRUMP) Kutaura chokwadi,",
+    "card_line": "{observation}\n  Mufambi {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Mutambo hauna kutanga.",
+    "header": "=== GEMANI WHIST DZOKUDZISA===",
+    "phase": "{observation}\nMhando: {phase}",
+    "trump_suit": "{observation}\nSuti yenzi: {trump_suit}",
+    "trump_card": "{observation}\nKadi yenzi: {card}",
+    "cards_left": "{observation}\nKadi dzeshanda: {count}",
+    "next_card": "{observation}\nKadi inotevera kuna mufambi: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation}\nCurrent trick:",
+    "trump_indicator": "(TRUMP) Kutaura chokwadi,",
+    "trick_line": "{observation}\n  Mufambi {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nMufambi {player_id}: {scoring} kucherechesa makadi ({tricks} wose), {hand_size} makadi munhande"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

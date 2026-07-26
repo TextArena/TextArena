@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "Bhoja Rakuwanda:\n\n{board}\nMikanzvi Yopinduka: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Player {player_id} haana kupinda kufamba mu fomati [A0 B0] .",
+    "invalid_coordinates": "Invalid action format. Player {player_id} haana kupinda ma coordinates akakodzera.",
+    "not_own_piece": "Muitiro usina kukodzera. Mutambi {player_id} anofanira kufambisa chimwe chezvimedu zvake.",
+    "scout_through_pieces": "Muitiro wechiito hauna kukodzera. Mutambi {player_id} haagoni kufambisa scout kuburikidza nezvimwe zvidimbu.",
+    "scout_diagonal": "Invalid action format. Player {player_id} haagoni kufamba scout diagonally.",
+    "non_scout_multi_square": "Chimiro chechiito chisina kukodzera. Zvidimbu, kunze kwevasori, zvinogona kufamba chete nzvimbo imwe panguva.",
+    "move_into_lake": "Muitiro wechiito hauna kukodzera. Mutambi {player_id} haagoni kupinda mudziva.",
+    "move_onto_own_piece": "Muitiro usina kukodzera. Mutambi {player_id} haagoni kuenda pachigamba chake.",
+    "move_bomb_or_flag": "Muitiro wechiito hauna kukodzera. Mutambi {player_id} haigone kufambisa bhomba kana mureza."
+  },
+  "game_action": {
+    "you_moved": "Wakafambisa chidimbu chako kubva pa {source} kuenda ku {dest}.",
+    "opponent_moved": "Mwari {player_id} akatenga chikwata kuva {source} kuenda {dest}.",
+    "you_equal_ranks": "Wakazotenga chikwata chako kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa marudzi ane anodaidzwa, zvikwata zvizvi zvaora.",
+    "opponent_equal_ranks": "Mwari {player_id} akatenga chikwata kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa marudzi ane anodaidzwa, zvikwata zvizvi zvaora.",
+    "you_miner_defused": "Wakazotenga chikwata chako kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa miner inokwesa bomb, mwari wakawina musango.",
+    "opponent_miner_defused": "Mwari {player_id} akatenga chikwata kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa miner inokwesa bomb, mwari wakaswera musango.",
+    "you_bomb_lost": "Wakazotenga chikwata chako kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa chikwata cha kutengesa hakuna miner, mwari wakaswera musango.",
+    "opponent_bomb_won": "Mwari {player_id} akatenga chikwata kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa chikwata cha kutengesa hakuna miner, mwari wakawina musango.",
+    "you_spy_won": "Wakazotenga chikwata chako kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa chikwata cha kutengesa kuna spy na chikwata cha kuzorwa kuna marshall, mwari wakawina musango.",
+    "opponent_spy_lost": "Mwari {player_id} akatenga chikwata kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa chikwata cha kutengesa kuna spy na chikwata cha kuzorwa kuna marshall, mwari wakaswera musango.",
+    "you_higher_won": "Wakazotenga chikwata chako kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa chikwata cha kutengesa kuna marudzi akadzwa kwazvo, mwari wakawina musango.",
+    "opponent_higher_lost": "Mwari {player_id} akatenga chikwata kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa chikwata cha kutengesa kuna marudzi akadzwa kwazvo, mwari wakaswera musango.",
+    "you_lower_lost": "Wakazotenga chikwata chako kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa chikwata cha kutengesa kuna marudzi akadzwa, mwari wakaswera musango.",
+    "opponent_lower_won": "Mwari {player_id} akatenga chikwata kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa chikwata cha kutengesa kuna marudzi akadzwa, mwari wakawina musango."
+  },
+  "outcome": {
+    "flag_captured": "Mutambi {player_id} akabata mureza womuvengi!",
+    "no_movable_pieces": "Mwari {winner_id} anowina! Mwari {loser_id} hana chikwata chokutenga."
+  }
+}

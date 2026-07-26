@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Bhodhi razvino: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kufambisa kunofanira kuva muchimiro [macro micro] nenhamba 0-8.",
+    "out_of_range": "Nhamba dzose dzinofanira kuva pakati pe0 ne8.",
+    "index_out_of_range": "Micro_board, row kana col iri kunze kwechikuva.",
+    "cell_occupied": "Muchitokisi makatozara.",
+    "wrong_micro_board": "Mutambi wacho anofanira kutamba mubhodhi duku rinotevera.",
+    "micro_board_won": "The micro board is already won."
+  },
+  "next_board": {
+    "any": "chero bhodhi diki-diki",
+    "specific": "micro bhodhi {nxt}"
+  },
+  "game_action": {
+    "played": "Muzinda {player_id} akashanda mu micro board {macro_idx}, seli {micro_idx} (row {row}, col {col}). Muzinda {opponent_id} anoziva kushanda mu {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Mutambi {player_id} anokunda Ultimate Tic Tac Toe!",
+    "draw": "The game is a draw!"
+  }
+}

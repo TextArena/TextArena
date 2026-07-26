@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Bhoja Rakuverenga:\n\n{board}\nMikano Yenyu: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Mapaili epakati --- ",
+    "pile": "{observation}Wanda {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Mwonekano wa Mwana {player_id} ---\n",
+    "payoff": "{observation}Wanda wa Payoff (Kadi ya Juu): {top_card}, Urefu wa Wanda wa Payoff: {payoff_length}\n",
+    "hand": "{observation}Mikono: {hand}\n",
+    "discard": "{observation}Mawanda ya Kubvisa: {discard}\n",
+    "empty": "Chisina chinhu"
+  },
+  "game_message": {
+    "no_cards_left": "Hapanazve makadhi okudhirowa kubva. Yeuka kuti unogona kutamba makadhi anobva kunzvimbo idzi: 1. Ruoko rwako 2. Kadhi repamusoro pemurwi wako wekubhadhara 3. Kadhi rapamusoro remumwe wemirwi yako yekurasikirwa ** . "
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Player {player_id} haana kupindura nechiito chakakodzera mumasikirini akakwana.",
+    "invalid_play": "Mutambi {player_id} akaedza kutamba {card} pane pakati pepakati {index}.",
+    "discard_from_payoff": "Kurasa kusina kukodzera. Mutambi {player_id} akaedza kurasa kadhi kubva mumurwi wemari yekubhadhara.",
+    "discard_not_in_hand": "Kurasa kusina kukodzera. Mutambi {player_id} akaedza kurasa kadhi risiri muruoko rwake.",
+    "wrong_move_type": "Mutambi {player_id} haana kupindura nemhando yechiito chakakodzera."
+  },
+  "game_action": {
+    "you_drew": "Wakadhirowa makadhi.",
+    "opponent_drew": "Mutambi {player_id} akadhirowa makadhi.",
+    "you_played": "Wakatamba {card} pachikamu chepakati {index}.",
+    "opponent_played": "Mwana {player_id} akashanda {card} kwenye wanda wa katikati {index}.",
+    "you_discarded": "Wakabvisa {card} kuwanda kwa {index}, kwa hufundisi ina maana kwamba mwesho wa turn yenyu. Hakuna sheni nyingine ya yenyu inayozingatiwa kwa turn hii. Mwana {next_player_id} anozopinda.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mwana {current_player} amemaliza wanda wake wa payoff! Mwana {current_player} anashinda!",
+    "deadlock_player_0": "Kudhakana kwakawanda! Mwana 0 anashinda na {player_0_payoff} kadi zisizoimalizika dhidi ya Mwana 1 {player_1_payoff} kadi.",
+    "deadlock_player_1": "Deadlock yasvika! Mutambi 1 anokunda nemakadhi {player_1_payoff} asara vs Makadhi eMutambi 0's {player_0_payoff}.",
+    "deadlock_tie": "Kudhakana kwakawanda na tie! Waviri wanawana {player_0_payoff} kadi zisizoimalizika. Mwana {current_player} anashinda kwa kuridhika."
+  }
+}

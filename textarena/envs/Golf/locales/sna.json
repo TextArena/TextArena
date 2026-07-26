@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Mwari kudya Golf (Kadhi Gemi) - Muzinda {player_id}.\nMukwati: Uye nepakati pfupi zvikuru muRound imwe chete. Iyi zvikamu zvinoshandisa zvinhu zvakazvinja, zvinopimwa sa0.\nMazhini eKadhi: A=1, 2-10=mwaka wakazvipira, J/Q=10, K=0\n\nMabiko (tsaira brackets zvakajeka):\n- '[draw]' - Tora kubva muDeck\n- '[take]' - Bata kubva paTsamba yekubvisa\n- '[swap X Y]' - Ita kadhi yakatora nenhamba X (mwaka) Y (kolomna)\n- '[discard]' - Bvisa kadhi yakatora"
+  },
+  "board": {
+    "drew": "Wakazodzwa: {card}\nTsitsi wandakuziva [swap X Y] kana [discard]",
+    "took": "Mwakabata: {card} kubva pa tsamba yekubvisa\nMwakazopota [swap X Y] nayo (haina kukwata)",
+    "peeked": "Mwakataura pa nhambo ({row},{col}): {card}",
+    "turn_view": "Mauko anouya:\n{hand}\nTsamba yekubvisa: {discard}\n{options}",
+    "none": "Hapana"
+  },
+  "options": {
+    "final_turns": "Mapinda ekugura! Makonzo anouya: [draw], [take], [peek X Y]",
+    "draw": "Makonzo anouya: [draw], [take]",
+    "must_swap": "Unofanira: [swap X Y] (haugoni kurasa makadhi kubva murwi wokurasa)",
+    "swap_or_discard": "Mwakapota: [swap X Y] kana [discard]"
+  },
+  "hand": {
+    "no_cards": "Hapana makadhi.",
+    "header": "Col: 1 2 3 Kutaura kwokuzvikudza",
+    "row": "Mwaka {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Muzinda {pid} akaita {new} ne{old} pa nhambo ({row},{col})",
+    "discarded": "Player {pid} discarded {card}"
+  },
+  "message": {
+    "deck_empty": "Dhekisi harina chinhu! Mutambo unoguma pakarepo.",
+    "knocked": "Mutambi {pid} akarova! Mumwe nomumwe mutambi anowana mumwezve mukana.",
+    "final_round": "Muzinda {pid} {reason}! Vanhu vose vaviri vanopinda gare gare"
+  },
+  "reason": {
+    "all_revealed": "has all cards revealed"
+  },
+  "invalid": {
+    "wrong_action": "Tsaira chinhu chimwe chakabatwa: [draw], [take], [swap X Y], [discard], [knock], kana [peek X Y]",
+    "discard_empty": "Muruzhinji rwokuraswa hakuna chinhu!",
+    "must_draw_first": "Mwakazodzwa kwanzi [draw], [take], [knock], kana [peek X Y]",
+    "cannot_discard_taken": "Haugoni kurasa kadhi rinobviswa mumurwi wokurasikirwa. Unofanira kurichinjanisa.",
+    "have_drawn_card": "Une kadhi rakadhirowewa. Unofanira [swap X Y] kana kuti [discard] naro.",
+    "need_drawn_swap": "Unoda kadhi rakadhirowewa kuti uchinjanise.",
+    "need_drawn_discard": "Unoda kadhi rakadhirowewa kuti urirase.",
+    "out_of_bounds": "Nhambo yepamweha. Tsaira mwaka 1-{max_row}, kolomna 1-{max_col}",
+    "knock_with_card": "Haugoni kugogodza nekadhi rakadhirowewa. Pedzisa kutendeuka kwako kutanga.",
+    "already_knocked": "Mumwe munhu akatokunda munharaunda ino.",
+    "already_revealed": "Kadhi iroro ratoratidzwa kare!"
+  },
+  "summary": {
+    "full": "Gemi rakapera! Muzinda {winner} anotonga na sko ya {score} point!\n\nMakonzo ekupedza:\n{scores}",
+    "line": "Muzinda {pid}: {score} point\n"
+  },
+  "board_str": {
+    "title": "=== GOLF GAME=== (Mashoko)",
+    "discard": "Dura rinoraswa: {card}",
+    "knocked": "Mutambi {pid} akarova!",
+    "player_header": "Muzinda {pid} (Sko: {score}):"
+  }
+}
