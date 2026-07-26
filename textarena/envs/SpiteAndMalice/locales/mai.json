@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "वर्तमान बोर्ड:\n\n{board}\nउपलब्ध चालें: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- केन्द्र पाइलसभ -- ",
+    "pile": "{observation}ढेर {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- खिलाड़ी {player_id} का दृश्य ---\n",
+    "payoff": "{observation}पेऑफ़ ढेर (शीर्ष कार्ड): {top_card}, पेऑफ़ ढेर लंबाई: {payoff_length}\n",
+    "hand": "{observation}हाथ: {hand}\n",
+    "discard": "{observation}त्याग ढेर: {discard}\n",
+    "empty": "खाली अछि."
+  },
+  "game_message": {
+    "no_cards_left": "अहाँ अपन कार्ड एहि प्रकार सँ खेल सकैत छी: 1. अहाँक हाथ 2. अहाँक पुरस्कार पाइलक शीर्ष पत्ता 3. कोनो सेहो डिस्क्राइब पाइल केर शीर्ष कार्ड। "
+  },
+  "invalid_move": {
+    "wrong_format": "अमान्य चाल प्रारूप. खेलाडी {player_id} वर्ग कोष्ठकमे मान्य चलानसँ प्रतिक्रिया नहि केलक।",
+    "invalid_play": "अमान्य खेल। खिलाड़ी {player_id} ने {card} को केंद्रीय ढेर {index} पर खेलने का प्रयास किया।",
+    "discard_from_payoff": "अमान्य त्याग. खेलाड़ी {player_id} भुगतान ढेर सँ एकटा कार्ड केँ छोड़बाक प्रयास केलक।",
+    "discard_not_in_hand": "अमान्य त्याग. खेलाड़ी {player_id} हाथमे नहि रहल कार्डकेँ फेकबाक प्रयास केलक।",
+    "wrong_move_type": "अमान्य चाल प्रकार. खेलाडी {player_id} वैध चलना प्रकारक साथ प्रतिक्रिया नहि केलक।"
+  },
+  "game_action": {
+    "you_drew": "अहाँ कार्ड निकालि देलहुँ।",
+    "opponent_drew": "खेलाड़ी {player_id} कार्ड निकालि देलनि।",
+    "you_played": "आपने {card} को केंद्रीय ढेर {index} पर खेला।",
+    "opponent_played": "खिलाड़ी {player_id} ने {card} को केंद्रीय ढेर {index} पर खेला।",
+    "you_discarded": "आपने {card} को त्यागने के लिए {index} में त्याग दिया, जिसका अर्थ है कि आपने अपनी बारी समाप्त कर दी। आपकी कोई और कार्रवाई नहीं मानी जाएगी। खिलाड़ी {next_player_id} अगली बारी लेगा।",
+    "opponent_discarded": "खिलाड़ी {player_id} ने {card} को त्यागने के लिए {index} में त्याग दिया, जिसका अर्थ है कि उन्होंने अपनी बारी समाप्त कर दी। खिलाड़ी {player_id} की इस बारी में कोई और कार्रवाई नहीं मानी जाएगी। खिलाड़ी {next_player_id}, आपकी बारी अगली है। कृपया [action card center_index] प्रारूप में अपनी कार्रवाई दर्ज करें।"
+  },
+  "outcome": {
+    "payoff_cleared": "खिलाड़ी {current_player} ने अपने पेऑफ़ ढेर को साफ़ कर दिया! खिलाड़ी {current_player} जीतता है!",
+    "deadlock_player_0": "डेडलॉक पहुंच गया! खिलाड़ी 0 ने {player_0_payoff} कार्ड शेष के साथ जीत हासिल की बनाम खिलाड़ी 1 के {player_1_payoff} कार्ड।",
+    "deadlock_player_1": "डेडलॉक पहुंच गया! खिलाड़ी 1 ने {player_1_payoff} कार्ड शेष के साथ जीत हासिल की बनाम खिलाड़ी 0 के {player_0_payoff} कार्ड।",
+    "deadlock_tie": "डेडलॉक पहुंच गया टाई के साथ! दोनों खिलाड़ियों के पास {player_0_payoff} कार्ड शेष हैं। खिलाड़ी {current_player} डिफ़ॉल्ट रूप से जीतता है।"
+  }
+}
