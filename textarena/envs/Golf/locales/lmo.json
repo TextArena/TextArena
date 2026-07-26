@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Te see giughee al Golf (Giögh de Cart) - Giugador {player_id}.\nScòpo: Ottegnì el puntegg total pussee bass in 'sta singola partita. Se le colònn gh'an el istess valor, hinn somegià 'me 0.\nValor di Cart: A=1, 2-10=valor facc, J/Q=10, K=0\n\nAzion (dòvra parentesi esat):\n- '[draw]' - Drew da la baraja\n- '[take]' - Tò da la mazza de scart\n- '[swap X Y]' - Scambia la carta drew con la posizion X (filera) Y (colonna)\n- '[discard]' - Scarta la carta drew"
+  },
+  "board": {
+    "drew": "Te see drew: {card}\nAdess te gh'è de [swap X Y] o [discard]",
+    "took": "Te gh'hee ciappaa: {card} da 'na pila de scartàa (non puoi buttar via) te ghe devi [swap X Y] con lù.",
+    "peeked": "Te see gaveggià a la posizion ({row},{col}): {card}",
+    "turn_view": "La tua man:\n{hand}\nMazza de scart: {discard}\n{options}",
+    "none": "Nücissì."
+  },
+  "options": {
+    "final_turns": "Turn final! Tee opzion: [draw], [take], [peek X Y]",
+    "draw": "Tee opzion: [draw], [take]",
+    "must_swap": "Te gh'è da: [swap X Y] (no se pò scartà i carte de la pila di scarto)",
+    "swap_or_discard": "Te see gh'è de: [swap X Y] o [discard]"
+  },
+  "hand": {
+    "no_cards": "Senza cartolina.",
+    "header": "Col: 1 2 3",
+    "row": "Filera {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Giugador {pid} a scambià {new} con {old} a la posizion ({row},{col})",
+    "discarded": "Giugador {pid} a scartà {card}"
+  },
+  "message": {
+    "deck_empty": "La piata l'è scua, la partida a finiss subit.",
+    "knocked": "Giocatore {pid} buttato! Ogni altro giocaeur el gh'ha on gir de pù.",
+    "final_round": "Giugador {pid} {reason}! Tutti gli olter giugadùr gh'an un olter turn"
+  },
+  "reason": {
+    "all_revealed": "l'ha svelaa tucc i carton?"
+  },
+  "invalid": {
+    "wrong_action": "Use exactly ONE bracketed action: [draw], [take], [swap X Y], [discard], [knock], or [peek X Y]",
+    "discard_empty": "La pila de scartà l'è vuda!",
+    "must_draw_first": "Te see gh'è de [draw], [take], [knock], o [peek X Y] prima",
+    "cannot_discard_taken": "Te pöl minga scartà 'na carta ciapada dal mucc de scherz, te la devi scambià.",
+    "have_drawn_card": "Te see gh'è 'na carta drew. Te gh'è de [swap X Y] o [discard]",
+    "need_drawn_swap": "Te gh'è bisògn de 'na carta tirada per scambià.",
+    "need_drawn_discard": "Te gh'è bisògn de 'na carta tirada per scartàla.",
+    "out_of_bounds": "Posizion foeura di limit. Dòvra filera 1-{max_row}, colonna 1-{max_col}",
+    "knock_with_card": "Te pöl minga battegh con una carta tirada. Completa prima el tò gir.",
+    "already_knocked": "Alura a gh'è già un che l'ha ciapà.",
+    "already_revealed": "La carta l'è già staa revelada!"
+  },
+  "summary": {
+    "full": "Giögh finii! Giugador {winner} venc con on puntegg de {score} punti!\n\nPuntegg final:\n{scores}",
+    "line": "Giugador {pid}: {score} punti\n"
+  },
+  "board_str": {
+    "title": "=== GOLF GAME === L'è 'na partìda de l'Univèrs.",
+    "discard": "Scartà cumulo: {card}",
+    "knocked": "Gioca {pid} ha bussato!",
+    "player_header": "Giugador {pid} (Punti: {score}):"
+  }
+}

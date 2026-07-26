@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Te se Giugador {player_id} in d'on gioco a du giugadur de Spite e Malice. El tò obietiv a l'è quell de vess el primm a svodà la pila de pagamento.\n\n### Panoramica del Gioco:\n- L'obietiv a l'è quell de svodà la pila de pagamento zogand carte in sui pile central.\n- Te podet zogà carte de tri font:\n  1. La tua **man** (te principi ogni turn con fin a 5 carte in man).\n  2. La **carta superior de la pila de pagamento**.\n  3. La **carta superior de ona qualsvoglia pila de scart**.\n\n### Regol de Zogada:\n- Te podet zogà ona carta in su ona pila central se l'è **ona graduazion pussee alta** de la carta superior in su quella pila (le pile central principien con l'As e van fin a la Regina; i Re a hinn salvadegh - poden vess zogà in su ona qualsvoglia carta ma cambien no la sequenza de graduazion. Chest voeur di che se on Re a l'è doprà dopo del 4, alora quell Re a l'è consideraa 'me el 5 e la prossima carta la gh'ha de vess el 6).\n- Se te podet no zogà nagòta oltra, te see obligaa de **scartà ona carta** in su ona pila de scart per finì el turn.\n- Se ona pila central la raggiung el numer de la Regina, la sarà svodada automaticament.\n- L'orden de graduazion a l'è: A=1, 2=2, ..., 9=9, J=10, Q=11, K 'me salvadegh.\n\n### Azion:\n1. **Pesa**: Al principi del turn, pesa le carte per riempì la man fin a 5 carte. Inserì **[draw]** per principià.\n2. **Zogà ona Carta**: Per zogà ona carta, specifega la carta e la pila central 'me **[play A♠ 0]** (indove 'A♠' a l'è la carta e '0' a l'è l'index de la pila central).\n3. **Scartà**: Se te podet no zogà nagòta oltra, scartà ona carta de la man in su ona pila de scart per finì el turn. Inserì **[discard A♠ 1]** (indove 'A♠' a l'è la carta e '1' a l'è l'index de la pila de scart). Nota che te podet no scartà nagòta carta de la pila de pagamento. Te podet scartà domà le carte de la man.\n\n"
+  },
+  "board": {
+    "current_board": "Tavol current:\n\n{board}\nMoviment disponibij: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pile Centrale -- ",
+    "pile": "{observation}Pila {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vista del Giugador {player_id} ---\n",
+    "payoff": "{observation}Pila de pagamento (Carta superior): {top_card}, Lunghezza de la pila de pagamento: {payoff_length}\n",
+    "hand": "{observation}Man: {hand}\n",
+    "discard": "{observation}Pile de scart: {discard}\n",
+    "empty": "Empty"
+  },
+  "game_message": {
+    "no_cards_left": "There are no more cards to draw from. Remember that you can play cards from these sources:\n  1. Your **hand**.\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Player {player_id} didn't respond with a valid move in square brackets.",
+    "invalid_play": "Zogada no valida. Giugador {player_id} ha provà de zogà {card} in su la pila central {index}.",
+    "discard_from_payoff": "Invalid discard. Player {player_id} tried to discard a card from the payoff pile.",
+    "discard_not_in_hand": "Discard invalid. Player {player_id} tried to discard a card that isn't in hand.",
+    "wrong_move_type": "Invalid move type. Player {player_id} didn't respond with a valid move type (Player 0) = \"Lè minga un giògn de mossa vàlid\"."
+  },
+  "game_action": {
+    "you_drew": "You drew cards.",
+    "opponent_drew": "Giocatore {player_id} tirò carte.",
+    "you_played": "Tu ghjucassi {card} in piàsa centràl {index}.",
+    "opponent_played": "Giugador {player_id} ha zogà {card} in su la pila central {index}.",
+    "you_discarded": "Te hai scartà {card} a la pila de scart {index}, che voeur di che te hai finii el turn. Nagòta azion ulteriora tua a l'è minga considerada per chest turn. Giugador {next_player_id} el varà de andà de seguit.",
+    "opponent_discarded": "Giugador {player_id} ha scartà {card} a la pila de scart {index}, che voeur di che l'ha finii el sò turn. Nagòta azion ulteriora del Giugador {player_id} a l'è minga considerada per chest turn. Giugador {next_player_id}, te varà de andà de seguit. Per favur, inserì la tua azion in del format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Giugador {current_player} ha finii la pila de pagamento! Giugador {current_player} el venc!",
+    "deadlock_player_0": "Stall raggiunt! Giugador 0 el venc con {player_0_payoff} carte rimast vs Giugador 1 con {player_1_payoff} carte.",
+    "deadlock_player_1": "Stall raggiunt! Giugador 1 el venc con {player_1_payoff} carte rimast vs Giugador 0 con {player_0_payoff} carte.",
+    "deadlock_tie": "Stall raggiunt con paregg! Tut e du i giugadur han {player_0_payoff} carte rimast. Giugador {current_player} el venc per defecc."
+  }
+}

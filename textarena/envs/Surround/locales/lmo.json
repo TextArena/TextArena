@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Giocador intorna a 'n {width}x{height} grid.\nSeet el giocador {player_id}. Moviment valid: '[up]' '[down]' '[left]' '[right]' o w/s/a/d.\nObietiv: sopraviv a tucc i alter. I trai a hinn letai; i impatt cont i mur a hinn mortai; i scontr a testa de duu a hinn mortai tutt duu."
+  },
+  "board": {
+    "current": "CURRENT BOARD: {board}",
+    "after_moves": "Board dòp mudàde simultànne: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Player {player_id} died due to invalid move."
+  },
+  "outcome": {
+    "survived_win": "Gioca {player_id} è sopravvissuto; tutti gli altri si sono schiantati.",
+    "all_crashed": "All players crashed simultaneously.",
+    "outlived": "El giugador l'ha vivüü de tutt i alter.",
+    "all_dead": "Tutt i giugador hinn mort.",
+    "turn_limit": "L'è rivà el limit de gir: chi che l'ha restaa püsee a longh vinc.",
+    "ranking": "{reason} Classifega final di grup (mijor→pegg) : {groups}"
+  }
+}

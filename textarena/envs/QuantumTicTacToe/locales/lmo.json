@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} nel Quantum Tic Tac Toe.\nIl tuo simbolo è '{symbol}', e i tuoi numeri di mossa sono sempre {parity} (ad esempio, X1, X3 o O2, O4).\n\nObiettivo: Vincere formando una linea di tre segni classici (solidificati da sovrapposizioni).\n\nCome giocare:\n- In ogni turno, metti un segno spettrale in due quadrati vuoti diversi utilizzando il formato '[a,b]'.\n- Questi segni sono intrecciati e etichettati come 'X1 / X1' o 'O4 / O4'.\n- Non puoi mettere segni spettrali in un quadrato che è già collassato (solidificato).\n\nRegola di collasso:\n- Se la tua mossa crea un ciclo nel grafico di intreccio, si verifica un collasso automatico.\n- Ogni segno spettrale nel ciclo si trasforma in un segno classico in una delle sue due posizioni.\n- Qualsiasi segno spettrale dipendente si verifica anche il collasso.\n\nVittoria:\n- Il gioco termina quando un giocatore ha tre segni classici in linea.\n- Se entrambi i giocatori ottengono una linea durante lo stesso collasso, il giocatore con il numero di mossa massimo più basso vince.\n\nEsempio di mossa: '[0,4]' mette un segno spettrale nelle celle 0 e 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Board:\n\n{board}\n\nInvia la tua mossa come '[a,b]' per mettere un segno quantistico in due posizioni."
+  },
+  "invalid_move": {
+    "wrong_format": "Format invalid. Use \"[a,b]\".",
+    "invalid_cells": "Invalid o duplicate cell indices.",
+    "already_solidified": "Una de le cellule l'è già solidificàda."
+  },
+  "game_action": {
+    "placed": "Giocatore {player_id} ha messo il suo simbolo in una sovrapposizione tra le celle {pos_a} e {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Sovrapposizione dipendente risolta. La cella ({r}, {c}) è ora {symbol}.",
+    "last_cell_resolved": "Sovrapposizione dell'ultima cella risolta. La cella ({r}, {c}) è ora {symbol}.",
+    "superposition_resolved": "Sovrapposizione risolta. La cella ({r}, {c}) è ora {symbol}."
+  },
+  "outcome": {
+    "win": "Gioca {player_id} vince con i segni solidificà!",
+    "draw": "La partìa l'è pareggia!"
+  }
+}

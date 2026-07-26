@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "El gioco el scomincia. Seme de bris: {trump_suit} (carta de bris: {trump_str}).",
+    "no_trump_card": "gnun"
+  },
+  "player_prompt": {
+    "intro": "Ti se giugador {player_id} in Whist todesch.\n{phase_info}\nTi te tien {hand_size} cart.\nGioga una carta con '[play N]', indove N l'è la posizion de la carta in la tua man (per esempi '[play 3]').",
+    "phase_learning": "FASE DELL'APPRENDIMENTO: al vincitor de ogni truc el ciapa la carta a faccia in sù e 'l perdent l tira la cartina proscima del mazzo. I trucs vünüü in questa fase i conta minga per la vittoria.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "Nè carta è in offerta - la fase di gioco ha cominciato.",
+    "deck_empty": "El mazzo l'è vuo - no gh'è nissuna carta in oferta.",
+    "available": "Card on offer: {card}",
+    "available_trump": "Card on offer: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Use '[play N]' to play the Nth card in your hand.",
+    "bad_position": "La posizion de la carta l'è minga esistenta. Te gh'hee {hand_size} carte.",
+    "must_follow_suit": "Te gh'è de fà el seguità e giugà una carta {lead_suit}.",
+    "invalid_play": "Chèsta carta la pò minga vèss giocaa."
+  },
+  "game_action": {
+    "played": "Giocatore {player_id} giocava con {card}."
+  },
+  "trick": {
+    "won": "El giugador {winner_id} el vince la manovra cont {card}.",
+    "won_learning": "Giugador {winner_id} el vins el trucch con {card} e el ciapa la carta volta su."
+  },
+  "phase": {
+    "learning_complete": "La baraca l'è esaurida, la fase de imparà a lè finìa e ogni truc restant el conta per vìncer."
+  },
+  "draw": {
+    "winner_received": "Te gh'è vinciù el truc e te ghè ciapà {card}.",
+    "loser_received": "Te perdet el truc e te tirat {card} dal mazzo.",
+    "winner_preview": "La proscima carta in oferta l'è {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Trucch vengiui fin ades - Giugador 0: {tricks0}, Giugador 1: {tricks1}",
+    "scores_playing": "Bris con punt - Giugador 0: {tricks0}, Giugador 1: {tricks1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Fas: {phase} ({remaining_cards} cart che resten nel maz)"
+  },
+  "hand": {
+    "no_cards": "Senza cartolina.",
+    "no_cards_in_hand": "Nè carte in mano.",
+    "header": "La tò man:",
+    "trump_indicator": "(TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Nè carte gh'ha giugàa ancamò 'sto trucch.",
+    "header": "La trucca attuale:",
+    "trump_indicator": "(TRUMP)",
+    "card_line": "{observation}\n  Giugador {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Gioca minga scominciaa.",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nFas: {phase}",
+    "trump_suit": "{observation}\nSeme de bris: {trump_suit}",
+    "trump_card": "{observation}\nCarta de bris: {card}",
+    "cards_left": "{observation}\nCart che resten nel maz: {count}",
+    "next_card": "{observation}\nProssima carta per el vinsidor: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} L'è 'l tò truc:",
+    "trump_indicator": "(TRUMP)",
+    "trick_line": "{observation}\n  Giugador {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nGiugador {player_id}: {scoring} bris con punt ({tricks} total), {hand_size} cart in man"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

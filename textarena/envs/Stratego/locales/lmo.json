@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ti te sé Giugador {player_id} in Stratego.\nEl to obietiv a l'è quell de ciapà la Bandiera del to aversari o eliminà tutt i so pezz mobili.\nLa to armada l'è stada metuda giò per ti in su la tavol, compresa la to Bandiera, i Bomb, e alter pezz de grad vari.\n\n### Istruzion de gioco\n1. **Regol de moviment:**\n   - In de la to tornada, ti podet spostà on pezz de on pass a on quadrat adasi (su, giò, manzin, o drecc) che l'è occupaa de on alter pezz.\n   - Esempi: On pezz el poden spostàss de A1 a B1 o A1 a A2 se B1 e A2 hinn minga occupaa del giugador.\n   - Se el pezz selezionaà a l'è on Bomb o on Flag, no el poden vess spostaa.\n2. **Battali:**\n   - Se ti te spostet in su on quadrat occupaa de on pezz del to aversari, alora gh'è ona battalia:\n     - El pezz con on grad pussee volt el venc e el elimina el pezz del aversari.\n     - Se i grad a hinn istess, tutt e du i pezz a hinn eliminaa de la tavol.\n     - **Casi speciai:**\n       - I Bomb eliminen la pupart di pezz atacant, foeura che i Miner, che poden disativà i Bomb.\n       - I Spie poden batt i Marescial se attachen primm, ma perdenn contra tutt i alter pezz.\n3. **Obietiv strategich:**\n   - Identificà i pezz del to aversari atravers i so moviment e battali.\n   - Protég la to Bandiera intant che ti cerchet de ciapà la Bandiera del to aversari.\n   - Doperà i Scout strategicament per ottegnì informazion sui pezz del to aversari e attacchà quij debol.\n\n### Come fà on moviment:\n1. Specifega i coordinad del pezz che ti voeuri spostà e la so destinazion.\n2. Doperà el format: [A0 B0], indove A0 a l'è la posizion de partenza, e B0 a l'è la destinazion.\n   - Esempi: Per spostà on pezz da la riga 0, colonna 0 a la riga 1, colonna 0, inserì [A0 B0].\n3. Assicuràti che la destinazion a l'è valida segond i regol de moviment sura.\n\n### Not important:\n- La tavol la mostrerà i to pezz e le so posizion, per esempi MN, MS.\n- La tavol la mostrerà anca le posizion conossuu di pezz del to aversari senza revelà i so grad, per esempi ?.\n- I grilj con ~ a hinn lagh e no poden vess occupaa.\n- Come suggeriment, scumincia el to gioco spostand i to pezz che a hinn in su la prima linea per ottegnì informazion sui pezz del to aversari. La prima linea del Giugador 0 e del Giugador 1 a l'è la riga D e G, respectivament.\n\nChi a l'è el stat corrent de la tavol:\n"
+  },
+  "board": {
+    "current_board": "Tavol corrent:\n\n{board}\nMoss possibil: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de azion no valid. Giugador {player_id} no l'ha inserii on moviment in del format [A0 B0].",
+    "invalid_coordinates": "Format d'azion invalid. El giugador {player_id} l'ha minga inserì i coordinad valid.",
+    "not_own_piece": "Invalid action format. Player {player_id} must move one of their own pieces. (Azion invalida: el giugador 〔0) l'ha de movè ona di sò pèss).",
+    "scout_through_pieces": "Invalid action format. Player {player_id} can't move a scout through other pieces.",
+    "scout_diagonal": "Invalid action format. Player {player_id} cannot move a scout diagonally.",
+    "non_scout_multi_square": "La forma de azion l'è invalida. I pezz, oltra i scout, poden spostà domà ona cassa per volta.",
+    "move_into_lake": "Invalid action format. Player {player_id} cannot move into the lake. ([0]) n'è minga pusìbil spostàss in del lagh, e 'l giugador l'ha de fàa la manéra giusta per andà a càsa!",
+    "move_onto_own_piece": "Invalid action format. Player {player_id} cannot move on their own piece. (Azion invalida: el giugador 〔0) l'è minga pussee bon de spostà la sò piassa).",
+    "move_bomb_or_flag": "Invalid action format. Player {player_id} can't move a bomb or flag."
+  },
+  "game_action": {
+    "you_moved": "Ti te sé spostaa el to pezz da {source} a {dest}.",
+    "opponent_moved": "Giugador {player_id} l'ha spostaa on pezz da {source} a {dest}.",
+    "you_equal_ranks": "Ti te sé spostaa el to pezz da {source} a {dest}. El pezz atacant l'era {attacking_rank} e 'l pezz de destin l'era {target_rank}. Desgià che i grad a hinn istess, tutt e du i pezz hinn staa eliminaa.",
+    "opponent_equal_ranks": "Giugador {player_id} l'ha spostaa on pezz da {source} a {dest}. El pezz atacant l'era {attacking_rank} e 'l pezz de destin l'era {target_rank}. Desgià che i grad a hinn istess, tutt e du i pezz hinn staa eliminaa.",
+    "you_miner_defused": "Ti te sé spostaa el to pezz da {source} a {dest}. El pezz atacant l'era {attacking_rank} e 'l pezz de destin l'era {target_rank}. Desgià che i miner poden disativà i bomb, ti hé vingiù la battalia.",
+    "opponent_miner_defused": "Giugador {player_id} l'ha spostaa on pezz da {source} a {dest}. El pezz atacant l'era {attacking_rank} e 'l pezz de destin l'era {target_rank}. Desgià che i miner poden disativà i bomb, ti hé pers la battalia.",
+    "you_bomb_lost": "Ti te sé spostaa el to pezz da {source} a {dest}. El pezz atacant l'era {attacking_rank} e 'l pezz de destin l'era {target_rank}. Desgià che l'atacant a l'è minga on miner, ti hé pers la battalia.",
+    "opponent_bomb_won": "Giugador {player_id} l'ha spostaa on pezz da {source} a {dest}. El pezz atacant l'era {attacking_rank} e 'l pezz de destin l'era {target_rank}. Desgià che l'atacant a l'è minga on miner, ti hé vingiù la battalia.",
+    "you_spy_won": "Ti te sé spostaa el to pezz da {source} a {dest}. El pezz atacant l'era {attacking_rank} e 'l pezz de destin l'era {target_rank}. Desgià che l'atacant a l'è on spia e 'l destin a l'è on marescial, ti hé vingiù la battalia.",
+    "opponent_spy_lost": "Giugador {player_id} l'ha spostaa on pezz da {source} a {dest}. El pezz atacant l'era {attacking_rank} e 'l pezz de destin l'era {target_rank}. Desgià che l'atacant a l'è on spia e 'l destin a l'è on marescial, ti hé pers la battalia.",
+    "you_higher_won": "Ti te sé spostaa el to pezz da {source} a {dest}. El pezz atacant l'era {attacking_rank} e 'l pezz de destin l'era {target_rank}. Desgià che l'atacant a l'è on grad pussee volt de quel de destin, ti hé vingiù la battalia.",
+    "opponent_higher_lost": "Giugador {player_id} l'ha spostaa on pezz da {source} a {dest}. El pezz atacant l'era {attacking_rank} e 'l pezz de destin l'era {target_rank}. Desgià che l'atacant a l'è on grad pussee volt de quel de destin, ti hé pers la battalia.",
+    "you_lower_lost": "Ti te sé spostaa el to pezz da {source} a {dest}. El pezz atacant l'era {attacking_rank} e 'l pezz de destin l'era {target_rank}. Desgià che l'atacant a l'è on grad pussee bass de quel de destin, ti hé pers la battalia.",
+    "opponent_lower_won": "Giugador {player_id} l'ha spostaa on pezz da {source} a {dest}. El pezz atacant l'era {attacking_rank} e 'l pezz de destin l'era {target_rank}. Desgià che l'atacant a l'è on grad pussee bass de quel de destin, ti hé vingiù la battalia."
+  },
+  "outcome": {
+    "flag_captured": "Giocatore {player_id} ha catturato la bandiera dell'avversario!",
+    "no_movable_pieces": "Giugador {winner_id} el venc! Giugador {loser_id} el gh'ha pu nissun pezz mobil."
+  }
+}
