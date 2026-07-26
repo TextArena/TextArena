@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in una partita a due giocatori di Spite and Malice. Il tuo obiettivo è essere il primo a svuotare il tuo mucchio di pagamento.\n\n### Panoramica del gioco:\n- L'obiettivo è svuotare il tuo mucchio di pagamento giocando carte ai mucchi centrali.\n- Puoi giocare carte da tre fonti:\n  1. La tua **mano** (inizi ogni turno con fino a 5 carte in mano).\n  2. La **carta in cima al tuo mucchio di pagamento**.\n  3. La **carta in cima a uno dei tuoi mucchi di scarto**.\n\n### Regole di gioco:\n- Puoi giocare una carta a un mucchio centrale se è **un rango più alto** della carta in cima a quel mucchio (i mucchi centrali iniziano con l'Asso e vanno fino alla Regina; i Re sono wild - possono essere giocati su qualsiasi carta ma non cambiano la sequenza di rango. Ciò significa che se un Re è usato dopo il 4, allora quel Re è classificato 5 e la prossima carta deve essere un 6).\n- Se non puoi giocare altre carte, devi **scartare una carta** a uno dei tuoi mucchi di scarto per terminare il tuo turno.\n- Se un mucchio centrale raggiunge la Regina, verrà svuotato automaticamente.\n- L'ordine di rango è: A=1, 2=2, ..., 9=9, J=10, Q=11, K come wild.\n\n### Azioni:\n1. **Pescare**: All'inizio del tuo turno, pescare carte per riempire la tua mano fino a 5 carte. Inserisci **[draw]** per iniziare.\n2. **Giocare una carta**: Per giocare una carta, specifica la carta e il mucchio centrale come questo: **[play A♠ 0]** (dove 'A♠' è la carta e '0' è l'indice del mucchio centrale).\n3. **Scartare**: Se non puoi giocare altre carte, scarta una carta dalla tua mano a un mucchio di scarto per terminare il tuo turno. Inserisci **[discard A♠ 1]** (dove 'A♠' è la carta e '1' è l'indice del mucchio di scarto). Nota che non puoi scartare nessuna carta dal mucchio di pagamento. Puoi scartare solo le carte dalla tua mano.\n\n"
+  },
+  "board": {
+    "current_board": "Tavolo corrente:\n\n{board}\nMosse disponibili: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pies Centri -- ",
+    "pile": "{observation}Mucchio {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vista del Giocatore {player_id} ---\n",
+    "payoff": "{observation}Mucchio di pagamento (Carta in cima): {top_card}, Lunghezza del mucchio di pagamento: {payoff_length}\n",
+    "hand": "{observation}Man: {hand} ",
+    "discard": "{observation}Mucchi di scarto: {discard}\n",
+    "empty": "No ghe xe niente."
+  },
+  "game_message": {
+    "no_cards_left": "No ghe xe più carte da tirar. Ricordate che podè zogar le carte de ste fonti: 1. la vostra mano 2. el primo carton dela pila paga 3. el secondo card del qualunque dei vostri mazzi scartati. "
+  },
+  "invalid_move": {
+    "wrong_format": "Format de mossa invàlida. El xugador {player_id} no ga risposto co na mossa valida in parentesi quadrate.",
+    "invalid_play": "Mossa non valida. Il Giocatore {player_id} ha tentato di giocare {card} sul mucchio centrale {index}.",
+    "discard_from_payoff": "Scartamento invalido. El xugador {player_id} el ga tentà de scartar na carta da ła pila del pagamento.",
+    "discard_not_in_hand": "Scartamento invalido. El xugador {player_id} el ga tentà de scartar na carta che no ła xe inteła man.",
+    "wrong_move_type": "Tipo de mossa invàlida. El xugador {player_id} no ga risposto co un tipo de mosse válido."
+  },
+  "game_action": {
+    "you_drew": "You drew cards.",
+    "opponent_drew": "El xugador {player_id} el gà tirà carte.",
+    "you_played": "Te ga zogà {card} su la pila de centro {index}.",
+    "opponent_played": "El xugador {player_id} el zugava {card} su ła pila sentrałe {index}.",
+    "you_discarded": "Hai scartato {card} al mucchio di scarto {index}, il che significa anche che hai terminato il tuo turno. Non saranno considerate ulteriori azioni tue per questo turno. Il Giocatore {next_player_id} giocherà dopo di te.",
+    "opponent_discarded": "Giocatore {player_id} ha scartato {card} al mucchio di scarto {index}, il che significa anche che ha terminato il suo turno. Non saranno considerate ulteriori azioni del Giocatore {player_id} per questo turno. Giocatore {next_player_id}, sarà il tuo turno. Per favore, inserisci la tua azione nel formato [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Il Giocatore {current_player} ha finito il suo mucchio di pagamento! Il Giocatore {current_player} vince!",
+    "deadlock_player_0": "Stallo raggiunto! Il Giocatore 0 vince con {player_0_payoff} carte rimanenti contro le {player_1_payoff} carte del Giocatore 1.",
+    "deadlock_player_1": "Stallo raggiunto! Il Giocatore 1 vince con {player_1_payoff} carte rimanenti contro le {player_0_payoff} carte del Giocatore 0.",
+    "deadlock_tie": "Stallo raggiunto con pareggio! Entrambi i giocatori hanno {player_0_payoff} carte rimanenti. Il Giocatore {current_player} vince per default."
+  }
+}

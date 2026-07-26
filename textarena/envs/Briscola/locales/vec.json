@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Zogo de Briscola scumisià! Seme de briscola: {trump_suit} (Carta de briscola: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Te stà zogando a Briscola - Zugador {player_id}.\nScopo: Vinser tiri e recoglier el pì de punti (120 punti totali nel mazzo).\nPunti de carte: A=11, 3=10, R=4, D=3, F=2, altre=0\nPotensa de carte: A > 3 > R > D > F > 7 > 6 > 5 > 4 > 2\nCarte de briscola bate carte no de briscola indipendentemente da ła potensa.\n\nAzione: '[play X]' dove X è ła posizion (1-{max_pos}) de ła carta in man"
+  },
+  "hand": {
+    "none": "No xe carte.",
+    "empty": "No ghe xe carte in man.",
+    "header": "La tua man:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "No se ga ancora zogo de carte.",
+    "header": "Trico de 'sto momento:",
+    "line": "  Zugador {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Zugador {player_id}: {points} punti",
+    "trump_info": "El tuto de Trump: {trump_suit}",
+    "trump_info_deck": "Seme de briscola: {trump_suit} | Carte restanti nel mazzo: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPunti: {scores}\n{trump_info}\n\nZoga na carta co [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Usa [play X] dove X xe la posizion de carta (1, 2, 3, ecc.)",
+    "out_of_range": "Posizion de carta no valida. Te ga {count} carte (1-{count})"
+  },
+  "action": {
+    "played": "Zugador {player_id} ga zogà {card}",
+    "trick_win": "Zugador {winner} vinse el tiro co {card} e otien {points} punti!"
+  },
+  "outcome": {
+    "head": "Zogo finì! Zugador {winner} vinse co {points} punti!\n\nPunti finali:\n{scores}",
+    "player_line": "Zugador {player_id}: {points} punti ({tricks} tiri)\n"
+  }
+}

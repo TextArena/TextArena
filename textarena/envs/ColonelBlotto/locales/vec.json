@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Ti sei {role} in Colonel Blotto.\nEl tuo scopo el xe vinser pì turni del tuo aversario.\nIn cada turno, asigna esattamente {num_total_units} unità traverso i campi {field_names}.\nEl zogador che asigna pì unità a un campo el vince quel campo, e el zogador che vince pì campi el vince el turno.\nPar esempio, '[A7 B7 C6]' asigna 7 unità a A, 7 a B, e 6 a C.",
+    "commander_alpha": "Comandante Alfa. El xe un omo de la guera!",
+    "commander_beta": "Comandante Beta. El xe un omo de la guera?"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nTurno {current_round}\nComandante Alpha ga asignà: {p0_allocations}\nComandante Beta ga asignà: {p1_allocations}\n",
+    "winner_alpha": "{message}Vincente: Comandante Alfa",
+    "winner_beta": "{message}Vincente: Comandante Beta",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid input format. Use: A:5 , B:10 , C:5 .",
+    "invalid_field": "Nome de canpo no vałido (s). Canpi validi: {field_names}",
+    "wrong_allocation_value": "Tutte le assegnazioni łe ga da esar integer no negativi.",
+    "incorrect_total_units": "Ti ga da asignare esattamente {num_total_units} unità. Somma atual: {current_sum}",
+    "good_allocations": "La distribuzion xe bona."
+  },
+  "outcome": {
+    "winner_alpha": "Comandante Alpha vince {score_0}-{score_1} dopo {num_rounds} turni!",
+    "winner_beta": "Comandante Beta vince {score_1}-{score_0} dopo {num_rounds} turni!",
+    "draw": "El zogo finisse in un pareggio {score_0}-{score_1} dopo {num_rounds} turni!",
+    "early_winner_alpha": "Comandante Alpha vince {scores_0}-{scores_1} (maggioranza otegnuda)!",
+    "early_winner_beta": "Comandante Beta vince {scores_1}-{scores_0} (maggioranza otegnuda)!"
+  }
+}

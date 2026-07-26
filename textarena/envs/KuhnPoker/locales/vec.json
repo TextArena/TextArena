@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ti sei Zogador {player_id} in un zogo de {max_rounds} round de Kuhn Poker.\nRegole del Zogo:\n- El Kuhn Poker el dopera un mazzo de 3 carte co J, Q, K (J el pì baso, K el pì alto)\n- Ogni zogador el buta {ante} ficha e el riceve 1 carta ogni round (nota che le carte le vien distribuìe senza recanbio, quindi no puoi avegher la stessa carta del tuo aversario).\n- El zogo el continua par {max_rounds} round\n- El zogador co el pì de fichi dopo tuti i round el vinse\nRegole de l'asion:\n- '[check]': Pasa senza puntare (solo se no gh'è nisuna puntada su la tola)\n- '[bet]': Zonta 1 ficha al pot (solo se no gh'è nisuna puntada su la tola)\n- '[call]': Coregi la puntada del aversario zontando 1 ficha al pot\n- '[fold]': Rende le tue man e lassa che el tuo aversario el vinse el pot"
+  },
+  "init_round": {
+    "round_start": "### Inìsio del round {current_round} su {max_rounds} round. La tua carta è: '{player_card}'",
+    "available_actions": "Le to asion dispoxìbiłi łe xe: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'asion el deve èssar [Check], [Bet], [Call], o [Fold].",
+    "not_legal": "L'azion la ga da esar {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Le to asion dispoxìbiłi łe xe: {legal_actions}.",
+    "round_summary": "{reason} Puntegi corenti: Zogador 0: '{player_0_chips}'; Zogador 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Confronto: '{winner_card}' del Zogador {winner} el bate '{loser_card}' del Zogador {loser}. Zogador {winner} el vinse el pot de {pot_value} fichi."
+  },
+  "outcome": {
+    "draw": "A ła fine de {max_rounds} i giri, tuti e do gavéa el steso nùmaro de fiche.",
+    "round_win": "Player {player_id} has folded.",
+    "winner_player0": "El xugador 0 ga vinto avendo pì fiches a ła fin de tuti i {max_rounds} giri.",
+    "winner_player1": "El xugador 1 ga vinto avendo pì fiches a ła fin de tuti i {max_rounds} giri."
+  }
+}

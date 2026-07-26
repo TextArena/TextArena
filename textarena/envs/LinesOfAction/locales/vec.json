@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "Concilio: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "El formato el ga da èsar e2e4 (da,a coordinate).",
+    "no_piece": "No {side} piece on {coord}.",
+    "identical": "Fonte e destinazion identiche.",
+    "not_straight_or_diagonal": "El movimento el ga da esar drito o diagonałe.",
+    "wrong_distance": "Bisogna spostar distansa pari a i tochi in riga.",
+    "enemy_blocks": "Un pezzo nemico el bloca la strada.",
+    "destination_own": "Destinazion ocupà da un solo corpo."
+  },
+  "game_action": {
+    "moved": "Zogador {player_id} ga spostà {from} -> {to}",
+    "captured_suffix": "Zogador {player_id} ga spostà {from} -> {to} ciapando un nemigo."
+  },
+  "outcome": {
+    "win": "Tutti i tochi xe connessi.",
+    "draw_no_capture": "60 mosse sensa catar.",
+    "draw_repetition": "Posizion ripetuta tre volte."
+  }
+}

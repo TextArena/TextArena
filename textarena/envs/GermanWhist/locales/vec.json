@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "La partita inizia. Seme di briscola: {trump_suit} (carta di briscola: {trump_str}).",
+    "no_trump_card": "nisun"
+  },
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} nel Whist tedesco.\n{phase_info}\nHai {hand_size} carte.\nGioca una carta con '[play N]', dove N è la posizione nella tua mano (ad esempio '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "FASE DI GIOCO: el mazzo xe esaurido. Ogni trucco da adesso in avanti conta par la vitoria."
+  },
+  "next_card": {
+    "playing_phase": "No ghe xe carte in oferta - la fase de zogo ga scominsià.",
+    "deck_empty": "El mazzo xe vuoto - no ghe xè carte in oferta.",
+    "available": "Carte in oferta: {card}",
+    "available_trump": "Cartolina in offerta: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de mossa invàlida. Utilizar \"[play N]\" par zugar la n-esima carta in man.",
+    "bad_position": "Sta posizion de carta no esiste. Te tegni {hand_size} carte.",
+    "must_follow_suit": "Te devi far el so esempio e giogar na carta {lead_suit}.",
+    "invalid_play": "No se pol giogar quela carta."
+  },
+  "game_action": {
+    "played": "El xugador {player_id} el gà xogà {card}."
+  },
+  "trick": {
+    "won": "El xugador {winner_id} vinse el trucco co {card}.",
+    "won_learning": "Giocatore {winner_id} vince la presa con {card} e prende la carta scoperta."
+  },
+  "phase": {
+    "learning_complete": "El mazzo xe esaurìo. La fase de imparar la xè finìa - ogni trucco restante conta par ła vitoria."
+  },
+  "draw": {
+    "winner_received": "Te ga vinto el trucco e te gà ricevù {card}.",
+    "loser_received": "Te ga perso el trucco e te gà tirà {card} dal mazzo.",
+    "winner_preview": "La prosima carta in oferta xe {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Prese vinte finora - Giocatore 0: {tricks0}, Giocatore 1: {tricks1}",
+    "scores_playing": "Prese di punteggio - Giocatore 0: {tricks0}, Giocatore 1: {tricks1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Fase: {phase} ({remaining_cards} carte restanti nel mazzo)"
+  },
+  "hand": {
+    "no_cards": "No xe carte.",
+    "no_cards_in_hand": "No ghe xe carte in man.",
+    "header": "La tua man:",
+    "trump_indicator": "(TRUMP) El xe un omo de la vita.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "No se ga ancora zogo de carte.",
+    "header": "Trico de 'sto momento:",
+    "trump_indicator": "(TRUMP) El xe un omo de la vita.",
+    "card_line": "{observation}\n  Giocatore {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Gioco no'l xe scominsià.",
+    "header": "=== GAME DEI BALANCI Tedeschi ===",
+    "phase": "{observation}\nFase: {phase}",
+    "trump_suit": "{observation}\nSeme di briscola: {trump_suit}",
+    "trump_card": "{observation}\nCarta di briscola: {card}",
+    "cards_left": "{observation}\nCarte restanti nel mazzo: {count}",
+    "next_card": "{observation}\nProssima carta per il vincitore: {card}",
+    "blank": "{observation} ƚa xe na roba de un omo.",
+    "current_trick": "{observation} Trico de 'sto momento:",
+    "trump_indicator": "(TRUMP) El xe un omo de la vita.",
+    "trick_line": "{observation}\n  Giocatore {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nGiocatore {player_id}: {scoring} prese ({tricks} totali), {hand_size} carte in mano"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Ti xe Zogador {player_id} inte el Tris a tre zogadori.\nEl to simbolo xe '{symbol}'.\nTi fai i tiri metendo el to simbolo so na tavola 5x5 par formar na linea de cuatro.\nLe linee le pol esare orizontałi, verticałi o diagonal.\nInvia el to mossò co el formato '[4]' par segnare ła ceła 4."
+  },
+  "board": {
+    "current_board": "Tavolo corente:\n\n{board}\n\nMossi disponibiłi: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de spostamento invàlido. Utilizar \"[cell]\" dove che ła cellula xe 0-{max_cell}.",
+    "out_of_range": "Numaro de ceła no valido: {cell}. El deve esare intrà 0 e {max_cell}.",
+    "already_occupied": "La cella {cell} la xe za ocupada.",
+    "made_invalid": "El xugador {player_id} el ga fato na mossa invalida."
+  },
+  "game_action": {
+    "placed": "Zogador {player_id} mete el so simbolo ({symbol}) inte el canpo ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Zogador {player_id} ({symbol}) vinse!",
+    "draw": "La partìa la xe paregia!"
+  }
+}
