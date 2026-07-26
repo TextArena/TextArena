@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id}. You are playing the Battleship game.\nYour goal is to sink all of your opponent's ships before they sink yours.\nOn your turn, you can fire missiles at specific coordinates in teh following format: '[a4]'. If the missile hits a ship, it is marked with 'X'. If it misses, it is marked with 'O'. In either scenarios, the game environment will inform you of your hits. If you have sunk a boat, the game environment will tell you!\nThe game ends when all of one player's ships have been sunk.\nYour initial board will show all of your ships placed and your opponent's hits on you, and your hits and misses on your opponent's board without showing your opponent's ships.\nHere is the initial board:\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Jalo ne ok odwoko gi co-ordinate ma en kare e kind bracket.",
+    "out_of_board": "Coordinate {coord} en oko mar board.",
+    "already_fired": "Coordinate {coord} osegoye."
+  },
+  "game_action": {
+    "you_sunk": "Kuzamisha! Umezamisha meli kwa {coord}! Boardi yako iliyosahihishwa:\n{view}",
+    "opp_sunk": "Opponent sunk your ship at {coord}! Your updated board:\n{view}",
+    "you_hit": "Hit! You hit a ship at {coord}! Your updated board:\n{view}",
+    "opp_hit": "Adwaro osiepni shipi yako kwa {coord}! Boardi yako iliyosahihishwa:\n{view}",
+    "you_miss": "Kukosa! Umekosa meli kwa {coord}! Boardi yako iliyosahihishwa:\n{view}",
+    "opp_miss": "Adwaro okawo shipi yako kwa {coord}! Boardi yako iliyosahihishwa:\n{view}"
+  },
+  "outcome": {
+    "win": "Jalo {player_id} osenyumo yiedhi duto mag jasike!"
+  }
+}

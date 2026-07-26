@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Wewe ni Player {player_id} katika Negotiation Game.\nUna baadhi ya rasilimali, na jukumu lako ni kufanya biashara ili thamani ya jumla ya rasilimali zako iongezwe.\nRasilimali na maadili yanayohusiana ambayo kwa sasa unazo ni:\n\t+ {resource_value_list}\nKwa kila mzunguko, unaweza kuongea na mpinzani wako na kutoa ofa ya biashara.\nTumia alama maalum zifuatazo kwa vitendo:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Rasilimali zinazotolewa -> Rasilimali zinazohitajika]\n  - '[Accept]': Ili kukubali ofa inayokuja.\n  - '[Deny]': Ili kukataa ofa inayokuja (kwa kawaida).\nMchezo huu utadumu kwa {max_turns} mizunguko kwa jumla."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Jalo ne otemo rwako ohala moro ma ok en gi mwandu madwarore.",
+    "out_of_range": "Player {player_id}, Chanzo lisilo halali. Safu {col} iko nje ya mipaka.",
+    "already_full": "Player {player_id}, Chanzo lisilo halali. Safu {col} imejaa.",
+    "proposing_with_no_resource": "Jaloch {player_id} notemo chiwo pesa ma ne nyalo konyo e ng'iewo gige tuke mag loyo mich, to ok en gi mwandu moromo.",
+    "incorrect_offer_format": "Player {player_id} made a trade offer in an incorrect format.",
+    "no_new_offer": "Jago moro {player_id} ne ok ochiwo paro machielo."
+  },
+  "offers": {
+    "reject": "Jalo {player_id} ne otamore wach loko.",
+    "accept": "Player {acceptor_id} amekubali ofa ya biashara kutoka kwa Player {proposer_id}.",
+    "proposal": "Player {player_id} ametoa ofa ifuatayo kwa Player {opponent_id}: Bidhaa zilizotolewa: {offered} -> Bidhaa zinazohitajika: {requested}"
+  },
+  "outcome": {
+    "win": "Jalo {winner_id} ne olocho ka en gi pesa mang'eny e nengo mar gik ma ne oyudo.",
+    "draw": "Lokruok ma kamano bende timore ne jogo duto."
+  }
+}

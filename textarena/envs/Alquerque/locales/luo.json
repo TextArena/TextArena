@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} ({piece}). Opponent is ({opp}).\nSubmit moves as '[a2 a3]' (from → to).\n- A normal move is one forward step to an adjacent empty vertex.\n- A capture is a jump over an adjacent enemy piece landing on the empty node beyond.\nEach capture yields {score_per_capture} points.\nGame ends after {max_moves} moves or when a player has no legal move."
+  },
+  "board": {
+    "current_board": "Chungo #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "Ok ber. Ti kod '[a2 a3]'.",
+    "unknown_square": "Ok ong'e kama odakie.",
+    "not_your_piece": "Soko mar wach ok en mari.",
+    "dest_not_empty": "Dweche ma ne gidhiye ok gin nono.",
+    "illegal": "Ok en chik."
+  },
+  "game_action": {
+    "captured": "Wacheni {player_id} alipata kipande! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Jalo {player_id} onge gi kidieny.",
+    "cannot_move": "Jalo {player_id} ok nyal dar.",
+    "higher_score": "Kwan mamalo mar joma ne omak.",
+    "move_limit": "Okang' mar ringo oserumo."
+  }
+}

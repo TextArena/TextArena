@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Mchezo unaanza. Suti ya trump: {trump_suit} (kadi ya trump: {trump_str}).",
+    "no_trump_card": "onge kata achiel."
+  },
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Whist ya Kijerumani.\n{phase_info}\nUko na {hand_size} kadi.\nCheza kadi kwa '[play N]', ambapo N ni nafasi yake katika mkono wako (kwa mfano '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "Onge kad moro amora minyalo yudi - ⁠kanyiso ni osechakore tugo.",
+    "deck_empty": "Ok ochak oyud kata kad achiel.",
+    "available": "Kad ma ichiwo: {card}",
+    "available_trump": "Kad ma ichiwo: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Ok en gima owinjore. Ti gi '[play N]' e goyo kad mar Nth manie lweti.",
+    "bad_position": "Ok inyal yudo namba ma kamano. In gi {hand_size} kata kadi moko.",
+    "must_follow_suit": "Nyaka iluw ranyisi mar jogo kendo iti gi {lead_suit}.",
+    "invalid_play": "Ok wanyal tiyo gi kadno."
+  },
+  "game_action": {
+    "played": "Jalo {player_id} ne tugo e {card}."
+  },
+  "trick": {
+    "won": "Jalo {winner_id} oloyo tugo gi {card}.",
+    "won_learning": "Mchezaji {winner_id} anashinda mzunguko huu na {card} na kuchukua kadi iliyo wazi."
+  },
+  "phase": {
+    "learning_complete": "The deck is exhausted. The learning phase is over - every remaining trick counts towards victory."
+  },
+  "draw": {
+    "winner_received": "Umeshinda mzunguko huu na umepokea {card}.",
+    "loser_received": "Ne ilalo michno mi igoyo {card} e tok gocho.",
+    "winner_preview": "Kad maluwo en {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Mafungu yaliyoshinda hadi sasa - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
+    "scores_playing": "Mafungu ya kuhesabu - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
+    "phase": "Okang ' mar: {phase}",
+    "phase_learning": "Mzunguko: {phase} ({remaining_cards} kadi zimesalia katika sitaha)"
+  },
+  "hand": {
+    "no_cards": "Onge kad mag loyo mich.",
+    "no_cards_in_hand": "Onge kad moro amora e lwete.",
+    "header": "Lweteni:",
+    "trump_indicator": "(TRUMP) Mano e gima ne otimore.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Onge ng'ama osetugo tugono.",
+    "header": "Paro ma wan - go sani:",
+    "trump_indicator": "(TRUMP) Mano e gima ne otimore.",
+    "card_line": "{observation}\n  Mchezaji {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Tugo ok ochakore.",
+    "header": "=== Tuke mar German Whist GAME===",
+    "phase": "{observation}\nMzunguko: {phase}",
+    "trump_suit": "{observation}\nSuti ya trump: {trump_suit}",
+    "trump_card": "{observation}\nKadi ya trump: {card}",
+    "cards_left": "{observation}\nKadi zisemo: {count}",
+    "next_card": "{observation}\nKadi inyuwa kwa mshindi: {card}",
+    "blank": "{observation}  kendo",
+    "current_trick": "{observation} Rieko masani:",
+    "trump_indicator": "(TRUMP) Mano e gima ne otimore.",
+    "trick_line": "{observation}\n  Mchezaji {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nMchezaji {player_id}: {scoring} alipata mafungu ({tricks} jumla), {hand_size} kadi katika mkono"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

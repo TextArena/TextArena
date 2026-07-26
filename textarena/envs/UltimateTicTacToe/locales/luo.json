@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Bodi masani: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kethruokno nyaka bed e yo mar [macro micro] ka iketo namba 0-8.",
+    "out_of_range": "Nyuktago duto nyaka bed e kind 0 kod 8.",
+    "index_out_of_range": "Micro_board, row, kata col ok nyal chopo.",
+    "cell_occupied": "Jomoko osekawo sel.",
+    "wrong_micro_board": "Jalo nyaka tugo e board machielo.",
+    "micro_board_won": "Oselochi e piem mar micro board."
+  },
+  "next_board": {
+    "any": "moro amora mar micro board",
+    "specific": "micro board {nxt} (tok ma ok ong'ere)"
+  },
+  "game_action": {
+    "played": "Player {player_id} osebe {macro_idx}, seli {micro_idx} (safu {row}, safu wima {col}). Player {opponent_id} ama lazima acheze {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Jalo {player_id} oloyo Ultimate Tic Tac Toe!",
+    "draw": "The game is a draw!"
+  }
+}
