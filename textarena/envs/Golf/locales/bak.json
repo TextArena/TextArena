@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Һеҙ Golf (карта уйыны) уйнағансығыҙ - Уйынсы {player_id}.\nМаҡсат: Бер турда иң түбән дөйөм иҫәпте алырға. Әгәр колонкалар бер үк ҡиммәтте бүләк итһә, улар 0 итеп суммалана.\nКарта ҡиммәттәре: A=1, 2-10=йөҙөнән, J/Q=10, K=0\n\nҒәмәлдәр (төҙөлөшөн ҡулланығыҙ):\n- '[draw]' - Тәртиптән тарыныу\n- '[take]' - Ҡалдырылған купканан алыу\n- '[swap X Y]' - Тарындырылған карта менән X (рәт) Y (колонка) позицияһын алмаштырыу\n- '[discard]' - Тарындырылған картаға ҡалдырыу"
+  },
+  "board": {
+    "drew": "Һеҙ тарындырҙығыҙ: {card}\nХәҙер һеҙ [swap X Y] йәки [discard]",
+    "took": "Һеҙ алдығыҙ: {card} ташлауҙан тупланманан һеҙ уның менән бергә (алып булмай) [swap X Y] алырға тейешһегеҙ.",
+    "peeked": "Һеҙ ({row},{col}) позицияһын ҡарадығыҙ: {card}",
+    "turn_view": "Һеҙҙең ҡулығыҙ:\n{hand}\nҠалдырылған купка: {discard}\n{options}",
+    "none": "Бер кем дә юҡ."
+  },
+  "options": {
+    "final_turns": "Ахирҙағы бортыраҡтар! Һеҙҙең варианттар: [draw], [take], [peek X Y]",
+    "draw": "Һеҙҙең варианттар: [draw], [take]",
+    "must_swap": "Һеҙ: [swap X Y] (ҡалдырып ташлауҙан карталарҙы кире ҡағырға ярамай)",
+    "swap_or_discard": "Һеҙ: [swap X Y] йәки [discard]"
+  },
+  "hand": {
+    "no_cards": "Карталар юҡ .",
+    "header": "Һалҡы: 1 2 3",
+    "row": "Рәт {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Уйынсы {pid} {new} менән {old} алмашты, позицияһы ({row},{col})",
+    "discarded": "Уйынсы {pid} {card} ҡалдырҙы"
+  },
+  "message": {
+    "deck_empty": "Уйын шунда уҡ тамамлана.",
+    "knocked": "Уйынсы {pid} ҡулға алынды! Һәр бер уйынсыға тағы бер бортыраҡ",
+    "final_round": "Уйынсы {pid} {reason}! Һәр бер уйынсыға тағы бер бортыраҡ"
+  },
+  "reason": {
+    "all_revealed": "бөтә карталар асылғанмы?"
+  },
+  "invalid": {
+    "wrong_action": "Тик бер ҡушымталы ғәмәл ҡулланығыҙ: [draw], [take], [swap X Y], [discard], [knock] йәки [peek X Y]",
+    "discard_empty": "Ҡалдыҡтар өйөмө буш!",
+    "must_draw_first": "Һеҙ беренсе [draw], [take], [knock] йәки [peek X Y]",
+    "cannot_discard_taken": "Ҡалдырып ташлау өйөмөнән алынған картаны кире ҡағып булмай. Уны алмаштырырға кәрәк.",
+    "have_drawn_card": "Һеҙ тарындырған картаға эйә. Һеҙ [swap X Y] йәки [discard]",
+    "need_drawn_swap": "Ҡарттарҙы алмаштырыу өсөн карта кәрәк.",
+    "need_drawn_discard": "Ҡалдырып ташлар өсөн, картаны һыҙып алыу кәрәк.",
+    "out_of_bounds": "Позиция сиктәрҙән тыш. Рәт 1-{max_row}, колонка 1-{max_col}",
+    "knock_with_card": "Ҡулдағы карта менән һуғып булмай. Тәүҙә сиратты тамамлағыҙ.",
+    "already_knocked": "Кемдер был раундты инде урап үткән.",
+    "already_revealed": "Был карта асылған да инде!"
+  },
+  "summary": {
+    "full": "Game Over! Player {winner} wins with a score of {score} points!\n\nFinal Scores:\n{scores}",
+    "line": "Уйынсы {pid}: {score} балл"
+  },
+  "board_str": {
+    "title": "=== ГОЛФ УЙЫНЫ===",
+    "discard": "Ҡалдырып ташлау: {card}",
+    "knocked": "Уйынсы {pid} шаҡыны!",
+    "player_header": "Уйынсы {pid} (Иҫәп: {score}):"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Вы - Игрок {player_id} в 3-игроковой Итерированной Дилемме Пленника. Матч длится {num_rounds} раундов.\nСтруктура раунда:\n• {conv_rounds} бесплатных чат-ходов\n• 1 решающий ход - отправьте один токен на каждого оппонента: '[<opp-id> cooperate]' или '[<opp-id> defect]' (т.е. '[1 defect] [2 cooperate]'; по умолчанию - 'сотрудничать'). \nПарная матрица выплат (применяется к каждой неупорядоченной паре):\n  - Оба сотрудничают  ->  {reward}\n  - Оба предают     ->  {punishment}\n  - Вы предаёте, они сотрудничают -> {temptation}\n  - Вы сотрудничаете, они предают -> {sucker}\nИгрок(и) с наивысшим баллом в конце всех раундов побеждает."
+  },
+  "round": {
+    "start": "─── Starting Round {round} ───\tYou can converse freely for the next {conv_rounds} rounds.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Түңәрәк {round} - Һөҙөмтәләр:",
+    "pair_line": "{observation}\n\t Player {i} vs Player {j} chose to {choice_i} and {choice_j} respectively (Player {i} gained {gain_i}, Player {j} gained {gain_j})",
+    "scores_open": "{observation} -> Хәҙерге баллдар: ",
+    "score_first": "{observation}Игрок {player_id} ({score})",
+    "score_next": "{observation}; Игрок {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Финальные баллы: {scores}. Рейтинговые группы (худшее→лучшее): {groups}"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Вы - Игрок {player_id} в Chopsticks. В свой ход выберите один из:\n  + Атака:  '[attack M O]'  где M - ваша рука (0 или 1), O - рука противника (0 или 1).\n    - Количество пальцев руки противника увеличивается на вашу руку; если >=5, оно становится 0.\n  + Раздел:   '[split L R]'  чтобы перераспределить общее количество пальцев в Л и Р (Л+Р = ваше общее).\nОтветьте точно одной из этих команд."
+  },
+  "board": {
+    "current_board": "Текущая доска:\nИгрок 0: {hands_0}\nИгрок 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Ҡулың {my_idx} үле.",
+    "opp_hand_dead": "Opponent hand {opp_idx} is already dead.",
+    "split_sum": "Бүленгән сумма {total} булырға тейеш.",
+    "split_no_change": "Сплит һеҙҙең ҡулдарҙы бүлеүҙе үҙгәртергә тейеш.",
+    "invalid_command": "Invalid move. Use “[attack M O]” or “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} атакует руку P{opp_id} {opp_idx}: она переходит от {opp_val} к {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Ике ҡаршы яҡтың да ҡулдары үле.",
+    "draw": "Боролоу сиктәре етте."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "Командир Альфа.",
+    "commander_beta": "Командир Бета."
+  },
+  "game_state": {
+    "header_round": "=== ПОДПОЛКОВНИК БЛОТТО - Раунд {current_round}/{num_rounds} ===\nВыигранные раунды - Командир Альфа: {alpha_score}, Командир Бета: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nРаунд {current_round}\nКомандир Альфа распределил: {p0_allocations}\nКомандир Бета распределил: {p1_allocations}\n",
+    "winner_alpha": "{message}Еңеүсе: Командир Альфа",
+    "winner_beta": "{message}Еңеүсе: Командир Бета",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "Ҡулланылған формат дөрөҫ түгел: A:5, B:10, C:5",
+    "invalid_field": "Ябай булмаған ялан исеме (). Дөрөҫ булған яландар: {field_names}",
+    "wrong_allocation_value": "Бөтә бүленештәр ҙә кире булмаған бөтөн һандар булырға тейеш.",
+    "incorrect_total_units": "Вам необходимо распределить ровно {num_total_units} единиц. Текущая сумма: {current_sum}",
+    "good_allocations": "Allocation is good."
+  },
+  "outcome": {
+    "winner_alpha": "Командир Альфа выигрывает {score_0}-{score_1} после {num_rounds} раундов!",
+    "winner_beta": "Командир Бета выигрывает {score_1}-{score_0} после {num_rounds} раундов!",
+    "draw": "Game ends in a {score_0}-{score_1} tie after {num_rounds} rounds!",
+    "early_winner_alpha": "Командир Альфа выигрывает {scores_0}-{scores_1} (достигнута большинство)!",
+    "early_winner_beta": "Командир Бета выигрывает {scores_1}-{scores_0} (достигнута большинство)!"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a game of Indian Poker.\n- 52-card deck; you see only the opponent's card.\n- Ante {ante} chip(s) each round, {max_rounds} round(s) total.\n- Valid moves: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X is a positive integer <= your chip count.)\n- Highest hidden card wins the pot at showdown.\n"
+  },
+  "round": {
+    "announce": "### Раунд {current_round}/{max_rounds}\nОппоненттың картаһы: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Төп нөхмә бер ҡулланырға, мәҫәлән '[check]', '[bet 2]', '[call]', '[raise 3]', йәки '[fold]'.",
+    "cannot_check": "Мөмкин түгел [check] - һеҙ ставкаға дусарһығыҙ.",
+    "amount_min": "Ставка / күтәреү суммаһы ≥ 1 булырға тейеш.",
+    "cannot_bet": "[bet] яһай алмайһығыҙ - [call] / [raise] / [fold] кәрәк.",
+    "nothing_to_call": "Һөйләшерлек бер нәмә лә юҡ; һеҙ уның урынына [check] алаһығыҙ.",
+    "no_bet_to_raise": "Асыу өсөн [bet X] ҡулланалар; күтәреү өсөн ставка юҡ.",
+    "insufficient": "Был эш өсөн етерлек фишкалар юҡ."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (харыж {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Мөмкин булған ғәмәлдәр: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Банка {pot} → Уйынсы {winner}. (Банк: P0:{p0}, P1:{p1})",
+    "folded": "Уйынсы {player_id} отставкаға сыға.",
+    "showdown_win": "Һөҙөмтә: {card_win} һуғыуҙар {card_lose}.",
+    "showdown_tie": "Шоу-даун тигеҙ: икеһе лә {card}. Банка бүленә – һәр береһе {split} ала."
+  },
+  "outcome": {
+    "p0_wins": "Уйынсы 0 еңә ({bank0} > {bank1})",
+    "p1_wins": "Уйынсы 1 еңә ({bank1} > {bank0})",
+    "draw": "Бөтә раундтарҙан һуң бер үк чипстар."
+  }
+}
