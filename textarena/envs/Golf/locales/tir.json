@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "እንተጸልእካ ጎልፍ (ካርት ገይም) - ሰለማዊ �{player_id}.\nምክንያት: ኣብ እዋን ረብዕ ዘይተኣምን ምክንያት ንስለማዊ እዩ. እንተኾነ ኮሎንም ኣንዳይ ተደናገረ እዩ፣ ኣብ ረብዕ ዘይተኣምን ምክንያት እዩ.\nቅንዐት ካርት: A=1, 2-10=ቅንዐት, J/Q=10, K=0\n\nምንባረ (ኣንስኪ ምንባረ እዩ):\n- '[draw]' - ካርት ንበረ\n- '[take]' - ካርት ንበረ ካብ ማዕበል ተሰርዝቦ\n- '[swap X Y]' - ካርት ንበረካ ጋን ማዕበል X (ረብዕ) Y (ኮሎን)\n- '[discard]' - ካርት ንበረካ ተሰርዘ"
+  },
+  "board": {
+    "drew": "You drew: {card}\nNow you must [swap X Y] or [discard] it.",
+    "took": "You took: {card} from discard pile\nYou must [swap X Y] with it (cannot discard).",
+    "peeked": "እንተንበረካ በማዕበል ({row},{col}): {card}",
+    "turn_view": "እድኩረ ኣንቲ:\n{hand}\nማዕበል ተሰርዝቦ: {discard}\n{options}",
+    "none": "ኣይፋልን።"
+  },
+  "options": {
+    "final_turns": "ምንባረ ሳልሳይ! ምንባረ ኣንቲ: [draw]፣ [take]፣ [peek X Y]",
+    "draw": "ምንባረ ኣንቲ: [draw]፣ [take]",
+    "must_swap": "ንስኻ ክትገብሮ ዘለካ፦ [swap X Y] (ካብ ናይ ምጥፍፋእ ክራማት ካርዲታት ከተወግድ ኣይትኽእልን ኢኻ)",
+    "swap_or_discard": "ንሕን መልእኽቲ ምንባረ �〕[swap X Y] ወይ �〕[discard] እያ"
+  },
+  "hand": {
+    "no_cards": "ካርዲ ኣይህሉን እዩ",
+    "header": "  Col:   1    2    3",
+    "row": "ረብዕ �{n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "ሰለማዊ �{pid} ተቀየረ �{new} ጋን �{old} በማዕበል ({row},{col})",
+    "discarded": "ሰለማዊ �{pid} ተሰርዝበ �{card}"
+  },
+  "message": {
+    "deck_empty": "መርከብ ባዶ'ያ! ጸወታ ብኡብኡ ይዛዘም።",
+    "knocked": "ተጻዋታይ {pid} ተደብዲቡ! ነፍሲ ወከፍ ካልእ ተጻወቲ ሓደ ተራ ይረክብ።",
+    "final_round": "ሰለማዊ �{pid} {reason}! ሰለማውያን ሳልሳይ ኣንዳይ ምንባረ እዩ"
+  },
+  "reason": {
+    "all_revealed": "ኩሉ ካርዲታት ተገልጸ'ዶ?"
+  },
+  "invalid": {
+    "wrong_action": "ኣንስኪ ኣንስኪ ምንባረ እዩ: [draw]፣ [take]፣ [swap X Y]፣ [discard]፣ [knock]፣ ወይ �〕[peek X Y]",
+    "discard_empty": "እቲ ናይ ምጥፍፋእ ክራማት ባዶ እዩ!",
+    "must_draw_first": "ንሕን መልእኽቲ ምንባረ �〕[draw]፣ [take]፣ [knock]፣ ወይ �〕[peek X Y]",
+    "cannot_discard_taken": "ካብ'ቲ ዝተወሃበካ ካርድ ክትድርብዮ ኣይትኽእልን ኢኻ። ከተልውጦ ኣለካ።",
+    "have_drawn_card": "You have a drawn card. You must [swap X Y] or [discard] it.",
+    "need_drawn_swap": "ንምልዋጥ ካርዲ የድልየካ።",
+    "need_drawn_discard": "You need a drawn card to discard.",
+    "out_of_bounds": "ማዕበል ወገን ኣይተኣምን። ረብዕ 1-{max_row}፣ ኮለን 1-{max_col} ይጠቕም",
+    "knock_with_card": "ብካርድ ክትድውል ኣይትኽእልን ኢኻ። ቅድም ነቲ ናይ መወዳእታ ተራኻ ኣጠናቅቕ።",
+    "already_knocked": "ሓደ ሰብ ነዚ ዙር ድሮ ኣጥቂዑዎ እዩ።",
+    "already_revealed": "እቲ ካርድ ድሮ ተገልጸ!"
+  },
+  "summary": {
+    "full": "Game Over! Player {winner} wins with a score of {score} points!\n\nFinal Scores:\n{scores}",
+    "line": "ሰለማዊ �{pid}: {score} ምክንያት\n"
+  },
+  "board_str": {
+    "title": "=== ግጥሚ ጎልፍ===",
+    "discard": "ናይ ምጥፍፋእ ክራማት {card}",
+    "knocked": "ተጻዋታይ {pid} ደቒቑ!",
+    "player_header": "ሰለማዊ �{pid} (ምክንያት: {score}):"
+  }
+}

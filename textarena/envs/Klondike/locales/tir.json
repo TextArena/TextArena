@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "ዘይቅኑዕ ቅርጺ ስጉምቲ፡ እቲ ተግባር ኣብ ሕጽኖት ክኣቱ ኣለዎ።",
+    "no_closing_bracket": "ዘይቅኑዕ ቅርጺ ስጉምቲ፡ ዝጠፍእ ናይ መዕጸዊ ክፋል ']'",
+    "empty_command": "ባዶ ትእዛዝ። 'draw' ወይ ድማ \"move <source><destination> [count]\" ትእዝዞም።",
+    "empty_action": "Empty action",
+    "move_needs_args": "ናይ ምንቅስቓስ ትእዛዝ መበገሲን መዕረፊን የድልዮ። ኣጠቓቕማ፦ 'move <source> <destination> [count]'",
+    "count_positive": "እቲ ቆጸራ ኣወንታዊ ወይ 'ኩሉ' ክኸውን ኣለዎ፡",
+    "count_invalid": "ዘይቅኑዕ ቆጸራ፡ ቁጽሪ ወይ 'all' ተጠቐም",
+    "unknown_command": "ምልካፍ ስርሕ '{cmd}' ኣይተረኽበን። 'ድራ'፡ 'ስርሕ <መገብሮ> <መደበሮ> [count]'፡ ወይ 'ሕራይ' ብምእንቲ ኣርእያ",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "እቲ ምንቅስቃስ ኣብ ፈለማ ምድሓን ዝኾነ እኳ እንተኾነ፡ ሓደ ስርሕ እንተኾነ፡ ኣእምሮ ዝኾነ ስርሕታት ወይ ሓደ ስርሕ ኣእምሮ እንተኾነ ስርሕታት {n} ኣካልን።",
+    "failed": "ስርሕ {n} ብዕሊ ኣብ ፈለማ ምድሓን ኣይተኣማን፡ ስርሕ ኣብ ፈለማ ምድሓን ኣይተኣማን፡ {msg}"
+  },
+  "move_result": {
+    "drew": "Drew card(s) from stock to waste.",
+    "cannot_draw": "ክስሕብ ኣይከኣለን፡ እቲ ዕቃብን ፍርስራስን ባዶ እዩ።",
+    "invalid_pile": "ዘይቅኑዕ ናይ መኽዘን ስም። W, F1-F4 ወይ T1-T7 ተጠቐም",
+    "foundation_one_card": "ሓደ ካርድ ጥራይ ናብ መሰረት ከተንቀሳቕስ ትኽእል ኢኻ",
+    "waste_to_foundation_ok": "ካብ ጎሓፍ ናብ ፋውንዴሽን ዝተሰጋገረ ካርዲ F{dst}",
+    "waste_to_foundation_bad": "ነቲ ናይ መሰረታ ካርዲ ናብ'ቲ መትከል ክተንቀሳቕሶ ኣይትኽእልን ኢኻ/ኺ።",
+    "tableau_to_foundation_ok": "ካርድ ካብ መገብሮ T{src} ናብ መደበሮ F{dst} ተሰሪሔ",
+    "tableau_to_foundation_bad": "ነቲ ናይ መሰረታ ካርዲ ናብ'ቲ መሰረት ክተንቀሳቕሶ ኣይትኽእልን ኢኻ/ኺ",
+    "foundation_to_foundation": "ካብ መሰረት ናብ መሠረት ክሰጋገር ኣይኽእልን እዩ",
+    "waste_to_tableau_one_card": "ካብ ጎሓፍ ናብ ታብሌው ሓደ ካርድ ጥራይ ክግዕዝ ይኽእል እዩ",
+    "waste_to_tableau_ok": "ካርድ ካብ ጎሓፍ ናብ ታብሌ T{dst} ተንቀሳቒሱ ኣሎ፡",
+    "waste_to_tableau_bad": "ነቲ ካርዲ ኣብ'ቲ ናይ መኣዛ ጽላት ከተእትዎ ኣይትኽእልን ኢኻ/ኺ።",
+    "no_face_up": "No face-up cards to move",
+    "tableau_to_tableau_ok": "ካርድ(ካርድታት) {count} ካብ መገብሮ T{src} ናብ T{dst} ተሰሪሔ",
+    "tableau_to_tableau_bad": "ካርድ(ካርድታት) {count} ካብ T{src} ናብ T{dst} ኣይተሰሪሕን",
+    "foundation_to_tableau_one_card": "ካብ መሰረት ናብ ሰሌዳ ሓደ ካርድ ጥራይ ከተንቀሳቕስ ትኽእል ኢኻ",
+    "foundation_empty": "ፋውንዴሽን F{src} ባዶ እዩ",
+    "foundation_to_tableau_ok": "ካርድ ካብ መደበሮ F{src} ናብ መገብሮ T{dst} ተሰሪሔ",
+    "foundation_to_tableau_bad": "ናይ መሰረት ካርድ ኣብ ታብሌይ T{dst} ክተእትው ኣይትኽእልን ኢኻ",
+    "to_waste_or_stock": "ናብ ጎሓፍ ወይ ክምችት ክትሰጋገር ኣይትኽእልን ኢኻ"
+  },
+  "outcome": {
+    "forfeit": "እቲ ጸወታ ተቛሪጹ፡ ናይ መወዳእታ ነጥቢ: {score} ኣብ መሰረታት ዘሎ ካርዲ።",
+    "won": "እንኳዕ ደስ በለኩም! ኣብ ክሎንዳይክ ሶሊተየር ተዓዊትኩም ኢኹም!",
+    "turn_limit": "ምዕራፍ ተረኽበ። ምሕረት ኣብ እንተኾነ ሓደ ስርሕ እንተኾነ፡ ኣእምሮ እንተኾነ ስርሕታት ወይ ሓደ ስርሕ ኣእምሮ እንተኾነ ስርሕታት {max_turns} ኣካልን። ነቲ ካርድ ኣብ መደበሮ ኣለዎ፡ {score} ካርድ(ካርድታት)"
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== ኣብ ናይ ሓባር መደብ ተሳተፍ።",
+    "turn": "ምሕረት፡ {turn}/{max_turns}",
+    "stock": "{stock} ካርዲታት",
+    "waste": "{waste} ጎሓፍ (W)",
+    "foundations_header": "መሰረታት:",
+    "foundation_row": "  F{n}፡ {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "አንተ ተሸላሚ {player_id} በህንድ ፖክር በኩል ነዎት.\n- 52-ካርድ ዳክ; አንተ ተቃራኒውን ካርድ ብቻ ታያለህ.\n- አንቲ ኮስት {ante} ቺፕ(ስ) አንድ ሮንድ ላይ, {max_rounds} ሮንድ(ስ) በሙሉ.\n- ተቀባላይ እርምጃዎች: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ነገር ግን አንተ ቺፕ ቁጥር ከላይ የሆነ ነገር ነው.)\n- ላይኛው ህይወት ካርድ ሸውዳውንን ይሸንፋል ፖትን.\n"
+  },
+  "round": {
+    "announce": "### ሮንድ {current_round}/{max_rounds}\nተቃራኒው ካርድ ነው: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "አቅራቢ እብድ አንድ የተደበረ እርምጃ, ምሳሌ '[check]', '[bet 2]', '[call]', '[raise 3]', ወይም '[fold]'.",
+    "cannot_check": "ኣይከኣልን [check] - ውርርድ ትገጥመካ ኣሎኻ።",
+    "amount_min": "መጠን ውርርድ/ምውስዋስ ≥1 ክኸውን ኣለዎ።",
+    "cannot_bet": "እንቅስቃሴ አትችልም [bet] - ማለት [call] / [raise] / [fold].",
+    "nothing_to_call": "ክትድውለሉ ዝግባእ ነገር የለን፤ ኣብ ክንዳኡ [check] ትኽእሊ።",
+    "no_bet_to_raise": "Use [bet X] to open; there is no bet to raise.",
+    "insufficient": "ነዚ ተግባር እኹል ቺፕስ የለን።"
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (ኮስት {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "ዝከኣል ስጉምቲታትካ {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  ፖት {pot} → ተሸላሚ {winner}. (ባንክሮሎስ P0:{p0}, P1:{p1})",
+    "folded": "ተጻዋታይ {player_id} ተጣሒሱ።",
+    "showdown_win": "Showdown: {card_win} beats {card_lose}.",
+    "showdown_tie": "Showdown tie: both {card}. Pot split – each receives {split}."
+  },
+  "outcome": {
+    "p0_wins": "ተሸላሚ 0 ይሸንፋል ({bank0} > {bank1})",
+    "p1_wins": "ተሸላሚ 1 ይሸንፋል ({bank1} > {bank0})",
+    "draw": "ድሕሪ ኩሉ ዙር ማዕረ ቺፕስ ኣለኩም"
+  }
+}

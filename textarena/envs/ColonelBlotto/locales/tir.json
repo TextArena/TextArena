@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "ኣዛዚ ኣልፋ፡",
+    "commander_beta": "ኮማንደር ቤታ፡"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - ሮንድ {current_round}/{num_rounds} ===\nሮንድ የተሸነፈ - ኮማንደር አልፋ: {alpha_score}, ኮማንደር ቤታ: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nሮንድ {current_round}\nኮማንደር አልፋ አስቀምጦ: {p0_allocations}\nኮማንደር ቤታ አስቀምጦ: {p1_allocations}\n",
+    "winner_alpha": "{message}ተዓዋቲ: ኮማንደር ኣልፋ",
+    "winner_beta": "{message}ተዓዋቲ: ኮማንደር ቤታ",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "ዘይቅኑዕ ናይ ምእታው ቅርጺ። A:5, B:10, C:5 ተጠቐም",
+    "invalid_field": "ዘይቅኑዕ ናይ ሜዳ ስም ((s) ፡ ቅቡል መዳይ: {field_names}",
+    "wrong_allocation_value": "ኩሉ ኣወሃህባታት ዘይ-ነጻዊ ምሉእ ቁጽሪ ክኸውን ኣለዎ።",
+    "incorrect_total_units": "እንኪያስ እንደ {num_total_units} አይነት መሆን ይገባል. የአሁኑ ምዝገባ: {current_sum}",
+    "good_allocations": "ምደባ ጽቡቕ እዩ።"
+  },
+  "outcome": {
+    "winner_alpha": "ኮማንደር አልፋ ይሸንፋል {score_0}-{score_1} በ{num_rounds} ሮንዶች!",
+    "winner_beta": "ኮማንደር ቤታ ይሸንፋል {score_1}-{score_0} በ{num_rounds} ሮንዶች!",
+    "draw": "ጨዋታ በ{score_0}-{score_1} ተመሳሳሪ አገባ በ{num_rounds} ሮንዶች!",
+    "early_winner_alpha": "ኮማንደር አልፋ ይሸንፋል {scores_0}-{scores_1} (ብዙሀንነት ተፈጸመ)!",
+    "early_winner_beta": "ኮማንደር ቤታ ይሸንፋል {scores_1}-{scores_0} (ብዙሀንነት ተፈጸመ)!"
+  }
+}

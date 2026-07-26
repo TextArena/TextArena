@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "ግዜ ጀሚሮ. ትራምፕ ሱት: {trump_suit} (ትራምፕ ካርድ: {trump_str}).",
+    "no_trump_card": "ኣይርከብን እዩ"
+  },
+  "player_prompt": {
+    "intro": "አንተ ተሸላሚ {player_id} ኣብ ጀርመን ዊስት.\n{phase_info}\nአንተ {hand_size} ካርድስ ትሕዝ.\nካርድ ጫወት ከም '[play N]', ኣብ ቦታ እዩ ኣብ እድኩም (እዚ እዚ '[play 3]').",
+    "phase_learning": "ናይ ምምሃር ደረጃ፡ እቲ ኣብ ነፍሲ ወከፍ ውዲት ዝዕወት ነቲ ዝተጋህደ ካርድ ይወስድ፣ እቲ ዝሰዓረ ድማ ነታ ቀጺላ ዘላ ካብ መቐመጢ ካርዲ ይስሕብ። ኣብዚ መድረኽ እዚ እተረኽበ ውጥናት ናብ ዓወታት ኣይቁጸርን እዩ።",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "ዝኾነ ካርድ ኣይቅረበን - ናይ ጸወታ መድረኽ ተጀሚሩ።",
+    "deck_empty": "እቲ መኽዘን ባዶ እዩ - ዝኾነ ካርድ ኣይቅረበን።",
+    "available": "ኣብ ቀረብ ዘሎ ካርድ: {card}",
+    "available_trump": "ካርዲ ኣብ ቀረብ: {card} (ትራምፕ)"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Use '[play N]' to play the Nth card in your hand.",
+    "bad_position": "እዚ ናይ ካርድ ቦታ የለን፡ ንስኻ {hand_size}ካርዲ ሒዝካ።",
+    "must_follow_suit": "ንስኻ እውን ከምኡ ክትገብርን {lead_suit} ካርድ ከተውጽእን።",
+    "invalid_play": "እዚ ካርድ'ዚ ክጻወት ኣይክእልን እዩ።"
+  },
+  "game_action": {
+    "played": "ተሸላሚ {player_id} ካርድ {card} ጫወተ."
+  },
+  "trick": {
+    "won": "ተሸላሚ {winner_id} ትሪክ ን ዕድል ኣለዎ ከም {card}.",
+    "won_learning": "ተሸላሚ {winner_id} ትሪክ ን ዕድል ኣለዎ ከም {card} ከም ፋይስ-ኣፕ ካርድ."
+  },
+  "phase": {
+    "learning_complete": "እቲ ናይ ትምህርቲ ደረጃ ተዛዚሙ - ኩሉ ዝተረፈ ብልሓት ናብ ዓወት ይጥቀስ።"
+  },
+  "draw": {
+    "winner_received": "ነቲ ውዲት ተዓዊተ {card} ተቐቢልካ።",
+    "loser_received": "ነቲ ተንኮል ስኢንካ {card} ካብ ድኳን ሰሓብካዮ።",
+    "winner_preview": "እቲ ቀጺሉ ዝቕረብ ካርድ {card} እዩ።"
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "ትሪክስ ወንበሮ - ተሸላሚ 0: {tricks0}, ተሸላሚ 1: {tricks1}",
+    "scores_playing": "ስኮሪንግ ትሪክስ - ተሸላሚ 0: {tricks0}, ተሸላሚ 1: {tricks1}",
+    "phase": "ደረጃ {phase}",
+    "phase_learning": "ፋዘት: {phase} ({remaining_cards} ካርድስ ብዙሕ ኣብ ደክ)"
+  },
+  "hand": {
+    "no_cards": "ካርዲ ኣይህሉን እዩ",
+    "no_cards_in_hand": "ኣብ ኢድካ ካርድ የለን",
+    "header": "ኢድካ፡-",
+    "trump_indicator": "(ትራምፕ)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "ክሳብ ሕጂ ነዚ ተንኮል ዝፈጸመ ካርታ የለን።",
+    "header": "እዋናዊ ብልሓት:",
+    "trump_indicator": "(ትራምፕ)",
+    "card_line": "{observation}\n  ተሸላሚ {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "ጸወታ ኣይተጀመረን።",
+    "header": "=== ናይ ጀርመን ዊስት ጌም===",
+    "phase": "{observation}\nፋዘት: {phase}",
+    "trump_suit": "{observation}\nትራምፕ ሱት: {trump_suit}",
+    "trump_card": "{observation}\nትራምፕ ካርድ: {card}",
+    "cards_left": "{observation}\nካርድስ ብዙሕ ኣብ ደክ: {count}",
+    "next_card": "{observation}\nካርድ ብዙሕ ን ወሪ: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} ናይ ሕጂ ብልሓት:",
+    "trump_indicator": "(ትራምፕ)",
+    "trick_line": "{observation}\n  ተሸላሚ {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nተሸላሚ {player_id}: {scoring} ስኮሪንግ ትሪክስ ({tricks} ብዙሕ), {hand_size} ካርድስ ኣብ እድ"
+  },
+  "outcome": {
+    "summary": "ፋዘት ማሕበረቅያ - ተሸላሚ 0: {l0}, ተሸላሚ 1: {l1}. ፋዘት ጫወት - ተሸላሚ 0: {p0}, ተሸላሚ 1: {p1}. ተሸላሚ {winner_id} ን ዕድል ኣለዎ ከም ስኮሪንግ {winner_tricks} ትሪክስ!"
+  }
+}
