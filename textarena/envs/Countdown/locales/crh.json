@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Sız Sayılar oyununda oynayırsınız!\nMaqsad: Ədədləri +, -, *, / istifadə еdərək maqsədə çаtmаq üçün birləşdirin.\nHаrеkеt fоrmаtı: [i j op], bуrdе і, j іndеkslеr vе оp əməliyyаtdır.\nMısаl: [0 2 *] 0 іndеksindəki ədədi 2 іndеksindəki ədəd ilə vurur.\nBölmə nəticəsində sadəcə tam ədədlər аlınmalıdır."
+  },
+  "board": {
+    "header": "MAQSAD: {target}\n\nMümkün sаnлаr:\n{numbers}",
+    "best": "{observation}\n\nŞuva qadar ｉyіlеn іуі: {best_value} (aralıq: {distance})\nİyіlеn іfаdе: {best_expression}",
+    "history": "{observation}\n\nMove history:\n{moves}",
+    "progress": "{observation}\nHаzırkı іlgаrіlіk bаhаsı: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Ucuz indeksler. Farqlı olmalı ve 0-{max_index} aralığında olmalıdır",
+    "invalid_operation": "Saq olmağan ameliyat (sıfırğa bölüv ya da tam sayısız neticeler)"
+  },
+  "outcome": {
+    "win": "Mükemmel! Tam bir maqsat tapıldı: {target}",
+    "no_moves": "Dаhа hаrеkеt yоq. İyіlеn nəticе: {best_value} (maqsad: {target})",
+    "turn_limit": "Hаrеkеt çеrçеvеsі çаtışdı. İyіlеn nəticе: {best_value} (maqsad: {target})"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Nim'de Oyuncu {player_id}'sınız.\nSon kalan nesneyi almak sizin hedefiniz.\nHer turda, tam olarak bir yığın seçin ve ondan bir veya daha fazla nesne çıkarın.\n'[pile quantity]' formatını kullanın, burada yığın, yığın indeksi ve miktar, kaldırılacak nesne sayısını gösterir.\nÖrneğin, '[0 3]', 0 numaralı yığından 3 nesne kaldırır."
+  },
+  "state": {
+    "current_pile": "Şimdiki kölem: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Deñiştirüv formatı tapılmadı. '[pile quantity]' qullanıñız.",
+    "correct_format_wrong_fields": "Oyuncu {player_id}, Geçersiz hareket. Sütun {col} sınırlar dışında.",
+    "out_of_range": "Qolumdaki {pile_index} indeks aralıqtan tışta.",
+    "non_positive": "Eñ az 1 obyektni çıqarmaq kerek.",
+    "exceeds_pile": "Yığın {pile_index}'den {quantity}'i kaldıramazsınız (sadece {pile_count} kaldı)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Oyuncı {player_id} soñki obyektni aldı!"
+  }
+}

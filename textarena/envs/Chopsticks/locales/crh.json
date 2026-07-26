@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Chopsticks. On your turn, choose one of:\n  + Attack:  '[attack M O]'  where M=your hand (0 or 1), O=opponent hand (0 or 1).\n    - Opponent's hand count increases by your hand; if >=5, it becomes 0.\n  + Split:   '[split L R]'  to redistribute your total fingers into L and R (L+R = your total).\nReply with exactly one of those commands."
+  },
+  "board": {
+    "current_board": "Current Board:\nOyuncu 0: {hands_0}\nOyuncu 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Eliniñ {my_idx} ölü.",
+    "opp_hand_dead": "Raqipniñ eli {opp_idx} endi ölüdir.",
+    "split_sum": "Bölüngenlerniñ toplamı {total} olmalı.",
+    "split_no_change": "Split qolunıñ dağıluvını deñiştirmeli.",
+    "invalid_command": "Ğayrıdar move. „[attack M O]” yaki „[split L R]” ni qullanıñız."
+  },
+  "game_action": {
+    "attack": "P{player_id}, P{opp_id}’nıñ eli {opp_idx}ğa hucum ete: ol {opp_val} dan {new_val} ğa barıp tur.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Eki raqipniñ de qolları ölü.",
+    "draw": "Dönüv sıñırı yetildi."
+  }
+}

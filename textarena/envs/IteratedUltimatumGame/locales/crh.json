@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Siz Oyuncu {player_id}'sınız, Iterated Ultimatum Game'in {num_rounds} turunu oynuyorsunuz.\nBu tur için kendiniz ve Oyuncu {other_id} arasında bölüşmek için ${pool}'unuz var.\n\nTeklifçi:\n  - Bir teklif yapın: [Offer: $X] (0 <= X <= havuz)\n  - Kabul edildiğinde → Siz (havuz - X) $ alırsınız, diğer oyuncu X $ alır\n  - Reddedildiğinde → Her iki oyuncu da 0 $ alır\n  - Örnek: [Offer: $3]  veya  'Adil olduğunu düşünüyorum. [Offer: $5]'\n\nCavapçı:\n  - Teklife [Accept] veya [Reject] ile karar verin\n  - Örnek: 'Makul görünüyor. [Accept]'\n            'Çok adaletsiz. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Tur {round_number} başlıyor! ---\nOyuncu {proposer_id} teklifçi, Oyuncu {responder_id} cavapçı.",
+    "offer": "Tur {round_number}: Oyuncu {proposer_id} Oyuncu {responder_id}'e ${offer} teklif ediyor (kendisi ${keep} tutuyor).",
+    "accepted": "Oyuncu {responder_id} kabul etti! Tur {round_number} kazançları: Oyuncu {proposer_id} +${proposer_gain}, Oyuncu {responder_id} +${responder_gain}. Yeni toplamlar: Oyuncu 0: ${total_0}, Oyuncu 1: ${total_1}.",
+    "rejected": "Oyuncu {responder_id} teklifi reddetti! Tur {round_number} kazançları: Her iki oyuncu da 0 $ aldı. Toplamlar aynı kaldı: Oyuncu 0: ${total_0}, Oyuncu 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Teklifçi [Offer: $X] formatında teklifni yapmalı.",
+    "bad_integer": "Teklif miqdarı kerçek bir tam sayılar olmalı.",
+    "out_of_range": "Teklif $0 ve ${pool} arasında olmalı.",
+    "no_current_offer": "Cevap bermek içün şimdiki teklif yoq.",
+    "accept_or_reject": "Cavapçı [Accept] ya da [Reject] teklif etmeli."
+  },
+  "outcome": {
+    "win": "Player {winner} won with ${winner_total} total vs Player {loser}'s ${loser_total}.",
+    "draw": "Eki oyuncı da ${total} umumiy miqdarında yekünledi."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Oyuncu {player_id} olarak Domuz Zarları oyununu oynuyorsunuz.\n\nKurallar:\n- Turunuzda '[roll]' veya '[hold]' yapabilirsiniz\n- 2-6 arası zar atın: Tur toplamınıza ekleyin\n- 1 atın: Tur toplamınızı kaybedin ve turu bitirin\n- Tutun: Tur toplamınızı puanınıza ekleyin ve turu bitirin\n- İlk {winning_score} puanı alan kazanır\n\nSizin turunuzda, geçerli puanları ve tur toplamını göreceksiniz.\nZarı atmak için '[roll]' veya puanlarınızı bankaya koymak için '[hold]' yanıtlayın."
+  },
+  "invalid_move": {
+    "invalid_action": "Geçersiz eylem formatı. '[roll]' veya '[hold]' kullanın."
+  },
+  "actions": {
+    "player_busted": "Oyuncu {player_id} patladı, {turn_total} puan kaybetti!",
+    "player_hold": "Oyuncu {player_id} tuttu ve {turn_total} puanı bankaya koydu."
+  },
+  "board": {
+    "player": "Oyuncu 0: '{score_0}'; Oyuncu 1: '{score_1}'",
+    "current_total_scores": "Geçerli Toplam Puanlar: {scores}\nBu turun geçerli toplam puanınız {turn_total}.",
+    "roll_history": "{observation}\nYour roll history for this turn: {roll_history}",
+    "first_roll": "{observation} Bu, nevbetiñizniñ birinci atımı.",
+    "available_actions": "{observation}\nMümkün eylemler: '[roll]' veya '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Oyuncu {winner_id} ({scores}) tur limitine ulaştığında daha yüksek puanı olduğu için kazandı",
+    "winner_by_score": "Oyuncu {winner_id} {winning_score} hedef puanına ulaşarak kazandı!",
+    "draw": "Tur sıñırı yetildi ve bütün oyuncılarnıñ aynı balları bar: {scores}"
+  }
+}

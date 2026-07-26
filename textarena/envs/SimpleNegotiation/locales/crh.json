@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Siz Oyuncu {player_id}'sınız Müzakere Oyununda.\nBazı kaynaklara sahipsiniz ve göreviniz, kaynaklarınızı öyle bir şekilde ticaret yaparak toplam değerini artırmaktır.\nŞu an sahip olduğunuz kaynaklar ve bunlarla ilgili değerler:\n\t+ {resource_value_list}\nHer turda, rakibinizle konuşabilir ve bir ticaret teklifi yapabilirsiniz.\nAşağıdaki özel tokenları hareketler için kullanın:\n  - '[Teklif: 3 Koyun, 2 Demir -> 5 Tuğla, 2 Koyun]': [Teklif: Teklif Edilen Kaynaklar -> İstenen Kaynaklar]\n  - '[Accept]': Gelen teklifi kabul etmek için.\n  - '[Deny]': Gelen teklifi reddetmek için (varsayılan).\nOyun toplam {max_turns} tur sürer."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Oyuncı, kerekli resursları olmağan bir ticaretni qabul etmege tırıştı.",
+    "out_of_range": "Oyuncu {player_id}, Geçersiz hareket. Sütun {col} sınırlar dışında.",
+    "already_full": "Oyuncu {player_id}, Geçersiz hareket. Sütun {col} dolu.",
+    "proposing_with_no_resource": "Oyuncı {player_id} kerekli resursları olmağan bir deñişim teklifini yapmağa tırıştı.",
+    "incorrect_offer_format": "Oyuncı {player_id} deñişüv teklifini yañlış şekilde yaptı.",
+    "no_new_offer": "Oyuncı {player_id} yañı bir ticaret teklifini yapmadı."
+  },
+  "offers": {
+    "reject": "Oyuncı {player_id} deñişim teklifini red etti.",
+    "accept": "Oyuncu {acceptor_id}, Oyuncu {proposer_id}'den gelen ticaret teklifini kabul etti.",
+    "proposal": "Oyuncu {player_id}, Oyuncu {opponent_id}'e aşağıdaki teklifi yaptı: Teklif edilen öğeler: {offered} -> İstenen öğeler: {requested}"
+  },
+  "outcome": {
+    "win": "Oyuncı {winner_id}, inventar qıymetinde daa büyük qazançnen ğalebe qazandı.",
+    "draw": "Bütün oyuncular içün yedeklerniñ qıymetinde aynı deñişüv."
+  }
+}

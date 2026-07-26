@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Siz Oyuncu {player_id}'sınız. Hafıza Oyunu oynuyorsunuz.\nAmacınız, rakibinizden daha fazla kart çiftini panoda eşleştirmektir.\nSıranızda, iki kartı çevirmek için ilk ve ikinci kartın sırasıyla satır ve sütun numaralarını girin, örneğin '[0 1 1 0]', ilk kart 0. satır ve 1. sütunda, ikinci kart 1. satır ve 0. sütunda olsun.\nEğer iki kart eşleşirse, bir puan kazanırsınız ve kartlar yüzüstü kalır. Eğer eşleşmezse, kartlar yüzüstü çevrilir, örneğin '.'.\nOyun, tüm çiftler eşleştirildiğinde biter."
+  },
+  "board": {
+    "current_board": "Şimdiki tahta: {board}",
+    "current_game_board": "Şimdiki oyun tahtası: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Player {player_id} did not respond with a valid direction in square brackets.",
+    "out_of_bounds": "Yasal olmağan areket. Oyuncı {player_id} çetke çıqqan yerni sayladı.",
+    "same_card_twice": "Yasal olmağan areket. Oynayıcı {player_id} aynı kartnı eki kere sayladı.",
+    "already_matched": "Invalid move. Player {player_id} selected one or both cards that have already been matched."
+  },
+  "game_message": {
+    "cards_match": "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
+    "cards_no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+  },
+  "outcome": {
+    "draw": "Eki oyuncı da aynı sayıda çift kartnı birleştirdi.",
+    "win": "Oyuncı {winner_id} ğalebe qazandı!",
+    "turn_limit": "Tur limiti ulaşıldı. Oyun bitti. Oyuncu 0 {score_0} puan, Oyuncu 1 {score_1} puan kazandı.",
+    "turn_limit_win": "{reason} Oyuncu {winner_id} kazandı!"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Oyuncu Surround bir {width}x{height} gridde.\nSiz oyuncu {player_id}siz. Geçerli hamleler: '[up]' '[down]' '[left]' '[right]' yada w/s/a/d.\nMaksat: başqa tüm oyunculardan ömür sürebilmek. İzler ölümcül; duvar çarpmaları öldürür; karşıdan karşıya çarpışmalar ikisini de öldürür."
+  },
+  "board": {
+    "current": "Şimdiki şura: {board}",
+    "after_moves": "Aynı vaqıtta areket etken soñ tahtası: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Oyuncı {player_id} qanunsız areket sebebinden elâk oldı."
+  },
+  "outcome": {
+    "survived_win": "Oyuncı {player_id} sağ qaldı; digerleri qazağa oğradı.",
+    "all_crashed": "Bütün oyuncılar aynı vaqıtta tüşti.",
+    "outlived": "Player outlived all others.",
+    "all_dead": "Bütün oyuncular öldi.",
+    "turn_limit": "Dönme sıñırı yetken - eñ çoq sağ qalğanı yeñdi.",
+    "ranking": "{reason} Final reyting grupları (ılbet→êñi): {groups}"
+  }
+}

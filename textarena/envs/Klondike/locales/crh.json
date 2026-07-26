@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "Uquqiy olmağan areket şekli. Areket qavğalarda olmalı.",
+    "no_closing_bracket": "Uquqsız areket formatı. Keteyatqan qapatma qavası ']'",
+    "empty_command": "Boş emir. 'draw' ya da 'move <source> <destination> [count] yazıñız",
+    "empty_action": "Boş areketler",
+    "move_needs_args": "Köç emirine menba ve maqsat kerek. qullanuv: 'kökni <menba><maqset yerini> [count] taşıy'",
+    "count_positive": "Sayuv müsbet ya da \"er kes\" olmalı.",
+    "count_invalid": "Saqlanmağan say. Bir raqam ya da \"er kesni\" qullanıñız",
+    "unknown_command": "Unknown command '{cmd}'. Use 'draw', 'move <source> <destination> [count]', or 'forfeit'",
+    "wrapped": "Amal {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Amal {n}: {msg}",
+    "before_failure": "İşlemden evel yapılğan {n} areketler.",
+    "failed": "Amal {n} müvaffaqiyetsiz oldu: {msg}"
+  },
+  "move_result": {
+    "drew": "Kartlarnı yedeklerden çöplükke çekip aldılar.",
+    "cannot_draw": "Çekip olamay. Em yedek, em de atıq boş.",
+    "invalid_pile": "Uquqsız topraq adı. W, F1-F4 ya da T1-T7 qullanıñız",
+    "foundation_one_card": "Tek bir kartnı temelge avuştıra bile.",
+    "waste_to_foundation_ok": "Atıqlardan fondğa avuştırılğan kart F{dst}",
+    "waste_to_foundation_bad": "Çöp kartını o temel yığınına avuştırıp olamaymız. 🔍",
+    "tableau_to_foundation_ok": "Tabladan T{src} kartını fondan F{dst}ğe köçürdik",
+    "tableau_to_foundation_bad": "Tablo kartını o temel yığınına avuştırıp olamaymız. 🔍",
+    "foundation_to_foundation": "Temelden temele köçip olamazlar.",
+    "waste_to_tableau_one_card": "Tek 1 kartnı çöplükten tabloğa avuştıra bile.",
+    "waste_to_tableau_ok": "Kartnıñ atılğanından T{dst} cedveline avuştırıldı.",
+    "waste_to_tableau_bad": "Bu tablo yığınına atılğan kartnı yerleştiremezsiñiz.",
+    "no_face_up": "Deñiştirmek içün açıq olğan kartlar yoq.",
+    "tableau_to_tableau_ok": "T{src}den T{dst}ğe {count} kart(qa) köçürdik",
+    "tableau_to_tableau_bad": "T{src}den T{dst}ğe {count} kart(qa) köçüremeyz",
+    "foundation_to_tableau_one_card": "Tek bir kartnı temelden tabloğa avuştıra bile.",
+    "foundation_empty": "F{src} temel boştur.",
+    "foundation_to_tableau_ok": "Fondan F{src} kartını tabla T{dst}ğe köçürdik",
+    "foundation_to_tableau_bad": "T{dst} cedveline temel kartını yerleştirmek mümkün degil.",
+    "to_waste_or_stock": "Atıq ya da stokqa avuştırıp olamazlar."
+  },
+  "outcome": {
+    "forfeit": "Oyun yiberildi. Soñki neticesi: {score} temellerde kartlar.",
+    "won": "Tebrikler! Klondike Solitaryasında ğalebe qazandıñız!",
+    "turn_limit": "Oyun bitti! Maksimum {max_turns} navbetge yetdiñiz. Ballar: {score} kart fondada."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE === Qırımtatar tilinde qonuşma:",
+    "turn": "Navbet: {turn}/{max_turns}",
+    "stock": "Saq: {stock} kartlar",
+    "waste": "Atıq (W): {waste}",
+    "foundations_header": "Esaslar:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}
