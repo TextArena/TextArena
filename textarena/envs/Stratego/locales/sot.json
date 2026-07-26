@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "O u mothami {player_id} mo Stratego.\nThelelo ya hao ke ya tsena boro ya mothami wa hao kapa o tlose tšona zonke za mothami wa hao.\nTšona ya hao di ile tsamaiswa ke wena mo borong, ka boro, bomo, le tšona zonke za marumo a fapana.\n\n### Melao ya tsamai\n1. **Melao ya tsamai:**\n   - Ka nako ya hao, o ka tsamaya tšona ya hao ka tsela ya nngwe go tšona e nngwe e e tsamaeng.\n   - Senao: Tšona e ka tsamaya go A1 go B1 kapa A1 go A2, e e seng e tsamaeng le tšona ya wena.\n   - E e seng tšona e le bomo kapa boro, e ka se tsamae.\n2. **Meto:**\n   - E e seng o tsamaya go tšona e e tsamaeng ke mothami wa hao, meto e tla tsamaea:\n     - Tšona e e nang marumo a kae e tsena mme e tlose tšona ya mothami wa hao.\n     - E e seng marumo a le a tshwanetse, tšona zonke zi tswa.\n     - **Meto e e kgethegileng:**\n       - Bomo e tlosa tšona zonke za mothami wa hao, e e seng mine, e e tsamaea le bomo.\n       - Spy e ka tsene marshall, e e seng e tsamae pele, mme e tlose tšona zonke za mothami wa hao.\n3. **Thelelo ya tsamai:**\n   - Bona tšona za mothami wa hao ka tsela ya tsamai le meto.\n   - Tshepisa boro ya hao mme o tsene boro ya mothami wa hao.\n   - Se kelekele tšona za hao ka tsela e e siameng.\n\n### Tsela ya tsamai\n1. Bona tšona e o e tsamayang le tšona e e tsamaeng.\n2. Se kelekele ka tsela e e nngwe: [A0 B0], e e seng A0 ke tšona e o e tsamayang, B0 ke tšona e e tsamaeng.\n   - Senao: E e seng o tsamaya tšona go A0 go B0, o se kelekele [A0 B0].\n3. Tshepisa tšona e e tsamaeng e le e e nngwe.\n\n### Dipotso tse di kgethegileng:\n- Boro e tla bontsha tšona ya hao le tšona e e tsamaeng, e e seng MN, MS.\n- Boro e tla bontsha le tšona za mothami wa hao e e tsamaeng, e e seng ?.\n- Tšona e e tsamaeng le ~ e le metse, e ka se tsamae.\n- O se kelekele tsamai ya hao, o tsamaye tšona ya hao e e tsamaeng mo borong, go tsena tšona za mothami wa hao. Mothami 0 le mothami 1 o na tšona e e tsamaeng mo D le G, respectively.\n\nEne ke boro ya kajeno:\n"
+  },
+  "board": {
+    "current_board": "Boro ya tsohle ya kajeno:\n\n{board}\nDikaro tse faneng: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Sebopeho sa ketso se fosahetseng. Sebapali {player_id} ha sea kenya motsamao ka sebopeho [A0 B0] .",
+    "invalid_coordinates": "Sebopeho sa ketso se fosahetseng. Sebapali {player_id} ha sea kenya likhokahano tse nepahetseng.",
+    "not_own_piece": "Mofuta oa ketso o sa sebetseng. Sebapali {player_id} se tlameha ho tsamaisa e 'ngoe ea likotoana tsa sona.",
+    "scout_through_pieces": "Mofuta oa ketso o sa sebetseng. Sebapali {player_id} se ke ke sa tsamaisa scout ka likotoana tse ling.",
+    "scout_diagonal": "Mofuta oa ketso o sa sebetseng. Sebapali {player_id} se ke ke sa tsamaisa scout ka diagonal.",
+    "non_scout_multi_square": "Sebopeho sa ketso se fosahetseng. Likarolo, ntle le li-scouts, li ka tsamaea sekwere se le seng feela ka nako e 'ngoe.",
+    "move_into_lake": "Mofuta oa ketso o sa sebetseng. Sebapali {player_id} se ke ke sa kena ka letšeng.",
+    "move_onto_own_piece": "Mofuta oa ketso o sa sebetseng. Sebapali {player_id} se ke ke sa fetela ho sekhechana sa sona.",
+    "move_bomb_or_flag": "Mofuta oa ketso o sa sebetseng. Sebapali {player_id} se ke ke sa tsamaisa bomo kapa folakha."
+  },
+  "game_action": {
+    "you_moved": "O ile wa tsamaya ka tšona ya hao ya {source} go ya {dest}.",
+    "opponent_moved": "Sebapali {player_id} se ile sa tlosa sekotoana ho tloha {source} ho ea ho {dest}.",
+    "you_equal_ranks": "O ile wa tsamaya ka tšona ya hao ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka marumo a le a tshwanetse, tšona zonke zi ile tswa.",
+    "opponent_equal_ranks": "Mothami {player_id} o ile a tsamaya ka tšona ya tsebo ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka marumo a le a tshwanetse, tšona zonke zi ile tswa.",
+    "you_miner_defused": "O ile wa tsamaya ka tšona ya hao ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka mine e tsamaea le bomo, o ile wa tsena.",
+    "opponent_miner_defused": "Mothami {player_id} o ile a tsamaya ka tšona ya tsebo ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka mine e tsamaea le bomo, o ile wa tsena.",
+    "you_bomb_lost": "O ile wa tsamaya ka tšona ya hao ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka modiri ha a tsamaee le mine, o ile wa tsena.",
+    "opponent_bomb_won": "Mothami {player_id} o ile a tsamaya ka tšona ya tsebo ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka modiri ha a tsamaee le mine, o ile wa tsena.",
+    "you_spy_won": "O ile wa tsamaya ka tšona ya hao ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka modiri ke spy mme tšebelopedi e le marshall, o ile wa tsena.",
+    "opponent_spy_lost": "Mothami {player_id} o ile a tsamaya ka tšona ya tsebo ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka modiri ke spy mme tšebelopedi e le marshall, o ile wa tsena.",
+    "you_higher_won": "O ile wa tsamaya ka tšona ya hao ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka modiri ke marumo a kae, o ile wa tsena.",
+    "opponent_higher_lost": "Mothami {player_id} o ile a tsamaya ka tšona ya tsebo ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka modiri ke marumo a kae, o ile wa tsena.",
+    "you_lower_lost": "O ile wa tsamaya ka tšona ya hao ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka modiri ke marumo a tlase, o ile wa tsena.",
+    "opponent_lower_won": "Mothami {player_id} o ile a tsamaya ka tšona ya tsebo ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka modiri ke marumo a tlase, o ile wa tsena."
+  },
+  "outcome": {
+    "flag_captured": "Sebapali {player_id} se hapile folakha ea mohanyetsi!",
+    "no_movable_pieces": "Mothami {winner_id} o tsena! Mothami {loser_id} ha a na tšona e tsamaeng."
+  }
+}

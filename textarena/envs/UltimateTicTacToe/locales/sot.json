@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Boto ea hona joale: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ho falla ho tlameha hore e be ka sebōpeho sa [macro micro] se nang le linomoro tsa 0-8.",
+    "out_of_range": "Lenane ka leng le tlameha ho ba pakeng tsa 0 le 8.",
+    "index_out_of_range": "Micro_board, row kapa col e ka ntle ho range.",
+    "cell_occupied": "Sele e se ntse e hapiloe.",
+    "wrong_micro_board": "Sebapali se lokela ho bapala boto e latelang ea micro.",
+    "micro_board_won": "The micro board is already won."
+  },
+  "next_board": {
+    "any": "boto efe kapa efe e nyane ea micro board",
+    "specific": "boto e nyane {nxt}"
+  },
+  "game_action": {
+    "played": "Player {player_id} e tšweletse ka micro board {macro_idx}, seli {micro_idx} (lera {row}, kholo {col}). Player {opponent_id} a tšwanetse hantle go tšweletsa ka {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Sebapali {player_id} se hapa Ultimate Tic Tac Toe!",
+    "draw": "Papali e tšoana!"
+  }
+}

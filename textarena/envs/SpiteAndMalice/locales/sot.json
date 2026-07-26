@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Boro ya Toka:\n\n{board}\nDiketso tse Availabe: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Li-Pile tsa Bohareng --- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- View ya Mothami {player_id} ---\n",
+    "payoff": "{observation}Payoff Pile (Karte e kgolong): {top_card}, Boholo ba Payoff Pile: {payoff_length}\n",
+    "hand": "{observation}Lepina: {hand}\n",
+    "discard": "{observation}Tlaasana ya go Lahla: {discard}\n",
+    "empty": "E se nang letho"
+  },
+  "game_message": {
+    "no_cards_left": "Ha ho sa na likarete tseo u ka li hulang. Hopola hore o ka bapala karete e tsoang mehloling ena: 1. Letsoho la hao 2. Karete ea pele mokotleng oa hau oa moputso 3. Karete e holimo mekotong efe kapa efe eo ue lahlileng.  Ho tsoa sebakeng se seng, khetha letoto le leng feela bakeng sa papali ea chelete."
+  },
+  "invalid_move": {
+    "wrong_format": "Mohato o sa sebetseng. Sebapali {player_id} ha sea ka sa arabela ka motsamao o nepahetseng ho brackets tse sekwere.",
+    "invalid_play": "Tsebe sa kotsi e seng sa tempele. Mothami {player_id} a nyenyeletse go dula {card} ho pile ya kesele {index}.",
+    "discard_from_payoff": "Ho lahla ho sa sebetseng. Sebapali {player_id} se lekile ho lahlela karete e tsoang mokotleng oa moputso.",
+    "discard_not_in_hand": "Ho lahla ho sa sebetseng. Sebapali {player_id} se lekile ho lahlela karete e seng letsohong la sona.",
+    "wrong_move_type": "Mofuta oa motsamao o sa sebetseng. Sebapali {player_id} ha sea araba ka mofuta oa motjha o sebetsang."
+  },
+  "game_action": {
+    "you_drew": "U ile ua hula likarete.",
+    "opponent_drew": "Sebapali {player_id} se ile sa hula likarete.",
+    "you_played": "U ne u bapala {card} ka moleng o bohareng oa papali ea chelete {index}.",
+    "opponent_played": "Mothami {player_id} o dule {card} ho pile ya kesele {index}.",
+    "you_discarded": "U lahletse {card} ho tlaasana ya go lahla {index}, eo le e leng sebaka sa hore u feletswe ke turn ya hao. Ha ho na diketsahalo tse ling tsa hao tse nylenehileng ka turn ena. Mothami {next_player_id} a tla tsamaea ka mor'a hao.",
+    "opponent_discarded": "Mothami {player_id} o lahletse {card} ho tlaasana ya go lahla {index}, eo le e leng sebaka sa hore o feletswe ke turn ya hae. Ha ho na diketsahalo tse ling tsa Mothami {player_id} tse nylenehileng ka turn ena. Mothami {next_player_id}, u tla tsamaea ka mor'a hao. Tswela ka aksi yako ka maeko [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Player {current_player} has finished their payoff pile! Player {current_player} wins!",
+    "deadlock_player_0": "Deadlock e fihlile! Mothami 0 o winne le {player_0_payoff} karte e seng tluoa vs Mothami 1's {player_1_payoff} karte.",
+    "deadlock_player_1": "Deadlock e fihlile! Mothami 1 o winne le {player_1_payoff} karte e seng tluoa vs Mothami 0's {player_0_payoff} karte.",
+    "deadlock_tie": "Deadlock reached with tie! Both players have {player_0_payoff} cards remaining. Player {current_player} wins by default."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "Boto: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Sebopeho se tlameha ho ba e2e4 (ho tloha,to coordinates).",
+    "no_piece": "Ha ho na {side} karolo e mabapi le {coord}.",
+    "identical": "Mohloli le sebaka seo ba eang ho sona li tšoana.",
+    "not_straight_or_diagonal": "Ho falla ho tlameha hore e be ka kotloloho kapa ka lehlakoreng le fapaneng.",
+    "wrong_distance": "E tlameha ho tsamaea sebaka se lekanang le likotoana tse tsamaellanang.",
+    "enemy_blocks": "Lithunya tsa sera li thibile tsela.",
+    "destination_own": "Sebaka seo se eang ho sona se hapiloe ke sesole sa rōna."
+  },
+  "game_action": {
+    "moved": "Player {player_id} e tsamaisa {from} -> {to}",
+    "captured_suffix": "Player {player_id} e tsamaisa {from} -> {to} e fumana motho wa kgale."
+  },
+  "outcome": {
+    "win": "Likarolo tsohle li kopane.",
+    "draw_no_capture": "Ho tsamaisoa ka makhetlo a 60 empa ho sa tšoaroa.",
+    "draw_repetition": "Boemo bo phetoa ka makhetlo a mararo."
+  }
+}

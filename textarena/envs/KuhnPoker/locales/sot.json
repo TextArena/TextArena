@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "U mmoleli {player_id} mmeleng ya {max_rounds} round ya Kuhn Poker.\nMekwa ya Tsamayo:\n- Kuhn Poker e tsamaya le dekhi ya 3 ka e ngata J, Q, K (J e nyane, K e kgolo)\n- Mmoleli yohle e qala {ante} chip mme e amohela karte 1 ho yohle mmeleng (hobane karte di ngatahohe without replacement, jwalo ka u se ke na karte e tshwanang le ya mmoleli wa hao).\n- Tsamayo e tsamaya ho fihlela {max_rounds} rounds\n- Mmoleli ya kgolo chip ho fihlela mmeleng yohle e menwe\nMekwa ya Tsebeletso:\n- '[check]': Qala without ho betsa (efe ha ho na betse e ngatahohe)\n- '[bet]': Ngata 1 chip ho poti (efe ha ho na betse e ngatahohe)\n- '[call]': Kenya betse ya mmoleli wa hao e ngata 1 chip ho poti\n- '[fold]': Tlohela karte ya hao mme u fele mmoleli wa hao a menwe poti"
+  },
+  "init_round": {
+    "round_start": "### Tsamaya ho qala round {current_round} ho tsoa {max_rounds} rounds. Pata e sengo: '{player_card}'",
+    "available_actions": "Liketso tsa hao tse fumanehang ke: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Tsebeletso e lokela e [Check], [Bet], [Call], kapa [Fold].",
+    "not_legal": "Ketso e tlameha ho ba {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Liketso tsa hao tse fumanehang ke: {legal_actions}.",
+    "round_summary": "{reason} Maduo aminwe: Mmoleli 0: '{player_0_chips}'; Mmoleli 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Mmoleli {winner}'s {winner_card} e kgona Mmoleli {loser}'s {loser_card}. Mmoleli {winner} a menwe poti ya {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Qetellong ea {max_rounds} potoloho, libapali ka bobeli li ne li e-na le palo e lekanang ea lichips.",
+    "round_win": "Player {player_id} has folded.",
+    "winner_player0": "Sebapali 0 se hlōtse ka ho ba le li-chips tse ngata qetellong ea {max_rounds} potoloho.",
+    "winner_player1": "Sebapali sa 1 se hlōtse ka ho ba le li-chips tse ngata qetellong ea {max_rounds} potoloho."
+  }
+}

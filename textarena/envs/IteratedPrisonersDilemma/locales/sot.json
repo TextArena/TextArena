@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "U na le Player {player_id} mochachachari wa Iterated Prisoner's Dilemma o tlang ho {num_rounds} rounds.\n\nTsamaiso ya Game:\n- Pele ho tsoa ha u qala u na le {total_conversation_rounds} matšo ho ipotsa ka potlako.\n- Kamora hoo, batswadi bohle ba ipotsa ka nako e le ngoe ba khethe ho tsamaya le ho tšoha.\n\nMekhatlo ya Go Tšeha (e se nang ho feta ho round):\n- Ba bang ba tsamaye le ba bang ba tšohe ➜ ba bang {cooperate_reward}\n- Ba bang ba tšohe ba bang ba tšohe ➜ ba bang {mutual_defect_reward}\n- E mong a tšohe, e mong a tsamaye le ➜ Yo a tšohileng {defect_reward}, Yo a tsamaileng {sucker_reward}\n\nHore u tsebe ho tšeha:\n- Ho tsoa ha puisano: u ngole mangolo a hao a tšoanang.\n- Ho tsoa ha phase ya tšeha: u be le '[Cooperate]' kapa '[Defect]' (ha e tsebe hore ke kapa e nyane). U ka ngola mangolo a mangata pele kapa mora token."
+  },
+  "phases": {
+    "conversation_finished": "Puisano e fetilwe ho round {round}. Le ka araba '[Cooperate]' kapa '[Defect]' ka har'a \\boxed{{}}.",
+    "starting_round": "--- Ho qala Round {round} ---",
+    "round_summary": "Dipego tsa round {round}:\n{outcome}\nPlayer 0 a fumane {r0} (kafung {score_0}), Player 1 a fumane {r1} (kafung {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "Bapala ka bobeli ba ile ba fumana lintlha {s0}.",
+    "round_both_cooperate": "Bapali bana ba babeli ba ile ba sebelisana.",
+    "round_both_defect": "Bapali ka bobeli ba ile ba baleha.",
+    "round_p0_cooperates_p1_defects": "Sebapali sa 0 se ile sa sebelisana le sona, sebapali sa 1 se ile tsa baleha.",
+    "round_p0_defects_p1_cooperates": "Sebapali sa 0 se ile sa baleha, sebapali sa 1 sona sa sebelisana le rōna."
+  }
+}
