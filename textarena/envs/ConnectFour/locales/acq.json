@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في كونكت فور.\nرمز قرصك: {symbol}.\nلديها لوحة اللعبة {num_rows} صفوف و {num_cols} أعمدة.\nيتخد اللاعبون دورهم في إسقاط قرصهم في واحدة من الأعمدة (0 إلى {end_col}).\nأول من يرتبط (أقراصه الخاصة) أربعة أقراص رأسيًا أو أفقيًا أو قطريًا يفوز.\nفي دورك، أدخل رقم العمود بين قوسين لمحاولة اللعب.\nعلى سبيل المثال: '[col 4]' أو '[col 1]'."
+  },
+  "board": {
+    "board_visible_state": "ولاية المجلس: {board_visual}",
+    "board_notvisible_state": "اللوحة لا تظهر لللاعبين."
+  },
+  "invalid_move": {
+    "wrong_format": "اللاعب {player_id}، صيغة الإجراء غير صالحة. الصيغة المتوقعة: '[col x]'.",
+    "out_of_range": "اللاعب {player_id}، إجراء غير صالح. العمود {col} خارج الحدود.",
+    "already_full": "Player {player_id}, Invalid action. Column {col} is full."
+  },
+  "action": {
+    "dropped_disk": "اللاعب {player_id} ألقى قرصه ({player_symbol}) في العمود {col}."
+  },
+  "outcome": {
+    "win": "اللاعب {player_id} يربح بجمع اربعة!",
+    "draw": "المباراه انتهت بالتعادل."
+  }
+}
