@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في لعبة تيك تاك تو لثلاثة لاعبين.\nرمزك هو '{symbol}'.\nتتخذ الدورات لوضع رمزك على لوحة 5x5 لتشكيل خط من أربعة.\nالخطوط يمكن أن تكون أفقية أو عمودية أو قطرية.\nأدخل نقرتك باستخدام التنسيق '[4]' لتسجيل الخلية 4."
+  },
+  "board": {
+    "current_board": "اللوحة الحالية:\n\n{board}\n\nالنقرات المتاحة: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "لا صحيح. استخدم \"[cell]\" وين الخلية هي 0-{max_cell}.",
+    "out_of_range": "رقم الخلية غير صالح: {cell}. يجب أن يكون بين 0 و {max_cell}.",
+    "already_occupied": "Cell {cell} is already occupied.",
+    "made_invalid": "لاعب {player_id} عمل حركه مش صالحة."
+  },
+  "game_action": {
+    "placed": "اللاعب {player_id} يضع رمزه ({symbol}) في الحقل ({row}، {col})."
+  },
+  "outcome": {
+    "win": "اللاعب {player_id} ({symbol}) يفوز!",
+    "draw": "المباراة متعادلة!"
+  }
+}

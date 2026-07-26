@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في لعبة {max_rounds} جولة من بوكر كون.\nقواعد اللعبة:\n- بوكر كون يستخدم مجموعة بطاقات من 3 بطاقات مع J، Q، K (J الأقل، K الأعلى)\n- كل لاعب ي đặt {ante} فئة ويستلم بطاقة واحدة في كل جولة (ملاحظة أن البطاقات تُdistributed بدون استبدال، لذلك لا يمكنك الحصول على نفس البطاقة مثل خصمك).\n- اللعبة تستمر ل {max_rounds} جولات\n- اللاعب الذي لديه معظم الفئات بعد جميع الجولات يفوز\nقواعد الحركة:\n- '[check]': تمر بدون الرهان (فقط إذا لم يكن هناك رهان على الطاولة)\n- '[bet]': أضف 1 فئة إلى الحصيلة (فقط إذا لم يكن هناك رهان على الطاولة)\n- '[call]': متابعة رهان خصمك بإضافة 1 فئة إلى الحصيلة\n- '[fold]': استسلم من يدك واسمح لخصمك بالفوز بالحصيلة"
+  },
+  "init_round": {
+    "round_start": "### بداية الجولة {current_round} من {max_rounds} جولات. بطاقتك هي: '{player_card}'",
+    "available_actions": "Your available actions are: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "الحركة يجب أن تكون [Check]، [Bet]، [Call]، أو [Fold].",
+    "not_legal": "الإجراء لازم يكون {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Your available actions are: {legal_actions}.",
+    "round_summary": "{reason} النقاط الحالية: اللاعب 0: '{player_0_chips}'; اللاعب 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "مواجهة: بطاقة اللاعب {winner} '{winner_card}' تهزم بطاقة اللاعب {loser} '{loser_card}'. اللاعب {winner} يفوز بالحصيلة من {pot_value} فئات."
+  },
+  "outcome": {
+    "draw": "في نهاية دورات {max_rounds}، كلا اللاعبين كانو عندهم نفس عدد الرقاقات.",
+    "round_win": "Player {player_id} has folded.",
+    "winner_player0": "لاعب 0 فاز من خلال وجود المزيد من الرقاقات في نهاية كل جولات {max_rounds}.",
+    "winner_player1": "اللاعب 1 فاز ولو كان عنده اكبر عدد من الرموز في نهاية كل جولات {max_rounds}."
+  }
+}

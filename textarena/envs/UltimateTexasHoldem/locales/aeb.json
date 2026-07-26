@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "ما زالتش في بطاقات.",
+    "rules": "🎯 تكساس هولديم الألتيميت - لاعب واحد ضد التاجر\n\n📖 نظرة عامة على اللعبة:\n• تبدأ مع {start_chips} فишات\n• مجموعة واحدة من 52 بطاقة (2♠-A♠، 2♥-A♥، 2♦-A♦، 2♣-A♣)\n• تلعب ضد التاجر (البيت)\n• كل جولة تتبع هيكل تكساس هولديم الألتيميت: تقوم برهان ANTE و BLIND، تستلم 2 بطاقة حفر، تقرر على رهانات لعب اختيارية عبر مراحل الرهان، ثم تكشف البطاقات المجتمعية وتقارن أفضل يد 5 بطاقات ضد يد التاجر. هدفك هو تحقيق أقصى ربح (عندما تكون لديك اليد الأفضل)، مع تقليل الخسائر (عندما تكون لديك اليد الأسوأ).\n• تنتهي اللعبة عندما تصل إلى 0 فيشات أو أقل في بداية الجولة (خسارة) أو اكتمل 1000 جولة مع الفيشات (فوز)\n\n💰 هيكل الرهان:\n• ANTE: رهان إجباري ${ante} في كل جولة\n• BLIND: رهان إجباري ${ante} في كل جولة\n• PLAY: رهان اختياري خلال اللعب. على مدار الجولة، يمكنك اختيار واحد فقط من التالي: (${ante4} إذا تم في PRE-FLOP، ${ante2} إذا تم في FLOP، أو ${ante} إذا تم في RIVER. يمكنك أيضًا طي في النهر، وتخليص اليد، بدون رهان.)\n\n🎴 توزيع البطاقات:\n• تستلم 2 بطاقة ظاهرة (بطاقات حفرك)\n• يستلم التاجر 2 بطاقة مخفية (مخفية عنك)\n• 5 بطاقات مجتمعية يتم توزيعها ظاهرة في البداية\n• البطاقات المجتمعية يتم كشفها تدريجياً خلال مراحل اللعبة\n\n🏆 تأهيل التاجر:\n• يجب على التاجر أن يكون على الأقل زوج (2 بطاقة من نفس الرتبة) لتأهيل، باستخدام 2 بطاقات في يده و 5 بطاقات مجتمعية.\n• تأهيل التاجر يؤثر على نتائج الرهان، كما سيتم شرحها لاحقا.\n\n🎮 مراحل اللعبة وإجراءاتها:\n📋 PRE-FLOP:\n  • الإجراءات: [4x] (${ante4}) أو [check]\n  • [4x]: وضع رهان لعب ${ante4}، يكشف أول 3 بطاقات مجتمعية\n  • [check]: بدون رهان إضافي، يكشف أول 3 بطاقات مجتمعية\n\n📋 FLOP:\n  • إذا تم وضع رهان 4x: متاح فقط [skip] (يكشف تلقائياً آخر 2 بطاقات مجتمعية)\n  • إذا لم يتم وضع رهان 4x: [2x] (${ante2}) أو [check]\n  • [2x]: وضع رهان لعب ${ante2}، يكشف آخر 2 بطاقات مجتمعية\n  • [check]: بدون رهان إضافي، يكشف آخر 2 بطاقات مجتمعية\n\n📋 RIVER:\n  • إذا تم وضع رهان 4x أو 2x: متاح فقط [skip] (يتقدم تلقائياً إلى المواجهة)\n  • إذا لم يتم وضع رهان لعب مسبق: [1x] (${ante}) أو [fold]\n  • [1x]: وضع رهان لعب ${ante}، يتقدم إلى المواجهة\n  • [fold]: التخلي عن اليد، خسارة رهانات ANTE و BLIND\n\n📋 SHOWDOWN:\n  • جميع البطاقات مكشوفة ومتقيمة\n  • أفضل يد 5 بطاقات من 7 بطاقات (2 حفر + 5 مجتمعية)\n  • الرهانات يتم تسويتها وفقاً لقواعد الدفع\n\n💎 دفع الرهانات:\n📊 رهان ANTE:\n  • التاجر لا يتأهل: PUSH (الرهان معاد)\n  • التاجر يتأهل وأنت تفوز: دفع 1:1 (الرهان + الربح)\n  • التاجر يتأهل وأنت تخسر: الرهان مفقود\n  • التعادل: PUSH (الرهان معاد)\n\n📊 رهان BLIND:\n  • غير متأثر بتأهيل التاجر\n  • أنت تفوز: الرهان معاد وربح إضافي بناءً على قوة يدك\n  • أنت تخسر: الرهان مفقود\n  • التعادل: PUSH (الرهان معاد)\n\n📊 جدول دفع رهان BLIND:\n  • رويال فلش: 500:1 (${{self.ante_amount * 500}})\n  • ستريت فلش: 50:1 (${{self.ante_amount * 50}})\n  • فور أوف أ كايند: 10:1 (${{self.ante_amount * 10}})\n  • فول هاوس: 3:1 (${{self.ante_amount * 3}})\n  • فلش: 3:1 (${{self.ante_amount * 3}})\n  • ستريت: 1:1 (${{self.ante_amount * 1}})\n  • أقل من ستريت: بدون ربح إضافي\n\n📊 رهان PLAY:\n  • غير متأثر بتأهيل التاجر\n  • المقارنة المباشرة: يدك الأفضل ضد يد التاجر الأفضل\n  • أنت تفوز: دفع 1:1 (الرهان + الربح)\n  • أنت تخسر: الرهان مفقود\n  • التعادل: PUSH (الرهان معاد)\n\n🎯 تصنيفات يد البوكر (الأفضل إلى الأسوأ):\n  1. رويال فلش: A-K-Q-J-10 من نفس العرف\n  2. ستريت فلش: 5 بطاقات متتالية من نفس العرف\n  3. فور أوف أ كايند: 4 بطاقات من نفس الرتبة\n  4. فول هاوس: 3 من نفس الرتبة + 2 من نفس الرتبة\n  5. فلش: 5 بطاقات من نفس العرف\n  6. ستريت: 5 بطاقات متتالية\n  7. ثري أوف أ كايند: 3 بطاقات من نفس الرتبة\n  8. تو بير: 2 زوج من رتبات مختلفة\n  9. ون بير: 2 بطاقة من نفس الرتبة\n  10. هاي كارد: أعلى بطاقة تفوز\n\n⌨️ أوامر الإجراء:\n• [4x] أو [play bet 4x]: وضع رهان لعب ${{self.ante_amount*4}}\n• [2x] أو [play bet 2x]: وضع رهان لعب ${{self.ante_amount*2}}\n• [1x] أو [play bet 1x]: وضع رهان لعب ${{self.ante_amount*1}}\n• [check] أو [c]: التحقق (بدون رهان إضافي)\n• [fold] أو [f]: الطي (التخلي عن اليد)\n• [skip] أو [s]: التخطي إلى المرحلة التالية (عندما لا يلزم إجراء)\n\n💡 نصائح الاستراتيجية:\n• الأيدي القوية في البداية (الأزواج، البطاقات العالية) غالباً ما تبرر الرهانات 4x\n• ضع في اعتبارك تأهيل التاجر - الأيدي الضعيفة قد تدفع إذا لم يتأهل التاجر\n• رهان BLIND يمكن أن يكون مربحاً جداً مع الأيدي القوية (رويال فلش = 500:1!)\n• انتبه إلى كومة الفيشات الخاصة بك! إذا انخفضت إلى 0 أو أقل في بداية الجولة، تفوز بالخسارة.\n\n⚠️  ملاحظات هامة:\n• رهانات ANTE و BLIND إجبارية في كل جولة\n• رهانات PLAY اختيارية واستراتيجية\n• تأكد من إدخال الإجراء الصحيح، وواحد فقط في كل مرة.\n\n",
+    "state": "🎯 الجولة {round}\n💰 الفيشات: {chips}\n🎴 يدك: {hand}\n📊 الرهانات الحالية: ANTE ${ante}، BLIND ${blind}، PLAY ${play}\n📋 المرحلة: {phase}\n🎯 الإجراءات المتاحة: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 الجولة {round} بدأت! الرهانات: ANTE ${ante}، BLIND ${blind}. لديك {chips} فишات متبقية.",
+    "your_hand": " يدك: {hand}",
+    "flop_revealed": " فلوب كشف: {cards}",
+    "river_revealed": " ريفير كشف: {cards}"
+  },
+  "invalid_move": {
+    "reason": "عمل غير صالح للمرحلة الحالية. اعمال موجودة: {available}",
+    "message": " عمل غير صالح! اعمال موجودة: {available}"
+  },
+  "action": {
+    "folded": "🃏 You folded."
+  },
+  "showdown": {
+    "dealer_hand": " شوبون! يد الوكيل: {cards}",
+    "community_cards": " بطاقات المجتمع: {cards}",
+    "player_best": "🎴 أفضل يد لللاعب: {name} ({cards})",
+    "dealer_best": "🎴 Dealer's best hand: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (طوي)",
+    "blind_lost_folded": " الرهان العمياء خسر! -${blind} (طوي)",
+    "ante_won": "✅ انتو راني فزت! +${amount}",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} رجع.",
+    "ante_lost": " الرهان خسر! -${ante}",
+    "blind_won": "✅ الرهان العمياء فاز! +${amount}",
+    "blind_pushed": " الرهان العمياء طاح! ${blind} رجع.",
+    "blind_lost": "❌ BLIND bet LOST! -${blind}",
+    "play_won": "✅ لعب الرهان فاز! +${amount}",
+    "play_pushed": " لعب الرهان طلع! ${play} رجع.",
+    "play_lost": " لعب الرهان خسر! -${play}",
+    "net_gain": "🎉 انتهت الجولة {round}! الربح الشبكي: +${net}",
+    "net_loss": "💸 انتهت الجولة {round}! الخسارة الشبكية: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 GAME OVER! {max_turns} rounds completed. You have ${chips} chips - YOU WIN!",
+    "game_over_lose": "لعبة إنتهت، ما عادلكش فيشب. الموزع ربح!",
+    "reward_win": "اكتملت {winner_rounds} جولات باللاعب مع ${chips} فишات",
+    "reward_lose": "لعبو خلصوا من الشيبس في الجولة {round}",
+    "reward_win_max": "اكتملت {max_turns} جولات باللاعب مع ${chips} فишات"
+  },
+  "hand_names": {
+    "royal_flush": "رويال فلش.",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "أربعة من نوعهم.",
+    "full_house": "بيوت كاملة.",
+    "flush": "فلاش.",
+    "straight": "مستقيم.",
+    "three_of_a_kind": "ثلاثة من نوعهم.",
+    "two_pair": "زوز زوجيين.",
+    "one_pair": "زوز واحدين.",
+    "high_card": "كارت عالية.",
+    "unknown": "يدا مش معروفة."
+  }
+}
