@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Siz Golf (Kart Oýuny) oýunyny oýnap ýorsuňuz - Oýnaýjy {player_id}.\nNýýet: Bu bir raundda iň pes jemleýji alýar. Eger sütunlar bir meňzeşde bolsa, olar 0 hökmünde jemlenýär.\nKart Baýlyklary: A=1, 2-10=ýüz güýbi, J/Q=10, K=0\n\nAction (aýnalaşdyrýlan ulanýn):\n- '[draw]' - Dekdan çykarmak\n- '[take]' - Goýulýan küýünden almak\n- '[swap X Y]' - Çykaran karty X (satyr) Y (sütun) pozisiýasy bilen çalşyrmak\n- '[discard]' - Çykaran karty goýmak\n"
+  },
+  "board": {
+    "drew": "Siz {card} çektiniz:\nIndi siz [swap X Y] ýa-da [discard] etmeli",
+    "took": "You took: {card} from discard pile\nYou must [swap X Y] with it (cannot discard).",
+    "peeked": "Siz ({row},{col}) pozisiýasyndan şonuňy gördiňiz: {card}",
+    "turn_view": "Sizin eliňiz:\n{hand}\nGoýulýan küý: {discard}\n{options}",
+    "none": "Hiç zat ýok."
+  },
+  "options": {
+    "final_turns": "Ähli soňky gezek! Sizin saýlaýyşlaryňyz: [draw], [take], [peek X Y]",
+    "draw": "Sizin saýlaýyşlaryňyz: [draw], [take]",
+    "must_swap": "Siz: [swap X Y] (kartlary taşlap bilmersiňiz)",
+    "swap_or_discard": "Siz: [swap X Y] ýa-da [discard] etmeli"
+  },
+  "hand": {
+    "no_cards": "Kartlar ýok .",
+    "header": "Süt: 1 2 3",
+    "row": "Ýaryş {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Oýnaýjy {pid} {new}-ni {old} bilen ({row},{col}) pozisiýada çalşyrdy",
+    "discarded": "Oýnaýjy {pid} {card} goýdu"
+  },
+  "message": {
+    "deck_empty": "Dek boş! Oýun derrew gutarýar.",
+    "knocked": "Oýunçy {pid} ýykyldy! Her bir başga oýunçyň ýene-de bir gezek tury bar.",
+    "final_round": "Oýnaýjy {pid} {reason}! Her bir oýnaýjy ähli bir gezek oýnaýar"
+  },
+  "reason": {
+    "all_revealed": "bar kartlar açyldymy ?"
+  },
+  "invalid": {
+    "wrong_action": "Aýnalaşdyrýlan ýekä action ulanýn: [draw], [take], [swap X Y], [discard], [knock] ýa-da [peek X Y]",
+    "discard_empty": "The discard pile is empty!",
+    "must_draw_first": "Siz ilkinji [draw], [take], [knock] ýa-da [peek X Y] etmeli",
+    "cannot_discard_taken": "Sen taşlan kartadan alnan kartoşkalary aýryp bilmersiň.Sen ony çalşyrmaly.",
+    "have_drawn_card": "Siz çeken kartasyňyz bar. Siz [swap X Y] ýa-da [discard] etmeli",
+    "need_drawn_swap": "Karta çalşmak üçin kart çekilmeli.",
+    "need_drawn_discard": "Sen taşlamak üçin bir kart çekmeli.",
+    "out_of_bounds": "Pozisiýa çäklere çykdy. 1-{max_row} satyr, 1-{max_col} sütun ulanýn",
+    "knock_with_card": "Sen kart çekilen wagty gapyny kakyp bilmersiň. Ilki öz gutarnyşyňy tamamla.",
+    "already_knocked": "Bu töwerekde kimdir biri eýýäm urdy.",
+    "already_revealed": "Bu kart eýýäm açyldy!"
+  },
+  "summary": {
+    "full": "Game Over! Player {winner} wins with a score of {score} points!\n\nFinal Scores:\n{scores}",
+    "line": "Oýnaýjy {pid}: {score} ball"
+  },
+  "board_str": {
+    "title": "=== Golf oýny===",
+    "discard": "Atylýan guty: {card}",
+    "knocked": "Oýunçy {pid} gapyny kakanda!",
+    "player_header": "Oýnaýjy {pid} (Bal: {score}):"
+  }
+}

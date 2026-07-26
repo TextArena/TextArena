@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "The game begins. Trump suit: {trump_suit} (trump card: {trump_str}).",
+    "no_trump_card": "hiç zat ýok"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in German Whist.\n{phase_info}\nYou hold {hand_size} cards.\nPlay a card with '[play N]', where N is its position in your hand (for example '[play 3]').",
+    "phase_learning": "Öwrenmek fazası: her hileli ýeňijiniň açyk kartasy alnar we ýitiren toparyň indiki kartasyny çeker. Bu fazada gazanylan hileleri ýeňiş üçin hasaplanmaýar.",
+    "phase_playing": "Oýnaş fazası: güllük gutarnykly. Häzirden başlap her hile ýeňiş üçin hasaplanýar."
+  },
+  "next_card": {
+    "playing_phase": "Hiç bir karta teklip edilmeýär - oýun fazası başlandy.",
+    "deck_empty": "The deck is empty - no card is on offer.",
+    "available": "Kart teklip edilýär: {card}",
+    "available_trump": "Kart teklip edilýär: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Ýaman hereket formati. Elinizdeki N-nji kartany oýnamak üçin '[play N]' ullanyň.",
+    "bad_position": "Bu karta düzümi ýok. Sizde {hand_size} kartlar bar.",
+    "must_follow_suit": "Siz hem şonuň ýaly edip, bir {lead_suit} kart oýnamalysyňyz.",
+    "invalid_play": "That card cannot be played."
+  },
+  "game_action": {
+    "played": "Oýunçy {player_id} oýnady {card}."
+  },
+  "trick": {
+    "won": "Player {winner_id} wins the trick with {card}.",
+    "won_learning": "Player {winner_id} wins the trick with {card} and takes the face-up card."
+  },
+  "phase": {
+    "learning_complete": "Hamyrmaýasy gutarnypdyr. Öwrenilýän faza tamamlandy - galan her hile ýeňiş üçin hasaplanýar."
+  },
+  "draw": {
+    "winner_received": "Sen hilede ýeňdiň we {card} aldyñ.",
+    "loser_received": "You lost the trick and drew {card} from the deck.",
+    "winner_preview": "{card} indiki kart."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tricks won so far - Player 0: {tricks0}, Player 1: {tricks1}",
+    "scores_playing": "Scoring tricks - Player 0: {tricks0}, Player 1: {tricks1}",
+    "phase": "Faza: {phase}",
+    "phase_learning": "Phase: {phase} ({remaining_cards} cards left in the deck)"
+  },
+  "hand": {
+    "no_cards": "Kartlar ýok .",
+    "no_cards_in_hand": "Elinde kart ýok .",
+    "header": "Eliň:",
+    "trump_indicator": "(TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Bu hile heniz oýnalmadyk kartalar.",
+    "header": "Häzirki hile:",
+    "trump_indicator": "(TRUMP)",
+    "card_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Oýun başlamady .",
+    "header": "=== Germaniýa oýunlary===",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nTrump suit: {trump_suit}",
+    "trump_card": "{observation}\nTrump card: {card}",
+    "cards_left": "{observation}\nCards left in deck: {count}",
+    "next_card": "{observation}\nNext card for winner: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Häzirki hile:",
+    "trump_indicator": "(TRUMP)",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPlayer {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} cards in hand"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}
