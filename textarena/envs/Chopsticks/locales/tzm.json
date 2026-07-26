@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Chopsticks. On your turn, choose one of:\n  + Attack:  '[attack M O]'  where M=your hand (0 or 1), O=opponent hand (0 or 1).\n    - Opponent's hand count increases by your hand; if >=5, it becomes 0.\n  + Split:   '[split L R]'  to redistribute your total fingers into L and R (L+R = your total).\nReply with exactly one of those commands."
+  },
+  "board": {
+    "current_board": "Asenmel n uṭṭun:\nAnṣli 0: {hands_0}\nAnṣli 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Your hand {my_idx} is dead.",
+    "opp_hand_dead": "Opponent hand {opp_idx} is already dead.",
+    "split_sum": "ⵉⵇⵇⴰⵏ ⴷ ⴰⴷ ⵏⵙⴱⴹ {total}.",
+    "split_no_change": "ⵉⵇⵇⴰⵏⴷ ⴰⴷ ⵉⵙⵏⴼⵍ ⵓⵙⴱⴹⵓ ⵏ ⵜⵣⵎⵎⴰⵔ ⵏⵏⴽ.",
+    "invalid_command": "Aseɣwen ur igi. Sken «[attack M O]» neɣ «[split L R]»."
+  },
+  "game_action": {
+    "attack": "P{player_id} ikkes P{opp_id}’s afus {opp_idx}: tettwa tamettut s {opp_val} ar {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Both opponent hands dead.",
+    "draw": "ⵜⵍⴽⵎⴷ ⵉ ⵓⵡⵜⵜⵓ ⵏ ⵓⵙⵏⴼⵍ."
+  }
+}

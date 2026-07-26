@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "TIMMAḌ: {target}\n\nIliman imqqurn: \n{numbers}",
+    "best": "{observation}\n\nIffiɣ d akud ann: {best_value} (tuddsa: {distance})\nIzwal uffir: {best_expression}",
+    "history": "{observation}\n\nTalalit n uṭṭun: \n{moves}",
+    "progress": "{observation}\nTaddart n tneflayt tamatart: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "ⵉⵙⵓⵎⴰⵔ ⵓⵔ ⵉⴳⵉⵏ ⵡⴰⵍⵍⵉ ⴷ ⵉⵇⵇⴰⵏ ⴰⴷ ⵜⵜⵓⵙⵏⴼⵍⵏⵜ ⴳ ⵓⵙⵡⵉⵔ 0-{max_index}",
+    "invalid_operation": "Invalid operation (division by zero or non-integer result)"
+  },
+  "outcome": {
+    "win": "ⵅⴰⵜⴰⵔ! ⵉⵍⵍⴰ ⵓⵡⵜⵜⴰⵙ ⵏ ⵜⵉⴷⵜ: {target}",
+    "no_moves": "Ur ila ṭṭunen. Asfel aḥzaq: {best_value} (azmez: {target})",
+    "turn_limit": "Tuddsa n uṭṭunen tettwaxḍa. Asfel aḥzaq: {best_value} (azmez: {target})"
+  }
+}

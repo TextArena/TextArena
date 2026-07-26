@@ -1,0 +1,30 @@
+{
+  "_comment": "Cryptarithm locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the assignment token `[A 5]`, single letters, or digits.",
+  "_slots": {
+    "{letter}": "A puzzle letter, e.g. S or E",
+    "{digit}": "A digit 0-9",
+    "{used_letter}": "The letter that already claimed a digit",
+    "{assigned}": "How many letters are mapped so far",
+    "{total}": "Total number of distinct letters",
+    "{pct}": "Progress as a percentage string, e.g. 50%"
+  },
+  "player_prompt": {
+    "intro": "Map each letter to a unique digit so the arithmetic holds.\nAssign with `[A 5]`, re-assign anytime.\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Bad action format. Use `[A 5]`.",
+    "letter_not_in_puzzle": "ⵓⵔ ⵉⵍⵍⵉ ⵓⵡⵔⵉⴽ {letter} ⴳ ⵜⴱⵔⵣⴰ.",
+    "digit_used": "Digit {digit} already used by {used_letter}.",
+    "leading_zero": "ⵓⵔ ⵉⵥⴹⴰⵕ ⴰⴷ ⵉⴳ ⵓⵟⵟⵓⵏ ⴰⵎⵣⵡⴰⵔⵓ ⵏ ⵜⴳⵓⵔⵉ 0."
+  },
+  "outcome": {
+    "correct": "ⴰⵖⴷ! ⵜⴰⴳⴷⴰⵣⴰⵍⵜ ⵜⵜⵓⵢⴰⴼⴰ.",
+    "incorrect": "Mapping complete but equation incorrect.",
+    "limit": "ⵉⵍⴽⵎ ⵓⵡⵜⵜⵓ ⵏ ⵓⵎⵓⵙⵙⵓ."
+  },
+  "board": {
+    "mapping_header": "Mapping:",
+    "none_yet": "(ⵓⵔ ⵉⵍⵍⵉ ⴽⵔⴰ ⵙⵓⵍ)",
+    "assigned": "\nIwaliwen: {assigned}/{total} ({pct})"
+  }
+}

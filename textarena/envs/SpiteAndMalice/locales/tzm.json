@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Asenmel n uṭṭun:\n\n{board}\nIswi yen umsid: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- ⵜⵉⵖⵔⵎⵜ ⵏ ⵡⴰⵎⵎⴰⵙ -- ",
+    "pile": "{observation}Uṭṭun {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Tirbaḍt n Amseqraq {player_id} ---\n",
+    "payoff": "{observation}Uṭṭun n tɛezri (Taqṣit tameṣṣant): {top_card}, Addad n yimṣiden n uṭṭun n tɛezri: {payoff_length}\n",
+    "hand": "{observation}Afus: {hand}\n",
+    "discard": "{observation}Uṭṭunen n ussid: {discard}\n",
+    "empty": "Empty"
+  },
+  "game_message": {
+    "no_cards_left": "There are no more cards to draw from. Remember that you can play cards from these sources:\n  1. Your **hand**.\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "ⵜⴰⵍⵖⴰ ⵏ ⵓⵎⵓⵙⵙⵓ ⵓⵔ ⵜⵓⵙⵍⵉⴳ. ⴰⵎⵓⵔⴰⵔ {player_id} ⵓⵔ ⵢⵔⵏⴰ ⵙ ⵢⴰⵜ ⵜⵎⵀⵍⴰ ⵉⵣⵍⵉⵏ ⴳ ⵉⴽⵡⵍⴰⵏ ⵉⵎⴽⴽⴰⵍⵓⵜⵏ.",
+    "invalid_play": "Azwel n ussid ur yezmir. Amseqraq {player_id} yessken ad yessken {card} deg uṭṭun ameṣṣan {index}.",
+    "discard_from_payoff": "Invalid discard. Player {player_id} tried to discard a card from the payoff pile.",
+    "discard_not_in_hand": "Invalid discard. Player {player_id} tried to discard a card that is not in hand.",
+    "wrong_move_type": "ⴰⵏⴰⵡ ⵏ ⵜⵎⵀⵍⵜ ⵓⵔ ⵜⵓⵙⵍⵉⴷ. ⵓⵎⵓⵔⴰⵔ {player_id} ⵓⵔ ⵢⵔⵏⴰ ⵙ ⵢⴰⵏ ⵡⴰⵏⴰⵡ ⵏ ⵉⵎⵀⵉⵍ ⵉⵣⵍⵉⵏ."
+  },
+  "game_action": {
+    "you_drew": "You drew cards.",
+    "opponent_drew": "ⵢⵉⵡⵙ ⵓⵎⵓⵔⴰⵔ {player_id} ⴳ ⵓⴽⵕⴰⴹ.",
+    "you_played": "Tekfaḍ ad tsekneḍ {card} deg uṭṭun ameṣṣan {index}.",
+    "opponent_played": "Amseqraq {player_id} yessken {card} deg uṭṭun ameṣṣan {index}.",
+    "you_discarded": "Tekfaḍ ad tsekneḍ {card} ɣer uṭṭun n ussid {index}, d acu yettwaṭṭaf akken ad t-yesɛed aṭas n tikkelt. Ur yezmer ad yefk tikkelt nnek deg tikkelt-a. Amseqraq {next_player_id} ad ibedd deg tikkelt-nniḍen.",
+    "opponent_discarded": "Amseqraq {player_id} yessken {card} ɣer uṭṭun n ussid {index}, d acu yettwaṭṭaf akken ad t-yesɛed aṭas n tikkelt. Ur yezmer ad yefk tikkelt n Amseqraq {player_id} deg tikkelt-a. Amseqraq {next_player_id}, tekfaḍ ad tbeddeḍ. Af-d yiwet ar usnulfu-ik deg wumuḍan [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Amseqraq {current_player} yettwasleq aṭṭun n tɛezri! Amseqraq {current_player} yettwafeg!",
+    "deadlock_player_0": "Tettwabdeq tamurt! Amseqraq 0 yettwafeg deg tɛezri n yimṣiden {player_0_payoff} deg ussid maḍi d Amseqraq 1 s yimṣiden {player_1_payoff}.",
+    "deadlock_player_1": "Tettwabdeq tamurt! Amseqraq 1 yettwafeg deg tɛezri n yimṣiden {player_1_payoff} deg ussid maḍi d Amseqraq 0 s yimṣiden {player_0_payoff}.",
+    "deadlock_tie": "Tettwabdeq tamurt s waddad! Sin n imṣiqra yettwaṭṭfen deg yimṣiden {player_0_payoff}. Amseqraq {current_player} yettwafeg s waddad."
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Three-Player Tic Tac Toe.\nYour symbol is '{symbol}'.\nYou take turns placing your symbol on a 5x5 board to form a line of four.\nLines can be horizontal, vertical, or diagonal.\nSubmit your move using the format '[4]' to mark cell 4."
+  },
+  "board": {
+    "current_board": "Asenmel n uṭṭun:\n\n{board}\n\nIswi yenẓan: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "ⵓⵔ ⵉⴳⵉ ⵓⴽⵛⵓⵎ ⵏ ⵜⵍⵖⴰ. ⵙⵔⵙ \"[cell]\" ⴳ ⵡⴰⴷⴷⴰⴷ ⵏⵏⴰ ⴷⴰⵔ ⵜⴰⵡⵊⵉⵡⵉⵏ 0-{max_cell} .",
+    "out_of_range": "Aṭas n tcella yagi: {cell}. Ilhaq ad yili gar n 0 ed {max_cell}.",
+    "already_occupied": "ⵜⵍⵍⴰ ⵜⵖⵔⴰⵙⵜ {cell} ⵖⵓⵔⵙⵏ.",
+    "made_invalid": "Player {player_id} made an invalid move"
+  },
+  "game_action": {
+    "placed": "Anemlal {player_id} yettwaḥ ({symbol}) deg teɣzi ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Anemlal {player_id} ({symbol}) yettwassen!",
+    "draw": "The game is a draw!"
+  }
+}

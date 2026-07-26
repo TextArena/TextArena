@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "ⵜⴰⵖⴰⵔⵜ ⵏ ⵡⵓⵔⴰⵔ: {board}",
+    "valid_moves": "{observation}\nIɣmaren igran: {moves}",
+    "no_valid_moves_reset": "{observation} ⵓⵔ ⵉⵍⵍⵉ ⴽⵔⴰ ⵏ ⵓⵎⵓⵙⵙⵓ ⵉⵣⵔⴼⴰⵏ - ⵉⵖ ⵜⵔⵉⴷ ⴰⴷ ⵜⵙⵍⴽⵎ.",
+    "no_valid_moves_step": "{observation} ⵓⵔ ⵉⵍⵍⵉ ⴽⵔⴰ ⵏ ⵓⵎⵓⵙⵙⵓ ⵉⵣⵔⴼⴰⵏ  ⵉⵖ ⵜⵔⵉⴷ ⴰⴷ ⵜⵙⴱⵉⴷ.",
+    "scores_reset": "{observation}\nIsmilen imɣaren - Mɣribi: {black_count}, Iɣeln: {white_count}\n",
+    "scores_step": "{observation}\nIsmilen - Mɣribi: {black_count}, Iɣeln: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "ⵉⵇⵇⴰⵏ ⴷ ⴰⴷ ⵢⵉⵍⵉ ⵓⵎⵓⵙⵙⵓ ⵙ ⵡⴰⵎⴽ [row, col].",
+    "illegal": "ⵜⵉⴼⵍⵡⵉⵜ ⵓⵔ ⵉⵍⴳⵉⵏⵏ. ⵜⵉⵎⵀⴰⵍ ⵉⵣⵔⴼⴰⵏ: {valid}"
+  },
+  "game_action": {
+    "skipped": "Player {pid} had to skip their turn",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Player {pid} ({piece}) has no valid moves and must skip."
+  },
+  "outcome": {
+    "black_wins": "Mɣribi iraḍ {black_count}-{white_count}.",
+    "white_wins": "Iɣeln iraḍ {white_count}-{black_count}.",
+    "draw": "Tabadut {black_count}-{white_count}."
+  }
+}
