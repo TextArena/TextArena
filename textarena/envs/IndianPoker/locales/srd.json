@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Sei Giogadore {player_id} in una partita di Indian Poker.\n- Mazzo di 52 carte; vedi solo la carta dell'avversario.\n- Ante {ante} fiches ogni round, {max_rounds} round totali.\n- Mosse valide: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X è un intero positivo <= al tuo numero di fiches.)\n- La carta nascosta più alta vince il piatto allo showdown.\n"
+  },
+  "round": {
+    "announce": "### Round {current_round}/{max_rounds}\nLa carta dell'avversario è: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Fornisci esattamente UNA azione tra parentesi, ad es. '[check]', '[bet 2]', '[call]', '[raise 3]', o '[fold]'.",
+    "cannot_check": "Non si podet [check] - est una aposta.",
+    "amount_min": "Sa cantidade de sa puntada/de su crèschida depet èssere ≥ 1.",
+    "cannot_bet": "Non puoi [bet] - devi [call] / [raise] / [fold].",
+    "nothing_to_call": "Nothing to call; you may [check] instead.",
+    "no_bet_to_raise": "Utilizade [bet X] pro abèrrere; non b'at aposta de artziare.",
+    "insufficient": "Non bastant sos tzircùitos pro custa azione."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Sas atziones possìbiles tuas: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Giogadore {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Giogadore {player_id} est istadu abbandonadu.",
+    "showdown_win": "Iscàrriga: {card_win} batit su {card_lose}.",
+    "showdown_tie": "Su showdown est parigiadu: ambos {card}. Pot split  cada unu retzit {split}."
+  },
+  "outcome": {
+    "p0_wins": "Player 0 wins ({bank0} > {bank1})",
+    "p1_wins": "Giogadore 1 vince ({bank1} > {bank0})",
+    "draw": "Fichas uguales a pustis de totu sas rondas."
+  }
+}

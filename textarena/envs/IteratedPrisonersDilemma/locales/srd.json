@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ita Giogadore {player_id} in un Dilemma de su Prisoneru Iteradu chi spanniat {num_rounds} rundhos.\n\nIstruturas de su Giogu:\n- In antis de cada decizionu tenis {total_conversation_rounds} boltas pro comunicare lìberu.\n- A pustis de cuddu, ambas giogadores eligint simultaniamente a cooperare o a tradire.\n\nMatritzi de Pagamentu (fissa pro cada rundha):\n- Ambas Cooperant ➜ cada unu {cooperate_reward}\n- Ambas Tradint ➜ cada unu {mutual_defect_reward}\n- Unu Tradit, unu Cooperat ➜ Tradidore {defect_reward}, Cooperadore {sucker_reward}\n\nComu Giogare:\n- Durante sa cunversatzione: tìpia calisisiat testu chi desis.\n- Durante sa fase de decizionu: inclui '[Cooperate]' o '[Defect]' (insensìbile a sa maiùscula/minùscula). Podes azùnghere testu extra in antis o a pustis de su token."
+  },
+  "phases": {
+    "conversation_finished": "Cunversatzione acabbada pro sa rundha {round}. Replicare cun '[Cooperate]' o '[Defect]' in \\boxed{{}}.",
+    "starting_round": "--- Ronda de cumintzu {round} ---",
+    "round_summary": "Resultados de sa rundha {round}:\n{outcome}\nGiogadore 0 atzetadu {r0} (totale {score_0}), Giogadore 1 atzetadu {r1} (totale {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "Parigi! Ambos giogadores ant fatu su gol {s0}.",
+    "round_both_cooperate": "Sos duos giogadores ant collaboradu.",
+    "round_both_defect": "Ambos sos giogadores sunt disertados.",
+    "round_p0_cooperates_p1_defects": "Su giogadore 0 at collaboradu, su giogadori 1 est disertadu.",
+    "round_p0_defects_p1_cooperates": "Su giogadore 0 at disertadu, su giogadori 1 at collaboradu."
+  }
+}

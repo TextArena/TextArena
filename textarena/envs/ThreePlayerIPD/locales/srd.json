@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Sei Giocatore {player_id} in un Iterated Prisoner's Dilemma a 3 giogadores. Sa partita durat {num_rounds} turnos.\nIstrutzione de su turnu:\n• {conv_rounds} turnos de chat lìberu\n• 1 turnu de decìsione - imbia unu token pro onni aponente: '[<opp-id> cooperate]' o '[<opp-id> defect]' (a esèmpiu '[1 defect] [2 cooperate]'; su prusau è 'cooperatzione'). \nMatrize de pagamentu pro pare (aplicada a onni pare disordinadu):\n  - Ambos cooperant  ->  {reward}\n  - Ambos si nd'ant a su mare     ->  {punishment}\n  - Tu te nd'as a su mare, issos cooperant -> {temptation}\n  - Tu cooperas, issos si nd'ant a su mare -> {sucker}\nSu giogadore(s) cun su prus artu puntiziu a sa fine de totu sos turnos binchet."
+  },
+  "round": {
+    "start": "─── Initziat su Turnu {round} ───\tPodes cunversare lìberu pro sos {conv_rounds} turnos a benìre.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Ronda {round} - Resurtados:",
+    "pair_line": "{observation}\n\t Giocatore {i} vs Giocatore {j} at eligìu de {choice_i} e {choice_j} respetivamente (Giocatore {i} at guadagnau {gain_i}, Giocatore {j} at guadagnau {gain_j})",
+    "scores_open": "{observation}\n-> Current scores: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Giocatore {player_id} ({score})",
+    "finalize": "{observation}  sa de su tzentru-meridianu"
+  },
+  "outcome": {
+    "final": "Final scores: {scores}.  Ranking groups (worst→best): {groups}"
+  }
+}

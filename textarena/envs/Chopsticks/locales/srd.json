@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in Chopsticks. Al tuo turno, scegli uno di:\n  + Attacca:  '[attack M O]'  dove M=la tua mano (0 o 1), O=la mano dell'avversario (0 o 1).\n    - Il conteggio della mano dell'avversario aumenta del valore della tua mano; se >=5, diventa 0.\n  + Dividi:   '[split L R]'  per ridistribuire il totale delle dita nella mano sinistra e destra (L+R = il tuo totale).\nRispondi con esattamente uno di quei comandi."
+  },
+  "board": {
+    "current_board": "Tavoliere attuale:\nGiocatore 0: {hands_0}\nGiocatore 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Your hand {my_idx} is dead.",
+    "opp_hand_dead": "Sa manu de s'aversàriu {opp_idx} est giai morta.",
+    "split_sum": "S'ispartzidura depet summare a {total}.",
+    "split_no_change": "S'ispartzidura depet cambiare sa distributzione de sas manos tuas.",
+    "invalid_command": "Mossa non valida. Usa “[attack M O]” o “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} attacks P{opp_id}’s hand {opp_idx}: it goes from {opp_val} to {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Sas duas manos de s'aversàriu sunt mortas.",
+    "draw": "Su lìmite de curva est istadu cròmpidu."
+  }
+}

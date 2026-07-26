@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Tzes playing Klondike Solitaire. Su tu obiettivu est de mossu totu sas cartas a sas pilas de fundatzione.\n\nRegulas de jocu:\n- Pilas de fundatzione (F1-F4): Costrui su da As a Re in suit\n- Pilas de tableau (T1-T7): Costrui giù alternande colores (ruju in nieddu, nieddu in ruju)\n- Stock: Draw cartas a pila de scartu\n- Scartu (W): Carta in altu disponibule pro jocu\n\nComandos:\n- 'draw' - Draw cartas da stock a scartu\n- 'move <source> <destination> [count]' - Mossu cartas tra pilas\n  Esempios: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Contu podet esser 'all', chi atentat de mossu totu sas cartas a sa lutz.\n- 'forfeit' - Acabai su jocu in manera immediata e blocat su puntuatzione attuale\n- Nomes de pila: W (scartu), F1-F4 (fundatziones), T1-T7 (tableau)\n\nPodes eseguire multiple aziones in unu turnu separande-las cun virgulas:\n  Esemplu: 'draw, move W T1, move T2 F1'\n\nSolu Re poden esser posizionados in pilas de tableau vazias.\nAzione eseguen in ordine - si una fallit, sas aziones rimanentes sunu saltadas.\nImprea 'forfeit' si crees chi su jocu est impossibule de binchere."
+  },
+  "format_error": {
+    "no_brackets": "Formadu de atzione non vàlidu. S'atziones depent èssere in parentesias.",
+    "no_closing_bracket": "Formadu de atzione non vàlidu. Mancat sa parentesi chi serrat \"]\"",
+    "empty_command": "Cumandu bòidu. Iscrie \"draw\" o \"move <source><destination> [count]\".",
+    "empty_action": "Atzione bòida",
+    "move_needs_args": "Su cumandu move rechedet una fonte e unu destinu. Utilizatzione: 'move <source> <destination> [count]'",
+    "count_positive": "Su contu depet èssere positivu o \"totu\"",
+    "count_invalid": "Contare invalidu. Imprea unu nùmeru o \"totu\"",
+    "unknown_command": "Comandu iscitu '{cmd}'. Imprea 'draw', 'move <source> <destination> [count]', o 'forfeit'",
+    "wrapped": "Azione {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Azione {n}: {msg}",
+    "before_failure": "Esegutadu {n} atzione (s) prima de su fallimentu.",
+    "failed": "Azione {n} fallida: {msg}"
+  },
+  "move_result": {
+    "drew": "At leadu sa carta de sos iscavos dae s'istàccu a su refudu.",
+    "cannot_draw": "Non si podet tirare. Sia su stoccaggio siat sos refudos sunt lìberos.",
+    "invalid_pile": "Nòmene de pila non vàlidu. Imprea W, F1-F4, o T1-T7",
+    "foundation_one_card": "Podet mòvere petzi 1 carta a sa fundatzione.",
+    "waste_to_foundation_ok": "Carte mòvida dae su refudu a sa fundatzione F{dst}",
+    "waste_to_foundation_bad": "Non si podet mòvere sa carta de iscadèntzia a cussa pila fundamentu.",
+    "tableau_to_foundation_ok": "Mossu carta da tableau T{src} a fundatzione F{dst}",
+    "tableau_to_foundation_bad": "Non si podet mòvere sa carta de su cuadru a cussa pila fundatzione.",
+    "foundation_to_foundation": "Non si podet mòvere dae fundamentu a fundamentu.",
+    "waste_to_tableau_one_card": "Podet mòvere petzi 1 carta dae su refudu a sa tàula.",
+    "waste_to_tableau_ok": "Carte mòvida dae su refudu a sa tàula T{dst}",
+    "waste_to_tableau_bad": "Non si podet pònnere sa carta de iscadèntzia in cussa pila a tàula.",
+    "no_face_up": "No b'at cartas a cara in artu pro si mòere.",
+    "tableau_to_tableau_ok": "Mossu {count} carta(s) da tableau T{src} a T{dst}",
+    "tableau_to_tableau_bad": "Impossibule mossu {count} carta(s) da T{src} a T{dst}",
+    "foundation_to_tableau_one_card": "Podet mòvere petzi una carta dae sa base a su tableau.",
+    "foundation_empty": "Sa fundatzione F{src} est bòida.",
+    "foundation_to_tableau_ok": "Mossu carta da fundatzione F{src} a tableau T{dst}",
+    "foundation_to_tableau_bad": "Non si podet pònnere sa carta de fundatzione in su cuadru T{dst}",
+    "to_waste_or_stock": "Non si podet mòvere a is refudos o a s'istàccu."
+  },
+  "outcome": {
+    "forfeit": "Sa partida est pèrdida. Su puntu finale: {score} cartas in fundamentos.",
+    "won": "Gratzias, as binchidu su Klondike Solitaire!",
+    "turn_limit": "Jocu terminadu! As arrivau a su massimu de {max_turns} turnos. Puntuatzione: {score} cartas in fundatziones."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE === Su nùmene de su film est \"Klondique Solitaire\".",
+    "turn": "Turnu: {turn}/{max_turns}",
+    "stock": "Istùdiu: {stock} carteddas",
+    "waste": "Waste (W): {waste}",
+    "foundations_header": "Fundatziones:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabella: ispetàculu de su sistema.",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Tu ses Giocatore {player_id} in Stratego.\nSu tuu obiettivu est catturare sa bandera de su opponenti o eliminare totu sas pezzas mossabiles.\nS'armada tua est stata posta pro te in su tabuladu, inclùdidu sa bandera, sas bombas e àteras pezzas de grados variados.\n\n### Istrutziones de giogu\n1. **Regolas de movimentu:**\n   - In sa tua borta, podes movè una pezza de unu passu a una quadra adjacente (in susu, in josu, a manu manca o a manu dereta) chi est giai occupada cun pezzas tuas.\n   - Esèmpiu: Una pezza podes movè da A1 a B1 o A1 a A2 si B1 e A2 no sunt postas cun pezzas tuas.\n   - Si sa pezza selezionada est una bomba o una bandera, no podes movè la.\n2. **Battallas:**\n   - Si tu movis in una quadra occupada da una pezza de su opponenti, tando una battalla acontesset:\n     - Sa pezza cun su gradu superiori binchet e eliminat sa pezza de su opponenti.\n     - Si sos grados sunt ugualis, ambas pezzas sunt eliminadas da su tabuladu.\n     - **Casus speciales:**\n       - Sas bombas eliminant totu sas pezzas attaccantis a foras de sos minatores, chi podent disinnescare sas bombas.\n       - Sos spias podent binchere su maresciallu si su spia attaccat primu, ma pèrdent cun totu sàteras pezzas.\n3. **Obiettivos estratègicos:**\n   - Identificare sas pezzas de su opponenti attraversu sos movimentos e sas battallas.\n   - Protègere sa bandera tua mentras tentas de catturare sa bandera de su opponenti.\n   - Usare sos scout strategicamente pro otènnere informatziones subra sas pezzas de su opponenti e attaccare sas pezzas dèbiles.\n\n### Comu fàghere unu movimentu:\n1. Specìfica sos coordinados de sa pezza chi desìas movè e su destinu.\n2. Usare su formatu: [A0 B0], in ue A0 est sa positzione de orìgine e B0 est sa positzione de destinu.\n   - Esèmpiu: Pro movè una pezza da sa riga 0, colonna 0 a sa riga 1, colonna 0, inputa [A0 B0].\n3. Assegùrate chi su destinu est vàlidu segundu sas regolas de movimentu in susu.\n\n### Notas importantes:\n- Su tabuladu amostat sas pezzas tuas e sas positziones, p. ex. MN, MS.\n- Su tabuladu amostat puru sas positziones connotas de sas pezzas de su opponenti senza revelare sos grados, p. ex. ?.\n- Sas grìgias cun ~ sunt lagus e no podes movè in ie.\n- Comu suggerimentu, incìpiatu su giogu movende sas pezzas tuas chi sunt in sa prima linea pro otènnere informatziones subra sas pezzas de su opponenti. Sa prima linea de su giocatore 0 e de su giocatore 1 est sa riga D e G rispetivamente.\n\nEccu su istadu attuale de su tabuladu:\n"
+  },
+  "board": {
+    "current_board": "Tavola attuale:\n\n{board}\nMossas disponibiles: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formadu de atzione invàlida. Giogadore {player_id} no at imbiadu una mossa in su formatu [A0 B0] .",
+    "invalid_coordinates": "Formadu de atzione non vàlidu. Giogadore {player_id} no at imbiadu coordinadas bàlidas.",
+    "not_own_piece": "Formadu de atzione non vàlidu. Giogadore {player_id} depet mòvere unu de sos pees suos.",
+    "scout_through_pieces": "Formadu de atzione non vàlidu. Giogadore {player_id} no podet mòvere unu iscout pro mèdiu de àteras piàzas.",
+    "scout_diagonal": "Invalid action format. Player {player_id} cannot move a scout diagonally.",
+    "non_scout_multi_square": "Formatzione de atzione non vàlida. Sas piàghinas, foras dae sos iscavos, podent mòvere solu una casella a sa borta.",
+    "move_into_lake": "Formadu de atzione non vàlidu. Giogadore {player_id} no podet intrare in su lagu.",
+    "move_onto_own_piece": "Formadu de atzione non vàlidu. Giogadore {player_id} no podet mòvere in su pezzu suo.",
+    "move_bomb_or_flag": "Formadu de atzione invàlidu. su giogadore {player_id} non podet mòvere una bomba o bandera."
+  },
+  "game_action": {
+    "you_moved": "Tu hai mossu sa tua pezza da {source} a {dest}.",
+    "opponent_moved": "Giocatore {player_id} ha mossu una pezza da {source} a {dest}.",
+    "you_equal_ranks": "Tu hai mossu sa tua pezza da {source} a {dest}. Sa pezza attaccante fiat {attacking_rank} e sa pezza de destinu fiat {target_rank}. Comu sos grados sunt ugualis, ambas pezzas sunt pèrdidas.",
+    "opponent_equal_ranks": "Giocatore {player_id} ha mossu una pezza da {source} a {dest}. Sa pezza attaccante fiat {attacking_rank} e sa pezza de destinu fiat {target_rank}. Comu sos grados sunt ugualis, ambas pezzas sunt pèrdidas.",
+    "you_miner_defused": "Tu hai mossu sa tua pezza da {source} a {dest}. Sa pezza attaccante fiat {attacking_rank} e sa pezza de destinu fiat {target_rank}. Comu sos minatores podent disinnescare bombas, hai bintu sa battalla.",
+    "opponent_miner_defused": "Giocatore {player_id} ha mossu una pezza da {source} a {dest}. Sa pezza attaccante fiat {attacking_rank} e sa pezza de destinu fiat {target_rank}. Comu sos minatores podent disinnescare bombas, hai pèrdidu sa battalla.",
+    "you_bomb_lost": "Tu hai mossu sa tua pezza da {source} a {dest}. Sa pezza attaccante fiat {attacking_rank} e sa pezza de destinu fiat {target_rank}. Comu s'attaccante no est unu minatore, hai pèrdidu sa battalla.",
+    "opponent_bomb_won": "Giocatore {player_id} ha mossu una pezza da {source} a {dest}. Sa pezza attaccante fiat {attacking_rank} e sa pezza de destinu fiat {target_rank}. Comu s'attaccante no est unu minatore, hai bintu sa battalla.",
+    "you_spy_won": "Tu hai mossu sa tua pezza da {source} a {dest}. Sa pezza attaccante fiat {attacking_rank} e sa pezza de destinu fiat {target_rank}. Comu s'attaccante est unu spia e su destinu est unu maresciallu, hai bintu sa battalla.",
+    "opponent_spy_lost": "Giocatore {player_id} ha mossu una pezza da {source} a {dest}. Sa pezza attaccante fiat {attacking_rank} e sa pezza de destinu fiat {target_rank}. Comu s'attaccante est unu spia e su destinu est unu maresciallu, hai pèrdidu sa battalla.",
+    "you_higher_won": "Tu hai mossu sa tua pezza da {source} a {dest}. Sa pezza attaccante fiat {attacking_rank} e sa pezza de destinu fiat {target_rank}. Comu s'attaccante est unu gradu superiori a su destinu, hai bintu sa battalla.",
+    "opponent_higher_lost": "Giocatore {player_id} ha mossu una pezza da {source} a {dest}. Sa pezza attaccante fiat {attacking_rank} e sa pezza de destinu fiat {target_rank}. Comu s'attaccante est unu gradu superiori a su destinu, hai pèrdidu sa battalla.",
+    "you_lower_lost": "Tu hai mossu sa tua pezza da {source} a {dest}. Sa pezza attaccante fiat {attacking_rank} e sa pezza de destinu fiat {target_rank}. Comu s'attaccante est unu gradu inferiori a su destinu, hai pèrdidu sa battalla.",
+    "opponent_lower_won": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a lower rank than the destination, you won the battle."
+  },
+  "outcome": {
+    "flag_captured": "Su giogadore {player_id} at pigadu sa bandera de s'aversàriu!",
+    "no_movable_pieces": "Giocatore {winner_id} binchet! Giocatore {loser_id} no tenet pius pezzas mossabiles."
+  }
+}

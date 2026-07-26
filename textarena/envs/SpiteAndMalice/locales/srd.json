@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Tavola Corrente:\n\n{board}\nMossas Disponibiles: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Piles de tzentru --- ",
+    "pile": "{observation}Mucchio {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vista del Giocatore {player_id} ---\n",
+    "payoff": "{observation}Mucchio di Pagamento (Carta in Cima): {top_card}, Lunghezza del Mucchio di Pagamento: {payoff_length}\n",
+    "hand": "{observation}Mano: {hand}\n",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "Prenu de nudda"
+  },
+  "game_message": {
+    "no_cards_left": "Non b'at prus cartas de iscarrigare. Ammentade chi podides giogare sas cartas dae custas fontes: 1. Sa manu tua 2. Su primu cartone de sa pila paga 3. Su primu cartu de cale si siat muntella scartada. ️"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatzione de mossa non vàlida. Giogadore {player_id} no at rispòndidu cun una mossa bàlida in parentesi cuadrada.",
+    "invalid_play": "Gioco non valido. Il Giocatore {player_id} ha cercato di giocare {card} sul mucchio centrale {index}.",
+    "discard_from_payoff": "Discartu invàlidu. Giogadore {player_id} at proadu a discarrigare una carta dae sa pila de pagamentu.",
+    "discard_not_in_hand": "Discartu invàlidu. Giogadore {player_id} at proadu a discarrigare una carta chi no est in manu.",
+    "wrong_move_type": "Tipu de mossa invàlida. Giogadore {player_id} no at rispòndidu cun unu tipu de mossu vàlidu."
+  },
+  "game_action": {
+    "you_drew": "T'as ispartu sas cartas.",
+    "opponent_drew": "Su giogadore {player_id} at tiradu cartas.",
+    "you_played": "T'as giogadu {card} in sa pila tzentrale {index}.",
+    "opponent_played": "Giocatore {player_id} ha giocato {card} sul mucchio centrale {index}.",
+    "you_discarded": "Hai scartato {card} al mucchio di scarto {index}, cosa che significa anche che hai finito il tuo turno. Non saranno considerate ulteriori azioni tue per questo turno. Il Giocatore {next_player_id} andrà dopo.",
+    "opponent_discarded": "Giocatore {player_id} ha scartato {card} al mucchio di scarto {index}, cosa che significa anche che ha finito il suo turno. Non saranno considerate ulteriori azioni del Giocatore {player_id} per questo turno. Giocatore {next_player_id}, sarà il tuo turno. Per favore, inserisci la tua azione nel formato [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Il Giocatore {current_player} ha finito il suo mucchio di pagamento! Il Giocatore {current_player} vince!",
+    "deadlock_player_0": "Stallo raggiunto! Il Giocatore 0 vince con {player_0_payoff} carte rimanenti contro le {player_1_payoff} carte del Giocatore 1.",
+    "deadlock_player_1": "Stallo raggiunto! Il Giocatore 1 vince con {player_1_payoff} carte rimanenti contro le {player_0_payoff} carte del Giocatore 0.",
+    "deadlock_tie": "Stallo raggiunto con pareggio! Entrambi i giocatori hanno {player_0_payoff} carte rimanenti. Il Giocatore {current_player} vince per default."
+  }
+}

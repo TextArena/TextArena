@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Su giogu incumintzat. Seme de trummu: {trump_suit} (carta de trummu: {trump_str}).",
+    "no_trump_card": "nudda de su totu"
+  },
+  "player_prompt": {
+    "intro": "Ita Giogadore {player_id} in Whist tedescu.\n{phase_info}\nTenita {hand_size} cartas.\nGioga una carta cun '[play N]', in ue N est su positzione in sa manu (pro esempiu '[play 3]').",
+    "phase_learning": "FASE DE APRENDIMENTU: su chi binchet de cada isfida pigat sa carta a cara e su pèrdidu tirat s'àtera cartedda dae su mazore. Is fadas bìnchidas in custa fase non contant pro sa vitòria.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "No est istada oferida peruna carta - sa fase de giogu at incumentzadu.",
+    "deck_empty": "Su ponte est bòidu - non s'agatat peruna carta.",
+    "available": "Carte in oferta: {card}",
+    "available_trump": "Sa carta de iscritu: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Formadu de mossa non vàlidu. Utilizade '[play N]' pro giogare sa N-a carta in manu vostra.",
+    "bad_position": "Custa positzione de sa carta no esistit. Tenes {hand_size} cartas.",
+    "must_follow_suit": "You must follow suit and play a {lead_suit} card.",
+    "invalid_play": "Custa carta non si podet giogare."
+  },
+  "game_action": {
+    "played": "Player {player_id} played {card}."
+  },
+  "trick": {
+    "won": "Su giogadore {winner_id} binchet su trigu cun {card}.",
+    "won_learning": "Giogadore {winner_id} binchit sa brinca cun {card} e pigat sa carta a sa vista."
+  },
+  "phase": {
+    "learning_complete": "Sa fase de imparamentu est acabada - cada tretu chi abarrat contat pro sa vitòria."
+  },
+  "draw": {
+    "winner_received": "As bintu su truccu e as retzidu {card}.",
+    "loser_received": "You lost the trick and drew {card} from the deck.",
+    "winner_preview": "Sa pròssima carta in oferta est {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tricks won so far - Player 0: {tricks0}, Player 1: {tricks1}",
+    "scores_playing": "Puntos de brincas - Giogadore 0: {tricks0}, Giogadore 1: {tricks1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Fase: {phase} ({remaining_cards} cartas abarradas in su mazzu)"
+  },
+  "hand": {
+    "no_cards": "No b'at carteddos.",
+    "no_cards_in_hand": "No tenes in manu sas cartas.",
+    "header": "Sa manu tua:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "No ant a èssere giogadas sas cartas pro custu truccu.",
+    "header": "Current trick:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Sa partida no est cumintzada.",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nFase: {phase}",
+    "trump_suit": "{observation}\nTrump suit: {trump_suit}",
+    "trump_card": "{observation}\nTrump card: {card}",
+    "cards_left": "{observation}\nCards left in deck: {count}",
+    "next_card": "{observation}\nNext card for winner: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nCurrent trick:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Giogadore {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nGiogadore {player_id}: {scoring} puntos de brincas ({tricks} totale), {hand_size} cartas in manu"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}
