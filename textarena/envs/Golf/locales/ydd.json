@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "דו שפּילסט גאָלף (קאַרט-שפּיל) - שפּילער {player_id}.\nציל: באַקומען דעם נידריגסטן סך-הכּל-סקאָר אין דעם איין-רונד.\nאויב קאָלומנעס טיילן די זעלבע ווערט, זענען זיי צוזאַמענגעפֿירט ווי 0.\nקאַרט-ווערטן: A=1, 2-10=פּנים-ווערט, J/Q=10, K=0\n\nאַקציעס (ניצן גענוי געקלאַמטע):\n- '[draw]' - ציען פֿון דעם דעק\n- '[take]' - נעמען פֿון דעם אַוועקוואָרפֿ-שטאָק\n- '[swap X Y]' - אָיסטוישן דעם געצויגענעם קאַרט מיט פּאָזיציע X (רייע) Y (קאָלומנע)\n- '[discard]' - אַוועקוואָרפֿן דעם געצויגענעם קאַרט"
+  },
+  "board": {
+    "drew": "דו האָסט אַרויסגעצויגן: {card}\nיעצט מוזטו [swap X Y] אָדער [discard] עס.",
+    "took": "דו האָסט גענומען: {card} פֿון דעם אַוועקוואָרפֿ-שטאָק\nדו מוזט [swap X Y] מיט עס (קען נישט אַוועקוואָרפֿן).",
+    "peeked": "דו האָסט געקוקט אויף פּאָזיציע ({row},{col}): {card}",
+    "turn_view": "דיין האַנט:\n{hand}\nאַוועקוואָרפֿ-שטאָק: {discard}\n{options}",
+    "none": "קיין איין."
+  },
+  "options": {
+    "final_turns": "פֿינאַלע טורן! דיינע אָפּציעס: [draw], [take], [peek X Y]",
+    "draw": "דיינע אָפּציעס: [draw], [take]",
+    "must_swap": "איר מוזט: [swap X Y] (קענען נישט אָפּוואַרפן קאַרדס פון פאַרווארפען הויפן)",
+    "swap_or_discard": "דו מוזט: [swap X Y] אָדער [discard]"
+  },
+  "hand": {
+    "no_cards": "קיין קאַרדס.",
+    "header": "קאָל: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "שפּילער {pid} האָט אָיסגעטוישט {new} מיט {old} בייַ פּאָזיציע ({row},{col})",
+    "discarded": "שפּילער {pid} האָט אַוועקגעוואָרפֿן {card}"
+  },
+  "message": {
+    "deck_empty": "די דעק איז ליידיק! דער שפּיל ענדיקט זיך גלײַך.",
+    "knocked": "שפּילער {pid} געטראָפֿן! יעדער אַנדערע שפּילער באַקומען נאָך איין מאָל.",
+    "final_round": "שפּילער {pid} {reason}! יעדער אַנדער שפּילער באַקומט נאָך איין טור."
+  },
+  "reason": {
+    "all_revealed": "האָט אַלע קאַרדס אַנטפּלעקט?"
+  },
+  "invalid": {
+    "wrong_action": "ניצן גענוי איין געקלאַמטע אַקציע: [draw], [take], [swap X Y], [discard], [knock], אָדער [peek X Y]",
+    "discard_empty": "דער אָפּזאָגן-הויל איז ליידיק!",
+    "must_draw_first": "דו מוזט ערשט [draw], [take], [knock], אָדער [peek X Y]",
+    "cannot_discard_taken": "איר קענט נישט אָפּוואַרפן אַ קאָרט וואָס איז גענומען פֿון דעם \"פֿרײַסן־קויל‟. איר מוז עס פֿאַרבייַטן.",
+    "have_drawn_card": "דו האָסט אַרויסגעצויגן אַ קאַרט. דו מוזט [swap X Y] אָדער [discard] עס.",
+    "need_drawn_swap": "איר דאַרפֿן אַ געצויגן קאָרט צו וועקסל.",
+    "need_drawn_discard": "You need a drawn card to discard.",
+    "out_of_bounds": "פּאָזיציע אויסער גרענעצן. ניצן רייע 1-{max_row}, קאָלומנע 1-{max_col}",
+    "knock_with_card": "דו קענסט נישט קלאפן מיט א געצויגןער קארטל. דער ערשטער טורן איז פארענדיגט.",
+    "already_knocked": "עמעצער האָט שוין געטראָפֿן דעם רונדע.",
+    "already_revealed": "די קאָרט איז שוין אַנטפּלעקט!"
+  },
+  "summary": {
+    "full": "שפּיל איבער! שפּילער {winner} געווינט מיט אַ סקאָר פֿון {score} פּונקטן!\n\nפֿינאַלע סקאָרן:\n{scores}",
+    "line": "שפּילער {pid}: {score} פּונקטן\n"
+  },
+  "board_str": {
+    "title": "=== גאָלף שפּיל ===",
+    "discard": "אָפּוואַרפן הויפן: {card}",
+    "knocked": "דער שפּילער {pid} האָט געטראָקנט!",
+    "player_header": "שפּילער {pid} (סקאָר: {score}):"
+  }
+}

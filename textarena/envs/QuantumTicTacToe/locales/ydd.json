@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ir zent Shpiler {player_id} in Kvantn Tic Tac Toe.\nAyen simbol iz '{symbol}', un ayer ruch numer iz aybolt {parity} (azoy vi, X1, X3 oder O2, O4).\n\nTsiel: Geyn a line fun dray klasish marks (solidifirt fun superpozitsyes).\n\nVi tsu shpiln:\n- Af yeder ruch, legt a spuk mark in tsvey andere leere kvadratn mitn format '[a,b]'.\n- Di marks zenen entangled, un gelabelt vi 'X1 / X1' oder 'O4 / O4'.\n- Ir kent nit legen spuk marks in a kvadrat vos iz shoyn tselakht (solidifirt).\n\nTsellekht Reygel:\n- Az ir ruch shafn a tsikl in dem entanglement graf, es tsellekht automatish.\n- Yeder spuk mark in dem tsikl vern a klasisher mark in eyn fun zayne tsvey pozitsyes.\n- Aybik dependent spuk marks tsellekht oykh.\n\nZig:\n- Di shpil endet ven a shpiler hot dray klasish marks in a line.\n- Az beyde shpilers kriegen a line bay di zelts tsellekht, di eyn mit di nideriker maks ruch numer zig.\n\nExample ruch: '[0,4]' legt a spuk mark in tselder 0 un 4."
+  },
+  "board": {
+    "current_board": "Kvantn Tic Tac Toe Bret:\n\n{board}\n\nShikt ayer ruch als '[a,b]' tsu legen a kvantn mark in tsvey ortn."
+  },
+  "invalid_move": {
+    "wrong_format": "אומגילטיק פֿאָרמאַט. ניצן \"[a,b]\".",
+    "invalid_cells": "אומגילטיק אָדער דופּליקאַט צעל אינדעקס.",
+    "already_solidified": "איינער פֿון די צעלער איז שוין פֿאַרקלעפּלט."
+  },
+  "game_action": {
+    "placed": "Shpiler {player_id} hat gelegt zayn simbol in a superpozitsye tsivishn tselder {pos_a} un {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Dependent superpozitsye iz geleyzt. Tselle ({r}, {c}) iz itst {symbol}.",
+    "last_cell_resolved": "Superpozitsye far letstn tselle iz geleyzt. Tselle ({r}, {c}) iz itst {symbol}.",
+    "superposition_resolved": "Superpozitsye iz geleyzt. Tselle ({r}, {c}) iz itst {symbol}."
+  },
+  "outcome": {
+    "win": "דער שפּילער {player_id} געווינט מיט סאָלידיפיצירטע מאַרקס!",
+    "draw": "The game is a draw!"
+  }
+}

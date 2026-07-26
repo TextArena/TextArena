@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Ir shpilt Klondike Solitaire. Ayer tsil iz tsuriktsien ale kartn tsu di fondatsye haypen.\n\nShpil regeln:\n- Fondatsye haypen (F1-F4): Bauen oyf fun Ace tsu King in kolir\n- Tabel haypen (T1-T7): Bauen arop alternativ kolirn (royt af shvarts, shvarts af royt)\n- Stok: Tsien kartn tsu vayt-pile\n- Vayt (W): Di oberste kartn iz barayt far shpil\n\nKomandn:\n- 'tsien' - Tsien kartn fun stok tsu vayt\n- 'riren <kval> <tsil> [count]' - Riren kartn tsivishn haypen\n  Ekzempeln: 'riren W T1', 'riren T1 F2', 'riren T3 T5 2'. Di tsahl ken oykh zayn 'ale', vos vet probirn tsuriktsien ale ongedekte kartn.\n- 'farliren' - Endn di shpil onmiten un shlosn ayer aktueln balmel\n- Haypn nemen: W (vayt), F1-F4 (fondatsyes), T1-T7 (tabel)\n\nIr ken eksekutern mehredike aktsyes in ayn tur durkh tsaytn mit komyen:\n  Ekzempel: 'tsien, riren W T1, riren T2 F1'\n\nNarishkeyt ken nor vayzn zikh af leydike tabel haypen.\nAktsyes eksekutern in ordn - ven eyns feylt, di ibergibene aktsyes vern ibergegangen.\nNutzen 'farliren' ven ir gaybn, az di shpil iz onmeglikh tsu gayn."
+  },
+  "format_error": {
+    "no_brackets": "אומגילטיקע קאַמף פֿאָרמאַט. אַקציע זאָל זיין אין בראַקאַץ.",
+    "no_closing_bracket": "אומגילטיק קאַמף פֿאָרמאַט. פעלנדיק קלאָוזינג בראַקעט ']'",
+    "empty_command": "ליידיק באַפֿעל. טייפּ \"ציען\" אָדער 'וועג <סאָורסע> <דעסטיניישאַן> [count]'",
+    "empty_action": "ליידיק קאַמף",
+    "move_needs_args": "מאָוו קאַמאַנד ריקווייערז מקור און דעסטיניישאַן. באַניץ: 'מייַך <סאָרסע> <דעסטינאַציע> [count]'",
+    "count_positive": "ציילן מוזן זיין positive אָדער \"אַלע\"",
+    "count_invalid": "אומגילטיקע ציילונג. ניצן אַ נומער אָדער \"אַלע\"",
+    "unknown_command": "Unknown command '{cmd}'. Use 'draw', 'move <source> <destination> [count]', or 'forfeit'",
+    "wrapped": "Aktsye {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Aktsye {n}: {msg}",
+    "before_failure": "עקסעקוטאַד {n} קאַמף ((s) איידער דורכפאַל.",
+    "failed": "Aktsye {n} iz gefeylt: {msg}"
+  },
+  "move_result": {
+    "drew": "ציען קאָרט (ס) פון לאַגער צו וויסט.",
+    "cannot_draw": "מע קען נישט ציען. ס׳איז ליידיג סיי אין סטאק, און סיי אין וויסט.",
+    "invalid_pile": "ניט גילטיק פּייל נאָמען. ניצן W, F1-F4, אָדער T1-T7",
+    "foundation_one_card": "קענען נאָר מאַך 1 קאָרט צו יסוד",
+    "waste_to_foundation_ok": "אריבערגעפארן קאַרטל פון וויסט צו יסוד F{dst}",
+    "waste_to_foundation_bad": "קענען ניט מאַך וויסט קאָרט צו אַז יסוד הויפן",
+    "tableau_to_foundation_ok": "Gerirt kartn fun tabel T{src} tsu fondatsye F{dst}",
+    "tableau_to_foundation_bad": "קען נישט מאַך טאַבלעוואָ קאָרט צו אַז יסוד הויפן",
+    "foundation_to_foundation": "קען נישט מאַך פון יסוד צו יקער",
+    "waste_to_tableau_one_card": "קענען נאָר מאַך 1 קאָרט פון וויסט צו טאַבלעאַ.",
+    "waste_to_tableau_ok": "אריבערגעפארן קאַרטל פון וויסט צו טיש T{dst}",
+    "waste_to_tableau_bad": "קען נישט שטעלן אָפּפאַל קאָרט אויף אַז טאַבלע הויפן",
+    "no_face_up": "קיין אויפֿגעקוקטע קאַרדס צו באַוועגן.",
+    "tableau_to_tableau_ok": "Gerirt {count} kartn(s) fun tabel T{src} tsu T{dst}",
+    "tableau_to_tableau_bad": "Ken nisht riren {count} kartn(s) fun T{src} tsu T{dst}",
+    "foundation_to_tableau_one_card": "קענען נאָר מאַך 1 קאָרט פון יסוד צו טאַבלע",
+    "foundation_empty": "פונדאַציע F{src} איז ליידיק.",
+    "foundation_to_tableau_ok": "Gerirt kartn fun fondatsye F{src} tsu tabel T{dst}",
+    "foundation_to_tableau_bad": "קען נישט שטעלן יסוד קאָרט אויף טאַבלע ט{dst}",
+    "to_waste_or_stock": "קען נישט אַריבערפירן צו וויסט אָדער לאַגער."
+  },
+  "outcome": {
+    "forfeit": "שפּיל פֿאַרפאַלן. לעצט כעזשבן: {score} קאַרדס אין יסודות.",
+    "won": "מזל טוב! איר האָט געווינען קלאָנדייק סאָלאַטיירע.",
+    "turn_limit": "Shpil iz over! Ir hot rekht der maksimum fun {max_turns} tern. Balmel: {score} kartn in fondatsyes."
+  },
+  "board": {
+    "title": "=== קלונדיקע סאָליטאירער===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "סטאָק: {stock} קאַרדס",
+    "waste": "אָפּפאַל (W): {waste}",
+    "foundations_header": "פֿונדאַציעס:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "טאַבולאַ:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

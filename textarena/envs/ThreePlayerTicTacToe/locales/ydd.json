@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "איר זענט שפּילער {player_id} אין דרײַ-שפּילער טיק-טאַק-טו. \nאײַער סימבאָל איז '{symbol}'.\nאיר נעמט די מובן אַראָפּלייגן אײַער סימבאָל אויף אַ 5x5 ברעט צו פֿאָרמירן אַ ליניע פֿון פֿיר.\nליניעס קענען זײַן האָריזאָנטאַל, ווערטיקאַל, אָדער דיאַגאָנאַל.\nשיקן אײַער מובן מיטן פֿאָרמאַט '[4]' צו מאַרקירן צעל 4."
+  },
+  "board": {
+    "current_board": "אַקטועלער ברעט:\n\n{board}\n\nווערפֿיגבאַרע מובן: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "אומגילטיקע מאַך פֿאָרמאַט. ניצן \"[cell]\" ווו צעל איז 0-{max_cell} .",
+    "out_of_range": "אומגילטיקע צעל-נומער: {cell}. מוז זײַן צווישן 0 און {max_cell}.",
+    "already_occupied": "צעל {cell} איז שוין אָוקיופּט.",
+    "made_invalid": "שפּילער {player_id} האָט געמאַכט אַן אומגילטיקן שריט."
+  },
+  "game_action": {
+    "placed": "שפּילער {player_id} לייגט זײַן סימבאָל ({symbol}) אין פֿעלד ({row}, {col})."
+  },
+  "outcome": {
+    "win": "שפּילער {player_id} ({symbol}) געווינט!",
+    "draw": "The game is a draw!"
+  }
+}

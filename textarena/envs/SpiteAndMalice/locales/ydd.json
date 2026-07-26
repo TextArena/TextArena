@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Aktueller Brett:\n\n{board}\nVerfügbare Züge: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- צענטער פּיילז --- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Spieler {player_id}'s Ansicht ---\n",
+    "payoff": "{observation}Abzahlungsstapel (Oberste Karte): {top_card}, Abzahlungsstapel-Länge: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Ablagestapel: {discard}\n",
+    "empty": "Empty"
+  },
+  "game_message": {
+    "no_cards_left": "עס זענען ניט מער קאַרדס צו ציען פון. געדענק אַז איר קענען שפּילן קאַרדז פֿון די מקורות: 1. דיין ** האַנט ** 2. דער ** שפּיץ-קאָרט פון אייער פּייאַפ פייַער ** 3. די ** שפּעצן-קאַרט פון קיין פון אייער דיסקרייד סטיילז**. "
+  },
+  "invalid_move": {
+    "wrong_format": "אומגילטיקע שריט פֿאָרמאַט. שפּילער {player_id} האָט נישט געענטפֿערט מיט אַ גילטיגע שוועבעלע אין קוואַדרעטן קראַצן.",
+    "invalid_play": "Ungültiger Zug. Spieler {player_id} versuchte, {card} auf den Mittelstapel {index} zu spielen.",
+    "discard_from_payoff": "אומגילטיקער אָפּוואַרפן. שפּילער {player_id} האָט געפרואווט צו אַוועקווארפן אַ קאָרט פֿון דער פּייאַף-הויל.",
+    "discard_not_in_hand": "אומגילטיקער אָפּוואַרפן. שפּילער {player_id} האָט געפרואווט צו אַוועקווארפן אַ קאָרט וואָס איז נישט אין דער האַנט.",
+    "wrong_move_type": "אומגילטיקע שריט טיפּ. שפּילער {player_id} האט נישט ריספּאַנד מיט אַ גילטיגע מאַך טיפּ ."
+  },
+  "game_action": {
+    "you_drew": "דו האָסט געצויגן קאַרטן.",
+    "opponent_drew": "דער שפּילער {player_id} האָט געצויגן קאַרטן.",
+    "you_played": "Sie haben {card} auf den Mittelstapel {index} gespielt.",
+    "opponent_played": "Spieler {player_id} hat {card} auf den Mittelstapel {index} gespielt.",
+    "you_discarded": "Sie haben {card} auf den Ablagestapel {index} abgelegt, was bedeutet, dass Sie Ihren Zug beendet haben. Weitere Aktionen von Ihnen werden in diesem Zug nicht berücksichtigt. Spieler {next_player_id} ist als Nächstes dran.",
+    "opponent_discarded": "Spieler {player_id} hat {card} auf den Ablagestapel {index} abgelegt, was bedeutet, dass er seinen Zug beendet hat. Weitere Aktionen von Spieler {player_id} werden in diesem Zug nicht berücksichtigt. Spieler {next_player_id}, Sie sind als Nächstes dran. Bitte geben Sie Ihre Aktion im Format [action card center_index] ein."
+  },
+  "outcome": {
+    "payoff_cleared": "Spieler {current_player} hat seinen Abzahlungsstapel geleert! Spieler {current_player} gewinnt!",
+    "deadlock_player_0": "Remis erreicht! Spieler 0 gewinnt mit {player_0_payoff} Karten übrig gegen Spieler 1's {player_1_payoff} Karten.",
+    "deadlock_player_1": "Remis erreicht! Spieler 1 gewinnt mit {player_1_payoff} Karten übrig gegen Spieler 0's {player_0_payoff} Karten.",
+    "deadlock_tie": "Remis mit Unentschieden! Beide Spieler haben {player_0_payoff} Karten übrig. Spieler {current_player} gewinnt per Default."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "דו ביסט שפילער {player_id}, שפילנדיג {num_rounds} רונדן פון Iterated Ultimatum Game.\nדו האסט ${pool} צו טיילן דעם רונד צווישן זיך און שפילער {other_id}.\n\nProposer:\n  - מאכן אן אנביט: [Offer: $X] (0 <= X <= pool)\n  - אויב אנגענומען → דו באקומסט $(pool - X), דער אנדערער שפילער באקומט $X\n  - אויב פארווארפן → ביידע באקומען $0\n  - ביישפיל: [Offer: $3]  אדער  'איך טראכט אז דאס איז גערעכט. [Offer: $5]'\n\nResponder:\n  - ענטפערן אויף דעם אנביט מיט איינער פון [Accept] אדער [Reject]\n  - ביישפיל: 'דאס דינקט זיך רעדלעך. [Accept]'\n            'צו אומגערעכט. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Round {round_number} begins! ---\nPlayer {proposer_id} is the proposer, Player {responder_id} is the responder.",
+    "offer": "רונד {round_number}: שפילער {proposer_id} ביט ${offer} צו שפילער {responder_id} (האלטנדיג ${keep}).",
+    "accepted": "שפילער {responder_id} האט אנגענומען! רונד {round_number} געווינס: שפילער {proposer_id} +${proposer_gain}, שפילער {responder_id} +${responder_gain}. נייע סך הכל: שפילער 0: ${total_0}, שפילער 1: ${total_1}.",
+    "rejected": "שפילער {responder_id} האט פארווארפן דעם אנביט! רונד {round_number} געווינס: ביידע שפילער +$0. סך הכל בלייבן: שפילער 0: ${total_0}, שפילער 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "דער פּראַפּאָזער מוזן מאַכן אַ פאָרשלאָג ניצן די פֿאָרמאַט [Offer: $X].",
+    "bad_integer": "פאָרשלאָג סומע מוזן זיין אַ גילטיק ינטאַדזשער.",
+    "out_of_range": "דער פאָרשלאָג מוזן זיין צווישן $0 און ${pool}.",
+    "no_current_offer": "קיין קראַנט פאָרשלאָג צו ריספּאַנד.",
+    "accept_or_reject": "דער ענטפערדיגער מוז איינער פון [Accept] אדער [Reject] דעם אנביט."
+  },
+  "outcome": {
+    "win": "שפילער {winner} האט געוואונען מיט ${winner_total} אינגאנצן קעגן שפילער {loser}'ס ${loser_total}.",
+    "draw": "ציען! ביידע שפילער האָבן געענדיקט מיט ${total} סך הכל."
+  }
+}

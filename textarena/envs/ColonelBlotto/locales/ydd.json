@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Du bist {role} in Colonel Blotto.\nDein Ziel ist es, mehr Runden als dein Gegner zu gewinnen.\nIn jeder Runde musst du genau {num_total_units} Einheiten auf Felder {field_names} verteilen.\nDer Spieler, der mehr Einheiten auf ein Feld setzt, gewinnt dieses Feld, und der Spieler, der mehr Felder gewinnt, gewinnt die Runde.\nZum Beispiel weist '[A7 B7 C6]' 7 Einheiten zu A, 7 zu B und 6 zu C zu.",
+    "commander_alpha": "קאָמאַנדער אַלףאַ.",
+    "commander_beta": "קאָמאַנדער בעטאַ."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Gewonnen - Kommandant Alpha: {alpha_score}, Kommandant Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRunde {current_round}\nKommandant Alpha hat zugewiesen: {p0_allocations}\nKommandant Beta hat zugewiesen: {p1_allocations}\n",
+    "winner_alpha": "{message}געווינער: קאָמאַנדער אַלף",
+    "winner_beta": "{message}געווינער: קאָמאַנדער ביתא",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "אומגילטיק אַרייַנפיר פֿאָרמאַט. נוצן: A:5 , B:10 , C: 5 .",
+    "invalid_field": "אומגילטיק פעלד נאָמען (א) ן. גילטיגע פֿעלדער: {field_names}",
+    "wrong_allocation_value": "אַלע אַלאַקיישאַנז מוזן זיין ניט-נעגאַטיוו ינטעדזשערז.",
+    "incorrect_total_units": "Du musst genau {num_total_units} einheiten zuweisen. Aktuelle Summe: {current_sum}",
+    "good_allocations": "די צוטיילונג איז גוט."
+  },
+  "outcome": {
+    "winner_alpha": "Kommandant Alpha gewinnt {score_0}-{score_1} nach {num_rounds} Runden!",
+    "winner_beta": "Kommandant Beta gewinnt {score_1}-{score_0} nach {num_rounds} Runden!",
+    "draw": "Spiel endet in einem {score_0}-{score_1} unentschieden nach {num_rounds} Runden!",
+    "early_winner_alpha": "Kommandant Alpha gewinnt {scores_0}-{scores_1} (Mehrheit erreicht)!",
+    "early_winner_beta": "Kommandant Beta gewinnt {scores_1}-{scores_0} (Mehrheit erreicht)!"
+  }
+}

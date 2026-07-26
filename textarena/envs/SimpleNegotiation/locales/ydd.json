@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "דער שפּילער האָט געפּרוּווט אָננעמען אַ האַנדל אָן צו האָבן די נויטיקע רעסורסן.",
+    "out_of_range": "שפּילער {player_id}, אָנוואַלדיקע אַקציע. קאָלאָנע {col} איז אַרויס פֿון גרענעצן.",
+    "already_full": "שפּילער {player_id}, אָנוואַלדיקע אַקציע. קאָלאָנע {col} איז פּונקט.",
+    "proposing_with_no_resource": "שפּילער {player_id} געפרוווט צו מאַכן אַ האַנדל פאָרשלאָג אָן ווייל די נייטיק רעסורסן.",
+    "incorrect_offer_format": "שפּילער {player_id} געמאכט אַ האַנדל פאָרשלאָג אין אַן פאַלש פֿאָרמאַט.",
+    "no_new_offer": "שפּילער {player_id} האט נישט געמאכט קיין נייַע האַנדל פאָרשלאָג."
+  },
+  "offers": {
+    "reject": "שפּילער {player_id} האָט אָפּגעזאָגט די האַנדל־פֿאָרשלאָג.",
+    "accept": "שפּילער {acceptor_id} האָט אָנגענומען די האַנדל פאָרשלאָג פון פּלייַערס {proposer_id}.",
+    "proposal": "שפּילער {player_id} האָט געמאַכט דעם פֿאָלגנדן אַנבאָט צו שפּילער {opponent_id}: אַנגעבאָטענע אָביִעקטן: {offered} -> געפֿאָדערטע אָביִעקטן: {requested}"
+  },
+  "outcome": {
+    "win": "שפּילער {winner_id} האָט געווינען דורך האָבן אַ גרעסערע גיינ אין ינוואַנטאָרי ווערט.",
+    "draw": "די זעלבע ענדערונג אין ינוואַנטאָרי ווערט פֿאַר אַלע פּלייַערס. ציען."
+  }
+}
