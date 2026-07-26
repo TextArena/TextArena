@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "ᱟᱢ ᱜᱚᱞᱯᱷ (ᱠᱟᱨᱰ ᱜᱮᱢ) ᱮᱱᱮᱡ ᱮᱫᱟ - Player {player_id}.\nᱚᱥᱚᱫᱷᱟᱨᱚᱬ: ᱢᱤᱫ ᱥᱤᱝᱜᱤ ᱮᱱᱮᱡ ᱨᱮ ᱠᱚᱢ ᱢᱳᱴᱟᱹ ᱥᱠᱳᱨ ᱮᱫᱟᱭ᱾ ᱡᱚᱠᱷᱚᱱ ᱠᱳᱞᱚᱢ ᱠᱚ ᱢᱤᱫ ᱞᱮᱠᱟᱱ ᱢᱩᱞᱩ ᱮᱫᱟ, ᱚᱱᱟ ᱫᱚ 0 ᱞᱮᱠᱟᱛᱮ ᱡᱚᱲᱟᱣ ᱮᱫᱟᱭ᱾\nᱠᱟᱨᱰ ᱢᱩᱞᱩ: A=1, 2-10=ᱢᱩᱠᱷᱤᱭᱟ ᱢᱩᱞᱩ, J/Q=10, K=0\n\nᱟᱠᱥᱚᱱ (ᱢᱤᱫ ᱴᱮᱱ ᱵᱨᱟᱠᱮᱴ ᱵᱮᱵᱷᱟᱨ ᱢᱮ):\n- '[draw]' - ᱰᱮᱠ ᱠᱷᱚᱱ ᱮᱫᱟᱭ\n- '[take]' - ᱚᱪᱚᱜ ᱠᱟᱨᱰ ᱠᱷᱚᱱ ᱮᱫᱟᱭ\n- '[swap X Y]' - ᱮᱫᱟᱭ ᱠᱟᱨᱰ ᱟᱫᱚᱞ ᱵᱚᱫᱚᱞ ᱮᱫᱟᱭ ᱴᱷᱟᱶ X (ᱥᱟᱨᱤ) Y (ᱠᱳᱞᱚᱢ)\n- '[discard]' - ᱮᱫᱟᱭ ᱠᱟᱨᱰ ᱚᱪᱚᱜ ᱮᱫᱟᱭ"
+  },
+  "board": {
+    "drew": "ᱟᱢ ᱮᱫᱟᱭ: {card}\nᱟᱢ ᱫᱚ ᱱᱤᱛ ᱮᱫᱟᱭ [swap X Y] ᱟᱨᱵᱟᱝ [discard] ᱚᱱᱟ",
+    "took": "ᱟᱢ ᱮᱫᱟᱭ: {card} ᱚᱪᱚᱜ ᱠᱟᱨᱰ ᱠᱷᱚᱱ\nᱟᱢ ᱫᱚ ᱚᱱᱟ ᱥᱟᱶ ᱮᱫᱟᱭ [swap X Y] (ᱚᱪᱚᱜ ᱫᱟᱲᱮᱭᱟᱹᱜ-ᱟ)",
+    "peeked": "ᱟᱢ ᱧᱮᱞ ᱮᱫᱟᱭ ({row},{col}) ᱨᱮ: {card}",
+    "turn_view": "ᱟᱢᱟᱜ ᱛᱷᱟᱹᱨᱤ:\n{hand}\nᱚᱪᱚᱜ ᱠᱟᱨᱰ: {discard}\n{options}",
+    "none": "ᱡᱟᱦᱟᱱ ᱵᱟᱝ"
+  },
+  "options": {
+    "final_turns": "ᱢᱩᱪᱟᱹᱫ ᱮᱱᱮᱡ! ᱟᱢᱟᱜ ᱵᱤᱠᱮᱞ: [draw], [take], [peek X Y]",
+    "draw": "ᱟᱢᱟᱜ ᱵᱤᱠᱮᱞ: [draw], [take]",
+    "must_swap": "ᱟᱢ ᱫᱚ: [swap X Y] (ᱵᱚᱫᱚᱞ ᱟᱠᱟᱱ ᱯᱷᱟᱤᱞ ᱠᱷᱚᱱ ᱠᱟᱨᱰ ᱵᱟᱭ ᱵᱷᱮᱡᱟ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ)",
+    "swap_or_discard": "ᱟᱢ ᱫᱚ ᱮᱫᱟᱭ: [swap X Y] ᱟᱨᱵᱟᱝ [discard]"
+  },
+  "hand": {
+    "no_cards": "ᱠᱟᱨᱰ ᱵᱟᱝ",
+    "header": "ᱠᱚᱞ: ᱑᱒᱓",
+    "row": "ᱥᱟᱨᱤ {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} {new} ᱟᱜ ᱟᱫᱚᱞ ᱵᱚᱫᱚᱞ ᱮᱫᱟ {old} ᱥᱟᱶ ({row},{col}) ᱨᱮ",
+    "discarded": "Player {pid} ᱚᱪᱚᱜ ᱮᱫᱟ {card}"
+  },
+  "message": {
+    "deck_empty": "ᱰᱮᱠ ᱫᱚ ᱵᱟᱱᱩᱜ-ᱟ᱾ ᱠᱷᱮᱞ ᱢᱩᱪᱟᱹᱫᱚᱜ ᱠᱟᱱᱟ ᱾",
+    "knocked": "Player {pid} knocked! Each other player gets one more turn.",
+    "final_round": "Player {pid} {reason}! ᱮᱴᱟᱜ ᱮᱱᱮᱡᱤᱭᱟᱹ ᱠᱚ ᱢᱤᱫ ᱫᱷᱟᱣ ᱮᱱᱮᱡ ᱮᱫᱟ"
+  },
+  "reason": {
+    "all_revealed": "ᱡᱚᱛᱚ ᱠᱟᱨᱰ ᱠᱚ ᱩᱭᱦᱟᱹᱨ ᱟᱠᱟᱫᱟ ᱾"
+  },
+  "invalid": {
+    "wrong_action": "ᱢᱤᱫ ᱴᱮᱱ ᱵᱨᱟᱠᱮᱴ ᱟᱠᱟᱱ ᱟᱠᱥᱚᱱ ᱵᱮᱵᱷᱟᱨ ᱢᱮ: [draw], [take], [swap X Y], [discard], [knock], ᱟᱨᱵᱟᱝ [peek X Y]",
+    "discard_empty": "ᱰᱤᱥᱠᱟᱨᱰ ᱯᱟᱭᱤᱞ ᱫᱚ ᱵᱟᱱᱩᱜ-ᱟ!",
+    "must_draw_first": "ᱟᱢ ᱫᱚ ᱯᱟᱹᱦᱤᱞ ᱮᱫᱟᱭ [draw], [take], [knock], ᱟᱨᱵᱟᱝ [peek X Y]",
+    "cannot_discard_taken": "You cannot discard a card taken from the discard pile. You must swap it.",
+    "have_drawn_card": "ᱟᱢᱟᱜ ᱢᱤᱫ ᱮᱫᱟᱭ ᱠᱟᱨᱰ ᱢᱮᱱᱟᱜ-ᱟ᱾ ᱟᱢ ᱫᱚ ᱮᱫᱟᱭ [swap X Y] ᱟᱨᱵᱟᱝ [discard] ᱚᱱᱟ",
+    "need_drawn_swap": "ᱟᱢ ᱫᱚ ᱵᱮᱵᱚᱥᱛᱟ ᱞᱟᱹᱜᱤᱫ ᱢᱤᱫ ᱰᱨᱟᱭ ᱠᱟᱨᱰ ᱨᱮᱭᱟᱜ ᱞᱟᱠᱛᱤ ᱢᱮᱱᱟᱜ ᱟ.",
+    "need_drawn_discard": "ᱟᱢ ᱫᱚ ᱢᱤᱫᱴᱮᱱ ᱪᱮᱛᱟᱱ ᱠᱟᱨᱰ ᱮᱢ ᱞᱟᱹᱠᱛᱤᱜ ᱠᱟᱱᱟ.",
+    "out_of_bounds": "ᱴᱷᱟᱶ ᱥᱤᱢᱟᱹ ᱵᱟᱹᱜᱤᱭᱟᱜ-ᱟ᱾ ᱥᱟᱨᱤ 1-{max_row}, ᱠᱳᱞᱚᱢ 1-{max_col} ᱵᱮᱵᱷᱟᱨ ᱢᱮ",
+    "knock_with_card": "ᱟᱢ ᱫᱚ ᱵᱟᱝᱢ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ ᱡᱩᱫᱤ ᱠᱟᱨᱰ ᱵᱟᱭ ᱧᱟᱢ ᱟᱠᱟᱱᱟ ᱾ ᱯᱩᱭᱞᱩ ᱛᱮ ᱟᱵᱚᱣᱟᱜ ᱴᱷᱟᱹᱶᱠᱟᱹ ᱥᱟ. ᱜᱤᱭᱟ. ।",
+    "already_knocked": "ᱱᱤᱡᱮ ᱜᱮ ᱱᱚᱣᱟ ᱨᱚᱸᱰ ᱨᱮᱭ ᱡᱤᱛᱠᱟ. ᱟᱠᱟᱫᱟ_",
+    "already_revealed": "ᱱᱤᱛᱚᱜ ᱫᱚ ᱱᱚᱣᱟ ᱠᱟᱨᱰ ᱪᱟᱞᱟᱣ ᱟᱠᱟᱱᱟ!"
+  },
+  "summary": {
+    "full": "ᱜᱮᱢ ᱢᱩᱪᱟᱹᱫ! Player {winner} ᱡᱤᱛᱠᱟᱹᱨ ᱮᱱᱟ {score} ᱯᱳᱭᱮᱱᱴ ᱥᱟᱶ!\n\nᱢᱩᱪᱟᱹᱫ ᱥᱠᱳᱨ:\n{scores}",
+    "line": "Player {pid}: {score} ᱯᱳᱭᱮᱱᱴ"
+  },
+  "board_str": {
+    "title": "=== ᱜᱳᱞᱯ ᱠᱷᱮᱞ===",
+    "discard": "ᱵᱚᱫᱚᱞ ᱢᱮ: {card}",
+    "knocked": "Player {pid} has knocked!",
+    "player_header": "Player {pid} (ᱥᱠᱳᱨ: {score}):"
+  }
+}

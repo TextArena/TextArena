@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "ᱠᱷᱮᱞ ᱵᱳᱨᱰ: {board}",
+    "valid_moves": "{observation}\nValid moves: {moves}",
+    "no_valid_moves_reset": "{observation}\nNo valid moves - you may have to skip.",
+    "no_valid_moves_step": "{observation}\nNo valid moves – you may have to skip.",
+    "scores_reset": "{observation}\nᱱᱤᱛᱟᱜ Scores - Black: {black_count}, White: {white_count}\n",
+    "scores_step": "{observation}\nScores - Black: {black_count}, White: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "ᱢᱚᱵᱟᱤᱞ ᱫᱚ [row, col] ᱨᱮᱭᱟᱜ ᱦᱩᱭᱩᱜ ᱞᱟᱹᱠᱛᱤ।",
+    "illegal": "ᱚᱞᱪᱤᱠᱤ ᱪᱟᱞᱟᱜ: {valid}"
+  },
+  "game_action": {
+    "skipped": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {pid} ᱟᱡᱟᱜ ᱦᱟᱹᱴᱤᱧ ᱫᱚᱭ ᱵᱚᱞᱚᱱ ᱞᱮᱫᱼᱟ ᱾",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Player {pid} ({piece}) has no valid moves and must skip."
+  },
+  "outcome": {
+    "black_wins": "Black {black_count}-{white_count} ᱨᱮ ᱡᱤᱛᱠᱟᱨ ᱮᱱᱟ.",
+    "white_wins": "White {white_count}-{black_count} ᱨᱮ ᱡᱤᱛᱠᱟᱨ ᱮᱱᱟ.",
+    "draw": "Draw {black_count}-{white_count}."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "ᱞᱟᱹᱠᱛᱤᱭᱟᱱ ᱟᱹᱢᱤᱞ ᱵᱟᱝ ᱛᱟᱦᱮᱸ ᱠᱟᱛᱮ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ ᱢᱤᱫ ᱵᱮᱯᱟᱨ ᱮ ᱯᱩᱨᱟᱣ ᱠᱮᱫᱼᱟ ᱾",
+    "out_of_range": "Player {player_id}, Invalid action. Column {col} is out of bounds.",
+    "already_full": "Player {player_id}, Invalid action. Column {col} is full.",
+    "proposing_with_no_resource": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱞᱟᱹᱠᱛᱤᱭᱟᱱ ᱟᱹᱢᱤᱞ ᱵᱟᱝ ᱛᱟᱦᱮᱸ ᱠᱟᱛᱮ ᱵᱮᱯᱟᱨ ᱨᱮᱱᱟᱜ ᱟᱵᱷᱚᱨ ᱮᱢᱟᱫᱮᱭᱟ ᱾",
+    "incorrect_offer_format": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱢᱤᱫ ᱵᱷᱮᱜᱟᱨ ᱯᱷᱚᱨᱢᱚᱴ ᱨᱮ ᱴᱨᱮᱠᱥ ᱚᱯᱨᱮᱥ ᱮ ᱵᱮᱱᱟᱣ ᱞᱮᱫᱼᱟ ᱾",
+    "no_new_offer": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱱᱟᱣᱟ ᱵᱮᱯᱟᱨᱮᱭᱟᱜ ᱟᱵᱮᱫᱚᱱ ᱵᱟᱭ ᱞᱟᱹᱭᱟᱠᱟᱫᱟ᱾"
+  },
+  "offers": {
+    "reject": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱴᱨᱮᱠ ᱟᱯᱷᱚᱨ ᱫᱚᱭ ᱵᱟᱧᱪᱟᱣ ᱠᱮᱫᱟ ᱾",
+    "accept": "Player {acceptor_id} Player {proposer_id} ᱠᱷᱚᱱ ᱵᱮᱯᱟᱨ ᱮ ᱟᱯᱱᱟᱣ ᱮᱫᱟ.",
+    "proposal": "Player {player_id} made the following offer to Player {opponent_id}: Offered items: {offered} -> Requested items: {requested}"
+  },
+  "outcome": {
+    "win": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {winner_id} ᱫᱚ ᱥᱚᱛ-ᱵᱟᱫᱽ ᱨᱮ ᱢᱟᱨᱟᱝ ᱜᱚᱲᱦᱚᱱ ᱠᱟᱛᱮᱭ ᱡᱤᱛᱠᱟᱹᱨ ᱞᱮᱱᱟ ᱾",
+    "draw": "Same change in inventory value for all players. Draw."
+  }
+}

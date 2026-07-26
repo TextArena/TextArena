@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Current Board:\n\n{board}\nAvailable Moves: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- ᱥᱮᱸᱴᱟᱨ ᱯᱟᱭᱤᱞᱥ -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Player {player_id}'s View ---\n",
+    "payoff": "{observation}Payoff Pile (Top Card): {top_card}, Payoff Pile Length: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "ᱵᱟᱱᱩᱜ-ᱟ"
+  },
+  "game_message": {
+    "no_cards_left": "There are no more cards to draw from. Remember that you can play cards from these sources:\n  1. Your **hand**.\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "ᱵᱟᱹᱞᱤ ᱪᱟᱞᱟᱣ ᱥᱟᱯᱲᱟᱣ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱥᱠᱮᱨᱟᱨ ᱠᱨᱮᱴ ᱨᱮ ᱢᱤᱫ ᱞᱟᱦᱟᱱᱛᱤ ᱪᱟᱞᱟᱜ ᱛᱮ ᱨᱩᱣᱟᱹᱨ ᱵᱟᱭ ᱮᱢ ᱟᱠᱟᱫᱟ᱾",
+    "invalid_play": "Invalid play. Player {player_id} tried to play {card} on center pile {index}.",
+    "discard_from_payoff": "ᱵᱟᱹᱞᱤ ᱟᱫᱮᱨ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱯᱟᱭᱩᱴ ᱰᱟᱠ ᱠᱷᱚᱱ ᱢᱤᱫ ᱠᱟᱨᱰ ᱵᱟᱧᱪᱟᱣ ᱞᱟᱹᱜᱤᱫ ᱮ ᱜᱚᱲᱦᱚᱱ ᱞᱮᱱᱟ᱾",
+    "discard_not_in_hand": "ᱵᱟᱹᱞᱤ ᱟᱫᱮᱨ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱢᱤᱫ ᱠᱟᱨᱰ ᱵᱟᱭ ᱚᱪᱚᱜ ᱞᱟᱹᱜᱤᱫ ᱮ ᱯᱚᱨᱚᱢᱟᱣ ᱞᱮᱱᱟ ᱡᱟᱦᱟᱸ ᱫᱚ ᱟᱡᱟᱜ ᱦᱟᱛᱟᱝ ᱨᱮ ᱵᱟᱝ ᱛᱟᱦᱮᱸ ᱠᱟᱱᱟ᱾",
+    "wrong_move_type": "ᱵᱟᱹᱞᱤ ᱪᱟᱞᱟᱜ ᱛᱷᱚᱠ ᱾ ᱠᱷᱮᱞᱚᱱᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱢᱤᱫ ᱥᱟᱹᱨᱤᱭᱟᱜ ᱪᱟᱞᱟᱣ ᱟᱱᱟᱜ ᱴᱷᱟᱶ ᱛᱮᱭ ᱨᱚᱲᱼᱮᱫᱟ ᱵᱟᱝ᱾"
+  },
+  "game_action": {
+    "you_drew": "ᱟᱢ ᱠᱟᱨᱰ ᱠᱚᱨᱟᱣ ᱟᱠᱟᱫ ᱢᱮᱭᱟ ᱾",
+    "opponent_drew": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱠᱟᱨᱰ ᱠᱚ ᱪᱮᱛᱟᱱ ᱨᱮ ᱦᱟ.",
+    "you_played": "You played {card} on center pile {index}.",
+    "opponent_played": "Player {player_id} played {card} on center pile {index}.",
+    "you_discarded": "You have discarded {card} to discard pile {index}, which also means you have finished their turn. No further actions of yours is considered for this turn. Player {next_player_id} will go next.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Player {current_player} has finished their payoff pile! Player {current_player} wins!",
+    "deadlock_player_0": "Deadlock reached! Player 0 wins with {player_0_payoff} cards remaining vs Player 1's {player_1_payoff} cards.",
+    "deadlock_player_1": "Deadlock reached! Player 1 wins with {player_1_payoff} cards remaining vs Player 0's {player_0_payoff} cards.",
+    "deadlock_tie": "Deadlock reached with tie! Both players have {player_0_payoff} cards remaining. Player {current_player} wins by default."
+  }
+}

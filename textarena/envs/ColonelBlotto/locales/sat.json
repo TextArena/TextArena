@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "ᱠᱚᱢᱟᱱᱰᱟᱨ ᱟᱞᱯᱷᱟ",
+    "commander_beta": "Commander Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nᱢᱟᱹᱦᱤᱛ ᱡᱤᱛᱠᱟᱹᱨ - ᱠᱚᱢᱟᱱᱰᱟᱨ ᱟᱞᱯᱷᱟ: {alpha_score}, ᱠᱚᱢᱟᱱᱰᱟᱨ ᱵᱤᱴᱟ: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nᱢᱟᱹᱦᱤᱛ {current_round}\nᱠᱚᱢᱟᱱᱰᱟᱨ ᱟᱞᱯᱷᱟ ᱫᱚ ᱵᱟᱥᱟᱣ ᱮᱫᱟ: {p0_allocations}\nᱠᱚᱢᱟᱱᱰᱟᱨ ᱵᱤᱴᱟ ᱫᱚ ᱵᱟᱥᱟᱣ ᱮᱫᱟ: {p1_allocations}\n",
+    "winner_alpha": "{message}ᱡᱤᱛᱠᱟᱹᱨᱤᱭᱟᱹ: ᱠᱚᱢᱟᱱᱰᱚᱨ ᱟᱞᱯᱷᱟ",
+    "winner_beta": "{message}ᱡᱤᱛᱠᱟᱹᱨᱤᱭᱟᱹ: ᱠᱚᱢᱟᱱᱰᱚᱨ ᱵᱤᱴᱟ",
+    "tie": "{message} ᱴᱟᱭ!"
+  },
+  "invalid_move": {
+    "wrong_format": "ᱵᱟᱹᱞᱤ ᱤᱱᱯᱩᱴ ᱯᱷᱚᱨᱢᱮᱴ ᱾ ᱵᱮᱵᱷᱟᱨ: A:5 , B:10 , C:5",
+    "invalid_field": "ᱵᱟᱹᱞᱤ ᱯᱷᱤᱞᱰ ᱧᱩᱛᱩᱢ (((s) ᱾ ᱥᱟᱹᱨᱤᱭᱟᱜ ᱯᱷᱤᱞ্ড: {field_names}",
+    "wrong_allocation_value": "ᱡᱚᱛᱚ ᱮᱞᱠᱷᱟ ᱫᱚ ᱵᱟᱝ-ᱱᱟᱯᱨᱤᱠ ᱤᱱᱴᱮᱡᱟᱨ ᱦᱩᱭᱩᱜ ᱞᱟᱹᱠᱛᱤ ᱾",
+    "incorrect_total_units": "You have to allocate exactly {num_total_units} units. Current sum: {current_sum}",
+    "good_allocations": "ᱮᱞᱠᱷᱟ ᱫᱚ ᱱᱟᱯᱟᱭ ᱜᱮᱭᱟ ᱾"
+  },
+  "outcome": {
+    "winner_alpha": "ᱠᱚᱢᱟᱱᱰᱟᱨ ᱟᱞᱯᱷᱟ ᱫᱚ {score_0}-{score_1} ᱡᱤᱛᱠᱟᱹᱨ ᱮᱱᱟ {num_rounds} ᱢᱟᱹᱦᱤᱛ ᱛᱟᱭᱚᱢ!",
+    "winner_beta": "ᱠᱚᱢᱟᱱᱰᱟᱨ ᱵᱤᱴᱟ ᱫᱚ {score_1}-{score_0} ᱡᱤᱛᱠᱟᱹᱨ ᱮᱱᱟ {num_rounds} ᱢᱟᱹᱦᱤᱛ ᱛᱟᱭᱚᱢ!",
+    "draw": "ᱜᱮᱢ ᱫᱚ {score_0}-{score_1} ᱛᱮ ᱵᱟᱨ ᱵᱟᱨ ᱜᱮ ᱢᱩᱪ ᱮᱱᱟ ᱟᱨ {num_rounds} ᱢᱟᱹᱦᱤᱛ!",
+    "early_winner_alpha": "ᱠᱚᱢᱟᱱᱰᱟᱨ ᱟᱞᱯᱷᱟ ᱫᱚ {scores_0}-{scores_1} (ᱢᱩᱫᱽᱨᱟ ᱟᱢᱮᱴ ᱮᱱᱟ)!",
+    "early_winner_beta": "ᱠᱚᱢᱟᱱᱰᱟᱨ ᱵᱤᱴᱟ ᱫᱚ {scores_1}-{scores_0} (ᱢᱩᱫᱽᱨᱟ ᱟᱢᱮᱴ ᱮᱱᱟ)!"
+  }
+}
