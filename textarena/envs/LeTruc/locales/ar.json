@@ -1,37 +1,42 @@
 {
   "_comment": "ملف لغة Le Truc. لا تترجم المفاتيح (الجانب الأيسر). ترجم القيم فقط (الجانب الأيمن). احتفظ بكل {placeholder} كما هو تمامًا. لا تترجم أبدًا رموز الإجراءات ('[play]'، '[raise]'، '[accept]'، '[fold]') أو تسميات البطاقات ورموز الأنواع (مثل 3♠، A♥، K♦) أو تسميات اللاعبين (P0، P1) أو قيم النقاط الرقمية.",
   "_slots": {
-    "{pid}": "رقم اللاعب، 0 أو 1",
-    "{winner}": "رقم اللاعب الذي فاز بالخدعة",
-    "{points}": "قيمة نقاط اليد، مثل 1 أو 2",
-    "{cards}": "قائمة مفصولة بمسافات بتسميات بطاقات اللاعب، مثل 'A♦ 3♠ A♥'",
-    "{card}": "تسمية بطاقة واحدة، مثل '3♠'"
+    "{pid}": "A player number, 0 or 1",
+    "{winner}": "The player number who won the trick or hand",
+    "{points}": "A hand point value, e.g. 1, 2 or 4",
+    "{p0}": "Player 0's running match score",
+    "{p1}": "Player 1's running match score",
+    "{cards}": "A space-separated list of the player's card labels, e.g. 'A♦ 3♠ A♥'",
+    "{card}": "A single card label, e.g. '3♠'",
+    "{legal}": "A comma-separated list of the currently legal action tokens"
   },
-
   "player_prompt": {
-    "intro": "ملخص لقواعد اللعبة"
+    "intro": "You are playing Le Truc, a 2-player trick game with a 40-card deck (rank high to low: 3 2 A K Q J 7 6 5 4).\nEach hand you get 3 cards and play up to three one-card tricks. The higher rank wins a trick regardless of suit; equal ranks tie ('spoilt'). Win the hand by taking two tricks, or by winning the first trick when the other ties; a spoilt trick counts for whoever won the first trick, and if all three tie no one scores.\nA hand is worth 1 point. On your turn you may '[raise]' (truc) to increase the stake: 1->2, then +2 for each further raise up to 12. Your opponent must '[accept]', '[fold]', or re-'[raise]'. A player who folds concedes the hand, and the raiser scores the stake from before that raise.\nActions: '[play <rank>]' (e.g. '[play 3]'), '[raise]', '[accept]', '[fold]'. First to 12 points wins the match."
   },
-
   "board": {
-    "new_hand": "### يد جديدة بقيمة {points} نقطة\nبطاقاتك: {cards}"
+    "new_hand": "### يد جديدة بقيمة {points} نقطة\nبطاقاتك: {cards}",
+    "valid_actions": "Legal now: {legal}."
   },
-
   "invalid_move": {
-    "unrecognised":       "إجراء غير معروف.",
-    "already_raised":     "تم الرفع بالفعل.",
+    "unrecognised": "إجراء غير معروف.",
+    "already_raised": "تم الرفع بالفعل.",
     "no_raise_to_accept": "لا يوجد رفع لقبوله.",
-    "cannot_fold":        "لا يمكن الانسحاب الآن.",
-    "wrong_rank":         "أنت لا تملك تلك الرتبة (يتم تجاهل الأنواع في الإدخال)."
+    "cannot_fold": "لا يمكن الانسحاب الآن.",
+    "wrong_rank": "أنت لا تملك تلك الرتبة (يتم تجاهل الأنواع في الإدخال).",
+    "must_respond": "A raise is pending - respond with '[accept]', '[fold]', or re-'[raise]' before playing a card.",
+    "max_stake": "The hand is already worth the maximum (12); you cannot raise further."
   },
-
   "action": {
     "raise": "P{pid} يرفع - اليد الآن {points} نقاط. على الخصم أن '[accept]' أو '[fold]'.",
-    "lead":  "P{pid} يبدأ بـ {card}.",
-    "play":  "P{pid} يلعب {card}. الخدعة لـ P{winner}."
+    "accept": "P{pid} accepts - the hand is worth {points} pts.",
+    "lead": "P{pid} يبدأ بـ {card}.",
+    "play": "P{pid} يلعب {card}. الخدعة لـ P{winner}.",
+    "spoilt": "P{pid} plays {card}. Ranks tie - the trick is spoilt."
   },
-
   "outcome": {
-    "folded":         "انسحب الخصم.",
+    "folded": "انسحب الخصم.",
+    "hand_won": "Hand won by P{winner} (+{points} pt(s)). Score - P0: {p0}, P1: {p1}.",
+    "void": "All three tricks spoilt - no score this hand. Score - P0: {p0}, P1: {p1}.",
     "reached_twelve": "بلوغ 12 نقطة."
   }
 }

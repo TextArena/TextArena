@@ -1,37 +1,42 @@
 {
   "_comment": "קובץ שפה של Le Truc. אין לתרגם את המפתחות (צד שמאל). יש לתרגם רק את הערכים (צד ימין). יש לשמור כל {placeholder} בדיוק כפי שהוא. לעולם אין לתרגם את אסימוני הפעולה ('[play]', '[raise]', '[accept]', '[fold]'), את תוויות הקלפים/הצורות (למשל 3♠, A♥, K♦), את תוויות השחקן (P0, P1) או את ערכי הנקודות המספריים.",
   "_slots": {
-    "{pid}": "מספר שחקן, 0 או 1",
-    "{winner}": "מספר השחקן שזכה בלקיחה",
-    "{points}": "ערך נקודות היד, למשל 1 או 2",
-    "{cards}": "רשימה מופרדת ברווחים של תוויות הקלפים של השחקן, למשל 'A♦ 3♠ A♥'",
-    "{card}": "תווית קלף בודדת, למשל '3♠'"
+    "{pid}": "A player number, 0 or 1",
+    "{winner}": "The player number who won the trick or hand",
+    "{points}": "A hand point value, e.g. 1, 2 or 4",
+    "{p0}": "Player 0's running match score",
+    "{p1}": "Player 1's running match score",
+    "{cards}": "A space-separated list of the player's card labels, e.g. 'A♦ 3♠ A♥'",
+    "{card}": "A single card label, e.g. '3♠'",
+    "{legal}": "A comma-separated list of the currently legal action tokens"
   },
-
   "player_prompt": {
-    "intro": "סיכום של חוקי המשחק"
+    "intro": "You are playing Le Truc, a 2-player trick game with a 40-card deck (rank high to low: 3 2 A K Q J 7 6 5 4).\nEach hand you get 3 cards and play up to three one-card tricks. The higher rank wins a trick regardless of suit; equal ranks tie ('spoilt'). Win the hand by taking two tricks, or by winning the first trick when the other ties; a spoilt trick counts for whoever won the first trick, and if all three tie no one scores.\nA hand is worth 1 point. On your turn you may '[raise]' (truc) to increase the stake: 1->2, then +2 for each further raise up to 12. Your opponent must '[accept]', '[fold]', or re-'[raise]'. A player who folds concedes the hand, and the raiser scores the stake from before that raise.\nActions: '[play <rank>]' (e.g. '[play 3]'), '[raise]', '[accept]', '[fold]'. First to 12 points wins the match."
   },
-
   "board": {
-    "new_hand": "### יד חדשה בשווי {points} נק'\nהקלפים שלך: {cards}"
+    "new_hand": "### יד חדשה בשווי {points} נק'\nהקלפים שלך: {cards}",
+    "valid_actions": "Legal now: {legal}."
   },
-
   "invalid_move": {
-    "unrecognised":       "פעולה לא מזוהה.",
-    "already_raised":     "כבר הועלה.",
+    "unrecognised": "פעולה לא מזוהה.",
+    "already_raised": "כבר הועלה.",
     "no_raise_to_accept": "אין העלאה לקבל.",
-    "cannot_fold":        "אי אפשר לפרוש כעת.",
-    "wrong_rank":         "אין ברשותך דרגה זו (מתעלמים מהצורות בקלט)."
+    "cannot_fold": "אי אפשר לפרוש כעת.",
+    "wrong_rank": "אין ברשותך דרגה זו (מתעלמים מהצורות בקלט).",
+    "must_respond": "A raise is pending - respond with '[accept]', '[fold]', or re-'[raise]' before playing a card.",
+    "max_stake": "The hand is already worth the maximum (12); you cannot raise further."
   },
-
   "action": {
     "raise": "P{pid} מעלה - היד כעת {points} נק'. היריב חייב '[accept]' או '[fold]'.",
-    "lead":  "P{pid} פותח עם {card}.",
-    "play":  "P{pid} משחק {card}. הלקיחה ל-P{winner}."
+    "accept": "P{pid} accepts - the hand is worth {points} pts.",
+    "lead": "P{pid} פותח עם {card}.",
+    "play": "P{pid} משחק {card}. הלקיחה ל-P{winner}.",
+    "spoilt": "P{pid} plays {card}. Ranks tie - the trick is spoilt."
   },
-
   "outcome": {
-    "folded":         "היריב פרש.",
+    "folded": "היריב פרש.",
+    "hand_won": "Hand won by P{winner} (+{points} pt(s)). Score - P0: {p0}, P1: {p1}.",
+    "void": "All three tricks spoilt - no score this hand. Score - P0: {p0}, P1: {p1}.",
     "reached_twelve": "הושגו 12 נקודות."
   }
 }

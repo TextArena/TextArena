@@ -1,37 +1,42 @@
 {
   "_comment": "Le-Truc-Sprachdatei. Übersetze KEINE Schlüssel (linke Seite). Übersetze nur Werte (rechte Seite). Behalte jeden {placeholder} exakt bei. Übersetze niemals die Aktions-Tokens ('[play]', '[raise]', '[accept]', '[fold]'), die Kartenbezeichnungen/Farben (z. B. 3♠, A♥, K♦), die Spielerbezeichnungen (P0, P1) oder numerische Punktwerte.",
   "_slots": {
-    "{pid}": "Eine Spielernummer, 0 oder 1",
-    "{winner}": "Die Nummer des Spielers, der den Stich gewonnen hat",
-    "{points}": "Ein Handpunktwert, z. B. 1 oder 2",
-    "{cards}": "Eine leerzeichengetrennte Liste der Kartenbezeichnungen des Spielers, z. B. 'A♦ 3♠ A♥'",
-    "{card}": "Eine einzelne Kartenbezeichnung, z. B. '3♠'"
+    "{pid}": "A player number, 0 or 1",
+    "{winner}": "The player number who won the trick or hand",
+    "{points}": "A hand point value, e.g. 1, 2 or 4",
+    "{p0}": "Player 0's running match score",
+    "{p1}": "Player 1's running match score",
+    "{cards}": "A space-separated list of the player's card labels, e.g. 'A♦ 3♠ A♥'",
+    "{card}": "A single card label, e.g. '3♠'",
+    "{legal}": "A comma-separated list of the currently legal action tokens"
   },
-
   "player_prompt": {
-    "intro": "eine Zusammenfassung der Spielregeln"
+    "intro": "You are playing Le Truc, a 2-player trick game with a 40-card deck (rank high to low: 3 2 A K Q J 7 6 5 4).\nEach hand you get 3 cards and play up to three one-card tricks. The higher rank wins a trick regardless of suit; equal ranks tie ('spoilt'). Win the hand by taking two tricks, or by winning the first trick when the other ties; a spoilt trick counts for whoever won the first trick, and if all three tie no one scores.\nA hand is worth 1 point. On your turn you may '[raise]' (truc) to increase the stake: 1->2, then +2 for each further raise up to 12. Your opponent must '[accept]', '[fold]', or re-'[raise]'. A player who folds concedes the hand, and the raiser scores the stake from before that raise.\nActions: '[play <rank>]' (e.g. '[play 3]'), '[raise]', '[accept]', '[fold]'. First to 12 points wins the match."
   },
-
   "board": {
-    "new_hand": "### Neue Hand im Wert von {points} Pkt.\nDeine Karten: {cards}"
+    "new_hand": "### Neue Hand im Wert von {points} Pkt.\nDeine Karten: {cards}",
+    "valid_actions": "Legal now: {legal}."
   },
-
   "invalid_move": {
-    "unrecognised":       "Unbekannte Aktion.",
-    "already_raised":     "Bereits erhöht.",
+    "unrecognised": "Unbekannte Aktion.",
+    "already_raised": "Bereits erhöht.",
     "no_raise_to_accept": "Keine Erhöhung zum Annehmen.",
-    "cannot_fold":        "Jetzt kann nicht gefoldet werden.",
-    "wrong_rank":         "Du hältst diesen Rang nicht (Farben werden bei der Eingabe ignoriert)."
+    "cannot_fold": "Jetzt kann nicht gefoldet werden.",
+    "wrong_rank": "Du hältst diesen Rang nicht (Farben werden bei der Eingabe ignoriert).",
+    "must_respond": "A raise is pending - respond with '[accept]', '[fold]', or re-'[raise]' before playing a card.",
+    "max_stake": "The hand is already worth the maximum (12); you cannot raise further."
   },
-
   "action": {
     "raise": "P{pid} erhöht - Hand jetzt {points} Pkt. Der Gegner muss '[accept]' oder '[fold]'.",
-    "lead":  "P{pid} spielt aus: {card}.",
-    "play":  "P{pid} spielt {card}. Stich geht an P{winner}."
+    "accept": "P{pid} accepts - the hand is worth {points} pts.",
+    "lead": "P{pid} spielt aus: {card}.",
+    "play": "P{pid} spielt {card}. Stich geht an P{winner}.",
+    "spoilt": "P{pid} plays {card}. Ranks tie - the trick is spoilt."
   },
-
   "outcome": {
-    "folded":         "Gegner hat gefoldet.",
+    "folded": "Gegner hat gefoldet.",
+    "hand_won": "Hand won by P{winner} (+{points} pt(s)). Score - P0: {p0}, P1: {p1}.",
+    "void": "All three tricks spoilt - no score this hand. Score - P0: {p0}, P1: {p1}.",
     "reached_twelve": "12 Punkte erreicht."
   }
 }

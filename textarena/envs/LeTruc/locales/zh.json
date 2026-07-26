@@ -1,37 +1,42 @@
 {
   "_comment": "Le Truc 语言文件。请勿翻译键名（左侧）。仅翻译值（右侧）。保持每个 {placeholder} 完全不变。切勿翻译动作标记（'[play]'、'[raise]'、'[accept]'、'[fold]'）、牌面标签/花色（如 3♠、A♥、K♦）、玩家标签（P0、P1）或数字点数。",
   "_slots": {
-    "{pid}": "玩家编号，0 或 1",
-    "{winner}": "赢得该墩的玩家编号",
-    "{points}": "该局的点数值，如 1 或 2",
-    "{cards}": "以空格分隔的玩家牌面标签列表，如 'A♦ 3♠ A♥'",
-    "{card}": "单张牌面标签，如 '3♠'"
+    "{pid}": "A player number, 0 or 1",
+    "{winner}": "The player number who won the trick or hand",
+    "{points}": "A hand point value, e.g. 1, 2 or 4",
+    "{p0}": "Player 0's running match score",
+    "{p1}": "Player 1's running match score",
+    "{cards}": "A space-separated list of the player's card labels, e.g. 'A♦ 3♠ A♥'",
+    "{card}": "A single card label, e.g. '3♠'",
+    "{legal}": "A comma-separated list of the currently legal action tokens"
   },
-
   "player_prompt": {
-    "intro": "游戏规则摘要"
+    "intro": "You are playing Le Truc, a 2-player trick game with a 40-card deck (rank high to low: 3 2 A K Q J 7 6 5 4).\nEach hand you get 3 cards and play up to three one-card tricks. The higher rank wins a trick regardless of suit; equal ranks tie ('spoilt'). Win the hand by taking two tricks, or by winning the first trick when the other ties; a spoilt trick counts for whoever won the first trick, and if all three tie no one scores.\nA hand is worth 1 point. On your turn you may '[raise]' (truc) to increase the stake: 1->2, then +2 for each further raise up to 12. Your opponent must '[accept]', '[fold]', or re-'[raise]'. A player who folds concedes the hand, and the raiser scores the stake from before that raise.\nActions: '[play <rank>]' (e.g. '[play 3]'), '[raise]', '[accept]', '[fold]'. First to 12 points wins the match."
   },
-
   "board": {
-    "new_hand": "### 新一局价值 {points} 点\n你的牌：{cards}"
+    "new_hand": "### 新一局价值 {points} 点\n你的牌：{cards}",
+    "valid_actions": "Legal now: {legal}."
   },
-
   "invalid_move": {
-    "unrecognised":       "无法识别的动作。",
-    "already_raised":     "已经加注。",
+    "unrecognised": "无法识别的动作。",
+    "already_raised": "已经加注。",
     "no_raise_to_accept": "没有可接受的加注。",
-    "cannot_fold":        "现在无法弃牌。",
-    "wrong_rank":         "你没有该点数的牌（输入时忽略花色）。"
+    "cannot_fold": "现在无法弃牌。",
+    "wrong_rank": "你没有该点数的牌（输入时忽略花色）。",
+    "must_respond": "A raise is pending - respond with '[accept]', '[fold]', or re-'[raise]' before playing a card.",
+    "max_stake": "The hand is already worth the maximum (12); you cannot raise further."
   },
-
   "action": {
     "raise": "P{pid} 加注 - 本局现在为 {points} 点。对手必须 '[accept]' 或 '[fold]'。",
-    "lead":  "P{pid} 首出 {card}。",
-    "play":  "P{pid} 打出 {card}。该墩归 P{winner}。"
+    "accept": "P{pid} accepts - the hand is worth {points} pts.",
+    "lead": "P{pid} 首出 {card}。",
+    "play": "P{pid} 打出 {card}。该墩归 P{winner}。",
+    "spoilt": "P{pid} plays {card}. Ranks tie - the trick is spoilt."
   },
-
   "outcome": {
-    "folded":         "对手弃牌。",
+    "folded": "对手弃牌。",
+    "hand_won": "Hand won by P{winner} (+{points} pt(s)). Score - P0: {p0}, P1: {p1}.",
+    "void": "All three tricks spoilt - no score this hand. Score - P0: {p0}, P1: {p1}.",
     "reached_twelve": "达到 12 点。"
   }
 }
