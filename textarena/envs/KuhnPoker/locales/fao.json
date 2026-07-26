@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Tú ert Leikari {player_id} í einum {max_rounds} umfar leik av Kuhn Poker.\nLeikareglur:\n- Kuhn Poker nýtir ein 3-kort dekki við J, Q, K (J lægsta, K hægsta)\n- Hvør leikari setir {ante} chip og fær 1 kort hvørt umfar (merk, at kortini verða úthandlað utan avrit, so tú kanst ikki hava tað sama kort sum mótparturin).\n- Leikin fer fram í {max_rounds} umfør\n- Leikarin við flest chip eftir øll umfør vinnur\nAktivitetsreglur:\n- '[check]': Lat leikin fara án at seta (bara um eingin setning er á borði)\n- '[bet]': Legg 1 chip til potti (bara um eingin setning er á borði)\n- '[call]': Javna mótpartnar sín setning við at leggja 1 chip til potti\n- '[fold]': Giv upp tínn hend og lát mótparturin vinna potti"
+  },
+  "init_round": {
+    "round_start": "### Byrjar umfar {current_round} av {max_rounds} umførum. Din kort er: '{player_card}'",
+    "available_actions": "Tínir tiltøk, sum tú kanst gera eru: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action must be [Check], [Bet], [Call], or [Fold].",
+    "not_legal": "Tiltakið skal vera {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Tínir tiltøk, sum tú kanst gera eru: {legal_actions}.",
+    "round_summary": "{reason} Núverandi stig: Leikari 0: '{player_0_chips}'; Leikari 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Tá ið {max_rounds} umførini vóru liðug, høvdu báðir leikarar sama tali av flísum.",
+    "round_win": "Leikarin {player_id} hevur lagt seg.",
+    "winner_player0": "Spælari 0 vann við at hava fleiri chip í endanum av øllum {max_rounds} umførunum.",
+    "winner_player1": "Leikari 1 vann við at hava fleiri chip í endanum av øllum {max_rounds} umførunum."
+  }
+}

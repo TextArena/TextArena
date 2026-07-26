@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Tú ert Leikari {player_id}, spælir {num_rounds} umførir av Iterated Ultimatum Leik.\nTú hevur ${pool} at skifta í hesa umførslu millum teg og Leikara {other_id}.\n\nFráboðari:\n  - Ger tilboð: [Offer: $X] (0 <= X <= pool)\n  - Um samtykt → Tú fær $(pool - X), hin leikarin fær $X\n  - Um avnumma → Báðir fáa $0\n  - Dømi: [Offer: $3]  eller  'Eg halda, at hetta er rættvís. [Offer: $5]'\n\nSvarandi:\n  - Ger avgerð um tilboðið við annaðhvort [Accept] eller [Reject]\n  - Dømi: 'Tað fer at síggja rættvís. [Accept]'\n            'Tað er ov unfair. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Round {round_number} begins! ---\nPlayer {proposer_id} is the proposer, Player {responder_id} is the responder.",
+    "offer": "Umførsla {round_number}: Leikari {proposer_id} bjóðar ${offer} til Leikara {responder_id} (heldur ${keep}).",
+    "accepted": "Leikari {responder_id} hevur samtykt! Umførsla {round_number} vinnur: Leikari {proposer_id} +${proposer_gain}, Leikari {responder_id} +${responder_gain}. Nýggj samanlagt: Leikari 0: ${total_0}, Leikari 1: ${total_1}.",
+    "rejected": "Leikari {responder_id} hevur avnumma tilboðið! Umførsla {round_number} vinnur: Báðir leikarar +$0. Samanlagt verður: Leikari 0: ${total_0}, Leikari 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Uppskotssetarin skal gera eitt tilboð við at nýta formatið [Offer: $X].",
+    "bad_integer": "Tilboðsupphæddin skal vera eitt galdandi heilt tal.",
+    "out_of_range": "Tilboð má vera milli $0 og ${pool}.",
+    "no_current_offer": "Eingin tilboð er at svara uppá.",
+    "accept_or_reject": "Svarandi má annaðhvort [Accept] eller [Reject] tilboðið."
+  },
+  "outcome": {
+    "win": "Leikari {winner} vann með ${winner_total} í heild vs Leikari {loser}'s ${loser_total}.",
+    "draw": "Báðir leikarar endaðu við ${total} í samansparing."
+  }
+}

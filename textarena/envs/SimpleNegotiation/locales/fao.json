@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Tú ert Leikari {player_id} í Samtalinum Leiki.\nTú hevur nøkur útbúgvingar, og tínn uppgáva er at handla soleiðis, at heildarvirði av tínni útbúgving gevst.\nÚtbúgvingarnir og sambond við virði, tú átt í løtuni, eru:\n\t+ {resource_value_list}\nÁ hvørjum váli, kann tú tosa við mótpart og gjøra ein handils tilbúð.\nNýta hesi serstaku tokeni til handlingar:\n  - '[Tilbúgving: 3 Sauð, 2 Málmar -> 5 Leir, 2 Sauð]': [Tilbúgving: Tilbúin Útbúgvingar -> Kravd Útbúgvingar]\n  - '[Accept]': At samtykkja innkomin tilbúgving.\n  - '[Deny]': At neiða innkomin tilbúgving (frágreiðing).\nLeikurin varar í {max_turns} válar í alt."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Leikarurin royndi at taka ímóti einum handli uttan at hava neyðugu tilfeingið.",
+    "out_of_range": "Leikari {player_id}, Ógyldig handling. Kolonna {col} er úti av marki.",
+    "already_full": "Leikari {player_id}, Ógyldig handling. Kolonna {col} er full.",
+    "proposing_with_no_resource": "Leikarin {player_id} royndi at gera eitt handilstilboð uttan at hava neyðugu tilfeingið.",
+    "incorrect_offer_format": "Leikarin {player_id} hevur gjørt eitt handilstilboð í skeivum sniði.",
+    "no_new_offer": "Leikarin {player_id} gjørdi ikki nakað nýtt handilstilboð."
+  },
+  "offers": {
+    "reject": "Leikarin {player_id} hevur vrakað býtistilboðið.",
+    "accept": "Leikarin {acceptor_id} tók av tilboðnum frá leikaranum {proposer_id}.",
+    "proposal": "Leikari {player_id} hevði gjørt hetta tilbúð til Leikari {opponent_id}: Tilbúin verkætni: {offered} -> Kravd verkætni: {requested}"
+  },
+  "outcome": {
+    "win": "Spælari {winner_id} vann við at hava størri vinning í tilfeingisvirði.",
+    "draw": "Sama broyting í tilfeingisvirðinum fyri allar aktørar."
+  }
+}

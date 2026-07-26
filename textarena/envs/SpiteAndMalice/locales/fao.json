@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Núverandi Borð:\n\n{board}\nFáanlegir Leikir: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Miðstaðarstovnarnir --- ",
+    "pile": "{observation}Pottur {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Leikari {player_id} sýn ---\n",
+    "payoff": "{observation}Innbetalingarpottur (Topkort): {top_card}, Innbetalingarpottur Longd: {payoff_length}\n",
+    "hand": "{observation}Hond: {hand}\n",
+    "discard": "{observation}Kastapottar: {discard}\n",
+    "empty": "Tómur"
+  },
+  "game_message": {
+    "no_cards_left": "Tú kanst ikki taka kort frá øðrum, men minnist til at tú kann spæla kort úr hesum keldur: 1. Tínari hond. 2. Hægsta kortið í tíni vinningsbondini. 3. Høsta korti á einum av tínum burturkast-bondum. ️ Síggj eisini her fyri teg sjálvt/n um tað er eitt \"spæl\" ella ein \"spilar\"."
+  },
+  "invalid_move": {
+    "wrong_format": "Ógilda rørsluformatið. Leikarin {player_id} svaraði ikki við einum galdandi taki í parentesum.",
+    "invalid_play": "Ógyldig leik. Leikari {player_id} royndi at spæla {card} á miðpotti {index}.",
+    "discard_from_payoff": "Ógildilig burturkast. Spælari {player_id} royndi at sleppa sær av við eitt kort úr vinningsbólkinum.",
+    "discard_not_in_hand": "Ógildilig burturkast. Spælari {player_id} royndi at sleppa av við eitt kort, sum ikki er í hondini.",
+    "wrong_move_type": "Ógildiligur rørslu-típur. Leikarin {player_id} svaraði ikki við einum galdandi rørslutípi."
+  },
+  "game_action": {
+    "you_drew": "You drew cards.",
+    "opponent_drew": "Leikarin {player_id} hevur trekt kort.",
+    "you_played": "Tú spældi {card} á miðstaðarstøðini {index}.",
+    "opponent_played": "Player {player_id} played {card} on center pile {index}.",
+    "you_discarded": "Tú hevur kastað {card} á kastapott {index}, hetta merkir eisini, at tú ert komin í enda tína beinleið. Onki ferðir av tínum verður mett at hava sérstøðu í hesi beinleið. Leikari {next_player_id} kemur næst.",
+    "opponent_discarded": "Leikari {player_id} kastaði {card} á kastapott {index}, hetta merkir eisini, at teir eru komin í enda sínar beinleið. Onki ferðir av Leikara {player_id} verður mett at hava sérstøðu í hesi beinleið. Leikari {next_player_id}, tú kemur næst. Vinsamast skriva tína handling í formi [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Leikari {current_player} hevur klárað sína innbetalingarpott! Leikari {current_player} vinnur!",
+    "deadlock_player_0": "Dótt er nádd! Leikari 0 vinnur við {player_0_payoff} kortum eftir í mun til Leikara 1 sínar {player_1_payoff} kort.",
+    "deadlock_player_1": "Dótt er nádd! Leikari 1 vinnur við {player_1_payoff} kortum eftir í mun til Leikara 0 sínar {player_0_payoff} kort.",
+    "deadlock_tie": "Dótt er nádd við jafntøðu! Báðir leikarar hava {player_0_payoff} kort eftir. Leikari {current_player} vinnur við sjálvgevi."
+  }
+}
