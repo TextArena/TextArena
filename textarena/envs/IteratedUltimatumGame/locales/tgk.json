@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Шумо бозигар {player_id} ҳастед, {num_rounds} даври Бозии Ултиматуми Такроршавандаро бозӣ мекунед.\nШумо ${pool} барои тақсимоти ин давр байни худ ва бозигар {other_id} доред.\n\nПешниҳодкунанда:\n  - Пешниҳод кунед: [Offer: $X] (0 <= X <= ҳавз)\n  - Агар қабул шавад → Шумо $(ҳавз - X) гирифта, бозигари дигар $X мегирад\n  - Агар рад шавад → Ҳар ду $0 мегиранд\n  - Мисол: [Offer: $3]  ё  'Ман фикр мекунам ин адолат аст. [Offer: $5]'\n\nҶавобдеҳ:\n  - Бар пешниҳод бо [Accept] ё [Reject] ҳукм кунед\n  - Мисол: 'Ин манзур мекунад. [Accept]'\n            'Хеле беадолат. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Даври {round_number} оғоз шуд! ---\nБозигар {proposer_id} пешниҳодкунанда, Бозигар {responder_id} ҷавобдеҳ аст.",
+    "offer": "Даври {round_number}: Бозигар {proposer_id} ${offer} ба Бозигар {responder_id} пешниҳод мекунад (ба қиммате ${keep} нигоҳ дошта мешавад).",
+    "accepted": "Бозигар {responder_id} қабул кард! Даври {round_number} фоида: Бозигар {proposer_id} +${proposer_gain}, Бозигар {responder_id} +${responder_gain}. Ҷамъи нав: Бозигар 0: ${total_0}, Бозигар 1: ${total_1}.",
+    "rejected": "Бозигар {responder_id} пешниҳодро рад кард! Даври {round_number} фоида: Ҳар ду бозигар +$0. Ҷамъҳо боқӣ мемонанд: Бозигар 0: ${total_0}, Бозигар 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Пешниҳодкунанда бояд бо истифода аз формати [Offer: $X] пешниҳод кунад.",
+    "bad_integer": "Маблағи пешниҳод бояд адади комил бошад.",
+    "out_of_range": "Пешниҳод бояд байни $0 ва ${pool} бошад.",
+    "no_current_offer": "Дар айни замон ягон пешниҳоди ҷавобӣ вуҷуд надорад.",
+    "accept_or_reject": "Ҷавобдеҳ бояд пешниҳодро [Accept] ё [Reject] кунад."
+  },
+  "outcome": {
+    "win": "Бозигар {winner} бо ҷамъи ${winner_total} бар зидди бозигар {loser} бо ${loser_total} ғалаба кард.",
+    "draw": "Ҳарду бозингар дар маҷмӯъ ${total} ба даст оварданд."
+  }
+}

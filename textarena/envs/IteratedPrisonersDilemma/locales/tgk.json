@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Шумо Бозигар {player_id} дар Иттиҳоди Қайди Асирон ҳастед, ки {num_rounds} даврро дар бар мегирад.\n\nТартиби Бозӣ:\n- Пеш аз ҳар қарор шумо {total_conversation_rounds} даври муошират доред.\n- Баъд аз он, ҳар ду бозигар ҳамзамон интихоб мекунанд, ки ҳамкорӣ кунанд ё хиёнат кунанд.\n\nМатрицаи Пардохт (дар ҳар давр): \n- Ҳамкории ҳар ду ➜ ҳар яки {cooperate_reward}\n- Хиёнати ҳар ду ➜ ҳар яки {mutual_defect_reward}\n- Яке хиёнат мекунад, яке ҳамкорӣ мекунад ➜ Хиёнатгар {defect_reward}, Ҳамкор {sucker_reward}\n\nЧигунагӣ Бозӣ Кунед:\n- Дар даври муошират: матни хоҳишро тайп кунед.\n- Дар даври қарор: '[Cooperate]' ё '[Defect]' (бисерист)-ро дохил кунед. Шумо метавонед матни иловагӣ пеш аз/пас аз унвон илова кунед."
+  },
+  "phases": {
+    "conversation_finished": "Суханони муошират ба даври {round} тамом шуд. Лутфан ҷавоб гузоред бо '[Cooperate]' ё '[Defect]' дар ҷои \\boxed{{}}.",
+    "starting_round": "--- Даври ибтидоӣ {round} ---",
+    "round_summary": "Round {round} results:\n{outcome}\nPlayer 0 earned {r0} (total {score_0}), Player 1 earned {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "Равшан! Ҳарду бозингар гол заданд {s0}.",
+    "round_both_cooperate": "Ҳарду бозигар ҳамкорӣ карданд.",
+    "round_both_defect": "Ҳардуи онҳо аз ҳизб фирор карданд.",
+    "round_p0_cooperates_p1_defects": "Бозигари 0 ҳамкорӣ кард, бозингари 1 фирор намуд.",
+    "round_p0_defects_p1_cooperates": "Player 0 defected, Player 1 cooperated."
+  }
+}

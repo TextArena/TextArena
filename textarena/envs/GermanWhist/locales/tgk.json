@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Бозӣ шурӯъ мешавад. Сути трумп: {trump_suit} (карти трумп: {trump_str}).",
+    "no_trump_card": "none"
+  },
+  "player_prompt": {
+    "intro": "Шумо Бозигар {player_id} дар Висти Олмонӣ ҳастед.\n{phase_info}\nШумо {hand_size} картро медоред.\nКартро бо '[play N]' бозед, ки N мақоми он дар дасти шумост (масалан '[play 3]').",
+    "phase_learning": "ФАСИ ОМОНГУН: ғолиби ҳар як ҳилла кортро рӯбарӯ мегирад ва мағлубшуда корти навбатии қаторро мекашад. Ҳиллатҳое, ки дар ин марҳила ба даст оварда шудаанд, барои пирӯзӣ ҳисоб карда намешаванд.",
+    "phase_playing": "ФАСИ СУРГ: қуттии бозиҳо тамом шудааст. Ҳар як ҳилла аз ин ба баъд барои пирӯзӣ ҳисоб карда мешавад."
+  },
+  "next_card": {
+    "playing_phase": "Дар ин ҷо ягон корти бозӣ пешниҳод карда намешавад - марҳилаи бози оғоз ёфтааст.",
+    "deck_empty": "Дар маҷмӯъ, ягон корт пешниҳод карда намешавад.",
+    "available": "Корти пешниҳодшуда: {card}",
+    "available_trump": "Корти пешниҳодшуда: {card} (ТРУМП)"
+  },
+  "invalid_move": {
+    "wrong_format": "Формати ҳаракати беэътибор. Барои бозӣ кардани корти Nth дар дасти худ '[play N]' -ро истифода баред.",
+    "bad_position": "Ин мавқеи корт вуҷуд надорад. Шумо {hand_size}корт доред.",
+    "must_follow_suit": "Шумо бояд ба он пайравӣ кунед ва як {lead_suit} кортро бозӣ намоед.",
+    "invalid_play": "Ин кортро бозӣ кардан мумкин нест."
+  },
+  "game_action": {
+    "played": "Бозигар {player_id} {card}-ро бозид."
+  },
+  "trick": {
+    "won": "Player {winner_id} wins the trick with {card}.",
+    "won_learning": "Бозигар {winner_id} трюкро бо {card} ғолиб мешавад ва карти рӯи болоро мегирад."
+  },
+  "phase": {
+    "learning_complete": "Дастаи бозӣ тамом шуд. Фасли омӯзиш ба охир расид - ҳар як ҳиллаи боқимонда барои пирӯзӣ ҳисоб карда мешавад."
+  },
+  "draw": {
+    "winner_received": "Шумо ғолиб омада, {card}-ро гирифтед.",
+    "loser_received": "Шумо фиребро аз даст додед ва {card}-ро аз палуба кашидед.",
+    "winner_preview": "Корти навбатии пешниҳодшуда {card} аст."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Трюкҳои гирифта то ҳол - Бозигар 0: {tricks0}, Бозигар 1: {tricks1}",
+    "scores_playing": "Трюкҳои ҳисобкунӣ - Бозигар 0: {tricks0}, Бозигар 1: {tricks1}",
+    "phase": "Марҳилаи: {phase}",
+    "phase_learning": "Фаза: {phase} ({remaining_cards} картҳои бозмонда дар гуҷ)"
+  },
+  "hand": {
+    "no_cards": "Бе кортҳо.",
+    "no_cards_in_hand": "Дар даст корт нест.",
+    "header": "Дасти шумо:",
+    "trump_indicator": "(ТРУМП)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Ҳанӯз ин ҳилларо касе бо кортҳо иҷро накардааст.",
+    "header": "Ҳилаҳои ҳозира:",
+    "trump_indicator": "(ТРУМП)",
+    "card_line": "{observation}\n  Бозигар {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Бозӣ оғоз нашудааст.",
+    "header": "=== Бозии ГЕРМАНИЯНГОЙИНАи ВИСТ===",
+    "phase": "{observation}\nФаза: {phase}",
+    "trump_suit": "{observation}\nСути трумп: {trump_suit}",
+    "trump_card": "{observation}\nКарти трумп: {card}",
+    "cards_left": "{observation}\nКартҳои бозмонда дар гуҷ: {count}",
+    "next_card": "{observation}\nКарти оянда барои ғолиб: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Ҳилаҳои ҳозира:",
+    "trump_indicator": "(ТРУМП)",
+    "trick_line": "{observation}\n  Бозигар {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nБозигар {player_id}: {scoring} трюкҳои ҳисобкунӣ ({tricks} умумӣ), {hand_size} карт дар даст"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

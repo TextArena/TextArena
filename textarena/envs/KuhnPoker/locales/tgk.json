@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a {max_rounds} round game of Kuhn Poker.\nGame Rules:\n- Kuhn Poker uses a 3-card deck with J, Q, K (J lowest, K highest)\n- Each player antes {ante} chip and receives 1 card each round (note that the cards are dealt without replacement, so you cannot have the same card as your opponent).\n- Game continues for {max_rounds} rounds\n- The player with the most chips after all rounds wins\nAction Rules:\n- '[check]': Pass without betting (only if no bet is on the table)\n- '[bet]': Add 1 chip to the pot (only if no bet is on the table)\n- '[call]': Match an opponent's bet by adding 1 chip to the pot\n- '[fold]': Surrender your hand and let your opponent win the pot"
+  },
+  "init_round": {
+    "round_start": "### Оғози даври {current_round} аз {max_rounds} давр. Карти шумо: '{player_card}'",
+    "available_actions": "Амалиёти дастраси шумо инҳоянд: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Амал бояд [Check], [Bet], [Call], ё [Fold] бошад.",
+    "not_legal": "Амалиёт бояд {legal_actions} бошад."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Амалиёти дастраси шумо инҳоянд: {legal_actions}.",
+    "round_summary": "{reason} Current scores: Player 0: '{player_0_chips}'; Player 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Дар охири {max_rounds} даврҳо, ҳарду бозингар шумораи якхелаи чипҳоро доштанд.",
+    "round_win": "Бозингари {player_id} боздошт шуд.",
+    "winner_player0": "Бозингари 0 бо доштани чипҳои бештар дар охири ҳамаи {max_rounds} даврҳо ғолиб шуд.",
+    "winner_player1": "Бозингари 1 бо доштани чипҳои бештар дар охири ҳамаи {max_rounds} даврҳо ғолиб шуд."
+  }
+}

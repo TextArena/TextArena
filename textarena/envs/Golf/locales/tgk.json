@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Шумо бозии Голф (Бозии карт)-ро мебозед - Бозигар {player_id}.\nМақсад: Дар ин даври ягона камтарин баллро гиред. Агар сутунҳо арзишҳои якхела дошта бошанд, онҳо чун 0 ҷамъ карда мешаванд.\nАрзишҳои карт: А=1, 2-10=арзиши номинал, J/Q=10, K=0\n\nАмалиётҳо (қавсҳоро истифода кунед):\n- '[draw]' - Аз колода кашидан\n- '[take]' - Аз гузориш гирифтан\n- '[swap X Y]' - Кашидани картро бо ҷойгузинии X (сатр) Y (сутун) иваз кардан\n- '[discard]' - Кашидани картро гузориш кардан"
+  },
+  "board": {
+    "drew": "Шумо {card}-ро кашидед:\nХозир шумо [swap X Y] ё [discard]-ро иҷро кунед.",
+    "took": "Шумо {card}-ро аз гузориш аз ҷой гирифтед\nШумо [swap X Y]-ро бо он (на метавонед гузориш кунед) иҷро кунед.",
+    "peeked": "Шумо ба ҷойгузинии ({row},{col}) нигаридед: {card}",
+    "turn_view": "Дасти шумо:\n{hand}\nГузориш: {discard}\n{options}",
+    "none": "Ҳеҷ чиз нест."
+  },
+  "options": {
+    "final_turns": "Даврҳои ниҳоӣ! Имкониятҳои шумо: [draw], [take], [peek X Y]",
+    "draw": "Имкониятҳои шумо: [draw], [take]",
+    "must_swap": "Шумо бояд: [swap X Y] (картҳоро аз хазинаи партофтан наметавонед)",
+    "swap_or_discard": "Шумо: [swap X Y] ё [discard]-ро иҷро кунед"
+  },
+  "hand": {
+    "no_cards": "Бе кортҳо.",
+    "header": "Ҷумла: 1 2 3",
+    "row": "Сатри {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Бозигар {pid} {new}-ро бо {old} дар ҷойгузинии ({row},{col}) иваз кард",
+    "discarded": "Бозигар {pid} {card}-ро гузаронд"
+  },
+  "message": {
+    "deck_empty": "Дар палуба холӣ аст! Бозӣ фавран ба охир мерасад.",
+    "knocked": "Бозингари {pid} зада шуд! Ҳар як бозигари дигар боз як навбат мегирад.",
+    "final_round": "Бозигар {pid} {reason}! Хар як бозигари дигар як бори дигар имконияти бозӣ хоҳад дошт."
+  },
+  "reason": {
+    "all_revealed": "ҳамаи кортҳо ошкор карда шудаанд?"
+  },
+  "invalid": {
+    "wrong_action": "Ягон амалиётро бо қавс истифода кунед: [draw], [take], [swap X Y], [discard], [knock], ё [peek X Y]",
+    "discard_empty": "Дар хазинаи партовҳо чизе нест!",
+    "must_draw_first": "Шумо аввал [draw], [take], [knock], ё [peek X Y]-ро иҷро кунед",
+    "cannot_discard_taken": "Шумо наметавонед як корти аз хазинаи партофташуда гирифтаро барканор кунед. Ин корро бояд иваз кард.",
+    "have_drawn_card": "Шумо корти кашидашуда доред. Шумо [swap X Y] ё [discard]-ро иҷро кунед.",
+    "need_drawn_swap": "Барои иваз кардани кортҳо ба шумо корти мушаххас лозим аст.",
+    "need_drawn_discard": "Барои партофтани он ба шумо як корти тарҳрезишуда лозим аст.",
+    "out_of_bounds": "Ҷойгузинии берун аз ҳудуд. Сатр 1-{max_row}, сутун 1-{max_col}-ро истифода кунед",
+    "knock_with_card": "Шумо бо як корти гирифташуда наметавонед ба дарвоза задед. Аввал навбати худро пур кунед.",
+    "already_knocked": "Касе аллакай ин даврро ба даст овардааст.",
+    "already_revealed": "Ин корти муқобилият аллакай ошкор шудааст!"
+  },
+  "summary": {
+    "full": "Бозӣ тамом шуд! Бозигар {winner} бо {score} балл ғолиб шуд!\n\nНатиҷаҳои ниҳоӣ:\n{scores}",
+    "line": "Бозигар {pid}: {score} балл"
+  },
+  "board_str": {
+    "title": "=== Бозии голф===",
+    "discard": "Бастаи партофташуда: {card}",
+    "knocked": "Player {pid} has knocked!",
+    "player_header": "Бозигар {pid} (Балл: {score}):"
+  }
+}

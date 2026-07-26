@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "ТАРГЕТ: {target}\n\nРақамҳои дастрас:\n{numbers}",
+    "best": "{observation}\n\nБеҳтарин то ҳол: {best_value} (фосила: {distance})\nБеҳтарин ифода: {best_expression}",
+    "history": "{observation}\n\nТаърихи ҳаракатҳо:\n{moves}",
+    "progress": "{observation}\nИмтиёзи пешрафти кунунӣ: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Нишондиҳандаҳои беэътибор. Бояд гуногун бошанд ва дар доираи 0-{max_index} бошад",
+    "invalid_operation": "Амали нодуруст (ба сифр тақсим кардан ё натиҷаи ғайри адад)"
+  },
+  "outcome": {
+    "win": "Мақсади дақиқ ёфт шуд: {target}",
+    "no_moves": "Ҳаракатҳои боз намонанд. Беҳтарин натиҷа: {best_value} (таргет: {target})",
+    "turn_limit": "Хадди давр расид. Беҳтарин натиҷа: {best_value} (таргет: {target})"
+  }
+}
