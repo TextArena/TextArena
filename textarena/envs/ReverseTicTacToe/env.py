@@ -20,7 +20,7 @@ class ReverseTicTacToeEnv(ta.Env):
         return self.m("player_prompt", "intro", player_id=player_id, symbol=symbol, opponent_symbol=opponent_symbol)
 
     def get_board_str(self): return create_board_str(board=self.state.game_state["board"])
-    def _render_board(self): return "\n---+---+---\n".join("|".join(f" {self.state.game_state["board"][r][c]} " if self.state.game_state["board"][r][c] else f" {str(r * 3 + c)} " for c in range(3)) for r in range(3))
+    def _render_board(self): return "\n---+---+---\n".join("|".join(f" {self.state.game_state['board'][r][c]} " if self.state.game_state["board"][r][c] else f" {str(r * 3 + c)} " for c in range(3)) for r in range(3))
     def _observer_current_state(self):
         available_moves = [f"'[{str(r*3+c)}]'" for r in range(3) for c in range(3) if self.state.game_state["board"][r][c] == '']
         self.state.add_observation(message=self.m("board", "current_board", board=self._render_board(), moves=', '.join(available_moves)), observation_type=ta.ObservationType.GAME_BOARD)
