@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in Quantum Tic Tac Toe.\nIl tuo simbolo è '{symbol}', e i tuoi numeri di mossa sono sempre {parity} (ad esempio, X1, X3 o O2, O4).\n\nObiettivo: Vincere formando una linea di tre segni classici (solidificati da sovrapposizioni).\n\nCome giocare:\n- In ogni turno, posiziona un segno spettrale in due quadrati vuoti diversi utilizzando il formato '[a,b]'.\n- Questi segni sono intrecciati e etichettati come 'X1 / X1' o 'O4 / O4'.\n- Non puoi posizionare segni spettrali in un quadrato che è già collassato (solidificato).\n\nRegola di collasso:\n- Se la tua mossa crea un ciclo nel grafico di intreccio, collassa automaticamente.\n- Ogni segno spettrale nel ciclo si trasforma in un segno classico in una delle sue due posizioni.\n- Qualsiasi segno spettrale dipendente collassa anche.\n\nVittoria:\n- Il gioco termina quando un giocatore ha tre segni classici in linea.\n- Se entrambi i giocatori ottengono una linea durante lo stesso collasso, il giocatore con il numero di mossa massimo più basso vince.\n\nEsempio di mossa: '[0,4]' posiziona un segno spettrale nelle celle 0 e 4."
+  },
+  "board": {
+    "current_board": "Tavoliere di Quantum Tic Tac Toe:\n\n{board}\n\nInserisci la tua mossa come '[a,b]' per posizionare un segno quantistico in due posizioni."
+  },
+  "invalid_move": {
+    "wrong_format": "Formât no valid. doprâ \"[a,b]\".",
+    "invalid_cells": "Indics di celulis invalidis o duplicâts.",
+    "already_solidified": "Une des celulis e je za solidificade."
+  },
+  "game_action": {
+    "placed": "Il giocatore {player_id} ha posizionato il suo simbolo in una sovrapposizione tra le celle {pos_a} e {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Sovrapposizione dipendente risolta. La cella ({r}, {c}) è ora {symbol}.",
+    "last_cell_resolved": "Sovrapposizione per l'ultima cella risolta. La cella ({r}, {c}) è ora {symbol}.",
+    "superposition_resolved": "Sovrapposizione risolta. La cella ({r}, {c}) è ora {symbol}."
+  },
+  "outcome": {
+    "win": "Il zuiadôr {player_id} al vinç cun segns solidificâts!",
+    "draw": "The game is a draw!"
+  }
+}

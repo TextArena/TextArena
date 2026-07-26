@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Tu zughis al Golf (Zûc di cartis) - Zogador {player_id}.\nObietîf: Otignî il punteggi plui bas te cheste sole vuelte. Se lis colonis a partagnin il stes valôr, a son somadis come 0.\nValôrs des cartis: A=1, 2-10=valôr faciâl, J/Q=10, K=0\n\nAzions (impieze brachetis esatis):\n- '[draw]' - Tira dal mazzo\n- '[take]' - Tira de la pila di scarts\n- '[swap X Y]' - Scambie la cartis tirade cun posizion X (rie) Y (colone)\n- '[discard]' - Scarta la cartis tirade"
+  },
+  "board": {
+    "drew": "Tu à tirât fûr: {card}\nCumò tu âs di [swap X Y] o [discard]",
+    "took": "Tu à tirât fûr: {card} de la pila di scarts\nTu âs di [swap X Y] cun chê (no puedis scartâ)",
+    "peeked": "Tu à dât un sguarç te posizion ({row},{col}): {card}",
+    "turn_view": "Tue man: \n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Nissune"
+  },
+  "options": {
+    "final_turns": "Torns finâi! Tus opzions: [draw], [take], [peek X Y]",
+    "draw": "Tus opzions: [draw], [take]",
+    "must_swap": "Tu âs di: [swap X Y] (no tu puedis butâ vie lis cartelis dal mugnestri)",
+    "swap_or_discard": "Tu âs di: [swap X Y] o [discard]"
+  },
+  "hand": {
+    "no_cards": "Nissune schede.",
+    "header": "Col: 1 2 3 (scriture di riferiment)",
+    "row": "Rie {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Zogador {pid} à scambiat {new} con {old} te posizion ({row},{col})",
+    "discarded": "Zogador {pid} à scartât {card}"
+  },
+  "message": {
+    "deck_empty": "Il ponte al è vueit! La partide e finìs in curt.",
+    "knocked": "Il zuiadôr {pid} al è butât! Ogni altri zuiadôrs a àn un turni in plui.",
+    "final_round": "Zogador {pid} {reason}! Ogn zogador al à un altri torn"
+  },
+  "reason": {
+    "all_revealed": "al à sveadis dutis lis schedis?"
+  },
+  "invalid": {
+    "wrong_action": "Impieze une azion cun brachete: [draw], [take], [swap X Y], [discard], [knock], o [peek X Y]",
+    "discard_empty": "The discard pile is empty!",
+    "must_draw_first": "Tu âs di [draw], [take], [knock], o [peek X Y] prime",
+    "cannot_discard_taken": "No tu puedis butâ vie une schede cjapade de pile di discjariis. Tu âs di cambiâlu.",
+    "have_drawn_card": "Tu âs un carton tirât fûr. Tu âs di [swap X Y] o [discard]",
+    "need_drawn_swap": "Tu âs bisugne di une schede par scambiâ.",
+    "need_drawn_discard": "Tu âs bisugne di une schede tirade par scartâle.",
+    "out_of_bounds": "Posizion fûr dai limits. Impieze rie 1-{max_row}, colonie 1-{max_col}",
+    "knock_with_card": "No tu puedis bati cun une schede tirade fûr. Finìs il to turni prin.",
+    "already_knocked": "Cualchidun al à za cjapât chest round.",
+    "already_revealed": "Cheste schede e je za stade rivelade!"
+  },
+  "summary": {
+    "full": "Zûc finît! Zogador {winner} al vinç cun un punteggi di {score} ponts!\n\nPunteggis finâi:\n{scores}",
+    "line": "Zogador {pid}: {score} ponts\n"
+  },
+  "board_str": {
+    "title": "=== GJUE DI GOLF === Al è rivât il moment di lâ a scuele.",
+    "discard": "Discard pile: {card}",
+    "knocked": "Il zuiadôr {pid} al à bussât!",
+    "player_header": "Player {pid} (Score: {score}):"
+  }
+}

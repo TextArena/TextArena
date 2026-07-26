@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Tu sê Zogadôr {player_id} tal Tris di tre zogadôrs.\nIl to simbul al è '{symbol}'.\nTu fâs voltis metint il to simbul su un tavoliere 5x5 par formâ une line di cuatri.\nLas linis a puedin jessi orizontâls, verticâls o diagonâls.\nInvie il to moviment usant il formât '[4]' par segnâ la celule 4."
+  },
+  "board": {
+    "current_board": "Tavoliere corrent:\n\n{board}\n\nMosis disponiblis: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format di spostament no valid. doprâ \"[cell]\" là che la cjadene e je 0-{max_cell}.",
+    "out_of_range": "Numar di celule no valid: {cell}. Al à di jessi tra 0 e {max_cell}.",
+    "already_occupied": "La celule {cell} e je za ocupade.",
+    "made_invalid": "Il zuiadôr {player_id} al à fate une mosse invalide."
+  },
+  "game_action": {
+    "placed": "Zogadôr {player_id} met il so simbul ({symbol}) tal cjamp ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Zogadôr {player_id} ({symbol}) vinç!",
+    "draw": "La partide e je parie!"
+  }
+}

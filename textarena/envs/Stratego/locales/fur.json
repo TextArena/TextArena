@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "Tavoliere corrent:\n\n{board}\nMozions disponibils: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format di azion no valid. Zogador {player_id} no à inserît une mozion tal format [A0 B0].",
+    "invalid_coordinates": "Format di azion invadibil. Il zuiadôr {player_id} nol à jentrât coordenadis validis.",
+    "not_own_piece": "Formât di azion invalide. Il zuiadôr {player_id} al à di movisi une des sôs fiestis.",
+    "scout_through_pieces": "Formât di azion invalide. Il zuiadôr {player_id} nol pues movisi un spietant traviers altris pioris.",
+    "scout_diagonal": "Formât di azion invalide. Il zuiadôr {player_id} nol pues spostâ un esploradôr in diagjonâl.",
+    "non_scout_multi_square": "Formât di azion invalide. I peçs, fûr dai esploradôrs, puedin movisi dome une casele ogni volte.",
+    "move_into_lake": "Formât di azion invalide. Il zuiadôr {player_id} nol pues movisi tal lûc dal lâc.",
+    "move_onto_own_piece": "Formât di azion invalide. Il zuiadôr {player_id} nol pues movisi su la sô pice.",
+    "move_bomb_or_flag": "Formât di azion invadibil. Il zuiadôr {player_id} nol pues movisi une bombe o la bandiere."
+  },
+  "game_action": {
+    "you_moved": "Tu à muçât la tô pièce da {source} a {dest}.",
+    "opponent_moved": "Zogador {player_id} al à muçât une pièce da {source} a {dest}.",
+    "you_equal_ranks": "Tu à muçât la tô pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che i gradi a son i stessis, ambis dôs piècis a àn pierdût.",
+    "opponent_equal_ranks": "Zogador {player_id} al à muçât une pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che i gradi a son i stessis, ambis dôs piècis a àn pierdût.",
+    "you_miner_defused": "Tu à muçât la tô pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che i minadôrs a puedin smontâ i bombs, tu à vinçût la bataie.",
+    "opponent_miner_defused": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As miners can defuse bombs, you lost the battle.",
+    "you_bomb_lost": "Tu à muçât la tô pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant no jere un minadôr, tu à pierdût la bataie.",
+    "opponent_bomb_won": "Zogador {player_id} al à muçât une pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant no jere un minadôr, tu à vinçût la bataie.",
+    "you_spy_won": "Tu à muçât la tô pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant al è un spie e la destinazion e je un maršal, tu à vinçût la bataie.",
+    "opponent_spy_lost": "Zogador {player_id} al à muçât une pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant al è un spie e la destinazion e je un maršal, tu à pierdût la bataie.",
+    "you_higher_won": "Tu à muçât la tô pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant al è un grad plui alt di chel di destinazion, tu à vinçût la bataie.",
+    "opponent_higher_lost": "Zogador {player_id} al à muçât une pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant al è un grad plui alt di chel di destinazion, tu à pierdût la bataie.",
+    "you_lower_lost": "Tu à muçât la tô pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant al è un grad plui bas di chel di destinazion, tu à pierdût la bataie.",
+    "opponent_lower_won": "Zogador {player_id} al à muçât une pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant al è un grad plui bas di chel di destinazion, tu à vinçût la bataie."
+  },
+  "outcome": {
+    "flag_captured": "Il zuiadôr {player_id} al à cjapât la bandiere dal aversari!",
+    "no_movable_pieces": "Zogador {winner_id} al à vinçût! Zogador {loser_id} no à plui piècis muçabils."
+  }
+}

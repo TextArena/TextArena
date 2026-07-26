@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "Formât di azion no valid. La azion e varès di jessi fra parentesiis.",
+    "no_closing_bracket": "Formât di azion no valid. No si cjate la brachete che e ferme ']'",
+    "empty_command": "Comande vueide. Digjitâ \"draw\" o \"move <source> <destination> [count]\".",
+    "empty_action": "Azion no fate valôr",
+    "move_needs_args": "Il comant move al domande une font e un destin. 'move <source> <destination> [count]'",
+    "count_positive": "Il contignût al à di jessi positîf o \"tots\"",
+    "count_invalid": "Conte invalide. doprâ un numar o \"tuts\"",
+    "unknown_command": "Comand incognossût '{cmd}'. Usâ 'draw', 'move <source> <destination> [count]', o 'forfeit'",
+    "wrapped": "Azion {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Azion {n}: {msg}",
+    "before_failure": "E je stade eseguide {n} azion (s) prime dal falliment.",
+    "failed": "Azion {n} falide: {msg}"
+  },
+  "move_result": {
+    "drew": "Discjame la schede dal stock al scart.",
+    "cannot_draw": "No si pues tirâ fûr. Cjamp e scart a son ducj vuarîts.",
+    "invalid_pile": "Nome di pila invadibil. doprâ W, F1-F4 o T1-T7",
+    "foundation_one_card": "Si pues spostâ dome une schede inte base.",
+    "waste_to_foundation_ok": "Trasferît la schede dai refudums aes fondazions F{dst}",
+    "waste_to_foundation_bad": "No pues spostâ la schede di scart a chê pile de fondazion.\\\\n\"",
+    "tableau_to_foundation_ok": "Mossât carte da tableau T{src} a fondazion F{dst}",
+    "tableau_to_foundation_bad": "No si pues spostâ la schede di tabêl a chê pile de fondazion.\\\\n\"",
+    "foundation_to_foundation": "No pues spostâsi di fonde a fondazion.",
+    "waste_to_tableau_one_card": "Si pues spostâ dome une schede dal scart al tabelon.",
+    "waste_to_tableau_ok": "Trasferît la schede dai refudums al cuadri T{dst}",
+    "waste_to_tableau_bad": "No pues meti la schede di scart su chê pile tableau.\\\\n\"",
+    "no_face_up": "No son cartele vierte par spostâle.",
+    "tableau_to_tableau_ok": "Mossâts {count} carte(s) da tableau T{src} a T{dst}",
+    "tableau_to_tableau_bad": "No si puedin movi {count} carte(s) da T{src} a T{dst}",
+    "foundation_to_tableau_one_card": "Si pues spostâ dome une schede de fondazion al tabelon.",
+    "foundation_empty": "La fondazion F{src} e je vueide.",
+    "foundation_to_tableau_ok": "Mossât carte da fondazion F{src} a tableau T{dst}",
+    "foundation_to_tableau_bad": "No si pues meti la cartele di fonde su il cuadri T{dst}",
+    "to_waste_or_stock": "No si pues spostâ ai refudums o a lis risorsis."
+  },
+  "outcome": {
+    "forfeit": "La partide e je pierdude. Score finâl: {score} cartelis in fondis.",
+    "won": "Compliments, tu âs vinçût il solitari di Klondike!",
+    "turn_limit": "Fin dal zûc! Tu âs rivât al massim di {max_turns} turns. Punteggi: {score} cartis tes fondazions."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== (cjanâl di balon)",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Cjarte: {stock} cartelis",
+    "waste": "Scart (W): {waste}",
+    "foundations_header": "Fondazions:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabel: (in inglês)",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}
