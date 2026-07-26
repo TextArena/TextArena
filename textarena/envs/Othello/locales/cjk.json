@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Chipapilo cha chihandwa: {board}",
+    "valid_moves": "{observation}\nMikisiyo iliyoidhinishwa: {moves}",
+    "no_valid_moves_reset": "{observation} Kukushi kusomboka cha ulemu - muhasa kukumba.",
+    "no_valid_moves_step": "{observation} Kukushi yuma yipema yize muuhasa kuhunga.",
+    "scores_reset": "{observation}\nMabala ya kuunganisha - Black: {black_count}, White: {white_count}\n",
+    "scores_step": "{observation}\nMabala - Black: {black_count}, White: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Kufwambulula chacho chatamba kupwa cha mutapu [row, col].",
+    "illegal": "Illegal move. Valid moves: {valid}"
+  },
+  "game_action": {
+    "skipped": "Mutu yoze te akulinga {pid} katambile kuhonesa mulimo wenyi.",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Mchezaji {pid} ({piece}) hana mikisiyo iliyoidhinishwa na lazima apitie."
+  },
+  "outcome": {
+    "black_wins": "Black kakumba {black_count}-{white_count}.",
+    "white_wins": "White kakumba {white_count}-{black_count}.",
+    "draw": "Solola {black_count}-{white_count}."
+  }
+}

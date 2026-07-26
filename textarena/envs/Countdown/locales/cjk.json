@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "LUTA: {target}\n\nNimero zya ku zola:\n{numbers}",
+    "best": "{observation}\n\nUa ku mona mwa ku zola: {best_value} (luzolo: {distance})\nNginga ya ku mona: {best_expression}",
+    "history": "{observation}\n\nLuta lwa zola:\n{moves}",
+    "progress": "{observation}\nNimero ya ku zola lwa sasa: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Invalid indices. Must be different and in range 0-{max_index}",
+    "invalid_operation": "Kuzachisa chuma chakuhona kupwa chamwenemwene (kuchihandununa ha zero hanji kuhitulula chize kuchishi lamba lieswe)"
+  },
+  "outcome": {
+    "win": "Yipema! Wanane chifwa chendene: {target}",
+    "no_moves": "No more moves. Best result: {best_value} (target: {target})",
+    "turn_limit": "Mala ya luta imanyikwa. Mwito wa ku mona: {best_value} (luta: {target})"
+  }
+}

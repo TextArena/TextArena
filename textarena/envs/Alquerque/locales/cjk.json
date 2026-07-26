@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} ({piece}). Opponent is ({opp}).\nSubmit moves as '[a2 a3]' (from → to).\n- A normal move is one forward step to an adjacent empty vertex.\n- A capture is a jump over an adjacent enemy piece landing on the empty node beyond.\nEach capture yields {score_per_capture} points.\nGame ends after {max_moves} moves or when a player has no legal move."
+  },
+  "board": {
+    "current_board": "Kuteleka #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "Kuyilemba kanawa. Shimbu kanda ulikate \"[a2 a3]\".",
+    "unknown_square": "Chihanda chakuhona kutachikiza.",
+    "not_your_piece": "Source is not your piece.",
+    "dest_not_empty": "Kuhichi kachapwile chakuzeneka mutu.",
+    "illegal": "Kulitwala ha chikungulwila cha mu maliji."
+  },
+  "game_action": {
+    "captured": "Mwani {player_id} akwata kipande! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Mutu yoze wakuzomboka {player_id} keshi ni mbonga.",
+    "cannot_move": "Player {player_id} cannot move.",
+    "higher_score": "Kutachikiza kanawa yuma.",
+    "move_limit": "Kuzomboka cha mu yilu chinashika."
+  }
+}

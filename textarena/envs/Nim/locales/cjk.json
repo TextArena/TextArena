@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "Kuzomboka cha musono: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kukushi muheto wa kutwala ha chihanda cha usongwelo. Shingulula \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Mwana {player_id}, Nketo isambadidi. Lumbu {col} ili pamoza na mipaka.",
+    "out_of_range": "Kulemba cha chizavu {pile_index} chinapu haze.",
+    "non_positive": "Must remove at least 1 object.",
+    "exceeds_pile": "Taiwezi kuchukua {quantity} kwenye lumbu {pile_index} (ni {pile_count} pekee zimesalia)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Muka-kwasa {player_id} yahana yuma yakusula!"
+  }
+}

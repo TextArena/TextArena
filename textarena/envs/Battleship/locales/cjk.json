@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id}. You are playing the Battleship game.\nYour goal is to sink all of your opponent's ships before they sink yours.\nOn your turn, you can fire missiles at specific coordinates in teh following format: '[a4]'. If the missile hits a ship, it is marked with 'X'. If it misses, it is marked with 'O'. In either scenarios, the game environment will inform you of your hits. If you have sunk a boat, the game environment will tell you!\nThe game ends when all of one player's ships have been sunk.\nYour initial board will show all of your ships placed and your opponent's hits on you, and your hits and misses on your opponent's board without showing your opponent's ships.\nHere is the initial board:\n"
+  },
+  "invalid_move": {
+    "wrong_format": "The player did not respond with a valid coordinate in square brackets.",
+    "out_of_board": "Coordinate {coord} yili haze lia mbonge.",
+    "already_fired": "Kufwika {coord} hanafupaho lyehi."
+  },
+  "game_action": {
+    "you_sunk": "Kunyaga! Uka kunyaga shipa ku {coord}! Shipa dyako dyalema:\n{view}",
+    "opp_sunk": "Mwene wa kuwaka kunyaga shipa dyako ku {coord}! Shipa dyako dyalema:\n{view}",
+    "you_hit": "Kuna shipa! Uka kuna shipa ku {coord}! Shipa dyako dyalema:\n{view}",
+    "opp_hit": "Opponent hit your ship at {coord}! Your updated board:\n{view}",
+    "you_miss": "Kasi! Uka kasi shipa ku {coord}! Shipa dyako dyalema:\n{view}",
+    "opp_miss": "Opponent missed your ship at {coord}! Your updated board:\n{view}"
+  },
+  "outcome": {
+    "win": "Player {player_id} has sunk all of their opponent's ships!"
+  }
+}

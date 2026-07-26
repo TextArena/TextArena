@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a game of Indian Poker.\n- 52-card deck; you see only the opponent's card.\n- Ante {ante} chip(s) each round, {max_rounds} round(s) total.\n- Valid moves: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X is a positive integer <= your chip count.)\n- Highest hidden card wins the pot at showdown.\n"
+  },
+  "round": {
+    "announce": "### Raundi {current_round}/{max_rounds}\nKadi ya mpinzani wako ni: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Supply exactly ONE bracketed action, e.g. '[check]', '[bet 2]', '[call]', '[raise 3]', or '[fold]'.",
+    "cannot_check": "Kanda [check] - yena uli ni chijimbikilo.",
+    "amount_min": "Kulemeka cha mbongo/kuzangula chatamba kupwa ≥ 1.",
+    "cannot_bet": "Hauwezi ku [bet] - lazima u [call] / [raise] / [fold].",
+    "nothing_to_call": "Kakweshi chuma chize muhasa kwiluka; yena mahasa [check].",
+    "no_bet_to_raise": "Use [bet X] to open; there is no bet to raise.",
+    "insufficient": "Ha chino, atu keshi kuhana mbongo jinene."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kuzenza {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Yuma yize muhasa kulinga: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Mwadi {winner}. (Mikopo P0:{p0}, P1:{p1})",
+    "folded": "Player {player_id} folded.",
+    "showdown_win": "Showdown: {card_win} beats {card_lose}.",
+    "showdown_tie": "Showdown tie: both {card}. Pot split – each receives {split}."
+  },
+  "outcome": {
+    "p0_wins": "Mwadi 0 anashinda ({bank0} > {bank1})",
+    "p1_wins": "Mwadi 1 anashinda ({bank1} > {bank0})",
+    "draw": "Equal chips after all rounds"
+  }
+}
