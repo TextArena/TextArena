@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Tú Imreoir {player_id}, ag imirt {num_rounds} babhtaí de Theorainn Últimátach Iterated.\nTá ${pool} agat chun scoilt an babhta seo idir thusa féin agus Imreoir {other_id}.\n\nTairisceoir:\n  - Déan tairiscint: [Offer: $X] (0 <= X <= pool)\n  - Má ghlactar → Gheobhaidh tú $(pool - X), gheobhaidh an imreoir eile $X\n  - Má dhiúltaítear → Gheobhaidh an bheirt $0\n  - Sampla: [Offer: $3]  nó  'Creidim go bhfuil sé seo cothrom. [Offer: $5]'\n\nFreagarthóir:\n  - Cinneadh a dhéanamh ar an tairiscint le [Accept] nó [Reject]\n  - Sampla: 'Tá sé sin réasúnta. [Accept]'\n            'Tá sé sin ró-éagórach. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Tús Babhta {round_number}! ---\nIs é Imreoir {proposer_id} an tairisceoir, Imreoir {responder_id} an freagarthóir.",
+    "offer": "Round {round_number}: Player {proposer_id} offers ${offer} to Player {responder_id} (keeping ${keep}).",
+    "accepted": "Ghlac Imreoir {responder_id}! Babhta {round_number} gnóthacháin: Imreoir {proposer_id} +${proposer_gain}, Imreoir {responder_id} +${responder_gain}. Iomlán nua: Imreoir 0: ${total_0}, Imreoir 1: ${total_1}.",
+    "rejected": "Dhiúltaigh Imreoir {responder_id} don tairiscint! Babhta {round_number} gnóthacháin: Imreoirí araon +$0. Fanann iomlán mar atá: Imreoir 0: ${total_0}, Imreoir 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Ní mór don tograí tairiscint a dhéanamh ag baint úsáide as an bhformáid [Offer: $X].",
+    "bad_integer": "Ní mór méid an tairiscint a bheith ina líon iomlán bailí.",
+    "out_of_range": "Ní mór go mbeadh an tairiscint idir $0 agus ${pool} .",
+    "no_current_offer": "Níl aon tairiscint reatha le freagairt dó.",
+    "accept_or_reject": "Ní mór don fhreagarthóir [Accept] nó [Reject] an tairiscint a dhéanamh."
+  },
+  "outcome": {
+    "win": "Bhuaigh Imreoir {winner} le ${winner_total} iomlán i gcoinne ${loser_total} Imreoir {loser}.",
+    "draw": "D'éirigh leis an dá imreoir ${total} a bhaint amach."
+  }
+}

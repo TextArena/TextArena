@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Fáilte go Lights Out! Tá griallach {size}x{size} de sholas agat.\nIs é do sprioc ná gach solas a chur AS (ionadaíocht le '.')\nNuair a bhruitear solas, cuirtear é féin agus a chomharsana comharsanacha (suas/síos/clé/deas) as.\nCuir isteach [row col] chun solas a bhrú (0-indecsithe, mar sin réimse bailí 0-{max_index}).\nTá suas le {max_turns} gluaiseanna agat chun an puist a réiteach.\nCatalóg: 'O' = solas AR, '.' = solas AS"
+  },
+  "board": {
+    "current_state": "Stádas reatha an ghriallach (Glaoigh {moves_made}, {moves_left} gluaisne fágtha, {completion}% críochnaithe):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ní mór an gníomh a bheith i bhformáid [row col] áit ar ionann líne agus col uimhreacha iomlána ó 0 go dtí {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Congratulations! You solved the puzzle in {moves_used} moves!",
+    "loss": "Cluiche thart! Úsáid tú gach glaoch {max_turns} gan an puist a réiteach. Críochnú deiridh: {completion}%\nStádas deiridh:\n{grid}"
+  }
+}

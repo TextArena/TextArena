@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "Formáid neamhbhailí gníomhaíochta. Ba cheart go mbeadh an gníomh i gclaontacha.",
+    "no_closing_bracket": "Formáid neamhbhailí gníomhaíochta. Bréagán dúnadh a bheith ar fáil ']'",
+    "empty_command": "Ordú folamh. Téigh 'draw' nó 'move <source> <destination> [count]'.",
+    "empty_action": "Gníomh folamh",
+    "move_needs_args": "Éilíonn an t-ordú gluaiseachta foinse agus ceann scríbe. Úsáid: 'move <source> <destination> [count]'",
+    "count_positive": "Ní mór go mbeadh an comhaireamh dearfach nó 'go léir'",
+    "count_invalid": "Líon neamhbhailí. Úsáid uimhir nó 'all'",
+    "unknown_command": "Ordú anaithnid '{cmd}'. Úsáid 'tarraing', 'gluais <foinse> <críoch> [count]', nó 'éirí as'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Gníomhaíocht {n} a rinneadh (í) roimh an bhfreagra.",
+    "failed": "Gníomh {n} theip: {msg}"
+  },
+  "move_result": {
+    "drew": "Cárta tarraingthe ó stoc go dramhaíl.",
+    "cannot_draw": "Ní féidir é a tharraingt. Tá an stoc agus an dramhaíl ar fad folamh.",
+    "invalid_pile": "Ainm cnuasach neamhbhailí. Úsáid W, F1-F4, nó T1-T7",
+    "foundation_one_card": "Ní féidir ach cárta 1 a aistriú go bunús.",
+    "waste_to_foundation_ok": "Cárta a bhogadh ó dhramhaíl go bunús F{dst}",
+    "waste_to_foundation_bad": "Ní féidir cárta dramhaíola a aistriú go dtí an stailc bunús sin",
+    "tableau_to_foundation_ok": "Cárta gluite ó thábla T{src} go bhunadh F{dst}",
+    "tableau_to_foundation_bad": "Ní féidir cárta taibléad a aistriú chuig an mbaile bunús sin",
+    "foundation_to_foundation": "Ní féidir é a aistriú ó bhunús go bunús.",
+    "waste_to_tableau_one_card": "Ní féidir ach cárta 1 a aistriú ó dhramhaíl go dtí an tábla.",
+    "waste_to_tableau_ok": "Cárta a bhogadh ó dhramhaíl go dtí an tábla T{dst}",
+    "waste_to_tableau_bad": "Ní féidir cárta dramhaíola a chur ar an mbaile tábla sin",
+    "no_face_up": "Níl cártaí os comhair chun bogadh.",
+    "tableau_to_tableau_ok": "{count} cárta(í) gluite ó thábla T{src} go T{dst}",
+    "tableau_to_tableau_bad": "Ní féidir {count} cárta(í) a ghluasad ó T{src} go T{dst}",
+    "foundation_to_tableau_one_card": "Ní féidir ach cárta 1 a aistriú ó bhunús go bord",
+    "foundation_empty": "Tá bunús F{src} folamh.",
+    "foundation_to_tableau_ok": "Cárta gluite ó bhunadh F{src} go tábla T{dst}",
+    "foundation_to_tableau_bad": "Ní féidir cárta bunaidh a chur ar an tábla T{dst}",
+    "to_waste_or_stock": "Ní féidir é a aistriú go dramhaíola nó stoc."
+  },
+  "outcome": {
+    "forfeit": "Cluiche a chailleadh. Scór deiridh: {score} cártaí i bhunaitheacha .",
+    "won": "Comhghairdeas! Tá tú bhuaigh Klondike Solitaire!",
+    "turn_limit": "Cluiche thart! Bhaint tú an uaschuigeach de {max_turns} turais. Scór: {score} cártaí i mbunaidh."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== Tá an t-am ag teacht.",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stoc: cártaí {stock}",
+    "waste": "Waste (W): {waste}",
+    "foundations_header": "Bunaíochtaí:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tábla:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Tú Imreoir {player_id} i Tic Tac Toe trí Imreoir.\nIs é do shiombail '{symbol}'.\nGlacann tú sealanna ag cur do shiombail ar chlár 5x5 chun líne de cheathair a chruthú.\nIs féidir línte a bheith cothrománach, ingearach, nó déanach.\nCuir isteach do ghluaisne sa chéadfhormáid '[4]' chun ceall 4 a mharcáil."
+  },
+  "board": {
+    "current_board": "Cláir Reatha:\n\n{board}\n\nGluaisne Ar Fáil: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formáid imeartha neamhbhailí. Úsáid \"[cell]\" nuair a bhíonn cill 0-{max_cell} .",
+    "out_of_range": "Uimhir chill neamhbhailí: {cell}. Ní mór go mbeadh sé idir 0 agus {max_cell} .",
+    "already_occupied": "Tá cealla {cell} á n-úsáid cheana féin.",
+    "made_invalid": "Rinne imreoir {player_id} gluaiseacht neamhbhailí."
+  },
+  "game_action": {
+    "placed": "Cuireann Imreoir {player_id} a shiombail ({symbol}) i gcéim ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Player {player_id} ({symbol}) wins!",
+    "draw": "Tá an cluiche a tharraingt!"
+  }
+}

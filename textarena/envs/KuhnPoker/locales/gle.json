@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Tú í Imreoir {player_id} i gcluiche {max_rounds}-rond de Phócar Kuhn.\nRialacha an Chluiche:\n- Úsáideann Pócar Kuhn déic 3-chárta le J, Q, K (J is íseal, K is airde)\n- Cuirtear {ante} giota ag gach imreoir agus faightear 1 chárta gach rond (tabhair faoi deara nach féidir leat an chárta céanna a bheith agat agus ag do chéile comhraic).\n- Leanann an cluiche ar aghaidh ar feadh {max_rounds} rond\n- Is é an imreoir leis an gcuid is mó giotaí tar éis na rond uile a bhuachan\nRialacha Gníomhartha:\n- '[check]': Pas gan geallúint (ach amháin má tá aon geallúint ar an mbord)\n- '[bet]': Cuir 1 ghiota leis an bpot (ach amháin má tá aon geallúint ar an mbord)\n- '[call]': Déan comhréiteach le geallúint do chéile comhraic trí 1 ghiota a chur leis an bpot\n- '[fold]': Éirigh as do lámh agus lig do chéile comhraic an pot a bhuachan"
+  },
+  "init_round": {
+    "round_start": "### Tús rond {current_round} as {max_rounds} rond. Is é do chárta: '{player_card}'",
+    "available_actions": "Is iad na gníomhaíochtaí atá ar fáil agat: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ní mór don ghníomh a bheith [Check], [Bet], [Call], nó [Fold].",
+    "not_legal": "Ní mór go mbeadh an gníomh {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Is iad na gníomhartha atá ar fáil agat ná: {legal_actions}.",
+    "round_summary": "{reason} Scóir reatha: Imreoir 0: '{player_0_chips}'; Imreoir 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Ag deireadh {max_rounds} babhtaí, bhí an líon céanna sliseanna ag an dá imreoir.",
+    "round_win": "Tá an t-imreoir {player_id} imithe.",
+    "winner_player0": "Bhuaigh imreoir 0 trí níos mó sliseanna a bheith aige ag deireadh gach babhta {max_rounds} .",
+    "winner_player1": "Bhuaigh imreoir 1 trí níos mó sliseanna a bheith aige ag deireadh gach babhta {max_rounds} ."
+  }
+}

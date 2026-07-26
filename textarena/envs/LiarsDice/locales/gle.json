@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Tú Imreoir {player_id} i gcluiche {num_players}-imreoirí Liars' Dice.\nRialacha:\n- Ar do thurn, tá tú in ann déanamh:\n  1) Cur isteach ar bhid nua le cáilíocht nó aghaidh níos airde (nó beirt) ná an bid reatha; i.e. '[Bid: 3, 4]',\n  2) Glaoch ar an mbid deireanach trí '[Call]' a chur isteach.\n\nMás glaoch atá ort:\n  - Má tá an líon ceart de luach aghaidh sin i measc na ndé uile níos lú ná an bid, caillteann an ceannaire deireanach dé amháin.\n  - Ar an gcúis eile, caillteann an glaoire dé amháin.\nImreoir a bhaineann 0 dé amach tá scoite. Buann an imreoir deireanach atá fágtha."
+  },
+  "board": {
+    "per_player": "\tImreoir {p}: {d}",
+    "new_round": "\nBabhta nua - Dé fágtha: {dice_summary}\nTá do Dhé seo nó: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Player {current_player_id} calls! The actual count of face {face_value} is {count}, which is LESS than {quantity}.\nPlayer {loser_id} (the last bidder) loses one die.",
+    "caller_loses": "Player {current_player_id} calls! The actual count of face {face_value} is {count}, which is >= {quantity}.\nPlayer {loser_id} (the caller) loses one die."
+  },
+  "action": {
+    "bid_announce": "Tairgeann imreoir {player_id} aghaidh {quantity} ar an duine {face_value} ."
+  },
+  "invalid_move": {
+    "call_no_bid": "Glao a rinneadh gan tairiscint roimh ré.",
+    "invalid_bid": "Tairiscint neamhbhailí: {reason}",
+    "not_recognized": "Gníomh nach bhfuil aithnithe mar '[Bid: X, Y]' nó '[Call]' bailí. Gníomh curtha isteach: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Tá cainníocht nua {new_quantity} níos ísle ná an chainníocht reatha {current_quantity}.",
+    "face_lower": "Tá luach ainmniúil nua {new_face_value} níos ísle ná an méid reatha {current_face_value}.",
+    "identical": "Tá an tairiscint comhionann leis an tairisceana reatha.",
+    "face_range": "Ní mór go mbeadh an luach ainmniúil idir 1 agus 6."
+  },
+  "message": {
+    "eliminated_invalid": "Cuireadh imreoir {player_id} amach le gluaiseacht neamhbhailí."
+  },
+  "outcome": {
+    "win": "Imreoir {winner} buaite! Rangú deireanach: {final_ranking}"
+  }
+}

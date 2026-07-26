@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Bord reatha: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ní mór an t-aistriú a bheith i bhfoirm [macro micro] le huimhreacha 0-8.",
+    "out_of_range": "Ní mór go mbeadh gach ceann de na hindeacsanna idir 0 agus 8.",
+    "index_out_of_range": "Tá an micre_chlár, líne nó col as raon.",
+    "cell_occupied": "Tá an cealla áitiú cheana féin.",
+    "wrong_micro_board": "Ní mór don imreoir a imirt sa chéad bhord micreafónta eile.",
+    "micro_board_won": "Tá an bord micreafónta buaite cheana féin."
+  },
+  "next_board": {
+    "any": "aon bhord micreabhóide",
+    "specific": "micreabord {nxt}"
+  },
+  "game_action": {
+    "played": "Player {player_id} played in micro board {macro_idx}, cell {micro_idx} (row {row}, col {col}). Player {opponent_id} must now play in {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Buaileann imreoir {player_id} Ultimate Tic Tac Toe!",
+    "draw": "Tá an cluiche a tharraingt!"
+  }
+}
