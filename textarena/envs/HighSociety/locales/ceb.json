@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ang Player {player_id} sa usa ka laro sa HighSociety (bersyon sa 2 ka mga player).\nDaloy sa laro:  Ang napulo ka mga prestige card gihulagway usa ka usa.\nBidding:    Sa matag hulagway, pilihin usab ang usa ka card sa kwarta 1-11 ug ibilin.\n            • Ang taas nga bid ang managdaog sa prestige card ug ipatong ang card sa kwarta.\n            • Ang ubos nga bid makakuha sa ilang card sa kwarta.\n            • Tie -> ang duha ka mga bid gibalik ug ang mao gihapong prestige card gihulagway.\nScoring:    Human sa napulo ka mga hulagway, idugang **natanging kwarta + mga punto sa prestige**.\n            Ang taas nga *net-worth* ang managdaog (eksakto nga tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Auction {round}/10  |  Prestige card: {prize}"
+  },
+  "board": {
+    "money_cards": "Ang imong nahibilin nga mga money card: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kinahanglang maglakip ug eksaktong usa ka [X] nga money card.",
+    "card_not_held": "Wala na nimo kanang kuwarta sa kard."
+  },
+  "message": {
+    "tie": "Ang mga bid nga nag-iibar gibalik. Pagpalit!",
+    "auction_result": "P0 nagbid {bid0}, P1 nagbid {bid1}. Ang Player {winner} ang nanagdaog sa prestige {prize} (kabtangan {total})."
+  },
+  "outcome": {
+    "p0_wins": "Net-worth {nw0} > {nw1}",
+    "p1_wins": "Net-worth {nw1} > {nw0}",
+    "draw": "Both net-worth {nw0} – exact tie."
+  }
+}

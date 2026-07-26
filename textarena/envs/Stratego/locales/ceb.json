@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Kamo mao ang Player {player_id} sa Stratego.\nAng inyong tumong mao ang pagkuha sa bandila sa inyong kaaway o pagkaon sa tanan nilang mga mahibaw-an nga piraso.\nAng inyong hukbo gipwesto alang kaninyo sa board, kauban ang inyong bandila, bomba, ug uban pang mga piraso nga may mga ranggo.\n\n### Mga Pahinumot sa Pagdula\n1. **Mga Pahinumot sa Paglihok:**\n   - Sa inyong pagdula, mahimo ninyong paglihokan ang usa ka piraso pinaagi sa usa ka hakbang ngadto sa usa ka katarungang kwadrado (taas, ubos, wala, o tuo) nga naokupahan na sa inyong mga piraso.\n   - Halimbawa: Ang usa ka piraso mahimo og paglihok gikan A1 ngadto B1 o A1 ngadto A2 kon ang B1 ug A2 dili naokupahan sa inyong kaugalingong mga piraso.\n   - Kon ang gipiling piraso usa ka bomba o bandila, dili kini mahimo og paglihokan.\n2. **Mga Away:**\n   - Kon mo-lihok kamo ngadto sa usa ka kwadrado nga naokupahan sa inyong kaaway, manghitabo ang away:\n     - Ang piraso nga adunay mas taas nga ranggo madaog ug makakuha sa inyong kaaway nga piraso.\n     - Kon ang mga ranggo pareho, ang duha ka piraso mawala gikan sa board.\n     - **Mga Espesyal nga Kaso:**\n       - Ang mga bomba makakuha sa kadaghanan sa mga atakeng piraso gawas sa mga minero, nga makadefuse og bomba.\n       - Ang mga espiya makadaog sa marshall kon ang espiya mao ang unang nag-atake apan mawala sa tanan nga ubang mga piraso.\n3. **Mga Estratehikong Tumong:**\n   - Hikayan ang inyong kaaway nga mga piraso pinaagi sa ilang mga paglihok ug away.\n   - Pangitaan ang inyong bandila samtang gihapon nag-attempt pagkuha sa bandila sa inyong kaaway.\n   - Gamitin ang mga scout estratehikong pagkuha og impormasyon mahitungod sa inyong kaaway nga mga piraso ug atakon ang mga hubog.\n\n### Unsaon pagbuhat og Paglihok:\n1. Ihapag ang mga koordinado sa piraso nga gihunan ninyo paglihokan ug ang destinasyon.\n2. Gamitin ang pormat: [A0 B0], diin A0 mao ang ginikanan nga posisyon, ug B0 mao ang destinasyon.\n   - Halimbawa: Aron paglihok og usa ka piraso gikan sa row 0, column 0 ngadto row 1, column 0, i-input ang [A0 B0].\n3. Siguraduhon ang destinasyon valid sumala sa mga pahinumot sa paglihok sa taas.\n\n### Mga Mahinungdanong Pahinumot:\n- Ang board magpakita sa inyong mga piraso ug ilang mga posisyon, e.g. MN, MS.\n- Ang board magpakita usab sa nailhan nga mga posisyon sa inyong kaaway nga mga piraso gawas sa pagbantay sa ilang mga ranggo, e.g. ?.\n- Ang mga grid nga adunay ~ mao ang mga lawa ug dili mahimo og paglihokan.\n- Ingon usa ka pagbaton, suguron ninyo ang inyong mga piraso nga naa sa mga frontlines aron makakuha og impormasyon mahitungod sa inyong kaaway nga mga piraso. Ang mga frontline sa player 0 ug player 1 mao ang row D ug G, respectively.\n\nKini mao ang kasamtangang kahimtang sa board:\n"
+  },
+  "board": {
+    "current_board": "Kasamtangan nga Board:\n\n{board}\nAvailable Moves: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Dili balido nga format sa aksyon. Player {player_id} wala input ang usa ka paglihok diha sa format [A0 B0] .",
+    "invalid_coordinates": "Dili balido nga format sa aksyon. Player {player_id} wala mosulod og mga coordinate nga balido.",
+    "not_own_piece": "Dili balido nga format sa aksyon. Player {player_id} kinahanglan molihok usa sa ilang kaugalingon nga mga piraso.",
+    "scout_through_pieces": "Dili balido nga format sa aksyon. Player {player_id} dili makabalhin og usa ka scout pinaagi sa ubang mga piraso.",
+    "scout_diagonal": "Dili balido nga format sa aksyon. Player {player_id} dili makabalhin og usa ka scout diagonal.",
+    "non_scout_multi_square": "Dili-makataronganon nga pormat sa aksiyon. Ang mga piraso, gawas pa sa mga espiya, makabalhin lamang ug usa ka kuwadrado matag higayon.",
+    "move_into_lake": "Dili balido nga format sa aksyon. Player {player_id} dili makabalhin ngadto sa lanaw.",
+    "move_onto_own_piece": "Dili balido nga format sa aksyon. Player {player_id} dili makabalhin ngadto sa ilang kaugalingon nga piraso.",
+    "move_bomb_or_flag": "Dili balido nga format sa aksyon. Player {player_id} dili makabalhin og bomba o bandera."
+  },
+  "game_action": {
+    "you_moved": "Ikaw mibalhin sa imong piraso gikan {source} ngadto sa {dest}.",
+    "opponent_moved": "Ang Player {player_id} naglihok og usa ka piraso gikan {source} ngadto {dest}.",
+    "you_equal_ranks": "Naglihok kamo og inyong piraso gikan {source} ngadto {dest}. Ang atakeng piraso mao {attacking_rank} ug ang destinasyon nga piraso mao {target_rank}. Tungod kay ang mga ranggo pareho, ang duha ka piraso nawala.",
+    "opponent_equal_ranks": "Ang Player {player_id} naglihok og usa ka piraso gikan {source} ngadto {dest}. Ang atakeng piraso mao {attacking_rank} ug ang destinasyon nga piraso mao {target_rank}. Tungod kay ang mga ranggo pareho, ang duha ka piraso nawala.",
+    "you_miner_defused": "Naglihok kamo og inyong piraso gikan {source} ngadto {dest}. Ang atakeng piraso mao {attacking_rank} ug ang destinasyon nga piraso mao {target_rank}. Tungod kay ang mga minero makadefuse og bomba, kamo nakadaog sa away.",
+    "opponent_miner_defused": "Ang Player {player_id} naglihok og usa ka piraso gikan {source} ngadto {dest}. Ang atakeng piraso mao {attacking_rank} ug ang destinasyon nga piraso mao {target_rank}. Tungod kay ang mga minero makadefuse og bomba, kamo nakawala sa away.",
+    "you_bomb_lost": "Naglihok kamo og inyong piraso gikan {source} ngadto {dest}. Ang atakeng piraso mao {attacking_rank} ug ang destinasyon nga piraso mao {target_rank}. Tungod kay ang ataker dili usa ka minero, kamo nakawala sa away.",
+    "opponent_bomb_won": "Ang Player {player_id} naglihok og usa ka piraso gikan {source} ngadto {dest}. Ang atakeng piraso mao {attacking_rank} ug ang destinasyon nga piraso mao {target_rank}. Tungod kay ang ataker dili usa ka minero, kamo nakadaog sa away.",
+    "you_spy_won": "Naglihok kamo og inyong piraso gikan {source} ngadto {dest}. Ang atakeng piraso mao {attacking_rank} ug ang destinasyon nga piraso mao {target_rank}. Tungod kay ang ataker usa ka espiya ug ang destinasyon usa ka marshall, kamo nakadaog sa away.",
+    "opponent_spy_lost": "Ang Player {player_id} naglihok og usa ka piraso gikan {source} ngadto {dest}. Ang atakeng piraso mao {attacking_rank} ug ang destinasyon nga piraso mao {target_rank}. Tungod kay ang ataker usa ka espiya ug ang destinasyon usa ka marshall, kamo nakawala sa away.",
+    "you_higher_won": "Naglihok kamo og inyong piraso gikan {source} ngadto {dest}. Ang atakeng piraso mao {attacking_rank} ug ang destinasyon nga piraso mao {target_rank}. Tungod kay ang ataker usa ka mas taas nga ranggo kay sa destinasyon, kamo nakadaog sa away.",
+    "opponent_higher_lost": "Ang Player {player_id} naglihok og usa ka piraso gikan {source} ngadto {dest}. Ang atakeng piraso mao {attacking_rank} ug ang destinasyon nga piraso mao {target_rank}. Tungod kay ang ataker usa ka mas taas nga ranggo kay sa destinasyon, kamo nakawala sa away.",
+    "you_lower_lost": "Naglihok kamo og inyong piraso gikan {source} ngadto {dest}. Ang atakeng piraso mao {attacking_rank} ug ang destinasyon nga piraso mao {target_rank}. Tungod kay ang ataker usa ka mas ubos nga ranggo kay sa destinasyon, kamo nakawala sa away.",
+    "opponent_lower_won": "Ang Player {player_id} naglihok og usa ka piraso gikan {source} ngadto {dest}. Ang atakeng piraso mao {attacking_rank} ug ang destinasyon nga piraso mao {target_rank}. Tungod kay ang ataker usa ka mas ubos nga ranggo kay sa destinasyon, kamo nakadaog sa away."
+  },
+  "outcome": {
+    "flag_captured": "Player {player_id} nakuha ang kaaway sa bandera!",
+    "no_movable_pieces": "Ang Player {winner_id} nakadaog! Ang Player {loser_id} wala nay mahibaw-an nga mga piraso."
+  }
+}

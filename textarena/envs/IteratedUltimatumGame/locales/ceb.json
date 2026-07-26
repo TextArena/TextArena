@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Ikaw si Player {player_id}, nagdula og {num_rounds} rounds sa Iterated Ultimatum Game.\nIkaw may ${pool} aron ibahin niining rounda sa pag-itan nimo ug sa Player {other_id}.\n\nProposer:\n  - Buhat og offer: [Offer: $X] (0 <= X <= pool)\n  - Kon gi-accept → Ikaw makadawat $(pool - X), ang laing player makadawat $X\n  - Kon gireject → Ang tanan makadawat $0\n  - Halimbawa: [Offer: $3]  o  'Nahisgot ko kini fair. [Offer: $5]'\n\nResponder:\n  - Magdesisyon sa offer uban sa [Accept] o [Reject]\n  - Halimbawa: 'Kana nag-ingon nako. [Accept]'\n            'Kadaut kaau. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Round {round_number} nagsugod! ---\nPlayer {proposer_id} mao ang proposer, Player {responder_id} mao ang responder.",
+    "offer": "Round {round_number}: Ang Player {proposer_id} nag-offer og ${offer} kang Player {responder_id} (nagpabilin ${keep}).",
+    "accepted": "Giaccept ni Player {responder_id}! Round {round_number} nakadawat: Player {proposer_id} +${proposer_gain}, Player {responder_id} +${responder_gain}. Bag-ong totals: Player 0: ${total_0}, Player 1: ${total_1}.",
+    "rejected": "Gireject ni Player {responder_id} ang offer! Round {round_number} nakadawat: Ang tanan mga player +$0. Ang mga total nagpabilin: Player 0: ${total_0}, Player 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Ang tigproponir kinahanglang mohimo ug tanyag nga mogamit sa pormat [Offer: $X].",
+    "bad_integer": "Ang kantidad sa tanyag kinahanglang usa ka balido nga integer.",
+    "out_of_range": "Ang tanyag kinahanglang tali sa $0 ug ${pool}.",
+    "no_current_offer": "Walay presenteng tanyag nga tubagon.",
+    "accept_or_reject": "Ang responder kinahanglan nga mag-[Accept] o [Reject] sa offer."
+  },
+  "outcome": {
+    "win": "Ang Player {winner} nakadaog uban sa ${winner_total} total kontra sa ${loser_total} ni Player {loser}.",
+    "draw": "Ang duha ka magdudula nahuman sa ${total} total."
+  }
+}

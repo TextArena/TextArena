@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw mao ang Player {player_id} sa usa ka {max_rounds} round nga dula sa Kuhn Poker.\nMga Tigsulat sa Dula:\n- Ang Kuhn Poker gigamit ang usa ka 3-card deck nga adunay J, Q, K (J pinakababa, K pinakahataas)\n- Ang matag player nag-antos {ante} chip ug nakadawat usa ka card matag round (tandaan nga ang mga card gidealt without replacement, busa dili ka makakuha sa mao gihapong card sa imong kaatbang).\n- Ang dula nagpabilin alang sa {max_rounds} rounds\n- Ang player nga adunay labing daghan nga chips human sa tanan nga rounds madaug\nMga Tigsulat sa Galaw:\n- '[check]': Pasa walay pagsugal (sa kondisyon nga walay bet sa lamesa)\n- '[bet]': Idugang 1 chip sa pot (sa kondisyon nga walay bet sa lamesa)\n- '[call]': Matudlo ang bet sa kaatbang pinaagi sa pagdugang 1 chip sa pot\n- '[fold]': I-surrender ang imong kamot ug pasagdan ang imong kaatbang makadaug sa pot"
+  },
+  "init_round": {
+    "round_start": "### Naglaunch ang round {current_round} gikan sa {max_rounds} rounds. Ang imong card mao: '{player_card}'",
+    "available_actions": "Ang imong magamit nga mga lihok mao ang: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ang galaw kinahanglan [Check], [Bet], [Call], o [Fold].",
+    "not_legal": "Ang aksyon kinahanglang {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Ang imong magamit nga mga lihok mao ang: {legal_actions}.",
+    "round_summary": "{reason} Kasalukuyang mga score: Player 0: '{player_0_chips}'; Player 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Sa katapusan sa {max_rounds} nga mga hugna, ang duha ka players adunay sama nga gidaghanon sa chips.",
+    "round_win": "Ang magdudula {player_id} mi-fold.",
+    "winner_player0": "Player 0 midaog pinaagi sa pagbaton og dugang nga chips sa katapusan sa tanan {max_rounds} round.",
+    "winner_player1": "Player 1 midaog pinaagi sa pagbaton og dugang nga chips sa katapusan sa tanan {max_rounds} round."
+  }
+}
