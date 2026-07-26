@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id} jugando un juego de Dados de Cerdo.\n\nReglas:\n- En tu turno, puedes '[roll]' o '[hold]'\n- Tirar un 2-6: Suma a tu total de turno\n- Tirar un 1: Pierde el total de turno y termina el turno\n- Mantener: Suma el total de turno a tu puntuación y termina el turno\n- El primero en {winning_score} puntos gana\n\nCuando sea tu turno, verás las puntuaciones y el total de turno actuales.\nResponde con '[roll]' para tirar el dado o '[hold]' para guardar tus puntos."
+  },
+  "invalid_move": {
+    "invalid_action": "Formato de acción inválido. Use '[roll]' o '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Jogador {player_id} perdeu, perde {turn_total} puntos!",
+    "player_hold": "Jogador {player_id} mantiene y ahorra {turn_total} puntos."
+  },
+  "board": {
+    "player": "Jogador 0: '{score_0}'; Jugador 1: '{score_1}'",
+    "current_total_scores": "Current Total Scores: {scores}\nYour current turn total is {turn_total}.",
+    "roll_history": "{observation}\nYour roll history for this turn: {roll_history}",
+    "first_roll": "{observation} Kóva ha'e pe ñepyrûmby nde jerére.",
+    "available_actions": "{observation}\nAcciones disponibles: '[roll]' o '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Jogador {winner_id} ganó por tener una puntuación más alta en el límite de turnos ({scores})",
+    "winner_by_score": "Player {winner_id} won by reaching the target score of {winning_score}!",
+    "draw": "Oñeg̃uahẽ límite de turno ha opavave jugador oguereko peteĩ puntaje: {scores}"
+  }
+}

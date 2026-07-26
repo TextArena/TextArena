@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Ko'ãgagua Jogador {player_id} peteĩ japo Liar's Dice {num_players}-jogador.\nTembikuaa:\n- Ko'ã arã, ko'ãgagua ikatu:\n  1) Eju ojapo hína ko'ãgagua tembikuaa kuera, hína kuera vai ha hína kuera iporãve ( térã mbojevy), ko'ãgagua tembikuaa kuera; i.e. '[Bid: 3, 4]',\n  2) Oñemboja ko'ãgagua tembikuaa kuera porãve ojejapóva '[Call]'.\n\nMba'eichapa oñemboja:\n  - Mba'eichapa ko teju kuera hína upéva, ko kuera iporãve, ha upéva imichĩve ko'ãgagua tembikuaa, último ojapo ohasa peteĩ teju.\n  - Ára, ojapóva ohasa peteĩ teju.\nJogador ohasa 0 teju ojejoka. Último jogador oñeha'ã."
+  },
+  "board": {
+    "per_player": "\tJogador {p}: {d}",
+    "new_round": "\nNew round - Remaining dice: {dice_summary}\nYour current Dice are: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Jogador {current_player_id} oñemboja! Ko teju kuera hína {face_value} ha'e {count}, ha upéva imichĩve {quantity}.\nJogador {loser_id} (último ojapo) ohasa peteĩ teju",
+    "caller_loses": "Jogador {current_player_id} oñemboja! Ko teju kuera hína {face_value} ha'e {count}, ha upéva >= {quantity}.\nJogador {loser_id} (ojapóva) ohasa peteĩ teju"
+  },
+  "action": {
+    "bid_announce": "Jokuaihára {player_id} oikuave'ẽ {quantity} hova {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Ohenóiva'ekue ndoguerekóirõ oferta.",
+    "invalid_bid": "Ome'ê vaíva oferta: {reason}",
+    "not_recognized": "He'i niko'ã ntejehechauka ko'ãgagua '[Bid: X, Y]' ni '[Call]'. He'i ojejapóva: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Mboyve {new_quantity} ipyahuvéva ko'ágãgua {current_quantity}-gui.",
+    "face_lower": "Válor nominal pyahu {new_face_value} sa'ive ko'ágãgua {current_face_value}-gui.",
+    "identical": "Ome'ê peteî oferta ojojoguáva upe ofrenda ko'ágãgua ndive.",
+    "face_range": "Valor nominal oĩva'erã 1 ha 6 apytépe."
+  },
+  "message": {
+    "eliminated_invalid": "Jokuaihára {player_id} ojeipe'a movimiento invalido rupive."
+  },
+  "outcome": {
+    "win": "Jogador {winner} oñeha'ã! Ñembyaty ha'e: {final_ranking}"
+  }
+}

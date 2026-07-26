@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Usted es el Jugador {player_id} en Chopsticks. En su turno, elija uno de:\n  + Ataque:  '[attack M O]'  donde M=mano suya (0 o 1), O=mano del oponente (0 o 1).\n    - La cuenta de la mano del oponente aumenta por su mano; si >=5, se vuelve 0.\n  + Dividir:   '[split L R]'  para redistribuir su total de dedos en L y R (L+R = su total).\nResponda con exactamente uno de esos comandos."
+  },
+  "board": {
+    "current_board": "Current Board:\nPlayer 0: {hands_0}\nPlayer 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Nde po {my_idx} omanóma.",
+    "opp_hand_dead": "Mano {opp_idx} oponente-pegua omanóma.",
+    "split_sum": "Oñemboja'ova'erã {total}-pe.",
+    "split_no_change": "Split omoambueva'erã nde po ñemboja'o.",
+    "invalid_command": "Movimiento inválido. Use “[attack M O]” o “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} attacks P{opp_id}’s hand {opp_idx}: it goes from {opp_val} to {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Mokõive oponente po omano.",
+    "draw": "The turn limit has been reached."
+  }
+}

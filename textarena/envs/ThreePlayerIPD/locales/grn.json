@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Nderehe Player {player_id} peteĩ tapicha mbohapyha Iterated Prisoner's Dilemma. Ko ñemboja ohasa {num_rounds} jahecha.\nJahecha rysýi:\n• {conv_rounds} jahecha ñemboja\n• 1 jahecha oñemboaje - ejuhu peteĩ tokera peteĩ tapicha guasu: '[<opp-id> cooperate]' o '[<opp-id> defect]' (hetaite '[1 defect] [2 cooperate]'; ko tembikuaa ko'ãga 'oñondive'). \nMba'e guasu oñemboja (oñemoĩva peteĩ tapicha guasu oĩva):\n  - Mbohapy oñondive  ->  {reward}\n  - Mbohapy ojapo va'erã -> {punishment}\n  - Nderehe ojapo va'erã, ha'e oñondive -> {temptation}\n  - Nderehe oñondive, ha'e ojapo va'erã -> {sucker}\nTapicha (kuéra) oĩva ipaha michĩva jahecha paha ohasa oñemboja kuéra oñeha'ã."
+  },
+  "round": {
+    "start": "─── Starting Round {round} ───\tYou can converse freely for the next {conv_rounds} rounds.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Resultados:",
+    "pair_line": "{observation}\n\t Player {i} vs Player {j} ohecha oñondive {choice_i} ha {choice_j} (Player {i} ohasa {gain_i}, Player {j} ohasa {gain_j})",
+    "scores_open": "{observation} -> Puntuación ko'ágãgua: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}  umi mba'e ojehúva rehe."
+  },
+  "outcome": {
+    "final": "Final scores: {scores}.  Ranking groups (worst→best): {groups}"
+  }
+}

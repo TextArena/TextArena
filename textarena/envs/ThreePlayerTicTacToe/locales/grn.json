@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Usted es Jugador {player_id} en Tic Tac Toe de Tres Jugadores.\nSu símbolo es '{symbol}'.\nUsted turna colocando su símbolo en un tablero 5x5 para formar una línea de cuatro.\nLas líneas pueden ser horizontales, verticales o diagonales.\nEnvíe su movimiento usando el formato '[4]' para marcar la celda 4."
+  },
+  "board": {
+    "current_board": "Tablero Actual:\n\n{board}\n\nMovimientos Disponibles: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movimiento ndoikóiva. Eipuru \"[cell]\" ha'ehápe celda 0-{max_cell}.",
+    "out_of_range": "Número de celda inválido: {cell}. Debe estar entre 0 y {max_cell}.",
+    "already_occupied": "Celdilla {cell} oĩma ocupada.",
+    "made_invalid": "Jokuaihára {player_id} ojapo peteĩ movimiento invalido."
+  },
+  "game_action": {
+    "placed": "Jugador {player_id} coloca su símbolo ({symbol}) en el campo ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Jugador {player_id} ({symbol}) gana!",
+    "draw": "Pe juego ha'e peteî empate!"
+  }
+}

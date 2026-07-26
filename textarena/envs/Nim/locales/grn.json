@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Usted es Jugador {player_id} en Nim.\nSu objetivo es tomar el último objeto restante.\nEn cada turno, elija exactamente una pila y retire uno o más objetos de ella.\nUse el formato '[pile quantity]', donde pila es el índice de pila y cantidad es la cantidad de objetos a remover.\nPor ejemplo, '[0 3]' retira 3 objetos de la pila 0."
+  },
+  "state": {
+    "current_pile": "Ko'ágãgua Pile: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ndajuhúi peteĩ formato de movimiento hekopete. Eipuru \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Player {player_id}, Invalid action. Column {col} is out of bounds.",
+    "out_of_range": "Pile índice {pile_index} oĩ okápe.",
+    "non_positive": "Ogueraha va'erã 1 objeto.",
+    "exceeds_pile": "No se puede remover {quantity} de pila {pile_index} (solo quedan {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "¡Peteĩ jugador {player_id} oguenohẽ objeto paha!"
+  }
+}

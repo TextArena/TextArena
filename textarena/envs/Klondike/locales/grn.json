@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "Formato de acción no válido. Umi mba'e ojejapóva oñemoĩva paréntesis-pe.",
+    "no_closing_bracket": "Formato de acción noĩporãva. Oime'ỹva paréntesis omohu'ãva ']\"",
+    "empty_command": "Ojekuaauka \"draw\" térã \"move <source> <destination> [count]\".",
+    "empty_action": "Acción oï'ÿva rehe",
+    "move_needs_args": "Movimiento-pe tekotevẽ peteĩ mo'ãha ha tenda. Jeiporu: 'move <source> <destination> [count]'.",
+    "count_positive": "Ko conteo ha'eva'erã positivo térã \"opavave\"",
+    "count_invalid": "Ojeiporu papapy térã \"opa\"",
+    "unknown_command": "Unknown command '{cmd}'. Use 'draw', 'move <source> <destination> [count]', or 'forfeit'",
+    "wrapped": "Acción {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Acción {n}: {msg}",
+    "before_failure": "Executed {n} action(s) before failure.",
+    "failed": "Acción {n} fracasó: {msg}"
+  },
+  "move_result": {
+    "drew": "Drew card(s) from stock to waste.",
+    "cannot_draw": "Ndaikatúi ojeipe'a. Umi reserva ha residuo nandiete.",
+    "invalid_pile": "Téra ndoikóiva. Eipuru W, F1-F4, térã T1-T7",
+    "foundation_one_card": "Ikatu omomýi 1 kuatia añónte fundación-pe.",
+    "waste_to_foundation_ok": "Tarjeta oñemomýiva ytyguágui fundación-pe F{dst}",
+    "waste_to_foundation_bad": "Ndaikatúi omomýi tarjeta de desecho upe pila fundación-pe g̃uarã",
+    "tableau_to_foundation_ok": "Movió carta de tableau T{src} a fundación F{dst}",
+    "tableau_to_foundation_bad": "Ndaikatúi oñemomýi tarjeta de tablero upe pila fundación-pe g̃uarã",
+    "foundation_to_foundation": "Ndaikatúi oñemomýi fundación guive ambue fundamento-pe.",
+    "waste_to_tableau_one_card": "Ikatu omomýi 1 tarjeta añónte tembiporu'ỹgui tablilla-pe.",
+    "waste_to_tableau_ok": "Ogueraha tarjeta deshecho guive ta'anga T{dst}-pe.",
+    "waste_to_tableau_bad": "Ndaikatúi oñemoĩ tarjeta de desecho upe tablero ári",
+    "no_face_up": "Ndaipóri tarjeta ojehecha'ỹva oñemomýi hag̃ua.",
+    "tableau_to_tableau_ok": "Movió {count} carta(s) de tableau T{src} a T{dst}",
+    "tableau_to_tableau_bad": "No se puede mover {count} carta(s) de T{src} a T{dst}",
+    "foundation_to_tableau_one_card": "Ikatu omomýi 1 tarjeta añónte fundación guive ta'anga peve.",
+    "foundation_empty": "Fundación F{src} ndoguerekói mba'eve.",
+    "foundation_to_tableau_ok": "Movió carta de fundación F{src} a tableau T{dst}",
+    "foundation_to_tableau_bad": "Ndaikatúi oñemoĩ tarjeta fundación tabla T{dst}-pe.",
+    "to_waste_or_stock": "Ndaikatúi oñemomýi mba'e ñehundi térã stock-pe."
+  },
+  "outcome": {
+    "forfeit": "Ojejapo peteĩ ñembosarái ha ojehupyty resultado final: {score} tarjeta fundación-pe.",
+    "won": "Vy'apavẽ, rehupyty pe Klondike Solitario!",
+    "turn_limit": "Juego terminado. Alcanzaste el máximo de {max_turns} turnos. Puntuación: {score} cartas en fundaciones"
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE === Oikovejeyva'ekue ary 1999-pe.",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Ñongatuha: {stock} tarjeta-kuéra",
+    "waste": "Yty (W): {waste}",
+    "foundations_header": "Umi fundación:",
+    "foundation_row": "F{n}: {cards} (Oñembohapejeýva)",
+    "tableau_header": "Ta'ãnga:",
+    "tableau_row": "T{n}: {cards} (ñe'ẽpehẽtai upeigua):"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "ÑEMBOGYKE: {target}\n\nÑembohasy ojejapóva:\n{numbers}",
+    "best": "{observation}\n\nIporãmbajepéma: {best_value} (moõmbaha: {distance})\nIporãmbajepéma tembikuaa: {best_expression}",
+    "history": "{observation}\n\nTembikuaa reko ndaje:\n{moves}",
+    "progress": "{observation}\nTembikuaa porãite ohasa: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Indice ndoikóiva. Oiko va'erã iñambuéva ha oĩva 0-{max_index} jerére",
+    "invalid_operation": "Operación noĩporãiva (división por cero térã resultado ndaha'éiva entero)"
+  },
+  "outcome": {
+    "win": "Iporãite! Ojuhu objetivo exacto: {target}",
+    "no_moves": "Ndaipóri tembikuaa. Mba'e porãite: {best_value} (ñembogyke: {target})",
+    "turn_limit": "Turn limit reached. Best result: {best_value} (target: {target})"
+  }
+}

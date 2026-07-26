@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Usted es Jugador {player_id} en un juego de Alta Sociedad (versión de 2 jugadores).\nFlujo del juego:  Diez tarjetas de prestigio son subastadas una después de otra.\nOferta:    Cada subasta, elija secretamente una tarjeta de dinero del 1 al 11 y revele.\n            • La oferta más alta gana la tarjeta de prestigio y descarta esa tarjeta de dinero.\n            • La oferta más baja mantiene su tarjeta de dinero.\n            • Empate -> ambas ofertas son devueltas y la misma tarjeta de prestigio es subastada nuevamente.\nPuntuación:    Después de las diez subastas, sume **efectivo restante + puntos de prestigio**.\n            El *patrimonio neto* más alto gana (empate exacto -> empate).\n\n**Sintaxis de acción**  →  ofrezca una sola tarjeta como '[7]' o '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Subasta {round}/10  |  Tarjeta de prestigio: {prize}"
+  },
+  "board": {
+    "money_cards": "Nde tarjeta de dinero rembyre: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Oguereko va'erã peteî [X] tarjeta de dinero añónte.",
+    "card_not_held": "Ndereikovéima pe tarjeta de pago."
+  },
+  "message": {
+    "tie": "Tie - bids returned. Rebid!",
+    "auction_result": "P0 ofrendó {bid0}, P1 ofrendó {bid1}. Jugador {winner} gana prestigio {prize} (total {total})."
+  },
+  "outcome": {
+    "p0_wins": "Patrimonio neto {nw0} > {nw1}",
+    "p1_wins": "Patrimonio neto {nw1} > {nw0}",
+    "draw": "Mokõive patrimonio neto {nw0}  ojoaju porã."
+  }
+}

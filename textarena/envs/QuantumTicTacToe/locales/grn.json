@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Quantum Tic Tac Toe.\nYour symbol is '{symbol}', and your move numbers are always {parity} (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Board:\n\n{board}\n\nEjuhu tapere ñande mboja '[a,b]' oñemboja hag̃ua peteĩ marka kuántika mokõime tendáre."
+  },
+  "invalid_move": {
+    "wrong_format": "Formato noĩporãva. Eipuru \"[a,b]\".",
+    "invalid_cells": "Indice de célula ndoikóiva térã oñembojoapy.",
+    "already_solidified": "Peteĩva umi célula-gui oñembopiro'yma."
+  },
+  "game_action": {
+    "placed": "Jogador {player_id} oñemboja ichupe marka peteĩ superposición entre celda {pos_a} ha {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposición dependiente oñemondóka. Celda ({r}, {c}) ko'ág̃a {symbol}.",
+    "last_cell_resolved": "Superposición ñemondóka celda ñemby. Celda ({r}, {c}) ko'ág̃a {symbol}.",
+    "superposition_resolved": "Superposición oñemondóka. Celda ({r}, {c}) ko'ág̃a {symbol}."
+  },
+  "outcome": {
+    "win": "¡Peteĩ jugador {player_id} ogana umi marca solidificada rehe!",
+    "draw": "Pe juego ha'e peteî empate!"
+  }
+}

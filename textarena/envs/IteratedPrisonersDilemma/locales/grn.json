@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "Conversa finalizada para a rodada {round}. Por favor, responda com '[Cooperate]' ou '[Defect]' dentro de \\boxed{{}}.",
+    "starting_round": "--- Ñepyrûha ñembyaty {round} ---",
+    "round_summary": "Resultados da rodada {round}:\n{outcome}\nJogador 0 ganhou {r0} (total {score_0}), Jogador 1 ganhou {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Jogador {winner} ganha {win_score} - {lose_score}.",
+    "draw": "Mokõive jugador ogana {s0}.",
+    "round_both_cooperate": "Mokõive jugador omba'apo oñondive.",
+    "round_both_defect": "Mokõive jugador ojehekýi.",
+    "round_p0_cooperates_p1_defects": "Player 0 cooperated, Player 1 defected.",
+    "round_p0_defects_p1_cooperates": "Player 0 defected, Player 1 cooperated."
+  }
+}

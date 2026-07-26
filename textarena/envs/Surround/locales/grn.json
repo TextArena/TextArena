@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Jugador alrededor de un {width}x{height} cuadrícula.\nUsted es jugador {player_id}. Movimientos válidos: '[up]' '[down]' '[left]' '[right]' o w/s/a/d.\nObjetivo: sobrevivir a todos los demás. Los rastros son mortales; golpes de pared matan; choques frontales matan a ambos."
+  },
+  "board": {
+    "current": "Junta ko'ágãgua: {board}",
+    "after_moves": "Junta oñemongu'e rire peteĩ jey: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Jokuaihára {player_id} omano movimiento ndojejapóiva rehe."
+  },
+  "outcome": {
+    "survived_win": "Oikove pe jugador {player_id}; opavave ambue oñembyai.",
+    "all_crashed": "All players crashed simultaneously.",
+    "outlived": "Péva ha'e pe ohasáva opavavépe.",
+    "all_dead": "Opavave jugador omano.",
+    "turn_limit": "Oñembojávo pe límite de vuelta - ohasáva ipukuveha ogana.",
+    "ranking": "{reason} Ranking final grupo (mejor→peor): {groups}"
+  }
+}

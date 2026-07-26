@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Bienvenido a Lights Out! Tienes una cuadrícula de {size}x{size} luces.\nTu objetivo es apagar TODAS las luces (representadas por '.').\nCuando presionas una luz, alterna ella misma Y sus vecinos adyacentes (arriba/abajo/izquierda/derecha).\nEscribe [row col] para presionar una luz (indexada en 0, por lo que el rango válido es 0-{max_index}).\nTienes hasta {max_turns} movimientos para resolver el rompecabezas.\nLeyenda: 'O' = luz ENCENDIDA, '.' = luz APAGADA"
+  },
+  "board": {
+    "current_state": "Estado actual de la cuadrícula (Movimiento {moves_made}, {moves_left} movimientos restantes, {completion}% completo):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "La acción debe estar en formato [row col] donde fila y columna son enteros desde 0 hasta {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Congratulations! You solved the puzzle in {moves_used} moves!",
+    "loss": "Juego terminado! Usaste todos los {max_turns} movimientos sin resolver el rompecabezas. Completado final: {completion}%\nEstado final:\n{grid}"
+  }
+}
