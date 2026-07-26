@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} تلعب لعبة نرد الخنزير.\n\nالقواعد:\n- في دورك، يمكنك إما '[roll]' أو '[hold]'\n- لفّ 2-6: أضف إلى إجمالي دورك\n- لفّ 1: خسر إجمالي الدور وانهي الدور\n- احتفظ: أضف إجمالي الدور إلى درجتك وانهي الدور\n- الأول الذي يصل إلى {winning_score} نقطة يفوز\n\nعندما يكون الدور لك، سترى الدرجات الحالية وإجمالي الدور.\nاستجِب بـ '[roll]' للفّ الطرف أو '[hold]' لتحويل نقطك."
+  },
+  "invalid_move": {
+    "invalid_action": "صيغة إجراء غير صالحة. استخدم '[roll]' أو '[hold]'."
+  },
+  "actions": {
+    "player_busted": "اللاعب {player_id} خسر، وفقد {turn_total} نقطة!",
+    "player_hold": "اللاعب {player_id} يُمسك ويدخر {turn_total} نقطة."
+  },
+  "board": {
+    "player": "اللاعب 0: '{score_0}'؛ اللاعب 1: '{score_1}'",
+    "current_total_scores": "الدرجات الإجمالية الحالية: {scores}\nإجمالي دورك الحالي هو {turn_total}.",
+    "roll_history": "{observation}\nYour roll history for this turn: {roll_history}",
+    "first_roll": "{observation} هيدا أول رماية بدورك.",
+    "available_actions": "{observation}\nالإجراءات المتاحة: '[roll]' أو '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "اللاعب {winner_id} فاز بالحصول على درجة أعلى عند حد الدور ({scores})",
+    "winner_by_score": "اللاعب {winner_id} فاز بالوصول إلى الدرجة الهدف {winning_score}!",
+    "draw": "وصلت حد الدور وكل اللاعبين عندهم نفس النتيجة: {scores}"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "أنت لاعب {player_id} في لعبة سجنر معاد Iterated Prisoner's Dilemma لمدة 3 لاعبين. تستمر المباراة {num_rounds} جولة.\nهيكل الجولة:\n• {conv_rounds} دورات دردشة مجانية\n• دور قرار واحد - قم بتقديم رمز واحد لكل خصم: '[<opp-id> cooperate]' أو '[<opp-id> defect]' (أي '[1 defect] [2 cooperate]'؛ الإعداد الافتراضي هو 'التعاون'). \nматрикс المكافأة الزوجي (يتم تطبيقه على كل زوج غير منظم):\n  - كلاهما يتعاون  ->  {reward}\n  - كلاهما يخون     ->  {punishment}\n  - أنت تخون، بينما يتعاونون -> {temptation}\n  - أنت تتعاون، بينما يخونون -> {sucker}\nاللاعب (اللاعبون) الذين لديهم أعلى درجة في نهاية جميع الجولات يفوزون."
+  },
+  "round": {
+    "start": "─── بدء الجولة {round} ───\tيمكنك التحدث بحرية خلال {conv_rounds} الجولات القادمة.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### الجولة {round} - النتائج:",
+    "pair_line": "{observation}\n\t اللاعب {i} ضد اللاعب {j} اختار {choice_i} و {choice_j} على التوالي (اللاعب {i} حصل على {gain_i}، اللاعب {j} حصل على {gain_j})",
+    "scores_open": "{observation} -> النتائج الحالية: ",
+    "score_first": "{observation}اللاعب {player_id} ({score})",
+    "score_next": "{observation}; اللاعب {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "النقاط النهائية: {scores}.  تصنيف المجموعات (أسوأ → أفضل): {groups}"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} ({piece}). الخصم هو ({opp}).\nأدخل الحركات على أنها '[a2 a3]' (من → إلى).\n- الحركة العادية هي خطوة واحدة إلى الأمام إلى رأس متجاور فارغ.\n- الحصار هو قفزة فوق قطعة عدوية متجاورة تهبط على العقدة الفارغة بعدها.\nكل حصار يields {score_per_capture} نقاط.\nاللعبة تنتهي بعد {max_moves} حركات أو عندما لا يملك لاعب أي حركة قانونية."
+  },
+  "board": {
+    "current_board": "الخطوة #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "شكل غلط. استعمل \"[a2 a3]\".",
+    "unknown_square": "مربع مجهول.",
+    "not_your_piece": "المصدر مش قطعتك.",
+    "dest_not_empty": "الوجهة مش فاضية.",
+    "illegal": "Illegal move."
+  },
+  "game_action": {
+    "captured": "اللاعب {player_id} أسر قطعة! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "لاعب {player_id} ما عندو قطع.",
+    "cannot_move": "لاعب {player_id} ما بيقدر يتحرك.",
+    "higher_score": "درجة التقاط أعلى.",
+    "move_limit": "وصلت حد الحركة."
+  }
+}
