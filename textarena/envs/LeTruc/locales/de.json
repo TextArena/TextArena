@@ -1,0 +1,37 @@
+{
+  "_comment": "Le-Truc-Sprachdatei. Übersetze KEINE Schlüssel (linke Seite). Übersetze nur Werte (rechte Seite). Behalte jeden {placeholder} exakt bei. Übersetze niemals die Aktions-Tokens ('[play]', '[raise]', '[accept]', '[fold]'), die Kartenbezeichnungen/Farben (z. B. 3♠, A♥, K♦), die Spielerbezeichnungen (P0, P1) oder numerische Punktwerte.",
+  "_slots": {
+    "{pid}": "Eine Spielernummer, 0 oder 1",
+    "{winner}": "Die Nummer des Spielers, der den Stich gewonnen hat",
+    "{points}": "Ein Handpunktwert, z. B. 1 oder 2",
+    "{cards}": "Eine leerzeichengetrennte Liste der Kartenbezeichnungen des Spielers, z. B. 'A♦ 3♠ A♥'",
+    "{card}": "Eine einzelne Kartenbezeichnung, z. B. '3♠'"
+  },
+
+  "player_prompt": {
+    "intro": "eine Zusammenfassung der Spielregeln"
+  },
+
+  "board": {
+    "new_hand": "### Neue Hand im Wert von {points} Pkt.\nDeine Karten: {cards}"
+  },
+
+  "invalid_move": {
+    "unrecognised":       "Unbekannte Aktion.",
+    "already_raised":     "Bereits erhöht.",
+    "no_raise_to_accept": "Keine Erhöhung zum Annehmen.",
+    "cannot_fold":        "Jetzt kann nicht gefoldet werden.",
+    "wrong_rank":         "Du hältst diesen Rang nicht (Farben werden bei der Eingabe ignoriert)."
+  },
+
+  "action": {
+    "raise": "P{pid} erhöht - Hand jetzt {points} Pkt. Der Gegner muss '[accept]' oder '[fold]'.",
+    "lead":  "P{pid} spielt aus: {card}.",
+    "play":  "P{pid} spielt {card}. Stich geht an P{winner}."
+  },
+
+  "outcome": {
+    "folded":         "Gegner hat gefoldet.",
+    "reached_twelve": "12 Punkte erreicht."
+  }
+}

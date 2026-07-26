@@ -1,0 +1,37 @@
+{
+  "_comment": "Le Truc locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[play]', '[raise]', '[accept]', '[fold]'), the card labels/suits (e.g. 3♠, A♥, K♦), player labels (P0, P1), or numeric point amounts.",
+  "_slots": {
+    "{pid}": "A player number, 0 or 1",
+    "{winner}": "The player number who won the trick",
+    "{points}": "A hand point value, e.g. 1 or 2",
+    "{cards}": "A space-separated list of the player's card labels, e.g. 'A♦ 3♠ A♥'",
+    "{card}": "A single card label, e.g. '3♠'"
+  },
+
+  "player_prompt": {
+    "intro": "a summary of the game rules"
+  },
+
+  "board": {
+    "new_hand": "### New hand worth {points} pt(s)\nYour cards: {cards}"
+  },
+
+  "invalid_move": {
+    "unrecognised":       "Unrecognised action.",
+    "already_raised":     "Already raised.",
+    "no_raise_to_accept": "No raise to accept.",
+    "cannot_fold":        "Cannot fold now.",
+    "wrong_rank":         "You don't hold that rank (suits ignored in input)."
+  },
+
+  "action": {
+    "raise": "P{pid} raises - hand now {points} pts. Opponent must '[accept]' or '[fold]'.",
+    "lead":  "P{pid} leads {card}.",
+    "play":  "P{pid} plays {card}. Trick to P{winner}."
+  },
+
+  "outcome": {
+    "folded":         "Opponent folded.",
+    "reached_twelve": "Reached 12 points."
+  }
+}

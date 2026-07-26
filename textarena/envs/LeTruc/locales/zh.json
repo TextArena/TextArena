@@ -1,0 +1,37 @@
+{
+  "_comment": "Le Truc 语言文件。请勿翻译键名（左侧）。仅翻译值（右侧）。保持每个 {placeholder} 完全不变。切勿翻译动作标记（'[play]'、'[raise]'、'[accept]'、'[fold]'）、牌面标签/花色（如 3♠、A♥、K♦）、玩家标签（P0、P1）或数字点数。",
+  "_slots": {
+    "{pid}": "玩家编号，0 或 1",
+    "{winner}": "赢得该墩的玩家编号",
+    "{points}": "该局的点数值，如 1 或 2",
+    "{cards}": "以空格分隔的玩家牌面标签列表，如 'A♦ 3♠ A♥'",
+    "{card}": "单张牌面标签，如 '3♠'"
+  },
+
+  "player_prompt": {
+    "intro": "游戏规则摘要"
+  },
+
+  "board": {
+    "new_hand": "### 新一局价值 {points} 点\n你的牌：{cards}"
+  },
+
+  "invalid_move": {
+    "unrecognised":       "无法识别的动作。",
+    "already_raised":     "已经加注。",
+    "no_raise_to_accept": "没有可接受的加注。",
+    "cannot_fold":        "现在无法弃牌。",
+    "wrong_rank":         "你没有该点数的牌（输入时忽略花色）。"
+  },
+
+  "action": {
+    "raise": "P{pid} 加注 - 本局现在为 {points} 点。对手必须 '[accept]' 或 '[fold]'。",
+    "lead":  "P{pid} 首出 {card}。",
+    "play":  "P{pid} 打出 {card}。该墩归 P{winner}。"
+  },
+
+  "outcome": {
+    "folded":         "对手弃牌。",
+    "reached_twelve": "达到 12 点。"
+  }
+}
