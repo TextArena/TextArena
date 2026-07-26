@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Anda bermain {color} dalam permainan Breakthrough. Anda melayangkan {direction} pada papan {board_size}x{board_size}.\nDalam giliran Anda, Anda dapat melayangkan satu buah satu langkah ke depan atau diagonal ke depan.\nSebuah buah hanya dapat melayangkan diagonal jika buah lawan ada di sana, dan hanya dapat melayangkan ke kotak yang telah ditempati dalam langkah diagonal.\nKetika memasuki kotak dengan buah lawan, Anda menangkapnya dan buah lawan dihilangkan secara permanen dari papan.\nGunakan notasi seperti UCI, misalnya [a2a3] untuk melayangkan dari a2 ke a3.\n* 'a' sesuai dengan kolom paling kiri, '1' adalah baris bawah (dari perspektif Putih).\n* Baris rumah Hitam adalah baris atas (baris 8 untuk 8x8). Baris rumah Putih adalah baris bawah (baris 1 untuk 8x8).\nPemain pertama yang buahnya mencapai baris rumah lawan memenangkan permainan. Jika semua buah Anda ditangkap, Anda kalah."
+  },
+  "invalid_move": {
+    "wrong_format": "Anggén notasi aljabar sané mapikukuh sakadi [a2a3].",
+    "out_of_bounds": "Move is out of board bounds.",
+    "illegal": "That move does not follow the Breakthrough rules or is not your piece."
+  },
+  "game_action": {
+    "moved": "Pemain {player_id} melayangkan {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Putih ngamolihang garis utama ireng.",
+    "black_reached": "Ireng sampun ngamolihang garis utama Putih.",
+    "white_captured": "Makasami layon Putih sampun kajiret.",
+    "black_captured": "Makejang patandingan Black kaambil.",
+    "no_moves": "Pamain {player_id} nénten malih madué pamargi."
+  }
+}

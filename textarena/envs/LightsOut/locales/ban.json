@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Selamat datang ring Lights Out! Sampeyan madue wewidangan {size}x{size} saking sorot.\nTujuan sampeyan inggih punika ngaputin kabeh sorot MATI (kawakilan '.').\nNika sampeyan ngepress sorot, ipun mubuhaké piyambak ipun lan tetangga ipun (duur/mundur/kiri/kanan).\nKetik [row col] kanggé ngepress sorot (0-indeks, saha jangkauan saé punika 0-{max_index}).\nSampeyan madue ngantos {max_turns} lungsur kanggé ngancurang teka-teki.\nLegend: 'O' = sorot NYALAK, '.' = sorot MATI"
+  },
+  "board": {
+    "current_state": "Wewidangan grid saiki (Lungsur {moves_made}, {moves_left} lungsur tetep, {completion}% rampung):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Pamargin patut ring format [row col] genah baris miwah kolom inggih punika wilangan bulat saking 0 ngantos {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Sugeng tanggap warsa! Ragane sampun mragatang teka-teki antuk gerakan {moves_used}.",
+    "loss": "Dolanan puput! Sampeyan ngginakaké kabeh {max_turns} lungsur tanpa ngancurang teka-teki. Pupungan pungkasan: {completion}%\nPupungan pungkasan:\n{grid}"
+  }
+}
