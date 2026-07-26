@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "P'ukllayqa qallarirqan. Wak'asqa k'uska: {trump_suit} (wak'asqa tarjeta: {trump_str}).",
+    "no_trump_card": "mana kanchu."
+  },
+  "player_prompt": {
+    "intro": "Qanqa p'ukllayuq {player_id} kani German Whistpi.\n{phase_info}\n{hand_size} k'uska kamayki.\nK'uska [play N]wan wak'ayku, chayqa N k'uska yanapanmi (ahinataq '[play 3]').",
+    "phase_learning": "Yachanapaq: kaypi atipanqa, chaytaq ñawpa kaq cartata jap'in; chinkaykaqtaj qhipa kartatapas. Kaymanjina ruwasqanku mana allinchu kanqa.",
+    "phase_playing": "Chaypi, tukuy ima ruwasqankuqa atipanakunman."
+  },
+  "next_card": {
+    "playing_phase": "Mana ima cartapis kanchu, chayraykutaq pukllaykuna qallarinña.",
+    "deck_empty": "Chay cartakunaqa mana mayqen kartanpas kanchu.",
+    "available": "Tarjeta: {card}",
+    "available_trump": "Cartel: {card} (TRUMP) Kay carteltaqa kaypi churaykunku:"
+  },
+  "invalid_move": {
+    "wrong_format": "Mana allin muyuy. '[play N]' nisqawan pukllaykuqtiyki, ñisqata kaq cartata churayki.",
+    "bad_position": "Chay cartaqa mana kanchu. Qamkunaqa {hand_size} cartata japʼinkichik.",
+    "must_follow_suit": "Qamqa chaymanjina, {lead_suit} cartawantaq pukllanki.",
+    "invalid_play": "Chay cartataqa mana atipanmanchu."
+  },
+  "game_action": {
+    "played": "P'ukllayuq {player_id} {card} wak'arqan."
+  },
+  "trick": {
+    "won": "P'ukllayuq {winner_id} {card}wan ch'askarqan.",
+    "won_learning": "P'ukllayuq {winner_id} {card}wan ch'askarqan wan wak'asqa tarjetata tarirarqan."
+  },
+  "phase": {
+    "learning_complete": "Chayqa tukukuchkan, yachakuypas tukushanña. Tukuy ima ruwasqanchismi atipanakunapaq yanapawasun."
+  },
+  "draw": {
+    "winner_received": "Qamqa gananki, chaskinki {card}.",
+    "loser_received": "Qamqa q'illaypi huknin kaqmanta {card} t'ikraspa, chinkaykurqanki.",
+    "winner_preview": "Qhipaq kaq cartaqa {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Ch'aska wak'asqa - P'ukllayuq 0: {tricks0}, P'ukllayuq 1: {tricks1}",
+    "scores_playing": "Scoring tricks - Player 0: {tricks0}, Player 1: {tricks1}",
+    "phase": "Pacha: {phase}",
+    "phase_learning": "P'unchay: {phase} ({remaining_cards} k'uskaqa llaktan)"
+  },
+  "hand": {
+    "no_cards": "Mana tarjetakunachu.",
+    "no_cards_in_hand": "Mana tarjetasniyojchu.",
+    "header": "Maquiyki:",
+    "trump_indicator": "(TRUMP) Kaypi qhaway:",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "No cards played yet this trick.",
+    "header": "Kunanqa:",
+    "trump_indicator": "(TRUMP) Kaypi qhaway:",
+    "card_line": "{observation}\n  P'ukllayuq {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Manaraq qallarisqachu.",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nP'unchay: {phase}",
+    "trump_suit": "{observation}\nWak'asqa k'uska: {trump_suit}",
+    "trump_card": "{observation}\nWak'asqa tarjeta: {card}",
+    "cards_left": "{observation}\nK'uska tarjetaqa: {count}",
+    "next_card": "{observation}\nNext card for winner: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Kunanqa:",
+    "trump_indicator": "(TRUMP) Kaypi qhaway:",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPlayer {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} cards in hand"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing a game of Pig Dice.\n\nRules:\n- On your turn, you can either '[roll]' or '[hold]'\n- Roll a 2-6: Add to your turn total\n- Roll a 1: Lose turn total and end turn\n- Hold: Add turn total to your score and end turn\n- First to {winning_score} points wins\n\nWhen it's your turn, you'll see the current scores and turn total.\nRespond with '[roll]' to roll the die or '[hold]' to bank your points."
+  },
+  "invalid_move": {
+    "invalid_action": "Ruway formatuqa ch'iqasqa. '[roll]' icha '[hold]' taytanchik."
+  },
+  "actions": {
+    "player_busted": "Player {player_id} busted, losing {turn_total} points!",
+    "player_hold": "Player {player_id} holds and banks {turn_total} points."
+  },
+  "board": {
+    "player": "Player 0: '{score_0}'; Player 1: '{score_1}'",
+    "current_total_scores": "Current Total Scores: {scores}\nYour current turn total is {turn_total}.",
+    "roll_history": "{observation}\nYour roll history for this turn: {roll_history}",
+    "first_roll": "{observation}\nThis is the first roll of your turn.",
+    "available_actions": "{observation}\nAvailable actions: '[roll]' or '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Player {winner_id} won by having a higher score at the turn limit ({scores})",
+    "winner_by_score": "Pukaraq {winner_id} {winning_score} pukyuqkunata chaskispa atipasqa!",
+    "draw": "Lliw pukllaqkunap huknin kaq puntachayninkunaqa: {scores}."
+  }
+}

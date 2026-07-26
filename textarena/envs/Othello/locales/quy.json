@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Qhapaq P'anqa: {board}",
+    "valid_moves": "{observation}\nKamayaq rinriykuna: {moves}",
+    "no_valid_moves_reset": "{observation} Mana allinchu, ichapis chinkaykachayta atinki.",
+    "no_valid_moves_step": "{observation} Mana allin takikunataqa mana atiwaqchu.",
+    "scores_reset": "{observation}\nKamayaq p'unchaykunapita q'illaykuna - Yana: {black_count}, Yuraq: {white_count}\n",
+    "scores_step": "{observation}\nQ'illaykuna - Yana: {black_count}, Yuraq: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Chay movimientoqa [row, col] nisqa formam kanan.",
+    "illegal": "Mana allin ruraykuna. Allin ruway: {valid}"
+  },
+  "game_action": {
+    "skipped": "Chaypi {pid} pukllaqqa mana chaymanchu rirqan.",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Pukaraq {pid} ({piece}) mana kamayaq rinriykuwan, chaywaq k'usqo q'awan"
+  },
+  "outcome": {
+    "black_wins": "Black wins {black_count}-{white_count}.",
+    "white_wins": "Yuraqqa atipan {white_count}-{black_count}.",
+    "draw": "{black_count}-{white_count} nisqaman t'ikray."
+  }
+}

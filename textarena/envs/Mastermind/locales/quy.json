@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Mastermind.\nYou need to find the code that is {code_length} digits long, each digit from 1 to {num_numbers}, {repeats}.\nIn your response, you can submit your guess in the following format: '[2 1 4 5]'.\nAfter each guess, you will receive feedback in the form of black and white pegs.\nA black peg indicates a correct digit in the correct position, while a white peg indicates a correct digit in the wrong position.\nYou have {max_turns} turns to guess the code.\n",
+    "with_repeats": "with possible repeats",
+    "no_duplicates": "mana iskayllachu kan,"
+  },
+  "invalid_move": {
+    "wrong_format": "You did not respond with a space-separated list of numbers wrapped in square brackets.",
+    "not_integers": "Tukuy qillqasqa kaqkunaqa allin enteros kananku tiyan.",
+    "wrong_length": "Chaypi imachus kasqanta yachanapaqqa, {code_length} yupaykuna kanan tiyan.",
+    "out_of_range": "Tukuy yupaykuna 1manta {num_numbers}kama kanan tiyan.",
+    "duplicates_not_allowed": "Mana iskay yupaykuna kanchu.",
+    "repeated_guess": "Qamqa ña yachankim {guess}. Huk kaqtapas yuyariychik."
+  },
+  "game_action": {
+    "feedback": "Submitted [{guess}]. Feedback: {black_pegs} black peg(s), {white_pegs} white peg(s)."
+  },
+  "outcome": {
+    "win": "You have cracked the code, solving {black_pegs} out of {code_length} pegs correctly",
+    "turn_limit": "Pʼitiyqa tukukuchkan. {percent} % nisqata chaninchanki."
+  }
+}

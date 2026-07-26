@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "Kamaya p'unchaypi:\n\n{board}\nRikuykuna: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Mana allin ruray formatu. Player {player_id} manan yaykurqanchu movimiento formaciónpi [A0 B0].",
+    "invalid_coordinates": "Mana allin ruwaykuna. {player_id} mana allintachu churarqan coordinadas válidas nisqawan.",
+    "not_own_piece": "Mana allin ruray: {player_id} pukllaq kikinpa huk p'anqapis churan.",
+    "scout_through_pieces": "Mana allin ruray formatu. {player_id} pukllaqqa mana huk p'anqata churanmanchu, wak t'aqaspa purinanpaq.",
+    "scout_diagonal": "Mana allin ruray formatu. {player_id} pukllaqqa mana atichwanchu huk qhawaq runata diagonalpi muyuyta.",
+    "non_scout_multi_square": "Mana allin formata churay. P'anqa, qhawachiqkunawan mana kikinchu kanku, sapa kuti huk cuadratalla puririyta atinku.",
+    "move_into_lake": "Mana allin ruray formatu. Runakuna {player_id} mana wayq'uman yaykunmanchu.",
+    "move_onto_own_piece": "Mana allin ruray formatu. {player_id} pukllaqqa mana kikinpa p'anpanman rinmanchu.",
+    "move_bomb_or_flag": "Mana allin ruray formatu. Runakuna {player_id} mana atinkuchu bomba utaq bandera apanapaqqa."
+  },
+  "game_action": {
+    "you_moved": "Q'awachkamunwanki {source}-manta {dest}-man.",
+    "opponent_moved": "Pukara {player_id} q'awachkamunwan {source}-manta {dest}-man.",
+    "you_equal_ranks": "Q'awachkamunwanki {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Ranks ch'iqanmi, iskaynintin piecekuna wañuchkanku.",
+    "opponent_equal_ranks": "Pukara {player_id} q'awachkamunwan {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Ranks ch'iqanmi, iskaynintin piecekuna wañuchkanku.",
+    "you_miner_defused": "Q'awachkamunwanki {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Miners bombakunata defusachkanku, allin p'unchayki.",
+    "opponent_miner_defused": "Pukara {player_id} q'awachkamunwan {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Miners bombakunata defusachkanku, q'umirpunchayki.",
+    "you_bomb_lost": "Q'awachkamunwanki {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Q'awachkachkaq mana miner, q'umirpunchayki.",
+    "opponent_bomb_won": "Pukara {player_id} q'awachkamunwan {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Q'awachkachkaq mana miner, allin p'unchayki.",
+    "you_spy_won": "Q'awachkamunwanki {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Q'awachkachkaq spy, ch'iqan marshall, allin p'unchayki.",
+    "opponent_spy_lost": "Pukara {player_id} q'awachkamunwan {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Q'awachkachkaq spy, ch'iqan marshall, q'umirpunchayki.",
+    "you_higher_won": "You have moved your piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a higher rank than the destination, you won the battle.",
+    "opponent_higher_lost": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a higher rank than the destination, you lost the battle.",
+    "you_lower_lost": "You have moved your piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a lower rank than the destination, you lost the battle.",
+    "opponent_lower_won": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a lower rank than the destination, you won the battle."
+  },
+  "outcome": {
+    "flag_captured": "¡Player {player_id}qa contranpi kaqpa bandera-ninta hap'irqan!",
+    "no_movable_pieces": "Pukara {winner_id} atipasqa! Pukara {loser_id} mana rikuy atinku."
+  }
+}

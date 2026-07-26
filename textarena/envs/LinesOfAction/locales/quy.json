@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "Consejo: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kay formataqa e2e4 (manta,manam).",
+    "no_piece": "Mana {side} khuyay {coord} pi.",
+    "identical": "Chayqa, maymantachus jamusqantawan ima.",
+    "not_straight_or_diagonal": "Chayqa, cheqanpi chayri diagonalman jina kanan tiyan.",
+    "wrong_distance": "Chay tʼaqa, maypichus kʼachata purinan tiyan.",
+    "enemy_blocks": "Mana allin runaqa ñanpi chinkaykun.",
+    "destination_own": "Chaymanqa kikinpa soldadosnin chayarqanku."
+  },
+  "game_action": {
+    "moved": "Pukara {player_id} musuq {from} -> {to}",
+    "captured_suffix": "Pukara {player_id} musuq {from} -> {to} maskaykunapaq wak'ayta."
+  },
+  "outcome": {
+    "win": "Tukuy imakunaqa hukllachasqa.",
+    "draw_no_capture": "60 kutipi mana japʼiyta atinkuchu.",
+    "draw_repetition": "Pisi kutillataña."
+  }
+}
