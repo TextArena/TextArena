@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing a game of Pig Dice.\n\nRules:\n- On your turn, you can either '[roll]' or '[hold]'\n- Roll a 2-6: Add to your turn total\n- Roll a 1: Lose turn total and end turn\n- Hold: Add turn total to your score and end turn\n- First to {winning_score} points wins\n\nWhen it's your turn, you'll see the current scores and turn total.\nRespond with '[roll]' to roll the die or '[hold]' to bank your points."
+  },
+  "invalid_move": {
+    "invalid_action": "Aṣe he ɖo na ɖi. Na mi '[roll]' kple '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Aze {player_id} wɔ na gbɔ {turn_total} nu!",
+    "player_hold": "Player {player_id} holds and banks {turn_total} points."
+  },
+  "board": {
+    "player": "Aze 0: '{score_0}'; Aze 1: '{score_1}'",
+    "current_total_scores": "Akwɛ́kpó nú azɔ̀ e ɖò wŭzù ɔ mɛ é: {scores} Wǔzɔ̌ towe lɛ́ɛ bǐ wɛ nyí {turn_total}.",
+    "roll_history": "{observation}\nEŋu na wɔ na nu he na tɔn: {roll_history}",
+    "first_roll": "{observation} É ɖò hwɛ towe sín nukɔn nukɔntɔn.",
+    "available_actions": "{observation}\nAṣe he na tɔn: '[roll]' kple '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Player {winner_id} won by having a higher score at the turn limit ({scores})",
+    "winner_by_score": "Aze {winner_id} wɔ na nu he na gbɔ {winning_score}!",
+    "draw": "E ɖó xwɛ ɖokpo ɔ ɖo mɛ lɛ bi: {scores}"
+  }
+}

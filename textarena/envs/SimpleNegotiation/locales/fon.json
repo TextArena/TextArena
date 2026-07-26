@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Azɔ̀tɔ́ ɔ tɛ́n kpɔ́n bo yí gbè nú azɔ̌ ɖé có é ɖó akwɛ e è na zán dó wà ná lɛ é ǎ.",
+    "out_of_range": "Player {player_id}, Azɔnɖɛ si. Column {col} ɖo ɖi ɖɛ.",
+    "already_full": "Player {player_id}, Azɔnɖɛ si. Column {col} wɔ ɖɔ.",
+    "proposing_with_no_resource": "azɔ̀tɔ́ {player_id} ɔ tɛ́n kpɔ́n ná bló nùjlɛ̌mɛ e è na dó xɔ akwɛ é cóbó ma ɖó nǔwukpikpé tɔn lɛ ǎ.",
+    "incorrect_offer_format": "azɔ̀tɔ́ {player_id} ɔ ɖè nùɖé ɖò wèmá e ma sɔgbe ǎ é mɛ.",
+    "no_new_offer": "azɔ̀tɔ́ {player_id} ɔ ɖè nùɖé ɖ'emɛ ǎ."
+  },
+  "offers": {
+    "reject": "azɔ̀tɔ́ {player_id} ɔ gbɛ́ nùɖɔxámɛ.",
+    "accept": "Player {acceptor_id} gbaɖe nuwɔnɔ ŋuti na Player {proposer_id}.",
+    "proposal": "Player {player_id} wɔ nuwɔnɔ kɛ na Player {opponent_id}: Nuwɔnɔ gbɔ: {offered} -> Nuwɔnɔ ɖi: {requested}"
+  },
+  "outcome": {
+    "win": "{winner_id} ɔ ɖu kpo akwɛ e é mɔ ɖò nǔ lɛ mɛ é gblamɛ.",
+    "draw": "Nǔ ɖokpo ɔ wɛ é ɖyɔ ɖò nǔ e è nɔ sɔ́ dó lɛ̌n nú mɛ ɖěɖee ɖè kplékplé enɛ lɛ é bǐ."
+  }
+}

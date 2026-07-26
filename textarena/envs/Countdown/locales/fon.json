@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "TARGET: {target}\n\nNɔnɔ wɛnɔ wɛna:\n{numbers}",
+    "best": "{observation}\n\nMiɖeɖe ɖo na mi: {best_value} (ɖokui: {distance})\nMiɖeɖe ɖokui: {best_expression}",
+    "history": "{observation}\n\nAɖawɔnɔ ɖokui:\n{moves}",
+    "progress": "{observation}\nNɔnɔ ɖokui ɖo na mi: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Wemɛ e ma sɔgbe ǎ lɛ. Ye ɖó na gbɔn vo bo ɖò tɛntin 0-{max_index} tɔn mɛ",
+    "invalid_operation": "azɔ̀ e nyí nùɖé é (e nɔ́ zɔ́n bɔ è má nú ɔ alǒ nǔ e ma nyí àkpá ɖé ǎ)"
+  },
+  "outcome": {
+    "win": "Gǎn! è mɔ nǔ e é ɖó ná dó ɔ́ bǐ: {target}",
+    "no_moves": "Eɖo aɖa ɖokui. Miɖeɖe ɖokui: {best_value} (target: {target})",
+    "turn_limit": "Nɔnɔ ɖokui ɖo na yi. Miɖeɖe ɖokui: {best_value} (target: {target})"
+  }
+}

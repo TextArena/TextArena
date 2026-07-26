@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "The game begins. Trump suit: {trump_suit} (trump card: {trump_str}).",
+    "no_trump_card": "ɖě ǎ"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in German Whist.\n{phase_info}\nYou hold {hand_size} cards.\nPlay a card with '[play N]', where N is its position in your hand (for example '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "È sɔ́ ɖ'emɛ ǎ - è jɛ̀ kpò ɔ jí.",
+    "deck_empty": "Akpá ɔ mɛ̀ ɖò nǔtí ǎ - è sɔ́ ɖ'emɛ nú ye ɖě ǎ.",
+    "available": "Akpá e è na lɛ é: {card}",
+    "available_trump": "Akpá e è sɔ́ dó ali jí é: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Use '[play N]' to play the Nth card in your hand.",
+    "bad_position": "That card position does not exist. You hold {hand_size} cards.",
+    "must_follow_suit": "You must follow suit and play a {lead_suit} card.",
+    "invalid_play": "È sixu wà nǔ dó wuntun enɛ wu ǎ."
+  },
+  "game_action": {
+    "played": "Player {player_id} played {card}."
+  },
+  "trick": {
+    "won": "Player {winner_id} wins the trick with {card}.",
+    "won_learning": "Player {winner_id} wins the trick with {card} and takes the face-up card."
+  },
+  "phase": {
+    "learning_complete": "Akpá ɔ́ bǐ vɔ. Nǔ kplɔnkplɔn sín akpáxwé fó - ayihun e kpo é ɖokpoɖokpo lɛ́ɛ nɔ wà nǔ dó ɖuɖeji wu."
+  },
+  "draw": {
+    "winner_received": "You won the trick and received {card}.",
+    "loser_received": "You lost the trick and drew {card} from the deck.",
+    "winner_preview": "Hweɖevonu e è na sɔ́ dó alɔ mɛ é wɛ nyí {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "ɖɔnɔ wɔn ɖɔ wɔna - Aɖavi 0: {tricks0}, Aɖavi 1: {tricks1}",
+    "scores_playing": "Scoring tricks - Player 0: {tricks0}, Player 1: {tricks1}",
+    "phase": "Xwεvi: {phase}",
+    "phase_learning": "Phase: {phase} ({remaining_cards} cards left in the deck)"
+  },
+  "hand": {
+    "no_cards": "Akpá ɖé kún ɖò fí ó.",
+    "no_cards_in_hand": "É ɖò alɔ mɛ ǎ.",
+    "header": "Alɔ towe:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "E ko sɔ́ kpò ɖò nǔ enɛ lɛ mɛ kpɔ́n ǎ.",
+    "header": "Nǔ e ɖò jijɛ wɛ dìn é:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Aɖavi {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "E jɛ̀ nùɖé jí ǎ.",
+    "header": "=== GERMAN WHIST Game (Gèmu tɔn ɔ́) ===",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nTrump suit: {trump_suit}",
+    "trump_card": "{observation}\nKàtà trump: {card}",
+    "cards_left": "{observation}\nCards left in deck: {count}",
+    "next_card": "{observation}\nNext card for winner: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Nǔ e ɖò jijɛ wɛ dìn é:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPlayer {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} cards in hand"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

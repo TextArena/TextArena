@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a game of HighSociety (2-player version).\nGame flow:  Ten prestige cards are auctioned one after another.\nBidding:    Each auction, secretly choose a money card 1-11 and reveal.\n            • Higher bid wins the prestige card and discards that money card.\n            • Lower bid keeps their money card.\n            • Tie -> both bids are returned and the same prestige card is re-auctioned.\nScoring:    After all ten auctions, add **remaining cash + prestige points**.\n            Higher *net-worth* wins (exact tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Agbale {round}/10  |  Kàntɔ̀ǹ: {prize}"
+  },
+  "board": {
+    "money_cards": "Akwɛ́ e ɖò wema towe jí é: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Must include exactly one [X] money card.",
+    "card_not_held": "A sɔ́ ɖó akwɛ e è nɔ zán dó xɔ nǔ lɛ é ǎ."
+  },
+  "message": {
+    "tie": "Tie - bids returned. Rebid!",
+    "auction_result": "P0 bid {bid0}, P1 bid {bid1}. Player {winner} wins prestige {prize} (total {total})."
+  },
+  "outcome": {
+    "p0_wins": "Nɛ́t-wɔ̀tʊ́ {nw0} > {nw1}",
+    "p1_wins": "Nɛ́t-wɔ̀tʊ́ {nw1} > {nw0}",
+    "draw": "E wè lɛ́ɛ bǐ sín akwɛ́ {nw0}  é ɖò kpɔ́."
+  }
+}
