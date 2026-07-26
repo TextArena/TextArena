@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "Boriti ni Board:\n\n{board}\nVakadidike ni Vakavoui: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Na ivakarau ni cakacaka e sega ni dodonu. Sega na dauqito {player_id} a curu ena dua na iwalewale ena kena ituvatuva [A0 B0] .",
+    "invalid_coordinates": "Na ivakarau ni cakacaka e sega ni dodonu. Sega na dauqito {player_id} a vakacuruma tiko na co-ordinates donu.",
+    "not_own_piece": "Na ivakarau ni cakacaka e sega ni dodonu. E dua na dauqito {player_id} me tosoya ga e dua vei ira nona tiki.",
+    "scout_through_pieces": "Na ivakarau ni cakacaka e sega ni dodonu. Sega ni rawa vua na dauqito {player_id} me tosoya e dua na scout ena so tale na tiki.",
+    "scout_diagonal": "Na ivakarau ni cakacaka e sega ni dodonu. Sega ni rawa vua na dauqito {player_id} me tosoya e dua na scout diagonally.",
+    "non_scout_multi_square": "Invalid action format. Pieces, apart from scouts, can only move one square at a time.",
+    "move_into_lake": "Na ivakarau ni cakacaka e sega ni dodonu. Sega ni rawa vua na dauqito {player_id} me toso ki loma ni drano.",
+    "move_onto_own_piece": "Na ivakarau ni cakacaka e sega ni dodonu. Sega ni rawa vua na dauqito {player_id} me toso ki na nona tiki.",
+    "move_bomb_or_flag": "Na ivakarau ni cakacaka e sega ni dodonu. Sega ni rawa vua na dauqito {player_id} me tosoya e dua na bomu se kuila."
+  },
+  "game_action": {
+    "you_moved": "O sa dabe na nomu piece mai {source} ki {dest}.",
+    "opponent_moved": "Player {player_id} e dabe se tarai ena piece mai {source} ki {dest}.",
+    "you_equal_ranks": "O sa dabe na nomu piece mai {source} ki {dest}. Na tarai e dabe e {attacking_rank} ka na iyalayala ni tarai e {target_rank}. Ni kaya na kaukauwa e tautauvata, na tarai e dabe kei na iyalayala ni tarai e lesi.",
+    "opponent_equal_ranks": "Player {player_id} e dabe se tarai ena piece mai {source} ki {dest}. Na tarai e dabe e {attacking_rank} ka na iyalayala ni tarai e {target_rank}. Ni kaya na kaukauwa e tautauvata, na tarai e dabe kei na iyalayala ni tarai e lesi.",
+    "you_miner_defused": "O sa dabe na nomu piece mai {source} ki {dest}. Na tarai e dabe e {attacking_rank} ka na iyalayala ni tarai e {target_rank}. Ni kaya na minia e rawata na bomu, o ni salei na bati.",
+    "opponent_miner_defused": "Player {player_id} e dabe se tarai ena piece mai {source} ki {dest}. Na tarai e dabe e {attacking_rank} ka na iyalayala ni tarai e {target_rank}. Ni kaya na minia e rawata na bomu, o ni salei na bati.",
+    "you_bomb_lost": "O sa dabe na nomu piece mai {source} ki {dest}. Na tarai e dabe e {attacking_rank} ka na iyalayala ni tarai e {target_rank}. Ni kaya ni tarai e dabe e sega ni minia, o ni salei na bati.",
+    "opponent_bomb_won": "Player {player_id} e dabe se tarai ena piece mai {source} ki {dest}. Na tarai e dabe e {attacking_rank} ka na iyalayala ni tarai e {target_rank}. Ni kaya ni tarai e dabe e sega ni minia, o ni salei na bati.",
+    "you_spy_won": "O sa dabe na nomu piece mai {source} ki {dest}. Na tarai e dabe e {attacking_rank} ka na iyalayala ni tarai e {target_rank}. Ni kaya ni tarai e dabe e spai ka na iyalayala ni tarai e marisala, o ni salei na bati.",
+    "opponent_spy_lost": "Player {player_id} e dabe se tarai ena piece mai {source} ki {dest}. Na tarai e dabe e {attacking_rank} ka na iyalayala ni tarai e {target_rank}. Ni kaya ni tarai e dabe e spai ka na iyalayala ni tarai e marisala, o ni salei na bati.",
+    "you_higher_won": "O sa dabe na nomu piece mai {source} ki {dest}. Na tarai e dabe e {attacking_rank} ka na iyalayala ni tarai e {target_rank}. Ni kaya ni tarai e dabe e tautauvata ka na iyalayala ni tarai, o ni salei na bati.",
+    "opponent_higher_lost": "Player {player_id} e dabe se tarai ena piece mai {source} ki {dest}. Na tarai e dabe e {attacking_rank} ka na iyalayala ni tarai e {target_rank}. Ni kaya ni tarai e dabe e tautauvata ka na iyalayala ni tarai, o ni salei na bati.",
+    "you_lower_lost": "O sa dabe na nomu piece mai {source} ki {dest}. Na tarai e dabe e {attacking_rank} ka na iyalayala ni tarai e {target_rank}. Ni kaya ni tarai e dabe e lailai ka na iyalayala ni tarai, o ni salei na bati.",
+    "opponent_lower_won": "Player {player_id} e dabe se tarai ena piece mai {source} ki {dest}. Na tarai e dabe e {attacking_rank} ka na iyalayala ni tarai e {target_rank}. Ni kaya ni tarai e dabe e lailai ka na iyalayala ni tarai, o ni salei na bati."
+  },
+  "outcome": {
+    "flag_captured": "Na dauqito {player_id} sa taura na kuila ni meca!",
+    "no_movable_pieces": "Player {winner_id} e salei! Player {loser_id} e sega ni piece e rawata."
+  }
+}

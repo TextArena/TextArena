@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Boro Current:\n\n{board}\nVakadidike: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Center Piles ---\n",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Player {player_id}'s View ---\n",
+    "payoff": "{observation}Payoff Pile (Top Card): {top_card}, Payoff Pile Length: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "Tawa lala tu ga."
+  },
+  "game_message": {
+    "no_cards_left": "E sega tale ni dua na kadi me tauri mai. Nanuma tiko mo rawa ni qito ena vei mataqali kadi oqo: 1. Na nomu ** liga** 2. Nai ** top card ni nomu payoff stack** 3. I ** top cards of any of your discard piles** "
+  },
+  "invalid_move": {
+    "wrong_format": "Na ivakarau ni toso e sega ni dodonu. Sega na dauqito {player_id} sauma ena dua na ilakolako donu ena brackets veibasai.",
+    "invalid_play": "Na dauqito {player_id} a tovolea me qitotaka na {card} ena loma ni dua na iwiliwili levu {index}.",
+    "discard_from_payoff": "Na dauqito {player_id} a tovolea me biuta laivi e dua na kadi mai na payoff ni ivotavota.",
+    "discard_not_in_hand": "Invalid discard. Player {player_id} e try discard e card e sega tu ena nomu hand.",
+    "wrong_move_type": "Na mataqali ilakolako e sega ni dodonu. Sega na dauqito {player_id} sauma ena dua na ivakarau donu ni toso."
+  },
+  "game_action": {
+    "you_drew": "You drew cards.",
+    "opponent_drew": "E dua na dauqito {player_id} e dreta mai na kadi.",
+    "you_played": "O a qito {card} ena loma ni bai {index}.",
+    "opponent_played": "Player {player_id} e play {card} ena center pile {index}.",
+    "you_discarded": "O na discard {card} ki na discard pile {index}, ka vakabibi tale ga me vaka malua na nomu turn. Sega ni vakadidike tale vei nomu ena turn oqo. Player {next_player_id} ena qai laki go next.",
+    "opponent_discarded": "Player {player_id} e discard {card} ki na discard pile {index}, ka vakabibi tale ga me vaka malua na nona turn. Sega ni vakadidike tale vei Player {player_id} ena turn oqo. Player {next_player_id}, o na qai laki go next. Kerekere, o na turaga nomu action ena format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Player {current_player} e finish na payoff pile! Player {current_player} win!",
+    "deadlock_player_0": "Deadlock reach! Player 0 win with {player_0_payoff} cards remaining vs Player 1's {player_1_payoff} cards.",
+    "deadlock_player_1": "Deadlock reach! Player 1 win with {player_1_payoff} cards remaining vs Player 0's {player_0_payoff} cards.",
+    "deadlock_tie": "Deadlock reached with tie! Both players have {player_0_payoff} cards remaining. Player {current_player} wins by default."
+  }
+}

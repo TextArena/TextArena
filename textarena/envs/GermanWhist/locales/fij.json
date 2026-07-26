@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Na game e start. Trump suit: {trump_suit} (trump card: {trump_str}).",
+    "no_trump_card": "sega ni dua na ka"
+  },
+  "player_prompt": {
+    "intro": "O cei Player {player_id} in German Whist.\n{phase_info}\nO tiko {hand_size} kaarte.\nPlay a card with '[play N]', where N is its position in your hand (for example '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "E sega ni dua na tikinipepa e soli - sa tekivu sara ga oqo.",
+    "deck_empty": "E lala na deck - e sega ni dua tale na tikite me soli.",
+    "available": "Na kadi e soli tiko: {card}",
+    "available_trump": "Na Kadi e Soli: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Na ivakarau ni toso e sega ni dodonu. Vakayagataka na '[play N]' mo vakatagitaka kina nai katini-ka ena ligamu.",
+    "bad_position": "E sega ni tiko na tikina oya. O taura tu e {hand_size} na tikidua.",
+    "must_follow_suit": "Mo muria na ivakaraitaki i koya e vakaliuliu qai vakayagataka tale ga nona {lead_suit} card.",
+    "invalid_play": "E sega ni rawa me caka na ka oqori."
+  },
+  "game_action": {
+    "played": "Na dauqito {player_id} e qito ena {card}."
+  },
+  "trick": {
+    "won": "Na dauqito {winner_id} e qaqa ena nona vakacakacakataki na {card}.",
+    "won_learning": "Player {winner_id} wins the trick with {card} and takes the face-up card."
+  },
+  "phase": {
+    "learning_complete": "Sa oti na nodra vuli - e bibi kece ga mera qaqa."
+  },
+  "draw": {
+    "winner_received": "O sa qaqa ena ilawaki o qai taura na {card}.",
+    "loser_received": "O sa druka qai digitaka na {card} mai na deck.",
+    "winner_preview": "Na kadi tarava e {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tricks won so far - Player 0: {tricks0}, Player 1: {tricks1}",
+    "scores_playing": "Scoring tricks - Player 0: {tricks0}, Player 1: {tricks1}",
+    "phase": "Na itutu: {phase}",
+    "phase_learning": "Phase: {phase} ({remaining_cards} kaarte qai left in the deck)"
+  },
+  "hand": {
+    "no_cards": "Sega ni dua na kadi.",
+    "no_cards_in_hand": "Sega ni dua na kadi e ligaqu.",
+    "header": "Na ligamu:",
+    "trump_indicator": "(TRUMP) Na cava e yaco?",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "E se sega ni dua na ka e caka ena qito oqo.",
+    "header": "Na ivadi e vakayagataki tiko nikua:",
+    "trump_indicator": "(TRUMP) Na cava e yaco?",
+    "card_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Sega ni tekivu na qito.",
+    "header": "=== Na QITO NI VAKATAKILAKA NA DUA ENA VOSA Vaka-JEMANI===",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nTrump suit: {trump_suit}",
+    "trump_card": "{observation}\nTrump card: {card}",
+    "cards_left": "{observation}\nKaarte qai left in deck: {count}",
+    "next_card": "{observation}\nNext card for winner: {card}",
+    "blank": "{observation}  na kena iwiliwili e sega ni kilai.",
+    "current_trick": "{observation} Na ivadi ni gauna oqo:",
+    "trump_indicator": "(TRUMP) Na cava e yaco?",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPlayer {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} kaarte in hand"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

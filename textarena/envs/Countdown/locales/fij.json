@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "TARGET: {target}\n\nNa nomuri available:\n{numbers}",
+    "best": "{observation}\n\nVakavoqa sara ga: {best_value} (kerei: {distance})\nVakavoqa vakasama: {best_expression}",
+    "history": "{observation}\n\nItuvaki ni kena ibuli: \n{moves}",
+    "progress": "{observation}\nScori ni veikau sara ga: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Na idusidusi e sega ni dodonu. E duidui ka tiko ena maliwa 0-{max_index}",
+    "invalid_operation": "Na cakacaka e sega ni dodonu (na kena wasei ena zero se na isau ka sega ni integer)"
+  },
+  "outcome": {
+    "win": "Perfect! Found exact target: {target}",
+    "no_moves": "Sega ni ibuli tale. Iyaya vakavoqa: {best_value} (target: {target})",
+    "turn_limit": "Na iyaya ni turn e tawamudu. Iyaya vakavoqa: {best_value} (target: {target})"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Tabana e vakayagataki tiko: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Na iwalewale ni kena toki e dodonu me [macro micro] ena naba 0-8.",
+    "out_of_range": "Indices must each be between 0 and 8.",
+    "index_out_of_range": "Na micro_board, laini se kolona e sega ni tiko ena vanua.",
+    "cell_occupied": "Sa tu na tamata ena rumu qo.",
+    "wrong_micro_board": "Me qito na dauqito ena dua tale na laini lailai.",
+    "micro_board_won": "Sa qaqa oti na boto lailai."
+  },
+  "next_board": {
+    "any": "dua na micro board",
+    "specific": "na micro board {nxt}"
+  },
+  "game_action": {
+    "played": "Player {player_id} a taura ina vatu ni micro board {macro_idx}, seli {micro_idx} (daku {row}, kolomu {col}). Player {opponent_id} yalovinaka me taura ena {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Na dauqito {player_id} e qaqa ena Ultimate Tic Tac Toe!",
+    "draw": "E tautauvata na qito!"
+  }
+}
