@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Fàilte gu Lights Out! Tha grìd {size}x{size} de sholasan agad.\nTha do phrìomh achd a' dol a thionndadh ALL solais OFF (air a riochdachadh le '.')\nNuair a bhrùicheas tu solas, tha e a' tionndadh aige fhèin AGUS a chomharsanaichean faisg (suas/sìos/clì/deas).\nCuir [row col] a-steach gus solas a bhrùich (0-innlich, mar sin raon èifeachdach 0-{max_index}).\nTha thu a' dol a dh'fhàs gu {max_turns} gluasaidhean a dh'fhreagairt an puzail.\nLiosta: 'O' = solas aig an teas meadhan, '.' = solas aig an fhàs meadhan"
+  },
+  "board": {
+    "current_state": "Current grid state (Move {moves_made}, {moves_left} moves remaining, {completion}% complete):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Feumaidh gnìomh a bhith ann an cruth [row col] far am bi sreath agus colan nan àireamhan eadar 0 gu {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Tapadh leibh! Dh' fhuasgladh sibh am puzzle ann an gluasadan {moves_used}!",
+    "loss": "Game over! Dh'fhàg sinn a h-uile {max_turns} gluasad gun a bhith a' dol a dh'fhreagairt an puzail. Crìochdhealbh: {completion}%\nStàit crìoch:\n{grid}"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Bòrd Làithreach:\n\n{board}\nGluasaidhean Riaghailteach: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Center Piles ---\n",
+    "pile": "{observation}Pailtean {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Sealladh a' Chluichiche {player_id} ---\n",
+    "payoff": "{observation}Pàirt a Lìbhrigeadh (Càradh aig Mullach): {top_card}, Fad a' Phàirt a Lìbhrigeadh: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "Empty"
+  },
+  "game_message": {
+    "no_cards_left": "Chan eil tuilleadh chairtean ri tharraing. Cuimhnich gum faod thu cairtean a chluich bho na stòran seo: 1. Do ** làmh ** 2. An ** top card de do stac pàighidh** 3. Tha an ** top cart de gin de na stacan casg agad *** . "
+  },
+  "invalid_move": {
+    "wrong_format": "Foirm ceum neo-dhligheach. Cha do fhreagair cluicheadair {player_id} le gluasad dligheach ann am bragantean ceàrnagach.",
+    "invalid_play": "Cluich neo-chèile. Dh'fhàg Cluichiche {player_id} {card} air pailtean meadhanach {index}.",
+    "discard_from_payoff": "Cha b' urrainn dha a bhith air an toirt seachad. 'S e cluicheadair {player_id} a bha airson cairt às na h-aibhnean pàighidh a thoirt dheth.",
+    "discard_not_in_hand": "Cha b' urrainn dha a bhith air an toirt seachad. 'S e cluicheadair {player_id} a bha airson cairt nach eil na làimh aige a thilgeil às.",
+    "wrong_move_type": "Chan eil seòrsa gluasad ceàrr ann. Cha do fhreagair cluicheadair {player_id} le seòrsa gluasaid dligheach."
+  },
+  "game_action": {
+    "you_drew": "You drew cards.",
+    "opponent_drew": "Chlàraich cluicheadair {player_id} cairtean.",
+    "you_played": "Chluich thu {card} air a' chlach mheadhan {index}.",
+    "opponent_played": "Cluichiche {player_id} chluich {card} air pailtean meadhanach {index}.",
+    "you_discarded": "Tha thu air {card} a dh'fhàgail aig pailtean dh'fhàgail {index}, a bheil a' ciallachadh gu bheil thu air crìoch a chur air do thuras. Chan eil tuilleadh gnìomhan agad air a mheasg airson an turais seo. Bidh Cluichiche {next_player_id} a' dol an ath dh'fhàs.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Tha Cluichiche {current_player} air a' phàirt a lìbhrigeadh! Tha Cluichiche {current_player} a' buannachd!",
+    "deadlock_player_0": "Tàinig dùbhlan! Tha Cluichiche 0 a' buannachd le {player_0_payoff} càraichean air fhàgail an aghaidh {player_1_payoff} càraichean aig Cluichiche 1.",
+    "deadlock_player_1": "Tàinig dùbhlan! Tha Cluichiche 1 a' buannachd le {player_1_payoff} càraichean air fhàgail an aghaidh {player_0_payoff} càraichean aig Cluichiche 0.",
+    "deadlock_tie": "Tàinig dùbhlan le co-ionannachd! Tha an dà chluichiche aig {player_0_payoff} càraichean air fhàgail. Tha Cluichiche {current_player} a' buannachd le ùghdarras."
+  }
+}

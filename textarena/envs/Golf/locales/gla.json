@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Tha thu a' cluich Golf (Geama Chàrtean) - Cluichiche {player_id}.\nAmas: Faigh an ìre as ìsle de scòr san turas aonarach seo. Ma tha colbhan a' dol a dh'fhàs an aon luach, tha iad air an cur ri chèile mar 0.\nLuachan Càrtean: A=1, 2-10=luach aghaidh, J/Q=10, K=0\n\nGnìomhan (cleachd bràistean tèarainte):\n- '[draw]' - Tarraing bho chluasag\n- '[take]' - Gabh bho chuibhle dh'fhàgail\n- '[swap X Y]' - Fàs càrtean tarraingte le àite X (sreath) Y (colbh)\n- '[discard]' - Fàg càrtean tarraingte"
+  },
+  "board": {
+    "drew": "Thog thu: {card}\nA-nis feumaidh thu [swap X Y] no [discard] e",
+    "took": "Thog thu: {card} bho chuibhle dh'fhàgail\nFeumaidh thu [swap X Y] leis (chan urrainn dhut fhàgail)",
+    "peeked": "Chunnaic thu aig àite ({row},{col}): {card}",
+    "turn_view": "Your hand:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Chan eil gin ann."
+  },
+  "options": {
+    "final_turns": "Turasan deireannach! Do roghainnean: [draw], [take], [peek X Y]",
+    "draw": "Do roghainnean: [draw], [take]",
+    "must_swap": "Feumaidh tu: [swap X Y] (chan urrainn dhut cairtean a thilgeil bhon stac tilleadh)",
+    "swap_or_discard": "Feumaidh thu: [swap X Y] no [discard]"
+  },
+  "hand": {
+    "no_cards": "Gun chairtean.",
+    "header": "Col: 1 2 3",
+    "row": "Sreath {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Cluichiche {pid} dh'fhàs {new} le {old} aig àite ({row},{col})",
+    "discarded": "Cluichiche {pid} dh'fhàg {card}"
+  },
+  "message": {
+    "deck_empty": "Tha an deic falamh! Bidh a' gheama a' crìochnachadh sa bhad.",
+    "knocked": "Player {pid} air a bhualadh! Tha gach cluicheadair eile aig aon chuairt.",
+    "final_round": "Cluichiche {pid} {reason}! Gheibh a h-uile cluichiche eile aon tuilleadh turas"
+  },
+  "reason": {
+    "all_revealed": "Tha a h-uile cairt air nochdadh."
+  },
+  "invalid": {
+    "wrong_action": "Cleachd aon ghnothach bràiste: [draw], [take], [swap X Y], [discard], [knock], no [peek X Y]",
+    "discard_empty": "Tha am moran caitheamh falamh!",
+    "must_draw_first": "Feumaidh thu a' chiad [draw], [take], [knock], no [peek X Y]",
+    "cannot_discard_taken": "Chan urrainn dhut cairt a thoirt às an stac-cairteachaidh, feumaidh tu atharrachadh.",
+    "have_drawn_card": "Tha càrtean tarraing thu. Feumaidh thu [swap X Y] no [discard] e",
+    "need_drawn_swap": "Feumaidh tu cairt air a tharraing gus iomlaid.",
+    "need_drawn_discard": "Feumaidh tu cairt air a tharraing gus an tilgeil thu.",
+    "out_of_bounds": "Àite a-muigh crìochan. Cleachd sreath 1-{max_row}, colbh 1-{max_col}",
+    "knock_with_card": "Chan urrainn dhut a bhith ag èirigh le cairt air an tarraing. Cuir crìoch air do thionndadh mu thràth.",
+    "already_knocked": "Tha cuideigin air a' chuairt seo a bhualadh mar-thà.",
+    "already_revealed": "Tha an cairt sin air a nochdadh mu thràth!"
+  },
+  "summary": {
+    "full": "Geama aig Crìoch! Cluichiche {winner} tha a' buannachd le scòr de {score} phuingean!\n\nScòran Deireannach:\n{scores}",
+    "line": "Cluichiche {pid}: {score} phuingean\n"
+  },
+  "board_str": {
+    "title": "=== GOLF GAME ===",
+    "discard": "Discard pile: {card}",
+    "knocked": "Tha cluicheadair {pid} air cnagadh!",
+    "player_header": "Cluichiche {pid} (Scòr: {score}):"
+  }
+}
