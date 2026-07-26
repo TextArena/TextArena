@@ -17,23 +17,23 @@
     "intro": "You are Player {player_id} in Three-Player GOPS.\n- You hold the 13 cards A-K (each exactly once).\n- Each round a prize is revealed. Submit ONE card like `[Q]`, `[10]`, `[2]` …\n- Highest card wins the prize (+ any carry-over pot). Ties roll the prize into the next round.\n- After 13 rounds, highest total wins. Invalid moves = elimination."
   },
   "round": {
-    "header": "### Mzunguko {round}/13 - Zawadi: {prize} (inagharimu {worth})",
+    "header": "### Round {round}/13 - Prize: {prize} (worth {worth})",
     "hand": "Your remaining hand: {hand}"
   },
   "reveal": {
-    "win": "Ofa » {bids} - Mwene {winner} anashinda {pot}.",
+    "win": "Bids » {bids} - Player {winner} wins {pot}.",
     "tie": "Bids » {bids} - tie, pot now {pot}.",
-    "scores": "Kulemba → {scoreline}"
+    "scores": "Scores → {scoreline}"
   },
   "invalid_move": {
-    "no_token": "Chilinga chacho chatamba kupwa ni kaarte mu chihanda ngwe \"[Q]\"",
-    "bad_card": "Karte kakusalejiwile hanji kali ni ulemu ko."
+    "no_token": "action needs a bracketed card like '[Q]'",
+    "bad_card": "cjk card already used or invalid"
   },
   "elimination": {
     "player": "Player {pid} eliminated after repeated invalid moves."
   },
   "outcome": {
-    "auto_win": "Two players eliminated - automatic win.",
-    "final": "Kutachika cha kusula: {scores}"
+    "auto_win": "Kkkk, avitani vaviri vavuliwe - kudrawa mupira.",
+    "final": "Final scores: {scores}"
   }
 }

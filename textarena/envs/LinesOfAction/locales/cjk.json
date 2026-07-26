@@ -13,24 +13,24 @@
     "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
   },
   "board": {
-    "current_board": "Chizavu: {board}"
+    "current_board": "Board:\n\n{board}"
   },
   "invalid_move": {
-    "wrong_format": "Kutachikiza chijimbikilo cha mukanda chinatela kupwa e2e4 (kufuma ku,kutwala ha)",
-    "no_piece": "Kakweshi mukanda {side} ha mukanda wa {coord}.",
-    "identical": "Kufuma ni kuya kuli ayo chili chifwanyisa chimwe.",
-    "not_straight_or_diagonal": "Kulitambukisa chatela kupwa mu usongwelo hanji ha kusolola.",
-    "wrong_distance": "Yitamba kuya ha chihela chize chili ni yiteli ya mu ndonga.",
-    "enemy_blocks": "Chuma cha mukwa-kole chinatumba jila.",
-    "destination_own": "Kuhichi ni umwe mutu."
+    "wrong_format": "Cjk: cj must be e2e4 (from, to coordinates).",
+    "no_piece": "No {side} piece on {coord}.",
+    "identical": "Cjk and destination are similar.",
+    "not_straight_or_diagonal": "Kengele cjk lazima iwe straight or diagonal.",
+    "wrong_distance": "Cj, esengeli ku sende k'akata na kilo.",
+    "enemy_blocks": "Kyangala ndundu ya lunda nzila.",
+    "destination_own": "Kwangaya cjk'a nga b'o ng'ama."
   },
   "game_action": {
-    "moved": "Kala {player_id} kuzula {from} -> {to}",
-    "captured_suffix": "Kala {player_id} kuzula {from} -> {to} kukwata mwadi wa musala."
+    "moved": "Player {player_id} moved {from} -> {to}",
+    "captured_suffix": "Player {player_id} moved {from} -> {to} capturing an enemy."
   },
   "outcome": {
-    "win": "Yuma yeswe yinalilulieka.",
-    "draw_no_capture": "60 ya kusakula chakuhona kukwata.",
-    "draw_repetition": "Position repeated three times."
+    "win": "Kwangalu nderi ma cj.",
+    "draw_no_capture": "60 moves without capture.",
+    "draw_repetition": "Kengele ya cjk ikatiwa mara tatu."
   }
 }

@@ -1,0 +1,21 @@
+{
+  "_comment": "English locale for SpellingBee. Keys (left) are fixed; translate only the values (right). Keep every {placeholder} verbatim, and keep the bracket example '[example]' and the allowed-letters display neutral (they are literal game syntax).",
+  "_slots": {
+    "{player_id}": "The player's id (integer)",
+    "{allowed_letters}": "The set of allowed letters, sorted and joined (do not translate)",
+    "{word}": "A submitted word"
+  },
+  "prompt": {
+    "intro": "You are Player {player_id} in the Spelling Bee Game.\nAllowed Letters: {allowed_letters}\nEach word must be at least as long as the previous word.\nRepeated words are not allowed.\nWrap your word in square brackets, e.g., '[example]'.\n"
+  },
+  "invalid": {
+    "shorter": "The submitted word is shorter than the previous word.",
+    "repeated": "The submitted word has been submitted before.",
+    "not_a_word": "The submitted word is not a valid english word.",
+    "illegal_characters": "The submitted word contains illegal characters.",
+    "wrong_format": "The submitted word does not follow the proper format. Please make sure to use squared brackets."
+  },
+  "feedback": {
+    "submitted": "Player {player_id} submitted the word: {word}"
+  }
+}

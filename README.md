@@ -263,7 +263,7 @@ Beyond the human-reviewed languages, TextArena includes **143 additional low-res
 | Umbundu (`umb`) | EXPERIMENTAL | 72% | ~63% |
 | Kimbundu (`kmb`) | EXPERIMENTAL | 70% | ~63% |
 | Luba-Kasai (`lua`) | EXPERIMENTAL | 65% | ~82% |
-| Chokwe (`cjk`) | EXPERIMENTAL | 22% | ~63% |
+| Chokwe (`cjk`) | EXPERIMENTAL | 63% | ~63% |
 
 Languages move from experimental to certified as verification improves; the list grows over time.
 

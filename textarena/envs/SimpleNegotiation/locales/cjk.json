@@ -3,8 +3,8 @@
     "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
   },
   "invalid_move": {
-    "receiving_with_no_resource": "Player tried accepting a trade without having the necessary resources.",
-    "out_of_range": "Mwene {player_id}, Nketo isambadidi. Lumbu {col} lwa kwiza kwenze.",
+    "receiving_with_no_resource": "Mupira wa miguu akajaribu kukubali biashara bila kuwa na rasilimali muhimu.",
+    "out_of_range": "Player {player_id}, Invalid action. Column {col} is out of bounds.",
     "already_full": "Player {player_id}, Invalid action. Column {col} is full.",
     "proposing_with_no_resource": "Player {player_id} tried to make a trade offer without having the necessary resources.",
     "incorrect_offer_format": "Player {player_id} made a trade offer in an incorrect format.",
@@ -12,11 +12,11 @@
   },
   "offers": {
     "reject": "Player {player_id} rejected the trade offer.",
-    "accept": "Mwene {acceptor_id} wakwata nketo ya kufwata ku Mwene {proposer_id}.",
-    "proposal": "Mwene {player_id} kufwata nketo kwa Mwene {opponent_id}: Zintu zinazofwata: {offered} -> Zintu zinazokwata: {requested}"
+    "accept": "Player {acceptor_id} accepted the trade offer from Player {proposer_id}.",
+    "proposal": "Player {player_id} made the following offer to Player {opponent_id}: Offered items: {offered} -> Requested items: {requested}"
   },
   "outcome": {
-    "win": "Mutu yoze te akulinga {winner_id} yawina ha kupwa ni ulemu unji wa yuma yize ali nayo.",
-    "draw": "Kuhinduka cha ulemu wa yuma ya mu chizavu kuli akwa-kusa jita eswe."
+    "win": "Player {winner_id} won by having a larger gain in inventory value.",
+    "draw": "Cjk, ck. "
   }
 }

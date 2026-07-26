@@ -1,0 +1,34 @@
+{
+  "_comment": "English locale for Word Ladder. Keys (left) are fixed; translate only the values (right). Keep every {placeholder} verbatim. Word tokens ({start_word}, {target_word}, {word}, {current}, {ladder}) are neutral game words and must not be translated. Keep the bracket example `[word]` as-is.",
+  "_slots": {
+    "{player_id}": "Player number (integer)",
+    "{start_word}": "The starting word of the ladder (neutral token)",
+    "{target_word}": "The target word to reach (neutral token)",
+    "{word}": "The word the player just submitted (neutral token)",
+    "{current}": "The player's current word (neutral token)",
+    "{target}": "The target word (neutral token)",
+    "{target_len}": "Length of the target word (integer)",
+    "{ladder}": "The move history joined by ' -> ' (neutral tokens)",
+    "{history}": "The rendered history line (already localized; do not translate)",
+    "{pct}": "Percentage of letters shared with the target (integer)"
+  },
+  "prompt": {
+    "intro": "You are Player {player_id}.  Your goal is to reach the target word by changing **one letter at a time**.\n- Start word:  **{start_word}**\n- Target word: **{target_word}**\nSubmit each move in square brackets, e.g.  `[word]`.\nHistory appears below as you play.  Good luck!\n"
+  },
+  "invalid": {
+    "wrong_format": "Invalid format. Wrap your word in square brackets, e.g. `[word]`.",
+    "wrong_length": "`{word}` has wrong length; target is {target_len} letters.",
+    "not_a_word": "`{word}` is not a recognised English word.",
+    "not_one_different": "`{word}` is not exactly one letter different from `{current}`."
+  },
+  "board": {
+    "history": "Word Ladder History: {ladder}.  Target Word: {target}\n"
+  },
+  "feedback": {
+    "progress": "Nice! Keep going.\n{history}"
+  },
+  "outcome": {
+    "win": "Congratulations! You reached the target word.",
+    "turn_limit": "The turn limit has been reached. You reached `{current}` which shares {pct}% of its letters with the target `{target}`."
+  }
+}

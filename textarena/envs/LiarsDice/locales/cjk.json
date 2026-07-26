@@ -25,31 +25,31 @@
     "intro": "You are Player {player_id} in an {num_players}-player Liar's Dice game.\nRules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\nIf you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins."
   },
   "board": {
-    "per_player": "\tMwene {p}: {d}",
-    "new_round": "\nMwendo mpya - Mafuta yaliyosalia: {dice_summary}\nMafuta yako ya sasa ni: {your_dice}"
+    "per_player": "\tPlayer {p}: {d}",
+    "new_round": "\nNew round - Remaining dice: {dice_summary}\nYour current Dice are: {your_dice}"
   },
   "call": {
     "bidder_loses": "Player {current_player_id} calls! The actual count of face {face_value} is {count}, which is LESS than {quantity}.\nPlayer {loser_id} (the last bidder) loses one die.",
     "caller_loses": "Player {current_player_id} calls! The actual count of face {face_value} is {count}, which is >= {quantity}.\nPlayer {loser_id} (the caller) loses one die."
   },
   "action": {
-    "bid_announce": "Mwene {player_id} akwata {quantity} kwa njira ya {face_value}."
+    "bid_announce": "Player {player_id} bids {quantity} of face {face_value}."
   },
   "invalid_move": {
-    "call_no_bid": "Kumuvuluka te keshi kuhana mbongo.",
-    "invalid_bid": "Kuhana chawana chakuhona kupwa ni ulemu: {reason}",
-    "not_recognized": "Hatua iliyotolewa haikutambuliwa kama '[Bid: X, Y]' halali au '[Call]'. Hatua iliyowasilishwa: {action}"
+    "call_no_bid": "Cj.",
+    "invalid_bid": "Invalid bid: {reason}",
+    "not_recognized": "Action not recognized as valid '[Bid: X, Y]' or '[Call]. Recommendation action: {action} "
   },
   "bid_reason": {
-    "quantity_lower": "Bungo jipya {new_quantity} ni nyakulya kuliko iliyopo {current_quantity}.",
-    "face_lower": "Thamba lyakwata {new_face_value} li nyakulya kuliko ilyo sasa {current_face_value}.",
-    "identical": "Kuhana chawana chili chifwika ni chize ali kuhanjisa musono.",
-    "face_range": "Chize chinasoloka chifanyile kupwa mukachi ka 1 ni 6."
+    "quantity_lower": "Cjk cj {new_quantity} is lower than current{current_quantity}.",
+    "face_lower": "Cjk cjc {new_face_value} is lower than current{current_face_value}.",
+    "identical": "Kombi ni sawa na komba ya sasa.",
+    "face_range": "Cjk cj: value must be between 1 and 6."
   },
   "message": {
-    "eliminated_invalid": "Mutu yoze te akulinga {player_id} yamusaula ha kukimba chuma chize kuchapwile chilemu."
+    "eliminated_invalid": "Player {player_id} was eliminated by invalid move."
   },
   "outcome": {
-    "win": "Mwene {winner} ameshinda! Matokeo ya mwisho: {final_ranking}"
+    "win": "Player {winner} wins! Final ranking: {final_ranking}"
   }
 }

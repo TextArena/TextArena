@@ -1,76 +1,76 @@
 {
   "game_start": {
     "intro": "The game begins. Trump suit: {trump_suit} (trump card: {trump_str}).",
-    "no_trump_card": "none"
+    "no_trump_card": "hakuna"
   },
   "player_prompt": {
-    "intro": "Wewe ni Mchezaji {player_id} katika Whist ya Kijerumani.\n〕{phase_info}\nUshikiliaje {hand_size} kadi.\nCheza kadi kwa '〕[play N]', ambapo N ni nafasi yake katika mkono wako (kwa mfano '〕[play 3]').",
-    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
-    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+    "intro": "You are Player {player_id} in German Whist.\n{phase_info}\nYou hold {hand_size} cards.\nPlay a card with '[play N]', where N is its position in your hand (for example '[play 3]').",
+    "phase_learning": "KSLK : WTNM: MD B BR: Ngatnm br mnd klkna d gla ckk, na ngwne sandiya td nm muwimbu w’a ndundu ye mbeji.",
+    "phase_playing": "KSKD: Dn d krm. a ttg gnyi blkna sd mla ngz z, ckk kεs k'i knd nma kngnga."
   },
   "next_card": {
-    "playing_phase": "Kukushi kaarte - te muputuka kusakula.",
-    "deck_empty": "Chimbunga chili cha kama - kakuli kaarte.",
-    "available": "Kafwo yize anahana: {card}",
-    "available_trump": "Karte waze akuhana: {card} (TRUMP)"
+    "playing_phase": "Hakuna kadi ya ku nyikiwa - hatua ya kucheza imeanza.",
+    "deck_empty": "Kanduku ya ndundu si ye - kadi yoyi nga yi nyiye.",
+    "available": "Card on offer: {card}",
+    "available_trump": "Card on offer: {card} (TRUMP)"
   },
   "invalid_move": {
-    "wrong_format": "Kuzachisa \"[play N]\" hanga ulizange kaarte wa Nth mu mukono we.",
-    "bad_position": "Chihela chacho kuchishi. Yena unafupila mikanda {hand_size} .",
-    "must_follow_suit": "Mwatela kukaula ni kwasa mukanda wa {lead_suit}.",
-    "invalid_play": "Chuma chino kuchatambile kuchizachisa."
+    "wrong_format": "Invalid move format. Use '[play N]' to play the Nth card in your hand.",
+    "bad_position": "Cjk cj kd bk n'o si. Una dkk {hand_size} kadi",
+    "must_follow_suit": "You must follow suit and play a {lead_suit} card.",
+    "invalid_play": "Kadi hiyo haiwezi kucheza."
   },
   "game_action": {
-    "played": "Mutu yoze te akuzomboka {player_id}, yapwile ni kuzunguluka {card}."
+    "played": "Player {player_id} played {card}."
   },
   "trick": {
-    "won": "Mutu yoze {winner_id} akuwina ha chizavu chize akwete ni {card}.",
+    "won": "Player {winner_id} wins the trick with {card}.",
     "won_learning": "Player {winner_id} wins the trick with {card} and takes the face-up card."
   },
   "phase": {
-    "learning_complete": "Chinyingi chacho chinatukwasa chinji, ni kulilongesa liakalileko - yuma yeswe yize yatwama mu chihanda chino yinakufungulula."
+    "learning_complete": "Kengele ya nderi yi bwile. Nzila ye ku ghula ehwa - kila mupira wa mwisho utwala ngonde kweya kwero lwangama."
   },
   "draw": {
-    "winner_received": "Yena wahasa mu chilimba ni kutambula {card}.",
+    "winner_received": "You won the trick and received {card}.",
     "loser_received": "You lost the trick and drew {card} from the deck.",
-    "winner_preview": "Karte mukwo yoze akuhana kali {card}."
+    "winner_preview": "Cjk card next on offer is {card}."
   },
   "turn": {
-    "board": "〕{phase}\n〕{scores}\n〕{next_card}\n\n〕{trick}\n\n〕{hand}",
-    "scores_learning": "Mafungu yaliyopatikana hadi sasa - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
-    "scores_playing": "Mafungu ya kuhesabu - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
-    "phase": "Kulemba: {phase}",
-    "phase_learning": "Mzunguko: {phase} (〕{remaining_cards} kadi zimesalia katika deki)"
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tricks won so far - Player 0: {tricks0}, Player 1: {tricks1}",
+    "scores_playing": "Scoring tricks - Player 0: {tricks0}, Player 1: {tricks1}",
+    "phase": "Phase: {phase}",
+    "phase_learning": "Phase: {phase} ({remaining_cards} cards left in the deck)"
   },
   "hand": {
-    "no_cards": "Kukushi mikanda ya kuhana.",
-    "no_cards_in_hand": "Kakwete mikanda mu kwoko ko.",
-    "header": "Your hand:",
-    "trump_indicator": " (TRUMP)",
+    "no_cards": "cj",
+    "no_cards_in_hand": "Hakuna kadi ndani",
+    "header": "Mukono wako:",
+    "trump_indicator": "(TRUMP)",
     "suit_line": "{observation}\n  {suit}{trump_indicator}:",
     "card_line": "{observation}\n    {index}. {card}"
   },
   "trick_view": {
-    "empty": "Kukushi ni umwe yoze makazangalisa mu kalimbalaka.",
-    "header": "Chuma cha musono:",
-    "trump_indicator": "(TRUMP) Yuma yize yinalingiwa ha miaka yino.",
-    "card_line": "〕{observation}\n  Mchezaji {player_id}: {card}〕{trump_indicator}"
+    "empty": "Hakuna kadi zilizocheza sasa hii trick.",
+    "header": "Cjk_e:",
+    "trump_indicator": "(TRUMP)",
+    "card_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}"
   },
   "board_str": {
-    "not_started": "Chizango kuchaputuka.",
-    "header": "=== UCHIKA WA JIMBANGU JA MAJERMAN YINALUMBA===",
-    "phase": "{observation}\nMzunguko: {phase}",
-    "trump_suit": "{observation}\nSuti ya trump: {trump_suit}",
-    "trump_card": "{observation}\nKadi ya trump: {card}",
-    "cards_left": "{observation}\nKadi zingidi mu deki: {count}",
-    "next_card": "{observation}\nKadi inayofuata kwa mshindi: {card}",
-    "blank": "{observation} ",
-    "current_trick": "{observation} Uhashi wa musono:",
-    "trump_indicator": "(TRUMP) Yuma yize yinalingiwa ha miaka yino.",
-    "trick_line": "{observation}\n  Mchezaji {player_id}: {card}〕{trump_indicator}",
-    "player_line": "{observation}\nMchezaji {player_id}: {scoring} alipata mafungu (〕{tricks} jumla), {hand_size} kadi katika mkono"
+    "not_started": "Game has not started",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nTrump suit: {trump_suit}",
+    "trump_card": "{observation}\nTrump card: {card}",
+    "cards_left": "{observation}\nCards left in deck: {count}",
+    "next_card": "{observation}\nNext card for winner: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nCurrent trick:",
+    "trump_indicator": "(TRUMP)",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPlayer {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} cards in hand"
   },
   "outcome": {
-    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+    "summary": "cjkcrtk - Player 0: {l0}, player 1 :{l1}. Playing phase - Player 0.: {p0} Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
   }
 }

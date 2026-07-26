@@ -6,36 +6,36 @@
     "current_board": "Current Board:\n\n{board}\nAvailable Moves: {moves}"
   },
   "render": {
-    "center_piles_header": "--- Yindundu ya ha chikolo cha mbonge -- ",
+    "center_piles_header": "--- Center Piles ----",
     "pile": "{observation}Pile {i}: {pile}\n",
     "player_view_header": "{observation}\n--- Player {player_id}'s View ---\n",
-    "payoff": "{observation}Mikanda ya Malipo (Kadi ya Juu): {top_card}, Urefu wa Mikanda ya Malipo: {payoff_length}\n",
+    "payoff": "{observation}Payoff Pile (Top Card): {top_card}, Payoff Pile Length: {payoff_length}\n",
     "hand": "{observation}Hand: {hand}\n",
     "discard": "{observation}Discard Piles: {discard}\n",
-    "empty": "Ka kulitaho."
+    "empty": "Cj"
   },
   "game_message": {
-    "no_cards_left": "Kanda mulikwata mikanda yakutuhwisa. Yivulukenu ngwenu muhasa kuhanga mikanda ya ku yikungululo yino: 1. Mukono wenu 2. Mukanda wa kusongo ha mukanda we wakufweta 3. Mukanda wa kumasango a kutuula. "
+    "no_cards_left": "Cjk, hakuna kadi yo zaidi ya ku draw. Remember that you can play cards from these sources: 1. Your **hand**. 2. The *top card of your payoff pile*. 3. Ny *top Card of any of your discard piles**."
   },
   "invalid_move": {
-    "wrong_format": "Muvwimbimbi wakuhengesa wa mulivwilu.Muka-kuzangamisa {player_id} kakatambwile kulihehwa chaulemu ha maswalale akuheta ku makulukaji a likina jakujingika (square brackets).",
+    "wrong_format": "Invalid move format. Player {player_id} did not respond with a valid move in square brackets.",
     "invalid_play": "Invalid play. Player {player_id} tried to play {card} on center pile {index}.",
-    "discard_from_payoff": "Kujimba cha mu-chino. Mukwa-kuzemba {player_id} yalitela kujimba umwe mukanda wa ku chihanda chize te akufweta ha kumujimba wacho.",
+    "discard_from_payoff": "Invalid discard. Player {player_id} tried to discard a card from the payoff pile.",
     "discard_not_in_hand": "Invalid discard. Player {player_id} tried to discard a card that is not in hand.",
-    "wrong_move_type": "Chuma cha kusakula chakuhona kupwa chamwenemwene. Mukwa-kusala {player_id} kakatambwile ni chuma chakusolola ngwe yuma yize te yili yamwaza ko."
+    "wrong_move_type": "cjk. Player {player_id} did not respond with a valid move type"
   },
   "game_action": {
-    "you_drew": "Yena wapwile ni kukwata mikanda.",
-    "opponent_drew": "Mutu yoze te akulinga chizavu {player_id} yapwile ni kufumba mikanda.",
-    "you_played": "Umicheza {card} kwenye mikanda ya kati {index}.",
-    "opponent_played": "Mwana {player_id} alicheza {card} kwenye mikanda ya kati {index}.",
-    "you_discarded": "Umekwata {card} ku mikanda ya kukata {index}, ikwela inaonyesha kwamba umemaliza mchezo wako. Hakuna hatua zaidi za yako zinazozingatiwa kwa mchezo huu. Mwana {next_player_id} atacheza unavyofuata.",
-    "opponent_discarded": "Mwana {player_id} akwata {card} ku mikanda ya kukata {index}, ikwela inaonyesha kwamba akamaliza mchezo wake. Hakuna hatua zaidi za Mwana {player_id} zinazozingatiwa kwa mchezo huu. Mwana {next_player_id}, utacheza unavyofuata. Tafadhali ingiza hatua yako kwa muundo [action card center_index]."
+    "you_drew": "Wakata cartes.",
+    "opponent_drew": "Player {player_id} drew cards.",
+    "you_played": "You played {card} on center pile {index}.",
+    "opponent_played": "Player {player_id} played {card} on center pile {index}.",
+    "you_discarded": "You have discarded {card} to discard pile {index}, which also means you have finished their turn. No further actions of yours is considered for this turn. Player {next_player_id} will go next.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
   },
   "outcome": {
     "payoff_cleared": "Player {current_player} has finished their payoff pile! Player {current_player} wins!",
-    "deadlock_player_0": "Kufikia kikomo! Mwana 0 anashinda na {player_0_payoff} kadi zimesalia dhidi ya Mwana 1's {player_1_payoff} kadi.",
-    "deadlock_player_1": "Kufikia kikomo! Mwana 1 anashinda na {player_1_payoff} kadi zimesalia dhidi ya Mwana 0's {player_0_payoff} kadi.",
+    "deadlock_player_0": "Cjk cj! Mchez'a 0 awinye {player_0_payoff} cards remaining vs mdlali 1's{player_1_payoff}.",
+    "deadlock_player_1": "Cjk ck! Mchez'i 1 win with {player_1_payoff} cards remaining vs mchez'a 0's{player_0_payoff}.",
     "deadlock_tie": "Deadlock reached with tie! Both players have {player_0_payoff} cards remaining. Player {current_player} wins by default."
   }
 }

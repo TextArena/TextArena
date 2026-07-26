@@ -3,16 +3,16 @@
     "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
   },
   "phases": {
-    "conversation_finished": "Kulumbuluka kwakufikela kwa mzunguko {round}. Tafadhali jibu kwa '[Cooperate]' au '[Defect]' ndani ya \\boxed{{}}.",
-    "starting_round": "--- Kulita cha kuputuka {round} ---",
-    "round_summary": "Matokeo ya mzunguko {round}:\n{outcome}\nMwene 0 alipata {r0} (jumla {score_0}), Mwene 1 alipata {r1} (jumla {score_1})."
+    "conversation_finished": "Conversation finished for round {round}. Please reply with '[Cooperate]' or '[Defect]' within \\boxed{{}}.",
+    "starting_round": "--- Kuqalisa Round {round} ---",
+    "round_summary": "Round {round} results:\n{outcome}\nPlayer 0 earned {r0} (total {score_0}), Player 1 earned {r1} (total {score_1})."
   },
   "outcome": {
-    "winner": "Mwene {winner} ushinda {win_score} - {lose_score}.",
-    "draw": "Yuma yeswe yaali yifupile {s0}.",
-    "round_both_cooperate": "Akwa-kuzomboka eswe aali kakukwasa.",
-    "round_both_defect": "Jitachi eswe aali yalitomboka.",
-    "round_p0_cooperates_p1_defects": "Mutu wa mu chihanda 0 te kakulikata, mutu 1 kakatukile.",
-    "round_p0_defects_p1_cooperates": "Mutu wa mu yitangiwa 0 yalimba, mutu 1 yaputuka kukalakala."
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "Khola! Abazannyi bonse baحرز {s0}. ",
+    "round_both_cooperate": "Bazannyi bombi ba bizana.",
+    "round_both_defect": "Bazannyi bombi bawile.",
+    "round_p0_cooperates_p1_defects": "Wopinzan'i 0 walinganye, wonson'i 1 awile.",
+    "round_p0_defects_p1_cooperates": "Wanzi 0 wawile, wanzi 1 wa lemuka."
   }
 }

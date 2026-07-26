@@ -1,0 +1,48 @@
+{
+  "_comment": "English locale for LetterAuction. Keys (left) are fixed; translate only the values (right). Keep every {placeholder} verbatim. Player numbers, letter tokens ({letter}), coin/number amounts and the bracket examples ([bid 2], [pass], [dog], [Game]) are neutral game syntax and must stay unchanged.",
+  "_slots": {
+    "{player_id}": "A player number (0 or 1)",
+    "{opponent_id}": "The other player's number (0 or 1)",
+    "{current_player}": "The player whose turn is next (0 or 1)",
+    "{coins}": "A player's remaining coins (integer)",
+    "{letters}": "A player's collected letters (a list, e.g. [] or ['A', 'B'])",
+    "{letter}": "The single letter being auctioned (a game token, do not translate)",
+    "{bid_amount}": "A number of coins bid (integer)",
+    "{current_bid}": "The current highest bid to beat (integer)",
+    "{action}": "The raw action string the player submitted",
+    "{word}": "A word submitted by a player (a game token, do not translate)",
+    "{word_value}": "The score value of a submitted word (integer)",
+    "{score}": "A player's final word score (integer)",
+    "{cont}": "A neutral continuation message (already localized; do not translate)"
+  },
+  "prompt": {
+    "intro": "You are Player {player_id}. You are currently in the Letter Auction game.\nThe goal of the game is to strategically bid on letters to form the highest value word. This is how the game works.\nYou must listen to the gamemaster for guidance to play the game.\nThe game consists of a series of rounds. In each round, a letter will be put up for auction.\nYou can bid on the letter using your coins. The player with the highest bid wins the letter.\nThe letter will be added to your collection, and the coins you bid will be deducted from your total.\nThis bidding of letters will repeat till all the letters have been auctioned off. You are not rewarded for saving your coins.\nAfter all the letters have been auctioned, you will use the letters to form the highest value english word from the letters won.\nThe player with the highest value word wins the game.\nIf you want to bid, submit your bid amount in square brackets like [bid 2] or [bid 10].\nIf you do not want to bid, submit [pass].\nFor the submission of the highest value word, you will be prompted at the end of the game to submit them in square brackets like [dog].\nHere is your starting information:\nYour current coins: {coins}\nYour current letters: {letters}\n\n[Game] Player 0 will go first. The first letter for bid: {letter}.\nStarting bid is {bid_amount} coin. You can bid any amount of coins, or choose not to bid.\n"
+  },
+  "invalid": {
+    "bad_bid_format": "Invalid action: {action}. Please enter a valid action: '[bid <amount>]' or '[pass]'.",
+    "bad_word_format": "Invalid action: {action}. Please enter a valid action: '[<word>]'.",
+    "not_enough_coins": "Invalid bid: {bid_amount}. You do not have enough coins.",
+    "bid_too_low": "Invalid bid: {bid_amount}. You must bid more than the current bid of {current_bid}.",
+    "not_a_word": "Invalid word: {word}. Please enter a valid English word.",
+    "missing_letter": "Invalid word: {word}. You do not have the letter '{letter}'."
+  },
+  "turn": {
+    "bid_more": " Player {current_player}, do you want to bid on the letter '{letter}' for more than {bid_amount}?",
+    "start_bid": " Player {current_player}, do you want to start bid on the letter '{letter}' for {bid_amount}?",
+    "auction_over": "The auction is over. Now, players will use the letters they've won to form the highest value english word from the letters won. The player with the highest value word wins the game. To submit the word, submit it in square brackets like [dog]."
+  },
+  "auction": {
+    "pass": "Player {player_id} passes on the letter '{letter}'.{cont}",
+    "pass_opp_wins": "Player {player_id} passes on the letter '{letter}'. Player {opponent_id} will have '{letter}' for {bid_amount}.{cont}",
+    "pass_both": "Player {player_id} passes on the letter '{letter}'. Player {opponent_id} also passes on the letter '{letter}'. So, no one will gain the letter.{cont}",
+    "bid": "Player {player_id} bids {bid_amount} on the letter '{letter}'.{cont}",
+    "bid_opp_pass": "Player {player_id} bids {bid_amount} on the letter '{letter}'. Since Player {opponent_id} passes on the letter '{letter}', Player {player_id} will have it for {bid_amount}.{cont}"
+  },
+  "word": {
+    "chosen": "Player {player_id} chooses the word '{word}' with a value of {word_value}."
+  },
+  "outcome": {
+    "win": "Player {player_id} wins with a score of {score}",
+    "draw": "It's a draw!"
+  }
+}

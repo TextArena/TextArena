@@ -24,20 +24,20 @@
     "intro": "You are Player {player_id}, playing {num_rounds} rounds of Iterated Ultimatum Game.\nYou have ${pool} to split this round between yourself and Player {other_id}.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n"
   },
   "round": {
-    "begins": "--- Mukanda {round_number} lukwata! ---\nMwana luyiko {proposer_id} ni mwana luyiko ukwata, Mwana luyiko {responder_id} ni mwana luyiko ulowa.",
-    "offer": "Mukanda {round_number}: Mwana luyiko {proposer_id} lunga ${offer} kwa Mwana luyiko {responder_id} (kutwa ${keep}).",
-    "accepted": "Mwana luyiko {responder_id} walukwata! Mukanda {round_number} wakwata: Mwana luyiko {proposer_id} +${proposer_gain}, Mwana luyiko {responder_id} +${responder_gain}. Totals mpya: Mwana luyiko 0: ${total_0}, Mwana luyiko 1: ${total_1}.",
-    "rejected": "Mwana luyiko {responder_id} walowa lulimi! Mukanda {round_number} wakwata: Wawili +$0. Totals yasila: Mwana luyiko 0: ${total_0}, Mwana luyiko 1: ${total_1}."
+    "begins": "--- Round {round_number} begins! ---\nPlayer {proposer_id} is the proposer, Player {responder_id} is the responder.",
+    "offer": "Round {round_number}: Player {proposer_id} offers ${offer} to Player {responder_id} (keeping ${keep}).",
+    "accepted": "Player {responder_id} accepted! Round {round_number} gains: Player {proposer_id} +${proposer_gain}, Player {responder_id} +${responder_gain}. New totals: Player 0: ${total_0}, Player 1: ${total_1}.",
+    "rejected": "Player {responder_id} rejected the offer! Round {round_number} gains: Both players +$0. Totals remain: Player 0: ${total_0}, Player 1: ${total_1}."
   },
   "invalid_move": {
-    "no_offer_format": "Proposer must make an offer using the format [Offer: $X].",
-    "bad_integer": "Offer amount must be a valid integer.",
-    "out_of_range": "Kuhana chacho chatamba kupwa ha chihanda cha $0 ni ${pool}.",
-    "no_current_offer": "No current offer to respond to.",
-    "accept_or_reject": "Mwana luyiko aluka ku [Accept] or [Reject] lulimi."
+    "no_offer_format": "Cjk: Proposer must make a offer using the format [Offer: $X].",
+    "bad_integer": "Cjk, cj, must be a valid integer.",
+    "out_of_range": "Offer must be between $0 and ${pool}.",
+    "no_current_offer": "Hakuna ofa ya sasa kwa kujibu na.",
+    "accept_or_reject": "Responder must either [Accept] or [Reject] the offer."
   },
   "outcome": {
-    "win": "Mwana luyiko {winner} wakwata na ${winner_total} wotulo vs Mwana luyiko {loser}'s ${loser_total}.",
-    "draw": "Yuma yeswe yaalifwika ni ${total}."
+    "win": "Player {winner} won with ${winner_total} total vs Player {loser}'s ${loser_total}.",
+    "draw": "Draw! Both players finished with ${total} total."
   }
 }

@@ -26,54 +26,54 @@
   "board": {
     "drew": "You drew: {card}\nNow you must [swap X Y] or [discard] it.",
     "took": "You took: {card} from discard pile\nYou must [swap X Y] with it (cannot discard).",
-    "peeked": "Umeangalia nafasi ({row},{col}): {card}",
-    "turn_view": "Mkono wako:\n{hand}\nMkeka wa kupita: {discard}\n{options}",
-    "none": "Kukushi niumwe."
+    "peeked": "You peeked at position ({row},{col}): {card}",
+    "turn_view": "Your hand:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Hakuna"
   },
   "options": {
-    "final_turns": "Mizunguko ya mwisho! Chaguo zako: [draw], [take], [peek X Y]",
-    "draw": "Chaguo zako: [draw], [take]",
-    "must_swap": "Mwatela: [swap X Y] (kakuchi kuhasa kuhana makadi a ha chihanda cha kusula)",
+    "final_turns": "Final turns! Your options: [draw], [take], [peek X Y]",
+    "draw": "Your options: [draw], [take]",
+    "must_swap": "You must: [swap X Y] (cannot discard cards from discard pile)",
     "swap_or_discard": "You must: [swap X Y] or [discard]"
   },
   "hand": {
-    "no_cards": "Kukushi mikanda ya kuhana.",
-    "header": "  Col:   1    2    3",
-    "row": "Safu {n}: {cards}"
+    "no_cards": "cj",
+    "header": "Col: 1 2 3",
+    "row": "Row {n}: {cards}"
   },
   "action_desc": {
     "swapped": "Player {pid} swapped {new} with {old} at position ({row},{col})",
     "discarded": "Player {pid} discarded {card}"
   },
   "message": {
-    "deck_empty": "Chihela cha mu kalimbachi chinapu chakuzeneka mutu!",
-    "knocked": "Mutu yoze wakufupila {pid} kakumwesa! Mukwo-mutu ni mukwo kakuwana umwe mulimo.",
+    "deck_empty": "Kengele ck'a nderi! Mchezo unaisha immediately.",
+    "knocked": "Player {pid} knocked! Each other player gets one more turn.",
     "final_round": "Player {pid} {reason}! Each other player gets one more turn."
   },
   "reason": {
-    "all_revealed": "has all cards revealed"
+    "all_revealed": "cjk has all cards revealed"
   },
   "invalid": {
-    "wrong_action": "Tumia hatua moja iliyo na mabano: [draw], [take], [swap X Y], [discard], [knock], au [peek X Y]",
-    "discard_empty": "Chimbunga cha yuma ya kuhana chili chakuzeneka!",
-    "must_draw_first": "Unahitaji kwanza [draw], [take], [knock], au [peek X Y]",
-    "cannot_discard_taken": "Kanda muhasa kwecha karte yize unanyonga ha chihanda cha kaarte waze wakusa.",
-    "have_drawn_card": "Una kadi iliyochorwa. Unahitaji [swap X Y] au [discard]",
-    "need_drawn_swap": "Mufupa mukanda uze wakulihana hanga uhindu upwe.",
-    "need_drawn_discard": "Mufupa mukanda uze muukasa hanga uhonese.",
+    "wrong_action": "Use exactly ONE bracketed action: [draw], [take], [swap X Y], [discard], [knock], or [peek X Y]",
+    "discard_empty": "K'embundu ya ku gunda ni ngonde!",
+    "must_draw_first": "You must first [draw], [take], [knock], or [peek X Y]",
+    "cannot_discard_taken": "Unasi ku ghula kadi e ithwale mu bwire. U fanele ku yi thala.",
+    "have_drawn_card": "You have a drawn card. You must [swap X Y] or [discard] it.",
+    "need_drawn_swap": "Cjk, unahitaji kadi ya kutandikwa.",
+    "need_drawn_discard": "Cj, una besoin d'un carte de crédit pour vérifier.",
     "out_of_bounds": "Position out of bounds. Use row 1-{max_row}, column 1-{max_col}",
-    "knock_with_card": "Kanda muhasa kukopa ni kaarte yize hiwapwa na-kufweta.",
-    "already_knocked": "Umwe mutu hanafupisa jino mukingo uno.",
-    "already_revealed": "That card is already revealed!"
+    "knock_with_card": "Cj, uwezi ku ghula na kadi ya benye. Ghala mupira wako wa kwanza.",
+    "already_knocked": "Mtu tayari ametimba hii round.",
+    "already_revealed": "Kadi hiyo tayari imegunduliwa!"
   },
   "summary": {
-    "full": "Mchezo Umekwisha! Mwana {winner} anashinda na alama ya {score} pointi!\n\nAlama za Mwisho:\n{scores}",
-    "line": "Mwana {pid}: {score} pointi\n"
+    "full": "Game Over! Player {winner} wins with a score of {score} points!\n\nFinal Scores:\n{scores}",
+    "line": "Player {pid}: {score} points\n"
   },
   "board_str": {
-    "title": "=== GOLF GAME ===",
-    "discard": "Kuchina chihanda cha kujimba: {card}",
+    "title": "=== GOVERNMENT",
+    "discard": "Discard pile: {card}",
     "knocked": "Player {pid} has knocked!",
-    "player_header": "Mwana {pid} (Alama: {score}):"
+    "player_header": "Player {pid} (Score: {score}):"
   }
 }

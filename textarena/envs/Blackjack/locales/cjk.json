@@ -1,16 +1,16 @@
 {
   "player_prompt": {
-    "intro": "Olenza ludilo la Blackjack dhidi ya Mukwataki.\nLengo lako ni kupata karibu na 21 bila kupita.\nKwenye muda wako, chagua '[Hit]' kupata kadi nyingine au '[Stand]' kushikilia.\nJ/Q/K = pointi 10; A = pointi 11 au 1, iliyo bora zaidi.\n"
+    "intro": "You are playing Blackjack against the dealer.\nYour goal is to get as close to 21 as possible without going over.\nOn your turn, choose '[Hit]' to draw another card or '[Stand]' to hold.\nJ/Q/K = 10 points; A = 11 or 1, whichever is better.\n"
   },
   "board": {
-    "current_state": "Luk'elo lwa {hand_number}/{num_hands}\nLuk'elo lwa ko: {player_hand} (Makumi: {score})\nMukwataki anapitila: {dealer_card}"
+    "current_state": "Hand {hand_number}/{num_hands}\nYour hand: {player_hand} (Score: {score})\nDealer shows: {dealer_card}"
   },
   "invalid_move": {
     "wrong_format": "Invalid action. Use '[Hit]' or '[Stand]'."
   },
   "game_message": {
-    "hand_result": "Luk'elo {hand_number}: o {outcome}. Makumi yako ya mwisho {player_score}, ya Mukwataki {dealer_score}.",
-    "all_complete": "=== Makumi yose ya {num_hands} yamalwa ===\nMakumi ya kupata: {wins}, Makumi ya kupwata: {losses}, Makumi ya kusawana: {draws}\n"
+    "hand_result": "Hand {hand_number}: you {outcome}. Your final {player_score}, Dealer {dealer_score}.",
+    "all_complete": "=== All {num_hands} hands complete ===\nWins: {wins}, Losses: {losses}, Draws: {draws}\n"
   },
   "outcome": {
     "game_over": "The game has concluded. Final scores: Dealer: {losses}, You: {wins}, Draws: {draws}"
