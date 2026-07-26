@@ -1,0 +1,105 @@
+{
+  "_comment": "Archivo de idioma de Hanabi en español. NO traduzcas las claves (lado izquierdo); traduce solo los valores. Mantén cada {placeholder} exactamente igual. Nunca traduzcas los tokens de acción ('[Reveal]', '[Play]', '[Discard]'), las plantillas literales de entrada 'player N card X color C' etc. ni los rangos numéricos/recuentos de tokens. Las palabras de color de las cartas ('white', 'yellow', 'green', 'blue', 'red') aparecen como prosa y DEBEN traducirse mediante el bloque 'color'; mantenlas consistentes en todas partes (etiquetas de los fuegos artificiales, descripciones de cartas). En la lista de colores válidos las palabras permanecen en inglés, porque son la entrada aceptada.",
+  "_slots": {
+    "{player_id}": "Un número de jugador (índice), p. ej. 0 o 1",
+    "{num_players}": "Número total de jugadores en la partida",
+    "{pid}": "Un número de jugador (índice)",
+    "{player}": "Un número de jugador (índice) mencionado en una pista, mantenido como número neutro",
+    "{color}": "Una palabra de color de carta o la cadena de color en bruto que escribió el jugador (sin cambios si la entrada es inválida)",
+    "{rank}": "Un rango de carta 1-5 o la cadena de rango en bruto que escribió el jugador",
+    "{card}": "Una descripción de carta renderizada, p. ej. 'a white card with rank 4'",
+    "{idx}": "Un índice de posición de carta en una mano",
+    "{card_index}": "Un índice de posición de carta",
+    "{fuse}": "Número de fichas de mecha restantes",
+    "{info}": "Número de fichas de información restantes",
+    "{fuse_tokens}": "Número de fichas de mecha restantes tras una jugada fallida",
+    "{fw_white}": "Progreso del fuego artificial (0-5) para el color blanco",
+    "{fw_yellow}": "Progreso del fuego artificial para el color amarillo",
+    "{fw_green}": "Progreso del fuego artificial para el color verde",
+    "{fw_blue}": "Progreso del fuego artificial para el color azul",
+    "{fw_red}": "Progreso del fuego artificial para el color rojo",
+    "{c_white}": "La palabra de color traducida para el blanco (anidada)",
+    "{c_yellow}": "La palabra de color traducida para el amarillo (anidada)",
+    "{c_green}": "La palabra de color traducida para el verde (anidada)",
+    "{c_blue}": "La palabra de color traducida para el azul (anidada)",
+    "{c_red}": "La palabra de color traducida para el rojo (anidada)",
+    "{visible_cards}": "Bloque prerrenderizado con las cartas visibles de los compañeros",
+    "{discard_pile}": "Bloque prerrenderizado con las cartas descartadas",
+    "{count}": "Número de jugadas inválidas hechas seguidas",
+    "{max_player}": "El índice de jugador válido más alto (num_players - 1)",
+    "{max_card}": "El índice de carta válido más alto (hand_size - 1)"
+  },
+
+  "color": {
+    "white": "blanco",
+    "yellow": "amarillo",
+    "green": "verde",
+    "blue": "azul",
+    "red": "rojo"
+  },
+
+  "card": {
+    "desc": "una carta {color} de rango {rank}"
+  },
+
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id} en una partida de Hanabi de {num_players} jugadores. Hanabi es un juego de cartas cooperativo en el que los jugadores trabajan juntos para crear una serie de fuegos artificiales jugando cartas en orden numérico ascendente empezando por el 1. Cada jugador sostiene sus cartas hacia afuera, de modo que todos los jugadores pueden ver las cartas de los demás pero no las propias.\n\nObjetivo:\nEl objetivo es jugar cartas en secuencia (del 1 al 5) para cada color sin cometer errores. Hay 5 colores diferentes y cada color tiene cartas numeradas del 1 al 5.\n\nReglas clave:\nEn tu turno, tienes tres tipos de acciones posibles:\n1. Dar una pista (Reveal): Proporciona a otro jugador una pista sobre sus cartas, indicando un color o un número presente en su mano. Las pistas deben ser precisas y solo pueden revelar las posiciones de las cartas que coinciden con la pista.\n2. Descartar una carta: Descarta una de tus propias cartas para posiblemente ganar una ficha de información.\n3. Jugar una carta: Intenta jugar una carta de tu mano. Si se juega correctamente en secuencia, se añade a los fuegos artificiales; si no, se reduce una ficha de mecha.\n\nFichas:\nFichas de mecha: Se descuentan cuando se juega una carta incorrecta.\nFichas de información: Se usan para dar pistas.\n\nJugadas ilegales:\nJugar una carta que no puede colocarse correctamente cuesta una ficha de mecha. Si las fichas de mecha llegan a cero, la partida termina en derrota.\n\nFin de la partida:\nLa partida termina cuando todos los fuegos artificiales están completos (puntuación perfecta de 25), o cuando el mazo se agota y cada jugador ha realizado un último turno, o cuando los jugadores se quedan sin fichas de mecha.\n\nRepresentación del estado:\nEl estado del juego se representa con los siguientes detalles:\nFichas de mecha: Número de fichas de mecha restantes.\nFichas de información: Número de fichas de información disponibles.\nFuegos artificiales: Progreso actual en cada color de fuego artificial.\nDescartes: Cartas que se han descartado.\n\nTu papel:\nEres uno de los jugadores, cooperando con los demás para maximizar la puntuación total de los fuegos artificiales (el número de cartas jugadas correctamente en secuencia).\nAunque no puedes ver tus propias cartas, sí puedes ver las cartas en las manos de tus compañeros.\nUsa las pistas, los descartes y las jugadas de forma estratégica para guiar al equipo hacia secuencias exitosas.\nCuando sea tu turno, tu salida debe estar en uno de los siguientes formatos entre comillas:\n\n'[Reveal] player N card X color C', para dar una pista sobre el color C de la carta X al jugador con índice N.\n'[Reveal] player N card X rank R', para dar una pista sobre el rango R de la carta X al jugador con índice N.\n'[Play] X', para jugar la carta en la posición X de tu mano.\n'[Discard] X', para descartar la carta en la posición X de tu mano.\n\nRecuerda: la comunicación se limita a pistas sobre colores o números únicamente, y no está permitido compartir información ilegal o superflua. ¡Trabajad juntos, seguid las reglas y aspirad a la mayor puntuación cooperativa posible!\n\n"
+  },
+
+  "state": {
+    "description": "Eres el jugador {pid}. \n\nEstado actual de la partida:\nFichas de mecha: quedan {fuse} fichas de mecha.\nFichas de información: quedan {info} fichas de información.\n\nFuegos artificiales: El progreso actual en cada color de fuego artificial es:\n\t{c_white}: {fw_white}.\n\t{c_yellow}: {fw_yellow}.\n\t{c_green}: {fw_green}.\n\t{c_blue}: {fw_blue}.\n\t{c_red}: {fw_red}.\n\nTus compañeros tienen las siguientes cartas en su mano:\n{visible_cards}\nDescartes: Las siguientes cartas han sido descartadas:\n{discard_pile}\n",
+    "player_cards_header": "- El jugador {pid} tiene las cartas:\n",
+    "card_line": "\tcarta {idx}: {card}\n"
+  },
+
+  "reveal": {
+    "hint_color": "La carta {card_index} del jugador {player} es {color}.",
+    "hint_rank": "La carta {card_index} del jugador {player} tiene rango {rank}."
+  },
+
+  "play": {
+    "success": "El jugador {pid} intenta jugar {card}. La carta se jugó con éxito.",
+    "fail": "El jugador {pid} intenta jugar {card}. La carta no coincidió con el estado actual de los fuegos artificiales. Esto cuesta una ficha de mecha. Quedan {fuse_tokens} fichas de mecha."
+  },
+
+  "discard": {
+    "replenished": "El jugador {pid} descarta {card}. Esto repone una ficha de información.",
+    "cap_reached": "El jugador {pid} descarta {card}. Esto no repone una ficha de información porque se alcanzó el límite de fichas."
+  },
+
+  "skip_turn": "El jugador {pid} hizo {count} jugadas inválidas seguidas y pierde un turno. ",
+  "final_round": "No quedan cartas en el mazo. Esta es la ronda final.",
+
+  "invalid": {
+    "generic_action_reason": "El jugador indicó una acción inválida. Los jugadores solo pueden '[reveal]', '[play]' o '[discard]'.",
+    "reveal_no_info_reason": "El jugador intentó dar una pista sin tener ninguna ficha de información.",
+    "reveal_own_reason": "El jugador intenta revelar información sobre sus propias cartas.",
+    "reveal_own_detail": "Intentaste revelar información sobre tus propias cartas. Esto no está permitido.",
+    "reveal_bad_teammate_reason": "El jugador intenta revelar información sobre un compañero que no existe.",
+    "reveal_bad_teammate_detail": "Intentaste revelar información sobre un compañero que no existe. Considera por favor a los compañeros entre 0 y {max_player} (incluidos). Ten en cuenta que no puedes revelar información sobre ti mismo, eres el jugador {pid}.",
+    "reveal_bad_card_reason": "El jugador intenta revelar información sobre una carta que no existe.",
+    "reveal_bad_card_detail": "Intentaste revelar información sobre una carta que no existe. El índice de carta debe estar entre 0 y {max_card} (incluidos). Indicaste {card_index}. ",
+    "reveal_bad_color_reason": "El jugador indicó un color que no está en el juego.",
+    "reveal_bad_color_detail": "Indicaste un color inválido. Los colores válidos son 'white', 'yellow', 'green', 'red' y 'blue'. Probaste: '{color}'.",
+    "reveal_bad_rank_reason": "El jugador indicó un rango inválido.",
+    "reveal_bad_rank_detail": "Indicaste un rango inválido. Los rangos válidos están entre 1 y 5 (incluidos). Indicaste: '{rank}'.",
+    "reveal_bad_rank_format_reason": "El jugador indicó un formato de rango inválido.",
+    "reveal_bad_rank_format_detail": "Indicaste un formato de rango inválido. Los rangos válidos están entre 1 y 5 (incluidos). Indicaste: '{rank}'.",
+    "reveal_incomplete_reason": "El jugador indicó una pista incompleta.",
+    "reveal_incomplete_detail": "Indicaste una acción inválida. Si quieres revelar una carta, escribe:\n '[Reveal] player N card X color C', para dar una pista sobre el color C de la carta X al jugador con índice N.\no\n'[Reveal] player N card X rank R', para dar una pista sobre el rango R de la carta X al jugador con índice N.\n\nPor ejemplo: '[Reveal] player 0 card 0 color green' revela que la carta 0 del jugador 0 es green.",
+    "play_nonexist_reason": "El jugador intenta jugar una carta que no existe.",
+    "play_nonexist_detail": "Intentaste jugar una carta que no existe. Considera por favor las cartas entre 0 y {max_card} (incluidas). Indicaste {card_index}.",
+    "play_parse_reason": "El jugador indicó una acción inválida.",
+    "play_parse_detail": "Indicaste una acción inválida. Si quieres jugar una carta, escribe:\n '[Play] X', para jugar la carta en la posición X de tu mano. Por ejemplo: '[Play] 0' juega la carta en la posición 0.",
+    "discard_nonexist_reason": "El jugador intenta descartar una carta que no existe.",
+    "discard_nonexist_detail": "Intentaste descartar una carta que no existe. Considera por favor las cartas entre 0 y {max_card} (incluidas). Indicaste {card_index}.",
+    "discard_parse_reason": "El jugador indicó una acción inválida.",
+    "discard_parse_detail": "Indicaste una acción inválida. Si quieres descartar una carta, escribe:\n '[Discard] X', para descartar la carta en la posición X de tu mano. Por ejemplo: '[Discard] 0' descarta la carta en la posición 0."
+  },
+
+  "outcome": {
+    "deck_empty": "El mazo se ha agotado.",
+    "fuse_empty": "El equipo se quedó sin fichas de mecha.",
+    "win": "Todos los 5 se han jugado con éxito."
+  }
+}
