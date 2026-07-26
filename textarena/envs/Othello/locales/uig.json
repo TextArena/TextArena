@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "ئويۇن تاختىسى: {board}",
+    "valid_moves": "{observation}\nمۇۋاپىق قەدەملەر: {moves}",
+    "no_valid_moves_reset": "{observation} ھەركەتلەر كۈچكە ئىگە ئەمەس، بەلكىم ئۆتۈپ كېتىشىڭىز مۇمكىن.",
+    "no_valid_moves_step": "{observation}ئادەتتىكى ھەرىكەتلەر يوق. سىز ئۆتۈپ كېتىشكە توغرا كېلىدۇ.",
+    "scores_reset": "{observation}\nھازىركى نەتىجىلەر - قارا: {black_count}, ئاق: {white_count}\n",
+    "scores_step": "{observation}\nنەتىجىلەر - قارا: {black_count}, ئاق: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "ھەركەت شەكلى بولسا [row, col].",
+    "illegal": "قانۇنسىز يۆتكىلىش. قانۇنىي ھەركەتلەر: {valid}"
+  },
+  "game_action": {
+    "skipped": "ئويۇنچى {pid} ئۆز نۆۋىتىنى ئۆتكۈزۈپ قويدى.",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "ئويناشچى {pid} ({piece})نىڭ مۇۋاپىق قەدەمى يوق ۋە ئۇ ئۆتкۈزۈشكە تىگىشلىك."
+  },
+  "outcome": {
+    "black_wins": "قارا يېنىش {black_count}-{white_count}.",
+    "white_wins": "ئاق يېنىش {white_count}-{black_count}.",
+    "draw": "تەڭلىك {black_count}-{white_count}."
+  }
+}

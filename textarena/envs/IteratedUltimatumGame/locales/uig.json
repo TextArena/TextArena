@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Siz O'yinchi {player_id}, Iterated Ultimatum O'yinining {num_rounds} raundini o'ynaysiz.\nSiz ushbu raundni o'zingiz va O'yinchi {other_id} o'rtasida {pool}$ bo'lishish uchun ega siz.\n\nTaklif qiluvchi:\n  - Taklif qil: [Offer: $X] (0 <= X <= pul)\n  - Qabul qilinsa → Sizga (pul - X)$, boshqa o'yinchiga X$\n  - Rad qilinsa → Ikkala o'yinchi ham 0$\n  - Misol: [Offer: $3]  yaki  'Menga bu adil ko'rinadi. [Offer: $5]'\n\nJavob beruvchi:\n  - Taklif bilan [Accept] yaki [Reject] bilan qaror qabul qil\n  - Misol: 'Buni ma'qul ko'raman. [Accept]'\n            'Juda adolatsiz. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Round {round_number} begins! ---\nPlayer {proposer_id} is the proposer, Player {responder_id} is the responder.",
+    "offer": "Round {round_number}: Player {proposer_id} offers ${offer} to Player {responder_id} (keeping ${keep}).",
+    "accepted": "O'yinchi {responder_id} qabul qildi! Raund {round_number} foydasi: O'yinchi {proposer_id} +{proposer_gain}$, O'yinchi {responder_id} +{responder_gain}$. Yangi jamlar: O'yinchi 0: {total_0}$, O'yinchi 1: {total_1}$.",
+    "rejected": "O'yinchi {responder_id} taklifni rad etdi! Raund {round_number} foydasi: Ikkala o'yinchi ham 0$. Jamlar saqlanadi: O'yinchi 0: {total_0}$, O'yinchi 1: {total_1}$."
+  },
+  "invalid_move": {
+    "no_offer_format": "تەكلىپ قىلغۇچى چوقۇم [Offer: $X] شەكلىدە بىر تەكلىپنى بېرىشى كېرەك.",
+    "bad_integer": "بۇ بىر پۈتۈن سان بولۇشى كېرەك.",
+    "out_of_range": "Taklif 0$ we {pool}$ orasida bolishi kerak.",
+    "no_current_offer": "ھازىرچە جاۋاب قايتۇرغىلى بولمايدىغان بىر تەكلىپمۇ يوق.",
+    "accept_or_reject": "Jawapker [Accept] yaki [Reject] taklifni qabul qilishi yaki rad etishi kerak."
+  },
+  "outcome": {
+    "win": "Player {winner} won with ${winner_total} total vs Player {loser}'s ${loser_total}.",
+    "draw": "تەڭلەڭ! ھەر ئىككىسى جەمئىي ${total} بىلەن ئاخىرلاشتى."
+  }
+}

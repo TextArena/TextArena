@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "كېڭەش پالاتاسى: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "شەكلى e2e4 (كوردىناتتىن،كوئوردىناتقا) بولۇشى كېرەك.",
+    "no_piece": "{coord} دە {side} لىق بۇلۇڭ يوق.",
+    "identical": "مەنبە ۋە مەقسەت ئوخشاش.",
+    "not_straight_or_diagonal": "ھەرىكەت چوقۇم تۈز ياكى تىرەك ھالەتتە بولۇشى كېرەك.",
+    "wrong_distance": "Must move distance equal to pieces in line.",
+    "enemy_blocks": "دۈشمەننىڭ گىرىم بۇيۇملىرى يولنى توسۇپ تۇرىدۇ.",
+    "destination_own": "ئۇلار (يەنى مۇشرىكلار) (قۇرئاننى يوققا چىقىرىش ئۈچۈن) ھەقىقەتەن ھىيلە - مىكىر ئىشلىتىدۇ"
+  },
+  "game_action": {
+    "moved": "ئوينچى {player_id} {from} -> {to} يۆتكەلدى.",
+    "captured_suffix": "Player {player_id} moved {from} -> {to} capturing an enemy."
+  },
+  "outcome": {
+    "win": "ھەممە يېرى بىر گەۋدە.",
+    "draw_no_capture": "60 قېتىملىق ھەرىكەتتە بىرمۇ توپنى تۇتۇۋالالمىدى.",
+    "draw_repetition": "ئورۇن ئۈچ قېتىم تەكرارلىنىدۇ."
+  }
+}

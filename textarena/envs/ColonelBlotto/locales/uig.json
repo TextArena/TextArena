@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "قوماندان ئالفا.",
+    "commander_beta": "قوماندان بىتا."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRound {current_round}\nCommander Alpha allocated: {p0_allocations}\nCommander Beta allocated: {p1_allocations}\n",
+    "winner_alpha": "{message}غەلبە قىلغۇچى: قوماندان ئالفا",
+    "winner_beta": "{message}غەلبە قىلغۇچى: قوماندان بېتا",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "خاتا كىرگۈزۈش شەكلى. ئىشلىتىش: A:5، B:10 ، C:5",
+    "invalid_field": "Invalid field name(s). Valid fields: {field_names}",
+    "wrong_allocation_value": "All allocations must be non-negative integers.",
+    "incorrect_total_units": "You have to allocate exactly {num_total_units} units. Current sum: {current_sum}",
+    "good_allocations": "تەقسىمات ياخشى."
+  },
+  "outcome": {
+    "winner_alpha": "Commander Alpha wins {score_0}-{score_1} after {num_rounds} rounds!",
+    "winner_beta": "Commander Beta wins {score_1}-{score_0} after {num_rounds} rounds!",
+    "draw": "Game ends in a {score_0}-{score_1} tie after {num_rounds} rounds!",
+    "early_winner_alpha": "Commander Alpha {scores_0}-{scores_1} بىلەن ئۇتۇپ چىقتى (كۆپچىلىك يەتكەچلىك!)!",
+    "early_winner_beta": "Commander Beta {scores_1}-{scores_0} بىلەن ئۇتۇپ چىقتى (كۆپچىلىك يەتكەچلىك!)!"
+  }
+}

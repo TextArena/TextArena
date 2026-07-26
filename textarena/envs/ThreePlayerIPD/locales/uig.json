@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "سىز {player_id}-ئوينىغۇچى 3-ئوينىغۇچىلۇق قايتا-قايتا تۇتۇقنىڭ دىلېمماسىدا. مۇسابقە {num_rounds} رۇندلارغا داۋاملىشىدۇ.\nرۇند تۈزۈلۈشى:\n• {conv_rounds} ئەركىن چات تۈرلەر\n• 1 قارار تۈرى - ھەر بىر قارشى تۇرغۇچىغا بىر تۈر: '[<opp-id> cooperate]' ياكى '[<opp-id> defect]' (مەسىلەن '[1 defect] [2 cooperate]'; پۈتۈنلەي ۋەكىل 'ھەمكارلىشىش'). \nژۇپتىيىۋى پايدىلار ماتېرسى (ھەر بىر تەرتىپسىز ژۇپتىگە قوزغىتىلغان):\n  - ئىككىلىسى ھەمكارلىشىدۇ  ->  {reward}\n  - ئىككىلىسىمۇ خىيىنچىلىق قىلىدۇ     ->  {punishment}\n  - سىز خىيىنچىلىق قىلىسىز، ئۇلار ھەمكارلىشىدۇ ->  {temptation}\n  - سىز ھەمكارلىشىسىز، ئۇلار خىيىنچىلىق قىلىدۇ ->  {sucker}\nئەڭ يۇقىرى پۇل مىقدارىغا ئىگە بولغان ئوينىغۇچى(لەر) بارلىق رۇندلارنىڭ ئاخىرىدا گەلىڭەن."
+  },
+  "round": {
+    "start": "─── {round}-رۇند باشلىنىدۇ ───\tسىز كېيىنكى {conv_rounds} رۇندلارغىچە ئەركىن گېپىlash ئېلىپ بېرىسىز.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### ئايلانما {round} - نەتىجە:",
+    "pair_line": "{observation}\n\t ئوينىغۇچى {i} vs ئوينىغۇچى {j} {choice_i} ۋە {choice_j} غا تەشاببوس قىلدى (ئوينىغۇچى {i} {gain_i} گە ئىگە بولدى، ئوينىغۇچى {j} {gain_j} گە ئىگە بولدى)",
+    "scores_open": "{observation} -> ھازىرقى نەتىجە: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; ئوينىغۇچى {player_id} ({score})",
+    "finalize": "{observation}  ئېسىل كىتابلار."
+  },
+  "outcome": {
+    "final": "Final نەتىجىلەر: {scores}.  گۇرۇپلارنىڭ رېيىتنگى (ئەڭ يامان→ئەڭ ياخشى): {groups}"
+  }
+}

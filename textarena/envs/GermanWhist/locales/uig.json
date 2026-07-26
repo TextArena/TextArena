@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "O'yin boshlandi. Ko'zbo'yin ma'nisi: {trump_suit} (ko'zbo'yin karta: {trump_str}).",
+    "no_trump_card": "يوق."
+  },
+  "player_prompt": {
+    "intro": "Siz German Whist o'yinchisi {player_id} siz.\n{phase_info}\nSiz {hand_size} kartalarni ushlab tursiz.\n'[play N]' buyrug'i bilan kartani chiqaring, bu kartaning o'rnini sizning qo'lingizda (masalan '[play 3]').",
+    "phase_learning": "ئۆگىنىش باسقۇچى: ھەر بىر ھىيلىنىڭ غەلىبەچىسى يۈزىنى ئېچىپ تاشلىغان كارتىنى ئالىدۇ، مەغلۇپ بولغان ئادەم يەنە كېيىنكى كارتوننى تارتىدۇ. بۇ مەزگىلدە ئېرىشكەن ھىيلە-مىكىرلەر غەلبىگە ھېسابلانمايدۇ.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "ھېچبىر كارتا تەمىنلەنمەيدۇ، ئويۇن باسقۇچى باشلاندى.",
+    "deck_empty": "توپ خالىي، ھېچقانداق كارتا يوق.",
+    "available": "كارتا تەمىنلەيدۇ: {card}",
+    "available_trump": "Taklif qilingan karta: {card} (KO'ZBO'YIN)"
+  },
+  "invalid_move": {
+    "wrong_format": "ئىناۋەتسىز ھەركەت شەكلى. قولىڭىزدىكى N-چىراغنى ئويناش ئۈچۈن '[play N]' نى ئىشلىتىڭ.",
+    "bad_position": "That card position does not exist. You hold {hand_size} cards.",
+    "must_follow_suit": "Siz ma'nisiga amal qilishingiz va {lead_suit} kartasini chiqarishingiz kerak.",
+    "invalid_play": "بۇ كارتىنى ئويناپ بولغىلى بولمايدۇ."
+  },
+  "game_action": {
+    "played": "O'yinchi {player_id} {card} kartasini chiqardi."
+  },
+  "trick": {
+    "won": "O'yinchi {winner_id} {card} bilan ushbu kartani yutdi.",
+    "won_learning": "O'yinchi {winner_id} {card} bilan ushbu kartani yutdi va ochiq kartani oldi."
+  },
+  "phase": {
+    "learning_complete": ".چەكسە-چىكسە، ھەممە ئادەم ئويۇننى يېڭەلەيدۇ"
+  },
+  "draw": {
+    "winner_received": "سىز ھىيلىگە ئېرىشىپ {card}نى تاپشۇرۇۋالىسىز.",
+    "loser_received": "You lost the trick and drew {card} from the deck.",
+    "winner_preview": "كېيىنكى كارتا {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Hozirgacha yutgan kartalar - O'yinchi 0: {tricks0}, O'yinchi 1: {tricks1}",
+    "scores_playing": "Ball kartalari - O'yinchi 0: {tricks0}, O'yinchi 1: {tricks1}",
+    "phase": "باسقۇچ: {phase}",
+    "phase_learning": "Bosqich: {phase} (dorada {remaining_cards} kartalar qolgan)"
+  },
+  "hand": {
+    "no_cards": "كارتا يوق.",
+    "no_cards_in_hand": "قولىدا كارتا يوق.",
+    "header": "قولۇڭنى ...",
+    "trump_indicator": "(تامام) نىڭ ھەممىسى ۋەيران بولدى .",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "No cards played yet this trick.",
+    "header": "نۆۋەتتىكى خادىم:",
+    "trump_indicator": "(تامام) نىڭ ھەممىسى ۋەيران بولدى .",
+    "card_line": "{observation}\n  O'yinchi {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "ئويۇن باشلانمىدى",
+    "header": "=== گېرمانىيەچە ۋىست ئويۇنى===",
+    "phase": "{observation}\nBosqich: {phase}",
+    "trump_suit": "{observation}\nKo'zbo'yin ma'nisi: {trump_suit}",
+    "trump_card": "{observation}\nKo'zbo'yin karta: {card}",
+    "cards_left": "{observation}\nDorada qolgan kartalar: {count}",
+    "next_card": "{observation}\nG'olibga tegishli keyingi karta: {card}",
+    "blank": "{observation}  ئېسىل كىتابلار.",
+    "current_trick": "{observation} ھازىرقى ھۈنىرى:",
+    "trump_indicator": "(تامام) نىڭ ھەممىسى ۋەيران بولدى .",
+    "trick_line": "{observation}\n  O'yinchi {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nO'yinchi {player_id}: {scoring} ball ({tricks} jami), {hand_size} kart qo'lda"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

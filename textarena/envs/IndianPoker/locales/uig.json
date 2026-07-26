@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "سىز ئوينچى {player_id} ھىندىستان پۆكېر ئوينىغا قاتناشقансىلەر.\n- 52-كارتلىق دېك; سىز مۇقابىلنىڭ كارتىنىلا كۆرەلەيسىز.\n- ھەر بىر راوندتا {ante} چىپ(لار)نى بېرىڭ، جەمئى {max_rounds} راوند.\n- مۇناسىپ ھەركەتلەر: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X سىزning چىپ سانىغا تەڭ كېلىدىغان بىر پوزىتىپ سان.).\n- يوشۇرۇن كارتى ئەڭ يۇقىرى بولغىنى پوتنى شووداۋندا يېڭىپ چىقىدۇ.\n"
+  },
+  "round": {
+    "announce": "### راوند {current_round}/{max_rounds}\nقارشى تەرەپنىڭ كارتى: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "توققۇسىز بىرلا قавىلىق ھەركەت بەلگىسىنى تەمىنلىك، مەسىلەن '[check]', '[bet 2]', '[call]', '[raise 3]', ياكى '[fold]'.",
+    "cannot_check": "Cannot [check] - you are facing a bet.",
+    "amount_min": "Bet / Raise amount must be ≥ 1.",
+    "cannot_bet": "[bet] قىلمايسىز - [call] / [raise] / [fold] قىلىشىڭىز كېرەك.",
+    "nothing_to_call": "چاقىرغىلى نەرسە يوق، سىز [check]نىلا ئىشلەتسىڭىز بولىدۇ.",
+    "no_bet_to_raise": "ئېچىش ئۈچۈن [bet X] نى ئىشلىتىڭ؛ ئۆستۈرۈشكە پۇل يوق.",
+    "insufficient": "Insufficient chips for that action."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (خىرجى {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "سىزنىڭ مۇمكىنچىلىك قىلىدىغان ھەرىكىتىڭىز: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  پوت {pot} → ئوينچى {winner}. (بانكروتلار P0:{p0}, P1:{p1})",
+    "folded": "Player {player_id} folded.",
+    "showdown_win": "شووداۋن: {card_win} {card_lose}نى يېڭىپ چىقىدۇ.",
+    "showdown_tie": "Showdown tie: both {card}. Pot split – each receives {split}."
+  },
+  "outcome": {
+    "p0_wins": "ئوينچى 0 يېڭىپ چىقىدۇ ({bank0} > {bank1})",
+    "p1_wins": "ئوينچى 1 يېڭىپ چىقىدۇ ({bank1} > {bank0})",
+    "draw": "ھەممە ئايلانما ئاخىرلاشقاندا ئوخشاش چىپلار بار."
+  }
+}

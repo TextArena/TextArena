@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "ماكسات: {target}\n\nقوللىنىشقا بولىدىغان سانلار:\n{numbers}",
+    "best": "{observation}\n\nھازىرغىچە ئەڭ ياخشى: {best_value} (ارىلىق: {distance})\nئەڭ ياخشى ئىپادىلەش: {best_expression}",
+    "history": "{observation}\n\nھەرەكەت تارىخى:\n{moves}",
+    "progress": "{observation}\nھازىرقى پىروگىرەسس نۇمۇرلىق نەتىجە: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "ئىناۋەتسىز كۆرسەتكۈچلەر. ئوخشىمىغان بولۇشى ۋە 0-{max_index} ئارىلىقىدا بولىشى كېرەك.",
+    "invalid_operation": "ناتوغرا مەشغۇلات (نۆلگە بۆلۈش ياكى پۈتۈن ساندىن باشقا نەتىجە)"
+  },
+  "outcome": {
+    "win": "مۇكەممەل! ئېنىق نىشاننى تاپتۇق: {target}",
+    "no_moves": "قوشۇمچە ھەرەكەت يوق. ئەڭ ياخشى نەتىجە: {best_value} (ماكسات: {target})",
+    "turn_limit": "ھەرەكەت چەكلىمىگە يېتىلدى. ئەڭ ياخشى نەتىجە: {best_value} (ماكسات: {target})"
+  }
+}
