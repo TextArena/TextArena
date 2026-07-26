@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Briscola game tan a ni! Trump suit: {trump_suit} (Trump card: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Briscola khel a, Player {player_id} ni e.\nGoal: Trick win rawh leh points tam ber ngah e (120 total points in the deck).\nCard Points: A=11, 3=10, K=4, Q=3, J=2, dangte=0\nCard Power: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTrump cards hian non-trump cards an khing e, power an neih ang ang.\n\nAction: '[play X]' where X is the position (1-{max_pos}) of the card in your hand\n"
+  },
+  "hand": {
+    "none": "Card a awm lo.",
+    "empty": "No cards in hand",
+    "header": "I kut:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP) A ni e."
+  },
+  "trick": {
+    "empty": "No cards played yet this trick.",
+    "header": "Current trick:",
+    "line": "  Player {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Player {player_id}: {points} pts",
+    "trump_info": "Trump suit: {trump_suit}",
+    "trump_info_deck": "Trump suit: {trump_suit} | Deck a card dang ṭhen: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nScores: {scores}\n{trump_info}\n\nCard khelh '[play X]' hmang"
+  },
+  "invalid_move": {
+    "wrong_format": "X chu card awmna (1, 2, 3, etc.) a nih chuan [play X] hmang ang che.",
+    "out_of_range": "Card position a dik lo. I card {count} neih a, (1-{count})"
+  },
+  "action": {
+    "played": "Player {player_id} {card} a khel",
+    "trick_win": "Player {winner} hian trick a win a, {card} a hmangin leh {points} points a hmu!"
+  },
+  "outcome": {
+    "head": "Game Over! Player {winner} hian {points} points a hmangin a win!\n\nFinal Scores:\n{scores}",
+    "player_line": "Player {player_id}: {points} points ({tricks} tricks)\n"
+  }
+}

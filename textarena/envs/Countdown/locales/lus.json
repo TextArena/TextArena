@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Countdown numbers game hi khel mek che! \nGoal: Number te +, -, *, / hmangin target thleng rawh.\nAction format: [i j op] i,j index leh operation op anih avangin hmang rawh.\nExample: [0 2 *] number index 0 leh index 2 te multiply a ni.\nDivision ah chuan number tlem ber a ni tur a ni."
+  },
+  "board": {
+    "header": "TARGET: {target}\n\nNumber dang awm te:\n{numbers}",
+    "best": "{observation}\n\nHe thleng ber tawh: {best_value} (distance: {distance})\nBest expression: {best_expression}",
+    "history": "{observation}\n\nMove history:\n{moves}",
+    "progress": "{observation}\nCurrent progress score: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Index diklo. A danglam a, 0-{max_index} range chhunga awm tur a ni ang.",
+    "invalid_operation": "Invalid operation (division by zero or non-integer result)"
+  },
+  "outcome": {
+    "win": "A ṭha hle mai! Target dik tak chu hmu ta: {target}",
+    "no_moves": "Move dang awm lo. He thleng ber: {best_value} (target: {target})",
+    "turn_limit": "Turn limit thleng tawh. He thleng ber: {best_value} (target: {target})"
+  }
+}

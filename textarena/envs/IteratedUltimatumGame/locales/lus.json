@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Nin hi Player {player_id} ni, Iterated Ultimatum Game {num_rounds} round khel turin.\nNin hian ${pool} i sem tumin he round-ah hian nange Player {other_id} tan atana i sem thei.\n\nProposer:\n  - Offer pe: [Offer: $X] (0 <= X <= pool)\n  - Accept a nih chuan → Nin i dawnin $(pool - X), player danga i dawnin $X\n  - Reject a nih chuan → Pawi an tling lo.\n  - Example: [Offer: $3]  or  'Ka ti zual. [Offer: $5]'\n\nResponder:\n  - Offer i peka chuan [Accept] emaw [Reject] emaw i ti thei.\n  - Example: 'A ti zual ka ti. [Accept]'\n            'A ti thiam lo ka ti. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Round {round_number} tan a ni! ---\nPlayer {proposer_id} hi proposer a ni, Player {responder_id} hi responder a ni.",
+    "offer": "Round {round_number}: Player {proposer_id} hian ${offer} Player {responder_id} hnenah a pe (a neihna ${keep}).",
+    "accepted": "Player {responder_id} hian a accept! Round {round_number} ah hian: Player {proposer_id} +${proposer_gain}, Player {responder_id} +${responder_gain}. New totals: Player 0: ${total_0}, Player 1: ${total_1}.",
+    "rejected": "Player {responder_id} hian a reject! Round {round_number} ah hian: Mipuiten pawi an tling lo. Totals a la dang ṭha: Player 0: ${total_0}, Player 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "A diltu chuan [Offer: $X] format hmang hian a bid tur a siam ang.",
+    "bad_integer": "Offer amount hi integer dik tak a ni tur a ni.",
+    "out_of_range": "A bid chu $0 leh ${pool} inkâra a ni tûr a ni.",
+    "no_current_offer": "Tûnah chuan a chhân lêt theih loh.",
+    "accept_or_reject": "Responder must either [Accept] or [Reject] the offer."
+  },
+  "outcome": {
+    "win": "Player {winner} hian ${winner_total} zeta tlingin Player {loser} ${loser_total} zeta tling chu a hneh.",
+    "draw": "A khelh zawh chuan player pahnih hian ${total} an nei ve ta a."
+  }
+}

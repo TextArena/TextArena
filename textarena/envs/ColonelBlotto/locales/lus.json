@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "I ni Colonel Blotto-ah {role} i ni.\nI tihtak chu round tam zawk a chak.\nRound reng reng ah, {num_total_units} units i pe ang a, fields {field_names} ah.\nField khat ah unit tam zawk pe tu hian field chu a chak a, field tam zawk a chak tu hian round a chak.\nExample ah, '[A7 B7 C6]' hian A ah 7 units, B ah 7 units, C ah 6 units a pe.",
+    "commander_alpha": "Commander Alpha-a chu a ni.",
+    "commander_beta": "Commander Beta-i chu."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRound {current_round}\nCommander Alpha hian {p0_allocations} pe\nCommander Beta hian {p1_allocations} pe",
+    "winner_alpha": "{message}Winner: Commander Alpha chu a ni.",
+    "winner_beta": "{message}Winner: Commander Beta chu a ni.",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "Input format diklo. A:5, B:10, C:5 hmang rawh",
+    "invalid_field": "Field hming diklo (..) field dik tak: {field_names}",
+    "wrong_allocation_value": "A semna zawng zawngte chu integer negative ni lo a nih tûr a ni.",
+    "incorrect_total_units": "I hian loh nan, {num_total_units} units pe tur a ni. Current sum: {current_sum}",
+    "good_allocations": "A chanpual chu a ṭha."
+  },
+  "outcome": {
+    "winner_alpha": "Commander Alpha hian {score_0}-{score_1} a chak after {num_rounds} rounds!",
+    "winner_beta": "Commander Beta hian {score_1}-{score_0} a chak after {num_rounds} rounds!",
+    "draw": "Game hi {score_0}-{score_1} tie ah a tawp after {num_rounds} rounds!",
+    "early_winner_alpha": "Commander Alpha hian {scores_0}-{scores_1} (majority achieved) a chak!",
+    "early_winner_beta": "Commander Beta hian {scores_1}-{scores_0} (majority achieved) a chak!"
+  }
+}

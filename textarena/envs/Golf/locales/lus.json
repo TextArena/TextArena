@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "I Golf (Card Game) khel a, Player {player_id} ni. \nGoal: I score tlem ber tawp i neih vang. Column te value in in ang lo, an sum hi 0 a ni.\nCard Values: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (use exact brackets):\n- '[draw]' - Deck atangin draw\n- '[take]' - Discard pile atangin la\n- '[swap X Y]' - Drawn card X (row) Y (column) position ah swap\n- '[discard]' - Drawn card discard"
+  },
+  "board": {
+    "drew": "I drew: {card}\nTun i pe ang [swap X Y] em awm e or [discard] ang e",
+    "took": "You took: {card} from discard pile\nYou must [swap X Y] with it (cannot discard).",
+    "peeked": "Ka en peek at position ({row},{col}): {card}",
+    "turn_view": "Ka hand:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Engmah awm lo."
+  },
+  "options": {
+    "final_turns": "Final turns! I options: [draw], [take], [peek X Y]",
+    "draw": "I options: [draw], [take]",
+    "must_swap": "I tih tûr chu: [swap X Y] (card paih theih loh)",
+    "swap_or_discard": "I must: [swap X Y] em awm e or [discard] ang e"
+  },
+  "hand": {
+    "no_cards": "Card a awm lo.",
+    "header": "Chhûng: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} a swap {new} with {old} position ({row},{col}) ah",
+    "discarded": "Player {pid} discarded {card}"
+  },
+  "message": {
+    "deck_empty": "Deck a awm tawh lo va, khelh zawh nghal mai ang.",
+    "knocked": "Player {pid} a knock! player dang zawngin an khelh leh thei ang.",
+    "final_round": "Player {pid} {reason}! Khualzah awm player te hian an inrawn leh ang"
+  },
+  "reason": {
+    "all_revealed": "a card zawng zawngte chu an pho chhuak tawh em?"
+  },
+  "invalid": {
+    "wrong_action": "Use exactly ONE bracketed action: [draw], [take], [swap X Y], [discard], [knock], or [peek X Y] ang e",
+    "discard_empty": "A paihna chu a reh ta!",
+    "must_draw_first": "I must first [draw], [take], [knock], or [peek X Y] ang e",
+    "cannot_discard_taken": "Card paih chhuahna hmun aṭanga lak chu i hnawl thei lo va, a dangin i thlak tûr a ni.",
+    "have_drawn_card": "I drawn card ka neih a. I must [swap X Y] em awm e or [discard] ang e",
+    "need_drawn_swap": "Inthlan nân chuan card i mamawh a ni.",
+    "need_drawn_discard": "I paih theih nân i card siam a ngai.",
+    "out_of_bounds": "Position out of bounds. Row 1-{max_row}, column 1-{max_col} hman rawh",
+    "knock_with_card": "I khelh zawh loh chuan i khêl thei lo va, a tâwpa intihsiak hmasa rawh.",
+    "already_knocked": "He round hi tuemaw chuan a lo ti tawh.",
+    "already_revealed": "Chu card chu a lang tawh!"
+  },
+  "summary": {
+    "full": "Game Over! Player {winner} hian score {score} points a hmuin a chak! \n\nFinal Scores:\n{scores}",
+    "line": "Player {pid}: {score} points"
+  },
+  "board_str": {
+    "title": "=== GOLF GAY=== chu a ni.",
+    "discard": "Discard pile: {card}",
+    "knocked": "Player {pid} chuan a rawn kik ta!",
+    "player_header": "Player {pid} (Score: {score}):"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an {num_players}-player Liar's Dice game.\nRules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\nIf you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins."
+  },
+  "board": {
+    "per_player": "\tPlayer {p}: {d}",
+    "new_round": "\nRound thar - Dice la awm {dice_summary}\nI dice hi {your_dice} an ni."
+  },
+  "call": {
+    "bidder_loses": "Player {current_player_id} in a call! Face {face_value} zingah actual count {count} a ni, a chuak chu {quantity} aiin a tam tlatsak zawk.\nPlayer {loser_id} (last bidder) hian a die pakhat a hloh.",
+    "caller_loses": "Player {current_player_id} in a call! Face {face_value} zingah actual count {count} a ni, a chuak chu {quantity} aiin a sang zawk.\nPlayer {loser_id} (caller) hian a die pakhat a hloh."
+  },
+  "action": {
+    "bid_announce": "Player {player_id} bids {quantity} of face {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Call made with no prior bid.",
+    "invalid_bid": "Bid diklo: {reason}",
+    "not_recognized": "Action hi a ṭha tawk lo, '[Bid: X, Y]' emaw '[Call]' emaw a ni lo. Action pekte: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Quantity thar {new_quantity} hi current {current_quantity} aiin a tam tlatsak zawk.",
+    "face_lower": "Face value thar {new_face_value} hi current {current_face_value} aiin a tam tlatsak zawk.",
+    "identical": "Bid chu tuna bid ang chiah a ni.",
+    "face_range": "A hming lam hlutna chu 1 leh 6 inkârah a ni tûr."
+  },
+  "message": {
+    "eliminated_invalid": "Player {player_id} chu move diklo a nih avangin an ban ta."
+  },
+  "outcome": {
+    "win": "Player {winner} in a win! Ranking chungchang: {final_ranking}"
+  }
+}

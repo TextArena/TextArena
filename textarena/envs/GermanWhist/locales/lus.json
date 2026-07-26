@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Game tan a ni. Trump suit: {trump_suit} (trump card: {trump_str}).",
+    "no_trump_card": "awm lo"
+  },
+  "player_prompt": {
+    "intro": "Nin hi Player {player_id} ni, German Whist-ah.\n{phase_info}\nNin hian card {hand_size} nei.\nCard phar hna i duh chuan '[play N]' ti rawh, N hi a position a ni (example: '[play 3]').",
+    "phase_learning": "HMANNAH CHUAN: Trick tin a hnehtu chuan card hmai lam chu a la ang a, chak lo tu erawh chuan an dawhkan aṭanga card dang hi a lak leh bawk. He stage-a trick hmuhte hian hnehna chanpual atan chhiar tel loh ani dawn a ni.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "Card eng mah a awm lo - khelh ṭan tawh.",
+    "deck_empty": "A dawhkan chu a reh - card eng mah an pe lo.",
+    "available": "Card a hlan: {card}",
+    "available_trump": "Card a hlan: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "A dik lo a. I kut chhunga Nth card khelh nân '[play N]' hmang ang che.",
+    "bad_position": "Chu card position chu a awm lo. I kutah chuan {hand_size} cards i keng e.",
+    "must_follow_suit": "I zui tûr a ni, {lead_suit} card i khel ang.",
+    "invalid_play": "Chu card chu khelh theih a ni lo."
+  },
+  "game_action": {
+    "played": "Player {player_id} chuan {card} a phar."
+  },
+  "trick": {
+    "won": "Player {winner_id} chuan {card} a hmuin trick a chak.",
+    "won_learning": "Player {winner_id} chuan {card} a hmuin trick a chak a, face-up card a la dawng."
+  },
+  "phase": {
+    "learning_complete": "A tâwpna chu a ni ta - hnehna chang tûrin thil dang zawng zawngte pawh hman theih an ni tawh."
+  },
+  "draw": {
+    "winner_received": "Trick i hneh a, {card} chu i dawng ta.",
+    "loser_received": "I hloh a, i draw {card} ta mai.",
+    "winner_preview": "A dawttu card chu {card} a ni."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tricks an hmu tawh - Player 0: {tricks0}, Player 1: {tricks1}",
+    "scores_playing": "Scoring tricks - Player 0: {tricks0}, Player 1: {tricks1}",
+    "phase": "Phase: {phase}",
+    "phase_learning": "Phase: {phase} ({remaining_cards} cards deck-a tam lem)"
+  },
+  "hand": {
+    "no_cards": "Card a awm lo.",
+    "no_cards_in_hand": "No cards in hand",
+    "header": "I kut:",
+    "trump_indicator": "(TRUMP) A ni e.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "No cards played yet this trick.",
+    "header": "Tunlai thil tih dân:",
+    "trump_indicator": "(TRUMP) A ni e.",
+    "card_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Game a la ṭan lo va.",
+    "header": "=== German Whist Game=== A ṭang a ni.",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nTrump suit: {trump_suit}",
+    "trump_card": "{observation}\nTrump card: {card}",
+    "cards_left": "{observation}\nDeck-a card tam lem: {count}",
+    "next_card": "{observation}\nWinner tan card dawng: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Tunlai thil tih dân:",
+    "trump_indicator": "(TRUMP) A ni e.",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPlayer {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} cards an nei"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}
