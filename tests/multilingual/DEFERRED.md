@@ -3,6 +3,13 @@
 Two categories are out of scope for the `self.m(...)` localization pattern used here.
 They need design work beyond string externalization and are flagged for a separate track.
 
+> **Deferred-for-translation is not the same as broken.** A game listed here is awaiting
+> *localization*; it says nothing about whether the game works. Several games below —
+> **NewRecruit, ScenarioPlanning, SettlersOfCatan, TruthAndDeception, LogicPuzzle** — were
+> given **correctness** fixes this session (entry-point / termination bugs; see the "adopted
+> games" section of FIXES.md). They now run correctly in English and are still listed here
+> only because they remain **un-localized**. Do not read their presence here as "don't ship."
+
 ## 1. Level-2 — shared-language communication games
 Games that relay **player-authored free text** to other players (conversation / negotiation /
 message phases). Cross-lingual play isn't meaningful — if two players use different languages
