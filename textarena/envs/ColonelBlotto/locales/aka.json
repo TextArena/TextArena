@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "Ɔsafohene Alpha",
+    "commander_beta": "Ɔsafohene Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nNkwadaa akye - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nNkwadaa {current_round}\nCommander Alpha de adu: {p0_allocations}\nCommander Beta de adu: {p1_allocations}\n",
+    "winner_alpha": "{message}Ɔkofo: Ɔsafohene Alpha",
+    "winner_beta": "{message}Ɔkofo: Ɔsafohene Beta",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid input format. Use: A:5, B:10, C:5",
+    "invalid_field": "Asase din a enni mu. Mframa pa: {field_names}",
+    "wrong_allocation_value": "All allocations must be non-negative integers.",
+    "incorrect_total_units": "Wopɛ sɛ wobɛkyekye {num_total_units} adu. Tumi a ɛwɔ hɔ: {current_sum}",
+    "good_allocations": "Ɔfã a wɔde ma no ye."
+  },
+  "outcome": {
+    "winner_alpha": "Commander Alpha di nkunim {score_0}-{score_1} wɔ {num_rounds} nkwadaa!",
+    "winner_beta": "Commander Beta di nkunim {score_1}-{score_0} wɔ {num_rounds} nkwadaa!",
+    "draw": "Agyina ma {score_0}-{score_1} akyi wɔ {num_rounds} nkwadaa!",
+    "early_winner_alpha": "Commander Alpha di nkunim {scores_0}-{scores_1} (abatoɔ no kɔ so da nsɛm!)!",
+    "early_winner_beta": "Commander Beta di nkunim {scores_1}-{scores_0} (abatoɔ no kɔ so da nsɛm!)!"
+  }
+}

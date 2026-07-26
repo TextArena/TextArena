@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Agyapadeɛ no hyɛ ase. Trump suit: {trump_suit} (trump kaa: {trump_str}).",
+    "no_trump_card": "none"
+  },
+  "player_prompt": {
+    "intro": "Wɔyɛ ɔgya {player_id} wɔ German Whist.\n{phase_info}\nWɔwɔ {hand_size} kaa.\nDi kaa a ɛwɔ '[play N]', a ɛyɛ ne dibea wɔ wo nsam (sɛ nhwɛso '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "No card is on offer - the playing phase has begun.",
+    "deck_empty": "The deck is empty - no card is on offer.",
+    "available": "Krataa a wɔ de ma: {card}",
+    "available_trump": "Krataa a wɔ de ma: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Ntotoe a enni mu. Fa '[play N]' di dwuma de adi nkrataa a ɛto so N wɔ wo nsam no ho dwuma.",
+    "bad_position": "That card position does not exist. You hold {hand_size} cards.",
+    "must_follow_suit": "Ɛsɛ sɛ wusuasua no na wode {lead_suit} kaade di dwuma.",
+    "invalid_play": "Wontumi mfa saa kaade no nni dwuma."
+  },
+  "game_action": {
+    "played": "Player {player_id} played {card}."
+  },
+  "trick": {
+    "won": "Player {winner_id} wins the trick with {card}.",
+    "won_learning": "Player {winner_id} wins the trick with {card} and takes the face-up card."
+  },
+  "phase": {
+    "learning_complete": "The deck is exhausted. The learning phase is over - every remaining trick counts towards victory."
+  },
+  "draw": {
+    "winner_received": "Woadi nkonim wɔ agoru no mu na woanya {card}.",
+    "loser_received": "Woadi nkogu na woayi {card} afi ɔfasu no mu.",
+    "winner_preview": "Krataa a edi hɔ no yɛ {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Nkonim a ɛfiri hɔ - ɔgya 0: {tricks0}, ɔgya 1: {tricks1}",
+    "scores_playing": "Nkonim a ɛfiri hɔ - ɔgya 0: {tricks0}, ɔgya 1: {tricks1}",
+    "phase": "Adesuadeɛ a ɛtɔ so nwɔtwe: {phase}",
+    "phase_learning": "Phase: {phase} ({remaining_cards} kaa a ɛwɔ deck no mu)"
+  },
+  "hand": {
+    "no_cards": "Kaade biara nni hɔ.",
+    "no_cards_in_hand": "Karta biara nni hɔ a wo nsa bɛka no.",
+    "header": "Wo nsa:",
+    "trump_indicator": "(TRUMP) Ɔyɛ ɔkwampaefo.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Obiara nni hɔ a wadi nkrataa yi ho dwuma.",
+    "header": "Mmerɛ a yɛadi kan:",
+    "trump_indicator": "(TRUMP) Ɔyɛ ɔkwampaefo.",
+    "card_line": "{observation}\n  ɔgya {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Agodie no amfi ase da.",
+    "header": "=== Germanfo Agorobea a Wɔbɔ no Mfonini===",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nTrump suit: {trump_suit}",
+    "trump_card": "{observation}\nTrump kaa: {card}",
+    "cards_left": "{observation}\nKaa no mu sɛ deck no mu: {count}",
+    "next_card": "{observation}\nKaa a ɛba wɔn a ɛdi nkonim: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Akwan a yɛfa so di dwuma nnɛ:",
+    "trump_indicator": "(TRUMP) Ɔyɛ ɔkwampaefo.",
+    "trick_line": "{observation}\n  ɔgya {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nɔgya {player_id}: {scoring} di nkonim ({tricks} ɛfiri hɔ), {hand_size} kaa wɔ n'nsam"
+  },
+  "outcome": {
+    "summary": "Nnwuma phase - ɔgya 0: {l0}, ɔgya 1: {l1}. Di dwuma phase - ɔgya 0: {p0}, ɔgya 1: {p1}. ɔgya {winner_id} di nkonim a ɛfiri {winner_tricks} di nkonim"
+  }
+}

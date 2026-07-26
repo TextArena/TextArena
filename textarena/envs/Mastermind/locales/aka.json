@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Mastermind.\nYou need to find the code that is {code_length} digits long, each digit from 1 to {num_numbers}, {repeats}.\nIn your response, you can submit your guess in the following format: '[2 1 4 5]'.\nAfter each guess, you will receive feedback in the form of black and white pegs.\nA black peg indicates a correct digit in the correct position, while a white peg indicates a correct digit in the wrong position.\nYou have {max_turns} turns to guess the code.\n",
+    "with_repeats": "a wobetumi ayɛ no bio.",
+    "no_duplicates": "with no duplicates"
+  },
+  "invalid_move": {
+    "wrong_format": "You did not respond with a space-separated list of numbers wrapped in square brackets.",
+    "not_integers": "All entries must be valid integers.",
+    "wrong_length": "Ɛsɛ sɛ wɔtoto no pɛpɛɛpɛ {code_length}.",
+    "out_of_range": "Ɛsɛ sɛ ne nyinaa yɛ 1 kosi {num_numbers} ntam.",
+    "duplicates_not_allowed": "Duplicate numbers are not allowed.",
+    "repeated_guess": "Woda ada {guess}. Mpene so da betere guess."
+  },
+  "game_action": {
+    "feedback": "Submitted [{guess}]. Feedback: {black_pegs} black peg(s), {white_pegs} white peg(s)."
+  },
+  "outcome": {
+    "win": "Woda asi code no, de {black_pegs} guu {code_length} pegs pɛ",
+    "turn_limit": "Turn limit reached. You guessed {percent} percent of the numbers correctly."
+  }
+}

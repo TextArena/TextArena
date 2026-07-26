@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in SimpleTak.\nOn the board, your stones appear as '{player_stone}' and your opponent's stones appear as '{opponent_stone}'.\n\nOn your turn, choose one empty cell (by its numbered index) and place your stone there.\nFor example, '[12]' places your stone in cell 12.\n\nYour objective is to form a continuous path of your stones that connects two opposite edges of the board (top-to-bottom or left-to-right)."
+  },
+  "invalid_move": {
+    "invalid_move_format": "Invalid move format",
+    "cell_out_of_range": "Seli din a ɛnyɛ pɛ {cell_num}. Ɛbɛyɛ sɛ ɛfiri 0 kɔsi {max_board_num}.",
+    "cell_already_occupied": "Ntamadan {cell_num} no wɔ hɔ dedaw. Yi ntamadan a ɛnni hwee."
+  },
+  "board": {
+    "current_state": "Current Board:\n\n{rendered_board}\nAvailable Moves: {available_moves}"
+  },
+  "action": {
+    "placement": "Ɔdane {current_player_id} de ne ho ma ({symbol}) wɔ seli {cell_num}."
+  },
+  "outcome": {
+    "winner": "Player {current_player_id} ('{symbol}') connected two opposite edges!",
+    "draw": "The board is full. It's a draw!"
+  }
+}
