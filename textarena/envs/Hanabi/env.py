@@ -34,7 +34,7 @@ class Card:
 
 
 class HanabiEnv(ta.Env):
-    def __init__(self, info_tokens: int = 8, fuse_tokens: int = 4,):
+    def __init__(self, info_tokens: int = 8, fuse_tokens: int = 3,):
 
         self.deck_size = 50
         self.info_tokens = info_tokens
@@ -425,6 +425,14 @@ class HanabiEnv(ta.Env):
         """
         Check whether the game has ended, and update the rewards accordingly.
 
+        Hanabi is fully cooperative and scored 0-25 (the number of cards correctly
+        played). That shared score is the reward every player receives, in every
+        terminal state. set_draw/set_winners are used only to mark the game done
+        and record the localized outcome reason; the reward must be written to
+        ``self.state.rewards`` afterwards (this is what ``env.close()`` returns) --
+        writing to ``self.rewards`` on the env has no effect. Mirrors the
+        score-as-reward pattern in ScorableGames (also a TeamMultiPlayerState).
+
         Returns:
             None
 
@@ -438,19 +446,16 @@ class HanabiEnv(ta.Env):
 
             elif self.state.game_state['last_round'] == self.state.current_player_id:  # End the last round
                 self.state.set_draw(reason=self.m("outcome", "deck_empty"))
-                rewards = self._calculate_scores()
-                self.rewards = {pid: rewards for pid in range(self.num_players)}
+                self.state.rewards = {pid: self._calculate_scores() for pid in range(self.num_players)}
 
-        if self.state.game_state['fuse_tokens'] < 0:  # There are no fuse tokens left
+        if self.state.game_state['fuse_tokens'] <= 0:  # There are no fuse tokens left
             self.state.set_draw(reason=self.m("outcome", "fuse_empty"))
-            rewards = self._calculate_scores()
-            self.rewards = {pid: rewards for pid in range(self.num_players)}
+            self.state.rewards = {pid: self._calculate_scores() for pid in range(self.num_players)}
 
         # Winning conditions
         if self._completed_fireworks():
             self.state.set_winners(list(range(self.num_players)), reason=self.m("outcome", "win"))
-            rewards = self._calculate_scores()
-            self.rewards = {pid: rewards for pid in range(self.num_players)}
+            self.state.rewards = {pid: self._calculate_scores() for pid in range(self.num_players)}
 
     def _completed_fireworks(self) -> bool:
         """
@@ -476,11 +481,11 @@ class HanabiEnv(ta.Env):
     @staticmethod
     def _generate_deck() -> List[Card]:
         """
-        Generate a deck of 40 cards. The deck contains 5 suits, white, yellow, blue, green and red; and 5 ranks. Of each
-        suit, there are three 1s, two of each 2s, 3s and 4s, and one 5.
+        Generate a deck of 50 cards. The deck contains 5 suits, white, yellow, blue, green and red; and 5 ranks. Of each
+        suit, there are three 1s, two of each 2s, 3s and 4s, and one 5 (10 cards per suit x 5 suits = 50).
 
         Returns:
-            List[Card]: a deck of Hanabi cards. The  total deck contains 50 cards.
+            List[Card]: a deck of Hanabi cards. The total deck contains 50 cards.
         """
         ranks = {1: 3, 2: 2, 3: 2, 4: 2, 5: 1}
         deck = []
