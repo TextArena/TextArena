@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Taula actual:\n\n{board}\nMovements disponibles: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pièlas centralas -- ",
+    "pile": "{observation}Pila {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vista del Jogador {player_id} ---\n",
+    "payoff": "{observation}Pila de pèrda (Carta superiora): {top_card}, Longor de la pila de pèrda: {payoff_length}\n",
+    "hand": "{observation}Man: {hand}\n",
+    "discard": "{observation}Pilas de descartes: {discard}\n",
+    "empty": "Empty"
+  },
+  "game_message": {
+    "no_cards_left": "There are no more cards to draw from. Remember that you can play cards from these sources:\n  1. Your **hand**.\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de movement invalid. Lo jogaire {player_id} respondèt pas amb un moviment valid dins los parentèsis carrats.",
+    "invalid_play": "Jòc invalid. Jogador {player_id} a temptat de jogar {card} a la pila centrala {index}.",
+    "discard_from_payoff": "Descart invalid. Joguèt {player_id} a ensajat de descartar una carta del pichon nombre d'espècias pagadas.",
+    "discard_not_in_hand": "Descart invalid. Joguèt {player_id} a ensajat de descartar una carta qu'es pas dins la man.",
+    "wrong_move_type": "Tip de movement invalid. Lo jogaire {player_id} respondèt pas amb un tipe de moviment valid."
+  },
+  "game_action": {
+    "you_drew": "Ai tirat las cartas.",
+    "opponent_drew": "Lo jogaire {player_id} tirèt de cartas.",
+    "you_played": "You played {card} on center pile {index}.",
+    "opponent_played": "Jogador {player_id} a jogat {card} a la pila centrala {index}.",
+    "you_discarded": "Avètz descartat {card} a la pila de descartes {index}, çò que significa que finís vòstre torn. Cap autre accion de la vostra part es presa en compte per aquest torn. Jogador {next_player_id} serà lo seguent.",
+    "opponent_discarded": "Jogador {player_id} a descartat {card} a la pila de descartes {index}, çò que significa tanben que finís son torn. Cap autre accion del Jogador {player_id} es presa en compte per aquest torn. Jogador {next_player_id}, serà lo seu torn. Si us plau, introduïsca la seva accion al format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Jogador {current_player} a finit sa pila de pèrda! Jogador {current_player} ganha!",
+    "deadlock_player_0": "Blocatge atengut! Jogador 0 ganha amb {player_0_payoff} cartas restantas contra {player_1_payoff} cartas del Jogador 1.",
+    "deadlock_player_1": "Blocatge atengut! Jogador 1 ganha amb {player_1_payoff} cartas restantas contra {player_0_payoff} cartas del Jogador 0.",
+    "deadlock_tie": "Blocatge atengut amb egalitat! Ambdós jogadors an {player_0_payoff} cartas restantas. Jogador {current_player} ganha per defaut."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Jugador Environament sus una grilla {width}x{height}.\nÈtz jogaire {player_id}. Movements valables: '[up]' '[down]' '[left]' '[right]' o w/s/a/d.\nObjectiu: subreviure a totes las autras. Las traças son mortalas; los tusts contra los murs tuan; los crashes frontals tuan los dos."
+  },
+  "board": {
+    "current": "Conselh actual: {board}",
+    "after_moves": "Tablèu après de movements simultanèus: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Lo jogaire {player_id} moriguèt a causa d'un movement invalid."
+  },
+  "outcome": {
+    "survived_win": "Lo jogaire {player_id} subrevisquèt; totes los autres se desplomèron.",
+    "all_crashed": "All players crashed simultaneously.",
+    "outlived": "Lo jogaire a subreviscut totes los autres.",
+    "all_dead": "Totes los jogaires mòrts.",
+    "turn_limit": "Limite de virada atengut - ganha lo mai long subrevivent.",
+    "ranking": "{reason} Classament final dels grops (melhor→pitjor): {groups}"
+  }
+}

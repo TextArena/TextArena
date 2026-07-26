@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ètz jòcador {player_id} dins un Dilema del Prisonièr Iterat per 3 jogaires. La partida dura {num_rounds} torns.\nEstructura del torn:\n• {conv_rounds} torns de discussion liura\n• 1 torn de decision - mandatz un jeton per adversari : '[<opp-id> cooperate]' o '[<opp-id> defect]' (es a dire '[1 defect] [2 cooperate]' ; lo defaut es 'cooperar'). \nMatritz de pagament per parelh (aplicada a cada parelh non ordenat):\n  - Totes dos cooperan  ->  {reward}\n  - Totes dos traïsson     ->  {punishment}\n  - Traïssatz, eles cooperan -> {temptation}\n  - Cooperatz, eles traïsson -> {sucker}\nLo(s) jòcador(s) amb lo puntatge mai naut a la fin de tots los torns ganha."
+  },
+  "round": {
+    "start": "─── Començament del Torn {round} ───\tPòtz parlar liurament pendent los {conv_rounds} torns segents.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Ronda {round} - Resultats:",
+    "pair_line": "{observation}\n\t Jòcador {i} vs Jòcador {j} a causit de {choice_i} e {choice_j} respectivament (Jòcador {i} a ganhat {gain_i}, Jòcador {j} a ganhat {gain_j})",
+    "scores_open": "{observation} -> Los resultats actuals: ",
+    "score_first": "{observation}Jòcador {player_id} ({score})",
+    "score_next": "{observation}; Jòcador {player_id} ({score})",
+    "finalize": "{observation}  lo"
+  },
+  "outcome": {
+    "final": "Final scores: {scores}.  Ranking groups (worst→best): {groups}"
+  }
+}

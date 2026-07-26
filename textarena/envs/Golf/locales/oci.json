@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Jogatz al Golf (Jòc de cartas) - Jogador {player_id}.\nObjectiu: Obténer lo puntatge total mai bas dins aquest torn unic. Se las colomnas partatjan la meteissa valor, son somadas coma 0.\nValors de las cartas: A=1, 2-10=valor facial, J/Q=10, K=0\n\nAccions (utilizatz parentèsis exactes):\n- '[draw]' - Tirar del talon\n- '[take]' - Prendre del mont de descart\n- '[swap X Y]' - Permutar la carta tirada amb la posicion X (reng) Y (colomna)\n- '[discard]' - Descartar la carta tirada"
+  },
+  "board": {
+    "drew": "Avètz tirat: {card}\nAra devètz [swap X Y] o [discard]",
+    "took": "Avètz pres: {card} del mont de descart\nDevètz [swap X Y] amb (non pòtz descartar)",
+    "peeked": "Avètz regardat a la posicion ({row},{col}): {card}",
+    "turn_view": "Vòstra man:\n{hand}\nMont de descart: {discard}\n{options}",
+    "none": "Pas cap de nom."
+  },
+  "options": {
+    "final_turns": "Torns finals! Vòstras opcions: [draw], [take], [peek X Y]",
+    "draw": "Vòstras opcions: [draw], [take]",
+    "must_swap": "You must: [swap X Y] (cannot discard cards from discard pile)",
+    "swap_or_discard": "Devètz: [swap X Y] o [discard]"
+  },
+  "hand": {
+    "no_cards": "Pas de cartas.",
+    "header": "Col: 1 2 3 (en anglés)",
+    "row": "Reng {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Jogador {pid} a permutat {new} amb {old} a la posicion ({row},{col})",
+    "discarded": "Jogador {pid} a descartat {card}"
+  },
+  "message": {
+    "deck_empty": "Lo pòrt es voide! La partida s'acaba immediatament.",
+    "knocked": "Player {pid} knocked! Each other player gets one more turn.",
+    "final_round": "Player {pid} {reason}! Each other player gets one more turn."
+  },
+  "reason": {
+    "all_revealed": "A totas las cartas reveladas ?"
+  },
+  "invalid": {
+    "wrong_action": "Utilizatz exactament UNA accion entre parentèsis: [draw], [take], [swap X Y], [discard], [knock], o [peek X Y]",
+    "discard_empty": "La pila de rebuts es bufa!",
+    "must_draw_first": "Devètz primièr [draw], [take], [knock], o [peek X Y]",
+    "cannot_discard_taken": "Podètz pas tirar una carta presa de la pila dels rebuts. La cal cambiar.",
+    "have_drawn_card": "Avètz una carta tirada. Devètz [swap X Y] o [discard]",
+    "need_drawn_swap": "Cal una carta tirada per escambiar.",
+    "need_drawn_discard": "You need a drawn card to discard.",
+    "out_of_bounds": "Posicion fòra dels limits. Utilizatz reng 1-{max_row}, colomna 1-{max_col}",
+    "knock_with_card": "Podètz pas botar amb una carta tirada. Acabatz vòstre torn en primièr.",
+    "already_knocked": "Qualqu'un a ja batut aqueste torn.",
+    "already_revealed": "Aquela carta es ja revelada!"
+  },
+  "summary": {
+    "full": "Jòc terminat! Jogador {winner} ganha amb un puntatge de {score} punts!\n\nPuntatges finals:\n{scores}",
+    "line": "Jogador {pid}: {score} punts\n"
+  },
+  "board_str": {
+    "title": "=== Jòc de golf ===",
+    "discard": "Enregistrament de la pilha: {card}",
+    "knocked": "Player {pid} has knocked!",
+    "player_header": "Player {pid} (Score: {score}):"
+  }
+}

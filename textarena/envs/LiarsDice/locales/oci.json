@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Ètz jogador {player_id} dins un jòc de daus de mentidor a {num_players} jogadors.\nReglas:\n- A son torn, poiriá:\n  1) Far una novèla ofèrta amb una quantitat o una cara mai nauta (o ambedós) que l'ofèrta actuala; es a dire '[Bid: 3, 4]',\n  2) Cridar l'ofèrta darrièra en picant '[Call]'.\n\nSe crida:\n  - Se la comptabilitat reala d'aquela valor de cara entre totas las daus es menor que l'ofèrta, l'ofèrent de darrièr pèrd un dau.\n  - D'autra manièra, lo cridador pèrd un dau.\nUn jogador que alcança 0 daus es eliminat. Lo darrièr jogador rèsta ganha."
+  },
+  "board": {
+    "per_player": "\tJogador {p}: {d}",
+    "new_round": "\nNovèl torn - Daus rèstas: {dice_summary}\nVòstres daus actuals son: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Jogador {current_player_id} crida! La comptabilitat reala de la cara {face_value} es {count}, que es MENOR que {quantity}.\nJogador {loser_id} (l'ultim ofèrent) pèrd un dau.",
+    "caller_loses": "Jogador {current_player_id} crida! La comptabilitat reala de la cara {face_value} es {count}, que es >= {quantity}.\nJogador {loser_id} (lo cridador) pèrd un dau."
+  },
+  "action": {
+    "bid_announce": "Player {player_id} bids {quantity} of face {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "L'apèl facha sens ofèrta prèvia.",
+    "invalid_bid": "Oferta invalida: {reason}",
+    "not_recognized": "Accions pas reconegudas coma una '[Bid: X, Y]' o '[Call]' valable. Accion presentada: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "La quantitat nòva {new_quantity} es inferiora a l'actual {current_quantity}.",
+    "face_lower": "La valor novèla {new_face_value} es inferiora a l'actual {current_face_value}.",
+    "identical": "L'ofèrta es identica a l'ofrenda actuala.",
+    "face_range": "La valor aparenta deu èsser entre 1 e 6."
+  },
+  "message": {
+    "eliminated_invalid": "Lo jogaire {player_id} foguèt eliminat per movement invalid."
+  },
+  "outcome": {
+    "win": "Jogador {winner} ganha! Classament final: {final_ranking}"
+  }
+}

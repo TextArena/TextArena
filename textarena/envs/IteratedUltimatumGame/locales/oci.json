@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Ètz jogaire {player_id}, jogant {num_rounds} rondas del Jòc d'Ultimatum Iteratiu.\nAvètz ${pool} per partejar aquesta ronda entre vos e Jogaire {other_id}.\n\nPropositor:\n  - Fare una ofèrta: [Offer: $X] (0 <= X <= ensemble)\n  - Se es acceptada → Obtengatz $(ensemble - X), l'autre jogaire obteng $X\n  - Se es refusada → Ambedos obtengon $0\n  - Exemple: [Offer: $3]  o  'Pensi que es just. [Offer: $5]'\n\nResponder:\n  - Decidir sull'ofèrta amb [Accept] o [Reject]\n  - Exemple: 'Sembla rasonable. [Accept]'\n            'Trop injust. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Ronda {round_number} comença ! ---\nJogaire {proposer_id} es lo propositor, Jogaire {responder_id} es lo responder.",
+    "offer": "Ronda {round_number}: Jogaire {proposer_id} ofèrta ${offer} a Jogaire {responder_id} (en gardant ${keep}).",
+    "accepted": "Jogaire {responder_id} a acceptat ! Ronda {round_number} ganhs: Jogaire {proposer_id} +${proposer_gain}, Jogaire {responder_id} +${responder_gain}. Novèls totaus: Jogaire 0: ${total_0}, Jogaire 1: ${total_1}.",
+    "rejected": "Jogaire {responder_id} a refusat l'ofèrta ! Ronda {round_number} ganhs: Ambedos jogaires +$0. Totaus demòran: Jogaire 0: ${total_0}, Jogaire 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Lo proponent deu far una ofèrta utilizant lo format [Offer: $X].",
+    "bad_integer": "Lo montant de l'ofèrta deu èsser un entièr valid.",
+    "out_of_range": "L'ofèrta deu èsser entre $0 e ${pool}.",
+    "no_current_offer": "Pas cap d'ofèrta per respondre.",
+    "accept_or_reject": "Responder must either [Accept] or [Reject] the offer."
+  },
+  "outcome": {
+    "win": "Jogador {winner} a ganhat amb ${winner_total} total vs Jogador {loser} amb ${loser_total}.",
+    "draw": "Ambedos jogaires acabèron amb ${total} total."
+  }
+}
