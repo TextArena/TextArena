@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing a game of Pig Dice.\n\nRules:\n- On your turn, you can either '[roll]' or '[hold]'\n- Roll a 2-6: Add to your turn total\n- Roll a 1: Lose turn total and end turn\n- Hold: Add turn total to your score and end turn\n- First to {winning_score} points wins\n\nWhen it's your turn, you'll see the current scores and turn total.\nRespond with '[roll]' to roll the die or '[hold]' to bank your points."
+  },
+  "invalid_move": {
+    "invalid_action": "Nketo lisio halali. Utumie '[roll]' or '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Omutesi {player_id} akwata, okupata {turn_total} pointsi!",
+    "player_hold": "Player {player_id} holds and banks {turn_total} points."
+  },
+  "board": {
+    "player": "Omutesi 0: '{score_0}'; Omutesi 1: '{score_1}'",
+    "current_total_scores": "Nketo za Kuholela: {scores}\nNketo yaku yonyene mwa turn yenu ni {turn_total}.",
+    "roll_history": "{observation}\nLihulu laku lya kukwata kwa turn yenu: {roll_history}",
+    "first_roll": "{observation}\nThis is the first roll of your turn.",
+    "available_actions": "{observation}\nNketo zilongo: '[roll]' or '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Player {winner_id} won by having a higher score at the turn limit ({scores})",
+    "winner_by_score": "Omutesi {winner_id} ashinda pakufikila nketo ya kupeleka {winning_score}!",
+    "draw": "The turn limit has been reached and all players have the same score: {scores}"
+  }
+}

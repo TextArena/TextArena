@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a game of HighSociety (2-player version).\nGame flow:  Ten prestige cards are auctioned one after another.\nBidding:    Each auction, secretly choose a money card 1-11 and reveal.\n            • Higher bid wins the prestige card and discards that money card.\n            • Lower bid keeps their money card.\n            • Tie -> both bids are returned and the same prestige card is re-auctioned.\nScoring:    After all ten auctions, add **remaining cash + prestige points**.\n            Higher *net-worth* wins (exact tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Olukongo {round}/10  |  Ombala ya prestige: {prize}"
+  },
+  "board": {
+    "money_cards": "Olombongo vi sangiwa vokasia: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Wakala omunyetu [X] ombala ya money.",
+    "card_not_held": "Pole, ove ku kuete vali elianjo lioku upa olombongo kupange wove."
+  },
+  "message": {
+    "tie": "Omanu vosi va kalapo, veya oku tambula ovikanda viavo viuvangi.",
+    "auction_result": "P0 olubidio {bid0}, P1 olubidio {bid1}. Omulongo {winner} unga omukalo prestige {prize} (wotango {total})."
+  },
+  "outcome": {
+    "p0_wins": "Ovimbali {nw0} > {nw1}",
+    "p1_wins": "Ovimbali {nw1} > {nw0}",
+    "draw": "Ovimbali vyawo {nw0} – oludila lwa kufana."
+  }
+}

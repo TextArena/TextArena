@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "Invalid action format. Action should be in brackets.",
+    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "empty_command": "Ocikundi ka ci kuete esapulo. soneha \"draw\" ale \"move <source><destination> [count]\".",
+    "empty_action": "Empty action",
+    "move_needs_args": "Move command requires source and destination. Usage: 'move <source> <destination> [count]'",
+    "count_positive": "Atendelo aco a sukila oku kala \"a sunguluka\" ale \"ocili\".",
+    "count_invalid": "Invalid count. Use a number or 'all'",
+    "unknown_command": "Kulaya esizwi '{cmd}'. Utumie 'draw', 'move <chikweti> <chilatu> [count]', or 'forfeit'",
+    "wrapped": "Ekintu {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Ekintu {n}: {msg}",
+    "before_failure": "Ekolwa {n} ekintu(s) kabili kukwata.",
+    "failed": "Ekintu {n} kaili: {msg}"
+  },
+  "move_result": {
+    "drew": "Drew card(s) from stock to waste.",
+    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "invalid_pile": "Invalid pile name. Use W, F1-F4, or T1-T7",
+    "foundation_one_card": "O pondola lika oku kapa okalivulu kamosi vonumbi yaco yo Internet.",
+    "waste_to_foundation_ok": "Oku upa ocikasia caco vovinene oco o ci kape vocimano F{dst}",
+    "waste_to_foundation_bad": "O pondola oku kapa o kombutador vo computador yove oco yi ku kuatise oku kuata elomboloko liovina wa tanga.",
+    "tableau_to_foundation_ok": "Lilaye kadi kuva tableau T{src} ku foundation F{dst}",
+    "tableau_to_foundation_bad": "O pondola oku kapa ovale yaco vocimalẽho co pulitika.",
+    "foundation_to_foundation": "Ka ci tava oku pitamo vali noke yoku sanga ociseveto.",
+    "waste_to_tableau_one_card": "O pondola lika oku kapa omapa yimosi vocikasia caco.",
+    "waste_to_tableau_ok": "Oku upa okakasia kosi yocitunu oku ka kapa vo tabela T{dst}",
+    "waste_to_tableau_bad": "O pondola oku kapa ovaleterio yaco vokakasia kaco konele yetosi li sangiwa vo tabela.",
+    "no_face_up": "Ka tu kuete ovikanda vioku eca komanu va sukila ekuatiso.",
+    "tableau_to_tableau_ok": "Lilaye {count} kadi(s) kuva tableau T{src} ku T{dst}",
+    "tableau_to_tableau_bad": "Ai kwata {count} kadi(s) kuva T{src} ku T{dst}",
+    "foundation_to_tableau_one_card": "O pondola lika oku kapa omapa yimosi vonanga yaco.",
+    "foundation_empty": "Ocitumãlo F{src} ka ci kuete omanu.",
+    "foundation_to_tableau_ok": "Lilaye kadi kuva foundation F{src} ku tableau T{dst}",
+    "foundation_to_tableau_bad": "Cannot place foundation card on tableau T{dst}",
+    "to_waste_or_stock": "Ka ci tava oku yi kapa vociwo ale vovina vikuavo."
+  },
+  "outcome": {
+    "forfeit": "Ludilo lulwile. Alama ya mwisho: {score} kadi ku foundations.",
+    "won": "Wa yula omapalo yoku litipula lomanu ya lingiwa vo Klondike!",
+    "turn_limit": "Ludilo luisha! Ulifikie wingi wa {max_turns} nkuluntu. Alama: {score} kadi ku foundations."
+  },
+  "board": {
+    "title": "=== Ocipepi Lomunda ya Velapo yo Afrika===",
+    "turn": "Nkuluntu: {turn}/{max_turns}",
+    "stock": "Stock: {stock} cards",
+    "waste": "Ocimbaluku (W): {waste}",
+    "foundations_header": "Foundations:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

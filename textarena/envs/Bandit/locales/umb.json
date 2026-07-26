@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "You are in a room with {num_buttons} buttons: {buttons}. Each button is associated with a Bernoulli distribution with a fixed but unknown mean; the means for the buttons could be different.\nFor each button, when you press it, you will get a reward that is sampled from associated distribution.\nYou have {num_turns} time steps and, on each time step, you can choose any button and receive the reward.\nYour goal is to strategically choose buttons at each time step to collect information about their reward distribution, that will let you choose the button with the highest mean reward correctly at the end of {num_turns} turns."
+  },
+  "board": {
+    "stat_line": "{button}: {reward} (played {count} times)",
+    "summary": "Summary:\n{stats}"
+  },
+  "invalid_move": {
+    "wrong_format": "Omunu waco ka tambuluile lolondaka via sunguluka.",
+    "invalid_button": "An invalid button has been selected."
+  },
+  "game_action": {
+    "pressed": "Omwale {button} kiboko na okwakala kwenda {reward}."
+  },
+  "game_message": {
+    "final_decision": "Noke yoku konomuisa ovina viosi via kongela vomapalo yaco, kũlĩhĩsa lutate esilivilo lioku nõla eci o yongola oku linga."
+  },
+  "outcome": {
+    "win": "Wa nõla ciwa ekonomuiso liove.",
+    "lose": "Pole, ove wa nõla onjila ka ya sungulukile."
+  }
+}

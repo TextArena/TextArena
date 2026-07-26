@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "The game begins. Trump suit: {trump_suit} (trump card: {trump_str}).",
+    "no_trump_card": "none"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in German Whist.\n{phase_info}\nYou hold {hand_size} cards.\nPlay a card with '[play N]', where N is its position in your hand (for example '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "No card is on offer - the playing phase has begun.",
+    "deck_empty": "The deck is empty - no card is on offer.",
+    "available": "Card on offer: {card}",
+    "available_trump": "Card on offer: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Use '[play N]' to play the Nth card in your hand.",
+    "bad_position": "That card position does not exist. You hold {hand_size} cards.",
+    "must_follow_suit": "You must follow suit and play a {lead_suit} card.",
+    "invalid_play": "That card cannot be played."
+  },
+  "game_action": {
+    "played": "Mwene {player_id} akapela {card}."
+  },
+  "trick": {
+    "won": "Mwene {winner_id} anapata tricki na {card}.",
+    "won_learning": "Mwene {winner_id} anapata tricki na {card} na kuchukua kadi iliyo wazi."
+  },
+  "phase": {
+    "learning_complete": "The deck is exhausted. The learning phase is over - every remaining trick counts towards victory."
+  },
+  "draw": {
+    "winner_received": "Ove wa yula kuenda wa tambula {card}.",
+    "loser_received": "Ove wa pumba uloño kuenda o kasi oku imba lika {card} kolomapalo.",
+    "winner_preview": "Okalivulu ka kuãimo, ka kuete osapi ya linga hati: {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tricki zilizopatikana hadi sasa - Mwene 0: {tricks0}, Mwene 1: {tricks1}",
+    "scores_playing": "Tricki za kupata - Mwene 0: {tricks0}, Mwene 1: {tricks1}",
+    "phase": "Ocinimbu: {phase}",
+    "phase_learning": "Phase: {phase} ({remaining_cards} cards left in the deck)"
+  },
+  "hand": {
+    "no_cards": "No cards",
+    "no_cards_in_hand": "No cards in hand",
+    "header": "Eka liove:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "No cards played yet this trick.",
+    "header": "Current trick:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Game not started",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nTrump suit: {trump_suit}",
+    "trump_card": "{observation}\nTrump card: {card}",
+    "cards_left": "{observation}\nCards left in deck: {count}",
+    "next_card": "{observation}\nNext card for winner: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nCurrent trick:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPlayer {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} cards in hand"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}
