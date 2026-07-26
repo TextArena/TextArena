@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a {max_rounds} round game of Kuhn Poker.\nGame Rules:\n- Kuhn Poker uses a 3-card deck with J, Q, K (J lowest, K highest)\n- Each player antes {ante} chip and receives 1 card each round (note that the cards are dealt without replacement, so you cannot have the same card as your opponent).\n- Game continues for {max_rounds} rounds\n- The player with the most chips after all rounds wins\nAction Rules:\n- '[check]': Pass without betting (only if no bet is on the table)\n- '[bet]': Add 1 chip to the pot (only if no bet is on the table)\n- '[call]': Match an opponent's bet by adding 1 chip to the pot\n- '[fold]': Surrender your hand and let your opponent win the pot"
+  },
+  "init_round": {
+    "round_start": "### بداية الجولة {current_round} من {max_rounds} جولات. بطاقتك هي: '{player_card}'",
+    "available_actions": "هادو اللي عندك: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "الحركة يجب أن تكون [Check]، [Bet]، [Call]، أو [Fold].",
+    "not_legal": "التدخل خاص يكون {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "هادو اللي عندك: {legal_actions}.",
+    "round_summary": "{reason} النقاط الحالية: اللاعب 0: '{player_0_chips}'; اللاعب 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "في نهاية جولات {max_rounds}، كان لكل من اللاعبين نفس العدد من الرقائق.",
+    "round_win": "Player {player_id} has folded.",
+    "winner_player0": "فاز اللاعب 0 من خلال وجود المزيد من الرقائق في نهاية كل الجولات {max_rounds}.",
+    "winner_player1": "فاز اللاعب 1 من خلال امتلاك المزيد من الرقائق في نهاية كل الجولات {max_rounds}."
+  }
+}

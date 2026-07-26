@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "أنت لاعب {player_id} في لعبة نيم.\nهدفك هو أخذ الكائن المتبقي الأخير.\nفي كل دور، اختر ركماً واحداً فقط وأزل كائنًا أو أكثر منه.\nاستخدم الصيغة '[pile quantity]'، حيث الركم هو فهرس الركام وكمية هي عدد الكائنات التي تريد إزالتها.\nعلى سبيل المثال، '[0 3]' يزيل 3 كائنات من الركم 0."
+  },
+  "state": {
+    "current_pile": "التيار: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "ما لقيتش شي شكل صالح. استخدم \"[pile quantity]\".",
+    "correct_format_wrong_fields": "لاعب {player_id}، إجراء غير صالح. العمود {col} خارج الحدود.",
+    "out_of_range": "مؤشر الصف {pile_index} خارج من النطاق.",
+    "non_positive": "خاصه يزيل شي حاجة واحدة على الأقل.",
+    "exceeds_pile": "لا يمكن إزالة {quantity} من الركام {pile_index} (متبقي فقط {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "لاعب {player_id} خديت آخر شي ((s)!"
+  }
+}
