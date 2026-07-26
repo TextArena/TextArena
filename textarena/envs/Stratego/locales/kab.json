@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Siḍiḍ kan anecdai {player_id} deg Stratego.\nNekni ur d-tesɛuḍ ad tɛawed akken ad t-ḥuz aseɛdu n anecdai inek, neɣ ad t-ḥuz aṭas n tneflayin inas.\nTafelwit inek tetwalit sɛant, akken ma llan aseɛdu, ibumben, d tneflayin n irran imiran.\n\n### Iɣawasen n usɛuḍ\n1. **Iɣawasen n tneflayt:**\n   - Deg tesɛuḍ inek, tefka yiwet n tneflayt sɛant yiwet n tɣimit (sɛant, siwel, zdat, neɣ zegga).\n   - Amud: Tneflayt tettwaliw seg A1 ar B1 neɣ A1 ar A2 ma B1 d A2 ur llant sɛant tafelwit n wemcic.\n   - Ma tneflayt tettwaliw d abumbu neɣ aseɛdu, ur tettwaliw tneflayt.\n2. **Imṛaɛ:**\n   - Ma tefka yiwet n tneflayt ɣer tɣimit i d-yezgan anecdai inek, ad ilint imṛaɛ:\n     - Tneflayt i yeɛnan iri imẓi yettwaggeɛ d acu kan, d acu kan ad tettwaliw.\n     - Ma irran imiran, tewɛed sin.\n     - **Iɣawasen imaynuten:**\n       - Ibumben ad ḥuzen tneflayin n irran imaynut, ma ḥuma ibanǧan ad ḥuzen ibumben.\n       - Ispeyen ad ḥuzen amiral ma ispey ad yefka yiwet n tneflayt ɣer amiral, ma ad tettwaliw d tneflayt nniḍen, ad tettwaliw.\n3. **Tafelwit n usɛuḍ:**\n   - Ruḥeḍ anecdai inek sɛant n tneflayin inas.\n   - Ḥrez aseɛdu inek, d ḥuz aseɛdu n anecdai inek.\n   - Sken tafelwit n tneflayt sɛant n tneflayt n irran imaynut.\n\n### Awalen n tefka:\n1. Ruḥeḍ tɣimit n tneflayt i tefka d tɣimit n tneflayt.\n2. Sken tefka sɛant: [A0 B0], ɣer tɣimit n tneflayt i d-yezgan anecdai inek.\n   - Amud: Ma tefka yiwet n tneflayt seg A0 ar B0, ruḥeḍ [A0 B0].\n3. Ḥrez tɣimit n tneflayt sɛant n tɣawasen n tneflayt ɣer ṭṭafat.\n\n### Iɣawasen imaynuten:\n- Tabɛaɛ ad tt-ɛawen tafelwit inek d tɣimit n tneflayin inas, sɛant MN, MS.\n- Tabɛaɛ ad tt-ɛawen tɣimit n tneflayin n anecdai inek sɛant ?, ma ur tt-ɛawen ara irran.\n- Tigezt n ~ d yilel, ur tettwaliw tneflayt ɣer ṭṭafat.\n- Sken tefka tneflayt inek i d-yezgan deg uɛeṭṭel, ad ruḥeḍ tafelwit n tneflayin n anecdai inek. Uɛeṭṭel n anecdai 0 d anecdai 1 d D d G nniḍen.\n\nDayeḍ asenṭaq usligel:\n"
+  },
+  "board": {
+    "current_board": "Asenṭaq usligel:\n\n{board}\nIzṛawen irnen: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aɛeggal n tefka ur yezmer ad yili. Anecdai {player_id} ur yefka yiwet n tneflayt sɛant n tefka [A0 B0].",
+    "invalid_coordinates": "Aḍris n tikli ur yelhi. Amyurar {player_id} ur d-yefki ara isekkilen ilhanen.",
+    "not_own_piece": "Ahil ur nlaq ara. Amyurar {player_id} ilaq ad yeddu s yiwet seg yiferrawen-is.",
+    "scout_through_pieces": "Ahil ur d-yusi ara. Amyurar {player_id} ur yezmir ad yeddu s uḥeṭṭuḍ deg yiɣsanen nniḍen.",
+    "scout_diagonal": "Ahil ur d-yusi ara. Amyurar {player_id} ur yezmir ad yeddu s tkerrust n umeskar deg uḥric amaynut.",
+    "non_scout_multi_square": "Asenfar n tikli ur yelhi. Iɣallen, ala imsebriden i izemren ad rzun yiwen uḥric deg yiwet n tikkelt.",
+    "move_into_lake": "Ahil ur d-yusi ara. Amyurar {player_id} ur yezmir ad ikcem ɣer ugelmim.",
+    "move_onto_own_piece": "Aḍris ur nlaq ara. Amyurar {player_id} ur yezmir ad ikcem ɣer uḥric-is s timmad-is.",
+    "move_bomb_or_flag": "Ahil ur d-yusi ara. Amyurar {player_id} ur yezmir ad yesserwet tibombeṛt neɣ aflag."
+  },
+  "game_action": {
+    "you_moved": "Tefka yiwet n tneflayt inek seg {source} ar {dest}.",
+    "opponent_moved": "Anecdai {player_id} yefka yiwet n tneflayt seg {source} ar {dest}.",
+    "you_equal_ranks": "Tefka yiwet n tneflayt inek seg {source} ar {dest}. Tneflayt tamenzut tettwaliw d {attacking_rank}, d acu kan tettwaliw d {target_rank}. S wakka irran imiran, tewɛed sin.",
+    "opponent_equal_ranks": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the ranks are the same, both pieces lost.",
+    "you_miner_defused": "You have moved your piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As miners can defuse bombs, you won the battle.",
+    "opponent_miner_defused": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As miners can defuse bombs, you lost the battle.",
+    "you_bomb_lost": "You have moved your piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is not a miner, you lost the battle.",
+    "opponent_bomb_won": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is not a miner, you won the battle.",
+    "you_spy_won": "You have moved your piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a spy and the destination is a marshall, you won the battle.",
+    "opponent_spy_lost": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a spy and the destination is a marshall, you lost the battle.",
+    "you_higher_won": "You have moved your piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a higher rank than the destination, you won the battle.",
+    "opponent_higher_lost": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a higher rank than the destination, you lost the battle.",
+    "you_lower_lost": "You have moved your piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a lower rank than the destination, you lost the battle.",
+    "opponent_lower_won": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a lower rank than the destination, you won the battle."
+  },
+  "outcome": {
+    "flag_captured": "Player {player_id} has captured the opponent's flag!",
+    "no_movable_pieces": "Player {winner_id} wins! Player {loser_id} has no more movable pieces."
+  }
+}

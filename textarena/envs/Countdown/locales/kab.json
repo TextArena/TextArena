@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "AZERWEG: {target}\n\nIliman imernawen:\n{numbers}",
+    "best": "{observation}\n\nIwakken akken yellaḍ: {best_value} (tuzza: {distance})\nIwakken aṣṣeɣnan: {best_expression}",
+    "history": "{observation}\n\nTalalit n uɣerwel:\n{moves}",
+    "progress": "{observation}\nTaddart n tuṣka ɣer ṭṭart: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Iɣil ur nqebbel. Ilaq ad yemgarad d win yellan gar 0-{max_index}",
+    "invalid_operation": "Invalid operation (division by zero or non-integer result)"
+  },
+  "outcome": {
+    "win": "D ayen yelhan! Yufa-d iswi n tidet: {target}",
+    "no_moves": "Ur llan uɣerwen aṭas. Awakken amezwaru: {best_value} (azerweg: {target})",
+    "turn_limit": "Taddart n uɣerwen tettwaxṭer. Awakken amezwaru: {best_value} (azerweg: {target})"
+  }
+}

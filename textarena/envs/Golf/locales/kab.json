@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "You are playing Golf (Card Game) - Player {player_id}.\nGoal: Get the lowest total score in this single round. If columns share the same value, they are summed as 0.\nCard Values: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (use exact brackets):\n- '[draw]' - Draw from deck\n- '[take]' - Take from discard pile\n- '[swap X Y]' - Swap drawn card with position X (row) Y (column)\n- '[discard]' - Discard the drawn card\n"
+  },
+  "board": {
+    "drew": "Tefkem: {card}\nTura d ṭṭafem [swap X Y] neɣ [discard]",
+    "took": "Tefkem: {card} si tɣessa n tnekzemt\nTura d ṭṭafem [swap X Y] (ur tzemmer tnekzem)",
+    "peeked": "Tefkem ẓṛet deg ṭaqṣit ({row},{col}): {card}",
+    "turn_view": "Your hand:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Ulac."
+  },
+  "options": {
+    "final_turns": "Final turns! Your options: [draw], [take], [peek X Y]",
+    "draw": "Iṭṭaf-ik: [draw], [take]",
+    "must_swap": "Ilaq ad: [swap X Y] (ur tezmir ara tkerḍiwin seg uḥric n yigerdan)",
+    "swap_or_discard": "Tura d ṭṭafem: [swap X Y] neɣ [discard]"
+  },
+  "hand": {
+    "no_cards": "Ulac tikarḍiwin.",
+    "header": "  Col:   1    2    3",
+    "row": "Ṭaqṣit {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} beddel {new} s {old} deg {row}, {col}",
+    "discarded": "Player {pid} tekcem {card}"
+  },
+  "message": {
+    "deck_empty": "Deck is empty! Game ends immediately.",
+    "knocked": "Amyurar {pid} yeɣli! Yal amurad nniḍen yesɛa yiwet n tikelt.",
+    "final_round": "Player {pid} {reason}! Maḍi kan yiman-nsen iḍerru yiwet n ṭṭaf"
+  },
+  "reason": {
+    "all_revealed": "has all cards revealed"
+  },
+  "invalid": {
+    "wrong_action": "Sken yiwen uṭṭun n ṭṭaf: [draw], [take], [swap X Y], [discard], [knock], neɣ [peek X Y]",
+    "discard_empty": "The discard pile is empty!",
+    "must_draw_first": "Tura d ṭṭafem [draw], [take], [knock], neɣ [peek X Y]",
+    "cannot_discard_taken": "Ur tezmireḍ ara ad tessebleɛeḍ takarḍa i d-tekkreḍ seg tqecwalt n usefru. Ilaq ad tt-tezziḍ.",
+    "have_drawn_card": "Tefkem kan card drew. Tura d ṭṭafem [swap X Y] neɣ [discard]",
+    "need_drawn_swap": "You need a drawn card to swap.",
+    "need_drawn_discard": "You need a drawn card to discard.",
+    "out_of_bounds": "Ṭaqṣit ur telliḍ. Sken ṭaqṣit 1-{max_row}, amḍan 1-{max_col}",
+    "knock_with_card": "Ur tezmireḍ ara ad d-teqqneḍ s tkarḍa i tesεiḍ. Ddem tikelt tamezwarut.",
+    "already_knocked": "Yella yakan win i d-yewwten tazzla.",
+    "already_revealed": "Tacarḍa-nni teffeɣ yakan!"
+  },
+  "summary": {
+    "full": "Game Over! Player {winner} wins with a score of {score} points!\n\nFinal Scores:\n{scores}",
+    "line": "Player {pid}: {score} n point\n"
+  },
+  "board_str": {
+    "title": "=== GOLF GAME ===",
+    "discard": "Aɣeṭṭa n usegmi: {card}",
+    "knocked": "Amyurar {pid} yekkat!",
+    "player_header": "Player {pid} (Tazmert: {score}):"
+  }
+}

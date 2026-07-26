@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing a game of Pig Dice.\n\nRules:\n- On your turn, you can either '[roll]' or '[hold]'\n- Roll a 2-6: Add to your turn total\n- Roll a 1: Lose turn total and end turn\n- Hold: Add turn total to your score and end turn\n- First to {winning_score} points wins\n\nWhen it's your turn, you'll see the current scores and turn total.\nRespond with '[roll]' to roll the die or '[hold]' to bank your points."
+  },
+  "invalid_move": {
+    "invalid_action": "Tafyirt n uɣmisen ur tesɛi ṭṭajat. Sken '[roll]' neɣ '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Player {player_id} busted, losing {turn_total} points!",
+    "player_hold": "Ajmuḍ {player_id} yettwahem, yetwasaḥ {turn_total} n point."
+  },
+  "board": {
+    "player": "Ajmuḍ 0 : '{score_0}' ; Ajmuḍ 1 : '{score_1}'",
+    "current_total_scores": "Current Total Scores: {scores}\nYour current turn total is {turn_total}.",
+    "roll_history": "{observation}\nYour roll history for this turn: {roll_history}",
+    "first_roll": "{observation} D wa i d asurif amezwaru n nnuba-k.",
+    "available_actions": "{observation}\nIɣmisen ikelman : '[roll]' neɣ '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Player {winner_id} won by having a higher score at the turn limit ({scores})",
+    "winner_by_score": "Player {winner_id} won by reaching the target score of {winning_score}!",
+    "draw": "The turn limit has been reached and all players have the same score: {scores}"
+  }
+}

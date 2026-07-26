@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Amur-nni yeεreḍ ad iqbel ameslay mebla ma yesɛa ayen ilaqen.",
+    "out_of_range": "Player {player_id}, Invalid action. Column {col} is out of bounds.",
+    "already_full": "Player {player_id}, Invalid action. Column {col} is full.",
+    "proposing_with_no_resource": "Amyurar {player_id} yeεreḍ ad d-yefk taweṛt n uṣewwi mebla ma yesɛa ayen ilaqen.",
+    "incorrect_offer_format": "Player {player_id} made a trade offer in an incorrect format.",
+    "no_new_offer": "Amur {player_id} ur d-yefki ara taweṛt tamaynut."
+  },
+  "offers": {
+    "reject": "Amur {player_id} yugi asumer n umeslay.",
+    "accept": "Player {acceptor_id} yefka asenfar n yefka n yexles n Player {proposer_id}.",
+    "proposal": "Player {player_id} yefka asenfar i Player {opponent_id}: Imɣaden yettwafken: {offered} -> Imɣaden yettwasnen: {requested}"
+  },
+  "outcome": {
+    "win": "Player {winner_id} won by having a larger gain in inventory value.",
+    "draw": "Same change in inventory value for all players. Draw."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "Aɣeṭṭa n tura: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ulac anagraw n usiweḍ ay yettwafen. Seqdec \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Player {player_id}, Invalid action. Column {col} is out of bounds.",
+    "out_of_range": "Asekles n tneqqit {pile_index} yeffeɣ-d seg teɣzi.",
+    "non_positive": "Must remove at least 1 object.",
+    "exceeds_pile": "Ur tzemreḍ ad tferreḍ {quantity} seg tiɣilt {pile_index} (kan ṭṭaf {pile_count} kan)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Amyurar {player_id} yewwi-d agemmay aneggaru ((s)!"
+  }
+}
