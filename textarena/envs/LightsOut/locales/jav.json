@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Sambut datang marang Lights Out! Panjenengané duwé grid {size}x{size} saka lampu.\nGol panjenengané yaiku matèni Kabeh lampu (dilambangaké déning '.')\nYèn panjenengané ngetok lampu, dhèwèké bakal ngowahi dhèwèké piyambak lan tetanggané (ndhuwur/ngandhap/kiri/kanan).\nKetik [row col] kanggo ngetok lampu (0-indeks, mligi jangkauan kang sah yaiku 0-{max_index}).\nPanjenengané duwé nganti {max_turns} langkah kanggo ngatasi teka-teki.\nLegenda: 'O' = lampu MENYALA, '.' = lampu MATI"
+  },
+  "board": {
+    "current_state": "Kondisi grid saiki (Langkah {moves_made}, {moves_left} langkah kang wis tetep, {completion}% rampung):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksi kudu ing format [row col] ngendi baris lan kolom iku wilangan saka 0 nganti {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Sugeng! Sampeyan wis ngrampungake teka-teki ing {moves_used} gerakan!",
+    "loss": "Dolanan rampung! Panjenengané nggunakaké kabeh {max_turns} langkah tanpa ngatasi teka-teki. Katerangan pungkasan: {completion}%\nPungkasan kondisi:\n{grid}"
+  }
+}

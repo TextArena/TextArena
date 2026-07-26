@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Sampeyan iku Player {player_id} ing game Kuhn Poker {max_rounds} putaran.\nRules Game:\n- Kuhn Poker nggunakake dek kartu 3-kartu karo J, Q, K (J paling cilik, K paling dhuwur)\n- Saben pemain menehi {ante} chip lan nrima 1 kartu saben putaran (perlu diingat yen kartu-kartu kuwi dibagi tanpa gantian, mula sampeyan ora bisa duwe kartu kang padha karo musuh).\n- Game terus nganti {max_rounds} putaran\n- Pemain kang paling akèh chip sawise kabeh putaran menang\nRules Aksi:\n- '[check]': Lewat tanpa taruhan (mung yèn ora ana taruhan ing meja)\n- '[bet]': Tambah 1 chip ing pot (mung yèn ora ana taruhan ing meja)\n- '[call]': Nyocet taruhan lawan karo nambah 1 chip ing pot\n- '[fold]': Nyerahna tangan lan mburi lawan menang pot"
+  },
+  "init_round": {
+    "round_start": "### Wiwitan putaran {current_round} saka {max_rounds} putaran. Kartu sampeyan: '{player_card}'",
+    "available_actions": "Tindakan sing kasedhiya yaiku: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action must be [Check], [Bet], [Call], or [Fold].",
+    "not_legal": "Tumindak kudu {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Tumindak sing kasedhiya yaiku: {legal_actions}.",
+    "round_summary": "{reason} Skor saiki: Player 0: '{player_0_chips}'; Player 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Ing pungkasan babak {max_rounds}, loro pemain duwe jumlah chip sing padha.",
+    "round_win": "Pemain {player_id} wis dilipat.",
+    "winner_player0": "Pemain 0 menang kanthi duwe chip luwih akeh ing pungkasan kabeh {max_rounds} putaran.",
+    "winner_player1": "Pemain 1 menang kanthi duwe chip luwih akeh ing pungkasan kabeh {max_rounds} putaran."
+  }
+}

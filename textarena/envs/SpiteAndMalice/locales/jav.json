@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Sampeyan iku Pemain {player_id} ing permainan Spite dan Malice kanggo rong pemain. Tujuan sampeyan iku dadi pemain sing kapisan kanggo kosongaké tumpukan bayarané.\n\n### Tinjauan Permainan:\n- Tujuané yaiku ngosongaké tumpukan bayaran kanthi main kartu menyang tumpukan tengah.\n- Sampeyan bisa main kartu saka telung sumber:\n  1. **Tangan** (sampeyan wiwitan saben giliran karo nganti 5 kartu ing tangan).\n  2. **Kartu paling dhuwur saka tumpukan bayaran**.\n  3. **Kartu paling dhuwur saka salah siji tumpukan mbuwang**.\n\n### Aturan Main:\n- Sampeyan bisa main kartu menyang tumpukan tengah yèn kartu iku **siji peringkat luwih dhuwur** tinimbang kartu paling dhuwur ing tumpukan iku (tumpukan tengah diwiwiti karo Ace lan munggah nganti Queen; Kings iku kartu liar - bisa dimainaké ing kartu apa waé nanging ora ngowahi urutan peringkat. Ini tegesé yèn King digunakaké sawisé 4, banjur King iku dianggep peringkat 5 lan kartu sabanjuré kudu 6).\n- Yèn sampeyan ora bisa main kartu manèh, sampeyan kudu **mbuwang kartu** menyang salah siji tumpukan mbuwang kanggo rampung gilirané.\n- Yèn tumpukan tengah tekan Queen, bakal diresikaké kanthi otomatis.\n- Urutan peringkat iku: A=1, 2=2, ..., 9=9, J=10, Q=11, K minangka kartu liar.\n\n### Aksi:\n1. **Tarik**: Ing wiwitan giliran, tarik kartu kanggo ngisi tangan nganti 5 kartu. Masukkan **[draw]** kanggo miwiti.\n2. **Main Kartu**: Kanggo main kartu, spesifikasikaké kartu lan tumpukan tengah kaya mengkéné: **[play A♠ 0]** (ing ngendi 'A♠' iku kartu lan '0' iku indeks tumpukan tengah).\n3. **Mbuwang**: Yèn sampeyan ora bisa main kartu manèh, buwang kartu saka tangan menyang tumpukan mbuwang kanggo rampung gilirané. Masukkan **[discard A♠ 1]** (ing ngendi 'A♠' iku kartu lan '1' iku indeks tumpukan mbuwang). Perlu diingat yèn sampeyan ora bisa mbuwang kartu apa waé saka tumpukan bayaran. Sampeyan mung bisa mbuwang kartu saka tangan.\n\n"
+  },
+  "board": {
+    "current_board": "Papan Saiki:\n\n{board}\nLangkah-Langkah Sing Kasedhiya: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pusat Piles --- ",
+    "pile": "{observation}Tumpukan {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Tinjauan Pemain {player_id} ---\n",
+    "payoff": "{observation}Tumpukan Bayaran (Kartu Paling Dhuwur): {top_card}, Dawa Tumpukan Bayaran: {payoff_length}\n",
+    "hand": "{observation}Tangan: {hand} ",
+    "discard": "{observation}Tumpukan Mbuwang: {discard}\n",
+    "empty": "Kosongé"
+  },
+  "game_message": {
+    "no_cards_left": "Ora ana kertu liyane kanggo narik. Elinga yen sampeyan bisa muter kartu saka sumber iki: 1. Panjenengan tangan 2. Kertu ndhuwur tumpukan pembayaran 3. Kertu paling dhuwur ing salah sawijining tumpukan sing dibuwang . "
+  },
+  "invalid_move": {
+    "wrong_format": "Format pamindhahan ora valid. Pemain {player_id} durung nanggapi kanthi pamindhahani sing bener ing kurung persegi.",
+    "invalid_play": "Main sing ora sah. Pemain {player_id} nyoba main {card} ing tumpukan tengah {index}.",
+    "discard_from_payoff": "Pamundhutan ora sah. Pemain {player_id} nyoba mbuwang kertu saka tumpukan pembayaran .",
+    "discard_not_in_hand": "Pamundhutan ora sah. Pemain {player_id} nyoba mbuwang kertu sing ora ana ing tangan kasebut.",
+    "wrong_move_type": "Jinis pamindhahan ora sah. Pemain {player_id} durung nanggapi kanthi jinis pamindhahanipun sing bener."
+  },
+  "game_action": {
+    "you_drew": "Kowé narik kartu.",
+    "opponent_drew": "Pemain {player_id} narik kertu.",
+    "you_played": "Panjenengan main {card} ing tumpukan tengah {index}.",
+    "opponent_played": "Pemain {player_id} main {card} ing tumpukan tengah {index}.",
+    "you_discarded": "Sampeyan wis mbuwang {card} menyang tumpukan mbuwang {index}, sing uga tegese sampeyan wis rampung gilirané. Ora ana aksi tambahan saka sampeyan sing dianggep kanggo giliran iki. Pemain {next_player_id} bakal maju.",
+    "opponent_discarded": "Pemain {player_id} mbuwang {card} menyang tumpukan mbuwang {index}, sing uga tegese dheweke wis rampung gilirané. Ora ana aksi tambahan saka Pemain {player_id} sing dianggep kanggo giliran iki. Pemain {next_player_id}, sampeyan bakal maju. Tolong masukkan aksi sampeyan ing format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Pemain {current_player} wis rampung tumpukan bayarannya! Pemain {current_player} menang!",
+    "deadlock_player_0": "Deadlock dicapai! Pemain 0 menang dengan {player_0_payoff} kartu sing tersisa vs Pemain 1's {player_1_payoff} kartu.",
+    "deadlock_player_1": "Deadlock dicapai! Pemain 1 menang dengan {player_1_payoff} kartu sing tersisa vs Pemain 0's {player_0_payoff} kartu.",
+    "deadlock_tie": "Deadlock dicapai dengan seri! Rong pemain duwe {player_0_payoff} kartu sing tersisa. Pemain {current_player} menang kanthi default."
+  }
+}
