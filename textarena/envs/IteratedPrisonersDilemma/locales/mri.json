@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ko koe te Kaikaiwhakaari {player_id} i roto i tētahi Iterated Prisoner's Dilemma e whāiti ana ki {num_rounds} rauniga.\n\nTe Hanganga o te Tākaro:\n- I mua i tēnei whakatau ka whai wā koe ki {total_conversation_rounds} whakatau ki te kōrero noa.\n- I muri i taua mea, ka whakatau ngātahi ngā kaiwhakaari ki te mahi tahi rānei ki te whakakore.\n\nTe Pūaranga o ngā Utu (whakapūmau ia rauniga):\n- Ka mahi tahi ngā Kaikaiwhakaari e rua ➜ ia tangata {cooperate_reward}\n- Ka whakakore ngā Kaikaiwhakaari e rua ➜ ia tangata {mutual_defect_reward}\n- Ka whakakore tetahi, ka mahi tahi tetahi ➜ Kaikaiwhakaari whakakore {defect_reward}, Kaikaiwhakaari mahi tahi {sucker_reward}\n\nMe pehea te tākaro:\n- I te wā o te kōrero: tuhi tetahi tuhinga e hiahia ana koe.\n- I te wā o te whakatau: whakauru '[Cooperate]' rānei '[Defect]' (kore rawa te take). Ka taea te whakauru i etahi atu tuhinga i mua o / i muri o te tohu."
+  },
+  "phases": {
+    "conversation_finished": "Kua mutu te kōrero mō te rauniga {round}. Tēnā whakautu ki '[Cooperate]' rānei '[Defect]' ki roto i \\boxed{{}}.",
+    "starting_round": "--- Te tīmatanga o te Rauna {round} ---",
+    "round_summary": "Ngā huanga o te rauniga {round}:\n{outcome}\nI whiwhi ai te Kaikaiwhakaari 0 i {r0} (ngā huanga katoa {score_0}), i whiwhi ai te Kaikaiwhakaari 1 i {r1} (ngā huanga katoa {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "He toenga! I eke nga kaitakaro e rua {s0}.",
+    "round_both_cooperate": "I mahi tahi ngā kaitākaro e rua.",
+    "round_both_defect": "I rere atu ngā kaitākaro e rua.",
+    "round_p0_cooperates_p1_defects": "I mahi tahi te kaitākaro 0, i rere atu te kaitakaro 1.",
+    "round_p0_defects_p1_cooperates": "I rere te kaitākaro 0 i a ia, ka mahi tahi te kaitakaro 1."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "Kaiwhakahaere Alpha",
+    "commander_beta": "Ko te Kaiwhakahaere Beta."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRaunga {current_round}\nKomiti Alpha whakarite ana: {p0_allocations}\nKomiti Beta whakarite ana: {p1_allocations}\n",
+    "winner_alpha": "{message}Whakawhi: Kaihautū Alpha",
+    "winner_beta": "{message}Whakawhi: Kaihautū Beta",
+    "tie": "{message}Kōtahi!"
+  },
+  "invalid_move": {
+    "wrong_format": "Kāore i te tika. Whakamahia: A:5, B:10, C:5",
+    "invalid_field": "Ingoa āpure kāore i te tika. Āpure whaimana: {field_names}",
+    "wrong_allocation_value": "All allocations must be non-negative integers.",
+    "incorrect_total_units": "Me whakarite koe ki nga {num_total_units} whakauru. Taputapu o naianei: {current_sum}",
+    "good_allocations": "He pai te tohatoha."
+  },
+  "outcome": {
+    "winner_alpha": "Komiti Alpha toa {score_0}-{score_1} i muri i {num_rounds} raunga!",
+    "winner_beta": "Komiti Beta toa {score_1}-{score_0} i muri i {num_rounds} raunga!",
+    "draw": "Ka mutu te whai i te {score_0}-{score_1} tiwe after {num_rounds} raunga!",
+    "early_winner_alpha": "Komiti Alpha toa {scores_0}-{scores_1} (tautoko nui rawa!)!",
+    "early_winner_beta": "Komiti Beta toa {scores_1}-{scores_0} (tautoko nui rawa!)!"
+  }
+}

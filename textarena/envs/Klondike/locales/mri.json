@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "Kāore i te tika. Me waiho ngā mahi ki roto i nga kōwae.",
+    "no_closing_bracket": "He hōputu mahi hē. Kāore i te kōwae kati ']'",
+    "empty_command": "whakahau kau. momo 'tohu' ranei \"move <source> <destination> [count]\"",
+    "empty_action": "Empty action",
+    "move_needs_args": "Ko te whakahau neke e hiahia ana ki te putake me te ūnga. Whakamahi: 'move <source> <destination> [count]'",
+    "count_positive": "Me whai pānga te tatau, \"katoa\" rānei.",
+    "count_invalid": "He tau kore. Whakamahia he nama, \"katoa\" rānei",
+    "unknown_command": "Unknown command '{cmd}'. Use 'draw', 'move <source> <destination> [count]', or 'forfeit'",
+    "wrapped": "Mahi {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Mahi {n}: {msg}",
+    "before_failure": "Kua mahia {n} mahi ((s) i mua o te kore.",
+    "failed": "Mahi {n} kore: {msg}"
+  },
+  "move_result": {
+    "drew": "I tangohia te kāri ((s) mai i ngā taonga ki nga ururua.",
+    "cannot_draw": "Kāore e taea te tāpiri. Kua kore ngā taonga me nga parahanga katoa.",
+    "invalid_pile": "Ingoa puranga hē. Whakamahia te W, F1-F4, T1-T7 rānei",
+    "foundation_one_card": "Ka taea te neke anake 1 kāri ki turanga",
+    "waste_to_foundation_ok": "Kawehia te kāri mai i ngā ururua ki te turanga F{dst}",
+    "waste_to_foundation_bad": "Kāore e taea te neke kāri ururua ki taua puranga turanga",
+    "tableau_to_foundation_ok": "Kuhu kāri teitei i runga i te wāhi whakarite T{src} ki te puranga F{dst}",
+    "tableau_to_foundation_bad": "Kāore e taea te neke i tētahi kāri papa ki taua puranga turanga",
+    "foundation_to_foundation": "Kāore e taea te neke mai i tētahi turanga ki tētahi atu.",
+    "waste_to_tableau_one_card": "Ka taea te neke 1 kāri anake i ngā tākai ki te papa.",
+    "waste_to_tableau_ok": "I nekehia te kāri mai i ngā ururua ki te papa T{dst}",
+    "waste_to_tableau_bad": "Kāore e taea te tāpiri kāri i runga i taua puranga papa.",
+    "no_face_up": "Kāore he kāri kanohi ake hei neke atu.",
+    "tableau_to_tableau_ok": "Neke i {count} kāri ki runga i wāhi whakarite T{src} ki T{dst}",
+    "tableau_to_tableau_bad": "E kore e taea te neke i {count} kāri ki runga i T{src} ki T{dst}",
+    "foundation_to_tableau_one_card": "Ka taea te neke 1 kāri anake i te turanga ki te papa.",
+    "foundation_empty": "He kau te turanga F{src}",
+    "foundation_to_tableau_ok": "Kuhu kāri teitei i runga i te puranga F{src} ki te wāhi whakarite T{dst}",
+    "foundation_to_tableau_bad": "Kāore e taea te whakatakoto kāri turanga ki runga i te papa T{dst}",
+    "to_waste_or_stock": "Kāore e taea te neke ki ngā para, taonga rānei."
+  },
+  "outcome": {
+    "forfeit": "Ka ngaro te kēmu. Ko nga kaute whakamutunga: {score} kāri i roto i nga turanga.",
+    "won": "Ngā mihi nui, kua riro i a koe te Klondike Solitaire!",
+    "turn_limit": "Mutu te kēmu! I tae koe ki te taumata o {max_turns} tūru. Tohu: {score} kāri ki runga i ngā puranga."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Tūru: {turn}/{max_turns}",
+    "stock": "Rauemi: {stock} kāri",
+    "waste": "He otaota (W): {waste}",
+    "foundations_header": "Ngā turanga:",
+    "foundation_row": "F{n}: {cards} ngā pūtea o te ao.",
+    "tableau_header": "Te papa:",
+    "tableau_row": "T{n}: {cards} ngā kōrero i te reo Māori."
+  }
+}

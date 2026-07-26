@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Poari o nāianei: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Me neke ki te ahua [macro micro] me nga nama 0-8.",
+    "out_of_range": "Me tau ngā taupū ki waenganui i te 0 me te 8.",
+    "index_out_of_range": "Ko te micro_board, rarangi, me ngā rārangi kei waho o te awhe.",
+    "cell_occupied": "Kua nohoia kē te pūtau.",
+    "wrong_micro_board": "The player must play in the next micro board.",
+    "micro_board_won": "Kua riro kē te poari iti."
+  },
+  "next_board": {
+    "any": "tetahi papa iti-iti",
+    "specific": "papa iti {nxt}"
+  },
+  "game_action": {
+    "played": "Kaiwhaiwhai {player_id} i whakatinana ki te papa iti {macro_idx}, ko te kokonga {micro_idx} (rarangi {row}, kohanga {col}). Me whakatinana a Kaiwhaiwhai {opponent_id} inaianei ki {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Ka wikitoria te kaitākaro {player_id} i a Ultimate Tic Tac Toe!",
+    "draw": "The game is a draw!"
+  }
+}

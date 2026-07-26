@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Kua timata te whutupaoro o Briscola! Suiti whutupaoro: {trump_suit} (Kāri whutupaoro: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Kei te tākaro koe i te whutupaoro o Briscola - Kaikōwhiri {player_id}.\nWhāinga: Ki te whiri i ngā whiri, ki te kohikohi i ngā pūruka maha rawa (120 pūruka katoa i roto i te tēpu).\nPūruka Pūruka: A=11, 3=10, K=4, Q=3, J=2, atu=0\nPūruka Mana: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKāri whutupaoro e whakawātea ana ngā kāri kore whutupaoro, ahakoa mana.\n\nMahi: '[play X]' i te wahi (1-{max_pos}) o te kāri i roto i tō ringa\n"
+  },
+  "hand": {
+    "none": "Kāore he kāri.",
+    "empty": "Kāore he kāri i te ringa.",
+    "header": "Ko tōu ringa:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP) Ko te mea nui, ko nga mahi a Trump."
+  },
+  "trick": {
+    "empty": "No cards played yet this trick.",
+    "header": "Te tinihanga o nāianei:",
+    "line": "  Kaikōwhiri {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Kaikōwhiri {player_id}: {points} pūruka",
+    "trump_info": "Ko te kakahu Trump: {trump_suit}",
+    "trump_info_deck": "Suiti whutupaoro: {trump_suit} | Kāri e toe ana i roto i te tēpu: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nTohungatanga: {scores}\n{trump_info}\n\nTākaro kāri mā te [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Whakamahia te [play X] kei reira ko X te tuunga kaari (1, 2, 3, etc.)",
+    "out_of_range": "He wahi kāri tūtū. Kei a koe {count} kāri (1-{count})"
+  },
+  "action": {
+    "played": "Ka takaro te kaitākaro {player_id} i a ia e tākaro ana ki te {card}",
+    "trick_win": "Player {winner} wins the trick with {card} and gains {points} points!"
+  },
+  "outcome": {
+    "head": "Kua mutu te whutupaoro! Kaikōwhiri {winner} i te whiri ki a {points} pūruka!\n\nTohungatanga Whakamutunga:\n{scores}",
+    "player_line": "Player {player_id}: {points} points ({tricks} tricks)\n"
+  }
+}

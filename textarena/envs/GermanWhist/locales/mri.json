@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Ka timata te kēmu. Kākahu whakaū: {trump_suit} (kāri whakaū: {trump_str}).",
+    "no_trump_card": "kahore he mea"
+  },
+  "player_prompt": {
+    "intro": "Ko koe te Kaitākaro {player_id} i Whist Tiamana.\n{phase_info}\nE uaua ana koe ki {hand_size} kāri.\nTākaro kāri ki '[play N]', ki te wahi o tēnei kāri i tō ringa (hei tauira '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "KAUPAPU: kua pau te papa. Ka whai wāhi mai ngā tinihanga katoa ki te wikitoria i tēnei wā."
+  },
+  "next_card": {
+    "playing_phase": "Kāore he kāri e tukuna ana - kua tīmata te wāhanga tākaro.",
+    "deck_empty": "He kau te papa - kāore he kāri e wātea ana.",
+    "available": "Kaari e whakaekea ana: {card}",
+    "available_trump": "Ka tukuna he kāri: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "He hōputu nekehanga hē. Whakamahia te '[play N]' hei whakatangi i te kāri Nth kei to ringa.",
+    "bad_position": "Kāore i te tīari taua tūnga kāri. Kei a koe ngā {hand_size} kāri, heoi anō ka taea e au te whakamahi i tēnei pūmanawa hei tāpiri ki tō kōpae pānuitanga.",
+    "must_follow_suit": "Me whai koe i te tauira me te tākaro kāri {lead_suit}.",
+    "invalid_play": "Kāore e taea te whakatangi i taua kāri."
+  },
+  "game_action": {
+    "played": "Ka takaro te kaitākaro {player_id} i a ia e tākaro ana ki te {card}."
+  },
+  "trick": {
+    "won": "Ka wikitoria te kaitākaro {winner_id} i te tinihanga ki a {card}.",
+    "won_learning": "Kaitākaro {winner_id} toa ki te pōti whai ki runga ki {card}, ā, ka tango i te kāri kanohi tuara."
+  },
+  "phase": {
+    "learning_complete": "Kua pau te papa. Ka mutu te wāhanga ako - ka whai wāhi atu ki te wikitoria ngā tinihanga katoa e toe ana."
+  },
+  "draw": {
+    "winner_received": "I wikitoria koe i te tinihanga, ā, ka whiwhi {card}.",
+    "loser_received": "Kua ngaro koe i te tinihanga, a ka tangohia e {card} mai i te papa.",
+    "winner_preview": "Ko te kāri e whai ake nei ko {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Pōti whai kua wini - Kaitākaro 0: {tricks0}, Kaitākaro 1: {tricks1}",
+    "scores_playing": "Pōti whai tātai - Kaitākaro 0: {tricks0}, Kaitākaro 1: {tricks1}",
+    "phase": "Te wāhanga: {phase}",
+    "phase_learning": "Tūtohinga: {phase} ({remaining_cards} kāri pōti mai i te pū)"
+  },
+  "hand": {
+    "no_cards": "Kāore he kāri.",
+    "no_cards_in_hand": "Kāore he kāri i te ringa.",
+    "header": "Ko tōu ringa:",
+    "trump_indicator": "(TRUMP) Ko te mea nui, ko nga mahi a Trump.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "No cards played yet this trick.",
+    "header": "Te tinihanga o nāianei:",
+    "trump_indicator": "(TRUMP) Ko te mea nui, ko nga mahi a Trump.",
+    "card_line": "{observation}\n  Kaitākaro {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Kāore te kēmu i tīmatahia.",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nTūtohinga: {phase}",
+    "trump_suit": "{observation}\nKākahu whakaū: {trump_suit}",
+    "trump_card": "{observation}\nKāri whakaū: {card}",
+    "cards_left": "{observation}\nKāri pōti mai: {count}",
+    "next_card": "{observation}\nKāri whai muri mō te toa: {card}",
+    "blank": "{observation}  ngā kōrero ā-iwi:",
+    "current_trick": "{observation} Te tinihanga o nāianei:",
+    "trump_indicator": "(TRUMP) Ko te mea nui, ko nga mahi a Trump.",
+    "trick_line": "{observation}\n  Kaitākaro {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nKaitākaro {player_id}: {scoring} pōti whai ({tricks} katoa), {hand_size} kāri i te ringa"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

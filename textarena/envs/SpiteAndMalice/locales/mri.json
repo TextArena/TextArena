@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Papa Kāri Whāriki:\n\n{board}\nNeke Atu: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Nga Pire o te Waenganui --- ",
+    "pile": "{observation}Puranga {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Tirohanga o Kaitakaro {player_id} ---\n",
+    "payoff": "{observation}Puranga Utu (Kāri Tuatahi): {top_card}, Roa o Puranga Utu: {payoff_length}\n",
+    "hand": "{observation}Ringa: {hand}\n",
+    "discard": "{observation}Puranga Whakarere: {discard}\n",
+    "empty": "Empty"
+  },
+  "game_message": {
+    "no_cards_left": "Kāore he kāri hei tāpiri atu. Kia mahara ka taea e koe te tākaro i ngā kāri mai ēnei pūtake: 1. Ko tō ringa 2. Te kāri runga o ō kōpaki utu 3. Te kāti tihi o tētahi o ō pōkai whakahētia. "
+  },
+  "invalid_move": {
+    "wrong_format": "Kāore i te tika. Kaore he kaitākaro {player_id} i whakautu ki tetahi nekehanga whaimana kei roto i nga kaakaariki tapawha.",
+    "invalid_play": "He whakatangi kore. I ngana te kaitākaro {player_id} ki te tākaro i a {card} kei runga i te papa waenganui o te wharepaku {index} .",
+    "discard_from_payoff": "Whakakahoretia te kore. I ngana te kaitakaro {player_id} ki te whakakore i tetahi kaari mai i te puranga utu.",
+    "discard_not_in_hand": "Whakakahoretia he kore. I ngana te kaitakaro {player_id} ki te whakakore i tetahi kaari kaore i roto i nga ringa.",
+    "wrong_move_type": "Kāore i te tika. Kaore he momo nekehanga e whakautu ana a kaitākaro {player_id} ki tētahi momo nekenga whaimana."
+  },
+  "game_action": {
+    "you_drew": "You drew cards.",
+    "opponent_drew": "I whakairihia e te kaitākaro {player_id} ngā kāri.",
+    "you_played": "I tākaro koe i {card} ki runga i te puranga pokapū {index}.",
+    "opponent_played": "Kaitakaro {player_id} i tākaro {card} ki runga i te puranga pokapū {index}.",
+    "you_discarded": "Kua whakarere atu koe i {card} ki te puranga whakarere {index}, koia hoki i whakaatu koe kua mutu tou tu. Kahore he mahi anō ou e whakaarohia mō tēnei tu. Kaitakaro {next_player_id} ka haere i muri.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Kaitakaro {current_player} kua mutu tana puranga utu! Kaitakaro {current_player} ka wini!",
+    "deadlock_player_0": "Kua tae ki te tuakiri! Kaitakaro 0 ka wini ki {player_0_payoff} kāri e toe ana ki waenganui i Kaitakaro 1 ki {player_1_payoff} kāri.",
+    "deadlock_player_1": "Kua tae ki te tuakiri! Kaitakaro 1 ka wini ki {player_1_payoff} kāri e toe ana ki waenganui i Kaitakaro 0 ki {player_0_payoff} kāri.",
+    "deadlock_tie": "Deadlock reached with tie! Both players have {player_0_payoff} cards remaining. Player {current_player} wins by default."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Ko koe te Kaitakaro {player_id} i tetahi taonga {num_players}-kaitakaro o te keemu Liar's Dice.\nTure:\n- I runga i to wā, ka taea e koe te mahi i tetahi o enei:\n  1) Mahi i tetahi tāpae hou me te nui ake o te tatau ranei te kanohi (ko te rua), ko '[Bid: 3, 4]',\n  2) Karanga te tāpae whakamutunga e tuhituhi '[Call]'.\n\nKi te karanga koe:\n  - Ki te tatau tūturu o taua uara kanohi i waenganui i nga kōwhatu katoa he iti i te tāpae, ka potea te kaitāpae whakamutunga kotahi kōwhatu.\n  - Waimarie, ka potea te karanga kotahi kōwhatu.\nHe kaitakaro ka taea te 0 kōwhatu ka whakakorea atu. Ko te kaitakaro whakamutunga ka wini."
+  },
+  "board": {
+    "per_player": "\tKaitakaro {p}: {d}",
+    "new_round": "\nRaunou hou - Tūāhuhi kōwhatu: {dice_summary}\nŌu kōwhatu o nāianei ko: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Kaitakaro {current_player_id} ka karanga! Ko te tatau tūturu o te kanohi {face_value} ko {count}, koia ko te iti i {quantity}.\nKaitakaro {loser_id} (te kaitāpae whakamutunga) ka potea kotahi kōwhatu.",
+    "caller_loses": "Kaitakaro {current_player_id} ka karanga! Ko te tatau tūturu o te kanohi {face_value} ko {count}, koia ko te nui ake ranei {quantity}.\nKaitakaro {loser_id} (te kaitāpae) ka potea kotahi kōwhatu."
+  },
+  "action": {
+    "bid_announce": "Player {player_id} bids {quantity} of face {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "I waea atu me te kore tono i mua.",
+    "invalid_bid": "He tono kore: {reason}",
+    "not_recognized": "Mahi kāore i te mohiotia ko te '[Bid: X, Y]' whai take ranei '[Call]'. Mahi i tukua: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Ko te rahinga hou {new_quantity} he iti ake i te o nāianei {current_quantity}.",
+    "face_lower": "Ko te uara ingoa hou {new_face_value} he iti ake i te o nāianei {current_face_value}.",
+    "identical": "He ōrite te tono ki te tuku o nāianei.",
+    "face_range": "Me waiho te uara mata i waenganui 1 me 6."
+  },
+  "message": {
+    "eliminated_invalid": "Player {player_id} was eliminated by invalid move."
+  },
+  "outcome": {
+    "win": "Kaitakaro {winner} ka wini! Whakapūmau whakamutunga: {final_ranking}"
+  }
+}
