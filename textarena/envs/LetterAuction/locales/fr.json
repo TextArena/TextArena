@@ -1,0 +1,54 @@
+{
+  "_comment": "Localisation française de LetterAuction. Les clés (à gauche) sont fixes ; ne traduis que les valeurs (à droite). Conserve chaque {placeholder} tel quel. Les numéros de joueur, les jetons de lettre ({letter}), les montants de pièces/nombres et les exemples entre crochets ([bid 2], [pass], [dog], [Game]) sont une syntaxe de jeu neutre et doivent rester inchangés.",
+  "_slots": {
+    "{player_id}": "Un numéro de joueur (0 ou 1)",
+    "{opponent_id}": "Le numéro de l'autre joueur (0 ou 1)",
+    "{current_player}": "Le joueur dont c'est le prochain tour (0 ou 1)",
+    "{coins}": "Les pièces restantes d'un joueur (entier)",
+    "{letters}": "Les lettres réunies par un joueur (une liste, p. ex. [] ou ['A', 'B'])",
+    "{letter}": "La lettre unique mise aux enchères (un jeton de jeu, ne pas traduire)",
+    "{bid_amount}": "Un nombre de pièces misées (entier)",
+    "{current_bid}": "La mise la plus haute actuelle à dépasser (entier)",
+    "{action}": "La chaîne d'action brute soumise par le joueur",
+    "{word}": "Un mot soumis par un joueur (un jeton de jeu, ne pas traduire)",
+    "{word_value}": "La valeur en points d'un mot soumis (entier)",
+    "{score}": "Le score final de mot d'un joueur (entier)",
+    "{cont}": "Un message de continuation neutre (déjà localisé ; ne pas traduire)"
+  },
+
+  "prompt": {
+    "intro": "Tu es le Joueur {player_id}. Tu joues actuellement au jeu Letter Auction.\nLe but du jeu est de miser stratégiquement sur des lettres pour former le mot de la plus grande valeur. Voici comment fonctionne le jeu.\nTu dois écouter le maître du jeu pour être guidé dans la partie.\nLe jeu se compose d'une série de manches. À chaque manche, une lettre est mise aux enchères.\nTu peux miser sur la lettre avec tes pièces. Le joueur avec la mise la plus élevée gagne la lettre.\nLa lettre sera ajoutée à ta collection et les pièces misées seront déduites de ton total.\nCette mise sur les lettres se répète jusqu'à ce que toutes les lettres aient été mises aux enchères. Tu n'es pas récompensé pour économiser tes pièces.\nUne fois toutes les lettres mises aux enchères, tu utiliseras les lettres pour former le mot de la plus grande valeur à partir des lettres gagnées.\nLe joueur avec le mot de la plus grande valeur gagne la partie.\nSi tu veux miser, soumets ton montant de mise entre crochets comme [bid 2] ou [bid 10].\nSi tu ne veux pas miser, soumets [pass].\nPour la soumission du mot de la plus grande valeur, il te sera demandé à la fin de la partie de le soumettre entre crochets comme [dog].\nVoici tes informations de départ :\nTes pièces actuelles : {coins}\nTes lettres actuelles : {letters}\n\n[Game] Le Joueur 0 commencera. La première lettre à miser : {letter}.\nLa mise de départ est de {bid_amount} pièce. Tu peux miser n'importe quel nombre de pièces ou choisir de ne pas miser.\n"
+  },
+
+  "invalid": {
+    "bad_bid_format": "Action non valide : {action}. Veuillez saisir une action valide : '[bid <amount>]' ou '[pass]'.",
+    "bad_word_format": "Action non valide : {action}. Veuillez saisir une action valide : '[<word>]'.",
+    "not_enough_coins": "Mise non valide : {bid_amount}. Tu n'as pas assez de pièces.",
+    "bid_too_low": "Mise non valide : {bid_amount}. Tu dois miser plus que la mise actuelle de {current_bid}.",
+    "not_a_word": "Mot non valide : {word}. Veuillez saisir un mot français valide.",
+    "missing_letter": "Mot non valide : {word}. Tu n'as pas la lettre '{letter}'."
+  },
+
+  "turn": {
+    "bid_more": " Joueur {current_player}, veux-tu miser sur la lettre '{letter}' plus de {bid_amount} ?",
+    "start_bid": " Joueur {current_player}, veux-tu commencer la mise sur la lettre '{letter}' pour {bid_amount} ?",
+    "auction_over": "L'enchère est terminée. Maintenant, les joueurs utiliseront les lettres qu'ils ont gagnées pour former le mot de la plus grande valeur à partir des lettres gagnées. Le joueur avec le mot de la plus grande valeur gagne la partie. Pour soumettre le mot, soumets-le entre crochets comme [dog]."
+  },
+
+  "auction": {
+    "pass": "Le Joueur {player_id} passe sur la lettre '{letter}'.{cont}",
+    "pass_opp_wins": "Le Joueur {player_id} passe sur la lettre '{letter}'. Le Joueur {opponent_id} obtiendra '{letter}' pour {bid_amount}.{cont}",
+    "pass_both": "Le Joueur {player_id} passe sur la lettre '{letter}'. Le Joueur {opponent_id} passe également sur la lettre '{letter}'. Donc personne n'obtiendra la lettre.{cont}",
+    "bid": "Le Joueur {player_id} mise {bid_amount} sur la lettre '{letter}'.{cont}",
+    "bid_opp_pass": "Le Joueur {player_id} mise {bid_amount} sur la lettre '{letter}'. Comme le Joueur {opponent_id} passe sur la lettre '{letter}', le Joueur {player_id} l'obtiendra pour {bid_amount}.{cont}"
+  },
+
+  "word": {
+    "chosen": "Le Joueur {player_id} choisit le mot '{word}' d'une valeur de {word_value}."
+  },
+
+  "outcome": {
+    "win": "Le Joueur {player_id} gagne avec un score de {score}",
+    "draw": "C'est une égalité !"
+  }
+}
