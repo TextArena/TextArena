@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "Bodi Lilipo:\n\n{board}\nMavuto Ang'amba: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Chosayenera kanthu mtundu. Player {player_id} sanali kulowa kusuntha mu mtundu wa [A0 B0] .",
+    "invalid_coordinates": "Zosayenera kanthu mtundu. Player {player_id} sanali kulowa olondola ndondomeko.",
+    "not_own_piece": "Chosayenera chochita. Wosewera {player_id} ayenera kusuntha chidutswa chimodzi cha iwo eni.",
+    "scout_through_pieces": "Chosayenera Action Format. Player {player_id} sangathe kusuntha scout mwa zidutswa zina.",
+    "scout_diagonal": "Chosayenera kanthu mtundu. Player {player_id} sangathe kusuntha scout diagonally.",
+    "non_scout_multi_square": "Njira yolakwika ya zochita. Zidutswa, kupatula azondi, zimangoyenda bwalo limodzi panthawi imodzi.",
+    "move_into_lake": "Mawonekedwe a zochitika zosagwira ntchito. Wosewera {player_id} sangathe kupita kunyanja.",
+    "move_onto_own_piece": "Mawonekedwe osavomerezeka. Wosewera {player_id} sangathe kupita ku chidutswa chake.",
+    "move_bomb_or_flag": "Chosayenera kanthu mtundu. Player {player_id} sangathe kusuntha bomba kapena mbendera."
+  },
+  "game_action": {
+    "you_moved": "Umehamisha kipande chako kutoka {source} hadi {dest}.",
+    "opponent_moved": "Mchezaji {player_id} amehamisha kipande kutoka {source} hadi {dest}.",
+    "you_equal_ranks": "Umehamisha kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kufikia kilikuwa {target_rank}. Kwa kuwa ngazi ziko sawa, vipande vyote viwili vilipotea.",
+    "opponent_equal_ranks": "Mchezaji {player_id} wamehamisha kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kufikia kilikuwa {target_rank}. Kwa kuwa ngazi ziko sawa, vipande vyote viwili vilipotea.",
+    "you_miner_defused": "Umehamisha kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kufikia kilikuwa {target_rank}. Kwa kuwa wana madini wanaweza kufuta mabomu, ulishinda mapigano.",
+    "opponent_miner_defused": "Mchezaji {player_id} wamehamisha kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kufikia kilikuwa {target_rank}. Kwa kuwa wana madini wanaweza kufuta mabomu, ulipoteza mapigano.",
+    "you_bomb_lost": "Umehamisha kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kufikia kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia sio miner, ulipoteza mapigano.",
+    "opponent_bomb_won": "Mchezaji {player_id} wamehamisha kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kufikia kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia sio miner, ulishinda mapigano.",
+    "you_spy_won": "Umehamisha kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kufikia kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia ni spye na kipande cha kufikia ni marshall, ulishinda mapigano.",
+    "opponent_spy_lost": "Mchezaji {player_id} wamehamisha kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kufikia kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia ni spye na kipande cha kufikia ni marshall, ulipoteza mapigano.",
+    "you_higher_won": "Umehamisha kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kufikia kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia kina ngazi ya juu zaidi ya kipande cha kufikia, ulishinda mapigano.",
+    "opponent_higher_lost": "Mchezaji {player_id} wamehamisha kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kufikia kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia kina ngazi ya juu zaidi ya kipande cha kufikia, ulipoteza mapigano.",
+    "you_lower_lost": "Umehamisha kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kufikia kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia kina ngazi ya chini zaidi ya kipande cha kufikia, ulipoteza mapigano.",
+    "opponent_lower_won": "Mchezaji {player_id} wamehamisha kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kufikia kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia kina ngazi ya chini zaidi ya kipande cha kufikia, ulishinda mapigano."
+  },
+  "outcome": {
+    "flag_captured": "Wosewera {player_id} wagwira mbendera ya mdani!",
+    "no_movable_pieces": "Mchezaji {winner_id} anashinda! Mchezaji {loser_id} hana vipande vya kuhamishwa tena."
+  }
+}

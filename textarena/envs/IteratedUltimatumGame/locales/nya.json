@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "We ku Mcheza {player_id}, kukhala {num_rounds} mizinga ya Iterated Ultimatum Game.\nInu ndi ${pool} kupanga mizingu ili kati inu na Mcheza {other_id}.\n\nMlembi:\n  - Tengera chilango: [Offer: $X] (0 <= X <= pool)\n  - Ili ikhale ikupitidwa → Inu khala $(pool - X), mcheza wina khale $X\n  - Ili ikana → Awiri khala $0\n  - Mfano: [Offer: $3]  or  'Inaona ngati ina ngozi. [Offer: $5]'\n\nMlembi akuluza:\n  - Tengera chilango na [Accept] kapena [Reject]\n  - Mfano: 'Inaoneka ngati ina ngozi. [Accept]'\n            'Ino ndi laji. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Mizingu {round_number} yanayanza! ---\nMcheza {proposer_id} ndi mlembi, Mcheza {responder_id} ndi mlembi akuluza.",
+    "offer": "Mizingu {round_number}: Mcheza {proposer_id} anachilanga ${offer} kwa Mcheza {responder_id} (kuchira ${keep}).",
+    "accepted": "Mcheza {responder_id} ikupitidwa! Mizingu {round_number} ufumu: Mcheza {proposer_id} +${proposer_gain}, Mcheza {responder_id} +${responder_gain}. Jumla mpya: Mcheza 0: ${total_0}, Mcheza 1: ${total_1}.",
+    "rejected": "Mcheza {responder_id} ikana chilango! Mizingu {round_number} ufumu: Awiri ochira +$0. Jumla ilipo: Mcheza 0: ${total_0}, Mcheza 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Wopempha ayenera kupereka ntchito pogwiritsa ntchito mtundu wa [Offer: $X].",
+    "bad_integer": "Ndalama zimene akupereka ziyenera kukhala nambala yathunthu.",
+    "out_of_range": "Ndalama zimene akupereka ziyenera kukhala pakati pa $0 ndi ${pool}.",
+    "no_current_offer": "Palibe chopereka chamakono choti muyankhe.",
+    "accept_or_reject": "Mlembi akuluza [Accept] kapena [Reject] chilango."
+  },
+  "outcome": {
+    "win": "Mcheza {winner} wina ndi ${winner_total} jumla vs Mcheza {loser}'s ${loser_total}.",
+    "draw": "Osewera onsewa anamaliza ndi ${total} yonse."
+  }
+}

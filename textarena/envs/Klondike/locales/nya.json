@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "Mawonekedwe a zochita zosagwira ntchito. Zochita ziyenera kukhala m'malimagulu.",
+    "no_closing_bracket": "Mawonekedwe a chochitika chosagwira ntchito. Kusowa kwa bracket yotseka ']'",
+    "empty_command": "Lamulo lopanda kanthu. Lembani 'kujambula' kapena 'kusuntha <gwero> <cholinga> [count]'",
+    "empty_action": "Zochita zopanda kanthu",
+    "move_needs_args": "Kusuntha lamulo amafuna gwero ndi kopita. Kagwiritsidwe: 'kusunthira <gwero> <kopita> [count]'",
+    "count_positive": "Chiŵerengerocho chiyenera kukhala chabwino kapena \"onse\"",
+    "count_invalid": "Kuwerengera kosagwira ntchito. Gwiritsani ntchito nambala kapena 'onse'",
+    "unknown_command": "Unknown command '{cmd}'. Use 'draw', 'move <source> <destination> [count]', or 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Kuchita {n} kanthu ((s) asanafike kulephera.",
+    "failed": "Action {n} imeseka: {msg}"
+  },
+  "move_result": {
+    "drew": "Anatulutsa makadi a ndalamazo m'sitoloyo n'kuziponya.",
+    "cannot_draw": "Sitingathe kukoka, sitikhala ndi katundu kapena zinyalala.",
+    "invalid_pile": "Dzina la mulu losavomerezeka. Gwiritsani ntchito W, F1-F4, kapena T1-T7",
+    "foundation_one_card": "Mungasinthe khadi limodzi lokha ku maziko.",
+    "waste_to_foundation_ok": "Kusamutsidwa khadi kuchokera zinyalala ku maziko F{dst}",
+    "waste_to_foundation_bad": "Simungathe kusuntha khadi la zinyalala ku mulu wa mazikowo",
+    "tableau_to_foundation_ok": "Tinamiza kadi ku tableau T{src} ku foundation F{dst}",
+    "tableau_to_foundation_bad": "Simungathe kusuntha khadi la tableau ku mulu wa mazikowo",
+    "foundation_to_foundation": "Sangasinthe kuchokera ku maziko kupita kumalo ena",
+    "waste_to_tableau_one_card": "Mungasinthe khadi limodzi lokha kuchoka ku zinyalala kupita pa tebulo",
+    "waste_to_tableau_ok": "Kusamutsidwa khadi kuchokera zinyalala kwa tableau T{dst}",
+    "waste_to_tableau_bad": "Simungathe kuika khadi la zinyalala pa mulu wa tableau umenewo",
+    "no_face_up": "Palibe makadi oyang'ana mmwamba oti asunthidwe.",
+    "tableau_to_tableau_ok": "Tinamiza {count} kadi(s) ku tableau T{src} ku T{dst}",
+    "tableau_to_tableau_bad": "Siyikufunika kunamiza {count} kadi(s) ku T{src} ku T{dst}",
+    "foundation_to_tableau_one_card": "Mungasinthe khadi limodzi lokha kuchokera ku maziko kupita pa tebulo",
+    "foundation_empty": "Maziko F{src} ndi opanda kanthu.",
+    "foundation_to_tableau_ok": "Tinamiza kadi ku foundation F{src} ku tableau T{dst}",
+    "foundation_to_tableau_bad": "Sangathe kuika maziko khadi pa tableau T{dst}",
+    "to_waste_or_stock": "Sangathe kusamutsidwa ku zinyalala kapena katundu."
+  },
+  "outcome": {
+    "forfeit": "Masewerawa anathamangitsidwa. Zotsatira zomaliza: {score} makadi pamaziko.",
+    "won": "Tikukuyamikirani, mwapambana pa mpikisano wa Klondike Solitaire!",
+    "turn_limit": "Game imapa! Munalandira turn yaikulu ya {max_turns}. Score: {score} kadi mu foundations."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== (Munthu amene ali yekha)",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Zogulitsa: {stock} makadi",
+    "waste": "Zinyalala (W): {waste}",
+    "foundations_header": "Maziko:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Chithunzi: M'munsi ndi pansi.",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}
