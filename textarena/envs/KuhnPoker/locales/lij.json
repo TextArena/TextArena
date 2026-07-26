@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a {max_rounds} round game of Kuhn Poker.\nGame Rules:\n- Kuhn Poker uses a 3-card deck with J, Q, K (J lowest, K highest)\n- Each player antes {ante} chip and receives 1 card each round (note that the cards are dealt without replacement, so you cannot have the same card as your opponent).\n- Game continues for {max_rounds} rounds\n- The player with the most chips after all rounds wins\nAction Rules:\n- '[check]': Pass without betting (only if no bet is on the table)\n- '[bet]': Add 1 chip to the pot (only if no bet is on the table)\n- '[call]': Match an opponent's bet by adding 1 chip to the pot\n- '[fold]': Surrender your hand and let your opponent win the pot"
+  },
+  "init_round": {
+    "round_start": "### Inìçio do round {current_round} de {max_rounds} rounds. A tò card è: '{player_card}'",
+    "available_actions": "E teu açioin che ti gh'æ son: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Açion dovéiva êse [Check], [Bet], [Call], ò [Fold].",
+    "not_legal": "L'açion a deve ëse {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "E teu açioin dispoxibili son: {legal_actions}.",
+    "round_summary": "{reason} Puntuaçioin atuaî: Giugou 0: '{player_0_chips}'; Giugou 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "A-a fin de {max_rounds} tourni, tutti doî i zugadöi an avuo o mæximo numero de fiñe.",
+    "round_win": "O zugatô {player_id} o l'é sciortio.",
+    "winner_player0": "O zugatô 0 o l'à vinto avendo ciù fichas à a fin de tutte e {max_rounds} rie.",
+    "winner_player1": "O zugatô 1 o l'à vinto avendo ciù fichas à a fin de tutti i {max_rounds} tour."
+  }
+}

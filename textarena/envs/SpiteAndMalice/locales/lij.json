@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Tavoliêre atoale:\n\n{board}\nMövi disponibili: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pile de çentro -- ",
+    "pile": "{observation}Mögio {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vista do Giöatore {player_id} ---\n",
+    "payoff": "{observation}Mögio de paga (Càrta de däto): {top_card}, Lônghezza do Mögio de paga: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Mögi de scarto: {discard}\n",
+    "empty": "Empty"
+  },
+  "game_message": {
+    "no_cards_left": "No gh'é ciù de carte da levâ. Ti te ricordi che ti peu giou e carte di sti ponti: 1. a teu man 2. a carta in sciô çimma do tò pilato 3. a carta into çimmo d'un quæxi tutti i tocchi scartæ. "
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Player {player_id} no o l'à rispòsto co-a mossa valida inte parentexi quadræte.",
+    "invalid_play": "Zögò no valìo. Giöatore {player_id} o tentò de zögâ {card} into o mögio centrale {index}.",
+    "discard_from_payoff": "Discartamento invalido. O zugatô {player_id} o l'à provou à descartâ unna carta da pila de pagamento.",
+    "discard_not_in_hand": "Discartamento invalido. O zugatô {player_id} o l'à provou à discardâ unna carta ch'a no gh'é inta man.",
+    "wrong_move_type": "Tipo de mossa invalido. O zugatô {player_id} o no l'à rispòsto co-o tipo de mosse valido."
+  },
+  "game_action": {
+    "you_drew": "You drew cards.",
+    "opponent_drew": "O zugatô {player_id} o l'à tirou de carte.",
+    "you_played": "Ti t'æ zûgòu {card} in sciâ pila çentrâ {index}.",
+    "opponent_played": "O zugatô {player_id} o l'à zuòu {card} in sciâ pila çentrâ {index}.",
+    "you_discarded": "Ti te sei scartò {card} into o mögio de scarto {index}, o che vö dì che ti te sei finî o turn. Nisciün atro açión da parte toa a vëgnì consideä pe sto turn. Giöatore {next_player_id} o vegni dopo.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Giöatore {current_player} o l'é finî o mögio de paga! Giöatore {current_player} o vince!",
+    "deadlock_player_0": "Stallo razonso! Giöatore 0 o vince con {player_0_payoff} carte remanenti contra {player_1_payoff} carte do Giöatore 1.",
+    "deadlock_player_1": "Stallo razonso! Giöatore 1 o vince con {player_1_payoff} carte remanenti contra {player_0_payoff} carte do Giöatore 0.",
+    "deadlock_tie": "Stallo razonso con pari! Ambi giöatoî àn {player_0_payoff} carte remanenti. Giöatore {current_player} o vince pe defeito."
+  }
+}

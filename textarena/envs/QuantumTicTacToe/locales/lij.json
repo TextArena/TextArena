@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Quantum Tic Tac Toe.\nYour symbol is '{symbol}', and your move numbers are always {parity} (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Board:\n\n{board}\n\nInvia a ti mœuvi comme '[a,b]' pe placede 'n marchio quantico in doeux loxi."
+  },
+  "invalid_move": {
+    "wrong_format": "Formato invalido. Deuvia \"[a,b]\".",
+    "invalid_cells": "Indiçioin de çellole invalide ò duplicæ.",
+    "already_solidified": "Unna de quelle çellole a l'é za solidificâ."
+  },
+  "game_action": {
+    "placed": "Giœugadœ {player_id} a l'ha messo o seu simbolo in 'na superpoxiçion tra e celle {pos_a} e {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superpoxiçion dependente risolta. A cella ({r}, {c}) a l'è adessi {symbol}.",
+    "last_cell_resolved": "Superpoxiçion pe l'urtima cella risolta. A cella ({r}, {c}) a l'è adessi {symbol}.",
+    "superposition_resolved": "Superpoxiçion risolta. A cella ({r}, {c}) a l'è adessi {symbol}."
+  },
+  "outcome": {
+    "win": "O zugatô {player_id} o vinçe co-i segni solidificæ!",
+    "draw": "A partïa a l'é un pareggio!"
+  }
+}

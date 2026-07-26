@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Ti sei Giugou {player_id} into Nim.\nO teu obietìvo o l'è pigiâ l'ùrtimo ogètto rimàsto.\nInto cada vòlta, sélleghe exactly un mùggio e elimìna un ò ciù ogètti da lê.\nDêuviâ o fòrmato '[pile quantity]', dónde mùggio o l'è l'ìndice do mùggio e quantitæ a l'è o nùmero de ogètti da eliminâ.\nPe esèmpio, '[0 3]' elimìna 3 ogètti da-o mùggio 0."
+  },
+  "state": {
+    "current_pile": "A-a giornâ d'ancheu: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "No l'é stæto trovou nisciun formato de spostamento valido. Deuvia \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Player {player_id}, Invalid action. Column {col} is out of bounds.",
+    "out_of_range": "L'indiçio de pila {pile_index} o l'é feua da-o raggio.",
+    "non_positive": "Bòscia levâse de manco un oggetto.",
+    "exceeds_pile": "No se peu levâ {quantity} da pila {pile_index} (solo {pile_count} a-a manciña)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "O zugatô {player_id} o l'à piggiou l'urtimo oggetto!"
+  }
+}

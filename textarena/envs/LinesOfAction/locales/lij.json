@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "Commune: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "O formòu o deve êse e2e4 (da, a-a coordinæ).",
+    "no_piece": "No {side} peçça in sce {coord}.",
+    "identical": "A-a fonte e a destinaçion son pæge.",
+    "not_straight_or_diagonal": "A mossa a deve ëse drita ò diagonale.",
+    "wrong_distance": "L'é de beseugno che se spanteñe unna distansa pægia a-i tòcchi in linia.",
+    "enemy_blocks": "O fæto o l'é che unna peçça nemixa a blocca o cammin.",
+    "destination_own": "A destinaçion a l'é occupâ da-o seu pròpio pezo."
+  },
+  "game_action": {
+    "moved": "Giugou {player_id} o l'ha spostou {from} -> {to}",
+    "captured_suffix": "Giugou {player_id} o l'ha spostou {from} -> {to}, catturando un nemigo."
+  },
+  "outcome": {
+    "win": "Tutte e pòrte son ligæ.",
+    "draw_no_capture": "60 mosse sensa cattûa.",
+    "draw_repetition": "A poxiçion a l'é ripetiua træ vòtte."
+  }
+}

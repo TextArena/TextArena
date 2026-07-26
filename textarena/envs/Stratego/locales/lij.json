@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "Tavoliêre atoâle:\n\n{board}\nMövi disponibili: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato d'azione no valido. Giögaô {player_id} no l'à inserîo 'n möve into formato [A0 B0].",
+    "invalid_coordinates": "Formato d'açion invalido. O zugatô {player_id} o no l'à inserîo de coordinæ valide.",
+    "not_own_piece": "Invalid action format. Player {player_id} must move one of their own pieces.",
+    "scout_through_pieces": "Invalid action format. Player {player_id} no peu spostâ un scout tra e atre peççe.",
+    "scout_diagonal": "Invalid action format. Player {player_id} no peu spostâ un scout in diagonale.",
+    "non_scout_multi_square": "Invalid action format. Pieces, apart from scouts, can only move one square at a time.",
+    "move_into_lake": "Formato d'açion invalido. O zugatô {player_id} o no peu intrâ into lago.",
+    "move_onto_own_piece": "Invalid action format. Player {player_id} cannot move onto their own piece.",
+    "move_bomb_or_flag": "Formato d'açion invalido. O zugatô {player_id} o no peu spostâ unna bomba ò un drappo."
+  },
+  "game_action": {
+    "you_moved": "Ti te sæ spostòu o tö pezzo da {source} a {dest}.",
+    "opponent_moved": "Giögaô {player_id} o l'à spostòu 'n pezzo da {source} a {dest}.",
+    "you_equal_ranks": "Ti te sæ spostòu o tö pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto i graddi sòn uguali, amboi pezzi sòn stæti eliminaî.",
+    "opponent_equal_ranks": "Giögaô {player_id} o l'à spostòu 'n pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto i graddi sòn uguali, amboi pezzi sòn stæti eliminaî.",
+    "you_miner_defused": "Ti te sæ spostòu o tö pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto i minaôi pònn disinnescâ e bombe, ti à vinto a bataggia.",
+    "opponent_miner_defused": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As miners can defuse bombs, you lost the battle.",
+    "you_bomb_lost": "Ti te sæ spostòu o tö pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto l'atacante no l'è 'n minaô, ti à perduo a bataggia.",
+    "opponent_bomb_won": "Giögaô {player_id} o l'à spostòu 'n pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto l'atacante no l'è 'n minaô, ti à vinto a bataggia.",
+    "you_spy_won": "Ti te sæ spostòu o tö pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto l'atacante o l'è 'n spion e a destinaçion a l'è 'n maresciallo, ti à vinto a bataggia.",
+    "opponent_spy_lost": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a spy and the destination is a marshall, you lost the battle.",
+    "you_higher_won": "Ti te sæ spostòu o tö pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto l'atacante o l'è 'n graddo superiô a-o de destinaçion, ti à vinto a bataggia.",
+    "opponent_higher_lost": "Giögaô {player_id} o l'à spostòu 'n pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto l'atacante o l'è 'n graddo superiô a-o de destinaçion, ti à perduo a bataggia.",
+    "you_lower_lost": "Ti te sæ spostòu o tö pezzo da {source} a {dest}. O pezzo atacante o l'êa {target_rank} e o pezzo de destinaçion o l'êa {attacking_rank}. Into quanto l'atacante o l'è 'n graddo inferiô a-o de destinaçion, ti à perduo a bataggia.",
+    "opponent_lower_won": "Giögaô {player_id} o l'à spostòu 'n pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto l'atacante o l'è 'n graddo inferiô a-o de destinaçion, ti à vinto a bataggia."
+  },
+  "outcome": {
+    "flag_captured": "O zugatô {player_id} o l'à catturou a bandiera do conträio!",
+    "no_movable_pieces": "Giögaô {winner_id} o l'à vinto! Giögaô {loser_id} no gh'à ciù pezzi möobili."
+  }
+}

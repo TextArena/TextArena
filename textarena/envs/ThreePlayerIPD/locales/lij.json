@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ti sei Giocatô {player_id} in un Iterated Prisoner's Dilemma a 3 giocatoî. A partìa dûa {num_rounds} turni.\nStruttüa do turnu:\n• {conv_rounds} turni de chat libero\n• 1 turnu de decixion - invia un token pe ogni aversaio: '[<opp-id> cooperate]' o '[<opp-id> defect]' (cioè '[1 defect] [2 cooperate]'; o defeuto o l'é 'cooperate'). \nMatrice de payoff pe ciascheduna coppia (aplicâ a ogni coppia no ordinâ):\n  - Tutti coôperan  ->  {reward}\n  - Tutti defettan     ->  {punishment}\n  - Ti defettê, lô coôperan -> {temptation}\n  - Ti coôperi, lô defettan -> {sucker}\nO giocatô (ò giocatorî) co-o punteggio ciù alto a-a fin de tutti i turni o vince."
+  },
+  "round": {
+    "start": "─── Iniziando o Turnu {round} ───\tTi pôi conversâ liberamente pe-i prossimi {conv_rounds} turni.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Ronda {round} - Risòlti:",
+    "pair_line": "{observation}\n\t Giocatô {i} vs Giocatô {j} a scelto de {choice_i} e {choice_j} rispettivamente (Giocatô {i} o l'à guadagnou {gain_i}, Giocatô {j} o l'à guadagnou {gain_j})",
+    "scores_open": "{observation} -> Score attuæ: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation} açión de l'época"
+  },
+  "outcome": {
+    "final": "Final scores: {scores}.  Ranking groups (worst→best): {groups}"
+  }
+}

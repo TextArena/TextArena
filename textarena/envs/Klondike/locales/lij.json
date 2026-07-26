@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "Formato de l'açion invalido. L'açión a dovieiva êse tra parentexi.",
+    "no_closing_bracket": "Formato de l'açion invalido. Manca a parentexi pe-o serrâ \"]\"",
+    "empty_command": "Comando sciortio. Tipo \"draw\" ò \"move <source> <destination> [count]\".",
+    "empty_action": "Açion de no-n'acento",
+    "move_needs_args": "O comando move o domanda de origine e destinaçion. Uzo: \"move <source> <destination> [count]\"",
+    "count_positive": "O conteggio o deve ëse positivo ò \"tutti\"",
+    "count_invalid": "Conto invalido. Deuvia un numero ò \"tutti\"",
+    "unknown_command": "Comando sconosciuto '{cmd}'. Dêuvi 'draw', 'move <source> <destination> [count]', o 'forfeit'",
+    "wrapped": "Açion {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Açion {n}: {msg}",
+    "before_failure": "Executæ {n} açion ((s) primma do fallimento.",
+    "failed": "Açion {n} fallia: {msg}"
+  },
+  "move_result": {
+    "drew": "A l'é vegnua da-o stoc a-i scarti.",
+    "cannot_draw": "No se peu tirâ, tanto o stocco comme i refæ son sciortii.",
+    "invalid_pile": "Nomme de pila no valido. deuviâ W, F1-F4, ò T1-T7",
+    "foundation_one_card": "O peu solo spostâ unna carta a-a fondaçion.",
+    "waste_to_foundation_ok": "Carte fæta sciortî da-i scarti a-a fondaçion F{dst}",
+    "waste_to_foundation_bad": "No se peu spostâ a cartella de scarto in sce quella pila da fondaçion. 🔍",
+    "tableau_to_foundation_ok": "Carta spostâ da tableau T{src} a fondazione F{dst}",
+    "tableau_to_foundation_bad": "No se peu spostâ a carta de tavola in quella pila fondamentâ",
+    "foundation_to_foundation": "No se peu spostâ da-a fondaçion a l'atra.",
+    "waste_to_tableau_one_card": "O peu solo spostâ unna carta da-o scarto a-a tabella.",
+    "waste_to_tableau_ok": "Trasferîo da-a carta de scarto a-o tavolin T{dst}",
+    "waste_to_tableau_bad": "No se peu mette a cartella de scarto in sciâ pila do tabellon.",
+    "no_face_up": "No gh'é de carte a-a testa pe fâse spostâ.",
+    "tableau_to_tableau_ok": "Spostæ {count} carte da tableau T{src} a T{dst}",
+    "tableau_to_tableau_bad": "No se pœu spostâ {count} carte da T{src} a T{dst}",
+    "foundation_to_tableau_one_card": "O peu solo spostâ unna carta da-a fondaçion a-o tavolo.",
+    "foundation_empty": "A fondaçion F{src} a l'é sciortia.",
+    "foundation_to_tableau_ok": "Carta spostâ da fondazione F{src} a tableau T{dst}",
+    "foundation_to_tableau_bad": "No se peu mette a cartella de fondaçion in sciô tavolo T{dst}",
+    "to_waste_or_stock": "No se peu portâ a-i refugi ò à l'armatûa."
+  },
+  "outcome": {
+    "forfeit": "A partïa a l'é stæta perdua. Score finale: {score} carte in fondamenti.",
+    "won": "Congratulaçioin, ti l'æ guägno o Klondike Solitaire!",
+    "turn_limit": "Fìn do giögo! È stæto razzonto o màssimo de {max_turns} turni. Punti: {score} carte inte fondaziuin."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== O l'é stæto un di ciù belli.",
+    "turn": "Turno: {turn}/{max_turns}",
+    "stock": "Stòcca: {stock} cartellìnn-e",
+    "waste": "De scarto (W): {waste}",
+    "foundations_header": "Fondamenti:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Tabellon:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}
