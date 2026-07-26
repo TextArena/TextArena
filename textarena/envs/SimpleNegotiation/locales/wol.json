@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Jëfandikukat bi jéem na nangu ab soppi, waaye amul ay ndimbal yu mu soxla.",
+    "out_of_range": "Jigéen {player_id}, Dogu bu njaboot. Kolom {col} doomu nguurte.",
+    "already_full": "Player {player_id}, Invalid action. Column {col} is full.",
+    "proposing_with_no_resource": "Jëfandikukat bi {player_id} jéem na a def ab joxe-tànneef bu amul ay ndimbal yu soxla.",
+    "incorrect_offer_format": "Jëfandikukat bi {player_id} def na ab joxe-tànk bu baaxul.",
+    "no_new_offer": "Jëfandikukat {player_id} deful benn laaj bu bees."
+  },
+  "offers": {
+    "reject": "Jëfandikukat bi {player_id} gàntu na li ñu ko joxe.",
+    "accept": "Jigéen {acceptor_id} tàmbli nañu ko defar Player {proposer_id}.",
+    "proposal": "Jigéen {player_id} defar nañu ko ci Player {opponent_id}: Joxe: {offered} -> Yegg: {requested}"
+  },
+  "outcome": {
+    "win": "Jëfandikukat {winner_id} dañ koo jël ci am lu ëpp solo ci li mu war a def.",
+    "draw": "Wonees na ci li am solo ngir ñépp."
+  }
+}
