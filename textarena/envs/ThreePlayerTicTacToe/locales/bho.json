@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Three-Player Tic Tac Toe.\nYour symbol is '{symbol}'.\nYou take turns placing your symbol on a 5x5 board to form a line of four.\nLines can be horizontal, vertical, or diagonal.\nSubmit your move using the format '[4]' to mark cell 4."
+  },
+  "board": {
+    "current_board": "वर्तमान बोर्ड:\n\n{board}\n\nउपलब्ध चालें: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "अमान्य चाल प्रारूप। '[cell]' का उपयोग करें जहां सेल 0-{max_cell} है।",
+    "out_of_range": "अमान्य सेल संख्या: {cell}। 0 और {max_cell} के बीच होना चाहिए।",
+    "already_occupied": "Cell {cell} is already occupied.",
+    "made_invalid": "खिलाड़ी {player_id} एगो अवैध चाल कइलस."
+  },
+  "game_action": {
+    "placed": "प्लेयर {player_id} अपना प्रतीक ({symbol}) फील्ड ({row}, {col}) में रखता है।"
+  },
+  "outcome": {
+    "win": "प्लेयर {player_id} ({symbol}) जीतता है!",
+    "draw": "खेल तनी बराबरी पर चल गइल!"
+  }
+}

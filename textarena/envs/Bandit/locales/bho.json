@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "You are in a room with {num_buttons} buttons: {buttons}. Each button is associated with a Bernoulli distribution with a fixed but unknown mean; the means for the buttons could be different.\nFor each button, when you press it, you will get a reward that is sampled from associated distribution.\nYou have {num_turns} time steps and, on each time step, you can choose any button and receive the reward.\nYour goal is to strategically choose buttons at each time step to collect information about their reward distribution, that will let you choose the button with the highest mean reward correctly at the end of {num_turns} turns."
+  },
+  "board": {
+    "stat_line": "{button}: {reward} ({count} बार खेलल गइल)",
+    "summary": "सारांश: {stats}"
+  },
+  "invalid_move": {
+    "wrong_format": "खिलाड़ी एगो वैध क्रिया प्रारूप के साथ जवाब ना दिहलस.",
+    "invalid_button": "एगो अवैध बटन चुनल गइल बा."
+  },
+  "game_action": {
+    "pressed": "तुम {button} बटन दबैले आ तुम्हें {reward} के इनाम मिलल."
+  },
+  "game_message": {
+    "final_decision": "अब आप लोग आपन बजट के इस्तेमाल कइके अलग-अलग विकल्पन पर विचार करीं आ ओकर फायदा देखीं। तनी सोच लीं कि कौनों एगो तरीका सबसे अच्छा बा।"
+  },
+  "outcome": {
+    "win": "बधाई. रउआ सही बटन चुनले बानीं!",
+    "lose": "आप गलत बटन चुनलीं।"
+  }
+}

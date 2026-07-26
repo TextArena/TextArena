@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "आप प्लेयर {player_id} हैं जो पिग डाइस का खेल खेल रहे हैं.\n\nनियम:\n- अपनी बारी में, आप या तो '[roll]' या '[hold]'\n- 2-6 का रोल: अपने टर्न कुल में जोड़ें\n- 1 का रोल: टर्न कुल हारें और टर्न समाप्त करें\n- रोकें: टर्न कुल को स्कोर में जोड़ें और टर्न समाप्त करें\n- {winning_score} प्वाइंट्स तक पहुंचने वाला पहला जीतता है\n\nजब आपकी बारी होगी, तो आप वर्तमान स्कोर और टर्न कुल देखेंगे.\n'[roll]' के साथ प्रतिक्रिया दें डाइस रोल करने के लिए या '[hold]' अपने प्वाइंट्स बैंक करने के लिए."
+  },
+  "invalid_move": {
+    "invalid_action": "अमान्य एक्शन फॉर्मेट. '[roll]' या '[hold]' का उपयोग करें."
+  },
+  "actions": {
+    "player_busted": "प्लेयर {player_id} बर्बाद हो गइल, {turn_total} प्वाइंट्स हार गइल!",
+    "player_hold": "Player {player_id} holds and banks {turn_total} points."
+  },
+  "board": {
+    "player": "प्लेयर 0: '{score_0}'; प्लेयर 1: '{score_1}'",
+    "current_total_scores": "वर्तमान कुल स्कोर: {scores}\nआपका वर्तमान टर्न कुल {turn_total} ह.",
+    "roll_history": "{observation}\nआपका इस टर्न के लिए रोल इतिहास: {roll_history}",
+    "first_roll": "{observation} इ राउर पहिला रोल बा.",
+    "available_actions": "{observation}\nउपलब्ध एक्शन: '[roll]' या '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "प्लेयर {winner_id} {scores} (टर्न सीमा) पर उच्च स्कोर के साथ जीत गइल",
+    "winner_by_score": "प्लेयर {winner_id} {winning_score} के लक्ष्य स्कोर तक पहुंचकर जीत गइल!",
+    "draw": "पासा के सीमा पहुँच गइल बा आ सभ खेलाड़ी लोग बराबर स्कोर रखले बाड़ें: {scores}"
+  }
+}
