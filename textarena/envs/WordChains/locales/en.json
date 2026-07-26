@@ -1,0 +1,30 @@
+{
+  "_comment": "English locale for Word Chains. Keys (left) are fixed; translate only the values (right). Keep every {placeholder} verbatim, keep the square-bracket examples like '[apple]' and '[monkey]' intact (players wrap words in square brackets), and keep any single-letter tokens neutral.",
+  "_slots": {
+    "{player_id}": "Player number (integer)",
+    "{word}": "A word (the current/starting word or a submitted word)",
+    "{start_letter}": "The single letter the next word must start with",
+    "{length}": "Required length of the next word (integer)",
+    "{count}": "Number of characters in the submitted word (integer)"
+  },
+
+  "prompt": {
+    "intro": "You are Player {player_id} in the Word Chains Game.\nPlayers take turns to provide valid English words that:\n1. Start with the last letter of the previous word\n2. Must be longer than the previous word\n3. Cannot be a word that was previously used\n\nIf you provide an invalid word, repeat a word, or fail to follow the rules, you lose.\nPlease wrap your word in square brackets, e.g., '[apple]', '[monkey]', etc.\nThe starting word is [{word}]."
+  },
+
+  "board": {
+    "next_word": "Next word must:\n1. Start with '{start_letter}'\n2. Be exactly {length} letters long"
+  },
+
+  "message": {
+    "played": "Player {player_id} played: [{word}]"
+  },
+
+  "invalid": {
+    "wrong_format": "Player {player_id} did not provide a word in the valid format.",
+    "wrong_length": "The word must be exactly {length} letters long. '{word}' has {count} characters.",
+    "wrong_start": "The word must start with '{start_letter}'.",
+    "not_a_word": "'{word}' is not a valid English word.",
+    "already_used": "The word '{word}' has already been used."
+  }
+}
