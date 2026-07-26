@@ -110,7 +110,7 @@ If you have any questions at all, feel free to reach out on discord. The below i
 
 ### Low-resource community localizations
 
-Beyond the human-reviewed languages, TextArena includes **57 additional low-resource UI localizations** produced with open machine-translation models and checked by an automatic, *reader-free* verifier: each string is translated, independently back-translated by two other models, and an LLM judges faithfulness against the English source. **No claim is made of native-review quality.** Every back-translation-confirmed divergence is **reverted to English**, so no *known*-wrong string ships; the counts below are how many leaves were reverted (a proxy for residual risk). Each language carries an explicit **confidence tier**. At runtime, `textarena.utils.locales.language_confidence.warn_if_flagged(lang)` emits a `UserWarning` for any non-certified locale; the machine-readable source is [`_trackb_confidence.json`](textarena/utils/locales/_trackb_confidence.json).
+Beyond the human-reviewed languages, TextArena includes **71 additional low-resource UI localizations** produced with open machine-translation models and checked by an automatic, *reader-free* verifier: each string is translated, independently back-translated by two other models, and an LLM judges faithfulness against the English source. **No claim is made of native-review quality.** Every back-translation-confirmed divergence is **reverted to English**, so no *known*-wrong string ships; the counts below are how many leaves were reverted (a proxy for residual risk). Each language carries an explicit **confidence tier**. At runtime, `textarena.utils.locales.language_confidence.warn_if_flagged(lang)` emits a `UserWarning` for any non-certified locale; the machine-readable source is [`_trackb_confidence.json`](textarena/utils/locales/_trackb_confidence.json).
 
 **Certified-flagged** (4) — verified; a few games flagged:
 
@@ -121,11 +121,12 @@ Beyond the human-reviewed languages, TextArena includes **57 additional low-reso
 | Gujarati (`gu`) | CERTIFIED_FLAGGED | ~97% | 22 | Alquerque, Breakthrough, Briscola, Crusade +14 more |
 | Belarusian (`be`) | CERTIFIED_FLAGGED | ~97% | 26 | Battleship, Breakthrough, Briscola, Chopsticks +16 more |
 
-> ⚠️ **Experimental** (53) — structurally valid and playable, but the prose is **not certified** and likely contains further errors the verifier missed. Use for coverage/research, not as a reference translation:
+> ⚠️ **Experimental** (67) — structurally valid and playable, but the prose is **not certified** and likely contains further errors the verifier missed. Use for coverage/research, not as a reference translation:
 
 | Language | Tier | Translated coverage | Confirmed (reverted) | Flagged games |
 |---|---|---|---|---|
 | Marathi (`mr`) | EXPERIMENTAL | ~94% | 31 | Checkers, ColonelBlotto, Cryptarithm, FifteenPuzzle +19 more |
+| Esperanto (`epo`) | EXPERIMENTAL | ~92% | 33 | Blackjack, Checkers, Chopsticks, ColonelBlotto +19 more |
 | Pashto (`ps`) | EXPERIMENTAL | ~92% | 36 | Breakthrough, Checkers, Chopsticks, ColonelBlotto +21 more |
 | Telugu (`te`) | EXPERIMENTAL | ~92% | 38 | Blackjack, Breakthrough, Briscola, Checkers +24 more |
 | ceb (`ceb`) | EXPERIMENTAL | ~88% | 38 | Bandit, Battleship, Blackjack, Briscola +25 more |
@@ -147,16 +148,20 @@ Beyond the human-reviewed languages, TextArena includes **57 additional low-reso
 | Kazakh (`kk`) | EXPERIMENTAL | ~88% | 66 | Alquerque, Bandit, Battleship, Breakthrough +33 more |
 | Odia (`or`) | EXPERIMENTAL | ~88% | 70 | Alquerque, Briscola, Checkers, Chess +36 more |
 | Burmese (`my`) | EXPERIMENTAL | ~88% | 70 | Alquerque, Briscola, ColonelBlotto, Countdown +30 more |
+| Scottish Gaelic (`gla`) | EXPERIMENTAL | ~84% | 70 | Alquerque, Battleship, Breakthrough, Briscola +36 more |
 | Somali (`so`) | EXPERIMENTAL | ~88% | 71 | Alquerque, Bandit, Battleship, Breakthrough +37 more |
 | Amharic (`am`) | EXPERIMENTAL | ~83% | 71 | Alquerque, Blackjack, Breakthrough, Briscola +32 more |
 | Crimean Tatar (`crh`) | EXPERIMENTAL | ~86% | 71 | Blackjack, Breakthrough, Briscola, Checkers +38 more |
 | North Levantine Arabic (`apc`) | EXPERIMENTAL | ~88% | 71 | Alquerque, Battleship, Blackjack, Breakthrough +39 more |
+| Friulian (`fur`) | EXPERIMENTAL | ~86% | 74 | Alquerque, Battleship, Blackjack, Breakthrough +39 more |
 | South Levantine Arabic (`ajp`) | EXPERIMENTAL | ~88% | 75 | Alquerque, Blackjack, Breakthrough, Briscola +40 more |
+| Irish (`gle`) | EXPERIMENTAL | ~87% | 75 | Battleship, Blackjack, Breakthrough, Briscola +36 more |
 | Bhojpuri (`bho`) | EXPERIMENTAL | ~86% | 78 | Alquerque, Bandit, Battleship, Blackjack +43 more |
 | Balinese (`ban`) | EXPERIMENTAL | ~87% | 79 | Alquerque, Bandit, Battleship, Blackjack +41 more |
 | Malagasy (`mg`) | EXPERIMENTAL | ~87% | 80 | Bandit, Blackjack, Breakthrough, Briscola +42 more |
 | Kyrgyz (`ky`) | EXPERIMENTAL | ~87% | 82 | Alquerque, Battleship, Blackjack, Breakthrough +44 more |
 | Acehnese (`ace`) | EXPERIMENTAL | ~86% | 83 | Alquerque, Bandit, Battleship, Blackjack +41 more |
+| Faroese (`fao`) | EXPERIMENTAL | ~85% | 85 | Bandit, Breakthrough, Briscola, Checkers +33 more |
 | Mesopotamian Arabic (`acm`) | EXPERIMENTAL | ~86% | 90 | Alquerque, Bandit, Blackjack, Breakthrough +39 more |
 | Moroccan Arabic (`ary`) | EXPERIMENTAL | ~85% | 95 | Alquerque, Bandit, Battleship, Blackjack +40 more |
 | Awadhi (`awa`) | EXPERIMENTAL | ~84% | 98 | Alquerque, Battleship, Breakthrough, Briscola +47 more |
@@ -169,15 +174,24 @@ Beyond the human-reviewed languages, TextArena includes **57 additional low-reso
 | Mongolian (`mn`) | EXPERIMENTAL | ~81% | 134 | Alquerque, Battleship, Blackjack, Breakthrough +49 more |
 | Basque (`eu`) | EXPERIMENTAL | ~80% | 137 | Battleship, Blackjack, Breakthrough, Briscola +47 more |
 | Bashkir (`bak`) | EXPERIMENTAL | ~75% | 141 | Alquerque, Bandit, Battleship, Blackjack +48 more |
+| Fijian (`fij`) | EXPERIMENTAL | ~74% | 154 | Alquerque, Bandit, Battleship, Blackjack +49 more |
 | Buginese (`bug`) | EXPERIMENTAL | ~78% | 155 | Alquerque, Bandit, Battleship, Blackjack +48 more |
 | Yoruba (`yo`) | EXPERIMENTAL | ~78% | 162 | Alquerque, Battleship, Blackjack, Briscola +46 more |
+| Guarani (`grn`) | EXPERIMENTAL | ~75% | 168 | Alquerque, Bandit, Battleship, Blackjack +56 more |
+| West Central Oromo (`gaz`) | EXPERIMENTAL | ~69% | 179 | Alquerque, Bandit, Battleship, Blackjack +55 more |
 | South Azerbaijani (`azb`) | EXPERIMENTAL | ~73% | 182 | Alquerque, Bandit, Battleship, Blackjack +59 more |
 | Standard Tibetan (`bod`) | EXPERIMENTAL | ~65% | 223 | Alquerque, Bandit, Battleship, Blackjack +54 more |
+| Ewe (`ewe`) | EXPERIMENTAL | ~65% | 241 | Alquerque, Battleship, Blackjack, Breakthrough +56 more |
+| Nigerian Fulfulde (`fuv`) | EXPERIMENTAL | ~65% | 241 | Alquerque, Bandit, Battleship, Blackjack +56 more |
+| Dzongkha (`dzo`) | EXPERIMENTAL | ~63% | 241 | Alquerque, Bandit, Battleship, Blackjack +56 more |
 | Central Aymara (`ayr`) | EXPERIMENTAL | ~66% | 246 | Alquerque, Bandit, Blackjack, Breakthrough +55 more |
 | Bambara (`bam`) | EXPERIMENTAL | ~63% | 256 | Alquerque, Bandit, Battleship, Blackjack +57 more |
 | Bemba (`bem`) | EXPERIMENTAL | ~61% | 283 | Alquerque, Bandit, Battleship, Blackjack +59 more |
 | Akan (`aka`) | EXPERIMENTAL | ~58% | 288 | Alquerque, Bandit, Battleship, Blackjack +57 more |
+| Southwestern Dinka (`dik`) | EXPERIMENTAL | ~59% | 295 | Alquerque, Bandit, Battleship, Blackjack +56 more |
+| Fon (`fon`) | EXPERIMENTAL | ~56% | 323 | Alquerque, Bandit, Battleship, Blackjack +57 more |
 | Chokwe (`cjk`) | EXPERIMENTAL | ~53% | 367 | Alquerque, Bandit, Battleship, Blackjack +57 more |
+| Dyula (`dyu`) | EXPERIMENTAL | ~46% | 411 | Alquerque, Bandit, Battleship, Blackjack +58 more |
 
 Languages move from experimental to certified as verification improves; the list grows over time.
 
