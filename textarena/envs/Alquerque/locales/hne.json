@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} ({piece}). Opponent is ({opp}).\nSubmit moves as '[a2 a3]' (from → to).\n- A normal move is one forward step to an adjacent empty vertex.\n- A capture is a jump over an adjacent enemy piece landing on the empty node beyond.\nEach capture yields {score_per_capture} points.\nGame ends after {max_moves} moves or when a player has no legal move."
+  },
+  "board": {
+    "current_board": "चलन #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "खराब प्रारूप। '[a2 a3]' का उपयोग करव.",
+    "unknown_square": "अज्ञात वर्ग. (अज्ञात वर्ग)",
+    "not_your_piece": "स्रोत आपके टुकड़ा नी हवय।",
+    "dest_not_empty": "गंतव्य खाली नी हवय।",
+    "illegal": "अवैध चाल."
+  },
+  "game_action": {
+    "captured": "प्लेयर {player_id} एक टुकड़ा पकड़ लिया है! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "खिलाड़ी {player_id} के करा कोई टुकड़ा नी हवय।",
+    "cannot_move": "खिलाड़ी {player_id} ह स्थानांतरित नी कर सकत हवय।",
+    "higher_score": "उच्च कैप्चर स्कोर.",
+    "move_limit": "गति सीमा तक पहुंच गए।"
+  }
+}

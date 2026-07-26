@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Welcome to Frozen Lake!\n\nYou are represented by 'P' on the grid.\nGrid symbols:\n  ' ' = Frozen surface (safe to walk on)\n  'H' = Hole (fall in and lose!)\n  'G' = Goal (reach this to win!)\n  'P' = Your current position\n\nAvailable actions: up, down, left, right (or w, a, s, d)\nType your action as: [up], [down], [left], [right] or [w], [a], [s], [d]\n\nObjective: Navigate from the start (top-left) to the goal (bottom-right) without falling into any holes!\n"
+  },
+  "board": {
+    "current_board": "वर्तमान बोर्ड:\n\n{board}\n\nउपलब्ध क्रियाएँ: {actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "अमान्य क्रिया प्रारूप। [up], [down], [left], [right] या [w], [a], [s], [d] का उपयोग करें।",
+    "unknown_action": "अज्ञात कार्रवाई '{action}'. ऊपर, नीचे, बाएं, दाएं या डब्ल्यूएएसडी का उपयोग करें।",
+    "hit_wall": "आप ह {action} चले के कोसिस करेव पर एक ठन दीवार म टकरा गे!"
+  },
+  "game_action": {
+    "moved": "आपने {action} को स्थिति ({row}, {col}) में ले जाया।"
+  },
+  "outcome": {
+    "win": "बधाई हो! आप लक्ष्य तक पहुंच गए हावे।",
+    "fell_in_hole": "आप एक छेद म गिर गए! गेम खत्म. आपने लक्ष्य तक यात्रा के {pct}% पूरा कर लिया। अब, यदि हम शून्य प्रतिशत ले अधिक हो जाएं तो क्या होगा?",
+    "turn_limit": "You reached the turn limit! Game over. You completed {pct}% of the journey to the goal."
+  }
+}

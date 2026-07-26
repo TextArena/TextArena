@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "अमान्य कार्रवाई प्रारूप. क्रिया कोष्ठक म होना चाहि।",
+    "no_closing_bracket": "अवैध कार्रवाई प्रारूप। बंद करे बर ब्रैकट गायब हवय ']'",
+    "empty_command": "खाली कमांड. टाइप 'draw' या 'move <source> <destination> [count]'<स्रोत> <गंतव्य> ले जाना \"।",
+    "empty_action": "खाली करे कार्रवाई",
+    "move_needs_args": "मूव कमांड के स्रोत अउ गंतव्य के जरूरत होत हवय । उपयोगः 'मूव <सोर्स> <गंतव्य> [count]'",
+    "count_positive": "गिनती सकारात्मक या 'सभी' होनी चाहिए।",
+    "count_invalid": "अमान्य गिनती. एक संख्या या 'सभी' का उपयोग करें",
+    "unknown_command": "अज्ञात आदेश '{cmd}'. 'draw', 'move <source> <destination> [count]', या 'forfeit' का उपयोग करें",
+    "wrapped": "कार्यवाही {n}: {msg}"
+  },
+  "action_result": {
+    "success": "कार्यवाही {n}: {msg}",
+    "before_failure": "विफलता ले पहीली निष्पादित {n} कार्रवाई।",
+    "failed": "कार्यवाही {n} विफल: {msg}"
+  },
+  "move_result": {
+    "drew": "स्टॉक ले कचरा तक कार्ड खींचे गए।",
+    "cannot_draw": "खींचा नई जा सकय. भंडार अउ अपशिष्ट दुनो खाली हंवय ।",
+    "invalid_pile": "अमान्य पाइल नाम. डब्ल्यू, एफ 1-एफ 4, या टी 1 -टी 7 का उपयोग करें।",
+    "foundation_one_card": "केवल 1 कार्ड ल फाउंडेशन म स्थानांतरित कर सकत हंवय ।",
+    "waste_to_foundation_ok": "अपशिष्ट ले नींव म कार्ड स्थानांतरित करे गए एफ{dst}",
+    "waste_to_foundation_bad": "नींव ढेर बर अपशिष्ट कार्ड नई चल सकय",
+    "tableau_to_foundation_ok": "कार्ड को टेबल्यू T{src} से फाउंडेशन F{dst} में स्थानांतरित किया गया",
+    "tableau_to_foundation_bad": "नींव ढेर बर तालिका कार्ड नइ चल सकिस",
+    "foundation_to_foundation": "नींव ले नींव तक नई जा सकय",
+    "waste_to_tableau_one_card": "अपशिष्ट ले तालिका म केवल 1 कार्ड स्थानांतरित कर सकत हवय ।",
+    "waste_to_tableau_ok": "अपशिष्ट ले तालिका टी में स्थानांतरित कार्ड{dst}",
+    "waste_to_tableau_bad": "ओ टेबुल ढेर म अपशिष्ट कार्ड नी रख सकथे",
+    "no_face_up": "आगे बढ़े बर कोनो मुड़ ऊपर वाले कार्ड नी होए",
+    "tableau_to_tableau_ok": "{count} कार्ड(s) को टेबल्यू T{src} से T{dst} में स्थानांतरित किया गया",
+    "tableau_to_tableau_bad": "T{src} से T{dst} तक {count} कार्ड(s) स्थानांतरित नहीं किया जा सकता",
+    "foundation_to_tableau_one_card": "नींव ले तालिका म केवल 1 कार्ड स्थानांतरित कर सकत हंवय ।",
+    "foundation_empty": "फाउंडेशन एफ{src} खाली हवय।",
+    "foundation_to_tableau_ok": "कार्ड को फाउंडेशन F{src} से टेबल्यू T{dst} में स्थानांतरित किया गया",
+    "foundation_to_tableau_bad": "फाउंडेशन कार्ड को टेबल्यू T{dst} पर रखा नहीं जा सकता",
+    "to_waste_or_stock": "अपशिष्ट या स्टॉक म जगह नी ले जा सकय।"
+  },
+  "outcome": {
+    "forfeit": "खेल हार गए। अंतिम स्कोर: नींव म कार्ड {score} ।",
+    "won": "बधाई हो! आप क्लोन्डिके सोलिटेयर जीते हवय !",
+    "turn_limit": "गेम समाप्त! आपने {max_turns} पालियों की अधिकतम सीमा तक पहुंच गया. स्कोर: {score} कार्ड फाउंडेशन में."
+  },
+  "board": {
+    "title": "=== क्लोंडिक सोलिटेयर ===",
+    "turn": "पाली: {turn}/{max_turns}",
+    "stock": "स्टॉक: {stock} कार्ड्स अउ एस्केप के साथ।",
+    "waste": "अपशिष्ट (डब्ल्यू): {waste}",
+    "foundations_header": "नींव: अउ",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "तालिका:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

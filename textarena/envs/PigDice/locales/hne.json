@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing a game of Pig Dice.\n\nRules:\n- On your turn, you can either '[roll]' or '[hold]'\n- Roll a 2-6: Add to your turn total\n- Roll a 1: Lose turn total and end turn\n- Hold: Add turn total to your score and end turn\n- First to {winning_score} points wins\n\nWhen it's your turn, you'll see the current scores and turn total.\nRespond with '[roll]' to roll the die or '[hold]' to bank your points."
+  },
+  "invalid_move": {
+    "invalid_action": "अमान्य एक्शन फॉर्मेट। '[roll]' या '[hold]' का उपयोग करें।"
+  },
+  "actions": {
+    "player_busted": "प्लेयर {player_id} बस्ट हो गया, {turn_total} पॉइंट्स हार गए!",
+    "player_hold": "प्लेयर {player_id} होल्ड करता है और {turn_total} पॉइंट्स बैंक करता है।"
+  },
+  "board": {
+    "player": "Player 0: '{score_0}'; Player 1: '{score_1}'",
+    "current_total_scores": "वर्तमान कुल स्कोर: {scores}\nआपका वर्तमान टर्न कुल {turn_total} है।",
+    "roll_history": "{observation}\nआपका इस टर्न के लिए रोल इतिहास: {roll_history}",
+    "first_roll": "{observation} इ तोर बारी के पहिली रोल हे।",
+    "available_actions": "{observation}\nउपलब्ध एक्शन: '[roll]' या '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "प्लेयर {winner_id} टर्न लिमिट ({scores}) पर उच्च स्कोर होने पर जीत गया",
+    "winner_by_score": "प्लेयर {winner_id} {winning_score} के लक्ष्य स्कोर तक पहुंचने पर जीत गया!",
+    "draw": "पासा सीमा तक पहुंच गए हावे अउ जम्मो खिलाड़ियों के पास एक ही स्कोर हावे: {scores}"
+  }
+}
