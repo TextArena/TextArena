@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "INSHITA: {target}\n\nNambari zilipo:\n{numbers}",
+    "best": "{observation}\n\nBafikila kuwaba: {best_value} (distance: {distance})\nBafikila bane: {best_expression}",
+    "history": "{observation}\n\nMushipashi wa kubadila:\n{moves}",
+    "progress": "{observation}\nAlinshi kwamba kubadila: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Ifyalembwa fyabula ukufikapo. Fifwile ukuba ifyapusana kabili mu cifulo ca 0-{max_index}",
+    "invalid_operation": "Invalid operation (division by zero or non-integer result)"
+  },
+  "outcome": {
+    "win": "Icisuma! {target}",
+    "no_moves": "Tabadika kwakutumpa. Bafikila kuwaba: {best_value} (inshita: {target})",
+    "turn_limit": "Mipango ya kubadila imeshika. Bafikila kuwaba: {best_value} (inshita: {target})"
+  }
+}

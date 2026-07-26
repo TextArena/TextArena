@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Mwali uchukua Golf (Card Game) - Mwali {player_id}.\nLengo: Pata alama ya chini kabisa katika mzunguko huu. Ikiwa safu zina thamani sawa, zinajumlishwa kama 0.\nThamani za kadi: A=1, 2-10=thamani ya uso, J/Q=10, K=0\n\nHatua (tumia mabano kamili):\n- '[draw]' - Chora kutoka kwenye sitaha\n- '[take]' - Chukua kutoka kwenye discard pile\n- '[swap X Y]' - Badilisha kadi iliyochorwa na nafasi X (safu) Y (safu wima)\n- '[discard]' - Tupa kadi iliyochorwa"
+  },
+  "board": {
+    "drew": "You drew: {card}\nNow you must [swap X Y] or [discard] it.",
+    "took": "You took: {card} from discard pile\nYou must [swap X Y] with it (cannot discard).",
+    "peeked": "Mwali walitazama kwenye nafasi ({row},{col}): {card}",
+    "turn_view": "Lukasa lako:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Takwaba"
+  },
+  "options": {
+    "final_turns": "Mizunguko ya mwisho! Chaguo zako: [draw], [take], [peek X Y]",
+    "draw": "Chaguo zako: [draw], [take]",
+    "must_swap": "Mufwile: [swap X Y] (mwilapoosa amakardi ukufuma mu mulongo wa kusenda)",
+    "swap_or_discard": "Mwali alitaki: [swap X Y] or [discard]"
+  },
+  "hand": {
+    "no_cards": "Takwaba amakardi.",
+    "header": "Icipingo: 1 2 3",
+    "row": "Safu {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Mwali {pid} waliishibanyika {new} na {old} kwenye nafasi ({row},{col})",
+    "discarded": "Player {pid} discarded {card}"
+  },
+  "message": {
+    "deck_empty": "Deck is empty! Game ends immediately.",
+    "knocked": "Player {pid} knocked! Each other player gets one more turn.",
+    "final_round": "Player {pid} {reason}! Each other player gets one more turn."
+  },
+  "reason": {
+    "all_revealed": "has all cards revealed"
+  },
+  "invalid": {
+    "wrong_action": "Tumia hatua moja iliyo ndani ya mabano: [draw], [take], [swap X Y], [discard], [knock], or [peek X Y]",
+    "discard_empty": "The discard pile is empty!",
+    "must_draw_first": "You must first [draw], [take], [knock], or [peek X Y]",
+    "cannot_discard_taken": "You cannot discard a card taken from the discard pile. You must swap it.",
+    "have_drawn_card": "You have a drawn card. You must [swap X Y] or [discard] it.",
+    "need_drawn_swap": "You need a drawn card to swap.",
+    "need_drawn_discard": "You need a drawn card to discard.",
+    "out_of_bounds": "Nafasi iliyo nje ya mipaka. Tumia safu 1-{max_row}, safu wima 1-{max_col}",
+    "knock_with_card": "You cannot knock with a drawn card. Complete your turn first.",
+    "already_knocked": "Someone has already knocked this round.",
+    "already_revealed": "Iyi kardi yaishibikwe kale!"
+  },
+  "summary": {
+    "full": "Game Over! Player {winner} wins with a score of {score} points!\n\nFinal Scores:\n{scores}",
+    "line": "Mwali {pid}: {score} pointi\n"
+  },
+  "board_str": {
+    "title": "=== GOLF GAME=== (Ukulwisha ukuteya golufu)",
+    "discard": "Ukupoosa umutondo: {card}",
+    "knocked": "Player {pid} has knocked!",
+    "player_header": "Mwali {pid} (Alama: {score}):"
+  }
+}
