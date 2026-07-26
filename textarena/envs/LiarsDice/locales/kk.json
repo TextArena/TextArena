@@ -22,18 +22,18 @@
     "final_ranking": "list of player indices from first eliminated to winner"
   },
   "player_prompt": {
-    "intro": "You are Player {player_id} in an {num_players}-player Liar's Dice game.\nRules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\nIf you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins."
+    "intro": "Сіз {player_id} ойыншысыз {num_players} ойыншымен өтірікші құлақ ойынында. Ережелері: - Сіздің кезегіңізде: 1) Қазіргі ұсыныстан жоғары мөлшерде немесе жоғары бетпен (немесе екеуі де) жаңа ұсыныс жасай аласыз; яғни '[Bid: 3, 4]', 2) \"[Call]\" деп теріп, соңғы ұсынысты шақырыңыз. Егер сіз шақырсаңыз: - Егер барлық құлақтар арасындағы нақты бағаның нақты саны ұсыныстан аз болса, соңғы ұсыныс беруші бір құлақты жоғалтады. - Әйтпесе, шақырушы бір құлақты жоғалтады. 0 құлаққа жеткен ойыншы шығарылады. Соңғы қалған ойыншы жеңіп шығады."
   },
   "board": {
     "per_player": "Ойыншы {p}: {d}",
-    "new_round": "\nNew round - Remaining dice: {dice_summary}\nYour current Dice are: {your_dice}"
+    "new_round": "Жаңа раунд - Қалған шақ: {dice_summary} Сіздің қазіргі шақ: {your_dice}"
   },
   "call": {
-    "bidder_loses": "Player {current_player_id} calls! The actual count of face {face_value} is {count}, which is LESS than {quantity}.\nPlayer {loser_id} (the last bidder) loses one die.",
-    "caller_loses": "Player {current_player_id} calls! The actual count of face {face_value} is {count}, which is >= {quantity}.\nPlayer {loser_id} (the caller) loses one die."
+    "bidder_loses": "Ойыншы {current_player_id} шақырады! {face_value} нақты саны {count}, ол {quantity}-тен аз. Ойыншы {loser_id} (соңғы саудагер) бір тақтадан айырады.",
+    "caller_loses": "Ойыншы {current_player_id} шақырады! {face_value} бетінің нақты саны {count}, яғни >= {quantity}. Ойыншы {loser_id} (шақырушы) бір тақтаны жоғалтады."
   },
   "action": {
-    "bid_announce": "Player {player_id} bids {quantity} of face {face_value}."
+    "bid_announce": "Ойыншы {player_id} бет {quantity} {face_value}-тің ұсыныстарын береді."
   },
   "invalid_move": {
     "call_no_bid": "Бұрынғы ұсыныстарсыз жасалған қоңырау.",

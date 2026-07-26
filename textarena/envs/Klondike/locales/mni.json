@@ -16,7 +16,7 @@
     "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
   },
   "player_prompt": {
-    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+    "intro": "নহাক্না ক্লোন্দিকে সোলিতেয়র শান্নরি। অদোমগী পান্দমদি কার্দ পুম্নমক ফাউন্দেসন পাইলশিংদা হোংদোকপা অসিনি। গেম রুল্স: - ফাউন্দেশন পায়েলশিং (F1-F4): এসতগী কিং ফাওবা স্যুটতা শেমগৎ-শাগৎপীয়ু - তেবল্যু পাইলশিং (T1-T7): অহেনবা মচুশীং (অঙাদা অঙৌবা, অশংবা অমদা অকোয়বগী) শাফগদবা স্তোকঃ স্টকদগী কার্দনা মাংখিবা পাইলদা চংশিনবীয়ু. কাচিংবদা লৈবা খ্বাইদগী ৱাংবা কের্তা:- 'থারকউ' - ষ্টোক্তগী কার্তনা মাংহনবিয়ু - 'হোংলো <source><destination> [count]'- পেল্লশিংগী মরক্তা কার্দনবু লেপ্পি উনামদম ওইনা:' খোঙ্গংগী W T1', 'খোংলো T1 F2', 'খা ত্রিশু থোরক্নি T3 T5 2'। মসিসু ওইথোক্লোই মদুদি খুদিংমক মথংদা লাপ্নবা হোৎনগনি। - 'থাজিল লৌশিনবীদুনা' - হৌজিক্কী স্কোর অদুগা লোইশিল্লবা অমসুং গেমেন্ত তৌরিবা মমিংদা লোন্নবা - পিএল প্লে অসি ফংহনবা: Pile ৱাইলে (মা), থবক শুদ্রেল ওইবা F4-F1), থেংনরবা ফি (F1) । খজিক ওইবা পাইলদুদা য়াওনবা T7-টি (tকী T1-T7), য়াম্না য়ৌরাংখ্রবা য়াদ্রবা পাইলশিং শীজিন্নবা পাইলাদা থমগদবনি (W) - খেলফম থোক্লিবা মেজরদা লৈরিবা সর্বাধিক কার্ডপুদা শিজিন্নবা য়াই৷ করিগুম্বা মফম অমা লৈবদি মখোয় অমত্তা চৎথোক্ক তৌবা ঙম্নৈ; অতোপ্পা এক্সচেক্তুনা সেভিক্তা থাংগুম্বদা ত্রান্স পীখিগদগেট তৌরকই: \\\\n = \"তি\" হায়না খঙহল্লি।\""
   },
   "format_error": {
     "no_brackets": "এক্সনগী ফোর্মেট অসি ইনভেলদ ওই। একসন অদু ক্রেক্টতা লৈবা তাই.",
@@ -36,7 +36,7 @@
   },
   "move_result": {
     "drew": "স্তোকতগী দিস্কাস্ততা হাপচিনবা কার্দশিং।",
-    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "cannot_draw": "লৌশিনবা য়াদে। স্তোক অমসুং ৱেস্ত অনিমক মচি ওইবা ঙম্মি।",
     "invalid_pile": "য়াদবা পাইল মমিং. W, F1-F4, নত্রগা T1-T7 শিজিন্নৌ",
     "foundation_one_card": "ফাউন্দেসনদা কার্দ 1 খক্তমক হোংদোকপা য়াগনি.",
     "waste_to_foundation_ok": "ফুদরেৎতগী কার্দতা য়ুমফমদা হোংদোকপা F{dst}",
@@ -54,7 +54,7 @@
     "foundation_empty": "ফাউন্দেসন F{src} অসি খক্তা লৈরে.",
     "foundation_to_tableau_ok": "Moved card from foundation F{src} to tableau T{dst}",
     "foundation_to_tableau_bad": "তেবল T{dst}দা ফাউন্দেসন কার্দ হাপচিনবা য়াদে",
-    "to_waste_or_stock": "Cannot move to waste or stock"
+    "to_waste_or_stock": "ৱেস্ত নত্ত্রগা স্তোকতা হোংবা য়াদে"
   },
   "outcome": {
     "forfeit": "গেম অসি মাংখি। ফাইনেল স্কোর: {score} কার্দশিং অদু বেন্দমেন্তশিংদা লৈরে।",

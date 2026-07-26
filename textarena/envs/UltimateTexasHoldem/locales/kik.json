@@ -21,7 +21,7 @@
     "{winner_rounds}": "The number of rounds completed"
   },
   "player_prompt": {
-    "no_cards": "No cards yet",
+    "no_cards": "Gũtirĩ kaarĩ.",
     "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Mchezaji Mmoja dhidi ya Mwandishi\n\n📖 MUHTASARI WA MCHEZO:\n• Unaanza na {start_chips} chips\n• Sitaha moja ya kadi 52 (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Unacheza dhidi ya mwandishi (nyumba)\n• Kila raundi inafuata muundo wa Ultimate Texas Hold'em: unatoa ANTE na BLIND bets, unapokea kadi 2 za hole, unafanya uamuzi kuhusu bets za PLAY zinazoweza kuchaguliwa katika vipindi vya kuweka beti, kisha unaonyesha kadi za jumuiya na kulinganisha mkono wako bora zaidi wa kadi 5 dhidi ya ule wa mwandishi. Lengo lako ni kuongeza ushindi wako (unapokuwa na mkono bora zaidi), wakati huo huo ukipunguza hasara zako (unapokuwa na mkono mbaya zaidi).\n• Mchezo hukamilika unapofikia chips 0 au chini ya hapo mwanzoni mwa raundi (HASARA) au ukamilishe raundi 1000 na chips (USHINDI)\n\n💰 MUUNDO WA KUWEKA BETI:\n• ANTE: Beti ya lazima ${ante} kila raundi\n• BLIND: Beti ya lazima ${ante} kila raundi\n• PLAY: Beti ya chaguo wakati wa mchezo. Katika muda wa raundi, unaweza kuchagua MOJA tu ya yafuatayo: (${ante4} ikiwa itafanywa katika PRE-FLOP, ${ante2} ikiwa itafanywa katika FLOP, au ${ante} ikiwa itafanywa katika RIVER. Pia unaweza kufunga katika mto, kuacha mkono, na kufanya beti yoyote.)\n\n🎴 KUGAWANYA KADI:\n• Unapokea kadi 2 za uso juu (kadi zako za hole)\n• Mwandishi anapokea kadi 2 za uso chini (zilizofichwa kutoka kwako)\n• Kadi 5 za jumuiya zinagawanywa uso chini mwanzoni\n• Kadi za jumuiya zinaonyeshwa kwa njia ya hatua kwa hatua kupitia vipindi vya mchezo\n\n🏆 KUFuzu KWA MWANDISI:\n• Mwandishi lazima awe na angalau PAIR (kadi 2 za kiwango sawa) ili kufuzu, kwa kutumia kadi 2 katika mkono wake na kadi 5 za jumuiya.\n• Kufuzu kwa mwandishi kunahusiana na matokeo ya kuweka beti, kama ilivyoelezwa baadaye.\n\n🎮 VIPINDI VYA MCHEZO & VITENDO:\n📋 PRE-FLOP:\n  • Vitendo: [4x] (${ante4}) au [check]\n  • [4x]: Weka ${ante4} beti ya PLAY, onyesha kadi 3 za kwanza za jumuiya\n  • [check]: Hakuna beti ya ziada, onyesha kadi 3 za kwanza za jumuiya\n\n📋 FLOP:\n  • Ikiwa beti ya 4x imewekwa: [skip] pekee inapatikana (inaonyesha kadi 2 za mwisho za jumuiya kiotomatiki)\n  • Ikiwa hakuna beti ya 4x: [2x] (${ante2}) au [check]\n  • [2x]: Weka ${ante2} beti ya PLAY, onyesha kadi 2 za mwisho za jumuiya\n  • [check]: Hakuna beti ya ziada, onyesha kadi 2 za mwisho za jumuiya\n\n📋 RIVER:\n  • Ikiwa beti ya 4x au 2x imewekwa: [skip] pekee inapatikana (inaendelea kiotomatiki hadi kufichua)\n  • Ikiwa hakuna beti ya PLAY iliyotangulia: [1x] (${ante}) au [fold]\n  • [1x]: Weka ${ante} beti ya PLAY, endelea hadi kufichua\n  • [fold]: Acha mkono, poteza bets za ANTE na BLIND\n\n📋 SHOWDOWN:\n  • Kadi zote zinaonyeshwa na kutathminiwa\n  • Mkono bora zaidi wa kadi 5 kutoka kwa kadi 7 (2 za hole + 5 za jumuiya)\n  • Bets zinatatuliwa kulingana na kanuni za malipo\n\n💎 MALipo YA BETI:\n📊 ANTE BET:\n  • Mwandishi hajafuzu: PUSH (beti inarudishwa)\n  • Mwandishi amefuzu & unashinda: Malipo ya 1:1 (beti + ushindi)\n  • Mwandishi amefuzu & unapoteza: Beti imepotea\n  • Tie: PUSH (beti inarudishwa)\n\n📊 BLIND BET:\n  • Haiathiriwi na kufuzu kwa mwandishi\n  • Unashinda: Beti inarudishwa na malipo ya ziada kulingana na nguvu ya mkono wako\n  • Unapoteza: Beti imepotea\n  • Tie: PUSH (beti inarudishwa)\n\n📊 MEZA YA MALIPO YA BLIND BET:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Chini ya Straight: Hakuna malipo ya ziada\n\n📊 PLAY BET:\n  • Haiathiriwi na kufuzu kwa mwandishi\n  • Ulinganisho wa moja kwa moja: Mkono wako bora dhidi ya ule wa Mwandishi\n  • Unashinda: Malipo ya 1:1 (beti + ushindi)\n  • Unapoteza: Beti imepotea\n  • Tie: PUSH (beti inarudishwa)\n\n🎯 CHEO ZA MKONO WA POKER (Bora hadi Mbaya):\n  1. Royal Flush: A-K-Q-J-10 za suti moja\n  2. Straight Flush: Kadi 5 mfululizo za suti moja\n  3. Four of a Kind: Kadi 4 za kiwango sawa\n  4. Full House: 3 za aina moja + 2 za aina moja\n  5. Flush: Kadi 5 za suti moja\n  6. Straight: Kadi 5 mfululizo\n  7. Three of a Kind: Kadi 3 za kiwango sawa\n  8. Two Pair: Jozi 2 za kiwango tofauti\n  9. One Pair: Kadi 2 za kiwango sawa\n  10. High Card: Kadi ya juu inashinda\n\n⌨️ AMRI ZA KUTENDA:\n• [4x] au [play bet 4x]: Weka ${{self.ante_amount*4}} beti ya PLAY\n• [2x] au [play bet 2x]: Weka ${{self.ante_amount*2}} beti ya PLAY\n• [1x] au [play bet 1x]: Weka ${{self.ante_amount*1}} beti ya PLAY\n• [check] au [c]: Angalia (hakuna beti ya ziada)\n• [fold] au [f]: Funga (acha mkono)\n• [skip] au [s]: Sogeza hadi hatua inayofuata (wakati hakuna hatua inayohitajika)\n\n💡 VIDokezo VYA MKAKATI:\n• Mikono bora ya kuanzia (jozi, kadi za juu) mara nyingi hufaa bets za 4x\n• Zingatia kufuzu kwa mwandishi - mikono dhaifu inaweza kusukuma ikiwa mwandishi hajafuzu\n• Beti ya BLIND inaweza kuwa ya faida kubwa na mikono bora (Royal Flush = 500:1!)\n• Angalia kizimba chako cha chips! Ikiwa inapungua hadi 0 au chini mwanzoni mwa raundi, unapoteza.\n\n⚠️  TAARIFA ZA MUHIMU:\n• Bets za ANTE na BLIND ni za lazima kila raundi\n• Bets za PLAY ni za chaguo na za mkakati\n• Hakikisha kuwa unatoa hatua sahihi, na hatua moja kwa wakati mmoja.\n\n",
     "state": "🎯 ROUND {round}\n💰 Chips: {chips}\n🎴 Your hand: {hand}\n📊 Current bets: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Phase: {phase}\n🎯 Available actions: {actions}\n\n"
   },
@@ -36,39 +36,39 @@
     "message": " Kĩama gĩtarĩ kĩagĩrĩire! Ciĩko iria irĩ ho: {available}"
   },
   "action": {
-    "folded": "🃏 You folded."
+    "folded": " Ũrĩ kũhũyũka."
   },
   "showdown": {
-    "dealer_hand": "🏁 SHOWDOWN! Dealer's hand: {cards}",
-    "community_cards": "🃏 Community cards: {cards}",
+    "dealer_hand": " RĨAKA! Guoko kwa mũgũnda: {cards}",
+    "community_cards": " Kaarĩ ka rũrĩrĩ: {cards}",
     "player_best": "🎴 Player's best hand: {name} ({cards})",
     "dealer_best": "🎴 Dealer's best hand: {name} ({cards})",
-    "ante_lost_folded": "❌ ANTE bet LOST! -${ante} (folded)",
-    "blind_lost_folded": "❌ BLIND bet LOST! -${blind} (folded)",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (kũgũtha)",
+    "blind_lost_folded": " GĨKARATHI KŨRUTHA! -${blind} (kĩrũngĩtwo)",
     "ante_won": "✅ ANTE bet WON! +${amount} Gũthondeka mũbango wa gũcokia mbeca na njĩra ya kũhũthĩra mbũri nĩ ũndũ mwega.",
     "ante_pushed": " ANTE bet PUSHED! ${ante} nĩ acokire na thutha.",
-    "ante_lost": "❌ ANTE bet LOST! -${ante}",
+    "ante_lost": " GĨKARATHI KŨRUTHAGWO! -${ante}",
     "blind_won": "✅ MŨGĨRANIA wa kĩronda nĩ ũhootanĩte! +${amount}",
-    "blind_pushed": "🔄 BLIND bet PUSHED! ${blind} returned",
-    "blind_lost": "❌ BLIND bet LOST! -${blind}",
+    "blind_pushed": " MŨGĨRANIA WA GUTHAKANA ŨTAGA! ${blind} nĩ acokire.",
+    "blind_lost": " MŨGĨRANIA nĩ aateire! -${blind}",
     "play_won": "✅ GĨTŨGĨRA nĩ ũhootanĩte! +${amount}",
     "play_pushed": " GĨKARATHI KŨRUTWO! ${play} nĩ kĩarutirũo",
-    "play_lost": "❌ PLAY bet LOST! -${play}",
+    "play_lost": " GĨTEKŨMBA KARATHI KAGAME! -${play}",
     "net_gain": "🎉 Raundi {round} imekamilika! Ushindi wa net: +${net}",
     "net_loss": "💸 Raundi {round} imekamilika! Hasara ya net: ${net}",
     "separator": "──────────────────────────────────────────────────"
   },
   "outcome": {
     "game_over_win": "🏁 GAME OVER! {max_turns} raundi zimekamilika. Una ${chips} chips - UMESHINDA!",
-    "game_over_lose": "🏁 GAME OVER! You're out of chips. Dealer wins!",
+    "game_over_lose": "GĨTŨMBA KĨA MWAKI: Ũrĩ na tũbũyũ twa mũcaara, ũrĩa ũgũtigithania nĩ agaacinda!",
     "reward_win": "Mchezaji alikamilisha {winner_rounds} raundi na ${chips} chips",
-    "reward_lose": "Player ran out of chips in round {round}",
+    "reward_lose": "Mũgambo watigire ndemwa cia mũhiano {round}",
     "reward_win_max": "Mchezaji alikamilisha {max_turns} raundi na ${chips} chips"
   },
   "hand_names": {
-    "royal_flush": "Royal Flush",
-    "straight_flush": "Straight Flush",
-    "four_of_a_kind": "Four of a Kind",
+    "royal_flush": "Mũthamaki wa Gũthaka",
+    "straight_flush": "Gũthambia Mĩtambo na Njĩra ya Mahĩndĩ",
+    "four_of_a_kind": "Ng'ano Inya cia Mũthemba Ũmwe",
     "full_house": "Nyũmba Yiyũire Andũ Aingĩ",
     "flush": "Kũhũra Maitho",
     "straight": "Ũrũme",

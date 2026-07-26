@@ -23,7 +23,7 @@
   "player_prompt": {
     "no_cards": "Kò tíì sí káàdì kankan",
     "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Single Player vs Dealer\n\n📖 ẸKA ỌJỌ:\n• O bẹrẹ pẹlu {start_chips} chips\n• Igi 52 kan (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• O ṣeré pẹlu dealer (ile)\n• Lati ṣe ibatan, o ṣe ANTE ati BLIND bets, gba 2 hole cards, ṣe aṣẹ ti o ṣe pẹṣẹ lori PLAY bets, ṣaaju ki o ṣe afihan community cards ati ṣe atunṣe pẹlu dealer. Ojumo re ni lati ṣe iranṣẹ rẹ ṣe pẹṣẹ (nigba ti o ni ọwọ ṣe pẹṣẹ), nigba ti o ṣe iranṣẹ rẹ ṣe pẹṣẹ (nigba ti o ni ọwọ ti ko ṣe pẹṣẹ).\n• Ọjọ naa pa lọgbo nigba ti o de 0 chips tabi lọwọ fun ibẹrẹ ọjọ (LOSS) tabi nigba ti o parí 1000 ọjọ pẹlu chips (WIN)\n\n💰 ẸKA OWÓ:\n• ANTE: Owó ti o ṣe pẹṣẹ fun ọjọ lobinrin: ${ante}\n• BLIND: Owó ti o ṣe pẹṣẹ fun ọjọ lobinrin: ${ante}\n• PLAY: Owó ti o ṣe pẹṣẹ nigba ti o ṣeré. Lati ṣe ibatan, o le ṣe aṣẹ kan pẹlu: (${ante4} nigba ti o ṣe ni PRE-FLOP, ${ante2} nigba ti o ṣe ni FLOP, tabi ${ante} nigba ti o ṣe ni RIVER. O tun le ṣe aṣẹ fold ni RIVER, ṣe iranṣẹ rẹ ṣe pẹṣẹ, ṣe iranṣẹ rẹ ṣe pẹṣẹ, ṣe iranṣẹ rẹ ṣe pẹṣẹ.\n\n🎴 ẸKA KAADI:\n• O gba 2 kaadi ti o ṣe pẹṣẹ (kaadi rẹ)\n• Dealer gba 2 kaadi ti ko ṣe pẹṣẹ (ti ko ṣe pẹṣẹ fun o)\n• 5 community cards ṣe afihan ni ibẹrẹ\n• Community cards ṣe afihan lati ṣe ibatan\n\n🏆 ẸKA DEALER:\n• Dealer ṣe pẹṣẹ lati ṣe pẹṣẹ pẹlu kaadi 2 ti o ṣe pẹṣẹ (2 kaadi ti o ṣe pẹṣẹ), ṣaaju ki o ṣe afihan community cards.\n• Ẹka dealer ṣe pẹṣẹ lori iranṣẹ owó, gẹgẹ bi a ṣe ṣe afihan lọwọ.\n\n🎮 ẸKA ỌJỌ & AṢẸ:\n📋 PRE-FLOP:\n  • Aṣẹ: [4x] (${ante4}) tabi [check]\n  • [4x]: Ṣe owó PLAY ${ante4}, ṣe afihan community cards 3 akọkọ\n  • [check]: Ko ṣe owó miran, ṣe afihan community cards 3 akọkọ\n\n📋 FLOP:\n  • Nigba ti owó 4x ṣe pẹṣẹ: Ṣe aṣẹ [skip] ṣe pẹṣẹ (ṣe afihan community cards 2 ikẹhin)\n  • Nigba ti ko ṣe owó 4x: [2x] (${ante2}) tabi [check]\n  • [2x]: Ṣe owó PLAY ${ante2}, ṣe afihan community cards 2 ikẹhin\n  • [check]: Ko ṣe owó miran, ṣe afihan community cards 2 ikẹhin\n\n📋 RIVER:\n  • Nigba ti owó 4x tabi 2x ṣe pẹṣẹ: Ṣe aṣẹ [skip] ṣe pẹṣẹ (ṣe afihan ọjọ naa)\n  • Nigba ti ko ṣe owó PLAY: [1x] (${ante}) tabi [fold]\n  • [1x]: Ṣe owó PLAY ${ante}, ṣe afihan ọjọ naa\n  • [fold]: Ṣe iranṣẹ rẹ ṣe pẹṣẹ, ṣe owó ANTE ati BLIND\n\n📋 SHOWDOWN:\n  • Ṣe afihan kaadi gbogbo ati ṣe atunṣe\n  • Ṣe aṣẹ 5 kaadi ṣe pẹṣẹ (2 kaadi rẹ + 5 community)\n  • Ṣe owó lori aṣẹ payout\n\n💎 ẸKA OWÓ PAYOUT:\n📊 ANTE BET:\n  • Dealer ko ṣe pẹṣẹ: PUSH (owó ṣe pẹṣẹ)\n  • Dealer ṣe pẹṣẹ ati o ṣe pẹṣẹ: 1:1 payout (owó + iranṣẹ)\n  • Dealer ṣe pẹṣẹ ati o ko ṣe pẹṣẹ: Owó ṣe pẹṣẹ\n  • Tie: PUSH (owó ṣe pẹṣẹ)\n\n📊 BLIND BET:\n  • Ko ṣe pẹṣẹ lori dealer qualification\n  • O ṣe pẹṣẹ: Owó ṣe pẹṣẹ ati iranṣẹ miran lori aṣẹ rẹ ṣe pẹṣẹ\n  • O ko ṣe pẹṣẹ: Owó ṣe pẹṣẹ\n  • Tie: PUSH (owó ṣe pẹṣẹ)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Ko ṣe iranṣẹ miran\n\n📊 PLAY BET:\n  • Ko ṣe pẹṣẹ lori dealer qualification\n  • Atunṣe pẹlu: Aṣẹ rẹ ṣe pẹṣẹ vs Aṣẹ dealer ṣe pẹṣẹ\n  • O ṣe pẹṣẹ: 1:1 payout (owó + iranṣẹ)\n  • O ko ṣe pẹṣẹ: Owó ṣe pẹṣẹ\n  • Tie: PUSH (owó ṣe pẹṣẹ)\n\n🎯 ẸKA KAADI POKER (Ṣe pẹṣẹ si Ṣe pẹṣẹ):\n  1. Royal Flush: A-K-Q-J-10 ti o ṣe pẹṣẹ\n  2. Straight Flush: 5 kaadi ti o ṣe pẹṣẹ ti o ṣe pẹṣẹ\n  3. Four of a Kind: 4 kaadi ti o ṣe pẹṣẹ\n  4. Full House: 3 ti o ṣe pẹṣẹ + 2 ti o ṣe pẹṣẹ\n  5. Flush: 5 kaadi ti o ṣe pẹṣẹ\n  6. Straight: 5 kaadi ti o ṣe pẹṣẹ\n  7. Three of a Kind: 3 kaadi ti o ṣe pẹṣẹ\n  8. Two Pair: 2 pairs ti o ṣe pẹṣẹ\n  9. One Pair: 2 kaadi ti o ṣe pẹṣẹ\n  10. High Card: Kaadi ti o ṣe pẹṣẹ ṣe pẹṣẹ\n\n⌨️  AṢẸ COMMANDS:\n• [4x] tabi [play bet 4x]: Ṣe owó PLAY ${{self.ante_amount*4}}\n• [2x] tabi [play bet 2x]: Ṣe owó PLAY ${{self.ante_amount*2}}\n• [1x] tabi [play bet 1x]: Ṣe owó PLAY ${{self.ante_amount*1}}\n• [check] tabi [c]: Ṣe aṣẹ (ko ṣe owó miran)\n• [fold] tabi [f]: Ṣe iranṣẹ rẹ ṣe pẹṣẹ (ṣe iranṣẹ rẹ ṣe pẹṣẹ)\n• [skip] tabi [s]: Ṣe aṣẹ si ọjọ naa (nigba ti ko ṣe aṣẹ)\n\n💡 ẸKA STRATEGY:\n• Aṣẹ bẹrẹ ti o ṣe pẹṣẹ (pairs, high cards) ṣe pẹṣẹ 4x bets\n• Ṣe aṣẹ dealer qualification - aṣẹ ti ko ṣe pẹṣẹ ṣe pẹṣẹ push nigba ti dealer ko ṣe pẹṣẹ\n• BLIND bet ṣe pẹṣẹ pẹlu aṣẹ ti o ṣe pẹṣẹ (Royal Flush = 500:1!)\n• Ṣe aṣẹ rẹ ṣe pẹṣẹ! Nigba ti o de 0 tabi lọwọ, o ṣe pẹṣẹ.\n\n⚠️  ẸKA IMPORTANT:\n• ANTE ati BLIND bets ṣe pẹṣẹ fun ọjọ lobinrin\n• PLAY bets ṣe pẹṣẹ ati ṣe aṣẹ\n• Ṣe aṣẹ ti o ṣe pẹṣẹ, ṣe aṣẹ kan ni wakati.\n\n",
-    "state": "🎯 ROUND {round}\n💰 Chips: {chips}\n🎴 Your hand: {hand}\n📊 Current bets: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Phase: {phase}\n🎯 Available actions: {actions}\n\n"
+    "state": " ROUND {round}  Chips: {chips}  Your hand: {hand}  Current bets: Ante ${ante}, Blind ${blind}, Play ${play}  Phase: {phase}  Available actions: {actions} "
   },
   "board": {
     "round_start": " Ìyí {round} ti bẹ̀rẹ̀! Ìdárayá: ANTE ${ante}, BLIND ${blind}. O ní {chips} àwọn chips tó kù.",
@@ -43,14 +43,14 @@
     "community_cards": " Àwọn káàdì ti Ìpínlẹ̀: {cards}",
     "player_best": " Ọwọ ti o dara julọ ti ẹrọ orin: {name} ({cards})",
     "dealer_best": " Ọwọ ti o dara julọ ti onisowo: {name} ({cards})",
-    "ante_lost_folded": "❌ ANTE bet LOST! -${ante} (folded)",
-    "blind_lost_folded": "❌ BLIND bet LOST! -${blind} (folded)",
+    "ante_lost_folded": " ANTE ìlépa LOST! -${ante} (ìlépa)",
+    "blind_lost_folded": " ÌDÍBÈRÈ ÀÌKÒRÒ TÓ ṢE! -${blind} (ìdìpọ̀)",
     "ante_won": "✅ ÀÌRÍWÉ ÌDÍLÉ WÓ! +${amount}",
     "ante_pushed": " ANTE ìlépa PUSHED! ${ante} padà wá",
     "ante_lost": "❌ ANTE bet LOST! -${ante}",
     "blind_won": "✅ ÌDÍBÈRÈ ÀÌRÒYÌN! +${amount}",
     "blind_pushed": " ÌDÍBÈRÈ ÀÌKÒRÍ! ${blind} padà wá",
-    "blind_lost": "❌ BLIND bet LOST! -${blind}",
+    "blind_lost": " ÌDÍBÈ tí kò ríran! -${blind}",
     "play_won": "✅ PLAY ì£1⁄4ì ì ¬í ! +${amount}",
     "play_pushed": "🔄 PLAY bet PUSHED! ${play} returned",
     "play_lost": "❌ PLAY bet LOST! -${play}",
@@ -66,16 +66,16 @@
     "reward_win_max": "Ẹlẹsẹ ti pari {max_turns} awọn iyipo pẹlu awọn eerun ${chips}"
   },
   "hand_names": {
-    "royal_flush": "Royal Flush",
-    "straight_flush": "Straight Flush",
-    "four_of_a_kind": "Four of a Kind",
+    "royal_flush": "Àkọlé àwòrán",
+    "straight_flush": "Ìṣàn tí ó dúró ṣánṣán",
+    "four_of_a_kind": "Àwọn Mẹ́rin Tó Ṣàrà Ọ̀tọ̀",
     "full_house": "Ilé tó kún",
     "flush": "Ìṣàn",
     "straight": "Tọ́nà",
     "three_of_a_kind": "Àwọn Mẹ́ta Tó Jẹ́ Irú Wọn",
-    "two_pair": "Two Pair",
-    "one_pair": "One Pair",
-    "high_card": "High Card",
+    "two_pair": "Àwọn Méjì",
+    "one_pair": "Àwọn Ọ̀dọ́langba",
+    "high_card": "Kaadi Gíga",
     "unknown": "Ọwọ́ Àìmọ̀"
   }
 }

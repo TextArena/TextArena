@@ -19,8 +19,8 @@
     "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "no_brackets": "Akwankyerɛ a enni mu. Ɛsɛ sɛ wɔde akwanya no hyɛ ntini bi ntam.",
+    "no_closing_bracket": "Akwankyerɛ a enni mu. Nkyinkyimfo no nni hɔ ']'",
     "empty_command": "Akwankyerɛ a enni mu. Twerɛ 'draw' anaa 'move <source><destination> [count]'.",
     "empty_action": "Adwuma a wonnya nyɛe biara",
     "move_needs_args": "Move ahyehyεde hia baabi a efi ne bea. Nkyerεase: 'move <source> <destination> [count]'",
@@ -36,25 +36,25 @@
   },
   "move_result": {
     "drew": "Wɔtwe nkrataa fi nneɛma a ɛwɔ hɔ kɔ sɛe mu.",
-    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "cannot_draw": "Yentumi mfa ntow. Nneɛma a wɔde gu hɔ ne nea wɔtow no nyinaa asa.",
     "invalid_pile": "Din a ɛmfata. Fa W, F1-F4, anaa T1-T7 di dwuma",
     "foundation_one_card": "Wubetumi de krataa baako pɛ akɔ fapem no so.",
     "waste_to_foundation_ok": "Karta a wɔayi afi atɛkyɛ mu akɔhyɛ ase F{dst}",
-    "waste_to_foundation_bad": "Cannot move waste card to that foundation pile",
+    "waste_to_foundation_bad": "Ntumi mfa kar bi nkɔ asa no so a ɛregyina hɔ",
     "tableau_to_foundation_ok": "Kɔɔ kɔtɔn firi tableau T{src} kɔɔ foundation F{dst}",
     "tableau_to_foundation_bad": "Ntumi mfa tableau kaade no nkɔ saa fapem dua yi so",
     "foundation_to_foundation": "Ntumi ntutu mfiri fapem kɔ fapem so",
     "waste_to_tableau_one_card": "Wubetumi atwe kaade 1 pɛ afi nneɛma a wɔagyae no mu akɔ tableau so.",
     "waste_to_tableau_ok": "Karta a wɔayi afi nneɛma so akɔ table T{dst} mu.",
-    "waste_to_tableau_bad": "Cannot place waste card on that tableau pile",
-    "no_face_up": "No face-up cards to move",
+    "waste_to_tableau_bad": "Ntumi mfa kar bi nto saa tableau pi no so",
+    "no_face_up": "Wonni nkrataa a wɔayi anim no bi na wɔde akɔ baabi foforo.",
     "tableau_to_tableau_ok": "Kɔɔ {count} kɔtɔn(s) firi tableau T{src} kɔɔ T{dst}",
     "tableau_to_tableau_bad": "Mmerɛ sɛ wɔkɔ {count} kɔtɔn(s) firi T{src} kɔɔ T{dst}",
     "foundation_to_tableau_one_card": "Wubetumi atwe kaade 1 pɛ afi ase kɔ ɔfã hɔ.",
     "foundation_empty": "Nkwamafo F{src} yɛ hwee.",
     "foundation_to_tableau_ok": "Kɔɔ kɔtɔn firi foundation F{src} kɔɔ tableau T{dst}",
     "foundation_to_tableau_bad": "Ntumi mfa foundation card nto table T{dst} so.",
-    "to_waste_or_stock": "Cannot move to waste or stock"
+    "to_waste_or_stock": "Wontumi mfa nkɔ aturo anaa nneɛma a wɔde sie mu."
   },
   "outcome": {
     "forfeit": "Agoru no sɛee. Awiei koraa: {score} nkrataa a ɛwɔ fapem mu.",

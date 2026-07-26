@@ -21,7 +21,7 @@
     "{winner_rounds}": "The number of rounds completed"
   },
   "player_prompt": {
-    "no_cards": "No cards yet",
+    "no_cards": "Kartlar daa yoq.",
     "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Tek Oyuncu vs Krupiye\n\n📖 OYUN ÖZETİ:\n• Siz {start_chips} chip ile başlarsınız\n• Tek bir desteden 52 kart (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Siz krupiye (ev) ile oynarsınız\n• Her tur Ultimate Texas Hold'em yapısını takip eder: siz ANTE ve BLIND bahisleri yatırırsınız, 2 hole kartı alırsınız, isteğe bağlı PLAY bahisleri için bahis aşamasında karar verirsiniz, sonra topluluk kartlarını açar ve en iyi 5-kart elinizi krupiyenin eli ile karşılaştırır. Amacınız, kazancınızı maksimize etmek (daha iyi eliniz olduğunda), kayıplarınızı minimize etmek (daha kötü eliniz olduğunda).\n• Oyun, tur başlangıcında 0 chip veya altına ulaştığınızda (KAYIP) veya 1000 turu chip ile tamamladığınızda (KAZANÇ) biter.\n\n💰 BAHİS YAPISI:\n• ANTE: Her tur için zorunlu ${ante} bahis\n• BLIND: Her tur için zorunlu ${ante} bahis\n• PLAY: İsteğe bağlı bahis. Tur boyunca, aşağıdaki seçeneklerden sadece birini seçebilirsiniz: (${ante4}, ön-flop'ta yapıldığında, ${ante2}, flop'ta yapıldığında veya ${ante}, nehrin yapıldığında. Ayrıca nehre katılırsınız ve elinizden vazgeçersiniz ve hiçbir bahis yapmazsınız.)\n\n🎴 KART DAĞITIMI:\n• Siz 2 açık kart (delik kartları) alırsınız\n• Krupiye 2 kapalı kart (sizden gizli) alırsınız\n• 5 topluluk kartı başlangıçta açık olarak dağıtılır\n• Topluluk kartları oyun aşamalarında ilerledikçe ilerler.\n\n🏆 KRUPİYE YETERLİLİĞİ:\n• Krupiye, en az bir PAIR (aynı ранкta 2 kart) ile nitelendirilmelidir, elindeki 2 kart ve 5 topluluk kartı kullanılarak.\n• Krupiye yeterliliği, bahis sonuçlarını etkiler, daha sonra açıklanacak.\n\n🎮 OYUN AŞAMALARI & HAREKETLER:\n📋 PRE-FLOP:\n  • Hareketler: [4x] (${ante4}) veya [check]\n  • [4x]: ${ante4} PLAY bahisi yatırın, ilk 3 topluluk kartını açın\n  • [check]: Ekstra bahis yapmayın, ilk 3 topluluk kartını açın\n\n📋 FLOP:\n  • 4x bahis yapıldıysa: Sadece [skip] kullanılabilir (otomatik olarak son 2 topluluk kartını açar)\n  • 4x bahis yapılmadıysa: [2x] (${ante2}) veya [check]\n  • [2x]: ${ante2} PLAY bahisi yatırın, son 2 topluluk kartını açın\n  • [check]: Ekstra bahis yapmayın, son 2 topluluk kartını açın\n\n📋 RIVER:\n  • 4x veya 2x bahis yapıldıysa: Sadece [skip] kullanılabilir (otomatik olarak sonuç aşamasına geçer)\n  • Önceki PLAY bahisi yapılmadıysa: [1x] (${ante}) veya [fold]\n  • [1x]: ${ante} PLAY bahisi yatırın, sonuç aşamasına geçin\n  • [fold]: Eli terk edin, ANTE ve BLIND bahislerini kaybedin\n\n📋 SHOWDOWN:\n  • Tüm kartlar açılır ve değerlendirilir\n  • 7 karttan (2 delik + 5 topluluk) en iyi 5-kart eli\n  • Bahisler, ödeme kurallarına göre sonuçlandırılır\n\n💎 BAHİS ÖDEMELERİ:\n📊 ANTE BAHİSİ:\n  • Krupiye nitelendirilmediğinde: PUSH (bahis iade edilir)\n  • Krupiye nitelendirildi ve siz kazandığınızda: 1:1 ödeme (bahis + kazanç)\n  • Krupiye nitelendirildi ve siz kaybettiniz: Bahis kaybedildi\n  • Beraberlik: PUSH (bahis iade edilir)\n\n📊 BLIND BAHİSİ:\n  • Krupiye nitelendirilmesinden etkilenmez\n  • Siz kazandığınızda: Bahis iade edilir ve el gücüne göre ekstra ödeme yapılır\n  • Siz kaybettiniz: Bahis kaybedildi\n  • Beraberlik: PUSH (bahis iade edilir)\n\n📊 BLIND BAHİS ÖDEME TABLOSU:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Straight'den daha düşük: Ekstra ödeme yapılmaz\n\n📊 PLAY BAHİSİ:\n  • Krupiye nitelendirilmesinden etkilenmez\n  • Doğrudan karşılaştırma: En iyi eliniz vs Krupiye'nin en iyi eli\n  • Siz kazandığınızda: 1:1 ödeme (bahis + kazanç)\n  • Siz kaybettiniz: Bahis kaybedildi\n  • Beraberlik: PUSH (bahis iade edilir)\n\n🎯 POKER EL SıRALAMASI (En iyi’den en kötüsüne):\n  1. Royal Flush: Aynı suitin A-K-Q-J-10'u\n  2. Straight Flush: Aynı suitin 5 ardışık kartı\n  3. Four of a Kind: Aynı ранкta 4 kart\n  4. Full House: 3lü + 2'li\n  5. Flush: Aynı suitin 5 kartı\n  6. Straight: 5 ardışık kart\n  7. Three of a Kind: Aynı ранкta 3 kart\n  8. Two Pair: Farklı ранкta 2 çift\n  9. One Pair: Aynı ранкta 2 kart\n  10. High Card: En yüksek kart kazanır\n\n⌨️  HAREKET KOMUTLARI:\n• [4x] veya [play bet 4x]: ${{self.ante_amount*4}} PLAY bahisi yatırın\n• [2x] veya [play bet 2x]: ${{self.ante_amount*2}} PLAY bahisi yatırın\n• [1x] veya [play bet 1x]: ${{self.ante_amount*1}} PLAY bahisi yatırın\n• [check] veya [c]: Kontrol (ekstra bahis yapmayın)\n• [fold] veya [f]: Katılmayın (eli terk edin)\n• [skip] veya [s]: Sonraki aşama (hiçbir hareket gerekmediğinde)\n\n💡 STRATEJİ İPUÇLARI:\n• Güçlü başlangıç elleri (çiftler, yüksek kartlar) genellikle 4x bahisleri haklı çıkarır\n• Krupiye nitelendirilmesini dikkate alın - zayıf eller nitelendirilmediğinde itebilir\n• BLIND bahisi güçlü ellerle (Royal Flush = 500:1!) çok karlı olabilir\n• Chip stack'inizi izleyin! Tur başlangıcında 0'a veya altına düşerse kaybedersiniz.\n\n⚠️  ÖNEMLİ NOTLAR:\n• ANTE ve BLIND bahisleri her tur için zorunludur\n• PLAY bahisleri isteğe bağlı ve stratejiktir\n• Doğru hareketi girin ve bir seferde sadece bir hareket yapın.\n\n",
     "state": "🎯 TUR {round}\n💰 Chip'ler: {chips}\n🎴 Eliniz: {hand}\n📊 Mevcut bahisler: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Aşama: {phase}\n🎯 Kullanılabilir hareketler: {actions}\n\n"
   },
@@ -44,15 +44,15 @@
     "player_best": "🎴 Oyuncu'nun en iyi eli: {name} ({cards})",
     "dealer_best": "🎴 Krupiye'nin en iyi eli: {name} ({cards})",
     "ante_lost_folded": " ANTE bahis ğayıp oldı! -${ante} (qısılğan)",
-    "blind_lost_folded": "❌ BLIND bet LOST! -${blind} (folded)",
+    "blind_lost_folded": " Körüngen bahis ĞAYTALDI! -${blind} (katlandı)",
     "ante_won": "✅ ANTE bahis QAYTAN! +${amount}",
     "ante_pushed": " ANTE bahis İTİQARATILDI! ${ante} qaytarıldı.",
     "ante_lost": " ANTE bahis ğayıp oldı! -${ante}",
     "blind_won": "✅ Körüngen bahis QAYTIRDIM! +${amount}",
     "blind_pushed": " Körüngen bahis İTİQARATLANDI! ${blind} qaytarıldı.",
-    "blind_lost": "❌ BLIND bet LOST! -${blind}",
+    "blind_lost": " Körüngen bahis ĞAYTALDI! -${blind}",
     "play_won": "✅ İddianı QAYT! +${amount}",
-    "play_pushed": "🔄 PLAY bet PUSHED! ${play} returned",
+    "play_pushed": " PLAY bahis İTİŞLENDI! ${play} qaytarıldı.",
     "play_lost": " Oyuncı bahis ğayıp oldı! -${play}",
     "net_gain": "🎉 Tur {round} tamamlandı! Net kazanç: +${net}",
     "net_loss": "💸 Tur {round} tamamlandı! Net kayıp: ${net}",
@@ -66,11 +66,11 @@
     "reward_win_max": "Oyuncu {max_turns} turu ${chips} chip ile tamamladı"
   },
   "hand_names": {
-    "royal_flush": "Royal Flush",
-    "straight_flush": "Straight Flush",
+    "royal_flush": "Qıral qırqımı",
+    "straight_flush": "Düz suvğa tüşürüv",
     "four_of_a_kind": "Dört çeşitniñ dörtü",
     "full_house": "Tam evniñ işi.",
-    "flush": "Flush",
+    "flush": "Suvnıñ aqması.",
     "straight": "Düz olğan.",
     "three_of_a_kind": "Üç çeşitniñ üçü",
     "two_pair": "Eki çift",

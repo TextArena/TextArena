@@ -33,7 +33,7 @@
   "options": {
     "final_turns": "ပွၵ်ႈလိုၼ်း! ၶေႃႈလၢႆးမႂ်း: [draw], [take], [peek X Y]",
     "draw": "လွင်ႈလိူၵ်ႈဢၼ်ၸဝ်ႈၵဝ်ႇမီးၼၼ်ႉ [draw], [take]",
-    "must_swap": "You must: [swap X Y] (cannot discard cards from discard pile)",
+    "must_swap": "တေလႆႈ: [swap X Y] (ဢမ်ႇၸၢင်ႈထွၼ်ပႅတ်ႈဝႂ်တီႈ ထႅမ်ဢၼ်လႆႈထွၼ်ဢွၵ်ႇ)",
     "swap_or_discard": "တေလႆႈ: [swap X Y] ဢမ်ႇၼၼ် [discard]"
   },
   "hand": {
@@ -46,12 +46,12 @@
     "discarded": "Player {pid} discarded {card}"
   },
   "message": {
-    "deck_empty": "Deck is empty! Game ends immediately.",
-    "knocked": "Player {pid} knocked! Each other player gets one more turn.",
+    "deck_empty": "ၵူၼ်ဢၼ်ဢမ်ႇမီးၵူၼ်းၼၼ်ႉ ပဵၼ်ၵွၼ်ႈပဝ်ႇယဝ်ႉ! လွင်ႈလဵၼ်ႈၼႆႉ မၼ်းသုတ်းၵႂႃႇၵမ်းလဵဝ်ယဝ်ႉ။",
+    "knocked": "ၽူႈလဵၼ်ႈ {pid} ၶုတ်ႈ! ၵူၼ်းတၢင်ႇၵေႃႉၶဝ် လႆႈၶိုၼ်းထႅဝ်ထႅင်ႈၵမ်းၼိူင်ႈယဝ်ႉ။",
     "final_round": "Player {pid} {reason}! Each other player gets one more turn."
   },
   "reason": {
-    "all_revealed": "has all cards revealed"
+    "all_revealed": "ၸွင်ႇလႆႈပိုတ်ႇၼႄ မၢႆလပ်ႉတင်းမူတ်းယဝ်ႉႁႃႉ?"
   },
   "invalid": {
     "wrong_action": "Use exactly ONE bracketed action: [draw], [take], [swap X Y], [discard], [knock], or [peek X Y]",
@@ -59,11 +59,11 @@
     "must_draw_first": "မႂ်းတေလႆႈပွၵ်ႈဢွၼ်တၢင်း [draw], [take], [knock], ဢမ်ႇၼၼ် [peek X Y]",
     "cannot_discard_taken": "သူဢမ်ႇၸၢင်ႈဢဝ်လႆႈ ဝႂ်ဢၼ်လုၵ်ႉတီႈ ထုပ်ႉပႅတ်ႈၼၼ်ႉသေ ဢဝ်ၵႂႃႇ။သူတေလႆႈလႅၵ်ႈမၼ်းၶိုၼ်းၵူၺ်းယဝ်ႉ။",
     "have_drawn_card": "You have a drawn card. You must [swap X Y] or [discard] it.",
-    "need_drawn_swap": "You need a drawn card to swap.",
-    "need_drawn_discard": "You need a drawn card to discard.",
+    "need_drawn_swap": "တႃႇတေလႅၵ်ႈလၢႆႈလႆႈၼၼ်ႉ လူဝ်ႇမီးဝႂ်ဢၼ်ၸၼ်ဝႆႉၼၼ်ႉယဝ်ႉ။",
+    "need_drawn_discard": "တႃႇတေထွၼ်ပႅတ်ႈၼၼ်ႉ လူဝ်ႇလႆႈ ထႆႇဝၼ်ႇဢၼ်ၶိုၵ်ႉၶႅမ်ႉၼၼ်ႉယဝ်ႉ။",
     "out_of_bounds": "ဢွင်ႈတီႈဢမ်ႇပေႃးမီး။ သႂ်ႇၶေႃႈလၢႆး 1-{max_row}, လွၵ်း 1-{max_col}",
-    "knock_with_card": "You cannot knock with a drawn card. Complete your turn first.",
-    "already_knocked": "Someone has already knocked this round.",
+    "knock_with_card": "ဢမ်ႇၸၢင်ႈဢဝ်ဝႂ်ဢၼ်လႆႈၸၼ်ဝႆႉၼၼ်ႉသေ တတ်းမၵ်း။ ဢွၼ်တၢင်းသုတ်းတႄႇၼႃႈၵၢၼ်ၸဝ်ႈၵဝ်ႇတႃႉ။",
+    "already_knocked": "ၵူၼ်းၵေႃႉၼိူင်ႈ လႆႈဢဝ်လွင်ႈၼႆႉသေ ၶိုၼ်ႈပဵၼ်မႃးယဝ်ႉ။",
     "already_revealed": "ၽႅၼ်ႇဢၼ်ၼၼ်ႉ လႆႈပိုတ်ႇၼႄဝႆႉယဝ်ႉ!"
   },
   "summary": {
@@ -71,9 +71,9 @@
     "line": "Player {pid}: {score} points\n"
   },
   "board_str": {
-    "title": "=== GOLF GAME ===",
+    "title": "=== လွင်ႈလဵၼ်ႈၵေႃး (လ်) ၽ်ႉ===",
     "discard": "ထုပ်ႉပႅတ်ႈ: {card}",
-    "knocked": "Player {pid} has knocked!",
+    "knocked": "ၽူႈလဵၼ်ႈ {pid} လႆႈၼဵၵ်း!",
     "player_header": "ၽူႈလႄႈ {pid} (သၢမ်: {score}):"
   }
 }

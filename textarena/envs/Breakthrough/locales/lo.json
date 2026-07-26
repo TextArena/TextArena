@@ -1,11 +1,11 @@
 {
   "player_prompt": {
-    "intro": "You are playing {color} in a game of Breakthrough. You move {direction} on an {board_size}x{board_size} board.\nIn your turn you can move a single piece one step forward or diagonally forward.\nA piece may only move diagonally if an opponent piece is there, and only move into such a preoccupied square in a diagonal step.\nWhen stepping into a square with an opponent piece, you capture it and the opponent's piece is removed permanently from the board.\nUse UCI-like notation in brackets, e.g. [a2a3] to move from a2 to a3.\n* 'a' corresponds to the leftmost column, '1' is the bottom row (from White's perspective).\n* Blacks's home row is the top row (row 8 for an 8x8). White's home row is the bottom row (row 1 for an 8x8).\nThe first player whose piece reaches the opponent's home row wins. If your pieces are all captured, you lose."
+    "intro": "ທ່ານກໍາລັງຫຼີ້ນ {color} ໃນເກມ Breakthrough. ທ່ານຍ້າຍ {direction} ໃນກະດານ {board_size}x{board_size}. ໃນເວລາຂອງທ່ານທ່ານສາມາດຍ້າຍສິ້ນດຽວໄປຂ້າງຫນ້າຫຼືທາງລວງຂ້າງຫນ້າ. ສິ້ນສາມາດຍ້າຍທາງລວງຖ້າຫາກວ່າສິ້ນຂອງຄູ່ແຂ່ງມີຢູ່, ແລະພຽງແຕ່ຍ້າຍເຂົ້າໄປໃນສວນທີ່ຖືກກໍານົດໄວ້ໃນຂັ້ນຕອນທາງລວງ. ເມື່ອເຂົ້າໄປໃນສວນທີ່ມີສິ້ນຂອງຄູ່ແຂ່ງ, ທ່ານຈັບມັນແລະສິ້ນຂອງຄູ່ແຂ່ງຖືກຖອນອອກຈາກກະດານຢ່າງຖາວອນ. ໃຊ້ການຂຽນແບບ UCI ໃນແຈກ, ເຊັ່ນ: [a2a3] ເພື່ອຍ້າຍຈາກ a2 ໄປ a3. * 'a' ແມ່ນກົງກັບແຖວຊ້າຍສຸດ, '1' ແມ່ນແຖວລຸ່ມ (ຈາກທັດສະນະຂອງ White). * ເຮືອນຂອງ Blacks ແມ່ນແຖວເທິງ (ແຖວ 8 ສໍາລັບ 8x8). ເຮືອນຂອງ White ແມ່ນແຖວລຸ່ມ (ແຖວ 1 ສໍາລັບ 8x8). ຖ້າສິ້ນຂອງຜູ້ທໍາອິດບັນລຸເຮືອນຂອງຄູ່ແຂ່ງຂອງທ່ານ, ທ່ານຈະເສຍ."
   },
   "invalid_move": {
     "wrong_format": "ກະລຸນາໃຊ້ການຂຽນແບບແອລເບີຣ໌ທີ່ຖືກແຈກແຈກເຊັ່ນ: [a2a3].",
     "out_of_bounds": "ການເຄື່ອນໄຫວແມ່ນນອກຂອບເຂດຂອງຄະນະກໍາມະການ.",
-    "illegal": "That move does not follow the Breakthrough rules or is not your piece."
+    "illegal": "ການເຄື່ອນໄຫວນັ້ນບໍ່ປະຕິບັດຕາມກົດລະບຽບ Breakthrough ຫຼືບໍ່ແມ່ນເຄື່ອງຂອງທ່ານ."
   },
   "game_action": {
     "moved": "ຜູ້ນ {player_id} ຍ້າຍ {move_str} ({piece})."
@@ -13,7 +13,7 @@
   "outcome": {
     "white_reached": "ຂາວໄດ້ເຂົ້າເຖິງແຖວບ້ານຂອງສີ ດໍາ.",
     "black_reached": "ສີດໍາໄດ້ບັນລຸເສັ້ນບ້ານຂອງຂາວ.",
-    "white_captured": "All White pieces captured.",
+    "white_captured": "ເຄື່ອງມືຂາວທັງຫມົດຖືກຈັບໄດ້.",
     "black_captured": "ເຄື່ອງມືສີດໍາທັງຫມົດຖືກຈັບໄດ້.",
     "no_moves": "ຜູ້ນ {player_id} ບໍ່ມີການເຄື່ອນໄຫວອີກຕໍ່ໄປ."
   }

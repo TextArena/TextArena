@@ -3,37 +3,37 @@
     "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
   },
   "board": {
-    "current_board": "Current Board:\n\n{board}\nAvailable Moves: {moves}"
+    "current_board": "Àwòrán: {board} Àwọn ìgbésẹ̀ tí ó wà: {moves}"
   },
   "render": {
     "center_piles_header": "--- Àwọn Òpó Ìlà --- ",
     "pile": "{observation}Ìdìpò {i}: {pile} ",
-    "player_view_header": "{observation}\n--- Player {player_id}'s View ---\n",
-    "payoff": "{observation}Payoff Pile (Top Card): {top_card}, Payoff Pile Length: {payoff_length}\n",
+    "player_view_header": "{observation} --- Ìwòye Olùṣeré {player_id} --- ",
+    "payoff": "{observation}Ìdánwò Ìdánwò (Kàtà Òkè): {top_card}, Ìdánwò Ìdánwò Ìdánwò: {payoff_length} ",
     "hand": "{observation}Ọwọ: {hand} ",
     "discard": "{observation}Gba Awọn apoti: {discard} ",
     "empty": "Kò sí nǹkan"
   },
   "game_message": {
-    "no_cards_left": "There are no more cards to draw from. Remember that you can play cards from these sources:\n  1. Your **hand**.\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n"
+    "no_cards_left": "Kò sí àwọn káàdì láti fà mọ́. Rántí pé o lè fi àwọn káàdì láti àwọn orísun wọ̀nyí: 1. Ọwọ́ rẹ. 2. Kaadi tó ga jùlọ nínú ìdìpọ̀ èrè rẹ. 3. Kaadi tó ga jùlọ nínú ìdìpọ̀ ìyọnu rẹ."
   },
   "invalid_move": {
-    "wrong_format": "Invalid move format. Player {player_id} did not respond with a valid move in square brackets.",
-    "invalid_play": "Invalid play. Player {player_id} tried to play {card} on center pile {index}.",
+    "wrong_format": "Àdàkọ ìgbésẹ̀ tí kò bá òfin mu. Ẹ̀yà eré {player_id} kò dábàá ìgbésẹ̀ tó bá òfin mu nínú àlàfo.",
+    "invalid_play": "Ẹsẹ̀ tí kò bá bófin mu. Ẹlẹ́sẹ̀ {player_id} gbìyànjú láti gbá {card} lórí ìlà àárín {index}.",
     "discard_from_payoff": "Àkọsílẹ̀ tí kò bá ìmúṣẹ. Ẹ̀yà eré {player_id} gbìyànjú láti yọ káàdì kan kúrò nínú ìdìpọ̀ tí wọ́n fi ń sanwó.",
     "discard_not_in_hand": "Invalid discard. Player {player_id} tried to discard a card that is not in hand.",
-    "wrong_move_type": "Invalid move type. Player {player_id} did not respond with a valid move type."
+    "wrong_move_type": "Ẹ̀yà ìgbésẹ̀ tí kò bá òfin mu. Ẹ̀yà ìgbésẹ̀ tí kò bá òfin mu ni {player_id} kò dáhùn."
   },
   "game_action": {
-    "you_drew": "You drew cards.",
-    "opponent_drew": "Player {player_id} drew cards.",
+    "you_drew": "O fi káàdì ta.",
+    "opponent_drew": "Ẹnìkan {player_id} fa káàdì.",
     "you_played": "O ti ṣere {card} lori àárín ìdìpọ̀ {index}.",
-    "opponent_played": "Player {player_id} played {card} on center pile {index}.",
-    "you_discarded": "You have discarded {card} to discard pile {index}, which also means you have finished their turn. No further actions of yours is considered for this turn. Player {next_player_id} will go next.",
+    "opponent_played": "Ẹ̀yin {player_id} ń ṣeré {card} lórí ìdìpọ̀ àárín {index}.",
+    "you_discarded": "O ti sọ {card} di àlàfo {index}, èyí tí ó tún túmọ̀ sí pé o ti parí ìyí wọn. Kò sí ìgbésẹ̀ rẹ tí a ó kà sí fún ìyí yìí. Olùṣeré {next_player_id} ni yóò tẹ̀lé.",
     "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. Kò sí ìgbésẹ̀ míì tí Player {player_id} ṣe tí a ó kà sí fún ìyí yìí. Player {next_player_id}, you will go next. Jọwọ tẹ ìgbésẹ̀ rẹ sínú ìtòlẹ́sẹẹsẹ [action card center_index]."
   },
   "outcome": {
-    "payoff_cleared": "Player {current_player} has finished their payoff pile! Player {current_player} wins!",
+    "payoff_cleared": "Ẹ̀yin òṣèré {current_player} ti parí ìdìpọ̀ èrè yín! Ẹ̀yin òṣèré {current_player} ti borí!",
     "deadlock_player_0": "A ti de ibi tí a kò lè wọlé! Ẹlẹ́dàá 0 ṣẹ́gun pẹ̀lú {player_0_payoff} káàdì tí ó kù vs Ẹlẹ́dàá 1's {player_1_payoff} káàdì.",
     "deadlock_player_1": "A ti de ibi tí a kò lè wọlé! Ẹlẹ́dàá 1 ti borí pẹ̀lú {player_1_payoff} káàdì tí ó kù vs Ẹlẹ́dàá 0's {player_0_payoff} káàdì.",
     "deadlock_tie": "Deadlock ti de pẹlu tie! Awọn oṣere mejeeji ni {player_0_payoff} awọn kaadi ti o ku. Olùṣere {current_player} ṣẹgun nipasẹ aiyipada."

@@ -21,11 +21,11 @@
     "{total}": "Each player's tied final total (a number)"
   },
   "player_prompt": {
-    "intro": "You are Player {player_id}, playing {num_rounds} rounds of Iterated Ultimatum Game.\nYou have ${pool} to split this round between yourself and Player {other_id}.\n\nProposer:\n  - Make an offer: [Offer: $X] (0 <= X <= pool)\n  - If accepted → You get $(pool - X), other player gets $X\n  - If rejected → Both get $0\n  - Example: [Offer: $3]  or  'I think this is fair. [Offer: $5]'\n\nResponder:\n  - Decide on the offer with either [Accept] or [Reject]\n  - Example: 'That seems reasonable. [Accept]'\n            'Too unfair. [Reject]'\n"
+    "intro": "Ị bụ onye na-egwu egwu {player_id}, na-egwu {num_rounds} agba nke Egwuregwu Ultimatum Egwuregwu. Ị nwere ${pool} iji kewaa agba a n'etiti onwe gị na Onye na-egwu egwu {other_id}. Onye na-atụ aro: - Mee onyinye: [Offer: $X] (0 <= X <= ọdọ mmiri) - Ọ bụrụ na a nabatara → Ị nweta $ ((ọdọ mmiri - X), onye ọkpụkpọ ọzọ na-enweta $ X - Ọ bụrụ na a jụrụ → Ha abụọ nweta $ 0 - Ihe atụ: [Offer: $3] ma ọ bụ 'Echere m na nke a bụ ihe ziri ezi. [Offer: $5]' Onye na-aza ajụjụ: - Kpebie na onyinye ahụ na ma ọ bụ [Accept] ma ọ bụ [Reject] - Ihe atụ: 'O yiri ihe ezi uche dị na ya. [Accept]' 'Ọ dị oke njọ. [Reject]'"
   },
   "round": {
     "begins": "--- Round {round_number} amalite! --- Player {proposer_id} bụ onye na-atụ aro, Player {responder_id} bụ onye na-aza.",
-    "offer": "Round {round_number}: Player {proposer_id} offers ${offer} to Player {responder_id} (keeping ${keep}).",
+    "offer": "Gburugburu {round_number}: Onye ọkpụkpọ {proposer_id} na-enye ${offer} Onye ọkpụkpọ {responder_id} (na-edebe ${keep}).",
     "accepted": "Onye ọkpụkpọ {responder_id} nabatara! Gburugburu {round_number} na-enweta: Onye ọkpụkpọ {proposer_id} + ${proposer_gain}, Onye ọkpụkpọ {responder_id} + ${responder_gain}. Ọnụ ọgụgụ ọhụrụ: Onye ọkpụkpọ 0: ${total_0}, Onye ọkpụkpọ 1: ${total_1}.",
     "rejected": "Onye ọkpụkpọ {responder_id} jụrụ onyinye ahụ! Gburugburu {round_number} na-enweta: Ndị egwuregwu abụọ + $ 0. Ọnụ ọgụgụ niile ka dị: Onye ọkpụkpọ 0: ${total_0}, Onye ọkpụkpọ 1: ${total_1}."
   },
@@ -34,7 +34,7 @@
     "bad_integer": "Ego a na-enye ga-abụrịrị ezigbo ọnụọgụgụ.",
     "out_of_range": "Onyinye a ga-adị n'etiti $0 na ${pool}.",
     "no_current_offer": "Enweghị onyinye ọ bụla dị ugbu a ị ga-aza.",
-    "accept_or_reject": "Responder must either [Accept] or [Reject] the offer."
+    "accept_or_reject": "Onye na-azaghachi ga-abụ [Accept] ma ọ bụ [Reject] na-enye."
   },
   "outcome": {
     "win": "Onye ọkpụkpọ {winner} meriri na ${winner_total} ngụkọta vs Onye ọkpụkpọ {loser} ${loser_total}.",

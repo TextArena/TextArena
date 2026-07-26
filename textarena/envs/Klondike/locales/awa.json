@@ -16,7 +16,7 @@
     "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
   },
   "player_prompt": {
-    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+    "intro": "आप क्लोन्डाइक सोलिटेयर खेलत हैं। आपका लक्ष्य सभी कार्ड का नींव ढेर पर ले जाना है। गेम नियमः - फाउंडेशन स्टैक (F1-F4): सूट में ऐस से राजा तक निर्माण करें- टेबल्यूस्टैक्स स्टॉक (T1-T7): वैकल्पिक रंगों को नीचे बनाएं (लाल पर काला, लाल पर काले) - स्टॉक: अपशिष्ट ढेर के लिए ड्रॉ कार्ड खींचें- अपशिष्ट (W): खेलने के लिए उपलब्ध शीर्ष कार्ड कमांड्स:- 'ड्रा' - स्टोक से अपशिष्ट तक ड्राइव करें-'<source> <destination> [count] चलाएं'-पिल के बीच पिक्स स्थानांतरित करें उदाहरणः W1 T1, move T1 F2, move T3 T5 2'। गिनती भी 'सब', जो तुरंत सभी चेहरे वाले कार्डों को आगे बढ़ाने की कोशिश करेगी असंभव हो सकती है. - 'के लिए हार जाओ' - अपने वर्तमान स्कोर में एसेस और तालाबंदी बनाएँ- Pile खदान (खदान), F4 1-F4, finds t7 (अन्यून कई टैंक) । यदि आपको लगता है कि खाली पाइल एक बार चल रही हैं तो केवल एक्शन्स द्वारा हटाया जा सकता हैः अगर बाकी बचे हुए आइटम स्थान पर रखा गया है, फिर उन्हें जीतने वाला क्रम बनाओर सेट करे Example: A2 टेबलूस्टैक्सन , S-1; जब शेष कार्रवाई छोड़ दिया जाता है तब ही कर सकते हैंः \"का उपयोग करके टैबंद\" ."
   },
   "format_error": {
     "no_brackets": "अवैध क्रिया का प्रारूप. कार्रवाई कोष्ठक में होनी चाहिये।",
@@ -66,7 +66,7 @@
     "turn": "पाली: {turn}/{max_turns}",
     "stock": "स्टॉक: {stock} कार्ड्स मा",
     "waste": "अपशिष्ट (W): {waste}",
-    "foundations_header": "Foundations:",
+    "foundations_header": "फाउंडेशन: मा र् च.",
     "foundation_row": "  एफ{n}: {cards}",
     "tableau_header": "Tableau:",
     "tableau_row": "  टी{n}: {cards}"

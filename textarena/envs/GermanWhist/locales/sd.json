@@ -1,7 +1,7 @@
 {
   "game_start": {
     "intro": "راند شروع ٿي. ٽرمپ سوٽ: {trump_suit} (ٽرمپ ڪارڊ: {trump_str}).",
-    "no_trump_card": "none"
+    "no_trump_card": "نه آهي"
   },
   "player_prompt": {
     "intro": "توهان جرمن وِسٽ ۾ پليئر {player_id} آهيو. {phase_info} توهان وٽ {hand_size} ڪارڊ آهن. هڪ ڪارڊ کيڏيو '[play N]' سان ، جتي N توهان جي هٿ ۾ ان جي پوزيشن آهي (مثال طور '[play 3]').",
@@ -32,11 +32,11 @@
   },
   "draw": {
     "winner_received": "توهان ٽريڪ کٽي ۽ حاصل ڪيو {card}.",
-    "loser_received": "You lost the trick and drew {card} from the deck.",
+    "loser_received": "توهان ٽوڪ وڃائي ڇڏيو ۽ ڊيڪ مان {card} ڪڍيو.",
     "winner_preview": "ايندڙ ڪارڊ پيش ڪيل آهي {card}."
   },
   "turn": {
-    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
     "scores_learning": "هن وقت تائين حاصل ڪيل چالون - پليئر 0: {tricks0} ، پليئر 1: {tricks1}",
     "scores_playing": "اسڪورنگ ٽرڪس - پليئر 0: {tricks0} ، پليئر 1: {tricks1}",
     "phase": "مرحلو: {phase}",
@@ -47,7 +47,7 @@
     "no_cards_in_hand": "هٿ ۾ ڪي به ڪارڊ نه آهن",
     "header": "تنهنجو هٿ:",
     "trump_indicator": "(ٽرمپ)",
-    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
     "card_line": "{observation} {index}. {card}"
   },
   "trick_view": {
@@ -58,7 +58,7 @@
   },
   "board_str": {
     "not_started": "راند شروع نه ٿي",
-    "header": "=== GERMAN WHIST GAME ===",
+    "header": "=== جرمن وائيٽ گيم ===",
     "phase": "{observation} مرحلو: {phase}",
     "trump_suit": "{observation} ٽرمپ سوٽ: {trump_suit}",
     "trump_card": "{observation} ٽرمپ ڪارڊ: {card}",

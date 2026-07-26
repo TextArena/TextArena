@@ -19,12 +19,12 @@
     "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "no_brackets": "O ye tagamasiɲɛ ɲumanw lo ye.",
+    "no_closing_bracket": "Sɛbɛ min tɛ sɛbɛ ye. A laban fanin be yen ']'",
     "empty_command": "Kumandε lakolon. I b'a sɛbɛ 'draw' wala 'move <source><destination> [count]'.",
-    "empty_action": "Empty action",
+    "empty_action": "Baara min tɛ foyi ɲɛ mɔgɔ ma",
     "move_needs_args": "move command be required source and destination. Usage: 'move <source><destination> [count]' i ka fɔta ye ko fɛn dɔ bɔyɔrɔ ni a taayɔrɔ bɛɛ ye kelen ye, o kɔrɔ k'a sɔrɔ yɔrɔ wɛrɛ tɛ yen fana (n)",
-    "count_positive": "Count must be positive or 'all'",
+    "count_positive": "A ka kan k'a ta a daminɛ na fɔɔ laban na.",
     "count_invalid": "N'a ma se ka jati, a be kɛ \"all\" ye.",
     "unknown_command": "Unknown command '{cmd}'. Use 'draw', 'move <source> <destination> [count]', or 'forfeit'",
     "wrapped": "Action {n}: {msg}"
@@ -43,7 +43,7 @@
     "waste_to_foundation_bad": "I tɛ se ka kariti bɔ i nɔ ra k'a bla bon kɔnɔ.",
     "tableau_to_foundation_ok": "Kɛ kaati ye tableau T{src} cɛ foundation F{dst}",
     "tableau_to_foundation_bad": "Se tɛ ka tableau kariti yɛlɛma o jufa kɔnɔ",
-    "foundation_to_foundation": "Cannot move from foundation to foundation",
+    "foundation_to_foundation": "A tɛ se ka bɔ a lɔyɔrɔ la k'a bila dɔ wɛrɛ kan.",
     "waste_to_tableau_one_card": "I be se ka karti 1 dɔrɔn ta k'a bila tableau kɔnɔ.",
     "waste_to_tableau_ok": "Kariti yɛlɛmana ka bɔ karitɔn dɔ la ka taga tableau T{dst} kan.",
     "waste_to_tableau_bad": "O tɛ se ka kariti bla tableau pile kan.",
@@ -65,10 +65,10 @@
     "title": "=== KLONDIKE SOLITAIRE=== N' ye n seko bɛɛ kɛ ka se k'i tɔgɔ sɛbɛ.",
     "turn": "Turn: {turn}/{max_turns}",
     "stock": "Karitiw: {stock} karitiw",
-    "waste": "Waste (W): {waste}",
-    "foundations_header": "Foundations:",
+    "waste": "Fɛɛn minw be kɛ ka dugukolo fa: {waste}",
+    "foundations_header": "Jamanadenw:",
     "foundation_row": "  F{n}: {cards}",
-    "tableau_header": "Tableau:",
+    "tableau_header": "Tablo: Yɔrɔ minw be yen.",
     "tableau_row": "  T{n}: {cards}"
   }
 }

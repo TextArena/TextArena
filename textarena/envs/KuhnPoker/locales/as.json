@@ -1,6 +1,6 @@
 {
   "player_prompt": {
-    "intro": "You are Player {player_id} in a {max_rounds} round game of Kuhn Poker.\nGame Rules:\n- Kuhn Poker uses a 3-card deck with J, Q, K (J lowest, K highest)\n- Each player antes {ante} chip and receives 1 card each round (note that the cards are dealt without replacement, so you cannot have the same card as your opponent).\n- Game continues for {max_rounds} rounds\n- The player with the most chips after all rounds wins\nAction Rules:\n- '[check]': Pass without betting (only if no bet is on the table)\n- '[bet]': Add 1 chip to the pot (only if no bet is on the table)\n- '[call]': Match an opponent's bet by adding 1 chip to the pot\n- '[fold]': Surrender your hand and let your opponent win the pot"
+    "intro": "আপুনি খেলুৱৈ {player_id} কুন প'কাৰৰ {max_rounds} ৰাউণ্ড খেলত। খেলৰ নিয়মঃ - কুন প'কাৰত ৩ কাৰ্ডৰ ডেক ব্যৱহাৰ কৰে য, ক, ক (য নিম্নতম, ক উচ্চতম) - প্ৰত্যেকজন খেলুৱৈ এণ্টছ {ante} চিপ আৰু প্ৰত্যেক ৰাউণ্ডত ১ কাৰ্ড লাভ কৰে (মনত ৰাখিব যে কাৰ্ডবোৰ সলনি নকৰাকৈ বিতৰণ কৰা হয়, গতিকে আপোনাৰ প্ৰতিপক্ষৰ সৈতে একে কাৰ্ড থাকিব নোৱাৰে) । - খেল {max_rounds} ৰাউণ্ডৰ বাবে অব্যাহত থাকে - সকলো ৰাউণ্ডৰ পিছত সৰ্বাধিক চিপ থকা খেলুৱৈ জিকিছে ক্ৰিয়া নিয়মঃ - '[check]': পাচ (কেৱল যদি টেবুলত কোনো বেট নাই) - '[bet]': পটলৈ ১ চিপ যোগ কৰক (কেৱল যদি টেবুলত কোনো বেট নাই) - '[call]': পটলৈ ১ যোগ কৰি প্ৰতিপক্ষৰ বেট মেচ কৰক - [fold]: আপোনাৰ হাত এৰি দিয়ক আৰু আপোনাৰ প্ৰতিপক্ষৰ পট জিকাব দিয়ক"
   },
   "init_round": {
     "round_start": "### আৰম্ভণি ৰাউণ্ড {current_round} ৰ পৰা {max_rounds} ৰাউণ্ড আপোনাৰ কাৰ্ড হল: '{player_card}'",
@@ -16,12 +16,12 @@
     "round_summary": "{reason} বৰ্তমানৰ স্ক'ৰঃ খেলুৱৈ ০ঃ \"{player_0_chips}\"; খেলুৱৈ ১ঃ \"{player_1_chips}\""
   },
   "showdown": {
-    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+    "showdown_summary": "শ্বডাউনঃ খেলুৱৈ {winner}ৰ {winner_card} খেলুৱৈ {loser}ৰ {loser_card}ক পৰাস্ত কৰে। খেলুৱৈ {winner}য়ে {pot_value}চিপৰ পট লাভ কৰে।"
   },
   "outcome": {
     "draw": "{max_rounds} ৰাউণ্ডৰ শেষত, দুয়োটা খেলুৱৈৰ সমান সংখ্যক চিপ আছিল।",
-    "round_win": "Player {player_id} has folded.",
-    "winner_player0": "Player 0 won by having more chips at the end of all {max_rounds} rounds.",
-    "winner_player1": "Player 1 won by having more chips at the end of all {max_rounds} rounds."
+    "round_win": "খেলুৱৈ {player_id}য়ে খেল সমাপ্ত কৰিছে।",
+    "winner_player0": "খেলুৱৈ ০ ৰ সকলো {max_rounds} ৰাউণ্ডৰ শেষত অধিক চিপ থকাটোৱে বিজয়ী হয়।",
+    "winner_player1": "খেলুৱৈ ১ ৰ সকলো {max_rounds} ৰাউণ্ডৰ শেষত অধিক চিপ থকাটোৱে বিজয়ী হয়।"
   }
 }

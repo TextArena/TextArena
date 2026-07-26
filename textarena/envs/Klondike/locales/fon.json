@@ -16,13 +16,13 @@
     "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
   },
   "player_prompt": {
-    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+    "intro": "A ɖo Klondike Solitaire wɛ. Nǔ e a na wa ɔ́ wɛ nyí ɖɔ hwi ni sɛ̀n lɛ bǐ dó ta nú mɛtɛnkpɔn-tɔ́kwɛ́ lɛ é jí. Xò gbɛgbɛ tɔn: - Mɛtɛ́nkpa (F1-F4): Nɔ kplékplé sín Ace yì King ɖò kɔlɛji ɖé nu - Tableau piles (T1-T7): Gbǎ nǔmɛsɛn lɛ (wùvɔ jɛ wiwi, wuntun jɛ cín) - Akpáɖán: Kún akpàxwé bo wá zán kpo gǒflágbá gblamɛ - Gǒflégbánú (W): Atɔxwɛ̌ ɖaxó hugǎn è sixu ɖè bɔ è nɔ xò => 'klɔ' => 'kɔ́n xójlawema bó ná zán kpo goxɔví ɖokpo gudo => 'xota tɛn<font> <title> [count] => 'tú wemaxixa]] => 'só akɔ́nɔ tòdó wè => 'zɔ̌ W1 T1, SÓ F2 T3, SÓ T5 2.' À lĕvo ɔ́, è hɛn ɔ́ yí \"all\" => 'bǐ', ée táá tɛ́n azɔn ɖokpó ɔ́ ba bo na bló bonu we ní mɔ wěma towe ɖíɖó => 'Gbɔ mi ɖó hwɛɖɔ xóxó ó => 'Kpɔ́númɔnɔ = forfeit'; à lè ko kpéte => 'Syɔ kɛɖɛ kpɔ́ndì => 'A ma sɔ́na wà nùɖé ǎ.', Mi ka sixú zɔ́ nùn ye zɛ azɔ̌ ɖě wú => 'Másà xá atɛ lɛ wu => 'Hɛnkɛ́nu ɖe kpowun': Sɛ́ kpan to do => 'Crná mε; Nuxu E má hun hwenu e è hwlàn awovɔ ɔ́n ayi tɔ́n ɔ́ nɛ è nyla fìn hǔn, mi yi te => 'to=$1. É nyɔ́:' [N' => To win!"
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "no_brackets": "Nǔwiwa e ma sɔgbe ǎ é sín akpàkpà. Nǔwiwa ɔ ɖó na ɖò ganmɛ mɛ̀.",
+    "no_closing_bracket": "Nǔwiwa e è ma sɔ́ ɖó ǎ é sín akpàkpà: wuntun tíìn ă ']'",
     "empty_command": "Xá nùɖé. Wlan 'draw' alǒ 'move <source><destination> [count].'",
-    "empty_action": "Empty action",
+    "empty_action": "Nǔ e mɛ̀ ma ɖè ǎ é",
     "move_needs_args": "move command ɔ byɔ source kpo destination kpo. Usage: 'move <source> <destination> [count]'",
     "count_positive": "Akwɛ ɔ ɖó na nyí ɖagbe alǒ \" bǐ\"",
     "count_invalid": "Xà nǔ e ma sɔgbe ǎ é. Wlan nùɖé alǒ ' bǐ'",
@@ -35,30 +35,30 @@
     "failed": "Azo {n} klɔ: {msg}"
   },
   "move_result": {
-    "drew": "Drew card(s) from stock to waste.",
-    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "drew": "E nɔ sɔ́ nǔ e ɖò mɛ lɛ é dó sú nùɖé sín wema jí.",
+    "cannot_draw": "È sixu ɖè ǎ. Nǔ e è hɛn lɛ é kpo nǔ e mɛ è nɔ dó lɛ é kpó bǐ vɔ́.",
     "invalid_pile": "Akɔ́n e nyí nǔ è ma sɔgbe ǎ é sín nyikɔ. W, F1-F4, alǒ T1-T7 wɛ a na zán",
     "foundation_one_card": "É sixu tɛnkpɔn bo na ɖó nǔ ɖokpo kpowun ɖò fí e è ɖè é.",
     "waste_to_foundation_ok": "E yí wema sín nǔ e jɛ lɛ é mɛ yì fí è nɔ ɖó ɔ F{dst}",
     "waste_to_foundation_bad": "E sixu sɛ̀n wema e è nɔ zán dó nùɖé lɛ́ɛ ɔ yì dòdó mɛ ǎ",
     "tableau_to_foundation_ok": "Zɛ ka ɖi T{src} ɖi F{dst}",
     "tableau_to_foundation_bad": "E sixu sɛ̀n tábléká ɔ́ dó nùxíɖókpɔ́ e ɖò fí é jí ǎ.",
-    "foundation_to_foundation": "Cannot move from foundation to foundation",
+    "foundation_to_foundation": "E sixu yì do mɛ̀ ă.",
     "waste_to_tableau_one_card": "E sixu tɛn ka ɖokpo kpowun sín nǔ e è ma dó ǎ é mɛ yì tableau jí.",
     "waste_to_tableau_ok": "E yí kpò sín nǔ e è hɛn yì nùɖé mɛ é jí wá table T{dst}",
     "waste_to_tableau_bad": "E sixu sɔ́ kpò ɖò nùɖíɖó lɛ sín xɛ ɔ jí ǎ.",
-    "no_face_up": "No face-up cards to move",
+    "no_face_up": "É sɔ́ ɖó ná ɖò nǔ lɛ jí ǎ.",
     "tableau_to_tableau_ok": "Zɛ {count} ka ɖi T{src} ɖi T{dst}",
     "tableau_to_tableau_bad": "Eɖi ɖɔ na zɛ {count} ka ɖi T{src} ɖi T{dst}",
     "foundation_to_tableau_one_card": "E sixu tɛn ka ɖokpo kpowun sín do ɔ mɛ yi tableau mɛ.",
     "foundation_empty": "Tɛnkpɔnmɛ F{src} ɔ mɛ̀ ɖò bibɛ̌bŭn.",
     "foundation_to_tableau_ok": "Zɛ ka ɖi F{src} ɖi T{dst}",
     "foundation_to_tableau_bad": "E sixu sɔ́ kpò ɖò table T {dst} jí ǎ.",
-    "to_waste_or_stock": "Cannot move to waste or stock"
+    "to_waste_or_stock": "E sixu yì nùvɔ mɛ ǎ."
   },
   "outcome": {
     "forfeit": "Ðàñïðîñòðàíåí. ×åðòîâûé ðåçóëüòàò: {score} êàðòîôåëü â îñíîâíûõ óãîëêàõ.",
-    "won": "Congratulations! You've won Klondike Solitaire!",
+    "won": "Un dó kú nú mi! Mi ɖu Klondike Solitaire sín ajɔ.",
     "turn_limit": "Game over! You reached the maximum of {max_turns} turns. Score: {score} cards in foundations."
   },
   "board": {

@@ -19,13 +19,13 @@
     "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "no_brackets": "Mana allin ruwaykuna, mana allinta ruwasqa.",
+    "no_closing_bracket": "Mana allin ruwaykuna. mana tukukuq paréntesis \"]\"",
     "empty_command": "Mana ima kamachiy. \"draw\" icha \"move <source> <destination> [count]\" nisqaman qillqay.",
-    "empty_action": "Empty action",
+    "empty_action": "Mana imapaq ruwakunchu.",
     "move_needs_args": "Move kamachiyqa maymantachus, imawantaq ripunanta munan. Usualidad: 'move <source> <destination> [count]'",
-    "count_positive": "Count must be positive or 'all'",
-    "count_invalid": "Invalid count. Use a number or 'all'",
+    "count_positive": "\"Tukuy\" nisqa valorqa allinpuni kanan tiyan.",
+    "count_invalid": "Mana allin willakuy. \"all\" nisqawan qillqay, icha huk yupayta utilizay.",
     "unknown_command": "Comando desconocido '{cmd}'. Usa 'draw', 'move <source> <destination> [count]', o 'forfeit'",
     "wrapped": "Accion {n}: {msg}"
   },
@@ -47,14 +47,14 @@
     "waste_to_tableau_one_card": "Uchuymanta q'illaymanqa huk kartallata apanapaq.",
     "waste_to_tableau_ok": "Cartilla de residuos nisqawan T{dst} tablapi churasqa.",
     "waste_to_tableau_bad": "Manan tarjeta q'epikunataqa chay tablero-man churayta atinchu.",
-    "no_face_up": "No face-up cards to move",
+    "no_face_up": "Mana ima cartatapis chʼichichanmanchu.",
     "tableau_to_tableau_ok": "Movi {count} carta(s) de tableau T{src} a T{dst}",
     "tableau_to_tableau_bad": "No se puede mover {count} carta(s) de T{src} a T{dst}",
     "foundation_to_tableau_one_card": "Uchuymanta ch'ulla t'ikamanqa huk kartallata apakunman.",
     "foundation_empty": "Fundación F{src} ch'usaqmi.",
     "foundation_to_tableau_ok": "Moved card from foundation F{src} to tableau T{dst}",
     "foundation_to_tableau_bad": "Mana atispa tarjeta de fundaciónpi t'ikrasqa T{dst}",
-    "to_waste_or_stock": "Cannot move to waste or stock"
+    "to_waste_or_stock": "Mana ima q'ipis, ni imapas tarikuyta atinchu."
   },
   "outcome": {
     "forfeit": "Q'illaypi: {score} tarjetas.",
@@ -64,11 +64,11 @@
   "board": {
     "title": "=== KLONDIKE SOLITAIRE === [[Piruwpi:K'iti]] sutiyuq p'anqaman t'inkimuqkuna",
     "turn": "Turno: {turn}/{max_turns}",
-    "stock": "Stock: {stock} cards",
+    "stock": "Ima cartakunachus: {stock} kartakunapi",
     "waste": "Waste (W): {waste} Wastaqa, maypichus kan.",
     "foundations_header": "Fundación:",
     "foundation_row": "F{n}: {cards}",
-    "tableau_header": "Tableau:",
+    "tableau_header": "Qelqa:",
     "tableau_row": "T{n}: {cards}"
   }
 }

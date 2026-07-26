@@ -48,6 +48,10 @@ class PokerEnv(ta.Env):
             "round": 1, "betting_round": 0, "player_chips": {pid: self.starting_chips for pid in range(num_players)}, "player_hands": {pid: [] for pid in range(num_players)},
             "community_cards": [], "visible_community_cards": [], "pot": 0, "current_bet": 0, "player_bets": {pid: 0 for pid in range(num_players)}, "button": 0, "folded_players": set(),
             "all_in_players": set(), "checked_players": set(), "round_turn": 0, "game_complete": False, "last_bettor": -1, "bet_round_complete": False,
+            # Total chips each player has put into the pot THIS hand (across every
+            # betting round). player_bets resets per street; this does not, so it is
+            # the basis for main/side-pot splitting at showdown.
+            "contributions": {pid: 0 for pid in range(num_players)},
         }
         self.state.reset(game_state=gs, player_prompt_function=self._prompt)
         self.state.add_observation(message=self.m("game", "start", num_rounds=self.num_rounds, num_players=num_players), observation_type=ta.ObservationType.GAME_MESSAGE)
@@ -75,6 +79,7 @@ class PokerEnv(ta.Env):
         gs["pot"] = 0
         gs["current_bet"] = 0
         gs["player_bets"] = {pid: 0 for pid in range(n)}
+        gs["contributions"] = {pid: 0 for pid in range(n)}
         gs["folded_players"] = set()
         gs["all_in_players"] = set()
         gs["checked_players"] = set()
@@ -441,15 +446,20 @@ class PokerEnv(ta.Env):
         return 1, sorted(ranks, reverse=True)[:5]
 
     def _check_straight(self, sorted_ranks: List[int]) -> Tuple[bool, int]:
+        # sorted_ranks is ascending and distinct. Scan the 5-card windows from the
+        # top down so the HIGHEST straight is returned (a 2-6 hand containing
+        # 2,3,4,5,6,7 is seven-high, not six-high). The wheel (A-2-3-4-5, five-high
+        # with the ace playing low) is only a fallback when no natural straight
+        # exists -- otherwise a hand like 2,3,4,5,6,A would wrongly score as the
+        # wheel instead of the higher six-high straight.
         if len(sorted_ranks) < 5:
             return False, -1
-        # Wheel
-        if {14, 2, 3, 4, 5}.issubset(sorted_ranks):
-            return True, 5
-        for i in range(len(sorted_ranks) - 4):
+        for i in range(len(sorted_ranks) - 5, -1, -1):
             seq = sorted_ranks[i:i + 5]
             if seq[-1] - seq[0] == 4:
                 return True, seq[-1]
+        if {14, 2, 3, 4, 5}.issubset(sorted_ranks):
+            return True, 5
         return False, -1
 
     def determine_winner(self):

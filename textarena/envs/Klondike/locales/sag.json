@@ -16,13 +16,13 @@
     "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
   },
   "player_prompt": {
-    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+    "intro": "Mo yeke sala ngia ti Klondike Solitaire. Ye so mo ye ayeke ti gue na acarte kue na ndo molongo ti gere ni. Akpengba-ndia ti jeu: - Molongo ti gunda (F1-F4): Leke lege ti guengo na nduzu, a londo na Ace juska Gbia; A lingbi nga ti leke aye tongana tableau (T1-T7): Gbu li nde nde (vuko na ndö ti vuko, vuko na ndo ti bengba) - Stock: Tinda alettre si ala buba gbâ ti atênë; Waste (W): Kota carte so alingbi ti tene azo asala kua na ni Commandes: 'tinda' - Tirango alettere na place ti bata wala ti zi yâ ni; <source><destination> [count] - Yôro akireti na popo ti apile Exemple: 'Yö W1', 'Zia T1 F2', 'Zi T3 T5 2'. Peut duti nga \"azo kue\", so ayeke tara fade fade ti yôra akugbe so lê asigigi polele pëpe. - 'Ti tï na kuâ\" - Hunzi angoi ti match na kanga iri ti mo laso - Piseau W (awâ), F4-F1-T1), Zua abate kuäle na ndo ni (T7-A)."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "no_brackets": "A yeke nzoni a zia atënë ni na yâ ti acouche.",
+    "no_closing_bracket": "A yeke na lege ni pëpe ti sara ye so a hunda. Kete kete tënë ayeke dä ape \"]\"",
     "empty_command": "Commande so ayeke senge. Mo lingbi ti sû \"draw\" wala \"move <source><destination> [count]\".",
-    "empty_action": "Empty action",
+    "empty_action": "Ye so a sara ni senge senge",
     "move_needs_args": "Komand ti yôro ahunda ndo so a londo dä nga na ndo ni si zo ague. A sala kusala na: 'move <source> <destination> [count]'",
     "count_positive": "A lingbi wungo ni aduti nzoni wala \"azo kue\"",
     "count_invalid": "A diko ni nzoni ape. Sara kua na mbeni wungo wala \"azo kue\"",
@@ -36,13 +36,13 @@
   },
   "move_result": {
     "drew": "A zia ni na yâ ti mbeni ye so a bata.",
-    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "cannot_draw": "E lingbi ti gboto ye pëpe, e yeke na aye mingi nga a buba ni kue.",
     "invalid_pile": "Iri ti pile ni ayeke na lege ni pëpe. Sara kua na W, F1-F4, wala T1-T7",
     "foundation_one_card": "A lingbi ti zia gi carte oko na yâ da ni.",
     "waste_to_foundation_ok": "A zia carte ni na yâ ti aye so a buba F{dst}",
     "waste_to_foundation_bad": "A lingbi ti zia carte ni na ndo so a leke gere ni dä ape.",
     "tableau_to_foundation_ok": "Tɛ̈mɛ̈n kɛ̈ thia kɛn tableau T{src} de foundation F{dst}",
-    "tableau_to_foundation_bad": "Cannot move tableau card to that foundation pile",
+    "tableau_to_foundation_bad": "A lingbi ti yôro carte ni na ndo molongo so a zia gere ni dä pëpe",
     "foundation_to_foundation": "A lingbi ti gue na mbeni ndo nde pëpe.",
     "waste_to_tableau_one_card": "A lingbi ti zia gi carte oko na yâ tableau ni.",
     "waste_to_tableau_ok": "A zia carte ni na yâ ti tableau T{dst}",
@@ -54,18 +54,18 @@
     "foundation_empty": "Ndokua F{src} ayeke senge.",
     "foundation_to_tableau_ok": "Tɛ̈mɛ̈n kɛ̈ thia kɛn foundation F{src} de tableau T{dst}",
     "foundation_to_tableau_bad": "A lingbi ti zia carte na ndo tableau T{dst} pëpe.",
-    "to_waste_or_stock": "Cannot move to waste or stock"
+    "to_waste_or_stock": "A lingbi ti zia ni na ndo so a yeke buba aye dä pëpe wala na yâ ti akungba."
   },
   "outcome": {
-    "forfeit": "Game forfeited. Final score: {score} cards in foundations.",
+    "forfeit": "A zia ngia ni na sese. Nduru wungo ti a-carte: {score} yâ ti acarte so ayeke tongana gere ti da (foundations).",
     "won": "E bara mo, mo sö benda na yâ ti molongo so a iri ni Klondike Solitaire!",
     "turn_limit": "Ŋɛ̈kɛ̈! Ya tɛ̈mɛ̈n tɛ̈mɛ̈n ɣɔn {max_turns}. Thia: {score} kɛ̈ thia kɛn foundation."
   },
   "board": {
-    "title": "=== KLONDIKE SOLITAIRE ===",
+    "title": "=== KLONDIKE SOLITAIRE=== Aye so mo yeke sara na yâ ti gigi ti mo kue ayeke ga ande nzoni.",
     "turn": "Tɛ̈mɛ̈n: {turn}/{max_turns}",
-    "stock": "Stock: {stock} cards",
-    "waste": "Waste (W): {waste}",
+    "stock": "Akete carte: {stock} acarte ti nginza so a zia na yâ ni.",
+    "waste": "Abalê ti kobe (W): {waste}",
     "foundations_header": "A leke ni:",
     "foundation_row": "F{n}: {cards} ti lo ni so ayeke na ndo ti sese.",
     "tableau_header": "Tableau: ti",

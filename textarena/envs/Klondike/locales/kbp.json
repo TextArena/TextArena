@@ -19,10 +19,10 @@
     "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "no_brackets": "Tʋma wena a-labɩna nɛ pɩfɛyɩ ɖeu yɔ, pɩwɛɛ se awɛ cɛcɛsɩ taa.",
+    "no_closing_bracket": "Tʊmɩyɛ nɖɩ ɖɩfɛyɩ ɖeu. Pɩtɛɖɩɣ kɩ-taa tɔmpiye \"]\" yɔ\".",
     "empty_command": "Pɩtɛ paɣtʋ. pamaɣ \"draw\" yaa \"move <source><destination> [count]\".",
-    "empty_action": "Empty action",
+    "empty_action": "Tʋma wena paalakɩ yɔ a-tɔm",
     "move_needs_args": "Pɩpɔzʋʋ se pɛɖɛzɩ lone nɖɩ ɖɩ-taa palɩzɩ tɔm yɔ nɛ ɖenɖe papɩzɩɣ patɩŋna yɔ. Tɔm piye: \"move <source> <destination> [count]\"",
     "count_positive": "Pɩwɛɛ se kɩ-tɛ tɔm ɛtalɩ camɩyɛ yaa \"mba payɩ\" yɔ.",
     "count_invalid": "Pɩfɛyɩ ɖeu se pama-kʋ. Palakɩna mayaɣ nakɛyɛ yaa \"mba payɩ\" yɔ.",
@@ -35,12 +35,12 @@
     "failed": "Action {n} failed: {msg}"
   },
   "move_result": {
-    "drew": "Drew card(s) from stock to waste.",
-    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "drew": "Ɛ-tɛ lɛɣtʋ kɩfatʋ kpɛlɛkʋʋ tʋmɩyɛ.",
+    "cannot_draw": "Pɩfɛyɩ se ɖɩlɩzɩ, mbʋ pʋyɔɔ yɔ wondu ndʋ ɖɩwɛna nɛ tɩ-taa ñɩtʋ fɛyɩ.",
     "invalid_pile": "Pɩtɩmʋna se pamaɣ-ɩ hɩɖɛ. Palakɩ tʋmɩyɛ nɛ W, F1-F4, yaa T1-T7",
     "foundation_one_card": "Papɩzɩɣ pɛtɛzɩna takayaɣ kʋɖʋmaɣ koŋ kɛ kiɖe tɛɛ.",
-    "waste_to_foundation_ok": "Moved card from waste to foundation F{dst}",
-    "waste_to_foundation_bad": "Cannot move waste card to that foundation pile",
+    "waste_to_foundation_ok": "Pɩlɩʋ \\\\ Kpɛdɩyaa kɩbɩma F{dst}",
+    "waste_to_foundation_bad": "Pɩfɛyɩ se pɛtɛzɩ karɩtɩ kɩfalʋʋ ŋgʋ pama-kʋ nɛ pɩɖɛɛ yɔ. 🔍",
     "tableau_to_foundation_ok": "Kaari kɛdɩ T pɩlɩŋa T{src} nɛ F pɩlɩŋa F{dst}",
     "tableau_to_foundation_bad": "Taapɩzɩɣ nɛ ɛɖɛzɩ tableau takayaɣ ŋga ka-taa kɛwɛna takayɩhayʋʋ yɔ. 🔍",
     "foundation_to_foundation": "Pɩfɛyɩ se pɛɖɛzɩ-ɖɩ nɛ pɩɖɛɛna ɖama yɔɔ.",
@@ -66,9 +66,9 @@
     "turn": "Turn: {turn}/{max_turns}",
     "stock": "Stock: {stock} cards",
     "waste": "Tɛtʊ ndʊ tɩ-taa paɖʊʊ tʊma yɔ: {waste}",
-    "foundations_header": "Foundations:",
+    "foundations_header": "Tʋma ɖɩlaɖɛ nɛ a-taa wobu:",
     "foundation_row": "  F{n}: {cards}",
-    "tableau_header": "Tableau:",
+    "tableau_header": "Takayɩhatʋ ndʋ tɩtamsɩna \\\\ 1",
     "tableau_row": "  T{n}: {cards}"
   }
 }

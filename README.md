@@ -112,158 +112,158 @@ If you have any questions at all, feel free to reach out on discord. The below i
 
 Beyond the human-reviewed languages, TextArena includes **143 additional low-resource UI localizations** produced with open machine-translation models and checked by an automatic, *reader-free* verifier: each string is translated, independently back-translated by two other models, and an LLM judges faithfulness against the English source. **No claim is made of native-review quality.** Every back-translation-confirmed divergence is **reverted to English**, so no *known*-wrong string ships; the counts below are how many leaves were reverted (a proxy for residual risk). Each language carries an explicit **confidence tier**. At runtime, `textarena.utils.locales.language_confidence.warn_if_flagged(lang)` emits a `UserWarning` for any non-certified locale; the machine-readable source is [`_trackb_confidence.json`](textarena/utils/locales/_trackb_confidence.json).
 
-**Certified-flagged** (4) — verified; a few games flagged:
+**Certified-flagged** (111) — verified; a few games flagged:
 
 | Language | Tier | Translated coverage | Confirmed (reverted) | Flagged games |
 |---|---|---|---|---|
-| Kannada (`kn`) | CERTIFIED_FLAGGED | ~97% | 12 | Breakthrough, Briscola, ColonelBlotto, ConnectFour +6 more |
-| Punjabi (`pa`) | CERTIFIED_FLAGGED | ~95% | 19 | Alquerque, Breakthrough, Briscola, Checkers +11 more |
-| Gujarati (`gu`) | CERTIFIED_FLAGGED | ~97% | 22 | Alquerque, Breakthrough, Briscola, Crusade +14 more |
-| Belarusian (`be`) | CERTIFIED_FLAGGED | ~97% | 26 | Battleship, Breakthrough, Briscola, Chopsticks +16 more |
+| Kannada (`kn`) | CERTIFIED_FLAGGED | ~95% | 0 | — |
+| Gujarati (`gu`) | CERTIFIED_FLAGGED | ~96% | 0 | — |
+| Punjabi (`pa`) | CERTIFIED_FLAGGED | ~97% | 0 | — |
+| Marathi (`mr`) | CERTIFIED_FLAGGED | ~97% | 0 | — |
+| Lao (`lo`) | CERTIFIED_FLAGGED | ~95% | 0 | — |
+| Central Kurdish (`ckb`) | CERTIFIED_FLAGGED | ~86% | 0 | — |
+| Sindhi (`sd`) | CERTIFIED_FLAGGED | ~96% | 1 | — |
+| Nepali (`ne`) | CERTIFIED_FLAGGED | ~95% | 1 | — |
+| Amharic (`am`) | CERTIFIED_FLAGGED | ~85% | 1 | — |
+| Chhattisgarhi (`hne`) | CERTIFIED_FLAGGED | ~88% | 1 | — |
+| Maithili (`mai`) | CERTIFIED_FLAGGED | ~91% | 1 | — |
+| Ilocano (`ilo`) | CERTIFIED_FLAGGED | ~89% | 1 | — |
+| Kashmiri (`kas`) | CERTIFIED_FLAGGED | ~84% | 1 | — |
+| Kikuyu (`kik`) | CERTIFIED_FLAGGED | ~79% | 1 | — |
+| Sundanese (`sun`) | CERTIFIED_FLAGGED | ~94% | 1 | — |
+| Tigrinya (`tir`) | CERTIFIED_FLAGGED | ~78% | 1 | — |
+| ceb (`ceb`) | CERTIFIED_FLAGGED | ~91% | 2 | — |
+| Banjar (`bjn`) | CERTIFIED_FLAGGED | ~92% | 2 | — |
+| Najdi Arabic (`ars`) | CERTIFIED_FLAGGED | ~93% | 2 | — |
+| Egyptian Arabic (`arz`) | CERTIFIED_FLAGGED | ~92% | 2 | — |
+| Esperanto (`epo`) | CERTIFIED_FLAGGED | ~94% | 2 | — |
+| Scottish Gaelic (`gla`) | CERTIFIED_FLAGGED | ~88% | 2 | — |
+| Irish (`gle`) | CERTIFIED_FLAGGED | ~89% | 2 | — |
+| Javanese (`jav`) | CERTIFIED_FLAGGED | ~93% | 2 | — |
+| Latgalian (`ltg`) | CERTIFIED_FLAGGED | ~87% | 2 | — |
+| Luo (`luo`) | CERTIFIED_FLAGGED | ~84% | 2 | — |
+| Central Kanuri (`knc`) | CERTIFIED_FLAGGED | ~76% | 2 | — |
+| Southern Sotho (`sot`) | CERTIFIED_FLAGGED | ~89% | 2 | — |
+| Minangkabau (`min`) | CERTIFIED_FLAGGED | ~90% | 2 | — |
+| Nyanja (`nya`) | CERTIFIED_FLAGGED | ~90% | 2 | — |
+| Shona (`sna`) | CERTIFIED_FLAGGED | ~90% | 2 | — |
+| Samoan (`smo`) | CERTIFIED_FLAGGED | ~89% | 2 | — |
+| Maori (`mri`) | CERTIFIED_FLAGGED | ~90% | 2 | — |
+| Pangasinan (`pag`) | CERTIFIED_FLAGGED | ~86% | 2 | — |
+| Meitei (`mni`) | CERTIFIED_FLAGGED | ~69% | 2 | — |
+| Swati (`ssw`) | CERTIFIED_FLAGGED | ~87% | 2 | — |
+| Sanskrit (`san`) | CERTIFIED_FLAGGED | ~86% | 2 | — |
+| Belarusian (`be`) | CERTIFIED_FLAGGED | ~96% | 3 | — |
+| Uzbek (`uz`) | CERTIFIED_FLAGGED | ~95% | 3 | — |
+| Malayalam (`ml`) | CERTIFIED_FLAGGED | ~95% | 3 | — |
+| Welsh (`cy`) | CERTIFIED_FLAGGED | ~93% | 3 | — |
+| Burmese (`my`) | CERTIFIED_FLAGGED | ~94% | 3 | — |
+| Somali (`so`) | CERTIFIED_FLAGGED | ~95% | 3 | — |
+| Hausa (`ha`) | CERTIFIED_FLAGGED | ~95% | 3 | — |
+| Taizzi-Adeni Arabic (`acq`) | CERTIFIED_FLAGGED | ~92% | 3 | — |
+| Acehnese (`ace`) | CERTIFIED_FLAGGED | ~92% | 3 | — |
+| West Central Oromo (`gaz`) | CERTIFIED_FLAGGED | ~79% | 3 | — |
+| Nigerian Fulfulde (`fuv`) | CERTIFIED_FLAGGED | ~81% | 3 | — |
+| Haitian Creole (`hat`) | CERTIFIED_FLAGGED | ~93% | 3 | — |
+| Northern Kurdish (`kmr`) | CERTIFIED_FLAGGED | ~87% | 3 | — |
+| Tatar (`tat`) | CERTIFIED_FLAGGED | ~86% | 3 | — |
+| Rundi (`run`) | CERTIFIED_FLAGGED | ~86% | 3 | — |
+| Tajik (`tgk`) | CERTIFIED_FLAGGED | ~90% | 3 | — |
+| Tsonga (`tso`) | CERTIFIED_FLAGGED | ~88% | 3 | — |
+| Armenian (`hy`) | CERTIFIED_FLAGGED | ~95% | 4 | — |
+| Igbo (`ig`) | CERTIFIED_FLAGGED | ~96% | 4 | — |
+| South Azerbaijani (`azb`) | CERTIFIED_FLAGGED | ~82% | 4 | — |
+| Limburgish (`lim`) | CERTIFIED_FLAGGED | ~91% | 4 | — |
+| Tamasheq (`taq`) | CERTIFIED_FLAGGED | ~71% | 4 | — |
+| Crimean Tatar (`crh`) | CERTIFIED_FLAGGED | ~90% | 5 | — |
+| South Levantine Arabic (`ajp`) | CERTIFIED_FLAGGED | ~92% | 5 | — |
+| Moroccan Arabic (`ary`) | CERTIFIED_FLAGGED | ~91% | 5 | — |
+| Bashkir (`bak`) | CERTIFIED_FLAGGED | ~82% | 5 | — |
+| Guarani (`grn`) | CERTIFIED_FLAGGED | ~84% | 5 | — |
+| Southwestern Dinka (`dik`) | CERTIFIED_FLAGGED | ~78% | 5 | — |
+| Lombard (`lmo`) | CERTIFIED_FLAGGED | ~88% | 5 | — |
+| Luxembourgish (`ltz`) | CERTIFIED_FLAGGED | ~90% | 5 | — |
+| Northern Sotho (`nso`) | CERTIFIED_FLAGGED | ~85% | 5 | — |
+| Tswana (`tsn`) | CERTIFIED_FLAGGED | ~86% | 5 | — |
+| Central Atlas Tamazight (`tzm`) | CERTIFIED_FLAGGED | ~76% | 5 | — |
+| Telugu (`te`) | CERTIFIED_FLAGGED | ~95% | 6 | — |
+| Sinhala (`si`) | CERTIFIED_FLAGGED | ~94% | 6 | — |
+| Mesopotamian Arabic (`acm`) | CERTIFIED_FLAGGED | ~92% | 6 | — |
+| Buginese (`bug`) | CERTIFIED_FLAGGED | ~86% | 6 | — |
+| Bambara (`bam`) | CERTIFIED_FLAGGED | ~79% | 6 | — |
+| Akan (`aka`) | CERTIFIED_FLAGGED | ~74% | 6 | — |
+| Mizo (`lus`) | CERTIFIED_FLAGGED | ~78% | 6 | — |
+| Sicilian (`scn`) | CERTIFIED_FLAGGED | ~92% | 6 | — |
+| Occitan (`oci`) | CERTIFIED_FLAGGED | ~91% | 6 | — |
+| Maltese (`mlt`) | CERTIFIED_FLAGGED | ~86% | 6 | — |
+| Nuer (`nus`) | CERTIFIED_FLAGGED | ~79% | 6 | — |
+| Sango (`sag`) | CERTIFIED_FLAGGED | ~77% | 6 | — |
+| Xhosa (`xho`) | CERTIFIED_FLAGGED | ~86% | 6 | — |
+| Turkmen (`tuk`) | CERTIFIED_FLAGGED | ~86% | 6 | — |
+| Central Aymara (`ayr`) | CERTIFIED_FLAGGED | ~79% | 7 | — |
+| Balinese (`ban`) | CERTIFIED_FLAGGED | ~91% | 7 | — |
+| Faroese (`fao`) | CERTIFIED_FLAGGED | ~91% | 7 | — |
+| Ligurian (`lij`) | CERTIFIED_FLAGGED | ~87% | 7 | — |
+| Kabyle (`kab`) | CERTIFIED_FLAGGED | ~80% | 7 | — |
+| Silesian (`szl`) | CERTIFIED_FLAGGED | ~91% | 7 | — |
+| Venetian (`vec`) | CERTIFIED_FLAGGED | ~92% | 7 | — |
+| Twi (`twi`) | CERTIFIED_FLAGGED | ~76% | 7 | — |
+| Pashto (`ps`) | CERTIFIED_FLAGGED | ~95% | 8 | — |
+| Zulu (`zu`) | CERTIFIED_FLAGGED | ~95% | 8 | — |
+| Assamese (`as`) | CERTIFIED_FLAGGED | ~95% | 8 | — |
+| Malagasy (`mg`) | CERTIFIED_FLAGGED | ~94% | 8 | — |
+| Fijian (`fij`) | CERTIFIED_FLAGGED | ~84% | 8 | — |
+| Papiamento (`pap`) | CERTIFIED_FLAGGED | ~92% | 8 | — |
+| Eastern Yiddish (`ydd`) | CERTIFIED_FLAGGED | ~88% | 8 | — |
+| Khmer (`km`) | CERTIFIED_FLAGGED | ~94% | 9 | — |
+| North Levantine Arabic (`apc`) | CERTIFIED_FLAGGED | ~91% | 9 | — |
+| Ewe (`ewe`) | CERTIFIED_FLAGGED | ~79% | 9 | — |
+| Ganda (`lug`) | CERTIFIED_FLAGGED | ~84% | 9 | — |
+| Shan (`shn`) | CERTIFIED_FLAGGED | ~76% | 9 | — |
+| Waray (`war`) | CERTIFIED_FLAGGED | ~87% | 9 | — |
+| Odia (`or`) | CERTIFIED_FLAGGED | ~94% | 10 | — |
+| Yoruba (`yo`) | CERTIFIED_FLAGGED | ~93% | 10 | — |
+| Asturian (`ast`) | CERTIFIED_FLAGGED | ~84% | 10 | — |
+| Friulian (`fur`) | CERTIFIED_FLAGGED | ~88% | 10 | — |
+| Santali (`sat`) | CERTIFIED_FLAGGED | ~75% | 10 | — |
+| Uyghur (`uig`) | CERTIFIED_FLAGGED | ~82% | 10 | — |
 
-> ⚠️ **Experimental** (139) — structurally valid and playable, but the prose is **not certified** and likely contains further errors the verifier missed. Use for coverage/research, not as a reference translation:
+> ⚠️ **Experimental** (32) — structurally valid and playable, but the prose is **not certified** and likely contains further errors the verifier missed. Use for coverage/research, not as a reference translation:
 
 | Language | Tier | Translated coverage | Confirmed (reverted) | Flagged games |
 |---|---|---|---|---|
-| Marathi (`mr`) | EXPERIMENTAL | ~94% | 31 | Checkers, ColonelBlotto, Cryptarithm, FifteenPuzzle +19 more |
-| Esperanto (`epo`) | EXPERIMENTAL | ~92% | 33 | Blackjack, Checkers, Chopsticks, ColonelBlotto +19 more |
-| Pashto (`ps`) | EXPERIMENTAL | ~92% | 36 | Breakthrough, Checkers, Chopsticks, ColonelBlotto +21 more |
-| Javanese (`jav`) | EXPERIMENTAL | ~91% | 36 | Battleship, Blackjack, Briscola, Chopsticks +20 more |
-| Sundanese (`sun`) | EXPERIMENTAL | ~92% | 36 | Battleship, Blackjack, Briscola, Checkers +23 more |
-| Telugu (`te`) | EXPERIMENTAL | ~92% | 38 | Blackjack, Breakthrough, Briscola, Checkers +24 more |
-| ceb (`ceb`) | EXPERIMENTAL | ~88% | 38 | Bandit, Battleship, Blackjack, Briscola +25 more |
-| Sindhi (`sd`) | EXPERIMENTAL | ~92% | 42 | Alquerque, Blackjack, Breakthrough, Briscola +24 more |
-| Nepali (`ne`) | EXPERIMENTAL | ~91% | 43 | Alquerque, Bandit, Checkers, ColonelBlotto +22 more |
-| Lao (`lo`) | EXPERIMENTAL | ~91% | 44 | Breakthrough, Chess, Cryptarithm, FrozenLake +25 more |
-| Sicilian (`scn`) | EXPERIMENTAL | ~90% | 44 | Blackjack, Chopsticks, ColonelBlotto, FrozenLake +24 more |
-| Uzbek (`uz`) | EXPERIMENTAL | ~92% | 45 | Alquerque, Breakthrough, Briscola, Chopsticks +26 more |
-| Malayalam (`ml`) | EXPERIMENTAL | ~91% | 48 | Alquerque, Battleship, Breakthrough, Briscola +22 more |
-| Zulu (`zu`) | EXPERIMENTAL | ~91% | 49 | Battleship, Breakthrough, Briscola, Checkers +27 more |
-| Venetian (`vec`) | EXPERIMENTAL | ~90% | 51 | Alquerque, Blackjack, Breakthrough, Briscola +31 more |
-| Haitian Creole (`hat`) | EXPERIMENTAL | ~89% | 52 | Alquerque, Chess, Chopsticks, ColonelBlotto +25 more |
-| Assamese (`as`) | EXPERIMENTAL | ~90% | 53 | Alquerque, Bandit, Breakthrough, Briscola +22 more |
-| Khmer (`km`) | EXPERIMENTAL | ~89% | 54 | Alquerque, Bandit, Battleship, Breakthrough +29 more |
-| Armenian (`hy`) | EXPERIMENTAL | ~90% | 55 | Alquerque, Bandit, Blackjack, Breakthrough +35 more |
-| Lombard (`lmo`) | EXPERIMENTAL | ~84% | 56 | Alquerque, Bandit, Battleship, Briscola +32 more |
-| Papiamento (`pap`) | EXPERIMENTAL | ~88% | 57 | Bandit, Blackjack, Checkers, Chopsticks +26 more |
-| Eastern Yiddish (`ydd`) | EXPERIMENTAL | ~86% | 57 | Alquerque, Breakthrough, Checkers, Chess +34 more |
-| Welsh (`cy`) | EXPERIMENTAL | ~89% | 58 | Alquerque, Battleship, Blackjack, Checkers +31 more |
-| Banjar (`bjn`) | EXPERIMENTAL | ~88% | 62 | Blackjack, Breakthrough, Briscola, Chopsticks +32 more |
-| Sinhala (`si`) | EXPERIMENTAL | ~88% | 64 | Alquerque, Bandit, Blackjack, Briscola +36 more |
-| Najdi Arabic (`ars`) | EXPERIMENTAL | ~89% | 64 | Alquerque, Blackjack, Breakthrough, Briscola +29 more |
-| Egyptian Arabic (`arz`) | EXPERIMENTAL | ~88% | 64 | Alquerque, Blackjack, Breakthrough, Chess +34 more |
-| Limburgish (`lim`) | EXPERIMENTAL | ~88% | 64 | Battleship, Blackjack, Breakthrough, Checkers +32 more |
-| Occitan (`oci`) | EXPERIMENTAL | ~88% | 64 | Blackjack, Briscola, Checkers, Chopsticks +27 more |
-| Tajik (`tgk`) | EXPERIMENTAL | ~87% | 64 | Blackjack, Breakthrough, Briscola, Checkers +29 more |
-| Taizzi-Adeni Arabic (`acq`) | EXPERIMENTAL | ~88% | 65 | Blackjack, Breakthrough, Briscola, Checkers +32 more |
-| Kazakh (`kk`) | EXPERIMENTAL | ~88% | 66 | Alquerque, Bandit, Battleship, Breakthrough +33 more |
-| Odia (`or`) | EXPERIMENTAL | ~88% | 70 | Alquerque, Briscola, Checkers, Chess +36 more |
-| Burmese (`my`) | EXPERIMENTAL | ~88% | 70 | Alquerque, Briscola, ColonelBlotto, Countdown +30 more |
-| Scottish Gaelic (`gla`) | EXPERIMENTAL | ~84% | 70 | Alquerque, Battleship, Breakthrough, Briscola +36 more |
-| Southern Sotho (`sot`) | EXPERIMENTAL | ~85% | 70 | Alquerque, Battleship, Blackjack, Breakthrough +37 more |
-| Somali (`so`) | EXPERIMENTAL | ~88% | 71 | Alquerque, Bandit, Battleship, Breakthrough +37 more |
-| Amharic (`am`) | EXPERIMENTAL | ~83% | 71 | Alquerque, Blackjack, Breakthrough, Briscola +32 more |
-| Crimean Tatar (`crh`) | EXPERIMENTAL | ~86% | 71 | Blackjack, Breakthrough, Briscola, Checkers +38 more |
-| North Levantine Arabic (`apc`) | EXPERIMENTAL | ~88% | 71 | Alquerque, Battleship, Blackjack, Breakthrough +39 more |
-| Luxembourgish (`ltz`) | EXPERIMENTAL | ~86% | 71 | Bandit, Blackjack, Breakthrough, Briscola +37 more |
-| Chhattisgarhi (`hne`) | EXPERIMENTAL | ~87% | 71 | Alquerque, Bandit, Battleship, Blackjack +42 more |
-| Friulian (`fur`) | EXPERIMENTAL | ~86% | 74 | Alquerque, Battleship, Blackjack, Breakthrough +39 more |
-| Maithili (`mai`) | EXPERIMENTAL | ~87% | 74 | Alquerque, Battleship, Blackjack, Breakthrough +38 more |
-| South Levantine Arabic (`ajp`) | EXPERIMENTAL | ~88% | 75 | Alquerque, Blackjack, Breakthrough, Briscola +40 more |
-| Irish (`gle`) | EXPERIMENTAL | ~87% | 75 | Battleship, Blackjack, Breakthrough, Briscola +36 more |
-| Minangkabau (`min`) | EXPERIMENTAL | ~86% | 77 | Battleship, Blackjack, Breakthrough, Briscola +42 more |
-| Bhojpuri (`bho`) | EXPERIMENTAL | ~86% | 78 | Alquerque, Bandit, Battleship, Blackjack +43 more |
-| Xhosa (`xho`) | EXPERIMENTAL | ~82% | 78 | Alquerque, Battleship, Breakthrough, Briscola +35 more |
-| Balinese (`ban`) | EXPERIMENTAL | ~87% | 79 | Alquerque, Bandit, Battleship, Blackjack +41 more |
-| Malagasy (`mg`) | EXPERIMENTAL | ~87% | 80 | Bandit, Blackjack, Breakthrough, Briscola +42 more |
-| Kyrgyz (`ky`) | EXPERIMENTAL | ~87% | 82 | Alquerque, Battleship, Blackjack, Breakthrough +44 more |
-| Acehnese (`ace`) | EXPERIMENTAL | ~86% | 83 | Alquerque, Bandit, Battleship, Blackjack +41 more |
-| Faroese (`fao`) | EXPERIMENTAL | ~85% | 85 | Bandit, Breakthrough, Briscola, Checkers +33 more |
-| Magahi (`mag`) | EXPERIMENTAL | ~85% | 86 | Alquerque, Battleship, Blackjack, Breakthrough +41 more |
-| Nyanja (`nya`) | EXPERIMENTAL | ~85% | 86 | Alquerque, Blackjack, Briscola, Checkers +41 more |
-| Shona (`sna`) | EXPERIMENTAL | ~83% | 87 | Alquerque, Bandit, Battleship, Blackjack +45 more |
-| Sardinian (`srd`) | EXPERIMENTAL | ~84% | 89 | Alquerque, Battleship, Blackjack, Breakthrough +39 more |
-| Samoan (`smo`) | EXPERIMENTAL | ~85% | 89 | Alquerque, Blackjack, Breakthrough, Briscola +41 more |
-| Mesopotamian Arabic (`acm`) | EXPERIMENTAL | ~86% | 90 | Alquerque, Bandit, Blackjack, Breakthrough +39 more |
-| Northern Kurdish (`kmr`) | EXPERIMENTAL | ~82% | 90 | Alquerque, Bandit, Battleship, Breakthrough +43 more |
-| Silesian (`szl`) | EXPERIMENTAL | ~85% | 91 | Alquerque, Bandit, Breakthrough, Briscola +39 more |
-| Moroccan Arabic (`ary`) | EXPERIMENTAL | ~85% | 95 | Alquerque, Bandit, Battleship, Blackjack +40 more |
-| Maori (`mri`) | EXPERIMENTAL | ~84% | 95 | Alquerque, Breakthrough, Briscola, Checkers +44 more |
-| Waray (`war`) | EXPERIMENTAL | ~82% | 97 | Blackjack, Breakthrough, Briscola, Chopsticks +39 more |
-| Awadhi (`awa`) | EXPERIMENTAL | ~84% | 98 | Alquerque, Battleship, Breakthrough, Briscola +47 more |
-| Maltese (`mlt`) | EXPERIMENTAL | ~83% | 99 | Battleship, Blackjack, Breakthrough, Briscola +39 more |
-| Norwegian Nynorsk (`nno`) | EXPERIMENTAL | ~84% | 99 | Alquerque, Battleship, Breakthrough, Briscola +37 more |
-| Ilocano (`ilo`) | EXPERIMENTAL | ~81% | 100 | Alquerque, Battleship, Blackjack, Breakthrough +46 more |
-| Georgian (`ka`) | EXPERIMENTAL | ~84% | 101 | Alquerque, Bandit, Battleship, Breakthrough +41 more |
-| Ligurian (`lij`) | EXPERIMENTAL | ~83% | 101 | Battleship, Breakthrough, Briscola, Checkers +41 more |
-| Pangasinan (`pag`) | EXPERIMENTAL | ~80% | 102 | Bandit, Battleship, Blackjack, Breakthrough +48 more |
-| Central Kurdish (`ckb`) | EXPERIMENTAL | ~81% | 105 | Bandit, Blackjack, Briscola, Chess +43 more |
-| Hausa (`ha`) | EXPERIMENTAL | ~83% | 108 | Alquerque, Bandit, Battleship, Blackjack +46 more |
-| Tunisian Arabic (`aeb`) | EXPERIMENTAL | ~83% | 109 | Alquerque, Bandit, Battleship, Blackjack +50 more |
-| Kashmiri (`kas`) | EXPERIMENTAL | ~77% | 114 | Alquerque, Bandit, Battleship, Breakthrough +46 more |
-| Meitei (`mni`) | EXPERIMENTAL | ~64% | 117 | Alquerque, Bandit, Battleship, Blackjack +51 more |
-| Igbo (`ig`) | EXPERIMENTAL | ~82% | 118 | Alquerque, Bandit, Breakthrough, Briscola +47 more |
-| Tatar (`tat`) | EXPERIMENTAL | ~79% | 120 | Alquerque, Bandit, Battleship, Briscola +41 more |
-| Uyghur (`uig`) | EXPERIMENTAL | ~78% | 121 | Alquerque, Battleship, Blackjack, Breakthrough +48 more |
-| Asturian (`ast`) | EXPERIMENTAL | ~82% | 122 | Bandit, Battleship, Blackjack, Breakthrough +48 more |
-| Tigrinya (`tir`) | EXPERIMENTAL | ~73% | 126 | Alquerque, Bandit, Battleship, Blackjack +48 more |
-| Tsonga (`tso`) | EXPERIMENTAL | ~80% | 127 | Alquerque, Battleship, Blackjack, Breakthrough +45 more |
-| Turkmen (`tuk`) | EXPERIMENTAL | ~79% | 129 | Alquerque, Bandit, Battleship, Blackjack +53 more |
-| Mizo (`lus`) | EXPERIMENTAL | ~71% | 131 | Bandit, Battleship, Blackjack, Breakthrough +53 more |
-| Mongolian (`mn`) | EXPERIMENTAL | ~81% | 134 | Alquerque, Battleship, Blackjack, Breakthrough +49 more |
-| Kinyarwanda (`kin`) | EXPERIMENTAL | ~78% | 135 | Alquerque, Bandit, Battleship, Blackjack +46 more |
-| Basque (`eu`) | EXPERIMENTAL | ~80% | 137 | Battleship, Blackjack, Breakthrough, Briscola +47 more |
-| Northern Sotho (`nso`) | EXPERIMENTAL | ~78% | 138 | Alquerque, Blackjack, Breakthrough, Briscola +46 more |
-| Swati (`ssw`) | EXPERIMENTAL | ~77% | 138 | Alquerque, Battleship, Blackjack, Breakthrough +54 more |
-| Bashkir (`bak`) | EXPERIMENTAL | ~75% | 141 | Alquerque, Bandit, Battleship, Blackjack +48 more |
-| Latgalian (`ltg`) | EXPERIMENTAL | ~79% | 141 | Alquerque, Battleship, Blackjack, Breakthrough +49 more |
-| Kabuverdianu (`kea`) | EXPERIMENTAL | ~78% | 146 | Bandit, Battleship, Blackjack, Breakthrough +43 more |
-| Tswana (`tsn`) | EXPERIMENTAL | ~77% | 146 | Alquerque, Battleship, Blackjack, Briscola +53 more |
-| Sanskrit (`san`) | EXPERIMENTAL | ~78% | 148 | Alquerque, Bandit, Battleship, Breakthrough +50 more |
-| Fijian (`fij`) | EXPERIMENTAL | ~74% | 154 | Alquerque, Bandit, Battleship, Blackjack +49 more |
-| Buginese (`bug`) | EXPERIMENTAL | ~78% | 155 | Alquerque, Bandit, Battleship, Blackjack +48 more |
-| Rundi (`run`) | EXPERIMENTAL | ~76% | 155 | Alquerque, Bandit, Battleship, Blackjack +54 more |
-| Yoruba (`yo`) | EXPERIMENTAL | ~78% | 162 | Alquerque, Battleship, Blackjack, Briscola +46 more |
-| Guarani (`grn`) | EXPERIMENTAL | ~75% | 168 | Alquerque, Bandit, Battleship, Blackjack +56 more |
-| West Central Oromo (`gaz`) | EXPERIMENTAL | ~69% | 179 | Alquerque, Bandit, Battleship, Blackjack +55 more |
-| South Azerbaijani (`azb`) | EXPERIMENTAL | ~73% | 182 | Alquerque, Bandit, Battleship, Blackjack +59 more |
-| Lingala (`lin`) | EXPERIMENTAL | ~74% | 184 | Alquerque, Battleship, Blackjack, Breakthrough +56 more |
-| Ganda (`lug`) | EXPERIMENTAL | ~72% | 193 | Alquerque, Bandit, Battleship, Blackjack +54 more |
-| Tok Pisin (`tpi`) | EXPERIMENTAL | ~71% | 195 | Alquerque, Bandit, Battleship, Blackjack +55 more |
-| Luo (`luo`) | EXPERIMENTAL | ~71% | 206 | Alquerque, Bandit, Battleship, Blackjack +57 more |
-| Shan (`shn`) | EXPERIMENTAL | ~65% | 209 | Alquerque, Bandit, Battleship, Blackjack +57 more |
-| Santali (`sat`) | EXPERIMENTAL | ~64% | 215 | Alquerque, Battleship, Blackjack, Breakthrough +58 more |
-| Tumbuka (`tum`) | EXPERIMENTAL | ~70% | 219 | Alquerque, Bandit, Battleship, Blackjack +54 more |
-| Standard Tibetan (`bod`) | EXPERIMENTAL | ~65% | 223 | Alquerque, Bandit, Battleship, Blackjack +54 more |
-| Luba-Kasai (`lua`) | EXPERIMENTAL | ~69% | 232 | Alquerque, Bandit, Battleship, Blackjack +58 more |
-| Ayacucho Quechua (`quy`) | EXPERIMENTAL | ~67% | 233 | Alquerque, Bandit, Blackjack, Breakthrough +57 more |
-| Jingpho (`kac`) | EXPERIMENTAL | ~56% | 237 | Alquerque, Bandit, Battleship, Blackjack +56 more |
-| Ewe (`ewe`) | EXPERIMENTAL | ~65% | 241 | Alquerque, Battleship, Blackjack, Breakthrough +56 more |
-| Nigerian Fulfulde (`fuv`) | EXPERIMENTAL | ~65% | 241 | Alquerque, Bandit, Battleship, Blackjack +56 more |
-| Dzongkha (`dzo`) | EXPERIMENTAL | ~63% | 241 | Alquerque, Bandit, Battleship, Blackjack +56 more |
-| Nuer (`nus`) | EXPERIMENTAL | ~62% | 241 | Alquerque, Bandit, Battleship, Blackjack +57 more |
-| Central Aymara (`ayr`) | EXPERIMENTAL | ~66% | 246 | Alquerque, Bandit, Blackjack, Breakthrough +55 more |
-| Bambara (`bam`) | EXPERIMENTAL | ~63% | 256 | Alquerque, Bandit, Battleship, Blackjack +57 more |
-| Kikuyu (`kik`) | EXPERIMENTAL | ~63% | 271 | Alquerque, Bandit, Battleship, Blackjack +59 more |
-| Sango (`sag`) | EXPERIMENTAL | ~62% | 278 | Alquerque, Bandit, Battleship, Blackjack +59 more |
-| Bemba (`bem`) | EXPERIMENTAL | ~61% | 283 | Alquerque, Bandit, Battleship, Blackjack +59 more |
-| Kabyle (`kab`) | EXPERIMENTAL | ~62% | 283 | Alquerque, Bandit, Battleship, Blackjack +59 more |
-| Akan (`aka`) | EXPERIMENTAL | ~58% | 288 | Alquerque, Bandit, Battleship, Blackjack +57 more |
-| Kikongo (`kon`) | EXPERIMENTAL | ~62% | 289 | Alquerque, Bandit, Battleship, Blackjack +57 more |
-| Mossi (`mos`) | EXPERIMENTAL | ~56% | 290 | Alquerque, Bandit, Battleship, Blackjack +58 more |
-| Southwestern Dinka (`dik`) | EXPERIMENTAL | ~59% | 295 | Alquerque, Bandit, Battleship, Blackjack +56 more |
-| Central Atlas Tamazight (`tzm`) | EXPERIMENTAL | ~58% | 298 | Alquerque, Bandit, Battleship, Blackjack +58 more |
-| Twi (`twi`) | EXPERIMENTAL | ~56% | 317 | Alquerque, Bandit, Battleship, Blackjack +57 more |
-| Central Kanuri (`knc`) | EXPERIMENTAL | ~55% | 321 | Alquerque, Bandit, Battleship, Blackjack +58 more |
-| Fon (`fon`) | EXPERIMENTAL | ~56% | 323 | Alquerque, Bandit, Battleship, Blackjack +57 more |
-| Wolof (`wol`) | EXPERIMENTAL | ~51% | 340 | Bandit, Battleship, Blackjack, Breakthrough +58 more |
-| Chokwe (`cjk`) | EXPERIMENTAL | ~53% | 367 | Alquerque, Bandit, Battleship, Blackjack +57 more |
-| Tamasheq (`taq`) | EXPERIMENTAL | ~49% | 388 | Alquerque, Bandit, Battleship, Blackjack +59 more |
-| Dyula (`dyu`) | EXPERIMENTAL | ~46% | 411 | Alquerque, Bandit, Battleship, Blackjack +58 more |
-| Kabiye (`kbp`) | EXPERIMENTAL | ~42% | 426 | Alquerque, Bandit, Battleship, Blackjack +59 more |
-| Umbundu (`umb`) | EXPERIMENTAL | ~45% | 428 | Alquerque, Bandit, Battleship, Blackjack +58 more |
-| Kimbundu (`kmb`) | EXPERIMENTAL | ~43% | 454 | Alquerque, Bandit, Battleship, Blackjack +59 more |
-| Kamba (`kam`) | EXPERIMENTAL | ~41% | 470 | Alquerque, Bandit, Battleship, Blackjack +58 more |
+| Kyrgyz (`ky`) | EXPERIMENTAL | ~94% | 11 | — |
+| Mongolian (`mn`) | EXPERIMENTAL | ~90% | 11 | — |
+| Tunisian Arabic (`aeb`) | EXPERIMENTAL | ~90% | 11 | — |
+| Kabuverdianu (`kea`) | EXPERIMENTAL | ~87% | 11 | — |
+| Luba-Kasai (`lua`) | EXPERIMENTAL | ~82% | 11 | — |
+| Jingpho (`kac`) | EXPERIMENTAL | ~71% | 11 | — |
+| Dzongkha (`dzo`) | EXPERIMENTAL | ~75% | 12 | — |
+| Sardinian (`srd`) | EXPERIMENTAL | ~88% | 12 | — |
+| Wolof (`wol`) | EXPERIMENTAL | ~70% | 12 | — |
+| Standard Tibetan (`bod`) | EXPERIMENTAL | ~75% | 13 | — |
+| Magahi (`mag`) | EXPERIMENTAL | ~88% | 13 | — |
+| Lingala (`lin`) | EXPERIMENTAL | ~85% | 13 | — |
+| Bhojpuri (`bho`) | EXPERIMENTAL | ~88% | 14 | — |
+| Bemba (`bem`) | EXPERIMENTAL | ~78% | 14 | — |
+| Kikongo (`kon`) | EXPERIMENTAL | ~76% | 14 | — |
+| Kinyarwanda (`kin`) | EXPERIMENTAL | ~86% | 15 | — |
+| Mossi (`mos`) | EXPERIMENTAL | ~71% | 15 | — |
+| Kazakh (`kk`) | EXPERIMENTAL | ~93% | 16 | — |
+| Ayacucho Quechua (`quy`) | EXPERIMENTAL | ~79% | 16 | — |
+| Tok Pisin (`tpi`) | EXPERIMENTAL | ~84% | 17 | — |
+| Tumbuka (`tum`) | EXPERIMENTAL | ~82% | 18 | — |
+| Kabiye (`kbp`) | EXPERIMENTAL | ~64% | 19 | — |
+| Norwegian Nynorsk (`nno`) | EXPERIMENTAL | ~89% | 19 | — |
+| Dyula (`dyu`) | EXPERIMENTAL | ~68% | 21 | — |
+| Fon (`fon`) | EXPERIMENTAL | ~74% | 23 | — |
+| Awadhi (`awa`) | EXPERIMENTAL | ~89% | 24 | — |
+| Kimbundu (`kmb`) | EXPERIMENTAL | ~63% | 29 | — |
+| Georgian (`ka`) | EXPERIMENTAL | ~91% | 33 | — |
+| Basque (`eu`) | EXPERIMENTAL | ~86% | 35 | — |
+| Umbundu (`umb`) | EXPERIMENTAL | ~63% | 37 | — |
+| Kamba (`kam`) | EXPERIMENTAL | ~57% | 75 | — |
+| Chokwe (`cjk`) | EXPERIMENTAL | ~63% | 112 | — |
 
 Languages move from experimental to certified as verification improves; the list grows over time.
 

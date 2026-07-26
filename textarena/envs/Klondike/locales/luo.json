@@ -19,10 +19,10 @@
     "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "no_brackets": "Yo ma itiyo godo ok owinjore. Timno onego obed e kind sirni ariyo mag nyukta madongo gi matindo.",
+    "no_closing_bracket": "Yo ma ok owinjore mar timo gimoro. Ok ochop e rang'iny ']'",
     "empty_command": "Chik ma nono. Ndik 'draw' kata 'move <source><destination> [count]'.",
-    "empty_action": "Empty action",
+    "empty_action": "Okang ' ma ne okawne ok notiyo.",
     "move_needs_args": "Chik mar Move dwaro kama ne owuokie kod kuma odhiye. Tiyo kode: 'move <source> <destination> [count]'",
     "count_positive": "Kwan nyaka bed maber kata \"duto\"",
     "count_invalid": "Kwan ma ok owinjore. Ti kod namba kata 'duto'",
@@ -62,7 +62,7 @@
     "turn_limit": "Wuotho! Iwe kelo {max_turns} turn. Alafu: {score} kadibed gi foundation."
   },
   "board": {
-    "title": "=== KLONDIKE SOLITAIRE ===",
+    "title": "=== KLONDIKE SOLITAIRE=== (Kendo e dho Ingresa)",
     "turn": "Turn: {turn}/{max_turns}",
     "stock": "Stok: {stock} kad mag somo",
     "waste": "Yugi (W): {waste}",

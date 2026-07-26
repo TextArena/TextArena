@@ -19,14 +19,14 @@
     "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
+    "no_brackets": "Tsarin aiki mara inganci. Ya kamata a sanya aiki a cikin baka.",
     "no_closing_bracket": "Tsarin aiki mara inganci. Rashin ƙwanƙwasawar rufewa ']'",
-    "empty_command": "Empty command. Type 'draw' or 'move <source> <destination> [count]'",
+    "empty_command": "Babu umarni. Rubuta 'jawo' ko 'motsi <tushe> <makoma> [count]'",
     "empty_action": "Mataki mara amfani",
     "move_needs_args": "Umurnin motsawa yana buƙatar tushe da manufa. Amfani: 'move <source> <destination> [count]'",
     "count_positive": "Dole ne ƙidaya ya zama tabbatacce ko 'duk'",
-    "count_invalid": "Invalid count. Use a number or 'all'",
-    "unknown_command": "Unknown command '{cmd}'. Use 'draw', 'move <source> <destination> [count]', or 'forfeit'",
+    "count_invalid": "Ƙidaya mara inganci. Yi amfani da lamba ko 'duk'",
+    "unknown_command": "Ba a sani ba umurnin '{cmd}'. Yi amfani da 'jawo', 'motsi <tushe> <makoma> [count]', ko 'ƙarewa'",
     "wrapped": "Aiki {n}: {msg}"
   },
   "action_result": {
@@ -68,7 +68,7 @@
     "waste": "Rashin aiki (W): {waste}",
     "foundations_header": "Ƙungiyoyi:",
     "foundation_row": "F{n}: {cards}",
-    "tableau_header": "Tableau:",
+    "tableau_header": "Shafi:",
     "tableau_row": "T{n}: {cards}"
   }
 }

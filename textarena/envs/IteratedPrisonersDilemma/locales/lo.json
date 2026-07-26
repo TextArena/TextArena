@@ -1,6 +1,6 @@
 {
   "player_prompt": {
-    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+    "intro": "ທ່ານເປັນ Player {player_id} ໃນ Iterated Prisoner's Dilemma ກວມເອົາ {num_rounds} ຮອບ. ໂຄງສ້າງເກມ: - ກ່ອນການຕັດສິນໃຈແຕ່ລະຄັ້ງທ່ານມີ {total_conversation_rounds} ຫັນໄປສື່ສານຢ່າງເສລີ. - ຫຼັງຈາກນັ້ນ, ຜູ້ຫຼິ້ນທັງສອງພ້ອມກັນເລືອກທີ່ຈະຮ່ວມມືກັນຫຼືບົກຜ່ອງ. Payoff Matrix (ກໍານົດແຕ່ລະຮອບ): - ທັງສອງຮ່ວມມືກັນ ➜ ແຕ່ລະ {cooperate_reward} - ທັງສອງບົກຜ່ອງ ➜ ແຕ່ລະ {mutual_defect_reward} - ຫນຶ່ງບົກຜ່ອງ, ຫນຶ່ງຮ່ວມມືກັບ ➜ Defector {defect_reward}, Cooperator {sucker_reward} ວິທີການຫຼີ້ນ: - ໃນລະຫວ່າງການສົນທະນາ: ປະເພດຂໍ້ຄວາມທີ່ທ່ານຕ້ອງການ. - ໃນໄລຍະການຕັດສິນໃຈປະກອບມີ: '[Cooperate] ຫຼື '[Defect] (ບໍ່ຮູ້ສຶກ). ທ່ານສາມາດເພີ່ມຂໍ້ຄວາມເພີ່ມເຕີມກ່ອນ / ຫຼັງຈາກ token."
   },
   "phases": {
     "conversation_finished": "ການສົນທະນາ ສໍາເລັດ ສໍາ ລັບຮອບ {round}. ກະລຸນາຕອບດ້ວຍ \"[Cooperate]\" ຫຼື \"[Defect]\" ພາຍໃນ \\boxed{{}}.",

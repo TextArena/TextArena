@@ -3,19 +3,19 @@
     "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
   },
   "state": {
-    "current_pile": "Current Pile:\n{piles}"
+    "current_pile": "ⴰⵖⴰⵔⴰⵙ ⵏ ⵓⵎⵏⵣⴰⵢ: {piles}"
   },
   "invalid_move": {
-    "wrong_format": "No valid move format found. Use '[pile quantity]'.",
+    "wrong_format": "ⵓⵔ ⵉⵜⵜⵢⴰⴼⴰ ⴽⵔⴰ ⵏ ⵓⵙⴽⴰⵔ ⵉⵣⵔⵉⵏ ⵉ ⵓⵙⵙⵎⵓⵜⵜⴳ. ⵙⵔⵙ \"[pile quantity]\".",
     "correct_format_wrong_fields": "Player {player_id}, Invalid action. Column {col} is out of bounds.",
-    "out_of_range": "Pile index {pile_index} is out of range.",
-    "non_positive": "Must remove at least 1 object.",
+    "out_of_range": "ⵓⴰ ⵢⵂⴰⵏ {pile_index} ⵏ ⴱⵉⵍⵍ ⵓⵔ ⵉⴾⵏⵢ ⴰⵛⵂⵔⵓⵜ.",
+    "non_positive": "ⵉⵇⵏⴻⵏ ⴰⴷ ⵢⴰⴽⴽⵙ ⵢⴰⵏ ⵓⵏⴰⵡ ⵙ ⵉⵎⵉⴽ.",
     "exceeds_pile": "Cannot remove {quantity} from pile {pile_index} (only {pile_count} left)."
   },
   "observation": {
     "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
   },
   "outcome": {
-    "win": "Player {player_id} took the last object(s)!"
+    "win": "ⴰⵛⴰⵆⴰⵍ {player_id} ⵉⴾⵔⴰⵛⵂ ⵂⴰⵔⴰⵜ ⵓⴰⵙ ⵙⴰⵎⴰⵏⴷⵓ (((ⵙ)!"
   }
 }

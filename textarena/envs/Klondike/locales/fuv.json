@@ -19,24 +19,24 @@
     "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "no_brackets": "Dabare kuuɗe je wala kuugal. Aje haani wonda nder dabareji marɗi jaawal.",
+    "no_closing_bracket": "Nulal kuuɗe je wala bote. Walaa haɓɓol ɓernde ']'",
     "empty_command": "Lollol ngol wala ko wi'i. Wondugo 'draw' mala 'move <source><destination> [count]'",
-    "empty_action": "Empty action",
+    "empty_action": "Kuugal je wala kujeji",
     "move_needs_args": "Ummaatoore Move e yiɗi aslu be jaɓɓorde. Naftirol: 'move <source> <destination> [count]'",
-    "count_positive": "Count must be positive or 'all'",
-    "count_invalid": "Invalid count. Use a number or 'all'",
+    "count_positive": "Limgal haani laato je ɗon be ko'e mala 'fuɗɗan fuu'",
+    "count_invalid": "Limgal je wala bote. Naftir limngal mala 'fuɗɗan'",
     "unknown_command": "Unknown command '{cmd}'. Use 'draw', 'move <source> <destination> [count]', or 'forfeit'",
     "wrapped": "Action {n}: {msg}"
   },
   "action_result": {
     "success": "A̱yiyaakel {n}: {msg}",
-    "before_failure": "Executed {n} action(s) before failure.",
+    "before_failure": "Naftirol {n} kuuɗe (s) hiddeko ɗum waɗa.",
     "failed": "A̱yiyaakel {n} mbele: {msg}"
   },
   "move_result": {
-    "drew": "Drew card(s) from stock to waste.",
-    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "drew": "Bindi je ɗon nder kujeji be ko haani.",
+    "cannot_draw": "Wala ko wurtinata. Fuuji be kujeeji ɗon wala goɗɗum.",
     "invalid_pile": "Innde pile je wala kuugal. Naftir W, F1-F4, mala T1-T7",
     "foundation_one_card": "Waawai yahugo kaarji 1 tan haa babal man.",
     "waste_to_foundation_ok": "Cardi je ɗon yahra diga kujeji yahugo to tiggol F{dst}",
@@ -46,7 +46,7 @@
     "foundation_to_foundation": "Walaa yahugo diga tiggaaki ha taggaaki feere",
     "waste_to_tableau_one_card": "Waawai yahugo kaarji 1 tan diga kujeeji ha tableau",
     "waste_to_tableau_ok": "Jaɓɓorgo Casi ɓillaaji ha Tableau T{dst}",
-    "waste_to_tableau_bad": "Cannot place waste card on that tableau pile",
+    "waste_to_tableau_bad": "Walaa dabare darnugo kart ha dow tabiru man.",
     "no_face_up": "Wala kaadiji je ɗon fahin ngam yahugo.",
     "tableau_to_tableau_ok": "Naɗa {count} kaarti e tableau T{src} yimɓe T{dst}",
     "tableau_to_tableau_bad": "A̱ngaa naɗa {count} kaarti e T{src} yimɓe T{dst}",

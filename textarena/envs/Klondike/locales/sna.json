@@ -19,7 +19,7 @@
     "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
+    "no_brackets": "Chimiro chechiito chisina kukodzera. Chiito chinofanira kuva pakati pemabhenji.",
     "no_closing_bracket": "Maitiro asina kukodzera. Kushaiwa kwekupedzisa bracket ']'",
     "empty_command": "Empty command. Type 'draw' kana kuti 'move <source><destination> [count]'",
     "empty_action": "Chiito chisina chinhu",
@@ -54,7 +54,7 @@
     "foundation_empty": "Foundation F{src} haina chinhu.",
     "foundation_to_tableau_ok": "Kardhu yakawuma kubva foundation F{src} ku tableau T{dst}",
     "foundation_to_tableau_bad": "Haikwanise kuisa hwaro kadhi patafura T{dst}",
-    "to_waste_or_stock": "Cannot move to waste or stock"
+    "to_waste_or_stock": "Haikwanisi kutamiswa kunzvimbo dzinoshandiswa kana kuti dzinogadzirwa zvinhu."
   },
   "outcome": {
     "forfeit": "Mutambo wakarasikirwa. Chiitiko chekupedzisira: {score} makadhi mune nheyo.",
@@ -62,7 +62,7 @@
     "turn_limit": "Game yava kuipa! Wakaenzera turn dza maximum {max_turns}. Score: {score} kardhu mu foundations."
   },
   "board": {
-    "title": "=== KLONDIKE SOLITAIRE ===",
+    "title": "=== KLONDIKE SOLITAIRE=== (Mashoko)",
     "turn": "Turn: {turn}/{max_turns}",
     "stock": "Zvitoro: {stock} makadhi",
     "waste": "Marara (W): {waste}",

@@ -21,11 +21,11 @@
     "{scores}": "The pre-rendered per-player list of final scores"
   },
   "player_prompt": {
-    "intro": "You are playing Golf (Card Game) - Player {player_id}.\nGoal: Get the lowest total score in this single round. If columns share the same value, they are summed as 0.\nCard Values: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (use exact brackets):\n- '[draw]' - Draw from deck\n- '[take]' - Take from discard pile\n- '[swap X Y]' - Swap drawn card with position X (row) Y (column)\n- '[discard]' - Discard the drawn card\n"
+    "intro": "Golfean ari zara jokatzen - Jokalari {player_id}. Helburua: lortzeko puntuazio txikiena. Zutabeak balore bera badute, 0 dira. Txartelaren balioak: A=1, 2-10=zenbaki-balioa, J/Q=10, K=0 Ekintzak (parentesi zehatzak erabili): - '[draw]' - Atzera bota - '[take]' - Atzera bota - '[swap X Y]' - Txandakatu X (lerroa) Y (zutabea) kokatutako karta - '[discard] - Atzera bota karta "
   },
   "board": {
     "drew": "Zoriatu duzu: {card}\nOrain [swap X Y] egin behar duzu edo [discard]",
-    "took": "You took: {card} from discard pile\nYou must [swap X Y] with it (cannot discard).",
+    "took": "Hartu zenuen: {card} botatzeko pilotik [swap X Y] berarekin (ezin da bota).",
     "peeked": "You peeked at position ({row},{col}): {card}",
     "turn_view": "Zure eskua: {hand} Galtzeko piloa: {discard} {options}",
     "none": "Ez dago"
@@ -54,9 +54,9 @@
     "all_revealed": "Karta guztiak irekiak daude?"
   },
   "invalid": {
-    "wrong_action": "Use exactly ONE bracketed action: [draw], [take], [swap X Y], [discard], [knock], or [peek X Y]",
+    "wrong_action": "Erabili itzazu zehazki ERAKUNTZEN bat: [draw], [take], [swap X Y], [discard], [knock] edo [peek X Y]",
     "discard_empty": "The discard pile is empty!",
-    "must_draw_first": "You must first [draw], [take], [knock], or [peek X Y]",
+    "must_draw_first": "Lehenik [draw], [take], [knock] edo [peek X Y] lerroak ipini behar dituzu.",
     "cannot_discard_taken": "Ezin duzu bota kartatxoa, aldatu egin behar da.",
     "have_drawn_card": "You have a drawn card. You must [swap X Y] or [discard] it.",
     "need_drawn_swap": "You need a drawn card to swap.",

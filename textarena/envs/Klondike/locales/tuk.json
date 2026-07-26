@@ -16,7 +16,7 @@
     "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
   },
   "player_prompt": {
-    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+    "intro": "Sen Klondike Solitaire oýnaýarsyň. Siziň maksadyňyz ähli kartalary esas depesine geçirmekdir. Oduň düzgünleri: - Döwlet depeleri (F1-F4): Esden Patyşa çenli sazlaşykly gurmak; Tablo toparalary (T1-T7): Režimi üýtgedip, reñkde düzeltmek (gyzyl bilen gara), Gara bilen gyr) - Sütek kartlaryny ýele sowurmak üçin daşarymda sakla we köp harplar döküp taşla- Ýele salma (W): Topardaky iň ýokarda ýerleşýän karta Oyun Komandasy: \"çak\" - Kartany sütünden çöpe atmak - <başgalama> [count] göçürmek . Kartalaryň arasyna köçürme mysallary: W T1 geçiriş , F2 geçirişi , T3 geçiriši , T5 2\". hemmesini sanap bilmegi mümkin\",bu hemme ýüzli kartoçkalary derrew aýyrmaga çalyşan bolar\"- Bu işi gutarar ýaly oýny tamamlap, häzirki netijesiňize getirmeli.- Pilesiňizde surat çekilmelidir: W (jasyzdan çykarylanýan), F4-F1, tapylanmalar (T1) ençemeharpaşa çykarmak (Gülgiden red.) Siz olary boş ýere goýbermelisinden sowran edip bilersiz bir toparlara goşarysyňyz. A tarapyndan hereket etmek üçin ulgamynda sen olaryň birini ulansa siz diňe ýekeje edinip bilersiňiz Mysal: Atalan bu işleri ýerine ýetirip, eger galan kaart teklip tablosu bosluklarda galmasaz edilmez bolsa, üstine goşullar)."
   },
   "format_error": {
     "no_brackets": "Nädogry hereket formati. Edilmeli işlemiň nusgasy çynjaga girmelidir.",
@@ -36,24 +36,24 @@
   },
   "move_result": {
     "drew": "Kartany çekip, gutaryşdan zyňyp goýberdik.",
-    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "cannot_draw": "Çekip bolmaýar. Hamytlar we dökünçler boşadyldy.",
     "invalid_pile": "peýdasyz hat üýşeme ad. W, F1-F4 ýa-da T1-T7 ullan",
     "foundation_one_card": "Diňe bir kartany üýşürmek mümkin.",
     "waste_to_foundation_ok": "Kartany zalyndan binä göçürdiler F{dst}",
-    "waste_to_foundation_bad": "Cannot move waste card to that foundation pile",
+    "waste_to_foundation_bad": "Geditiň faýdasy bilen baglanşykly hata göçürip bolmaýar .",
     "tableau_to_foundation_ok": "Kart tableau M{src} dan foundation N{dst} e geçirildi",
-    "tableau_to_foundation_bad": "Cannot move tableau card to that foundation pile",
+    "tableau_to_foundation_bad": "Kadany faýdasyň astyna geçirmek bolmady .",
     "foundation_to_foundation": "Esasyndan beýlekisine göçüp bolmaýar.",
     "waste_to_tableau_one_card": "Diňe bir kartany zordan tablo göçürmek mümkin.",
     "waste_to_tableau_ok": "Kartany zalyndan T{dst} sahypasyna göçürdi.",
-    "waste_to_tableau_bad": "Cannot place waste card on that tableau pile",
+    "waste_to_tableau_bad": "Geditiň hataryny bu daşa ekläp bolmaýar .",
     "no_face_up": "Ýüzügi açyk kartalar ýok .",
     "tableau_to_tableau_ok": "Kartlar {count} tableau T{src} den T{dst} e geçirildi",
     "tableau_to_tableau_bad": "Kartlar {count} T{src} den T{dst} e geçirilmedi",
     "foundation_to_tableau_one_card": "Diňe bir kartany esasyndan tablo göçürmek mümkin.",
     "foundation_empty": "F{src} binasy boş.",
     "foundation_to_tableau_ok": "Kart foundation N{src} dan tableau M{dst} e geçirildi",
-    "foundation_to_tableau_bad": "Cannot place foundation card on tableau T{dst}",
+    "foundation_to_tableau_bad": "T{dst} matalyna binany goýmaga rugsat berilmeýär.",
     "to_waste_or_stock": "Çöp-çöri ýa hem stoklara göçürip bolmaýar."
   },
   "outcome": {

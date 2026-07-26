@@ -19,10 +19,10 @@
     "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "no_brackets": "Ocina caco ci kasi vocipakulo.",
+    "no_closing_bracket": "Ocinimbu caco ka ci kuete esilivilo. Ka kuli ondimbukiso ']'",
     "empty_command": "Ocikundi ka ci kuete esapulo. soneha \"draw\" ale \"move <source><destination> [count]\".",
-    "empty_action": "Empty action",
+    "empty_action": "Oku Yuvula Ovina ka vi Kuete Esilivilo",
     "move_needs_args": "Move command requires source and destination. Usage: 'move <source> <destination> [count]'",
     "count_positive": "Atendelo aco a sukila oku kala \"a sunguluka\" ale \"ocili\".",
     "count_invalid": "Invalid count. Use a number or 'all'",
@@ -36,7 +36,7 @@
   },
   "move_result": {
     "drew": "Drew card(s) from stock to waste.",
-    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "cannot_draw": "Ovikũla viosi via nyõleha, ka vi kuete vali esilivilo.",
     "invalid_pile": "Invalid pile name. Use W, F1-F4, or T1-T7",
     "foundation_one_card": "O pondola lika oku kapa okalivulu kamosi vonumbi yaco yo Internet.",
     "waste_to_foundation_ok": "Oku upa ocikasia caco vovinene oco o ci kape vocimano F{dst}",
@@ -53,7 +53,7 @@
     "foundation_to_tableau_one_card": "O pondola lika oku kapa omapa yimosi vonanga yaco.",
     "foundation_empty": "Ocitumãlo F{src} ka ci kuete omanu.",
     "foundation_to_tableau_ok": "Lilaye kadi kuva foundation F{src} ku tableau T{dst}",
-    "foundation_to_tableau_bad": "Cannot place foundation card on tableau T{dst}",
+    "foundation_to_tableau_bad": "Ka ci tava oku kapa o cartão de fundo vo quadro T{dst}",
     "to_waste_or_stock": "Ka ci tava oku yi kapa vociwo ale vovina vikuavo."
   },
   "outcome": {
@@ -64,11 +64,11 @@
   "board": {
     "title": "=== Ocipepi Lomunda ya Velapo yo Afrika===",
     "turn": "Nkuluntu: {turn}/{max_turns}",
-    "stock": "Stock: {stock} cards",
+    "stock": "[0] Olopapelo viuvangi: {stock}",
     "waste": "Ocimbaluku (W): {waste}",
-    "foundations_header": "Foundations:",
+    "foundations_header": "Ocisoko Coku Tata Akundi Votembo Yosi:",
     "foundation_row": "F{n}: {cards}",
-    "tableau_header": "Tableau:",
+    "tableau_header": "Ociluvialuvia ca 2:",
     "tableau_row": "T{n}: {cards}"
   }
 }

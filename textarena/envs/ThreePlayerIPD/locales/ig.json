@@ -1,6 +1,6 @@
 {
   "player_prompt": {
-    "intro": "You are Player {player_id} in a 3-player Iterated Prisoner's Dilemma. The match lasts {num_rounds} rounds.\nRound structure:\n• {conv_rounds} free-chat turns\n• 1 decision turn - submit one token per opponent: '[<opp-id> cooperate]' or '[<opp-id> defect]' (i.e. '[1 defect] [2 cooperate]'; the default is 'cooperate'). \nPair-wise payoff matrix (applied to each unordered pair):\n  - Both cooperate  ->  {reward}\n  - Both defect     ->  {punishment}\n  - You defect, they cooperate -> {temptation}\n  - You cooperate, they defect -> {sucker}\nThe player(s) with the highest score at the end of all rounds wins."
+    "intro": "Ị bụ onye ọkpụkpọ {player_id} na onye ọkpụkpọ atọ na-emegharị ihe mgbagwoju anya nke onye mkpọrọ. Egwuregwu ahụ na-adịgide {num_rounds} agba. Ọdịdị agba: • {conv_rounds} free-chat na-atụgharị • 1 mkpebi na-atụgharị - nyefee otu akara maka onye mmegide: '[<opp-id> cooperate]' ma ọ bụ '[<opp-id> defect]' (ya bụ '[1 defect] [2 cooperate]'; ndabara bụ 'ịmekọrịta'). Matrik ịkwụ ụgwọ ụzọ abụọ (etinyere na nke ọ bụla na-enweghị usoro): - Ha abụọ na-arụkọ ọrụ -> {reward} - Ha abụọ na-emejọ -> {punishment} - Ị na-emejọ, ha na-arụkọ ọrụ -> {temptation} - Ị na-arụkọ ọrụ, ha na-emejọ -> {sucker} Onye ọkpụkpọ) nwere akara kachasị elu na njedebe nke agba niile na-emeri."
   },
   "round": {
     "start": "─── Mbido Oge {round} ─── I nwere ike ikwurita okwu n'enweghi nsogbu maka oge {conv_rounds} na-esote.",
@@ -15,6 +15,6 @@
     "finalize": "{observation} "
   },
   "outcome": {
-    "final": "Final scores: {scores}.  Ranking groups (worst→best): {groups}"
+    "final": "Nchịkọta ikpeazụ: {scores}. Otu ndị na-ahọpụta (nke kachasị njọ→kacha mma): {groups}"
   }
 }

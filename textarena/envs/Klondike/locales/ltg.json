@@ -16,7 +16,7 @@
     "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
   },
   "player_prompt": {
-    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+    "intro": "Tu spēlēj Klondike Solitaire. Tovs mierkis ir puorceļt vysys kartis iz pamatkuopem. Spēlis nūsacejumi: - Pamatkuopi (F1-F4): Uztaiseit nu asam leidz karalim, kas pīdar kaidam; Tabula kuopuši (T1-T7): Nūstaiguot sovstarpeigi kruosus (sorkons pret malnu i tymss pret sarkanu); Stokšums: Izvuokt kartenis pi atkrytumūs kūpuma; Atkrisšona (W): Vysleluokuo karte, kura var tikt izmontuota komandom \"izvītuot\" (\"draw\") - Aizvītuojiet karteles no stoka da nakryumim; \"nosaukt <bīdru><gaļdestinatieju> [count]\"; Puorstuojit karetes storp kupom pīmāri: \"Nosauktu W1\", \"nosoti T1 F2\", \"nostuoti T3 T5 2\". Var skaiteit ari \"visas\", kurymā naīspiejams tūlaik puorskaut vysu vierzīni uz augšu karti. \"Pārōktīs\" (-i) - Beidzēt spēli un īslodzeigt sovu golda rezultatu ar aktualom vuordzeibu; Stabele stuovūkļu (Rods), Zylts parosti (Zrots), F1-T7-T1, zamakrs (C1), zams (Skrits pret rūtai nieks pret rudi) - izvīnuot kartesūt korpusēsšonu viers kartis lopuos kartis burtim (zynuot vairuokus kartuļus pie plāk)."
   },
   "format_error": {
     "no_brackets": "Naatbylstūšs darbeibys formats. Darbeibai juobyut īkōršonūs.",
@@ -57,7 +57,7 @@
     "to_waste_or_stock": "Navar puorvītuot iz atkrytumim voi kryumim."
   },
   "outcome": {
-    "forfeit": "Game forfeited. Final score: {score} cards in foundations.",
+    "forfeit": "Spēle nūpeļneita. Beigu rezultats: {score} kartenis pamatūs.",
     "won": "Apsveicu, tu esi uzvariejs Klondikys pasis!",
     "turn_limit": "Spēle beigusies! Jūs sasniedzāt maksimālo {max_turns} gājienus. Rezultāts: {score} kārtis fondos."
   },

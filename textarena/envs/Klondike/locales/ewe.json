@@ -19,10 +19,10 @@
     "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "no_brackets": "Dɔwɔɖui si mesɔ o. Ele be woawɔ dɔ le akplo me.",
+    "no_closing_bracket": "Dɔwɔŋutise si mesɔ o. Nuwuƒokpe mele eme ']'",
     "empty_command": "Se ƒuƒlu. Ŋlɔ 'draw' alo 'move <source><destination> [count].'",
-    "empty_action": "Empty action",
+    "empty_action": "Dɔwɔɖui si me womezã naneke le o",
     "move_needs_args": "Move command bia source kple destination. Usage: 'move <source> <destination> [count]'",
     "count_positive": "Ele be xexlẽdzesi nanye nyu alo \"wo katã\"",
     "count_invalid": "Xlẽme si mele eteƒe o. Zã xexlẽdzesi alo 'wo katã'",
@@ -47,17 +47,17 @@
     "waste_to_tableau_one_card": "Àte ŋu aʋu ka ɖeka ko tso gbe me ayi aɖaka dzi.",
     "waste_to_tableau_ok": "Woɖe ka tso gbevuwo me yi aɖaka T{dst} dzi.",
     "waste_to_tableau_bad": "Mate ŋu ada kaɖidɔ ɖe tableau ƒe kpekpeme ma dzi o",
-    "no_face_up": "No face-up cards to move",
+    "no_face_up": "Womate ŋu aʋu ʋuʋu o.",
     "tableau_to_tableau_ok": "Dze kɔmitɔ {count} si T{src} va zu T{dst}",
     "tableau_to_tableau_bad": "Ame si na kɔmitɔ {count} si T{src} va zu T{dst}",
     "foundation_to_tableau_one_card": "Àte ŋu aʋu ka ɖeka ko tso gɔmeɖoanyi gbɔ ayi aɖaka dzi.",
     "foundation_empty": "Foundation F{src} nye ƒuƒlu.",
     "foundation_to_tableau_ok": "Dze kɔmitɔ tɔxe si F{src} va zu T{dst}",
     "foundation_to_tableau_bad": "Mate ŋu ada fondation card ɖe table T{dst} dzi o.",
-    "to_waste_or_stock": "Cannot move to waste or stock"
+    "to_waste_or_stock": "Womate ŋu atsɔe ayi aɖawui alo adzraɖoƒe o."
   },
   "outcome": {
-    "forfeit": "Game forfeited. Final score: {score} cards in foundations.",
+    "forfeit": "Woɖu dzi le fefea me. Mlɔeba la, woƒo ga: {score} si wotsɔ ɖo kpewo dzii.",
     "won": "Akpe na wò! Èɖu Klondike ƒe Ameɖekɛƒomeʋiʋlia dzi!",
     "turn_limit": "Nɔnɔme! Esi na nukae si ɖo {max_turns}. Nya: {score} kɔmitɔ si F"
   },

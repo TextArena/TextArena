@@ -5,8 +5,8 @@
   },
   "player_prompt": {
     "intro": "You are Player {player_id} in German Whist.\n{phase_info}\nYou hold {hand_size} cards.\nPlay a card with '[play N]', where N is its position in your hand (for example '[play 3]').",
-    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
-    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+    "phase_learning": "XƆXWEMƐN KAN: mɛ e ɖu ɖò nùjiwǔ ɖokpo ɖokpo jí é nɔ yí kpò è ɖè ɔ, bɔ mɛ e bú lɛ́ɛ nɔ fɔ wema ɖevo sín xójlawema ɔ. Nǔjiwǔ ɖěɖee è na ɖò tɛn elɔ mɛ lɛ́' ǎ é kún nyí nǔ ee ná zɔ́n bɔ è na ɖu ɖíɖó ó ó.",
+    "phase_playing": "Xó ɔ́: è ko zán nǔ e ɖò xixo lɛ é bǐ. sín din jɛ nukɔn ɔ́, nùɖé kún sɔ́ nɔ byɔ̌ ɖɔ a na ɖu ɖ'é jí ó."
   },
   "next_card": {
     "playing_phase": "È sɔ́ ɖ'emɛ ǎ - è jɛ̀ kpò ɔ jí.",
@@ -15,13 +15,13 @@
     "available_trump": "Akpá e è sɔ́ dó ali jí é: {card} (TRUMP)"
   },
   "invalid_move": {
-    "wrong_format": "Invalid move format. Use '[play N]' to play the Nth card in your hand.",
-    "bad_position": "That card position does not exist. You hold {hand_size} cards.",
-    "must_follow_suit": "You must follow suit and play a {lead_suit} card.",
+    "wrong_format": "E nɔ zán '[play N]' bo na ɖè wema Nth e ɖò alɔ towe mɛ é.",
+    "bad_position": "Akpá enɛ nɔ tíin ǎ. A hɛn akpà {hand_size} lɛ.",
+    "must_follow_suit": "A na xwedó e bo sɔ́ {lead_suit} sín wuntun ɖé dó ayi mɛ.",
     "invalid_play": "È sixu wà nǔ dó wuntun enɛ wu ǎ."
   },
   "game_action": {
-    "played": "Player {player_id} played {card}."
+    "played": "{player_id} ɔ ɖ'azɔnkpɛn e nyí {card} é jí."
   },
   "trick": {
     "won": "Player {winner_id} wins the trick with {card}.",
@@ -31,8 +31,8 @@
     "learning_complete": "Akpá ɔ́ bǐ vɔ. Nǔ kplɔnkplɔn sín akpáxwé fó - ayihun e kpo é ɖokpoɖokpo lɛ́ɛ nɔ wà nǔ dó ɖuɖeji wu."
   },
   "draw": {
-    "winner_received": "You won the trick and received {card}.",
-    "loser_received": "You lost the trick and drew {card} from the deck.",
+    "winner_received": "A ɖu akpà ɔ́ jí bo yí {card}.",
+    "loser_received": "A bú nùjlɛ́n ɔ bo ɖè {card} sín xúxú mɛ.",
     "winner_preview": "Hweɖevonu e è na sɔ́ dó alɔ mɛ é wɛ nyí {card}."
   },
   "turn": {
@@ -46,14 +46,14 @@
     "no_cards": "Akpá ɖé kún ɖò fí ó.",
     "no_cards_in_hand": "É ɖò alɔ mɛ ǎ.",
     "header": "Alɔ towe:",
-    "trump_indicator": " (TRUMP)",
+    "trump_indicator": "(TƆN ÐÉHWƐ)",
     "suit_line": "{observation}\n  {suit}{trump_indicator}:",
     "card_line": "{observation}\n    {index}. {card}"
   },
   "trick_view": {
     "empty": "E ko sɔ́ kpò ɖò nǔ enɛ lɛ mɛ kpɔ́n ǎ.",
     "header": "Nǔ e ɖò jijɛ wɛ dìn é:",
-    "trump_indicator": " (TRUMP)",
+    "trump_indicator": "(TƆN ÐÉHWƐ)",
     "card_line": "{observation}\n  Aɖavi {player_id}: {card}{trump_indicator}"
   },
   "board_str": {
@@ -66,7 +66,7 @@
     "next_card": "{observation}\nNext card for winner: {card}",
     "blank": "{observation} ",
     "current_trick": "{observation} Nǔ e ɖò jijɛ wɛ dìn é:",
-    "trump_indicator": " (TRUMP)",
+    "trump_indicator": "(TƆN ÐÉHWƐ)",
     "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
     "player_line": "{observation}\nPlayer {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} cards in hand"
   },

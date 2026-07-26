@@ -5,19 +5,19 @@
   },
   "player_prompt": {
     "intro": "Wewe ni Mchezaji {player_id} katika German Whist.\n{phase_info}\nUko na {hand_size} kadi.\nCheza kadi kwa '[play N]', ambapo N ni nafasi yake katika mkono wako (kwa mfano '[play 3]').",
-    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
-    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+    "phase_learning": "IFYO BALISHIBA: Uulecimfya mu busekese bonse alapokelela kardi ya pa muulu e lyo uufilwa akabuula na yambi. Amacinda ayacitwa muli ubu busekesi tayabalwa nga ca kuti umuntu alicimfishe ubusanso bwa kubalilapo.",
+    "phase_playing": "Ukufuma pali ino nshita, fyonse ifyo mucita kuti fyalenga mwacimfya."
   },
   "next_card": {
     "playing_phase": "Takwaba icikope ca kwishibilako - inshita ya kulalwa yatendeka.",
-    "deck_empty": "The deck is empty - no card is on offer.",
+    "deck_empty": "Icitabo tacakwete nangu kamo - tapali na maka ya kupeela.",
     "available": "Kaadi ya kupebwa: {card}",
     "available_trump": "Kaadi mupebwa: {card} (TRUMP)"
   },
   "invalid_move": {
     "wrong_format": "Ukubomfya '[play N]' ku kutambisha kalata ya nth mu minwe yenu.",
     "bad_position": "Iyi kardi tailipo. Mulikwata {hand_size} makadi.",
-    "must_follow_suit": "You must follow suit and play a {lead_suit} card.",
+    "must_follow_suit": "Mufwile ukulakonka ifyo bacita no kulabomfya kalata ya {lead_suit}.",
     "invalid_play": "Ico te kuti cicitike."
   },
   "game_action": {
@@ -28,7 +28,7 @@
     "won_learning": "Player {winner_id} wins the trick with {card} and takes the face-up card."
   },
   "phase": {
-    "learning_complete": "The deck is exhausted. The learning phase is over - every remaining trick counts towards victory."
+    "learning_complete": "Icipampa calikapwa. Isambililo lyalipwa - ubucenjeshi bonse bwasala bwalicindama ku kucimfya."
   },
   "draw": {
     "winner_received": "Mwalicimfishe ubucenjeshi kabili mwalipokele {card}.",
@@ -39,25 +39,25 @@
     "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
     "scores_learning": "Dira zilizoshindwa mpaka sasa - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
     "scores_playing": "Alama za kadi - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
-    "phase": "Phase: {phase}",
+    "phase": "Iciputulwa: {phase}",
     "phase_learning": "Dira: {phase} (〕{remaining_cards} kadi zimesalia kwenye deck)"
   },
   "hand": {
     "no_cards": "Takwaba amakardi.",
-    "no_cards_in_hand": "No cards in hand",
+    "no_cards_in_hand": "Takwaba ifya kucita mu kuboko kwesu.",
     "header": "Ukuboko kwenu:",
     "trump_indicator": " (TRUMP)",
     "suit_line": "{observation}\n  {suit}{trump_indicator}:",
     "card_line": "{observation}\n    {index}. {card}"
   },
   "trick_view": {
-    "empty": "No cards played yet this trick.",
-    "header": "Current trick:",
+    "empty": "Tapalipo amakardi ayo balepanga.",
+    "header": "Icipingo ca nomba:",
     "trump_indicator": " (TRUMP)",
     "card_line": "{observation}\n  Mchezaji {player_id}: {card}〕{trump_indicator}"
   },
   "board_str": {
-    "not_started": "Game not started",
+    "not_started": "Icimuti tacatendeke.",
     "header": "=== GERMAN WHIST GAME=== (Ukulwisha kwa ba German)",
     "phase": "{observation}\nDira: {phase}",
     "trump_suit": "{observation}\nTrump suit: {trump_suit}",
@@ -65,7 +65,7 @@
     "cards_left": "{observation}\nKadi zili kwenye deck: {count}",
     "next_card": "{observation}\nKadi inayofuata kwa mshindi: {card}",
     "blank": "{observation}  ama-ma no shita.",
-    "current_trick": "{observation}\nCurrent trick:",
+    "current_trick": "{observation} Ubukopo:",
     "trump_indicator": "(TRUMP) Na kabili, na ine wine e fyo natontonkanya.",
     "trick_line": "{observation}\n  Mchezaji {player_id}: {card}{trump_indicator}",
     "player_line": "{observation}\nMchezaji {player_id}: {scoring} alama za kadi (〕{tricks} jumla), {hand_size} kadi katika mkono"

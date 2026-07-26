@@ -19,24 +19,24 @@
     "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "no_brackets": "Mi̱ /ci̱ la̱tdɛ lot rɔ, bi̱ kɛ dhil te rɛy bunä.",
+    "no_closing_bracket": "Ta̱a̱ in ca la̱t kɛ jɛ /ciɛ thuɔ̱k./Thiɛlɛ biɛl mi ciɛk kä thany ']'",
     "empty_command": "Tëë baaŋ. Ta̱a̱dɛ 'draw' kiɛ 'move <source><destination> [count]'.",
     "empty_action": "Lät mi̱ thiɛl luɔt",
     "move_needs_args": "Möt kä min ca lar go̱rɛ gua̱th in bäkɛ thi̱n kɛnɛ gua̱a̱th tin wä kɛ jɛ. Käpdɛ: 'move <source> <destination> [count]'",
-    "count_positive": "Count must be positive or 'all'",
+    "count_positive": "Kuën bɛ yi̱k te kɛ mi̱ gɔaa kiɛ 'ti̱ diaal'",
     "count_invalid": "Kuɛ̈n /cɛ lät. La̱tdɛ kɛ nämbär kiɛ 'kɛn diaal'",
     "unknown_command": "Unknown command '{cmd}'. Use 'draw', 'move <source> <destination> [count]', or 'forfeit'",
     "wrapped": "Action {n}: {msg}"
   },
   "action_result": {
     "success": "Action {n}: {msg}",
-    "before_failure": "Executed {n} action(s) before failure.",
+    "before_failure": "Mi̱ caa la̱t {n} ɛ /känɛ ni̱ cop.",
     "failed": "Action {n} failed: {msg}"
   },
   "move_result": {
     "drew": "Tëë kɛ kaar ti̱ caa ka̱m raar kä /ci̱kɛ bi̱ ben.",
-    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "cannot_draw": "/Ci̱kɛ dee luäŋ kɛ yiow, kä ci̱ kuak kɛnɛ tin kɔakɛ te jɔc.",
     "invalid_pile": "Thiɛlɛ mi̱ lotdɛ kɛ ciöt in ca la̱t ɛ lɔac. La̱tdɛ kɛɛ W, F1-F4, kiɛ T1-T7",
     "foundation_one_card": "De̱rɛ kaar kɛl kärɔa naŋ kä puɔndɛcin.",
     "waste_to_foundation_ok": "Carkɛ ni̱ kä min la yärɛ (waste) ɛ wä nhiam kɛ ɣöö bɛ kulɛ ben rɛy puɔndëcinä F{dst}",
@@ -54,10 +54,10 @@
     "foundation_empty": "Kä puɔ̱ndëcin F{src} ɛ mi̱ te baaŋ.",
     "foundation_to_tableau_ok": "Moved card from foundation F{src} to tableau T{dst}",
     "foundation_to_tableau_bad": "/Ci̱kɛ de luäŋ kɛ läth kä kaar baapä (foundation card) rɛy gua̱a̱ mi̱ ca gɔ̱r T{dst}",
-    "to_waste_or_stock": "Cannot move to waste or stock"
+    "to_waste_or_stock": "/Cɛ dee naŋ kɛ ɣöö bɛ ya̱r kiɛ ba yiɛn."
   },
   "outcome": {
-    "forfeit": "Game forfeited. Final score: {score} cards in foundations.",
+    "forfeit": "Ci ŋar ɛ thuuk. Kä min ca gɔ̱r kɛ kui̱dɛ: {score} kä ci kɛn kuën diaal la̱th rɛy duëli̱kiɛn.",
     "won": "Cää puɔ̱th, ci ji̱n Klöndiak Solitär tiam!",
     "turn_limit": "Game over! You reached the maximum of {max_turns} turns. Score: {score} cards in foundations."
   },

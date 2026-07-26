@@ -19,8 +19,8 @@
     "intro": "Unacheza Klondike Solitaire. Lengo lako ni kuhamisha kadi zote hadi foundation piles.\n\nSheria za Mchezo:\n- Foundation piles (F1-F4): Jenga juu kutoka Ace hadi King kwa rangi\n- Tableau piles (T1-T7): Jenga chini kwa rangi tofauti (nyekundu kwenye nyeusi, nyeusi kwenye nyekundu)\n- Stock: Chora kadi hadi waste pile\n- Waste (W): Kadi ya juu inapatikana kwa ajili ya kucheza\n\nAmri:\n- 'draw' - Chora kadi kutoka stock hadi waste\n- 'move <source> <destination> [count]' - Hamisha kadi kati ya mirundo\n  Mifano: 'move W T1', 'move T1 F2', 'move T3 T5 2'. idadi pia inaweza kuwa 'all', ambayo itajaribu kuhamisha kadi zote zinazoonekana.\n- 'forfeit' - Mwisho wa mchezo mara moja na kufunga alama yako ya sasa\n- Majina ya mirundo: W (waste), F1-F4 (foundation), T1-T7 (tableau)\n\nUnaweza kutekeleza vitendo vingi kwa mwendo mmoja kwa kuyatenganisha na viambishi:\n  Mfano: 'draw, move W T1, move T2 F1'\n\nWafalme pekee wanaweza kuwekwa kwenye mirundo ya tableau isiyo na kadi.\nVitendo vinatekelezwa kwa mpangilio - ikiwa moja itashindika, vitendo vingine vinavyofuata vitapuuzwa.\nTumia 'forfeit' ikiwa unafikiri mchezo hauwezi kushindwa."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "no_brackets": "Dienza malu adi kaayi makane. Malu aa adi ne bua kuikala mu nkatshinkatshi ya miaku mikese (parentheses).",
+    "no_closing_bracket": "Mpangilu mubi: kabena ne tshilamba tshia ndekelu to. ']'",
     "empty_command": "Mukenji wa tshianana. Tuala \"draw\" anyi 'move <source><destination> [count]'",
     "empty_action": "Tshienzedi tshianana",
     "move_needs_args": "Mukenji wa kusungula udi ulomba muaba ne kuudi uya. 'kushiya <kudi> <kuya> [count]'",
@@ -31,42 +31,42 @@
   },
   "action_result": {
     "success": "Action {n}: {msg}",
-    "before_failure": "Executed {n} action(s) before failure.",
+    "before_failure": "Kuenza {n} malu kumpala kua dikosa dia mudimu.",
     "failed": "Kazi {n} ikwama: {msg}"
   },
   "move_result": {
-    "drew": "Drew card(s) from stock to waste.",
-    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
-    "invalid_pile": "Invalid pile name. Use W, F1-F4, or T1-T7",
+    "drew": "Kadiota ka dipatuisha (ka mu tshiena Ebelu) kadi katangila bintu bia ku tshiamu.",
+    "cannot_draw": "Katuena mua kuambula bintu to, ne tudi tushala anu bapuekele.",
+    "invalid_pile": "Dîna dia mulongolongo wa biamu kadiyi dijalame. Utela W, F1-F4, anyi T1-T7",
     "foundation_one_card": "Udi mua kuambula karte kamue patupu mu tshishimikidi.",
     "waste_to_foundation_ok": "Kadi ka ku tshianana kadibu bateka mu tshishimikidi F{dst}",
-    "waste_to_foundation_bad": "Cannot move waste card to that foundation pile",
+    "waste_to_foundation_bad": "Kuena mua kuambula karte ka tshianana mu tshina tshia nshindamenu atshi to.",
     "tableau_to_foundation_ok": "Imehamisha kadi kutoka tableau T{src} hadi foundation F{dst}",
-    "tableau_to_foundation_bad": "Cannot move tableau card to that foundation pile",
+    "tableau_to_foundation_bad": "Kuena mua kuambula karte ka tableau mu mulongo wa bintu bia mushinga to. 🔍",
     "foundation_to_foundation": "Kabena mua kuya ku tshishimikidi ne tshionso to.",
     "waste_to_tableau_one_card": "Udi mua kuambula karte kamue patupu mu tshiamu tshia dibenga kukuata bua kuya kutshibuila pa tablo.",
     "waste_to_tableau_ok": "Kadi ka mu tshianana kadibu bateka ku tablo T{dst}",
-    "waste_to_tableau_bad": "Cannot place waste card on that tableau pile",
+    "waste_to_tableau_bad": "Kuena mua kuteka karte ka tshianana ku mulongo wa tablo eu to.",
     "no_face_up": "No face-up cards to move",
     "tableau_to_tableau_ok": "Imehamisha {count} kadi(s) kutoka tableau T{src} hadi T{dst}",
     "tableau_to_tableau_bad": "Haiwezi kuhamisha {count} kadi(s) kutoka T{src} hadi T{dst}",
     "foundation_to_tableau_one_card": "Udi mua kuambula karte kamue patupu mu tshisanji tshia pa mutu bua kuya ne mu tshianza tshikuabu.",
     "foundation_empty": "Tshisumbu F{src} katshiena ne muntu to.",
     "foundation_to_tableau_ok": "Imehamisha kadi kutoka foundation F{src} hadi tableau T{dst}",
-    "foundation_to_tableau_bad": "Cannot place foundation card on tableau T{dst}",
-    "to_waste_or_stock": "Cannot move to waste or stock"
+    "foundation_to_tableau_bad": "Ki mbimpe kuteka karte ka dijadika dia nshindamenu pa tablo T{dst} to.",
+    "to_waste_or_stock": "Kabena mua kuya mu tshibutshilu anyi muaba wa kusombela to."
   },
   "outcome": {
-    "forfeit": "Game forfeited. Final score: {score} cards in foundations.",
+    "forfeit": "Tshimfuanyi tshia ndekelu: {score} karte mu bishimikidi.",
     "won": "Dianyisha, udi mupete mpeta wa mu manaya a Klondike!",
     "turn_limit": "Game over! You reached the maximum of {max_turns} turns. Score: {score} cards in foundations."
   },
   "board": {
     "title": "=== KLONDIKE SOLITAIRE=== (Mufuma mu ditunga dia Japon)",
     "turn": "Mwaka: {turn}/{max_turns}",
-    "stock": "Stock: {stock} cards",
-    "waste": "Waste (W): {waste}",
-    "foundations_header": "Foundations:",
+    "stock": "Tshiamu: {stock} karte ya kufilabu.",
+    "waste": "Biamu bia kutua nabi mâyi panshi (W): {waste}",
+    "foundations_header": "Malu adibu bajadike:",
     "foundation_row": "  F{n}: {cards}",
     "tableau_header": "Tshimfuanyi:",
     "tableau_row": "  T{n}: {cards}"

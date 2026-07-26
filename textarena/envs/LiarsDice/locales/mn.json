@@ -22,11 +22,11 @@
     "final_ranking": "list of player indices from first eliminated to winner"
   },
   "player_prompt": {
-    "intro": "You are Player {player_id} in an {num_players}-player Liar's Dice game.\nRules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\nIf you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins."
+    "intro": "Та бол {player_id} тоглогч {num_players} тоглогчтой Хурдны хулгай тоглоомд. Хууль: - Та өөрийн эргэлтэд: 1) Одоогийн санал болгож байгаагаас илүү их хэмжээтэй эсвэл илүү өндөр нүүртэй (эсвэл аль аль нь) шинэ санал болгож болно; өөрөөр хэлбэл '[Bid: 3, 4]', 2) \"[Call]\" гэж бичэн сүүлийн санал болгож болно. Хэрэв та дуудвал: - Хэрэв бүх хулгай дунд дээрх үнэ цэнийн бодит тоо нь санал болгоноос бага бол сүүлийн санал өгөх хүн нэг хулгай алддаг. - Үгүй бол дуудсан нь нэг хулгай алддаг. 0 хулгай хүрсэн тоглогч хаягдана. Сүүлийн үлдсэн тоглогч ялалт байгуулна."
   },
   "board": {
     "per_player": "Тоглоогч {p}: {d}",
-    "new_round": "\nNew round - Remaining dice: {dice_summary}\nYour current Dice are: {your_dice}"
+    "new_round": "Шинэ тойрог - үлдсэн мөч: {dice_summary} Таны өнөөгийн мөч нь: {your_dice}"
   },
   "call": {
     "bidder_loses": "Тоглогч {current_player_id} дууддаг! Бодит тооны тоо {face_value} бол {count} бөгөөд энэ нь {quantity}-ээс ХАЛГА. Тоглогч {loser_id} (сүүлчийн санал тавьсан) нэг талыг алдаж байна.",
@@ -47,7 +47,7 @@
     "face_range": "Нэрний үнэ нь 1-6 хооронд байх ёстой."
   },
   "message": {
-    "eliminated_invalid": "Player {player_id} was eliminated by invalid move."
+    "eliminated_invalid": "Тоглогч {player_id} хүчингүй хөдөлгөөнөөр шалгарсан."
   },
   "outcome": {
     "win": "Тоглогч {winner} ялжээ! Түрүүний жагсаалт: {final_ranking}"

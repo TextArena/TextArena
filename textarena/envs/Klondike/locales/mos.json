@@ -19,13 +19,13 @@
     "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "no_brackets": "Tʋʋmd sẽn pa zemse. tʋʋmda segd n bee ne kãn-kãe rãmba.",
+    "no_closing_bracket": "Tʋʋmd sẽn pa zemse. Bãadg la b loogr n be \"]\" pʋgẽ wã ka ye",
     "empty_command": "Gom-kẽndr sẽn pa be ye. gʋls \"draw\" bɩ \"move <source> <destination> [count]\".",
-    "empty_action": "Empty action",
+    "empty_action": "Tʋʋm sẽn pa tũ ne bũmb ye",
     "move_needs_args": "Yɩta wa \"move\" noore tɩ yaa tɩlae ne zĩig la sẽn na n kẽngã. A rɩkda: 'move <source> <destination> [count]'",
-    "count_positive": "Count must be positive or 'all'",
-    "count_invalid": "Invalid count. Use a number or 'all'",
+    "count_positive": "Bãngrã segd n yɩɩ sõma bɩ \"bũmb fãa\"",
+    "count_invalid": "Bãngr-goam sẽn pa zemse. Rɩk sõor bɩ \"bũmb fãa\"",
     "unknown_command": "Unknown command '{cmd}'. Use 'draw', 'move <source> <destination> [count]', or 'forfeit'",
     "wrapped": "Action {n}: {msg}"
   },
@@ -35,25 +35,25 @@
     "failed": "Action {n} failed: {msg}"
   },
   "move_result": {
-    "drew": "Drew card(s) from stock to waste.",
+    "drew": "A sẽn da tar karẽn-dotã n na n wa sãam a teedã.",
     "cannot_draw": "B pa tõe n dɩk ye. Zĩ-gãong la a sãmpoaga fãa yaa zaalem.",
     "invalid_pile": "Tʋʋmd sẽn pa zemse. rɩk W, F1-F4, bɩ T1-T7",
     "foundation_one_card": "A tõe n talla kaar a ye bal tɩ b ning yẽbgrẽ wã.",
     "waste_to_foundation_ok": "B sẽn dɩk kaarã n yi zũudẽ wã tɩ b tall-a t'a lebg ligdã F{dst}",
     "waste_to_foundation_bad": "Pa tõe n tall karẽn-biisa sẽn be wã tɩ b rɩk yẽbgrã ye.",
     "tableau_to_foundation_ok": "Moved card from tableau T{src} to foundation F{dst}",
-    "tableau_to_foundation_bad": "Cannot move tableau card to that foundation pile",
+    "tableau_to_foundation_bad": "Pa tõe n tall tablɛr kartã tɩ ta yẽbgr roogã ye",
     "foundation_to_foundation": "B pa tõe n kẽng yẽbgr a to pʋgẽ ye.",
     "waste_to_tableau_one_card": "A tõe n talla kaar a ye bal sẽn yi zuloeesẽ wã tɩ kẽ tablɛy pʋgẽ.",
     "waste_to_tableau_ok": "B sẽn yi n dɩk kaarã t'a kẽng tablɛ T{dst} pʋgẽ wã",
     "waste_to_tableau_bad": "Pa tõe n ning karẽn-biisa sẽn ka be wã tablɛo gilli ye.",
-    "no_face_up": "No face-up cards to move",
+    "no_face_up": "B pa na n tall kaar-dãmb sẽn puk ye.",
     "tableau_to_tableau_ok": "Moved {count} card(s) from tableau T{src} to T{dst}",
     "tableau_to_tableau_bad": "Cannot move {count} card(s) from T{src} to T{dst}",
     "foundation_to_tableau_one_card": "A tõe n talla kaar a ye bal t'a yi yẽbgrẽ wã n kẽng tablɛy pʋgẽ.",
     "foundation_empty": "Bõn-naandg F{src} yaa zaalem.",
     "foundation_to_tableau_ok": "Moved card from foundation F{src} to tableau T{dst}",
-    "foundation_to_tableau_bad": "Cannot place foundation card on tableau T{dst}",
+    "foundation_to_tableau_bad": "Pa tõe n ning fondã kart tablɛ T{dst} ye.",
     "to_waste_or_stock": "B pa tõe n tall-a tɩ b rɩk a sẽn na yɩl n sãam bɩ n ning ye."
   },
   "outcome": {

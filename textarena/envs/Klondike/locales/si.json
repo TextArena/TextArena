@@ -16,26 +16,26 @@
     "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
   },
   "player_prompt": {
-    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+    "intro": "ඔබ ක්ලන්ඩයික් සොලයිටේර් ක් රීඩා කරනවා. ඔබේ ඉලක්කය වන්නේ සියලුම කාඩ්පත් පදනම් ගොඩවල් වෙත ගෙනයාමයි. ක් රීඩා නීති: - පදනම් ගොඩවල් (F1-F4): ඇඳුමේ ඒස් සිට රජු දක්වා ගොඩනඟන්න - ටේබල් ගොඩවල් (T1-T7): විකල්ප වර්ණ ගොඩනඟන්න (රතු මත කළු, කළු මත රතු) - තොගය: කාඩ්පත් ඉවත දැමීමට කාඩ්පත් ගොඩට ගන්න - අපද් රව් ය (W): ක් රීඩා කිරීමට ඉහළම කාඩ්පත විධාන: - 'අදින්න' - තොගයේ සිට කාඩ්පත් ඉවත දැමීමට - '<මූලාශ් රය> <යනාන්තය> [count] ගෙන යන්න - තොග අතර කාඩ්පත් ගෙනයන්න උදාහරණ: 'W T1 ගෙන යන්න', 'T1 F2 ගෙන යන්න', 'T3 T5 ගෙන යන්න 2'. 'සියලු' ද ගණන් ගත හැකිය, එය වහාම මුහුණට මුහුණලා ඇති සියලුම කාඩ්පත් ගෙනයාමට උත්සාහ කරනු ඇත. - 'එයට' - ක් රීඩය අවසන් කරන්න සහ ඔබේ වර්තමාන ලකුණු තහනම් කරන්න - වර්තමාන වර්ණ: W (අදින්න), F1-F4 (F1-T1) - තොගු, T1-T7 තොග (T1) ඔබ ඉතිරිතම කාඩ්පත් ඉවත දැමන්න) - ඔබ තොගු කළ හැක්කේ එක් ක් රියාමා ඇඳුමක් සමඟ තොගය තුළ තබා ගැනීමට නම්, ඉතිරිවෙන් පමණක් ක් රියාමා, ඉතිරිවෙන් තොගය ජයග් රයට ගෙන යා හැකිය."
   },
   "format_error": {
     "no_brackets": "ක් රියාව අක් රියයි. ක් රියාව කුටි තුළ තිබිය යුතුයි.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
+    "no_closing_bracket": "අක් රීය ක් රියාකාරී ආකෘතිය.",
     "empty_command": "හිස් විධානය. ටයිප් කරන්න 'draw' හෝ 'move <source> <destination> [count]'",
     "empty_action": "හිස් ක් රියාව",
     "move_needs_args": "මාරු විධානය මූලාශ් රය සහ ගමනාන්තය අවශ් යයි. භාවිතය: 'move <source> <destination> [count]'",
     "count_positive": "ගණනය ධනාත්මක හෝ \"සියලු\" විය යුතුය",
-    "count_invalid": "Invalid count. Use a number or 'all'",
+    "count_invalid": "අක් රීය ගණනය කිරීම.",
     "unknown_command": "නොදන්නා විධානය '{cmd}'. 'draw', 'move <source> <destination> [count]', හෝ 'forfeit' භාවිතා කරන්න",
     "wrapped": "ක් රියාමාර්ගය {n}: {msg}"
   },
   "action_result": {
     "success": "ක් රියාමාර්ගය {n}: {msg}",
     "before_failure": "{n} ක් රියාවන් ක් රියාත්මක කිරීමේදී අසාර්ථක වීමට පෙර.",
-    "failed": "Action {n} failed: {msg}"
+    "failed": "{n} ක් රියාමාර්ගය අසාර්ථකයි: {msg}"
   },
   "move_result": {
-    "drew": "Drew card(s) from stock to waste.",
+    "drew": "කාඩ් එක ගලවලා, කුණු වෙලා.",
     "cannot_draw": "අදින්න බෑ, බඩු සහ අපද් රව් ය දෙකම හිස්.",
     "invalid_pile": "අක් රීය තොග නාමය. W, F1-F4 හෝ T1-T7 භාවිතා කරන්න",
     "foundation_one_card": "පදනමට ගෙනියන්න පුළුවන් එක කාඩ් එකක් විතරයි.",
@@ -62,13 +62,13 @@
     "turn_limit": "ක් රීඩාව අවසන්! ඔබ උපරිම {max_turns} හැරීම් කරා ළඟා වී ඇත. ලකුණු: {score} පදනම් වල කාඩ්පත්."
   },
   "board": {
-    "title": "=== KLONDIKE SOLITAIRE ===",
+    "title": "=== ක්ලොන්ඩික් සොලිටේයර් ===",
     "turn": "හැරීම: {turn}/{max_turns}",
-    "stock": "Stock: {stock} cards",
+    "stock": "කොටස්: {stock} කාඩ්පත්",
     "waste": "අපද් රව් ය (W): {waste}",
     "foundations_header": "පදනම්:",
     "foundation_row": "F{n}: {cards}",
-    "tableau_header": "Tableau:",
+    "tableau_header": "රූප සටහන:",
     "tableau_row": "T{n}: {cards}"
   }
 }

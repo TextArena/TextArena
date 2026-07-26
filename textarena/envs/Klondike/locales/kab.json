@@ -19,13 +19,13 @@
     "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
   },
   "format_error": {
-    "no_brackets": "Invalid action format. Action should be in brackets.",
-    "no_closing_bracket": "Invalid action format. Missing closing bracket ']'",
-    "empty_command": "Empty command. Type 'draw' or 'move <source> <destination> [count]'",
+    "no_brackets": "Ahil ur d-yusi ara deg uḍris. Ilaq ad yili gar yiferrawen n tneqlaft.",
+    "no_closing_bracket": "Asenfar n tigawt ur nelli ara d win. Ulac amrar i t-id-yettakken \"]\"",
+    "empty_command": "Aɣerru d ilem. Cceb \"ssufeɣ\" neɣ \"ssusfeḍ <taṣelkit> <tasamunt> [count]\".",
     "empty_action": "Taɣawsa d-yexlan",
     "move_needs_args": "Aɣawas n usikel yeḥwaǧ aselkim d tanzeɣt. Aseqdec: 'move <source> <destination> [count]'",
-    "count_positive": "Count must be positive or 'all'",
-    "count_invalid": "Invalid count. Use a number or 'all'",
+    "count_positive": "Aḥezzu ilaq ad yili d aẓidan neɣ \"kul wa\"",
+    "count_invalid": "Aḥesbu ur nlaq ara. Seqdec amḍan neɣ \"kul wa\"",
     "unknown_command": "Aseɛtu yettwakem '{cmd}'. Sken 'draw', 'move <source> <destination> [count]', neɣ 'forfeit'",
     "wrapped": "Asebter {n}: {msg}"
   },
@@ -35,8 +35,8 @@
     "failed": "Asebter {n} yettwafed: {msg}"
   },
   "move_result": {
-    "drew": "Drew card(s) from stock to waste.",
-    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "drew": "Tekkseḍ-d takarḍa seg usekles ɣer useɣzef.",
+    "cannot_draw": "Ur nezmir ad d-nekkes. Iɣbula akked yiḥerqan akk rzanen.",
     "invalid_pile": "Isem n tqacuct ur yelhi ara. Sseqdec W, F1-F4, neɣ T1-T7",
     "foundation_one_card": "Yezmer ad yessiweḍ kan yiwet n tkarḍa ɣer lsas.",
     "waste_to_foundation_ok": "Takarḍa i d-yettwaḥerzen seg useklu ɣer lsas F{dst}",
@@ -47,17 +47,17 @@
     "waste_to_tableau_one_card": "Yezmer ad yessuqel kan yiwet n tkarḍa seg usefru ɣer umata.",
     "waste_to_tableau_ok": "Tameẓla gar ileqman d usebter n t{dst}",
     "waste_to_tableau_bad": "Ur yezmir ara ad yerr takarḍa n usegmi ɣef tqacuct-nni n uḍebsi.",
-    "no_face_up": "No face-up cards to move",
+    "no_face_up": "Ulac tikarḍiwin i d-yettwafernen akken ad ttḥerrikent.",
     "tableau_to_tableau_ok": "Nefka {count} karti(s) seg T{src} ar T{dst}",
     "tableau_to_tableau_bad": "Ur yeɣliḍ ad t-nejḍeḍ {count} karti(s) seg T{src} ar T{dst}",
     "foundation_to_tableau_one_card": "Yezmer ad yessiweḍ kan yiwet n tkarḍa seg usebter ɣer uḍar.",
     "foundation_empty": "Taɣult F{src} d tilemt.",
     "foundation_to_tableau_ok": "Nefka karti seg F{src} ar T{dst}",
     "foundation_to_tableau_bad": "Ur yezmir ara ad yerr takarḍa n usebded ɣef tmenḍawt T{dst}",
-    "to_waste_or_stock": "Cannot move to waste or stock"
+    "to_waste_or_stock": "Ur yezmir ad yettwasekcem ɣer yiɣeblan neɣ i usentel."
   },
   "outcome": {
-    "forfeit": "Game forfeited. Final score: {score} cards in foundations.",
+    "forfeit": "Tazrawt n taggara: {score} tiqṛaḍ deg yisekla.",
     "won": "Ayyuz, rebḥem deg Klondike Solitaire!",
     "turn_limit": "Game over! You reached the maximum of {max_turns} turns. Score: {score} cards in foundations."
   },

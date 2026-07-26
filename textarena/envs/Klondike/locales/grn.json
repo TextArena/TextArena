@@ -16,7 +16,7 @@
     "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
   },
   "player_prompt": {
-    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+    "intro": "Nde re'upa Klondike Solitaire. Ne rembiapo ha'e embohasa opaite kuatia umi pila fundación-pe. Reglas del juego: - Pila Fundaciones (F1-F4): Ejapo peteĩ as rey reheguáva - Pila Tablero (T1-T7): Emboja'o sa'i sa'ivéva (poyvi pytã ári, hũ ro'ýpe) - Stock: Emboguete tarjeta hetave itaju rovái - Waste (W): Tarjeta yvatevéva ojepurúva ñembosarái hag̃ua Ohechauka \"empue\" - Emboguejy ta'anga oĩva stock guive waste peve - 'emohenda <fuente><destino> [count]'-Emboguete mbogua aty apytépe Ejemplo: emboguete W T1', embogueta T1 F2', embogate T3 T5 2'. Ikatu avei eipapa 'opavave', oñeha'ãva omýi pya'eterei opaichagua carta ojereva hendápe. - 'ñemboyke' - Emohu'ã joko ha emoinge ne mba'epuruvicha ko'ágägua nde réra rupive - Pile: W pileta (was), remboguata F4-F1-T1, tembiapokuña morotĩrã (t7 tablero) - Mba'apo ikatúke ikatu ejaporavo ñembohasa ambue póso ndive peguáicha remomombyaty A table de la mesa oĩhápe Techapyrã: Rehechauka pu'ỹre añoiténte reguerekuaa papapykuera opyta reipota oñemohẽramo pe távape; tesa'a tapykuére: Esquema ohasávo w-1 = 'Ñemoambuesãmbyhýva f-1, ombohape'erãgui guahẽta raitypa rire upe tenda opytávaramo' ('forfe') - Rei kuéra iñambue añónte': Embogueraha tape omboguerahami jeiko' techa ndikatuichýnte ohecháme."
   },
   "format_error": {
     "no_brackets": "Formato de acción no válido. Umi mba'e ojejapóva oñemoĩva paréntesis-pe.",
@@ -35,7 +35,7 @@
     "failed": "Acción {n} fracasó: {msg}"
   },
   "move_result": {
-    "drew": "Drew card(s) from stock to waste.",
+    "drew": "Ogueraha tarjeta de crédito umi mba'e oîva guive ha ojeitypa.",
     "cannot_draw": "Ndaikatúi ojeipe'a. Umi reserva ha residuo nandiete.",
     "invalid_pile": "Téra ndoikóiva. Eipuru W, F1-F4, térã T1-T7",
     "foundation_one_card": "Ikatu omomýi 1 kuatia añónte fundación-pe.",

@@ -6,7 +6,7 @@
   "player_prompt": {
     "intro": "أنت اللاعب {player_id} في German Whist.\n{phase_info}\nأنت تحمل {hand_size} بطاقات.\nالعب بطاقة مع '〕[play N]'، حيث N هو موضعها في يدك (على سبيل المثال '〕[play 3]').",
     "phase_learning": "مرحلة التعلم: الفائز في كل خدعة يأخذ البطاقة المفتوحة والخاسر ينسحب الورقة القادمة من الطابق. الخدع التي تمكنت منها خلال هذه المرحلة لا تعتبر نصرًا.",
-    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+    "phase_playing": "مرحلة اللعب: البطاقه منتهية كل خدعة من الان تعتبر نصر."
   },
   "next_card": {
     "playing_phase": "ما في ورقة عرض-- مرحلة اللعب بدأت.",
@@ -15,7 +15,7 @@
     "available_trump": "البطاقة المعروضة: {card} (ترامب)"
   },
   "invalid_move": {
-    "wrong_format": "Invalid move format. Use '[play N]' to play the Nth card in your hand.",
+    "wrong_format": "شكل حركة غير صحيح. استخدم \"[play N]\" لعزف البطاقة الـ 10 في يدك.",
     "bad_position": "موقف البطاقة هذا غير موجود. تمتلك بطاقات {hand_size} .",
     "must_follow_suit": "عليك ان تتبع هذا وتلعب ورقة {lead_suit}.",
     "invalid_play": "هذه البطاقة لا يمكن ان تلعب."
@@ -46,19 +46,19 @@
     "no_cards": "لا بطاقات.",
     "no_cards_in_hand": "ماعندك بطاقات في يد.",
     "header": "يدك:",
-    "trump_indicator": " (TRUMP)",
+    "trump_indicator": "(ترامب)",
     "suit_line": "{observation}\n  {suit}〕{trump_indicator}:",
     "card_line": "{observation}\n    {index}. {card}"
   },
   "trick_view": {
-    "empty": "No cards played yet this trick.",
+    "empty": "ما في ورق لعب بعد هذه الخدعة.",
     "header": "خدعة حالية:",
-    "trump_indicator": " (TRUMP)",
+    "trump_indicator": "(ترامب)",
     "card_line": "{observation}\n  اللاعب {player_id}: {card}〕{trump_indicator}"
   },
   "board_str": {
     "not_started": "اللعبة ما بدأتش.",
-    "header": "=== GERMAN WHIST GAME ===",
+    "header": "=== لعبة المانيا السمكة===",
     "phase": "{observation}\nالمرحلة: {phase}",
     "trump_suit": "{observation}\nTrump سويت: {trump_suit}",
     "trump_card": "{observation}\nبطاقة Trump: {card}",
@@ -66,7 +66,7 @@
     "next_card": "{observation}\nالبطاقة التالية للفائز: {card}",
     "blank": "{observation} ",
     "current_trick": "{observation}\nالدهة الحالية:",
-    "trump_indicator": " (TRUMP)",
+    "trump_indicator": "(ترامب)",
     "trick_line": "{observation}\n  اللاعب {player_id}: {card}〕{trump_indicator}",
     "player_line": "{observation}\nPlayer {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} cards in hand"
   },

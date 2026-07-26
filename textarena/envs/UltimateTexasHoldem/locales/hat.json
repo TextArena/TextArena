@@ -21,7 +21,7 @@
     "{winner_rounds}": "The number of rounds completed"
   },
   "player_prompt": {
-    "no_cards": "No cards yet",
+    "no_cards": "Pa gen kat ankò.",
     "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Jwè Yon kont Dealer\n\n📖 REZIME JWÈT LA:\n• Ou kòmanse ak {start_chips} chip\n• Dek kart 52 (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Ou jwe kont dealer (lakay)\n• Chak rond swiv estrikti Ultimate Texas Hold'em: ou poste mize ANTE ak BLIND, resevwa 2 kart hole, deside sou mize PLAY opsyonèl atravè faz jwèt la, epi revele kart kominite ak konpare pi bon men 5-kat ou kont men dealer. Objektif ou se maximize ganans ou (lè ou gen men pi bon), pandan ou minimize pèt ou (lè ou gen men pi mal).\n• Jwèt la fini lè ou rive 0 chip oswa pi ba nan kòmansman rond (PÈT) oswa konplè 1000 rond ak chip (GENYEN)\n\n💰 ESTRIKTI MIZE:\n• ANTE: Mize obligatwa ${ante} chak rond\n• BLIND: Mize obligatwa ${ante} chak rond\n• PLAY: Mize opsyonèl pandan jwèt la. Pandan rond la, ou ka chwazi YON SELMAN nan sa yo ki swiv: (${ante4} si ou fe li nan PRE-FLOP, ${ante2} si ou fe li nan FLOP, oswa ${ante} si ou fe li nan RIVER. Ou ka fold tou nan rivyè, abandone men ou, epi pa fe okenn mize.)\n\n🎴 DISTRIKSYON KART:\n• Ou resevwa 2 kart fas-wou (kart hole ou yo)\n• Dealer resevwa 2 kart fas-wo (kache nan ou)\n• 5 kart kominite deyal fas-wo anvan\n• Kart kominite yo revele pwogresivman atravè faz jwèt la\n\n🏆 KALIFIKASYON DEALER:\n• Dealer dwe gen omwen YON PÈ (2 kart menm rang) kalifye, itilize 2 kart nan men li ak 5 kart kominite.\n• Kalifikasyon dealer afekte rezilta mize yo, jan sa pral eksplike pi tard.\n\n🎮 FAZ JWÈT & AKSYON:\n📋 PRE-FLOP:\n  • Aksyon: [4x] (${ante4}) oswa [check]\n  • [4x]: Mete ${ante4} mize PLAY, revele premye 3 kart kominite\n  • [check]: Pa gen okenn mize adisyonèl, revele premye 3 kart kominite\n\n📋 FLOP:\n  • Si mize 4x mete: Sèlman [skip] disponib (oto-revele 2 kart kominite ki rete)\n  • Si pa gen mize 4x: [2x] (${ante2}) oswa [check]\n  • [2x]: Mete ${ante2} mize PLAY, revele 2 kart kominite ki rete\n  • [check]: Pa gen okenn mize adisyonèl, revele 2 kart kominite ki rete\n\n📋 RIVER:\n  • Si mize 4x oswa 2x mete: Sèlman [skip] disponib (oto-pwosede a showdown)\n  • Si pa gen okenn mize PLAY anvan: [1x] (${ante}) oswa [fold]\n  • [1x]: Mete ${ante} mize PLAY, pwosede a showdown\n  • [fold]: Abandone men ou, pèdi mize ANTE ak BLIND\n\n📋 SHOWDOWN:\n  • Tout kart yo revele ak evalye\n  • Pi bon men 5-kat nan 7 kart (2 hole + 5 kominite)\n  • Mize yo regle selon règ mize yo\n\n💎 PÈ MIZE:\n📊 MIZE ANTE:\n  • Dealer pa kalifye: PUSH (mize retounen)\n  • Dealer kalifye ak ou genyen: 1:1 pè (mize + ganans)\n  • Dealer kalifye ak ou pèdi: Mize pèdi\n  • Egalite: PUSH (mize retounen)\n\n📊 MIZE BLIND:\n  • Pa afekte pa kalifikasyon dealer\n  • Ou genyen: Mize retounen ak pè adisyonèl baze sou fòs men ou\n  • Ou pèdi: Mize pèdi\n  • Egalite: PUSH (mize retounen)\n\n📊 TABLO PÈ MIZE BLIND:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Moins ke Straight: Pa gen okenn pè adisyonèl\n\n📊 MIZE PLAY:\n  • Pa afekte pa kalifikasyon dealer\n  • Konparasyon direk: Pi bon men ou kont pi bon men dealer\n  • Ou genyen: 1:1 pè (mize + ganans)\n  • Ou pèdi: Mize pèdi\n  • Egalite: PUSH (mize retounen)\n\n🎯 KLASMAN MEN POKÈ (Pi bon a Pi mal):\n  1. Royal Flush: A-K-Q-J-10 menm kostim\n  2. Straight Flush: 5 kart konsekif menm kostim\n  3. Four of a Kind: 4 kart menm rang\n  4. Full House: 3 menm rang + 2 menm rang\n  5. Flush: 5 kart menm kostim\n  6. Straight: 5 kart konsekif\n  7. Three of a Kind: 3 kart menm rang\n  8. Two Pair: 2 pè menm rang diferan\n  9. One Pair: 2 kart menm rang\n  10. High Card: Kart ki pi wo ap genyen\n\n⌨️ KOMANDE AKSYON:\n• [4x] oswa [play bet 4x]: Mete ${{self.ante_amount*4}} mize PLAY\n• [2x] oswa [play bet 2x]: Mete ${{self.ante_amount*2}} mize PLAY\n• [1x] oswa [play bet 1x]: Mete ${{self.ante_amount*1}} mize PLAY\n• [check] oswa [c]: Cheke (pa gen okenn mize adisyonèl)\n• [fold] oswa [f]: Fold (abandone men ou)\n• [skip] oswa [s]: Sote a faz ki vinan (lè pa gen okenn aksyon ki nesesè)\n\n💡 KONSÈY STRATEJI:\n• Men kòmansman fò (pè, kart wo) souvan jisifye mize 4x\n• Konsidere kalifikasyon dealer - men feb ki ka pouse si dealer pa kalifye\n• Mize BLIND ka byen pwofitab ak men fò (Royal Flush = 500:1!)\n• Gade chip ou! Si li desann a 0 oswa pi ba nan kòmansman rond, ou pèdi.\n\n⚠️  REMAK ENPÒTAN:\n• Mize ANTE ak BLIND yo obligatwa chak rond\n• Mize PLAY yo opsyonèl ak estratejik\n• Asire w ke ou mete aksyon ki kòrèk, e sèlman yon aksyon nan yon fwa.\n\n",
     "state": "🎯 ROND {round}\n💰 Chip: {chips}\n🎴 Men ou: {hand}\n📊 Mize aktyèl: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Faz: {phase}\n🎯 Aksyon disponib: {actions}\n\n"
   },
@@ -68,14 +68,14 @@
   "hand_names": {
     "royal_flush": "Royal Flush (Flash wa)",
     "straight_flush": "Straight Flush (Flèch dwat)",
-    "four_of_a_kind": "Four of a Kind",
+    "four_of_a_kind": "Kat nan yon kalite",
     "full_house": "Full House (kay plen)",
-    "flush": "Flush",
-    "straight": "Straight",
+    "flush": "Flèch",
+    "straight": "Dwat",
     "three_of_a_kind": "Twa nan yon kalite a",
-    "two_pair": "Two Pair",
+    "two_pair": "De pè",
     "one_pair": "Yon sèl pè.",
-    "high_card": "High Card",
+    "high_card": "Kat anwo nan syèl la.",
     "unknown": "Men ki pa konnen"
   }
 }

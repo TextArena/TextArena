@@ -16,7 +16,7 @@
     "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
   },
   "player_prompt": {
-    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+    "intro": "سىز Klondike Solitaire ئوينايسىز. سىزنىڭ مەقسىتىڭىز بارلىق كارتىنى ئاساسىي توپلارغا يۆتكەش بولىدۇ . ئويۇن قائىدىلىرى: - ئاساسى توپلار (F1- F4): ئاقچىدىن پادىشاھقا ئوخشاش دەرىجىدە قۇرۇش- Tableau توپلار T1-T7): ئۆزگىرىشچان رەڭلەرنى (قىزىل بىلەن قارا، قارا بىلەن قىزىل) قۇرۇش--خەت ساقلاش: تاشلاپ قالىدىغان كومىغا خەت تارتىش- Waste (W): ئەڭ يۇقىرىدىكى كارتونى ئىشلىتىشكە بۇيرىغان بۇيرۇقلار:- 'draw' -- خاتتىن ئەخلەتكە كۆچۈرۈش--- <source><destination> [count] ھەركەت قىلىش ئارىلىقىدا خەتلارنى يۆتكىشكە قوشۇلۇشى مۇمكىن مىسال: W1 نى يۆتكۈزۈش ، T2 نى يۆتيشى ، T3 نى يۆلەپ بېرىش ، T5 نى يۈرۈشتۈرۈش 2. يەنە \"all\" دەپ ھېسابلىغىلى بولىدىكەن، ئۇ ھامان يۈزلۈك كارتا يۆتىۋېلىشنى سىنايدۇ.- 'forfeit' --- ئويۇنى ئاخىرلاشتۇرۇپ ھازىرقى نومۇرىڭىزنى مۇقىملايسىز قىلىۋېتىڭ؛ Pile: W (waste), F4- F1- F7- T4 تاللانغان تۈرلەر) ؛ كۆپ قېتىملىق خاراكتىرىلغان تاختىغا قاتناش- waste (تىلگەن). ئەگەر قالغان بىر قاتاردا سەپلىنىشتا ھەرىكەت قىلسا پەقەت بىردىنچە مەشغۇلات ئېلىپ بار بولغاندىلا يانداش ئۇسۇلى ئارقىلىق ئۇلارنى ئايرىپ ئالالايسەن. مەسىلەن: A1, مەغلۇچەكتە ئىشلەتسىڭىز خالا تەڭلىكتە باشقا ۋاقىتتا قوللىنىش ئۈچۈن قىسقۇچ بەلگىڭىزدە قالدۇرۇلغان چارە قىلالغۇسىز ئاكتىپ قويۇڭ."
   },
   "format_error": {
     "no_brackets": "ئىناۋەتسىز ھەركەت شەكلى.ھەرىكەت قوساق ئىچىدە بولۇشى كېرەك.",
@@ -36,7 +36,7 @@
   },
   "move_result": {
     "drew": "Drew card(s) from stock to waste.",
-    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "cannot_draw": "سىز تارتىپ بولالمايسىز. ھەم زاپچاس، ھەم ئەخلەت خالتىسى بار.",
     "invalid_pile": "ئىناۋەتسىز توپ نامى. W، F1-F4 ياكى T1-T7 نى ئىشلىتىڭ",
     "foundation_one_card": "پەقەت بىرلا خەتنى ئاساسقا يۆتكەلگىلى بولىدۇ.",
     "waste_to_foundation_ok": "ئەخلەتتىن فوندىغا يۆتكەلگەن كارتا F{dst}",
