@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "Conversation finished for round {round}. Please reply with '[Cooperate]' or '[Defect]' within \\boxed{{}}.",
+    "starting_round": "--- Mobembo ya ebandeli {round} ---",
+    "round_summary": "Maboko {round} maye makomaki:\n{outcome}\nMokeli 0 akomaki {r0} (motango {score_0}), Mokeli 1 akomaki {r1} (motango {score_1})."
+  },
+  "outcome": {
+    "winner": "Mokeli {winner} akomaka {win_score} - {lose_score}.",
+    "draw": "Draw! Both players scored {s0}.",
+    "round_both_cooperate": "Basani nyonso mibale basalaki na bomoko.",
+    "round_both_defect": "Basani nyonso mibale bakimaki.",
+    "round_p0_cooperates_p1_defects": "Mosani 0 asalaki elongo, mosani 1 akimaki.",
+    "round_p0_defects_p1_cooperates": "Mosani 0 akimaki, mosani 1 asanganaki."
+  }
+}

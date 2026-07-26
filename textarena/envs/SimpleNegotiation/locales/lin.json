@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Mosani amekaki kondima mombongo kozanga kozala na makoki oyo esengeli.",
+    "out_of_range": "Mokonzi {player_id}, Nsima ezali te. Koloni {col} ezali kati ya mabe te.",
+    "already_full": "Mokonzi {player_id}, Nsima ezali te. Koloni {col} ezali na mabe.",
+    "proposing_with_no_resource": "Moyembi {player_id} amekaki kosala mombongo kozanga kozala na makoki oyo esengeli.",
+    "incorrect_offer_format": "Monyokoli {player_id} asalaki libonza ya kosomba na lolenge mabe.",
+    "no_new_offer": "Monyokoli {player_id} asalaki te libonza ya sika."
+  },
+  "offers": {
+    "reject": "Moyembi {player_id} aboyaki kosomba.",
+    "accept": "Mobalani {acceptor_id} andimi kosombitinya ya molandi {proposer_id}.",
+    "proposal": "Mokonzi {player_id} akeli mbotama oyo kwa Mokonzi {opponent_id}: Makambi ebongisi: {offered} -> Makambi emonani: {requested}"
+  },
+  "outcome": {
+    "win": "Moyembi {winner_id} alongaki na kozwáká motuya ya biloko mingi.",
+    "draw": "Mbongwana ya motuya na biloko mpo na basani nyonso ezali se ndenge moko."
+  }
+}

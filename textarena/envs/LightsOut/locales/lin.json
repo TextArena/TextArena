@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Karibu kwenye Lights Out! Una gridi ya {size}x{size} ya taa.\nLengo lako ni kuzima taa ZOTE (zinazowakilishwa na '.')\nUnapogonga taa, inabadilisha yenyewe NA jirani zake za karibu (juu/chini/kushoto/kulia).\nAndika [row col] kugonga taa (0-indeksi, kwa hivyo anuwai halali ni 0-{max_index}).\nUna hamisha za {max_turns} za kutatua puzzle.\nMaelezo: 'O' = taa IMEWEKWA, '.' = taa IMEZIMWA"
+  },
+  "board": {
+    "current_state": "Etati ya sasa ya gridi (Kuhamisha {moves_made}, {moves_left} kuhamisha kunasalia, {completion}% imekamilika):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action esengeli ezala na format [row col] esika molongo mpe col ezali ba integers kobanda 0 kino {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Matɔndi! Osilisi puzzle na {moves_used} biteni !",
+    "loss": "Game over! You used all {max_turns} moves without solving the puzzle. Final completion: {completion}%\nFinal state:\n{grid}"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "No cards yet",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Mokeli moko vs Mwana ndako\n\n📖 KISANSI YA LUKULU:\n• Oza na {start_chips} chips\n• Deko moja ya 52 karti (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Oza lukini na mwana ndako (ndako)\n• Kila mwaka ukomaka muundo wa Ultimate Texas Hold'em: oza na ANTE na BLIND bets, oza na 2 karti za hole, oza na desisi ya optional PLAY bets katika mikolo ya kujadiliana, kisha oza na karti za jamii na linganisha mkono wako bora zaidi na ule wa mwana ndako. Lengo lako ni kuongeza ushindi wako (wakati una mkono bora), wakati unapunguza hasara zako (wakati una mkono mbaya).\n• Lukulu linaisha wakati oza na chips 0 au chini ya kuanza kwa mwaka (HASARA) au kukamilisha mikolo 1000 na chips (USHINDI)\n\n💰 MUUNDO WA KUJADILIANA:\n• ANTE: Beti ya lazima ${ante} kila mwaka\n• BLIND: Beti ya lazima ${ante} kila mwaka\n• PLAY: Beti ya chaguo wakati wa mchezo. Katika muda wa mwaka, oza na chaguo moja tu: (${ante4} ikiwa imefanywa kwa PRE-FLOP, ${ante2} ikiwa imefanywa kwa FLOP, au ${ante} ikiwa imefanywa kwa RIVER. Pia oza na chaguo la kufunga kwa mto, kutoa mkono, na kufanya beti yoyote.)\n\n🎴 KUGAWANYA KARTI:\n• Oza na 2 karti za uso (karti za hole zako)\n• Mwana ndako anapata 2 karti za uso chini (zilizofichwa kutoka kwako)\n• 5 karti za jamii zinagawanywa uso chini mwanzoni\n• Karti za jamii zinaonyeshwa kwa njia ya hatua za mchezo\n\n🏆 KUFuzu KWA MWANA NDako:\n• Mwana ndako lazima awe na angalau PAIR (2 karti za kiwango sawa) ili kufuzu, kwa kutumia 2 karti katika mkono wake na 5 karti za jamii.\n• Kufuzu kwa mwana ndako kunahusiana na matokeo ya kujadiliana, kama ilivyo elezewa baadaye.\n\n🎮 HATUA ZA MCHEZO & VITENDO:\n📋 PRE-FLOP:\n  • Vitendo: [4x] (${ante4}) au [check]\n  • [4x]: Weka ${ante4} PLAY bet, onyesha karti 3 za kwanza za jamii\n  • [check]: Hakuna beti ya ziada, onyesha karti 3 za kwanza za jamii\n\n📋 FLOP:\n  • Ikiwa beti 4x imewekwa: Chaguo pekee [skip] (kwa njia ya kiotomatiki inaonyesha karti 2 za mwisho za jamii)\n  • Ikiwa hakuna beti 4x: [2x] (${ante2}) au [check]\n  • [2x]: Weka ${ante2} PLAY bet, onyesha karti 2 za mwisho za jamii\n  • [check]: Hakuna beti ya ziada, onyesha karti 2 za mwisho za jamii\n\n📋 RIVER:\n  • Ikiwa beti 4x au 2x imewekwa: Chaguo pekee [skip] (kwa njia ya kiotomatiki inaendelea hadi kufichua)\n  • Ikiwa hakuna beti ya PLAY iliyotangulia: [1x] (${ante}) au [fold]\n  • [1x]: Weka ${ante} PLAY bet, endelea hadi kufichua\n  • [fold]: Toa mkono, poteza ANTE na BLIND bets\n\n📋 SHOWDOWN:\n  • Karti zote zinaonyeshwa na kutathminiwa\n  • Mkono bora zaidi wa 5 karti kutoka 7 karti (2 hole + 5 jamii)\n  • Bets zinatatuliwa kulingana na sheria za malipo\n\n💎 MALipo YA KUJADILIANA:\n📊 ANTE BET:\n  • Mwana ndako hajafuzu: PUSH (betti imerudishwa)\n  • Mwana ndako amefuzu & oza ushindi: Malipo 1:1 (betti + ushindi)\n  • Mwana ndako amefuzu & oza upotevu: Beti imepotea\n  • Tie: PUSH (betti imerudishwa)\n\n📊 BLIND BET:\n  • Haiathiriwi na kufuzu kwa mwana ndako\n  • Oza ushindi: Beti imerudishwa na malipo ya ziada kulingana na nguvu ya mkono wako\n  • Oza upotevu: Beti imepotea\n  • Tie: PUSH (betti imerudishwa)\n\n📊 MEZA YA MALipo YA BLIND BET:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Chini ya Straight: Hakuna malipo ya ziada\n\n📊 PLAY BET:\n  • Haiathiriwi na kufuzu kwa mwana ndako\n  • Linganisho la moja kwa moja: Mkono bora zaidi wako vs Mkono bora zaidi wa Mwana ndako\n  • Oza ushindi: Malipo 1:1 (betti + ushindi)\n  • Oza upotevu: Beti imepotea\n  • Tie: PUSH (betti imerudishwa)\n\n🎯 CHEO ZA MKONO WA POKER (Bora hadi Mbaya):\n  1. Royal Flush: A-K-Q-J-10 za kiwango sawa\n  2. Straight Flush: 5 karti mfululizo za kiwango sawa\n  3. Four of a Kind: 4 karti za kiwango sawa\n  4. Full House: 3 za aina moja + 2 za aina moja\n  5. Flush: 5 karti za kiwango sawa\n  6. Straight: 5 karti mfululizo\n  7. Three of a Kind: 3 karti za kiwango sawa\n  8. Two Pair: 2 jozi za viwango tofauti\n  9. One Pair: 2 karti za kiwango sawa\n  10. High Card: Kadi ya juu inashinda\n\n⌨️  AMRI ZA KUTENDA:\n• [4x] au [play bet 4x]: Weka ${{self.ante_amount*4}} PLAY bet\n• [2x] au [play bet 2x]: Weka ${{self.ante_amount*2}} PLAY bet\n• [1x] au [play bet 1x]: Weka ${{self.ante_amount*1}} PLAY bet\n• [check] au [c]: Angalia (hakuna beti ya ziada)\n• [fold] au [f]: Funga (toa mkono)\n• [skip] au [s]: Sogeza hadi hatua inayofuata (wakati hakuna hatua inayohitajika)\n\n💡 VIDokezo VYA MKAKATI:\n• Mikono bora ya kuanzia (jozi, karti za juu) mara nyingi hufanya 4x bets\n• Zingatia kufuzu kwa mwana ndako - mikono dhaifu inaweza kusukuma ikiwa mwana ndako hajafuzu\n• Beti ya BLIND inaweza kuwa ya faida kubwa na mikono bora (Royal Flush = 500:1!)\n• Angalia kizimba chako cha chips! Ikiwa inapungua hadi 0 au chini ya kuanza kwa mwaka, oza upotevu.\n\n⚠️  TAARIFA ZA MUHIMU:\n• ANTE na BLIND bets ni za lazima kila mwaka\n• PLAY bets ni za chaguo na za mkakati\n• Hakikisha kuwa unaingiza hatua sahihi, na hatua moja kwa wakati mmoja.\n\n",
+    "state": "🎯 MWAKA {round}\n💰 Chips: {chips}\n🎴 Mkono wako: {hand}\n📊 Bets za sasa: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Hatua: {phase}\n🎯 Vitendo vinavyopatikana: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Round {round} started! Bets: ANTE ${ante}, BLIND ${blind}. You have {chips} chips remaining.",
+    "your_hand": " Lobɔkɔ na yo: {hand}",
+    "flop_revealed": " FLOP emonisami: {cards}",
+    "river_revealed": " RIVER abimisi: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Misala ya mabe mpo na phase oyo. misala mizali: {available}",
+    "message": " Likambo ya mabe! Misala oyo ekoki kosalema: {available}"
+  },
+  "action": {
+    "folded": " Osili kokwea."
+  },
+  "showdown": {
+    "dealer_hand": " BONGA! lobɔkɔ ya moto oyo azali kopesa: {cards}",
+    "community_cards": " Ba carte ya Communauté: {cards}",
+    "player_best": "🎴 Mkono bora zaidi wa Mokeli: {name} ({cards})",
+    "dealer_best": "🎴 Mkono bora zaidi wa Mwana ndako: {name} ({cards})",
+    "ante_lost_folded": " ANTE BET LOST! -${ante} (ekangami)",
+    "blind_lost_folded": "❌ BLIND bet LOST! -${blind} (folded)",
+    "ante_won": "✅ ANTE abundi mpe alongi! +${amount}",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} ezongaki",
+    "ante_lost": " ANTE BET LOST! -${ante}",
+    "blind_won": "✅ BETE YA MOKILI MOSUSU ELONGI! +${amount}",
+    "blind_pushed": "🔄 BLIND bet PUSHED! ${blind} returned",
+    "blind_lost": "❌ BLIND bet LOST! -${blind}",
+    "play_won": "✅ PLAY bet WON! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} ezongisami",
+    "play_lost": "❌ PLAY bet LOST! -${play}",
+    "net_gain": "🎉 Round {round} completed! Net gain: +${net}",
+    "net_loss": "💸 Round {round} completed! Net loss: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 GAME OVER! {max_turns} rounds completed. You have ${chips} chips - YOU WIN!",
+    "game_over_lose": " MOSALA EKOKI! Ozali lisusu na ba fiches te. Monyokoli alongi!",
+    "reward_win": "Mokeli akomaki {winner_rounds} mikolo na ${chips} chips",
+    "reward_lose": "Mosani asilisaki ba fiches na round {round}",
+    "reward_win_max": "Player completed {max_turns} rounds with ${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "Mbongo ya mokonzi (Royal Flush)",
+    "straight_flush": "Motuya ya polele (Straight Flush)",
+    "four_of_a_kind": "Banzete minei ya ndenge moko",
+    "full_house": "Ndako etondi na bato",
+    "flush": "Kotiola mai ya miso",
+    "straight": "Na kotɛngama te",
+    "three_of_a_kind": "Bazali misato na lolenge moko",
+    "two_pair": "Mibale na mibale",
+    "one_pair": "Zwá yango mibalemibale",
+    "high_card": "Karte ya likoló",
+    "unknown": "Lobɔkɔ oyo eyebani te"
+  }
+}
