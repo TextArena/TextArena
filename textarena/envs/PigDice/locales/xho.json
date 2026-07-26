@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing a game of Pig Dice.\n\nRules:\n- On your turn, you can either '[roll]' or '[hold]'\n- Roll a 2-6: Add to your turn total\n- Roll a 1: Lose turn total and end turn\n- Hold: Add turn total to your score and end turn\n- First to {winning_score} points wins\n\nWhen it's your turn, you'll see the current scores and turn total.\nRespond with '[roll]' to roll the die or '[hold]' to bank your points."
+  },
+  "invalid_move": {
+    "invalid_action": "Uhlobo lweminyango lisahamba. Sebenzisa '[roll]' noma '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Mdlali {player_id} ubhujile, esala {turn_total} ipointi!",
+    "player_hold": "Mdlali {player_id} akhwaza futhi abhanka {turn_total} ipointi."
+  },
+  "board": {
+    "player": "Mdlali 0: '{score_0}'; Mdlali 1: '{score_1}'",
+    "current_total_scores": "Amanqaku apheleleyo akhoyo ngoku: {scores} Inani lakho elipheleleyo langoku ngu- {turn_total}.",
+    "roll_history": "{observation}\nUmthamo wakho wokugijima kule turni: {roll_history}",
+    "first_roll": "{observation} Eli lithuba lakho lokuqala.",
+    "available_actions": "{observation}\nIzinto ezithandekiwe: '[roll]' noma '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Mdlali {winner_id} uphume ngokuba nesikolo eliphakame kwi-limiti yeturn ({scores})",
+    "winner_by_score": "Mdlali {winner_id} uphume ngokufikela kwenani lalipointi {winning_score}!",
+    "draw": "Umda wempinda ufikelelwe kwaye bonke abadlali banamanqaku afanayo: {scores}"
+  }
+}

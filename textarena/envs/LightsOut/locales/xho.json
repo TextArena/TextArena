@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Wamkelekile kwi-Lights Out! Unayo isithili {size}x{size} selayiti.\nInhloso yakho kukhomba zonke selayiti KUSIWE (kubonakala ngoku '.')\nUngakwazi ukukhomba iselayiti, iyathetha ngokwakhe NA abantu abangaphakathi (phezulu/naphakathi/kwaphandle/kwesokunene).\nBhala [row col] ukukhomba iselayiti (0-igidi, kwa hiyo kufika kwi-0-{max_index}).\nUnayo zikomo {max_turns} ukukhomba ukuthula iphazamiso.\nIncwadi: 'O' = iselayiti IKHOMBE, '.' = iselayiti KUSIWE"
+  },
+  "board": {
+    "current_state": "Isithili seziko eliyaphiwe (Kusonga {moves_made}, {moves_left} izosonga ezisesele, {completion}% ezikomile):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Isenzo kufuneka sibe kwifomathi [row col] apho umgca kunye necol ziyinombolo ukusuka ku-0 ukuya ku-{max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Ndiyavuyisana nawe, usombulule iphazili ngeendlela ezi- {moves_used}!",
+    "loss": "Igadi elithiye! Wadibana konke {max_turns} izosonga ukuthula iphazamiso. Ukupheleleyo kukomisa: {completion}%\nIsithili sokupheleleyo:\n{grid}"
+  }
+}

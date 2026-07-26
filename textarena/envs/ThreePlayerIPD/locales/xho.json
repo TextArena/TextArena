@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "UyisiPlayer {player_id} kwi-3-Player Iterated Prisoner's Dilemma. Umjikelezo ungaqa {num_rounds} izibelo.\nUmjikelezo wendlela:\n• {conv_rounds} izibelo zokuthetha ngokwenzuzo\n• 1 isibelo sokwenza uqondo - thumela ithokheni elilodwa kwi-opponent: '[<opp-id> cooperate]' noma '[<opp-id> defect]' (ngokwesibonelo '[1 defect] [2 cooperate]'; isethuleliyo 'ukuxolela'). \nMatrix yamandla yezigamu (eyakhiwe kwi-gamu ezisilinganayo):\n  - Bonke abaxolele  ->  {reward}\n  - Bonke abaxolele kabi    ->  {punishment}\n  - Wena uxolela kabi, abanye baxolela -> {temptation}\n  - Wena uxolela, abanye baxolela kabi -> {sucker}\nOyena mdlali(u) onephepha eliphezulu kwisikhathi sokuphela komjikelezo wozala."
+  },
+  "round": {
+    "start": "─── Kwanza Round {round} ───\tUngakwazi ukuthetha ngokwenzuzo kwi-{conv_rounds} izibelo ezayo.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Umjikelo {round} - Iziphumo:",
+    "pair_line": "{observation}\n\t Player {i} vs Player {j} ikhethile ukuthi {choice_i} na {choice_j} kwa kuwa (Player {i} iphepha {gain_i}, Player {j} iphepha {gain_j})",
+    "scores_open": "{observation} -> Amanqaku akhoyo ngoku: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}  I-RWB"
+  },
+  "outcome": {
+    "final": "Amashore ayezayo: {scores}.  Izigubu zomgangatho (zokuvuka→ezilungile): {groups}"
+  }
+}

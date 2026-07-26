@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Uyiyithonde ndiyaphi na Player {player_id} kumdlalo we-Indian Poker.\n- 52-card deck; uyibona kuphela icadi lempikiswano.\n- Ante {ante} chip(s) ngemdlalo, {max_rounds} mizamo yomdlalo.\n- Izinto ezivumelekile: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ngumahluko omancipheka <= ichip count yakho.)\n- Icadi elihle kude iphumelela ipoti kuliphi ukubonakala.\n"
+  },
+  "round": {
+    "announce": "### Round {current_round}/{max_rounds}\nYour opponent's card is: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Nika ngaphezu kwe-BRAKITI eyodwa, njengoko '[check]', '[bet 2]', '[call]', '[raise 3]', noma '[fold]'.",
+    "cannot_check": "Akunakwenzeka [check] - ujongene nokubheja.",
+    "amount_min": "Isixa sokubheja / sokudibanisa kufuneka sibe yi-≥ 1.",
+    "cannot_bet": "Angakwazi ukubeta [bet] - kufuneka [call] / [raise] / [fold].",
+    "nothing_to_call": "Akukho nto yokutsalela umnxeba; unokwenza [check] endaweni yoko.",
+    "no_bet_to_raise": "Sebenzisa [bet X] ukuvula; akukho kubhejo lokuwuphakamisa.",
+    "insufficient": "Insufficient chips for that action."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (imali {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Izenzo zakho ezinokwenzeka: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Player {winner}. (Ibankrolls P0:{p0}, P1:{p1})",
+    "folded": "Umdlali {player_id} uvale.",
+    "showdown_win": "Ukujongana: {card_win} ibetha i-{card_lose}.",
+    "showdown_tie": "Umdlalo wokugqibela ubhangile: bobabini {card}. Ipot split  ngamnye ufumana {split} ."
+  },
+  "outcome": {
+    "p0_wins": "Player 0 uyathoba ({bank0} > {bank1})",
+    "p1_wins": "Player 1 uyathoba ({bank1} > {bank0})",
+    "draw": "Iichips ezilinganayo emva kwazo zonke iirandi"
+  }
+}

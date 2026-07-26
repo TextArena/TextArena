@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Indaba yakudala. Isipho entsha: {trump_suit} (kadi entsha: {trump_str}).",
+    "no_trump_card": "akukho nanye"
+  },
+  "player_prompt": {
+    "intro": "Uyimdlali {player_id} kwiJalopi yaseGerman.\n{phase_info}\nUnikeli kadi {hand_size}.\nDlala kadi ngokuthi '[play N]', lapho N ingumhlalo wakho kwenza.\n(Dlalani '[play 3]')",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "Akukho khadi linikezelwayo - isigaba sokudlala siqalile.",
+    "deck_empty": "Umgangatho awunanto - akukho khadi linikezelwayo.",
+    "available": "Ikhadi elinikezelwayo: {card}",
+    "available_trump": "Ikhadi elinikezelwayo: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Ifomathi yokunyakaza engekho mthethweni. Sebenzisa '[play N]' ukudlala ikhadi le-Nth esandleni sakho.",
+    "bad_position": "Loo ndawo yekhadi ayikho. Unamakhadi {hand_size} .",
+    "must_follow_suit": "Kufuneka ulandele umzekelo wakhe uze udlale ikhadi elithi {lead_suit}.",
+    "invalid_play": "Loo khadi ayinakudlalwa."
+  },
+  "game_action": {
+    "played": "Umdlali {player_id} wadlala u-{card}."
+  },
+  "trick": {
+    "won": "Umdlali {winner_id} uphumelele iqhinga ngo-{card}.",
+    "won_learning": "Mdlali {winner_id} uphumelela kadi nezifunekile {card} kanti akhetha kadi entsha"
+  },
+  "phase": {
+    "learning_complete": "Umgangatho uphelile. Isigaba sokufunda sigqityiwe - onke amaqhinga aseleyo ayabala ukuze siphumelele."
+  },
+  "draw": {
+    "winner_received": "Uphumelele eli qhinga waza wafumana {card}.",
+    "loser_received": "You lost the trick and drew {card} from the deck.",
+    "winner_preview": "Ikhadi elilandelayo elinikezelwayo ngu {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Kadi ezifunekile - Mdlali 0: {tricks0}, Mdlali 1: {tricks1}",
+    "scores_playing": "Kadi ezifunekile - Mdlali 0: {tricks0}, Mdlali 1: {tricks1}",
+    "phase": "Isigaba: {phase}",
+    "phase_learning": "Isiphepho: {phase} ({remaining_cards} kadi ezisemthethweni)"
+  },
+  "hand": {
+    "no_cards": "Akukho makhadi.",
+    "no_cards_in_hand": "Akukho makhadi esandleni",
+    "header": "Isandla sakho:",
+    "trump_indicator": "(TRUMP) I-Radio yeyona nto ibalulekileyo.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Akukho khadi lidlalwe okwangoku eli qhinga.",
+    "header": "Current trick:",
+    "trump_indicator": "(TRUMP) I-Radio yeyona nto ibalulekileyo.",
+    "card_line": "{observation}\n  Mdlali {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Umdlalo awuqalanga",
+    "header": "=== Umdlalo weGerman Whist===",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nTrump suit: {trump_suit}",
+    "trump_card": "{observation}\nTrump card: {card}",
+    "cards_left": "{observation}\nKadi ezisemthethweni: {count}",
+    "next_card": "{observation}\nKadi inokuzala umdlali ophumeleleyo: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation} Iqhinga langoku:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Mdlali {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nMdlali {player_id}: {scoring} kadi ezifunekile ({tricks} zonke), {hand_size} kadi ezikhethekile"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}
