@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Tableru actual:\n\n{board}\nMovimientos disponibles: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Piles centrales --- ",
+    "pile": "{observation}Montón {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Visión del Xugador {player_id} ---\n",
+    "payoff": "{observation}Montón de paga (Carta cimera): {top_card}, Llargor del montón de paga: {payoff_length}\n",
+    "hand": "{observation}Mano: {hand} ",
+    "discard": "{observation}Montones de desaniciu: {discard}\n",
+    "empty": "Vacíu."
+  },
+  "game_message": {
+    "no_cards_left": "Nun hai más cartes pa sacar. Recuerda que puedes xugar les tarxetes d'estes fontes: 1. La to mano 2. El top card de la pila paga 3. El top cards de cualesquier otra pila descarta. "
+  },
+  "invalid_move": {
+    "wrong_format": "El xugador {player_id} nun respondió con un movimientu válidu en paréntesis rectangulares.",
+    "invalid_play": "Xugada inválida. Xugador {player_id} intentó xugar {card} nel montón central {index}.",
+    "discard_from_payoff": "El xugador {player_id} intentó deshacerse d'una carta del montón de pagos.",
+    "discard_not_in_hand": "El xugador {player_id} intentó descartar una carta que nun ta na so mano.",
+    "wrong_move_type": "El xugador {player_id} nun respondió con un tipu de movimientu válidu."
+  },
+  "game_action": {
+    "you_drew": "Ye una carta.",
+    "opponent_drew": "El xugador {player_id} dibuxó cartes.",
+    "you_played": "Xugasti {card} nel montón central {index}.",
+    "opponent_played": "El xugador {player_id} xugaba {card} na pila central {index}.",
+    "you_discarded": "Desaniciasti {card} al montón de desaniciu {index}, lo que tamién significa que rematasti la to vuelta. Nenguna otra aición tuya se considera pa esta vuelta. Xugador {next_player_id} va ser el próximu.",
+    "opponent_discarded": "Xugador {player_id} desanició {card} al montón de desaniciu {index}, lo que tamién significa que remató la so vuelta. Nenguna otra aición del Xugador {player_id} se considera pa esta vuelta. Xugador {next_player_id}, vas ser el próximu. Por favor, introduce la to aición nel formatu [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Xugador {current_player} acabó con el so montón de paga! Xugador {current_player} gana!",
+    "deadlock_player_0": "Alcánzose un puntu muertu. Xugador 0 gana con {player_0_payoff} cartes restantes vs {player_1_payoff} cartes del Xugador 1.",
+    "deadlock_player_1": "Alcánzose un puntu muertu. Xugador 1 gana con {player_1_payoff} cartes restantes vs {player_0_payoff} cartes del Xugador 0.",
+    "deadlock_tie": "Alcánzose un puntu muertu con empate. Dambos xugadores tienen {player_0_payoff} cartes restantes. Xugador {current_player} gana por defeutu."
+  }
+}

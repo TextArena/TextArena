@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Yes xugador {player_id} n'un xuegu de Póker indiu.\n- Baraxa de 52 cartes; namás ves la carta del oponente.\n- Apueste {ante} ficha(s) cada ronda, {max_rounds} ronda(s) total.\n- Movimientos válidos: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ye un númberu enteru positivu <= el númberu de les tos fiches.)\n- La carta oculta más alta gana el pot na confrontación.\n"
+  },
+  "round": {
+    "announce": "### Ronda {current_round}/{max_rounds}\nLa carta del to oponente ye: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Supply exactly ONE bracketed action, e.g. '[check]', '[bet 2]', '[call]', '[raise 3]', or '[fold]'.",
+    "cannot_check": "Nun se puede [check] - ye una apuesta.",
+    "amount_min": "El valor de la apuesta/recuperación tien d'esistir ≥ 1.",
+    "cannot_bet": "Nun puedes [bet] - debes [call] / [raise] / [fold].",
+    "nothing_to_call": "Nada que llamar; ye posible [check] en llugar d'ello.",
+    "no_bet_to_raise": "El xuegu ye abiertu con [bet X]; nun hai apostes pa aumentar.",
+    "insufficient": "Nun hai chips suficientes pa esa acción."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (costu {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Les sos posibles acciones: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Player {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "El xugador {player_id} retiróse.",
+    "showdown_win": "Showdown: {card_win} beats {card_lose}.",
+    "showdown_tie": "Showdown tie: both {card}. Pot split – each receives {split}."
+  },
+  "outcome": {
+    "p0_wins": "Xugador 0 gana ({bank0} > {bank1})",
+    "p1_wins": "Xugador 1 gana ({bank1} > {bank0})",
+    "draw": "Les fiches iguales dempués de toles rondes."
+  }
+}

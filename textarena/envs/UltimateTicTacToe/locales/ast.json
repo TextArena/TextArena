@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Tableru actual:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "El movimientu tien de ser na forma [macro micro] con númberos 0-8.",
+    "out_of_range": "Los índices tienen de tar ente 0 y 8.",
+    "index_out_of_range": "El micro_panel, fila o columna ta fora de llindada.",
+    "cell_occupied": "La célula yá ta ocupada.",
+    "wrong_micro_board": "El xugador tien de xugar nel siguiente micro tablero.",
+    "micro_board_won": "El micro tableru yá ta ganáu."
+  },
+  "next_board": {
+    "any": "Cualquier micro tabla.",
+    "specific": "tableru micro {nxt}"
+  },
+  "game_action": {
+    "played": "Xugador {player_id} xugó nel tableru micro {macro_idx}, celda {micro_idx} (fila {row}, columna {col}). Xugador {opponent_id} tien que xugar agora en {nxt_txt}."
+  },
+  "outcome": {
+    "win": "El xugador {player_id} gana Ultimate Tic Tac Toe!",
+    "draw": "El partíu ye empate."
+  }
+}

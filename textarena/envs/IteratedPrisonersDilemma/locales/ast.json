@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "Conversación rematada pa la ronda {round}. Respuenda con '[Cooperate]' o '[Defect]' dientro de \\boxed{{}}.",
+    "starting_round": "--- Ronda d' iniciu {round} ---",
+    "round_summary": "Round {round} results:\n{outcome}\nPlayer 0 earned {r0} (total {score_0}), Player 1 earned {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "El xugador {winner} gana {win_score} - {lose_score}.",
+    "draw": "En total, los dos xugadores anotaron {s0}.",
+    "round_both_cooperate": "Ambos xugadores cooperaron.",
+    "round_both_defect": "Los dos xugadores desertaron.",
+    "round_p0_cooperates_p1_defects": "El xugador 0 cooperó, el 1 desertó.",
+    "round_p0_defects_p1_cooperates": "El xugador 0 desertó, el xugador 1 cooperó."
+  }
+}

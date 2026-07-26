@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Yes Xugador {player_id} n'un xuegu de {max_rounds} rondes de Póker Kuhn.\nRegles del xuegu:\n- El Póker Kuhn usa un mazu de 3 cartes con J, Q, K (J más baxu, K más altu)\n- Cada xugador apuesta {ante} ficha y recibe 1 carta cada ronda (nota que les cartes son repartíes ensin reemplazu, asina que nun puedes tener la mesma carta que'l to oponente).\n- El xuegu sigue mientres {max_rounds} rondes\n- El xugador con más fiches dempués de toes les rondes gana\nRegles d'aición:\n- '[check]': Pasar ensin apostar (solo si nun hai apueste na mesa)\n- '[bet]': Amestar 1 ficha al pot (solo si nun hai apueste na mesa)\n- '[call]': Igualar l'apueste d'un oponente amestando 1 ficha al pot\n- '[fold]': Rindise y dexar que l'oponente gane el pot"
+  },
+  "init_round": {
+    "round_start": "### Starting round {current_round} out of {max_rounds} rounds. Your card is: '{player_card}'",
+    "available_actions": "Les acciones disponibles son: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'aición debe ser [Check], [Bet], [Call], o [Fold].",
+    "not_legal": "La acción tien de ser {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Les acciones disponibles son: {legal_actions}.",
+    "round_summary": "{reason} Puntuaciones actuales: Xugador 0: '{player_0_chips}'; Xugador 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Enfrentamientu: El {winner_card} del Xugador {winner} gana al {loser_card} del Xugador {loser}. El Xugador {winner} gana un pot de {pot_value} fiches."
+  },
+  "outcome": {
+    "draw": "Al final de les rondes {max_rounds}, los dos xugadores teníen el mesmu númberu d'chips.",
+    "round_win": "El xugador {player_id} retiróse.",
+    "winner_player0": "El xugador 0 ganó por tener más fiches al final de toles rondes {max_rounds}.",
+    "winner_player1": "El xugador 1 ganó por tener más fiches al final de toles rondes {max_rounds}."
+  }
+}

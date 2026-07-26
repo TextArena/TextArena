@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Yes xugador {player_id} en Nim.\nEl to objetivo ye tomar l'últimu oxetu restante.\nEn cada xugada, escoyi exactamente una pila y retira unu o más oxetos d'ella.\nUsa el formatu '[pile quantity]', onde pila ye l'índiz de la pila y cantidá ye el númberu d'oxetos a retirar.\nPor exemplu, '[0 3]' retira 3 oxetos de la pila 0."
+  },
+  "state": {
+    "current_pile": "El so nome ye \"Current Pile\" (en inglés: Current Stack). {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nun s'atopó formatu válidu de desplazamientu. Usa \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Xugador {player_id}, Aición non válida. Columna {col} ta fora de llendes.",
+    "out_of_range": "L'índice de pila {pile_index} ta fuera del rangu.",
+    "non_positive": "Hai qu'eliminar al menos un oxetu.",
+    "exceeds_pile": "Nun se pueden retirar {quantity} de la pila {pile_index} (namái {pile_count} queden)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "El xugador {player_id} tomó l'últimu oxetu (s)!"
+  }
+}

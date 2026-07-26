@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Yes {role} en Coronel Blotto.\nEl to objetivo ye ganar más rondes que el to oponente.\nEn cada ronda, asigna exactamente {num_total_units} unidaes en campos {field_names}.\nEl xugador que asigna más unidaes a un campu gana esi campu, y el xugador que gana más campos gana la ronda.\nPor exemplu, '[A7 B7 C6]' asigna 7 unidaes a A, 7 a B, y 6 a C.",
+    "commander_alpha": "Comandante Alfa.",
+    "commander_beta": "El Comandante Beta."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRonda {current_round}\nComandante Alfa asignó: {p0_allocations}\nComandante Beta asignó: {p1_allocations}\n",
+    "winner_alpha": "{message}Ganador: Comandante Alfa",
+    "winner_beta": "{message}Ganador: Comandante Beta",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatu d'entrada inválidu. Utilizar: A:5, B:10, C:5",
+    "invalid_field": "Nomes de campos non válidos. Campos valides: {field_names}",
+    "wrong_allocation_value": "La asignación ye un númberu enteru non negativu.",
+    "incorrect_total_units": "Tienes que asignar exactamente {num_total_units} unidaes. Suma actual: {current_sum}",
+    "good_allocations": "La asignación ye bona."
+  },
+  "outcome": {
+    "winner_alpha": "Comandante Alfa gana {score_0}-{score_1} dempués de {num_rounds} rondes!",
+    "winner_beta": "Comandante Beta gana {score_1}-{score_0} dempués de {num_rounds} rondes!",
+    "draw": "El xuegu termina nun empate {score_0}-{score_1} dempués de les rondes {num_rounds}!",
+    "early_winner_alpha": "Comandante Alfa gana {scores_0}-{scores_1} (mayoría algamada)!",
+    "early_winner_beta": "Comandante Beta gana {scores_1}-{scores_0} (mayoría algamada)!"
+  }
+}
