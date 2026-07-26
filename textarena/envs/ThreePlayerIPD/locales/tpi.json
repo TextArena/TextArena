@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Yu em Player {player_id} long 3-pela Iterated Prisoner's Dilemma. Em i go long {num_rounds} raun.\nRaun strakcha:\n• {conv_rounds} fri-chat taem\n• 1 desisan taem - submit wan token per opoten: '[<opp-id> cooperate]' or '[<opp-id> defect]' (mi olsem '[1 defect] [2 cooperate]'; default em i 'cooperate'). \nPe-pei pe-faem matrix (apliket long each unordered pe):\n  - Tupela i cooperate  ->  {reward}\n  - Tupela i defect     ->  {punishment}\n  - Yu defect, ol i cooperate -> {temptation}\n  - Yu cooperate, ol i defect -> {sucker}\nPlaeya(s) we i gat skor highest long end bilong ol raun i win."
+  },
+  "round": {
+    "start": "─── Starting Round {round} ───\tYou can converse freely for the next {conv_rounds} rounds.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Results:",
+    "pair_line": "{observation}\n\t Player {i} vs Player {j} choosim {choice_i} na {choice_j} riposibik (Player {i} i gat {gain_i}, Player {j} i gat {gain_j})",
+    "scores_open": "{observation} -> Ol mak bilong nau: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}  long tok Inglis: \"the\""
+  },
+  "outcome": {
+    "final": "Skor final: {scores}.  Grup ranking (wos → best): {groups}"
+  }
+}

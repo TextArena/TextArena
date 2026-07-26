@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Current Board:\n\n{board}\nAvailable Moves: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Ol Senis Bilong Sentri --- ",
+    "pile": "{observation}Pila {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- View Bilong Pleya {player_id} ---\n",
+    "payoff": "{observation}Pila Bilong Yu (Top Kard): {top_card}, Pila Bilong Yu Length: {payoff_length}\n",
+    "hand": "{observation}Han: {hand}\n",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "Empty"
+  },
+  "game_message": {
+    "no_cards_left": "I no gat moa ol kat bilong pilai long en. Tingim olsem yu ken pilai wantaim sampela kain kart: 1. *Hand* 2. **Top card of your payoff pile** 3. **Top Card of any of your discard stacks.* "
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Man {player_id} i no bekim long wanpela gutpela pasin bilong em insait long ol brackets.",
+    "invalid_play": "Pley i nogut. Pleya {player_id} laik pleyim {card} long pila senta {index}.",
+    "discard_from_payoff": "Man i laik pilai {player_id} em i traim long rausim wanpela kat bilong dispela hap.",
+    "discard_not_in_hand": "Itokim i nogut. Pleya {player_id} laik itokim kard we i no stap long han.",
+    "wrong_move_type": "Invalid move type. Player {player_id} did not respond with a valid move type."
+  },
+  "game_action": {
+    "you_drew": "Yu pilai ol kat.",
+    "opponent_drew": "Man {player_id} i pilai.",
+    "you_played": "Yu pleyim {card} long pila senta {index}.",
+    "opponent_played": "Pleya {player_id} i pleyim {card} long pila senta {index}.",
+    "you_discarded": "Yu itokim {card} long pila itokim {index}, na em i min olsem yu pinisim turn bilong yu. Nogat moa akshan bilong yu i kamap long dispela turn. Pleya {next_player_id} i go nex.",
+    "opponent_discarded": "Pleya {player_id} itokim {card} long pila itokim {index}, na em i min olsem em i pinisim turn bilong em. Nogat moa akshan bilong Pleya {player_id} i kamap long dispela turn. Pleya {next_player_id}, yu go nex. Plez enta akshan bilong yu long fomat [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Pleya {current_player} i pinisim pila bilong em! Pleya {current_player} winim!",
+    "deadlock_player_0": "Deadlock reached! Player 0 wins with {player_0_payoff} cards remaining vs Player 1's {player_1_payoff} cards.",
+    "deadlock_player_1": "Deadlock i kamap! Pleya 1 winim na i stap na {player_1_payoff} kard i stap bek gen. Pleya 0 i stap na {player_0_payoff} kard i stap bek gen.",
+    "deadlock_tie": "Deadlock i kamap na tie! Tupela pleya i stap na {player_0_payoff} kard i stap bek gen. Pleya {current_player} winim bikos em i winim defolt."
+  }
+}

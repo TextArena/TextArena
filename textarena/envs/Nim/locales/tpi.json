@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "Ol Tok Pisin: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "No painim wanpela valid move format. Yusim '[pile quantity]'.",
+    "correct_format_wrong_fields": "Pleya {player_id}, Akson i no gut. Kolom {col} i go longwe na bodi.",
+    "out_of_range": "{pile_index} i no stap long mak.",
+    "non_positive": "Em i mas rausim wanpela samting.",
+    "exceeds_pile": "Inap long harim {quantity} from paile {pile_index} (nogat {pile_count} i stap)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Man {player_id} i kisim laspela samting ((s)!"
+  }
+}

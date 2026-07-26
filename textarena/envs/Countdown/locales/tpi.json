@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "TEGET: {target}\n\nNamba i availabl:\n{numbers}",
+    "best": "{observation}\n\nNambawan yet: {best_value} (distans: {distance})\nNambawan expreshen: {best_expression}",
+    "history": "{observation}\n\nStori bilong muv:\n{moves}",
+    "progress": "{observation}\nSkor bilong karim nau: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Ol indeks i no stret, ol mas narapela kain na insait long mak 0-{max_index}",
+    "invalid_operation": "Invalid operation (division long zero o no integer result)"
+  },
+  "outcome": {
+    "win": "Gutpela tru! Lukim stret mak: {target}",
+    "no_moves": "Ino gat muv gen. Risult bilong nambawan: {best_value} (teget: {target})",
+    "turn_limit": "Turn limit reached. Best result: {best_value} (target: {target})"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Yu em Pleya {player_id} long Chopsticks. Long turn bilong yu, chusim wan bilong dispela:\n  + Atak:  '[attack M O]'  we M=han bilong yu (0 o 1), O=han bilong opponent (0 o 1).\n    - Han bilong opponent i go up long han bilong yu; if >=5, em i go bek long 0.\n  + Split:   '[split L R]'  long redistribute olgeta finger bilong yu long L na R (L+R = olgeta bilong yu).\nReply wantaim wan bilong dispela komando."
+  },
+  "board": {
+    "current_board": "Bord Nau:\nPleya 0: {hands_0}\nPleya 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Han bilong yu {my_idx} i dai pinis.",
+    "opp_hand_dead": "Han bilong opponent {opp_idx} em i dai pinis.",
+    "split_sum": "Namba bilong ol dispela hap em {total}.",
+    "split_no_change": "Split i mas senisim pasin bilong yu long tilim han.",
+    "invalid_command": "Muvim i no gut. Usim “[attack M O]” o “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} i go long han bilong P{opp_id} {opp_idx}: em i lusim {opp_val} na i go kamap {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Tupela han bilong narapela i dai pinis.",
+    "draw": "Mipela i kamap pinis long mak bilong tanim."
+  }
+}

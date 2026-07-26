@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "Komanda Alfa.",
+    "commander_beta": "Komanda Beta."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRaun {current_round}\nCommander Alpha putim: {p0_allocations}\nCommander Beta putim: {p1_allocations}\n",
+    "winner_alpha": "{message}Winner: Komanda Alfa",
+    "winner_beta": "{message}Winner: Komanda Beta",
+    "tie": "{message}Tia!"
+  },
+  "invalid_move": {
+    "wrong_format": "Invail input format. Yusim: A:5, B:10, C:5",
+    "invalid_field": "Nem bilong fold i no valid (namba ol) Gutpela folds: {field_names}",
+    "wrong_allocation_value": "All allocations must be non-negative integers.",
+    "incorrect_total_units": "Yu mas putim eksaklek {num_total_units} yunit. Nambawan samting nau: {current_sum}",
+    "good_allocations": "Allocation is good."
+  },
+  "outcome": {
+    "winner_alpha": "Commander Alpha winim {score_0}-{score_1} bihain long {num_rounds} raun!",
+    "winner_beta": "Commander Beta winim {score_1}-{score_0} bihain long {num_rounds} raun!",
+    "draw": "Gem bung i go long {score_0}-{score_1} tie bihain long {num_rounds} raun!",
+    "early_winner_alpha": "Commander Alpha winim {scores_0}-{scores_1} (majoriti ikamach)!",
+    "early_winner_beta": "Commander Beta winim {scores_1}-{scores_0} (majoriti ikamach)!"
+  }
+}

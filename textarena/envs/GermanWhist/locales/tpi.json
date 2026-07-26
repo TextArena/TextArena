@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Gem igat stat. Tramp suit: {trump_suit} (tramp kard: {trump_str}).",
+    "no_trump_card": "i no gat wanpela bilong ol."
+  },
+  "player_prompt": {
+    "intro": "Yu stap olsem Pleeya {player_id} long Jeman Wis.\n{phase_info}\nYu holim {hand_size} kards.\nPlei wanpela kard wantaim '[play N]', we bilong em i stap long han bilong yu (olsem '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "Ol i no gat wanpela kat - ⁠dispela taim bilong pilai em nau.",
+    "deck_empty": "Ol i no gat wanpela samting long en.",
+    "available": "Ol i givim kat: {card}",
+    "available_trump": "Ol i givim kat: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Yusim '[play N]' long pilai namba Nth kat i stap insait long han bilong yu.",
+    "bad_position": "Dispela posisen i no stap. Yu holim {hand_size} ol kat.",
+    "must_follow_suit": "Yu mas bihainim pasin bilong em na pilai wanpela {lead_suit} kat.",
+    "invalid_play": "Dispela samting i no inap kamap."
+  },
+  "game_action": {
+    "played": "Man {player_id} i pilai long {card}."
+  },
+  "trick": {
+    "won": "Man {winner_id} i winim trik wantaim {card}.",
+    "won_learning": "Pleeya {winner_id} winim trik wantaim {card} na kisim kard i stap op."
+  },
+  "phase": {
+    "learning_complete": "The deck is exhausted. The learning phase is over - every remaining trick counts towards victory."
+  },
+  "draw": {
+    "winner_received": "Yu winim trik na kisim {card}.",
+    "loser_received": "Yu lusim trik na yu kisim {card} long deck.",
+    "winner_preview": "Namba 2 ka em {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Trikis win olredy - Pleeya 0: {tricks0}, Pleeya 1: {tricks1}",
+    "scores_playing": "Skorim triks - Pleeya 0: {tricks0}, Pleeya 1: {tricks1}",
+    "phase": "Pesen: {phase}",
+    "phase_learning": "Fes: {phase} ({remaining_cards} kards i stap yet long dek)"
+  },
+  "hand": {
+    "no_cards": "No gat ol kat.",
+    "no_cards_in_hand": "I no gat ol kat long han bilong em.",
+    "header": "Han bilong yu:",
+    "trump_indicator": "(TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "No cards played yet this trick.",
+    "header": "Ol pasin bilong nau:",
+    "trump_indicator": "(TRUMP)",
+    "card_line": "{observation}\n  Pleeya {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Spel i no stat yet.",
+    "header": "=== Ples bilong pilai long ol samting i gat laip na pasin isi, em JEMAN WHIST GAME===",
+    "phase": "{observation}\nFes: {phase}",
+    "trump_suit": "{observation}\nTramp suit: {trump_suit}",
+    "trump_card": "{observation}\nTramp kard: {card}",
+    "cards_left": "{observation}\nKards i stap yet long dek: {count}",
+    "next_card": "{observation}\nNekis kard long winim: {card}",
+    "blank": "{observation}  long tok Inglis: \"the\"",
+    "current_trick": "{observation} Ol pasin bilong nau:",
+    "trump_indicator": "(TRUMP)",
+    "trick_line": "{observation}\n  Pleeya {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPleeya {player_id}: {scoring} skorim triks ({tricks} olgeta), {hand_size} kards long han"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}
