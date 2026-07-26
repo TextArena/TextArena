@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are playing {color} in a game of Breakthrough. You move {direction} on an {board_size}x{board_size} board.\nIn your turn you can move a single piece one step forward or diagonally forward.\nA piece may only move diagonally if an opponent piece is there, and only move into such a preoccupied square in a diagonal step.\nWhen stepping into a square with an opponent piece, you capture it and the opponent's piece is removed permanently from the board.\nUse UCI-like notation in brackets, e.g. [a2a3] to move from a2 to a3.\n* 'a' corresponds to the leftmost column, '1' is the bottom row (from White's perspective).\n* Blacks's home row is the top row (row 8 for an 8x8). White's home row is the bottom row (row 1 for an 8x8).\nThe first player whose piece reaches the opponent's home row wins. If your pieces are all captured, you lose."
+  },
+  "invalid_move": {
+    "wrong_format": "कृपया ब्रैकेट वाले बीजगणितीय संकेतन का प्रयोग करें जैसे [a2a3]।",
+    "out_of_bounds": "बोर्ड का निदेशक का जेईसीबी >> प्रबंधन का जेसीबी",
+    "illegal": "इ चाल या तो ब्रेकथ्रू नियम का पालन नाहीं करत है, या फिर ई आपके काम की बात नाही बा।"
+  },
+  "game_action": {
+    "moved": "प्लेयर {player_id} {move_str} ({piece}) चलेला।"
+  },
+  "outcome": {
+    "white_reached": "सफेद काली की होम लाइन पर पहुंचे।",
+    "black_reached": "ब्लैक व्हाइट का होम रैंक पर पहुंच गया।",
+    "white_captured": "सब सफेद चिजियन कैदी होइ गइन।",
+    "black_captured": "सब ब्लैक कैप्चर कराई जा रही हैं.",
+    "no_moves": "खिलाड़ी {player_id} का आगे कौनो चाल नाहीं बा।"
+  }
+}

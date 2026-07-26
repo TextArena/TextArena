@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "आप प्लेयर {player_id} हैं एक इटरेटेड प्रिजनर्स डाइलेमा में जो {num_rounds} राउंड तक फैला है।\n\nगेम संरचना:\n- प्रत्येक निर्णय से पहले आपके पास {total_conversation_rounds} मोड़ हैं स्वतंत्र रूप से संवाद करने के लिए।\n- उसके बाद, दोनों खिलाड़ी एक साथ सहयोग करने या धोखा देने का चयन करते हैं।\n\nपेऑफ मैट्रिक्स (प्रत्येक राउंड में निश्चित):\n- दोनों सहयोग ➜ प्रत्येक {cooperate_reward}\n- दोनों धोखा ➜ प्रत्येक {mutual_defect_reward}\n- एक धोखा देता है, एक सहयोग करता है ➜ धोखेबाज {defect_reward}, सहयोगी {sucker_reward}\n\nकैसे खेलना है:\n- बातचीत के दौरान: आप जो चाहें वैसा टेक्स्ट टाइप करें।\n- निर्णय चरण के दौरान: '[Cooperate]' या '[Defect]' (केस-इनसेंसिटिव) शामिल करें। आप टोकन से पहले/बाद में अतिरिक्त पाठ जोड़ सकते हैं।"
+  },
+  "phases": {
+    "conversation_finished": "बातचीत समाप्त हो गई राउंड {round} के लिए। कृपया '[Cooperate]' या '[Defect]' के साथ उत्तर दें \\boxed{{}} के भीतर।",
+    "starting_round": "--- आरंभिक दौर {round} ---- मा",
+    "round_summary": "राउंड {round} के परिणाम:\n{outcome}\nप्लेयर 0 ने {r0} अर्जित किया (कुल {score_0}), प्लेयर 1 ने {r1} अर्जित किया (कुल {score_1})।"
+  },
+  "outcome": {
+    "winner": "प्लेयर {winner} जीतता {win_score} - {lose_score}।",
+    "draw": "ड्रॉ! दुनो खिलाड़ी स्कोर {s0}।",
+    "round_both_cooperate": "Both players cooperated.",
+    "round_both_defect": "Both players defected.",
+    "round_p0_cooperates_p1_defects": "खिलाड़ी 0 सहयोग करे, खिलाड़ी 1 पीछे हटे।",
+    "round_p0_defects_p1_cooperates": "खिलाड़ी 0 चूक गए, प्लेयर 1 सहयोग का दावा कर रहे हैं।"
+  }
+}
