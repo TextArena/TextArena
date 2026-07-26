@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "I ye Jokelɛ {player_id} ɔ kɛ Iterated Prisoner's Dilemma ina fɔrɛ {num_rounds}.\n\nKɛnɛɛnya kɛrɛnkɛrɛn:\n- U bɛn fɛrɛ kɛnɛɛnya, i ye {total_conversation_rounds} turns doni kɛnɛ kɔrɔ.\n- Kɛrɛnkɛrɛn, awɛrɛ jokelɛw ye kɛ sɔrɔ kɛ 'cooperate' ni 'defect'.\n\nPayoff Matrix (fixed each round):\n- Awɛrɛ cooperate ➜ ɔgɔrɔ {cooperate_reward}\n- Awɛrɛ defect ➜ ɔgɔrɔ {mutual_defect_reward}\n- ɔgɔrɔ defect, ɔgɔrɔ cooperate ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nO kɛ sɔrɔ:\n- Kɛnɛɛnya fɛrɛ: ka kɛrɛ ɔgɔrɔ kɛ i bɛn kan.\n- Kɛ sɔrɔ fɛrɛ: ka kɛ '[Cooperate]' ni '[Defect]' (case-insensitive). I bɛn kɛ ɔgɔrɔ kɛrɛ kan u kɛ token."
+  },
+  "phases": {
+    "conversation_finished": "Conversation finished for round {round}. Please reply with '[Cooperate]' or '[Defect]' within \\boxed{{}}.",
+    "starting_round": "--- Starting Round {round} ---",
+    "round_summary": "Round {round} results:\n{outcome}\nPlayer 0 earned {r0} (total {score_0}), Player 1 earned {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "Draw! Both players scored {s0}.",
+    "round_both_cooperate": "U fila bɛɛ sɔnna ka baara kɛ ɲɔgɔn fɛ.",
+    "round_both_defect": "U fila bɛɛ bolila.",
+    "round_p0_cooperates_p1_defects": "Player 0 cooperated, Player 1 defected.",
+    "round_p0_defects_p1_cooperates": "Player 0 defected, Player 1 cooperated."
+  }
+}

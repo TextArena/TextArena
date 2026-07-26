@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "TARƐTI: {target}\n\nLamɛnɛrɛn don: \n{numbers}",
+    "best": "{observation}\n\nFin ŋɛsɛbɛ: {best_value} (tariku: {distance})\nFin sɛbɛn: {best_expression}",
+    "history": "{observation}\n\nTɛmɛlɛyɛn tɔgɔ: \n{moves}",
+    "progress": "{observation}\nTariku sɛbɛn: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "A ka kan ka kɛ cogoya wɛrɛ ye ani a be se ka tɛmɛ 0-{max_index} fɛ.",
+    "invalid_operation": "Baara min tɛ bɛn ni sariya ye (fara 0 ma walima a laban ka kɛ nimɔrɔ dantigɛbali dɔ ye)"
+  },
+  "outcome": {
+    "win": "A ka ɲi! An ye an ɲɛɛ jɔlen sɔrɔ: {target}",
+    "no_moves": "Tɛmɛlɛyɛn in na. Fin ŋɛsɛbɛ: {best_value} (tarɛti: {target})",
+    "turn_limit": "Kɛlɛndɛn tariku. Fin ŋɛsɛbɛ: {best_value} (tarɛti: {target})"
+  }
+}

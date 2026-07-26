@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "I ye Player {player_id} o kɛ HighSociety (2-player version).\nGame flow:  Ten prestige cards zaɛ kɛ auctioned one after another.\nBidding:    Each auction, secretly choose a money card 1-11 and reveal.\n            • Higher bid wins the prestige card and discards that money card.\n            • Lower bid keeps their money card.\n            • Tie -> both bids are returned and the same prestige card is re-auctioned.\nScoring:    After all ten auctions, add **remaining cash + prestige points**.\n            Higher *net-worth* wins (exact tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Auction {round}/10  |  Prestige card: {prize}"
+  },
+  "board": {
+    "money_cards": "I ka kartiw tɔɔ: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "O ka kan k'a kɛ ni karti [X] kelen dɔrɔn lo ye.",
+    "card_not_held": "I ka ladɛrɛsi ye fɛɛn minw tagamasiɲɛ lo, u dɔ be yen fana."
+  },
+  "message": {
+    "tie": "A y'a fɔ ko: \"Aw ka segi k'o koo kelen nin kɛ\".",
+    "auction_result": "P0 bid {bid0}, P1 bid {bid1}. Player {winner} wins prestige {prize} (total {total})."
+  },
+  "outcome": {
+    "p0_wins": "Net-worth {nw0} > {nw1}",
+    "p1_wins": "Net-worth {nw1} > {nw0}",
+    "draw": "O fila bɛɛ ka wari ye {nw0}  ɲɔgɔn bɔ."
+  }
+}

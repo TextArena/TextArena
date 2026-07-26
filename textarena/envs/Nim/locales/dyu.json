@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "Jamanakuntigi ka jɛmukan: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "No valid move format found. Use '[pile quantity]'.",
+    "correct_format_wrong_fields": "Player {player_id}, Invalid action. Column {col} is out of bounds.",
+    "out_of_range": "A ka bon {pile_index}.",
+    "non_positive": "A ka ɲi k'a to fɛɛn dɔ be bɔ a la.",
+    "exceeds_pile": "I ka baara {quantity} kɔnɔ pile {pile_index} (ni {pile_count} dɛn sɔrɔ)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Jurusɛbɛbaga {player_id} ye fɛɛn laban min ta o lo!"
+  }
+}
