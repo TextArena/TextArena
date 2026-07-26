@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "TARGET: {target}\n\nLamdaŋa din be niŋ: \n{numbers}",
+    "best": "{observation}\n\nYɛla din kɔbiga: {best_value} (distance: {distance})\nBɛɛ bɛla din kɔbiga: {best_expression}",
+    "history": "{observation}\n\nKɔbigu tariga: \n{moves}",
+    "progress": "{observation}\nKɔbigu tariga din be niŋ: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "B sẽn ka zemsã segd n yɩɩ toor-toore, la zĩnd 0 tɩ ta {max_index} pʋgẽ.",
+    "invalid_operation": "Tʋʋmd sẽn pa zemse (kareng ne zéro bɩ n ka sõor zãng ye)"
+  },
+  "outcome": {
+    "win": "B sẽn maan bũmb ningã sɩd yɩɩ sõma wʋsgo. {target}",
+    "no_moves": "Kɔbigu niŋ na. Yɛla din kɔbiga: {best_value} (target: {target})",
+    "turn_limit": "Kɔbigu kɔbigu niŋ na. Yɛla din kɔbiga: {best_value} (target: {target})"
+  }
+}

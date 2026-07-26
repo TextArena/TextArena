@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id}. You are playing Sudoku.\nHere is the current state of the Sudoku grid. Each row is numbered from 1 to 9, and each column is also numbered from 1 to 9.\nEmpty cells are represented by '.', and pre-filled cells contain digits from 1 to 9.\n\nCurrent Sudoku Grid:\nYour objective is to fill the empty cells in the 9x9 grid with digits from 1 to 9 such that:\n1. Each row contains all digits from 1 to 9 without repetition.\n2. Each column contains all digits from 1 to 9 without repetition.\n3. Each of the nine 3x3 subgrids contains all digits from 1 to 9 without repetition.\n\nRules and Instructions:\n1. **Do not overwrite** the initial numbers provided in the grid.\n2. **Only fill** empty cells represented by '.'.\n3. You may respond in any manner you prefer, but ensure that your response includes the format of '[row column number]'.\n4. **Ensure** that your move does not violate Sudoku rules. Invalid moves will result in penalties.\nExamples:\n- **Valid Move**:\n  - Grid Snippet Before Move:\n  \n  - Move: `[5 3 7]`\n  - Explanation: Placing 7 at row 5, column 3 does not violate any Sudoku rules.\n\n- **Invalid Move** (Overwriting a pre-filled cell):\n  - Grid Snippet Before Move:\n  \n  - Move: `[1 1 9]`\n  - Explanation: Cell (1,1) is already filled with 5. You cannot overwrite it.\n\n- **Invalid Move** (Violating Sudoku rules):\n  - Grid Snippet Before Move:\n  \n  - Move: `[1 3 5]`\n  - Explanation: Placing 5 in row 1, column 3 violates the rule since 5 already exists in row 1.\n\nThe history of your moves and thoughts will be appended as you play more rounds. Use the history of your move to improve your decision making by avoiding the moves you have tried. Good luck!\n\n"
+  },
+  "board": {
+    "game_board": "Game Board: {board}",
+    "board_state": "B sẽn yaa b taoor soabã: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Yaa so-toak sẽn pa zemse. Tãabd {player_id} ka leok ne 'ray column number' ye.",
+    "out_of_bounds": "Dôga yɛn daŋga. Jɛɛga {player_id} da yɛn kɔr {num} ({row}, {col}), di yi paasen.",
+    "overwrite": "Dôga yɛn daŋga. Jɛɛga {player_id} da yɛn kɔr {row} ({col}), di yi kɔr.",
+    "violates_rules": "Dôga yɛn daŋga. Jɛɛga {player_id} da yɛn kɔr {num} ({row}, {col}), di yi paasen dôga."
+  },
+  "outcome": {
+    "win": "M pẽgd-y lame! Kamba {player_id} maana Sudoku wã.",
+    "turn_limit": "Y sẽn pids {percent}% wã yaa vẽenega."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "A makame n na n deeg b sẽn da rɩk-a t'a pa tar ligd ning fãa.",
+    "out_of_range": "Player {player_id}, Kɔrɛ ŋma. Column {col} nyɛla din zaɣi yini.",
+    "already_full": "Player {player_id}, Kɔrɛ ŋma. Column {col} nyɛla din be.",
+    "proposing_with_no_resource": "A {player_id} makame n na n maan a weoogrã, la a pa tar ligd sẽn sek ye.",
+    "incorrect_offer_format": "A {player_id} maana a weoogã ne seb-vãoog sẽn pa zems ye.",
+    "no_new_offer": "A {player_id} pa kõ a to yam ye."
+  },
+  "offers": {
+    "reject": "A {player_id} tõdga a weoogã.",
+    "accept": "Player {acceptor_id} daa pahi la trade offer ŋɔ maa zuɣu ka di yina Player {proposer_id} sani.",
+    "proposal": "Player {player_id} daa kpaai la offer ŋɔ maa zuɣu n-ti Player {opponent_id}: Offered items: {offered} -> Requested items: {requested}"
+  },
+  "outcome": {
+    "win": "B sẽn paam n naagd b taab to-to wã kɩtame tɩ {winner_id} tõogd n tõoge.",
+    "draw": "Same change in inventory value for all players. Draw."
+  }
+}

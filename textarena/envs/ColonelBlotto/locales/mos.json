@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "Komandɛɛr Alfa.",
+    "commander_beta": "Komandɛɛr Beta."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nZaɣa {current_round}\nCommander Alpha simsɛri la: {p0_allocations}\nCommander Beta simsɛri la: {p1_allocations}\n",
+    "winner_alpha": "{message}Sẽn tõog-a: Komandɛɛr Alfa.",
+    "winner_beta": "{message}Sẽn tõog-a: Komandɛɛr Beta",
+    "tie": "{message}Yɩ-y wa taaba!"
+  },
+  "invalid_move": {
+    "wrong_format": "Sebr sẽn pa zemse. rɩk-y: A:5, B:10, C:5",
+    "invalid_field": "Ka zems ye. A ka zemse: {field_names}",
+    "wrong_allocation_value": "B fãa segd n yɩɩ sõor sẽn pa zuloees ye.",
+    "incorrect_total_units": "A yaa zo Simsɛri la kamani {num_total_units}. Ŋun kam zaa: {current_sum}",
+    "good_allocations": "B sẽn pʋɩ-a wã yaa sõma."
+  },
+  "outcome": {
+    "winner_alpha": "Commander Alpha nyɛ ŋun di {score_0}-{score_1} zaɣa {num_rounds}!",
+    "winner_beta": "Commander Beta nyɛ ŋun di {score_1}-{score_0} zaɣa {num_rounds}!",
+    "draw": "Zuɣu Sima kpiɛ {score_0}-{score_1} zaɣa ni {num_rounds} zaɣa!",
+    "early_winner_alpha": "Commander Alpha nyɛ ŋun di {scores_0}-{scores_1} (piibupiini niŋ sima)!",
+    "early_winner_beta": "Commander Beta nyɛ ŋun di {scores_1}-{scores_0} (piibupiini niŋ sima)!"
+  }
+}
