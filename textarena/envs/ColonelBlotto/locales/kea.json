@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Bo eis {role} em Colonel Blotto.\nO seu objetivo é ganhar mais rodadas do que o seu oponente.\nEm cada rodada, allocar exatamente {num_total_units} unidades através de campos {field_names}.\nO jogador que allocar mais unidades a um campo ganha esse campo, e o jogador que ganha mais campos ganha a rodada.\nPor exemplo, '[A7 B7 C6]' allocar 7 unidades a A, 7 a B, e 6 a C.",
+    "commander_alpha": "Kumandanti Alfa, N ta bai.",
+    "commander_beta": "Kumandanti Beta, N ta bai."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Rodada {current_round}/{num_rounds} ===\nRodadas Ganhos - Comandante Alpha: {alpha_score}, Comandante Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRodada {current_round}\nComandante Alpha allocou: {p0_allocations}\nComandante Beta allocou: {p1_allocations}\n",
+    "winner_alpha": "{message} Vitor: Kumandanti Alfa",
+    "winner_beta": "{message} Vitor: Kumandanti Beta",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatu di entrada invalidu. Uza: A:5, B:10, C:5",
+    "invalid_field": "Nómi di kanpu invalidu (s). Kanpus válidu: {field_names}",
+    "wrong_allocation_value": "All allocations must be non-negative integers.",
+    "incorrect_total_units": "Bo eis allocar exatamente {num_total_units} unidades. Soma atual: {current_sum}",
+    "good_allocations": "Allocation is good."
+  },
+  "outcome": {
+    "winner_alpha": "Comandante Alpha vence {score_0}-{score_1} após {num_rounds} rodadas!",
+    "winner_beta": "Comandante Beta vence {score_1}-{score_0} após {num_rounds} rodadas!",
+    "draw": "Jogo termina empatado {score_0}-{score_1} após {num_rounds} rodadas!",
+    "early_winner_alpha": "Comandante Alpha vence {scores_0}-{scores_1} (maioria alcançada)!",
+    "early_winner_beta": "Comandante Beta vence {scores_1}-{scores_0} (maioria alcançada)!"
+  }
+}

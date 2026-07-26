@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Jogu di tavula: {board}",
+    "valid_moves": "{observation}\nMovimentu Valídu: {moves}",
+    "no_valid_moves_reset": "{observation}\nNo valid moves - you may have to skip.",
+    "no_valid_moves_step": "{observation}\nNo valid moves – you may have to skip.",
+    "scores_reset": "{observation}\nSkorren Aktual - Pretu: {black_count}, Branku: {white_count}\n",
+    "scores_step": "{observation}\nSkorren - Pretu: {black_count}, Branku: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Kel mudansa debe ser di forma [row, col].",
+    "illegal": "Movimentu ilegal. Mudansa válidu: {valid}"
+  },
+  "game_action": {
+    "skipped": "Player {pid} had to skip their turn",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Jogadó {pid} ({piece}) nka movimentu valídu i tenki skipa."
+  },
+  "outcome": {
+    "black_wins": "Black wins {black_count}-{white_count}.",
+    "white_wins": "Branku ta ganha {white_count}-{black_count}.",
+    "draw": "Draw {black_count}-{white_count}."
+  }
+}

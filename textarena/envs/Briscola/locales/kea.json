@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Jogu di Briscola começou! Naipe de trunfo: {trump_suit} (Karta de trunfo: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Bo ta joga Briscola - Jogadôr {player_id}.\nMetu: Ganhá jogadas i kolekta mais pontos (120 pontos total na baralhu).\nPontus di kartas: A=11, 3=10, K=4, Q=3, J=2, outus=0\nPoder di kartas: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKartas di trunfo baté kartas sinu trunfo, indipendentementi di poder.\n\nAksãu: '[play X]' undi X é a posiçãu (1-{max_pos}) di karta na bo mão\n"
+  },
+  "hand": {
+    "none": "No cards",
+    "empty": "No cards in hand",
+    "header": "Bu mô:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(Trump) N ta atxa ma el é un bon ómi."
+  },
+  "trick": {
+    "empty": "No cards played yet this trick.",
+    "header": "Kel truku di oji:",
+    "line": "  Jogadôr {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Jogadôr {player_id}: {points} pts",
+    "trump_info": "Trabadju di Trump: {trump_suit}",
+    "trump_info_deck": "Trump suit: {trump_suit} | Cards left in deck: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPontuaçãu: {scores}\n{trump_info}\n\nJoga karta uzându [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Uza [play X] undi X é pozison di kartidja (1, 2, 3, etc.)",
+    "out_of_range": "Posiçãu di karta invalidu. Bo tem {count} kartas (1-{count})"
+  },
+  "action": {
+    "played": "Jogadôr {player_id} jogou {card}",
+    "trick_win": "Jogadôr {winner} ganha a jogada com {card} e ganha {points} pontos!"
+  },
+  "outcome": {
+    "head": "Jogu akaba! Jogadôr {winner} ganha ku {points} pontos!\n\nPontuaçãu final:\n{scores}",
+    "player_line": "Jogadôr {player_id}: {points} pontos ({tricks} jogadas)\n"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id} em Chopsticks. Na sua vez, escolha um dos seguintes:\n  + Atacar:  '[attack M O]'  onde M=sua mão (0 ou 1), O=mão do oponente (0 ou 1).\n    - A contagem da mão do oponente aumenta com a sua mão; se >=5, ela se torna 0.\n  + Dividir:   '[split L R]'  para redistribuir o total de dedos em L e R (L+R = seu total).\nResponda com exatamente um desses comandos."
+  },
+  "board": {
+    "current_board": "Tabuleiro Atual:\nJogador 0: {hands_0}\nJogador 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Bu mô {my_idx} sta mortu.",
+    "opp_hand_dead": "Má {opp_idx} di oponenti dja sta mortu.",
+    "split_sum": "Divididu debe ser {total}.",
+    "split_no_change": "Split debe muda bu distribuison di mô.",
+    "invalid_command": "Movimento inválido. Use “[attack M O]” ou “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} ataca a mão de P{opp_id} {opp_idx}: ela passa de {opp_val} para {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Tudu dôs mô di oponenti ta móre.",
+    "draw": "Nu txiga na limiti di virason."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Benvidu na Lights Out! Bo ka un gridi di {size}x{size} di luzi.\nBo meta é desligá TODU luzi (reprezentadu por '.')\nKuandu bo toka un luzi, el ta alterna su mesmu I su vizinhu adjasente (riba/baixo/esquerda/direita).\nTipe [row col] pa toka un luzi (0-indiçadu, entao rai validu ta 0-{max_index}).\nBo ka te movimentu {max_turns} pa resolve puzzle.\nLeyenda: 'O' = luzi LIGA, '.' = luzi DESLIGA"
+  },
+  "board": {
+    "current_state": "Stadu atuali di gridi (Movimentu {moves_made}, {moves_left} movimentu restanti, {completion}% kompletu):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Asosiason debe ten formatu [row col] undi róda i kóla é númeru interu di 0 ti {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Parabéns! Bu rezolve es puzle na {moves_used} mudansa.",
+    "loss": "Jogu termina! Bo usou tudu {max_turns} movimentu sin resolve puzzle. Kompletu final: {completion}%\nStadu final:\n{grid}"
+  }
+}

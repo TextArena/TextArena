@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "O joga kuminsa. Naipe trump: {trump_suit} (karta trump: {trump_str}).",
+    "no_trump_card": "ninhun di es ka ten"
+  },
+  "player_prompt": {
+    "intro": "Bo é Jogador {player_id} na Whist Alemão.\n{phase_info}\nBo tinhi {hand_size} kartas.\nJoga karta ku '[play N]', undi N é pozison na bo man (pa ezemplu '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "Ka ten ninhun karta ki sta ta oferedu - fase di djogu dja kumesa.",
+    "deck_empty": "Kel baril ka ten ninhun karta.",
+    "available": "Karta ki sta oferedu: {card}",
+    "available_trump": "Karta ki sta oferesedu: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Use '[play N]' to play the Nth card in your hand (Uza \" 〔0]) pa bu toka kel kartera ki ten na mô di-nho, y poi un otu karton riba dentu di bóka.",
+    "bad_position": "Kel pozison di karton ka ta izisti. Bu tene {hand_size} karta.",
+    "must_follow_suit": "Bu debe sigi ses izénplu i juga un karta {lead_suit}.",
+    "invalid_play": "Kel karta li ka pode ser uzadu."
+  },
+  "game_action": {
+    "played": "Jogu {player_id} ta djugaba na {card}."
+  },
+  "trick": {
+    "won": "Jogu {winner_id} ta ganha kel truku ku {card}.",
+    "won_learning": "Jogador {winner_id} gana trick ku {card} i tira karta di fas"
+  },
+  "phase": {
+    "learning_complete": "Tudu karru sta kansadu, fase di aprendizájen dja kaba - tudu truku ki resta ta konta pa vitória."
+  },
+  "draw": {
+    "winner_received": "Bu ganha kel truku i bu resebe {card}.",
+    "loser_received": "Bu perde kel truku i bu traze {card} di barku.",
+    "winner_preview": "Kel otu karta ki ta oferese é {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tricks ganha te na faze di aprentizaj - Jogador 0: {tricks0}, Jogador 1: {tricks1}",
+    "scores_playing": "Tricks di puntus - Jogador 0: {tricks0}, Jogador 1: {tricks1}",
+    "phase": "Fase: {phase} N ta faze kel ki bu krê.",
+    "phase_learning": "Faze: {phase} ({remaining_cards} kartas ki sta na barca)"
+  },
+  "hand": {
+    "no_cards": "Ka ten karton.",
+    "no_cards_in_hand": "Ka ten karta na mô.",
+    "header": "Bu mô:",
+    "trump_indicator": "(Trump) N ta atxa ma el é un bon ómi.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "No cards played yet this trick.",
+    "header": "Kel truku di oji:",
+    "trump_indicator": "(Trump) N ta atxa ma el é un bon ómi.",
+    "card_line": "{observation}\n  Jogador {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Jogu ka kumesa.",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nFaze: {phase}",
+    "trump_suit": "{observation}\nNaipe trump: {trump_suit}",
+    "trump_card": "{observation}\nKarta trump: {card}",
+    "cards_left": "{observation}\nKartas ki sta na barca: {count}",
+    "next_card": "{observation}\nProksima karta pa vinsedor: {card}",
+    "blank": "{observation}  ki ta faze un dizenhu na internet.",
+    "current_trick": "{observation} Truku di oji:",
+    "trump_indicator": "(Trump) N ta atxa ma el é un bon ómi.",
+    "trick_line": "{observation}\n  Jogador {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nJogador {player_id}: {scoring} puntus tricks ({tricks} total), {hand_size} kartas na man"
+  },
+  "outcome": {
+    "summary": "Faze di aprentizaj - Jogador 0: {l0}, Jogador 1: {l1}. Faze di joga - Jogador 0: {p0}, Jogador 1: {p1}. Jogador {winner_id} gana ku {winner_tricks} puntus tricks!"
+  }
+}
