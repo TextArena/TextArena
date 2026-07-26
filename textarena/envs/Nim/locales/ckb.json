@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "تۆ یاریکەر {player_id} ی تێی Nim یت.\nئامانجت لەبەردەستە، شتە مابۆوەکان بگرە.\nلە هەر گۆڕەکدا، تەنھا یەک پاشە ھەڵبژێرە و یەک یان چەند شتێک لێی دەستبەردار بکە.\nفۆرمەتەکە بەکار بەرە '[pile quantity]'، لێرەدا پاشە نیشانەی پاشە و quantity ژمارەی شتەکانن کە دەتەوێ دەستبەردار بکەیت.\nوەک مۆدێل، '[0 3]' ٣ شت لە پاشە ٠ دەستبەردار دەکات."
+  },
+  "state": {
+    "current_pile": "کۆی ئێستای: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "هیچ فۆرماتی جوڵەی دروست نەدۆزرایەوە. بەکاربێنە \"[pile quantity]\".",
+    "correct_format_wrong_fields": "یاریکەر {player_id}، چالاکیی بەتاڵە، ستوون {col} لە سنوورەکان دەرە.",
+    "out_of_range": "Pile index {pile_index} is out of range.",
+    "non_positive": "دەبێت لانیکەم یەک تەن لاببرێت.",
+    "exceeds_pile": "ناتوانی {quantity} لە پاشە {pile_index} بەدەست بھێنی (تەنھا {pile_count} مابۆیەوە)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "یاریزان {player_id} کۆتا ئۆبجێکتی (((s)) ی برد!"
+  }
+}

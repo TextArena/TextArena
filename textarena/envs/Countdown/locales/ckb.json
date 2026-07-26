@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "ئامانج: {target}\n\n ژمارەکان بەردەست:\n{numbers}",
+    "best": "{observation}\n\n باشترین تا ئێستا: {best_value} (دووری: {distance})\nباشترین دەربڕین: {best_expression}",
+    "history": "{observation}\n\nMove history:\n{moves}",
+    "progress": "{observation}\n پێشکەوتنی ئێستا: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "هێڵەکانی هەڵە دەبێت جیاواز بن و لە مەودای 0-{max_index} دا بێت.",
+    "invalid_operation": "ئۆپەراسیۆنی هەڵە (بە سفر دابەشکردن یان ئەنجامێکی نا-تەمای)"
+  },
+  "outcome": {
+    "win": "بە تەواوی ئامانجمان دۆزییەوە: {target}",
+    "no_moves": "هیچ جوڵەیەک نەما. باشترین ئەنجام: {best_value} (ئامانج: {target})",
+    "turn_limit": "سنووری جوڵە گەیشتووە. باشترین ئەنجام: {best_value} (ئامانج: {target})"
+  }
+}

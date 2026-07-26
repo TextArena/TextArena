@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "فۆرماتی کارکردن هەڵەیە. دەبێت کاری کردن لە قۆچکەدا بێت.",
+    "no_closing_bracket": "فۆرماتی هەڵەی کارکردن. کورتەباسێکی داخستنی نەماوە \"]\"",
+    "empty_command": "فەرمانێکی بەتاڵ. تایپ بکە \"draw\" یان \"move <source> <destination> [count]\".",
+    "empty_action": "کرداری بەتاڵ",
+    "move_needs_args": "فەرمانى گواستنەوە پێویستی بە سەرچاوەو مەبەست هەیە. بەکارھێنان: 'move <source> <destination> [count]'",
+    "count_positive": "پێویستە ژمارەکە پۆزەتیڤ بێت یان \"هەموو\"",
+    "count_invalid": "ژمارە هەڵەیە. ژمارەیەک یان \"هەموو\" بەکاربهێنە",
+    "unknown_command": "فەرمانێ نەناسراو '{cmd}'. بەکارھێنە 'draw', 'move <source> <destination> [count]', یا 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "جێبەجێ کرا {n} کرداری (((s) پێش شکستی.",
+    "failed": "ئەرک {n} سەرنەکەوت: {msg}"
+  },
+  "move_result": {
+    "drew": "Drew card(s) from stock to waste.",
+    "cannot_draw": "Cannot draw. Both stock and waste are empty.",
+    "invalid_pile": "ناوی پایلەکە هەڵەیە. W، F1-F4 یان T1-T7 بەکاربهێنە",
+    "foundation_one_card": "تەنها یەک کارد دەتوانرێت بگوازێتەوە بۆ بنکەکە.",
+    "waste_to_foundation_ok": "کارتی گواستراو لە پاشماوە بۆ دامەزراندن F{dst}",
+    "waste_to_foundation_bad": "ناتوانرێت کارتی پاشماوەکان بگوازێتەوە بۆ ئەو کۆمەلە بنەماییە.",
+    "tableau_to_foundation_ok": "کارت لە تەختەیی T{src} بۆ بنەما F{dst} گواسترایەوە",
+    "tableau_to_foundation_bad": "ناتوانیت کارتەکانی تابلۆ بگەیەنیتە ئەو کۆمەلە بنەماییە.",
+    "foundation_to_foundation": "ناتوانرێت لە بنکەوە بۆ بنکە بگوێزرێ.",
+    "waste_to_tableau_one_card": "تەنیا یەک کارد لە پاشماوەوە دەگوازرێتەوە بۆ تابلۆ.",
+    "waste_to_tableau_ok": "کارتی گواستراو لە پاشماوە بۆ تابلۆی T{dst}",
+    "waste_to_tableau_bad": "ناتوانرێت کارتی پاشەکەوت بخەیتە سەر ئەو کۆمەلە تابلۆیە.",
+    "no_face_up": "هیچ کاردێکی ڕووخراو بۆ جوڵەکردن نییە.",
+    "tableau_to_tableau_ok": " {count} کارت لە تەختەیی T{src} بۆ T{dst} گواسترایەوە",
+    "tableau_to_tableau_bad": "ناتوانی {count} کارت لە T{src} بۆ T{dst} بەرز بکەی",
+    "foundation_to_tableau_one_card": "تەنیا یەک کارد لە بنکە بۆ تابلۆ دەگوازرێتەوە.",
+    "foundation_empty": "بنکەی F{src} بەتاڵە.",
+    "foundation_to_tableau_ok": "کارت لە بنەما F{src} بۆ تەختەیی T{dst} گواسترایەوە",
+    "foundation_to_tableau_bad": "ناتوانی کارتێکی بنەمای بۆ تەختەیی T{dst} بەرز بکەی",
+    "to_waste_or_stock": "ناتوانرێت بگوازرێتەوە بۆ پاشماوەو کۆگاکردنەوە."
+  },
+  "outcome": {
+    "forfeit": "یاریەکە لە دەست درا. ئەنجامی کۆتایی: {score} کاردەکان بە بنەماکانەوە.",
+    "won": "پیرۆزبایی، تۆ توانیت یاری تەنیایی کلۆندایک ببەیت!",
+    "turn_limit": "یاری کۆتایییە! گەیشتیتە زۆرترین {max_turns} گۆڕان. خاڵ: {score} کارت لە بنەماکان."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== (بە ئینگلیزی)",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "هەڵمەتی: کارتەکان {stock}",
+    "waste": "پاشەڕۆ (W): {waste}",
+    "foundations_header": "دامەزراوەکان:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "تابلۆ:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

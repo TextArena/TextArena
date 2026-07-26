@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "تۆ یاریکەری {player_id}یت لە یاریەکدا پۆکەر هیندی.\n- 52 کارتی دەستە؛ تۆ تەنیا کارتەکەی بەرامبەری بینی.\n- ئەنتێ {ante} چیپ لە هەر خولەکدا، {max_rounds} خولەک هەمووی.\n- جوڵەی چالاک: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ژمارەیەکی چالاکە <= ژمارەی چیپەکانت.)\n- بەرزترین کارتە هەڵوەشاوە براوەی پۆتە لە کاتی شۆوداو."
+  },
+  "round": {
+    "announce": "### خولە {current_round}/{max_rounds}\nکارتەکەی بەرامبەر: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "دڵنیابە هەموو چریاکان لە نێو قۆڵەکدا، وەک '[check]'، '[bet 2]'، '[call]'، '[raise 3]'، یان '[fold]'。",
+    "cannot_check": "ناتوانیت [check] - تۆ ڕووبەڕووی گرەوێک دەبیتەوە.",
+    "amount_min": "بڕی گرەوەکە دەبێت لە ١ بێت.",
+    "cannot_bet": "Cannot [bet] - must [call] / [raise] / [fold].",
+    "nothing_to_call": "هیچ شتێک نییە بۆ بانگی کردن؛ تۆ ئەتوانیت [check] لە جیاتی ئەوە.",
+    "no_bet_to_raise": "بەکارھێنانی [bet X] بۆ کردنەوە؛ ھیچ گرەوێک نییە کە زیاد بکرێت.",
+    "insufficient": "Insufficient chips for that action."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]'، '[bet X]'",
+    "actions_facing_bet": "'[call]' (بەرھەم {to_call})، '[raise X]'، '[fold]'",
+    "possible_actions": "کارەکانی ئەگەری تۆ: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  پۆت {pot} → یاریکەر {winner}. (بانکرۆڵ P0:{p0}، P1:{p1})",
+    "folded": "یاریزان {player_id} فۆڵد بوو.",
+    "showdown_win": "شۆوداوون: {card_win} سەرکەوتوبوو بەسەر {card_lose}.",
+    "showdown_tie": "یەکسانبوونی شۆوداوون: هەردوو {card}. پۆت دابەش دەکرێت – هەریەکەیان {split} وەردەگرێت."
+  },
+  "outcome": {
+    "p0_wins": "یاریکەر 0 سەرکەوتوبوو ({bank0} > {bank1})",
+    "p1_wins": "یاریکەر 1 سەرکەوتوبوو ({bank1} > {bank0})",
+    "draw": "چێپەکانی یەکسان لە دوای هەموو گەڕەکان."
+  }
+}

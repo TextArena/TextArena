@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id}. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched."
+  },
+  "board": {
+    "current_board": "Current board:\n{board}",
+    "current_game_board": "بۆردی یاریی ئێستا: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "فۆرماتی جوڵەی هەڵە. یاریزان {player_id} بە ئاراستەیەکی دروست لە قۆچکە چوارگۆشەکاندا وەڵام نەداوە.",
+    "out_of_bounds": "جوڵەی هەڵە. یاریزان {player_id} ھەڵبژاردنی پێگەیەکی دەرەوەی سنوورەکان .",
+    "same_card_twice": "جوڵەی هەڵە. یاریزان {player_id} هەمان کارتی دووجار هەڵبژاردووە.",
+    "already_matched": "جوڵەی ناڕاست. یاریزان {player_id} یەکێک یان هەردوو کارتی هەڵبژارد کە پێشتر یەکسان کراونەتەوە."
+  },
+  "game_message": {
+    "cards_match": "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
+    "cards_no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+  },
+  "outcome": {
+    "draw": "هەردوو یاریزان هەمان ژمارەی جووت کارتیان داناوە.",
+    "win": "یاریزان {winner_id} براوە بوو!",
+    "turn_limit": "سنووری گۆڕان تەواو بووە. یارییەکە تەواو بووە. یاریزانی 0 {score_0} خالەکان، یاریزانی 1 {score_1} خالەکان بەدەست ھێناوە.",
+    "turn_limit_win": "{reason} یاریزانی {winner_id} براوە!"
+  }
+}
