@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Sie adalah Pemain {player_id}. Sie sedang bermain permainan Battleship.\nTujuan sie adalah untuk ngonkoh semua kapal lawan sebelum lawan ngonkoh kapal sie.\nPada giliran sie, sie dapat menembak peluru ke koordinat tertentu dalam format berikut: '[a4]'. Jika peluru mengenai kapal, maka akan ditandai dengan 'X'. Jika meleset, maka akan ditandai dengan 'O'. Dalam kedua skenario, lingkungan permainan akan menginformasikan sie tentang tembakan sie. Jika sie telah ngonkoh sebuah kapal, lingkungan permainan akan mengabarkan sie!\nPermainan berakhir ketika semua kapal pemain telah ngonkoh.\nPeta awal sie akan menampilkan semua kapal sie yang telah ditempatkan dan tembakan lawan pada sie, serta tembakan dan meleset sie pada peta lawan tanpa menampilkan kapal lawan.\nBerikut adalah peta awal:\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Pemain hana meutanggong jaweub deungen koordinat yang valid dalam kurung kuadrat.",
+    "out_of_board": "Koordinat {coord} na diluwa dewan.",
+    "already_fired": "The coordinate {coord} has already been fired upon."
+  },
+  "game_action": {
+    "you_sunk": "Ngonkoh! Sie ngon ngonkoh kapal di {coord}! Peta sie yang telah diperbarui:\n{view}",
+    "opp_sunk": "Opponent sunk your ship at {coord}! Your updated board:\n{view}",
+    "you_hit": "Hit! Sie ngon hit kapal di {coord}! Peta sie yang telah diperbarui:\n{view}",
+    "opp_hit": "Lawan ngon hit kapal sie di {coord}! Peta sie yang telah diperbarui:\n{view}",
+    "you_miss": "Meleset! Sie ngon meleset kapal di {coord}! Peta sie yang telah diperbarui:\n{view}",
+    "opp_miss": "Lawan ngon meleset kapal sie di {coord}! Peta sie yang telah diperbarui:\n{view}"
+  },
+  "outcome": {
+    "win": "Player {player_id} has sunk all of their opponent's ships!"
+  }
+}

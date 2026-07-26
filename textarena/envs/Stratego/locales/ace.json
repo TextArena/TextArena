@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Kamu adalah Pemain {player_id} dalam Stratego.\nTujuanmu adalah menangkap Bendera lawan atau menghilangkan semua bidak lawan yang dapat dipindahkan.\nPasukanmu telah ditempatkan untukmu di papan, termasuk Bendera, Bom, dan bidak lainnya dengan pangkat yang bervariasi.\n\n### Instruksi Permainan\n1. **Aturan Pergerakan:**\n   - Pada giliranmu, kamu dapat memindahkan satu bidak satu langkah ke kotak yang berdekatan (atas, bawah, kiri, atau kanan) yang sudah ditempati oleh bidakmu.\n   - Contoh: Bidak dapat dipindahkan dari A1 ke B1 atau A1 ke A2 jika B1 dan A2 tidak ditempati oleh bidak pemain yang sama.\n   - Jika bidak yang dipilih adalah Bom atau Bendera, maka tidak dapat dipindahkan.\n2. **Pertarungan:**\n   - Jika kamu memindahkan bidak ke kotak yang ditempati oleh bidak lawan, maka pertarungan akan terjadi:\n     - Bidak dengan pangkat yang lebih tinggi menang dan menghilangkan bidak lawan.\n     - Jika pangkatnya sama, maka kedua bidak dihilangkan dari papan.\n     - **Kasus Khusus:**\n       - Bom menghilangkan bidak penyerang kecuali Penambang, yang dapat menonaktifkan Bom.\n       - Mata-mata dapat mengalahkan Jenderal jika Mata-mata menyerang terlebih dahulu, tetapi kalah dengan bidak lainnya.\n3. **Tujuan Strategis:**\n   - Identifikasi bidak lawan melalui pergerakan dan pertarungan.\n   - Lindungi Benderamu sambil mencoba menangkap Bendera lawan.\n   - Gunakan Pengintai secara strategis untuk mendapatkan informasi tentang bidak lawan dan menyerang yang lemah.\n\n### Cara Membuat Gerakan:\n1. Tentukan koordinat bidak yang ingin dipindahkan dan tujuannya.\n2. Gunakan format: [A0 B0], di mana A0 adalah posisi sumber, dan B0 adalah tujuan.\n   - Contoh: Untuk memindahkan bidak dari baris 0, kolom 0 ke baris 1, kolom 0, masukkan [A0 B0].\n3. Pastikan tujuan valid sesuai dengan aturan pergerakan di atas.\n\n### Catatan Penting:\n- Papan akan menampilkan bidakmu dan posisinya, misalnya MN, MS.\n- Papan juga akan menampilkan posisi bidak lawan yang diketahui tanpa mengungkapkan pangkatnya, misalnya ?.\n- Grid dengan ~ adalah danau dan tidak dapat dipindahkan.\n- Sebagai saran, mulailah permainan dengan memindahkan bidakmu yang berada di garis depan untuk mendapatkan informasi tentang bidak lawan. Garis depan Pemain 0 dan Pemain 1 adalah baris D dan G masing-masing.\n\nBerikut adalah keadaan papan saat ini:\n"
+  },
+  "board": {
+    "current_board": "Papan Saangkiat:\n\n{board}\nGerakan yang Tersedia: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format aksi hana sah. Peunampilan {player_id} han jeut di peutamong lam format [A0 B0].",
+    "invalid_coordinates": "Format aksi hana sah. Peunampilan {player_id} han jeut geupeutamong koordinat nyang valid.",
+    "not_own_piece": "Format aksi hana sah. Peumeu'en {player_id} haroh meupeutren saboh dari aneuk panah droe jih keudroe.",
+    "scout_through_pieces": "Invalid action format. Player {player_id} cannot move a scout through other pieces.",
+    "scout_diagonal": "Format aksi hana sah. Peumeu'en {player_id} hanjeut meubah peungamat seucara diagonal.",
+    "non_scout_multi_square": "Format aksi hana sah. Pica, seulaen pramuka, hanya jeut bergerak saboh kotak bak watee nyan.",
+    "move_into_lake": "Invalid action format. Player {player_id} cannot move into the lake.",
+    "move_onto_own_piece": "Format aksi hana sah. Peumeu'en {player_id} hanjeut meu-ubah bak peuta droe jih keudroe.",
+    "move_bomb_or_flag": "Format aksi hana sah. Peumeu'en {player_id} hanjeut meubah bom atawa bendera."
+  },
+  "game_action": {
+    "you_moved": "Kamu telah memindahkan bidakmu dari {source} ke {dest}.",
+    "opponent_moved": "Pemain {player_id} telah memindahkan bidak dari {source} ke {dest}.",
+    "you_equal_ranks": "Kamu telah memindahkan bidakmu dari {source} ke {dest}. Bidak penyerang adalah {attacking_rank} dan bidak tujuan adalah {target_rank}. Karena kedua bidak memiliki pangkat yang sama, keduanya hilang.",
+    "opponent_equal_ranks": "Pemain {player_id} telah memindahkan bidak dari {source} ke {dest}. Bidak penyerang adalah {attacking_rank} dan bidak tujuan adalah {target_rank}. Karena kedua bidak memiliki pangkat yang sama, keduanya hilang.",
+    "you_miner_defused": "Kamu telah memindahkan bidakmu dari {source} ke {dest}. Bidak penyerang adalah {attacking_rank} dan bidak tujuan adalah {target_rank}. Karena penambang dapat menonaktifkan bom, kamu memenangkan pertarungan.",
+    "opponent_miner_defused": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As miners can defuse bombs, you lost the battle.",
+    "you_bomb_lost": "Kamu telah memindahkan bidakmu dari {source} ke {dest}. Bidak penyerang adalah {attacking_rank} dan bidak tujuan adalah {target_rank}. Karena penyerang bukanlah penambang, kamu kalah dalam pertarungan.",
+    "opponent_bomb_won": "Pemain {player_id} telah memindahkan bidak dari {source} ke {dest}. Bidak penyerang adalah {attacking_rank} dan bidak tujuan adalah {target_rank}. Karena penyerang bukanlah penambang, kamu memenangkan pertarungan.",
+    "you_spy_won": "Kamu telah memindahkan bidakmu dari {source} ke {dest}. Bidak penyerang adalah {attacking_rank} dan bidak tujuan adalah {target_rank}. Karena penyerang adalah mata-mata dan tujuan adalah jenderal, kamu memenangkan pertarungan.",
+    "opponent_spy_lost": "Pemain {player_id} telah memindahkan bidak dari {source} ke {dest}. Bidak penyerang adalah {attacking_rank} dan bidak tujuan adalah {target_rank}. Karena penyerang adalah mata-mata dan tujuan adalah jenderal, kamu kalah dalam pertarungan.",
+    "you_higher_won": "Kamu telah memindahkan bidakmu dari {source} ke {dest}. Bidak penyerang adalah {attacking_rank} dan bidak tujuan adalah {target_rank}. Karena penyerang memiliki pangkat yang lebih tinggi dari tujuan, kamu memenangkan pertarungan.",
+    "opponent_higher_lost": "Pemain {player_id} telah memindahkan bidak dari {source} ke {dest}. Bidak penyerang adalah {attacking_rank} dan bidak tujuan adalah {target_rank}. Karena penyerang memiliki pangkat yang lebih tinggi dari tujuan, kamu kalah dalam pertarungan.",
+    "you_lower_lost": "Kamu telah memindahkan bidakmu dari {source} ke {dest}. Bidak penyerang adalah {attacking_rank} dan bidak tujuan adalah {target_rank}. Karena penyerang memiliki pangkat yang lebih rendah dari tujuan, kamu kalah dalam pertarungan.",
+    "opponent_lower_won": "Pemain {player_id} telah memindahkan bidak dari {source} ke {dest}. Bidak penyerang adalah {attacking_rank} dan bidak tujuan adalah {target_rank}. Karena penyerang memiliki pangkat yang lebih rendah dari tujuan, kamu memenangkan pertarungan."
+  },
+  "outcome": {
+    "flag_captured": "Pemain {player_id} telah menangkap bendera lawan! ([0]) - geu deh ji geum, oh yeah !",
+    "no_movable_pieces": "Pemain {winner_id} menang! Pemain {loser_id} tidak memiliki bidak yang dapat dipindahkan lagi."
+  }
+}

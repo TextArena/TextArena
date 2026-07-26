@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam permainan HighSociety (versi 2-pemain).\nAlur permainan:  Sepuluh kartu prestise dilelang satu per satu.\nPenawaran:    Setiap lelang, pilih kartu uang 1-11 secara rahasia dan buka.\n            • Penawaran yang lebih tinggi memenangkan kartu prestise dan mengeluarkan kartu uang tersebut.\n            • Penawaran yang lebih rendah menyimpan kartu uang mereka.\n            • Seri -> kedua penawaran dikembalikan dan kartu prestise yang sama dilelang kembali.\nPenilaian:    Setelah semua lelang selesai, tambahkan **uang yang tersisa + poin prestise**.\n            *Kekayaan bersih* yang lebih tinggi memenangkan (tie yang tepat -> seri).\n\n**Sintaks aksi**  →  tawar satu kartu seperti '[7]' atau '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Lelang {round}/10  |  Kartu prestise: {prize}"
+  },
+  "board": {
+    "money_cards": "Kartu keu peng yang na: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Harus mencakup tepat saboh [X] kartu uang.",
+    "card_not_held": "Droeneuh hana le na kartu nyan."
+  },
+  "message": {
+    "tie": "Tie - bids returned. Rebid!",
+    "auction_result": "P0 tawar {bid0}, P1 tawar {bid1}. Pemain {winner} memenangkan prestise {prize} (total {total})."
+  },
+  "outcome": {
+    "p0_wins": "Kekayaan bersih {nw0} > {nw1}",
+    "p1_wins": "Kekayaan bersih {nw1} > {nw0}",
+    "draw": "Bandua net-worth {nw0}  pat saban."
+  }
+}

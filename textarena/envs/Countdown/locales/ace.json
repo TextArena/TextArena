@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Kamu sedang bermain game angka Countdown!\nTujuan: Gabungkan angka-angka menggunakan +, -, *, / untuk mencapai target.\nFormat aksi: [i j op] di mana i, j adalah indeks dan op adalah operasi.\nContoh: [0 2 *] mengalikan angka di indeks 0 dengan angka di indeks 2.\nPembagian harus menghasilkan angka bulat saja."
+  },
+  "board": {
+    "header": "TARGET: {target}\n\nAngka-angka yang tersedia:\n{numbers}",
+    "best": "{observation}\n\nMeubagoih that geuseumik: {best_value} (jarak: {distance})\nMeubagoih ekspresi: {best_expression}",
+    "history": "{observation}\n\nSejarah gerakan:\n{moves}",
+    "progress": "{observation}\nSkor kemajuan saat ini: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Indeks hana sah. harus beda dan dalam kisaran 0-{max_index}",
+    "invalid_operation": "Operasi hana sah (peubagi deungen nol atau hase non-integer)"
+  },
+  "outcome": {
+    "win": "Perfect! geuui target: {target}",
+    "no_moves": "Tidak ada gerakan lagi. Hasil terbaik: {best_value} (target: {target})",
+    "turn_limit": "Batasi giliran tercapai. Hasil terbaik: {best_value} (target: {target})"
+  }
+}

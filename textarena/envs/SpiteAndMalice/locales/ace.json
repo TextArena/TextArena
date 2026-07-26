@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam permainan dua pemain Spite dan Malice. Tujuan Anda adalah menjadi yang pertama untuk mengosongkan tumpukan bayaran Anda.\n\n### Tinjauan Permainan:\n- Tujuan adalah membersihkan tumpukan bayaran Anda dengan memainkan kartu ke tumpukan tengah.\n- Anda dapat memainkan kartu dari tiga sumber:\n  1. **Tangan** Anda (Anda memulai setiap giliran dengan hingga 5 kartu di tangan).\n  2. **Kartu teratas dari tumpukan bayaran** Anda.\n  3. **Kartu teratas dari salah satu tumpukan buang** Anda.\n\n### Aturan Bermain:\n- Anda dapat memainkan kartu ke tumpukan tengah jika itu **satu peringkat lebih tinggi** dari kartu teratas di tumpukan itu (tumpukan tengah dimulai dengan Ace dan naik ke Queen; Kings adalah liar - mereka dapat dimainkan di kartu mana pun tetapi tidak mengubah urutan peringkat. Ini berarti jika King digunakan setelah 4, maka King itu berperingkat 5 dan kartu berikutnya harus 6).\n- Jika Anda tidak dapat memainkan kartu lagi, Anda harus **membuang kartu** ke salah satu tumpukan buang Anda untuk mengakhiri giliran Anda.\n- Jika tumpukan tengah mencapai Queen, itu akan dibersihkan secara otomatis.\n- Urutan peringkat adalah: A=1, 2=2, ..., 9=9, J=10, Q=11, K sebagai liar.\n\n### Tindakan:\n1. **Mengambil**: Di awal giliran Anda, ambil kartu untuk mengisi tangan Anda hingga 5 kartu. Masukkan **[draw]** untuk memulai.\n2. **Memainkan Kartu**: Untuk memainkan kartu, tentukan kartu dan tumpukan tengah seperti ini: **[play A♠ 0]** (di mana 'A♠' adalah kartu dan '0' adalah indeks tumpukan tengah).\n3. **Membuang**: Jika Anda tidak dapat memainkan kartu lagi, buang kartu dari tangan Anda ke tumpukan buang untuk mengakhiri giliran Anda. Masukkan **[discard A♠ 1]** (di mana 'A♠' adalah kartu dan '1' adalah indeks tumpukan buang). Perhatikan bahwa Anda tidak dapat membuang kartu dari tumpukan bayaran. Anda hanya dapat membuang kartu dari tangan Anda.\n\n"
+  },
+  "board": {
+    "current_board": "Papan Saat Ini:\n\n{board}\nGerakan Tersedia: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pile pusat -- ",
+    "pile": "{observation}Tumpukan {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Tampilan Pemain {player_id} ---\n",
+    "payoff": "{observation}Tumpukan Bayaran (Kartu Teratas): {top_card}, Panjang Tumpukan Bayaran: {payoff_length}\n",
+    "hand": "{observation}Tangan: {hand}\n",
+    "discard": "{observation}Tumpukan Buang: {discard}\n",
+    "empty": "Hana meuasoe."
+  },
+  "game_message": {
+    "no_cards_left": "Hana le kartu untuk di cok. Ingat bahwa droeneuh jeut peuget kartu dari sumber nyoe: 1. jaroe gata 2. kartu paleng ateh bak tumpukan hadiah 3. kartu paling awai nibak pile yang hana geupakek. "
+  },
+  "invalid_move": {
+    "wrong_format": "Format langkah hana sah. Peumeuén {player_id} han geu respon deungen saboh gerakan nyang valid lam kurung peut sagoe.",
+    "invalid_play": "Gerakan tidak valid. Pemain {player_id} mencoba memainkan {card} di tumpukan tengah {index}.",
+    "discard_from_payoff": "Pengucilan yang hana sah. Pemain {player_id} mencoba untuk membuang kartu dari tumpukan hadiah.",
+    "discard_not_in_hand": "Pengucilan yang hana sah. Peumeuén {player_id} meucuba untuk geupeutulak kartu nyang kon bak jaroe jih.",
+    "wrong_move_type": "Tipe langkah hana sah.Pemain {player_id} tidak menanggapi dengan tipe gerakan yang valid."
+  },
+  "game_action": {
+    "you_drew": "Gata geutarek kartu.",
+    "opponent_drew": "Pemain {player_id} geutarek kartu.",
+    "you_played": "Neupeumeunang {card} bak pile pusat {index}.",
+    "opponent_played": "Pemain {player_id} memainkan {card} di tumpukan tengah {index}.",
+    "you_discarded": "Anda telah membuang {card} ke tumpukan buang {index}, yang juga berarti Anda telah menyelesaikan giliran Anda. Tidak ada tindakan lebih lanjut dari Anda yang dipertimbangkan untuk giliran ini. Pemain {next_player_id} akan bermain selanjutnya.",
+    "opponent_discarded": "Pemain {player_id} membuang {card} ke tumpukan buang {index}, yang juga berarti mereka telah menyelesaikan giliran mereka. Tidak ada tindakan lebih lanjut dari Pemain {player_id} yang dipertimbangkan untuk giliran ini. Pemain {next_player_id}, giliran Anda selanjutnya. Silakan masukkan tindakan Anda dalam format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Pemain {current_player} telah menyelesaikan tumpukan bayaran mereka! Pemain {current_player} menang!",
+    "deadlock_player_0": "Jalan buntu tercapai! Pemain 0 menang dengan {player_0_payoff} kartu tersisa vs Pemain 1's {player_1_payoff} kartu.",
+    "deadlock_player_1": "Jalan buntu tercapai! Pemain 1 menang dengan {player_1_payoff} kartu tersisa vs Pemain 0's {player_0_payoff} kartu.",
+    "deadlock_tie": "Jalan buntu tercapai dengan seri! Kedua pemain memiliki {player_0_payoff} kartu tersisa. Pemain {current_player} menang secara default."
+  }
+}

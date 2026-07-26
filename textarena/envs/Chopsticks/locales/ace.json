@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Kamu adalah Pemain {player_id} dalam Chopsticks. Pada giliranmu, pilih salah satu:\n  + Serang:  '[attack M O]'  di mana M=tanganmu (0 atau 1), O=tangan lawan (0 atau 1).\n    - Jumlah jari tangan lawan bertambah oleh tanganmu; jika >=5, maka menjadi 0.\n  + Bagi:   '[split L R]'  untuk mendistribusikan total jari-jarimu ke L dan R (L+R = totalmu).\nBalas dengan salah satu perintah tersebut."
+  },
+  "board": {
+    "current_board": "Papan Saangkih:\nPemain 0: {hands_0}\nPemain 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Jaroe gata {my_idx} ka maté.",
+    "opp_hand_dead": "Tangan lawan {opp_idx} kaleuh mate.",
+    "split_sum": "Pembagian harus jumlah jih {total}.",
+    "split_no_change": "Split pasti geubah distribusi jaroe gata.",
+    "invalid_command": "Gerakan tidak sah. Gunakan “[attack M O]” atau “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} menyerang genggam P{opp_id} {opp_idx}: ia berubah dari {opp_val} ke {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Mandua jaroe lawan ka maté.",
+    "draw": "Watèe meulikôt ka trôk."
+  }
+}

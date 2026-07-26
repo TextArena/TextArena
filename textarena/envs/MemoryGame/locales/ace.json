@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id}. Anda sedang memainkan Permainan Memori.\nTujuan Anda adalah untuk mencocokkan lebih banyak pasang kartu di papan, daripada lawan Anda.\nPada giliran Anda, pilih dua kartu untuk dibalik dengan memasukkan nomor baris dan kolom kartu pertama dan kedua secara berurutan seperti '[0 1 1 0]', di mana kartu pertama berada di baris 0 dan kolom 1, dan kartu kedua berada di baris 1 dan kolom 0.\nJika dua kartu cocok, Anda mendapatkan poin dan kartu tetap menghadap ke atas. Jika tidak cocok, kartu dibalik kembali menghadap ke bawah, misalnya '.'.\nPermainan berakhir ketika semua pasang telah cocok."
+  },
+  "board": {
+    "current_board": "Papan nyang jinoë: {board}",
+    "current_game_board": "Papan Game jinoe: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format langkah hana sah. Peunampilan {player_id} hanjeut geu respon deungen arah nyang valid lam kurung peut sagoe.",
+    "out_of_bounds": "Langkah hana sah.Pemain {player_id} memilih posisi luar batas.",
+    "same_card_twice": "Langkah hana sah.Pemain {player_id} memilih kartu yang sama dua kali.",
+    "already_matched": "Invalid move. Player {player_id} selected one or both cards that have already been matched."
+  },
+  "game_message": {
+    "cards_match": "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
+    "cards_no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+  },
+  "outcome": {
+    "draw": "Mandua pemain meucocok jumlah pasang kartu yang sama.",
+    "win": "Peunemu {winner_id} ka meunang!",
+    "turn_limit": "Batasan giliran telah tercapai. Permainan selesai. Pemain 0 mencetak {score_0} poin, Pemain 1 mencetak {score_1} poin.",
+    "turn_limit_win": "{reason} Pemain {winner_id} telah memenangkan!"
+  }
+}

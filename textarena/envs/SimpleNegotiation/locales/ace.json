@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam Permainan Negosiasi.\nAnda memiliki beberapa sumber daya, dan tugas Anda adalah untuk berdagang sehingga nilai total sumber daya Anda meningkat.\nSumber daya dan nilai yang terkait yang Anda miliki saat ini adalah:\n\t+ {resource_value_list}\nPada setiap giliran, Anda dapat berbicara dengan lawan Anda dan membuat tawaran perdagangan.\nGunakan token khusus berikut untuk tindakan:\n  - '[Tawaran: 3 Domba, 2 Bijih -> 5 Bata, 2 Domba]': [Tawaran: Sumber Daya yang Ditawarkan -> Sumber Daya yang Diminta]\n  - '[Accept]': Untuk menerima tawaran masuk.\n  - '[Deny]': Untuk menolak tawaran masuk (default).\nPermainan berlangsung selama {max_turns} giliran secara total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Pemain mencoba untuk menerima pertukaran tanpa sumber daya yeng diperlukan.",
+    "out_of_range": "Pemain {player_id}, Tindakan tidak sah. Kolom {col} di luar batas.",
+    "already_full": "Pemain {player_id}, Tindakan tidak sah. Kolom {col} sudah penuh.",
+    "proposing_with_no_resource": "Pemain {player_id} mencoba untuk membuat tawaran perdagangan tanpa memiliki sumber daya yeng diperlukan.",
+    "incorrect_offer_format": "Pemain {player_id} geupeuget tawaran pertukaran dalam format nyang salah.",
+    "no_new_offer": "Pemain {player_id} hana peuget tawaran perdagangan baro."
+  },
+  "offers": {
+    "reject": "Pemain {player_id} geu tulak tawaran pertukaran.",
+    "accept": "Pemain {acceptor_id} geu terimong tawaran pertukaran dari Player {proposer_id}.",
+    "proposal": "Player {player_id} made the following offer to Player {opponent_id}: Offered items: {offered} -> Requested items: {requested}"
+  },
+  "outcome": {
+    "win": "Pemain {winner_id} meunang deungen na laba leubeh rayek dalam nilai inventaris.",
+    "draw": "Perubahan nilai persediaan yang sama untuk mandum pemain."
+  }
+}
