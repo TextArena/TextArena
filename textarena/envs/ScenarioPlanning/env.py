@@ -13,7 +13,10 @@ class ScenarioPlanningEnv(ta.Env):
             scenarios_path (str): Path to the JSON file containing scenarios.
         """
         if jury_class is None:
-            from textarena.envs.utils import OpenRouterJury  # or from your local import
+            # Import from the submodule: OpenRouterJury is not re-exported from the
+            # utils package __init__, so `from textarena.envs.utils import ...` raises
+            # ImportError. This matches how textarena.envs.__init__ imports it.
+            from textarena.envs.utils.jury import OpenRouterJury
             jury_class = OpenRouterJury
         self._load_scenarios(scenarios_path) # Load scenarios
         self.judge = jury_class(jury_size=jury_size, options=["Player 0", "Player 1"]) # Initialize judges
