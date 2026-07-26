@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Vi ludas {color} en ludo de Breakthrough. Vi movas {direction} sur {board_size}x{board_size} tabulo.\nEn via turno vi povas movi unu pecon unu paŝon antaŭen aŭ diagonale antaŭen.\nPeco rajtas moviĝi nur diagonale se kontraŭula peco estas tie, kaj nur moviĝi en tian okupitan kvadraton en diagonala paŝo.\nKiam enirante en kvadraton kun kontraŭula peco, vi kaptas ĝin kaj la kontraŭula peco estas forigita permane el la tabulo.\nUzu UCI-similan notacion en krampoj, ekz. [a2a3] por movi de a2 al a3.\n* 'a' korespondas al la malplej dekstra kolumno, '1' estas la malsupra vico (el la perspektivo de Blanko).\n* La hejma vico de Nigro estas la supra vico (vico 8 por 8x8). La hejma vico de Blanko estas la malsupra vico (vico 1 por 8x8).\nLa unua ludanto, kies peco atingas la hejman vicon de la kontraŭulo, gajnas. Se viaj pecoj estas ĉiuj kaptitaj, vi malgajnas."
+  },
+  "invalid_move": {
+    "wrong_format": "Bonvolu uzi algebran notadon kiel [a2a3].",
+    "out_of_bounds": "Moviĝo estas ekster la limoj de la estraro.",
+    "illegal": "Tiu movo ne sekvas la regulojn de \"malkovro\" aŭ ĝi estas malĝusta."
+  },
+  "game_action": {
+    "moved": "Ludanto {player_id} movas {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "La blankaj atingis la hejman vicon de la nigraj.",
+    "black_reached": "Nigro atingis la hejman vicon de blanko.",
+    "white_captured": "Ĉiuj blankaj pecoj estas kaptitaj.",
+    "black_captured": "Ĉiuj nigraj ĉampionoj estas kaptitaj.",
+    "no_moves": "Ludanto {player_id} ne plu havas movojn."
+  }
+}

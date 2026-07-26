@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Aktuala estraro: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "La movo devas esti en la formo [macro micro] kun nombroj 0-8.",
+    "out_of_range": "Indeksoj devas ĉiu esti inter 0 kaj 8.",
+    "index_out_of_range": "La mikro_tabulo, vico aŭ kolono estas ekster la intervalo.",
+    "cell_occupied": "La ĉelo jam estas okupita.",
+    "wrong_micro_board": "La ludanto devas ludi en la sekva mikro-tabulo.",
+    "micro_board_won": "La mikro-komisiono jam gajnis."
+  },
+  "next_board": {
+    "any": "ajna mikro-plato.",
+    "specific": "mikro-tabulo {nxt}"
+  },
+  "game_action": {
+    "played": "Ludanto {player_id} ludis en mikro-ŝako {macro_idx}, ĉelo {micro_idx} (vico {row}, kolumno {col}). Ludanto {opponent_id} nun devas ludi en {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Ludanto {player_id} gajnas Ultimate Tic Tac Toe! (Fineca Tiktakfingro)!",
+    "draw": "La ludo estas remisa!"
+  }
+}

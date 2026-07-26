@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Vi estas Ludanto {player_id} en {max_rounds}-raŭnda ludo de Kuhn Poker.\nLudreguloj:\n- Kuhn Poker uzas 3-kartan ferdekon kun J, Q, K (J plej malalta, K plej alta)\n- Ĉiu ludanto metas {ante} ĉipon kaj ricevas 1 karton ĉiun raŭndon (notu, ke la karto estas distribuita sen anstataŭigo, do vi ne povas havi la saman karton kiel via kontraŭulo).\n- La ludo daŭras por {max_rounds} raŭndoj\n- La ludanto kun la plej multaj ĉipoj post ĉiuj raŭndoj gajnas\nAgreguloj:\n- '[check]': Pasu sen veti (nur se neniu veto estas sur la tablo)\n- '[bet]': Aldonu 1 ĉipon al la pokalo (nur se neniu veto estas sur la tablo)\n- '[call]': Kunmetu kontraŭulan veton per aldoni 1 ĉipon al la pokalo\n- '[fold]': Cedu vian manon kaj lasu vian kontraŭulon gajni la pokalon"
+  },
+  "init_round": {
+    "round_start": "### Komencante raŭndon {current_round} el {max_rounds} raŭndoj. Via karto estas: '{player_card}'",
+    "available_actions": "Viaj disponeblaj agoj estas: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ago devas esti [Check], [Bet], [Call], aŭ [Fold].",
+    "not_legal": "Ago devas esti {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Viaj disponeblaj agoj estas: {legal_actions}.",
+    "round_summary": "{reason} Nunaj poentoj: Ludanto 0: '{player_0_chips}'; Ludanto 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Konfrontiĝo: Ludanto {winner}'s {winner_card} venkas Ludanton {loser}'s {loser_card}. Ludanto {winner} gajnas pokalon de {pot_value} ĉipoj."
+  },
+  "outcome": {
+    "draw": "Ĉe la fino de {max_rounds} rondoj, ambaŭ ludantoj havis la saman nombron da blatoj.",
+    "round_win": "Ludanto {player_id} falis.",
+    "winner_player0": "Ludanto 0 gajnis havante pli da blatoj ĉe la fino de ĉiuj {max_rounds} rondoj.",
+    "winner_player1": "Ludanto 1 gajnis havante pli da blatoj ĉe la fino de ĉiuj {max_rounds} rondoj."
+  }
+}

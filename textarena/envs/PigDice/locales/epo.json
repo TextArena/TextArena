@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Vi estas Ludanto {player_id} ludadante ludo de Pig Dice.\n\nReguloj:\n- Dum via vico, vi povas aŭ '[roll]' aŭ '[hold]'\n- Ruli 2-6: Aldoni al via vicotalo\n- Ruli 1: Perdi vicotalon kaj fini vicon\n- Teni: Aldoni vicotalon al via poentaro kaj fini vicon\n- Unua atingi {winning_score} poentojn gajnas\n\nKiam estas via vico, vi vidos la aktualajn poentarojn kaj vicotalon.\nRespondu per '[roll]' por ruli la ĵetkubon aŭ '[hold]' por banki viajn poentojn."
+  },
+  "invalid_move": {
+    "invalid_action": "Nevalida agformato. Uz'u '[roll]' aŭ '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Ludanto {player_id} estas elĵetita, perdiĝante {turn_total} poentojn!",
+    "player_hold": "Ludanto {player_id} tenas kaj bankas {turn_total} poentojn."
+  },
+  "board": {
+    "player": "Ludanto 0: '{score_0}'; Ludanto 1: '{score_1}'",
+    "current_total_scores": "Aktualaj totalaj poentoj: {scores} Via nuna turno estas {turn_total}.",
+    "roll_history": "{observation}\nVia rolla historio por ĉi tiu vico: {roll_history}",
+    "first_roll": "{observation} Jen la unua rulo de via vico.",
+    "available_actions": "{observation}\nHaveblaj agoj: '[roll]' aŭ '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Ludanto {winner_id} gajnis havante pli altan poentaron ĉe la limigo de vico ({scores})",
+    "winner_by_score": "Ludanto {winner_id} gajnis atingante la celitan poentaron de {winning_score}!",
+    "draw": "La turnlimo estis atingita kaj ĉiuj ludantoj havas la saman poentaron: {scores}"
+  }
+}

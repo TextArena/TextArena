@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Vi ludas Golfo (Kartludo) - Ludanto {player_id}.\nCelo: Akiri la plej malaltan suman poenton en ĉi tiu ununura vico. Se kolumnoj kunhavas la saman valoron, ili sumiĝas kiel 0.\nKartaj valoroj: A=1, 2-10=vizaĝa valoro, J/Q=10, K=0\n\nAgadoj (uzi ekzaktajn krampojn):\n- '[draw]' - Tiri el la kartaro\n- '[take]' - Prendi el la foriga amaso\n- '[swap X Y]' - Interŝanĝi la tiritan karton kun pozicio X (vico) Y (kolumno)\n- '[discard]' - Forigi la tiritan karton"
+  },
+  "board": {
+    "drew": "Vi tiris: {card}\nNun vi devas [swap X Y] aŭ [discard] ĝin.",
+    "took": "Vi prenis: {card} el forĵeta amaso. Vi devas [swap X Y] kun ĝi (ne povas forĵeti).",
+    "peeked": "Vi rigardis pozicion ({row},{col}): {card}",
+    "turn_view": "Via mano:\n{hand}\nForiga amaso: {discard}\n{options}",
+    "none": "Neniu."
+  },
+  "options": {
+    "final_turns": "Finalaj vicoj! Viaj elektoj: [draw], [take], [peek X Y]",
+    "draw": "Viaj elektoj: [draw], [take]",
+    "must_swap": "Vi devas: [swap X Y] (ne eblas forĵeti kartojn el la ruba amaso)",
+    "swap_or_discard": "Vi devas: [swap X Y] aŭ [discard]"
+  },
+  "hand": {
+    "no_cards": "Sen kartoj.",
+    "header": "Kol: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Ludanto {pid} interŝanĝis {new} kun {old} ĉe pozicio ({row},{col})",
+    "discarded": "Ludanto {pid} forigis {card}"
+  },
+  "message": {
+    "deck_empty": "La ferdeko estas malplena! Ludo finiĝas tuj.",
+    "knocked": "Ludanto {pid} frapis! Ĉiu alia ludanto ricevas unu plian turnon.",
+    "final_round": "Ludanto {pid} {reason}! Ĉiu alia ludanto ricevas unu plian vicon."
+  },
+  "reason": {
+    "all_revealed": "Ĉu ĉiuj kartoj estas malkaŝitaj?"
+  },
+  "invalid": {
+    "wrong_action": "Uzvu ekzakte UNU agadon en krampoj: [draw], [take], [swap X Y], [discard], [knock], aŭ [peek X Y]",
+    "discard_empty": "La rubaĵomaso estas malplena!",
+    "must_draw_first": "Vi devas unue [draw], [take], [knock], aŭ [peek X Y]",
+    "cannot_discard_taken": "Vi ne povas forĵeti karton prenitan el la maŝino. Vi devas interŝanĝi ĝin.",
+    "have_drawn_card": "Vi havas tiritan karton. Vi devas [swap X Y] aŭ [discard] ĝin.",
+    "need_drawn_swap": "Vi bezonas tiritan karton por interŝanĝi.",
+    "need_drawn_discard": "You need a drawn card to discard.",
+    "out_of_bounds": "Pozicio ekster limoj. Uzvu vicon 1-{max_row}, kolumnon 1-{max_col}",
+    "knock_with_card": "Vi ne povas frapi kun tirita karto. Kompletigu vian turnon unue.",
+    "already_knocked": "Iu jam frapis tiun rondon.",
+    "already_revealed": "Tiu karto jam estas malkaŝita!"
+  },
+  "summary": {
+    "full": "Ludo finiĝis! Ludanto {winner} gajnas kun poentaro de {score} poentoj!\n\nFinaj poentoj:\n{scores}",
+    "line": "Ludanto {pid}: {score} poentoj\n"
+  },
+  "board_str": {
+    "title": "=== Golfo-Ludo===",
+    "discard": "Forĵeta amaso: {card}",
+    "knocked": "{pid} ludanto frapis!",
+    "player_header": "Ludanto {pid} (Poentoj: {score}):"
+  }
+}

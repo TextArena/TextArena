@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Vi estas Ludanto {player_id} en 3-ludanta Iterita Prizonula Dilemo. La matĉo daŭras {num_rounds} raŭndo(j)n.\nRaŭnda strukturo:\n• {conv_rounds} liber-parolaj turnoj\n• 1 decid-turno - sendu unu tokenon por ĉiu kontraŭulo: '[<opp-id> cooperate]' aŭ '[<opp-id> defect]' (t.e. '[1 defect] [2 cooperate]'; la defaŭlto estas 'kunlabori'). \nPar-para pago-matrico (aplikita al ĉiu neserita paro):\n  - Ambaŭ kunlaboras  ->  {reward}\n  - Ambaŭ defektas     ->  {punishment}\n  - Vi defektas, ili kunlaboras ->  {temptation}\n  - Vi kunlaboras, ili defektas ->  {sucker}\nLa ludanto(j) kun la plej alta poento fine de ĉiuj raŭndo(j) gajnas."
+  },
+  "round": {
+    "start": "─── Komencas Raŭndo {round} ───\tVi povas konversacii libere dum la sekvaj {conv_rounds} raŭndo(j).",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "Rondo {round} - Rezultoj:",
+    "pair_line": "{observation}\n\t Ludanto {i} vs Ludanto {j} elektis {choice_i} kaj {choice_j} respektive (Ludanto {i} gajnis {gain_i}, Ludanto {j} gajnis {gain_j})",
+    "scores_open": "{observation} -> Aktualaj poentaroj: ",
+    "score_first": "{observation}Ludanto {player_id} ({score})",
+    "score_next": "{observation}; Ludanto {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Finaj poentoj: {scores}.  Grupoj laŭ rango (plej malbona→plej bona): {groups}"
+  }
+}

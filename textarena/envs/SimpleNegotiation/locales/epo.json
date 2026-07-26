@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Vi estas Ludanto {player_id} en la Negocada Ludo.\nVi havas iom da rimedoj, kaj via tasko estas interŝanĝi ilin tiel, ke la suma valoro de viaj rimedoj pliiĝu.\nLa rimedoj kaj la asociitaj valoroj, kiujn vi nun havas, estas:\n\t+ {resource_value_list}\nĈe ĉiu vico, vi povas paroli kun via kontraŭulo kaj fari komercan proponon.\nUzu la sekvajn specialajn tokenojn por agoj:\n  - '[Oferto: 3 Ŝafoj, 2 Erco -> 5 Briko, 2 Ŝafoj]': [Oferto: Ofertitaj Rimedoj -> Petataj Rimedoj]\n  - '[Accept]': Akcepti envenan proponon.\n  - '[Deny]': Malakcepti envenan proponon (defaŭlta).\nLa ludo daŭras {max_turns} vicojn entute."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Ludanto provis akcepti komercon sen havi la necesajn rimedojn.",
+    "out_of_range": "Ludanto {player_id}, Nevalida ago. Kolono {col} estas ekster la limoj.",
+    "already_full": "Ludanto {player_id}, Nevalida ago. Kolono {col} estas plena.",
+    "proposing_with_no_resource": "Ludanto {player_id} provis fari interŝanĝoferton sen havi la necesajn rimedojn.",
+    "incorrect_offer_format": "Ludanto {player_id} faris interŝanĝoferton en malĝusta formato.",
+    "no_new_offer": "Ludanto {player_id} faris neniun novan komercan oferton."
+  },
+  "offers": {
+    "reject": "Ludanto {player_id} rifuzis la interŝanĝoferton.",
+    "accept": "Ludanto {acceptor_id} akceptis la komercan oferton de ludanto {proposer_id}.",
+    "proposal": "Ludanto {player_id} faris la sekvan proponon al Ludanto {opponent_id}: Ofertitaj objektoj: {offered} -> Petataj objektoj: {requested}"
+  },
+  "outcome": {
+    "win": "Ludanto {winner_id} gajnis havante pli grandan akiron en inventara valoro.",
+    "draw": "Sama ŝanĝo en la inventara valoro por ĉiuj ludantoj. Neniuj."
+  }
+}

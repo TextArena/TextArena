@@ -34,7 +34,7 @@ import sys
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ENVS_DIR = os.path.join(REPO_ROOT, "textarena", "envs")
-DEFAULT_LANGS = ["ar", "de", "es", "fr", "he", "ms", "zh", "kn", "be", "gu", "pa", "mr", "ps", "te", "sd", "ne", "lo", "uz", "ml", "zu", "as", "km", "hy", "cy", "si", "kk", "or", "my", "so", "mg", "ky", "ka", "ha", "ig", "mn", "eu", "yo", "am", "ceb", "bjn", "ars", "arz", "acq", "crh", "apc", "ajp", "bho", "ace", "acm", "ary", "ckb", "aeb", "ast", "bug", "ayr", "bam", "bem", "cjk", "ban", "awa", "bak", "azb", "bod", "aka"]  # en is the source
+DEFAULT_LANGS = ["ar", "de", "es", "fr", "he", "ms", "zh", "kn", "be", "gu", "pa", "mr", "ps", "te", "sd", "ne", "lo", "uz", "ml", "zu", "as", "km", "hy", "cy", "si", "kk", "or", "my", "so", "mg", "ky", "ka", "ha", "ig", "mn", "eu", "yo", "am", "ceb", "bjn", "ars", "arz", "acq", "crh", "apc", "ajp", "bho", "ace", "acm", "ary", "ckb", "aeb", "ast", "bug", "ayr", "bam", "bem", "cjk", "ban", "awa", "bak", "azb", "bod", "aka", "epo"]  # en is the source
 LANG_NAMES = {
     "ar": "Arabic", "de": "German", "es": "Spanish", "fr": "French",
     "he": "Hebrew", "ms": "Malay", "zh": "Simplified Chinese",
@@ -95,6 +95,7 @@ LANG_NAMES = {
     "azb": "South Azerbaijani",
     "bod": "Standard Tibetan",
     "aka": "Akan",
+    "epo": "Esperanto",
 }
 
 SYSTEM = (
