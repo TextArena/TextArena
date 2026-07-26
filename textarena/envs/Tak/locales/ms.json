@@ -1,0 +1,37 @@
+{
+    "_comment": "Rentetan setempat untuk persekitaran Tak. Kekalkan {placeholders} utuh. Token buah (F/W/C + id pemain), koordinat grid seperti (2,2), format tindakan [ACTION SOURCE ALLOCATION], dan papan ASCII adalah neutral dan tidak boleh diterjemahkan.",
+    "_slots": {
+        "player_id": "nombor pemain (0 atau 1)",
+        "current_player_id": "nombor pemain bagi pemain yang bertindak",
+        "board": "papan ASCII yang telah dipaparkan (neutral, jangan terjemah)",
+        "flat_stones": "bilangan batu rata yang tersedia untuk pemain semasa",
+        "capstones": "bilangan batu penutup (capstone) yang tersedia untuk pemain semasa",
+        "cells": "senarai koordinat sasaran neutral, cth. [(0, 0)]",
+        "source": "tuple koordinat sumber neutral, cth. (0, 0)",
+        "targets": "senarai koordinat sasaran neutral, cth. [(1, 0)]"
+    },
+
+    "player_prompt": {
+        "intro": "Anda ialah Pemain {player_id} dalam Tak.\nMatlamat anda adalah untuk menghubungkan dua sisi bertentangan pada papan dengan buah anda bagi membentuk sebuah laluan sambil menghalang lawan anda daripada melakukan perkara yang sama.\nAnda boleh melakukan tindakan berikut pada giliran anda:\n- Meletakkan sebuah buah pada petak kosong.\n- Menggerakkan setimbun buah dari satu petak ke satu atau lebih petak. Anda boleh menimbun buah anda di atas buah lain pada petak sasaran. Buah yang paling atas menentukan pemilikan timbunan itu.\n- Membahagikan setimbun buah kepada dua atau lebih timbunan dan mengagihkannya ke petak bersebelahan.\n- Meratakan batu dinding menjadi batu rata menggunakan batu penutup (capstone) anda.\n- Meletakkan sebuah Batu Penutup (Capstone) pada petak kosong.\n- Menggerakkan Batu Penutup dari satu petak ke satu atau lebih petak. Sebuah batu penutup juga boleh meratakan batu dinding semasa pergerakannya.\n\nBagi setiap gerakan, hantar tindakan anda menggunakan format:\n[ACTION SOURCE ALLOCATION]\n- ACTION: Jenis gerakan yang anda lakukan ('place' atau 'move').\n- SOURCE: Koordinat grid tempat batu bermula. Guna () untuk 'place'.\n- ALLOCATION: Sebuah kamus di mana kunci ialah koordinat grid sasaran dan nilai ialah batu atau buah yang digerakkan atau diletakkan.\n\nJenis Batu dan Kebolehannya:\n- Batu Rata ('F'):\n  - Membentuk sebahagian daripada laluan (digunakan untuk menghubungkan sisi papan).\n  - Boleh ditimbun di atas buah lain atau mempunyai buah lain ditimbun di atasnya.\n  - Boleh digerakkan sebagai sebahagian daripada timbunan atau secara individu.\n\n- Batu Dinding ('W'):\n  - Menghalang laluan dan menghalang lawan daripada melengkapkan sambungan mereka.\n  - Tidak boleh menjadi sebahagian daripada laluan.\n  - Boleh diratakan menjadi batu rata oleh sebuah batu penutup.\n\n- Batu Penutup ('C'):\n  - Bertindak sebagai batu rata dan boleh membentuk sebahagian daripada laluan.\n  - Boleh meratakan batu dinding, menghapuskan kesan halangannya.\n  - Tidak boleh ditutup oleh buah lain, sentiasa kekal di atas timbunan.\n  - Merupakan alat yang berkuasa untuk kedua-dua pembinaan laluan dan mengganggu rancangan lawan anda.\n\nBatu akan dikenal pasti oleh pemain seperti berikut:\n- Batu Rata untuk Pemain 0: 'F0'\n- Batu Dinding untuk Pemain 1: 'W1'\n- Batu Penutup untuk Pemain 1: 'C1'\n\nContoh:\n- Untuk meletakkan batu penutup pada (3,2):\n  [place () {{(3,2): [C0]}}]\n- Untuk menggerakkan semua buah dari (2,2) ke (2,3):\n  [move (2,2) {{(2,3): [F0]}}]\n- Untuk membahagikan setimbun 5 buah dari (2,2) kepada dua petak:\n  [move (2,2) {{(2,3): [F0, F0], (2,4): [W0, F0, C0]}}]\n- Untuk menggerakkan dan menimbun satu buah dari (2,2) ke atas timbunan sedia ada di (2,3):\n  [move (2,2) {{(2,3): [F0]}}]\n\nApabila menghantar gerakan anda, fikirkan secara strategik tentang matlamat pembinaan laluan anda dan gerakan berpotensi lawan anda.\n"
+    },
+
+    "board": {
+        "current_state": "Papan Semasa:\n\n{board}\nBatu Rata Tersedia: {flat_stones}, Batu Penutup Tersedia: {capstones}\n"
+    },
+
+    "invalid_move": {
+        "invalid_format": "Format gerakan tidak sah. Pemain {current_player_id} tidak membalas dengan gerakan yang sah dalam kurungan segi empat sama.",
+        "invalid_placement": "Peletakan tidak sah. Pemain {current_player_id} cuba meletakkan sebuah buah pada petak yang tidak sah.",
+        "invalid_movement": "Pergerakan tidak sah. Pemain {current_player_id} cuba menggerakkan buah dengan cara yang tidak sah.",
+        "invalid_action": "Tindakan tidak sah. Pemain {current_player_id} cuba melakukan tindakan yang tidak diketahui."
+    },
+
+    "action": {
+        "placement": "Pemain {current_player_id} meletakkan sebuah buah pada ({cells}).",
+        "movement": "Pemain {current_player_id} menggerakkan buah dari {source} ke {targets}."
+    },
+
+    "outcome": {
+        "winner": "Pemain {current_player_id} telah menghubungkan dua sisi bertentangan pada papan."
+    }
+}

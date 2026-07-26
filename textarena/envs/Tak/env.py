@@ -7,7 +7,7 @@ class TakEnv(ta.Env):
     """
     Tak environment.
     """
-    def __init__(self, board_size, stones, capstones):
+    def __init__(self, board_size=4, stones=15, capstones=1):
         """
         Initialize the Tak game environment
         
@@ -101,59 +101,7 @@ class TakEnv(ta.Env):
         """
         Generate the player prompt.
         """
-        prompt = (
-            f"You are Player {player_id} in Tak.\n"
-            "Your goal is to connect two opposite edges of the board with your pieces to form a road while blocking your opponent from doing the same.\n"
-            "You can perform the following actions on your turn:\n"
-            "- Place a piece on an empty square.\n"
-            "- Move a stack of pieces from one square to one or more squares. You can stack your pieces on top of other pieces on the target square. The topmost piece determines ownership of the stack.\n"
-            "- Split a stack of pieces into two or more stacks and distribute them to adjacent squares.\n"
-            "- Flatten a wall stone into a flat stone using your capstone.\n"
-            "- Place a Capstone on an empty square.\n"
-            "- Move a Capstone from one square to one or more squares. A capstone can also flatten a wall stone during its move.\n"
-            "\n"
-            "For each move, submit your action using the format:\n"
-            "[ACTION SOURCE ALLOCATION]\n"
-            "- ACTION: The type of move you are making ('place' or 'move').\n"
-            "- SOURCE: The grid coordinates where the stones originate. Use () for 'place'.\n"
-            "- ALLOCATION: A dictionary where keys are target grid coordinates and values are the stones or pieces being moved or placed.\n"
-            "\n"
-            "Stone Types and Their Abilities:\n"
-            "- Flat Stone ('F'):\n"
-            "  - Forms part of a road (used to connect edges of the board).\n"
-            "  - Can be stacked on top of other pieces or have other pieces stacked on it.\n"
-            "  - Can be moved as part of a stack or individually.\n"
-            "\n"
-            "- Wall Stone ('W'):\n"
-            "  - Blocks roads and prevents opponents from completing their connections.\n"
-            "  - Cannot be part of a road.\n"
-            "  - Can be flattened into a flat stone by a capstone.\n"
-            "\n"
-            "- Capstone ('C'):\n"
-            "  - Acts as a flat stone and can form part of a road.\n"
-            "  - Can flatten wall stones, removing their blocking effect.\n"
-            "  - Cannot be covered by other pieces, always remains on top of the stack.\n"
-            "  - Is a powerful tool for both road-building and disrupting your opponent's plans.\n"
-            "\n"
-            "The stones will be identified by the player as follows:\n"
-            "- Flat Stone for Player 0: 'F0'\n"
-            "- Wall Stone for Player 1: 'W1'\n"
-            "- Capstone for Player 1: 'C1'\n"
-            "\n"
-            "Examples:\n"
-            "- To place a capstone on (3,2):\n"
-            "  [place () {(3,2): [C0]}]\n"
-            "- To move all pieces from (2,2) to (2,3):\n"
-            "  [move (2,2) {(2,3): [F0]}]\n"
-            "- To split a stack of 5 pieces from (2,2) into two squares:\n"
-            "  [move (2,2) {(2,3): [F0, F0], (2,4): [W0, F0, C0]}]\n"
-            "- To move and stack one piece from (2,2) onto an existing stack at (2,3):\n"
-            "  [move (2,2) {(2,3): [F0]}]\n"
-            "\n"
-            "When submitting your move, think strategically about your road-building goals and your opponent's potential moves.\n"
-        )
-
-        return prompt
+        return self.m("player_prompt", "intro", player_id=player_id)
     
     def _observe_current_state(self) -> None:
         """
@@ -164,7 +112,7 @@ class TakEnv(ta.Env):
         available_flat_stones = self.players[self.state.current_player_id]["stones"]
         available_capstones = self.players[self.state.current_player_id]["capstones"]
         self.state.add_observation(
-            message=f"Current Board:\n\n{board_str}\nAvailable Flat Stones: {available_flat_stones}, Available Capstones: {available_capstones}\n",
+            message=self.m("board", "current_state", board=board_str, flat_stones=available_flat_stones, capstones=available_capstones),
             observation_type=ta.ObservationType.GAME_BOARD
         )
 
@@ -193,7 +141,7 @@ class TakEnv(ta.Env):
 
         if not match:
             ## no matching action
-            reason=f"Invalid move format. Player {self.state.current_player_id} did not respond with a valid move in square brackets."
+            reason=self.m("invalid_move", "invalid_format", current_player_id=self.state.current_player_id)
             self.state.set_invalid_move(reason=reason)
         
         else:
@@ -204,28 +152,28 @@ class TakEnv(ta.Env):
                 ## place a piece on an empty square
                 if not self._is_valid_placement(allocation):
                     ## invalid placement
-                    reason=f"Invalid placement. Player {self.state.current_player_id} tried to place a piece on an invalid square."
+                    reason=self.m("invalid_move", "invalid_placement", current_player_id=self.state.current_player_id)
                     self.state.set_invalid_move(reason=reason)
                 else:
                     self._apply_placement(allocation, self.state.current_player_id)
-                    message=f"Player {self.state.current_player_id} placed a piece on ({list(allocation.keys())})."
+                    message=self.m("action", "placement", current_player_id=self.state.current_player_id, cells=list(allocation.keys()))
                     self.state.add_observation(from_id=-1, to_id=-1, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
             elif action == "move":
                 ## move a stack of pieces from one square to another
                 if not self._is_valid_movement(source, allocation):
                     ## invalid movement
-                    reason=f"Invalid movement. Player {self.state.current_player_id} tried to move pieces in an invalid way."
+                    reason=self.m("invalid_move", "invalid_movement", current_player_id=self.state.current_player_id)
                     self.state.set_invalid_move(reason=reason)
                 else:
                     ## valid movement
                     self._apply_movement(source, allocation)
-                    message=f"Player {self.state.current_player_id} moved pieces from {source} to {list(allocation.keys())}.",
+                    message=self.m("action", "movement", current_player_id=self.state.current_player_id, source=source, targets=list(allocation.keys()))
                     self.state.add_observation(from_id=-1, to_id=-1, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
             else:
                 ## invalid action
-                reason=f"Invalid action. Player {self.state.current_player_id} tried to perform an unknown action."
+                reason=self.m("invalid_move", "invalid_action", current_player_id=self.state.current_player_id)
                 self.state.set_invalid_move(reason=reason)
 
             
@@ -234,7 +182,7 @@ class TakEnv(ta.Env):
         
         if self._check_win(self.state.current_player_id): ## check if the game is over
             ## game is over
-            reason=f"Player {self.state.current_player_id} has connected two opposite edges of the board."
+            reason=self.m("outcome", "winner", current_player_id=self.state.current_player_id)
             self.state.set_winner(player_id=self.state.current_player_id, reason=reason)
 
         result = self.state.step()
