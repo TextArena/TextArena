@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Uwe mwari {player_id} katika Tic Tac Toe ya watu watatu.\nAlama yako ni '{symbol}'.\nUnachukua mabadiliko kuweka alama yako kwenye bamba la 5x5 kuunda mstari wa nne.\nMistari inaweza kuwa ya usawa, wima, au diagonal.\nWasilisha kuhamia kwa kutumia fomu '[4]' ili kuchora seli 4."
+  },
+  "board": {
+    "current_board": "Kibao cha sasa:\n\n{board}\n\nIndangamagumo zinazopatikana: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Uburyo bwo kwimuka budafise agaciro. Koresha \"[cell]\" aho agace ari 0-{max_cell} .",
+    "out_of_range": "Inombolo y'urupapuro idakwiye: {cell}. Itegerezwa kuba iri hagati ya 0 na {max_cell} .",
+    "already_occupied": "Ikiringo {cell} kiramaze gutwarwa.",
+    "made_invalid": "Player {player_id} made an invalid move"
+  },
+  "game_action": {
+    "placed": "Mwari {player_id} anaweka alama yake ({symbol}) kwenye uwanja ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Mwari {player_id} ({symbol}) anashinda!",
+    "draw": "The game is a draw!"
+  }
+}

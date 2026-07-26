@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} ({piece}). Opponent is ({opp}).\nSubmit moves as '[a2 a3]' (from → to).\n- A normal move is one forward step to an adjacent empty vertex.\n- A capture is a jump over an adjacent enemy piece landing on the empty node beyond.\nEach capture yields {score_per_capture} points.\nGame ends after {max_moves} moves or when a player has no legal move."
+  },
+  "board": {
+    "current_board": "Kuhamisha #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "Uburyo bubi. Koresha '[a2 a3]'.",
+    "unknown_square": "Ikibanza kitazwi.",
+    "not_your_piece": "Ntiwibaze ko ari wewe uzoba uwa mbere.",
+    "dest_not_empty": "Aho bagiye si ahantu hatagira abantu.",
+    "illegal": "Gukora ivyo bintu mu buryo butemewe n'amategeko."
+  },
+  "game_action": {
+    "captured": "Mwari {player_id} ameshika kipande! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Umukinyi {player_id} nta bipande afise.",
+    "cannot_move": "Umukinyi {player_id} ntashobora kugenda.",
+    "higher_score": "Ukuronka amanota menshi.",
+    "move_limit": "Umwanya ntarengwa w'ugutambuka urashitse."
+  }
+}

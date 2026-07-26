@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Chopsticks. On your turn, choose one of:\n  + Attack:  '[attack M O]'  where M=your hand (0 or 1), O=opponent hand (0 or 1).\n    - Opponent's hand count increases by your hand; if >=5, it becomes 0.\n  + Split:   '[split L R]'  to redistribute your total fingers into L and R (L+R = your total).\nReply with exactly one of those commands."
+  },
+  "board": {
+    "current_board": "Kibao cha sasa:\nMwari 0: {hands_0}\nMwari 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Ukuboko kwawe {my_idx} kwarapfuye.",
+    "opp_hand_dead": "Ukuboko kw'umwansi {opp_idx} kuba kwatanguye gupfa.",
+    "split_sum": "Uwutawe ategerezwa kuba {total}.",
+    "split_no_change": "Utegerezwa kuba uhinduye ukuntu ukuboko kwawe gukwiragiye.",
+    "invalid_command": "Kusogea kisichohalali. Utumie “[attack M O]” au “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} attacks P{opp_id}’s hand {opp_idx}: it goes from {opp_val} to {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Ukuboko kw'umwansi kwose kwapfuye.",
+    "draw": "Umwanya ntarengwa wo guhindukira warashitse."
+  }
+}

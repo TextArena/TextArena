@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Wewe ni Mwana {player_id} katika Stratego.\nLengo lako ni kuteka Bendera ya mpinzani wako au kuondoa vipande vyote vya kusogea.\nJeshi lako limepangwa kwa ajili yako kwenye bazi, ikijumuisha Bendera yako, Mabomu, na vipande vingine vya ngazi tofauti.\n\n### Maelekezo ya Uchezi\n1. **Kanuni za Kusogea:**\n   - Katika kuzunguka kwako, unaweza kusogea kipande kimoja kwa hatua moja hadi mraba unaokaribiana (juu, chini, kushoto, au kulia) ambao tayari umeshikiliwa na vipande vyako.\n   - Kwa mfano: Kipande kinaweza kusogea kutoka A1 hadi B1 au A1 hadi A2 ikiwa B1 na A2 hazijashikiliwa na vipande vya mchezaji mwenyewe.\n   - Ikiwa kipande kilichochaguliwa ni Bomu au Bendera, hakiwezi kusogezwa.\n2. **Mapigano:**\n   - Ikiwa unasogea kwenye mraba unaokaliwa na kipande cha mpinzani, basi mapigano yatakea:\n     - Kipande cha ngazi ya juu zaidi kinashinda na kuondoa kipande cha mpinzani.\n     - Ikiwa ngazi ziko sawa, vipande vyote viwili vinatolewa kutoka kwenye bazi.\n     - **Kesi Maalum:**\n       - Mabomu huondoa vipande vingi vya kushambulia isipokuwa Migodi, ambayo inaweza kufuta Mabomu.\n       - Spai wanaweza kushinda Mashariki ikiwa Spai hushambulia kwanza lakini kupoteza kwa vipande vingine vyote.\n3. **Malengo ya Kimkakati:**\n   - Tambua vipande vya mpinzani wako kupitia harakati zao na mapigano.\n   - Linda Bendera yako wakati unajaribu kuteka Bendera ya mpinzani wako.\n   - Utumie Skauti kwa njia ya kimkakati ili kupata taarifa kuhusu vipande vya mpinzani wako na kushambulia zile dhaifu.\n\n### Jinsi ya Kufanya Kusogea:\n1. Bainisha kuratibu za kipande unachotaka kusogea na kilelekezo chake.\n2. Utumie fomu: [A0 B0], ambapo A0 ni nafasi ya chanzo, na B0 ni nafasi ya kilelekezo.\n   - Kwa mfano: Ili kusogea kipande kutoka safu 0, safu 0 hadi safu 1, safu 0, ingiza [A0 B0].\n3. Hakikisha kilelekezo ni halali kulingana na kanuni za kusogea zilizo hapo juu.\n\n### Maswali Muhimu:\n- Bazi itaonyesha vipande vyako na nafasi zao, kwa mfano MN, MS.\n- Bazi pia itaonyesha nafasi zinazojulikana za vipande vya mpinzani wako bila kufichua ngazi zao, kwa mfano ?.\n- Gridi zenye ~ ni maziwa na haziwezi kusogezwa.\n- Kama pendekezo, anza mchezo wako kwa kusogea vipande vyako ambavyo viko kwenye mstari wa mbele ili kupata taarifa kuhusu vipande vya mpinzani wako. Mstari wa mbele wa Mwana 0 na Mwana 1 ni safu D na G mtawalia.\n\nHapa kuna hali ya sasa ya bazi:\n"
+  },
+  "board": {
+    "current_board": "Current Board:\n\n{board}\nAvailable Moves: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Umukinyi {player_id} ntiyagize intambwe mu buryo bwa [A0 B0].",
+    "invalid_coordinates": "Uburyo bwo gukora budafise agaciro. Umukinnyi {player_id} ntiyashiramwo ibiharuro bibereye.",
+    "not_own_piece": "Umukinyi {player_id} ategerezwa kwimura kimwe mu bipande vyiwe.",
+    "scout_through_pieces": "Umukinyi {player_id} ntashobora gutwara umusoda mu zindi nkino.",
+    "scout_diagonal": "Umukinyi {player_id} ntashobora kwimura umuskuti mu buryo bw'iburyo.",
+    "non_scout_multi_square": "Ibirwanisho vyose, kiretse ivyo bita abacunguzi gusa, bishobora kwimuka ikibanza kimwe.",
+    "move_into_lake": "Umukinyi {player_id} ntashobora kuja mu kiyaga.",
+    "move_onto_own_piece": "Umukinyi {player_id} ntashobora kuja ku gikoresho ciwe.",
+    "move_bomb_or_flag": "Umukinyi {player_id} ntashobora kwimura bombe canke ibendera."
+  },
+  "game_action": {
+    "you_moved": "Umesogea kipande chako kutoka {source} hadi {dest}.",
+    "opponent_moved": "Umukinyi {player_id} yashize igikoresho ku ruhande rwa {source} mu kibanza ca {dest}.",
+    "you_equal_ranks": "Umesogea kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha mwisho kilikuwa {target_rank}. Kwa kuwa ngazi ziko sawa, vipande vyote viwili vimepotea.",
+    "opponent_equal_ranks": "Mwana {player_id} amesogea kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha mwisho kilikuwa {target_rank}. Kwa kuwa ngazi ziko sawa, vipande vyote viwili vimepotea.",
+    "you_miner_defused": "Umesogea kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha mwisho kilikuwa {target_rank}. Kwa kuwa wana migodi wanaweza kufuta mabomu, umeshinda mapigano.",
+    "opponent_miner_defused": "Mwana {player_id} amesogea kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha mwisho kilikuwa {target_rank}. Kwa kuwa wana migodi wanaweza kufuta mabomu, umepoteza mapigano.",
+    "you_bomb_lost": "Umesogea kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha mwisho kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia sio miner, umepoteza mapigano.",
+    "opponent_bomb_won": "Mwana {player_id} amesogea kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha mwisho kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia sio miner, umeshinda mapigano.",
+    "you_spy_won": "Umesogea kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha mwisho kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia ni spai na kipande cha mwisho ni marshall, umeshinda mapigano.",
+    "opponent_spy_lost": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a spy and the destination is a marshall, you lost the battle.",
+    "you_higher_won": "Umesogea kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha mwisho kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia kina ngazi ya juu zaidi ya kipande cha mwisho, umeshinda mapigano.",
+    "opponent_higher_lost": "Mwana {player_id} amesogea kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha mwisho kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia kina ngazi ya juu zaidi ya kipande cha mwisho, umepoteza mapigano.",
+    "you_lower_lost": "Umesogea kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha mwisho kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia kina ngazi ya chini zaidi ya kipande cha mwisho, umepoteza mapigano.",
+    "opponent_lower_won": "Mwana {player_id} amesogea kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha mwisho kilikuwa {target_rank}. Kwa kuwa kipande cha kushambulia kina ngazi ya chini zaidi ya kipande cha mwisho, umeshinda mapigano."
+  },
+  "outcome": {
+    "flag_captured": "Umukinyi {player_id} yafashe ibendera ry'uwo bahanganye!",
+    "no_movable_pieces": "Mwana {winner_id} anashinda! Mwana {loser_id} hana vipande vya kusogea zaidi."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Kibao cha sasa:\n\n{board}\nMikikio iliyopatikana: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Imirwi yo hagati mu nzu (Pilles) -- ",
+    "pile": "{observation}Kifurushi {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Mtazamo wa Mchezaji {player_id} ---\n",
+    "payoff": "{observation}Kifurushi cha Malipo (Kadi ya Juu): {top_card}, Urefu wa Kifurushi cha Malipo: {payoff_length}\n",
+    "hand": "{observation}Mkono: {hand}\n",
+    "discard": "{observation}Vifurushi vya Taka: {discard}\n",
+    "empty": "Itagira ikintu na kimwe kirimwo."
+  },
+  "game_message": {
+    "no_cards_left": "There are no more cards to draw from. Remember that you can play cards from these sources:\n  1. Your **hand**.\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Umukinnyi {player_id} ntiyishuye n'ingingo yemewe mu nkingi z'imfuruka.",
+    "invalid_play": "Umukinyi {player_id} yagerageje gukina {card} ku murwi wo hagati {index}.",
+    "discard_from_payoff": "Umukinyi {player_id} yagerageje guta ikarata iri mu runganwe rw'amafaranga.",
+    "discard_not_in_hand": "Umukinyi {player_id} yagerageje guta ikarata itari mu kuboko.",
+    "wrong_move_type": "Umukinyi {player_id} ntiyishuye akoresheje umukino w'inyuma."
+  },
+  "game_action": {
+    "you_drew": "Waratwaye udukarata.",
+    "opponent_drew": "Umukinyi {player_id} yarakuye amakarata.",
+    "you_played": "Wakinishije {card} ku murwi wo hagati {index}.",
+    "opponent_played": "Umukinyi {player_id} yakina {card} ku murwi wo hagati {index}.",
+    "you_discarded": "Umeifuta {card} hadi kifurushi cha taka {index}, ambacho pia ina maana kwamba umeimaliza mchezo wako. Hatua zaidi za yako hazizingatiwi kwa mchezo huu. Mchezaji {next_player_id} atacheza mchezo ujao.",
+    "opponent_discarded": "Mchezaji {player_id} amefuta {card} hadi kifurushi cha taka {index}, ambacho pia ina maana kwamba amemaliza mchezo wake. Hatua zaidi za Mchezaji {player_id} hazizingatiwi kwa mchezo huu. Mchezaji {next_player_id}, utacheza mchezo ujao. Tafadhali ingiza hatua yako kwa muundo [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mchezaji {current_player} amemaliza kifurushi cha malipo! Mchezaji {current_player} anashinda!",
+    "deadlock_player_0": "Kufikia kikomo kimefikiwa! Mchezaji 0 anashinda na {player_0_payoff} kadi zimesalia dhidi ya Mchezaji 1 {player_1_payoff} kadi.",
+    "deadlock_player_1": "Kufikia kikomo kimefikiwa! Mchezaji 1 anashinda na {player_1_payoff} kadi zimesalia dhidi ya Mchezaji 0 {player_0_payoff} kadi.",
+    "deadlock_tie": "Kufikia kikomo kimefikiwa na usawa! Wachezaji wote wana {player_0_payoff} kadi zimesalia. Mchezaji {current_player} anashinda kwa kawaida."
+  }
+}
