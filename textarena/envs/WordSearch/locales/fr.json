@@ -1,0 +1,42 @@
+{
+  "_comment": "Localisation française pour Word Search. Les clés (à gauche) sont fixes ; ne traduisez que les valeurs (à droite). Conservez chaque {placeholder} tel quel. Les étiquettes de la grille (R00/C00), les coordonnées et le format d'action entre crochets '[start_row start_col end_row end_col]' ainsi que les exemples comme '[1 1 1 5]' sont NEUTRES et ne doivent pas être traduits. {board} et {words} sont du contenu de jeu neutre. Remarque : dans prompt.intro, l'occurrence '{{player_id}}' est échappée à dessein afin de s'afficher littéralement comme '{player_id}' (conforme au texte d'origine du jeu).",
+  "_slots": {
+    "{player_id}": "Numéro du joueur (entier)",
+    "{mode}": "Libellé du mode de jeu (déjà localisé : Basique/Difficile)",
+    "{tries}": "Nombre de tentatives incorrectes restantes (entier)",
+    "{board}": "La grille rendue (neutre ; ne pas traduire)",
+    "{words}": "Liste des mots cachés séparés par des virgules (tokens neutres)",
+    "{coords}": "Les coordonnées 'start_row start_col end_row end_col' (neutres)",
+    "{word}": "Un mot caché trouvé (token neutre)",
+    "{found}": "Nombre de mots trouvés jusqu'à présent (entier)",
+    "{total}": "Nombre total de mots cachés (entier)",
+    "{pct}": "Pourcentage de mots trouvés (entier)"
+  },
+
+  "prompt": {
+    "mode_basic": "Basique",
+    "mode_hardcore": "Difficile",
+    "intro": "Vous êtes le Joueur {player_id} et vous participez à un défi Word Search en mode {mode}. L'objectif est de trouver et de surligner les mots cachés dans la grille ci-dessous. Les lignes et les colonnes sont numérotées pour votre repère.\n\nVoici l'état actuel de la grille Word Search :\n----------------------------------------\nLes mots que vous avez déjà trouvés sont marqués entre crochets [ ]. Chaque ligne et chaque colonne est numérotée pour plus de clarté.\n\n\nPour localiser un mot, indiquez la ligne et la colonne de sa première et de sa dernière lettre. Notez que les mots sont soit horizontaux, soit verticaux.\nVous pouvez rédiger votre réponse et vos réflexions comme vous le souhaitez. Mais vous ne pouvez soumettre qu'une seule proposition à la fois. Pour vos propositions, utilisez le format '[start_row start_col end_row end_col]'.\nPar exemple, si vous voulez trouver le mot 'HELLO' commençant à la ligne 1, colonne 1 et se terminant à la ligne 1, colonne 5, entrez '[1 1 1 5]'.\n\nConsignes :\n- Chaque proposition doit être unique ; vous ne pouvez pas répéter la même proposition.\n- Il vous reste au total {tries} tentatives incorrectes.\n- L'historique de vos tentatives sera enregistré ci-dessous.\n\nFaites vos propositions avec soin et stratégie. Bonne chance, Joueur {{player_id}} ! Voyons combien de mots vous pouvez trouver !\n"
+  },
+
+  "board": {
+    "state": "Grille actuelle :\n\n{board}\nMots placés : {words}\nTentatives incorrectes restantes : {tries}"
+  },
+
+  "invalid": {
+    "wrong_format": "Format de coup invalide. Le Joueur {player_id} n'a pas répondu avec des 'start_row, start_col, end_row, end_col' valides.",
+    "out_of_range": "Format de coup invalide. Le Joueur {player_id} n'a pas répondu avec des 'start_row, start_col, end_row, end_col' valides.",
+    "already_attempted": "Coup invalide. Cette action a déjà été tentée."
+  },
+
+  "feedback": {
+    "incorrect": "[{coords}] est une tentative incorrecte. Il reste {tries} tentatives incorrectes.",
+    "correct": "[{coords}] est une tentative correcte. Vous avez trouvé le mot '{word}'.",
+    "correct_unknown": "[{coords}] est une tentative correcte, mais le mot ne figure pas parmi les mots placés."
+  },
+
+  "outcome": {
+    "no_tries": "Plus aucune tentative incorrecte restante. Vous avez trouvé {found} mots sur {total} ({pct}%).",
+    "win": "Félicitations ! Vous avez terminé le casse-tête Word Search."
+  }
+}

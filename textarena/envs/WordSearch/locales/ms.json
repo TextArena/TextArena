@@ -1,0 +1,42 @@
+{
+  "_comment": "Penyetempatan Bahasa Melayu untuk Word Search. Kunci (kiri) adalah tetap; terjemah nilai (kanan) sahaja. Kekalkan setiap {placeholder} sebagaimana adanya. Label grid (R00/C00), koordinat dan format tindakan berkurung '[start_row start_col end_row end_col]' serta contoh seperti '[1 1 1 5]' adalah NEUTRAL dan tidak boleh diterjemah. {board} dan {words} ialah kandungan permainan neutral. Nota: dalam prompt.intro, kemunculan '{{player_id}}' sengaja dilepaskan supaya dipaparkan secara literal sebagai '{player_id}' (sepadan dengan teks permainan asal).",
+  "_slots": {
+    "{player_id}": "Nombor pemain (integer)",
+    "{mode}": "Label mod permainan (sudah disetempatkan: Asas/Hardcore)",
+    "{tries}": "Bilangan cubaan salah yang berbaki (integer)",
+    "{board}": "Grid yang dipaparkan (neutral; jangan terjemah)",
+    "{words}": "Senarai perkataan tersembunyi dipisahkan koma (token neutral)",
+    "{coords}": "Koordinat 'start_row start_col end_row end_col' (neutral)",
+    "{word}": "Perkataan tersembunyi yang dijumpai (token neutral)",
+    "{found}": "Bilangan perkataan yang dijumpai setakat ini (integer)",
+    "{total}": "Jumlah keseluruhan perkataan tersembunyi (integer)",
+    "{pct}": "Peratusan perkataan yang dijumpai (integer)"
+  },
+
+  "prompt": {
+    "mode_basic": "Asas",
+    "mode_hardcore": "Hardcore",
+    "intro": "Anda ialah Pemain {player_id}, dan anda menyertai cabaran Word Search dalam mod {mode}. Objektifnya adalah untuk mencari dan menyerlahkan perkataan tersembunyi pada grid di bawah. Baris dan lajur dinomborkan untuk rujukan anda.\n\nBerikut ialah keadaan semasa grid Word Search:\n----------------------------------------\nPerkataan yang telah anda jumpai ditanda dalam kurungan siku [ ]. Setiap baris dan lajur dinomborkan untuk kejelasan.\n\n\nUntuk mencari sesuatu perkataan, nyatakan baris dan lajur huruf permulaan dan huruf akhirnya. Perhatikan bahawa perkataan sama ada melintang atau menegak.\nAnda boleh menaip jawapan dan fikiran anda dalam apa jua cara. Namun anda hanya boleh menghantar satu penyerahan pada satu masa. Untuk penyerahan anda, gunakan format '[start_row start_col end_row end_col]'.\nContohnya, jika anda mahu mencari perkataan 'HELLO' yang bermula di baris 1, lajur 1 dan berakhir di baris 1, lajur 5, masukkan '[1 1 1 5]'.\n\nGaris panduan:\n- Setiap tekaan mesti unik; anda tidak boleh mengulang tekaan yang sama.\n- Anda mempunyai sejumlah {tries} cubaan salah yang berbaki.\n- Sejarah cubaan anda akan direkodkan di bawah.\n\nBuat tekaan anda dengan berhati-hati dan strategik. Semoga berjaya, Pemain {{player_id}}! Mari lihat berapa banyak perkataan yang dapat anda jumpai!\n"
+  },
+
+  "board": {
+    "state": "Grid Semasa:\n\n{board}\nPerkataan Diletakkan: {words}\nCubaan Salah Berbaki: {tries}"
+  },
+
+  "invalid": {
+    "wrong_format": "Format langkah tidak sah. Pemain {player_id} tidak membalas dengan 'start_row, start_col, end_row, end_col' yang sah.",
+    "out_of_range": "Format langkah tidak sah. Pemain {player_id} tidak membalas dengan 'start_row, start_col, end_row, end_col' yang sah.",
+    "already_attempted": "Langkah tidak sah. Tindakan ini telah pun dicuba."
+  },
+
+  "feedback": {
+    "incorrect": "[{coords}] ialah cubaan yang salah. {tries} cubaan salah berbaki.",
+    "correct": "[{coords}] ialah cubaan yang betul. Anda menjumpai perkataan '{word}'.",
+    "correct_unknown": "[{coords}] ialah cubaan yang betul, tetapi perkataan itu tidak ditemui dalam perkataan yang diletakkan."
+  },
+
+  "outcome": {
+    "no_tries": "Tiada lagi cubaan salah yang berbaki. Anda menjumpai {found} daripada {total} perkataan ({pct}%).",
+    "win": "Tahniah! Anda telah menyelesaikan teka-teki Word Search."
+  }
+}
