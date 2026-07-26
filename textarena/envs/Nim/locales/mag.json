@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "आप निम में प्लेयर {player_id} हैं।\nआपका लक्ष्य अंतिम शेष वस्तु लेना है।\nप्रत्येक मोड़ पर, ठीक एक पाइल चुनें और उसमें से एक या एक से अधिक वस्तुएं हटाएं.\n'[pile quantity]' प्रारूप का उपयोग करें, जहां पाइल पाइल सूचकांक है और मात्रा हटाने की वस्तुओं की संख्या है।\nउदाहरण के लिए, '[0 3]' पाइल 0 से 3 वस्तुओं को हटाता है।"
+  },
+  "state": {
+    "current_pile": "वर्तमान ढेर: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "कोई वैध स्थानांतरण प्रारूप ना मिलल. '[pile quantity]' के उपयोग करहु।",
+    "correct_format_wrong_fields": "प्लेयर {player_id}, अमान्य कार्रवाई। कॉलम {col} सीमा से बाहर है।",
+    "out_of_range": "पाइल इंडेक्स {pile_index} सीमा से बाहर हई।",
+    "non_positive": "कम से कम 1 वस्तु के हटावे के चाही।",
+    "exceeds_pile": "Cannot remove {quantity} from pile {pile_index} (only {pile_count} left)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "खिलाड़ी {player_id} अंतिम वस्तु लेलकय !"
+  }
+}

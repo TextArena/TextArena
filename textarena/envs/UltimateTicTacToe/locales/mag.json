@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "वर्तमान बोर्ड: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "चाल के फॉर्म [macro micro] में होवे चाहि जेकरा मे संख्या 0-8 हो।",
+    "out_of_range": "प्रत्येक सूचकांक के 0 अउर 8 के बीच होवे चाहि।",
+    "index_out_of_range": "माइक्रो_बोर्ड, पंक्ति या कॉल सीमा से बाहर हई।",
+    "cell_occupied": "सेल पहले से ही कब्जा कर लेल गेल हई।",
+    "wrong_micro_board": "खिलाड़ी के अगले माइक्रो बोर्ड में खेलना चाहि।",
+    "micro_board_won": "माइक्रो बोर्ड जीत चुकलइ हे ।"
+  },
+  "next_board": {
+    "any": "कोई भी माइक्रो बोर्ड",
+    "specific": "माइक्रो बोर्ड {nxt}"
+  },
+  "game_action": {
+    "played": "प्लेयर {player_id} ने माइक्रो बोर्ड {macro_idx} में, सेल {micro_idx} (पंक्ति {row}, कॉलम {col}) में खेला। प्लेयर {opponent_id} को अब {nxt_txt} में खेलना होगा।"
+  },
+  "outcome": {
+    "win": "खिलाड़ी {player_id} अल्टीमेट टिक टैक टू जीतलय!",
+    "draw": "खेल बराबरी पर चललइ !"
+  }
+}

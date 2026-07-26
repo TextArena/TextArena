@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "आप {role} कर्नल ब्लोटो में हैं।\nआपका लक्ष्य अपने प्रतिद्वंद्वी से अधिक राउंड जीतना है।\nप्रत्येक राउंड में, ठीक {num_total_units} यूनिट को क्षेत्र {field_names} में आवंटित करें।\nजो खिलाड़ी किसी क्षेत्र में अधिक यूनिट आवंटित करता है, वह उस क्षेत्र जीतता है, और जो खिलाड़ी अधिक क्षेत्र जीतता है, वह राउंड जीतता है।\nउदाहरण के लिए, '[A7 B7 C6]' ए में 7 यूनिट, बी में 7 और सी में 6 आवंटित करता है।",
+    "commander_alpha": "कमांडर अलफ़ा.",
+    "commander_beta": "कमांडर बेटा ! \""
+  },
+  "game_state": {
+    "header_round": "=== कर्नल ब्लोटो - राउंड {current_round}/{num_rounds} ===\nराउंड जीते - कमांडर अल्फा: {alpha_score}, कमांडर बीटा: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nराउंड {current_round}\nकमांडर अल्फा आवंटित: {p0_allocations}\nकमांडर बीटा आवंटित: {p1_allocations}\n",
+    "winner_alpha": "{message}विजेता: कमांडर अल्फा",
+    "winner_beta": "{message}विजेता: कमांडर बीटा",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "अवैध इनपुट प्रारूप। उपयोगः ए: 5, बी 10: 10, सी 5:",
+    "invalid_field": "अवैध फ़ील्ड नाम ()) वैध क्षेत्र: {field_names}",
+    "wrong_allocation_value": "All allocations must be non-negative integers.",
+    "incorrect_total_units": "आपको ठीक {num_total_units} यूनिट आवंटित करना होगा। वर्तमान योग: {current_sum}",
+    "good_allocations": "आवंटन अच्छा हइ ।"
+  },
+  "outcome": {
+    "winner_alpha": "कमांडर अल्फा {score_0}-{score_1} जीतता है {num_rounds} राउंड के बाद!",
+    "winner_beta": "कमांडर बीटा {score_1}-{score_0} जीतता है {num_rounds} राउंड के बाद!",
+    "draw": "गेम {score_0}-{score_1} टाई में {num_rounds} राउंड के बाद समाप्त होता है!",
+    "early_winner_alpha": "कमांडर अल्फा {scores_0}-{scores_1} जीतता है (बहुमत हासिल किया गया)!",
+    "early_winner_beta": "कमांडर बीटा {scores_1}-{scores_0} जीतता है (बहुमत हासिल किया गया)!"
+  }
+}

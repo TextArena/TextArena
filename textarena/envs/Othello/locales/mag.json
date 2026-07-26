@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "आप खिलाड़ी {player_id} हैं जो {colour} ({piece}) के साथ ओथेलो का खेल खेल रहे हैं।\nआपका लक्ष्य खेल के अंत में बोर्ड पर अपने रंग के अधिक टुकड़े होना है।\nअपनी बारी में, एक टुकड़ा रखें ताकि यह एक या एक से अधिक विरोधी के टुकड़ों को अपने नए टुकड़े और अपने मौजूदा टुकड़े के बीच में किसी भी दिशा (क्षैतिज, ऊर्ध्वाधर या विकर्ण) में घेर ले। सभी घेरे हुए विरोधी टुकड़े आपके रंग में पलट जाएंगे।\n'[row, col]' प्रारूप में अपनी चाल प्रदान करें।"
+  },
+  "board": {
+    "game_board": "गेम बोर्ड: {board}",
+    "valid_moves": "{observation}\nवैध चालें: {moves}",
+    "no_valid_moves_reset": "{observation} कोई वैध चाल - तोरा छोड़ देवे पड़तो।",
+    "no_valid_moves_step": "{observation} कोई मान्य चाल नञ्, तोरा छोड़ देवे पड़तो।",
+    "scores_reset": "{observation}\nवर्तमान स्कोर - काला: {black_count}, सफेद: {white_count}\n",
+    "scores_step": "{observation}\nस्कोर - काला: {black_count}, सफेद: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "चाल के रूप [row, col] में होवे चाहि।",
+    "illegal": "अवैध चाल. वैध चाल: {valid}"
+  },
+  "game_action": {
+    "skipped": "खिलाड़ी {pid} के अपन बारी छोड़ देवे पड़लई।",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "खिलाड़ी {pid} ({piece}) के पास कोई वैध चाल नहीं है और उन्हें छोड़ना होगा।"
+  },
+  "outcome": {
+    "black_wins": "काला जीत गेलइ {black_count}-{white_count}।",
+    "white_wins": "सफेद जीतता है {white_count}-{black_count}.",
+    "draw": "ड्रा {black_count}-{white_count}."
+  }
+}

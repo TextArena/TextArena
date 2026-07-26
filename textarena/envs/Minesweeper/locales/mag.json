@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are playing the Minesweeper game.\nThe objective of the game is to reveal all cells that do not contain mines.\nTo make a move, simply specify the row and column coordinates you want to reveal using the format:\n- `[row col]`: Reveal the cell at the specified row and column.\nFor example:\n- `[3 2]` to reveal the cell in Row 3, Column 2.\n- `[5 6]` to reveal the cell in Row 5, Column 6.\nOn your first move, you will reveal an area around the cell you choose to ensure a safe start.\nThe current board layout is shown below. Cells that are unrevealed are represented by a dot ('.'), revealed numbers show the count of adjacent mines.\nBe mindful not to choose already revealed cells.\nHere is the current board layout:\n"
+  },
+  "board": {
+    "game_board": "गेम बोर्ड: {board}",
+    "current_board": "वर्तमान बोर्ड: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "वर्ग कोष्ठक में मान्य निर्देशांक के साथ अपने प्रतिक्रिया न देले रहथिन।",
+    "out_of_bounds": "निर्दिष्ट पंक्ति अउर स्तंभ निर्देशांक सीमा के बाहर हई।",
+    "already_revealed": "({row}, {col}) पर सेल पहले से ही उजागर किया जा चुका है।",
+    "hit_mine": "तुमने ({row}, {col}) पर एक माइन मारा है।"
+  },
+  "game_action": {
+    "revealed": "तुमने ({row}, {col}) पर सेल को उजागर किया है।"
+  },
+  "outcome": {
+    "win": "बधाई हो, आप सफलतापूर्वक माइन्सवीपर बोर्ड के माध्यम से हल कर चुके हैं।",
+    "turn_limit": "वक्र सीमा तक पहुँच गेल हई। अपने सफलतापूर्वक सुरक्षित कक्ष के {percent}% उजागर कर लेले छथिन।"
+  }
+}
