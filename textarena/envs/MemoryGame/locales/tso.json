@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id}. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched."
+  },
+  "board": {
+    "current_board": "Khodi ya sweswi: {board}",
+    "current_game_board": "Xitsonga: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Player {player_id} did not respond with a valid direction in square brackets.",
+    "out_of_bounds": "Ku famba loku nga riki enawini. Mutlangi {player_id} u hlawule ndhawu leyi a yi ri ehandle ka ntlangu wa bolo ya milenge.",
+    "same_card_twice": "Ku famba loku nga riki enawini. Mutlangi {player_id} u hlawule khadi leri fanaka kambirhi.",
+    "already_matched": "Ku famba loku nga riki enawini. Mutlangi {player_id} u hlawula khadi rin'we kumbe hamambirhi lama ana se ma hlanganisiweke."
+  },
+  "game_message": {
+    "cards_match": "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
+    "cards_no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+  },
+  "outcome": {
+    "draw": "Vatlangi havambirhi va hlanganise nhlayo leyi fanaka ya tikhadi.",
+    "win": "Mutlangi {winner_id} u hlurile!",
+    "turn_limit": "Muvhigo wa turn u katisiwile. Gema ri vule. Player 0 u tsale {score_0} point, Player 1 u tsale {score_1} point.",
+    "turn_limit_win": "{reason} Player {winner_id} has won!"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "U ni Mkuruleni {player_id} katika Stratego.\nLengo lako ni kuteka bendera ya mkuruleni wako au kuondoa bhokisi zote za kuhama za wapinzani wako.\nJeshi lako limepangwa kwa ajili yako kwenye bhoza, ikijumuisha bendera yako, mabomu, na bhokisi nyinginezo za ngazi tofauti.\n\n### Miongozo ya Uchezi\n1. **Kanuni za Kuhama:**\n   - Katika kugeuza kwako, unaweza kuhama bhokisi moja kwa hatua moja hadi mraba jirani (juu, chini, kushoto, au kulia) ambao tayari umeshikiliwa na bhokisi zako.\n   - Mfano: Bhokisi inaweza kuhama kutoka A1 hadi B1 au A1 hadi A2 ikiwa B1 na A2 hazijashikiliwa na bhokisi za mchezaji mwenyewe.\n   - Ikiwa bhokisi iliyochaguliwa ni bomu au bendera, haiwezi kuhamishwa.\n2. **Mapigano:**\n   - Ikiwa utahamia mraba uliokaliwa na bhokisi ya mpinzani, basi mapigano yatakea:\n     - Bhokisi yenye ngazi ya juu inashinda na kuondoa bhokisi ya mpinzani.\n     - Ikiwa ngazi zinafanana, bhokisi zote mbili zinaondolewa kutoka kwenye bhoza.\n     - **Matukio Maalum:**\n       - Mabomu huondoa bhokisi nyingi za kushambulia isipokuwa wafanyakazi, ambao wanaweza kufuta mabomu.\n       - Wajasusi wanaweza kushinda jenerali ikiwa jaso hushambulia kwanza lakini kupoteza kwa bhokisi nyingine zote.\n3. **Malengo ya Uchezi:**\n   - Tambua bhokisi za mpinzani wako kupitia harakati na mapigano yao.\n   - Linda bendera yako wakati unajaribu kuteka bendera ya mpinzani wako.\n   - Utumie watafiti kwa mkakati ili kupata taarifa kuhusu bhokisi za mpinzani wako na kushambulia zile dhaifu.\n\n### Jinsi ya Kufanya Hamsha:\n1. Bainisha kuratibu za bhokisi unayotaka kuihamisha na kilele chake.\n2. Utumie fomu: [A0 B0], ambapo A0 ni nafasi ya chanzo, na B0 ni nafasi ya kufika.\n   - Mfano: Ili kuhama bhokisi kutoka safu 0, safu 0 hadi safu 1, safu 0, ingiza [A0 B0].\n3. Hakikisha kilele ni halali kulingana na kanuni za kuhama zilizo hapo juu.\n\n### Maswali Muhimu:\n- Bhoza itaonyesha bhokisi zako na nafasi zao, kwa mfano MN, MS.\n- Bhoza pia itaonyesha nafasi zinazojulikana za bhokisi za mpinzani wako bila kufichua ngazi zao, kwa mfano ?.\n- Gridi zenye ~ ni maziwa na haziwezi kuhamishwa.\n- Kama pendekezo, anza mchezo wako kwa kuhama bhokisi zako zilizo kwenye mistari ya mbele ili kupata taarifa kuhusu bhokisi za mpinzani wako. Mstari wa mbele wa mkuruleni 0 na mkuruleni 1 ni safu D na G mtawalia.\n\nHapa kuna hali ya sasa ya bhoza:\n"
+  },
+  "board": {
+    "current_board": "Bhoza ra Lebhoza:\n\n{board}\nMaviseni ya Kufana: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Fomete ya xiendlo leyi nga tirhiki. Mutlangi {player_id} a nga nghenisanga ku famba hi fometi ya [A0 B0] .",
+    "invalid_coordinates": "Fomete ya xiendlo leyi nga tirhiki. Mutlangi {player_id} a nga nghenisanga tikhodinatara leti faneleke.",
+    "not_own_piece": "Muxaka wa xiendlo lexi nga riki na ntikelo. Mutlangi {player_id} u fanele ku fambisa xin'wana xa swiphemu swa yena n'wini.",
+    "scout_through_pieces": "Invalid action format. Player {player_id} cannot move a scout through other pieces.",
+    "scout_diagonal": "Invalid action format. Player {player_id} cannot move a scout diagonally.",
+    "non_scout_multi_square": "Swivumbeko swa xiendlo a swi tirhi. Swirho, handle ka vakamberi va nga famba hi xikwere xin'we ntsena nkarhi wun'wana ni wun'wanyana.",
+    "move_into_lake": "Invalid action format. Player {player_id} cannot move into the lake.",
+    "move_onto_own_piece": "Muxaka wa xiendlo lexi nga tirhiki. Mutlangi {player_id} a nge swi koti ku ya eka xiphemu xa yena n'wini.",
+    "move_bomb_or_flag": "Muxaka wa xiendlo lexi nga tirhiki. Mutlangi {player_id} a nge swi koti ku fambisa bomo kumbe mujeko."
+  },
+  "game_action": {
+    "you_moved": "Umehamisha bhokisi yako kutoka {source} hadi {dest}.",
+    "opponent_moved": "Mkuruleni {player_id} wa tuma bhokisi kutoka {source} hadi {dest}.",
+    "you_equal_ranks": "Umehamisha bhokisi yako kutoka {source} hadi {dest}. Bhokisi ya kushambulia ilikuwa {attacking_rank} na bhokisi ya kufika ilikuwa {target_rank}. Kwa kuwa ngazi zinafanana, bhokisi zote mbili zilipotea.",
+    "opponent_equal_ranks": "Mkuruleni {player_id} wa tuma bhokisi kutoka {source} hadi {dest}. Bhokisi ya kushambulia ilikuwa {attacking_rank} na bhokisi ya kufika ilikuwa {target_rank}. Kwa kuwa ngazi zinafanana, bhokisi zote mbili zilipotea.",
+    "you_miner_defused": "Umehamisha bhokisi yako kutoka {source} hadi {dest}. Bhokisi ya kushambulia ilikuwa {attacking_rank} na bhokisi ya kufika ilikuwa {target_rank}. Kwa kuwa wafanyikazi wanaweza kufuta mabomu, ulishinda mapigano.",
+    "opponent_miner_defused": "Mkuruleni {player_id} wa tuma bhokisi kutoka {source} hadi {dest}. Bhokisi ya kushambulia ilikuwa {attacking_rank} na bhokisi ya kufika ilikuwa {target_rank}. Kwa kuwa wafanyikazi wanaweza kufuta mabomu, ulipoteza mapigano.",
+    "you_bomb_lost": "Umehamisha bhokisi yako kutoka {source} hadi {dest}. Bhokisi ya kushambulia ilikuwa {attacking_rank} na bhokisi ya kufika ilikuwa {target_rank}. Kwa kuwa kishambuliaji sio mhudumu, ulipoteza mapigano.",
+    "opponent_bomb_won": "Mkuruleni {player_id} wa tuma bhokisi kutoka {source} hadi {dest}. Bhokisi ya kushambulia ilikuwa {attacking_rank} na bhokisi ya kufika ilikuwa {target_rank}. Kwa kuwa kishambuliaji sio mhudumu, ulishinda mapigano.",
+    "you_spy_won": "Umehamisha bhokisi yako kutoka {source} hadi {dest}. Bhokisi ya kushambulia ilikuwa {attacking_rank} na bhokisi ya kufika ilikuwa {target_rank}. Kwa kuwa kishambuliaji ni jaso na kufika ni jenerali, ulishinda mapigano.",
+    "opponent_spy_lost": "Mkuruleni {player_id} wa tuma bhokisi kutoka {source} hadi {dest}. Bhokisi ya kushambulia ilikuwa {attacking_rank} na bhokisi ya kufika ilikuwa {target_rank}. Kwa kuwa kishambuliaji ni jaso na kufika ni jenerali, ulipoteza mapigano.",
+    "you_higher_won": "Umehamisha bhokisi yako kutoka {source} hadi {dest}. Bhokisi ya kushambulia ilikuwa {attacking_rank} na bhokisi ya kufika ilikuwa {target_rank}. Kwa kuwa kishambuliaji ni ngazi ya juu zaidi ya kufika, ulishinda mapigano.",
+    "opponent_higher_lost": "Mkuruleni {player_id} wa tuma bhokisi kutoka {source} hadi {dest}. Bhokisi ya kushambulia ilikuwa {attacking_rank} na bhokisi ya kufika ilikuwa {target_rank}. Kwa kuwa kishambuliaji ni ngazi ya juu zaidi ya kufika, ulipoteza mapigano.",
+    "you_lower_lost": "Umehamisha bhokisi yako kutoka {source} hadi {dest}. Bhokisi ya kushambulia ilikuwa {attacking_rank} na bhokisi ya kufika ilikuwa {target_rank}. Kwa kuwa kishambuliaji ni ngazi ya chini zaidi ya kufika, ulipoteza mapigano.",
+    "opponent_lower_won": "Mkuruleni {player_id} wa tuma bhokisi kutoka {source} hadi {dest}. Bhokisi ya kushambulia ilikuwa {attacking_rank} na bhokisi ya kufika ilikuwa {target_rank}. Kwa kuwa kishambuliaji ni ngazi ya chini zaidi ya kufika, ulishinda mapigano."
+  },
+  "outcome": {
+    "flag_captured": "Mutlangi {player_id} u teke mujeko wa nala!",
+    "no_movable_pieces": "Mkuruleni {winner_id} anashinda! Mkuruleni {loser_id} hana bhokisi zaidi za kuhama."
+  }
+}

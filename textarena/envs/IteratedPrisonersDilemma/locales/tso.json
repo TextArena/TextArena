@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "Kuxoxa ku sukeliwe ku rounding {round}. N'wena, ndza ku respond na '[Cooperate]' or '[Defect]' laha misava yi nga yi boxiwe {{}}.",
+    "starting_round": "--- Ku sungula ka Nxaxamelo {round} ---",
+    "round_summary": "Mafhungo ya rounding {round}:\n{outcome}\nPlayer 0 u vekelele {r0} (mungu {score_0}), Player 1 u vekelele {r1} (mungu {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "Draw! Both players scored {s0}.",
+    "round_both_cooperate": "Vatlangi havambirhi va tirhisanile.",
+    "round_both_defect": "Vatlangi havambirhi va balekile.",
+    "round_p0_cooperates_p1_defects": "Mutlangi wa 0 u tirhisanile na vona, mutlangi 1 a nga tshembekanga.",
+    "round_p0_defects_p1_cooperates": "Mutlangi wa 0 u hlanukile, mutlangi 1 a tirhisana."
+  }
+}

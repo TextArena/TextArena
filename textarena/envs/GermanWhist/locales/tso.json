@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Mchezo huanza. Suti ya kufunga: {trump_suit} (kadi ya kufunga: {trump_str}).",
+    "no_trump_card": "a yi kona"
+  },
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Whist ya Kijerumani.\n{phase_info}\nUshikiliaje {hand_size} makadi.\nCheza kadi kwa '[play N]', ambapo N ni nafasi yake katika mkono wako (kwa mfano '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "A ku na khadi leri nga kona - nkarhi wo tlanga wu sungurile.",
+    "deck_empty": "Xiphepherhele a xi na nchumu - ku hava khadi leri nga kona.",
+    "available": "Khadi leri nyikeriwaka: {card}",
+    "available_trump": "Khadi leri nyikeriweke: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Tirhisa '[play N]' ku tlanga khadi ra Nth leri u nga na rona.",
+    "bad_position": "Xiyimo xexo xa khadi a xi kona. U na {hand_size} wa makhadi.",
+    "must_follow_suit": "U fanele u landzela xikombiso xa yena kutani u tlanga khadi ra {lead_suit}.",
+    "invalid_play": "That card cannot be played."
+  },
+  "game_action": {
+    "played": "Mutlangi {player_id} u tlange hi {card}."
+  },
+  "trick": {
+    "won": "Mutlangi {winner_id} u hlula hi ku tirhisa {card}.",
+    "won_learning": "Mchezaji {winner_id} anashinda mkwaju huo na {card} na kuchukua kadi iliyo wazi."
+  },
+  "phase": {
+    "learning_complete": "Xiyenge xo dyondza xi herile - rhengu rin'wana ni rin'wanyana leri seleke ra pfuna eku hluleni."
+  },
+  "draw": {
+    "winner_received": "You won the trick and received {card}.",
+    "loser_received": "You lost the trick and drew {card} from the deck.",
+    "winner_preview": "Khadi leri landzelaka i {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Mikwaju iliyoshinda hadi sasa - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
+    "scores_playing": "Mikwaju ya kufunga - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
+    "phase": "Xiyenge: {phase}",
+    "phase_learning": "Mzunguko: {phase} ({remaining_cards} makadi yamesalia katika sitaha)"
+  },
+  "hand": {
+    "no_cards": "A ku na makhadi.",
+    "no_cards_in_hand": "No cards in hand",
+    "header": "Voko ra wena:",
+    "trump_indicator": "(TRUMP) Xana u nga swi tsakela ku va ni munghana wo tano?",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "A ku si va ni makhadi lama tlangeke hi ndlela leyi.",
+    "header": "Maendlelo ya sweswi:",
+    "trump_indicator": "(TRUMP) Xana u nga swi tsakela ku va ni munghana wo tano?",
+    "card_line": "{observation}\n  Mchezaji {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Ntlangu a wu sunguriwanga",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nMzunguko: {phase}",
+    "trump_suit": "{observation}\nSuti ya kufunga: {trump_suit}",
+    "trump_card": "{observation}\nKadi ya kufunga: {card}",
+    "cards_left": "{observation}\nKari ya makadi a masikiwa: {count}",
+    "next_card": "{observation}\nKadi inayofuata kwa mshindi: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Vuxisi bya sweswi:",
+    "trump_indicator": "(TRUMP) Xana u nga swi tsakela ku va ni munghana wo tano?",
+    "trick_line": "{observation}\n  Mchezaji {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nMchezaji {player_id}: {scoring} mikwaju ya kufunga ({tricks} jumla), {hand_size} makadi katika mkono"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

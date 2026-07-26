@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Xitirhisiwa xa ntlangu: {board}",
+    "valid_moves": "{observation}\nValid moves: {moves}",
+    "no_valid_moves_reset": "{observation}\nNo valid moves - you may have to skip.",
+    "no_valid_moves_step": "{observation} Ku hava magoza lama nga tirhisiwaka u fanele ku tshika.",
+    "scores_reset": "{observation}\nMakontiri ya sasa - Black: {black_count}, White: {white_count}\n",
+    "scores_step": "{observation}\nMakontiri - Black: {black_count}, White: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Ku rhurha ku fanele ku va ka xivumbeko xa [row, col].",
+    "illegal": "Ku famba loku nga riki enawini. ku famba lokunene: {valid}"
+  },
+  "game_action": {
+    "skipped": "Mutlangi {pid} u boheke ku tlula nkarhi wa yena.",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Mutsari {pid} ({piece}) a na tivhiko leti vuriwaka na a fanele a tiva."
+  },
+  "outcome": {
+    "black_wins": "Vantima va hlula {black_count}-{white_count}.",
+    "white_wins": "Valungu va hlula {white_count}-{black_count}.",
+    "draw": "Draw {black_count}-{white_count}."
+  }
+}

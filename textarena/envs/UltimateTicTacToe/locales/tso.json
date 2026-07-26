@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Khodi ya sweswi: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ku rhurha ku fanele ku va hi xivumbeko xa [macro micro] na tinomboro 0-8.",
+    "out_of_range": "Tinhlayo ta kona ti fanele ku va exikarhi ka 0 na 8.",
+    "index_out_of_range": "Xiphephana lexi nge micro_board, row kumbe col xi le handle ka ndhawu leyi faneleke.",
+    "cell_occupied": "Se ku ni munhu la tshamaka exitokisini xa mina.",
+    "wrong_micro_board": "Mutlangi u fanele a tlanga eka bodo leyitsongo leyi landzelaka.",
+    "micro_board_won": "Bodo ya swithongwana ana se yi hluriwile."
+  },
+  "next_board": {
+    "any": "khodi yin'wana ni yin'we leyitsongo",
+    "specific": "khodi ya xikhale {nxt}"
+  },
+  "game_action": {
+    "played": "Mfiri {player_id} u tirele ku micro board {macro_idx}, seli {micro_idx} (xihloko {row}, kolona {col}). Mfiri {opponent_id} a fanele ku tirha kona hi {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Mutlangi {player_id} u hlula eka Ultimate Tic Tac Toe!",
+    "draw": "Ntlangu wu ve na ku ringana!"
+  }
+}
