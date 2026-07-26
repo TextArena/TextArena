@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "Komandan Alfa. (Pengusaha)",
+    "commander_beta": "Komandan Beta iyae ro."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRonde {current_round}\nCommander Alpha mengalokasikan: {p0_allocations}\nCommander Beta mengalokasikan: {p1_allocations}\n",
+    "winner_alpha": "{message}Pemenang: Panglima Alpha",
+    "winner_beta": "{message}Pemenang: Komandan Beta",
+    "tie": "{message}Tie! (Kurang lebih dari satu)"
+  },
+  "invalid_move": {
+    "wrong_format": "Format input de'na valid. Pakkeguna: A:5, B:10, C:5",
+    "invalid_field": "Aseng lapangang de'nacooco. Lapang iya cocoe: {field_names}",
+    "wrong_allocation_value": "Sininna attuntukeng waji' mancaji bilangang makkalepu tennia-negatif.",
+    "incorrect_total_units": "Andi harus alokasikan tepat {num_total_units} unit. Jumlah saat ini: {current_sum}",
+    "good_allocations": "Assibagengeng makessing."
+  },
+  "outcome": {
+    "winner_alpha": "Commander Alpha menang {score_0}-{score_1} setelah {num_rounds} ronde!",
+    "winner_beta": "Commander Beta menang {score_1}-{score_0} setelah {num_rounds} ronde!",
+    "draw": "Game ends in a {score_0}-{score_1} tie after {num_rounds} rounds!",
+    "early_winner_alpha": "Commander Alpha menang {scores_0}-{scores_1} (mayoritas tercapai)!",
+    "early_winner_beta": "Commander Beta menang {scores_1}-{scores_0} (mayoritas tercapai)!"
+  }
+}

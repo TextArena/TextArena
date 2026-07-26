@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pamain {player_id} yang bermain permainan Pig Dice.\n\nAturan:\n- Pada giliran Anda, Anda dapat '[roll]' atau '[hold]'\n- Menggulir 2-6: Tambahkan ke total giliran Anda\n- Menggulir 1: Rugi total giliran dan akhiri giliran\n- Megang: Tambahkan total giliran ke skor Anda dan akhiri giliran\n- Yang pertama mencapai {winning_score} poin menang\n\nKetika giliran Anda, Anda akan melihat skor saat ini dan total giliran.\nTanggapi dengan '[roll]' untuk menggulir dadu atau '[hold]' untuk menabung poin Anda."
+  },
+  "invalid_move": {
+    "invalid_action": "Format aksi tidak valid. Gunakan '[roll]' atau '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Player {player_id} busted, losing {turn_total} points!",
+    "player_hold": "Pamain {player_id} megang dan menabung {turn_total} poin."
+  },
+  "board": {
+    "player": "Pamain 0: '{score_0}'; Pamain 1: '{score_1}'",
+    "current_total_scores": "Total skor iya makkokkoe: {scores} total giliranmu iyanaritu {turn_total}.",
+    "roll_history": "{observation}\nRiwayat lemparan Anda untuk giliran ini: {roll_history}",
+    "first_roll": "{observation} Iyanae gulung pammulangna giliranmu.",
+    "available_actions": "{observation}\nAksi yang tersedia: '[roll]' atau '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Pamain {winner_id} menang dengan memiliki skor lebih tinggi pada batas giliran ({scores})",
+    "winner_by_score": "Pamain {winner_id} menang dengan mencapai skor target {winning_score}!",
+    "draw": "Watang giliranna pura ri cappu na sininna tau maccule e mappunai skor pappada: {scores}"
+  }
+}
