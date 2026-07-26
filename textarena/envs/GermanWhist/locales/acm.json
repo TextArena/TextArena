@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "تبدأ اللعبة. Trump Suit: {trump_suit} (Trump Card: {trump_str}).",
+    "no_trump_card": "لا شيء."
+  },
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في لعبة German Whist.\n{phase_info}\nتمسك بـ {hand_size} بطاقات.\nالعب بطاقة بـ '〕[play N]'، حيث N هو موضعها في يدك (على سبيل المثال '〕[play 3]').",
+    "phase_learning": "مرحلة التعلم: الفائز في كل خدعة يأخذ البطاقة المفتوحة والخاسر يلتقط الورقة اللاحية من الطابق. لا تُحسب الخدعات التي تمكنت منها خلال هذه المرحلة للفوز.",
+    "phase_playing": "مرحلة اللعب: الطابق استنفد. كل خدعة من الان فصاعداً تَحْسِب للفوز."
+  },
+  "next_card": {
+    "playing_phase": "ماكو بطاقة عقدت-- مرحلة اللعب بدأت.",
+    "deck_empty": "الدبّار فارغ - لا بطاقة في العرض.",
+    "available": "بطاقة في العرض: {card}",
+    "available_trump": "بطاقة عرض: {card} (ترامب)"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Use '[play N]' to play the Nth card in your hand.",
+    "bad_position": "موقف البطاقة هذا غير موجود. تملك بطاقات {hand_size} .",
+    "must_follow_suit": "لازم تتبعوه وتلعب بطاقة {lead_suit}.",
+    "invalid_play": "لا يُمكن نَلْعِب هذي البطاقة."
+  },
+  "game_action": {
+    "played": "لاعب {player_id} لَعِبْتُ {card}."
+  },
+  "trick": {
+    "won": "اللاعب {winner_id} يفوز بالدور مع {card}.",
+    "won_learning": "اللاعب {winner_id} يفوز بالدور مع {card} ويتحصل على البطاقة المواجهة."
+  },
+  "phase": {
+    "learning_complete": "الدبّار مُنهك. مرحلة التعلُّم انتهت - كل خدعة متبقية تَحْسِب للنصر."
+  },
+  "draw": {
+    "winner_received": "انت ربحت الحيلة و تلقيت {card}.",
+    "loser_received": "ضيعت الخدعة و سحبت {card} من الطابق.",
+    "winner_preview": "البطاقة التالية المقدمة هي {card}."
+  },
+  "turn": {
+    "board": "〕{phase}\n〕{scores}\n〕{next_card}\n\n〕{trick}\n\n〕{hand}",
+    "scores_learning": "نقاط الفوز حتى الآن - اللاعب 0: {tricks0}، اللاعب 1: {tricks1}",
+    "scores_playing": "نقاط الفوز - اللاعب 0: {tricks0}، اللاعب 1: {tricks1}",
+    "phase": "المرحلة: {phase}",
+    "phase_learning": "المرحلة: {phase} (〕{remaining_cards} بطاقات متبقية في Deck)"
+  },
+  "hand": {
+    "no_cards": "لا بطاقات.",
+    "no_cards_in_hand": "ماكو بطاقات في اليد.",
+    "header": "يَدُك:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}〕{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "لا كروت لعبت بعد هذي الحيلة.",
+    "header": "خدعة حالية:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "〕{observation}\n  اللاعب {player_id}: {card}〕{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Game not started",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nالمرحلة: {phase}",
+    "trump_suit": "{observation}\nTrump suit: {trump_suit}",
+    "trump_card": "{observation}\nبطاقة Trump: {card}",
+    "cards_left": "{observation}\nCards left in deck: {count}",
+    "next_card": "{observation}\nالبطاقة التالية للفائز: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} الحيلة الجارية:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  اللاعب {player_id}: {card}〕{trump_indicator}",
+    "player_line": "{observation}\nPlayer {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} cards in hand"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}
