@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "Niyprawidłowy format akcyje. Akcyjo powinna być we ôkładkach.",
+    "no_closing_bracket": "Niyprawidłowy format akcyje. Brakuje ôkłŏdki kōńcowyj \"]\"",
+    "empty_command": "Puste polecenie. Wpisz \"draw\" abo \"move <source> <destination> [count]\".",
+    "empty_action": "Prōzno akcyjo",
+    "move_needs_args": "Kōmandyjo przesuwanio wymogo zdrzōdła i cylu. Użycie: \"przenosić <źrōd> <cyla> [count]\"",
+    "count_positive": "Liczba musi być dodatnio abo \"wszyscy\"",
+    "count_invalid": "Niyprawidłowe liczenie. Użyj liczby abo \"wszyscy\"",
+    "unknown_command": "Nieznana komenda '{cmd}'. Użyj 'draw', 'move <source> <destination> [count]', lub 'forfeit'",
+    "wrapped": "Akcja {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Akcja {n}: {msg}",
+    "before_failure": "Wykōnowane {n} akcyje przed awariōm.",
+    "failed": "Akcja {n} nie powiodła się: {msg}"
+  },
+  "move_result": {
+    "drew": "Z kartki do magazynu na odpady.",
+    "cannot_draw": "Niy idzie wyciōngnōńć, niy ma ani zapasōw, ani ôchłōd.",
+    "invalid_pile": "Niyprawidłowo nazwa szpile. Użyj W, F1-F4 abo T1-T7",
+    "foundation_one_card": "Możecie przenosić ino 1 karta do podstawy.",
+    "waste_to_foundation_ok": "Przenoszōnŏ karta z ôdpadu do fundamyntu F{dst}",
+    "waste_to_foundation_bad": "Niy idzie przeniyś karty do tygōw z fundacyjōm. 🔍",
+    "tableau_to_foundation_ok": "Przeniesiono kartę z talii T{src} do fundamentu F{dst}",
+    "tableau_to_foundation_bad": "Niy idzie przeniyś karty tabulkowyj do tego stōlu fundamyntu. 🔍",
+    "foundation_to_foundation": "Niy idzie przechodzić z fundamyntu do fundamentu.",
+    "waste_to_tableau_one_card": "Może przenosić ino 1 karta z ôszkodowanio do tabulki.",
+    "waste_to_tableau_ok": "Przenoszōnŏ karta z ôdpadu do tabeli T{dst}",
+    "waste_to_tableau_bad": "Niy idzie złożyć karty na tym kupie tabulōw. 🔍",
+    "no_face_up": "Żŏdne karty do przesuwaniŏ.",
+    "tableau_to_tableau_ok": "Przeniesiono {count} kart(y) z talii T{src} do T{dst}",
+    "tableau_to_tableau_bad": "Nie można przenieść {count} kart(y) z T{src} do T{dst}",
+    "foundation_to_tableau_one_card": "Może przenosić ino 1 karta z fundamyntu na tabulka.",
+    "foundation_empty": "Fundacyjo F{src} je prōzno.",
+    "foundation_to_tableau_ok": "Przeniesiono kartę z fundamentu F{src} do talii T{dst}",
+    "foundation_to_tableau_bad": "Niy idzie złożyć karty fundamyntu na tabula T{dst}",
+    "to_waste_or_stock": "Niy idzie przenosić do ôdpadu abo zapasu."
+  },
+  "outcome": {
+    "forfeit": "Gra przegrywano. Wynik kōńcowy: {score} karty we fundamyntach.",
+    "won": "Gratulujymy, wygraliście w Klondike Solitaire!",
+    "turn_limit": "Koniec gry! Osiągnąłeś maksymalną liczbę {max_turns} tur. Wynik: {score} kart w fundamentach."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Tura: {turn}/{max_turns}",
+    "stock": "Stok: {stock} kartōw",
+    "waste": "Ôpady (W): {waste}",
+    "foundations_header": "Fundacyje:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabulka:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

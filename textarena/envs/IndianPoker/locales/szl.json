@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Gracza {player_id} w grze w pokera indyjskiego.\n- Talia 52 kart; widzisz tylko kartę przeciwnika.\n- Ante {ante} żeton(ów) każdej rundy, {max_rounds} rund(y) łącznie.\n- Ważne ruchy: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X to dodatnia liczba całkowita <= twojego stanu konta.)\n- Najwyższa ukryta karta wygrywa pot w showdown.\n"
+  },
+  "round": {
+    "announce": "### Runda {current_round}/{max_rounds}\nKarta twojego przeciwnika to: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Daj dokładnie JEDENŃ action w nawiasach, np. '[check]', '[bet 2]', '[call]', '[raise 3]', lub '[fold]'.",
+    "cannot_check": "Niy mogesz [check] - stojesz przed zakładym.",
+    "amount_min": "Wielgość zakładu/podwyżki musi być ≥ 1.",
+    "cannot_bet": "Nie możesz [bet] - musisz [call] / [raise] / [fold].",
+    "nothing_to_call": "Nic do wzywanio; możecie zamiast tego [check].",
+    "no_bet_to_raise": "Użyj [bet X] do ôtwarciŏ; niy ma stawiyniŏ, co by było podwyższōne.",
+    "insufficient": "Niy styknie tych żetonōw na ta akcyjo."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (koszt {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Twoje możebne akcyje: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Gracza {winner}. (Bankroll P0:{p0}, P1:{p1})",
+    "folded": "Gracz {player_id} ôdciep.",
+    "showdown_win": "Showdown: {card_win} bije {card_lose}.",
+    "showdown_tie": "Showdown tie: both {card}. Pot split – each receives {split}."
+  },
+  "outcome": {
+    "p0_wins": "Gracza 0 wygrywa ({bank0} > {bank1})",
+    "p1_wins": "Gracza 1 wygrywa ({bank1} > {bank0})",
+    "draw": "Rōwne żetōngi po kołach."
+  }
+}

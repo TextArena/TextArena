@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "The game begins. Trump suit: {trump_suit} (trump card: {trump_str}).",
+    "no_trump_card": "żodyn niy ma"
+  },
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} we Whista Niymieckim.\n{phase_info}\nTrzymasz {hand_size} karty.\nZagraj kartã z '[play N]', gdzi N jeji pozycyjŏ we twojij ręce (na przykłŏd '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "Kożdy szpil ôd terozka liczy sie do zwyciynstwa."
+  },
+  "next_card": {
+    "playing_phase": "Żodnyj karty niy ma - faza gry sie zaczła.",
+    "deck_empty": "Balk je pusty - żodnyj karty niy ma.",
+    "available": "Kartka ôfertowano: {card}",
+    "available_trump": "Kartka na ôfercie: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Niyprawidłowy format ruchu. Użyj \"[play N]\" do ôdegranianio n-tej karty we twojij rynce.",
+    "bad_position": "Ta pozycyjo karty niy istniyje. Trzimej {hand_size} karty.",
+    "must_follow_suit": "Trza sie za nim wziōnś i zagrać {lead_suit} karta.",
+    "invalid_play": "Tyn kartã niy idzie zagrać."
+  },
+  "game_action": {
+    "played": "Gracz {player_id} zagrał w grze {card}."
+  },
+  "trick": {
+    "won": "Gracz {winner_id} wygrywo sztuczka z {card}.",
+    "won_learning": "Gracz {winner_id} wygrywa sztyngaj z {card} i bierze odkrytõ kartã."
+  },
+  "phase": {
+    "learning_complete": "Faza nauki je kōńczōno - kożdy ôstatni sztuczek liczy sie do zwyciynstwa."
+  },
+  "draw": {
+    "winner_received": "Wygrałeś sztuczka i dostoł żeś {card}.",
+    "loser_received": "Przegrałeś sztuczka i wyciōngnōł żeś {card} z kōnsek.",
+    "winner_preview": "Nastympno karta to {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Sztyngaje wygrane dotąd - Gracz 0: {tricks0}, Gracz 1: {tricks1}",
+    "scores_playing": "Sztyngaje punktowe - Gracz 0: {tricks0}, Gracz 1: {tricks1}",
+    "phase": "Faza: {phase}",
+    "phase_learning": "Faza: {phase} (〕{remaining_cards} kart sztyngały)"
+  },
+  "hand": {
+    "no_cards": "Bez kartōw.",
+    "no_cards_in_hand": "No cards in hand",
+    "header": "Your hand:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Żodyn jeszcze niy grał w te karty.",
+    "header": "Teroźny sztuczek:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Gracz {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Gra niy napoczła sie.",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nFaza: {phase}",
+    "trump_suit": "{observation}\nKolor: {trump_suit}",
+    "trump_card": "{observation}\nKarta koloru: {card}",
+    "cards_left": "{observation}\nKarty sztyngały: {count}",
+    "next_card": "{observation}\nNastępna karta dla wygranych: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation} Terŏźny sztuczek:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Gracz {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nGracz {player_id}: {scoring} sztyngajůw (〕{tricks} łącznie), {hand_size} kart we ręku"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

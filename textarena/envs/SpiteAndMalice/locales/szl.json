@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Aktualno płyta:\n\n{board}\nDostępne posunięcia: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Środkowe Piylki -- ",
+    "pile": "{observation}Stos {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Widok Gracza {player_id} ---\n",
+    "payoff": "{observation}Stos wypłaty (górna karta): {top_card}, Długość stosu wypłaty: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Stosy odrzuceń: {discard}\n",
+    "empty": "Pustŏ."
+  },
+  "game_message": {
+    "no_cards_left": "Niy ma już kart do wyciōnganio. Pamiyntejcie, iże idzie grać z tych zdrzōdł: 1. Twoja **rōma** 2. Gōrno karta twojigo szpile wypłat** 3. Gōrna karta kożdego ze twojich ôdkludzōnych szpilōw**. "
+  },
+  "invalid_move": {
+    "wrong_format": "Niyprawidłowy format ruchu. Gracz {player_id} niy ôdpowiōł prawidłym ruchem w nawiōnzanych klamrōwkach.",
+    "invalid_play": "Błędne posunięcie. Gracz {player_id} próbował zagrać {card} na stosie centralnym {index}.",
+    "discard_from_payoff": "Niyważne ôdciepniynie. Gracz {player_id} prōbowoł ôddŏwać karta z kupy wypłat.",
+    "discard_not_in_hand": "Niyważne ôdciepniynie. Gracz {player_id} prōbowoł ôddŏwać karta, co niy ma w rynce.",
+    "wrong_move_type": "Niyprawidłowy typ ruchu. Gracz {player_id} niy ôdpowiadoł prawidłym rodzinnym ruchem."
+  },
+  "game_action": {
+    "you_drew": "Tyś wyciōngnōł karty.",
+    "opponent_drew": "Gracz {player_id} wyciōngnōł karty.",
+    "you_played": "Zagraliście {card} na środkowym stōnie {index}.",
+    "opponent_played": "Player {player_id} played {card} on center pile {index}.",
+    "you_discarded": "Odrzuciłeś {card} do stosu odrzuceń {index}, co oznacza, że zakończyłeś swoją turę. Nie będą brane pod uwagę żadne dalsze działania twoje w tej turze. Gracz {next_player_id} będzie następny.",
+    "opponent_discarded": "Gracz {player_id} odrzucił {card} do stosu odrzuceń {index}, co oznacza, że zakończył swoją turę. Nie będą brane pod uwagę żadne dalsze działania Gracza {player_id} w tej turze. Gracz {next_player_id}, twoja kolej. Wprowadź swoją akcję w formacie [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Gracz {current_player} wyczyścił swój stos wypłaty! Gracz {current_player} wygrywa!",
+    "deadlock_player_0": "Zakończono remis! Gracz 0 wygrywa z {player_0_payoff} kartami pozostałymi w stosie w porównaniu z {player_1_payoff} kartami Gracza 1.",
+    "deadlock_player_1": "Zakończono remis! Gracz 1 wygrywa z {player_1_payoff} kartami pozostałymi w stosie w porównaniu z {player_0_payoff} kartami Gracza 0.",
+    "deadlock_tie": "Zakończono remis z remisem! Obaj gracze mają {player_0_payoff} kart pozostałych. Gracz {current_player} wygrywa domyślnie."
+  }
+}

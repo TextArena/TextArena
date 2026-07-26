@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing a game of Pig Dice.\n\nRules:\n- On your turn, you can either '[roll]' or '[hold]'\n- Roll a 2-6: Add to your turn total\n- Roll a 1: Lose turn total and end turn\n- Hold: Add turn total to your score and end turn\n- First to {winning_score} points wins\n\nWhen it's your turn, you'll see the current scores and turn total.\nRespond with '[roll]' to roll the die or '[hold]' to bank your points."
+  },
+  "invalid_move": {
+    "invalid_action": "Nieprawidłowy format akcji. Użyj '[roll]' lub '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Gracza {player_id} wykluczono, tracąc {turn_total} punkty!",
+    "player_hold": "Gracza {player_id} trzyma i wpłaca {turn_total} punkty."
+  },
+  "board": {
+    "player": "Gracz 0: '{score_0}'; Gracz 1: '{score_1}'",
+    "current_total_scores": "Aktualne wyniki: {scores} Twoje aktualne sumy rund to {turn_total}.",
+    "roll_history": "{observation}\nTwoja historia ruchów w tym turze: {roll_history}",
+    "first_roll": "{observation} To je piyrszy rōłz twojij kolejki.",
+    "available_actions": "{observation}\nDostępne akcje: '[roll]' lub '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Gracza {winner_id} wygrał, mając wyższy wynik na limicie tury ({scores})",
+    "winner_by_score": "Gracza {winner_id} wygrał, osiągając docelowy wynik {winning_score}!",
+    "draw": "Ôgraniczynie rundy je ôsiōngniynte, a wszyjscy gracze majōm taki sōm wynik: {scores}"
+  }
+}

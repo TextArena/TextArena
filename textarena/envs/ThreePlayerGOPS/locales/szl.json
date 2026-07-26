@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Three-Player GOPS.\n- You hold the 13 cards A-K (each exactly once).\n- Each round a prize is revealed. Submit ONE card like `[Q]`, `[10]`, `[2]` …\n- Highest card wins the prize (+ any carry-over pot). Ties roll the prize into the next round.\n- After 13 rounds, highest total wins. Invalid moves = elimination."
+  },
+  "round": {
+    "header": "### Runda {round}/13 - Nagroda: {prize} (warta {worth})",
+    "hand": "Twoja ôstała rynka: {hand}"
+  },
+  "reveal": {
+    "win": "Licyncyje  {bids} - Gracz {winner} wygrywo {pot}.",
+    "tie": "Licyncyje  {bids} - remis, pot terozki {pot}.",
+    "scores": "Wyniki → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "Akcyjo potrzebuje karty we nawiōnzaniu, jak \"[Q]\"",
+    "bad_card": "karta już użyto abo niyważno"
+  },
+  "elimination": {
+    "player": "Gracz {pid} wykluczony po wielokrotnych niyważnych ruchach."
+  },
+  "outcome": {
+    "auto_win": "Dwóch eliminacyjnych graczōw - automatyczne wygrane.",
+    "final": "Ôstatnie wyniki: {scores}"
+  }
+}

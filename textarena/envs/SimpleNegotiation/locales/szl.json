@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczu {player_id} w Grze Negocjacyje.\nMająś jakieś surowce, a twoim zadaniem je handlować tak, coby łątna wartość twojich surowców wzrosła.\nSurowce i przypisane wartości, które teraz mająś, to:\n\t+ {resource_value_list}\nPrzy każdej turze, możesz pogwodzić śe ze swojim przeciwnikem i złożyć propozycję handlu.\nUżywaj następujących specjalnych tokenów do działań:\n  - '[Oferta: 3 Owce, 2 Rudy -> 5 Cegły, 2 Owce]': [Oferta: Zaoferowane Surowce -> Żądane Surowce]\n  - '[Accept]': Coby przyjąć nadchodzącą ofertę.\n  - '[Deny]': Coby odrzucić nadchodzącą ofertę (domyślnie).\nGra trwa {max_turns} tury w sumie."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Gracz prōbowoł zaakceptować wymiana bez posiadanie potrzebnych zasobōw.",
+    "out_of_range": "Gracza {player_id}, Niyżładne działanie. Kolumna {col} wykraczauje poza granice.",
+    "already_full": "Gracza {player_id}, Niyżładne działanie. Kolumna {col} je już zajęta.",
+    "proposing_with_no_resource": "Gracz {player_id} prōbowoł złożyć ôferta handlowo bez posiadanie potrzebnych zasobōw.",
+    "incorrect_offer_format": "Gracz {player_id} złożył oferta handlowo we niypoprawnym formie.",
+    "no_new_offer": "Gracz {player_id} niy złożył żŏdnyj nowyj ôferty handlowej."
+  },
+  "offers": {
+    "reject": "Gracz {player_id} ôdciepōł ôferta handlowo.",
+    "accept": "Gracz {acceptor_id} zaakceptowoł ôferta handlowo ôd gracza {proposer_id}.",
+    "proposal": "Gracza {player_id} złożył następującą propozycję Graczu {opponent_id}: Zaoferowane przedmioty: {offered} -> Żądane przedmioty: {requested}"
+  },
+  "outcome": {
+    "win": "Gracz {winner_id} wygroł, bo mioł srogszy przidzień w wercie zapasōw.",
+    "draw": "Ta sama zmiana w wartości zapasōw dlo wszyjskich graczōw."
+  }
+}

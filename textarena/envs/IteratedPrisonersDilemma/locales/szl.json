@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w wielorundowym Dylemacie Więźnia trwającym {num_rounds} rund.\n\nStruktura gry:\n- Przed każdą decyzją masz {total_conversation_rounds} tury na swobodną komunikację.\n- Po tym, obaj gracze jednocześnie wybierają współpracę lub zdradę.\n\nMacierz wypłat (stała w każdej rundzie):\n- Obydwaj współpracują ➜ każdy {cooperate_reward}\n- Obydwaj zdradzają ➜ każdy {mutual_defect_reward}\n- Jeden zdradza, jeden współpracuje ➜ Zdrajca {defect_reward}, Współpracownik {sucker_reward}\n\nJak grać:\n- Podczas rozmowy: wpisz dowolny tekst.\n- Podczas fazy decyzji: dołącz '[Cooperate]' lub '[Defect]' (bez względu na wielkość liter). Możesz dodać dodatkowy tekst przed lub po tokenie."
+  },
+  "phases": {
+    "conversation_finished": "Rozmowa skończona dla rundy {round}. Proszę odpowiedzieć '[Cooperate]' lub '[Defect]' w ramach \\boxed{{}}.",
+    "starting_round": "--- Runda ôd poczōntku {round} ---",
+    "round_summary": "Wyniki rundy {round}:\n{outcome}\nGracz 0 zarobił {r0} (łącznie {score_0}), Gracz 1 zarobił {r1} (łącznie {score_1})."
+  },
+  "outcome": {
+    "winner": "Gracza {winner} wygrywa {win_score} - {lose_score}.",
+    "draw": "Ôba gracze strzelili {s0}.",
+    "round_both_cooperate": "Ôba gracze spōłpracowali.",
+    "round_both_defect": "Both players defected.",
+    "round_p0_cooperates_p1_defects": "Gracz 0 spōłpracowoł, gracz 1 uciyk.",
+    "round_p0_defects_p1_cooperates": "Gracz 0 uciyk, gracz 1 spōłpracowoł."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id}. Grajesz w Grę Pamięciową.\nTwoim celem jest znaleźć więcej par kart na planszy, niż twój przeciwnik.\nNa twojej turze, wybierz dwie karty do odwrócenia, wpisując numery wiersza i kolumny pierwszej i drugiej karty odpowiednio, jak '[0 1 1 0]', gdzie pierwsza karta jest w wierszu 0 i kolumnie 1, a druga karta jest w wierszu 1 i kolumnie 0.\nJeśli dwie karty się zgadzają, dostajesz punkt i karty pozostają odwrócone. Jeśli nie się zgadzają, karty są odwrócone z powrotem do góry, np. '.'.\nGra kończy się, gdy wszystkie pary zostaną znalezione."
+  },
+  "board": {
+    "current_board": "Aktualnŏ tabulka: {board}",
+    "current_game_board": "Aktualnŏ tabula szpilōw: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Niyprawidłowy format ruchu. Gracz {player_id} niy ôdpowiadoł prawidłym kerōnkym w nawiōnzanych klamrōwkach.",
+    "out_of_bounds": "Niyważny ruch. Gracz {player_id} ôbrał pozycyjo poza granicōm placu.",
+    "same_card_twice": "Niyważny ruch. Gracz {player_id} ôbrał ta sama karta dwa razy.",
+    "already_matched": "Niyważny ruch. Gracz {player_id} ôbrał jedna abo dwie karty, co już były dopasowane."
+  },
+  "game_message": {
+    "cards_match": "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
+    "cards_no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+  },
+  "outcome": {
+    "draw": "Ôba gracze ôdgadli ta sama liczba par kart.",
+    "win": "Gracz {winner_id} wygrał!",
+    "turn_limit": "Osiągnięto limit tur. Gra się skończyła. Gracz 0 zdobył {score_0} punktów, Gracz 1 zdobył {score_1} punktów.",
+    "turn_limit_win": "{reason} Gracz {winner_id} wygrał!"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} we Nim.\nTwoim celem je wziōnci ostatni pozostōły obiekt.\nNa każdym geście, wybierz dokładnie jedną słupę i wyjmij jeden abo więcej obiektōw z niej.\nUżywaj formatu '[pile quantity]', gdzie słupa je indeks słupy a ilość je liczba obiektōw do wyjmowania.\nNa przykład, '[0 3]' wyjmujōm 3 obiekty ze słupy 0."
+  },
+  "state": {
+    "current_pile": "Aktualnŏ szpilka: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Niy znŏdli prawego formatu przesuwaniŏ. Użyj \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Gracza {player_id}, ňywałne działanie. Słupa {col} je poza granicōm.",
+    "out_of_range": "Indeks szpile {pile_index} je poza zakresym.",
+    "non_positive": "Trza ôdewrzić co nojmynij 1 przedmiot.",
+    "exceeds_pile": "Niy możno wyjmować {quantity} ze słupy {pile_index} (zostało tylko {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Gracz {player_id} wziōn ôstatni przedmiot!"
+  }
+}
