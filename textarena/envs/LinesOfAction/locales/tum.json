@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "Komiti: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Mtundu wake uyenera kukhala e2e4 (kuchokera,to coordinates).",
+    "no_piece": "Palije {side} cinthu pa {coord}.",
+    "identical": "Malo agho ghakufumira na uko kukuya ni ghamoza.",
+    "not_straight_or_diagonal": "Move must be straight or diagonal.",
+    "wrong_distance": "Must move distance equal to pieces in line.",
+    "enemy_blocks": "Enemy piece blocks the path.",
+    "destination_own": "Ŵakaŵa na malo ghekha agho ŵakalutanga."
+  },
+  "game_action": {
+    "moved": "Mwami {player_id} wakonzeka {from} -> {to}",
+    "captured_suffix": "Mwami {player_id} wakonzeka {from} -> {to} wakapata mwamuna wa mkonzi."
+  },
+  "outcome": {
+    "win": "Vinthu vyose vili kulengeka.",
+    "draw_no_capture": "Ŵakaŵa na malundi 60 kweni ŵakaŵasanga yayi.",
+    "draw_repetition": "Ŵakaweleraso katatu."
+  }
+}

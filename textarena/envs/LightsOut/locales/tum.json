@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Karibu kwenye Lights Out! Una gridi ya {size}x{size} ya taa.\nLengo lako ni kuzima TAA ZOTE (zinazowakilishwa na '.')\nUnapobofya taa, hubadilisha yenyewe NA jirani zake za karibu (juu/chini/kushoto/kulia).\nAndika [row col] kubofya taa (0-indexed, kwa hivyo anuwai halali ni 0-{max_index}).\nUna misogezo {max_turns} ya kufikia ili kutatua puzzle.\nMaelezo: 'O' = taa IKIMWAGA, '.' = taa IMEZIMWA"
+  },
+  "board": {
+    "current_state": "Hali ya sasa ya gridi (Mwendo {moves_made}, {moves_left} misogezo iliyobaki, {completion}% iliyojazwa):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Chiwerengero cha zilembo chiyenera kukhala mu mtundu wa [row col] pomwe mzere ndi ndime zili pakati pa 0 mpaka {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Wawa, watonda mu nthowa ya {moves_used}!",
+    "loss": "Mchezo umemaliza! Umeitumia misogezo yote {max_turns} bila kutatua puzzle. Ukamilishaji wa mwisho: {completion}%\nHali ya mwisho:\n{grid}"
+  }
+}

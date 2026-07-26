@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Munthu uyo wakakhumbanga kugura vinthu ivi wakaŵa kuti walije ndalama zakukwana.",
+    "out_of_range": "Mwini {player_id}, Nthabwala yosatila. Koloni {col} ili ku mphaka.",
+    "already_full": "Mwini {player_id}, Nthabwala yosatila. Koloni {col} ili ndi anthu.",
+    "proposing_with_no_resource": "Woseŵera {player_id} wakayezga kuti wapeleke ndalama kwambura kuŵa na vinthu vyakukhumbikwa.",
+    "incorrect_offer_format": "Player {player_id} made a trade offer in an incorrect format.",
+    "no_new_offer": "Player {player_id} made no new trade offer."
+  },
+  "offers": {
+    "reject": "Woseŵera {player_id} wakakana kusinthana.",
+    "accept": "Wosewera {acceptor_id} adavomera kusinthana kuchokera kwa wosewerayo {proposer_id}.",
+    "proposal": "Mwini {player_id} anachita ulongozi kwa Mwini {opponent_id}: Zinthu zofunzidwa: {offered} -> Zinthu zotengedwa: {requested}"
+  },
+  "outcome": {
+    "win": "Wosewera {winner_id} adawina chifukwa chopeza phindu lalikulu pamtengo wamasheya.",
+    "draw": "Same change in inventory value for all players. Draw."
+  }
+}
