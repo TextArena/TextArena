@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing a game of Pig Dice.\n\nRules:\n- On your turn, you can either '[roll]' or '[hold]'\n- Roll a 2-6: Add to your turn total\n- Roll a 1: Lose turn total and end turn\n- Hold: Add turn total to your score and end turn\n- First to {winning_score} points wins\n\nWhen it's your turn, you'll see the current scores and turn total.\nRespond with '[roll]' to roll the die or '[hold]' to bank your points."
+  },
+  "invalid_move": {
+    "invalid_action": "صيغة الإجراء غير صالحة. استخدم '[roll]' أو '[hold]'."
+  },
+  "actions": {
+    "player_busted": "اللاعب {player_id} خسر، وفقد {turn_total} نقطة!",
+    "player_hold": "اللاعب {player_id} يحتفظ ويدخر {turn_total} نقطة."
+  },
+  "board": {
+    "player": "اللاعب 0: '{score_0}'؛ اللاعب 1: '{score_1}'",
+    "current_total_scores": "الدرجات الإجمالية الحالية: {scores}\nإجمالي دورك الحالي هو {turn_total}.",
+    "roll_history": "{observation}\nتاريخ لفّاتك في هذا الدور: {roll_history}",
+    "first_roll": "{observation}\nهذا هو الدور الأول من دورك.",
+    "available_actions": "{observation}\nالإجراءات المتاحة: '[roll]' أو '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "اللاعب {winner_id} فاز بالحصول على درجة أعلى عند حد الدور ({scores})",
+    "winner_by_score": "اللاعب {winner_id} فاز بالوصول إلى الدرجة الهدف {winning_score}!",
+    "draw": "حد التحول وصل وكل اللاعبين عندهم نفس النتيجة: {scores}"
+  }
+}

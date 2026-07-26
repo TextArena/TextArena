@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} ({piece}). Opponent is ({opp}).\nSubmit moves as '[a2 a3]' (from → to).\n- A normal move is one forward step to an adjacent empty vertex.\n- A capture is a jump over an adjacent enemy piece landing on the empty node beyond.\nEach capture yields {score_per_capture} points.\nGame ends after {max_moves} moves or when a player has no legal move."
+  },
+  "board": {
+    "current_board": "الخطوة #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "شكل سيء. استخدم \"[a2 a3]\".",
+    "unknown_square": "مربع مجهول.",
+    "not_your_piece": "المصدر ليس قطعتك.",
+    "dest_not_empty": "وجهتك مش فارغة.",
+    "illegal": "حركة غير قانونية."
+  },
+  "game_action": {
+    "captured": "اللاعب {player_id} ألتقط قطعة! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "لاعب {player_id} ليس لديه قطع.",
+    "cannot_move": "لاعب {player_id} لايمكن يتحرك.",
+    "higher_score": "احصل على درجة اكبر من التقاط.",
+    "move_limit": "حد الحركة وصل."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في معضلة السجين المتكررة التي تمتد ل {num_rounds} جولة.\n\nهيكل اللعبة:\n- قبل كل قرار لديك {total_conversation_rounds} دورات للتواصل بحرية.\n- بعد ذلك، يختار كلا اللاعبين في نفس الوقت التعاون أو الخيانة.\n\nمصفوفة المكافآت (ثابتة في كل جولة):\n- كلاهما يتعاونان ➜ كل واحد {cooperate_reward}\n- كلاهما يخونان ➜ كل واحد {mutual_defect_reward}\n- أحدهما يخون والآخر يتعاون ➜ الخائن {defect_reward}، المتعاون {sucker_reward}\n\nكيف تلعب:\n- خلال المحادثة: اكتب أي نص تريد.\n- خلال مرحلة القرار: أدرج '[Cooperate]' أو '[Defect]' (حساسة لحالة الحروف). يمكنك إضافة نص إضافي قبل/بعد العلامة."
+  },
+  "phases": {
+    "conversation_finished": "انتهت المحادثة للجولة {round}. يرجى الرد ب '[Cooperate]' أو '[Defect]' في المربع {{}}.",
+    "starting_round": "--- الجولة الاولى {round} --",
+    "round_summary": "نتائج الجولة {round}:\n{outcome}\nاللاعب 0 حصل على {r0} (المجموع {score_0})، اللاعب 1 حصل على {r1} (المجموع {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "تعادل! كلا اللاعبين سجلا {s0}.",
+    "round_both_cooperate": "كلا اللاعبين تعاونوا.",
+    "round_both_defect": "كلا اللاعبين انشقوا.",
+    "round_p0_cooperates_p1_defects": "اللاعب صفر تعاون، واللاعب واحد انشق.",
+    "round_p0_defects_p1_cooperates": "اللاعب صفر هرب، واللاعب واحد تعاون."
+  }
+}
