@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Chopsticks. On your turn, choose one of:\n  + Attack:  '[attack M O]'  where M=your hand (0 or 1), O=opponent hand (0 or 1).\n    - Opponent's hand count increases by your hand; if >=5, it becomes 0.\n  + Split:   '[split L R]'  to redistribute your total fingers into L and R (L+R = your total).\nReply with exactly one of those commands."
+  },
+  "board": {
+    "current_board": "Bodi Lililo:\nMchezaji 0: {hands_0}\nMchezaji 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Kw'oko kwaku {my_idx} kũi thayũ.",
+    "opp_hand_dead": "Mkono wa mpinzani {opp_idx} tayari umekufa.",
+    "split_sum": "Kugawanya lazima kiwe jumla ya {total}.",
+    "split_no_change": "No nginya Split ethĩwe aatĩanĩe na kĩla ũvangĩte.",
+    "invalid_command": "Hatua batili. Tumia “[attack M O]” au “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} anashambulia mkono wa P{opp_id} {opp_idx}: unatoka {opp_val} hadi {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Kwosana na ũndũ ũmanyi witũ wa mĩtũkĩ wĩana, nĩ laisi mũno mũndũ akavĩta.",
+    "draw": "Tũlũlũmĩlye ũtwi witũ wa kũendeea kũkitana na mũisyo ũsu kwa nzĩa nzeo."
+  }
+}

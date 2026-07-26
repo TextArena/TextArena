@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "Kĩlungu kya mũonza: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Mĩandĩko nĩyaĩle kwĩthĩwa yĩ mĩaonĩ ya \"e2 e4\" (kuma,kũka) na \"coordinates\".",
+    "no_piece": "Hakuna kipande cha {side} kwenye {coord}.",
+    "identical": "Kĩsese kĩla kĩthĩawa vau vamwe na vala mũndũ ũtwaĩte valũa no nginya ikethĩwa iilyĩ oou.",
+    "not_straight_or_diagonal": "No nginya wĩkale ũatĩĩe nzĩa ĩla ũkwenda kũthi nayo.",
+    "wrong_distance": "No nginya tũsũanĩe ũndũ tũtonya kwĩka nĩ kana mĩsoa ĩsu yĩkaneene nesa.",
+    "enemy_blocks": "Andũ ala mavĩtĩte nĩmeesĩ nzĩa ĩla ĩtonya kũvikĩwa.",
+    "destination_own": "Mũndũũme ũmwe aĩ na kĩthũi kĩnene."
+  },
+  "game_action": {
+    "moved": "Mchezaji {player_id} alihamia {from} -> {to}",
+    "captured_suffix": "Mchezaji {player_id} alihamia {from} -> {to} akivizia adui."
+  },
+  "outcome": {
+    "win": "Maũndũ asu onthe nĩmakonanĩtye.",
+    "draw_no_capture": "Ĩmwe ĩte ĩvũĩ, na ĩswii!",
+    "draw_repetition": "Ĩtambya ya kelĩ: Mbee ĩsiwa na yĩngĩ."
+  }
+}
