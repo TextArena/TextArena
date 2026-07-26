@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "ཁྱེད་མི་སྣ་{player_id} ཡིན་པས་གསུམ་མི་རྩེ་མོ་ལ་རྩེད་མོ་འཁྲབ་པ་ཡིན。\nཁྱེད་ཀྱི་རྟགས་མ་'{symbol}'ཡིན།\nཁྱེད་ཀྱིས་རྒྱུན་ལྡན་གྱི་འགུལ་སྐྱོད་ཀྱི་སྟེང་དུ་རྟགས་མ་བཞག་ནས་ཤིང་སྟར་བཞི་ཡི་ཐིག་བཟོ་བ་ཡིན。\nཐིག་དེ་ཐོག་ཏུ་ཡོད་པ་དང་འོག་ཏུ་ཡོད་པ་དང་གཡས་གཡོན་དུ་ཡོད་པ་ཡིན།\nཁྱེད་ཀྱི་འགུལ་སྐྱོད་བཀོད་སྟངས་'[4]' བྱས་ཏེ་འཁོད་ས་བཞི་པ་བཀོད་པ་ཡིན"
+  },
+  "board": {
+    "current_board": "དཀར་འཇམ་གྱི་བོད།:\n\n{board}\n\nརྒྱུན་ལྡན་གྱི་འགུལ་སྐྱོད།: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "འདྲ་གཟུགས་སྤོ་རྒྱུ་དེ་མི་མཐུན་པ་རེད་འདུག ཁང་མིག་ནི་ 0-{max_cell}ཡིན་ན་ \"[cell]\" ལག་ལེན་འཐབ་དགོས།",
+    "out_of_range": "མི་འཇགས་པའི་འཁོད་ས་གྲངས།: {cell}。 ༠ དང་{max_cell} བར་དག་ཡིན་དགོས",
+    "already_occupied": "Cell {cell} is already occupied.",
+    "made_invalid": "རྩེད་འགྲན་པ་ {player_id} གིས་བྱ་རིམ་སྐྱོན་ཅན་ཞིག་བཟོས་པ།"
+  },
+  "game_action": {
+    "placed": "མི་སྣ་{player_id} གིས་རྟགས་མ་{symbol} འཁོད་ས་{row}、{col} ལ་བཞག"
+  },
+  "outcome": {
+    "win": "མི་སྣ་{player_id} （{symbol}）རྒྱལ་ཁ་ཐོབ་པ་ཡིན",
+    "draw": "The game is a draw!"
+  }
+}

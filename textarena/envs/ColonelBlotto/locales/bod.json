@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "སྟོང་དཔོན་ཨལ་ཕཱ་།",
+    "commander_beta": "དམག་དཔོན་པེ་ཊ་ལགས།"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nརྒྱུགས་{current_round}\nམགོ་འཛིན་ཨལ་ཕ་ལ་{p0_allocations}\nམགོ་འཛིན་བེ་ཏ་ལ་{p1_allocations}\n",
+    "winner_alpha": "{message}རྒྱལ་རབས། དམག་དཔོན་ཨལ་ཕཱ་།",
+    "winner_beta": "{message}རྒྱལ་རབས། དམག་དཔོན་པེ་ཊ་ (Beta)",
+    "tie": "{message}བཅིངས་འགྲོལ་!"
+  },
+  "invalid_move": {
+    "wrong_format": "ནང་འཇུག་བྱེད་ལམ་ལུགས་དེ་མི་མཐུན་པས། ལག་ལེན་: A:5 དང་ B:10 དང་། C:5",
+    "invalid_field": "མི་འཇོག་པའི་མིང་གཞི། འཇོག་པའི་མིང་གཞི་: {field_names}",
+    "wrong_allocation_value": "All allocations must be non-negative integers.",
+    "incorrect_total_units": "ཁྱེད་ཀྱིས་སྒྲིག་སྟངས་དང་མཉམ་པའི་{num_total_units} སྟོང་ཕྲག་གཅིག་བཟོས་དགོས། དེང་གི་མཉམ་འབྲེལ་: {current_sum}",
+    "good_allocations": "བགོ་བཀྲམ་ལེགས་པོ་ཡོད།"
+  },
+  "outcome": {
+    "winner_alpha": "མགོ་འཛིན་ཨལ་ཕ་{score_0}-{score_1} རྒྱུགས་{num_rounds} འཕྲོ་བར་!",
+    "winner_beta": "Commander Beta wins {score_1}-{score_0} after {num_rounds} rounds!",
+    "draw": "རྩེ་མོ་{score_0}-{score_1} གྱི་མཉམ་འབྲེལ་རྒྱུགས་{num_rounds} འཕྲོ་བར་!",
+    "early_winner_alpha": "མགོ་འཛིན་ཨལ་ཕ་{scores_0}-{scores_1} (མང་ཚོགས་ཀྱི་དབང་ཐང་ཐོབ་པ་)!",
+    "early_winner_beta": "མགོ་འཛིན་བེ་ཏ་{scores_1}-{scores_0} (མང་ཚོགས་ཀྱི་དབང་ཐང་ཐོབ་པ་)!"
+  }
+}

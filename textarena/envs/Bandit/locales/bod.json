@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "You are in a room with {num_buttons} buttons: {buttons}. Each button is associated with a Bernoulli distribution with a fixed but unknown mean; the means for the buttons could be different.\nFor each button, when you press it, you will get a reward that is sampled from associated distribution.\nYou have {num_turns} time steps and, on each time step, you can choose any button and receive the reward.\nYour goal is to strategically choose buttons at each time step to collect information about their reward distribution, that will let you choose the button with the highest mean reward correctly at the end of {num_turns} turns."
+  },
+  "board": {
+    "stat_line": "{button}: {reward} ({count} གསུམ་བྱས་)",
+    "summary": "{stats}ཡིག་གཟུགས་:"
+  },
+  "invalid_move": {
+    "wrong_format": "རྩེད་འགྲན་པ་དེས་བྱ་སྤྱོད་ཀྱི་རྣམ་གྲངས། འདྲ་མིན་གྱི་ལན་འདེབས་བྱས་མེད།",
+    "invalid_button": "ནུས་མེད་ཀྱི་སྒྲོམ་འདེམས་པ་འདུག། 🔍"
+  },
+  "game_action": {
+    "pressed": "ཁྱེད་{button} སྦུག་བཏུམ་པ་དང་{reward} གྱི་རྒྱུ་འབྱུང་ཐོབ་"
+  },
+  "game_message": {
+    "final_decision": "You have exhausted your budget for trying out different choices and observe their rewards. Now make a deduction about what the best choice is."
+  },
+  "outcome": {
+    "win": "བསྟོད་ཚོགས། ཁྱོད་ཀྱིས་གདམ་ཁ་དྲང་པོ་བྱས་འདུག།",
+    "lose": "ཁྱོད་ཀྱིས་གདམ་ཁ་མི་འོས་པའི་སྒམ་ཞིག་འདེམས་པ་ཡིན།"
+  }
+}

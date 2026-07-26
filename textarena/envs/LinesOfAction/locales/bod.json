@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "{board} ཚོགས་ཆུང་།"
+  },
+  "invalid_move": {
+    "wrong_format": "ཚད་གཞི་ནི་ e2e4 (from,to coordinates) ཡིན་དགོས།",
+    "no_piece": "{side} གི་རྟ་{coord} ན་མེད།",
+    "identical": "འབྱུང་ཁུངས་དང་གནས་ཁ་འདྲ་མཚུངས་ཡིན།",
+    "not_straight_or_diagonal": "འགྲོ་བ་ནི་དྲང་པོ་ཡང་ན་ ཟུར་ཐིག་གི་དགོས་ངེས་ཡིན།",
+    "wrong_distance": "ཕྲ་རིང་ནི་ཐིག་ཁྲམ་ནང་ཡོད་པའི་དུམ་བུ་དང་མཚུངས་པར་སྤོ་དགོས།",
+    "enemy_blocks": "དགྲ་བོའི་མཚོན་ཆ་གིས་ལམ་བཀག་འདུག།",
+    "destination_own": "ཕྱོགས་སྟོན་་་་ གཙོ་ངོས།\" རྩོམ་རིག\" རང་མོས། \"རང་ལུས་མེར་བསྲེགས་ཀྱི་འགྲན་སྡུར།"
+  },
+  "game_action": {
+    "moved": "མི་ཟེར་{player_id} གཞུག་{from} -> {to}",
+    "captured_suffix": "མི་ཟེར་{player_id} གཞུག་{from} -> {to} དགྲ་རྟ་ཞིག་བཟུང་སྟེག"
+  },
+  "outcome": {
+    "win": "ཚང་མ་མཉམ་དུ་སྦྱར་བ་རེད།",
+    "draw_no_capture": "༦༠ ཐེངས་གཅིག་ཀྱང་མི་འཛིན་པར་འགྲོ་བཞིན་ཡོད།",
+    "draw_repetition": "གནས་སྟངས་ཐེངས་གསུམ་ལ་བསྐྱར་དུ་འབད།"
+  }
+}

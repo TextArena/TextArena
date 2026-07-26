@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "རྩེད་སྒྲོམ་: {board}",
+    "valid_moves": "{observation}\nའགལ་འབབ་བྱེད་སྟངས་: {moves}",
+    "no_valid_moves_reset": "{observation} ལས་དོན་ངེས་ཅན་མེད་ན། བརྒལ་བ་བྱེད་ཆོག་པ་ཡིན།",
+    "no_valid_moves_step": "{observation} ལས་དོན་ངེས་ཅན་མེད་ན། ཁྱོད་ཀྱིས་ཕལ་ཆེར་འགྲིམ་པར་བྱེད་ཆོག།",
+    "scores_reset": "{observation}\nད་ལྟའི་བསྡུས་ཚན་ - ནག་པོ་: {black_count}, དཀར་པོ་: {white_count}\n",
+    "scores_step": "{observation}\nབསྡུས་ཚན་ - ནག་པོ་: {black_count}, དཀར་པོ་: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Move must be of the form [row, col].",
+    "illegal": "ཁྲིམས་འགལ་དུ་སྤོ་བཤུད་བྱས། འོས་ལྡན་གྱི་འགྲེམས་སྟོན་ནི། {valid}"
+  },
+  "game_action": {
+    "skipped": "{pid} རྩེད་འགྲན་པ་རང་གི་གོ་རིམ་སྤང་དགོས་བྱུང་ཡོད།",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "མི་སྣ་{pid} ({piece}) ལ་འགལ་འབབ་བྱེད་སྟངས་མེད་པས་བག་གནས་བྱེད་དགོས་"
+  },
+  "outcome": {
+    "black_wins": "དུང་དཀར་གྱིས་རྒྱལ་ཁ་ཐོབ། {black_count}-{white_count}།",
+    "white_wins": "དཀར་པོ་ལ་རྒྱལ་ཁ་ཐོབ། {white_count}-{black_count}།",
+    "draw": "མཉམ་{black_count}-{white_count}"
+  }
+}

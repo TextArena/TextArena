@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Player Surround on a {width}x{height} grid.\nYou are player {player_id}. Valid moves: '[up]' '[down]' '[left]' '[right]' or w/s/a/d.\nObjective: outlive everyone else. Trails are deadly; wall hits kill; head-on crashes kill both."
+  },
+  "board": {
+    "current": "ད་ལྟའི་ཚོགས་ཆུང་། {board}",
+    "after_moves": "ཕྱོགས་མཚུངས་འགྲོ་བཞིན་པའི་རྗེས་ཀྱི་སྒྲོམ་: {board}"
+  },
+  "game_action": {
+    "invalid_death": "{player_id} རྩེད་འགྲན་པ་འདས་གྲོངས་སུ་གྱུར་བ་ནི་ནོར་འཁྲུལ་གྱི་ལས་འགུལ་ཞིག་ཡིན་པའི་རྐྱེན་ཡིན།"
+  },
+  "outcome": {
+    "survived_win": "{player_id}རྩེད་འགྲན་པ་ཐར་བ་དང། གཞན་རྣམས་བརྡིབས་པ་རེད།",
+    "all_crashed": "རྩེད་འགྲན་པ་ཐམས་ཅད་དུས་གཅིག་ཏུ་འཕུར་བ་རེད།",
+    "outlived": "Player ལ་གཞན་ལས་ལྷག་པའི་འཚོ་བ་བསྐྱངས་ཡོད།",
+    "all_dead": "མི་ཚང་མ་ཤི་སོང་།",
+    "turn_limit": "Turn limit reached - longest survivor wins.",
+    "ranking": "{reason} མཐའ་མིི་རྟག་རིམ་གྲས་སྦྱོར་ཚུལ། (བཟང་→ངན)：{groups}"
+  }
+}

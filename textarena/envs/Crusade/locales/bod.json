@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} ({piece}). Opponent is ({opp}). Submit moves as '[b1 c3]' (from → to). All pieces move like chess knights.\nEach capture scores {score_per_capture} point. Game ends after {max_moves} moves or when a player has no legal move / no pieces. Higher score wins."
+  },
+  "board": {
+    "current_board": "རྒྱུན་འཛིན་ཤོག་{move_count}\n\n{board}\n\nའགྲོ་སྟངས་ཡོད་པ།: {moves}"
+  },
+  "invalid_move": {
+    "bad_format": "ཡིག་གཟུགས་ཀྱི་རྣམ་པ་མི་འདྲ་བ་ཞིག '[b1 c3]' ལག་ལེན་འཐབ་།",
+    "unknown_square": "མ་ཤེས་པའི་ས་ཁྱེར།",
+    "not_your_piece": "ལས་ཁུངས་ནི་ཁྱོད་ཀྱི་ལས་ཀ་མིན་ནོ།",
+    "own_piece": "རང་ཉིད་ལ་ས་གཞི་མ་གཏོགས།",
+    "not_knight": "རྟ་དམག་གི་བྱ་གཞག་མིན་ནོ།།"
+  },
+  "game_action": {
+    "moved": "མི་{player_id} གིས་རྩིག་པ་{frm} ནས་{to} ལ་འཛུལ་བ།.",
+    "capture": "{observation} རྩིག་པ་ཞིག་འཛིན་པ་ཡིན། (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "རྩེད་པ་ {player_id} ལ་རྡུལ་མེད་པ།",
+    "cannot_move": "རྩེད་འགྲན་པ་ {player_id} འགྲོ་མི་ཐུབ།",
+    "higher_score": "སྐུགས་ཚད་མཐོ་ཤོས་བཟུང་།",
+    "move_limit": "འགྲོ་ཚད་བསླེབས་སོང་།"
+  }
+}
