@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa Iterated Prisoner's Dilemma na may {num_rounds} rounds.\n\nEstruktura ng Laro:\n- Bago ang bawat desisyon mayroon kang {total_conversation_rounds} turn upang makipag-usap nang malaya.\n- Pagkatapos nito, kapwa mga manlalaro ay magkakasabay na pumili ng pagtutulungan o pagtataksil.\n\nPayoff Matrix (nakatakda sa bawat round):\n- Kapwa nagtutulungan ➜ bawat isa {cooperate_reward}\n- Kapwa nagtataksil ➜ bawat isa {mutual_defect_reward}\n- Isa ay nagtataksil, isa ay nagtutulungan ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nPaano Maglaro:\n- Sa panahon ng conversation: mag-type ng anumang teksto ka naisin.\n- Sa panahon ng paggawa ng desisyon: isama ang '[Cooperate]' o '[Defect]' (hindi nakakase nsitive sa malaking o maliit na titik). Maaari kang magdagdag ng karagdagang teksto bago/simula sa token."
+  },
+  "phases": {
+    "conversation_finished": "Napagpilian na ang conversation para sa round {round}. Pakisagot lang ng '[Cooperate]' o '[Defect]' sa loob ng \\boxed{{}}.",
+    "starting_round": "--- Gapoan a Panag-alimpag {round} ---",
+    "round_summary": "Mga resulta ng Round {round}:\n{outcome}\nNakakita ang Player 0 ng {r0} (kabuuang {score_0}), nakakita ang Player 1 ng {r1} (kabuuang {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "Parehon nan-goal so duaran manlalaban {s0}.",
+    "round_both_cooperate": "Nankimey iran dua.",
+    "round_both_defect": "Amin ya manlalaban et tinmaynan.",
+    "round_p0_cooperates_p1_defects": "Si Player 0 so nantutulongan, si Player 1 et tinmaynan.",
+    "round_p0_defects_p1_cooperates": "Say Player 0 so tinmaynan, say Player 1 et nantutulongan."
+  }
+}

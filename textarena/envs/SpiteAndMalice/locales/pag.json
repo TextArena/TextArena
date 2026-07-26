@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Kaiba ka na Player {player_id} ed two-player game na Spite and Malice. So goal mo et na first to empty so payoff pile.\n\n### Game Overview:\n- So objective et na clear so payoff pile by playing cards ed center piles.\n- Kaiba mo na play cards from three sources:\n  1. So **hand** (kaiba mo na start each turn na up to 5 cards ed hand).\n  2. So **top card na so payoff pile**.\n  3. So **top card na any na so discard piles**.\n\n### Playing Rules:\n- Kaiba mo na play card ed center pile no et one rank higher na top card ed that pile (center piles start na Ace tan go up to Queen; Kings ari na wild - ari na play ed any card pero no agi na rank sequence. This means no King ari na play after 4, then that King ari na ranked 5 tan so next card ari na 6).\n- No kaiba mo na play any more cards, kaiba mo na discard card ed one na so discard piles to end so turn.\n- No center pile ari na reach Queen, ari na clear automatically.\n- So rank order et: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: Ed start na so turn, draw cards to fill so hand up to 5 cards. Pakipan na **[draw]** to begin.\n2. **Play a Card**: To play card, specify so card tan so center pile like this: **[play A♠ 0]** (where 'A♠' et so card tan '0' et so center pile index).\n3. **Discard**: No kaiba mo na play any more cards, discard card from hand ed discard pile to end so turn. Pakipan na **[discard A♠ 1]** (where 'A♠' et so card tan '1' et so discard pile index). Note na kaiba mo na discard any card from payoff pile. Kaiba mo na discard only so cards from hand.\n\n"
+  },
+  "board": {
+    "current_board": "Kasalatan a Dakal a Board:\n\n{board}\nAvailable Moves: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Center Piles --  Saray Pile ed Sentro na Bildo",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Player {player_id}'s View ---\n",
+    "payoff": "{observation}Payoff Pile (Top Card): {top_card}, Payoff Pile Length: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "Anggapoy karga to."
+  },
+  "game_message": {
+    "no_cards_left": "Anggapo lay kaardan naala yo. Tandaan ya sarag yon usaren irayan kargaan: 1. Say \"hand\" mo 2. Say sankaatageyan a kard ed saray aka-discard mon pila.* 3. Say sankatagyan a karta diad anggan dinan iran inusar mod pila.* "
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Say player {player_id} so ag-inmebat ed valid a galaw diad square brackets.",
+    "invalid_play": "Invalid play. Player {player_id} tinry na play {card} ed center pile {index}.",
+    "discard_from_payoff": "Invalid discard. Player {player_id} tried to discard a card from the payoff pile. Say sakey ed saray manlalaban et si [[Joyce]], ya inusar ton \" '[[Crossed]] \" '.",
+    "discard_not_in_hand": "Ag-agawa so inekal. Say manlalaban {player_id} et sinali ton ibasura so sakey a kard ya anggapo ed lima to.",
+    "wrong_move_type": "Invalid move type. Player {player_id} did not respond with a valid move type (Say sakey ya ogaw et ag-inmebat na balibalin klasey ililitrato to)."
+  },
+  "game_action": {
+    "you_drew": "You drew cards.",
+    "opponent_drew": "Say sakey a manlalaban et {player_id} so angala na saray kard.",
+    "you_played": "Tinogtogen moy {card} diad center pile {index}.",
+    "opponent_played": "Say manlalaban {player_id} so akilabanan na {card} diad sentro a pila {index}.",
+    "you_discarded": "Indiscard mo na {card} ed discard pile {index}, a kaibat na ibagam a natan la na turn mo. No further actions diad yo is considered para ed this turn. Player {next_player_id} anggan to na.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Player {current_player} natan la na payoff pile! Player {current_player} nanka na win!",
+    "deadlock_player_0": "Deadlock naabot! Player 0 nanka na win na {player_0_payoff} cards remaining vs Player 1's {player_1_payoff} cards.",
+    "deadlock_player_1": "Deadlock naabot! Player 1 nanka na win na {player_1_payoff} cards remaining vs Player 0's {player_0_payoff} cards.",
+    "deadlock_tie": "Deadlock naabot na tie! Both players ari na {player_0_payoff} cards remaining. Player {current_player} nanka na win by default."
+  }
+}

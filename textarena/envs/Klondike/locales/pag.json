@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win."
+  },
+  "format_error": {
+    "no_brackets": "Aliwan dugan format na action. Say action et nepeg ya walad parentesis.",
+    "no_closing_bracket": "Aliwan dugan format na action. Anggapoy closing bracket ']'",
+    "empty_command": "Anggapoy ganggan. I-type so \"draw\" odino 'move <source><destination> [count]'",
+    "empty_action": "Anggapoy gagawaen to.",
+    "move_needs_args": "Say move a komando so mankaukolan na source tan destination. Usage: 'move <source> <destination> [count]'",
+    "count_positive": "Say bilang et nepeg ya positibo odino \"amin\"",
+    "count_invalid": "Ag-agawa so bilang. Usaren so numero odino 'amin'",
+    "unknown_command": "Di-kilala a komand '{cmd}'. Gawisen 'draw', 'move <source> <destination> [count]', o 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Executed {n} action(s) before failure.",
+    "failed": "Aksiyon {n} nabigso: {msg}"
+  },
+  "move_result": {
+    "drew": "Inekal toy card (s) to manlapud stock anggad basura.",
+    "cannot_draw": "Agnayarin man-draw. Anggapoy karga tan basura ed saray suplay na ayayep.",
+    "invalid_pile": "Invalid pile name. Use W, F1-F4, or T1-T7 (Ag-makatunongan so ngaran na pila)",
+    "foundation_one_card": "Nayari labat ya iyalis so 1 a kard ed pundasyon.",
+    "waste_to_foundation_ok": "Inalis so kard manlapud basura ed pundasyon F{dst}",
+    "waste_to_foundation_bad": "Agnayarin iyalis so karga na basura ed satan ya pundasyon a pila",
+    "tableau_to_foundation_ok": "Inilipat so karta manlapud tableau T{src} ed foundation F{dst}",
+    "tableau_to_foundation_bad": "Agnayarin iyalis so table card ed satan ya pundasyon na pila",
+    "foundation_to_foundation": "Agnayarin onalis manlapud sakey a pundasyon paonlad sananey ya pundasion.",
+    "waste_to_tableau_one_card": "Nayari labat ya iyalis so 1 a kard manlapud basura ed tabla.",
+    "waste_to_tableau_ok": "Inalis so kard manlapud basura ed tabla T{dst}",
+    "waste_to_tableau_bad": "Agnayarin i-placed so waste card ed satan ya tableau pile.",
+    "no_face_up": "Anggapoy aka-open a kard ya iyalis.",
+    "tableau_to_tableau_ok": "Inilipat so {count} karta(s) manlapud tableau T{src} ed T{dst}",
+    "tableau_to_tableau_bad": "Dapat a ilipat so {count} karta(s) manlapud T{src} ed T{dst}",
+    "foundation_to_tableau_one_card": "Nayari labat ya iyalis so 1 a kard manlapud base anggad tableau.",
+    "foundation_empty": "Say Foundation F{src} et anggapoy karga to.",
+    "foundation_to_tableau_ok": "Inilipat so karta manlapud foundation F{src} ed tableau T{dst}",
+    "foundation_to_tableau_bad": "Agnayarin i-place so foundation card ed table T{dst}",
+    "to_waste_or_stock": "Agnayarin iyalis ed basura odino itiponan."
+  },
+  "outcome": {
+    "forfeit": "Say resulta et {score} a kard ed saray pundasyon.",
+    "won": "Komendasyon, analo kayo ed Klondike Solitaire!",
+    "turn_limit": "Napagpa si game! Nakala so maksimum na {max_turns} turno. Puntos: {score} karta ed foundation."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Turno: {turn}/{max_turns}",
+    "stock": "Stock: {stock} saray kard",
+    "waste": "Waste (W): {waste} Say so",
+    "foundations_header": "Saray Pundasyon:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tablo:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

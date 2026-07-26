@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw so Player {player_id} ed Nim.\nSay goal mo et anggan to akat ya ang natitipon a object.\nEd siam a turn, pilien yo exactamente say metung a pile tan alisen yo say metung o mas a object manlapu na.\nGamiten yo say format '[pile quantity]', say pile so say index na pile tan say quantity so say bilang na object a alisen yo.\nSay halimbawa, '[0 3]' so alisen na 3 object manlapu pile 0."
+  },
+  "state": {
+    "current_pile": "Natan ya Pile: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Anggapoy nalmoan ya valid move format. Use '[pile quantity]'.",
+    "correct_format_wrong_fields": "Player {player_id}, Invalido a aksion. Column {col} ketdi ya agto.",
+    "out_of_range": "Say index na pila {pile_index} et ag-abayag.",
+    "non_positive": "Nepeg ya ekalen so ag-onkulang ed sakey a bengatla.",
+    "exceeds_pile": "Cannot remove {quantity} from pile {pile_index} (only {pile_count} left)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Say manlalako {player_id} so angala ed unor ya bengatla!"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Kaiba ka Player {player_id} ed sayan {num_players}-player Liar's Dice game.\nSaray rules:\n- Ed say turn mo, kaiba ka balet:\n  1) Makatukoy na bagong bid met a higher quantity or higher face (or both) than say current bid; i.e. '[Bid: 3, 4]',\n  2) Agcall say last bid by typing '[Call]'.\n\nNo agcall ka:\n  - No say actual a count na face value among all dice et less than say bid, say last bidder matalo met one die.\n  - Otherwise, say caller matalo met one die.\nSay player a angga ed 0 dice et eliminated. Say last remaining player win."
+  },
+  "board": {
+    "per_player": "\tPlayer {p}: {d}",
+    "new_round": "\nBagong round - Natitira nga dice: {dice_summary}\nSay tocdo yan dice mo et: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Player {current_player_id} calls! The actual count of face {face_value} is {count}, which is LESS than {quantity}.\nPlayer {loser_id} (the last bidder) loses one die.",
+    "caller_loses": "Player {current_player_id} agcall! Say actual a count na face {face_value} et {count}, a balet >= {quantity}.\nPlayer {loser_id} (say caller) matalo met one die."
+  },
+  "action": {
+    "bid_announce": "Say player {player_id} so manbid na {quantity} ed lupa to {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Say tawag et ginawa ya anggapoy akauna a bid.",
+    "invalid_bid": "Invalid bid: {reason}",
+    "not_recognized": "Action not recognized as either a valid '[Bid: X, Y]' or '[Call]'. Submitted action: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Say balon kantidad {new_quantity} et mas abeba nen say walad natan ya bilang na {current_quantity}.",
+    "face_lower": "Say balon nominal a kantidad {new_face_value} et mas abeba nen say aktual ya bilang na {current_face_value}.",
+    "identical": "Say bid et mipara ed peles ya i-bid.",
+    "face_range": "Say nominal a kantidad et nepeg ya 1 anggad 6."
+  },
+  "message": {
+    "eliminated_invalid": "Say manlalaban {player_id} so naekal lapud ag-agawa."
+  },
+  "outcome": {
+    "win": "Player {winner} win! Final ranking: {final_ranking}"
+  }
+}

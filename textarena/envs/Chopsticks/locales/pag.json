@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw so Player {player_id} ed Chopsticks. No turn mo, pili ka met ed saray:\n  + Attack:  '[attack M O]'  where M=so kamot mo (0 o 1), O=kamot na kalaban (0 o 1).\n    - Labi so kamot na kalaban toon maungay ed kamot mo; no >=5, iton toon 0.\n  + Split:   '[split L R]'  a manggawa so total na daliri mo ed L tan R (L+R = so total mo).\nReply ka met ed exactly one na saray komand."
+  },
+  "board": {
+    "current_board": "Kasalanan a Dakal a Board:\nPlayer 0: {hands_0}\nPlayer 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Say kamot mo {my_idx} et dead.",
+    "opp_hand_dead": "Say kalaban a lima {opp_idx} et inatey la.",
+    "split_sum": "Say kantidad na divided et nepeg ya {total}.",
+    "split_no_change": "Nepeg a manguman so panangibunog na lima yo.",
+    "invalid_command": "Say invalid move. Gawisen so “[attack M O]” o “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} inatake so kamot na P{opp_id} {opp_idx}: iton toon ed {opp_val} to {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Amin ya kalaban et inatey la.",
+    "draw": "Akasabi la so limitasyon na kalkalnan iyalis."
+  }
+}
