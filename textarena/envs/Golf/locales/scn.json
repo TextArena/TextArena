@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Stai giocando a Golf (Gioco di carte) - Giocatore {player_id}.\nObiettivo: Ottenere il punteggio totale più basso in questo singolo round. Se le colonne condividono lo stesso valore, vengono sommate come 0.\nValori delle carte: A=1, 2-10=valore facciale, J/Q=10, K=0\n\nAzioni (usa parentesi esatte):\n- '[draw]' - Pescare dal mazzo\n- '[take]' - Prendere dal mazzo scartato\n- '[swap X Y]' - Scambiare la carta pescata con la posizione X (riga) Y (colonna)\n- '[discard]' - Scartare la carta pescata"
+  },
+  "board": {
+    "drew": "Hai pescato: {card}\nOra devi [swap X Y] o [discard]",
+    "took": "Hai preso: {card} dal mazzo scartato\nDevi [swap X Y] con esso (non puoi scartare)",
+    "peeked": "Hai sbirciato alla posizione ({row},{col}): {card}",
+    "turn_view": "La tua mano:\n{hand}\nMazzo scartato: {discard}\n{options}",
+    "none": "Nuddu"
+  },
+  "options": {
+    "final_turns": "Ultimi turni! Le tue opzioni: [draw], [take], [peek X Y]",
+    "draw": "Le tue opzioni: [draw], [take]",
+    "must_swap": "Tu devi: [swap X Y] (nun pò scartari carti di la pila)",
+    "swap_or_discard": "Devi: [swap X Y] o [discard]"
+  },
+  "hand": {
+    "no_cards": "No carti di carta.",
+    "header": "Col: 1 2 3 (Cù u so' capu)",
+    "row": "Riga {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} scambiò {new} con {old} alla posizione ({row},{col})",
+    "discarded": "Player {pid} scartò {card}"
+  },
+  "message": {
+    "deck_empty": "Lu ponte è vacanti! La partita finisci subitu.",
+    "knocked": "Giocatore {pid} ha bussato! Ogni altro giocatore ha un'ultima mossa",
+    "final_round": "Giocatore {pid} {reason}! Ogni altro giocatore ha un'ultima mossa"
+  },
+  "reason": {
+    "all_revealed": "ha' rivelatu tutti li carti?"
+  },
+  "invalid": {
+    "wrong_action": "Usa esattamente UN'Azione tra parentesi: [draw], [take], [swap X Y], [discard], [knock], o [peek X Y]",
+    "discard_empty": "Lu cummentu di li scarti è vacanti!",
+    "must_draw_first": "Devi prima [draw], [take], [knock], o [peek X Y]",
+    "cannot_discard_taken": "Nun si pò scartari na carta ca è stata pigghiata da lu cumulu di i schedarii, ci vole a scambiarla.",
+    "have_drawn_card": "Hai una carta pescata. Devi [swap X Y] o [discard]",
+    "need_drawn_swap": "Ti servi na carta tirata pi scambiari.",
+    "need_drawn_discard": "Ti servi na carta ca ti veni a lu cori pi scartari.",
+    "out_of_bounds": "Posizione fuori dai limiti. Usa riga 1-{max_row}, colonna 1-{max_col}",
+    "knock_with_card": "Nun si pò bussari cu na carta tirata. Prima cumpletati u vostru turnu.",
+    "already_knocked": "C'è già quarcunu ca ha fattu stu giru.",
+    "already_revealed": "Chella carta è già rivelata!"
+  },
+  "summary": {
+    "full": "Gioco finito! Giocatore {winner} vince con un punteggio di {score} punti!\n\nPunteggi finali:\n{scores}",
+    "line": "Giocatore {pid}: {score} punti\n"
+  },
+  "board_str": {
+    "title": "=== GIOCO DI GOFFE=== (Capitolo) Lu picciriddu di lu Signuri.",
+    "discard": "Cumpostu di scartamentu: {card}",
+    "knocked": "Lu jocaturi {pid} ha buscatu!",
+    "player_header": "Giocatore {pid} (Punteggio: {score}):"
+  }
+}

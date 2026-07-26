@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ti sei Jucaturi {player_id} in Stratego.\nLu toi obbiettivu è catturari la bandiera di l'avversariu o elimina tutti li pezzi mossibbili.\nLu toi esercitu è statu posizionatu ppi te supra la tavula, inclusa la bandiera, li bombi e àutri pezzi di ranghi vari.\n\n### Istruzzioni di jocu\n1. **Reguli di mossu:**\n   - Supra lu toi turnu, puoi mossari nu pezzu di nu passu versu na casella adiacenti (supra, sutta, manca o dritta) ca è già occupata cu li toi pezzi.\n   - Esempiu: Nu pezzu pò mossari da A1 a B1 o A1 a A2 si B1 e A2 nun sunnu posti cu li pezzi di lu jucaturi.\n   - Si lu pezzu selezzionatu è nu bomba o na bandiera, nun pò essiri mossu.\n2. **Battagghi:**\n   - Si ti mossi supra na casella occupata di nu pezzu di l'avversariu, allura na battagghia si verificà:\n     - Lu pezzu cu lu ranghi cchiù àutu vince e elimina lu pezzu di l'avversariu.\n     - Si li ranghi sunnu uguali, tutti dui pezzi vennu rimossi dalla tavula.\n     - **Casi speciali:**\n       - Li bombi eliminanu la maggior parti di li pezzi attaccanti eccettu li minaturi, ca ponnu disinnescari li bombi.\n       - Li spii ponnu vinciri lu maresciallu si lu spiu attacca primu, ma pèrdunu contra tutti l'àutri pezzi.\n3. **Obbiettivi stratègici:**\n   - Identificari li pezzi di l'avversariu attraversu li mossi e li battagghi.\n   - Pruteggiri la tua bandiera mentri ti attenti di catturari la bandiera di l'avversariu.\n   - Usari li scout strategicamenti ppi guadagnari nfurmazzioni supra li pezzi di l'avversariu e attaccari li pezzi deboli.\n\n### Comu fari nu mossu:\n1. Specifichi li coordinati di lu pezzu ca vuliti mossari e la destinazzioni.\n2. Usari lu formatu: [A0 B0], unni A0 è la posizzioni di partenza, e B0 è la destinazzioni.\n   - Esempiu: Ppi mossari nu pezzu da riga 0, colonna 0 a riga 1, colonna 0, inserisci [A0 B0].\n3. Assicurati ca la destinazzioni è validu secunnu li regoli di mossu supra.\n\n### Noti mpurtanti:\n- La tavula mostra li toi pezzi e li toi posizzioni, p. es. MN, MS.\n- La tavula mostra macari li posizzioni canusciuti di li pezzi di l'avversariu senza rivelari li ranghi, p. es. ?.\n- Li grigghi cu ~ sunnu laghi e nun ponnu essiri mossi.\n- Comu suggerimentu, inizia lu jocu mossannu li toi pezzi ca sunnu supra la linia di fronti ppi guadagnari nfurmazzioni supra li pezzi di l'avversariu. Li linii di fronti di jucaturi 0 e jucaturi 1 sunnu riga D e G rispettivamente.\n\nEccu lu statu attuali di la tavula:\n"
+  },
+  "board": {
+    "current_board": "Tavula current:\n\n{board}\nMossi disponibbili: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatu di azziuni invalidu. Jucaturi {player_id} nun ha inseritu nu mossu nel formatu [A0 B0].",
+    "invalid_coordinates": "Formatu d'azzioni nvalidu. Lu jucaturi {player_id} nun ha datu li coordinati validi.",
+    "not_own_piece": "Formatu d'azzioni nvalidu. Lu jucaturi {player_id} havi a muviri unu di li soi pezzi.",
+    "scout_through_pieces": "Invalid action format. Player {player_id} cannot move a scout through other pieces.",
+    "scout_diagonal": "Formatu d'azzioni nvaliddu. Lu jucaturi {player_id} nun pò muviri nu scogghiu in diagonali.",
+    "non_scout_multi_square": "Invalid action format. Pieces, apart from scouts, can only move one square at a time.",
+    "move_into_lake": "Formatu d'azzioni nvalidu. Lu jucaturi {player_id} nun pò trasiri ntô lacu.",
+    "move_onto_own_piece": "Formatu d'azzioni nvalidu. Lu jucaturi {player_id} nun pò muvirisi supra lu so pezzu.",
+    "move_bomb_or_flag": "Formatu d'azzioni nvalidu. Lu jucaturi {player_id} nun pò muviri na bomba o 'na bannera."
+  },
+  "game_action": {
+    "you_moved": "Ti hai mossu la tua pieza da {source} a {dest}.",
+    "opponent_moved": "Jucaturi {player_id} ha mossu na pieza da {source} a {dest}.",
+    "you_equal_ranks": "Ti hai mossu la tua pieza da {source} a {dest}. La pieza attaccanti era {attacking_rank} e la pieza di destinazzioni era {target_rank}. Comu li ranghi sunnu uguali, tutti dui pezzi persiru.",
+    "opponent_equal_ranks": "Jucaturi {player_id} ha mossu na pieza da {source} a {dest}. La pieza attaccanti era {attacking_rank} e la pieza di destinazzioni era {target_rank}. Comu li ranghi sunnu uguali, tutti dui pezzi persiru.",
+    "you_miner_defused": "Ti hai mossu la tua pieza da {source} a {dest}. La pieza attaccanti era {attacking_rank} e la pieza di destinazzioni era {target_rank}. Comu li minaturi ponnu disinnescari li bombi, vinciasti la battagghia.",
+    "opponent_miner_defused": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As miners can defuse bombs, you lost the battle.",
+    "you_bomb_lost": "Ti hai mossu la tua pieza da {source} a {dest}. La pieza attaccanti era {attacking_rank} e la pieza di destinazzioni era {target_rank}. Comu l'attaccanti nun è nu minaturi, persi la battagghia.",
+    "opponent_bomb_won": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is not a miner, you won the battle.",
+    "you_spy_won": "Ti hai mossu la tua pieza da {source} a {dest}. La pieza attaccanti era {attacking_rank} e la pieza di destinazzioni era {target_rank}. Comu l'attaccanti è nu spia e la destinazzioni è nu maresciallu, vinciasti la battagghia.",
+    "opponent_spy_lost": "Jucaturi {player_id} ha mossu na pieza da {source} a {dest}. La pieza attaccanti era {attacking_rank} e la pieza di destinazzioni era {target_rank}. Comu l'attaccanti è nu spia e la destinazzioni è nu maresciallu, persi la battagghia.",
+    "you_higher_won": "Ti hai mossu la tua pieza da {source} a {dest}. La pieza attaccanti era {attacking_rank} e la pieza di destinazzioni era {target_rank}. Comu l'attaccanti è nu ranghi cchiù àutu di la destinazzioni, vinciasti la battagghia.",
+    "opponent_higher_lost": "Jucaturi {player_id} ha mossu na pieza da {source} a {dest}. La pieza attaccanti era {attacking_rank} e la pieza di destinazzioni era {target_rank}. Comu l'attaccanti è nu ranghi cchiù àutu di la destinazzioni, persi la battagghia.",
+    "you_lower_lost": "Ti hai mossu la tua pieza da {source} a {dest}. La pieza attaccanti era {attacking_rank} e la pieza di destinazzioni era {target_rank}. Comu l'attaccanti è nu ranghi cchiù bassu di la destinazzioni, persi la battagghia.",
+    "opponent_lower_won": "Jucaturi {player_id} ha mossu na pieza da {source} a {dest}. La pieza attaccanti era {attacking_rank} e la pieza di destinazzioni era {target_rank}. Comu l'attaccanti è nu ranghi cchiù bassu di la destinazzioni, vinciasti la battagghia."
+  },
+  "outcome": {
+    "flag_captured": "Lu jocaturi {player_id} ha catturatu la bannera di l'avversariu!",
+    "no_movable_pieces": "Jucaturi {winner_id} vince! Jucaturi {loser_id} nun ha cchiù pezzi mossibbili."
+  }
+}

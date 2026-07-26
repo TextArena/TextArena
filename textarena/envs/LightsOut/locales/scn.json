@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Benvenutu a Lights Out! Tu hai na griglia {size}x{size} di luci.\nLu toi obbiettivu è di stinguere TUTTI li luci (rapprisintati da '.')\nQuannu tu premi na luci, si alterna iddu stissu E li sò vicini adiacenti (supra/jù/smanu/dritta).\nTipa [row col] pi premiri na luci (0-indicizzatu, quinni gamma validu è 0-{max_index}).\nTu hai finu a {max_turns} mossi pi risòliri l'enigma.\nLiggenna: 'O' = luci ACCISA, '.' = luci SPENTA"
+  },
+  "board": {
+    "current_state": "Statu currenti dâ griglia (Mossa {moves_made}, {moves_left} mossi rimanenti, {completion}% completu):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'azzione deve esse in furmatu [row col] induve a fila è u culone sò numeri interi da 0 à {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Congratulazioni! Haiu risolto u puzzle in {moves_used} mosse!",
+    "loss": "Jocu terminatu! Tu usasti tutti {max_turns} mossi senza risòliri l'enigma. Cumplizziuni finali: {completion}%\nStatu finali:\n{grid}"
+  }
+}

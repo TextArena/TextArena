@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Tu si Jucaturi {player_id}, jucannu {num_rounds} turni di Iterated Ultimatum Game.\nTi hai ${pool} pi spartiri st'round tra tia e Jucaturi {other_id}.\n\nPruposituri:\n  - Facci n'offerta: [Offer: $X] (0 <= X <= piscina)\n  - Si è accittata → Tu pigghi $(piscina - X), l'autru jucaturi pigghia $X\n  - Si è rifiutata → Tutti dui pigghianu $0\n  - Esempiu: [Offer: $3]  o  'Penzu ca chista è giusta. [Offer: $5]'\n\nRispunsabili:\n  - Decidi supra l'offerta cu [Accept] o [Reject]\n  - Esempiu: 'Pare chi è ragiunèvuli. [Accept]'\n            'Troppu ingiustu. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Round {round_number} accumenza! ---\nJucaturi {proposer_id} è lu pruposituri, Jucaturi {responder_id} è lu rispunsabili.",
+    "offer": "Round {round_number}: Jucaturi {proposer_id} offri ${offer} a Jucaturi {responder_id} (tenennu ${keep}).",
+    "accepted": "Jucaturi {responder_id} accittau! Round {round_number} guadagni: Jucaturi {proposer_id} +${proposer_gain}, Jucaturi {responder_id} +${responder_gain}. Nuovi tutali: Jucaturi 0: ${total_0}, Jucaturi 1: ${total_1}.",
+    "rejected": "Jucaturi {responder_id} rifiutau l'offerta! Round {round_number} guadagni: Tutti dui jucatura +$0. Tutali arristunu: Jucaturi 0: ${total_0}, Jucaturi 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Lu pruponenti havi a fari n'offerta usannu lu furmatu [Offer: $X].",
+    "bad_integer": "L'importu di l'offerta deve esse un numeru sanu validu.",
+    "out_of_range": "L'offerta deve esse trà $0 è ${pool}.",
+    "no_current_offer": "Nun c'è nuddu attuali offerta pi rispunniri.",
+    "accept_or_reject": "Lu rispunsabili devi accittari o [Accept] o [Reject] l'offerta."
+  },
+  "outcome": {
+    "win": "Jucaturi {winner} ha vinciutu cu ${winner_total} tutali vs Jucaturi {loser} cu ${loser_total}.",
+    "draw": "Tutti dui jucatura fineru cu ${total} totali."
+  }
+}

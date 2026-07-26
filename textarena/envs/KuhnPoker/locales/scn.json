@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in un gioco di {max_rounds} round di Kuhn Poker.\nRegole del gioco:\n- Il Kuhn Poker utilizza un mazzo di 3 carte con J, Q, K (J più basso, K più alto)\n- Ogni giocatore paga {ante} chip e riceve 1 carta ogni round (nota che le carte vengono distribuite senza sostituzione, quindi non puoi avere la stessa carta del tuo avversario).\n- Il gioco continua per {max_rounds} round\n- Il giocatore con più chip dopo tutti i round vince\nRegole delle azioni:\n- '[check]': Passa senza puntare (solo se non c'è una puntata sul tavolo)\n- '[bet]': Aggiungi 1 chip al piatto (solo se non c'è una puntata sul tavolo)\n- '[call]': Copia la puntata dell'avversario aggiungendo 1 chip al piatto\n- '[fold]': Rinuncia alla tua mano e lascia che il tuo avversario vinca il piatto"
+  },
+  "init_round": {
+    "round_start": "### Iniziando il round {current_round} su {max_rounds} round. La tua carta è: '{player_card}'",
+    "available_actions": "Li tò azzioni dispunìbbili sunnu: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'azione deve essere [Check], [Bet], [Call], o [Fold].",
+    "not_legal": "L'azzioni havi a èssiri {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Li tò azzioni dispunìbbili sunnu: {legal_actions}.",
+    "round_summary": "{reason} Punti attuali: Giocatore 0: '{player_0_chips}'; Giocatore 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Scontro: il {winner_card} del Giocatore {winner} batte il {loser_card} del Giocatore {loser}. Il Giocatore {winner} vince il piatto di {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "A la fini di {max_rounds} giri, tutti dui jucatura avìanu lu stissu nùmmuru di fiches.",
+    "round_win": "Lu jucaturi {player_id} s'è ritiratu.",
+    "winner_player0": "Lu jucaturi 0 vinciu avennu cchiù fichi a la fini di tutti li turni {max_rounds}.",
+    "winner_player1": "Lu jucaturi 1 vincìu avennu cchiù fichi a la fini di tutti li turni {max_rounds}."
+  }
+}

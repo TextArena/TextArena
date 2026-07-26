@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Lu jocu accumenza. Seme di briscola: {trump_suit} (carta di briscola: {trump_str}).",
+    "no_trump_card": "nisciunu"
+  },
+  "player_prompt": {
+    "intro": "Sìiti Giucatori {player_id} 'n Whist tidescu.\n{phase_info}\nTiniti {hand_size} carti.\nJucati na carta cu '[play N]', unni N è la pusizzioni 'n manu (pi esempiu '[play 3]').",
+    "phase_learning": "FASE DI APPRENDI: lu vincituri di ogni truccu pigghia la carta aperta e l'avvinciutu tira a prossima carta dû mazzu. I trucchi arrivati nta sta fasi nun cuntanu pi la vittoria.",
+    "phase_playing": "FASE DI GIOCO: u mazzu è esauritu. Ogni truccu da avà in avanti conta pè a vittoria."
+  },
+  "next_card": {
+    "playing_phase": "Nun c'è carta a disposizione - la fascia di jocu è accuminciata.",
+    "deck_empty": "Lu mazzu è vacanti - nun c'è carta.",
+    "available": "Carte à pruposta: {card}",
+    "available_trump": "Carte à l'offerta: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatu di muvimentu non validu. Utilizza '[play N]' pi sunari la nth carta ca hai in manu.",
+    "bad_position": "Sta pusizzioni nun esisti. Tu teni {hand_size} carti.",
+    "must_follow_suit": "Tu devi seguità l'esempio e sunà na carta {lead_suit}.",
+    "invalid_play": "Chista carta nun si pò giucari."
+  },
+  "game_action": {
+    "played": "Lu jucaturi {player_id} jocava cu {card}."
+  },
+  "trick": {
+    "won": "Lu jucaturi {winner_id} vinci lu truccu cu {card}.",
+    "won_learning": "Giucatori {winner_id} vinci lu jocu cu {card} e pigghia la carta a facci visìbbili."
+  },
+  "phase": {
+    "learning_complete": "Lu mazzu è esaggeratu. La fasi di apprendimentu hè finita - ogni truccu chì resta conta pè a vittoria."
+  },
+  "draw": {
+    "winner_received": "Vinni u truccu e ricivi {card}.",
+    "loser_received": "Haiu persu lu truccu e hai tiratu {card} dû mazzu.",
+    "winner_preview": "La prossima carta ca si trova è {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Punti di presa finu ora - Giucatori 0: {tricks0}, Giucatori 1: {tricks1}",
+    "scores_playing": "Punti di presa - Giucatori 0: {tricks0}, Giucatori 1: {tricks1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Fasi: {phase} ({remaining_cards} carti rimasti 'n mazzu)"
+  },
+  "hand": {
+    "no_cards": "No carti di carta.",
+    "no_cards_in_hand": "Nenti carti 'n manu.",
+    "header": "La tò manu:",
+    "trump_indicator": "(TRUMP) Cchiù picca!",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Nenti carti sunatu ancora stu truccu.",
+    "header": "Truccu currenti:",
+    "trump_indicator": "(TRUMP) Cchiù picca!",
+    "card_line": "{observation}\n  Giucatori {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Lu jocu nun si cuminciau.",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nFasi: {phase}",
+    "trump_suit": "{observation}\nSeme di briscola: {trump_suit}",
+    "trump_card": "{observation}\nCarta di briscola: {card}",
+    "cards_left": "{observation}\nCarti rimasti nel mazzu: {count}",
+    "next_card": "{observation}\nProssima carta pî vinci: {card}",
+    "blank": "{observation}  lu",
+    "current_trick": "{observation} Tricu attuali:",
+    "trump_indicator": "(TRUMP) Cchiù picca!",
+    "trick_line": "{observation}\n  Giucatori {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nGiucatori {player_id}: {scoring} punti di presa ({tricks} totali), {hand_size} carti 'n manu"
+  },
+  "outcome": {
+    "summary": "Fasi di apprendimentu - Giucatori 0: {l0}, Giucatori 1: {l1}. Fasi di jocu - Giucatori 0: {p0}, Giucatori 1: {p1}. Giucatori {winner_id} vinci cu {winner_tricks} punti di presa!"
+  }
+}
