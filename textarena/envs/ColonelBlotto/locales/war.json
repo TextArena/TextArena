@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw an {role} ha Colonel Blotto.\nAn imo panguna nga tumong madaog hin damo nga round kay imo kaatbang.\nHa tagsa round, i-assign an eksakto nga {num_total_units} nga yunit ha mga campo {field_names}.\nAn manggigigiyahan nga nag-assign hin damo nga yunit ha usa nga campo an makakadaog ha campo, ngan an manggigigiyahan nga makakadaog hin damo nga campo an makakadaog ha round.\nPara han example, '[A7 B7 C6]' nag-assign hin 7 yunit ha A, 7 ha B, ngan 6 ha C.",
+    "commander_alpha": "Kumander Alpha",
+    "commander_beta": "Kumander Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRound {current_round}\nCommander Alpha allocated: {p0_allocations}\nCommander Beta allocated: {p1_allocations}\n",
+    "winner_alpha": "{message}Nagdaog: Komander Alpha",
+    "winner_beta": "{message}Nagdaog: Komander Beta",
+    "tie": "{message}Tie! An alleyway."
+  },
+  "invalid_move": {
+    "wrong_format": "Diri-makatuman nga input format. Paggamit: A:5, B:10, C:5",
+    "invalid_field": "Waray-pagamit nga ngaran hin uma ((s) }}. Mga balido nga mga uma: {field_names}",
+    "wrong_allocation_value": "An ngatanan nga mga pag-apod-apud kinahanglan diri negatibo nga integers.",
+    "incorrect_total_units": "Kinahanglan mo mag-assign hin eksakto nga {num_total_units} nga yunit. Kasalukuyan nga kabug-osan: {current_sum}",
+    "good_allocations": "Maopay an pag-apod-apud."
+  },
+  "outcome": {
+    "winner_alpha": "Nadaog an Commander Alpha {score_0}-{score_1} katapos {num_rounds} nga round!",
+    "winner_beta": "Nadaog an Commander Beta {score_1}-{score_0} katapos {num_rounds} nga round!",
+    "draw": "Natapos an laro ha {score_0}-{score_1} tie katapos {num_rounds} nga round!",
+    "early_winner_alpha": "Commander Alpha wins {scores_0}-{scores_1} (majority achieved)!",
+    "early_winner_beta": "Commander Beta wins {scores_1}-{scores_0} (majority achieved)!"
+  }
+}

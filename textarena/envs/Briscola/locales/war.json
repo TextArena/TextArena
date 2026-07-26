@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Ginhimo an Briscola! Trump suit: {trump_suit} (Trump card: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Naglalaro ka han Briscola - Player {player_id}.\nTunguhin: Makakda han mga trick ngan makolekta han mga puntos (120 puntos an kabug-osan han deck).\nMga Puntos han Card: A=11, 3=10, K=4, Q=3, J=2, iba=0\nKusog han Card: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nMga Trump cards nakakda han mga non-trump cards bisan paano an kusog.\n\nAksyon: '[play X]' kun diin X an posisyon (1-{max_pos}) han card ha imo kamot\n"
+  },
+  "hand": {
+    "none": "Waray mga kard.",
+    "empty": "Waray mga kard ha kamot",
+    "header": "An imo kamot:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Waray pa gin-gamit nga mga kard ini nga taktika.",
+    "header": "An yana nga paagi:",
+    "line": "  Player {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Player {player_id}: {points} pts",
+    "trump_info": "Trump suit: {trump_suit}",
+    "trump_info_deck": "Trump suit: {trump_suit} | Mga card na natitira ha deck: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nMga Scores: {scores}\n{trump_info}\n\nPilara an card gamit an [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Gamiton an [play X] diin X amo an posisyon han kard (1, 2, 3, ngan iba pa)",
+    "out_of_range": "Invalid card position. You have {count} cards (1-{count})"
+  },
+  "action": {
+    "played": "Player {player_id} naglaro han {card}",
+    "trick_win": "Player {winner} nakakda han trick nga may {card} ngan nakakuha han {points} puntos!"
+  },
+  "outcome": {
+    "head": "Game Over! Player {winner} nakakda han {points} puntos!\n\nMga Pangwakas na Scores:\n{scores}",
+    "player_line": "Player {player_id}: {points} points ({tricks} tricks)\n"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Naglalara ka han Countdown numbers game!\nTungtungan: Ikompyut ang mga numero gamit an +, -, *, / para makab-ot an target.\nPormat han aksyon: [i j op] kun diin i,j amo an mga indise ngan op amo an operasyon.\nHalimbawa: [0 2 *] nagmumultiplika han numero ha indise 0 upod han numero ha indise 2.\nAn pagdibisyon kinahanglan magresulta ha bug-os nga mga numero la."
+  },
+  "board": {
+    "header": "TARGET: {target}\n\nMga numero nga available:\n{numbers}",
+    "best": "{observation}\n\nBest so far: {best_value} (distance: {distance})\nBest expression: {best_expression}",
+    "history": "{observation}\n\nKasaysayan han mga hugot:\n{moves}",
+    "progress": "{observation}\nKasamtangan nga score han pag-antos: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "An mga indices in diri balido. Kinahanglan magkaiba ngan ha sakob han 0-{max_index}",
+    "invalid_operation": "Waray-pagpahayag nga operasyon (bahin pinaagi han zero o diri integro nga resulta)"
+  },
+  "outcome": {
+    "win": "An eksaktong target hinagian: {target}",
+    "no_moves": "Waray pa mga hugot. Pinakamaupay nga resulta: {best_value} (target: {target})",
+    "turn_limit": "Nakabot an limit han turn. Pinakamaupay nga resulta: {best_value} (target: {target})"
+  }
+}

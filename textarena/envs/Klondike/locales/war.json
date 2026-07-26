@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Naglalara ka han Klondike Solitaire. An iyong goal amo an ibalhin an ngatanan nga cards ngadto han foundation piles.\n\nMga Patakaran han Game:\n- Foundation piles (F1-F4): Itukod ngadto ha Ace ngadto ha King ha suit\n- Tableau piles (T1-T7): Itukod ngadto ha ubos ha pag-iralinan han mga kolor (pula ha itom, itom ha pula)\n- Stock: I-draw an mga cards ngadto ha waste pile\n- Waste (W): An ibabaw nga card amo an available para han paglalara\n\nMga Komanda:\n- 'draw' - I-draw an mga cards tikang ha stock ngadto ha waste\n- 'move <source> <destination> [count]' - Ibalhin an mga cards ha mga piles\n  Mga Halimbawa: 'move W T1', 'move T1 F2', 'move T3 T5 2'. an count pwede gihapon 'all', nga an ibig sabihon amo an pag-attempt han pagbalhin han ngatanan nga face-up cards.\n- 'forfeit' - Humanon an game dayon ngan i-lock an iyong kasalukuyan nga score\n- Mga ngaran han Pile: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nPwede ka mag-execute han mga multiple actions ha usa nga turn pinaagi han pag-separate han mga komanda ha mga koma:\n  Halimbawa: 'draw, move W T1, move T2 F1'\n\nNagpapabilin la an mga Hari an pwede ipaligid ha mga empty tableau piles.\nAn mga Action nagpapabilin ha orden - kon usa nabigo, an mga natitira nga actions gin-papabilin."
+  },
+  "format_error": {
+    "no_brackets": "An mga buhat in kinahanglan nga aada ha parentes.",
+    "no_closing_bracket": "Waray-uyon nga porma hin aksyon. Diri naabot an katapusan nga parakante ']'",
+    "empty_command": "Waray ginsugo. I-type an 'draw' o 'move <source><destination> [count]'.",
+    "empty_action": "Waray-pagbuhat nga aksyon",
+    "move_needs_args": "An sugo nga move in nagkikinahanglan hin tinubdan ngan destinasyon. Paggamit: 'move <source> <destination> [count]'",
+    "count_positive": "An ihap kinahanglan magin positibo o \"ngatanan\"",
+    "count_invalid": "Diri-makatuman nga ihap. Gamit an numero o 'ngatanan'",
+    "unknown_command": "Nakilala nga komanda '{cmd}'. Gamita 'draw', 'move <source> <destination> [count]', o 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Ginbuhat {n} nga aksyon (s) antes han kapakyasan.",
+    "failed": "Action {n} nabigo: {msg}"
+  },
+  "move_result": {
+    "drew": "Gin-ihap an mga kard tikang ha stock ngadto ha basura.",
+    "cannot_draw": "Diri na ito makukuha. An mga suplay ngan an basura waray sulod.",
+    "invalid_pile": "Diri balido nga ngaran han pila. Gamit W, F1-F4, o T1-T7",
+    "foundation_one_card": "Puydi la magbalhin hin 1 nga kard ngadto ha pundasyon.",
+    "waste_to_foundation_ok": "Pagbalhin han kard tikang ha basura ngadto ha pundasyon F{dst}",
+    "waste_to_foundation_bad": "Cannot move waste card to that foundation pile",
+    "tableau_to_foundation_ok": "Ginbalhin an card tikang ha tableau T{src} ngadto ha foundation F{dst}",
+    "tableau_to_foundation_bad": "Cannot move tableau card to that foundation pile",
+    "foundation_to_foundation": "Diri makakalagyw tikang ha pundasyon ngadto han pundasyon",
+    "waste_to_tableau_one_card": "Puydi la magbalhin hin 1 nga kard tikang ha basura ngadto han tabla.",
+    "waste_to_tableau_ok": "Ginbalhin an kard tikang ha basura ngadto han talaan T{dst}",
+    "waste_to_tableau_bad": "Cannot place waste card on that tableau pile",
+    "no_face_up": "Waray mga card nga waray nawong basi ibalhin",
+    "tableau_to_tableau_ok": "Moved {count} card(s) from tableau T{src} to T{dst}",
+    "tableau_to_tableau_bad": "Cannot move {count} card(s) from T{src} to T{dst}",
+    "foundation_to_tableau_one_card": "Puydi la magbalhin hin 1 nga kard tikang ha pundasyon ngadto han lamesa.",
+    "foundation_empty": "An pundasyon F{src} waray sulod.",
+    "foundation_to_tableau_ok": "Ginbalhin an card tikang ha foundation F{src} ngadto ha tableau T{dst}",
+    "foundation_to_tableau_bad": "Diri mahihimo magbutang hin card han pundasyon ha lamesa T{dst}",
+    "to_waste_or_stock": "Diri puydi ibalhin ha basura o stock"
+  },
+  "outcome": {
+    "forfeit": "An katapusan nga score: {score} mga kard ha pundasyon.",
+    "won": "Kumusta, nagdaog ka ha Klondike Solitaire!",
+    "turn_limit": "Game over! Nakabalyo ka han maximum nga {max_turns} turns. Score: {score} cards ha foundations."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== An mga pakli nga ginliwat:",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stock: {stock} mga kard",
+    "waste": "Waste (W): {waste}",
+    "foundations_header": "Mga pundasyon:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Talaan:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

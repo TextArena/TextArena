@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Manlalaro {player_id} sa 3-manlalarong Iterated Prisoner's Dilemma. Ang labanan ay nagtatagal ng {num_rounds} na mga round.\nStruktura ng round:\n• {conv_rounds} na mga pagliko sa malayang pag-uusap\n• 1 pagliko sa pagpapasya - magsumite ng isa token bawat kalaban: '[<opp-id> cooperate]' o '[<opp-id> defect]' (i.e. '[1 defect] [2 cooperate]'; ang default ay 'magkasundo'). \nPair-wise payoff matrix (inalapat sa bawat walang ayos na pares):\n  - Kapwa nagkasundo  ->  {reward}\n  - Kapwa nagtaksil     ->  {punishment}\n  - Ikaw ay nagtaksil, sila ay nagkasundo -> {temptation}\n  - Ikaw ay nagkasundo, sila ay nagtaksil -> {sucker}\nAng manlalaro(s) na may pinakamataas na puntos sa pagtatapos ng lahat ng mga round ay nanalo."
+  },
+  "round": {
+    "start": "─── Nagsisimula ang Round {round} ───\tMaaari kang makipag-usap nang malaya sa susunod na {conv_rounds} na mga round.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Mga Resulta:",
+    "pair_line": "{observation}\n\t Manlalaro {i} vs Manlalaro {j} ay nagpasya na {choice_i} at {choice_j} ayon sa pagkakabanggit (Manlalaro {i} ay nakakuha ng {gain_i}, Manlalaro {j} ay nakakuha ng {gain_j})",
+    "scores_open": "{observation} -> Mga score yana: ",
+    "score_first": "{observation}Manlalaro {player_id} ({score})",
+    "score_next": "{observation}; Manlalaro {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Mga pangwakas na puntos: {scores}.  Pagraranggo ng mga grupo (pinakamababa→pinakamahusay): {groups}"
+  }
+}

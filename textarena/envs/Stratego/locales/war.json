@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "Karuhaan nga Bangon:\n\n{board}\nMga Baraan nga Mugna: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Waray-makatuman nga pormat hin aksyon. An magdudula {player_id} waray magsurat han iya paglihok ha pormat [A0 B0] .",
+    "invalid_coordinates": "Diri balido nga pormat hin aksyon. An magdudula {player_id} waray igpasulod an mga balido na koordinado.",
+    "not_own_piece": "An player {player_id} kinahanglan magbalhin hin usa han ira mga piraso.",
+    "scout_through_pieces": "An player {player_id} diri makakagbalhin hin scout ha iba nga mga piraso.",
+    "scout_diagonal": "An player {player_id} diri puydi magbalhin hin scout ha diagonal.",
+    "non_scout_multi_square": "An mga piraso, gawas han scouts, puydi la magbalhin hin usa nga kwadrado ha kada higayon.",
+    "move_into_lake": "Waray-pagamit nga pormat hin aksyon. An magdudula {player_id} diri makakagbalhin ngadto ha linaw.",
+    "move_onto_own_piece": "An player {player_id} diri puydi magbalhin ngadto han iya kalugaringon nga piraso.",
+    "move_bomb_or_flag": "An player {player_id} in diri makakagbalhin hin bomba o bandera."
+  },
+  "game_action": {
+    "you_moved": "Nakiguros kamo sa inyong piraso gikan sa {source} ngadto sa {dest}.",
+    "opponent_moved": "An magdudula {player_id} in nagbalhin hin piraso tikang ha {source} ngadto han {dest}.",
+    "you_equal_ranks": "Nakiguros kamo sa inyong piraso gikan sa {source} ngadto sa {dest}. Ang atakeng piraso mao ang {attacking_rank} ug ang destinasyon nga piraso mao ang {target_rank}. Tungod kay ang mga ranggo pareho, ang duha ka piraso nawala.",
+    "opponent_equal_ranks": "Ang Manlalaro {player_id} nakiguros og usa ka piraso gikan sa {source} ngadto sa {dest}. Ang atakeng piraso mao ang {attacking_rank} ug ang destinasyon nga piraso mao ang {target_rank}. Tungod kay ang mga ranggo pareho, ang duha ka piraso nawala.",
+    "you_miner_defused": "Nakiguros kamo sa inyong piraso gikan sa {source} ngadto sa {dest}. Ang atakeng piraso mao ang {attacking_rank} ug ang destinasyon nga piraso mao ang {target_rank}. Tungod kay ang mga minero makadefuse sa mga bomba, kamo nakadaog sa away.",
+    "opponent_miner_defused": "Ang Manlalaro {player_id} nakiguros og usa ka piraso gikan sa {source} ngadto sa {dest}. Ang atakeng piraso mao ang {attacking_rank} ug ang destinasyon nga piraso mao ang {target_rank}. Tungod kay ang mga minero makadefuse sa mga bomba, kamo nakawala sa away.",
+    "you_bomb_lost": "Nakiguros kamo sa inyong piraso gikan sa {source} ngadto sa {dest}. Ang atakeng piraso mao ang {attacking_rank} ug ang destinasyon nga piraso mao ang {target_rank}. Tungod kay ang atakero dili usa ka minero, kamo nakawala sa away.",
+    "opponent_bomb_won": "Ang Manlalaro {player_id} nakiguros og usa ka piraso gikan sa {source} ngadto sa {dest}. Ang atakeng piraso mao ang {attacking_rank} ug ang destinasyon nga piraso mao ang {target_rank}. Tungod kay ang atakero dili usa ka minero, kamo nakadaog sa away.",
+    "you_spy_won": "Nakiguros kamo sa inyong piraso gikan sa {source} ngadto sa {dest}. Ang atakeng piraso mao ang {attacking_rank} ug ang destinasyon nga piraso mao ang {target_rank}. Tungod kay ang atakero usa ka espiya ug ang destinasyon usa ka marshall, kamo nakadaog sa away.",
+    "opponent_spy_lost": "Ang Manlalaro {player_id} nakiguros og usa ka piraso gikan sa {source} ngadto sa {dest}. Ang atakeng piraso mao ang {attacking_rank} ug ang destinasyon nga piraso mao ang {target_rank}. Tungod kay ang atakero usa ka espiya ug ang destinasyon usa ka marshall, kamo nakawala sa away.",
+    "you_higher_won": "Nakiguros kamo sa inyong piraso gikan sa {source} ngadto sa {dest}. Ang atakeng piraso mao ang {attacking_rank} ug ang destinasyon nga piraso mao ang {target_rank}. Tungod kay ang atakero usa ka mas taas nga ranggo kay sa destinasyon, kamo nakadaog sa away.",
+    "opponent_higher_lost": "Ang Manlalaro {player_id} nakiguros og usa ka piraso gikan sa {source} ngadto sa {dest}. Ang atakeng piraso mao ang {attacking_rank} ug ang destinasyon nga piraso mao ang {target_rank}. Tungod kay ang atakero usa ka mas taas nga ranggo kay sa destinasyon, kamo nakawala sa away.",
+    "you_lower_lost": "Nakiguros kamo sa inyong piraso gikan sa {source} ngadto sa {dest}. Ang atakeng piraso mao ang {attacking_rank} ug ang destinasyon nga piraso mao ang {target_rank}. Tungod kay ang atakero usa ka mas ubos nga ranggo kay sa destinasyon, kamo nakawala sa away.",
+    "opponent_lower_won": "Ang Manlalaro {player_id} nakiguros og usa ka piraso gikan sa {source} ngadto sa {dest}. Ang atakeng piraso mao ang {attacking_rank} ug ang destinasyon nga piraso mao ang {target_rank}. Tungod kay ang atakero usa ka mas ubos nga ranggo kay sa destinasyon, kamo nakadaog sa away."
+  },
+  "outcome": {
+    "flag_captured": "An magdudula {player_id} nakakuha han bandera han kaaway!",
+    "no_movable_pieces": "Ang Manlalaro {winner_id} nakadaog! Ang Manlalaro {loser_id} wala nay mga piraso nga makiguros."
+  }
+}
