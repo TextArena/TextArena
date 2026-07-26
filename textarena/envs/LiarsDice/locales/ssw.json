@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Wena u-Player {player_id} emdlalweni we-Liar's Dice wababhali abangamashumi {num_players}.\nMithetho:\n- Ngemvulo wakho, ungasenzo ukudlala noma:\n  1) Ukwenza kubudlela okusha nodumo oludidekelwe noma face eliphezulu (noma zombili) kulendlela ekhona; noma '[Bid: 3, 4]',\n  2) Ukukhuluma kubudlela lokugcina kwa kubhala '[Call]'.\n\nUkungikhuluma:\n  - Izinga lombowo le-face leyo kuleyo maphakathi ne-ti-dice zonke liphansi kulendlela, umkhubi wokugcina uphume induku.\n  - Ngakho, umkhubi uphume induku.\nUmklami ongowamaduze angaphumelela. Umklami ophila kuphela ushaya."
+  },
+  "board": {
+    "per_player": "\tPlayer {p}: {d}",
+    "new_round": "\nMzulo wetshele - Ti-dice tingalawuli: {dice_summary}\nTi-dice sakho sikhona: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Player {current_player_id} calls! The actual count of face {face_value} is {count}, which is LESS than {quantity}.\nPlayer {loser_id} (the last bidder) loses one die.",
+    "caller_loses": "Player {current_player_id} ikhuluma! Inomboro yalombowo ye-face {face_value} ni {count}, leyo ingaphezulu kwaleyo {quantity}.\nPlayer {loser_id} (umkhubi) uphume induku."
+  },
+  "action": {
+    "bid_announce": "Player {player_id} bids {quantity} of face {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Call made with no prior bid.",
+    "invalid_bid": "Invalid bid: {reason}",
+    "not_recognized": "Action not recognized as either a valid '[Bid: X, Y]' or '[Call]'. Submitted action: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Linani lelisha {new_quantity} lincane kunaleli lelisebentako {current_quantity}.",
+    "face_lower": "Inomboro yetshele yomtsengwa {new_face_value} ingaphansi kwaleyo lekhona {current_face_value}.",
+    "identical": "Umnikelo ufana ncamashi nalona wamanje.",
+    "face_range": "Linani lelibekiwe kumele libe emkhatsini wa 1 na 6."
+  },
+  "message": {
+    "eliminated_invalid": "Umdlali {player_id} ukhishwe ngekungasebenti kahle."
+  },
+  "outcome": {
+    "win": "Player {winner} ushaye! Ukuthula okupheleleyo: {final_ranking}"
+  }
+}

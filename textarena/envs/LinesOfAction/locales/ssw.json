@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "Likomidi: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ifomethi kumele ibe ngu e2e4 (kusuka,kuya ku-coordinates).",
+    "no_piece": "Kute {side} incenye ku-{coord}.",
+    "identical": "Umtfombo kanye nendzawo lokuyiwa kuyo kuyafana.",
+    "not_straight_or_diagonal": "Move must be straight or diagonal.",
+    "wrong_distance": "Kumele ihambe ngebudze lobulingana netincenye letihambisanako.",
+    "enemy_blocks": "Sitja sesitsa sivale indlela.",
+    "destination_own": "Indzawo lebhekiswe kuyo lenetintfo takho."
+  },
+  "game_action": {
+    "moved": "Player {player_id} waphindza {from} -> {to}",
+    "captured_suffix": "Player {player_id} waphindze {from} -> {to} wacapha umdlweli."
+  },
+  "outcome": {
+    "win": "Tonkhe tincenye tihlangene.",
+    "draw_no_capture": "Kusuka ku-60 ngaphandle kwekubamba.",
+    "draw_repetition": "Kuphindvwa kwetimo katsatfu."
+  }
+}

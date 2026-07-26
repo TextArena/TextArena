@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "Kutshengwa kwesigamu sesheshiwe kwe raoundi {round}. Ngiyacela ubuyekezelela '[Cooperate]' noma '[Defect]' ngaphambi kwemihla {{}}.",
+    "starting_round": "--- Kucala Kwemdlalo {round} ---",
+    "round_summary": "Imiphumela yeraandi {round}:\n{outcome}\nPlayer 0 waphumelela {r0} (jikelele {score_0}), Player 1 waphumelela {r1} (jikelele {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} shaya {win_score} - {lose_score}.",
+    "draw": "Bobabili labadlali babhala {s0}.",
+    "round_both_cooperate": "Bobabili labadlali babambisana.",
+    "round_both_defect": "Bobabili labadlali babaleka.",
+    "round_p0_cooperates_p1_defects": "Umdlali 0 wabambisana, umdlali 1 wehluleka.",
+    "round_p0_defects_p1_cooperates": "Umdlali 0 ubalekile, umdlali 1 usebentisane."
+  }
+}
