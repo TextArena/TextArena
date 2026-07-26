@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "Current Board:\n\n{board}\nAvailable Moves: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Saan a wasto a pormat iti aksion. Player {player_id} ket saan a nangibaga iti maysa a pagbaliw iti pormat [A0 B0].",
+    "invalid_coordinates": "Saan a maitutop nga action format. Ti agay-ayam {player_id} ket saan a nangipatulod kadagiti husto a koordinada.",
+    "not_own_piece": "Saan a maitutop nga aksion. Ti agay-ayam {player_id} ket masapul nga agtignay iti maysa kadagiti bukodna a piesa.",
+    "scout_through_pieces": "Saan a mabalin nga aramiden ti player {player_id} iti sabali pay a piesa.",
+    "scout_diagonal": "Saan a mabalin nga ag-play ti player {player_id} iti maysa a scout.",
+    "non_scout_multi_square": "Saan a mabalin ti agtignay. Dagiti piesa, malaksid kadagiti scout, ket mabalinda laeng nga iyakar iti maysa a kuadro tunggal maminsan.",
+    "move_into_lake": "Saan a mabalin nga ag-play ti player {player_id} iti dan-aw.",
+    "move_onto_own_piece": "Saan a mabalin nga ag-play ti player {player_id} iti bukodna a piesa.",
+    "move_bomb_or_flag": "Saan a mabalin nga ag-play ti player {player_id} iti maysa a bomba wenno bandera."
+  },
+  "game_action": {
+    "you_moved": "Nagbaliw ka iti sarito a piraso manipud {source} iti {dest}.",
+    "opponent_moved": "Player {player_id} ket nagbaliw iti maysa a piraso manipud {source} iti {dest}.",
+    "you_equal_ranks": "Nagbaliw ka iti sarito a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti ranggo ket maysa, dagitoy a dua a piraso ket napukaw.",
+    "opponent_equal_ranks": "Player {player_id} ket nagbaliw iti maysa a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti ranggo ket maysa, dagitoy a dua a piraso ket napukaw.",
+    "you_miner_defused": "Nagbaliw ka iti sarito a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti minero ket makadefuse iti bomba, kaadayo ka iti gubat.",
+    "opponent_miner_defused": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As miners can defuse bombs, you lost the battle.",
+    "you_bomb_lost": "Nagbaliw ka iti sarito a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti atakante ket saan a minero, kaadayo ka iti gubat.",
+    "opponent_bomb_won": "Player {player_id} ket nagbaliw iti maysa a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti atakante ket saan a minero, kaadayo ka iti gubat.",
+    "you_spy_won": "Nagbaliw ka iti sarito a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti atakante ket espia ken ti destinasyon ket marshall, kaadayo ka iti gubat.",
+    "opponent_spy_lost": "Player {player_id} ket nagbaliw iti maysa a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti atakante ket espia ken ti destinasyon ket marshall, kaadayo ka iti gubat.",
+    "you_higher_won": "Nagbaliw ka iti sarito a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti atakante ket ranggo a nangato ngem ti destinasyon, kaadayo ka iti gubat.",
+    "opponent_higher_lost": "Player {player_id} ket nagbaliw iti maysa a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti atakante ket ranggo a nangato ngem ti destinasyon, kaadayo ka iti gubat.",
+    "you_lower_lost": "Nagbaliw ka iti sarito a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti atakante ket ranggo a nababa ngem ti destinasyon, kaadayo ka iti gubat.",
+    "opponent_lower_won": "Player {player_id} ket nagbaliw iti maysa a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti atakante ket ranggo a nababa ngem ti destinasyon, kaadayo ka iti gubat."
+  },
+  "outcome": {
+    "flag_captured": "Ti agay-ayam {player_id} ket nakagun-od ti wagayway iti kalaban!",
+    "no_movable_pieces": "Player {winner_id} ket nanalo! Player {loser_id} ket awan iti ania man a piraso a mabalin a maibaliw."
+  }
+}

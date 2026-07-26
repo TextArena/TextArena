@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Chopsticks. On your turn, choose one of:\n  + Attack:  '[attack M O]'  where M=your hand (0 or 1), O=opponent hand (0 or 1).\n    - Opponent's hand count increases by your hand; if >=5, it becomes 0.\n  + Split:   '[split L R]'  to redistribute your total fingers into L and R (L+R = your total).\nReply with exactly one of those commands."
+  },
+  "board": {
+    "current_board": "Takder a Kasasaad:\nPlayer 0: {hands_0}\nPlayer 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Your hand {my_idx} is dead.",
+    "opp_hand_dead": "Opponent hand {opp_idx} is already dead.",
+    "split_sum": "Ti bilang ti nabiningay ket masapul a {total}.",
+    "split_no_change": "Split must change your hand distribution.",
+    "invalid_command": "Saanko a tumakder. Usaren “[attack M O]” wenno “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} ket ti tumakder iti lima ni P{opp_id}’s hand {opp_idx}: mangrugi iti {opp_val} agingga iti {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Natay ti dua nga ima dagiti kalaban.",
+    "draw": "Naabot ti limitasion a pagbaw-ing."
+  }
+}

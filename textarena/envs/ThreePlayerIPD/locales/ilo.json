@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Kayo ket Player {player_id} iti maysa a 3-player Iterated Prisoner's Dilemma. Ti partido ket mapan iti {num_rounds} a round.\nEstruktura ti round:\n• {conv_rounds} a libre a panagchat\n• 1 a panagdesisyon a turn - isubmit ti maysa a token para iti tunggal a kalaban: '[<opp-id> cooperate]' wenno '[<opp-id> defect]' (kas iti '[1 defect] [2 cooperate]'; ti default ket 'cooperate'). \nPair-wise a payoff a matrix (maaplikar iti tunggal a di-urnos a pares):\n  - Both cooperate  ->  {reward}\n  - Both defect     ->  {punishment}\n  - Kayo defect, sila cooperate -> {temptation}\n  - Kayo cooperate, sila defect -> {sucker}\nTi player(s) a mangabak iti kangatuan a score iti pagpatinggaan ti amin a round ket mangabak."
+  },
+  "round": {
+    "start": "─── Nangrugi ti Round {round} ───\tKayo ket makasao iti libre para iti sunod a {conv_rounds} a round.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Dagiti resulta:",
+    "pair_line": "{observation}\n\t Player {i} vs Player {j} nagpili a {choice_i} ken {choice_j} respectivamente (Player {i} nakaala {gain_i}, Player {j} nakaala {gain_j})",
+    "scores_open": "{observation} -> Dagiti agdama a marka: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}  ti"
+  },
+  "outcome": {
+    "final": "Pakalaglag a pagikeddeng: {scores}.  Pannakaisangkat iti grupo (saanen→naimbag): {groups}"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "agdama a board: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ti panagpukaw ket masapul nga adda iti porma [macro micro] a dagiti numero 0-8.",
+    "out_of_range": "Dagiti indice ket nasken nga aggiddan iti nagbaetan ti 0 ken 8.",
+    "index_out_of_range": "The micro_board, row, or col is out of range.",
+    "cell_occupied": "Naibalud ti selda.",
+    "wrong_micro_board": "Masapul nga agtokar ti agay-ayam iti sumaruno a micro board.",
+    "micro_board_won": "Naabak ti micro board."
+  },
+  "next_board": {
+    "any": "aniaman a mikro board",
+    "specific": "mikro a board {nxt}"
+  },
+  "game_action": {
+    "played": "Player {player_id} dimteng iti micro board {macro_idx}, cell {micro_idx} (row {row}, col {col}). Player {opponent_id} ket kinamennen a mangplay iti {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Ti agay-ayam {player_id} ket nangabak iti Ultimate Tic Tac Toe!",
+    "draw": "Agpapada ti sugal!"
+  }
+}

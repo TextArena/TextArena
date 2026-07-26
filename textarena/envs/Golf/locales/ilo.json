@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Agpaspas ka iti Golf (Card Game) - Player {player_id}.\nGoal: Makagun-od iti kababaan a puntos iti daytoy a maysa a round. No adda pagshare dagiti column iti isu met laeng a puntos, awan ti isu met a puntos.\nPuntos ti card: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (usaren exact brackets):\n- '[draw]' - Draw manipud iti deck\n- '[take]' - Kuha manipud iti discard pile\n- '[swap X Y]' - Paltaan ti drawn card iti posision X (row) Y (column)\n- '[discard]' - Taltal ti drawn card\n"
+  },
+  "board": {
+    "drew": "You drew: {card}\nNow you must [swap X Y] or [discard] it.",
+    "took": "You took: {card} from discard pile\nYou must [swap X Y] with it (cannot discard).",
+    "peeked": "Nangpek ka iti posision ({row},{col}): {card}",
+    "turn_view": "Imbag mo:\n{hand}\nTambak ti pagtaltalon: {discard}\n{options}",
+    "none": "Awan ti aniamanna."
+  },
+  "options": {
+    "final_turns": "Final turns! Options mo: [draw], [take], [peek X Y]",
+    "draw": "Options mo: [draw], [take]",
+    "must_swap": "Masapul a: [swap X Y] (di mabalin nga ibelleng dagiti kard manipud iti pagibellengan)",
+    "swap_or_discard": "Awanan yo: [swap X Y] wenno [discard]"
+  },
+  "hand": {
+    "no_cards": "Awan ti kard.",
+    "header": "Col: 1 2 3 ti",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} inpaltaan {new} iti {old} iti posision ({row},{col})",
+    "discarded": "Player {pid} immawat {card}"
+  },
+  "message": {
+    "deck_empty": "Awanen ti adda iti deck! Agpatinggan a dagus ti ay-ayam.",
+    "knocked": "Player {pid} knocked! Each other player gets one more turn.",
+    "final_round": "Player {pid} {reason}! Amin a dadduma a player ket mabalin a maysa pay a turn"
+  },
+  "reason": {
+    "all_revealed": "naipalgaken kadi amin a kard?"
+  },
+  "invalid": {
+    "wrong_action": "Usaren yo exactamente maysa a bracketed action: [draw], [take], [swap X Y], [discard], [knock], wenno [peek X Y]",
+    "discard_empty": "Ti basura ket awan!",
+    "must_draw_first": "Awanan yo umuna a [draw], [take], [knock], wenno [peek X Y]",
+    "cannot_discard_taken": "You cannot discard a card taken from the discard pile. You must swap it.",
+    "have_drawn_card": "Adda kayat nakadrew. Agnanayon, [swap X Y] wenno [discard]",
+    "need_drawn_swap": "Kasapulam ti naipada a kard tapno mabaliwam.",
+    "need_drawn_discard": "Kasapulam ti naipatarus a kard tapno maparut.",
+    "out_of_bounds": "Posision awan iti pagbeddengan. Usaren yo row 1-{max_row}, column 1-{max_col}",
+    "knock_with_card": "You cannot knock with a drawn card. Complete your turn first.",
+    "already_knocked": "Adda nangabak iti daytoy a gimong.",
+    "already_revealed": "Naipalgaken dayta a kard!"
+  },
+  "summary": {
+    "full": "Game Over! Player {winner} nangabak iti puntos a {score}!\n\nFinal Scores:\n{scores}",
+    "line": "Player {pid}: {score} puntos\n"
+  },
+  "board_str": {
+    "title": "=== GOLF AMINAN=== Ti Daniw ti Ilokano:",
+    "discard": "Ti mangibelleng a bunton: {card}",
+    "knocked": "Nagtuktok ti player {pid}!",
+    "player_header": "Player {pid} (Puntos: {score}):"
+  }
+}

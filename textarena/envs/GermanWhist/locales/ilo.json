@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Nangrugi ti laro. Trump a palma: {trump_suit} (trump a tarjeta: {trump_str}).",
+    "no_trump_card": "awan ti uray maysa"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in German Whist.\n{phase_info}\nYou hold {hand_size} cards.\nPlay a card with '[play N]', where N is its position in your hand (for example '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "TI PAGTUGAYAN: naibus ti deck. Tunggal gakat manipud ita ket maibilang a manggun-od iti balligi."
+  },
+  "next_card": {
+    "playing_phase": "Awan ti maited a kard - nangrugi ti fase iti panagay-ayam.",
+    "deck_empty": "Awan ti naipan iti deck - awan a pulos dagiti naited a kard.",
+    "available": "Karta a maited: {card}",
+    "available_trump": "Naipaay ti kard: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Saan a mabalin nga ag-move format. Usaren ti '[play N]' tapno mausarmo ti Nono a kard iti imam.",
+    "bad_position": "Awan dayta a puesto ti kard. Adda kenka dagiti {hand_size} a kard.",
+    "must_follow_suit": "Masapul a surotenyo ti ulidan ken agtokayo iti {lead_suit} a kard.",
+    "invalid_play": "Saan a mabalin nga usaren dayta."
+  },
+  "game_action": {
+    "played": "Ti agay-ayam {player_id} ket nagay-ayam iti {card}."
+  },
+  "trick": {
+    "won": "Ti agay-ayam {winner_id} ket mangabak iti triko babaen ti {card}.",
+    "won_learning": "Agarroer {winner_id} ti nagabak iti trick iti {card} ken kinuyog na ti tarjeta a naiykos"
+  },
+  "phase": {
+    "learning_complete": "Nalpasen ti tukad, nalpasen a nagadal - tunggal nabatbati nga ar-aramiden ket napateg iti panagballigi."
+  },
+  "draw": {
+    "winner_received": "Nangabakka iti triko ket naawatmo ti {card}.",
+    "loser_received": "Napukawmo ti gakat ket nagparangka iti {card} manipud iti deck.",
+    "winner_preview": "Ti sumaganad a naiparang ket {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tricks won so far - Player 0: {tricks0}, Player 1: {tricks1}",
+    "scores_playing": "Scoring a tricks - Agarroer 0: {tricks0}, Agarroer 1: {tricks1}",
+    "phase": "Paset: {phase}",
+    "phase_learning": "Pasete: {phase} ({remaining_cards} a tarjeta a naiwan iti sabong)"
+  },
+  "hand": {
+    "no_cards": "Awan ti kard.",
+    "no_cards_in_hand": "Awan ti kard iti ima",
+    "header": "Ti imam:",
+    "trump_indicator": "(TRUMP) Ti panangitandudo iti politika ti pagilian.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Awan pay ti nausar a kard iti daytoy nga ar-aramid.",
+    "header": "Kaaduan a pamay-an:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Agarroer {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Saan a nangrugi ti ay-ayam",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nPasete: {phase}",
+    "trump_suit": "{observation}\nTrump a palma: {trump_suit}",
+    "trump_card": "{observation}\nTrump a tarjeta: {card}",
+    "cards_left": "{observation}\nNaiwan a tarjeta iti sabong: {count}",
+    "next_card": "{observation}\nSimmusunod a tarjeta para iti nagabak: {card}",
+    "blank": "{observation}  ti",
+    "current_trick": "{observation}\nCurrent trick:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Agarroer {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nAgarroer {player_id}: {scoring} a pannakabakol iti tricks ({tricks} amin), {hand_size} a tarjeta iti limaan"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Kayat ka ti Player {player_id} iti maysa a Naipatarusang Prisoner's Dilemma a sumakop ti {num_rounds} raond.\n\nPangrukod ti Laro:\n- Sakbay ti tunggal a pagpilian, adda ka ti {total_conversation_rounds} pagpilian a pagkomunikar a libre.\n- Kalpasan ti dayta, pagpilian dagiti dua a player a makibinningay wenno umasideg.\n\nMatris ti Bayad (naipakda iti tunggal a raond):\n- Dagiti dua a Makibinningay ➜ tunggal {cooperate_reward}\n- Dagiti dua a Umasideg ➜ tunggal {mutual_defect_reward}\n- Maysa a Umasideg, maysa a Makibinningay ➜ Umasideg {defect_reward}, Makibinningay {sucker_reward}\n\nKasanoyan a Paglaruan:\n- Iti panawen ti konbersasion: sarita ka ti ania man a teksto.\n- Iti panawen ti pagpilian: ikabil '[Cooperate]' wenno '[Defect]' (saan a nasaysayat). Mabalin ka a makadkaddua pay ti ekstra a teksto sakbay wenno kalpasan ti token."
+  },
+  "phases": {
+    "conversation_finished": "Natapos ti konbersasion para iti raond {round}. Pakipag-ibatan iti '[Cooperate]' wenno '[Defect]' iti loob ti \\boxed{{}}.",
+    "starting_round": "--- Panagrugi ti Round {round} ---",
+    "round_summary": "Resulta ti Raond {round}:\n{outcome}\nNanggana ti Player 0 ti {r0} (dagup ti {score_0}), nanggana ti Player 1 ti {r1} (dagup ti {score_1})."
+  },
+  "outcome": {
+    "winner": "Ti agay-ayam {winner} ket mangabak iti {win_score} - {lose_score}.",
+    "draw": "Nagparehistro! Agpada a nagsuor dagiti aggay-ayam {s0}.",
+    "round_both_cooperate": "Nagtitinnulong dagiti dua nga agay-ayam.",
+    "round_both_defect": "Agpadpada a naglibas dagiti agpampanaw.",
+    "round_p0_cooperates_p1_defects": "Nagtrabaho ti Player 0, naglibas ni Player 1.",
+    "round_p0_defects_p1_cooperates": "Player 0 defected, Player 1 cooperated."
+  }
+}

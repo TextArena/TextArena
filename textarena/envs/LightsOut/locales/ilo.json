@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Welcome ti Lights Out! Addakam {size}x{size} grid ti ilaw.\nTi gola mo ket iti amin a ilaw OFF (tinawtawagan babaen ti '.')\nNo presiam ti ilaw, agtoggle ti sadino ken dagiti kaaduan a asideg (ngato/baba/wanwan/kaliwa).\nItype [row col] a pres ti ilaw (0-indexed, isu a saan a mapan idiay 0-{max_index}).\nAddakam {max_turns} moves a solbarna ti puzzle.\nLegenda: 'O' = ilaw ON, '.' = ilaw OFF"
+  },
+  "board": {
+    "current_state": "Kasaad ti agdama a grid (Move {moves_made}, {moves_left} moves ti nabati, {completion}% kompleto):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ti aksion ket nasken nga adda iti pormat [row col] a sadiay ti linia ken kolumno ket dagiti entero manipud 0 aginggana idiay {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Kablaawak! Nasolbarmo ti puzzle iti {moves_used} a tignay!",
+    "loss": "Paspasen ti laro! Inusarmo amin {max_turns} moves without solbarna ti puzzle. Paspasen a paset: {completion}%\nPaspasen a estado:\n{grid}"
+  }
+}

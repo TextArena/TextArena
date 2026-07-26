@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Kayat mo ti Player {player_id} iti Three-Player Tic Tac Toe.\nTi simbolo mo ket '{symbol}'.\nKayat mo a mapaspas iti pannakailukat iti simbolo mo iti 5x5 a tablero tapno makabilda iti linia ti uppat.\nDagiti linia ket mabalin a horizontal, bertikal, wenno diagonal.\nIsubmit mo ti pagliwlian mo a kas pormat '[4]' tapno markahan ti selula 4."
+  },
+  "board": {
+    "current_board": "Takder a Kasasaad:\n\n{board}\n\nDagiti Makalukat a Pagliwlian: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Saanket a pormat ti pagliwlian. Usaren '[cell]' a kas kun diay selula ket 0-{max_cell}.",
+    "out_of_range": "Saanket a numero ti selula: {cell}. Nasken a mabalin a pagbaetan ti 0 ken {max_cell}.",
+    "already_occupied": "Ti selula {cell} ket napuntaanen.",
+    "made_invalid": "Player {player_id} made an invalid move"
+  },
+  "game_action": {
+    "placed": "Ti Player {player_id} ket inikkat iti simbolo na ({symbol}) iti sakup ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Ti Player {player_id} ({symbol}) ket nakagun-od!",
+    "draw": "Agpapada ti sugal!"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Kayat ka ti Player {player_id} iti {max_rounds} a round a laro iti Kuhn Poker.\nAlagaden ti Laro:\n- Inus-usar ti Kuhn Poker ti 3-kardong baraha iti J, Q, K (J baba, K kataltalonan)\n- Umang-ante ti tunggal a player iti {ante} a chip ken makakita iti 1 kard iti tunggal a round (nota: ti kard ket naikabil without panangibalayaw, isu a saan ka a makakita iti isu met a kard a kas iti kalaban mo).\n- Ti laro ket mapaspas iti {max_rounds} a rounds\n- Ti player a ken ti kaaduan a chips kalpasan iti amin a rounds ket ti mangabak\nAlagaden ti Action:\n- '[check]': Pasa without betting (laeng no di pay bet iti lamesa)\n- '[bet]': Idasig iti 1 chip iti pot (laeng no di pay bet iti lamesa)\n- '[call]': Maturog iti bet iti kalaban babaen iti panangidas iti 1 chip iti pot\n- '[fold]': Iurrender ti imahen mo ken ipan iti kalaban a mangabak iti pot"
+  },
+  "init_round": {
+    "round_start": "### Nagrugi iti round {current_round} iti {max_rounds} a rounds. Card mo: '{player_card}'",
+    "available_actions": "Dagiti mabalin nga aramidem ket: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ti action ket [Check], [Bet], [Call], wenno [Fold].",
+    "not_legal": "Ti tignay ket masapul a {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Dagiti mabalin nga aramidem ket: {legal_actions}.",
+    "round_summary": "{reason} Agdama a puntos: Player 0: '{player_0_chips}'; Player 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: {winner_card} iti Player {winner} ket pinagbetan iti {loser_card} iti Player {loser}. Player {winner} ket mangabak iti pot iti {pot_value} a chips."
+  },
+  "outcome": {
+    "draw": "At the end of {max_rounds} rounds, both players had the same number of chips.",
+    "round_win": "Nagsardeng ti agay-ayam {player_id}.",
+    "winner_player0": "Nangabak ti Player 0 babaen iti ad-adu a chips idi ngudo dagiti amin {max_rounds} nga round.",
+    "winner_player1": "Nangabak ti Player 1 babaen iti ad-adu a chips idi ngudo dagiti amin {max_rounds} nga round."
+  }
+}
