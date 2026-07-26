@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Umukino wa Briscola waratangiye! Isuiti ya Trump: {trump_suit} (Kart ya Trump: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Uri gukina Briscola - Umukinnyi {player_id}.\nItegeko: Shinge umukino na kugura pointi nyinshi (jumla ya pointi 120 mu mwaka).\nPointi za Kart: A=11, 3=10, K=4, Q=3, J=2, zingine=0\nNguvu ya Kart: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKart ya Trump ikiza kart nke si ya Trump binyuze ku nguvu.\n\nGukora: '[play X]' aho X ni aho kart iherereye (1-{max_pos}) mu mukino wawe"
+  },
+  "hand": {
+    "none": "Nta makarita yo gukinaho.",
+    "empty": "Nta makarita afite mu ntoki.",
+    "header": "Ukuboko kwawe:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(Trump) Ni byo koko."
+  },
+  "trick": {
+    "empty": "Nta makarita yakinnye iyi trick.",
+    "header": "Igitego cyo muri iki gihe:",
+    "line": "  Umukinnyi {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Umukinnyi {player_id}: {points} pts",
+    "trump_info": "Igikoresho cya Trump: {trump_suit}",
+    "trump_info_deck": "Isuiti ya Trump: {trump_suit} | Kart zisigaye mu mwaka: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nAmashusho: {scores}\n{trump_info}\n\nKina kart kwa kutumia [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Koresha [play X] aho X ari igipimo cyikarita (1, 2, 3, n'ibindi)",
+    "out_of_range": "Aho umukino wawe ukora. Uriye na {count} kati (1-{count})"
+  },
+  "action": {
+    "played": "Umukinnyi {player_id} araje {card}",
+    "trick_win": "Umukinnyi {winner} ashinge umukino na {card} na kupata {points} pointi!"
+  },
+  "outcome": {
+    "head": "Umukino waratangiye! Umukinnyi {winner} ashinge na {points} pointi!\n\nAmashusho yanyuma:\n{scores}",
+    "player_line": "Player {player_id}: {points} points ({tricks} tricks)\n"
+  }
+}

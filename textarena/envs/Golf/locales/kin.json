@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "You are playing Golf (Card Game) - Player {player_id}.\nGoal: Get the lowest total score in this single round. If columns share the same value, they are summed as 0.\nCard Values: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (use exact brackets):\n- '[draw]' - Draw from deck\n- '[take]' - Take from discard pile\n- '[swap X Y]' - Swap drawn card with position X (row) Y (column)\n- '[discard]' - Discard the drawn card\n"
+  },
+  "board": {
+    "drew": "Wavuyeho: {card}\nBo wavuyeho [swap X Y] cyangwa [discard]",
+    "took": "Wavuyeho: {card} ku rutonde rw'avuyeho\nWavuyeho [swap X Y] nayo (ntavuyeho)",
+    "peeked": "Wavuyeho ku ntera ({row},{col}): {card}",
+    "turn_view": "Your hand:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Nta na kimwe kirimo."
+  },
+  "options": {
+    "final_turns": "Imikino ya nyuma! Ikoresho ryacu: [draw], [take], [peek X Y]",
+    "draw": "Ikoresho ryacu: [draw], [take]",
+    "must_swap": "Ugomba: [swap X Y] (ntushobora gutoranya amakarita yo mu byo utora)",
+    "swap_or_discard": "Wavuyeho: [swap X Y] cyangwa [discard]"
+  },
+  "hand": {
+    "no_cards": "Nta makarita yo gukinaho.",
+    "header": "  Col:   1    2    3",
+    "row": "Intara {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Umukinozi {pid} yabeshye {new} na {old} ku ntera ({row},{col})",
+    "discarded": "Player {pid} discarded {card}"
+  },
+  "message": {
+    "deck_empty": "Umukino urarangiye.",
+    "knocked": "Player {pid} knocked! Each other player gets one more turn.",
+    "final_round": "Umukinozi {pid} {reason}! Buri mukinozi undi afite igikorwa kimwe gusa"
+  },
+  "reason": {
+    "all_revealed": "ese amakarita yose yabonetse?"
+  },
+  "invalid": {
+    "wrong_action": "Use exactly ONE bracketed action: [draw], [take], [swap X Y], [discard], [knock], or [peek X Y]",
+    "discard_empty": "Ibikoresho byo mu nzu by'ibishingwe nta kintu birimo!",
+    "must_draw_first": "Wavuyeho mbere [draw], [take], [knock], cyangwa [peek X Y]",
+    "cannot_discard_taken": "Ntimushobora gutakaza ikarita yavanywe mu byo mwajyaga mutanga. Mugomba kuyisimbuza indi.",
+    "have_drawn_card": "Uvuyeho umukino. Wavuyeho [swap X Y] cyangwa [discard]",
+    "need_drawn_swap": "Kugira ngo uhindure, ugomba kuba ufite ikarita.",
+    "need_drawn_discard": "You need a drawn card to discard.",
+    "out_of_bounds": "Ntera yari munsi y'ingero. Utumye intara 1-{max_row}, koloni 1-{max_col}",
+    "knock_with_card": "Ntimushobora gukomanga ku ikarita ya mbere. Mujye mubanza kurangiza umukino wanyu.",
+    "already_knocked": "Hari umuntu umaze gutsinda uyu mukino.",
+    "already_revealed": "Iyo karita yamaze guhishurwa!"
+  },
+  "summary": {
+    "full": "Imikino y'irangiwe! Umukinozi {winner} atsinze na gatsinda ya {score}!\n\nGatsinda z'irangiwe:\n{scores}",
+    "line": "Umukinozi {pid}: {score} pointi\n"
+  },
+  "board_str": {
+    "title": "=== GAKINDO CYO KURI GOLFI=== Byarangiye:",
+    "discard": "Guta umurundo: {card}",
+    "knocked": "Umukinnyi {pid} yakomanze!",
+    "player_header": "Umukinozi {pid} (Gatsinda: {score}):"
+  }
+}

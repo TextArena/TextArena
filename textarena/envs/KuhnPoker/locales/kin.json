@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Uwite Umukino {player_id} muri mugoroba wa {max_rounds} wa Kuhn Poker.\nItegeko ry'umukino:\n- Kuhn Poker itumaga kaari 3 na J, Q, K (J ifite, K ikirenga)\n- Umukino wese atanga {ante} chip na kapata kaari 1 kuri mugoroba (kumbuka ko kaari zitangwa ziriko, kandi siwe wa kaari moja na umukino wawe)\n- Umukino ugeza kugeza {max_rounds} mugoroba\n- Umukino utunze chip nyinshi nyuma y'amugoroba yose\nItegeko ry'umwanzo:\n- '[check]': Gusa (iyo umwanzo siwe ku meza)\n- '[bet]': Ongera chip 1 ku mutungo (iyo umwanzo siwe ku meza)\n- '[call]': Kuranisha umwanzo w'umukino wawe kwa kuongeza chip 1 ku mutungo\n- '[fold]': Taba umukino wawe na umukino wawe utunze mutungo"
+  },
+  "init_round": {
+    "round_start": "### Kuzamuka kwa mugoroba {current_round} kuva {max_rounds} mugoroba. Katika kaari yawe: '{player_card}'",
+    "available_actions": "Ibikorwa byawe biboneka ni: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kuweza kuba [Check], [Bet], [Call], cyangwa [Fold].",
+    "not_legal": "Igikorwa kigomba kuba {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Ibikorwa byawe biboneka ni: {legal_actions}.",
+    "round_summary": "{reason} Amashyirahamwe ya nyuma: Umukino 0: '{player_0_chips}'; Umukino 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Kurasa: Umukino {winner} '{winner_card}' ikiri Umukino {loser} '{loser_card}'. Umukino {winner} utunze mutungo wa {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "At the end of {max_rounds} rounds, both players had the same number of chips.",
+    "round_win": "Umukinnyi {player_id} yaretse gukina.",
+    "winner_player0": "Umukinnyi 0 yatsinze kuko yari afite chips nyinshi kurangiza imikino yose {max_rounds}.",
+    "winner_player1": "Umukinnyi 1 yatsinze afite chips nyinshi kurangiza {max_rounds} imiterere yose."
+  }
+}
