@@ -1,0 +1,43 @@
+{
+  "_comment": "Fail bahasa Santorini dalam bahasa Melayu. JANGAN terjemah kunci, hanya nilai. Kekalkan setiap {placeholder}. Jangan sekali-kali terjemah {board} ASCII, nama warna yang dihantar sebagai {color}/{winner_color}/dll. (Navy/White/Grey), label pekerja (N1, N2, W1, W2, G1, G2), format token gerakan [worker_id source dest build] / contoh seperti [N1C1C2B2], koordinat papan (A-E, 1-5) atau nombor aras.",
+  "_slots": {
+    "{color}": "Nama warna/peranan pemain (Navy, White atau Grey) - jangan terjemah",
+    "{color_initial}": "Huruf pertama warna, digunakan untuk token gerakan (N, W atau G) - jangan terjemah",
+    "{board}": "Papan ASCII yang dipaparkan - masukkan seadanya, jangan terjemah",
+    "{valid_moves}": "Senarai token gerakan sah dipisahkan koma - jangan terjemah",
+    "{expected_color}": "Warna pekerja yang dirujuk - jangan terjemah",
+    "{player_color}": "Warna pemain yang bertindak - jangan terjemah",
+    "{worker_num}": "Nombor pekerja, 1 atau 2",
+    "{source}": "Koordinat asal, cth. C2 - jangan terjemah",
+    "{dest}": "Koordinat destinasi, cth. C3 - jangan terjemah",
+    "{build}": "Koordinat pembinaan, cth. B2 - jangan terjemah",
+    "{player_id}": "Nombor seorang pemain, cth. 0 atau 1",
+    "{winner_id}": "Nombor pemain yang menang",
+    "{winner_color}": "Warna pemain yang menang - jangan terjemah",
+    "{loser_id}": "Nombor pemain yang kalah",
+    "{loser_color}": "Warna pemain yang kalah - jangan terjemah"
+  },
+
+  "player_prompt": {
+    "intro":       "Anda bermain {color} dalam permainan Santorini.\n\nPeraturan Permainan:\n1. Pergerakan:\n   - Pekerja hanya boleh bergerak ke petak bersebelahan (termasuk pepenjuru)\n   - Tidak boleh bergerak ke petak yang diduduki pekerja lain atau kubah\n   - Boleh naik paling banyak satu aras, tetapi boleh turun sebanyak mana-mana aras\n\n2. Pembinaan:\n   - Mesti membina di petak bersebelahan dengan tempat pekerja anda bergerak\n   - Tidak boleh membina di tempat mana-mana pekerja berdiri\n   - Tidak boleh membina di atas kubah (aras 4)\n   - Membina menambah satu aras (atau mencipta kubah pada aras 3)\n\n3. Syarat Kemenangan:\n   - Menang dengan menggerakkan pekerja ke aras 3\n   - Menang jika lawan tiada gerakan sah\n\nBuat gerakan anda dalam format [worker_id source dest build]\nContoh: [{color_initial}1C1C2B2] bermaksud gerakkan pekerja 1 {color} dari C1 ke C2 dan bina di B2\nAnda boleh sertakan teks tambahan dalam mesej anda, tetapi anda hanya boleh menyebut corak gerakan sah sekali sahaja.\n",
+    "board_state": "\nKeadaan papan semasa:\n{board}\n",
+    "valid_moves": "\nGerakan sah: {valid_moves}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format gerakan tidak sah. Format dijangka: [worker_id source dest build], cth. [N1C1C2B2]",
+    "wrong_player": "Tidak boleh menggerakkan pekerja {expected_color} (anda ialah {player_color})",
+    "no_worker":    "Tiada pekerja {worker_num} di kedudukan {source}",
+    "bad_move":     "Gerakan tidak sah dari {source} ke {dest}",
+    "bad_build":    "Pembinaan tidak sah di {build}"
+  },
+
+  "game_action": {
+    "moved":        "Pemain {player_id} ({color}) menggerakkan pekerja {worker_num} dari {source} ke {dest} dan membina di {build}"
+  },
+
+  "outcome": {
+    "win_level3":   "Pemain {winner_id} ({winner_color}) menang dengan menggerakkan pekerja ke aras 3!",
+    "no_moves":     "Pemain {loser_id} ({loser_color}) tiada gerakan sah. Pemain {winner_id} ({winner_color}) menang!"
+  }
+}
