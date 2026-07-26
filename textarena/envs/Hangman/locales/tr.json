@@ -1,0 +1,31 @@
+{
+  "_comment": "Türkçe dil dosyası için Hangman. Anahtarları (sol taraf) çevirme. Yalnızca değerleri (sağ taraf) çevir.",
+  "_slots": {
+    "{board}": "Nötr oluşturulmuş tahta (C00/C01 sütun başlıkları, açığa çıkarılmış harfler, '_' boşluklar); çevirme",
+    "{tries_left}": "Kalan yanlış denemeler (tamsayı)",
+    "{guessed}": "Virgülle ayrılmış liste zaten tahmin edilen harfler",
+    "{letter}": "Tahmin edilen harf veya tam kelime (yazildiği gibi tutulur)",
+    "{pct}": "Doğru tahmin edilen karakterlerin yüzdesi, 2 ondalık basamağa yuvarlanır",
+    "{target_word}": "Gizli hedef kelime"
+  },
+  "prompt": {
+    "intro": "Hangman oynuyorsunuz. Oyunun amacı, bir harf tahminleri veya tüm kelime sağlayarak kelimeyi tahmin etmektir.\nHer sütun numaralandırılmıştır. Harflerle doldurulması gereken hücreler '_' ile temsil edilir.\n\nİki şekilde cevap verebilirsiniz. Tek harf tahminleri '[L]' formatında veya tüm kelimeyi '[LIGHT]' formatında tahmin edebilirsiniz.\nEğer verilen harf kelimede varsa, ızgarada açığa çıkarılacaktır.\nEğer verilen kelime doğruysa, kazanırsınız.\nOynarken, seçimlerinizin geçmişi aşağıda eklenecektir. Bilgiyi kullanarak kelimeyi çözün ve kazanın.\n6 yanlış deneme hakkınız var.\n\n"
+  },
+  "board": {
+    "status": "Mevcut tahta:\n{board}\n{tries_left} deneme hakkınız kaldı.\nTahmin edilen harfler: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Geçersiz hamle formatı. Geçerli bir 'harf' veya 'kelime' ile cevap vermediniz.",
+    "already_guessed": "Zaten tahmin edilen '{letter}' harfini tekrar tahmin ettiniz."
+  },
+  "message": {
+    "wrong_word": "'{letter}' tahmininiz hedef kelime değil.",
+    "letter_in": "{letter} tahmininiz kelimede var",
+    "letter_not_in": "{letter} tahmininiz kelimede yok. {tries_left} canınız kaldı."
+  },
+  "outcome": {
+    "win_word": "Tebrikler! Hangman bilmecesini tamamladınız.",
+    "win_board": "Tebrikler! Hangman bilmecesini tamamladınız.",
+    "out_of_tries": "Deneme hakkınız bitti. Karakterlerin {pct} yüzdesini doğru tahmin ettiniz. Hedef kelime : {target_word}"
+  }
+}

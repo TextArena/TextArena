@@ -1,0 +1,37 @@
+{
+  "_comment": "Polski język dla Word Search. Klucze (lewa strona) są stałe; tłumacz tylko wartości (prawa strona). Zachowaj każdy {placeholder} w oryginalnej formie. Etykiety siatki (R00/C00), współrzędne i format akcji w nawiasach '[start_row start_col end_row end_col]' oraz przykłady takie jak '[1 1 1 5]' są NEUTRALNE i nie mogą być tłumaczone. {board} i {words} są neutralną zawartością gry.",
+  "_slots": {
+    "{player_id}": "Numer gracza (liczba całkowita)",
+    "{mode}": "Etykieta trybu gry (już zlokalizowana: Podstawowy/Hardcore)",
+    "{tries}": "Liczba pozostałych nieudanych prób (liczba całkowita)",
+    "{board}": "Wyrenderowana siatka (neutralna; nie tłumacz)",
+    "{words}": "Rozdzielona przecinkami lista ukrytych słów (neutralne tokeny)",
+    "{coords}": "Współrzędne 'start_row start_col end_row end_col' (neutralne)",
+    "{word}": "Ukryte słowo, które zostało znalezione (neutralny token)",
+    "{found}": "Liczba znalezionych słów (liczba całkowita)",
+    "{total}": "Całkowita liczba ukrytych słów (liczba całkowita)",
+    "{pct}": "Procent znalezionych słów (liczba całkowita)"
+  },
+  "prompt": {
+    "mode_basic": "Podstawowy",
+    "mode_hardcore": "Hardcore",
+    "intro": "Jesteś Graczem {player_id} i uczestniczysz w wyzwaniu Word Search w trybie {mode}. Celem jest znalezienie i podświetlenie ukrytych słów na siatce poniżej. Wiersze i kolumny są ponumerowane dla Twojej wygody.\n\nOto aktualny stan planszy Word Search:\n----------------------------------------\nSłowa, które już znalazłeś, są oznaczone w nawiasach kwadratowych [ ]. Każdy wiersz i kolumna jest ponumerowany dla jasności.\n\n\nAby zlokalizować słowo, określ wiersz i kolumnę jego początku i końca. Zwróć uwagę, że słowa są albo w poprzek, albo w dół.\nMożesz wpisać swoją odpowiedź i myśli w dowolny sposób. Ale możesz przesłać tylko jedną odpowiedź na raz. Dla Twoich odpowiedzi użyj formatu '[start_row start_col end_row end_col]'.\nNa przykład, jeśli chcesz znaleźć słowo 'HELLO' zaczynające się w wierszu 1, kolumnie 1 i kończące się w wierszu 1, kolumnie 5, wpisz '[1 1 1 5]'.\n\nWytyczne:\n- Każda próba musi być unikalna; nie możesz powtórzyć tej samej próby.\n- Masz łącznie {tries} nieudanych prób.\n- Historia Twoich prób będzie zapisywana poniżej.\n\nDokładnie przemyśl swoje próby i strategicznie podejdź do gry. Powodzenia, Gracz {{player_id}}! Zobaczmy, ile słów możesz znaleźć!\n"
+  },
+  "board": {
+    "state": "Aktualna plansza:\n\n{board}\nUmieszczone słowa: {words}\nPozostałe nieudane próby: {tries}"
+  },
+  "invalid": {
+    "wrong_format": "Nieprawidłowy format ruchu. Gracz {player_id} nie odpowiedział z prawidłowym 'start_row, start_col, end_row, end_col'.",
+    "out_of_range": "Nieprawidłowy format ruchu. Gracz {player_id} nie odpowiedział z prawidłowym 'start_row, start_col, end_row, end_col'.",
+    "already_attempted": "Nieprawidłowy ruch. Akcja już została podjęta."
+  },
+  "feedback": {
+    "incorrect": "[{coords}] jest nieprawidłową próbą. Pozostało {tries} nieudanych prób.",
+    "correct": "[{coords}] jest prawidłową próbą. Znalazłeś słowo '{word}'.",
+    "correct_unknown": "[{coords}] jest prawidłową próbą, ale słowo nie zostało znalezione w umieszczonych słowach."
+  },
+  "outcome": {
+    "no_tries": "Nie ma więcej nieudanych prób. Znalazłeś {found} z {total} słów ({pct}%).",
+    "win": "Gratulacje! Ukończyłeś puzzle Word Search."
+  }
+}

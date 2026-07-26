@@ -1,0 +1,37 @@
+{
+  "_comment": "Norsk Bokmål-lokaliseringsfil for Word Search. Oversett bare verdier (høyre side).",
+  "_slots": {
+    "{player_id}": "Spillerens nummer (heltall)",
+    "{mode}": "Spillmodus (allerede oversatt: Basic/Hardcore)",
+    "{tries}": "Antall gjenstående feilforsøk (heltall)",
+    "{board}": "Det tegnede rutenettet (nøytralt; oversett ikke)",
+    "{words}": "Kommaseparert liste over gjemte ord (nøytrale tegn)",
+    "{coords}": "Koordinatene 'start_rad start_kolonne slutt_rad slutt_kolonne' (nøytralt)",
+    "{word}": "Et gjemt ord som ble funnet (nøytralt tegn)",
+    "{found}": "Antall ord funnet så langt (heltall)",
+    "{total}": "Totalt antall gjemte ord (heltall)",
+    "{pct}": "Prosentdel av ord funnet (heltall)"
+  },
+  "prompt": {
+    "mode_basic": "Grunnleggende",
+    "mode_hardcore": "Hardcore",
+    "intro": "Du er Spiller {player_id}, og du deltar i en Word Search-utfordring modellert som {mode}. Målet er å finne og fremheve gjemte ord på rutenettet nedenfor. Radene og kolonnene er nummerert for din referanse.\n\nHer er den nåværende tilstanden for Word Search-brettet:\n----------------------------------------\nOrd du allerede har funnet, er merket med firkantede parenteser [ ]. Hver rad og kolonne er nummerert for tydelighet.\n\n\nFor å lokalisere et ord, angi raden og kolonnen for start- og sluttbokstavene. Merk at ordene er enten på tvers eller nedover.\nDu kan skrive dine svar og tanker på hvilken som helst måte. Men du kan bare sende inn ett svar om gangen. For dine innsendelser, bruk formatet '[start_rad start_kolonne slutt_rad slutt_kolonne]'.\nFor eksempel, hvis du vil finne ordet 'HEI' som starter på rad 1, kolonne 1 og slutter på rad 1, kolonne 3, skriv '[1 1 1 3]'.\n\nRetningslinjer:\n- Hvert gjett må være unikt; du kan ikke gjenta samme gjett.\n- Du har totalt {tries} feilforsøk igjen.\n- Historien over dine forsøk vil bli registrert nedenfor.\n\nGjør dine gjett nøye og strategisk. Lykke til, Spiller {{player_id}}! La oss se hvor mange ord du kan finne!\n"
+  },
+  "board": {
+    "state": "Nåværende brett:\n\n{board}\nPlasserte ord: {words}\nGjenstående feilforsøk: {tries}"
+  },
+  "invalid": {
+    "wrong_format": "Ugyldig format for trekk. Spiller {player_id} svarte ikke med gyldig 'start_rad, start_kolonne, slutt_rad, slutt_kolonne'.",
+    "out_of_range": "Ugyldig format for trekk. Spiller {player_id} svarte ikke med gyldig 'start_rad, start_kolonne, slutt_rad, slutt_kolonne'.",
+    "already_attempted": "Ugyldig trekk. Handlingen har allerede blitt forsøkt."
+  },
+  "feedback": {
+    "incorrect": "[{coords}] er et feil forsøk. {tries} feilforsøk igjen.",
+    "correct": "[{coords}] er et korrekt forsøk. Du fant ordet '{word}'.",
+    "correct_unknown": "[{coords}] er et korrekt forsøk, men ordet ble ikke funnet i plasserte ord."
+  },
+  "outcome": {
+    "no_tries": "Ingen flere feilforsøk igjen. Du fant {found} av {total} ord ({pct}%).",
+    "win": "Gratulerer! Du fullførte Word Search-gåten."
+  }
+}

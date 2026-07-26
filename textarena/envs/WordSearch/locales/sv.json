@@ -1,0 +1,37 @@
+{
+  "_comment": "Svensk lokalisering för Word Search. Översätt endast värden (höger sida). Behåll varje {placeholder} oförändrad. Etiketter för rutnät (R00/C00), koordinater och formatet för åtgärder i hakparenteser '[start_row start_col end_row end_col]' och exempel som '[1 1 1 5]' är NEUTRALA och får inte översättas. {board} och {words} är neutralt spelmaterial.",
+  "_slots": {
+    "{player_id}": "Spelarens nummer (heltal)",
+    "{mode}": "Spellägesetikett (redan lokaliserad: Basic/Hardcore)",
+    "{tries}": "Antal felaktiga försök kvar (heltal)",
+    "{board}": "Det återgivna rutnätet (neutralt; översätt inte)",
+    "{words}": "Kommaavgränsad lista med dolda ord (neutrala token)",
+    "{coords}": "Koordinaterna 'start_row start_col end_row end_col' (neutralt)",
+    "{word}": "Ett dolt ord som hittades (neutralt token)",
+    "{found}": "Antal hittade ord hittills (heltal)",
+    "{total}": "Totalt antal dolda ord (heltal)",
+    "{pct}": "Procentandel hittade ord (heltal)"
+  },
+  "prompt": {
+    "mode_basic": "Grundläggande",
+    "mode_hardcore": "Hårdkärnat",
+    "intro": "Du är Spelare {player_id}, och du deltar i en Word Search-utmaning som modellerats som {mode}. Målet är att hitta och markera dolda ord på rutnätet nedan. Raderna och kolumnerna är numrerade för din referens.\n\nHär är det aktuella tillståndet för Word Search-brädet:\n----------------------------------------\nOrd som du redan har hittat är markerade i hakparenteser [ ]. Varje rad och kolumn är numrerad för tydlighet.\n\n\nFör att lokalisera ett ord, ange raden och kolumnen för dess start- och slutbokstäver. Observera att ord är antingen tvärs över eller ned.\nDu kan skriva din respons och tankar på vilket sätt som helst. Men du kan bara skicka in en inlämning åt gången. För dina inlämningar, använd formatet '[start_row start_col end_row end_col]'.\nTill exempel, om du vill hitta ordet 'HEJ' som börjar på rad 1, kolumn 1 och slutar på rad 1, kolumn 3, ange '[1 1 1 3]'.\n\nRiktlinjer:\n- Varje gissning måste vara unik; du kan inte upprepa samma gissning.\n- Du har totalt {tries} felaktiga försök kvar.\n- Historiken för dina försök kommer att registreras nedan.\n\nGör dina gissningar noggrant och strategiskt. Lycka till, Spelare {{player_id}}! Låt oss se hur många ord du kan hitta!\n"
+  },
+  "board": {
+    "state": "Aktuellt bräde:\n\n{board}\nPlacerade ord: {words}\nFelaktiga försök kvar: {tries}"
+  },
+  "invalid": {
+    "wrong_format": "Ogiltigt format för drag. Spelare {player_id} svarade inte med giltig 'start_row, start_col, end_row, end_col'.",
+    "out_of_range": "Ogiltigt format för drag. Spelare {player_id} svarade inte med giltig 'start_row, start_col, end_row, end_col'.",
+    "already_attempted": "Ogiltigt drag. Åtgärden har redan försökts."
+  },
+  "feedback": {
+    "incorrect": "[{coords}] är ett felaktigt försök. {tries} felaktiga försök kvar.",
+    "correct": "[{coords}] är ett korrekt försök. Du hittade ordet '{word}'.",
+    "correct_unknown": "[{coords}] är ett korrekt försök, men ordet hittades inte i de placerade orden."
+  },
+  "outcome": {
+    "no_tries": "Inga fler felaktiga försök kvar. Du hittade {found} av {total} ord ({pct}%).",
+    "win": "Grattis! Du har slutfört Word Search-pusslet."
+  }
+}

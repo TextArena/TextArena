@@ -1,0 +1,34 @@
+{
+  "_comment": "Lietuvių lokalizacija žaidimui Word Ladder. Vertėkite tik reikšmes (dešinėje pusėje). Palikite kiekvieną {placeholder} kaip yra.",
+  "_slots": {
+    "{player_id}": "Žaidėjo numeris (sveikas skaičius)",
+    "{start_word}": "Pradinis žodis (neutralus žodis)",
+    "{target_word}": "Tikslinis žodis (neutralus žodis)",
+    "{word}": "Žodis, kurį žaidėjas ką tik pateikė (neutralus žodis)",
+    "{current}": "Žaidėjo dabartinis žodis (neutralus žodis)",
+    "{target}": "Tikslinis žodis (neutralus žodis)",
+    "{target_len}": "Tikslinio žodžio ilgis (sveikas skaičius)",
+    "{ladder}": "Ėjimų istorija, sujungta ' -> ' (neutralūs žodžiai)",
+    "{history}": "Išvesta istorijos eilutė (jau lokalizuota; nevertėkite)",
+    "{pct}": "Procentas bendrų raidžių su tiksliniu žodžiu (sveikas skaičius)"
+  },
+  "prompt": {
+    "intro": "Jūs esate Žaidėjas {player_id}. Jūsų tikslas yra pasiekti tikslinį žodį, keičiant **po vieną raidę kiekvieną kartą**.\n- Pradinis žodis: **{start_word}**\n- Tikslinis žodis: **{target_word}**\nPateikite kiekvieną ėjimą kvadratinėse skliaustose, pvz. `[word]`.\nĖjimų istorija bus rodoma žemiau, kai žaisite. Sėkmės!\n"
+  },
+  "invalid": {
+    "wrong_format": "Neteisingas formatas. Įveskite žodį kvadratinėse skliaustose, pvz. `[word]`.",
+    "wrong_length": "`{word}` turi neteisingą ilgį; tikslinis žodis yra {target_len} raidžių.",
+    "not_a_word": "`{word}` nėra atpažįstamas žodis.",
+    "not_one_different": "`{word}` nėra tiksliai viena raidė skirtinga nuo `{current}`."
+  },
+  "board": {
+    "history": "Žodžių laiptų istorija: {ladder}. Tikslinis žodis: {target}\n"
+  },
+  "feedback": {
+    "progress": "Gerai! Tęskite.\n{history}"
+  },
+  "outcome": {
+    "win": "Sveikiname! Jūs pasiekėte tikslinį žodį.",
+    "turn_limit": "Ėjimų limitas buvo pasiektas. Jūs pasiekėte `{current}`, kuris dalinasi {pct}% raidžių su tiksliniu žodžiu `{target}`."
+  }
+}

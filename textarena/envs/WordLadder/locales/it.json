@@ -1,0 +1,34 @@
+{
+  "_comment": "File di localizzazione di Word Ladder. Le chiavi (a sinistra) sono fisse; tradurre solo i valori (a destra). Mantenere ogni {placeholder} invariato. I token di parole ({start_word}, {target_word}, {word}, {current}, {ladder}) sono parole di gioco neutrali e non devono essere tradotti. Mantenere l'esempio di parentesi quadre `[word]` invariato.",
+  "_slots": {
+    "{player_id}": "Numero del giocatore (intero)",
+    "{start_word}": "La parola iniziale della scala (token neutrale)",
+    "{target_word}": "La parola obiettivo da raggiungere (token neutrale)",
+    "{word}": "La parola appena inviata dal giocatore (token neutrale)",
+    "{current}": "La parola attuale del giocatore (token neutrale)",
+    "{target}": "La parola obiettivo (token neutrale)",
+    "{target_len}": "Lunghezza della parola obiettivo (intero)",
+    "{ladder}": "La cronologia delle mosse unite da ' -> ' (token neutrali)",
+    "{history}": "La riga di cronologia resa (già localizzata; non tradurre)",
+    "{pct}": "Percentuale di lettere condivise con l'obiettivo (intero)"
+  },
+  "prompt": {
+    "intro": "Sei il Giocatore {player_id}. Il tuo obiettivo è raggiungere la parola obiettivo modificando **una lettera alla volta**.\n- Parola iniziale: **{start_word}**\n- Parola obiettivo: **{target_word}**\nInvia ogni mossa tra parentesi quadre, ad esempio `[word]`.\nLa cronologia appare sotto mentre giochi. Buona fortuna!\n"
+  },
+  "invalid": {
+    "wrong_format": "Formato non valido. Avvolgi la tua parola tra parentesi quadre, ad esempio `[word]`.",
+    "wrong_length": "`{word}` ha lunghezza errata; l'obiettivo è di {target_len} lettere.",
+    "not_a_word": "`{word}` non è una parola riconosciuta.",
+    "not_one_different": "`{word}` non è esattamente una lettera diversa da `{current}`."
+  },
+  "board": {
+    "history": "Cronologia della Scala di Parole: {ladder}. Parola Obiettivo: {target}\n"
+  },
+  "feedback": {
+    "progress": "Bravo! Continua così.\n{history}"
+  },
+  "outcome": {
+    "win": "Congratulazioni! Hai raggiunto la parola obiettivo.",
+    "turn_limit": "Il limite di turni è stato raggiunto. Hai raggiunto `{current}` che condivide il {pct}% delle sue lettere con l'obiettivo `{target}`."
+  }
+}

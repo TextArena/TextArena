@@ -1,0 +1,37 @@
+{
+  "_comment": "Magyar nyelvi fájl a Word Search játékhoz. A kulcsok (bal oldal) rögzítettek; csak az értékeket (jobb oldal) fordítsa le. Minden {placeholder} szó szerinti maradjon. A rács címkéi (R00/C00), koordináták és a zárójelben megadott formátum '[start_row start_col end_row end_col]' és példák, mint '[1 1 1 5]', semlegesek és nem fordíthatók le. A {board} és {words} semleges játéktartalom.",
+  "_slots": {
+    "{player_id}": "Játékos száma (egész szám)",
+    "{mode}": "Játékmód címke (már lokalizált: Alap/Hardcore)",
+    "{tries}": "Helytelen kísérletek száma (egész szám)",
+    "{board}": "A megjelenített rács (semleges; ne fordítsa le)",
+    "{words}": "Elrejtett szavak vesszővel elválasztott listája (semleges tokenek)",
+    "{coords}": "A 'start_row start_col end_row end_col' koordináták (semleges)",
+    "{word}": "Egy elrejtett szó, amelyet megtaláltak (semleges token)",
+    "{found}": "Megtalált szavak száma eddig (egész szám)",
+    "{total}": "Elrejtett szavak összes száma (egész szám)",
+    "{pct}": "Megtalált szavak százaléka (egész szám)"
+  },
+  "prompt": {
+    "mode_basic": "Alap",
+    "mode_hardcore": "Hardcore",
+    "intro": "Ön a {{player_id}}. játékos, és részt vesz egy Word Search kihívásban, amely {mode} módban van modellezve. A cél az, hogy megtalálja és kiemelje az elrejtett szavakat az alábbi rácsban. A sorok és oszlopok számozva vannak az Ön számára.\n\nItt látható a Word Search tábla jelenlegi állapota:\n----------------------------------------\nA már megtalált szavak szögletes zárójelben vannak jelölve [ ]. Minden sor és oszlop számozva van a tisztaság kedvéért.\n\n\nEgy szó megtalálásához adja meg a kezdő és végbetűk sorát és oszlopát. Vegye figyelembe, hogy a szavak vagy vízszintesen, vagy függőlegesen helyezkednek el.\nBármilyen módon beírhatja válaszát és gondolatait. De csak egy beküldést tehet egyszerre. Beküldéseihez használja a '[start_row start_col end_row end_col]' formátumot.\nPéldául, ha meg akarja találni a 'HELLO' szót, amely az 1. sorban, 1. oszlopban kezdődik és az 1. sorban, 5. oszlopban végződik, írja be '[1 1 1 5]'.\n\nÚtmutató:\n- Minden tippnek egyedinek kell lennie; nem ismételheti meg ugyanazt a tippet.\n- Összesen {tries} helytelen kísérlet maradt.\n- A kísérleteinek előzményei alább lesznek rögzítve.\n\nTegye meg tippjeit gondosan és stratégiailag. Sok szerencsét, {{player_id}}. játékos! Nézzük meg, hány szót tud megtalálni!\n"
+  },
+  "board": {
+    "state": "Aktuális tábla:\n\n{board}\nElhelyezett szavak: {words}\nHelytelen kísérletek száma: {tries}"
+  },
+  "invalid": {
+    "wrong_format": "Érvénytelen lépésformátum. A {player_id}. játékos nem válaszolt érvényes 'start_row, start_col, end_row, end_col' formátummal.",
+    "out_of_range": "Érvénytelen lépésformátum. A {player_id}. játékos nem válaszolt érvényes 'start_row, start_col, end_row, end_col' formátummal.",
+    "already_attempted": "Érvénytelen lépés. A műveletet már megkísérelték."
+  },
+  "feedback": {
+    "incorrect": "[{coords}] egy helytelen kísérlet. {tries} helytelen kísérlet maradt.",
+    "correct": "[{coords}] egy helyes kísérlet. Megtalálta a '{word}' szót.",
+    "correct_unknown": "[{coords}] egy helyes kísérlet, de a szó nem volt megtalálható az elhelyezett szavak között."
+  },
+  "outcome": {
+    "no_tries": "Nincs több helytelen kísérlet. {found} szót talált meg {total} szóból ({pct}%).",
+    "win": "Gratulálunk! Teljesítette a Word Search feladványt."
+  }
+}

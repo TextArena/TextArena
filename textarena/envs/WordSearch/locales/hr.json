@@ -1,0 +1,37 @@
+{
+  "_comment": "Hrvatska lokalizacija za Word Search. Ključevi (lijeva strana) su fiksni; prevodite samo vrijednosti (desna strana). Zadržite svaki {placeholder} doslovno. Oznake mreže (R00/C00), koordinate i format akcije u zagradama '[start_row start_col end_row end_col]' i primjeri kao '[1 1 1 5]' su NEUTRALNI i ne smiju se prevoditi. {board} i {words} su neutralni sadržaji igre. Napomena: u prompt.intro pojavljivanje '{{player_id}}' je namjerno pobeglo tako da se doslovno prikazuje kao '{player_id}' (odgovara izvornom tekstu igre).",
+  "_slots": {
+    "{player_id}": "Broj igrača (cijeli broj)",
+    "{mode}": "Oznaka režima igre (već lokalizirano: Basic/Hardcore)",
+    "{tries}": "Broj preostalih pogrešnih pokušaja (cijeli broj)",
+    "{board}": "Iscrtana mreža (neutralna; ne prevodite)",
+    "{words}": "Popis skrivenih riječi odvojenih zarezima (neutralni tokeni)",
+    "{coords}": "Koordinate 'start_row start_col end_row end_col' (neutralne)",
+    "{word}": "Pronađena skrivena riječ (neutralni token)",
+    "{found}": "Broj pronađenih riječi do sada (cijeli broj)",
+    "{total}": "Ukupni broj skrivenih riječi (cijeli broj)",
+    "{pct}": "Postotak pronađenih riječi (cijeli broj)"
+  },
+  "prompt": {
+    "mode_basic": "Osnovno",
+    "mode_hardcore": "Hardcore",
+    "intro": "Vi ste Igrač {player_id}, i sudjelujete u izazovu Word Search modeliranom kao {mode}. Cilj je pronaći i istaknuti skrivene riječi na mreži ispod. Redovi i stupci su numerirani za vaše reference.\n\nOvdje je trenutno stanje ploče Word Search:\n----------------------------------------\nRiječi koje ste već pronašli su označene u uglatim zagradama [ ]. Svaki red i stupac je numeriran za jasnoću.\n\n\nDa biste pronašli riječ, navedite red i stupac njezina početka i kraja. Napomena da su riječi ili preko ili dolje.\nMožete upisati svoj odgovor i misli na bilo koji način. Ali možete predati samo jedan prijedlog odjednom. Za vaše prijedloge, koristite format '[start_row start_col end_row end_col]'.\nNa primjer, ako želite pronaći riječ 'HELLO' koja počinje u redu 1, stupcu 1 i završava u redu 1, stupcu 5, unesite '[1 1 1 5]'.\n\nSmjernice:\n- Svaki pokušaj mora biti jedinstven; ne možete ponoviti isti pokušaj.\n- Imate ukupno {tries} preostalih pogrešnih pokušaja.\n- Povijest vaših pokušaja će biti zabilježena ispod.\n\nNapravite svoje pokušaje pažljivo i strateški. Sretno, Igrač {{player_id}}! Vidimo koliko riječi možete pronaći!\n"
+  },
+  "board": {
+    "state": "Trenutna ploča:\n\n{board}\nPostavljene riječi: {words}\nPreostali pogrešni pokušaji: {tries}"
+  },
+  "invalid": {
+    "wrong_format": "Neispravan format poteza. Igrač {player_id} nije odgovorio s valjanim 'start_row, start_col, end_row, end_col'.",
+    "out_of_range": "Neispravan format poteza. Igrač {player_id} nije odgovorio s valjanim 'start_row, start_col, end_row, end_col'.",
+    "already_attempted": "Neispravan potez. Akcija je već pokušana."
+  },
+  "feedback": {
+    "incorrect": "[{coords}] je pogrešan pokušaj. {tries} preostalih pogrešnih pokušaja.",
+    "correct": "[{coords}] je točan pokušaj. Pronašli ste riječ '{word}'.",
+    "correct_unknown": "[{coords}] je točan pokušaj, ali riječ nije pronađena u postavljnim riječima."
+  },
+  "outcome": {
+    "no_tries": "Nema više preostalih pogrešnih pokušaja. Pronašli ste {found} od {total} riječi ({pct}%).",
+    "win": "Čestitamo! Završili ste slagalicu Word Search."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "_comment": "Svensk lokalisering för Wordle. ÖVERSÄTT INTE nycklar (vänster sida). Översätt endast värden (höger sida).",
+  "_slots": {
+    "{word_length}": "Längden på det hemliga ordet (heltal)",
+    "{num_guesses}": "Antal tillåtna gissningar (heltal)",
+    "{word}": "Ett gissat ord",
+    "{view}": "Neutrala återgivna bokstäver + G/Y/X-återkoppling (översätt inte)",
+    "{guesses_left}": "Återstående gissningar (heltal)",
+    "{pct}": "Procent av korrekt placerade bokstäver (heltal)",
+    "{secret}": "Det hemliga ordet"
+  },
+  "prompt": {
+    "intro": "Du spelar Wordle.\nEtt hemligt {word_length}-bokstäver långt ord har valts. Du har {num_guesses} försök att gissa det.\nFör varje gissning, linda in ditt ord i hakparenteser (t.ex. '[äpple]').\nÅterkoppling för varje bokstav kommer att ges enligt följande:\n  - G (grön): korrekt bokstav i korrekt position\n  - Y (gul): bokstaven finns i ordet men i fel position\n  - X (fel): bokstaven finns inte i ordet\nAnge din gissning för att börja.\n"
+  },
+  "invalid": {
+    "wrong_format": "Du försökte skicka in ett ord i fel format. Se till att använda hakparenteser.",
+    "wrong_length": "Ditt ord måste vara exakt {word_length} bokstäver långt.",
+    "already_guessed": "Du har redan gissat '{word}' tidigare. Försök med ett annat ord.",
+    "not_a_word": "'{word}' är inte ett giltigt ord."
+  },
+  "feedback": {
+    "submitted": "Du skickade in [{word}].\nÅterkoppling:\n{view}\nDu har {guesses_left} gissningar kvar."
+  },
+  "outcome": {
+    "win": "Grattis! Du gissade ordet korrekt!",
+    "turn_limit": "Tidsgränsen har nåtts. Du gissade inte ordet, men din bästa gissning matchade {pct}% av bokstäverna i korrekt position.\nDet hemliga ordet var: **{secret}**."
+  }
+}

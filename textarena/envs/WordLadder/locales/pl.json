@@ -1,0 +1,34 @@
+{
+  "_comment": "Polski język dla Word Ladder. Klucze (lewa strona) są stałe; tłumacz tylko wartości (prawa strona). Zachowaj każdy {placeholder} w oryginalnej formie. Tokeny słów ({start_word}, {target_word}, {word}, {current}, {ladder}) są neutralnymi tokenami gry i nie powinny być tłumaczone. Zachowaj przykład w nawiasach `[word]` bez zmian.",
+  "_slots": {
+    "{player_id}": "Numer gracza (liczba całkowita)",
+    "{start_word}": "Początkowe słowo drabiny (neutralny token)",
+    "{target_word}": "Słowo docelowe do osiągnięcia (neutralny token)",
+    "{word}": "Słowo, które gracz właśnie przesłał (neutralny token)",
+    "{current}": "Aktualne słowo gracza (neutralny token)",
+    "{target}": "Słowo docelowe (neutralny token)",
+    "{target_len}": "Długość słowa docelowego (liczba całkowita)",
+    "{ladder}": "Historia ruchów połączona przez ' -> ' (neutralne tokeny)",
+    "{history}": "Wiersz historii (już zlokalizowany; nie tłumacz)",
+    "{pct}": "Procent liter wspólnych ze słowem docelowym (liczba całkowita)"
+  },
+  "prompt": {
+    "intro": "Jesteś Graczem {player_id}. Twoim celem jest osiągnięcie słowa docelowego, zmieniając **jedną literę na raz**.\n- Słowo początkowe: **{start_word}**\n- Słowo docelowe: **{target_word}**\nPrześlij każdy ruch w nawiasach kwadratowych, np. `[word]`.\nHistoria pojawia się poniżej, gdy grasz. Powodzenia!\n"
+  },
+  "invalid": {
+    "wrong_format": "Nieprawidłowy format. Umieść swoje słowo w nawiasach kwadratowych, np. `[word]`.",
+    "wrong_length": "`{word}` ma nieprawidłową długość; słowo docelowe ma {target_len} liter.",
+    "not_a_word": "`{word}` nie jest rozpoznawanym słowem.",
+    "not_one_different": "`{word}` nie różni się dokładnie o jedną literę od `{current}`."
+  },
+  "board": {
+    "history": "Historia Word Ladder: {ladder}. Słowo docelowe: {target}\n"
+  },
+  "feedback": {
+    "progress": "Świetnie! Kontynuuj.\n{history}"
+  },
+  "outcome": {
+    "win": "Gratulacje! Osiągnąłeś słowo docelowe.",
+    "turn_limit": "Osiągnięto limit tur. Osiągnąłeś `{current}`, które dzieli {pct}% liter ze słowem docelowym `{target}`."
+  }
+}

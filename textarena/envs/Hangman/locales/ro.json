@@ -1,0 +1,31 @@
+{
+  "_comment": "Fișier de localizare pentru Hangman. Cheile (partea stângă) sunt fixe; traduceți doar valorile (partea dreaptă). Păstrați fiecare {placeholder} exact așa cum este.",
+  "_slots": {
+    "{board}": "Tablă neutră randată (anteturi de coloane C00/C01, litere dezvăluite, spații goale '_'); nu traduceți",
+    "{tries_left}": "Numărul de încercări greșite rămase (număr întreg)",
+    "{guessed}": "Listă de litere deja ghicite, separate prin virgulă",
+    "{letter}": "Litera ghicită sau cuvântul complet (păstrat așa cum a fost tastat)",
+    "{pct}": "Procentajul de caractere ghicite corect, formatat la 2 zecimale",
+    "{target_word}": "Cuvântul țintă ascuns"
+  },
+  "prompt": {
+    "intro": "Jucați Hangman. Obiectivul jocului este de a ghici cuvântul furnizând ghiciri de litere sau întregul cuvânt.\nFiecare coloană este numerotată. Celulele care trebuie populate cu litere sunt reprezentate de '_'.\n\nExistă două moduri în care puteți răspunde. Puteți furniza ghiciri de litere în formatul '[L]', sau puteți ghici întregul cuvânt în formatul '[LIGHT]'.\nDacă litera dată este în cuvânt, va fi dezvăluită în grilă.\nDacă cuvântul dat este corect, câștigați.\nPe măsură ce jucați, istoricul alegerilor dvs. va fi adăugat mai jos. Utilizați informațiile pentru a descoperi cuvântul și a câștiga.\nAveți 6 încercări greșite înainte de a se termina jocul.\n\n"
+  },
+  "board": {
+    "status": "Tablă curentă:\n{board}\nMai aveți {tries_left} încercări.\nLitere ghicite: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Format de mutare invalid. Nu ați răspuns cu o literă sau un cuvânt valid.",
+    "already_guessed": "Ați ghicit litera '{letter}' care a fost deja ghicită."
+  },
+  "message": {
+    "wrong_word": "Ghiciți dvs. de '{letter}' nu este cuvântul țintă.",
+    "letter_in": "Ghiciți dvs. de {letter} este în cuvânt",
+    "letter_not_in": "Ghiciți dvs. de {letter} nu este în cuvânt. Mai aveți {tries_left} vieți."
+  },
+  "outcome": {
+    "win_word": "Felicitări! Ați completat puzzle-ul Hangman.",
+    "win_board": "Felicitări! Ați completat puzzle-ul Hangman.",
+    "out_of_tries": "Nu mai aveți încercări. Ați ghicit {pct} la sută din caractere corect. Cuvântul țintă era: {target_word}"
+  }
+}

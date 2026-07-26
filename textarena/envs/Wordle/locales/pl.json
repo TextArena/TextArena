@@ -1,0 +1,28 @@
+{
+  "_comment": "Polska wersja językowa Wordle. Klucze (lewa strona) są stałe; tłumacz tylko wartości (prawa strona). Zachowaj każdy {placeholder} w oryginalnej formie i nie zmieniaj liter G/Y/X (są to znaczniki gry dla każdej litery).",
+  "_slots": {
+    "{word_length}": "Długość tajnego słowa (liczba całkowita)",
+    "{num_guesses}": "Liczba dozwolonych prób (liczba całkowita)",
+    "{word}": "Zgadywane słowo",
+    "{view}": "Neutralne litery + G/Y/X informacje zwrotne (nie tłumacz)",
+    "{guesses_left}": "Pozostałe próby (liczba całkowita)",
+    "{pct}": "Procent poprawnie umieszczonych liter (liczba całkowita)",
+    "{secret}": "Tajne słowo"
+  },
+  "prompt": {
+    "intro": "Grajesz w Wordle.\nWybrano tajne słowo o długości {word_length} liter. Masz {num_guesses} prób, aby je odgadnąć.\nDla każdej próby, umieść swoje słowo w nawiasach kwadratowych (np. '[jabłko]').\nInformacje zwrotne dla każdej litery będą podane w następujący sposób:\n  - G (zielony): poprawna litera w poprawnej pozycji\n  - Y (żółty): litera istnieje w słowie, ale w złej pozycji\n  - X (zły): litera nie występuje w słowie\nWpisz swoją próbę, aby rozpocząć.\n"
+  },
+  "invalid": {
+    "wrong_format": "Próbowałeś wysłać słowo w złym formacie. Proszę upewnić się, że używasz nawiasów kwadratowych.",
+    "wrong_length": "Twoje słowo musi mieć dokładnie {word_length} liter.",
+    "already_guessed": "Już wcześniej zgadywałeś '{word}'. Proszę spróbować innego słowa.",
+    "not_a_word": "'{word}' nie jest ważnym słowem."
+  },
+  "feedback": {
+    "submitted": "Wysłałeś [{word}].\nInformacje zwrotne:\n{view}\nMasz {guesses_left} prób."
+  },
+  "outcome": {
+    "win": "Gratulacje! Odgadłeś słowo poprawnie!",
+    "turn_limit": "Osiągnięto limit tur. Nie odgadłeś słowa, ale Twoja najlepsza próba pasowała do {pct}% liter w poprawnych pozycjach.\nTajne słowo to: **{secret}**."
+  }
+}

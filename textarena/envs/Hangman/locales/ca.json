@@ -1,0 +1,31 @@
+{
+  "_comment": "Fitxer de localització de Hangman. NO tradueixis les claus (costat esquerre). Només tradueix els valors (costat dret). Mantén cada {placeholder} tal com està.",
+  "_slots": {
+    "{board}": "Tauler neutral renderitzat (capçaleres de columna C00/C01, lletres revelades, espais en blanc '_'); no tradueixis",
+    "{tries_left}": "Intentos incorrectes restants (enter)",
+    "{guessed}": "Llista de lletres ja endevinades separades per comes",
+    "{letter}": "La lletra endevinada o la paraula sencera (conservada tal com s'ha escrit)",
+    "{pct}": "Percentatge de caràcters endevinats correctament, formatat a 2 decimals",
+    "{target_word}": "La paraula objectiu oculta"
+  },
+  "prompt": {
+    "intro": "Estàs jugant a Hangman. L'objectiu del joc és endevinar la paraula proporcionant conjectures de lletres o la paraula sencera.\nCada columna està numerada. Les cel·les que cal omplir amb lletres estan representades per '_'.\n\nHi ha dues maneres de respondre. Pots proporcionar conjectures de lletres en el format de '[L]', o pots endevinar la paraula sencera en el format de '[LIGHT]'.\nSi la lletra donada està en la paraula, es revelarà en la quadrícula.\nSi la paraula donada és correcta, guanyes.\nA mesura que juguis, la història de les teves opcions s'afegirà a continuació. Utilitza la informació per descobrir la paraula i guanyar.\nTens 6 intents incorrectes abans que el joc acabi.\n\n"
+  },
+  "board": {
+    "status": "Tauler actual:\n{board}\nTens {tries_left} intents restants.\nLletres endevinades: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Format de moviment invàlid. No has respost amb una 'lletra' o 'paraula' vàlida.",
+    "already_guessed": "Has endevinat la lletra '{letter}' que ja ha estat endevinada."
+  },
+  "message": {
+    "wrong_word": "La teva conjectura de '{letter}' no és la paraula objectiu.",
+    "letter_in": "La teva conjectura de {letter} està en la paraula",
+    "letter_not_in": "La teva conjectura de {letter} no està en la paraula. Tens {tries_left} vides restants."
+  },
+  "outcome": {
+    "win_word": "Felicitats! Has completat el trencaclosques de Hangman.",
+    "win_board": "Felicitats! Has completat el trencaclosques de Hangman.",
+    "out_of_tries": "Has exhaurit els intents. Has endevinat el {pct} percentatge dels caràcters correctament. La paraula objectiu era: {target_word}"
+  }
+}

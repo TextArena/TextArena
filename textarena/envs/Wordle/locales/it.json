@@ -1,0 +1,28 @@
+{
+  "_comment": "File di localizzazione di Wordle. Le chiavi (a sinistra) sono fisse; tradurre solo i valori (a destra). Mantenere ogni {placeholder} invariato e mantenere le lettere di feedback G/Y/X invariate (sono i marker del gioco per ogni lettera).",
+  "_slots": {
+    "{word_length}": "Lunghezza della parola segreta (intero)",
+    "{num_guesses}": "Numero di tentativi consentiti (intero)",
+    "{word}": "Una parola indovinata",
+    "{view}": "Lettere rese neutre + feedback G/Y/X (non tradurre)",
+    "{guesses_left}": "Tentativi rimanenti (intero)",
+    "{pct}": "Percentuale di lettere correttamente posizionate (intero)",
+    "{secret}": "La parola segreta"
+  },
+  "prompt": {
+    "intro": "Stai giocando a Wordle.\nÈ stata scelta una parola segreta di {word_length} lettere. Hai {num_guesses} tentativi per indovinarla.\nPer ogni tentativo, racchiudi la tua parola in parentesi quadre (ad esempio, '[mela]').\nIl feedback per ogni lettera sarà dato come segue:\n  - G (verde): lettera corretta nella posizione corretta\n  - Y (giallo): la lettera esiste nella parola ma nella posizione sbagliata\n  - X (sbagliato): la lettera non è nella parola\nInserisci il tuo tentativo per iniziare.\n"
+  },
+  "invalid": {
+    "wrong_format": "Hai provato a inviare una parola nel formato sbagliato. Assicurati di utilizzare le parentesi quadre.",
+    "wrong_length": "La tua parola deve essere esattamente di {word_length} lettere.",
+    "already_guessed": "Hai già indovinato '{word}' prima. Prova una parola diversa.",
+    "not_a_word": "'{word}' non è una parola valida."
+  },
+  "feedback": {
+    "submitted": "Hai inviato [{word}].\nFeedback:\n{view}\nHai {guesses_left} tentativi rimanenti."
+  },
+  "outcome": {
+    "win": "Congratulazioni! Hai indovinato la parola correttamente!",
+    "turn_limit": "È stato raggiunto il limite di turni. Non hai indovinato la parola, ma il tuo miglior tentativo ha corrisposto al {pct}% delle lettere nelle posizioni corrette.\nLa parola segreta era: **{secret}**."
+  }
+}

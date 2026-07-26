@@ -1,0 +1,34 @@
+{
+  "_comment": "Dansk lokalisationsfil for Word Ladder. Oversæt ikke nøgler (venstre side). Oversæt kun værdier (højre side).",
+  "_slots": {
+    "{player_id}": "Spillerens nummer (heltal)",
+    "{start_word}": "Startordet på stigen (neutral token)",
+    "{target_word}": "Målordet at nå (neutral token)",
+    "{word}": "Ordet spilleren lige har indsendt (neutral token)",
+    "{current}": "Spillerens aktuelle ord (neutral token)",
+    "{target}": "Målordet (neutral token)",
+    "{target_len}": "Længden af målordet (heltal)",
+    "{ladder}": "Bevægelseshistorikken sammenkædet med ' -> ' (neutrale tokens)",
+    "{history}": "Den gengivne historiklinje (allerede lokaliseret; oversæt ikke)",
+    "{pct}": "Procentdel af bogstaver delt med målet (heltal)"
+  },
+  "prompt": {
+    "intro": "Du er Spiller {player_id}. Dit mål er at nå målordet ved at ændre **ét bogstav ad gangen**.\n- Startord: **{start_word}**\n- Målord: **{target_word}**\nIndsend hver bevægelse i firkantede parenteser, f.eks. `[word]`.\nHistorikken vises nedenfor, når du spiller. Held og lykke!\n"
+  },
+  "invalid": {
+    "wrong_format": "Ugyldigt format. Omgiv dit ord med firkantede parenteser, f.eks. `[word]`.",
+    "wrong_length": "`{word}` har forkert længde; målet er {target_len} bogstaver.",
+    "not_a_word": "`{word}` er ikke et anerkendt ord.",
+    "not_one_different": "`{word}` er ikke nøjagtigt ét bogstav forskelligt fra `{current}`."
+  },
+  "board": {
+    "history": "Word Ladder Historik: {ladder}. Målord: {target}\n"
+  },
+  "feedback": {
+    "progress": "Godt gået! Bliv ved.\n{history}"
+  },
+  "outcome": {
+    "win": "Tillykke! Du nåede målordet.",
+    "turn_limit": "Tidsgrænsen er nået. Du nåede `{current}`, som deler {pct}% af sine bogstaver med målet `{target}`."
+  }
+}

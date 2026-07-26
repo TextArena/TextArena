@@ -1,0 +1,31 @@
+{
+  "_comment": "Suomenkielinen lokalisointi Hangman-peliin. Avaimet (vasen) ovat kiinteitä; käännetään vain arvot (oikea). Jätetään jokainen {placeholder} sellaisenaan. Jätetään neutraalit tunnukset käännettäväksi: '[L]' / '[LIGHT]' hakasulkeiden muodot, yksittäisen kirjaimen arvaus {letter}, sarakkeiden otsikot (C00, C01, ...) ja '_' tyhjät {board} sisällä.",
+  "_slots": {
+    "{board}": "Neutraali piirretty pelilauta (C00/C01 sarakkeiden otsikot, paljastetut kirjaimet, '_' tyhjät); älä käänne",
+    "{tries_left}": "Jäljellä olevat väärät yritykset (kokonaisluku)",
+    "{guessed}": "Pilkulla eroteltu lista jo arvatuista kirjaimista",
+    "{letter}": "Arvattu kirjain tai koko sana (säilytetään kirjoitettuna)",
+    "{pct}": "Oikein arvattujen merkkien prosentti, muotoiltu 2 desimaalille",
+    "{target_word}": "Piilotettu kohdesana"
+  },
+  "prompt": {
+    "intro": "Pelaat Hangman-peliä. Peliin tavoitteena on arvata sana antamalla yksittäisiä kirjaimia tai koko sana.\nJokainen sarake on numeroitu. Solut, jotka täytyy täyttää kirjaimilla, on edustettu merkillä '_'.\n\nOn kaksi tapaa, joilla voit vastata. Voit antaa yksittäisiä kirjaimia muodossa '[L]', tai voit arvata koko sanan muodossa '[LIGHT]'.\nJos annettu kirjain on sanassa, se paljastetaan ruudukossa.\nJos annettu sana on oikein, voitat.\nPelaamisen aikana valintojesi historia liitetään alla olevaan listaan. Käytä tietoa selvittääksesi sanan ja voittaaksesi.\nSinulla on 6 väärää yritystä ennen kuin peli päättyy.\n\n"
+  },
+  "board": {
+    "status": "Nykyinen pelilauta:\n{board}\nSinulla on {tries_left} yritystä jäljellä.\nArvatut kirjaimet: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Virheellinen siirron muoto. Et vastannut kelvollisella 'kirjaimella' tai 'sanalla'.",
+    "already_guessed": "Arvasit kirjaimen '{letter}', joka on jo arvattu."
+  },
+  "message": {
+    "wrong_word": "Arvauksesi '{letter}' ei ole kohdesana.",
+    "letter_in": "Arvauksesi {letter} on sanassa",
+    "letter_not_in": "Arvauksesi {letter} ei ole sanassa. Sinulla on {tries_left} elämää jäljellä."
+  },
+  "outcome": {
+    "win_word": "Onnittelut! Suoritit Hangman-pelin.",
+    "win_board": "Onnittelut! Olet suorittanut Hangman-pelin.",
+    "out_of_tries": "Olet loppu yrityksistä. Arvasit {pct} prosenttia merkeistä oikein. Kohdesana oli: {target_word}"
+  }
+}

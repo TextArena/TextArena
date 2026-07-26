@@ -1,0 +1,34 @@
+{
+  "_comment": "Ngôn ngữ tiếng Anh cho Word Ladder. Các khóa (bên trái) là cố định; chỉ dịch các giá trị (bên phải). Giữ nguyên mọi {placeholder}. Các từ khóa ({start_word}, {target_word}, {word}, {current}, {ladder}) là từ trung tính của trò chơi và không được dịch. Giữ ví dụ trong ngoặc vuông `[word]` nguyên vẹn.",
+  "_slots": {
+    "{player_id}": "Số thứ tự của người chơi (số nguyên)",
+    "{start_word}": "Từ bắt đầu của chuỗi từ (từ trung tính)",
+    "{target_word}": "Từ mục tiêu cần đạt đến (từ trung tính)",
+    "{word}": "Từ mà người chơi vừa gửi (từ trung tính)",
+    "{current}": "Từ hiện tại của người chơi (từ trung tính)",
+    "{target}": "Từ mục tiêu (từ trung tính)",
+    "{target_len}": "Độ dài của từ mục tiêu (số nguyên)",
+    "{ladder}": "Lịch sử các nước đi được nối bằng ' -> ' (từ trung tính)",
+    "{history}": "Dòng lịch sử đã được hiển thị (đã được địa phương hóa; không dịch)",
+    "{pct}": "Phần trăm các chữ cái chung với từ mục tiêu (số nguyên)"
+  },
+  "prompt": {
+    "intro": "Bạn là Người chơi {player_id}. Mục tiêu của bạn là đạt đến từ mục tiêu bằng cách thay đổi **một chữ cái mỗi lần**.\n- Từ bắt đầu:  **{start_word}**\n- Từ mục tiêu: **{target_word}**\nGửi mỗi nước đi trong ngoặc vuông, ví dụ:  `[word]`.\nLịch sử sẽ hiển thị bên dưới khi bạn chơi. Chúc may mắn!\n"
+  },
+  "invalid": {
+    "wrong_format": "Định dạng không hợp lệ. Bọc từ của bạn trong ngoặc vuông, ví dụ: `[word]`.",
+    "wrong_length": "`{word}` có độ dài không đúng; từ mục tiêu có {target_len} chữ cái.",
+    "not_a_word": "`{word}` không phải là một từ được công nhận.",
+    "not_one_different": "`{word}` không chỉ khác một chữ cái so với `{current}`."
+  },
+  "board": {
+    "history": "Lịch sử chuỗi từ: {ladder}.  Từ mục tiêu: {target}\n"
+  },
+  "feedback": {
+    "progress": "Tuyệt vời! Hãy tiếp tục.\n{history}"
+  },
+  "outcome": {
+    "win": "Chúc mừng! Bạn đã đạt đến từ mục tiêu.",
+    "turn_limit": "Hạn chế lượt chơi đã đạt đến. Bạn đã đạt đến `{current}` chia sẻ {pct}% các chữ cái với từ mục tiêu `{target}`."
+  }
+}

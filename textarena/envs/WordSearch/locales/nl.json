@@ -1,0 +1,37 @@
+{
+  "_comment": "Nederlandse lokalisatie voor Word Search. Vertaal alleen de waarden (rechterkant). Houd elke {placeholder} letterlijk. Rasterlabels (R00/C00), coördinaten en de actie-indeling '[start_row start_col end_row end_col]' en voorbeelden als '[1 1 1 5]' zijn NEUTRAAL en mogen niet worden vertaald. {board} en {words} zijn neutrale spelinhoud.",
+  "_slots": {
+    "{player_id}": "Spelernummer (geheel getal)",
+    "{mode}": "Spelmoduslabel (al gelokaliseerd: Basis/Hardcore)",
+    "{tries}": "Aantal resterende onjuiste pogingen (geheel getal)",
+    "{board}": "Het gerenderde raster (neutraal; vertaal niet)",
+    "{words}": "Komma-gescheiden lijst van verborgen woorden (neutrale tokens)",
+    "{coords}": "De 'start_row start_col end_row end_col'-coördinaten (neutraal)",
+    "{word}": "Een verborgen woord dat is gevonden (neutraal token)",
+    "{found}": "Aantal gevonden woorden tot nu toe (geheel getal)",
+    "{total}": "Totaal aantal verborgen woorden (geheel getal)",
+    "{pct}": "Percentage gevonden woorden (geheel getal)"
+  },
+  "prompt": {
+    "mode_basic": "Basis",
+    "mode_hardcore": "Hardcore",
+    "intro": "U bent Speler {player_id} en neemt deel aan een Word Search-uitdaging gemodelleerd als {mode}. Het doel is om verborgen woorden op het raster hieronder te vinden en te markeren. De rijen en kolommen zijn genummerd voor uw referentie.\n\nHier is de huidige staat van het Word Search-bord:\n----------------------------------------\nWoorden die u al hebt gevonden, zijn gemarkeerd in vierkante haken [ ]. Elke rij en kolom is genummerd voor duidelijkheid.\n\n\nOm een woord te lokaliseren, geeft u de rij en kolom van de begin- en eindletters op. Houd er rekening mee dat woorden horizontaal of verticaal zijn.\nU kunt uw reactie en gedachten op elke manier typen. Maar u kunt slechts één inzending tegelijk indienen. Voor uw inzendingen gebruikt u het formaat '[start_row start_col end_row end_col]'.\nBijvoorbeeld, als u het woord 'HALLO' wilt vinden dat begint op rij 1, kolom 1 en eindigt op rij 1, kolom 5, voert u '[1 1 1 5]' in.\n\nRichtlijnen:\n- Elke gok moet uniek zijn; u kunt dezelfde gok niet herhalen.\n- U hebt in totaal {tries} onjuiste pogingen over.\n- De geschiedenis van uw pogingen wordt hieronder geregistreerd.\n\nDoe uw gokken zorgvuldig en strategisch. Succes, Speler {{player_id}}! Laten we zien hoeveel woorden u kunt vinden!\n"
+  },
+  "board": {
+    "state": "Huidig bord:\n\n{board}\nGeplaatste woorden: {words}\nResterende onjuiste pogingen: {tries}"
+  },
+  "invalid": {
+    "wrong_format": "Ongeldig formaat voor de zet. Speler {player_id} heeft niet gereageerd met een geldig 'start_row, start_col, end_row, end_col'.",
+    "out_of_range": "Ongeldig formaat voor de zet. Speler {player_id} heeft niet gereageerd met een geldig 'start_row, start_col, end_row, end_col'.",
+    "already_attempted": "Ongeldige zet. De actie is al eerder geprobeerd."
+  },
+  "feedback": {
+    "incorrect": "[{coords}] is een onjuiste poging. {tries} onjuiste pogingen over.",
+    "correct": "[{coords}] is een correcte poging. U hebt het woord '{word}' gevonden.",
+    "correct_unknown": "[{coords}] is een correcte poging, maar het woord is niet gevonden in de geplaatste woorden."
+  },
+  "outcome": {
+    "no_tries": "Geen onjuiste pogingen meer over. U hebt {found} van de {total} woorden gevonden ({pct}%).",
+    "win": "Gefeliciteerd! U hebt de Word Search-puzzel voltooid."
+  }
+}

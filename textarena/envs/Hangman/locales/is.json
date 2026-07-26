@@ -1,0 +1,31 @@
+{
+  "_comment": "Íslensk staðfærsla fyrir Hangman. ÞÝÐA EKKI lykla (vinstri hlið). Þýða aðeins gildi (hægri hlið).",
+  "_slots": {
+    "{board}": "Hlutlaust teiknað borð (C00/C01 dálkar, opinberaðar stafir, '_' auðir reitir); ekki þýða",
+    "{tries_left}": "Fjöldi eftirstandandi rangra reyna (heiltala)",
+    "{guessed}": "Kommuskiptur listi yfir þegar ágættir stafir",
+    "{letter}": "Giskandi stafur eða full orð (hélt eins og skrifað)",
+    "{pct}": "Hlutfall rétt giskra stafa, sniðið í 2 aukastafi",
+    "{target_word}": "Falið markorð"
+  },
+  "prompt": {
+    "intro": "Þú ert að spila Hangman. Markmið leiksins er að giska orðið með því að veita einn staf gisk eða allt orðið.\nHver dálkur er númeraður. Reitir sem þarf að fylla með stöfum eru táknaðir með '_'.\n\nÞað eru tvær leiðir til að svara. Þú getur veitt einn staf gisk í sniðinu '[L]', eða þú getur giskað allt orðið í sniðinu '[LIGHT]'.\nEf gefinn stafur er í orðinu, verður hann sýnilegur í grindinni.\nEf gefið orð er rétt, vinnur þú.\nÞegar þú spilar, verður saga þinna vala bætt við hér að neðan. Notaðu upplýsingarnar til að komast að orðinu og vinna.\nÞú hefur 6 rangar reynir áður en leikurinn endar.\n\n"
+  },
+  "board": {
+    "status": "Núverandi borð:\n{board}\nÞú hefur {tries_left} reynir eftir.\nGiskir stafir: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Ógilt snið fyrir leik. Þú svaraðir ekki með giltum 'staf' eða 'orði'.",
+    "already_guessed": "Þú giskaðir stafinn '{letter}' sem hefur þegar verið giskaður."
+  },
+  "message": {
+    "wrong_word": "Gisk þitt á '{letter}' er ekki markorðið.",
+    "letter_in": "Gisk þitt á {letter} er í orðinu",
+    "letter_not_in": "Gisk þitt á {letter} er ekki í orðinu. Þú hefur {tries_left} líf eftir."
+  },
+  "outcome": {
+    "win_word": "Til hamingju! Þú kláraðir Hangman þrautina.",
+    "win_board": "Til hamingju! Þú hefur klárað Hangman þrautina.",
+    "out_of_tries": "Þú ert búinn að reyna. Þú giskaðir {pct} prósent af stöfunum rétt. Markorðið var: {target_word}"
+  }
+}

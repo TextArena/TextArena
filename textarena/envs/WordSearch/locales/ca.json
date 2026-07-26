@@ -1,0 +1,37 @@
+{
+  "_comment": "Fitxer de localització de Word Search. NO tradueixis les claus (costat esquerre). Només tradueix els valors (costat dret). Mantén cada {placeholder} tal com està.",
+  "_slots": {
+    "{player_id}": "Número del jugador (enter)",
+    "{mode}": "Etiqueta del mode de joc (ja localitzada: Bàsic/Hardcore)",
+    "{tries}": "Nombre d'intents incorrectes restants (enter)",
+    "{board}": "La quadrícula renderitzada (neutral; no tradueixis)",
+    "{words}": "Llista de paraules amagades separades per comes (tokens neutrals)",
+    "{coords}": "Les coordenades 'fila_inicial columna_inicial fila_final columna_final' (neutrals)",
+    "{word}": "Una paraula amagada que s'ha trobat (token neutral)",
+    "{found}": "Nombre de paraules trobades fins ara (enter)",
+    "{total}": "Nombre total de paraules amagades (enter)",
+    "{pct}": "Percentatge de paraules trobades (enter)"
+  },
+  "prompt": {
+    "mode_basic": "Bàsic",
+    "mode_hardcore": "Hardcore",
+    "intro": "Ets el Jugador {player_id}, i estàs participant en un desafiament de Word Search modelat com a {mode}. L'objectiu és trobar i destacar les paraules amagades a la quadrícula de sota. Les files i columnes estan numerades per a la teva referència.\n\nAquí tens l'estat actual de la quadrícula de Word Search:\n----------------------------------------\nLes paraules que ja has trobat estan marcades en claudàtors [ ]. Cada fila i columna està numerada per a la claredat.\n\n\nPer localitzar una paraula, especifica la fila i la columna de les seves lletres inicials i finals. Tingues en compte que les paraules són o bé horitzontals o bé verticals.\nPots escriure la teva resposta i pensaments de qualsevol manera. Però només pots enviar una submissió alhora. Per a les teves submissió, utilitza el format '[fila_inicial columna_inicial fila_final columna_final]'.\nPer exemple, si vols trobar la paraula 'HELLO' començant a la fila 1, columna 1 i acabant a la fila 1, columna 5, entra '[1 1 1 5]'.\n\nDirectrius:\n- Cada intent ha de ser únic; no pots repetir el mateix intent.\n- Tens un total de {tries} intents incorrectes restants.\n- La història dels teus intents serà registrada a sota.\n\nFes les teves suposicions amb compte i estratègicament. Bona sort, Jugador {{player_id}}! Vejam quantes paraules pots trobar!\n"
+  },
+  "board": {
+    "state": "Tauler actual:\n\n{board}\nParaules col·locades: {words}\nIntents incorrectes restants: {tries}"
+  },
+  "invalid": {
+    "wrong_format": "Format de moviment invàlid. El Jugador {player_id} no ha respost amb un format vàlid 'fila_inicial, columna_inicial, fila_final, columna_final'.",
+    "out_of_range": "Format de moviment invàlid. El Jugador {player_id} no ha respost amb un format vàlid 'fila_inicial, columna_inicial, fila_final, columna_final'.",
+    "already_attempted": "Moviment invàlid. L'acció ja s'ha intentat."
+  },
+  "feedback": {
+    "incorrect": "[{coords}] és un intent incorrecte. {tries} intents incorrectes restants.",
+    "correct": "[{coords}] és un intent correcte. Has trobat la paraula '{word}'.",
+    "correct_unknown": "[{coords}] és un intent correcte, però la paraula no s'ha trobat a les paraules col·locades."
+  },
+  "outcome": {
+    "no_tries": "No queden més intents incorrectes. Has trobat {found} de {total} paraules ({pct}%).",
+    "win": "Felicitats! Has completat el trencaclosques de Word Search."
+  }
+}

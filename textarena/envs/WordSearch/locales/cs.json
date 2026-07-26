@@ -1,0 +1,37 @@
+{
+  "_comment": "Česká lokalizace pro Word Search. Klíče (vlevo) jsou pevné; překládávejte pouze hodnoty (vpravo). Zachovejte každý {placeholder} beze změny. Označení mřížky (R00/C00), souřadnice a formát akce v závorkách '[start_row start_col end_row end_col]' a příklady jako '[1 1 1 5]' jsou NEUTRÁLNÍ a nesmí být překládány. {board} a {words} jsou neutrální obsah hry.",
+  "_slots": {
+    "{player_id}": "Číslo hráče (celé číslo)",
+    "{mode}": "Označení herního režimu (již lokalizováno: Základní/Hardcore)",
+    "{tries}": "Počet zbývajících nesprávných pokusů (celé číslo)",
+    "{board}": "Vykreslená mřížka (neutrální; nepřekládávejte)",
+    "{words}": "Čárkami oddělený seznam skrytých slov (neutrální tokeny)",
+    "{coords}": "Souřadnice 'start_row start_col end_row end_col' (neutrální)",
+    "{word}": "Nalezené skryté slovo (neutrální token)",
+    "{found}": "Počet nalezených slov (celé číslo)",
+    "{total}": "Celkový počet skrytých slov (celé číslo)",
+    "{pct}": "Procento nalezených slov (celé číslo)"
+  },
+  "prompt": {
+    "mode_basic": "Základní",
+    "mode_hardcore": "Hardcore",
+    "intro": "Jste hráč {player_id} a účastníte se výzvy Word Search v režimu {mode}. Cílem je najít a zvýraznit skrytá slova na mřížce níže. Řádky a sloupce jsou očíslovány pro vaši referenci.\n\nZde je aktuální stav mřížky Word Search:\n----------------------------------------\nSlova, která jste již našli, jsou označena v hranatých závorkách [ ]. Každý řádek a sloupec je očíslován pro jasnost.\n\n\nChcete-li najít slovo, zadejte řádek a sloupec jeho začátku a konce. Všimněte si, že slova jsou buď vodorovná nebo svislá.\nMůžete zadat svou odpověď a myšlenky jakýmkoli způsobem. Ale můžete odeslat pouze jednu odpověď najednou. Pro vaše odpovědi použijte formát '[start_row start_col end_row end_col]'.\nNapříklad, pokud chcete najít slovo 'HELLO' začínající na řádku 1, sloupci 1 a končící na řádku 1, sloupci 5, zadejte '[1 1 1 5]'.\n\nPokyny:\n- Každý pokus musí být jedinečný; nelze opakovat stejný pokus.\n- Máte celkem {tries} nesprávných pokusů.\n- Historie vašich pokusů bude zaznamenána níže.\n\nDělejte své pokusy pečlivě a strategicky. Hodně štěstí, hráč {{player_id}}! Uvidíme, kolik slov můžete najít!\n"
+  },
+  "board": {
+    "state": "Aktuální mřížka:\n\n{board}\nUmístěná slova: {words}\nZbývající nesprávné pokusy: {tries}"
+  },
+  "invalid": {
+    "wrong_format": "Neplatný formát pohybu. Hráč {player_id} neodpověděl s platným 'start_row, start_col, end_row, end_col'.",
+    "out_of_range": "Neplatný formát pohybu. Hráč {player_id} neodpověděl s platným 'start_row, start_col, end_row, end_col'.",
+    "already_attempted": "Neplatný pohyb. Akce již byla pokusena."
+  },
+  "feedback": {
+    "incorrect": "[{coords}] je nesprávný pokus. {tries} nesprávných pokusů zbývá.",
+    "correct": "[{coords}] je správný pokus. Našli jste slovo '{word}'.",
+    "correct_unknown": "[{coords}] je správný pokus, ale slovo nebylo nalezeno v umístěných slovech."
+  },
+  "outcome": {
+    "no_tries": "Žádné další nesprávné pokusy nezbyly. Našli jste {found} ze {total} slov ({pct}%).",
+    "win": "Gratulujeme! Dokončili jste puzzle Word Search."
+  }
+}

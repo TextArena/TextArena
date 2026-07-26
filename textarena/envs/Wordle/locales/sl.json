@@ -1,0 +1,28 @@
+{
+  "_comment": "Slovenski prevod za Wordle. Ključi (levo) so fikseni; prevodite samo vrednosti (desno). Ohranite vsak {placeholder} dobesedno in ohranite črke povratne informacije G/Y/X nespremenjene (so označevalci igre za vsako črko).",
+  "_slots": {
+    "{word_length}": "Dolžina skrivne besede (celo število)",
+    "{num_guesses}": "Število dovoljenih ugibanj (celo število)",
+    "{word}": "Ugibana beseda",
+    "{view}": "Nevtralno prikazane črke + povratne informacije G/Y/X (ne prevodite)",
+    "{guesses_left}": "Preostala ugibanja (celo število)",
+    "{pct}": "Odstotek pravilno postavjenih črk (celo število)",
+    "{secret}": "Skrivna beseda"
+  },
+  "prompt": {
+    "intro": "Igrate Wordle.\nIzbrana je bila skrivna {word_length}-črkovna beseda. Imate {num_guesses} poskusov, da jo uganete.\nZa vsako ugibanje obkrožite svojo besedo s kvadratnimi oklepaji (npr. '[jabolko]').\nPovratne informacije za vsako črko bodo podane kot sledi:\n  - G (zelena): pravilna črka na pravilnem mestu\n  - Y (rumena): črka obstaja v besedi, a na napačnem mestu\n  - X (nepopravno): črka ni v besedi\nVnesite svoje ugibanje, da začnete.\n"
+  },
+  "invalid": {
+    "wrong_format": "Poskusili ste oddati besedo v napačnem formatu. Prosim, prepričajte se, da uporabljate kvadratne oklepaje.",
+    "wrong_length": "Vaša beseda mora biti točno {word_length} črk dolga.",
+    "already_guessed": "Že ste prej uganili '{word}'. Prosim, poskusite z drugo besedo.",
+    "not_a_word": "'{word}' ni veljavna beseda."
+  },
+  "feedback": {
+    "submitted": "Oddali ste [{word}].\nPovratne informacije:\n{view}\nImate še {guesses_left} ugibanj."
+  },
+  "outcome": {
+    "win": "Čestitke! Pravilno ste uganili besedo!",
+    "turn_limit": "Dosežen je bil limit potez. Niste uganili besede, a vaš najboljši poskus je ujemal {pct}% črk v pravilnih položajih.\nSkrivna beseda je bila: **{secret}**."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Slovenski prevod za Hangman. Ključi (levo) so fikseni; prevodite samo vrednosti (desno). Ohranite vsak {placeholder} kot je.",
+  "_slots": {
+    "{board}": "Nevtralna prikazana plošča (C00/C01 glave stolpcev, razkrite črke, '_' praznine); ne prevodite",
+    "{tries_left}": "Število preostalih napačnih poskusov (celo število)",
+    "{guessed}": "Seznam že uganjenih črk, ločenih z vejico",
+    "{letter}": "Ugibana črka ali cela beseda (obdržana kot je bila vpisana)",
+    "{pct}": "Odstotek pravilno uganjenih znakov, oblikovan na 2 decimalni mesta",
+    "{target_word}": "Skrita ciljna beseda"
+  },
+  "prompt": {
+    "intro": "Igrate Hangman. Cilj igre je uganiti besedo tako, da podate posamezne črke ali celo besedo.\nVsak stolpec je označen. Celice, ki jih je treba zapolniti s črkami, so predstavljene z '_'.\n\nObstajata dva načina, kako lahko odgovorite. Lahko podate posamezne črke v obliki '[L]', ali pa lahko uganite celo besedo v obliki '[LIGHT]'.\nČe je podana črka v besedi, bo razkrita v mreži.\nČe je podana beseda pravilna, zmagate.\nMed igranjem se bo zgodovina vaših izbir dodajala spodaj. Uporabite informacije, da uganite besedo in zmagate.\nImate 6 napačnih poskusov, preden se igra konča.\n\n"
+  },
+  "board": {
+    "status": "Trenutna plošča:\n{board}\nImate še {tries_left} poskusov.\nUganjene črke: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Napačen format poteze. Niste odgovorili z veljavno 'črko' ali 'besedo'.",
+    "already_guessed": "Uganili ste črko '{letter}', ki je že bila uganjena."
+  },
+  "message": {
+    "wrong_word": "Vaš ugib '{letter}' ni ciljna beseda.",
+    "letter_in": "Vaš ugib {letter} je v besedi",
+    "letter_not_in": "Vaš ugib {letter} ni v besedi. Imate še {tries_left} življenj."
+  },
+  "outcome": {
+    "win_word": "Čestitke! Dokončali ste Hangman uganko.",
+    "win_board": "Čestitke! Dokončali ste Hangman uganko.",
+    "out_of_tries": "Zmanjkalo vam je poskusov. Uganili ste {pct} odstotek znakov pravilno. Ciljna beseda je bila: {target_word}"
+  }
+}
