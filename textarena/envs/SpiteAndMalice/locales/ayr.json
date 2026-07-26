@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Taqi P'iqi:\n\n{board}\nAka Aruni: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pilanaka taypi lurata -- ",
+    "pile": "{observation}P'iqi {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- P'iqi {player_id}'s View ---\n",
+    "payoff": "{observation}Payoff P'iqi (Top Card): {top_card}, Payoff P'iqi Length: {payoff_length}\n",
+    "hand": "{observation} Amparampi: {hand} ",
+    "discard": "{observation}Discard P'iqinakaxa: {discard}\n",
+    "empty": "Jan kunani."
+  },
+  "game_message": {
+    "no_cards_left": "Janiw juk'ampi cartas utjxiti. Amtasipxam, aka jakawimpis atipt'apxasma: 1. amparam 2. Qullqi katuqañ tarjetanakan p'iqinchata 3. Jalthapiñ tarjeta ukanakatxa maynitipini. "
+  },
+  "invalid_move": {
+    "wrong_format": "Jani wali wakichata. {player_id} anatirixa janiw mä aski lurawimpix jayskanti, aka taypi paréntesis ukankiwa.",
+    "invalid_play": "Jan wali play. P'iqi {player_id} p'iqiriniraki {card} center p'iqi {index}.",
+    "discard_from_payoff": "Jani chiqapa jaqsuña. {player_id} anatirixa payllawi qutuchata mä tarjeta jaqsuñwa yant'i.",
+    "discard_not_in_hand": "Jani chiqapa jaqsuña. {player_id} anatirixa janiwa amparapanki uka carta jaqsuñ munkataynati.",
+    "wrong_move_type": "Jani wali wakichata. {player_id} anatirixa janiwa aski wakichäwimpi jayskiti."
+  },
+  "game_action": {
+    "you_drew": "You drew cards.",
+    "opponent_drew": "{player_id} anatirix cartanakwa apsuwayi.",
+    "you_played": "Janiw p'iqiriniraki {card} center p'iqi {index}.",
+    "opponent_played": "Player {player_id} played {card} on center pile {index}.",
+    "you_discarded": "You have discarded {card} to discard pile {index}, which also means you have finished their turn. No further actions of yours is considered for this turn. Player {next_player_id} will go next.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "P'iqi {current_player} payoff p'iqinakaxa! P'iqi {current_player} wakiskiraki!",
+    "deadlock_player_0": "Deadlock reached! Player 0 wins with {player_0_payoff} cards remaining vs Player 1's {player_1_payoff} cards.",
+    "deadlock_player_1": "Deadlock reached! Player 1 wins with {player_1_payoff} cards remaining vs Player 0's {player_0_payoff} cards.",
+    "deadlock_tie": "Deadlock reached with tie! Both players have {player_0_payoff} cards remaining. Player {current_player} wins by default."
+  }
+}

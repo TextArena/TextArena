@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} ({piece}). Opponent is ({opp}).\nSubmit moves as '[a2 a3]' (from → to).\n- A normal move is one forward step to an adjacent empty vertex.\n- A capture is a jump over an adjacent enemy piece landing on the empty node beyond.\nEach capture yields {score_per_capture} points.\nGame ends after {max_moves} moves or when a player has no legal move."
+  },
+  "board": {
+    "current_board": "Chhuxu #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "Jan wali qillqawi. \"[a2 a3]\" ukampi qillqantma.",
+    "unknown_square": "Jan uñt'at plaza.",
+    "not_your_piece": "Janiw juman kuna lurañamas utjkiti.",
+    "dest_not_empty": "Destination not empty.",
+    "illegal": "Illegal move."
+  },
+  "game_action": {
+    "captured": "Waki {player_id} qhipanakax jach'a jilatasi! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "{player_id} anatirix janiw kuna ch'uqiw utjkanti.",
+    "cannot_move": "{player_id} anatirix janiw sarkaspati.",
+    "higher_score": "Higher capture score.",
+    "move_limit": "Move limit reached."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "Q'AWANA: {target}\n\nJaqiña akatiti:\n{numbers}",
+    "best": "{observation}\n\nJupax q'ala: {best_value} (jaqi: {distance})\nJupax sutipa: {best_expression}",
+    "history": "{observation}\n\nMove history:\n{moves}",
+    "progress": "{observation}\nQ'ala p'iqi: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Indices inválidos. Jani kikipakiñapawa, 0-{max_index} ukch'anawa.",
+    "invalid_operation": "Invalid operation (division by zero or non-integer result)"
+  },
+  "outcome": {
+    "win": "¡Jach'a amtatarjamaw jikxatasma! {target}",
+    "no_moves": "Janiw kamana. Jupax q'ala: {best_value} (q'awana: {target})",
+    "turn_limit": "P'iqi kamana. Jupax q'ala: {best_value} (q'awana: {target})"
+  }
+}

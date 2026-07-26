@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Kamisaraki Lights Out! Jupaxa {size}x{size} q'awina ukhamaña.\nJupanakaxa tukuyi q'awinakaxa tukuyi (wali ukhamata '.')\nJupaxa q'awinaxa janiw uñacht'ayäna, ukhamaraki jupaxa q'awinakaxa uñacht'ayäna (q'ala/q'ama/pana/laya).\nJupaxa [row col] ukhamata q'awinaxa uñacht'ayäna (0-ukhamata, ukhamaraki tukuyi ukhamata 0-{max_index}).\nJupaxa tukuyi {max_turns} ch'amanakaxa ukhamata p'iqi tukuyirinakaxa.\nQ'alla: 'O' = q'awina wali, '.' = q'awina tukuyi"
+  },
+  "board": {
+    "current_state": "Current grid state (Move {moves_made}, {moves_left} moves remaining, {completion}% complete):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksiyonaka ukaxa [row col] ukhamata, ukhamaraki naq'araña ukhamata 0 ukhamata {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "¡Jallalla! Jumax {moves_used} saräwinakanw puzzle uk askichtaxa.",
+    "loss": "Game over! You used all {max_turns} moves without solving the puzzle. Final completion: {completion}%\nFinal state:\n{grid}"
+  }
+}

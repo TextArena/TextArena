@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a game of HighSociety (2-player version).\nGame flow:  Ten prestige cards are auctioned one after another.\nBidding:    Each auction, secretly choose a money card 1-11 and reveal.\n            • Higher bid wins the prestige card and discards that money card.\n            • Lower bid keeps their money card.\n            • Tie -> both bids are returned and the same prestige card is re-auctioned.\nScoring:    After all ten auctions, add **remaining cash + prestige points**.\n            Higher *net-worth* wins (exact tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Subasta {round}/10  |  Tarjeta de prestigio: {prize}"
+  },
+  "board": {
+    "money_cards": "Qullqi tarjetanakama: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ukax mä [X] cartel de dinero ukamp chikt'atañapawa.",
+    "card_not_held": "Janiw kuna qullqis utxiti."
+  },
+  "message": {
+    "tie": "¡Uñt'atäki uka alasiñax kuttanxiwa!",
+    "auction_result": "P0 ofertó {bid0}, P1 ofertó {bid1}. Jugador {winner} gana prestigio {prize} (total {total})."
+  },
+  "outcome": {
+    "p0_wins": "Patrimonio neto {nw0} > {nw1}",
+    "p1_wins": "Patrimonio neto {nw1} > {nw0}",
+    "draw": "Paypach suma {nw0}  kikipaki."
+  }
+}
