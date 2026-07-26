@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "ད་ལྟོའི་ཡིག་ཚང་: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "འགྲོ་སྐབས་ཚུགས་ཀྱི་རྣམ་པ་[macro micro] ཡིན་དགོས། 0-8 གྱི་གྲངས་ཀྱིས།",
+    "out_of_range": "ཨང་གྲངས་ཚུ་ ༠ དང་ ༨ གི་བར་ན་འབད་དགོཔ་ཨིན།",
+    "index_out_of_range": "ཕྲ་རིང་ཆུང་བ་ ཡང་ན་ གྲལ་ཐིག་དེ་ ཁྱབ་ཚད་ལས་བརྒལ་ཏེ་ཡོདཔ་ཨིན།",
+    "cell_occupied": "བཙོན་ཁང་འདི་ ཧེ་མ་ལས་རང་ མི་གིས་གང་སྟེ་འདུག།",
+    "wrong_micro_board": "རྩེད་འགྲན་པ་གིས་ ཤུལ་མའི་ཨང་རིམ་ནང་རྩེདམོ་རྩེ་དགོ།",
+    "micro_board_won": "ཆུང་རིམ་སྒྲོམ་འདི་ ཧེ་མ་ལས་ཐོབ་ཚར་ནུག"
+  },
+  "next_board": {
+    "any": "ཆུང་བ་སྒྲོམ་ཚུ་ཆ་མཉམ་ཨིན།",
+    "specific": "མི་ཆུང་བརྒྱུད་ཐིག {nxt}"
+  },
+  "game_action": {
+    "played": "Player {player_id} འགྲོ་སྐབས་མི་ཆུང་བརྒྱུད་ཐིག {macro_idx}、 འགྲོ་ཐིག {micro_idx} (གཡོག་ཐིག {row}、 གཡོག་གྲུ {col})。 Player {opponent_id} ད་ནི་{nxt_txt}ནང་འགྲོ་སྐབས་བྱེད་དགོས།"
+  },
+  "outcome": {
+    "win": "རྩེད་འགྲན་པ་ {player_id} གིས་ ཨེལ་ཊི་མི་ཀྲ་ ཏིག་ཏེག་ཨོཕ་ལུ་ རྒྱལ་ཁ་ཐོབ་ཡོདཔ་ཨིན།",
+    "draw": "The game is a draw!"
+  }
+}

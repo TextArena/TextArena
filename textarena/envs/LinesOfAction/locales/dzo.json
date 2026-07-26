@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "གྲོས་ཚོགས་: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ཚད་གཞི་འདི་ e2e4 (ལས་,to coordinates) ཨིན་དགོ",
+    "no_piece": "{side} གི་མིང་མེད་པ་{coord} ལ་མེད།",
+    "identical": "འབྱུང་ཁུངས་དང་ མཇུག་བསྡུ་ས་ཆ་འདི་ གཅིག་མཚུངས་ཨིན།",
+    "not_straight_or_diagonal": "འགྲུལ་བསྐྱོད་དེ་ ཐད་ཀར་ ཡང་ན་ ཟུར་ཐིག་སྦེ་འབད་དགོཔ་ཨིན།",
+    "wrong_distance": "ཕྲང་སྒྲིག་ནང་ཡོད་མི་རྡུལ་ཚུ་དང་ དབྱེ་བ་འདྲ་མཉམ་སྦེ་ སྤོ་དགོཔ་ཨིན།",
+    "enemy_blocks": "དགྲ་གི་མཚོན་ཆ་གིས་ ལམ་བཀག་ནུག",
+    "destination_own": "ཕྱོགས་ཁ་འདི་ རང་གིས་རང་ལུ་དབང་ཡོདཔ་ཨིན།"
+  },
+  "game_action": {
+    "moved": "Player {player_id} ཕྱིན་{from} -> {to} འགྲོ་ཡོད།",
+    "captured_suffix": "Player {player_id} moved {from} -> {to} capturing an enemy."
+  },
+  "outcome": {
+    "win": "སྦྲགས་ཐིག་ག་ར་ མཐུད་ལྡོག་འབད་ཡོདཔ་ཨིན།",
+    "draw_no_capture": "60 moves without capture.",
+    "draw_repetition": "གནས་སྟངས་འདི་ ཚར་གསུམ་ལོག་བསྐྱལ་ནུག"
+  }
+}

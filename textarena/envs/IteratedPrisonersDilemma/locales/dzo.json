@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "འབྲེལ་བ་མཇུག་སྒྲིལ་{round} ལ་སྤྱི་འཐུས་'[Cooperate]' ཡང་ན '[Defect]' འདེམ་སྒྲིག་བྱེད་དགོས། དུས་ཚོད་འཁེལ་བ་\\boxed{{}}.",
+    "starting_round": "--- འགོ་བཙུགས་ཀྱི་འཁོར་ལོ་བརྒྱད་ {round} --",
+    "round_summary": "ར་འཁོར་{round} གི་འབྲས་བུ།:\n{outcome}\nམིའོ་ 0 ལ་{r0} ཐོབ་པ་(མཇུག་འབྲས་{score_0}) མིའོ་ 1 ལ་{r1} ཐོབ་པ་(མཇུག་འབྲས་{score_1})."
+  },
+  "outcome": {
+    "winner": "མིའོ་{winner} གཏན་འཁེལ་{win_score} - {lose_score}.",
+    "draw": "རྩེད་འགྲན་པ་གཉིས་ཆ་ར་གིས་ {s0}ཐོ་བཀོད་འབད་ཡོདཔ་ཨིན།",
+    "round_both_cooperate": "རྩེད་འགྲན་པ་གཉིས་ཆ་ར་གིས་ མཉམ་འབྲེལ་འབད་ཡོདཔ་ཨིན།",
+    "round_both_defect": "རྩེད་འགྲན་པ་གཉིས་ཆ་ར་གིས་ རྒྱང་བསྒྲགས་འབད་ཡོདཔ་ཨིན།",
+    "round_p0_cooperates_p1_defects": "Player 0 cooperated, Player 1 defected.",
+    "round_p0_defects_p1_cooperates": "Player 0 defected, Player 1 cooperated."
+  }
+}

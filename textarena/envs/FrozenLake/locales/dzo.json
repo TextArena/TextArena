@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Welcome to Frozen Lake!\n\nYou are represented by 'P' on the grid.\nGrid symbols:\n  ' ' = Frozen surface (safe to walk on)\n  'H' = Hole (fall in and lose!)\n  'G' = Goal (reach this to win!)\n  'P' = Your current position\n\nAvailable actions: up, down, left, right (or w, a, s, d)\nType your action as: [up], [down], [left], [right] or [w], [a], [s], [d]\n\nObjective: Navigate from the start (top-left) to the goal (bottom-right) without falling into any holes!\n"
+  },
+  "board": {
+    "current_board": "དེང་གི་བོད།:\n\n{board}\n\nསྤྱོད་ལམ་ཡོད་པ།: {actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "སྤྱོད་ལམ་གྱི་ཚིག་སྦྱོར་ནོར་འདུག དེ་གི་ཚབ་[up]、[down]、[left]、[right] ཡི་སྦྱོར་བ་དང་[w]、[a]、[s]、[d] གི་སྦྱོར་བ་སྤྱད་ཅིག",
+    "unknown_action": "ནམ་ཡང་ཤེས་མི་ལཱ་ '{action}' འདི་ཡར་མར་གཡོན་གཡས་ ཡང་ན་ w, a, s, d ལག་ལེན་འཐབ་ཨིན།",
+    "hit_wall": "ཁྱོད་ཀྱིས་ {action}སྤོ་ནི་འབད་ཡོད་རུང་ རྩིག་པའི་གུ་ཕོག་ནུག"
+  },
+  "game_action": {
+    "moved": "ཁྱེད་{action} ཡི་ཚབ་{row}、{col} གི་གནས་སུ་བསྐྱུར་ཡོད།"
+  },
+  "outcome": {
+    "win": "དགའ་ཚོར་གྱི་གླུ་དབྱངས་ཕུལཝ་ཨིན། ཁྱོད་ཀྱིས་དམིགས་ཡུལ་འདི་གྲུབ་ནུག",
+    "fell_in_hole": "You fell into a hole! Game over. You completed {pct}% of the journey to the goal.",
+    "turn_limit": "You reached the turn limit! Game over. You completed {pct}% of the journey to the goal."
+  }
+}

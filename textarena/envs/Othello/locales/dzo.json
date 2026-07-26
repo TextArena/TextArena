@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "རྩེད་རིགས་སྒྲོམ་: {board}",
+    "valid_moves": "{observation}\nའགལ་འཁྲིད་བྱེད་སྟངས་: {moves}",
+    "no_valid_moves_reset": "{observation} ཁྱོད་ཀྱིས་ཁ་བསྒྱུར་འབད་མ་བཏུབ་པ་ཅིན་ ཁྱོད་ཕར་བཤུད་རྐྱབ་དགོཔ་འབྱུང་འོང་།",
+    "no_valid_moves_step": "{observation} ཁྱོད་ཀྱིས་འབད་ཚུགས་མི་ལཱ་ཚུ་མེད་པ་ཅིན་ ཁྱོད་ཕར་བཤོལ་གཏང་དགོཔ།",
+    "scores_reset": "{observation}\nརྒྱུན་འཁྲིད་གཏན་འཁྲིད་ - ནག་པོ་: {black_count}, དཀར་པོ་: {white_count}\n",
+    "scores_step": "{observation}\nགཏན་འཁྲིད་ - ནག་པོ་: {black_count}, དཀར་པོ་: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "སྤོ་རིམ་འདི་ [row, col] བཟུམ་སྦེ་བཟོ་དགོཔ་ཨིན།",
+    "illegal": "ཁྲིམས་འགལ་གྱི་ལས་རིམ་ཨིན། ལས་སྣ་ངོ་མ་འདི་: {valid}"
+  },
+  "game_action": {
+    "skipped": "རྩེད་འགྲན་པ་ {pid} གིས་ ཁོང་རའི་གོ་རིམ་འདི་ བཏོན་དགོཔ་བྱུང་ནུག",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Player {pid} ({piece}) has no valid moves and must skip."
+  },
+  "outcome": {
+    "black_wins": "ནག་པོ་གིས་ཕམ་{black_count}-{white_count}",
+    "white_wins": "དཀར་པོ་གིས་ཕམ་{white_count}-{black_count}",
+    "draw": "གོ་རིམ་{black_count}-{white_count}"
+  }
+}
