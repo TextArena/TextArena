@@ -96,7 +96,15 @@ class HangmanEnv(ta.Env):
                     self.state.set_outcome(reward=1, reason=self.m("outcome", "win_word"))
                     self.state.game_state["current_board"] = self.state.game_state["target_letters"]  # reveal the word
                 else:
+                    # A wrong full-word guess costs a life, exactly like a wrong letter.
+                    # Without this the game could never end: a full word is not a letter, so
+                    # the guess was neither recorded in guessed_letters nor rejected as an
+                    # invalid move -- an agent could guess wrong words forever. Re-show the
+                    # board afterwards so the lost try is visible (board.status carries the
+                    # localized {tries_left}, matching the wrong-letter feedback).
+                    self.state.game_state["tries_left"] -= 1
                     self.state.add_observation(message=self.m("message", "wrong_word", letter=letter), observation_type=ta.ObservationType.GAME_MESSAGE)
+                    self._observe_current_state()
 
             else: # Player guessed a single letter
                 if letter in self.state.game_state["guessed_letters"]: # Check if the letter has been guessed before
@@ -111,8 +119,15 @@ class HangmanEnv(ta.Env):
                         self.state.add_observation(message=self.m("message", "letter_not_in", letter=letter, tries_left=self.state.game_state['tries_left']), observation_type=ta.ObservationType.GAME_MESSAGE)
                     self.state.add_observation(self._render_current_board(), observation_type=ta.ObservationType.GAME_BOARD)
 
-            if self.state.game_state["tries_left"] == 0:                                            self.state.set_outcome(reward=self._get_percentage_completion(), reason=self.m("outcome", "out_of_tries", pct=f"{self._get_percentage_completion()*100:.2f}", target_word=self.state.game_state['target_word']))
-            elif self.state.game_state["current_board"] == self.state.game_state["target_letters"]: self.state.set_outcome(reward=1, reason=self.m("outcome", "win_board"))
+            # Terminal checks run only if the move above didn't already decide the game.
+            # A correct full-word guess sets win_word and reveals the board; without this
+            # guard the board-complete branch below would immediately overwrite that reason
+            # with win_board (making outcome.win_word unreachable).
+            if not self.state.done:
+                if self.state.game_state["tries_left"] <= 0:
+                    self.state.set_outcome(reward=self._get_percentage_completion(), reason=self.m("outcome", "out_of_tries", pct=f"{self._get_percentage_completion()*100:.2f}", target_word=self.state.game_state['target_word']))
+                elif self.state.game_state["current_board"] == self.state.game_state["target_letters"]:
+                    self.state.set_outcome(reward=1, reason=self.m("outcome", "win_board"))
         return self.state.step()
 
     def _reveal_letter(self, letter: str) -> None:
