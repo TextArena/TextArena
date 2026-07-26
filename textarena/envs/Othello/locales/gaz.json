@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Boordiin taphaa: {board}",
+    "valid_moves": "{observation}\nGolee Maltu: {moves}",
+    "no_valid_moves_reset": "{observation} Sochiin sirrii hin jiru - darbuu qabda.",
+    "no_valid_moves_step": "{observation} Sochiin sirrii hin jiru.  ati darbuu qabda ta'a.",
+    "scores_reset": "{observation}\nAmala Koree - Dhumaa: {black_count}, Bilaa: {white_count}\n",
+    "scores_step": "{observation}\nAmala - Dhumaa: {black_count}, Bilaa: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Sochiin sochii bifa [row, col] ta'uu qaba.",
+    "illegal": "Sochii seeraan alaa. socho'iiwwan fudhatama qaban: {valid}"
+  },
+  "game_action": {
+    "skipped": "Taphattuun {pid} dabaree isaanii irra darbuu qaba ture.",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Player {pid} ({piece}) golee maltu hin qabu, ስለሆነም ይተዋል."
+  },
+  "outcome": {
+    "black_wins": "Gurraachi ni mo'ata {black_count}-{white_count}.",
+    "white_wins": "Adiin ni mo'ata {white_count}-{black_count}.",
+    "draw": "ተስማማት {black_count}-{white_count}."
+  }
+}

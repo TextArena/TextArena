@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "Ajajaa Alfaa.",
+    "commander_beta": "Ajajaa Beetaa."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nGalaana - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nGalaana {current_round}\nCommander Alpha: {p0_allocations}\nCommander Beta: {p1_allocations}\n",
+    "winner_alpha": "{message}Gaafa: Ajajaa Alfaa",
+    "winner_beta": "{message}Gaafa: Ajajaa Beetaa",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "Foormatii galmeessaa hin ta'u. fayyadama: A:5, B:10, C:5",
+    "invalid_field": "Maqaa dirree hin ta'in ((s) Dirreen fudhatama qabu: {field_names}",
+    "wrong_allocation_value": "All allocations must be non-negative integers.",
+    "incorrect_total_units": "You have to allocate exactly {num_total_units} units. Current sum: {current_sum}",
+    "good_allocations": "Qophiin kennamu gaarii dha."
+  },
+  "outcome": {
+    "winner_alpha": "Commander Alpha {score_0}-{score_1} booda {num_rounds} galaana!",
+    "winner_beta": "Commander Beta {score_1}-{score_0} booda {num_rounds} galaana!",
+    "draw": "Tamsaasaan {score_0}-{score_1} booda {num_rounds} galaana!",
+    "early_winner_alpha": "Commander Alpha {scores_0}-{scores_1} (baaltina guddaa tamsaasaan)!",
+    "early_winner_beta": "Commander Beta {scores_1}-{scores_0} (baaltina guddaa tamsaasaan)!"
+  }
+}

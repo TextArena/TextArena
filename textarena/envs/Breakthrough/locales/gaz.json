@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are playing {color} in a game of Breakthrough. You move {direction} on an {board_size}x{board_size} board.\nIn your turn you can move a single piece one step forward or diagonally forward.\nA piece may only move diagonally if an opponent piece is there, and only move into such a preoccupied square in a diagonal step.\nWhen stepping into a square with an opponent piece, you capture it and the opponent's piece is removed permanently from the board.\nUse UCI-like notation in brackets, e.g. [a2a3] to move from a2 to a3.\n* 'a' corresponds to the leftmost column, '1' is the bottom row (from White's perspective).\n* Blacks's home row is the top row (row 8 for an 8x8). White's home row is the bottom row (row 1 for an 8x8).\nThe first player whose piece reaches the opponent's home row wins. If your pieces are all captured, you lose."
+  },
+  "invalid_move": {
+    "wrong_format": "Please use bracketed algebraic notation like [a2a3]. (Kanaafuu, akka fakkeenyaatti)",
+    "out_of_bounds": "Sochiin kun daangaa boordichaa ala ta'a.",
+    "illegal": "Sochiin sun seerawwan Darbii hordofuu hin danda'u ykn kees miti."
+  },
+  "game_action": {
+    "moved": "Player {player_id} moves {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Adiin bakka gurraachi itti taphatu ga'e.",
+    "black_reached": "Black reached White's home row.",
+    "white_captured": "Meeshaaleen warra adii hundi qabamaniiru.",
+    "black_captured": "Mi'oonni gurraachoo hundi qabamaniiru.",
+    "no_moves": "Taphachiisaa {player_id} socho'iinsa hin qabu."
+  }
+}

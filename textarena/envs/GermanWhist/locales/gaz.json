@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Takkallee yeroo jalqaba. Safuu trump: {trump_suit} (kaarti trump: {trump_str}).",
+    "no_trump_card": "hin jiru"
+  },
+  "player_prompt": {
+    "intro": "Si Takkallee {player_id} German Whist keessatti.\n{phase_info}\nSi {hand_size} kaartii argamu.\nKaarti [play N] waliin tamsaasa, N safuu keessan irraa yoo ta'u (misaalaa '[play 3]')",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "Kaardii tokkollee hin kennamu - taphichi jalqabameera.",
+    "deck_empty": "Kaardiiwwan kaardiin irratti hin kennamneef.",
+    "available": "Kaardiin kennamaa jiru: {card}",
+    "available_trump": "Kaardiin dhihaate: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Faayilii socho'u hin qabu. Kaardii Nth harka kee keessa jiru taphachuuf '[play N]' fayyadami.",
+    "bad_position": "Bakki kaardii kanaa hin jiru. Kaardii {hand_size} qabda.",
+    "must_follow_suit": "Isinis akkasuma kaardii {lead_suit} taphachuu qabdu.",
+    "invalid_play": "Kaardiin kun hojiirra ooluu hin danda'u."
+  },
+  "game_action": {
+    "played": "Taphachiisaa {player_id} taphatteef, {card}."
+  },
+  "trick": {
+    "won": "Takkallee {winner_id} takkaa waliin {card} yeroo argamu",
+    "won_learning": "Takkallee {winner_id} takkaa waliin {card} yeroo argamu, kaarti faca'uu irraa argamu"
+  },
+  "phase": {
+    "learning_complete": "The deck is exhausted. The learning phase is over - every remaining trick counts towards victory."
+  },
+  "draw": {
+    "winner_received": "Ati gocha kana mo'attee {card} argatte.",
+    "loser_received": "You lost the trick and drew {card} from the deck.",
+    "winner_preview": "Kaardiin itti aanu {card} dha."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tricks won so far - Player 0: {tricks0}, Player 1: {tricks1}",
+    "scores_playing": "Takkaa irraa argamu - Takkallee 0: {tricks0}, Takkallee 1: {tricks1}",
+    "phase": "Phase: {phase}",
+    "phase_learning": "Faase: {phase} ({remaining_cards} kaartii irraa hin dhaabbanne)"
+  },
+  "hand": {
+    "no_cards": "Kaardii hin qabu.",
+    "no_cards_in_hand": "Kaardii harkaa hin qabanne.",
+    "header": "Harki kee:",
+    "trump_indicator": "(TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Ammallee kaardii taphachuu hin dandeenye.",
+    "header": "Tooftaa amma jiru:",
+    "trump_indicator": "(TRUMP)",
+    "card_line": "{observation}\n  Takkallee {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Tapha hin jalqabne",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nFaase: {phase}",
+    "trump_suit": "{observation}\nSafuu trump: {trump_suit}",
+    "trump_card": "{observation}\nKaarti trump: {card}",
+    "cards_left": "{observation}\nKaartii irraa hin dhaabbanne: {count}",
+    "next_card": "{observation}\nKaarti dura taa'ee fi izzuu: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Tooftaa amma jiru:",
+    "trump_indicator": "(TRUMP)",
+    "trick_line": "{observation}\n  Takkallee {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nTakkallee {player_id}: {scoring} takkaa irraa argamu ({tricks} guutuu), {hand_size} kaartii safuu irraa"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}
