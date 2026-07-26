@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "TAFKI: {target}\n\nLamorde mawɗe:\n{numbers}",
+    "best": "{observation}\n\nMbelewudu maa ngam: {best_value} (wuri: {distance})\nMbele maa ngam: {best_expression}",
+    "history": "{observation}\n\nTarihin yin aiki:\n{moves}",
+    "progress": "{observation}\nMakon mawɗe na yanzu: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Indeji je wala kuugal. Haani be ferɗoodum e nder wakkere 0-{max_index}",
+    "invalid_operation": "Invalid operation (division by zero or non-integer result)"
+  },
+  "outcome": {
+    "win": "Perfect! Found exact target: {target}",
+    "no_moves": "Babu sauye-sauye. Mafi kyawun sakamako: {best_value} (maɗaukin: {target})",
+    "turn_limit": "Iyakar kai an tsiga. Mafi kyawun sakamako: {best_value} (maɗaukin: {target})"
+  }
+}

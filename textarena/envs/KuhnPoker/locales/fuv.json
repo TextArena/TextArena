@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "A si Yakke {player_id} caggal {max_rounds} rundu ɓurɓe Kuhn Poker.\nAlkawali ɓurɓe:\n- Kuhn Poker ɓolwi kaarti 3 ngam J, Q, K (J ɓataaka, K ɓataaka ngal)\n- Yakke ɓuri ɓe {ante} chip e jottori 1 kaarti caggal rundu (woni, kaarti ɓe jotti ɓe ngam ɓe ɓe ngam wallitijo, haa si ɓe ngam kaarti ɓe ngam ɓe)\n- ɓurɓe ɓolwi caggal {max_rounds} runduen\n- Yakke ngam ɓe ɓe ngam chip ɓuri ngal rundu ɓe ngam ɓe\nAlkawali ciyaari:\n- '[check]': Tawti ngam ɓe ɓuri (so tawo ngam ɓe ɓuri ngam ɓe)\n- '[bet]': Ngam 1 chip caggal poti (so tawo ngam ɓe ɓuri ngam ɓe)\n- '[call]': Jokkondi ɓe ngam ɓe ɓuri ngam 1 chip caggal poti\n- '[fold]': Tawti ngam kaarti ɓe e si Yakke ɓe ngam poti"
+  },
+  "init_round": {
+    "round_start": "### Innde rundu {current_round} caggal {max_rounds} runduen. Kaartiinka woni: '{player_card}'",
+    "available_actions": "Kujeji je ɗon haani waɗugo mari: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ciyaari woni [Check], [Bet], [Call], ko [Fold].",
+    "not_legal": "Action must be {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Kujeji je ɗon haani waɗugo mari: {legal_actions}.",
+    "round_summary": "{reason} Ciyaari yimmɓe: Yakke 0: '{player_0_chips}'; Yakke 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Yakke {winner} ngam {winner_card} ɓataaka Yakke {loser} ngam {loser_card}. Yakke {winner} ngam poti ngam {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "Ha ragare {max_rounds} roundji, ɓe'e fuu jogii limgal chips je ɗon fotti.",
+    "round_win": "Player {player_id} has folded.",
+    "winner_player0": "Player 0 won by having more chips at the end of all {max_rounds} rounds.",
+    "winner_player1": "Player 1 won by having more chips at the end of all {max_rounds} rounds."
+  }
+}

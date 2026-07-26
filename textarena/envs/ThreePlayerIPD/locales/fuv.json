@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "A si Player {player_id} e go'o 3-player Iterated Prisoner's Dilemma. Hakkilan nden boo {num_rounds} raunde.\nRaundeeji dum:\n• {conv_rounds} turneeji chat e free\n• 1 turneeji shawara - tokara tokara kadi e kowa: '[<opp-id> cooperate]' ko '[<opp-id> defect]' (misali '[1 defect] [2 cooperate]'; default nden 'cooperate'). \nPair-wise payoff matrix (applied to each unordered pair):\n  - Both cooperate  ->  {reward}\n  - Both defect     ->  {punishment}\n  - Ka defect, su cooperate ->  {temptation}\n  - Ka cooperate, su defect ->  {sucker}\nPlayer(s) e score maaɗaa ɓurɗe nder raundeeji ndii yaari."
+  },
+  "round": {
+    "start": "─── Ina raunde {round} ───\tKaɗa yimɓe e free nder {conv_rounds} raunde.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Nafiji:",
+    "pair_line": "{observation}\n\t Player {i} vs Player {j} oon shawara {choice_i} e {choice_j} (Player {i} ɓeydaa {gain_i}, Player {j} ɓeydaa {gain_j})",
+    "scores_open": "{observation} -> Lartolji jonta: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}  ha nder ko'e maɓɓe."
+  },
+  "outcome": {
+    "final": "Final scores: {scores}.  Ranking groups (worst→best): {groups}"
+  }
+}
