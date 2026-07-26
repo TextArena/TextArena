@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Bi tile la: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "O bɛ se ka kɛ [macro micro] ye ni jatidenw ye 0-8 la.",
+    "out_of_range": "Indices bɛɛ ka kan ka kɛ 0 ani 8 cɛ.",
+    "index_out_of_range": "The micro_board, row, or col is out of range.",
+    "cell_occupied": "The cell is already occupied.",
+    "wrong_micro_board": "O tigi ka kan ka tulon kɛ mikɔrɔtabuli wɛrɛ la.",
+    "micro_board_won": "The micro board is already won."
+  },
+  "next_board": {
+    "any": "mini-bordiyé",
+    "specific": "mikɔrɔtabulari {nxt}"
+  },
+  "game_action": {
+    "played": "Jokelani {player_id} daa jagaya kɔnɔti kɛcɛya {macro_idx}, seli {micro_idx} (daraka {row}, kɔlɔmɛ {col}). Jokelani {opponent_id} yɛn bɛ jagaya kɔnɔti {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Jiginni {player_id} ye Tic Tac Toe laban sɔrɔ!",
+    "draw": "The game is a draw!"
+  }
+}

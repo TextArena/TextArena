@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "I ye jokelani {player_id}, i b'a don {num_rounds} bukari Iterated Ultimatum Game.\nI ye ${pool} ko k'a faga o bugun bukari ko, a ka jokelani {other_id}.\n\nProposer:\n  - A faga dalilen: [Offer: $X] (0 <= X <= pool)\n  - Ika dalilen ye, → I ye $(pool - X), jokelani kelen ye $X\n  - Ika dalilen ma ye, → Aw ka ye $0\n  - Seneko: [Offer: $3]  ni  'N'b'a faga ko dalilen. [Offer: $5]'\n\nResponder:\n  - A faga dalilen ko ni [Accept] ni [Reject]\n  - Seneko: 'A dalilen ko ye, [Accept]'\n            'A dalilen ko ma ye, [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Bukari {round_number} ye! ---\nJokelani {proposer_id} ye proposer, jokelani {responder_id} ye responder.",
+    "offer": "Bukari {round_number}: Jokelani {proposer_id} faga ${offer} jokelani {responder_id} (a ka ye ${keep}).",
+    "accepted": "Jokelani {responder_id} ye dalilen! Bukari {round_number}: Jokelani {proposer_id} +${proposer_gain}, jokelani {responder_id} +${responder_gain}. Jamana ko sira: Jokelani 0: ${total_0}, Jokelani 1: ${total_1}.",
+    "rejected": "Jokelani {responder_id} ma ye dalilen! Bukari {round_number}: Aw ka ye $0. Jamana ko sira: Jokelani 0: ${total_0}, Jokelani 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "O ka kan k'a kɛ ni [Offer: $X] ye.",
+    "bad_integer": "Sigiyɔrɔ sɔngɔ ka kan ka kɛ jatiden dafalen ye.",
+    "out_of_range": "Oferisi bɛ kan ka kɛ $0 ani ${pool} cɛ.",
+    "no_current_offer": "Bi laseli tɛ sɔrɔ min ka kan ni jaabi ye.",
+    "accept_or_reject": "Responder y'a faga [Accept] ni [Reject] k'a dalilen."
+  },
+  "outcome": {
+    "win": "Jokelani {winner} ye jigi ko ${winner_total} jamana ko, ko jokelani {loser} ${loser_total}.",
+    "draw": "O don na, u fila bɛɛ ye wari ${total} sɔrɔ."
+  }
+}

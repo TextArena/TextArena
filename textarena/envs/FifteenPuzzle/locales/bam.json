@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id}. You are playing the 15-Puzzle game.\nThe objective of the game is to arrange the numbered tiles in ascending order from 1 to 15, with the empty space located in the bottom-right corner.\nTo make a move, you can slide a tile into the empty space (represented by a double underscore, e.g. __) by using one of the following commands:\n- 'up': Move the tile below the empty space up.\n- 'down': Move the tile above the empty space down.\n- 'left': Move the tile to the right of the empty space left.\n- 'right': Move the tile to the left of the empty space right.\nTo submit your move, type the direction (e.g., 'up', 'down', 'left', or 'right') in square brackets, e.g. [up].\nThe current board layout is shown below. Use the information to solve the puzzle.\n"
+  },
+  "board": {
+    "current_board": "Bɛɛkɔnɔnin Cɛma:\n\n{board}\nKɛlɛndɛlen Don: {moves}",
+    "game_board": "Game Board:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Player {player_id} did not respond with a valid direction in square brackets.",
+    "illegal_move": "Invalid move. The tile cannot be moved in the specified direction."
+  },
+  "outcome": {
+    "win": "Congratulations! {player_id} ɲɔgɔndɔnna ye ɲɛtaa sɔrɔ ka 15-Puzzle jaabi.",
+    "turn_limit": "The turn limit has been reached. The model completed {percent} percent of the puzzle"
+  }
+}
