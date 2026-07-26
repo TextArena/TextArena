@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Mbeni zo ti pikango mozoko atara ti yeda na mbeni ye so a gbanzi ni sân ti wara aye kue.",
+    "out_of_range": "Lokuta {player_id}, Sika nzonzi. Kolóná {col} ezali kozala na mabe.",
+    "already_full": "Lokuta {player_id}, Sika nzonzi. Kolóná {col} ezali na mabe.",
+    "proposing_with_no_resource": "Player {player_id} tried to make a trade offer without having the necessary resources.",
+    "incorrect_offer_format": "Zo ti pikango ye {player_id} amû mbeni mbeti so a sû na lege ni pëpe.",
+    "no_new_offer": "Zo ti pikango ye {player_id} amû mbeni fini matabisi pëpe."
+  },
+  "offers": {
+    "reject": "Mbeni zo ti pikango ndembo {player_id} ake na lo ye so a mû ni.",
+    "accept": "Lokuta {acceptor_id} akaboli lisolo la lokuta {proposer_id}.",
+    "proposal": "Lokuta {player_id} akeli lisolo oyo na lokuta {opponent_id}: Makambi ebongisi: {offered} -> Makambi emonani: {requested}"
+  },
+  "outcome": {
+    "win": "Zo ti pikango ye {winner_id} awara na lege so lo wara kota ngele mingi ahon.",
+    "draw": "A yeke changé ngere ti aye kue gi oko tongaso na yâ ti azo so ayeke sara ngia."
+  }
+}

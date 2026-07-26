@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing a game of Pig Dice.\n\nRules:\n- On your turn, you can either '[roll]' or '[hold]'\n- Roll a 2-6: Add to your turn total\n- Roll a 1: Lose turn total and end turn\n- Hold: Add turn total to your score and end turn\n- First to {winning_score} points wins\n\nWhen it's your turn, you'll see the current scores and turn total.\nRespond with '[roll]' to roll the die or '[hold]' to bank your points."
+  },
+  "invalid_move": {
+    "invalid_action": "Fôrmati ya ngûnda ezînga. Sînga '[roll]' tî '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Lokuta {player_id} abîmé, ezînga {turn_total} pointe!",
+    "player_hold": "Lokuta {player_id} kolinga na banki {turn_total} pointe."
+  },
+  "board": {
+    "player": "Lokuta 0: '{score_0}'; Lokuta 1: '{score_1}'",
+    "current_total_scores": "Makambo ma pointe ezînga: {scores}\nMakambo ma kôkâ ôko ezînga {turn_total}.",
+    "roll_history": "{observation}\nHistoîre ya rôle ôko kôkâ: {roll_history}",
+    "first_roll": "{observation} So ayeke kozo ye so mo yeke bi na lê ti keke.",
+    "available_actions": "{observation}\nZîngêngê za kôkâ: '[roll]' tî '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Lokuta {winner_id} îmênga na pointe ezînga pîri na limite ya kôkâ ({scores})",
+    "winner_by_score": "Player {winner_id} won by reaching the target score of {winning_score}!",
+    "draw": "A si na lango ti kiringo ni awe, nga azo kue so ayeke sara ngia ni awara gi oko ye: {scores}"
+  }
+}

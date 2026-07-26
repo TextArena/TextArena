@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "The game begins. Trump suit: {trump_suit} (trump card: {trump_str}).",
+    "no_trump_card": "mbeni pëpe"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in German Whist.\n{phase_info}\nYou hold {hand_size} cards.\nPlay a card with '[play N]', where N is its position in your hand (for example '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "A yeke mû mbeni carte oko pëpe, a to nda ti sala ngia ni awe.",
+    "deck_empty": "A zia mbeni carte na ndo ni pëpe.",
+    "available": "A mû carte ni na ala: {card}",
+    "available_trump": "A mû carte ni na ala: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Use '[play N]' to play the Nth card in your hand.",
+    "bad_position": "That card position does not exist. You hold {hand_size} cards.",
+    "must_follow_suit": "A lingbi mo mû tapande ti lo na mo zia mbeni carte {lead_suit}.",
+    "invalid_play": "A lingbi ti sala kusala na carte so pëpe."
+  },
+  "game_action": {
+    "played": "Zo ti pikango ye {player_id} ayeke pika lani na {card}."
+  },
+  "trick": {
+    "won": "Zo ti pikango ye {winner_id} awara triche ni na lege so lo sala kusala na {card}.",
+    "won_learning": "Mîngî {winner_id} lôzî trick na {card} mpô na kôzo kâti kôzo."
+  },
+  "phase": {
+    "learning_complete": "A hunzi ti manda ye awe, na a yeke sala kusala na angangu kode kue so angbâ."
+  },
+  "draw": {
+    "winner_received": "Mo wara ye ti ngangu ni na mo wara {card}.",
+    "loser_received": "You lost the trick and drew {card} from the deck.",
+    "winner_preview": "Na pekoni, a yeke mû carte {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tricks won so far - Player 0: {tricks0}, Player 1: {tricks1}",
+    "scores_playing": "Scoring tricks - Player 0: {tricks0}, Player 1: {tricks1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Phase: {phase} ({remaining_cards} kôzo kôzo deck)"
+  },
+  "hand": {
+    "no_cards": "A yeke wara carte na yâ ni ape.",
+    "no_cards_in_hand": "A yeke wara carte na maboko ti ala pëpe.",
+    "header": "Na maboko ti mo:",
+    "trump_indicator": "(TRUMP) A yeke tâ tënë.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "No cards played yet this trick.",
+    "header": "Fango ye ti fadeso:",
+    "trump_indicator": "(TRUMP) A yeke tâ tënë.",
+    "card_line": "{observation}\n  Mîngî {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "A komanse ti sara ngia ni ape",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nSûti trump: {trump_suit}",
+    "trump_card": "{observation}\nKâti trump: {card}",
+    "cards_left": "{observation}\nKâti kôzo tî deck: {count}",
+    "next_card": "{observation}\nNext card for winner: {card}",
+    "blank": "{observation}  ti",
+    "current_trick": "{observation} Tâ kode ti salango ye:",
+    "trump_indicator": "(TRUMP) A yeke tâ tënë.",
+    "trick_line": "{observation}\n  Mîngî {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPlayer {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} cards in hand"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

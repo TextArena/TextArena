@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "SÊSE: {target}\n\nNammbênî yî nde: \n{numbers}",
+    "best": "{observation}\n\nKödörö ngä ti mbï: {best_value} (ndeke: {distance})\nKödörö ngä ti mbï tî siri: {best_expression}",
+    "history": "{observation}\n\nSuka zî ti kûeyî: \n{moves}",
+    "progress": "{observation}\nNdeke tî ködörö: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "A lingbi a duti nde na yâ ti wungo 0-{max_index}",
+    "invalid_operation": "A yeke na lege ni pëpe ti sara kua so (ti kangbi ye na zero wala mbeni wungo kue ape)"
+  },
+  "outcome": {
+    "win": "Aye so ala yeke gi ayeke tâ nzoni mingi. {target}",
+    "no_moves": "No more moves. Best result: {best_value} (target: {target})",
+    "turn_limit": "Ködörö tî kpa ti ngû. Ködörö ngä ti mbï: {best_value} (sêse: {target})"
+  }
+}

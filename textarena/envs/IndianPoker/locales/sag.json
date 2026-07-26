@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a game of Indian Poker.\n- 52-card deck; you see only the opponent's card.\n- Ante {ante} chip(s) each round, {max_rounds} round(s) total.\n- Valid moves: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X is a positive integer <= your chip count.)\n- Highest hidden card wins the pot at showdown.\n"
+  },
+  "round": {
+    "announce": "### Tûngûla {current_round}/{max_rounds}\nKârtî ô la rivâle âzî: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Supply exactly ONE bracketed action, e.g. '[check]', '[bet 2]', '[call]', '[raise 3]', or '[fold]'.",
+    "cannot_check": "Mo lingbi pëpe [check] - mo yeke na gbele mbeni pari.",
+    "amount_min": "A lingbi kota ti nginza so a zia na yâ ni aduti 1 wala ahon tongaso.",
+    "cannot_bet": "Cannot [bet] - must [call] / [raise] / [fold].",
+    "nothing_to_call": "Mbeni ye ti iri na lo ayeke dä pëpe; mo lingbi [check] ni.",
+    "no_bet_to_raise": "Use [bet X] to open; there is no bet to raise.",
+    "insufficient": "A yeke wara gbâ ti azo tongaso pëpe."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Aye so mo lingbi ti sara: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pôti {pot} → Mboura {winner}. (Bângo P0:{p0}, P1:{p1})",
+    "folded": "Zo ti pikango ndembo ni {player_id} azia.",
+    "showdown_win": "Showdown: {card_win} beats {card_lose}.",
+    "showdown_tie": "Showdown tie: both {card}. Pot split – each receives {split}."
+  },
+  "outcome": {
+    "p0_wins": "Mboura 0 âkûri ({bank0} > {bank1})",
+    "p1_wins": "Mboura 1 âkûri ({bank1} > {bank0})",
+    "draw": "A lingbi tere na peko ti angbonga ni kue."
+  }
+}

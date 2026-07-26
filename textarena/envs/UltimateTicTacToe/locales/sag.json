@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Ndokua ti fango tënë laso: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "A lingbi a zia na yâ ni agere ti 0-8 so ayeke tongana [macro micro].",
+    "out_of_range": "A lingbi indice oko kue aduti na popo ti 0 nga 8.",
+    "index_out_of_range": "The micro_board, row, or col is out of range.",
+    "cell_occupied": "A mû azo na yâ ti da ni awe.",
+    "wrong_micro_board": "A lingbi zo ni aduti na ndo ti tableau so ayeke ndulu.",
+    "micro_board_won": "A mû na e mbeni kete tableau awe."
+  },
+  "next_board": {
+    "any": "mbeni kete tableau kue so a zia ni na yâ ti masini",
+    "specific": "micro board {nxt} ti lo so a leke ni na ndo ti lê ti keke"
+  },
+  "game_action": {
+    "played": "Lokuta {player_id} aze kozanga na bongongo ndenge {macro_idx}, seli {micro_idx} (ligne {row}, kolonne {col}). Lokuta {opponent_id} aleka kozanga na {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Zo so ayeke {player_id} awara fini Tic Tac Toe!",
+    "draw": "A sara match ni na lege ti kpongo zo oko pëpe!"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Sängö Ködörö:\n\n{board}\nKödörö Tî Ngî: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Akete ndo ti yâ ni so ayeke na popo-ti-gbâ -- ",
+    "pile": "{observation}Ködörö {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Mgböngö {player_id}'s View ---\n",
+    "payoff": "{observation}Ködörö Tî Ngî Tî Ngî (Ködörö Tî Ngî Tî Ngî): {top_card}, Ködörö Tî Ngî Tî Ngî: {payoff_length}\n",
+    "hand": "{observation}Mbeni maboko: {hand} ",
+    "discard": "{observation}Ködörö Tî Ngî: {discard}\n",
+    "empty": "A yeke senge."
+  },
+  "game_message": {
+    "no_cards_left": "There are no more cards to draw from. Remember that you can play cards from these sources:\n  1. Your **hand**.\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "A yeke na lege ni pëpe ti sara ye so a hunda. Zo ti pikango ndembo {player_id} akiri tënë nzoni ape, nga lo zia mbeni sioni sarango ye tongaso na yâ ti acouche-feuille (so ayeke tongana encadré).",
+    "invalid_play": "Ngî tî ködörö âzû. Mgböngö {player_id} a ngî {card} na ködörö tî ngî {index}.",
+    "discard_from_payoff": "Zo ti pikango carte ni {player_id} atara lani ti zi mbeni carte na yâ ti gbâ ti acarte so a futa.",
+    "discard_not_in_hand": "Zo ti pikango carte ni {player_id} atara lani ti bi mbeni carte so ayeke na maboko ti lo pëpe.",
+    "wrong_move_type": "A yeke na lege ni pëpe. Zo ti pikango ye {player_id} akiri tënë nzoni ape."
+  },
+  "game_action": {
+    "you_drew": "You drew cards.",
+    "opponent_drew": "Zo ti pikango ye {player_id} agboto ale-carte.",
+    "you_played": "Âkûî ngî {card} na ködörö tî ngî {index}.",
+    "opponent_played": "Mgböngö {player_id} a ngî {card} na ködörö tî ngî {index}.",
+    "you_discarded": "Âkûî ngî {card} na ködörö tî ngî {index}, mbênî na ye sînga tî ködörö. Ködörö tî ngî mbênî na âkûî âkûî sînga tî ködörö. Mgböngö {next_player_id} âkûî ngî tî ködörö.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Player {current_player} has finished their payoff pile! Player {current_player} wins!",
+    "deadlock_player_0": "Ködörö tî ngî âzû! Mgböngö 0 âkûî ngî tî ködörö na {player_0_payoff} kârt na ye, vs Mgböngö 1 na {player_1_payoff} kârt.",
+    "deadlock_player_1": "A si na mbeni ndao! Zo ti pikango ye 1 asö benda tongana a ngbâ {player_1_payoff} carte so angbâ, nga akarte ti zo ti pikingo ye 0 ayeke {player_0_payoff}.",
+    "deadlock_tie": "Ködörö tî ngî âzû na ngî tî ködörö! Mgböngö âzû na {player_0_payoff} kârt na ye. Mgböngö {current_player} âkûî ngî tî ködörö na ngî tî ködörö."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Mastermind.\nYou need to find the code that is {code_length} digits long, each digit from 1 to {num_numbers}, {repeats}.\nIn your response, you can submit your guess in the following format: '[2 1 4 5]'.\nAfter each guess, you will receive feedback in the form of black and white pegs.\nA black peg indicates a correct digit in the correct position, while a white peg indicates a correct digit in the wrong position.\nYou have {max_turns} turns to guess the code.\n",
+    "with_repeats": "na lege ti kiringo ni peut-être.",
+    "no_duplicates": "a yeke na atënë use pëpe"
+  },
+  "invalid_move": {
+    "wrong_format": "You did not respond with a space-separated list of numbers wrapped in square brackets.",
+    "not_integers": "All entries must be valid integers.",
+    "wrong_length": "A lingbi a wara tâ gi {code_length} wungo ti azo so ayeke na yâ ni.",
+    "out_of_range": "A lingbi wungo ni kue aduti na popo ti 1 nga {num_numbers}.",
+    "duplicates_not_allowed": "A yeke yeda pëpe na adocteur ti kiri peko ti numero ni.",
+    "repeated_guess": "Mo hinga awe {guess}. Tara ti bâ mbeni ye nde na pekoni."
+  },
+  "game_action": {
+    "feedback": "Submitted [{guess}]. Feedback: {black_pegs} black peg(s), {white_pegs} white peg(s)."
+  },
+  "outcome": {
+    "win": "You have cracked the code, solving {black_pegs} out of {code_length} pegs correctly",
+    "turn_limit": "A si na ndo ti wungo so a lingbi mo zia ni. Mo hinga {percent} % ti adesizion nzoni."
+  }
+}

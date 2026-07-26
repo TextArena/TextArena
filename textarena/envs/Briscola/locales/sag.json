@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Briscola azo! Kati suit: {trump_suit} (Kati karte: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Oyo aze kati na Briscola - Lokuta {player_id}.\nNzela: Kati trick na koleka pointi na mwana (120 pointi na mwana karte).\nPointi karte: A=11, 3=10, K=4, Q=3, J=2, mbeni=0\nNzoto karte: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKati karte kati na mbeni karte bonganga na nzoto.\n\nNzela: '[play X]' mbala X e posisi (1-{max_pos}) karte oyo na loko"
+  },
+  "hand": {
+    "none": "A yeke wara carte na yâ ni ape.",
+    "empty": "A yeke wara carte na maboko ti ala pëpe.",
+    "header": "Na maboko ti mo:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP) A yeke tâ tënë."
+  },
+  "trick": {
+    "empty": "Mbeni zo ti kpengo na carte ni so ayeke dä pëpe.",
+    "header": "Fango ye ti fadeso:",
+    "line": "  Lokuta {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Lokuta {player_id}: {points} pt",
+    "trump_info": "Kode ti Trump: {trump_suit}",
+    "trump_info_deck": "Trump suit: {trump_suit} | Cards left in deck: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nSko: {scores}\n{trump_info}\n\nKoze karte na [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Sara kua na [play X] so X ayeke place ti carte ni (1, 2, 3, nga na ambeni ye tongaso)",
+    "out_of_range": "Posisi karte e pana. Oyo oze {count} karte (1-{count})"
+  },
+  "action": {
+    "played": "Lokuta {player_id} aze {card}",
+    "trick_win": "Lokuta {winner} aze kati na trick ngba na {card} pe na koze {points} pointi!"
+  },
+  "outcome": {
+    "head": "Mwana azo! Lokuta {winner} aze kati na {points} pointi!\n\nSko na mwana:\n{scores}",
+    "player_line": "Zo ti pikango ye {player_id}: {points} aye ({tricks} akode) "
+  }
+}

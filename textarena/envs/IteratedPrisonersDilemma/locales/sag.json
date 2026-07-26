@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "Kolînga êkî kôta pîri ngûnda {round}. Sînga na kötä '[Cooperate]' tô '[Defect]' ndro tôngö {{}}.",
+    "starting_round": "--- Kozo Tour {round} ---",
+    "round_summary": "Mîngî {round} êngî: \n{outcome}\nLokuta 0 êkî ngînga {r0} (ngînga tônga {score_0}), Lokuta 1 êkî ngînga {r1} (ngînga tônga {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "Draw! Both players scored {s0}.",
+    "round_both_cooperate": "Azo use kue so ayeke sala kua ni asala kusala maboko na maboko.",
+    "round_both_defect": "Ala use kue azia lege ti ala.",
+    "round_p0_cooperates_p1_defects": "Zo ti ngia 0 amû maboko na e, zo ti ngia 1 akpe.",
+    "round_p0_defects_p1_cooperates": "Zo ti ngia 0 akpe, zo ti ngia 1 asala kusala maboko na maboko."
+  }
+}
