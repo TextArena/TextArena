@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a {max_rounds} round game of Kuhn Poker.\nGame Rules:\n- Kuhn Poker uses a 3-card deck with J, Q, K (J lowest, K highest)\n- Each player antes {ante} chip and receives 1 card each round (note that the cards are dealt without replacement, so you cannot have the same card as your opponent).\n- Game continues for {max_rounds} rounds\n- The player with the most chips after all rounds wins\nAction Rules:\n- '[check]': Pass without betting (only if no bet is on the table)\n- '[bet]': Add 1 chip to the pot (only if no bet is on the table)\n- '[call]': Match an opponent's bet by adding 1 chip to the pot\n- '[fold]': Surrender your hand and let your opponent win the pot"
+  },
+  "init_round": {
+    "round_start": "### Kuminsando ronda {current_round} di {max_rounds} rondanan. Bo karti ta: '{player_card}'",
+    "available_actions": "Bo akshonnan disponibel ta: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksion mester ta [Check], [Bet], [Call], o [Fold].",
+    "not_legal": "E akshon mester ta {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Bo akshonnan disponibel ta: {legal_actions}.",
+    "round_summary": "{reason} Puntuashon aktual: Player 0: '{player_0_chips}'; Player 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner} su {winner_card} ta bati Player {loser} su {loser_card}. Player {winner} ta gana pot di {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "Na final di e rondnan {max_rounds}, tur dos hungadó tabatin mesun kantidat di chip.",
+    "round_win": "E hungadó {player_id} a fold.",
+    "winner_player0": "E hungadó 0 a gana dor di tin mas chip na final di tur rondo {max_rounds}.",
+    "winner_player1": "E hungadó 1 a gana dor di tin mas chip na final di tur rondo {max_rounds}."
+  }
+}

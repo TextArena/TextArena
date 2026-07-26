@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Bo ta hunga wega di numero di Countdown!\nMeta: Combina numeronan usando +, -, *, / pa alcansa e meta.\nFormato di accion: [i j op] unda i,j ta indice y op ta e operacion.\nEhempel: [0 2 *] ta multiplika numero na indice 0 cu numero na indice 2.\nDivision mester resulta den numeronan integru so."
+  },
+  "board": {
+    "header": "META: {target}\n\nNumeronan disponibel:\n{numbers}",
+    "best": "{observation}\n\nMihor teha ata: {best_value} (distancia: {distance})\nMihor expresion: {best_expression}",
+    "history": "{observation}\n\nHistoria di movimentu:\n{moves}",
+    "progress": "{observation}\nPuntuacion actual di progreso: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Indices Invalids: Must Be Different and Within Range 0-{max_index} (Indexnan no válido mester ta diferente i den e intervalo di 0 - 〔0])",
+    "invalid_operation": "Operashon invalido (divishon pa zero òf resultado ku no ta un kantidat integral)"
+  },
+  "outcome": {
+    "win": "Perfecto! A haña meta eksakto: {target}",
+    "no_moves": "Ningun movimentu mas. Mihor resultado: {best_value} (meta: {target})",
+    "turn_limit": "Limiter di turno alcansa. Mihor resultado: {best_value} (meta: {target})"
+  }
+}

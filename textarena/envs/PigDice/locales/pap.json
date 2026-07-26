@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Bo ta Hungador {player_id} hungando un wega di Pig Dice.\n\nRegla:\n- Na bo turno, bo por '[roll]' o '[hold]'\n- Roll un 2-6: Agrega na bo total di turno\n- Roll un 1: Perde total di turno y termina turno\n- Mantene: Agrega total di turno na bo score y termina turno\n- E promé hungador cu {winning_score} punto ta gana\n\nCuando ta bo turno, bo lo wak TURN di e score aktual y total di turno.\nResponde ku '[roll]' pa roll e dado o '[hold]' pa deposita bo punto."
+  },
+  "invalid_move": {
+    "invalid_action": "Formato di aksion no valido. Usá '[roll]' o '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Hungador {player_id} a keda bisti, perdiendo {turn_total} punto!",
+    "player_hold": "Hungador {player_id} a mantene y a deposita {turn_total} punto."
+  },
+  "board": {
+    "player": "Hungador 0: '{score_0}'; Hungador 1: '{score_1}'",
+    "current_total_scores": "E total di balornan aktual: {scores} Bo tur e ta {turn_total}.",
+    "roll_history": "{observation}\nHistoria di bo roll pa e turno aki: {roll_history}",
+    "first_roll": "{observation} Esaki ta e promé rol di bo turno.",
+    "available_actions": "{observation}\nAksionnan disponibel: '[roll]' o '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Hungador {winner_id} a gana tener un score mas haltu na limite di turno ({scores})",
+    "winner_by_score": "Hungador {winner_id} a gana alcanzando e meta di score di {winning_score}!",
+    "draw": "E limite di turno a ser alcansa y tur hungador tin e mesun score: {scores}"
+  }
+}

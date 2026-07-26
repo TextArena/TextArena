@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Tablero Aktual:\n\n{board}\nMovimentu Disponibel: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pilenan di Centro --- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Bista di Hungador {player_id} ---\n",
+    "payoff": "{observation}Pilha di Paga (Karton Ariba): {top_card}, Largo di Pilha di Paga: {payoff_length}\n",
+    "hand": "{observation}Man: {hand} ",
+    "discard": "{observation}Pilhanan di Deskarte: {discard}\n",
+    "empty": "Empty"
+  },
+  "game_message": {
+    "no_cards_left": "There are no more cards to draw from. Remember that you can play cards from these sources:\n  1. Your **hand**.\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Player {player_id} did not respond with a valid move in square brackets.",
+    "invalid_play": "Un wega invalido. hungadó {player_id} a purba di hunga {card} riba e pila sentral {index} .",
+    "discard_from_payoff": "Un hungadó {player_id} a purba di kita un karta for di e pila.",
+    "discard_not_in_hand": "Un hungadó {player_id} a purba di kita un karta ku no ta den su man.",
+    "wrong_move_type": "Un move invalido. E hungadó {player_id} no a kontestá ku un move válido."
+  },
+  "game_action": {
+    "you_drew": "You drew cards.",
+    "opponent_drew": "Player {player_id} drew cards.",
+    "you_played": "Bo a hunga {card} riba e pila sentral {index}.",
+    "opponent_played": "Hungador {player_id} a hunga {card} riba pilha sentral {index}.",
+    "you_discarded": "Bo a deskarta {card} pa pilha di deskarte {index}, ku ta nifiká ku bo a terminá bo turno. Ningun akshon adishonal di bo lo keda konsiderá pa e turno aki. Hungador {next_player_id} lo ta bai despues.",
+    "opponent_discarded": "Hungador {player_id} a deskarta {card} pa pilha di deskarte {index}, ku ta nifiká ku e tambe a terminá su turno. Ningun akshon adishonal di Hungador {player_id} lo keda konsiderá pa e turno aki. Hungador {next_player_id}, bo lo ta bai despues. Por favor, entrada bo akshon den formato [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Player {current_player} has finished their payoff pile! Player {current_player} wins!",
+    "deadlock_player_0": "Deadlock a ser alcanzá! Hungador 0 ta gana ku {player_0_payoff} karton nan sobra vs Hungador 1 su {player_1_payoff} karton.",
+    "deadlock_player_1": "Deadlock a ser alcanzá! Hungador 1 ta gana ku {player_1_payoff} karton nan sobra vs Hungador 0 su {player_0_payoff} karton.",
+    "deadlock_tie": "Deadlock a ser alcanzá ku empate! Tur dos hungadónan tin {player_0_payoff} karton nan sobra. Hungador {current_player} ta gana pa defekto."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Bo ta Player {player_id} den e Juego di Negoshacion.\nBo tin algu recursos, i bo tarea ta pa komersia asina ku e balor total di bo recursos ta krese.\nE recursos i balor asosiá ku bo tin aktualmente ta:\n\t+ {resource_value_list}\nNa kada turno, bo por papia ku bo oponent i haci un oferda di komersio.\nUsa e siguiente token spesial pa akshonan:\n  - '[Ofer: 3 Kabritu, 2 Ore -> 5 Ladrillo, 2 Kabritu]': [Ofer: Rekursunan ofrenda -> Rekursunan pedi]\n  - '[Accept]': Pa aksepta un oferda entrante.\n  - '[Deny]': Pa rechasa un oferda entrante (default).\nE juego ta dura pa {max_turns} turnonan na total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "E hungadó a purba di aseptá un komèrsio sin tin e rekursonan nesesario.",
+    "out_of_range": "Player {player_id}, Akshon invalido. Kolomna {col} ta fuera di limit.",
+    "already_full": "Player {player_id}, Akshon invalido. Kolomna {col} ta komplet.",
+    "proposing_with_no_resource": "E hungadó {player_id} a purba di hasi un oferta pa komèrsio sin tin e rekursonan nesesario.",
+    "incorrect_offer_format": "E hungadó {player_id} a hasi un oferta di komèrsio den un formato inkorekto.",
+    "no_new_offer": "E hungadó {player_id} no a hasi ningun oferta nobo di komèrsio."
+  },
+  "offers": {
+    "reject": "E hungadó {player_id} a rechasá e oferta di kambio.",
+    "accept": "E hungadó {acceptor_id} a aseptá e oferta di trade for di Player {proposer_id}.",
+    "proposal": "Player {player_id} a haci e siguiente oferda na Player {opponent_id}: Artikulonan ofrenda: {offered} -> Artikulonan pedi: {requested}"
+  },
+  "outcome": {
+    "win": "E hungadó {winner_id} a gana dor di tin un ganashi mas grandi den balor di inventario.",
+    "draw": "E mesun kambio den balor di inventario pa tur hungadó."
+  }
+}

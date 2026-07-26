@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Chopsticks. On your turn, choose one of:\n  + Attack:  '[attack M O]'  where M=your hand (0 or 1), O=opponent hand (0 or 1).\n    - Opponent's hand count increases by your hand; if >=5, it becomes 0.\n  + Split:   '[split L R]'  to redistribute your total fingers into L and R (L+R = your total).\nReply with exactly one of those commands."
+  },
+  "board": {
+    "current_board": "Tablero Aktual:\nHungador 0: {hands_0}\nHungador 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Bo man {my_idx} ta morto.",
+    "opp_hand_dead": "E man di e opositor {opp_idx} ya ta morto.",
+    "split_sum": "E suma di e parti mester ta {total}.",
+    "split_no_change": "Split mester a kambia bo distribushon di man.",
+    "invalid_command": "Movimiento invalido. Usá “[attack M O]” o “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} ta ataká e man di P{opp_id} {opp_idx}: e ta bai for di {opp_val} pa {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Tur dos man di e oponente ta morto.",
+    "draw": "E limite di turno a ser alcansa."
+  }
+}
