@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "nsn kyer afe round {round}. Ka biribiara '[Cooperate]' anaa '[Defect]' n n boxei {{}}.",
+    "starting_round": "--- Ahyɛaseɛ Mmere {round} ---",
+    "round_summary": "Nsn afe {round} nsm:\n{outcome}\nPlayer 0 te byin {r0} (bpia {score_0}), Player 1 te byin {r1} (bpia {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "Wɔbɔɔ agoru! Asani biara bɔɔ {s0}.",
+    "round_both_cooperate": "Asɔfokuw abien no nyinaa yɛɛ biako.",
+    "round_both_defect": "Asɔfokuw abien no nyinaa guanee.",
+    "round_p0_cooperates_p1_defects": "Ɔpanyin 0 yɛɛ adwuma, na ɔpanin 1 guanee.",
+    "round_p0_defects_p1_cooperates": "Ɔpanyin 0 guan fii kuw no mu, na ɔpanin 1 yɛɛ adwuma."
+  }
+}

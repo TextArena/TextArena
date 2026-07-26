@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a game of HighSociety (2-player version).\nGame flow:  Ten prestige cards are auctioned one after another.\nBidding:    Each auction, secretly choose a money card 1-11 and reveal.\n            • Higher bid wins the prestige card and discards that money card.\n            • Lower bid keeps their money card.\n            • Tie -> both bids are returned and the same prestige card is re-auctioned.\nScoring:    After all ten auctions, add **remaining cash + prestige points**.\n            Higher *net-worth* wins (exact tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Auction {round}/10  |  Prestige card: {prize}"
+  },
+  "board": {
+    "money_cards": "Wo sika nkrataa a aka no: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Mepɔ wɔn hyɛ da biara mu [X] sika card.",
+    "card_not_held": "You no longer have that money card."
+  },
+  "message": {
+    "tie": "Tie - bids returned. Rebid!",
+    "auction_result": "P0 bɔ {bid0}, P1 bɔ {bid1}. Player {winner} di prestige {prize} (ɔha {total})."
+  },
+  "outcome": {
+    "p0_wins": "Net-worth {nw0} > {nw1}",
+    "p1_wins": "Net-worth {nw1} > {nw0}",
+    "draw": "Both net-worth {nw0} – exact tie."
+  }
+}

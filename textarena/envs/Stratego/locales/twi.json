@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Wɔyɛ Ɔmanfofo {player_id} wɔ Stratego.\nWɔ adeɛ a wɔde ma wo ne sɛ wo fa ɔmanfofo no flag anaa wo twɛn wo nnwuma nyinaa.\nWɔ ahyɛ wo nnwuma afi wo bɔɖi so, awo to wo flag, bomms, na nnwuma afoforɔ a wɔ wɔ abɔdeɛ.\n\n### Nnwuma Nhyehyɛe\n1. **Nhwɛsoɔ Nhyehyɛe:**\n   - Wɔ wo nna, wo tumi fa wo nhwɛsoɔ ko nkɔ beaeɛ a ɛnyɛ wo nnwuma no wɔ.\n   - Ɛfiri: Nhwɛsoɔ tumi fa A1 ko B1 anaa A1 ko A2 sɛ B1 na A2 nnɔ wo nnwuma no so.\n   - Sɛ nhwɛsoɔ a wofa no yɛ bomb anaa flag, ɛnnɔ wo fa bi.\n2. **Nsiesie:**\n   - Sɛ wo fa wo nhwɛsoɔ ko beaeɛ a ɔmanfofo no wɔ, nsiesie betumi aba:\n     - Nhwɛsoɔ a ɛwɔ abɔdeɛ kɛseɛ no di nkonim na twɛn ɔmanfofo no nhwɛsoɔ no.\n     - Sɛ abɔdeɛ no nyɛ pɛpɛɛpɛ a, nhwɛsoɔ mbɔwei twɛn.\n     - **Nsiesie a ɛnyɛ pɛ:**\n       - Bombs twɛn nhwɛsoɔ afoforɔ afoforɔ mpɛpɛɛpɛ, mpɛpɛɛpɛ miners defuse bomms.\n       - Spies tumi di marshall so sɛ spy no hyɛ nsiesie no aseɛ nanso wɔ twɛn nhwɛsoɔ afoforɔ.\n3. **Nnwuma Nsɛm:**\n   - Gye di nsiesie a ɔmanfofo no wɔ afi wɔn nnwuma na nsiesie so.\n   - Boa wo flag na kɔ fa ɔmanfofo no flag.\n   - Fa scouts yɛ adwuma sɛ wɔn bɛ boa wo anya ɔmanfofo no nnwuma na wɔn a wɔ yɛ ketewa.\n\n### Sɛn? Wɔfa Nhwɛsoɔ:\n1. Kaa beaeɛ a wo nhwɛsoɔ wɔ ne beaeɛ a ɛkɔ.\n2. De nhwɛsoɔ no sɛ: [A0 B0], a A0 ne beaeɛ a nhwɛsoɔ no wɔ, B0 ne beaeɛ a ɛkɔ.\n   - Ɛfiri: Sɛ wo fa nhwɛsoɔ a ɛwɔ row 0, column 0 kɔ row 1, column 0, ka [A0 B0].\n3. Hwe a, beaeɛ a ɛkɔ no yɛ pɛ sɛ nhwɛsoɔ nhyehyɛe a ɛwɔ hɔ.\n\n### Ɔhaw a Ɛho Hia:\n- Bɔɖi no bɛsi wo nnwuma na wɔn beaeɛ, e.g. MN, MS.\n- Bɔɖi no bɛsi ɔmanfofo no nnwuma a wɔn ansa na wɔn abɔdeɛ, e.g. ?.\n- Grids a ɛwɔ ~ yɛ nsu na ɛnnɔ wo fa ko hɔ.\n- Sɛ ɛyɛ wo pɛ, hyɛ wo nnwuma a ɛwɔ front lines afi hɔ sɛ wobɛnya nsiesie a ɔmanfofo no wɔ. Ɔmanfofo 0 ne 1 frontlines yɛ row D ne G respectively.\n\nHwɛ bɔɖi kɛseɛ pɛ:"
+  },
+  "board": {
+    "current_board": "Bɔɖi Kɛse:\n\n{board}\nNsiesie Nnwuma: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Akwan a enni mu. Odifo {player_id} ankyerɛ ne kwan wɔ ɔkwan no so sɛ [A0 B0] .",
+    "invalid_coordinates": "Invalid action format. Player {player_id} did not input valid coordinates.",
+    "not_own_piece": "Akwan a ɛmfata. Ɛsɛ sɛ ɔgyinafo {player_id} twe wɔn ankasa nnua no mu biako.",
+    "scout_through_pieces": "Invalid action format. Player {player_id} cannot move a scout through other pieces.",
+    "scout_diagonal": "Invalid action format. Player {player_id} cannot move a scout diagonally.",
+    "non_scout_multi_square": "Invalid action format. Pieces, apart from scouts, can only move one square at a time.",
+    "move_into_lake": "Akwan a ɛmfata. Ɔbɔadeɛ {player_id} ntumi nkɔ ɔtare no mu.",
+    "move_onto_own_piece": "Akwan a ɛmfata. Ɔbɔadeɛ {player_id} ntumi ntutu ne nan nkɔ n'ankasa bi so.",
+    "move_bomb_or_flag": "Akwan a ɛmfata. Ɔbɔadeɛ {player_id} ntumi mfa bɔmb anaa frankaa nkɔ baabiara."
+  },
+  "game_action": {
+    "you_moved": "Woyɛ wo nhwɛsoɔ fa {source} ko to {dest}.",
+    "opponent_moved": "Ɔmanfofo {player_id} ayɛ nhwɛsoɔ fa {source} ko to {dest}.",
+    "you_equal_ranks": "Woyɛ wo nhwɛsoɔ fa {source} ko to {dest}. Nhwɛsoɔ a ɛhyɛɛ nsiesie no ne {attacking_rank} na beaeɛ a nhwɛsoɔ no kɔeɛ no ne {target_rank}. Sɛ abɔdeɛ no nyɛ pɛpɛɛpɛ a, nhwɛsoɔ mbɔwei nyɛ adwuma.",
+    "opponent_equal_ranks": "Ɔmanfofo {player_id} ayɛ nhwɛsoɔ fa {source} ko to {dest}. Nhwɛsoɔ a ɛhyɛɛ nsiesie no ne {attacking_rank} na beaeɛ a nhwɛsoɔ no kɔeɛ no ne {target_rank}. Sɛ abɔdeɛ no nyɛ pɛpɛɛpɛ a, nhwɛsoɔ mbɔwei nyɛ adwuma.",
+    "you_miner_defused": "Woyɛ wo nhwɛsoɔ fa {source} ko to {dest}. Nhwɛsoɔ a ɛhyɛɛ nsiesie no ne {attacking_rank} na beaeɛ a nhwɛsoɔ no kɔeɛ no ne {target_rank}. Sɛ miners tumi defuse bombs, woyɛ nsiesie no.",
+    "opponent_miner_defused": "Ɔmanfofo {player_id} ayɛ nhwɛsoɔ fa {source} ko to {dest}. Nhwɛsoɔ a ɛhyɛɛ nsiesie no ne {attacking_rank} na beaeɛ a nhwɛsoɔ no kɔeɛ no ne {target_rank}. Sɛ miners tumi defuse bombs, woyɛ nsiesie no.",
+    "you_bomb_lost": "Woyɛ wo nhwɛsoɔ fa {source} ko to {dest}. Nhwɛsoɔ a ɛhyɛɛ nsiesie no ne {attacking_rank} na beaeɛ a nhwɛsoɔ no kɔeɛ no ne {target_rank}. Sɛ nhwɛsoɔ a ɛhyɛɛ nsiesie no nyɛ bomb, woyɛ nsiesie no.",
+    "opponent_bomb_won": "Ɔmanfofo {player_id} ayɛ nhwɛsoɔ fa {source} ko to {dest}. Nhwɛsoɔ a ɛhyɛɛ nsiesie no ne {attacking_rank} na beaeɛ a nhwɛsoɔ no kɔeɛ no ne {target_rank}. Sɛ nhwɛsoɔ a ɛhyɛɛ nsiesie no nyɛ miner a, woyɛ nsiesie no.",
+    "you_spy_won": "Woyɛ wo nhwɛsoɔ fa {source} ko to {dest}. Nhwɛsoɔ a ɛhyɛɛ nsiesie no ne {attacking_rank} na beaeɛ a nhwɛsoɔ no kɔeɛ no ne {target_rank}. Sɛ nhwɛsoɔ a ɛhyɛɛ nsiesie no yɛ spy na beaeɛ a nhwɛsoɔ no kɔeɛ no yɛ marshall, woyɛ nsiesie no.",
+    "opponent_spy_lost": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a spy and the destination is a marshall, you lost the battle.",
+    "you_higher_won": "Woyɛ wo nhwɛsoɔ fa {source} ko to {dest}. Nhwɛsoɔ a ɛhyɛɛ nsiesie no ne {attacking_rank} na beaeɛ a nhwɛsoɔ no kɔeɛ no ne {target_rank}. Sɛ nhwɛsoɔ a ɛhyɛɛ nsiesie no yɛ abɔdeɛ kɛseɛ paa sɛ beaeɛ a nhwɛsoɔ no kɔeɛ no, woyɛ nsiesie no.",
+    "opponent_higher_lost": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a higher rank than the destination, you lost the battle.",
+    "you_lower_lost": "You have moved your piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a lower rank than the destination, you lost the battle.",
+    "opponent_lower_won": "Ɔmanfofo {player_id} ayɛ nhwɛsoɔ fa {source} ko to {dest}. Nhwɛsoɔ a ɛhyɛɛ nsiesie no ne {attacking_rank} na beaeɛ a nhwɛsoɔ no kɔeɛ no ne {target_rank}. Sɛ nhwɛsoɔ a ɛhyɛɛ nsiesie no yɛ abɔdeɛ ketewa paa sɛ beaeɛ a nhwɛsoɔ no kɔeɛ no, woyɛ nsiesie no."
+  },
+  "outcome": {
+    "flag_captured": "Ɔpanyin {player_id} no agye ɔfoforo frankaa!",
+    "no_movable_pieces": "Player {winner_id} wins! Player {loser_id} has no more movable pieces."
+  }
+}
