@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Three-Player Tic Tac Toe.\nYour symbol is '{symbol}'.\nYou take turns placing your symbol on a 5x5 board to form a line of four.\nLines can be horizontal, vertical, or diagonal.\nSubmit your move using the format '[4]' to mark cell 4."
+  },
+  "board": {
+    "current_board": "Boro ya gona ya kgwedi:\n\n{board}\n\nDitshelelo tse di kgonegang: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Sebopego sa go sepela se sego molaong. Diriša \"[cell]\" mo sele e lego 0-{max_cell} .",
+    "out_of_range": "Nomoro ya sele e sa šomego: {cell}. E swanetše go ba magareng ga 0 le {max_cell} .",
+    "already_occupied": "Sele {cell} e šetše e na le motho.",
+    "made_invalid": "Sebapadi {player_id} se dirile mosepelo wo o sa dumelelwago"
+  },
+  "game_action": {
+    "placed": "Mmoki {player_id} o hloma semelo sa gagwe ({symbol}) mo sephiring ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Player {player_id} ({symbol}) wins!",
+    "draw": "The game is a draw!"
+  }
+}

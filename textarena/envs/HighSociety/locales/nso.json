@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a game of HighSociety (2-player version).\nGame flow:  Ten prestige cards are auctioned one after another.\nBidding:    Each auction, secretly choose a money card 1-11 and reveal.\n            • Higher bid wins the prestige card and discards that money card.\n            • Lower bid keeps their money card.\n            • Tie -> both bids are returned and the same prestige card is re-auctioned.\nScoring:    After all ten auctions, add **remaining cash + prestige points**.\n            Higher *net-worth* wins (exact tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Auction {round}/10  |  Kaadi ya Prestige: {prize}"
+  },
+  "board": {
+    "money_cards": "Dikarata tša gago tšeo di šetšego: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ke kgonego ya go akaretsa kaadi ya chelete [X] pele.",
+    "card_not_held": "Ga o sa na karata yeo ya tšhelete."
+  },
+  "message": {
+    "tie": "Dithekišo tša go leka-lekana di bušeditšwe morago.",
+    "auction_result": "P0 e bile {bid0}, P1 e bile {bid1}. Modiri {winner} a fenya prestige {prize} (kgolo {total})."
+  },
+  "outcome": {
+    "p0_wins": "Net-worth {nw0} > {nw1}",
+    "p1_wins": "Net-worth {nw1} > {nw0}",
+    "draw": "Bobedi bja thoto ya bona e feletšego {nw0}  go swana ka mo go nepagetšego."
+  }
+}

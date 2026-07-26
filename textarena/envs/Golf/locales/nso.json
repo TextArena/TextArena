@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "O dula Golf (Kadi) - Player {player_id}.\nMmušo: Pata sko e tlase ka mošomo o le mongwe. Fa koloneng e na le tseno e le nngwe, di phephetšwa bjalo ka 0.\nMadi a Kadi: A=1, 2-10=madi a a bonwa, J/Q=10, K=0\n\nTokelo (sebelisa kgwedi ka katlego):\n- '[draw]' - Tswa mo dekini\n- '[take]' - Tswa mo dipileng\n- '[swap X Y]' - Feditse kadi e dumeletsegileng le poso X (lorero) Y (kholomo)\n- '[discard]' - Iphela kadi e dumeletsegileng"
+  },
+  "board": {
+    "drew": "O dumeletse: {card}\nJwale o swanetse [swap X Y] goba [discard]",
+    "took": "O dumeletse: {card} go tswa mo dipileng\nO swanetse [swap X Y] na yona (ga a kgone go iphela)",
+    "peeked": "O ile a bone ka poso ({row},{col}): {card}",
+    "turn_view": "Lemo la gago:\n{hand}\nDipilo: {discard}\n{options}",
+    "none": "Ga go na le e tee."
+  },
+  "options": {
+    "final_turns": "Diturn tsa boraro! Dikamano tsa gago: [draw], [take], [peek X Y]",
+    "draw": "Dikamano tsa gago: [draw], [take]",
+    "must_swap": "O swanetše go: [swap X Y] (o ka se kgone go lahla dikarata tše di lego mokgobo wa tšeo o swanetšego go di lahla)",
+    "swap_or_discard": "O swanetse: [swap X Y] goba [discard]"
+  },
+  "hand": {
+    "no_cards": "Ga go na dikarata.",
+    "header": "Kol: 1 2 3",
+    "row": "Lorero {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} o feditse {new} le {old} ka poso ({row},{col})",
+    "discarded": "Player {pid} o hlankeditse {card}"
+  },
+  "message": {
+    "deck_empty": "Papadi e fela kapejana.",
+    "knocked": "Sebapadi {pid} se kgorometšwe! Se sengwe le se sengwe sa dibapadi tše dingwe di hwetša sebaka se tee.",
+    "final_round": "Player {pid} {reason}! Batho ba bangwe ba na turn e nngwe"
+  },
+  "reason": {
+    "all_revealed": "Na o utolotše dikarata ka moka?"
+  },
+  "invalid": {
+    "wrong_action": "Sebelisa tokelo e nngwe ya kgwedi: [draw], [take], [swap X Y], [discard], [knock], goba [peek X Y]",
+    "discard_empty": "Mokgobo wa go lahla o se na selo!",
+    "must_draw_first": "O swanetse go ❗️ [draw], [take], [knock], goba [peek X Y]",
+    "cannot_discard_taken": "O ka se ke wa lahla karata yeo e tšerwego mokgobong wo o lahlilwego. O swanetše go e fapanya.",
+    "have_drawn_card": "O na le kadi e o e dumeletsegileng. O swanetse [swap X Y] goba [discard] yona",
+    "need_drawn_swap": "O nyaka karata e swerwego gore o kgone go fapanyetša.",
+    "need_drawn_discard": "O nyaka karata e swerwego gore o kgone go lahla.",
+    "out_of_bounds": "Poso ke ntle le mabotho. Sebelisa lorero 1-{max_row}, kholomo 1-{max_col}",
+    "knock_with_card": "O ka se ke wa kokota ge o sa tšwa go ntšha karata. Phetha nako ya gago pele.",
+    "already_knocked": "Motho yo mongwe o šetše a fentše mothalading wo.",
+    "already_revealed": "Karata yeo e šetše e utolotšwe!"
+  },
+  "summary": {
+    "full": "Papo e feditilwe! Player {winner} a fenya le sko sa {score} diponto!\n\nDipontšo tsa boraro:\n{scores}",
+    "line": "Player {pid}: {score} diponto\n"
+  },
+  "board_str": {
+    "title": "=== Papadi ya GOLF===",
+    "discard": "Go lahla mokgobo: {card}",
+    "knocked": "Sebapadi {pid} se ile sa kokota!",
+    "player_header": "Player {pid} (Sko: {score}):"
+  }
+}

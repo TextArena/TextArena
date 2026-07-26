@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are playing {color} in a game of Breakthrough. You move {direction} on an {board_size}x{board_size} board.\nIn your turn you can move a single piece one step forward or diagonally forward.\nA piece may only move diagonally if an opponent piece is there, and only move into such a preoccupied square in a diagonal step.\nWhen stepping into a square with an opponent piece, you capture it and the opponent's piece is removed permanently from the board.\nUse UCI-like notation in brackets, e.g. [a2a3] to move from a2 to a3.\n* 'a' corresponds to the leftmost column, '1' is the bottom row (from White's perspective).\n* Blacks's home row is the top row (row 8 for an 8x8). White's home row is the bottom row (row 1 for an 8x8).\nThe first player whose piece reaches the opponent's home row wins. If your pieces are all captured, you lose."
+  },
+  "invalid_move": {
+    "wrong_format": "Ka kgopelo diriša mongwalo wa algebra wo o lego ka gare ga dikhurumetšo go swana le [a2a3].",
+    "out_of_bounds": "Go sepela go ka ntle ga mellwane ya boto.",
+    "illegal": "That move does not follow the Breakthrough rules or is not your piece."
+  },
+  "game_action": {
+    "moved": "Modiri {player_id} o felela {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Ba bašweu ba ile ba fihla moleng wa mathomo wa ma-Black.",
+    "black_reached": "Ba baso ba ile ba fihla moleng wa mathomo wa go bapala ga Makgowa.",
+    "white_captured": "Dithuto ka moka tša bašweu di thopilwe.",
+    "black_captured": "Dikarolo ka moka tša Bathobaso di thopilwe.",
+    "no_moves": "Sebapadi {player_id} ga se sa na methaladi e mengwe."
+  }
+}

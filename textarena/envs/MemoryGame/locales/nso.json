@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id}. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched."
+  },
+  "board": {
+    "current_board": "Boto ya ga bjale: {board}",
+    "current_game_board": "Boto ya Papadi e lego gona bjale: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Sebopego sa mosepelo se sego molaong. Sebapadi {player_id} ga se a araba ka tsela ya maleba yeo e lego gare ga dikhurumetšo tša sekwere.",
+    "out_of_bounds": "Kgato e sa dumelelwago. Sebapadi {player_id} se kgethile boemo bja ka ntle ga mellwane ya papadi.",
+    "same_card_twice": "Go sepela mo go sa dumelelwego. Sebapadi {player_id} se kgethile karata e tee gabedi.",
+    "already_matched": "Go sepela mo go sa dumelelwago. Sebapadi {player_id} se kgethile karata e tee goba bobedi bja tšona tšeo di šetšego di bapeditšwe."
+  },
+  "game_message": {
+    "cards_match": "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
+    "cards_no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+  },
+  "outcome": {
+    "draw": "Baphadišani ka bobedi ba ile ba bapetša palo e swanago ya dikarata.",
+    "win": "Sebapadi {winner_id} se fentše!",
+    "turn_limit": "Tempe ya turn e fihlile. Pino e fedile. Player 0 e ile ya hlola {score_0} dima, Player 1 e ile ya hlola {score_1} dima.",
+    "turn_limit_win": "{reason} Player {winner_id} has won!"
+  }
+}
