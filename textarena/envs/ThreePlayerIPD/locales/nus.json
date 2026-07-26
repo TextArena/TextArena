@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Yin acë Player {player_id} ë 3-player Iterated Prisoner's Dilemma. Thök aacë {num_rounds} rounds.\nThök ë riɛl:\n• {conv_rounds} thök ë free-chat\n• 1 thök ë decision - submit one token per opponent: '[<opp-id> cooperate]' or '[<opp-id> defect]' (i.e. '[1 defect] [2 cooperate]'; thök ë default aye 'cooperate'). \nPair-wise payoff matrix (applied to each unordered pair):\n  - Both cooperate  ->  {reward}\n  - Both defect     ->  {punishment}\n  - Yin defect, kɛn cooperate ->  {temptation}\n  - Yin cooperate, kɛn defect ->  {sucker}\nPlayer(s) ë thök ë riɛl ku thök aye kɛm atë thök aacë."
+  },
+  "round": {
+    "start": "─── Starting Round {round} ───\tYin acë free-chat ë thök ë riɛl ku thök aye {conv_rounds} rounds.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Kä min ci̱ ben raar:",
+    "pair_line": "{observation}\n\t Player {i} vs Player {j} cë lëu bë '{choice_i}' nɛ '{choice_j}' (Player {i} cë lëu {gain_i}, Player {j} cë lëu {gain_j})",
+    "scores_open": "{observation} -> Kɛn tin ci̱ rɔ̱ la̱t ɛn wa̱lɛ: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}  kä"
+  },
+  "outcome": {
+    "final": "Kɛm ë riɛl: {scores}.  Thök ë riɛl (kɛm ë bɛ̈i→kɛm ë lɔ): {groups}"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are playing {color} in a game of Breakthrough. You move {direction} on an {board_size}x{board_size} board.\nIn your turn you can move a single piece one step forward or diagonally forward.\nA piece may only move diagonally if an opponent piece is there, and only move into such a preoccupied square in a diagonal step.\nWhen stepping into a square with an opponent piece, you capture it and the opponent's piece is removed permanently from the board.\nUse UCI-like notation in brackets, e.g. [a2a3] to move from a2 to a3.\n* 'a' corresponds to the leftmost column, '1' is the bottom row (from White's perspective).\n* Blacks's home row is the top row (row 8 for an 8x8). White's home row is the bottom row (row 1 for an 8x8).\nThe first player whose piece reaches the opponent's home row wins. If your pieces are all captured, you lose."
+  },
+  "invalid_move": {
+    "wrong_format": "Lätni̱ aljɛbriak in ca gɔ̱r kɛ pörɛkthi̱e̱l ce̱tkɛ [a2a3].",
+    "out_of_bounds": "Ɛn ɣöö bɛ wä raar /cɛ rɔ lot kɛ naath.",
+    "illegal": "Ɛn duɔ̱ɔ̱p ɛmɔ /cɛ rɔ lot kɛ ŋuɔ̱t tin la guɛckɛ ɛ nɛy diaal kiɛ /ciɛɛ jɛn in deri lät ni jɛ."
+  },
+  "game_action": {
+    "moved": "Riäŋ {player_id} kuɛr {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Bi̱lɛk cɛ cop kä biɛl mi̱ te jɔk.",
+    "black_reached": "Cu Black cop kä White's home row.",
+    "white_captured": "Kɛn diaal tin la̱tkɛ ɛ Bɛl caa kɛ käp.",
+    "black_captured": "Kɛn diaal ca kɛ käp ɛ la nɛy ti̱ jiath.",
+    "no_moves": "Ji̱ ŋarä {player_id} /thiɛlɛ kɛ mi dɔ̱ŋ ti bɛ lɛ wɔ̱ la̱t."
+  }
+}

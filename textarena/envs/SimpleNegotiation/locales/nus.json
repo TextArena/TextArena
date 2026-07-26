@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Ɛn ram ɛmɔ cɛ ɣɔ̱n i̱ bɛ duɔ̱ɔ̱r nhɔk mi /kenɛ kuak tëë go̱o̱rɛ jek.",
+    "out_of_range": "Riäk {player_id}, Cäkë kekë. Kär {col} ee luel luel.",
+    "already_full": "Riäk {player_id}, Cäkë kekë. Kär {col} ee full.",
+    "proposing_with_no_resource": "Ɛn ŋar {player_id} cɛ ɣɔ̱n i̱ bɛ duɔ̱ɔ̱r kɔk mi /thiɛl yio̱w.",
+    "incorrect_offer_format": "Player {player_id} made a trade offer in an incorrect format.",
+    "no_new_offer": "Player {player_id} made no new trade offer."
+  },
+  "offers": {
+    "reject": "Player {player_id} rejected the trade offer.",
+    "accept": "Riäk {acceptor_id} aci luoi kë offer de Player {proposer_id}.",
+    "proposal": "Riäk {player_id} cäkë offer de kë Player {opponent_id}: Kënë piööth: {offered} -> Kënë bïk: {requested}"
+  },
+  "outcome": {
+    "win": "Player {winner_id} won by having a larger gain in inventory value.",
+    "draw": "Ɛn min ci̱ rɔ gɛr kä pek in caa kuëŋ rɛy kuakni̱ diaal ɛ jɛn kɛl."
+  }
+}

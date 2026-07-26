@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Ciɛrkä min la̱tkɛ kɛ kui̱ ŋarä: {board}",
+    "valid_moves": "{observation}\nValid moves: {moves}",
+    "no_valid_moves_reset": "{observation}/Thiɛlɛ mi̱ la jälɛ - dɔ̱ŋ bi̱ ji̱n ɛ naŋ.",
+    "no_valid_moves_step": "{observation} /Thiɛlɛ mi̱ la̱tkɛ ɛ jiek kä bi̱ rɔ cu gɛɛr.",
+    "scores_reset": "{observation}\nCuëët Scores - Thiong: {black_count}, Thudan: {white_count}\n",
+    "scores_step": "{observation}\nScores - Thiong: {black_count}, Thudan: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Move must be of the form [row, col].",
+    "illegal": "Lät ti̱ /ci̱ rɔ̱ lot. Luɔc in lätkɛ: {valid}"
+  },
+  "game_action": {
+    "skipped": "Ji̱ ŋarä {pid} cu kɛn ɛ lo̱k i̱ bi̱ kɛ wɔ̱ kä gua̱a̱thdiɛn.",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Riëng {pid} ({piece}) acë noom ë valid moves ë kuën ë skip."
+  },
+  "outcome": {
+    "black_wins": "Thiong wins {black_count}-{white_count}.",
+    "white_wins": "White wins {white_count}-{black_count}.",
+    "draw": "Draw {black_count}-{white_count}."
+  }
+}
