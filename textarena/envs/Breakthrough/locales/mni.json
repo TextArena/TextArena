@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are playing {color} in a game of Breakthrough. You move {direction} on an {board_size}x{board_size} board.\nIn your turn you can move a single piece one step forward or diagonally forward.\nA piece may only move diagonally if an opponent piece is there, and only move into such a preoccupied square in a diagonal step.\nWhen stepping into a square with an opponent piece, you capture it and the opponent's piece is removed permanently from the board.\nUse UCI-like notation in brackets, e.g. [a2a3] to move from a2 to a3.\n* 'a' corresponds to the leftmost column, '1' is the bottom row (from White's perspective).\n* Blacks's home row is the top row (row 8 for an 8x8). White's home row is the bottom row (row 1 for an 8x8).\nThe first player whose piece reaches the opponent's home row wins. If your pieces are all captured, you lose."
+  },
+  "invalid_move": {
+    "wrong_format": "[a2a3]গুম্বা ব্রেকেত তৌরবা অলজেব্রিক নোতেসন শিজিন্নৌ।",
+    "out_of_bounds": "খোঙথাং অসি বোর্দকী ঙমখৈদগী হেন্দোকপনি।",
+    "illegal": "খোঙথাং অসিনা ব্রেকথ্রুগী কাংলোনশিং ঙাক্না চৎনদে নত্রগা মসি নহাক্কী পোৎশক নত্তে।"
+  },
+  "game_action": {
+    "moved": "Player {player_id} {move_str} ({piece}) ṣṛṅ."
+  },
+  "outcome": {
+    "white_reached": "ৱাইতশিংনা ব্লেক্কী হোম রোলদা য়ৌখি।",
+    "black_reached": "ব্লেক্কী শক্তম্না ৱাইতকী হোম রোলদা য়ৌখি।",
+    "white_captured": "ৱাইটকী শক্তম খুদিংমক লৌশিনখ্রে।",
+    "black_captured": "ব্লেক পুম্নমক ফাজিনখ্রে।",
+    "no_moves": "শান্নরোই {player_id}না মথং-মথং খোঙথাং অমত্তা চংশিনবা ঙমদ্রে।"
+  }
+}

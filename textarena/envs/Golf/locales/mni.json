@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "You are playing Golf (Card Game) - Player {player_id}.\nGoal: Get the lowest total score in this single round. If columns share the same value, they are summed as 0.\nCard Values: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (use exact brackets):\n- '[draw]' - Draw from deck\n- '[take]' - Take from discard pile\n- '[swap X Y]' - Swap drawn card with position X (row) Y (column)\n- '[discard]' - Discard the drawn card\n"
+  },
+  "board": {
+    "drew": "You drew: {card}\nNow you must [swap X Y] or [discard] it.",
+    "took": "নহাক্না লৌথোকপা য়াবা মশিংদগী {card} লৌখি। অদোমনা মসিগা লোয়ননা (থীংবা ঙমদে) [swap X Y] তৌগদবনি।",
+    "peeked": "You peeked at position ({row},{col}): {card}",
+    "turn_view": "Your hand:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "অমত্তা লৈতে"
+  },
+  "options": {
+    "final_turns": "Final turns! Your options: [draw], [take], [peek X Y]",
+    "draw": "Your options: [draw], [take]",
+    "must_swap": "নহাক্না: [swap X Y] (মখাগী কার্দশিং অসি কাপ্পা য়াদে)",
+    "swap_or_discard": "You must: [swap X Y] or [discard]"
+  },
+  "hand": {
+    "no_cards": "কার্দশিং লৈতে।",
+    "header": "কল: ১ ২ ৩",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} swapped {new} with {old} at position ({row},{col})",
+    "discarded": "Player {pid} {card} discarded"
+  },
+  "message": {
+    "deck_empty": "Deck is empty! Game ends immediately.",
+    "knocked": "শান্নরোই {pid}না থুগায়খ্রে! অতোপ্পা শান্নরিবশিং খুদিংমক্না মথং-মথং অমা চংশিনগনি।",
+    "final_round": "Player {pid} {reason}! Each other player gets one more turn."
+  },
+  "reason": {
+    "all_revealed": "কার্দ পুম্নমক ফোংদোকখ্রে।"
+  },
+  "invalid": {
+    "wrong_action": "Use exactly ONE bracketed action: [draw], [take], [swap X Y], [discard], [knock], or [peek X Y]",
+    "discard_empty": "দিসকাস্ত পিল অসি মপুং ফাদ্রি!",
+    "must_draw_first": "You must first [draw], [take], [knock], or [peek X Y]",
+    "cannot_discard_taken": "নহাক্না কাপ্পা য়াদ্রিবা কার্দ অদু লৌথোকপা য়ারোই। অদোমনা মদু হোংদোক্কনি।",
+    "have_drawn_card": "You have a drawn card. You must [swap X Y] or [discard] it.",
+    "need_drawn_swap": "অদোম্না শিন্দোক্নবা দিরেক্ত কার্দ অমা মথৌ তাই।",
+    "need_drawn_discard": "অদোম্না থাদোক্নবা দিসক্রাইব তৌরবা কার্দ অমা মথৌ তাই।",
+    "out_of_bounds": "Position out of bounds. Use row 1-{max_row}, column 1-{max_col}",
+    "knock_with_card": "নহাক্না কার্দ অমা লৌরগা কাপ্পা য়াদে। অহানবদা অদোমগী তাঙ্কক অদু মপুং ফাহনবিয়ু।",
+    "already_knocked": "মীওই অমনা রাউন্দ অসি হান্ননা থারকখ্রে।",
+    "already_revealed": "কার্দ অদু হান্ননা ফোংখ্রে!"
+  },
+  "summary": {
+    "full": "Game Over! Player {winner} wins with a score of {score} points!\n\nFinal Scores:\n{scores}",
+    "line": "Player {pid}: {score} points\n"
+  },
+  "board_str": {
+    "title": "=== গল্ফ গেম===",
+    "discard": "থাদোকপা য়াদবা পাইল: {card}",
+    "knocked": "শান্নরোই {pid}না কাপ্পা হৌরে!",
+    "player_header": "Player {pid} (Score: {score}):"
+  }
+}

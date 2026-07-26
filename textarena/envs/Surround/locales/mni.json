@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-প্লেয়ার পরিবেষ্টন একটি {width}x{height} গ্রিডে。\nআপনি খেলোয়াড় {player_id}। বৈধ নড়াচড়া: '[up]' '[down]' '[left]' '[right]' বা w/s/a/d.\nউদ্দেশ্য: সবার থেকে বেঁচে থাকুন। ট্রেইলগুলি মারাত্মক; দেয়াল আঘাত হত্যা; মাথার সংঘর্ষ দুটিকেই হত্যা করে"
+  },
+  "board": {
+    "current": "হৌজিক লৈরিবা বোদি: {board}",
+    "after_moves": "মতম অমত্তদা খোঙথাং কয়া অমা পাংথোক্লবা মতুংদা বোর্দ: {board}"
+  },
+  "game_action": {
+    "invalid_death": "শান্নরোই {player_id}না অশোয়বা খোঙথাং অমগী মরমদা শিখি।"
+  },
+  "outcome": {
+    "survived_win": "Player {player_id} survived; all others crashed.",
+    "all_crashed": "শান্নরোই পুম্নমক্না অমুক্তা থেংথখি।",
+    "outlived": "প্লেয়রনা অতোপ্পশিংদগী হেন্না হিংখি।",
+    "all_dead": "শান্নরোই পুম্নমক শিখ্রে।",
+    "turn_limit": "তর্ন লিমিৎ য়ৌরে - খ্বাইদগী শাংনা হিংবা মীওইনা মাইপাকই।",
+    "ranking": "{reason} তীব্র দরজা গোষ্ঠী (ভাল→খারাপ): {groups}"
+  }
+}

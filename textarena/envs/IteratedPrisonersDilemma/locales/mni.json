@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "Conversation ṣārṅga round {round} ṭhāmna. Please reply with '[Cooperate]' or '[Defect]' within \\boxed{{}}.",
+    "starting_round": "--- হৌরকপা রাউন্দ {round} ---",
+    "round_summary": "Round {round} ṭhāmna:\n{outcome}\nPlayer 0 ṅākṣī ṭhāmna {r0} (total {score_0}), Player 1 ṅākṣī ṭhāmna {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "শান্নরোই অনিমক্না গোল চনখি {s0}।",
+    "round_both_cooperate": "শান্নরোই অনিমক্না মতেং পাংনখি।",
+    "round_both_defect": "শান্নরোই অনিমক্না দিজর্টেদ তৌখি।",
+    "round_p0_cooperates_p1_defects": "শান্নরোই 0না মতেং পাংনখি, শান্নরিবা 1না চোংথোকখ্রে।",
+    "round_p0_defects_p1_cooperates": "শান্নরোই 0না চংখি, শান্নরিবা 1না মতেং পাংনখি।"
+  }
+}

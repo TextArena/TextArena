@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Nim gi Player {player_id} ni.\nTouning last object alungba ngaijare.\nTurn ama, pile ok oiba, ama object ok alungba.\nFormat '[pile quantity]' bu use toiba, pile index le quantity alungbana.\nExample: '[0 3]' pile 0 gi 3 object alungbana."
+  },
+  "state": {
+    "current_pile": "হৌজিক্কী পাইল: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "চৎনবা য়াবা খোঙথাং ফোর্মেত অমত্তা ফংদ্রে. '[pile quantity]' শিজিন্নৌ.",
+    "correct_format_wrong_fields": "Player {player_id}, Invalid action. Column {col} out of bounds ama.",
+    "out_of_range": "পাইল ইন্দেক্স {pile_index} অসি রেঞ্জগী মপান্দা লৈ।",
+    "non_positive": "য়ামদ্রবদা পোৎশক অমা লৌথোক্কদবনি।",
+    "exceeds_pile": "Cannot remove {quantity} from pile {pile_index} (only {pile_count} left)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "শান্নরোই {player_id}না অরোয়বা পোৎলম লৌখি!"
+  }
+}

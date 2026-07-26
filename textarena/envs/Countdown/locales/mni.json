@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "লক্ষ্য: {target}\n\nউপলব্ধ সংখ্যা:\n{numbers}",
+    "best": "{observation}\n\nশ্রেষ্ঠ এখনো পর্যন্ত: {best_value} (দূরত্ব: {distance})\nশ্রেষ্ঠ অভিব্যক্তি: {best_expression}",
+    "history": "{observation}\n\nচাল ইতিহাস:\n{moves}",
+    "progress": "{observation}\nবর্তমান অগ্রগতি স্কোর: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "ইনভেলদ ইন্দেক্সশিং। মান্নদবা অমসুং রেঞ্জ 0-{max_index}গী মনুংদা লৈবা ওইগদবনি.",
+    "invalid_operation": "অরানবা ওপরেসন (নিলদা য়েন্থোকপা নত্ত্রগা ইন্তিজর ওইদবা ফল)"
+  },
+  "outcome": {
+    "win": "মপুং ফানা ফংলে! অশেংবা পান্দম অদু থেংনরে: {target}",
+    "no_moves": "No more moves. Best result: {best_value} (target: {target})",
+    "turn_limit": "Turn limit reached. Best result: {best_value} (target: {target})"
+  }
+}

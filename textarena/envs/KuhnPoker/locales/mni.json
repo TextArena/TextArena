@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a {max_rounds} round game of Kuhn Poker.\nGame Rules:\n- Kuhn Poker uses a 3-card deck with J, Q, K (J lowest, K highest)\n- Each player antes {ante} chip and receives 1 card each round (note that the cards are dealt without replacement, so you cannot have the same card as your opponent).\n- Game continues for {max_rounds} rounds\n- The player with the most chips after all rounds wins\nAction Rules:\n- '[check]': Pass without betting (only if no bet is on the table)\n- '[bet]': Add 1 chip to the pot (only if no bet is on the table)\n- '[call]': Match an opponent's bet by adding 1 chip to the pot\n- '[fold]': Surrender your hand and let your opponent win the pot"
+  },
+  "init_round": {
+    "round_start": "### {current_round} রাউন্ড শুরু করা হচ্ছে {max_rounds} রাউন্ডের মধ্যে। আপনার কার্ড হল: '{player_card}'",
+    "available_actions": "নহাক্না লৌখৎপা য়াবা থবকশিং অদুদি: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "অ্যাকশন অবশ্যই [Check], [Bet], [Call], বা [Fold] হতে হবে。",
+    "not_legal": "এক্সন অদু {legal_actions} ওইগদবনি।"
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "নহাক্কী তৌবা য়াবা থবকশিংদি: {legal_actions}নি।",
+    "round_summary": "{reason} বর্তমান স্কোর: প্লেয়ার 0: '{player_0_chips}'; প্লেয়ার 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "{max_rounds} রাউন্দ লোইরকপদা, শান্নরোই অনিমক্কী চিপ মশীং মান্নখি।",
+    "round_win": "শান্নরোই {player_id}না ফোল্দ তৌখ্রে।",
+    "winner_player0": "{max_rounds} রাউন্দ পুম্নমক্কী অরোইবদা চিপশিং হেন্না লৈদুনা শান্নরোয় 0না মায় পাকখি।",
+    "winner_player1": "{max_rounds} রাউন্দ পুম্নমক্কী অরোইবদা চিপশিং হেন্না লৈবা শান্নরোয় 1না মায় পাকখি।"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Nangba Player {player_id}, {num_rounds} rounds Iterated Ultimatum Game ṭamṭa khongnangba.\nNangṭon ${pool} ṭamṭa ṭonkhomna round ṭhatlou na nangba Player {other_id} ṭonkhomna ṭamṭa split ṭhatpa.\n\nProposer:\n  - Offer ṭhatpa: [Offer: $X] (0 <= X <= pool)\n  - Accepted ṭhatlou → Nangba $(pool - X) ṭonkhom, nangba ṭhatlou Player $X ṭonkhom\n  - Rejected ṭhatlou → Both $0 ṭonkhom\n  - Example: [Offer: $3]  ebu  'Nangṭon ṭhatpa fair ṭhajaoba. [Offer: $5]'\n\nResponder:\n  - Offer ṭhatpa ṭhatlou na [Accept] ebu [Reject] ṭhatpa\n  - Example: 'Ṭhatpa reasonable ṭhajabi. [Accept]'\n            'Unfair ṭhajabi. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Round {round_number} begins! ---\nPlayer {proposer_id} proposer ṭhajabi, Player {responder_id} responder ṭhajabi.",
+    "offer": "Round {round_number}: Player {proposer_id} ${offer} Player {responder_id} ṭonkhomna offer ṭhatpa (keeping ${keep}).",
+    "accepted": "Player {responder_id} accepted! Round {round_number} gains: Player {proposer_id} +${proposer_gain}, Player {responder_id} +${responder_gain}. New totals: Player 0: ${total_0}, Player 1: ${total_1}.",
+    "rejected": "Player {responder_id} rejected the offer! Round {round_number} gains: Both players +$0. Totals remain: Player 0: ${total_0}, Player 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "প্রোপোজর অদুনা [Offer: $X] ফোর্মেত শিজিন্নদুনা ওফর অমা পীগদবনি।",
+    "bad_integer": "ওফরগী শেনফম অসি ভেলিদ ওইবা ইন্তিজর মশীং অমা ওইগদবনি।",
+    "out_of_range": "ওফর অসি $0 অমসুং ${pool}গী মরক্তা ওইগদবনি।",
+    "no_current_offer": "হৌজিক পাউখুম পীরক্নবা ৱাফম অমত্তা লৈতে।",
+    "accept_or_reject": "Responder ṭonkhomna ṭhatpa ṭhatlou na [Accept] ebu [Reject] the offer."
+  },
+  "outcome": {
+    "win": "Player {winner} ṭonkhomna ${winner_total} ṭamṭa vs Player {loser}'s ${loser_total}.",
+    "draw": "শান্নরোয় অনিমক্না ${total} পুন্না লৌদুনা লোইশিনখি।"
+  }
+}

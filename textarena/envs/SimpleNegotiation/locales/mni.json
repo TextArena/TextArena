@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "শান্নরোই অদুনা তঙাইফদবা রিসোর্সশিং লৈতনা ত্রাঞ্জেক্সন অমা লৌনবা হোৎনখি।",
+    "out_of_range": "Player {player_id}, ಅಮಾನತು ಕ್ರಿಯೆ. Column {col} ಮಿತಿಮೀರಿದೆ.",
+    "already_full": "Player {player_id}, ಅಮಾನತು ಕ್ರಿಯೆ. Column {col} ತುಂಬಿದೆ.",
+    "proposing_with_no_resource": "শান্নরোই {player_id}না তঙাইফদবা রিসোর্সশিং লৈতবা মওংদা ত্রাঞ্জেক্সনগী ওফেয়র অমা তৌনবা হোৎনখি।",
+    "incorrect_offer_format": "শান্নরোই {player_id}না ত্রাঞ্জেক্সনগী অফার অমা ফোর্মেৎ চুমদবা মওংদা পীখি।",
+    "no_new_offer": "শান্নরোই {player_id}না অনৌবা ত্রাবেল ওফর অমত্তা পীখিদে।"
+  },
+  "offers": {
+    "reject": "শান্নরোই {player_id}না ত্রাঞ্জেক্সনগী ওফর অদু য়াখিদে।",
+    "accept": "Player {acceptor_id} ಅವರು Player {proposer_id} ರಿಂದ ವ್ಯಾಪಾರ ಪ್ರಸ್ತಾಪವನ್ನು ಅಂಗೀಕರಿಸಿದರು.",
+    "proposal": "Player {player_id} made the following offer to Player {opponent_id}: Offered items: {offered} -> Requested items: {requested}"
+  },
+  "outcome": {
+    "win": "শান্নরোই {winner_id}না ইনভেস্তোর ভেল্যুদা হেন্না চাউবা শেন্দোং ফংদুনা মায় পাকখি।",
+    "draw": "শান্নরোই পুম্নমক্কী ইনভেন্তরী ভেল্যুদা মান্নবা অহোংবা লৈ। দ্রো তৌবীয়ু।"
+  }
+}

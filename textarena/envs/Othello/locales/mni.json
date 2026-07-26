@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "গেম বোর্দ: {board}",
+    "valid_moves": "{observation}\nValid moves: {moves}",
+    "no_valid_moves_reset": "{observation} চৎনবা য়াবা খোঙথাং অমত্তা লৈতে - অদোম্না চত্থোক-চৎশিন তৌদবা য়াই।",
+    "no_valid_moves_step": "{observation} চৎনবা য়াবা খোঙথাং অমত্তা লৈতে। অদোম্না থাদোকপা য়াই.",
+    "scores_reset": "{observation}\nHuidon Scores - Black: {black_count}, White: {white_count}\n",
+    "scores_step": "{observation}\nScores - Black: {black_count}, White: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "খোঙথাং অসি [row, col] মওংদা ওইগদবনি।",
+    "illegal": "Illegal move. Valid moves: {valid}"
+  },
+  "game_action": {
+    "skipped": "শান্নরোই {pid}না মহাক্কী মথন্তা চংখিদে।",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Player {pid} ({piece}) valid moves umlei, skip bukni."
+  },
+  "outcome": {
+    "black_wins": "Black {black_count}-{white_count} ki wins.",
+    "white_wins": "White {white_count}-{black_count} ki wins.",
+    "draw": "Draw {black_count}-{white_count}."
+  }
+}
