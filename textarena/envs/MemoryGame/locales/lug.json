@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id}. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched."
+  },
+  "board": {
+    "current_board": "Ekitongole ekiriko kati: {board}",
+    "current_game_board": "Ekitebe ky'emizannyo ekiriko kati: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Enkola y'okutambula ebadde terina makulu. Omuzannyi {player_id} teyanukudde na ngeri entuufu mu bbeere erya square brackets.",
+    "out_of_bounds": "Omupiira tegulina makulu. Omuzannyo {player_id} gw'azannya guli mu bbanga lya wala okuva ku kisaawe ky'omuzannyi w'empaka.",
+    "same_card_twice": "Omupiira tegulina mugaso. Omuzannyo {player_id} gw'azannya gwabadde gumu emirundi ebiri.",
+    "already_matched": "Omupiira tegulina mugaso. Omuzannyo {player_id} gw'asazeewo gumu oba kaadi zombi ezaabadde zikwatagana dda."
+  },
+  "game_message": {
+    "cards_match": "The cards selected by Player {player_id} at positions [{r1} {c1}] and [{r2} {c2}] match!",
+    "cards_no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+  },
+  "outcome": {
+    "draw": "Abazannyi bombi baakubye ennamba y'akaadi ze zimu.",
+    "win": "Omuzannyi {winner_id} awangudde!",
+    "turn_limit": "Mudumu wa turn imefukibwa. Omuzannyo gudde. Muzannyi 0 wasaze {score_0} pointi, Muzannyi 1 wasaze {score_1} pointi.",
+    "turn_limit_win": "{reason} Muzannyi {winner_id} awangudde!"
+  }
+}

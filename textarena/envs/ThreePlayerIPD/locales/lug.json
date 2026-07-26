@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Oli muzannyi {player_id} mu muzannyo ogw'abata abatali ogw'Iterated Prisoner's Dilemma. Emizannyo gino gusanyuka {num_rounds} emizannyo.\nEkibinja ky'omuzannyo:\n• {conv_rounds} mazungumzo ga bulijjo\n• 1 muzannyo ogw'okukola bivvulu - tuma tokeni emwe eri omuzannyi omulala: '[<opp-id> cooperate]' oba '[<opp-id> defect]' (kubaga '[1 defect] [2 cooperate]'; ekibaga kisooka kiri 'cooperate'). \nEkibinja ky'ebivvulu (ekisembera ku buli kibinja ekisengeka):\n  - Bonna babadde batya  ->  {reward}\n  - Bonna babadde bavu  ->  {punishment}\n  - We wavu, bonna batya ->  {temptation}\n  - We batya, bonna bavu ->  {sucker}\nOmuzannyi (aba) ali na ekibinja ekisinga ku mwisho gw'emizannyo gino yekka alina mukwano."
+  },
+  "round": {
+    "start": "─── Ekivvula kya Round {round} ───\tOsiibye kuwuliriza bulijjo kwa {conv_rounds} emizannyo ejja.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Ebivuddemu:",
+    "pair_line": "{observation}\n\t Muzannyi {i} vs Muzannyi {j} yalonda {choice_i} na {choice_j} (Muzannyi {i} yegatta {gain_i}, Muzannyi {j} yegatta {gain_j})",
+    "scores_open": "{observation}\n-> Current scores: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Muzannyi {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Ekibinja ky'omwaka: {scores}.  Kibinja cha makundi (kabisi→kizito): {groups}"
+  }
+}

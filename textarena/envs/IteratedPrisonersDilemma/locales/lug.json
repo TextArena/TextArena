@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "Okukubagana kwakkulu kwa mzunguko {round}. Tandika '[Cooperate]' or '[Defect]' mu {{}} eddibba.",
+    "starting_round": "--- Okutandikawo {round} ----",
+    "round_summary": "Mazengo ga mzunguko {round}:\n{outcome}\nOmuzannyi 0 yassa {r0} (jumla {score_0}), Omuzannyi 1 yassa {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Omuzannyi {winner} awangula {win_score} - {lose_score}.",
+    "draw": "Abazannyi bombi baakuba ggoolo {s0}.",
+    "round_both_cooperate": "Abazannyi bombi baakolaganye.",
+    "round_both_defect": "Both players defected.",
+    "round_p0_cooperates_p1_defects": "Omuzannyi 0 yakolera wamu, Omuzannyi 1 yadduka.",
+    "round_p0_defects_p1_cooperates": "Omuzannyi 0 yadduka, Omuzannyi 1 yakolera wamu."
+  }
+}

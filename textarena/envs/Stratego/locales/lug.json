@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "Current Board:\n\n{board}\nAvailable Moves: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ekintu tekimala. Omuzannyi {player_id} takwata kikomo mu ngeri [A0 B0].",
+    "invalid_coordinates": "Enkola ya kikolwa ekitali kituufu. Omuzannyi {player_id} teyayingizaako bulambirira obutuufu.",
+    "not_own_piece": "Omuzannyi {player_id} alina okukyusa emu ku mpeke ze.",
+    "scout_through_pieces": "Enkola y'ekintu ekitali kituufu. Omuzannyi {player_id} tayinza kutambuza mulala nga yeekubye ku kipande kye kimu.",
+    "scout_diagonal": "Enkola y'omuzannyo tegisaana. Omuzanyi {player_id} tasobola kusindika mugoba ku ludda olumu olw'ekisenge (diagonal).",
+    "non_scout_multi_square": "Enkola y'ekikolwa ekitali kituufu. Ebitundu, okuggyako abagenyi, bisobola okutambula ekifo kimu kyokka mu kiseera kye kimu.",
+    "move_into_lake": "Enkola y'omuzannyo tegisaana. Omuzanyi {player_id} tayinza kugenda mu nnyanja.",
+    "move_onto_own_piece": "Enkola y'ekintu ekitali kituufu. Omuzannyi {player_id} tayinza kuddukira mu kipande kye ye kennyini.",
+    "move_bomb_or_flag": "Enkola y'omuzannyo tegisaana. Omuzanyi {player_id} tasobola kusitula bbomu oba bendera."
+  },
+  "game_action": {
+    "you_moved": "Oli amuyita ekikomo ko ku {source} go {dest}.",
+    "opponent_moved": "Omuzannyi {player_id} amuyita ekikomo ku {source} go {dest}.",
+    "you_equal_ranks": "Oli amuyita ekikomo ko ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi amaranga gabiri gali mu katono, byonna biwunya.",
+    "opponent_equal_ranks": "Omuzannyi {player_id} amuyita ekikomo ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi amaranga gabiri gali mu katono, byonna biwunya.",
+    "you_miner_defused": "Oli amuyita ekikomo ko ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi abanyanzi banakola ebibyaaliro, olwunga ekibyaaliro.",
+    "opponent_miner_defused": "Omuzannyi {player_id} amuyita ekikomo ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi abanyanzi banakola ebibyaaliro, olinywa ekibyaaliro.",
+    "you_bomb_lost": "Oli amuyita ekikomo ko ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo tekyaali myanzi, olinywa ekibyaaliro.",
+    "opponent_bomb_won": "Omuzannyi {player_id} amuyita ekikomo ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo tekyaali myanzi, olinywa ekibyaaliro.",
+    "you_spy_won": "Oli amuyita ekikomo ko ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo ekyaali jajjaani nekyali kwenyumya marishali, olwunga ekibyaaliro.",
+    "opponent_spy_lost": "Omuzannyi {player_id} amuyita ekikomo ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo ekyaali jajjaani nekyali kwenyumya marishali, olinywa ekibyaaliro.",
+    "you_higher_won": "Oli amuyita ekikomo ko ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo kyaali kireke ku ky'ekitalo, olwunga ekibyaaliro.",
+    "opponent_higher_lost": "Omuzannyi {player_id} amuyita ekikomo ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo kyaali kireke ku ky'ekitalo, olinywa ekibyaaliro.",
+    "you_lower_lost": "Oli amuyita ekikomo ko ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo kyaali kirala ku ky'ekitalo, olinywa ekibyaaliro.",
+    "opponent_lower_won": "Omuzannyi {player_id} amuyita ekikomo ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo kyaali kirala ku ky'ekitalo, olinywa ekibyaaliro."
+  },
+  "outcome": {
+    "flag_captured": "Omuzannyo {player_id} gukutte bendera ya muliraanwa!",
+    "no_movable_pieces": "Omuzannyi {winner_id} awangula! Omuzannyi {loser_id} talina bikomo byamalayo."
+  }
+}

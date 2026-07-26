@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Tusanyuse ku Lights Out! Oli mwesigwa wa {size}x{size} wa masigi.\nLakiri lyo ni okkisa masigi ONA (egiyitibwa '.')\nBwe tukaaba masigi, ekwatagana n'ebisigiyeko (wansi/juula/ku ddala/ku dda usiri).\nAndika [row col] okkaaba masigi (0-indexed, kwa mugatte, kye kigazi 0-{max_index}).\nOli mwesigwa {max_turns} emipiira okusulula puzzle.\nLegend: 'O' = masigi ON, '.' = masigi OFF"
+  },
+  "board": {
+    "current_state": "Ekyasa ky'obudde bwa gridi (Kuwa {moves_made}, {moves_left} kuwa kuzina, {completion}% emaliriza):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ekikolwa kirina okubeera mu kika [row col] nga olunyiriri n'olugambo biba nnamba entuufu okuva ku 0 okutuuka ku {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Mwebale nnyo! Omazzeemu ekizibu mu ntambula ya {moves_used}!",
+    "loss": "Emipiira yafa! Owaonyeza {max_turns} emipiira bila kusulula puzzle. Kusulula kw'oluvannyuma: {completion}%\nEkisa ky'oluvannyuma:\n{grid}"
+  }
+}

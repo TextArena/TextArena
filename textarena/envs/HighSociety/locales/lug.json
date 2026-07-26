@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a game of HighSociety (2-player version).\nGame flow:  Ten prestige cards are auctioned one after another.\nBidding:    Each auction, secretly choose a money card 1-11 and reveal.\n            • Higher bid wins the prestige card and discards that money card.\n            • Lower bid keeps their money card.\n            • Tie -> both bids are returned and the same prestige card is re-auctioned.\nScoring:    After all ten auctions, add **remaining cash + prestige points**.\n            Higher *net-worth* wins (exact tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Okukopa {round}/10  |  Kaadi ya Prestige: {prize}"
+  },
+  "board": {
+    "money_cards": "Kaadi z'ensimbi ezisigadde: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Laziri kuwa nayo kaadi ya sente [X].",
+    "card_not_held": "Kati tolina kaadi eyo."
+  },
+  "message": {
+    "tie": "Tie - bids returned. Rebid!",
+    "auction_result": "P0 alitoa ofa ya {bid0}, P1 alitoa ofa ya {bid1}. Mchezaji {winner} anashinda prestige {prize} (jumla {total})."
+  },
+  "outcome": {
+    "p0_wins": "Thamani ya neti {nw0} > {nw1}",
+    "p1_wins": "Thamani ya neti {nw1} > {nw0}",
+    "draw": "Bombi omuwendo gw'obugagga bwabwe {nw0}  kyenkana."
+  }
+}
