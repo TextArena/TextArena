@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are playing {color} in a game of Breakthrough. You move {direction} on an {board_size}x{board_size} board.\nIn your turn you can move a single piece one step forward or diagonally forward.\nA piece may only move diagonally if an opponent piece is there, and only move into such a preoccupied square in a diagonal step.\nWhen stepping into a square with an opponent piece, you capture it and the opponent's piece is removed permanently from the board.\nUse UCI-like notation in brackets, e.g. [a2a3] to move from a2 to a3.\n* 'a' corresponds to the leftmost column, '1' is the bottom row (from White's perspective).\n* Blacks's home row is the top row (row 8 for an 8x8). White's home row is the bottom row (row 1 for an 8x8).\nThe first player whose piece reaches the opponent's home row wins. If your pieces are all captured, you lose."
+  },
+  "invalid_move": {
+    "wrong_format": "Taflatse zã algebra ƒe dzesi si le akplowo me abe [a2a3] ene.",
+    "out_of_bounds": "Mɔnukpɔkpɔ meli be woazɔ mɔ sia o.",
+    "illegal": "Mɔnu sia mewɔ ɖeka kple Toyiyi ƒe sewo o alo menye wò asinu wònye o."
+  },
+  "game_action": {
+    "moved": "Dɔdzikpɔla {player_id} wɔ {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "White reached Black's home row.",
+    "black_reached": "Black reached White's home row.",
+    "white_captured": "All White pieces captured.",
+    "black_captured": "All Black pieces captured.",
+    "no_moves": "Fefewɔla {player_id} megate ŋu le afɔɖeɖe aɖeke wɔm o."
+  }
+}

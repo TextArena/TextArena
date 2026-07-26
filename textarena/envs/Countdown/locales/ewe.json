@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "TARGET: {target}\n\nNɔnɔ blibo si me wɔ: \n{numbers}",
+    "best": "{observation}\n\nTɛtrɛ kple kɔkɔe: {best_value} (distance: {distance})\nTɛtrɛ nɔnɔ: {best_expression}",
+    "history": "{observation}\n\nTɛ nɔnɔ ɖeŋgɔ: \n{moves}",
+    "progress": "{observation}\nKɔkɔe si me wɔ ɖo: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Madzedzewo. Ele be woato vovo eye woanɔ 0-{max_index} dome",
+    "invalid_operation": "Dɔwɔɖui si mesɔ o (woamae na nu alo anye xexlẽdzesi blibo ƒe ŋuɖoɖoa)"
+  },
+  "outcome": {
+    "win": "Ewɔ dɔ nyuie ŋutɔ! Míekpɔ míaƒe taɖodzinua: {target}",
+    "no_moves": "Eŋu nɔnɔ ɖɛ. Tɛtrɛ kple kɔkɔe: {best_value} (target: {target})",
+    "turn_limit": "Nuxɔme si me wɔ ɖo. Tɛtrɛ kple kɔkɔe: {best_value} (target: {target})"
+  }
+}

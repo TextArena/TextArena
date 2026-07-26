@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "Nuxɔxɔxɔ ɖɔɖɔe le round {round}. Mɔ na mi be yɛ '[Cooperate]' kple '[Defect]' le \boxed{{}}.",
+    "starting_round": "--- Ʋliƒoƒe {round} ---",
+    "round_summary": "Round {round} ɖoɖowɔwɔ:\n{outcome}\nDɔdzikpɔla 0 xɔ ɖe {r0} (wɔwɔ {score_0}), Dɔdzikpɔla 1 xɔ ɖe {r1} (wɔwɔ {score_1})."
+  },
+  "outcome": {
+    "winner": "Dɔdzikpɔla {winner} di be {win_score} - {lose_score}.",
+    "draw": "Wo ame evea siaa ɖo {s0}.",
+    "round_both_cooperate": "Ŋutsu eveawo siaa wɔ dɔ aduadu.",
+    "round_both_defect": "Wo ame evea siaa trɔ le woƒe dzi me.",
+    "round_p0_cooperates_p1_defects": "Fefewɔla 0 wɔ nu aduadu, eye fefenu 1 dzo.",
+    "round_p0_defects_p1_cooperates": "Player 0 defected, Player 1 cooperated."
+  }
+}
