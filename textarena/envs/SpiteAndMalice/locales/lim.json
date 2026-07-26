@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n"
+  },
+  "board": {
+    "current_board": "Hujig spelbord:\n\n{board}\nBesjikbare zètte: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Centrumstapel -- ",
+    "pile": "{observation}Hoep {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Speler {player_id} ziene översich ---\n",
+    "payoff": "{observation}Payoff-hoep (Topkaart): {top_card}, Lengde van payoff-hoep: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand} ",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "Leeg ."
+  },
+  "game_message": {
+    "no_cards_left": "De kaarte die weej zien te vergaete, zeen neet mie. 't Is de handj waat geer kint sjpeule: 1. Euze haand 2. d'n hoegste kaart van eur betaolstapel 3. d'ne hoegte kaart vaan e paar oetsjtèlle stapele. "
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Speler {player_id} reageerde neet mèt 'n geldige sjpelling in haakjes.",
+    "invalid_play": "Óngeldige zèt. Speler {player_id} heet geprobeerd om {card} te speele op centraal hoep {index}.",
+    "discard_from_payoff": "Invalide verwerpe. Speler {player_id} probeerde 'n kaart oet de payoff-stapel te werpe.",
+    "discard_not_in_hand": "Invalide verwerpe. Speler {player_id} probeerde 'n kaarte te goon die neet in de hand is.",
+    "wrong_move_type": "Invalid move type. Player {player_id} did not respond with a valid move type."
+  },
+  "game_action": {
+    "you_drew": "Je hebt kaarten getrokke.",
+    "opponent_drew": "Speler {player_id} trok kaarte.",
+    "you_played": "Ge speulde {card} op de middelste stapel {index}.",
+    "opponent_played": "Speler {player_id} heet {card} gespeeld op centraal hoep {index}.",
+    "you_discarded": "Doe höbs {card} aafgegoej op aafgoejhoep {index}, wat ouch beteikent det doe dien beurt aafgeslote höbs. Gein wijtere acties van dich waere bie deze beurt in aonmerking gekómme. Speler {next_player_id} kump aan de beurt.",
+    "opponent_discarded": "Speler {player_id} heet {card} aafgegoej op aafgoejhoep {index}, wat ouch beteikent det ze hun beurt aafgeslote höbbe. Gein wijtere acties van Speler {player_id} waere bie deze beurt in aonmerking gekómme. Speler {next_player_id}, doe kóm aan de beurt. Vul asjeblieft dien actie in in 't formaat [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Speler {current_player} heet ziene payoff-hoep leeggespeeld! Speler {current_player} wint!",
+    "deadlock_player_0": "Doadlop bereik! Speler 0 wint mit {player_0_payoff} kaarte blieve taegeüber Speler 1 ziene {player_1_payoff} kaarte.",
+    "deadlock_player_1": "Doadlop bereik! Speler 1 wint mit {player_1_payoff} kaarte blieve taegeüber Speler 0 ziene {player_0_payoff} kaarte.",
+    "deadlock_tie": "Deadlock reached with tie! Both players have {player_0_payoff} cards remaining. Player {current_player} wins by default."
+  }
+}

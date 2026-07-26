@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Du späölt Golf (Kaartspel) - Speler {player_id}.\nDoel: Krieg de lieëgste totaalsjore in deze enkel runde. Wenn kolomme dezelfde waerde deile, waere ze gesommeerd es 0.\nKaartwaardes: A=1, 2-10=waerde, J/Q=10, K=0\n\nActies (gebruuk eksakte hake):\n- '[draw]' - Troke van 't deck\n- '[take]' - Numme van aafgoejhövel\n- '[swap X Y]' - Wissel getrokke kaart mit posisie X (riege) Y (kolom)\n- '[discard]' - Gooj de getrokke kaart aaf"
+  },
+  "board": {
+    "drew": "Du hees getrokke: {card}\nNu mus du [swap X Y] of [discard]",
+    "took": "Du hees genoomen: {card} van aafgoejhövel\nDu mus [swap X Y] mit (kan 't neet aafgoeje)",
+    "peeked": "Du hees gekeek op posisie ({row},{col}): {card}",
+    "turn_view": "Din handj:\n{hand}\nAafgoejhövel: {discard}\n{options}",
+    "none": "gein."
+  },
+  "options": {
+    "final_turns": "Letste beurte! Din opties: [draw], [take], [peek X Y]",
+    "draw": "Din opties: [draw], [take]",
+    "must_swap": "You must: [swap X Y] (cannot discard cards from discard pile)",
+    "swap_or_discard": "Du mus: [swap X Y] of [discard]"
+  },
+  "hand": {
+    "no_cards": "Gein kaarten.",
+    "header": "Col: 1 2 3 veur de oetgebreide.",
+    "row": "Riege {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Speler {pid} heet {new} omgeruild mit {old} op posisie ({row},{col})",
+    "discarded": "Player {pid} discarded {card}"
+  },
+  "message": {
+    "deck_empty": "'t Deck is leeg, de partij kump aaf.",
+    "knocked": "Speler {pid} geklopt! Iedere andere speler krijgt nog 1 beurt.",
+    "final_round": "Speler {pid} {reason}! Edere angere speler krieg eine extra beurt"
+  },
+  "reason": {
+    "all_revealed": "has all cards revealed"
+  },
+  "invalid": {
+    "wrong_action": "Gebruuk eksak ein gehaokde actie: [draw], [take], [swap X Y], [discard], [knock], of [peek X Y]",
+    "discard_empty": "De aafsjtrökstapel is leeg!",
+    "must_draw_first": "Du mus iers [draw], [take], [knock], of [peek X Y]",
+    "cannot_discard_taken": "You cannot discard a card taken from the discard pile. You must swap it.",
+    "have_drawn_card": "Du hes 'n getrokke kaart. Du mus [swap X Y] of [discard]",
+    "need_drawn_swap": "'t Is neet te verwisselen.",
+    "need_drawn_discard": "'t Is neet te verwarre.",
+    "out_of_bounds": "Posisie boete de grenze. Gebruuk riege 1-{max_row}, kolom 1-{max_col}",
+    "knock_with_card": "Geer kint neet kloppe mèt 'n getrokke kaart. Gans e deil vaan uch beurt is d'r veur.",
+    "already_knocked": "Iemand heeft deze ronde al geslagen.",
+    "already_revealed": "Die kaart is al onthuld!"
+  },
+  "summary": {
+    "full": "Spiel aaf! Speler {winner} wint mit 'n sjore van {score} punte!\n\nFinale sjores:\n{scores}",
+    "line": "Speler {pid}: {score} punte\n"
+  },
+  "board_str": {
+    "title": "=== Golfspel===",
+    "discard": "Verwerphoop: {card}",
+    "knocked": "Speler {pid} haet geklop!",
+    "player_header": "Speler {pid} (Sjore: {score}):"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in Quantum Tic Tac Toe.\nUw symbool is '{symbol}', en uw zetnummers zijn altijd {parity} (bijv., X1, X3 of O2, O4).\n\nDoel: Win door een lijn van drie klassieke tekens te vormen (geconsolideerd uit superposities).\n\nHoe te spelen:\n- Op elke beurt, plaats een spookteken in twee verschillende lege vierkanten met het formaat '[a,b]'.\n- Deze tekens zijn verstrengeld en gelabeld als 'X1 / X1' of 'O4 / O4'.\n- U kunt geen spooktekens plaatsen in een vierkant dat al is ingestort (geconsolideerd).\n\nIneenstortingsregel:\n- Als uw zet een cyclus in de verstrengelingsgrafiek creëert, stort deze automatisch in.\n- Elk spookteken in de cyclus verandert in een klassiek teken in een van zijn twee posities.\n- Alle afhankelijke spooktekens storten ook in.\n\nOverwinning:\n- Het spel eindigt wanneer een speler drie klassieke tekens op een rij heeft.\n- Als beide spelers een lijn krijgen tijdens dezelfde ineenstorting, wint degene met het lagere maximale zetnummer.\n\nVoorbeeldzet: '[0,4]' plaatst een spookteken in cellen 0 en 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Bord:\n\n{board}\n\nStuur uw zet als '[a,b]' om een kwantumteken in twee locaties te plaatsen."
+  },
+  "invalid_move": {
+    "wrong_format": "Ongelogd formaat. Gebroek '[a,b]'.",
+    "invalid_cells": "Invalide of dupliceerde celindices.",
+    "already_solidified": "Ein van de cellen is al gestald."
+  },
+  "game_action": {
+    "placed": "Speler {player_id} heeft hun symbool geplaatst in een superpositie tussen cellen {pos_a} en {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Afhankelijke superpositie opgelost. Cel ({r}, {c}) is nu {symbol}.",
+    "last_cell_resolved": "Superpositie voor laatste cel opgelost. Cel ({r}, {c}) is nu {symbol}.",
+    "superposition_resolved": "Superpositie opgelost. Cel ({r}, {c}) is nu {symbol}."
+  },
+  "outcome": {
+    "win": "Player {player_id} wins with solidified marks!",
+    "draw": "'t Spel is gelijkspel!"
+  }
+}

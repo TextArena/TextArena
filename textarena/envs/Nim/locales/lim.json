@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "Current Pile: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Geine geldige verplaatsingsformaot. Gebroek '[pile quantity]'.",
+    "correct_format_wrong_fields": "Speler {player_id}, Ongeldige actie. Kolom {col} is boete de grenze.",
+    "out_of_range": "De stapelindex {pile_index} is oet bereik.",
+    "non_positive": "Mèt minstens 1 object weg.",
+    "exceeds_pile": "Kunt {quantity} neet waere uit stapel {pile_index} (allein {pile_count} euver)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Speler {player_id} haolt 't lètste veurwerp (s)!"
+  }
+}

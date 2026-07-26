@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Du bis Speler {player_id} in 'n 3-spelers Iterated Prisoner's Dilemma. De match duurt {num_rounds} runde.\nRonde structuur:\n• {conv_rounds} vriej-kletsbeurte\n• 1 beslissingbeurt - sjik ein token per opponent: '[<opp-id> cooperate]' of '[<opp-id> defect]' (zoea '[1 defect] [2 cooperate]'; de sjtandaard is 'samenwirke'). \nPaar-wijs payoff matrix (toegepas op edere ongeörde paor):\n  - Beide samenwirke  ->  {reward}\n  - Beide verroeje    ->  {punishment}\n  - Du verroejs, zie samenwirke -> {temptation}\n  - Du samenwirks, zie verroeje -> {sucker}\nDe speler(s) mit 't hoegste score aan 't eind van alle runde wint."
+  },
+  "round": {
+    "start": "─── Start van Ronde {round} ───\tDu kans vriej kletsen veur de volgende {conv_rounds} runde.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Ronde {round} - Resultaat:",
+    "pair_line": "{observation}\n\t Speler {i} vs Speler {j} koos om {choice_i} en {choice_j} respectievelijk (Speler {i} behaolde {gain_i}, Speler {j} behaolde {gain_j})",
+    "scores_open": "{observation} -> Huidige scores: ",
+    "score_first": "{observation}Speler {player_id} ({score})",
+    "score_next": "{observation}; Speler {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Definitieve scores: {scores}.  Ranking groepe (slechtste→bèste): {groups}"
+  }
+}

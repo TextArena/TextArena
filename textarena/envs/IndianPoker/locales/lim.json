@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Ich bènt Speler {player_id} in 'n spel Indian Poker.\n- 52-kaartjdekk; ich zuut allèng 't kaart van d'n teigenspeler.\n- Inzèt {ante} chip(s) per róndj, {max_rounds} róndj(e) in totaal.\n- Geldig acties: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X is 'n positief getal <= d'n chipstandj van dich.)\n- De höggste verborgen kaart wintj de pot biej 't showdown.\n"
+  },
+  "round": {
+    "announce": "### Róndj {current_round}/{max_rounds}\nD'n kaart van d'n teigenspeler is: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Lever eksak ein gehaokde actie, b.v. '[check]', '[bet 2]', '[call]', '[raise 3]', of '[fold]'.",
+    "cannot_check": "Kan neet [check] - geer staot veur 'n weddj.",
+    "amount_min": "Bet / Raise bedrag moet ≥ 1 wezen.",
+    "cannot_bet": "Kènt nicht [bet] - mòt [call] / [raise] / [fold].",
+    "nothing_to_call": "Niets te belde; ge kènt [check] in plaatsj.",
+    "no_bet_to_raise": "Gebroek [bet X] veur te opene; d'r is gein weddjèlle om te verhoge.",
+    "insufficient": "Neet genóg chips veur die actie."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kès {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Euze mogelike acties: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Speler {winner}. (Bankrolle P0:{p0}, P1:{p1})",
+    "folded": "Speler {player_id} gevold.",
+    "showdown_win": "Showdown: {card_win} beats {card_lose}.",
+    "showdown_tie": "Showdown tied: both {card}. Pot split  each receives {split}."
+  },
+  "outcome": {
+    "p0_wins": "Speler 0 wint ({bank0} > {bank1})",
+    "p1_wins": "Speler 1 wint ({bank1} > {bank0})",
+    "draw": "Gelijke fiches na alle rondjes."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Du bis Speler {player_id} in e {max_rounds}-ronde Kuhn Poker-speul.\nSpeulregels:\n- Kuhn Poker gebroek 'n 3-kaarte deck mit J, Q, K (J leegste, K hoegste)\n- Edere speler zet {ante} chip in en krieg 1 kaart per ronde (merk op dat de kaarte zonger vervanging waere gedild, dus du kanst neet dezelfde kaart as din opponent hebbe).\n- 't Speul geit {max_rounds} ronde door\n- De speler mit de meiste chips nao alle ronde wint\nActieregels:\n- '[check]': Pas zonger in te zette (allein es gein inzat op de tafel steit)\n- '[bet]': Voeg 1 chip toe aan de pot (allein es gein inzat op de tafel steit)\n- '[call]': Volg 'n inzat van 'nen opponent door 1 chip toe te voege aan de pot\n- '[fold]': Geef op en laot din opponent de pot winne"
+  },
+  "init_round": {
+    "round_start": "### Rond {current_round} van {max_rounds} ronde begint. Jouw kaart is: '{player_card}'",
+    "available_actions": "De oare aksjes binne: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Actie mót [Check], [Bet], [Call], of [Fold] zeen.",
+    "not_legal": "Aktie moot {legal_actions} zien."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "De oetgebreide acties zien: {legal_actions}.",
+    "round_summary": "{reason} Huidige scores: Speler 0: '{player_0_chips}'; Speler 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Speler {winner} ziene {winner_card} klop Speler {loser} ziene {loser_card}. Speler {winner} wint pot van {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Aan 't eind van {max_rounds} ronde hadde allebei de speulers dezelfde aontal chips.",
+    "round_win": "Speler {player_id} is gevold.",
+    "winner_player0": "Speler 0 wint door aan 't eind van alle {max_rounds} rondjes meer chips te höbbe.",
+    "winner_player1": "Speler 1 wint door aan 't eind van alle {max_rounds} rondjes meer chips te höbbe."
+  }
+}

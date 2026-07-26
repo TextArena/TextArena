@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Je bent Speler {player_id} in het Onderhandelingsspel.\nJe hebt enkele bronnen, en je taak is om te ruilen zodat de totale waarde van je bronnen toeneemt.\nDe bronnen en de bijbehorende waarden die je momenteel hebt, zijn:\n\t+ {resource_value_list}\nBij elke beurt kun je met je tegenstander praten en een handelsaanbod doen.\nGebruik de volgende speciale tokens voor acties:\n  - '[Aanbod: 3 Schapen, 2 Erts -> 5 Steen, 2 Schapen]': [Aanbod: Aangeboden bronnen -> Gevraagde bronnen]\n  - '[Accept]': Om een binnenkomend aanbod te accepteren.\n  - '[Deny]': Om een binnenkomend aanbod te weigeren (standaard).\nHet spel duurt {max_turns} beurten in totaal."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Speler probeerde 'n handel te acceptere zonder de nodige middele.",
+    "out_of_range": "Speler {player_id}, Ongeldige actie. Kolom {col} is buiten de grenzen.",
+    "already_full": "Speler {player_id}, Ongeldige actie. Kolom {col} is vol.",
+    "proposing_with_no_resource": "Speler {player_id} probeerde 'n handelsaanbod te make zonder de nodige middele.",
+    "incorrect_offer_format": "Speler {player_id} maakde 'n verhandelingsbod in e foutief formaot.",
+    "no_new_offer": "Speler {player_id} maakde gein nuuj handelsaanbod."
+  },
+  "offers": {
+    "reject": "Speler {player_id} verwierp 't aafsjlaog.",
+    "accept": "Speler {acceptor_id} heeft het handelsaanbod van Speler {proposer_id} geaccepteerd.",
+    "proposal": "Speler {player_id} heeft het volgende aanbod gedaan aan Speler {opponent_id}: Aangeboden artikelen: {offered} -> Gevraagde artikelen: {requested}"
+  },
+  "outcome": {
+    "win": "Speler {winner_id} wint door 'n groeter winse te höbbe in de inventarwaarde.",
+    "draw": "Same verandering in de inventarwaarde veur alle spelers."
+  }
+}
