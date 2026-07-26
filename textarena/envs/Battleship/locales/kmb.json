@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id}. You are playing the Battleship game.\nYour goal is to sink all of your opponent's ships before they sink yours.\nOn your turn, you can fire missiles at specific coordinates in teh following format: '[a4]'. If the missile hits a ship, it is marked with 'X'. If it misses, it is marked with 'O'. In either scenarios, the game environment will inform you of your hits. If you have sunk a boat, the game environment will tell you!\nThe game ends when all of one player's ships have been sunk.\nYour initial board will show all of your ships placed and your opponent's hits on you, and your hits and misses on your opponent's board without showing your opponent's ships.\nHere is the initial board:\n"
+  },
+  "invalid_move": {
+    "wrong_format": "The player did not respond with a valid coordinate in square brackets.",
+    "out_of_board": "O kijimbuete {coord} mu phutu a k'ixana \"mundu\".",
+    "already_fired": "O kididi kiki, a kixana {coord}. A mateka kiá kubula o athu mu ididi íii."
+  },
+  "game_action": {
+    "you_sunk": "Kuzamisha! Umezamisha meli kwa {coord}! Tablo ya kuweka kwa wakati ujao:\n{view}",
+    "opp_sunk": "Oponente ilizamisha nave ya yo kwa {coord}! Tablo ya kuweka kwa wakati ujao:\n{view}",
+    "you_hit": "Kukwata! Umekwata meli kwa {coord}! Tablo ya kuweka kwa wakati ujao:\n{view}",
+    "opp_hit": "Oponente kukwata nave ya yo kwa {coord}! Tablo ya kuweka kwa wakati ujao:\n{view}",
+    "you_miss": "Eie ua lueza, o kaxa iê ia bhixila! {view} O kijimbuete kiê kia lelu: {coord}",
+    "opp_miss": "Oponente akakosa nave ya yo kwa {coord}! Tablo ya kuweka kwa wakati ujao:\n{view}"
+  },
+  "outcome": {
+    "win": "O muthu {player_id} u takula o ji naviiu joso ja nguma iê!"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Kibhangelu kia Jimbongo: {board}",
+    "valid_moves": "{observation} Jifilme ja tokala: {moves}",
+    "no_valid_moves_reset": "{observation} Se o kijimbuete kiki, kia lungu ni muxi uê, eie ua tokala ku xisa-u.",
+    "no_valid_moves_step": "{observation} Se o jikoleka ka mu bhanga kima, eie u tena ku lenga.",
+    "scores_reset": "{observation}\nScores za Sasa - Black: {black_count}, White: {white_count}\n",
+    "scores_step": "{observation}\nScores - Black: {black_count}, White: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Move must be of the form [row, col].",
+    "illegal": "O ku bhanga kiki, ki kituxi kana. {valid}"
+  },
+  "game_action": {
+    "skipped": "Mwadi {pid} alilazimika kupita mchezo wake",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Mwadi {pid} ({piece}) hana hatua halali na lazima apite."
+  },
+  "outcome": {
+    "black_wins": "Black wins {black_count}-{white_count}.",
+    "white_wins": "White wins {white_count}-{black_count}.",
+    "draw": "Draw {black_count}-{white_count}."
+  }
+}

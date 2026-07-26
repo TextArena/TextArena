@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Munene {player_id} em um jogo de Pôquer Indiano.\n- Baralho de 52 cartas; você vê apenas a carta do oponente.\n- Ante {ante} ficha(s) cada rodada, {max_rounds} rodada(s) no total.\n- Movimentos válidos: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X é um inteiro positivo <= seu número de fichas.)\n- A carta oculta mais alta vence o pote no showdown.\n"
+  },
+  "round": {
+    "announce": "### Rodada {current_round}/{max_rounds}\nA carta do seu oponente é: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Supply exactly ONE bracketed action, e.g. '[check]', '[bet 2]', '[call]', '[raise 3]', or '[fold]'.",
+    "cannot_check": "Não pode [check] - você está enfrentando uma aposta.",
+    "amount_min": "Bet / Raise amount must be ≥ 1.",
+    "cannot_bet": "Cannot [bet] - must [call] / [raise] / [fold].",
+    "nothing_to_call": "Nothing to call; you may [check] instead.",
+    "no_bet_to_raise": "Use [bet X] to open; there is no bet to raise.",
+    "insufficient": "O athu ka kexile ni kitadi kiavulu phala ku sumba o ima íii."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kuela {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "O ima i u tena kubhanga: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pote {pot} → Munene {winner}. (Bancos P0:{p0}, P1:{p1})",
+    "folded": "Player {player_id} folded.",
+    "showdown_win": "Showdown: {card_win} beats {card_lose}.",
+    "showdown_tie": "Showdown tie: both {card}. Pot split – each receives {split}."
+  },
+  "outcome": {
+    "p0_wins": "Munene 0 vence ({bank0} > {bank1})",
+    "p1_wins": "Player 1 wins ({bank1} > {bank0})",
+    "draw": "Equal chips after all rounds"
+  }
+}

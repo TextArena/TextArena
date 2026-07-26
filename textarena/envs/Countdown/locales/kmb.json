@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "TARGET: {target}\n\nAvailable numbers:\n{numbers}",
+    "best": "{observation}\n\nMeli kwenda muna: {best_value} (lumbu: {distance})\nNginga ya meli: {best_expression}",
+    "history": "{observation}\n\nLususu lwakwenda:\n{moves}",
+    "progress": "{observation}\nNkanda ya lumbu: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "O kijimbuete kia tokala ku kala mu kisangela 0-{max_index}",
+    "invalid_operation": "Invalid operation (division by zero or non-integer result)"
+  },
+  "outcome": {
+    "win": "Perfect! Found exact target: {target}",
+    "no_moves": "Kala kwenda muna. Meli kwenda: {best_value} (lunga: {target})",
+    "turn_limit": "Lukasu lwakwenda lukomene. Meli kwenda: {best_value} (lunga: {target})"
+  }
+}
