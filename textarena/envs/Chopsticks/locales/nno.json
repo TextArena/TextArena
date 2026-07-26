@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spelar {player_id} i Chopsticks. På din tur, vel ein av:\n  + Angrip:  '[attack M O]'  der M=din hand (0 eller 1), O=motstandarhand (0 eller 1).\n    - Motstandarhanden sin teljing aukar med din hand; viss >=5, blir den 0.\n  + Del:   '[split L R]'  for å omfordela din totale fingerantal inn i V og H (V+H = din totale).\nSvar med nøyaktig ein av desse kommandoane."
+  },
+  "board": {
+    "current_board": "Gjeldande brett:\nSpelar 0: {hands_0}\nSpelar 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Handen din {my_idx} er død.",
+    "opp_hand_dead": "Motstandarhanden {opp_idx} er allereie død.",
+    "split_sum": "Split må addera til {total}.",
+    "split_no_change": "Split må endra handedistribusjon.",
+    "invalid_command": "Ugyldig trekk. Bruk “[attack M O]” eller “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} angrip P{opp_id} sin hand {opp_idx}: den går frå {opp_val} til {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Båe hendene på motspelare må verta drepne.",
+    "draw": "The turn limit has been reached."
+  }
+}

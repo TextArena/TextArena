@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Ikkje eit kort enno.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Ein spelar mot dealeren\n\n📖 SPELETS OVERSIKT:\n• Du startar med {start_chips} jetongar\n• Ein dekk på 52 kort (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Du spelar mot dealeren (huset)\n• Kvar runde følgjer Ultimate Texas Hold'em-strukturen: du set ANTE- og BLIND-innsatsar, mottak 2 holekort, avgjer om å setje valfrie PLAY-innsatsar over betalingsfasane, og så avdekke felleskort og samanlikne din beste 5-kortshand mot dealerens. Målet ditt er å maksimere vinningane (når du har den betre handa), medan du minimiserer tapet (når du har den dårlegare handa).\n• Spelet endar når du når 0 jetongar eller lågare ved byrjinga av runden (TAP) eller fullfører 1000 rundar med jetongar (SIGER)\n\n💰 INNSATSSTRUKTUR:\n• ANTE: Omgjerande ${ante} innsats kvar runde\n• BLIND: Omgjerande ${ante} innsats kvar runde\n• PLAY: Valfritt innsats under spelet. Gjennom heile runden kan du velje BERRE EIN av følgjande: (${ante4} om det gjøres ved PRE-FLOP, ${ante2} om det gjøres ved FLOP, eller ${ante} om det gjøres ved RIVER. Kan også folda ved elva, gi opp på handa, og ikkje setje noka innsats.)\n\n🎴 KORTFORDELING:\n• Du mottak 2 åpne kort (dine holekort)\n• Dealaren mottak 2 lukka kort (skjulte for deg)\n• 5 felleskort er delt lukka frå byrjinga\n• Felleskort er avdekte progressivt gjennom spelefasane\n\n🏆 DEALER-KVALIFISERING:\n• Dealaren må ha minst EIT PAR (2 kort av same rang) for å kvalifisere, ved å bruke dei 2 korta i handa og dei 5 felleskorta.\n• Dealaren sin kvalifisering påverkar innsatsresultata, som vil bli forklårt seinare.\n\n🎮 SPELEFASAR & HANDLINGAR:\n📋 PRE-FLOP:\n  • Handlingar: [4x] (${ante4}) eller [check]\n  • [4x]: Set ${ante4} PLAY-innsats, avdekke dei første 3 felleskorta\n  • [check]: Ingen ekstra innsats, avdekke dei første 3 felleskorta\n\n📋 FLOP:\n  • Om 4x-innsats er sett: Berre [skip] er tilgjengeleg (auto-avdekke dei siste 2 felleskorta)\n  • Om ingen 4x-innsats: [2x] (${ante2}) eller [check]\n  • [2x]: Set ${ante2} PLAY-innsats, avdekke dei siste 2 felleskorta\n  • [check]: Ingen ekstra innsats, avdekke dei siste 2 felleskorta\n\n📋 RIVER:\n  • Om 4x- eller 2x-innsats er sett: Berre [skip] er tilgjengeleg (auto-går til oppgjer)\n  • Om ingen tidlegare PLAY-innsats: [1x] (${ante}) eller [fold]\n  • [1x]: Set ${ante} PLAY-innsats, går til oppgjer\n  • [fold]: Gi opp handa, tape ANTE- og BLIND-innsatsar\n\n📋 OPPGJER:\n  • Alle kort er avdekte og vurderde\n  • Beste 5-kortshand frå 7 kort (2 hole + 5 felles)\n  • Innsatsar er avgjort i henhold til utbetalingreglane\n\n💎 INNSATSUTBETALINGAR:\n📊 ANTE-INNSATS:\n  • Dealaren kvalifiserer ikkje: PUSH (innsats returnert)\n  • Dealaren kvalifiserer og du vinn: 1:1 utbetaling (innsats + vinning)\n  • Dealaren kvalifiserer og du taper: Innsats tapt\n  • Uavgjort: PUSH (innsats returnert)\n\n📊 BLIND-INNSATS:\n  • Uavhengig av dealaren sin kvalifisering\n  • Du vinn: Innsats returnert og ekstra utbetaling basert på handstyrken din\n  • Du taper: Innsats tapt\n  • Uavgjort: PUSH (innsats returnert)\n\n📊 BLIND-INNSATS-UTBETALINGSTABELL:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Fire av same rang: 10:1 (${{self.ante_amount * 10}})\n  • Fullt hus: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Mindre enn Straight: Ingen ekstra utbetaling\n\n📊 PLAY-INNSATS:\n  • Uavhengig av dealaren sin kvalifisering\n  • Direkte samanlikning: Din beste hand mot dealerens beste hand\n  • Du vinn: 1:1 utbetaling (innsats + vinning)\n  • Du taper: Innsats tapt\n  • Uavgjort: PUSH (innsats returnert)\n\n🎯 POKER-HANDRANGERING (Beste til verste):\n  1. Royal Flush: A-K-Q-J-10 av same farge\n  2. Straight Flush: 5 påfølgjande kort av same farge\n  3. Fire av same rang: 4 kort av same rang\n  4. Fullt hus: 3 av same rang + 2 av same rang\n  5. Flush: 5 kort av same farge\n  6. Straight: 5 påfølgjande kort\n  7. Tre av same rang: 3 kort av same rang\n  8. To par: 2 par av ulike rangar\n  9. Eit par: 2 kort av same rang\n  10. Høgaste kort: Høgaste kort vinn\n\n⌨️  HANDLINGSKOMMANDOAR:\n• [4x] eller [play bet 4x]: Set ${{self.ante_amount*4}} PLAY-innsats\n• [2x] eller [play bet 2x]: Set ${{self.ante_amount*2}} PLAY-innsats\n• [1x] eller [play bet 1x]: Set ${{self.ante_amount*1}} PLAY-innsats\n• [check] eller [c]: Sjekke (ingen ekstra innsats)\n• [fold] eller [f]: Folda (gi opp handa)\n• [skip] eller [s]: Hoppa til neste fase (når ingen handling er nødvendig)\n\n💡 STRATEGITIPS:\n• Sterke starthendar (par, høge kort) rettferdiggjer ofte 4x-innsatsar\n• Vurder dealaren sin kvalifisering - svake hendar kan pusha om dealaren ikkje kvalifiserer\n• BLIND-innsats kan være svært lønnsam med sterke hendar (Royal Flush = 500:1!)\n• Vakt på jetongstapen din! Om den går til 0 eller lågare ved byrjinga av runden, taper du.\n\n⚠️  VIKTIGE MELDINGAR:\n• ANTE- og BLIND-innsatsar er omgjerande kvar runde\n• PLAY-innsatsar er valfrie og strategiske\n• Sørg for å setje riktig handling, og berre ein handling om gangen.\n\n",
+    "state": "🎯 RUNDE {round}\n💰 Jetongar: {chips}\n🎴 Din hand: {hand}\n📊 Gjeldande innsatsar: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fase: {phase}\n🎯 Tilgjengelege handlingar: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Runde {round} starta! Innsatsar: ANTE ${ante}, BLIND ${blind}. Du har {chips} jetongar attende.",
+    "your_hand": " Handa di: {hand}",
+    "flop_revealed": " FLOP avslørt: {cards}",
+    "river_revealed": " RIVER avslørt: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Ugyldig handling for den noverande fasen. Tilgjengelege handlingar: {available}",
+    "message": "❌ Invalid action! Available actions: {available}"
+  },
+  "action": {
+    "folded": "🃏 You folded."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Hånden til seljaren: {cards}",
+    "community_cards": " Samfunnskort: {cards}",
+    "player_best": "🎴 Spelaren sin beste hand: {name} ({cards})",
+    "dealer_best": "🎴 Dealaren sin beste hand: {name} ({cards})",
+    "ante_lost_folded": " ANTE vedde tapt! -${ante} (falt)",
+    "blind_lost_folded": " Vettar tap! -${blind} (fold)",
+    "ante_won": "✅ ANTE-veddemål VINNER! +${amount}",
+    "ante_pushed": " ANTE-sats PUSHED! ${ante} kom tilbake.",
+    "ante_lost": " ANTE vedteken tapt! -${ante}",
+    "blind_won": "✅ Vinnande sjanse! +${amount}",
+    "blind_pushed": " Blind-satsning PUSHED! ${blind} returnerte.",
+    "blind_lost": " Vettar tapte! -${blind}",
+    "play_won": "✅ PLAY bet WON! +${amount} (gjev deg ein sjanse)",
+    "play_pushed": " PLAY bet PUSHED! ${play} returnerte.",
+    "play_lost": " Spelar innsats tapt! -${play}",
+    "net_gain": "🎉 Runde {round} fullført! Netto vinning: +${net}",
+    "net_loss": "💸 Runde {round} fullført! Netto tap: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 SPELET ER OVER! {max_turns} rundar fullført. Du har ${chips} jetongar - DU VINN!",
+    "game_over_lose": "Dei har ingen sjetongar lenger, og seljaren vinner.",
+    "reward_win": "Spelaren fullførte {winner_rounds} rundar med ${chips} jetongar",
+    "reward_lose": "Spelaren vart utan sjetongar i runden {round}",
+    "reward_win_max": "Spelaren fullførte {max_turns} rundar med ${chips} jetongar"
+  },
+  "hand_names": {
+    "royal_flush": "Kongeleg flåsj",
+    "straight_flush": "Straight Flush (slettande)",
+    "four_of_a_kind": "Fire av ein slag",
+    "full_house": "Fullt hus.",
+    "flush": "Flush (flått)",
+    "straight": "Rett fram.",
+    "three_of_a_kind": "Tre av same slag",
+    "two_pair": "To par av dei.",
+    "one_pair": "Eit par, ein gong to.",
+    "high_card": "Høgste kortet.",
+    "unknown": "Uvitande hand"
+  }
+}

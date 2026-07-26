@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spelar {player_id} i Stratego.\nDitt mål er å fange motstandarane sin Flag eller eliminere alle dei flyttbare brikka deira.\nDin hær er plassert for deg på brettet, inkludert din Flag, Bomber og andre brikker av varierande rang.\n\n### Spelinstruksjonar\n1. **Flyttereglar:**\n   - På din tur, kan du flytte ein brikke ein skritt til ein tilstøytande kvadrat (opp, ned, venstre eller høgre) som allereie er okkupert med dine brikker.\n   - Døme: Ein brikke kan flytte frå A1 til B1 eller A1 til A2 om B1 og A2 ikkje er plassert med spelaren sine eigne brikker.\n   - Om den valde brikka er ein Bomb eller ein Flag, kan den ikkje flyttast.\n2. **Slag:**\n   - Om du flyttar på ein kvadrat som er okkupert av ein motstandar sin brikke, vil eit slag føre seg:\n     - Brikka med høgare rang vinn og eliminerer motstandarane sin brikke.\n     - Om rangane er like, fjernast begge brikker frå brettet.\n     - **Spesialtilfelle:**\n       - Bomber eliminerer dei fleste angriparbrikka bortsett frå Miner, som kan uskadeleggjere bomber.\n       - Spionar kan slå Marskalken om Spionen angriper først, men taper mot alle andre brikker.\n3. **Strategiske mål:**\n   - Identifiser motstandarane sine brikker gjennom dei sine rørsler og slag.\n   - Verne din Flag medan du prøver å fange motstandarane sin Flag.\n   - Bruk Speidar strategisk for å få informasjon om motstandarane sine brikker og åtakke svake.\n\n### Korleis du kan gjere eit trekk:\n1. Spesifiser koordinatane til brikka du vil flytte og destinasjonen.\n2. Bruk formatet: [A0 B0], der A0 er kildeplassen og B0 er destinasjonskvadratet.\n   - Døme: For å flytte ein brikke frå rad 0, kolonne 0 til rad 1, kolonne 0, skriv [A0 B0].\n3. Sørg for at destinasjonskvadratet er gyldig i henhold til flyttereglane ovenfor.\n\n### Viktige merknader:\n- Brettet vil vise dine brikker og posisjonane deira, t.d. MN, MS.\n- Brettet vil òg vise kjende posisjonar av motstandarane sine brikker utan å avsløre rangane deira, t.d. ?.\n- Rutenett med ~ er innsjøar og kan ikkje flyttast på.\n- Som eit forslag, start spill med å flytte dine brikker som er på frontlinja for å få informasjon om motstandarane sine brikker. Spelar 0 og spelar 1 sine frontlinjer er rad D og G, respektivt.\n\nHer er den noverande bretttilstanden:\n"
+  },
+  "board": {
+    "current_board": "Gjeldande brett:\n\n{board}\nTilgjengelege trekk: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldig handlingsformat. Spelar {player_id} skreiv ikkje inn eit trekk i formatet [A0 B0].",
+    "invalid_coordinates": "Ugyldig aksjonsformat. Spelaren {player_id} gav ikkje inn gyldige koordinatar.",
+    "not_own_piece": "Ugyldig handlingsformat. Spelaren {player_id} må flytta ein av sine eigne brikkjer.",
+    "scout_through_pieces": "Ugyldig handlingsformat. Spelaren {player_id} kan ikkje flytta ein speidar gjennom andre brikkjer.",
+    "scout_diagonal": "Ugyldig aksjonsformat. Spelaren {player_id} kan ikkje flytta ein speider diagonalt.",
+    "non_scout_multi_square": "Ugyldig aksjonsformat. Stykk, bortsett frå speidarar, kan berre flytta ein plass om gongen.",
+    "move_into_lake": "Ugyldig aksjonsformat. Spelar {player_id} kan ikkje flytta inn i sjøen.",
+    "move_onto_own_piece": "Ugyldig handlingsformat. Spelaren {player_id} kan ikkje flytta på sin eigen brikkje.",
+    "move_bomb_or_flag": "Ugyldig aksjonsformat. Spelaren {player_id} kan ikkje flytta ein bombe eller eit flagg."
+  },
+  "game_action": {
+    "you_moved": "Du har flytta din brikke frå {source} til {dest}.",
+    "opponent_moved": "Spelaren {player_id} har flytta ein brikk frå {source} til {dest}.",
+    "you_equal_ranks": "Du har flytta din brikke frå {source} til {dest}. Angrepsbrikka var {attacking_rank} og destinasjonsbrikka var {target_rank}. Sidan rangane er like, tapte begge brikker.",
+    "opponent_equal_ranks": "Spelar {player_id} har flytta ein brikke frå {source} til {dest}. Angrepsbrikka var {attacking_rank} og destinasjonsbrikka var {target_rank}. Sidan rangane er like, tapte begge brikker.",
+    "you_miner_defused": "Du har flytta din brikke frå {source} til {dest}. Angrepsbrikka var {attacking_rank} og destinasjonsbrikka var {target_rank}. Sidan miner kan uskadeleggjere bomber, vann du slaget.",
+    "opponent_miner_defused": "Spelar {player_id} har flytta ein brikke frå {source} til {dest}. Angrepsbrikka var {attacking_rank} og destinasjonsbrikka var {target_rank}. Sidan miner kan uskadeleggjere bomber, tapte du slaget.",
+    "you_bomb_lost": "Du har flytta din brikke frå {source} til {dest}. Angrepsbrikka var {attacking_rank} og destinasjonsbrikka var {target_rank}. Sidan angriparen ikkje er ein miner, tapte du slaget.",
+    "opponent_bomb_won": "Spelar {player_id} har flytta ein brikke frå {source} til {dest}. Angrepsbrikka var {attacking_rank} og destinasjonsbrikka var {target_rank}. Sidan angriparen ikkje er ein miner, vann du slaget.",
+    "you_spy_won": "Du har flytta din brikke frå {source} til {dest}. Angrepsbrikka var {attacking_rank} og destinasjonsbrikka var {target_rank}. Sidan angriparen er ein spion og destinasjonen er ein marskalk, vann du slaget.",
+    "opponent_spy_lost": "Spelar {player_id} har flytta ein brikke frå {source} til {dest}. Angrepsbrikka var {attacking_rank} og destinasjonsbrikka var {target_rank}. Sidan angriparen er ein spion og destinasjonen er ein marskalk, tapte du slaget.",
+    "you_higher_won": "Du har flytta din brikke frå {source} til {dest}. Angrepsbrikka var {attacking_rank} og destinasjonsbrikka var {target_rank}. Sidan angriparen er høgare rang enn destinasjonen, vann du slaget.",
+    "opponent_higher_lost": "Spelar {player_id} har flytta ein brikke frå {source} til {dest}. Angrepsbrikka var {attacking_rank} og destinasjonsbrikka var {target_rank}. Sidan angriparen er høgare rang enn destinasjonen, tapte du slaget.",
+    "you_lower_lost": "Du har flytta din brikke frå {source} til {dest}. Angrepsbrikka var {attacking_rank} og destinasjonsbrikka var {target_rank}. Sidan angriparen er lågare rang enn destinasjonen, tapte du slaget.",
+    "opponent_lower_won": "Spelar {player_id} har flytta ein brikke frå {source} til {dest}. Angrepsbrikka var {attacking_rank} og destinasjonsbrikka var {target_rank}. Sidan angriparen er lågare rang enn destinasjonen, vann du slaget."
+  },
+  "outcome": {
+    "flag_captured": "Spelar {player_id} har fanga flagget til motstandaren!",
+    "no_movable_pieces": "Spelar {winner_id} vinn! Spelar {loser_id} har ikkje fleire flyttbare brikker."
+  }
+}

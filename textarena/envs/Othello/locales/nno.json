@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Du er spelar {player_id} som spelar {colour} ({piece}) i eit spel Othello.\nMålet ditt er å ha fleire brikker av din farge på brettet ved slutten av spelet.\nI din tur, plasser ein brikke så han flanker ein eller fleire av motstandarane sine brikker - i alle retningar (vassrett, loddrett eller skrått) - mellom din nye brikke og ein annan av dine eksisterande brikker. Alle flankerte motstandar-brikker vil bli snudd til din farge.\nGje din trekk i formatet '[row, col]'."
+  },
+  "board": {
+    "game_board": "Spelbrett: {board}",
+    "valid_moves": "{observation}\nGyldige trekk: {moves}",
+    "no_valid_moves_reset": "{observation} Ingen gyldige røringar - du må kanskje hoppa over.",
+    "no_valid_moves_step": "{observation} Ingen gyldige røringar. Du må kanskje hoppe over det.",
+    "scores_reset": "{observation}\nNoenverande poeng - Svart: {black_count}, Kvit: {white_count}\n",
+    "scores_step": "{observation}\nPoeng - Svart: {black_count}, Kvit: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Flytta må vera av forma [row, col].",
+    "illegal": "Ulovlege røringar. Gyldige røyrsler: {valid}"
+  },
+  "game_action": {
+    "skipped": "Spelaren {pid} måtte hoppa over.",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Spelar {pid} ({piece}) har ingen gyldige trekk og må hoppe over."
+  },
+  "outcome": {
+    "black_wins": "Svart vinn {black_count}-{white_count}.",
+    "white_wins": "Hvite vinn {white_count}-{black_count}.",
+    "draw": "Trekk {black_count}-{white_count}."
+  }
+}

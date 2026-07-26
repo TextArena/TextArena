@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spelar {player_id} i Forhandlingsspelet.\nDu har nokre ressursar, og oppgåva di er å handle slik at den totale verdien av ressursane dine aukar.\nRessursane og tilknytte verdiar du no har, er:\n\t+ {resource_value_list}\nVed kvar omgang, kan du snakke med motstandaren din og la fram eit handels tilbod.\nBruk følgjande spesialteikn for handlingar:\n  - '[Tilbod: 3 Sau, 2 Malm -> 5 Murstein, 2 Sau]': [Tilbod: Tilbodne ressursar -> Ettertrakta ressursar]\n  - '[Accept]': For å akseptere eit innkommende tilbod.\n  - '[Deny]': For å avvise eit innkommende tilbod (standard).\nSpelet varer i {max_turns} omgangar til saman."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Spelaren prøvde å godta ein bytte utan å ha dei nødvendige ressursane.",
+    "out_of_range": "Spelar {player_id}, Ugyldig handling. Kolonne {col} er utanfor grensene.",
+    "already_full": "Spelar {player_id}, Ugyldig handling. Kolonne {col} er full.",
+    "proposing_with_no_resource": "Spelaren {player_id} prøvde å gje eit byttetilbod utan å ha dei tilleggsutstyret.",
+    "incorrect_offer_format": "Spelaren {player_id} gjorde eit byttetilbod i feil format.",
+    "no_new_offer": "Spelaren {player_id} gjorde ikkje noko nytt byttetilbod."
+  },
+  "offers": {
+    "reject": "Spelaren {player_id} avviste byttetilbodet.",
+    "accept": "Spelar {acceptor_id} aksepterte handels tilbodet frå Spelar {proposer_id}.",
+    "proposal": "Spelar {player_id} la fram følgjande tilbod til Spelar {opponent_id}: Tilbodne gjenstandar: {offered} -> Ettertrakta gjenstandar: {requested}"
+  },
+  "outcome": {
+    "win": "Spelaren {winner_id} vann ved å ha ein større vinning i lagerverda.",
+    "draw": "Det er den same endringa i inventarisering for alle aktørar."
+  }
+}

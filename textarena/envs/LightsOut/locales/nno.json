@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Velkomen til Lights Out! Du har eit {size}x{size} rutenett av lys.\nMålet ditt er å slå AV Alle lys (representert av '.')\nNår du trykkjer på eit lys, skifter det seg sjølv OG nabane (opp/ned/venstre/høgre).\nSkriv [row col] for å trykkje på eit lys (0-indeksert, så gyldig område er 0-{max_index}).\nDu har opp til {max_turns} trekk for å løse puzzle.\nForklaring: 'O' = lys PÅ, '.' = lys AV"
+  },
+  "board": {
+    "current_state": "Aktuell rutenetttilstand (Trekk {moves_made}, {moves_left} trekk attåt, {completion}% fullført):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksion må ha formatet [row col] der rekkje og kol er heiltal frå 0 til {max_index}.",
+    "out_of_range": "Coordinates must be between 0 and {max_index}. You entered [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Gratulasjon! Du løyste puslespillet i {moves_used} rørsler!",
+    "loss": "Spelet er over! Du nytta alle {max_turns} trekk utan å løse puzzle. Endelig fullføring: {completion}%\nEndelig tilstand:\n{grid}"
+  }
+}

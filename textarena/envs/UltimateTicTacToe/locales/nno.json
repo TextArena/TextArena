@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in **Ultimate Tic Tac Toe**.\nSubmit your move as **[macro  micro]** (two numbers 0-8):\n• *macro*  = which mini-board you play in\n• *micro* = which square inside that mini-board\nExample `[7 8]` ➜ place your mark in mini-board 7, square 8, and\nforce your opponent to play in mini-board 8 next.\n\nYou are `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Aktuelt styre: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Flytta må vera i form [macro micro] med nummer 0-8.",
+    "out_of_range": "Indekser må alle vera mellom 0 og 8.",
+    "index_out_of_range": "The micro_board, row, or col is out of range.",
+    "cell_occupied": "Cella er allereie okkupert.",
+    "wrong_micro_board": "Spelaren må spela på det neste mikro-brettet.",
+    "micro_board_won": "Mikro-brettet er allereie vunne."
+  },
+  "next_board": {
+    "any": "kva for eit mikro-bord som helst.",
+    "specific": "Mikro-platt {nxt}"
+  },
+  "game_action": {
+    "played": "Spelar {player_id} spelte i mikro-plate {macro_idx}, celle {micro_idx} (rad {row}, kolonne {col}). Spelar {opponent_id} må no spelast i {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Spelaren {player_id} vinn Ultimate Tic Tac Toe!",
+    "draw": "Matchen er ein uavgjort match."
+  }
+}

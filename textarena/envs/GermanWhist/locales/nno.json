@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Spelet byrjar. Trumpfarge: {trump_suit} (trumpkort: {trump_str}).",
+    "no_trump_card": "ingen av dei"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in German Whist.\n{phase_info}\nYou hold {hand_size} cards.\nPlay a card with '[play N]', where N is its position in your hand (for example '[play 3]').",
+    "phase_learning": "LÆRINGSFASEN: Vinnaren av kvar trikk tek det opplagte kortet, og taperen trekker neste kort frå dekk. Triks som er vunne i denne fasen tel ikkje med til seier.",
+    "phase_playing": "Alle triks tel opp til ein seier."
+  },
+  "next_card": {
+    "playing_phase": "Det er ikkje noko kort i utbod - spelet har byrja.",
+    "deck_empty": "Dekket er tomt - det finst ikkje noko kort.",
+    "available": "Kort som er tilbodt: {card}",
+    "available_trump": "Card on offer: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldig trekkformat. Bruk \"[play N]\" for å spela det n-te kortet i handa di.",
+    "bad_position": "Denne kortposisjonen finst ikkje. Du held {hand_size} kort.",
+    "must_follow_suit": "Du må følgja med og spela eit {lead_suit} kort.",
+    "invalid_play": "Det kortet kan ikkje spillast."
+  },
+  "game_action": {
+    "played": "Spelar {player_id} spelte med {card}."
+  },
+  "trick": {
+    "won": "Spelaren {winner_id} vinn tricket med {card}.",
+    "won_learning": "Spelar {winner_id} vinn tricken med {card} og tar det synlege kortet."
+  },
+  "phase": {
+    "learning_complete": "Tråden er over, læra er ferdig - alle trekk som vert brukt kan hjelpa til med å vinne."
+  },
+  "draw": {
+    "winner_received": "Du vann og fekk {card}.",
+    "loser_received": "You lost the trick and drew {card} from the deck.",
+    "winner_preview": "Det neste kortet som vert tilbodt er {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Trick vunne hittil - Spelar 0: {tricks0}, Spelar 1: {tricks1}",
+    "scores_playing": "Poenggjevande trick - Spelar 0: {tricks0}, Spelar 1: {tricks1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Fase: {phase} ({remaining_cards} kort attende i dekken)"
+  },
+  "hand": {
+    "no_cards": "No cards",
+    "no_cards_in_hand": "Ingen kort i handa.",
+    "header": "Handa di:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Ingen har spelt dette før.",
+    "header": "Det siste trykket:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Spelar {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Spelet starta ikkje.",
+    "header": "=== GERMAN WHIST GAME ===",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nTrumpfarge: {trump_suit}",
+    "trump_card": "{observation}\nTrumpkort: {card}",
+    "cards_left": "{observation}\nKort attende i dekken: {count}",
+    "next_card": "{observation}\nNeste kort for vinnaren: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Aktuell triks:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Spelar {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nSpelar {player_id}: {scoring} poenggjevande trick ({tricks} totalt), {hand_size} kort på hand"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

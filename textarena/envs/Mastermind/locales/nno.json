@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Du spelar Mastermind.\nDu må finne koden som er {code_length} siffer lang, kvart siffer frå 1 til {num_numbers}, {repeats}.\nI svaret ditt kan du sende gjettinga di i følgjande format: '[2 1 4 5]'.\nEtter kvart gjetting får du tilbakemelding i form av svarte og kvite peg(s).\nEin svart peg indikerer eit korrekt siffer på rett plass, medan ein kvit peg indikerer eit korrekt siffer på feil plass.\nDu har {max_turns} omgangar til å gjetta koden.\n",
+    "with_repeats": "med mogleg repetisjonar.",
+    "no_duplicates": "utan duplikat."
+  },
+  "invalid_move": {
+    "wrong_format": "You did not respond with a space-separated list of numbers wrapped in square brackets.",
+    "not_integers": "Alle oppgåver må vera gyldige heile tal.",
+    "wrong_length": "Gjevinga burde innehalda nøyaktig {code_length} tal.",
+    "out_of_range": "Alle tal må vera mellom 1 og {num_numbers}.",
+    "duplicates_not_allowed": "Det er ikkje tillate dupliserte nummer.",
+    "repeated_guess": "Du har allereie gjeve {guess}. Prøv ei anna gjett."
+  },
+  "game_action": {
+    "feedback": "Submitted [{guess}]. Feedback: {black_pegs} black peg(s), {white_pegs} white peg(s)."
+  },
+  "outcome": {
+    "win": "You have cracked the code, solving {black_pegs} out of {code_length} pegs correctly",
+    "turn_limit": "Turn limit reached. You guessed {percent} percent of the numbers correctly."
+  }
+}

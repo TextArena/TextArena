@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spelar {player_id} i eit to-spelar-spel av Spite and Malice. Målet ditt er å vera den første som tømmer sin innbetalingstølle.\n\n### Speloversyn:\n- Målet er å rydda innbetalingstølla di ved å spela kort til midtpilane.\n- Du kan spela kort frå tre kjelder:\n  1. **Handa** di (du byrjar kvar omgang med opp til 5 kort på handa).\n  2. **Toppkortet på innbetalingstølla** di.\n  3. **Toppkortet på ein av kastepilane** dine.\n\n### Spelreglar:\n- Du kan spela eit kort til ein midtpile om det er **ein rang høgare** enn toppkortet på den pilen (midtpilane byrjar med Ess og går opp til Dronning; Kongar er vilkårlige - dei kan spelast på eit kort, men endrar ikkje rekkefølgja. Dette tyder at om ein Kong vert brukt etter 4, så er Kongen rangert 5 og det neste kortet må vera ein 6).\n- Om du ikkje kan spela fleire kort, må du **kasta eit kort** til ein av kastepilane dine for å avslutta omgangen din.\n- Om ein midtpile når Dronning, vert ho rydda automatisk.\n- Rekkefølgja er: E=1, 2=2, ..., 9=9, J=10, Q=11, K som vilkårlig.\n\n### Handlingar:\n1. **Trek**: Ved byrjinga av omgangen din, trekk kort for å fylla handa di opp til 5 kort. Skriv inn **[draw]** for å byrja.\n2. **Spel eit kort**: For å spela eit kort, spesifiser kortet og midtpila på følgjande måte: **[play A♠ 0]** (der 'A♠' er kortet og '0' er midtpile-indeksen).\n3. **Kast**: Om du ikkje kan spela fleire kort, kast eit kort frå handa di til ein kastepile for å avslutta omgangen din. Skriv inn **[discard A♠ 1]** (der 'A♠' er kortet og '1' er kastepile-indeksen). Merk at du ikkje kan kasta eit kort frå innbetalingstølla. Du kan berre kasta kort frå handa di.\n\n"
+  },
+  "board": {
+    "current_board": "Gjeldande brett:\n\n{board}\nTilgjengelege trekk: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Senterpylsar -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Spelar {player_id}'s syn ---\n",
+    "payoff": "{observation}Innbetalingstølle (Toppkort): {top_card}, Innbetalingstølle-lengd: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Kastepilar: {discard}\n",
+    "empty": "Empty"
+  },
+  "game_message": {
+    "no_cards_left": "There are no more cards to draw from. Remember that you can play cards from these sources:\n  1. Your **hand**.\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldig trekkformat. Spelaren {player_id} svara ikkje med ein gyldig trek i parenteser.",
+    "invalid_play": "Ugyldig spel. Spelar {player_id} prøvde å spela {card} på midtpile {index}.",
+    "discard_from_payoff": "Ugyldig kasting. Spelaren {player_id} prøvde å kasta eit kort frå utbetalingsstapellet.",
+    "discard_not_in_hand": "Ugyldig kasting. Spelar {player_id} prøvde å kasta eit kort som ikkje er i handa hans.",
+    "wrong_move_type": "Ugyldig røringsstype. Spelaren {player_id} svara ikkje med ein gyldig røringssytre."
+  },
+  "game_action": {
+    "you_drew": "Du trekte kort.",
+    "opponent_drew": "Spelaren {player_id} trekte kort.",
+    "you_played": "Du spelte {card} på midten av stabla {index}.",
+    "opponent_played": "Spelar {player_id} spelte {card} på midtpile {index}.",
+    "you_discarded": "Du har kasta {card} til kastepile {index}, noko som òg tyder på at du er ferdig med omgangen din. Ingen vidare handlingar av deg vert vurdert for denne omgangen. Spelar {next_player_id} skal gå neste.",
+    "opponent_discarded": "Spelar {player_id} kasta {card} til kastepile {index}, noko som òg tyder på at dei er ferdige med omgangen sin. Ingen vidare handlingar av Spelar {player_id} vert vurdert for denne omgangen. Spelar {next_player_id}, du skal gå neste. Vennlegst skriv inn handlinga di i formatet [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Spelar {current_player} har ferdigstilt sin innbetalingstølle! Spelar {current_player} vinn!",
+    "deadlock_player_0": "Dødlås nådd! Spelar 0 vinn med {player_0_payoff} kort att mot Spelar 1 sine {player_1_payoff} kort.",
+    "deadlock_player_1": "Dødlås nådd! Spelar 1 vinn med {player_1_payoff} kort att mot Spelar 0 sine {player_0_payoff} kort.",
+    "deadlock_tie": "Dødlås nådd med uavgjort! Begge spelarane har {player_0_payoff} kort att. Spelar {current_player} vinn på førehand."
+  }
+}

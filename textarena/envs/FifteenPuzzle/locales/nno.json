@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Du er spelar {player_id}. Du spelar 15-Puzzle-spelet.\nMålet med spelet er å ordne dei nummererte flisa i stigande rekkefølge frå 1 til 15, med den tomme plassen plassert i høgre nedre hjørne.\nFor å gjere eit trekk, kan du skyve ein flis inn i den tomme plassen (representert av ein dobbel understrek, t.d. __) ved å bruke ein av følgjande kommandoar:\n- 'up': Flytt flisa under den tomme plassen opp.\n- 'down': Flytt flisa over den tomme plassen ned.\n- 'left': Flytt flisa til høgre for den tomme plassen til venstre.\n- 'right': Flytt flisa til venstre for den tomme plassen til høgre.\nFor å sende inn trekket ditt, skriv retninga (t.d. 'up', 'down', 'left' eller 'right') i klammer, t.d. [up].\nLayoutet til det gjeldande brettet er vist under. Bruk informasjonen for å løse puzzlet.\n"
+  },
+  "board": {
+    "current_board": "Gjeldande brett:\n\n{board}\nTilgjengelege trekk: {moves}",
+    "game_board": "Spelbrett: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldig trekkformat. Spelaren {player_id} svara ikkje med ein gyldig retning i parenteser.",
+    "illegal_move": "Ugyldig trekk. Blokken kan ikkje rørsast i den angitte retninga."
+  },
+  "outcome": {
+    "win": "Gratulasjon! Spelaren {player_id} har løst 15-gåsspillet.",
+    "turn_limit": "Modellen har fullført {percent} prosent av puslespillet."
+  }
+}

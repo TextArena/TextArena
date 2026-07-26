@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Du er {role} i Colonel Blotto.\nDitt mål er å vinne fleire rundar enn motstandaren din.\nI kvar runde, fordel nøyaktig {num_total_units} einingar over felt {field_names}.\nSpelaren som fordelar fleire einingar til eit felt, vinn det feltet, og spelaren som vinn fleire felt, vinn runden.\nTil dømes, '[A7 B7 C6]' fordelar 7 einingar til A, 7 til B, og 6 til C.",
+    "commander_alpha": "Kommandør Alfa.",
+    "commander_beta": "Kommandør Beta, ikkje sant."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRound {current_round}\nCommander Alpha allocated: {p0_allocations}\nCommander Beta allocated: {p1_allocations}\n",
+    "winner_alpha": "{message}Vinnar: Kommandør Alpha",
+    "winner_beta": "{message}Vinnar: Kommandør Beta",
+    "tie": "{message}Tie!"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldig inngangsformat. Bruk: A:5, B:10, C:5",
+    "invalid_field": "Ugyldig namn på feltet (((s). Gyldige felter: {field_names}",
+    "wrong_allocation_value": "Alle tildelingar må vera ikkje-negative heile tal.",
+    "incorrect_total_units": "Du må fordela nøyaktig {num_total_units} einingar. Noverande sum: {current_sum}",
+    "good_allocations": "Tildeling er god."
+  },
+  "outcome": {
+    "winner_alpha": "Kommandør Alpha vinn {score_0}-{score_1} etter {num_rounds} rundar!",
+    "winner_beta": "Kommandør Beta vinn {score_1}-{score_0} etter {num_rounds} rundar!",
+    "draw": "Spelet endar med {score_0}-{score_1} uavgjort etter {num_rounds} rundar!",
+    "early_winner_alpha": "Kommandør Alpha vinn {scores_0}-{scores_1} (fleirtal oppnådd)!",
+    "early_winner_beta": "Kommandør Beta vinn {scores_1}-{scores_0} (fleirtal oppnådd)!"
+  }
+}

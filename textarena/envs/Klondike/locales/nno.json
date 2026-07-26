@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Du spelar Klondike Solitaire. Målet ditt er å flytte alle kort til grunnlagsplassane.\n\nSpelereglar:\n- Grunnlagsplassar (F1-F4): Bygg opp frå Ess til Konge i farge\n- Tableauplassar (T1-T7): Bygg ned i vekslande fargar (raudt på svart, svart på raudt)\n- Stokk: Trekk kort til avfallsplassen\n- Avfall (W): Øvste kort er tilgjengeleg for spel\n\nKommandoar:\n- 'draw' - Trekk kort frå stokk til avfall\n- 'move <source> <destination> [count]' - Flytt kort mellom plassar\n  Døme: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Antall kan også vere 'all', som vil prøve å flytte alle synlege kort.\n- 'forfeit' - Avslutt spelet umiddelbart og lås inn poengsummen din\n- Plassnamn: W (avfall), F1-F4 (grunnlag), T1-T7 (tableau)\n\nDu kan utføre fleire handlingar i ein tur ved å skilje dei med komma:\n  Døme: 'draw, move W T1, move T2 F1'\n\nBerre Kongar kan plasserast på tomme tableauplassar.\nHandlingar utførerast i rekkefølgje - om ein feilar, vert dei attverande handlingane hoppa over.\nBruk 'forfeit' om du trur spelet er umogeleg å vinne."
+  },
+  "format_error": {
+    "no_brackets": "Ugyldig handlingformat. Handlinga skal stå mellom parentesar.",
+    "no_closing_bracket": "Ugyldig handlingformat. Manglar ein avsluttende parentes ']'",
+    "empty_command": "Kommandot er tomt. Skriv \"draw\" eller \"move <source> <destination> [count]\".",
+    "empty_action": "Tom handling",
+    "move_needs_args": "Move-kommando krev kild og mål. Bruk: 'move <kild> <mål> [count]'",
+    "count_positive": "Teljaren må vera positiv eller \"alle\"",
+    "count_invalid": "Ugyldig teljing. Bruk eit tal eller \"alle\"",
+    "unknown_command": "Ukjent kommando '{cmd}'. Bruk 'draw', 'move <source> <destination> [count]', eller 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Utførde {n} handlingar før feil.",
+    "failed": "Action {n} failed: {msg}"
+  },
+  "move_result": {
+    "drew": "Trekk kortet frå lager til avfall.",
+    "cannot_draw": "Kan ikkje trekkje. Både lager og avfall er leige.",
+    "invalid_pile": "Ugyldig stablinnamn. Bruk W, F1-F4, eller T1-T7",
+    "foundation_one_card": "Kan berre flytta eit kort til grunnleggjaren.",
+    "waste_to_foundation_ok": "Flytta kort frå avfall til grunnlegg F{dst}",
+    "waste_to_foundation_bad": "Du kan ikkje flytta avfallskort til grunnpilaren.",
+    "tableau_to_foundation_ok": "Flytta kort frå tableau T{src} til grunnlag F{dst}",
+    "tableau_to_foundation_bad": "Du kan ikkje flytta ein tabellkort til denne grunnpilaren.",
+    "foundation_to_foundation": "Kan ikkje flytta frå grunnlegg til grunnlag.",
+    "waste_to_tableau_one_card": "Kan berre flytta 1 kort frå avfall til tavle.",
+    "waste_to_tableau_ok": "Flytta kort frå avfall til tabell T{dst}",
+    "waste_to_tableau_bad": "Du kan ikkje setja avfallskort på tabula-haugen.",
+    "no_face_up": "Ingen oppvoka kort å flytte.",
+    "tableau_to_tableau_ok": "Flytta {count} kort frå tableau T{src} til T{dst}",
+    "tableau_to_tableau_bad": "Kan ikkje flytte {count} kort frå T{src} til T{dst}",
+    "foundation_to_tableau_one_card": "Kan berre flytta 1 kort frå grunnlaget til tavla.",
+    "foundation_empty": "Stiftelse F{src} er tomt.",
+    "foundation_to_tableau_ok": "Flytta kort frå grunnlag F{src} til tableau T{dst}",
+    "foundation_to_tableau_bad": "Kan ikkje plassere grunnkort på bord T{dst}",
+    "to_waste_or_stock": "Kan ikkje flytta til avfall eller lager."
+  },
+  "outcome": {
+    "forfeit": "Spel forkastet. endeleg score: {score} kort i grunnleggjer.",
+    "won": "Gratulasjonar, du har vunne Klondike Solitaire!",
+    "turn_limit": "Slutt på spelet! Du nådde maksimum {max_turns} turar. Poengsum: {score} kort på grunnlag."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stok: {stock} kort",
+    "waste": "Avfall (W): {waste}",
+    "foundations_header": "Stiftingar:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tavla:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}
