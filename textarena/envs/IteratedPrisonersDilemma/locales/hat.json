@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ou se Jwè {player_id} nan yon Dilem Prisonye Itere ki dure {num_rounds} tou.\n\nEstrikti Jwè:\n- Anvan chak desizyon ou gen {total_conversation_rounds} tou pou konverse libman.\n- Apre sa, de jwè chwazi koopere oswa defekte similtane.\n\nMatris Payoff (fiks chak tou):\n- De moun Koopere ➜ chak {cooperate_reward}\n- De moun Defekte ➜ chak {mutual_defect_reward}\n- Youn Defekte, youn Koopere ➜ Defektè {defect_reward}, Kooparatè {sucker_reward}\n\nJan pou Jwe:\n- Pandan konversasyon: tape nenpòt tèks ou vle.\n- Pandan faz desizyon: mete '[Cooperate]' oswa '[Defect]' (san sans). Ou ka ajoute tèks ekstra anvan/apre tokèn."
+  },
+  "phases": {
+    "conversation_finished": "Konversasyon an fini pou tou {round}. Tanpri reponn ak '[Cooperate]' oswa '[Defect]' nan \boxed{{}}.",
+    "starting_round": "--- Kòmanse Round {round} ---",
+    "round_summary": "Rezilta tou {round}:\n{outcome}\nJwè 0 genyen {r0} (total {score_0}), Jwè 1 genyen {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} wins {win_score} - {lose_score}.",
+    "draw": "Tou de jwè te fè nòt {s0}.",
+    "round_both_cooperate": "Tou de jwè yo te kolabore.",
+    "round_both_defect": "Tou de jwè yo te dezè.",
+    "round_p0_cooperates_p1_defects": "Jwè 0 te kolabore, jwè 1 defèkté.",
+    "round_p0_defects_p1_cooperates": "Jwè 0 defèkté, jwè 1 kolabore."
+  }
+}

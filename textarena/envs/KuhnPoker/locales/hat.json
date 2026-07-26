@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ou se Jwè {player_id} nan yon jwèt {max_rounds} tou nan Kuhn Poker.\nRegelman Jwèt:\n- Kuhn Poker itilize yon dek kat 3-kat ak J, Q, K (J pi ba, K pi wo)\n- Chak jwè mete {ante} chip epi resevwa 1 kat chak tou (remake ke kat yo deyal san reman, kidonk ou pa ka gen menm kat ke advèse ou).\n- Jwèt la kontinye pandan {max_rounds} tou\n- Jwè a ki gen plis chip apre tout tou yo genyen\nRegelman Aksyon:\n- '[check]': Pase san pari (sèlman si pa gen pari sou tab la)\n- '[bet]': Ajoute 1 chip nan pot la (sèlman si pa gen pari sou tab la)\n- '[call]': Mache yon pari advèse a pa ajoute 1 chip nan pot la\n- '[fold]': Abandone men ou epi kite advèse ou genyen pot la"
+  },
+  "init_round": {
+    "round_start": "### Kòmanse tou {current_round} sou {max_rounds} tou. Kat pou ou se: '{player_card}'",
+    "available_actions": "Aksyon ou genyen yo se: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksyon an dwe [Check], [Bet], [Call], oswa [Fold].",
+    "not_legal": "Aksyon dwe {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, submitted move: '[{move}]'.",
+    "valid_actions": "Aksyon ou genyen yo se: {legal_actions}.",
+    "round_summary": "{reason} Skor aktyèl: Jwè 0: '{player_0_chips}'; Jwè 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Kat Jwè {winner} {winner_card} bat Kat Jwè {loser} {loser_card}. Jwè {winner} genyen pot {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "At the end of {max_rounds} rounds, both players had the same number of chips.",
+    "round_win": "Jwè {player_id} te fè bak.",
+    "winner_player0": "Player 0 won by having more chips at the end of all {max_rounds} rounds.",
+    "winner_player1": "Player 1 won by having more chips at the end of all {max_rounds} rounds."
+  }
+}

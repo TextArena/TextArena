@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ou se Jwè {player_id} nan Stratego.\nObjektif ou se kaptire drapo adversè ou oswa elimine tout pyès deplasab yo.\nLame ou te mete pou ou sou bwod la, ki gen ladan drapo ou, bom, ak lòt pyès ki gen rang varye.\n\n### Enstriksyon Jwè\n1. **Reg sou deplasman:**\n   - Nan tou ou, ou kapab deplase yon sèl pyès pa yon sèl etap nan yon kare ajasan (nò, sid, gwòt, oswa dwat) ki deja okipe ak pyès ou.\n   - Egzanp: Yon pyès kapab deplase soti nan A1 bay B1 oswa A1 bay A2 si B1 ak A2 pa mete ak pyès jwè a.\n   - Si pyès seleksyone a se yon bom oswa yon drapo, li pa kapab deplase.\n2. **Batay:**\n   - Si ou deplase sou yon kare okipe pa yon pyès adversè, yon batay pral fèt:\n     - Pyès ki gen rang pi wo a genyen epi elimine pyès adversè a.\n     - Si rang yo menm, de pyès yo retire nan bwod la.\n     - **Ka espesyal:**\n       - Bom kapab elimine pi fò pyès atakant yo eksepte minè, ki kapab defize bom.\n       - Espyon kapab bat marshallye si espion an atake an premye, men pèdi devan tout lòt pyès.\n3. **Objektif estratejik:**\n   - Idantifye pyès adversè ou atravè deplasman yo ak batay yo.\n   - Pwoteje drapo ou pandan ou eseye kaptire drapo adversè ou.\n   - Itilize eskout estratejikman pou jwenn enfòmasyon sou pyès adversè ou ak atake pyès fèb yo.\n\n### Jan ou fè yon deplasman:\n1. Spesifye koòdonnée pyès ou vle deplase a ak destine li.\n2. Itilize fòm nan: [A0 B0], kote A0 se pozisyon sours, epi B0 se destine.\n   - Egzanp: Pou deplase yon pyès soti nan liy 0, kolòn 0 bay liy 1, kolòn 0, antre [A0 B0].\n3. Asire w ke destine a valab selon reg deplasman yo anlè.\n\n### Remak enpòtan:\n- Bwod la pral montre pyès ou ak pozisyon yo, pa egzanp MN, MS.\n- Bwod la pral montre pozisyon konnen pyès adversè ou san revele rang yo, pa egzanp ?.\n- Grit yo ak ~ se lak epi pa kapab deplase sou yo.\n- Kòm yon sijesyon, kòmanse jwè ou a pa deplase pyès ou ki nan liy devan yo pou jwenn enfòmasyon sou pyès adversè ou. Liy devan jwè 0 ak jwè 1 se liy D ak G respektivman.\n\nMen kounye a, bwod la nan eta sa a:\n"
+  },
+  "board": {
+    "current_board": "Bwod aktyèl:\n\n{board}\nDeplasman disponib: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Pa valab fòma aksyon. jwè {player_id} pa t 'antre yon mouvman nan fòma a [A0 B0] .",
+    "invalid_coordinates": "Fòma aksyon ki pa valab. Jwè {player_id} pat antre kowòdone valid yo.",
+    "not_own_piece": "Pa valab fòma aksyon. jwè {player_id} dwe deplase youn nan moso pwòp yo.",
+    "scout_through_pieces": "Pa valab fòma aksyon. jwè {player_id} pa ka deplase yon scout nan lòt moso yo.",
+    "scout_diagonal": "Pa valab fòma aksyon. Jwè {player_id} pa ka deplase yon scout diagonalman.",
+    "non_scout_multi_square": "Fòma aksyon ki pa valab. Pye, apa de scouts yo, ka deplase sèlman yon kare nan yon moman.",
+    "move_into_lake": "Pa valab fòma aksyon. Jwè {player_id} pa ka deplase nan lak la.",
+    "move_onto_own_piece": "Pa valab fòma aksyon. jwè {player_id} pa ka deplase sou moso pwòp yo.",
+    "move_bomb_or_flag": "Pa valab fòma aksyon. jwè {player_id} pa ka deplase yon bonm oswa drapo."
+  },
+  "game_action": {
+    "you_moved": "Ou te deplase pyès ou nan {source} bay {dest}.",
+    "opponent_moved": "Jwè {player_id} te deplase yon pyès nan {source} bay {dest}.",
+    "you_equal_ranks": "Ou te deplase pyès ou nan {source} bay {dest}. Pyès atakan an te {attacking_rank} epi destine pyès a te {target_rank}. Kom rang yo menm, de pyès yo pèdi.",
+    "opponent_equal_ranks": "Jwè {player_id} te deplase yon pyès nan {source} bay {dest}. Pyès atakan an te {attacking_rank} epi destine pyès a te {target_rank}. Kom rang yo menm, de pyès yo pèdi.",
+    "you_miner_defused": "Ou te deplase pyès ou nan {source} bay {dest}. Pyès atakan an te {attacking_rank} epi destine pyès a te {target_rank}. Kom minè kapab defize bom, ou genyen batay la.",
+    "opponent_miner_defused": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As miners can defuse bombs, you lost the battle.",
+    "you_bomb_lost": "Ou te deplase pyès ou nan {source} bay {dest}. Pyès atakan an te {attacking_rank} epi destine pyès a te {target_rank}. Kom atakan an pa yon minè, ou pèdi batay la.",
+    "opponent_bomb_won": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is not a miner, you won the battle.",
+    "you_spy_won": "Ou te deplase pyès ou nan {source} bay {dest}. Pyès atakan an te {attacking_rank} epi destine pyès a te {target_rank}. Kom atakan an se yon espion epi destine a se yon marshallye, ou genyen batay la.",
+    "opponent_spy_lost": "Jwè {player_id} te deplase yon pyès nan {source} bay {dest}. Pyès atakan an te {attacking_rank} epi destine pyès a te {target_rank}. Kom atakan an se yon espion epi destine a se yon marshallye, ou pèdi batay la.",
+    "you_higher_won": "Ou te deplase pyès ou nan {source} bay {dest}. Pyès atakan an te {attacking_rank} epi destine pyès a te {target_rank}. Kom atakan an se yon rang pi wo pase destine a, ou genyen batay la.",
+    "opponent_higher_lost": "Jwè {player_id} te deplase yon pyès nan {source} bay {dest}. Pyès atakan an te {attacking_rank} epi destine pyès a te {target_rank}. Kom atakan an se yon rang pi wo pase destine a, ou pèdi batay la.",
+    "you_lower_lost": "Ou te deplase pyès ou nan {source} bay {dest}. Pyès atakan an te {attacking_rank} epi destine pyès a te {target_rank}. Kom atakan an se yon rang pi ba pase destine a, ou pèdi batay la.",
+    "opponent_lower_won": "Jwè {player_id} te deplase yon pyès nan {source} bay {dest}. Pyès atakan an te {attacking_rank} epi destine pyès a te {target_rank}. Kom atakan an se yon rang pi ba pase destine a, ou genyen batay la."
+  },
+  "outcome": {
+    "flag_captured": "Jwè {player_id} te kaptire drapo opozan an!",
+    "no_movable_pieces": "Jwè {winner_id} genyen! Jwè {loser_id} pa gen pyès deplasab ankò."
+  }
+}
