@@ -11,11 +11,11 @@
     "{legal}": "A comma-separated list of the currently legal action tokens"
   },
   "player_prompt": {
-    "intro": "You are playing Le Truc, a 2-player trick game with a 40-card deck (rank high to low: 3 2 A K Q J 7 6 5 4).\nEach hand you get 3 cards and play up to three one-card tricks. The higher rank wins a trick regardless of suit; equal ranks tie ('spoilt'). Win the hand by taking two tricks, or by winning the first trick when the other ties; a spoilt trick counts for whoever won the first trick, and if all three tie no one scores.\nA hand is worth 1 point. On your turn you may '[raise]' (truc) to increase the stake: 1->2, then +2 for each further raise up to 12. Your opponent must '[accept]', '[fold]', or re-'[raise]'. A player who folds concedes the hand, and the raiser scores the stake from before that raise.\nActions: '[play <rank>]' (e.g. '[play 3]'), '[raise]', '[accept]', '[fold]'. First to 12 points wins the match."
+    "intro": "Anda sedang bermain Le Truc, permainan pusingan untuk 2 pemain dengan dek 40 kad (pangkat tinggi ke rendah: 3 2 A K Q J 7 6 5 4).\nSetiap tangan anda mendapat 3 kad dan bermain sehingga tiga pusingan satu kad. Pangkat lebih tinggi memenangi pusingan tanpa mengira daun; pangkat yang sama menghasilkan seri ('terbatal'). Menangi tangan dengan mengambil dua pusingan, atau dengan memenangi pusingan pertama apabila yang satu lagi seri; pusingan terbatal dikira untuk sesiapa yang memenangi pusingan pertama, dan jika ketiga-tiganya seri tiada sesiapa mendapat mata.\nSatu tangan bernilai 1 mata. Pada giliran anda, anda boleh '[raise]' (truc) untuk menaikkan pertaruhan: 1->2, kemudian +2 bagi setiap kenaikan seterusnya sehingga 12. Lawan anda mesti '[accept]', '[fold]' atau '[raise]' semula. Pemain yang melipat menyerahkan tangan itu, dan penaik memperoleh pertaruhan sebelum kenaikan tersebut.\nTindakan: '[play <rank>]' (cth. '[play 3]'), '[raise]', '[accept]', '[fold]'. Yang pertama mencapai 12 mata memenangi perlawanan."
   },
   "board": {
     "new_hand": "### Tangan baharu bernilai {points} mata\nKad anda: {cards}",
-    "valid_actions": "Legal now: {legal}."
+    "valid_actions": "Sah sekarang: {legal}."
   },
   "invalid_move": {
     "unrecognised": "Tindakan tidak dikenali.",
@@ -23,20 +23,20 @@
     "no_raise_to_accept": "Tiada kenaikan untuk diterima.",
     "cannot_fold": "Tidak boleh lipat sekarang.",
     "wrong_rank": "Anda tidak memegang pangkat itu (simbol daun diabaikan dalam input).",
-    "must_respond": "A raise is pending - respond with '[accept]', '[fold]', or re-'[raise]' before playing a card.",
-    "max_stake": "The hand is already worth the maximum (12); you cannot raise further."
+    "must_respond": "Ada kenaikan yang belum dijawab - jawab dengan '[accept]', '[fold]' atau '[raise]' semula sebelum bermain kad.",
+    "max_stake": "Tangan sudah bernilai maksimum (12); anda tidak boleh menaikkan lagi."
   },
   "action": {
-    "raise": "P{pid} menaikkan - tangan kini {points} mata. Lawan mesti '[accept]' atau '[fold]'.",
-    "accept": "P{pid} accepts - the hand is worth {points} pts.",
+    "raise": "P{pid} melaung truc - tangan kini bernilai {points} mata. Lawan mesti '[accept]', '[fold]' atau '[raise]' semula.",
+    "accept": "P{pid} menerima - tangan bernilai {points} mata.",
     "lead": "P{pid} membuka dengan {card}.",
     "play": "P{pid} bermain {card}. Pusingan kepada P{winner}.",
-    "spoilt": "P{pid} plays {card}. Ranks tie - the trick is spoilt."
+    "spoilt": "P{pid} bermain {card}. Pangkat seri - pusingan terbatal."
   },
   "outcome": {
     "folded": "Lawan melipat.",
-    "hand_won": "Hand won by P{winner} (+{points} pt(s)). Score - P0: {p0}, P1: {p1}.",
-    "void": "All three tricks spoilt - no score this hand. Score - P0: {p0}, P1: {p1}.",
+    "hand_won": "Tangan dimenangi oleh P{winner} (+{points} mata). Skor - P0: {p0}, P1: {p1}.",
+    "void": "Ketiga-tiga pusingan terbatal - tiada mata untuk tangan ini. Skor - P0: {p0}, P1: {p1}.",
     "reached_twelve": "Mencapai 12 mata."
   }
 }

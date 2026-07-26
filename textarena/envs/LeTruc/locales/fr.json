@@ -11,11 +11,11 @@
     "{legal}": "A comma-separated list of the currently legal action tokens"
   },
   "player_prompt": {
-    "intro": "You are playing Le Truc, a 2-player trick game with a 40-card deck (rank high to low: 3 2 A K Q J 7 6 5 4).\nEach hand you get 3 cards and play up to three one-card tricks. The higher rank wins a trick regardless of suit; equal ranks tie ('spoilt'). Win the hand by taking two tricks, or by winning the first trick when the other ties; a spoilt trick counts for whoever won the first trick, and if all three tie no one scores.\nA hand is worth 1 point. On your turn you may '[raise]' (truc) to increase the stake: 1->2, then +2 for each further raise up to 12. Your opponent must '[accept]', '[fold]', or re-'[raise]'. A player who folds concedes the hand, and the raiser scores the stake from before that raise.\nActions: '[play <rank>]' (e.g. '[play 3]'), '[raise]', '[accept]', '[fold]'. First to 12 points wins the match."
+    "intro": "Vous jouez à Le Truc, un jeu de plis pour 2 joueurs avec un jeu de 40 cartes (rang du plus fort au plus faible : 3 2 A K Q J 7 6 5 4).\nÀ chaque main, vous recevez 3 cartes et jouez jusqu'à trois plis d'une carte. Le rang le plus élevé remporte le pli quelle que soit la couleur ; des rangs égaux font égalité ('nul'). Gagnez la main en prenant deux plis, ou en remportant le premier pli lorsque l'autre est nul ; un pli nul compte pour celui qui a gagné le premier pli, et si les trois sont nuls personne ne marque.\nUne main vaut 1 point. À votre tour, vous pouvez '[raise]' (truc) pour augmenter l'enjeu : 1->2, puis +2 pour chaque relance suivante jusqu'à 12. Votre adversaire doit '[accept]', '[fold]' ou de nouveau '[raise]'. Le joueur qui se couche concède la main, et le relanceur marque l'enjeu d'avant cette relance.\nActions : '[play <rank>]' (p. ex. '[play 3]'), '[raise]', '[accept]', '[fold]'. Le premier à 12 points gagne la partie."
   },
   "board": {
     "new_hand": "### Nouvelle main valant {points} pt(s)\nVos cartes : {cards}",
-    "valid_actions": "Legal now: {legal}."
+    "valid_actions": "Autorisées maintenant : {legal}."
   },
   "invalid_move": {
     "unrecognised": "Action non reconnue.",
@@ -23,20 +23,20 @@
     "no_raise_to_accept": "Aucune relance à accepter.",
     "cannot_fold": "Impossible de se coucher maintenant.",
     "wrong_rank": "Vous ne possédez pas ce rang (les couleurs sont ignorées en entrée).",
-    "must_respond": "A raise is pending - respond with '[accept]', '[fold]', or re-'[raise]' before playing a card.",
-    "max_stake": "The hand is already worth the maximum (12); you cannot raise further."
+    "must_respond": "Une relance est en attente - répondez par '[accept]', '[fold]' ou de nouveau '[raise]' avant de jouer une carte.",
+    "max_stake": "La main vaut déjà le maximum (12) ; vous ne pouvez plus relancer."
   },
   "action": {
-    "raise": "P{pid} relance - la main vaut maintenant {points} pts. L'adversaire doit '[accept]' ou '[fold]'.",
-    "accept": "P{pid} accepts - the hand is worth {points} pts.",
+    "raise": "P{pid} annonce truc - la main vaut maintenant {points} pt(s). L'adversaire doit '[accept]', '[fold]' ou de nouveau '[raise]'.",
+    "accept": "P{pid} accepte - la main vaut {points} pt(s).",
     "lead": "P{pid} entame avec {card}.",
     "play": "P{pid} joue {card}. Pli pour P{winner}.",
-    "spoilt": "P{pid} plays {card}. Ranks tie - the trick is spoilt."
+    "spoilt": "P{pid} joue {card}. Les rangs sont à égalité - le pli est nul."
   },
   "outcome": {
     "folded": "L'adversaire s'est couché.",
-    "hand_won": "Hand won by P{winner} (+{points} pt(s)). Score - P0: {p0}, P1: {p1}.",
-    "void": "All three tricks spoilt - no score this hand. Score - P0: {p0}, P1: {p1}.",
+    "hand_won": "Main gagnée par P{winner} (+{points} pt(s)). Score - P0: {p0}, P1: {p1}.",
+    "void": "Les trois plis nuls - aucun point cette main. Score - P0: {p0}, P1: {p1}.",
     "reached_twelve": "12 points atteints."
   }
 }
