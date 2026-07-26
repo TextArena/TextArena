@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\nMove format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "Deste: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format divê e2e4 (ji,to koordinatên) be.",
+    "no_piece": "No {side} piece li ser {coord}.",
+    "identical": "Çavkaniya û armanca wan yek e.",
+    "not_straight_or_diagonal": "Divê tevger rast be an jî diagonal.",
+    "wrong_distance": "Divê dûrî wekhev bi parçeyên li rêzê.",
+    "enemy_blocks": "Tişta dijmin rê digire.",
+    "destination_own": "Destûra ku bi xwe ji aliyê yekî ve hatiye dagirkirin."
+  },
+  "game_action": {
+    "moved": "Player {player_id} çû {from} -> {to}",
+    "captured_suffix": "Player {player_id} çû {from} -> {to} û dijberêk girt."
+  },
+  "outcome": {
+    "win": "Hemû perçe girêdayî ne.",
+    "draw_no_capture": "60 tevger bê ku kesek bigire.",
+    "draw_repetition": "Cihê sê caran dubare kirin."
+  }
+}

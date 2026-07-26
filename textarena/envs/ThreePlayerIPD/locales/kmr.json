@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Tu Leyîstikvan {player_id}î yî di Lêpirsîna Şêwirmendiyê ya 3-leyîstikvanî. Pêşbirk {num_rounds} gerran didome.\nRêzika gerran:\n• {conv_rounds} gerrên axaftinê yên azad\n• 1 gerra biryara danê - tokenekê ji bo her dijberê bêşikê: '[<opp-id> cooperate]' an '[<opp-id> defect]' (aniku '[1 defect] [2 cooperate]'; sifir 'hevkariyê' ye). \nMatrîksa mêtirsiya parezî (li ser her coteyê bêrêzê tê bicîhanîn):\n  - Herdu hevkarî dikin  ->  {reward}\n  - Herdu şêwirmendî dikin     ->  {punishment}\n  - Tu şêwirmendî dikî, ew hevkarî dikin -> {temptation}\n  - Tu hevkarî dikî, ew şêwirmendî dikin -> {sucker}\nLeyîstikvan (an leyîstikvan) bi pûvana herî bilind di dawîya hemû gerran de dibin serkeftî."
+  },
+  "round": {
+    "start": "─── Destpêka Gerra {round} ───\tTu dikarî bêyî rêzê axaftinê bikî di gerrên paşîn {conv_rounds} de.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Encam:",
+    "pair_line": "{observation}\n\t Player {i} vs Player {j} chose to {choice_i} and {choice_j} respectively (Player {i} gained {gain_i}, Player {j} gained {gain_j})",
+    "scores_open": "{observation} -> Notên niha: ",
+    "score_first": "{observation}Leyîstikvan {player_id} ({score})",
+    "score_next": "{observation}; Leyîstikvan {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Pûванên dawî: {scores}.  Komanên rêzê (xirab→baş): {groups}"
+  }
+}

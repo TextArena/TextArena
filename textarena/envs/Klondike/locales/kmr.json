@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Hûn Klondike Solitaire dilîzin. Armancê we ev e ku hemû kartan ber bi pileya binê ve bibe.\n\nReglûkên Pîlê:\n- Pileyên binê (F1-F4): Ji Ace heta Keyê di nav suit de pêşve bike\n- Pileyên tableau (T1-T7): Di nav rengên cuda de (sor li ser reş, reş li ser sor) paşve bike\n- Stock: Kartan ji bo pileya waste bike\n- Waste (W): Kartê li serê pileyê vekirî ye\n\nFerman:\n- 'draw' - Kartan ji stokê ber bi waste ve bike\n- 'move <source> <destination> [count]' - Kartan di nav pileyan de bibe\n  Mînak: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Jimara kartan jî 'hemû' be, ku dê hewl bide ku hemû kartên vekirî bibin.\n- 'forfeit' - Pîlê bi awayekî fest bikê û pûana xwe ya niha bistîne\n- Navên pileyan: W (waste), F1-F4 (binê), T1-T7 (tableau)\n\nHûn dikarin çend çalakî di yek gera de bicîh bikin, bi awayekî ku wan bi komayê veqetîne:\n  Mînak: 'draw, move W T1, move T2 F1'\n\nTenê Keyê dikare li ser pileya tableau ya vala were rûniştin.\nÇalakiyan di rêz de têne bicîh kirin - heke yekî bi şêl be, çalakiyên mayî bi şêl dibin.\n'Forfeit' bikar bînin, heke hûn bawer bikin ku pîl nikare were bistîn."
+  },
+  "format_error": {
+    "no_brackets": "Formatê çalakiyê neheq e. Çalakî divê di nav parên de be.",
+    "no_closing_bracket": "format action invalid. winda bracket girtina ']'",
+    "empty_command": "Empty command. Type 'draw' an jî 'move <source> <destination> [count] \"",
+    "empty_action": "Çalakiya vala",
+    "move_needs_args": "Fermana Move pêwîstî bi çavkaniyê û armancê heye. Bikaranîn: 'move <source> <destination> [count]'",
+    "count_positive": "Count divê erênî be an 'hemû'",
+    "count_invalid": "Hejmara Neçalak. hejmarek an 'hemû' bikar bînin",
+    "unknown_command": "Fermanê nemabûyî '{cmd}'. 'draw', 'move <source> <destination> [count]', an 'forfeit' bikar bîne",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Berî têkçûnê, çalakiyên {n} hatine kirin.",
+    "failed": "Action {n} failed: {msg}"
+  },
+  "move_result": {
+    "drew": "Ji kartên stûyê re cardin hilweşandin.",
+    "cannot_draw": "Nikare bikişîne. Hem stok û hem jî ziyanê vala ne.",
+    "invalid_pile": "Navê pile neheq e. W, F1-F4, an T1-T7 bikar bînin",
+    "foundation_one_card": "Tenê dikare 1 kart ji bo bingehîn biçe.",
+    "waste_to_foundation_ok": "Karta ji bermahiyê veguhestin bingehê F{dst}",
+    "waste_to_foundation_bad": "Nikare kartên westiyan bişîne ser wê pileya bingehîn",
+    "tableau_to_foundation_ok": "Kartê ji tableau T{src} ber bi binê F{dst} ve hat guhertin",
+    "tableau_to_foundation_bad": "Nikare kartên tabloyê bişîne ser wê pileya bingehîn",
+    "foundation_to_foundation": "Nikare ji bingehê ve bibe bingehek din.",
+    "waste_to_tableau_one_card": "Tenê dikare 1 kart ji waste bo tableau bihelîne.",
+    "waste_to_tableau_ok": "Karta ji berfê veguhestin tabloya T{dst}",
+    "waste_to_tableau_bad": "Nikare kartên westiyan li ser wê pileya tabloyê de bixe",
+    "no_face_up": "Ti kartên rûyê xweş nînin ku werin veguhestin.",
+    "tableau_to_tableau_ok": "{count} kartan ji tableau T{src} ber bi T{dst} ve hat guhertin",
+    "tableau_to_tableau_bad": "Nikare {count} kartan ji T{src} ber bi T{dst} ve bibe",
+    "foundation_to_tableau_one_card": "Tenê dikare 1 kart ji bingehîn ber bi tabloyê ve bibe.",
+    "foundation_empty": "Saziya F{src} vala ye.",
+    "foundation_to_tableau_ok": "Kartê ji binê F{src} ber bi tableau T{dst} ve hat guhertin",
+    "foundation_to_tableau_bad": "Nikare karta bingehîn li tabloya T{dst}ê bixe.",
+    "to_waste_or_stock": "Nikare ji bo çopê an stokê were veguhestin."
+  },
+  "outcome": {
+    "forfeit": "Lîstik ji dest ve hat. Nîqaşa dawî: {score} kartên di bingeh de.",
+    "won": "Te qezenca Klondike Solitaire kir!",
+    "turn_limit": "Pîl bi dawî bû! Hûn gihîştin asta bilin a {max_turns} gera. Pûan: {score} kartan li ser binê"
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Dor: {turn}/{max_turns}",
+    "stock": "Stok: {stock} kartên",
+    "waste": "Berhemên (W): {waste}",
+    "foundations_header": "Foundations:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Tablo:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

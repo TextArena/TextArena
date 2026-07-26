@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Te di lîsta Golf (Card Game) de dilîze - Player {player_id}.\nArmanç: Pûanê herî kêm di vê gêranê de bigire. Heke stûnên wekhev hev hene, wek 0 tên hesibandin.\nNirxên cardan: A=1, 2-10=nirxê wê, J/Q=10, K=0\n\nÇalakiyan (bikarîne çarçoveyên rast):\n- '[draw]' - Card wergirin ji dekê\n- '[take]' - Card wergirin ji kûpêya vebirinê\n- '[swap X Y]' - Cardê wergirtî bi pozîsyona X (rêz) Y (stûn) îbadel bike\n- '[discard]' - Cardê wergirtî vebire"
+  },
+  "board": {
+    "drew": "Te cardêk wergirt: {card}\nNiha divê tu [swap X Y] an [discard] bikî",
+    "took": "Te cardêk wergirt: {card} ji kûpêya vebirinê\nDivê tu bi wê re [swap X Y] bikî (nakevê vê cardê vebirin)",
+    "peeked": "Te li pozîsyona ({row},{col}) cardêk temaşe kir: {card}",
+    "turn_view": "Your hand:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Ti kesî tuneye."
+  },
+  "options": {
+    "final_turns": "Gêranên dawî! Hilbijartinên te: [draw], [take], [peek X Y]",
+    "draw": "Hilbijartinên te: [draw], [take]",
+    "must_swap": "Divê hûn: [swap X Y] (nekarin kartên ji pileya hilweşandinê hilweşin)",
+    "swap_or_discard": "Divê tu: [swap X Y] an [discard] bikî"
+  },
+  "hand": {
+    "no_cards": "Ne kart in.",
+    "header": "Kol: 1 2 3",
+    "row": "Rêz {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} {new} bi {old} li pozîsyona ({row},{col}) îbadel kir",
+    "discarded": "Player {pid} discarded {card}"
+  },
+  "message": {
+    "deck_empty": "Qada vala ye! Lîstik di cih de bi dawî dibe.",
+    "knocked": "Lîstikvan {pid} têk çû! Her lîstikvana din yek guherîneke zêdetir heye.",
+    "final_round": "Player {pid} {reason}! Her yek ji yên din yek gêranek din werdigire"
+  },
+  "reason": {
+    "all_revealed": "has all cards revealed"
+  },
+  "invalid": {
+    "wrong_action": "Use exactly ONE bracketed action: [draw], [take], [swap X Y], [discard], [knock], or [peek X Y]",
+    "discard_empty": "The discard pile is empty!",
+    "must_draw_first": "Divê tu yekem [draw], [take], [knock], an [peek X Y] bikî",
+    "cannot_discard_taken": "Tu nikarî kartek ji pileya hilweşandinê bistîne. Divê tu wê biguherînî.",
+    "have_drawn_card": "Te cardêk wergirtî. Divê tu [swap X Y] an [discard] bikî",
+    "need_drawn_swap": "Ji bo guhertinê kartek laşkirî pêwîst e.",
+    "need_drawn_discard": "You need a drawn card to discard.",
+    "out_of_bounds": "Pozîsyon derveyî sinor. Bikarîne rêz 1-{max_row}, stûn 1-{max_col}",
+    "knock_with_card": "You cannot knock with a drawn card. Complete your turn first.",
+    "already_knocked": "Kesekî berê jî vê rûndeyê xist.",
+    "already_revealed": "Ew kart ji berê ve hatiye eşkerekirin!"
+  },
+  "summary": {
+    "full": "Dawî! Player {winner} bi pûanê {score} xalê sereke distîne!\n\nPûanên Dawî:\n{scores}",
+    "line": "Player {pid}: {score} points\n"
+  },
+  "board_str": {
+    "title": "=== GOLF GAME ===",
+    "discard": "Discard pile: {card}",
+    "knocked": "Lîstikvanê {pid} ket!",
+    "player_header": "Player {pid} (Score: {score}):"
+  }
+}

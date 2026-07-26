@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Hûn Lîstikvan {player_id} li Strategoyê ye.\nArmanca we ya ku pîsaya dijmin an Flag an hemû pîsên birînkirinê ji holê rakin.\nLeşkeriya we ji bo we li ser taqetê hatiye rêkxin, di nav de Flag, Bomb, û pîsên din ên rûteyên cuda.\n\n### Rêbazên Lîstikê\n1. **Rêbazên Birînê:**\n   - Di gera we de, hûn dikarin pîsekê bi pêncîkê ber bi çarçoveyekî cîran (jor, jêr, çep, an jî rast) ku berê bi pîsên we hatiye dagirkirin, bibe.\n   - Mînak: Pîsek dikare ji A1 ber bi B1 an A1 ber bi A2 here, heke B1 û A2 bi pîsên xwe hatine rêkxin.\n   - Heke pîsaya hilbijartî Bomb an Flag be, ew nikare were birîn.\n2. **Şer:**\n   - Heke hûn ber bi çarçoveyekî dagirkerî bi pîsaya dijmin, wê gavê şer rû dide:\n     - Pîsaya bi rûteya bilind dibîne û pîsaya dijminê dûr dixe.\n     - Heke rûteyên wan wek hev bin, her du pîsên winda dibin.\n     - **Halên Taybet:**\n       - Bombeyên pîsên êrîşker ên gelemperî dûr dixin, lê mineyên bombeyan bêbandor dikin.\n       - Spî dikarin marşalê bikujin, heke spî yekem êrîş bike, lê winda dibin ji pîsên din.\n3. **Armançên Stratejîk:**\n   - Pîsên dijminê bi rêya birîn û şerê nas bikin.\n   - Flagê xwe biparêzîn, hewl dabîn ku Flagê dijminê bigirin.\n   - Scoutan bi awayekî stratejîk bikar bînin, agahdarî li ser pîsên dijminê bikin û pîsên nizm bişkînin.\n\n### Çawa Birînê Bikin:\n1. Koordînatanên pîsê ku hûn dixwazin bibirin û cihê wê binivîsîn.\n2. Bi formatê: [A0 B0], ku A0 cihê çavkanî ye, û B0 cihê dûrketinê ye.\n   - Mînak: Heke hûn pîsekê ji rêz 0, stûn 0 ber bi rêz 1, stûn 0 bibînin, [A0 B0] binivîsîn.\n3. Cihê dûrketinê vala be, li gor rêbazên birînê.\n\n### Agahdariyên Girîng:\n- Taqeta heyî pîsên we û cihên wan nîşan dide, mînak MN, MS.\n- Taqeta heyî cihên nasî yên pîsên dijminê jî nîşan dide, bê ku rûteyên wan nîşan bide, mînak ?.\n- Torên bi ~ nîşanî golên ku nikarin were birîn in.\n- Wekî pêşniyar, lîstika xwe bi birîna pîsên xwe yên li rêzên pêşîn bidêne destpêkirin, ku agahdarî li ser pîsên dijminê bikin. Rêzên pêşîn ên lîstikvan 0 û lîstikvan 1, rêz D û G ne."
+  },
+  "board": {
+    "current_board": "Taqeta Heyî\n\n{board}\nBirinîn Berfireh: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatê çalakîyê neheq e. Lîstikvan {player_id} di formatê de tevgerek nedaye [A0 B0] .",
+    "invalid_coordinates": "Formatê çalakiyê nepejirandî. Lîstikvan {player_id} koordinatên rast nedan nav kirin.",
+    "not_own_piece": "Formatê çalakiya neheq. Lîstikvan {player_id} divê yek ji parçeyên xwe bişîne.",
+    "scout_through_pieces": "Formatê çalakiyê nepejirandî. Lîstikvan {player_id} nikare scout bi nav parçeyên din ve derbas bike.",
+    "scout_diagonal": "Formatê çalakiyê nepejirandî. Lîstikvan {player_id} nikare scoutek diagonal bişîne.",
+    "non_scout_multi_square": "Formatê çalakiyê neheq e. Piçik, ji bilî scouts, dikarin tenê yek çargoşe di carekê de bicih bînin.",
+    "move_into_lake": "Formatê çalakiyê nepejirandî. Lîstikvan {player_id} nikare bikeve nav golê.",
+    "move_onto_own_piece": "Formatê çalakiya nepejirandî. Lîstikvan {player_id} nikare li ser parçeyên xwe biçe.",
+    "move_bomb_or_flag": "Formatê çalakiyê nepejirandî. Lîstikvan {player_id} nikare bombe an ala veguherîne."
+  },
+  "game_action": {
+    "you_moved": "Te perçeyê xwe ji {source} veguhastin bo {dest}.",
+    "opponent_moved": "Lîstikvan {player_id} pîsek ji {source} ber bi {dest} birê.",
+    "you_equal_ranks": "Hûn pîsaya xwe ji {source} ber bi {dest} birê. Pîsaya êrîşker {attacking_rank} bû û pîsaya dûrketinê {target_rank} bû. Ji ber ku rûteyên wan wek hev in, her du pîsên winda bûn.",
+    "opponent_equal_ranks": "Lîstikvan {player_id} pîsek ji {source} ber bi {dest} birê. Pîsaya êrîşker {attacking_rank} bû û pîsaya dûrketinê {target_rank} bû. Ji ber ku rûteyên wan wek hev in, her du pîsên winda bûn.",
+    "you_miner_defused": "Hûn pîsaya xwe ji {source} ber bi {dest} birê. Pîsaya êrîşker {attacking_rank} bû û pîsaya dûrketinê {target_rank} bû. Ji ber ku mineyên dikarin bombeyan bêbandor bikin, hûn şerê bazî kir.",
+    "opponent_miner_defused": "Lîstikvan {player_id} pîsek ji {source} ber bi {dest} birê. Pîsaya êrîşker {attacking_rank} bû û pîsaya dûrketinê {target_rank} bû. Ji ber ku mineyên dikarin bombeyan bêbandor bikin, hûn şerê winda kir.",
+    "you_bomb_lost": "Hûn pîsaya xwe ji {source} ber bi {dest} birê. Pîsaya êrîşker {attacking_rank} bû û pîsaya dûrketinê {target_rank} bû. Ji ber ku êrîşker ne mineyek e, hûn şerê winda kir.",
+    "opponent_bomb_won": "Lîstikvan {player_id} pîsek ji {source} ber bi {dest} birê. Pîsaya êrîşker {attacking_rank} bû û pîsaya dûrketinê {target_rank} bû. Ji ber ku êrîşker ne mineyek e, hûn şerê bazî kir.",
+    "you_spy_won": "Hûn pîsaya xwe ji {source} ber bi {dest} birê. Pîsaya êrîşker {attacking_rank} bû û pîsaya dûrketinê {target_rank} bû. Ji ber ku êrîşker spîyek e û dûrketin marşal e, hûn şerê bazî kir.",
+    "opponent_spy_lost": "Lîstikvan {player_id} pîsek ji {source} ber bi {dest} birê. Pîsaya êrîşker {attacking_rank} bû û pîsaya dûrketinê {target_rank} bû. Ji ber ku êrîşker spîyek e û dûrketin marşal e, hûn şerê winda kir.",
+    "you_higher_won": "Hûn pîsaya xwe ji {source} ber bi {dest} birê. Pîsaya êrîşker {attacking_rank} bû û pîsaya dûrketinê {target_rank} bû. Ji ber ku êrîşker rûteyek bilindtir e ji dûrketinê, hûn şerê bazî kir.",
+    "opponent_higher_lost": "Lîstikvan {player_id} pîsek ji {source} ber bi {dest} birê. Pîsaya êrîşker {attacking_rank} bû û pîsaya dûrketinê {target_rank} bû. Ji ber ku êrîşker rûteyek bilindtir e ji dûrketinê, hûn şerê winda kir.",
+    "you_lower_lost": "Hûn pîsaya xwe ji {source} ber bi {dest} birê. Pîsaya êrîşker {attacking_rank} bû û pîsaya dûrketinê {target_rank} bû. Ji ber ku êrîşker rûteyek nizmtir e ji dûrketinê, hûn şerê winda kir.",
+    "opponent_lower_won": "Player {player_id} has moved a piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a lower rank than the destination, you won the battle."
+  },
+  "outcome": {
+    "flag_captured": "Lîstikvan {player_id} ala dijmin girt!",
+    "no_movable_pieces": "Lîstikvan {winner_id} bi ser ket! Lîstikvan {loser_id} pîsên birînkirinê nîn e."
+  }
+}

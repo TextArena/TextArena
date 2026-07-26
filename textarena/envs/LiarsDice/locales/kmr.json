@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Tu yî Yar {player_id} î yê di bernameya Liar's Dice ya {num_players}-yaran de.\nRêzik: \n- Di gera te de, tu dikarî ya:\n  1) Pêşniyarekî nû bikî bi hejmara zêdetir an rûyê zêdetir (an her du) ji pêşniyara niha; mînak '[Bid: 3, 4]',\n  2) Bang bikî pêşniyara dawî bi nivîsîna '[Call]'.\n\nHeke tu bang bikî:\n  - Heke hejmarê rastîn ê wê rûyê di nav diceyan de kêm be ji pêşniyara niha, pêşniyarkarê dawî diceyekî dizî.\n  - Na, bangkêr diceyekî dizî.\nYarê ku digihîje 0 dice tê rakirin. Yarê dawî yê mayî distîne."
+  },
+  "board": {
+    "per_player": "\tYar {p}: {d}",
+    "new_round": "\nNew round - Remaining dice: {dice_summary}\nYour current Dice are: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Yar {current_player_id} bang dike! Hejmarê rastîn ê rûyê {face_value} {count} e, ku kêm e ji {quantity}.\nYar {loser_id} (yê dawî yê pêşniyarkêr) diceyekî dizî.",
+    "caller_loses": "Yar {current_player_id} bang dike! Hejmarê rastîn ê rûyê {face_value} {count} e, ku >= {quantity} e.\nYar {loser_id} (yê bangkêr) diceyekî dizî."
+  },
+  "action": {
+    "bid_announce": "Yar {player_id} pêşniyar dike {quantity} ya rûyê {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Bi bê pêşkêşkirinê telefon hate kirin.",
+    "invalid_bid": "Pêşkêşkirina bêqîmet: {reason}",
+    "not_recognized": "Çalakî ne hatiye naskirin wek '[Bid: X, Y]' an jî '[Call]' yê dilî. Çalakiya pêşkêş: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nû ya hejmara {new_quantity} kêm e ji ya kêmtir a niha {current_quantity}.",
+    "face_lower": "Nû ya rûyê {new_face_value} kêm e ji ya kêmtir a niha {current_face_value}.",
+    "identical": "Pêşkêşkirina bi pêşkêşî ya niha re eynî ye.",
+    "face_range": "Nirxa rûyê divê di navbera 1 û 6 be."
+  },
+  "message": {
+    "eliminated_invalid": "Lîstikvan {player_id} bi tevgereke neqanûnî hat derxistin."
+  },
+  "outcome": {
+    "win": "Yar {winner} distîne! Rêzîkirina dawî: {final_ranking}"
+  }
+}
