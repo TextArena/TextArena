@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "You are {role} in Colonel Blotto.\nYour goal is to win more rounds than your opponent.\nOn each round, allocate exactly {num_total_units} units across fields {field_names}.\nThe player who allocates more units to a field wins that field, and the player who wins more fields wins the round.\nFor example, '[A7 B7 C6]' allocates 7 units to A, 7 to B, and 6 to C.",
+    "commander_alpha": "Commander Alpha, ye aye!",
+    "commander_beta": "Commander Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRounds Won - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRiɛl {current_round}\nCommander Alpha cɔl: {p0_allocations}\nCommander Beta cɔl: {p1_allocations}\n",
+    "winner_alpha": "{message}Winner: Commander Alpha (kë ye cɔl \"Alpha\")",
+    "winner_beta": "{message}Winner: Commander Beta (kë ye cɔl \"Beta\")",
+    "tie": "{message}Tie ye !"
+  },
+  "invalid_move": {
+    "wrong_format": "Acie path. Luɔ̈i: A:5, B:10, C:5",
+    "invalid_field": "Acie path. Kä puɔth: {field_names}",
+    "wrong_allocation_value": "All allocations must be non-negative integers.",
+    "incorrect_total_units": "Yin ë bë kekë cɔl ë baai {num_total_units} wëëu. Cɔl ë bɛn: {current_sum}",
+    "good_allocations": "Aŋuɛ̈ɛ̈n ba ke tek yiic."
+  },
+  "outcome": {
+    "winner_alpha": "Commander Alpha wins {score_0}-{score_1} after {num_rounds} rounds!",
+    "winner_beta": "Commander Beta wins {score_1}-{score_0} after {num_rounds} rounds!",
+    "draw": "Lɔɔk aŋic bë nyuɔɔth ë {score_0}-{score_1} kɛkɛ ë riɛl {num_rounds}!",
+    "early_winner_alpha": "Commander Alpha wins {scores_0}-{scores_1} (majority achieved)!",
+    "early_winner_beta": "Commander Beta wins {scores_1}-{scores_0} (majority achieved)!"
+  }
+}

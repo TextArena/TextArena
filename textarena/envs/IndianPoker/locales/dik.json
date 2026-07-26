@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a game of Indian Poker.\n- 52-card deck; you see only the opponent's card.\n- Ante {ante} chip(s) each round, {max_rounds} round(s) total.\n- Valid moves: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X is a positive integer <= your chip count.)\n- Highest hidden card wins the pot at showdown.\n"
+  },
+  "round": {
+    "announce": "### Run {current_round}/{max_rounds}\nKɔc kuɔp ee: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Riɛɛc ku jɔl yic, e.g. '[check]', '[bet 2]', '[call]', '[raise 3]', '[fold]'.",
+    "cannot_check": "Cannot [check] - you are facing a bet.",
+    "amount_min": "Bet/Raise bëi adhil bï ya ≥ 1.",
+    "cannot_bet": "Kɛn aal [bet] - kɛn aac [call] / [raise] / [fold].",
+    "nothing_to_call": "Acïn kë bï yïn cɔɔl; alëu ba [check] looi.",
+    "no_bet_to_raise": "Luɔ̈i [bet X] ba liep; acïn kë bï juak.",
+    "insufficient": "Insufficient chips for that action."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Kä lëu ba looi: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Player {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Player {player_id} folded.",
+    "showdown_win": "Showdown: {card_win} beats {card_lose}.",
+    "showdown_tie": "Tie: Both {card}. Pot split  each receives {split}."
+  },
+  "outcome": {
+    "p0_wins": "Player 0 wins ({bank0} > {bank1})",
+    "p1_wins": "Player 1 wins ({bank1} > {bank0})",
+    "draw": "Equal chips after all rounds"
+  }
+}
