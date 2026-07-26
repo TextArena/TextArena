@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Multilingual regression + smoke test for localized envs.
 
-For every game in game_scenarios.GAMES:
+For every game in game_scenarios.GAMES that ships a `locales/` folder (games
+without one are not multilingual targets and are skipped, matching
+scripts/check_locales.py):
   * GOLDEN IDENTITY - the English transcript must byte-match the committed
     goldens/<Game>.en.json (proves later edits don't silently change output).
   * CROSS-LINGUAL SMOKE - the game runs to completion under a mixed-language
@@ -34,6 +36,18 @@ def golden_path(game):
     return os.path.join(GOLDEN_DIR, f"{game}.en.json")
 
 
+def has_locales(game):
+    """A game is a multilingual target iff it ships a `locales/` folder.
+
+    Mirrors scripts/check_locales.py, which only validates games with a
+    locales/ folder. Games without one (e.g. de-scoped from the multilingual
+    effort, their env.py reverted to a monolingual state) are not localized and
+    are skipped here too, so this suite stays consistent with the locale gate
+    instead of crashing on an env that never opted in.
+    """
+    return os.path.isdir(os.path.join(REPO_ROOT, "textarena", "envs", game, "locales"))
+
+
 def langs_for(game):
     """Languages to smoke-test for a game.
 
@@ -62,6 +76,9 @@ def _selected(games):
 def update_goldens(games=None):
     os.makedirs(GOLDEN_DIR, exist_ok=True)
     for game in _selected(games):
+        if not has_locales(game):
+            print(f"SKIP {game}: no locales/ folder (not a multilingual target)")
+            continue
         text = canonical(run_game(GAMES[game], "en"))
         with open(golden_path(game), "w", encoding="utf-8") as f:
             f.write(text + "\n")
@@ -70,7 +87,12 @@ def update_goldens(games=None):
 
 def verify(games=None):
     failures = 0
+    skipped = 0
     for game in _selected(games):
+        if not has_locales(game):
+            print(f"SKIP {game}: no locales/ folder (not a multilingual target)")
+            skipped += 1
+            continue
         spec = GAMES[game]
         # 1. English golden identity
         path = golden_path(game)
@@ -114,7 +136,9 @@ def verify(games=None):
     if failures:
         print(f"FAILED: {failures} check(s) failed.")
         return 1
-    print(f"PASSED: {len(_selected(games))} game(s).")
+    tested = len(_selected(games)) - skipped
+    suffix = f" ({skipped} skipped: no locales/)" if skipped else ""
+    print(f"PASSED: {tested} game(s){suffix}.")
     return 0
 
 
