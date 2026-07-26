@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "أنت تلعب لعبة العد التنازلي للأرقام!\nالهدف: جمع الأرقام باستخدام + و - و * و / للوصول إلى الهدف.\nصيغة الإجراء: [i j op] حيث i و j هي الفهارس و op هي العملية.\nالمثال: [0 2 *] يضرب الرقم في الفهرس 0 مع الرقم في الفهرس 2.\nالdivision يجب أن تؤدي إلى أرقام كاملة فقط."
+  },
+  "board": {
+    "header": "الهدف: {target}\n\nالأرقام المتاحة:\n{numbers}",
+    "best": "{observation}\n\nالأفضل حتى الآن: {best_value} (المسافة: {distance})\nأفضل تعبير: {best_expression}",
+    "history": "{observation}\n\nMove history:\n{moves}",
+    "progress": "{observation}\nدرجة التقدم الحالية: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "مؤشرات مش صالحة. لازم تكون مختلفة وفي حدود 0-{max_index}",
+    "invalid_operation": "عملية مش صالحة (قسمة على الصفر أو نتيجة غير عدد صحيح)"
+  },
+  "outcome": {
+    "win": "ممتاز! لقيت الهدف المحدد: {target}",
+    "no_moves": "لا توجد حركات إضافية. أفضل نتيجة: {best_value} (الهدف: {target})",
+    "turn_limit": "تم الوصول إلى حد الدورات. أفضل نتيجة: {best_value} (الهدف: {target})"
+  }
+}

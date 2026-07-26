@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في لعبة النيم.\nهدفك هو أخذ الكائن المتبقي الأخير.\nفي كل دور، اختر كومًا واحدًا فقط وأزل كائنًا أو أكثر منه.\nاستخدم الصيغة '[pile quantity]'، حيث الكوم هو فهرس الكوم وكمية الكائنات التي تريد إزالتها.\nعلى سبيل المثال، '[0 3]' يزيل 3 كائنات من الكوم 0."
+  },
+  "state": {
+    "current_pile": "كومة التيار: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "ما اتوجدش شكل نقل صالح. استخدم \"[pile quantity]\".",
+    "correct_format_wrong_fields": "اللاعب {player_id}، إجراء غير صحيح. العمود {col} خارج الحدود.",
+    "out_of_range": "مؤشر كومة {pile_index} خارج النطاق.",
+    "non_positive": "لازم يزيل حاجة واحدة على الأقل.",
+    "exceeds_pile": "لا يمكن إزالة {quantity} من الكوم {pile_index} (متبقي {pile_count} فقط)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "اللاعب {player_id} أخد آخر كائن (((s)!"
+  }
+}
