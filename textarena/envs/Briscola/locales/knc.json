@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Briscola kadi woni! Trump suit: {trump_suit} (Trump kadi: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Ki woni kadi Briscola - Ɗononki {player_id}.\nGoal: Ɗonki tricki nde ɗonki pointi ɓataki (120 pointi ɓataki to kadi deck).\nKadi pointi: A=11, 3=10, K=4, Q=3, J=2, ɓeɓe=0\nKadi power: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTrump kadi ɓataki kadi ɓe non-trump kadi ɓe power.\n\nAction: '[play X]' innde X woni position (1-{max_pos}) to kadi to ki hand\n"
+  },
+  "hand": {
+    "none": "No cards",
+    "empty": "Karta so suro muskondeye ba.",
+    "header": "Muskonǝm:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP) Kәla awoa dәga."
+  },
+  "trick": {
+    "empty": "No cards played yet this trick.",
+    "header": "Kǝla kǝrmabe:",
+    "line": "  Ɗononki {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Ɗononki {player_id}: {points} pts",
+    "trump_info": "Trump suit: {trump_suit}",
+    "trump_info_deck": "Trump suit: {trump_suit} | Cards left in deck: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPointi: {scores}\n{trump_info}\n\nWoni kadi using [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Shilan faidatǝ [play X] na X dǝ shima kalkal kartbe (1, 2, 3, etc.)",
+    "out_of_range": "Kadi position ɓataki. Ki woni {count} kadi (1-{count})"
+  },
+  "action": {
+    "played": "Player {player_id} played {card}",
+    "trick_win": "Player {winner} wins the trick with {card} and gains {points} points!"
+  },
+  "outcome": {
+    "head": "Kadi woni kesi! Ɗononki {winner} ɓataki ɓe {points} pointi!\n\nPointi ɓataki:\n{scores}",
+    "player_line": "Ɗononki {player_id}: {points} pointi ({tricks} tricki)\n"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are playing Countdown numbers game!\nGoal: Combine numbers using +, -, *, / to reach the target.\nAction format: [i j op] where i,j are indices and op is the operation.\nExample: [0 2 *] multiplies number at index 0 with number at index 2.\nDivision must result in whole numbers only."
+  },
+  "board": {
+    "header": "KÀLÀ: {target}\n\nKàlàmà kà fàndì:\n{numbers}",
+    "best": "{observation}\n\nBest so far: {best_value} (distance: {distance})\nBest expression: {best_expression}",
+    "history": "{observation}\n\nMove history:\n{moves}",
+    "progress": "{observation}\nCurrent progress score: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Indexwa kalkal gǝnyi. Adadǝ gade-gade kuru suro 0-{max_index} lan kara",
+    "invalid_operation": "Kǝndo kalkal gǝnyi (kashi fallo yaktin au lamba wofilabe)"
+  },
+  "outcome": {
+    "win": "Kǝla-kǝn! Target kalkalye fando: {target}",
+    "no_moves": "Kàlàmà kà fàndì kò. Mbèèrò ngànzà: {best_value} (kàlà: {target})",
+    "turn_limit": "Kàlàmà kà fàndì kò. Mbèèrò ngànzà: {best_value} (kàlà: {target})"
+  }
+}

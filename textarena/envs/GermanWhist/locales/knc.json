@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Kɔɔlɛ kɛɛnɛŋɛ. Kɔɔlɛ kɛɛnɛŋɛ: {trump_suit} (kārtu kɛɛnɛŋɛ: {trump_str}).",
+    "no_trump_card": "ndaso ba."
+  },
+  "player_prompt": {
+    "intro": "A kɔyɔm {player_id} ɓɛɛ German Whist.\n{phase_info}\nA ɓɛɛ {hand_size} kārtu.\nKɛɛlɛ kārtu ɓɛɛ '[play N]', ɓɛɛ N ɓɛɛ ɗɛɛ a kɔyɔm (ɓɛɛ ɓɛɛ '[play 3]').",
+    "phase_learning": "LEARNING PHASE: the winner of each trick takes the face-up card and the loser draws the next card from the deck. Tricks won in this phase do not count towards victory.",
+    "phase_playing": "PLAYING PHASE: the deck is exhausted. Every trick from now on counts towards victory."
+  },
+  "next_card": {
+    "playing_phase": "Kat ba dǝ sadinba - sa bisketǝye baditǝna.",
+    "deck_empty": "Kәmbu dә ba - kәrtuwa gәnyi.",
+    "available": "Karta do awowa sadin ma: {card}",
+    "available_trump": "Kat dǝye banajin: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Fasal kǝndotǝye ba. '[play N]' faidatә kart nth suro muskonnǝmben bisketaro.",
+    "bad_position": "That card position does not exist. You hold {hand_size} cards.",
+    "must_follow_suit": "You must follow suit and play a {lead_suit} card.",
+    "invalid_play": "Kaadi adә sǝdin ba."
+  },
+  "game_action": {
+    "played": "Kɔyɔm {player_id} kɛɛlɛ {card}."
+  },
+  "trick": {
+    "won": "Kɔyɔm {winner_id} kɛɛlɛ kɔɔlɛ ɓɛɛ {card}.",
+    "won_learning": "Kɔyɔm {winner_id} kɛɛlɛ kɔɔlɛ ɓɛɛ {card} ɓɛɛ kɛɛlɛ kārtu kɛɛnɛŋɛ."
+  },
+  "phase": {
+    "learning_complete": "The deck is exhausted. The learning phase is over - every remaining trick counts towards victory."
+  },
+  "draw": {
+    "winner_received": "Nyiye kasudu dәn kәnasarratә kuru {card} gowotә.",
+    "loser_received": "Nyiye trick dǝga koltǝ kuru {card} dә daga gattǝna.",
+    "winner_preview": "Kadi kǝn burobedǝ shima {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tricks won so far - Player 0: {tricks0}, Player 1: {tricks1}",
+    "scores_playing": "Kɔɔlɛ kɛɛlɛ - Kɔyɔm 0: {tricks0}, Kɔyɔm 1: {tricks1}",
+    "phase": "Kәndaram: {phase}",
+    "phase_learning": "Féɛti: {phase} ({remaining_cards} kārtu mbɛɛlɛ ɓɛɛ kɔɔlɛ)"
+  },
+  "hand": {
+    "no_cards": "Karta ba.",
+    "no_cards_in_hand": "Karta so suro muskondeye ba.",
+    "header": "Muskonǝm:",
+    "trump_indicator": "(TRUMP) Kәla awoa dәga.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "No cards played yet this trick.",
+    "header": "Kǝla kǝrmabe:",
+    "trump_indicator": "(TRUMP) Kәla awoa dәga.",
+    "card_line": "{observation}\n  Kɔyɔm {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Kǝndodә badiyatimba.",
+    "header": "=== German Whist Game (Kambodə Gəmnati Germanyye Kambo) ===",
+    "phase": "{observation}\nFéɛti: {phase}",
+    "trump_suit": "{observation}\nKɔɔlɛ kɛɛnɛŋɛ: {trump_suit}",
+    "trump_card": "{observation}\nKārtu kɛɛnɛŋɛ: {card}",
+    "cards_left": "{observation}\nKārtu mbɛɛlɛ: {count}",
+    "next_card": "{observation}\nKārtu kɛɛnɛŋɛ: {card}",
+    "blank": "{observation} ǝdǝn dǝm.",
+    "current_trick": "{observation} Kәrma kәndabe:",
+    "trump_indicator": "(TRUMP) Kәla awoa dәga.",
+    "trick_line": "{observation}\n  Kɔyɔm {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nKɔyɔm {player_id}: {scoring} kɛɛlɛ kɔɔlɛ ({tricks} ɗɛɛ), {hand_size} kārtu ɓɛɛ"
+  },
+  "outcome": {
+    "summary": "Learning phase - Player 0: {l0}, Player 1: {l1}. Playing phase - Player 0: {p0}, Player 1: {p1}. Player {winner_id} wins with {winner_tricks} scoring tricks!"
+  }
+}

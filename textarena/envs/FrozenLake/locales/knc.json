@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Welcome to Frozen Lake!\n\nYou are represented by 'P' on the grid.\nGrid symbols:\n  ' ' = Frozen surface (safe to walk on)\n  'H' = Hole (fall in and lose!)\n  'G' = Goal (reach this to win!)\n  'P' = Your current position\n\nAvailable actions: up, down, left, right (or w, a, s, d)\nType your action as: [up], [down], [left], [right] or [w], [a], [s], [d]\n\nObjective: Navigate from the start (top-left) to the goal (bottom-right) without falling into any holes!\n"
+  },
+  "board": {
+    "current_board": "Borti K'ono K'ono:\n\n{board}\n\nKadi K'ono: {actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kadi k'ono k'ono kadi k'ono. Kadi [up], [down], [left], [right] ko [w], [a], [s], [d].",
+    "unknown_action": "Awo notәnyi '{action}'. faidatǝ, cidibe-a, laanzaye-a au w, a, s, d.",
+    "hit_wall": "You tried to move {action} but hit a wall!"
+  },
+  "game_action": {
+    "moved": "Kadi {action} kadi k'ono ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Ngәla'a fando! Nyiye na-adәga sǝkkin.",
+    "fell_in_hole": "You fell into a hole! Game over. You completed {pct}% of the journey to the goal.",
+    "turn_limit": "You reached the turn limit! Game over. You completed {pct}% of the journey to the goal."
+  }
+}
