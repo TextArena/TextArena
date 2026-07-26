@@ -386,7 +386,6 @@ class WordSearchEnv(ta.Env):
                 
                 # Check if the substring is a valid English word
                 if self._is_valid_word(substring):
-                    print(f"Unintended word found: {substring}")
                     self._replace_unintended_word(grid, substring_positions)
 
     def _replace_unintended_word(self, grid, positions):
@@ -485,12 +484,10 @@ class WordSearchEnv(ta.Env):
             (actual_start == expected_end and actual_end == expected_start):
                 self.correct_words.add(placed_word)
                 self._highlight_word(start_row, start_col, end_row, end_col)
-                print(f"Correct! The word '{placed_word}' was found.")
                 return True
 
         # If no match, record as an incorrect attempt
         self.incorrect_attempts.append((start_row, start_col, end_row, end_col))
-        print("Incorrect attempt.")
         return False
 
         
@@ -511,8 +508,8 @@ class WordSearchEnv(ta.Env):
         elif start_col == end_col:  # Vertical word
             for row in range(min(start_row, end_row), max(start_row, end_row) + 1):
                 self.highlighted_positions.add((row, start_col))
-        else:
-            print("Invalid input: Words can only be horizontal or vertical.")
+        # Placed words are only across/down, so a diagonal selection never reaches
+        # this method; there is nothing to highlight if one somehow does.
 
     def _extract_word(self, grid, start_row, start_col, end_row, end_col):
         """
@@ -534,7 +531,6 @@ class WordSearchEnv(ta.Env):
         elif start_col == end_col:  # Vertical word
             return "".join(grid[row][start_col] for row in range(min(start_row, end_row), max(start_row, end_row) + 1))
         else:
-            print("Invalid input: Words can only be horizontal or vertical.")
             return ""
 
     def _matches_position(self, word, row, col, direction, start_row, start_col, end_row, end_col):
@@ -575,7 +571,6 @@ class WordSearchEnv(ta.Env):
             self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid", "wrong_format", player_id=player_id))
         else:
             for match in matches:
-                print("Checking match:", match)
                 start_row, start_col, end_row, end_col = [int(x) for x in match]
                 coords = f"{start_row} {start_col} {end_row} {end_col}"
                 if not (0 <= start_row < len(self.state.game_state["board"])
