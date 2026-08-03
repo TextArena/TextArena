@@ -174,7 +174,7 @@ Two-Player
 | 17 | [IteratedPrisonersDilemma](#iteratedprisonersdilemma) | 2 | 🌐 | |
 | 18 | [IteratedRockPaperScissors](#iteratedrockpaperscissors) | 2 | 🌐 | |
 | 19 | [IteratedTwoThirdsAverage](#iteratedtwothirdsaverage) | 2 | 🌐 | |
-| 20 | [IteratedStagHunt](#iteratedstaghunt) | 2 | | |
+| 20 | [IteratedStagHunt](#iteratedstaghunt) | 2 | 🌐 | |
 | 21 | [KuhnPoker](#kuhnpoker) | 2 | 🌐 | |
 | 22 | [LeducHoldem](#leducholdem) | 2 | | |
 | 23 | [LeTruc](#letruc) | 2 | | |

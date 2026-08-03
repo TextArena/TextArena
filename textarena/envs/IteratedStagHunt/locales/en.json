@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro":            "You are Player {player_id} in an {num_rounds} round game of Iterated Stag Hunt.\n\nGame Structure:\n- The game consists of {decision_rounds} decision rounds\n- Before each decision, you have {conversation_rounds} turns to communicate\n- After communication, both players simultaneously choose to hunt a Stag or Hare\n\nRewards:\n- The rewards associated with hunting stags and hares may differ between rounds\n- The rewards are presented at the start of each round\n\nHow to Play:\n- During communication: Simply type your message\n- During decision phase: Use '[Stag]' or '[Hare]'\nYou can include additional text before or after these tokens.\n"
+  },
+
+  "round": {
+    "payoff_matrix":    "Starting Round {round} with payoff matrix:\n- Both hunt a Stag: Both get {mutual_stag} points\n- Both hunt a Hare: Both get {mutual_hare} points\n- One hunts a Hare, One hunts a Stag: The hunter of the Hare gets {single_hare} points, the hunter of the Stag gets {single_stag} points\nYou can freely communicate with your opponent for {conversation_rounds} rounds before making a decision.",
+    "decision_phase":   "The decision phase for round {round} has started. Please reply with either '[stag]' or '[hare]'.",
+    "results":          "Round {round} complete. Results:\n\tPlayer 0 picked '{decision0}' (payoff: {payoff0}; total: {total0})\n\tPlayer 1 picked '{decision1}' (payoff: {payoff1}; total: {total1})"
+  },
+
+  "outcome": {
+    "win":              "Final scores: Player 0: {p0}, Player 1: {p1}\nPlayer {winner_id} won!",
+    "draw":             "Final scores: Player 0: {p0}, Player 1: {p1}\nIt's a Tie!"
+  }
+}
