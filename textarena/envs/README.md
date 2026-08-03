@@ -231,15 +231,15 @@ Two-Player
 |--:|------|:----:|:-------:|:------------:|----------|
 | 1 | [Hanabi](#hanabi) | ? | | | |
 | 2 | [ImTheBoss](#imtheboss) | ? | ? | | |
-| 3 | [IteratedUltimatumGame](#iteratedultimatumgame) | ? | ? | | |
-| 4 | [Klondike](#klondike) | ? | | | |
+| 3 | [IteratedUltimatumGame](#iteratedultimatumgame) | ? | ? | 🌐 | |
+| 4 | [Klondike](#klondike) | ? | | 🌐 | |
 | 5 | [MarketEntryGame](#marketentrygame) | ? | ? | | |
 | 6 | [NewRecruit](#newrecruit) | ? | ? | | |
 | 7 | [PublicGoodsGame](#publicgoodsgame) | ? | ? | | |
 | 8 | [ScorableGames](#scorablegames) | ? | ? | | |
 | 9 | [Set](#set) | ? | | | |
 | 10 | [SettlersOfCatan](#settlersofcatan) | ? | ? | | |
-| 11 | [UltimateTexasHoldem](#ultimatetexasholdem) | ? | | | |
+| 11 | [UltimateTexasHoldem](#ultimatetexasholdem) | ? | | 🌐 | |
 | 12 | [UsedCarNegotiation](#usedcarnegotiation) | ? | ? | | |
 | 13 | [VendorNegotiation](#vendornegotiation) | ? | ? | | |
 | 14 | [WinAsMuchAsYouCan](#winasmuchasyoucan) | ? | ? | | |
