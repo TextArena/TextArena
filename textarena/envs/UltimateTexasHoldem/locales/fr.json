@@ -1,0 +1,88 @@
+{
+  "_comment": "Fichier de langue Ultimate Texas Hold'em. NE traduisez PAS les clés (côté gauche). Traduisez uniquement les valeurs (côté droit). Conservez chaque {placeholder} exactement tel quel. Ne traduisez jamais les jetons d'action ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), les étiquettes/couleurs de cartes (p. ex. 'A♠', 'K♥', '10♦'), les libellés de phase passés dans {phase}, ni les montants numériques de jetons/mise/paiement. Les fragments littéraux échappés '${{...}}' de la table de paiement dans les règles reproduisent verbatim un bug d'affichage préexistant et doivent être conservés exactement (les doubles accolades sont intentionnelles).",
+  "_slots": {
+    "{start_chips}": "Le nombre de jetons de départ, p. ex. 1000",
+    "{ante}": "Le montant de la mise ante/blind, p. ex. 25",
+    "{ante4}": "Quatre fois l'ante, p. ex. 100",
+    "{ante2}": "Deux fois l'ante, p. ex. 50",
+    "{round}": "Le numéro de la manche en cours",
+    "{chips}": "Le nombre de jetons actuel du joueur",
+    "{hand}": "Une liste d'étiquettes de cartes séparées par des virgules, p. ex. 'A♠, K♥', ou le texte localisé indiquant l'absence de cartes",
+    "{phase}": "Le jeton de libellé de la phase en cours (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Une liste séparée par des virgules de jetons d'action entre crochets, p. ex. '[play_bet_4x], [check]'",
+    "{available}": "Une liste séparée par des virgules des jetons d'action entre crochets actuellement autorisés",
+    "{blind}": "Le montant de la mise blind",
+    "{play}": "Le montant de la mise play",
+    "{cards}": "Une liste d'étiquettes de cartes séparées par des virgules, p. ex. 'Q♣, 7♦, 2♠'",
+    "{name}": "Un nom de main de poker localisé, inséré tel quel",
+    "{amount}": "Un montant de jetons",
+    "{net}": "La variation nette de jetons pour la manche (peut être négative)",
+    "{max_turns}": "Le nombre maximum de manches",
+    "{winner_rounds}": "Le nombre de manches terminées"
+  },
+
+  "player_prompt": {
+    "no_cards": "Pas encore de cartes",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Un seul joueur contre le croupier\n\n📖 APERÇU DU JEU :\n• Vous commencez avec {start_chips} jetons\n• Un seul jeu de 52 cartes (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Vous jouez contre le croupier (la maison)\n• Chaque manche suit la structure de l'Ultimate Texas Hold'em : vous placez les mises ANTE et BLIND, recevez 2 cartes fermées, décidez des mises PLAY optionnelles au fil des phases de mise, puis révélez les cartes communes et comparez votre meilleure main de 5 cartes à celle du croupier. Votre but est de maximiser vos gains (quand vous avez la meilleure main), tout en minimisant vos pertes (quand vous avez la moins bonne main).\n• La partie se termine lorsque vous atteignez 0 jeton ou moins au début d'une manche (DÉFAITE) ou lorsque vous terminez 1000 manches avec des jetons (VICTOIRE)\n\n💰 STRUCTURE DES MISES :\n• ANTE : Mise obligatoire de ${ante} à chaque manche\n• BLIND : Mise obligatoire de ${ante} à chaque manche\n• PLAY : Mise optionnelle pendant le jeu. Au cours de la manche, vous pouvez choisir UNE SEULE des options suivantes : (${ante4} si effectuée au PRE-FLOP, ${ante2} si effectuée au FLOP, ou ${ante} si effectuée au RIVER. Vous pouvez aussi vous coucher au river, abandonnant la main et ne plaçant aucune mise.)\n\n🎴 DISTRIBUTION DES CARTES :\n• Vous recevez 2 cartes face visible (vos cartes fermées)\n• Le croupier reçoit 2 cartes face cachée (invisibles pour vous)\n• 5 cartes communes sont distribuées face cachée au départ\n• Les cartes communes sont révélées progressivement au fil des phases du jeu\n\n🏆 QUALIFICATION DU CROUPIER :\n• Le croupier doit avoir au moins une PAIRE (2 cartes de même rang) pour se qualifier, en utilisant les 2 cartes de sa main et les 5 cartes communes.\n• La qualification du croupier influe sur les résultats des mises, comme expliqué plus loin.\n\n🎮 PHASES DU JEU ET ACTIONS :\n📋 PRE-FLOP :\n  • Actions : [4x] (${ante4}) ou [check]\n  • [4x] : Placer une mise PLAY de ${ante4}, révèle les 3 premières cartes communes\n  • [check] : Aucune mise supplémentaire, révèle les 3 premières cartes communes\n\n📋 FLOP :\n  • Si la mise 4x a été placée : Seul [skip] est disponible (révèle automatiquement les 2 dernières cartes communes)\n  • S'il n'y a pas de mise 4x : [2x] (${ante2}) ou [check]\n  • [2x] : Placer une mise PLAY de ${ante2}, révèle les 2 dernières cartes communes\n  • [check] : Aucune mise supplémentaire, révèle les 2 dernières cartes communes\n\n📋 RIVER :\n  • Si la mise 4x ou 2x a été placée : Seul [skip] est disponible (passe automatiquement à l'abattage)\n  • S'il n'y a pas eu de mise PLAY précédente : [1x] (${ante}) ou [fold]\n  • [1x] : Placer une mise PLAY de ${ante}, passe à l'abattage\n  • [fold] : Abandonner la main, perdre les mises ANTE et BLIND\n\n📋 SHOWDOWN :\n  • Toutes les cartes sont révélées et évaluées\n  • Meilleure main de 5 cartes parmi 7 cartes (2 fermées + 5 communes)\n  • Les mises sont réglées selon les règles de paiement\n\n💎 PAIEMENTS DES MISES :\n📊 MISE ANTE :\n  • Le croupier ne se qualifie pas : PUSH (mise rendue)\n  • Le croupier se qualifie et vous gagnez : paiement 1:1 (mise + gains)\n  • Le croupier se qualifie et vous perdez : Mise perdue\n  • Égalité : PUSH (mise rendue)\n\n📊 MISE BLIND :\n  • Non affectée par la qualification du croupier\n  • Vous gagnez : Mise rendue et paiement supplémentaire selon la force de votre main\n  • Vous perdez : Mise perdue\n  • Égalité : PUSH (mise rendue)\n\n📊 TABLE DE PAIEMENT DE LA MISE BLIND :\n  • Quinte Flush Royale : 500:1 (${{self.ante_amount * 500}})\n  • Quinte Flush : 50:1 (${{self.ante_amount * 50}})\n  • Carré : 10:1 (${{self.ante_amount * 10}})\n  • Full : 3:1 (${{self.ante_amount * 3}})\n  • Couleur : 3:1 (${{self.ante_amount * 3}})\n  • Quinte : 1:1 (${{self.ante_amount * 1}})\n  • Moins qu'une Quinte : Aucun paiement supplémentaire\n\n📊 MISE PLAY :\n  • Non affectée par la qualification du croupier\n  • Comparaison directe : Votre meilleure main contre la meilleure main du croupier\n  • Vous gagnez : paiement 1:1 (mise + gains)\n  • Vous perdez : Mise perdue\n  • Égalité : PUSH (mise rendue)\n\n🎯 CLASSEMENT DES MAINS DE POKER (De la meilleure à la moins bonne) :\n  1. Quinte Flush Royale : A-K-Q-J-10 de la même couleur\n  2. Quinte Flush : 5 cartes consécutives de la même couleur\n  3. Carré : 4 cartes de même rang\n  4. Full : un brelan + une paire\n  5. Couleur : 5 cartes de la même couleur\n  6. Quinte : 5 cartes consécutives\n  7. Brelan : 3 cartes de même rang\n  8. Deux Paires : 2 paires de rangs différents\n  9. Paire : 2 cartes de même rang\n  10. Carte Haute : La carte la plus haute l'emporte\n\n⌨️  COMMANDES D'ACTION :\n• [4x] ou [play bet 4x] : Placer une mise PLAY de ${{self.ante_amount*4}}\n• [2x] ou [play bet 2x] : Placer une mise PLAY de ${{self.ante_amount*2}}\n• [1x] ou [play bet 1x] : Placer une mise PLAY de ${{self.ante_amount*1}}\n• [check] ou [c] : Checker (aucune mise supplémentaire)\n• [fold] ou [f] : Se coucher (abandonner la main)\n• [skip] ou [s] : Passer à la phase suivante (quand aucune action n'est nécessaire)\n\n💡 CONSEILS DE STRATÉGIE :\n• Les mains de départ fortes (paires, cartes hautes) justifient souvent une mise 4x\n• Tenez compte de la qualification du croupier - les mains faibles peuvent faire PUSH si le croupier ne se qualifie pas\n• La mise BLIND peut être très rentable avec des mains fortes (Quinte Flush Royale = 500:1 !)\n• Surveillez votre tapis ! S'il tombe à 0 ou moins au début d'une manche, vous perdez.\n\n⚠️  NOTES IMPORTANTES :\n• Les mises ANTE et BLIND sont obligatoires à chaque manche\n• Les mises PLAY sont optionnelles et stratégiques\n• Assurez-vous de saisir la bonne action, et une seule action à la fois.\n\n",
+    "state": "🎯 MANCHE {round}\n💰 Jetons : {chips}\n🎴 Votre main : {hand}\n📊 Mises actuelles : Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Phase : {phase}\n🎯 Actions disponibles : {actions}\n\n"
+  },
+
+  "board": {
+    "round_start": "🎮 Manche {round} commencée ! Mises : ANTE ${ante}, BLIND ${blind}. Il vous reste {chips} jetons.",
+    "your_hand": "🎴 Votre main : {hand}",
+    "flop_revealed": "🃏 FLOP révélé : {cards}",
+    "river_revealed": "🃏 RIVER révélé : {cards}"
+  },
+
+  "invalid_move": {
+    "reason": "Action invalide pour la phase en cours. Actions disponibles : {available}",
+    "message": "❌ Action invalide ! Actions disponibles : {available}"
+  },
+
+  "action": {
+    "folded": "🃏 Vous vous êtes couché."
+  },
+
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN ! Main du croupier : {cards}",
+    "community_cards": "🃏 Cartes communes : {cards}",
+    "player_best": "🎴 Meilleure main du joueur : {name} ({cards})",
+    "dealer_best": "🎴 Meilleure main du croupier : {name} ({cards})",
+    "ante_lost_folded": "❌ Mise ANTE PERDUE ! -${ante} (couché)",
+    "blind_lost_folded": "❌ Mise BLIND PERDUE ! -${blind} (couché)",
+    "ante_won": "✅ Mise ANTE GAGNÉE ! +${amount}",
+    "ante_pushed": "🔄 Mise ANTE en PUSH ! ${ante} rendu",
+    "ante_lost": "❌ Mise ANTE PERDUE ! -${ante}",
+    "blind_won": "✅ Mise BLIND GAGNÉE ! +${amount}",
+    "blind_pushed": "🔄 Mise BLIND en PUSH ! ${blind} rendu",
+    "blind_lost": "❌ Mise BLIND PERDUE ! -${blind}",
+    "play_won": "✅ Mise PLAY GAGNÉE ! +${amount}",
+    "play_pushed": "🔄 Mise PLAY en PUSH ! ${play} rendu",
+    "play_lost": "❌ Mise PLAY PERDUE ! -${play}",
+    "net_gain": "🎉 Manche {round} terminée ! Gain net : +${net}",
+    "net_loss": "💸 Manche {round} terminée ! Perte nette : ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+
+  "outcome": {
+    "game_over_win": "🏁 PARTIE TERMINÉE ! {max_turns} manches terminées. Vous avez ${chips} jetons - VOUS GAGNEZ !",
+    "game_over_lose": "🏁 PARTIE TERMINÉE ! Vous n'avez plus de jetons. Le croupier gagne !",
+    "reward_win": "Le joueur a terminé {winner_rounds} manches avec ${chips} jetons",
+    "reward_lose": "Le joueur s'est retrouvé à court de jetons à la manche {round}",
+    "reward_win_max": "Le joueur a terminé {max_turns} manches avec ${chips} jetons"
+  },
+
+  "hand_names": {
+    "royal_flush": "Quinte Flush Royale",
+    "straight_flush": "Quinte Flush",
+    "four_of_a_kind": "Carré",
+    "full_house": "Full",
+    "flush": "Couleur",
+    "straight": "Quinte",
+    "three_of_a_kind": "Brelan",
+    "two_pair": "Deux Paires",
+    "one_pair": "Paire",
+    "high_card": "Carte Haute",
+    "unknown": "Main Inconnue"
+  }
+}

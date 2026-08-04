@@ -1,0 +1,41 @@
+{
+  "_comment": "Fail bahasa LinesOfAction dalam bahasa Melayu. JANGAN terjemahkan kunci, hanya nilai. Jangan sekali-kali terjemahkan koordinat papan (a-h, 1-8), huruf buah (O, X), token format gerakan atau grid ASCII {board}.",
+  "_slots": {
+    "{player_id}": "Nombor pemain, sama ada 0 atau 1",
+    "{side}": "Huruf buah pemain, sama ada O atau X",
+    "{other}": "Huruf buah lawan, sama ada O atau X",
+    "{board}": "Paparan ASCII papan; biarkan seadanya",
+    "{coord}": "Koordinat papan seperti b1 atau a3",
+    "{from}": "Koordinat asal sesuatu gerakan, seperti b1",
+    "{to}": "Koordinat destinasi sesuatu gerakan, seperti b3"
+  },
+
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam permainan LinesOfAction.\nBuah anda ialah '{side}', buah lawan ialah '{other}'.\nFormat gerakan: `[b1b3]` (koordinat asal ke koordinat destinasi). Gerakan sah bergerak mendatar, menegak atau menyerong sebanyak petak yang sama dengan jumlah buah (mana-mana warna) pada garisan itu. Anda boleh melompat buah sendiri, tetapi bukan buah lawan; mendarat pada buah lawan menawannya.  Anda menang apabila semua buah anda bersambung melalui 8 jiran."
+  },
+
+  "board": {
+    "current_board": "Papan:\n\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format mestilah e2e4 (koordinat asal, destinasi).",
+    "no_piece": "Tiada buah {side} pada {coord}.",
+    "identical": "Asal dan destinasi adalah sama.",
+    "not_straight_or_diagonal": "Gerakan mesti lurus atau menyerong.",
+    "wrong_distance": "Mesti bergerak jarak yang sama dengan buah pada garisan.",
+    "enemy_blocks": "Buah lawan menghalang laluan.",
+    "destination_own": "Destinasi diduduki oleh buah sendiri."
+  },
+
+  "game_action": {
+    "moved": "Pemain {player_id} menggerakkan {from} -> {to}",
+    "captured_suffix": "Pemain {player_id} menggerakkan {from} -> {to} menawan buah lawan."
+  },
+
+  "outcome": {
+    "win": "Semua buah bersambung.",
+    "draw_no_capture": "60 gerakan tanpa tawanan.",
+    "draw_repetition": "Kedudukan berulang tiga kali."
+  }
+}

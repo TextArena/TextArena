@@ -22,7 +22,7 @@ general todos:
 | 9 | [FrozenLake](#frozenlake) | Single | 1 | 🌐 | |
 | 10 | [GuessTheNumber](#guessthenumber) | Single | 1 | | |
 | 11 | [GuessWho](#guesswho) | Single | 1 | | |
-| 12 | [Hangman](#hangman) | Single | 1 | | |
+| 12 | [Hangman](#hangman) | Single | 1 | 🌐 | |
 | 13 | [LightsOut](#lightsout) | Single | 1 | | |
 | 14 | [LogicPuzzle](#logicpuzzle) | Single | 1 | | |
 | 15 | [Mastermind](#mastermind) | Single | 1 | | |
@@ -36,9 +36,9 @@ general todos:
 | 23 | [ThreeCardMonte](#threecardmonte) | Single | 1 | | |
 | 24 | [TowerOfHanoi](#towerofhanoi) | Single | 1 | 🌐 | |
 | 25 | [TwentyQuestions](#twentyquestions) | Single | 1 | | |
-| 26 | [WordLadder](#wordladder) | Single | 1 | | |
-| 27 | [Wordle](#wordle) | Single | 1 | | |
-| 28 | [WordSearch](#wordsearch) | Single | 1 | | |
+| 26 | [WordLadder](#wordladder) | Single | 1 | 🌐 | |
+| 27 | [Wordle](#wordle) | Single | 1 | 🌐 | |
+| 28 | [WordSearch](#wordsearch) | Single | 1 | 🌐 | |
 | 29 | [Alquerque](#alquerque) | Two | 2 | | |
 | 30 | [Battleship](#battleship) | Two | 2 | | |
 | 31 | [Breakthrough](#breakthrough) | Two | 2 | | |
@@ -47,7 +47,7 @@ general todos:
 | 34 | [Chopsticks](#chopsticks) | Two | 2 | | |
 | 35 | [ColonelBlotto](#colonelblotto) | Two | 2 | 🌐 | |
 | 36 | [ConnectFour](#connectfour) | Two | 2 | 🌐 | |
-| 37 | [Coup](#coup) | Multi | 2–6 | | |
+| 37 | [Coup](#coup) | Multi | 2–6 | 🌐 | |
 | 38 | [Crusade](#crusade) | Two | 2 | | |
 | 39 | [Debate](#debate) | Two | 2 | | |
 | 40 | [DontSayIt](#dontsayit) | Two | 2 | | |
@@ -64,7 +64,7 @@ general todos:
 | 51 | [LeducHoldem](#leducholdem) | Two | 2 | | |
 | 52 | [LeTruc](#letruc) | Two | 2 | | |
 | 53 | [LinesOfAction](#linesofaction) | Two | 2 | | |
-| 54 | [LetterAuction](#letterauction) | Two | 2 | | |
+| 54 | [LetterAuction](#letterauction) | Two | 2 | 🌐 | |
 | 55 | [LiarsDice](#liarsdice) | Multi | 2–15 | | |
 | 56 | [MemoryGame](#memorygame) | Two | 2 | | |
 | 57 | [Nim](#nim) | Two | 2 | 🌐 | |
@@ -79,7 +79,7 @@ general todos:
 | 66 | [SimpleNegotiation](#simplenegotiation) | Two | 2 | 🌐 | |
 | 67 | [SimpleTak](#simpletak) | Two | 2 | 🌐 | |
 | 68 | [Snake](#snake) | Multi | 2–15 | | |
-| 69 | [SpellingBee](#spellingbee) | Two | 2 | | |
+| 69 | [SpellingBee](#spellingbee) | Two | 2 | 🌐 | |
 | 70 | [SpiteAndMalice](#spiteandmalice) | Two | 2 | | |
 | 71 | [Stratego](#stratego) | Two | 2 | | |
 | 72 | [Surround](#surround) | Multi | 2–15 | | |
@@ -89,8 +89,8 @@ general todos:
 | 76 | [TwoDollar](#twodollar) | Two | 2 | | |
 | 77 | [UltimateTicTacToe](#ultimatetictactoe) | Two | 2 | | |
 | 78 | [WildTicTacToe](#wildtictactoe) | Two | 2 | | |
-| 79 | [WordChains](#wordchains) | Two | 2 | | |
-| 80 | [Briscola](#briscola) | Multi | 2–4 | | |
+| 79 | [WordChains](#wordchains) | Two | 2 | 🌐 | |
+| 80 | [Briscola](#briscola) | Multi | 2–4 | 🌐 | |
 | 81 | [Golf](#golf) | Multi | 2–4 | | |
 | 82 | [Negotiation](#negotiation) | Multi | 2–15 | | |
 | 83 | [CharacterConclave](#characterconclave) | Multi | 3–15 | | |
@@ -129,7 +129,7 @@ general todos:
 | 4 | [Blackjack](#blackjack) | 1 | 🌐 | |
 | 5 | [Countdown](#countdown) | 1 | 🌐 | |
 | 6 | [Crosswords](#crosswords) | 1 | | |
-| 7 | [Cryptarithm](#cryptarithm) | 1 | | |
+| 7 | [Cryptarithm](#cryptarithm) | 1 | 🌐 | |
 | 8 | [FifteenPuzzle](#fifteenpuzzle) | 1 | 🌐 | |
 | 9 | [FrozenLake](#frozenlake) | 1 | 🌐 | |
 | 10 | [GuessTheNumber](#guessthenumber) | 1 | 🌐 | |
@@ -178,7 +178,7 @@ Two-Player
 | 21 | [KuhnPoker](#kuhnpoker) | 2 | 🌐 | |
 | 22 | [LeducHoldem](#leducholdem) | 2 | | |
 | 23 | [LeTruc](#letruc) | 2 | | |
-| 24 | [LinesOfAction](#linesofaction) | 2 | | |
+| 24 | [LinesOfAction](#linesofaction) | 2 | 🌐 | |
 | 25 | [LetterAuction](#letterauction) | 2 | | |
 | 26 | [MemoryGame](#memorygame) | 2 | 🌐 | |
 | 27 | [Nim](#nim) | 2 | 🌐 | |
@@ -205,13 +205,13 @@ Two-Player
 | # | Game | Players | Multilingual | Comments |
 |--:|------|:-------:|:------------:|----------|
 | 1 | [Coup](#coup) | 2–6 | | |
-| 2 | [LiarsDice](#liarsdice) | 2–15 | | |
+| 2 | [LiarsDice](#liarsdice) | 2–15 | 🌐 | |
 | 3 | [Poker](#poker) | 2–15 | | |
 | 4 | [Santorini](#santorini) | 2–3 | | |
-| 5 | [Snake](#snake) | 2–15 | | |
-| 6 | [Surround](#surround) | 2–15 | | |
-| 7 | [Briscola](#briscola) | 2–4 | | |
-| 8 | [Golf](#golf) | 2–4 | | |
+| 5 | [Snake](#snake) | 2–15 | 🌐 | |
+| 6 | [Surround](#surround) | 2–15 | 🌐 | |
+| 7 | [Briscola](#briscola) | 2–4 | 🌐 | |
+| 8 | [Golf](#golf) | 2–4 | 🌐 | |
 | 9 | [Negotiation](#negotiation) | 2–15 | | |
 | 10 | [CharacterConclave](#characterconclave) | 3–15 | | |
 | 11 | [Codenames](#codenames) | 4 | | |
@@ -219,8 +219,8 @@ Two-Player
 | 13 | [BlindAuction](#blindauction) | 3–15 | | |
 | 14 | [SecretMafia](#secretmafia) | 6–15 | | |
 | 15 | [Taboo](#taboo) | 4–8 | | |
-| 16 | [ThreePlayerGOPS](#threeplayergops) | 3 | | |
-| 17 | [ThreePlayerTicTacToe](#threeplayertictactoe) | 3 | | |
+| 16 | [ThreePlayerGOPS](#threeplayergops) | 3 | 🌐 | |
+| 17 | [ThreePlayerTicTacToe](#threeplayertictactoe) | 3 | 🌐 | |
 | 18 | [ThreePlayerIPD](#threeplayeripd) | 3 | 🌐 | |
 | 19 | [TwoRoomsAndABoom](#tworoomsandaboom) | 6–20 | | |
 
@@ -229,17 +229,17 @@ Two-Player
 
 | # | Game | Mode | Players | Multilingual | Comments |
 |--:|------|:----:|:-------:|:------------:|----------|
-| 1 | [Hanabi](#hanabi) | ? | ? | | |
+| 1 | [Hanabi](#hanabi) | ? | | | |
 | 2 | [ImTheBoss](#imtheboss) | ? | ? | | |
-| 3 | [IteratedUltimatumGame](#iteratedultimatumgame) | ? | ? | | |
-| 4 | [Klondike](#klondike) | ? | ? | | |
+| 3 | [IteratedUltimatumGame](#iteratedultimatumgame) | ? | ? | 🌐 | |
+| 4 | [Klondike](#klondike) | ? | | 🌐 | |
 | 5 | [MarketEntryGame](#marketentrygame) | ? | ? | | |
 | 6 | [NewRecruit](#newrecruit) | ? | ? | | |
 | 7 | [PublicGoodsGame](#publicgoodsgame) | ? | ? | | |
 | 8 | [ScorableGames](#scorablegames) | ? | ? | | |
-| 9 | [Set](#set) | ? | ? | | |
+| 9 | [Set](#set) | ? | | | |
 | 10 | [SettlersOfCatan](#settlersofcatan) | ? | ? | | |
-| 11 | [UltimateTexasHoldem](#ultimatetexasholdem) | ? | ? | | |
+| 11 | [UltimateTexasHoldem](#ultimatetexasholdem) | ? | | 🌐 | |
 | 12 | [UsedCarNegotiation](#usedcarnegotiation) | ? | ? | | |
 | 13 | [VendorNegotiation](#vendornegotiation) | ? | ? | | |
 | 14 | [WinAsMuchAsYouCan](#winasmuchasyoucan) | ? | ? | | |

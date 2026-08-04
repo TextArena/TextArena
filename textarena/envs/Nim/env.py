@@ -19,7 +19,7 @@ class NimEnv(ta.Env):
     def reset(self, num_players: int, seed: Optional[int] = None):
         self.state = ta.TwoPlayerState(num_players=num_players, seed=seed)
         self.state.reset(game_state={"piles": self.initial_piles.copy()}, player_prompt_function=self._prompt)
-        self.state.add_observation(message=self.m("state", "current_pile", pile_0=self.state.game_state["piles"][0], pile_1=self.state.game_state["piles"][1], pile_2=self.state.game_state["piles"][2]), observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(message=self.m("state", "current_pile", piles=self._render_piles()), observation_type=ta.ObservationType.GAME_BOARD)
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
         return self.m("player_prompt", "intro", player_id=player_id)
@@ -27,7 +27,7 @@ class NimEnv(ta.Env):
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
         self._execute_move(action) # Execute the move (or mark invalid if the format is incorrect/illegal)
-        self.state.add_observation(message=self.m("state", "current_pile", pile_0=self.state.game_state["piles"][0], pile_1=self.state.game_state["piles"][1], pile_2=self.state.game_state["piles"][2]), observation_type=ta.ObservationType.GAME_BOARD) # After the current player moves, send the updated board to the opponent.
+        self.state.add_observation(message=self.m("state", "current_pile", piles=self._render_piles()), observation_type=ta.ObservationType.GAME_BOARD) # After the current player moves, send the updated board to the opponent.
         self._check_game_over() # Check if the game is over
         return self.state.step() # Proceed to the next turn (or finalize if done)
 
@@ -48,7 +48,6 @@ class NimEnv(ta.Env):
             self.state.set_winner(player_id=self.state.current_player_id, reason=self.m("outcome", "win", player_id=self.state.current_player_id))
 
     def _render_piles(self) -> str:
-        lines = []
-        for i, amt in enumerate(self.state.game_state["piles"]):
-            lines.append(f"  {self.m('state', 'pile')} {i}: {amt}")
-        return "\n".join(lines)
+        # Language-neutral, dynamic over any number of piles (matches the original
+        # game); the localized "Current Pile:" header wraps it via the {piles} slot.
+        return "\n".join(f"  pile {i}: {amt}" for i, amt in enumerate(self.state.game_state["piles"]))

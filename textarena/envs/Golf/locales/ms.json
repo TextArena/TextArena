@@ -1,0 +1,89 @@
+{
+  "_comment": "Fail bahasa Golf (permainan kad). JANGAN terjemahkan kunci (sebelah kiri). Terjemahkan hanya nilai (sebelah kanan). Kekalkan setiap {placeholder} betul-betul seperti asal. Jangan sekali-kali terjemahkan token tindakan ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), label kad (A, 2-10, J, Q, K), simbol sut, huruf X/Y yang digunakan sebagai pemegang tempat baris/lajur dalam token, atau skor/kedudukan berangka. Kekalkan susun atur grid ASCII (jarak, nombor lajur, '?', penjajaran 'Col', 'Row') supaya papan kekal mudah dibaca.",
+  "_slots": {
+    "{player_id}": "Nombor pemain, cth. 0 atau 1",
+    "{pid}": "Nombor pemain, cth. 0 atau 1",
+    "{winner}": "Nombor pemain dengan skor terendah",
+    "{score}": "Jumlah mata berangka",
+    "{card}": "Label kad seperti A♠, 10♥, K♦ atau Q♣",
+    "{new}": "Label kad yang diletakkan ke dalam grid",
+    "{old}": "Label kad yang dikeluarkan daripada grid",
+    "{row}": "Nombor baris",
+    "{col}": "Nombor lajur",
+    "{max_row}": "Nombor baris sah yang terbesar",
+    "{max_col}": "Nombor lajur sah yang terbesar",
+    "{reason}": "Frasa pra-render yang menerangkan mengapa pusingan akhir bermula",
+    "{n}": "Nombor baris yang dipaparkan di awal baris grid",
+    "{cards}": "Sel pra-render yang sensitif susun atur bagi satu baris grid",
+    "{hand}": "Blok grid pemain yang pra-render",
+    "{discard}": "Label kad di atas timbunan buang, atau perkataan untuk 'tiada'",
+    "{options}": "Baris pra-render yang menyenaraikan tindakan yang tersedia",
+    "{scores}": "Senarai pra-render skor akhir bagi setiap pemain"
+  },
+
+  "player_prompt": {
+    "intro": "Anda bermain Golf (Permainan Kad) - Pemain {player_id}.\nMatlamat: Dapatkan jumlah skor terendah dalam pusingan tunggal ini. Jika lajur berkongsi nilai yang sama, ia dijumlahkan sebagai 0.\nNilai Kad: A=1, 2-10=nilai muka, J/Q=10, K=0\n\nTindakan (guna kurungan tepat):\n- '[draw]' - Cabut daripada dek\n- '[take]' - Ambil daripada timbunan buang\n- '[swap X Y]' - Tukar kad yang dicabut dengan kedudukan X (baris) Y (lajur)\n- '[discard]' - Buang kad yang dicabut\n"
+  },
+
+  "board": {
+    "drew": "Anda mencabut: {card}\nSekarang anda mesti [swap X Y] atau [discard] ia.",
+    "took": "Anda mengambil: {card} daripada timbunan buang\nAnda mesti [swap X Y] dengannya (tidak boleh buang).",
+    "peeked": "Anda mengintai di kedudukan ({row},{col}): {card}",
+    "turn_view": "Tangan anda:\n{hand}\nTimbunan buang: {discard}\n{options}",
+    "none": "Tiada"
+  },
+
+  "options": {
+    "final_turns": "Giliran akhir! Pilihan anda: [draw], [take], [peek X Y]",
+    "draw": "Pilihan anda: [draw], [take]",
+    "must_swap": "Anda mesti: [swap X Y] (tidak boleh buang kad daripada timbunan buang)",
+    "swap_or_discard": "Anda mesti: [swap X Y] atau [discard]"
+  },
+
+  "hand": {
+    "no_cards": "Tiada kad",
+    "header": "  Col:   1    2    3",
+    "row": "Row {n}: {cards}"
+  },
+
+  "action_desc": {
+    "swapped": "Pemain {pid} menukar {new} dengan {old} di kedudukan ({row},{col})",
+    "discarded": "Pemain {pid} membuang {card}"
+  },
+
+  "message": {
+    "deck_empty": "Dek kosong! Permainan tamat serta-merta.",
+    "knocked": "Pemain {pid} mengetuk! Setiap pemain lain mendapat satu giliran lagi.",
+    "final_round": "Pemain {pid} {reason}! Setiap pemain lain mendapat satu giliran lagi."
+  },
+
+  "reason": {
+    "all_revealed": "telah mendedahkan semua kad"
+  },
+
+  "invalid": {
+    "wrong_action": "Guna tepat SATU tindakan berkurungan: [draw], [take], [swap X Y], [discard], [knock], atau [peek X Y]",
+    "discard_empty": "Timbunan buang kosong!",
+    "must_draw_first": "Anda mesti [draw], [take], [knock], atau [peek X Y] dahulu",
+    "cannot_discard_taken": "Anda tidak boleh membuang kad yang diambil daripada timbunan buang. Anda mesti menukarnya.",
+    "have_drawn_card": "Anda mempunyai kad yang dicabut. Anda mesti [swap X Y] atau [discard] ia.",
+    "need_drawn_swap": "Anda memerlukan kad yang dicabut untuk menukar.",
+    "need_drawn_discard": "Anda memerlukan kad yang dicabut untuk membuang.",
+    "out_of_bounds": "Kedudukan di luar had. Guna baris 1-{max_row}, lajur 1-{max_col}",
+    "knock_with_card": "Anda tidak boleh mengetuk dengan kad yang dicabut. Selesaikan giliran anda dahulu.",
+    "already_knocked": "Seseorang telah mengetuk dalam pusingan ini.",
+    "already_revealed": "Kad itu telah pun didedahkan!"
+  },
+
+  "summary": {
+    "full": "Permainan Tamat! Pemain {winner} menang dengan skor {score} mata!\n\nSkor Akhir:\n{scores}",
+    "line": "Pemain {pid}: {score} mata\n"
+  },
+
+  "board_str": {
+    "title": "=== PERMAINAN GOLF ===",
+    "discard": "Timbunan buang: {card}",
+    "knocked": "Pemain {pid} telah mengetuk!",
+    "player_header": "Pemain {pid} (Skor: {score}):"
+  }
+}

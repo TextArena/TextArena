@@ -1,0 +1,14 @@
+{
+  "entry": "textarena.envs.IteratedUltimatumGame.env:IteratedUltimatumGameEnv",
+  "num_players": 2,
+  "seed": 42,
+  "scenarios": {
+    "p0_wins": ["[Offer: $2]", "[Accept]", "[Offer: $2]", "[Accept]"],
+    "p1_wins": ["[Offer: $8]", "[Accept]", "[Offer: $8]", "[Accept]"],
+    "draw": ["[Offer: $5]", "[Accept]", "[Offer: $5]", "[Accept]"],
+    "reject": ["[Offer: $3]", "[Reject]", "[Offer: $4]", "[Accept]"],
+    "invalid_proposer_format": ["bad move", "[Offer: $3]", "[Accept]", "[Offer: $3]", "[Accept]"],
+    "invalid_offer_range": ["[Offer: $99]", "[Offer: $3]", "[Accept]", "[Offer: $3]", "[Accept]"],
+    "invalid_responder": ["[Offer: $3]", "maybe", "[Accept]", "[Offer: $3]", "[Accept]"]
+  }
+}

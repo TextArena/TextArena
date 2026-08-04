@@ -1,5 +1,6 @@
 
-import re, numpy
+import random
+import re
 from typing import Optional, Tuple, Dict, Any
 
 import textarena as ta
@@ -36,7 +37,7 @@ class SpellingBeeEnv(ta.Env):
             'n': 6.75, 'o': 7.51, 'p': 1.93, 'q': 0.10, 'r': 5.99, 's': 6.33, 't': 9.06, 'u': 2.76, 'v': 0.98, 'w': 2.36, 'x': 0.15, 'y': 1.97, 'z': 0.07
         }
         probs = [w / sum(list(letter_frequencies.values())) for w in list(letter_frequencies.values())] # Convert weights to probabilities that sum to 1.
-        return set(numpy.random.choice(list(letter_frequencies.keys()), size=self.num_letters, replace=False, p=probs))
+        return set(random.choices(list(letter_frequencies.keys()), k=self.num_letters))
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)

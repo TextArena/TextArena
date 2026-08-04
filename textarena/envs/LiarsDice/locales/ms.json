@@ -1,0 +1,63 @@
+{
+  "_comment": "Teks yang dilihat pemain untuk Liar's Dice. Token tindakan dalam kurungan siku ('[Bid: X, Y]', '[Call]'), ID pemain, nilai muka dadu, kuantiti dan bilangan ialah ruang letak neutral dan tidak boleh diterjemahkan.",
+  "_slots": {
+    "player_id": "indeks pemain (integer)",
+    "num_players": "bilangan pemain dalam permainan (integer)",
+    "dice_summary": "bilangan dadu berbaki setiap pemain yang telah dicantum dengan '; '",
+    "your_dice": "senarai nilai dadu pemain ini yang telah dijana, dipisahkan dengan koma",
+    "p": "indeks pemain (integer)",
+    "d": "bilangan dadu berbaki bagi pemain itu (integer)",
+    "current_player_id": "indeks pemain yang membuat call (integer)",
+    "face_value": "nilai muka dadu yang dikira (1-6)",
+    "count": "bilangan sebenar dadu yang sepadan (integer)",
+    "quantity": "kuantiti bidaan (integer)",
+    "loser_id": "indeks pemain yang kehilangan sebiji dadu (integer)",
+    "new_quantity": "kuantiti bidaan yang baru dihantar (integer)",
+    "current_quantity": "kuantiti bidaan semasa (integer)",
+    "new_face_value": "nilai muka bidaan yang baru dihantar (integer)",
+    "current_face_value": "nilai muka bidaan semasa (integer)",
+    "action": "rentetan tindakan mentah yang dihantar pemain",
+    "reason": "sebab penolakan bidaan yang bersarang",
+    "winner": "indeks pemain yang menang (integer)",
+    "final_ranking": "senarai indeks pemain dari yang pertama tersingkir hingga pemenang"
+  },
+
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam permainan Liar's Dice {num_players} pemain.\nPeraturan:\n- Pada giliran anda, anda boleh sama ada:\n  1) Membuat bidaan baharu dengan kuantiti lebih tinggi atau muka lebih tinggi (atau kedua-duanya) daripada bidaan semasa; iaitu '[Bid: 3, 4]',\n  2) Mencabar bidaan terakhir dengan menaip '[Call]'.\n\nJika anda mencabar:\n  - Jika bilangan sebenar nilai muka itu di kalangan semua dadu kurang daripada bidaan, pembida terakhir kehilangan sebiji dadu.\n  - Jika tidak, pencabar kehilangan sebiji dadu.\nPemain yang mencapai 0 dadu tersingkir. Pemain terakhir yang tinggal menang."
+  },
+
+  "board": {
+    "per_player":       "\tPemain {p}: {d}",
+    "new_round":        "\nPusingan baharu - Dadu berbaki: {dice_summary}\nDadu semasa anda ialah: {your_dice}"
+  },
+
+  "call": {
+    "bidder_loses":     "Pemain {current_player_id} mencabar! Bilangan sebenar muka {face_value} ialah {count}, iaitu KURANG daripada {quantity}.\nPemain {loser_id} (pembida terakhir) kehilangan sebiji dadu.",
+    "caller_loses":     "Pemain {current_player_id} mencabar! Bilangan sebenar muka {face_value} ialah {count}, iaitu >= {quantity}.\nPemain {loser_id} (pencabar) kehilangan sebiji dadu."
+  },
+
+  "action": {
+    "bid_announce":     "Pemain {player_id} membida {quantity} bagi muka {face_value}."
+  },
+
+  "invalid_move": {
+    "call_no_bid":      "Cabaran dibuat tanpa bidaan terdahulu.",
+    "invalid_bid":      "Bidaan tidak sah: {reason}",
+    "not_recognized":   "Tindakan tidak dikenali sebagai '[Bid: X, Y]' atau '[Call]' yang sah. Tindakan dihantar: {action}"
+  },
+
+  "bid_reason": {
+    "quantity_lower":   "Kuantiti baharu {new_quantity} lebih rendah daripada semasa {current_quantity}.",
+    "face_lower":       "Nilai muka baharu {new_face_value} lebih rendah daripada semasa {current_face_value}.",
+    "identical":        "Bidaan adalah sama dengan bidaan semasa.",
+    "face_range":       "Nilai muka mestilah antara 1 dan 6."
+  },
+
+  "message": {
+    "eliminated_invalid": "Pemain {player_id} tersingkir kerana langkah tidak sah."
+  },
+
+  "outcome": {
+    "win":              "Pemain {winner} menang! Kedudukan akhir: {final_ranking}"
+  }
+}

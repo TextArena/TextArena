@@ -1,0 +1,170 @@
+{
+  "full_game_win": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Congratulations! You guessed the word correctly!",
+        "role": "Player 0",
+        "turn_count": 5
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Playing Wordle.\nA secret 5-letter word has been chosen. You have 6 attempts to guess it.\nFor each guess, wrap your word in square brackets (e.g., '[apple]').\nFeedback for each letter will be given as follows:\n  - G (green): correct letter in the correct position\n  - Y (yellow): letter exists in the word but in the wrong position\n  - X (wrong): letter is not in the word\nEnter your guess to begin.\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "action": "[table]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "[table]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You submitted [table].\nFeedback:\nT A B L E\nX X X X Y\nYou have 5 guesses left.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "notbrackets",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "notbrackets",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: You tried submitting a word in the wrong format. Please make sure to use squared brackets. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[house]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "[house]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You submitted [house].\nFeedback:\nH O U S E\nX G X X Y\nYou have 4 guesses left.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[table]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "[table]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: You have already guessed 'table' before. Please try a different word. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[water]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "[water]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You submitted [water].\nFeedback:\nW A T E R\nX X X G G\nYou have 3 guesses left.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[toolongword]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "[toolongword]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Your word must be exactly 5 letters. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[plant]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "[plant]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You submitted [plant].\nFeedback:\nP L A N T\nX X X X X\nYou have 2 guesses left.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[zzzzz]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "[zzzzz]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: 'zzzzz' is not an English word. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[cover]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "[cover]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      }
+    ],
+    "rewards": {
+      "0": 1
+    }
+  }
+}

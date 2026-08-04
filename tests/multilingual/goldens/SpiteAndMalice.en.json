@@ -1,0 +1,378 @@
+{
+  "draw_play_discard": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 3
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n--- Center Piles ---\nPile 0: []\nPile 1: []\nPile 2: []\nPile 3: []\n\n--- Player 0's View ---\nPayoff Pile (Top Card): K♣, Payoff Pile Length: 20\nHand: ['3♦', '6♦', '5♦', 'J♦', '5♠']\nDiscard Piles: [[], [], [], []]\n\nAvailable Moves: [draw], [play K♣ 0], [play K♣ 1], [play K♣ 2], [play K♣ 3], [discard 3♦ 0], [discard 6♦ 0], [discard 5♦ 0], [discard J♦ 0], [discard 5♠ 0], [discard 3♦ 1], [discard 6♦ 1], [discard 5♦ 1], [discard J♦ 1], [discard 5♠ 1], [discard 3♦ 2], [discard 6♦ 2], [discard 5♦ 2], [discard J♦ 2], [discard 5♠ 2], [discard 3♦ 3], [discard 6♦ 3], [discard 5♦ 3], [discard J♦ 3], [discard 5♠ 3]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You drew cards.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n--- Center Piles ---\nPile 0: []\nPile 1: []\nPile 2: []\nPile 3: []\n\n--- Player 0's View ---\nPayoff Pile (Top Card): K♣, Payoff Pile Length: 20\nHand: ['3♦', '6♦', '5♦', 'J♦', '5♠']\nDiscard Piles: [[], [], [], []]\n\nAvailable Moves: [draw], [play K♣ 0], [play K♣ 1], [play K♣ 2], [play K♣ 3], [discard 3♦ 0], [discard 6♦ 0], [discard 5♦ 0], [discard J♦ 0], [discard 5♠ 0], [discard 3♦ 1], [discard 6♦ 1], [discard 5♦ 1], [discard J♦ 1], [discard 5♠ 1], [discard 3♦ 2], [discard 6♦ 2], [discard 5♦ 2], [discard J♦ 2], [discard 5♠ 2], [discard 3♦ 3], [discard 6♦ 3], [discard 5♦ 3], [discard J♦ 3], [discard 5♠ 3]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[play K♣ 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[play K♣ 0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You played K♣ on center pile 0.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n--- Center Piles ---\nPile 0: ['K♣']\nPile 1: []\nPile 2: []\nPile 3: []\n\n--- Player 0's View ---\nPayoff Pile (Top Card): 5♠, Payoff Pile Length: 19\nHand: ['3♦', '6♦', '5♦', 'J♦', '5♠']\nDiscard Piles: [[], [], [], []]\n\nAvailable Moves: [draw], [discard 3♦ 0], [discard 6♦ 0], [discard 5♦ 0], [discard J♦ 0], [discard 5♠ 0], [discard 3♦ 1], [discard 6♦ 1], [discard 5♦ 1], [discard J♦ 1], [discard 5♠ 1], [discard 3♦ 2], [discard 6♦ 2], [discard 5♦ 2], [discard J♦ 2], [discard 5♠ 2], [discard 3♦ 3], [discard 6♦ 3], [discard 5♦ 3], [discard J♦ 3], [discard 5♠ 3]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[discard 3♦ 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 drew cards.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 played K♣ on center pile 0.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 discarded 3♦ to discard pile 1, which also means they finished their turn. No further actions of Player 0 is considered for this turn. Player 1, you will go next. Please enter your action in the format [action card center_index].",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n--- Center Piles ---\nPile 0: ['K♣']\nPile 1: []\nPile 2: []\nPile 3: []\n\n--- Player 1's View ---\nPayoff Pile (Top Card): 7♠, Payoff Pile Length: 20\nHand: ['A♦', 'K♦', '8♦', '9♦', '2♣']\nDiscard Piles: [[], [], [], []]\n\nAvailable Moves: [draw], [play K♦ 0], [play 2♣ 0], [play A♦ 1], [play K♦ 1], [play A♦ 2], [play K♦ 2], [play A♦ 3], [play K♦ 3], [discard A♦ 0], [discard K♦ 0], [discard 8♦ 0], [discard 9♦ 0], [discard 2♣ 0], [discard A♦ 1], [discard K♦ 1], [discard 8♦ 1], [discard 9♦ 1], [discard 2♣ 1], [discard A♦ 2], [discard K♦ 2], [discard 8♦ 2], [discard 9♦ 2], [discard 2♣ 2], [discard A♦ 3], [discard K♦ 3], [discard 8♦ 3], [discard 9♦ 3], [discard 2♣ 3]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[play 2♣ 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[play 2♣ 0]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You played 2♣ on center pile 0.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n--- Center Piles ---\nPile 0: ['K♣', '2♣']\nPile 1: []\nPile 2: []\nPile 3: []\n\n--- Player 1's View ---\nPayoff Pile (Top Card): 7♠, Payoff Pile Length: 20\nHand: ['A♦', 'K♦', '8♦', '9♦']\nDiscard Piles: [[], [], [], []]\n\nAvailable Moves: [draw], [play K♦ 0], [play A♦ 1], [play K♦ 1], [play A♦ 2], [play K♦ 2], [play A♦ 3], [play K♦ 3], [discard A♦ 0], [discard K♦ 0], [discard 8♦ 0], [discard 9♦ 0], [discard A♦ 1], [discard K♦ 1], [discard 8♦ 1], [discard 9♦ 1], [discard A♦ 2], [discard K♦ 2], [discard 8♦ 2], [discard 9♦ 2], [discard A♦ 3], [discard K♦ 3], [discard 8♦ 3], [discard 9♦ 3]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[discard 8♦ 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[discard 3♦ 1]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have discarded 3♦ to discard pile 1, which also means you have finished their turn. No further actions of yours is considered for this turn. Player 1 will go next.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 discarded 3♦ to discard pile 1, which also means they finished their turn. No further actions of Player 0 is considered for this turn. Player 1, you will go next. Please enter your action in the format [action card center_index].",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 played 2♣ on center pile 0.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 discarded 8♦ to discard pile 0, which also means they finished their turn. No further actions of Player 1 is considered for this turn. Player 0, you will go next. Please enter your action in the format [action card center_index].",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n--- Center Piles ---\nPile 0: ['K♣', '2♣']\nPile 1: []\nPile 2: []\nPile 3: []\n\n--- Player 0's View ---\nPayoff Pile (Top Card): 5♠, Payoff Pile Length: 19\nHand: ['6♦', '5♦', 'J♦', '5♠']\nDiscard Piles: [[], ['3♦'], [], []]\n\nAvailable Moves: [draw], [play 3♦ 0], [discard 6♦ 0], [discard 5♦ 0], [discard J♦ 0], [discard 5♠ 0], [discard 6♦ 1], [discard 5♦ 1], [discard J♦ 1], [discard 5♠ 1], [discard 6♦ 2], [discard 5♦ 2], [discard J♦ 2], [discard 5♠ 2], [discard 6♦ 3], [discard 5♦ 3], [discard J♦ 3], [discard 5♠ 3]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "invalid_discard_from_payoff": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n--- Center Piles ---\nPile 0: []\nPile 1: []\nPile 2: []\nPile 3: []\n\n--- Player 0's View ---\nPayoff Pile (Top Card): K♣, Payoff Pile Length: 20\nHand: ['3♦', '6♦', '5♦', 'J♦', '5♠']\nDiscard Piles: [[], [], [], []]\n\nAvailable Moves: [draw], [play K♣ 0], [play K♣ 1], [play K♣ 2], [play K♣ 3], [discard 3♦ 0], [discard 6♦ 0], [discard 5♦ 0], [discard J♦ 0], [discard 5♠ 0], [discard 3♦ 1], [discard 6♦ 1], [discard 5♦ 1], [discard J♦ 1], [discard 5♠ 1], [discard 3♦ 2], [discard 6♦ 2], [discard 5♦ 2], [discard J♦ 2], [discard 5♠ 2], [discard 3♦ 3], [discard 6♦ 3], [discard 5♦ 3], [discard J♦ 3], [discard 5♠ 3]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[discard K♣ 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[discard K♣ 0]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid discard. Player 0 tried to discard a card from the payoff pile. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n--- Center Piles ---\nPile 0: []\nPile 1: []\nPile 2: []\nPile 3: []\n\n--- Player 0's View ---\nPayoff Pile (Top Card): K♣, Payoff Pile Length: 20\nHand: ['3♦', '6♦', '5♦', 'J♦', '5♠']\nDiscard Piles: [[], [], [], []]\n\nAvailable Moves: [draw], [play K♣ 0], [play K♣ 1], [play K♣ 2], [play K♣ 3], [discard 3♦ 0], [discard 6♦ 0], [discard 5♦ 0], [discard J♦ 0], [discard 5♠ 0], [discard 3♦ 1], [discard 6♦ 1], [discard 5♦ 1], [discard J♦ 1], [discard 5♠ 1], [discard 3♦ 2], [discard 6♦ 2], [discard 5♦ 2], [discard J♦ 2], [discard 5♠ 2], [discard 3♦ 3], [discard 6♦ 3], [discard 5♦ 3], [discard J♦ 3], [discard 5♠ 3]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "invalid_discard_not_in_hand": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n--- Center Piles ---\nPile 0: []\nPile 1: []\nPile 2: []\nPile 3: []\n\n--- Player 0's View ---\nPayoff Pile (Top Card): K♣, Payoff Pile Length: 20\nHand: ['3♦', '6♦', '5♦', 'J♦', '5♠']\nDiscard Piles: [[], [], [], []]\n\nAvailable Moves: [draw], [play K♣ 0], [play K♣ 1], [play K♣ 2], [play K♣ 3], [discard 3♦ 0], [discard 6♦ 0], [discard 5♦ 0], [discard J♦ 0], [discard 5♠ 0], [discard 3♦ 1], [discard 6♦ 1], [discard 5♦ 1], [discard J♦ 1], [discard 5♠ 1], [discard 3♦ 2], [discard 6♦ 2], [discard 5♦ 2], [discard J♦ 2], [discard 5♠ 2], [discard 3♦ 3], [discard 6♦ 3], [discard 5♦ 3], [discard J♦ 3], [discard 5♠ 3]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[discard 2♣ 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[discard 2♣ 0]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid discard. Player 0 tried to discard a card that is not in hand. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n--- Center Piles ---\nPile 0: []\nPile 1: []\nPile 2: []\nPile 3: []\n\n--- Player 0's View ---\nPayoff Pile (Top Card): K♣, Payoff Pile Length: 20\nHand: ['3♦', '6♦', '5♦', 'J♦', '5♠']\nDiscard Piles: [[], [], [], []]\n\nAvailable Moves: [draw], [play K♣ 0], [play K♣ 1], [play K♣ 2], [play K♣ 3], [discard 3♦ 0], [discard 6♦ 0], [discard 5♦ 0], [discard J♦ 0], [discard 5♠ 0], [discard 3♦ 1], [discard 6♦ 1], [discard 5♦ 1], [discard J♦ 1], [discard 5♠ 1], [discard 3♦ 2], [discard 6♦ 2], [discard 5♦ 2], [discard J♦ 2], [discard 5♠ 2], [discard 3♦ 3], [discard 6♦ 3], [discard 5♦ 3], [discard J♦ 3], [discard 5♠ 3]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "invalid_format": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n--- Center Piles ---\nPile 0: []\nPile 1: []\nPile 2: []\nPile 3: []\n\n--- Player 0's View ---\nPayoff Pile (Top Card): K♣, Payoff Pile Length: 20\nHand: ['3♦', '6♦', '5♦', 'J♦', '5♠']\nDiscard Piles: [[], [], [], []]\n\nAvailable Moves: [draw], [play K♣ 0], [play K♣ 1], [play K♣ 2], [play K♣ 3], [discard 3♦ 0], [discard 6♦ 0], [discard 5♦ 0], [discard J♦ 0], [discard 5♠ 0], [discard 3♦ 1], [discard 6♦ 1], [discard 5♦ 1], [discard J♦ 1], [discard 5♠ 1], [discard 3♦ 2], [discard 6♦ 2], [discard 5♦ 2], [discard J♦ 2], [discard 5♠ 2], [discard 3♦ 3], [discard 6♦ 3], [discard 5♦ 3], [discard J♦ 3], [discard 5♠ 3]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "not a move",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "not a move",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid move format. Player 0 did not respond with a valid move in square brackets. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      }
+    ],
+    "rewards": null
+  },
+  "invalid_play": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.\n\n### Game Overview:\n- The objective is to clear your payoff pile by playing cards to the center piles.\n- You can play cards from three sources:\n  1. Your **hand** (you start each turn with up to 5 cards in hand).\n  2. The **top card of your payoff pile**.\n  3. The **top card of any of your discard piles**.\n\n### Playing Rules:\n- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n- If a center pile reaches Queen, it will be cleared automatically.\n- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Actions:\n1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.\n2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).\n3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n--- Center Piles ---\nPile 0: []\nPile 1: []\nPile 2: []\nPile 3: []\n\n--- Player 0's View ---\nPayoff Pile (Top Card): K♣, Payoff Pile Length: 20\nHand: ['3♦', '6♦', '5♦', 'J♦', '5♠']\nDiscard Piles: [[], [], [], []]\n\nAvailable Moves: [draw], [play K♣ 0], [play K♣ 1], [play K♣ 2], [play K♣ 3], [discard 3♦ 0], [discard 6♦ 0], [discard 5♦ 0], [discard J♦ 0], [discard 5♠ 0], [discard 3♦ 1], [discard 6♦ 1], [discard 5♦ 1], [discard J♦ 1], [discard 5♠ 1], [discard 3♦ 2], [discard 6♦ 2], [discard 5♦ 2], [discard J♦ 2], [discard 5♠ 2], [discard 3♦ 3], [discard 6♦ 3], [discard 5♦ 3], [discard J♦ 3], [discard 5♠ 3]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[play A♠ 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[play A♠ 0]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid play. Player 0 tried to play A♠ on center pile 0. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n--- Center Piles ---\nPile 0: []\nPile 1: []\nPile 2: []\nPile 3: []\n\n--- Player 0's View ---\nPayoff Pile (Top Card): K♣, Payoff Pile Length: 20\nHand: ['3♦', '6♦', '5♦', 'J♦', '5♠']\nDiscard Piles: [[], [], [], []]\n\nAvailable Moves: [draw], [play K♣ 0], [play K♣ 1], [play K♣ 2], [play K♣ 3], [discard 3♦ 0], [discard 6♦ 0], [discard 5♦ 0], [discard J♦ 0], [discard 5♠ 0], [discard 3♦ 1], [discard 6♦ 1], [discard 5♦ 1], [discard J♦ 1], [discard 5♠ 1], [discard 3♦ 2], [discard 6♦ 2], [discard 5♦ 2], [discard J♦ 2], [discard 5♠ 2], [discard 3♦ 3], [discard 6♦ 3], [discard 5♦ 3], [discard J♦ 3], [discard 5♠ 3]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "_comment": "Fichier de langue de Surround en français. NE traduisez PAS les clés, seulement les valeurs. Conservez chaque {marqueur} exactement tel quel. NE traduisez PAS les jetons de mouvement/direction saisis par le joueur ([up], [down], [left], [right], w, s, a, d) ni le plateau ASCII dans {board}.",
+  "_slots": {
+    "{num_players}": "Nombre de joueurs dans la partie",
+    "{width}": "Largeur du plateau en cases",
+    "{height}": "Hauteur du plateau en cases",
+    "{player_id}": "Le numéro d'un joueur (à partir de 0)",
+    "{board}": "La grille ASCII rendue ; garder neutre, ne jamais traduire ses caractères",
+    "{reason}": "La phrase rendue du motif de fin de partie",
+    "{groups}": "Données de classement neutres (liste de groupes d'ID de joueur, du meilleur au pire) ; ne pas traduire"
+  },
+  "player_prompt": {
+    "intro": "Surround à {num_players} joueurs sur une grille {width}x{height}.\nVous êtes le joueur {player_id}. Coups valides : '[up]' '[down]' '[left]' '[right]' ou w/s/a/d.\nObjectif : survivre plus longtemps que tous les autres. Les traînées sont mortelles ; heurter un mur tue ; les collisions frontales tuent les deux."
+  },
+  "board": {
+    "current":     "Plateau actuel :\n{board}",
+    "after_moves": "Plateau après les coups simultanés :\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Le joueur {player_id} est mort à cause d'un coup invalide."
+  },
+  "outcome": {
+    "survived_win": "Le joueur {player_id} a survécu ; tous les autres se sont écrasés.",
+    "all_crashed":  "Tous les joueurs se sont écrasés simultanément.",
+    "outlived":     "Le joueur a survécu à tous les autres.",
+    "all_dead":     "Tous les joueurs sont morts.",
+    "turn_limit":   "Limite de tours atteinte - le survivant le plus durable gagne.",
+    "ranking":      "{reason} Groupes de classement (meilleur→pire) : {groups}"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "_comment": "Ultimate-Texas-Hold'em-Sprachdatei. Übersetze KEINE Schlüssel (linke Seite). Übersetze nur Werte (rechte Seite). Behalte jeden {placeholder} exakt bei. Übersetze niemals die Aktions-Tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), die Kartenbezeichnungen/Farben (z. B. 'A♠', 'K♥', '10♦'), die in {phase} übergebenen Phasenbezeichnungen oder irgendwelche numerischen Chip-/Einsatz-/Auszahlungsbeträge. Die wörtlichen '${{...}}'-Fragmente in der Auszahlungstabelle der Regeln reproduzieren einen bereits bestehenden Anzeigefehler wortwörtlich und müssen exakt beibehalten werden (die doppelten geschweiften Klammern sind beabsichtigt).",
+  "_slots": {
+    "{start_chips}": "Anfänglicher Chip-Bestand, z. B. 1000",
+    "{ante}": "Der Ante-/Blind-Einsatzbetrag, z. B. 25",
+    "{ante4}": "Das Vierfache des Ante, z. B. 100",
+    "{ante2}": "Das Doppelte des Ante, z. B. 50",
+    "{round}": "Die aktuelle Rundennummer",
+    "{chips}": "Der aktuelle Chip-Bestand des Spielers",
+    "{hand}": "Eine kommagetrennte Liste von Kartenbezeichnungen, z. B. 'A♠, K♥', oder der lokalisierte Text für keine Karten",
+    "{phase}": "Das aktuelle Phasenbezeichnungs-Token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Eine kommagetrennte Liste von Aktions-Tokens in Klammern, z. B. '[play_bet_4x], [check]'",
+    "{available}": "Eine kommagetrennte Liste der aktuell erlaubten Aktions-Tokens in Klammern",
+    "{blind}": "Der Blind-Einsatzbetrag",
+    "{play}": "Der Play-Einsatzbetrag",
+    "{cards}": "Eine kommagetrennte Liste von Kartenbezeichnungen, z. B. 'Q♣, 7♦, 2♠'",
+    "{name}": "Ein lokalisierter Poker-Handname, wortwörtlich eingefügt",
+    "{amount}": "Ein Chip-Betrag",
+    "{net}": "Die Netto-Chip-Veränderung der Runde (kann negativ sein)",
+    "{max_turns}": "Die maximale Anzahl an Runden",
+    "{winner_rounds}": "Die Anzahl der abgeschlossenen Runden"
+  },
+
+  "player_prompt": {
+    "no_cards": "Noch keine Karten",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Einzelspieler gegen Dealer\n\n📖 SPIELÜBERSICHT:\n• Du startest mit {start_chips} Chips\n• Ein einzelnes Deck mit 52 Karten (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Du spielst gegen den Dealer (das Haus)\n• Jede Runde folgt der Struktur von Ultimate Texas Hold'em: Du setzt ANTE und BLIND, erhältst 2 Hole Cards, entscheidest über optionale PLAY-Einsätze über die Einsatzphasen hinweg, deckst dann die Gemeinschaftskarten auf und vergleichst deine beste 5-Karten-Hand mit der des Dealers. Dein Ziel ist es, deine Gewinne zu maximieren (wenn du die bessere Hand hast) und deine Verluste zu minimieren (wenn du die schlechtere Hand hast).\n• Das Spiel endet, wenn du zu Beginn einer Runde 0 Chips oder weniger hast (NIEDERLAGE) oder 1000 Runden mit Chips abschließt (SIEG)\n\n💰 EINSATZSTRUKTUR:\n• ANTE: Pflichteinsatz von ${ante} in jeder Runde\n• BLIND: Pflichteinsatz von ${ante} in jeder Runde\n• PLAY: Optionaler Einsatz während des Spiels. Im Verlauf der Runde darfst du NUR EINEN der folgenden Einsätze wählen: (${ante4} beim PRE-FLOP, ${ante2} beim FLOP oder ${ante} beim RIVER. Am River kann auch gefoldet werden, wodurch du die Hand aufgibst und keinen Einsatz tätigst.)\n\n🎴 KARTENAUSTEILUNG:\n• Du erhältst 2 offene Karten (deine Hole Cards)\n• Der Dealer erhält 2 verdeckte Karten (für dich verborgen)\n• 5 Gemeinschaftskarten werden zunächst verdeckt ausgeteilt\n• Die Gemeinschaftskarten werden im Verlauf der Spielphasen schrittweise aufgedeckt\n\n🏆 DEALER-QUALIFIKATION:\n• Der Dealer muss mindestens ein PAAR (2 Karten desselben Rangs) haben, um sich zu qualifizieren, wobei die 2 Karten seiner Hand und die 5 Gemeinschaftskarten verwendet werden.\n• Die Dealer-Qualifikation beeinflusst die Einsatzergebnisse, wie später erklärt wird.\n\n🎮 SPIELPHASEN & AKTIONEN:\n📋 PRE-FLOP:\n  • Aktionen: [4x] (${ante4}) oder [check]\n  • [4x]: Setze ${ante4} als PLAY-Einsatz, deckt die ersten 3 Gemeinschaftskarten auf\n  • [check]: Kein zusätzlicher Einsatz, deckt die ersten 3 Gemeinschaftskarten auf\n\n📋 FLOP:\n  • Wenn ein 4x-Einsatz getätigt wurde: Nur [skip] verfügbar (deckt automatisch die letzten 2 Gemeinschaftskarten auf)\n  • Wenn kein 4x-Einsatz: [2x] (${ante2}) oder [check]\n  • [2x]: Setze ${ante2} als PLAY-Einsatz, deckt die letzten 2 Gemeinschaftskarten auf\n  • [check]: Kein zusätzlicher Einsatz, deckt die letzten 2 Gemeinschaftskarten auf\n\n📋 RIVER:\n  • Wenn ein 4x- oder 2x-Einsatz getätigt wurde: Nur [skip] verfügbar (geht automatisch zum Showdown über)\n  • Wenn kein vorheriger PLAY-Einsatz: [1x] (${ante}) oder [fold]\n  • [1x]: Setze ${ante} als PLAY-Einsatz, geht zum Showdown über\n  • [fold]: Gib die Hand auf, verliere ANTE- und BLIND-Einsätze\n\n📋 SHOWDOWN:\n  • Alle Karten werden aufgedeckt und ausgewertet\n  • Beste 5-Karten-Hand aus 7 Karten (2 Hole + 5 Gemeinschaft)\n  • Einsätze werden nach den Auszahlungsregeln abgerechnet\n\n💎 EINSATZAUSZAHLUNGEN:\n📊 ANTE-EINSATZ:\n  • Dealer qualifiziert sich nicht: PUSH (Einsatz zurückgegeben)\n  • Dealer qualifiziert sich & du gewinnst: 1:1-Auszahlung (Einsatz + Gewinn)\n  • Dealer qualifiziert sich & du verlierst: Einsatz verloren\n  • Unentschieden: PUSH (Einsatz zurückgegeben)\n\n📊 BLIND-EINSATZ:\n  • Unabhängig von der Dealer-Qualifikation\n  • Du gewinnst: Einsatz zurückgegeben und zusätzliche Auszahlung je nach Stärke deiner Hand\n  • Du verlierst: Einsatz verloren\n  • Unentschieden: PUSH (Einsatz zurückgegeben)\n\n📊 BLIND-EINSATZ-AUSZAHLUNGSTABELLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Weniger als Straight: Keine zusätzliche Auszahlung\n\n📊 PLAY-EINSATZ:\n  • Unabhängig von der Dealer-Qualifikation\n  • Direkter Vergleich: Deine beste Hand gegen die beste Hand des Dealers\n  • Du gewinnst: 1:1-Auszahlung (Einsatz + Gewinn)\n  • Du verlierst: Einsatz verloren\n  • Unentschieden: PUSH (Einsatz zurückgegeben)\n\n🎯 POKER-HAND-RANGFOLGE (Beste bis Schlechteste):\n  1. Royal Flush: A-K-Q-J-10 derselben Farbe\n  2. Straight Flush: 5 aufeinanderfolgende Karten derselben Farbe\n  3. Four of a Kind: 4 Karten desselben Rangs\n  4. Full House: Drilling + Paar\n  5. Flush: 5 Karten derselben Farbe\n  6. Straight: 5 aufeinanderfolgende Karten\n  7. Three of a Kind: 3 Karten desselben Rangs\n  8. Two Pair: 2 Paare unterschiedlicher Ränge\n  9. One Pair: 2 Karten desselben Rangs\n  10. High Card: Höchste Karte gewinnt\n\n⌨️  AKTIONSBEFEHLE:\n• [4x] oder [play bet 4x]: Setze ${{self.ante_amount*4}} als PLAY-Einsatz\n• [2x] oder [play bet 2x]: Setze ${{self.ante_amount*2}} als PLAY-Einsatz\n• [1x] oder [play bet 1x]: Setze ${{self.ante_amount*1}} als PLAY-Einsatz\n• [check] oder [c]: Check (kein zusätzlicher Einsatz)\n• [fold] oder [f]: Fold (Hand aufgeben)\n• [skip] oder [s]: Weiter zur nächsten Phase (wenn keine Aktion nötig ist)\n\n💡 STRATEGIE-TIPPS:\n• Starke Starthände (Paare, hohe Karten) rechtfertigen oft 4x-Einsätze\n• Berücksichtige die Dealer-Qualifikation - schwache Hände können ein Push ergeben, wenn sich der Dealer nicht qualifiziert\n• Der BLIND-Einsatz kann mit starken Händen sehr profitabel sein (Royal Flush = 500:1!)\n• Behalte deinen Chip-Stapel im Auge! Wenn er zu Beginn einer Runde auf 0 oder darunter fällt, verlierst du.\n\n⚠️  WICHTIGE HINWEISE:\n• ANTE- und BLIND-Einsätze sind in jeder Runde Pflicht\n• PLAY-Einsätze sind optional und strategisch\n• Achte darauf, die richtige Aktion einzugeben, und immer nur eine Aktion auf einmal.\n\n",
+    "state": "🎯 RUNDE {round}\n💰 Chips: {chips}\n🎴 Deine Hand: {hand}\n📊 Aktuelle Einsätze: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Phase: {phase}\n🎯 Verfügbare Aktionen: {actions}\n\n"
+  },
+
+  "board": {
+    "round_start": "🎮 Runde {round} gestartet! Einsätze: ANTE ${ante}, BLIND ${blind}. Du hast noch {chips} Chips.",
+    "your_hand": "🎴 Deine Hand: {hand}",
+    "flop_revealed": "🃏 FLOP aufgedeckt: {cards}",
+    "river_revealed": "🃏 RIVER aufgedeckt: {cards}"
+  },
+
+  "invalid_move": {
+    "reason": "Ungültige Aktion für die aktuelle Phase. Verfügbare Aktionen: {available}",
+    "message": "❌ Ungültige Aktion! Verfügbare Aktionen: {available}"
+  },
+
+  "action": {
+    "folded": "🃏 Du hast gefoldet."
+  },
+
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Hand des Dealers: {cards}",
+    "community_cards": "🃏 Gemeinschaftskarten: {cards}",
+    "player_best": "🎴 Beste Hand des Spielers: {name} ({cards})",
+    "dealer_best": "🎴 Beste Hand des Dealers: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE-Einsatz VERLOREN! -${ante} (gefoldet)",
+    "blind_lost_folded": "❌ BLIND-Einsatz VERLOREN! -${blind} (gefoldet)",
+    "ante_won": "✅ ANTE-Einsatz GEWONNEN! +${amount}",
+    "ante_pushed": "🔄 ANTE-Einsatz PUSH! ${ante} zurückgegeben",
+    "ante_lost": "❌ ANTE-Einsatz VERLOREN! -${ante}",
+    "blind_won": "✅ BLIND-Einsatz GEWONNEN! +${amount}",
+    "blind_pushed": "🔄 BLIND-Einsatz PUSH! ${blind} zurückgegeben",
+    "blind_lost": "❌ BLIND-Einsatz VERLOREN! -${blind}",
+    "play_won": "✅ PLAY-Einsatz GEWONNEN! +${amount}",
+    "play_pushed": "🔄 PLAY-Einsatz PUSH! ${play} zurückgegeben",
+    "play_lost": "❌ PLAY-Einsatz VERLOREN! -${play}",
+    "net_gain": "🎉 Runde {round} abgeschlossen! Nettogewinn: +${net}",
+    "net_loss": "💸 Runde {round} abgeschlossen! Nettoverlust: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+
+  "outcome": {
+    "game_over_win": "🏁 SPIEL VORBEI! {max_turns} Runden abgeschlossen. Du hast ${chips} Chips - DU GEWINNST!",
+    "game_over_lose": "🏁 SPIEL VORBEI! Dir sind die Chips ausgegangen. Der Dealer gewinnt!",
+    "reward_win": "Spieler hat {winner_rounds} Runden mit ${chips} Chips abgeschlossen",
+    "reward_lose": "Spieler hatte in Runde {round} keine Chips mehr",
+    "reward_win_max": "Spieler hat {max_turns} Runden mit ${chips} Chips abgeschlossen"
+  },
+
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Four of a Kind",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Three of a Kind",
+    "two_pair": "Two Pair",
+    "one_pair": "One Pair",
+    "high_card": "High Card",
+    "unknown": "Unbekannte Hand"
+  }
+}

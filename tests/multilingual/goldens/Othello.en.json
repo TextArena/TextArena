@@ -1,0 +1,314 @@
+{
+  "illegal_move": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 playing Black (B) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Game Board:\n  0 1 2 3 4 5 6 7\n0|.|.|.|.|.|.|.|.|\n1|.|.|.|.|.|.|.|.|\n2|.|.|.|.|.|.|.|.|\n3|.|.|.|W|B|.|.|.|\n4|.|.|.|B|W|.|.|.|\n5|.|.|.|.|.|.|.|.|\n6|.|.|.|.|.|.|.|.|\n7|.|.|.|.|.|.|.|.|\nValid moves: '[2, 3]', '[3, 2]', '[4, 5]', '[5, 4]'\nCurren Scores - Black: 2, White: 2\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0, 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0, 0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Illegal move. Valid moves: [[2, 3], [3, 2], [4, 5], [5, 4]] Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[2, 3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 playing White (W) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'.",
+        "trailing_to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Game Board:\n  0 1 2 3 4 5 6 7\n0|.|.|.|.|.|.|.|.|\n1|.|.|.|.|.|.|.|.|\n2|.|.|.|.|.|.|.|.|\n3|.|.|.|W|B|.|.|.|\n4|.|.|.|B|W|.|.|.|\n5|.|.|.|.|.|.|.|.|\n6|.|.|.|.|.|.|.|.|\n7|.|.|.|.|.|.|.|.|\nValid moves: '[2, 3]', '[3, 2]', '[4, 5]', '[5, 4]'\nCurren Scores - Black: 2, White: 2\n",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0, 0]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[2, 3]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (B) played [2, 3] flipping 1 piece(s)",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Game Board:\n  0 1 2 3 4 5 6 7\n0|.|.|.|.|.|.|.|.|\n1|.|.|.|.|.|.|.|.|\n2|.|.|.|B|.|.|.|.|\n3|.|.|.|B|B|.|.|.|\n4|.|.|.|B|W|.|.|.|\n5|.|.|.|.|.|.|.|.|\n6|.|.|.|.|.|.|.|.|\n7|.|.|.|.|.|.|.|.|\nValid moves: '[2, 2]', '[2, 4]', '[4, 2]'\nScores - Black: 4, White: 1\n",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "play_and_flip": {
+    "game_info": {
+      "0": {
+        "invalid_move": true,
+        "reason": "Illegal move. Valid moves: [[2, 1], [3, 2], [4, 5], [5, 4]]",
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Illegal move. Valid moves: [[2, 1], [3, 2], [4, 5], [5, 4]]",
+        "role": "Player 1",
+        "turn_count": 1
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 playing Black (B) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Game Board:\n  0 1 2 3 4 5 6 7\n0|.|.|.|.|.|.|.|.|\n1|.|.|.|.|.|.|.|.|\n2|.|.|.|.|.|.|.|.|\n3|.|.|.|W|B|.|.|.|\n4|.|.|.|B|W|.|.|.|\n5|.|.|.|.|.|.|.|.|\n6|.|.|.|.|.|.|.|.|\n7|.|.|.|.|.|.|.|.|\nValid moves: '[2, 3]', '[3, 2]', '[4, 5]', '[5, 4]'\nCurren Scores - Black: 2, White: 2\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2, 3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 playing White (W) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Game Board:\n  0 1 2 3 4 5 6 7\n0|.|.|.|.|.|.|.|.|\n1|.|.|.|.|.|.|.|.|\n2|.|.|.|.|.|.|.|.|\n3|.|.|.|W|B|.|.|.|\n4|.|.|.|B|W|.|.|.|\n5|.|.|.|.|.|.|.|.|\n6|.|.|.|.|.|.|.|.|\n7|.|.|.|.|.|.|.|.|\nValid moves: '[2, 3]', '[3, 2]', '[4, 5]', '[5, 4]'\nCurren Scores - Black: 2, White: 2\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[2, 3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (B) played [2, 3] flipping 1 piece(s)",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Game Board:\n  0 1 2 3 4 5 6 7\n0|.|.|.|.|.|.|.|.|\n1|.|.|.|.|.|.|.|.|\n2|.|.|.|B|.|.|.|.|\n3|.|.|.|B|B|.|.|.|\n4|.|.|.|B|W|.|.|.|\n5|.|.|.|.|.|.|.|.|\n6|.|.|.|.|.|.|.|.|\n7|.|.|.|.|.|.|.|.|\nValid moves: '[2, 2]', '[2, 4]', '[4, 2]'\nScores - Black: 4, White: 1\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2, 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2, 3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (B) played [2, 3] flipping 1 piece(s)",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Game Board:\n  0 1 2 3 4 5 6 7\n0|.|.|.|.|.|.|.|.|\n1|.|.|.|.|.|.|.|.|\n2|.|.|.|B|.|.|.|.|\n3|.|.|.|B|B|.|.|.|\n4|.|.|.|B|W|.|.|.|\n5|.|.|.|.|.|.|.|.|\n6|.|.|.|.|.|.|.|.|\n7|.|.|.|.|.|.|.|.|\nValid moves: '[2, 2]', '[2, 4]', '[4, 2]'\nScores - Black: 4, White: 1\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[2, 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (W) played [2, 2] flipping 1 piece(s)",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Game Board:\n  0 1 2 3 4 5 6 7\n0|.|.|.|.|.|.|.|.|\n1|.|.|.|.|.|.|.|.|\n2|.|.|W|B|.|.|.|.|\n3|.|.|.|W|B|.|.|.|\n4|.|.|.|B|W|.|.|.|\n5|.|.|.|.|.|.|.|.|\n6|.|.|.|.|.|.|.|.|\n7|.|.|.|.|.|.|.|.|\nValid moves: '[2, 1]', '[3, 2]', '[4, 5]', '[5, 4]'\nScores - Black: 3, White: 3\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2, 4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2, 4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Illegal move. Valid moves: [[2, 1], [3, 2], [4, 5], [5, 4]] Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[5, 3]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[5, 3]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      }
+    ],
+    "rewards": {
+      "0": -1,
+      "1": 1
+    }
+  },
+  "wrong_format": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 playing Black (B) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Game Board:\n  0 1 2 3 4 5 6 7\n0|.|.|.|.|.|.|.|.|\n1|.|.|.|.|.|.|.|.|\n2|.|.|.|.|.|.|.|.|\n3|.|.|.|W|B|.|.|.|\n4|.|.|.|B|W|.|.|.|\n5|.|.|.|.|.|.|.|.|\n6|.|.|.|.|.|.|.|.|\n7|.|.|.|.|.|.|.|.|\nValid moves: '[2, 3]', '[3, 2]', '[4, 5]', '[5, 4]'\nCurren Scores - Black: 2, White: 2\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "not a move",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "not a move",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Move must be of the form [row, col]. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[2, 3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 playing White (W) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'.",
+        "trailing_to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Game Board:\n  0 1 2 3 4 5 6 7\n0|.|.|.|.|.|.|.|.|\n1|.|.|.|.|.|.|.|.|\n2|.|.|.|.|.|.|.|.|\n3|.|.|.|W|B|.|.|.|\n4|.|.|.|B|W|.|.|.|\n5|.|.|.|.|.|.|.|.|\n6|.|.|.|.|.|.|.|.|\n7|.|.|.|.|.|.|.|.|\nValid moves: '[2, 3]', '[3, 2]', '[4, 5]', '[5, 4]'\nCurren Scores - Black: 2, White: 2\n",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "not a move",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[2, 3]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (B) played [2, 3] flipping 1 piece(s)",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Game Board:\n  0 1 2 3 4 5 6 7\n0|.|.|.|.|.|.|.|.|\n1|.|.|.|.|.|.|.|.|\n2|.|.|.|B|.|.|.|.|\n3|.|.|.|B|B|.|.|.|\n4|.|.|.|B|W|.|.|.|\n5|.|.|.|.|.|.|.|.|\n6|.|.|.|.|.|.|.|.|\n7|.|.|.|.|.|.|.|.|\nValid moves: '[2, 2]', '[2, 4]', '[4, 2]'\nScores - Black: 4, White: 1\n",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  }
+}

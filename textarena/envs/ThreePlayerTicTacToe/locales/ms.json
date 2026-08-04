@@ -1,0 +1,23 @@
+{
+  "_comment": "Fail bahasa ThreePlayerTicTacToe — Bahasa Melayu. JANGAN terjemahkan kunci. Terjemahkan nilai sahaja. Kekalkan setiap {placeholder} seadanya.",
+  "_slots": {
+    "{player_id}": "Nombor pemain, contoh 0, 1 atau 2",
+    "{symbol}": "Tanda pemain, salah satu daripada A, B atau C",
+    "{cell}": "Nombor kotak papan",
+    "{max_cell}": "Nombor kotak sah tertinggi",
+    "{row}": "Indeks baris tanda yang diletakkan",
+    "{col}": "Indeks lajur tanda yang diletakkan",
+    "{board}": "Papan ASCII yang dipaparkan (jangan terjemah)",
+    "{moves}": "Senarai langkah tersedia dipisahkan koma seperti '[4]' (jangan terjemah)"
+  },
+  "player_prompt": { "intro": "Anda ialah Pemain {player_id} dalam Tic Tac Toe Tiga Pemain.\nSimbol anda ialah '{symbol}'.\nAnda bergilir meletakkan simbol anda pada papan 5x5 untuk membentuk satu barisan empat.\nBarisan boleh mendatar, menegak, atau pepenjuru.\nHantar langkah anda menggunakan format '[4]' untuk menanda kotak 4." },
+  "board": { "current_board": "Papan Semasa:\n\n{board}\n\nLangkah Tersedia: {moves}" },
+  "invalid_move": {
+    "wrong_format": "Format langkah tidak sah. Gunakan '[kotak]' di mana kotak ialah 0-{max_cell}.",
+    "out_of_range": "Nombor kotak tidak sah: {cell}. Mesti antara 0 dan {max_cell}.",
+    "already_occupied": "Kotak {cell} telah diduduki.",
+    "made_invalid": "Pemain {player_id} membuat langkah tidak sah"
+  },
+  "game_action": { "placed": "Pemain {player_id} meletakkan simbolnya ({symbol}) di petak ({row}, {col})." },
+  "outcome": { "win": "Pemain {player_id} ({symbol}) menang!", "draw": "Permainan tamat seri!" }
+}

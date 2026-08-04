@@ -1,0 +1,28 @@
+{
+  "_comment": "Cryptarithm 简体中文语言包。请勿翻译键名，只翻译值。保留每个 {占位符}；不要翻译分配记号 `[A 5]`、字母或数字。",
+  "_slots": {
+    "{letter}": "谜题中的字母，例如 S 或 E",
+    "{digit}": "数字 0-9",
+    "{used_letter}": "已占用该数字的字母",
+    "{assigned}": "目前已映射的字母数量",
+    "{total}": "不同字母的总数",
+    "{pct}": "进度百分比，例如 50%"
+  },
+  "player_prompt": { "intro": "为每个字母分配一个唯一的数字，使算式成立。\n用 `[A 5]` 进行分配，可随时重新分配。\n" },
+  "invalid_move": {
+    "wrong_format": "操作格式错误。请使用 `[A 5]`。",
+    "letter_not_in_puzzle": "字母 {letter} 不在谜题中。",
+    "digit_used": "数字 {digit} 已被 {used_letter} 使用。",
+    "leading_zero": "单词的首位数字不能为 0。"
+  },
+  "outcome": {
+    "correct": "正确！等式成立。",
+    "incorrect": "映射已完成，但等式不成立。",
+    "limit": "已达到步数上限。"
+  },
+  "board": {
+    "mapping_header": "映射：",
+    "none_yet": "  （尚无）",
+    "assigned": "\n已分配：{assigned}/{total}（{pct}）"
+  }
+}

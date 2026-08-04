@@ -1,0 +1,306 @@
+{
+  "full_game_win": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Congratulations! You completed the Word Search puzzle.",
+        "role": "Player 0",
+        "turn_count": 6
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0, and you are participating in a Word Search challenge modeled as Basic. The objective is to find and highlight hidden words on the grid below. The rows and columns are numbered for your reference.\n\nHere is the current state of the Word Search board:\n----------------------------------------\nWords you have already found are marked in square brackets [ ]. Each row and column is numbered for clarity.\n\n\nTo locate a word, specify the row and column of its start and end letters. Note that words are either across or down.\nYou may type your response and thoughts in any manner. But you may only submit one submission at a time. For your submissions, use the format '[start_row start_col end_row end_col]'.\nFor instance, if you want to find the word 'HELLO' starting at row 1, column 1 and ending at row 1, column 5, enter '[1 1 1 5]'.\n\nGuidelines:\n- Each guess must be unique; you cannot repeat the same guess.\n- You have a total of 20 incorrect attempts remaining.\n- The history of your attempts will be recorded below.\n\nMake your guesses carefully and strategically. Good luck, Player {player_id}! Let's see how many words you can find!\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n   C00 C01 C02 C03 C04 C05 C06 C07 C08 C09\nR00  S   I   L   V   E   R   C   A   R   D  \nR01  A   N   S   W   E   R   F   O   O   T  \nR02  S   N   B   A   C   G   H   Q   T   A  \nR03  R   G   W   U   W   R   N   H   O   S  \nR04  I   Z   A   Y   Z   F   W   N   K   I  \nR05  E   T   H   U   N   D   E   R   G   Y  \nR06  K   D   C   M   D   L   L   T   I   Z  \nR07  B   X   O   R   D   M   C   R   J   U  \nR08  T   L   S   G   W   C   B   V   H   Y  \nR09  J   C   H   D   M   I   O   U   L   F  \nPlaced Words: THUNDER, SILVER, ANSWER, CARD, FOOT\nIncorrect Attempts Remaining: 20",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 0 0 5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "[0 0 0 5] is a correct attempt. You found the word 'SILVER'.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n   C00 C01 C02 C03 C04 C05 C06 C07 C08 C09\nR00 [S] [I] [L] [V] [E] [R]  C   A   R   D  \nR01  A   N   S   W   E   R   F   O   O   T  \nR02  S   N   B   A   C   G   H   Q   T   A  \nR03  R   G   W   U   W   R   N   H   O   S  \nR04  I   Z   A   Y   Z   F   W   N   K   I  \nR05  E   T   H   U   N   D   E   R   G   Y  \nR06  K   D   C   M   D   L   L   T   I   Z  \nR07  B   X   O   R   D   M   C   R   J   U  \nR08  T   L   S   G   W   C   B   V   H   Y  \nR09  J   C   H   D   M   I   O   U   L   F  \nPlaced Words: THUNDER, SILVER, ANSWER, CARD, FOOT\nIncorrect Attempts Remaining: 20",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "notbrackets",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "notbrackets",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Invalid move format. Player 0 did not respond with valid 'start_row, start_col, end_row, end_col'. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n   C00 C01 C02 C03 C04 C05 C06 C07 C08 C09\nR00 [S] [I] [L] [V] [E] [R]  C   A   R   D  \nR01  A   N   S   W   E   R   F   O   O   T  \nR02  S   N   B   A   C   G   H   Q   T   A  \nR03  R   G   W   U   W   R   N   H   O   S  \nR04  I   Z   A   Y   Z   F   W   N   K   I  \nR05  E   T   H   U   N   D   E   R   G   Y  \nR06  K   D   C   M   D   L   L   T   I   Z  \nR07  B   X   O   R   D   M   C   R   J   U  \nR08  T   L   S   G   W   C   B   V   H   Y  \nR09  J   C   H   D   M   I   O   U   L   F  \nPlaced Words: THUNDER, SILVER, ANSWER, CARD, FOOT\nIncorrect Attempts Remaining: 20",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 6 0 9]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 6 0 9]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "[0 6 0 9] is a correct attempt. You found the word 'CARD'.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n   C00 C01 C02 C03 C04 C05 C06 C07 C08 C09\nR00 [S] [I] [L] [V] [E] [R] [C] [A] [R] [D] \nR01  A   N   S   W   E   R   F   O   O   T  \nR02  S   N   B   A   C   G   H   Q   T   A  \nR03  R   G   W   U   W   R   N   H   O   S  \nR04  I   Z   A   Y   Z   F   W   N   K   I  \nR05  E   T   H   U   N   D   E   R   G   Y  \nR06  K   D   C   M   D   L   L   T   I   Z  \nR07  B   X   O   R   D   M   C   R   J   U  \nR08  T   L   S   G   W   C   B   V   H   Y  \nR09  J   C   H   D   M   I   O   U   L   F  \nPlaced Words: THUNDER, SILVER, ANSWER, CARD, FOOT\nIncorrect Attempts Remaining: 20",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 0 0 99]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 99]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Invalid move format. Player 0 did not respond with valid 'start_row, start_col, end_row, end_col'. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n   C00 C01 C02 C03 C04 C05 C06 C07 C08 C09\nR00 [S] [I] [L] [V] [E] [R] [C] [A] [R] [D] \nR01  A   N   S   W   E   R   F   O   O   T  \nR02  S   N   B   A   C   G   H   Q   T   A  \nR03  R   G   W   U   W   R   N   H   O   S  \nR04  I   Z   A   Y   Z   F   W   N   K   I  \nR05  E   T   H   U   N   D   E   R   G   Y  \nR06  K   D   C   M   D   L   L   T   I   Z  \nR07  B   X   O   R   D   M   C   R   J   U  \nR08  T   L   S   G   W   C   B   V   H   Y  \nR09  J   C   H   D   M   I   O   U   L   F  \nPlaced Words: THUNDER, SILVER, ANSWER, CARD, FOOT\nIncorrect Attempts Remaining: 20",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2 2 2 5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2 2 2 5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "[2 2 2 5] is an incorrect attempt. 19 incorrect tries remaining.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n   C00 C01 C02 C03 C04 C05 C06 C07 C08 C09\nR00 [S] [I] [L] [V] [E] [R] [C] [A] [R] [D] \nR01  A   N   S   W   E   R   F   O   O   T  \nR02  S   N   B   A   C   G   H   Q   T   A  \nR03  R   G   W   U   W   R   N   H   O   S  \nR04  I   Z   A   Y   Z   F   W   N   K   I  \nR05  E   T   H   U   N   D   E   R   G   Y  \nR06  K   D   C   M   D   L   L   T   I   Z  \nR07  B   X   O   R   D   M   C   R   J   U  \nR08  T   L   S   G   W   C   B   V   H   Y  \nR09  J   C   H   D   M   I   O   U   L   F  \nPlaced Words: THUNDER, SILVER, ANSWER, CARD, FOOT\nIncorrect Attempts Remaining: 19",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1 0 1 5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1 0 1 5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "[1 0 1 5] is a correct attempt. You found the word 'ANSWER'.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n   C00 C01 C02 C03 C04 C05 C06 C07 C08 C09\nR00 [S] [I] [L] [V] [E] [R] [C] [A] [R] [D] \nR01 [A] [N] [S] [W] [E] [R]  F   O   O   T  \nR02  S   N   B   A   C   G   H   Q   T   A  \nR03  R   G   W   U   W   R   N   H   O   S  \nR04  I   Z   A   Y   Z   F   W   N   K   I  \nR05  E   T   H   U   N   D   E   R   G   Y  \nR06  K   D   C   M   D   L   L   T   I   Z  \nR07  B   X   O   R   D   M   C   R   J   U  \nR08  T   L   S   G   W   C   B   V   H   Y  \nR09  J   C   H   D   M   I   O   U   L   F  \nPlaced Words: THUNDER, SILVER, ANSWER, CARD, FOOT\nIncorrect Attempts Remaining: 19",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1 6 1 9]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1 6 1 9]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "[1 6 1 9] is a correct attempt. You found the word 'FOOT'.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n   C00 C01 C02 C03 C04 C05 C06 C07 C08 C09\nR00 [S] [I] [L] [V] [E] [R] [C] [A] [R] [D] \nR01 [A] [N] [S] [W] [E] [R] [F] [O] [O] [T] \nR02  S   N   B   A   C   G   H   Q   T   A  \nR03  R   G   W   U   W   R   N   H   O   S  \nR04  I   Z   A   Y   Z   F   W   N   K   I  \nR05  E   T   H   U   N   D   E   R   G   Y  \nR06  K   D   C   M   D   L   L   T   I   Z  \nR07  B   X   O   R   D   M   C   R   J   U  \nR08  T   L   S   G   W   C   B   V   H   Y  \nR09  J   C   H   D   M   I   O   U   L   F  \nPlaced Words: THUNDER, SILVER, ANSWER, CARD, FOOT\nIncorrect Attempts Remaining: 19",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[5 1 5 7]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[5 1 5 7]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "[5 1 5 7] is a correct attempt. You found the word 'THUNDER'.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n   C00 C01 C02 C03 C04 C05 C06 C07 C08 C09\nR00 [S] [I] [L] [V] [E] [R] [C] [A] [R] [D] \nR01 [A] [N] [S] [W] [E] [R] [F] [O] [O] [T] \nR02  S   N   B   A   C   G   H   Q   T   A  \nR03  R   G   W   U   W   R   N   H   O   S  \nR04  I   Z   A   Y   Z   F   W   N   K   I  \nR05  E  [T] [H] [U] [N] [D] [E] [R]  G   Y  \nR06  K   D   C   M   D   L   L   T   I   Z  \nR07  B   X   O   R   D   M   C   R   J   U  \nR08  T   L   S   G   W   C   B   V   H   Y  \nR09  J   C   H   D   M   I   O   U   L   F  \nPlaced Words: THUNDER, SILVER, ANSWER, CARD, FOOT\nIncorrect Attempts Remaining: 19",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": 1.0
+    }
+  },
+  "invalids_and_repeat": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0, and you are participating in a Word Search challenge modeled as Basic. The objective is to find and highlight hidden words on the grid below. The rows and columns are numbered for your reference.\n\nHere is the current state of the Word Search board:\n----------------------------------------\nWords you have already found are marked in square brackets [ ]. Each row and column is numbered for clarity.\n\n\nTo locate a word, specify the row and column of its start and end letters. Note that words are either across or down.\nYou may type your response and thoughts in any manner. But you may only submit one submission at a time. For your submissions, use the format '[start_row start_col end_row end_col]'.\nFor instance, if you want to find the word 'HELLO' starting at row 1, column 1 and ending at row 1, column 5, enter '[1 1 1 5]'.\n\nGuidelines:\n- Each guess must be unique; you cannot repeat the same guess.\n- You have a total of 20 incorrect attempts remaining.\n- The history of your attempts will be recorded below.\n\nMake your guesses carefully and strategically. Good luck, Player {player_id}! Let's see how many words you can find!\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n   C00 C01 C02 C03 C04 C05 C06 C07 C08 C09\nR00  S   I   L   V   E   R   C   A   R   D  \nR01  A   N   S   W   E   R   F   O   O   T  \nR02  S   N   B   A   C   G   H   Q   T   A  \nR03  R   G   W   U   W   R   N   H   O   S  \nR04  I   Z   A   Y   Z   F   W   N   K   I  \nR05  E   T   H   U   N   D   E   R   G   Y  \nR06  K   D   C   M   D   L   L   T   I   Z  \nR07  B   X   O   R   D   M   C   R   J   U  \nR08  T   L   S   G   W   C   B   V   H   Y  \nR09  J   C   H   D   M   I   O   U   L   F  \nPlaced Words: THUNDER, SILVER, ANSWER, CARD, FOOT\nIncorrect Attempts Remaining: 20",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "notbrackets",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "notbrackets",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Invalid move format. Player 0 did not respond with valid 'start_row, start_col, end_row, end_col'. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n   C00 C01 C02 C03 C04 C05 C06 C07 C08 C09\nR00  S   I   L   V   E   R   C   A   R   D  \nR01  A   N   S   W   E   R   F   O   O   T  \nR02  S   N   B   A   C   G   H   Q   T   A  \nR03  R   G   W   U   W   R   N   H   O   S  \nR04  I   Z   A   Y   Z   F   W   N   K   I  \nR05  E   T   H   U   N   D   E   R   G   Y  \nR06  K   D   C   M   D   L   L   T   I   Z  \nR07  B   X   O   R   D   M   C   R   J   U  \nR08  T   L   S   G   W   C   B   V   H   Y  \nR09  J   C   H   D   M   I   O   U   L   F  \nPlaced Words: THUNDER, SILVER, ANSWER, CARD, FOOT\nIncorrect Attempts Remaining: 20",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2 2 2 5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2 2 2 5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "[2 2 2 5] is an incorrect attempt. 19 incorrect tries remaining.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n   C00 C01 C02 C03 C04 C05 C06 C07 C08 C09\nR00  S   I   L   V   E   R   C   A   R   D  \nR01  A   N   S   W   E   R   F   O   O   T  \nR02  S   N   B   A   C   G   H   Q   T   A  \nR03  R   G   W   U   W   R   N   H   O   S  \nR04  I   Z   A   Y   Z   F   W   N   K   I  \nR05  E   T   H   U   N   D   E   R   G   Y  \nR06  K   D   C   M   D   L   L   T   I   Z  \nR07  B   X   O   R   D   M   C   R   J   U  \nR08  T   L   S   G   W   C   B   V   H   Y  \nR09  J   C   H   D   M   I   O   U   L   F  \nPlaced Words: THUNDER, SILVER, ANSWER, CARD, FOOT\nIncorrect Attempts Remaining: 19",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2 2 2 5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2 2 2 5]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Invalid move. The action has already been attempted. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n   C00 C01 C02 C03 C04 C05 C06 C07 C08 C09\nR00  S   I   L   V   E   R   C   A   R   D  \nR01  A   N   S   W   E   R   F   O   O   T  \nR02  S   N   B   A   C   G   H   Q   T   A  \nR03  R   G   W   U   W   R   N   H   O   S  \nR04  I   Z   A   Y   Z   F   W   N   K   I  \nR05  E   T   H   U   N   D   E   R   G   Y  \nR06  K   D   C   M   D   L   L   T   I   Z  \nR07  B   X   O   R   D   M   C   R   J   U  \nR08  T   L   S   G   W   C   B   V   H   Y  \nR09  J   C   H   D   M   I   O   U   L   F  \nPlaced Words: THUNDER, SILVER, ANSWER, CARD, FOOT\nIncorrect Attempts Remaining: 19",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  }
+}

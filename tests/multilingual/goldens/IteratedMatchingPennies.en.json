@@ -1,0 +1,289 @@
+{
+  "p0_sweep_match": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 won more rounds.",
+        "role": "Player 0",
+        "turn_count": 5
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 won more rounds.",
+        "role": "Player 1",
+        "turn_count": 5
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 (Matcher) in a 5-round Matching Pennies game.\n- Each round, submit [heads] or [tails] (or [h], [t]).\n- If your choice matches your opponent’s, Player 0 wins the round; otherwise Player 1 wins.\nReply with your choice in the format '[heads]' or '[tails]'.\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "action": "[heads]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 (Mismatcher) in a 5-round Matching Pennies game.\n- Each round, submit [heads] or [tails] (or [h], [t]).\n- If your choice matches your opponent’s, Player 0 wins the round; otherwise Player 1 wins.\nReply with your choice in the format '[heads]' or '[tails]'.\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "action": "[heads]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked heads. Match -> Player 0 wins",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[heads]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked heads. Match -> Player 0 wins",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[heads]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked heads. Match -> Player 0 wins",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[heads]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked heads. Match -> Player 0 wins",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[heads]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked heads. Match -> Player 0 wins",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[heads]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked heads. Match -> Player 0 wins",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[heads]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked heads. Match -> Player 0 wins",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[heads]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked heads. Match -> Player 0 wins",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[heads]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked heads. Match -> Player 0 wins",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": {
+      "0": 1,
+      "1": -1
+    }
+  },
+  "p1_sweep_mismatch_with_invalid": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 1 won more rounds.",
+        "role": "Player 0",
+        "turn_count": 5
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 1 won more rounds.",
+        "role": "Player 1",
+        "turn_count": 5
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 (Matcher) in a 5-round Matching Pennies game.\n- Each round, submit [heads] or [tails] (or [h], [t]).\n- If your choice matches your opponent’s, Player 0 wins the round; otherwise Player 1 wins.\nReply with your choice in the format '[heads]' or '[tails]'.\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "action": "bad",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid format; please submit '[heads]' or '[tails]'. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[heads]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 (Mismatcher) in a 5-round Matching Pennies game.\n- Each round, submit [heads] or [tails] (or [h], [t]).\n- If your choice matches your opponent’s, Player 0 wins the round; otherwise Player 1 wins.\nReply with your choice in the format '[heads]' or '[tails]'.\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "action": "[tails]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked tails. Mismatch -> Player 1 wins.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[heads]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked tails. Mismatch -> Player 1 wins.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[tails]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked tails. Mismatch -> Player 1 wins.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[heads]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked tails. Mismatch -> Player 1 wins.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[tails]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked tails. Mismatch -> Player 1 wins.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[heads]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked tails. Mismatch -> Player 1 wins.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[tails]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked tails. Mismatch -> Player 1 wins.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[heads]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked tails. Mismatch -> Player 1 wins.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[tails]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 picked heads; Player 1 picked tails. Mismatch -> Player 1 wins.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": {
+      "0": -1,
+      "1": 1
+    }
+  }
+}
