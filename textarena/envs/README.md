@@ -174,7 +174,7 @@ Two-Player
 | 17 | [IteratedPrisonersDilemma](#iteratedprisonersdilemma) | 2 | 🌐 | |
 | 18 | [IteratedRockPaperScissors](#iteratedrockpaperscissors) | 2 | 🌐 | |
 | 19 | [IteratedTwoThirdsAverage](#iteratedtwothirdsaverage) | 2 | 🌐 | |
-| 20 | [IteratedStagHunt](#iteratedstaghunt) | 2 | | |
+| 20 | [IteratedStagHunt](#iteratedstaghunt) | 2 | 🌐 | |
 | 21 | [KuhnPoker](#kuhnpoker) | 2 | 🌐 | |
 | 22 | [LeducHoldem](#leducholdem) | 2 | | |
 | 23 | [LeTruc](#letruc) | 2 | | |
@@ -231,15 +231,15 @@ Two-Player
 |--:|------|:----:|:-------:|:------------:|----------|
 | 1 | [Hanabi](#hanabi) | ? | | | |
 | 2 | [ImTheBoss](#imtheboss) | ? | ? | | |
-| 3 | [IteratedUltimatumGame](#iteratedultimatumgame) | ? | ? | | |
-| 4 | [Klondike](#klondike) | ? | | | |
+| 3 | [IteratedUltimatumGame](#iteratedultimatumgame) | ? | ? | 🌐 | |
+| 4 | [Klondike](#klondike) | ? | | 🌐 | |
 | 5 | [MarketEntryGame](#marketentrygame) | ? | ? | | |
 | 6 | [NewRecruit](#newrecruit) | ? | ? | | |
 | 7 | [PublicGoodsGame](#publicgoodsgame) | ? | ? | | |
 | 8 | [ScorableGames](#scorablegames) | ? | ? | | |
 | 9 | [Set](#set) | ? | | | |
 | 10 | [SettlersOfCatan](#settlersofcatan) | ? | ? | | |
-| 11 | [UltimateTexasHoldem](#ultimatetexasholdem) | ? | | | |
+| 11 | [UltimateTexasHoldem](#ultimatetexasholdem) | ? | | 🌐 | |
 | 12 | [UsedCarNegotiation](#usedcarnegotiation) | ? | ? | | |
 | 13 | [VendorNegotiation](#vendornegotiation) | ? | ? | | |
 | 14 | [WinAsMuchAsYouCan](#winasmuchasyoucan) | ? | ? | | |

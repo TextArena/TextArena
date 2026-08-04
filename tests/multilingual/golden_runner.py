@@ -19,8 +19,15 @@ def load_env(entry):
     return getattr(module, cls_name)
 
 
-def run_scenario(EnvCls, actions, lang_mapping, num_players=2, seed=42):
-    env = EnvCls()
+def run_scenario(
+    EnvCls,
+    actions,
+    lang_mapping,
+    num_players=2,
+    seed=42,
+    env_kwargs=None,
+):
+    env = EnvCls(**(env_kwargs or {}))
     env.reset(num_players=num_players, seed=seed, lang_mapping=lang_mapping)
     log = []
     for act in actions:
@@ -41,19 +48,23 @@ def run_scenario(EnvCls, actions, lang_mapping, num_players=2, seed=42):
 
 
 def run_game(spec, lang):
-    """Run every scenario in a game spec at a single language.
-
-    spec = {"entry": "...:Cls", "scenarios": {name: [actions]}, "num_players": 2, "seed": 42}
-    """
     EnvCls = load_env(spec["entry"])
     n = spec.get("num_players", 2)
     seed = spec.get("seed", 42)
+    env_kwargs = spec.get("env_kwargs", {})
     lang_mapping = {i: lang for i in range(n)}
+
     return {
-        name: run_scenario(EnvCls, actions, dict(lang_mapping), num_players=n, seed=seed)
+        name: run_scenario(
+            EnvCls,
+            actions,
+            dict(lang_mapping),
+            num_players=n,
+            seed=seed,
+            env_kwargs=env_kwargs,
+        )
         for name, actions in spec["scenarios"].items()
     }
-
 
 def canonical(obj):
     return json.dumps(obj, ensure_ascii=False, indent=2, sort_keys=True)

@@ -69,34 +69,14 @@ class SpellingBeeEnv(ta.Env):
     def _prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
         return self.m("prompt", "intro", player_id=player_id, allowed_letters=''.join(sorted(game_state['allowed_letters'])))
 
-    def _generate_allowed_letters(self, lang: str) -> set:
-        assert self.num_letters <= 26, "num_letters cannot exceed 26."
-        # Frequency-weighted sample WITHOUT replacement, using the stdlib `random`
-        # module (seeded by the game's State from `seed`, so it is reproducible).
-        # This replaces a numpy dependency (numpy is not a core requirement, so
-        # the original `import numpy` broke SpellingBee on a clean install).
-        if lang == "en":
-            letter_frequencies = _EN_LETTER_FREQUENCIES
-        else:
-            letter_frequencies = self._active_dictionary.letter_frequencies()
-        letters = list(letter_frequencies.keys())
-        weights = [float(w) for w in letter_frequencies.values()]
-        n = min(self.num_letters, len(letters))
-        chosen = []
-        for _ in range(n):
-            total = sum(weights)
-            r = random.uniform(0, total)
-            upto = 0.0
-            for i, w in enumerate(weights):
-                upto += w
-                if upto >= r:
-                    chosen.append(letters.pop(i))
-                    weights.pop(i)
-                    break
-            else:  # floating-point fallback: take the last remaining
-                chosen.append(letters.pop())
-                weights.pop()
-        return set(chosen)
+    def _generate_allowed_letters(self) -> set:
+        assert self.num_letters <= 26, "num_letters cannot exceed 26." 
+        letter_frequencies = { # Frequency of letters in the English language (rough estimates)
+            'a': 8.17, 'b': 1.49, 'c': 2.78, 'd': 4.25, 'e': 12.70, 'f': 2.23, 'g': 2.02, 'h': 6.09, 'i': 7.00, 'j': 0.15, 'k': 0.77, 'l': 4.03, 'm': 2.41, 
+            'n': 6.75, 'o': 7.51, 'p': 1.93, 'q': 0.10, 'r': 5.99, 's': 6.33, 't': 9.06, 'u': 2.76, 'v': 0.98, 'w': 2.36, 'x': 0.15, 'y': 1.97, 'z': 0.07
+        }
+        probs = [w / sum(list(letter_frequencies.values())) for w in list(letter_frequencies.values())] # Convert weights to probabilities that sum to 1.
+        return set(random.choices(list(letter_frequencies.keys()), k=self.num_letters))
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
