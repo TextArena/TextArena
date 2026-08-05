@@ -22,10 +22,10 @@ class LeducHoldemEnv(ta.Env):
     @staticmethod
     def _rank_to_str(r: int) -> str: return ["J", "Q", "K"][r]
 
-    def _legal(self, gs): # returns set of legal strings
-        if gs["current_bet"] == 0:          return {"check", "bet"}
-        elif gs["raises_this_round"] < 2:   return {"call", "raise", "fold"}
-        else:                               return {"call", "fold"}
+    def _legal(self, gs): # returns list of legal strings (ordered for deterministic output)
+        if gs["current_bet"] == 0:          return ["check", "bet"]
+        elif gs["raises_this_round"] < 2:   return ["call", "raise", "fold"]
+        else:                               return ["call", "fold"]
 
     def reset(self, num_players: int = 2, seed: Optional[int] = None):
         self.state = ta.TwoPlayerState(num_players=num_players, seed=seed)
@@ -34,20 +34,17 @@ class LeducHoldemEnv(ta.Env):
         self._deal_new_hand()
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are Player {player_id} in Leduc Hold'em.\nRespond with one action token like '[check]', '[bet]', '[call]', '[raise]', or '[fold]' when it is your turn.\n"
-            f"Fixed bet sizes: 2 chips pre-flop, 4 chips post-flop (max 2 raises per round)."
-        )
+        return self.m("player_prompt", "intro", player_id=player_id)
 
     def _deal_new_hand(self):
         gs = self.state.game_state
         # check if we have reached the round limit
         if gs.get("hands_dealt", 0) >= self.max_rounds:
-            self._declare_match_winner("Reached hand limit")
+            self._declare_match_winner(self.m("outcome", "hand_limit"))
             return
         if any(bank < self.bet_sizes[0] for bank in gs["player_bank"].values()):
             busted = 0 if gs["player_bank"][0] < self.bet_sizes[0] else 1
-            self.state.set_winner(1 - busted, f"Player {busted} is busted.")
+            self.state.set_winner(1 - busted, self.m("outcome", "busted", busted=busted))
             return
         gs["hands_dealt"] = gs.get("hands_dealt", 0) + 1
 
@@ -63,7 +60,7 @@ class LeducHoldemEnv(ta.Env):
         self.state.manually_set_current_player_id(gs["starting_player"])
 
         # private observations
-        for pid in (0, 1): self.state.add_observation(to_id=pid, message=f"### New hand - your private card: {self._rank_to_str(gs['player_cards'][pid])}", observation_type=ta.ObservationType.GAME_MESSAGE)
+        for pid in (0, 1): self.state.add_observation(to_id=pid, message=self.m("board", "new_hand", card=self._rank_to_str(gs['player_cards'][pid])), observation_type=ta.ObservationType.GAME_MESSAGE)
         self._announce_legal(self.state.current_player_id)
 
     def step(self, action: str) -> Tuple[bool, Dict[str, Any]]:
@@ -72,12 +69,12 @@ class LeducHoldemEnv(ta.Env):
         self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
         m = self.action_space.search(action)
         if not m:
-            self.state.set_invalid_move(reason = "Supply exactly one legal action token.")
+            self.state.set_invalid_move(reason = self.m("invalid_move", "wrong_format"))
             return self.state.step()
 
         move = m.group(1).lower()
         if move not in self._legal(gs):
-            self.state.set_invalid_move(reason = f"Illegal now. Allowed: {self._legal(gs)}")
+            self.state.set_invalid_move(reason = self.m("invalid_move", "illegal_now", allowed=self._legal(gs)))
             return self.state.step()
 
         bet_unit = self.bet_sizes[gs["round"]]
@@ -87,7 +84,7 @@ class LeducHoldemEnv(ta.Env):
                 self._next_round_or_showdown()
                 return self.state.step(rotate_player=False)
             gs["prev_check"] = True
-            self.state.add_observation(message=f"Player {pid} checks.", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=self.m("action", "check", pid=pid), observation_type=ta.ObservationType.GAME_MESSAGE)
             self._announce_legal(1-pid)
             return self.state.step(rotate_player=True)
         gs["prev_check"] = False
@@ -96,20 +93,20 @@ class LeducHoldemEnv(ta.Env):
             gs["current_bet"] = bet_unit
             gs["raises_this_round"] = 0
             self._commit_chips(pid, bet_unit)
-            self.state.add_observation(message=f"Player {pid} bets {bet_unit}.", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=self.m("action", "bet", pid=pid, amount=bet_unit), observation_type=ta.ObservationType.GAME_MESSAGE)
         elif move == "raise":
             gs["raises_this_round"] += 1
             gs["current_bet"] += bet_unit
             self._commit_chips(pid, bet_unit)
-            self.state.add_observation(message=f"Player {pid} raises {bet_unit}.", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=self.m("action", "raise", pid=pid, amount=bet_unit), observation_type=ta.ObservationType.GAME_MESSAGE)
         elif move == "call":
             to_call = gs["current_bet"]
             self._commit_chips(pid, to_call)
-            self.state.add_observation(message=f"Player {pid} calls {to_call}.", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=self.m("action", "call", pid=pid, amount=to_call), observation_type=ta.ObservationType.GAME_MESSAGE)
             self._next_round_or_showdown()
             return self.state.step(rotate_player=False)
         elif move == "fold":
-            self._award(1-pid, reason=f"Player {pid} folds.")
+            self._award(1-pid, reason=self.m("action", "fold", pid=pid))
             return self.state.step(rotate_player=False)
 
         # continue betting
@@ -123,14 +120,14 @@ class LeducHoldemEnv(ta.Env):
 
     def _announce_legal(self, to_pid: int):
         legal = ", ".join(f"'[{a}]'" for a in self._legal(self.state.game_state))
-        self.state.add_observation(to_id=to_pid, message=f"Valid actions: {legal}", observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(to_id=to_pid, message=self.m("board", "valid_actions", legal=legal), observation_type=ta.ObservationType.GAME_BOARD)
 
     def _next_round_or_showdown(self):
         gs = self.state.game_state
         if gs["round"] == 0:                   # flop round begins
             gs.update({"round": 1, "current_bet": 0, "raises_this_round": 0, "prev_check": False})
             card = self._rank_to_str(gs["board_card"])
-            self.state.add_observation(message=f"Flop card revealed: {card}", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=self.m("board", "flop", card=card), observation_type=ta.ObservationType.GAME_MESSAGE)
             self.state.manually_set_current_player_id(gs["starting_player"])
             self._announce_legal(gs["starting_player"])
         else: self._showdown()
@@ -143,10 +140,10 @@ class LeducHoldemEnv(ta.Env):
         pair1, high1 = self._rank_strength(gs["player_cards"][1], gs["board_card"])
         if pair0 != pair1:      winner = 0 if pair0 else 1
         elif high0 != high1:    winner = 0 if high0 > high1 else 1
-        else:                   self._split_pot(reason="Exact tie."); return
-        self._award(winner, reason=f"Showdown - Player {winner} wins. ")
+        else:                   self._split_pot(reason=self.m("showdown", "tie")); return
+        self._award(winner, reason=self.m("showdown", "wins", winner=winner))
         
-    def _split_pot(self, reason: str):
+    def _split_pot(self, reason):
         gs = self.state.game_state
         split = gs["pot"] // 2
         gs["player_bank"][0] += split
@@ -154,15 +151,15 @@ class LeducHoldemEnv(ta.Env):
         self.state.add_observation(message=reason, observation_type=ta.ObservationType.GAME_MESSAGE)
         self._deal_new_hand()
 
-    def _award(self, winner: int, reason: str):
+    def _award(self, winner: int, reason):
         gs = self.state.game_state
         gs["player_bank"][winner] += gs["pot"]
-        reason += f"Current banks: Player 0: {gs['player_bank'][0]}; Player 1: {gs['player_bank'][1]}\n"
-        self.state.add_observation(message=reason, observation_type=ta.ObservationType.GAME_MESSAGE)
+        message = self.m("outcome", "banks", reason=reason, b0=gs['player_bank'][0], b1=gs['player_bank'][1])
+        self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
         self._deal_new_hand()
 
-    def _declare_match_winner(self, reason: str):
+    def _declare_match_winner(self, reason):
         b0, b1 = self.state.game_state["player_bank"].values()
-        if b0 > b1:     self.state.set_winner(0, reason + f" | stacks {b0}>{b1}")
-        elif b1 > b0:   self.state.set_winner(1, reason + f" | stacks {b1}>{b0}")
-        else:           self.state.set_draw(reason + " | equal stacks")
+        if b0 > b1:     self.state.set_winner(0, self.m("outcome", "match_winner", reason=reason, hi=b0, lo=b1))
+        elif b1 > b0:   self.state.set_winner(1, self.m("outcome", "match_winner", reason=reason, hi=b1, lo=b0))
+        else:           self.state.set_draw(self.m("outcome", "match_draw", reason=reason))

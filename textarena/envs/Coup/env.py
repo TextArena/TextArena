@@ -8,6 +8,13 @@ from textarena.envs.Coup import base_coup_prompts
 from rich.text import Text
 
 
+class _CoupInvalid(ValueError):
+    """Carries a LocalizedMessage (or str) reason for an invalid move raised deep
+    in the parse/validation code, so step() can forward it to set_invalid_move
+    without stringifying (which would break localization)."""
+    def __init__(self, msg):
+        self.msg = msg
+        super().__init__()
 
 
 class CoupEnv(ta.Env):
@@ -28,8 +35,8 @@ class CoupEnv(ta.Env):
 
     def reset(self, num_players: int, seed: Optional[int] = None) -> None:
         """ Reset the environment for a new Coup game """
-        self.state = ta.State(num_players=num_players, min_players=2, max_players=6)
-        self.state.error_allowance = 3
+        assert 2 <= num_players <= 6, f"Coup supports between 2 and 6 players, received {num_players}"
+        self.state = ta.FFAMultiPlayerState(num_players=num_players, seed=seed, error_allowance=3)
 
         # Create deck with three of each card
         deck = ["Duke", "Assassin", "Ambassador", "Captain", "Contessa"] * 3
@@ -63,10 +70,10 @@ class CoupEnv(ta.Env):
         game_state["rendered_board"] = self._render_board(game_state)
         
         # Initialize textarena state
-        self.state.reset(seed=seed, game_state=game_state, player_prompt_function=self._gen_initial_prompt)
+        self.state.reset(game_state=game_state, player_prompt_function=self._gen_initial_prompt)
 
         # Always start with player 0
-        self.state.manually_update_current_player(new_player_id=0)
+        self.state.manually_set_current_player_id(new_player_id=0)
         self._send_call_to_action_prompt()
             
     
@@ -75,11 +82,14 @@ class CoupEnv(ta.Env):
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         """ Process a single step/action from the current player """
-        # Log the player's raw input by sending the action_str to player with id -1
-        self.state.add_observation(from_id=self.state.current_player_id, to_id=-1, message=action, for_logging=True)
+        # Log the player's raw input by echoing the raw action
+        self.state.add_observation(from_id=self.state.current_player_id, to_id=-1, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
 
         # Start with the assumption that we can move to the next player. (is set to True if we detect an invalid move)
-        self.state.prevent_player_change = False
+        # This local flag reproduces the old `state.prevent_player_change` behaviour: an
+        # invalid move keeps the turn on the same player (handled by state.step's
+        # made_invalid_move guard + our own manual player control).
+        self._invalid_this_step = False
 
         # Game phase is either in play (a player is doing an initial action like income, foreign aid, etc)
         # or challenge (we are querying one or more players about a potential counteraction)
@@ -97,23 +107,54 @@ class CoupEnv(ta.Env):
             else:
                 raise Exception(f"Unexpected game phase: {self.state.game_state['phase']}")
 
-            
-            if self.state.prevent_player_change:
-                return False, {"reason": "Invalid move"}
-            
+
+            if self._invalid_this_step:
+                # Invalid move: do not advance the turn. state.step won't rotate/advance
+                # because made_invalid_move is set inside set_invalid_move.
+                return self.state.step(rotate_player=False)
+
             adv_turn = self._advance_turn()
 
             # Render after we've updated the action metadata and advanced the turn
             self.state.game_state["rendered_board"] = self._render_board()
-            
+
             # This tells the current player it's their turn and asks them what they want to do.
             if not adv_turn[0]:  # Game not over
                 self._send_call_to_action_prompt()
 
-            return adv_turn
+            return self.state.step(rotate_player=False)
         except ValueError as e:
-            self.state.set_invalid_move(player_id=self.state.current_player_id, reason=str(e))
-            return False, {"reason":str(e)}
+            reason = e.msg if isinstance(e, _CoupInvalid) else str(e)
+            self._set_invalid_move(reason=reason)
+            return self.state.step(rotate_player=False)
+
+    def _set_invalid_move(self, reason: str) -> None:
+        """
+        Reproduce the old `set_invalid_move(player_id, reason)` intent on the current
+        FFA state. Sets the local `_invalid_this_step` flag so step() keeps the turn on
+        the offending player. If the error allowance is exhausted, the player forfeits
+        by losing all remaining influence, and the turn advances to the next player.
+        """
+        self._invalid_this_step = True
+        exhausted = self.state.set_invalid_move(reason=reason)
+        if exhausted:
+            pid = self.state.current_player_id
+            # Forfeit: the player loses all remaining influence.
+            while len(self.state.game_state["hidden_hand"][pid]) > 0:
+                self._make_player_lose_a_card(pid)
+            self.state.game_state["action_metadata"] = None
+            self.state.game_state["phase"] = GamePhase.Play
+            # Advance to the next living player (force past the made_invalid_move guard).
+            next_pid = (pid + 1) % self.state.num_players
+            while len(self.state.game_state["hidden_hand"][next_pid]) == 0 and next_pid != pid:
+                next_pid = (next_pid + 1) % self.state.num_players
+            self.state.manually_set_current_player_id(new_player_id=next_pid, force=True)
+            winner = self._get_winner()
+            if winner is not None:
+                self.state.set_winners(player_ids=[winner], reason=self.m("win","reason",winner=winner))
+            else:
+                self.state.game_state["rendered_board"] = self._render_board()
+                self._send_call_to_action_prompt()
 
         
     def _update_action_metadata_for_play_phase(self, action_type: CoupActionType, action_target_player_id: Optional[int] = None):
@@ -121,17 +162,17 @@ class CoupEnv(ta.Env):
         This validates state and updates state as needed. NOTE THAT ONLY ALLOWABLE ACTIONS HERE ARE THE ONES FROM THE OFFICIAL CHEATSHEET "ACTION" COLUMN (see README.md)
         """
         if self.state.game_state["coins"][self.state.current_player_id] >= 10 and action_type is not CoupActionType.Coup:
-            self.state.set_invalid_move(player_id=self.state.current_player_id, reason=f"Invalid move. You cannot do anything other than coup when you have 10 or more coins. Please pick a player id to Coup and respond with: [coup x].")
+            self._set_invalid_move(reason=self.m("reason","ten_coins"))
             return
         if action_type is CoupActionType.Income:
             self.state.game_state["action_metadata"] = ActionMetadata(action_type=action_type, source_player_id=self.state.current_player_id, target_player_id=action_target_player_id)
             self._execute_current_action()
         elif action_type is CoupActionType.Coup:
             if self.state.game_state["coins"][self.state.current_player_id] < 7:
-                self.state.set_invalid_move(player_id=self.state.current_player_id, reason=f"Invalid move. You don't have enough coins to coup.")
+                self._set_invalid_move(reason=self.m("reason","coup_funds"))
                 return
             if self.state.game_state["hidden_hand"][action_target_player_id] == []:
-                self.state.set_invalid_move(player_id=self.state.current_player_id, reason=f"Invalid move. Can't coup player {action_target_player_id} because they are already eliminated from play.")
+                self._set_invalid_move(reason=self.m("reason","coup_eliminated", target=action_target_player_id))
                 return
             
             self.state.game_state["action_metadata"] = ActionMetadata(action_type=action_type, source_player_id=self.state.current_player_id, target_player_id=action_target_player_id)
@@ -144,19 +185,19 @@ class CoupEnv(ta.Env):
         
         elif action_type is CoupActionType.ForeignAid or action_type is CoupActionType.Assassinate or action_type is CoupActionType.Steal:
             if action_type is CoupActionType.Assassinate and self.state.game_state["coins"][self.state.current_player_id] < 3:
-                self.state.set_invalid_move(player_id=self.state.current_player_id, reason=f"Invalid move. You don't have enough coins to assassinate.")
+                self._set_invalid_move(reason=self.m("reason","assassinate_funds"))
                 return
             if action_type is CoupActionType.Steal and action_target_player_id is not None and action_target_player_id == self.state.current_player_id:
-                self.state.set_invalid_move(player_id=self.state.current_player_id, reason=f"Invalid move. You cannot steal from yourself, the second value in the [steal x] response must be a valid player id.")
+                self._set_invalid_move(reason=self.m("reason","steal_self"))
                 return
             if action_type is CoupActionType.Steal and action_target_player_id is None and action_target_player_id >= self.state.num_players:
-                self.state.set_invalid_move(player_id=self.state.current_player_id, reason=f"Invalid move. The second value in the [steal x] response must be a valid player id.")
+                self._set_invalid_move(reason=self.m("reason","steal_invalid_target"))
                 return
             if action_type is CoupActionType.Steal and self.state.game_state["coins"][action_target_player_id] < 2:
-                self.state.set_invalid_move(player_id=self.state.current_player_id, reason=f"Invalid move. Player {action_target_player_id} doesn't have enough coins to steal from.")
+                self._set_invalid_move(reason=self.m("reason","steal_target_funds", target=action_target_player_id))
                 return
             if action_type is CoupActionType.Steal and self.state.game_state["hidden_hand"][action_target_player_id] == []:
-                self.state.set_invalid_move(player_id=self.state.current_player_id, reason=f"Invalid move. You cannot steal from Player {action_target_player_id} because they are already eliminated from play.")
+                self._set_invalid_move(reason=self.m("reason","steal_eliminated", target=action_target_player_id))
                 return
 
             # For assassination, deduct the cost immediately (per rules, you pay even if blocked)
@@ -182,13 +223,13 @@ class CoupEnv(ta.Env):
             self._execute_showdown_on_bullshit()
         elif action is CoupActionType.BlockForeignAid or action is CoupActionType.BlockStealAmbassador or action is CoupActionType.BlockStealCaptain or action is CoupActionType.BlockAssassinate:
             if (action is CoupActionType.BlockStealAmbassador or action is CoupActionType.BlockStealCaptain) and self.state.game_state["action_metadata"].action_type is not CoupActionType.Steal:
-                self.state.set_invalid_move(player_id=self.state.current_player_id, reason=f"Invalid move. You cannot call [block steal x] when the last played action is a {self.state.game_state['action_metadata'].action_type.name}.")
+                self._set_invalid_move(reason=self.m("reason","block_steal_mismatch", action=self.state.game_state['action_metadata'].action_type.name))
                 return
             if action is CoupActionType.BlockAssassinate and self.state.game_state["action_metadata"].action_type is not CoupActionType.Assassinate:
-                self.state.set_invalid_move(player_id=self.state.current_player_id, reason=f"Invalid move. You cannot call [block assassinate] when the last played action is a {self.state.game_state['action_metadata'].action_type.name}.")
+                self._set_invalid_move(reason=self.m("reason","block_assassinate_mismatch", action=self.state.game_state['action_metadata'].action_type.name))
                 return
             if action is CoupActionType.BlockForeignAid and self.state.game_state["action_metadata"].action_type is not CoupActionType.ForeignAid:
-                self.state.set_invalid_move(player_id=self.state.current_player_id, reason=f"Invalid move. You cannot call [block foreign aid] when the last played action is a {self.state.game_state['action_metadata'].action_type.name}.")
+                self._set_invalid_move(reason=self.m("reason","block_foreign_mismatch", action=self.state.game_state['action_metadata'].action_type.name))
                 return
             self.state.game_state["phase"] = GamePhase.QueryToChallengeTheBlocker
             self.state.game_state["action_metadata"].blocker_player_id = self.state.current_player_id
@@ -202,7 +243,7 @@ class CoupEnv(ta.Env):
                 ("[block assassinate], " if (self.state.game_state["action_metadata"].action_type is CoupActionType.Assassinate  and self.state.game_state["action_metadata"].target_player_id == self.state.current_player_id) else \
                 ("[block foreign aid], " if self.state.game_state["action_metadata"].action_type is CoupActionType.ForeignAid else ""))
             bullshit_str = "call [BULLSHIT], " if self.state.game_state["action_metadata"].action_type is not CoupActionType.ForeignAid else "" # you can't bullshit on foreign aid
-            raise ValueError(f"Invalid action: {action}, Player #{self.state.game_state['action_metadata'].source_player_id} is attempting to {self.state.game_state["action_metadata"].action_type}, you must either {block_options_str}{bullshit_str}or [PASS]")
+            raise _CoupInvalid(self.m("err","query_block_invalid", action=action, source=self.state.game_state['action_metadata'].source_player_id, attempt=self.state.game_state['action_metadata'].action_type, options=f"{block_options_str}{bullshit_str}"))
 
     def _update_action_metadata_for_query_to_challenge_the_blocker_phase(self, action: CoupActionType):
         if action is CoupActionType.PASS:
@@ -211,7 +252,7 @@ class CoupEnv(ta.Env):
             self.state.game_state["action_metadata"].blocker_challenger_player_id = self.state.current_player_id
             self._execute_showdown_on_blocker_bullshit()
         else:
-            raise ValueError(f"Invalid action: {action}, you must either [PASS] or call [BULLSHIT]")
+            raise _CoupInvalid(self.m("err","query_challenge_blocker_invalid", action=action))
 
     def _update_action_metadata_for_query_which_to_keep_phase(self, action_type: CoupActionType, cards_to_keep: Optional[List[str]] = None):
         """
@@ -219,10 +260,10 @@ class CoupEnv(ta.Env):
         """
         if action_type is not CoupActionType.Keep:
             cards_str = "<card1> <card2>" if len(self.state.game_state["revealed_hand"][self.state.current_player_id]) == 0 else "<card>"
-            raise ValueError(f"Invalid action: {action_type}, you must respond with [keep {cards_str}] to specify the card(s) to keep")
-        
+            raise _CoupInvalid(self.m("err","keep_wrong_action", action=action_type, cards=cards_str))
+
         if cards_to_keep is None:
-            raise ValueError("You must specify which cards to keep")
+            raise _CoupInvalid(self.m("err","keep_none"))
             
         # Check how many cards the player should keep based on their remaining influences
         player_id = self.state.current_player_id
@@ -230,9 +271,9 @@ class CoupEnv(ta.Env):
         
         if len(cards_to_keep) != expected_cards_to_keep:
             if expected_cards_to_keep == 2:
-                raise ValueError("You must specify exactly two cards to keep")
+                raise _CoupInvalid(self.m("err","keep_two"))
             else:
-                raise ValueError("You must specify exactly one card to keep (since you have lost an influence)")
+                raise _CoupInvalid(self.m("err","keep_one"))
         
         # Store the cards to keep in metadata
         self.state.game_state["action_metadata"].cards_to_keep = [c.title() for c in cards_to_keep]
@@ -255,9 +296,10 @@ class CoupEnv(ta.Env):
         if curr_action.action_type is CoupActionType.Income:
             self.state.game_state["coins"][curr_action.source_player_id] += 1
             self.state.game_state["treasury_coins"] -= 1
-            source_player_observation = f"You just successfully played income. You now have {self.state.game_state['coins'][curr_action.source_player_id]} coins"
-            other_player_observations = f"Player #{curr_action.source_player_id} just played income. They now have {self.state.game_state['coins'][curr_action.source_player_id]} coins"
-            
+            coins = self.state.game_state['coins'][curr_action.source_player_id]
+            source_player_observation = self.m("act","income_source", coins=coins)
+            other_player_observations = self.m("act","income_others", source=curr_action.source_player_id, coins=coins)
+
         elif curr_action.action_type is CoupActionType.Coup:
             self.state.game_state["coins"][curr_action.source_player_id] -= 7
             self.state.game_state["treasury_coins"] += 7
@@ -265,79 +307,79 @@ class CoupEnv(ta.Env):
             # Make the target player lose a card
             lost_card = self._make_player_lose_a_card(curr_action.target_player_id)
 
-            remaining_cards_with_target = "now have 1 card remaining." if len(self.state.game_state["hidden_hand"][curr_action.target_player_id]) > 0 else "now have no cards remaining and are eliminated from play."
-            source_player_observation = f"You just successfully played coup on Player #{curr_action.target_player_id}. They lost a card and revealed a {lost_card}. They {remaining_cards_with_target}"
-            target_player_observation = f"You just lost a card and revealed a {lost_card} card. You {remaining_cards_with_target}"
-            other_player_observations = f"Player #{curr_action.source_player_id} just played coup on Player #{curr_action.target_player_id}. They lost a card and revealed a {lost_card} card. They {remaining_cards_with_target}"
-            
+            remaining = self._remaining_frag(curr_action.target_player_id)
+            source_player_observation = self.m("act","coup_source", target=curr_action.target_player_id, card=lost_card, remaining=remaining)
+            target_player_observation = self.m("act","coup_target", card=lost_card, remaining=remaining)
+            other_player_observations = self.m("act","coup_others", source=curr_action.source_player_id, target=curr_action.target_player_id, card=lost_card, remaining=remaining)
+
         elif curr_action.action_type is CoupActionType.ForeignAid:
             self.state.game_state["coins"][curr_action.source_player_id] += 2
             self.state.game_state["treasury_coins"] -= 2
-
-            source_player_observation = f"You just successfully played foreign aid. You now have {self.state.game_state['coins'][curr_action.source_player_id]} coins"
-            other_player_observations = f"Player #{curr_action.source_player_id} just played foreign aid. They now have {self.state.game_state['coins'][curr_action.source_player_id]} coins"
+            coins = self.state.game_state['coins'][curr_action.source_player_id]
+            source_player_observation = self.m("act","fa_source", coins=coins)
+            other_player_observations = self.m("act","fa_others", source=curr_action.source_player_id, coins=coins)
 
         elif curr_action.action_type is CoupActionType.Tax:
             self.state.game_state["coins"][curr_action.source_player_id] += 3
             self.state.game_state["treasury_coins"] -= 3
-
-            source_player_observation = f"You just successfully played tax. You now have {self.state.game_state['coins'][curr_action.source_player_id]} coins"
-            other_player_observations = f"Player #{curr_action.source_player_id} just played tax. They now have {self.state.game_state['coins'][curr_action.source_player_id]} coins"
+            coins = self.state.game_state['coins'][curr_action.source_player_id]
+            source_player_observation = self.m("act","tax_source", coins=coins)
+            other_player_observations = self.m("act","tax_others", source=curr_action.source_player_id, coins=coins)
 
         elif curr_action.action_type is CoupActionType.Assassinate:
             # Check for if player is already out, do nothing if so.
             if len(self.state.game_state["hidden_hand"][curr_action.target_player_id]) == 0:
                 return
-            
+
             # Make the target player lose a card
             lost_card = self._make_player_lose_a_card(curr_action.target_player_id)
-            remaining_cards_with_target = "now have 1 card remaining." if len(self.state.game_state["hidden_hand"][curr_action.target_player_id]) > 0 else "now have no cards remaining and are eliminated from play."
-            source_player_observation = f"You just successfully played assassinate on Player #{curr_action.target_player_id}. They lost a card and revealed a {lost_card}. They {remaining_cards_with_target}"
-            target_player_observation = f"You just lost a card and revealed a {lost_card} card. You {remaining_cards_with_target}"
-            other_player_observations = f"Player #{curr_action.source_player_id} just played assassinate on Player #{curr_action.target_player_id}. They lost a card and revealed a {lost_card}. They {remaining_cards_with_target}"
-            
+            remaining = self._remaining_frag(curr_action.target_player_id)
+            source_player_observation = self.m("act","assass_source", target=curr_action.target_player_id, card=lost_card, remaining=remaining)
+            target_player_observation = self.m("act","assass_target", card=lost_card, remaining=remaining)
+            other_player_observations = self.m("act","assass_others", source=curr_action.source_player_id, target=curr_action.target_player_id, card=lost_card, remaining=remaining)
+
         elif curr_action.action_type is CoupActionType.Steal:
             self.state.game_state["coins"][curr_action.source_player_id] += 2
             self.state.game_state["coins"][curr_action.target_player_id] -= 2
+            scoins = self.state.game_state['coins'][curr_action.source_player_id]
+            tcoins = self.state.game_state['coins'][curr_action.target_player_id]
+            source_player_observation = self.m("act","steal_source", target=curr_action.target_player_id, scoins=scoins, tcoins=tcoins)
+            target_player_observation = self.m("act","steal_target", source=curr_action.source_player_id, scoins=scoins, tcoins=tcoins)
+            other_player_observations = self.m("act","steal_others", source=curr_action.source_player_id, target=curr_action.target_player_id, scoins=scoins, tcoins=tcoins)
 
-            source_player_observation = f"You just successfully stole two coins from Player #{curr_action.target_player_id}. You now have {self.state.game_state['coins'][curr_action.source_player_id]} coins. Player #{curr_action.target_player_id} has {self.state.game_state['coins'][curr_action.target_player_id]} coins"
-            target_player_observation = f"Player #{curr_action.source_player_id} just stole two coins from you. You now have {self.state.game_state['coins'][curr_action.target_player_id]} coins. Player #{curr_action.source_player_id} has {self.state.game_state['coins'][curr_action.source_player_id]} coins"
-            other_player_observations = f"Player #{curr_action.source_player_id} just stole two coins from Player #{curr_action.target_player_id}. Player #{curr_action.source_player_id} has {self.state.game_state['coins'][curr_action.source_player_id]} coins. Player #{curr_action.target_player_id} has {self.state.game_state['coins'][curr_action.target_player_id]} coins"
-            
         elif curr_action.action_type is CoupActionType.Exchange:
             # Draw two cards from the pile
             if len(self.state.game_state["pile"]) < 2:
-                raise ValueError("Not enough cards in pile for exchange")
-            
+                raise _CoupInvalid(self.m("err","pile_empty"))
+
             # Draw two cards and add them directly to the player's hand
             card1 = self.state.game_state["pile"].pop()
             card2 = self.state.game_state["pile"].pop()
             self.state.game_state["hidden_hand"][curr_action.source_player_id].append(card1)
             self.state.game_state["hidden_hand"][curr_action.source_player_id].append(card2)
-            
+
             # Change phase to QueryWhichToKeep
             self.state.game_state["phase"] = GamePhase.QueryWhichToKeep
-            
+
             # Send observation to player about their options
             all_cards = self.state.game_state["hidden_hand"][curr_action.source_player_id]
             cards_str = ", ".join(all_cards)
-            
+
             # Determine how many cards they need to keep based on revealed cards (influences lost)
             cards_to_keep_count = 2 - len(self.state.game_state["revealed_hand"][curr_action.source_player_id])
-            
+
             if cards_to_keep_count == 2:
-                source_player_observation = f"You drew two cards from the pile for exchange. You now have: {cards_str}. You must choose which two cards to keep using [keep <card1>" + \
-                    f"{' <card2>' if len(self.state.game_state['revealed_hand'][curr_action.source_player_id]) == 0 else ''}]"
+                source_player_observation = self.m("act","exchange_source_two", cards=cards_str)
             else:  # cards_to_keep_count == 1
-                source_player_observation = f"You drew two cards from the pile for exchange. You now have: {cards_str}. Since you have lost an influence, you must choose which one card to keep using [keep <card>]"
-                
-            other_player_observations = f"Player #{curr_action.source_player_id} is exchanging cards with the Court deck."
+                source_player_observation = self.m("act","exchange_source_one", cards=cards_str)
+
+            other_player_observations = self.m("act","exchange_others", source=curr_action.source_player_id)
 
         # Broadcast the observations to the players
         if source_player_observation:
-            self.state.add_observation(from_id=ta.GAME_ID, to_id=curr_action.source_player_id, message=source_player_observation, for_logging=False)
+            self.state.add_observation(from_id=ta.GAME_ID, to_id=curr_action.source_player_id, message=source_player_observation, observation_type=ta.ObservationType.GAME_MESSAGE)
         if target_player_observation is not None:
-            self.state.add_observation(from_id=ta.GAME_ID, to_id=curr_action.target_player_id, message=target_player_observation, for_logging=False)
+            self.state.add_observation(from_id=ta.GAME_ID, to_id=curr_action.target_player_id, message=target_player_observation, observation_type=ta.ObservationType.GAME_MESSAGE)
         if other_player_observations is not None:
             exclude_ids = [curr_action.source_player_id]
             if curr_action.target_player_id is not None:
@@ -380,19 +422,19 @@ class CoupEnv(ta.Env):
                 self.state.game_state["action_metadata"].action_type = CoupActionType.PASS
     
             # Tell the challenger that their bullshit call failed
-            challenger_message = f"Your bullshit call on Player #{challenged_player_id} failed. They did indeed have a {challenged_card} card." + \
-                (f"You lost a {card_lost_by_challenger} card." if (len(challenger_remaining_cards) == 0 or challenger_remaining_cards[0] != card_lost_by_challenger) else f"You lost one of your {card_lost_by_challenger} cards.") + \
-                (f"You now have only one card remaining, the {challenger_remaining_cards[0]} card." if len(challenger_remaining_cards) > 0 else \
-                f"You have no cards remaining, you're eliminated!")
+            if len(challenger_remaining_cards) == 0 or challenger_remaining_cards[0] != card_lost_by_challenger:
+                _t1 = self.t("sd","lost_a", lost=card_lost_by_challenger, _pid=challenger_player_id)
+            else:
+                _t1 = self.t("sd","lost_one_of", lost=card_lost_by_challenger, _pid=challenger_player_id)
+            _t2 = self.t("sd","now_one_the", card0=(challenger_remaining_cards[0] if challenger_remaining_cards else ""), _pid=challenger_player_id) if len(challenger_remaining_cards) > 0 else self.t("sd","now_none_elim", _pid=challenger_player_id)
+            challenger_message = self.t("sd","chal_fail_head", challenged=challenged_player_id, card=challenged_card, _pid=challenger_player_id) + _t1 + _t2
             # Tell the challenged player that they just survived a bullshit challenge
-            challenged_message = f"You were unsuccessfully challenged on your {challenged_card} claim by Player #{challenger_player_id}. " + \
-                f"Because you had to reveal your {challenged_card} card to prove them wrong, you were given a new one from the pile. It is a {new_pulled_card} card. Player #{challenger_player_id} revealed and lost a {card_lost_by_challenger} card, " + \
-                (f"they now have only one card remaining." if len(challenger_remaining_cards) > 0 else f"they have no cards remaining, Player #{challenger_player_id} is eliminated!")
+            _t3 = self.t("sd","they_now_one", _pid=challenged_player_id) if len(challenger_remaining_cards) > 0 else self.t("sd","they_none_elim", challenger=challenger_player_id, _pid=challenged_player_id)
+            challenged_message = self.t("sd","chal_survive", card=challenged_card, challenger=challenger_player_id, new=new_pulled_card, lost=card_lost_by_challenger, _pid=challenged_player_id) + _t3
             # Tell everyone else what happened
-            other_player_observations = f"Player #{challenger_player_id} just unsuccessfully called bullshit on Player #{challenged_player_id}'s {challenged_card} claim! " + \
-                f"Player #{challenged_player_id} did indeed have a {challenged_card} card, put it back in the pile and got a new one. Player #{challenger_player_id} lost an influence and revealed a {card_lost_by_challenger} card." + \
-                (f"Player #{challenger_player_id} now has 1 card remaining." if len(challenger_remaining_cards) > 0 else f"Player #{challenger_player_id} has no cards remaining, they're eliminated!")
-    
+            _t4 = self.t("sd","others_chal_one", challenger=challenger_player_id) if len(challenger_remaining_cards) > 0 else self.t("sd","others_chal_none", challenger=challenger_player_id)
+            other_player_observations = self.t("sd","others_unsucc", challenger=challenger_player_id, challenged=challenged_player_id, card=challenged_card, lost=card_lost_by_challenger) + _t4
+
         else:
             # Player who got challenged loses a card, nothing else changes
             card_lost_by_challenged = self._make_player_lose_a_card(challenged_player_id)
@@ -402,28 +444,27 @@ class CoupEnv(ta.Env):
                 self.state.game_state["coins"][challenged_player_id] += 3
                 self.state.game_state["treasury_coins"] -= 3
             
-            challenged_message = f"You were challenged on your {challenged_card} claim by Player #{challenger_player_id}, Since you did not have a {challenged_card} card, you lost your {card_lost_by_challenged} card." + \
-                (f" Your 3 coins for the assassination attempt have been refunded." if self.state.game_state["action_metadata"].action_type is CoupActionType.Assassinate else "") + \
-                (f" You now have only one card remaining, the {self.state.game_state["hidden_hand"][challenged_player_id][0]} card." if len(self.state.game_state["hidden_hand"][challenged_player_id]) > 0 else \
-                " You have no cards remaining, you're eliminated!")
+            _is_assass = self.state.game_state["action_metadata"].action_type is CoupActionType.Assassinate
+            _ch_hand = self.state.game_state['hidden_hand'][challenged_player_id]
+            _refund_you = self.t("sd","refund_you", _pid=challenged_player_id) if _is_assass else ""
+            _tail = self.t("sd","you_now_one_the", card0=(_ch_hand[0] if _ch_hand else ""), _pid=challenged_player_id) if len(_ch_hand) > 0 else self.t("sd","you_none_elim", _pid=challenged_player_id)
+            challenged_message = self.t("sd","chal_dishonest_head", card=challenged_card, challenger=challenger_player_id, lost=card_lost_by_challenged, _pid=challenged_player_id) + _refund_you + _tail
             # Tell the challenger that they just successfully challenged the challenged player
-            challenger_message = f"You just successfully challenged Player #{challenged_player_id} on their {challenged_card} claim! " + \
-                (f"They are blocked from doing it and have {len(self.state.game_state["hidden_hand"][challenged_player_id])} card remaining." if len(self.state.game_state["hidden_hand"][challenged_player_id]) > 0 else \
-                "They have no cards remaining, they're eliminated!") + \
-                (f" They were refunded their 3 coins." if self.state.game_state["action_metadata"].action_type is CoupActionType.Assassinate else "")
+            _blk = self.t("sd","blocked_have", n=len(_ch_hand), _pid=challenger_player_id) if len(_ch_hand) > 0 else self.t("sd","blocked_none", _pid=challenger_player_id)
+            _refund_they = self.t("sd","refund_they", _pid=challenger_player_id) if _is_assass else ""
+            challenger_message = self.t("sd","succ_head", challenged=challenged_player_id, card=challenged_card, _pid=challenger_player_id) + _blk + _refund_they
             # Other players see the challenger successfully challenge the challenged player
-            other_player_observations = f"Player #{challenger_player_id} just successfully challenged Player #{challenged_player_id} on their {challenged_card} claim! " + \
-                (f"Player #{challenged_player_id} was blocked from doing it and has {len(self.state.game_state["hidden_hand"][challenged_player_id])} card remaining." if len(self.state.game_state["hidden_hand"][challenged_player_id]) > 0 else \
-                f"Player #{challenged_player_id} has no cards remaining, they're eliminated!") + \
-                (f" They were refunded their 3 coins." if self.state.game_state["action_metadata"].action_type is CoupActionType.Assassinate else "")
+            _oblk = self.t("sd","others_blocked_have", challenged=challenged_player_id, n=len(_ch_hand)) if len(_ch_hand) > 0 else self.t("sd","others_blocked_none", challenged=challenged_player_id)
+            _orefund = self.t("sd","refund_they") if _is_assass else ""
+            other_player_observations = self.t("sd","others_succ_head", challenger=challenger_player_id, challenged=challenged_player_id, card=challenged_card) + _oblk + _orefund
             
             # Mark no-op for _advance_turn()
             self.state.game_state["action_metadata"].action_type = CoupActionType.PASS
 
         # Also mark that we have no more players to query so that we can advance the turn
         self.state.game_state["action_metadata"].players_to_query = None
-        self.state.add_observation(from_id=ta.GAME_ID, to_id=challenged_player_id, message=challenged_message, for_logging=False)
-        self.state.add_observation(from_id=ta.GAME_ID, to_id=challenger_player_id, message=challenger_message, for_logging=False)
+        self.state.add_observation(from_id=ta.GAME_ID, to_id=challenged_player_id, message=challenged_message, observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(from_id=ta.GAME_ID, to_id=challenger_player_id, message=challenger_message, observation_type=ta.ObservationType.GAME_MESSAGE)
         self._broadcast_observations(other_player_observations, exclude_player_ids=[challenged_player_id, challenger_player_id])
     
     def _execute_showdown_on_blocker_bullshit(self):
@@ -464,10 +505,10 @@ class CoupEnv(ta.Env):
             challenger_remaining = len(self.state.game_state["hidden_hand"][challenger_player_id])
             
             # Send observations
-            blocker_msg = f"You were challenged on your {block_card} block by Player #{challenger_player_id}. Since you had the {block_card}, you shuffled it back and drew a {new_card}. Player #{challenger_player_id} lost a {card_lost} and has {challenger_remaining} card(s) remaining."
-            challenger_msg = f"Your challenge on Player #{blocker_player_id}'s {block_card} block failed. They did have a {block_card}. You lost a {card_lost} and have {challenger_remaining} card(s) remaining."
-            others_msg = f"Player #{challenger_player_id} challenged Player #{blocker_player_id}'s {block_card} block and failed. Player #{blocker_player_id} had the {block_card}, shuffled it back and drew a new card. Player #{challenger_player_id} lost a {card_lost} and has {challenger_remaining} card(s) remaining."
-            
+            blocker_msg = self.m("bb","blocker_honest", card=block_card, challenger=challenger_player_id, new=new_card, lost=card_lost, n=challenger_remaining)
+            challenger_msg = self.m("bb","challenger_honest", blocker=blocker_player_id, card=block_card, lost=card_lost, n=challenger_remaining)
+            others_msg = self.m("bb","others_honest", challenger=challenger_player_id, blocker=blocker_player_id, card=block_card, lost=card_lost, n=challenger_remaining)
+
             # The block was successful, so the original action is cancelled
             self.state.game_state["action_metadata"].action_type = CoupActionType.PASS
             
@@ -477,16 +518,16 @@ class CoupEnv(ta.Env):
             blocker_remaining = len(self.state.game_state["hidden_hand"][blocker_player_id])
             
             # Send observations
-            blocker_msg = f"You were challenged on your {block_card} block by Player #{challenger_player_id}. Since you didn't have a {block_card}, you lost a {card_lost} and have {blocker_remaining} card(s) remaining."
-            challenger_msg = f"Your challenge on Player #{blocker_player_id}'s {block_card} block succeeded! They didn't have a {block_card}. They lost a {card_lost} and have {blocker_remaining} card(s) remaining."
-            others_msg = f"Player #{challenger_player_id} successfully challenged Player #{blocker_player_id}'s {block_card} block. Player #{blocker_player_id} didn't have the {block_card}, lost a {card_lost} and has {blocker_remaining} card(s) remaining."
+            blocker_msg = self.m("bb","blocker_liar", card=block_card, challenger=challenger_player_id, lost=card_lost, n=blocker_remaining)
+            challenger_msg = self.m("bb","challenger_liar", blocker=blocker_player_id, card=block_card, lost=card_lost, n=blocker_remaining)
+            others_msg = self.m("bb","others_liar", challenger=challenger_player_id, blocker=blocker_player_id, card=block_card, lost=card_lost, n=blocker_remaining)
             
             # The block failed, so the original action will proceed
             # No need to change action_type
         
         # Send all observations
-        self.state.add_observation(from_id=ta.GAME_ID, to_id=blocker_player_id, message=blocker_msg, for_logging=False)
-        self.state.add_observation(from_id=ta.GAME_ID, to_id=challenger_player_id, message=challenger_msg, for_logging=False)
+        self.state.add_observation(from_id=ta.GAME_ID, to_id=blocker_player_id, message=blocker_msg, observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(from_id=ta.GAME_ID, to_id=challenger_player_id, message=challenger_msg, observation_type=ta.ObservationType.GAME_MESSAGE)
         self._broadcast_observations(others_msg, exclude_player_ids=[blocker_player_id, challenger_player_id])
         
         # Mark that we're done querying
@@ -507,7 +548,7 @@ class CoupEnv(ta.Env):
             if card in cards_available:
                 cards_available.remove(card)
             else:
-                raise ValueError(f"Cannot keep {card} - it's not one of your available cards")
+                raise _CoupInvalid(self.m("err","keep_unavailable", card=card))
         
         # Update player's hand with only the kept cards
         self.state.game_state["hidden_hand"][player_id] = list(cards_to_keep)
@@ -519,12 +560,12 @@ class CoupEnv(ta.Env):
         
         # Send observations
         if len(cards_to_keep) == 1:
-            source_observation = f"You have completed your exchange and kept: {cards_to_keep[0]}"
+            source_observation = self.m("ex","kept_one", card=cards_to_keep[0])
         else:
-            source_observation = f"You have completed your exchange and kept: {', '.join(cards_to_keep)}"
-        other_observation = f"Player #{player_id} has completed their exchange."
+            source_observation = self.m("ex","kept_two", cards=', '.join(cards_to_keep))
+        other_observation = self.m("ex","others", player=player_id)
         
-        self.state.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=source_observation, for_logging=False)
+        self.state.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=source_observation, observation_type=ta.ObservationType.GAME_MESSAGE)
         self._broadcast_observations(other_observation, exclude_player_ids=[player_id])
 
     def _broadcast_observations(self, other_player_observations: str, exclude_player_ids: Optional[List[int]] = None):
@@ -532,16 +573,16 @@ class CoupEnv(ta.Env):
         for pid in range(self.state.num_players):
             if pid in exclude_player_ids:
                 continue
-            self.state.add_observation(from_id=ta.GAME_ID, to_id=pid, message=other_player_observations, for_logging=False)
+            self.state.add_observation(from_id=ta.GAME_ID, to_id=pid, message=other_player_observations, observation_type=ta.ObservationType.GAME_MESSAGE)
 
     # ---------------------------------------------------------------------
     # PROMPT GENERATION METHODS -- CONVERTS GAME STATE TO PROMPT
     # ---------------------------------------------------------------------
-    def _gen_initial_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        prompt = base_coup_prompts.base_prompt.replace("<NUM_PLAYERS>", str(self.state.num_players))
-        prompt = prompt.replace("<PLAYER_ID>", str(player_id))
-        prompt = prompt.replace("<PLAYER_OBSERVATIONS>", self._make_player_observations_prompt(player_id))
-        return prompt
+    def _gen_initial_prompt(self, player_id: int, game_state: Dict[str, Any]):
+        return self.m("prompt", "base",
+                      num_players=self.state.num_players,
+                      player_id=player_id,
+                      player_observations=self._make_player_observations_prompt(player_id, _pid=player_id))
     
 
     def _make_last_action_msg(self, player_id: int, action: CoupActionType) -> str:
@@ -571,34 +612,36 @@ class CoupEnv(ta.Env):
         else: # game_state["phase"] == "play", so we are in play mode not challenge mode, and we know the action is not Keep
             return f"Player #{curr_pid} just played {action.value}."
 
-    def _make_player_observations_prompt(self, player_id: Optional[int] = None) -> str:
+    def _make_player_observations_prompt(self, player_id: Optional[int] = None, _pid: Optional[int] = None) -> str:
         """
         Make a prompt for the specified player. Tells them their latest hand and the state of the game (what cards are in the pile, what cards are in the revealed hand, etc).
+        Rendered directly to a string in the recipient's language (_pid).
         """
         if player_id is None:
             player_id = self.state.current_player_id
+        if _pid is None:
+            _pid = player_id
         game_state = self.state.game_state
-        msg = f"There are {self.state.num_players} players in the game.\n"
+        msg = self.t("obs", "header", num_players=self.state.num_players, _pid=_pid)
 
         for pid in range(self.state.num_players):
-            if pid == player_id: 
+            if pid == player_id:
                 continue
             if len(game_state['hidden_hand'][pid]) == 0:
-                msg += f"Player #{pid} is out.\n"
+                msg += self.t("obs", "player_out", pid=pid, _pid=_pid)
             elif len(game_state['revealed_hand'][pid]) > 0:
-                msg += f"Player #{pid} has {game_state['coins'][pid]} coins, has revealed and lost a {game_state['revealed_hand'][pid][0]} card, and has {len(game_state['hidden_hand'][pid])} hidden influence cards remaining.\n"
+                msg += self.t("obs", "player_revealed", pid=pid, coins=game_state['coins'][pid], card=game_state['revealed_hand'][pid][0], hidden=len(game_state['hidden_hand'][pid]), _pid=_pid)
             else:
-                msg += f"Player #{pid} has {game_state['coins'][pid]} coins, and has {len(game_state['hidden_hand'][pid])} hidden influence cards remaining.\n"
+                msg += self.t("obs", "player_hidden", pid=pid, coins=game_state['coins'][pid], hidden=len(game_state['hidden_hand'][pid]), _pid=_pid)
 
-
-        msg += f"\n ------ You are Player #{player_id}. You have {game_state['coins'][player_id]} coins"
+        msg += self.t("obs", "you_prefix", pid=player_id, coins=game_state['coins'][player_id], _pid=_pid)
 
         if len(game_state['hidden_hand'][player_id]) == 2:
-            msg += f" and {len(game_state['hidden_hand'][player_id])} hidden influence cards remaining: You have a {game_state['hidden_hand'][player_id][0]} and a {game_state['hidden_hand'][player_id][1]}."
+            msg += self.t("obs", "you_two", hidden=len(game_state['hidden_hand'][player_id]), c0=game_state['hidden_hand'][player_id][0], c1=game_state['hidden_hand'][player_id][1], _pid=_pid)
         elif len(game_state['hidden_hand'][player_id]) == 1:
-            msg += f", a hidden {game_state['hidden_hand'][player_id][0]} card, and you have a revealed {game_state['revealed_hand'][player_id][0]} card that is out of play."
+            msg += self.t("obs", "you_one", c0=game_state['hidden_hand'][player_id][0], c1=game_state['revealed_hand'][player_id][0], _pid=_pid)
 
-        msg += " --------\n"
+        msg += self.t("obs", "you_suffix", _pid=_pid)
         return msg
     
     def _send_call_to_action_prompt(self) -> None:
@@ -606,61 +649,57 @@ class CoupEnv(ta.Env):
         Make a prompt for the player that asks them to make an action or challenge. 
         This is only called when the player IS the current_player, done AFTER we've advanced the turn.
         """
-        msg = base_coup_prompts.base_reprompt
-        msg = msg.replace("<PLAYER_OBSERVATIONS>", self._make_player_observations_prompt())
-        
+        cur = self.state.current_player_id
+
         # Determine the call to action based on the current phase
         if self.state.game_state["phase"] == GamePhase.QueryWhichToKeep:
             # Player needs to choose which cards to keep after exchange
-            call_to_action_str = f"You need to choose which {'two cards' if len(self.state.game_state['revealed_hand'][self.state.current_player_id]) == 0 else 'card'} to keep. Use [keep <card1>" + \
-                f"{' <card2>' if len(self.state.game_state['revealed_hand'][self.state.current_player_id]) == 0 else ''}]"
-            
+            if len(self.state.game_state['revealed_hand'][cur]) == 0:
+                call_to_action_str = self.t("cta", "keep_two", _pid=cur)
+            else:
+                call_to_action_str = self.t("cta", "keep_one", _pid=cur)
+
         elif self.state.game_state["phase"] == GamePhase.QueryForBlockOrChallenge:
             # Player is being asked if they want to block or challenge
             metadata = self.state.game_state["action_metadata"]
             action = metadata.action_type
             source_player_id = metadata.source_player_id
             target_player_id = metadata.target_player_id
-            
+
             # Build the action description
-            action_desc = f"Player #{source_player_id} is attempting to {action.value}"
+            action_desc = self.t("cta", "action_desc", source=source_player_id, action=action.value, _pid=cur)
             if action is CoupActionType.Assassinate:
-                action_desc += " (they have paid 3 coins)"
-            if target_player_id is not None and target_player_id != self.state.current_player_id:
-                action_desc += f" on Player #{target_player_id}"
-            elif target_player_id == self.state.current_player_id:
-                action_desc += " on you"
-            
-            # Determine valid block options for current player
+                action_desc += self.t("cta", "paid", _pid=cur)
+            if target_player_id is not None and target_player_id != cur:
+                action_desc += self.t("cta", "on_player", target=target_player_id, _pid=cur)
+            elif target_player_id == cur:
+                action_desc += self.t("cta", "on_you", _pid=cur)
+
+            # Determine valid block options for current player (neutral command tokens)
             block_options = []
             if action is CoupActionType.ForeignAid:
                 block_options.append("[block foreign aid]")
-            elif action is CoupActionType.Steal and target_player_id == self.state.current_player_id:
+            elif action is CoupActionType.Steal and target_player_id == cur:
                 block_options.extend(["[block steal captain]", "[block steal ambassador]"])
-            elif action is CoupActionType.Assassinate and target_player_id == self.state.current_player_id:
+            elif action is CoupActionType.Assassinate and target_player_id == cur:
                 block_options.append("[block assassinate]")
-            
-            # Build the call to action
-            if block_options:
-                block_str = ", ".join(block_options) + ", "
-            else:
-                block_str = ""
-            
+
+            block_str = ", ".join(block_options) + ", " if block_options else ""
+
             # Add claim info for challengeable actions
             claim_str = ""
             if action in {CoupActionType.Tax, CoupActionType.Assassinate, CoupActionType.Steal, CoupActionType.Exchange}:
-                claim_str = f" (claiming {self._action_to_card(action)})"
-            
-            # Build the call to action with proper handling for foreign aid
-            bullshit_str = "call [BULLSHIT], " if action is not CoupActionType.ForeignAid else ""
-            call_to_action_str = f"{action_desc}{claim_str}. Do you want to {block_str}{bullshit_str}or [PASS]?"
-            
+                claim_str = self.t("cta", "claiming", card=self._action_to_card(action), _pid=cur)
+
+            bullshit_str = self.t("cta", "bullshit", _pid=cur) if action is not CoupActionType.ForeignAid else ""
+            call_to_action_str = self.t("cta", "tail", action_desc=action_desc, claim=claim_str, block=block_str, bullshit=bullshit_str, _pid=cur)
+
         elif self.state.game_state["phase"] == GamePhase.QueryToChallengeTheBlocker:
             # Someone blocked, asking if anyone wants to challenge the block
             metadata = self.state.game_state["action_metadata"]
             blocker_id = metadata.blocker_player_id
             block_type = metadata.block_type
-            
+
             # Determine which card the blocker is claiming based on block type
             if block_type is CoupActionType.BlockForeignAid:
                 block_claim = "Duke"
@@ -672,21 +711,23 @@ class CoupEnv(ta.Env):
                 block_claim = "Contessa"
             else:
                 block_claim = "unknown card"
-            
-            call_to_action_str = f"Player #{blocker_id} is blocking with {block_claim}. Do you want to call [BULLSHIT] or [PASS]?"
-            
-        elif self.state.game_state["coins"][self.state.current_player_id] >= 10:
+
+            call_to_action_str = self.t("cta", "blocking", blocker=blocker_id, card=block_claim, _pid=cur)
+
+        elif self.state.game_state["coins"][cur] >= 10:
             # Forced coup
-            call_to_action_str = "You have 10 or more coins and must coup. Use [coup x] where x is the player id number."
-            
+            call_to_action_str = self.t("cta", "forced_coup", _pid=cur)
+
         else:
             # Normal play phase
-            call_to_action_str = "What action do you want to take?"
-        
-        msg = msg.replace("<CALL_TO_ACTION_OR_CHALLENGE>", call_to_action_str)
-        
+            call_to_action_str = self.t("cta", "normal", _pid=cur)
+
         # Send the message to the current player
-        self.state.add_observation(from_id=ta.GAME_ID, to_id=self.state.current_player_id, message=msg, for_logging=False)
+        self.state.add_observation(from_id=ta.GAME_ID, to_id=cur,
+                                   message=self.m("prompt", "reprompt",
+                                                  player_observations=self._make_player_observations_prompt(player_id=cur, _pid=cur),
+                                                  call_to_action=call_to_action_str),
+                                   observation_type=ta.ObservationType.GAME_MESSAGE)
 
     def _action_to_card(self, action: CoupActionType) -> str:
         """ Convert a CoupActionType to a card """
@@ -715,6 +756,12 @@ class CoupEnv(ta.Env):
     # ---------------------------------------------------------------------
     # GAME STATE ADJUSTMENT METHODS -- SYNTACTIC SUGAR FOR THE GAME LOGIC
     # ---------------------------------------------------------------------
+
+    def _remaining_frag(self, player_id: int):
+        """Localized 'now have 1 card remaining.' / 'now have no cards ...' fragment."""
+        if len(self.state.game_state["hidden_hand"][player_id]) > 0:
+            return self.m("frag","remaining_one")
+        return self.m("frag","remaining_none")
 
     def _make_player_lose_a_card(self, player_id: int):
         """
@@ -796,12 +843,12 @@ class CoupEnv(ta.Env):
         else:
             raise Exception(f"Unexpected game phase: {self.state.game_state['phase']}")
         
-        self.state.manually_update_current_player(new_player_id=next_pid)
+        self.state.manually_set_current_player_id(new_player_id=next_pid)
         
         # Check for winner
         winner = self._get_winner()
         if winner is not None:
-            self.state.set_winners(player_ids=[winner], reason=f"Player {winner} has won the game!")
+            self.state.set_winners(player_ids=[winner], reason=self.m("win","reason",winner=winner))
             return True, {"winner": winner}
         else:
             return False, {}
@@ -829,41 +876,41 @@ class CoupEnv(ta.Env):
         # 1) Grab all bracketed chunks, take the last one.
         match_list = re.findall(r"\[([^\[\]]+)\]", response_str.replace("[GAME]", " "))
         if not match_list:
-            raise ValueError(f"No bracketed command found. What is your desired [action]?")
+            raise _CoupInvalid(self.m("err","no_bracket"))
         cmd = match_list[-1].strip().lower()
         tokens = cmd.split()
 
         if not tokens:
-            raise ValueError("Empty command.")
+            raise _CoupInvalid(self.m("err","empty"))
 
         # ---------- Simple one-word actions ----------
         simple = {"income": CoupActionType.Income, "tax": CoupActionType.Tax,"exchange": CoupActionType.Exchange, "pass": CoupActionType.PASS, "bullshit": CoupActionType.BULLSHIT}
         if tokens[0] in simple:
             if len(tokens) > 1:
-                raise ValueError(f"Invalid action: {tokens[0]}, cannot have more than one word when doing a {tokens[0]}")
+                raise _CoupInvalid(self.m("err","simple_extra", token=tokens[0]))
             return simple[tokens[0]], None
         
         if tokens[:2] == ["foreign", "aid"]:
             if len(tokens) > 2:
-                raise ValueError(f"Invalid action: {response_str}, cannot have more than two words when doing a foreign aid")
+                raise _CoupInvalid(self.m("err","foreign_extra", response=response_str))
             return CoupActionType.ForeignAid, None
 
         # ---------- Directed actions ----------
         directed_map = {"coup": CoupActionType.Coup, "assassinate": CoupActionType.Assassinate, "steal": CoupActionType.Steal }
         if tokens[0] in directed_map:
             if len(tokens) < 2 or not tokens[1].isdigit():
-                raise ValueError(f"Missing / invalid target for '{tokens[0]}'.")
+                raise _CoupInvalid(self.m("err","directed_target", token=tokens[0]))
             return directed_map[tokens[0]], int(tokens[1])
 
         # ---------- Ambassador "keep" special ----------
         if tokens[0] == "keep":
             if len(tokens) < 2 or len(tokens) > 3:
-                raise ValueError("'keep' must specify one or two cards to keep.")
+                raise _CoupInvalid(self.m("err","keep_count"))
             
             cards = []
             for i in range(1, len(tokens)):
                 if tokens[i].lower() not in {"duke", "assassin", "ambassador", "captain", "contessa"}:
-                    raise ValueError(f"Invalid card name: {tokens[i]}")
+                    raise _CoupInvalid(self.m("err","invalid_card", card=tokens[i]))
                 cards.append(tokens[i].lower())
             
             return CoupActionType.Keep, cards
@@ -877,11 +924,11 @@ class CoupEnv(ta.Env):
                     return CoupActionType.BlockStealAmbassador, None
                 if tokens[2] == "captain":
                     return CoupActionType.BlockStealCaptain, None
-                raise ValueError("Block steal must specify 'ambassador' or 'captain'.")
+                raise _CoupInvalid(self.m("err","block_steal_spec"))
             if tokens[1] == "assassinate":
                 return CoupActionType.BlockAssassinate, None
 
-        raise ValueError(f"Unrecognized command: [{cmd}]")
+        raise _CoupInvalid(self.m("err","unrecognized", cmd=cmd))
     
 
     #########################################################################
@@ -892,18 +939,18 @@ class CoupEnv(ta.Env):
         Convert the game state to a headline string.
         """
         if hasattr(self.state, "game_state") and self.state.game_state is not None and self._get_winner() == self.state.current_player_id:
-            return f"Player #{self._get_winner()} has won!"
+            return self.t("hl", "won", winner=self._get_winner())
         if game_state["phase"] == GamePhase.Play:
-            return f"It's Player #{self.state.current_player_id}'s turn"
+            return self.t("hl", "turn", pid=self.state.current_player_id)
         elif game_state["phase"] == GamePhase.QueryForBlockOrChallenge:
             tgt_player_str = ""
             if game_state['action_metadata'].action_type in {CoupActionType.Assassinate, CoupActionType.Steal}:
-                tgt_player_str = f" on Player #{game_state['action_metadata'].target_player_id}" if game_state['action_metadata'].action_type is CoupActionType.Assassinate else f" from Player #{game_state['action_metadata'].target_player_id}"
-            return f"Player #{game_state['action_metadata'].source_player_id} is attempting a {game_state['action_metadata'].action_type.name}{tgt_player_str}, asking if Player #{self.state.current_player_id} wants to block/challenge."
+                tgt_player_str = self.t("hl", "target_on", target=game_state['action_metadata'].target_player_id) if game_state['action_metadata'].action_type is CoupActionType.Assassinate else self.t("hl", "target_from", target=game_state['action_metadata'].target_player_id)
+            return self.t("hl", "query_block", source=game_state['action_metadata'].source_player_id, action=game_state['action_metadata'].action_type.name, target=tgt_player_str, pid=self.state.current_player_id)
         elif game_state["phase"] == GamePhase.QueryToChallengeTheBlocker:
-            return f"Player #{game_state['action_metadata'].blocker_player_id} is doing a {game_state['action_metadata'].block_type.name} on Player #{game_state['action_metadata'].source_player_id}, asking if Player #{self.state.current_player_id} wants to challenge the block."
+            return self.t("hl", "query_challenge_blocker", blocker=game_state['action_metadata'].blocker_player_id, block=game_state['action_metadata'].block_type.name, source=game_state['action_metadata'].source_player_id, pid=self.state.current_player_id)
         elif game_state["phase"] == GamePhase.QueryWhichToKeep:
-            return f"Player #{game_state['action_metadata'].source_player_id} is attempting an Exchange, asking which they wish to keep."
+            return self.t("hl", "query_keep", source=game_state['action_metadata'].source_player_id)
         else:
             raise Exception(f"Unexpected game phase: {game_state['phase']}")
         

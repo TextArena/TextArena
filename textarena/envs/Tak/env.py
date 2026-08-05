@@ -4,21 +4,45 @@ from typing import Dict, Optional, List, Tuple
 import textarena as ta
 
 class TakEnv(ta.Env):
+    """Tak (simplified variant).
+
+    Two players build stacks of Flat stones ('F'), Wall stones ('W') and a
+    Capstone ('C') on a square board. The game ends when:
+
+      * a player connects two opposite edges with a road of their own flats /
+        capstones (walls do NOT count) -- that player wins; or
+      * the board fills up, or a player runs out of pieces -- then whoever has
+        the most flat stones showing on top of stacks wins the "flat count"
+        (walls and capstones don't count); an equal flat count is a draw.
+
+    A turn limit is enforced purely as a safeguard against non-terminating
+    move-shuffling play; if it is reached the flat count decides the result.
+
+    Faithful to standard Tak: placement, road wins, the capstone flattening
+    walls (and never being covered), the carry limit (at most `board_size`
+    pieces may be lifted from a stack), and the flat-count endgame. **Simplified:**
+    multi-square stack moves are validated by requiring each successive drop to
+    lie one step further (Manhattan distance) from the origin rather than along a
+    strictly straight line, so some non-linear drop paths are accepted. This is
+    why the class is a simplified Tak variant; the player prompt says so too.
     """
-    Tak environment.
-    """
-    def __init__(self, board_size, stones, capstones):
-        """
-        Initialize the Tak game environment
-        
+    def __init__(self, board_size: int = 4, stones: int = 15, capstones: int = 1, max_turns: int = 100):
+        """Initialize the Tak game environment.
+
         Args:
-            difficulty: Difficulty of the game. Can be "easy", "medium", "hard".
+            board_size: Side length of the square board.
+            stones: Flat/Wall stones each player starts with.
+            capstones: Capstones each player starts with.
+            max_turns: Safeguard turn cap; on reaching it the flat count decides
+                the result (real Tak has no turn limit, but move-only play can
+                otherwise continue forever).
         """
 
         self.board_size = board_size
         self.stones = stones
         self.capstones = capstones
-        
+        self.max_turns = max_turns
+
         self.players = None
         self.board = None
 
@@ -34,7 +58,7 @@ class TakEnv(ta.Env):
             seed: Seed for the random number generator.
         """
         ## initialize the game state
-        self.state = ta.TwoPlayerState(num_players=num_players, seed=seed)
+        self.state = ta.TwoPlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
 
         ## initialize the board
         self.board = self._generate_board()
@@ -101,59 +125,7 @@ class TakEnv(ta.Env):
         """
         Generate the player prompt.
         """
-        prompt = (
-            f"You are Player {player_id} in Tak.\n"
-            "Your goal is to connect two opposite edges of the board with your pieces to form a road while blocking your opponent from doing the same.\n"
-            "You can perform the following actions on your turn:\n"
-            "- Place a piece on an empty square.\n"
-            "- Move a stack of pieces from one square to one or more squares. You can stack your pieces on top of other pieces on the target square. The topmost piece determines ownership of the stack.\n"
-            "- Split a stack of pieces into two or more stacks and distribute them to adjacent squares.\n"
-            "- Flatten a wall stone into a flat stone using your capstone.\n"
-            "- Place a Capstone on an empty square.\n"
-            "- Move a Capstone from one square to one or more squares. A capstone can also flatten a wall stone during its move.\n"
-            "\n"
-            "For each move, submit your action using the format:\n"
-            "[ACTION SOURCE ALLOCATION]\n"
-            "- ACTION: The type of move you are making ('place' or 'move').\n"
-            "- SOURCE: The grid coordinates where the stones originate. Use () for 'place'.\n"
-            "- ALLOCATION: A dictionary where keys are target grid coordinates and values are the stones or pieces being moved or placed.\n"
-            "\n"
-            "Stone Types and Their Abilities:\n"
-            "- Flat Stone ('F'):\n"
-            "  - Forms part of a road (used to connect edges of the board).\n"
-            "  - Can be stacked on top of other pieces or have other pieces stacked on it.\n"
-            "  - Can be moved as part of a stack or individually.\n"
-            "\n"
-            "- Wall Stone ('W'):\n"
-            "  - Blocks roads and prevents opponents from completing their connections.\n"
-            "  - Cannot be part of a road.\n"
-            "  - Can be flattened into a flat stone by a capstone.\n"
-            "\n"
-            "- Capstone ('C'):\n"
-            "  - Acts as a flat stone and can form part of a road.\n"
-            "  - Can flatten wall stones, removing their blocking effect.\n"
-            "  - Cannot be covered by other pieces, always remains on top of the stack.\n"
-            "  - Is a powerful tool for both road-building and disrupting your opponent's plans.\n"
-            "\n"
-            "The stones will be identified by the player as follows:\n"
-            "- Flat Stone for Player 0: 'F0'\n"
-            "- Wall Stone for Player 1: 'W1'\n"
-            "- Capstone for Player 1: 'C1'\n"
-            "\n"
-            "Examples:\n"
-            "- To place a capstone on (3,2):\n"
-            "  [place () {(3,2): [C0]}]\n"
-            "- To move all pieces from (2,2) to (2,3):\n"
-            "  [move (2,2) {(2,3): [F0]}]\n"
-            "- To split a stack of 5 pieces from (2,2) into two squares:\n"
-            "  [move (2,2) {(2,3): [F0, F0], (2,4): [W0, F0, C0]}]\n"
-            "- To move and stack one piece from (2,2) onto an existing stack at (2,3):\n"
-            "  [move (2,2) {(2,3): [F0]}]\n"
-            "\n"
-            "When submitting your move, think strategically about your road-building goals and your opponent's potential moves.\n"
-        )
-
-        return prompt
+        return self.m("player_prompt", "intro", player_id=player_id)
     
     def _observe_current_state(self) -> None:
         """
@@ -164,7 +136,7 @@ class TakEnv(ta.Env):
         available_flat_stones = self.players[self.state.current_player_id]["stones"]
         available_capstones = self.players[self.state.current_player_id]["capstones"]
         self.state.add_observation(
-            message=f"Current Board:\n\n{board_str}\nAvailable Flat Stones: {available_flat_stones}, Available Capstones: {available_capstones}\n",
+            message=self.m("board", "current_state", board=board_str, flat_stones=available_flat_stones, capstones=available_capstones),
             observation_type=ta.ObservationType.GAME_BOARD
         )
 
@@ -193,7 +165,7 @@ class TakEnv(ta.Env):
 
         if not match:
             ## no matching action
-            reason=f"Invalid move format. Player {self.state.current_player_id} did not respond with a valid move in square brackets."
+            reason=self.m("invalid_move", "invalid_format", current_player_id=self.state.current_player_id)
             self.state.set_invalid_move(reason=reason)
         
         else:
@@ -204,42 +176,76 @@ class TakEnv(ta.Env):
                 ## place a piece on an empty square
                 if not self._is_valid_placement(allocation):
                     ## invalid placement
-                    reason=f"Invalid placement. Player {self.state.current_player_id} tried to place a piece on an invalid square."
+                    reason=self.m("invalid_move", "invalid_placement", current_player_id=self.state.current_player_id)
                     self.state.set_invalid_move(reason=reason)
                 else:
                     self._apply_placement(allocation, self.state.current_player_id)
-                    message=f"Player {self.state.current_player_id} placed a piece on ({list(allocation.keys())})."
+                    message=self.m("action", "placement", current_player_id=self.state.current_player_id, cells=list(allocation.keys()))
                     self.state.add_observation(from_id=-1, to_id=-1, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
             elif action == "move":
                 ## move a stack of pieces from one square to another
                 if not self._is_valid_movement(source, allocation):
                     ## invalid movement
-                    reason=f"Invalid movement. Player {self.state.current_player_id} tried to move pieces in an invalid way."
+                    reason=self.m("invalid_move", "invalid_movement", current_player_id=self.state.current_player_id)
                     self.state.set_invalid_move(reason=reason)
                 else:
                     ## valid movement
                     self._apply_movement(source, allocation)
-                    message=f"Player {self.state.current_player_id} moved pieces from {source} to {list(allocation.keys())}.",
+                    message=self.m("action", "movement", current_player_id=self.state.current_player_id, source=source, targets=list(allocation.keys()))
                     self.state.add_observation(from_id=-1, to_id=-1, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
             else:
                 ## invalid action
-                reason=f"Invalid action. Player {self.state.current_player_id} tried to perform an unknown action."
+                reason=self.m("invalid_move", "invalid_action", current_player_id=self.state.current_player_id)
                 self.state.set_invalid_move(reason=reason)
 
             
             self.state.game_state["rendered_board"] = self._render_board() ## update the rendered board
 
-        
-        if self._check_win(self.state.current_player_id): ## check if the game is over
-            ## game is over
-            reason=f"Player {self.state.current_player_id} has connected two opposite edges of the board."
-            self.state.set_winner(player_id=self.state.current_player_id, reason=reason)
+        ## Terminal checks run only after a valid move (an invalid move leaves the
+        ## board unchanged and may already have ended the game on a repeat error).
+        if not self.state.made_invalid_move and not self.state.done:
+            cur = self.state.current_player_id      # step() has not rotated yet: this is the mover
+            opp = 1 - cur
+            if self._check_win(cur):                # the mover completed their own road
+                self.state.set_winner(player_id=cur, reason=self.m("outcome", "winner", current_player_id=cur))
+            elif self._check_win(opp):              # a move can complete the opponent's road (e.g. flattening a wall)
+                self.state.set_winner(player_id=opp, reason=self.m("outcome", "winner", current_player_id=opp))
+            elif self._board_full() or self._out_of_pieces(0) or self._out_of_pieces(1):
+                self._resolve_flat_count(capped=False)   # board full / a player ran out -> flat count
+            elif self.state.turn + 1 >= self.state.max_turns:
+                self._resolve_flat_count(capped=True)    # safeguard cap -> flat count
 
         result = self.state.step()
         self._observe_current_state()
         return result
+
+    def _flat_counts(self) -> Dict[int, int]:
+        """Flat stones showing on top of stacks, per player (walls/capstones don't count)."""
+        counts = {0: 0, 1: 0}
+        for row in self.board:
+            for cell in row:
+                if cell and cell[-1][0] == "F":
+                    counts[int(cell[-1][-1])] += 1
+        return counts
+
+    def _board_full(self) -> bool:
+        return all(cell for row in self.board for cell in row)
+
+    def _out_of_pieces(self, player_id: int) -> bool:
+        return self.players[player_id]["stones"] == 0 and self.players[player_id]["capstones"] == 0
+
+    def _resolve_flat_count(self, capped: bool = False) -> None:
+        """End the game by flat count (board full / out of pieces / turn cap)."""
+        c = self._flat_counts()
+        if c[0] == c[1]:
+            key = "draw_capped" if capped else "draw"
+            self.state.set_draw(reason=self.m("outcome", key, flats0=c[0], flats1=c[1]))
+        else:
+            winner = 0 if c[0] > c[1] else 1
+            key = "flat_win_capped" if capped else "flat_win"
+            self.state.set_winner(player_id=winner, reason=self.m("outcome", key, winner=winner, flats0=c[0], flats1=c[1]))
 
     def _check_win(self, player_id):
         """
@@ -423,6 +429,9 @@ class TakEnv(ta.Env):
         
         source_stack = self.board[source_row][source_col]
         pieces_to_move = [value for values in allocation.values() for value in values]
+
+        if len(pieces_to_move) > self.board_size: ## carry limit: at most board_size pieces may be lifted from a stack
+            return False
 
         if pieces_to_move != source_stack[-len(pieces_to_move):]: ## pieces to move must match the top of the stack in order
             return False

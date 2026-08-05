@@ -27,7 +27,8 @@ from golden_runner import run_game, canonical, load_env, run_scenario  # noqa: E
 from game_scenarios import GAMES  # noqa: E402
 
 GOLDEN_DIR = os.path.join(HERE, "goldens")
-LANGS = ["ar", "de", "en", "es", "fr", "he", "ms", "zh"]
+LANGS = ["ar", "de", "en", "es", "fr", "he", "ms", "zh", "kn", "be", "gu", "pa", "mr", "ps", "te", "sd", "ne", "lo", "uz", "ml", "zu", "as", "km", "hy", "cy", "si", "kk", "or", "my", "so", "mg", "ky", "ka", "ha", "ig", "mn", "eu", "yo", "am", "ceb", "bjn", "ars", "arz", "acq", "crh", "apc", "ajp", "bho", "ace", "acm", "ary", "ckb", "aeb", "ast", "bug", "ayr", "bam", "bem", "cjk", "ban", "awa", "bak", "azb", "bod", "aka", "epo", "gla", "fur", "gle", "fao", "fij", "grn", "gaz", "ewe", "fuv", "dzo", "dik", "fon", "dyu", "jav", "hat", "lmo", "lim", "ltz", "hne", "mai", "mag", "kmr", "ilo", "lij", "kas", "lus", "kin", "ltg", "kea", "lin", "lug", "luo", "lua", "kac", "kik", "kab", "kon", "knc", "kbp", "kmb", "kam", "sun", "scn", "pap", "oci", "sot", "min", "nya", "sna", "srd", "smo", "szl", "mri", "mlt", "nno", "pag", "mni", "tat", "nso", "ssw", "san", "run", "shn", "sat", "quy", "nus", "sag", "mos", "taq", "vec", "ydd", "tgk", "xho", "war", "uig", "tir", "tso", "tuk", "tsn", "tpi", "tum", "tzm", "twi", "wol", "umb"]
+_LANG_OVERRIDE = None  # set by --langs to smoke a subset (e.g. adding one new language)
 
 
 def golden_path(game):
@@ -41,13 +42,14 @@ def langs_for(game):
     logographic zh). textarena/envs/<game>/locales/_supported_langs.json (a JSON
     list) narrows the set; absent -> all 8.
     """
+    base = _LANG_OVERRIDE if _LANG_OVERRIDE is not None else LANGS
     supported = os.path.join(REPO_ROOT, "textarena", "envs", game, "locales", "_supported_langs.json")
     if os.path.exists(supported):
         import json
         with open(supported, encoding="utf-8") as f:
             declared = json.load(f)
-        return [l for l in LANGS if l in declared]
-    return LANGS
+        return [l for l in base if l in declared]
+    return base
 
 
 def _selected(games):
@@ -121,8 +123,17 @@ def verify(games=None):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--update", action="store_true", help="regenerate committed goldens")
+    ap.add_argument("--langs", help="comma-separated language subset to smoke (e.g. en,pt); "
+                                    "English golden identity always runs. Default: all 8.")
     ap.add_argument("games", nargs="*", help="restrict to these game names (default: all)")
     args = ap.parse_args()
+    if args.langs:
+        global _LANG_OVERRIDE
+        want = [l.strip() for l in args.langs.split(",") if l.strip()]
+        _LANG_OVERRIDE = [l for l in want if l in LANGS] or None
+        unknown = [l for l in want if l not in LANGS]
+        if unknown:
+            print(f"note: ignoring languages not in LANGS (add them there first): {unknown}")
     if args.update:
         update_goldens(args.games)
         return 0

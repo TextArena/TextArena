@@ -225,8 +225,8 @@ class NewRecruitEnv(ta.Env):
             "The issues are in this order:\n"
             f"{issue_order_str}\n\n"
             "Available actions:\n"
-            "  - Write your rationale to convince {opponent_role}, followed by a proposal using letter choices:\n"
-            "    You may say anything (truths, lies, all in between) to persuade {opponent_role} to accept the proposal.\n"
+            f"  - Write your rationale to convince the {opponent_role}, followed by a proposal using letter choices:\n"
+            f"    You may say anything (truths, lies, all in between) to persuade the {opponent_role} to accept the proposal.\n"
             "    Example format:\n"
             "    ```\n"
             "    I believe this proposal is fair because it balances our interests.\n"
@@ -438,24 +438,22 @@ class NewRecruitEnv(ta.Env):
         try:
             # Check if the letter sequence has the correct length
             if len(letter_sequence) != len(self.issues):
-                print(f"Letter sequence has incorrect length: {len(letter_sequence)}, expected {len(self.issues)}")
                 return None
-            
+
             # Create the proposal dictionary
             proposal = {}
             for i, issue in enumerate(self.issues):
                 letter = letter_sequence[i].upper()
                 if letter not in self.choice_letters[issue]:
-                    print(f"Invalid letter '{letter}' for issue '{issue}'")
                     return None
-                
+
                 choice = self.choice_letters[issue][letter]
                 proposal[issue] = choice
-            
-            print(f"Parsed letter sequence: {letter_sequence} -> {proposal}")
+
             return proposal
-        except Exception as e:
-            print(f"Exception during letter sequence parsing: {e}")
+        except Exception:
+            # Malformed sequence -> treated as an invalid move by the caller,
+            # which surfaces a clear reason to the player.
             return None
 
     def _end_game_with_zero_points(self, reason: str):
