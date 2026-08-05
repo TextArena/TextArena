@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "អ្នកជា Player {player_id} ក្នុងការប្រកួត 3 Player Iterated Prisoner's Dilemma. ការប្រកួតមានរយៈពេល {num_rounds} ជុំ. រចនាសម្ព័ន្ធជុំ: • {conv_rounds} ការផ្លាស់ប្តូរសន្ទនាសេរី • 1 ការសម្រេចចិត្ត - បញ្ជូនតួមួយសម្រាប់គូប្រជែង: '[<opp-id> cooperate] 'ឬ '[<opp-id> defect]' (ឧទាហរណ៍ '[1 defect] [2 cooperate] '); ការរួមចំណែកជាជំហានដំបូង) ។ ម៉ាទិចប្រាក់ចំណេញដោយគូ (អនុវត្តទៅលើគូមិនរៀបចំនីមួយៗ - ទាំងពីរសហការ -> {reward} - ទាំងពីរខ្វះ -> {punishment} - អ្នកខ្វះ, ពួកគេសហការ -> {temptation} - អ្នកសហការ, ពួកគេខ្វះ -> {sucker} កីឡាករដែលមានពិន្ទុខ្ពស់បំផុតនៅចុងបញ្ចប់នៃជុំទាំងអស់ឈ្នះ។"
+  },
+  "round": {
+    "start": "─── ការចាប់ផ្តើមជុំ {round} ─── អ្នកអាចនិយាយដោយសេរីសម្រាប់ជុំបន្ទាប់ {conv_rounds} ។",
+    "chat_finished": "ការជជែកបានបញ្ចប់សម្រាប់ជុំទី {round}។ ដាក់សេចក្តីសម្រេចរបស់អ្នក មួយសញ្ញាក្នុងមួយគូប្រកួត៖ `[pid cooperate]` ឬ `[pid defect]`។"
+  },
+  "results": {
+    "header": "### ជុំ {round} - លទ្ធផល:",
+    "pair_line": "{observation} កីឡាករ {i} vs កីឡាករ {j} បានជ្រើសរើស {choice_i} និង {choice_j} ជាលំដាប់ (កីឡាករ {i} ទទួលបាន {gain_i}, កីឡាករ {j} ទទួលបាន {gain_j})",
+    "scores_open": "{observation} -> លទ្ធផលបច្ចុប្បន្ន: ",
+    "score_first": "{observation}អ្នកលេង {player_id} ({score})",
+    "score_next": "{observation}; កីឡាករ {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "លទ្ធផលចុងក្រោយ: {scores}. ក្រុមចំណាត់ថ្នាក់ (អាក្រក់បំផុត→ល្អបំផុត): {groups}"
+  }
+}

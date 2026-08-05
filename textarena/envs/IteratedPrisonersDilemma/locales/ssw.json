@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ngiyi Player {player_id} emdlalweni we Prisoner's Dilemma onyakeni {num_rounds}.\n\nIsakhiwo se Game:\n- Ngaphambi kokuthatha isinqumo, una {total_conversation_rounds} imizamo yokuxhumana ngokukhululeka.\n- Emva kwaloko, bobabili abadlali bakhetha ukusebenzisana noma ukukhetha.\n\niPayoff Matrix (ifiswe njalo):\n- Bobabili Basebenzisana ➜ ilungelo {cooperate_reward}\n- Bobabili Bakhethe ➜ ilungelo {mutual_defect_reward}\n- Omunye Ukhethe, omunye Usebenzisane ➜ Ukhethe {defect_reward}, Usebenzisane {sucker_reward}\n\nIndlela yokudlala:\n- Ngesikhathi sokuxhumana: bhala noma yini ufuna.\n- Ngesikhathi sokuthatha isinqumo: faka '[Cooperate]' noma '[Defect]' (akukho mpangela). Ungafaka ekstra text phambi/noma emva kwetoken."
+  },
+  "phases": {
+    "conversation_finished": "Kutshengwa kwesigamu sesheshiwe kwe raoundi {round}. Ngiyacela ubuyekezelela '[Cooperate]' noma '[Defect]' ngaphambi kwemihla {{}}.",
+    "starting_round": "--- Kucala Kwemdlalo {round} ---",
+    "round_summary": "Imiphumela yeRound {round}:\n{outcome}\nMdlali 0 uphumele {r0} (ngemaphumela {score_0} kwa jumla), Mdlali 1 uphumele {r1} (ngemaphumela {score_1} kwa jumla)."
+  },
+  "outcome": {
+    "winner": "Player {winner} shaya {win_score} - {lose_score}.",
+    "draw": "Bobabili labadlali babhala {s0}.",
+    "round_both_cooperate": "Bobabili labadlali babambisana.",
+    "round_both_defect": "Bobabili labadlali babaleka.",
+    "round_p0_cooperates_p1_defects": "Umdlali 0 wabambisana, umdlali 1 wehluleka.",
+    "round_p0_defects_p1_cooperates": "Umdlali 0 ubalekile, umdlali 1 usebentisane."
+  }
+}

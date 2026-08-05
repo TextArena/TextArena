@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Käär Briscola aya! Dhölök: {trump_suit} (Kär dhöl: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Yin abi kawaja Briscola - Akuen {player_id}.\nYɔ̈ɔ̈k: Yɛ̈ɛ̈ kawaja thiɛ̈ɛ̈k ku kuɛ̈ɛ̈k piɛ̈th (120 piɛ̈th dɛ̈t deŋ ku thiɛ̈ɛ̈k).\nPiɛ̈th thiɛ̈ɛ̈k: A=11, 3=10, K=4, Q=3, J=2, kɔ̈k=0\nYɛ̈ɛ̈k thiɛ̈ɛ̈k: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nThiɛ̈ɛ̈k tuɛ̈ɛ̈k aaciɛ̈ɛ̈k thiɛ̈ɛ̈k kɔ̈k ku thiɛ̈ɛ̈k yɔ̈ɔ̈k.\n\nKawaja: '[play X]' ciɛ̈ɛ̈ X ee pan (1-{max_pos}) thiɛ̈ɛ̈k ee raan kuɔ̈ɔ̈k"
+  },
+  "hand": {
+    "none": "Acïn kaarïth ye ke looi.",
+    "empty": "Acïn kaar ke muk.",
+    "header": "Lɔ̈mdu:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Acïn kä ye kek mat thïn bï ya looi.",
+    "header": "Kä ye kek looi në yemɛɛn:",
+    "line": "  Wëër {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Wëër {player_id}: {points} pts",
+    "trump_info": "Trump suit: {trump_suit} (të ye kek tɔ̈ɔ̈u thïn)",
+    "trump_info_deck": "Dhölök: {trump_suit} | Kär lööc ku deck: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPööc lööc: {scores}\n{trump_info}\n\nLööc kär ku [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Luɔ̈i [play X] tɛ̈n yen X ee kë cï rot looi (1, 2, 3, ku jɔl ya kɔ̈k)",
+    "out_of_range": "Thok kekë ye guöp. Ya cïn {count} kär (1-{count})"
+  },
+  "action": {
+    "played": "Wëër {player_id} aya {card}",
+    "trick_win": "Wëër {winner} acë lööc ku {card}, ee dhöl {points} pööc!"
+  },
+  "outcome": {
+    "head": "Dɔ̈ɔ̈r këcïtë! Lööŋ {winner} dhïïm kuɔ̈ɔ̈ {points} pts!\n\nKäŋ ëë lööŋ ëë dhïïm:\n{scores}",
+    "player_line": "Wëër {player_id}: {points} pööc ({tricks} lööc)\n"
+  }
+}

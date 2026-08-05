@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "ನೀವು LinesOfAction ಆಟದಲ್ಲಿ ಆಟಗಾರ {player_id} ಆಗಿದ್ದೀರಿ.\nನಿಮ್ಮ ಪೀಸ್‌ಗಳು '{side}' ಆಗಿವೆ, ವಿರೋಧಿಯ ಪೀಸ್‌ಗಳು '{other}' ಆಗಿವೆ.\nಮೂವ್ ಫಾರ್ಮ್ಯಾಟ್: `[b1b3]` (ಮೂಲ-ಕೋಆರ್ಡಿನೇಟ್ ಗಮ್ಯ-ಕೋಆರ್ಡಿನೇಟ್). ಕಾನೂನುಬದ್ಧ ಮೂವ್ ಅಡ್ಡಡ್ಡವಾಗಿ, ನೇರವಾಗಿ, ಅಥವಾ ವಿಕರ್ಣವಾಗಿ ಆ ಸಾಲಿನಲ್ಲಿರುವ ಒಟ್ಟು ಪೀಸ್‌ಗಳ (ಯಾವುದೇ ಬಣ್ಣ) ಸಂಖ್ಯೆಗೆ ಸಮಾನವಾದ ಚೌಕಗಳ ಸಂಖ್ಯೆಯನ್ನು ಪ್ರಯಾಣಿಸುತ್ತದೆ. ನೀವು ನಿಮ್ಮ ಸ್ವಂತ ಪೀಸ್‌ಗಳ ಮೇಲೆ ಜಿಗಿಯಬಹುದು, ಆದರೆ ವಿರೋಧಿಯ ಪೀಸ್‌ಗಳ ಮೇಲೆ ಅಲ್ಲ; ವಿರೋಧಿಯ ಮೇಲೆ ಇಳಿಯುವುದು ಅದನ್ನು ಸೆರೆಹಿಡಿಯುತ್ತದೆ.  ನಿಮ್ಮ ಎಲ್ಲಾ ಪೀಸ್‌ಗಳು 8-ನೆರೆಯರೊಂದಿಗೆ ಸಂಪರ್ಕ ಹೊಂದಿದಾಗ ಗೆಲ್ಲಿ."
+  },
+  "board": {
+    "current_board": "ಮಂಡಳಿ: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ಸ್ವರೂಪವು e2e4 ಆಗಿರಬೇಕು (ಸಮನ್ವಯದಿಂದ,ಸಂಯೋಜನೆಗಳಿಗೆ).",
+    "no_piece": "{side} ನ {coord} ಭಾಗವಿಲ್ಲ.",
+    "identical": "ಮೂಲ ಮತ್ತು ಗಮ್ಯಸ್ಥಾನ ಒಂದೇ ಆಗಿರುತ್ತದೆ.",
+    "not_straight_or_diagonal": "ಚಲನೆಯು ನೇರವಾಗಿ ಅಥವಾ ಅಡ್ಡಲಾಗಿರಬೇಕು.",
+    "wrong_distance": "ರೇಖೆಯಲ್ಲಿರುವ ತುಣುಕುಗಳಿಗೆ ಸಮನಾದ ದೂರವನ್ನು ಚಲಿಸಬೇಕು.",
+    "enemy_blocks": "ಶತ್ರು ತುಣುಕು ಮಾರ್ಗವನ್ನು ನಿರ್ಬಂಧಿಸುತ್ತದೆ.",
+    "destination_own": "ಗಮ್ಯಸ್ಥಾನವನ್ನು ಸ್ವಂತ ತುಣುಕು ಆಕ್ರಮಿಸಿಕೊಂಡಿದೆ."
+  },
+  "game_action": {
+    "moved": "ಆಟಗಾರ {player_id} {from} -> {to} ಗೆ ಸ್ಥಳಾಂತರಿಸಿದ್ದಾರೆ",
+    "captured_suffix": "ಆಟಗಾರ {player_id} {from} -> {to} ನಡೆಯನ್ನು ಶತ್ರುವನ್ನು ಸೆರೆಹಿಡಿಯುವ ಮೂಲಕ ಮಾಡಿದ."
+  },
+  "outcome": {
+    "win": "ಎಲ್ಲಾ ತುಣುಕುಗಳು ಸಂಪರ್ಕ.",
+    "draw_no_capture": "60 ಚಲಿಸುತ್ತದೆ ಹಿಡಿಯುವ ಇಲ್ಲದೆ.",
+    "draw_repetition": "ಸ್ಥಾನವನ್ನು ಮೂರು ಬಾರಿ ಪುನರಾವರ್ತಿಸಲಾಗಿದೆ."
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "आपनि गोल्फ (कार्ड गेम) खेल रहल छी - खिलाड़ी {player_id}।\nलक्ष्य: एही एकल राउंड में सबसे कम कुल स्कोर प्राप्त करू। यदि कॉलम एक ही मूल्य साझा करैत छै, तो ऊनका 0 के रूप में जोड़ल जायत।\nकार्ड मूल्य: A=1, 2-10=मूल्य, J/Q=10, K=0\n\nकार्रवाई (सटीक ब्रैकेट का उपयोग करू):\n- '[draw]' - डेक से ड्रॉ करू\n- '[take]' - डिस्कार्ड पाइल से लू\n- '[swap X Y]' - ड्रॉ कार्ड के साथ स्थिति X (पंक्ति) Y (स्तंभ) के साथ अदल-बदल करू\n- '[discard]' - ड्रॉ कार्ड को त्यागू"
+  },
+  "board": {
+    "drew": "आपनि ड्रॉ किया: {card}\nअब आपनि [swap X Y] या [discard] करू",
+    "took": "आपनि लिया: {card} डिस्कार्ड पाइल से\nआपनि [swap X Y] के साथ अदल-बदल करू (त्यागू नहीं कर सकैत)",
+    "peeked": "आपनि स्थिति ({row},{col}) पर झाँकल: {card}",
+    "turn_view": "आपनि हाथ:\n{hand}\nडिस्कार्ड पाइल: {discard}\n{options}",
+    "none": "कोनो नहि"
+  },
+  "options": {
+    "final_turns": "अंतिम मोड़! आपनि विकल्प: [draw], [take], [peek X Y]",
+    "draw": "आपनि विकल्प: [draw], [take]",
+    "must_swap": "अहाँकेँ: [swap X Y] (डिस्कास्ट पाइलसँ कार्ड नहि फेकि सकैत छी)",
+    "swap_or_discard": "आपनि करू: [swap X Y] या [discard]"
+  },
+  "hand": {
+    "no_cards": "कोनो कार्ड नहि",
+    "header": "कोलः 1 2 3",
+    "row": "पंक्ति {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "खिलाड़ी {pid} ने {new} के साथ {old} को स्थिति ({row},{col}) पर अदल-बदल किया",
+    "discarded": "खिलाड़ी {pid} ने {card} को त्यागल"
+  },
+  "message": {
+    "deck_empty": "डेक खाली अछि! खेल तुरन्त समाप्त होइत छैक.",
+    "knocked": "खिलाड़ी {pid} ने दस्तक दिया! प्रत्येक अन्य खिलाड़ी को एक और मोड़ मिलता",
+    "final_round": "खिलाड़ी {pid} {reason}! प्रत्येक अन्य खिलाड़ी को एक और मोड़ मिलता"
+  },
+  "reason": {
+    "all_revealed": "सभ कार्ड प्रकट कएने अछि ?"
+  },
+  "invalid": {
+    "wrong_action": "सटीक एक ब्रैकेटेड कार्रवाई का उपयोग करू: [draw], [take], [swap X Y], [discard], [knock], या [peek X Y]",
+    "discard_empty": "डिस्पोजेड पाइल खाली अछि!",
+    "must_draw_first": "आपनि पहले [draw], [take], [knock], या [peek X Y] करू",
+    "cannot_discard_taken": "अहाँ सभ केँ ई नहि कहि सकैत छी जे \"निकाल\" मे सँ कोनो कार्ड निकालि कऽ फेकि दिअ। एकरा अदला-बदल करए पड़तैक।",
+    "have_drawn_card": "आपनि एक ड्रॉ कार्ड है। आपनि [swap X Y] या [discard] करू",
+    "need_drawn_swap": "अहाँकेँ अपन कार्ड बदलबाक लेल एकटा ड्राई कार्ड चाही।",
+    "need_drawn_discard": "अहाँकेँ एकटा कार्ड निकालि फेकबाक लेल चाही.",
+    "out_of_bounds": "स्थिति सीमा से बाहर है। पंक्ति 1-{max_row}, स्तंभ 1-{max_col} का उपयोग करू",
+    "knock_with_card": "अहाँ अपन कार्डक साथ नॉक नहि कऽ सकैत छी. पहिने अपना मोड़ पूरा करू।",
+    "already_knocked": "एहि राउन्डमे कोइ पहलहि से नॉक कर चुकल अछि।",
+    "already_revealed": "ओ कार्ड आब खुजल अछि!"
+  },
+  "summary": {
+    "full": "गेम ओवर! खिलाड़ी {winner} {score} अंक के साथ जीतता!\n\nअंतिम स्कोर:\n{scores}",
+    "line": "खिलाड़ी {pid}: {score} अंक\n"
+  },
+  "board_str": {
+    "title": "=== गोल्फ गेम ===",
+    "discard": "डिस्कार्ड पाइल: {card}",
+    "knocked": "खेलाड़ी {pid} दस्तक देलनि अछि!",
+    "player_header": "खिलाड़ी {pid} (स्कोर: {score}):"
+  }
+}

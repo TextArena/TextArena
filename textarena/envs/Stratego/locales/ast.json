@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Yes el xugador {player_id} en Stratego.\nEl to oxetivu ye prindar la bandera del to oponente o esaniciar toles sos pieces móviles.\nEl to exércitu foi asitiáu nel tableru pa ti, incluyendo la to bandera, bombes y otres pieces de distintos rangos.\n\n### Instrucciones de xuegu\n1. **Regles de movimientu:**\n   - Nel to tornu, puedes mover una pieza un pasu a una casilla axacente (enriba, embaxo, esquierda o derecha) que yá tea ocupada poles tos pieces.\n   - Exemplu: Una pieza puede mover dende A1 a B1 o A1 a A2 si B1 y A2 nun tán asitiaes coles pieces del xugador.\n   - Si la pieza seleccionada ye una bomba o una bandera, nun puede ser movida.\n2. **Batalles:**\n   - Si te mueves a una casilla ocupada por una pieza del oponente, entós va haber una batalla:\n     - La pieza col rangu más altu gana y esanicia la pieza del oponente.\n     - Si los rangos son iguales, dambes pieces son eliminaes del tableru.\n     - **Casos especiales:**\n       - Les bombes esanicien la mayoría de les pieces atacantes, sacante los mineros, que desactiven les bombes.\n       - Los espíes pueden derrotar al mariscal si l'espía ataca en primer llugar, pero pierden contra toles demás pieces.\n3. **Oxetivos estratéxicos:**\n   - Identifica les pieces del to oponente al traviés de los sos movimientos y batalles.\n   - Protexe la to bandera mientres intentes prindar la bandera del to oponente.\n   - Utiliza los esploradores de manera estratéxica pa llograr información sobre les pieces del to oponente y atacar a les débiles.\n\n### Cómo faer un movimientu:\n1. Especifica les coordenaes de la pieza que quies mover y el so destín.\n2. Utiliza'l formatu: [A0 B0], onde A0 ye la posición d'orixe y B0 ye'l destín.\n   - Exemplu: Pa mover una pieza dende la fila 0, columna 0 a la fila 1, columna 0, introduce [A0 B0].\n3. Asegúrate de que'l destín seya válidu según les regles de movimientu anteriores.\n\n### Notes importantes:\n- El tableru amosará les tos pieces y les sos posiciones, p. ex. MN, MS.\n- El tableru tamién amosará les posiciones conocíes de les pieces del to oponente ensin revelar los sos rangos, p. ex. ?.\n- Les cuadrícules con ~ son llagos y nun pueden ser movíes.\n- Como suxerencia, empieza'l to xuegu moviendo les pieces que tán na llinia del frente pa llograr información sobre les pieces del to oponente. El xugador 0 y el xugador 1 tienen les llinies del frente nes files D y G, respeutivamente.\n\nEquí ta l'estáu actual del tableru:\n"
+  },
+  "board": {
+    "current_board": "Tableru actual:\n\n{board}\nMovimientos disponibles: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "El xugador {player_id} nun introdució una jugada nel formatu [A0 B0].",
+    "invalid_coordinates": "Esti formatu ye inválidu. El xugador {player_id} nun introdució coordenades válides.",
+    "not_own_piece": "El xugador {player_id} tien de mover una de les sos pieces.",
+    "scout_through_pieces": "El xugador {player_id} nun puede mover un explorador a través d'otres pieces.",
+    "scout_diagonal": "El xugador {player_id} nun puede mover un explorador na diagonal.",
+    "non_scout_multi_square": "El formatu d'acción inválidu. Les pieces, al marxe de los exploradores, solo pueden mover una casilla a la vegada.",
+    "move_into_lake": "Formatu d'aición non válidu. El xugador {player_id} nun puede mover se escontra'l llagu.",
+    "move_onto_own_piece": "El xugador {player_id} nun puede mover a la so propia pieza.",
+    "move_bomb_or_flag": "El xugador {player_id} nun puede mover una bomba o bandera."
+  },
+  "game_action": {
+    "you_moved": "Movisti la to pieza dende {source} a {dest}.",
+    "opponent_moved": "El xugador {player_id} movió una pieza de {source} a {dest}.",
+    "you_equal_ranks": "Movisti la to pieza de {source} a {dest}. La pieza atacante yera {attacking_rank} y la pieza de destín yera {target_rank}. Como los rangos son los mesmos, dambes pieces perdieron.",
+    "opponent_equal_ranks": "El xugador {player_id} movió una pieza de {source} a {dest}. La pieza atacante yera {attacking_rank} y la pieza de destín yera {target_rank}. Como los rangos son los mesmos, dambes pieces perdieron.",
+    "you_miner_defused": "Movisti la to pieza dende {source} a {dest}. La pieza atacante yera {attacking_rank} y la pieza de destín yera {target_rank}. Como los mineros pueden desactivar bombes, ganasti la batalla.",
+    "opponent_miner_defused": "El xugador {player_id} movió una pieza de {source} a {dest}. La pieza atacante yera {attacking_rank} y la pieza de destín yera {target_rank}. Como los mineros pueden desactivar bombes, perdisti la batalla.",
+    "you_bomb_lost": "Movisti la to pieza de {source} a {dest}. La pieza atacante yera {attacking_rank} y la pieza de destín yera {target_rank}. Como l'atacante nun ye un mineru, perdisti la batalla.",
+    "opponent_bomb_won": "El xugador {player_id} movió una pieza de {source} a {dest}. La pieza atacante yera {attacking_rank} y la pieza de destín yera {target_rank}. Como l'atacante nun ye un mineru, ganasti la batalla.",
+    "you_spy_won": "Movisti la to pieza de {source} a {dest}. La pieza atacante yera {attacking_rank} y la pieza de destín yera {target_rank}. Como l'atacante ye un espía y el destín ye un mariscal, ganasti la batalla.",
+    "opponent_spy_lost": "El xugador {player_id} movió una pieza de {source} a {dest}. La pieza atacante yera {attacking_rank} y la pieza de destín yera {target_rank}. Como l'atacante ye un espía y el destín ye un mariscal, perdisti la batalla.",
+    "you_higher_won": "Movisti la to pieza de {source} a {dest}. La pieza atacante yera {attacking_rank} y la pieza de destín yera {target_rank}. Como l'atacante ye de rangu cimera al de destín, ganasti la batalla.",
+    "opponent_higher_lost": "El xugador {player_id} movió una pieza de {source} a {dest}. La pieza atacante yera {attacking_rank} y la pieza de destín yera {target_rank}. Como l'atacante ye de rangu cimera al de destín, perdisti la batalla.",
+    "you_lower_lost": "Movisti la to pieza de {source} a {dest}. La pieza atacante yera {attacking_rank} y la pieza de destín yera {target_rank}. Como l'atacante ye de rangu inferior al de destín, perdisti la batalla.",
+    "opponent_lower_won": "El xugador {player_id} movió una pieza de {source} a {dest}. La pieza atacante yera {attacking_rank} y la pieza de destín yera {target_rank}. Como l'atacante ye de rangu inferior al de destín, ganasti la batalla."
+  },
+  "outcome": {
+    "flag_captured": "El xugador {player_id} captó la bandera del oponente!",
+    "no_movable_pieces": "El xugador {winner_id} gana! El xugador {loser_id} nun tien más pieces movibles."
+  }
+}

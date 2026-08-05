@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ị bụ onye ọkpụkpọ {player_id} na onye ọkpụkpọ atọ na-emegharị ihe mgbagwoju anya nke onye mkpọrọ. Egwuregwu ahụ na-adịgide {num_rounds} agba. Ọdịdị agba: • {conv_rounds} free-chat na-atụgharị • 1 mkpebi na-atụgharị - nyefee otu akara maka onye mmegide: '[<opp-id> cooperate]' ma ọ bụ '[<opp-id> defect]' (ya bụ '[1 defect] [2 cooperate]'; ndabara bụ 'ịmekọrịta'). Matrik ịkwụ ụgwọ ụzọ abụọ (etinyere na nke ọ bụla na-enweghị usoro): - Ha abụọ na-arụkọ ọrụ -> {reward} - Ha abụọ na-emejọ -> {punishment} - Ị na-emejọ, ha na-arụkọ ọrụ -> {temptation} - Ị na-arụkọ ọrụ, ha na-emejọ -> {sucker} Onye ọkpụkpọ) nwere akara kachasị elu na njedebe nke agba niile na-emeri."
+  },
+  "round": {
+    "start": "─── Mbido Oge {round} ─── I nwere ike ikwurita okwu n'enweghi nsogbu maka oge {conv_rounds} na-esote.",
+    "chat_finished": "Mgbanwe gwụrụ maka raundi {round}. Nyefee mkpebi gị, otu token kwa onye mmegide: `[pid cooperate]` ma ọ bụ `[pid defect]`."
+  },
+  "results": {
+    "header": "### Gburugburu {round} - Nsonaazụ:",
+    "pair_line": "{observation} Onye ọkpụkpọ {i} vs Onye ọkpụkpọ {j} họọrọ {choice_i} na {choice_j} n'otu n'otu (Onye ọkpụkpọ {i} nwetara {gain_i}, Onye ọkpụkpọ {j} nwetara {gain_j})",
+    "scores_open": "{observation} -> Akara ndị dị ugbu a: ",
+    "score_first": "{observation}Onye na-egwu egwu {player_id} ({score})",
+    "score_next": "{observation}; Onye na-egwu egwu {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Nchịkọta ikpeazụ: {scores}. Otu ndị na-ahọpụta (nke kachasị njọ→kacha mma): {groups}"
+  }
+}

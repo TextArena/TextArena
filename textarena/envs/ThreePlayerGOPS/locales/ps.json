@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "تاسو د درې لوبغاړو GOPS کې لوبغاړی {player_id} یاست.\n- تاسو د 13 کارتونه A-K (هر یو یو ځل) په لاس کې لرئ.\n- په هر راؤنډ کې یو انعام ښکاره کیږي. یو کارت لکه `[Q]`، `[10]`، `[2]` … وړاندې کړئ\n- لوړ کارت انعام ګټي (+ هر ډول پورته شوی پوت). ټای راؤنډ انعام د بل راؤنډ ته رول کوي.\n- تر 13 راؤنډونو وروسته، لوړ ټول ګټونکی دی. ناسم حرکتونه = حذف."
+  },
+  "round": {
+    "header": "### دور {round}/13 - جایزه: {prize} (د {worth} ارزښت لري)",
+    "hand": "ستاسو پاتې لاس: {hand}"
+  },
+  "reveal": {
+    "win": "داوطلبي  {bids} - لوبغاړی {winner} ګټي {pot}.",
+    "tie": "داوطلبي  {bids} - ټای، پوټ اوس {pot}.",
+    "scores": "د ټاکنو پایلې → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "عمل ته د \"[Q]\" په څېر د قوسونو په منځ کې کارت ته اړتیا ده.",
+    "bad_card": "کارت لا دمخه کارول شوی یا غیرقانوني"
+  },
+  "elimination": {
+    "player": "لوبغاړی {pid} د بې ځایه حرکتونو له تکرار وروسته له لوبې بهر شو."
+  },
+  "outcome": {
+    "auto_win": "دوه لوبغاړي له منځه تللي - اتوماتې ګټل.",
+    "final": "وروستۍ نمرې: {scores}"
+  }
+}

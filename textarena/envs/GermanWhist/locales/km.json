@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "ការប្រកួតចាប់ផ្តើម។ សម្លៀកបំពាក់ Trump: {trump_suit} (កាត Trump: {trump_str}) ។",
+    "no_trump_card": "គ្មាន"
+  },
+  "player_prompt": {
+    "intro": "អ្នកជា Player {player_id} ក្នុងភាសាអាល្លឺម៉ង់ Whist. {phase_info} អ្នកកាន់កាត {hand_size} លេងកាតមួយដែលមាន '[play N] ', ដែល N គឺជាតំណែងរបស់វានៅក្នុងដៃរបស់អ្នក (ឧទាហរណ៍ '[play 3]') ។",
+    "phase_learning": "ដំណាក់កាលរៀនសូត្រ៖ អ្នកឈ្នះនៃកិច្ចកលនីមួយៗ នឹងយកប័ណ្ណដែលបែរមុខឡើង ហើយអ្នកចាញ់នឹងទាញប័ណ្ណបន្ទាប់ពីសំណុំប័ណ្ណ។ កិច្ចកលឈ្នះក្នុងដំណាក់កាលនេះ មិនគិតបញ្ចូលទៅក្នុងជ័យជំនះទេ។",
+    "phase_playing": "ដំណាក់កាលលេង: ក្បាលដែកត្រូវបានអស់ហើយ រាល់ការលួចលាក់ចាប់ពីពេលនេះទៅ គឺមានន័យថា ឈ្នះ។"
+  },
+  "next_card": {
+    "playing_phase": "គ្មានកាតណាមួយត្រូវបានផ្តល់ជូន - ដំណាក់កាលលេងបានចាប់ផ្តើម។",
+    "deck_empty": "កាតគ្មានអ្វីទេ គ្មានកាតណាមួយដែលអាចផ្តល់ជូនបាន។",
+    "available": "ប័ណ្ណដែលផ្តល់ជូន: {card}",
+    "available_trump": "កាតដែលផ្តល់ជូន: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "រូបមន្តចលនាមិនត្រឹមត្រូវ សូមប្រើ '[play N]' ដើម្បីលេងកាត Nth នៅក្នុងដៃរបស់អ្នក។",
+    "bad_position": "តំណែងកាតនោះមិនមាន អ្នកកាន់កាត {hand_size} ។",
+    "must_follow_suit": "អ្នកត្រូវតែធ្វើតាម និងលេងកាត {lead_suit} ។",
+    "invalid_play": "កាតនោះមិនអាចលេងបានទេ។"
+  },
+  "game_action": {
+    "played": "កីឡាករ {player_id} បានលេង {card} ។"
+  },
+  "trick": {
+    "won": "កីឡាករ {winner_id} ឈ្នះ ល្បិច ជាមួយ {card} ។",
+    "won_learning": "កីឡាករ {winner_id} ឈ្នះការលួចលាក់ជាមួយ {card} និងយកកាតបិទមុខ។"
+  },
+  "phase": {
+    "learning_complete": "ក្បួនដែកត្រូវបានអស់ហើយ ដំណាក់កាលរៀនបានបញ្ចប់ - រាល់ល្បិចដែលនៅសល់មានតម្លៃសម្រាប់ជ័យជម្នះ។"
+  },
+  "draw": {
+    "winner_received": "អ្នកបានឈ្នះល្បិច និងទទួលបាន {card} ។",
+    "loser_received": "អ្នកបានចាញ់ល្បិច ហើយបានដក {card} ពីដងខ្លួន។",
+    "winner_preview": "កាតបន្ទាប់ដែលត្រូវបានផ្តល់គឺ {card} ។"
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "ល្បិចឈ្នះរហូតមកដល់ពេលនេះ - កីឡាករ 0: {tricks0}, កីឡាករ 1: {tricks1}",
+    "scores_playing": "ការរកគ្រាប់បាល់ - កីឡាករ 0: {tricks0}, កីឡាករ 1: {tricks1}",
+    "phase": "ដំណាក់កាល: {phase}",
+    "phase_learning": "ដំណាក់កាល: {phase} ({remaining_cards} កាតនៅសល់ក្នុងដំបូល)"
+  },
+  "hand": {
+    "no_cards": "គ្មានកាត",
+    "no_cards_in_hand": "គ្មានកាតក្នុងដៃ",
+    "header": "ដៃរបស់អ្នក",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "គ្មានកាតលេងនៅឡើយទេ ល្បិចនេះ",
+    "header": "ល្បិចបច្ចុប្បន្ន:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation} កីឡាករ {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "ល្បែងមិនចាប់ផ្តើម",
+    "header": "=== កីឡាអាល្លឺម៉ង់ ===",
+    "phase": "{observation} ដំណាក់កាល: {phase}",
+    "trump_suit": "{observation} សម្លៀកបំពាក់ Trump: {trump_suit}",
+    "trump_card": "{observation} កាត Trump: {card}",
+    "cards_left": "{observation} កាតដែលនៅសល់ក្នុងដំបូល: {count}",
+    "next_card": "{observation} កាតបន្ទាប់សម្រាប់អ្នកឈ្នះ: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} ល្បិចបច្ចុប្បន្ន:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation} កីឡាករ {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} កីឡាករ {player_id}: {scoring} ការរកគ្រាប់បាល់ ({tricks} សរុប), {hand_size} កាតនៅក្នុងដៃ"
+  },
+  "outcome": {
+    "summary": "ដំណាក់កាលរៀន - កីឡាករ 0: {l0}, កីឡាករ 1: {l1}. ដំណាក់កាលលេង - កីឡាករ 0: {p0}, កីឡាករ 1: {p1}. កីឡាករ {winner_id} ឈ្នះដោយ {winner_tricks} ល្បិចរកគ្រាប់!"
+  }
+}

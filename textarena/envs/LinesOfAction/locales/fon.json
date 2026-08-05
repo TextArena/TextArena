@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "A nyi azɔnwà {player_id} to LinesOfAction tɔn lɛ.\nA wumɛnɔ wɛ ' {side} ', azɔnwà wumɛnɔ wɛ ' {other} '.\nGbɛjɛ kpodo: `[b1b3]` (gbɛ yi gbɔna). Gbɛjɛ dɔwɛ lɛ hɛnnu azɔn, kponnɔ, kpanɔnɔ kponnɔ azɔn wumɛnɔ (kpɔɖɛ wɛ) to gbɛ lɛ. A sɔ azɔn wumɛnɔ lɛ, gba a ma sɔ azɔnwà wumɛnɔ lɛ; a to azɔnwà gbɛ mɛ, a na ɖɔ azɔnwà. A wɛna wɛ a wumɛnɔ ɖokpo ɖɔ ɖɛnɛ kpɔkpɔ."
+  },
+  "board": {
+    "current_board": "Akpáxwé: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "E ɖó na nyí e2e4 (tín,dé coordinates).",
+    "no_piece": "Egbe {side} megbe na {coord}.",
+    "identical": "Nǔ e sín fí è wá é kpo nǔ e yì wɛ è ɖè ɔ́ kpó nyí ɖokpo.",
+    "not_straight_or_diagonal": "Hɔn ɔ ɖó na nyí ɖido alǒ diagonal.",
+    "wrong_distance": "E ɖó na gló mɛ e ɖò zɔ nú xɛ lɛ é ɖokpo ɔ.",
+    "enemy_blocks": "Kɛntɔ́ lɛ sín nǔ ɖò ali ɔ glɔ́n wɛ.",
+    "destination_own": "Akpá e è sɔ́ dó mɔ tɛn na yì é wɛ nyí ɖɔ yeɖesunɔ tɔn."
+  },
+  "game_action": {
+    "moved": "Abla {player_id} wɔ {from} -> {to}",
+    "captured_suffix": "Abla {player_id} wɔ {from} -> {to} na ɖɛ wɔ gbɔ."
+  },
+  "outcome": {
+    "win": "Nǔ lɛ bǐ ɖò bǔ.",
+    "draw_no_capture": "É yì afɔ 60 có è ka wlí ɖě ǎ.",
+    "draw_repetition": "Nɔ tɛn ɔ mɛ azɔn atɔn."
+  }
+}

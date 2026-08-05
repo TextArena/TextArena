@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Kamoe ta lhee game Solitaire Klondike. Tujuan kamoe nyan keu peubloe kartu mandum u foundation piles.\n\nPeuraton Game:\n- Foundation piles (F1-F4): Peubloe naek nibak Ace keu Raja lam suit\n- Tableau piles (T1-T7): Peubloe turun ngon warna selang-seling (mirah atawa itam, itam atawa mirah)\n- Stock: Tarik kartu u waste pile\n- Waste (W): Kartu paling aseh keu dimainkan\n\nPeuraton:\n- 'draw' - Tarik kartu nibak stock u waste\n- 'move <source> <destination> [count]' - Pindah kartu antara piles\n  Contoh: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Count juga jeuët 'all', nyang jeuët meupindah kartu mandum nyang ka tupeue.\n- 'forfeit' - Akhiri game langsung ngon kunci skor kamoe jinoe\n- Nan pile: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nKamoe jeuët jalan saboh peuraton leubeh nibak sa'at ngon meukirajih ngon koma:\n  Contoh: 'draw, move W T1, move T2 F1'\n\nRaja jeuët teupeue lam tableau piles nyang kosong.\nPeuraton jeuët jalan ngon tertib - meu'én saboh gagal, peuraton la'én jeuët dileupah.\nPeuguna 'forfeit' meu'én kamoe yakin game nyan han jeuet keumeunang."
+  },
+  "format_error": {
+    "no_brackets": "Format tindakan hana sah. Aksi haroh dalam kurung-kurung.",
+    "no_closing_bracket": "Format tindakan hana sah. Kurung peugöt nyang kureueng ']'",
+    "empty_command": "Pesen kosong. Ketik \"draw\" atau \"move <source> <destination> [count]\".",
+    "empty_action": "tindakan kosong (empty action)",
+    "move_needs_args": "Perintah aleu pindah meukeusudkan asai ngon tujuan. Cara ngui: 'move <source> <destination> [count]'",
+    "count_positive": "Count meu'én positip atawa 'all'",
+    "count_invalid": "Count salah. Peuguna angka atawa 'all'",
+    "unknown_command": "Perintah tidak dikenal '{cmd}'. Gunakan 'draw', 'move <source> <destination> [count]', atau 'forfeit'",
+    "wrapped": "Aksi {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Aksi {n}: {msg}",
+    "before_failure": "{n} tindakan ((s) nyang ji ekseusi sigohlom gagal.",
+    "failed": "Aksi {n} gagal: {msg}"
+  },
+  "move_result": {
+    "drew": "Kheun awak nyan, \"Kamoe ka ji ek kartu keu barang-barang nyang hana meuguna\".",
+    "cannot_draw": "Hana jeut tacok. Mandua stok dan limbah ka kosong.",
+    "invalid_pile": "Nan tumpak hana sah. Guna W, F1-F4, atawa T1-T7",
+    "foundation_one_card": "Jeut cuma meubah 1 kartu keu yayasan.",
+    "waste_to_foundation_ok": "Kertas yang dipindah dari limbah ke yayasan F{dst}",
+    "waste_to_foundation_bad": "Han jeut neu pindahkan kartu sisa keu tumpukan pondasi nyan.",
+    "tableau_to_foundation_ok": "Pindahkan kartu dari tableau T{src} ke fondasi F{dst}",
+    "tableau_to_foundation_bad": "Hana jeut geupinah kartu tableau keu tumpukan pondasi nyan",
+    "foundation_to_foundation": "Hanjeut jioh dari pondasi ke fondasi laen.",
+    "waste_to_tableau_one_card": "Jeut keu saboh kartu mantong dari sisa ke tableau.",
+    "waste_to_tableau_ok": "Geupinah kartu dari sisa keu tabel T{dst}",
+    "waste_to_tableau_bad": "Hana jeut ta peutamong kartu sisa bak tumpukan tableau nyan.",
+    "no_face_up": "Hana kartu muka keu ji gerak.",
+    "tableau_to_tableau_ok": "Pindahkan {count} kartu dari tableau T{src} ke T{dst}",
+    "tableau_to_tableau_bad": "Tidak bisa memindahkan {count} kartu dari T{src} ke T{dst}",
+    "foundation_to_tableau_one_card": "Jeut keu saboh kartu mantong dari dasar ke tableau.",
+    "foundation_empty": "Yayasan F{src} kosong",
+    "foundation_to_tableau_ok": "Pindahkan kartu dari fondasi F{src} ke tableau T{dst}",
+    "foundation_to_tableau_bad": "Hana jeut ta peutamong kartu yayasan bak tabel T{dst}",
+    "to_waste_or_stock": "Hanjeut dipinah keu limbah atawa stok."
+  },
+  "outcome": {
+    "forfeit": "Game ka akhiri. Skor akhir: {score} kartu lam foundations.",
+    "won": "Selamat, awak meunang Solitaire Klondike!",
+    "turn_limit": "Permainan berakhir! Anda mencapai batas maksimum {max_turns} giliran. Skor: {score} kartu di fondasi."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== Geugeon geudaeui modeun sungani",
+    "turn": "Giliran: {turn}/{max_turns}",
+    "stock": "Stok: {stock} kartu keude-keude",
+    "waste": "Limbah (W): {waste}",
+    "foundations_header": "Yayasan:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabel: Peukeuh.",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

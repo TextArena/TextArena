@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spelar {player_id} i Kvantetisk Tic Tac Toe.\nDitt symbol er '{symbol}', og dine flyttenummer er alltid {parity} (t.d. X1, X3 eller O2, O4).\n\nMål: Vinn ved å danne ei linje av tre klassiske merke (fastsett frå superposisjonar).\n\nKorleis spela:\n- På kvar omgang, plasser eit spøkelsesmerke i to forskjellige tomme kvadrat med formatet '[a,b]'.\n- Desse merka er samanfletta, og merka som 'X1 / X1' eller 'O4 / O4'.\n- Du kan ikkje plassere spøkelsesmerke i eit kvadrat som allereie har kollapsa (fastsett).\n\nKollapsregel:\n- Om ditt trekk skapar ein syklus i samanflettinggrafen, kollapsar det automatisk.\n- Kvar spøkelsesmerke i syklusen blir til eit klassisk merke i eine av dei to posisjonane.\n- Eventuelle avhengige spøkelsesmerke kollapsar også.\n\nSiger:\n- Spelet endar når ein spelar har tre klassiske merke på rad.\n- Om begge spelarar får ei linje under same kollaps, vinn spelaren med det lågaste maksimumsflyttenummeret.\n\nEksempel på trekk: '[0,4]' plasserer eit spøkelsesmerke i cellene 0 og 4."
+  },
+  "board": {
+    "current_board": "Kvantetisk Tic Tac Toe-brett:\n\n{board}\n\nSend inn trekket ditt som '[a,b]' for å plassere et kvantemerkke i to lokalisasjonar."
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldig format. Bruk \"[a,b]\".",
+    "invalid_cells": "Ugyldige eller dupliserte celleindeks.",
+    "already_solidified": "Ein av cellene er allereie fastlagt."
+  },
+  "game_action": {
+    "placed": "Spelar {player_id} plasserte sitt symbol i ein superposisjon mellom cellene {pos_a} og {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Avhengig superposisjon løyst. Celle ({r}, {c}) er no {symbol}.",
+    "last_cell_resolved": "Superposisjon for siste celle løyst. Celle ({r}, {c}) er no {symbol}.",
+    "superposition_resolved": "Superposisjon løyst. Celle ({r}, {c}) er no {symbol}."
+  },
+  "outcome": {
+    "win": "Spelaren {player_id} vann med faste karakterar!",
+    "draw": "Matchen er ein uavgjort match."
+  }
+}

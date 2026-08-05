@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Yes el xugador {player_id} nun Dilema del Prisioneru Iteráu que dura {num_rounds} rondes.\n\nEstructura del xuegu:\n- Enantes de cada decisión tienes {total_conversation_rounds} veces pa comunicate llibremente.\n- Dempués, dambos xugadores elixen al empar cooperar o desertar.\n\nMatriz de pagu (fixa cada ronda):\n- Dambos cooperen ➜ cada unu {cooperate_reward}\n- Dambos deserten ➜ cada unu {mutual_defect_reward}\n- Unu deserta, otru coopera ➜ Desertor {defect_reward}, Cooperador {sucker_reward}\n\nCómo xugar:\n- Mientres la conversación: escribe cualquier testu que deseyes.\n- Mientres la fase de decisión: inclúi '[Cooperate]' o '[Defect]' (insensible a mayúscules). Puedes amestar testu adicional enantes/dempués del token."
+  },
+  "phases": {
+    "conversation_finished": "Conversación rematada pa la ronda {round}. Respuenda con '[Cooperate]' o '[Defect]' dientro de \\boxed{{}}.",
+    "starting_round": "--- Ronda d' iniciu {round} ---",
+    "round_summary": "Resultaos de la ronda {round}:\n{outcome}\nEl xugador 0 ganó {r0} (total {score_0}), el xugador 1 ganó {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "El xugador {winner} gana {win_score} - {lose_score}.",
+    "draw": "En total, los dos xugadores anotaron {s0}.",
+    "round_both_cooperate": "Ambos xugadores cooperaron.",
+    "round_both_defect": "Los dos xugadores desertaron.",
+    "round_p0_cooperates_p1_defects": "El xugador 0 cooperó, el 1 desertó.",
+    "round_p0_defects_p1_cooperates": "El xugador 0 desertó, el xugador 1 cooperó."
+  }
+}

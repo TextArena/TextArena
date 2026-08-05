@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Siz Chopsticks o'yinida {player_id} o'yinchi siz. O'zingizning navbatingizda, quyidagilardan birini tanlang:\n  + Hujum: '[attack M O]'  bu yerda M=sizning qo'lingiz (0 yoki 1), O=raqib qo'li (0 yoki 1).\n    - Raqibning qo'lida barmoqlar soni sizning qo'lingizdagi barmoqlar soniga ko'payadi; agar >=5 bo'lsa, u 0 ga aylanadi.\n  + Bo'lish: '[split L R]'  sizning jami barmoqlaringizni L va R ga qayta taqsimlash uchun (L+R = sizning jami).\nAniq bir buyruq bilan javob bering."
+  },
+  "board": {
+    "current_board": "Joriy taxt: 0 o'yinchi: {hands_0} 1 o'yinchi: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Qo'lingiz {my_idx} o'lik.",
+    "opp_hand_dead": "Raqibning qo'li {opp_idx} allaqachon o'lik.",
+    "split_sum": "Bo'linish summasi {total} bo'lishi kerak.",
+    "split_no_change": "Split sizning qo'lingizni taqsimlashni o'zgartirishi kerak.",
+    "invalid_command": "Noto'g'ri harakat. [attack M O] yoki [split L R] ishlating."
+  },
+  "game_action": {
+    "attack": "P{player_id} P{opp_id}ning qo'liga hujum qiladi {opp_idx}: u {opp_val}dan {new_val}ga o'tadi.",
+    "split": "P{player_id} [{L}, {R}]ga bo'ladi."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Raqibning ikkala qo'li ham o'lik.",
+    "draw": "Burilish chegarasiga yetildi."
+  }
+}

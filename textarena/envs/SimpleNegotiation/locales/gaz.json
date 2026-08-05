@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Taphattuun tokko qabeenya barbaachisu osoo hin qabaatin daldala fudhachuuf yaalii godhe.",
+    "out_of_range": "Player {player_id}, Amala dhiira. Kolomni {col} bakka hin jiru.",
+    "already_full": "Player {player_id}, Amala dhiira. Kolomni {col} darbuu dha.",
+    "proposing_with_no_resource": "Taphattuun {player_id} qabeenya barbaachisu osoo hin qabaatin gatii daldalaaf dhiyeessuu yaalte.",
+    "incorrect_offer_format": "Taphattuun {player_id} gosa taphaatiin ala ta'e tokko irratti filannoon daldalaa dhiheesse.",
+    "no_new_offer": "Taphattuun {player_id} gatii haaraa hin kennine."
+  },
+  "offers": {
+    "reject": "Taphattuun {player_id} afeerraa jijjiirraa kana hin fudhanne.",
+    "accept": "Leensa {acceptor_id} kenneera gurgurachuuf Leensa {proposer_id} irraa fudhate.",
+    "proposal": "Leensa {player_id} Leensa {opponent_id} kenneera armaan gadi dhiyeessa: Qabeenya dhiyaate: {offered} -> Qabeenya gaafatame: {requested}"
+  },
+  "outcome": {
+    "win": "Taphachiisaa {winner_id} gatii invastii keessatti bu'aa guddaa qabaachuudhaan mo'ateera.",
+    "draw": "Jijjiirama walfakkaataa gatii invastii taphattoota hundaaf."
+  }
+}

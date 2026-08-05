@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ko koe te Kaitakaro {player_id} i Stratego.\nKo tō whāinga ko te hopu i te Kara o tō hoariri, ko te whakakore rānei i ngā kaiwhakaari e neke ana.\nKua whakapāngia tō ope mō koe ki runga i te papa, tae atu ki tō Kara, ngā Pū, me ētahi atu kaiwhakaari o ngā pikitanga rereke.\n\n### Aratohu o te Tākaro\n1. **Ngā Ture o te Neke:**\n   - I tō wā, ka taea e koe te neke i tētahi kaiwhakaari ki tētahi tapawhā e tata ana (ki runga, ki raro, ki mua, ki muri) kua kapi i ngā kaiwhakaari au.\n   - Tērā te tauira: Ka taea e tētahi kaiwhakaari te neke i A1 ki B1, ki A1 ki A2 rānei ki B1, ki A2 kāore i whakapāngia e ngā kaiwhakaari a te kaitakaro.\n   - Ki te kaiwhakaari i whiriwhiria he Pū, he Kara rānei, kāore e taea te neke.\n2. **Ngā Whawhai:**\n   - Ki te neke koe ki tētahi wāhi kua whakapāngia e tētahi kaiwhakaari o tō hoariri, ka whai mai he whawhai:\n     - Ko te kaiwhakaari whakapae i te pikitanga teitei ka wini, ka whakakore i te kaiwhakaari o tō hoariri.\n     - Ki te rite ngā pikitanga, ka ngaro ngā kaiwhakaari e rua.\n     - **Ngā Kēhi:**\n       - Ka whakakore ngā Pū i ngā kaiwhakaari whakapae, ko ngā Kaitono anake e taea ai te whakakore i ngā Pū.\n       - Ka taea e ngā Kaitono te whawhai ki te Tāwera, ki te kaiwhakaari whakapae i te Kaitono, engari ka taea e ngā kaiwhakaari katoa atu.\n3. **Ngā Whāinga Rautaki:**\n   - Tūhura ngā kaiwhakaari o tō hoariri mā ngā neke me ngā whawhai.\n   - Ka tiakina tō Kara, ka whai anō ki te hopu i te Kara o tō hoariri.\n   - Whakamahia ngā Kaitono ki ngā whakaaro, ki te tūhura i ngā kaiwhakaari o tō hoariri, ki te whawhai ki ngā mea ngoikore.\n\n### Me Pēhea te Neke:\n1. Whakaatu ngā tūtohu o te kaiwhakaari e neke ana koe, me tōna wāhi e haere ana.\n2. Whakamahia te whakapānga: [A0 B0], ko A0 te wāhi o te kaiwhakaari, ko B0 te wāhi e haere ana.\n   - Tērā te tauira: Ki te neke i tētahi kaiwhakaari i te rārangi 0, te kōwae 0 ki te rārangi 1, te kōwae 0, whakapānga [A0 B0].\n3. Whakaritea ko te wāhi e haere ana he wāhi tika, ka rite ki ngā ture o te neke i runga ake nei.\n\n### Ngā Kōrero Whakamahara:\n- Ka whakaatu te papa i ngā kaiwhakaari au, i ō rātou wāhi, pērā i MN, MS.\n- Ka whakaatu anō te papa i ngā wāhi e mōhiotia ana o ngā kaiwhakaari o tō hoariri, kāore e whakaatu i ō rātou pikitanga, pērā i ?.\n- Ko ngā wāhi e whakaatu ana ~ he awa, kāore e taea te neke ki runga.\n- He tohutohu, ka tīmata koe i te tākaro mā te neke i ō kaiwhakaari e tu ana i te mātārangi ki mua, ki te tūhura i ngā kaiwhakaari o tō hoariri. Ko ngā mātārangi ki mua o Kaitakaro 0, o Kaitakaro 1 ko te rārangi D, ko te rārangi G.\n\nKo te papa o nāianei:\n"
+  },
+  "board": {
+    "current_board": "Papa Kāri Whenua O Nāianei:\n\n{board}\nNeke Atu: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "He kupu hē te whakapānga. Kaitakaro {player_id} kāore i whakapānga i tētahi neke i te whakapānga [A0 B0].",
+    "invalid_coordinates": "Kāore i te tika ngā taunga mahi. Kaore a kaitākaro {player_id} i tāuru i tētahi tauwhāiti whaimana.",
+    "not_own_piece": "Kāore i te tika. Me neke e te kaitākaro {player_id} tētahi o āna ake tūruhi.",
+    "scout_through_pieces": "Hē te āhua o te mahi. Kāore e āhei te kaitākaro {player_id} te neke i tētahi kaitutei mā roto i ētahi atu kaihanga.",
+    "scout_diagonal": "Hē te āhua o te mahi. Kāore e āhei te kaitākaro {player_id} te neke i tētahi kaitutei ki te kōtui.",
+    "non_scout_multi_square": "He hōputu mahi hē. Ko ngā tūru, haunga te kaitirotiro, ka neke kotahi anake i ia wā.",
+    "move_into_lake": "Kāore i te tika. Kaore e taea e te kaitākaro {player_id} te neke ki roto o te moana.",
+    "move_onto_own_piece": "Hē te āhua o te mahi. Kāore e āhei te kaitākaro {player_id} te neke ki runga i tāna ake kaihanga.",
+    "move_bomb_or_flag": "Kāore i te tika. Kaore e taea e te kaitākaro {player_id} te neke patu, haki rānei."
+  },
+  "game_action": {
+    "you_moved": "Kua neke koe i tō kaiwhakaari i {source} ki {dest}.",
+    "opponent_moved": "Kua nekehia e te kaitākaro {player_id} tētahi tūranga mai i {source} ki {dest}.",
+    "you_equal_ranks": "Kua neke koe i tō kaiwhakaari i {source} ki {dest}. Ko te kaiwhakaari whakapae i {attacking_rank}, ko te kaiwhakaari whakararo i {target_rank}. I te mea ko ngā pikitanga e rua ngā rite, kua ngaro ngā kaiwhakaari e rua.",
+    "opponent_equal_ranks": "Kaitakaro {player_id} kua neke i tētahi kaiwhakaari i {source} ki {dest}. Ko te kaiwhakaari whakapae i {attacking_rank}, ko te kaiwhakaari whakararo i {target_rank}. I te mea ko ngā pikitanga e rua ngā rite, kua ngaro ngā kaiwhakaari e rua.",
+    "you_miner_defused": "Kua neke koe i tō kaiwhakaari i {source} ki {dest}. Ko te kaiwhakaari whakapae i {attacking_rank}, ko te kaiwhakaari whakararo i {target_rank}. I te mea ka taea e ngā kaitono te whakakore i ngā pū, kua wini koe i te whawhai.",
+    "opponent_miner_defused": "Kaitakaro {player_id} kua neke i tētahi kaiwhakaari i {source} ki {dest}. Ko te kaiwhakaari whakapae i {attacking_rank}, ko te kaiwhakaari whakararo i {target_rank}. I te mea ka taea e ngā kaitono te whakakore i ngā pū, kua taea koe e te whawhai.",
+    "you_bomb_lost": "Kua neke koe i tō kaiwhakaari i {source} ki {dest}. Ko te kaiwhakaari whakapae i {attacking_rank}, ko te kaiwhakaari whakararo i {target_rank}. I te mea he kaitono kē atu te kaiwhakaari whakapae, kua taea koe e te whawhai.",
+    "opponent_bomb_won": "Kaitakaro {player_id} kua neke i tētahi kaiwhakaari i {source} ki {dest}. Ko te kaiwhakaari whakapae i {attacking_rank}, ko te kaiwhakaari whakararo i {target_rank}. I te mea he kaitono kē atu te kaiwhakaari whakapae, kua wini koe i te whawhai.",
+    "you_spy_won": "Kua neke koe i tō kaiwhakaari i {source} ki {dest}. Ko te kaiwhakaari whakapae i {attacking_rank}, ko te kaiwhakaari whakararo i {target_rank}. I te mea he kaitono kē atu te kaiwhakaari whakapae, kua wini koe i te whawhai.",
+    "opponent_spy_lost": "Kaitakaro {player_id} kua neke i tētahi kaiwhakaari i {source} ki {dest}. Ko te kaiwhakaari whakapae i {attacking_rank}, ko te kaiwhakaari whakararo i {target_rank}. I te mea he kaitono kē atu te kaiwhakaari whakapae, kua taea koe e te whawhai.",
+    "you_higher_won": "Kua neke koe i tō kaiwhakaari i {source} ki {dest}. Ko te kaiwhakaari whakapae i {attacking_rank}, ko te kaiwhakaari whakararo i {target_rank}. I te mea he kaitono kē atu te kaiwhakaari whakapae i te kaiwhakaari whakararo, kua wini koe i te whawhai.",
+    "opponent_higher_lost": "Kaitakaro {player_id} kua neke i tētahi kaiwhakaari i {source} ki {dest}. Ko te kaiwhakaari whakapae i {attacking_rank}, ko te kaiwhakaari whakararo i {target_rank}. I te mea he kaitono kē atu te kaiwhakaari whakapae i te kaiwhakaari whakararo, kua taea koe e te whawhai.",
+    "you_lower_lost": "Kua neke koe i tō kaiwhakaari i {source} ki {dest}. Ko te kaiwhakaari whakapae i {attacking_rank}, ko te kaiwhakaari whakararo i {target_rank}. I te mea he kaitono kē atu te kaiwhakaari whakapae i te kaiwhakaari whakararo, kua taea koe e te whawhai.",
+    "opponent_lower_won": "Kaitakaro {player_id} kua neke i tētahi kaiwhakaari i {source} ki {dest}. Ko te kaiwhakaari whakapae i {attacking_rank}, ko te kaiwhakaari whakararo i {target_rank}. I te mea he kaitono kē atu te kaiwhakaari whakapae i te kaiwhakaari whakararo, kua wini koe i te whawhai."
+  },
+  "outcome": {
+    "flag_captured": "Kua riro i te kaitākaro {player_id} te haki o tōna hoa tauwhainga!",
+    "no_movable_pieces": "Kaitakaro {winner_id} kua wini! Kaitakaro {loser_id} kāore anō he kaiwhakaari e neke."
+  }
+}

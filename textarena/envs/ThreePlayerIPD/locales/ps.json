@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "تاسو د لوبغاړي {player_id} په توګه د درې لوبغاړو په تکرار شوي زنداني معضل کې یاست. لوبه {num_rounds} دورې دوام لري. د دورې جوړښت: • {conv_rounds} وړیا چیټ بدلونه • 1 پریکړه بدل - د مخالف په مقابل کې یو ټوکن وسپاري: '[<opp-id> cooperate]' یا '[<opp-id> defect]' (د بیلګې په توګه '[1 defect] [2 cooperate]؛ ډیفالټ د 'همکارۍ' دی). د جوړه په واسطه د تادیې میټریکس (په هر غیر منظم جوړه باندې پلي کیږي): - دواړه همکاري -> {reward} - دواړه نیمګړتیا -> {punishment} - تاسو نیمګړتیا ، دوی همکاري -> {temptation} - تاسو همکاري ، دوی نیمګړتیا -> {sucker} هغه لوبغاړی چې د ټولو دورو په پای کې ترټولو لوړه نمره ولري ګټي."
+  },
+  "round": {
+    "start": "د پیل دور {round} تاسو کولی شئ د راتلونکي {conv_rounds} دور لپاره په آزاده توګه خبرې وکړئ.",
+    "chat_finished": "د دورې {round} لپاره د چټ پای ته ورسېد. خپلې پریکړې وړاندې کړئ، د هر مخالف لپاره یو توکن: `[pid cooperate]` یا `[pid defect]`."
+  },
+  "results": {
+    "header": "### پړاو {round} - پایلې:",
+    "pair_line": "{observation} لوبغاړی {i} vs لوبغاړی {j} په ترتیب سره {choice_i} او {choice_j} غوره کړي (لوبغاړی {i} ترلاسه کړی {gain_i} ، لوبغاړی {j} ترلاسه کړی {gain_j})",
+    "scores_open": "{observation} -> اوسني نمرې: ",
+    "score_first": "{observation}د لوبغاړي {player_id} ({score})",
+    "score_next": "{observation}؛ لوبغاړی {player_id} ({score})",
+    "finalize": "{observation}  د"
+  },
+  "outcome": {
+    "final": "وروستۍ نمرې: {scores}. د درجه بندۍ ډلې (بدترین→ غوره): {groups}"
+  }
+}

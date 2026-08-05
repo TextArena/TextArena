@@ -1,0 +1,39 @@
+{
+  "_comment": "Locale Bahasa Melayu untuk Word Ladder. Kunci (kiri) adalah tetap; terjemah hanya nilai (kanan). Kekalkan setiap {placeholder} sebagaimana adanya. Token perkataan ({start_word}, {target_word}, {word}, {current}, {ladder}) ialah perkataan permainan yang neutral dan tidak boleh diterjemahkan. Kekalkan contoh dalam kurungan `[word]` sebagaimana adanya.",
+  "_slots": {
+    "{player_id}": "Nombor pemain (integer)",
+    "{start_word}": "Perkataan mula tangga (token neutral)",
+    "{target_word}": "Perkataan sasaran yang perlu dicapai (token neutral)",
+    "{word}": "Perkataan yang baru dihantar oleh pemain (token neutral)",
+    "{current}": "Perkataan semasa pemain (token neutral)",
+    "{target}": "Perkataan sasaran (token neutral)",
+    "{target_len}": "Panjang perkataan sasaran (integer)",
+    "{ladder}": "Sejarah langkah yang disambung dengan ' -> ' (token neutral)",
+    "{history}": "Baris sejarah yang dipaparkan (sudah dilokalkan; jangan terjemah)",
+    "{pct}": "Peratusan huruf yang dikongsi dengan sasaran (integer)"
+  },
+
+  "prompt": {
+    "intro": "Anda ialah Pemain {player_id}.  Matlamat anda adalah mencapai perkataan sasaran dengan menukar **satu huruf pada satu masa**.\n- Perkataan mula:  **{start_word}**\n- Perkataan sasaran: **{target_word}**\nHantar setiap langkah dalam kurungan siku, cth.  `[word]`.\nSejarah dipaparkan di bawah semasa anda bermain.  Semoga berjaya!\n"
+  },
+
+  "invalid": {
+    "wrong_format": "Format tidak sah. Bungkus perkataan anda dalam kurungan siku, cth. `[word]`.",
+    "wrong_length": "`{word}` mempunyai panjang yang salah; sasaran ialah {target_len} huruf.",
+    "not_a_word": "`{word}` bukan perkataan yang dikenali.",
+    "not_one_different": "`{word}` tidak berbeza tepat satu huruf daripada `{current}`."
+  },
+
+  "board": {
+    "history": "Sejarah Word Ladder: {ladder}.  Perkataan Sasaran: {target}\n"
+  },
+
+  "feedback": {
+    "progress": "Bagus! Teruskan.\n{history}"
+  },
+
+  "outcome": {
+    "win": "Tahniah! Anda telah mencapai perkataan sasaran.",
+    "turn_limit": "Had giliran telah dicapai. Anda mencapai `{current}` yang berkongsi {pct}% hurufnya dengan sasaran `{target}`."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Nang tsawm ai wa, na Player {player_id} rai. Na Sudoku shanu gawm da.\nSudoku grid a shanu gawm da, kaba wa na 1 kaw 9 shi ai wa, kaba wa na 1 kaw 9 shi ai wa.\nKaba empty wa '.' ai wa, kaba pre-filled wa digit 1 kaw 9 shi ai wa.\n\nSudoku Grid shanu gawm da:\nNang a tsa ga, 9x9 grid wa empty kaba wa digit 1 kaw 9 shi ai wa, kadi:\n1. Kaba wa shi ai wa, digit 1 kaw 9 shi ai wa, ma kaba wa repeat ai wa.\n2. Kaba wa shi ai wa, digit 1 kaw 9 shi ai wa, ma kaba wa repeat ai wa.\n3. Kaba wa 9 3x3 subgrid wa, digit 1 kaw 9 shi ai wa, ma kaba wa repeat ai wa.\n\nGa na shanu gawm da, kaba wa:\n1. **Ma kaba wa overwrite** initial number wa grid wa provide ai wa.\n2. **Ma kaba wa fill** empty kaba wa '.' ai wa.\n3. Na response wa format wa '[row column number]' shi ai wa.\n4. **Ma kaba wa ensure** na move wa Sudoku rules violate ai wa. Invalid move wa penalty wa result ai wa.\nExamples:\n- **Valid Move**:\n  - Grid Snippet Before Move:\n  \n  - Move: `[5 3 7]`\n  - Explanation: 7 wa row 5, column 3 wa place ai wa, Sudoku rules violate ai wa ma ai wa.\n\n- **Invalid Move** (Overwriting a pre-filled cell):\n  - Grid Snippet Before Move:\n  \n  - Move: `[1 1 9]`\n  - Explanation: Cell (1,1) wa already filled wa 5. Na overwrite ai wa ma ai wa.\n\n- **Invalid Move** (Violating Sudoku rules):\n  - Grid Snippet Before Move:\n  \n  - Move: `[1 3 5]`\n  - Explanation: 5 wa row 1, column 3 wa place ai wa, Sudoku rules violate ai wa.\n\nNa move wa history wa thoughts wa appended ai wa, na play more rounds wa. Na move wa history wa improve na decision making wa, na move wa tried wa avoid ai wa. Good luck!\n\n"
+  },
+  "board": {
+    "game_board": "Makam Kasha:\n{board}",
+    "board_state": "Makam ningmu: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "N jaw ai shamu shamawt hkrang. Player {player_id} gaw, 'row column number' hte n htai ya lu sai.",
+    "out_of_bounds": "Makam masham ai. {player_id} wa na {num} a ({row}, {col}) a na kun a, makam masham re.",
+    "overwrite": "လိုင်ယာခရီးမွာ။ ကစူပူ {player_id} နေရာ ({row}, {col}) ချန်ပူတဲ့ကွဲဆန်ဆဲ ချန်ပူခါ။",
+    "violates_rules": "Masha hte shawng hku. Player {player_id} {num} ni ({row}, {col}) hta kaw shawng hku, Sudoku daw danhte hte senghte."
+  },
+  "outcome": {
+    "win": "Kabu gara ai lam! ginsup ninghkring {player_id} gaw Sudoku puzzle hpe ngut kre la sai.",
+    "turn_limit": "Turn limit wa reached ai wa. Na correctly filled {percent}% wa empty kaba wa."
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Ine un jo Klondike Solitaire. Teko lako ni kutoa kadi zote hadi kwenye matopeni ya msingi.\n\nSheria za Mchezo:\n- Matopeni ya msingi (F1-F4): Jenga kutoka Ace hadi King kwa rangi\n- Matopeni ya meza (T1-T7): Jenga chini kwa kubadilisha rangi (nyekundu juu ya nyeusi, nyeusi juu ya nyekundu)\n- Hisa: Chora kadi hadi kwenye taka\n- Taka (W): Kadi ya juu inapatikana kwa kucheza\n\nMaagizo:\n- 'draw' - Chora kadi kutoka hisa hadi taka\n- 'move <source> <destination> [count]' - Hamisha kadi kati ya matopeni\n  Mifano: 'move W T1', 'move T1 F2', 'move T3 T5 2'. nambari pia inaweza kuwa 'all', ambayo itajaribu kuhama kadi zote zilizo wazi.\n- 'forfeit' - Maliza mchezo mara moja na ufunge alama yako ya sasa\n- Majina ya matopeni: W (taka), F1-F4 (msingi), T1-T7 (meza)\n\nUnaweza kutekeleza vitendo vingi katika zamu moja kwa kuvitenganisha na alama za komma:\n  Mfano: 'draw, move W T1, move T2 F1'\n\nNi Wafalme pekee wanaweza kuwekwa kwenye matopeni tupu ya meza.\nVitendo vinavyotekelezwa kwa mpangilio - ikiwa moja itashindwa, vitendo vilivyobaki vitapuuzwa.\nTumia 'forfeit' ikiwa unaamini mchezo hauwezekani kushinda."
+  },
+  "format_error": {
+    "no_brackets": "Yo ma itiyo godo ok owinjore. Timno onego obed e kind sirni ariyo mag nyukta madongo gi matindo.",
+    "no_closing_bracket": "Yo ma ok owinjore mar timo gimoro. Ok ochop e rang'iny ']'",
+    "empty_command": "Amri nder. Ket 'draw' koso 'move <source> <destination> [count]'",
+    "empty_action": "Kitendo nder",
+    "move_needs_args": "Amri ya kusonga inahitaji chanzo na kikomo. Matumizi: 'move <source> <destination> [count]'",
+    "count_positive": "Hesabu lazima iwe chanya au 'all'",
+    "count_invalid": "Hesabu isiyo halali. Tumia nambari au 'all'",
+    "unknown_command": "Onyalo mabayo '{cmd}'. Unyalo 'draw', 'move <source> <destination> [count]', au 'forfeit'",
+    "wrapped": "Chako {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Chako {n}: {msg}",
+    "before_failure": "Ne otimo {n} gima ne pok otimne maber.",
+    "failed": "Chako {n} ema faili: {msg}"
+  },
+  "move_result": {
+    "drew": "Ne ogolo kadgo e stock mi owitgi.",
+    "cannot_draw": "Ok wanyal golo gimoro amora. Gik moko duto ma ne wan - go koro onge kendo gionge kata mana gik matin.",
+    "invalid_pile": "Nying moket ok en kare. Ti kod W, F1-F4, kata T1-T7",
+    "foundation_one_card": "Inyalo mana loko kad achiel e kar dak mar mise.",
+    "waste_to_foundation_ok": "Ka ng'ato okelo kad ma ne oselalgo e kar kano gik moko F{dst}",
+    "waste_to_foundation_bad": "Ok nyal dar kad mar yugi e kidieno.",
+    "tableau_to_foundation_ok": "Kari ibed gi tableau T{src} pa foundation F{dst}",
+    "tableau_to_foundation_bad": "Ok nyal dar kad mar tableau e kidieny ma ne ogergo mise. 🔍",
+    "foundation_to_foundation": "Ok nyal dar e kind sirni ariyo mag mise.",
+    "waste_to_tableau_one_card": "Inyalo mana loko kad achiel kende e sanduk mar waste nyaka tableau.",
+    "waste_to_tableau_ok": "Ne oter kad e otas mar T{dst}",
+    "waste_to_tableau_bad": "Ok nyal keto kad mar waste e wi tableau pile",
+    "no_face_up": "Onge kad ma ng'ato nyalo loko ka ok ong'iyo malo.",
+    "tableau_to_tableau_ok": "Kari {count} ibed gi tableau T{src} pa T{dst}",
+    "tableau_to_tableau_bad": "Inywalo konywa {count} kadibed gi T{src} pa T{dst}",
+    "foundation_to_tableau_one_card": "Inyalo mana loko kad achiel kende e kind kar dak kod kar bet.",
+    "foundation_empty": "Foundation F{src} ok en gimoro amora.",
+    "foundation_to_tableau_ok": "Kari ibed gi foundation F{src} pa tableau T{dst}",
+    "foundation_to_tableau_bad": "Ok nyal ketie kad mar mise e mesa T{dst}",
+    "to_waste_or_stock": "Ok nyal tergi kama ikethoe gik moko kata kuonde ma gibeyoe."
+  },
+  "outcome": {
+    "forfeit": "Tuke ne okethore. Gikone, kwan-gi nobedo {score} e karatiche ma nochung'ne mise mag kanisa.",
+    "won": "Wagoyoni erokamano kuom loyo tuke mag Klondike Solitaire!",
+    "turn_limit": "Wuotho! Iwe kelo {max_turns} turn. Alafu: {score} kadibed gi foundation."
+  },
+  "board": {
+    "title": "=== ATUKU YA KLONDIKE ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stok: {stock} kad mag somo",
+    "waste": "Yugi (W): {waste}",
+    "foundations_header": "Mise:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Chal mar ng'ato:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a 3-player Iterated Prisoner's Dilemma. The match lasts {num_rounds} rounds.\nRound structure:\n• {conv_rounds} free-chat turns\n• 1 decision turn - submit one token per opponent: '[<opp-id> cooperate]' or '[<opp-id> defect]' (i.e. '[1 defect] [2 cooperate]'; the default is 'cooperate'). \nPair-wise payoff matrix (applied to each unordered pair):\n  - Both cooperate  ->  {reward}\n  - Both defect     ->  {punishment}\n  - You defect, they cooperate -> {temptation}\n  - You cooperate, they defect -> {sucker}\nThe player(s) with the highest score at the end of all rounds wins."
+  },
+  "round": {
+    "start": "─── Kuanza Mzunguko {round} ───\tUnaweza kujadiliana kwa uhuru kwa mizunguko {conv_rounds} ijayo.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Nsuka ya Lukutakanu {round}:",
+    "pair_line": "{observation}\n\t Mwana {i} dhidi ya Mwana {j} walichagua {choice_i} na {choice_j} mtawalia (Mwana {i} alipata {gain_i}, Mwana {j} alipata {gain_j})",
+    "scores_open": "{observation} -> Ba pointi ya ntangu yai: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}  ya kele na ntu-dyambu \"M\""
+  },
+  "outcome": {
+    "final": "Makala ma kwenda: {scores}.  Makundi ya kufunga (mbaya→nzuri): {groups}"
+  }
+}

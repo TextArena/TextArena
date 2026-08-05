@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Oli Omutendesi {player_id} mu Stratego.\nEriyo lyo lye kufuna Bendera ya mukwano wo oba okuttibwa kitundu kya kwe kyonna.\nEggye lyo limutwalibwa ku mbao, likwata Bendera yo, Bombu, na kitundu kya kiti kya njawulo.\n\n### Ebiragiro bya Muzanyo\n1. **Ebikolwa bya Kusitula:**\n   - Ku kisa kyo, osobola kusitula kitundu kimo kwa kisitula kimo okudda ku kisera ekirira (juu, wansi, kkono, oba kulyo) ekiri limutwalibwa kitundu kya kwe.\n   - Ekyokulabirako: Kitundu kisobola kusitula okuva A1 okudda B1 oba A1 okudda A2 singa B1 na A2 zitawalibwa kitundu kya kwe.\n   - Singa kitundu ekyo ekyali kisitulwa kye Bombu oba Bendera, tekisobola kusitulwa.\n2. **Lutaba:**\n   - Singa ositula ku kisera ekiri limutwalibwa kitundu kya mukwano wo, lutaba lujja kutokea:\n     - Kitundu ekyo ekyali kikubwa kye kitundu ekyo kye kisitulwa.\n     - Singa kiti kya njawulo, kitundu zombi zitawalibwa ku mbao.\n     - **Ebikolwa Ebirala:**\n       - Bombu zisitula kitundu kya kwe kyonna kyonka Miners, abasitula Bombu.\n       - Spies zisobola kufuna Marshal singa Spy asitule kwanza naye azitta kitundu kya kwe.\n3. **Ebigendererwa bya Kusitula:**\n   - Tambula kitundu kya mukwano wo mu kusitula kwabwe na lutaba.\n   - Kuma Bendera yo wakati ogeza Bendera ya mukwano wo.\n   - Kozesa Skauti mu kusitula kwabwe okufuna amawulire ku kitundu kya mukwano wo na kufuna ekyali kilemwa.\n\n### Engeri ya Kusitula:\n1. Tambula kisera kya kitundu kye ositula na kisera kye kisitulwa.\n2. Kozesa mpangilio: [A0 B0], A0 kye kisera kya kitundu ekyo kye ositula, ate B0 kye kisera kye kisitulwa.\n   - Ekyokulabirako: Okusitula kitundu okuva safu 0, safu wansi 0 okudda safu 1, safu wansi 0, ingiza [A0 B0].\n3. Kuma kisera kye kisitulwa kikola mpangilio wa kusitula.\n\n### Ebiragiro Ebikulu:\n- Mbao ejja kukuwa kitundu kya kwe na kisera kyabwe, e.g. MN, MS.\n- Mbao ejja kukuwa kisera kya kitundu kya mukwano wo kyonka kisitula kya kwe, e.g. ?.\n- Gridi eziri na ~ ziri na mazzi na tezisobola kusitulwa.\n- Nga ekiragiro, tandika muzanyo kwa kusitula kitundu kya kwe ekiri ku ntonto okufuna amawulire ku kitundu kya mukwano wo. Omutendesi 0 na omutendesi 1 bali na ntonto ku safu D na G mtawalia.\n\nMbao ejja kukuwa bwetyo:\n"
+  },
+  "board": {
+    "current_board": "Board ya Sasa:\n\n{board}\nKuteka Okusobola: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ekintu tekimala. Omuzannyi {player_id} takwata kikomo mu ngeri [A0 B0].",
+    "invalid_coordinates": "Enkola ya kikolwa ekitali kituufu. Omuzannyi {player_id} teyayingizaako bulambirira obutuufu.",
+    "not_own_piece": "Mpangilio gwa kutendeka tekikola. Omutendesi {player_id} asitule kitundu kya kwe.",
+    "scout_through_pieces": "Mpangilio gwa kutendeka tekikola. Omutendesi {player_id} tasobola kusiitula skauti mu kitundu kya kwe.",
+    "scout_diagonal": "Enkola y'omuzannyo tegisaana. Omuzanyi {player_id} tasobola kusindika mugoba ku ludda olumu olw'ekisenge (diagonal).",
+    "non_scout_multi_square": "Enkola y'ekikolwa ekitali kituufu. Ebitundu, okuggyako abagenyi, bisobola okutambula ekifo kimu kyokka mu kiseera kye kimu.",
+    "move_into_lake": "Enkola y'omuzannyo tegisaana. Omuzanyi {player_id} tayinza kugenda mu nnyanja.",
+    "move_onto_own_piece": "Enkola y'ekintu ekitali kituufu. Omuzannyi {player_id} tayinza kuddukira mu kipande kye ye kennyini.",
+    "move_bomb_or_flag": "Enkola y'omuzannyo tegisaana. Omuzanyi {player_id} tasobola kusitula bbomu oba bendera."
+  },
+  "game_action": {
+    "you_moved": "Oli amuyita ekikomo ko ku {source} go {dest}.",
+    "opponent_moved": "Omuzannyi {player_id} amuyita ekikomo ku {source} go {dest}.",
+    "you_equal_ranks": "Oli amuyita ekikomo ko ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi amaranga gabiri gali mu katono, byonna biwunya.",
+    "opponent_equal_ranks": "Omuzannyi {player_id} amuyita ekikomo ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi amaranga gabiri gali mu katono, byonna biwunya.",
+    "you_miner_defused": "Oli amuyita ekikomo ko ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi abanyanzi banakola ebibyaaliro, olwunga ekibyaaliro.",
+    "opponent_miner_defused": "Omuzannyi {player_id} amuyita ekikomo ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi abanyanzi banakola ebibyaaliro, olinywa ekibyaaliro.",
+    "you_bomb_lost": "Oli amuyita ekikomo ko ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo tekyaali myanzi, olinywa ekibyaaliro.",
+    "opponent_bomb_won": "Omuzannyi {player_id} amuyita ekikomo ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo tekyaali myanzi, olinywa ekibyaaliro.",
+    "you_spy_won": "Oli amuyita ekikomo ko ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo ekyaali jajjaani nekyali kwenyumya marishali, olwunga ekibyaaliro.",
+    "opponent_spy_lost": "Omuzannyi {player_id} amuyita ekikomo ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo ekyaali jajjaani nekyali kwenyumya marishali, olinywa ekibyaaliro.",
+    "you_higher_won": "Oli amuyita ekikomo ko ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo kyaali kireke ku ky'ekitalo, olwunga ekibyaaliro.",
+    "opponent_higher_lost": "Omuzannyi {player_id} amuyita ekikomo ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo kyaali kireke ku ky'ekitalo, olinywa ekibyaaliro.",
+    "you_lower_lost": "Oli amuyita ekikomo ko ku {source} go {dest}. Ekikomo ekyaali kubyaaliro {attacking_rank} nekyali kwenyumya {target_rank}. Kwa sababi ekikomo kyaali kirala ku ky'ekitalo, olinywa ekibyaaliro.",
+    "opponent_lower_won": "Omuzanyi {player_id} akutte kikumi kutoka {source} okudda {dest}. Ekikumi ekyakugoba kyali {attacking_rank} ate ekikumi ekyo kyakutwalibwa kyali {target_rank}. Kuba nti omugoba alina kikumi kya wansi kuliko ekikumi ekyakutwalibwa, owange wuwange omutalo."
+  },
+  "outcome": {
+    "flag_captured": "Omuzannyo {player_id} gukutte bendera ya muliraanwa!",
+    "no_movable_pieces": "Omuzannyi {winner_id} awangula! Omuzannyi {loser_id} talina bikomo byamalayo."
+  }
+}

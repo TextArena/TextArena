@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Waray pa mga kard.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Single Player vs Dealer\n\n📖 GAME OVERVIEW:\n• Pagsugod ka hin {start_chips} chips\n• Single deck hin 52 baraha (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Magmumulay ka patok han dealer (house)\n• Kada round susunod han Ultimate Texas Hold'em structure: magpo-post ka hin ANTE ngan BLIND bets, makakarawat ka hin 2 hole cards, magdedesisyon ka hin optional PLAY bets ha mga betting phase, tapos ig-reveal an mga community cards ngan ikumpara an imo best 5-card hand patok han dealer’s. An imo goal amo an pag-maximize han imo winnings (kun ikaw an mayda mas maupay nga kamot), samtang pag-minimize han imo losses (kun ikaw an mayda mas maluya nga kamot).\n• Game natapos kun ikaw nakarawat hin 0 chips o ubos pa ha pagsugod han round (LOSS) o nakumpleto ka hin 1000 rounds hin chips (WIN)\n\n💰 BETTING STRUCTURE:\n• ANTE: Mandatory ${ante} bet kada round\n• BLIND: Mandatory ${ante} bet kada round\n• PLAY: Optional bet ha gameplay. Ha kada round, pwede ka magpili hin usa la han mga nagsunod: (${ante4} kun ginbuhat ha PRE-FLOP, ${ante2} kun ginbuhat ha FLOP, o ${ante} kun ginbuhat ha RIVER. Pwede ka gihapon mag-fold ha river, paghatag hin kamot, ngan paghimo hin waray bet.)\n\n🎴 CARD DEALING:\n• Makakarawat ka hin 2 face-up cards (an imo hole cards)\n• Dealer makakarawat hin 2 face-down cards (tinago ha imo)\n• 5 community cards gin-deal face-down ha una\n• Community cards gin-reveal progresibo ha mga game phase\n\n🏆 DEALER QUALIFICATION:\n• Dealer kinahanglan mayda at least usa ka PAIR (2 baraha hin pareho nga rank) para ma-qualify, gamit an 2 baraha ha ira kamot ngan an 5 community cards.\n• Dealer qualification naapektohan an mga betting outcome, samtang ige-eksplika ha sunod.\n\n🎮 GAME PHASES & ACTIONS:\n📋 PRE-FLOP:\n  • Mga aksyon: [4x] (${ante4}) o [check]\n  • [4x]: Maghimo hin ${ante4} PLAY bet, ig-reveal an mga unang 3 community cards\n  • [check]: Waray karagdagang bet, ig-reveal an mga unang 3 community cards\n\n📋 FLOP:\n  • Kun 4x bet ginbuhat: Usa la [skip] an available (auto-reveal an mga huring 2 community cards)\n  • Kun waray 4x bet: [2x] (${ante2}) o [check]\n  • [2x]: Maghimo hin ${ante2} PLAY bet, ig-reveal an mga huring 2 community cards\n  • [check]: Waray karagdagang bet, ig-reveal an mga huring 2 community cards\n\n📋 RIVER:\n  • Kun 4x o 2x bet ginbuhat: Usa la [skip] an available (auto-proceed ha showdown)\n  • Kun waray prior PLAY bet: [1x] (${ante}) o [fold]\n  • [1x]: Maghimo hin ${ante} PLAY bet, mag-proceed ha showdown\n  • [fold]: Paghatag hin kamot, mawawara an ANTE ngan BLIND bets\n\n📋 SHOWDOWN:\n  • An tanan mga baraha gin-reveal ngan ige-evaluate\n  • An best 5-card hand tikang ha 7 baraha (2 hole + 5 community)\n  • Mga bet gin-settle sumala han payout rules\n\n💎 BET PAYOUTS:\n📊 ANTE BET:\n  • Dealer waray qualify: PUSH (bet ginbalik)\n  • Dealer qualify ngan ikaw an nakadaog: 1:1 payout (bet + winnings)\n  • Dealer qualify ngan ikaw an nakaperdi: Bet nawawara\n  • Tie: PUSH (bet ginbalik)\n\n📊 BLIND BET:\n  • Waray apektado han dealer qualification\n  • Ikaw an nakadaog: Bet ginbalik ngan karagdagang payout sumala han imo kamot\n  • Ikaw an nakaperdi: Bet nawawara\n  • Tie: PUSH (bet ginbalik)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Waray karagdagang payout\n\n📊 PLAY BET:\n  • Waray apektado han dealer qualification\n  • Direkta nga komparasyon: An imo best hand patok han dealer's best hand\n  • Ikaw an nakadaog: 1:1 payout (bet + winnings)\n  • Ikaw an nakaperdi: Bet nawawara\n  • Tie: PUSH (bet ginbalik)\n\n🎯 POKER HAND RANKINGS (Best to Worst):\n  1. Royal Flush: A-K-Q-J-10 hin pareho nga suit\n  2. Straight Flush: 5 sunod-sunod nga baraha hin pareho nga suit\n  3. Four of a Kind: 4 baraha hin pareho nga rank\n  4. Full House: 3 hin pareho nga rank + 2 hin pareho nga rank\n  5. Flush: 5 baraha hin pareho nga suit\n  6. Straight: 5 sunod-sunod nga baraha\n  7. Three of a Kind: 3 baraha hin pareho nga rank\n  8. Two Pair: 2 pareho nga rank hin baraha\n  9. One Pair: 2 baraha hin pareho nga rank\n  10. High Card: An gihataasi nga baraha an nakadaog\n\n⌨️  ACTION COMMANDS:\n• [4x] o [play bet 4x]: Maghimo hin ${{self.ante_amount*4}} PLAY bet\n• [2x] o [play bet 2x]: Maghimo hin ${{self.ante_amount*2}} PLAY bet\n• [1x] o [play bet 1x]: Maghimo hin ${{self.ante_amount*1}} PLAY bet\n• [check] o [c]: Check (waray karagdagang bet)\n• [fold] o [f]: Fold (paghatag hin kamot)\n• [skip] o [s]: Skip ha sunod nga phase (kun waray aksyon kinahanglan)\n\n💡 STRATEGY TIPS:\n• Mga kusog nga pagsugod nga kamot (pareho, hataas nga baraha) madalas nagpapahimo hin 4x bets\n• Iksamin an dealer qualification - mga maluya nga kamot pwede mag-push kun dealer waray qualify\n• BLIND bet pwede magin profitable hin kusog nga kamot (Royal Flush = 500:1!)\n• Bantayi an imo chip stack! Kun mag-ubos ha 0 o ubos pa ha pagsugod han round, ikaw an nakaperdi.\n\n⚠️  IMPORTANT NOTES:\n• ANTE ngan BLIND bets mandatory kada round\n• PLAY bets optional ngan strategic\n• Siguraduhin an imo input han aksyon, ngan usa la an aksyon ha usa ka panahon.\n\n",
+    "state": "🎯 ROUND {round}\n💰 Chips: {chips}\n🎴 An imo kamot: {hand}\n📊 Kasamtangan nga mga bet: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Phase: {phase}\n🎯 Mga available nga aksyon: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Ang Round {round} nagtikang! Mga apusta: ANTE ${ante}, BLIND ${blind}. Mayda ka {chips} mga tsip nga nabilin.",
+    "your_hand": " An imo kamot: {hand}",
+    "flop_revealed": " FLOP ginpahayag: {cards}",
+    "river_revealed": " RIVER ginpahayag: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Dirì maupay nga aksyon para han kasalukuyan nga yugto. Mga magamit nga mga aksyon: {available}",
+    "message": "❌ Dirì maupay nga aksyon! Mga magamit nga mga aksyon: {available}"
+  },
+  "action": {
+    "folded": " Nag-ihap ka."
+  },
+  "showdown": {
+    "dealer_hand": " Ipakita! Kamot han tag-iya: {cards}",
+    "community_cards": " Mga kard han komunidad: {cards}",
+    "player_best": "🎴 An imo best hand: {name} ({cards})",
+    "dealer_best": "🎴 An best hand han dealer: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (ginlilibotan)",
+    "blind_lost_folded": " BINUG-BITAN nga PANGGASA NAWAL! -${blind} (ginpakianhan)",
+    "ante_won": "✅ Ang ANTE bet NADAOG! +${amount}",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} ginbalik",
+    "ante_lost": "❌ Nawala an ANTE bet! -${ante}",
+    "blind_won": "✅ Ang BLIND bet NADAOG! +${amount}",
+    "blind_pushed": " BET PUSHED! ${blind} ginbalik",
+    "blind_lost": " BINUG-BILANG nga Pusta NALUSAD! -${blind}",
+    "play_won": "✅ Ang PLAY bet NADAOG! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} ginbalik",
+    "play_lost": "❌ Nawala an PLAY bet! -${play}",
+    "net_gain": "🎉 Round {round} nakompleto! Net gain: +${net}",
+    "net_loss": "💸 Round {round} nakompleto! Net loss: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 GAME OVER! {max_turns} rounds nakompleto. Mayda ka ${chips} chips - NAKADAOG KA!",
+    "game_over_lose": " GAME OVER! Waray na kamo chips. Nagdaog an dealer!",
+    "reward_win": "Paragamit nakumpleto hin {winner_rounds} rounds hin ${chips} chips",
+    "reward_lose": "An manlalaro waray na chips ha round {round}",
+    "reward_win_max": "Paragamit nakumpleto hin {max_turns} rounds hin ${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush (Reyal nga Pag-awas)",
+    "straight_flush": "Husto nga Pag-arado",
+    "four_of_a_kind": "Upat nga Klase han mga Pito",
+    "full_house": "Bug-os nga Balay",
+    "flush": "Pag-arado han tubig",
+    "straight": "Diretso nga",
+    "three_of_a_kind": "Tulo nga Diri Pareho ha Ira",
+    "two_pair": "Duha nga Pares",
+    "one_pair": "Usa nga Pares",
+    "high_card": "Hataas nga Karta",
+    "unknown": "Diri Kilala nga Kamot"
+  }
+}

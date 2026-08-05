@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Шумо дар Клондайк Солитер бозӣ мекунед. Ҳадафатон ин аст, ки ҳамаи кортҳоро ба пулҳои асосӣ интиқол диҳед.\n\nҚоидаҳои бозӣ:\n- Пулҳои асосӣ (F1-F4): Аз корти туз то корти шоҳ бо ранги якхела\n- Пулҳои табли (T1-T7): Аз корти калон то корти хурд бо ранги алтернативӣ (сурх ба сиёҳ, сиёҳ ба сурх)\n- Захира: Кортиро аз захира ба пули захира кашида бароред\n- Захира (W): Корти боло барои бозӣ дастрас аст\n\nАмрҳо:\n- 'draw' - Кортиро аз захира ба пули захира кашида бароред\n- 'move <source> <destination> [count]' - Кортиро байни пулҳо интиқол диҳед\n  Намунаҳо: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count ҳамчунин метавонад 'all' бошад, ки кӯшиш мекунад ҳамаи кортҳои рӯи болоро интиқол диҳад.\n- 'forfeit' - Бозиро фавран хотима диҳед ва ҳисоби ҷории худро қулф кунед\n- Номи пулҳо: W (захира), F1-F4 (асосӣ), T1-T7 (табли)\n\nШумо метавонед чандин амалро дар як давра иҷро кунед, ки онҳоро бо вергул ҷудо кунед:\n  Намуна: 'draw, move W T1, move T2 F1'\n\nФақат шоҳҳо метавонанд ба пулҳои табли холӣ гузошта шаванд.\nАмалҳо ба тартиб иҷро мешаванд - агар яке аз онҳо номуваффақ бошад, амалҳои боқимонда тарк мешаванд.\nАз 'forfeit' истифода кунед, агар шумо боварӣ доред, ки бозӣ ғайримумкин аст."
+  },
+  "format_error": {
+    "no_brackets": "Формати амали номувофиқ. Амалиёт бояд дар камарбанд бошад.",
+    "no_closing_bracket": "Формати амали нодуруст. Камидаи басташавӣ намерасад ']'",
+    "empty_command": "Фармони холӣ. Навъи \"draw\" ё \"move <source> <destination> [count]\".",
+    "empty_action": "Амалиёти холӣ",
+    "move_needs_args": "Фармони ҳаракат манбаъ ва маконро талаб мекунад. Истифода: 'move <source> <destination> [count]'",
+    "count_positive": "Теъдод бояд мусбат ё 'all' бошад",
+    "count_invalid": "Теъдоди нодуруст. Raqami ё 'all'-ро истифода баред",
+    "unknown_command": "Командаи номаълум '{cmd}'. Истифода аз 'draw', 'move <source> <destination> [count]', ё 'forfeit'",
+    "wrapped": "Амалиёт {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Амалиёт {n}: {msg}",
+    "before_failure": "Амалиёт {n} анҷом шуд пеш аз шикаст.",
+    "failed": "Амалиёт {n} шикаст хӯрд: {msg}"
+  },
+  "move_result": {
+    "drew": "Корти кашидашуда аз захира ба партов.",
+    "cannot_draw": "Наметавон кашид. Ҳам захира ва ҳам партов холӣ аст.",
+    "invalid_pile": "Номи сатр нодуруст аст. W, F1-F4 ё T1-T7 -ро истифода баред",
+    "foundation_one_card": "Танҳо 1 кортро ба асос мегузаронида метавонад.",
+    "waste_to_foundation_ok": "Корти аз партов ба бунёд кӯчонидашуда F{dst}",
+    "waste_to_foundation_bad": "Корти партофташударо ба он қуттии асос гузоштан мумкин нест.",
+    "tableau_to_foundation_ok": "Карт аз tableau T{src} ба пӯя F{dst} кӯчонда шуд",
+    "tableau_to_foundation_bad": "Корти тахтаро ба он қуттии асос кӯчонда наметавонад",
+    "foundation_to_foundation": "Аз як поя ба паёмак ҳаракат карда наметавонад.",
+    "waste_to_tableau_one_card": "Танҳо 1 кортро аз партов ба ҷадвал гузаронидан мумкин аст.",
+    "waste_to_tableau_ok": "Корти аз партов ба ҷадвали T кӯчонидашуда{dst}",
+    "waste_to_tableau_bad": "Корти партофташударо ба он теъдоди тахтаи тақсимнашаванда гузоштан мумкин нест.",
+    "no_face_up": "Ҳеҷ гуна кортҳои рӯ ба рӯи ҳаракат карданӣ нестанд.",
+    "tableau_to_tableau_ok": "Кӯчондан {count} карт(ҳо) аз tableau T{src} ба T{dst}",
+    "tableau_to_tableau_bad": "Наметонан {count} карт(ҳо) аз T{src} ба T{dst} кӯчонӣ",
+    "foundation_to_tableau_one_card": "Танҳо 1 кортро аз асос ба ҷадвал гузаронидан мумкин аст.",
+    "foundation_empty": "Фонд F{src} холӣ аст.",
+    "foundation_to_tableau_ok": "Карт аз пӯя F{src} ба tableau T{dst} кӯчонда шуд",
+    "foundation_to_tableau_bad": "Наметонан картҳои пӯядорро дар tableau T{dst} гузошт",
+    "to_waste_or_stock": "Наметавонад ба партовҳо ё захира интиқол дода шавад."
+  },
+  "outcome": {
+    "forfeit": "Бозӣ аз даст дода шуд. Натиҷаи ниҳоӣ: {score} кортҳо дар асосҳо.",
+    "won": "Табрикот, шумо дар мусобиқаи \"Клондайк Солитер\" ғолиб омадед!",
+    "turn_limit": "Бозӣ тамом! Шумо {max_turns} навбатҳоро расидед. Балл: {score} картҳо дар пӯяҳо."
+  },
+  "board": {
+    "title": "=== КЛОНДИКЕ САЛАЙТАРИ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Ҳисоб: {stock} кортҳо",
+    "waste": "Партовҳо (W): {waste}",
+    "foundations_header": "Асосҳо:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Тасвир:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

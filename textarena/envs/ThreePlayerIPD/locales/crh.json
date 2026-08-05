@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Siz {player_id} oyuncusısınız, 3 oyunculuq Iteratsiya etilgen Mahpus Dilemmasında. Match {num_rounds} turdan ibarettir.\nTur yapısı:\n• {conv_rounds} serbest söyleşme turı\n• 1 qarar turı - başqa oyuncuğa qarşı bir token qoyuñız: '[<opp-id> cooperate]' yada '[<opp-id> defect]' (yani '[1 defect] [2 cooperate]'; susma 'cooperate'). \nCütlerge qarşı ödemeler cedveli (her bir tertipsiz cüte tatbik etile):\n  - Eki de işbirliği yapqan -> {reward}\n  - Eki de defekt etken -> {punishment}\n  - Siz defekt etken, olar işbirliği yapqan -> {temptation}\n  - Siz işbirliği yapqan, olar defekt etken -> {sucker}\nBütün turlardan soñ en yuqarı ballı oyuncu(lar) ğalebe qazana."
+  },
+  "round": {
+    "start": "─── {round} Turu Başlayır ───\tSiz soñraki {conv_rounds} turda serbestçe söyleşe bilirsiniz.",
+    "chat_finished": "Tur {round} içün söyleşme bitken. Qararlarıñıznı, bir token başqa oyuncuğa qarşı: `[pid cooperate]` yada `[pid defect]`."
+  },
+  "results": {
+    "header": "### {round} Turu - Neticeler:",
+    "pair_line": "{observation}\n\t Oyuncu {i} Oyuncu {j} qarşısında {choice_i} ve {choice_j} seçti (Oyuncu {i} {gain_i} qazandı, Oyuncu {j} {gain_j} qazandı)",
+    "scores_open": "{observation}\n-> Şuanki ballar: ",
+    "score_first": "{observation}Oyuncu {player_id} ({score})",
+    "score_next": "{observation}; Oyuncu {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Nihai ballar: {scores}.  Sıralama grupları (en kötünden→en iyisine): {groups}"
+  }
+}

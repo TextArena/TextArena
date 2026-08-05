@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "თქვენ ხართ მოთამაშე {player_id} ინდური პოკერის თამაშში.\n- 52 კარტის კოლოდა; თქვენ ხედავთ მხოლოდ მეტოქის კარტს.\n- ანტე {ante} ფიშკა(ები) ყოველ რაუნდში, {max_rounds} რაუნდი სულ.\n- კანონიერი სვლები: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X არის დადებითი მთელი რიცხვი, რომელიც არ აღემატება თქვენს ფიშკების რაოდს.)\n- ყველაზე მაღალი დამალული კარტა გადაწყვეტს ფსონს შოუდაუნში.\n"
+  },
+  "round": {
+    "announce": "### რაუნდი {current_round}/{max_rounds} თქვენი მეტოქის ბარათი არის: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "მიწოდება ზუსტად ერთი კოლოფის ფარგლებში, მაგალითად, \"[check]\", \"[bet 2]\", \"[call]\", \"[raise 3]\" ან \"[fold]\".",
+    "cannot_check": "ვერ [check] - თქვენ აპირებთ ფსონს.",
+    "amount_min": "ფსონის / გაზრდის ოდენობა უნდა იყოს ≥ 1.",
+    "cannot_bet": "არ შეიძლება [bet] - უნდა [call] / [raise] / [fold].",
+    "nothing_to_call": "არაფერი, რომ დარეკოთ; თქვენ შეგიძლიათ [check] ამის ნაცვლად.",
+    "no_bet_to_raise": "გამოიყენეთ [bet X] გახსნისთვის; არ არის ფსონის გაზრდა.",
+    "insufficient": "ფიშკები არასაკმარისია ამ მოქმედებისთვის."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "\"[check]\", \"[bet X]\"",
+    "actions_facing_bet": "\"[call]\" (ღირებულება {to_call}), \"[raise X]\", \"[fold]\"",
+    "possible_actions": "თქვენი შესაძლო ქმედებები: {legal}"
+  },
+  "message": {
+    "round_result": "{reason} Pot {pot} → Player {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "მოთამაშე {player_id} დატოვა.",
+    "showdown_win": "დაპირისპირება: {card_win} ურტყამს {card_lose}-ს.",
+    "showdown_tie": "დოუდაუნის ფრედ: ორივე {card}. ქვაბი გაყოფილი  თითოეული იღებს {split}."
+  },
+  "outcome": {
+    "p0_wins": "მოთამაშე 0 იგებს ({bank0} > {bank1})",
+    "p1_wins": "მოთამაშე 1 იგებს ({bank1} > {bank0})",
+    "draw": "თანაბარი ჩიპები ყველა რაუნდის შემდეგ"
+  }
+}

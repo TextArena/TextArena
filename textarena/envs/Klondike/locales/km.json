@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "អ្នកកំពុងលេងការប្រកួតកាត Klondike Solitaire។ គោលដៅរបស់អ្នកគឺចល័តកាតទាំងអស់ទៅកាន់ផ្ទះមូលដ្ឋាន។\n\nច្បាប់លេង៖\n- ផ្ទះមូលដ្ឋាន (F1-F4)៖ សាងសង់ឡើងពី Ace ទៅ King ក្នុងសំណុំ\n- ផ្ទះតុ (T1-T7)៖ សាងសង់ចុះតាមពណ៌ផ្លាស់ប្តូរ (ក្រហមលើខ្មៅ ខ្មៅលើក្រហម)\n- ស្តុក៖ ទាក់កាតទៅកាន់ផ្ទះរុករក\n- រុករក (W)៖ កាតកំពូលអាចប្រើបានសម្រាប់លេង\n\nការបញ្ជា៖\n- 'draw' - ទាក់កាតពីស្តុកទៅរុករក\n- 'move <source> <destination> [count]' - ចល័តកាតរវាងផ្ទះ\n ឧទាហរណ៍៖ 'move W T1', 'move T1 F2', 'move T3 T5 2'។ count ក៏អាចជា 'all' ដែលនឹងព្យាយាមចល័តកាតទាំងអស់ដែលមើលឃើញ។\n- 'forfeit' - បញ្ចប់ការប្រកួតភ្លាមៗ និងចាក់ស្ករកម្រិតបច្ចុប្បន្នរបស់អ្នក\n- ឈ្មោះផ្ទះ៖ W (រុករក)  F1-F4 (មូលដ្ឋាន)  T1-T7 (តុ)\n\nអ្នកអាចប្រតិបត្តិការជាច្រើននៅក្នុងមួយជំហានដោយបំបែកពួកវាដោយការរៀបរាប់៖\n ឧទាហរណ៍៖ 'draw, move W T1, move T2 F1'\n\nតែស្តេចប៉ុណ្ណោះដែលអាចតម្កល់ទុកលើផ្ទះតុង់ទំនាក់។\nសកម្មភាពប្រតិបត្តិការក្នុងលំដាប់ - ប្រសិនបើមួយរយៈពេលមួយបរាជ័យ ការសកម្មភាពដែលនៅសល់ត្រូវបានលើកលែង។\nប្រើ 'forfeit' ប្រសិនបើអ្នកជឿថា ការប្រកួតនេះមិនអាចឈ្នះបាន។"
+  },
+  "format_error": {
+    "no_brackets": "រូបមន្តសកម្មភាពមិនត្រឹមត្រូវ សកម្មភាពត្រូវស្ថិតនៅក្នុងក្របខ័ណ្ឌ",
+    "no_closing_bracket": "រូបមន្តសកម្មភាពមិនត្រឹមត្រូវ. ខ្វះខាតក្របខ័ណ្ឌបិទ ']'",
+    "empty_command": "បញ្ជាគ្មានអ្វី។ Type \"draw\" ឬ \"move <source> <destination> [count]\"",
+    "empty_action": "សកម្មភាពគ្មានអ្វី",
+    "move_needs_args": "បញ្ជាផ្លាស់ទីត្រូវការប្រភព និងគោលដៅ។ ប្រើប្រាស់: 'move <source> <destination> [count]'",
+    "count_positive": "ចំនួនត្រូវតែជាវិជ្ជមាន ឬ 'all'",
+    "count_invalid": "ចំនួនមិនត្រឹមត្រូវ។ ប្រើប្រាស់លេខ ឬ 'all'",
+    "unknown_command": "បញ្ជាមិនស្គាល់ '{cmd}'. ប្រើ 'draw', 'move <source> <destination> [count]', ឬ 'forfeit'",
+    "wrapped": "សកម្មភាព {n}: {msg}"
+  },
+  "action_result": {
+    "success": "សកម្មភាព {n}: {msg}",
+    "before_failure": "អនុវត្តន៍ {n} សកម្មភាព (s) មុនពេលបរាជ័យ។",
+    "failed": "ការប្តឹង {n} បរាជ័យ: {msg}"
+  },
+  "move_result": {
+    "drew": "បានដកកាតពីហាងលក់ដូរទៅជាអាវុធ។",
+    "cannot_draw": "មិនអាចទាញបាន។ ស្តុក និងកាកបំណះទាំងពីរស្ទើរតែនៅទទេ។",
+    "invalid_pile": "ឈ្មោះបាតមិនត្រឹមត្រូវ: ប្រើ W, F1-F4 ឬ T1-T7",
+    "foundation_one_card": "អាចចល័តបានតែ 1 កាតទៅមូលដ្ឋាន",
+    "waste_to_foundation_ok": "ប័ណ្ណដែលត្រូវបានផ្លាស់ប្តូរពីសំណល់ទៅមូលដ្ឋាន F{dst}",
+    "waste_to_foundation_bad": "មិនអាចចល័តកាតអាកាសធាតុទៅជាគំនរមូលដ្ឋាននោះបាន",
+    "tableau_to_foundation_ok": "បានផ្លាស់ប្តូរកាតពីតារាង T{src} ទៅមូលដ្ឋាន F{dst}",
+    "tableau_to_foundation_bad": "មិនអាចចល័តកាតតូបែលទៅជាគំនរមូលដ្ឋាននោះបាន",
+    "foundation_to_foundation": "មិនអាចផ្លាស់ពីមូលដ្ឋានទៅមូលដ្ឋានបាន",
+    "waste_to_tableau_one_card": "អាចចល័តកាត 1 ប៉ុណ្ណោះពីការបំផ្លាញទៅតូប",
+    "waste_to_tableau_ok": "ប័ណ្ណដែលត្រូវបានផ្លាស់ប្តូរពីសំណល់ទៅតារាង T{dst}",
+    "waste_to_tableau_bad": "មិនអាចដាក់កាតអាកាសធាតុទៅលើគំនរតារាងនោះបាន",
+    "no_face_up": "គ្មានកាតដែលបិទទ្វារ ដើម្បីផ្លាស់ប្តូរ",
+    "tableau_to_tableau_ok": "ផ្លាស់ប្តូរ {count} កាត (s) ពី តារាង T{src} ទៅ T{dst}",
+    "tableau_to_tableau_bad": "មិនអាចផ្លាស់ប្តូរ {count} កាត (s) ពី T{src} ទៅ T{dst}",
+    "foundation_to_tableau_one_card": "អាចចល័តកាត 1 ប៉ុណ្ណោះពីមូលដ្ឋានទៅតូប",
+    "foundation_empty": "មូលដ្ឋាន F{src} គឺគ្មាន",
+    "foundation_to_tableau_ok": "បានផ្លាស់ប្តូរកាតពីមូលដ្ឋាន F{src} ទៅតារាង T{dst}",
+    "foundation_to_tableau_bad": "មិនអាចដាក់កាតមូលដ្ឋាននៅលើតារាង T{dst}",
+    "to_waste_or_stock": "មិនអាចផ្ទេរទៅជាអាកាសធាតុ ឬធនធាន"
+  },
+  "outcome": {
+    "forfeit": "ការប្រកួតបានបាត់បង់លទ្ធផលចុងក្រោយ: {score} កាតនៅក្នុងមូលដ្ឋាន។",
+    "won": "សូមអបអរសាទរ! អ្នកបានឈ្នះ Klondike Solitaire!",
+    "turn_limit": "ការប្រកួតបានបញ្ចប់! អ្នកបានឈានដល់កម្រិតខ្ពស់បំផុតនៃ {max_turns} ប្តូរ. ពិន្ទុ: {score} កាតនៅក្នុងមូលដ្ឋាន."
+  },
+  "board": {
+    "title": "=== ក្លុងឌាយ សូលីតេរ៍ ===",
+    "turn": "ប្តូរ: {turn}/{max_turns}",
+    "stock": "ហាង: {stock} កាត",
+    "waste": "កាកសំណល់ (W): {waste}",
+    "foundations_header": "មូលនិធិ:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "តារាង:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "_comment": "Localización en español de LetterAuction. Las claves (izquierda) son fijas; traduce solo los valores (derecha). Conserva cada {placeholder} tal cual. Los números de jugador, los tokens de letra ({letter}), las cantidades de monedas/números y los ejemplos entre corchetes ([bid 2], [pass], [dog], [Game]) son sintaxis neutral del juego y deben permanecer sin cambios.",
+  "_slots": {
+    "{player_id}": "Un número de jugador (0 o 1)",
+    "{opponent_id}": "El número del otro jugador (0 o 1)",
+    "{current_player}": "El jugador cuyo turno es el siguiente (0 o 1)",
+    "{coins}": "Las monedas restantes de un jugador (entero)",
+    "{letters}": "Las letras reunidas por un jugador (una lista, p. ej. [] o ['A', 'B'])",
+    "{letter}": "La letra individual subastada (un token del juego, no traducir)",
+    "{bid_amount}": "Una cantidad de monedas ofertadas (entero)",
+    "{current_bid}": "La puja más alta actual a superar (entero)",
+    "{action}": "La cadena de acción sin procesar enviada por el jugador",
+    "{word}": "Una palabra enviada por un jugador (un token del juego, no traducir)",
+    "{word_value}": "El valor de puntuación de una palabra enviada (entero)",
+    "{score}": "La puntuación final de palabra de un jugador (entero)",
+    "{cont}": "Un mensaje de continuación neutral (ya localizado; no traducir)"
+  },
+
+  "prompt": {
+    "intro": "Eres el Jugador {player_id}. Actualmente estás en el juego Letter Auction.\nEl objetivo del juego es pujar estratégicamente por letras para formar la palabra de mayor valor. Así funciona el juego.\nDebes escuchar al maestro del juego para recibir orientación sobre cómo jugar.\nEl juego consta de una serie de rondas. En cada ronda se subastará una letra.\nPuedes pujar por la letra usando tus monedas. El jugador con la puja más alta gana la letra.\nLa letra se añadirá a tu colección y las monedas que pujes se descontarán de tu total.\nEsta puja de letras se repetirá hasta que todas las letras hayan sido subastadas. No se te recompensa por ahorrar monedas.\nDespués de que todas las letras hayan sido subastadas, usarás las letras para formar la palabra de mayor valor con las letras ganadas.\nEl jugador con la palabra de mayor valor gana el juego.\nSi quieres pujar, envía tu cantidad de puja entre corchetes como [bid 2] o [bid 10].\nSi no quieres pujar, envía [pass].\nPara el envío de la palabra de mayor valor, se te pedirá al final del juego que la envíes entre corchetes como [dog].\nAquí tienes tu información inicial:\nTus monedas actuales: {coins}\nTus letras actuales: {letters}\n\n[Game] El Jugador 0 irá primero. La primera letra para pujar: {letter}.\nLa puja inicial es de {bid_amount} moneda. Puedes pujar cualquier cantidad de monedas o elegir no pujar.\n"
+  },
+
+  "invalid": {
+    "bad_bid_format": "Acción no válida: {action}. Por favor, introduce una acción válida: '[bid <amount>]' o '[pass]'.",
+    "bad_word_format": "Acción no válida: {action}. Por favor, introduce una acción válida: '[<word>]'.",
+    "not_enough_coins": "Puja no válida: {bid_amount}. No tienes suficientes monedas.",
+    "bid_too_low": "Puja no válida: {bid_amount}. Debes pujar más que la puja actual de {current_bid}.",
+    "not_a_word": "Palabra no válida: {word}. Por favor, introduce una palabra española válida.",
+    "missing_letter": "Palabra no válida: {word}. No tienes la letra '{letter}'."
+  },
+
+  "turn": {
+    "bid_more": " Jugador {current_player}, ¿quieres pujar por la letra '{letter}' por más de {bid_amount}?",
+    "start_bid": " Jugador {current_player}, ¿quieres iniciar la puja por la letra '{letter}' por {bid_amount}?",
+    "auction_over": "La subasta ha terminado. Ahora, los jugadores usarán las letras que han ganado para formar la palabra de mayor valor con las letras ganadas. El jugador con la palabra de mayor valor gana el juego. Para enviar la palabra, envíala entre corchetes como [dog]."
+  },
+
+  "auction": {
+    "pass": "El Jugador {player_id} pasa de la letra '{letter}'.{cont}",
+    "pass_opp_wins": "El Jugador {player_id} pasa de la letra '{letter}'. El Jugador {opponent_id} obtendrá '{letter}' por {bid_amount}.{cont}",
+    "pass_both": "El Jugador {player_id} pasa de la letra '{letter}'. El Jugador {opponent_id} también pasa de la letra '{letter}'. Así que nadie obtendrá la letra.{cont}",
+    "bid": "El Jugador {player_id} puja {bid_amount} por la letra '{letter}'.{cont}",
+    "bid_opp_pass": "El Jugador {player_id} puja {bid_amount} por la letra '{letter}'. Como el Jugador {opponent_id} pasa de la letra '{letter}', el Jugador {player_id} la obtendrá por {bid_amount}.{cont}"
+  },
+
+  "word": {
+    "chosen": "El Jugador {player_id} elige la palabra '{word}' con un valor de {word_value}."
+  },
+
+  "outcome": {
+    "win": "El Jugador {player_id} gana con una puntuación de {score}",
+    "draw": "¡Es un empate!"
+  }
+}

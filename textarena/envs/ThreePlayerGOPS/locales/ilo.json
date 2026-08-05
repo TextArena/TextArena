@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Sika ti Player {player_id} iti Three-Player GOPS.\n- Agkawkaw mo dagiti 13 a karta A-K (kada maysa a karta, eksakto laeng maysa).\n- Iti kada round, maiyebkas ti maysa a prize. Isubmit mo ti MAYSa a karta a kas `[Q]`, `[10]`, `[2]` …\n- Ti kangatuan a karta ti mangabak ti prize (+ aniaman a naikarga a pot). Dagiti ties ket agpapalayaw ti prize iti sumaruno a round.\n- Kalpasan dagiti 13 a round, ti kangatuan a total ti mangabak. Dagiti invalid a moves = eliminasyon."
+  },
+  "round": {
+    "header": "### Rondada {round}/13 - Premio: {prize} (nalaka {worth})",
+    "hand": "Ti nabati nga imam: {hand}"
+  },
+  "reveal": {
+    "win": "Dagiti bid  {bids} - Mangabak ti Player {winner} {pot}.",
+    "tie": "Dagiti bid  {bids} - tie, pot ita {pot}.",
+    "scores": "Dagiti marka → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "ti tignay ket kasapulanna iti naikabil a kard nga addaan kadagiti kurtina, a kasla \"[Q]\"",
+    "bad_card": "nausaren wenno saan nga umiso a kard"
+  },
+  "elimination": {
+    "player": "Nailaksid ti agay-ayam {pid} kalpasan a naminsan pay nga awanen ti pategna."
+  },
+  "outcome": {
+    "auto_win": "Dua a manay-ayam ti naikkat - automatiko nga agballigi.",
+    "final": "Dagiti maudi a puntos: {scores}"
+  }
+}

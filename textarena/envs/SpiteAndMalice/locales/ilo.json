@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Sika ti Player {player_id} iti maysa a duwa a pammalag ti Spite ken Malice. Ti gannuatmo ket agbalin a mauna a maikkat ti payoff pilemo.\n\n### Pakaammo ti Pammalag:\n- Ti gannuat ket agikkat ti payoff pilemo babaen ti panagpammalag kadagiti karta iti sentro a pammalag.\n- Mabalinmo a pammalag kadagiti karta manipud iti tallo a taudan:\n  1. Ti **imakam** (agrukodka iti kada panaglukat ti agingga iti 5 a karta iti imakam).\n  2. Ti **ngato a karta ti payoff pilemo**.\n  3. Ti **ngato a karta ti aniaman kadagiti discard pilemo**.\n\n### Dagiti Alagaden ti Panagpammalag:\n- Mabalinmo a pammalag ti maysa a karta iti sentro a pammalag no daytoy ket **maysa a ranggo nga ngato** ngem ti ngato a karta iti dayta a pammalag (dagiti sentro a pammalag ket agrukod iti Ace ken agpangato iti Queen; dagiti Kings ket wild - mabalin a pammalag iti aniaman a karta ngem saan a baliwan ti ranggo a sekwen. Daytoy ket kayatna a sawen no usaren ti maysa a King kalpasan ti 4, daytoy a King ket ranggo a 5 ken ti sumunod a karta ket nasken a 6).\n- No saanmo a mabalin a pammalag ti aniaman a karta, nasken a **ikkaten ti maysa a karta** iti maysa kadagiti discard pilemo tapno makalpas ti panaglukatmo.\n- No makarukod ti maysa a sentro a pammalag iti Queen, daytoy ket maikkat a automatiko.\n- Ti ranggo a sekwen ket: A=1, 2=2, ..., 9=9, J=10, Q=11, K a kas wild.\n\n### Dagiti Aramid:\n1. **Aganid**: Iti rugi ti panaglukatmo, aganid kadagiti karta tapno mapuno ti imakam agingga iti 5 a karta. Ikkat **[draw]** tapno rugian.\n2. **Pammalag ti Karta**: Tapno pammalag ti maysa a karta, spesipikaen ti karta ken ti sentro a pammalag a kas iti: **[play A♠ 0]** (nga 'A♠' ket ti karta ken '0' ket ti indeks ti sentro a pammalag).\n3. **Ikkat**: No saanmo a mabalin a pammalag ti aniaman a karta, ikkat ti maysa a karta manipud iti imakam iti maysa a discard pile tapno makalpas ti panaglukatmo. Ikkat **[discard A♠ 1]** (nga 'A♠' ket ti karta ken '1' ket ti indeks ti discard pile). Kumbagar a saan a mabalin a ikkat ti aniaman a karta manipud iti payoff pile. Mabalinmo laeng a ikkat ti karta manipud iti imakam.\n\n"
+  },
+  "board": {
+    "current_board": "Dagiti Agdama a Papan:\n\n{board}\nDagiti Adda a Mugimugen: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Dagiti Central a Pila --- ",
+    "pile": "{observation}Paka {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Ti Panakaiw ti Player {player_id} ---\n",
+    "payoff": "{observation}Payoff a Paka (Ngato a Kard): {top_card}, Kaatiddog ti Payoff a Paka: {payoff_length}\n",
+    "hand": "{observation}Kamot: {hand}\n",
+    "discard": "{observation}Tumpaw a Paka: {discard}\n",
+    "empty": "Awan ti nagyananna."
+  },
+  "game_message": {
+    "no_cards_left": "Awanen dagiti kard a mabalin nga usaren. Laglagipenyo a mabalinanyo ti agputar kadagiti kard manipud kadagitoy: 1. Ti ima**mo 2. Ti kangatuan a kard iti pagbayad mo.* 3. Ti kangrunaan a kard ti aniaman kadagiti saanmon a mausar* *"
+  },
+  "invalid_move": {
+    "wrong_format": "Saan a maitutop nga agpang. Ti agay-ayam {player_id} ket saan a simmungbat babaen ti maysa a napudno a panagpang iti kuadrado a kurtina.",
+    "invalid_play": "Saanko a paglilad. Ti Player {player_id} ket nangilad iti {card} iti sentro a paka {index}.",
+    "discard_from_payoff": "Saan a maitutop nga panangibelleng. Ti agay-ayam {player_id} pinadasna ti mangibellengan iti maysa a kard manipud kadagiti pagbayadanna.",
+    "discard_not_in_hand": "Saan a maitutop nga panangibelleng. Ti agay-ayam {player_id} pinadasna ti mangibellengan iti kard a saan nga adda iti imana.",
+    "wrong_move_type": "Saan a maiparbeng nga aglukat ti kita. Ti agay-ayam {player_id} ket saan a simmungbat babaen iti napudno a panaglukat a tipo."
+  },
+  "game_action": {
+    "you_drew": "Nangala ka kadagiti karta.",
+    "opponent_drew": "Nagpartuat ti agay-ayam {player_id} kadagiti kard.",
+    "you_played": "Nagtokarka iti {card} idiay tengnga a pila ti {index}.",
+    "opponent_played": "Ti Player {player_id} ket nangilad iti {card} iti sentro a paka {index}.",
+    "you_discarded": "Natinawid mo ti {card} iti tumpaw a paka {index}, a daytoy ket signifikado a naikkatmo met ti turnom. Awan pay sabali a mugimugen yo a maikonsidera para iti daytoy a turn. Ti Player {next_player_id} ti sumango.",
+    "opponent_discarded": "Ti Player {player_id} ket tinawid ni {card} iti tumpaw a paka {index}, a daytoy ket signifikado a naikkatna met ti turnona. Awan pay sabali a mugimugen ti Player {player_id} a maikonsidera para iti daytoy a turn. Ti Player {next_player_id}, kayat mo ti sumango iti mugimugen yo iti formato [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Ti Player {current_player} ket naikkatna ti payoff a paka! Ti Player {current_player} ket agnanaak!",
+    "deadlock_player_0": "Naabotan ti deadlock! Ti Player 0 ket agnanaak iti {player_0_payoff} a kard ket atatiddog vs ti {player_1_payoff} a kard ti Player 1.",
+    "deadlock_player_1": "Naabotan ti deadlock! Ti Player 1 ket agnanaak iti {player_1_payoff} a kard ket atatiddog vs ti {player_0_payoff} a kard ti Player 0.",
+    "deadlock_tie": "Nakarukod ti deadlock iti tie! Dagiti dua a player ket addaan iti {player_0_payoff} a karta a nabati. Ti Player {current_player} ti nagabak babaen ti default."
+  }
+}

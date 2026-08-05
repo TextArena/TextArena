@@ -1,0 +1,26 @@
+{
+  "_comment": "Set-Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel, nur die Werte. Behalte jeden {platzhalter} exakt bei. Übersetze NICHT die Karten-Attributwörter (one/two/three, red/green/purple, open/striped/solid, oval/diamond/squiggle) in den Beispielen, die Klammer-Beispiele wie [1, 4, 11] / [2, 4, 8] / [card1, card2, card3], die ASCII-Kopfzeile '=== BRETT ===' oder das Wort 'Set' als Spiel-/Fachbegriff. Die Brett-Zeilen ({rows}) werden vom Spiel erzeugt und sind neutral.",
+  "_slots": {
+    "{rows}": "Vom Spiel erzeugte, neutrale nummerierte Kartenliste (jede Zeile 'index: number color fill shape'); nicht übersetzen",
+    "{cards_dealt}": "Anzahl der zusätzlich ausgeteilten Karten (eine Ganzzahl)",
+    "{max_idx}": "Der höchste gültige Kartenindex auf dem Brett (eine Ganzzahl)"
+  },
+  "player_prompt": {
+    "intro": "Du spielst ein Einzelspieler-Spiel von Set. Dein Ziel ist es, in 20 Zügen so viele Sets wie möglich zu finden, ohne Fehler zu machen. Das Brett enthält eine nummerierte Liste von 12 oder mehr Karten mit (Anzahl, Farbe, Füllung, Form). Ein Set besteht aus 3 Karten, bei denen für jedes Attribut alle 3 gleich oder alle 3 verschieden sind. Zum Beispiel wären 'one red open squiggle', 'two green open squiggle', 'three purple open squiggle' ein Set. In jedem Zug wählst du anhand ihres nummerierten Index eine Liste von 3 Karten vom Brett aus. Zum Beispiel \"[1, 4, 11]\". Ist es ein Set, punktest du und die Karten werden ersetzt. Ist es kein Set, war dieser Zug vergeudet. Das Spiel endet, wenn dir die Züge ausgehen. Du MUSST deine Karten in Klammern angeben, wie [2, 4, 8], sonst werden sie nicht erkannt."
+  },
+  "board": {
+    "state": "=== BOARD ==={rows}"
+  },
+  "game_message": {
+    "dealt_cards": "Keine gültigen Sets auf dem Brett gefunden. {cards_dealt} zusätzliche Karten ausgeteilt.",
+    "found_set": "Du hast ein Set gefunden! +1 Punkt!",
+    "not_a_set": "Das ist kein Set. Kein Punkt für dich."
+  },
+  "invalid_move": {
+    "wrong_format": "Ungültiges Aktionsformat. Gib eine Liste von Ganzzahlen an, wie [card1, card2, card3].",
+    "out_of_range": "Ungültige Aktion. Die Kartenindizes müssen zwischen 1 und {max_idx} liegen."
+  },
+  "outcome": {
+    "game_over": "Du hast 20 Züge gemacht. Das Spiel ist vorbei."
+  }
+}

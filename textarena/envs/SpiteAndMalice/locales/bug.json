@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Sibawa Player {player_id} ri laro Spite and Malice. Tujuanmu iya makkeda palaro payoff pilemu.\n\n### Gambaran Laro:\n- Tujuan iya makkeda payoff pilemu dengan maen kartu ri center piles.\n- Kau bisa maen kartu dari tiga sumber:\n  1. **Tanganmu** (kau mulai setiap giliran dengan sampai 5 kartu di tangan).\n  2. **Kartu atas payoff pilemu**.\n  3. **Kartu atas salah satu discard pilesmu**.\n\n### Aturan Maen:\n- Kau bisa maen kartu ri center pile jika iya **satu tingkat lebih tinggi** dari kartu atas ri pile itu (center piles mulai dengan Ace dan naik sampai Queen; Kings iya wild - bisa dimaenkan di atas kartu apa saja tapi tidak mengubah urutan tingkat. Ini berarti jika King digunakan setelah 4, maka King itu iya tingkat 5 dan kartu berikutnya harus iya 6).\n- Jika kau tidak bisa maen kartu lagi, kau harus **membuang kartu** ri salah satu discard pilesmu untuk mengakhiri giliranmu.\n- Jika center pile mencapai Queen, iya akan dibersihkan secara otomatis.\n- Urutan tingkat iya: A=1, 2=2, ..., 9=9, J=10, Q=11, K sebagai wild.\n\n### Aksi:\n1. **Menggambar**: Di awal giliranmu, menggambar kartu untuk mengisi tanganmu sampai 5 kartu. Masukkan **[draw]** untuk memulai.\n2. **Maen Kartu**: Untuk maen kartu, tentukan kartu dan center pile seperti ini: **[play A♠ 0]** (di mana 'A♠' iya kartu dan '0' iya indeks center pile).\n3. **Membuang**: Jika kau tidak bisa maen kartu lagi, membuang kartu dari tanganmu ri discard pile untuk mengakhiri giliranmu. Masukkan **[discard A♠ 1]** (di mana 'A♠' iya kartu dan '1' iya indeks discard pile). Perhatikan bahwa kau tidak bisa membuang kartu dari payoff pile. Kau hanya bisa membuang kartu dari tanganmu.\n\n"
+  },
+  "board": {
+    "current_board": "Papan Saaran:\n\n{board}\nGerakkan Yang Tersedia: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pile tengngae -- ",
+    "pile": "{observation}Tumpukan {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Tampilan Player {player_id} ---\n",
+    "payoff": "{observation}Tumpukan Bayaran (Kartu Teratas): {top_card}, Panjang Tumpukan Bayaran: {payoff_length}\n",
+    "hand": "{observation}Tangnga: {hand} ",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "Temmanggi'na"
+  },
+  "game_message": {
+    "no_cards_left": "De'na gaga kartu laing untu' ripigau. Engngerangngi weddikko mappuasangi kartu pole iyyae sumber: 1. *tanganmu.* 2. **kartu kaminang matanre pole tumpukan pabbere** 3. *karta kaminang tanre pole risininna tumpukenna paccalla* ."
+  },
+  "invalid_move": {
+    "wrong_format": "Format gerak iya de'na valid. Pemuter {player_id} tidak menanggapi dengan gerakan yang valid dalam kurung kotak.",
+    "invalid_play": "Gerakan tidak valid. Pemain {player_id} mencoba memainkan {card} di tumpukan tengah {index}.",
+    "discard_from_payoff": "Najajiangngi de'na ullei. Pemae {player_id} nacoba mappuasai seddi kartu pole ri tumpukan appalangnge.",
+    "discard_not_in_hand": "Nalempuri de'na ullei. Pemaen {player_id} nacoba mappurai kartu iya denae ri tanganna.",
+    "wrong_move_type": "Jenis gerak iya ga valid. Pemain {player_id} tidak menanggapi dengan jenis gerak yang valid."
+  },
+  "game_action": {
+    "you_drew": "Iko mappuada.",
+    "opponent_drew": "Pemilue {player_id} nalai kartu.",
+    "you_played": "Mupaggoppoi {card} ri tengngaana pile'e {index}.",
+    "opponent_played": "Pelari {player_id} maenngi ri {card} pile tengngae {index}.",
+    "you_discarded": "Kau membuang {card} ke discard pile {index}, yang juga berarti kau mengakhiri giliranmu. Tidak ada aksi lainmu yang dipertimbangkan untuk giliran ini. Player {next_player_id} akan bermain selanjutnya.",
+    "opponent_discarded": "Pemain {player_id} makkalu {card} ri tumpukan buang {index}, iya esso nakkalu pakkaluwanna turnna. Tenai pakkaluwanna Pemain {player_id} ripakkaluwangi turniwiwi. Pemain {next_player_id}, iko makkaluiwiwi. Tulungiwiwi pakkaluwanna actionmu ri format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Pemain {current_player} telah menyelesaikan tumpukan bayaran mereka! Pemain {current_player} menang!",
+    "deadlock_player_0": "Jalan buntu tercapai! Pemain 0 menang dengan {player_0_payoff} kartu tersisa vs Pemain 1's {player_1_payoff} kartu.",
+    "deadlock_player_1": "Jalan buntu tercapai! Pemain 1 menang dengan {player_1_payoff} kartu tersisa vs Pemain 0's {player_0_payoff} kartu.",
+    "deadlock_tie": "Kondisi seri tercapai dengan hasil seri! Kedua pemain memiliki {player_0_payoff} kartu tersisa. Player {current_player} menang secara default."
+  }
+}

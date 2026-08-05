@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Uri Mchezaji {player_id} mukati me michezo ye LinesOfAction.\nMaseza ako ndi '{side}', maseza e nhamussua ndi '{other}'.\nMfumo we kuenda: `[b1b3]` (kuratidzwa kwe kuendeswa kwa mchezaji). Kuenda kwakabvumidzwa kunofamba kwa mwelekeo wa mlalo, wemusoro, kana diagonal, kwa idadi ye miraba inofanana ne jumla ye maseza (ye ruvara rese) mukati me mstari uyo. Unaweza kudarika maseza ako, asi maseza e nhamussua; kugara pamusoro pe mchezaji we nhamussua kunomukamata.  Uhwine mukati me maseza ako yose akabatana."
+  },
+  "board": {
+    "current_board": "Dare: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Chimiro chinofanira kuva e2e4 (kubva,kuenda kunzvimbo).",
+    "no_piece": "Hapana {side} chidimbu pa {coord}.",
+    "identical": "Kwakabva uye kwaienda zvakafanana.",
+    "not_straight_or_diagonal": "Kufamba kunofanira kuva kwakarurama kana kuti kwakaganhurirwa.",
+    "wrong_distance": "Inofanira kufamba chinhambwe chakaenzana nezvidimbu zviri mumutsetse.",
+    "enemy_blocks": "Chidimbu chomuvengi chinovhara nzira.",
+    "destination_own": "Nzvimbo yainogara nhengo yomunhu oga."
+  },
+  "game_action": {
+    "moved": "Mwari {player_id} akatsonga {from} -> {to}",
+    "captured_suffix": "Mwari {player_id} akatsonga {from} -> {to} akapota mwari wevamwe."
+  },
+  "outcome": {
+    "win": "Zvinhu zvose zvakabatana.",
+    "draw_no_capture": "Kufamba 60 pasina kubata.",
+    "draw_repetition": "Nzvimbo inodzokororwa katatu."
+  }
+}

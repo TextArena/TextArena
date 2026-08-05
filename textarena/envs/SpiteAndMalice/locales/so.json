@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Waxaad tahay Ciyaaryahan {player_id} oo ah ciyaar laba ciyaaryahan ah ee Spite and Malice. Golihii aad u haya waa inaad noqotid ugu horeysay inaad dhamaatid kaarada dambiga bixinta.\n\n### Sharaxaada Ciyaarta:\n- Haddaafku waa inaad dhamaatid dambiga bixinta kaaradaada si aad ugu ciyaaro kaaradaha dhexe.\n- Waxaad ciyaaraysan kartaa kaaradahaa saddex meheradood:\n  1. **Gacanta** (waxaad bilaabaysaa tur aad ugu badnaan 5 kaarood gacanta).\n  2. **Kaarada ugu sarreeya ee dambiga bixinta**.\n  3. **Kaarada ugu sarreeya ee mid ka mid ah dambiyada dhamaan**.\n\n### Sharciyada Ciyaarta:\n- Waxaad ciyaaraysan kartaa kaarad ku dambiga dhexe haddii ay tahay **darajo kooban** ka kaarada ugu sarreeya ee dambiga (dambiyaasha dhexdeeda waxay bilaabmaan Ace iyo waxay koobnaan Queen; Boqoradu waa kuwa ugu walba - waxay ciyaaraysan kartaa kaarad kasta laakiin waxay u beddelaan darajada ugu xigay.\n- Haddii aadan ciyaaraysan kartiin kaarad kale, waxaad **dhamaan kartaa** ka mid ka mid ah dambiyada dhamaan si aad ugu dhameysid tur.\n- Haddii dambiga dhexdeeda gaaro Queen, waxay dhamaanaysaa otomaatigii.\n- Darajada ugu xigay waa: A=1, 2=2, ..., 9=9, J=10, Q=11, K oo ah mid walba.\n\n### Falalka:\n1. **Cin**: Waagii turkaaga, cin kaarad si aad ugu buuxi gacanta ilaa 5 kaarood. Gali **[draw]** si aad bilaabdo.\n2. **Ciyaar kaarad**: Si aad u ciyaaro kaarad, sheeg kaarada iyo dambiga dhexe sida: **[play A♠ 0]** (haddii 'A♠' waa kaarada iyo '0' waa indekska dambiga dhexdeeda).\n3. **Dhamaan**: Haddii aadan ciyaaraysan kartiin kaarad kale, dhamaan kaarad gacantaada si aad ugu dhameysid tur. Gali **[discard A♠ 1]** (haddii 'A♠' waa kaarada iyo '1' waa indekska dambiyada dhamaan). Tuu waxaad u maleysan kartiin kaarad kasta oo ka mid ah dambiga bixinta. Waxaad u maleysan kartaa kaaradaha gacantaada.\n\n"
+  },
+  "board": {
+    "current_board": "Guddiga hadda jira: {board} Dhaqdhaqaaqyada la heli karo: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Xarunta Xuddunta --- ",
+    "pile": "{observation}Dhacdada {i}: {pile} ",
+    "player_view_header": "{observation} --- Muuqaalka ciyaaryahanka {player_id}",
+    "payoff": "{observation}Dhawrka Dhaxalka (Kaarka Ugu Sareeya): {top_card}, Dhererka Dhawrka Dhaxalka: {payoff_length}\n",
+    "hand": "{observation}Gacan: {hand}\n",
+    "discard": "{observation}Dib u tuurida: {discard} ",
+    "empty": "Madhan yahay"
+  },
+  "game_message": {
+    "no_cards_left": "Ma jiraan wax kaarar ah oo aad ka soo saari karto. Xusuusnow inaad ka ciyaari karto kaararka ilahaas: 1. Gacantaada. 2. Kaarka ugu sareeya ee kubbadaada lacag bixinta. 3. Kaarka ugu sareeya ee kubbadaada la tuuro."
+  },
+  "invalid_move": {
+    "wrong_format": "Qaabka dhaqaaq aan sax ahayn. Ciyaaryahanka {player_id} ma uusan ka jawaabin dhaqaaq sax ah oo ku jira qaybo isku wareegsan.",
+    "invalid_play": "Ciyaar aan ansax ahayn. Ciyaaryahanka {player_id} wuxuu isku dayay inuu ciyaaro {card} oo ku yaal xarunta dhexe {index}.",
+    "discard_from_payoff": "Kaar bixid aan ansax ahayn. Ciyaaryahanka {player_id} wuxuu isku dayay inuu ka tuuro kaar ka mid ah xidhmooyinka lacag bixinta.",
+    "discard_not_in_hand": "Kaar aan sax ahayn. Ciyaaryahanka {player_id} wuxuu isku dayay inuu tuuro kaar aan gacanta ku jirin.",
+    "wrong_move_type": "Nooca dhaqaaq aan sax ahayn. Ciyaaryahanka {player_id} ma uusan ku jawaabin nooc dhaqaaq sax ah."
+  },
+  "game_action": {
+    "you_drew": "Waxaad ka heshay kaar.",
+    "opponent_drew": "Ciyaaryahanka {player_id} ayaa kaararka soo saaray.",
+    "you_played": "Waxaad ku ciyaartay {card} tuulmada dhexe {index}.",
+    "opponent_played": "Ciyaaryahanka {player_id} wuxuu ciyaaray {card} oo ku yaal xarunta dhexe {index}.",
+    "you_discarded": "Waxaad ku riday {card} si aad u tuurto tuul {index}, taas oo sidoo kale macnaheedu yahay inaad dhammaysay wareeggooda. Wax kale oo aad qabato laguma tixgelinayo wareeggan. Ciyaaryahanka {next_player_id} ayaa xiga.",
+    "opponent_discarded": "Ciyaaryahanka {player_id} ayaa tuuray {card} si uu u tuuro tuul {index}, taas oo sidoo kale macnaheedu yahay inay dhammeeyeen wareeggooda. Wax kale oo ka socda Ciyaaryahanka {player_id} looma tixgelinayo wareeggan. Ciyaaryahanka {next_player_id}, waxaad noqon doontaa kan xiga. Fadlan ku qor ficilkaaga qaabka [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Ciyaaryahanka {current_player} ayaa dhamaystiray lacagtii ay ku bixiyeen! Ciyaaryahanka {current_player} ayaa guuleystay!",
+    "deadlock_player_0": "Go'aan la'aan ayaa la gaaray! Ciyaaryahanka 0 ayaa guuleysta iyadoo {player_0_payoff} kaararka haray vs Ciyaaryahanka 1 {player_1_payoff} kaararka.",
+    "deadlock_player_1": "Go'aan la'aan ayaa la gaaray! Ciyaaryahanka 1 wuxuu ku guuleystaa kaararka {player_1_payoff} ka harsan kaararka ciyaaryahanka 0 ee {player_0_payoff} kaararka.",
+    "deadlock_tie": "Cayaarta waa istaagay oo labada cayaaraha waa siman! Labada cayaaraha waxay leeyihiin {player_0_payoff} kaararka haray. Cayaaraha {current_player} ayaa guuleystay oo ku salaysan qaabka."
+  }
+}

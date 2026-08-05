@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are playing the Minesweeper game.\nThe objective of the game is to reveal all cells that do not contain mines.\nTo make a move, simply specify the row and column coordinates you want to reveal using the format:\n- `[row col]`: Reveal the cell at the specified row and column.\nFor example:\n- `[3 2]` to reveal the cell in Row 3, Column 2.\n- `[5 6]` to reveal the cell in Row 5, Column 6.\nOn your first move, you will reveal an area around the cell you choose to ensure a safe start.\nThe current board layout is shown below. Cells that are unrevealed are represented by a dot ('.'), revealed numbers show the count of adjacent mines.\nBe mindful not to choose already revealed cells.\nHere is the current board layout:\n"
+  },
+  "board": {
+    "game_board": "Spelbrett: {board}",
+    "current_board": "Noverande brett:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Du svarte ikkje med gyldige koordinatar i kvadratparentesar.",
+    "out_of_bounds": "Koordinatane i rekkje og kolonne er ikkje tilgjengelege.",
+    "already_revealed": "Cella på ({row}, {col}) er allereie avdekt.",
+    "hit_mine": "Du traff ei mine på ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Du avdekkja cella på ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Gratulerer! Du har suksessfullt rydda Minesweeper-brettet.",
+    "turn_limit": "Grensa for trekk er nådd. Du avdekte {percent}% av dei trygge cellene."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Umdlali wetama kwemukela kutsengiselana ngaphandle kwekutfola imitfombolusito ledzingekako.",
+    "out_of_range": "Player {player_id}, Ngawe ngimphikisana. Koloni {col} ikaphandle kwemigomo.",
+    "already_full": "Player {player_id}, Ngawe ngimphikisana. Koloni {col} iphile.",
+    "proposing_with_no_resource": "Umdlali {player_id} wetame kwenta sicelo sekutsengisa ngaphandle kwekutfola timali letenele.",
+    "incorrect_offer_format": "Umdlali {player_id} wenta sicelo sekuntjintja ngekwehlukahlukana.",
+    "no_new_offer": "Umdlali {player_id} akazange ente sicelo lesisha sekutsengiswa."
+  },
+  "offers": {
+    "reject": "Umdlali {player_id} wala kuniketwa imali.",
+    "accept": "Player {acceptor_id} wamthokozisa kwezokuthenga kwaPlayer {proposer_id}.",
+    "proposal": "Player {player_id} wenza kwezokuthenga kwaPlayer {opponent_id}: Izinto eziphakwa: {offered} -> Izinto ezifunwa: {requested}"
+  },
+  "outcome": {
+    "win": "Umdlali {winner_id} uncobile ngekutsi abe nenzuzo lenkhulu emalini yakhe.",
+    "draw": "Kugucuka lokufanako ekudzingisweni kwemitfombolusito kubo bonkhe badlali."
+  }
+}

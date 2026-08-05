@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ndiwe Mchezaji {player_id} m'mwamba wa {max_rounds} wa mchezo wa Kuhn Poker.\nMwiko wa Mchezo:\n- Kuhn Poker umatumiza kadi 3 za J, Q, K (J ndiyo ya chini kabisa, K ndiyo ya juu zaidi)\n- Kila mchezaji anatambulisha {ante} chip na kupokea kadi 1 kila mwamba (kumbuka kwamba kadi hizi hutolewa bila kubadilishwa, kwa hivyo huwezi kuwa na kadi sawa na mshindani wako).\n- Mchezo unaendelea kwa {max_rounds} mwamba\n- Mchezaji aliye na chipi nyingi zaidi baada ya mwamba wote anashinda\nMwiko wa Vitendo:\n- '[check]': Pita bila kubeti (tu wakati hakuna beti kwenye jedwali)\n- '[bet]': Ongeza chip 1 kwenye poti (tu wakati hakuna beti kwenye jedwali)\n- '[call]': Linganisha beti ya mshindani wako kwa kuongeza chip 1 kwenye poti\n- '[fold]': Achilia mkono wako na acha mshindani wako ashinde poti"
+  },
+  "init_round": {
+    "round_start": "### Kuanza mwamba {current_round} kati ya {max_rounds} mwamba. Kadi yako ni: '{player_card}'",
+    "available_actions": "Ivyo mungacita ni ivi: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kitendo lazima kiwe [Check], [Bet], [Call], au [Fold].",
+    "not_legal": "Kitendo lazima kiwe {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Mchezaji {player_id}, alituma kitendo: '[{move}]'.",
+    "valid_actions": "Ivyo mungacita ni ivi: {legal_actions}.",
+    "round_summary": "{reason} Mafumbo a siku la leo: Mchezaji 0: '{player_0_chips}'; Mchezaji 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Kadi ya Mchezaji {winner} {winner_card} inashinda kadi ya Mchezaji {loser} {loser_card}. Mchezaji {winner} anashinda poti ya {pot_value} chipi."
+  },
+  "outcome": {
+    "draw": "Paumaliro wa {max_rounds} round wosewera waliyose wakaŵa na chip yake.",
+    "round_win": "Woseŵera {player_id} wakata.",
+    "winner_player0": "Wosewera 0 wapambana chifukwa cha chip chake chochuluka kumapeto kwa {max_rounds} kuzungulira.",
+    "winner_player1": "Wosewera 1 adawina chifukwa chokhala ndi tchipisi zambiri kumapeto kwa {max_rounds} kuzungulira."
+  }
+}

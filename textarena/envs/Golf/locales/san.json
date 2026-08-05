@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "गोल्फ इति क्रीडा क्रीडसि - क्रीडक {player_id} ।\nउद्देशः - एतस्मिन् एकस्मिन् वृत्ते निम्नतमः सङ्कलितः अङ्कः प्राप्तः । यदि स्तम्भाः समानां किमपि भागं वहन्ति, ते शून्यरूपेण सङ्कलिताः ।\nपत्रकमूल्यानि - अ=१, २-१०=मुखमूल्य, ज/क्व=१०, क=०\n\nक्रियाः (विनियोगात् अनुसरणीयम्):\n- '[draw]' - प्रतिकर्तृकात् पत्रं गृह्ण\n- '[take]' - निराकृतपट्टिकात् पत्रं गृह्ण\n- '[swap X Y]' - प्रतिकर्तृकात् पत्रं स्थाने X (पङ्क्ति) Y (स्तम्भ) सह विनिमय\n- '[discard]' - प्रतिकर्तृकात् पत्रं निराकुरु\n"
+  },
+  "board": {
+    "drew": "त्वं प्रतिकर्तृकात् पत्रं गृहीतवान् - {card}\nअधुना त्वं [swap X Y] वा [discard] कर्तुम्",
+    "took": "त्वं गृहीतवान् - {card} निराकृतपट्टिकात्\nत्वं तेन सह [swap X Y] कर्तुं न शक्नोसि (निराकुरितुं न शक्नोसि) ।",
+    "peeked": "त्वं स्थाने ({row},{col}) पत्रं विलोकितवान् - {card}",
+    "turn_view": "तव हस्तः -\n{hand}\nनिराकृतपट्टिका - {discard}\n{options}",
+    "none": "न विद्यते।"
+  },
+  "options": {
+    "final_turns": "अन्तिमवाराः! तव विकल्पाः - [draw], [take], [peek X Y]",
+    "draw": "तव विकल्पाः - [draw], [take]",
+    "must_swap": "भवता अवश्यम्: [swap X Y] (अत्र न कर्तुं शक्यते)",
+    "swap_or_discard": "त्वं कर्तुम् - [swap X Y] वा [discard]"
+  },
+  "hand": {
+    "no_cards": "न च कार्डं।",
+    "header": "कोलः १२३",
+    "row": "पंक्ति {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "क्रीडक {pid} पत्रं {new} सह {old} स्थाने ({row},{col}) विनिमितवान्",
+    "discarded": "क्रीडक {pid} निराकृतवान् {card}"
+  },
+  "message": {
+    "deck_empty": "क्रीडायाः समापनं तत्क्षणम् भवति।",
+    "knocked": "{pid} क्रीडाकारः नट! प्रत्येकं अन्योत्स्करस्य एकम् अधिकं पादः भवति ।",
+    "final_round": "क्रीडक {pid} {reason}! प्रत्येकः अन्यः क्रीडकः एकं वारं अधिकं प्राप्नोति ।"
+  },
+  "reason": {
+    "all_revealed": "सर्वकार्यं प्रकटितम् अस्ति।"
+  },
+  "invalid": {
+    "wrong_action": "विनियोगात् अनुसरणीयम् एकमेव कार्यम् - [draw], [take], [swap X Y], [discard], [knock], वा [peek X Y]",
+    "discard_empty": "निराकरणस्थानं रिक्तमस्ति!",
+    "must_draw_first": "त्वं प्रथमं [draw], [take], [knock], वा [peek X Y] कर्तुम्",
+    "cannot_discard_taken": "न च भवता प्रक्षिप्तं कार्डम् अपसारयितुं शक्यते, परतः एव अदलाभः करणीयः।",
+    "have_drawn_card": "त्वं प्रतिकर्तृकात् पत्रं गृहीतवान् । त्वं [swap X Y] वा [discard] कर्तुम्",
+    "need_drawn_swap": "भवद्भिः कार्डं प्रतिस्थापयितुं एकम् चित्रकं आवश्यकता अस्ति ।",
+    "need_drawn_discard": "भवद्भिः एकं कार्डम् अपसारयितुं अपेक्षितमस्ति।",
+    "out_of_bounds": "स्थानं सीमातीतम् । पङ्क्तिं १-{max_row}, स्तम्भं १-{max_col} विनियोगात् कर्तुम्",
+    "knock_with_card": "न च कर्त्तव्यमस्ति, प्रथमं स्वपादे पूर्णम् करोतु।",
+    "already_knocked": "कश्चित् एवम् राण्डं अकरोत् ।",
+    "already_revealed": "तत्कार्डं पूर्वमेव प्रकटितम् अस्ति!"
+  },
+  "summary": {
+    "full": "क्रीडा समाप्ता! क्रीडक {winner} विजयी अभवत्, अङ्कानां {score} सह!\n\nअन्तिमाङ्काः -\n{scores}",
+    "line": "क्रीडक {pid} - अङ्कानां {score}\n"
+  },
+  "board_str": {
+    "title": "=== गोल्फ़ खेलः ===",
+    "discard": "अपवर्जितः {card}",
+    "knocked": "Kreḍitā {pid} āhatavān!",
+    "player_header": "क्रीडक {pid} (अङ्काः {score}) -"
+  }
+}

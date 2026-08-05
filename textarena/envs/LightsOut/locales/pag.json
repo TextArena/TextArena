@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Malinacbay ka ed Lights Out! May {size}x{size} grid ka na ilay lights.\nSay impanggoal mo et ontunen amin diad ILAY lights OFF (representado ed '.')\nNo ontunen ka ed ilay, ontunen to man din siamay adjacent neighbors (taas/baba/wanan/kaliwa).\nSulat [row col] a ontunen ed ilay (0-indexed, so baleg so ranggo 0-{max_index}).\nMay up to {max_turns} moves ka a solbayan diad puzzle.\nLegend: 'O' = ilay ON, '.' = ilay OFF"
+  },
+  "board": {
+    "current_state": "Kasalatan na estado na grid (Laras {moves_made}, {moves_left} laras natitipon, {completion}% nakompleto):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Say action et nepeg ya format [row col] no say linya tan kolumn so integer manlapud 0 anggad {max_index}.",
+    "out_of_range": "Say koordinado ya dapat ya manlapo 0 ya {max_index}. In-enter mo ya [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Komendasyon! Asolusyonan mo so puzzle ed {moves_used} iran galaw!",
+    "loss": "Pakalatan na laro! Inusar mo amin diad {max_turns} laras sin solbayan diad puzzle. Pangulo na pankompleto: {completion}%\nPangulo na estado:\n{grid}"
+  }
+}

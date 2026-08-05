@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Int qed ikun Player {player_id} f'logħba ta' żewġ plejers ta' Spite and Malice. L-għan tiegħek huwa li tkun l-ewwel li tħalli l-pile tal-payoff tiegħek vojta.\n\n### Ħarsa Ġenerali tal-Logħba:\n- L-objettiv huwa li tħalli l-pile tal-payoff tiegħek vojta billi tilgħab karta fuq il-pile tal-ċentru.\n- Tista' tilgħab karta minn tliet sorsi:\n  1. Il-**ħand** tiegħek (tibda kull dawra b'saħħa ta' 5 karti f'ħandek).\n  2. Il-**karta ta' fuq tal-pile tal-payoff tiegħek**.\n  3. Il-**karta ta' fuq ta' xi waħda mill-pile tal-discard tiegħek**.\n\n### Regoli tal-Logħba:\n- Tista' tilgħab karta fuq pile tal-ċentru jekk tkun **rank waħda ogħla** mill-karta ta' fuq fuq dik il-pile (il-pile tal-ċentru jibdew b'Ace u jaslu sa Queen; il-Kings huma wild - jistgħu jintlagħbu fuq karta kwalunkwe imma ma jbiddlux is-sekwenza tar-rank. Dan ifisser li jekk King jintuża wara 4, imbagħad dik il-King tirranka 5 u l-karta li jmiss trid tkun 6).\n- Jekk ma tistax tilgħab karti oħra, trid **tiddiska karta** fuq waħda mill-pile tal-discard tiegħek biex tintemm id-dawra tiegħek.\n- Jekk pile tal-ċentru tasal sa Queen, se tiġi mħallija awtomatikament.\n- L-ordni tar-rank hija: A=1, 2=2, ..., 9=9, J=10, Q=11, K bħala wild.\n\n### Azzjonijiet:\n1. **Tella'**: Fl-ewwel ta' dawra tiegħek, tella' karti biex timla l-ħand tiegħek sa 5 karti. Daħħal **[draw]** biex tibda.\n2. **Lagħab Karta**: Biex tilgħab karta, speċifika l-karta u l-pile tal-ċentru hekk: **[play A♠ 0]** (fejn 'A♠' hija l-karta u '0' hija l-indiċi tal-pile tal-ċentru).\n3. **Diddiska**: Jekk ma tistax tilgħab karti oħra, diddiska karta mill-ħand tiegħek fuq pile tal-discard biex tintemm id-dawra tiegħek. Daħħal **[discard A♠ 1]** (fejn 'A♠' hija l-karta u '1' hija l-indiċi tal-pile tal-discard). Żomm f'moħħek li ma tistax tiddiska karta mill-pile tal-payoff. Tista' tiddiska biss il-karti mill-ħand tiegħek.\n\n"
+  },
+  "board": {
+    "current_board": "Bord Attwali:\n\n{board}\nMosse Disponibbli: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Piles Ċentrali --- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Veduta tal-Player {player_id} ---\n",
+    "payoff": "{observation}Pile tal-Payoff (Karta ta' Fuq): {top_card}, Tul tal-Pile tal-Payoff: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Pile tal-Discard: {discard}\n",
+    "empty": "Ħieles."
+  },
+  "game_message": {
+    "no_cards_left": "M'hemmx karta oħra biex tittella' minnha. Ftakar li tista' tilgħab karti minn dawn is-sorsi:\n  1. Id-**idek**.\n  2. L-**ewwel karta tal-munzell tiegħek tal-ħlas**.\n  3. L-**ewwel karta ta' kwalunkwe wieħed mill-munzelli tiegħek tal-kartijiet mejtin**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Format ta' mossa invalidu. Il-plejer {player_id} ma wieġebx b'mossa valida fi qrennijiet kwadri.",
+    "invalid_play": "Logħba invalida. Il-Player {player_id} prova jilgħab {card} fuq pile tal-ċentru {index}.",
+    "discard_from_payoff": "Riżarkar invalidu. Il-plejer {player_id} ipprova jirriżarma karta mill-munzell tal-ħlas.",
+    "discard_not_in_hand": "Riżarkar invalidu. Il-plejer {player_id} ipprova jirriżarma karta li mhix f'idejh.",
+    "wrong_move_type": "Tip ta' mossa invalidu. Il-plejer {player_id} ma wieġebx b'tip ta' pass validu."
+  },
+  "game_action": {
+    "you_drew": "Int ġibdet il-karti.",
+    "opponent_drew": "Il-plejer {player_id} ġibed il-karti.",
+    "you_played": "Int lagħbu {card} fuq il-pil ċentrali {index}.",
+    "opponent_played": "Il-Player {player_id} lagħab {card} fuq pile tal-ċentru {index}.",
+    "you_discarded": "Int diddiskajt {card} fuq pile tal-discard {index}, li tfisser ukoll li temmejt id-dawra tiegħek. L-ebda azzjoni oħra tiegħek mhix konsiderata għal din id-dawra. Il-Player {next_player_id} se jmur il-ġdid.",
+    "opponent_discarded": "Il-plejer {player_id} ħaġġ {card} fil-miżbla tal-karti {index}, li tfisser ukoll li temm id-dawra tiegħu. L-ebda azzjoni oħra tal-plejer {player_id} mhix qed titqies għal din id-dawra. Il-plejer {next_player_id}, inti sejjer it-tieni. Jekk jogħġbok daħħal l-azzjoni tiegħek fil-format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Il-plejer {current_player} temm is-safra tal-pagament! Il-plejer {current_player} jirbaħ!",
+    "deadlock_player_0": "Deadlock! Il-Player 0 rebaħ b'{player_0_payoff} karti li fadal kontra {player_1_payoff} karti tal-Player 1.",
+    "deadlock_player_1": "Deadlock! Il-Player 1 rebaħ b'{player_1_payoff} karti li fadal kontra {player_0_payoff} karti tal-Player 0.",
+    "deadlock_tie": "Deadlock b'parità! Iż-żewġ plejers għandhom {player_0_payoff} karti li fadal. Il-Player {current_player} rebaħ b'default."
+  }
+}

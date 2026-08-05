@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "I ka jwe Klondike Solitaire. I ka kan ka kɛnɛ kɔnɔ ka ta foundation piles.\n\nJɛnw ka ɲɛfɛnw:\n- Foundation piles (F1-F4): Kɛnɛ ka bɔnɔ Ace fo ka tiɲɛ King ka ɲɛfɛ\n- Tableau piles (T1-T7): Kɛnɛ ka bɔnɔ fo ka tiɲɛ colors ka wɛrɛ (red kɔnɔ black, black kɔnɔ red)\n- Stock: Draw kɔnɔ ka cards fo waste pile\n- Waste (W): Top card ka bon kosɛbɛ play\n\nCommands:\n- 'draw' - Draw kɔnɔ ka cards fo stock ka waste\n- 'move <source> <destination> [count]' - Kɛnɛ ka cards kosɛbɛ piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count ka bon kosɛbɛ 'all', ka tiɲɛ ka kɛnɛ ka face-up cards.\n- 'forfeit' - Jɛnw ka taga ka sɔrɔ i ka score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nI ka execute kɔnɔ actions ka one turn ka sɔrɔ ka commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nKings kɛrɛ ka bon kosɛbɛ empty tableau piles.\nActions ka execute ka ɲɛfɛ - ka one fails, ka remaining actions ka skipped.\nKɔnɔ 'forfeit' ka i ka jɛnw ka impossible ka taga."
+  },
+  "format_error": {
+    "no_brackets": "Baara kɛcogo man ɲi. Baara ka kan ka don dakun na.",
+    "no_closing_bracket": "Baara kɛcogo man ɲi. Daɲɛ laban fan bɛ yen ']'",
+    "empty_command": "Kumandɔn lakika. I bɛ 'draw' sɛbɛn walima i b'a fɔ 'move <source><destination> [count]'.",
+    "empty_action": "Baara lakolonw",
+    "move_needs_args": "Kɛlɛkɛlɛ kɔmɛndi 'move' bɛ kɛnɛ ka bɔ dɔn o dɔn. Kɛlɛkɛlɛ bɛɛ: 'move <source> <destination> [count]'",
+    "count_positive": "Kɔntɛ bɛɛ kɔrɛktɛ pɔzitif aw 'all'",
+    "count_invalid": "Kɔntɛ bɛɛ kɔrɛktɛ. Kɔmandi bɛɛ kɔrɛktɛ: kɔntɛ aw 'all'",
+    "unknown_command": "Kɛma '{cmd}' ye misali. Ka 'draw', 'move <source> <destination> [count]', ani 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "A ye {n} waleya kɛ (s) sani a ka dɛsɛ.",
+    "failed": "Action {n} bɛɛ kɛ: {msg}"
+  },
+  "move_result": {
+    "drew": "Ka bɔ kaari la k'a kɛ fu ye.",
+    "cannot_draw": "An tɛ se ka fɛn bɔ, fɛnw bɛɛ banni ani u fililen don.",
+    "invalid_pile": "Tɔgɔ min tɛ bɛn. I bɛ W, F1-F4, walima T1-T7 kɛ a la",
+    "foundation_one_card": "I bɛ se ka karti 1 dɔrɔn bila i kun na.",
+    "waste_to_foundation_ok": "Kariti min bɔra kungow la ka taa a bila sigili yɔrɔ F{dst} na.",
+    "waste_to_foundation_bad": "I tɛ se ka kariti bila a nɔ na fo fondasiɔn la.",
+    "tableau_to_foundation_ok": "Kaati kɛma ye tableau T{src} cɛ foundation F{dst}",
+    "tableau_to_foundation_bad": "T'a sé ka tableau karti yèlèma o fondasyon tòn na",
+    "foundation_to_foundation": "A tɛ se ka taa bɔ a ju sigi yɔrɔ dɔ la ka ta'a bila a tɔ wɛrɛ kan.",
+    "waste_to_tableau_one_card": "I bɛ se ka karti 1 dɔrɔn ta ni a ye k'a bila tabolo la.",
+    "waste_to_tableau_ok": "Kariti minana ka bɔ kungow la ka taa tableau T{dst} na.",
+    "waste_to_tableau_bad": "I tɛ se ka sɛbɛnni kɛli bila tabolo kan yen.",
+    "no_face_up": "Karitiw tɛ yɛlɛ ka taa yɔrɔ wɛrɛ la.",
+    "tableau_to_tableau_ok": "Kaati {count} kɛma(s) ye tableau T{src} cɛ T{dst}",
+    "tableau_to_tableau_bad": "I ka na {count} kɛma(s) ye T{src} cɛ T{dst}",
+    "foundation_to_tableau_one_card": "I bɛ se ka karti 1 dɔrɔn ta bɔli la ka taa tableau kan.",
+    "foundation_empty": "F{src} siginiden lakika tɛ yen.",
+    "foundation_to_tableau_ok": "Kaati kɛma ye foundation F{src} cɛ tableau T{dst}",
+    "foundation_to_tableau_bad": "Tɛ ka foundation card ka bon kosɛbɛ tableau T{dst}",
+    "to_waste_or_stock": "A tɛ se ka taa foroko la walima fɛn dɔ wɛrɛ kɔnɔ."
+  },
+  "outcome": {
+    "forfeit": "Ɲɔnbɛn bɛ ban. laban jabi: {score} karitiw sɔrɔli jɔyɔrɔ la.",
+    "won": "I ye Klondike Solitaire sɔrɔ!",
+    "turn_limit": "Jɛnw ka taga! I ka tiɲɛ ka maximum {max_turns} turns. Score: {score} cards ka foundations."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== (Kolondiye kelenna)",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Sɔrɔda: {stock} karitiw",
+    "waste": "Falenfɛnw (W): {waste}",
+    "foundations_header": "Jiginni:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabolo:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

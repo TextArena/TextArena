@@ -1,0 +1,30 @@
+{
+  "_comment": "Tetapan wilayah bahasa Melayu untuk Word Chains. Kunci (kiri) adalah tetap; terjemah hanya nilai (kanan). Kekalkan setiap {placeholder} sama seperti asal, kekalkan contoh dalam kurungan siku seperti '[apple]' dan '[monkey]' tanpa diubah (pemain membalut perkataan dalam kurungan siku), dan kekalkan token satu huruf secara neutral.",
+  "_slots": {
+    "{player_id}": "Nombor pemain (integer)",
+    "{word}": "Sepatah perkataan (perkataan semasa/permulaan atau perkataan yang dihantar)",
+    "{start_letter}": "Satu huruf yang mesti menjadi permulaan perkataan seterusnya",
+    "{length}": "Panjang yang diperlukan untuk perkataan seterusnya (integer)",
+    "{count}": "Bilangan aksara dalam perkataan yang dihantar (integer)"
+  },
+
+  "prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam Permainan Rantaian Perkataan.\nPemain mengambil giliran untuk memberikan perkataan Melayu yang sah yang:\n1. Bermula dengan huruf terakhir perkataan sebelumnya\n2. Mesti lebih panjang daripada perkataan sebelumnya\n3. Tidak boleh perkataan yang telah digunakan sebelum ini\n\nJika anda memberikan perkataan yang tidak sah, mengulang perkataan, atau tidak mengikut peraturan, anda kalah.\nBalut perkataan anda dalam kurungan siku, contohnya, '[apple]', '[monkey]', dsb.\nPerkataan permulaan ialah [{word}]."
+  },
+
+  "board": {
+    "next_word": "Perkataan seterusnya mesti:\n1. Bermula dengan '{start_letter}'\n2. Tepat {length} huruf panjang"
+  },
+
+  "message": {
+    "played": "Pemain {player_id} bermain: [{word}]"
+  },
+
+  "invalid": {
+    "wrong_format": "Pemain {player_id} tidak memberikan perkataan dalam format yang sah.",
+    "wrong_length": "Perkataan mesti tepat {length} huruf panjang. '{word}' mempunyai {count} aksara.",
+    "wrong_start": "Perkataan mesti bermula dengan '{start_letter}'.",
+    "not_a_word": "'{word}' bukan perkataan Melayu yang sah.",
+    "already_used": "Perkataan '{word}' telah pun digunakan."
+  }
+}

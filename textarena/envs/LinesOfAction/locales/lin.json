@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Ozali Joueur {player_id} na mokili ya LinesOfAction.\nBipayi na yo bazali '{side}', bipayi ya mokonzi bazali '{other}'.\nFormat ya mouvement : `[b1b3]` (coord-from coord-to). Mouvement ya ligi aza na mbala ya miraba sawa na bipayi zote (mokili yoyi) na ligi wana. Ozali koluka bipayi na yo, kasi si bipayi ya mokonzi ; kutua na bipayi ya mokonzi ekoma.  Ozwi lobi bipayi zote zinaunganishwa na 8-makonzi."
+  },
+  "board": {
+    "current_board": "Lisangani: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formati ezali na lokota e2e4 (lokasi ya kwanza, lokasi ya suka).",
+    "no_piece": "No {side} eteni na {coord}.",
+    "identical": "Ebandeli mpe esika oyo bazali kokende ezali ndenge moko.",
+    "not_straight_or_diagonal": "Esengeli kotambola semba to na ekulusu.",
+    "wrong_distance": "Esengeli kotambola na ntaka ekokani na biteni oyo ezali molɔngɔ́ moko.",
+    "enemy_blocks": "Eteni ya banguna ekangisi nzela.",
+    "destination_own": "Esika oyo moto moko azali kokende."
+  },
+  "game_action": {
+    "moved": "Mokonzi {player_id} akomaki {from} -> {to}",
+    "captured_suffix": "Mokonzi {player_id} akomaki {from} -> {to} akolonga mosusu wa nsɛ́."
+  },
+  "outcome": {
+    "win": "Makambo nyonso ekokani.",
+    "draw_no_capture": "Mikili 60 ya kutambula bila kozwa.",
+    "draw_repetition": "Na nsima, bózongela esika yango mbala misato."
+  }
+}

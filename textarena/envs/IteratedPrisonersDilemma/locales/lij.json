@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ti sei o Giugou {player_id} in un Dilemma do Priggionê Iterou che dûa {num_rounds} turni.\n\nStruttüa do Giögo:\n- Prima de ogni decixion ti hai {total_conversation_rounds} turni pe comunicâ liberamente.\n- Dopo, tutti doî giugou i sceliñan de cooperâ o de tradî simultaniamente.\n\nMatrice di Pagamenti (fissa a ogni turnu):\n- Tutti Cooperan ➜ ognun {cooperate_reward}\n- Tutti Tradiscan ➜ ognun {mutual_defect_reward}\n- Un Tradisce e un Cooperan ➜ o Traditô {defect_reward}, o Cooperatô {sucker_reward}\n\nCömme Giugâ:\n- Durante a conversazione: ti pôi scrîve qualsæsi testo.\n- Durante a fase de decixion: metti '[Cooperate]' o '[Defect]' (insenscibile a-o caso). Ti pôi azonze di texto extra primma/dopo o token."
+  },
+  "phases": {
+    "conversation_finished": "Conversazione finia pe-o turnu {round}. Rispondi co '[Cooperate]' o '[Defect]' dentr'o \\boxed{{}}.",
+    "starting_round": "--- Ronda de iniçiâ {round} ---",
+    "round_summary": "Rizultati do turnu {round}:\n{outcome}\nO giugou 0 o l'ha guadagnou {r0} (in totale {score_0}), o giugou 1 o l'ha guadagnou {r1} (in totale {score_1})."
+  },
+  "outcome": {
+    "winner": "O zugatô {winner} o vinçe {win_score} - {lose_score}.",
+    "draw": "Pareggio! Tutti doî i zugadöi an segnou {s0}.",
+    "round_both_cooperate": "I doî zugadô an cooperou.",
+    "round_both_defect": "I doî zugadô an desertòu.",
+    "round_p0_cooperates_p1_defects": "O Zugador 0 o l'ha cooperòu, o Zugador 1 o no l'ha cooperòu.",
+    "round_p0_defects_p1_cooperates": "O Zugador 0 o no l'ha cooperòu, o Zugador 1 o l'ha cooperòu."
+  }
+}

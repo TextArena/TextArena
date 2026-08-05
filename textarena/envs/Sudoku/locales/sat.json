@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Ami Player {player_id} mena. Ami Sudoku khela kana.\nNe ikir chikan te Sudoku grid chhena. Pratyek sor 1 theke 9 tak number kana, ar pratyek column 1 theke 9 tak number kana.\nKhali cell gulike '.' diya chhena, ar pura cell gulike 1 theke 9 tak digit chhena.\n\nEkhon Sudoku Grid chhena:\nTumar uddeshyo 9x9 grid te khali cell gulike 1 theke 9 tak digit diya bharna, emni:\n1. Pratyek sor te 1 theke 9 tak digit thakna, punorabrittir bina.\n2. Pratyek column te 1 theke 9 tak digit thakna, punorabrittir bina.\n3. Noi 3x3 subgrid te 1 theke 9 tak digit thakna, punorabrittir bina.\n\nNiyam ar nirdesh:\n1. **Pura number ke over write** kana na grid te.\n2. **Khali cell ke bharna**, '.' diya chhena.\n3. Tumi kono vabe jawab kana paro, kintu dekha [row column number] format ase.\n4. **Dekha** tumar chal Sudoku niyam ke langhena. Avaidh chal ke lathi padna.\nUdaharan:\n- **Baidh Chal**:\n  - Grid Snippet Age Chal:\n  \n  - Chal: `[5 3 7]`\n  - Byakhya: 7 ke row 5, column 3 te rakhna Sudoku niyam ke langhena na.\n\n- **Avaidh Chal** (Pura cell ke over write kana):\n  - Grid Snippet Age Chal:\n  \n  - Chal: `[1 1 9]`\n  - Byakhya: Cell (1,1) te 5 ase. Tumi ota ke over write kana paro na.\n\n- **Avaidh Chal** (Sudoku niyam ke langhena):\n  - Grid Snippet Age Chal:\n  \n  - Chal: `[1 3 5]`\n  - Byakhya: 5 ke row 1, column 3 te rakhna Sudoku niyam ke langhena karon 5 row 1 te ase.\n\nTumar chal ar bhabna purba itihas jawana jawana khela kana. Tumar chal ke itihas diya apnar nirnay bhalo kana, avaidh chal ke ebar kana.\n\nSaubhagya!\n\n"
+  },
+  "board": {
+    "game_board": "ᱠᱷᱮᱞ ᱵᱳᱨᱰ: {board}",
+    "board_state": "ᱵᱳᱨᱰ ᱫᱤᱥᱟᱹᱢ: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ᱵᱟᱹᱞᱤ ᱪᱟᱞᱟᱜ ᱯᱷᱚᱨᱢᱮᱴ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱥᱟᱹᱨᱤᱭᱟᱜ 'row column number' ᱛᱮᱭ ᱵᱟᱵᱟᱛ ᱟᱠᱟᱫᱼᱟ᱾",
+    "out_of_bounds": "Avaidh chal. Player {player_id} {num} ke ({row}, {col}) te rakhna chhena, se sima ke bahar ase.",
+    "overwrite": "Avaidh chal. Player {player_id} pura cell ({row}, {col}) ke over write kana chhena.",
+    "violates_rules": "Avaidh chal. Player {player_id} {num} ke ({row}, {col}) te rakhna chhena, se Sudoku niyam ke langhena."
+  },
+  "outcome": {
+    "win": "ᱥᱟᱨᱦᱟᱣ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱥᱩᱫᱳᱠᱩ ᱯᱟᱡᱚᱞ ᱮ ᱥᱟᱵ ᱞᱮᱫᱼᱟ ᱾",
+    "turn_limit": "ᱞᱤᱢᱤᱴ ᱦᱮᱡ ᱟᱠᱟᱱᱟ ᱾ ᱟᱢ {percent}% ᱵᱷᱤᱛᱨᱤ ᱠᱮᱞ ᱠᱚ ᱥᱟᱹᱨᱤᱭᱟᱜ ᱮ ᱯᱩᱨᱟᱹᱣ ᱟᱠᱟᱱ."
+  }
+}

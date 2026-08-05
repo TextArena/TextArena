@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "O kemuni na Player {player_id} ena qito LinesOfAction.\nNa nomuni iyaya e '{side}', na iyaya ni kena qito e '{other}'.\nFomu ni curu: `[b1b3]` (mai-coord ki-coord). E curu vakalawa, vakatotolo, se vakavasaga e dua na iyaya e tautauvata kei na kena iyaya (e dua na roka) ena lini ya. O rawa ni curu sori iyaya nomuni, ia sega na iyaya ni kena qito; wili kina e dua na iyaya ni kena qito e kena capture.  Ni mo ni ciqomi kece na nomuni iyaya e 8-veitokani."
+  },
+  "board": {
+    "current_board": "Tabana: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Na kena ituvatuva e dodonu me na E2E4 (mai,ki coordinates).",
+    "no_piece": "Sega ni {side} tiki ena {coord}.",
+    "identical": "E tautauvata na vanua e vu mai kina kei na kena icavacava.",
+    "not_straight_or_diagonal": "Me tu vakadodonu se vakalekalekataka na vanua e gole kina.",
+    "wrong_distance": "Me toso na kena yawa me tautauvata kei ira era tu vata.",
+    "enemy_blocks": "E dua na ka e sogota tiko na sala.",
+    "destination_own": "Vanua e tiko kina e dua na iyaya nomuni."
+  },
+  "game_action": {
+    "moved": "Player {player_id} liliva {from} -> {to}",
+    "captured_suffix": "Player {player_id} liliva {from} -> {to} na kauta e dua na tamata yaga."
+  },
+  "outcome": {
+    "win": "E sema kece na tikina lalai.",
+    "draw_no_capture": "60 na ilakolako e sega ni dua me vesuki.",
+    "draw_repetition": "Tokaruataki vakatolu na itutu."
+  }
+}

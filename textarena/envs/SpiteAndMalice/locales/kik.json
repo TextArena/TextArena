@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ni wewe Mchezaji {player_id} katika mchezo wa wachezaji wawili wa Spite na Malice. Lengo lako ni kuwa wa kwanza kuondoa safu yako ya malipo.\n\n### Muhtasari wa Mchezo:\n- Lengo ni kusafisha safu yako ya malipo kwa kucheza kadi kwenye safu za katikati.\n- Unaweza kucheza kadi kutoka kwa vyanzo vitatu:\n  1. **Mkono wako** (huanza kila zamu na kadi hadi 5 mkononi).\n  2. **Kadi ya juu ya safu yako ya malipo**.\n  3. **Kadi ya juu ya safu yoyote ya taka yako**.\n\n### Kanuni za Kucheza:\n- Unaweza kucheza kadi kwenye safu ya katikati ikiwa ni **daraja moja juu** kuliko kadi ya juu kwenye safu hiyo (safu za katikati huanza na Ace na kupanda hadi Queen; Wafalme ni wakubwa - wanaweza kucheza kwenye kadi yoyote lakini hawabadilishi mpangilio wa daraja. Hii ina maana ikiwa Mfalme anatumika baada ya 4, basi Mfalme huyo anapangwa 5 na kadi inayofuata lazima iwe 6).\n- Ikiwa huwezi kucheza kadi zaidi, lazima **utupe kadi** kwenye safu yako ya taka ili kumaliza zamu yako.\n- Ikiwa safu ya katikati inafikia Queen, itasafishwa kiotomatiki.\n- Mpangilio wa daraja ni: A=1, 2=2, ..., 9=9, J=10, Q=11, K kama mkubwa.\n\n### Vitendo:\n1. **Chora**: Mwanzoni mwa zamu yako, chora kadi ili kujaza mkono wako hadi kadi 5. Ingiza **[draw]** ili kuanza.\n2. **Cheza Kadi**: Ili kucheza kadi, fafanua kadi na safu ya katikati kama hii: **[play A♠ 0]** (ambapo 'A♠' ni kadi na '0' ni kiashiria cha safu ya katikati).\n3. **Tupa**: Ikiwa huwezi kucheza kadi zaidi, tupa kadi kutoka kwa mkono wako kwenye safu ya taka ili kumaliza zamu yako. Ingiza **[discard A♠ 1]** (ambapo 'A♠' ni kadi na '1' ni kiashiria cha safu ya taka). Kumbuka kuwa huwezi kutupa kadi yoyote kutoka kwa safu ya malipo. Unaweza tu kutupa kadi kutoka kwa mkono wako.\n\n"
+  },
+  "board": {
+    "current_board": "Bodi Iri Current:\n\n{board}\nMikaro Iriwekwa: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Ikundi cia Gũtũũrithia Mĩtĩ ya Kũgitĩra Mĩciĩ-inĩ iitũ --- ",
+    "pile": "{observation}Chungu {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Mtazamo wa Mugambi {player_id} ---\n",
+    "payoff": "{observation}Chungu la Malipo (Kadi ya Juu): {top_card}, Urefu wa Chungu la Malipo: {payoff_length}\n",
+    "hand": "{observation}Mkono: {hand}\n",
+    "discard": "{observation}Chungu la Kukomboa: {discard}\n",
+    "empty": "Ĩtarĩ kĩndũ"
+  },
+  "game_message": {
+    "no_cards_left": "Hakuna karata zingine za kũteka. Kumbuka kwamba unaweza kucheza karata kutoka kwa vyanzo hivi:\n  1. Mkono wako.\n  2. Karata ya juu ya kĩndũ chako cha kũpata.\n  3. Karata ya juu ya yoyote kĩndũ chako cha kũthupilia mbali.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Mũgambo ũtarĩ wa kĩhooto. Mũteng'eri {player_id} ndacokirie na mũbango mwega ũrĩ gatagatĩ ka ndemwa cia gĩturwa.",
+    "invalid_play": "Cheza lisilo halali. Mugambi {player_id} alijaribu kucheza {card} kwenye chungu la kati {index}.",
+    "discard_from_payoff": "Mũgambo ũtarĩ kĩene. Mwĩina {player_id} nĩ ageririe kũruta kaarĩ karĩa gaathondekirũo mũgũnda-inĩ ũcio wa mbeca cia gũcagũrio.",
+    "discard_not_in_hand": "Mũgambo ũtarĩ kĩene. Mwĩina {player_id} nĩ ageririe kũruta karati ĩtaarĩ guoko-inĩ gwake.",
+    "wrong_move_type": "Mũthemba wa ikinya ũtarĩ mwega. Mũteng'eri {player_id} ndacokirie na mũhiano ũrĩ wega."
+  },
+  "game_action": {
+    "you_drew": "Nĩ wagũithirie.",
+    "opponent_drew": "Mũthaaki {player_id} akĩruta kadi.",
+    "you_played": "Umecheza {card} kwenye chungu la kati {index}.",
+    "opponent_played": "Mugambi {player_id} amecheza {card} kwenye chungu la kati {index}.",
+    "you_discarded": "Umethupilia mbali karata {card} kwenye kĩndũ kĩa kũthupilia mbali {index}, ambayo pia ina maana umemaliza zamu yako. Hakuna hatua nyingine ya kwako inazingatiwa kwa zamu hii. Mchezaji {next_player_id} atakwendelea.",
+    "opponent_discarded": "Mugambi {player_id} ameikomboa {card} kwenye chungu la kukomboa {index}, ambayo ina maana kwamba amemaliza mchezo wake. Hatua zingine za Mugambi {player_id} hazizingatiwi kwa mchezo huu. Mugambi {next_player_id}, utacheza mchezo ujao. Tafadhali ingiza hatua yako kwa muundo [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mchezaji {current_player} amemaliza sarafu yake ya malipo! Mchezaji {current_player} anashinda!",
+    "deadlock_player_0": "Kufikia kikomo! Mugambi 0 anashinda na {player_0_payoff} kadi zimesalia dhidi ya Mugambi 1 {player_1_payoff} kadi.",
+    "deadlock_player_1": "Kufikia kikomo! Mugambi 1 anashinda na {player_1_payoff} kadi zimesalia dhidi ya Mugambi 0 {player_0_payoff} kadi.",
+    "deadlock_tie": "Kutokana na usawa wa nguvu! Wachezaji wote wawili wana kadi {player_0_payoff} zilizosalia. Mchezaji {current_player} anashinda kwa kawaida."
+  }
+}

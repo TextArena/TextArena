@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "O n ṣere Gọọfu (Awọn ere Kaadi) - Player {player_id}. Goal: Gba awọn ti o kere lapapọ score ni yi nikan yika. Ti o ba ti ọwọn pin awọn kanna iye, ti won ti wa ni summed bi 0. Kaadi iye: A = 1, 2-10 = oju iye, J / Q = 10, K = 0 Actions (lo gangan brackets): - '[draw]' - Fa lati dekini - '[take]' - Ya lati egbin discard - '[swap X Y]' - Swap fa kaadi pẹlu ipo X (row) Y (column) - '[discard]' - Fi awọn kaadi fa "
+  },
+  "board": {
+    "drew": "O fa: {card} Bayi o gbọdọ [swap X Y] tabi [discard] o.",
+    "took": "O gba: {card} lati inu àpò ìyọnu O gbọdọ [swap X Y] pẹlu rẹ (kò le ṣe ìyọnu).",
+    "peeked": "O wo inu ipo ({row},{col}): {card}",
+    "turn_view": "Ọwọ rẹ: {hand} Àkójọ ìsọ̀kan: {discard} {options}",
+    "none": "Kò sí"
+  },
+  "options": {
+    "final_turns": "Ìyí ìkẹyìn! Àwọn àyè rẹ: [draw], [take], [peek X Y]",
+    "draw": "Àwọn àyè rẹ: [draw], [take]",
+    "must_swap": "O gbọdọ: [swap X Y] (kò lè fi kaadi sílẹ̀ láti inú àpò ìyókù)",
+    "swap_or_discard": "O gbọdọ: [swap X Y] tabi [discard]"
+  },
+  "hand": {
+    "no_cards": "Kò sí káàdì",
+    "header": "Àpótí: 1 2 3",
+    "row": "Ojú-ìwé {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Ẹ̀yà orin {pid} pààrọ̀ {new} pẹ̀lú {old} ní ipò ({row},{col})",
+    "discarded": "Oṣere {pid} ti kọsilẹ kárí {card}"
+  },
+  "message": {
+    "deck_empty": "Àpótí náà ti di ahoro!",
+    "knocked": "Ẹnìkan {pid} ti kọlu! Ẹnìkan yòókù gba ìyíkan síi.",
+    "final_round": "Oṣere {pid} {reason}! Ọkọọkan oṣere mìíràn rí iye ìgbà kan sì."
+  },
+  "reason": {
+    "all_revealed": "ṣé gbogbo káàdì tó wà nínú rẹ̀ ló ti hàn?"
+  },
+  "invalid": {
+    "wrong_action": "Lo gangan ỌKAN ti a fi si abẹlẹ: [draw], [take], [swap X Y], [discard], [knock], tabi [peek X Y]",
+    "discard_empty": "Kò sí nǹkan kan nínú àpò ìdọ̀tí náà!",
+    "must_draw_first": "O gbọdọ kọkọ [draw], [take], [knock], tabi [peek X Y]",
+    "cannot_discard_taken": "O ko le ta kaadi ti o gba lati inu akojopo awon kaadi ti a ta sile. O gbodo yi i.",
+    "have_drawn_card": "O ní káàdì tí a fà. O ní láti [swap X Y] tàbí [discard] ó.",
+    "need_drawn_swap": "O nílò káàdì tí wọ́n fà láti fi pààrọ̀.",
+    "need_drawn_discard": "O nílò káàdì tí wọ́n fà láti fi sọ nù.",
+    "out_of_bounds": "Ipo ti o wa ni ita awọn aala. Lo ila 1-{max_row}, ọwọn 1-{max_col}",
+    "knock_with_card": "O ko le lu ija pẹlu kaadi ti o gba. Ṣe pari igo rẹ kọjọ kojọ.",
+    "already_knocked": "Ẹnì kan ti já bọ́ọ̀lù yìí.",
+    "already_revealed": "A ti ṣí káàdì yẹn payá!"
+  },
+  "summary": {
+    "full": "Eré ti parí! Oṣere {winner} ló gbẹ̀ẹ́ pẹ̀lú àmì {score}!\n\nÀmì Parí:\n{scores}",
+    "line": "Oṣere {pid}: àmì {score}\n"
+  },
+  "board_str": {
+    "title": "=== GOLF GAME === Ìṣirò àti ìsọfúnni",
+    "discard": "Àpò ìyọnu: {card}",
+    "knocked": "Ẹnìkan {pid} ti kan ilẹ̀kùn!",
+    "player_header": "Ẹ̀yin òṣèré {pid} (Ìdíje: {score}):"
+  }
+}

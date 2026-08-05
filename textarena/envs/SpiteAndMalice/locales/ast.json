@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Yes Player {player_id} nun xuegu de dos xugadores de Spite and Malice. El to oxetivu ye ser el primeru n'acabar cola to pila de pagu.\n\n### Visión xeneral del xuegu:\n- L'oxetivu ye llimpiar la to pila de pagu xugando cartes a les piles centrales.\n- Pues xugar cartes de tres fontes:\n  1. La to **mano** (empieces cada vez con hasta 5 cartes en mano).\n  2. La **carta cimera de la to pila de pagu**.\n  3. La **carta cimera de cualesquiera de les tos piles de refugaya**.\n\n### Regles de xuegu:\n- Pues xugar una carta a una pila central si ye **una categoría más alta** que la carta cimera nesa pila (les piles centrales empiecen con As y lleguen hasta Reina; los Reyes son comodinos - puen xugase sobre cualquier carta pero nun camuden la secuencia de categoría. Esto significa que si un Rei s'usa dempués d'un 4, esi Rei tien categoría 5 y la siguiente carta tien de ser un 6).\n- Si nun puen xugar más cartes, debes **refugar una carta** a una de les tos piles de refugaya pa finar la to vez.\n- Si una pila central llega a Reina, llimpiaráse automáticamente.\n- La orde de categoría ye: A=1, 2=2, ..., 9=9, J=10, Q=11, K como comodín.\n\n### Aiciones:\n1. **Robar**: Al entamu de la to vez, roba cartes pa enllenar la to mano hasta 5 cartes. Introduz **[draw]** pa entamar.\n2. **Xugar una carta**: Pa xugar una carta, especifica la carta y la pila central asina: **[play A♠ 0]** (onde 'A♠' ye la carta y '0' ye l'índiz de la pila central).\n3. **Refugar**: Si nun puen xugar más cartes, refuga una carta de la to mano a una pila de refugaya pa finar la to vez. Introduz **[discard A♠ 1]** (onde 'A♠' ye la carta y '1' ye l'índiz de la pila de refugaya). Ten en cuenta que nun puen refugar nenguna carta de la pila de pagu. Namái puen refugar les cartes de la to mano.\n\n"
+  },
+  "board": {
+    "current_board": "Tableru actual:\n\n{board}\nMovimientos disponibles: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Piles centrales --- ",
+    "pile": "{observation}Montón {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Visión del Xugador {player_id} ---\n",
+    "payoff": "{observation}Montón de paga (Carta cimera): {top_card}, Llargor del montón de paga: {payoff_length}\n",
+    "hand": "{observation}Mano: {hand} ",
+    "discard": "{observation}Montones de desaniciu: {discard}\n",
+    "empty": "Vacíu."
+  },
+  "game_message": {
+    "no_cards_left": "Nun hai más cartes pa sacar. Recuerda que puedes xugar les tarxetes d'estes fontes: 1. La to mano 2. El top card de la pila paga 3. El top cards de cualesquier otra pila descarta. "
+  },
+  "invalid_move": {
+    "wrong_format": "El xugador {player_id} nun respondió con un movimientu válidu en paréntesis rectangulares.",
+    "invalid_play": "Xugada inválida. Xugador {player_id} intentó xugar {card} nel montón central {index}.",
+    "discard_from_payoff": "El xugador {player_id} intentó deshacerse d'una carta del montón de pagos.",
+    "discard_not_in_hand": "El xugador {player_id} intentó descartar una carta que nun ta na so mano.",
+    "wrong_move_type": "El xugador {player_id} nun respondió con un tipu de movimientu válidu."
+  },
+  "game_action": {
+    "you_drew": "Robasti cartes.",
+    "opponent_drew": "El xugador {player_id} dibuxó cartes.",
+    "you_played": "Xugasti {card} nel montón central {index}.",
+    "opponent_played": "El xugador {player_id} xugaba {card} na pila central {index}.",
+    "you_discarded": "Desaniciasti {card} al montón de desaniciu {index}, lo que tamién significa que rematasti la to vuelta. Nenguna otra aición tuya se considera pa esta vuelta. Xugador {next_player_id} va ser el próximu.",
+    "opponent_discarded": "Xugador {player_id} desanició {card} al montón de desaniciu {index}, lo que tamién significa que remató la so vuelta. Nenguna otra aición del Xugador {player_id} se considera pa esta vuelta. Xugador {next_player_id}, vas ser el próximu. Por favor, introduce la to aición nel formatu [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Xugador {current_player} acabó con el so montón de paga! Xugador {current_player} gana!",
+    "deadlock_player_0": "Alcánzose un puntu muertu. Xugador 0 gana con {player_0_payoff} cartes restantes vs {player_1_payoff} cartes del Xugador 1.",
+    "deadlock_player_1": "Alcánzose un puntu muertu. Xugador 1 gana con {player_1_payoff} cartes restantes vs {player_0_payoff} cartes del Xugador 0.",
+    "deadlock_tie": "Alcánzose un puntu muertu con empate. Dambos xugadores tienen {player_0_payoff} cartes restantes. Xugador {current_player} gana por defeutu."
+  }
+}

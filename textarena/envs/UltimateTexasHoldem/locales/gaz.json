@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Ammallee kaardii hin qabnu.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Tokko Player vs Dealer\n\n📖 GAME OVERVIEW:\n• Jalqaba {start_chips} chip\n• Deck kaartii tokko 52 (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Gocha player vs dealer (mana)\n• Round tokko tokko Ultimate Texas Hold'em structure qaba: ANTE fi BLIND bets godhu, 2 kaartii argattu, PLAY bets optional godhu, kaartii community argattu, fi kaartii 5-sararaa player vs dealer mijaawu. Goal kee maximizii winnings (yoo kaartii sirrii qabda), fi minimize loss (yoo kaartii doofaa qabda).\n• Game dhumessa yoo chip kee 0 ykn gadii jalqaba round (LOSS) ykn 1000 round guutuu chip kee (WIN)\n\n💰 BETTING STRUCTURE:\n• ANTE: Mandatory ${ante} bet round tokko\n• BLIND: Mandatory ${ante} bet round tokko\n• PLAY: Optional bet gameplay keessatti. Round keessatti, tokko tokko godhu: (${ante4} yoo PRE-FLOP, ${ante2} yoo FLOP, ykn ${ante} yoo RIVER. Yoo kaartii river, fold godhu, fi bet hin godhin.)\n\n🎴 CARD DEALING:\n• 2 kaartii argattu (kaartii kee)\n• Dealer 2 kaartii argattu (hidden keessan)\n• 5 kaartii community argattu face-down jalqaba\n• Kaartii community progressive godhu phase keessatti\n\n🏆 DEALER QUALIFICATION:\n• Dealer kaartii PAIR (2 kaartii sirrii) qabu, 2 kaartii fi 5 kaartii community.\n• Dealer qualification betting outcomes affect, as will be explained later.\n\n🎮 GAME PHASES & ACTIONS:\n📋 PRE-FLOP:\n  • Actions: [4x] (${ante4}) ykn [check]\n  • [4x]: Place ${ante4} PLAY bet, reveals first 3 kaartii community\n  • [check]: No additional bet, reveals first 3 kaartii community\n\n📋 FLOP:\n  • Yoo 4x bet godhe: Only [skip] available (auto-reveals last 2 kaartii community)\n  • Yoo 4x bet hin godhin: [2x] (${ante2}) ykn [check]\n  • [2x]: Place ${ante2} PLAY bet, reveals last 2 kaartii community\n  • [check]: No additional bet, reveals last 2 kaartii community\n\n📋 RIVER:\n  • Yoo 4x ykn 2x bet godhe: Only [skip] available (auto-proceeds showdown)\n  • Yoo PLAY bet hin godhin: [1x] (${ante}) ykn [fold]\n  • [1x]: Place ${ante} PLAY bet, proceeds showdown\n  • [fold]: Give up kaartii, lose ANTE fi BLIND bets\n\n📋 SHOWDOWN:\n  • Kaartii hundi argattu fi evaluated\n  • Best 5-sararaa kaartii 7 kaartii (2 kaartii + 5 kaartii community)\n  • Bets settled according payout rules\n\n💎 BET PAYOUTS:\n📊 ANTE BET:\n  • Dealer doesn't qualify: PUSH (bet returned)\n  • Dealer qualifies & you win: 1:1 payout (bet + winnings)\n  • Dealer qualifies & you lose: Bet lost\n  • Tie: PUSH (bet returned)\n\n📊 BLIND BET:\n  • Unaffected dealer qualification\n  • You win: Bet returned fi additional payout based hand strength\n  • You lose: Bet lost\n  • Tie: PUSH (bet returned)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: No additional payout\n\n📊 PLAY BET:\n  • Unaffected dealer qualification\n  • Direct comparison: Your best hand vs Dealer's best hand\n  • You win: 1:1 payout (bet + winnings)\n  • You lose: Bet lost\n  • Tie: PUSH (bet returned)\n\n🎯 POKER HAND RANKINGS (Best to Worst):\n  1. Royal Flush: A-K-Q-J-10 of same suit\n  2. Straight Flush: 5 consecutive cards of same suit\n  3. Four of a Kind: 4 cards of same rank\n  4. Full House: 3 of a kind + 2 of a kind\n  5. Flush: 5 cards of same suit\n  6. Straight: 5 consecutive cards\n  7. Three of a Kind: 3 cards of same rank\n  8. Two Pair: 2 pairs of different ranks\n  9. One Pair: 2 cards of same rank\n  10. High Card: Highest card wins\n\n⌨️  ACTION COMMANDS:\n• [4x] ykn [play bet 4x]: Place ${{self.ante_amount*4}} PLAY bet\n• [2x] ykn [play bet 2x]: Place ${{self.ante_amount*2}} PLAY bet\n• [1x] ykn [play bet 1x]: Place ${{self.ante_amount*1}} PLAY bet\n• [check] ykn [c]: Check (no additional bet)\n• [fold] ykn [f]: Fold (give up kaartii)\n• [skip] ykn [s]: Skip to next phase (when no action needed)\n\n💡 STRATEGY TIPS:\n• Strong starting hands (pairs, high cards) often justify 4x bets\n• Consider dealer qualification - weak hands may push if dealer doesn't qualify\n• BLIND bet can be very profitable with strong hands (Royal Flush = 500:1!)\n• Watch your chip stack! If it goes to 0 or below at start of round, you lose.\n\n⚠️  IMPORTANT NOTES:\n• ANTE fi BLIND bets are mandatory every round\n• PLAY bets are optional fi strategic\n• Make sure you input the correct action, fi only one action at a time.\n\n",
+    "state": "🎯 DUUBA {round}\n💰 Chipotaa: {chips}\n🎴 Hundee kee: {hand}\n📊 Kaffaltii ammaa: Ante ${ante}, Blind ${blind}, Tapha ${play}\n📋 Faaga: {phase}\n🎯 Sochiilee malaa: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Round {round} jalqabe! Bets: ANTE ${ante}, BLIND ${blind}. {chips} chips illee.",
+    "your_hand": " Harka kee: {hand}",
+    "flop_revealed": " FLOP mul'ise: {cards}",
+    "river_revealed": " RIVER mul'ise: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Tarkaanfii hin fudhatamneef sadarkaa amma jiru. Tarkaanfiiwwan jiran: {available}",
+    "message": " Tarkaanfii hin malle! Tarkaanfiiwwan jiran: {available}"
+  },
+  "action": {
+    "folded": " Ati ni gadhiifte."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Harka daldalaan: {cards}",
+    "community_cards": " Kaardiiwwan hawaasaa: {cards}",
+    "player_best": "🎴 Hundee gaarii nama taphataa: {name} ({cards})",
+    "dealer_best": "🎴 Dealer's best hand: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (dabale)",
+    "blind_lost_folded": " BILIND bet LOST! -${blind} (dabalee)",
+    "ante_won": "✅ ANTE bet WON! +${amount} (Gabaasa)",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} deebi'e.",
+    "ante_lost": " ANTE bet LOST! -${ante}",
+    "blind_won": "✅ WANTIIN DHABAA GALA! +${amount}",
+    "blind_pushed": " BILIND bet PUSHED! ${blind} deebi'e.",
+    "blind_lost": " BILIND bet LOST! -${blind}",
+    "play_won": "✅ PLAY bet WON! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} deebi'e.",
+    "play_lost": " PLAY bet LOST! -${play}",
+    "net_gain": "🎉 Round {round} xumure! Net gain: +${net}",
+    "net_loss": "💸 Round {round} xumure! Net loss: ${net}",
+    "separator": "i-ii -iii i ii u iiiu uiuiiu uu iuuiuuuuii, uu uu uuouuuu ui ui uiuu ui uiu."
+  },
+  "outcome": {
+    "game_over_win": "🏁 TAPHA DHUMAA! {max_turns} duuba xumurame. Chipotaa ${chips} qabda - ATIN MO'OTTE!",
+    "game_over_lose": "GAME OVER! Chiipsi keessan dhumeera. Deeliin ni mo'ata!",
+    "reward_win": "Taphataan {winner_rounds} duuba xumuree chipotaa ${chips} qabu",
+    "reward_lose": "Taphattuun marsaa {round} keessatti chiipsi isaa dhume.",
+    "reward_win_max": "Taphataan {max_turns} duuba xumuree chipotaa ${chips} qabu"
+  },
+  "hand_names": {
+    "royal_flush": "Rooyaal Filas (Royal Flush)",
+    "straight_flush": "Dirree Dhugaatti Xuuxuun (Straight Flush)",
+    "four_of_a_kind": "Gosa Arfan",
+    "full_house": "Mana guutuu",
+    "flush": "Fuuleessaa (flush)",
+    "straight": "Sirrii",
+    "three_of_a_kind": "Gosa Sadiifi Tokko Taʼu",
+    "two_pair": "Lamaanuu Lama Taʼu",
+    "one_pair": "Hiriyaa Tokko",
+    "high_card": "Kaardii ol'aanaa",
+    "unknown": "Harka hin beekamne"
+  }
+}

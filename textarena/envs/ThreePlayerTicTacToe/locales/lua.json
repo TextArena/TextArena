@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Owe udi mukwetu {player_id} mu Three-Player Tic Tac Toe.\nKibonde kienu ni '{symbol}'.\nOsekeleza kubaka kibonde kienu pa plateau 5x5 po kutunga mstari wa nne.\nMistari inaweza kuwa wima, mlalo au diagonal.\nTumishe mbinu ya kuweka '[4]' po kubaka cellule 4."
+  },
+  "board": {
+    "current_board": "Lubamba lwa Bombo:\n\n{board}\n\nMikondo ya Kufika: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Mudibu bateke mushindu mubi wa kuteka bintu. Kuenza mudimu ne \"[cell]\" muaba udi kasumbu ka 0-{max_cell}.",
+    "out_of_range": "Numero wa kasumbu ka muntu udi kayi muakanyine: {cell}. Udi ne bua kuikala pankatshi pa 0 ne {max_cell}.",
+    "already_occupied": "Kasumbu {cell} kakadi kaleja muntu.",
+    "made_invalid": "Muena manaya {player_id} wakenza tshingoma tshibi."
+  },
+  "game_action": {
+    "placed": "Mwani {player_id} akatamba ishemo lake ({symbol}) mu nsi ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Mwani {player_id} ({symbol}) ashinda!",
+    "draw": "Tshimfuanyi etshi tshidi tshipatula bipeta bibi!"
+  }
+}

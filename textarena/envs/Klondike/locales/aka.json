@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Wɔrekyere Klondike Solitaire. W'abrabɔ ne sɛ wɔbɛfa kaad nnyinaa kɔ foundation piles.\n\nMmara a wɔde di dwuma:\n- Foundation piles (F1-F4): Si kaad firi Ace kɔpem King wɔ suit mu\n- Tableau piles (T1-T7): Si kaad so wɔ nkrɔnkrɔn kɔla (kɔkɔɔ wɔ tuntum, tuntum wɔ kɔkɔɔ)\n- Stock: Fa kaad firi stock kɔ waste pile\n- Waste (W): Kaad a ɛwɔ soro pɛ sɛ wɔbɛfa\n\nNkyerɛkyerɛmu:\n- 'draw' - Fa kaad firi stock kɔ waste\n- 'move <source> <destination> [count]' - Fa kaad firi ɔfa kɔ kɔ\n  Nhwehwɛmu: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count nso betumi ayɛ 'all', a wɔbɛpɛ sɛ wɔbɛfa kaad nnyinaa a ɛwɔ anim.\n- 'forfeit' - Bɔ dwumadie no ɛnɛ na wɔkyekyere w'agorɔ a ɛwɔ soro\n- Pile din: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nWobɛtumi ayɛ nnwuma pii wɔ kwan baako mu sɛ wɔde comma na ɛkyekyere:\n  Nhwehwɛmu: 'draw, move W T1, move T2 F1'\n\nNkwaadɔm pɛ sɛ wɔbɛsi no wɔ tableau piles a ɛwɔ hɔ.\nNnwuma no bɛyɛ wɔ kwan no - sɛ ɛbaako antumi, a wɔbɛkye nnwuma a aka no.\nFa 'forfeit' sɛ w'adwen ho sɛ dwumadie no nnyɛ hwee sɛ wɔbɛdi nkonim."
+  },
+  "format_error": {
+    "no_brackets": "Akwan a ɛmfata. Ɛsɛ sɛ akwan no yɛ brackets mu.",
+    "no_closing_bracket": "Akwan a wɔfa so yɛ adwuma no ho nteɛ. Nkyinkyimfo bracket nni hɔ ']'",
+    "empty_command": "Akwankyerɛ a enni mu. Twerɛ 'draw' anaa 'move <source><destination> [count]'.",
+    "empty_action": "Akwan a enni mu",
+    "move_needs_args": "Nkyerɛkyerɛmu 'move' hia ɔfa ne kɔ. Sɛdeɛ wɔde di dwuma: 'move <source> <destination> [count]'",
+    "count_positive": "Nsɛm a wɔka no 'count' no, ɛsɛ sɛ ɛyɛ positive anaa 'all'.",
+    "count_invalid": "Nsɛm a wɔka no 'count' no yɛ saa. Sɛ wɔka number anaa 'all'.",
+    "unknown_command": "Ɛhɔ nhwɛso '{cmd}'. Di 'draw', 'move <source> <destination> [count]', anaa 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "{n}deε edi kan a εwɔsεε ansa na ne ho yε f.",
+    "failed": "Action {n} abɔso: {msg}"
+  },
+  "move_result": {
+    "drew": "Ɔtwe kaade no firi nnwoma mu kɔ sɛe.",
+    "cannot_draw": "Wontumi mfa ntow. Nneɛma a wɔde gu hɔ ne nea wɔtow no nyinaa asa.",
+    "invalid_pile": "Nkyerεma a enni mu. Fa W, F1-F4, anaa T1-T7 di dwuma",
+    "foundation_one_card": "Wobetumi de krataafa 1 pɛ akɔ fapem no so.",
+    "waste_to_foundation_ok": "Karta a wɔayi afi atɛkyɛ mu akɔ beaeɛ foforo F{dst}",
+    "waste_to_foundation_bad": "Wontumi mfa kartidie a w'ayi no nkɔ saa fapem kodoɔ yi so",
+    "tableau_to_foundation_ok": "Kɔɔ kɔtɔn firi tableau T{src} kɔɔ foundation F{dst}",
+    "tableau_to_foundation_bad": "Ntumi mfa tableau card nka saa foundation pile no ho",
+    "foundation_to_foundation": "Wontumi nkekae mfi fapem kɔ fapem mu.",
+    "waste_to_tableau_one_card": "Wobɛtumi ayi krataa baako pɛ afi ɔfasuo mu akɔ tableau so.",
+    "waste_to_tableau_ok": "Wɔde krataa no firi waste kɔ tableau T{dst} no mu.",
+    "waste_to_tableau_bad": "Wontumi mfa kartidie a w'ayi no nto saa tableau pile yi so",
+    "no_face_up": "Nkrataa a ɛda fam nni hɔ a ɛsɛ sɛ wɔtwe no.",
+    "tableau_to_tableau_ok": "Kɔɔ kɔtɔn {count} firi tableau T{src} kɔɔ T{dst}",
+    "tableau_to_tableau_bad": "Mmerɛ biara mfa kɔtɔn {count} firi T{src} kɔɔ T{dst}",
+    "foundation_to_tableau_one_card": "Wobɛtumi asesa kaade 1 pɛ afi ɔfese akɔ table.",
+    "foundation_empty": "Foundation F{src} yɛ empty",
+    "foundation_to_tableau_ok": "Kɔɔ kɔtɔn firi foundation F{src} kɔɔ tableau T{dst}",
+    "foundation_to_tableau_bad": "Ntumi mfa foundation card nto table T{dst} so.",
+    "to_waste_or_stock": "Wontumi mfa nkɔ w'aduro anaa wo nkuraase mu."
+  },
+  "outcome": {
+    "forfeit": "Agoru no agyae. Nkonim a etwa to: {score} nkrataa wɔ fapem mu.",
+    "won": "Anigye! Woadi Klondike Solitaire no so nkonim!",
+    "turn_limit": "Agɔde! Woduu fɔ wɔ {max_turns} turns no. Score: {score} kɔtɔn wɔ foundations."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== (Ɔtoaa so sɛ: \"Mma w'ani nnye\")",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Krataafa: {stock} nkrataafa",
+    "waste": "Waste (W): {waste}",
+    "foundations_header": "Nnyinasoɔ:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Adesua:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

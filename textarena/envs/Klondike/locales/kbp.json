@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Ɛyʊ waŋ Klondike Solitaire. Ɛyʊ tɔm kɛɛɛ kɛɛ pɩŋga yɔɔ.\n\nPaɣtʊ tɩŋga:\n- Pɩŋga yɔɔ (F1-F4): Kɛɛɛ pɩŋga yɔɔ kɛɛɛ kɛɛ\n- Pɩŋga tɩŋga (T1-T7): Kɛɛɛ pɩŋga tɩŋga kɛɛɛ kɛɛ\n- Pɔɔɖɛɛɛ: Kɩmaŋ wɛɛɛ kɛɛɛ pɔɔɖɛɛɛ yɔɔ\n- Pɔɔɖɛɛɛ (W): Kɩmaŋ wɛɛɛ yɔɔ\n\nPaɣtʊ:\n- 'draw' - Kɩmaŋ wɛɛɛ kɛɛɛ pɔɔɖɛɛɛ yɔɔ\n- 'move <source> <destination> [count]' - Kɩmaŋ wɛɛɛ kɛɛɛ pɩŋga\n  Ɖɔɖɔɔ: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count wɛɛɛ 'all', nɛɛ tɔm kɛɛɛ kɛɛ pɩŋga yɔɔ.\n- 'forfeit' - Ɛyʊ tɔm kɛɛɛ kɛɛ pɩŋga yɔɔ\n- Pɩŋga yɔɔ: W (pɔɔɖɛɛɛ), F1-F4 (pɩŋga yɔɔ), T1-T7 (pɩŋga tɩŋga)\n\nƐyʊ waŋ tɔm kɛɛɛ kɛɛ pɩŋga yɔɔ, pɩŋga tɩŋga kɛɛɛ kɛɛ.\nPaɣtʊ tɩŋga tɔm kɛɛɛ kɛɛ pɩŋga yɔɔ.\nƉɔɖɔɔ 'forfeit' ɛyʊ waŋ tɔm kɛɛɛ kɛɛ pɩŋga yɔɔ."
+  },
+  "format_error": {
+    "no_brackets": "Tʋma wena a-labɩna nɛ pɩfɛyɩ ɖeu yɔ, pɩwɛɛ se awɛ cɛcɛsɩ taa.",
+    "no_closing_bracket": "Tʊmɩyɛ nɖɩ ɖɩfɛyɩ ɖeu. Pɩtɛɖɩɣ kɩ-taa tɔmpiye \"]\" yɔ\".",
+    "empty_command": "Tɛɛ tɛɛ ɛ-hɛzɩɣ. Mɑɣ 'draw' ɛntaa 'move <source> <destination> [count]'",
+    "empty_action": "Tʋma wena paalakɩ yɔ a-tɔm",
+    "move_needs_args": "Tɛɛ tɛɛ ɛ-hɛzɩɣ tɛɛ tɛɛ. Mɑɣ 'move <source> <destination> [count]'",
+    "count_positive": "Kɛɛlɛɛ tɛɛ ɛ-hɛzɩɣ. Mɑɣ sɩɣɖɛ ɛntaa 'all'",
+    "count_invalid": "Kɛɛlɛɛ tɛɛ ɛ-hɛzɩɣ. Mɑɣ sɩɣɖɛ ɛntaa 'all'",
+    "unknown_command": "Pɩlɩŋa weyi ɖɔɖɔ '{cmd}'. Sɩɣa 'draw', 'move <source> <destination> [count]', or 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Tɛɛ {n} tɛɛ tɛɛ tɛɛ tɛɛ.",
+    "failed": "Tɛɛ {n} tɛɛ ɛ-hɛzɩɣ: {msg}"
+  },
+  "move_result": {
+    "drew": "Kɩmaŋ wɛɛɛ kɛɛɛ pɔɔɖɛɛɛ yɔɔ.",
+    "cannot_draw": "Paɣtʊ tɩŋga wɛɛɛ kɛɛɛ pɔɔɖɛɛɛ yɔɔ.",
+    "invalid_pile": "Pɩlɩ tɛɛ ɛ-hɛzɩɣ. Mɑɣ W, F1-F4, ɛntaa T1-T7",
+    "foundation_one_card": "Kɩmaŋ wɛɛ kɛɛlɛɛ kɛɛ pɩŋga yɔɔ",
+    "waste_to_foundation_ok": "Tɛɛ kɛlɛɛ tɛɛ F{dst}",
+    "waste_to_foundation_bad": "Paɣtʊ tɩŋga wɛɛɛ pɔɔɖɛɛɛ yɔɔ pɩŋga yɔɔ",
+    "tableau_to_foundation_ok": "Tɛɛ kɛlɛɛ T{src} nɛ F{dst}",
+    "tableau_to_foundation_bad": "Pɩlɩ tɛɛ ɛ-hɛzɩɣ tɛɛ tɛɛ",
+    "foundation_to_foundation": "Pɩlɩ tɛɛ ɛ-hɛzɩɣ tɛɛ tɛɛ",
+    "waste_to_tableau_one_card": "Kɩmaŋ wɛɛɛ kɛɛɛ pɔɔɖɛɛɛ yɔɔ pɩŋga",
+    "waste_to_tableau_ok": "Tɛɛ kɛlɛɛ tɛɛ T{dst}",
+    "waste_to_tableau_bad": "Paɣtʊ tɩŋga wɛɛɛ pɔɔɖɛɛɛ yɔɔ pɩŋga tɩŋga",
+    "no_face_up": "Paɣtʊ tɩŋga wɛɛɛ nɛɛ",
+    "tableau_to_tableau_ok": "Tɛɛ kɛlɛɛ {count} kɛɛlɛɛ tɛɛ T{src} nɛ T{dst}",
+    "tableau_to_tableau_bad": "Pɩlɩ tɛɛ ɛ-hɛzɩɣ {count} kɛɛlɛɛ T{src} nɛ T{dst}",
+    "foundation_to_tableau_one_card": "Kɩmaŋ wɛɛɛ kɛɛɛ pɩŋga yɔɔ pɩŋga",
+    "foundation_empty": "F{src} tɛɛ ɛ-hɛzɩɣ",
+    "foundation_to_tableau_ok": "Tɛɛ kɛlɛɛ F{src} nɛ T{dst}",
+    "foundation_to_tableau_bad": "Paɣtʊ tɩŋga wɛɛɛ kɛɛɛ pɩŋga T{dst} yɔɔ",
+    "to_waste_or_stock": "Eɖeke tɔm wɛɛɛ pɔɔɖɛɛɛ yɔɔ"
+  },
+  "outcome": {
+    "forfeit": "Kɩbɩɩ tɛɛ. Tɛɛ sɩɣɖɛ {score} kɛɛlɛɛ tɛɛ",
+    "won": "Kɩbɩɩ! Wɛɛɛ Klondike Solitaire!",
+    "turn_limit": "Kɩbɩɩ! Wɛɛɛ tɛɛ tɛɛ {max_turns} tɛɛ. Sɩɣɖɛ: {score} kɛɛlɛɛ tɛɛ"
+  },
+  "board": {
+    "title": "Kʋnʋmɩŋ ndɩ ndɩ taa tɔm kɩcɛyɩtʋ. === KLONDIKE SOLITAIRE===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Tɛɛ: {stock} kɛɛlɛɛ",
+    "waste": "Tɛtʊ ndʊ tɩ-taa paɖʊʊ tʊma yɔ: {waste}",
+    "foundations_header": "Tʋma ɖɩlaɖɛ nɛ a-taa wobu:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Takayɩhatʋ ndʋ tɩtamsɩna \\\\ 1",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

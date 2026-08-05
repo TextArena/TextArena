@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "Píle reatha: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Níl aon fhormáid gluaiseachta bailí le fáil. Úsáid '[pile quantity]'.",
+    "correct_format_wrong_fields": "Imreoir {player_id}, Gníomh neamhbhailí. Tá colún {col} as teorainn.",
+    "out_of_range": "Tá innéacs na píola {pile_index} lasmuigh den raon.",
+    "non_positive": "Ní mór dó rud amháin ar a laghad a bhaint.",
+    "exceeds_pile": "Ní féidir {quantity} a bhaint as carn {pile_index} (níl ach {pile_count} fágtha)."
+  },
+  "observation": {
+    "removed_from_piles": "D'imir Imreoir {player_id} [{pile_index} {quantity}], ag baint {quantity} ábhar(as) as carn {pile_index}."
+  },
+  "outcome": {
+    "win": "Ghlac imreoir {player_id} an t-ábhar deireanach ((s)!"
+  }
+}

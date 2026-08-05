@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Serp del jogaire sus un grillat {width}×{height}.\nControlatz la serp {player_id}. Movements valables: '[up]'/'[down]'/'[left]'/'[right]' (o w/s/a/d).\nObjectiu: subreviure mai longtemps o èsser lo mai long e obtenir lo puntatge mai naut (limita de torns {max_turns} torns)."
+  },
+  "board": {
+    "current": "Taulièr actual:\n{board}",
+    "after_moves": "Estat actual del taulièr:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Serpent {player_id} moriguèt a causa d'un movement invalid."
+  },
+  "outcome": {
+    "survived_win": "Lo jogaire {player_id} subrevisquèt; totes los autres moriguèron.",
+    "all_dead_simul": "Totas las sèrps moriguèron simultanèament.",
+    "outlived": "Lo jogaire a subreviscut totes los autres.",
+    "all_dead": "Totas las sèrps mòrtas.",
+    "turn_limit": "Limite de virada atengut - lo melhor score ganha l'estagi.",
+    "ranking": "{reason} Classament final dels grops (pitjor→melhor): {groups}"
+  }
+}

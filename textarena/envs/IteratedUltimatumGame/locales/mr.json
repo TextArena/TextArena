@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "तुम्ही खेळाडू {player_id} आहात, पुनरावृत्ती अल्टिमेटम गेमच्या {num_rounds} फेऱ्या खेळत आहात. तुमच्याकडे ${pool} आहेत जे या फेरीला स्वतः आणि खेळाडू {other_id} यांच्यात विभाजित करा. प्रस्तावक: - एक ऑफर द्या: [Offer: $X] (0 <= X <= पूल) - जर स्वीकारले → तुम्हाला $ ((पूल - एक्स), इतर खेळाडू $ एक्स मिळते - जर नाकारले → दोन्ही मिळतात $ 0 - उदाहरणः [Offer: $3] किंवा 'मला वाटते की हे योग्य आहे. [Offer: $5]' प्रतिसादकर्ता: - ऑफरवर निर्णय घ्या [Accept] किंवा [Reject] - उदाहरणः 'हे वाजवी दिसते. [Accept]' 'खूप अन्यायकारक. [Reject]'"
+  },
+  "round": {
+    "begins": "--- राउंड {round_number} सुरु होतो! --- प्लेअर {proposer_id} प्रस्तावक आहे, प्लेअर {responder_id} प्रतिसादकर्ता आहे.",
+    "offer": "फेरी {round_number}: खेळाडू {proposer_id} खेळाडू {responder_id} ला ${offer} देते (${keep} ठेवून).",
+    "accepted": "खेळाडू {responder_id} स्वीकारला! फेरी {round_number} जिंकली: खेळाडू {proposer_id} + ${proposer_gain}, खेळाडू {responder_id} + ${responder_gain}. नवीन एकूण: खेळाडू 0: ${total_0}, खेळाडू 1: ${total_1}.",
+    "rejected": "खेळाडू {responder_id}ने ऑफर नाकारली! फेरी {round_number}ची कमाई: दोन्ही खेळाडू +$0. एकूण राहिलेः खेळाडू 0: ${total_0}, खेळाडू 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "प्रस्तावकाने [Offer: $X] या स्वरूपात प्रस्ताव सादर करावा.",
+    "bad_integer": "ऑफरची रक्कम एक वैध पूर्णांक असणे आवश्यक आहे.",
+    "out_of_range": "ऑफर $ 0 आणि $ {pool} दरम्यान असणे आवश्यक आहे.",
+    "no_current_offer": "प्रतिसाद देण्यासाठी सध्या कोणतीही ऑफर नाही.",
+    "accept_or_reject": "उत्तरदात्याने यापैकी एकतर [Accept] किंवा [Reject] ऑफर द्यावी."
+  },
+  "outcome": {
+    "win": "खेळाडू {winner}ने ${winner_total} एकूण vs खेळाडू {loser}चे ${loser_total} जिंकले.",
+    "draw": "दोन्ही खेळाडू ${total} एकूण जिंकले."
+  }
+}

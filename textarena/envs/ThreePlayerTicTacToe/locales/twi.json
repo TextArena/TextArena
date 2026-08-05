@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Wɔyɛ ɔkɔtɔni {player_id} wɔ Abien Three-Player Tic Tac Toe.\nWɔde '{symbol}' hyɛ wo. \nWɔde wo ho hyɛ bɔɔde a ɛwɔ 5x5 so forma mpoano a ɛyɛ nan.\nMpoano no bɛtɔ gu, anaasɛ ɛbɛkɔ faako, anaasɛ ɛbɛkɔ kɔkɔɔ.\nDe wo mmɔbɔ so sɛ '[4]' de hyɛ fie a ɛto so 4."
+  },
+  "board": {
+    "current_board": "Bɔɔde akyɛ sen:\n\n{board}\n\nMmɔbɔ a wɔde bɛma: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ntotoho a enni mu. Fa '[cell]' di dwuma bere a ɔdan no yɛ 0-{max_cell}.",
+    "out_of_range": "Nsɛm a ɛyɛ hu: {cell}. Ɛbɛyɛ sɛ ɛfiri 0 kɔsi {max_cell}.",
+    "already_occupied": "Nkwammoaa {cell} no wɔ hɔ dedaw.",
+    "made_invalid": "Ɔbɔadeɛ {player_id} yɛɛ ade a ɛmfata."
+  },
+  "game_action": {
+    "placed": "ɔkɔtɔni {player_id} de ne ho hyɛ ({symbol}) wɔ fie ({row}, {col})."
+  },
+  "outcome": {
+    "win": "ɔkɔtɔni {player_id} ({symbol}) di!",
+    "draw": "Agoru no yɛ pɛ!"
+  }
+}

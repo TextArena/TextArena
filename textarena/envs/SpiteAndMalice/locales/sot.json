@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "U wena Player {player_id} papaling ya Spite and Malice ya bapalami ba babedi. Sepheo sa hao ke ho ba wa pele ho senya sephutheloana sa hao sa payoff.\n\n### Tlhahlobo ya Papali:\n- Sepheo ke ho hlakisa sephutheloana sa hao sa payoff ka ho bapala dikareti ho ya dipapaling tsa kareti tsa katikati.\n- U ka bapala dikareti tse tswang metsweng e meraro:\n  1. Letsoho la hao **(u qala nako e nngwe le e nngwe ka dikareti tse 5 letsohong la hao)**.\n  2. **Kareti ya pele ya sephutheloana sa hao sa payoff**.\n  3. **Kareti ya pele ya sephutheloana sefe kapa sefe sa hao sa discard**.\n\n### Melao ya Bapalo:\n- U ka bapala kareti ho papaling ya kareti ya katikati haeba e le **rang e le nngwe e phahameng** ho kareti ya pele ya papali eo (dipapali tsa kareti tsa katikati di qala ka Ace mme di ya ho fihla Queen; Kings ke wild - di ka bapalwa holim'a kareti efe kapa efe empa di sa fetole rang ya mfuatano. Hona ho bolela hore haeba King e sebediswa kamora 4, joale King eo e rangwa 5 mme kareti e latelang e tlameha ho ba 6).\n- Haeba u sa kgone ho bapala dikareti tse ding, u tlameha **ho lahla kareti** ho sephutheloana sa hao sa discard ho fedisa nako ya hao.\n- Haeba papali ya kareti ya katikati e fihla Queen, e tla hlakiswa ka bo eona.\n- Rang ya mfuatano ke: A=1, 2=2, ..., 9=9, J=10, Q=11, K e le wild.\n\n### Ditiro:\n1. **Draw**: Qalang nako ya hao, kga dikareti ho tlatsa letsoho la hao ho fihla dikareti tse 5. Kena **[draw]** ho qala.\n2. **Bapala Kareti**: Ho bapala kareti, hlalosa kareti le papali ya kareti ya katikati jwaloka: **[play A♠ 0]** (kaha 'A♠' ke kareti mme '0' ke index ya papali ya kareti ya katikati).\n3. **Lahla**: Haeba u sa kgone ho bapala dikareti tse ding, lahla kareti ho tswa letsohong la hao ho sephutheloana sa discard ho fedisa nako ya hao. Kena **[discard A♠ 1]** (kaha 'A♠' ke kareti mme '1' ke index ya sephutheloana sa discard). Hlokomela hore u sa kgone ho lahla kareti efe kapa efe ho tswa sephutheloaneng sa payoff. U ka lahla dikareti tse tswang letsohong la hao feela.\n\n"
+  },
+  "board": {
+    "current_board": "Boro ya Toka:\n\n{board}\nDiketso tse Availabe: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Li-Pile tsa Bohareng --- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- View ya Mothami {player_id} ---\n",
+    "payoff": "{observation}Payoff Pile (Karte e kgolong): {top_card}, Boholo ba Payoff Pile: {payoff_length}\n",
+    "hand": "{observation}Lepina: {hand}\n",
+    "discard": "{observation}Tlaasana ya go Lahla: {discard}\n",
+    "empty": "E se nang letho"
+  },
+  "game_message": {
+    "no_cards_left": "Ha ho sa na likarete tseo u ka li hulang. Hopola hore o ka bapala karete e tsoang mehloling ena: 1. Letsoho la hao 2. Karete ea pele mokotleng oa hau oa moputso 3. Karete e holimo mekotong efe kapa efe eo ue lahlileng.  Ho tsoa sebakeng se seng, khetha letoto le leng feela bakeng sa papali ea chelete."
+  },
+  "invalid_move": {
+    "wrong_format": "Mohato o sa sebetseng. Sebapali {player_id} ha sea ka sa arabela ka motsamao o nepahetseng ho brackets tse sekwere.",
+    "invalid_play": "Tsebe sa kotsi e seng sa tempele. Mothami {player_id} a nyenyeletse go dula {card} ho pile ya kesele {index}.",
+    "discard_from_payoff": "Ho lahla ho sa sebetseng. Sebapali {player_id} se lekile ho lahlela karete e tsoang mokotleng oa moputso.",
+    "discard_not_in_hand": "Ho lahla ho sa sebetseng. Sebapali {player_id} se lekile ho lahlela karete e seng letsohong la sona.",
+    "wrong_move_type": "Mofuta oa motsamao o sa sebetseng. Sebapali {player_id} ha sea araba ka mofuta oa motjha o sebetsang."
+  },
+  "game_action": {
+    "you_drew": "U ile ua hula likarete.",
+    "opponent_drew": "Sebapali {player_id} se ile sa hula likarete.",
+    "you_played": "U ne u bapala {card} ka moleng o bohareng oa papali ea chelete {index}.",
+    "opponent_played": "Mothami {player_id} o dule {card} ho pile ya kesele {index}.",
+    "you_discarded": "U lahletse {card} ho tlaasana ya go lahla {index}, eo le e leng sebaka sa hore u feletswe ke turn ya hao. Ha ho na diketsahalo tse ling tsa hao tse nylenehileng ka turn ena. Mothami {next_player_id} a tla tsamaea ka mor'a hao.",
+    "opponent_discarded": "Mothami {player_id} o lahletse {card} ho tlaasana ya go lahla {index}, eo le e leng sebaka sa hore o feletswe ke turn ya hae. Ha ho na diketsahalo tse ling tsa Mothami {player_id} tse nylenehileng ka turn ena. Mothami {next_player_id}, u tla tsamaea ka mor'a hao. Tswela ka aksi yako ka maeko [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Motho wa papali {current_player} o senyehile sephutheloana sa hao sa payoff! Motho wa papali {current_player} o wile!",
+    "deadlock_player_0": "Deadlock e fihlile! Mothami 0 o winne le {player_0_payoff} karte e seng tluoa vs Mothami 1's {player_1_payoff} karte.",
+    "deadlock_player_1": "Deadlock e fihlile! Mothami 1 o winne le {player_1_payoff} karte e seng tluoa vs Mothami 0's {player_0_payoff} karte.",
+    "deadlock_tie": "Ho fihlela kgwedi ka ho lekana! Bapalami ba babedi ba na {player_0_payoff} dikareti tse setseng. Motho wa papali {current_player} o wile ka tlwaelo."
+  }
+}

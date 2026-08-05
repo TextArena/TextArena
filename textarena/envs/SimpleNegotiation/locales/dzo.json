@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "རྩེད་འགྲན་པ་གིས་ དགོས་མཁོ་ཅན་གྱི་ ཐོན་ཁུངས་མེད་རུང་ ཚོང་འབྲེལ་འཐབ་ནིའི་ དཔའ་བཅམ་ནུག",
+    "out_of_range": "རྩེདམོག་འགྲན་བྱེད་མི་ {player_id} གྱིས་འགན་འཁྲི་མི་འགྲིགས་པ། དུམ་བུ་ {col} ས་མཚམས་ལས་འགོང་བ།",
+    "already_full": "མིའོ་{player_id}، འབྲས་བུ་མེད་པའི་ལས་འགུལ། ཀོ་ལམ་{col} འགོག་པ་ཡིན།",
+    "proposing_with_no_resource": "རྩེད་འགྲན་པ་ {player_id} གིས་ དགོས་མཁོ་ཅན་གྱི་ ཐོན་ཁུངས་མེད་རུང་ ཚོང་འབྲེལ་གྱི་གདམ་ཁ་འདི་ བཙུགས་ནི་གི་ དཔའ་བཅམ་ནུག",
+    "incorrect_offer_format": "རྩེད་འགྲན་པ་ {player_id} གིས་ ཚོང་འབྲེལ་གྱི་གདམ་ཁ་འདི་ ཚུལ་མིན་བཟོ་རྣམ་ནང་ལུ་བཀོད་ནུག",
+    "no_new_offer": "རྩེད་འགྲན་པ་ {player_id} གིས་ ཚོང་འབྲེལ་གྱི་གྲོས་འདེབས་གསརཔ་ཅིག་མ་ཕུལ་པས།"
+  },
+  "offers": {
+    "reject": "རྩེད་འགྲན་པ་ {player_id} གིས་ ཚོང་འབྲེལ་གྱི་གདམ་ཁ་འདི་ ཆ་མེད་བཏང་ནུག",
+    "accept": "རྩེདམོག་འགྲན་བྱེད་མི་ {acceptor_id} གྱིས་རྩེདམོག་འགྲན་བྱེད་མི་ {proposer_id} གྱི་ཚོང་འབྲེལ་གྱི་གྲོས་བཞེས་པ།",
+    "proposal": "མིའོ་{player_id} གིས་ མིའོ་{opponent_id} ལ་འདི་འདྲ་གྱི་ཞུ་ཡིག་ཕུལ་ཡོད།: ཕུལ་བའི་རྫས་སྦྱིན།: {offered} -> སྤྲོད་འཇགས་ཀྱི་རྫས་སྦྱིན།: {requested}"
+  },
+  "outcome": {
+    "win": "རྩེད་འགྲན་པ་ {winner_id} གིས་ དངོས་རིགས་ཀྱི་གོང་ཚད་ལུ་ ཡར་སེང་སྦོམ་སྦེ་རང་འབད་ཐོག་ལས་ རྒྱལ་ཁ་ཐོབ་ཡོདཔ་ཨིན།",
+    "draw": "རྩེད་འགྲན་པ་ག་ར་ལུ་ དངོས་རིགས་ཀྱི་གནས་གོང་འདི་འདྲ་ཅིག་རང་འགྱུར་ཏེ་འདུག། འདྲན་བསྡུར་འབད་ནི།"
+  }
+}

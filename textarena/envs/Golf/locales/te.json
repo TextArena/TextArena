@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "మీరు గోల్ఫ్ (కార్డ్ గేమ్) - ప్లేయర్ {player_id} ఆడుతున్నారు. లక్ష్యంః ఈ ఒక్క రౌండ్లో అత్యల్ప మొత్తం స్కోరును పొందండి. కాలమ్లు ఒకే విలువను పంచుకుంటే, అవి 0 గా సంకలనం చేయబడతాయి. కార్డ్ విలువలుః A = 1, 2-10 = ముఖ విలువ, J / Q = 10, K = 0 చర్యలు (ఖచ్చితమైన కుండలీకరణాలను ఉపయోగించండి): - '[draw]' - డెక్ నుండి డ్రా - '[take]' - విస్మరించిన పైల్ నుండి తీసుకోండి - '[swap X Y]' - X (వరుస) Y (కాలమ్) తో డ్రా చేసిన కార్డును మార్చండి - '[discard]' - డ్రా చేసిన కార్డును విస్మరించండి "
+  },
+  "board": {
+    "drew": "మీరు డ్రాః {card} ఇప్పుడు మీరు తప్పక [swap X Y] లేదా [discard] అది.",
+    "took": "మీరు తీసుకున్నారు: {card} విస్మరించు కుప్ప నుండి మీరు దానితో [swap X Y] చేయాలి (విస్మరించలేరు).",
+    "peeked": "మీరు స్థానం ({row},{col}) వద్ద చూసారుః {card}",
+    "turn_view": "మీ చేతి: {hand} విస్మరించు కుప్ప: {discard} {options}",
+    "none": "ఏదీ లేదు"
+  },
+  "options": {
+    "final_turns": "చివరి మలుపులు! మీ ఎంపికలుః [draw], [take], [peek X Y]",
+    "draw": "మీ ఎంపికలు: [draw], [take]",
+    "must_swap": "మీరు తప్పక: [swap X Y] (విస్మరించు కుప్ప నుండి కార్డులను విస్మరించలేరు)",
+    "swap_or_discard": "మీరు తప్పక: [swap X Y] లేదా [discard]"
+  },
+  "hand": {
+    "no_cards": "కార్డులు లేవు",
+    "header": "కోల్: 1 2 3",
+    "row": "వరుస {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "ఆటగాడు {pid} {new} ను {old} తో స్థానంలో ({row},{col}) మార్చాడు",
+    "discarded": "ఆటగాడు {pid} {card}ని వదిలివేశాడు"
+  },
+  "message": {
+    "deck_empty": "డెక్ ఖాళీగా ఉంది! ఆట వెంటనే ముగుస్తుంది.",
+    "knocked": "ఆటగాడు {pid} తడబడ్డాడు! ప్రతి ఇతర ఆటగాడు మరో మలుపు తీసుకుంటాడు.",
+    "final_round": "ఆటగాడు {pid} {reason}! ప్రతి ఇతర ఆటగాడు మరో మలుపు పొందుతాడు."
+  },
+  "reason": {
+    "all_revealed": "అన్ని కార్డులు వెల్లడించింది"
+  },
+  "invalid": {
+    "wrong_action": "సరిగ్గా ఒక బ్రాకెట్ చర్యను ఉపయోగించండిః [draw], [take], [swap X Y], [discard], [knock], లేదా [peek X Y]",
+    "discard_empty": "విస్మరించు కుప్ప ఖాళీగా ఉంది!",
+    "must_draw_first": "మీరు మొదట [draw], [take], [knock], లేదా [peek X Y]",
+    "cannot_discard_taken": "మీరు విస్మరించిన కుప్ప నుండి తీసుకున్న కార్డును విస్మరించలేరు. మీరు దానిని మార్చుకోవాలి.",
+    "have_drawn_card": "మీరు ఒక డ్రా కార్డు కలిగి. మీరు తప్పక [swap X Y] లేదా [discard] అది.",
+    "need_drawn_swap": "మీరు మార్పిడి ఒక డ్రా కార్డు అవసరం.",
+    "need_drawn_discard": "మీరు విస్మరించడానికి ఒక డ్రా కార్డు అవసరం.",
+    "out_of_bounds": "సరిహద్దు వెలుపల స్థానం. వరుస 1-{max_row}, కాలమ్ 1-{max_col} ఉపయోగించండి",
+    "knock_with_card": "మీరు డ్రా కార్డు తో తట్టడానికి కాదు. మీ మలుపు మొదటి పూర్తి.",
+    "already_knocked": "ఎవరైనా ఇప్పటికే ఈ రౌండ్ కొట్టారు.",
+    "already_revealed": "ఆ కార్డు ఇప్పటికే వెల్లడి చేయబడింది!"
+  },
+  "summary": {
+    "full": "గేమ్ ఓవర్! ఆటగాడు {winner} {score} పాయింట్లతో గెలుస్తాడు! తుది స్కోర్లుః {scores}",
+    "line": "ఆటగాడు {pid}: {score} పాయింట్లు "
+  },
+  "board_str": {
+    "title": "=== గోల్ఫ్ ఆట ===",
+    "discard": "విస్మరించు కుప్ప: {card}",
+    "knocked": "ఆటగాడు {pid} తలుపు తట్టాడు!",
+    "player_header": "ఆటగాడు {pid} (స్కోరు: {score}):"
+  }
+}

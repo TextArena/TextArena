@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Pleyer Sineekaa kan gridi {width}×{height}.\nAti sineekaa {player_id} ni dhiheessi. Garaagarumman dhaban: '[up]'/'[down]'/'[left]'/'[right]' (ykn w/s/a/d).\nMadda: jiraatu guddaa kanatti ykn uumamaan guddaa ta'e ni too'annoo guddaa argati (xumura gara {max_turns} gara)."
+  },
+  "board": {
+    "current": "Boordiin amma jiru: {board}",
+    "after_moves": "Biyyaa Boordiin yeroo ammaa jiru: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Bofa {player_id} sababa socho'iinsa hin taanee duute."
+  },
+  "outcome": {
+    "survived_win": "Taphachiisaa {player_id} lubbuun hafe; warri kaan hundi ni du'an.",
+    "all_dead_simul": "Bofawwan hundi al tokko du'an.",
+    "outlived": "Taphachiisaan kun warra kaan hunda caalaa jiraateera.",
+    "all_dead": "Bofawwan hundi du'an.",
+    "turn_limit": "Daangaa dabaree ga'eera - lakkoofsi gaariin mo'ata.",
+    "ranking": "{reason} Sadarkaa guutuu (dheerina→wanjaala): {groups}"
+  }
+}

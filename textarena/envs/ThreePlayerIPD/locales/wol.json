@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Yaa ngone Player {player_id} ci 3-jàngalekat Iterated Prisoner's Dilemma. Match bi dafa am {num_rounds} round.\nRound bi mënikat:\n• {conv_rounds} xelit ci waxtaan\n• 1 xelit bu njëkk - indil waxtaan wiin ci ay token ci kanamu opponent: '[<opp-id> cooperate]' walla '[<opp-id> defect]' (samaa '[1 defect] [2 cooperate]'; default bi mooy 'cooperate').\nPair-wise payoff matrix (ñu koy dëkkale ci ay pèri-pèri):\n  - Ñaari cooperate  ->  {reward}\n  - Ñaari defect     ->  {punishment}\n  - Yaa defect, ñoo cooperate -> {temptation}\n  - Yaa cooperate, ñoo defect -> {sucker}\nKàlla bi ngone naan naan gën a kawe score ci njëllum round yi lépp, moo gën a am."
+  },
+  "round": {
+    "start": "─── Tànn {round} dal ───\tYaa ngone waxtaan-waxtaan ci {conv_rounds} tànn yi ci topp.",
+    "chat_finished": "Waxtaan bi jeex na ci round {round}. Indil sa xëlit, ay token ci kanamu opponent: `[pid cooperate]` walla `[pid defect]`."
+  },
+  "results": {
+    "header": "### Ronde {round} - Njëlbeen:",
+    "pair_line": "{observation}\n\t Jàngoro {i} ak Jàngoro {j} xëyoon naa {choice_i} ak {choice_j} ci topp (Jàngoro {i} am {gain_i}, Jàngoro {j} am {gain_j})",
+    "scores_open": "{observation} -> Jëfandikukat bii: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}  yi ci biir:"
+  },
+  "outcome": {
+    "final": "Solo yi ci njëlbeen: {scores}.  Groupe yi ñu ngone daje (sabab→baax): {groups}"
+  }
+}

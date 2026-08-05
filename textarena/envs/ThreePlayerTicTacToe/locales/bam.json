@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "I ye jɛkulu {player_id} o Three-Player Tic Tac Toe.\nI ka kɛlɛnden ye '{symbol}'.\nI bɛɛ sɛbɛn kɛlɛnden kɔnɔntɔn 5x5 kɔnɔntɔn fɛrɛ kɛlɛndenw bɛɛ kɔnɔntɔn.\nKɛlɛndenw bɛɛ kɔnɔntɔn yeelima in kɛlɛ, kɔrɔ, walla diagonal.\nSɛbɛn kɛlɛnden kɔnɔntɔn '[4]' kɔnɔntɔn fɛrɛ kɛlɛnden 4."
+  },
+  "board": {
+    "current_board": "Bɛɛ kɔnɔntɔn:\n\n{board}\n\nKɛlɛndenw bɛɛ bɔ: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kɛlɛnden fɛrɛ bɛɛ kɔnɔntɔn. Sɛbɛn '[cell]' kɔnɔntɔn ye 0-{max_cell}.",
+    "out_of_range": "Kɛlɛnden bɛɛ kɔnɔntɔn: {cell}. Yeelima in kɛ 0 aurɛ {max_cell}.",
+    "already_occupied": "Soli {cell} bɛ yen ka ban.",
+    "made_invalid": "Jalakɛla {player_id} ye sen t'a la."
+  },
+  "game_action": {
+    "placed": "Jɛkulu {player_id} ka kɛlɛnden a ye ({symbol}) kɔnɔntɔn fɛrɛ ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Jɛkulu {player_id} ({symbol}) ye jɛkulu!",
+    "draw": "O bɔlɔ ye barajuru don!"
+  }
+}

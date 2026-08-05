@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Droe neuh Pemain {player_id} lam Drei-Player GOPS.\n- Droe geuploh 13 boh kartu A-K (tiep-tiep si droe).\n- Tiep putaran hadiah geupeuleumah. Kirimkan SA boh kartu lagèe `[Q]`, `[10]`, `[2]` …\n- Kartu paléng manyang meuang hadiah (+ deng pot geubawa). Tiep-tiep geupeusong hadiah u putaran lheueh.\n- Lheueh 13 putaran, jeuëm paléng manyang meuang. Geupeuhancô lé gerak salah = teungöh."
+  },
+  "round": {
+    "header": "### Ronde {round}/13 - Hadiah: {prize} (meunye seupanyo {worth})",
+    "hand": "Jaroe gata nyang tinggai: {hand}"
+  },
+  "reveal": {
+    "win": "Tawaran » {bids} - Pemain {winner} meuang {pot}.",
+    "tie": "Tawaran » {bids} - tiep, pot jinoe {pot}.",
+    "scores": "Skor-skor jih → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "tindakan nyan perle kartu yang na dalam kurung lagee \"[Q]\"",
+    "bad_card": "kartu nyang ka dipakek atawa hana sah."
+  },
+  "elimination": {
+    "player": "Pemain {pid} dipeuteubiet lheuh langkah hana sah nyang meuulang-ulang."
+  },
+  "outcome": {
+    "auto_win": "Dua peunemu ji eliminasi - meunang otomatis.",
+    "final": "Skor akhe: {scores}"
+  }
+}

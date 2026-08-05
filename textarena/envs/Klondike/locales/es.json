@@ -15,11 +15,9 @@
     "{waste}": "La carta superior del descarte, o '--' si está vacío (nunca traducir)",
     "{cards}": "Las cartas de una pila como etiquetas neutrales, o '--' si está vacía (nunca traducir)"
   },
-
   "player_prompt": {
     "intro": "Estás jugando al Klondike Solitario. Tu objetivo es mover todas las cartas a las pilas de fundación.\n\nReglas del juego:\n- Pilas de fundación (F1-F4): Construye en orden ascendente del As al Rey por palo\n- Pilas de tableau (T1-T7): Construye en orden descendente alternando colores (rojo sobre negro, negro sobre rojo)\n- Mazo: Roba cartas al descarte\n- Descarte (W): La carta superior está disponible para jugar\n\nComandos:\n- 'draw' - Roba cartas del mazo al descarte\n- 'move <source> <destination> [count]' - Mueve cartas entre pilas\n  Ejemplos: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count también puede ser 'all', que intentará mover todas las cartas boca arriba.\n- 'forfeit' - Termina el juego de inmediato y fija tu puntuación actual\n- Nombres de pila: W (descarte), F1-F4 (fundaciones), T1-T7 (tableau)\n\nPuedes ejecutar varias acciones en un turno separándolas con comas:\n  Ejemplo: 'draw, move W T1, move T2 F1'\n\nSolo los Reyes pueden colocarse en pilas de tableau vacías.\nLas acciones se ejecutan en orden; si una falla, las acciones restantes se omiten.\nUsa 'forfeit' si crees que el juego es imposible de ganar."
   },
-
   "format_error": {
     "no_brackets": "Formato de acción inválido. La acción debe ir entre corchetes.",
     "no_closing_bracket": "Formato de acción inválido. Falta el corchete de cierre ']'",
@@ -31,13 +29,11 @@
     "unknown_command": "Comando desconocido '{cmd}'. Usa 'draw', 'move <source> <destination> [count]' o 'forfeit'",
     "wrapped": "Acción {n}: {msg}"
   },
-
   "action_result": {
     "success": "Acción {n}: {msg}",
     "before_failure": "Se ejecutaron {n} acción(es) antes del fallo.",
     "failed": "Acción {n} fallida: {msg}"
   },
-
   "move_result": {
     "drew": "Se robó(aron) carta(s) del mazo al descarte.",
     "cannot_draw": "No se puede robar. El mazo y el descarte están vacíos.",
@@ -60,13 +56,11 @@
     "foundation_to_tableau_bad": "No se puede colocar la carta de fundación en el tableau T{dst}",
     "to_waste_or_stock": "No se puede mover al descarte ni al mazo"
   },
-
   "outcome": {
     "forfeit": "Juego abandonado. Puntuación final: {score} cartas en las fundaciones.",
     "won": "¡Felicidades! ¡Has ganado al Klondike Solitario!",
     "turn_limit": "¡Fin del juego! Alcanzaste el máximo de {max_turns} turnos. Puntuación: {score} cartas en las fundaciones."
   },
-
   "board": {
     "title": "=== SOLITARIO KLONDIKE ===",
     "turn": "Turno: {turn}/{max_turns}",

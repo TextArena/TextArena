@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "U mchechi {player_id} ka Three-Player GOPS.\n- U tšwere karete 13 tsa A-K (e 'ngoe e le eona).\n- Raundi e 'ngoe e bonwa tlhahiso. Romella karete e le 'ngoe e jwalo ka `[Q]`, `[10]`, `[2]` …\n- Karete e phahameng e wina tlhahiso (+ tlhahiso e fetilweng). Tlhahiso e fetilweng e fetilwe raundi e latelang.\n- Kamora raundi 13, tlhahiso e phahameng e wina. Mesebetsi e fosahetseng = ho iluwa."
+  },
+  "round": {
+    "header": "### Round {round}/13 - Sebaka: {prize} (e leka {worth})",
+    "hand": "Letsoho la hao le setseng: {hand}"
+  },
+  "reveal": {
+    "win": "Mesebetsi » {bids} - Mchechi {winner} wina {pot}.",
+    "tie": "Lichelete  {bids} - tie, pot hona joale {pot}.",
+    "scores": "Lipalo → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "ketso e hloka karete ea kholomo joaloka \"[Q]\"",
+    "bad_card": "karete e seng e sebelisitsoe kapa ha ea nepahala"
+  },
+  "elimination": {
+    "player": "Sebapali {pid} se tlositsoe ka mor'a hore a phete-phete ho nka mehato e seng molaong."
+  },
+  "outcome": {
+    "auto_win": "Libapali tse peli li tlositsoe - ho hlōla ka bohona.",
+    "final": "Lipalo tsa ho qetela: {scores}"
+  }
+}

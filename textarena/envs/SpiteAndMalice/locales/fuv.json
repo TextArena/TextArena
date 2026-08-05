@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ko oonaa Player {player_id} e dowlaaji Spite e Malice. Ko golle maa oonaa ko o jeyaa payoff pile maa.\n\n### Taariiha Dowlaaji:\n- Ko oonaa maa ko jeyaa payoff pile maa e kaadii kaadii dowlaaji.\n- A yi'i kaadii kaadii dowlaaji e:\n  1. **Kunnu maa** (a yi'i kowtal handal maa e kaadii 5).\n  2. **Kaadii dow payoff pile maa**.\n  3. **Kaadii dow discard pile maa**.\n\n### Taariiha E Kaadii:\n- A yi'i kaadii e center pile maa ko o **wolde e go'o** e kaadii dow center pile maa (center pile maa e suudu e Ace e hoori e Queen; Kings yi'i wild - a yi'i kaadii e ko oonaa maa a yi'i kaadii e rank sequence maa. Oonaa maa ko King e yi'i e 4, o rewti King maa ko ranked 5 e kaadii go'o maa ko 6).\n- A yi'i kaadii maa a jeyaa, a **discard kaadii** e discard pile maa e jeyaa turn maa.\n- A center pile maa e Queen, a yi'i cleared automatically.\n- Rank order maa: A=1, 2=2, ..., 9=9, J=10, Q=11, K yi'i wild.\n\n### Actions:\n1. **Draw**: E suudu turn maa, draw kaadii e fill hand maa e kaadii 5. Enter **[draw]** e begin.\n2. **Play a Card**: E play kaadii, specify kaadii e center pile maa like this: **[play A♠ 0]** (e 'A♠' kaadii e '0' center pile index).\n3. **Discard**: A yi'i kaadii maa a jeyaa, discard kaadii e hand maa e discard pile maa e jeyaa turn maa. Enter **[discard A♠ 1]** (e 'A♠' kaadii e '1' discard pile index). Note a yi'i discard kaadii e payoff pile maa. A yi'i discard kaadii e hand maa.\n\n"
+  },
+  "board": {
+    "current_board": "Bortu Jihaaji:\n\n{board}\nMova Himo: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Center Piles (Haa'e ha caka) -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Mɓorjo {player_id}'s View ---\n",
+    "payoff": "{observation}Kungu nyalɗe (Karte koo): {top_card}, Janɗe kungu: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Janɗe wakkati: {discard}\n",
+    "empty": "Walaa ko haani"
+  },
+  "game_message": {
+    "no_cards_left": "Walaa kujeji feere je footi aɗa. Yejjite on waawai fija dabareeji daga ɗo'o: 1. Jungo mon 2. Kaadi ɓurɗo dow nder kaadi koɗon jaɓɓa, 3. Kadi ɓurɗum dow kala kawtal ngal mbaawoton itta. "
+  },
+  "invalid_move": {
+    "wrong_format": "Na'i je waylata be no ɗum waɗata. {player_id} jaabake bee lawol ngol ɗon nder dabareji ɗi ɓe waɗi ha ɓaawo man.",
+    "invalid_play": "Woni baa. Mɓorjo {player_id} woni {card} e center pile {index}.",
+    "discard_from_payoff": "Wojugo {player_id} footi wurtina kaarji je ɗon nder kuugal.",
+    "discard_not_in_hand": "Wojugo {player_id} footi wurtina kaar je wala ha juɗe maako.",
+    "wrong_move_type": "Na'i je ɗon naftirta. {player_id} moodibo jaabake be no ɓe ngaɗata ko haani."
+  },
+  "game_action": {
+    "you_drew": "A wurtini kujeji.",
+    "opponent_drew": "Ɓowlugo {player_id} wurtini kaadi.",
+    "you_played": "A woni {card} e center pile {index}.",
+    "opponent_played": "Player {player_id} yi'i kaadii {card} e center pile {index}.",
+    "you_discarded": "A woni {card} e discard pile {index}, o woni woodi a heɓi turne mawngal. Ko woodi woodani ɓe a e turne ngal. Mɓorjo {next_player_id} yaa wiɗi e ngal.",
+    "opponent_discarded": "Koɗo {player_id} wiyi {card} e janɗe wakkati {index}, tee o wiyi no koo. Koɗo {player_id} ɗum waɗa e koo. Koɗo {next_player_id}, a yiɗa e gooto. Soo tawo e gooto e ɓantuu [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Koɗo {current_player} timmini kungu nyalɗe! Koɗo {current_player} moɗi!",
+    "deadlock_player_0": "Koɗo ɓe ndaara! Koɗo 0 moɗi e karte {player_0_payoff} toɓɓe vs Koɗo 1 e karte {player_1_payoff}.",
+    "deadlock_player_1": "Koɗo ɓe ndaara! Koɗo 1 moɗi e karte {player_1_payoff} toɓɓe vs Koɗo 0 e karte {player_0_payoff}.",
+    "deadlock_tie": "Koɗo ɓe ndaara e koo! Ɓe koɗo ɓe karte {player_0_payoff} toɓɓe. Koɗo {current_player} moɗi e ɓantuu."
+  }
+}

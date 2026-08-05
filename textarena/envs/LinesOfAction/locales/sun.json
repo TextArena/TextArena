@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Anjeun Pamaén {player_id} dina kaulinan LinesOfAction.\nBidak anjeun '{side}', bidak lawan '{other}'.\nFormat gerakan: `[b1b3]` (koordinat-asal koordinat-tujuan). Gerakan anu sah lumaku horizontal, vertikal, atawa diagonal saperlu jumlah bidak (warna naon baé) dina garis éta. Anjeun bisa ngaluncatan bidak anjeun sorangan, tapi henteu bidak lawan; ngagurat di bidak lawan ngarebutna.  Meunangkeun upami sadaya bidak anjeun nyambung 8-tatangga."
+  },
+  "board": {
+    "current_board": "Dewan: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format kudu e2e4 (ti,ka koordinat).",
+    "no_piece": "Teu aya {side} potongan dina {coord}.",
+    "identical": "Sumber jeung tujuan sarua.",
+    "not_straight_or_diagonal": "Gerak kudu lempeng atawa diagonal.",
+    "wrong_distance": "Kudu pindah jarak sarua jeung potongan dina garis.",
+    "enemy_blocks": "Kacapi musuh meungpeuk jalan.",
+    "destination_own": "Tujuan anu dicekel ku sorangan."
+  },
+  "game_action": {
+    "moved": "Pamaén {player_id} nggerakkeun {from} -> {to}",
+    "captured_suffix": "Pamaén {player_id} nggerakkeun {from} -> {to} nyerep musuh."
+  },
+  "outcome": {
+    "win": "Sadaya potongan nyambung.",
+    "draw_no_capture": "60 gerakan tanpa néwak.",
+    "draw_repetition": "Posisi diulang tilu kali."
+  }
+}

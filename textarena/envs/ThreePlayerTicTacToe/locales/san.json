@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "आपखिलाड़ी {player_id} हैं तीन-खिलाड़ीटिकटैकटो।\nआपकासंकेत '{symbol}' है।\nआप अपनासंकेत को ५x५ बोर्ड पर रखनेके लिए बारी-बारीसे अपनी बारीलेते हैं ताकिवे चार की एकपंक्ति बना सकें।\nपंक्तियाँ क्षैतिज, ऊर्ध्वाधर या विकर्ण हो सकती हैं।\n'[4]' प्रारूप का उपयोग करके अपनी चाल जमा करें ताकि कोशिका ४ को चिह्नित किया जा सके।"
+  },
+  "board": {
+    "current_board": "वर्तमानबोर्ड:\n\n{board}\n\nउपलब्धचालें: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "अमान्यचालप्रारूप। '[cell]' का उपयोगकरें जहाँ कोशिका ०-{max_cell} है।",
+    "out_of_range": "अमान्य कोशिका संख्या: {cell}। ० और {max_cell} के बीच होना चाहिए।",
+    "already_occupied": "{cell} कोष्ठं पूर्वमेव आश्रितः अस्ति ।",
+    "made_invalid": "क्रीडकः {player_id} अवैधं चालम् अकरोत् ।"
+  },
+  "game_action": {
+    "placed": "खिलाड़ी {player_id} अपनासंकेत ({symbol}) क्षेत्र ({row}, {col}) में रखताहै।"
+  },
+  "outcome": {
+    "win": "खिलाड़ी {player_id} ({symbol}) जीतताहै!",
+    "draw": "क्रीडा समस्यते!"
+  }
+}

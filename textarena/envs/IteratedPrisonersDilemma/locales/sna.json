@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Wewe ni Mwana {player_id} kwenye Iterated Prisoner's Dilemma inopinduka {num_rounds} raundi.\n\nMuundo wa Gemu:\n- Kabla ya kila uamuzi una {total_conversation_rounds} mikwamo ya kujadili bila vikwazo.\n- Baada ya hapo, wachezaji wote wawili kwa wakati mmoja huchagua kuunga mkono au kupinga.\n\nJedwali la Mafanikio (linalobadilika kila raundi):\n- Wote kuunga mkono ➜ kila mmoja {cooperate_reward}\n- Wote kupinga ➜ kila mmoja {mutual_defect_reward}\n- Mmoja kupinga, mmoja kuunga mkono ➜ Mpinga {defect_reward}, Mwenye kuunga mkono {sucker_reward}\n\nJinsi ya Kucheza:\n- Wakati wa mazungumzo: andika maneno yoyote unayotaka.\n- Wakati wa kipindi cha uamuzi: weka '[Cooperate]' au '[Defect]' (bila kujali herufi kubwa au ndogo). Unaweza kuongeza maneno zaidi kabla au baada ya token."
+  },
+  "phases": {
+    "conversation_finished": "Mazungumzo akapera kwa raundi {round}. Tamba nezve '[Cooperate]' kana '[Defect]' munguva wa \\boxed{{}}.",
+    "starting_round": "--- Kutanga Round {round} ---",
+    "round_summary": "Matokeo ya raundi {round}:\n{outcome}\nMwana 0 akapata {r0} (jumla {score_0}), Mwana 1 akapata {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Mwana {winner} anotonga {win_score} - {lose_score}.",
+    "draw": "Dhonza! Vatambi vose vakawana {s0}.",
+    "round_both_cooperate": "Vatambi vacho vose vari vaviri vakabatana.",
+    "round_both_defect": "Vatambi vose vari vaviri vakatiza.",
+    "round_p0_cooperates_p1_defects": "Mutambi 0 akabatana, mutambi 1 akapanduka.",
+    "round_p0_defects_p1_cooperates": "Mutambi 0 akatiza, mutambi 1 akabatana."
+  }
+}

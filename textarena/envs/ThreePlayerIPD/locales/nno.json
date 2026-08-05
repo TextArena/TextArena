@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a 3-player Iterated Prisoner's Dilemma. The match lasts {num_rounds} rounds.\nRound structure:\n• {conv_rounds} free-chat turns\n• 1 decision turn - submit one token per opponent: '[<opp-id> cooperate]' or '[<opp-id> defect]' (i.e. '[1 defect] [2 cooperate]'; the default is 'cooperate'). \nPair-wise payoff matrix (applied to each unordered pair):\n  - Both cooperate  ->  {reward}\n  - Both defect     ->  {punishment}\n  - You defect, they cooperate -> {temptation}\n  - You cooperate, they defect -> {sucker}\nThe player(s) with the highest score at the end of all rounds wins."
+  },
+  "round": {
+    "start": "─── Startar Runde {round} ───\tDu kan konversere fritt i dei neste {conv_rounds} runde.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Runde {round} - Resultat:",
+    "pair_line": "{observation}\n\t Spelar {i} mot Spelar {j} valde å {choice_i} og {choice_j} høvesvis (Spelar {i} fekk {gain_i}, Spelar {j} fekk {gain_j})",
+    "scores_open": "{observation} -> Aktuelle poengsummar: ",
+    "score_first": "{observation}Spelar {player_id} ({score})",
+    "score_next": "{observation}; Spelar {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Sluttpoengsummar: {scores}.  Rangeringsgrupper (dårlegast→best): {groups}"
+  }
+}

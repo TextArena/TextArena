@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "El xugador intentó aceptar un intercambiu ensin tener los recursos necesarios.",
+    "out_of_range": "Xugador {player_id}, Aición non válida. Columna {col} ta fora de llendes.",
+    "already_full": "Xugador {player_id}, Aición non válida. Columna {col} ta llena.",
+    "proposing_with_no_resource": "El xugador {player_id} intentó facer una ufierta comercial ensin tener los recursos necesarios.",
+    "incorrect_offer_format": "El xugador {player_id} fixo una ufierta de negociu nun formatu incorrectu.",
+    "no_new_offer": "El xugador {player_id} nun fixo una nueva ufierta comercial."
+  },
+  "offers": {
+    "reject": "El xugador {player_id} refugó la ufierta de cambéu.",
+    "accept": "Xugador {acceptor_id} aceptó l'ufierta de cambéu del Xugador {proposer_id}.",
+    "proposal": "Xugador {player_id} fixo la siguiente ufierta al Xugador {opponent_id}: Oxetos ufiertaos: {offered} -> Oxetos solicitaos: {requested}"
+  },
+  "outcome": {
+    "win": "El xugador {winner_id} ganó por tener una mayor ganancia nel valor de los inventarios.",
+    "draw": "El mesmu cambéu nel valor del inventariu pa tolos xugadores."
+  }
+}

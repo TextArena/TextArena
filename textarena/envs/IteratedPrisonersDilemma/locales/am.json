@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "የንግሮ ውይይት ለማረጋገጫ {round} ተጠምዷል. '[Cooperate]' ወይም '[Defect]'ን በ\\boxed{{}} ውስጥ አሳይ.",
+    "starting_round": "--- የመነሻ ዙር {round} ---",
+    "round_summary": "ማረጋገጫ {round} ውጤቶች:\n{outcome}\nኤሌሜንት 0 {r0}ን ተቀላቀለ (አጠቃላይ {score_0}), ኤሌሜንት 1 {r1}ን ተቀላቀለ (አጠቃላይ {score_1})."
+  },
+  "outcome": {
+    "winner": "ኤሌሜንት {winner} አሸንፋል {win_score} - {lose_score}.",
+    "draw": "ሁለቱም ተጫዋቾች {s0} አስቆጥረዋል ።",
+    "round_both_cooperate": "ሁለቱም ተጫዋቾች ተባብረው ሠርተዋል።",
+    "round_both_defect": "ሁለቱም ተጫዋቾች ከሃዲዎች ናቸው።",
+    "round_p0_cooperates_p1_defects": "ተጫዋች 0 ተባብሮ ነበር፣ ተጫዋች 1 ሸሽቷል።",
+    "round_p0_defects_p1_cooperates": "ተጫዋች 0 ከሃዲ ሆኗል፣ ተጫዋች 1 ተባብሯል።"
+  }
+}

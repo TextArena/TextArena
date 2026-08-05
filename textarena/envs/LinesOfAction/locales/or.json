@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "ଆପଣ ଖେଳ LinesOfAction ର ଖେଳାଳି {player_id}।\nଆପଣଙ୍କ ଟୁକୁଡ଼ା '{side}', ବିରୋଧୀ ଟୁକୁଡ଼ା '{other}'।\nଚାଲ ଫର୍ମାଟ: `[b1b3]` (ଉତ୍ସ-ସ୍ଥାନାଙ୍କ ଗନ୍ତବ୍ୟ-ସ୍ଥାନାଙ୍କ)। ଏକ ବୈଧ ଚାଲ ସମାନ ସଂଖ୍ୟକ ବର୍ଗ ଉଲ୍ଲମ୍ବ, ଅନୁଲମ୍ବ, କିମ୍ବା ତିର୍ଯକ ଭାବେ ଯାତ୍ରା କରି ସେହି ରେଖାର ସମସ୍ତ ଟୁକୁଡ଼ା (ଯେ କୋଣସୀ ରଙ୍ଗ)। ଆପଣ ନିଜ ଟୁକୁଡ଼ା ଉପର ଦିଆ ଯାଇ ପାରିବେ, କିନ୍ତୁ ବିରୋଧୀ ଟୁକୁଡ଼ା ଉପର ନହିଁ; ବିରୋଧୀ ଟୁକୁଡ଼ା ଉପର ପହଞ୍ଚିଲେ ଆପଣ ତାହା ଧରି ନେବେ। ସମସ୍ତ ଟୁକୁଡ଼ା 8-ପଡ଼ୋଶୀ ସଂଯୁକ୍ତ ହେଲେ ଆପଣ ଜିତି ଯାଇଛନ୍ତି।"
+  },
+  "board": {
+    "current_board": "ବୋର୍ଡ: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ଫର୍ମାଟ e2e4 ହେବା ଉଚିତ (କୋର୍ଡିନେଟରୁ,କୋର୍ଡିନେଟକୁ)",
+    "no_piece": "କୋନ ପିସ {side} କୋନ ଉପରେ {coord}.",
+    "identical": "ଉତ୍ପତ୍ତି ଓ ଲକ୍ଷ୍ୟସ୍ଥଳ ସମାନ ।",
+    "not_straight_or_diagonal": "ଗତି ସରଳ ରେଖା ବା ତିର୍ୟକ ରେଖା ହୋଇଥିବା ଆବଶ୍ୟକ।",
+    "wrong_distance": "ଗୋଟିଏ ଧାଡ଼ିରେ ଥିବା ଅଂଶ ସହିତ ସମାନ ଦୂରତା ଅତିକ୍ରମ କରିବା ଉଚିତ ।",
+    "enemy_blocks": "ଶତ୍ରୁ ପକ୍ଷର ଖଣ୍ଡେ ପଥ ଅବରୋଧ କରୁଛି ।",
+    "destination_own": "ଲକ୍ଷ୍ୟସ୍ଥଳରେ ନିଜସ୍ୱ ଦଳ ଦ୍ୱାରା ନିୟୋଜିତ ।"
+  },
+  "game_action": {
+    "moved": "ଖେଳାଳି {player_id} ଚାଲିଗଲେ {from} -> {to}",
+    "captured_suffix": "ଖେଳାଳି {player_id} {from} -> {to} କୁ ଘୁଞ୍ଚାଇ ଶତ୍ରୁକୁ ଧରିବା ।"
+  },
+  "outcome": {
+    "win": "ସବୁ ଅଂଶ ଯୋଡି ହୋଇ ରହିଛି ।",
+    "draw_no_capture": "୬୦ ଥର ଚାଲିଲେ ମଧ୍ୟ ଧରାଯାଇ ପାରିଲା ନାହିଁ ।",
+    "draw_repetition": "ସ୍ଥିତିକୁ ତିନିଥର ପୁନରାବୃତ୍ତି କରନ୍ତୁ."
+  }
+}

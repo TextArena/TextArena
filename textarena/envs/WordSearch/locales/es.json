@@ -1,0 +1,42 @@
+{
+  "_comment": "Localización en español para Word Search. Las claves (izquierda) son fijas; traduce solo los valores (derecha). Conserva cada {placeholder} tal cual. Las etiquetas de la cuadrícula (R00/C00), las coordenadas y el formato de acción entre corchetes '[start_row start_col end_row end_col]' y ejemplos como '[1 1 1 5]' son NEUTROS y no deben traducirse. {board} y {words} son contenido de juego neutro. Nota: en prompt.intro la aparición '{{player_id}}' está escapada a propósito para que se muestre literalmente como '{player_id}' (coincide con el texto original del juego).",
+  "_slots": {
+    "{player_id}": "Número de jugador (entero)",
+    "{mode}": "Etiqueta del modo de juego (ya localizada: Básico/Difícil)",
+    "{tries}": "Número de intentos incorrectos restantes (entero)",
+    "{board}": "La cuadrícula renderizada (neutra; no traducir)",
+    "{words}": "Lista de palabras ocultas separadas por comas (tokens neutros)",
+    "{coords}": "Las coordenadas 'start_row start_col end_row end_col' (neutras)",
+    "{word}": "Una palabra oculta encontrada (token neutro)",
+    "{found}": "Número de palabras encontradas hasta ahora (entero)",
+    "{total}": "Número total de palabras ocultas (entero)",
+    "{pct}": "Porcentaje de palabras encontradas (entero)"
+  },
+
+  "prompt": {
+    "mode_basic": "Básico",
+    "mode_hardcore": "Difícil",
+    "intro": "Eres el Jugador {player_id} y participas en un desafío de Word Search en modo {mode}. El objetivo es encontrar y resaltar las palabras ocultas en la cuadrícula de abajo. Las filas y columnas están numeradas para tu referencia.\n\nEste es el estado actual de la cuadrícula de Word Search:\n----------------------------------------\nLas palabras que ya has encontrado están marcadas entre corchetes [ ]. Cada fila y columna está numerada para mayor claridad.\n\n\nPara localizar una palabra, indica la fila y la columna de su letra inicial y final. Ten en cuenta que las palabras van en horizontal o en vertical.\nPuedes escribir tu respuesta y tus reflexiones como quieras. Pero solo puedes enviar una jugada a la vez. Para tus envíos, usa el formato '[start_row start_col end_row end_col]'.\nPor ejemplo, si quieres encontrar la palabra 'HELLO' que empieza en la fila 1, columna 1 y termina en la fila 1, columna 5, escribe '[1 1 1 5]'.\n\nDirectrices:\n- Cada intento debe ser único; no puedes repetir el mismo intento.\n- Tienes un total de {tries} intentos incorrectos restantes.\n- El historial de tus intentos se registrará a continuación.\n\nHaz tus intentos con cuidado y estrategia. ¡Buena suerte, Jugador {{player_id}}! ¡Veamos cuántas palabras puedes encontrar!\n"
+  },
+
+  "board": {
+    "state": "Cuadrícula actual:\n\n{board}\nPalabras colocadas: {words}\nIntentos incorrectos restantes: {tries}"
+  },
+
+  "invalid": {
+    "wrong_format": "Formato de jugada no válido. El Jugador {player_id} no respondió con 'start_row, start_col, end_row, end_col' válidos.",
+    "out_of_range": "Formato de jugada no válido. El Jugador {player_id} no respondió con 'start_row, start_col, end_row, end_col' válidos.",
+    "already_attempted": "Jugada no válida. Esta acción ya se ha intentado."
+  },
+
+  "feedback": {
+    "incorrect": "[{coords}] es un intento incorrecto. Quedan {tries} intentos incorrectos.",
+    "correct": "[{coords}] es un intento correcto. Has encontrado la palabra '{word}'.",
+    "correct_unknown": "[{coords}] es un intento correcto, pero la palabra no se encontró entre las palabras colocadas."
+  },
+
+  "outcome": {
+    "no_tries": "No quedan más intentos incorrectos. Has encontrado {found} de {total} palabras ({pct}%).",
+    "win": "¡Felicidades! Has completado el rompecabezas de Word Search."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Siz Strategoda {player_id} oýunçysy. \nSiziň maksadyňyz garşydaşyň baýdagyny ele geçirmek ýa-da olaryň hereket edýän ähli böleklerini ýok etmek. \nSiziň goşunyňyz tagtaya goýuldy, şol sanda baýdak, bombalar we beýleki dürli derejeli bölekler. \n\n### Oýun Tälimatlary\n1. **Hereket Düzlügi:**\n   - Siziň gezeginizde, siz bir bölegi ýanyňyzdaky kwadrata (ýokary, aşak, çep ýa-da sag) bir gezek hereket etdirip bilersiňiz, eger ol kwadrat eýýäm sizden dolular. \n   - Mysal: Bir bölek A1-den B1-e ýa-da A1-den A2-e hereket etdirilip bilner, eger B1 we A2 sizden doly kwadratlar däl bolsa. \n   - Eger saýlanan bölek bomba ýa-da baýdak bolsa, ony hereket etdirmek bolmaz. \n2. **Söweşler:**\n   - Eger siz garşydaşyň bölegi bilen doldurylan kwadrata hereket etdirseňiz, söweş başlaýar: \n     - Ýokary derejeli bölek ýeňýär we garşydaşyň bölegini ýok edýär. \n     - Eger derejeler deň bolsa, her iki bölek tagtadan aýrylýar. \n     - **Ýörite ýagdaýlar:**\n       - Bombalar köp hüjüm edýän bölekleri, Minersler ýok etmekden başga, bombalary ýok edýär. \n       - Spieslar Marshally ýeňip bilýär, ýöne beýleki ähli böleklerden ýeňilýär. \n3. **Strategik Maksatlar:**\n   - Garşydaşyň böleklerini hereketleri we söweşleriň üsti bilen anyklap bilersiňiz. \n   - Siziň baýdagyňyzy gorap, garşydaşyň baýdagyny ele geçirmäge synanyşyň. \n   - Scouts-lary strategiýalyk ýagdaýda ulanyp, garşydaşyň bölekleri barada maglumat ýygnap, ýeňil ýerlere hüjüm ediň. \n\n### Hereketi Näme Ýasamak:\n1. Hereket etdirmek isleýän bölegiň we onuň ýerleşýän ýeriniň koordinatlaryny ýazyň. \n2. [A0 B0] formatyny ulanyň, ýerinde A0 çeşme ýeri, B0 bolsa ýerleşýän ýer. \n   - Mysal: Bir bölegi 0-nji setirden, 0-nji sütundan 1-nji setire, 0-nji sütuna hereket etdirmek üçin [A0 B0] ýazyň. \n3. Hereketiň ýerleşýän ýerini ýokarydaky hereket düzlügine laýyklykda ýazyň. \n\n### Wajyp Bellikler:\n- Tagta siziň bölekleriňiz we olaryň ýerleri, mysal üçin MN, MS görkeziler. \n- Tagta garşydaşyň bölekleriniň ýerleri, mysal üçin ?, görkeziler, ýöne olaryň derejeleri ýok. \n- ~ bilen belgilenen kwadratlar köl bolup, olara hereket etdirmek bolmaz. \n- Teklipler ýaly, oýuny başlaň, frontda ýerleşýän bölekleri hereket etdirip, garşydaşyň bölekleri barada maglumat ýygnap bilersiňiz. 0-nji we 1-nji oýunçynyň frontlary ýagny D we G setirleri. \n\nTagtanyň häzirki ýagdaýy:\n"
+  },
+  "board": {
+    "current_board": " Häzirki tahta:\n\n{board}\nMöjük hereketler: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Natyk hereket formaty. Oýunçy {player_id} hereketi [A0 B0] formatyny boýunça ýazmady.",
+    "invalid_coordinates": "Ýaramaz hereket formati. Oýunçy {player_id} dogry koordinatlary girmedi.",
+    "not_own_piece": "Ýaman hereket düzgüni.Oýunçy {player_id} öz oýunjagazlarynyň birini göçürmeli.",
+    "scout_through_pieces": "Ýalňyş hereket formaty. {player_id} oýunçysy käşpiýany beýleki böleklerden geçirmek bilen hereket etdiremese.",
+    "scout_diagonal": "Ýaman hereket formati.Oýunçy {player_id} skautlary digonaly göçürüp bilmez.",
+    "non_scout_multi_square": "Ýaramaz hereket formady. Kümüşler, gözden geçirjilerden başgalar diňe bir gezekde bir kvadrat göçürip bilýärler.",
+    "move_into_lake": "Ýalňyş hereket formaty. {player_id} oýunçysy köle hereket etdiremese.",
+    "move_onto_own_piece": "Ýaman hereket formati.Oýunçy {player_id} öz oýunjasyna geçip bilmez.",
+    "move_bomb_or_flag": "Ýaman hereket formati.Oýunçy {player_id} bomba ýa-da bayragy göçürip bilmez."
+  },
+  "game_action": {
+    "you_moved": "Sen öz ýaragyny {source} dan {dest} ýere hereket etdiň.",
+    "opponent_moved": "Oýunçy {player_id} öz ýaragyny {source} dan {dest} ýere hereket etdi.",
+    "you_equal_ranks": "Sen öz ýaragyny {source} dan {dest} ýere hereket etdiň. Hüjüm ediji ýarag {attacking_rank} we ýerleşilen ýarag {target_rank} edi. Derejeler birmeňzeş, ählisi ýitdi.",
+    "opponent_equal_ranks": "Oýunçy {player_id} öz ýaragyny {source} dan {dest} ýere hereket etdi. Hüjüm ediji ýarag {attacking_rank} we ýerleşilen ýarag {target_rank} edi. Derejeler birmeňzeş, ählisi ýitdi.",
+    "you_miner_defused": "Sen öz ýaragyny {source} dan {dest} ýere hereket etdiň. Hüjüm ediji ýarag {attacking_rank} we ýerleşilen ýarag {target_rank} edi. Minerler bombalary ýok edýär, sen ýeňdiň.",
+    "opponent_miner_defused": "Oýunçy {player_id} öz ýaragyny {source} dan {dest} ýere hereket etdi. Hüjüm ediji ýarag {attacking_rank} we ýerleşilen ýarag {target_rank} edi. Minerler bombalary ýok edýär, sen ýitdiň.",
+    "you_bomb_lost": "Sen öz ýaragyny {source} dan {dest} ýere hereket etdiň. Hüjüm ediji ýarag {attacking_rank} we ýerleşilen ýarag {target_rank} edi. Hüjüm ediji miner däl, sen ýitdiň.",
+    "opponent_bomb_won": "Oýunçy {player_id} öz ýaragyny {source} dan {dest} ýere hereket etdi. Hüjüm ediji ýarag {attacking_rank} we ýerleşilen ýarag {target_rank} edi. Hüjüm ediji miner däl, sen ýeňdiň.",
+    "you_spy_won": "Sen öz ýaragyny {source} dan {dest} ýere hereket etdiň. Hüjüm ediji ýarag {attacking_rank} we ýerleşilen ýarag {target_rank} edi. Hüjüm ediji şpiyon we ýerleşilen ýarag marşal, sen ýeňdiň.",
+    "opponent_spy_lost": "Oýunçy {player_id} öz ýaragyny {source} dan {dest} ýere hereket etdi. Hüjüm ediji ýarag {attacking_rank} we ýerleşilen ýarag {target_rank} edi. Hüjüm ediji şpiyon we ýerleşilen ýarag marşal, sen ýitdiň.",
+    "you_higher_won": "Sen öz ýaragyny {source} dan {dest} ýere hereket etdiň. Hüjüm ediji ýarag {attacking_rank} we ýerleşilen ýarag {target_rank} edi. Hüjüm ediji ýokary derejeli, sen ýeňdiň.",
+    "opponent_higher_lost": "Oýunçy {player_id} öz ýaragyny {source} dan {dest} ýere hereket etdi. Hüjüm ediji ýarag {attacking_rank} we ýerleşilen ýarag {target_rank} edi. Hüjüm ediji ýokary derejeli, sen ýitdiň.",
+    "you_lower_lost": "Sen öz ýaragyny {source} dan {dest} ýere hereket etdiň. Hüjüm ediji ýarag {attacking_rank} we ýerleşilen ýarag {target_rank} edi. Hüjüm ediji aşak derejeli, sen ýitdiň.",
+    "opponent_lower_won": "Oýunçy {player_id} öz ýaragyny {source} dan {dest} ýere hereket etdi. Hüjüm ediji ýarag {attacking_rank} we ýerleşilen ýarag {target_rank} edi. Hüjüm ediji aşak derejeli, sen ýeňdiň."
+  },
+  "outcome": {
+    "flag_captured": "Oýunçy {player_id} garşydaşyň baýragyny ele saldy!",
+    "no_movable_pieces": "Oýunçy {winner_id} ýeňdi! Oýunçy {loser_id} ýene hereket ediji ýaraglary ýok."
+  }
+}

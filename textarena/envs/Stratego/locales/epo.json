@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Vi estas Ludanto {player_id} en Stratego.\nVia celo estas kapti la flagon de via kontraŭulo aŭ elimini ĉiujn iliajn moveblajn pecojn.\nVia armeo estis metita por vi sur la tabulo, inkluzive de via flago, bomboj, kaj aliaj pecoj de diversaj rangoj.\n\n### Instrukcioj por la Ludado\n1. **Movreguloj:**\n   - Dum via vico, vi povas movi unu pecon je unu paŝo al apuda kvadrato (supren, malsupren, maldekstren, aŭ dekstren) kiu estas okupita de viaj propraj pecoj.\n   - Ekzemplo: Peco povas moviĝi de A1 al B1 aŭ A1 al A2 se B1 kaj A2 ne estas okupitaj de la propraj pecoj de la ludanto.\n   - Se la elektita peco estas bombon aŭ flagon, ĝi ne povas esti movita.\n2. **Bataloj:**\n   - Se vi moviĝas sur kvadraton okupitan de peco de via kontraŭulo, tiam batalo okazos:\n     - La peco kun la pli alta rango gajnas kaj eliminis la pecon de la kontraŭulo.\n     - Se la rangoj estas egalaj, ambaŭ pecoj foriĝas de la tabulo.\n     - **Specialaj Kazoj:**\n       - Bomboj eliminis plejparton de la atakantaj pecoj escepte de ministroj, kiuj malaktivigas bombojn.\n       - Spionoj povas venki la marŝalon se la spiono atakas unue sed perdiĝas kontraŭ ĉiuj aliaj pecoj.\n3. **Strategiaj Celoj:**\n   - Identigi la pecojn de via kontraŭulo tra iliaj movoj kaj bataloj.\n   - Protekti vian flagon dum provo kapti la flagon de via kontraŭulo.\n   - Uzi Skoltojn strategie por gajni informojn pri la pecoj de via kontraŭulo kaj ataki malfortajn pecojn.\n\n### Kiel Fari Movon:\n1. Specifigu la koordinatojn de la peco kiun vi volas movi kaj ĝian destinon.\n2. Uzadu la formaton: [A0 B0], kie A0 estas la fonta pozicio, kaj B0 estas la destinacia pozicio.\n   - Ekzemplo: Por movi pecon de vico 0, kolumno 0 al vico 1, kolumno 0, enigu [A0 B0].\n3. Certigu ke la destinacio estas valida laŭ la movreguloj supre.\n\n### Gravaj Notoj:\n- La tabulo montras viajn pecojn kaj iliajn poziciojn, ekz. MN, MS.\n- La tabulo ankaŭ montras konatajn poziciojn de la pecoj de via kontraŭulo sen reveli iliajn rangojn, ekz. ?.\n- Kradoj kun ~ estas lagoj kaj ne povas esti movitaj sur.\n- Kiel sugesto, komencu vian ludon movante viajn pecojn kiuj estas sur la frontlinioj por gajni informojn pri la pecoj de via kontraŭulo. La frontlinioj de ludanto 0 kaj ludanto 1 estas vico D kaj vico G respektive.\n\nJen estas la nuna stato de la tabulo:\n"
+  },
+  "board": {
+    "current_board": "Nuna Tabulo:\n\n{board}\nHaveblaj Movoj: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Malvalida agformato. Ludanto {player_id} ne enigis movon en la formato [A0 B0] .",
+    "invalid_coordinates": "Malvalida agformato. Ludanto {player_id} ne enigis validajn koordinatojn.",
+    "not_own_piece": "Malvalida agformato. Ludanto {player_id} devas movi unu el siaj propraj pecoj.",
+    "scout_through_pieces": "Malvalida agformato. Ludanto {player_id} ne povas movi esploriston tra aliaj pecoj.",
+    "scout_diagonal": "Malvalida agformato. Ludanto {player_id} ne povas movi esploriston diagonale.",
+    "non_scout_multi_square": "Malvalida agformato. Pecoj, krom esploristoj, povas movi nur unu kvadraton je fojo.",
+    "move_into_lake": "Malvalida agformato. Ludanto {player_id} ne povas moviĝi en la lagon.",
+    "move_onto_own_piece": "Malvalida agformato. Ludanto {player_id} ne povas moviĝi sur sian propran pecon.",
+    "move_bomb_or_flag": "Malvalida agformato. Ludanto {player_id} ne povas movi bombon aŭ flagon."
+  },
+  "game_action": {
+    "you_moved": "Vi movis vian pecon de {source} al {dest}.",
+    "opponent_moved": "Ludanto {player_id} movis pecon de {source} al {dest}.",
+    "you_equal_ranks": "Vi movis vian pecon de {source} al {dest}. La atakanta peco estis {attacking_rank} kaj la destinacia peco estis {target_rank}. Ĉar la rangoj estas samaj, ambaŭ pecoj perdiĝis.",
+    "opponent_equal_ranks": "Ludanto {player_id} movis pecon de {source} al {dest}. La atakanta peco estis {attacking_rank} kaj la destinacia peco estis {target_rank}. Ĉar la rangoj estas samaj, ambaŭ pecoj perdiĝis.",
+    "you_miner_defused": "Vi movis vian pecon de {source} al {dest}. La atakanta peco estis {attacking_rank} kaj la destinacia peco estis {target_rank}. Ĉar ministroj povas malaktivigi bombojn, vi gajnis la batalon.",
+    "opponent_miner_defused": "Ludanto {player_id} movis pecon de {source} al {dest}. La atakanta peco estis {attacking_rank} kaj la destinacia peco estis {target_rank}. Ĉar ministroj povas malaktivigi bombojn, vi perdis la batalon.",
+    "you_bomb_lost": "Vi movis vian pecon de {source} al {dest}. La atakanta peco estis {attacking_rank} kaj la destinacia peco estis {target_rank}. Ĉar la atakanto ne estas ministo, vi perdis la batalon.",
+    "opponent_bomb_won": "Ludanto {player_id} movis pecon de {source} al {dest}. La atakanta peco estis {attacking_rank} kaj la destinacia peco estis {target_rank}. Ĉar la atakanto ne estas ministo, vi gajnis la batalon.",
+    "you_spy_won": "Vi movis vian pecon de {source} al {dest}. La atakanta peco estis {attacking_rank} kaj la destinacia peco estis {target_rank}. Ĉar la atakanto estas spiono kaj la destinacio estas marŝalo, vi gajnis la batalon.",
+    "opponent_spy_lost": "Ludanto {player_id} movis pecon de {source} al {dest}. La atakanta peco estis {attacking_rank} kaj la destinacia peco estis {target_rank}. Ĉar la atakanto estas spiono kaj la destinacio estas marŝalo, vi perdis la batalon.",
+    "you_higher_won": "Vi movis vian pecon de {source} al {dest}. La atakanta peco estis {attacking_rank} kaj la destinacia peco estis {target_rank}. Ĉar la atakanto estas pli alta rango ol la destinacio, vi gajnis la batalon.",
+    "opponent_higher_lost": "Ludanto {player_id} movis pecon de {source} al {dest}. La atakanta peco estis {attacking_rank} kaj la destinacia peco estis {target_rank}. Ĉar la atakanto estas pli alta rango ol la destinacio, vi perdis la batalon.",
+    "you_lower_lost": "Vi movis vian pecon de {source} al {dest}. La atakanta peco estis {attacking_rank} kaj la destinacia peco estis {target_rank}. Ĉar la atakanto estas pli malalta rango ol la destinacio, vi perdis la batalon.",
+    "opponent_lower_won": "Ludanto {player_id} movis pecon de {source} al {dest}. La atakanta peco estis {attacking_rank} kaj la destinacia peco estis {target_rank}. Ĉar la atakanto estas pli malalta rango ol la destinacio, vi gajnis la batalon."
+  },
+  "outcome": {
+    "flag_captured": "Ludanto {player_id} kaptis la flagon de la kontraŭulo!",
+    "no_movable_pieces": "Ludanto {winner_id} gajnas! Ludanto {loser_id} havas neniujn moveblajn pecojn."
+  }
+}

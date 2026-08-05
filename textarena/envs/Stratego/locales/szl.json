@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Jeżeś Szpiler {player_id} we Stratego.\nTwōj cwek to zniszczyć Fanã przeciwnika abo wyeliminować wše jegō pjynty, kere idōm poruszać.\nTwōjã armijõ umieszczōno na szachowńicy, łącznie z Twojōm Fanōm, Bombami i inszymi pjyntami roztōmajtych rōng.\n\n### Instrukcyje Gry\n1. **Reguły Ruchu:**\n   - We Twoji turze możesz ruszyć pjyntã ô jedyn sztap na ôboczne pōle (gōra, dōł, lewo abo prawo), kere je zajynte Twojimi pjyntami.\n   - Przikład: Pjyntã idzie ruszyć ze A1 na B1 abo A1 na A2, jeśli B1 i A2 niy sōm zajynte Twojimi pjyntami.\n   - Jeśli ôbrany pjynt je Bombōm abo Fanōm, niy idzie go ruszyć.\n2. **Bitwy:**\n   - Jeśli ruszysz na pōle zajynte pjyntã przeciwnika, to dojdzie do bitwy:\n     - Pjynt z wyższym rōngiem wygrywŏ i eliminuje pjyntã przeciwnika.\n     - Jeśli rōngi sōm rōwne, ôbō pjynty sōm usuwane ze szachowńicy.\n     - **Specjalne Przypadki:**\n       - Bomby eliminujōm wiynkszość atakujōncych pjyntōw ôprōcz Gryfōw, kere rozbrajajōm Bomby.\n       - Szpiedzy mogōm pokōnać Marszałka, jeśli Szpiedzy zaatakujōm pjyrszy, ale przegrywajōm ze wszyjskimi inszymi pjyntami.\n3. **Strategiczne Cele:**\n   - Rozpoznej pjynty przeciwnika przez ich ruchy i bitwy.\n   - Chroń swojã Fanã, próbujōnc zdobyć Fanã przeciwnika.\n   - Stosuj Skautōw strategicznie, coby zyskać informacyje ô pjyntach przeciwnika i zaatakować słabe.\n\n### Jak Wykōnać Ruch:\n1. Wskaż kōrdynaty pjynta, kerego chcesz ruszyć i jego cyl.\n2. Stosuj format: [A0 B0], kaj A0 je pōzycyjō pōchodnō, a B0 je cyl.\n   - Przikład: Coby ruszyć pjyntã ze rzyndy 0, kolumny 0 na rzyndã 1, kolumnã 0, wpisz [A0 B0].\n3. Upewnij sie, że cyl je ważny podług reguł ruchu wyżej.\n\n### Wôżne Nôtatki:\n- Szachowńica pokaże Twoje pjynty i ich pōzycyje, np. MN, MS.\n- Szachowńica pokaże tyż znōme pōzycyje pjyntōw przeciwnika bez ôdkrywania ich rōng, np. ?.\n- Kratki ze ~ sōm jeziorami i niy idzie na nie ruszyć.\n- Jako sugestiã, zacznij grã ôd ruszyniã pjyntōw, kere sōm na pjyrszyj lini, coby zyskać informacyje ô pjyntach przeciwnika. Pjyrszŏ linia Szpilera 0 i Szpilera 1 je rzynda D i G."
+  },
+  "board": {
+    "current_board": "Aktualno szachownica:\n\n{board}\nDostępne posuněćia: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Niyprawidłowy format akcyje. Gracz {player_id} niy wkludziōł ruchu we formie [A0 B0].",
+    "invalid_coordinates": "Niyprawidłowy format akcyje. Gracz {player_id} niy wkludziōł prawych spōlnych.",
+    "not_own_piece": "Niyprawidłowy format akcyje. Gracz {player_id} musi ruszyć jedna ze swojich kōnsek.",
+    "scout_through_pieces": "Niyprawidłowy format akcyje. Gracz {player_id} niy może ruszyć szpilŏrza bez inksze kōnsztele.",
+    "scout_diagonal": "Niyprawidłowy format akcyje. Gracz {player_id} niy może ruszyć skauta na przekrój.",
+    "non_scout_multi_square": "Niyprawidłowy format akcyje. Figurki, poza zwiadowcami, mogōm poruszać sie ino jedyn sztyrok na raz.",
+    "move_into_lake": "Niyprawidłowy format akcyje. Gracz {player_id} niy może wlyźć do jeziora.",
+    "move_onto_own_piece": "Niyprawidłowy format akcyje. Gracz {player_id} niy może przejść na swojã włŏsno sztuka.",
+    "move_bomb_or_flag": "Niyprawidłowy format akcyje. Gracz {player_id} niy może ruszyć bōmby ani flagi."
+  },
+  "game_action": {
+    "you_moved": "Przesunōłeś swoją figurkę z {source} do {dest}.",
+    "opponent_moved": "Gracz {player_id} przesunōł figurkę z {source} do {dest}.",
+    "you_equal_ranks": "Przesunōłeś swoją figurkę z {source} do {dest}. Atakujōncą figurkōm była {attacking_rank}, a docelowōm {target_rank}. Ponieważ stopnie są takie same, obie figurki przepadły.",
+    "opponent_equal_ranks": "Gracz {player_id} przesunōł figurkę z {source} do {dest}. Atakujōncą figurkōm była {attacking_rank}, a docelowōm {target_rank}. Ponieważ stopnie są takie same, obie figurki przepadły.",
+    "you_miner_defused": "Przesunōłeś swoją figurkę z {source} do {dest}. Atakujōncą figurkōm była {attacking_rank}, a docelowōm {target_rank}. Ponieważ górnicy mogą rozbroić bomby, wygrałeś bitwę.",
+    "opponent_miner_defused": "Gracz {player_id} przesunōł figurkę z {source} do {dest}. Atakujōncą figurkōm była {attacking_rank}, a docelowōm {target_rank}. Ponieważ górnicy mogą rozbroić bomby, przegrałeś bitwę.",
+    "you_bomb_lost": "Przesunōłeś swoją figurkę z {source} do {dest}. Atakujōncą figurkōm była {attacking_rank}, a docelowōm {target_rank}. Ponieważ atakujōncy nie jest górnikym, przegrałeś bitwę.",
+    "opponent_bomb_won": "Gracz {player_id} przesunōł figurkę z {source} do {dest}. Atakujōncą figurkōm była {attacking_rank}, a docelowōm {target_rank}. Ponieważ atakujōncy nie jest górnikym, wygrałeś bitwę.",
+    "you_spy_won": "Przesunōłeś swoją figurkę z {source} do {dest}. Atakujōncą figurkōm była {attacking_rank}, a docelowōm {target_rank}. Ponieważ atakujōncy to szpieg, a cel to marszałek, wygrałeś bitwę.",
+    "opponent_spy_lost": "Gracz {player_id} przesunōł figurkę z {source} do {dest}. Atakujōncą figurkōm była {attacking_rank}, a docelowōm {target_rank}. Ponieważ atakujōncy to szpieg, a cel to marszałek, przegrałeś bitwę.",
+    "you_higher_won": "Przesunōłeś swoją figurkę z {source} do {dest}. Atakujōncą figurkōm była {attacking_rank}, a docelowōm {target_rank}. Ponieważ atakujōncy ma wyższy stopień niż cel, wygrałeś bitwę.",
+    "opponent_higher_lost": "Szpiler {player_id} przeniósł pjynta ze {source} do {dest}. Atakujōncy pjynt mjoł rōng {attacking_rank}, a pjynt we cylu mjoł rōng {target_rank}. Skirz atakujōncy pjynt mjoł wyższy rōng niż pjynt we cylu, przegrałeś bitwã.",
+    "you_lower_lost": "Przesunōłeś swoją figurkę z {source} do {dest}. Atakujōncą figurkōm była {attacking_rank}, a docelowōm {target_rank}. Ponieważ atakujōncy ma niższy stopień niż cel, przegrałeś bitwę.",
+    "opponent_lower_won": "Szpiler {player_id} przeniósł pjynta ze {source} do {dest}. Atakujōncy pjynt mjoł rōng {attacking_rank}, a pjynt we cylu mjoł rōng {target_rank}. Skirz atakujōncy pjynt mjoł niższy rōng niż pjynt we cylu, wygrałeś bitwã."
+  },
+  "outcome": {
+    "flag_captured": "Gracz {player_id} chyciōł flaga ôd przeciwnika!",
+    "no_movable_pieces": "Gracz {winner_id} wygrywa! Gracz {loser_id} nie ma już żadnych ruchomych figurek."
+  }
+}

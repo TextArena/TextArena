@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Jugador {player_id} kawkani, {num_rounds} rondas de Iterated Ultimatum Game khaynatä.\nQullqi ${pool} kawkani esta ronda entre kawkani y jugador {other_id}.\n\nPropositor:\n  - Ofrecimiento: [Offer: $X] (0 <= X <= pool)\n  - Si aceptado → Kawkani $(pool - X) ganado, otro jugador $X ganado\n  - Si rechazado → Ambos $0 ganado\n  - Ejemplo: [Offer: $3]  o  'Kunjamasa justicia. [Offer: $5]'\n\nRespondiente:\n  - Decisión sobre la oferta con [Accept] o [Reject]\n  - Ejemplo: 'Kunjamasa razonable. [Accept]'\n            'Masi injusticia. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Juk'ampisxani {round_number} q'awinakapxani! ---\nJichha {proposer_id} q'awiri, Jichha {responder_id} jani q'awiri.",
+    "offer": "Ronda {round_number}: Jugador {proposer_id} ofrece ${offer} a jugador {responder_id} (guardando ${keep}).",
+    "accepted": "Jugador {responder_id} aceptado! Ronda {round_number} ganancias: Jugador {proposer_id} +${proposer_gain}, jugador {responder_id} +${responder_gain}. Nuevos totales: Jugador 0: ${total_0}, jugador 1: ${total_1}.",
+    "rejected": "Jugadorni {responder_id} uñjasiñapxiwa! P'unchay {round_number} gananciasi: Pa jugadorni +$0. Totales q'araña: Jugador 0: ${total_0}, Jugador 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Mayt'irix [Offer: $X] ukjam formato apnaqasaw mä oferta apsuñapa.",
+    "bad_integer": "Uka mayt'äwix mä suma phuqhatakïñapawa.",
+    "out_of_range": "Offerakaxa $0 ukhamaraki ${pool} khayañanipxani.",
+    "no_current_offer": "Janiw jichhaxa kuna oferta jaysañas utjkiti.",
+    "accept_or_reject": "Respondiente debe aceptar o rechazar la oferta con [Accept] o [Reject]."
+  },
+  "outcome": {
+    "win": "Jugador {winner} ganó con ${winner_total} total vs jugador {loser} ${loser_total}.",
+    "draw": "Paypach anatirix ${total} ukhaw tukuyapxäna."
+  }
+}

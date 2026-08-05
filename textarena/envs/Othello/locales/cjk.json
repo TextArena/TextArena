@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Bodo la Michezo:\n{board}",
+    "valid_moves": "{observation}\nZamu zinazowezekana: {moves}",
+    "no_valid_moves_reset": "{observation}\nHakuna zamu zinazowezekana - unaweza kuhitaji kudunda.",
+    "no_valid_moves_step": "{observation}\nHakuna zamu zinazowezekana – unaweza kuhitaji kudunda.",
+    "scores_reset": "{observation}\nAlama za Sasa - Nyeusi: {black_count}, Weupe: {white_count}\n",
+    "scores_step": "{observation}\nAlama - Nyeusi: {black_count}, Weupe: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Cjk must be of the form [row, col].",
+    "illegal": "Zamu batili. Zamu zinazowezekana: {valid}"
+  },
+  "game_action": {
+    "skipped": "Mwana {pid} alilazimika kudunda zamu yake",
+    "played": "Mwana {pid} ({piece}) alicheza [{r}, {c}] akigeuza {flipped} kipande (au vipande)"
+  },
+  "game_message": {
+    "must_skip": "Mwana {pid} ({piece}) hana zamu zinazowezekana na lazima adunde."
+  },
+  "outcome": {
+    "black_wins": "Nyeusi inashinda {black_count}-{white_count}.",
+    "white_wins": "Weupe inashinda {white_count}-{black_count}.",
+    "draw": "Komeka {black_count}-{white_count}. "
+  }
+}

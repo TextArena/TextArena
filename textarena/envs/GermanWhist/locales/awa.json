@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "गेम शुरू हो गइल बा। ट्रम्प सूट: {trump_suit} (ट्रम्प कार्ड: {trump_str})।",
+    "no_trump_card": "नाहीं कांहीं ॥"
+  },
+  "player_prompt": {
+    "intro": "तुम प्लेयर {player_id} हउ जर्मन विस्ट में।\n{phase_info}\nतुम {hand_size} कार्ड धारिस。\n'[play N]' के साथ कार्ड खेलिस, जहां N तुम्हार हाथ में इसका पोजीशन ह (उदाहरण के लिए '[play 3]')。",
+    "phase_learning": "सीखना चरण: हर चाल कय विजेता मुँह-ऊपर वाले कार्ड लेत है अउर हारे वाला अगला कार्ड डेक से खींचत अहै। इ चरण मा जीती गई चाल जीत खातिर गिनल नाहीं जात हय।",
+    "phase_playing": "खेल चरण: डेक खतम होइ गवा है अब से हर चाल जीत के खातिर गिनती मा रहत ह।"
+  },
+  "next_card": {
+    "playing_phase": "कौनो कार्ड नाहीं दिया गवा - खेल चरण शुरू होइ ग है।",
+    "deck_empty": "डेक खाली है - कौनो कार्ड की पेशकश नहीं की गई है।",
+    "available": "प्रस्तावित कार्ड: {card} मा",
+    "available_trump": "प्रस्ताव पर कार्ड: {card} (ट्रम्प) मा प्रकाशित"
+  },
+  "invalid_move": {
+    "wrong_format": "अमान्य चाल प्रारूप. अपने हाथ मा Nth कार्ड खेलै के लिए '[play N]' का प्रयोग करा।",
+    "bad_position": "ओह कार्ड पोजीशन मौजूद नइखे। तुम {hand_size} कार्ड धारिस。",
+    "must_follow_suit": "आप अनुकरण करै अउर {lead_suit} कार्ड खेलै का चाही।",
+    "invalid_play": "इ कार्ड कय खेलय ना जाय सकत है।"
+  },
+  "game_action": {
+    "played": "प्लेयर {player_id} {card} खेलिस。"
+  },
+  "trick": {
+    "won": "प्लेयर {winner_id} {card} के साथ ट्रिक जीत लिहिस。",
+    "won_learning": "प्लेयर {winner_id} {card} के साथ ट्रिक जीत लिहिस और फेस-अप कार्ड ले लिहिस。"
+  },
+  "phase": {
+    "learning_complete": "डेक खतम होइ ग है. सीख का दौर खत्म - हर एक बची हुई चाल जीत की खातिर मायने रखती हैं।"
+  },
+  "draw": {
+    "winner_received": "तुम ट्रिक जीत लिहिस और {card} प्राप्त किहिस。",
+    "loser_received": "आप चाल खो दिए अउर डेक से {card} खींच लिए.",
+    "winner_preview": "अगला कार्ड {card} है."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "अब तक जीतल गइल ट्रिक्स - प्लेयर 0: {tricks0}, प्लेयर 1: {tricks1}",
+    "scores_playing": "स्कोरिंग ट्रिक्स - प्लेयर 0: {tricks0}, प्लेयर 1: {tricks1}",
+    "phase": "चरण: {phase} मा",
+    "phase_learning": "चरण: {phase} ({remaining_cards} कार्ड बाँचल बा डेक में)"
+  },
+  "hand": {
+    "no_cards": "नाहीं कार्डिगन!",
+    "no_cards_in_hand": "हाथ मा कौनो कार्ड नाही बा",
+    "header": "आपके हाथ में:",
+    "trump_indicator": "(ट्रांप) कहिन कि-",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "अब तक कोई भी ई चाल चलाय नाहीं पाई बा।",
+    "header": "वर्तमान ट्रिक:",
+    "trump_indicator": "(ट्रांप) कहिन कि-",
+    "card_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "खेल सुरु ना होई",
+    "header": "=== जर्मन व्हिस्ट गेम ===",
+    "phase": "{observation}\nचरण: {phase}",
+    "trump_suit": "{observation}\nट्रम्प सूट: {trump_suit}",
+    "trump_card": "{observation}\nट्रम्प कार्ड: {card}",
+    "cards_left": "{observation}\nकार्ड बाँचल बा: {count}",
+    "next_card": "{observation}\nजीतन वाला के अगला कार्ड: {card}",
+    "blank": "{observation}  मा",
+    "current_trick": "{observation}\nवर्तमान ट्रिक:",
+    "trump_indicator": "(ट्रांप) कहिन कि-",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nप्लेयर {player_id}: {scoring} स्कोरिंग ट्रिक्स ({tricks} कुल), {hand_size} कार्ड हाथ में"
+  },
+  "outcome": {
+    "summary": "लर्निंग चरण - प्लेयर 0: {l0}, प्लेयर 1: {l1}। प्ले चरण - प्लेयर 0: {p0}, प्लेयर 1: {p1}। प्लेयर {winner_id} {winner_tricks} स्कोरिंग ट्रिक्स के साथ जीत लिहिस!"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "तुम्ही खेळाडू {player_id} आहात {num_players}-खेळाडू खोटारडाच्या डाईज गेममध्ये नियम: - तुमच्या वळणावर, तुम्ही एकतर: 1) सध्याच्या बोलीपेक्षा जास्त प्रमाणात किंवा उच्च चेहरा (किंवा दोन्ही) असलेली नवीन बोली लावू शकता; म्हणजेच '[Bid: 3, 4]', 2) '[Call]' टाइप करून शेवटची बोली कॉल करा. जर तुम्ही कॉल केले तर: - सर्व डाईजमधील त्या मूळ मूल्याची वास्तविक गणना बोलीपेक्षा कमी असेल तर शेवटचा बोलीदार एक डाई गमावतो. - अन्यथा, कॉल करणारा एक डाई गमावतो. 0 डाईपर्यंत पोहोचणारा खेळाडू काढून टाकला जातो. शेवटचा उर्वरित खेळाडू जिंकतो."
+  },
+  "board": {
+    "per_player": "खेळाडू {p}: {d}",
+    "new_round": "नवीन फेरी - उर्वरित डाईस: {dice_summary} तुमचे सध्याचे डाईस: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "खेळाडू {current_player_id} कॉल करतो! प्रत्यक्ष चेहरा {face_value} ची गणना {count} आहे, जी {quantity} पेक्षा कमी आहे. खेळाडू {loser_id} (शेवटचा बोलीदार) एक डाई गमावतो.",
+    "caller_loses": "खेळाडू {current_player_id} बोलतो! चेहर्‍याची वास्तविक संख्या {face_value} ही {count} आहे, जी {quantity} पेक्षा जास्त किंवा समान आहे.\nखेळाडू {loser_id} (बोलणारा) एक डाई गमवतो."
+  },
+  "action": {
+    "bid_announce": "खेळाडू {player_id} ऑफर {quantity} चेहऱ्यावर {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "आधीच्या बोलीशिवाय केलेला कॉल.",
+    "invalid_bid": "अवैध बोली: {reason}",
+    "not_recognized": "एकतर वैध \"[Bid: X, Y]\" किंवा \"[Call]\" म्हणून मान्यता न मिळालेले कारवाई. सादर केलेली कारवाई: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "नवीन प्रमाण {new_quantity} सध्याच्या {current_quantity} पेक्षा कमी आहे.",
+    "face_lower": "नवीन नामी मूल्य {new_face_value} सध्याच्या {current_face_value} पेक्षा कमी आहे.",
+    "identical": "बोली सध्याच्या बोलीसारखीच आहे.",
+    "face_range": "अंकित मूल्य 1 ते 6 दरम्यान असावे."
+  },
+  "message": {
+    "eliminated_invalid": "खेळाडू {player_id} अवैध हालचालीमुळे बाहेर पडला."
+  },
+  "outcome": {
+    "win": "खेळाडू {winner} जिंकतो! अंतिम क्रमवारी: {final_ranking}"
+  }
+}

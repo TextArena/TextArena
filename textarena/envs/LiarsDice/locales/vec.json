@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Tu sei Giocatore {player_id} in un gioco de Liar's Dice a {num_players} giocatori.\nRegole:\n- Sulla tua tournée, tu puoi:\n  1) Fare un nova oferta con una quantità o faccia più alta (o entrambe) de ła oferta atual; cioè '[Bid: 3, 4]',\n  2) Chiamare l'ultima oferta digitando '[Call]'.\n\nSe tu chiami:\n  - Se el conto reale de quel valore de faccia tra tuti i dadi è meno de ła oferta, l'ultimo offerente perde un dado.\n  - Altrimenti, el chiamante perde un dado.\nUn giocatore che raggiunge 0 dadi è eliminà. L'ultimo giocatore restante vince."
+  },
+  "board": {
+    "per_player": "\tGiocatore {p}: {d}",
+    "new_round": "\nNova tournée - Dadi restanti: {dice_summary}\nI tuoi dadi atuali sono: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Giocatore {current_player_id} chiama! El conto reale de ła faccia {face_value} è {count}, che è MENO de {quantity}.\nGiocatore {loser_id} (l'ultimo offerente) perde un dado.",
+    "caller_loses": "Giocatore {current_player_id} chiama! El conto reale de ła faccia {face_value} è {count}, che è >= {quantity}.\nGiocatore {loser_id} (el chiamante) perde un dado."
+  },
+  "action": {
+    "bid_announce": "Giocatore {player_id} el fa un'offerta de faccia {quantity} o {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Chiamà senza un'offerta anteriore.",
+    "invalid_bid": "Oferta invalida: {reason}",
+    "not_recognized": "Azione no reconosuda come '[Bid: X, Y]' o '[Call]' valida. Azione inviada: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nova quantità {new_quantity} è più bassa de ła atual {current_quantity}.",
+    "face_lower": "El novo valor nominale {new_face_value} el xe pì basso de l'atuale {current_face_value}.",
+    "identical": "L'offerta xe identica a l'oferta corrente.",
+    "face_range": "El valor nominale el ga da esar fra 1 e 6."
+  },
+  "message": {
+    "eliminated_invalid": "El xugador {player_id} el xe stà eliminà par un'invalida mossa."
+  },
+  "outcome": {
+    "win": "Giocatore {winner} vince! Clasifica finale: {final_ranking}"
+  }
+}

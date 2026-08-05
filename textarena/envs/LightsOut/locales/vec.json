@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Benvegnuo a Lights Out! Ti ga na griglia de {size}x{size} luci.\nEl tuo obietivo xe queło de spénzer TUTE le luci (rapresentae da '.')\nQuando ti schiaci na luce, ła cambia stato e anca i so vicini (sora/soto/sinistra/destra).\nDigita [row col] par schiaciar na luce (a indici 0, quindi intervalo valido xe 0-{max_index}).\nTi ga fin a {max_turns} mosse par risòlvar el puzzle.\nLegenda: 'O' = luce ACCESA, '.' = luce SPENTA"
+  },
+  "board": {
+    "current_state": "Stato corrente de ła griglia (Mossa {moves_made}, {moves_left} mosse rimanenti, {completion}% completo):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'azion la ga da esar in formato [row col] dove riga e col xe numeri intieri dal 0 al {max_index}.",
+    "out_of_range": "Łe coordinae łe ga da èsar tra 0 e {max_index}. Ti ghè inserìo [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Complimenti! Te ghe risolto el puzzle in {moves_used} mosse!",
+    "loss": "Fine del gioco! Ti ga doprà tutte le {max_turns} mosse senza risòlvar el puzzle. Completamento finale: {completion}%\nStato finale:\n{grid}"
+  }
+}

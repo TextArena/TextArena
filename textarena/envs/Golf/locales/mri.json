@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Kei te takaro koe i te Kāri (Kēmu) - Player {player_id}.\nWhāinga: Whakaputaina te toa iti rawa i tēnei raupapa kotahi. Ki te whakaritea ngā kohatu, ka whakauruhia hei 0.\nNgā uara kāri: A=1, 2-10=whakaahua, J/Q=10, K=0\n\nNgā mahi (whakamahia ngā whakawhāiti tika):\n- '[draw]' - Tangohia mai i te tāhuhu\n- '[take]' - Tangohia mai i te puranga whakarere\n- '[swap X Y]' - Whakawhiti te kāri i tangohia ki te tūranga X (rori) Y (kohatu)\n- '[discard]' - Whakarere i te kāri i tangohia"
+  },
+  "board": {
+    "drew": "I tangohia e koe: {card}\nInaianei me [swap X Y] ranei [discard]",
+    "took": "I tangohia e koe: {card} mai i te puranga makawe Me [swap X Y] me ia (kaore e taea te whakakore).",
+    "peeked": "I tirotirohia e koe ki te tūranga ({row},{col}): {card}",
+    "turn_view": "Ko tou ringa:\n{hand}\nKo te puranga whakarere: {discard}\n{options}",
+    "none": "Kāore he mea."
+  },
+  "options": {
+    "final_turns": "Ngā whakatau whakamutunga! Ko ngā kōwhiringa: [draw], [take], [peek X Y]",
+    "draw": "Ko ngā kōwhiringa: [draw], [take]",
+    "must_swap": "Me: [swap X Y] (kaore e taea te whakakore i nga kaari mai i te puranga o te maka)",
+    "swap_or_discard": "Me [swap X Y] ranei [discard]"
+  },
+  "hand": {
+    "no_cards": "Kāore he kāri.",
+    "header": "Koura: 1 2 3",
+    "row": "Rori {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} kua whakawhiti {new} ki {old} ki te tūranga ({row},{col})",
+    "discarded": "Player {pid} kua whakarere i {card}"
+  },
+  "message": {
+    "deck_empty": "Kua kore te papa! Ka mutu tonu te kēmu.",
+    "knocked": "Kaitākaro {pid} i patua! Ka whiwhi kētia e kētahi atu kaitākaro tētahi huri anō.",
+    "final_round": "Kaitākaro {pid} {reason}! Ka whiwhi kētia e kētahi atu kaitākaro tētahi huri anō."
+  },
+  "reason": {
+    "all_revealed": "kua whakakitea katoa ngā kāri"
+  },
+  "invalid": {
+    "wrong_action": "Whakamahia kotahi anake o ngā mahi whakawhāiti: [draw], [take], [swap X Y], [discard], [knock], ranei [peek X Y]",
+    "discard_empty": "Kua kore te puranga o ngā mea kua maka!",
+    "must_draw_first": "Me tirotiro koe tuatahi [draw], [take], [knock], ranei [peek X Y]",
+    "cannot_discard_taken": "Kāore e taea te whakakore i tētahi kāri kua tangohia mai i ngā tūru whakakahoretanga. Me whakawhiti kētia.",
+    "have_drawn_card": "Kei a koe he kāri whakatahia. Me [swap X Y] ranei [discard]",
+    "need_drawn_swap": "E hiahia ana koe ki tētahi kāri kua tāpaetia hei whakawhiti.",
+    "need_drawn_discard": "E hiahia ana koe ki tētahi kāri kua tāpaetia hei whakakore.",
+    "out_of_bounds": "Tūranga ki waho. Whakamahia rori 1-{max_row}, kohatu 1-{max_col}",
+    "knock_with_card": "E kore e taea te patukituki ki te kāri i hīkina. Whakaoti tō huri i te tuatahi.",
+    "already_knocked": "Kua oti kē i tētahi te patu tēnei rauna.",
+    "already_revealed": "Kua whakakitea kētia taua kāri!"
+  },
+  "summary": {
+    "full": "Kua mutu te kēmu! Player {winner} ka toa ki te toa o {score} pūru!\n\nNgā toa whakamutunga:\n{scores}",
+    "line": "Player {pid}: {score} pūru\n"
+  },
+  "board_str": {
+    "title": "=== PĀTARO GOLF=== Ko te tikanga o tēnei whārangi ko:",
+    "discard": "Te kōpeke whakarere: {card}",
+    "knocked": "Kua patoto te kaitākaro {pid}!",
+    "player_header": "Player {pid} (Toa: {score}):"
+  }
+}

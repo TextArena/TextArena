@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Ko'o Player {player_id} e derewol Indian Poker.\n- 52-kawtal kawtal; ko'o yi'i kawtal jarga e.\n- Kuugal {ante} chip(s) e kowgal, {max_rounds} kowgal(s) piro.\n- Yi'i e derewol: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ko wakkati e dow laawol ≤ e chip mool.)\n- Kawtal yi'i e dow e poti e showdown.\n"
+  },
+  "round": {
+    "announce": "### Dowla {current_round}/{max_rounds}\nKarta opponent maa: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Ina jama'a kafa kafa kafa, misali '[check]', '[bet 2]', '[call]', '[raise 3]', ko '[fold]'.",
+    "cannot_check": "Walaa [check] - on ɗon laara ceede.",
+    "amount_min": "Bet / Raise mool ko wakkati ≥ 1.",
+    "cannot_bet": "O yi'i [bet] - laawol [call] / [raise] / [fold].",
+    "nothing_to_call": "Ba'a poti; a yi'i [check] tawa.",
+    "no_bet_to_raise": "Naftirgo [bet X] ngam maɓɓugo; wala ko ɓeydata.",
+    "insufficient": "Fuu kujeji ɗi o waɗata."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (koshi {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Ko footi a waɗa: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Jokkondir {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Jaawal {player_id} ɓooyta.",
+    "showdown_win": "Showdown: {card_win} ya doke {card_lose}.",
+    "showdown_tie": "Showdown tie: fuuji {card}. Pot split  koomoye jaɓata {split}."
+  },
+  "outcome": {
+    "p0_wins": "Jokkondir 0 ya ci ({bank0} > {bank1})",
+    "p1_wins": "Jokkondir 1 ya ci ({bank1} > {bank0})",
+    "draw": "Fulal nanndal ɓaawo kala raanduji fu"
+  }
+}

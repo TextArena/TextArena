@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "तपाईं तीन-खेलाडी टिक टक टुमा खेलाडी {player_id} हुनुहुन्छ। तपाईंको प्रतीक '{symbol}' हो। तपाईं चारको रेखा बनाउनको लागि 5x5 बोर्डमा आफ्नो प्रतीक राखेर बारी बारीमा लिनुहुन्छ। रेखाहरू तेर्सो, ठाडो, वा विकर्ण हुन सक्छ। सेल 4 मार्क गर्न ढाँचा '[4]' प्रयोग गरेर तपाईंको चाल बुझाउनुहोस्।"
+  },
+  "board": {
+    "current_board": "वर्तमान बोर्ड: {board} उपलब्ध चालहरू: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "अमान्य चाल ढाँचा। जहाँ सेल ०-{max_cell} छ त्यहाँ \"[cell]\" प्रयोग गर्नुहोस्।",
+    "out_of_range": "अमान्य सेल नम्बर: {cell}. यो ० र {max_cell} बीचमा हुनुपर्छ।",
+    "already_occupied": "सेल {cell} पहिले नै कब्जा गरिएको छ।",
+    "made_invalid": "खेलाडी {player_id} ले अवैध चाल बनायो"
+  },
+  "game_action": {
+    "placed": "खेलाडी {player_id} आफ्नो प्रतीक ({symbol}) क्षेत्र ({row}, {col}) मा राख्छ।"
+  },
+  "outcome": {
+    "win": "खेलाडी {player_id} ({symbol}) विजयी हुन्छ!",
+    "draw": "खेल बराबरीमा सकियो!"
+  }
+}

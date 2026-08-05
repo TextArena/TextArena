@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Umukinyi yaragerageje kwemera guhinduranya atafise uburyo bukenewe.",
+    "out_of_range": "Umukinnyi {player_id}, Igikorwa kibujije. Inzira {col} iko hanze ya mipaka.",
+    "already_full": "Umukinnyi {player_id}, Igikorwa kibujije. Inzira {col} imejaa.",
+    "proposing_with_no_resource": "Umukinyi {player_id} yagerageje gutanga igiciro c'ukugurana atafise uburyo bukenewe.",
+    "incorrect_offer_format": "Umukinyi {player_id} yatanze igicapo co guhinduranya mu buryo butari bwo.",
+    "no_new_offer": "Umukinyi {player_id} nta kintu gishasha yigeze atanga."
+  },
+  "offers": {
+    "reject": "Umukinyi {player_id} yaranse ico giteramo.",
+    "accept": "Umukinnyi {acceptor_id} yarakabije uwo kuzitanga na Umukinnyi {proposer_id}.",
+    "proposal": "Umukinnyi {player_id} yateje uwo kuzitanga kwa Umukinnyi {opponent_id}: Ibiratanga: {offered} -> Ibiratangwa: {requested}"
+  },
+  "outcome": {
+    "win": "Umukinyi {winner_id} yatsinze mu kuronka amahera menshi.",
+    "draw": "Ihinduka rimwe ku bigega vy'abakinyi bose."
+  }
+}

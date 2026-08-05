@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Inwe ni Nyathi {player_id} katika mchezo wa wachezaji wawili wa Spite na Malice. Lengo lako ni kuwa wa kwanza kuondoa ororo lako la malipo.\n\n### Muktadha wa Mchezo:\n- Lengo ni kusafisha ororo lako la malipo kwa kucheza kadi kwenye mirundo ya katikati.\n- Unaweza kucheza kadi kutoka vyanzo vitatu:\n  1. Mkono wako **(huanza kila zamu na hadi kadi 5 mkononi)**.\n  2. Kadi ya juu ya ororo lako la malipo.\n  3. Kadi ya juu ya ororo lolote lako la taka.\n\n### Kanuni za Kucheza:\n- Unaweza kucheza kadi kwenye mrunda wa katikati ikiwa ni **daraja moja zaidi** kuliko kadi ya juu kwenye mrunda huo (mirundo ya katikati huanza na Ace na kwenda hadi Queen; Wafalme ni wakamataaji - wanaweza kucheza kwenye kadi yoyote lakini hawabadilishi mpangilio wa daraja. Hii inamaanisha ikiwa Mfalme anatumika baada ya 4, basi Mfalme huyo anapewa daraja la 5 na kadi inayofuata lazima iwe 6).\n- Ikiwa huwezi kucheza kadi zaidi, lazima **utupie kadi** kwenye moja ya mirundo yako ya taka ili kumaliza zamu yako.\n- Ikiwa mrunda wa katikati unafikia Queen, utasafishwa kiotomatiki.\n- Mpangilio wa daraja ni: A=1, 2=2, ..., 9=9, J=10, Q=11, K kama wakamataaji.\n\n### Vitendo:\n1. **Chora**: Kuanza kwa zamu yako, chora kadi ili kujaza mkono wako hadi kadi 5. Ingiza **[draw]** ili kuanza.\n2. **Cheza Kadi**: Ili kucheza kadi, taja kadi na mrunda wa katikati kama hii: **[play A♠ 0]** (ambapo 'A♠' ni kadi na '0' ni index ya mrunda wa katikati).\n3. **Tupa**: Ikiwa huwezi kucheza kadi zaidi, tupie kadi kutoka kwa mkono wako hadi kwenye mrunda wa taka ili kumaliza zamu yako. Ingiza **[discard A♠ 1]** (ambapo 'A♠' ni kadi na '1' ni index ya mrunda wa taka). Kumbuka kuwa huwezi kutupa kadi yoyote kutoka kwa ororo la malipo. Unaweza tu kutupa kadi kutoka kwa mkono wako.\n\n"
+  },
+  "board": {
+    "current_board": "Bodi ya Sasa:\n\n{board}\nVitendo Vinavyopatikana: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Kuonde ma ne Okorgi e dier Tielo mag Lweny (Center Piles) --- ",
+    "pile": "{observation}Kifurushi {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Mtazamo wa Player {player_id} ---\n",
+    "payoff": "{observation}Sarafu ya Malipo (Kadi ya Juu): {top_card}, Urefu wa Sarafu ya Malipo: {payoff_length}\n",
+    "hand": "{observation}Boko: {hand} ",
+    "discard": "{observation}Sarafu za Kutupa: {discard}\n",
+    "empty": "Onge gimoro amora e iye."
+  },
+  "game_message": {
+    "no_cards_left": "Onge kad mamoko minyalo golo. Ng'e ni inyalo tugo kadi mowuok e kuonde maluwogi: 1. Lweteni 2. Kad manie wiyi mar pimo mich ma in-go 3. Kaadi man malo mogik ei pichni duto miwito.* "
+  },
+  "invalid_move": {
+    "wrong_format": "Yo ma ok owinjore mar tugo. Jalo {player_id} ne ok odwoko gi tim mowinjore e kind rang'iny ariyo mag nyukta madongo.",
+    "invalid_play": "Kucheza kisicho sahihi. Player {player_id} alijaribu kucheza {card} kwenye sarafu ya katikati {index}.",
+    "discard_from_payoff": "Jalo {player_id} notemo golo kad moro e kidieny mar payoff.",
+    "discard_not_in_hand": "Jalo {player_id} notemo golo kad ma ok en e lwete.",
+    "wrong_move_type": "Jalo {player_id} ne ok odwoko gi kidieny mar tugo maber."
+  },
+  "game_action": {
+    "you_drew": "Ne igoyo ombulu.",
+    "opponent_drew": "Jalo {player_id} ne ogolo kad.",
+    "you_played": "Ne itugo {card} e kidieny mar dier ot {index}.",
+    "opponent_played": "Jategi {player_id} onyiero kadi {card} kuom pile ya katikati {index}.",
+    "you_discarded": "Inyiero kadi {card} kuom pile ya kadi tich {index}, ma onyiero ni inyiero osie turn. Ok inyiero bedo koro gin mara. Jategi {next_player_id} onyiero biro next.",
+    "opponent_discarded": "Jatech {player_id} osewaro {card} gi pile ya osewaro {index}, ma neno ema owacho ni owari turni yao. Ok inyalo action nyingine ya Jatech {player_id} ikosolewa kwa turni eni. Jatech {next_player_id}, inyalo wach ni. Kwa wach, ingiza action yako kwa mfumo [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Nyathi {current_player} amemaliza ororo lake la malipo! Nyathi {current_player} anashinda!",
+    "deadlock_player_0": "Kufikia kizuizi! Player 0 anashinda na {player_0_payoff} kadi zilizobaki dhidi ya {player_1_payoff} kadi za Player 1.",
+    "deadlock_player_1": "Kufikia kizuizi! Player 1 anashinda na {player_1_payoff} kadi zilizobaki dhidi ya {player_0_payoff} kadi za Player 0.",
+    "deadlock_tie": "Kufikia kizuizi kwa usawa! Wachezaji wote wawili wana {player_0_payoff} kadi zilizobaki. Player {current_player} anashinda kwa chaguo-msingi."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Wo ne Oyikyerɛ {player_id} wɔ LinesOfAction agorɔ mu.\nWo pieces no yɛ '{side}', oponnyi pieces no yɛ '{other}'.\nMove format: `[b1b3]` (firi-coord to-coord). Move a ɛfata no fa kwan horizontal, vertical, anaa diagonal a ɛyɛ squares dodoɔ a ɛyɛ pieces (kɔkɔɔ biara) wɔ saa line no mu. Wobɛtumi akɔtene wo pieces wɔn ho, nanso wuntumi ankɔtene oponnyi pieces; wokɔ a woduru oponnyi no, wobɛfa no.  Wo a wodi agorɔ no bere a wo pieces nyinaa yɛ 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "Dwumadibea: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ɛsɛ sɛ wɔfa saa kwan yi so: e2e4 (from,to coordinates).",
+    "no_piece": "{side} no piece on {coord}.",
+    "identical": "Ɛfiase ne baabi a wɔrekɔ yɛ pɛ.",
+    "not_straight_or_diagonal": "Ɛsɛ sɛ akwantu no yɛ tee anaa diagonal.",
+    "wrong_distance": "Ɛsɛ sɛ wɔtwe wɔn ho fi akyiri a ɛne nnua no di nsɛ.",
+    "enemy_blocks": "Ɔtamfo bi a ɔde ne nsa asi kwan no so.",
+    "destination_own": "Ɔdan a wɔn ankasa hyɛ mu."
+  },
+  "game_action": {
+    "moved": "Ɔdan {player_id} tu kɔ {from} -> {to}",
+    "captured_suffix": "Oyikyerɛ {player_id} tuu {from} -> {to} faa oponnyi."
+  },
+  "outcome": {
+    "win": "Nneɛma no nyinaa wɔ abusuabɔ.",
+    "draw_no_capture": "60 moves a wɔntumi ankɔfa oponnyi.",
+    "draw_repetition": "Wɔsan yɛɛ tebea no ho adwuma mprɛnsa."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ses Giogadore {player_id} in un giogu a duos giogadores de Spite e Malice. Su tuo obiettivu est de esser su primu a isciucare sa pila de pagamentu.\n\n### Panorama de su Giogu:\n- S'obiettivu est de isciucare sa pila de pagamentu giogande cartas a sas pilas tzentrales.\n- Podes giogare cartas dae tres orìgines:\n  1. Sa **manu tua** (comintzas onni giru cun fintzas a 5 cartas in manu).\n  2. Sa **carta in artu de sa pila de pagamentu tua**.\n  3. Sa **carta in artu de una cale si siat de sas pilas de iscartu tuas**.\n\n### Regulas de Giogu:\n- Podes giogare una carta a una pila tzentrale si est **unu gradu prus artu** de sa carta in artu de cussa pila (sas pilas tzentrales comintzan cun s'Ace e andant fintzas a sa Regina; sos Re sunt selvàgios - poden essere giogados in una cale si siat carta ma no cambian sa secuèntzia de gradu. Custu cheret nàrrere chi si un Re est usadu a pustis de su 4, tando cuddu Re est graduadu 5 e sa carta imbeniente depet essere unu 6).\n- Si no podes giogare àteras cartas, depes **iscartare una carta** a una de sas pilas de iscartu tuas pro acabare su giru.\n- Si una pila tzentrale arribat a sa Regina, issa at a essere isciucada in automàticu.\n- S'òrdine de gradu est: A=1, 2=2, ..., 9=9, J=10, Q=11, K comente selvàgiu.\n\n### Atzionis:\n1. **Pigare**: A s'incumintzu de su giru, pigas cartas pro prenare sa manu tua fintzas a 5 cartas. Inseris **[draw]** pro comintzare.\n2. **Giogare una Carta**: Pro giogare una carta, specificas sa carta e sa pila tzentrale gai: **[play A♠ 0]** (in ue 'A♠' est sa carta e '0' est s'ìnditze de sa pila tzentrale).\n3. **Iscartare**: Si no podes giogare àteras cartas, iscartas una carta dae sa manu tua a una pila de iscartu pro acabare su giru. Inseris **[discard A♠ 1]** (in ue 'A♠' est sa carta e '1' est s'ìnditze de sa pila de iscartu). Nota chi no podes iscartare peruna carta dae sa pila de pagamentu. Podes iscartare petzi sas cartas dae sa manu tua.\n\n"
+  },
+  "board": {
+    "current_board": "Tavola Corrente:\n\n{board}\nMossas Disponibiles: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Piles de tzentru --- ",
+    "pile": "{observation}Mucchio {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vista de su Giogadore {player_id} ---\n",
+    "payoff": "{observation}Pila de Pagamentu (Carta in Artu): {top_card}, Longaria de sa Pila de Pagamentu: {payoff_length}\n",
+    "hand": "{observation}Mano: {hand}\n",
+    "discard": "{observation}Pilas de Scartu: {discard}\n",
+    "empty": "Prenu de nudda"
+  },
+  "game_message": {
+    "no_cards_left": "Non b'at prus cartas de iscarrigare. Ammentade chi podides giogare sas cartas dae custas fontes: 1. Sa manu tua 2. Su primu cartone de sa pila paga 3. Su primu cartu de cale si siat muntella scartada. ️"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatzione de mossa non vàlida. Giogadore {player_id} no at rispòndidu cun una mossa bàlida in parentesi cuadrada.",
+    "invalid_play": "Giogada non vàlida. Su giogadore {player_id} at tentadu de giogare {card} in sa pila tzentrale {index}.",
+    "discard_from_payoff": "Discartu invàlidu. Giogadore {player_id} at proadu a discarrigare una carta dae sa pila de pagamentu.",
+    "discard_not_in_hand": "Discartu invàlidu. Giogadore {player_id} at proadu a discarrigare una carta chi no est in manu.",
+    "wrong_move_type": "Tipu de mossa invàlida. Giogadore {player_id} no at rispòndidu cun unu tipu de mossu vàlidu."
+  },
+  "game_action": {
+    "you_drew": "T'as ispartu sas cartas.",
+    "opponent_drew": "Su giogadore {player_id} at tiradu cartas.",
+    "you_played": "T'as giogadu {card} in sa pila tzentrale {index}.",
+    "opponent_played": "Su giogadore {player_id} at giogadu {card} in sa pila tzentrale {index}.",
+    "you_discarded": "As discartadu {card} in sa pila de iscartos {index}, su chi cheret nàrrere chi as finidu su to turno. Per custu turno, non si tenet contu de àteras aziones tuas. Su giogadore {next_player_id} at a esser su pròssimu.",
+    "opponent_discarded": "Giocatore {player_id} ha scartato {card} al mucchio di scarto {index}, cosa che significa anche che ha finito il suo turno. Non saranno considerate ulteriori azioni del Giocatore {player_id} per questo turno. Giocatore {next_player_id}, sarà il tuo turno. Per favore, inserisci la tua azione nel formato [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Su giogadore {current_player} at acabadu sa pila de pagamentu! Su giogadore {current_player} at bintu!",
+    "deadlock_player_0": "Impasse raggiuntu! Su giogadore 0 at bintu cun {player_0_payoff} cartas abarradas vs {player_1_payoff} cartas de su giogadore 1.",
+    "deadlock_player_1": "Impasse raggiuntu! Su giogadore 1 at bintu cun {player_1_payoff} cartas abarradas vs {player_0_payoff} cartas de su giogadore 0.",
+    "deadlock_tie": "Impasse raggiuntu cun paridade! Ambos giogadores ant {player_0_payoff} cartas abarradas. Su giogadore {current_player} at bintu pro deretu."
+  }
+}

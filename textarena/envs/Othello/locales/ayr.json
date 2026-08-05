@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Jacha anataña: {board}",
+    "valid_moves": "{observation}\nKunawsa jikxatixa: {moves}",
+    "no_valid_moves_reset": "{observation} Janiw kuna movimientos chiqapäkiti, inas jaytjañama.",
+    "no_valid_moves_step": "{observation} Janiw kuna movimientos chiqanakas utjkiti. Inasa jaytjañamachi.",
+    "scores_reset": "{observation}\nKunjamasa Mara - Ch'iyara: {black_count}, Yuraq: {white_count}\n",
+    "scores_step": "{observation}\nMara - Ch'iyara: {black_count}, Yuraq: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Uka movimiento ukax [row, col] ukjamäñapawa.",
+    "illegal": "Jan wali lurawinaka. Jani aski lurañanakapa: {valid}"
+  },
+  "game_action": {
+    "skipped": "{pid} anatirix janiw turkapxiti.",
+    "played": "Player {pid} ({piece}) [{r}, {c}] mayacht'asi, {flipped} q'ala utt'asi"
+  },
+  "game_message": {
+    "must_skip": "Player {pid} ({piece}) mayacht'ayasi kamach'i, satañaniwa."
+  },
+  "outcome": {
+    "black_wins": "Ch'iyarax q'uwä {black_count}-{white_count}.",
+    "white_wins": "Janq'uxa atipt'iwa {white_count}-{black_count}.",
+    "draw": "Draw {black_count}-{white_count}."
+  }
+}

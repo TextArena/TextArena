@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "သင်သည် LinesOfAction ကစားနည်း၏ ကစားသမား {player_id} ဖြစ်ပါသည်။\nသင့် ပစ္စည်းများသည် '{side}' ဖြစ်ပြီး၊ ပြိုင်ဘက်၏ ပစ္စည်းများသည် '{other}' ဖြစ်ပါသည်။\nရွှေ့ပုံစံ: `[b1b3]` (မူလ ညွှန်း မှ ရောက်လိုက်သည့် ညွှန်း)။ ဥပဒေကဲ့သို့ ရွှေ့လိုက်သည့် အကွာအဝေးသည် အလျားလိုက်၊ ဒေါင်လိုက်၊ သို့မဟုတ် ထောင့်လိုက် ဖြစ်ပါသည်။ သင် သင့် ပစ္စည်းများ ကျော်လိုက်နိုင်ပါသည်၊ သို့သော် ပြိုင်ဘက်၏ ပစ္စည်းများ ကျော်လိုက်နိုင်ခြင်း မရှိပါ။ ပြိုင်ဘက်၏ ပစ္စည်း ပေါ်သို့ ဆင်းလိုက်သည့် အခါ သင် အနိုင်ရပါသည်။ သင့် ပစ္စည်း အားလုံး 8-နေရာ ဆက်သွယ်ထားသည့် အခါ သင် အနိုင်ရပါသည်။"
+  },
+  "board": {
+    "current_board": "ဘုတ်အဖွဲ့: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format သည် e2e4 ဖြစ်ရမည် (coordinates မှ,သို့)",
+    "no_piece": "No {side} piece on {coord}.",
+    "identical": "အရင်းအမြစ်နဲ့ ပန်းတိုင်က အတူတူပါပဲ။",
+    "not_straight_or_diagonal": "ရွေ့လျားမှုဟာ ဖြောင့် (သို့) ထောင့်ဖြတ်ဖြစ်ရပါမယ်။",
+    "wrong_distance": "အတန်းထဲက အပိုင်းတွေအတိုင်း ညီမျှတဲ့ အကွာအဝေးကို ရွေ့ရမယ်။",
+    "enemy_blocks": "ရန်သူရဲ့လက်နက်က လမ်းကိုပိတ်ဆို့နေတယ်။",
+    "destination_own": "ပန်းတိုင်ကို ကိုယ်ပိုင်လက်နက်နဲ့ ပိုင်ဆိုင်တယ်။"
+  },
+  "game_action": {
+    "moved": "ကစားသမား {player_id} ရွှေ့ပြောင်း {from} -> {to}",
+    "captured_suffix": "ကစားသမား {player_id} သည် ရန်သူကို ဖမ်းယူရန် {from} -> {to} ကို ရွှေ့သည်။"
+  },
+  "outcome": {
+    "win": "အပိုင်းအစအားလုံး ချိတ်ဆက်နေတယ်။",
+    "draw_no_capture": "ဖမ်းမမိခင် လှုပ်ရှားမှု ၆၀ ပါ။",
+    "draw_repetition": "နေရာကို သုံးကြိမ် ထပ်ကျော့တယ်။"
+  }
+}

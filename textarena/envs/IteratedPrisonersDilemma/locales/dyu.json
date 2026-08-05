@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "I ye Jokelɛ {player_id} ɔ kɛ Iterated Prisoner's Dilemma ina fɔrɛ {num_rounds}.\n\nKɛnɛɛnya kɛrɛnkɛrɛn:\n- U bɛn fɛrɛ kɛnɛɛnya, i ye {total_conversation_rounds} turns doni kɛnɛ kɔrɔ.\n- Kɛrɛnkɛrɛn, awɛrɛ jokelɛw ye kɛ sɔrɔ kɛ 'cooperate' ni 'defect'.\n\nPayoff Matrix (fixed each round):\n- Awɛrɛ cooperate ➜ ɔgɔrɔ {cooperate_reward}\n- Awɛrɛ defect ➜ ɔgɔrɔ {mutual_defect_reward}\n- ɔgɔrɔ defect, ɔgɔrɔ cooperate ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nO kɛ sɔrɔ:\n- Kɛnɛɛnya fɛrɛ: ka kɛrɛ ɔgɔrɔ kɛ i bɛn kan.\n- Kɛ sɔrɔ fɛrɛ: ka kɛ '[Cooperate]' ni '[Defect]' (case-insensitive). I bɛn kɛ ɔgɔrɔ kɛrɛ kan u kɛ token."
+  },
+  "phases": {
+    "conversation_finished": "Kɛlɛ kɔkan kɔnɔw ye kɔnɔ {round}. I ye '[Cooperate]' walima '[Defect]' ye \\boxed{{}} kɔnɔ.",
+    "starting_round": "--- Kɔnɔ {round} kɔkan ---",
+    "round_summary": "Kalo {round} kɛlɛw:\n{outcome}\nKɔnɔnɛnɛ 0 sigira {r0} (jumla {score_0}), Kɔnɔnɛnɛ 1 sigira {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} ye {win_score} - {lose_score}.",
+    "draw": "Kɔnɔ! Nɛgɛkɛlaw ye {s0}.",
+    "round_both_cooperate": "U fila bɛɛ sɔnna ka baara kɛ ɲɔgɔn fɛ.",
+    "round_both_defect": "U fila bɛɛ bolila.",
+    "round_p0_cooperates_p1_defects": "Kɔnɔnɛnɛ 0 kɛra taga, Kɔnɔnɛnɛ 1 kɛra bɔ.",
+    "round_p0_defects_p1_cooperates": "Kɔnɔnɛnɛ 0 kɛra bɔ, Kɔnɔnɛnɛ 1 kɛra taga."
+  }
+}

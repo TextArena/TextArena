@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Nekk d uɣerbani {player_id}, ar tturarɣ {num_rounds} n tɣulin n Iterated Ultimatum Game.\nḌariɣ ${pool} iɣunab n kraygat tɣult sɣur-k d uɣerbani {other_id}.\n\nAssuɣsi:\n  - Ssuɣs tɣawsa: [Offer: $X] (0 <= X <= pool)\n  - Ma d yiwen iɣunab → Nekk ar tɣamaɣ $(pool - X), uɣerbani nniḍen ar tɣama $X\n  - Ma d yiwen ur iɣunab → Kraygat ar tɣama $0\n  - Amzray: [Offer: $3]  neɣ  'Ḥsabɣ d akken d amḍan. [Offer: $5]'\n\nAssider:\n  - Ṣṣay tɣawsa s [Accept] neɣ [Reject]\n  - Amzray: 'Ḥsabɣ d akken d amḍan. [Accept]'\n            'Ur d yiwen amḍan. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Tafra {round_number} teggḍa! ---\nAnegzem {proposer_id} d amseɣẓaḍ, Anegzem {responder_id} d amsenɣẓaḍ.",
+    "offer": "Tɣult {round_number}: Uɣerbani {proposer_id} iɣunab ${offer} i uɣerbani {responder_id} (ar tɣama ${keep}).",
+    "accepted": "Anegzem {responder_id} yessufɣeḍ! Tafra {round_number} tessɛu: Anegzem {proposer_id} +${proposer_gain}, Anegzem {responder_id} +${responder_gain}. Iɣewwaṛen imaynuten: Anegzem 0: ${total_0}, Anegzem 1: ${total_1}.",
+    "rejected": "Anegzem {responder_id} yekkes lḥeqq! Tafra {round_number} tessɛu: Snen yakk fell-asen $0. Iɣewwaṛen zemren ad ilin: Anegzem 0: ${total_0}, Anegzem 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "ⵉⵇⵇⴰⵏ ⴷ ⴰⴷ ⵉⵙⴽⵔ ⵓⵎⵙⵙⵓⴼⵖ ⵢⴰⵜ ⵜⵏⴰⴼⵓⵜ ⵙ ⵓⵡⵉⴽⵉ ⵏ [Offer: $X].",
+    "bad_integer": "ⵉⵇⵇⴰⵏ ⴷ ⴰⴷ ⵉⴳ ⵡⴰⵜⵉⴳ ⵏ ⵓⵙⵙⵓⵎⵔ ⴰⵎⴹⴰⵏ ⵉⵎⴷⴷⴰⴽⴽⵡⵍ.",
+    "out_of_range": "Lḥeqq ara ad yili gar $0 d ${pool}.",
+    "no_current_offer": "ⵓⵔ ⵉⵍⵍⵉ ⴽⵔⴰ ⵏ ⵓⵙⵙⴼⵔⴽ ⵉⵍⴰⵏ ⵜⴰⵖⴹⴼⵜ.",
+    "accept_or_reject": "Asenmel aɣerman ad yessufɣeḍ [Accept] neɣ [Reject] lḥeqq."
+  },
+  "outcome": {
+    "win": "Uɣerbani {winner} iɣunab s ${winner_total} ḍari vs uɣerbani {loser} s ${loser_total}.",
+    "draw": "ⵙⵙⴽⵛⵎⵏ ⵉⵎⵓⵔⴰⵔⵏ ⴰⴽⴽⵡ ⵥⴹⴰⵕⵏ ⴰⴷ ⵖⵔⵉⵏ ${total} ⴳ ⵓⵎⵎⴰⵣ."
+  }
+}

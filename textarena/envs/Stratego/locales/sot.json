@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "U Motshameki {player_id} Stratego.\nSepheo sa hao ke ho tshwara Folaga ya hao kapa ho hlakisa mabotho a hao a maholo.\nMabotho a hao a entsweletse ho uena tafoleng, e kenyeletsa Folaga ya hao, Dibomo, le mabotho a mang a mafahla a fapaneng.\n\n### Litlhahiso tsa Tshameko\n1. **Melao ya Tshameko:**\n   - Ha u tshameka, u ka entswela pisi e le ngoe ka ngoe ho ea ka morao ho eona (holimo, tlas'e, lehlakoreng la hlooho kapa la mokwatla) e entsweletseng ka mabotho a hao.\n   - Mohlala: Pisi e ka entswela ho tloha A1 ho ea B1 kapa A1 ho ea A2 ha B1 le A2 e se entsweletseng ka mabotho a hao.\n   - Ha u entsweletse pisi e le Bomu kapa Folaga, e ke ke entswela.\n2. **Lintwa:**\n   - Ha u entswela pisi ho ea ka morao ho e entsweletseng ka pisi ya hao, e tla etsa ntwa:\n     - Pisi e moholo e entsweletse mme e hlakise pisi ya hao.\n     - Ha mafahla a lekana, mabotho a mabedi a tla hlakiswa tafoleng.\n     - **Mabaka a Kgethegileng:**\n       - Dibomo di hlakisa mabotho a mang a tshamekang ntle le Balemi, ba ka thibela Dibomo.\n       - Molaodi a ka hlakisa Mohlabani ha a tshameka pele, empa a lahleha ho mabotho a mang.\n3. **Sepheo sa Tshameko:**\n   - Tseba mabotho a hao ka ho entswela ha aona le lintwa.\n   - Tshireletsa Folaga ya hao ha u leka ho tshwara Folaga ya hao.\n   - Sebelisa Balekodi ka tshameko ho fumana tsebiso ka mabotho a hao le ho tshameka mabotho a maholo.\n\n### Ho etsa Tshameko:\n1. Tlhahisa mafahla a pisi e entsweletseng le e entsweletseng teng.\n2. Sebelisa mofuta: [A0 B0], e kapa A0 e le sebaka sa tloha, le B0 e le sebaka sa ea.\n   - Mohlala: Ho entswela pisi ho tloha rara 0, lehlakore 0 ho ea rara 1, lehlakore 0, kenya [A0 B0].\n3. Netefatsa sebaka sa ea ke sebaka se nepahetseng ka melao ya tloha ya ka holimo.\n\n### Litlhahiso tsa Bohlokwa:\n- Tafola e tla bontsha mabotho a hao le mabotho a teng, e.g. MN, MS.\n- Tafola e tla bontsha mabotho a hao a teng a nang le mafahla a sa tsebeng, e.g. ?.\n- Mabaka a ~ ke mabomvana mme a ke ke entswela teng.\n- E le kgakololo, qala tshameko ya hao ka ho entswela mabotho a hao a maholo ho fumana tsebiso ka mabotho a hao. Motshameki 0 le motshameki 1 ba na le mabotho a maholo a rara D le G, ka tatellano."
+  },
+  "board": {
+    "current_board": "Boro ya tsohle ya kajeno:\n\n{board}\nDikaro tse faneng: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Sebopeho sa ketso se fosahetseng. Sebapali {player_id} ha sea kenya motsamao ka sebopeho [A0 B0] .",
+    "invalid_coordinates": "Sebopeho sa ketso se fosahetseng. Sebapali {player_id} ha sea kenya likhokahano tse nepahetseng.",
+    "not_own_piece": "Mofuta oa ketso o sa sebetseng. Sebapali {player_id} se tlameha ho tsamaisa e 'ngoe ea likotoana tsa sona.",
+    "scout_through_pieces": "Mofuta oa ketso o sa sebetseng. Sebapali {player_id} se ke ke sa tsamaisa scout ka likotoana tse ling.",
+    "scout_diagonal": "Mofuta oa ketso o sa sebetseng. Sebapali {player_id} se ke ke sa tsamaisa scout ka diagonal.",
+    "non_scout_multi_square": "Sebopeho sa ketso se fosahetseng. Likarolo, ntle le li-scouts, li ka tsamaea sekwere se le seng feela ka nako e 'ngoe.",
+    "move_into_lake": "Mofuta oa ketso o sa sebetseng. Sebapali {player_id} se ke ke sa kena ka letšeng.",
+    "move_onto_own_piece": "Mofuta oa ketso o sa sebetseng. Sebapali {player_id} se ke ke sa fetela ho sekhechana sa sona.",
+    "move_bomb_or_flag": "Mofuta oa ketso o sa sebetseng. Sebapali {player_id} se ke ke sa tsamaisa bomo kapa folakha."
+  },
+  "game_action": {
+    "you_moved": "O ile wa tsamaya ka tšona ya hao ya {source} go ya {dest}.",
+    "opponent_moved": "Sebapali {player_id} se ile sa tlosa sekotoana ho tloha {source} ho ea ho {dest}.",
+    "you_equal_ranks": "O ile wa tsamaya ka tšona ya hao ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka marumo a le a tshwanetse, tšona zonke zi ile tswa.",
+    "opponent_equal_ranks": "Mothami {player_id} o ile a tsamaya ka tšona ya tsebo ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka marumo a le a tshwanetse, tšona zonke zi ile tswa.",
+    "you_miner_defused": "U entsweletse pisi ya hao ho tloha {source} ho ea {dest}. Pisi e neng e tloha e ne e le {attacking_rank} mme pisi e neng e le teng e ne e le {target_rank}. Kaha balemi ba ka thibela dibomo, u entsweletse ntwa.",
+    "opponent_miner_defused": "Motshameki {player_id} o entsweletse pisi ho tloha {source} ho ea {dest}. Pisi e neng e tloha e ne e le {attacking_rank} mme pisi e neng e le teng e ne e le {target_rank}. Kaha balemi ba ka thibela dibomo, u lahlehile ntwa.",
+    "you_bomb_lost": "O ile wa tsamaya ka tšona ya hao ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka modiri ha a tsamaee le mine, o ile wa tsena.",
+    "opponent_bomb_won": "Mothami {player_id} o ile a tsamaya ka tšona ya tsebo ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka modiri ha a tsamaee le mine, o ile wa tsena.",
+    "you_spy_won": "U phetse pisi ya hao ho tloha {source} ho ea {dest}. Pisi e neng e tloha e ne e le {attacking_rank} mme pisi e neng e le teng e ne e le {target_rank}. Kaha mothekerare e ne e le mokgokgoko mme e teng e ne e le mareshele, u hlotse ntwa.",
+    "opponent_spy_lost": "Tshameki {player_id} o phetse pisi ho tloha {source} ho ea {dest}. Pisi e neng e tloha e ne e le {attacking_rank} mme pisi e neng e le teng e ne e le {target_rank}. Kaha mothekerare e ne e le mokgokgoko mme e teng e ne e le mareshele, u hlotswe ntwa.",
+    "you_higher_won": "U phetse pisi ya hao ho tloha {source} ho ea {dest}. Pisi e neng e tloha e ne e le {attacking_rank} mme pisi e neng e le teng e ne e le {target_rank}. Kaha mothekerare e moholo haholo ho feta e teng, u hlotse ntwa.",
+    "opponent_higher_lost": "Tshameki {player_id} o phetse pisi ho tloha {source} ho ea {dest}. Pisi e neng e tloha e ne e le {attacking_rank} mme pisi e neng e le teng e ne e le {target_rank}. Kaha mothekerare e moholo haholo ho feta e teng, u hlotswe ntwa.",
+    "you_lower_lost": "U phetse pisi ya hao ho tloha {source} ho ea {dest}. Pisi e neng e tloha e ne e le {attacking_rank} mme pisi e neng e le teng e ne e le {target_rank}. Kaha mothekerare e nyane haholo ho feta e teng, u hlotswe ntwa.",
+    "opponent_lower_won": "Mothami {player_id} o ile a tsamaya ka tšona ya tsebo ya {source} go ya {dest}. Tšona ya tsamai e ne e le {attacking_rank} mme tšona ya tšebelopedi e ne e le {target_rank}. Jaaka modiri ke marumo a tlase, o ile wa tsena."
+  },
+  "outcome": {
+    "flag_captured": "Sebapali {player_id} se hapile folakha ea mohanyetsi!",
+    "no_movable_pieces": "Mothami {winner_id} o tsena! Mothami {loser_id} ha a na tšona e tsamaeng."
+  }
+}

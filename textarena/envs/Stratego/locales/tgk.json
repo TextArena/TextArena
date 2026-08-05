@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n"
+  },
+  "board": {
+    "current_board": "Борди кунуни:\n\n{board}\nХаркатҳои дастрас: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Формати амали нодуруст. Бозингар {player_id} ҳаракатеро дар формат ворид накардааст [A0 B0] .",
+    "invalid_coordinates": "Формати амали нодуруст. Бозингар {player_id} координатаҳои дуруст ворид накардааст.",
+    "not_own_piece": "Формати амали номувофиқ. Бозингар {player_id} бояд яке аз донаҳои худро ҳаракат диҳад.",
+    "scout_through_pieces": "Формати амали номувофиқ. Бозингар {player_id} наметавонад скаутро тавассути ашёҳои дигар гузарад.",
+    "scout_diagonal": "Формати амали нодуруст. Бозингар {player_id} наметавонад скаутро ба таври диагоналӣ ҳаракат диҳад.",
+    "non_scout_multi_square": "Формати амали номувофиқ. Қисмҳо, ба ғайр аз скаутҳо, метавонанд танҳо як майдонро дар як вақт ҳаракат кунанд.",
+    "move_into_lake": "Формати амали нодуруст. Бозингар {player_id} наметавонад ба кӯл ҳаракат кунад.",
+    "move_onto_own_piece": "Формати амали номувофиқ. Бозингар {player_id} наметавонад ба фигури худ ҳаракат кунад.",
+    "move_bomb_or_flag": "Формати амали номувофиқ. Бозингар {player_id} наметавонад бомба ё парчамро ҳаракат диҳад."
+  },
+  "game_action": {
+    "you_moved": "Шумо қисми худро аз {source} ба {dest} кӯчонидед.",
+    "opponent_moved": "Бозигар {player_id} як қисмро аз {source} ба {dest} кӯчонид.",
+    "you_equal_ranks": "Шумо қисми худро аз {source} ба {dest} кӯчонидед. Қисми ҳамлакунанда {attacking_rank} буд ва қисми манзил {target_rank} буд. Чун дараҷаҳо яксонанд, ҳар ду қисм ҳалок шуданд.",
+    "opponent_equal_ranks": "Бозигар {player_id} як қисмро аз {source} ба {dest} кӯчонид. Қисми ҳамлакунанда {attacking_rank} буд ва қисми манзил {target_rank} буд. Чун дараҷаҳо яксонанд, ҳар ду қисм ҳалок шуданд.",
+    "you_miner_defused": "Шумо қисми худро аз {source} ба {dest} кӯчонидед. Қисми ҳамлакунанда {attacking_rank} буд ва қисми манзил {target_rank} буд. Чун минерҳо метавонанд бомбҳоро нейтрал гардонанд, шумо ҷангро бод бахт.",
+    "opponent_miner_defused": "Бозигар {player_id} як қисмро аз {source} ба {dest} кӯчонид. Қисми ҳамлакунанда {attacking_rank} буд ва қисми манзил {target_rank} буд. Чун минерҳо метавонанд бомбҳоро нейтрал гардонанд, шумо ҷангро бод.",
+    "you_bomb_lost": "Шумо қисми худро аз {source} ба {dest} кӯчонидед. Қисми ҳамлакунанда {attacking_rank} буд ва қисми манзил {target_rank} буд. Чун ҳамлакунанда ғайри минер аст, шумо ҷангро бод.",
+    "opponent_bomb_won": "Бозигар {player_id} як қисмро аз {source} ба {dest} кӯчонид. Қисми ҳамлакунанда {attacking_rank} буд ва қисми манзил {target_rank} буд. Чун ҳамлакунанда ғайри минер аст, шумо ҷангро бод бахт.",
+    "you_spy_won": "Шумо қисми худро аз {source} ба {dest} кӯчонидед. Қисми ҳамлакунанда {attacking_rank} буд ва қисми манзил {target_rank} буд. Чун ҳамлакунанда ҷасус аст ва манзил маршал аст, шумо ҷангро бод бахт.",
+    "opponent_spy_lost": "Бозигар {player_id} як қисмро аз {source} ба {dest} кӯчонид. Қисми ҳамлакунанда {attacking_rank} буд ва қисми манзил {target_rank} буд. Чун ҳамлакунанда ҷасус аст ва манзил маршал аст, шумо ҷангро бод.",
+    "you_higher_won": "You have moved your piece from {source} to {dest}. The attacking piece was {attacking_rank} and the destination piece was {target_rank}. As the attacker is a higher rank than the destination, you won the battle.",
+    "opponent_higher_lost": "Бозигар {player_id} як қисмро аз {source} ба {dest} кӯчонид. Қисми ҳамлакунанда {attacking_rank} буд ва қисми манзил {target_rank} буд. Чун ҳамлакунанда дараҷаи баландтар аз манзил аст, шумо ҷангро бод.",
+    "you_lower_lost": "Шумо қисми худро аз {source} ба {dest} кӯчонидед. Қисми ҳамлакунанда {attacking_rank} буд ва қисми манзил {target_rank} буд. Чун ҳамлакунанда дараҷаи пасттар аз манзил аст, шумо ҷангро бод.",
+    "opponent_lower_won": "Бозигари {player_id} як қисмат аз {source} ба {dest} ҳаракат кардааст. Қисмати ҳамла {attacking_rank} буд ва қисмати мақсад {target_rank} буд. Ҳамлачи ранги пасттар аз қисмати мақсад аст, шумо ҷангро бурд кардед."
+  },
+  "outcome": {
+    "flag_captured": "Бозингари {player_id} парчами рақибро забт кардааст!",
+    "no_movable_pieces": "Бозигар {winner_id} пирӯз шуд! Бозигар {loser_id} ҳеч қисми ҳаракатпазире намондааст."
+  }
+}

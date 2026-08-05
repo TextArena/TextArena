@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "La ludo komenciĝas. Trumpkoloro: {trump_suit} (trumpkarto: {trump_str}).",
+    "no_trump_card": "neniujn."
+  },
+  "player_prompt": {
+    "intro": "Vi estas Ludanto {player_id} en Germana Visko.\n{phase_info}\nVi tenas {hand_size} kartojn.\nLudu karton per '[play N]', kie N estas ĝia pozicio en via mano (ekzemple '[play 3]').",
+    "phase_learning": "Lernado: la gajninto de ĉiu truko prenas la vizaĝan karton kaj la malgajnanto tiras la sekvan karton el la fako. Trukoj venkitaj en ĉi tiu fazo ne kalkuliĝas por venko.",
+    "phase_playing": "Ĉiu truko de nun estas grava por la venko."
+  },
+  "next_card": {
+    "playing_phase": "Neniu karto estas ofertata - la ludfazo komenciĝis.",
+    "deck_empty": "La ferdeko estas malplena - neniu karto ofertas.",
+    "available": "Karto ofertata: {card}",
+    "available_trump": "Karto ofertita: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Nevalida movo formato. Uzu \"[play N]\" por ludi la N-an karton en via mano.",
+    "bad_position": "Tiu kartoposicio ne ekzistas. Vi tenas {hand_size}kartojn.",
+    "must_follow_suit": "Vi devas sekvi la ekzemplon kaj ludi {lead_suit}-karton.",
+    "invalid_play": "Tiu karto ne povas esti ludata."
+  },
+  "game_action": {
+    "played": "Ludanto {player_id} ludis {card}."
+  },
+  "trick": {
+    "won": "Ludanto {winner_id} gajnas la trukon kun {card}.",
+    "won_learning": "Ludanto {winner_id} gajnas la trikon per {card} kaj prenas la videblan karton."
+  },
+  "phase": {
+    "learning_complete": "La fako estas elĉerpita. La lernfazo finiĝis - ĉiu cetera truko gravas por la venko."
+  },
+  "draw": {
+    "winner_received": "Vi gajnis la trukon kaj ricevis {card}.",
+    "loser_received": "Vi perdis la trukon kaj tiris {card} el la ferdeko.",
+    "winner_preview": "La sekva karto ofertata estas {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Trikaj gajnoj ĝis nun - Ludanto 0: {tricks0}, Ludanto 1: {tricks1}",
+    "scores_playing": "Poentaj trikoj - Ludanto 0: {tricks0}, Ludanto 1: {tricks1}",
+    "phase": "Fazo: {phase}",
+    "phase_learning": "Fazo: {phase} ({remaining_cards} kartoj restantaj en la talono)"
+  },
+  "hand": {
+    "no_cards": "Sen kartoj.",
+    "no_cards_in_hand": "Sen kartoj en la mano.",
+    "header": "Via mano.",
+    "trump_indicator": "(TRUMP) Mi ne scias.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Neniu karto ludita ĉi-truko.",
+    "header": "Nuntempa truko:",
+    "trump_indicator": "(TRUMP) Mi ne scias.",
+    "card_line": "{observation}\n  Ludanto {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "La ludo ne komenciĝis.",
+    "header": "=== GERMANA VISTO-LUDO ===",
+    "phase": "{observation}\nFazo: {phase}",
+    "trump_suit": "{observation}\nTrumpkoloro: {trump_suit}",
+    "trump_card": "{observation}\nTrumpkarto: {card}",
+    "cards_left": "{observation}\nKartoj restantaj en la talono: {count}",
+    "next_card": "{observation}\nSekva karto por la gajninto: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Nuntempa truko:",
+    "trump_indicator": "(TRUMP) Mi ne scias.",
+    "trick_line": "{observation}\n  Ludanto {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nLudanto {player_id}: {scoring} poentaj trikoj ({tricks} suma), {hand_size} kartoj enmane"
+  },
+  "outcome": {
+    "summary": "Lerna fazo - Ludanto 0: {l0}, Ludanto 1: {l1}. Ludfazo - Ludanto 0: {p0}, Ludanto 1: {p1}. Ludanto {winner_id} venkas kun {winner_tricks} poentodonaj trukoj!"
+  }
+}

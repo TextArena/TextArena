@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "ਤੁਸੀਂ ਖਿਡਾਰੀ {player_id} ਹੋ LinesOfAction ਦੀ ਖੇਡ ਵਿੱਚ।\nਤੁਹਾਡੇ ਟੁਕੜੇ '{side}' ਹਨ, ਵਿਰੋਧੀ ਦੇ ਟੁਕੜੇ '{other}' ਹਨ।\nਮੂਵ ਫਾਰਮੈਟ: `[b1b3]` (ਕੋਆਰਡੀਨੇਟ ਤੋਂ ਕੋਆਰਡੀਨੇਟ ਤੱਕ)। ਇੱਕ ਕਾਨੂੰਨੀ ਮੂਵ ਉਸ ਲਾਈਨ ਵਿੱਚ ਟੁਕੜਿਆਂ ਦੀ ਗਿਣਤੀ ਦੇ ਬਰਾਬਰ ਵਰਗਾਂ ਦੀ ਗਿਣਤੀ ਨਾਲ ਲੰਬਕਾਰੀ, ਉੱਲੰਬ ਜਾਂ ਤਿਰਛੇ ਤੌਰ 'ਤੇ ਯਾਤਰਾ ਕਰਦਾ ਹੈ। ਤੁਸੀਂ ਆਪਣੇ ਟੁਕੜਿਆਂ ਉੱਤੇ ਛਾਲ ਮਾਰ ਸਕਦੇ ਹੋ, ਪਰ ਵਿਰੋਧੀ ਦੇ ਟੁਕੜਿਆਂ ਉੱਤੇ ਨਹੀਂ; ਵਿਰੋਧੀ ਉੱਤੇ ਉਤਰਨਾ ਇਸ ਨੂੰ ਫੜ ਲੈਂਦਾ ਹੈ। ਜਦੋਂ ਤੁਹਾਡੇ ਸਾਰੇ ਟੁਕੜੇ 8-ਗੁਆਂਢੀ ਕੁਨੈਕਟ ਹੋ ਜਾਣ ਤਾਂ ਜਿੱਤੋ।"
+  },
+  "board": {
+    "current_board": "ਬੋਰਡ: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ਫਾਰਮੈਟ e2e4 (ਸੰਕੇਤ ਤੋਂ,ਸੰਕੇਤ ਤੱਕ) ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।",
+    "no_piece": "{side} ਉੱਤੇ ਕੋਈ {coord} ਟੁਕੜਾ ਨਹੀਂ।",
+    "identical": "ਮੂਲ ਅਤੇ ਮੰਜ਼ਿਲ ਇੱਕੋ ਜਿਹੇ ਹਨ।",
+    "not_straight_or_diagonal": "ਚਾਲ ਸਿੱਧੀ ਜਾਂ ਤਿਰਛੀ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ।",
+    "wrong_distance": "ਲਾਈਨ ਵਿੱਚ ਟੁਕੜਿਆਂ ਦੇ ਬਰਾਬਰ ਦੂਰੀ ਤੇ ਚਲਣਾ ਚਾਹੀਦਾ ਹੈ।",
+    "enemy_blocks": "ਦੁਸ਼ਮਣ ਦਾ ਟੁਕੜਾ ਰਸਤਾ ਰੋਕਦਾ ਹੈ।",
+    "destination_own": "ਮੰਜ਼ਿਲ ਆਪਣੇ ਹੀ ਟੁਕੜੇ ਦੁਆਰਾ ਕਬਜ਼ਾ ਕੀਤਾ ਗਿਆ."
+  },
+  "game_action": {
+    "moved": "ਖਿਡਾਰੀ {player_id} ਚਲੇ ਗਏ {from} -> {to}",
+    "captured_suffix": "ਖਿਡਾਰੀ {player_id} ਨੇ {from} -> {to} ਨੂੰ ਇੱਕ ਦੁਸ਼ਮਣ ਨੂੰ ਫੜਨ ਲਈ ਭੇਜਿਆ।"
+  },
+  "outcome": {
+    "win": "ਸਾਰੇ ਟੁਕੜੇ ਜੁੜੇ ਹੋਏ ਹਨ।",
+    "draw_no_capture": "ਬਿਨਾਂ ਕੈਪਚਰ ਦੇ 60 ਚਾਲਾਂ।",
+    "draw_repetition": "ਸਥਿਤੀ ਨੂੰ ਤਿੰਨ ਵਾਰ ਦੁਹਰਾਇਆ ਗਿਆ।"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jokalari {player_id} zara Quantum Tic Tac Toe-n.\nZure ikurra '{symbol}' da, eta zure mugimendu zenbakiak beti {parity} dira (adibidez, X1, X3 edo O2, O4).\n\nHelburua: Hiru marka klasiko lerrokatu (superposizioetatik solidifikatuak) eta irabazi.\n\nNola jokatu:\n- Txanda bakoitzean, bi lauki huts desberdinetan marka izugarri bat jarri '[a,b]' formatuan.\n- Marka hauek korapilatuak daude, eta 'X1 / X1' edo 'O4 / O4' bezala etiketatuak.\n- Ezin duzu marka izugarriak lauki batean jarri, jada kolapsatu (solidifikatu) bada.\n\nKolapsorako araua:\n- Zure mugimenduak ziklo bat sortzen badu korapilatze-grafikoan, automatikoki kolapsatzen da.\n- Zikloko marka izugarri bakoitza bi posizioetako batean marka klasiko bihurtzen da.\n- Marka izugarri menpekotasunak ere kolapsatzen dira.\n\nGaraipena:\n- Jokoa amaitzen da jokalari batek hiru marka klasiko lerrokatzen dituenean.\n- Bi jokalariek lerro bat lortzen badute kolapso berean, mugimendu zenbaki maximo txikiagatik irabazten duena.\n\nAdibidezko mugimendua: '[0,4]' marka izugarri bat jarri lauki 0 eta 4-an."
+  },
+  "board": {
+    "current_board": "Tic Tac Toe Kuantikoaren Taula: {board} Zure mugimendua \"[a,b]\" gisa aurkeztu, bi lekutan marka kuantikoa jartzeko."
+  },
+  "invalid_move": {
+    "wrong_format": "Formatu ezegokia. Erabili \"[a,b]\".",
+    "invalid_cells": "Zelula-indize ezegonkorrak edo bikoiztuak.",
+    "already_solidified": "Gelaxka bat jada solidifikatuta dago."
+  },
+  "game_action": {
+    "placed": "{player_id} jokalariak bere ikurra {pos_a} eta {pos_b} gelaxken artean superposatu zuen."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposizio menpekotasuna konpondu da. Laukia ({r}, {c}) orain {symbol} da.",
+    "last_cell_resolved": "Azken laukiaren superposizioa konpondu da. Laukia ({r}, {c}) orain {symbol} da.",
+    "superposition_resolved": "Superposizioa konpondu da. Laukia ({r}, {c}) orain {symbol} da."
+  },
+  "outcome": {
+    "win": "Jokalari {player_id}-k irabazi du marka solidifikatuekin!",
+    "draw": "Partida berdinduta dago!"
+  }
+}

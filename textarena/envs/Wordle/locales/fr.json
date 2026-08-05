@@ -1,0 +1,28 @@
+{
+  "_comment": "Locale française pour Wordle. Les clés (à gauche) sont fixes ; ne traduisez que les valeurs (à droite). Conservez chaque {placeholder} tel quel, et gardez les lettres de retour G/Y/X inchangées (ce sont les marqueurs par lettre du jeu).",
+  "_slots": {
+    "{word_length}": "Longueur du mot secret (entier)",
+    "{num_guesses}": "Nombre de tentatives autorisées (entier)",
+    "{word}": "Un mot proposé",
+    "{view}": "Lettres neutres affichées + retour G/Y/X (ne pas traduire)",
+    "{guesses_left}": "Tentatives restantes (entier)",
+    "{pct}": "Pourcentage de lettres correctement placées (entier)",
+    "{secret}": "Le mot secret"
+  },
+  "prompt": {
+    "intro": "Vous jouez à Wordle.\nUn mot secret de {word_length} lettres a été choisi. Vous avez {num_guesses} tentatives pour le deviner.\nPour chaque essai, placez votre mot entre crochets (par exemple, '[apple]').\nUn retour d'information sera donné pour chaque lettre comme suit :\n  - G (vert) : lettre correcte dans la bonne position\n  - Y (jaune) : la lettre existe dans le mot mais dans la mauvaise position\n  - X (incorrect) : la lettre n'est pas dans le mot\nEntrez votre essai pour commencer.\n"
+  },
+  "invalid": {
+    "wrong_format": "Vous avez essayé de soumettre un mot dans le mauvais format. Veillez à bien utiliser des crochets.",
+    "wrong_length": "Votre mot doit comporter exactement {word_length} lettres.",
+    "already_guessed": "Vous avez déjà proposé '{word}' auparavant. Veuillez essayer un autre mot.",
+    "not_a_word": "'{word}' n'est pas un mot valide."
+  },
+  "feedback": {
+    "submitted": "Vous avez soumis [{word}].\nRetour :\n{view}\nIl vous reste {guesses_left} tentatives."
+  },
+  "outcome": {
+    "win": "Félicitations ! Vous avez deviné le mot correctement !",
+    "turn_limit": "La limite de tours a été atteinte. Vous n'avez pas deviné le mot, mais votre meilleure proposition correspondait à {pct}% des lettres aux bonnes positions.\nLe mot secret était : **{secret}**."
+  }
+}

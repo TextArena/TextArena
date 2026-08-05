@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "भवान् खिलाडी {player_id} भारतीय पोकरक्रीडायाम् अस्ति।\n- ५२ पत्रकक्रीडापत्रकम्; भवान् केवलम् प्रतिद्वन्द्विनः पत्रकम् पश्यति।\n- प्रत्येकं चक्रं {ante} चिप्(स्), {max_rounds} चक्र(स्) समग्रम्।\n- वैधानिक क्रियाः '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X एकः सकारात्मकः पूर्णाङ्कः भवति <= भवतः चिप् संख्या।)\n- उच्चतमः गुप्तः पत्रकः पात्रं विजयति।\n"
+  },
+  "round": {
+    "announce": "### चक्रं {current_round}/{max_rounds}\nभवतः प्रतिद्वन्द्विनः पत्रकम् अस्ति: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "एकमेव क्रियाम् उद्धर, उदाहरणार्थं '[check]', '[bet 2]', '[call]', '[raise 3]', वा '[fold]'।",
+    "cannot_check": "न शक्नोति [check] - भवद्भिः शर्तेः सम्मुखं स्थितम् अस्ति।",
+    "amount_min": "निक्षेप/उद्धरणं मात्रा ≥ १ भवितुम् अर्हति ।",
+    "cannot_bet": "न शक्यते [bet] कर्तुम् - [call] / [raise] / [fold] कर्तुमर्हति।",
+    "nothing_to_call": "न किञ्चिदपि कथयितुम्; भवन् [check] एव कर्तुं शक्नुवन्ति।",
+    "no_bet_to_raise": "[bet X] प्रयोक्तव्यः, यतः वर्धनीयः पणः नास्ति।",
+    "insufficient": "अपर्याप्तं चिप् तत्क्रियायाम्।"
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (व्यय {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "भवद्भिः सम्भाव्य क्रियाः {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  पात्रं {pot} → खिलाडी {winner}। (बैंकरोल P0:{p0}, P1:{p1})",
+    "folded": "क्रीडकः {player_id} निपातितः।",
+    "showdown_win": "प्रदर्शनम्: {card_win} {card_lose} विजयति।",
+    "showdown_tie": "प्रदर्शनम् समानं: उभयत्र {card}। पात्रं विभक्तं – प्रत्येकः {split} प्राप्नोति।"
+  },
+  "outcome": {
+    "p0_wins": "खिलाडी ० विजयति ({bank0} > {bank1})",
+    "p1_wins": "खिलाडी १ विजयति ({bank1} > {bank0})",
+    "draw": "सर्वेषां राण्डानां पश्चाद् समानं चिप् भवति ।"
+  }
+}

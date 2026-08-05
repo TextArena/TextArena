@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "ཁྱེད་ཀྱིས་ LinesOfAction གི་རྩེདམོར་མི་སྣ་ {player_id} ཡིན།\nཁྱེད་ཀྱི་སྒྱུ་ཆ་ '{side}' ཡིན་པ་དང་། ཕྱོགས་གཞན་གྱི་སྒྱུ་ཆ་ '{other}' ཡིན།\nསྤོར་བཀོད་དབྱིབས་: `[b1b3]` (གནས་ཚུལ་ནས་གནས་ཚུལ་བར་) ཁྲིམས་མཐུན་པའི་སྤོར་བ་ནི་ཐད་ཀར་དང་ཐད་རིགས་སམ་མདུན་རིགས་ཀྱི་ཐད་ཀར་སྤོར་བ་ཡིན་པ་དང་། ཐད་ཀར་དེ་ནང་གི་སྒྱུ་ཆའི་གྲངས་ཀ (ཁ་དོག་གང་ཡང་རུང་) དེ་ཙམ་གྱི་སྒོ་སྤོར་བ་ཡིན། ཁྱེད་ཀྱི་སྒྱུ་ཆ་རང་གི་སྒྱུ་ཆ་ཐོག་ནས་སྤོར་ཆོག ཕྱོགས་གཞན་གྱི་སྒྱུ་ཆ་ཐོག་ནས་སྤོར་མི་ཆོག ཕྱོགས་གཞན་གྱི་སྒྱུ་ཆ་ཐོག་ཏུ་འབྱར་ན་དེ་ཁྱེར་བ་ཡིན། ཁྱེད་ཀྱི་སྒྱུ་ཆ་ཐམས་ཅད་མདུན་རིགས་ཀྱི་སྒྱུ་ཆ་དང་འབྲེལ་ན་རྒྱལ་ཁ་ཐོབ་པ་ཡིན།"
+  },
+  "board": {
+    "current_board": "གྲོས་ཚོགས་: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ཨག་བསྒྱུར་གྱི་རྣམ་པ་ e2e4 (འགོ་འབྱུང་ས་དང་འབྱོར་སའི་ས་རྟགས་) ཡིན་དགོས།",
+    "no_piece": "{side} གི་མིང་མེད་པ་{coord} ལ་མེད།",
+    "identical": "འབྱུང་ཁུངས་དང་ མཇུག་བསྡུ་ས་ཆ་འདི་ གཅིག་མཚུངས་ཨིན།",
+    "not_straight_or_diagonal": "འགྲུལ་བསྐྱོད་དེ་ ཐད་ཀར་ ཡང་ན་ ཟུར་ཐིག་སྦེ་འབད་དགོཔ་ཨིན།",
+    "wrong_distance": "ཕྲང་སྒྲིག་ནང་ཡོད་མི་རྡུལ་ཚུ་དང་ དབྱེ་བ་འདྲ་མཉམ་སྦེ་ སྤོ་དགོཔ་ཨིན།",
+    "enemy_blocks": "དགྲ་གི་མཚོན་ཆ་གིས་ ལམ་བཀག་ནུག",
+    "destination_own": "ཕྱོགས་ཁ་འདི་ རང་གིས་རང་ལུ་དབང་ཡོདཔ་ཨིན།"
+  },
+  "game_action": {
+    "moved": "Player {player_id} ཕྱིན་{from} -> {to} འགྲོ་ཡོད།",
+    "captured_suffix": "མི་གཉིས་ཀྱི་ཨང་རྟགས་ {player_id} སྤོ་བ་ {from} -> {to} ཕྱོགས་གཞན་གྱི་སྒྲོམ་ཚིག་གི་ཐིག་རིས་དེ་བཟུང་བ་ཡིན།"
+  },
+  "outcome": {
+    "win": "སྦྲགས་ཐིག་ག་ར་ མཐུད་ལྡོག་འབད་ཡོདཔ་ཨིན།",
+    "draw_no_capture": "བཙོན་བཟུང་འབད་མ་ཚུགས་པར་ འགྲོ་འགྲུལ་ཐེངས་༦༠ ལང་ནུག",
+    "draw_repetition": "གནས་སྟངས་འདི་ ཚར་གསུམ་ལོག་བསྐྱལ་ནུག"
+  }
+}

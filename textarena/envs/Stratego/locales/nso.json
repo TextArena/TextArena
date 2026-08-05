@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "O kile wa Player {player_id} mo Stratego.\nSepheo sa gago ke go tšea Flag ya mmotsomišani wa gago goba go fedisa maphelo ohle a bona a ka sepelwa.\nMaphelo a gago a beilwe mo bodibeng, go akaretša Flag ya gago, Bombs, le maphelo a mangwe a maemo a fapanego.\n\n### Ditaelo tša Bapadi\n1. **Melao ya Sepetlele:**\n   - Mo sepetlele sa gago, o ka sepetlela maphelo a gago ka mo fano go lefelo le le kgauswi (godimo, tlase, le letona, goba le letšehla) leo le se nago maphelo a gago.\n   - Sekhelo: Maphelo a ka sepetlela go A1 go B1 goba A1 go A2 ge B1 le A2 di sa le nago maphelo a gago.\n   - Ge o kgethile maphelo a Bomb goba Flag, a ka se sepetlelwe.\n2. **Dinno:**\n   - Ge o sepetlela go lefelo leo le nago maphelo a mmotsomišani wa gago, dinno di tla direga:\n     - Maphelo a maemo a godimo a wina le a fedisa maphelo a mmotsomišani wa gago.\n     - Ge maemo a lekana, maphelo ohle a tla fediswa mo bodibeng.\n     - **Dikgetho Tše Kgethegile:**\n       - Bombs di fedisa maphelo a go tlhasela a fapanego le Miners, leo le difudumetsa Bombs.\n       - Spies di ka wina Marshal ge Spy e tlhasela pele, eupša di lahlewa ke maphelo ohle a mangwe.\n3. **Sepheo sa Maano:**\n   - Tseba maphelo a mmotsomišani wa gago ka sepheo sa bona sa sepelwa le dinno.\n   - Tšhire Flag ya gago ge o leka go tšea Flag ya mmotsomišani wa gago.\n   - Šomiša Scouts ka maano go bona tsebiso ya maphelo a mmotsomišani wa gago le go tlhasela a mahloromelana.\n\n### Kao go Direga Sepetlele:\n1. Tsebiša di-koordinete tša maphelo a o ka sepetlela le lefelo la bona la kgoro.\n2. Šomiša sekhelofomulo: [A0 B0], kwa A0 e le lefelo la kgoro, le B0 e le lefelo la kgoro.\n   - Sekhelo: Go sepetlela maphelo go safu 0, safu 0 go safu 1, safu 0, tlhakola [A0 B0].\n3. Netefatsa lefelo la kgoro ke la molaong go ya ka melao ya sepelwa ka godimo.\n\n### Ditseno Tše Bohlokwa:\n- Bodiba bo tla bontšha maphelo a gago le mafelo a bona, e.g. MN, MS.\n- Bodiba bo tla bontšha le mafelo a tsebjwa ya maphelo a mmotsomišani wa gago a sa bontši maemo a bona, e.g. ?.\n- Grids le ~ ke dinoka le ka se sepetlelwe go tšona.\n- Kao kgodišo, thoma bapadi ba gago ka go sepetlela maphelo a gago a kgoro go bona tsebiso ya maphelo a mmotsomišani wa gago. Player 0 le player 1's frontlines ke safu D le G ka go latelana.\n\nBona ke mola wa bodiba bjalo ka bjalo:\n"
+  },
+  "board": {
+    "current_board": "Boro ya Sekgwa:\n\n{board}\nDikgetho tse DIhlakahlakahlang: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Sebopego sa tiro se sego molaong. Sebapadi {player_id} ga se a tsenya mosepelo ka sebopego sa [A0 B0] .",
+    "invalid_coordinates": "Sebopego sa tiro se sego molaong. Sebapadi {player_id} ga se a tsenya di-coordinate tše nepagetšego.",
+    "not_own_piece": "Sebopego sa tiro yeo e sego ya maleba. Sebapadi {player_id} se swanetše go šuthiša le lengwe la dikarolwana tša sona ka noši.",
+    "scout_through_pieces": "Sebopego sa tiro yeo e sego ya maleba. Sebapadi {player_id} se ka se kgone go šuthiša monyakišiši dikarolong tše dingwe.",
+    "scout_diagonal": "Sebopego sa tiro yeo e sego ya maleba. Sebapadi {player_id} se ka se kgone go šuthiša moseka-dithekniki wa sona o lebile thoko ye nngwe.",
+    "non_scout_multi_square": "Sebopego sa tiro se sego molaong. Dikarolwana, ka ntle le dihlodi di kgona go sepela sekwere setee feela ka nako e tee.",
+    "move_into_lake": "Sebopego sa tiro se sego molaong. Sebapadi {player_id} ga a kgone go ya letsheng.",
+    "move_onto_own_piece": "Sebopego sa tiro yeo e sego ya maleba. Sebapadi {player_id} se ka se kgone go šuthišetša lelokelelo la sona godimo ga karolo ya lona.",
+    "move_bomb_or_flag": "Sebopego sa tiro se sego molaong. Sebapadi {player_id} ga a kgone go šuthiša pomo goba folaga."
+  },
+  "game_action": {
+    "you_moved": "O ile wa tsere sebaka sa gago go tswa {source} go ya {dest}.",
+    "opponent_moved": "Mmoki {player_id} o ile a tsere sebaka go tswa {source} go ya {dest}.",
+    "you_equal_ranks": "O ile wa tsere sebaka sa gago go tswa {source} go ya {dest}. Sebaka sa kgwele ya tsereke e ne e le {attacking_rank} mme sebaka sa kgwele ya tshwanelo e ne e le {target_rank}. Jaaka marumo a le akgare, sebaka sa kgwele pedi sa hlakahlakwa.",
+    "opponent_equal_ranks": "Mmoki {player_id} o ile a tsere sebaka go tswa {source} go ya {dest}. Sebaka sa kgwele ya tsereke e ne e le {attacking_rank} mme sebaka sa kgwele ya tshwanelo e ne e le {target_rank}. Jaaka marumo a le akgare, sebaka sa kgwele pedi sa hlakahlakwa.",
+    "you_miner_defused": "O ile wa tsere sebaka sa gago go tswa {source} go ya {dest}. Sebaka sa kgwele ya tsereke e ne e le {attacking_rank} mme sebaka sa kgwele ya tshwanelo e ne e le {target_rank}. Jaaka baeti ba kgona go tlosa mabomo, o ile wa kgwele.",
+    "opponent_miner_defused": "Mmoki {player_id} o ile a tsere sebaka go tswa {source} go ya {dest}. Sebaka sa kgwele ya tsereke e ne e le {attacking_rank} mme sebaka sa kgwele ya tshwanelo e ne e le {target_rank}. Jaaka baeti ba kgona go tlosa mabomo, o ile wa kgwele.",
+    "you_bomb_lost": "O ile wa tsere sebaka sa gago go tswa {source} go ya {dest}. Sebaka sa kgwele ya tsereke e ne e le {attacking_rank} mme sebaka sa kgwele ya tshwanelo e ne e le {target_rank}. Jaaka kgwele ya tsereke e se ene mmoki, o ile wa kgwele.",
+    "opponent_bomb_won": "Player {player_id} o sepetlele maphelo go {source} go {dest}. Maphelo a go tlhasela a be {attacking_rank} le maphelo a kgoro a be {target_rank}. Ka ge go tlhasela ga se miner, o wina dinno.",
+    "you_spy_won": "O ile wa tsere sebaka sa gago go tswa {source} go ya {dest}. Sebaka sa kgwele ya tsereke e ne e le {attacking_rank} mme sebaka sa kgwele ya tshwanelo e ne e le {target_rank}. Jaaka kgwele ya tsereke e mopolayi mme sebaka sa tshwanelo e le maretsi, o ile wa kgwele.",
+    "opponent_spy_lost": "Mmoki {player_id} o ile a tsere sebaka go tswa {source} go ya {dest}. Sebaka sa kgwele ya tsereke e ne e le {attacking_rank} mme sebaka sa kgwele ya tshwanelo e ne e le {target_rank}. Jaaka kgwele ya tsereke e mopolayi mme sebaka sa tshwanelo e le maretsi, o ile wa kgwele.",
+    "you_higher_won": "O ile wa tsere sebaka sa gago go tswa {source} go ya {dest}. Sebaka sa kgwele ya tsereke e ne e le {attacking_rank} mme sebaka sa kgwele ya tshwanelo e ne e le {target_rank}. Jaaka kgwele ya tsereke e kgare ya tshwanelo, o ile wa kgwele.",
+    "opponent_higher_lost": "Player {player_id} o sepetlele maphelo go {source} go {dest}. Maphelo a go tlhasela a be {attacking_rank} le maphelo a kgoro a be {target_rank}. Ka ge go tlhasela ke maemo a godimo go kgoro, o lahlewa dinno.",
+    "you_lower_lost": "O ile wa tsere sebaka sa gago go tswa {source} go ya {dest}. Sebaka sa kgwele ya tsereke e ne e le {attacking_rank} mme sebaka sa kgwele ya tshwanelo e ne e le {target_rank}. Jaaka kgwele ya tsereke e tlase ya tshwanelo, o ile wa kgwele.",
+    "opponent_lower_won": "Player {player_id} o sepetlele maphelo go {source} go {dest}. Maphelo a go tlhasela a be {attacking_rank} le maphelo a kgoro a be {target_rank}. Ka ge go tlhasela ke maemo a tlase go kgoro, o wina dinno."
+  },
+  "outcome": {
+    "flag_captured": "Sebapadi {player_id} se thopile folaga ya lenaba!",
+    "no_movable_pieces": "Mmoki {winner_id} o ile wa tsereka! Mmoki {loser_id} ga a na dikgetho tse dihlakahlakahlang."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Uyimthandi {player_id} emdlalweni wabantu babili wa Spite and Malice. Inhloso yakho ukuba uwe owokuqala ukususa isitsha sakho sokubhadala.\n\n### Isiqalo Somdlalo:\n- Inhloso ukususa isitsha sakho sokubhadala ngokudlala amakhadi kwenye izitsha zikazwelonke.\n- Ungadlala amakhadi kusuka kwezinye zisikhala ezintathu:\n  1. Isandla sakho (uqala isikhathi sakho sonke nomakhadi ayisihlanu esandleni).\n  2. Ikhadi eliphezulu lesitsha sakho sokubhadala.\n  3. Ikhadi eliphezulu lesitsha sakho sokususa.\n\n### Imithetho Yomdlalo:\n- Ungadlala ikhadi kwenye isitsha kazwelonke ukuba iyingiliziwe **ngelinye igaba** kulikhadi eliphezulu kuleso sitsha (izitsha kazwelonke ziqala nge-Ace zaya kuze kwa-Queen; i-King siyakhuluma - ingadlalwa kwenye noma yikhadi nini kodwa ayishintshi ukuhluka kwegaba. Lokhu kusho ukuthi ukuba i-King isetshenziswe emva kwe-4, i-King iyingiliziwe **nge-5** nelikhadi elilandelayo kumele liwe **nge-6**).\n- Ukuba ungakwazi ukudlala amakhadi ngempela, kumele **ususe ikhadi** kwenye isitsha sakho sokususa ukuqeda isikhathi sakho.\n- Ukuba isitsha kazwelonke sifikile kwa-Queen, siya sokususwa ngokuzenzekela.\n- Ukuhluka kwegaba kuyafana nale: A=1, 2=2, ..., 9=9, J=10, Q=11, K siyakhuluma.\n\n### Ezinyathelo:\n1. **Thatha**: Kuqaleni kwenye isikhathi sakho, thatha amakhadi ayisihlanu ukuze uzuze isandla sakho. Shicilela **[draw]** ukuqala.\n2. **Dlala ikhadi**: Ukuze udle ikhadi, qamba ikhadi nelitsha kazwelonke ngale ndlela: **[play A♠ 0]** (lapho 'A♠' ikhadi '0' isitsha kazwelonke).\n3. **Susa**: Ukuba ungakwazi ukudlala amakhadi ngempela, susa ikhadi esandleni sakho kwenye isitsha sokususa ukuqeda isikhathi sakho. Shicilela **[discard A♠ 1]** (lapho 'A♠' ikhadi '1' isitsha sokususa). Qaphela ukuthi akuvumelekile kususa noma yikhadi kusuka kwenye isitsha sokubhadala. Ungasusa amakhadi kusuka esandleni sakho kuphela.\n\n"
+  },
+  "board": {
+    "current_board": "Ibhodi yamanje: {board} Ukuhamba okukhona: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Izinsika Eziphakathi --- ",
+    "pile": "{observation}Inqwaba {i}: {pile} ",
+    "player_view_header": "{observation} --- Umbono womdlali {player_id} --- ",
+    "payoff": "{observation}Izinqwaba Zokukhokha (Ikhadi Eliphezulu): {top_card}, Ubude Bokuqoqwa Kwezinqwaba Zokukhokha: {payoff_length} ",
+    "hand": "{observation}Isandla: {hand} ",
+    "discard": "{observation}Ukulahla Izinqwaba: {discard} ",
+    "empty": "Ayinalutho"
+  },
+  "game_message": {
+    "no_cards_left": "Awekho amakhadi ongawadonsa. Khumbula ukuthi ungadlala amakhadi avela kulezi zindawo: 1. Isandla sakho. 2. Ikhadi eliphakeme kunawo wonke enqwabeni yakho yokukhokha. 3. Ikhadi eliphakeme kunawo wonke enqwabeni yakho yokulahla."
+  },
+  "invalid_move": {
+    "wrong_format": "Ifomethi yokunyakaza engalungile. Umdlali {player_id} akaphendulanga ngokunyakaza okusemthethweni kubakaki abakwesobunxele.",
+    "invalid_play": "Ukusebenzisa okungalungile. Ummdlali {player_id} uzama ukusebenzisa {card} phezu kwenye isitsha sikhulu {index}.",
+    "discard_from_payoff": "Ukulahla okungavumelekile. Umdlali {player_id} uzame ukulahla ikhadi esithombeni sokukhokha.",
+    "discard_not_in_hand": "Ukulahla okungavumelekile. Umdlali {player_id} uzame ukulahla ikhadi elingekho esandleni.",
+    "wrong_move_type": "Uhlobo lomzila siyo ngendlela. Umthandi {player_id} akakwazanga ukuphendula nomzila othandekayo."
+  },
+  "game_action": {
+    "you_drew": "Wadonsa amakhadi.",
+    "opponent_drew": "Umdlali {player_id} wadonsa amakhadi.",
+    "you_played": "Udlale {card} esiteji esiphakathi {index}.",
+    "opponent_played": "Umdlali {player_id} wadlala {card} esiteji esiphakathi {index}.",
+    "you_discarded": "Ususe {card} kwenye sitsha sokususa {index}, okusho ukuthi uphethile isikhathi sakho. Akukho zinye zezinyathelo zako ezizoqashwa kulesi sikhathi. Umthandi {next_player_id} uyaqhubeka.",
+    "opponent_discarded": "Umdlali {player_id} ulahle {card} ukuze alahle inqwaba {index}, okusho nokuthi baphothule ithuba labo. Akukho okunye okwenziwe ngumdlali {player_id} okubhekwa njengalokhu. Umdlali {next_player_id}, uzohamba ngokulandelayo. Sicela ufake isenzo sakho ngefomethi [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Umdlali {current_player} uqedile inqwaba yabo yokukhokha! Umdlali {current_player} uyawina!",
+    "deadlock_player_0": "Ukuboshwa kufinyelelwe! Umdlali 0 uyawina ngamakhadi asele {player_0_payoff} vs amakhadi {player_1_payoff} omdlali 1.",
+    "deadlock_player_1": "Ukuboshwa kufinyelelwe! Umdlali 1 uyawina ngamakhadi asele {player_1_payoff} vs amakhadi kaMdlali 0 {player_0_payoff} .",
+    "deadlock_tie": "Isikhathi sesikhala sifikile ngezinga! Bobabili abadlali baneamakadi {player_0_payoff} asala. Mdlali {current_player} uphumelele ngokuzenzakalela."
+  }
+}

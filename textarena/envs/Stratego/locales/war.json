@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw hi Player {player_id} ha Stratego.\nAn imo tuyo amo an makuptan an bandera han imo kalaban o magwara han ngatanan nga mga piraso nira nga pwede magliwat.\nAn imo kasundalohan ginbutang na ha board para ha imo, lakip an imo bandera, mga bomba, ngan iba pa nga mga piraso han iba-iba nga ranggo.\n\n### Mga Instruksiyon han Pagmuling\n1. **Mga Patakaran han Pagliwat:**\n   - Ha imo turno, pwede ka magliwat hin usa ka piraso hin usa ka lakang ha usa ka karatig nga kwadrado (paitaas, paibaba, pakaliwa, o pakatuo) nga gin-okupar na han imo mga piraso.\n   - Pananglitan: Usa ka piraso pwede magliwat tikang ha A1 ngadto ha B1 o A1 ngadto ha A2 kun B1 ngan A2 diri gin-okupar han mga piraso han manlalaro.\n   - Kun an napili nga piraso amo an bomba o bandera, diri ini pwede magliwat.\n2. **Mga Gubat:**\n   - Kun magliwat ka ha usa ka kwadrado nga gin-okupar han usa ka piraso han kalaban, magkakagubat:\n     - An piraso han mas hataas nga ranggo amo an mananalo ngan magwawara han piraso han kalaban.\n     - Kun an mga ranggo pareho, an duha ka piraso mawawara ha board.\n     - **Mga Espesyal nga Kaso:**\n       - An mga bomba nagwawara han kadam-an nga mga piraso nga atakante maliban ha mga Minero, nga nagpapawara han mga bomba.\n       - An mga Espiya pwede magdaog han Marshal kun an Espiya amo an unang mag-atake pero matalo ha ngatanan nga iba pa nga mga piraso.\n3. **Mga Tuyo Estratehiko:**\n   - I-identipika an mga piraso han kalaban pinaagi han ira mga pagliwat ngan mga gubat.\n   - Protektahan an imo bandera samtang nagtatangka ka makuptan an bandera han kalaban.\n   - Gamita an mga Scout estratehiko para makakuha hin impormasyon mahitungod han mga piraso han kalaban ngan atakihon an mga maluya.\n\n### Pan-o Maghimo hin Pagliwat:\n1. Ispesipika an mga koordinado han piraso nga imo gustong magliwat ngan an destinasyon nito.\n2. Gamita an format: [A0 B0], kun diin A0 amo an posisyon han ginikanan, ngan B0 amo an destinasyon.\n   - Pananglitan: Para magliwat hin piraso tikang ha hilera 0, kolumna 0 ngadto ha hilera 1, kolumna 0, igpasok an [A0 B0].\n3. Siguraduhon an destinasyon amo an balido sumala han mga patakaran han pagliwat ha igbaw.\n\n### Mga Mahinungdanon nga Nota:\n- An board amo an magpapakita han imo mga piraso ngan an ira mga posisyon, e.g. MN, MS.\n- An board amo an magpapakita han mga kilala nga posisyon han mga piraso han kalaban nga waray magpapakita han ira mga ranggo, e.g. ?.\n- An mga grid nga ~ amo an mga lawa ngan diri pwede magliwat ha igbaw.\n- Bilang suhestyon, umpisa an imo pagmuling pinaagi han pagliwat han imo mga piraso nga aada ha unhan nga mga linya para makakuha hin impormasyon mahitungod han mga piraso han kalaban. An unhan nga mga linya han Player 0 ngan Player 1 amo an hilera D ngan G, respektibamente.\n\nAmo ini an kasalukuyan nga estado han board:\n"
+  },
+  "board": {
+    "current_board": "Karuhaan nga Bangon:\n\n{board}\nMga Baraan nga Mugna: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Waray-makatuman nga pormat hin aksyon. An magdudula {player_id} waray magsurat han iya paglihok ha pormat [A0 B0] .",
+    "invalid_coordinates": "Diri balido nga pormat hin aksyon. An magdudula {player_id} waray igpasulod an mga balido na koordinado.",
+    "not_own_piece": "An player {player_id} kinahanglan magbalhin hin usa han ira mga piraso.",
+    "scout_through_pieces": "An player {player_id} diri makakagbalhin hin scout ha iba nga mga piraso.",
+    "scout_diagonal": "An player {player_id} diri puydi magbalhin hin scout ha diagonal.",
+    "non_scout_multi_square": "An mga piraso, gawas han scouts, puydi la magbalhin hin usa nga kwadrado ha kada higayon.",
+    "move_into_lake": "Waray-pagamit nga pormat hin aksyon. An magdudula {player_id} diri makakagbalhin ngadto ha linaw.",
+    "move_onto_own_piece": "An player {player_id} diri puydi magbalhin ngadto han iya kalugaringon nga piraso.",
+    "move_bomb_or_flag": "An player {player_id} in diri makakagbalhin hin bomba o bandera."
+  },
+  "game_action": {
+    "you_moved": "Nakiguros kamo sa inyong piraso gikan sa {source} ngadto sa {dest}.",
+    "opponent_moved": "An magdudula {player_id} in nagbalhin hin piraso tikang ha {source} ngadto han {dest}.",
+    "you_equal_ranks": "Ikaw nagliwat han imo piraso tikang ha {source} ngadto ha {dest}. An piraso nga atakante amo an {attacking_rank} ngan an piraso han destinasyon amo an {target_rank}. Kay an mga ranggo pareho, an duha ka piraso nawara.",
+    "opponent_equal_ranks": "An Player {player_id} nagliwat hin piraso tikang ha {source} ngadto ha {dest}. An piraso nga atakante amo an {attacking_rank} ngan an piraso han destinasyon amo an {target_rank}. Kay an mga ranggo pareho, an duha ka piraso nawara.",
+    "you_miner_defused": "Ikaw nagliwat han imo piraso tikang ha {source} ngadto ha {dest}. An piraso nga atakante amo an {attacking_rank} ngan an piraso han destinasyon amo an {target_rank}. Kay an mga minero pwede magpawara han mga bomba, ikaw nagdaog han gubat.",
+    "opponent_miner_defused": "An Player {player_id} nagliwat hin piraso tikang ha {source} ngadto ha {dest}. An piraso nga atakante amo an {attacking_rank} ngan an piraso han destinasyon amo an {target_rank}. Kay an mga minero pwede magpawara han mga bomba, ikaw nawara han gubat.",
+    "you_bomb_lost": "Ikaw nagliwat han imo piraso tikang ha {source} ngadto ha {dest}. An piraso nga atakante amo an {attacking_rank} ngan an piraso han destinasyon amo an {target_rank}. Kay an atakante diri usa ka minero, ikaw nawara han gubat.",
+    "opponent_bomb_won": "An Player {player_id} nagliwat hin piraso tikang ha {source} ngadto ha {dest}. An piraso nga atakante amo an {attacking_rank} ngan an piraso han destinasyon amo an {target_rank}. Kay an atakante diri usa ka minero, ikaw nagdaog han gubat.",
+    "you_spy_won": "Ikaw nagliwat han imo piraso tikang ha {source} ngadto ha {dest}. An piraso nga atakante amo an {attacking_rank} ngan an piraso han destinasyon amo an {target_rank}. Kay an atakante usa ka espiya ngan an destinasyon amo an marshall, ikaw nagdaog han gubat.",
+    "opponent_spy_lost": "An Player {player_id} nagliwat hin piraso tikang ha {source} ngadto ha {dest}. An piraso nga atakante amo an {attacking_rank} ngan an piraso han destinasyon amo an {target_rank}. Kay an atakante usa ka espiya ngan an destinasyon amo an marshall, ikaw nawara han gubat.",
+    "you_higher_won": "Ikaw nagliwat han imo piraso tikang ha {source} ngadto ha {dest}. An piraso nga atakante amo an {attacking_rank} ngan an piraso han destinasyon amo an {target_rank}. Kay an atakante usa ka mas hataas nga ranggo kaysa destinasyon, ikaw nagdaog han gubat.",
+    "opponent_higher_lost": "An Player {player_id} nagliwat hin piraso tikang ha {source} ngadto ha {dest}. An piraso nga atakante amo an {attacking_rank} ngan an piraso han destinasyon amo an {target_rank}. Kay an atakante usa ka mas hataas nga ranggo kaysa destinasyon, ikaw nawara han gubat.",
+    "you_lower_lost": "Ikaw nagliwat han imo piraso tikang ha {source} ngadto ha {dest}. An piraso nga atakante amo an {attacking_rank} ngan an piraso han destinasyon amo an {target_rank}. Kay an atakante usa ka mas ubos nga ranggo kaysa destinasyon, ikaw nawara han gubat.",
+    "opponent_lower_won": "An Player {player_id} nagliwat hin piraso tikang ha {source} ngadto ha {dest}. An piraso nga atakante amo an {attacking_rank} ngan an piraso han destinasyon amo an {target_rank}. Kay an atakante usa ka mas ubos nga ranggo kaysa destinasyon, ikaw nagdaog han gubat."
+  },
+  "outcome": {
+    "flag_captured": "An magdudula {player_id} nakakuha han bandera han kaaway!",
+    "no_movable_pieces": "An Player {winner_id} nagdaog! An Player {loser_id} waray na mga piraso nga pwede magliwat."
+  }
+}

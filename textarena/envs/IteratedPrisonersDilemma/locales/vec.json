@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ti xe el Zogador {player_id} in un Dilemma del Prigioniero Iterà spannendo {num_rounds} giri.\n\nStrutura del Zogo:\n- Prima de cada desision tu ga {total_conversation_rounds} turni par comunicare liberamente.\n- Dopo, tuti do zogadori scielgono simultaneamente de cooperare o tradire.\n\nMatrice dei Pagamenti (fisa ogni giro):\n- Tutti Cooperano ➜ cadauno {cooperate_reward}\n- Tutti Tradisano ➜ cadauno {mutual_defect_reward}\n- Uno Tradise, uno Cooperà ➜ Traditor {defect_reward}, Cooperador {sucker_reward}\n\nCome Zogare:\n- Durante ła conversazione: digita qualunque testo che ti piaxe.\n- Durante ła fase de desision: includi '[Cooperate]' o '[Defect]' (insensibile a ła maiuscoła). Ti poi aggiungere testo extra prima/dopo el token."
+  },
+  "phases": {
+    "conversation_finished": "Conversazione finia par el giro {round}. Per favore, rispondi con '[Cooperate]' o '[Defect]' dentro \\boxed{{}}.",
+    "starting_round": "--- Ronda de partensa {round} ---",
+    "round_summary": "Risultati del giro {round}:\n{outcome}\nEl Zogador 0 ga vinto {r0} (totale {score_0}), el Zogador 1 ga vinto {r1} (totale {score_1})."
+  },
+  "outcome": {
+    "winner": "El xugador {winner} vinse {win_score} - {lose_score}.",
+    "draw": "Pareggio!Tuti e do i zugadori ga fato {s0}.",
+    "round_both_cooperate": "I do zugadori i ga cooperà.",
+    "round_both_defect": "I due zugadori i ga dezertà.",
+    "round_p0_cooperates_p1_defects": "El xugador 0 ga cooperà, el xogador 1 gà disertà.",
+    "round_p0_defects_p1_cooperates": "Giocatore 0 ga disertà, giogador 1 gà cooperado."
+  }
+}

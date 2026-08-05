@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Say kaayon ka {role} ed Colonel Blotto.\nSay impangapalya mo et mananka mas rondos ed say kalaban mo.\nAgyalimo rondos, agyalin exactly {num_total_units} units ed fields {field_names}.\nSay totoo a agyalin mas units ed field et mananka so field, tan say totoo a mananka mas fields et mananka so rondos.\nNo example, '[A7 B7 C6]' agyalin 7 units ed A, 7 ed B, tan 6 ed C.",
+    "commander_alpha": "Komander Alpha, agka la manpapawil.",
+    "commander_beta": "Komander Beta, say ngaran na sayan grupo et..."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRondos a Nidaig - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRondos {current_round}\nCommander Alpha agyalin: {p0_allocations}\nCommander Beta agyalin: {p1_allocations}\n",
+    "winner_alpha": "{message}Manalo: Komander Alpha",
+    "winner_beta": "{message}Manalo: Komander Beta",
+    "tie": "{message}Mantalo!"
+  },
+  "invalid_move": {
+    "wrong_format": "Aliwan dugan format na input. Usaren: A:5, B:10, C:5",
+    "invalid_field": "Mali a nagan na lugan. Mabalin a lugan: {field_names}",
+    "wrong_allocation_value": "Amin ya allocation et nepeg a aliwan negatibo iran integer.",
+    "incorrect_total_units": "Nasumpal ka man-allocate na eksakto {num_total_units} a yunit. Saray agdumanan: {current_sum}",
+    "good_allocations": "Maong so pangibunog."
+  },
+  "outcome": {
+    "winner_alpha": "Commander Alpha ya nanka {score_0}-{score_1} kaibat {num_rounds} rondos!",
+    "winner_beta": "Commander Beta ya nanka {score_1}-{score_0} kaibat {num_rounds} rondos!",
+    "draw": "Say gawaen na laro et tie a {score_0}-{score_1} kaibat {num_rounds} rondos!",
+    "early_winner_alpha": "Commander Alpha ya nanka {scores_0}-{scores_1} (nabangon so mayoria)!",
+    "early_winner_beta": "Commander Beta ya nanka {scores_1}-{scores_0} (nabangon so mayoria)!"
+  }
+}

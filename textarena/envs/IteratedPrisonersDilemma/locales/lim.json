@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Jie zint Speler {player_id} in 'n geïtereerde Prisoner's Dilemma dat {num_rounds} rondes duurt.\n\nSpelstructuur:\n- Veur edere beslissing höbt jie {total_conversation_rounds} beurtje óm vriej te communicere.\n- Daonao kieze bei spelers tegeliekertied of ze samewirke of óftrèkke.\n\nOpbrengsmaatries (vas per ronde):\n- Bei samewirke ➜ ederen {cooperate_reward}\n- Bei óftrèkke ➜ ederen {mutual_defect_reward}\n- Ein óftrèk, ein samewirk ➜ óftrèkker {defect_reward}, samewirker {sucker_reward}\n\nHoe te spelen:\n- Tiedens conversatie: tip alle tekste die jie wilt.\n- Tiedens beslissingsfase: voeg '[Cooperate]' of '[Defect]' toe (gevoelig veur hoof- en kleine letters). Jie mag extra tekste toeveuge veur of nao 't token."
+  },
+  "phases": {
+    "conversation_finished": "Conversatie aafgeslote veur ronde {round}. Antwoord asjeblieft mit '[Cooperate]' of '[Defect]' binne \\boxed{{}}.",
+    "starting_round": "--- Startronde {round} ---",
+    "round_summary": "Resultate ronde {round}:\n{outcome}\nSpeler 0 haet {r0} verdiend (totaal {score_0}), Speler 1 haet {r1} verdiend (totaal {score_1})."
+  },
+  "outcome": {
+    "winner": "Speler {winner} wint {win_score} - {lose_score}.",
+    "draw": "Beide speulers scoorde {s0}.",
+    "round_both_cooperate": "Beide speulers koöperere.",
+    "round_both_defect": "Beide speulers defectere.",
+    "round_p0_cooperates_p1_defects": "Speler 0 haet meegewerkt, speler 1 is euvergelaote.",
+    "round_p0_defects_p1_cooperates": "Speler 0 is overgelopen, speler 1 heeft meegewerkt."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam permainan Kuhn Poker {max_rounds} ronde.\nAturan Permainan:\n- Kuhn Poker menggunakan dek 3-kartu dengan J, Q, K (J terendah, K tertinggi)\n- Setiap pemain memasang {ante} chip dan menerima 1 kartu setiap ronde (perhatikan bahwa kartu dibagikan tanpa penggantian, sehingga Anda tidak dapat memiliki kartu yang sama dengan lawan Anda).\n- Permainan berlangsung selama {max_rounds} ronde\n- Pemain dengan chip terbanyak setelah semua ronde memenangkan permainan\nAturan Aksi:\n- '[check]': Lewat tanpa bertaruh (hanya jika tidak ada taruhan di meja)\n- '[bet]': Tambah 1 chip ke pot (hanya jika tidak ada taruhan di meja)\n- '[call]': Sesuaikan taruhan lawan dengan menambah 1 chip ke pot\n- '[fold]': Menyerah dan biarkan lawan memenangkan pot"
+  },
+  "init_round": {
+    "round_start": "### Memulai ronde {current_round} dari {max_rounds} ronde. Kartu Anda adalah: '{player_card}'",
+    "available_actions": "Tindakan nang kawa Pian lakukan adalah: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksi harus [Check], [Bet], [Call], atau [Fold].",
+    "not_legal": "Tindakan harus {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Pemain {player_id}, mengajukan aksi: '[{move}]'.",
+    "valid_actions": "Tindakan nang kawa dilaku'i adalah: {legal_actions}.",
+    "round_summary": "{reason} Skor saat ini: Pemain 0: '{player_0_chips}'; Pemain 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Pertarungan: {winner_card} Pemain {winner} mengalahkan {loser_card} Pemain {loser}. Pemain {winner} memenangkan pot sebesar {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "Pada akhir ronde {max_rounds}, kadua pamain baisi jumlah chip nang sama.",
+    "round_win": "Pemain {player_id} sudah manyerah.",
+    "winner_player0": "Pamain 0 manang lawan baisi labih banyak chip di akhir samunyaan ronde {max_rounds}.",
+    "winner_player1": "Pamain 1 manang lawan baisi chip nang labih banyak di akhir samunyaan ronde {max_rounds}."
+  }
+}

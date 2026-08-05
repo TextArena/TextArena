@@ -1,0 +1,39 @@
+{
+  "_comment": "Locale en español para Word Ladder. Las claves (izquierda) son fijas; traduce solo los valores (derecha). Conserva cada {placeholder} tal cual. Los tokens de palabra ({start_word}, {target_word}, {word}, {current}, {ladder}) son palabras neutrales del juego y no deben traducirse. Conserva el ejemplo entre corchetes `[word]` sin cambios.",
+  "_slots": {
+    "{player_id}": "Número de jugador (entero)",
+    "{start_word}": "La palabra inicial de la escalera (token neutral)",
+    "{target_word}": "La palabra objetivo a alcanzar (token neutral)",
+    "{word}": "La palabra que el jugador acaba de enviar (token neutral)",
+    "{current}": "La palabra actual del jugador (token neutral)",
+    "{target}": "La palabra objetivo (token neutral)",
+    "{target_len}": "Longitud de la palabra objetivo (entero)",
+    "{ladder}": "El historial de jugadas unido por ' -> ' (tokens neutrales)",
+    "{history}": "La línea de historial mostrada (ya localizada; no traducir)",
+    "{pct}": "Porcentaje de letras compartidas con el objetivo (entero)"
+  },
+
+  "prompt": {
+    "intro": "Eres el Jugador {player_id}.  Tu objetivo es alcanzar la palabra objetivo cambiando **una letra a la vez**.\n- Palabra inicial:  **{start_word}**\n- Palabra objetivo: **{target_word}**\nEnvía cada jugada entre corchetes, p. ej.  `[word]`.\nEl historial aparece abajo mientras juegas.  ¡Buena suerte!\n"
+  },
+
+  "invalid": {
+    "wrong_format": "Formato inválido. Envuelve tu palabra entre corchetes, p. ej. `[word]`.",
+    "wrong_length": "`{word}` tiene una longitud incorrecta; el objetivo tiene {target_len} letras.",
+    "not_a_word": "`{word}` no es una palabra reconocida.",
+    "not_one_different": "`{word}` no difiere exactamente en una letra de `{current}`."
+  },
+
+  "board": {
+    "history": "Historial de Word Ladder: {ladder}.  Palabra objetivo: {target}\n"
+  },
+
+  "feedback": {
+    "progress": "¡Bien! Sigue así.\n{history}"
+  },
+
+  "outcome": {
+    "win": "¡Felicidades! Alcanzaste la palabra objetivo.",
+    "turn_limit": "Se alcanzó el límite de turnos. Llegaste a `{current}`, que comparte el {pct}% de sus letras con el objetivo `{target}`."
+  }
+}

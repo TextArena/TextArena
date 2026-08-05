@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Panjenengan pemain {player_id} ing Stratego.\nTujuan panjenengan yaiku ngrebut gendéra lawan utawa ngilangi kabèh pion lawan sing bisa obah.\nTentara panjenengan wis ditempatke ing papan, kalebu gendéra, bom, lan pion liyané kanthi rangking béda-béda.\n\n### Pandhuan Dolanan\n1. **Aturan Obah:**\n   - Ing giliran panjenengan, panjenengan bisa mindahake pion siji kanthi langkah siji menyang kothak sing tangga (munggah, mudhun, kiwa, utawa tengen) sing wis dipasangi pion panjenengan.\n   - Tuladha: Pion bisa mindah saka A1 menyang B1 utawa A1 menyang A2 yèn B1 lan A2 ora dipasangi pion panjenengan.\n   - Yèn pion sing dipilih yaiku bom utawa gendéra, ora bisa dipindhah.\n2. **Pertempuran:**\n   - Yèn panjenengan mindah menyang kothak sing wis dipasangi pion lawan, mula pertempuran bakal dumadi:\n     - Pion kanthi rangking luwih dhuwur menang lan ngilangi pion lawan.\n     - Yèn rangking padha, loro-loroné pion bakal diilangi saka papan.\n     - **Kasus Mirunggan:**\n       - Bom bisa ngilangi pion sing nyerang kejaba Miner, sing bisa nètralisir bom.\n       - Spion bisa ngalahaké Marshal yèn Spion nyerang kapisan nanging kalah karo pion liyané.\n3. **Tujuan Strategis:**\n   - Identifikasi pion lawan liwat obah lan pertempuran.\n   - Lindhungi gendéra panjenengan nalika nyoba ngrebut gendéra lawan.\n   - Gunakaké Scout kanthi strategis kanggo nampa informasi babagan pion lawan lan nyerang sing lemah.\n\n### Carane Nindhakake Langkah:\n1. Spesifikasikke koordinat pion sing panjenengan arep mindah lan tujuané.\n2. Gunakaké format: [A0 B0], ing ngendi A0 yaiku posisi sumber, lan B0 yaiku tujuan.\n   - Tuladha: Kanggo mindah pion saka baris 0, kolom 0 menyang baris 1, kolom 0, input [A0 B0].\n3. Pastikaké tujuan valid miturut aturan obah ing dhuwur.\n\n### Cathetan wigati:\n- Papan bakal nuduhaké pion panjenengan lan posisiné, contoné MN, MS.\n- Papan uga bakal nuduhaké posisi pion lawan sing wis dikawruhi tanpa nuduhaké rangking, contoné ?.\n- Grid kanthi ~ yaiku tlaga lan ora bisa dipindhah menyang kana.\n- Minangka saran, wiwiti dolanan panjenengan kanthi mindah pion sing ana ing garis depan kanggo nampa informasi babagan pion lawan. Pemain 0 lan pemain 1 garis depan yaiku baris D lan G.\n\nPapan saiki nuduhaké:\n"
+  },
+  "board": {
+    "current_board": "Papan Saiki:\n\n{board}\nLangkah-Langkah Sing Kasedhiya: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format aksi ora valid. Pemain {player_id} durung ngetik pamindhahan ing format [A0 B0] .",
+    "invalid_coordinates": "Format aksi ora valid. Pemain {player_id} durung ngetik koordinat sing bener.",
+    "not_own_piece": "Format aksi ora valid. Pemain {player_id} kudu mindhah salah sawijining potongan dhewe.",
+    "scout_through_pieces": "Format aksi ora valid. Pemain {player_id} ora bisa mindhah pramuka liwat potongan liyane.",
+    "scout_diagonal": "Format aksi ora valid. Pemain {player_id} ora bisa mindhah pramuka kanthi diagonal.",
+    "non_scout_multi_square": "Format aksi ora valid. Piece, kajaba pramuka, mung bisa mindhah siji kothak sekaligus.",
+    "move_into_lake": "Format aksi ora valid. Pemain {player_id} ora bisa pindhah menyang tlaga kasebut.",
+    "move_onto_own_piece": "Format aksi ora valid. Pemain {player_id} ora bisa pindhah menyang potongan dhewe.",
+    "move_bomb_or_flag": "Format aksi ora valid. Pemain {player_id} ora bisa mindhah bom utawa gendera."
+  },
+  "game_action": {
+    "you_moved": "Sampeyan wis mindhah potongan saka {source} menyang {dest}.",
+    "opponent_moved": "Pemain {player_id} wis pindhah potongan saka {source} menyang {dest} .",
+    "you_equal_ranks": "Panjenengané wis mindhahaké pérangan panjenengané saka {source} menyang {dest}. Pérangan sing nyerang iku {attacking_rank} lan pérangan tujuan iku {target_rank}. Amarga pangkaté padha, kaloro pérangan ilang.",
+    "opponent_equal_ranks": "Pemain {player_id} wis mindhahaké pérangan saka {source} menyang {dest}. Pérangan sing nyerang iku {attacking_rank} lan pérangan tujuan iku {target_rank}. Amarga pangkaté padha, kaloro pérangan ilang.",
+    "you_miner_defused": "Panjenengané wis mindhahaké pérangan panjenengané saka {source} menyang {dest}. Pérangan sing nyerang iku {attacking_rank} lan pérangan tujuan iku {target_rank}. Amarga miner bisa ngilangaké bom, panjenengané menang perang.",
+    "opponent_miner_defused": "Pemain {player_id} wis mindhahaké pérangan saka {source} menyang {dest}. Pérangan sing nyerang iku {attacking_rank} lan pérangan tujuan iku {target_rank}. Amarga miner bisa ngilangaké bom, panjenengané kalah perang.",
+    "you_bomb_lost": "Panjenengané wis mindhahaké pérangan panjenengané saka {source} menyang {dest}. Pérangan sing nyerang iku {attacking_rank} lan pérangan tujuan iku {target_rank}. Amarga pérangan sing nyerang dudu miner, panjenengané kalah perang.",
+    "opponent_bomb_won": "Pemain {player_id} wis mindhahaké pérangan saka {source} menyang {dest}. Pérangan sing nyerang iku {attacking_rank} lan pérangan tujuan iku {target_rank}. Amarga pérangan sing nyerang dudu miner, panjenengané menang perang.",
+    "you_spy_won": "Panjenengané wis mindhahaké pérangan panjenengané saka {source} menyang {dest}. Pérangan sing nyerang iku {attacking_rank} lan pérangan tujuan iku {target_rank}. Amarga pérangan sing nyerang iku spy lan tujuan iku marshall, panjenengané menang perang.",
+    "opponent_spy_lost": "Pemain {player_id} wis mindhahaké pérangan saka {source} menyang {dest}. Pérangan sing nyerang iku {attacking_rank} lan pérangan tujuan iku {target_rank}. Amarga pérangan sing nyerang iku spy lan tujuan iku marshall, panjenengané kalah perang.",
+    "you_higher_won": "Panjenengané wis mindhahaké pérangan panjenengané saka {source} menyang {dest}. Pérangan sing nyerang iku {attacking_rank} lan pérangan tujuan iku {target_rank}. Amarga pérangan sing nyerang duwé pangkat luwih dhuwur tinimbang tujuan, panjenengané menang perang.",
+    "opponent_higher_lost": "Pemain {player_id} wis mindhahaké pérangan saka {source} menyang {dest}. Pérangan sing nyerang iku {attacking_rank} lan pérangan tujuan iku {target_rank}. Amarga pérangan sing nyerang duwé pangkat luwih dhuwur tinimbang tujuan, panjenengané kalah perang.",
+    "you_lower_lost": "Panjenengané wis mindhahaké pérangan panjenengané saka {source} menyang {dest}. Pérangan sing nyerang iku {attacking_rank} lan pérangan tujuan iku {target_rank}. Amarga pérangan sing nyerang duwé pangkat luwih cilik tinimbang tujuan, panjenengané kalah perang.",
+    "opponent_lower_won": "Pemain {player_id} wis mindhahaké pérangan saka {source} menyang {dest}. Pérangan sing nyerang iku {attacking_rank} lan pérangan tujuan iku {target_rank}. Amarga pérangan sing nyerang duwé pangkat luwih cilik tinimbang tujuan, panjenengané menang perang."
+  },
+  "outcome": {
+    "flag_captured": "Pemain {player_id} wis nyekel gendera lawan!",
+    "no_movable_pieces": "Pemain {winner_id} menang! Pemain {loser_id} ora duwé pérangan sing bisa dipindhah manèh."
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Nanhte Klondike Solitaire kaji hkan sa. Nanhte a lam kaba wa, kaba hpaw shawng hpe foundation piles de du shangun na.\n\nKaji Gunhpawt:\n- Foundation piles (F1-F4): Ace mare King de du shangun, hpaw shawng hte rau\n- Tableau piles (T1-T7): Hpaw shawng rau, kadau kadau (kadau ni, ni kadau)\n- Stock: Hpaw shawng hpe waste pile de shangun\n- Waste (W): Hpaw shawng kaba wa, shangun na\n\nA Lai:\n- 'draw' - Stock mare waste de hpaw shawng shangun\n- 'move <source> <destination> [count]' - Hpaw shawng kaba wa, shangun na\n  Kaja: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count hpe 'all' mung, hpaw shawng kaba wa shangun na.\n- 'forfeit' - Kaji hkan sa, nanhte a lam kaba wa, shi shangun na\n- Pile a lam: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nNanhte a lam kaba wa, shi shangun na, kaja hkan sa.\n  Kaja: 'draw, move W T1, move T2 F1'\n\nTableau piles kaba wa, King ni shangun na.\nA Lai shangun na, kaja hkan sa, shi shangun na.\n'forfeit' hpe shangun na, kaji hkan sa, nanhte a lam kaba wa, shi shangun na."
+  },
+  "format_error": {
+    "no_brackets": "N jaw ai action format. Action gaw bracket ni hta rawng ra na re.",
+    "no_closing_bracket": "N jaw ai action format. shut na bracket n nga ai ']'",
+    "empty_command": "A Lai kaba wa, mu madau. 'draw' hpe 'move <source> <destination> [count]' hpe shangun na.",
+    "empty_action": "N jaw ai lam ni galaw na matu",
+    "move_needs_args": "Move command gaw source hte destination hpe ra ai. 'move <source> <destination> [count]' nga nna lang ma ai.",
+    "count_positive": "Count hpe mu madau, 'all' hpe shangun na.",
+    "count_invalid": "N jaw ai jahpan. Jahpan nlawm na matu, \"all\" hpe lang u.",
+    "unknown_command": "A Lai '{cmd}' hpe mu madau. 'draw', 'move <source> <destination> [count]', 'forfeit' hpe shangun na.",
+    "wrapped": "Hkamja lam {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Hkamja lam {n}: {msg}",
+    "before_failure": "{n} a lam kaba wa, shangun na.",
+    "failed": "{n} a lam kaba wa, shi shangun na: {msg}"
+  },
+  "move_result": {
+    "drew": "Stock mare waste de hpaw shawng shangun.",
+    "cannot_draw": "N lu shaw la ai. Hka hte n sa mai ai ni yawng gaw htum mat sai.",
+    "invalid_pile": "N jaw ai lawu na mying hpe lang u. W, F1-F4, T1-T7 ni hpe lang ga",
+    "foundation_one_card": "Foundation kaw card 1 sha mai htawt ai.",
+    "waste_to_foundation_ok": "Kawng kaw na Foundation de htawt ai card F{dst}",
+    "waste_to_foundation_bad": "Waste hpaw shawng hpe foundation pile de shangun na.",
+    "tableau_to_foundation_ok": "Tableau T{src} mare foundation F{dst} de hpaw shawng shangun.",
+    "tableau_to_foundation_bad": "Tableau hpaw shawng hpe foundation pile de shangun na.",
+    "foundation_to_foundation": "Npawt nhpang kaw nna npawt hpang de htawt lu ai lam nnga",
+    "waste_to_tableau_one_card": "Matsaw ningtsa kaw na card 1 hpe sha htawt mai ai.",
+    "waste_to_tableau_ok": "Matsaw ningtsa kaw na T{dst} de htawt ai card.",
+    "waste_to_tableau_bad": "Waste hpaw shawng hpe tableau pile de shangun na.",
+    "no_face_up": "Hkrun lam hta hkawm na matu, myiman yawng ai card n nga sai.",
+    "tableau_to_tableau_ok": "{count} hpaw shawng kaba wa, tableau T{src} mare T{dst} de shangun.",
+    "tableau_to_tableau_bad": "{count} hpaw shawng kaba wa, T{src} mare T{dst} de shangun na.",
+    "foundation_to_tableau_one_card": "Foundation kaw na Table de card 1 sha mai htawt ai.",
+    "foundation_empty": "Foundation F{src} gaw n nga ai.",
+    "foundation_to_tableau_ok": "Foundation F{src} mare tableau T{dst} de hpaw shawng shangun.",
+    "foundation_to_tableau_bad": "Foundation card hpe Table T{dst} hta n mai bang ai.",
+    "to_waste_or_stock": "Waste hpe stock de shangun na."
+  },
+  "outcome": {
+    "forfeit": "Kaji hkan sa, nanhte a lam kaba wa, shi shangun na. Lam kaba wa: {score} hpaw shawng hpe foundations de.",
+    "won": "Kabu gara ai. Nang Klondike Solitaire hpe lu la sai!",
+    "turn_limit": "Kaji hkan sa! {max_turns} a lam kaba wa, shangun na. Lam kaba wa: {score} hpaw shawng hpe foundations de."
+  },
+  "board": {
+    "title": "Klondique Solitaire (Jinghpaw ga malai: Jinghpaw Wunpawng Sha Ni) === KLONDIKE SOLITAIRE===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stock: {stock} card ni hpe lang ai.",
+    "waste": "Ka-ni (W): {waste}",
+    "foundations_header": "Hpung ni:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Sumla:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

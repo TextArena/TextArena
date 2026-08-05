@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Leikin byrjar. Trómur bukka: {trump_suit} (trómur spjald: {trump_str}).",
+    "no_trump_card": "ikki til staðar"
+  },
+  "player_prompt": {
+    "intro": "Tú ert Leikari {player_id} í týskum hvíti.\n{phase_info}\nTú hevur {hand_size} spjald.\nSpæl eitt spjald við '[play N]', har N er staðan í tíni hendi (t.d. '[play 3]').",
+    "phase_learning": "LÆRNINGARFAS: Vinnarin av hvørjum trikki tekur uppvísa kortið, og tann tapandi dregur næsta kort úr dekinum. Trikkar sum eru vunnir í hesum fasuni telja ikki við til sigurin.",
+    "phase_playing": "Hvørji spøl, ið verða gjørd í hesum bólki hava týdning fyri sigurin."
+  },
+  "next_card": {
+    "playing_phase": "Eingin kort eru at fáa - spælifasan er byrjað.",
+    "deck_empty": "Deypið er tómt - einki kort verður boðið.",
+    "available": "Kort, ið verður boðið út: {card}",
+    "available_trump": "Kort, sum vit bjóða: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Ógilda flytingarformatið. Brúka '[play N]' at spæla n-ta kortið í hondini á tær.",
+    "bad_position": "Henda kortstillingin er ikki til. Tú hevur {hand_size} kort í hondini á tær.",
+    "must_follow_suit": "Tú mást fylgja tí og spæla eitt {lead_suit} kort.",
+    "invalid_play": "Hetta kortið kann ikki verða spælt."
+  },
+  "game_action": {
+    "played": "Leikarin {player_id} hevur spælt við {card}."
+  },
+  "trick": {
+    "won": "Spælarin {winner_id} vinnur trikin við at hava {card}.",
+    "won_learning": "Leikari {winner_id} vinnur tríggj við {card} og tekur upp á spjaldið"
+  },
+  "phase": {
+    "learning_complete": "Lærufasin er av - hvørt einasta spæl, sum eftir stendur, hevur týdning fyri sigurin."
+  },
+  "draw": {
+    "winner_received": "Tú vann trikin og fekk {card}.",
+    "loser_received": "Tú misti trikin og hevur tikið {card} úr dekinum.",
+    "winner_preview": "Næsta kortið, sum verður boðið út er {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tríggir vunnið hittil - Leikari 0: {tricks0}, Leikari 1: {tricks1}",
+    "scores_playing": "Metir tríggir - Leikari 0: {tricks0}, Leikari 1: {tricks1}",
+    "phase": "Fase: {phase} (í hvørjum føri)",
+    "phase_learning": "Fasa: {phase} ({remaining_cards} spjald eftir í dekki)"
+  },
+  "hand": {
+    "no_cards": "Eingin kort.",
+    "no_cards_in_hand": "Eingin kort í hondini.",
+    "header": "Hendur tínar:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Hesi kortini hava ikki verið spæld enn.",
+    "header": "Núverandi trikki:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Leikari {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Spæl ikki byrjað",
+    "header": "=== Týskari hvítleikur===",
+    "phase": "{observation}\nFasa: {phase}",
+    "trump_suit": "{observation}\nTrómur bukka: {trump_suit}",
+    "trump_card": "{observation}\nTrómur spjald: {card}",
+    "cards_left": "{observation}\nSpjaldar eftir í dekki: {count}",
+    "next_card": "{observation}\nNæsta spjald til vinnarans: {card}",
+    "blank": "{observation}  at fáa sær ein góðan dag.",
+    "current_trick": "{observation}\nNúverandi trøkk:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Leikari {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nLeikari {player_id}: {scoring} mettir tríggir ({tricks} tilsamans), {hand_size} spjald í hendi"
+  },
+  "outcome": {
+    "summary": "Læringarfasa - Leikari 0: {l0}, Leikari 1: {l1}. Spælafasa - Leikari 0: {p0}, Leikari 1: {p1}. Leikari {winner_id} vinnur við {winner_tricks} mettum tríggjum!"
+  }
+}

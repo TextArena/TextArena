@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Mchezo unanuka. Suti ya kupiga chapuo: {trump_suit} (chapuo cha kupiga chapuo: {trump_str}).",
+    "no_trump_card": "gũtirĩ o na ũmwe"
+  },
+  "player_prompt": {
+    "intro": "We ni Mchezaji {player_id} katika Whist ya Kijerumani.\n{phase_info}\nUna mikono {hand_size} ya kadi.\nCheza kadi kwa kutumia '[play N]', ambapo N ni nafasi yake kwenye mkono wako (kwa mfano '[play 3]').",
+    "phase_learning": "GĨCUNJIRI KŨRUTWO: ũrĩa ũhootanaga kĩgeranio o gĩothe nĩ we wĩyohagĩra kadi ĩrĩa ĩrorete igũrũ na ũcio ũkũhootwo agacoka akeyũkia karati ĩngĩ kuuma gĩkero-inĩ. Kĩgerania kĩrĩa kĩahotetwo ihinda rĩrĩ gĩtituaga kũrũa kana gũtoorania.",
+    "phase_playing": "GĨCUNJĨ KŨREKIA: Mbarathi nĩ ĩrĩkĩtie kũhĩa. Kĩgeranio o gĩothe kuuma rĩu no kĩhote gũgũteithia ũhootane."
+  },
+  "next_card": {
+    "playing_phase": "Gũtirĩ kaarĩ kahingũririo - mũbira wa gũcaria nĩ wambĩrĩirie.",
+    "deck_empty": "Gĩcunjĩ kĩu gĩtirĩ kĩndũ - gũtirĩ kandi ĩheanĩtwo.",
+    "available": "Kaarĩ ka kũrutwo: {card}",
+    "available_trump": "Kaarĩ ka kũrutwo: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Gũthaka gũtiagĩrĩire. Hũthĩra '[play N]' gũthaka karati ya Nth ĩrĩa ũrĩ nayo guoko-inĩ gwaku.",
+    "bad_position": "Kaarĩ kau gatirĩ ho. Ũkoragwo na kaarĩ {hand_size}",
+    "must_follow_suit": "No mũhaka wĩke o taguo na ũhũthagĩre kadi ya {lead_suit}.",
+    "invalid_play": "Kaari kau gatingĩhũthĩka."
+  },
+  "game_action": {
+    "played": "Mũthaaki {player_id} nĩ athakaga na {card}."
+  },
+  "trick": {
+    "won": "Mũthaaki {winner_id} nĩ agaacinda kĩgeranio na {card}.",
+    "won_learning": "Mchezaji {winner_id} anashinda mchezo huo kwa kutumia {card} na kuchukua kadi iliyo wazi."
+  },
+  "phase": {
+    "learning_complete": "Gĩthaka kĩu gĩgĩkira, na mũico wa kwĩruta ũgĩkinya - o kĩgeranio kĩrĩa kĩngĩ nĩ kĩa bata harĩ kũhootana."
+  },
+  "draw": {
+    "winner_received": "Nĩ ũhootanĩte kĩgeranio na ũkĩheo {card}.",
+    "loser_received": "Ũrĩ o hĩndĩ ũrahĩirũo nĩ mũtego na ũkĩruta {card} kuuma gĩthũri-inĩ.",
+    "winner_preview": "Kaarĩ ka kerĩ karutagwo nĩ {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Michezo iliyoshinda mpaka sasa - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
+    "scores_playing": "Michezo inayopata alama - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
+    "phase": "Kĩrathi: {phase}",
+    "phase_learning": "Mzunguko: {phase} (〕{remaining_cards} kadi zimesalia katika sitaha)"
+  },
+  "hand": {
+    "no_cards": "Gũtirĩ kaarĩ.",
+    "no_cards_in_hand": "Gũtirĩ kaarĩ moko-inĩ maku.",
+    "header": "Guoko gwaku:",
+    "trump_indicator": "(TRUMP) Nĩ ngenaga mũno.",
+    "suit_line": "{observation}\n  {suit}〕{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Gũtirĩ ihengere cia kũina irĩ na kĩene kĩu.",
+    "header": "Kĩgeranio kĩa ũmũthĩ:",
+    "trump_indicator": "(TRUMP) Nĩ ngenaga mũno.",
+    "card_line": "{observation}\n  Mchezaji {player_id}: {card}〕{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Gĩkundi gĩtiambĩrĩirie",
+    "header": "=== GĨTŨMBA KĨA NJARIMANI=== Mũrango wa mũico:",
+    "phase": "{observation}\nMzunguko: {phase}",
+    "trump_suit": "{observation}\nSuti ya kupiga chapuo: {trump_suit}",
+    "trump_card": "{observation}\nKadi ya trump: {card}",
+    "cards_left": "{observation}\nKadi zimesalia: {count}",
+    "next_card": "{observation}\nKadi inayofuata kwa mshindi: {card}",
+    "blank": "{observation}  nĩ ũndũ wa gũkua gwakwa.",
+    "current_trick": "{observation} Ũrĩa ũramenya rĩu:",
+    "trump_indicator": "(TRUMP) Nĩ ngenaga mũno.",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nMchezaji {player_id}: {scoring} michezo inayopata alama ({tricks} kwa jumla), mikono {hand_size} ya kadi"
+  },
+  "outcome": {
+    "summary": "Muda wa kujifunza - Mchezaji 0: {l0}, Mchezaji 1: {l1}. Muda wa kucheza - Mchezaji 0: {p0}, Mchezaji 1: {p1}. Mchezaji {winner_id} anashinda kwa {winner_tricks} michezo inayopata alama!"
+  }
+}

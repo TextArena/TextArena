@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Sètz Jogaire {player_id} a Chopsticks. A vòstra tornada, causissètz una de:\n  + Atac:  '[attack M O]'  ont M=la vòstra man (0 o 1), O=la man de l'adversari (0 o 1).\n    - Lo compte de la man de l'adversari aumenta de la vòstra man; se >=5, ven 0.\n  + Partiment:   '[split L R]'  per redistribuir lo total de vòstres dets en L e R (L+R = lo vòstre total).\nRespondètz amb exactament una d'aquelas comandas."
+  },
+  "board": {
+    "current_board": "Taulèr actual:\nJogaire 0: {hands_0}\nJogaire 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Ta man {my_idx} es mòrta.",
+    "opp_hand_dead": "La man de l'adversari {opp_idx} es ja mòrta.",
+    "split_sum": "La soma de la division deu èsser {total}.",
+    "split_no_change": "Split deu cambiar la distribucion de las mans.",
+    "invalid_command": "Moviment invalid. Utilizatz «[attack M O]» o «[split L R]»."
+  },
+  "game_action": {
+    "attack": "P{player_id} ataca la man de P{opp_id} {opp_idx}: passa de {opp_val} a {new_val}.",
+    "split": "J{player_id} se parteja en [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Ambedoas mans de l'adversari son mòrtas.",
+    "draw": "La limita de virada es arribada."
+  }
+}

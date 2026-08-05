@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ko koe te Kaitākaro {player_id} i roto i te Whakataetae Whakaheke Herekore o ngā Herekore 3. Ka whakapaua te whakataetae i {num_rounds} raunga.\nHanganga Raunga:\n• {conv_rounds} nekehanga kōrero herekore\n• 1 nekehanga whakatau - tuku i tetahi tohu mō tētahi o ngā hoariri: '[<opp-id> cooperate]' rānei '[<opp-id> defect]' (arā '[1 defect] [2 cooperate]'; ko te koretake ko 'mahinga'). \nPūnaha utu mō ngā tūhononga piri (ka whakapaua ki ngā tūhononga kore-ūpoko):\n  - Ka mahinga ngā tūhononga e rua  ->  {reward}\n  - Ka whakakeke ngā tūhononga e rua     ->  {punishment}\n  - Ka whakakeke koe, ka mahinga rātou ->  {temptation}\n  - Ka mahinga koe, ka whakakeke rātou ->  {sucker}\nKo te kaitākaro (tētahi rānei) ka whai tohu teitei rawa i te mutunga o ngā raunga katoa ka toa."
+  },
+  "round": {
+    "start": "─── Timata ana te Rauna {round} ───\tKa taea e koe te kōrero noa mō ngā {conv_rounds} rauna e haere ake nei.",
+    "chat_finished": "Kua mutu te kōrero mō te raundi {round}. Tukua mai ō whakatau, kotahi tīkena mō ia hoa whawhai: `[pid cooperate]` ki `[pid defect]`."
+  },
+  "results": {
+    "header": "### Rauna {round} - Ngā Hua:",
+    "pair_line": "{observation}\n\t Kaitākaro {i} vs Kaitākaro {j} i whiriwhiri ki {choice_i} me {choice_j} (Kaitākaro {i} i whiwhi {gain_i}, Kaitākaro {j} i whiwhi {gain_j})",
+    "scores_open": "{observation} -> Ngā kaute o nāianei: ",
+    "score_first": "{observation}Kaitākaro {player_id} ({score})",
+    "score_next": "{observation}; Kaitākaro {player_id} ({score})",
+    "finalize": "{observation}  ngā kōrero ā-iwi:"
+  },
+  "outcome": {
+    "final": "Tohu whakamutunga: {scores}.  Rōpū whakarārangi (kino ki te pai): {groups}"
+  }
+}

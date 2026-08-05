@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Yu Player {player_id}. Yu pilai Sudoku.\nHia i stap long current state bilong Sudoku grid. Olgeta lain i namba long 1 go 9, na olgeta kolom i namba tu long 1 go 9.\nOlgeta sel i no gat samting i stap long '.', na olgeta sel i gat namba i stap long 1 go 9.\n\nCurrent Sudoku Grid:\nYu objective i stap long pulim olgeta sel i no gat samting long 9x9 grid wantaim namba long 1 go 9 olsem:\n1. Olgeta lain i gat olgeta namba long 1 go 9 no ken i stap dua.\n2. Olgeta kolom i gat olgeta namba long 1 go 9 no ken i stap dua.\n3. Olgeta ninepela 3x3 subgrid i gat olgeta namba long 1 go 9 no ken i stap dua.\n\nRul na Instruction:\n1. **No ken overwrite** olgeta namba i stap long grid.\n2. **Pulim tasol** olgeta sel i no gat samting i stap long '.'.\n3. Yu ken respond long eni maner yu laik, tasol yu mas ensure yu response i gat format bilong '[row column number]'.\n4. **Ensure** yu move i no ken violate Sudoku rul. Invalid move i ken result long penalties.\nExamples:\n- **Valid Move**:\n  - Grid Snippet Before Move:\n  \n  - Move: `[5 3 7]`\n  - Explanation: Placing 7 long row 5, kolom 3 i no ken violate eni Sudoku rul.\n\n- **Invalid Move** (Overwriting a pre-filled cell):\n  - Grid Snippet Before Move:\n  \n  - Move: `[1 1 9]`\n  - Explanation: Sel (1,1) i stap filled wantaim 5. Yu no ken overwrite.\n\n- **Invalid Move** (Violating Sudoku rules):\n  - Grid Snippet Before Move:\n  \n  - Move: `[1 3 5]`\n  - Explanation: Placing 5 long row 1, kolom 3 i violate rul bilong Sudoku long wanem 5 i stap exist long row 1.\n\nOlgeta history bilong yu move na thoughts i ken stap append long yu pilai moa raun. Usim history bilong yu move long improve yu decision making long avoid move yu try pinis. Lukim yu!\n\n"
+  },
+  "board": {
+    "game_board": "Ples Bilong Pilim Kaikai: {board}",
+    "board_state": "Gavman bilong ol: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Pasim move i no stret. Pleya {player_id} i no tok stret long 'row column number'.",
+    "out_of_bounds": "Wokim wanpela go i no stret. Pleya {player_id} i traim putim {num} long ({row}, {col}), we i no bilong ples.",
+    "overwrite": "Muv bilong yu i no gut. Pleya {player_id} traim raitem bak cell ({row}, {col}).",
+    "violates_rules": "Muv bilong yu i no gut. Pleya {player_id} traim place {num} long ({row}, {col}), em i bagarapim ruks bilong Sudoku."
+  },
+  "outcome": {
+    "win": "Mi tok amamas! Man {player_id} i pinisim Sudoku.",
+    "turn_limit": "Yu inapim pinis {percent}% bilong ol hap i no gat man."
+  }
+}

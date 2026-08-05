@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Vi estas Ludanto {player_id} en Kvantuma Triktrako.\nVia simbolo estas '{symbol}', kaj viaj movnumeroj estas ĉiam {parity} (ekz., X1, X3 aŭ O2, O4).\n\nCelo: Venku per formado de linio de tri klasikaj markoj (solidigitaj el superpozicioj).\n\nKiel Ludi:\n- En ĉiu vico, metu spukan markon en du malsamajn malplenajn kvadratojn uzante la formaton '[a,b]'.\n- Ĉi tiuj markoj estas interplektitaj, kaj etikeditaj kiel 'X1 / X1' aŭ 'O4 / O4'.\n- Vi ne povas meti spukan markon en kvadraton, kiu jam kolapsis (solidiĝis).\n\nRegulo de Kolapso:\n- Se via movo kreas ciklon en la interplekta grafo, ĝi kolapsas aŭtomate.\n- Ĉiu spuka marko en la ciklo ŝanĝiĝas en klasikan markon en unu el siaj du pozicioj.\n- Ajnaj dependaj spukaj markoj ankaŭ kolapsas.\n\nVenko:\n- La ludo finiĝas, kiam ludanto havas tri klasikajn markojn en vico.\n- Se ambaŭ ludantoj ricevas linion dum la sama kolapso, la ludanto kun la pli malalta maksimuma movnumero venkas.\n\nEkzempla movo: '[0,4]' metas spukan markon en ĉeloj 0 kaj 4."
+  },
+  "board": {
+    "current_board": "Kvanta Tik-Tak-Toe Tabulo:\n\n{board}\n\nSendu vian movon kiel '[a,b]' por meti kvantan markon en du lokoj."
+  },
+  "invalid_move": {
+    "wrong_format": "Malvalida formato. Uzu \"[a,b]\".",
+    "invalid_cells": "Malvalidaj aŭ duplikataj ĉelindeksoj.",
+    "already_solidified": "Unu el la ĉeloj jam solidiĝis."
+  },
+  "game_action": {
+    "placed": "Ludanto {player_id} metis sian simbolon en superpozicio inter ĉeloj {pos_a} kaj {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Dependanta superpozicio solvita. Ĉelo ({r}, {c}) nun estas {symbol}.",
+    "last_cell_resolved": "Superpozicio por la lasta ĉelo solvita. Ĉelo ({r}, {c}) nun estas {symbol}.",
+    "superposition_resolved": "Superpozicio solvita. Ĉelo ({r}, {c}) nun estas {symbol}."
+  },
+  "outcome": {
+    "win": "Ludanto {player_id} gajnas per solidigitaj markoj!",
+    "draw": "La ludo estas remisa!"
+  }
+}

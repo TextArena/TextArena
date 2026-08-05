@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Nyɛ Ŋutinya {player_id} le Three-Player GOPS.\n- Nyɛ wɔ 13 kaɖi siwo A-K (ɖeɖe kple dzɔdzɔ).\n- Le xexlẽ siwo la, kaɖi siwo woɖe ƒe dzɔdzɔ. Dze kaɖi ɖeɖe abe `[Q]`, `[10]`, `[2]` …\n- Kaɖi siwo woɖe dzɔdzɔ wɔ la, wɔ akɔnta siwo le dzɔdzɔ. Ties roll kaɖi siwo le xexlẽ siwo.\n- Le 13 xexlẽ siwo gɔme, akɔnta siwo wɔ la wɔ dzɔdzɔ. Dze siwo vɔvɔ o = kɔ siwo."
+  },
+  "round": {
+    "header": "### Round {round}/13 - Prize: {prize} (wɔ {worth})",
+    "hand": "Wò asi mamlɛa: {hand}"
+  },
+  "reveal": {
+    "win": "Bids » {bids} - Player {winner} wɔ {pot}.",
+    "tie": "Teƒeƒlewo  {bids} - tie, pot now {pot}.",
+    "scores": "Numedzesiwo → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "dɔwɔna hiã kadodo si le akplo me abe \"[Q]\" ene.",
+    "bad_card": "wozã kaɖidɔa xoxo alo eƒe asi mesɔ o"
+  },
+  "elimination": {
+    "player": "Woɖe fefewɔla {pid} le esi wòte afɔ gbegblẽwo wɔwɔ enuenu ta."
+  },
+  "outcome": {
+    "auto_win": "Ne woƒo fefewɔla eve ɖa la, ke woaɖu dzi.",
+    "final": "Nuƒo mamlɛtɔ: {scores}"
+  }
+}

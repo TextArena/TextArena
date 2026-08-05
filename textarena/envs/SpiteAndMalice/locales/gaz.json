@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ati leenca {player_id} kessatti tapha lamaan Spite fi Malice. Galii kee qabduu dhuunfaa keessan baasuudha.\n\n### Hubachiisa Tapha:\n- Galii qabduu dhuunfaa keessan baasuun tapha kessatti ka'uu dha.\n- Kaartii saddeet irraa ka'uu dandeessa:\n  1. **Harka kee** (yeroo hundaa kaartii 5 ol ta'a).\n  2. **Kaartii olaanaa dhuunfaa kee**.\n  3. **Kaartii olaanaa dhuunfaa ala kee**.\n\n### Seera Tapha:\n- Kaartii tokko kessatti ka'uu dandeessa yoo **sadarkaa tokko olaanaa** kaartii olaanaa kessatti ta'e (kessawwan eegalanii Ace fi gara Queen; Kings ni wilde - kaartii kamuu irratti ka'uu dandeessa, garuu sadarkaa hin jijjiiru. Kana jechuun yoo King ka'uu ba'e 4, King sun sadarkaa 5 ta'a, kaartii dhufu sadarkaa 6 ta'a).\n- Yoo kaartii ka'uu hin dandeenye, kaartii **ala kee** tokko kessatti ala kee dhuunfaa irratti ka'uu qabda.\n- Yoo kessawwan Queen ga'e, qulqulleeffama automaata.\n- Sadarkaa kaartii: A=1, 2=2, ..., 9=9, J=10, Q=11, K ni wilde.\n\n### Sochiin:\n1. **Soora**: Yeroo hundaa kaartii sooruu qabduu harka kee 5 kaartii guutuu. **[draw]** jedhuun jalqaba.\n2. **Kaartii Ka'uu**: Kaartii ka'uu, kaartii fi kessawwan akka kana: **[play A♠ 0]** (akka 'A♠' kaartii fi '0' kessawwan index).\n3. **Ala kee**: Yoo kaartii ka'uu hin dandeenye, kaartii harka kee ala kee dhuunfaa irratti ka'uu qabda. **[discard A♠ 1]** jedhuun (akka 'A♠' kaartii fi '1' kessawwan index). Kaartii dhuunfaa kee ala kee hin ka'uu, kaartii harka kee qofa ka'uu dandeessa."
+  },
+  "board": {
+    "current_board": "Booradii kuusaa:\n\n{board}\nMiidiileen ala dhaabuu: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Giddugalaa Gurguddoo (Center Piles) -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Pleyer {player_id}'s View ---\n",
+    "payoff": "{observation}Qabsoo (Kaarta Olaanaa): {top_card}, Dheerina Qabsoo: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Harqoota: {discard}\n",
+    "empty": "Gatii hin qabu."
+  },
+  "game_message": {
+    "no_cards_left": "Kaardii itti taphattu hin jiru. Kana yaadadhu: 1. Harka kee 2. Kaardiin ol aanaa kaartii badhaasa keetii 3. Kaartiin olii kaa'iiwwan gad lakkifaman keessaa kamiyyuu . "
+  },
+  "invalid_move": {
+    "wrong_format": "Taphachiisaa {player_id} sochii sirrii hin taaneen deebii kenne.",
+    "invalid_play": "Dhaabuu bittaa. Pleyer {player_id} {card} center pile {index} irratti dhaabuu barbaade.",
+    "discard_from_payoff": "Taphattuun {player_id} kaardii kaardiin itti kennamu keessaa baasuuf yaalii godhe.",
+    "discard_not_in_hand": "Taphachiisaa {player_id} kaardii harkaa hin qabne baasuuf yaalii godhe.",
+    "wrong_move_type": "Taphachiisaa {player_id} taphattuu sirrii hin taaneen deebii kenne."
+  },
+  "game_action": {
+    "you_drew": "Kaardii qabatteetta.",
+    "opponent_drew": "Taphattuun {player_id} kaardii baate.",
+    "you_played": "Ati {card} taphatte pilaankii giddu galeessa irratti {index}.",
+    "opponent_played": "Pleyer {player_id} {card} center pile {index} irratti dhaabuu.",
+    "you_discarded": "Siif miidiileen {card} discard pile {index} keessatti dhaabuu, kunis ni dhiiraan kee itti dhufu. Dhufuun kee Pleyer {next_player_id} gara kee dhufa.",
+    "opponent_discarded": "Pleyer {player_id} miidiileen {card} discard pile {index} keessatti dhaabuu, kunis ni dhiiraan isaa itti dhufu. Dhufuun isaa Pleyer {player_id} kana irratti hinjiru. Pleyer {next_player_id}, siif gara kee dhufa. Dhahaa kee formati [action card center_index] keessatti."
+  },
+  "outcome": {
+    "payoff_cleared": "Pleyer {current_player} payoff pile isaa xiqqaachee! Pleyer {current_player} waliigaltee dhufuun barbaachisa!",
+    "deadlock_player_0": "Tapha dhumate! Pilaayari 0 kaartota {player_0_payoff} qabatee moo'ate, Pilaayari 1 kaartota {player_1_payoff} qabatee.",
+    "deadlock_player_1": "Tapha dhumate! Pilaayari 1 kaartota {player_1_payoff} qabatee moo'ate, Pilaayari 0 kaartota {player_0_payoff} qabatee.",
+    "deadlock_tie": "Deadlock dhufee waliigaltee! Pleyeroota {player_0_payoff} kaartii irraa eegalan. Pleyer {current_player} waliigaltee dhufuun barbaachisa."
+  }
+}

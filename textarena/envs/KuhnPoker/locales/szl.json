@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Jeżeś Gracz {player_id} we {max_rounds} rundowyj grze we Kuhna Poker.\nReguły Gry:\n- Kuhn Poker używo 3-kartowyj taliy ze J, Q, K (J nojniższo, K nojwyższo)\n- Kożdy gracz wkludźo {ante} żeton a dostowo 1 kartę kożdům rundům (zwrůć uwagům, iże karty sům rozdowowane bez wymjany, tak cobyś nie můg mieć tej samej karty kej twůj przeciwnik).\n- Gra trwo {max_rounds} rund\n- Gracz ze nojwjyncyj żetonůma po wszyjskich rundach wygrywo\nReguły Akcyji:\n- '[check]': Przepuść bez obstawiania (jynoż kej żodyn obstaw nie je na stole)\n- '[bet]': Dodaj 1 żeton do puli (jynoż kej żodyn obstaw nie je na stole)\n- '[call]': Dorůwnaj obstaw przeciwnika dodając 1 żeton do puli\n- '[fold]': Zrezygnuj ze swojij rynki a daj wygrać przeciwnikowi"
+  },
+  "init_round": {
+    "round_start": "### Rozpoczynům rundę {current_round} ze {max_rounds} rund. Twoja karta to: '{player_card}'",
+    "available_actions": "Twoje dostępne akcyje to: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Akcyjo musi być [Check], [Bet], [Call] abo [Fold].",
+    "not_legal": "Akcyjo musi być {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Gracz {player_id} wykonoł ruch: '[{move}]'.",
+    "valid_actions": "Twoje dostępne akcyje to: {legal_actions}.",
+    "round_summary": "{reason} Aktualne wyniki: Gracz 0: '{player_0_chips}'; Gracz 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Karta gracza {winner} {winner_card} bije kartę gracza {loser} {loser_card}. Gracz {winner} wygrywo pulę {pot_value} żetonůw."
+  },
+  "outcome": {
+    "draw": "Pod kůńcu {max_rounds} rund, uobodwa szpilerzy mioły tůż samo wjelość żetonůw.",
+    "round_win": "Gracz {player_id} ôdciepnōł.",
+    "winner_player0": "Gracz 0 wygroł, bo mioł wiyncyj żetonōw na kōńcu wszyjskich rund {max_rounds}.",
+    "winner_player1": "Gracz 1 wygroł, bo mioł wiyncyj żetonōw na kōńcu wszyjskich rund {max_rounds}."
+  }
+}

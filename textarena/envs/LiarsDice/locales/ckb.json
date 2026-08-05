@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "ئەتۆ یاریزان {player_id}ی لە یارییەکی Liar's Dice دایە کە {num_players} یاریزان تیایە.\nیاساکان:\n- لە دەورەکەتدا، دەتوانی یەکێک لەمانە بکەی:\n  1) پێشنیارێکی نوێ بکە بە بڕێکی زۆرتر یان نرخی ڕووی زارەکەی بەرزتر (یان ھەردووکیان) لە پێشنیارە ھەنووکە؛ بۆ نموونە '[Bid: 3, 4]',\n  2) پێشنیارە دوایینە پەسەند بکە بە نووسینی '[Call]'.\n\nئەگەر پەسەندی کرد:\n  - ئەگەر ژمارەی ڕاستەقینەی نرخی ڕووی زارەکە لەنێوان ھەموو زارەکان کەمتر بێت لە پێشنیارەکە، یاریزانە دوایینە کە پێشنیارێکی کردووە زارێک دەدۆڕێت.\n  - بە پێچەوانەوە، یاریزانەکەی کە پەسەندی کردووە زارێک دەدۆڕێت.\nیاریزانەکەی کە دەگاتە 0 زار دەر دەکرێت. یاریزانە دوایینە کە مابێتەوە براوە دەبێت."
+  },
+  "board": {
+    "per_player": "\tیاریکەر {p}: {d}",
+    "new_round": "\nقۆناغی نوێ - تاسەکەکان بە جێ ماوە: {dice_summary}\nتاسەکەکانت ئێستا: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "یاریکەر {current_player_id} بانگەشە دەکات! ژمارەی ڕاستەقینەی ڕوو {face_value} {count}یە، کە کەمترە لە {quantity}.\nیاریکەر {loser_id} (یاریکەری کۆتا) یەک تاس دەبەردەنێت.",
+    "caller_loses": "یاریکەر {current_player_id} بانگەشە دەکات! ژمارەی ڕاستەقینەی ڕوو {face_value} {count}یە، کە >= {quantity}یە.\nیاریکەر {loser_id} (بانگەشەکەر) یەک تاس دەبەردەنێت."
+  },
+  "action": {
+    "bid_announce": "یاریکەر {player_id} پێشنیاری {quantity}ی ڕوو {face_value} دەکات."
+  },
+  "invalid_move": {
+    "call_no_bid": "پەیوەندیکردن بەبێ پێشەکی پێشکەشکردنی ئۆفەر.",
+    "invalid_bid": "ئۆفەرێکی پووچ: {reason}",
+    "not_recognized": "چالاکی ناسرا نەبوو وەک '[Bid: X, Y]' یان '[Call]'ی چالاک. چالاکیی پێشکەشکراو: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "چەندێتی نوێ {new_quantity} کەمترە لە {current_quantity}ی ئێستا.",
+    "face_lower": "ڕووێنەی نوێ {new_face_value} کەمترە لە {current_face_value}ی ئێستا.",
+    "identical": "ئۆفەرەکە وەکوو ئۆفەری ئێستا وایە.",
+    "face_range": "بەهای ناونیشان دەبێت لە نێوان 1 و 6 بێت."
+  },
+  "message": {
+    "eliminated_invalid": "یاریزان {player_id} بە جوڵەی نەشیاو دەرکرا."
+  },
+  "outcome": {
+    "win": "یاریکەر {winner} سەرکەوتووە! ڕیزبەندی کۆتایی: {final_ranking}"
+  }
+}

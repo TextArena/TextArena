@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Omuzannyi Snake ku {width}×{height} grid.\nOgola omuzannyi {player_id}. Ezisa kuwa: '[up]'/'[down]'/'[left]'/'[right]' (oba w/s/a/d).\nEkyunuuzo: okutamu buli lunaku oba ukome kuwa munoonyi n'olweza ekisa ekikulu (omisi y'ekitundu {max_turns})."
+  },
+  "board": {
+    "current": "Olukiiko oluliwo kati: {board}",
+    "after_moves": "Ekitongole ekiramuzi mu kiseera kino: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Omusota {player_id} yafa olw'okutambula mu ngeri etali ya bwenkanya."
+  },
+  "outcome": {
+    "survived_win": "Omuzannyi {player_id} yawonawo; abalala bonna baafa.",
+    "all_dead_simul": "Emisota gyonna gyafa omulundi gumu.",
+    "outlived": "Mchezaji aliishi muda mrefu kuliko wengine wote.",
+    "all_dead": "Emisota gyonna gifudde.",
+    "turn_limit": "Ekigero ky'ekikopo kituuse - ekifo ekisingayo obulungi kiwangula tie-break.",
+    "ranking": "{reason} Mpaka z'akafubo (zzaasi→zzibuukira): {groups}"
+  }
+}

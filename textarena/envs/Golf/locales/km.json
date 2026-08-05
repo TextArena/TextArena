@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "អ្នកកំពុងលេង Golf (កាត Game) - Player {player_id}. គោលដៅ: ទទួលបានលទ្ធផលសរុបទាបបំផុតនៅក្នុងមួយជុំនេះ. ប្រសិនបើជួរមានតម្លៃដូចគ្នា, ពួកគេត្រូវបានសរុបជា 0. តម្លៃកាត: A = 1, 2-10 = face value, J / Q = 10, K = 0 សកម្មភាព (ប្រើក្របខ័ណ្ឌត្រឹមត្រូវ): - \"[draw]\" - Draw from deck - \"[take]\" - Take from discard pile - \"[swap X Y]\" - Swap drawn card with position X (row) Y (column) - \"[discard]\" - Discard the drawn card "
+  },
+  "board": {
+    "drew": "អ្នកបានគូរ: {card} ឥឡូវអ្នកត្រូវ [swap X Y] ឬ [discard] វា។",
+    "took": "អ្នកបានយក: {card} ពីការបោះចោលគំនរអ្នកត្រូវតែ [swap X Y] ជាមួយវា (មិនអាចបោះចោល) ។",
+    "peeked": "អ្នកបានមើលមើលនៅកន្លែង ({row},{col}): {card}",
+    "turn_view": "ដៃរបស់អ្នក: {hand} បោះចោល: {discard} {options}",
+    "none": "គ្មាន"
+  },
+  "options": {
+    "final_turns": "ជម្រើសរបស់អ្នក: [draw], [take], [peek X Y]",
+    "draw": "ជម្រើសរបស់អ្នក: [draw], [take]",
+    "must_swap": "អ្នកត្រូវ: [swap X Y] (មិនអាចបោះបង់កាតពីគំនរបោះបង់ចោល)",
+    "swap_or_discard": "អ្នកត្រូវ: [swap X Y] ឬ [discard]"
+  },
+  "hand": {
+    "no_cards": "គ្មានកាត",
+    "header": "  Col:   1    2    3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "កីឡាករ {pid} បានដូរ {new} ជាមួយ {old} នៅតំណែង ({row},{col})",
+    "discarded": "កីឡាករ {pid} បោះចោល {card}"
+  },
+  "message": {
+    "deck_empty": "ដើមកាតទទេ! ល្បែងបញ្ចប់ភ្លាមៗ។",
+    "knocked": "កីឡាករ {pid} បាក់! កីឡាករម្នាក់ទៀតទទួលបានមួយជំហានទៀត។",
+    "final_round": "កីឡាករ {pid} {reason}! កីឡាករម្នាក់ទៀតទទួលបានមួយជំហានទៀត។"
+  },
+  "reason": {
+    "all_revealed": "តើ កាត ទាំងអស់ ត្រូវបាន បង្ហាញ"
+  },
+  "invalid": {
+    "wrong_action": "ប្រើប្រាស់សកម្មភាពដែលស្ថិតនៅក្នុងក្របខ័ណ្ឌតែមួយ: [draw], [take], [swap X Y], [discard], [knock], ឬ [peek X Y]",
+    "discard_empty": "កញ្ចប់ដកចេញគ្មានអ្វី!",
+    "must_draw_first": "អ្នកត្រូវមុនដំបូង [draw], [take], [knock], ឬ [peek X Y]",
+    "cannot_discard_taken": "អ្នកមិនអាចបោះបង់កាតដែលយកចេញពីកញ្ចប់បោះបង់ចោលទេ អ្នកត្រូវតែប្ដូរវា។",
+    "have_drawn_card": "អ្នកមានកាតដេញមួយ អ្នកត្រូវតែ [swap X Y] ឬ [discard] វា។",
+    "need_drawn_swap": "អ្នកត្រូវការកាតដែលបានដកចេញ ដើម្បីប្ដូរ។",
+    "need_drawn_discard": "អ្នកត្រូវការកាតដែលចាក់ចេញ ដើម្បីបោះចោល។",
+    "out_of_bounds": "តំណែងក្រៅព្រំដែន ប្រើជួរ 1-{max_row}, ស្លាក 1-{max_col}",
+    "knock_with_card": "អ្នកមិនអាចទាត់ដោយកាតដេញបាន អ្នកត្រូវបញ្ចប់ការផ្លាស់ប្តូររបស់អ្នកមុន",
+    "already_knocked": "មានអ្នកខ្លះបានវាយវគ្គនេះរួចហើយ",
+    "already_revealed": "កាតនោះត្រូវបានបង្ហាញរួចហើយ!"
+  },
+  "summary": {
+    "full": "Game Over! Player {winner} ឈ្នះដោយមានលទ្ធផល {score} ពិន្ទុ! លទ្ធផលចុងក្រោយ: {scores}",
+    "line": "កីឡាករ {pid}: {score} ពិន្ទុ "
+  },
+  "board_str": {
+    "title": "=== កីឡា ហ្គោល ===",
+    "discard": "កញ្ចប់បោះចោល: {card}",
+    "knocked": "អ្នកលេង {pid} បានធ្វើការវាយ!",
+    "player_header": "កីឡាករ {pid} (ពិន្ទុ: {score}):"
+  }
+}

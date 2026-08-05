@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Briscola ကစားပွဲစတင်! ထရမ့်အဝတ်အစား: {trump_suit} (ထရမ့်ကဒ်: {trump_card})"
+  },
+  "prompt": {
+    "intro": "သင် Briscola ကစားနေပါသည် - Player {player_id}.\nရည်မှန်းချက်: လက်များ အနိုင်ရရှိပြီး အများဆုံး ပွိုင့်များ (လက်ခံလုပ်ငန်းတွင် စုစုပေါင်း 120 ပွိုင့်) စုဆောင်းပါ။\nကတ်ကား ပွိုင့်များ: A=11, 3=10, K=4, Q=3, J=2, အခြားများ=0\nကတ်ကား အာဏာ: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTrump ကတ်ကားများ အာဏာ မရှိသော ကတ်ကားများ ကို အနိုင်ယူနိုင်သည်။\n\nလုပ်ဆောင်ချက်: '[play X]' အမိန့် တစ်ခု ဖြစ်ပြီး X သည် သင့် လက်ထဲမှ ကတ်ကား၏ နေရာ (1-{max_pos}) ဖြစ်သည်"
+  },
+  "hand": {
+    "none": "ကဒ်မရှိဘူး",
+    "empty": "လက်ထဲမှာ ကဒ်တွေ မရှိဘူး။",
+    "header": "မင်းရဲ့လက်။",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(ထရမ့်)"
+  },
+  "trick": {
+    "empty": "ဒီကစားနည်းကို ဘယ်ကစားသမားမှ မကစားရသေးဘူး။",
+    "header": "လက်ရှိ လှည့်ကွက်က",
+    "line": "ကစားသမား {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "ကစားသမား {player_id}: {points} pts",
+    "trump_info": "ထရမ့်အဝတ်အစား: {trump_suit}",
+    "trump_info_deck": "ထရမ့်အထည်: {trump_suit}  ကဒ်ပြားတွေ ကျန်နေတာက {deck_count}",
+    "board": "{hand} {trick} အမှတ်များ: {scores} {trump_info} [play X] ကိုသုံး၍ ကတ်တစ်ကဒ်ကို ကစားပါ။"
+  },
+  "invalid_move": {
+    "wrong_format": "X သည် ကတ်၏ နေရာ (1, 2, 3, စသည်) ဖြစ်သော [play X] ကို အသုံးပြုပါ။",
+    "out_of_range": "မမှန်သော ကဒ်အနေအထား။ သင့်မှာ {count} ကဒ် (1-{count}) ရှိတယ်။"
+  },
+  "action": {
+    "played": "ကစားသမား {player_id} ကစားခဲ့သည် {card}",
+    "trick_win": "Player {winner} အနိုင်ရသည် {card} နှင့် {points} ပွိုင့်များ ရရှိခဲ့သည်!"
+  },
+  "outcome": {
+    "head": "ဂိမ်းအဆုံး! ကစားသမား {winner} {points} မှတ်နှင့်အတူနိုင်သည်! နောက်ဆုံးရမှတ်များ: {scores}",
+    "player_line": "ကစားသမား {player_id}: {points} အမှတ် ({tricks} လှည့်ကွက်) "
+  }
+}

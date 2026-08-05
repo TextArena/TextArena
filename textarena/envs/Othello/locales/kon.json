@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Kisadilu ya Bansaka: {board}",
+    "valid_moves": "{observation}\nMikolo Ikeleka: {moves}",
+    "no_valid_moves_reset": "{observation} Nge lenda sala ve ata kitambi mosi ya mbote, yo yina nge fwete losa.",
+    "no_valid_moves_step": "{observation} Ata muntu mosi ve lenda sala mambu yina nge ke zola kusala. Nge ta vanda na mfunu ya kutina-tina yo.",
+    "scores_reset": "{observation}\nMakwela Manimani - Eku: {black_count}, Mputu: {white_count}\n",
+    "scores_step": "{observation}\nMakwela - Eku: {black_count}, Mputu: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Kisalu ya kuvutula fwete vanda na mutindu [row, col].",
+    "illegal": "Kubaluka ya mbi.Kubalula yina kele mbote: {valid}"
+  },
+  "game_action": {
+    "skipped": "Muntu ya kebula {pid} fwete sala ve nsaka na yandi.",
+    "played": "Mwana nkenda {pid} ({piece}) akenda [{r}, {c}] akakatwa {flipped} mamboko"
+  },
+  "game_message": {
+    "must_skip": "Mwana nkenda {pid} ({piece}) hana mwendo unaoruhusiwa na unabidi kuleka."
+  },
+  "outcome": {
+    "black_wins": "Bantu ndombe ke nungaka {black_count}-{white_count}.",
+    "white_wins": "Mindele me nunga {white_count}-{black_count}.",
+    "draw": "Baka {black_count}-{white_count}."
+  }
+}

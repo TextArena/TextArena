@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Mo ye Player {player_id} na Stratego.\nKôli ya mo ye kôbara bendera ya adversaire ou eliminer pièces zô zô zangui.\nArmée ya mo ye mîsi na board, y compris bendera, bombes, na pièces zô zô zangui.\n\n### Instruction ya Gameplay\n1. **Règles ya Déplacement:**\n   - Na tour ya mo, mo pô déplacer pièce mo yôkô na carré adjacent (haut, bas, gauche ou droite) qui est déjà occupé avec pièces ya mo.\n   - Exemple: pièce pô déplacer de A1 à B1 ou A1 à A2 si B1 et A2 ne sont pas placés avec pièces ya mo.\n   - Si pièce sélectionnée est une bombe ou une bendera, elle ne peut pas être déplacée.\n2. **Batailles:**\n   - Si mo déplacer sur carré occupé par pièce ya adversaire, alors bataille va se produire:\n     - Pièce avec rang supérieur gagne et élimine pièce ya adversaire.\n     - Si rangs sont égaux, les deux pièces sont supprimées du board.\n     - **Cas Spéciaux:**\n       - Bombes éliminent la plupart des pièces attaquantes sauf les mineurs, qui désamorcent les bombes.\n       - Espions peuvent vaincre le maréchal si l'espion attaque en premier mais perdent contre toutes les autres pièces.\n3. **Objectifs Stratégiques:**\n   - Identifier pièces ya adversaire à travers leurs mouvements et batailles.\n   - Protéger bendera ya mo tout en essayant de capturer bendera ya adversaire.\n   - Utiliser les éclaireurs de manière stratégique pour obtenir des informations sur pièces ya adversaire et attaquer les pièces faibles.\n\n### Comment Faire un Déplacement:\n1. Spécifier les coordonnées de la pièce que mo veut déplacer et sa destination.\n2. Utiliser le format: [A0 B0], où A0 est la position source, et B0 est la destination.\n   - Exemple: Pour déplacer une pièce de la ligne 0, colonne 0 à la ligne 1, colonne 0, saisir [A0 B0].\n3. Assurer que la destination est valide selon les règles de déplacement ci-dessus.\n\n### Notes Importantes:\n- Le board affichera pièces ya mo et leurs positions, par exemple MN, MS.\n- Le board affichera également les positions connues des pièces ya adversaire sans révéler leurs rangs, par exemple ?.\n- Les grilles avec ~ sont des lacs et ne peuvent pas être déplacées.\n- Comme suggestion, commencer le jeu en déplaçant les pièces qui sont sur les lignes de front pour obtenir des informations sur pièces ya adversaire. Les lignes de front de Player 0 et Player 1 sont respectivement D et G.\n\nVoici l'état actuel du board:\n"
+  },
+  "board": {
+    "current_board": "Board Actuel:\n\n{board}\nDéplacements Disponibles: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format d'action invalide. Player {player_id} n'a pas saisi un déplacement dans le format [A0 B0].",
+    "invalid_coordinates": "A yeke na lege ni pëpe. Zo ti pikango ye {player_id} azia yâ ti aye so ayeke nzoni ape.",
+    "not_own_piece": "A lingbi zo ti pikango ye {player_id} azia mbeni oko na popo ti a-pièce ti lo.",
+    "scout_through_pieces": "A lingbi ti zia mbeni ye na yâ ni pëpe. Zo so ayeke sala ngia {player_id} alingbi pepe ti yôro lê ti lo na popo ti ambeni kugbe-mbeti nde.",
+    "scout_diagonal": "Format d'action invalide. Player {player_id} ne peut pas déplacer un éclaireur en diagonale.",
+    "non_scout_multi_square": "A lingbi ti zia mbeni ye na place ni pëpe. Atënë so ayeke nde alingbi gi ti gue oko, me a yeke nzoni zo kue ague gï na ndo oko.",
+    "move_into_lake": "A yeke na lege ni pëpe ti sara ye so a hunda. Zo ti pikango gere {player_id} alingbi ti gue na yâ ti lac ape.",
+    "move_onto_own_piece": "A lingbi ti zia mbeni ye na place ni pëpe. Zo so ayeke sala ngia {player_id} alingbi ti gue na ndo ti lê ti gere ti lo wani ape.",
+    "move_bomb_or_flag": "A yeke na lege ni pëpe ti sara ye so. Zo ti pikango lê ti ngombe {player_id} alingbi pëpe ti yô bombe wala drapeau."
+  },
+  "game_action": {
+    "you_moved": "Ü aî ködörö ngö nden mön mön mön mön {source} na mön mön mön mön {dest}.",
+    "opponent_moved": "Mgbè {player_id} aî ködörö ngö nden mön mön mön mön {source} na mön mön mön mön {dest}.",
+    "you_equal_ranks": "Mo a déplacé pièce de {source} à {dest}. La pièce attaquante était {attacking_rank} et la pièce de destination était {target_rank}. Comme les rangs sont les mêmes, les deux pièces ont perdu.",
+    "opponent_equal_ranks": "Player {player_id} a déplacé une pièce de {source} à {dest}. La pièce attaquante était {attacking_rank} et la pièce de destination était {target_rank}. Comme les rangs sont les mêmes, les deux pièces ont perdu.",
+    "you_miner_defused": "Mo a déplacé pièce de {source} à {dest}. La pièce attaquante était {attacking_rank} et la pièce de destination était {target_rank}. Comme les mineurs peuvent désamorcer les bombes, mo a gagné la bataille.",
+    "opponent_miner_defused": "Mgbè {player_id} aî ködörö ngö nden mön mön mön mön {source} na mön mön mön mön {dest}. Ködörö ngö aî nden mön mön mön mön {attacking_rank} na ködörö ngö mön mön mön mön {target_rank}. Ködörö ngö aî nden mön mön mön mön, mbênî ngâ na ngâ ya.",
+    "you_bomb_lost": "Mo a déplacé pièce de {source} à {dest}. La pièce attaquante était {attacking_rank} et la pièce de destination était {target_rank}. Comme l'attaquant n'est pas un mineur, mo a perdu la bataille.",
+    "opponent_bomb_won": "Mgbè {player_id} aî ködörö ngö nden mön mön mön mön {source} na mön mön mön mön {dest}. Ködörö ngö aî nden mön mön mön mön {attacking_rank} na ködörö ngö mön mön mön mön {target_rank}. Ködörö ngö aî nden mön mön mön mön, ü na ngâ ya.",
+    "you_spy_won": "Mo a déplacé pièce de {source} à {dest}. La pièce attaquante était {attacking_rank} et la pièce de destination était {target_rank}. Comme l'attaquant est un espion et la destination est un maréchal, mo a gagné la bataille.",
+    "opponent_spy_lost": "Mgbè {player_id} aî ködörö ngö nden mön mön mön mön {source} na mön mön mön mön {dest}. Ködörö ngö aî nden mön mön mön mön {attacking_rank} na ködörö ngö mön mön mön mön {target_rank}. Ködörö ngö aî nden mön mön mön mön, mbênî ngâ na ngâ ya.",
+    "you_higher_won": "Mo a déplacé pièce de {source} à {dest}. La pièce attaquante était {attacking_rank} et la pièce de destination était {target_rank}. Comme l'attaquant est d'un rang supérieur à la destination, mo a gagné la bataille.",
+    "opponent_higher_lost": "Mgbè {player_id} aî ködörö ngö nden mön mön mön mön {source} na mön mön mön mön {dest}. Ködörö ngö aî nden mön mön mön mön {attacking_rank} na ködörö ngö mön mön mön mön {target_rank}. Ködörö ngö aî nden mön mön mön mön, ü na ngâ ya ködörö.",
+    "you_lower_lost": "Mo a déplacé pièce de {source} à {dest}. La pièce attaquante était {attacking_rank} et la pièce de destination était {target_rank}. Comme l'attaquant est d'un rang inférieur à la destination, mo a perdu la bataille.",
+    "opponent_lower_won": "Player {player_id} a déplacé une pièce de {source} à {dest}. La pièce attaquante était {attacking_rank} et la pièce de destination était {target_rank}. Comme l'attaquant est d'un rang inférieur à la destination, mo a gagné la bataille."
+  },
+  "outcome": {
+    "flag_captured": "Zo ti pikango ndeke {player_id} agbu drapeau ti wato ni!",
+    "no_movable_pieces": "Mgbè {winner_id} aî ngâ! Mgbè {loser_id} aî ködörö ngö nden mön mön mön mön."
+  }
+}

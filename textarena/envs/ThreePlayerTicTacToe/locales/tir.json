@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "ንስኻ ተጻዋት {player_id} ኣብ ትሪ-ፕሌየር ቲክ ታክ ቶ ኢኻ.\nምስልኻ '{symbol}' ኢኻ.\nንስኻ ኣብ ቦርድ 5x5 ምስልኻ ኣብ ርእሰ ኣንዳ ምሕላው ከሎ ኣብ ላይን ኣብ ኮነ ኣብ ረብዕ ምስልኻ ኣብ ርእሰ ኣንዳ ምሕላው.\nንቡራትኻ ኣብ ፋርማት '[4]' ንስልኪ 4 ኣብ ማርክ ይጠቕም."
+  },
+  "board": {
+    "current_board": "ቦርድ ኣብ ሂደት:\n\n{board}\n\nንቡራት ምሕላው: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "ንቡራት ኣብ ኮነ ፋርማት. '[cell]' ኣብ ስልኪ ከሎ 0-{max_cell} ይጠቕም.",
+    "out_of_range": "ቁጽሪ ስልኪ ኣብ ዙሪያ: {cell}. መስሓብ ከሎ መጻእ 0 ከሎ {max_cell}.",
+    "already_occupied": "ዋህዮ {cell} ድሮ ተጨውዩ ኣሎ።",
+    "made_invalid": "ተጻዋታይ {player_id} ዘይቅኑዕ ስጉምቲ ወሲዱ እዩ ።"
+  },
+  "game_action": {
+    "placed": "ተጻዋት {player_id} ምስልኡ ({symbol}) ኣብ መደብ ({row}, {col}) ወስደ."
+  },
+  "outcome": {
+    "win": "ተጻዋት {player_id} ({symbol}) ይርከብ!",
+    "draw": "እቲ ጸወታ ማዕረ እዩ!"
+  }
+}

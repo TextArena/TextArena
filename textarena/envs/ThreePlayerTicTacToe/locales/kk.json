@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Сіз Player {player_id} Three-Player Tic Tac Toe ойынында.\nСіздің нышаныңыз '{symbol}'.\nСіз өз нышаныңызды 5x5 тақтайға орnatып, төрт нышанды қатар құрасыз.\nЖолдары горизонталь, вертикаль немесе диагональ болуы мүмкін.\nӨз қимылыңызды '[4]' форматын пайдалана отырып, 4 нөмірлі жасушаны белгілеу үшін жіберiңіз."
+  },
+  "board": {
+    "current_board": "Қазіргі тақта: {board} Қол жетімді қимылдар: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Қозғалыс пішімі жарамсыз. Ұяшықтың 0-{max_cell} болғанда \"[cell]\" дегенді пайдаланыңыз.",
+    "out_of_range": "Жарамсыз ұяшық нөмірі: {cell}. 0 мен {max_cell} аралығында болуы тиіс.",
+    "already_occupied": "{cell} жасушасы бос емес.",
+    "made_invalid": "Ойыншы {player_id} жарамсыз ойын жасады"
+  },
+  "game_action": {
+    "placed": "Ойыншы {player_id} өзінің символын ({symbol}) алаңға ({row}, {col}) қояды."
+  },
+  "outcome": {
+    "win": "Ойыншы {player_id} ({symbol}) жеңіске жетеді!",
+    "draw": "Ойын тең!"
+  }
+}

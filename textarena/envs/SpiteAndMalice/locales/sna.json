@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Iwe ndi Player {player_id} mu game ya Spite and Malice ya vanhu vaviri. Chinangwa chako ndicho chekutanga kupera pile yako ya payoff.\n\n### Mhando ye Game:\n- Chinangwa ndicho chekupera pile yako ya payoff kwa kucheza kadi kwenye mapile ari pakati.\n- Ungacheza kadi kubva kwa zvikomo zvitatu:\n  1. **Mawoko ako** (unotanga kila zamu na kadi zisina kupfuura 5 mawoko).\n  2. **Kadi ya juu ya pile yako ya payoff**.\n  3. **Kadi ya juu ya yoyi kati ya mapile ako aya discard**.\n\n### Mitemo ye Kucheza:\n- Ungacheza kadi kwenye pile ya pakati kana **rakamu rimwe chete** ya juu ya kadi iri pile iyoyo (mapile ari pakati anotanga na Ace na kuenda juu kuenda Queen; Mambo aya wild - avanogona kucheza pa kadi yoyi asi vachinje mfuatano wa rakamu. Izvi zvinoreva kana Mambokadzi akashandiswa pamberi pe 4, basa Mambokadzi uyu ane rakamu 5 na kadi inotevera inofanira kuva 6).\n- Kana usingagone kucheza kadi zaidi, unofanira **kudiscard kadi** kwenye yoyi kati ya mapile ako aya discard kuti zamu yako ipere.\n- Kana pile ya pakati ikasvika Queen, ichapera yenyewe.\n- Mfuatano wa rakamu ndiye: A=1, 2=2, ..., 9=9, J=10, Q=11, Mambokadzi ari wild.\n\n### Miitirio:\n1. **Kutamba**: Pa kutanga kwa zamu yako, tamba kadi kuti mawoko ako azare kadi zisina kupfuura 5. Shandisa **[draw]** kuti tangise.\n2. **Kucheza Kadi**: Kucheza kadi, zvidza kadi na pile ya pakati kunge: **[play A♠ 0]** (kadi 'A♠' na '0' ndiyo index ya pile ya pakati).\n3. **Kudiscard**: Kana usingagone kucheza kadi zaidi, discard kadi kubva mawoko ako kwenye pile ya discard kuti zamu yako ipere. Shandisa **[discard A♠ 1]** (kadi 'A♠' na '1' ndiyo index ya pile ya discard). Tambai kadi yoyi kubva pile ya payoff haitambirwi. Ungadiscard kadi kubva mawoko ako chete.\n\n"
+  },
+  "board": {
+    "current_board": "Bhoja Rakuverenga:\n\n{board}\nMikano Yenyu: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Mapaili epakati --- ",
+    "pile": "{observation}Wanda {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Mwonekano wa Mwana {player_id} ---\n",
+    "payoff": "{observation}Wanda wa Payoff (Kadi ya Juu): {top_card}, Urefu wa Wanda wa Payoff: {payoff_length}\n",
+    "hand": "{observation}Mikono: {hand}\n",
+    "discard": "{observation}Mawanda ya Kubvisa: {discard}\n",
+    "empty": "Chisina chinhu"
+  },
+  "game_message": {
+    "no_cards_left": "Hapanazve makadhi okudhirowa kubva. Yeuka kuti unogona kutamba makadhi anobva kunzvimbo idzi: 1. Ruoko rwako 2. Kadhi repamusoro pemurwi wako wekubhadhara 3. Kadhi rapamusoro remumwe wemirwi yako yekurasikirwa ** . "
+  },
+  "invalid_move": {
+    "wrong_format": "Mfumo usina kunzwika wa miitirio. Player {player_id} haana kuitira miitirio inobvumirwa mukati me mabako.",
+    "invalid_play": "Mutambo usina kukwana. Mutambo {player_id} akarasa kucheza {card} pamusoro pe{index}.",
+    "discard_from_payoff": "Kurasa kusina kukodzera. Mutambi {player_id} akaedza kurasa kadhi kubva mumurwi wemari yekubhadhara.",
+    "discard_not_in_hand": "Kurasa kusina kukodzera. Mutambi {player_id} akaedza kurasa kadhi risiri muruoko rwake.",
+    "wrong_move_type": "Mutambi {player_id} haana kupindura nemhando yechiito chakakodzera."
+  },
+  "game_action": {
+    "you_drew": "Wakadhirowa makadhi.",
+    "opponent_drew": "Mutambi {player_id} akadhirowa makadhi.",
+    "you_played": "Wakatamba {card} pachikamu chepakati {index}.",
+    "opponent_played": "Mwana {player_id} akashanda {card} kwenye wanda wa katikati {index}.",
+    "you_discarded": "Wakapandura {card} kuimbwa yepamutemo {index}, zvinoreva kuti wamapera zvitambo zvako. Hakuna zvitendo zvikuru zvako zvinotarisirwa kwa zvitambo izvi. Mutambo {next_player_id} ndiye anotevera.",
+    "opponent_discarded": "Player {player_id} akadiscard {card} kwenye pile ya discard {index}, zvinoreva kuti wamapera zamu yake. Hakuna zvimwe zvaPlayer {player_id} zvinotariswa kwa zamu iyi. Player {next_player_id}, iwe nako kuita miitirio kunge: [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mwana {current_player} amemaliza wanda wake wa payoff! Mwana {current_player} anashinda!",
+    "deadlock_player_0": "Kudhakana kwakawanda! Mwana 0 anashinda na {player_0_payoff} kadi zisizoimalizika dhidi ya Mwana 1 {player_1_payoff} kadi.",
+    "deadlock_player_1": "Deadlock yasvika! Mutambi 1 anokunda nemakadhi {player_1_payoff} asara vs Makadhi eMutambi 0's {player_0_payoff}.",
+    "deadlock_tie": "Kudhakana kwakawanda na tie! Waviri wanawana {player_0_payoff} kadi zisizoimalizika. Mwana {current_player} anashinda kwa kuridhika."
+  }
+}

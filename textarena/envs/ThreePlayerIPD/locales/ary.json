@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "أنت لاعب {player_id} في لعبة سجنير دايلما متكررة للاعبين 3. تستمر المباراة {num_rounds} جولات.\nهيكل الجولة:\n• {conv_rounds} دورات دردشة مجانية\n• دور قرار واحد - قدم رمزًا واحدًا لكل خصم: '[<opp-id> cooperate]' أو '[<opp-id> defect]' (أي '[1 defect] [2 cooperate]'؛ الإعداد الافتراضي هو 'التعاون'). \nматрикс مكافأة زوجي (تطبق على كل زوج غير منظم):\n  - كلاهما يتعاون  ->  {reward}\n  - كلاهما يخون     ->  {punishment}\n  - أنت تخون، 而هم يتعاونون -> {temptation}\n  - أنت تتعاون، 而هم يخونون -> {sucker}\nاللاعب (اللاعبون) الذين لديهم أعلى درجة في نهاية جميع الجولات يفوزون."
+  },
+  "round": {
+    "start": "─── بدء الجولة {round} ───\tيمكنك التحدث بحرية للجولات {conv_rounds} القادمة.",
+    "chat_finished": "سلاّمت ليهدرة د هاد الجولة {round}. قدم قراراتك، توكين واحد لكل خصم: `[pid cooperate]` أولّا `[pid defect]`."
+  },
+  "results": {
+    "header": "### الجولة {round} - النتائج:",
+    "pair_line": "{observation}\n\t اللاعب {i} ضد اللاعب {j} اختار {choice_i} و {choice_j} على التوالي (اللاعب {i} حصل على {gain_i}، اللاعب {j} حصل على {gain_j})",
+    "scores_open": "{observation} -> النتائج الحالية: ",
+    "score_first": "{observation}اللاعب {player_id} ({score})",
+    "score_next": "{observation}; اللاعب {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "النقاط النهائية: {scores}.  تصنيف المجموعات (أسوأ → أفضل): {groups}"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Dir sidd Spiller {player_id} an engem Spill vu LinesOfAction.\nÄr Steng sinn '{side}', Géigner-Steng sinn '{other}'.\nZuch-Format: `[b1b3]` (vu-Koordinat op-Koordinat). E legale Zuch geet horizontal, vertikal oder diagonal eng Zuel vu Quadraten, déi der Zuel vu Steng (jee no Faarf) an där Linn entsprécht. Dir kënnt iwwer Är eegen Steng sprangen, awer net iwwer Géigner-Steng; wann Dir op en Géigner landt, da gëtt en gefaangen.  Gewonnen, wann all Är Steng 8-Noper-verbonden sinn."
+  },
+  "board": {
+    "current_board": "Board: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format muss e2e4 sinn (vun,bis Koordinaten).",
+    "no_piece": "Keng {side} Stéck op {coord}.",
+    "identical": "D'Quell an d'Zil sinn identesch.",
+    "not_straight_or_diagonal": "D'Bewegung muss direkt oder diagonal sinn.",
+    "wrong_distance": "Muss d'Distanz gläich bewegen wéi Stécker an der Linn.",
+    "enemy_blocks": "D'Feind-Piece blockéiert de Wee.",
+    "destination_own": "Destinatioun vun eegene Stécker besat."
+  },
+  "game_action": {
+    "moved": "Spiller {player_id} huet {from} -> {to} beweegt",
+    "captured_suffix": "Spiller {player_id} huet {from} -> {to} beweegt an huet e feindleche Stéck gefaangen."
+  },
+  "outcome": {
+    "win": "All d'Stécker sinn zesummegeschloss.",
+    "draw_no_capture": "60 Bewegungen ouni Capture.",
+    "draw_repetition": "D'Positioun dräimol widderholl."
+  }
+}

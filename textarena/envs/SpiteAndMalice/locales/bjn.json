@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Kamu adalah Pemain {player_id} dalam permainan Spite dan Malice dua pemain. Tujuanmu adalah menjadi yang pertama mengosongkan tumpukan pembayaranmu.\n\n### Ikhtisar Permainan:\n- Tujuan adalah membersihkan tumpukan pembayaranmu dengan memainkan kartu ke tumpukan tengah.\n- Kamu dapat memainkan kartu dari tiga sumber:\n  1. **Tanganmu** (kamu mulai setiap giliran dengan kartu di tangan hingga 5 kartu).\n  2. **Kartu atas tumpukan pembayaranmu**.\n  3. **Kartu atas tumpukan kartu buanganmu**.\n\n### Aturan Permainan:\n- Kamu dapat memainkan kartu ke tumpukan tengah jika kartu itu **satu peringkat lebih tinggi** dari kartu atas di tumpukan itu (tumpukan tengah dimulai dengan As dan naik hingga Ratu; Raja adalah liar - dapat dimainkan di atas kartu mana pun tetapi tidak mengubah urutan peringkat. Ini berarti jika Raja digunakan setelah 4, maka Raja itu peringkat 5 dan kartu berikutnya harus 6).\n- Jika kamu tidak dapat memainkan kartu lagi, kamu harus **membuang kartu** ke salah satu tumpukan kartu buanganmu untuk mengakhiri giliranmu.\n- Jika tumpukan tengah mencapai Ratu, maka akan dibersihkan secara otomatis.\n- Urutan peringkat adalah: A=1, 2=2, ..., 9=9, J=10, Q=11, K sebagai liar.\n\n### Aksi:\n1. **Menggambar**: Di awal giliranmu, menggambar kartu untuk mengisi tanganmu hingga 5 kartu. Masukkan **[draw]** untuk memulai.\n2. **Memainkan Kartu**: Untuk memainkan kartu, tentukan kartu dan tumpukan tengah seperti ini: **[play A♠ 0]** (di mana 'A♠' adalah kartu dan '0' adalah indeks tumpukan tengah).\n3. **Membuang**: Jika kamu tidak dapat memainkan kartu lagi, membuang kartu dari tanganmu ke tumpukan kartu buangan untuk mengakhiri giliranmu. Masukkan **[discard A♠ 1]** (di mana 'A♠' adalah kartu dan '1' adalah indeks tumpukan kartu buangan). Perhatikan bahwa kamu tidak dapat membuang kartu apa pun dari tumpukan pembayaran. Kamu hanya dapat membuang kartu dari tanganmu.\n\n"
+  },
+  "board": {
+    "current_board": "Papan Saarang:\n\n{board}\nGérakkan Tersadia: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pile nang tangah -- ",
+    "pile": "{observation}Tumpukan {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Tampilan Pemain {player_id} ---\n",
+    "payoff": "{observation}Tumpukan Pembayaran (Kartu Teratas): {top_card}, Panjang Tumpukan Pembayaran: {payoff_length}\n",
+    "hand": "{observation}Tangan: {hand}  wan",
+    "discard": "{observation}Tumpukan Ngabalas: {discard}\n",
+    "empty": "Kadada isinya."
+  },
+  "game_message": {
+    "no_cards_left": "Kadada lagi kartu nang kawa di ambil. ingat bahwa Pian bisa ma'umpati kartu dari sumber-sumber ini: 1. tangan Anda 2. kartu atas tumpukan hadiah anda 3. kartu atas salah satu tumpukan pembuangan anda "
+  },
+  "invalid_move": {
+    "wrong_format": "Format pamindahan kada sah. Pamain {player_id} indak manjawap jo suatu langkah nan valid dalam kurung kotak.",
+    "invalid_play": "Maen nang kada sah. Pemain {player_id} mancuba maemainkan {card} di tumpukan tangah {index}.",
+    "discard_from_payoff": "Panghilang kada sah. Pamain {player_id} mancuba manghilangakan kartu matan tumpukan pambayaran.",
+    "discard_not_in_hand": "Buang kada sah. Pamain {player_id} mancuba mangaluarakan kartu nang kadada di tangan.",
+    "wrong_move_type": "Tipe langkah kada sah. Pamain {player_id} kada manjawab lawan tipe gerakan nang valid."
+  },
+  "game_action": {
+    "you_drew": "Kau menggambar kartu.",
+    "opponent_drew": "Pamain {player_id} manggambar kartu.",
+    "you_played": "Kamu maemainkan {card} di tumpukan tangah {index}.",
+    "opponent_played": "Pemain {player_id} maemainkan {card} di tumpukan tangah {index}.",
+    "you_discarded": "Kamu sudah ngabalas {card} ka tumpukan ngabalas {index}, nang artinya kamu sudah salasai giliran kamu. Tindakan salanjutnya kamu kada dianggap gasan giliran ini. Pemain {next_player_id} akan main salanjutnya.",
+    "opponent_discarded": "Pemain {player_id} ngabalas {card} ka tumpukan ngabalas {index}, nang artinya mereka sudah salasai giliran mereka. Tindakan salanjutnya Pemain {player_id} kada dianggap gasan giliran ini. Pemain {next_player_id}, kamu akan main salanjutnya. Silakan masukkan aksi kamu dalam format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Pemain {current_player} sudah menghabiskan tumpukan pembayaran mereka! Pemain {current_player} menang!",
+    "deadlock_player_0": "Keseimbangan tercapai! Pemain 0 menang dengan {player_0_payoff} kartu tersisa lawan Pemain 1 yang memiliki {player_1_payoff} kartu.",
+    "deadlock_player_1": "Keseimbangan tercapai! Pemain 1 menang dengan {player_1_payoff} kartu tersisa lawan Pemain 0 yang memiliki {player_0_payoff} kartu.",
+    "deadlock_tie": "Keseimbangan tercapai dengan seri! Kedua pemain memiliki {player_0_payoff} kartu tersisa. Pemain {current_player} menang secara default."
+  }
+}

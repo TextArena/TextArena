@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Tas xugando {color} nun xuegu de Breakthrough. Mueves {direction} nun tableru de {board_size}x{board_size}.\nNa to vez puedes mover una pieza un pasu palantre o diagonalmente palantre.\nUna pieza namái puede mover diagonalmente si hai una pieza del oponente ellí, y namái puede mover a esi cuadráu ocupáu nun pasu diagonal.\nAl entrar nun cuadráu con una pieza del oponente, captúrala y la pieza del oponente ye eliminada permanentemente del tableru.\nUsa notación UCI nel corchu, p. ex. [a2a3] pa mover dende a2 hasta a3.\n* 'a' correspuende cola columna más a la izquierda, '1' ye la fila inferior (dende la perspeutiva de les blanques).\n* La fila de casa de les negres ye la fila cimera (fila 8 pa un 8x8). La fila de casa de les blanques ye la fila inferior (fila 1 pa un 8x8).\nEl primer xugador que la so pieza algama la fila de casa del oponente gana. Si les tos pieces son prindaes, pierdes."
+  },
+  "invalid_move": {
+    "wrong_format": "Por favor, usa la notación alxébrica ente paréntesis como [a2a3].",
+    "out_of_bounds": "El movimientu ta fora de los llendes del tableru.",
+    "illegal": "El movimientu nun sigue les regles de Breakthrough o non ye la to pieza."
+  },
+  "game_action": {
+    "moved": "Xugador {player_id} mueve {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "El blancu algamó la fila de casa del negru.",
+    "black_reached": "El negru algamó la fila de casa del blancu.",
+    "white_captured": "Toles pieces blanques captáu.",
+    "black_captured": "Tolos pieces negros capturaes.",
+    "no_moves": "El xugador {player_id} nun tien más movimientos."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "ඔබ ක් රීඩකයා {player_id}, පුනරාවර්තන අවසාන ක් රීඩාවේ {num_rounds} වටයක් ක් රීඩා කරයි. ඔබට මෙම වටය ඔබ සහ ක් රීඩකයා {other_id} අතර බෙදීමට ${pool} ඇත. යෝජකයා: - දීමනාවක් කරන්න: [Offer: $X] (0 <= X <= තටාකය) - පිළිගනු ලැබුවහොත් → ඔබට $ ((තටාකය - X), අනෙක් ක් රීඩකයාට $ X ලැබේ - ප් රතික්ෂේප කළහොත් → දෙදෙනාටම $ 0 ලැබේ - උදාහරණය: [Offer: $3] හෝ 'මම හිතන්නේ මෙය සාධාරණයි. [Offer: $5]' ප් රතිචාරකයා: - යෝජනාව ගැන තීරණය කරන්න [Accept] හෝ [Reject] - උදාහරණය: 'එය සාධාරණයි. [Accept]' 'ඉතා අසාධාරණයි. [Reject]'"
+  },
+  "round": {
+    "begins": "--- වටය {round_number} ආරම්භ වේ! --- ක් රීඩකයා {proposer_id} යෝජනා කරන්නා, ක් රීඩකයා {responder_id} ප් රතිචාර දක්වන්නා වේ.",
+    "offer": "වට {round_number}: ක්‍රීඩක {proposer_id} ක්‍රීඩක {responder_id} හට ${offer} යෝජනය කරයි (තබා ගන්නා ${keep}).",
+    "accepted": "ක් රීඩකයා {responder_id} පිළිගනු ලැබේ! වටය {round_number} ලාභ: ක් රීඩකයා {proposer_id} + ${proposer_gain}, ක් රීඩකයා {responder_id} + ${responder_gain}. නව මුළු: ක් රීඩකයා 0: ${total_0}, ක් රීඩකයා 1: ${total_1}.",
+    "rejected": "ක් රීඩකයා {responder_id} යෝජනාව ප් රතික්ෂේප කරයි! වටය {round_number} ලාභ: ක් රීඩකයින් දෙදෙනාම + $ 0. මුළු මුදල ඉතිරිව ඇත: ක් රීඩකයා 0: $ {total_0}, ක් රීඩකයා 1: $ {total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "යෝජකයා [Offer: $X] ආකෘතිය භාවිතා කරමින් ඉදිරිපත් කළ යුතුය.",
+    "bad_integer": "ඉදිරිපත් කළ මුදල වලංගු පූර්ණ සංඛ් යාවක් විය යුතුයි.",
+    "out_of_range": "යෝජනාව යනු $0 සහ ${pool} අතර විය යුතුය.",
+    "no_current_offer": "ප් රතිචාර දැක්වීමට වර්තමාන ඉල්ලීමක් නැහැ.",
+    "accept_or_reject": "ප් රතිචාරකයා [Accept] හෝ [Reject] ඉදිරිපත් කළ යුතුය."
+  },
+  "outcome": {
+    "win": "ක්‍රීඩක {winner} ${winner_total} මුදලක් සමඟ ජය ගත්තේය, ක්‍රීඩක {loser} ${loser_total} මුදලක් සමඟ පරාජය විය.",
+    "draw": "දෙදෙනාම ${total}ක් ලබාගෙන අවසන් විය."
+  }
+}

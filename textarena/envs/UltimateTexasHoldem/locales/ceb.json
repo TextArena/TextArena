@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Walay mga kard pa.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Usa ka Manlalaro vs Dealer\n\n📖 Pangkalahatang Panglantaw:\n• Magasugod ka sa {start_chips} ka chip\n• Usa ka deck sa 52 ka karta (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Magdula ka batok sa dealer (balay)\n• Matag yugto mosunod sa estruktura sa Ultimate Texas Hold'em: mag-post ka sa ANTE ug BLIND pusta, madawat ka sa 2 ka karta sa hole, magdesisyon ka sa optional PLAY pusta sa mga yugto sa pusta, unya magpadayag sa mga karta sa komunidad ug ikumpara ang imong pinakamaayong 5-ka-karta nga kamot batok sa dealer. Ang imong tuyo mao ang pagmaximize sa imong kadaogan (kung ikaw ang adunay maayong kamot), samtang gipaminimize ang imong kadaotan (kung ikaw ang adunay masamang kamot).\n• Ang dula mahuman kung ikaw makab-ot sa 0 chip o ubos sa pagsugod sa yugto (PAGKADAOT) o makumpleto ang 1000 ka yugto sa chip (PAGKAADAOT)\n\n💰 ESTRUKTURA SA PUSTA:\n• ANTE: Mandatory ${ante} pusta matag yugto\n• BLIND: Mandatory ${ante} pusta matag yugto\n• PLAY: Optional pusta sa panahon sa dula. Sa tibuok yugto, pwede ka lang magpili sa usa sa mga mosunod: (${ante4} kung gihimo sa PRE-FLOP, ${ante2} kung gihimo sa FLOP, o ${ante} kung gihimo sa RIVER. Pwede usab mag-fold sa river, ug maghatag sa kamot, ug walay pusta.)\n\n🎴 PAGDEAL SA KARTA:\n• Madawat ka sa 2 ka karta sa atubangan (imong mga karta sa hole)\n• Ang dealer madawat sa 2 ka karta sa likod (gipatago gikan sa imo)\n• 5 ka karta sa komunidad gideal sa atubangan sa pagsugod\n• Ang mga karta sa komunidad gipadayag sa progresibo sa mga yugto sa dula\n\n🏆 Kwalipikasyon sa Dealer:\n• Ang dealer kinahanglan adunay kwalipikasyon sa PAIR (2 ka karta sa parehong ranggo) aron makwalipikar, gamit ang 2 ka karta sa ilang kamot ug ang 5 ka karta sa komunidad.\n• Ang kwalipikasyon sa dealer makaapekto sa mga resulta sa pusta, nga maipaliwanag sa ulahi.\n\n🎮 MGA YUGTO SA DULA UG MGA AKSYON:\n📋 PRE-FLOP:\n  • Mga aksyon: [4x] (${ante4}) o [check]\n  • [4x]: Ibutang ang ${ante4} PLAY pusta, magpadayag sa unang 3 ka karta sa komunidad\n  • [check]: Walay dugang pusta, magpadayag sa unang 3 ka karta sa komunidad\n\n📋 FLOP:\n  • Kung 4x pusta gihimo: Pwede lang [skip] (awtomatikong magpadayag sa ulahi 2 ka karta sa komunidad)\n  • Kung walay 4x pusta: [2x] (${ante2}) o [check]\n  • [2x]: Ibutang ang ${ante2} PLAY pusta, magpadayag sa ulahi 2 ka karta sa komunidad\n  • [check]: Walay dugang pusta, magpadayag sa ulahi 2 ka karta sa komunidad\n\n📋 RIVER:\n  • Kung 4x o 2x pusta gihimo: Pwede lang [skip] (awtomatikong magpadayon sa showdown)\n  • Kung walay prior PLAY pusta: [1x] (${ante}) o [fold]\n  • [1x]: Ibutang ang ${ante} PLAY pusta, magpadayon sa showdown\n  • [fold]: Maghatag sa kamot, mawala ang ANTE ug BLIND pusta\n\n📋 SHOWDOWN:\n  • Tanang karta gipadayag ug giebalwar\n  • Pinakamaayong 5-ka-karta nga kamot gikan sa 7 ka karta (2 ka karta sa hole + 5 ka karta sa komunidad)\n  • Mga pusta gisettle sumala sa mga patakaran sa bayad\n\n💎 MGA PATAKARAN SA BAYAD:\n📊 ANTE PUSTA:\n  • Ang dealer dili kwalipikado: PUSH (pusta gibalik)\n  • Ang dealer kwalipikado ug ikaw ang adunay maayong kamot: 1:1 bayad (pusta + kadaogan)\n  • Ang dealer kwalipikado ug ikaw ang adunay masamang kamot: Pusta nawala\n  • Tie: PUSH (pusta gibalik)\n\n📊 BLIND PUSTA:\n  • Dili apektado sa kwalipikasyon sa dealer\n  • Ikaw ang adunay maayong kamot: Pusta gibalik ug dugang bayad sumala sa kusog sa imong kamot\n  • Ikaw ang adunay masamang kamot: Pusta nawala\n  • Tie: PUSH (pusta gibalik)\n\n📊 BLIND PUSTA PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Masamang kamot: Walay dugang bayad\n\n📊 PLAY PUSTA:\n  • Dili apektado sa kwalipikasyon sa dealer\n  • Direktang pagpili: Imong pinakamaayong kamot vs Kamot sa Dealer\n  • Ikaw ang adunay maayong kamot: 1:1 bayad (pusta + kadaogan)\n  • Ikaw ang adunay masamang kamot: Pusta nawala\n  • Tie: PUSH (pusta gibalik)\n\n🎯 RANKING SA KAMOT SA POKER (Pinakamaayo hangtod Pinakasamang):\n  1. Royal Flush: A-K-Q-J-10 sa parehong sapaw\n  2. Straight Flush: 5 ka sunud-sunod nga karta sa parehong sapaw\n  3. Four of a Kind: 4 ka karta sa parehong ranggo\n  4. Full House: 3 ka karta sa parehong ranggo + 2 ka karta sa parehong ranggo\n  5. Flush: 5 ka karta sa parehong sapaw\n  6. Straight: 5 ka sunud-sunod nga karta\n  7. Three of a Kind: 3 ka karta sa parehong ranggo\n  8. Two Pair: 2 ka pares sa karta sa lahi nga ranggo\n  9. One Pair: 2 ka karta sa parehong ranggo\n  10. High Card: Pinakataas nga karta ang nagmadaog\n\n⌨️  MGA KOMANDO SA AKSYON:\n• [4x] o [play bet 4x]: Ibutang ang ${{self.ante_amount*4}} PLAY pusta\n• [2x] o [play bet 2x]: Ibutang ang ${{self.ante_amount*2}} PLAY pusta\n• [1x] o [play bet 1x]: Ibutang ang ${{self.ante_amount*1}} PLAY pusta\n• [check] o [c]: Check (walay dugang pusta)\n• [fold] o [f]: Fold (maghatag sa kamot)\n• [skip] o [s]: Skip sa sunod nga yugto (kung walay aksyon kinahanglan)\n\n💡 MGA TIPS SA ESTRATEHIYA:\n• Mga kusog nga kamot sa pagsugod (pares, taas nga karta) kanunay nagpapahintulot sa 4x pusta\n• Pagsabot sa kwalipikasyon sa dealer - mga mahuyang kamot pwede mag-push kung ang dealer dili kwalipikado\n• BLIND pusta pwede magkadaogon kaayo sa mga kusog nga kamot (Royal Flush = 500:1!)\n• Bantayan ang imong stack sa chip! Kung kini mahitabo sa 0 o ubos sa pagsugod sa yugto, ikaw ang makadaot.\n\n⚠️  MGA IMPORTANTE NGA PAHIBALO:\n• ANTE ug BLIND pusta mandatory matag yugto\n• PLAY pusta optional ug estratehiko\n• Siguraduhin nga imong gipang-input ang sakto nga aksyon, ug usa lang ka aksyon sa usa ka panahon.\n\n",
+    "state": "🎯 ROUND {round}\n💰 Chips: {chips}\n🎴 Ang imong kamot: {hand}\n📊 Mga bet sa kasamtangan: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Phase: {phase}\n🎯 Mga available nga aksyon: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Round {round} nagsugod! Bets: ANTE ${ante}, BLIND ${blind}. May {chips} chips ka nga natapos.",
+    "your_hand": " Ang imong kamot: {hand}",
+    "flop_revealed": " FLOP gipadayag: {cards}",
+    "river_revealed": " RIVER gipadayag: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Dili balido nga aksyon alang sa karon nga yugto. Available mga lihok: {available}",
+    "message": " Dili balido nga aksyon! May-iya nga mga aksiyon: {available}"
+  },
+  "action": {
+    "folded": " Ikaw mihunong."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Kamot sa tigbaligya: {cards}",
+    "community_cards": " Mga kard sa komunidad: {cards}",
+    "player_best": "🎴 Pinakamaayong kamot sa Manlalaro: {name} ({cards})",
+    "dealer_best": "🎴 Ang best hand sa dealer: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (napiko)",
+    "blind_lost_folded": " BILIND bet NALUMA! -${blind} (napildi)",
+    "ante_won": "✅ ANTE bet WON! +${amount} (Pagawas sa mga BET)",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} mibalik",
+    "ante_lost": " ANTE bet LOST! -${ante}",
+    "blind_won": "✅ Ang BLIND bet NA-DAUG! +${amount}",
+    "blind_pushed": " BINAL nga pusta GIPANGGASA! ${blind} gibalik",
+    "blind_lost": " BILIND bet NALUMA! -${blind}",
+    "play_won": "✅ Ang PLAY bet NA-DAUG! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} mibalik",
+    "play_lost": " PLAY bet LOST! -${play}",
+    "net_gain": "🎉 Ang round {round} nakompleto! Net gain: +${net}",
+    "net_loss": "💸 Ang round {round} nakompleto! Net loss: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 GAME OVER! {max_turns} rounds ang nakompleto. May ${chips} chips ka - NADAUG KA!",
+    "game_over_lose": " GAME OVER! Wala kay chips. Nagdaog ang tigbaligya!",
+    "reward_win": "Ang player nakompleto sa {winner_rounds} rounds nga may ${chips} chips",
+    "reward_lose": "Player migawas sa mga chips diha sa round {round}",
+    "reward_win_max": "Ang player nakompleto sa {max_turns} rounds nga may ${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush (Ang Puno sa Hari)",
+    "straight_flush": "Husto nga Pag-agos sa Tubig",
+    "four_of_a_kind": "Upat sa Usa ka Klase",
+    "full_house": "Full House ang mga Tawo sa Balay",
+    "flush": "Pag-flush",
+    "straight": "Linaw-id",
+    "three_of_a_kind": "Tulo sa Usa ka Klase",
+    "two_pair": "Duha ka Pares",
+    "one_pair": "Usa ka Pares",
+    "high_card": "Taas nga Karta",
+    "unknown": "Wala mailhi nga Kamot"
+  }
+}

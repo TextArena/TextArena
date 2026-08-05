@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "I ka kɛlɛ Golf (Kaadi Jɛri) - Jɛri {player_id}.\nKɛlɛ: Kɛ jɛri kɔnɔ kɔɔrɔ dɔ la kɛlɛ kɔɔrɔ kan. Ni kɔlɔn bɛ kɔɔrɔ kelen, u bɛ kɔɔrɔ 0.\nKaadi Kɛlɛ: A=1, 2-10=kɛlɛ kɔɔrɔ, J/Q=10, K=0\n\nKɛlɛw (kɛlɛ kɔɔrɔ bɛɛ): \n- '[draw]' - Kaadi kɔɔrɔ jɛri\n- '[take]' - Kaadi kɔɔrɔ fa\n- '[swap X Y]' - Kaadi kɔɔrɔ bɛɛ X (sɛri) Y (kɔlɔn)\n- '[discard]' - Kaadi kɔɔrɔ jɛri kɔɔrɔ.\n"
+  },
+  "board": {
+    "drew": "I ka na: {card}\nYɛrɛ na [swap X Y] wa ni [discard]",
+    "took": "I fa: {card} kaadi kɔɔrɔ fa\nI ka tɛ [swap X Y] kɛlɛ (tɛ kɔɔrɔ jɛri).",
+    "peeked": "I ka kɛ: kɔnɔ ({row}, {col}): {card}",
+    "turn_view": "I ka kɛ:\n{hand}\nDanbo pile: {discard}\n{options}",
+    "none": "Foyi tɛ yen."
+  },
+  "options": {
+    "final_turns": "Kɔnɔ kɛlen! I ka kɛlen: [draw], [take], [peek X Y]",
+    "draw": "I ka kɛlen: [draw], [take]",
+    "must_swap": "I ka kan: [swap X Y] (i tɛ se ka karitiw bila fili la)",
+    "swap_or_discard": "I bɛ na: [swap X Y] ni [discard]"
+  },
+  "hand": {
+    "no_cards": "Karitiw tɛ yen.",
+    "header": "Kol: 1 2 3 kolɔnniw",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Jokelani {pid} doni {new} ni {old} kɔnɔ ({row}, {col})",
+    "discarded": "Kɛlɛbɔ {pid} kɔnɔw la {card} kɔnɔw la"
+  },
+  "message": {
+    "deck_empty": "Bɛnbaliya bɛ kɛ! Ɲininkali labanna sisan.",
+    "knocked": "Jiginɛ {pid} bɛ a la!Jiginni tɔ kelen o kelen bɛɛ ka kan ni yɛlɛma ye.",
+    "final_round": "Jokelani {pid} {reason}! Anw kɛlen jokelani ye na kɛlen kɔnɔ"
+  },
+  "reason": {
+    "all_revealed": "kɔnɔw la ka kɛlɛbɔ kɔnɔw la"
+  },
+  "invalid": {
+    "wrong_action": "Kɛlɛbɔ kɔnɔw la ka kɔrɔw la kɔnɔw la! Kɛlɛbɔ kɔnɔw la ka kɔrɔw la: [draw], [take], [swap X Y], [discard], [knock], walima [peek X Y]",
+    "discard_empty": "Falenfɛn kuruw lakolon don!",
+    "must_draw_first": "I bɛ na [draw], [take], [knock], ni [peek X Y] kɔnɔ",
+    "cannot_discard_taken": "I tɛ se ka kadi min ta k'a bɔ i yɛrɛ la, o fili. I bɛ a yɛlɛma ɲɔgɔn fɛ.",
+    "have_drawn_card": "I ka kɛ kɔnɔ. I bɛ na [swap X Y] wa ni [discard]",
+    "need_drawn_swap": "I mago bɛ ka kartiw sɔrɔ walasa k'u falenfalen.",
+    "need_drawn_discard": "I mago bɛ ka kartiw sɔrɔ walasa k'u fili.",
+    "out_of_bounds": "Position kɔnɔw la kɔnɔw la! Kɛlɛbɔ kɔnɔw la ka ligne 1-{max_row}, colonne 1-{max_col}",
+    "knock_with_card": "I tɛ se ka da sɔgɔ ni i ye kariti bɔ. A' y'aw ta dafa fɔlɔ.",
+    "already_knocked": "Mɔgɔ dɔ ye nin ɲɔgɔn kɛ ka ban.",
+    "already_revealed": "O karti jirala ka ban!"
+  },
+  "summary": {
+    "full": "Kaati kɛ! Jokelani {winner} ye lamɛnɛ kɛ sɛbɛn ni {score} point!\n\nLamɛnɛ kɛ sɛbɛn:\n{scores}",
+    "line": "Jokelani {pid}: {score} point\n"
+  },
+  "board_str": {
+    "title": "=== GOLF JIGI=== (Kibaru 548, 2017) E bɛ se ka mun kɛ?",
+    "discard": "Falenfɛn bilali: {card}",
+    "knocked": "Jalakɛla {pid} ye da kɔnkɔn!",
+    "player_header": "Jokelani {pid} (Lamɛnɛri: {score}):"
+  }
+}

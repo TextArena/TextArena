@@ -1,0 +1,28 @@
+{
+  "_comment": "Configuración regional en español para Wordle. Las claves (izquierda) son fijas; traduce solo los valores (derecha). Conserva cada {placeholder} literalmente y mantén sin cambios las letras de retroalimentación G/Y/X (son los marcadores por letra del juego).",
+  "_slots": {
+    "{word_length}": "Longitud de la palabra secreta (entero)",
+    "{num_guesses}": "Número de intentos permitidos (entero)",
+    "{word}": "Una palabra adivinada",
+    "{view}": "Letras renderizadas neutrales + retroalimentación G/Y/X (no traducir)",
+    "{guesses_left}": "Intentos restantes (entero)",
+    "{pct}": "Porcentaje de letras colocadas correctamente (entero)",
+    "{secret}": "La palabra secreta"
+  },
+  "prompt": {
+    "intro": "Estás jugando Wordle.\nSe ha elegido una palabra secreta de {word_length} letras. Tienes {num_guesses} intentos para adivinarla.\nPara cada intento, coloca tu palabra entre corchetes (por ejemplo, '[apple]').\nSe proporcionará retroalimentación para cada letra de la siguiente manera:\n  - G (verde): letra correcta en la posición correcta\n  - Y (amarillo): la letra existe en la palabra pero en la posición incorrecta\n  - X (equivocado): la letra no está en la palabra\nIngresa tu suposición para comenzar.\n"
+  },
+  "invalid": {
+    "wrong_format": "Intentaste enviar una palabra en el formato equivocado. Asegúrate de usar corchetes.",
+    "wrong_length": "Tu palabra debe tener exactamente {word_length} letras.",
+    "already_guessed": "Ya adivinaste '{word}' antes. Por favor, prueba con una palabra diferente.",
+    "not_a_word": "'{word}' no es una palabra válida."
+  },
+  "feedback": {
+    "submitted": "Enviaste [{word}].\nRetroalimentación:\n{view}\nTe quedan {guesses_left} intentos."
+  },
+  "outcome": {
+    "win": "¡Felicidades! ¡Adivinaste la palabra correctamente!",
+    "turn_limit": "Se ha alcanzado el límite de turnos. No adivinaste la palabra, pero tu mejor intento acertó el {pct}% de las letras en las posiciones correctas.\nLa palabra secreta era: **{secret}**."
+  }
+}

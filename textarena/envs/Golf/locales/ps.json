@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "تاسو ګالف لوبیږئ - لوبغاړی {player_id}. هدف: په دې واحد دور کې ترټولو ټیټ مجموعي سکور ترلاسه کړئ. که کالمونه ورته ارزښت شریک کړي ، دوی د 0 په توګه راټول شوي دي د کارت ارزښتونه: A = 1 ، 2-10 = نوم ارزښت ، J / Q = 10 ، K = 0 کړنې (د دقیق قوسونو کارول): - '[draw]' - له ډیک څخه ډرا - '[take]' - له لرې کیدو څخه واخلئ - '[swap X Y]' - د موقعیت X (سره) Y (کالم) سره د ډرا کارت بدل کړئ - '[discard]' - د ډرا کارت لرې کړئ "
+  },
+  "board": {
+    "drew": "تاسو رسم کړی: {card} اوس تاسو باید [swap X Y] یا [discard] یې کړئ.",
+    "took": "تاسو واخیست: {card} د ضایع کیدو کڅوړه څخه تاسو باید [swap X Y] ورسره (د ضایع کیدو وړ نه یاست).",
+    "peeked": "تاسو په موقيعت ({row},{col}) کې کتل: {card}",
+    "turn_view": "ستاسو لاس: {hand} د لرې کولو کڅوړه: {discard} {options}",
+    "none": "هیڅ نه"
+  },
+  "options": {
+    "final_turns": "وروستي وارونه! ستاسو اختیارونه: [draw]، [take]، [peek X Y]",
+    "draw": "ستاسو انتخابونه: [draw]، [take]",
+    "must_swap": "تاسو باید: [swap X Y] (د رد کیدو له ډلې څخه کارتونه نه شي غورځولی)",
+    "swap_or_discard": "تاسو باید: [swap X Y] یا [discard]"
+  },
+  "hand": {
+    "no_cards": "د کارتونو نه",
+    "header": "د کال: 1 2 3",
+    "row": "د (۱) قطار {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "لوبغاړی {pid} په موقعیت کې {new} د {old} سره بدل کړ ({row}،{col})",
+    "discarded": "لوبغاړی {pid} لرې شوی {card}"
+  },
+  "message": {
+    "deck_empty": "ډیک خالي دی! لوبه سمدستي پای ته رسیږي.",
+    "knocked": "لوبغاړی {pid} ټک شوی! هر بل لوبغاړی یو بل وار لري.",
+    "final_round": "لوبغاړی {pid} {reason}! هر بل لوبغاړی یو بل وار لري."
+  },
+  "reason": {
+    "all_revealed": "ټولې کارتونه ښکاره شوي دي"
+  },
+  "invalid": {
+    "wrong_action": "په کلي کې د [draw]، [take]، [swap X Y]، [discard]، [knock]، یا [peek X Y] په څیر د یو عمل څخه کار واخلئ",
+    "discard_empty": "د ګوښه کولو کڅوړه خالي ده!",
+    "must_draw_first": "تاسو باید لومړی [draw]، [take]، [knock]، یا [peek X Y]",
+    "cannot_discard_taken": "تاسو نه شئ کولای چې د ردولو له ډلې څخه اخیستل شوی کارت له منځه یوسي. تاسو باید دا بدل کړئ.",
+    "have_drawn_card": "تاسو یو کارت لرئ. تاسو باید [swap X Y] یا [discard] دا.",
+    "need_drawn_swap": "تاسو ته يوه راغلې کارډ په بدل کولو کې اړتيا لري.",
+    "need_drawn_discard": "تاسو د دې لپاره چې له منځه یې یوسي، یو کارت ته اړتیا لرئ.",
+    "out_of_bounds": "د حد څخه بهر موقعیت. د قطار 1-{max_row} ، کالم 1-{max_col} وکاروئ",
+    "knock_with_card": "تاسو نشئ کولی د یو کارت سره ټک ټک کړئ. لومړی خپل وار بشپړ کړئ.",
+    "already_knocked": "یو څوک لا دمخه دا پړاو ټکولی دی.",
+    "already_revealed": "دا کارت لا دمخه ښکاره شوی دی!"
+  },
+  "summary": {
+    "full": "د لوبې پای! لوبغاړی {winner} د {score} ټکو په ترلاسه کولو سره ګټي! وروستي نمرې: {scores}",
+    "line": "لوبغاړی {pid}: {score} ټکي "
+  },
+  "board_str": {
+    "title": "=== د ګالف لوبې ===",
+    "discard": "د لرې کولو کڅوړه: {card}",
+    "knocked": "لوبغاړی {pid} کښکول کړی دی!",
+    "player_header": "لوبغاړی {pid} (نمره: {score}):"
+  }
+}

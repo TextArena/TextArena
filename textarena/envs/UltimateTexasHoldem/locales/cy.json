@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Dim cardiau eto",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Chwaraewr Sengl yn erbyn y Deliwr\n\n📖 TROSOLWG O'R GÊM:\n• Rydych yn dechrau gyda {start_chips} chips\n• Pac unigol o 52 card (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Rydych yn chwarae yn erbyn y deliwr (tŷ)\n• Mae pob rownd yn dilyn strwythur Ultimate Texas Hold'em: rydych yn postio betiau ANTE a BLIND, yn derbyn 2 gerdyn tyllu, yn penderfynu ar betiau PLAY dewisol ar draws y camau betio, yna'n datgelu cardiau cymunedol a chymharu eich llaw gorau 5-card yn erbyn llaw y deliwr. Eich nod yw i gynyddu eich enillion (pan rydych â'r llaw well), tra'n lleihau eich colledion (pan rydych â'r llaw waeth).\n• Mae'r gêm yn dod i ben pan rydych yn cyrraedd 0 chips neu is ar ddechrau rownd (COLLED) neu cwblhau 1000 rownd gyda chips (ENNIL)\n\n💰 STRWYTHUR BETIO:\n• ANTE: Bet ${ante} mandadol bob rownd\n• BLIND: Bet ${ante} mandadol bob rownd\n• PLAY: Bet dewisol yn ystod y gêm. Drwy gydol y rownd, gallwch ddewis UN o'r canlynol: (${ante4} os yw wedi'i wneud yn PRE-FLOP, ${ante2} os yw wedi'i wneud yn FLOP, neu ${ante} os yw wedi'i wneud yn RIVER. Gallwch hefyd foldio yn y river, gan roi'r gorau i'r llaw, a gwneud dim bet.)\n\n🎴 DELIO CARDIAU:\n• Rydych yn derbyn 2 gerdyn wyneb i fyny (eich cardiau tyllu)\n• Mae'r deliwr yn derbyn 2 gerdyn wyneb i lawr (cudd oddi wrthych)\n• Mae 5 card cymunedol yn cael eu delio wyneb i lawr i ddechrau\n• Mae cardiau cymunedol yn cael eu datgelu'n raddol drwy'r camau gêm\n\n🏆 CYMHWYSTER DELIWR:\n• Rhaid i'r deliwr gael o leiaf PAR (2 gerdyn o'r un rheng) i gymhwyso, gan ddefnyddio'r 2 gerdyn yn eu llaw a'r 5 card cymunedol.\n• Mae cymhwyster y deliwr yn effeithio ar ganlyniadau betio, fel y bydd yn cael ei egluro yn ddiweddarach.\n\n🎮 CAMAU GÊM & GWYRDDION:\n📋 PRE-FLOP:\n  • Gweithredoedd: [4x] (${ante4}) neu [check]\n  • [4x]: Rhoi bet ${ante4} PLAY, datgelu 3 card cymunedol cyntaf\n  • [check]: Dim bet ychwanegol, datgelu 3 card cymunedol cyntaf\n\n📋 FLOP:\n  • Os yw bet 4x wedi'i wneud: Dim ond [skip] ar gael (datgelu 2 card cymunedol olaf yn awtomatig)\n  • Os nad yw bet 4x wedi'i wneud: [2x] (${ante2}) neu [check]\n  • [2x]: Rhoi bet ${ante2} PLAY, datgelu 2 card cymunedol olaf\n  • [check]: Dim bet ychwanegol, datgelu 2 card cymunedol olaf\n\n📋 RIVER:\n  • Os yw bet 4x neu 2x wedi'i wneud: Dim ond [skip] ar gael (mynd ymlaen i'r sioe yn awtomatig)\n  • Os nad yw bet PLAY wedi'i wneud o'r blaen: [1x] (${ante}) neu [fold]\n  • [1x]: Rhoi bet ${ante} PLAY, mynd ymlaen i'r sioe\n  • [fold]: Rhoi'r gorau i'r llaw, colli betiau ANTE a BLIND\n\n📋 SIOE:\n  • Datgelu a gwerthuso pob card\n  • Llaw gorau 5-card o 7 card (2 tyllu + 5 cymunedol)\n  • Settlo betiau yn ôl rheolau talu\n\n💎 TALU BETIAU:\n📊 BET ANTE:\n  • Nid yw'r deliwr yn gymwys: PUSH (bet wedi'i ddychwelyd)\n  • Mae'r deliwr yn gymwys ac rydych yn ennill: talu 1:1 (bet + enillion)\n  • Mae'r deliwr yn gymwys ac rydych yn colli: bet wedi'i golli\n  • Cyfartal: PUSH (bet wedi'i ddychwelyd)\n\n📊 BET BLIND:\n  • Heb ei effeithio gan gymhwyster y deliwr\n  • Rydych yn ennill: bet wedi'i ddychwelyd a thalu ychwanegol yn seiliedig ar gryfder eich llaw\n  • Rydych yn colli: bet wedi'i golli\n  • Cyfartal: PUSH (bet wedi'i ddychwelyd)\n\n📊 TABL TALU BET BLIND:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Llai na Straight: Dim talu ychwanegol\n\n📊 BET PLAY:\n  • Heb ei effeithio gan gymhwyster y deliwr\n  • Cymhariaeth uniongyrchol: eich llaw gorau yn erbyn llaw gorau y deliwr\n  • Rydych yn ennill: talu 1:1 (bet + enillion)\n  • Rydych yn colli: bet wedi'i golli\n  • Cyfartal: PUSH (bet wedi'i ddychwelyd)\n\n🎯 SAFLEOEDD LLAW POCER (Gorau i Waethaf):\n  1. Royal Flush: A-K-Q-J-10 o'r un siwt\n  2. Straight Flush: 5 card yn olynol o'r un siwt\n  3. Four of a Kind: 4 card o'r un rheng\n  4. Full House: 3 o'r un rheng + 2 o'r un rheng\n  5. Flush: 5 card o'r un siwt\n  6. Straight: 5 card yn olynol\n  7. Three of a Kind: 3 card o'r un rheng\n  8. Two Pair: 2 bar o wahanol rhengau\n  9. One Pair: 2 card o'r un rheng\n  10. High Card: y card uchaf yn ennill\n\n⌨️  GWYRDDION GWEITHRED:\n• [4x] neu [play bet 4x]: Rhoi bet ${{self.ante_amount*4}} PLAY\n• [2x] neu [play bet 2x]: Rhoi bet ${{self.ante_amount*2}} PLAY\n• [1x] neu [play bet 1x]: Rhoi bet ${{self.ante_amount*1}} PLAY\n• [check] neu [c]: Check (dim bet ychwanegol)\n• [fold] neu [f]: Fold (rhoi'r gorau i'r llaw)\n• [skip] neu [s]: Skip i'r cam nesaf (pan nad oes gweithred angenrheidiol)\n\n💡 TIPYNION STRATEGAETH:\n• Mae llawoedd cychwyn cryf (parau, cardiau uchel) yn aml yn cyfiawnhau betiau 4x\n• Ystyriwch gymhwyster y deliwr - llawoedd gwan gall pushio os nad yw'r deliwr yn gymwys\n• Gall bet BLIND fod yn broffidiol iawn gyda llawoedd cryf (Royal Flush = 500:1!)\n• Gwyliwch eich stac chips! Os yw'n mynd i 0 neu is ar ddechrau rownd, rydych yn colli.\n\n⚠️  NODIADAU PWYSIG:\n• Mae betiau ANTE a BLIND yn mandadol bob rownd\n• Mae betiau PLAY yn dewisol ac yn strategol\n• Gwnewch yn siŵr eich bod yn mewnbwn y gweithred gywir, a dim ond un gweithred ar y tro.\n\n",
+    "state": "🎯 ROWND {round}\n💰 Sglodion: {chips}\n🎴 Eich llaw: {hand}\n📊 Betiau cyfredol: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Cam: {phase}\n🎯 Gweithredoedd ar gael: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Rownd {round} wedi dechrau! Pethau: ANTE ${ante}, BLIND ${blind}. Mae {chips} chipiau ar ôl gennych.",
+    "your_hand": " Eich llaw: {hand}",
+    "flop_revealed": " FLOP a ddatgelwyd: {cards}",
+    "river_revealed": " RIVER datgelu: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Gweithred annilys ar gyfer y cam cyfredol. Gweithredoedd ar gael: {available}",
+    "message": " Gweithredu annilys! Gweithrediadau sydd ar gael: {available}"
+  },
+  "action": {
+    "folded": " Rydych yn plygu."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Llaw y gwerthwr: {cards}",
+    "community_cards": " Cerdynnau Cymunedol: {cards}",
+    "player_best": " Llaw gorau'r chwaraewr: {name} ({cards})",
+    "dealer_best": " Gwefan gorau'r gwerthwr: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (cwympo)",
+    "blind_lost_folded": " bet blind LOST! -${blind} (cwympwyd)",
+    "ante_won": "✅ Bet ANTE wedi'i ennill! +${amount}",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} yn ôl",
+    "ante_lost": " ANTE bet LOST! -${ante}",
+    "blind_won": "✅ Blind bet WON! +${amount}",
+    "blind_pushed": " PUSHED bet BLIND! ${blind} yn cael ei ddychwelyd",
+    "blind_lost": " bet blind LOST! -${blind}",
+    "play_won": "✅ Enillodd bet CHWARAE! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} yn ôl",
+    "play_lost": "❌ Collodd bet CHWARAE! -${play}",
+    "net_gain": "🎉 Rownd {round} wedi cwblhau! Ennill net: +${net}",
+    "net_loss": " Cyfnod {round} wedi'i gwblhau! Colli net: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 GEMAU AR BEN! {max_turns} rowndiau wedi cwblhau. Mae ${chips} chipiau gennych - RYDWYD TI!",
+    "game_over_lose": "🏁 WEDI GORFFEN! Rydych allan o chips. Mae'r deliwr yn ennill!",
+    "reward_win": "Mae'r chwaraewr wedi cwblhau rowndiau {winner_rounds} gyda sglodion ${chips}",
+    "reward_lose": "Mae'r chwaraewr wedi mynd allan o sglodion yn y rownd {round}",
+    "reward_win_max": "Mae'r chwaraewr wedi cwblhau rowndiau {max_turns} gyda sglodion ${chips}"
+  },
+  "hand_names": {
+    "royal_flush": "Fflush Brenhinol",
+    "straight_flush": "Fflws Tynn",
+    "four_of_a_kind": "Pedwar o'r fath",
+    "full_house": "Tŷ llawn",
+    "flush": "Fflush",
+    "straight": "Yn syth",
+    "three_of_a_kind": "Tri o'r fath",
+    "two_pair": "Dau Gyfaill",
+    "one_pair": "Un Pâr",
+    "high_card": "Cerdyn Uwch",
+    "unknown": "Llaw anwybodus"
+  }
+}

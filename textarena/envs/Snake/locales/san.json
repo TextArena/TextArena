@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-आदिमानुषः सर्पः {width}×{height} जालके उपरि।\nत्वं सर्पं {player_id} नियन्त्रयसि। प्रामाणिकगतयः: '[up]'/'[down]'/'[left]'/'[right]' (वा w/s/a/d)।\nउद्देश्यः दीर्घतमं जीवितुं वा दीर्घतमः भूत्वा उच्चतमां कोटिं प्राप्तुं (परिवर्तनसंख्यापरिमितिः {max_turns} परिवर्तनानि)।"
+  },
+  "board": {
+    "current": "वर्तमानः बोर्ड: {board}",
+    "after_moves": "वर्तमान बोर्ड राज्यः {board}"
+  },
+  "game_action": {
+    "invalid_death": "सर्पः {player_id} अवैधं चलनं कृत्वा मृत्।"
+  },
+  "outcome": {
+    "survived_win": "क्रीडाकरः {player_id} जीवितवान्; अन्यैः सर्वेभ्यः प्राणान् हतः।",
+    "all_dead_simul": "सर्वे सर्पाः एकस्मिन् एव समये मृताः।",
+    "outlived": "खिलाडी सर्वान् अन्यान् अतिजीवितवान्।",
+    "all_dead": "सर्वे सर्पाः मृतवन्तः।",
+    "turn_limit": "वक्रस्य सीमायाः आगमनम् - सर्वोत्कृष्टं स्कोरः टाई-ब्रेक विजयी भवति ।",
+    "ranking": "{reason} अन्तिम श्रेणीसमूहाः (निकृष्टात् उत्तमं प्रति) {groups}"
+  }
+}

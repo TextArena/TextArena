@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Mo ye zo {player_id} na kôsi ya LinesOfAction.\nZo ti mo ye '{side}', zo ti angbô ye '{other}'.\nFormat ya déplacement: `[b1b3]` (kötä zo ti kôsi na kotä zo ti déplacement). Déplacement ya lôi ye na ndö horizontal, vertical, ou diagonal, na kôme ya kare ya zo ti mbû (ndöngö zo ti mô) na ndö la. Mo ye déplacer na zo ti mo ye, mais pas na zo ti angbô; kotä na zo ti angbô ye kôsi ya capture.  Gagner lè tout zo ti mo ye ye 8-voisin connecté."
+  },
+  "board": {
+    "current_board": "Bungbi ti azo so ayeke bâ lege ni: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "A lingbi a zia ni na yâ ti kode so e2e4 (ti londo, juska coordinate).",
+    "no_piece": "Mɛlɛ {side} wɛ̈ɛ̈ŋde pɛ̈i {coord}",
+    "identical": "Kötä zo ti source na kotä zo ti déplacement ye ndöngö.",
+    "not_straight_or_diagonal": "A lingbi a gue na nduzu wala ti bâ ndo.",
+    "wrong_distance": "A lingbi lo gue ayo tongana ti so a yeke tambela na yâ molongo.",
+    "enemy_blocks": "Mbeni wato akanga lege na e.",
+    "destination_own": "A yeke mbeni ye so a zia na yâ ti ndo ni."
+  },
+  "game_action": {
+    "moved": "Mo ye {player_id} déplacer {from} -> {to}",
+    "captured_suffix": "Lokuta {player_id} sɛndɛ {from} -> {to} na kɔti mɛlɛ"
+  },
+  "outcome": {
+    "win": "Aye ni kue ague oko.",
+    "draw_no_capture": "A gue na lo 60 sân ti gbu mbeni zo.",
+    "draw_repetition": "A kiri ti fa ndo ni fani ota."
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Ou ap jwe Golf (Jwè kat) - Jwè {player_id}.\nBijou: Gen skò total pi ba nan toun sa a. Si kolòn yo pataje menm valè, yo konpte kòm 0.\nValè kat: A=1, 2-10=valè figi, J/Q=10, K=0\n\nAksyon (itilize mak egzak): \n- '[draw]' - Tire soti nan dek \n- '[take]' - Pran soti nan pak boule \n- '[swap X Y]' - Chanje kat tire ak pozisyon X (liy) Y (kolòn) \n- '[discard]' - Boule kat tire"
+  },
+  "board": {
+    "drew": "Ou te tire: {card}\nKounye a ou dwe [swap X Y] oubyen [discard] li.",
+    "took": "Ou te pran: {card} soti nan pak boule\nOu dwe [swap X Y] ak li (pa ka boule).",
+    "peeked": "Ou te gade nan pozisyon ({row},{col}): {card}",
+    "turn_view": "Men ou:\n{hand}\nPil discard: {discard}\n{options}",
+    "none": "Pa gen okenn."
+  },
+  "options": {
+    "final_turns": "Toun fini! Chwa ou: [draw], [take], [peek X Y]",
+    "draw": "Chwa ou: [draw], [take]",
+    "must_swap": "Ou dwe: [swap X Y] (pa ka jete kat nan pil dechaje)",
+    "swap_or_discard": "Ou dwe: [swap X Y] oubyen [discard]"
+  },
+  "hand": {
+    "no_cards": "Pa gen kat.",
+    "header": "Kol: 1 2 3",
+    "row": "Liy {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Jwè {pid} te chanje {new} ak {old} nan pozisyon ({row},{col})",
+    "discarded": "Jwè {pid} te boule {card}"
+  },
+  "message": {
+    "deck_empty": "Deck la vid! Jwèt fini imedyatman.",
+    "knocked": "Jwè {pid} te frape! Chak lòt jwè gen yon vire plis.",
+    "final_round": "Jwè {pid} {reason}! Chak lòt jwè gen yon toun plis."
+  },
+  "reason": {
+    "all_revealed": "li te revele tout kat yo?"
+  },
+  "invalid": {
+    "wrong_action": "Itilize yon sèl aksyon ki gen mak: [draw], [take], [swap X Y], [discard], [knock], oubyen [peek X Y]",
+    "discard_empty": "Pil dechè a vid!",
+    "must_draw_first": "Ou dwe premye [draw], [take], [knock], oubyen [peek X Y]",
+    "cannot_discard_taken": "Ou pa ka jete yon kat ki soti nan pil la, ou dwe chanje li.",
+    "have_drawn_card": "Ou gen yon kat trase. ou dwe [swap X Y] oswa [discard] li.",
+    "need_drawn_swap": "Ou bezwen yon kat trase pou fè echanj.",
+    "need_drawn_discard": "Ou bezwen yon kat trase pou jete.",
+    "out_of_bounds": "Pozisyon deyò limit. Itilize liy 1-{max_row}, kolòn 1-{max_col}",
+    "knock_with_card": "Ou pa ka frape ak yon kat trase. Konplete vire ou an premye.",
+    "already_knocked": "Yon moun te deja frape wonn sa a.",
+    "already_revealed": "Kat sa a deja parèt!"
+  },
+  "summary": {
+    "full": "Jwè fini! Jwè {winner} genyen ak yon skò de {score} pwen!\n\nSkò fini:\n{scores}",
+    "line": "Jwè {pid}: {score} pwen\n"
+  },
+  "board_str": {
+    "title": "=== GOLF JWE ===",
+    "discard": "Dechè pil: {card}",
+    "knocked": "Jwè {pid} te frape!",
+    "player_header": "Jwè {pid} (Skò: {score}):"
+  }
+}

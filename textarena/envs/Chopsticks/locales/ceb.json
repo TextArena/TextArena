@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw mao ang Player {player_id} sa Chopsticks. Sa imong paglikay, pili usa sa:\n  + Atake:  '[attack M O]'  diin M=imong kamot (0 o 1), O=kamot sa kaatbang (0 o 1).\n    - Ang kamot sa kaatbang nagdugang sa imong kamot; kung >=5, kini mahimong 0.\n  + Gibahin:   '[split L R]'  aron ibahin ang imong kabug-at ngadto sa L ug R (L+R = imong kabug-at).\nSumulong sa eksaktong usa sa mga komando."
+  },
+  "board": {
+    "current_board": "Kasalukuyang Board:\nManlalaro 0: {hands_0}\nManlalaro 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Ang imong kamot {my_idx} patay na.",
+    "opp_hand_dead": "Ang kamot sa kaatbang {opp_idx} patay na.",
+    "split_sum": "Kinahanglan nga ang pagbahin mokabat sa {total}.",
+    "split_no_change": "Ang Split kinahanglang magbag-o sa imong paghatod ug kamot.",
+    "invalid_command": "Dili valid nga paglihok. Gamita “[attack M O]” o “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} nag-atake sa kamot ni P{opp_id} {opp_idx}: kini naggikan sa {opp_val} ngadto sa {new_val}.",
+    "split": "Si P{player_id} mibahin ngadto sa [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Ang duha ka kamot sa kaatbang patay na.",
+    "draw": "Ang limitasyon sa pag-ikot naabot."
+  }
+}

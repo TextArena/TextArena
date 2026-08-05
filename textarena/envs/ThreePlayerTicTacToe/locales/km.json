@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "អ្នកជា​អ្នក​លេង {player_id} នៅ​ក្នុង​ល្បែង​តិចតាក់តូ​បី​នាក់។\nនិមិត្តសញ្ញា​របស់​អ្នក​គឺ '{symbol}'។\nអ្នក​លេង​ជា​លំដាប់ ដាក់​និមិត្តសញ្ញា​របស់​អ្នក​នៅ​លើ​ក្តារ​៥​គុណ​៥ ដើម្បី​បង្កើត​ជា​បន្ទាត់​បួន។\nបន្ទាត់​អាច​ជា​បន្ទាត់​ទ្រអឺត បន្ទាត់​បញ្ឈរ ឬ​បន្ទាត់​មូល។\nស្នើ​ការ​ផ្លាស់​ប្តូរ​របស់​អ្នក​ដោយ​ប្រើ​ទម្រង់ '[4]' ដើម្បី​សម្គាល់​កោសិកា​ទី ៤។"
+  },
+  "board": {
+    "current_board": "ក្រុមប្រឹក្សា បច្ចុប្បន្ន: {board} មានចលនា: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "រូបមន្តចល័តមិនត្រឹមត្រូវ: ប្រើ \"[cell]\" នៅកន្លែងដែលកោសិកាគឺ 0-{max_cell}",
+    "out_of_range": "លេខកូដសញ្ញាមិនត្រឹមត្រូវ: {cell}. ត្រូវស្ថិតនៅចន្លោះ 0 និង {max_cell}.",
+    "already_occupied": "កោសិកា {cell} ត្រូវបានប្រើប្រាស់រួចហើយ។",
+    "made_invalid": "កីឡាករ {player_id} បានធ្វើចលនាមិនត្រឹមត្រូវ"
+  },
+  "game_action": {
+    "placed": "កីឡាករ {player_id} ដាក់សញ្ញា ({symbol}) របស់ខ្លួននៅក្នុងវាល ({row}, {col}) ។"
+  },
+  "outcome": {
+    "win": "កីឡាករ {player_id} ({symbol}) ឈ្នះ!",
+    "draw": "ការប្រកួតគឺស្មើគ្នា!"
+  }
+}

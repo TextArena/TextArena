@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Inwe ni Jokwath {player_id} katika Iterated Prisoner's Dilemma mar {num_rounds} mzunguko.\n\nMikundo ya Emeka:\n- Kabla ya uamuzi wowote inwe {total_conversation_rounds} zamu za kuwasiliana bila vizuizi.\n- Baada ya hapo, wachezaji wote wawili kwa wakati mmoja huchagua kuungana au kutoridhika.\n\nMatrix ya Mshahara (imekamilika kila mzunguko):\n- Wote wawili Wanaungana ➜ kila {cooperate_reward}\n- Wote wawili Wametoridhika ➜ kila {mutual_defect_reward}\n- Mmoja ametoridhika, mmoja Anaungana ➜ Mtoridhika {defect_reward}, Mshirikishi {sucker_reward}\n\nNamna ya Emeka:\n- Wakati wa mazungumzo: andika maandishi yoyote unayotaka.\n- Wakati wa uamuzi: jumuisha '[Cooperate]' au '[Defect]' (isichukuliwe kwa umakini wa herufi). Inaweza kuongeza maandishi ya ziada kabla/ baada ya kiashiria."
+  },
+  "phases": {
+    "conversation_finished": "Lwoko bedo kwa raundu {round}. Chukua kuwajibika kwa kusema '[Cooperate]' au '[Defect]' ndani ya \\boxed{{}}.",
+    "starting_round": "--- Chakruok mar Duol {round} ---",
+    "round_summary": "Matokeo ya mzunguko {round}:\n{outcome}\nMchezaji 0 alipata {r0} (jumla {score_0}), Mchezaji 1 alipata {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Mchezaji {winner} anashinda {win_score} - {lose_score}.",
+    "draw": "Ng'ato ka ng'ato ne oloyo {s0}.",
+    "round_both_cooperate": "Jopuonjre ariyogo ne tiyo kanyachiel.",
+    "round_both_defect": "Jopuonjre ariyogo ne oringo.",
+    "round_p0_cooperates_p1_defects": "Nyakwamba 0 alishirikiana, Nyakwamba 1 alikataa.",
+    "round_p0_defects_p1_cooperates": "Jaloch mar 0 ne oringo, to jalno 1 notimo kamano."
+  }
+}

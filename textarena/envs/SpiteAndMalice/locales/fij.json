@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "O kerekere, o Player {player_id} ena qito Spite and Malice. Na nomu inaki ni o sa qai vakalala na nomu payoff pile.\n\n### Ivakarau ni Qito:\n- Na inaki ni qito oqo me vakalala na nomu payoff pile kwa na qito ena center piles.\n- O rawa ni qito kadi mai na tolu na vanua:\n  1. Na **ligadra** (o sa tekivu kila gauna ena 5 kadi).\n  2. Na **kadi vakalailai ni nomu payoff pile**.\n  3. Na **kadi vakalailai ni yadra discard piles**.\n\n### Ivakarau ni Qito:\n- O rawa ni qito kadi ena center pile kevaka e **dua na kadi e cake** mai na kadi ena pile (center piles sa tekivu ena Ace ka yaco me Queen; Kings e wild - era rawa ni qito ena kadi yadra, ia era sega ni veisau na kena kerekere. Oqo e kena ibalebale kevaka e dua na King e qito ena 4, sa dua na King e 5 ka na kadi e tarava e rawa ni 6).\n- Kevaka o sega ni rawa ni qito kadi tale, o tawana me **discard kadi** ena dua na yadra discard piles me vakalala na nomu gauna.\n- Kevaka e dua na center pile sa yaco me Queen, sa na vakalala otomatiki.\n- Na kerekere ni kadi e: A=1, 2=2, ..., 9=9, J=10, Q=11, K e wild.\n\n### Veika:\n1. **Draw**: Ena tekivu ni nomu gauna, draw kadi me vakaotia na ligadra me 5 kadi. Enter **[draw]** me tekivu.\n2. **Qito kadi**: Me qito kadi, tukuna na kadi kei na center pile ena ivakarau oqo: **[play A♠ 0]** (kadi 'A♠' kei na '0' e center pile index).\n3. **Discard**: Kevaka o sega ni rawa ni qito kadi tale, discard kadi mai na ligadra ena discard pile me vakalala na nomu gauna. Enter **[discard A♠ 1]** (kadi 'A♠' kei na '1' e discard pile index). Kerekere, o sega ni rawa ni discard kadi mai na payoff pile. O rawa ni discard kadi mai na ligadra walega.\n\n"
+  },
+  "board": {
+    "current_board": "Bodi Qito Vou:\n\n{board}\nIvakalolomani ni Qito: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Na iYau e Loma ni Qele --- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Rai ni Dauqito {player_id} ---\n",
+    "payoff": "{observation}Payoff Pile (Kadi Vakalailai): {top_card}, Payoff Pile Balavu: {payoff_length}\n",
+    "hand": "{observation}liga: {hand} ",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "Tawa lala tu ga."
+  },
+  "game_message": {
+    "no_cards_left": "Sega ni katini e tu me kerekerei. Kerekerei mo nanuma ni o rawa ni qito katini mai na:\n  1. Nomu **ligadra**.\n  2. **Katini e cake mai na nomu kerekerei ni ivakarau**.\n  3. **Katini e cake mai na nomu kerekerei**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Na ivakarau ni toso e sega ni dodonu. Sega na dauqito {player_id} sauma ena dua na ilakolako donu ena brackets veibasai.",
+    "invalid_play": "Ivakalolomani na qito. Na dauqito {player_id} a via qito {card} ki na kerekerei {index}.",
+    "discard_from_payoff": "Ivakalolomani na kerekerei. Na dauqito {player_id} a via kerekerei e dua na katini mai na kerekerei ni ivakarau.",
+    "discard_not_in_hand": "Discard e sega ni dodonu. Player {player_id} sa discard kadi e sega ni ena ligadra.",
+    "wrong_move_type": "Na mataqali ilakolako e sega ni dodonu. Sega na dauqito {player_id} sauma ena dua na ivakarau donu ni toso."
+  },
+  "game_action": {
+    "you_drew": "O a veitalanoataka na tikiniqele.",
+    "opponent_drew": "E dua na dauqito {player_id} e dreta mai na kadi.",
+    "you_played": "O a qito {card} ena loma ni bai {index}.",
+    "opponent_played": "Player {player_id} sa qito {card} ena center pile {index}.",
+    "you_discarded": "O sa kerekere {card} ki na ivurevure ni kerekere {index}, ka sa kena ibalebale o sa oti talega na nomu gauna. Sega ni dua na veika e nomu e na vakasamataki tale ena gauna oqo. Na dauni {next_player_id} e na lako mai.",
+    "opponent_discarded": "Player {player_id} e discard {card} ki na discard pile {index}, ka vakabibi tale ga me vaka malua na nona turn. Sega ni vakadidike tale vei Player {player_id} ena turn oqo. Player {next_player_id}, o na qai laki go next. Kerekere, o na turaga nomu action ena format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Na dauqito {current_player} e vakacavari pile payoff yadua! Na dauqito {current_player} e qaqa!",
+    "deadlock_player_0": "Deadlock sa yaco! Player 0 sa qai ena {player_0_payoff} kadi e tiko vs Player 1 ena {player_1_payoff} kadi.",
+    "deadlock_player_1": "Deadlock sa yaco! Player 1 sa qai ena {player_1_payoff} kadi e tiko vs Player 0 ena {player_0_payoff} kadi.",
+    "deadlock_tie": "Sa oti na veika e sega ni rawa! E rau sa tu e {player_0_payoff} na kad e rau tu. Na dauni {current_player} e wini ena vakatulewa."
+  }
+}

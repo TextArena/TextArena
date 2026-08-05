@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Enn eru ongar kortuvørur.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Ein spælari vs Dealer\n\n📖 GAME OVERVIEW:\n• Tú byrjar við {start_chips} pengum\n• Ein stak av 52 kortum (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Tú spælir móti dealer (húsi)\n• Hvør túr fylgir Ultimate Texas Hold'em struktur: tú leggur ANTE og BLIND væður, fær 2 hol kort, avgjør um valfrí PLAY væður ígjøgnum betting fasar, síðan avdúkar samfelags kort og samanber tína bestu 5-kort hond móti dealer’s.\n• Málið er at maksimera tína vinning (når tú hevur betri hond), meðan tú minimerar tína tapt (når tú hevur verri hond).\n• Spælið endar tá tú kemur niður á 0 pengar ella minni í byrjun av túri (TAP) ella tá tú hevur klárað 1000 túrar við pengum (VINST)\n\n💰 BETTING STRUKTUR:\n• ANTE: Obligatorisk ${ante} væða hvør túr\n• BLIND: Obligatorisk ${ante} væða hvør túr\n• PLAY: Valfrí væða ígjøgnum spælið. Ígjøgnum túrin, kanst tú bert velja EIN av følgjandi: (${ante4} um tú gerst á PRE-FLOP, ${ante2} um tú gerst á FLOP, ella ${ante} um tú gerst á RIVER. Kanst eisini folda á river, gevur upp á hondini, og gerst ongantíð væða.)\n\n🎴 KORTDEILING:\n• Tú fær 2 opna kort (tíni hol kort)\n• Dealer fær 2 lokað kort (fjald frá tær)\n• 5 samfelags kort verða deild lokað í byrjun\n• Samfelags kort verða avdúkað progressivt ígjøgnum spælisfasar\n\n🏆 DEALER KVALIFIKATION:\n• Dealer má hava í minsta lagi eitt PAR (2 kort av sama rank) fyri at kvalifisera, við tí 2 kortunum í síni hond og tí 5 samfelags kortunum.\n• Dealer kvalifikation ávirkar væðu úrslitini, sum verður útskýrt seinni.\n\n🎮 SPÆLISFASAR & AKSJÓNIR:\n📋 PRE-FLOP:\n  • Aksjónir: [4x] (${ante4}) ella [check]\n  • [4x]: Legg ${ante4} PLAY væða, avdúkar fyrstu 3 samfelags kort\n  • [check]: Ongantíð væða, avdúkar fyrstu 3 samfelags kort\n\n📋 FLOP:\n  • Um 4x væða er lagt: Bert [skip] tilgongdar (auto-avdúkar seinastu 2 samfelags kort)\n  • Um onga 4x væða: [2x] (${ante2}) ella [check]\n  • [2x]: Legg ${ante2} PLAY væða, avdúkar seinastu 2 samfelags kort\n  • [check]: Ongantíð væða, avdúkar seinastu 2 samfelags kort\n\n📋 RIVER:\n  • Um 4x ella 2x væða er lagt: Bert [skip] tilgongdar (auto-framskridur til showdown)\n  • Um onga PLAY væða: [1x] (${ante}) ella [fold]\n  • [1x]: Legg ${ante} PLAY væða, framskridur til showdown\n  • [fold]: Gev upp á hondini, tapir ANTE og BLIND væður\n\n📋 SHOWDOWN:\n  • Öll kort verða avdúkað og mett\n  • Besta 5-kort hond úr 7 kortum (2 hol + 5 samfelags)\n  • Væður úrslitini ávirkar eftir útbetalings reglurnar\n\n💎 VÆÐU ÚTBETALINGAR:\n📊 ANTE VÆÐA:\n  • Dealer kvalifiserar ikki: PUSH (væða returnerar)\n  • Dealer kvalifiserar og tú vinnur: 1:1 útbetaling (væða + vinning)\n  • Dealer kvalifiserar og tú tapir: Væða tapt\n  • Javnt: PUSH (væða returnerar)\n\n📊 BLIND VÆÐA:\n  • Ikki ávirkað av dealer kvalifikation\n  • Tú vinnur: Væða returnerar og útbetaling eftir hond styrkja\n  • Tú tapir: Væða tapt\n  • Javnt: PUSH (væða returnerar)\n\n📊 BLIND VÆÐA ÚTBETALINGAR:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Minni enn Straight: Ongantíð útbetaling\n\n📊 PLAY VÆÐA:\n  • Ikki ávirkað av dealer kvalifikation\n  • Bein samanbering: Tína besta hond vs Dealer’s besta hond\n  • Tú vinnur: 1:1 útbetaling (væða + vinning)\n  • Tú tapir: Væða tapt\n  • Javnt: PUSH (væða returnerar)\n\n🎯 PÓKER HOND RANGERING (Best til Værst):\n  1. Royal Flush: A-K-Q-J-10 av sama suit\n  2. Straight Flush: 5 áein kort av sama suit\n  3. Four of a Kind: 4 kort av sama rank\n  4. Full House: 3 av sama rank + 2 av sama rank\n  5. Flush: 5 kort av sama suit\n  6. Straight: 5 áein kort\n  7. Three of a Kind: 3 kort av sama rank\n  8. Two Pair: 2 par av ymiskum rank\n  9. One Pair: 2 kort av sama rank\n  10. High Card: Hægsta kort vinnur\n\n⌨️  AKSJÓNSKOMMANDUR:\n• [4x] ella [play bet 4x]: Legg ${{self.ante_amount*4}} PLAY væða\n• [2x] ella [play bet 2x]: Legg ${{self.ante_amount*2}} PLAY væða\n• [1x] ella [play bet 1x]: Legg ${{self.ante_amount*1}} PLAY væða\n• [check] ella [c]: Check (ongantíð væða)\n• [fold] ella [f]: Fold (gev upp á hondini)\n• [skip] ella [s]: Skip til næsta fas (når onga aksjón er neyðug)\n\n💡 STRATEGI TIPS:\n• Sterkar byrjunar hendir (par, høgir kort) ofta rættferðiggja 4x væður\n• Hugsa um dealer kvalifikation - veikar hendir kunnu pusha um dealer ikki kvalifiserar\n• BLIND væða kann vera sera ávirkandi við sterkum hondum (Royal Flush = 500:1!)\n• Ansja tína pengastøðu! Um hon kemur niður á 0 ella minni í byrjun av túri, tapir tú.\n\n⚠️  VIKTUGAR ÁMINNINGAR:\n• ANTE og BLIND væður eru obligatoriskar hvør túr\n• PLAY væður eru valfríar og strategiskar\n• Ansja at tú leggur rætt aksjón, og bert eina aksjón á sinni.\n\n",
+    "state": "🎯 UMFARI {round}\n💰 Chippar: {chips}\n🎴 Tín hond: {hand}\n📊 Núverandi væddanir: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Umfar: {phase}\n🎯 Tilgjøgur aktionir: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Umfar {round} hevur byrjað! Væddanir: ANTE ${ante}, BLIND ${blind}. Tú hevur {chips} chippar eftir.",
+    "your_hand": " Hendur tínar: {hand}",
+    "flop_revealed": " FLOP avdúkaði: {cards}",
+    "river_revealed": " RÍVUR vísti: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Ógildilig átøk fyri verandi stig. Tilber at gera: {available}",
+    "message": " Ógildigur tilburður! Tilberir tiltøk: {available}"
+  },
+  "action": {
+    "folded": "- Tú hevur lagt teg aftur."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Hendurnar hjá býtarinum: {cards}",
+    "community_cards": " Kommunala kort: {cards}",
+    "player_best": "🎴 Leikarans besta hond: {name} ({cards})",
+    "dealer_best": "🎴 Útgávufólks besta hond: {name} ({cards})",
+    "ante_lost_folded": " ANTE-veddingin er tapt! -${ante} (faldað)",
+    "blind_lost_folded": " BLOYNDUR-veddingin er tapt! -${blind} (flett)",
+    "ante_won": "✅ ANTE hevur vunnið! +${amount}",
+    "ante_pushed": " ANTE-veddingin verður afturvíst! ${ante} er vendur.",
+    "ante_lost": " ANTE-veddingin er tapt! -${ante}",
+    "blind_won": "✅ BLIND-væðing VANN! +${amount}",
+    "blind_pushed": " BLIND-veddingin verður afturvíst! ${blind} er latin.",
+    "blind_lost": " TÓVURIN hevur tapt! -${blind}",
+    "play_won": "✅ LEIK-væðing VANN! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} hevur verið afturgingin.",
+    "play_lost": " Spælið hevur tapt! -${play}",
+    "net_gain": "🎉 Umfar {round} liðið! Netto-vinning: +${net}",
+    "net_loss": "💸 Umfar {round} liðið! Netto-tap: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 LEIKURIN ER LIÐIN! {max_turns} umfar eru liðin. Tú hevur ${chips} chippar - TÚ VINNUR!",
+    "game_over_lose": "Spælið er av, tit hava ikki fleiri chip. Dealer vinnur!",
+    "reward_win": "Leikari hevur liðið {winner_rounds} umfar við ${chips} chippar",
+    "reward_lose": "Leikarin fekk ikki chips í umfarið {round}",
+    "reward_win_max": "Leikari hevur liðið {max_turns} umfar við ${chips} chippar"
+  },
+  "hand_names": {
+    "royal_flush": "Kongliga fløska",
+    "straight_flush": "Rættar rennur",
+    "four_of_a_kind": "Fýra av einum slag",
+    "full_house": "Fullur húsur",
+    "flush": "Tørvur á fløsku",
+    "straight": "Rættarliga",
+    "three_of_a_kind": "Tríggir av sínum slag",
+    "two_pair": "Tvey pør",
+    "one_pair": "Eitt par av teimum.",
+    "high_card": "Høgt kort",
+    "unknown": "Ókend hond"
+  }
+}

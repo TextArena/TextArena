@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ètz jogador {player_id} d'un jòc de {max_rounds} rondas de Pòquer Kuhn.\nReglas del Jòc:\n- Lo Pòquer Kuhn utiliza un sabèl de 3 cartas amb J, Q, K (J mai bas, K mai naut)\n- Cadun jogador pòsta {ante} ficha e recep 1 carta cada ronda (notatz que las cartas son distribuidas sens remplaçament, alara podètz pas aver la meteissa carta que vòstre adversari).\n- Lo jòc contunha pendent {max_rounds} rondas\n- Lo jogador amb mai de fichas après totas las rondas ganha\nReglas d'accion:\n- '[check]': Passar sens pariar (sonque se pas i a cap pariatge sus la taula)\n- '[bet]': Apondre 1 ficha al pot (sonque se pas i a cap pariatge sus la taula)\n- '[call]': Emparar un pariatge d'un adversari en apondent 1 ficha al pot\n- '[fold]': Abandonar la man e laissar ganhar lo pot a l'adversari"
+  },
+  "init_round": {
+    "round_start": "### Començament de la ronda {current_round} sobre {max_rounds} rondas. La teva carta es: '{player_card}'",
+    "available_actions": "Las accions disponiblas son: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'accion deu èsser [Check], [Bet], [Call], o [Fold].",
+    "not_legal": "L'accion deu èsser {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Jogaire {player_id}, a somés la jogada: '[{move}]'.",
+    "valid_actions": "Las accions disponiblas son: {legal_actions}.",
+    "round_summary": "{reason} Puntuacions actualas: Jogaire 0: '{player_0_chips}'; Jogaire 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: La carta {winner_card} del Jogaire {winner} bat la carta {loser_card} del Jogaire {loser}. Lo Jogaire {winner} ganha lo pot de {pot_value} fichas."
+  },
+  "outcome": {
+    "draw": "A la fin de las rondas {max_rounds}, los dos jogaires avián lo meteis nombre de fichas.",
+    "round_win": "Lo jogaire {player_id} se retirèt.",
+    "winner_player0": "Lo jogaire 0 ganhèt per aver mai de fichas a la fin de totas las rondas {max_rounds}.",
+    "winner_player1": "Lo jogaire 1 ganhèt per aver mai de fichas a la fin de totas las rondas {max_rounds}."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Game Briscola dimulai! Jenis truf: {trump_suit} (Kartu truf: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Kamu bermain Briscola - Player {player_id}.\nTujuan: Menang trik dan mengumpulkan poin paling banyak (120 poin total di dek).\nPoin Kartu: A=11, 3=10, K=4, Q=3, J=2, lainnya=0\nKekuatan Kartu: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKartu truf mengalahkan kartu non-truf terlepas dari kekuatan.\n\nAksi: '[play X]' di mana X adalah posisi (1-{max_pos}) kartu di tanganmu\n"
+  },
+  "hand": {
+    "none": "Ora ana kertu.",
+    "empty": "Ora ana kartu ing tangan.",
+    "header": "Tanganmu:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Ora ana kertu sing diputer durung trik iki.",
+    "header": "Trik saiki:",
+    "line": "  Player {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Player {player_id}: {points} poin",
+    "trump_info": "Setelan Trump: {trump_suit}",
+    "trump_info_deck": "Jenis truf: {trump_suit} | Kartu yang tersisa di dek: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nSkor: {scores}\n{trump_info}\n\nMainkan kartu menggunakan [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Gunakake [play X] ing ngendi X minangka posisi kertu (1, 2, 3, lsp)",
+    "out_of_range": "Posisi kartu tidak valid. Kamu memiliki {count} kartu (1-{count})"
+  },
+  "action": {
+    "played": "Player {player_id} main {card}",
+    "trick_win": "Player {winner} menang trik karo {card} lan nampa {points} poin!"
+  },
+  "outcome": {
+    "head": "Game Rampung! Pemain {winner} menang karo {points} poin!\n\nSkor Pungkasan:\n{scores}",
+    "player_line": "Player {player_id}: {points} poin ({tricks} trik)\n"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "عمود التيار: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "ما لقيت شي شكل نقلي صالح. إستعمل \"[pile quantity]\".",
+    "correct_format_wrong_fields": "لاعب {player_id}، إجراء غير صالح. العمود {col} خارج الحدود.",
+    "out_of_range": "فهرس الكومة {pile_index} خارج النطاق.",
+    "non_positive": "لازم يزيل شي واحد على الأقل.",
+    "exceeds_pile": "لا يمكن إزالة {quantity} من الكومة {pile_index} (متبقي فقط {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "اللاعب {player_id} لعب [{pile_index} {quantity}]، وإزالة {quantity} شيء (أشياء) من الكومة {pile_index}."
+  },
+  "outcome": {
+    "win": "اللاعب {player_id} أخد آخر شي (((s)!"
+  }
+}

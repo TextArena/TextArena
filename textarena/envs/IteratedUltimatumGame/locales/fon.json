@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "A nyi azɔnwema {player_id}, mi ɖo {num_rounds} ɖo Iterated Ultimatum Game.\nA nyi ${pool} mi ɖo le ɖo ɖo si mi kpo to azɔnwema {other_id}.\n\nAzɔnwema ɖo:\n  - Ɖo asɛ: [Offer: $X] (0 <= X <= pool)\n  - Nɛ gbɛ wɛ azɔ, A nyi na $(pool - X), azɔnwema kpo na $X\n  - Nɛ gbɛ ma wɛ azɔ, A nyi ɖo kpo na $0\n  - Apɛsɛ: [Offer: $3]  alo  'Mɛ sɛ ɖo ɖo ɖo. [Offer: $5]'\n\nAzɔnwema kpo:\n  - Ɖo asɛ ɖo na [Accept] alo [Reject]\n  - Apɛsɛ: 'Ɛ jɛ ɖo ɖo. [Accept]'\n            'Ɛ ma ɖo ɖo. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Ɖo {round_number} bɛɖɛ! ---\nAzɔnwema {proposer_id} ɖo azɔnwema ɖo, Azɔnwema {responder_id} ɖo azɔnwema kpo.",
+    "offer": "Alọgọ ṣin ṣọṣi {round_number}: Agba ṣinatọ̀n {proposer_id} dọ̀n alọgọ ${offer} hẹ Agba ṣinatọ̀n {responder_id} (nado mọ ${keep}).",
+    "accepted": "Agba ṣinatọ̀n {responder_id} jlo alọgọ! Alọgọ ṣin ṣọṣi {round_number}: Agba ṣinatọ̀n {proposer_id} +${proposer_gain}, Agba ṣinatọ̀n {responder_id} +${responder_gain}. Pọsunu titengbe: Agba ṣinatọ̀n 0: ${total_0}, Agba ṣinatọ̀n 1: ${total_1}.",
+    "rejected": "Agba ṣinatọ̀n {responder_id} ma jlo alọgọ! Alọgọ ṣin ṣọṣi {round_number}: Mọyi na mọ $0. Pọsunu lẹ zẹemẹdo: Agba ṣinatọ̀n 0: ${total_0}, Agba ṣinatọ̀n 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Mɛ e na w'azɔ̌ ɔ ná é ɖó na zán nùjlɛ́n [Offer: $X] tɔn dó bló tuto.",
+    "bad_integer": "akwɛ e è na sɔ́ dó xɔ ɔ ná é ɖó na nyí nùjlɛ̌n ɖagbe ɖé.",
+    "out_of_range": "Akwɛ ɔ ɖo na nɔ tɛntin $0 kpo ${pool} kpo.",
+    "no_current_offer": "Gbɛ̀ azɔ gbɛ̀ ɖi kɛ wɛ̀.",
+    "accept_or_reject": "Respondè do àlọ tọn dehe na tindo avase yi [Accept] kavi [Reject] dọ ema."
+  },
+  "outcome": {
+    "win": "Agba ṣinatọ̀n he ye ji {winner} gba na gbẹ̀, pọsunu ${winner_total} wutu, bo ṣẹṣẹ sọn Agba ṣinatọ̀n he ye ji {loser} he mọ pọsunu ${loser_total}.",
+    "draw": "Gbɛ̀ gbɛ̀! Player kpɛkpɛ wèzɔ ${total} gbɛ̀ gbɛ̀."
+  }
+}

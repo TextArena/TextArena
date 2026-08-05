@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "I no gat ol kat yet.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Wanpela Player vs Dealer\n\n📖 GAME OVERVIEW:\n• Yu kamap long {start_chips} chips\n• Wanpela deck long 52 cards (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Yu pley against dealer (haus)\n• Kila raun i bihainim Ultimate Texas Hold'em struktur: yu post ANTE na BLIND bets, kisim 2 hole cards, deside long optional PLAY bets across betting phases, then reveal community cards na compare yu best 5-card hand against dealer’s. Yu goal i maximize yu winnings (wen yu gat better hand), wail minimizing yu losses (wen yu gat worse hand).\n• Game i pinis wen yu rausim 0 chips o below long start long raun (LOSS) o complete 1000 raun long chips (WIN)\n\n💰 BETTING STRUCTURE:\n• ANTE: Mandatory ${ante} bet kila raun\n• BLIND: Mandatory ${ante} bet kila raun\n• PLAY: Optional bet long gameplay. Throughout raun, yu ken chusim ONLY WAN long following: (${ante4} if done long PRE-FLOP, ${ante2} if done long FLOP, o ${ante} if done long RIVER. Ken i fold long river, givim ap long hand, na mekim no bet.)\n\n🎴 CARD DEALING:\n• Yu kisim 2 face-up cards (yu hole cards)\n• Dealer kisim 2 face-down cards (hidden from yu)\n• 5 community cards i deal face-down initially\n• Community cards i reveal progressively long game phases\n\n🏆 DEALER QUALIFICATION:\n• Dealer i mas gat at least wan PAIR (2 cards long same rank) long qualify, usim 2 cards long hand na 5 community cards.\n• Dealer qualification i afektem betting outcomes, as bai i explainim later.\n\n🎮 GAME PHASES & ACTIONS:\n📋 PRE-FLOP:\n  • Actions: [4x] (${ante4}) o [check]\n  • [4x]: Place ${ante4} PLAY bet, reveal first 3 community cards\n  • [check]: No additional bet, reveal first 3 community cards\n\n📋 FLOP:\n  • If 4x bet placed: Only [skip] available (auto-reveal last 2 community cards)\n  • If no 4x bet: [2x] (${ante2}) o [check]\n  • [2x]: Place ${ante2} PLAY bet, reveal last 2 community cards\n  • [check]: No additional bet, reveal last 2 community cards\n\n📋 RIVER:\n  • If 4x o 2x bet placed: Only [skip] available (auto-proceed long showdown)\n  • If no prior PLAY bet: [1x] (${ante}) o [fold]\n  • [1x]: Place ${ante} PLAY bet, proceed long showdown\n  • [fold]: Givim ap hand, lose ANTE na BLIND bets\n\n📋 SHOWDOWN:\n  • All cards reveal na evaluate\n  • Best 5-card hand from 7 cards (2 hole + 5 community)\n  • Bets settle according long payout rules\n\n💎 BET PAYOUTS:\n📊 ANTE BET:\n  • Dealer i no qualify: PUSH (bet return)\n  • Dealer i qualify & yu win: 1:1 payout (bet + winnings)\n  • Dealer i qualify & yu lose: Bet lost\n  • Tie: PUSH (bet return)\n\n📊 BLIND BET:\n  • Unaffected long dealer qualification\n  • Yu win: Bet return na additional payout based long yu hand strength\n  • Yu lose: Bet lost\n  • Tie: PUSH (bet return)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four long a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: No additional payout\n\n📊 PLAY BET:\n  • Unaffected long dealer qualification\n  • Direct comparison: Yu best hand vs Dealer's best hand\n  • Yu win: 1:1 payout (bet + winnings)\n  • Yu lose: Bet lost\n  • Tie: PUSH (bet return)\n\n🎯 POKER HAND RANKINGS (Best long Worst):\n  1. Royal Flush: A-K-Q-J-10 long same suit\n  2. Straight Flush: 5 consecutive cards long same suit\n  3. Four long a Kind: 4 cards long same rank\n  4. Full House: 3 long a kind + 2 long a kind\n  5. Flush: 5 cards long same suit\n  6. Straight: 5 consecutive cards\n  7. Three long a Kind: 3 cards long same rank\n  8. Two Pair: 2 pairs long different ranks\n  9. One Pair: 2 cards long same rank\n  10. High Card: Highest card wins\n\n⌨️  ACTION COMMANDS:\n• [4x] o [play bet 4x]: Place ${{self.ante_amount*4}} PLAY bet\n• [2x] o [play bet 2x]: Place ${{self.ante_amount*2}} PLAY bet\n• [1x] o [play bet 1x]: Place ${{self.ante_amount*1}} PLAY bet\n• [check] o [c]: Check (no additional bet)\n• [fold] o [f]: Fold (givim ap hand)\n• [skip] o [s]: Skip long next phase (wen no action needed)\n\n💡 STRATEGY TIPS:\n• Strong starting hands (pairs, high cards) often justify 4x bets\n• Consider dealer qualification - weak hands may push if dealer i no qualify\n• BLIND bet ken i very profitable long strong hands (Royal Flush = 500:1!)\n• Watch yu chip stack! If i go long 0 o below long start long raun, yu lose.\n\n⚠️  IMPORTANT NOTES:\n• ANTE na BLIND bets i mandatory kila raun\n• PLAY bets i optional na strategic\n• Make sure yu input correct action, na only wan action long wan taim.\n\n",
+    "state": "🎯 Raun {round}\n💰 Chips: {chips}\n🎴 Yu han: {hand}\n📊 Karan bet: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fez: {phase}\n🎯 Avalebel aksion: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Raun {round} i statim! Bet: ANTE ${ante}, BLIND ${blind}. Yu hav {chips} chips we i stap.",
+    "your_hand": " Han bilong yu: {hand}",
+    "flop_revealed": " FLOP i kamapim klia: {cards}",
+    "river_revealed": " RIVER i kamapim klia: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Ol samting yu ken mekim long dispela hap i no stret. {available}",
+    "message": " Ol samting yu inap mekim: {available}"
+  },
+  "action": {
+    "folded": " Yu lusim pinis."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Han bilong man i givim mani: {cards}",
+    "community_cards": " Ol kad bilong Komyuniti: {cards}",
+    "player_best": "🎴 Pleeya's bes han: {name} ({cards})",
+    "dealer_best": "🎴 Dila i winim han: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (pasim)",
+    "blind_lost_folded": "❌ Moni bilong BLIND i GO PINIS! -${blind} (yupela i fold)",
+    "ante_won": "✅ ANTE moni bilong yu WIN! +${amount}",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} i kam bek",
+    "ante_lost": " ANTE bet LOST! -${ante}",
+    "blind_won": "✅ Moni bilong BLIND i KAMAP! +${amount}",
+    "blind_pushed": " BILONG PISIM I KAM! ${blind} i kam bek.",
+    "blind_lost": "❌ Moni bilong BLIND i GO PINIS! -${blind}",
+    "play_won": "✅ Plei bet WIN! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} i kam bek.",
+    "play_lost": " Plei Bet i Lusim! - ${play}",
+    "net_gain": "🎉 Raun {round} ᴘɪᴍᴘ! Net gain: +${net}",
+    "net_loss": "💸 Raun {round} ᴘɪᴍᴘ! Net los: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 Gem ᴘɪᴍᴘ! {max_turns} raun ᴘɪᴍᴘ. Yu hav ${chips} chips - Yu win!",
+    "game_over_lose": " GAM I STOP! Yu no gat moa chips. Dailers i win!",
+    "reward_win": "Pleeya ᴘɪᴍᴘ {winner_rounds} raun wantaim ${chips} chips",
+    "reward_lose": "Man i sot long chips insait long raun {round}",
+    "reward_win_max": "Pleeya ᴘɪᴍᴘ {max_turns} raun wantaim ${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "Roiyal Flas",
+    "straight_flush": "Stretpela Flush",
+    "four_of_a_kind": "Fopela i Narapela Kain",
+    "full_house": "Haus i pulap",
+    "flush": "Putim wara long hanlek bilong yu.",
+    "straight": "Stretpela rot i go stret",
+    "three_of_a_kind": "Tripela Samting i Narapela Kain",
+    "two_pair": "Tupela Paset",
+    "one_pair": "Wanpela Paset",
+    "high_card": "Hai Kadi",
+    "unknown": "Han i no klia"
+  }
+}

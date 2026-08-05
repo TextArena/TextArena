@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Qanmi Player {player_id} kanki {num_players}-pukllaykachaq Liar's Dice pukllaypi.\nKamachikuna:\n- Q'umir turnoykita, qanmi:\n  1) Musuq bid ruwayta, aswan yupayninman aswan face (manañachu) kunan bidmanta; ahinataq '[Bid: 3, 4]',\n  2) Q'ipiyta q'umir bidta '[Call]' qillqaspa.\n\nQ'ipiyta q'umir q'ipiykachaq:\n  - Wakichi yupaykunapaq yupaynin mana yupasqa bidmanta, q'ipiykachaq pask'arqan huk wakichita.\n  - Mana, q'ipiykachaq pask'arqan huk wakichita.\nPukllaykachaq 0 wakichi yupaykunayuq pask'arqan, atipaqmi."
+  },
+  "board": {
+    "per_player": "\tPukaraq {p}: {d}",
+    "new_round": "\nUkhu p'unchay - Mana k'usillu: {dice_summary}\nKamayuq k'usilluq kan: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Pukllaykachaq {current_player_id} q'ipiyta! Wakichi yupaykunapaq yupaynin {face_value} {count}, mana yupasqa {quantity}.\nPukllaykachaq {loser_id} (q'ipiykachaq) pask'arqan huk wakichita.",
+    "caller_loses": "Runa {current_player_id} riman! {face_value} ñawpaq q'ipin {count}mi, {quantity}manta aswanmi.\nRuna {loser_id} (rimaq) huk t'uru p'unchawn."
+  },
+  "action": {
+    "bid_announce": "Pukaraq {player_id} apukun {quantity} ukhu face {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Mana ni uj ofertawanchu, chayman chayan.",
+    "invalid_bid": "Mana allin oferta: {reason}",
+    "not_recognized": "Accion mana riqsichu '[Bid: X, Y]' icha '[Call]' nisqataq. Apukun accion: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Ukhu p'unchay {new_quantity} aswan p'isqaqa kunan {current_quantity}.",
+    "face_lower": "Ukhu face willay {new_face_value} aswan p'isqaqa kunan {current_face_value}.",
+    "identical": "Chay ofertaqa kunanmantaq kikinmi.",
+    "face_range": "Qhapaq valorqa 1 - 6 nisqamanmi kanqa."
+  },
+  "message": {
+    "eliminated_invalid": "Pichu pukllaq {player_id} mana allin puriywan lluqsirqan."
+  },
+  "outcome": {
+    "win": "Pukaraq {winner} atipay! Tukuy pukllay: {final_ranking}"
+  }
+}

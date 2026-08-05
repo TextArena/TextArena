@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Siz Spite and Malice iki-oýunçyly oýununda {player_id} oýunçysy. Siz ýeňiş ýetmek üçin özüňiziň payoff ýygynynda ilkinji bolup boşaltmaly.\n\n### Oýun Gözden Geçirme:\n- Maksat, kartlary merkezi ýygyndylara oýnap, özüňiziň payoff ýygynyny arassalamak.\n- Siz üç çeşmeden kart oýnap bilýärsiňiz:\n  1. Siz **el** (siz her gezek 5 kart bilen başlaýarsyňyz).\n  2. Siz **payoff ýygynynyň ýokarsyndaky kart**.\n  3. Siz **ähli discard ýygynlaryň ýokarsyndaky kart**.\n\n### Oýun Düzlügi:\n- Siz merkezi ýygynlara kart oýnap bilýärsiňiz, ýöne ýokarda ýerleşýän kartdan **bir orun ýokary** bolsa (merkezi ýygynlar Ace bilen başlaýar we Queen ýetýär; Kings - olar ýekeje kartda oýnap bilýär, ýöne orun tertibini üýtgedýär. Bu, 4-den soň King ulanylanda, şol King 5-orunly we indiki kart 6 bolmaly diýmegi aňladýar).\n- Eger siz kart oýnap bilmeýän bolsaňyz, siz **kart ýatyrýarsyňyz** discard ýygynlaryň birine gezeginizi tamamlap.\n- Eger merkezi ýygyn Queen ýetse, ol awtomatik ýagdaýda arassalanylýar.\n- Orun tertibi: A=1, 2=2, ..., 9=9, J=10, Q=11, K ýeke.\n\n### Hereketler:\n1. **Çek**: Siz gezeginizi başlanda, eliňizi 5 kart bilen dolduryň. **[draw]** ýazyp başlaň.\n2. **Kart Oýnaň**: Kart oýnamak üçin, kart we merkezi ýygyn ýaly ýazyp: **[play A♠ 0]** (ýaly 'A♠' kart we '0' merkezi ýygyn indeksi).\n3. **Ýatyrmak**: Eger siz kart oýnap bilmeýän bolsaňyz, eliňizden kart ýatyryň discard ýygynyna gezeginizi tamamlap. **[discard A♠ 1]** ýazyp (ýaly 'A♠' kart we '1' discard ýygyn indeksi). Ýatyrjak kart payoff ýygynundan ýatyryp bolmaýar. Siz diňe eliňizdäki kartlary ýatyryp bilýärsiňiz.\n\n"
+  },
+  "board": {
+    "current_board": " Häzirki tahta:\n\n{board}\nMöhkäm ýerine ýetiriler: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Merkez Maýdalar -- ",
+    "pile": "{observation}Taý {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Oýnawaňy {player_id}-iň görnüşi ---\n",
+    "payoff": "{observation}Ýatyş hökmünde kart (birinji kart): {top_card}, Ýatyş hökmünde kartlaryň sany: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Ýatyş ýygnaklary: {discard}\n",
+    "empty": "Boş"
+  },
+  "game_message": {
+    "no_cards_left": "Çekmek üçin kartlar ýok. Ýadyňyzdamy siz şu çeşmelerden kartalary oýnap bilersiňiz: 1. Siziň eliňiz 2. Önerme gutusynyň üst kagyzy 3. Atylýan gutlaryňyzyñ islendikiniň üst kagyzydyr. "
+  },
+  "invalid_move": {
+    "wrong_format": "Ýaramaz hereket formati. Oýunçy {player_id} düzgünli hereketi bilen jogap bermedi, kerçegiň arasynda görkezildi.",
+    "invalid_play": "Ýalňyş oýun. Oýunçy {player_id} {card} kartyny merkezi ýygyn {index} ýerine ýerleştirmäge synanyşdy.",
+    "discard_from_payoff": "Ýalňyşdyrylma. Oýunçy {player_id} töleg gutarýan topardan karty aýyrmaga synanyşdy.",
+    "discard_not_in_hand": "Ýaramaz atmak. Oýunçy {player_id} eliňde bolmadyk karty taşlamaga synanyşdy.",
+    "wrong_move_type": "Ýaramaz hereket tipi. Oýunçy {player_id} dogry hereket bilen jogap bermedi."
+  },
+  "game_action": {
+    "you_drew": "Sen karta çekdiň.",
+    "opponent_drew": "Oýunçy {player_id} karta çekdi.",
+    "you_played": "Siz {card} kartyny merkezi ýygyn {index} ýerine ýerleştirdiňiz.",
+    "opponent_played": "Oýunçy {player_id} {card} kartyny merkezi ýygyn {index} ýerine ýerleştirdi.",
+    "you_discarded": "Siz {card}-i ýatyş hökmünde {index}-e goýdunuz, bu hem siz hökmini tamamladynyzy aňladýar. Bu hökmde sizinkiň garaşylýan hiç bir çäreleri göz öňünde tutulmaýar. Oýnawaňy {next_player_id} indi ýerine ýetirjek.",
+    "opponent_discarded": "Oýnawaňy {player_id} ýatyş hökmünde {card}-i ýatyş ýygnagy {index}-e goýdy, bu hem oýnawaňyň hökmini tamamladyny aňladýar. Bu hökmde Oýnawaňy {player_id}-iň garaşylýan hiç bir çäreleri göz öňünde tutulmaýar. Oýnawaňy {next_player_id}, siz indi ýerine ýetirjeksiňiz. Ýerine ýetirjek işleriňizi [action card center_index] formatda giriziň."
+  },
+  "outcome": {
+    "payoff_cleared": "Oýnawaňy {current_player} öz ýatyş hökmünde kartlaryny tamamlady! Oýnawaňy {current_player} ýeňdi!",
+    "deadlock_player_0": "Gatyşyk ýagdaýa ýetdi! Oýnawaňy 0 {player_0_payoff} kartlary galan hökmünde Oýnawaňy 1-e garşy ýeňdi, şol bir wagtda Oýnawaňy 1-de {player_1_payoff} kart galan.",
+    "deadlock_player_1": "Gatyşyk ýagdaýa ýetdi! Oýnawaňy 1 {player_1_payoff} kartlary galan hökmünde Oýnawaňy 0-a garşy ýeňdi, şol bir wagtda Oýnawaňy 0-da {player_0_payoff} kart galan.",
+    "deadlock_tie": "Ýagdaý ýetdi we deňlik! Iki oýunçy {player_0_payoff} kart bilen ýeňdi. Oýunçy {current_player} ýeňdi!"
+  }
+}

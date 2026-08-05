@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "ၸဝ်ႈၵဝ်ႇ တိုၵ်ႉမႄး Klondike Solitaire ။ ၵၢင်ၸႂ်ၸဝ်ႈၵဝ်ႇ ၶႂ်ႈႁႂ်ႈၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ် ၶိုၼ်ႈၸူး foundation piles ။\n\nၵႂၢမ်းၵပ်းၵၢႆႇၶဝ်:\n- foundation piles (F1-F4): ၵေႃႇႁႂ်ႈၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ် တီႈ Ace ၶိုၼ်ႈၸူး King ၼႂ်း suit \n- Tableau piles (T1-T7): ၵေႃႇလူင်ၸိုဝ်ႈၸိုင်ႈၶဝ် တီႈၼိူဝ်ႁူဝ်လႅင် လႅင်လိူင် (ႁူဝ်လႅင်ၸဵတ်း၊ ႁူဝ်လႅင်ၶဵဝ်)\n- Stock: 'draw' ၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ် တီႈ stock ၶိုၼ်ႈၸူး waste pile\n- Waste (W): ၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ် တီႈၼိူဝ်ႁူဝ် waste ၸၢင်ႈဢဝ်ႁဵတ်းၵၢၼ်\n\nၵႂၢမ်းၸႂ်ႉ:\n- 'draw' - 'draw' ၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ် တီႈ stock ၶိုၼ်ႈၸူး waste\n- 'move <source> <destination> [count]' - ၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ် ၶၢႆႉၸူးၼႂ်း piles\n  ၸိူဝ်းႁိူၼ်း: 'move W T1', 'move T1 F2', 'move T3 T5 2' ။ count ၸၢင်ႈႁဵတ်း 'all' ၶိုၼ်ႈၸူးၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ် တီႈၼိူဝ်ႁူဝ်ၸိုဝ်ႈၸိုင်ႈၶဝ်\n- 'forfeit' - ၸဝ်ႈၵဝ်ႇ ဢဝ်ၵွၼ်ႇၸူးၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ် တီႈၼိူဝ်ႁူဝ်ၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ်\n- ၸိုဝ်ႈ piles: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nၸဝ်ႈၵဝ်ႇ ၸၢင်ႈႁဵတ်းၵၢၼ်ၶိုၼ်းၶိုၼ်း၊ ၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ် တီႈၼိူဝ်ႁူဝ်ၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ် ၶၢႆႉၸူးၼႂ်း piles ၼၼ်ႉ၊ ၸိူဝ်းႁိူၼ်း: 'draw, move W T1, move T2 F1'\n\nၶိူဝ်းၸိုဝ်ႈၸိုင်ႈၶဝ် တီႈၼိူဝ်ႁူဝ် King ၸၢင်ႈႁဵတ်းၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ် တီႈၼိူဝ်ႁူဝ် tableau piles ။\nၵၢၼ်ၶိုၼ်းၶိုၼ်း တီႈၼိူဝ်ႁူဝ်ၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ် တီႈၼိူဝ်ႁူဝ် piles ၼၼ်ႉ တီႈၼိူဝ်ႁူဝ်ၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ် ဢဝ်ၸိုဝ်ႈၸိုင်ႈၶဝ် တီႈၼိူဝ်ႁူဝ် piles ၼၼ်ႉ၊ ၸိူဝ်းႁိူၼ်း: 'forfeit' ၸဝ်ႈၵဝ်ႇ ဢဝ်ၵွၼ်ႇၸူးၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ် တီႈၼိူဝ်ႁူဝ်ၶႅပ်းၸိုဝ်ႈၸိုင်ႈၶဝ်"
+  },
+  "format_error": {
+    "no_brackets": "ပိူင်ႁဵတ်းသၢင်ႈ ဢၼ်ဢမ်ႇမႅၼ်ႈ။ လွင်ႈႁဵတ်းသၢင်ႈၼႆႉ ထုၵ်ႇလီမီးဝႆႉၼႂ်းၵႄႈ သဵၼ်ႈမၢႆဢၼ်ၶွတ်ႇၽွတ်ႈဝႆႉၼၼ်ႉယဝ်ႉ။",
+    "no_closing_bracket": "ၽၢင်ႁၢင်ႈဢၼ်ဢမ်ႇၽဵင်ႇပဵင်း။ ဢမ်ႇမီးႁူးၵွၼ်ႇ ဢၼ်ဢိုတ်းဝႆႉ ']'",
+    "empty_command": "လွင်ႈသင်ႇဢၼ်ဢမ်ႇမီးတီႈပွင်ႇ။ တႅမ်ႈ 'draw' ဢမ်ႇၼၼ် 'move <source> <destination> [count]'",
+    "empty_action": "လွင်ႈႁဵတ်းသၢင်ႈ ဢၼ်ဢမ်ႇမီးလွင်ႈတၢင်း။",
+    "move_needs_args": "အမိန့်မှာ အစနဲ့ အဆုံး လိုအပ်ပါတယ်။ အသုံးပြုပုံ: 'move <source> <destination> [count]'",
+    "count_positive": "Count သည် အပေါင်း သို့မဟုတ် 'all' ဖြစ်ရန်",
+    "count_invalid": "လွင်ႈၼပ်ႉဢၢၼ်ႇဢမ်ႇမႅၼ်ႈ ၸႂ်ႉတူဝ်ၼပ်ႉ ဢမ်ႇၼၼ် 'all' (တၢင်းမူတ်း)",
+    "unknown_command": "အမိန့် '{cmd}' မသိပါ။ 'draw', 'move <source> <destination> [count]', သို့ 'forfeit' အသုံးပြုပါ",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "{n} အမိန့် အောင်မြင် ခဲ့။",
+    "failed": "လုပ်ဆောင်ချက် {n} မအောင်မြင်ပါ: {msg}"
+  },
+  "move_result": {
+    "drew": "ရိုင္းကတ္တဲ့နေရာမှ ကတ်မ်ားကို စွန္႔လိုက္တဲ့နေရာသို့ ကောက်ခဲ့ပါသည္။",
+    "cannot_draw": "ဢမ်ႇၸၢင်ႈၸၼ်လႆႈ၊ ၶူဝ်းၶွင်ဢၼ်ၵိုတ်းဝႆႉလႄႈ ဢၼ်ပႅတ်ႈၸိူဝ်းၼၼ်ႉ တင်းသွင်ၼႆႉ သုတ်းသဵင်ႈယဝ်ႉ။",
+    "invalid_pile": "ၸိုဝ်ႈႁဵင်းၵွင်ႉဢၼ်ဢမ်ႇၽဵင်ႇပဵင်း။ ၸႂ်ႉ W, F1-F4, ဢမ်ႇၼၼ် T1-T7",
+    "foundation_one_card": "ၸၢင်ႈဢဝ်ဝႂ် 1 ဢၼ်ၵူၺ်း ၶၢႆႉၸူးငဝ်ႈၸိုင်ႈလႆႈယူႇယဝ်ႉ။",
+    "waste_to_foundation_ok": "ၶၢႆႉပႅတ်ႈဝႂ်ယႃႈမဝ်းၵမ် တီႈၼႂ်းပိုၼ်ႉတီႈ F{dst}",
+    "waste_to_foundation_bad": "ဢမ်ႇၸၢင်ႈၶၢႆႉ ၶႅပ်းယဵၼ်းၶိုၼ်း တီႈၼႂ်းႁုၼ်ႈငဝ်ႈၼၼ်ႉလႆႈ",
+    "tableau_to_foundation_ok": "T{src} မှ ကတ်ကို F{dst} သို့ ပြောင်းရွှေ့ပါသည်",
+    "tableau_to_foundation_bad": "ဢမ်ႇၸၢင်ႈၶၢႆႉၽႅၼ်ႇၶႅပ်းႁၢင်ႈၸူး တီႈထုပ်ႉငဝ်ႈမၼ်းၼၼ်ႉလႆႈယူႇၶႃႈ။",
+    "foundation_to_foundation": "ဢမ်ႇၸၢင်ႈၶၢႆႉတီႈလုၵ်ႉ တီႈငဝ်ႈငုၼ်းသေၵႂႃႇၸူး ငဝ်ႈငုၼ်ႈတၢင်ႇဢၼ်။",
+    "waste_to_tableau_one_card": "ၸၢင်ႈၶၢႆႉလႆႈ 1 ၶႅပ်းၵူၺ်း လုၵ်ႉတီႈၶူဝ်းၶွင်သေ ၶဝ်ႈၼႂ်းၽိူၼ် (tableau)",
+    "waste_to_tableau_ok": "ၶၢႆႉပႅတ်ႈဝႂ်တီႈယႃႉသေ ဢဝ်မႃးသႂ်ႇၼႂ်းၽႅၼ်ႇလိၼ် T{dst}",
+    "waste_to_tableau_bad": "ဢမ်ႇၸၢင်ႈဢဝ် ၶႅပ်းယဵၼ်း ဢၼ်ဢမ်ႇလူဝ်ႇၼၼ်ႉ သႂ်ႇၼိူဝ် ၽိူၼ်ၽိုၼ်လိၵ်ႈဢၼ်ၼိူင်ႈ ၼၼ်ႉလႆႈယူႇယဝ်ႉ။",
+    "no_face_up": "ဢမ်ႇမီးဝႂ်ဢၼ်ၽႅၼ်ဝႆႉ တႃႇတေၶၢႆႉလႆႈ။",
+    "tableau_to_tableau_ok": "T{src} မှ T{dst} သို့ {count} ကတ်(များ) ကို ပြောင်းရွှေ့ပါသည်",
+    "tableau_to_tableau_bad": "T{src} မှ T{dst} သို့ {count} ကတ်(များ) ကို ပြောင်းရွှေ့၍ မရပါ",
+    "foundation_to_tableau_one_card": "ၸၢင်ႈၶၢႆႉလႆႈ 1 ၶႅပ်းၵူၺ်း လုၵ်ႉတီႈငဝ်ႈငုၼ်းသေ ၵႂႃႇၸူးၽိူၼ်။",
+    "foundation_empty": "ငဝ်ႈငုၼ်း F{src} ၼႆႉ လင်ၶႃးဝႆႉ။",
+    "foundation_to_tableau_ok": "အခြေခံအစု F{src} ကစားပွဲအစု T{dst} သို့ ရွှေ့လိုက်သည်။",
+    "foundation_to_tableau_bad": "ဢမ်ႇၸၢင်ႈဢဝ် card တီႈၼိူဝ်ၽႅၼ်ႇလိၼ် T{dst}",
+    "to_waste_or_stock": "စွန္႔လိုက္တဲ့နေရာ သို့မဟုတ် ရိုင္းကတ္တဲ့နေရာသို့ ရွှေ့လို႔မရပါ။"
+  },
+  "outcome": {
+    "forfeit": "လွင်ႈလဵၼ်ႈဢၼ်လႆႈထုၵ်ႇထွၼ်ဢွၵ်ႇ။ ၶေႃႈတွပ်ႇလိုၼ်းသုတ်း: {score} ၽႅၼ်ႇတီႈငဝ်ႈႁၢၵ်ႈၼၼ်ႉယဝ်ႉ။",
+    "won": "မႂ်ႇသုင်ၶႃႈ၊ သူင်ႇသူးဢၼ်လႆႈတီႈ Klondike Solitaire ယဝ်ႉဢေႃႈ။",
+    "turn_limit": "ကစားပွဲ အဆုံး! အများဆုံး {max_turns} ခါ အပြီး။ အမှတ်: {score} ကဒ် အခြေခံ ပုံစုများမှာ"
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "ၶူဝ်းၶွင်: {stock} ဝႂ်ၵၢတ်ႉ (cards)",
+    "waste": "ၶူဝ်းၶွင်ဢၼ်ဢမ်ႇမီးတီႈပွင်ႇ (W): {waste}",
+    "foundations_header": "ငဝ်ႈငုၼ်း:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "ၽႅၼ်ႇလိၼ်:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

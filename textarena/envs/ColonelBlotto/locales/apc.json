@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "أنت {role} في اللعبة كولونيل بلوتو.\nهدفك هو الفوز بعدد أكبر من الجولات من خصمك.\nفي كل جولة، قم بتوزيع {num_total_units} وحدة بالضبط عبر الحقول {field_names}.\nاللاعب الذي يخصص وحدات أكثر لحقل يفوز بهذا الحقل، واللاعب الذي يفوز بعدد أكبر من الحقول يفوز بالجولة.\nعلى سبيل المثال، '[A7 B7 C6]' يخصص 7 وحدات إلى A، و 7 إلى B، و 6 إلى C.",
+    "commander_alpha": "قائد ألفا.",
+    "commander_beta": "قائد بيتا."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - الجولة {current_round}/{num_rounds} ===\nالجولات المربوحة - القائد ألفا: {alpha_score}، القائد بيتا: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nالجولة {current_round}\nالقائد ألفا قام بتخصيص: {p0_allocations}\nالقائد بيتا قام بتخصيص: {p1_allocations}\n",
+    "winner_alpha": "{message}الفائز: القائد ألفا",
+    "winner_beta": "{message}الفائز: القائد بيتا",
+    "tie": "{message}ربطة!"
+  },
+  "invalid_move": {
+    "wrong_format": "شكل إدخال غير صالح. إستعمل: A:5، B:10، C:5",
+    "invalid_field": "إسم الحقل غير صالح. حقول صحيحة: {field_names}",
+    "wrong_allocation_value": "كل التخصيصات لازم تكون عدد صحيح مش سالب.",
+    "incorrect_total_units": "يجب تخصيص {num_total_units} وحدة بدقة. المجموع الحالي: {current_sum}",
+    "good_allocations": "التوزيع منيح."
+  },
+  "outcome": {
+    "winner_alpha": "يفوز القائد ألفا {score_0}-{score_1} بعد {num_rounds} جولات!",
+    "winner_beta": "يفوز القائد بيتا {score_1}-{score_0} بعد {num_rounds} جولات!",
+    "draw": "ينتهي اللعب بالتعادل {score_0}-{score_1} بعد {num_rounds} جولات!",
+    "early_winner_alpha": "يفوز القائد ألفا {scores_0}-{scores_1} (الاغلبية تحققت)!",
+    "early_winner_beta": "يفوز القائد بيتا {scores_1}-{scores_0} (الاغلبية تحققت)!"
+  }
+}

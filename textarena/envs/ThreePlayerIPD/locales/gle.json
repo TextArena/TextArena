@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Tá tú mar Imreoir {player_id} i gcluiche 3-imreoir Iterated Prisoner's Dilemma. Maireann an cluiche {num_rounds} babhta.\nStruchtúr babhta:\n• {conv_rounds} babhta caint shaor\n• 1 babhta cinnte - cuir isteach aon token amháin in aghaidh gach iomaitheora: '[<opp-id> cooperate]' nó '[<opp-id> defect]' (i.e. '[1 defect] [2 cooperate]'; is é an réamhshocraíocht 'comhoibriú'). \nMaiteas pair-wise (curtha i bhfeidhm ar gach pair asordaithe):\n  - Comhoibríonn an bheirt  ->  {reward}\n  - Déanann an bheirt éirí as     ->  {punishment}\n  - Déanann tú éirí as, comhoibríonn siad ->  {temptation}\n  - Comhoibríonn tú, déanann siad éirí as ->  {sucker}\nBuann an imreoir(í) leis an scór is airde ag deireadh na mbabhtaí ar fad."
+  },
+  "round": {
+    "start": "─── Tús Babhta {round} ───\tTá tú in ann comhrá a dhéanamh go saor in aisce don {conv_rounds} babhtaí atá le teacht.",
+    "chat_finished": "Críochnaithe an comhrá don bhabhta {round}. Cuir isteach do chinniúintí, ticéad amháin in aghaidh an chéile comhraic: `[pid cooperate]` nó `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Torthaí:",
+    "pair_line": "{observation}\n\t Imreoir {i} in aghaidh Imreoir {j} roghnaigh {choice_i} agus {choice_j} faoi seach (bhain Imreoir {i} {gain_i}, bhain Imreoir {j} {gain_j})",
+    "scores_open": "{observation} -> Scóir reatha: ",
+    "score_first": "{observation}Imreoir {player_id} ({score})",
+    "score_next": "{observation}; Imreoir {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Scóir dheiridh: {scores}.  Grúpaí rangaithe (is measa → is fearr): {groups}"
+  }
+}

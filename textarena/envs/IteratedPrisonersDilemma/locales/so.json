@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Waxaad tahay ciyaaryahanka {player_id} ee Xabsiga Xabsiga ee Xabsiga oo ku yaala wareegyada {num_rounds} Qaab dhismeedka ciyaarta: - Kahor go'aan kasta waxaad leedahay {total_conversation_rounds} u jeestay si ay si xor ah ula xiriiraan. - Kadib, labada ciyaaryahanba waxay isku mar u doortaan inay iskaashi ama cilad sameeyaan. Matrix-ka Bixinta (la hagaajiyay wareeg kasta): - Labaduba Iskaashi ➜ mid kasta {cooperate_reward} - Labaduba Cilad ➜ mid kasta {mutual_defect_reward} - Mid ayaa Cilad leh, mid ayaa Iskaashi ➜ Defector {defect_reward}, Iskaashi {sucker_reward} Sida loo ciyaaro: - Inta lagu jiro wada hadalka: qor qoraal kasta oo aad rabto. - Inta lagu jiro marxaladda go'aanka: ku dar '[Cooperate]' ama '[Defect]' (xasaasiyad-xasaasiyad). Waxaad ku dari kartaa qoraal dheeri ah kahor / ka dib astaanta."
+  },
+  "phases": {
+    "conversation_finished": "Wadahadalku wuxuu ku dhammaaday wareegga {round}. Fadlan ku soo jawaab '[Cooperate]' ama '[Defect]' gudaha \\boxed{{}}.",
+    "starting_round": "--- Wareega bilowga {round} ---",
+    "round_summary": "Natiijada wareega {round}: {outcome} Ciyaaryahanka 0 wuxuu kasbaday {r0} (wadar {score_0}), Ciyaaryahanka 1 wuxuu kasbaday {r1} (wadar {score_1})."
+  },
+  "outcome": {
+    "winner": "Ciyaaryahanka {winner} ayaa guuleysta {win_score} - {lose_score}.",
+    "draw": "Isku aad! Labada ciyaartoy ayaa dhaliyay {s0}.",
+    "round_both_cooperate": "Labada ciyaartoyba way wada shaqeeyeen.",
+    "round_both_defect": "Labada ciyaartoyba way ka soo goosteen.",
+    "round_p0_cooperates_p1_defects": "Ciyaaryahanka lambarkiisa 0 wuxuu wadashaqeyn la yeeshay, Ciyaaryahanka 1 wuxuu ka goostay.",
+    "round_p0_defects_p1_cooperates": "Ciyaaryahanka lambarkiisa 0 uu ka soo goostay, Ciyaaryahanka 1 uu iska kaashaday."
+  }
+}

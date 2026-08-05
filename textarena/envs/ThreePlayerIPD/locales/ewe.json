@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Efe Player {player_id} le 3-player Iterated Prisoner's Dilemma me. Eɖo lɔ {num_rounds} wɔɣa.\nWɔɣa tsɔtsɔ:\n• {conv_rounds} free-chat wɔɣa\n• 1 decision wɔɣa - naʼi token ɖe ɖeɖi ɖe ɖeɖi: '[<opp-id> cooperate]' kple '[<opp-id> defect]' (eye wɔna '[1 defect] [2 cooperate]'; ɖe si wɔna 'cooperate'). \nPair-wise payoff matrix (le ɖe ɖeɖi ɖe ɖeɖi):\n  - Mie nyɔnu kple mie nyɔnu  ->  {reward}\n  - Mie tsɔ kple mie tsɔ     ->  {punishment}\n  - Mie tsɔ, wɔɖo nyɔnu ->  {temptation}\n  - Mie nyɔnu, wɔɖo tsɔ ->  {sucker}\nNyuie si ɖe kɔkɔe kɔkɔe le wɔɣa ɖe ɖeɖi wɔna."
+  },
+  "round": {
+    "start": "─── Xɔxɛ ɖoɖo {round} ───\tAmetɔwo katã ale kple akpeɖeɖe le ƒe {conv_rounds} ɖoɖo si wo.",
+    "chat_finished": "Nuƒoƒo na ɖe si o si wò {round}. Tso ƒe nubabla, akpa gome la ɖeka ɖe kpekpeɖe ɖeka: `[pid cooperate]` alo `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Nu siwo do tso eme:",
+    "pair_line": "{observation}\n\t Aka {i} kple Aka {j} ɖe wɔwɔ ɖe {choice_i} kple {choice_j} (Aka {i} xɔ {gain_i}, Aka {j} xɔ {gain_j})",
+    "scores_open": "{observation} -> Nukutɔe la, nu siwo le edzi yim fifia: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Akɔnta ƒe xexeme ƒe nu ƒe nu: {scores}.  Ɖeɖeɖe ɖeɖeɖe ƒe ɖoɖo ƒe ɖoɖo (gbɔgbɔ → ɖeɖeɖe): {groups}"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "We u Player {player_id} mu Tic Tac Toe ya Vanu Vatu.\nOvite ovayo ni '{symbol}'.\nWe uzinga mukanda wo kufeka ovite ovayo pa tchiboko ya 5x5 kuunda mstari wa ne.\nMistari inaweza kuwa ya ndunda, ya kusimama, kana ya diagonal.\nTuma movi ovayo uzinga mu njila ya '[4]' ku marka selu 4."
+  },
+  "board": {
+    "current_board": "Ombala oyuukala:\n\n{board}\n\nOndjala zilwe: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ocimunga caco ka ci tava oku ci pongolola. Kuami onumbi yokuti \"[cell]\" apa ocimatamata 0-{max_cell} .",
+    "out_of_range": "Ombala ili kweli: {cell}. Ili shimu po 0 na {max_cell}.",
+    "already_occupied": "Ningo {cell} ili na oshilongo.",
+    "made_invalid": "Mwene {player_id} uukala ondjala ili na oshili."
+  },
+  "game_action": {
+    "placed": "Mwene {player_id} uukala iisimbo shyu ({symbol}) mu ningo ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Mwene {player_id} ({symbol}) uukala ombala!",
+    "draw": "O ndambu yi ndambuluka!"
+  }
+}

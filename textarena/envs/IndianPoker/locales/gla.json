@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Is tu Player {player_id} ann an geama Indian Poker.\n- Pacaid 52 cairt; chì thu dìreach cairt an nàmhaid.\n- Ante {ante} chip(s) gach cuairt, {max_rounds} cuairt(ean) gu lèir.\n- Gluasadan ceadaichte: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (Is àireamh dhìreach X nas lugha na àireamh do chip.)\n- 'S e cairt fhalach as àirde a bhuannaicheas am pot aig showdown.\n"
+  },
+  "round": {
+    "announce": "### Cuairt {current_round}/{max_rounds}\n'S e cairt an nàmhaid: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Cuir a-mach gnìomh bràisteachd aonar, m.e. '[check]', '[bet 2]', '[call]', '[raise 3]', no '[fold]'.",
+    "cannot_check": "Chan urrainn dhut [check] a dh'èanamh - tha thu a' dol an aghaidh bet.",
+    "amount_min": "Feumaidh an t-suim geall / àrdachadh a bhith ≥ 1.",
+    "cannot_bet": "Chan urrainn dhut [bet] - feumaidh tu [call] / [raise] / [fold].",
+    "nothing_to_call": "Chan eil dad ri ghairm; faodaidh tu [check] an àite sin.",
+    "no_bet_to_raise": "Cleachd [bet X] gus fosgladh; chan eil geall ri àrdachadh.",
+    "insufficient": "Chan eil criomagan gu leòr airson an gnìomh sin."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cosg {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Na gnìomhan a dh 'fhaodadh tu: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Cluicheadair {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Player {player_id} air a philleadh.",
+    "showdown_win": "Showdown: {card_win} a 'bualadh air {card_lose}.",
+    "showdown_tie": "Showdown tie: an dà chuid {card}. Pot roinnte  gach fear a 'faighinn {split} ."
+  },
+  "outcome": {
+    "p0_wins": "Cluicheadair 0 a' buannachadh ({bank0} > {bank1})",
+    "p1_wins": "Cluicheadair 1 a' buannachadh ({bank1} > {bank0})",
+    "draw": "Chip co-ionann às deidh gach cuairt."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Wena u Pleiya {player_id} eka gemu ya {max_rounds} round ya Kuhn Poker.\nMiyambalo ya gemu:\n- Kuhn Poker iya tirhisa dekhi ya kadi 3 na J, Q, K (J ndi ya kuleka, K ndi ya kuleka)\n- Pleiya yin'wana yi nyika {ante} chip na ku amukela kadi 1 kila round (xana ku va kadi zi tirhisiwa without replacement, hikuva u nga ku na kadi ile ile na mpfana wena)\n- Gemu yi ya emahlweni ku fika {max_rounds} rounds\n- Pleiya yi na chips ngi ya kuleka ba round hinkwato yi ngwenya\nMiyambalo ya vugwijo:\n- '[check]': Ku pfuxa without ku bet (hi ku va bet yi le kona)\n- '[bet]': Ku kongomisa 1 chip e pot (hi ku va bet yi le kona)\n- '[call]': Ku bet ya mpfana wena ku kongomisa 1 chip e pot\n- '[fold]': Ku tshika kadi ya wena na ku pfuxa mpfana wena ku ngwenya pot"
+  },
+  "init_round": {
+    "round_start": "### Ku sungula round {current_round} ku fika {max_rounds} rounds. Kadi ya wena i '{player_card}'",
+    "available_actions": "Leswi u nga swi endlaka hi leswi: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ku endla ku fanele ku va [Check], [Bet], [Call], kumbe [Fold].",
+    "not_legal": "Xiendlo xi fanele ku va {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Mpiri {player_id}, ku endla ku nghenisiwa: '[{move}]'.",
+    "valid_actions": "Leswi u nga swi endlaka hi leswi: {legal_actions}.",
+    "round_summary": "{reason} Mafambiso ya sasa: Pleiya 0: '{player_0_chips}'; Pleiya 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Mpiri {winner}'s {winner_card} wu hlula Mpiri {loser}'s {loser_card}. Mpiri {winner} wu wena poti ya {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Eku heleni ka {max_rounds} wa ti-round, vatlangi havambirhi a va ri na nhlayo yo ringana ya machipisi.",
+    "round_win": "Mutlangi {player_id} u wisile.",
+    "winner_player0": "Mutlangi wa 0 u hlurile hi ku va na machipisi yo tala emakumu ka {max_rounds} ya minxaxamelo hinkwayo.",
+    "winner_player1": "Mutlangi wo sungula u hlurile hi ku va ni machipisi yo tala emakumu ka minxaxamelo hinkwayo ya {max_rounds}."
+  }
+}

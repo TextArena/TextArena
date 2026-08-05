@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Riolaso Player {player_id}, makkalai {num_rounds} ronde IUG (Iterated Ultimatum Game).\nRiasengnge ${pool} riolo riaseuwi ronde sia antara riolaso na Player {other_id}.\n\nProposer:\n  - Makkalai pakkau: [Offer: $X] (0 <= X <= pool)\n  - Iami riolo accetta → Riolaso ngasengnge $(pool - X), player lainnge ngasengnge $X\n  - Iami riolo tolak → Keduanya ngasengnge $0\n  - Conto: [Offer: $3]  ata  'Kuangka sengaja rieppo. [Offer: $5]'\n\nResponder:\n  - Makkalai keputusan pakkau riaseuwi [Accept] ata [Reject]\n  - Conto: 'Sengaja rieppo. [Accept]'\n            'Tidak adil. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Ronde {round_number} ri mulai! ---\nOle' {proposer_id} ri pappasang, ole' {responder_id} ri panyanggah.",
+    "offer": "Ronde {round_number}: ole' {proposer_id} ri tawarkan $ {offer} ri ole' {responder_id} (nai $ {keep}).",
+    "accepted": "Ole' {responder_id} ri terima! Ronde {round_number} ri untung: ole' {proposer_id} +$ {proposer_gain}, ole' {responder_id} +$ {responder_gain}. Jumlah baru: ole' 0: $ {total_0}, ole' 1: $ {total_1}.",
+    "rejected": "Ole' {responder_id} ri tolak tawaran! Ronde {round_number} ri untung: keduanya ri +$0. Jumlah tetap: ole' 0: $ {total_0}, ole' 1: $ {total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Tau mappiddarae parellu makkebbu pabbere na pakei bentu' [Offer: $X].",
+    "bad_integer": "Nilai nawarengi waji' mancaji bilangang makkalepu iya makkeguna.",
+    "out_of_range": "Pakkasse'na harus ri pallawangenna $0 sibawa ${pool}.",
+    "no_current_offer": "Degaga pakkasseengeng makkokkoe untu' ripateppai.",
+    "accept_or_reject": "Responder harus makkalai [Accept] ata [Reject] pakkau riaseuwi."
+  },
+  "outcome": {
+    "win": "Ole' {winner} ri menang dengan $ {winner_total} jumlah vs ole' {loser} ri $ {loser_total}.",
+    "draw": "Draw! Duanna tau maccule'e purai napunnai ${total} total."
+  }
+}

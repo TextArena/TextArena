@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "O kile wa ba Player {player_id} ka papadi ya Spite and Malice ya bapalami ba babedi. Sepheo sa gago ke go ba wa pele go senya setšhipa sa gago sa payoff.\n\n### Tshedimoso ya Papadi:\n- Sepheo ke go hlakola setšhipa sa gago sa payoff ka go bapala dikari go setšhipeng sa gare.\n- O ka bapala dikari go tšwa go ditšhupetšo tše tharo:\n  1. **Letšhupetšo la gago** (o thoma ka nako ya gago le dikari tše 5 ka letšhupetšong la gago).\n  2. **Kari ya godimo ya setšhipa sa gago sa payoff**.\n  3. **Kari ya godimo ya setšhipa sengwe le sengwe sa gago sa discard**.\n\n### Melao ya Bapadi:\n- O ka bapala kari go setšhipeng sa gare ge e le **ye nngwe ya godimo** go ya godimo ya setšhipa seo (setšhipa sa gare se thoma ka Ace le go ya go fihla Queen; Kings ke dikari tše di sa lekanyeng - di ka bapalwa go kari ye nngwe le ye nngwe eupša di sa fetole sekgala sa dikari. Se se ra gore ge King e šomišitšwe ka morago ga 4, gona King eo e tla ba 5 le kari ya go latela e swanetše go ba 6).\n- Ge o sa kgone go bapala dikari tše dingwe, o swanetše go **tlogela kari** go setšhipeng sengwe sa gago sa discard go fediša nako ya gago.\n- Ge setšhipa sa gare se fihla Queen, se tla hlakolwa ka boomo.\n- Sekgala sa dikari ke: A=1, 2=2, ..., 9=9, J=10, Q=11, K e le kari e sa lekanyeng.\n\n### Ditšhupetšo:\n1. **Draw**: Ka tšhupetšo ya nako ya gago, bopa dikari go tlatsa letšhupetšo la gago go fihla dikari tše 5. Tsena **[draw]** go thoma.\n2. **Bapala kari**: Go bapala kari, hlalosa kari le setšhipa sa gare bjalo ka: **[play A♠ 0]** (kwa 'A♠' e le kari le '0' e le nomoro ya setšhipa sa gare).\n3. **Tlogela**: Ge o sa kgone go bapala dikari tše dingwe, tlogela kari go tšwa go letšhupetšo la gago go setšhipeng sa discard go fediša nako ya gago. Tsena **[discard A♠ 1]** (kwa 'A♠' e le kari le '1' e le nomoro ya setšhipa sa discard). Hlokomela gore o sa kgone go tlogela kari ye nngwe go tšwa go setšhipa sa payoff. O ka tlogela dikari tše di tšwago go letšhupetšo la gago fela.\n\n"
+  },
+  "board": {
+    "current_board": "Boro ya Tokelo ya kgwedi:\n\n{board}\nDikgetho tse DI: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Makala a Bogareng bja Motšhene wa go Tšweletša Meetse (Center Piles)",
+    "pile": "{observation}Tlaolelo {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Selo sa Mmoki {player_id} ---\n",
+    "payoff": "{observation}Tlaolelo ya go Tlhakantša (Dikepe tse di lego kwa tlaolelo): {top_card}, Boleu bja Tlaolelo ya go Tlhakantša: {payoff_length}\n",
+    "hand": "{observation}Lega: {hand}\n",
+    "discard": "{observation}Tlaolelo ya go Tlhakantša: {discard}\n",
+    "empty": "Ga se na selo"
+  },
+  "game_message": {
+    "no_cards_left": "Ga go sa na dikarata tšeo o ka di dirišago. Gopola gore o ka bapala karata yeo e tšwago methopong ye: 1. Letsogo la gago 2. Karata ya godimo-dimo ya mokgobo wa gago 3. Karata e nngwe le e nngwe ya mekgobo ya gago ya go lahla "
+  },
+  "invalid_move": {
+    "wrong_format": "Sebopego sa mosepelo wo o sego wa loka. Sebapadi {player_id} ga se a araba ka mosepelo woo o lego molaong go dikhurumetša tša sekwere.",
+    "invalid_play": "Tshwanelo ya go dira e sa tsene. Mmoki {player_id} a etse go dira {card} mo tlaolelong ya kgwedi {index}.",
+    "discard_from_payoff": "Go lahla go se na mohola. Sebapadi {player_id} o lekile go lahlela karata ya mokgobo wa moputso.",
+    "discard_not_in_hand": "Go lahla go se na mohola. Sebapadi {player_id} o lekile go lahlela karata yeo e sego ka seatleng sa gagwe.",
+    "wrong_move_type": "Mošomi {player_id} ga se a araba ka mohuta wa mosepelo wo o nepagetšego."
+  },
+  "game_action": {
+    "you_drew": "O ile wa thalela dikarata.",
+    "opponent_drew": "Sebapadi {player_id} se ile sa goga dikarata.",
+    "you_played": "O dile {card} mo tlaolelong ya kgwedi {index}.",
+    "opponent_played": "Sebapadi {player_id} se be se bapala ka go ba le {card} godimo ga mokgobo wa gare {index}.",
+    "you_discarded": "O tlhakantse {card} go tlaolelo ya go tlhakantsha {index}, e le e sego kwa ntle ga turn ya gago. Mmoki {next_player_id} a tla tsena ka morago.",
+    "opponent_discarded": "Mmoki {player_id} o tlhakantse {card} go tlaolelo ya go tlhakantsha {index}, e le e sego kwa ntle ga turn ya Mmoki {player_id}. Mmoki {next_player_id}, o tla tsena ka morago. Kopa o ngwale setsho sa gago ka tsela [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mmoki {current_player} o feditse tlaolelo ya go tlhakantsha! Mmoki {current_player} a fenya!",
+    "deadlock_player_0": "Go feteletswe ke deadlock! Mmoki 0 a fenya le {player_0_payoff} dikepe tse di saleng tsebe ya Mmoki 1 le {player_1_payoff} dikepe.",
+    "deadlock_player_1": "Go feteletswe ke deadlock! Mmoki 1 a fenya le {player_1_payoff} dikepe tse di saleng tsebe ya Mmoki 0 le {player_0_payoff} dikepe.",
+    "deadlock_tie": "Kgomo e kgolo e fihlile ka tekano! Bapalami ba babedi ba na le dikgomo tše {player_0_payoff} tše sa lego kgomong ya payoff. Player {current_player} o wina ka go lekana."
+  }
+}

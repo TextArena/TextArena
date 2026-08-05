@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Nang Player {player_id} ni. Nang Sudoku khelgi khelliba.\nSudoku grid gi current mangda leiriba ni. Row oina 1 to 9 no. oina nongmei leiriba, column oina 1 to 9 no. oina nongmei leiriba.\nMakhada cell hoina '.' gi mangdagi leiriba, prefilled cell hoina 1 to 9 gi digit mangdagi leiriba.\n\nCurrent Sudoku Grid:\nNang gi objective ni 9x9 grid gi makhada cell ho khongba 1 to 9 gi digit no oina:\n1. Row oina 1 to 9 gi digit no oina nongmei leiriba, repetition nattaba.\n2. Column oina 1 to 9 gi digit no oina nongmei leiriba, repetition nattaba.\n3. Nine 3x3 subgrid oina 1 to 9 gi digit no oina nongmei leiriba, repetition nattaba.\n\nNiyam amasung Instructions:\n1. **Thabakhiba** initial number gi grid gi mangdagi khongba.\n2. **Khongba** makhada cell hoina '.' gi mangdagi khongba.\n3. Nang response khongba manner amasung format '[row column number]' gi mangdagi khongba.\n4. **Khongba** nang gi move Sudoku niyam gi thabakhiba. Invalid move gi penalties oina leiriba.\nExamples:\n- **Valid Move**:\n  - Grid Snippet Before Move:\n  \n  - Move: `[5 3 7]`\n  - Explanation: 7 gi row 5, column 3 gi mangdagi khongba Sudoku niyam gi thabakhiba.\n\n- **Invalid Move** (Pre-filled cell gi overwrite):\n  - Grid Snippet Before Move:\n  \n  - Move: `[1 1 9]`\n  - Explanation: Cell (1,1) gi 5 gi mangdagi khongba. Nang overwrite khongba.\n\n- **Invalid Move** (Sudoku niyam gi thabakhiba):\n  - Grid Snippet Before Move:\n  \n  - Move: `[1 3 5]`\n  - Explanation: 5 gi row 1, column 3 gi mangdagi khongba Sudoku niyam gi thabakhiba 5 gi row 1 gi mangdagi khongba.\n\nNang gi move amasung thoughts gi history appended oina khelliba round khongba. Nang gi move gi history khongba decision making khongba improvement khongba avoiding moves nang gi tried. Chak khangba!\n\n"
+  },
+  "board": {
+    "game_board": "খেলবা বোর্ড:\n{board}",
+    "board_state": "বোর্ড অবস্থা:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "অসংগত খেলবা ফর্মেট। খেলোয়াড় {player_id} 'সারি কলাম সংখ্যা' দিয়ে সঠিকভাবে সাড়া দিলে নহিবা।",
+    "out_of_bounds": "অসংগত খেলবা। খেলোয়াড় {player_id} ({row}, {col}) তাহান্দে {num} রাখবা চাইলে, গোড়া চাওখাতবা নহিবা।",
+    "overwrite": "অসংগত খেলবা। খেলোয়াড় {player_id} পূর্বে পূর্ণ করা সেল ({row}, {col}) তাহান্দে লিখবা চাইলে।",
+    "violates_rules": "অসংগত খেলবা। খেলোয়াড় {player_id} ({row}, {col}) তাহান্দে {num} রাখবা চাইলে, সুডোকু নিয়ম ভঙ্গ করে।"
+  },
+  "outcome": {
+    "win": "নুংঙাইবা ফোংদোকচরি! শান্নরোই {player_id}না সুদোকু পাজল লোইশিনখি।",
+    "turn_limit": "অদোম্না চপ চাবা {percent}%গী অহাংবা সেলশিংদু চুম্মীনা মেনশিনখ্রে."
+  }
+}

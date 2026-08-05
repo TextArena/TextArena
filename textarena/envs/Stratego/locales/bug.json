@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Riasele'ko Player {player_id} ri Stratego.\nTuju'ko'ko riasele'ko makkalu' Flag lawanmu atau makkalu' pammulangngi' pappotongi'na.\nPasukanmu riasele'ko tettu' ri olona' pappotongi'na, pappasangngi' Flag, Bom, sibawa pappotongi' laingnge' rangka'na.\n\n### Instruksi Pappotongi'na\n1. **Paraturan Pappindolo:**\n   - Ri tammate'ko, riko makkalu' pappindolo' pappotongi'na se'reji'e.\n   - Conto: Pappotongi'na makkalu' pappindolo' A1 ri B1 atau A1 ri A2 jajai B1 sibawa A2 tena' pappasangngi' pappotongi'na riko.\n   - Jajai pappotongi'na riasele'ko Bom atau Flag, tena' makkalu' pappindolo'.\n2. **Papporongngi'na:**\n   - Jajai riko makkalu' pappindolo' ri pappotongi'na lawanmu, papporongngi'na makkalu':\n     - Pappotongi'na rangka'na laingnge' makkalu' papporongngi'na lawanmu.\n     - Jajai rangka'na samo, pappotongi'na riko sibawa lawanmu makkalu' papporongngi'na.\n     - **Kasus Spesial:**\n       - Bom makkalu' papporongngi'na pappotongi'na laingnge' kecuali Miner, nainappa Bom.\n       - Spion makkalu' papporongngi'na Marshal jajai Spion makkalu' serangngi' pertamo, tapi kalah ngasengi' pappotongi'na laingnge'.\n3. **Tuju' Strategis:**\n   - Tettu' pappotongi'na lawanmu ri pappindolo' sibawa papporongngi'na.\n   - Lindungi Flagmu sambil makkalu' papporongngi'na Flag lawanmu.\n   - Gunakangi' Scout secara strategis ngasengi' informasi tentang pappotongi'na lawanmu sibawa serangngi' pappotongi'na lemah.\n\n### Cara Makkalu' Pappindolo:\n1. Tentukangi' koordinat pappotongi'na riko makkalu' pappindolo' sibawa tuju' pappindolo'na.\n2. Gunakangi' format: [A0 B0], nainappa A0 ri posisi sumber, sibawa B0 ri tuju' pappindolo'na.\n   - Conto: Ngasengi' pappotongi'na makkalu' pappindolo' dari baris 0, kolom 0 ri baris 1, kolom 0, masukangi' [A0 B0].\n3. Pastikangi' tuju' pappindolo'na valid sesuai paraturan pappindolo' di atas.\n\n### Catatan Penting:\n- Pappotongi'na riko sibawa posisina makkalu' tettu' ri papan, conto: MN, MS.\n- Pappotongi'na lawanmu tanpa rangka'na makkalu' tettu' ri papan, conto: ?.\n- Grid nainappa ~ ri danau sibawa tena' makkalu' pappindolo'.\n- Sebagai saran, mulai pappotongi'na riko dengan makkalu' pappindolo' pappotongi'na ri garis depan ngasengi' informasi tentang pappotongi'na lawanmu. Player 0 sibawa player 1 ri garis depan masing-masing ri baris D sibawa G.\n\nBerikut ri keadaan papan saat ini:\n"
+  },
+  "board": {
+    "current_board": "Papan Saaran:\n\n{board}\nGerakkan Yang Tersedia: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format aksi tidak valid. Pemain {player_id} tidak memasukkan gerakan dalam format [A0 B0].",
+    "invalid_coordinates": "Format aksi salah. Pemain {player_id} tena' masukkan koordinat valid.",
+    "not_own_piece": "Format aksi de'na ullei. Pemaen {player_id} waji naleppa seddi pole pattentunna alena.",
+    "scout_through_pieces": "Format aksi de'na ullei. Pemaen {player_id} dee naulle mabbere passilolong ri seddi gambara laingnge.",
+    "scout_diagonal": "Format aksi de'na ullei. Pemaen {player_id} dee naulle pallebang i pencarina secara diagonal.",
+    "non_scout_multi_square": "Format aksi salah. Peca', salain pengintai, hanya bisa bergerak satu petak sekali.",
+    "move_into_lake": "Format aksi de'na ullei ripake. Pemaen {player_id} dee naulle lecce ri tasi e.",
+    "move_onto_own_piece": "Format aksi de'na ullei. Pemaen {player_id} dee naulle lecce ri peddanna alena.",
+    "move_bomb_or_flag": "Format aksi de'na ullei. Pemaen {player_id} dee naulle pallebbang bom iyaregga bendera."
+  },
+  "game_action": {
+    "you_moved": "Anda telah memindahkan bidak Anda dari {source} ke {dest}.",
+    "opponent_moved": "Pemaen {player_id} telah memindahkan sepotong dari {source} ke {dest}.",
+    "you_equal_ranks": "Riko makkalu' pappindolo' pappotongi'na riko dari {source} ri {dest}. Pappotongi'na serangngi' ri {attacking_rank} sibawa pappotongi'na tuju' ri {target_rank}. Jajai rangka'na samo, pappotongi'na riko sibawa lawanmu makkalu' papporongngi'na.",
+    "opponent_equal_ranks": "Pemain {player_id} naiyya' peca' ri {source} nuju {dest}. Peca' seranganna' {attacking_rank} na peca' tujuanna' {target_rank}. Karena pangkat sama, kaduanya kalah.",
+    "you_miner_defused": "Iko mappalebbi peca iko dari {source} ri {dest}. Peca serange iya {attacking_rank} si peca tujuan iya {target_rank}. Karena panambang polé mappalebbi bomba, iko menangi pertempuran.",
+    "opponent_miner_defused": "Pemain {player_id} mappalebbi peca dari {source} ri {dest}. Peca serange iya {attacking_rank} si peca tujuan iya {target_rank}. Karena panambang polé mappalebbi bomba, iko kalah pertempuran.",
+    "you_bomb_lost": "Anda telah memindahkan bidak Anda dari {source} ke {dest}. Bidak penyerang adalah {attacking_rank} dan bidak tujuan adalah {target_rank}. Karena penyerang bukan penambang, Anda kalah dalam pertarungan.",
+    "opponent_bomb_won": "Pemain {player_id} telah memindahkan bidak dari {source} ke {dest}. Bidak penyerang adalah {attacking_rank} dan bidak tujuan adalah {target_rank}. Karena penyerang bukan penambang, Anda memenangkan pertarungan.",
+    "you_spy_won": "Riko makkalu' pappindolo' pappotongi'na riko dari {source} ri {dest}. Pappotongi'na serangngi' ri {attacking_rank} sibawa pappotongi'na tuju' ri {target_rank}. Jajai pappotongi'na serangngi' ri Spion sibawa tuju' ri Marshal, riko makkalu' papporongngi'na.",
+    "opponent_spy_lost": "Pemain {player_id} naiyya' peca' ri {source} nuju {dest}. Peca' seranganna' {attacking_rank} na peca' tujuanna' {target_rank}. Karena seranganna' mata-mata na tujuanna' marsyal, iyya' kalah.",
+    "you_higher_won": "Riko makkalu' pappindolo' pappotongi'na riko dari {source} ri {dest}. Pappotongi'na serangngi' ri {attacking_rank} sibawa pappotongi'na tuju' ri {target_rank}. Jajai pappotongi'na serangngi' ri rangka'na laingnge' ngasengi' tuju', riko makkalu' papporongngi'na.",
+    "opponent_higher_lost": "Pemain {player_id} naiyya' peca' ri {source} nuju {dest}. Peca' seranganna' {attacking_rank} na peca' tujuanna' {target_rank}. Karena seranganna' lebi tinggi daripada tujuanna', iyya' kalah.",
+    "you_lower_lost": "Iko mappalebbi peca iko dari {source} ri {dest}. Peca serange iya {attacking_rank} si peca tujuan iya {target_rank}. Karena serange iya pangkatna labbiriwiwi dari tujuan, iko kalah pertempuran.",
+    "opponent_lower_won": "Pemain {player_id} mappalebbi peca dari {source} ri {dest}. Peca serange iya {attacking_rank} si peca tujuan iya {target_rank}. Karena serange iya pangkatna labbiriwiwi dari tujuan, iko menangi pertempuran."
+  },
+  "outcome": {
+    "flag_captured": "Player {player_id} makkalu' papporongngi' Flag lawanmu!",
+    "no_movable_pieces": "Pemain {winner_id} menang! Pemain {loser_id} tidak memiliki bidak yang dapat dipindahkan lagi."
+  }
+}

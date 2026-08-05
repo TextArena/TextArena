@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "راند شروع ٿي. ٽرمپ سوٽ: {trump_suit} (ٽرمپ ڪارڊ: {trump_str}).",
+    "no_trump_card": "نه آهي"
+  },
+  "player_prompt": {
+    "intro": "توهان جرمن وِسٽ ۾ پليئر {player_id} آهيو. {phase_info} توهان وٽ {hand_size} ڪارڊ آهن. هڪ ڪارڊ کيڏيو '[play N]' سان ، جتي N توهان جي هٿ ۾ ان جي پوزيشن آهي (مثال طور '[play 3]').",
+    "phase_learning": "سکيا وارو مرحلو: هر چال جو فاتح منهن وارو ڪارڊ وٺندو آهي ۽ هاريندڙ ڊيڪ مان ايندڙ ڪارڊ ڪ drawsندو آهي. هن مرحلي ۾ حاصل ڪيل چالون فتح جي لاءِ ڳڻپ نه ڪنديون آهن.",
+    "phase_playing": "راندين جو مرحلو: ڊيڪ ختم ٿي چڪو آهي. هاڻ کان هر چال فتح جي طرف ڳڻپ ڪري ٿي."
+  },
+  "next_card": {
+    "playing_phase": "ڪو به ڪارڊ پيش نه ڪيو ويو آهي - راند جو مرحلو شروع ٿي چڪو آهي.",
+    "deck_empty": "ڊيڪ خالي آهي - ڪو به ڪارڊ پيش نه ڪيو ويو آهي.",
+    "available": "ڪارڊ پيش ڪيو ويو: {card}",
+    "available_trump": "ڪارڊ پيش ڪيو ويو: {card} (ٽرمپ)"
+  },
+  "invalid_move": {
+    "wrong_format": "غلط حرڪت وارو فارميٽ. '[play N]' استعمال ڪريو توهان جي هٿ ۾ اينٿ ڪارڊ کيڏڻ لاءِ.",
+    "bad_position": "اها ڪارڊ پوزيشن موجود ناهي. توهان وٽ {hand_size} ڪارڊ آهن.",
+    "must_follow_suit": "توھان کي اھو عمل ڪرڻ گھرجي ۽ {lead_suit} ڪارڊ کيڏڻ گھرجي.",
+    "invalid_play": "اهو ڪارڊ نه ٿو کلي سگهي."
+  },
+  "game_action": {
+    "played": "پليئر {player_id} کيڏيو {card}."
+  },
+  "trick": {
+    "won": "پليئر {winner_id} {card} سان چال کٽي ٿو.",
+    "won_learning": "پليئر {winner_id} {card} سان چال کٽي ٿو ۽ منهن مٿي ڪارڊ وٺندو آهي."
+  },
+  "phase": {
+    "learning_complete": "ڊيڪ ختم ٿي چڪو آهي. سکيا وارو مرحلو ختم ٿي چڪو آهي - هر باقي چال فتح جي طرف ڳڻپ ڪري ٿي."
+  },
+  "draw": {
+    "winner_received": "توهان ٽريڪ کٽي ۽ حاصل ڪيو {card}.",
+    "loser_received": "توهان ٽوڪ وڃائي ڇڏيو ۽ ڊيڪ مان {card} ڪڍيو.",
+    "winner_preview": "ايندڙ ڪارڊ پيش ڪيل آهي {card}."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "هن وقت تائين حاصل ڪيل چالون - پليئر 0: {tricks0} ، پليئر 1: {tricks1}",
+    "scores_playing": "اسڪورنگ ٽرڪس - پليئر 0: {tricks0} ، پليئر 1: {tricks1}",
+    "phase": "مرحلو: {phase}",
+    "phase_learning": "مرحلو: {phase} ({remaining_cards} ڪارڊ ڊيڪ ۾ ڇڏي ويو)"
+  },
+  "hand": {
+    "no_cards": "ڪارڊ نه",
+    "no_cards_in_hand": "هٿ ۾ ڪي به ڪارڊ نه آهن",
+    "header": "تنهنجو هٿ:",
+    "trump_indicator": "(ٽرمپ)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "اڃا تائين ڪو به ڪارڊ هن چال کي نه ادا ڪيو.",
+    "header": "موجوده چال:",
+    "trump_indicator": "(ٽرمپ)",
+    "card_line": "{observation} پليئر {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "راند شروع نه ٿي",
+    "header": "=== جرمن وائيٽ گيم ===",
+    "phase": "{observation} مرحلو: {phase}",
+    "trump_suit": "{observation} ٽرمپ سوٽ: {trump_suit}",
+    "trump_card": "{observation} ٽرمپ ڪارڊ: {card}",
+    "cards_left": "{observation} ڪارڊ ڊيڪ ۾ ڇڏي ويا: {count}",
+    "next_card": "{observation} فاتح لاءِ ايندڙ ڪارڊ: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} موجوده چال:",
+    "trump_indicator": "(ٽرمپ)",
+    "trick_line": "{observation} پليئر {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} پليئر {player_id}: {scoring} اسڪورنگ ٽرڪس ({tricks} مجموعي طور تي) ، {hand_size} ڪارڊ هٿ ۾"
+  },
+  "outcome": {
+    "summary": "سکيا وارو مرحلو - پليئر 0: {l0}، پليئر 1: {l1}. راند جو مرحلو - پليئر 0: {p0}، پليئر 1: {p1}. پليئر {winner_id} {winner_tricks} اسڪورنگ ٽرڪن سان کٽي ٿو!"
+  }
+}

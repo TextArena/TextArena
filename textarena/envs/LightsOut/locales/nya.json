@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Tikulandirani ku Lights Out! Mulina gridi ya {size}x{size} ya miyala.\nCholinga chanu ndi kuzima MIYALA YONSE (yomwe imawakilishidwa na '.').\nMukadikira miyala, imakhazikika yenyewe NDIPONSO abwenzi ake a pafupi (kunyamula/kutsika/kumanja/kumanzere).\nLembani [row col] kukodza miyala (0-indexed, kwa hivyo masafa abale ndi 0-{max_index}).\nMulina mpaka {max_turns} mizintho kutatua fumbo.\nMaulalo: 'O' = miyala imawaka, '.' = miyala imazima"
+  },
+  "board": {
+    "current_state": "Hali ya sasa ya gridi (Move {moves_made}, {moves_left} zidziwili ziliyobaki, {completion}% ikompletika):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action ayenera kukhala mu mtundu [row col] kumene mzere ndi col ndi integers kuchokera 0 kuti {max_index}.",
+    "out_of_range": "Viwianishi vikuyenera kuwa pakati pa 0 ndi {max_index}. Mwalembera [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Zabwino zonse! Mwathetsa vutoli mu {moves_used} mayendedwe!",
+    "loss": "Mchezo umemaliza! Wanatumia zidziwili zote {max_turns} bila kutatua puzzle. Ukamilishaji wa mwisho: {completion}%\nHali ya mwisho:\n{grid}"
+  }
+}

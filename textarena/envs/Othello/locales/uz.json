@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "O'yinlar taxtasi: {board}",
+    "valid_moves": "{observation} Amaldagi harakatlar: {moves}",
+    "no_valid_moves_reset": "{observation} Haqiqiy harakatlar yo'q - siz o'tkazib yuborishingiz kerak bo'lishi mumkin.",
+    "no_valid_moves_step": "{observation} Hech qanday haqiqiy harakatlar  siz o'tkazib yuborishingiz kerak bo'lishi mumkin.",
+    "scores_reset": "{observation}\nJoriy hisob - Qora: {black_count}, Oq: {white_count}\n",
+    "scores_step": "{observation} Ballar - Qora: {black_count}, Oq: {white_count} "
+  },
+  "invalid_move": {
+    "wrong_format": "Harakat [row, col] shaklida bo'lishi kerak.",
+    "illegal": "Noto'g'ri harakatlar. Amaldagi harakatlar: {valid}"
+  },
+  "game_action": {
+    "skipped": "O'yinchi {pid} o'z navbatini o'tkazib yuborishi kerak edi",
+    "played": "{pid}-o'yinchi ({piece}) [{r}, {c}] o'ynadi va {flipped} dona(lar)ni ag'darib tashladi"
+  },
+  "game_message": {
+    "must_skip": "O'yinchi {pid} ({piece}) ning harakatlari haqiqiy emas va u o'tishi kerak."
+  },
+  "outcome": {
+    "black_wins": "Qoralar g'alaba qozonadi {black_count}-{white_count}.",
+    "white_wins": "Oqlar g'alaba qozonadi {white_count}-{black_count}.",
+    "draw": "{black_count}-{white_count} chiziqlarini chizish."
+  }
+}

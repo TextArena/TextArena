@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "أنت لاعب {player_id} في Three-Player GOPS.\n- أنت تمتلك البطاقات 13 من A إلى K (كل واحدة مرة واحدة).\n- في كل جولة، يتم الكشف عن جائزة. قدم بطاقة واحدة مثل `[Q]`، `[10]`، `[2]` …\n- البطاقة الأعلى تفوز بالجائزة (+ أي جائزة محتفظ بها). التعادلات تؤدي إلى الجائزة إلى الجولة التالية.\n- بعد 13 جولة، الفائز هو الأعلى إجماليًا. الحركات غير الصالحة = الإقصاء."
+  },
+  "round": {
+    "header": "### الجولة {round}/13 - الجائزة: {prize} (تستحق {worth})",
+    "hand": "يدك المتبقيه: {hand}"
+  },
+  "reveal": {
+    "win": "عروض » {bids} - لاعب {winner} يفوز {pot}.",
+    "tie": "العروض  {bids} - تعادل، وعاء الآن {pot}.",
+    "scores": "النتائج → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "هذا العمل يحتاج بطاقه بين قوسين مثل \"[Q]\"",
+    "bad_card": "بطاقة مستعملة او غير صالحه."
+  },
+  "elimination": {
+    "player": "لاعب {pid} مطرود بعد حركات غير صالحة متكررة."
+  },
+  "outcome": {
+    "auto_win": "لاعبين اثنين مطرودين - فوز تلقائي.",
+    "final": "الدرجات النهائية: {scores}"
+  }
+}

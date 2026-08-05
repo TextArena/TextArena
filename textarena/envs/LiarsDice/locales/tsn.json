@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "O motshameki {player_id} mo motshamekong wa Liar's Dice wa batsamaisi ba {num_players}.\nMelao:\n- Fa o le mo tshamekong ya gago, o ka:\n  1) Dirisa bid e ntšha ka palo e kgolo gape gape kgolo (kgotsa zombili) go feta bid e e teng; e.g. '[Bid: 3, 4]',\n  2) Bidisa bid ya bofelo ka go keteka '[Call]'.\n\nFa o bidisa:\n  - Fa palo ya nnete ya maadima a matlhopho a tsebe go ralala matlhopho yotlhe e le kwa tlase ga bid, motshameki wa bofelo o latlhega tsebe.\n  - Gape, motshameki yo o bidisitseng o latlhega tsebe.\nMotshameki yo o fitlheletseng 0 matlhopho a tsebe o latlhegelwa. Motshameki wa bofelo yo o setseng o fentse."
+  },
+  "board": {
+    "per_player": "\tMmoleli {p}: {d}",
+    "new_round": "\nMafelo a mantsi - Diketo di seng dikgweleditse: {dice_summary}\nDiketo tsa gago tse di mo gae kwa: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Motshameki {current_player_id} o bidisa! Palo ya nnete ya maadima a matlhopho a tsebe {face_value} ke {count}, e e le kwa tlase ga {quantity}.\nMotshameki {loser_id} (motshameki wa bofelo) o latlhega tsebe.",
+    "caller_loses": "Motshameki {current_player_id} o bitsa! Palo ya sesupo {face_value} ke {count}, e e fetang kana e lekana le {quantity}.\nMotshameki {loser_id} (yoo bitsang) o latlhegelwa ke tsebe nngwe."
+  },
+  "action": {
+    "bid_announce": "Mmoleli {player_id} o biditse {quantity} ya tsala {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "O ne a dira jalo kwantle ga go ntsha moneelo pele.",
+    "invalid_bid": "Thekiso e e sa siamang: {reason}",
+    "not_recognized": "Tshwanelo ya tiro e seng ya itsiwe e le '[Bid: X, Y]' kgotsa '[Call]'. Tiro e e filweng: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Palo e ntšha {new_quantity} ke kwa tlase ga ya jaanong {current_quantity}.",
+    "face_lower": "Boleng jo boša jwa leina {new_face_value} ke kwa tlase ga boleng jwa jaanong jwa leina la {current_face_value}.",
+    "identical": "Thekiso e tshwana le theki ya ga jaana.",
+    "face_range": "Boleng jwa yone bo tshwanetse go nna fa gare ga 1 le 6."
+  },
+  "message": {
+    "eliminated_invalid": "Motshameki {player_id} o ne a tswa ka motsamao wa gagwe e le o sa tshwanelang."
+  },
+  "outcome": {
+    "win": "Motshameki {winner} o fentse! Lenane la batsamaisi: {final_ranking}"
+  }
+}

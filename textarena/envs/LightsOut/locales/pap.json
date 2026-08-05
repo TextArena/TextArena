@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Bon bini na Lights Out! Bo tin un grid di {size}x{size} di lusnan.\nMeta bo ta pa apaga Tur lusnan (representa pa '.')\nKuando bo presiona un lus, e ta kambia su mes i su bisiñanan adjacentenan (ariba/abou/robez/derechi).\nTipea [row col] pa presiona un lus (0-indexed, asina e rang valied ta 0-{max_index}).\nBo tin tei {max_turns} moveshin pa resolve e puzzle.\nLeyenda: 'O' = lus na, '.' = lus apaga"
+  },
+  "board": {
+    "current_state": "Estado aktual di grid (Movimiento {moves_made}, {moves_left} moveshin nan ta resta, {completion}% komplet):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "E akshon mester ta den e formato [row col] kaminda ròl i kolòn ta entero for di 0 te ku {max_index}.",
+    "out_of_range": "Koordiná mester ta entre 0 i {max_index}. Bo a drenta [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Felicitacion! Bo a resolve e puzzle den {moves_used} moves!",
+    "loss": "Wega a termina! Bo a usa tur {max_turns} moveshin sin resolve e puzzle. Kompletion final: {completion}%\nEstado final:\n{grid}"
+  }
+}

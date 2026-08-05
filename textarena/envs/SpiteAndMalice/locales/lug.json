@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Oli Player {player_id} mu mizannyo ya Spite and Malice ya baana babiri. Ekigendererwa kyo kufuuka wa kwanza okukaliriza kikunja kyo.\n\n### Ekikunja kya Muzannyo:\n- Ekigendererwa kyo kukaliriza kikunja kyo kwa kuzannya kadi ku kikunja kya katikati.\n- Oyinza kuzannya kadi okuva ku masanduku matatu:\n  1. **Lukono lwo** (otandika buli luzannya na kadi tano mu lukono).\n  2. **Kadi ya waggulu wa kikunja kyo**.\n  3. **Kadi ya waggulu wa kikunja ky'oyokya**.\n\n### Engeri za Kuzannya:\n- Oyinza kuzannya kadi ku kikunja kya katikati singa **ekadi emu waggulu** wa kadi ya waggulu wa kikunja ekyo (kikunja kya katikati kitandika na Ace ne kigenda ku Queen; Kings ni za kufunika - zinaweza kuzannywa ku kadi yonna naye tezitakyuka mpangilio wa kadi. Kino kitegeeza singa King etumibwa oluvannyuma lwa 4, King eyo eri waggulu wa 5 ne kadi inayofuuka eteekwa kuwa 6).\n- Singa toweza kuzannya kadi zaidi, oliwagwa **kuyokya kadi** ku kikunja kyo ky'oyokya okukomesa luzannya lwo.\n- Singa kikunja kya katikati kifunike Queen, kijja kukalirizibwa awotokooto.\n- Mpangilio wa kadi ni: A=1, 2=2, ..., 9=9, J=10, Q=11, K ng'ezo za kufunika.\n\n### Emikono:\n1. **Kutunda**: Ku ntandiko ya luzannya lwo, tunda kadi okujaza lukono lwo na kadi tano. Ingiza **[draw]** okutandika.\n2. **Kuzannya Kadi**: Kuzannya kadi, tusa kadi ne kikunja kya katikati nti: **[play A♠ 0]** (nga 'A♠' ye kadi ne '0' ye nambari ya kikunja kya katikati).\n3. **Kuyokya**: Singa toweza kuzannya kadi zaidi, yokya kadi okuva mu lukono lwo ku kikunja kyo ky'oyokya okukomesa luzannya lwo. Ingiza **[discard A♠ 1]** (nga 'A♠' ye kadi ne '1' ye nambari ya kikunja kyo ky'oyokya). Lwaki toliweza kuyokya kadi yonna okuva ku kikunja kyo. Oyinza kuyokya kadi okuva mu lukono lwo.\n\n"
+  },
+  "board": {
+    "current_board": "Ekikunja kya Sasa:\n\n{board}\nEmikono Inayowezekana: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Emizinga egy'omukaaga -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Ekibonero kya Omuzannyi {player_id} ---\n",
+    "payoff": "{observation}Kikunja kya Payoff (Kadi ya Waggulu): {top_card}, Urefu wa Kikunja kya Payoff: {payoff_length}\n",
+    "hand": "{observation}Lukono: {hand}\n",
+    "discard": "{observation}Kikunja kya Kuyokya: {discard}\n",
+    "empty": "Ebirimu tebiriiko."
+  },
+  "game_message": {
+    "no_cards_left": "Tewali kadi zaidi za kutunda. Lwaki oyinza kuzannya kadi okuva ku masanduku matatu:\n  1. **Lukono lwo**.\n  2. **Kadi ya waggulu wa kikunja kyo**.\n  3. **Kadi ya waggulu wa kikunja ky'oyokya**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Enkola y'empaka embi. Omuzannyi {player_id} teyanukudde n'empakana ennungi mu nkasi eziri wakati w'ennyingo bbiri.",
+    "invalid_play": "Kuzannya si sahihi. Player {player_id} yayagwa kuzannya {card} ku kikunja {index}.",
+    "discard_from_payoff": "Omuzannyo tegulina mugaso. Omuzannyi {player_id} yagezaako okugoba kaadi okuva mu kibinja ky'ebirabo.",
+    "discard_not_in_hand": "Omuzannyo tegusaana. Omuzannyi {player_id} yagezaako okugoba kaadi etaali mu ngalo ze.",
+    "wrong_move_type": "Omuzannyi {player_id} teyanukula n'ekikolwa ekituufu."
+  },
+  "game_action": {
+    "you_drew": "Waakuba kaadi.",
+    "opponent_drew": "Omuzannyi {player_id} yafulumya kaadi.",
+    "you_played": "Waddako {card} ku kibinja ekisooka {index}.",
+    "opponent_played": "Player {player_id} azannya {card} ku kikunja {index}.",
+    "you_discarded": "Oli yaweereza {card} mu kintu ky'okweyunga {index}, ekitegeeza nti oli amaliriza omuzannyo wo. Tebafuna kuzingira ku mazannyo amalala ago. Omuzannyi {next_player_id} azannya muzannyo ogujja.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Omuzannyi {current_player} amaliriza kintu kye'okweyunga kwa mugaso! Omuzannyi {current_player} azannyira!",
+    "deadlock_player_0": "Ekivuunika kitegeeredde! Omuzannyi 0 azannyira ne {player_0_payoff} kaadi zisigadde vs Omuzannyi 1' {player_1_payoff} kaadi.",
+    "deadlock_player_1": "Ekivuunika kitegeeredde! Omuzannyi 1 azannyira ne {player_1_payoff} kaadi zisigadde vs Omuzannyi 0' {player_0_payoff} kaadi.",
+    "deadlock_tie": "Olwaatu lwatuuka na kufungana! Abazannyi bombi balina karati {player_0_payoff} zisigaddwa. Omuzannyi {current_player} awangula kwa mpangizo."
+  }
+}

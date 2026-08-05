@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Qanri p'ukllayuq {player_id} kimsa p'ukllayuq Tic Tac Toe pi.\nQan symbolayki '{symbol}'.\nQan turnaykikunawan symbolaykita p'ankallapi 5x5 nisqapi, t'inkunata ruwanapaq.\nT'inkunakunaqa waqaychay, khillaychay, icha diagonalninqa.\nRuraykita '[4]' formatupi apaykachay, khillay 4 mark'aypaq."
+  },
+  "board": {
+    "current_board": "P'unchay p'ankallan:\n\n{board}\n\nQ'umir rurasqakuna: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Mana allin rura formatu. '[cell]' taytanchik, khillay 0-{max_cell}.",
+    "out_of_range": "Mana khillaypa numeru: {cell}. 0 wan {max_cell} khillakamayaqmi.",
+    "already_occupied": "{cell} nisqa celulaqa ña hunt'asqaña.",
+    "made_invalid": "Pichu {player_id} pukllaq mana allin puriyta ruwarqan."
+  },
+  "game_action": {
+    "placed": "P'ukllayuq {player_id} q'ellanwan symbolan ({symbol}) khillaypi ({row}, {col})."
+  },
+  "outcome": {
+    "win": "P'ukllayuq {player_id} ({symbol}) atipayay!",
+    "draw": "Pukllayqa t'inkisqa kachkan!"
+  }
+}

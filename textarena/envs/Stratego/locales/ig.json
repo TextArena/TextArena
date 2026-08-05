@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ị bụ Onye Egwuregwu {player_id} na Stratego.\nEbumnuche gị bụ ijide Flag nke onye mmegide gị ma ọ bụ iwepụ ihe niile ha nwere ike ịkwaga.\nA tọhapụrụ ndị agha gị n'elu oche, gụnyere Flag gị, Bombs, na ihe ndị ọzọ nke ọkwa dị iche iche.\n\n### Ntuziaka Egwuregwu\n1. **Iwu Ịkwaga:**\n   - N'oge gị, ị nwere ike ịkwaga otu ihe site na otu nzọpụta gaa n'otu mraba gbara ya gburugburu (elu, ala, aka ekpe, ma ọ bụ aka nri) nke ejirila ihe gị mejupụtara.\n   - Ọmụmaatụ: Ihe nwere ike ịkwaga site na A1 gaa B1 ma ọ bụ A1 gaa A2 ma ọ bụrụ na B1 na A2 ejirila ihe nke onye egwuregwu wepụtara.\n   - Ọ bụrụ na ihe ahọpụtara bụ Bomb ma ọ bụ Flag, ọ pụghị ịkwaga.\n2. **Agha:**\n   - Ọ bụrụ na ị kwagara n'otu mraba nke onye mmegide gị wepụtara, mgbe ahụ agha ga-eme:\n     - Ihe nwere ọkwa dị elu meriri ma wepụ ihe nke onye mmegide.\n     - Ọ bụrụ na ọkwa ahụ dị n'otu, a na-ewepụ ihe abụọ ahụ n'elu oche.\n     - **Ihe Nchọpụta Pụrụ Iche:**\n       - Bombs na-ewepụ ihe ndị ọzọ na-awakpo ma e wezụga Miners, nke na-agbanye Bombs.\n       - Ndị nledo nwere ike merie Marshal ma ọ bụrụ na Spy ahụ wakporo mbụ ma furu efu n'ihe ndị ọzọ.\n3. **Ebumnuche Ọgbọ:**\n   - Chọpụta ihe nke onye mmegide gị site na ịkwaga ha na agha ha.\n   - Chebe Flag gị mgbe ị na-agbalị ijide Flag nke onye mmegide gị.\n   - Jiri Scouts n'ụzọ mkpebi iji nweta ozi gbasara ihe nke onye mmegide gị na wakpo ndị ọzọ.\n\n### Otu esi eme njem:\n1. Ọpụrụ ọnọdụ nke ihe ị chọrọ ịkwaga na ebumnuche ya.\n2. Jiri usoro: [A0 B0], ebe A0 bụ ọnọdụ mmalite, na B0 bụ ebumnuche.\n   - Ọmụmaatụ: Iji kwaga ihe site na ahịrị 0, kọlụm 0 gaa ahịrị 1, kọlụm 0, tinye [A0 B0].\n3. Hụ na ebumnuche ahụ dị irè dị ka iwu ịkwaga n'elu.\n\n### Ihe Nkọwa Pụrụ Iche:\n- Oche ahụ ga-egosi ihe gị na ọnọdụ ha, dịka MN, MS.\n- Oche ahụ kwa ga-egosi ọnọdụ nke onye mmegide gị ma ghara ikpughe ọkwa ha, dịka ?.\n- Grids na ~ bụ ọdọ mmiri ma pụghị ịkwaga n'elu ha.\n- Dị ka ntụzịaka, malite egwuregwu gị site na ịkwaga ihe gị nke dị n'ihu iji nweta ozi gbasara ihe nke onye mmegide gị. Ahịrị nke Player 0 na Player 1 bụ D na G n'otu n'otu.\n\nNke a bụ ọnọdụ oche ugbu a:\n"
+  },
+  "board": {
+    "current_board": "Board ugbu a: {board} Nkeji na-aga: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ọkpụkpọ ihe na-abaghị uru. Onye ọkpụkpọ {player_id} etinyeghị aka na usoro [A0 B0].",
+    "invalid_coordinates": "Ọkpụkpọ ihe na-abaghị uru. Onye ọkpụkpọ {player_id} etinyeghị ihe ziri ezi.",
+    "not_own_piece": "Ọkpụkpọ ahụ bụ ihe na-abaghị uru. Onye ọkpụkpọ {player_id} ga-ebugharị otu n'ime ibe ya.",
+    "scout_through_pieces": "Ọkpụkpọ ihe na-abaghị uru. Onye ọkpụkpọ {player_id} enweghị ike ịkwaga onye nyocha site na ibe ndị ọzọ.",
+    "scout_diagonal": "Ọkpụkpọ ihe na-abaghị uru. Onye ọkpụkpọ {player_id} enweghị ike ịkwaga onye nyocha na diagonal.",
+    "non_scout_multi_square": "Ọkpụkpọ ihe na-abaghị uru. Akụkụ, ma e wezụga ndị na-enyocha, nwere ike ịkwaga otu square n'otu oge.",
+    "move_into_lake": "Ụdị ihe na-abaghị uru. Onye ọkpụkpọ {player_id} enweghị ike ịkwaga n'ime ọdọ mmiri ahụ.",
+    "move_onto_own_piece": "Ọkpụkpọ na-abaghị uru. Onye ọkpụkpọ {player_id} enweghị ike ịkwaga na ibe nke aka ya.",
+    "move_bomb_or_flag": "Ụdị ihe na-abaghị uru. Onye ọkpụkpọ {player_id} enweghị ike ịkwaga bọmbụ ma ọ bụ ọkọlọtọ."
+  },
+  "game_action": {
+    "you_moved": "I bugharịrị iberibe gị site na {source} gaa {dest}.",
+    "opponent_moved": "Onye na-egwu egwu {player_id} ebugharịwo ibe site na {source} gaa {dest}.",
+    "you_equal_ranks": "Ị kwagara ibe gị site na {source} ruo {dest}. Akụkụ na-awakpo bụ {attacking_rank} na akụkụ nke ebe a na-aga bụ {target_rank}. Ebe ọ bụ na ọkwa ha bụ otu, ibe abụọ ahụ furu efu.",
+    "opponent_equal_ranks": "Onye na-egwu egwu {player_id} ebugharịwo ihe site na {source} gaa {dest}. Ihe na-awakpo bụ {attacking_rank} na ihe mgbaru ọsọ bụ {target_rank}. Ebe ọ bụ na ọkwa ha bụ otu, iberibe abụọ ahụ furu efu.",
+    "you_miner_defused": "Ị kwagara ibe gị site na {source} ruo {dest}. Akụkụ na-awakpo bụ {attacking_rank} na akụkụ ebe a na-aga bụ {target_rank}. Ebe ọ bụ na ndị na-egwupụta akụ nwere ike imebi bọmbụ, ị meriri n'agha ahụ.",
+    "opponent_miner_defused": "Onye na-egwu egwu {player_id} ebugharịwo ihe site na {source} gaa {dest}. Ihe na-awakpo bụ {attacking_rank} na ihe mgbaru ọsọ bụ {target_rank}. Ebe ọ bụ na ndị na-egwupụta akụ nwere ike imebi bọmbụ, ị tụfuru agha ahụ.",
+    "you_bomb_lost": "Ị kwagara ibe gị site na {source} ruo {dest}. Ihe na-awakpo bụ {attacking_rank} na ebe a na-aga bụ {target_rank}. Ebe ọ bụ na onye na-awakpo abụghị onye na-egwu ala, ị furu efu agha ahụ.",
+    "opponent_bomb_won": "Onye na-egwu egwu {player_id} ebugharịwo ihe site na {source} gaa {dest}. Ihe na-awakpo bụ {attacking_rank} na ebe a na-aga bụ {target_rank}. Ebe ọ bụ na onye na-awakpo abụghị onye na-egwupụta akụ, ị meriri agha ahụ.",
+    "you_spy_won": "I kwagara ihe egwuregwu gi site na {source} gaa {dest}. Ihe egwuregwu ahụ na-akpagbu bụ {attacking_rank} na ihe egwuregwu ebumnuche ahụ bụ {target_rank}. N'ihi na onye na-akpagbu bụ onye nledo na ebumnuche ahụ bụ onye isi ọchịagha, ị meriri agha ahụ.",
+    "opponent_spy_lost": "Onye na-egwu egwu {player_id} ebugharịwo ihe site na {source} gaa {dest}. Ihe na-awakpo bụ {attacking_rank} na ebe a na-aga bụ {target_rank}. Ebe ọ bụ na onye na-awakpo bụ onye nledo na ebe a na-aga bụ onye na-elekọta, ị furu efu agha ahụ.",
+    "you_higher_won": "Ị kwagara ibe gị site na {source} ruo {dest}. Akụkụ na-awakpo bụ {attacking_rank} na akụkụ nke ebe a na-aga bụ {target_rank}. Ebe ọ bụ na onye na-awakpo bụ ọkwa dị elu karịa ebe a na-aga, ị meriri n'agha ahụ.",
+    "opponent_higher_lost": "Onye na-egwu egwu {player_id} ebugharịwo ihe site na {source} gaa {dest}. Ihe na-awakpo bụ {attacking_rank} na ebe a na-aga bụ {target_rank}. Ebe ọ bụ na onye na-awakpo bụ ọkwa dị elu karịa ebe a na-aga, ị furu efu agha ahụ.",
+    "you_lower_lost": "Ị kwagara ibe gị site na {source} ruo {dest}. Ihe na-awakpo bụ {attacking_rank} na ebe a na-aga bụ {target_rank}. Ebe ọ bụ na onye na-awakpo bụ ọkwa dị ala karịa ebe a na-aga, ị tụfuru agha ahụ.",
+    "opponent_lower_won": "Onye na-egwu egwu {player_id} ebugharịwo ihe site na {source} gaa {dest}. Ihe na-awakpo bụ {attacking_rank} na ebe a na-aga bụ {target_rank}. Ebe ọ bụ na onye na-awakpo bụ ọkwa dị ala karịa ebe a na-aga, ị meriri agha ahụ."
+  },
+  "outcome": {
+    "flag_captured": "Onye na-egwu egwu {player_id} weghaara ọkọlọtọ onye iro!",
+    "no_movable_pieces": "Onye na-egwu egwu {winner_id} na-emeri! Onye na-egwu egwu {loser_id} enweghị ihe ọ bụla na-agagharị agagharị."
+  }
+}

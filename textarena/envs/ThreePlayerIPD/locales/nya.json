@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Iwe ndi Mcheni {player_id} mu mchezo wa watu 3 wa Iterated Prisoner's Dilemma. Mchezo unathawira {num_rounds} malundo.\nMalo a malundo:\n• {conv_rounds} malundo a chat yathu yathu\n• 1 malundo a maamuzi - pereka tokeni limodzi kwa kila msiri: '[<opp-id> cooperate]' or '[<opp-id> defect]' (koma '[1 defect] [2 cooperate]'; tokeni la kawiri ni 'kuikana'). \nChilemba cha malipo kwa kila jozi:\n  - Onse amaiikana  ->  {reward}\n  - Onse akana  ->  {punishment}\n  - Iwe ukane, ao amaiikana -> {temptation}\n  - Iwe uaiikane, ao akane -> {sucker}\nMcheni (wo) ndi aliyebeba alunde linalo mwambo kabisa pa malundo yose anapata"
+  },
+  "round": {
+    "start": "─── Kuanza kwa Malundo {round} ───\tInu mukuchema kwa malundo {conv_rounds} yathuyi.",
+    "chat_finished": "Makalata athesedwa kwa mzunguko {round}. Pepeseleza mawu akowo, tokhoni limoza kwa mnong'ona aliyense: `[pid cooperate]` kapena `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Zotsatira:",
+    "pair_line": "{observation}\n\t Mcheni {i} vs Mcheni {j} anaponya {choice_i} na {choice_j} (Mcheni {i} anapata {gain_i}, Mcheni {j} anapata {gain_j})",
+    "scores_open": "{observation} -> Zotsatira zamakono: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Matsola a mafumbo: {scores}.  Malonda a magulu (oyera ku mwambo): {groups}"
+  }
+}

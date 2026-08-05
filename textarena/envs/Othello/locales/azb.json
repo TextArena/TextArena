@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "اویون تاختاسی: {board}",
+    "valid_moves": "{observation}\nEtibarlı addımlar: {moves}",
+    "no_valid_moves_reset": "{observation} یئرلی حرکتلر یوخدور - سیز گرک اویونماسیزا مجبور اولاسینیز.",
+    "no_valid_moves_step": "{observation} هئچ بیر حاقلی حرکت یوخدور.  سیز گرک اویونماسیزا مجبور اولاسینیز.",
+    "scores_reset": "{observation}\nİndiki Xallar - Qara: {black_count}, Ağ: {white_count}\n",
+    "scores_step": "{observation}\nXallar - Qara: {black_count}, Ağ: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "حرکتين شكلينه [row, col] اوخشامالي اولور.",
+    "illegal": "قانونسوز حرکتلر.صحیح حرکاتلار: {valid}"
+  },
+  "game_action": {
+    "skipped": "اویونچو {pid} اؤز نؤوبه سینی کئچدیردی.",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "Player {pid} ({piece}) has no valid moves and must skip."
+  },
+  "outcome": {
+    "black_wins": "قارا قازانیر {black_count}-{white_count}.",
+    "white_wins": "آغلار قازانیر {white_count}-{black_count}.",
+    "draw": "{black_count}-{white_count} چک."
+  }
+}

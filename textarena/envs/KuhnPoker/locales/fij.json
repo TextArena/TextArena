@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "O kerekere mo ni Player {player_id} ena qito {max_rounds} ni raundi ni Kuhn Poker.\nNa Lawa ni Qito:\n- Na Kuhn Poker e vakayagataka e dua na dakai 3-kadi kei na J, Q, K (J e kadi lailai duadua, K e kadi cauravou duadua)\n- Kila dauqito e solia {ante} chip ka rawata 1 kadi kila raundi (kerekere kua ni na kadi e soli tu me vaka e sega ni veisoli, kua ni rawa mo ni kadi vata kei na nomu meca).\n- Na qito e tiko kina {max_rounds} raundi\n- Na dauqito e rawata na chip e levu duadua e muri ni kecega na raundi e qai wini\nNa Lawa ni Vakayacora:\n- '[check]': Vaka meca tu me vaka e sega ni bet e tiko ena tebol\n- '[bet]': Vakuria 1 chip ki na pot (vakauasivi kevaka e sega ni bet e tiko ena tebol)\n- '[call]': Vaka meca na bet a vakuria na nomu meca kwa vakuria 1 chip ki na pot\n- '[fold]': Solia lesu na nomu kadi ka vakadonuya na nomu meca me wini na pot"
+  },
+  "init_round": {
+    "round_start": "### Ni kuruvakarua ni round {current_round} mai vei {max_rounds} na round. Na ka ni nomu kati: '{player_card}'",
+    "available_actions": "Na ka o rawa ni cakava: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Na veikaqa vaka[Check], [Bet], [Call], se [Fold].",
+    "not_legal": "Na ka e caka tiko me {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, a solia na veiqito: '[{move}]'.",
+    "valid_actions": "Na ka o rawa ni cakava: {legal_actions}.",
+    "round_summary": "{reason} Iyaya ni vakadewa: Pleiya 0: '{player_0_chips}'; Pleiya 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Na qaiqai: Na Player {winner} e {winner_card} e qai koya e wini na Player {loser} e {loser_card}. Na Player {winner} e wini na pot e {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "Ena icavacava ni {max_rounds} na duru, rau sa tautauvata ruarua na dauqito ena levu ni chips.",
+    "round_win": "Sa folded na dauqito {player_id}.",
+    "winner_player0": "Na dauqito 0 qaqa ena nona sa levu cake na chips ni oti kece {max_rounds} veimacawa.",
+    "winner_player1": "Na dauqito 1 qaqa ena kena levu cake na chips ni oti kece {max_rounds} veimacawa."
+  }
+}

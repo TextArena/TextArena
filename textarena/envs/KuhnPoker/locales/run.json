@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Uri umukinnyi {player_id} mu michezo ya Kuhn Poker ya mizunguko {max_rounds}.\nAmategeko ya Mchezo:\n- Kuhn Poker itagira ikarata 3 za J, Q, K (J ndogo zaidi, K kubwa zaidi)\n- Kila mukinnyi atanga {ante} chip na akabona ikarata 1 kila mzunguko (kumbuka kwamba ikarata zitabonwa bila kubadilishwa, kwa hivyo utaweza kuwa na ikarata sawa na ya mpinzani wako).\n- Mchezo utaendelea kwa mizunguko {max_rounds}\n- Mukinnyi aliye na chips nyingi zaidi baada ya mizunguko yote atashinda\nAmategeko ya Vitendo:\n- '[check]': Pita bila kubeti (ni muhimu tu ikiwa hakuna beti kwenye meza)\n- '[bet]': Ongeza chip 1 kwenye poti (ni muhimu tu ikiwa hakuna beti kwenye meza)\n- '[call]': Linganisha beti ya mpinzani wako kwa kuongeza chip 1 kwenye poti\n- '[fold]': Achilia mkono wako na uruhusu mpinzani wako ashinde poti"
+  },
+  "init_round": {
+    "round_start": "### Turi kuanza mzunguko {current_round} kati ya mizunguko {max_rounds}. Ikara yawe ni: '{player_card}'",
+    "available_actions": "Ibikorwa mushobora gukora ni ibi: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Igizo kigende [Check], [Bet], [Call], canke [Fold].",
+    "not_legal": "Igikorwa gitegerezwa kuba {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Mukinnyi {player_id}, alituma kitendo: '[{move}]'.",
+    "valid_actions": "Ibikorwa ufise ni ibi: {legal_actions}.",
+    "round_summary": "{reason} Amascore yakuwe: Mwari 0: '{player_0_chips}'; Mwari 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Kuzura: Mwari {winner} '{winner_card}' ikizeza Mwari {loser} '{loser_card}'. Mwari {winner} ashinda poti ya {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "Mu mpera z'iminota {max_rounds}, abakinyi bompi bari bafise ibiceri bingana.",
+    "round_win": "Umukinyi {player_id} yaratsinzwe.",
+    "winner_player0": "Umukinyi 0 yatsinze mu kugira chips nyinshi ku mpera z'iminota yose {max_rounds}.",
+    "winner_player1": "Umukinyi 1 yatsinze mu kugira chips nyinshi ku mpera z'iminota yose {max_rounds} ."
+  }
+}

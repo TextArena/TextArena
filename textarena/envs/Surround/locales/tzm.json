@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Amaray deg Surround ɣef {width}x{height} grid.\nDdukki ad tiliḍ umaray {player_id}. Imussa iɣewwaṛen: '[up]' '[down]' '[left]' '[right]' neɣ w/s/a/d.\nAɣewwaṛ: ḍḍiɣ ɣer kraygat yan. Imussa ḍḍayanin gan imettinen; aɣewwaṛ n uḍebsi gan imettinen; imussa n uḍebsi gan imettinen i kraygat yan."
+  },
+  "board": {
+    "current": "ⴰⴳⵔⴰⵡ ⴰⵎⴰⵢⵏⵓ: {board}",
+    "after_moves": "ⵜⴰⵖⵔⵎⵜ ⴷⴼⴼⵉⵔ ⵏ ⵉⵎⵓⵙⵙⵓⵜⵏ ⵉⴽⵙⵡⴰⵜⵏ: {board}"
+  },
+  "game_action": {
+    "invalid_death": "ⵉⵎⵎⵓⵜ ⵓⵎⵓⵔⴰⵔ {player_id} ⵙ ⵜⵎⵏⵜⵉⵍⵜ ⵏ ⵓⵙⵙⴰⵢ ⵓⵔ ⵉⵍⵍⵉⵏ."
+  },
+  "outcome": {
+    "survived_win": "ⵢⵓⴷⵔ ⵓⵎⵓⵔⴰⵔ {player_id}, ⴽⵓⵍⵍⵓ ⵡⵉⵢⴰⴹ ⵉⵅⵛⵏ.",
+    "all_crashed": "ⴽⵓⵍⵍⵓ ⵉⵎⵓⵔⴰⵔⵏ ⵜⵜⵡⴰⵎⵥⵏ ⴳ ⵢⴰⵜ ⵜⵉⵣⵉ.",
+    "outlived": "ⵉⵎⵓⵔⴰⵔ ⵉⵇⴱⵓⵕⵏ ⴽⵓⵍⵍⵓ.",
+    "all_dead": "ⴽⵓⵍⵍⵓ ⵉⵎⵓⵔⴰⵔⵏ ⵎⵎⵓⵜⵏ.",
+    "turn_limit": "ⴰⵣⴳⵏ ⵏ ⵓⴽⵡⵜⵜⵓ ⵢⵉⵡⴹ - ⴰⴷ ⵉⵔⴰⵔ ⵡⴰⵏⵏⴰ ⵉⴷⴷⵔⵏ.",
+    "ranking": "{reason} Tanẓẓi tagrawla s uɣawas (amezzwar→ameɣyas): {groups}"
+  }
+}

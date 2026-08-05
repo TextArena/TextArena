@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Int qed tkun {role} fil-Kolonel Blotto.\nL-għan tiegħek hu li tirbaħ aktar rounds mill-avversarju tiegħek.\nF'kull round, allokka eżattament {num_total_units} unitajiet fuq il-oqsma {field_names}.\nIl-plejer li jallokka aktar unitajiet f'oqsma jirbaħ dak l-oqsma, u l-plejer li jirbaħ aktar oqsma jirbaħ ir-round.\nPer eżempju, '[A7 B7 C6]' jallokka 7 unitajiet lil A, 7 lil B, u 6 lil C.",
+    "commander_alpha": "Kmandant Alfa.",
+    "commander_beta": "Kmandant Beta"
+  },
+  "game_state": {
+    "header_round": "=== Kolonell Blotto - Rawnd {current_round}/{num_rounds} ===\nRawnds Rebbieħ - Commander Alpha: {alpha_score}, Commander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRound {current_round}\nKmandant Alfa allokka: {p0_allocations}\nKmandant Beta allokka: {p1_allocations}\n",
+    "winner_alpha": "{message}Rebbieħ: Kmandant Alpha",
+    "winner_beta": "{message}Rebbieħ: Kmandant Beta",
+    "tie": "{message}Għaqqad!"
+  },
+  "invalid_move": {
+    "wrong_format": "Format ta' input mhux validu. Użu: A:5, B:10, C:5",
+    "invalid_field": "Isem ta' kamp invalidu (s). Kamp validi: {field_names}",
+    "wrong_allocation_value": "L-allokazzjonijiet kollha għandhom ikunu integers mhux negattivi.",
+    "incorrect_total_units": "Inti għandek toqqroba eżatt {num_total_units} units. Somma attwali: {current_sum}",
+    "good_allocations": "L- allokazzjoni hija tajba."
+  },
+  "outcome": {
+    "winner_alpha": "Commander Alpha jirbaħ {score_0}-{score_1} wara {num_rounds} rawnds!",
+    "winner_beta": "Commander Beta jirbaħ {score_1}-{score_0} wara {num_rounds} rawnds!",
+    "draw": "Il-logħba tispiċċa fi sqarja {score_0}-{score_1} wara {num_rounds} rawnds!",
+    "early_winner_alpha": "Commander Alpha jirbaħ {scores_0}-{scores_1} (maġġoranza miksuba)!",
+    "early_winner_beta": "Commander Beta jirbaħ {scores_1}-{scores_0} (maġġoranza miksuba)!"
+  }
+}
