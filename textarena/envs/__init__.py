@@ -256,22 +256,23 @@ register_with_versions(id="KuhnPoker-v0-medium",  entry_point="textarena.envs.Ku
 register_with_versions(id="KuhnPoker-v0-long",    entry_point="textarena.envs.KuhnPoker.env:KuhnPokerEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS}, max_rounds=15  )
 register_with_versions(id="KuhnPoker-v0-extreme", entry_point="textarena.envs.KuhnPoker.env:KuhnPokerEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS}, max_rounds=25  )
 
-# # LeducHoldem [2 Player]
-# register(id="LeducHoldem-v0", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=5)
-# register(id="LeducHoldem-v0-medium", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=9)
-# register(id="LeducHoldem-v0-long", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=15)
-# register(id="LeducHoldem-v0-extreme", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=25)
-# register(id="LeducHoldem-v0-raw", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=5)
-# register(id="LeducHoldem-v0-raw-medium", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=9)
-# register(id="LeducHoldem-v0-raw-long", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=15)
-# register(id="LeducHoldem-v0-raw-extreme", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=25)
-# register(id="LeducHoldem-v0-train", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=5)
-# register(id="LeducHoldem-v0-train-medium", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=9)
-# register(id="LeducHoldem-v0-train-long", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=15)
-# register(id="LeducHoldem-v0-train-extreme", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=25)
+# LeducHoldem [2 Player]
+register(id="LeducHoldem-v0", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=5)
+register(id="LeducHoldem-v0-medium", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=9)
+register(id="LeducHoldem-v0-long", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=15)
+register(id="LeducHoldem-v0-extreme", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=25)
+register(id="LeducHoldem-v0-raw", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=5)
+register(id="LeducHoldem-v0-raw-medium", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=9)
+register(id="LeducHoldem-v0-raw-long", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=15)
+register(id="LeducHoldem-v0-raw-extreme", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=25)
+register(id="LeducHoldem-v0-train", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=5)
+register(id="LeducHoldem-v0-train-medium", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=9)
+register(id="LeducHoldem-v0-train-long", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=15)
+register(id="LeducHoldem-v0-train-extreme", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=25)
 
 # LeTruc [2 Player]
-# TODO 
+register(id="LeTruc-v0", entry_point="textarena.envs.LeTruc.env:LeTrucEnv", default_wrappers=DEFAULT_WRAPPERS)
+register(id="LeTruc-v0-train", entry_point="textarena.envs.LeTruc.env:LeTrucEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper])
 
 # LinesOfAction [2 Player]
 register_with_versions(id="LinesOfAction-v0", entry_point="textarena.envs.LinesOfAction.env:LinesOfActionEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})

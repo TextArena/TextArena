@@ -30,7 +30,7 @@ class LeTrucEnv(ta.Env):
         self.action_space = re.compile(
             r"""\[
                 (?P<verb>play|raise|accept|fold)            # action keyword
-                (?:\s+(?P<card>(10|[234567JQKA])))?         # optional rank (play)
+                (?:\s+(?P<card>[234567JQKA]))?              # optional rank (play)
             \]""",
             re.IGNORECASE | re.VERBOSE,
         )
@@ -73,14 +73,29 @@ class LeTrucEnv(ta.Env):
         # First raise lifts the stake 1->2; every further raise adds 2, capped at 12.
         return 2 if stake == 1 else min(stake + 2, 12)
 
+    def _effective_stake(self) -> int:
+        """The stake a raise would build on: the standing proposal if one exists
+        (a re-raise implicitly accepts it), otherwise the agreed stake.
+
+        FIX: the raise cap must be checked against THIS value, not gs["stake"].
+        Checking gs["stake"] allowed a no-op "raise" from a pending 12 (stake 10),
+        which flipped the accept-12/fold-10 decision onto the opponent as
+        accept-12/fold-12 -- a strict exploit.
+        """
+        gs = self.state.game_state
+        return gs["pending"]["proposed"] if gs["pending"] is not None else gs["stake"]
+
     def _legal(self, pid: int) -> List[str]:
         gs = self.state.game_state
         if gs["pending"] is not None:                       # pid must answer a standing raise
             acts = ["accept", "fold"]
-            if gs["stake"] < 12: acts.append("raise")
+            if self._effective_stake() < 12: acts.append("raise")   # FIX: was gs["stake"] < 12
             return acts
-        acts = [f"play {c[:-1]}" for c in gs["hands"][pid]]  # otherwise pid is to play a card
-        if gs["stake"] < 12: acts.append("raise")
+        acts = []
+        for c in gs["hands"][pid]:                          # otherwise pid is to play a card
+            a = f"play {c[:-1]}"
+            if a not in acts: acts.append(a)                # dedupe duplicate ranks
+        if self._effective_stake() < 12: acts.append("raise")
         return acts
 
     def _announce_legal(self, pid: int):
@@ -130,10 +145,10 @@ class LeTrucEnv(ta.Env):
 
     def _do_raise(self, pid: int):
         gs = self.state.game_state
-        if gs["stake"] >= 12:
-            return self._invalid("max_stake")
         if gs["pending"] is not None and gs["pending"]["offerer"] == pid:
             return self._invalid("already_raised")           # your offer is still standing
+        if self._effective_stake() >= 12:                    # FIX: was gs["stake"] >= 12
+            return self._invalid("max_stake")
         if gs["pending"] is not None:
             gs["stake"] = gs["pending"]["proposed"]          # re-raise implicitly accepts the standing offer
         else:
