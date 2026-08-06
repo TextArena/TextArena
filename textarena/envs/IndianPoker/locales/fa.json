@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "شما بازیکن {player_id} در بازی پوکر هندی هستید.\n- ۵۲ کارت در دسترس است و شما فقط کارت حریف را می‌بینید.\n- هر دور {ante} چیپ (ها) آنتی می‌شود و در مجموع {max_rounds} دور بازی می‌شود.\n- حرکات معتبر: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X یک عدد صحیح مثبت است که باید کمتر یا برابر با تعداد چیپ‌های شما باشد.)\n- بالاترین کارت پنهان در مرحله نهایی برنده پات می‌شود.\n"
+  },
+  "round": {
+    "announce": "### دور {current_round}/{max_rounds}\nکارت حریف شما این است: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "یک عمل مشخص را در براکت قرار دهید، به عنوان مثال '[check]', '[bet 2]', '[call]', '[raise 3]' یا '[fold]'.",
+    "cannot_check": " نمی‌توانید [check] کنید - شما با یک شرط روبرو هستید.",
+    "amount_min": "مقدار شرط / افزایش باید ≥ ۱ باشد.",
+    "cannot_bet": " نمی‌توانید [bet] کنید - باید [call] / [raise] / [fold] کنید.",
+    "nothing_to_call": "چیزی برای [call] وجود ندارد؛ می‌توانید به جای آن [check] کنید.",
+    "no_bet_to_raise": "از [bet X] برای شروع استفاده کنید؛ هیچ شرطی برای افزایش وجود ندارد.",
+    "insufficient": "چیپ‌های کافی برای این عمل وجود ندارد."
+  },
+  "game_action": {
+    "action": "بازیکن {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (هزینه {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "حرکات ممکن شما: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  پات {pot} → بازیکن {winner}. (موجودی P0:{p0}, P1:{p1})",
+    "folded": "بازیکن {player_id} تسلیم شد.",
+    "showdown_win": "مرحله نهایی: {card_win} برنده {card_lose} است.",
+    "showdown_tie": "تساوی در مرحله نهایی: هر دو {card}. پات تقسیم می‌شود – هر کدام {split} دریافت می‌کنند."
+  },
+  "outcome": {
+    "p0_wins": "بازیکن ۰ برنده است ({bank0} > {bank1})",
+    "p1_wins": "بازیکن ۱ برنده است ({bank1} > {bank0})",
+    "draw": "چیپ‌های برابر بعد از تمام دورها"
+  }
+}

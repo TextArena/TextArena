@@ -1,0 +1,31 @@
+{
+  "_comment": "Fișier de localizare pentru Snake. NU traduceți cheile (partea stângă). Traduceți doar valorile (partea dreaptă). Păstrați fiecare {placeholder} exact așa cum este.",
+  "_slots": {
+    "{num_players}": "Numărul de jucători în meci",
+    "{width}": "Lățimea tablei în celule",
+    "{height}": "Înălțimea tablei în celule",
+    "{max_turns}": "Limita de ture pentru meci",
+    "{player_id}": "Numărul jucătorului (bazat pe 0)",
+    "{board}": "Grila ASCII randată; păstrați-o neutră, nu o traduceți",
+    "{reason}": "Frază randată pentru motivul de sfârșit de joc",
+    "{groups}": "Date de clasament neutre (o listă de grupuri de ID-uri de jucător, de la cel mai slab la cel mai bun); nu traduceți"
+  },
+  "player_prompt": {
+    "intro": "Șarpe cu {num_players} jucători pe o grilă de {width}×{height}.\nControlați șarpele {player_id}. Mișcări valide: '[up]'/'[down]'/'[left]'/'[right]' (sau w/s/a/d).\nObiectiv: supraviețuiți cel mai mult sau fiți cel mai lung și obțineți cel mai mare scor (limita de ture {max_turns} ture)."
+  },
+  "board": {
+    "current": "Tablă curentă:\n{board}",
+    "after_moves": "Starea curentă a tablei:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Șarpele {player_id} a murit din cauza unei mișcări nevalide."
+  },
+  "outcome": {
+    "survived_win": "Jucătorul {player_id} a supraviețuit; toți ceilalți au pierit.",
+    "all_dead_simul": "Toți șerpii au murit simultan.",
+    "outlived": "Jucătorul a supraviețuit tuturor celorlalți.",
+    "all_dead": "Toți șerpii sunt morți.",
+    "turn_limit": "Limita de ture a fost atinsă - cel mai bun scor câștigă la egalitate.",
+    "ranking": "{reason} Grupuri de clasament finale (de la cel mai slab la cel mai bun): {groups}"
+  }
+}

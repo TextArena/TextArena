@@ -1,0 +1,39 @@
+{
+  "_comment": "Tệp ngôn ngữ ThreePlayerGOPS. KHÔNG được dịch các khóa (bên trái). Chỉ dịch các giá trị (bên phải). Giữ nguyên mọi {placeholder}. Không dịch các thẻ bài trong ngoặc vuông (ví dụ: [A], [10], [Q], [K]), các đoạn trung lập về đặt cược/tỷ số như 'P0:10', các dấu markdown '### ', hoặc các ký hiệu '»' và '→'.",
+  "_slots": {
+    "{player_id}": "Số thứ tự của người chơi, 0, 1 hoặc 2",
+    "{round}": "Số vòng hiện tại, từ 1 đến 13",
+    "{prize}": "Nhãn mặt của lá bài giải thưởng được tiết lộ (A, 2..10, J, Q, K) - không dịch",
+    "{worth}": "Giá trị tổng cộng của giải thưởng bao gồm cả số tiền được chuyển từ vòng trước",
+    "{hand}": "Các lá bài còn lại của người chơi, được hiển thị dưới dạng các thẻ trong ngoặc vuông như '[A]' '[2]' - không dịch",
+    "{bids}": "Danh sách các lá bài đã đặt cược được phân cách bằng dấu phẩy như 'P0:10, P1:J, P2:Q' - không dịch",
+    "{winner}": "Số thứ tự của người chơi thắng vòng",
+    "{pot}": "Giá trị số tiền được trao hoặc chuyển sang vòng tiếp theo",
+    "{scoreline}": "Bảng tỷ số hiện tại như 'P0:0  P1:0  P2:11' - không dịch",
+    "{pid}": "Số thứ tự của người chơi bị loại",
+    "{scores}": "Tỷ số cuối cùng dưới dạng bản đồ số thứ tự người chơi đến tỷ số - không dịch"
+  },
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong Three-Player GOPS.\n- Bạn giữ 13 lá bài từ A đến K (mỗi lá chỉ xuất hiện một lần).\n- Mỗi vòng, một giải thưởng được tiết lộ. Gửi MỘT lá bài như `[Q]`, `[10]`, `[2]` …\n- Lá bài cao nhất thắng giải thưởng (+ bất kỳ số tiền được chuyển từ vòng trước). Nếu hòa, giải thưởng sẽ được chuyển sang vòng tiếp theo.\n- Sau 13 vòng, người có tổng điểm cao nhất thắng. Các nước đi không hợp lệ = bị loại."
+  },
+  "round": {
+    "header": "### Vòng {round}/13 - Giải thưởng: {prize} (giá trị {worth})",
+    "hand": "Các lá bài còn lại của bạn: {hand}"
+  },
+  "reveal": {
+    "win": "Đặt cược » {bids} - Người chơi {winner} thắng {pot}.",
+    "tie": "Đặt cược » {bids} - hòa, số tiền hiện tại {pot}.",
+    "scores": "Tỷ số → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "hành động cần một lá bài trong ngoặc vuông như '[Q]'",
+    "bad_card": "lá bài đã được sử dụng hoặc không hợp lệ"
+  },
+  "elimination": {
+    "player": "Người chơi {pid} bị loại sau nhiều lần đặt cược không hợp lệ."
+  },
+  "outcome": {
+    "auto_win": "Hai người chơi bị loại - chiến thắng tự động.",
+    "final": "Tỷ số cuối cùng: {scores}"
+  }
+}

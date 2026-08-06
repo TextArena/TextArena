@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround-lokaalleêr. MAAK NIE sleutels (linkerkant) oor nie. Vertaal net waardes (regterkant).",
+  "_slots": {
+    "{num_players}": "Aantal spelers in die wedstryd",
+    "{width}": "Bordwydte in selle",
+    "{height}": "Bordhoogte in selle",
+    "{player_id}": "Die speler se nommer (0-gebaseer)",
+    "{board}": "Die gerenderde ASCII-rooster; hou neutraal, vertaal nooit sy karakters",
+    "{reason}": "Die gerenderde einde-van-spel rede frase",
+    "{groups}": "Neutrale rangorde data ( 'n lys van speler-id-groepe, beste tot slegste); vertaal nie"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Speler Omsingel op 'n {width}x{height} rooster.\nJy is speler {player_id}. Geldige skuiwe: '[up]' '[down]' '[left]' '[right]' of w/s/a/d.\nDoelwit: oorleef al die ander. Spore is dodelik; muur-treffers dood; kop-aan-botsings dood beide."
+  },
+  "board": {
+    "current": "Huidige Bord:\n{board}",
+    "after_moves": "Bord na gelyktydige skuiwe:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Speler {player_id} is dood weens 'n ongeldige skuif."
+  },
+  "outcome": {
+    "survived_win": "Speler {player_id} het oorleef; al die ander het gebots.",
+    "all_crashed": "Al die spelers het gelyktydig gebots.",
+    "outlived": "Speler het al die ander oorleef.",
+    "all_dead": "Al die spelers is dood.",
+    "turn_limit": "Beurtgrens bereik - langste oorlewende wenner.",
+    "ranking": "{reason} Finale rangorde-groepe (beste→slegste): {groups}"
+  }
+}

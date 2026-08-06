@@ -1,0 +1,28 @@
+{
+  "_comment": "Dansk lokalisationsfil for Wordle. Oversæt ikke nøgler (venstre side). Oversæt kun værdier (højre side).",
+  "_slots": {
+    "{word_length}": "Længden af det hemmelige ord (heltal)",
+    "{num_guesses}": "Antallet af tilladte gæt (heltal)",
+    "{word}": "Et gættet ord",
+    "{view}": "Neutrale tegn + G/Y/X-tilbagemelding (oversæt ikke)",
+    "{guesses_left}": "Resterende gæt (heltal)",
+    "{pct}": "Procentdel af korrekt placerede bogstaver (heltal)",
+    "{secret}": "Det hemmelige ord"
+  },
+  "prompt": {
+    "intro": "Du spiller Wordle.\nEt hemmeligt {word_length}-bogstavord er blevet valgt. Du har {num_guesses} forsøg på at gætte det.\nFor hver gætning skal du indsætte dit ord i firkantede parenteser (f.eks. '[æble]').\nTilbagemelding for hvert bogstav vil blive givet som følger:\n  - G (grøn): korrekt bogstav i korrekt position\n  - Y (gul): bogstav findes i ordet, men i forkert position\n  - X (forkert): bogstav er ikke i ordet\nIndtast dit gæt for at begynde.\n"
+  },
+  "invalid": {
+    "wrong_format": "Du forsøgte at indsende et ord i forkert format. Sørg for at bruge firkantede parenteser.",
+    "wrong_length": "Dit ord skal være nøjagtigt {word_length} bogstaver.",
+    "already_guessed": "Du har allerede gættet '{word}' før. Prøv et andet ord.",
+    "not_a_word": "'{word}' er ikke et gyldigt ord."
+  },
+  "feedback": {
+    "submitted": "Du indsendte [{word}].\nTilbagemelding:\n{view}\nDu har {guesses_left} gæt tilbage."
+  },
+  "outcome": {
+    "win": "Tillykke! Du gættede ordet korrekt!",
+    "turn_limit": "Tidsgrænsen er nået. Du gættede ikke ordet, men dit bedste gæt matchede {pct}% af bogstaverne i korrekte positioner.\nDet hemmelige ord var: **{secret}**."
+  }
+}

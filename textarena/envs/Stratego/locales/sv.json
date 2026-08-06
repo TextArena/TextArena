@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Du är spelare {player_id} i Stratego.\nDitt mål är att erövra din motståndares flagga eller eliminera alla deras flyttbara pjäser.\nDin armé har placerats för dig på brädet, inklusive din flagga, bomber och andra pjäser av varierande rang.\n\n### Spelregler\n1. **Rörelse Regler:**\n   - På din tur kan du flytta en pjäs ett steg till ett intilliggande fält (upp, ner, vänster eller höger) som redan är upptaget med dina pjäser.\n   - Exempel: En pjäs kan flytta från A1 till B1 eller A1 till A2 om B1 och A2 inte är upptagna med spelarens egna pjäser.\n   - Om den valda pjäsen är en bomb eller en flagga, kan den inte flyttas.\n2. **Strider:**\n   - Om du flyttar till ett fält som upptas av en motståndares pjäs, kommer en strid att inträffa:\n     - Pjäsen med den högre rangen vinner och eliminerar motståndarens pjäs.\n     - Om rangerna är lika, tas båda pjäserna bort från brädet.\n     - **Speciella fall:**\n       - Bomber eliminerar de flesta attackerande pjäser förutom gruvarbetare, som desarmerar bomber.\n       - Spioner kan besegra marskalken om spionen attackerar först, men förlorar mot alla andra pjäser.\n3. **Strategiska mål:**\n   - Identifiera din motståndares pjäser genom deras rörelser och strider.\n   - Skydda din flagga samtidigt som du försöker erövra din motståndares flagga.\n   - Använd spanare strategiskt för att få information om din motståndares pjäser och attackera svaga.\n\n### Hur man gör ett drag:\n1. Ange koordinaterna för den pjäs du vill flytta och dess destination.\n2. Använd formatet: [A0 B0], där A0 är startpositionen och B0 är destinationen.\n   - Exempel: För att flytta en pjäs från rad 0, kolumn 0 till rad 1, kolumn 0, ange [A0 B0].\n3. Se till att destinationen är giltig enligt rörelse reglerna ovan.\n\n### Viktiga noteringar:\n- Brädet kommer att visa dina pjäser och deras positioner, t.ex. MN, MS.\n- Brädet kommer också att visa kända positioner av din motståndares pjäser utan att avslöja deras rang, t.ex. ?.\n- Rutnät med ~ är sjöar och kan inte flyttas till.\n- Som ett förslag, börja ditt spel genom att flytta dina pjäser som är på frontlinjen för att få information om din motståndares pjäser. Spelare 0 och spelare 1:s frontlinjer är rad D respektive G.\n\nHär är det aktuella brädet:\n"
+  },
+  "board": {
+    "current_board": "Aktuellt bräde:\n\n{board}\nTillgängliga drag: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ogiltigt format för åtgärd. Spelare {player_id} angav inte ett drag i formatet [A0 B0].",
+    "invalid_coordinates": "Ogiltigt format för åtgärd. Spelare {player_id} angav inte giltiga koordinater.",
+    "not_own_piece": "Ogiltigt format för åtgärd. Spelare {player_id} måste flytta en av sina egna pjäser.",
+    "scout_through_pieces": "Ogiltigt format för åtgärd. Spelare {player_id} kan inte flytta en spanare genom andra pjäser.",
+    "scout_diagonal": "Ogiltigt format för åtgärd. Spelare {player_id} kan inte flytta en spanare diagonalt.",
+    "non_scout_multi_square": "Ogiltigt format för åtgärd. Pjäser, förutom spanare, kan bara flyttas ett fält åt gången.",
+    "move_into_lake": "Ogiltigt format för åtgärd. Spelare {player_id} kan inte flytta in i en sjö.",
+    "move_onto_own_piece": "Ogiltigt format för åtgärd. Spelare {player_id} kan inte flytta till en av sina egna pjäser.",
+    "move_bomb_or_flag": "Ogiltigt format för åtgärd. Spelare {player_id} kan inte flytta en bomb eller en flagga."
+  },
+  "game_action": {
+    "you_moved": "Du har flyttat din pjäs från {source} till {dest}.",
+    "opponent_moved": "Spelare {player_id} har flyttat en pjäs från {source} till {dest}.",
+    "you_equal_ranks": "Du har flyttat din pjäs från {source} till {dest}. Den attackerande pjäsen var {attacking_rank} och målpjäsen var {target_rank}. Eftersom rangerna är lika, förlorade båda pjäserna.",
+    "opponent_equal_ranks": "Spelare {player_id} har flyttat en pjäs från {source} till {dest}. Den attackerande pjäsen var {attacking_rank} och målpjäsen var {target_rank}. Eftersom rangerna är lika, förlorade båda pjäserna.",
+    "you_miner_defused": "Du har flyttat din pjäs från {source} till {dest}. Den attackerande pjäsen var {attacking_rank} och målpjäsen var {target_rank}. Eftersom gruvarbetare kan desarmera bomber, vann du striden.",
+    "opponent_miner_defused": "Spelare {player_id} har flyttat en pjäs från {source} till {dest}. Den attackerande pjäsen var {attacking_rank} och målpjäsen var {target_rank}. Eftersom gruvarbetare kan desarmera bomber, förlorade du striden.",
+    "you_bomb_lost": "Du har flyttat din pjäs från {source} till {dest}. Den attackerande pjäsen var {attacking_rank} och målpjäsen var {target_rank}. Eftersom angriparen inte är en gruvarbetare, förlorade du striden.",
+    "opponent_bomb_won": "Spelare {player_id} har flyttat en pjäs från {source} till {dest}. Den attackerande pjäsen var {attacking_rank} och målpjäsen var {target_rank}. Eftersom angriparen inte är en gruvarbetare, vann du striden.",
+    "you_spy_won": "Du har flyttat din pjäs från {source} till {dest}. Den attackerande pjäsen var {attacking_rank} och målpjäsen var {target_rank}. Eftersom angriparen är en spion och målet är en marskalk, vann du striden.",
+    "opponent_spy_lost": "Spelare {player_id} har flyttat en pjäs från {source} till {dest}. Den attackerande pjäsen var {attacking_rank} och målpjäsen var {target_rank}. Eftersom angriparen är en spion och målet är en marskalk, förlorade du striden.",
+    "you_higher_won": "Du har flyttat din pjäs från {source} till {dest}. Den attackerande pjäsen var {attacking_rank} och målpjäsen var {target_rank}. Eftersom angriparen har en högre rang än målet, vann du striden.",
+    "opponent_higher_lost": "Spelare {player_id} har flyttat en pjäs från {source} till {dest}. Den attackerande pjäsen var {attacking_rank} och målpjäsen var {target_rank}. Eftersom angriparen har en högre rang än målet, förlorade du striden.",
+    "you_lower_lost": "Du har flyttat din pjäs från {source} till {dest}. Den attackerande pjäsen var {attacking_rank} och målpjäsen var {target_rank}. Eftersom angriparen har en lägre rang än målet, förlorade du striden.",
+    "opponent_lower_won": "Spelare {player_id} har flyttat en pjäs från {source} till {dest}. Den attackerande pjäsen var {attacking_rank} och målpjäsen var {target_rank}. Eftersom angriparen har en lägre rang än målet, vann du striden."
+  },
+  "outcome": {
+    "flag_captured": "Spelare {player_id} har erövrat motståndarens flagga!",
+    "no_movable_pieces": "Spelare {winner_id} vinner! Spelare {loser_id} har inga fler flyttbara pjäser."
+  }
+}

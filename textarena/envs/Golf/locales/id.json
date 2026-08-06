@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (permainan kartu) berkas lokal. JANGAN menerjemahkan kunci (sisi kiri). Hanya terjemahkan nilai (sisi kanan). Simpan setiap {placeholder} persis seperti yang ada. Jangan menerjemahkan token aksi ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), label kartu (A, 2-10, J, Q, K), simbol suit, huruf X/Y yang digunakan sebagai placeholder baris/kolom dalam token, atau skor/posisi numerik. Simpan tata letak grid ASCII (spasi, nomor kolom, '?', 'Col', 'Row' alignment) agar papan tetap dapat dibaca.",
+  "_slots": {
+    "{player_id}": "Nomor pemain, misalnya 0 atau 1",
+    "{pid}": "Nomor pemain, misalnya 0 atau 1",
+    "{winner}": "Nomor pemain dengan skor terendah",
+    "{score}": "Total poin numerik",
+    "{card}": "Label kartu seperti A♠, 10♥, K♦ atau Q♣",
+    "{new}": "Label kartu yang ditempatkan ke dalam grid",
+    "{old}": "Label kartu yang dihapus dari grid",
+    "{row}": "Nomor baris",
+    "{col}": "Nomor kolom",
+    "{max_row}": "Nomor baris terbesar yang valid",
+    "{max_col}": "Nomor kolom terbesar yang valid",
+    "{reason}": "Frasa yang telah dirender menjelaskan mengapa ronde akhir dimulai",
+    "{n}": "Nomor baris yang ditampilkan di awal baris grid",
+    "{cards}": "Sel-sel baris grid yang telah dirender dan sensitif terhadap tata letak",
+    "{hand}": "Blok grid pemain yang telah dirender",
+    "{discard}": "Label kartu di atas tumpukan buangan, atau kata untuk 'none'",
+    "{options}": "Baris yang telah dirender yang mencantumkan aksi yang tersedia",
+    "{scores}": "Daftar skor akhir per-pemain yang telah dirender"
+  },
+  "player_prompt": {
+    "intro": "Anda sedang bermain Golf (Permainan Kartu) - Pemain {player_id}.\nTujuan: Dapatkan total skor terendah dalam ronde tunggal ini. Jika kolom memiliki nilai yang sama, mereka dijumlahkan sebagai 0.\nNilai Kartu: A=1, 2-10=nilai nominal, J/Q=10, K=0\n\nAksi (gunakan kurung siku yang tepat):\n- '[draw]' - Ambil dari dek\n- '[take]' - Ambil dari tumpukan buangan\n- '[swap X Y]' - Tukar kartu yang diambil dengan posisi X (baris) Y (kolom)\n- '[discard]' - Buang kartu yang diambil\n"
+  },
+  "board": {
+    "drew": "Anda mengambil: {card}\nSekarang Anda harus [swap X Y] atau [discard] kartu tersebut.",
+    "took": "Anda mengambil: {card} dari tumpukan buangan\nAnda harus [swap X Y] dengan kartu tersebut (tidak dapat dibuang).",
+    "peeked": "Anda melihat posisi ({row},{col}): {card}",
+    "turn_view": "Tangan Anda:\n{hand}\nTumpukan buangan: {discard}\n{options}",
+    "none": "Tidak ada"
+  },
+  "options": {
+    "final_turns": "Ronde akhir! Pilihan Anda: [draw], [take], [peek X Y]",
+    "draw": "Pilihan Anda: [draw], [take]",
+    "must_swap": "Anda harus: [swap X Y] (tidak dapat membuang kartu dari tumpukan buangan)",
+    "swap_or_discard": "Anda harus: [swap X Y] atau [discard]"
+  },
+  "hand": {
+    "no_cards": "Tidak ada kartu",
+    "header": "  Kol:   1    2    3",
+    "row": "Baris {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Pemain {pid} menukar {new} dengan {old} di posisi ({row},{col})",
+    "discarded": "Pemain {pid} membuang {card}"
+  },
+  "message": {
+    "deck_empty": "Dek kosong! Permainan berakhir segera.",
+    "knocked": "Pemain {pid} mengetuk! Setiap pemain lain mendapat satu giliran lagi.",
+    "final_round": "Pemain {pid} {reason}! Setiap pemain lain mendapat satu giliran lagi."
+  },
+  "reason": {
+    "all_revealed": "memiliki semua kartu yang terbuka"
+  },
+  "invalid": {
+    "wrong_action": "Gunakan tepat SATU aksi dalam kurung siku: [draw], [take], [swap X Y], [discard], [knock], atau [peek X Y]",
+    "discard_empty": "Tumpukan buangan kosong!",
+    "must_draw_first": "Anda harus terlebih dahulu [draw], [take], [knock], atau [peek X Y]",
+    "cannot_discard_taken": "Anda tidak dapat membuang kartu yang diambil dari tumpukan buangan. Anda harus menukarnya.",
+    "have_drawn_card": "Anda memiliki kartu yang diambil. Anda harus [swap X Y] atau [discard] kartu tersebut.",
+    "need_drawn_swap": "Anda memerlukan kartu yang diambil untuk menukar.",
+    "need_drawn_discard": "Anda memerlukan kartu yang diambil untuk membuang.",
+    "out_of_bounds": "Posisi di luar batas. Gunakan baris 1-{max_row}, kolom 1-{max_col}",
+    "knock_with_card": "Anda tidak dapat mengetuk dengan kartu yang diambil. Selesaikan giliran Anda terlebih dahulu.",
+    "already_knocked": "Seseorang telah mengetuk di ronde ini.",
+    "already_revealed": "Kartu tersebut sudah terbuka!"
+  },
+  "summary": {
+    "full": "Permainan Berakhir! Pemain {winner} menang dengan skor {score} poin!\n\nSkor Akhir:\n{scores}",
+    "line": "Pemain {pid}: {score} poin\n"
+  },
+  "board_str": {
+    "title": "=== PERMAINAN GOLF ===",
+    "discard": "Tumpukan buangan: {card}",
+    "knocked": "Pemain {pid} telah mengetuk!",
+    "player_header": "Pemain {pid} (Skor: {score}):"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} ({piece}). Przeciwnik jest ({opp}). Podaj ruchy w formacie '[b1 c3]' (z → do). Wszystkie pionki poruszają się jak szachowe skoczki.\nKażde schwytanie jest warte {score_per_capture} punktów. Gra kończy się po {max_moves} ruchach lub gdy gracz nie ma żadnego legalnego ruchu / nie ma pionków. Wyższy wynik wygrywa."
+  },
+  "board": {
+    "current_board": "Ruch #{move_count}\n\n{board}\n\nDostępne ruchy: {moves}"
+  },
+  "invalid_move": {
+    "bad_format": "Zły format. Użyj '[b1 c3]'.",
+    "unknown_square": "Nieznany kwadrat.",
+    "not_your_piece": "Źródło nie jest twoim pionkiem.",
+    "own_piece": "Nie można wylądować na własnym pionku.",
+    "not_knight": "To nie jest ruch skoczka."
+  },
+  "game_action": {
+    "moved": "Gracz {player_id} przesunął swój pionek z {frm} do {to}.",
+    "capture": "{observation} Schwytuje pionek! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Gracz {player_id} nie ma pionków.",
+    "cannot_move": "Gracz {player_id} nie może się ruszyć.",
+    "higher_score": "Wyższy wynik schwytania.",
+    "move_limit": "Osiągnięto limit ruchów."
+  }
+}

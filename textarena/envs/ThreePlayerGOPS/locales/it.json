@@ -1,0 +1,39 @@
+{
+  "_comment": "File di localizzazione di ThreePlayerGOPS. NON tradurre le chiavi (lato sinistro). Tradurre solo i valori (lato destro).",
+  "_slots": {
+    "{player_id}": "Il numero del giocatore, 0, 1 o 2",
+    "{round}": "Il numero del round corrente, 1..13",
+    "{prize}": "L'etichetta della carta premio rivelata (A, 2..10, J, Q, K) - non tradurre",
+    "{worth}": "Il valore totale del premio, compreso eventuali vincite accumulate",
+    "{hand}": "Le carte rimanenti del giocatore, rappresentate come token tra parentesi quadre come '[A]' '[2]' - non tradurre",
+    "{bids}": "L'elenco neutro delle carte giocate, separate da virgole, come 'P0:10, P1:J, P2:Q' - non tradurre",
+    "{winner}": "Il numero del giocatore che ha vinto il round",
+    "{pot}": "Il valore del piatto assegnato o trasferito in questo round",
+    "{scoreline}": "La classifica neutra dei punteggi come 'P0:0  P1:0  P2:11' - non tradurre",
+    "{pid}": "Il numero del giocatore eliminato",
+    "{scores}": "I punteggi finali come mappatura grezza numero giocatore-punteggio - non tradurre"
+  },
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in Three-Player GOPS.\n- Hai in mano le 13 carte A-K (ognuna esattamente una volta).\n- Ogni round viene rivelato un premio. Invia UNA carta come `[Q]`, `[10]`, `[2]` …\n- La carta più alta vince il premio (+ eventuali vincite accumulate). Le parità trasferiscono il premio al round successivo.\n- Dopo 13 round, vince il totale più alto. Mosse non valide = eliminazione."
+  },
+  "round": {
+    "header": "### Round {round}/13 - Premio: {prize} (valore {worth})",
+    "hand": "La tua mano rimanente: {hand}"
+  },
+  "reveal": {
+    "win": "Offerte » {bids} - Il Giocatore {winner} vince {pot}.",
+    "tie": "Offerte » {bids} - parità, piatto ora {pot}.",
+    "scores": "Punteggi → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "l'azione richiede una carta tra parentesi quadre come '[Q]'",
+    "bad_card": "carta già utilizzata o non valida"
+  },
+  "elimination": {
+    "player": "Il Giocatore {pid} è stato eliminato dopo ripetute mosse non valide."
+  },
+  "outcome": {
+    "auto_win": "Due giocatori eliminati - vittoria automatica.",
+    "final": "Punteggi finali: {scores}"
+  }
+}

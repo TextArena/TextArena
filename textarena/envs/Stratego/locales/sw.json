@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Stratego.\nLengo lako ni kukamata bendera ya mpinzani wako au kuondoa vipande vyote vinavyoweza kusogezwa.\nJeshi lako limepangwa kwa ajili yako kwenye ubao, ikiwa ni pamoja na bendera yako, mabomu, na vipande vingine vya vyeo tofauti.\n\n### Mwongozo wa Michezo\n1. **Sheria za Harakati:**\n   - Katika zamu yako, unaweza kusogeza kipande kimoja kwa hatua moja hadi mraba wa karibu (juu, chini, kushoto, au kulia) ambao tayari umekaliwa na vipande vyako.\n   - Mfano: Kipande kinaweza kusonga kutoka A1 hadi B1 au A1 hadi A2 ikiwa B1 na A2 hazijapangwa na vipande vya mchezaji mwenyewe.\n   - Ikiwa kipande kilichochaguliwa ni Bomu au Bendera, hakiwezi kusogezwa.\n2. **Mapigano:**\n   - Ikiwa utasonga hadi mraba uliokaliwa na kipande cha mpinzani, basi mapigano yatakuwa:\n     - Kipande cha cheo cha juu zaidi kinaishinda na kuondoa kipande cha mpinzani.\n     - Ikiwa vyeo ni sawa, vipande vyote viwili huondolewa kutoka kwenye ubao.\n     - **Matukio Maalum:**\n       - Mabomu huondoa vipande vingi vya kushambulia isipokuwa Wachimbaji, ambao hutegua Mabomu.\n       - Vipande vya Kijasusi vinaweza kushinda Marekani ikiwa Kijasusi kinafanya mashambulizi ya kwanza lakini kupoteza kwa vipande vyote vingine.\n3. **Malengo ya Kimkakati:**\n   - Tambua vipande vya mpinzani wako kupitia harakati zao na mapigano.\n   - Linda bendera yako wakati wa kujaribu kukamata bendera ya mpinzani wako.\n   - Tumia Wapelelezi kwa ujanja ili kupata taarifa kuhusu vipande vya mpinzani wako na kushambulia wale wanaodhoofika.\n\n### Jinsi ya Kufanya Hatua:\n1. Bainisha viwianishi vya kipande unachotaka kusonga na kilele chake.\n2. Tumia muundo: [A0 B0], ambapo A0 ni nafasi ya chanzo, na B0 ni kilele.\n   - Mfano: Ili kusonga kipande kutoka safu 0, safu 0 hadi safu 1, safu 0, ingiza [A0 B0].\n3. Hakikisha kilele ni halali kulingana na sheria za harakati hapo juu.\n\n### Kumbukumbu Muhimu:\n- Ubao utaonyesha vipande vyako na nafasi zao, kwa mfano MN, MS.\n- Ubao pia utaonyesha nafasi zinazojulikana za vipande vya mpinzani wako bila kufichua vyeo vyao, kwa mfano ?.\n- Gridi zenye ~ ni maziwa na haziwezi kusogezwa.\n- Kama pendekezo, anza mchezo wako kwa kusonga vipande vyako vilivyo kwenye mstari wa mbele ili kupata taarifa kuhusu vipande vya mpinzani wako. Mchezaji 0 na mchezaji 1 wana mstari wa mbele wa safu D na G mtawalia.\n\nHapa kuna hali ya sasa ya ubao:\n"
+  },
+  "board": {
+    "current_board": "Ubao wa Sasa:\n\n{board}\nMichezo Inayopatikana: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Muundo usio sahihi wa hatua. Mchezaji {player_id} hakuweka hatua katika muundo [A0 B0].",
+    "invalid_coordinates": "Muundo usio sahihi wa hatua. Mchezaji {player_id} hakuweka viwianishi sahihi.",
+    "not_own_piece": "Muundo usio sahihi wa hatua. Mchezaji {player_id} lazima asogeze mojawapo ya vipande vyake.",
+    "scout_through_pieces": "Muundo usio sahihi wa hatua. Mchezaji {player_id} hawezi kusonga mpelelezi kupitia vipande vingine.",
+    "scout_diagonal": "Muundo usio sahihi wa hatua. Mchezaji {player_id} hawezi kusonga mpelelezi diagonally.",
+    "non_scout_multi_square": "Muundo usio sahihi wa hatua. Vipande, isipokuwa wapelelezi, vinaweza kusogezwa mraba mmoja tu kwa wakati mmoja.",
+    "move_into_lake": "Muundo usio sahihi wa hatua. Mchezaji {player_id} hawezi kusonga hadi kwenye ziwa.",
+    "move_onto_own_piece": "Muundo usio sahihi wa hatua. Mchezaji {player_id} hawezi kusonga kwenye kipande chake.",
+    "move_bomb_or_flag": "Muundo usio sahihi wa hatua. Mchezaji {player_id} hawezi kusonga bomu au bendera."
+  },
+  "game_action": {
+    "you_moved": "Umesonga kipande chako kutoka {source} hadi {dest}.",
+    "opponent_moved": "Mchezaji {player_id} amesonga kipande kutoka {source} hadi {dest}.",
+    "you_equal_ranks": "Umesonga kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kilele kilikuwa {target_rank}. Kwa kuwa vyeo ni sawa, vipande vyote viwili vimepotea.",
+    "opponent_equal_ranks": "Mchezaji {player_id} amesonga kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kilele kilikuwa {target_rank}. Kwa kuwa vyeo ni sawa, vipande vyote viwili vimepotea.",
+    "you_miner_defused": "Umesonga kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kilele kilikuwa {target_rank}. Kwa kuwa wachimbaji wanaweza kutegeua mabomu, umeshinda mapigano.",
+    "opponent_miner_defused": "Mchezaji {player_id} amesonga kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kilele kilikuwa {target_rank}. Kwa kuwa wachimbaji wanaweza kutegeua mabomu, umepoteza mapigano.",
+    "you_bomb_lost": "Umesonga kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kilele kilikuwa {target_rank}. Kwa kuwa mshambuliaji si mchimbaji, umepoteza mapigano.",
+    "opponent_bomb_won": "Mchezaji {player_id} amesonga kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kilele kilikuwa {target_rank}. Kwa kuwa mshambuliaji si mchimbaji, umeshinda mapigano.",
+    "you_spy_won": "Umesonga kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kilele kilikuwa {target_rank}. Kwa kuwa mshambuliaji ni kijasusi na kilele ni marekani, umeshinda mapigano.",
+    "opponent_spy_lost": "Mchezaji {player_id} amesonga kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kilele kilikuwa {target_rank}. Kwa kuwa mshambuliaji ni kijasusi na kilele ni marekani, umepoteza mapigano.",
+    "you_higher_won": "Umesonga kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kilele kilikuwa {target_rank}. Kwa kuwa mshambuliaji ana cheo cha juu kuliko kilele, umeshinda mapigano.",
+    "opponent_higher_lost": "Mchezaji {player_id} amesonga kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kilele kilikuwa {target_rank}. Kwa kuwa mshambuliaji ana cheo cha juu kuliko kilele, umepoteza mapigano.",
+    "you_lower_lost": "Umesonga kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kilele kilikuwa {target_rank}. Kwa kuwa mshambuliaji ana cheo cha chini kuliko kilele, umepoteza mapigano.",
+    "opponent_lower_won": "Mchezaji {player_id} amesonga kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha kilele kilikuwa {target_rank}. Kwa kuwa mshambuliaji ana cheo cha chini kuliko kilele, umeshinda mapigano."
+  },
+  "outcome": {
+    "flag_captured": "Mchezaji {player_id} amekamata bendera ya mpinzani!",
+    "no_movable_pieces": "Mchezaji {winner_id} anashinda! Mchezaji {loser_id} hana vipande vinavyoweza kusogezwa tena."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "Fjalët përballë përdoruesit për Liar's Dice. Tokenet e veprimit të kornizës ('[Bid: X, Y]', '[Call]'), indekset e lojtarëve, vlerat e fytyrës së zareve, sasitë dhe numërimet janë hapësira neutrale dhe nuk duhet të përkthehen kurrë.",
+  "_slots": {
+    "player_id": "indeksi i lojtarit (numër i plotë)",
+    "num_players": "numri i lojtarëve në lojë (numër i plotë)",
+    "dice_summary": "përmbledhje e parapërgatitur e numërimit të zareve të mbetura për çdo lojtar të bashkuar me '; '",
+    "your_dice": "lista e parapërgatitur e vlerave të fytyrës së zareve të këtij lojtari të bashkuar me presje",
+    "p": "indeksi i lojtarit (numër i plotë)",
+    "d": "numërimi i zareve të mbetura për atë lojtar (numër i plotë)",
+    "current_player_id": "indeksi i lojtarit që thërret (numër i plotë)",
+    "face_value": "vlera e fytyrës së zarit që po numërohet (1-6)",
+    "count": "numri aktual i zareve përputhëse (numër i plotë)",
+    "quantity": "sasia e ofertës (numër i plotë)",
+    "loser_id": "indeksi i lojtarit që humbet një zar (numër i plotë)",
+    "new_quantity": "sasia e ofertës së sapoparë (numër i plotë)",
+    "current_quantity": "sasia aktuale e ofertës (numër i plotë)",
+    "new_face_value": "vlera e fytyrës së ofertës së sapoparë (numër i plotë)",
+    "current_face_value": "vlera aktuale e fytyrës së ofertës (numër i plotë)",
+    "action": "stringu i veprimit të papërpunuar që lojtari dërgoi",
+    "reason": "arsyeja e refuzimit të ofertës e ngërthyer",
+    "winner": "indeksi i lojtarit që fiton (numër i plotë)",
+    "final_ranking": "lista e indekseve të lojtarëve nga i pari i eliminuar deri te fituesi"
+  },
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në një lojë Liar's Dice me {num_players} lojtarë.\nRregullat:\n- Në radhën tuaj, ju mund të:\n  1) Bëni një ofertë të re me një sasi më të lartë ose një fytyrë më të lartë (ose të dyja) se oferta aktuale; p.sh. '[Bid: 3, 4]',\n  2) Thirrni ofertën e fundit duke shkruar '[Call]'.\n\nNëse thirrni:\n  - Nëse numërimi aktual i vlerës së fytyrës së zarit midis të gjitha zareve është më i vogël se oferta, ofertuesi i fundit humbet një zar.\n  - Përndryshe, thirrësi humbet një zar.\nNjë lojtar që arrin në 0 zare eliminohet. Lojtari i fundit që mbetet fiton."
+  },
+  "board": {
+    "per_player": "\tLojtari {p}: {d}",
+    "new_round": "\nRaundi i ri - Zaret e mbetura: {dice_summary}\nZaret tuaja aktuale janë: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Lojtari {current_player_id} thërret! Numërimi aktual i fytyrës {face_value} është {count}, i cili është MË I VOGËL se {quantity}.\nLojtari {loser_id} (ofertuesi i fundit) humbet një zar.",
+    "caller_loses": "Lojtari {current_player_id} thërret! Numërimi aktual i fytyrës {face_value} është {count}, i cili është >= {quantity}.\nLojtari {loser_id} (thirrësi) humbet një zar."
+  },
+  "action": {
+    "bid_announce": "Lojtari {player_id} ofron {quantity} të fytyrës {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Thirrja u bë pa ofertë të mëparshme.",
+    "invalid_bid": "Oferta e pavlefshme: {reason}",
+    "not_recognized": "Veprimi nuk njihet si një '[Bid: X, Y]' apo '[Call]' i vlefshëm. Veprimi i dërguar: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Sasia e re {new_quantity} është më e vogël se {current_quantity} aktual.",
+    "face_lower": "Vlera e re e fytyrës {new_face_value} është më e vogël se {current_face_value} aktual.",
+    "identical": "Oferta është identike me ofertën aktuale.",
+    "face_range": "Vlera e fytyrës duhet të jetë midis 1 dhe 6."
+  },
+  "message": {
+    "eliminated_invalid": "Lojtari {player_id} u eliminua nga lëvizja e pavlefshme."
+  },
+  "outcome": {
+    "win": "Lojtari {winner} fiton! Renditja finale: {final_ranking}"
+  }
+}

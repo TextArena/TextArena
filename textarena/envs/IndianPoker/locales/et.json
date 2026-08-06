@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Oled mängija {player_id} India pokkeri mängus.\n- 52-kaardiline pakka; näed ainult vastase kaarti.\n- Panus {ante} žetoon(i) iga ringi kohta, {max_rounds} ring(i) kokku.\n- Kehtivad käigud: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X on positiivne täisarv ≤ sinu žetoonide arv.)\n- Kõrgeim peidetud kaart võidab poti lõpuks.\n"
+  },
+  "round": {
+    "announce": "### Ring {current_round}/{max_rounds}\nVastase kaart on: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Sisesta täpselt ÜKS sulgudes olev tegevus, nt '[check]', '[bet 2]', '[call]', '[raise 3]' või '[fold]'.",
+    "cannot_check": "Ei saa [check] - oled vastamisi panusega.",
+    "amount_min": "Panuse / tõstmise summa peab olema ≥ 1.",
+    "cannot_bet": "Ei saa [bet] - pead [call] / [raise] / [fold].",
+    "nothing_to_call": "Ei ole midagi kutsuda; võid [check] asemel.",
+    "no_bet_to_raise": "Kasuta [bet X] avamiseks; pole panust, mida tõsta.",
+    "insufficient": "Pole piisavalt žetoone selle tegevuse jaoks."
+  },
+  "game_action": {
+    "action": "Mängija {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (maksumus {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Sinu võimalikud tegevused: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Mängija {winner}. (Pangakontod P0:{p0}, P1:{p1})",
+    "folded": "Mängija {player_id} loobus.",
+    "showdown_win": "Lõppmäng: {card_win} võidab {card_lose}.",
+    "showdown_tie": "Lõppmängu viik: mõlemad {card}. Pot jagatakse – igaüks saab {split}."
+  },
+  "outcome": {
+    "p0_wins": "Mängija 0 võidab ({bank0} > {bank1})",
+    "p1_wins": "Mängija 1 võidab ({bank1} > {bank0})",
+    "draw": "Võrdne žetoonide arv pärast kõiki ringe"
+  }
+}

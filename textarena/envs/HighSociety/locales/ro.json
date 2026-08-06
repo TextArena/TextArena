@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} într-un joc de HighSociety (versiunea pentru 2 jucători).\nFluxul jocului: Zece cărți de prestigiu sunt licitate una după alta.\nLicitarea: La fiecare licitație, alegeți în secret o carte de bani 1-11 și dezvăluiți-o.\n• Oferta mai mare câștigă cartea de prestigiu și elimină acea carte de bani.\n• Oferta mai mică păstrează cartea de bani.\n• Egalitate → ambele oferte sunt returnate și aceeași carte de prestigiu este relicitată.\nScorarea: După toate cele zece licitații, adăugați **bani rămași + puncte de prestigiu**.\n• Valoarea netă mai mare câștigă (egalitate exactă → remiză).\n\n**Sintaxa acțiunii** → licitați o singură carte, cum ar fi '[7]' sau '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Licitație {round}/10  |  Carte de prestigiu: {prize}"
+  },
+  "board": {
+    "money_cards": "Cărțile dvs. de bani rămase: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Trebuie să includeți exact o carte de bani [X].",
+    "card_not_held": "Nu mai aveți acea carte de bani."
+  },
+  "message": {
+    "tie": "Egalitate - ofertele sunt returnate. Relicitați!",
+    "auction_result": "P0 a oferit {bid0}, P1 a oferit {bid1}. Jucătorul {winner} câștigă prestigiul {prize} (total {total})."
+  },
+  "outcome": {
+    "p0_wins": "Valoarea netă {nw0} > {nw1}",
+    "p1_wins": "Valoarea netă {nw1} > {nw0}",
+    "draw": "Ambele valori nete {nw0} – egalitate exactă."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Fitxer de localització de Snake. NO tradueixis les claus (costat esquerre). Només tradueix els valors (costat dret). Mantén cada {placeholder} exactament com està.",
+  "_slots": {
+    "{num_players}": "Nombre de jugadors a la partida",
+    "{width}": "Amplada del tauler en cel·les",
+    "{height}": "Alçada del tauler en cel·les",
+    "{max_turns}": "Límit de torns per a la partida",
+    "{player_id}": "Número del jugador (basat en 0)",
+    "{board}": "La quadrícula ASCII renderitzada; mantén-la neutral, mai tradueixis els seus caràcters",
+    "{reason}": "La frase de motiu de final de joc renderitzada",
+    "{groups}": "Dades de classificació neutrals (una llista de grups d'ID de jugador, del pitjor al millor); no tradueixis"
+  },
+  "player_prompt": {
+    "intro": "Serp de {num_players} jugadors en una quadrícula de {width}×{height}.\nControles la serp {player_id}. Moviments vàlids: '[up]'/'[down]'/'[left]'/'[right]' (o w/s/a/d).\nObjectiu: sobreviure més temps o ser el més llarg i obtenir la puntuació més alta (límit de torns {max_turns} torns)."
+  },
+  "board": {
+    "current": "Tauler actual:\n{board}",
+    "after_moves": "Estat actual del tauler:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "La serp {player_id} va morir a causa d'un moviment invàlid."
+  },
+  "outcome": {
+    "survived_win": "El jugador {player_id} va sobreviure; tots els altres van perir.",
+    "all_dead_simul": "Totes les serps van morir simultàniament.",
+    "outlived": "El jugador va sobreviure a tots els altres.",
+    "all_dead": "Totes les serps són mortes.",
+    "turn_limit": "S'ha assolit el límit de torns - la millor puntuació guanya l'empat.",
+    "ranking": "{reason} Grups de classificació finals (del pitjor al millor): {groups}"
+  }
+}

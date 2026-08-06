@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Du är Spelare {player_id} i ett 3-spelar Itererat Fångarnas Dilemma. Matchen varar {num_rounds} rundor.\nRundstruktur:\n• {conv_rounds} fria chattvarv\n• 1 beslutsvänt - skicka in en token per motståndare: '[<opp-id> cooperate]' eller '[<opp-id> defect]' (d.v.s. '[1 defect] [2 cooperate]'; standard är 'samarbeta'). \nParvis utbetalningsmatris (tillämpad på varje oordnad par):\n  - Båda samarbetar  ->  {reward}\n  - Båda svek     ->  {punishment}\n  - Du svek, de samarbetar -> {temptation}\n  - Du samarbetar, de svek -> {sucker}\nSpelaren/spelarna med den högsta poängen i slutet av alla rundor vinner."
+  },
+  "round": {
+    "start": "─── Rund {round} börjar ───\tDu kan konversera fritt under de nästa {conv_rounds} rundorna.",
+    "chat_finished": "Chatt avslutad för rund {round}. Skicka in dina beslut, en token per motståndare: `[pid cooperate]` eller `[pid defect]`."
+  },
+  "results": {
+    "header": "### Rund {round} - Resultat:",
+    "pair_line": "{observation}\n\t Spelare {i} vs Spelare {j} valde att {choice_i} respektive {choice_j} (Spelare {i} fick {gain_i}, Spelare {j} fick {gain_j})",
+    "scores_open": "{observation}\n-> Aktuella poäng: ",
+    "score_first": "{observation}Spelare {player_id} ({score})",
+    "score_next": "{observation}; Spelare {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Slutpoäng: {scores}.  Rankningsgrupper (sämst→bäst): {groups}"
+  }
+}

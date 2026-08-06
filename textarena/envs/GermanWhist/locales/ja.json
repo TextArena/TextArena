@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "ゲームが始まります。切り札のスート: {trump_suit} (切り札: {trump_str}).",
+    "no_trump_card": "なし"
+  },
+  "player_prompt": {
+    "intro": "あなたは German Whist のプレイヤー {player_id} です。\n{phase_info}\n手札は {hand_size} 枚です。\n'[play N]' でカードをプレイします（N は手札の位置、例えば '[play 3]'）。",
+    "phase_learning": "LEARNING PHASE: トリックの勝者は表向きのカードを取り、敗者はデッキから次のカードを引きます。このフェーズで勝ったトリックは勝利にカウントされません。",
+    "phase_playing": "PLAYING PHASE: デッキは尽きました。これからはすべてのトリックが勝利にカウントされます。"
+  },
+  "next_card": {
+    "playing_phase": "提供されるカードはありません - プレイフェーズが始まりました。",
+    "deck_empty": "デッキは空です - 提供されるカードはありません。",
+    "available": "提供されるカード: {card}",
+    "available_trump": "提供されるカード: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "無効な手の形式です。'[play N]' を使用して手札の N 番目のカードをプレイします。",
+    "bad_position": "そのカードの位置は存在しません。手札は {hand_size} 枚です。",
+    "must_follow_suit": "同じスートのカードをプレイしなければなりません ({lead_suit} のカード)。",
+    "invalid_play": "そのカードはプレイできません。"
+  },
+  "game_action": {
+    "played": "プレイヤー {player_id} が {card} をプレイしました。"
+  },
+  "trick": {
+    "won": "プレイヤー {winner_id} が {card} でトリックを勝ちました。",
+    "won_learning": "プレイヤー {winner_id} が {card} でトリックを勝ち、表向きのカードを取りました。"
+  },
+  "phase": {
+    "learning_complete": "デッキは尽きました。学習フェーズは終了し、残りのすべてのトリックが勝利にカウントされます。"
+  },
+  "draw": {
+    "winner_received": "あなたはトリックを勝ち、{card} を受け取りました。",
+    "loser_received": "あなたはトリックを負け、デッキから {card} を引きました。",
+    "winner_preview": "次の提供されるカードは {card} です。"
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "これまでのトリック - プレイヤー 0: {tricks0}, プレイヤー 1: {tricks1}",
+    "scores_playing": "得点トリック - プレイヤー 0: {tricks0}, プレイヤー 1: {tricks1}",
+    "phase": "フェーズ: {phase}",
+    "phase_learning": "フェーズ: {phase} (デッキに残り {remaining_cards} 枚)"
+  },
+  "hand": {
+    "no_cards": "カードなし",
+    "no_cards_in_hand": "手札なし",
+    "header": "あなたの手札:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "このトリックではまだカードがプレイされていません。",
+    "header": "現在のトリック:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  プレイヤー {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "ゲームが始まっていません",
+    "header": "=== GERMAN WHIST ゲーム ===",
+    "phase": "{observation}\nフェーズ: {phase}",
+    "trump_suit": "{observation}\n切り札のスート: {trump_suit}",
+    "trump_card": "{observation}\nトランプカード: {card}",
+    "cards_left": "{observation}\nデッキに残りカード: {count}",
+    "next_card": "{observation}\n勝者への次のカード: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\n現在のトリック:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  プレイヤー {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nプレイヤー {player_id}: {scoring} 得点トリック ({tricks} 合計), 手札 {hand_size} 枚"
+  },
+  "outcome": {
+    "summary": "学習フェーズ - プレイヤー 0: {l0}, プレイヤー 1: {l1}. プレイフェーズ - プレイヤー 0: {p0}, プレイヤー 1: {p1}. プレイヤー {winner_id} が {winner_tricks} 得点トリックで勝利しました！"
+  }
+}

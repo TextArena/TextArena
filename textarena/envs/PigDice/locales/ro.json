@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} într-un joc de Zaruri Pig.\n\nReguli:\n- La rândul dvs., puteți alege între '[roll]' sau '[hold]'\n- Rulați un 2-6: Adăugați la totalul rândului dvs.\n- Rulați un 1: Pierdeți totalul rândului și încheiați rândul\n- Țineți: Adăugați totalul rândului la scorul dvs. și încheiați rândul\n- Primul care ajunge la {winning_score} puncte câștigă\n\nCând este rândul dvs., veți vedea scorurile actuale și totalul rândului.\nRăspundeți cu '[roll]' pentru a rula zarul sau '[hold]' pentru a vă băga punctele în bancă."
+  },
+  "invalid_move": {
+    "invalid_action": "Format de acțiune invalid. Folosiți '[roll]' sau '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Jucătorul {player_id} a dat faliment, pierzând {turn_total} puncte!",
+    "player_hold": "Jucătorul {player_id} ține și băga în bancă {turn_total} puncte."
+  },
+  "board": {
+    "player": "Jucătorul 0: '{score_0}'; Jucătorul 1: '{score_1}'",
+    "current_total_scores": "Scoruri totale actuale: {scores}\nTotalul rândului dvs. actual este {turn_total}.",
+    "roll_history": "{observation}\nIstoricul rulărilor dvs. pentru acest rând: {roll_history}",
+    "first_roll": "{observation}\nAceasta este prima rulare a rândului dvs.",
+    "available_actions": "{observation}\nAcțiuni disponibile: '[roll]' sau '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Jucătorul {winner_id} a câștigat deoarece avea un scor mai mare la limita de rânduri ({scores})",
+    "winner_by_score": "Jucătorul {winner_id} a câștigat deoarece a atins scorul țintă de {winning_score}!",
+    "draw": "Limita de rânduri a fost atinsă și toți jucătorii au același scor: {scores}"
+  }
+}

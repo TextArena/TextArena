@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Du spelar Minesweeper-spelet.\nSpelets mål är att avslöja alla celler som inte innehåller minor.\nFör att göra ett drag, ange bara rad- och kolumnkoordinaterna du vill avslöja med formatet:\n- `[rad kolumn]`: Avslöja cellen på den angivna raden och kolumnen.\nTill exempel:\n- `[3 2]` för att avslöja cellen i rad 3, kolumn 2.\n- `[5 6]` för att avslöja cellen i rad 5, kolumn 6.\nPå ditt första drag kommer du att avslöja ett område runt cellen du väljer för att säkerställa en säker start.\nDen aktuella brädlayouten visas nedan. Celler som inte är avslöjade representeras av en punkt ('.'), avslöjade siffror visar antalet intilliggande minor.\nVar uppmärksam på att inte välja redan avslöjade celler.\nHär är den aktuella brädlayouten:\n"
+  },
+  "board": {
+    "game_board": "Spelbräde:\n\n{board}",
+    "current_board": "Aktuellt bräde:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Du svarade inte med giltiga koordinater inom hakparenteser.",
+    "out_of_bounds": "De angivna rad- och kolumnkoordinaterna är utanför gränserna.",
+    "already_revealed": "Cellen på ({row}, {col}) har redan avslöjats.",
+    "hit_mine": "Du träffade en mina på ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Du avslöjade cellen på ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Grattis! Du har framgångsrikt rensat Minesweeper-brädet.",
+    "turn_limit": "Tidsgränsen har nåtts. Du avslöjade framgångsrikt {percent}% av de säkra cellerna."
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em file ng lokasyon. HUWAG isalin ang mga susi (kaliwang bahagi). Isalin lamang ang mga halaga (kanang bahagi).",
+  "_slots": {
+    "{start_chips}": "Simulang bilang ng chip, hal. 1000",
+    "{ante}": "Ang halaga ng ante/blind bet, hal. 25",
+    "{ante4}": "Apat na beses ang halaga ng ante, hal. 100",
+    "{ante2}": "Dalawang beses ang halaga ng ante, hal. 50",
+    "{round}": "Ang kasalukuyang bilang ng round",
+    "{chips}": "Ang kasalukuyang bilang ng chip ng manlalaro",
+    "{hand}": "Isang listahan ng mga label ng card, hal. 'A♠, K♥', o ang lokal na teksto para sa walang card",
+    "{phase}": "Ang kasalukuyang label ng phase (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Isang listahan ng mga bracketed na token ng pagkilos, hal. '[play_bet_4x], [check]'",
+    "{available}": "Isang listahan ng mga bracketed na token ng pagkilos na kasalukuyang legal",
+    "{blind}": "Ang halaga ng blind bet",
+    "{play}": "Ang halaga ng play bet",
+    "{cards}": "Isang listahan ng mga label ng card, hal. 'Q♣, 7♦, 2♠'",
+    "{name}": "Isang lokal na pangalan ng poker hand, isinaksak nang literal",
+    "{amount}": "Isang halaga ng chip",
+    "{net}": "Ang net na pagbabago ng chip para sa round (maaaring negatibo)",
+    "{max_turns}": "Ang pinakamataas na bilang ng round",
+    "{winner_rounds}": "Ang bilang ng mga round na nakumpleto"
+  },
+  "player_prompt": {
+    "no_cards": "Walang card pa",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Single Player vs Dealer\n\n📖 PANGKALAHATANG IDEYA NG LARO:\n• Simula ka sa {start_chips} chip\n• Isang deck ng 52 card (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Nilalaro mo ang dealer (bahay)\n• Bawat round ay sumusunod sa estruktura ng Ultimate Texas Hold'em: nagpo-post ka ng ANTE at BLIND bet, nakatanggap ka ng 2 hole card, nagpapasya ka sa mga optional na PLAY bet sa mga phase ng pagtaya, pagkatapos ay inihahayag ang mga community card at ikumpara ang iyong pinakamahusay na 5-card hand sa dealer.\nAng iyong layunin ay i-maximize ang iyong mga panalo (kapag ikaw ay may mas mahusay na hand), habang i-minimize ang iyong mga pagkatalo (kapag ikaw ay may mas mahinang hand).\n• Ang laro ay nagtatapos kapag ikaw ay nakarating sa 0 chip o mas mababa sa simula ng round (TALO) o nakumpleto ang 1000 round na may chip (PANALO)\n\n💰 ESTRUKTURA NG PAGTAYA:\n• ANTE: Mandatory ${ante} bet sa bawat round\n• BLIND: Mandatory ${ante} bet sa bawat round\n• PLAY: Optional bet sa gameplay. Sa buong round, maaari kang pumili ng ISA SA MGA SUMUSUNOD: (${ante4} kung ginawa sa PRE-FLOP, ${ante2} kung ginawa sa FLOP, o ${ante} kung ginawa sa RIVER. Maaari ring mag-fold sa river, na ibig sabihin ay sumuko sa hand, at walang bet.)\n\n🎴 PAGHAHATI NG CARD:\n• Nakatanggap ka ng 2 face-up card (ang iyong hole card)\n• Ang dealer ay nakatanggap ng 2 face-down card (nakatago sa iyo)\n• 5 community card ay nahahati nang face-down sa simula\n• Ang mga community card ay inihahayag nang progresibo sa mga phase ng laro\n\n🏆 KALIFIKASYON NG DEALER:\n• Ang dealer ay dapat na mayroon ng hindi bababa sa isang PAIR (2 card ng parehong ranggo) upang makwalipika, gamit ang 2 card sa kanilang hand at ang 5 community card.\n• Ang kalipikasyon ng dealer ay nakakaapekto sa mga resulta ng pagtaya, na ipapaliwanag sa ibaba.\n\n🎮 MGA PHASE NG LARO & MGA PAGKILOS:\n📋 PRE-FLOP:\n  • Mga pagkilos: [4x] (${ante4}) o [check]\n  • [4x]: Maglagay ng ${ante4} PLAY bet, inihahayag ang unang 3 community card\n  • [check]: Walang karagdagang bet, inihahayag ang unang 3 community card\n\n📋 FLOP:\n  • Kung 4x bet ang ginawa: ISA lamang [skip] ang magagamit (awtomatikong inihahayag ang huling 2 community card)\n  • Kung walang 4x bet: [2x] (${ante2}) o [check]\n  • [2x]: Maglagay ng ${ante2} PLAY bet, inihahayag ang huling 2 community card\n  • [check]: Walang karagdagang bet, inihahayag ang huling 2 community card\n\n📋 RIVER:\n  • Kung 4x o 2x bet ang ginawa: ISA lamang [skip] ang magagamit (awtomatikong tumutuloy sa showdown)\n  • Kung walang prior PLAY bet: [1x] (${ante}) o [fold]\n  • [1x]: Maglagay ng ${ante} PLAY bet, tumutuloy sa showdown\n  • [fold]: Sumuko sa hand, matalo ang ANTE at BLIND bet\n\n📋 SHOWDOWN:\n  • Lahat ng card ay inihahayag at tinatayang\n  • Pinakamahusay na 5-card hand mula sa 7 card (2 hole + 5 community)\n  • Mga bet ay tinatayang ayon sa mga panuntunan ng pagbayad\n\n💎 MGA PAYOUT NG BET:\n📊 ANTE BET:\n  • Ang dealer ay hindi nakwalipika: PUSH (bet ay ibinalik)\n  • Ang dealer ay nakwalipika at ikaw ay nanalo: 1:1 payout (bet + panalo)\n  • Ang dealer ay nakwalipika at ikaw ay natalo: Bet ay natalo\n  • Tabla: PUSH (bet ay ibinalik)\n\n📊 BLIND BET:\n  • Hindi apektado ng kalipikasyon ng dealer\n  • Ikaw ay nanalo: Bet ay ibinalik at karagdagang payout batay sa lakas ng iyong hand\n  • Ikaw ay natalo: Bet ay natalo\n  • Tabla: PUSH (bet ay ibinalik)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Mas mababa sa Straight: Walang karagdagang payout\n\n📊 PLAY BET:\n  • Hindi apektado ng kalipikasyon ng dealer\n  • Direktang paghahambing: Ang iyong pinakamahusay na hand vs ang pinakamahusay na hand ng dealer\n  • Ikaw ay nanalo: 1:1 payout (bet + panalo)\n  • Ikaw ay natalo: Bet ay natalo\n  • Tabla: PUSH (bet ay ibinalik)\n\n🎯 RANKING NG POKER HAND (Pinakamahusay hanggang Pinakamahina):\n  1. Royal Flush: A-K-Q-J-10 ng parehong suit\n  2. Straight Flush: 5 sunud-sunod na card ng parehong suit\n  3. Four of a Kind: 4 card ng parehong ranggo\n  4. Full House: 3 ng isang uri + 2 ng isang uri\n  5. Flush: 5 card ng parehong suit\n  6. Straight: 5 sunud-sunod na card\n  7. Three of a Kind: 3 card ng parehong ranggo\n  8. Two Pair: 2 pares ng iba't ibang ranggo\n  9. One Pair: 2 card ng parehong ranggo\n  10. High Card: Pinakamataas na card ang nanalo\n\n⌨️  MGA COMMAND NG PAGKILOS:\n• [4x] o [play bet 4x]: Maglagay ng ${{self.ante_amount*4}} PLAY bet\n• [2x] o [play bet 2x]: Maglagay ng ${{self.ante_amount*2}} PLAY bet\n• [1x] o [play bet 1x]: Maglagay ng ${{self.ante_amount*1}} PLAY bet\n• [check] o [c]: Check (walang karagdagang bet)\n• [fold] o [f]: Fold (sumuko sa hand)\n• [skip] o [s]: Skip sa susunod na phase (kapag walang pagkilos na kailangan)\n\n💡 MGA TIP SA ESTRATEHIYA:\n• Malakas na mga starting hand (pares, mataas na card) ay madalas na nagtatawag ng 4x bet\n• Isaalang-alang ang kalipikasyon ng dealer - mahinang mga hand ay maaaring mag-push kung ang dealer ay hindi nakwalipika\n• Ang BLIND bet ay maaaring maging napakalaki sa mga malakas na hand (Royal Flush = 500:1!)\n• Bantayan ang iyong chip stack! Kung ito ay pumunta sa 0 o mas mababa sa simula ng round, ikaw ay natalo.\n\n⚠️  MAHALAGANG PAALALA:\n• Ang ANTE at BLIND bet ay mandatory sa bawat round\n• Ang PLAY bet ay optional at estratehiko\n• Siguraduhin na ikaw ay nag-input ng tamang pagkilos, at isa lamang pagkilos sa isang pagkakataon.\n\n",
+    "state": "🎯 ROUND {round}\n💰 Chip: {chips}\n🎴 Ang iyong hand: {hand}\n📊 Kasalukuyang mga bet: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Phase: {phase}\n🎯 Mga magagamit na pagkilos: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Round {round} ay nagsimula! Mga bet: ANTE ${ante}, BLIND ${blind}. Mayroon kang {chips} chip na natitira.",
+    "your_hand": "🎴 Ang iyong hand: {hand}",
+    "flop_revealed": "🃏 FLOP ay inihayag: {cards}",
+    "river_revealed": "🃏 RIVER ay inihayag: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Hindi wastong pagkilos para sa kasalukuyang phase. Mga magagamit na pagkilos: {available}",
+    "message": "❌ Hindi wastong pagkilos! Mga magagamit na pagkilos: {available}"
+  },
+  "action": {
+    "folded": "🃏 Ikaw ay sumuko."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Ang hand ng dealer: {cards}",
+    "community_cards": "🃏 Mga community card: {cards}",
+    "player_best": "🎴 Pinakamahusay na hand ng manlalaro: {name} ({cards})",
+    "dealer_best": "🎴 Pinakamahusay na hand ng dealer: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE bet ay NALO! -${ante} (sumuko)",
+    "blind_lost_folded": "❌ BLIND bet ay NALO! -${blind} (sumuko)",
+    "ante_won": "✅ ANTE bet ay NANALO! +${amount}",
+    "ante_pushed": "🔄 ANTE bet ay IPINAGPALIT! ${ante} ay ibinalik",
+    "ante_lost": "❌ ANTE bet ay NALO! -${ante}",
+    "blind_won": "✅ BLIND bet ay NANALO! +${amount}",
+    "blind_pushed": "🔄 BLIND bet ay IPINAGPALIT! ${blind} ay ibinalik",
+    "blind_lost": "❌ BLIND bet ay NALO! -${blind}",
+    "play_won": "✅ PLAY bet ay NANALO! +${amount}",
+    "play_pushed": "🔄 PLAY bet ay IPINAGPALIT! ${play} ay ibinalik",
+    "play_lost": "❌ PLAY bet ay NALO! -${play}",
+    "net_gain": "🎉 Round {round} ay nakumpleto! Net na panalo: +${net}",
+    "net_loss": "💸 Round {round} ay nakumpleto! Net na pagkatalo: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 LARO AY TAPos! {max_turns} round ay nakumpleto. Mayroon kang ${chips} chip - IKAW AY NANALO!",
+    "game_over_lose": "🏁 LARO AY TAPos! Ikaw ay walang chip na natitira. Ang dealer ay nanalo!",
+    "reward_win": "Ang manlalaro ay nakumpleto ang {winner_rounds} round na may ${chips} chip",
+    "reward_lose": "Ang manlalaro ay walang chip na natitira sa round {round}",
+    "reward_win_max": "Ang manlalaro ay nakumpleto ang {max_turns} round na may ${chips} chip"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Apat ng isang Uri",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Tatlo ng isang Uri",
+    "two_pair": "Dalawang Pares",
+    "one_pair": "Isang Pares",
+    "high_card": "Mataas na Card",
+    "unknown": "Hindi Kilalang Hand"
+  }
+}

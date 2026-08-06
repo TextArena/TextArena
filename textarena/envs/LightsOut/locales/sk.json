@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Vitajte v hre Lights Out! Máte {size}x{size} mriežku svetiel.\nVašim cieľom je vypnúť VŠETKY svetlá (značené ako '.').\nKeď stlačíte svetlo, prepína sa samo a jeho priľahlí susedia (hore/dole/vľavo/vpravo).\nNapíšte [riadok stĺpec] pre stlačenie svetla (0-indexované, takže platný rozsah je 0-{max_index}).\nMáte až {max_turns} ťahov na vyriešenie hádanky.\nLegenda: 'O' = svetlo ZAPNUTÉ, '.' = svetlo VYPNUTÉ"
+  },
+  "board": {
+    "current_state": "Aktuálny stav mriežky (Ťah {moves_made}, zostáva {moves_left} ťahov, {completion}% dokončené):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Akcia musí byť vo formáte [riadok stĺpec], kde riadok a stĺpec sú celé čísla od 0 do {max_index}.",
+    "out_of_range": "Súradnice musia byť medzi 0 a {max_index}. Zadali ste [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Gratulujeme! Vyriešili ste hádanku v {moves_used} ťahoch!",
+    "loss": "Hra skončila! Použili ste všetkých {max_turns} ťahov bez vyriešenia hádanky. Konečné dokončenie: {completion}%\nKonečný stav:\n{grid}"
+  }
+}

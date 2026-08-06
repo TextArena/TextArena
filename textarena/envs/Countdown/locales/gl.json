@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Estás xogando ao xogo de números Countdown!\nObxectivo: Combina números usando +, -, *, / para alcanzar o obxectivo.\nFormato de acción: [i j op] onde i,j son índices e op é a operación.\nExemplo: [0 2 *] multiplica o número no índice 0 polo número no índice 2.\nA división debe dar como resultado números enteiros unicamente."
+  },
+  "board": {
+    "header": "OBXECTIVO: {target}\n\nNúmeros dispoñibles:\n{numbers}",
+    "best": "{observation}\n\nMellor ata agora: {best_value} (distancia: {distance})\nMellor expresión: {best_expression}",
+    "history": "{observation}\n\nHistorial de movementos:\n{moves}",
+    "progress": "{observation}\nPuntuación de progreso actual: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de acción incorrecto. Usa `[i j op]` onde i,j son índices e op é +,-,*,/",
+    "invalid_indices": "Índices incorrectos. Deben ser diferentes e estar no rango 0-{max_index}",
+    "invalid_operation": "Operación incorrecta (división por cero ou resultado non enteiro)"
+  },
+  "outcome": {
+    "win": "Perfecto! Encontrado o obxectivo exacto: {target}",
+    "no_moves": "Non hai máis movementos. Mellor resultado: {best_value} (obxectivo: {target})",
+    "turn_limit": "Límite de quendas alcanzado. Mellor resultado: {best_value} (obxectivo: {target})"
+  }
+}

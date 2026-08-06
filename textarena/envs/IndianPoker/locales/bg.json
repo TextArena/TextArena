@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Вие сте Играч {player_id} в игра на Индийски Покер.\n- 52-картена тесте; виждате само картата на опонента.\n- Анте {ante} жетона(и) на рунд, {max_rounds} рунд(а) общо.\n- Валидни ходове: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X е положително цяло число ≤ броя на вашите жетони.)\n- Най-високата скрита карта печели пота при шоудаун.\n"
+  },
+  "round": {
+    "announce": "### Рунд {current_round}/{max_rounds}\nКартата на опонента е: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Посочете точно ЕДНО действие в скоби, напр. '[check]', '[bet 2]', '[call]', '[raise 3]' или '[fold]'.",
+    "cannot_check": "Не можете да [check] - пред вас има залог.",
+    "amount_min": "Сумата за залог / повишаване трябва да бъде ≥ 1.",
+    "cannot_bet": "Не можете да [bet] - трябва да [call] / [raise] / [fold].",
+    "nothing_to_call": "Няма какво да повикате; можете да [check] вместо това.",
+    "no_bet_to_raise": "Използвайте [bet X], за да отворите; няма залог за повишаване.",
+    "insufficient": "Недостатъчно жетони за това действие."
+  },
+  "game_action": {
+    "action": "Играч {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (стои {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Възможни действия: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Пот {pot} → Играч {winner}. (Банкрол P0:{p0}, P1:{p1})",
+    "folded": "Играч {player_id} се отказа.",
+    "showdown_win": "Шоудаун: {card_win} побеждава {card_lose}.",
+    "showdown_tie": "Шоудаун равенство: и двата {card}. Потът се разделя – всеки получава {split}."
+  },
+  "outcome": {
+    "p0_wins": "Играч 0 печели ({bank0} > {bank1})",
+    "p1_wins": "Играч 1 печели ({bank1} > {bank0})",
+    "draw": "Равни жетони след всички рундове"
+  }
+}

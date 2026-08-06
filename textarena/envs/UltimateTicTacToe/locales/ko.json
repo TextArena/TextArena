@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "당신은 **Ultimate Tic Tac Toe**의 플레이어 {player_id}입니다.\n수를 제출할 때 **[macro  micro]** (두 개의 0-8 사이의 숫자) 형식을 사용하세요:\n• *macro*  = 어떤 미니 보드에서 플레이할 것인지\n• *micro* = 그 미니 보드 안의 어떤 정사각형인지\n예 `[7 8]` ➜ 미니 보드 7의 정사각형 8에 표시를 놓고,\n다음에는 상대방이 미니 보드 8에서 플레이하도록 강제합니다.\n\n당신은 `{symbol}`입니다.\n"
+  },
+  "board": {
+    "current_board": "현재 보드:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "수는 [macro micro] 형식으로 0-8 사이의 숫자를 사용해야 합니다.",
+    "out_of_range": "인덱스는 각각 0과 8 사이여야 합니다.",
+    "index_out_of_range": "미니 보드, 행, 또는 열이 범위를 벗어났습니다.",
+    "cell_occupied": "셀이 이미 차지되어 있습니다.",
+    "wrong_micro_board": "플레이어는 다음 미니 보드에서 플레이해야 합니다.",
+    "micro_board_won": "미니 보드는 이미 승리한 상태입니다."
+  },
+  "next_board": {
+    "any": "어떤 미니 보드든",
+    "specific": "미니 보드 {nxt}"
+  },
+  "game_action": {
+    "played": "플레이어 {player_id}가 미니 보드 {macro_idx}, 셀 {micro_idx} (행 {row}, 열 {col})에 플레이했습니다. 플레이어 {opponent_id}는 이제 {nxt_txt}에서 플레이해야 합니다."
+  },
+  "outcome": {
+    "win": "플레이어 {player_id}가 Ultimate Tic Tac Toe에서 승리했습니다!",
+    "draw": "게임이 무승부입니다!"
+  }
+}

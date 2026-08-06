@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire-lokaalleêr. MAAK NIE sleutels (linkerkant) oor nie. Vertaal net waardes (regterkant).",
+  "_slots": {
+    "{n}": "Indeks van 'n aksie binne 'n komma-geskeide opdrag, 1-gebaseer",
+    "{msg}": "'n Geneste per-aksie resultaatboodskap (reeds gelokaliseer)",
+    "{count}": "Aantal gesigte-omhoog kaarte wat geskuif word",
+    "{src}": "Bron-tafelstapelnommer, 1-gebaseer",
+    "{dst}": "Bestemmingstapelnommer, 1-gebaseer",
+    "{cmd}": "Die onbekende opdrag wat die speler getik het (nie vertaal)",
+    "{max_turns}": "Die maksimum aantal beurte voordat die spel eindig",
+    "{score}": "Aantal kaarte tans in die fondasie-stapels",
+    "{board}": "Die gerenderde ASCII-bord (nooit vertaal)",
+    "{turn}": "Huidige beurtnommer",
+    "{stock}": "Aantal kaarte oor in die voorraad",
+    "{waste}": "Die boonste afvalkaart-etiket, of '--' as leeg (nooit vertaal)",
+    "{cards}": "Die kaarte in 'n stapel as neutrale etikette, of '--' as leeg (nooit vertaal)"
+  },
+  "player_prompt": {
+    "intro": "Jy speel Klondike Solitaire. Jou doel is om alle kaarte na die fondasie-stapels te skuif.\n\nSpelreëls:\n- Fondasie-stapels (F1-F4): Bou op van Aas tot Koning in soort\n- Tafelstapels (T1-T7): Bou af in afwisselende kleure (rooi op swart, swart op rooi)\n- Voorraad: Trek kaarte na die afvalstapel\n- Afval (W): Boonste kaart beskikbaar vir spel\n\nOpdragte:\n- 'draw' - Trek kaarte van voorraad na afval\n- 'move <bron> <bestemming> [aantal]' - Skuif kaarte tussen stapels\n  Voorbeelde: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Aantal kan ook 'all' wees, wat sal probeer om alle gesigte-omhoog kaarte te skuif.\n- 'forfeit' - Beëindig die spel onmiddellik en sluit jou huidige telling in\n- Stapelname: W (afval), F1-F4 (fondasies), T1-T7 (tafelstapels)\n\nJy kan meervoudige aksies in een beurt uitvoer deur hulle met kommas te skei:\n  Voorbeeld: 'draw, move W T1, move T2 F1'\n\nSlegs Konings kan op leë tafelstapels geplaas word.\nAksies word in orde uitgevoer - as een misluk, word die oorblywende aksies oorgeslaan.\nGebruik 'forfeit' as jy glo die spel is onmoontlik om te wen."
+  },
+  "format_error": {
+    "no_brackets": "Ongeldige aksieformaat. Aksie moet in hakies wees.",
+    "no_closing_bracket": "Ongeldige aksieformaat. Ontbrekende sluit-hakie ']'",
+    "empty_command": "Leë opdrag. Tik 'draw' of 'move <bron> <bestemming> [aantal]'",
+    "empty_action": "Leë aksie",
+    "move_needs_args": "Skuif-opdrag vereis bron en bestemming. Gebruik: 'move <bron> <bestemming> [aantal]'",
+    "count_positive": "Aantal moet positief of 'all' wees",
+    "count_invalid": "Ongeldige aantal. Gebruik 'n getal of 'all'",
+    "unknown_command": "Onbekende opdrag '{cmd}'. Gebruik 'draw', 'move <bron> <bestemming> [aantal]', of 'forfeit'",
+    "wrapped": "Aksie {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Aksie {n}: {msg}",
+    "before_failure": "Uitgevoer {n} aksie(s) voor mislukking.",
+    "failed": "Aksie {n} misluk: {msg}"
+  },
+  "move_result": {
+    "drew": "Getrek kaarte van voorraad na afval.",
+    "cannot_draw": "Kan nie trek nie. Beide voorraad en afval is leeg.",
+    "invalid_pile": "Ongeldige stapelnaam. Gebruik W, F1-F4, of T1-T7",
+    "foundation_one_card": "Kan slegs 1 kaart na fondasie skuif",
+    "waste_to_foundation_ok": "Geskuif kaart van afval na fondasie F{dst}",
+    "waste_to_foundation_bad": "Kan nie afvalkaart na daardie fondasie-stapel skuif nie",
+    "tableau_to_foundation_ok": "Geskuif kaart van tafelstapel T{src} na fondasie F{dst}",
+    "tableau_to_foundation_bad": "Kan nie tafelstapelkaart na daardie fondasie-stapel skuif nie",
+    "foundation_to_foundation": "Kan nie van fondasie na fondasie skuif nie",
+    "waste_to_tableau_one_card": "Kan slegs 1 kaart van afval na tafelstapel skuif",
+    "waste_to_tableau_ok": "Geskuif kaart van afval na tafelstapel T{dst}",
+    "waste_to_tableau_bad": "Kan nie afvalkaart op daardie tafelstapel plaas nie",
+    "no_face_up": "Geen gesigte-omhoog kaarte om te skuif nie",
+    "tableau_to_tableau_ok": "Geskuif {count} kaarte van tafelstapel T{src} na T{dst}",
+    "tableau_to_tableau_bad": "Kan nie {count} kaarte van T{src} na T{dst} skuif nie",
+    "foundation_to_tableau_one_card": "Kan slegs 1 kaart van fondasie na tafelstapel skuif",
+    "foundation_empty": "Fondasie F{src} is leeg",
+    "foundation_to_tableau_ok": "Geskuif kaart van fondasie F{src} na tafelstapel T{dst}",
+    "foundation_to_tableau_bad": "Kan nie fondasiekaart op tafelstapel T{dst} plaas nie",
+    "to_waste_or_stock": "Kan nie na afval of voorraad skuif nie"
+  },
+  "outcome": {
+    "forfeit": "Spel opgegee. Finale telling: {score} kaarte in fondasies.",
+    "won": "Gelukwensing! Jy het Klondike Solitaire gewen!",
+    "turn_limit": "Spel oor! Jy het die maksimum van {max_turns} beurte bereik. Telling: {score} kaarte in fondasies."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Beurt: {turn}/{max_turns}",
+    "stock": "Voorraad: {stock} kaarte",
+    "waste": "Afval (W): {waste}",
+    "foundations_header": "Fondasies:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tafelstapels:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

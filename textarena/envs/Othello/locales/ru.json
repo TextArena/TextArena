@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Вы — Игрок {player_id}, играющий {colour} ({piece}) в игре Отелло.\nВаша цель — иметь больше фишек вашего цвета на доске к концу игры.\nНа вашем ходу, разместите фишку так, чтобы она фланкировала одну или несколько фишек вашего противника в любом направлении (горизонтально, вертикально или по диагонали) между вашей новой фишкой и другой из ваших существующих фишек. Все фланкированные фишки противника будут перевернуты в ваш цвет.\nУкажите ваш ход в формате '[row, col]'."
+  },
+  "board": {
+    "game_board": "Игровая доска:\n{board}",
+    "valid_moves": "{observation}\nДоступные ходы: {moves}",
+    "no_valid_moves_reset": "{observation}\nНет доступных ходов - возможно, вам придется пропустить.",
+    "no_valid_moves_step": "{observation}\nНет доступных ходов – возможно, вам придется пропустить.",
+    "scores_reset": "{observation}\nТекущие счета - Черные: {black_count}, Белые: {white_count}\n",
+    "scores_step": "{observation}\nСчета - Черные: {black_count}, Белые: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Ход должен быть в формате [row, col].",
+    "illegal": "Недопустимый ход. Доступные ходы: {valid}"
+  },
+  "game_action": {
+    "skipped": "Игрок {pid} должен пропустить свой ход",
+    "played": "Игрок {pid} ({piece}) сыграл [{r}, {c}], перевернув {flipped} фишку(и)"
+  },
+  "game_message": {
+    "must_skip": "Игрок {pid} ({piece}) не имеет доступных ходов и должен пропустить."
+  },
+  "outcome": {
+    "black_wins": "Черные выиграли {black_count}-{white_count}.",
+    "white_wins": "Белые выиграли {white_count}-{black_count}.",
+    "draw": "Ничья {black_count}-{white_count}."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame yerli faylı. Açarları (sol tərəf) tərcümə etməyin. Yalnız dəyərləri (sağ tərəf) tərcümə edin.",
+  "_slots": {
+    "{player_id}": "Oyunçunun nömrəsi, 0 və ya 1",
+    "{other_id}": "Digər oyunçunun nömrəsi, 1 və ya 0",
+    "{num_rounds}": "Ümumi raund sayı",
+    "{pool}": "Hər raundda mövcud olan pul miqdarı (bir ədəd)",
+    "{round_number}": "Cari raund nömrəsi",
+    "{proposer_id}": "Təklif edən oyunçunun nömrəsi, 0 və ya 1",
+    "{responder_id}": "Cavab verən oyunçunun nömrəsi, 0 və ya 1",
+    "{offer}": "Təklif olunan məbləğ (bir ədəd)",
+    "{keep}": "Təklif edən oyunçunun saxladığı məbləğ (bir ədəd)",
+    "{proposer_gain}": "Təklif edən oyunçunun bu raundda qazandığı pul (bir ədəd)",
+    "{responder_gain}": "Cavab verən oyunçunun bu raundda qazandığı pul (bir ədəd)",
+    "{total_0}": "Oyunçu 0-ın yığılmış ümumi məbləği (bir ədəd)",
+    "{total_1}": "Oyunçu 1-in yığılmış ümumi məbləği (bir ədəd)",
+    "{winner}": "Qalib oyunçunun nömrəsi",
+    "{loser}": "Məğlub oyunçunun nömrəsi",
+    "{winner_total}": "Qalibin ümumi pulu (bir ədəd)",
+    "{loser_total}": "Məğlubun ümumi pulu (bir ədəd)",
+    "{total}": "Hər oyunçunun bərabər final ümumi məbləği (bir ədəd)"
+  },
+  "player_prompt": {
+    "intro": "Siz Oyunçu {player_id}-siniz, {num_rounds} raund Iterated Ultimatum Oyunu oynuyorsunuz.\nBu raundda özünüz və Oyunçu {other_id} arasında bölüşdürmək üçün ${pool} pulunuz var.\n\nTəklif edən:\n  - Təklif edin: [Offer: $X] (0 <= X <= pool)\n  - Əgər qəbul olunarsa → Siz $(pool - X) alırsınız, digər oyunçu $X alır\n  - Əgər rədd olunarsa → Hər ikiniz $0 alırsınız\n  - Nümunə: [Offer: $3]  və ya  'Mən düşünürəm ki, bu ədalətlidir. [Offer: $5]'\n\nCavab verən:\n  - Təklifə ya [Accept] ya da [Reject] ilə qərar verin\n  - Nümunə: 'Bu məqbul görünür. [Accept]'\n            'Çox ədalətsizdir. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Raund {round_number} başlayır! ---\nOyunçu {proposer_id} təklif edəndir, Oyunçu {responder_id} cavab verəndir.",
+    "offer": "Raund {round_number}: Oyunçu {proposer_id} Oyunçu {responder_id}-ə ${offer} təklif edir (${keep} saxlayır).",
+    "accepted": "Oyunçu {responder_id} qəbul etdi! Raund {round_number} qazancları: Oyunçu {proposer_id} +${proposer_gain}, Oyunçu {responder_id} +${responder_gain}. Yeni ümumi məbləğlər: Oyunçu 0: ${total_0}, Oyunçu 1: ${total_1}.",
+    "rejected": "Oyunçu {responder_id} təklifi rədd etdi! Raund {round_number} qazancları: Hər iki oyunçu +$0. Ümumi məbləğlər dəyişməz: Oyunçu 0: ${total_0}, Oyunçu 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Təklif edən oyunçu təklifini [Offer: $X] formatında etməlidir.",
+    "bad_integer": "Təklif məbləği düzgün ədəd olmalıdır.",
+    "out_of_range": "Təklif $0 və ${pool} arasında olmalıdır.",
+    "no_current_offer": "Cavab verən oyunçu üçün cari təklif yoxdur.",
+    "accept_or_reject": "Cavab verən oyunçu ya [Accept] ya da [Reject] ilə qərar verməlidir."
+  },
+  "outcome": {
+    "win": "Oyunçu {winner} ${winner_total} ümumi məbləği ilə Oyunçu {loser}-in ${loser_total} ümumi məbləğini üstələdi.",
+    "draw": "Heç-heçə! Hər iki oyunçu ${total} ümumi məbləği ilə bitirdi."
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe-lokaliseringsfil. ÖVERSÄTT INTE nycklar (vänster sida). Översätt endast värden (höger sida).",
+  "_slots": {
+    "{player_id}": "Spelarens nummer, t.ex. 0, 1 eller 2",
+    "{symbol}": "Spelarens markering, en av A, B eller C",
+    "{cell}": "Ett brädrutenummer",
+    "{max_cell}": "Det högsta giltiga rutenumret (brädstorlek^2 - 1)",
+    "{row}": "Brädradindex för den placerade markeringen",
+    "{col}": "Brädkolumnindex för den placerade markeringen",
+    "{board}": "Det återgivna ASCII-brädet (översätt inte)",
+    "{moves}": "Den kommaavgränsade listan över tillgängliga dragtoken som '[4]' (översätt inte)"
+  },
+  "player_prompt": {
+    "intro": "Du är Spelare {player_id} i Tic Tac Toe för tre spelare.\nDin symbol är '{symbol}'.\nDu turas om att placera din symbol på ett 5x5-bräde för att bilda en linje av fyra.\nLinjer kan vara horisontella, vertikala eller diagonala.\nSkicka in ditt drag med formatet '[4]' för att markera ruta 4."
+  },
+  "board": {
+    "current_board": "Aktuellt bräde:\n\n{board}\n\nTillgängliga drag: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ogiltigt dragformat. Använd '[cell]' där cell är 0-{max_cell}.",
+    "out_of_range": "Ogiltigt rutenummer: {cell}. Måste vara mellan 0 och {max_cell}.",
+    "already_occupied": "Ruta {cell} är redan upptagen.",
+    "made_invalid": "Spelare {player_id} gjorde ett ogiltigt drag"
+  },
+  "game_action": {
+    "placed": "Spelare {player_id} placerar sin symbol ({symbol}) i fält ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Spelare {player_id} ({symbol}) vinner!",
+    "draw": "Spelet är oavgjort!"
+  }
+}

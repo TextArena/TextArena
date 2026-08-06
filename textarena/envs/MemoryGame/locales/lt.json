@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id}. Žaidžiate Atminties žaidimą.\nJūsų tikslas yra surasti daugiau kortų porų ant lentos nei jūsų varžovas.\nSavo ėjimo metu pasirinkite dvi kortas, kurias norite apversti, įvesdami pirmosios ir antrosios kortos eilės ir stulpelio numerius, pvz., '[0 1 1 0]', kur pirmoji korta yra eilėje 0 ir stulpelyje 1, o antroji korta yra eilėje 1 ir stulpelyje 0.\nJei dvi kortos sutampa, jūs gaunate tašką, o kortos lieka atverstos. Jei jos nesutampa, kortos vėl apverčiamos aukštyn kojom, pvz., '.'.\nŽaidimas baigiasi, kai visos poros yra surastos."
+  },
+  "board": {
+    "current_board": "Dabartinė lenta:\n{board}",
+    "current_game_board": "Dabartinė žaidimo lenta:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neteisingas ėjimo formatas. Žaidėjas {player_id} neatsakė su galiojančia kryptimi kvadratinėse skliaustose.",
+    "out_of_bounds": "Neteisingas ėjimas. Žaidėjas {player_id} pasirinko poziciją už lentos ribų.",
+    "same_card_twice": "Neteisingas ėjimas. Žaidėjas {player_id} pasirinko tą pačią kortą du kartus.",
+    "already_matched": "Neteisingas ėjimas. Žaidėjas {player_id} pasirinko vieną ar abi kortas, kurios jau buvo surastos."
+  },
+  "game_message": {
+    "cards_match": "Žaidėjo {player_id} pasirinktos kortos pozicijose [{r1} {c1}] ir [{r2} {c2}] sutampa!",
+    "cards_no_match": "Žaidėjo {player_id} pasirinktos kortos nesutampa. Kortos pozicijose [{r1} {c1}] ir [{r2} {c2}] yra {pos1} ir {pos2} atitinkamai."
+  },
+  "outcome": {
+    "draw": "Abu žaidėjai surado tą patį skaičių kortų porų.",
+    "win": "Žaidėjas {winner_id} laimėjo!",
+    "turn_limit": "Ėjimų limitas buvo pasiektas. Žaidimas baigėsi. Žaidėjas 0 surinko {score_0} taškų, žaidėjas 1 surinko {score_1} taškų.",
+    "turn_limit_win": "{reason} Žaidėjas {winner_id} laimėjo!"
+  }
+}

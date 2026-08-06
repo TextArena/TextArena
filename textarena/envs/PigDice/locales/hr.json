@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} koji igra igru Pig Dice.\n\nPravila:\n- Na vašoj šansi, možete ili '[roll]' ili '[hold]'\n- Bacite 2-6: Dodajte u vaš ukupni rezultat šanse\n- Bacite 1: Izgubite ukupni rezultat šanse i završite šansu\n- Hold: Dodajte ukupni rezultat šanse u vaš rezultat i završite šansu\n- Prvi koji dostigne {winning_score} bodova pobjeđuje\n\nKada je vaša šansa, vidjet ćete trenutne rezultate i ukupni rezultat šanse.\nOdgovorite s '[roll]' da biste bacili kocku ili '[hold]' da biste pohranili svoje bodove."
+  },
+  "invalid_move": {
+    "invalid_action": "Neispravan format akcije. Koristite '[roll]' ili '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Igrač {player_id} je propao, izgubivši {turn_total} bodova!",
+    "player_hold": "Igrač {player_id} drži i pohranjuje {turn_total} bodova."
+  },
+  "board": {
+    "player": "Igrač 0: '{score_0}'; Igrač 1: '{score_1}'",
+    "current_total_scores": "Trenutni ukupni rezultati: {scores}\nVaš trenutni ukupni rezultat šanse je {turn_total}.",
+    "roll_history": "{observation}\nVaša povijest bacanja za ovu šansu: {roll_history}",
+    "first_roll": "{observation}\nOvo je prvo bacanje vaše šanse.",
+    "available_actions": "{observation}\nDostupne akcije: '[roll]' ili '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Igrač {winner_id} je pobijedio jer ima viši rezultat na kraju šanse ({scores})",
+    "winner_by_score": "Igrač {winner_id} je pobijedio jer je dostigao ciljni rezultat od {winning_score}!",
+    "draw": "Kraj šanse je dostignut i svi igrači imaju isti rezultat: {scores}"
+  }
+}

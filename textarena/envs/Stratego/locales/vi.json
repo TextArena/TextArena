@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong Stratego.\nMục tiêu của bạn là bắt cờ của đối thủ hoặc loại bỏ tất cả các quân cờ di chuyển được của họ.\nQuân đội của bạn đã được đặt trên bàn cờ, bao gồm cờ, bom và các quân cờ khác có các cấp bậc khác nhau.\n\n### Hướng dẫn Chơi\n1. **Quy tắc Di chuyển:**\n   - Trong lượt của bạn, bạn có thể di chuyển một quân cờ một bước đến một ô kề (lên, xuống, trái, hoặc phải) mà đã bị chiếm bởi quân cờ của bạn.\n   - Ví dụ: Một quân cờ có thể di chuyển từ A1 đến B1 hoặc A1 đến A2 nếu B1 và A2 không bị chiếm bởi quân cờ của bạn.\n   - Nếu quân cờ được chọn là Bom hoặc Cờ, nó không thể di chuyển.\n2. **Trận chiến:**\n   - Nếu bạn di chuyển vào một ô bị chiếm bởi quân cờ của đối thủ, một trận chiến sẽ xảy ra:\n     - Quân cờ có cấp bậc cao hơn sẽ thắng và loại bỏ quân cờ của đối thủ.\n     - Nếu cấp bậc bằng nhau, cả hai quân cờ sẽ bị loại khỏi bàn cờ.\n     - **Trường hợp Đặc biệt:**\n       - Bom loại bỏ hầu hết các quân cờ tấn công ngoại trừ Kỹ sư, có thể vô hiệu hóa Bom.\n       - Điệp viên có thể đánh bại Tướng nếu Điệp viên tấn công trước nhưng thua tất cả các quân cờ khác.\n3. **Mục tiêu Chiến lược:**\n   - Xác định quân cờ của đối thủ thông qua các nước đi và trận chiến của họ.\n   - Bảo vệ cờ của bạn trong khi cố gắng bắt cờ của đối thủ.\n   - Sử dụng Trinh sát một cách chiến lược để thu thập thông tin về quân cờ của đối thủ và tấn công những quân cờ yếu.\n\n### Cách Di chuyển:\n1. Chỉ định tọa độ của quân cờ bạn muốn di chuyển và đích đến.\n2. Sử dụng định dạng: [A0 B0], trong đó A0 là vị trí nguồn, và B0 là đích đến.\n   - Ví dụ: Để di chuyển một quân cờ từ hàng 0, cột 0 đến hàng 1, cột 0, nhập [A0 B0].\n3. Đảm bảo đích đến hợp lệ theo quy tắc di chuyển trên.\n\n### Lưu ý Quan trọng:\n- Bàn cờ sẽ hiển thị quân cờ và vị trí của bạn, ví dụ: MN, MS.\n- Bàn cờ cũng sẽ hiển thị vị trí đã biết của quân cờ đối thủ mà không tiết lộ cấp bậc, ví dụ: ?.\n- Ô có ~ là hồ và không thể di chuyển vào.\n- Đề xuất, hãy bắt đầu trò chơi bằng cách di chuyển quân cờ ở tuyến đầu để thu thập thông tin về quân cờ của đối thủ. Tuyến đầu của Người chơi 0 và Người chơi 1 là hàng D và G tương ứng.\n\nĐây là trạng thái hiện tại của bàn cờ:\n"
+  },
+  "board": {
+    "current_board": "Bàn cờ hiện tại:\n\n{board}\nCác nước đi có thể thực hiện: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Định dạng hành động không hợp lệ. Người chơi {player_id} không nhập nước đi theo định dạng [A0 B0].",
+    "invalid_coordinates": "Định dạng hành động không hợp lệ. Người chơi {player_id} không nhập tọa độ hợp lệ.",
+    "not_own_piece": "Định dạng hành động không hợp lệ. Người chơi {player_id} phải di chuyển một quân cờ của mình.",
+    "scout_through_pieces": "Định dạng hành động không hợp lệ. Người chơi {player_id} không thể di chuyển trinh sát qua các quân cờ khác.",
+    "scout_diagonal": "Định dạng hành động không hợp lệ. Người chơi {player_id} không thể di chuyển trinh sát chéo.",
+    "non_scout_multi_square": "Định dạng hành động không hợp lệ. Các quân cờ, ngoại trừ trinh sát, chỉ có thể di chuyển một ô tại một thời điểm.",
+    "move_into_lake": "Định dạng hành động không hợp lệ. Người chơi {player_id} không thể di chuyển vào hồ.",
+    "move_onto_own_piece": "Định dạng hành động không hợp lệ. Người chơi {player_id} không thể di chuyển vào quân cờ của mình.",
+    "move_bomb_or_flag": "Định dạng hành động không hợp lệ. Người chơi {player_id} không thể di chuyển bom hoặc cờ."
+  },
+  "game_action": {
+    "you_moved": "Bạn đã di chuyển quân cờ từ {source} đến {dest}.",
+    "opponent_moved": "Người chơi {player_id} đã di chuyển một quân cờ từ {source} đến {dest}.",
+    "you_equal_ranks": "Bạn đã di chuyển quân cờ từ {source} đến {dest}. Quân cờ tấn công là {attacking_rank} và quân cờ đích là {target_rank}. Vì cấp bậc bằng nhau, cả hai quân cờ đều bị loại.",
+    "opponent_equal_ranks": "Người chơi {player_id} đã di chuyển một quân cờ từ {source} đến {dest}. Quân cờ tấn công là {attacking_rank} và quân cờ đích là {target_rank}. Vì cấp bậc bằng nhau, cả hai quân cờ đều bị loại.",
+    "you_miner_defused": "Bạn đã di chuyển quân cờ từ {source} đến {dest}. Quân cờ tấn công là {attacking_rank} và quân cờ đích là {target_rank}. Vì kỹ sư có thể vô hiệu hóa bom, bạn đã thắng trận chiến.",
+    "opponent_miner_defused": "Người chơi {player_id} đã di chuyển một quân cờ từ {source} đến {dest}. Quân cờ tấn công là {attacking_rank} và quân cờ đích là {target_rank}. Vì kỹ sư có thể vô hiệu hóa bom, bạn đã thua trận chiến.",
+    "you_bomb_lost": "Bạn đã di chuyển quân cờ từ {source} đến {dest}. Quân cờ tấn công là {attacking_rank} và quân cờ đích là {target_rank}. Vì quân cờ tấn công không phải là kỹ sư, bạn đã thua trận chiến.",
+    "opponent_bomb_won": "Người chơi {player_id} đã di chuyển một quân cờ từ {source} đến {dest}. Quân cờ tấn công là {attacking_rank} và quân cờ đích là {target_rank}. Vì quân cờ tấn công không phải là kỹ sư, bạn đã thắng trận chiến.",
+    "you_spy_won": "Bạn đã di chuyển quân cờ từ {source} đến {dest}. Quân cờ tấn công là {attacking_rank} và quân cờ đích là {target_rank}. Vì quân cờ tấn công là điệp viên và quân cờ đích là tướng, bạn đã thắng trận chiến.",
+    "opponent_spy_lost": "Người chơi {player_id} đã di chuyển một quân cờ từ {source} đến {dest}. Quân cờ tấn công là {attacking_rank} và quân cờ đích là {target_rank}. Vì quân cờ tấn công là điệp viên và quân cờ đích là tướng, bạn đã thua trận chiến.",
+    "you_higher_won": "Bạn đã di chuyển quân cờ từ {source} đến {dest}. Quân cờ tấn công là {attacking_rank} và quân cờ đích là {target_rank}. Vì quân cờ tấn công có cấp bậc cao hơn quân cờ đích, bạn đã thắng trận chiến.",
+    "opponent_higher_lost": "Người chơi {player_id} đã di chuyển một quân cờ từ {source} đến {dest}. Quân cờ tấn công là {attacking_rank} và quân cờ đích là {target_rank}. Vì quân cờ tấn công có cấp bậc cao hơn quân cờ đích, bạn đã thua trận chiến.",
+    "you_lower_lost": "Bạn đã di chuyển quân cờ từ {source} đến {dest}. Quân cờ tấn công là {attacking_rank} và quân cờ đích là {target_rank}. Vì quân cờ tấn công có cấp bậc thấp hơn quân cờ đích, bạn đã thua trận chiến.",
+    "opponent_lower_won": "Người chơi {player_id} đã di chuyển một quân cờ từ {source} đến {dest}. Quân cờ tấn công là {attacking_rank} và quân cờ đích là {target_rank}. Vì quân cờ tấn công có cấp bậc thấp hơn quân cờ đích, bạn đã thắng trận chiến."
+  },
+  "outcome": {
+    "flag_captured": "Người chơi {player_id} đã bắt cờ của đối thủ!",
+    "no_movable_pieces": "Người chơi {winner_id} thắng! Người chơi {loser_id} không còn quân cờ di chuyển được."
+  }
+}

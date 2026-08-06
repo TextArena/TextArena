@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste {role} v Colonel Blotto.\nVaš cilj je zmagati več krogov kot vaš nasprotnik.\nV vsakem krogu razporedite točno {num_total_units} enot čez polja {field_names}.\nIgralec, ki razporedi več enot v polje, zmaga v tem polju, in igralec, ki zmaga v več poljih, zmaga v krogu.\nNa primer, '[A7 B7 C6]' razporedi 7 enot v A, 7 v B in 6 v C.",
+    "commander_alpha": "Poveljnik Alfa",
+    "commander_beta": "Poveljnik Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Krog {current_round}/{num_rounds} ===\nZmagani krogi - Poveljnik Alfa: {alpha_score}, Poveljnik Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nKrog {current_round}\nPoveljnik Alfa je razporedil: {p0_allocations}\nPoveljnik Beta je razporedil: {p1_allocations}\n",
+    "winner_alpha": "{message}Zmagovalec: Poveljnik Alfa",
+    "winner_beta": "{message}Zmagovalec: Poveljnik Beta",
+    "tie": "{message}Neodločeno!"
+  },
+  "invalid_move": {
+    "wrong_format": "Neveljaven format vnosa. Uporabite: A:5, B:10, C:5",
+    "invalid_field": "Neveljavno ime polja. Veljavna polja: {field_names}",
+    "wrong_allocation_value": "Vse razporeditve morajo biti nenegativna cela števila.",
+    "incorrect_total_units": "Morali bi razporediti točno {num_total_units} enot. Trenutna vsota: {current_sum}",
+    "good_allocations": "Razporeditev je dobra."
+  },
+  "outcome": {
+    "winner_alpha": "Poveljnik Alfa zmaga {score_0}-{score_1} po {num_rounds} krogih!",
+    "winner_beta": "Poveljnik Beta zmaga {score_1}-{score_0} po {num_rounds} krogih!",
+    "draw": "Igra se konča z {score_0}-{score_1} neodločenim rezultatom po {num_rounds} krogih!",
+    "early_winner_alpha": "Poveljnik Alfa zmaga {scores_0}-{scores_1} (dosežen večinski rezultat)!",
+    "early_winner_beta": "Poveljnik Beta zmaga {scores_1}-{scores_0} (dosežen večinski rezultat)!"
+  }
+}

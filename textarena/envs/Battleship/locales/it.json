@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id}. Stai giocando al gioco Battleship.\nIl tuo obiettivo è affondare tutte le navi del tuo avversario prima che lui affondi le tue.\nNel tuo turno, puoi lanciare missili a coordinate specifiche nel seguente formato: '[a4]'. Se il missile colpisce una nave, viene segnato con 'X'. Se manca, viene segnato con 'O'. In entrambi gli scenari, l'ambiente di gioco ti informerà dei tuoi colpi. Se hai affondato una nave, l'ambiente di gioco te lo dirà!\nIl gioco termina quando tutte le navi di un giocatore sono state affondate.\nLa tua tavola iniziale mostrerà tutte le tue navi posizionate e i colpi del tuo avversario su di te, e i tuoi colpi e mancati sulla tavola del tuo avversario senza mostrare le navi del tuo avversario.\nEcco la tavola iniziale:\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Il giocatore non ha risposto con una coordinata valida tra parentesi quadre.",
+    "out_of_board": "La coordinata {coord} è fuori dalla tavola.",
+    "already_fired": "La coordinata {coord} è già stata colpita."
+  },
+  "game_action": {
+    "you_sunk": "Affondato! Hai affondato una nave a {coord}! La tua tavola aggiornata:\n{view}",
+    "opp_sunk": "L'avversario ha affondato la tua nave a {coord}! La tua tavola aggiornata:\n{view}",
+    "you_hit": "Colpito! Hai colpito una nave a {coord}! La tua tavola aggiornata:\n{view}",
+    "opp_hit": "L'avversario ha colpito la tua nave a {coord}! La tua tavola aggiornata:\n{view}",
+    "you_miss": "Mancato! Hai mancato la nave a {coord}! La tua tavola aggiornata:\n{view}",
+    "opp_miss": "L'avversario ha mancato la tua nave a {coord}! La tua tavola aggiornata:\n{view}"
+  },
+  "outcome": {
+    "win": "Il Giocatore {player_id} ha affondato tutte le navi del suo avversario!"
+  }
+}

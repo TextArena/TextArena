@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "あなたはプレイヤー {player_id} ({piece}) です。相手は ({opp}) です。\n手を '[a2 a3]' の形式で提出してください（from → to）。\n- 通常の手は、隣接する空の頂点に1つ前進します。\n- 取り込みは、隣接する敵の駒を飛び越えて、その先の空のノードに着地します。\n各取り込みで {score_per_capture} ポイントが得られます。\nゲームは {max_moves} 手後、またはプレイヤーが合法的な手がなくなった場合に終了します。"
+  },
+  "board": {
+    "current_board": "手数 #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "形式が不正です。'[a2 a3]' の形式を使用してください。",
+    "unknown_square": "不明なマスです。",
+    "not_your_piece": "出発点が自分の駒ではありません。",
+    "dest_not_empty": "到着点が空ではありません。",
+    "illegal": "不正な手です。"
+  },
+  "game_action": {
+    "captured": "プレイヤー {player_id} が駒を取りました！ (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "プレイヤー {player_id} には駒がありません。",
+    "cannot_move": "プレイヤー {player_id} は手を打てません。",
+    "higher_score": "高い取り込みスコア。",
+    "move_limit": "手数制限に達しました。"
+  }
+}

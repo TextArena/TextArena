@@ -1,0 +1,55 @@
+{
+  "_comment": "Uporabniški vmesnik za Liar's Dice. Oznake za dejanja v oglatih oklepajih ('[Bid: X, Y]', '[Call]'), indeksi igralcev, vrednosti na kockah, količine in štetja so nevtralna mesta in se nikoli ne prevajajo.",
+  "_slots": {
+    "player_id": "indeks igralca (celo število)",
+    "num_players": "število igralcev v igri (celo število)",
+    "dice_summary": "predhodno prikazane število preostalih kock za vsakega igralca, ločene z vejico",
+    "your_dice": "predhodno prikazane vrednosti na vaših kockah, ločene z vejico",
+    "p": "indeks igralca (celo število)",
+    "d": "število preostalih kock za tega igralca (celo število)",
+    "current_player_id": "indeks igralca, ki je poklical (celo število)",
+    "face_value": "vrednost na kocki, ki se šteje (1-6)",
+    "count": "dejansko število ujemajočih kock (celo število)",
+    "quantity": "količina ponudbe (celo število)",
+    "loser_id": "indeks igralca, ki izgubi kocko (celo število)",
+    "new_quantity": "količina ponudbe, ki je bila pravkar oddana (celo število)",
+    "current_quantity": "trenutna količina ponudbe (celo število)",
+    "new_face_value": "vrednost na kocki, ki je bila pravkar oddana (celo število)",
+    "current_face_value": "trenutna vrednost na kocki (celo število)",
+    "action": "surova niz dejanja, ki ga je igralec oddal",
+    "reason": "razlog za zavrnitev ponudbe",
+    "winner": "indeks igralca, ki zmaga (celo število)",
+    "final_ranking": "seznam indeksov igralcev od prvega izločenega do zmagovalca"
+  },
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v igri Liar's Dice z {num_players} igralci.\nPravila:\n- Na vašo vrsto lahko ali:\n  1) Oddate novo ponudbo z višjo količino ali višjo vrednostjo (ali oboje) kot trenutna ponudba; npr. '[Bid: 3, 4]',\n  2) Pokličete zadnjo ponudbo z vtipkanjem '[Call]'.\n\nČe pokličete:\n  - Če dejansko število te vrednosti med vsemi kockami je manjše kot ponudba, zadnji ponudnik izgubi eno kocko.\n  - Sicer pokličitelj izgubi eno kocko.\nIgralec, ki doseže 0 kock, je izločen. Zadnji preostali igralec zmaga."
+  },
+  "board": {
+    "per_player": "\tIgralec {p}: {d}",
+    "new_round": "\nNov krog - Preostale kocke: {dice_summary}\nVaše trenutne kocke so: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Igralec {current_player_id} pokliče! Dejansko število vrednosti {face_value} je {count}, kar je MANJ kot {quantity}.\nIgralec {loser_id} (zadnji ponudnik) izgubi eno kocko.",
+    "caller_loses": "Igralec {current_player_id} pokliče! Dejansko število vrednosti {face_value} je {count}, kar je >= {quantity}.\nIgralec {loser_id} (pokličitelj) izgubi eno kocko."
+  },
+  "action": {
+    "bid_announce": "Igralec {player_id} ponudi {quantity} vrednosti {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Poklič brez prejšnje ponudbe.",
+    "invalid_bid": "Neveljavna ponudba: {reason}",
+    "not_recognized": "Dejanje ni prepoznano kot veljavno '[Bid: X, Y]' ali '[Call]'. Oddano dejanje: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nova količina {new_quantity} je nižja kot trenutna {current_quantity}.",
+    "face_lower": "Nova vrednost {new_face_value} je nižja kot trenutna {current_face_value}.",
+    "identical": "Ponudba je enaka trenutni ponudbi.",
+    "face_range": "Vrednost mora biti med 1 in 6."
+  },
+  "message": {
+    "eliminated_invalid": "Igralec {player_id} je bil izločen zaradi neveljavnega poteza."
+  },
+  "outcome": {
+    "win": "Igralec {winner} zmaga! Končno uvrstitev: {final_ranking}"
+  }
+}

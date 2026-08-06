@@ -1,0 +1,34 @@
+{
+  "_comment": "Nederlandse lokalisatie voor Word Ladder. Sleutels (links) zijn vast; vertaal alleen de waarden (rechts). Houd elke {placeholder} letterlijk. Woordtokens ({start_word}, {target_word}, {word}, {current}, {ladder}) zijn neutrale spelwoorden en mogen niet worden vertaald. Houd het voorbeeld met vierkante haken `[word]` zoals het is.",
+  "_slots": {
+    "{player_id}": "Spelernummer (geheel getal)",
+    "{start_word}": "Het startwoord van de ladder (neutraal token)",
+    "{target_word}": "Het doelwoord om te bereiken (neutraal token)",
+    "{word}": "Het woord dat de speler zojuist heeft ingediend (neutraal token)",
+    "{current}": "Het huidige woord van de speler (neutraal token)",
+    "{target}": "Het doelwoord (neutraal token)",
+    "{target_len}": "Lengte van het doelwoord (geheel getal)",
+    "{ladder}": "De bewegingsgeschiedenis samengevoegd door ' -> ' (neutrale tokens)",
+    "{history}": "De weergegeven geschiedenisregel (al gelokaliseerd; niet vertalen)",
+    "{pct}": "Percentage van de letters die worden gedeeld met het doel (geheel getal)"
+  },
+  "prompt": {
+    "intro": "U bent Speler {player_id}. Uw doel is om het doelwoord te bereiken door **één letter tegelijk** te veranderen.\n- Startwoord: **{start_word}**\n- Doelwoord: **{target_word}**\nDien elke zet in tussen vierkante haken, bijv. `[word]`.\nDe geschiedenis verschijnt hieronder terwijl u speelt. Succes!\n"
+  },
+  "invalid": {
+    "wrong_format": "Ongeldig formaat. Plaats uw woord tussen vierkante haken, bijv. `[word]`.",
+    "wrong_length": "`{word}` heeft de verkeerde lengte; het doel is {target_len} letters.",
+    "not_a_word": "`{word}` is geen erkend woord.",
+    "not_one_different": "`{word}` is niet precies één letter verschillend van `{current}`."
+  },
+  "board": {
+    "history": "Word Ladder-geschiedenis: {ladder}. Doelwoord: {target}\n"
+  },
+  "feedback": {
+    "progress": "Goed gedaan! Ga door.\n{history}"
+  },
+  "outcome": {
+    "win": "Gefeliciteerd! U hebt het doelwoord bereikt.",
+    "turn_limit": "De beurtlimiet is bereikt. U hebt `{current}` bereikt, wat {pct}% van zijn letters deelt met het doel `{target}`."
+  }
+}

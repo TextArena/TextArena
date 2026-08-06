@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} memainkan permainan Pig Dice.\n\nAturan:\n- Pada giliran Anda, Anda dapat '[roll]' atau '[hold]'\n- Gulirkan 2-6: Tambahkan ke total giliran Anda\n- Gulirkan 1: Kehilangan total giliran dan akhiri giliran\n- Tahan: Tambahkan total giliran ke skor Anda dan akhiri giliran\n- Yang pertama mencapai {winning_score} poin menang\n\nKetika giliran Anda, Anda akan melihat skor dan total giliran saat ini.\nJawab dengan '[roll]' untuk menggulirkan dadu atau '[hold]' untuk menyimpan poin Anda."
+  },
+  "invalid_move": {
+    "invalid_action": "Format aksi tidak valid. Gunakan '[roll]' atau '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Pemain {player_id} gagal, kehilangan {turn_total} poin!",
+    "player_hold": "Pemain {player_id} menahan dan menyimpan {turn_total} poin."
+  },
+  "board": {
+    "player": "Pemain 0: '{score_0}'; Pemain 1: '{score_1}'",
+    "current_total_scores": "Skor Total Saat Ini: {scores}\nTotal giliran Anda saat ini adalah {turn_total}.",
+    "roll_history": "{observation}\nRiwayat guliran Anda untuk giliran ini: {roll_history}",
+    "first_roll": "{observation}\nIni adalah guliran pertama giliran Anda.",
+    "available_actions": "{observation}\nAksi yang tersedia: '[roll]' atau '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Pemain {winner_id} menang dengan memiliki skor yang lebih tinggi pada batas giliran ({scores})",
+    "winner_by_score": "Pemain {winner_id} menang dengan mencapai skor target {winning_score}!",
+    "draw": "Batas giliran telah tercapai dan semua pemain memiliki skor yang sama: {scores}"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Dansk lokalisationsfil for Hangman. Oversæt ikke nøgler (venstre side). Oversæt kun værdier (højre side).",
+  "_slots": {
+    "{board}": "Neutralt tegnet bræt (C00/C01 kolonneoverskrifter, afslørede bogstaver, '_' tomme felter); oversæt ikke",
+    "{tries_left}": "Resterende forkerte forsøg (heltal)",
+    "{guessed}": "Kommasepareret liste af allerede gættede bogstaver",
+    "{letter}": "Det gættede bogstav eller hele ord (beholdt som indtastet)",
+    "{pct}": "Procentdel af tegn gættet korrekt, formatteret til 2 decimaler",
+    "{target_word}": "Det skjulte målord"
+  },
+  "prompt": {
+    "intro": "Du spiller Hangman. Målet med spillet er at gætte ordet ved at give etbogstavsgæt eller hele ordet.\nHver kolonne er nummereret. Cellerne, der skal udfyldes med bogstaver, repræsenteres af '_'.\n\nDer er to måder, du kan svare på. Du kan give etbogstavsgæt i formatet '[L]', eller du kan gætte hele ordet i formatet '[LIGHT]'.\nHvis det givne bogstav er i ordet, vil det blive afsløret i gitteret.\nHvis det givne ord er korrekt, vinder du.\nSom du spiller, vil historien over dine valg blive føjet nedenfor. Brug oplysningerne til at finde ud af ordet og vinde.\nDu har 6 forkerte forsøg, før spillet slutter.\n\n"
+  },
+  "board": {
+    "status": "Aktuelt bræt:\n{board}\nDu har {tries_left} forsøg tilbage.\nGættede bogstaver: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Ugyldigt trækformat. Du svarede ikke med et gyldigt 'bogstav' eller 'ord'.",
+    "already_guessed": "Du gættede bogstavet '{letter}', som allerede er blevet gættet."
+  },
+  "message": {
+    "wrong_word": "Dit gæt af '{letter}' er ikke målordet.",
+    "letter_in": "Dit gæt af {letter} er i ordet",
+    "letter_not_in": "Dit gæt af {letter} er ikke i ordet. Du har {tries_left} liv tilbage."
+  },
+  "outcome": {
+    "win_word": "Tillykke! Du har løst Hangman-gåden.",
+    "win_board": "Tillykke! Du har løst Hangman-gåden.",
+    "out_of_tries": "Du er løbet tør for forsøg. Du gættede {pct} procent af tegnene korrekt. Målordet var: {target_word}"
+  }
+}

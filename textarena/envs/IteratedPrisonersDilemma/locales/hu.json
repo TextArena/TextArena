@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos az Ismételt Fogolydilemmában, amely {num_rounds} körből áll.\n\nJátékstruktúra:\n- Minden döntés előtt {total_conversation_rounds} fordulója van arra, hogy szabadon kommunikáljon.\n- Ezt követően mindkét játékos egyidejűleg választja a kooperációt vagy az árulást.\n\nKifizetési mátrix (minden körben rögzített):\n- Mindketten kooperálnak ➜ mindegyik {cooperate_reward}\n- Mindketten árulók ➜ mindegyik {mutual_defect_reward}\n- Az egyik árul, a másik kooperál ➜ Az áruló {defect_reward}, a kooperáló {sucker_reward}\n\nHogyan kell játszani:\n- Beszélgetés közben: írjon be bármilyen szöveget.\n- Döntési fázisban: tartalmazza a '[Cooperate]' vagy '[Defect]' (kis- és nagybetűk megkülönböztetése nélkül). További szöveget adhat hozzá a token előtt vagy után."
+  },
+  "phases": {
+    "conversation_finished": "A beszélgetés véget ért a {round}. körben. Kérjük, válaszoljon a '[Cooperate]' vagy '[Defect]' használatával \\boxed{{}}.",
+    "starting_round": "--- A {round}. kör kezdete ---",
+    "round_summary": "A {round}. kör eredményei:\n{outcome}\nA 0. játékos {r0} pontot szerzett (összesen {score_0}), az 1. játékos {r1} pontot szerzett (összesen {score_1})."
+  },
+  "outcome": {
+    "winner": "A {winner}. játékos nyer {win_score} - {lose_score} arányban.",
+    "draw": "Döntetlen! Mindkét játékos {s0} pontot szerzett.",
+    "round_both_cooperate": "Mindkét játékos kooperált.",
+    "round_both_defect": "Mindkét játékos árult.",
+    "round_p0_cooperates_p1_defects": "A 0. játékos kooperált, az 1. játékos árult.",
+    "round_p0_defects_p1_cooperates": "A 0. játékos árult, az 1. játékos kooperált."
+  }
+}

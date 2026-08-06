@@ -1,0 +1,34 @@
+{
+  "_comment": "Fitxer de localització de Word Ladder. NO tradueixis les claus (costat esquerre). Només tradueix els valors (costat dret).",
+  "_slots": {
+    "{player_id}": "Número del jugador (enter)",
+    "{start_word}": "La paraula inicial de l'escala (token neutral)",
+    "{target_word}": "La paraula objectiu a assolir (token neutral)",
+    "{word}": "La paraula que el jugador acaba de presentar (token neutral)",
+    "{current}": "La paraula actual del jugador (token neutral)",
+    "{target}": "La paraula objectiu (token neutral)",
+    "{target_len}": "Longitud de la paraula objectiu (enter)",
+    "{ladder}": "L'historial de moviments units per ' -> ' (tokens neutrals)",
+    "{history}": "La línia d'historial renderitzada (ja localitzada; no tradueixis)",
+    "{pct}": "Percentatge de lletres compartides amb la paraula objectiu (enter)"
+  },
+  "prompt": {
+    "intro": "Ets el Jugador {player_id}. El teu objectiu és assolir la paraula objectiu canviant **una lletra cada vegada**.\n- Paraula inicial: **{start_word}**\n- Paraula objectiu: **{target_word}**\nPresenta cada moviment entre claudàtors, per exemple `[word]`.\nL'historial apareix a continuació mentre jugues. Bona sort!\n"
+  },
+  "invalid": {
+    "wrong_format": "Format invàlid. Embolica la teva paraula en claudàtors, per exemple `[word]`.",
+    "wrong_length": "`{word}` té longitud incorrecta; la paraula objectiu té {target_len} lletres.",
+    "not_a_word": "`{word}` no és una paraula reconeguda.",
+    "not_one_different": "`{word}` no és exactament una lletra diferent de `{current}`."
+  },
+  "board": {
+    "history": "Historial de l'escala de paraules: {ladder}. Paraula objectiu: {target}\n"
+  },
+  "feedback": {
+    "progress": "Bé! Continua.\n{history}"
+  },
+  "outcome": {
+    "win": "Felicitats! Has assolit la paraula objectiu.",
+    "turn_limit": "S'ha assolit el límit de torns. Has assolit `{current}` que comparteix el {pct}% de les seves lletres amb la paraula objectiu `{target}`."
+  }
+}

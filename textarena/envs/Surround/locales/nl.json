@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround-localebestand. Vertaal GEEN sleutels (linkerkant). Vertaal alleen waarden (rechterkant). Houd elke {placeholder} precies zoals het is.",
+  "_slots": {
+    "{num_players}": "Aantal spelers in de wedstrijd",
+    "{width}": "Breedte van het bord in cellen",
+    "{height}": "Hoogte van het bord in cellen",
+    "{player_id}": "Het nummer van de speler (op basis van 0)",
+    "{board}": "Het gerenderde ASCII-raster; houd neutraal, vertaal nooit de tekens",
+    "{reason}": "De gerenderde einde-van-het-spel reden zin",
+    "{groups}": "Neutrale rangschikking gegevens (een lijst van speler-id-groepen, van beste tot slechtste); vertaal niet"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Speler Surround op een {width}x{height} raster.\nU bent speler {player_id}. Geldige zetten: '[up]' '[down]' '[left]' '[right]' of w/s/a/d.\nDoel: overleef iedereen. Sporen zijn dodelijk; muurklappen doden; frontale botsingen doden beide."
+  },
+  "board": {
+    "current": "Huidig bord:\n{board}",
+    "after_moves": "Bord na gelijktijdige zetten:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Speler {player_id} stierf door een ongeldige zet."
+  },
+  "outcome": {
+    "survived_win": "Speler {player_id} overleefde; alle anderen crashten.",
+    "all_crashed": "Alle spelers crashten gelijktijdig.",
+    "outlived": "Speler overleefde alle anderen.",
+    "all_dead": "Alle spelers dood.",
+    "turn_limit": "Maximale aantal beurten bereikt - langste overlevende wint.",
+    "ranking": "{reason} Eindelijke rangschikking groepen (beste→slechtste): {groups}"
+  }
+}

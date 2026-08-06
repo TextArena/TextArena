@@ -1,0 +1,31 @@
+{
+  "_comment": "Nederlandse lokalisatie voor Hangman. Sleutels (links) zijn vast; vertaal alleen de waarden (rechts). Houd elke {placeholder} letterlijk. Houd neutrale tokens onvertaald: de '[L]' / '[LIGHT]' bracket-indelingen, de enkele-lettergok {letter}, de kolomkoppen (C00, C01, ...) en '_' lege plekken binnen {board}.",
+  "_slots": {
+    "{board}": "Neutraal gerenderd bord (C00/C01 kolomkoppen, onthulde letters, '_' lege plekken); vertaal niet",
+    "{tries_left}": "Resterende onjuiste pogingen (geheel getal)",
+    "{guessed}": "Komma-gescheiden lijst van al geraden letters",
+    "{letter}": "De geraden letter of volledige woord (behouden zoals getypt)",
+    "{pct}": "Percentage van correct geraden tekens, opgemaakt tot 2 decimalen",
+    "{target_word}": "Het verborgen doelwoord"
+  },
+  "prompt": {
+    "intro": "U speelt Hangman. Het doel van het spel is om het woord te raden door één letter tegelijk te raden of het hele woord.\nElke kolom heeft een nummer. De cellen die moeten worden gevuld met letters, worden weergegeven door '_'.\n\nEr zijn twee manieren waarop u kunt antwoorden. U kunt één letter tegelijk raden in de indeling '[L]', of u kunt het hele woord raden in de indeling '[LIGHT]'.\nAls de gegeven letter in het woord staat, zal deze worden onthuld in het raster.\nAls het gegeven woord correct is, wint u.\nTerwijl u speelt, zal de geschiedenis van uw keuzes onderaan worden toegevoegd. Gebruik de informatie om het woord te achterhalen en te winnen.\nU heeft 6 onjuiste pogingen voordat het spel eindigt.\n\n"
+  },
+  "board": {
+    "status": "Huidig bord:\n{board}\nU heeft {tries_left} pogingen over.\nGeraden letters: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Ongeldige zet-indeling. U hebt niet gereageerd met een geldige 'letter' of 'woord'.",
+    "already_guessed": "U hebt de letter '{letter}' al eerder geraden."
+  },
+  "message": {
+    "wrong_word": "Uw gok van '{letter}' is niet het doelwoord.",
+    "letter_in": "Uw gok van {letter} staat in het woord",
+    "letter_not_in": "Uw gok van {letter} staat niet in het woord. U heeft {tries_left} levens over."
+  },
+  "outcome": {
+    "win_word": "Gefeliciteerd! U hebt de Hangman-puzzel voltooid.",
+    "win_board": "Gefeliciteerd! U hebt de Hangman-puzzel voltooid.",
+    "out_of_tries": "U bent door uw pogingen heen. U hebt {pct} procent van de tekens correct geraden. Het doelwoord was: {target_word}"
+  }
+}

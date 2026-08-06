@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in Nim.\nUw doel is om het laatste overgebleven object te nemen.\nBij elke beurt, kies precies één stapel en verwijder één of meer objecten ervan.\nGebruik het formaat '[stapel hoeveelheid]', waar stapel de stapelindex is en hoeveelheid het aantal objecten is dat u wilt verwijderen.\nBijvoorbeeld, '[0 3]' verwijdert 3 objecten uit stapel 0."
+  },
+  "state": {
+    "current_pile": "Huidige Stapel:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Geen geldig zetformaat gevonden. Gebruik '[stapel hoeveelheid]'.",
+    "correct_format_wrong_fields": "Speler {player_id}, Ongeldige actie. Kolom {col} is buiten de grenzen.",
+    "out_of_range": "Stapelindex {pile_index} is buiten bereik.",
+    "non_positive": "U moet minstens 1 object verwijderen.",
+    "exceeds_pile": "Kan niet {quantity} verwijderen uit stapel {pile_index} (alleen {pile_count} over)."
+  },
+  "observation": {
+    "removed_from_piles": "Speler {player_id} speelde [{pile_index} {quantity}], waarbij {quantity} object(en) uit stapel {pile_index} werden verwijderd."
+  },
+  "outcome": {
+    "win": "Speler {player_id} nam het laatste object(en)!"
+  }
+}

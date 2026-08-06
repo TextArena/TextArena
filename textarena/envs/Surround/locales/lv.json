@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround lokalizācijas fails. NEtulkojiet atslēgas (kreisā puse). Tulkojiet tikai vērtības (labā puse). Saglabājiet katru {placeholder} tieši tā, kā tas ir.",
+  "_slots": {
+    "{num_players}": "Spēlētāju skaits mačā",
+    "{width}": "Galdiņa platums šūnās",
+    "{height}": "Galdiņa augstums šūnās",
+    "{player_id}": "Spēlētāja numurs (0-bāzēts)",
+    "{board}": "Renderētā ASCII režģis; saglabājiet neitrālu, nekad netulkot tā rakstzīmes",
+    "{reason}": "Renderētā spēles beigu iemesla frāze",
+    "{groups}": "Neitrāli rangi dati (spēlētāju ID grupu saraksts, labākais uz sliktāko); netulkot"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-spēlētāju Surround uz {width}x{height} režģa.\nJūs esat spēlētājs {player_id}. Derīgie gājieni: '[up]' '[down]' '[left]' '[right]' vai w/s/a/d.\nMērķis: pārdzīvot visus pārējos. Pēdas ir nāvējošas; sienas triecieni nogalina; galvu uz galvas sadursmes nogalina abus."
+  },
+  "board": {
+    "current": "Pašreizējais galdiņš:\n{board}",
+    "after_moves": "Galdiņš pēc vienlaicīgiem gājieniem:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Spēlētājs {player_id} nomira nepareiza gājiena dēļ."
+  },
+  "outcome": {
+    "survived_win": "Spēlētājs {player_id} izdzīvoja; visi pārējie sadūrās.",
+    "all_crashed": "Visi spēlētāji sadūrās vienlaicīgi.",
+    "outlived": "Spēlētājs pārdzīvoja visus pārējos.",
+    "all_dead": "Visi spēlētāji miruši.",
+    "turn_limit": "Gājienu limits sasniegts - visilgāk dzīvojušais uzvar.",
+    "ranking": "{reason} Galīgās rangi grupas (labākais→sliktākais): {groups}"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "O xogo comeza. Pala de triunfo: {trump_suit} (carta de triunfo: {trump_str}).",
+    "no_trump_card": "ningunha"
+  },
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} en Whist alemán.\n{phase_info}\nTes {hand_size} cartas.\nXoga unha carta con '[play N]', onde N é a súa posición na túa man (por exemplo '[play 3]').",
+    "phase_learning": "FASE DE APRENDIZAXE: o gañador de cada truco colle a carta boca arriba e o perdedor colle a seguinte carta do mazo. Os trucos gañados nesta fase non contan para a vitoria.",
+    "phase_playing": "FASE DE XOGO: o mazo está esgotado. Cada truco a partir de agora conta para a vitoria."
+  },
+  "next_card": {
+    "playing_phase": "Non hai carta dispoñible - a fase de xogo comezou.",
+    "deck_empty": "O mazo está baleiro - non hai carta dispoñible.",
+    "available": "Carta dispoñible: {card}",
+    "available_trump": "Carta dispoñible: {card} (TRIUNFO)"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movemento incorrecto. Usa '[play N]' para xogar a Nª carta da túa man.",
+    "bad_position": "Esa posición de carta non existe. Tes {hand_size} cartas.",
+    "must_follow_suit": "Debes seguir a pala e xogar unha carta de {lead_suit}.",
+    "invalid_play": "Esa carta non se pode xogar."
+  },
+  "game_action": {
+    "played": "O Xogador {player_id} xogou {card}."
+  },
+  "trick": {
+    "won": "O Xogador {winner_id} gaña o truco con {card}.",
+    "won_learning": "O Xogador {winner_id} gaña o truco con {card} e colle a carta boca arriba."
+  },
+  "phase": {
+    "learning_complete": "O mazo está esgotado. A fase de aprendizaxe rematou - cada truco restante conta para a vitoria."
+  },
+  "draw": {
+    "winner_received": "Gañaches o truco e recibiches {card}.",
+    "loser_received": "Perdechés o truco e colléchés {card} do mazo.",
+    "winner_preview": "A seguinte carta dispoñible é {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Trucos gañados ata agora - Xogador 0: {tricks0}, Xogador 1: {tricks1}",
+    "scores_playing": "Trucos de puntuación - Xogador 0: {tricks0}, Xogador 1: {tricks1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Fase: {phase} ({remaining_cards} cartas restantes no mazo)"
+  },
+  "hand": {
+    "no_cards": "Non hai cartas",
+    "no_cards_in_hand": "Non hai cartas na man",
+    "header": "A túa man:",
+    "trump_indicator": " (TRIUNFO)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Non se xogaron cartas neste truco.",
+    "header": "Truco actual:",
+    "trump_indicator": " (TRIUNFO)",
+    "card_line": "{observation}\n  Xogador {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Xogo non comezado",
+    "header": "=== XOGO DE WHIST ALEMÁN ===",
+    "phase": "{observation}\nFase: {phase}",
+    "trump_suit": "{observation}\nPala de triunfo: {trump_suit}",
+    "trump_card": "{observation}\nCarta de triunfo: {card}",
+    "cards_left": "{observation}\nCartas restantes no mazo: {count}",
+    "next_card": "{observation}\nSeguinte carta para o gañador: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nTruco actual:",
+    "trump_indicator": " (TRIUNFO)",
+    "trick_line": "{observation}\n  Xogador {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nXogador {player_id}: {scoring} trucos de puntuación ({tricks} totais), {hand_size} cartas na man"
+  },
+  "outcome": {
+    "summary": "Fase de aprendizaxe - Xogador 0: {l0}, Xogador 1: {l1}. Fase de xogo - Xogador 0: {p0}, Xogador 1: {p1}. O Xogador {winner_id} gaña con {winner_tricks} trucos de puntuación!"
+  }
+}

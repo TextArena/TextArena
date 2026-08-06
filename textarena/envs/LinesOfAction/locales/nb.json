@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction-lokaliseringsfil. OVERSETT IKKE nøkler (venstre side). Oversett bare verdier (høyre side). Aldri oversett brett-koordinater (a-h, 1-8), brikkebokstaver (O, X), flytteformat-token eller {board}-ASCII-grid.",
+  "_slots": {
+    "{player_id}": "Spillerens nummer, enten 0 eller 1",
+    "{side}": "Spillerens brikkebokstav, enten O eller X",
+    "{other}": "Motstanderens brikkebokstav, enten O eller X",
+    "{board}": "ASCII-gjengivelsen av brettet; behold som det er",
+    "{coord}": "En brett-koordinat som f.eks. b1 eller a3",
+    "{from}": "Kildekoordinaten for et trekk, som f.eks. b1",
+    "{to}": "Destinasjonskoordinaten for et trekk, som f.eks. b3"
+  },
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i spillet LinesOfAction.\nDine brikker er '{side}', motstanderens brikker er '{other}'.\nFlytteformat: `[b1b3]` (fra-koordinat til-koordinat). Et lovlig trekk går horisontalt, vertikalt eller diagonalt et antall ruter lik det totale antallet brikker (hvilken som helst farge) i den linjen. Du kan hoppe over dine egne brikker, men ikke motstanderens brikker; å lande på en motstander fanger den. Vinn når alle dine brikker er 8-nabo-koblet."
+  },
+  "board": {
+    "current_board": "Brett:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatet må være e2e4 (fra- og til-koordinater).",
+    "no_piece": "Ingen {side}-brikke på {coord}.",
+    "identical": "Kilde og destinasjon er identiske.",
+    "not_straight_or_diagonal": "Trekket må være rett eller diagonalt.",
+    "wrong_distance": "Må flytte en avstand lik antallet brikker i linjen.",
+    "enemy_blocks": "Motstanderens brikke blokkerer veien.",
+    "destination_own": "Destinasjonen er opptatt av egen brikke."
+  },
+  "game_action": {
+    "moved": "Spiller {player_id} flyttet {from} -> {to}",
+    "captured_suffix": "Spiller {player_id} flyttet {from} -> {to} og fanget en motstander."
+  },
+  "outcome": {
+    "win": "Alle brikker er koblet.",
+    "draw_no_capture": "60 trekk uten å fange.",
+    "draw_repetition": "Posisjonen gjentas tre ganger."
+  }
+}

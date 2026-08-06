@@ -1,0 +1,28 @@
+{
+  "_comment": "Suomenkielinen lokalisointi Wordle-peliin. Avaimet (vasen puoli) ovat kiinteitä; käännetään vain arvot (oikea puoli). Jätetään kaikki {placeholder}-merkit sellaisinaan, ja pidetään palautteen kirjaimet G/Y/X muuttumattomina (ne ovat pelin kirjainkohtaisia merkkejä).",
+  "_slots": {
+    "{word_length}": "Salasanan pituus (kokonaisluku)",
+    "{num_guesses}": "Sallittujen arvausten määrä (kokonaisluku)",
+    "{word}": "Arvattu sana",
+    "{view}": "Neutraalit kirjaimet + G/Y/X-palaute (älä käänne)",
+    "{guesses_left}": "Jäljellä olevat arvaukset (kokonaisluku)",
+    "{pct}": "Oikein sijoitettujen kirjainten prosentti (kokonaisluku)",
+    "{secret}": "Salasana"
+  },
+  "prompt": {
+    "intro": "Pelaat Wordle-peliä.\nSalainen {word_length}-kirjaiminen sana on valittu. Sinulla on {num_guesses} yritystä arvata se.\nJokaiselle arvaukselle kirjoita sanasi hakasulkeisiin (esim. '[omena]').\nPalaute annetaan jokaiselle kirjaimelle seuraavasti:\n  - G (vihreä): oikea kirjain oikeassa paikassa\n  - Y (keltainen): kirjain on sanassa, mutta väärässä paikassa\n  - X (väärä): kirjain ei ole sanassa\nAnna arvauksesi aloittaaksesi.\n"
+  },
+  "invalid": {
+    "wrong_format": "Yritit lähettää sanan väärässä muodossa. Varmista, että käytät hakasulkeita.",
+    "wrong_length": "Sanasi tulee olla täsmälleen {word_length} kirjainta.",
+    "already_guessed": "Olet jo arvannut sanan '{word}' aikaisemmin. Yritä eri sanaa.",
+    "not_a_word": "'{word}' ei ole kelvollinen sana."
+  },
+  "feedback": {
+    "submitted": "Lähettit sanan [{word}].\nPalaute:\n{view}\nSinulla on {guesses_left} arvausta jäljellä."
+  },
+  "outcome": {
+    "win": "Onnittelut! Arvasit sanan oikein!",
+    "turn_limit": "Vuorojen rajoitus on saavutettu. Et arvannut sanaa, mutta paras arvauksesi vastasi {pct}% kirjaimista oikeissa paikoissa.\nSalainen sana oli: **{secret}**."
+  }
+}

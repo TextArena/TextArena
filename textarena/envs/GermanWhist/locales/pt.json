@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "O jogo começa. Naipe de truques: {trump_suit} (carta de truques: {trump_str}).",
+    "no_trump_card": "nenhuma"
+  },
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id} no Whist Alemão.\n{phase_info}\nVocê tem {hand_size} cartas.\nJogue uma carta com '[play N]', onde N é a posição da carta na sua mão (por exemplo '[play 3]').",
+    "phase_learning": "FASE DE APRENDIZADO: o vencedor de cada truque pega a carta virada para cima e o perdedor compra a próxima carta do baralho. Os truques vencidos nesta fase não contam para a vitória.",
+    "phase_playing": "FASE DE JOGO: o baralho está esgotado. Cada truque a partir de agora conta para a vitória."
+  },
+  "next_card": {
+    "playing_phase": "Nenhuma carta está disponível - a fase de jogo começou.",
+    "deck_empty": "O baralho está vazio - nenhuma carta está disponível.",
+    "available": "Carta disponível: {card}",
+    "available_trump": "Carta disponível: {card} (TRUQUE)"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movimento inválido. Use '[play N]' para jogar a N-ésima carta na sua mão.",
+    "bad_position": "Essa posição de carta não existe. Você tem {hand_size} cartas.",
+    "must_follow_suit": "Você deve seguir o naipe e jogar uma carta de {lead_suit}.",
+    "invalid_play": "Essa carta não pode ser jogada."
+  },
+  "game_action": {
+    "played": "Jogador {player_id} jogou {card}."
+  },
+  "trick": {
+    "won": "Jogador {winner_id} vence o truque com {card}.",
+    "won_learning": "Jogador {winner_id} vence o truque com {card} e pega a carta virada para cima."
+  },
+  "phase": {
+    "learning_complete": "O baralho está esgotado. A fase de aprendizado está terminada - cada truque restante conta para a vitória."
+  },
+  "draw": {
+    "winner_received": "Você venceu o truque e recebeu {card}.",
+    "loser_received": "Você perdeu o truque e comprou {card} do baralho.",
+    "winner_preview": "A próxima carta disponível é {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Truques vencidos até agora - Jogador 0: {tricks0}, Jogador 1: {tricks1}",
+    "scores_playing": "Truques de pontuação - Jogador 0: {tricks0}, Jogador 1: {tricks1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Fase: {phase} ({remaining_cards} cartas restantes no baralho)"
+  },
+  "hand": {
+    "no_cards": "Nenhuma carta",
+    "no_cards_in_hand": "Nenhuma carta na mão",
+    "header": "Sua mão:",
+    "trump_indicator": " (TRUQUE)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Nenhuma carta jogada ainda neste truque.",
+    "header": "Truque atual:",
+    "trump_indicator": " (TRUQUE)",
+    "card_line": "{observation}\n  Jogador {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Jogo não iniciado",
+    "header": "=== JOGO DE WHIST ALEMÃO ===",
+    "phase": "{observation}\nFase: {phase}",
+    "trump_suit": "{observation}\nNaipe de truques: {trump_suit}",
+    "trump_card": "{observation}\nCarta de truques: {card}",
+    "cards_left": "{observation}\nCartas restantes no baralho: {count}",
+    "next_card": "{observation}\nPróxima carta para o vencedor: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nTruque atual:",
+    "trump_indicator": " (TRUQUE)",
+    "trick_line": "{observation}\n  Jogador {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nJogador {player_id}: {scoring} truques de pontuação ({tricks} total), {hand_size} cartas na mão"
+  },
+  "outcome": {
+    "summary": "Fase de aprendizado - Jogador 0: {l0}, Jogador 1: {l1}. Fase de jogo - Jogador 0: {p0}, Jogador 1: {p1}. Jogador {winner_id} vence com {winner_tricks} truques de pontuação!"
+  }
+}

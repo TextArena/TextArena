@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola-lokaliseringsfil. ÖVERSÄTT INTE nycklar (vänster sida). Översätt endast värden (höger sida).",
+  "_slots": {
+    "{player_id}": "Ett spelarnummer, t.ex. 0 eller 1",
+    "{trump_suit}": "Trumffärgsymbolen (♠♥♦♣) - översätt inte",
+    "{trump_card}": "Trumfkortets etikett, t.ex. '7♠' - översätt inte",
+    "{card}": "Ett kortetikett, t.ex. 'A♥' - översätt inte",
+    "{trump_mark}": "Den förrenderade '(TRUMP)'-markören, eller tom",
+    "{max_pos}": "Den högsta lagliga kortpositionen i spelarens hand",
+    "{count}": "Antalet kort en spelare håller",
+    "{pos}": "Ett korts positionnummer i handen",
+    "{points}": "Ett antal poäng (kortvärde eller ackumulerad poäng)",
+    "{hand}": "Den förrenderade, flerradiga handlistan",
+    "{trick}": "Den förrenderade listan över nuvarande trick",
+    "{scores}": "Den förrenderade poänglinjen, eller den slutliga poängblocken per spelare",
+    "{trump_info}": "Den förrenderade trumffärg-/korträkningslinjen",
+    "{winner}": "Spelarnumret som vann trick eller spel",
+    "{tricks}": "Ett antal trick vunna av en spelare",
+    "{deck_count}": "Antalet kort kvar i leken"
+  },
+  "game": {
+    "start": "Briscola-spelet har startat! Trumffärg: {trump_suit} (Trumfkort: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Du spelar Briscola - Spelare {player_id}.\nMål: Vinn trick och samla flest poäng (totalt 120 poäng i leken).\nKortpoäng: A=11, 3=10, K=4, Q=3, J=2, övriga=0\nKortstyrka: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTrumfkort slår icke-trumfkort oavsett styrka.\n\nÅtgärd: '[play X]' där X är positionen (1-{max_pos}) av kortet i din hand\n"
+  },
+  "hand": {
+    "none": "Inga kort",
+    "empty": "Inga kort i handen",
+    "header": "Din hand:",
+    "card_line": "  {pos}. {card} [{points} poäng]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Inga kort spelade ännu i detta trick.",
+    "header": "Nuvarande trick:",
+    "line": "  Spelare {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Spelare {player_id}: {points} poäng",
+    "trump_info": "Trumffärg: {trump_suit}",
+    "trump_info_deck": "Trumffärg: {trump_suit} | Kort kvar i leken: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPoäng: {scores}\n{trump_info}\n\nSpela ett kort med [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Använd [play X] där X är kortpositionen (1, 2, 3, etc.)",
+    "out_of_range": "Ogiltig kortposition. Du har {count} kort (1-{count})"
+  },
+  "action": {
+    "played": "Spelare {player_id} spelade {card}",
+    "trick_win": "Spelare {winner} vinner trick med {card} och får {points} poäng!"
+  },
+  "outcome": {
+    "head": "Spelet är slut! Spelare {winner} vinner med {points} poäng!\n\nSlutliga poäng:\n{scores}",
+    "player_line": "Spelare {player_id}: {points} poäng ({tricks} trick)\n"
+  }
+}

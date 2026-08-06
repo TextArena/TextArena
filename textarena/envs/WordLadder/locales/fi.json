@@ -1,0 +1,34 @@
+{
+  "_comment": "Suomenkielinen lokalisointitiedosto Word Ladder -peliin. ÄLÄ käännä avaimia (vasen puoli). Käännä vain arvot (oikea puoli).",
+  "_slots": {
+    "{player_id}": "Pelaajan numero (kokonaisluku)",
+    "{start_word}": "Lähtösana (pelisana)",
+    "{target_word}": "Kohdesana (pelisana)",
+    "{word}": "Pelaajan äskettäin lähettämä sana (pelisana)",
+    "{current}": "Pelaajan nykyinen sana (pelisana)",
+    "{target}": "Kohdesana (pelisana)",
+    "{target_len}": "Kohdesanan pituus (kokonaisluku)",
+    "{ladder}": "Siirtohistoria ' -> ' -merkillä yhdistettynä (pelisanat)",
+    "{history}": "Muotoiltu historiarivi (jo lokalisoitu, älä käännä)",
+    "{pct}": "Kohdesanan kanssa jaettujen kirjainten prosentti (kokonaisluku)"
+  },
+  "prompt": {
+    "intro": "Olet Pelaaja {player_id}. Tavoitteesi on saavuttaa kohdesana muuttamalla **yhtä kirjainta kerrallaan**.\n- Lähtösana: **{start_word}**\n- Kohdesana: **{target_word}**\nLähetä jokainen siirto hakasuluissa, esim. `[word]`.\nHistoria näkyy alla pelin edetessä. Onnea!\n"
+  },
+  "invalid": {
+    "wrong_format": "Virheellinen muoto. Käytä hakasulkuja sanan ympärillä, esim. `[word]`.",
+    "wrong_length": "`{word}` on väärän pituinen; kohdesana on {target_len} kirjainta.",
+    "not_a_word": "`{word}` ei ole tunnustettu sana.",
+    "not_one_different": "`{word}` ei ole täsmälleen yhden kirjaimen erilainen kuin `{current}`."
+  },
+  "board": {
+    "history": "Sanaportaan historia: {ladder}. Kohdesana: {target}\n"
+  },
+  "feedback": {
+    "progress": "Hyvä! Jatka.\n{history}"
+  },
+  "outcome": {
+    "win": "Onnea! Saavutit kohdesanan.",
+    "turn_limit": "Vuororaja on saavutettu. Saavutit `{current}` -sanalle, joka jakaa {pct}% kirjaimistaan kohdesanan `{target}` kanssa."
+  }
+}

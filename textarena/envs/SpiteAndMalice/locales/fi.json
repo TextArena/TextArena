@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} kahden pelaajan Spite and Malice -pelissä. Tavoitteesi on olla ensimmäinen, joka tyhjentää maksupinoasi.\n\n### Pelin yleiskatsaus:\n- Tavoitteena on tyhjentää maksupinoasi pelaamalla kortteja keskipinoihin.\n- Voit pelata kortteja kolmesta lähteestä:\n  1. **Kädestäsi** (jokainen vuoro alkaa enintään 5 kortilla kädessäsi).\n  2. **Maksupinon päällimmäinen kortti**.\n  3. **Minkä tahansa hävikkikasan päällimmäinen kortti**.\n\n### Pelisäännöt:\n- Voit pelata kortin keskipinoon, jos se on **yksi arvo korkeampi** kuin pinon päällimmäinen kortti (keskipinot alkavat Ässästä ja menevät Kuningattareen asti; Kuningas on villi - se voidaan pelata mille tahansa kortille, mutta se ei muuta arvojärjestystä. Tämä tarkoittaa, että jos Kuningas pelataan 4:n jälkeen, niin se on arvoltaan 5 ja seuraava kortti täytyy olla 6).\n- Jos et voi pelata enää kortteja, sinun täytyy **hävittää kortti** yhteen hävikkikasoihisi vuoron lopettamiseksi.\n- Jos keskipino saavuttaa Kuningattaren, se tyhjennetään automaattisesti.\n- Arvojärjestys on: Ä=1, 2=2, ..., 9=9, J=10, Q=11, K villinä.\n\n### Toimet:\n1. **Nosta**: Vuoron alussa nosta kortteja täyttääksesi kätesi enintään 5 kortilla. Kirjoita **[draw]** aloittaaksesi.\n2. **Pelaakortti**: Pelaaksesi kortin, määritä kortti ja keskipino näin: **[play A♠ 0]** (jossa 'A♠' on kortti ja '0' on keskipinon indeksi).\n3. **Hävitä**: Jos et voi pelata enää kortteja, hävitä kortti kädestäsi hävikkikasoihin vuoron lopettamiseksi. Kirjoita **[discard A♠ 1]** (jossa 'A♠' on kortti ja '1' on hävikkikasan indeksi). Huomaa, että et voi hävittää mitään korttia maksupinosta. Voit hävittää vain kortteja kädestäsi.\n\n"
+  },
+  "board": {
+    "current_board": "Nykyinen pelilauta:\n\n{board}\nSaatavilla olevat siirrot: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Keskipinot ---\n",
+    "pile": "{observation}Pino {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Pelaaja {player_id}:n näkymä ---\n",
+    "payoff": "{observation}Maksupino (päällimmäinen kortti): {top_card}, Maksupinon pituus: {payoff_length}\n",
+    "hand": "{observation}Käsi: {hand}\n",
+    "discard": "{observation}Hävikkikasat: {discard}\n",
+    "empty": "Tyhjä"
+  },
+  "game_message": {
+    "no_cards_left": "Ei ole enää kortteja nostettavaksi. Muista, että voit pelata kortteja näistä lähteistä:\n  1. **Kädestäsi**.\n  2. **Maksupinon päällimmäinen kortti**.\n  3. **Minkä tahansa hävikkikasan päällimmäinen kortti**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Virheellinen siirtomuoto. Pelaaja {player_id} ei vastannut kelvollisella siirrolla hakasulkeissa.",
+    "invalid_play": "Virheellinen peli. Pelaaja {player_id} yritti pelata {card} keskipinoon {index}.",
+    "discard_from_payoff": "Virheellinen hävitys. Pelaaja {player_id} yritti hävittää kortin maksupinosta.",
+    "discard_not_in_hand": "Virheellinen hävitys. Pelaaja {player_id} yritti hävittää korttia, jota ei ole kädessä.",
+    "wrong_move_type": "Virheellinen siirtotyyppi. Pelaaja {player_id} ei vastannut kelvollisella siirtotyypillä."
+  },
+  "game_action": {
+    "you_drew": "Nostit kortteja.",
+    "opponent_drew": "Pelaaja {player_id} nosti kortteja.",
+    "you_played": "Pelit {card} keskipinoon {index}.",
+    "opponent_played": "Pelaaja {player_id} pelasi {card} keskipinoon {index}.",
+    "you_discarded": "Hävitit {card} hävikkikasoihin {index}, mikä tarkoittaa, että olet päättänyt vuorosi. Ei ole enää toimia tällä vuorolla. Pelaaja {next_player_id} pelaa seuraavaksi.",
+    "opponent_discarded": "Pelaaja {player_id} hävitti {card} hävikkikasoihin {index}, mikä tarkoittaa, että hän on päättänyt vuoronsa. Ei ole enää toimia Pelaajalla {player_id} tällä vuorolla. Pelaaja {next_player_id}, pelaat seuraavaksi. Kirjoita toimintasi muodossa [toiminto kortti keskipino]."
+  },
+  "outcome": {
+    "payoff_cleared": "Pelaaja {current_player} on tyhjentänyt maksupinonsa! Pelaaja {current_player} voittaa!",
+    "deadlock_player_0": "Tasapeli saavutettu! Pelaaja 0 voittaa {player_0_payoff} korttia jäljellä Pelaajan 1 {player_1_payoff} korttia vastaan.",
+    "deadlock_player_1": "Tasapeli saavutettu! Pelaaja 1 voittaa {player_1_payoff} korttia jäljellä Pelaajan 0 {player_0_payoff} korttia vastaan.",
+    "deadlock_tie": "Tasapeli saavutettu tasatilanteessa! Molemmilla pelaajilla on {player_0_payoff} korttia jäljellä. Pelaaja {current_player} voittaa oletusarvoisesti."
+  }
+}

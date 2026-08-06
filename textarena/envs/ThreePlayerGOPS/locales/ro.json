@@ -1,0 +1,39 @@
+{
+  "_comment": "Fișier de localizare pentru ThreePlayerGOPS. NU traduceți cheile (partea stângă). Traduceți doar valorile (partea dreaptă).",
+  "_slots": {
+    "{player_id}": "Numărul jucătorului, 0, 1 sau 2",
+    "{round}": "Numărul rundei curente, 1..13",
+    "{prize}": "Eticheta feței cărții de premiu dezvăluită (A, 2..10, J, Q, K) - nu traduceți",
+    "{worth}": "Valoarea totală a premiului, inclusiv orice pot transportat",
+    "{hand}": "Cărțile rămase ale jucătorului, reprezentate ca tokenuri între paranteze pătrate, cum ar fi '[A]' '[2]' - nu traduceți",
+    "{bids}": "Lista neutră, separată prin virgule, a cărților jucate, cum ar fi 'P0:10, P1:J, P2:Q' - nu traduceți",
+    "{winner}": "Numărul jucătorului care a câștigat runda",
+    "{pot}": "Valoarea potului acordată sau transportată în această rundă",
+    "{scoreline}": "Scorul curent, neutră, ca 'P0:0  P1:0  P2:11' - nu traduceți",
+    "{pid}": "Numărul jucătorului care a fost eliminat",
+    "{scores}": "Scorurile finale ca o mapare brută a numărului jucătorului la scor - nu traduceți"
+  },
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} în Three-Player GOPS.\n- Dețineți cele 13 cărți A-K (fiecare exact o dată).\n- În fiecare rundă, un premiu este dezvăluit. Trimiteți O SINGURĂ carte, cum ar fi `[Q]`, `[10]`, `[2]` …\n- Cea mai mare carte câștigă premiul (+ orice pot transportat). Egalitatea rulează premiul în următoarea rundă.\n- După 13 runde, cel mai mare total câștigă. Mișcări nevalide = eliminare."
+  },
+  "round": {
+    "header": "### Runda {round}/13 - Premiu: {prize} (valoare {worth})",
+    "hand": "Mâna dvs. rămasă: {hand}"
+  },
+  "reveal": {
+    "win": "Licitări » {bids} - Jucătorul {winner} câștigă {pot}.",
+    "tie": "Licitări » {bids} - egalitate, potul este acum {pot}.",
+    "scores": "Scoruri → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "acțiunea necesită o carte între paranteze pătrate, cum ar fi '[Q]'",
+    "bad_card": "cartea a fost deja folosită sau este invalidă"
+  },
+  "elimination": {
+    "player": "Jucătorul {pid} a fost eliminat după mișcări nevalide repetate."
+  },
+  "outcome": {
+    "auto_win": "Doi jucători eliminați - câștig automat.",
+    "final": "Scoruri finale: {scores}"
+  }
+}

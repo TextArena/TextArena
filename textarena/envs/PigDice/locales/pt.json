@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id} jogando um jogo de Dados do Porco.\n\nRegras:\n- Na sua vez, você pode escolher '[roll]' ou '[hold]'\n- Rolar um 2-6: Adicionar ao total da sua vez\n- Rolar um 1: Perder o total da sua vez e terminar a vez\n- Segurar: Adicionar o total da sua vez à sua pontuação e terminar a vez\n- O primeiro a alcançar {winning_score} pontos vence\n\nQuando for sua vez, você verá as pontuações atuais e o total da sua vez.\nResponda com '[roll]' para rolar o dado ou '[hold]' para guardar seus pontos."
+  },
+  "invalid_move": {
+    "invalid_action": "Formato de ação inválido. Use '[roll]' ou '[hold]'."
+  },
+  "actions": {
+    "player_busted": "O Jogador {player_id} quebrou, perdendo {turn_total} pontos!",
+    "player_hold": "O Jogador {player_id} segura e guarda {turn_total} pontos."
+  },
+  "board": {
+    "player": "Jogador 0: '{score_0}'; Jogador 1: '{score_1}'",
+    "current_total_scores": "Pontuações Totais Atuais: {scores}\nO total da sua vez atual é {turn_total}.",
+    "roll_history": "{observation}\nHistórico de rolagens para esta vez: {roll_history}",
+    "first_roll": "{observation}\nEsta é a primeira rolagem da sua vez.",
+    "available_actions": "{observation}\nAções disponíveis: '[roll]' ou '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "O Jogador {winner_id} venceu por ter uma pontuação mais alta no limite de vezes ({scores})",
+    "winner_by_score": "O Jogador {winner_id} venceu ao alcançar a pontuação alvo de {winning_score}!",
+    "draw": "O limite de vezes foi alcançado e todos os jogadores têm a mesma pontuação: {scores}"
+  }
+}

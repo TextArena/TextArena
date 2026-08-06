@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Jucați jocul de numere Countdown!\nScop: Combinați numerele folosind +, -, *, / pentru a atinge ținta.\nFormatul acțiunii: [i j op] unde i, j sunt indici și op este operația.\nExemplu: [0 2 *] înmulțește numărul de la indicele 0 cu numărul de la indicele 2.\nDivizia trebuie să rezulte în numere întregi."
+  },
+  "board": {
+    "header": "ȚINTĂ: {target}\n\nNumere disponibile:\n{numbers}",
+    "best": "{observation}\n\nCel mai bun până acum: {best_value} (distanță: {distance})\nCea mai bună expresie: {best_expression}",
+    "history": "{observation}\n\nIstoricul mutărilor:\n{moves}",
+    "progress": "{observation}\nScorul progresului curent: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de acțiune invalid. Folosiți `[i j op]` unde i, j sunt indici și op este +, -, *, /",
+    "invalid_indices": "Indici invalidi. Trebuie să fie diferiți și în intervalul 0-{max_index}",
+    "invalid_operation": "Operație invalidă (împărțire la zero sau rezultat neîntreg)"
+  },
+  "outcome": {
+    "win": "Perfect! Ați găsit ținta exactă: {target}",
+    "no_moves": "Nu mai sunt mutări. Cel mai bun rezultat: {best_value} (țintă: {target})",
+    "turn_limit": "Limita de ture a fost atinsă. Cel mai bun rezultat: {best_value} (țintă: {target})"
+  }
+}

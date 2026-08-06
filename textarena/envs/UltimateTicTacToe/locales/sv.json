@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Du är spelare {player_id} i **Ultimate Tic Tac Toe**.\nAnge ditt drag som **[macro  micro]** (två siffror 0-8):\n• *macro*  = vilket minibräde du spelar i\n• *micro* = vilken ruta i det minibrädet\nExempel `[7 8]` ➜ placera din markering i minibräde 7, ruta 8, och\nfå din motståndare att spela i minibräde 8 nästa gång.\n\nDu är `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Aktuellt bräde:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Draget måste vara i formatet [macro micro] med siffror 0-8.",
+    "out_of_range": "Index måste var och en vara mellan 0 och 8.",
+    "index_out_of_range": "Minibrädet, raden eller kolumnen är utanför området.",
+    "cell_occupied": "Rutan är redan upptagen.",
+    "wrong_micro_board": "Spelaren måste spela i nästa minibräde.",
+    "micro_board_won": "Minibrädet är redan vunnet."
+  },
+  "next_board": {
+    "any": "valfritt minibräde",
+    "specific": "minibräde {nxt}"
+  },
+  "game_action": {
+    "played": "Spelare {player_id} spelade i minibräde {macro_idx}, ruta {micro_idx} (rad {row}, kolumn {col}). Spelare {opponent_id} måste nu spela i {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Spelare {player_id} vinner Ultimate Tic Tac Toe!",
+    "draw": "Spelet är oavgjort!"
+  }
+}

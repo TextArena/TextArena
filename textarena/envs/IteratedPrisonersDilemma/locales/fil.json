@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa isang Paulit-ulit na Dilema ng Bilanggo na sumasaklaw sa {num_rounds} rounds.\n\nIstruktura ng Laro:\n- Bago ang bawat desisyon ay may {total_conversation_rounds} pagkakataon kang makipag-usap nang malaya.\n- Pagkatapos nito, kapwa manlalaro ay sabay-sabay na pumili kung makikipagtulungan o hindi.\n\nMatrix ng Bayad (nakapirmi sa bawat round):\n- Kapwa Makikipagtulungan ➜ bawat {cooperate_reward}\n- Kapwa Hindi Makikipagtulungan ➜ bawat {mutual_defect_reward}\n- Isa ay Hindi Makikipagtulungan, isa ay Makikipagtulungan ➜ Hindi Makikipagtulungan {defect_reward}, Makikipagtulungan {sucker_reward}\n\nPaano Maglaro:\n- Sa panahon ng pag-uusap: itype ang anumang teksto na nais mo.\n- Sa panahon ng pagpapasya: isama ang '[Cooperate]' o '[Defect]' (hindi sensitibo sa kaso). Maaari kang magdagdag ng ekstrang teksto bago/pagkatapos ng token."
+  },
+  "phases": {
+    "conversation_finished": "Tapos na ang pag-uusap para sa round {round}. Mangyaring sumagot ng '[Cooperate]' o '[Defect]' sa loob ng \\boxed{{}}.",
+    "starting_round": "--- Nagsisimula ang Round {round} ---",
+    "round_summary": "Mga resulta ng Round {round}:\n{outcome}\nAng Player 0 ay nakakuha ng {r0} (kabuuang {score_0}), ang Player 1 ay nakakuha ng {r1} (kabuuang {score_1})."
+  },
+  "outcome": {
+    "winner": "Ang Player {winner} ay nanalo {win_score} - {lose_score}.",
+    "draw": "Tabla! Parehong manlalaro ay nakakuha ng {s0}.",
+    "round_both_cooperate": "Kapwa manlalaro ay nakipagtulungan.",
+    "round_both_defect": "Kapwa manlalaro ay hindi nakipagtulungan.",
+    "round_p0_cooperates_p1_defects": "Ang Player 0 ay nakipagtulungan, ang Player 1 ay hindi nakipagtulungan.",
+    "round_p0_defects_p1_cooperates": "Ang Player 0 ay hindi nakipagtulungan, ang Player 1 ay nakipagtulungan."
+  }
+}

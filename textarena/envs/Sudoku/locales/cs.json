@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id}. Hrajete Sudoku.\nZde je aktuální stav Sudoku mřížky. Každý řádek je očíslován od 1 do 9 a každá sloupec je také očíslován od 1 do 9.\nPrázdné buňky jsou reprezentovány tečkou '.', a předem vyplněné buňky obsahují číslice od 1 do 9.\n\nAktuální Sudoku mřížka:\nVaším cílem je vyplnit prázdné buňky v 9x9 mřížce číslicemi od 1 do 9 tak, aby:\n1. Každý řádek obsahoval všechny číslice od 1 do 9 bez opakování.\n2. Každá sloupec obsahovala všechny číslice od 1 do 9 bez opakování.\n3. Každá z devíti 3x3 podmřížek obsahovala všechny číslice od 1 do 9 bez opakování.\n\nPravidla a instrukce:\n1. **Nepřepisujte** počáteční čísla poskytnutá v mřížce.\n2. **Vyplňte pouze** prázdné buňky reprezentované tečkou '.'.\n3. Můžete odpovídat jakýmkoli způsobem, ale zajistěte, aby vaše odpověď obsahovala formát '[řádek sloupec číslo]'.\n4. **Zajistěte**, aby váš tah neporušoval pravidla Sudoku. Neplatné tahy budou mít za následek penalizace.\nPříklady:\n- **Platný tah**:\n  - Výňatek mřížky před tahem:\n  \n  - Tah: `[5 3 7]`\n  - Vysvětlivka: Umístění 7 na řádek 5, sloupec 3 neporušuje žádná pravidla Sudoku.\n\n- **Neplatný tah** (přepisování předem vyplněné buňky):\n  - Výňatek mřížky před tahem:\n  \n  - Tah: `[1 1 9]`\n  - Vysvětlivka: Buňka (1,1) je již vyplněna číslem 5. Nemůžete ji přepsat.\n\n- **Neplatný tah** (porušování pravidel Sudoku):\n  - Výňatek mřížky před tahem:\n  \n  - Tah: `[1 3 5]`\n  - Vysvětlivka: Umístění 5 na řádek 1, sloupec 3 porušuje pravidlo, protože 5 již existuje na řádku 1.\n\nHistorie vašich tahů a myšlenek bude přidána, jak budete hrát více kol. Použijte historii vašich tahů k zlepšení svého rozhodování tím, že se vyhnete tahům, které jste již zkoušeli. Hodně štěstí!\n\n"
+  },
+  "board": {
+    "game_board": "Herní deska:\n{board}",
+    "board_state": "Stav desky: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát tahu. Hráč {player_id} neodpověděl platným 'řádek sloupec číslo'.",
+    "out_of_bounds": "Neplatný tah. Hráč {player_id} se pokusil umístit {num} na ({row}, {col}), což je mimo hranice.",
+    "overwrite": "Neplatný tah. Hráč {player_id} se pokusil přepsat předem vyplněnou buňku ({row}, {col}).",
+    "violates_rules": "Neplatný tah. Hráč {player_id} se pokusil umístit {num} na ({row}, {col}), což porušuje pravidla Sudoku."
+  },
+  "outcome": {
+    "win": "Gratulujeme! Hráč {player_id} dokončil Sudoku puzzle.",
+    "turn_limit": "Byl dosažen limit tahů. Správně jste vyplnili {percent}% prázdných buněk."
+  }
+}

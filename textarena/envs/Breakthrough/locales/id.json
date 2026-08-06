@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Anda bermain sebagai {color} dalam permainan Breakthrough. Anda bergerak {direction} pada papan berukuran {board_size}x{board_size}.\nDalam giliran Anda, Anda dapat memindahkan satu buah catur satu langkah ke depan atau diagonal ke depan.\nSebuah catur hanya dapat bergerak diagonal jika ada catur lawan di sana, dan hanya dapat memasuki kotak yang sudah ditempati dalam langkah diagonal.\nKetika memasuki kotak dengan catur lawan, Anda menangkapnya dan catur lawan dihilangkan secara permanen dari papan.\nGunakan notasi aljabar seperti dalam tanda kurung, misalnya [a2a3] untuk memindahkan dari a2 ke a3.\n* 'a' sesuai dengan kolom paling kiri, '1' adalah baris paling bawah (dari perspektif Putih).\n* Baris rumah Hitam adalah baris paling atas (baris 8 untuk papan 8x8). Baris rumah Putih adalah baris paling bawah (baris 1 untuk papan 8x8).\nPemain pertama yang mencapai baris rumah lawan menang. Jika semua catur Anda tertangkap, Anda kalah."
+  },
+  "invalid_move": {
+    "wrong_format": "Harap gunakan notasi aljabar dalam tanda kurung seperti [a2a3].",
+    "out_of_bounds": "Gerakan keluar dari batas papan.",
+    "illegal": "Gerakan tersebut tidak mengikuti aturan Breakthrough atau bukan catur Anda."
+  },
+  "game_action": {
+    "moved": "Pemain {player_id} memindahkan {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Putih mencapai baris rumah Hitam.",
+    "black_reached": "Hitam mencapai baris rumah Putih.",
+    "white_captured": "Semua catur Putih tertangkap.",
+    "black_captured": "Semua catur Hitam tertangkap.",
+    "no_moves": "Pemain {player_id} tidak memiliki gerakan lagi."
+  }
+}

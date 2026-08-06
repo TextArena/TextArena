@@ -1,0 +1,55 @@
+{
+  "_comment": "Käyttäjälle näkyvät merkkijonot Liar's Dice -peliin. Hakasulkeiset toimintotunnukset ('[Bid: X, Y]', '[Call]'), pelaajien indeksit, nopan arvot, määrät ja laskurit ovat neutraaleja paikkoja ja niitä ei saa koskaan kääntää.",
+  "_slots": {
+    "player_id": "pelaajan indeksi (kokonaisluku)",
+    "num_players": "pelaajien määrä pelissä (kokonaisluku)",
+    "dice_summary": "esirenderöity '; '-liitetty lista pelaajien jäljellä olevista nopista",
+    "your_dice": "esirenderöity pilkulla erotettu lista tämän pelaajan nopan arvoista",
+    "p": "pelaajan indeksi (kokonaisluku)",
+    "d": "jäljellä olevien noppien määrä kyseisellä pelaajalla (kokonaisluku)",
+    "current_player_id": "pelaajan indeksi, joka kutsui (kokonaisluku)",
+    "face_value": "nopan arvo, jota lasketaan (1-6)",
+    "count": "todellinen määrä vastaavia noppien arvoja (kokonaisluku)",
+    "quantity": "tarjousmäärä (kokonaisluku)",
+    "loser_id": "pelaajan indeksi, joka menettää nopin (kokonaisluku)",
+    "new_quantity": "juuri lähetetty tarjousmäärä (kokonaisluku)",
+    "current_quantity": "nykyinen tarjousmäärä (kokonaisluku)",
+    "new_face_value": "juuri lähetetty nopan arvo (kokonaisluku)",
+    "current_face_value": "nykyinen nopan arvo (kokonaisluku)",
+    "action": "pelaajan lähettämä toimintomerkkijono",
+    "reason": "sisäkkäinen tarjoushylkäyksen syy",
+    "winner": "pelaajan indeksi, joka voittaa (kokonaisluku)",
+    "final_ranking": "lista pelaajien indekseistä ensimmäisen eliminoidusta voittajaan"
+  },
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} {num_players}-pelaajan Liar's Dice -pelissä.\nSäännöt:\n- Vuorollasi voit joko:\n  1) Tehdä uuden tarjouksen korkeamman määrän tai korkeamman nopan arvon (tai molemmat) kuin nykyinen tarjous; esim. '[Bid: 3, 4]',\n  2) Kutsua viimeisen tarjouksen kirjoittamalla '[Call]'.\n\nJos kutsut:\n  - Jos todellinen määrä kyseistä nopan arvoa kaikkien noppien keskuudessa on vähemmän kuin tarjous, viimeinen tarjoaja menettää yhden nopin.\n  - Muussa tapauksessa kutsuja menettää yhden nopin.\nPelaaja, joka saavuttaa 0 noppien määrän, eliminoidaan. Viimeinen jäljellä oleva pelaaja voittaa."
+  },
+  "board": {
+    "per_player": "\tPelaaja {p}: {d}",
+    "new_round": "\nUusi kierros - Jäljellä olevat nopit: {dice_summary}\nNykyiset nopit ovat: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Pelaaja {current_player_id} kutsuu! Todellinen määrä nopan arvoa {face_value} on {count}, joka on VÄHEMMÄN kuin {quantity}.\nPelaaja {loser_id} (viimeinen tarjoaja) menettää yhden nopin.",
+    "caller_loses": "Pelaaja {current_player_id} kutsuu! Todellinen määrä nopan arvoa {face_value} on {count}, joka on >= {quantity}.\nPelaaja {loser_id} (kutsuja) menettää yhden nopin."
+  },
+  "action": {
+    "bid_announce": "Pelaaja {player_id} tarjoaa {quantity} nopan arvoa {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Kutsu tehtiin ilman edellistä tarjousta.",
+    "invalid_bid": "Virheellinen tarjous: {reason}",
+    "not_recognized": "Toimintoa ei tunnistettu joko kelvolliseksi '[Bid: X, Y]' tai '[Call]'. Lähetetty toiminto: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Uusi määrä {new_quantity} on alempi kuin nykyinen {current_quantity}.",
+    "face_lower": "Uusi nopan arvo {new_face_value} on alempi kuin nykyinen {current_face_value}.",
+    "identical": "Tarjous on identtinen nykyisen tarjouksen kanssa.",
+    "face_range": "Nopan arvon on oltava välillä 1 ja 6."
+  },
+  "message": {
+    "eliminated_invalid": "Pelaaja {player_id} eliminoidaan virheellisen siirron vuoksi."
+  },
+  "outcome": {
+    "win": "Pelaaja {winner} voittaa! Lopullinen sijoitus: {final_ranking}"
+  }
+}

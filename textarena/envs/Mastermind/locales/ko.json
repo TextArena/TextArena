@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "마스터마인드를 하고 있습니다.\n{code_length}자리의 코드를 찾아야 하며, 각 자리는 1에서 {num_numbers} 사이의 숫자로, {repeats}입니다.\n답변 시, 다음 형식으로 추측을 제출할 수 있습니다: '[2 1 4 5]'.\n각 추측 후, 검은색과 흰색 핀 형태의 피드백을 받게 됩니다.\n검은색 핀은 올바른 위치에 있는 올바른 숫자를, 흰색 핀은 올바른 숫자지만 잘못된 위치를 나타냅니다.\n코드를 추측하기 위해 {max_turns}번의 기회가 있습니다.\n",
+    "with_repeats": "중복 가능",
+    "no_duplicates": "중복 없음"
+  },
+  "invalid_move": {
+    "wrong_format": "제출한 답변이 대괄호로 감싸진 공백으로 구분된 숫자 목록이 아닙니다.",
+    "not_integers": "모든 항목은 유효한 정수여야 합니다.",
+    "wrong_length": "추측은 정확히 {code_length}개의 숫자를 포함해야 합니다.",
+    "out_of_range": "모든 숫자는 1과 {num_numbers} 사이여야 합니다.",
+    "duplicates_not_allowed": "중복 숫자는 허용되지 않습니다.",
+    "repeated_guess": "이미 {guess}를 추측했습니다. 다른 추측을 시도해 주세요."
+  },
+  "game_action": {
+    "feedback": "제출 [{guess}]. 피드백: {black_pegs}개의 검은색 핀, {white_pegs}개의 흰색 핀."
+  },
+  "outcome": {
+    "win": "코드를 해독하여 {code_length}개 중 {black_pegs}개의 핀을 올바르게 맞추었습니다.",
+    "turn_limit": "턴 제한에 도달했습니다. {percent} 퍼센트의 숫자를 올바르게 추측했습니다."
+  }
+}

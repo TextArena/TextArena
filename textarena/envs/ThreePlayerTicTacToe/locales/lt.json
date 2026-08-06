@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe lokalės failas. NERVERSIKITE raktažodžių (kairėje pusėje). Vertėkite tik reikšmes (dešinėje pusėje). Palikite kiekvieną {placeholder} lygiai taip pat.",
+  "_slots": {
+    "{player_id}": "Žaidėjo numeris, pvz., 0, 1 ar 2",
+    "{symbol}": "Žaidėjo ženklas, vienas iš A, B ar C",
+    "{cell}": "Lentos langelio numeris",
+    "{max_cell}": "Aukščiausias galiojantis langelio numeris (lentos_dydis^2 - 1)",
+    "{row}": "Lentos eilutės indeksas, kuriame padėtas ženklas",
+    "{col}": "Lentos stulpelio indeksas, kuriame padėtas ženklas",
+    "{board}": "Atvaizduota ASCII lenta (neneversti)",
+    "{moves}": "Kableliais atskirtas sąrašas galimų ėjimo ženklų, pvz., '[4]' (neneversti)"
+  },
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} trijų žaidėjų Tic Tac Toe žaidime.\nJūsų simbolis yra '{symbol}'.\nJūs paeiliui dedate savo simbolį ant 5x5 lentos, kad sudarytumėte keturių ženklų liniją.\nLinijos gali būti horizontalios, vertikalios arba įstrižos.\nPateikite savo ėjimą naudodami formatą '[4]', kad pažymėtumėte langelį 4."
+  },
+  "board": {
+    "current_board": "Dabartinė lenta:\n\n{board}\n\nGalimi ėjimai: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neteisingas ėjimo formatas. Naudokite '[cell]', kur cell yra 0-{max_cell}.",
+    "out_of_range": "Neteisingas langelio numeris: {cell}. Turi būti tarp 0 ir {max_cell}.",
+    "already_occupied": "Langelis {cell} jau yra užimtas.",
+    "made_invalid": "Žaidėjas {player_id} padarė neteisingą ėjimą"
+  },
+  "game_action": {
+    "placed": "Žaidėjas {player_id} deda savo simbolį ({symbol}) į lauką ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Žaidėjas {player_id} ({symbol}) laimi!",
+    "draw": "Žaidimas baigiasi lygiosiomis!"
+  }
+}

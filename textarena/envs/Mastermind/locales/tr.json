@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Mastermind oynuyorsunuz.\n{code_length} basamak uzunluğunda, her basamak 1 ile {num_numbers} arasında olan kodu bulmanız gerekiyor, {repeats}.\nCevabınızda, tahmininizi aşağıdaki formatta gönderebilirsiniz: '[2 1 4 5]'.\nHer tahminin ardından, siyah ve beyaz çubuklar şeklinde geri bildirim alacaksınız.\nSiyah bir çubuk doğru basamakta doğru bir rakamı, beyaz bir çubuk ise yanlış basamakta doğru bir rakamı gösterir.\nKodu tahmin etmek için {max_turns} turunuz var.\n",
+    "with_repeats": "tekrarlar olabilir",
+    "no_duplicates": "tekrar yok"
+  },
+  "invalid_move": {
+    "wrong_format": "Kare parantez içinde boşlukla ayrılmış bir sayı listesiyle cevap vermediniz.",
+    "not_integers": "Tüm girişler geçerli tamsayı olmalıdır.",
+    "wrong_length": "Tahmin {code_length} adet sayı içermelidir.",
+    "out_of_range": "Tüm sayılar 1 ile {num_numbers} arasında olmalıdır.",
+    "duplicates_not_allowed": "Aynı sayı birden fazla kez kullanılamaz.",
+    "repeated_guess": "Zaten {guess} tahmininde bulundunuz. Lütfen farklı bir tahmin deneyin."
+  },
+  "game_action": {
+    "feedback": "[{guess}] gönderildi. Geri bildirim: {black_pegs} siyah çubuk(lar), {white_pegs} beyaz çubuk(lar)."
+  },
+  "outcome": {
+    "win": "Kodu çözdünüz, {code_length} çubuktan {black_pegs} tanesini doğru olarak çözerek",
+    "turn_limit": "Tur sınırına ulaşıldı. Sayıların {percent} yüzdesini doğru olarak tahmin ettiniz."
+  }
+}

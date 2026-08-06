@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id} em um jogo de HighSociety (versão para 2 jogadores).\nFluxo do jogo:  Dez cartas de prestígio são leiloadas uma após a outra.\nLicitação:    Em cada leilão, escolha secretamente uma carta de dinheiro de 1 a 11 e revele.\n            • O lance mais alto vence a carta de prestígio e descarta essa carta de dinheiro.\n            • O lance mais baixo mantém sua carta de dinheiro.\n            • Empate -> ambos os lances são devolvidos e a mesma carta de prestígio é re-leiloada.\nPontuação:    Após todos os dez leilões, adicione **dinheiro restante + pontos de prestígio**.\n            O *patrimônio líquido* mais alto vence (empate exato -> empate).\n\n**Sintaxe de ação**  →  lance uma carta única como '[7]' ou '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Leilão {round}/10  |  Carta de prestígio: {prize}"
+  },
+  "board": {
+    "money_cards": "Suas cartas de dinheiro restantes: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Deve incluir exatamente uma carta de dinheiro [X].",
+    "card_not_held": "Você não tem mais essa carta de dinheiro."
+  },
+  "message": {
+    "tie": "Empate - lances devolvidos. Re-lance!",
+    "auction_result": "P0 lance {bid0}, P1 lance {bid1}. Jogador {winner} vence prestígio {prize} (total {total})."
+  },
+  "outcome": {
+    "p0_wins": "Patrimônio líquido {nw0} > {nw1}",
+    "p1_wins": "Patrimônio líquido {nw1} > {nw0}",
+    "draw": "Ambos patrimônios líquidos {nw0} – empate exato."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} divu spēlētāju Spite and Malice spēlē. Jūsu mērķis ir būt pirmais, kas iztukšo savu atlīdzības kaudzi.\n\n### Spēles pārskats:\n- Mērķis ir iztukšot savu atlīdzības kaudzi, spēlējot kārtis uz centrālajām kaudzēm.\n- Jūs varat spēlēt kārtis no trim avotiem:\n  1. Jūsu **rokā** (jūs sākat katru gājienu ar līdz 5 kārtīm rokā).\n  2. **Augšējā kārtī no jūsu atlīdzības kaudzes**.\n  3. **Augšējā kārtī no jebkuras no jūsu atkritumu kaudzēm**.\n\n### Spēles noteikumi:\n- Jūs varat spēlēt kārti uz centrālās kaudzes, ja tā ir **par vienu rangu augstāka** nekā augšējā kārtī uz tās kaudzes (centrālās kaudzes sākas ar Āsi un iet līdz Dāmai; Karaļi ir jokera kārtis - tie var tikt spēlēti uz jebkuras kārtis, bet tie neizmaina rangu secību. Tas nozīmē, ja Karalis tiek izmantots pēc 4, tad tas Karalis ir 5. ranga un nākamā kārtī jābūt 6).\n- Ja jūs nevarat spēlēt vairāk kārtis, jūs jā**atmet kārti** uz vienas no jūsu atkritumu kaudzēm, lai beigtu savu gājienu.\n- Ja centrālā kaudze sasniedz Dāmu, tā tiks automātiski iztukšota.\n- Rangu secība ir: Ā=1, 2=2, ..., 9=9, J=10, D=11, K kā jokera kārtis.\n\n### Darbības:\n1. **Izvilkt kārtis**: Gājiena sākumā izvilkt kārtis, lai aizpildītu savu roku līdz 5 kārtīm. Ievadiet **[draw]**, lai sāktu.\n2. **Spēlēt kārti**: Lai spēlētu kārti, norādiet kārti un centrālo kaudzi šādi: **[play A♠ 0]** (kur 'A♠' ir kārtis un '0' ir centrālās kaudzes indekss).\n3. **Atmest kārti**: Ja jūs nevarat spēlēt vairāk kārtis, atmest kārti no savas rokas uz atkritumu kaudzi, lai beigtu savu gājienu. Ievadiet **[discard A♠ 1]** (kur 'A♠' ir kārtis un '1' ir atkritumu kaudzes indekss). Ņemiet vērā, ka jūs nevarat atmest kārti no atlīdzības kaudzes. Jūs varat atmest tikai kārtis no savas rokas.\n\n"
+  },
+  "board": {
+    "current_board": "Pašreizējais galdiņš:\n\n{board}\nPieejamie gājieni: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Centrālās kaudzes ---\n",
+    "pile": "{observation}Kaudze {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Spēlētāja {player_id} skats ---\n",
+    "payoff": "{observation}Atlīdzības kaudze (Augšējā kārtis): {top_card}, Atlīdzības kaudzes garums: {payoff_length}\n",
+    "hand": "{observation}Roka: {hand}\n",
+    "discard": "{observation}Atkritumu kaudzes: {discard}\n",
+    "empty": "Tukšs"
+  },
+  "game_message": {
+    "no_cards_left": "Nav vairāk kārtis, ko izvilkt. Atcerieties, ka jūs varat spēlēt kārtis no šiem avotiem:\n  1. Jūsu **rokā**.\n  2. **Augšējā kārtī no jūsu atlīdzības kaudzes**.\n  3. **Augšējā kārtī no jebkuras no jūsu atkritumu kaudzēm**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Nepareizs gājiena formāts. Spēlētājs {player_id} neatbildēja ar derīgu gājienu kvadrātiekavās.",
+    "invalid_play": "Nepareiza spēle. Spēlētājs {player_id} mēģināja spēlēt {card} uz centrālās kaudzes {index}.",
+    "discard_from_payoff": "Nepareizs atmests. Spēlētājs {player_id} mēģināja atmest kārti no atlīdzības kaudzes.",
+    "discard_not_in_hand": "Nepareizs atmests. Spēlētājs {player_id} mēģināja atmest kārti, kas nav viņa rokā.",
+    "wrong_move_type": "Nepareizs gājiena tips. Spēlētājs {player_id} neatbildēja ar derīgu gājiena tipu."
+  },
+  "game_action": {
+    "you_drew": "Jūs izvilktāt kārtis.",
+    "opponent_drew": "Spēlētājs {player_id} izvilka kārtis.",
+    "you_played": "Jūs spēlējāt {card} uz centrālās kaudzes {index}.",
+    "opponent_played": "Spēlētājs {player_id} spēlēja {card} uz centrālās kaudzes {index}.",
+    "you_discarded": "Jūs atmestāt {card} uz atkritumu kaudzes {index}, kas arī nozīmē, ka jūs beidzāt savu gājienu. Nav turpmāku jūsu darbību šajā gājienā. Spēlētājs {next_player_id} dosies nākamais.",
+    "opponent_discarded": "Spēlētājs {player_id} atmesta {card} uz atkritumu kaudzes {index}, kas arī nozīmē, ka viņi beidza savu gājienu. Nav turpmāku Spēlētāja {player_id} darbību šajā gājienā. Spēlētājs {next_player_id}, jūs dosies nākamais. Lūdzu, ievadiet savu darbību formātā [darbība kārtis centrālās kaudzes indekss]."
+  },
+  "outcome": {
+    "payoff_cleared": "Spēlētājs {current_player} ir pabeidzis savu atlīdzības kaudzi! Spēlētājs {current_player} uzvar!",
+    "deadlock_player_0": "Iestājies strupceļš! Spēlētājs 0 uzvar ar {player_0_payoff} kārtīm atlikušām pret Spēlētāja 1 {player_1_payoff} kārtīm.",
+    "deadlock_player_1": "Iestājies strupceļš! Spēlētājs 1 uzvar ar {player_1_payoff} kārtīm atlikušām pret Spēlētāja 0 {player_0_payoff} kārtīm.",
+    "deadlock_tie": "Iestājies strupceļš ar neizšķirtu! Abi spēlētāji ir ar {player_0_payoff} kārtīm atlikušām. Spēlētājs {current_player} uzvar pēc noklusējuma."
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Datoteka s lokalizacijom za Golf (kartaška igra). NE PREVODITE ključeve (lijeva strana). Samo prevodite vrijednosti (desna strana).",
+  "_slots": {
+    "{player_id}": "Broj igrača, npr. 0 ili 1",
+    "{pid}": "Broj igrača, npr. 0 ili 1",
+    "{winner}": "Broj igrača s najnižim rezultatom",
+    "{score}": "Numerički ukupni rezultat",
+    "{card}": "Oznaka karte kao što je A♠, 10♥, K♦ ili Q♣",
+    "{new}": "Oznaka karte koja je stavljena u mrežu",
+    "{old}": "Oznaka karte koja je uklonjena iz mreže",
+    "{row}": "Broj reda",
+    "{col}": "Broj stupca",
+    "{max_row}": "Najveći valjani broj reda",
+    "{max_col}": "Najveći valjani broj stupca",
+    "{reason}": "Unaprijed prikazana fraza koja opisuje zašto je počeo posljednji krug",
+    "{n}": "Broj reda prikazan na početku retka mreže",
+    "{cards}": "Unaprijed prikazane, osjetljive na raspored ćelije jednog retka mreže",
+    "{hand}": "Unaprijed prikazani blok mreže igrača",
+    "{discard}": "Oznaka karte na vrhu otpadne hrpe ili riječ za 'nema'",
+    "{options}": "Unaprijed prikazana linija koja popisuje dostupne radnje",
+    "{scores}": "Unaprijed prikazani popis konačnih rezultata po igraču"
+  },
+  "player_prompt": {
+    "intro": "Igrate Golf (kartašku igru) - Igrač {player_id}.\nCilj: Postignite najnižu ukupnu ocjenu u ovom jednom krugu. Ako stupci dijele istu vrijednost, oni se sumiraju kao 0.\nVrijednosti karata: A=1, 2-10=vrijednost lica, J/Q=10, K=0\n\nRadnje (koristite točno zagrade):\n- '[draw]' - Izvlačenje iz špila\n- '[take]' - Uzimanje iz otpadne hrpe\n- '[swap X Y]' - Zamjena izvučene karte s položajem X (red) Y (stupac)\n- '[discard]' - Odbacivanje izvučene karte\n"
+  },
+  "board": {
+    "drew": "Izvučena karta: {card}\nSada morate [swap X Y] ili [discard] ju.",
+    "took": "Uzeli ste: {card} iz otpadne hrpe\nMorati ćete [swap X Y] s njom (ne možete odbaciti).",
+    "peeked": "Pogledali ste na položaj ({row},{col}): {card}",
+    "turn_view": "Vaša ruka:\n{hand}\nOtpadna hrpa: {discard}\n{options}",
+    "none": "Nema"
+  },
+  "options": {
+    "final_turns": "Završni potezi! Vaše opcije: [draw], [take], [peek X Y]",
+    "draw": "Vaše opcije: [draw], [take]",
+    "must_swap": "Morati ćete: [swap X Y] (ne možete odbaciti karte iz otpadne hrpe)",
+    "swap_or_discard": "Morati ćete: [swap X Y] ili [discard]"
+  },
+  "hand": {
+    "no_cards": "Nema karata",
+    "header": "  Stupac:   1    2    3",
+    "row": "Red {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Igrač {pid} zamijenio {new} s {old} na položaju ({row},{col})",
+    "discarded": "Igrač {pid} odbacio {card}"
+  },
+  "message": {
+    "deck_empty": "Špil je prazan! Igra se odmah završava.",
+    "knocked": "Igrač {pid} kucnuo! Svaki drugi igrač dobiva još jedan potez.",
+    "final_round": "Igrač {pid} {reason}! Svaki drugi igrač dobiva još jedan potez."
+  },
+  "reason": {
+    "all_revealed": "ima sve karte otkrivene"
+  },
+  "invalid": {
+    "wrong_action": "Koristite točno jednu zagradu radnje: [draw], [take], [swap X Y], [discard], [knock] ili [peek X Y]",
+    "discard_empty": "Otpadna hrpa je prazna!",
+    "must_draw_first": "Morati ćete prvo [draw], [take], [knock] ili [peek X Y]",
+    "cannot_discard_taken": "Ne možete odbaciti kartu uzetu iz otpadne hrpe. Morati ćete ju zamijeniti.",
+    "have_drawn_card": "Imate izvučenu kartu. Morati ćete [swap X Y] ili [discard] ju.",
+    "need_drawn_swap": "Potrebna vam je izvučena karta za zamjenu.",
+    "need_drawn_discard": "Potrebna vam je izvučena karta za odbacivanje.",
+    "out_of_bounds": "Položaj je izvan granica. Koristite red 1-{max_row}, stupac 1-{max_col}",
+    "knock_with_card": "Ne možete kucnuti s izvučenom kartom. Prvo morate dovršiti potez.",
+    "already_knocked": "Netko je već kucnuo ovaj krug.",
+    "already_revealed": "Ta karta je već otkrivena!"
+  },
+  "summary": {
+    "full": "Igra je gotova! Igrač {winner} pobjeđuje s rezultatom od {score} bodova!\n\nKonačni rezultati:\n{scores}",
+    "line": "Igrač {pid}: {score} bodova\n"
+  },
+  "board_str": {
+    "title": "=== GOLF IGRA ===",
+    "discard": "Otpadna hrpa: {card}",
+    "knocked": "Igrač {pid} je kucnuo!",
+    "player_header": "Igrač {pid} (Rezultat: {score}):"
+  }
+}

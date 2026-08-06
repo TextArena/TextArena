@@ -1,0 +1,28 @@
+{
+  "_comment": "Wordle için Türkçe dil dosyası. Anahtarları (sol taraf) çevirme. Yalnızca değerleri (sağ taraf) çevir.",
+  "_slots": {
+    "{word_length}": "Gizli kelimenin uzunluğu (tam sayı)",
+    "{num_guesses}": "İzin verilen tahmin sayısı (tam sayı)",
+    "{word}": "Tahmin edilen bir kelime",
+    "{view}": "Nötr işlenmiş harfler + G/Y/X geri bildirimi (çevirme)",
+    "{guesses_left}": "Kalan tahminler (tam sayı)",
+    "{pct}": "Doğru yerleştirilmiş harflerin yüzdesi (tam sayı)",
+    "{secret}": "Gizli kelime"
+  },
+  "prompt": {
+    "intro": "Wordle oynuyorsunuz.\nBir gizli {word_length} harfli kelime seçilmiştir. Tahmin etmek için {num_guesses} girişiminiz var.\nHer tahmin için, kelimenizi köşeli parantezler içine alın (örneğin, '[elma]').\nHer harf için geri bildirimi aşağıdaki gibi verilecektir:\n  - G (yeşil): doğru harf, doğru konumda\n  - Y (sarı): harf kelime içinde var, ancak yanlış konumda\n  - X (yanlış): harf kelime içinde yok\nTahmininizi girmek için başlayın.\n"
+  },
+  "invalid": {
+    "wrong_format": "Yanlış formatta bir kelime göndermeye çalıştınız. Lütfen köşeli parantezleri kullanmaya dikkat edin.",
+    "wrong_length": "Kelimeniz tam olarak {word_length} harf olmalıdır.",
+    "already_guessed": "Daha önce '{word}' kelimesini tahmin etmişsiniz. Lütfen farklı bir kelime deneyin.",
+    "not_a_word": "'{word}' geçerli bir kelime değil."
+  },
+  "feedback": {
+    "submitted": "Gönderdiğiniz kelime: [{word}].\nGeri bildirimi:\n{view}\nKalan tahminleriniz: {guesses_left}."
+  },
+  "outcome": {
+    "win": "Tebrikler! Kelimeyi doğru tahmin ettiniz!",
+    "turn_limit": "Tur sınırına ulaşıldı. Kelimeyi tahmin edemediniz, ancak en iyi tahmininiz doğru konumlardaki harflerin {pct}%'sini eşleştirdi.\nGizli kelime: **{secret}**."
+  }
+}

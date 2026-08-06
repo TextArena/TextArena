@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id}. Anda sedang memainkan Sudoku.\nBerikut adalah kondisi terkini dari grid Sudoku. Setiap baris dinomori dari 1 hingga 9, dan setiap kolom juga dinomori dari 1 hingga 9.\nSel kosong direpresentasikan oleh '.', dan sel yang sudah terisi berisi angka dari 1 hingga 9.\n\nGrid Sudoku Saat Ini:\nTujuan Anda adalah mengisi sel kosong di grid 9x9 dengan angka dari 1 hingga 9 sehingga:\n1. Setiap baris berisi semua angka dari 1 hingga 9 tanpa pengulangan.\n2. Setiap kolom berisi semua angka dari 1 hingga 9 tanpa pengulangan.\n3. Setiap dari sembilan subgrid 3x3 berisi semua angka dari 1 hingga 9 tanpa pengulangan.\n\nAturan dan Petunjuk:\n1. **Jangan menulis ulang** angka awal yang disediakan di grid.\n2. **Hanya isi** sel kosong yang direpresentasikan oleh '.'.\n3. Anda dapat merespons dengan cara apa pun yang Anda inginkan, tetapi pastikan respons Anda mencakup format '[baris kolom angka]'.\n4. **Pastikan** bahwa langkah Anda tidak melanggar aturan Sudoku. Langkah yang tidak valid akan mengakibatkan hukuman.\nContoh:\n- **Langkah Valid**:\n  - Potongan Grid Sebelum Langkah:\n  \n  - Langkah: `[5 3 7]`\n  - Penjelasan: Menempatkan 7 di baris 5, kolom 3 tidak melanggar aturan Sudoku.\n\n- **Langkah Tidak Valid** (Menulis ulang sel yang sudah terisi):\n  - Potongan Grid Sebelum Langkah:\n  \n  - Langkah: `[1 1 9]`\n  - Penjelasan: Sel (1,1) sudah terisi dengan 5. Anda tidak dapat menulis ulangnya.\n\n- **Langkah Tidak Valid** (Melanggar aturan Sudoku):\n  - Potongan Grid Sebelum Langkah:\n  \n  - Langkah: `[1 3 5]`\n  - Penjelasan: Menempatkan 5 di baris 1, kolom 3 melanggar aturan karena 5 sudah ada di baris 1.\n\nRiwayat langkah dan pemikiran Anda akan ditambahkan saat Anda memainkan lebih banyak putaran. Gunakan riwayat langkah Anda untuk meningkatkan pengambilan keputusan dengan menghindari langkah yang sudah Anda coba. Selamat bermain!\n\n"
+  },
+  "board": {
+    "game_board": "Papan Permainan:\n{board}",
+    "board_state": "Kondisi Papan:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format langkah tidak valid. Pemain {player_id} tidak merespons dengan 'baris kolom angka' yang valid.",
+    "out_of_bounds": "Langkah tidak valid. Pemain {player_id} mencoba menempatkan {num} di ({row}, {col}), yang berada di luar batas.",
+    "overwrite": "Langkah tidak valid. Pemain {player_id} mencoba menulis ulang sel yang sudah terisi ({row}, {col}).",
+    "violates_rules": "Langkah tidak valid. Pemain {player_id} mencoba menempatkan {num} di ({row}, {col}), yang melanggar aturan Sudoku."
+  },
+  "outcome": {
+    "win": "Selamat! Pemain {player_id} menyelesaikan teka-teki Sudoku.",
+    "turn_limit": "Batas putaran telah tercapai. Anda berhasil mengisi {percent}% dari sel kosong."
+  }
+}

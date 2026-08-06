@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in een spel van HighSociety (2-spelerversie).\nSpelverloop: Tien prestige-kaarten worden één voor één geveild.\nBieden: Bij elke veiling kiest u in het geheim een geldkaart 1-11 en onthult deze.\n            • De hoogste bieder wint de prestige-kaart en gooit die geldkaart weg.\n            • De laagste bieder houdt zijn geldkaart.\n            • Gelijkspel -> beide biedingen worden teruggegeven en dezelfde prestige-kaart wordt opnieuw geveild.\nScoren: Na alle tien veilingen, tel **overgebleven geld + prestige-punten** op.\n            De hoogste *netto-waarde* wint (exact gelijkspel -> gelijkspel).\n\n**Actie-syntax**  →  bied één enkele kaart zoals '[7]' of '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Veiling {round}/10  |  Prestige-kaart: {prize}"
+  },
+  "board": {
+    "money_cards": "Uw overgebleven geldkaarten: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Moet precies één [X] geldkaart bevatten.",
+    "card_not_held": "U hebt die geldkaart niet meer."
+  },
+  "message": {
+    "tie": "Gelijkspel - biedingen teruggegeven. Opnieuw bieden!",
+    "auction_result": "P0 bood {bid0}, P1 bood {bid1}. Speler {winner} wint prestige {prize} (totaal {total})."
+  },
+  "outcome": {
+    "p0_wins": "Netto-waarde {nw0} > {nw1}",
+    "p1_wins": "Netto-waarde {nw1} > {nw0}",
+    "draw": "Beide netto-waarde {nw0} – exact gelijkspel."
+  }
+}

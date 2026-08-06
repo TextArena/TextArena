@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS nyelvi fájl. NE fordítsa le a kulcsokat (bal oldal). Csak a értékeket fordítsa le (jobb oldal).",
+  "_slots": {
+    "{player_id}": "A játékos száma, 0, 1 vagy 2",
+    "{round}": "Az aktuális kör száma, 1..13",
+    "{prize}": "A felfedett nyereménykártya arca (A, 2..10, J, Q, K) - ne fordítsa le",
+    "{worth}": "A nyeremény teljes értéke, beleértve bármilyen áthozott tétet",
+    "{hand}": "A játékos maradék kártyái, zárójelben megjelenítve, mint '[A]' '[2]' - ne fordítsa le",
+    "{bids}": "A semleges, vesszővel elválasztott listája a játszott kártyáknak, mint 'P0:10, P1:J, P2:Q' - ne fordítsa le",
+    "{winner}": "A játékos száma, aki megnyerte a kört",
+    "{pot}": "A tét értéke, amelyet ebben a körben adtak át vagy vittek tovább",
+    "{scoreline}": "A semleges, futó eredményjelző, mint 'P0:0  P1:0  P2:11' - ne fordítsa le",
+    "{pid}": "A játékos száma, akit kiesett",
+    "{scores}": "A végső pontszámok, mint nyers játékos-szám és pontszám leképezés - ne fordítsa le"
+  },
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a Háromjátékos GOPS-ban.\n- Ön tartja a 13 kártyát A-K (mindegyik pontosan egyszer).\n- Minden körben egy nyereményt fednek fel. Küldjön be EGY kártyát, mint `[Q]`, `[10]`, `[2]` …\n- A legmagasabb kártya nyeri a nyereményt (+ bármilyen áthozott tétet). A döntetlenek a nyereményt a következő körbe göngyölítik.\n- 13 kör után a legmagasabb összeg nyer. Érvénytelen lépések = kiesés."
+  },
+  "round": {
+    "header": "### {round}/13. kör - Nyeremény: {prize} (értéke {worth})",
+    "hand": "Maradék kezed: {hand}"
+  },
+  "reveal": {
+    "win": "Licit » {bids} - A {winner}. játékos nyer {pot}.",
+    "tie": "Licit » {bids} - döntetlen, a tét most {pot}.",
+    "scores": "Pontszámok → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "a művelethez egy zárójelben lévő kártyára van szükség, mint '[Q]'",
+    "bad_card": "a kártya már használt vagy érvénytelen"
+  },
+  "elimination": {
+    "player": "A {pid}. játékos kiesett ismételt érvénytelen lépések után."
+  },
+  "outcome": {
+    "auto_win": "Két játékos kiesett - automatikus győzelem.",
+    "final": "Végső pontszámok: {scores}"
+  }
+}

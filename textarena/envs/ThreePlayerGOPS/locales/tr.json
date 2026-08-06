@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS dil dosyası. Anahtarları (sol taraf) çevirme. Yalnızca değerleri (sağ taraf) çevir.",
+  "_slots": {
+    "{player_id}": "Oyuncunun numarası, 0, 1 veya 2",
+    "{round}": "Mevcut tur numarası, 1..13",
+    "{prize}": "Açık kartın yüz etiketi (A, 2..10, J, Q, K) - çevirme",
+    "{worth}": "Ödülün toplam değeri, kalan pot dahil",
+    "{hand}": "Oyuncunun kalan kartları, köşeli parantezli tokenler olarak gösterilir, örneğin '[A]' '[2]' - çevirme",
+    "{bids}": "Tarafsız, virgülle ayrılmış oynanmış kartlar listesi, örneğin 'P0:10, P1:J, P2:Q' - çevirme",
+    "{winner}": "Turun kazanan oyuncu numarası",
+    "{pot}": "Bu turda kazanılan veya kalan pot değeri",
+    "{scoreline}": "Tarafsız, sürekli skor tablosu, örneğin 'P0:0  P1:0  P2:11' - çevirme",
+    "{pid}": "Elenen oyuncu numarası",
+    "{scores}": "Nihai skorlar, ham oyuncu numarası ile skor eşlemesi olarak - çevirme"
+  },
+  "player_prompt": {
+    "intro": "Three-Player GOPS'te Oyuncu {player_id}'siniz.\n- 13 kartı (her biri tam olarak bir kez) tutuyorsunuz: A-K.\n- Her turda bir ödül açıklanıyor. Tek bir kart gönderin, örneğin `[Q]`, `[10]`, `[2]` …\n- En yüksek kart ödülü kazanıyor (+ kalan pot). Beraberlikler ödülü bir sonraki tura taşıyor.\n- 13 turdan sonra, en yüksek toplam kazanıyor. Geçersiz hamleler = elenme."
+  },
+  "round": {
+    "header": "### Tur {round}/13 - Ödül: {prize} (değer {worth})",
+    "hand": "Kalan eliniz: {hand}"
+  },
+  "reveal": {
+    "win": "Teklifler » {bids} - Oyuncu {winner} {pot} kazandı.",
+    "tie": "Teklifler » {bids} - berabere, pot şimdi {pot}.",
+    "scores": "Skorlar → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "eylem köşeli parantezli bir kart gerektiriyor, örneğin '[Q]'",
+    "bad_card": "kart zaten kullanıldı veya geçersiz"
+  },
+  "elimination": {
+    "player": "Oyuncu {pid} tekrarlanan geçersiz hamlelerden sonra elendi."
+  },
+  "outcome": {
+    "auto_win": "İki oyuncu elendi - otomatik kazanma.",
+    "final": "Nihai skorlar: {scores}"
+  }
+}

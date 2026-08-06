@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w **Ultimate Tic Tac Toe**.\nPrześlij swój ruch jako **[macro  micro]** (dwa numery 0-8):\n• *macro*  = w której mini-planszy grasz\n• *micro* = który kwadrat wewnątrz tej mini-planszy\nPrzykład `[7 8]` ➜ umieść swój znak w mini-planszy 7, kwadracie 8, i\nzmusić przeciwnika do gry w mini-planszy 8 następnie.\n\nJesteś `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Aktualna plansza:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ruch musi być w formacie [macro micro] z numerami 0-8.",
+    "out_of_range": "Indeksy muszą być między 0 a 8.",
+    "index_out_of_range": "Micro-plansza, wiersz lub kolumna jest poza zakresem.",
+    "cell_occupied": "Komórka jest już zajęta.",
+    "wrong_micro_board": "Gracz musi grać w następnej micro-planszy.",
+    "micro_board_won": "Micro-plansza jest już wygrana."
+  },
+  "next_board": {
+    "any": "dowolna micro-plansza",
+    "specific": "micro-plansza {nxt}"
+  },
+  "game_action": {
+    "played": "Gracz {player_id} zagrał w micro-planszy {macro_idx}, komórce {micro_idx} (wiersz {row}, kolumna {col}). Gracz {opponent_id} musi teraz grać w {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Gracz {player_id} wygrywa Ultimate Tic Tac Toe!",
+    "draw": "Gra kończy się remisem!"
+  }
+}

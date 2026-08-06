@@ -1,0 +1,34 @@
+{
+  "_comment": "Slovenská lokalizácia pre Word Ladder. Kľúče (ľavá strana) sú pevne dané; prekladajte iba hodnoty (pravá strana). Zachovajte každý {placeholder}verbatim. Slovné tokeny ({start_word}, {target_word}, {word}, {current}, {ladder}) sú neutrálne herné slová a nesmú byť preložené. Zachovajte príklad v hranatých zátvorkách `[word]` tak, ako je.",
+  "_slots": {
+    "{player_id}": "Číslo hráča (celé číslo)",
+    "{start_word}": "Počiatočné slovo reťaze (neutrálny token)",
+    "{target_word}": "Cieľové slovo, ktoré treba dosiahnuť (neutrálny token)",
+    "{word}": "Slovo, ktoré hráč práve odoslal (neutrálny token)",
+    "{current}": "Aktuálne slovo hráča (neutrálny token)",
+    "{target}": "Cieľové slovo (neutrálny token)",
+    "{target_len}": "Dĺžka cieľového slova (celé číslo)",
+    "{ladder}": "História ťahov spojená pomocou ' -> ' (neutrálne tokeny)",
+    "{history}": "Zobrazená história (už lokalizovaná; neprekladajte)",
+    "{pct}": "Percento písmen, ktoré sú spoločné s cieľovým slovom (celé číslo)"
+  },
+  "prompt": {
+    "intro": "Ste Hráč {player_id}. Váš cieľ je dosiahnuť cieľové slovo zmenou **jedného písmena naraz**.\n- Počiatočné slovo: **{start_word}**\n- Cieľové slovo: **{target_word}**\nOdosielajte každý ťah v hranatých zátvorkách, napr. `[word]`.\nHistória sa zobrazuje nižšie počas hry. Veľa šťastia!\n"
+  },
+  "invalid": {
+    "wrong_format": "Neplatný formát. Obalte svoje slovo do hranatých zátvoriek, napr. `[word]`.",
+    "wrong_length": "`{word}` má nesprávnu dĺžku; cieľ je {target_len} písmen.",
+    "not_a_word": "`{word}` nie je rozpoznané slovo.",
+    "not_one_different": "`{word}` nie je presne jedno písmeno odlišné od `{current}`."
+  },
+  "board": {
+    "history": "História Word Ladder: {ladder}. Cieľové slovo: {target}\n"
+  },
+  "feedback": {
+    "progress": "Dobré! Pokračujte ďalej.\n{history}"
+  },
+  "outcome": {
+    "win": "Gratulujeme! Dosiahli ste cieľové slovo.",
+    "turn_limit": "Bol dosiahnutý limit ťahov. Dosiahli ste `{current}`, ktoré zdieľa {pct}% písmen s cieľovým slovom `{target}`."
+  }
+}

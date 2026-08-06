@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là {role} trong Trò chơi Đại tá Blotto.\nMục tiêu của bạn là thắng nhiều vòng hơn đối thủ của bạn.\nTrong mỗi vòng, phân bổ chính xác {num_total_units} đơn vị trên các chiến trường {field_names}.\nNgười chơi phân bổ nhiều đơn vị hơn cho một chiến trường sẽ thắng chiến trường đó, và người chơi thắng nhiều chiến trường hơn sẽ thắng vòng.\nVí dụ, '[A7 B7 C6]' phân bổ 7 đơn vị cho A, 7 cho B, và 6 cho C.",
+    "commander_alpha": "Đại tá Alpha",
+    "commander_beta": "Đại tá Beta"
+  },
+  "game_state": {
+    "header_round": "=== TRÒ CHƠI ĐẠI TÁ BLOTTO - Vòng {current_round}/{num_rounds} ===\nSố vòng thắng - Đại tá Alpha: {alpha_score}, Đại tá Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nVòng {current_round}\nĐại tá Alpha phân bổ: {p0_allocations}\nĐại tá Beta phân bổ: {p1_allocations}\n",
+    "winner_alpha": "{message}Người thắng: Đại tá Alpha",
+    "winner_beta": "{message}Người thắng: Đại tá Beta",
+    "tie": "{message}Hòa!"
+  },
+  "invalid_move": {
+    "wrong_format": "Định dạng đầu vào không hợp lệ. Sử dụng: A:5, B:10, C:5",
+    "invalid_field": "Tên chiến trường không hợp lệ. Chiến trường hợp lệ: {field_names}",
+    "wrong_allocation_value": "Tất cả các phân bổ phải là số nguyên không âm.",
+    "incorrect_total_units": "Bạn phải phân bổ chính xác {num_total_units} đơn vị. Tổng hiện tại: {current_sum}",
+    "good_allocations": "Phân bổ hợp lệ."
+  },
+  "outcome": {
+    "winner_alpha": "Đại tá Alpha thắng {score_0}-{score_1} sau {num_rounds} vòng!",
+    "winner_beta": "Đại tá Beta thắng {score_1}-{score_0} sau {num_rounds} vòng!",
+    "draw": "Trò chơi kết thúc với tỷ số hòa {score_0}-{score_1} sau {num_rounds} vòng!",
+    "early_winner_alpha": "Đại tá Alpha thắng {scores_0}-{scores_1} (đạt đa số)!",
+    "early_winner_beta": "Đại tá Beta thắng {scores_1}-{scores_0} (đạt đa số)!"
+  }
+}

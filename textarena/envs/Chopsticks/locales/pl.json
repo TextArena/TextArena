@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w Chopsticks. W swojej turze wybierz jedną z następujących opcji:\n  + Atak: '[attack M O]', gdzie M=twoja ręka (0 lub 1), O=ręka przeciwnika (0 lub 1).\n    - Liczba palców w ręce przeciwnika zwiększa się o liczbę palców w twojej ręce; jeśli jest >=5, staje się 0.\n  + Podział: '[split L R]', aby rozdzielić swoje palce na L i R (L+R = twoja suma).\nOdpowiedz dokładnie jedną z tych komend."
+  },
+  "board": {
+    "current_board": "Aktualna plansza:\nGracz 0: {hands_0}\nGracz 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Twoja ręka {my_idx} jest martwa.",
+    "opp_hand_dead": "Ręka przeciwnika {opp_idx} jest już martwa.",
+    "split_sum": "Podział musi sumować się do {total}.",
+    "split_no_change": "Podział musi zmienić rozkład twoich rąk.",
+    "invalid_command": "Nieprawidłowy ruch. Użyj “[attack M O]” lub “[split L R]”."
+  },
+  "game_action": {
+    "attack": "G{player_id} atakuje rękę G{opp_id} {opp_idx}: zmienia się z {opp_val} na {new_val}.",
+    "split": "G{player_id} dzieli się na [{L}, {R}]."
+  },
+  "history": {
+    "entry": "G{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Obie ręce przeciwnika są martwe.",
+    "draw": "Osiągnięto limit tur."
+  }
+}

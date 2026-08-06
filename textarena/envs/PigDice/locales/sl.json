@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v igri Pig Dice.\n\nPravila:\n- Na vašo vrsto lahko '[roll]' ali '[hold]'\n- Vrzi 2-6: Dodaj k svojemu skupnemu številu v krogu\n- Vrzi 1: Izgubi skupno število v krogu in končaj krog\n- Hold: Dodaj skupno število v krogu k svojemu rezultatu in končaj krog\n- Prvi, ki doseže {winning_score} točk, zmaga\n\nKo je vaša vrsta, boste videli trenutne rezultate in skupno število v krogu.\nOdgovorite z '[roll]', da vrzete kocko ali '[hold]', da shranite svoje točke."
+  },
+  "invalid_move": {
+    "invalid_action": "Neveljaven format dejanja. Uporabite '[roll]' ali '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Igralec {player_id} je izgubil {turn_total} točk!",
+    "player_hold": "Igralec {player_id} shranjuje in banka {turn_total} točk."
+  },
+  "board": {
+    "player": "Igralec 0: '{score_0}'; Igralec 1: '{score_1}'",
+    "current_total_scores": "Trenutni skupni rezultati: {scores}\nVaše trenutno skupno število v krogu je {turn_total}.",
+    "roll_history": "{observation}\nZgodovina vaših vrgitev v tem krogu: {roll_history}",
+    "first_roll": "{observation}\nTo je prva vržitev v vašem krogu.",
+    "available_actions": "{observation}\nRazpoložljiva dejanja: '[roll]' ali '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Igralec {winner_id} je zmagal, ker ima višji rezultat ob koncu kroga ({scores})",
+    "winner_by_score": "Igralec {winner_id} je zmagal, ker je dosegel ciljni rezultat {winning_score}!",
+    "draw": "Omejitev kroga je bila dosežena in vsi igralci imajo enak rezultat: {scores}"
+  }
+}

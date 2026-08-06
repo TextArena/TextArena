@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id}. Þú ert að spila Minnisleikinn.\nMarkmið þitt er að para saman fleiri pör af spilum á borðinu en andstæðingur þinn.\nÁ þinni rönd skalt þú velja tvö spil til að snúa, með því að slá inn númer raðar og dálks fyrsta og síðasta spilsins, eins og '[0 1 1 0]', þar sem fyrsta spilið er í röð 0 og dálk 1, og síðasta spilið er í röð 1 og dálk 0.\nEf spilin tvö eru eins, færðu stig og spilin verða áfram snuð upp. Ef þau eru ekki eins, verða spilin snuð aftur niður, t.d. '.'.\nLeikurinn endar þegar öll pör hafa verið paruð."
+  },
+  "board": {
+    "current_board": "Núverandi borð:\n{board}",
+    "current_game_board": "Núverandi Leikborð:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ógilt snið fyrir leik. Leikmaður {player_id} svaraði ekki með giltu átt í hornklosum.",
+    "out_of_bounds": "Ógiltur leikur. Leikmaður {player_id} valdi stað utan borðsins.",
+    "same_card_twice": "Ógiltur leikur. Leikmaður {player_id} valdi sama spilið tvisvar.",
+    "already_matched": "Ógiltur leikur. Leikmaður {player_id} valdi eitt eða bæði spilin sem eru þegar paruð."
+  },
+  "game_message": {
+    "cards_match": "Spilin sem Leikmaður {player_id} valdi á stöðum [{r1} {c1}] og [{r2} {c2}] eru eins!",
+    "cards_no_match": "Spilin sem Leikmaður {player_id} valdi eru ekki eins. Spilin á stöðum [{r1} {c1}] og [{r2} {c2}] eru {pos1} og {pos2} í þeirri röð."
+  },
+  "outcome": {
+    "draw": "Báðir leikmenn paruðu sama fjölda para af spilum.",
+    "win": "Leikmaður {winner_id} hefur unnið!",
+    "turn_limit": "Takmörk á leikum hafa verið náð. Leikurinn er lokið. Leikmaður 0 fékk {score_0} stig, Leikmaður 1 fékk {score_1} stig.",
+    "turn_limit_win": "{reason} Leikmaður {winner_id} hefur unnið!"
+  }
+}

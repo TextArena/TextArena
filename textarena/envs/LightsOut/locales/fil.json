@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Maligayang pagdating sa Lights Out! Mayroon kang grid ng mga ilaw na {size}x{size}.\nAng iyong layunin ay patayin LAHAT ng mga ilaw (na kinakatawan ng '.').\nKapag pinindot mo ang isang ilaw, nagpapalit ito ng sarili nito AT ng mga katabing kapitbahay nito (pataas/pababa/pakaliwa/pakanan).\nI-type ang [row col] upang pindutin ang isang ilaw (0-indexed, kaya wastong saklaw ay 0-{max_index}).\nMayroon kang hanggang {max_turns} mga pagkilos upang malutas ang puzzle.\nLegend: 'O' = ilaw ON, '.' = ilaw OFF"
+  },
+  "board": {
+    "current_state": "Kasalukuyang estado ng grid (Pagkilos {moves_made}, {moves_left} mga pagkilos na natitira, {completion}% kumpleto):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ang pagkilos ay dapat sa format [row col] kung saan ang row at col ay mga integer mula 0 hanggang {max_index}.",
+    "out_of_range": "Ang mga koordinado ay dapat nasa pagitan ng 0 at {max_index}. Ipinasok mo ang [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Binabati kita! Nalutas mo ang puzzle sa {moves_used} mga pagkilos!",
+    "loss": "Tapos na ang laro! Ginamit mo ang lahat ng {max_turns} mga pagkilos nang hindi nalutas ang puzzle. Huling kumpleto: {completion}%\nHuling estado:\n{grid}"
+  }
+}

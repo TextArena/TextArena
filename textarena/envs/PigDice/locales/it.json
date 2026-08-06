@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in un gioco di Pig Dice.\n\nRegole:\n- Nel tuo turno, puoi scegliere di '[roll]' o '[hold]'\n- Tira un 2-6: Aggiungi al totale del tuo turno\n- Tira un 1: Perdi il totale del turno e termina il turno\n- Tieni: Aggiungi il totale del turno al tuo punteggio e termina il turno\n- Il primo a raggiungere {winning_score} punti vince\n\nQuando è il tuo turno, vedrai i punteggi attuali e il totale del turno.\nRispondi con '[roll]' per tirare il dado o '[hold]' per depositare i tuoi punti."
+  },
+  "invalid_move": {
+    "invalid_action": "Formato di azione non valido. Utilizza '[roll]' o '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Il Giocatore {player_id} è andato in bancarotta, perdendo {turn_total} punti!",
+    "player_hold": "Il Giocatore {player_id} tiene e deposita {turn_total} punti."
+  },
+  "board": {
+    "player": "Giocatore 0: '{score_0}'; Giocatore 1: '{score_1}'",
+    "current_total_scores": "Punteggi Totali Attuali: {scores}\nIl tuo totale di turno attuale è {turn_total}.",
+    "roll_history": "{observation}\nLa tua cronologia di tiri per questo turno: {roll_history}",
+    "first_roll": "{observation}\nQuesto è il primo tiro del tuo turno.",
+    "available_actions": "{observation}\nAzioni disponibili: '[roll]' o '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Il Giocatore {winner_id} ha vinto avendo un punteggio più alto al limite di turno ({scores})",
+    "winner_by_score": "Il Giocatore {winner_id} ha vinto raggiungendo il punteggio target di {winning_score}!",
+    "draw": "Il limite di turno è stato raggiunto e tutti i giocatori hanno lo stesso punteggio: {scores}"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em-lokaliseringsfil. ÖVERSÄTT INTE nycklar (vänster sida). Översätt endast värden (höger sida).",
+  "_slots": {
+    "{start_chips}": "Startchip, t.ex. 1000",
+    "{ante}": "Ante/blind-insatsbelopp, t.ex. 25",
+    "{ante4}": "Fyra gånger ante, t.ex. 100",
+    "{ante2}": "Två gånger ante, t.ex. 50",
+    "{round}": "Aktuell runda",
+    "{chips}": "Spelarens nuvarande chipantal",
+    "{hand}": "En kommaavgränsad lista med kortetiketter, t.ex. 'A♠, K♥', eller den lokaliseras texten för inga kort",
+    "{phase}": "Aktuell faslabeltoken (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "En kommaavgränsad lista med hakparenteserade åktionstoken, t.ex. '[play_bet_4x], [check]'",
+    "{available}": "En kommaavgränsad lista med för närvarande lagliga hakparenteserade åktionstoken",
+    "{blind}": "Blind-insatsbelopp",
+    "{play}": "Play-insatsbelopp",
+    "{cards}": "En kommaavgränsad lista med kortetiketter, t.ex. 'Q♣, 7♦, 2♠'",
+    "{name}": "Ett lokaliseras pokernamn, insatt ordagrant",
+    "{amount}": "Ett chipbelopp",
+    "{net}": "Nettochipförändring för rundan (kan vara negativ)",
+    "{max_turns}": "Maximalt antal rundor",
+    "{winner_rounds}": "Antal rundor som slutförts"
+  },
+  "player_prompt": {
+    "no_cards": "Inga kort ännu",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - En spelare mot dealern\n\n📖 ÖVERSIKT ÖVER SPELET:\n• Du börjar med {start_chips} chip\n• Enkel kortlek med 52 kort (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Du spelar mot dealern (huset)\n• Varje runda följer Ultimate Texas Hold'em-strukturen: du lägger ANTE och BLIND-insatser, får 2 hålkort, bestämmer om valfria PLAY-insatser under satsningsfaserna, avslöjar sedan gemensamma kort och jämför din bästa 5-kortshand med dealerns. Ditt mål är att maximera dina vinster (när du har den bättre handen), samtidigt som du minimerar dina förluster (när du har den sämre handen).\n• Spelet slutar när du når 0 chip eller under i början av en runda (FÖRLUST) eller slutför 1000 rundor med chip (VINST)\n\n💰 Satsningsstruktur:\n• ANTE: Obligatorisk ${ante} insats varje runda\n• BLIND: Obligatorisk ${ante} insats varje runda\n• PLAY: Valfri insats under spelet. Under hela rundan kan du välja ENDAST EN av följande: (${ante4} om du gör det i PRE-FLOP, ${ante2} om du gör det i FLOP eller ${ante} om du gör det i RIVER. Du kan också lägga dig i RIVER, ge upp handen och inte göra någon insats.)\n\n🎴 Kortutdelning:\n• Du får 2 synliga kort (dina hålkort)\n• Dealern får 2 osynliga kort (dolda för dig)\n• 5 gemensamma kort delas ut osynligt i början\n• Gemensamma kort avslöjas progressivt under spelets faser\n\n🏆 Dealerns kvalifikation:\n• Dealern måste ha minst ett PAR (2 kort av samma rang) för att kvalificera sig, med hjälp av de 2 korten i sin hand och de 5 gemensamma korten.\n• Dealerns kvalifikation påverkar satsningsresultaten, som kommer att förklaras senare.\n\n🎮 Spelfaser och åtgärder:\n📋 PRE-FLOP:\n  • Åtgärder: [4x] (${ante4}) eller [check]\n  • [4x]: Lägg ${ante4} PLAY-insats, avslöjar första 3 gemensamma kort\n  • [check]: Ingen ytterligare insats, avslöjar första 3 gemensamma kort\n\n📋 FLOP:\n  • Om 4x-insatsen placeras: Endast [skip] tillgänglig (auto-avslöjar sista 2 gemensamma kort)\n  • Om ingen 4x-insats: [2x] (${ante2}) eller [check]\n  • [2x]: Lägg ${ante2} PLAY-insats, avslöjar sista 2 gemensamma kort\n  • [check]: Ingen ytterligare insats, avslöjar sista 2 gemensamma kort\n\n📋 RIVER:\n  • Om 4x eller 2x-insatsen placeras: Endast [skip] tillgänglig (auto-fortsätter till showdown)\n  • Om ingen tidigare PLAY-insats: [1x] (${ante}) eller [fold]\n  • [1x]: Lägg ${ante} PLAY-insats, fortsätter till showdown\n  • [fold]: Ge upp handen, förlorar ANTE och BLIND-insatser\n\n📋 SHOWDOWN:\n  • Alla kort avslöjas och utvärderas\n  • Bästa 5-kortshand från 7 kort (2 hålkort + 5 gemensamma kort)\n  • Insatser regleras enligt utbetalningsregler\n\n💎 Utbetalningar:\n📊 ANTE-insats:\n  • Dealern kvalificerar sig inte: PUSH (insatsen återbetalas)\n  • Dealern kvalificerar sig och du vinner: 1:1 utbetalning (insats + vinst)\n  • Dealern kvalificerar sig och du förlorar: Insatsen förloras\n  • Oavgjort: PUSH (insatsen återbetalas)\n\n📊 BLIND-insats:\n  • Påverkas inte av dealerns kvalifikation\n  • Du vinner: Insatsen återbetalas och ytterligare utbetalning baserad på din handstyrka\n  • Du förlorar: Insatsen förloras\n  • Oavgjort: PUSH (insatsen återbetalas)\n\n📊 BLIND-insatsutbetalningstabell:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Mindre än Straight: Ingen ytterligare utbetalning\n\n📊 PLAY-insats:\n  • Påverkas inte av dealerns kvalifikation\n  • Direkt jämförelse: Din bästa hand mot dealerns bästa hand\n  • Du vinner: 1:1 utbetalning (insats + vinst)\n  • Du förlorar: Insatsen förloras\n  • Oavgjort: PUSH (insatsen återbetalas)\n\n🎯 Pokerhandrankning (bäst till sämst):\n  1. Royal Flush: A-K-Q-J-10 av samma färg\n  2. Straight Flush: 5 på varandra följande kort av samma färg\n  3. Four of a Kind: 4 kort av samma rang\n  4. Full House: 3 av en sort + 2 av en sort\n  5. Flush: 5 kort av samma färg\n  6. Straight: 5 på varandra följande kort\n  7. Three of a Kind: 3 kort av samma rang\n  8. Two Pair: 2 par av olika rang\n  9. One Pair: 2 kort av samma rang\n  10. High Card: Högsta kortet vinner\n\n⌨️  Åtgärdskommandon:\n• [4x] eller [play bet 4x]: Lägg ${{self.ante_amount*4}} PLAY-insats\n• [2x] eller [play bet 2x]: Lägg ${{self.ante_amount*2}} PLAY-insats\n• [1x] eller [play bet 1x]: Lägg ${{self.ante_amount*1}} PLAY-insats\n• [check] eller [c]: Check (ingen ytterligare insats)\n• [fold] eller [f]: Ge upp handen\n• [skip] eller [s]: Hoppa över till nästa fas (när ingen åtgärd behövs)\n\n💡 Strategitips:\n• Starka starthänder (par, höga kort) motiverar ofta 4x-insatser\n• Tänk på dealerns kvalifikation - svaga händer kan trycka om dealern inte kvalificerar sig\n• BLIND-insatsen kan vara mycket lönsam med starka händer (Royal Flush = 500:1!)\n• Titta på din chipstack! Om den går till 0 eller under i början av en runda, förlorar du.\n\n⚠️  Viktiga noteringar:\n• ANTE och BLIND-insatser är obligatoriska varje runda\n• PLAY-insatser är valfria och strategiska\n• Se till att du anger rätt åtgärd, och endast en åtgärd åt gången.\n\n",
+    "state": "🎯 Runda {round}\n💰 Chip: {chips}\n🎴 Din hand: {hand}\n📊 Nuvarande insatser: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fas: {phase}\n🎯 Tillgängliga åtgärder: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Runda {round} har börjat! Insatser: ANTE ${ante}, BLIND ${blind}. Du har {chips} chip kvar.",
+    "your_hand": "🎴 Din hand: {hand}",
+    "flop_revealed": "🃏 FLOP avslöjat: {cards}",
+    "river_revealed": "🃏 RIVER avslöjat: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Ogiltig åtgärd för nuvarande fas. Tillgängliga åtgärder: {available}",
+    "message": "❌ Ogiltig åtgärd! Tillgängliga åtgärder: {available}"
+  },
+  "action": {
+    "folded": "🃏 Du lade dig."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Dealerns hand: {cards}",
+    "community_cards": "🃏 Gemensamma kort: {cards}",
+    "player_best": "🎴 Spelarens bästa hand: {name} ({cards})",
+    "dealer_best": "🎴 Dealerns bästa hand: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE-insatsen FÖRLORAD! -${ante} (lade sig)",
+    "blind_lost_folded": "❌ BLIND-insatsen FÖRLORAD! -${blind} (lade sig)",
+    "ante_won": "✅ ANTE-insatsen VUNNEN! +${amount}",
+    "ante_pushed": "🔄 ANTE-insatsen PUSHAD! ${ante} återbetalad",
+    "ante_lost": "❌ ANTE-insatsen FÖRLORAD! -${ante}",
+    "blind_won": "✅ BLIND-insatsen VUNNEN! +${amount}",
+    "blind_pushed": "🔄 BLIND-insatsen PUSHAD! ${blind} återbetalad",
+    "blind_lost": "❌ BLIND-insatsen FÖRLORAD! -${blind}",
+    "play_won": "✅ PLAY-insatsen VUNNEN! +${amount}",
+    "play_pushed": "🔄 PLAY-insatsen PUSHAD! ${play} återbetalad",
+    "play_lost": "❌ PLAY-insatsen FÖRLORAD! -${play}",
+    "net_gain": "🎉 Runda {round} slutförd! Nettoresultat: +${net}",
+    "net_loss": "💸 Runda {round} slutförd! Nettoförlust: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 SPELET ÖVER! {max_turns} rundor slutförda. Du har ${chips} chip - DU VINNER!",
+    "game_over_lose": "🏁 SPELET ÖVER! Du har slut på chip. Dealern vinner!",
+    "reward_win": "Spelaren slutförde {winner_rounds} rundor med ${chips} chip",
+    "reward_lose": "Spelaren fick slut på chip i runda {round}",
+    "reward_win_max": "Spelaren slutförde {max_turns} rundor med ${chips} chip"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Fyra av en sort",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Tre av en sort",
+    "two_pair": "Två par",
+    "one_pair": "Ett par",
+    "high_card": "Högsta kortet",
+    "unknown": "Okänd hand"
+  }
+}

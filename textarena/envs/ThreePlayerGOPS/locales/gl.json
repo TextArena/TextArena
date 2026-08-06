@@ -1,0 +1,39 @@
+{
+  "_comment": "Ficheiro de localización de ThreePlayerGOPS. NON traduzas as claves (lado esquerdo). Só traduce os valores (lado dereito).",
+  "_slots": {
+    "{player_id}": "O número do xogador, 0, 1 ou 2",
+    "{round}": "O número da rolda actual, 1..13",
+    "{prize}": "A etiqueta da carta de premio revelada (A, 2..10, J, Q, K) - non traduzas",
+    "{worth}": "O valor total do premio, incluído calquera bote levado",
+    "{hand}": "As cartas restantes do xogador, representadas como tokens entre corchetes como '[A]' '[2]' - non traduzas",
+    "{bids}": "A lista neutral de cartas xogadas, separadas por comas, como 'P0:10, P1:J, P2:Q' - non traduzas",
+    "{winner}": "O número do xogador que gañou a rolda",
+    "{pot}": "O valor do bote outorgado ou levado nesta rolda",
+    "{scoreline}": "A puntuación en curso, como 'P0:0  P1:0  P2:11' - non traduzas",
+    "{pid}": "O número do xogador que foi eliminado",
+    "{scores}": "As puntuacións finais como unha asignación de número de xogador a puntuación - non traduzas"
+  },
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} en Three-Player GOPS.\n- Tes as 13 cartas A-K (cada unha exactamente unha vez).\n- Cada rolda, un premio é revelado. Envia UNHA carta como `[Q]`, `[10]`, `[2]` …\n- A carta máis alta gaña o premio (+ calquera bote levado). Os empates fan rodar o premio á seguinte rolda.\n- Despois de 13 roldas, gaña o total máis alto. Movementos inválidos = eliminación."
+  },
+  "round": {
+    "header": "### Rolda {round}/13 - Premio: {prize} (valor {worth})",
+    "hand": "A túa man restante: {hand}"
+  },
+  "reveal": {
+    "win": "Poxas » {bids} - O Xogador {winner} gaña {pot}.",
+    "tie": "Poxas » {bids} - empate, bote agora {pot}.",
+    "scores": "Puntuacións → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "a acción necesita unha carta entre corchetes como '[Q]'",
+    "bad_card": "carta xa utilizada ou inválida"
+  },
+  "elimination": {
+    "player": "O Xogador {pid} foi eliminado despois de movementos inválidos repetidos."
+  },
+  "outcome": {
+    "auto_win": "Dous xogadores eliminados - vitoria automática.",
+    "final": "Puntuacións finais: {scores}"
+  }
+}

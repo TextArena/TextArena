@@ -1,0 +1,28 @@
+{
+  "_comment": "Ngôn ngữ tiếng Anh cho Wordle. Các khóa (bên trái) là cố định; chỉ dịch các giá trị (bên phải). Giữ nguyên mọi {placeholder} và giữ nguyên các chữ cái phản hồi G/Y/X (họ là các dấu hiệu theo chữ của trò chơi).",
+  "_slots": {
+    "{word_length}": "Độ dài của từ bí mật (số nguyên)",
+    "{num_guesses}": "Số lần đoán được phép (số nguyên)",
+    "{word}": "Một từ đã đoán",
+    "{view}": "Các chữ cái được hiển thị trung lập + phản hồi G/Y/X (không dịch)",
+    "{guesses_left}": "Số lần đoán còn lại (số nguyên)",
+    "{pct}": "Phần trăm các chữ cái đúng vị trí (số nguyên)",
+    "{secret}": "Từ bí mật"
+  },
+  "prompt": {
+    "intro": "Bạn đang chơi Wordle.\nMột từ bí mật có {word_length} chữ cái đã được chọn. Bạn có {num_guesses} lần đoán để đoán từ đó.\nĐối với mỗi lần đoán, hãy bao từ của bạn trong dấu ngoặc vuông (ví dụ, '[apple]').\nPhản hồi cho mỗi chữ cái sẽ được cung cấp như sau:\n  - G (xanh lá): chữ cái đúng và ở đúng vị trí\n  - Y (vàng): chữ cái tồn tại trong từ nhưng ở vị trí sai\n  - X (sai): chữ cái không có trong từ\nNhập từ đoán của bạn để bắt đầu.\n"
+  },
+  "invalid": {
+    "wrong_format": "Bạn đã thử gửi từ không đúng định dạng. Hãy chắc chắn rằng bạn sử dụng ngoặc vuông.",
+    "wrong_length": "Từ của bạn phải có chính xác {word_length} chữ cái.",
+    "already_guessed": "Bạn đã đoán '{word}' trước đó. Hãy thử một từ khác.",
+    "not_a_word": "'{word}' không phải là từ hợp lệ."
+  },
+  "feedback": {
+    "submitted": "Bạn đã gửi [{word}].\nPhản hồi:\n{view}\nBạn còn {guesses_left} lần đoán."
+  },
+  "outcome": {
+    "win": "Chúc mừng! Bạn đã đoán đúng từ!",
+    "turn_limit": "Hạn chế lượt đã đạt. Bạn không đoán được từ, nhưng lần đoán tốt nhất của bạn khớp {pct}% các chữ cái ở vị trí đúng.\nTừ bí mật là: **{secret}**."
+  }
+}

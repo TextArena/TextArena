@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id}. Hrajete hru 15-Puzzle.\nCílem hry je uspořádat číslované dlaždice v vzestupném pořadí od 1 do 15, s prázdným prostorem umístěným v pravém dolním rohu.\nChcete-li provést tah, můžete posunout dlaždici do prázdného prostoru (zobrazeného jako dvojité podtržítko, např. __) pomocí jedné z následujících příkazů:\n- 'up': Přesuňte dlaždici pod prázdným prostorem nahoru.\n- 'down': Přesuňte dlaždici nad prázdným prostorem dolů.\n- 'left': Přesuňte dlaždici napravo od prázdného prostoru doleva.\n- 'right': Přesuňte dlaždici nalevo od prázdného prostoru doprava.\nChcete-li odeslat svůj tah, zadejte směr (např. 'up', 'down', 'left' nebo 'right') v hranatých závorkách, např. [up].\nAktuální rozložení desky je zobrazeno níže. Použijte tyto informace k vyřešení hádanky.\n"
+  },
+  "board": {
+    "current_board": "Aktuální deska:\n\n{board}\nDostupné tahy: {moves}",
+    "game_board": "Herní deska:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát tahu. Hráč {player_id} neodpověděl platným směrem v hranatých závorkách.",
+    "illegal_move": "Neplatný tah. Dlaždici nelze přesunout ve specifikovaném směru."
+  },
+  "outcome": {
+    "win": "Gratulujeme! Hráč {player_id} úspěšně vyřešil hádanku 15-Puzzle.",
+    "turn_limit": "Byl dosažen limit tahů. Model dokončil {percent} procent hádanky."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in die Onderhandelingspel.\nJy het sekere hulpbronne, en jou taak is om te ruil sodat die totale waarde van jou hulpbronne toeneem.\nDie hulpbronne en verwante waardes wat jy tans het, is:\n\t+ {resource_value_list}\nMet elke beurt kan jy met jou teenstander praat en 'n ruiloanbod maak.\nGebruik die volgende spesiale tokens vir aksies:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Aangebode Hulpbronne -> Gewenste Hulpbronne]\n  - '[Accept]': Om 'n inkomende aanbod te aanvaar.\n  - '[Deny]': Om 'n inkomende aanbod te weier (verstek).\nDie spel duur vir {max_turns} beurte in totaal."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Speler het probeer om 'n ruil te aanvaar sonder om die nodige hulpbronne te hê.",
+    "out_of_range": "Speler {player_id}, Ongeldige aksie. Kolom {col} is buite die grense.",
+    "already_full": "Speler {player_id}, Ongeldige aksie. Kolom {col} is vol.",
+    "proposing_with_no_resource": "Speler {player_id} het probeer om 'n ruiloanbod te maak sonder om die nodige hulpbronne te hê.",
+    "incorrect_offer_format": "Speler {player_id} het 'n ruiloanbod in 'n verkeerde formaat gemaak.",
+    "no_new_offer": "Speler {player_id} het geen nuwe ruiloanbod gemaak nie."
+  },
+  "offers": {
+    "reject": "Speler {player_id} het die ruiloanbod verwerp.",
+    "accept": "Speler {acceptor_id} het die ruiloanbod van Speler {proposer_id} aanvaar.",
+    "proposal": "Speler {player_id} het die volgende aanbod aan Speler {opponent_id} gemaak: Aangebode items: {offered} -> Gewenste items: {requested}"
+  },
+  "outcome": {
+    "win": "Speler {winner_id} het gewen deur 'n groter toename in voorraadwaarde te hê.",
+    "draw": "Dieselfde verandering in voorraadwaarde vir alle spelers. Gelykopuitslag."
+  }
+}

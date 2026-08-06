@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround-lokaalitiedosto. ÄLÄ käännä avaimia (vasen puoli). Käännä vain arvot (oikea puoli). Säilytä jokainen {placeholder} täsmälleen sellaisenaan.",
+  "_slots": {
+    "{num_players}": "Pelaajien määrä ottelussa",
+    "{width}": "Pelilaudan leveys ruutuina",
+    "{height}": "Pelilaudan korkeus ruutuina",
+    "{player_id}": "Pelaajan numero (0-pohjainen)",
+    "{board}": "Renderöity ASCII-ruudukko; pidä neutraalina, älä koskaan käännä sen merkkejä",
+    "{reason}": "Renderöity pelin loppumisen syylause",
+    "{groups}": "Neutraali ranking-tieto (lista pelaajien ryhmistä, paras huonoin); älä käännä"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-pelaajan Surround {width}x{height}-ruudukolla.\nOlet pelaaja {player_id}. Kelpoiset siirrot: '[up]' '[down]' '[left]' '[right]' tai w/s/a/d.\nTavoite: selvitä kaikkien muiden edelle. Jäljet ovat tappavia; seinäosumat tappavat; päällekkäiset törmäykset tappavat molemmat."
+  },
+  "board": {
+    "current": "Nykyinen pelilauta:\n{board}",
+    "after_moves": "Pelilauta yhtäaikaisen siirron jälkeen:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Pelaaja {player_id} kuoli virheellisen siirron vuoksi."
+  },
+  "outcome": {
+    "survived_win": "Pelaaja {player_id} selvisi; kaikki muut törmäsivät.",
+    "all_crashed": "Kaikki pelaajat törmäsivät yhtä aikaa.",
+    "outlived": "Pelaaja selvisi kaikkien muiden edelle.",
+    "all_dead": "Kaikki pelaajat kuolleet.",
+    "turn_limit": "Vuorojen rajoitus saavutettu - pisimpään selvinnyt voittaa.",
+    "ranking": "{reason} Lopulliset ranking-ryhmät (paras→huonoin): {groups}"
+  }
+}

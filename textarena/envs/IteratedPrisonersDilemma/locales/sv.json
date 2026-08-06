@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Du är Spelare {player_id} i ett Itererat Fångarnas Dilemma som spänner över {num_rounds} omgångar.\n\nSpelstruktur:\n- Innan varje beslut har du {total_conversation_rounds} turer för att kommunicera fritt.\n- Efter det väljer båda spelarna samtidigt att samarbeta eller svika.\n\nUtbetalningsmatris (fast varje omgång):\n- Båda samarbetar ➜ varje {cooperate_reward}\n- Båda sviker ➜ varje {mutual_defect_reward}\n- En sviker, en samarbetar ➜ Sviker {defect_reward}, Samarbetare {sucker_reward}\n\nHur man spelar:\n- Under konversationen: skriv vilken text du vill.\n- Under beslutsfasen: inkludera '[Cooperate]' eller '[Defect]' (skiftlägesokänsligt). Du kan lägga till extra text före/efter token."
+  },
+  "phases": {
+    "conversation_finished": "Konversationen är avslutad för omgång {round}. Vänligen svara med '[Cooperate]' eller '[Defect]' inom \\boxed{{}}.",
+    "starting_round": "--- Startar Omgång {round} ---",
+    "round_summary": "Resultat för omgång {round}:\n{outcome}\nSpelare 0 tjänade {r0} (totalt {score_0}), Spelare 1 tjänade {r1} (totalt {score_1})."
+  },
+  "outcome": {
+    "winner": "Spelare {winner} vinner {win_score} - {lose_score}.",
+    "draw": "Oavgjort! Båda spelarna fick {s0}.",
+    "round_both_cooperate": "Båda spelarna samarbetade.",
+    "round_both_defect": "Båda spelarna svek.",
+    "round_p0_cooperates_p1_defects": "Spelare 0 samarbetade, Spelare 1 svek.",
+    "round_p0_defects_p1_cooperates": "Spelare 0 svek, Spelare 1 samarbetade."
+  }
+}

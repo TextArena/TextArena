@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Välkommen till Lights Out! Du har ett {size}x{size} rutnät av lampor.\nDitt mål är att släcka ALLA lampor (representerade av '.').\nNär du trycker på en lampa, växlar den sig själv OCH sina intilliggande grannar (upp/ner/vänster/höger).\nSkriv [rad kolumn] för att trycka på en lampa (0-indexerad, så giltigt område är 0-{max_index}).\nDu har upp till {max_turns} drag för att lösa pusslet.\nFörklaring: 'O' = lampa på, '.' = lampa av"
+  },
+  "board": {
+    "current_state": "Aktuell rutnätstillstånd (Drag {moves_made}, {moves_left} drag kvar, {completion}% komplett):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Åtgärden måste vara i format [rad kolumn] där rad och kolumn är heltal från 0 till {max_index}.",
+    "out_of_range": "Koordinaterna måste vara mellan 0 och {max_index}. Du angav [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Grattis! Du löste pusslet på {moves_used} drag!",
+    "loss": "Spelet är över! Du använde alla {max_turns} drag utan att lösa pusslet. Slutlig komplettering: {completion}%\nSlutlig tillstånd:\n{grid}"
+  }
+}

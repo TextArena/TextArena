@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w dwuosobowej grze Spite and Malice. Twoim celem jest jako pierwszy opróżnić swoją stertę wygranych.\n\n### Przegląd gry:\n- Celem jest opróżnienie swojej sterty wygranych poprzez zagrywanie kart do centralnych stert.\n- Możesz zagrywać karty z trzech źródeł:\n  1. Twojej **ręki** (zaczynasz każdą turę z maksymalnie 5 kartami w ręce).\n  2. **Górnej karty swojej sterty wygranych**.\n  3. **Górnej karty dowolnej ze swoich stert odrzuconych**.\n\n### Zasady gry:\n- Możesz zagrywać kartę do centralnej sterty, jeśli jest **o jeden stopień wyższa** niż górna karta na tej stercie (centralne sterty zaczynają się od Asa i idą do Damy; Króle są dzikie - mogą być zagrywane na dowolnej karcie, ale nie zmieniają kolejności stopni. Oznacza to, że jeśli Król jest użyty po 4, to ten Król ma stopień 5 i następna karta musi być 6).\n- Jeśli nie możesz zagrywać już żadnych kart, musisz **odrzucić kartę** do jednej ze swoich stert odrzuconych, aby zakończyć swoją turę.\n- Jeśli centralna sterta osiągnie Damę, zostanie automatycznie opróżniona.\n- Kolejność stopni jest: A=1, 2=2, ..., 9=9, J=10, Q=11, K jako dzika.\n\n### Akcje:\n1. **Dobierz**: Na początku swojej tury, dobierz karty, aby wypełnić swoją rękę do 5 kart. Wpisz **[draw]**, aby rozpocząć.\n2. **Zagraj kartę**: Aby zagrać kartę, określ kartę i centralną stertę w ten sposób: **[play A♠ 0]** (gdzie 'A♠' jest kartą, a '0' jest indeksem centralnej sterty).\n3. **Odrzuć**: Jeśli nie możesz już zagrywać kart, odrzuć kartę z ręki do sterty odrzuconych, aby zakończyć swoją turę. Wpisz **[discard A♠ 1]** (gdzie 'A♠' jest kartą, a '1' jest indeksem sterty odrzuconych). Zwróć uwagę, że nie możesz odrzucić żadnej karty ze sterty wygranych. Możesz odrzucić tylko karty z ręki.\n\n"
+  },
+  "board": {
+    "current_board": "Aktualna plansza:\n\n{board}\nDostępne ruchy: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Centralne sterty ---\n",
+    "pile": "{observation}Sterta {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Widok gracza {player_id} ---\n",
+    "payoff": "{observation}Sterta wygranych (górna karta): {top_card}, długość sterty wygranych: {payoff_length}\n",
+    "hand": "{observation}Ręka: {hand}\n",
+    "discard": "{observation}Sterty odrzucone: {discard}\n",
+    "empty": "Pusty"
+  },
+  "game_message": {
+    "no_cards_left": "Nie ma już kart do dobierania. Pamiętaj, że możesz zagrywać karty z następujących źródeł:\n  1. Twojej **ręki**.\n  2. **Górnej karty swojej sterty wygranych**.\n  3. **Górnej karty dowolnej ze swoich stert odrzuconych**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Nieprawidłowy format ruchu. Gracz {player_id} nie odpowiedział prawidłowym ruchem w nawiasach kwadratowych.",
+    "invalid_play": "Nieprawidłowy ruch. Gracz {player_id} próbował zagrać {card} na centralnej stercie {index}.",
+    "discard_from_payoff": "Nieprawidłowy odrzut. Gracz {player_id} próbował odrzucić kartę ze sterty wygranych.",
+    "discard_not_in_hand": "Nieprawidłowy odrzut. Gracz {player_id} próbował odrzucić kartę, która nie jest w ręce.",
+    "wrong_move_type": "Nieprawidłowy typ ruchu. Gracz {player_id} nie odpowiedział prawidłowym typem ruchu."
+  },
+  "game_action": {
+    "you_drew": "Dobierałeś karty.",
+    "opponent_drew": "Gracz {player_id} dobierał karty.",
+    "you_played": "Zagrałeś {card} na centralnej stercie {index}.",
+    "opponent_played": "Gracz {player_id} zagrał {card} na centralnej stercie {index}.",
+    "you_discarded": "Odrzuciłeś {card} do sterty odrzuconych {index}, co oznacza, że zakończyłeś swoją turę. Żadne dalsze akcje nie będą rozważane w tej turze. Gracz {next_player_id} będzie następny.",
+    "opponent_discarded": "Gracz {player_id} odrzucił {card} do sterty odrzuconych {index}, co oznacza, że zakończył swoją turę. Żadne dalsze akcje gracza {player_id} nie będą rozważane w tej turze. Gracz {next_player_id}, będziesz następny. Wpisz swoją akcję w formacie [akcja karta indeks]."
+  },
+  "outcome": {
+    "payoff_cleared": "Gracz {current_player} opróżnił swoją stertę wygranych! Gracz {current_player} wygrywa!",
+    "deadlock_player_0": "Osiągnięto impas! Gracz 0 wygrywa z {player_0_payoff} kartami pozostałymi w stosunku do {player_1_payoff} kart gracza 1.",
+    "deadlock_player_1": "Osiągnięto impas! Gracz 1 wygrywa z {player_1_payoff} kartami pozostałymi w stosunku do {player_0_payoff} kart gracza 0.",
+    "deadlock_tie": "Osiągnięto impas z remisem! Obydwaj gracze mają {player_0_payoff} kart pozostałych. Gracz {current_player} wygrywa domyślnie."
+  }
+}

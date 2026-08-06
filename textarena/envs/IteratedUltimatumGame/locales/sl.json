@@ -1,0 +1,43 @@
+{
+  "_comment": "Datoteka s prevodom za IteratedUltimatumGame. NE PREVADIJ ključev (levo), samo vrednosti (desno).",
+  "_slots": {
+    "{player_id}": "Številka igralca, 0 ali 1",
+    "{other_id}": "Številka drugega igralca, 1 ali 0",
+    "{num_rounds}": "Skupno število krogov",
+    "{pool}": "Znesek denarja, ki je na voljo vsak krog (število)",
+    "{round_number}": "Številka trenutnega kroga",
+    "{proposer_id}": "Številka igralca, ki predlaga, 0 ali 1",
+    "{responder_id}": "Številka igralca, ki odgovarja, 0 ali 1",
+    "{offer}": "Znesek, ki ga predlaga (število)",
+    "{keep}": "Znesek, ki ga predlagatelj obdrži (število)",
+    "{proposer_gain}": "Denar, ki ga je predlagatelj pridobil v tem krogu (število)",
+    "{responder_gain}": "Denar, ki ga je odgovarjalec pridobil v tem krogu (število)",
+    "{total_0}": "Skupni znesek igralca 0 (število)",
+    "{total_1}": "Skupni znesek igralca 1 (število)",
+    "{winner}": "Številka zmagovalnega igralca",
+    "{loser}": "Številka poraženega igralca",
+    "{winner_total}": "Skupni znesek zmagovalca (število)",
+    "{loser_total}": "Skupni znesek poraženca (število)",
+    "{total}": "Skupni znesek vsakega igralca v izenačenem zaključku (število)"
+  },
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} in igrate {num_rounds} krogov igre Iterated Ultimatum Game.\nImate ${pool} za razdelitev med sabo in Igralcem {other_id} v tem krogu.\n\nPredlagatelj:\n  - Naredite ponudbo: [Offer: $X] (0 <= X <= pool)\n  - Če sprejeto → Vi dobite $(pool - X), drugi igralec dobi $X\n  - Če zavrnjeno → Oba igralca dobita $0\n  - Primer: [Offer: $3]  ali  'Mislim, da je to pošteno. [Offer: $5]'\n\nOdgovarjalec:\n  - Odločite o ponudbi z [Accept] ali [Reject]\n  - Primer: 'To se mi zdi razumno. [Accept]'\n            'Preveč nepravično. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Krog {round_number} se začne! ---\nIgralec {proposer_id} je predlagatelj, Igralec {responder_id} je odgovarjalec.",
+    "offer": "Krog {round_number}: Igralec {proposer_id} ponuja ${offer} Igralcu {responder_id} (obdrži ${keep}).",
+    "accepted": "Igralec {responder_id} je sprejel! Krog {round_number} pridobitki: Igralec {proposer_id} +${proposer_gain}, Igralec {responder_id} +${responder_gain}. Novi skupni zneski: Igralec 0: ${total_0}, Igralec 1: ${total_1}.",
+    "rejected": "Igralec {responder_id} je zavrnil ponudbo! Krog {round_number} pridobitki: Oba igralca +$0. Skupni zneski ostanejo: Igralec 0: ${total_0}, Igralec 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Predlagatelj mora narediti ponudbo v obliki [Offer: $X].",
+    "bad_integer": "Znesek ponudbe mora biti veljavno celo število.",
+    "out_of_range": "Ponudba mora biti med $0 in ${pool}.",
+    "no_current_offer": "Ni trenutne ponudbe za odgovor.",
+    "accept_or_reject": "Odgovarjalec mora sprejeti ali zavrniti ponudbo z [Accept] ali [Reject]."
+  },
+  "outcome": {
+    "win": "Igralec {winner} je zmagal z ${winner_total} skupnim zneskom proti Igralcu {loser} z ${loser_total} skupnim zneskom.",
+    "draw": "Izenačeno! Oba igralca sta zaključila z ${total} skupnim zneskom."
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "_comment": "Filipino na lokasyon para sa Word Ladder. HUWAG isalin ang mga susi (kaliwang bahagi). Isalin lamang ang mga halaga (kanang bahagi).",
+  "_slots": {
+    "{player_id}": "Numero ng manlalaro (integer)",
+    "{start_word}": "Ang simula ng salita ng hagdan (neutral na token)",
+    "{target_word}": "Ang target na salita na dapat abutin (neutral na token)",
+    "{word}": "Ang salita na isinumite ng manlalaro (neutral na token)",
+    "{current}": "Ang kasalukuyang salita ng manlalaro (neutral na token)",
+    "{target}": "Ang target na salita (neutral na token)",
+    "{target_len}": "Haba ng target na salita (integer)",
+    "{ladder}": "Ang kasaysayan ng pagkilos na pinagdugtong ng ' -> ' (neutral na token)",
+    "{history}": "Ang linya ng kasaysayan na na-render na (naka-lokalize na; huwag isalin)",
+    "{pct}": "Porsiyento ng mga titik na ibinahagi sa target (integer)"
+  },
+  "prompt": {
+    "intro": "Ikaw ay Player {player_id}.  Ang iyong layunin ay abutin ang target na salita sa pamamagitan ng pagbabago ng **isang titik sa isang pagkakataon**.\n- Simulang salita:  **{start_word}**\n- Target na salita: **{target_word}**\nIsinumite ang bawat pagkilos sa loob ng mga panaklong, hal.  `[word]`.\nAng kasaysayan ay lilitaw sa ibaba habang naglalaro ka.  Mabuting suwerte!\n"
+  },
+  "invalid": {
+    "wrong_format": "Hindi wastong format. Balutin ang iyong salita sa loob ng mga panaklong, hal. `[word]`.",
+    "wrong_length": "`{word}` ay may maling haba; ang target ay {target_len} titik.",
+    "not_a_word": "`{word}` ay hindi isang kinikilalang salita.",
+    "not_one_different": "`{word}` ay hindi eksaktong isang titik na iba sa `{current}`."
+  },
+  "board": {
+    "history": "Kasaysayan ng Word Ladder: {ladder}.  Target na Salita: {target}\n"
+  },
+  "feedback": {
+    "progress": "Mabuti! Ituloy mo lang.\n{history}"
+  },
+  "outcome": {
+    "win": "Binabati kita! Abutin mo ang target na salita.",
+    "turn_limit": "Ang limitasyon ng pag-ikot ay naabot na. Abutin mo ang `{current}` na ibinabahagi ang {pct}% ng mga titik nito sa target `{target}`."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} Neuvottelupelissä.\nSinulla on joitakin resursseja, ja tehtäväsi on tehdä kauppoja siten, että resurssiesi kokonaisarvo kasvaa.\nResurssit ja niihin liittyvät arvot, joita sinulla tällä hetkellä on, ovat:\n\t+ {resource_value_list}\nJokaisella vuorolla voit keskustella vastustajasi kanssa ja tehdä kauppaehdotuksen.\nKäytä seuraavia erikoistunnuksia toimintojen suorittamiseen:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Tarjotut resurssit -> Pyydetty resurssit]\n  - '[Accept]': Hyväksyäksesi saapuvan tarjouksen.\n  - '[Deny]': Hylätäksesi saapuvan tarjouksen (oletus).\nPeli kestää {max_turns} vuoroa yhteensä."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Pelaaja yritti hyväksyä kaupan ilman tarvittavia resursseja.",
+    "out_of_range": "Pelaaja {player_id}, Virheellinen toiminto. Sarake {col} on rajojen ulkopuolella.",
+    "already_full": "Pelaaja {player_id}, Virheellinen toiminto. Sarake {col} on täynnä.",
+    "proposing_with_no_resource": "Pelaaja {player_id} yritti tehdä kauppaehdotuksen ilman tarvittavia resursseja.",
+    "incorrect_offer_format": "Pelaaja {player_id} teki kauppaehdotuksen virheellisessä muodossa.",
+    "no_new_offer": "Pelaaja {player_id} ei tehnyt uutta kauppaehdotusta."
+  },
+  "offers": {
+    "reject": "Pelaaja {player_id} hylkäsi kauppaehdotuksen.",
+    "accept": "Pelaaja {acceptor_id} hyväksyi kauppaehdotuksen Pelaajalta {proposer_id}.",
+    "proposal": "Pelaaja {player_id} teki seuraavan ehdotuksen Pelaajalle {opponent_id}: Tarjotut esineet: {offered} -> Pyydetty esineet: {requested}"
+  },
+  "outcome": {
+    "win": "Pelaaja {winner_id} voitti, koska hänen varastonsa arvo kasvoi enemmän.",
+    "draw": "Sama muutos varaston arvossa kaikilla pelaajilla. Tasapeli."
+  }
+}

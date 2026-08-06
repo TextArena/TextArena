@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Oled mängija {player_id} ja mängid Pig Dice'i.\n\nReeglid:\n- Oma käigu ajal saad kas '[roll]' või '[hold]'\n- Veereta 2-6: Lisa oma käigu kokku\n- Veereta 1: Kaota käigu kokku ja käigu lõpp\n- Hoida: Lisa käigu kokku oma skoorile ja käigu lõpp\n- Esimene, kes saavutab {winning_score} punkti, võidab\n\nKui on sinu käik, näed praeguseid skoore ja käigu kokku.\nVasta '[roll]' täringu veeretamiseks või '[hold]' punktide panemiseks."
+  },
+  "invalid_move": {
+    "invalid_action": "Vigane tegevuse vorming. Kasuta '[roll]' või '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Mängija {player_id} läks pankrotti ja kaotas {turn_total} punkti!",
+    "player_hold": "Mängija {player_id} hoiab ja panustab {turn_total} punkti."
+  },
+  "board": {
+    "player": "Mängija 0: '{score_0}'; Mängija 1: '{score_1}'",
+    "current_total_scores": "Praegused koguskoorid: {scores}\nSinu praegune käigu kokku on {turn_total}.",
+    "roll_history": "{observation}\nSinu veeretamise ajalugu selle käigu jooksul: {roll_history}",
+    "first_roll": "{observation}\nSee on sinu käigu esimene veeretamine.",
+    "available_actions": "{observation}\nSaadaolevad tegevused: '[roll]' või '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Mängija {winner_id} võitis, kuna tal oli kõrgem skoor käikude piirangul ({scores})",
+    "winner_by_score": "Mängija {winner_id} võitis, kuna ta jõudis sihtmärgi skoorini {winning_score}!",
+    "draw": "Käikude piirang on täis ja kõik mängijad on võrdsetel skooridel: {scores}"
+  }
+}

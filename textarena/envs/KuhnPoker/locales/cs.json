@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} v {max_rounds}kolové hře Kuhn Poker.\nPravidla hry:\n- Kuhn Poker používá 3kartový balíček s J, Q, K (J nejnižší, K nejvyšší)\n- Každý hráč vsadí {ante} žetonů a obdrží 1 kartu v každém kole (poznamenejte si, že karty jsou rozdávány bez náhrady, takže nemůžete mít stejnou kartu jako váš soupeř).\n- Hra pokračuje po {max_rounds} kol\n- Hráč s největším počtem žetonů po všech kolech vyhrává\nPravidla akcí:\n- '[check]': Přeskočte bez sázení (pouze pokud není na stole žádná sázka)\n- '[bet]': Přidejte 1 žeton do banku (pouze pokud není na stole žádná sázka)\n- '[call]': Dorovnejte soupeřovu sázku přidáním 1 žetonu do banku\n- '[fold]': Vzdáte se své ruky a nechte svého soupeře vyhrát bank"
+  },
+  "init_round": {
+    "round_start": "### Začíná kolo {current_round} z {max_rounds} kol. Vaše karta je: '{player_card}'",
+    "available_actions": "Vaše dostupné akce jsou: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Akce musí být [Check], [Bet], [Call] nebo [Fold].",
+    "not_legal": "Akce musí být {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Hráč {player_id} odeslal akci: '[{move}]'.",
+    "valid_actions": "Vaše dostupné akce jsou: {legal_actions}.",
+    "round_summary": "{reason} Aktuální skóre: Hráč 0: '{player_0_chips}'; Hráč 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Karta hráče {winner} {winner_card} poráží kartu hráče {loser} {loser_card}. Hráč {winner} vyhrává bank {pot_value} žetonů."
+  },
+  "outcome": {
+    "draw": "Na konci {max_rounds} kol měli oba hráči stejný počet žetonů.",
+    "round_win": "Hráč {player_id} se vzdal.",
+    "winner_player0": "Hráč 0 vyhrál tím, že měl na konci všech {max_rounds} kol více žetonů.",
+    "winner_player1": "Hráč 1 vyhrál tím, že měl na konci všech {max_rounds} kol více žetonů."
+  }
+}

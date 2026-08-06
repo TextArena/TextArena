@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Welkom by Lights Out! Jy het 'n {size}x{size} rooster van ligte.\nJou doel is om ALLE ligte AF te skakel (voorgestel deur '.').\nWanneer jy 'n lig druk, skakel dit self EN sy aangrensende bure (bo/onder/links regs).\nTik [ry kol] om 'n lig te druk (0-geïndekseerd, dus geldige reeks is 0-{max_index}).\nJy het tot {max_turns} skuiwe om die raaisel op te los.\nLegende: 'O' = lig AAN, '.' = lig AF"
+  },
+  "board": {
+    "current_state": "Huidige roosterstatus (Skuif {moves_made}, {moves_left} skuiwe oor, {completion}% voltooi):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksie moet in formaat [ry kol] wees waar ry en kol heelgetalle van 0 tot {max_index} is.",
+    "out_of_range": "Koördinate moet tussen 0 en {max_index} wees. Jy het [{row},{col}] ingevoer."
+  },
+  "outcome": {
+    "win": "Gelukwensing! Jy het die raaisel in {moves_used} skuiwe opgelos!",
+    "loss": "Speletjie oor! Jy het al {max_turns} skuiwe gebruik sonder om die raaisel op te los. Finale voltooiing: {completion}%\nFinale status:\n{grid}"
+  }
+}

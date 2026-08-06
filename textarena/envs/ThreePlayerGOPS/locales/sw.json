@@ -1,0 +1,39 @@
+{
+  "_comment": "Faili ya lugha ya ThreePlayerGOPS. USITAFSIRI funguo (upande wa kushoto). Tafsiri maadili tu (upande wa kulia).",
+  "_slots": {
+    "{player_id}": "Nambari ya mchezaji, 0, 1 au 2",
+    "{round}": "Nambari ya raundi ya sasa, 1..13",
+    "{prize}": "Lebo ya uso wa kadi ya zawadi iliyofichuliwa (A, 2..10, J, Q, K) - usitafsiri",
+    "{worth}": "Thamani ya jumla ya zawadi ikijumuisha kiasi chochote kilichobebwa",
+    "{hand}": "Kadi zilizobaki za mchezaji, zilizowekwa kama tokeni zilizowekwa mabano kama '[A]' '[2]' - usitafsiri",
+    "{bids}": "Orodha ya kadi zilizotolewa kwa njia isiyoegemea upande wowote kama 'P0:10, P1:J, P2:Q' - usitafsiri",
+    "{winner}": "Nambari ya mchezaji aliyeshinda raundi",
+    "{pot}": "Thamani ya zawadi iliyotolewa au iliyobebwa katika raundi hii",
+    "{scoreline}": "Ukumbi wa alama unaotumika kama 'P0:0  P1:0  P2:11' - usitafsiri",
+    "{pid}": "Nambari ya mchezaji aliyeliminika",
+    "{scores}": "Alama za mwisho kama mpangilio wa nambari ya mchezaji hadi alama - usitafsiri"
+  },
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Three-Player GOPS.\n- Una kadi 13 A-K (kila moja mara moja).\n- Kila raundi zawadi inafichuliwa. Wasilisha KADI MOJA kama `[Q]`, `[10]`, `[2]` …\n- Kadi ya juu inashinda zawadi (+ kiasi chochote kilichobebwa). Usawa unarudisha zawadi hadi raundi inayofuata.\n- Baada ya raundi 13, jumla ya juu inashinda. Hatua zisizo halali = kuondolewa."
+  },
+  "round": {
+    "header": "### Raundi {round}/13 - Zawadi: {prize} (thamani {worth})",
+    "hand": "Mikono yako iliyobaki: {hand}"
+  },
+  "reveal": {
+    "win": "Ofa » {bids} - Mchezaji {winner} anashinda {pot}.",
+    "tie": "Ofa » {bids} - usawa, sasa {pot}.",
+    "scores": "Alama → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "kitendo kinahitaji kadi iliyo na mabano kama '[Q]'",
+    "bad_card": "kadi tayari imechukuliwa au haifai"
+  },
+  "elimination": {
+    "player": "Mchezaji {pid} ameondolewa baada ya hatua zisizo halali mara kwa mara."
+  },
+  "outcome": {
+    "auto_win": "Wachezaji wawili wameondolewa - ushindi wa otomatiki.",
+    "final": "Alama za mwisho: {scores}"
+  }
+}

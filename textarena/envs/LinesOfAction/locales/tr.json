@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction dil dosyası. Anahtarları (sol taraf) çevirme. Yalnızca değerleri (sağ taraf) çevir.",
+  "_slots": {
+    "{player_id}": "Oyuncunun numarası, örneğin 0 veya 1",
+    "{side}": "Oyuncunun taş harfi, X veya O",
+    "{other}": "Rakibin taş harfi, X veya O",
+    "{board}": "Tahtanın ASCII gösterimi; olduğu gibi tutun",
+    "{coord}": "Tahta koordinatı, örneğin b1 veya a3",
+    "{from}": "Bir hamlenin kaynak koordinatı, örneğin b1",
+    "{to}": "Bir hamlenin hedef koordinatı, örneğin b3"
+  },
+  "player_prompt": {
+    "intro": "LinesOfAction oyununda Oyuncu {player_id}'siniz.\nTaşlarınız '{side}', rakip taşları '{other}'dir.\nHamle formatı: `[b1b3]` (başlangıç koordinatı-bitiş koordinatı). Yasal bir hamle, herhangi bir renkteki taşların toplam sayısına eşit kare sayısı kadar yatay, dikey veya çapraz olarak ilerler. Kendi taşlarınızın üzerinden atlayabilirsiniz, ancak rakip taşlarının üzerinden atlayamazsınız; rakip taşının üzerine inmek onu yakalar. Tüm taşlarınız 8 komşu bağlı olduğunda kazanırsınız."
+  },
+  "board": {
+    "current_board": "Tahta:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format e2e4 (başlangıç ve bitiş koordinatları) olmalıdır.",
+    "no_piece": "{coord} üzerinde {side} taşı yok.",
+    "identical": "Kaynak ve hedef aynı.",
+    "not_straight_or_diagonal": "Hamle düz veya çapraz olmalıdır.",
+    "wrong_distance": "Satırdaki taşlara eşit mesafe hareket etmelisiniz.",
+    "enemy_blocks": "Düşman taşı yolu engelliyor.",
+    "destination_own": "Hedef kendi taşınız tarafından işgal edildi."
+  },
+  "game_action": {
+    "moved": "Oyuncu {player_id} {from} -> {to} hareket etti",
+    "captured_suffix": "Oyuncu {player_id} {from} -> {to} hareket ederek bir düşman yakaladı."
+  },
+  "outcome": {
+    "win": "Tüm taşlar bağlı.",
+    "draw_no_capture": "60 hamle yakalamadan.",
+    "draw_repetition": "Pozisyon üç kez tekrarlandı."
+  }
+}

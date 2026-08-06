@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a Stratego-ban.\nCélja, hogy elfogja az ellenfél zászlóját vagy eliminálja az összes mozgatható darabját.\nA hadserege már el van helyezve az Ön számára a táblán, beleértve a zászlót, bombákat és más különböző rangú darabokat.\n\n### Játék Utasítások\n1. **Mozgatási Szabályok:**\n   - A következő lépésénél egy darabot egy lépéssel mozgathat egy szomszédos négyzetbe (fel, le, balra vagy jobbra), amely már foglalt a saját darabjaival.\n   - Példa: Egy darab az A1-ről B1-re vagy A1-ről A2-re mozoghat, ha B1 és A2 nincsenek elhelyezve a játékos saját darabjaival.\n   - Ha a kiválasztott darab egy bomba vagy egy zászló, akkor nem lehet mozgatni.\n2. **Csaták:**\n   - Ha egy olyan négyzetre mozog, amelyet egy ellenfél darabja foglal el, akkor csata történik:\n     - A magasabb rangú darab nyer és eliminálja az ellenfél darabját.\n     - Ha a rangok egyenlőek, mindkét darab eltávolításra kerül a tábláról.\n     - **Különleges Esetek:**\n       - A bombák a legtöbb támadó darabot eliminálják, kivéve az aknászokat, amelyek hatástalanítják a bombákat.\n       - A kémek legyőzhetik a marsallt, ha a kém támad először, de elveszítik az összes többi darab ellen.\n3. **Stratégiai Célok:**\n   - Azonosítsa az ellenfél darabjait a mozgásaik és csatáik révén.\n   - Védje a zászlaját, miközben megpróbálja elfogni az ellenfél zászlaját.\n   - Használja a felderítőket stratégiai módon, hogy információt szerezzen az ellenfél darabjairól és megtámadja a gyenge darabokat.\n\n### Hogyan tegyen lépést:\n1. Adja meg a darab koordinátáit, amelyet mozgatni szeretne, és a célkoordinátákat.\n2. Használja a következő formátumot: [A0 B0], ahol A0 a forrás pozíció, és B0 a cél pozíció.\n   - Példa: Egy darab mozgatása a 0. sorból, 0. oszlopból a 1. sorba, 0. oszlopba, írja be [A0 B0].\n3. Győződjön meg arról, hogy a cél érvényes a fenti mozgatási szabályok szerint.\n\n### Fontos Megjegyzések:\n- A tábla megjeleníti az Ön darabjait és pozícióikat, pl. MN, MS.\n- A tábla megjeleníti az ellenfél ismert pozícióit anélkül, hogy felfedné a rangjukat, pl. ?.\n- A ~ jelű rácsok tavak és nem lehet rájuk mozogni.\n- Javasoljuk, hogy kezdje a játékot az első sorban álló darabok mozgatásával, hogy információt szerezzen az ellenfél darabjairól. A 0. és 1. játékos frontvonala a D és G sorban van.\n\nItt látható az aktuális tábla állapot:\n"
+  },
+  "board": {
+    "current_board": "Aktuális Tábla:\n\n{board}\nElérhető Lépések: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Érvénytelen akció formátum. A {player_id}. játékos nem adott meg egy lépést a [A0 B0] formátumban.",
+    "invalid_coordinates": "Érvénytelen akció formátum. A {player_id}. játékos nem adott meg érvényes koordinátákat.",
+    "not_own_piece": "Érvénytelen akció formátum. A {player_id}. játékosnak saját darabját kell mozgatnia.",
+    "scout_through_pieces": "Érvénytelen akció formátum. A {player_id}. játékos nem mozgathat felderítőt más darabokon keresztül.",
+    "scout_diagonal": "Érvénytelen akció formátum. A {player_id}. játékos nem mozgathat felderítőt átlósan.",
+    "non_scout_multi_square": "Érvénytelen akció formátum. A darabok, a felderítők kivételével, csak egy négyzetet mozoghatnak egyszerre.",
+    "move_into_lake": "Érvénytelen akció formátum. A {player_id}. játékos nem mozoghat a tóba.",
+    "move_onto_own_piece": "Érvénytelen akció formátum. A {player_id}. játékos nem mozoghat saját darabjára.",
+    "move_bomb_or_flag": "Érvénytelen akció formátum. A {player_id}. játékos nem mozoghat bombát vagy zászlót."
+  },
+  "game_action": {
+    "you_moved": "Ön mozgatta a darabját a {source}-ból a {dest}-be.",
+    "opponent_moved": "A {player_id}. játékos mozgatta a darabját a {source}-ból a {dest}-be.",
+    "you_equal_ranks": "Ön mozgatta a darabját a {source}-ból a {dest}-be. A támadó darab {attacking_rank} és a cél darab {target_rank} volt. Mivel a rangok egyenlőek, mindkét darab elveszett.",
+    "opponent_equal_ranks": "A {player_id}. játékos mozgatta a darabját a {source}-ból a {dest}-be. A támadó darab {attacking_rank} és a cél darab {target_rank} volt. Mivel a rangok egyenlőek, mindkét darab elveszett.",
+    "you_miner_defused": "Ön mozgatta a darabját a {source}-ból a {dest}-be. A támadó darab {attacking_rank} és a cél darab {target_rank} volt. Mivel az aknászok hatástalaníthatják a bombákat, Ön nyerte a csatát.",
+    "opponent_miner_defused": "A {player_id}. játékos mozgatta a darabját a {source}-ból a {dest}-be. A támadó darab {attacking_rank} és a cél darab {target_rank} volt. Mivel az aknászok hatástalaníthatják a bombákat, Ön elveszítette a csatát.",
+    "you_bomb_lost": "Ön mozgatta a darabját a {source}-ból a {dest}-be. A támadó darab {attacking_rank} és a cél darab {target_rank} volt. Mivel a támadó nem aknász, Ön elveszítette a csatát.",
+    "opponent_bomb_won": "A {player_id}. játékos mozgatta a darabját a {source}-ból a {dest}-be. A támadó darab {attacking_rank} és a cél darab {target_rank} volt. Mivel a támadó nem aknász, Ön nyerte a csatát.",
+    "you_spy_won": "Ön mozgatta a darabját a {source}-ból a {dest}-be. A támadó darab {attacking_rank} és a cél darab {target_rank} volt. Mivel a támadó kém és a cél marsall, Ön nyerte a csatát.",
+    "opponent_spy_lost": "A {player_id}. játékos mozgatta a darabját a {source}-ból a {dest}-be. A támadó darab {attacking_rank} és a cél darab {target_rank} volt. Mivel a támadó kém és a cél marsall, Ön elveszítette a csatát.",
+    "you_higher_won": "Ön mozgatta a darabját a {source}-ból a {dest}-be. A támadó darab {attacking_rank} és a cél darab {target_rank} volt. Mivel a támadó magasabb rangú, mint a cél, Ön nyerte a csatát.",
+    "opponent_higher_lost": "A {player_id}. játékos mozgatta a darabját a {source}-ból a {dest}-be. A támadó darab {attacking_rank} és a cél darab {target_rank} volt. Mivel a támadó magasabb rangú, mint a cél, Ön elveszítette a csatát.",
+    "you_lower_lost": "Ön mozgatta a darabját a {source}-ból a {dest}-be. A támadó darab {attacking_rank} és a cél darab {target_rank} volt. Mivel a támadó alacsonyabb rangú, mint a cél, Ön elveszítette a csatát.",
+    "opponent_lower_won": "A {player_id}. játékos mozgatta a darabját a {source}-ból a {dest}-be. A támadó darab {attacking_rank} és a cél darab {target_rank} volt. Mivel a támadó alacsonyabb rangú, mint a cél, Ön nyerte a csatát."
+  },
+  "outcome": {
+    "flag_captured": "A {player_id}. játékos elfogta az ellenfél zászlóját!",
+    "no_movable_pieces": "A {winner_id}. játékos nyert! A {loser_id}. játékosnak nincs több mozgatható darabja."
+  }
+}

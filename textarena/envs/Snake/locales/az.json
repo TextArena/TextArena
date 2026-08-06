@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake yerli faylı. Açarları (sol tərəf) tərcümə etməyin. Yalnız dəyərləri (sağ tərəf) tərcümə edin.",
+  "_slots": {
+    "{num_players}": "Oyunda iştirak edən oyunçuların sayı",
+    "{width}": "Taxtanın eni (hücrələrdə)",
+    "{height}": "Taxtanın hündürlüyü (hücrələrdə)",
+    "{max_turns}": "Oyun üçün növbə limiti",
+    "{player_id}": "Oyunçunun nömrəsi (0-bazalı)",
+    "{board}": "Render edilmiş ASCII şəbəkəsi; neytral saxlayın, heç vaxt simvollarını tərcümə etməyin",
+    "{reason}": "Oyunun sonuna aid səbəb cümləsi",
+    "{groups}": "Neytral reytinq məlumatları (oyunçu-id qruplarının siyahısı, ən pisdən ən yaxşısına); tərcümə etməyin"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Oyunçu İlan {width}×{height} şəbəkəsində.\nSiz ilan {player_id}-ni idarə edirsiniz. Etibarlı hərəkətlər: '[up]'/'[down]'/'[left]'/'[right]' (və ya w/s/a/d).\nMəqsəd: ən uzun müddətə sağ qalmaq və ya ən uzun və ən yüksək balı almaq (növbə limiti {max_turns} növbə)."
+  },
+  "board": {
+    "current": "Cari Taxta:\n{board}",
+    "after_moves": "Cari Taxta Vəziyyəti:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "İlan {player_id} etibarsız hərəkətə görə öldü."
+  },
+  "outcome": {
+    "survived_win": "Oyunçu {player_id} sağ qaldı; bütün digərləri məhv oldu.",
+    "all_dead_simul": "Bütün ilan eyni vaxtda öldü.",
+    "outlived": "Oyunçu bütün digərlərindən daha uzun yaşadı.",
+    "all_dead": "Bütün ilan öldü.",
+    "turn_limit": "Növbə limitinə çatdı - ən yaxşı hesab qalib gəlir.",
+    "ranking": "{reason} Final reytinq qrupları (ən pisdən ən yaxşısına): {groups}"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe ロケールファイル。キー（左側）は翻訳しないでください。値（右側）のみを翻訳します。すべての {placeholder} をそのままにします。",
+  "_slots": {
+    "{player_id}": "プレイヤーの番号、例えば 0、1 または 2",
+    "{symbol}": "プレイヤーのマーク、A、B、または C のいずれか",
+    "{cell}": "ボードのセル番号",
+    "{max_cell}": "最大の有効なセル番号 (ボードサイズ^2 - 1)",
+    "{row}": "マークが置かれたボードの行インデックス",
+    "{col}": "マークが置かれたボードの列インデックス",
+    "{board}": "描画された ASCII ボード（翻訳しないでください）",
+    "{moves}": "利用可能な手のトークンのカンマ区切りリスト（例：'[4]'）（翻訳しないでください）"
+  },
+  "player_prompt": {
+    "intro": "あなたは Three-Player Tic Tac Toe のプレイヤー {player_id} です。\nあなたのシンボルは '{symbol}' です。\n5x5 のボード上で4つ並べる番を交代で行います。\n横、縦、または斜めのラインを作ることができます。\n手を提出する際は、'[4]' の形式を使用してセル 4 にマークを置きます。"
+  },
+  "board": {
+    "current_board": "現在のボード:\n\n{board}\n\n利用可能な手: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "無効な手の形式です。'[cell]' の形式を使用してください。ここで cell は 0-{max_cell} の範囲です。",
+    "out_of_range": "無効なセル番号: {cell}。0 から {max_cell} の間でなければなりません。",
+    "already_occupied": "セル {cell} はすでに占有されています。",
+    "made_invalid": "プレイヤー {player_id} が無効な手をしました"
+  },
+  "game_action": {
+    "placed": "プレイヤー {player_id} がフィールド ({row}, {col}) にシンボル ({symbol}) を置きました。"
+  },
+  "outcome": {
+    "win": "プレイヤー {player_id} ({symbol}) の勝利です！",
+    "draw": "引き分けです！"
+  }
+}

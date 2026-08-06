@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Olet {role} Colonel Blotto -pelissä.\nTavoitteesi on voittaa enemmän kierroksia kuin vastustajasi.\nJokaisella kierroksella, jaa tasan {num_total_units} yksikköä kenttien {field_names} kesken.\nPelaaja, joka jaa enemmän yksiköitä kentälle, voittaa sen kentän, ja pelaaja, joka voittaa enemmän kenttiä, voittaa kierroksen.\nEsimerkiksi '[A7 B7 C6]' jaa 7 yksikköä A:lle, 7 B:lle ja 6 C:lle.",
+    "commander_alpha": "Komentaja Alfa",
+    "commander_beta": "Komentaja Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Kierros {current_round}/{num_rounds} ===\nVoitetut kierrokset - Komentaja Alfa: {alpha_score}, Komentaja Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nKierros {current_round}\nKomentaja Alfa jakoi: {p0_allocations}\nKomentaja Beta jakoi: {p1_allocations}\n",
+    "winner_alpha": "{message}Voittaja: Komentaja Alfa",
+    "winner_beta": "{message}Voittaja: Komentaja Beta",
+    "tie": "{message}Tasapeli!"
+  },
+  "invalid_move": {
+    "wrong_format": "Virheellinen syötteen muoto. Käytä: A:5, B:10, C:5",
+    "invalid_field": "Virheellinen kentän nimi. Kelvolliset kentät: {field_names}",
+    "wrong_allocation_value": "Kaikki jakamiset tulee olla ei-negatiivisia kokonaislukuja.",
+    "incorrect_total_units": "Sinun tulee jakaa tasan {num_total_units} yksikköä. Nykyinen summa: {current_sum}",
+    "good_allocations": "Jakaminen on hyvä."
+  },
+  "outcome": {
+    "winner_alpha": "Komentaja Alfa voittaa {score_0}-{score_1} {num_rounds} kierroksen jälkeen!",
+    "winner_beta": "Komentaja Beta voittaa {score_1}-{score_0} {num_rounds} kierroksen jälkeen!",
+    "draw": "Peli päättyy {score_0}-{score_1} tasapeliin {num_rounds} kierroksen jälkeen!",
+    "early_winner_alpha": "Komentaja Alfa voittaa {scores_0}-{scores_1} (enemmistö saavutettu)!",
+    "early_winner_beta": "Komentaja Beta voittaa {scores_1}-{scores_0} (enemmistö saavutettu)!"
+  }
+}

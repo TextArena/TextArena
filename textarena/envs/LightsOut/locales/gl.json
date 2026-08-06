@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Benvido a Lights Out! Tes unha grella de {size}x{size} luces.\nO teu obxectivo é apagar TODAS as luces (representadas por '.').\nCando premas unha luz, cambia o seu estado e o dos seus veciños adxacentes (arriba/abaixo/esquerda/dereita).\nEscribe [fila columna] para premer unha luz (indexada a 0, polo que o rango válido é 0-{max_index}).\nTes ata {max_turns} movementos para resolver o crebacabezas.\nLenda: 'O' = luz acesa, '.' = luz apagada"
+  },
+  "board": {
+    "current_state": "Estado actual da grella (Movemento {moves_made}, {moves_left} movementos restantes, {completion}% completo):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "A acción debe estar no formato [fila columna] onde fila e columna son números enteiros de 0 a {max_index}.",
+    "out_of_range": "As coordenadas deben estar entre 0 e {max_index}. Introduciches [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Parabéns! Resolviches o crebacabezas en {moves_used} movementos!",
+    "loss": "Xogo rematado! Usaches todos os {max_turns} movementos sen resolver o crebacabezas. Completitude final: {completion}%\nEstado final:\n{grid}"
+  }
+}

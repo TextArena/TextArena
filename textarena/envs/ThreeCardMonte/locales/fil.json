@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte file ng lokasyon. HUWAG isalin ang mga susi (kaliwang bahagi). Isalin lamang ang mga halaga (kanang bahagi).",
+  "_slots": {
+    "{line}": "Ang nilikhang hilera ng mga tasa",
+    "{step}": "Ang kasalukuyang numero ng hakbang sa paghalo",
+    "{steps}": "Ang kabuuang numero ng mga hakbang sa paghalo",
+    "{i}": "Ang unang index ng tasa na kasama sa pagpapalit",
+    "{j}": "Ang pangalawang index ng tasa na kasama sa pagpapalit",
+    "{prompt}": "Ang lokal na bahagi ng paanyaya na idinagdag pagkatapos ng mga tasa",
+    "{max_index}": "Ang pinakamataas na wastong index ng tasa, hal. bilang_ng_tasa-1",
+    "{ball_pos}": "Ang index ng tasa kung saan nasa ilalim ang bola"
+  },
+  "player_prompt": {
+    "intro": "Subaybayan ang nakatagong bola 'X' habang ang mga tasa ay inihahalo.\nPagkatapos ng paghalo, hulaan ang lokasyon nito gamit ang `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Ang bola ay nagsisimula: {line}",
+    "shuffle": "Paghalo {step}/{steps}: pinagpalit ang mga tasa {i} at {j}.",
+    "cups": "Mga tasa: {line}  {prompt}",
+    "guess_now": "(Hulaan NA!)",
+    "reveal": "(Ibigay: ang bola ay nasa ilalim ng {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Maling pagkilos. Gamitin ang `[k]`.",
+    "out_of_range": "Index ay labas ng saklaw 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Tama! Nakita mo ang bola.",
+    "lose": "Mali — ang bola ay nasa ilalim ng tasa {ball_pos}."
+  }
+}

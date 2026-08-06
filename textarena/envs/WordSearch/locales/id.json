@@ -1,0 +1,37 @@
+{
+  "_comment": "Lokal Inggris untuk Word Search. Kunci (kiri) tetap; terjemahkan hanya nilai (kanan). Simpan setiap {placeholder} secara harfiah. Label grid (R00/C00), koordinat, dan format aksi dalam kurung siku '[start_row start_col end_row end_col]' dan contoh seperti '[1 1 1 5]' adalah NETRAL dan tidak boleh diterjemahkan. {board} dan {words} adalah konten game netral. Catatan: dalam prompt.intro kejadian '{{player_id}}' sengaja di-escape sehingga ditampilkan secara harfiah sebagai '{player_id}' (cocok dengan teks game asli).",
+  "_slots": {
+    "{player_id}": "Nomor pemain (bilangan bulat)",
+    "{mode}": "Label mode game (sudah diterjemahkan: Dasar/Ketat)",
+    "{tries}": "Jumlah upaya yang salah yang tersisa (bilangan bulat)",
+    "{board}": "Grid yang dirender (netral; jangan diterjemahkan)",
+    "{words}": "Daftar kata tersembunyi yang dipisahkan koma (token netral)",
+    "{coords}": "Koordinat 'start_row start_col end_row end_col' (netral)",
+    "{word}": "Kata tersembunyi yang ditemukan (token netral)",
+    "{found}": "Jumlah kata yang ditemukan (bilangan bulat)",
+    "{total}": "Jumlah total kata tersembunyi (bilangan bulat)",
+    "{pct}": "Persentase kata yang ditemukan (bilangan bulat)"
+  },
+  "prompt": {
+    "mode_basic": "Dasar",
+    "mode_hardcore": "Ketat",
+    "intro": "Anda adalah Pemain {player_id}, dan Anda sedang berpartisipasi dalam tantangan Word Search yang dimodelkan sebagai {mode}. Tujuan Anda adalah menemukan dan menandai kata-kata tersembunyi pada grid di bawah ini. Baris dan kolom dinomori untuk referensi Anda.\n\nBerikut adalah kondisi terkini dari papan Word Search:\n----------------------------------------\nKata-kata yang sudah Anda temukan ditandai dalam kurung siku [ ]. Setiap baris dan kolom dinomori untuk kejelasan.\n\n\nUntuk menemukan kata, tentukan baris dan kolom huruf awal dan akhirnya. Perhatikan bahwa kata-kata hanya bisa horizontal atau vertikal.\nAnda dapat mengetik respons dan pikiran Anda dengan cara apa pun. Namun, Anda hanya dapat mengirim satu pengiriman pada satu waktu. Untuk pengiriman Anda, gunakan format '[start_row start_col end_row end_col]'.\nMisalnya, jika Anda ingin menemukan kata 'HELLO' yang dimulai di baris 1, kolom 1 dan berakhir di baris 1, kolom 5, masukkan '[1 1 1 5]'.\n\nPedoman:\n- Setiap tebakan harus unik; Anda tidak dapat mengulangi tebakan yang sama.\n- Anda memiliki total {tries} upaya yang salah yang tersisa.\n- Riwayat upaya Anda akan dicatat di bawah ini.\n\nBuat tebakan Anda dengan hati-hati dan strategis. Selamat beruntung, Pemain {{player_id}}! Mari kita lihat berapa banyak kata yang dapat Anda temukan!\n"
+  },
+  "board": {
+    "state": "Papan Saat Ini:\n\n{board}\nKata yang Ditempatkan: {words}\nUpaya yang Salah Tersisa: {tries}"
+  },
+  "invalid": {
+    "wrong_format": "Format gerakan tidak valid. Pemain {player_id} tidak merespons dengan 'start_row, start_col, end_row, end_col' yang valid.",
+    "out_of_range": "Format gerakan tidak valid. Pemain {player_id} tidak merespons dengan 'start_row, start_col, end_row, end_col' yang valid.",
+    "already_attempted": "Gerakan tidak valid. Tindakan tersebut sudah pernah dicoba."
+  },
+  "feedback": {
+    "incorrect": "[{coords}] adalah upaya yang salah. {tries} upaya yang salah tersisa.",
+    "correct": "[{coords}] adalah upaya yang benar. Anda menemukan kata '{word}'.",
+    "correct_unknown": "[{coords}] adalah upaya yang benar, tetapi kata tersebut tidak ditemukan dalam kata-kata yang ditempatkan."
+  },
+  "outcome": {
+    "no_tries": "Tidak ada upaya yang salah yang tersisa. Anda menemukan {found} dari {total} kata ({pct}%).",
+    "win": "Selamat! Anda menyelesaikan teka-teki Word Search."
+  }
+}

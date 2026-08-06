@@ -1,0 +1,36 @@
+{
+  "_comment": "Soubor lokalizace pro LinesOfAction. NEpřekládávejte klíče (levá strana). Překládávejte pouze hodnoty (pravá strana).",
+  "_slots": {
+    "{player_id}": "Číslo hráče, buď 0 nebo 1",
+    "{side}": "Písmeno hráčovy figurky, buď O nebo X",
+    "{other}": "Písmeno soupeřovy figurky, buď O nebo X",
+    "{board}": "ASCII zobrazení desky; ponechte beze změny",
+    "{coord}": "Souřadnice na desce, jako například b1 nebo a3",
+    "{from}": "Výchozí souřadnice pohybu, jako například b1",
+    "{to}": "Cílová souřadnice pohybu, jako například b3"
+  },
+  "player_prompt": {
+    "intro": "Jste Hráč {player_id} ve hře LinesOfAction.\nVaše figurky jsou '{side}', soupeřovy figurky jsou '{other}'.\nFormát pohybu: `[b1b3]` (od souřadnice do souřadnice). Legální pohyb probíhá horizontálně, vertikálně nebo diagonálně o počet polí rovný celkovému počtu figurek (jakékoli barvy) v této řadě. Můžete přeskočit své vlastní figurky, ale ne soupeřovy; přistání na soupeřově figurce ji zajme.  Vyhráváte, když jsou všechny vaše figurky spojeny jako 8-sousední."
+  },
+  "board": {
+    "current_board": "Deska:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formát musí být e2e4 (souřadnice od, do).",
+    "no_piece": "Žádná {side} figurka na {coord}.",
+    "identical": "Výchozí a cílová souřadnice jsou identické.",
+    "not_straight_or_diagonal": "Pohyb musí být rovný nebo diagonální.",
+    "wrong_distance": "Musíte se pohybovat o vzdálenost rovnou počtu figurek v řadě.",
+    "enemy_blocks": "Soupeřova figurka blokuje cestu.",
+    "destination_own": "Cílová souřadnice je obsazena vlastní figurkou."
+  },
+  "game_action": {
+    "moved": "Hráč {player_id} se pohyboval {from} -> {to}",
+    "captured_suffix": "Hráč {player_id} se pohyboval {from} -> {to} a zajal soupeřovu figurku."
+  },
+  "outcome": {
+    "win": "Všechny figurky jsou spojeny.",
+    "draw_no_capture": "60 tahů bez zajetí soupeřovy figurky.",
+    "draw_repetition": "Pozice se opakovala třikrát."
+  }
+}

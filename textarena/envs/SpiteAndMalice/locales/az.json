@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Siz iki oyunçulu Spite and Malice oyununda Oyunçu {player_id}-siniz. Hədəfiniz ödəmə yığınınızı boşaltmaq üçün ilk olmaqdır.\n\n### Oyun Haqqında:\n- Məqsəd ödəmə yığınınızı mərkəz yığınlarına kart oynamaqla təmizləməkdir.\n- Siz kartları üç mənbədən oynaya bilərsiniz:\n  1. **Əlinizdəki kartlar** (hər gedişdə əlinizdə 5 kartla başlayırsınız).\n  2. **Ödəmə yığınınızın üst kartı**.\n  3. **Atılan kart yığınlarınızdan hər hansı birinin üst kartı**.\n\n### Oyun Qaydaları:\n- Siz mərkəz yığınına kart oynaya bilərsiniz əgər o kart **bir rütbə yuxarı** olsun (mərkəz yığınları Ace ilə başlayır və Queen-ə qədər gedir; Kral kartları istənilən karta oynanabilir, lakin rütbə ardıcıllığını dəyişmir. Bu, əgər Kral 4-dən sonra istifadə olunursa, o Kral 5-ci rütbəyə sahib olur və növbəti kart 6 olmalıdır).\n- Əgər siz daha kart oynaya bilməsəniz, gedişinizi bitirmək üçün kartı atılan kart yığınınıza **atmalısınız**.\n- Əgər mərkəz yığını Queen-ə çatarsa, avtomatik olaraq təmizlənəcək.\n- Rütbə ardıcıllığı: A=1, 2=2, ..., 9=9, J=10, Q=11, Kral istənilən karta oynanabilir.\n\n### Hərəkətlər:\n1. **Çəkmək**: Gedişinizə başlamaq üçün kartları çəkin ki, əlinizdə 5 kart olsun. **[draw]** daxil edin.\n2. **Kart Oynamaq**: Kart oynamaq üçün kartı və mərkəz yığınını belə göstərin: **[play A♠ 0]** (burada 'A♠' kartdır və '0' mərkəz yığınının indeksidir).\n3. **Atmaq**: Əgər siz daha kart oynaya bilməsəniz, əlinizdən kartı atılan kart yığınınıza atın ki, gedişinizi bitirin. **[discard A♠ 1]** daxil edin (burada 'A♠' kartdır və '1' atılan kart yığınının indeksidir). Qeyd edin ki, siz ödəmə yığınından kart ataya bilməzsiniz. Yalnız əlinizdəki kartları ata bilərsiniz.\n\n"
+  },
+  "board": {
+    "current_board": "Cari Taxta:\n\n{board}\nMövcud Hərəkətlər: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Mərkəz Yığınları ---\n",
+    "pile": "{observation}Yığın {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Oyunçu {player_id}-nin Görünüşü ---\n",
+    "payoff": "{observation}Ödəmə Yığını (Üst Kart): {top_card}, Ödəmə Yığını Uzunluğu: {payoff_length}\n",
+    "hand": "{observation}Əl: {hand}\n",
+    "discard": "{observation}Atılan Kart Yığınları: {discard}\n",
+    "empty": "Boş"
+  },
+  "game_message": {
+    "no_cards_left": "Çəkmək üçün daha kart yoxdur. Xatırlayın ki, siz kartları bu mənbələrdən oynaya bilərsiniz:\n  1. **Əlinizdəki kartlar**.\n  2. **Ödəmə yığınınızın üst kartı**.\n  3. **Atılan kart yığınlarınızdan hər hansı birinin üst kartı**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Yanlış hərəkət formatı. Oyunçu {player_id} kvadrat mötərizədə etibarlı hərəkətlə cavab vermədi.",
+    "invalid_play": "Yanlış oynama. Oyunçu {player_id} mərkəz yığını {index}-ə {card} kartını oynamağa çalışdı.",
+    "discard_from_payoff": "Yanlış atma. Oyunçu {player_id} ödəmə yığınından kart atmağa çalışdı.",
+    "discard_not_in_hand": "Yanlış atma. Oyunçu {player_id} əlində olmayan kartı atmağa çalışdı.",
+    "wrong_move_type": "Yanlış hərəkət tipi. Oyunçu {player_id} etibarlı hərəkət tipi ilə cavab vermədi."
+  },
+  "game_action": {
+    "you_drew": "Siz kartları çəkdiniz.",
+    "opponent_drew": "Oyunçu {player_id} kartları çəkdi.",
+    "you_played": "Siz mərkəz yığını {index}-ə {card} kartını oynadınız.",
+    "opponent_played": "Oyunçu {player_id} mərkəz yığını {index}-ə {card} kartını oynadı.",
+    "you_discarded": "Siz {card} kartını atılan kart yığını {index}-ə atmışsınız, bu da sizin gedişinizi bitirir. Bu gediş üçün sizin daha hərəkətləriniz nəzərə alınmayacaq. Oyunçu {next_player_id} növbəti gedişi edəcək.",
+    "opponent_discarded": "Oyunçu {player_id} {card} kartını atılan kart yığını {index}-ə atmışdır, bu da onların gedişini bitirir. Bu gediş üçün Oyunçu {player_id}-nin daha hərəkətləri nəzərə alınmayacaq. Oyunçu {next_player_id}, sizin növbənizdir. Zəhmət olmasa hərəkətinizi [hərəkət kart mərkəz_indeksi] formatında daxil edin."
+  },
+  "outcome": {
+    "payoff_cleared": "Oyunçu {current_player} ödəmə yığınını bitirdi! Oyunçu {current_player} qazandı!",
+    "deadlock_player_0": "Heç-heçə! Oyunçu 0 {player_0_payoff} kartla qalib gəldi, Oyunçu 1-in {player_1_payoff} kartı var.",
+    "deadlock_player_1": "Heç-heçə! Oyunçu 1 {player_1_payoff} kartla qalib gəldi, Oyunçu 0-in {player_0_payoff} kartı var.",
+    "deadlock_tie": "Heç-heçə bərabərliklə! Hər iki oyunçunun {player_0_payoff} kartı var. Oyunçu {current_player} susmaya görə qazandı."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} v Stratego.\nVašim cieľom je získať vlajku súpera alebo eliminovať všetky jeho pohyblivé kameny.\nVaša armáda bola umiestnená na dosku, vrátane vašej vlajky, bômb a ďalších kameňov rôznych hodností.\n\n### Inštrukcie k hraní\n1. **Pravidlá pohybu:**\n   - Počas svojej ťahy môžete presunúť jeden kameň o jeden krok do susedného štvorca (hore, dolu, vľavo alebo vpravo), ktorý je už obsadený vašimi kameňmi.\n   - Príklad: Kameň môže presunúť z A1 do B1 alebo A1 do A2, ak B1 a A2 nie sú umiestnené s hráčovými vlastnými kameňmi.\n   - Ak je vybraný kameň bômba alebo vlajka, nemôže byť presunutý.\n2. **Bitky:**\n   - Ak sa presunete na štvorec obsadený súperovým kameňom, potom sa bude konať bitka:\n     - Kameň s vyššou hodnosťou víťazí a eliminuje súperov kameň.\n     - Ak sú hodnosti rovnaké, oba kameňe sú odstránené z dosky.\n     - **Špeciálne prípady:**\n       - Bômba eliminuje väčšinu útočiacich kameňov okrem baníkov, ktorí zneškodňujú bômbu.\n       - Špión môže poraziť maršala, ak špión zaútočí prvý, ale prehrá s ostatnými kameňmi.\n3. **Strategické ciele:**\n   - Identifikujte súperove kameňe prostredníctvom ich pohybov a bitiek.\n   - Chráňte vašu vlajku a zároveň sa pokúste získať súperovu vlajku.\n   - Použite prieskumníkov strategicky, aby ste získali informácie o súperových kameňoch a zaútočili na slabé.\n\n### Ako urobiť ťah:\n1. Špecifikujte súradnice kameňa, ktorý chcete presunúť, a jeho cieľ.\n2. Použite formát: [A0 B0], kde A0 je východisková pozícia a B0 je cieľová pozícia.\n   - Príklad: Ak chcete presunúť kameň z riadku 0, stĺpca 0 do riadku 1, stĺpca 0, zadajte [A0 B0].\n3. Zabezpečte, aby cieľ bol platný podľa pravidiel pohybu vyššie.\n\n### Dôležité poznámky:\n- Doska zobrazí vaše kameňe a ich pozície, napr. MN, MS.\n- Doska tiež zobrazí známe pozície súperových kameňov bez odhalenia ich hodností, napr. ?.\n- Mriežky s ~ sú jazerá a nemôžu byť presunuté.\n- Ako návrh, začnite hru tým, že presuniete kameňe, ktoré sú na frontových líniách, aby ste získali informácie o súperových kameňoch. Hráč 0 a hráč 1 majú frontové línie v riadku D a G.\n\nTu je aktuálny stav dosky:\n"
+  },
+  "board": {
+    "current_board": "Aktuálna doska:\n\n{board}\nDostupné ťahy: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát akcie. Hráč {player_id} nezadal ťah v formáte [A0 B0].",
+    "invalid_coordinates": "Neplatný formát akcie. Hráč {player_id} nezadal platné súradnice.",
+    "not_own_piece": "Neplatný formát akcie. Hráč {player_id} musí presunúť jeden zo svojich vlastných kameňov.",
+    "scout_through_pieces": "Neplatný formát akcie. Hráč {player_id} nemôže presunúť prieskumníka cez iné kameňe.",
+    "scout_diagonal": "Neplatný formát akcie. Hráč {player_id} nemôže presunúť prieskumníka diagonálne.",
+    "non_scout_multi_square": "Neplatný formát akcie. Kameňe, okrem prieskumníkov, môžu byť presunuté iba o jeden štvorec naraz.",
+    "move_into_lake": "Neplatný formát akcie. Hráč {player_id} nemôže presunúť do jazera.",
+    "move_onto_own_piece": "Neplatný formát akcie. Hráč {player_id} nemôže presunúť na svoj vlastný kameň.",
+    "move_bomb_or_flag": "Neplatný formát akcie. Hráč {player_id} nemôže presunúť bômbu alebo vlajku."
+  },
+  "game_action": {
+    "you_moved": "Presunuli ste svoj kameň z {source} do {dest}.",
+    "opponent_moved": "Hráč {player_id} presunul kameň z {source} do {dest}.",
+    "you_equal_ranks": "Presunuli ste svoj kameň z {source} do {dest}. Útočiaci kameň bol {attacking_rank} a cieľový kameň bol {target_rank}. Keďže sú hodnosti rovnaké, oba kameňe boli odstránené.",
+    "opponent_equal_ranks": "Hráč {player_id} presunul kameň z {source} do {dest}. Útočiaci kameň bol {attacking_rank} a cieľový kameň bol {target_rank}. Keďže sú hodnosti rovnaké, oba kameňe boli odstránené.",
+    "you_miner_defused": "Presunuli ste svoj kameň z {source} do {dest}. Útočiaci kameň bol {attacking_rank} a cieľový kameň bol {target_rank}. Keďže baníci môžu zneškodniť bômbu, vyhráli ste bitku.",
+    "opponent_miner_defused": "Hráč {player_id} presunul kameň z {source} do {dest}. Útočiaci kameň bol {attacking_rank} a cieľový kameň bol {target_rank}. Keďže baníci môžu zneškodniť bômbu, prehrali ste bitku.",
+    "you_bomb_lost": "Presunuli ste svoj kameň z {source} do {dest}. Útočiaci kameň bol {attacking_rank} a cieľový kameň bol {target_rank}. Keďže útočník nie je baník, prehrali ste bitku.",
+    "opponent_bomb_won": "Hráč {player_id} presunul kameň z {source} do {dest}. Útočiaci kameň bol {attacking_rank} a cieľový kameň bol {target_rank}. Keďže útočník nie je baník, vyhráli ste bitku.",
+    "you_spy_won": "Presunuli ste svoj kameň z {source} do {dest}. Útočiaci kameň bol {attacking_rank} a cieľový kameň bol {target_rank}. Keďže útočník je špión a cieľ je maršal, vyhráli ste bitku.",
+    "opponent_spy_lost": "Hráč {player_id} presunul kameň z {source} do {dest}. Útočiaci kameň bol {attacking_rank} a cieľový kameň bol {target_rank}. Keďže útočník je špión a cieľ je maršal, prehrali ste bitku.",
+    "you_higher_won": "Presunuli ste svoj kameň z {source} do {dest}. Útočiaci kameň bol {attacking_rank} a cieľový kameň bol {target_rank}. Keďže útočník má vyššiu hodnosť ako cieľ, vyhráli ste bitku.",
+    "opponent_higher_lost": "Hráč {player_id} presunul kameň z {source} do {dest}. Útočiaci kameň bol {attacking_rank} a cieľový kameň bol {target_rank}. Keďže útočník má vyššiu hodnosť ako cieľ, prehrali ste bitku.",
+    "you_lower_lost": "Presunuli ste svoj kameň z {source} do {dest}. Útočiaci kameň bol {attacking_rank} a cieľový kameň bol {target_rank}. Keďže útočník má nižšiu hodnosť ako cieľ, prehrali ste bitku.",
+    "opponent_lower_won": "Hráč {player_id} presunul kameň z {source} do {dest}. Útočiaci kameň bol {attacking_rank} a cieľový kameň bol {target_rank}. Keďže útočník má nižšiu hodnosť ako cieľ, vyhráli ste bitku."
+  },
+  "outcome": {
+    "flag_captured": "Hráč {player_id} získal vlajku súpera!",
+    "no_movable_pieces": "Hráč {winner_id} víťazí! Hráč {loser_id} nemá žiadne ďalšie pohyblivé kameňe."
+  }
+}

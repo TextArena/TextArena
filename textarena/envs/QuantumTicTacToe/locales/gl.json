@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} en Tic Tac Toe Cuántico.\nO teu símbolo é '{symbol}', e os números dos teus movementos son sempre {parity} (por exemplo, X1, X3 ou O2, O4).\n\nObxectivo: Gaña formando unha liña de tres marcas clásicas (solidificadas a partir de superposicións).\n\nComo xogar:\n- En cada quenda, coloca unha marca espeluznante en dous cadrados baleiros diferentes usando o formato '[a,b]'.\n- Estas marcas están entrelazadas e etiquetadas como 'X1 / X1' ou 'O4 / O4'.\n- Non podes colocar marcas espeluznantes nun cadrado que xa colapsou (solidificouse).\n\nRegra de colapso:\n- Se o teu movemento crea un ciclo no grafo de entrelazamento, colapsa automaticamente.\n- Cada marca espeluznante no ciclo convértese nunha marca clásica nunha das súas dúas posicións.\n- As marcas espeluznantes dependentes tamén colapsan.\n\nVitoria:\n- O xogo remata cando un xogador ten tres marcas clásicas en liña.\n- Se ambos xogadores obtén unha liña durante o mesmo colapso, gaña o que ten o número máximo de movemento máis baixo.\n\nExemplo de movemento: '[0,4]' coloca unha marca espeluznante nas celas 0 e 4."
+  },
+  "board": {
+    "current_board": "Taboleiro de Tic Tac Toe Cuántico:\n\n{board}\n\nEnvía o teu movemento como '[a,b]' para colocar unha marca cuántica en dúas localizacións."
+  },
+  "invalid_move": {
+    "wrong_format": "Formato incorrecto. Usa '[a,b]'.",
+    "invalid_cells": "Índices de cela inválidos ou duplicados.",
+    "already_solidified": "Unha das celas xa está solidificada."
+  },
+  "game_action": {
+    "placed": "O Xogador {player_id} colocou o seu símbolo nunha superposición entre as celas {pos_a} e {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposición dependente resolta. A cela ({r}, {c}) agora é {symbol}.",
+    "last_cell_resolved": "Superposición para a última cela resolta. A cela ({r}, {c}) agora é {symbol}.",
+    "superposition_resolved": "Superposición resolta. A cela ({r}, {c}) agora é {symbol}."
+  },
+  "outcome": {
+    "win": "O Xogador {player_id} gaña con marcas solidificadas!",
+    "draw": "O xogo é un empate!"
+  }
+}

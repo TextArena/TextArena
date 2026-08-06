@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś {role} w Colonel Blotto.\nTwoim celem jest wygranie większej liczby rund niż przeciwnik.\nW każdej rundzie przydziel dokładnie {num_total_units} jednostek na pola {field_names}.\nGracz, który przydziela więcej jednostek do pola, wygrywa to pole, a gracz, który wygrywa więcej pól, wygrywa rundę.\nNa przykład, '[A7 B7 C6]' przydziela 7 jednostek do A, 7 do B i 6 do C.",
+    "commander_alpha": "Dowódca Alfa",
+    "commander_beta": "Dowódca Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Runda {current_round}/{num_rounds} ===\nRundy Wygrane - Dowódca Alfa: {alpha_score}, Dowódca Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRunda {current_round}\nDowódca Alfa przydzielił: {p0_allocations}\nDowódca Beta przydzielił: {p1_allocations}\n",
+    "winner_alpha": "{message}Zwycięzca: Dowódca Alfa",
+    "winner_beta": "{message}Zwycięzca: Dowódca Beta",
+    "tie": "{message}Remis!"
+  },
+  "invalid_move": {
+    "wrong_format": "Niepoprawny format wejściowy. Użyj: A:5, B:10, C:5",
+    "invalid_field": "Niepoprawna nazwa pola. Prawidłowe pola: {field_names}",
+    "wrong_allocation_value": "Wszystkie przydziały muszą być nieujemnymi liczbami całkowitymi.",
+    "incorrect_total_units": "Musisz przydzielić dokładnie {num_total_units} jednostek. Aktualna suma: {current_sum}",
+    "good_allocations": "Przydział jest poprawny."
+  },
+  "outcome": {
+    "winner_alpha": "Dowódca Alfa wygrywa {score_0}-{score_1} po {num_rounds} rundach!",
+    "winner_beta": "Dowódca Beta wygrywa {score_1}-{score_0} po {num_rounds} rundach!",
+    "draw": "Gra kończy się remisem {score_0}-{score_1} po {num_rounds} rundach!",
+    "early_winner_alpha": "Dowódca Alfa wygrywa {scores_0}-{scores_1} (osiągnięta większość)!",
+    "early_winner_beta": "Dowódca Beta wygrywa {scores_1}-{scores_0} (osiągnięta większość)!"
+  }
+}

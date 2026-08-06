@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Stai giocando al gioco Minesweeper.\nL'obiettivo del gioco è rivelare tutte le celle che non contengono mine.\nPer fare una mossa, specifica semplicemente le coordinate di riga e colonna che desideri rivelare utilizzando il formato:\n- `[row col]`: Rivela la cella alla riga e colonna specificate.\nAd esempio:\n- `[3 2]` per rivelare la cella nella riga 3, colonna 2.\n- `[5 6]` per rivelare la cella nella riga 5, colonna 6.\nAl tuo primo turno, rivelerai un'area intorno alla cella che scegli per assicurarti un inizio sicuro.\nLa disposizione attuale della tavola è mostrata di seguito. Le celle non rivelate sono rappresentate da un punto ('.'), i numeri rivelati mostrano il conteggio delle mine adiacenti.\nFai attenzione a non scegliere celle già rivelate.\nEcco la disposizione attuale della tavola:\n"
+  },
+  "board": {
+    "game_board": "Tavola di gioco:\n\n{board}",
+    "current_board": "Tavola attuale:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Non hai risposto con coordinate valide tra parentesi quadre.",
+    "out_of_bounds": "Le coordinate di riga e colonna specificate sono fuori dai limiti.",
+    "already_revealed": "La cella in ({row}, {col}) è già stata rivelata.",
+    "hit_mine": "Hai colpito una mina in ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Hai rivelato la cella in ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Congratulazioni! Hai ripulito con successo la tavola di Minesweeper.",
+    "turn_limit": "È stato raggiunto il limite di turni. Hai scoperto con successo il {percent}% delle celle sicure."
+  }
+}

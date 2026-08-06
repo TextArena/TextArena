@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a Nim-ben.\nCélja, hogy elvegye az utolsó megmaradt tárgyat.\nMinden körben válasszon pontosan egy kupacot és távolítson el egy vagy több tárgyat belőle.\nHasználja a '[kupac mennyiség]' formátumot, ahol a kupac a kupac indexe és a mennyiség a tárgyak száma, amelyeket el szeretne távolítani.\nPéldául, '[0 3]' 3 tárgyat távolít el a 0. kupacból."
+  },
+  "state": {
+    "current_pile": "Aktuális kupac:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nem található érvényes lépésformátum. Használja a '[kupac mennyiség]' formátumot.",
+    "correct_format_wrong_fields": "{player_id}. játékos, érvénytelen művelet. Az {col} oszlop határon kívül van.",
+    "out_of_range": "A {pile_index} kupacindex határon kívül van.",
+    "non_positive": "Legalább 1 tárgyat el kell távolítani.",
+    "exceeds_pile": "Nem lehet {quantity} tárgyat eltávolítani a {pile_index} kupacból (csak {pile_count} maradt)."
+  },
+  "observation": {
+    "removed_from_piles": "{player_id}. játékos játszotta a [{pile_index} {quantity}] lépést, eltávolítva {quantity} tárgyat a {pile_index} kupacból."
+  },
+  "outcome": {
+    "win": "{player_id}. játékos elvette az utolsó tárgyat!"
+  }
+}

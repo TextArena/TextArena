@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame nyelvi fájl. NE fordítsa le a kulcsokat (bal oldal). Csak a értékeket fordítsa le (jobb oldal). Tartsa meg minden {placeholder}-t pontosan úgy, ahogy van; ne fordítsa le a műveleti tokeneket [Offer: $X] / [Accept] / [Reject]. Tartsa meg a '$' valuta jelet és az összes számot úgy, ahogy van.",
+  "_slots": {
+    "{player_id}": "A játékos száma, 0 vagy 1",
+    "{other_id}": "A másik játékos száma, 1 vagy 0",
+    "{num_rounds}": "A körök teljes száma",
+    "{pool}": "A rendelkezésre álló pénzösszeg minden körben (egy szám)",
+    "{round_number}": "Az aktuális kör száma",
+    "{proposer_id}": "A javaslattevő játékos száma, 0 vagy 1",
+    "{responder_id}": "A válaszadó játékos száma, 0 vagy 1",
+    "{offer}": "A felajánlott összeg (egy szám)",
+    "{keep}": "A javaslattevő által megtartott összeg (egy szám)",
+    "{proposer_gain}": "A javaslattevő által ebben a körben szerzett pénz (egy szám)",
+    "{responder_gain}": "A válaszadó által ebben a körben szerzett pénz (egy szám)",
+    "{total_0}": "A 0. játékos felhalmozott összege (egy szám)",
+    "{total_1}": "Az 1. játékos felhalmozott összege (egy szám)",
+    "{winner}": "A nyertes játékos száma",
+    "{loser}": "A vesztes játékos száma",
+    "{winner_total}": "A nyertes játékos teljes pénze (egy szám)",
+    "{loser_total}": "A vesztes játékos teljes pénze (egy szám)",
+    "{total}": "Minden játékos döntetlen végső összege (egy szám)"
+  },
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos, aki {num_rounds} kört játszik az Iterated Ultimatum Game-ben.\nÖnnek ${pool} áll rendelkezésre, hogy ebben a körben megossza maga és a {other_id}. játékos között.\n\nJavaslattevő:\n  - Tegyen ajánlatot: [Offer: $X] (0 <= X <= pool)\n  - Ha elfogadják → Ön $(pool - X)-t kap, a másik játékos $X-t kap\n  - Ha elutasítják → Mindketten $0-t kapnak\n  - Példa: [Offer: $3]  vagy  'Úgy gondolom, ez igazságos. [Offer: $5]'\n\nVálaszadó:\n  - Döntsön az ajánlatról [Accept] vagy [Reject] segítségével\n  - Példa: 'Ez ésszerűnek tűnik. [Accept]'\n            'Túl igazságtalan. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- A {round_number}. kör kezdődik! ---\nA {proposer_id}. játékos a javaslattevő, a {responder_id}. játékos a válaszadó.",
+    "offer": "{round_number}. kör: A {proposer_id}. játékos ${offer}-t ajánl a {responder_id}. játékosnak (${keep}-t megtartva).",
+    "accepted": "A {responder_id}. játékos elfogadta! A {round_number}. kör nyeresége: {proposer_id}. játékos +${proposer_gain}, {responder_id}. játékos +${responder_gain}. Új összegek: 0. játékos: ${total_0}, 1. játékos: ${total_1}.",
+    "rejected": "A {responder_id}. játékos elutasította az ajánlatot! A {round_number}. kör nyeresége: Mindkét játékos +$0. Az összegek változatlanok: 0. játékos: ${total_0}, 1. játékos: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "A javaslattevőnek ajánlatot kell tennie a [Offer: $X] formátumban.",
+    "bad_integer": "Az ajánlat összegének érvényes egész számnak kell lennie.",
+    "out_of_range": "Az ajánlatnak $0 és ${pool} között kell lennie.",
+    "no_current_offer": "Nincs aktuális ajánlat, amelyre válaszolni lehet.",
+    "accept_or_reject": "A válaszadónak vagy [Accept]-tel kell elfogadnia, vagy [Reject]-tel elutasítania az ajánlatot."
+  },
+  "outcome": {
+    "win": "A {winner}. játékos nyert ${winner_total} összeggel a {loser}. játékos ${loser_total} összegével szemben.",
+    "draw": "Döntetlen! Mindkét játékos ${total} összeggel fejezte be a játékot."
+  }
+}

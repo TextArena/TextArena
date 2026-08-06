@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} Iteruotame Kalėjimo Dilemos žaidime, kuris trunka {num_rounds} raundus.\n\nŽaidimo struktūra:\n- Prieš kiekvieną sprendimą turite {total_conversation_rounds} ėjimų laisvai bendrauti.\n- Po to abu žaidėjai vienu metu pasirenka ar bendradarbiauti, ar išduoti.\n\nAtlygio matrica (fiksuoja kiekvieną raundą):\n- Abu bendradarbiauja ➜ kiekvienas {cooperate_reward}\n- Abu išduoda ➜ kiekvienas {mutual_defect_reward}\n- Vienas išduoda, kitas bendradarbiauja ➜ išduotojas {defect_reward}, bendradarbiavęs {sucker_reward}\n\nKaip žaisti:\n- Pokalbio metu: įveskite bet kokį tekstą, kurį norite.\n- Sprendimo fazėje: įtraukite '[Cooperate]' arba '[Defect]' (nesvarbu, didžiosios ar mažosios raidės). Galite pridėti papildomą tekstą prieš/ar po žetoną."
+  },
+  "phases": {
+    "conversation_finished": "Pokalbis baigtas {round} raundui. Prašome atsakyti su '[Cooperate]' arba '[Defect]' viduje \\boxed{{}}.",
+    "starting_round": "--- Pradedamas {round} raundas ---",
+    "round_summary": "{round} raundo rezultatai:\n{outcome}\nŽaidėjas 0 uždirbo {r0} (viso {score_0}), žaidėjas 1 uždirbo {r1} (viso {score_1})."
+  },
+  "outcome": {
+    "winner": "Žaidėjas {winner} laimi {win_score} - {lose_score}.",
+    "draw": "Lygiosios! Abu žaidėjai surinko {s0} taškų.",
+    "round_both_cooperate": "Abu žaidėjai bendradarbiavo.",
+    "round_both_defect": "Abu žaidėjai išduodami.",
+    "round_p0_cooperates_p1_defects": "Žaidėjas 0 bendradarbiavo, žaidėjas 1 išduodamas.",
+    "round_p0_defects_p1_cooperates": "Žaidėjas 0 išduodamas, žaidėjas 1 bendradarbiavo."
+  }
+}

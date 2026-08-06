@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} nun xogo de dous xogadores de Spite e Malice. O teu obxectivo é ser o primeiro en baleirar a túa pila de pago.\n\n### Visión xeral do xogo:\n- O obxectivo é limpar a túa pila de pago xogando cartas ás pilas centrais.\n- Podes xogar cartas de tres fontes:\n  1. A túa **man** (comezas cada quenda con ata 5 cartas na man).\n  2. A **carta superior da túa pila de pago**.\n  3. A **carta superior de calquera das túas pilas de descarte**.\n\n### Regras de xogo:\n- Podes xogar unha carta a unha pila central se é **un rango máis alto** que a carta superior nesa pila (as pilas centrais comezan con As e van ata Raíña; os Reis son comodíns - poden xogarse en calquera carta pero non cambian a secuencia de rango. Isto significa que se se usa un Rei despois do 4, entón ese Rei ten un rango de 5 e a seguinte carta debe ser un 6).\n- Se non podes xogar máis cartas, debes **descartar unha carta** a unha das túas pilas de descarte para rematar a túa quenda.\n- Se unha pila central alcanza a Raíña, limparase automaticamente.\n- A orde de rango é: A=1, 2=2, ..., 9=9, J=10, Q=11, K como comodín.\n\n### Accións:\n1. **Debuxar**: Ao comezo da túa quenda, debuxa cartas para encher a túa man ata 5 cartas. Introduce **[draw]** para comezar.\n2. **Xogar unha carta**: Para xogar unha carta, especifica a carta e a pila central deste xeito: **[play A♠ 0]** (onde 'A♠' é a carta e '0' é o índice da pila central).\n3. **Descartar**: Se non podes xogar máis cartas, descarta unha carta da túa man a unha pila de descarte para rematar a túa quenda. Introduce **[discard A♠ 1]** (onde 'A♠' é a carta e '1' é o índice da pila de descarte). Ten en conta que non podes descartar cartas da pila de pago. Só podes descartar as cartas da túa man.\n\n"
+  },
+  "board": {
+    "current_board": "Taboleiro actual:\n\n{board}\nMovementos dispoñibles: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pilas centrais ---\n",
+    "pile": "{observation}Pila {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vista do xogador {player_id} ---\n",
+    "payoff": "{observation}Pila de pago (carta superior): {top_card}, lonxitude da pila de pago: {payoff_length}\n",
+    "hand": "{observation}Man: {hand}\n",
+    "discard": "{observation}Pilas de descarte: {discard}\n",
+    "empty": "Baleiro"
+  },
+  "game_message": {
+    "no_cards_left": "Non hai máis cartas para debuxar. Lembra que podes xogar cartas de tres fontes:\n  1. A túa **man**.\n  2. A **carta superior da túa pila de pago**.\n  3. A **carta superior de calquera das túas pilas de descarte**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movemento incorrecto. O xogador {player_id} non respondeu cun movemento válido entre corchetes.",
+    "invalid_play": "Xogada inválida. O xogador {player_id} intentou xogar {card} na pila central {index}.",
+    "discard_from_payoff": "Descarte inválido. O xogador {player_id} intentou descartar unha carta da pila de pago.",
+    "discard_not_in_hand": "Descarte inválido. O xogador {player_id} intentou descartar unha carta que non está na man.",
+    "wrong_move_type": "Tipo de movemento incorrecto. O xogador {player_id} non respondeu cun tipo de movemento válido."
+  },
+  "game_action": {
+    "you_drew": "Debuxaches cartas.",
+    "opponent_drew": "O xogador {player_id} debuxou cartas.",
+    "you_played": "Xogaches {card} na pila central {index}.",
+    "opponent_played": "O xogador {player_id} xogou {card} na pila central {index}.",
+    "you_discarded": "Descartaches {card} na pila de descarte {index}, o que tamén significa que remataches a túa quenda. Non se considerarán máis accións túas para esta quenda. O xogador {next_player_id} irá a continuación.",
+    "opponent_discarded": "O xogador {player_id} descartou {card} na pila de descarte {index}, o que tamén significa que rematou a súa quenda. Non se considerarán máis accións do xogador {player_id} para esta quenda. Xogador {next_player_id}, irás a continuación. Introduce a túa acción no formato [acción carta índice central]."
+  },
+  "outcome": {
+    "payoff_cleared": "O xogador {current_player} rematou a súa pila de pago! O xogador {current_player} gaña!",
+    "deadlock_player_0": "Alcanzouse un punto morto! O xogador 0 gaña con {player_0_payoff} cartas restantes fronte ás {player_1_payoff} cartas do xogador 1.",
+    "deadlock_player_1": "Alcanzouse un punto morto! O xogador 1 gaña con {player_1_payoff} cartas restantes fronte ás {player_0_payoff} cartas do xogador 0.",
+    "deadlock_tie": "Alcanzouse un punto morto con empate! Ambos xogadores teñen {player_0_payoff} cartas restantes. O xogador {current_player} gaña por defecto."
+  }
+}

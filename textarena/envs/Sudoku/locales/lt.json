@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id}. Jūs žaidžiate Sudoku.\nŠtai dabartinė Sudoku tinklelio būsena. Kiekviena eilutė yra numeruota nuo 1 iki 9, o kiekviena stulpelis taip pat yra numeruotas nuo 1 iki 9.\nTušti langeliai yra žymimi '.', o iš anksto užpildyti langeliai turi skaičius nuo 1 iki 9.\n\nDabartinis Sudoku tinklelis:\nJūsų tikslas yra užpildyti tuščius langelius 9x9 tinklelyje skaičiais nuo 1 iki 9 taip, kad:\n1. Kiekviena eilutė turi visus skaičius nuo 1 iki 9 be pasikartojimo.\n2. Kiekviena stulpelis turi visus skaičius nuo 1 iki 9 be pasikartojimo.\n3. Kiekvienas iš devynių 3x3 subtinklelių turi visus skaičius nuo 1 iki 9 be pasikartojimo.\n\nTaisyklės ir instrukcijos:\n1. **Neperrašykite** pradinių skaičių, pateiktų tinklelyje.\n2. **Užpildykite** tik tuščius langelius, žymimus '.'.\n3. Jūs galite atsakyti bet kokia forma, bet įsitikinkite, kad jūsų atsakyme yra '[eilutė stulpelis skaičius]' formatas.\n4. **Įsitikinkite**, kad jūsų ėjimas nepažeidžia Sudoku taisyklių. Netinkami ėjimai bus baudžiami.\nPavyzdžiai:\n- **Galimas ėjimas**:\n  - Tinklelio iškarpinys prieš ėjimą:\n  \n  - Ėjimas: `[5 3 7]`\n  - Paaiškinimas: 7 skaičiaus įdėjimas į 5 eilutę, 3 stulpelį nepažeidžia jokių Sudoku taisyklių.\n\n- **Netinkamas ėjimas** (perrašant iš anksto užpildytą langelį):\n  - Tinklelio iškarpinys prieš ėjimą:\n  \n  - Ėjimas: `[1 1 9]`\n  - Paaiškinimas: Langelis (1,1) jau yra užpildytas 5 skaičiumi. Jūs negalite jį perrašyti.\n\n- **Netinkamas ėjimas** (pažeidžiant Sudoku taisykles):\n  - Tinklelio iškarpinys prieš ėjimą:\n  \n  - Ėjimas: `[1 3 5]`\n  - Paaiškinimas: 5 skaičiaus įdėjimas į 1 eilutę, 3 stulpelį pažeidžia taisyklę, nes 5 skaičius jau egzistuoja 1 eilutėje.\n\nJūsų ėjimų ir minties istorija bus pridėta, kai žaisite daugiau raundų. Naudokite savo ėjimo istoriją, kad pagerintumėte savo sprendimų kokybę, vengdami ėjimų, kuriuos jau bandėte. Sėkmės!\n\n"
+  },
+  "board": {
+    "game_board": "Žaidimo tinklelis:\n{board}",
+    "board_state": "Tinklelio būsena: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Netinkamas ėjimo formatas. Žaidėjas {player_id} neatvėrė su galimu 'eilutė stulpelis skaičius' formatu.",
+    "out_of_bounds": "Netinkamas ėjimas. Žaidėjas {player_id} bandė įdėti {num} į ({row}, {col}), kuris yra už tinklelio ribų.",
+    "overwrite": "Netinkamas ėjimas. Žaidėjas {player_id} bandė perrašyti iš anksto užpildytą langelį ({row}, {col}).",
+    "violates_rules": "Netinkamas ėjimas. Žaidėjas {player_id} bandė įdėti {num} į ({row}, {col}), kuris pažeidžia Sudoku taisykles."
+  },
+  "outcome": {
+    "win": "Sveikiname! Žaidėjas {player_id} užbaigė Sudoku galvosūkį.",
+    "turn_limit": "Ėjimų limitas buvo pasiektas. Jūs teisingai užpildėte {percent}% tuščių langelių."
+  }
+}

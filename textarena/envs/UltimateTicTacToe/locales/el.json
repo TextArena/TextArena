@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Είστε ο Παίκτης {player_id} στο **Ultimate Tic Tac Toe**.\nΥποβάλλετε την κίνηση σας ως **[macro  micro]** (δύο αριθμούς 0-8):\n• *macro*  = σε ποιο mini-πίνακα παίζετε\n• *micro* = σε ποιο τετράγωνο μέσα σε αυτόν τον mini-πίνακα\nΠαράδειγμα `[7 8]` ➜ τοποθετήστε το σύμβολό σας στο mini-πίνακα 7, τετράγωνο 8, και\nαναγκάστε τον αντίπαλο σας να παίξει στο mini-πίνακα 8 στη συνέχεια.\n\nΕίστε `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Τρέχων πίνακας:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Η κίνηση πρέπει να είναι στη μορφή [macro micro] με αριθμούς 0-8.",
+    "out_of_range": "Οι δείκτες πρέπει να είναι μεταξύ 0 και 8.",
+    "index_out_of_range": "Το micro_board, η σειρά ή η στήλη είναι εκτός εύρους.",
+    "cell_occupied": "Το κελί είναι ήδη κατειλημμένο.",
+    "wrong_micro_board": "Ο παίκτης πρέπει να παίξει στο επόμενο micro board.",
+    "micro_board_won": "Το micro board έχει ήδη κερδηθεί."
+  },
+  "next_board": {
+    "any": "οποιοδήποτε micro board",
+    "specific": "micro board {nxt}"
+  },
+  "game_action": {
+    "played": "Ο Παίκτης {player_id} έπαιξε στο micro board {macro_idx}, κελί {micro_idx} (σειρά {row}, στήλη {col}). Ο Παίκτης {opponent_id} πρέπει τώρα να παίξει στο {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Ο Παίκτης {player_id} κερδίζει το Ultimate Tic Tac Toe!",
+    "draw": "Το παιχνίδι είναι ισοπαλία!"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Siz 3 oyunçu ilə Iterated Prisoner's Dilemma-da Oyunçu {player_id}-siniz. Oyun {num_rounds} raund davam edir.\nRaund strukturu:\n• {conv_rounds} sərbəst söhbət dövrü\n• 1 qərar dövrü - hər bir rəqibə bir token göndərin: '[<opp-id> cooperate]' və ya '[<opp-id> defect]' (məsələn, '[1 defect] [2 cooperate]'; susmaya görə 'əməkdaşlıq' seçilir).\nCüt-ölçülü ödəmə matrisası (hər qeyri-sıralı cütə tətbiq olunur):\n  - Hər ikisi əməkdaşlıq edir -> {reward}\n  - Hər ikisi xəyanət edir -> {punishment}\n  - Siz xəyanət edirsiniz, onlar əməkdaşlıq edir -> {temptation}\n  - Siz əməkdaşlıq edirsiniz, onlar xəyanət edir -> {sucker}\nBütün raundlar sonunda ən yüksək hesab sahibi oyunçu (lar) qazanır."
+  },
+  "round": {
+    "start": "─── {round} Raundu Başlayır ───\tNövbəti {conv_rounds} raundlarda sərbəst söhbət edə bilərsiniz.",
+    "chat_finished": "{round} raundu üçün söhbət bitirildi. Qərarlarınızı, hər bir rəqibə bir token göndərin: `[pid cooperate]` və ya `[pid defect]`."
+  },
+  "results": {
+    "header": "### {round} Raundu - Nəticələr:",
+    "pair_line": "{observation}\n\t Oyunçu {i} və Oyunçu {j} müvafiq olaraq {choice_i} və {choice_j} seçdi (Oyunçu {i} {gain_i} qazandı, Oyunçu {j} {gain_j} qazandı)",
+    "scores_open": "{observation}\n-> Cari hesablar: ",
+    "score_first": "{observation}Oyunçu {player_id} ({score})",
+    "score_next": "{observation}; Oyunçu {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Yekun hesablar: {scores}.  Sıralama qrupları (ən pis → ən yaxşı): {groups}"
+  }
+}

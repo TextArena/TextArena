@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} en Stratego.\nO teu obxectivo é capturar a bandeira do teu opoñente ou eliminar todas as súas pezas móbeis.\nO teu exército foi colocado no taboleiro, incluída a túa bandeira, bombas e outras pezas de diferentes rangos.\n\n### Instrucións de xogo\n1. **Regras de movemento:**\n   - No teu turno, podes mover unha peza un paso a un cadrado adxacente (arriba, abaixo, esquerda ou dereita) que xa estea ocupado coas túas pezas.\n   - Exemplo: Unha peza pode moverse de A1 a B1 ou A1 a A2 se B1 e A2 non están colocadas coas pezas do xogador.\n   - Se a peza seleccionada é unha bomba ou unha bandeira, non se pode mover.\n2. **Batallas:**\n   - Se te moves a un cadrado ocupado por unha peza do opoñente, entón ocorrerá unha batalla:\n     - A peza co rango máis alto gaña e elimina a peza do opoñente.\n     - Se os rangos son iguais, ambas as pezas son eliminadas do taboleiro.\n     - **Casos especiais:**\n       - As bombas eliminan a maioría das pezas atacantes, excepto os mineiros, que desactivan as bombas.\n       - Os espías poden derrotar ao mariscal se o espía ataca primeiro, pero perden contra todas as outras pezas.\n3. **Obxectivos estratéxicos:**\n   - Identifica as pezas do teu opoñente a través dos seus movementos e batallas.\n   - Protexe a túa bandeira mentres intentas capturar a bandeira do teu opoñente.\n   - Usa os exploradores de forma estratéxica para obter información sobre as pezas do teu opoñente e atacar as débiles.\n\n### Como facer un movemento:\n1. Especifica as coordenadas da peza que queres mover e o seu destino.\n2. Usa o formato: [A0 B0], onde A0 é a posición de orixe e B0 é o destino.\n   - Exemplo: Para mover unha peza de fila 0, columna 0 a fila 1, columna 0, introduce [A0 B0].\n3. Asegúrate de que o destino é válido segundo as regras de movemento anteriores.\n\n### Notas importantes:\n- O taboleiro mostrará as túas pezas e as súas posicións, por exemplo, MN, MS.\n- O taboleiro tamén mostrará as posicións coñecidas das pezas do teu opoñente sen revelar os seus rangos, por exemplo, ?.\n- As grellas con ~ son lagos e non se poden mover.\n- Como suxestión, comeza o xogo movendo as pezas que están na fronte para obter información sobre as pezas do teu opoñente. A fronte do xogador 0 e do xogador 1 son a fila D e G, respectivamente.\n\nAquí está o estado actual do taboleiro:\n"
+  },
+  "board": {
+    "current_board": "Taboleiro actual:\n\n{board}\nMovementos dispoñibles: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de acción inválido. O xogador {player_id} non introduciu un movemento no formato [A0 B0].",
+    "invalid_coordinates": "Formato de acción inválido. O xogador {player_id} non introduciu coordenadas válidas.",
+    "not_own_piece": "Formato de acción inválido. O xogador {player_id} debe mover unha das súas propias pezas.",
+    "scout_through_pieces": "Formato de acción inválido. O xogador {player_id} non pode mover un explorador a través doutras pezas.",
+    "scout_diagonal": "Formato de acción inválido. O xogador {player_id} non pode mover un explorador diagonalmente.",
+    "non_scout_multi_square": "Formato de acción inválido. As pezas, agás os exploradores, só poden moverse un cadrado á vez.",
+    "move_into_lake": "Formato de acción inválido. O xogador {player_id} non pode moverse ao lago.",
+    "move_onto_own_piece": "Formato de acción inválido. O xogador {player_id} non pode moverse sobre a súa propia peza.",
+    "move_bomb_or_flag": "Formato de acción inválido. O xogador {player_id} non pode mover unha bomba ou unha bandeira."
+  },
+  "game_action": {
+    "you_moved": "Moviches a túa peza de {source} a {dest}.",
+    "opponent_moved": "O xogador {player_id} moveu unha peza de {source} a {dest}.",
+    "you_equal_ranks": "Moviches a túa peza de {source} a {dest}. A peza atacante era {attacking_rank} e a peza de destino era {target_rank}. Como os rangos son iguais, ambas as pezas perderon.",
+    "opponent_equal_ranks": "O xogador {player_id} moveu unha peza de {source} a {dest}. A peza atacante era {attacking_rank} e a peza de destino era {target_rank}. Como os rangos son iguais, ambas as pezas perderon.",
+    "you_miner_defused": "Moviches a túa peza de {source} a {dest}. A peza atacante era {attacking_rank} e a peza de destino era {target_rank}. Como os mineiros poden desactivar bombas, gañaches a batalla.",
+    "opponent_miner_defused": "O xogador {player_id} moveu unha peza de {source} a {dest}. A peza atacante era {attacking_rank} e a peza de destino era {target_rank}. Como os mineiros poden desactivar bombas, perdechés a batalla.",
+    "you_bomb_lost": "Moviches a túa peza de {source} a {dest}. A peza atacante era {attacking_rank} e a peza de destino era {target_rank}. Como o atacante non é un mineiro, perdechés a batalla.",
+    "opponent_bomb_won": "O xogador {player_id} moveu unha peza de {source} a {dest}. A peza atacante era {attacking_rank} e a peza de destino era {target_rank}. Como o atacante non é un mineiro, gañou a batalla.",
+    "you_spy_won": "Moviches a túa peza de {source} a {dest}. A peza atacante era {attacking_rank} e a peza de destino era {target_rank}. Como o atacante é un espía e o destino é un mariscal, gañaches a batalla.",
+    "opponent_spy_lost": "O xogador {player_id} moveu unha peza de {source} a {dest}. A peza atacante era {attacking_rank} e a peza de destino era {target_rank}. Como o atacante é un espía e o destino é un mariscal, perdechés a batalla.",
+    "you_higher_won": "Moviches a túa peza de {source} a {dest}. A peza atacante era {attacking_rank} e a peza de destino era {target_rank}. Como o atacante é de rango superior ao destino, gañaches a batalla.",
+    "opponent_higher_lost": "O xogador {player_id} moveu unha peza de {source} a {dest}. A peza atacante era {attacking_rank} e a peza de destino era {target_rank}. Como o atacante é de rango superior ao destino, perdechés a batalla.",
+    "you_lower_lost": "Moviches a túa peza de {source} a {dest}. A peza atacante era {attacking_rank} e a peza de destino era {target_rank}. Como o atacante é de rango inferior ao destino, perdechés a batalla.",
+    "opponent_lower_won": "O xogador {player_id} moveu unha peza de {source} a {dest}. A peza atacante era {attacking_rank} e a peza de destino era {target_rank}. Como o atacante é de rango inferior ao destino, gañou a batalla."
+  },
+  "outcome": {
+    "flag_captured": "O xogador {player_id} capturou a bandeira do opoñente!",
+    "no_movable_pieces": "O xogador {winner_id} gaña! O xogador {loser_id} non ten máis pezas móbeis."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Você está jogando Mastermind.\nVocê precisa encontrar o código que tem {code_length} dígitos de comprimento, cada dígito de 1 a {num_numbers}, {repeats}.\nNa sua resposta, você pode enviar seu palpite no seguinte formato: '[2 1 4 5]'.\nDepois de cada palpite, você receberá feedback na forma de pinos pretos e brancos.\nUm pino preto indica um dígito correto na posição correta, enquanto um pino branco indica um dígito correto na posição errada.\nVocê tem {max_turns} turnos para adivinhar o código.\n",
+    "with_repeats": "com possíveis repetições",
+    "no_duplicates": "sem duplicatas"
+  },
+  "invalid_move": {
+    "wrong_format": "Você não respondeu com uma lista de números separados por espaços e envolvidos em colchetes.",
+    "not_integers": "Todas as entradas devem ser números inteiros válidos.",
+    "wrong_length": "O palpite deve conter exatamente {code_length} números.",
+    "out_of_range": "Todos os números devem estar entre 1 e {num_numbers}.",
+    "duplicates_not_allowed": "Números duplicados não são permitidos.",
+    "repeated_guess": "Você já adivinhou {guess}. Por favor, tente um palpite diferente."
+  },
+  "game_action": {
+    "feedback": "Enviado [{guess}]. Feedback: {black_pegs} pino(s) preto(s), {white_pegs} pino(s) branco(s)."
+  },
+  "outcome": {
+    "win": "Você quebrou o código, resolvendo {black_pegs} de {code_length} pinos corretamente",
+    "turn_limit": "Limite de turnos alcançado. Você adivinhou {percent} por cento dos números corretamente."
+  }
+}

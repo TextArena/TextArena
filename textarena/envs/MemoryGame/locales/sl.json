@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id}. Igrate igro Spomina.\nVaš cilj je ujemati več parov kart na plošči kot vaš nasprotnik.\nNa vašo vrsto izberite dve karti, ki jih želite obrniti, tako da vnesete številko vrstice in stolpca prve in druge karte kot '[0 1 1 0]', kjer je prva karta v vrstici 0 in stolpcu 1, druga karta pa v vrstici 1 in stolpcu 0.\nČe se obe karti ujemata, dobite točko in karti ostanejo obračene navzgor. Če se ne ujemata, se karti obrnejo nazaj navzdol, npr. '.'.\nIgra se konča, ko so vsi pari ujemani."
+  },
+  "board": {
+    "current_board": "Trenutna plošča:\n{board}",
+    "current_game_board": "Trenutna igralna plošča:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neveljaven format poteze. Igralec {player_id} ni odgovoril s pravilno smerjo v oglatih oklepajih.",
+    "out_of_bounds": "Neveljavna poteza. Igralec {player_id} je izbral pozicijo zunaj meja.",
+    "same_card_twice": "Neveljavna poteza. Igralec {player_id} je izbral isto karto dvakrat.",
+    "already_matched": "Neveljavna poteza. Igralec {player_id} je izbral eno ali obe karti, ki sta že bile ujemani."
+  },
+  "game_message": {
+    "cards_match": "Karti, ki jih je izbral Igralec {player_id} na pozicijah [{r1} {c1}] in [{r2} {c2}], se ujemata!",
+    "cards_no_match": "Karti, ki jih je izbral Igralec {player_id}, se ne ujemata. Karti na pozicijah [{r1} {c1}] in [{r2} {c2}] sta {pos1} in {pos2}."
+  },
+  "outcome": {
+    "draw": "Oba igralca sta ujemala enako število parov kart.",
+    "win": "Igralec {winner_id} je zmagal!",
+    "turn_limit": "Dosežen je bil limit potez. Igra je končana. Igralec 0 je dosegel {score_0} točk, Igralec 1 je dosegel {score_1} točk.",
+    "turn_limit_win": "{reason} Igralec {winner_id} je zmagal!"
+  }
+}

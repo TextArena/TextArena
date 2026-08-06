@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "당신은 인디언 포커의 플레이어 {player_id}입니다.\n- 52장의 카드 덱; 상대방의 카드만 볼 수 있습니다.\n- 각 라운드에 {ante} 칩을 걸어야 하며, 총 {max_rounds} 라운드입니다.\n- 유효한 수: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X는 1 이상의 양의 정수이며, 칩 개수 이하여야 합니다.)\n- 최고의 숨겨진 카드가 오픈 시 포트를 가져갑니다.\n"
+  },
+  "round": {
+    "announce": "### 라운드 {current_round}/{max_rounds}\n상대방의 카드는: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "정확히 하나의 괄호 안의 행동을 제공해야 합니다. 예: '[check]', '[bet 2]', '[call]', '[raise 3]', 또는 '[fold]'.",
+    "cannot_check": "상대방이 베팅한 상황에서는 [check]할 수 없습니다.",
+    "amount_min": "베팅 / 레이즈 금액은 1 이상이어야 합니다.",
+    "cannot_bet": "베팅 중인 상황에서는 [bet]할 수 없습니다. [call] / [raise] / [fold] 중 하나를 선택해야 합니다.",
+    "nothing_to_call": "콜할 것이 없습니다. [check]할 수 있습니다.",
+    "no_bet_to_raise": "[bet X]로 오픈해야 합니다. 레이즈할 베팅이 없습니다.",
+    "insufficient": "해당 행동을 위한 충분한 칩이 없습니다."
+  },
+  "game_action": {
+    "action": "플레이어 {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "가능한 행동: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  포트 {pot} → 플레이어 {winner}. (뱅크롤 P0:{p0}, P1:{p1})",
+    "folded": "플레이어 {player_id}가 포기했습니다.",
+    "showdown_win": "오픈: {card_win}가 {card_lose}를 이겼습니다.",
+    "showdown_tie": "오픈 무승부: 둘 다 {card}. 포트 분할 – 각각 {split}을 받습니다."
+  },
+  "outcome": {
+    "p0_wins": "플레이어 0이 이겼습니다 ({bank0} > {bank1})",
+    "p1_wins": "플레이어 1이 이겼습니다 ({bank1} > {bank0})",
+    "draw": "모든 라운드 후 칩이 동일합니다"
+  }
+}

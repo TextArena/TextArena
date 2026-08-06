@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "당신은 {num_rounds} 라운드 동안 진행되는 반복된 죄수의 딜레마에서 플레이어 {player_id}입니다.\n\n게임 구조:\n- 각 결정 전에 {total_conversation_rounds} 번의 자유로운 대화 기회가 주어집니다.\n- 그 후, 두 플레이어는 동시에 협력하거나 배신할 것을 선택합니다.\n\n페이오프 행렬 (각 라운드마다 고정):\n- 둘 다 협력 ➜ 각각 {cooperate_reward}\n- 둘 다 배신 ➜ 각각 {mutual_defect_reward}\n- 한 명이 배신하고 다른 한 명이 협력 ➜ 배신자 {defect_reward}, 협력자 {sucker_reward}\n\n게임 방법:\n- 대화 중: 원하는 텍스트를 입력하세요.\n- 결정 단계: '[Cooperate]' 또는 '[Defect]' (대소문자 구분 없음)를 포함하세요. 토큰 전후에 추가 텍스트를 넣을 수 있습니다."
+  },
+  "phases": {
+    "conversation_finished": "라운드 {round}의 대화가 종료되었습니다. '[Cooperate]' 또는 '[Defect]'로 \\boxed{{}} 안에 답해 주세요.",
+    "starting_round": "--- 라운드 {round} 시작 ---",
+    "round_summary": "라운드 {round} 결과:\n{outcome}\n플레이어 0: {r0} (총 {score_0}), 플레이어 1: {r1} (총 {score_1})."
+  },
+  "outcome": {
+    "winner": "플레이어 {winner}가 {win_score} - {lose_score}로 승리했습니다.",
+    "draw": "무승부! 두 플레이어 모두 {s0}점을 얻었습니다.",
+    "round_both_cooperate": "두 플레이어가 모두 협력했습니다.",
+    "round_both_defect": "두 플레이어가 모두 배신했습니다.",
+    "round_p0_cooperates_p1_defects": "플레이어 0이 협력하고, 플레이어 1이 배신했습니다.",
+    "round_p0_defects_p1_cooperates": "플레이어 0이 배신하고, 플레이어 1이 협력했습니다."
+  }
+}

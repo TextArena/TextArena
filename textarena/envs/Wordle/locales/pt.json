@@ -1,0 +1,28 @@
+{
+  "_comment": "Português do Brasil para Wordle. As chaves (à esquerda) são fixas; traduza apenas os valores (à direita). Mantenha cada {placeholder} inalterado e mantenha as letras de feedback G/Y/X inalteradas (elas são os marcadores por letra do jogo).",
+  "_slots": {
+    "{word_length}": "Comprimento da palavra secreta (inteiro)",
+    "{num_guesses}": "Número de palpites permitidos (inteiro)",
+    "{word}": "Uma palavra adivinhada",
+    "{view}": "Letras renderizadas neutras + feedback G/Y/X (não traduzir)",
+    "{guesses_left}": "Palpites restantes (inteiro)",
+    "{pct}": "Porcentagem de letras colocadas corretamente (inteiro)",
+    "{secret}": "A palavra secreta"
+  },
+  "prompt": {
+    "intro": "Você está jogando Wordle.\nUma palavra secreta de {word_length} letras foi escolhida. Você tem {num_guesses} tentativas para adivinhá-la.\nPara cada palpite, envolva sua palavra em colchetes (por exemplo, '[maçã]').\nO feedback para cada letra será dado da seguinte forma:\n  - G (verde): letra correta na posição correta\n  - Y (amarelo): letra existe na palavra, mas na posição errada\n  - X (errado): letra não está na palavra\nInsira seu palpite para começar.\n"
+  },
+  "invalid": {
+    "wrong_format": "Você tentou submeter uma palavra no formato errado. Por favor, certifique-se de usar colchetes.",
+    "wrong_length": "Sua palavra deve ter exatamente {word_length} letras.",
+    "already_guessed": "Você já adivinhou '{word}' antes. Por favor, tente uma palavra diferente.",
+    "not_a_word": "'{word}' não é uma palavra válida."
+  },
+  "feedback": {
+    "submitted": "Você submeteu [{word}].\nFeedback:\n{view}\nVocê tem {guesses_left} palpites restantes."
+  },
+  "outcome": {
+    "win": "Parabéns! Você adivinhou a palavra corretamente!",
+    "turn_limit": "O limite de turnos foi alcançado. Você não adivinhou a palavra, mas seu melhor palpite correspondeu a {pct}% das letras nas posições corretas.\nA palavra secreta era: **{secret}**."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake staðfærslu skrá. ÞÝÐA EKKI lykla (vinstri hlið). Þýða aðeins gildi (hægri hlið). Halda hverjum {placeholder} nákvæmlega eins og er. ÞÝÐA EKKI hreyfing/áttartöknum sem leikmaðurinn slær inn ([up], [down], [left], [right], w, s, a, d) eða ASCII borðið sem er teiknað í {board}.",
+  "_slots": {
+    "{num_players}": "Fjöldi leikmanna í viðureigninni",
+    "{width}": "Breidd borðsins í reitum",
+    "{height}": "Hæð borðsins í reitum",
+    "{max_turns}": "Takmörk á umferðir fyrir viðureignina",
+    "{player_id}": "Leikmannsnúmer (byggt á 0)",
+    "{board}": "Teiknað ASCII grind; halda hlutlaust, aldrei þýða stafi þess",
+    "{reason}": "Teiknað orsakalag fyrir enda leiksins",
+    "{groups}": "Hlutlaust gögn um röðun (lista af hópum leikmannsnúmera, verst til best); þýða ekki"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Leikmanns Snake á {width}×{height} grind.\nÞú stýrir snáki {player_id}. Gildir leikir: '[up]'/'[down]'/'[left]'/'[right]' (eða w/s/a/d).\nMarkmið: lifa lengst eða vera lengstur og fá hæstu stig (umferðartakmörk {max_turns} umferðir)."
+  },
+  "board": {
+    "current": "Núverandi Borð:\n{board}",
+    "after_moves": "Núverandi Staða Borðs:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Snákur {player_id} dó vegna ógilds leiks."
+  },
+  "outcome": {
+    "survived_win": "Leikmaður {player_id} lifði af; allir aðrir dóu.",
+    "all_dead_simul": "Allir snákar dóu samtímis.",
+    "outlived": "Leikmaður lifði lengur en allir aðrir.",
+    "all_dead": "Allir snákar dauðir.",
+    "turn_limit": "Umferðartakmörk náð - best stig vinna jafntefli.",
+    "ranking": "{reason} Loka röðunargrupper (verst→best): {groups}"
+  }
+}

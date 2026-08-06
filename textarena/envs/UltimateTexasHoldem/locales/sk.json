@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em súbor lokalizácie. NEPREKLADAJTE kľúče (ľavá strana). Prekladajte iba hodnoty (pravá strana).",
+  "_slots": {
+    "{start_chips}": "Počiatočný počet žetónov, napr. 1000",
+    "{ante}": "Povinná stávka ANTE, napr. 25",
+    "{ante4}": "Štyrikrát väčšia stávka ANTE, napr. 100",
+    "{ante2}": "Dvakrát väčšia stávka ANTE, napr. 50",
+    "{round}": "Aktuálny kôl",
+    "{chips}": "Aktuálny počet žetónov hráča",
+    "{hand}": "Zoznam kariet hráča, napr. 'A♠, K♥', alebo text bez kariet",
+    "{phase}": "Aktuálna fáza hry (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Zoznam dostupných akcií, napr. '[play_bet_4x], [check]'",
+    "{available}": "Zoznam aktuálne dostupných akcií",
+    "{blind}": "Povinná stávka BLIND",
+    "{play}": "Stávka PLAY",
+    "{cards}": "Zoznam kariet, napr. 'Q♣, 7♦, 2♠'",
+    "{name}": "Názov pokerovej ruky, vloženýverbatim",
+    "{amount}": "Suma žetónov",
+    "{net}": "Netová zmena počtu žetónov v kole (môže byť záporná)",
+    "{max_turns}": "Maximálny počet kôl",
+    "{winner_rounds}": "Počet kôl, ktoré hráč dokončil"
+  },
+  "player_prompt": {
+    "no_cards": "Žiadne karty zatiaľ",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Hra proti dealerovi\n\n📖 PREHĽAD HRY:\n• Začínaš s {start_chips} žetónmi\n• Jedna sada 52 kariet (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Hraješ proti dealerovi (domy)\n• Každé kolo sa skladá z Ultimate Texas Hold'em štruktúry: staviš ANTE a BLIND, dostaneš 2 karty, rozhodneš sa o voliteľnej stávke PLAY v jednotlivých fázach hry, potom odhalíš spoločné karty a porovnáš svoju najlepšiu 5-kartovú ruku s rukou dealera. Tvoj cieľ je maximalizovať svoje výhry (keď máš lepšiu ruku), zatiaľ čo minimalizuješ svoje straty (keď máš horšiu ruku).\n• Hra končí, keď zostaneš bez žetónov alebo dokončíš 1000 kôl s žetónmi (VÝHRA)\n\n💰 ŠTRUKTÚRA STÁVKY:\n• ANTE: Povinná stávka ${ante} v každom kole\n• BLIND: Povinná stávka ${ante} v každom kole\n• PLAY: Voliteľná stávka počas hry. Počas kola môžeš vybrať iba jednu z nasledujúcich možností: (${ante4} ak sa rozhodneš v PRE-FLOP, ${ante2} ak sa rozhodneš v FLOP, alebo ${ante} ak sa rozhodneš v RIVER. Môžeš tiež zložiť ruku v RIVER, vzdáš sa svojej ruky a neurobíš žiadnu stávku.)\n\n🎴 ROZDÁVANIE KARIET:\n• Dostaneš 2 karty (tvoje hole karty)\n• Dealer dostane 2 karty (skryté pred tebou)\n• 5 spoločných kariet sa rozdáva najprv lícom dolu\n• Spoločné karty sa postupne odhaľujú v jednotlivých fázach hry\n\n🏆 KVALIFIKÁCIA DEALERA:\n• Dealer musí mať aspoň pár (2 karty rovnakej hodnoty) na kvalifikáciu, pomocou 2 kariet v jeho ruke a 5 spoločných kariet.\n• Kvalifikácia dealera ovplyvňuje výsledky stávok, ako bude vysvetlené neskôr.\n\n🎮 FÁZY HRY & AKCIE:\n📋 PRE-FLOP:\n  • Akcie: [4x] (${ante4}) alebo [check]\n  • [4x]: Stávka ${ante4} PLAY, odhalí prvé 3 spoločné karty\n  • [check]: Žiadna ďalšia stávka, odhalí prvé 3 spoločné karty\n\n📋 FLOP:\n  • Ak bola stávka 4x: Iba [skip] je dostupná (automaticky odhalí posledné 2 spoločné karty)\n  • Ak nebola stávka 4x: [2x] (${ante2}) alebo [check]\n  • [2x]: Stávka ${ante2} PLAY, odhalí posledné 2 spoločné karty\n  • [check]: Žiadna ďalšia stávka, odhalí posledné 2 spoločné karty\n\n📋 RIVER:\n  • Ak bola stávka 4x alebo 2x: Iba [skip] je dostupná (automaticky prejde k showdown)\n  • Ak nebola žiadna stávka PLAY: [1x] (${ante}) alebo [fold]\n  • [1x]: Stávka ${ante} PLAY, prejde k showdown\n  • [fold]: Vzdáš sa svojej ruky, strácaš stávky ANTE a BLIND\n\n📋 SHOWDOWN:\n  • Všetky karty sa odhalia a vyhodnotia\n  • Najlepšia 5-kartová ruka z 7 kariet (2 hole + 5 spoločných)\n  • Stávky sa vyrovnávajú podľa pravidiel výplaty\n\n💎 VÝPLATA STÁVOK:\n📊 ANTE STÁVKA:\n  • Dealer sa nekvalifikuje: PUSH (stávka sa vráti)\n  • Dealer sa kvalifikuje a vyhráš: výplata 1:1 (stávka + výhra)\n  • Dealer sa kvalifikuje a prehráš: strácaš stávku\n  • Remíza: PUSH (stávka sa vráti)\n\n📊 BLIND STÁVKA:\n  • Nezávisí na kvalifikácii dealera\n  • Vyhráš: stávka sa vráti a ďalšia výplata podľa sily tvojej ruky\n  • Prehráš: strácaš stávku\n  • Remíza: PUSH (stávka sa vráti)\n\n📊 BLIND STÁVKA VÝPLATA:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Menej ako Straight: žiadna ďalšia výplata\n\n📊 PLAY STÁVKA:\n  • Nezávisí na kvalifikácii dealera\n  • Priama porovnanie: tvoja najlepšia ruka vs dealerova najlepšia ruka\n  • Vyhráš: výplata 1:1 (stávka + výhra)\n  • Prehráš: strácaš stávku\n  • Remíza: PUSH (stávka sa vráti)\n\n🎯 POKER RUKY (od najlepšej po najhoršiu):\n  1. Royal Flush: A-K-Q-J-10 rovnakej farby\n  2. Straight Flush: 5 po sebe idúcich kariet rovnakej farby\n  3. Four of a Kind: 4 karty rovnakej hodnoty\n  4. Full House: 3 karty rovnakej hodnoty + 2 karty rovnakej hodnoty\n  5. Flush: 5 kariet rovnakej farby\n  6. Straight: 5 po sebe idúcich kariet\n  7. Three of a Kind: 3 karty rovnakej hodnoty\n  8. Two Pair: 2 páry kariet rôznych hodnôt\n  9. One Pair: 2 karty rovnakej hodnoty\n  10. High Card: najvyššia karta vyhráva\n\n⌨️  PRÍKAZY AKCIÍ:\n• [4x] alebo [play bet 4x]: stávka ${{self.ante_amount*4}} PLAY\n• [2x] alebo [play bet 2x]: stávka ${{self.ante_amount*2}} PLAY\n• [1x] alebo [play bet 1x]: stávka ${{self.ante_amount*1}} PLAY\n• [check] alebo [c]: check (žiadna ďalšia stávka)\n• [fold] alebo [f]: fold (vzdanie sa ruky)\n• [skip] alebo [s]: preskočenie na ďalšiu fázu (keď nie je potrebná žiadna akcia)\n\n💡 STRATÉGIE TIPY:\n• Silné začiatočné ruky (páry, vysoké karty) často ospravodlňujú stávky 4x\n• Zvaž kvalifikáciu dealera - slabé ruky môžu byť push ak sa dealer nekvalifikuje\n• BLIND stávka môže byť veľmi zisková s silnými rukami (Royal Flush = 500:1!)\n• Pozor na svoj počet žetónov! Ak klesne na 0 alebo nižšie na začiatku kola, prehráš.\n\n⚠️  DÔLEŽITÉ POZNÁMKY:\n• ANTE a BLIND stávky sú povinné v každom kole\n• PLAY stávky sú voliteľné a strategické\n• Uisti sa, že zadáš správnu akciu, a iba jednu akciu naraz.\n\n",
+    "state": "🎯 KOLO {round}\n💰 Žetóny: {chips}\n🎴 Tvoja ruka: {hand}\n📊 Aktuálne stávky: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fáza: {phase}\n🎯 Dostupné akcie: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Kolo {round} začalo! Stávky: ANTE ${ante}, BLIND ${blind}. Máš {chips} žetónov.",
+    "your_hand": "🎴 Tvoja ruka: {hand}",
+    "flop_revealed": "🃏 FLOP odhalený: {cards}",
+    "river_revealed": "🃏 RIVER odhalený: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Neplatná akcia pre aktuálnu fázu. Dostupné akcie: {available}",
+    "message": "❌ Neplatná akcia! Dostupné akcie: {available}"
+  },
+  "action": {
+    "folded": "🃏 Zložil si ruku."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Dealerova ruka: {cards}",
+    "community_cards": "🃏 Spoločné karty: {cards}",
+    "player_best": "🎴 Tvoja najlepšia ruka: {name} ({cards})",
+    "dealer_best": "🎴 Dealerova najlepšia ruka: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE stávka STRATENÁ! -${ante} (zložená)",
+    "blind_lost_folded": "❌ BLIND stávka STRATENÁ! -${blind} (zložená)",
+    "ante_won": "✅ ANTE stávka VYHRATÁ! +${amount}",
+    "ante_pushed": "🔄 ANTE stávka PUSH! ${ante} vrátená",
+    "ante_lost": "❌ ANTE stávka STRATENÁ! -${ante}",
+    "blind_won": "✅ BLIND stávka VYHRATÁ! +${amount}",
+    "blind_pushed": "🔄 BLIND stávka PUSH! ${blind} vrátená",
+    "blind_lost": "❌ BLIND stávka STRATENÁ! -${blind}",
+    "play_won": "✅ PLAY stávka VYHRATÁ! +${amount}",
+    "play_pushed": "🔄 PLAY stávka PUSH! ${play} vrátená",
+    "play_lost": "❌ PLAY stávka STRATENÁ! -${play}",
+    "net_gain": "🎉 Kolo {round} dokončené! Čistý zisk: +${net}",
+    "net_loss": "💸 Kolo {round} dokončené! Čistá strata: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 HRA SKONČILA! {max_turns} kôl dokončených. Máš ${chips} žetónov - VYHRÁVAŠ!",
+    "game_over_lose": "🏁 HRA SKONČILA! Zostal si bez žetónov. Dealer vyhráva!",
+    "reward_win": "Hráč dokončil {winner_rounds} kôl s ${chips} žetónmi",
+    "reward_lose": "Hráč zostal bez žetónov v kole {round}",
+    "reward_win_max": "Hráč dokončil {max_turns} kôl s ${chips} žetónmi"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Štyri rovnaké",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Tri rovnaké",
+    "two_pair": "Dve páry",
+    "one_pair": "Jedna pár",
+    "high_card": "Najvyššia karta",
+    "unknown": "Neznáma ruka"
+  }
+}

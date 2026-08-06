@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "आप खिलाड़ी {player_id} हैं जो {colour} ({piece}) खेल रहे हैं ओथेलो के एक खेल में।\nआपका लक्ष्य खेल के अंत तक बोर्ड पर अपने रंग के अधिक टुकड़े होना है।\nअपनी बारी पर, एक टुकड़ा रखें जैसे कि यह आपके प्रतिद्वंद्वी के एक या अधिक टुकड़ों को किसी भी दिशा में (क्षैतिज, ऊर्ध्वाधर, या तिरछा) आपके नए टुकड़े और आपके मौजूदा टुकड़ों में से एक के बीच में रखता है। सभी फ्लैंक किए गए प्रतिद्वंद्वी टुकड़े आपके रंग में बदल जाएंगे।\nअपनी चाल को '[पंक्ति, कॉलम]' प्रारूप में प्रदान करें।"
+  },
+  "board": {
+    "game_board": "गेम बोर्ड:\n{board}",
+    "valid_moves": "{observation}\nमान्य चालें: {moves}",
+    "no_valid_moves_reset": "{observation}\nकोई मान्य चाल नहीं है - आपको छोड़ना पड़ सकता है।",
+    "no_valid_moves_step": "{observation}\nकोई मान्य चाल नहीं है – आपको छोड़ना पड़ सकता है।",
+    "scores_reset": "{observation}\nवर्तमान स्कोर - काला: {black_count}, सफेद: {white_count}\n",
+    "scores_step": "{observation}\nस्कोर - काला: {black_count}, सफेद: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "चाल को [पंक्ति, कॉलम] के रूप में होना चाहिए।",
+    "illegal": "अवैध चाल। मान्य चालें: {valid}"
+  },
+  "game_action": {
+    "skipped": "खिलाड़ी {pid} को अपनी बारी छोड़नी पड़ी",
+    "played": "खिलाड़ी {pid} ({piece}) ने [{r}, {c}] खेला और {flipped} टुकड़े पलट दिए"
+  },
+  "game_message": {
+    "must_skip": "खिलाड़ी {pid} ({piece}) के पास कोई मान्य चाल नहीं है और छोड़ना होगा।"
+  },
+  "outcome": {
+    "black_wins": "काला जीतता है {black_count}-{white_count}।",
+    "white_wins": "सफेद जीतता है {white_count}-{black_count}।",
+    "draw": "ड्रॉ {black_count}-{white_count}।"
+  }
+}

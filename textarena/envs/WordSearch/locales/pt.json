@@ -1,0 +1,37 @@
+{
+  "_comment": "Português do Brasil para Word Search. As chaves (à esquerda) são fixas; traduza apenas os valores (à direita). Mantenha todos os {placeholders} inalterados. Os rótulos da grade (R00/C00), coordenadas e o formato de ação entre colchetes '[linha_inicial coluna_inicial linha_final coluna_final]' e exemplos como '[1 1 1 5]' são NEUTROS e não devem ser traduzidos. {board} e {words} são conteúdo de jogo neutro. Nota: no prompt.intro, a ocorrência '{{player_id}}' é intencionalmente escapada para ser renderizada literalmente como '{player_id}' (corresponde ao texto original do jogo).",
+  "_slots": {
+    "{player_id}": "Número do jogador (inteiro)",
+    "{mode}": "Rótulo do modo de jogo (já localizado: Básico/Difícil)",
+    "{tries}": "Número de tentativas incorretas restantes (inteiro)",
+    "{board}": "A grade renderizada (neutra; não traduza)",
+    "{words}": "Lista de palavras ocultas separadas por vírgula (tokens neutros)",
+    "{coords}": "As coordenadas 'linha_inicial coluna_inicial linha_final coluna_final' (neutras)",
+    "{word}": "Uma palavra oculta que foi encontrada (token neutro)",
+    "{found}": "Número de palavras encontradas até agora (inteiro)",
+    "{total}": "Número total de palavras ocultas (inteiro)",
+    "{pct}": "Porcentagem de palavras encontradas (inteiro)"
+  },
+  "prompt": {
+    "mode_basic": "Básico",
+    "mode_hardcore": "Difícil",
+    "intro": "Você é o Jogador {player_id} e está participando de um desafio de Caça-Palavras modelado como {mode}. O objetivo é encontrar e destacar palavras ocultas na grade abaixo. As linhas e colunas são numeradas para sua referência.\n\nAqui está o estado atual da grade de Caça-Palavras:\n----------------------------------------\nAs palavras que você já encontrou estão marcadas em colchetes [ ]. Cada linha e coluna é numerada para clareza.\n\n\nPara localizar uma palavra, especifique a linha e a coluna de suas letras iniciais e finais. Observe que as palavras estão ou na horizontal ou na vertical.\nVocê pode digitar sua resposta e pensamentos de qualquer maneira. Mas você só pode enviar uma submissão por vez. Para suas submissões, use o formato '[linha_inicial coluna_inicial linha_final coluna_final]'.\nPor exemplo, se você quiser encontrar a palavra 'OLÁ' começando na linha 1, coluna 1 e terminando na linha 1, coluna 3, digite '[1 1 1 3]'.\n\nDiretrizes:\n- Cada chute deve ser único; você não pode repetir o mesmo chute.\n- Você tem um total de {tries} tentativas incorretas restantes.\n- O histórico de suas tentativas será registrado abaixo.\n\nFaça seus chutes com cuidado e estratégia. Boa sorte, Jogador {{player_id}}! Vamos ver quantas palavras você pode encontrar!\n"
+  },
+  "board": {
+    "state": "Grade Atual:\n\n{board}\nPalavras Colocadas: {words}\nTentativas Incorretas Restantes: {tries}"
+  },
+  "invalid": {
+    "wrong_format": "Formato de movimento inválido. O Jogador {player_id} não respondeu com 'linha_inicial, coluna_inicial, linha_final, coluna_final' válido.",
+    "out_of_range": "Formato de movimento inválido. O Jogador {player_id} não respondeu com 'linha_inicial, coluna_inicial, linha_final, coluna_final' válido.",
+    "already_attempted": "Movimento inválido. A ação já foi tentada."
+  },
+  "feedback": {
+    "incorrect": "[{coords}] é uma tentativa incorreta. {tries} tentativas incorretas restantes.",
+    "correct": "[{coords}] é uma tentativa correta. Você encontrou a palavra '{word}'.",
+    "correct_unknown": "[{coords}] é uma tentativa correta, mas a palavra não foi encontrada nas palavras colocadas."
+  },
+  "outcome": {
+    "no_tries": "Não há mais tentativas incorretas restantes. Você encontrou {found} de {total} palavras ({pct}%).",
+    "win": "Parabéns! Você completou o quebra-cabeça de Caça-Palavras."
+  }
+}

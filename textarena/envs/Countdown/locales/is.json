@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert að spila Countdown töluleik!\nMarkmið: Sameina tölur með +, -, *, / til að ná marki.\nSnið aðgerðar: [i j op] þar sem i,j eru vísar og op er aðgerðin.\nDæmi: [0 2 *] margfaldar töluna í vísunum 0 og 2.\nDeiling verður að skila einungis heiltölum."
+  },
+  "board": {
+    "header": "MARK: {target}\n\nTölur í boði:\n{numbers}",
+    "best": "{observation}\n\nBesta til þessa: {best_value} (fjarlægð: {distance})\nBesta rök: {best_expression}",
+    "history": "{observation}\n\nSögu leikja:\n{moves}",
+    "progress": "{observation}\nNúverandi stigagjöf: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ógilt snið aðgerðar. Nota `[i j op]` þar sem i,j eru vísar og op er +,-,*,/",
+    "invalid_indices": "Ógildir vísar. Verða að vera ólíkir og innan bilsins 0-{max_index}",
+    "invalid_operation": "Ógild aðgerð (deiling með núlli eða óheiltölulegur niðurstaða)"
+  },
+  "outcome": {
+    "win": "Fullkomið! Fann nákvæm mark: {target}",
+    "no_moves": "Engir fleiri leikir. Besti árangur: {best_value} (mark: {target})",
+    "turn_limit": "Takmörk á leikjum náð. Besti árangur: {best_value} (mark: {target})"
+  }
+}

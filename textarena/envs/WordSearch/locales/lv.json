@@ -1,0 +1,37 @@
+{
+  "_comment": "Latviešu lokalizācija Word Search. Atslēgas (kreisā puse) ir fiksētas; tulko tikai vērtības (labā puse). Saglabājiet katru {placeholder} tādu, kāds tas ir. Režģa etiķetes (R00/C00), koordinātes un darbības formāts '[start_row start_col end_row end_col]' un piemēri kā '[1 1 1 5]' ir NEITRĀLI un nedrīkst tikt tulkoti. {board} un {words} ir neitrāls spēles saturs. Piezīme: prompt.intro tekstā '{{player_id}}' ir apzināti aizstāts, lai tas tiek attēlots burtiski kā '{player_id}' (atbilst oriģinālajam spēles tekstam).",
+  "_slots": {
+    "{player_id}": "Spēlētāja numurs (vesels skaitlis)",
+    "{mode}": "Spēles režīma nosaukums (jau lokalizēts: Basic/Hardcore)",
+    "{tries}": "Nepareizu mēģinājumu skaits, kas palicis (vesels skaitlis)",
+    "{board}": "Attēlots režģis (neitrāls; netulkojiet)",
+    "{words}": "Atdalītu vārdu saraksts (neitrāli tokeni)",
+    "{coords}": "'start_row start_col end_row end_col' koordinātes (neitrālas)",
+    "{word}": "Atrastais vārds (neitrāls tokens)",
+    "{found}": "Līdz šim atrasto vārdu skaits (vesels skaitlis)",
+    "{total}": "Slēpto vārdu kopskaits (vesels skaitlis)",
+    "{pct}": "Atrasto vārdu procentuālais skaits (vesels skaitlis)"
+  },
+  "prompt": {
+    "mode_basic": "Pamata",
+    "mode_hardcore": "Smagais",
+    "intro": "Jūs esat Spēlētājs {player_id}, un jūs piedalījaties Word Search izaicinājumā, kas modelēts kā {mode}. Mērķis ir atrast un iezīmēt slēptos vārdus režģī zemāk. Rindas un kolonnas ir numurētas jūsu atsaucei.\n\nŠeit ir pašreizējais Word Search režģa stāvoklis:\n----------------------------------------\nVārdi, kurus jūs jau esat atraduši, ir atzīmēti kvadrātiekavās [ ]. Katra rinda un kolonna ir numurēta skaidrībai.\n\n\nLai atrastu vārdu, norādiet rindu un kolonnu tā sākuma un beigu burtiem. Ņemiet vērā, ka vārdi ir vai nu pāri vai lejā.\nJūs varat ierakstīt savu atbildi un domas jebkādā veidā. Bet jūs varat iesniegt tikai vienu iesniegumu vienā laikā. Savos iesniegumos izmantojiet formātu '[start_row start_col end_row end_col]'.\nPiēmēram, ja jūs vēlaties atrast vārdu 'HELLO' sākot no rindas 1, kolonnas 1 un beidzot ar rindu 1, kolonnu 5, ievadiet '[1 1 1 5]'.\n\nVadlīnijas:\n- Katrs minējums ir jābūt unikāls; jūs nevarat atkārtot to pašu minējumu.\n- Jums ir kopā {tries} nepareizu mēģinājumu, kas palicis.\n- Jūsu mēģinājumu vēsture tiks ierakstīta zemāk.\n\nVeiciet savus minējumus uzmanīgi un stratēģiski. Veiksmi, Spēlētāj {{player_id}}! Redzēsim, cik daudz vārdu jūs varat atrast!\n"
+  },
+  "board": {
+    "state": "Pašreizējais režģis:\n\n{board}\nIzvietoti vārdi: {words}\nNepareizu mēģinājumu skaits, kas palicis: {tries}"
+  },
+  "invalid": {
+    "wrong_format": "Nederīgs gājiens formāts. Spēlētājs {player_id} neatbildēja ar derīgu 'start_row, start_col, end_row, end_col'.",
+    "out_of_range": "Nederīgs gājiens formāts. Spēlētājs {player_id} neatbildēja ar derīgu 'start_row, start_col, end_row, end_col'.",
+    "already_attempted": "Nederīgs gājiens. Darbība jau ir mēģināta."
+  },
+  "feedback": {
+    "incorrect": "[{coords}] ir nepareizs mēģinājums. {tries} nepareizu mēģinājumu skaits, kas palicis.",
+    "correct": "[{coords}] ir pareizs mēģinājums. Jūs atradāt vārdu '{word}'.",
+    "correct_unknown": "[{coords}] ir pareizs mēģinājums, bet vārds netika atrasts izvietotajos vārdos."
+  },
+  "outcome": {
+    "no_tries": "Vairs nav nepareizu mēģinājumu. Jūs atradāt {found} no {total} vārdiem ({pct}%).",
+    "win": "Apsveicam! Jūs pabeidzāt Word Search uzdevumu."
+  }
+}

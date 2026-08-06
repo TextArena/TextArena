@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Du är Spelare {player_id}. Du spelar Minnesspelet.\nDitt mål är att matcha fler par av kort på brädet än din motståndare.\nPå din tur väljer du två kort att vända genom att ange rad- och kolumnnumren för det första och andra kortet som '[0 1 1 0]', där det första kortet är i rad 0 och kolumn 1, och det andra kortet är i rad 1 och kolumn 0.\nOm de två korten matchar får du en poäng och korten förblir vända uppåt. Om de inte matchar vänds korten tillbaka neråt, t.ex. '.'.\nSpelet slutar när alla par har matchats."
+  },
+  "board": {
+    "current_board": "Aktuellt bräde:\n{board}",
+    "current_game_board": "Aktuellt Spelbräde:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ogiltigt dragformat. Spelare {player_id} svarade inte med en giltig riktning inom hakparenteser.",
+    "out_of_bounds": "Ogiltigt drag. Spelare {player_id} valde en position utanför gränserna.",
+    "same_card_twice": "Ogiltigt drag. Spelare {player_id} valde samma kort två gånger.",
+    "already_matched": "Ogiltigt drag. Spelare {player_id} valde ett eller båda kort som redan har matchats."
+  },
+  "game_message": {
+    "cards_match": "Korten som valdes av Spelare {player_id} på positionerna [{r1} {c1}] och [{r2} {c2}] matchar!",
+    "cards_no_match": "Korten som valdes av Spelare {player_id} matchar inte. Korten på positionerna [{r1} {c1}] och [{r2} {c2}] är {pos1} respektive {pos2}."
+  },
+  "outcome": {
+    "draw": "Båda spelarna matchade samma antal par av kort.",
+    "win": "Spelare {winner_id} har vunnit!",
+    "turn_limit": "Tidsgränsen har nåtts. Spelet är slut. Spelare 0 fick {score_0} poäng, Spelare 1 fick {score_1} poäng.",
+    "turn_limit_win": "{reason} Spelare {winner_id} har vunnit!"
+  }
+}

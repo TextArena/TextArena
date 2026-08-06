@@ -1,0 +1,37 @@
+{
+  "_comment": "Fișier de localizare pentru Word Search. Cheile (partea stângă) sunt fixe; traduceți doar valorile (partea dreaptă). Păstrați fiecare {placeholder} exact așa cum este.",
+  "_slots": {
+    "{player_id}": "Numărul jucătorului (număr întreg)",
+    "{mode}": "Eticheta modului de joc (deja localizată: Basic/Hardcore)",
+    "{tries}": "Numărul de încercări greșite rămase (număr întreg)",
+    "{board}": "Grila redată (conținut neutru; nu traduceți)",
+    "{words}": "Listă de cuvinte ascunse, separate prin virgulă (tokenuri neutre)",
+    "{coords}": "Coordonatele 'start_row start_col end_row end_col' (neutre)",
+    "{word}": "Un cuvânt ascuns care a fost găsit (token neutru)",
+    "{found}": "Numărul de cuvinte găsite până acum (număr întreg)",
+    "{total}": "Numărul total de cuvinte ascunse (număr întreg)",
+    "{pct}": "Procentajul de cuvinte găsite (număr întreg)"
+  },
+  "prompt": {
+    "mode_basic": "Basic",
+    "mode_hardcore": "Hardcore",
+    "intro": "Sunteți Jucătorul {player_id} și participați la o provocare Word Search modelată ca {mode}. Obiectivul este să găsiți și să evidențiați cuvinte ascunse pe grila de mai jos. Rândurile și coloanele sunt numerotate pentru referința dumneavoastră.\n\nAici este starea actuală a tablei Word Search:\n----------------------------------------\nCuvintele pe care le-ați găsit deja sunt marcate în paranteze pătrate [ ]. Fiecare rând și coloană este numerotată pentru claritate.\n\n\nPentru a localiza un cuvânt, specificați rândul și coloana literelor sale de început și sfârșit. Notați că cuvintele sunt fie orizontale, fie verticale.\nPuteți introduce răspunsul și gândurile dumneavoastră în orice mod. Dar puteți trimite doar o singură încercare la un moment dat. Pentru încercările dumneavoastră, folosiți formatul '[start_row start_col end_row end_col]'.\nDe exemplu, dacă doriți să găsiți cuvântul 'HELLO' care începe la rândul 1, coloana 1 și se termină la rândul 1, coloana 5, introduceți '[1 1 1 5]'.\n\nGhiduri:\n- Fiecare încercare trebuie să fie unică; nu puteți repeta aceeași încercare.\n- Aveți un total de {tries} încercări greșite rămase.\n- Istoria încercărilor dumneavoastră va fi înregistrată mai jos.\n\nFaceți încercările cu atenție și strategic. Mult noroc, Jucător {{player_id}}! Să vedem câte cuvinte puteți găsi!\n"
+  },
+  "board": {
+    "state": "Tablă curentă:\n\n{board}\nCuvinte plasate: {words}\nÎncercări greșite rămase: {tries}"
+  },
+  "invalid": {
+    "wrong_format": "Format de mutare invalid. Jucătorul {player_id} nu a răspuns cu un format valid 'start_row, start_col, end_row, end_col'.",
+    "out_of_range": "Format de mutare invalid. Jucătorul {player_id} nu a răspuns cu un format valid 'start_row, start_col, end_row, end_col'.",
+    "already_attempted": "Mutare invalidă. Acțiunea a fost deja încercată."
+  },
+  "feedback": {
+    "incorrect": "[{coords}] este o încercare greșită. {tries} încercări greșite rămase.",
+    "correct": "[{coords}] este o încercare corectă. Ați găsit cuvântul '{word}'.",
+    "correct_unknown": "[{coords}] este o încercare corectă, dar cuvântul nu a fost găsit în cuvintele plasate."
+  },
+  "outcome": {
+    "no_tries": "Nu mai aveți încercări greșite rămase. Ați găsit {found} din {total} cuvinte ({pct}%).",
+    "win": "Felicitări! Ați completat puzzle-ul Word Search."
+  }
+}

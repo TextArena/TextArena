@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} într-un Dilemă a Prizonierului Iterat care se desfășoară pe parcursul a {num_rounds} runde.\n\nStructura jocului:\n- Înainte de fiecare decizie, aveți {total_conversation_rounds} ture pentru a comunica liber.\n- După aceea, ambii jucători aleg simultan să coopereze sau să înșele.\n\nMatricea de câștiguri (fixă pentru fiecare rundă):\n- Ambii cooperează ➜ fiecare {cooperate_reward}\n- Ambii înșeală ➜ fiecare {mutual_defect_reward}\n- Unul înșeală, celălalt cooperează ➜ Înșelătorul {defect_reward}, Cooperatorul {sucker_reward}\n\nCum se joacă:\n- În timpul conversației: tastați orice text doriți.\n- În faza de decizie: includeți '[Cooperate]' sau '[Defect]' (indiferent de majuscule/minuscule). Puteți adăuga text suplimentar înainte/după token."
+  },
+  "phases": {
+    "conversation_finished": "Conversația s-a încheiat pentru runda {round}. Vă rugăm să răspundeți cu '[Cooperate]' sau '[Defect]' în \\boxed{{}}.",
+    "starting_round": "--- Începutul Rundei {round} ---",
+    "round_summary": "Rezultatele rundei {round}:\n{outcome}\nJucătorul 0 a câștigat {r0} (total {score_0}), Jucătorul 1 a câștigat {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Jucătorul {winner} câștigă {win_score} - {lose_score}.",
+    "draw": "Remiză! Ambii jucători au obținut {s0}.",
+    "round_both_cooperate": "Ambii jucători au cooperat.",
+    "round_both_defect": "Ambii jucători au înșelat.",
+    "round_p0_cooperates_p1_defects": "Jucătorul 0 a cooperat, Jucătorul 1 a înșelat.",
+    "round_p0_defects_p1_cooperates": "Jucătorul 0 a înșelat, Jucătorul 1 a cooperat."
+  }
+}

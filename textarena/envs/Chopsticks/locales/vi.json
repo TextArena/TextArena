@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong trò Chopped Sticks. Trong lượt của bạn, hãy chọn một trong những hành động sau:\n  + Tấn công:  '[attack M O]'  trong đó M=người chơi (0 hoặc 1), O=đối thủ (0 hoặc 1).\n    - Số ngón tay của đối thủ tăng bằng số ngón tay của bạn; nếu >=5, nó sẽ trở thành 0.\n  + Chia:   '[split L R]'  để phân phối lại tổng số ngón tay của bạn thành L và R (L+R = tổng số ngón tay của bạn).\nHãy trả lời bằng chính xác một trong những lệnh trên."
+  },
+  "board": {
+    "current_board": "Bàn cờ hiện tại:\nNgười chơi 0: {hands_0}\nNgười chơi 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Tay {my_idx} của bạn đã chết.",
+    "opp_hand_dead": "Tay {opp_idx} của đối thủ đã chết.",
+    "split_sum": "Phân phối phải tổng bằng {total}.",
+    "split_no_change": "Phân phối phải thay đổi số ngón tay của bạn.",
+    "invalid_command": "Nước đi không hợp lệ. Hãy sử dụng “[attack M O]” hoặc “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} tấn công tay {opp_idx} của P{opp_id}: từ {opp_val} đến {new_val}.",
+    "split": "P{player_id} chia thành [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Cả hai tay của đối thủ đã chết.",
+    "draw": "Hạn chế lượt đã đạt đến."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Du spiller Minesweeper-spillet.\nMålet med spillet er å avdekke alle celler som ikke inneholder miner.\nFor å gjøre et trekk, angi bare rad- og kolonnekoordinatene du ønsker å avdekke ved å bruke formatet:\n- `[rad kol]`: Avdekke cellen på den angitte raden og kolonnen.\nFor eksempel:\n- `[3 2]` for å avdekke cellen i rad 3, kolonne 2.\n- `[5 6]` for å avdekke cellen i rad 5, kolonne 6.\nPå ditt første trekk vil du avdekke et område rundt cellen du velger for å sikre en trygg start.\nDen nåværende brettlayouten vises nedenfor. Celler som ikke er avdekket, representeres av en prikk ('.'), avdekkede tall viser antallet nærliggende miner.\nVær oppmerksom på å ikke velge allerede avdekkede celler.\nHer er den nåværende brettlayouten:\n"
+  },
+  "board": {
+    "game_board": "Spillebrett:\n\n{board}",
+    "current_board": "Nåværende brett:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Du svarte ikke med gyldige koordinater i firkantede parenteser.",
+    "out_of_bounds": "De angitte rad- og kolonnekoordinatene er utenfor grensene.",
+    "already_revealed": "Cellen på ({row}, {col}) er allerede avdekket.",
+    "hit_mine": "Du traff en mine på ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Du avdekket cellen på ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Gratulerer! Du har klart å rydde Minesweeper-brettet.",
+    "turn_limit": "Tidsbegrensningen er nådd. Du avdekket {percent}% av de trygge cellene."
+  }
+}

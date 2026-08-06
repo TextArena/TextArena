@@ -1,0 +1,32 @@
+{
+  "_comment": "Súbor lokalizácie ThreePlayerTicTacToe. NEPREKLADAJTE kľúče (ľavá strana). Prekladajte iba hodnoty (pravá strana).",
+  "_slots": {
+    "{player_id}": "Číslo hráča, napr. 0, 1 alebo 2",
+    "{symbol}": "Značka hráča, jedna z A, B alebo C",
+    "{cell}": "Číslo bunky na doske",
+    "{max_cell}": "Najvyšší platný číslo bunky (veľkosť_dosky^2 - 1)",
+    "{row}": "Index riadku dosky, kde bola umiestnená značka",
+    "{col}": "Index stĺpca dosky, kde bola umiestnená značka",
+    "{board}": "Vykreslená ASCII doska (neprekládať)",
+    "{moves}": "Čiarkou oddelený zoznam dostupných ťahov ako '[4]' (neprekládať)"
+  },
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} v Troj-Player Tic Tac Toe.\nVaša značka je '{symbol}'.\nStriedajte sa pri umiestňovaní svojej značky na 5x5 dosku, aby ste vytvorili líniu zo štyroch.\nLínie môžu byť horizontálne, vertikálne alebo diagonálne.\nOdoslite svoj ťah pomocou formátu '[4]', aby ste označili bunku 4."
+  },
+  "board": {
+    "current_board": "Aktuálna doska:\n\n{board}\n\nDostupné ťahy: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát ťahu. Použite '[bunka]', kde bunka je 0-{max_cell}.",
+    "out_of_range": "Neplatné číslo bunky: {cell}. Musí byť medzi 0 a {max_cell}.",
+    "already_occupied": "Bunka {cell} je už obsadená.",
+    "made_invalid": "Hráč {player_id} urobil neplatný ťah"
+  },
+  "game_action": {
+    "placed": "Hráč {player_id} umiestnil svoju značku ({symbol}) do poľa ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Hráč {player_id} ({symbol}) zvíťazil!",
+    "draw": "Hra skončila remízou!"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Игра начинается. Козырная масть: {trump_suit} (козырная карта: {trump_str}).",
+    "no_trump_card": "нет"
+  },
+  "player_prompt": {
+    "intro": "Вы — Игрок {player_id} в Немецком Висте.\n{phase_info}\nУ вас {hand_size} карт.\nСыграйте карту с помощью '[play N]', где N — позиция карты в вашей руке (например '[play 3]').",
+    "phase_learning": "ФАЗА ОБУЧЕНИЯ: победитель каждого хода берет открытую карту, а проигравший берет следующую карту из колоды. Ходы, выигранные в этой фазе, не засчитываются в победу.",
+    "phase_playing": "ФАЗА ИГРЫ: колода исчерпана. Каждый ход отныне засчитывается в победу."
+  },
+  "next_card": {
+    "playing_phase": "Нет карты для предложения - фаза игры началась.",
+    "deck_empty": "Колода пуста - нет карты для предложения.",
+    "available": "Карта для предложения: {card}",
+    "available_trump": "Карта для предложения: {card} (КОЗЫРЬ)"
+  },
+  "invalid_move": {
+    "wrong_format": "Неправильный формат хода. Используйте '[play N]', чтобы сыграть N-ю карту в вашей руке.",
+    "bad_position": "Такой позиции карты не существует. У вас {hand_size} карт.",
+    "must_follow_suit": "Вы должны следовать масти и сыграть карту {lead_suit}.",
+    "invalid_play": "Эту карту нельзя сыграть."
+  },
+  "game_action": {
+    "played": "Игрок {player_id} сыграл {card}."
+  },
+  "trick": {
+    "won": "Игрок {winner_id} выиграл ход с {card}.",
+    "won_learning": "Игрок {winner_id} выиграл ход с {card} и взял открытую карту."
+  },
+  "phase": {
+    "learning_complete": "Колода исчерпана. Фаза обучения закончилась - каждый оставшийся ход засчитывается в победу."
+  },
+  "draw": {
+    "winner_received": "Вы выиграли ход и получили {card}.",
+    "loser_received": "Вы проиграли ход и взяли {card} из колоды.",
+    "winner_preview": "Следующая карта для предложения — {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Ходы, выигранные до сих пор - Игрок 0: {tricks0}, Игрок 1: {tricks1}",
+    "scores_playing": "Засчитывающиеся ходы - Игрок 0: {tricks0}, Игрок 1: {tricks1}",
+    "phase": "Фаза: {phase}",
+    "phase_learning": "Фаза: {phase} ({remaining_cards} карт осталось в колоде)"
+  },
+  "hand": {
+    "no_cards": "Нет карт",
+    "no_cards_in_hand": "Нет карт в руке",
+    "header": "Ваша рука:",
+    "trump_indicator": " (КОЗЫРЬ)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Еще нет сыгранных карт в этом ходу.",
+    "header": "Текущий ход:",
+    "trump_indicator": " (КОЗЫРЬ)",
+    "card_line": "{observation}\n  Игрок {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Игра не началась",
+    "header": "=== НЕМЕЦКИЙ ВИСТ ===",
+    "phase": "{observation}\nФаза: {phase}",
+    "trump_suit": "{observation}\nКозырная масть: {trump_suit}",
+    "trump_card": "{observation}\nКозырная карта: {card}",
+    "cards_left": "{observation}\nКарт осталось в колоде: {count}",
+    "next_card": "{observation}\nСледующая карта для победителя: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nТекущий ход:",
+    "trump_indicator": " (КОЗЫРЬ)",
+    "trick_line": "{observation}\n  Игрок {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nИгрок {player_id}: {scoring} засчитывающихся ходов ({tricks} всего), {hand_size} карт в руке"
+  },
+  "outcome": {
+    "summary": "Фаза обучения - Игрок 0: {l0}, Игрок 1: {l1}. Фаза игры - Игрок 0: {p0}, Игрок 1: {p1}. Игрок {winner_id} выиграл с {winner_tricks} засчитывающимися ходами!"
+  }
+}

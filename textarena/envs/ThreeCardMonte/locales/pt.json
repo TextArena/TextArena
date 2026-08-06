@@ -1,0 +1,31 @@
+{
+  "_comment": "Arquivo de localização do ThreeCardMonte. NÃO traduza as chaves (lado esquerdo). Traduza apenas os valores (lado direito).",
+  "_slots": {
+    "{line}": "A linha renderizada de copos",
+    "{step}": "O número atual do passo de embaralhamento",
+    "{steps}": "O número total de passos de embaralhamento",
+    "{i}": "O índice do primeiro copo envolvido em uma troca",
+    "{j}": "O índice do segundo copo envolvido em uma troca",
+    "{prompt}": "O fragmento de prompt localizado anexado após os copos",
+    "{max_index}": "O índice válido mais alto do copo, ou seja, num_cups-1",
+    "{ball_pos}": "O índice do copo em que a bola está"
+  },
+  "player_prompt": {
+    "intro": "Acompanhe a bola oculta 'X' enquanto os copos são embaralhados.\nDepois de embaralhar, adivinhe sua localização com `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "A bola começa: {line}",
+    "shuffle": "Embaralhamento {step}/{steps}: trocou os copos {i} e {j}.",
+    "cups": "Copos: {line}  {prompt}",
+    "guess_now": "(Adivinhe AGORA!)",
+    "reveal": "(Revelar: bola sob {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Ação inválida. Use `[k]`.",
+    "out_of_range": "Índice fora do intervalo 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Correto! Você encontrou a bola.",
+    "lose": "Errado — a bola estava sob o copo {ball_pos}."
+  }
+}

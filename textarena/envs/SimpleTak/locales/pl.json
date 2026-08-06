@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w SimpleTak.\nNa planszy Twoje kamienie są oznaczone jako '{player_stone}', a kamienie przeciwnika jako '{opponent_stone}'.\n\nW swojej turze wybierz jedną pustą komórkę (po jej numerze indeksu) i umieść tam swój kamień.\nNa przykład, '[12]' umieszcza Twój kamień w komórce 12.\n\nTwoim celem jest utworzenie ciągłej ścieżki swoich kamieni, która łączy dwa przeciwległe brzegi planszy (od góry do dołu lub od lewej do prawej)."
+  },
+  "invalid_move": {
+    "invalid_move_format": "Niepoprawny format ruchu",
+    "cell_out_of_range": "Niepoprawny numer komórki {cell_num}. Musi być między 0 a {max_board_num}.",
+    "cell_already_occupied": "Komórka {cell_num} jest już zajęta. Wybierz pustą komórkę."
+  },
+  "board": {
+    "current_state": "Aktualna plansza:\n\n{rendered_board}\nDostępne ruchy: {available_moves}"
+  },
+  "action": {
+    "placement": "Gracz {current_player_id} umieścił swój symbol ({symbol}) w komórce {cell_num}."
+  },
+  "outcome": {
+    "winner": "Gracz {current_player_id} ('{symbol}') połączył dwa przeciwległe brzegi!",
+    "draw": "Plansza jest pełna. To remis!"
+  }
+}

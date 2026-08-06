@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em dil dosyası. Anahtarları (sol taraf) çevirme. Yalnızca değerleri (sağ taraf) çevir.",
+  "_slots": {
+    "{start_chips}": "Başlangıç çip sayısı, örneğin 1000",
+    "{ante}": "Ante/kör bahis miktarı, örneğin 25",
+    "{ante4}": "Ante'nin dört katı, örneğin 100",
+    "{ante2}": "Ante'nin iki katı, örneğin 50",
+    "{round}": "Mevcut tur numarası",
+    "{chips}": "Oyuncunun mevcut çip sayısı",
+    "{hand}": "Virgülle ayrılmış kart etiketleri, örneğin 'A, K', veya yerelleştirilmiş kart yok metni",
+    "{phase}": "Mevcut aşama etiketi belirteci (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Virgülle ayrılmış köşeli işlem belirteçleri, örneğin '[play_bet_4x], [check]'",
+    "{available}": "Virgülle ayrılmış şu anda yasal köşeli işlem belirteçleri",
+    "{blind}": "Kör bahis miktarı",
+    "{play}": "Oynama bahis miktarı",
+    "{cards}": "Virgülle ayrılmış kart etiketleri, örneğin 'Q, 7, 2'",
+    "{name}": "Yerelleştirilmiş poker eli adı, olduğu gibi eklenir",
+    "{amount}": "Çip miktarı",
+    "{net}": "Tur için net çip değişimi (negatif olabilir)",
+    "{max_turns}": "Maksimum tur sayısı",
+    "{winner_rounds}": "Tamamlanan tur sayısı"
+  },
+  "player_prompt": {
+    "no_cards": "Henüz kart yok",
+    "rules": " ULTIMATE TEXAS HOLD'EM - Tek Oyunculu vs Bayi\n\n OYUN GENEL BAKIŞ:\n• {start_chips} çiple başlarsınız\n• 52 kartlık tek bir deste (2-A, 2-A, 2-A, 2-A)\n• Bayiye karşı oynarsınız (ev)\n• Her tur Ultimate Texas Hold'em yapısını takip eder: ANTE ve BLIND bahisleri koyarsınız, 2 delik kartı alırsınız, bahis aşamalarında isteğe bağlı PLAY bahisleri koyarsınız, sonra topluluk kartlarını açar ve en iyi 5 kartlık elinizi bayinin eliyle karşılaştırırsınız. Amacınız kazancınızı en üst düzeye çıkarmak (daha iyi eliniz olduğunda), kayıplarınızı en aza indirmektir (daha kötü eliniz olduğunda).\n• Oyun, tur başında 0 çipe veya altına ulaştığınızda (KAYIP) veya 1000 turu çiplerle tamamladığınızda (KAZANÇ) sona erer\n\n BAHİS YAPISI:\n• ANTE: Her turda zorunlu ${ante} bahisi\n• BLIND: Her turda zorunlu ${ante} bahisi\n• PLAY: Oyun sırasında isteğe bağlı bahistir. Tur boyunca, yalnızca aşağıdaki seçeneklerden BİRİNİ seçebilirsiniz: (${ante4} PRE-FLOP'ta yapılırsa, ${ante2} FLOP'ta yapılırsa veya ${ante} RIVER'da yapılırsa. Ayrıca RIVER'da eli bırakabilir ve bahiste bulunmayabilirsiniz.)\n\n KART DAĞITIMI:\n• 2 yüzü açık kart alırsınız (delik kartlarınız)\n• Bayi 2 yüzü kapalı kart alır (sizin için gizlidir)\n• 5 topluluk kartı başlangıçta yüzü kapalı olarak dağıtılır\n• Topluluk kartları oyun aşamaları boyunca ilerledikçe açılır\n\n BAYİ NİTELİĞİ:\n• Bayinin en az bir ÇİFTİ (aynı rütbede 2 kart) olması gerekir, 2 kartlarını ve 5 topluluk kartını kullanarak.\n• Bayi niteliği bahis sonuçlarını etkiler, daha sonra açıklanacaktır.\n\n OYUN AŞAMALARI VE İŞLEMLERİ:\n PRE-FLOP:\n  • İşlemler: [4x] (${ante4}) veya [check]\n  • [4x]: ${ante4} PLAY bahisi koyar, ilk 3 topluluk kartını açar\n  • [check]: Ek bahis olmaz, ilk 3 topluluk kartını açar\n\n FLOP:\n  • 4x bahisi koyulduysa: Yalnızca [skip] kullanılabilir (son 2 topluluk kartını otomatik olarak açar)\n  • 4x bahisi koyulmadıysa: [2x] (${ante2}) veya [check]\n  • [2x]: ${ante2} PLAY bahisi koyar, son 2 topluluk kartını açar\n  • [check]: Ek bahis olmaz, son 2 topluluk kartını açar\n\n RIVER:\n  • 4x veya 2x bahisi koyulduysa: Yalnızca [skip] kullanılabilir (gösteriye otomatik olarak ilerler)\n  • Önceki PLAY bahisi yoksa: [1x] (${ante}) veya [fold]\n  • [1x]: ${ante} PLAY bahisi koyar, gösteriye ilerler\n  • [fold]: Eli bırakır, ANTE ve BLIND bahislerini kaybeder\n\n SHOWDOWN:\n  • Tüm kartlar açılır ve değerlendirilir\n  • 7 karttan (2 delik + 5 topluluk) en iyi 5 kartlık el\n  • Bahisler ödeme kurallarına göre çözülür\n\n BAHİS ÖDEMELERİ:\n ANTE BAHİSİ:\n  • Bayi niteliği kazanmaz: İTME (bahis iade edilir)\n  • Bayi niteliği kazanır ve siz kazanırsınız: 1:1 ödeme (bahis + kazanç)\n  • Bayi niteliği kazanır ve siz kaybedersiniz: Bahis kaybedilir\n  • Beraberlik: İTME (bahis iade edilir)\n\n BLIND BAHİSİ:\n  • Bayi niteliğinden etkilenmez\n  • Kazanırsınız: Bahis iade edilir ve el gücünüze dayalı ek ödeme\n  • Kaybedersiniz: Bahis kaybedilir\n  • Beraberlik: İTME (bahis iade edilir)\n\n BLIND BAHİSİ ÖDEME TABLOSU:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Ek ödeme yapılmaz\n\n PLAY BAHİSİ:\n  • Bayi niteliğinden etkilenmez\n  • Doğrudan karşılaştırma: En iyi eliniz vs Bayinin en iyi eli\n  • Kazanırsınız: 1:1 ödeme (bahis + kazanç)\n  • Kaybedersiniz: Bahis kaybedilir\n  • Beraberlik: İTME (bahis iade edilir)\n\n POKER ELİ SIRALAMALARI (En İyiye Kötüye):\n  1. Royal Flush: A-K-Q-J-10 aynı suit\n  2. Straight Flush: 5 art arda kart aynı suit\n  3. Four of a Kind: 4 kart aynı rütbe\n  4. Full House: 3 aynı rütbe + 2 aynı rütbe\n  5. Flush: 5 kart aynı suit\n  6. Straight: 5 art arda kart\n  7. Three of a Kind: 3 kart aynı rütbe\n  8. Two Pair: 2 farklı rütbede 2'li\n  9. One Pair: 2 kart aynı rütbe\n  10. High Card: En yüksek kart kazanır\n\n İŞLEM KOMUTLARI:\n• [4x] veya [play bet 4x]: ${{self.ante_amount*4}} PLAY bahisi koyar\n• [2x] veya [play bet 2x]: ${{self.ante_amount*2}} PLAY bahisi koyar\n• [1x] veya [play bet 1x]: ${{self.ante_amount*1}} PLAY bahisi koyar\n• [check] veya [c]: Kontrol (ek bahis olmaz)\n• [fold] veya [f]: Eli bırak (bahis kaybedilir)\n• [skip] veya [s]: Bir sonraki aşamaya geç (işlem gerekmez)\n\n STRATEJİ İPUÇLARI:\n• Güçlü başlangıç elleri (çiftler, yüksek kartlar) genellikle 4x bahislerini haklı çıkarır\n• Bayi niteliğini düşünün - zayıf eller bayi niteliği kazanamazsa itebilir\n• BLIND bahisi güçlü ellerle çok karlı olabilir (Royal Flush = 500:1!)\n• Çip yığınınızı izleyin! Tur başında 0'a veya altına inerse, kaybedersiniz.\n\n ÖNEMLİ NOTLAR:\n• ANTE ve BLIND bahisleri her turda zorunludur\n• PLAY bahisleri isteğe bağlı ve stratejiktir\n• Doğru işlemi girdiğinizden ve yalnızca bir işlem girdiğinizden emin olun.\n\n",
+    "state": " TUR {round}\n Çipler: {chips}\n Eliniz: {hand}\n Mevcut bahisler: Ante ${ante}, Blind ${blind}, Play ${play}\n Aşama: {phase}\n Kullanılabilir işlemler: {actions}\n\n"
+  },
+  "board": {
+    "round_start": " Tur {round} başladı! Bahisler: ANTE ${ante}, BLIND ${blind}. {chips} çip kaldı.",
+    "your_hand": " Eliniz: {hand}",
+    "flop_revealed": " FLOP açıldı: {cards}",
+    "river_revealed": " RIVER açıldı: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Geçersiz işlem için mevcut aşama. Kullanılabilir işlemler: {available}",
+    "message": " Geçersiz işlem! Kullanılabilir işlemler: {available}"
+  },
+  "action": {
+    "folded": " Eli bıraktınız."
+  },
+  "showdown": {
+    "dealer_hand": " GÖSTERİ! Bayinin eli: {cards}",
+    "community_cards": " Topluluk kartları: {cards}",
+    "player_best": " Oyuncunun en iyi eli: {name} ({cards})",
+    "dealer_best": " Bayinin en iyi eli: {name} ({cards})",
+    "ante_lost_folded": " ANTE bahisi KAYBEDİLDİ! -${ante} (eli bırakıldı)",
+    "blind_lost_folded": " BLIND bahisi KAYBEDİLDİ! -${blind} (eli bırakıldı)",
+    "ante_won": " ANTE bahisi KAZANDI! +${amount}",
+    "ante_pushed": " ANTE bahisi İTİLDİ! ${ante} iade edildi",
+    "ante_lost": " ANTE bahisi KAYBEDİLDİ! -${ante}",
+    "blind_won": " BLIND bahisi KAZANDI! +${amount}",
+    "blind_pushed": " BLIND bahisi İTİLDİ! ${blind} iade edildi",
+    "blind_lost": " BLIND bahisi KAYBEDİLDİ! -${blind}",
+    "play_won": " PLAY bahisi KAZANDI! +${amount}",
+    "play_pushed": " PLAY bahisi İTİLDİ! ${play} iade edildi",
+    "play_lost": " PLAY bahisi KAYBEDİLDİ! -${play}",
+    "net_gain": " Tur {round} tamamlandı! Net kazanç: +${net}",
+    "net_loss": " Tur {round} tamamlandı! Net kayıp: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": " OYUN BİTTİ! {max_turns} tur tamamlandı. ${chips} çipiniz var - KAZANDINIZ!",
+    "game_over_lose": " OYUN BİTTİ! Çipleriniz bitti. Bayi kazandı!",
+    "reward_win": " Oyuncu {winner_rounds} turu ${chips} çiple tamamladı",
+    "reward_lose": " Oyuncu {round} turunda çiplerini tüketti",
+    "reward_win_max": " Oyuncu {max_turns} turu ${chips} çiple tamamladı"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Dört Tanesi",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Üç Tanesi",
+    "two_pair": "İki Çift",
+    "one_pair": "Bir Çift",
+    "high_card": "Yüksek Kart",
+    "unknown": "Bilinmeyen El"
+  }
+}

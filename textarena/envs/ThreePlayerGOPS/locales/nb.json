@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS-lokaliseringsfil. OVERSETT IKKE nøkler (venstre side). Oversett bare verdier (høyre side).",
+  "_slots": {
+    "{player_id}": "Spillerens nummer, 0, 1 eller 2",
+    "{round}": "Den nåværende runden, 1..13",
+    "{prize}": "Premiekortets ansiktsetikett (A, 2..10, J, Q, K) - oversett ikke",
+    "{worth}": "Premiens totale verdi inkludert eventuell overført pot",
+    "{hand}": "Spillerens gjenværende kort, gjengitt som bracketede token som '[A]' '[2]' - oversett ikke",
+    "{bids}": "Den nøytrale komma-separerte listen over spilte kort som 'P0:10, P1:J, P2:Q' - oversett ikke",
+    "{winner}": "Spillerens nummer som vant runden",
+    "{pot}": "Pot-verdien som ble tildelt eller overført denne runden",
+    "{scoreline}": "Den nøytrale løpende scoreboarden som 'P0:0  P1:0  P2:11' - oversett ikke",
+    "{pid}": "Spillerens nummer som ble eliminert",
+    "{scores}": "De endelige poengene som en rå spillernummer-til-poeng-mapping - oversett ikke"
+  },
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i Three-Player GOPS.\n- Du holder de 13 kortene A-K (hvert eksakt én gang).\n- Hver runde avsløres en premie. Send inn ET kort som `[Q]`, `[10]`, `[2]` …\n- Høyest kort vinner premien (+ eventuell overført pot). Uavgjort ruller premien over til neste runde.\n- Etter 13 runder vinner høyest totalt. Ugyldige trekk = eliminering."
+  },
+  "round": {
+    "header": "### Runde {round}/13 - Premie: {prize} (verdi {worth})",
+    "hand": "Din gjenværende hånd: {hand}"
+  },
+  "reveal": {
+    "win": "Bud » {bids} - Spiller {winner} vinner {pot}.",
+    "tie": "Bud » {bids} - uavgjort, pot nå {pot}.",
+    "scores": "Poeng → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "handling trenger et bracketed kort som '[Q]'",
+    "bad_card": "kort allerede brukt eller ugyldig"
+  },
+  "elimination": {
+    "player": "Spiller {pid} eliminert etter gjentatte ugyldige trekk."
+  },
+  "outcome": {
+    "auto_win": "To spillere eliminert - automatisk seier.",
+    "final": "Endelige poeng: {scores}"
+  }
+}

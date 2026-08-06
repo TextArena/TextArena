@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Bạn đang chơi trò Minesweeper.\nMục tiêu của trò chơi là mở tất cả các ô không chứa mìn.\nĐể thực hiện một nước đi, chỉ cần chỉ định tọa độ hàng và cột bạn muốn mở theo định dạng:\n- `[row col]`: Mở ô tại hàng và cột đã chỉ định.\nVí dụ:\n- `[3 2]` để mở ô ở Hàng 3, Cột 2.\n- `[5 6]` để mở ô ở Hàng 5, Cột 6.\nTrong nước đi đầu tiên, bạn sẽ mở một khu vực xung quanh ô bạn chọn để đảm bảo một khởi đầu an toàn.\nBố cục bàn cờ hiện tại được hiển thị dưới đây. Các ô chưa mở được biểu diễn bằng dấu chấm ('.'), các số đã mở hiển thị số lượng mìn kề bên.\nHãy cẩn thận không chọn các ô đã mở.\nĐây là bố cục bàn cờ hiện tại:\n"
+  },
+  "board": {
+    "game_board": "Bàn cờ trò chơi:\n\n{board}",
+    "current_board": "Bàn cờ hiện tại:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Bạn đã không trả lời bằng tọa độ hợp lệ trong dấu ngoặc vuông.",
+    "out_of_bounds": "Tọa độ hàng và cột đã chỉ định nằm ngoài giới hạn.",
+    "already_revealed": "Ô tại ({row}, {col}) đã được mở.",
+    "hit_mine": "Bạn đã chạm phải mìn tại ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Bạn đã mở ô tại ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Chúc mừng! Bạn đã thành công mở hết bàn cờ Minesweeper.",
+    "turn_limit": "Hạn chế lượt đã đạt. Bạn đã thành công mở {percent}% các ô an toàn."
+  }
+}

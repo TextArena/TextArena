@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "あなたは {player_id} プレイヤーとしてインドポーカーをプレイします。\n- 52枚のカードデッキを使用します。あなたが見るのは相手のカードのみです。\n- 各ラウンドで {ante} チップを賭け、合計 {max_rounds} ラウンドを行います。\n- 有効なアクション: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X は 1 以上で、あなたのチップ数以下の正の整数です。)\n- ショーダウンで最も高い隠しカードを持つプレイヤーがポットを獲得します。\n"
+  },
+  "round": {
+    "announce": "### ラウンド {current_round}/{max_rounds}\n相手のカードは: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "正確に1つの括弧内のアクションを指定してください。例: '[check]', '[bet 2]', '[call]', '[raise 3]', '[fold]'.",
+    "cannot_check": "[check] はできません - 相手からベットを受けています。",
+    "amount_min": "ベット / レイズの額は 1 以上でなければなりません。",
+    "cannot_bet": "[bet] はできません - [call] / [raise] / [fold] のいずれかを選択してください。",
+    "nothing_to_call": "コールするものがありません。[check] を選択できます。",
+    "no_bet_to_raise": "[bet X] を使用してベットを開始してください。レイズするベットがありません。",
+    "insufficient": "そのアクションにはチップが不足しています。"
+  },
+  "game_action": {
+    "action": "プレイヤー {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "あなたの可能なアクション: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  ポット {pot} → プレイヤー {winner}. (バンクロール P0:{p0}, P1:{p1})",
+    "folded": "プレイヤー {player_id} がフォールドしました。",
+    "showdown_win": "ショーダウン: {card_win} が {card_lose} を打ち負かしました。",
+    "showdown_tie": "ショーダウンの引き分け: 両方 {card}。ポットは分割され、それぞれ {split} を受け取ります。"
+  },
+  "outcome": {
+    "p0_wins": "プレイヤー 0 が勝利しました ({bank0} > {bank1})",
+    "p1_wins": "プレイヤー 1 が勝利しました ({bank1} > {bank0})",
+    "draw": "すべてのラウンド後、チップ数が等しい"
+  }
+}

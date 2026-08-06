@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} dviejų žaidėjų žaidime Spite and Malice. Jūsų tikslas yra būti pirmas, kuris išvalo savo mokėjimo kuprinį.\n\n### Žaidimo Apžvalga:\n- Tikslas yra išvalyti savo mokėjimo kuprinį žaidžiant kortas į centro kuprinius.\n- Jūs galite žaisti kortas iš trijų šaltinių:\n  1. Jūsų **ranka** (jūs pradėjate kiekvieną ėjimą su iki 5 kortų rankoje).\n  2. **Viršutinė korta jūsų mokėjimo kuprinyje**.\n  3. **Viršutinė korta bet kurio jūsų atmetimo kuprinyje**.\n\n### Žaidimo Taisyklės:\n- Jūs galite žaisti kortą į centro kuprinį, jei ji yra **viena ranga aukštesnė** už viršutinę kortą tame kuprinyje (centro kupriniai prasideda su Tūzu ir eina iki Karalienės; Karaliai yra laisvi - jie gali būti žaisti ant bet kurios kortos, bet jie nekeičia rango sekos. Tai reiškia, jei Karalius yra panaudotas po 4, tada tas Karalius yra rango 5, ir kitas kortas turi būti 6).\n- Jei jūs negalite žaisti daugiau kortų, jūs turite **atmesti kortą** į vieną iš jūsų atmetimo kuprinių, kad baigtumėte savo ėjimą.\n- Jei centro kuprinys pasiekia Karalienę, jis bus automatiškai išvalytas.\n- Rango tvarka yra: T=1, 2=2, ..., 9=9, V=10, K=11, Karalius kaip laisvas.\n\n### Veiksmai:\n1. **Traukti**: Žaidimo pradžioje, traukite kortas, kad užpildytumėte savo ranką iki 5 kortų. Įveskite **[draw]**, kad pradėtumėte.\n2. **Žaisti kortą**: Norėdami žaisti kortą, nurodykite kortą ir centro kuprinį taip: **[play A♠ 0]** (kur 'A♠' yra korta, o '0' yra centro kuprinio indeksas).\n3. **Atmesti**: Jei jūs negalite žaisti daugiau kortų, atmestite kortą iš savo rankos į atmetimo kuprinį, kad baigtumėte savo ėjimą. Įveskite **[discard A♠ 1]** (kur 'A♠' yra korta, o '1' yra atmetimo kuprinio indeksas). Atkreipkite dėmesį, kad jūs negalite atmesti jokios kortos iš mokėjimo kuprinyje. Jūs galite atmesti tik kortas iš savo rankos.\n\n"
+  },
+  "board": {
+    "current_board": "Dabartinė Lenta:\n\n{board}\nGalimi Ėjimai: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Centro Kupriniai ---\n",
+    "pile": "{observation}Kuprinys {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Žaidėjo {player_id} Vaizdas ---\n",
+    "payoff": "{observation}Mokėjimo Kuprinys (Viršutinė Korta): {top_card}, Mokėjimo Kuprinio Ilgis: {payoff_length}\n",
+    "hand": "{observation}Ranka: {hand}\n",
+    "discard": "{observation}Atmetimo Kupriniai: {discard}\n",
+    "empty": "Tuščias"
+  },
+  "game_message": {
+    "no_cards_left": "Nėra daugiau kortų, kurias galima traukti. Atkreipkite dėmesį, kad jūs galite žaisti kortas iš šių šaltinių:\n  1. Jūsų **ranka**.\n  2. **Viršutinė korta jūsų mokėjimo kuprinyje**.\n  3. **Viršutinė korta bet kurio jūsų atmetimo kuprinyje**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Neteisingas ėjimo formatas. Žaidėjas {player_id} neatsakė su galimu ėjimu kvadratinėse skliaustose.",
+    "invalid_play": "Neteisingas žaidimas. Žaidėjas {player_id} bandė žaisti {card} ant centro kuprinyje {index}.",
+    "discard_from_payoff": "Neteisingas atmetimas. Žaidėjas {player_id} bandė atmesti kortą iš mokėjimo kuprinyje.",
+    "discard_not_in_hand": "Neteisingas atmetimas. Žaidėjas {player_id} bandė atmesti kortą, kuri nėra jo rankoje.",
+    "wrong_move_type": "Neteisingas ėjimo tipas. Žaidėjas {player_id} neatsakė su galimu ėjimo tipu."
+  },
+  "game_action": {
+    "you_drew": "Jūs traukėte kortas.",
+    "opponent_drew": "Žaidėjas {player_id} traukė kortas.",
+    "you_played": "Jūs žaidėte {card} ant centro kuprinyje {index}.",
+    "opponent_played": "Žaidėjas {player_id} žaidė {card} ant centro kuprinyje {index}.",
+    "you_discarded": "Jūs atmestite {card} į atmetimo kuprinį {index}, kas reiškia, kad jūs baigėte savo ėjimą. Kitų jūsų veiksmų šiame ėjime nebus atsižvelgta. Žaidėjas {next_player_id} eis kitas.",
+    "opponent_discarded": "Žaidėjas {player_id} atmestite {card} į atmetimo kuprinį {index}, kas reiškia, kad jis baigė savo ėjimą. Kitų žaidėjo {player_id} veiksmų šiame ėjime nebus atsižvelgta. Žaidėjas {next_player_id}, jūs eisite kitas. Prašome įvesti savo veiksmą formatu [veiksmas korta centro_indeksas]."
+  },
+  "outcome": {
+    "payoff_cleared": "Žaidėjas {current_player} baigė savo mokėjimo kuprinį! Žaidėjas {current_player} laimėjo!",
+    "deadlock_player_0": "Lygiosios pasiektos! Žaidėjas 0 laimėjo su {player_0_payoff} kortomis likusiomis prieš Žaidėjo 1 {player_1_payoff} kortas.",
+    "deadlock_player_1": "Lygiosios pasiektos! Žaidėjas 1 laimėjo su {player_1_payoff} kortomis likusiomis prieš Žaidėjo 0 {player_0_payoff} kortas.",
+    "deadlock_tie": "Lygiosios pasiektos su lygiu rezultatu! Abu žaidėjai turi {player_0_payoff} kortų likusių. Žaidėjas {current_player} laimėjo pagal numatytąjį laimėjimą."
+  }
+}

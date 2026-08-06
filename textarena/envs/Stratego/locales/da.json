@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i Stratego.\nDit mål er at erobre modstanderens flag eller eliminere alle deres flytbare brikker.\nDin hær er blevet placeret for dig på brættet, inklusive din flag, bomber og andre brikker af varierende rang.\n\n### Spilinstruktioner\n1. **Bevægelsesregler:**\n   - På din tur kan du flytte en brik én skridt til et tilstødende felt (op, ned, til venstre eller til højre), der allerede er besat med dine brikker.\n   - Eksempel: En brik kan flytte fra A1 til B1 eller A1 til A2, hvis B1 og A2 ikke er placeret med spillerens egne brikker.\n   - Hvis den valgte brik er en bombe eller et flag, kan den ikke flyttes.\n2. **Kampe:**\n   - Hvis du flytter til et felt, der er besat af en modstanders brik, vil en kamp forekomme:\n     - Brikken med den højere rang vinder og eliminerer modstanderens brik.\n     - Hvis rangene er lige, fjernes begge brikker fra brættet.\n     - **Specielle tilfælde:**\n       - Bomber eliminerer de fleste angribende brikker undtagen minearbejdere, som desarmerer bomber.\n       - Spioner kan besejre marskallen, hvis spionen angriber først, men taber til alle andre brikker.\n3. **Strategiske mål:**\n   - Identificér modstanderens brikker gennem deres bevægelser og kampe.\n   - Beskyt din flag, mens du forsøger at erobre modstanderens flag.\n   - Brug spejderstrategisk til at få information om modstanderens brikker og angribe svage.\n\n### Sådan foretager du et træk:\n1. Angiv koordinaterne for den brik, du vil flytte, og dens destination.\n2. Brug formatet: [A0 B0], hvor A0 er startpositionen, og B0 er destinationen.\n   - Eksempel: For at flytte en brik fra række 0, kolonne 0 til række 1, kolonne 0, indtast [A0 B0].\n3. Sørg for, at destinationen er gyldig ifølge bevægelsesreglerne ovenfor.\n\n### Vigtige noter:\n- Brættet viser dine brikker og deres positioner, f.eks. MN, MS.\n- Brættet viser også kendte positioner af modstanderens brikker uden at afsløre deres rang, f.eks. ?.\n- Felter med ~ er søer og kan ikke flyttes til.\n- Som et forslag kan du starte spillet ved at flytte dine brikker, der er på frontlinjen, for at få information om modstanderens brikker. Spiller 0 og spiller 1's frontlinjer er henholdsvis række D og G.\n\nHer er den aktuelle brættets tilstand:\n"
+  },
+  "board": {
+    "current_board": "Aktuelt bræt:\n\n{board}\nTilgængelige træk: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldigt format for handling. Spiller {player_id} har ikke indtastet et træk i formatet [A0 B0].",
+    "invalid_coordinates": "Ugyldigt format for handling. Spiller {player_id} har ikke indtastet gyldige koordinater.",
+    "not_own_piece": "Ugyldigt format for handling. Spiller {player_id} skal flytte en af deres egne brikker.",
+    "scout_through_pieces": "Ugyldigt format for handling. Spiller {player_id} kan ikke flytte en spejder gennem andre brikker.",
+    "scout_diagonal": "Ugyldigt format for handling. Spiller {player_id} kan ikke flytte en spejder diagonalt.",
+    "non_scout_multi_square": "Ugyldigt format for handling. Brikker, undtagen spejdere, kan kun flytte ét felt ad gangen.",
+    "move_into_lake": "Ugyldigt format for handling. Spiller {player_id} kan ikke flytte ind i en sø.",
+    "move_onto_own_piece": "Ugyldigt format for handling. Spiller {player_id} kan ikke flytte på en af deres egne brikker.",
+    "move_bomb_or_flag": "Ugyldigt format for handling. Spiller {player_id} kan ikke flytte en bombe eller et flag."
+  },
+  "game_action": {
+    "you_moved": "Du har flyttet din brik fra {source} til {dest}.",
+    "opponent_moved": "Spiller {player_id} har flyttet en brik fra {source} til {dest}.",
+    "you_equal_ranks": "Du har flyttet din brik fra {source} til {dest}. Den angribende brik var {attacking_rank} og destinationsbrikken var {target_rank}. Da rangene er lige, tabte begge brikker.",
+    "opponent_equal_ranks": "Spiller {player_id} har flyttet en brik fra {source} til {dest}. Den angribende brik var {attacking_rank} og destinationsbrikken var {target_rank}. Da rangene er lige, tabte begge brikker.",
+    "you_miner_defused": "Du har flyttet din brik fra {source} til {dest}. Den angribende brik var {attacking_rank} og destinationsbrikken var {target_rank}. Da minearbejdere kan desarmerer bomber, vandt du kampen.",
+    "opponent_miner_defused": "Spiller {player_id} har flyttet en brik fra {source} til {dest}. Den angribende brik var {attacking_rank} og destinationsbrikken var {target_rank}. Da minearbejdere kan desarmerer bomber, tabte du kampen.",
+    "you_bomb_lost": "Du har flyttet din brik fra {source} til {dest}. Den angribende brik var {attacking_rank} og destinationsbrikken var {target_rank}. Da angriberen ikke er en minearbejder, tabte du kampen.",
+    "opponent_bomb_won": "Spiller {player_id} har flyttet en brik fra {source} til {dest}. Den angribende brik var {attacking_rank} og destinationsbrikken var {target_rank}. Da angriberen ikke er en minearbejder, vandt du kampen.",
+    "you_spy_won": "Du har flyttet din brik fra {source} til {dest}. Den angribende brik var {attacking_rank} og destinationsbrikken var {target_rank}. Da angriberen er en spion og destinationsbrikken er en marskal, vandt du kampen.",
+    "opponent_spy_lost": "Spiller {player_id} har flyttet en brik fra {source} til {dest}. Den angribende brik var {attacking_rank} og destinationsbrikken var {target_rank}. Da angriberen er en spion og destinationsbrikken er en marskal, tabte du kampen.",
+    "you_higher_won": "Du har flyttet din brik fra {source} til {dest}. Den angribende brik var {attacking_rank} og destinationsbrikken var {target_rank}. Da angriberen har en højere rang end destinationsbrikken, vandt du kampen.",
+    "opponent_higher_lost": "Spiller {player_id} har flyttet en brik fra {source} til {dest}. Den angribende brik var {attacking_rank} og destinationsbrikken var {target_rank}. Da angriberen har en højere rang end destinationsbrikken, tabte du kampen.",
+    "you_lower_lost": "Du har flyttet din brik fra {source} til {dest}. Den angribende brik var {attacking_rank} og destinationsbrikken var {target_rank}. Da angriberen har en lavere rang end destinationsbrikken, tabte du kampen.",
+    "opponent_lower_won": "Spiller {player_id} har flyttet en brik fra {source} til {dest}. Den angribende brik var {attacking_rank} og destinationsbrikken var {target_rank}. Da angriberen har en lavere rang end destinationsbrikken, vandt du kampen."
+  },
+  "outcome": {
+    "flag_captured": "Spiller {player_id} har erobret modstanderens flag!",
+    "no_movable_pieces": "Spiller {winner_id} vinder! Spiller {loser_id} har ingen flere flytbare brikker."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in Stratego.\nUw doel is om de vlag van uw tegenstander te veroveren of al hun verplaatsbare stukken te elimineren.\nUw leger is voor u op het bord geplaatst, inclusief uw vlag, bommen en andere stukken van verschillende rangen.\n\n### Spel instructies\n1. **Bewegingsregels:**\n   - Op uw beurt kunt u één stuk één stap verplaatsen naar een aangrenzend vierkant (omhoog, omlaag, links of rechts) dat al bezet is door uw stukken.\n   - Voorbeeld: Een stuk kan van A1 naar B1 of A1 naar A2 verplaatsen als B1 en A2 niet bezet zijn door de stukken van de speler.\n   - Als het geselecteerde stuk een bom of een vlag is, kan het niet worden verplaatst.\n2. **Gevechten:**\n   - Als u op een vierkant verplaatst dat bezet is door een stuk van uw tegenstander, dan zal een gevecht plaatsvinden:\n     - Het stuk met de hogere rang wint en elimineert het stuk van de tegenstander.\n     - Als de rangen gelijk zijn, worden beide stukken van het bord verwijderd.\n     - **Speciale gevallen:**\n       - Bommen elimineren de meeste aanvallende stukken, behalve mijnwerkers, die bommen onschadelijk maken.\n       - Spionnen kunnen de maarschalk verslaan als de spion eerst aanvalt, maar verliezen van alle andere stukken.\n3. **Strategische doelen:**\n   - Identificeer de stukken van uw tegenstander door hun bewegingen en gevechten.\n   - Bescherm uw vlag terwijl u probeert de vlag van uw tegenstander te veroveren.\n   - Gebruik verkenners strategisch om informatie over de stukken van uw tegenstander te verkrijgen en zwakke stukken aan te vallen.\n\n### Hoe een zet te doen:\n1. Geef de coördinaten op van het stuk dat u wilt verplaatsen en de bestemming.\n2. Gebruik het formaat: [A0 B0], waarbij A0 de bronpositie is en B0 de bestemming.\n   - Voorbeeld: Om een stuk van rij 0, kolom 0 naar rij 1, kolom 0 te verplaatsen, voer [A0 B0] in.\n3. Zorg ervoor dat de bestemming geldig is volgens de bewegingsregels hierboven.\n\n### Belangrijke opmerkingen:\n- Het bord zal uw stukken en hun posities laten zien, bijv. MN, MS.\n- Het bord zal ook de bekende posities van de stukken van uw tegenstander laten zien zonder hun rangen te onthullen, bijv. ?.\n- Rasters met ~ zijn meren en kunnen niet worden betreden.\n- Als suggestie, begin uw spel door uw stukken op de frontlinies te verplaatsen om informatie over de stukken van uw tegenstander te verkrijgen. De frontlinies van speler 0 en speler 1 zijn respectievelijk rij D en G.\n\nHier is de huidige staat van het bord:\n"
+  },
+  "board": {
+    "current_board": "Huidig bord:\n\n{board}\nBeschikbare zetten: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldig actieformaat. Speler {player_id} heeft geen zet ingevoerd in het formaat [A0 B0].",
+    "invalid_coordinates": "Ongeldig actieformaat. Speler {player_id} heeft geen geldige coördinaten ingevoerd.",
+    "not_own_piece": "Ongeldig actieformaat. Speler {player_id} moet een van hun eigen stukken verplaatsen.",
+    "scout_through_pieces": "Ongeldig actieformaat. Speler {player_id} kan geen verkenners door andere stukken verplaatsen.",
+    "scout_diagonal": "Ongeldig actieformaat. Speler {player_id} kan geen verkenners diagonaal verplaatsen.",
+    "non_scout_multi_square": "Ongeldig actieformaat. Stukken, behalve verkenners, kunnen slechts één vierkant tegelijk verplaatsen.",
+    "move_into_lake": "Ongeldig actieformaat. Speler {player_id} kan niet in het meer verplaatsen.",
+    "move_onto_own_piece": "Ongeldig actieformaat. Speler {player_id} kan niet op hun eigen stuk verplaatsen.",
+    "move_bomb_or_flag": "Ongeldig actieformaat. Speler {player_id} kan geen bom of vlag verplaatsen."
+  },
+  "game_action": {
+    "you_moved": "U heeft uw stuk van {source} naar {dest} verplaatst.",
+    "opponent_moved": "Speler {player_id} heeft een stuk van {source} naar {dest} verplaatst.",
+    "you_equal_ranks": "U heeft uw stuk van {source} naar {dest} verplaatst. Het aanvallende stuk was {attacking_rank} en het doelstuk was {target_rank}. Aangezien de rangen gelijk zijn, hebben beide stukken verloren.",
+    "opponent_equal_ranks": "Speler {player_id} heeft een stuk van {source} naar {dest} verplaatst. Het aanvallende stuk was {attacking_rank} en het doelstuk was {target_rank}. Aangezien de rangen gelijk zijn, hebben beide stukken verloren.",
+    "you_miner_defused": "U heeft uw stuk van {source} naar {dest} verplaatst. Het aanvallende stuk was {attacking_rank} en het doelstuk was {target_rank}. Aangezien mijnwerkers bommen onschadelijk kunnen maken, hebt u de strijd gewonnen.",
+    "opponent_miner_defused": "Speler {player_id} heeft een stuk van {source} naar {dest} verplaatst. Het aanvallende stuk was {attacking_rank} en het doelstuk was {target_rank}. Aangezien mijnwerkers bommen onschadelijk kunnen maken, hebt u de strijd verloren.",
+    "you_bomb_lost": "U heeft uw stuk van {source} naar {dest} verplaatst. Het aanvallende stuk was {attacking_rank} en het doelstuk was {target_rank}. Aangezien de aanvaller geen mijnwerker is, hebt u de strijd verloren.",
+    "opponent_bomb_won": "Speler {player_id} heeft een stuk van {source} naar {dest} verplaatst. Het aanvallende stuk was {attacking_rank} en het doelstuk was {target_rank}. Aangezien de aanvaller geen mijnwerker is, hebt u de strijd gewonnen.",
+    "you_spy_won": "U heeft uw stuk van {source} naar {dest} verplaatst. Het aanvallende stuk was {attacking_rank} en het doelstuk was {target_rank}. Aangezien de aanvaller een spion is en het doel een maarschalk is, hebt u de strijd gewonnen.",
+    "opponent_spy_lost": "Speler {player_id} heeft een stuk van {source} naar {dest} verplaatst. Het aanvallende stuk was {attacking_rank} en het doelstuk was {target_rank}. Aangezien de aanvaller een spion is en het doel een maarschalk is, hebt u de strijd verloren.",
+    "you_higher_won": "U heeft uw stuk van {source} naar {dest} verplaatst. Het aanvallende stuk was {attacking_rank} en het doelstuk was {target_rank}. Aangezien de aanvaller een hogere rang heeft dan het doel, hebt u de strijd gewonnen.",
+    "opponent_higher_lost": "Speler {player_id} heeft een stuk van {source} naar {dest} verplaatst. Het aanvallende stuk was {attacking_rank} en het doelstuk was {target_rank}. Aangezien de aanvaller een hogere rang heeft dan het doel, hebt u de strijd verloren.",
+    "you_lower_lost": "U heeft uw stuk van {source} naar {dest} verplaatst. Het aanvallende stuk was {attacking_rank} en het doelstuk was {target_rank}. Aangezien de aanvaller een lagere rang heeft dan het doel, hebt u de strijd verloren.",
+    "opponent_lower_won": "Speler {player_id} heeft een stuk van {source} naar {dest} verplaatst. Het aanvallende stuk was {attacking_rank} en het doelstuk was {target_rank}. Aangezien de aanvaller een lagere rang heeft dan het doel, hebt u de strijd gewonnen."
+  },
+  "outcome": {
+    "flag_captured": "Speler {player_id} heeft de vlag van de tegenstander veroverd!",
+    "no_movable_pieces": "Speler {winner_id} wint! Speler {loser_id} heeft geen verplaatsbare stukken meer."
+  }
+}

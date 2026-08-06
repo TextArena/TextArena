@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i Chopsticks. På din tur, velg en av følgende:\n  + Angrep:  '[attack M O]'  hvor M=din hånd (0 eller 1), O=motstanderens hånd (0 eller 1).\n    - Motstanderens håndteller øker med din hånd; hvis >=5, blir den 0.\n  + Del:   '[split L R]'  for å fordele dine totale fingre inn i L og R (L+R = din total).\nSvar med nøyaktig en av disse kommandoene."
+  },
+  "board": {
+    "current_board": "Nåværende brett:\nSpiller 0: {hands_0}\nSpiller 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Din hånd {my_idx} er død.",
+    "opp_hand_dead": "Motstanderens hånd {opp_idx} er allerede død.",
+    "split_sum": "Del må summe til {total}.",
+    "split_no_change": "Del må endre din håndfordeling.",
+    "invalid_command": "Ugyldig trekk. Bruk “[attack M O]” eller “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} angriper P{opp_id}’s hånd {opp_idx}: den går fra {opp_val} til {new_val}.",
+    "split": "P{player_id} deler inn i [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Begge motstanderens hender er døde.",
+    "draw": "Tidsbegrensningen er nådd."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Du spiller {color} i et spil Breakthrough. Du flytter {direction} på et {board_size}x{board_size} bræt.\nI din tur kan du flytte en enkelt brik ét skridt frem eller diagonalt frem.\nEn brik må kun flytte diagonalt, hvis en modstanderbrik er der, og kun flytte ind i en sådan optaget firkant i et diagonalt skridt.\nNår du træder ind i en firkant med en modstanderbrik, fanger du den, og modstanderens brik fjernes permanent fra brættet.\nBrug UCI-lignende notation i parenteser, f.eks. [a2a3] for at flytte fra a2 til a3.\n* 'a' svarer til den venstre kolonne, '1' er den nederste række (fra Hvids perspektiv).\n* Sorts hjemrække er øverste række (række 8 for et 8x8-bræt). Hvids hjemrække er den nederste række (række 1 for et 8x8-bræt).\nDen første spiller, hvis brik når modstanderens hjemrække, vinder. Hvis dine brikker alle bliver fanget, taber du."
+  },
+  "invalid_move": {
+    "wrong_format": "Brug venligst parenteser med algebraisk notation som [a2a3].",
+    "out_of_bounds": "Flytningen er uden for brættets grænser.",
+    "illegal": "Denne flytning følger ikke Breakthrough-reglerne eller er ikke din brik."
+  },
+  "game_action": {
+    "moved": "Spiller {player_id} flytter {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Hvid nåede Sorts hjemrække.",
+    "black_reached": "Sort nåede Hvids hjemrække.",
+    "white_captured": "Alle Hvids brikker blev fanget.",
+    "black_captured": "Alle Sorts brikker blev fanget.",
+    "no_moves": "Spiller {player_id} har ingen flere flytninger."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_comment": "Datoteka s lokalizacijom za ThreePlayerGOPS. NE PREVODITE ključeve (lijeva strana). Samo prevodite vrijednosti (desna strana).",
+  "_slots": {
+    "{player_id}": "Broj igrača, 0, 1 ili 2",
+    "{round}": "Trenutni broj runde, 1..13",
+    "{prize}": "Otkrivena nagradna karta (A, 2..10, J, Q, K) - nemojte prevoditi",
+    "{worth}": "Ukupna vrijednost nagrade uključujući preneseni iznos",
+    "{hand}": "Preostale karte igrača, prikazane kao tokeni u zagradama kao '[A]' '[2]' - nemojte prevoditi",
+    "{bids}": "Neutralni popis odigranih karata kao 'P0:10, P1:J, P2:Q' - nemojte prevoditi",
+    "{winner}": "Broj igrača koji je pobijedio u rundi",
+    "{pot}": "Iznos koji se dodjeljuje ili prenosi u ovoj rundi",
+    "{scoreline}": "Neutralni rezultati kao 'P0:0  P1:0  P2:11' - nemojte prevoditi",
+    "{pid}": "Broj igrača koji je eliminiran",
+    "{scores}": "Konačni rezultati kao sirovi popis broja igrača i rezultata - nemojte prevoditi"
+  },
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} u Three-Player GOPS.\n- Držite 13 karata A-K (svaku točno jednom).\n- Svaka runda otkriva nagradu. Predajte JEDNU kartu kao `[Q]`, `[10]`, `[2]` …\n- Najviša karta osvaja nagradu (+ bilo koji preneseni iznos). Izjednačenja prenose nagradu u sljedeću rundu.\n- Nakon 13 rundi, najviši ukupni rezultat pobjeđuje. Nevaljani potezi = eliminacija."
+  },
+  "round": {
+    "header": "### Runda {round}/13 - Nagrada: {prize} (vrijednost {worth})",
+    "hand": "Vaša preostala ruka: {hand}"
+  },
+  "reveal": {
+    "win": "Ponude » {bids} - Igrač {winner} osvaja {pot}.",
+    "tie": "Ponude » {bids} - izjednačenje, iznos sada {pot}.",
+    "scores": "Rezultati → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "akcija zahtijeva kartu u zagradama kao '[Q]'",
+    "bad_card": "karta već korištena ili nevaljana"
+  },
+  "elimination": {
+    "player": "Igrač {pid} eliminiran nakon ponovljenih nevaljanih poteza."
+  },
+  "outcome": {
+    "auto_win": "Dva igrača eliminirana - automatska pobjeda.",
+    "final": "Konačni rezultati: {scores}"
+  }
+}

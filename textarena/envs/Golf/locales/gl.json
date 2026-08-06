@@ -1,0 +1,79 @@
+{
+  "_comment": "Ficheiro de localización de Golf (xogo de cartas). NON traduzas as claves (lado esquerdo). Só traduce os valores (lado dereito). Mantén cada {placeholder} exactamente como está.",
+  "_slots": {
+    "{player_id}": "O número do xogador, por exemplo, 0 ou 1",
+    "{pid}": "O número do xogador, por exemplo, 0 ou 1",
+    "{winner}": "O número do xogador coa puntuación máis baixa",
+    "{score}": "Un total de puntos numéricos",
+    "{card}": "Unha etiqueta de carta como A♠, 10♥, K♦ ou Q♣",
+    "{new}": "A etiqueta da carta que se colocou na grella",
+    "{old}": "A etiqueta da carta que se eliminou da grella",
+    "{row}": "Un número de fila",
+    "{col}": "Un número de columna",
+    "{max_row}": "O maior número de fila válido",
+    "{max_col}": "O maior número de columna válido",
+    "{reason}": "Unha frase pre-renderizada que describe por que comezou a rolda final",
+    "{n}": "Un número de fila que se mostra ao comezo dunha fila da grella",
+    "{cards}": "As celas pre-renderizadas dunha fila da grella",
+    "{hand}": "O bloque da grella do xogador pre-renderizado",
+    "{discard}": "A etiqueta da carta no alto da pila de descarte, ou a palabra para 'ningunha'",
+    "{options}": "A liña pre-renderizada que enumera as accións dispoñibles",
+    "{scores}": "A lista pre-renderizada de puntuacións finais por xogador"
+  },
+  "player_prompt": {
+    "intro": "Estás xogando a Golf (Xogo de Cartas) - Xogador {player_id}.\nObxectivo: Obter a puntuación total máis baixa nesta rolda única. Se as columnas comparten o mesmo valor, súmanse como 0.\nValores das cartas: A=1, 2-10=valor facial, J/Q=10, K=0\n\nAccións (usa parénteses exactos):\n- '[draw]' - Debuxa da baralla\n- '[take]' - Toma da pila de descarte\n- '[swap X Y]' - Intercambia a carta debuxada coa posición X (fila) Y (columna)\n- '[discard]' - Descarta a carta debuxada\n"
+  },
+  "board": {
+    "drew": "Debuxaches: {card}\nAgora debes [swap X Y] ou [discard] ela.",
+    "took": "Tomaches: {card} da pila de descarte\nDebes [swap X Y] con ela (non podes descartala).",
+    "peeked": "Ollaches a posición ({row},{col}): {card}",
+    "turn_view": "A túa man:\n{hand}\nPila de descarte: {discard}\n{options}",
+    "none": "Ningunha"
+  },
+  "options": {
+    "final_turns": "Roldas finais! As túas opcións: [draw], [take], [peek X Y]",
+    "draw": "As túas opcións: [draw], [take]",
+    "must_swap": "Debes: [swap X Y] (non podes descartar cartas da pila de descarte)",
+    "swap_or_discard": "Debes: [swap X Y] ou [discard]"
+  },
+  "hand": {
+    "no_cards": "Non hai cartas",
+    "header": "  Col:   1    2    3",
+    "row": "Fila {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "O xogador {pid} intercambiou {new} con {old} na posición ({row},{col})",
+    "discarded": "O xogador {pid} descartou {card}"
+  },
+  "message": {
+    "deck_empty": "A baralla está baleira! O xogo remata inmediatamente.",
+    "knocked": "O xogador {pid} golpeou! Cada outro xogador ten unha rolda máis.",
+    "final_round": "O xogador {pid} {reason}! Cada outro xogador ten unha rolda máis."
+  },
+  "reason": {
+    "all_revealed": "ten todas as cartas reveladas"
+  },
+  "invalid": {
+    "wrong_action": "Usa exactamente UNA acción entre parénteses: [draw], [take], [swap X Y], [discard], [knock], ou [peek X Y]",
+    "discard_empty": "A pila de descarte está baleira!",
+    "must_draw_first": "Debes primeiro [draw], [take], [knock], ou [peek X Y]",
+    "cannot_discard_taken": "Non podes descartar unha carta tomada da pila de descarte. Debes intercambiala.",
+    "have_drawn_card": "Tes unha carta debuxada. Debes [swap X Y] ou [discard] ela.",
+    "need_drawn_swap": "Necesitas unha carta debuxada para intercambiar.",
+    "need_drawn_discard": "Necesitas unha carta debuxada para descartar.",
+    "out_of_bounds": "Posición fóra dos límites. Usa fila 1-{max_row}, columna 1-{max_col}",
+    "knock_with_card": "Non podes golpear cunha carta debuxada. Completa primeiro a túa rolda.",
+    "already_knocked": "Alguén xa golpeou nesta rolda.",
+    "already_revealed": "Esa carta xa está revelada!"
+  },
+  "summary": {
+    "full": "Xogo rematado! O xogador {winner} gaña cunha puntuación de {score} puntos!\n\nPuntuacións finais:\n{scores}",
+    "line": "Xogador {pid}: {score} puntos\n"
+  },
+  "board_str": {
+    "title": "=== XOGO DE GOLF ===",
+    "discard": "Pila de descarte: {card}",
+    "knocked": "O xogador {pid} golpeou!",
+    "player_header": "Xogador {pid} (Puntuación: {score}):"
+  }
+}

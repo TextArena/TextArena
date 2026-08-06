@@ -1,0 +1,34 @@
+{
+  "_comment": "Česká lokalizace pro Word Ladder. Klíče (vlevo) jsou pevné; překládávejte pouze hodnoty (vpravo). Zachovejte každý {placeholder} beze změny. Slovní tokeny ({start_word}, {target_word}, {word}, {current}, {ladder}) jsou neutrální herní slova a nesmí být překládány. Zachovejte příklad v hranatých závorkách `[word]` beze změny.",
+  "_slots": {
+    "{player_id}": "Číslo hráče (celé číslo)",
+    "{start_word}": "Počáteční slovo žebříku (neutrální token)",
+    "{target_word}": "Cílové slovo, které je třeba dosáhnout (neutrální token)",
+    "{word}": "Slovo, které hráč právě odeslal (neutrální token)",
+    "{current}": "Aktuální slovo hráče (neutrální token)",
+    "{target}": "Cílové slovo (neutrální token)",
+    "{target_len}": "Délka cílového slova (celé číslo)",
+    "{ladder}": "Historie tahů spojená ' -> ' (neutrální tokeny)",
+    "{history}": "Zobrazená historie (již lokalizovaná; nepřekládávejte)",
+    "{pct}": "Procento sdílených písmen s cílem (celé číslo)"
+  },
+  "prompt": {
+    "intro": "Jste hráč {player_id}. Vaším cílem je dosáhnout cílového slova změnou **jednoho písmene najednou**.\n- Počáteční slovo: **{start_word}**\n- Cílové slovo: **{target_word}**\nOdešlete každý tah v hranatých závorkách, např. `[word]`.\nHistorie se zobrazuje níže, jak hrajete. Hodně štěstí!\n"
+  },
+  "invalid": {
+    "wrong_format": "Neplatný formát. Obalte své slovo do hranatých závorek, např. `[word]`.",
+    "wrong_length": "`{word}` má špatnou délku; cíl je {target_len} písmen.",
+    "not_a_word": "`{word}` není rozpoznáno jako slovo.",
+    "not_one_different": "`{word}` není přesně jedno písmeno jiné než `{current}`."
+  },
+  "board": {
+    "history": "Historie Word Ladder: {ladder}. Cílové slovo: {target}\n"
+  },
+  "feedback": {
+    "progress": "Skvělé! Pokračujte.\n{history}"
+  },
+  "outcome": {
+    "win": "Gratulujeme! Dosáhli jste cílového slova.",
+    "turn_limit": "Byl dosažen limit tahů. Dosáhli jste `{current}`, které sdílí {pct}% písmen s cílem `{target}`."
+  }
+}

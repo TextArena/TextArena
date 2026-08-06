@@ -1,0 +1,32 @@
+{
+  "_comment": "Datoteka s prevodom za ThreePlayerTicTacToe. NE PREVADIJ ključev (levo), samo vrednosti (desno).",
+  "_slots": {
+    "{player_id}": "Številka igralca, npr. 0, 1 ali 2",
+    "{symbol}": "Znak igralca, eden izmed A, B ali C",
+    "{cell}": "Številka celice na plošči",
+    "{max_cell}": "Najvišja veljavna številka celice (velikost_plošče^2 - 1)",
+    "{row}": "Indeks vrstice plošče, kjer je postavljen znak",
+    "{col}": "Indeks stolpca plošče, kjer je postavljen znak",
+    "{board}": "Izrisana ASCII plošča (ne prevajajte)",
+    "{moves}": "Seznam razpoložljivih potez, ločenih z vejico, kot '[4]' (ne prevajajte)"
+  },
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v Tic Tac Toe za tri igralce.\nVaš znak je '{symbol}'.\nNa vrsto postavljate svoj znak na 5x5 plošči, da tvorite vrsto štirih.\nVrste lahko so vodoravne, navpične ali diagonale.\nOddajte svojo potezo v formatu '[4]', da označite celico 4."
+  },
+  "board": {
+    "current_board": "Trenutna plošča:\n\n{board}\n\nRazpoložljive poteze: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neveljaven format poteze. Uporabite '[celica]', kjer je celica 0-{max_cell}.",
+    "out_of_range": "Neveljavna številka celice: {cell}. Morajo biti med 0 in {max_cell}.",
+    "already_occupied": "Celica {cell} je že zasedena.",
+    "made_invalid": "Igralec {player_id} je naredil neveljavno potezo"
+  },
+  "game_action": {
+    "placed": "Igralec {player_id} postavlja svoj znak ({symbol}) v polje ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Igralec {player_id} ({symbol}) zmaga!",
+    "draw": "Igra je neodločena!"
+  }
+}

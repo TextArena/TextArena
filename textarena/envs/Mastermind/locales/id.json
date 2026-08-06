@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Anda sedang memainkan Mastermind.\nAnda perlu menemukan kode yang terdiri dari {code_length} digit, setiap digit dari 1 hingga {num_numbers}, {repeats}.\nDalam respons Anda, Anda dapat mengirim tebakan Anda dalam format berikut: '[2 1 4 5]'.\nSetelah setiap tebakan, Anda akan menerima umpan balik dalam bentuk paku hitam dan putih.\nPaku hitam menunjukkan digit yang benar di posisi yang benar, sementara paku putih menunjukkan digit yang benar di posisi yang salah.\nAnda memiliki {max_turns} kesempatan untuk menebak kode.\n",
+    "with_repeats": "dengan kemungkinan pengulangan",
+    "no_duplicates": "tanpa duplikat"
+  },
+  "invalid_move": {
+    "wrong_format": "Anda tidak merespons dengan daftar angka yang dipisahkan spasi dan dibungkus dalam tanda kurung siku.",
+    "not_integers": "Semua entri harus berupa angka yang valid.",
+    "wrong_length": "Tebakan harus berisi tepat {code_length} angka.",
+    "out_of_range": "Semua angka harus berada antara 1 dan {num_numbers}.",
+    "duplicates_not_allowed": "Angka duplikat tidak diizinkan.",
+    "repeated_guess": "Anda sudah menebak {guess}. Silakan coba tebakan yang berbeda."
+  },
+  "game_action": {
+    "feedback": "Dikirim [{guess}]. Umpan balik: {black_pegs} paku hitam, {white_pegs} paku putih."
+  },
+  "outcome": {
+    "win": "Anda telah memecahkan kode, memecahkan {black_pegs} dari {code_length} paku dengan benar",
+    "turn_limit": "Batas putaran tercapai. Anda menebak {percent} persen dari angka dengan benar."
+  }
+}

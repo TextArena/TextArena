@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} jugant a un joc de Pig Dice.\n\nRegles:\n- Al teu torn, pots '[roll]' o '[hold]'\n- Tira un 2-6: Afegeix al total del teu torn\n- Tira un 1: Perd el total del teu torn i acaba el torn\n- Hold: Afegeix el total del teu torn a la teva puntuació i acaba el torn\n- El primer a arribar a {winning_score} punts guanya\n\nQuan sigui el teu torn, veuràs les puntuacions actuals i el total del teu torn.\nRespon amb '[roll]' per tirar el dau o '[hold]' per ingressar els teus punts."
+  },
+  "invalid_move": {
+    "invalid_action": "Format d'acció invàlid. Utilitza '[roll]' o '[hold]'."
+  },
+  "actions": {
+    "player_busted": "El Jugador {player_id} ha fet fallida, perdent {turn_total} punts!",
+    "player_hold": "El Jugador {player_id} manté i ingressa {turn_total} punts."
+  },
+  "board": {
+    "player": "Jugador 0: '{score_0}'; Jugador 1: '{score_1}'",
+    "current_total_scores": "Puntuacions totals actuals: {scores}\nEl total del teu torn actual és {turn_total}.",
+    "roll_history": "{observation}\nHistòria de tirades per a aquest torn: {roll_history}",
+    "first_roll": "{observation}\nAquesta és la primera tirada del teu torn.",
+    "available_actions": "{observation}\nAccions disponibles: '[roll]' o '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "El Jugador {winner_id} ha guanyat per tenir una puntuació més alta al límit de torns ({scores})",
+    "winner_by_score": "El Jugador {winner_id} ha guanyat per arribar a la puntuació objectiu de {winning_score}!",
+    "draw": "S'ha assolit el límit de torns i tots els jugadors tenen la mateixa puntuació: {scores}"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id}. Estàs jugant al joc del 15-Puzzle.\nL'objectiu del joc és ordenar les fitxes numerades en ordre ascendent de l'1 al 15, amb l'espai buit situat a la cantonada inferior dreta.\nPer fer un moviment, pots lliscar una fitxa cap a l'espai buit (representat per un doble guió baix, per exemple, __) utilitzant una de les següents comandes:\n- 'up': Mou la fitxa que hi ha sota l'espai buit cap amunt.\n- 'down': Mou la fitxa que hi ha sobre l'espai buit cap avall.\n- 'left': Mou la fitxa que hi ha a la dreta de l'espai buit cap a l'esquerra.\n- 'right': Mou la fitxa que hi ha a l'esquerra de l'espai buit cap a la dreta.\nPer enviar el teu moviment, escriu la direcció (per exemple, 'up', 'down', 'left' o 'right') entre claudàtors, per exemple, [up].\nLa disposició actual del tauler es mostra a continuació. Utilitza la informació per resoldre el trencaclosques.\n"
+  },
+  "board": {
+    "current_board": "Tauler actual:\n\n{board}\nMoviments disponibles: {moves}",
+    "game_board": "Tauler de joc:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de moviment invàlid. El Jugador {player_id} no ha respost amb una direcció vàlida entre claudàtors.",
+    "illegal_move": "Moviment invàlid. La fitxa no es pot moure en la direcció especificada."
+  },
+  "outcome": {
+    "win": "Felicitats! El Jugador {player_id} ha resolt amb èxit el 15-Puzzle.",
+    "turn_limit": "S'ha assolit el límit de torns. El model ha completat el {percent} per cent del trencaclosques"
+  }
+}

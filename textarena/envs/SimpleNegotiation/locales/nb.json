@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i Forhandlingspillet.\nDu har noen ressurser, og din oppgave er å handle slik at den totale verdien av dine ressurser øker.\nRessursene og tilhørende verdier du har nå er:\n\t+ {resource_value_list}\nI hver tur kan du snakke med motstanderen din og fremme et tilbud.\nBruk følgende spesialtegn for handlinger:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Tilbudte Ressurser -> Ønskede Ressurser]\n  - '[Accept]': For å godta et inngående tilbud.\n  - '[Deny]': For å avslå et inngående tilbud (standard).\nSpillet varer i {max_turns} turer totalt."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Spilleren prøvde å godta en handel uten å ha de nødvendige ressursene.",
+    "out_of_range": "Spiller {player_id}, Ugyldig handling. Kolonne {col} er utenfor grensene.",
+    "already_full": "Spiller {player_id}, Ugyldig handling. Kolonne {col} er full.",
+    "proposing_with_no_resource": "Spiller {player_id} prøvde å fremme et tilbud uten å ha de nødvendige ressursene.",
+    "incorrect_offer_format": "Spiller {player_id} fremmet et tilbud i et feil format.",
+    "no_new_offer": "Spiller {player_id} fremmet ikke noe nytt tilbud."
+  },
+  "offers": {
+    "reject": "Spiller {player_id} avslo handelstilbudet.",
+    "accept": "Spiller {acceptor_id} godtok handelstilbudet fra Spiller {proposer_id}.",
+    "proposal": "Spiller {player_id} fremmet følgende tilbud til Spiller {opponent_id}: Tilbudte varer: {offered} -> Ønskede varer: {requested}"
+  },
+  "outcome": {
+    "win": "Spiller {winner_id} vant ved å ha en større økning i lagerverdi.",
+    "draw": "Samme endring i lagerverdi for alle spillere. Uavgjort."
+  }
+}

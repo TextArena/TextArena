@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS lokalizācijas fails. NEtulkojiet atslēgas (kreisā puse). Tulkojiet tikai vērtības (labā puse).",
+  "_slots": {
+    "{player_id}": "Spēlētāja numurs, 0, 1 vai 2",
+    "{round}": "Pašreizējā kārta, 1..13",
+    "{prize}": "Atklātās balvas kārtas vērtība (A, 2..10, J, Q, K) - netulkojiet",
+    "{worth}": "Balvas kopējā vērtība, ieskaitot jebkādu pārnesto banku",
+    "{hand}": "Spēlētāja atlikušās kārtas, attēlotas kā iekavu tokenus, piemēram, '[A]' '[2]' - netulkojiet",
+    "{bids}": "Neitrāls, ar komatiem atdalīts saraksts ar spēlētajām kārtām, piemēram, 'P0:10, P1:J, P2:Q' - netulkojiet",
+    "{winner}": "Spēlētāja numurs, kurš uzvarēja kārtā",
+    "{pot}": "Bankas vērtība, kas tika piešķirta vai pārnēsāta šajā kārtā",
+    "{scoreline}": "Neitrāls, aktīvais rezultātu tablo, piemēram, 'P0:0  P1:0  P2:11' - netulkojiet",
+    "{pid}": "Spēlētāja numurs, kurš tika izslēgts",
+    "{scores}": "Galīgie rezultāti kā neapstrādāts spēlētāja numura un rezultātu kartējums - netulkojiet"
+  },
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} Three-Player GOPS spēlē.\n- Jums ir 13 kārtas A-K (katra tieši vienu reizi).\n- Katrā kārtā tiek atklāta balva. Iesniegiet VIENU kārtu, piemēram, `[Q]`, `[10]`, `[2]` …\n- Augstākā kārta uzvar balvu (+ jebkādu pārnesto banku). Neizšķirti veic balvu nākamajā kārtā.\n- Pēc 13 kārtām augstākais kopējais rezultāts uzvar. Nederīgi gājieni = izslēgšana."
+  },
+  "round": {
+    "header": "### Kārta {round}/13 - Balva: {prize} (vērtība {worth})",
+    "hand": "Jūsu atlikusī roka: {hand}"
+  },
+  "reveal": {
+    "win": "Solījumi » {bids} - Spēlētājs {winner} uzvar {pot}.",
+    "tie": "Solījumi » {bids} - neizšķirts, banka tagad {pot}.",
+    "scores": "Rezultāti → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "darbībai nepieciešama iekavu kārta, piemēram, '[Q]'",
+    "bad_card": "kārta jau izmantota vai nederīga"
+  },
+  "elimination": {
+    "player": "Spēlētājs {pid} izslēgts pēc vairākiem nederīgiem gājieniem."
+  },
+  "outcome": {
+    "auto_win": "Divi spēlētāji izslēgti - automātiska uzvara.",
+    "final": "Galīgie rezultāti: {scores}"
+  }
+}

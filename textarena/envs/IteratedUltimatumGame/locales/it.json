@@ -1,0 +1,43 @@
+{
+  "_comment": "File di localizzazione di IteratedUltimatumGame. NON tradurre le chiavi (lato sinistro). Tradurre solo i valori (lato destro).",
+  "_slots": {
+    "{player_id}": "Il numero del giocatore, 0 o 1",
+    "{other_id}": "Il numero dell'altro giocatore, 1 o 0",
+    "{num_rounds}": "Numero totale di round",
+    "{pool}": "Importo di denaro disponibile ogni round (un numero)",
+    "{round_number}": "Il numero del round corrente",
+    "{proposer_id}": "Il numero del giocatore che propone, 0 o 1",
+    "{responder_id}": "Il numero del giocatore che risponde, 0 o 1",
+    "{offer}": "L'importo offerto (un numero)",
+    "{keep}": "L'importo che il proponente tiene (un numero)",
+    "{proposer_gain}": "Denaro guadagnato dal proponente in questo round (un numero)",
+    "{responder_gain}": "Denaro guadagnato dal rispondente in questo round (un numero)",
+    "{total_0}": "Totale accumulato del giocatore 0 (un numero)",
+    "{total_1}": "Totale accumulato del giocatore 1 (un numero)",
+    "{winner}": "Il numero del giocatore vincitore",
+    "{loser}": "Il numero del giocatore perdente",
+    "{winner_total}": "Totale di denaro del vincitore (un numero)",
+    "{loser_total}": "Totale di denaro del perdente (un numero)",
+    "{total}": "Totale finale di ogni giocatore in parità (un numero)"
+  },
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id}, che gioca {num_rounds} round di Iterated Ultimatum Game.\nHai ${pool} da dividere in questo round tra te e il Giocatore {other_id}.\n\nProponente:\n  - Fai un'offerta: [Offer: $X] (0 <= X <= pool)\n  - Se accettata → Ottieni $(pool - X), l'altro giocatore ottiene $X\n  - Se rifiutata → Entrambi ottenete $0\n  - Esempio: [Offer: $3]  o  'Penso che sia giusto. [Offer: $5]'\n\nRispondente:\n  - Decidi sull'offerta con [Accept] o [Reject]\n  - Esempio: 'Sembra ragionevole. [Accept]'\n            'Troppo ingiusto. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Il round {round_number} inizia! ---\nIl Giocatore {proposer_id} è il proponente, il Giocatore {responder_id} è il rispondente.",
+    "offer": "Round {round_number}: Il Giocatore {proposer_id} offre ${offer} al Giocatore {responder_id} (tenendo ${keep}).",
+    "accepted": "Il Giocatore {responder_id} ha accettato! Guadagni del round {round_number}: Giocatore {proposer_id} +${proposer_gain}, Giocatore {responder_id} +${responder_gain}. Nuovi totali: Giocatore 0: ${total_0}, Giocatore 1: ${total_1}.",
+    "rejected": "Il Giocatore {responder_id} ha rifiutato l'offerta! Guadagni del round {round_number}: Entrambi i giocatori +$0. I totali rimangono: Giocatore 0: ${total_0}, Giocatore 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Il proponente deve fare un'offerta utilizzando il formato [Offer: $X].",
+    "bad_integer": "L'importo dell'offerta deve essere un intero valido.",
+    "out_of_range": "L'offerta deve essere tra $0 e ${pool}.",
+    "no_current_offer": "Nessuna offerta corrente a cui rispondere.",
+    "accept_or_reject": "Il rispondente deve scegliere tra [Accept] e [Reject] l'offerta."
+  },
+  "outcome": {
+    "win": "Il Giocatore {winner} ha vinto con un totale di ${winner_total} contro il totale di ${loser_total} del Giocatore {loser}.",
+    "draw": "Pareggio! Entrambi i giocatori hanno finito con un totale di ${total}."
+  }
+}

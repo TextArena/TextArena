@@ -1,0 +1,55 @@
+{
+  "_comment": "Kullanıcıya dönük dizgiler için Liar's Dice. Parantez içindeki eylem belirteçleri ('[Bid: X, Y]', '[Call]'), oyuncu kimlikleri, zar yüzü değerleri, miktarlar ve sayımlar tarafsız yuvalardır ve asla tercüme edilmemelidir.",
+  "_slots": {
+    "player_id": "oyuncu dizini (tamsayı)",
+    "num_players": "oyunda oyuncu sayısı (tamsayı)",
+    "dice_summary": "her oyuncu için kalan zar sayımlarının ön işlenmiş '; '-birleştirilmiş listesi",
+    "your_dice": "bu oyuncunun zar yüzü değerlerinin ön işlenmiş virgülle ayrılmış listesi",
+    "p": "oyuncu dizini (tamsayı)",
+    "d": "o oyuncu için kalan zar sayısı (tamsayı)",
+    "current_player_id": "çağrı yapan oyuncunun dizini (tamsayı)",
+    "face_value": "sayılan zar yüzü değeri (1-6)",
+    "count": "eşleşen zarların gerçek sayısı (tamsayı)",
+    "quantity": "teklif edilen miktar (tamsayı)",
+    "loser_id": "zar kaybeden oyuncunun dizini (tamsayı)",
+    "new_quantity": "yeni teklif edilen miktar (tamsayı)",
+    "current_quantity": "mevcut teklif edilen miktar (tamsayı)",
+    "new_face_value": "yeni teklif edilen yüz değeri (tamsayı)",
+    "current_face_value": "mevcut teklif edilen yüz değeri (tamsayı)",
+    "action": "oyuncunun gönderdiği ham eylem dizisi",
+    "reason": "iç içe teklif-ret nedeni",
+    "winner": "kazanan oyuncunun dizini (tamsayı)",
+    "final_ranking": "birinci elenen oyuncudan kazanan oyuncuya kadar oyuncu dizinlerinin listesi"
+  },
+  "player_prompt": {
+    "intro": "Siz {num_players} oyunculu bir Liar's Dice oyununda Oyuncu {player_id}'siniz.\nKurallar:\n- Sıranızda, ya:\n  1) Mevcut tekliften daha yüksek miktar veya daha yüksek yüz (veya her ikisi) ile yeni bir teklif yapın; örneğin '[Bid: 3, 4]',\n  2) Son teklifi '[Call]' yazarak çağırın.\n\nEğer çağırırsanız:\n  - Eğer tüm zarlar arasındaki gerçek sayı, tekliften daha azsa, son teklif sahibi bir zar kaybeder.\n  - Aksi takdirde, çağırıcı bir zar kaybeder.\nZar sayısı 0'a ulaşan oyuncu elenir. Son kalan oyuncu kazanır."
+  },
+  "board": {
+    "per_player": "\tOyuncu {p}: {d}",
+    "new_round": "\nYeni tur - Kalan zarlar: {dice_summary}\nMevcut Zarlarınız: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Oyuncu {current_player_id} çağırıyor! Yüz {face_value}'nin gerçek sayısı {count}, bu da {quantity}'den AZ.\nOyuncu {loser_id} (son teklif sahibi) bir zar kaybediyor.",
+    "caller_loses": "Oyuncu {current_player_id} çağırıyor! Yüz {face_value}'nin gerçek sayısı {count}, bu da {quantity}'den BÜYÜK veya EŞİT.\nOyuncu {loser_id} (çağırıcı) bir zar kaybediyor."
+  },
+  "action": {
+    "bid_announce": "Oyuncu {player_id}, {quantity} adet yüz {face_value} teklif ediyor."
+  },
+  "invalid_move": {
+    "call_no_bid": "Önceki teklif olmadan çağırıldı.",
+    "invalid_bid": "Geçersiz teklif: {reason}",
+    "not_recognized": "Eylem, geçerli bir '[Bid: X, Y]' veya '[Call]' olarak tanınmıyor. Gönderilen eylem: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Yeni miktar {new_quantity}, mevcut {current_quantity}'den daha az.",
+    "face_lower": "Yeni yüz değeri {new_face_value}, mevcut {current_face_value}'den daha az.",
+    "identical": "Teklif, mevcut teklifle aynı.",
+    "face_range": "Yüz değeri 1 ile 6 arasında olmalıdır."
+  },
+  "message": {
+    "eliminated_invalid": "Oyuncu {player_id}, geçersiz hamleyle elendi."
+  },
+  "outcome": {
+    "win": "Oyuncu {winner} kazandı! Nihai sıralama: {final_ranking}"
+  }
+}

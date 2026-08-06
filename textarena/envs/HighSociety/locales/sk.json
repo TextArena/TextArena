@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} v hre HighSociety (verzia pre 2 hráčov).\nPrúd hry:  Desať prestížnych kariet sa draží jedno po druhom.\nDražba:    Každú dražbu tajne vyberte peniaze v rozmedzí 1-11 a odhalte.\n            • Vyššia ponuka vyhráva prestížnú kartu a zahodí túto kartu peňazí.\n            • Nižšia ponuka si ponecháva kartu peňazí.\n            • Remíza -> obe ponuky sú vrátené a tá istá prestížna karta sa znova draží.\nŠkórovanie:    Po všetkých desiatich dražbách pridajte **zostávajúce peniaze + prestížne body**.\n            Vyššia *čistá hodnota* vyhráva (presná remíza -> remíza).\n\n**Syntax akcie**  →  ponúknuť jednu kartu ako '[7]' alebo '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Dražba {round}/10  |  Prestížna karta: {prize}"
+  },
+  "board": {
+    "money_cards": "Vaše zostávajúce karty peňazí: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Musí obsahovať presne jednu [X] kartu peňazí.",
+    "card_not_held": "Už nemáte túto kartu peňazí."
+  },
+  "message": {
+    "tie": "Remíza - ponuky vrátené. Znovu ponúknuť!",
+    "auction_result": "P0 ponúkol {bid0}, P1 ponúkol {bid1}. Hráč {winner} vyhráva prestíž {prize} (celkom {total})."
+  },
+  "outcome": {
+    "p0_wins": "Čistá hodnota {nw0} > {nw1}",
+    "p1_wins": "Čistá hodnota {nw1} > {nw0}",
+    "draw": "Obidve čisté hodnoty {nw0} – presná remíza."
+  }
+}

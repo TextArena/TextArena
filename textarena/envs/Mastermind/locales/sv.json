@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Du spelar Mastermind.\nDu måste hitta koden som är {code_length} siffror lång, varje siffra från 1 till {num_numbers}, {repeats}.\nI ditt svar kan du skicka in din gissning i följande format: '[2 1 4 5]'.\nEfter varje gissning kommer du att få återkoppling i form av svarta och vita stift.\nEtt svart stift indikerar en korrekt siffra i korrekt position, medan ett vitt stift indikerar en korrekt siffra i fel position.\nDu har {max_turns} omgångar på dig att gissa koden.\n",
+    "with_repeats": "med möjliga upprepningar",
+    "no_duplicates": "utan dubbletter"
+  },
+  "invalid_move": {
+    "wrong_format": "Du svarade inte med en blankstegsseparerad lista med siffror inom hakparenteser.",
+    "not_integers": "Alla inlägg måste vara giltiga heltal.",
+    "wrong_length": "Gissningen bör innehålla exakt {code_length} siffror.",
+    "out_of_range": "Alla siffror måste vara mellan 1 och {num_numbers}.",
+    "duplicates_not_allowed": "Dubbletter av siffror är inte tillåtna.",
+    "repeated_guess": "Du har redan gissat {guess}. Försök med en annan gissning."
+  },
+  "game_action": {
+    "feedback": "Skickade in [{guess}]. Återkoppling: {black_pegs} svarta stift, {white_pegs} vita stift."
+  },
+  "outcome": {
+    "win": "Du har knäckt koden och löst {black_pegs} av {code_length} stift korrekt",
+    "turn_limit": "Tidsgränsen har nåtts. Du gissade {percent} procent av siffrorna korrekt."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} na naglalaro ng Pig Dice.\n\nMga Patakaran:\n- Sa iyong pagkakataon, maaari kang mag- '[roll]' o '[hold]'\n- I-roll ang 2-6: Idagdag sa iyong kabuuang pagkakataon\n- I-roll ang 1: Mawalan ng kabuuang pagkakataon at tapusin ang pagkakataon\n- Hold: Idagdag ang kabuuang pagkakataon sa iyong iskor at tapusin ang pagkakataon\n- Ang unang makakuha ng {winning_score} puntos ay mananalo\n\nKapag ikaw ang nasa pagkakataon, makikita mo ang kasalukuyang mga iskor at kabuuang pagkakataon.\nTumugon ng '[roll]' upang i-roll ang dice o '[hold]' upang ideposito ang iyong mga puntos."
+  },
+  "invalid_move": {
+    "invalid_action": "Hindi wastong format ng pagkilos. Gamitin ang '[roll]' o '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Ang Player {player_id} ay nabigo, nawalan ng {turn_total} puntos!",
+    "player_hold": "Ang Player {player_id} ay nag-hold at nagdeposito ng {turn_total} puntos."
+  },
+  "board": {
+    "player": "Player 0: '{score_0}'; Player 1: '{score_1}'",
+    "current_total_scores": "Kasalukuyang Kabuuang Iskor: {scores}\nAng iyong kasalukuyang kabuuang pagkakataon ay {turn_total}.",
+    "roll_history": "{observation}\nAng iyong kasaysayan ng pag-roll para sa pagkakataong ito: {roll_history}",
+    "first_roll": "{observation}\nIto ang unang pag-roll ng iyong pagkakataon.",
+    "available_actions": "{observation}\nMga Pagkilos na Magagamit: '[roll]' o '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Ang Player {winner_id} ay nanalo dahil sa mas mataas na iskor sa hangganan ng pagkakataon ({scores})",
+    "winner_by_score": "Ang Player {winner_id} ay nanalo dahil sa pag-abot sa target na iskor na {winning_score}!",
+    "draw": "Ang hangganan ng pagkakataon ay naabot at lahat ng mga manlalaro ay may parehong iskor: {scores}"
+  }
+}

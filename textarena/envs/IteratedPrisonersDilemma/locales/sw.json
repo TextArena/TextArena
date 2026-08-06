@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Dilemma ya Wafungwa Inayorudiwa inayojumuisha {num_rounds} raundi.\n\nMuundo wa Mchezo:\n- Kabla ya kila uamuzi una {total_conversation_rounds} zamu za kujadiliana kwa uhuru.\n- Baada ya hapo, wachezaji wote wawili huchagua kuungana au kutoridhika kwa wakati mmoja.\n\nMatrix ya Matokeo (thabiti kila raundi):\n- Wote Wawili Wanaungana ➜ kila mmoja {cooperate_reward}\n- Wote Wawili Wametoridhika ➜ kila mmoja {mutual_defect_reward}\n- Mmoja Anatridhika, mmoja Anaungana ➜ Mtoridhika {defect_reward}, Mshirikishi {sucker_reward}\n\nJinsi ya Kucheza:\n- Wakati wa mazungumzo: andika maandishi yoyote unayotaka.\n- Wakati wa awamu ya uamuzi: jumuisha '[Cooperate]' au '[Defect]' (bila kujali herufi kubwa au ndogo). Unaweza kuongeza maandishi ya ziada kabla/ baada ya kiashiria."
+  },
+  "phases": {
+    "conversation_finished": "Mazungumzo yamekamilika kwa raundi {round}. Tafadhali jibu kwa '[Cooperate]' au '[Defect]' ndani ya \\boxed{{}}.",
+    "starting_round": "--- Kuanza Raundi {round} ---",
+    "round_summary": "Matokeo ya Raundi {round}:\n{outcome}\nMchezaji 0 alipata {r0} (jumla {score_0}), Mchezaji 1 alipata {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Mchezaji {winner} anashinda {win_score} - {lose_score}.",
+    "draw": "Sare! Wachezaji wote wawili walipata {s0}.",
+    "round_both_cooperate": "Wachezaji wote wawili walishirikiana.",
+    "round_both_defect": "Wachezaji wote wawili walitoridhika.",
+    "round_p0_cooperates_p1_defects": "Mchezaji 0 alishirikiana, Mchezaji 1 alitoridhika.",
+    "round_p0_defects_p1_cooperates": "Mchezaji 0 alitoridhika, Mchezaji 1 alishirikiana."
+  }
+}

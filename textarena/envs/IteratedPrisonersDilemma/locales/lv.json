@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} Iterētā Cietuma Dilemmā, kas ilgst {num_rounds} kārtas.\n\nSpēles struktūra:\n- Pirms katras lēmuma pieņemšanas jums ir {total_conversation_rounds} gājieni, lai brīvi sazinātos.\n- Pēc tam abi spēlētāji vienlaicīgi izvēlas sadarboties vai nodevēt.\n\nIeguvumu matrica (fiksēta katrā kārtā):\n- Abi sadarbojas ➜ katrs {cooperate_reward}\n- Abi nodevē ➜ katrs {mutual_defect_reward}\n- Viens nodevē, otrs sadarbojas ➜ nodevētājs {defect_reward}, sadarbības partneris {sucker_reward}\n\nKā spēlēt:\n- Sarunu laikā: ierakstiet jebkādu tekstu, ko vēlaties.\n- Lēmuma pieņemšanas fāzē: iekļaujiet '[Cooperate]' vai '[Defect]' (neatkarīgi no lielumiem). Jūs varat pievienot papildu tekstu pirms vai pēc žetonu."
+  },
+  "phases": {
+    "conversation_finished": "Saruna pabeigta {round}. kārtai. Lūdzu, atbildiet ar '[Cooperate]' vai '[Defect]' ietvaros \\boxed{{}}.",
+    "starting_round": "--- Sāk {round}. kārtu ---",
+    "round_summary": "{round}. kārtas rezultāti:\n{outcome}\nSpēlētājs 0 nopelnīja {r0} (kopā {score_0}), Spēlētājs 1 nopelnīja {r1} (kopā {score_1})."
+  },
+  "outcome": {
+    "winner": "Spēlētājs {winner} uzvar {win_score} - {lose_score}.",
+    "draw": "Neizšķirts! Abi spēlētāji guva {s0} punktus.",
+    "round_both_cooperate": "Abi spēlētāji sadarbojās.",
+    "round_both_defect": "Abi spēlētāji nodevēja.",
+    "round_p0_cooperates_p1_defects": "Spēlētājs 0 sadarbojās, Spēlētājs 1 nodevēja.",
+    "round_p0_defects_p1_cooperates": "Spēlētājs 0 nodevēja, Spēlētājs 1 sadarbojās."
+  }
+}

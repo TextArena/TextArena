@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id}. Grajesz w Memory Game.\nTwoim celem jest dopasowanie większej liczby par kart na planszy niż twój przeciwnik.\nW swojej turze wybierz dwie karty do odwrócenia, wprowadzając numery wiersza i kolumny pierwszej i drugiej karty odpowiednio, jak '[0 1 1 0]', gdzie pierwsza karta znajduje się w wierszu 0 i kolumnie 1, a druga karta znajduje się w wierszu 1 i kolumnie 0.\nJeśli dwie karty są zgodne, zdobywasz punkt, a karty pozostają odkryte. Jeśli nie są zgodne, karty są odwracane z powrotem na dolną stronę, np. '.'.\nGra kończy się, gdy wszystkie pary zostaną dopasowane."
+  },
+  "board": {
+    "current_board": "Aktualna plansza:\n{board}",
+    "current_game_board": "Aktualna plansza gry:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nieprawidłowy format ruchu. Gracz {player_id} nie odpowiedział ważnym kierunkiem w nawiasach kwadratowych.",
+    "out_of_bounds": "Nieprawidłowy ruch. Gracz {player_id} wybrał pozycję poza granicami.",
+    "same_card_twice": "Nieprawidłowy ruch. Gracz {player_id} wybrał tę samą kartę dwa razy.",
+    "already_matched": "Nieprawidłowy ruch. Gracz {player_id} wybrał jedną lub obie karty, które już zostały dopasowane."
+  },
+  "game_message": {
+    "cards_match": "Karty wybrane przez Gracza {player_id} w pozycjach [{r1} {c1}] i [{r2} {c2}] są zgodne!",
+    "cards_no_match": "Karty wybrane przez Gracza {player_id} nie są zgodne. Karty w pozycjach [{r1} {c1}] i [{r2} {c2}] są odpowiednio {pos1} i {pos2}."
+  },
+  "outcome": {
+    "draw": "Obaj gracze dopasowali tę samą liczbę par kart.",
+    "win": "Gracz {winner_id} wygrał!",
+    "turn_limit": "Osiągnięto limit tur. Gra się skończyła. Gracz 0 zdobył {score_0} punktów, Gracz 1 zdobył {score_1} punktów.",
+    "turn_limit_win": "{reason} Gracz {winner_id} wygrał!"
+  }
+}

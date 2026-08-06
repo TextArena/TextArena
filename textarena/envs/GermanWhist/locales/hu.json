@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "A játék elkezdődik. Adut szín: {trump_suit} (adut kártya: {trump_str}).",
+    "no_trump_card": "nincs"
+  },
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a Német Whistben.\n{phase_info}\nÖn {hand_size} kártyát tart a kezében.\nJátsszon egy kártyát a '[play N]' paranccsal, ahol N a kártya helye a kezében (például '[play 3]').",
+    "phase_learning": "TANULÁSI SZAKASZ: a trükkök nyertesei elveszik a felfordított kártyát, a vesztesek pedig húznak egy új kártyát a pakliból. Ebben a szakaszban nyert trükkök nem számítanak a győzelemhez.",
+    "phase_playing": "JÁTÉK SZAKASZ: a pakli elfogyott. Mostantól minden trükk számít a győzelemhez."
+  },
+  "next_card": {
+    "playing_phase": "Nincs kártya kínálatban - a játék szakasz elkezdődött.",
+    "deck_empty": "A pakli üres - nincs kártya kínálatban.",
+    "available": "Kínált kártya: {card}",
+    "available_trump": "Kínált kártya: {card} (ADU)"
+  },
+  "invalid_move": {
+    "wrong_format": "Érvénytelen lépés formátum. Használja a '[play N]' parancsot a N. kártya lejátszásához.",
+    "bad_position": "Ez a kártyahely nem létezik. Ön {hand_size} kártyát tart a kezében.",
+    "must_follow_suit": "Követnie kell a színt és le kell játszania egy {lead_suit} kártyát.",
+    "invalid_play": "Ezt a kártyát nem lehet lejátszani."
+  },
+  "game_action": {
+    "played": "A {player_id}. játékos lejátszotta a {card} kártyát."
+  },
+  "trick": {
+    "won": "A {winner_id}. játékos nyerte a trükköt a {card} kártyával.",
+    "won_learning": "A {winner_id}. játékos nyerte a trükköt a {card} kártyával és elveszi a felfordított kártyát."
+  },
+  "phase": {
+    "learning_complete": "A pakli elfogyott. A tanulási szakasz véget ért - minden további trükk számít a győzelemhez."
+  },
+  "draw": {
+    "winner_received": "Ön nyerte a trükköt és megkapta a {card} kártyát.",
+    "loser_received": "Ön elvesztette a trükköt és húzott egy {card} kártyát a pakliból.",
+    "winner_preview": "A következő kínált kártya a {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Eddig nyert trükkök - 1. játékos: {tricks0}, 2. játékos: {tricks1}",
+    "scores_playing": "Pontszerző trükkök - 1. játékos: {tricks0}, 2. játékos: {tricks1}",
+    "phase": "Szakasz: {phase}",
+    "phase_learning": "Szakasz: {phase} ({remaining_cards} kártya maradt a pakliban)"
+  },
+  "hand": {
+    "no_cards": "Nincs kártya",
+    "no_cards_in_hand": "Nincs kártya a kezében",
+    "header": "Kezében lévő kártyák:",
+    "trump_indicator": " (ADU)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Még nem játszottak kártyát ebben a trükkben.",
+    "header": "Aktuális trükk:",
+    "trump_indicator": " (ADU)",
+    "card_line": "{observation}\n  {player_id}. játékos: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "A játék még nem kezdődött el",
+    "header": "=== NÉMET WHIST JÁTÉK ===",
+    "phase": "{observation}\nSzakasz: {phase}",
+    "trump_suit": "{observation}\nAdut szín: {trump_suit}",
+    "trump_card": "{observation}\nAdut kártya: {card}",
+    "cards_left": "{observation}\nKártyák száma a pakliban: {count}",
+    "next_card": "{observation}\nKövetkező kártya a nyertesnek: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nAktuális trükk:",
+    "trump_indicator": " (ADU)",
+    "trick_line": "{observation}\n  {player_id}. játékos: {card}{trump_indicator}",
+    "player_line": "{observation}\n{player_id}. játékos: {scoring} pontszerző trükk ({tricks} összesen), {hand_size} kártya a kezében"
+  },
+  "outcome": {
+    "summary": "Tanulási szakasz - 1. játékos: {l0}, 2. játékos: {l1}. Játék szakasz - 1. játékos: {p0}, 2. játékos: {p1}. A {winner_id}. játékos nyert {winner_tricks} pontszerző trükkel!"
+  }
+}

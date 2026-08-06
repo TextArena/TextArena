@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í leik af Indverskum Póker.\n- 52-spilaköpp; þú sérð aðeins andstæðingskortið.\n- Fyrirframgreiðsla {ante} tók(s) í hverjum umferð, {max_rounds} umferð(ir) alls.\n- Gildir leikir: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X er jákvæð heiltala ≤ fjöldi tóka þinna.)\n- Hæsta faldkortið vinnur pottinn í úrslitum.\n"
+  },
+  "round": {
+    "announce": "### Umferð {current_round}/{max_rounds}\nKort andstæðingsins er: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Vinsamlegast gefðu upp nákvæmlega EINN leik í sviga, t.d. '[check]', '[bet 2]', '[call]', '[raise 3]', eða '[fold]'.",
+    "cannot_check": "Getur ekki [check] - þú ert að fara fram á veðmál.",
+    "amount_min": "Veðmál / Hækka upphæð verður að vera ≥ 1.",
+    "cannot_bet": "Getur ekki [bet] - verður að [call] / [raise] / [fold].",
+    "nothing_to_call": "Ekkert til að kalla; þú mátt [check] í staðinn.",
+    "no_bet_to_raise": "Notaðu [bet X] til að opna; engin veðmál eru til að hækka.",
+    "insufficient": "Ekki næg tókar fyrir þennan leik."
+  },
+  "game_action": {
+    "action": "Leikmaður {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kostnaður {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Mögulegir leikir þínir: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pottur {pot} → Leikmaður {winner}. (Bankar P0:{p0}, P1:{p1})",
+    "folded": "Leikmaður {player_id} lagði niður.",
+    "showdown_win": "Úrslit: {card_win} slær {card_lose}.",
+    "showdown_tie": "Jafntefli í úrslitum: bæði {card}. Pottur skipt – hver fær {split}."
+  },
+  "outcome": {
+    "p0_wins": "Leikmaður 0 vinnur ({bank0} > {bank1})",
+    "p1_wins": "Leikmaður 1 vinnur ({bank1} > {bank0})",
+    "draw": "Jafnir tókar eftir allar umferðir"
+  }
+}

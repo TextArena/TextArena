@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} într-un joc de Dilemă a Prizonierului cu 3 jucători. Meciul durează {num_rounds} runde.\nStructura rundei:\n• {conv_rounds} ture de discuție liberă\n• 1 tură de decizie - trimiteți un token per adversar: '[<opp-id> cooperate]' sau '[<opp-id> defect]' (de exemplu, '[1 defect] [2 cooperate]'; implicit este 'cooperează'). \nMatricea de câștiguri perechi (aplicată fiecărei perechi neordonate):\n  - Ambele cooperează  ->  {reward}\n  - Ambele trădează     ->  {punishment}\n  - Dvs. trădați, ei cooperează -> {temptation}\n  - Dvs. cooperați, ei trădează -> {sucker}\nJucătorul (jucătorii) cu cel mai mare scor la sfârșitul tuturor rundelor câștigă."
+  },
+  "round": {
+    "start": "─── Începe Runda {round} ───\tPuteți discuta liber pentru următoarele {conv_rounds} runde.",
+    "chat_finished": "Discuția s-a încheiat pentru runda {round}. Trimiteți deciziile dvs., un token per adversar: `[pid cooperate]` sau `[pid defect]`."
+  },
+  "results": {
+    "header": "### Runda {round} - Rezultate:",
+    "pair_line": "{observation}\n\t Jucătorul {i} vs Jucătorul {j} a ales să {choice_i} și {choice_j} respectiv (Jucătorul {i} a câștigat {gain_i}, Jucătorul {j} a câștigat {gain_j})",
+    "scores_open": "{observation}\n-> Scoruri curente: ",
+    "score_first": "{observation}Jucătorul {player_id} ({score})",
+    "score_next": "{observation}; Jucătorul {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Scoruri finale: {scores}.  Grupuri de clasament (cel mai rău → cel mai bun): {groups}"
+  }
+}

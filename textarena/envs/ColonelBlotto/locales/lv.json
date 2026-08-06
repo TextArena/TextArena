@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat {role} pulkveža Blotto spēlē.\nJūsu mērķis ir uzvarēt vairāk kārtu nekā jūsu pretinieks.\nKatru karti sadaliet tieši {num_total_units} vienības pa laukiem {field_names}.\nSpēlētājs, kurš sadala vairāk vienību laukā, uzvar to lauku, un spēlētājs, kurš uzvar vairāk lauku, uzvar kārtu.\nPiemeņu, '[A7 B7 C6]' sadala 7 vienības A laukā, 7 B laukā un 6 C laukā.",
+    "commander_alpha": "Komandieris Alfa",
+    "commander_beta": "Komandieris Beta"
+  },
+  "game_state": {
+    "header_round": "=== PULKVEŽA BLOTTO - Kārta {current_round}/{num_rounds} ===\nUzvarētās kārtas - Komandieris Alfa: {alpha_score}, Komandieris Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nKārta {current_round}\nKomandieris Alfa sadalīja: {p0_allocations}\nKomandieris Beta sadalīja: {p1_allocations}\n",
+    "winner_alpha": "{message}Uzvarētājs: Komandieris Alfa",
+    "winner_beta": "{message}Uzvarētājs: Komandieris Beta",
+    "tie": "{message}Neizšķirts!"
+  },
+  "invalid_move": {
+    "wrong_format": "Nepareizs ievades formāts. Izmantojiet: A:5, B:10, C:5",
+    "invalid_field": "Nepareizs lauka nosaukums. Derīgie lauki: {field_names}",
+    "wrong_allocation_value": "Visas sadalījuma vērtības ir jābūt nenegatīviem veseliem skaitļiem.",
+    "incorrect_total_units": "Jums ir jāsadalā tieši {num_total_units} vienības. Pašreizējā summa: {current_sum}",
+    "good_allocations": "Sadalījums ir labs."
+  },
+  "outcome": {
+    "winner_alpha": "Komandieris Alfa uzvar {score_0}-{score_1} pēc {num_rounds} kārtām!",
+    "winner_beta": "Komandieris Beta uzvar {score_1}-{score_0} pēc {num_rounds} kārtām!",
+    "draw": "Spēle beidzas ar {score_0}-{score_1} neizšķirtu pēc {num_rounds} kārtām!",
+    "early_winner_alpha": "Komandieris Alfa uzvar {scores_0}-{scores_1} (sasniegts vairākums)!",
+    "early_winner_beta": "Komandieris Beta uzvar {scores_1}-{scores_0} (sasniegts vairākums)!"
+  }
+}

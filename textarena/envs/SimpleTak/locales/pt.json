@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id} no SimpleTak.\nNo tabuleiro, suas pedras aparecem como '{player_stone}' e as pedras do seu oponente aparecem como '{opponent_stone}'.\n\nNa sua vez, escolha uma célula vazia (pelo seu índice numerado) e coloque sua pedra lá.\nPor exemplo, '[12]' coloca sua pedra na célula 12.\n\nSeu objetivo é formar um caminho contínuo de suas pedras que conecte duas arestas opostas do tabuleiro (de cima para baixo ou da esquerda para a direita)."
+  },
+  "invalid_move": {
+    "invalid_move_format": "Formato de movimento inválido",
+    "cell_out_of_range": "Número de célula inválido {cell_num}. Deve estar entre 0 e {max_board_num}.",
+    "cell_already_occupied": "A célula {cell_num} já está ocupada. Escolha uma célula vazia."
+  },
+  "board": {
+    "current_state": "Tabuleiro Atual:\n\n{rendered_board}\nMovimentos Disponíveis: {available_moves}"
+  },
+  "action": {
+    "placement": "O Jogador {current_player_id} colocou seu símbolo ({symbol}) na célula {cell_num}."
+  },
+  "outcome": {
+    "winner": "O Jogador {current_player_id} ('{symbol}') conectou duas arestas opostas!",
+    "draw": "O tabuleiro está cheio. É um empate!"
+  }
+}

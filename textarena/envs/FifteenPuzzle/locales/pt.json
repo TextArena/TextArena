@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id}. Você está jogando o jogo do 15-Puzzle.\nO objetivo do jogo é organizar as peças numeradas em ordem crescente de 1 a 15, com o espaço vazio localizado no canto inferior direito.\nPara fazer uma jogada, você pode deslizar uma peça para o espaço vazio (representado por dois sublinhados, por exemplo, __) usando um dos seguintes comandos:\n- 'up': Mova a peça abaixo do espaço vazio para cima.\n- 'down': Mova a peça acima do espaço vazio para baixo.\n- 'left': Mova a peça à direita do espaço vazio para a esquerda.\n- 'right': Mova a peça à esquerda do espaço vazio para a direita.\nPara submeter sua jogada, digite a direção (por exemplo, 'up', 'down', 'left' ou 'right') entre colchetes, por exemplo, [up].\nA disposição atual do tabuleiro é mostrada abaixo. Use as informações para resolver o quebra-cabeça.\n"
+  },
+  "board": {
+    "current_board": "Tabuleiro Atual:\n\n{board}\nMovimentos Disponíveis: {moves}",
+    "game_board": "Tabuleiro do Jogo:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movimento inválido. O Jogador {player_id} não respondeu com uma direção válida entre colchetes.",
+    "illegal_move": "Movimento inválido. A peça não pode ser movida na direção especificada."
+  },
+  "outcome": {
+    "win": "Parabéns! O Jogador {player_id} resolveu com sucesso o 15-Puzzle.",
+    "turn_limit": "O limite de turnos foi alcançado. O modelo completou {percent} por cento do quebra-cabeça"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola lokalisationsfil. Oversæt ikke nøgler (venstre side). Oversæt kun værdier (højre side).",
+  "_slots": {
+    "{player_id}": "Spillerens nummer, f.eks. 0 eller 1",
+    "{trump_suit}": "Trumpfarvens symbol (♠♥♦♣) - oversæt ikke",
+    "{trump_card}": "Trumpkortets mærke, f.eks. '7♠' - oversæt ikke",
+    "{card}": "Et kortmærke, f.eks. 'A♥' - oversæt ikke",
+    "{trump_mark}": "Det forudrenderede '(TRUMP)'-mærke, eller tomt",
+    "{max_pos}": "Den højeste lovlige kortposition i spillerens hånd",
+    "{count}": "Antallet af kort en spiller holder",
+    "{pos}": "Et korts positionsnummer i hånden",
+    "{points}": "Et antal point (kortværdi eller akkumuleret score)",
+    "{hand}": "Den forudrenderede, flerlinjede håndliste",
+    "{trick}": "Den forudrenderede liste over aktuelle tricks",
+    "{scores}": "Den forudrenderede scorelinje eller den endelige scoreblok pr. spiller",
+    "{trump_info}": "Den forudrenderede trumpfarve-/dekantal-linje",
+    "{winner}": "Spillerens nummer, der vandt tricket eller spillet",
+    "{tricks}": "Antallet af tricks vundet af en spiller",
+    "{deck_count}": "Antallet af kort tilbage i dækken"
+  },
+  "game": {
+    "start": "Briscola-spillet er startet! Trumpfarve: {trump_suit} (Trumpkort: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Du spiller Briscola - Spiller {player_id}.\nMål: Vind tricks og samle flest point (120 point i alt i dækken).\nKortpoint: A=11, 3=10, K=4, Q=3, J=2, andre=0\nKortstyrke: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTrumpkort slår ikke-trumpkort uanset styrke.\n\nHandling: '[play X]' hvor X er positionen (1-{max_pos}) af kortet i din hånd\n"
+  },
+  "hand": {
+    "none": "Ingen kort",
+    "empty": "Ingen kort i hånden",
+    "header": "Din hånd:",
+    "card_line": "  {pos}. {card} [{points} pt]{trump_mark}",
+    "trump_mark": " (TRUMF)"
+  },
+  "trick": {
+    "empty": "Ingen kort spillet endnu i dette trick.",
+    "header": "Aktuelt trick:",
+    "line": "  Spiller {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Spiller {player_id}: {points} pt",
+    "trump_info": "Trumpfarve: {trump_suit}",
+    "trump_info_deck": "Trumpfarve: {trump_suit} | Kort tilbage i dækken: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nScores: {scores}\n{trump_info}\n\nSpil et kort ved hjælp af [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Brug [play X] hvor X er kortpositionen (1, 2, 3 osv.)",
+    "out_of_range": "Ugyldig kortposition. Du har {count} kort (1-{count})"
+  },
+  "action": {
+    "played": "Spiller {player_id} spillede {card}",
+    "trick_win": "Spiller {winner} vinder tricket med {card} og får {points} point!"
+  },
+  "outcome": {
+    "head": "Spillet er slut! Spiller {winner} vinder med {points} point!\n\nEndelige scores:\n{scores}",
+    "player_line": "Spiller {player_id}: {points} point ({tricks} tricks)\n"
+  }
+}

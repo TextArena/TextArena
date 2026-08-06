@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} {max_rounds} raundu Kūna Pokera spēlē.\nSpēles noteikumi:\n- Kūna Pokers izmanto 3-karšu kārti ar J, Q, K (J zemākais, K augstākais)\n- Katrs spēlētājs iemaksā {ante} žetonu un saņem 1 karti katrā raundā (ņemiet vērā, ka kartis tiek izdalītas bez aizvietošanas, tāpēc jūs nevarat būt ar to pašu karti kā jūsu pretinieks).\n- Spēle turpinās {max_rounds} raundus\n- Spēlētājs ar visvairāk žetoniem pēc visiem raundiem uzvar\nDarbību noteikumi:\n- '[check]': Izlaist bez likmēm (tikai ja nav likmēm uz galda)\n- '[bet]': Pievienot 1 žetonu bankai (tikai ja nav likmēm uz galda)\n- '[call]': Atbilst pretinieka likmei, pievienojot 1 žetonu bankai\n- '[fold]': Atteikties no savas rokas un ļaut pretiniekam uzvarēt banku"
+  },
+  "init_round": {
+    "round_start": "### Sākot {current_round} raundu no {max_rounds} raundiem. Jūsu karta ir: '{player_card}'",
+    "available_actions": "Jūsu pieejamās darbības ir: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Darbībai jābūt [Check], [Bet], [Call] vai [Fold].",
+    "not_legal": "Darbībai jābūt {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Spēlētājs {player_id} iesniedza gājienu: '[{move}]'.",
+    "valid_actions": "Jūsu pieejamās darbības ir: {legal_actions}.",
+    "round_summary": "{reason} Pašreizējie rezultāti: Spēlētājs 0: '{player_0_chips}'; Spēlētājs 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Šovs: Spēlētāja {winner} {winner_card} pārspēj Spēlētāja {loser} {loser_card}. Spēlētājs {winner} uzvar banku ar {pot_value} žetoniem."
+  },
+  "outcome": {
+    "draw": "Pēc {max_rounds} raundiem abi spēlētāji bija ar vienādu žetonu skaitu.",
+    "round_win": "Spēlētājs {player_id} ir atteicies.",
+    "winner_player0": "Spēlētājs 0 uzvarēja, jo bija ar vairāk žetoniem pēc visiem {max_rounds} raundiem.",
+    "winner_player1": "Spēlētājs 1 uzvarēja, jo bija ar vairāk žetoniem pēc visiem {max_rounds} raundiem."
+  }
+}

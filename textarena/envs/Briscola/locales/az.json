@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola yerli faylı. Açarları (sol tərəf) tərcümə etməyin. Yalnız dəyərləri (sağ tərəf) tərcümə edin.",
+  "_slots": {
+    "{player_id}": "Oyunçunun nömrəsi, məsələn 0 və ya 1",
+    "{trump_suit}": "Əsas geyim simvolu (♠♥♦♣) - tərcümə etməyin",
+    "{trump_card}": "Əsas kart etiketi, məsələn '7♠' - tərcümə etməyin",
+    "{card}": "Kart etiketi, məsələn 'A♥' - tərcümə etməyin",
+    "{trump_mark}": "Pre-rendered '(ƏSAS)' markeri, və ya boş",
+    "{max_pos}": "Oyunçunun əlindəki ən yüksək kart mövqeyi",
+    "{count}": "Oyunçunun tutduğu kartların sayı",
+    "{pos}": "Kartın mövqeyi nömrəsi əldə",
+    "{points}": "Xal sayı (kart dəyəri və ya toplanan hesab)",
+    "{hand}": "Pre-rendered, multi-line əl siyahısı",
+    "{trick}": "Pre-rendered cari-trick siyahısı",
+    "{scores}": "Pre-rendered hesab sətri, və ya final hər-oyunçu hesab bloku",
+    "{trump_info}": "Pre-rendered əsas-geyim / kolleksiya sayı sətri",
+    "{winner}": "Trick və ya oyunu qazanan oyunçunun nömrəsi",
+    "{tricks}": "Oyunçu tərəfindən qazanılan tricklərin sayı",
+    "{deck_count}": "Kolleksiyada qalan kartların sayı"
+  },
+  "game": {
+    "start": "Briscola oyunu başladı! Əsas geyim: {trump_suit} (Əsas kart: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Siz Briscola oynuyorsunuz - Oyunçu {player_id}.\nHədəf: Trickləri qazanmaq və ən çox xal toplamaq (cəmi 120 xal var).\nKart Xalları: A=11, 3=10, K=4, Q=3, J=2, digərləri=0\nKart Gücü: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nƏsas kartlar qeyri-əsas kartları gücləndirir.\n\nHərəkət: '[play X]' burada X əlinizdəki kartın mövqeyi (1-{max_pos})\n"
+  },
+  "hand": {
+    "none": "Kart yoxdur",
+    "empty": "Əldə kart yoxdur",
+    "header": "Əliniz:",
+    "card_line": "  {pos}. {card} [{points} xal]{trump_mark}",
+    "trump_mark": " (ƏSAS)"
+  },
+  "trick": {
+    "empty": "Hələ bu trick üçün kart oynanmayıb.",
+    "header": "Cari trick:",
+    "line": "  Oyunçu {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Oyunçu {player_id}: {points} xal",
+    "trump_info": "Əsas geyim: {trump_suit}",
+    "trump_info_deck": "Əsas geyim: {trump_suit} | Kolleksiyada qalan kartlar: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nHesablar: {scores}\n{trump_info}\n\nKart oynayın [play X] istifadə edərək"
+  },
+  "invalid_move": {
+    "wrong_format": "[play X] istifadə edin, burada X kart mövqeyi (1, 2, 3, və s.)",
+    "out_of_range": "Yanlış kart mövqeyi. Sizdə {count} kart var (1-{count})"
+  },
+  "action": {
+    "played": "Oyunçu {player_id} {card} oynadı",
+    "trick_win": "Oyunçu {winner} {card} ilə trick qazandı və {points} xal qazandı!"
+  },
+  "outcome": {
+    "head": "Oyun Bitdi! Oyunçu {winner} {points} xal ilə qazandı!\n\nFinal Hesablar:\n{scores}",
+    "player_line": "Oyunçu {player_id}: {points} xal ({tricks} trick)\n"
+  }
+}

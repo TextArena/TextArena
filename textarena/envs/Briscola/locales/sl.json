@@ -1,0 +1,57 @@
+{
+  "_comment": "Datoteka s prevodom za Briscola. NE PREVADIJ ključev (levo), samo vrednosti (desno).",
+  "_slots": {
+    "{player_id}": "Številka igralca, npr. 0 ali 1",
+    "{trump_suit}": "Simbol adutne barve (♠♥♦♣) - ne prevajaj",
+    "{trump_card}": "Oznaka adutne karte, npr. '7♠' - ne prevajaj",
+    "{card}": "Oznaka karte, npr. 'A♥' - ne prevajaj",
+    "{trump_mark}": "Predhodno prikazano označbo '(TRUMP)', ali prazno",
+    "{max_pos}": "Najvišja dovoljena pozicija karte v igralčevi roki",
+    "{count}": "Število kart, ki jih igralec drži",
+    "{pos}": "Številka pozicije karte v roki",
+    "{points}": "Število točk (vrednost karte ali zbrani rezultat)",
+    "{hand}": "Predhodno prikazano, večvrstično seznam kart v roki",
+    "{trick}": "Predhodno prikazano seznam kart v trenutnem triku",
+    "{scores}": "Predhodno prikazano vrstico rezultatov, ali končni blok rezultatov za igralca",
+    "{trump_info}": "Predhodno prikazano informacijo o adutni barvi / številu kart v kupčku",
+    "{winner}": "Številka igralca, ki je zmagal v triku ali igri",
+    "{tricks}": "Število trikov, ki jih je igralec zmagal",
+    "{deck_count}": "Število kart, ki so še v kupčku"
+  },
+  "game": {
+    "start": "Igra Briscola se je začela! Adutna barva: {trump_suit} (Adutna karta: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Igrate Briscolo - Igralec {player_id}.\nCilj: Zmagajte trike in zberite največ točk (skupno 120 točk v kupčku).\nTočke kart: A=11, 3=10, K=4, Q=3, J=2, ostale=0\nMoč kart: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nAdutne karte premagajo neadutne karte ne glede na moč.\n\nAkcija: '[play X]' kjer je X pozicija (1-{max_pos}) karte v vaši roki\n"
+  },
+  "hand": {
+    "none": "Brez kart",
+    "empty": "Brez kart v roki",
+    "header": "Vaša roka:",
+    "card_line": "  {pos}. {card} [{points} točk]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Še nobena karta ni bila odigrana v tem triku.",
+    "header": "Trenutni trik:",
+    "line": "  Igralec {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Igralec {player_id}: {points} točk",
+    "trump_info": "Adutna barva: {trump_suit}",
+    "trump_info_deck": "Adutna barva: {trump_suit} | Število kart v kupčku: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nRezultati: {scores}\n{trump_info}\n\nOdigrate karto z [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Uporabite [play X] kjer je X pozicija karte (1, 2, 3, itd.)",
+    "out_of_range": "Neveljavna pozicija karte. Imate {count} kart (1-{count})"
+  },
+  "action": {
+    "played": "Igralec {player_id} je odigral {card}",
+    "trick_win": "Igralec {winner} zmaga v triku z {card} in dobi {points} točk!"
+  },
+  "outcome": {
+    "head": "Igra je končana! Igralec {winner} zmaga z {points} točkami!\n\nKončni rezultati:\n{scores}",
+    "player_line": "Igralec {player_id}: {points} točk ({tricks} trikov)\n"
+  }
+}

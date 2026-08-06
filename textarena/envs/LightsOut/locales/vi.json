@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Chào mừng bạn đến với Lights Out! Bạn có một lưới đèn {size}x{size}.\nMục tiêu của bạn là TẮT TẤT CẢ các đèn (được biểu diễn bằng '.').\nKhi bạn nhấn một đèn, nó sẽ chuyển trạng thái và các đèn kề cận (trên/dưới/trái/phải) cũng sẽ chuyển trạng thái.\nNhập [row col] để nhấn một đèn (được đánh chỉ số từ 0, nên phạm vi hợp lệ là 0-{max_index}).\nBạn có tối đa {max_turns} lượt để giải đố.\nHuyền thoại: 'O' = đèn BẬT, '.' = đèn TẮT"
+  },
+  "board": {
+    "current_state": "Trạng thái lưới hiện tại (Lượt {moves_made}, còn {moves_left} lượt, hoàn thành {completion}%):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hành động phải có định dạng [row col] trong đó row và col là số nguyên từ 0 đến {max_index}.",
+    "out_of_range": "Tọa độ phải nằm trong khoảng từ 0 đến {max_index}. Bạn đã nhập [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Chúc mừng! Bạn đã giải đố trong {moves_used} lượt!",
+    "loss": "Trò chơi kết thúc! Bạn đã sử dụng hết {max_turns} lượt mà không giải được đố. Hoàn thành cuối cùng: {completion}%\nTrạng thái cuối cùng:\n{grid}"
+  }
+}

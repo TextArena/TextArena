@@ -1,0 +1,43 @@
+{
+  "_comment": "Súbor lokalizácie IteratedUltimatumGame. NEPREKLADAJTE kľúče (ľavá strana). Prekladajte iba hodnoty (pravá strana).",
+  "_slots": {
+    "{player_id}": "Číslo hráča, 0 alebo 1",
+    "{other_id}": "Číslo druhého hráča, 1 alebo 0",
+    "{num_rounds}": "Celkový počet kôl",
+    "{pool}": "Suma peňazí dostupná v každom kole (číslo)",
+    "{round_number}": "Číslo aktuálneho kola",
+    "{proposer_id}": "Číslo hráča, ktorý robí návrh, 0 alebo 1",
+    "{responder_id}": "Číslo hráča, ktorý reaguje, 0 alebo 1",
+    "{offer}": "Ponúknutá suma (číslo)",
+    "{keep}": "Suma, ktorú si hráč ponechá (číslo)",
+    "{proposer_gain}": "Peniaze, ktoré hráč získal v tomto kole (číslo)",
+    "{responder_gain}": "Peniaze, ktoré druhý hráč získal v tomto kole (číslo)",
+    "{total_0}": "Celková suma hráča 0 (číslo)",
+    "{total_1}": "Celková suma hráča 1 (číslo)",
+    "{winner}": "Číslo víťazného hráča",
+    "{loser}": "Číslo porazeného hráča",
+    "{winner_total}": "Celková suma víťazného hráča (číslo)",
+    "{loser_total}": "Celková suma porazeného hráča (číslo)",
+    "{total}": "Celková suma každého hráča v prípade remízy (číslo)"
+  },
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} a hrajete {num_rounds} kôl Iterated Ultimatum Game.\nMáte ${pool} na rozdelenie medzi seba a Hráča {other_id} v tomto kole.\n\nNavrhnutie:\n  - Urobte ponuku: [Offer: $X] (0 <= X <= pool)\n  - Ak je prijaté → Získate $(pool - X), druhý hráč získa $X\n  - Ak je odmietnuté → Oba hráči získajú $0\n  - Príklad: [Offer: $3]  alebo  'Myslím, že je to spravodlivé. [Offer: $5]'\n\nReakcia:\n  - Rozhodnite o ponuke pomocou [Accept] alebo [Reject]\n  - Príklad: 'To sa zdá rozumné. [Accept]'\n            'Príliš nespravodlivé. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Kolo {round_number} začína! ---\nHráč {proposer_id} je navrhnutie, Hráč {responder_id} je reakcia.",
+    "offer": "Kolo {round_number}: Hráč {proposer_id} ponúka ${offer} Hráčovi {responder_id} (ponechá si ${keep}).",
+    "accepted": "Hráč {responder_id} prijal! Zisky kola {round_number}: Hráč {proposer_id} +${proposer_gain}, Hráč {responder_id} +${responder_gain}. Nové celkové sumy: Hráč 0: ${total_0}, Hráč 1: ${total_1}.",
+    "rejected": "Hráč {responder_id} odmietol ponuku! Zisky kola {round_number}: Oba hráči +$0. Celkové sumy zostávajú: Hráč 0: ${total_0}, Hráč 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Navrhnutie musí urobiť ponuku pomocou formátu [Offer: $X].",
+    "bad_integer": "Suma ponuky musí byť platné celé číslo.",
+    "out_of_range": "Ponuka musí byť medzi $0 a ${pool}.",
+    "no_current_offer": "Žiadna aktuálna ponuka na reakciu.",
+    "accept_or_reject": "Reakcia musí buď [Accept] alebo [Reject] ponuku."
+  },
+  "outcome": {
+    "win": "Hráč {winner} vyhral s celkovou sumou ${winner_total} proti Hráčovi {loser} s celkovou sumou ${loser_total}.",
+    "draw": "Remíza! Oba hráči skončili s celkovou sumou ${total}."
+  }
+}

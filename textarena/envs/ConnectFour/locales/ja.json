@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "あなたは Connect Four のプレイヤー {player_id} です。\nあなたのディスクのシンボル: {symbol}。\nゲームボードは {num_rows} 行と {num_cols} 列で構成されています。\nプレイヤーは交互にディスクを列の一つ (0 から {end_col}) に落とします。\n最初に4つのディスクを縦、横、または斜めに繋げたプレイヤーが勝利します。\nあなたの番になったら、列の番号を角括弧で入力して手を進めます。\n例えば: '[col 4]' または '[col 1]'。"
+  },
+  "board": {
+    "board_visible_state": "ボードの状態:\n{board_visual}",
+    "board_notvisible_state": "ゲームボードはプレイヤーには表示されません。"
+  },
+  "invalid_move": {
+    "wrong_format": "プレイヤー {player_id}、無効なアクション形式です。期待される形式: '[col x]'。",
+    "out_of_range": "プレイヤー {player_id}、無効なアクションです。列 {col} は範囲外です。",
+    "already_full": "プレイヤー {player_id}、無効なアクションです。列 {col} は既に満杯です。"
+  },
+  "action": {
+    "dropped_disk": "プレイヤー {player_id} が列 {col} にディスク ({player_symbol}) を落としました。"
+  },
+  "outcome": {
+    "win": "プレイヤー {player_id} が4つを繋げて勝利しました！",
+    "draw": "ゲームは引き分けで終了しました。"
+  }
+}

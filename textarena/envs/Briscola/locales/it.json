@@ -1,0 +1,57 @@
+{
+  "_comment": "File di localizzazione di Briscola. NON tradurre le chiavi (lato sinistro). Tradurre solo i valori (lato destro). Mantenere ogni {placeholder} esattamente com'è. Non tradurre il token di azione '[play X]', le etichette delle carte (A, 2..7, J, Q, K), i simboli dei semi (trasportati nelle slot {card}/{trump_card}) o i conteggi/punteggi/risultati numerici. Il testo del marcatore '(TRUMP)' può essere localizzato.",
+  "_slots": {
+    "{player_id}": "Il numero del giocatore, ad esempio 0 o 1",
+    "{trump_suit}": "Il simbolo del seme di briscola (♠♥♦♣) - non tradurre",
+    "{trump_card}": "L'etichetta della carta di briscola, ad esempio '7♠' - non tradurre",
+    "{card}": "L'etichetta di una carta, ad esempio 'A♥' - non tradurre",
+    "{trump_mark}": "Il marcatore pre-renderizzato '(TRUMP)', o vuoto",
+    "{max_pos}": "La posizione più alta della carta nella mano del giocatore",
+    "{count}": "Il numero di carte che un giocatore tiene",
+    "{pos}": "Il numero di posizione di una carta nella mano",
+    "{points}": "Un numero di punti (valore della carta o punteggio accumulato)",
+    "{hand}": "L'elenco pre-renderizzato, multi-riga della mano",
+    "{trick}": "L'elenco pre-renderizzato della presa corrente",
+    "{scores}": "La riga pre-renderizzata del punteggio, o il blocco finale del punteggio per giocatore",
+    "{trump_info}": "La riga pre-renderizzata del seme di briscola / conteggio del mazzo",
+    "{winner}": "Il numero del giocatore che ha vinto la presa o il gioco",
+    "{tricks}": "Un numero di prese vinte da un giocatore",
+    "{deck_count}": "Numero di carte rimaste nel mazzo"
+  },
+  "game": {
+    "start": "Partita di Briscola iniziata! Seme di briscola: {trump_suit} (Carta di briscola: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Stai giocando a Briscola - Giocatore {player_id}.\nObiettivo: Vincere le prese e raccogliere il maggior numero di punti (120 punti totali nel mazzo).\nPunti delle carte: A=11, 3=10, K=4, Q=3, J=2, altri=0\nPotenza delle carte: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nLe carte di briscola battono le carte non di briscola indipendentemente dalla potenza.\n\nAzione: '[play X]' dove X è la posizione (1-{max_pos}) della carta nella tua mano\n"
+  },
+  "hand": {
+    "none": "Nessuna carta",
+    "empty": "Nessuna carta in mano",
+    "header": "La tua mano:",
+    "card_line": "  {pos}. {card} [{points} punti]{trump_mark}",
+    "trump_mark": " (BRISCOLA)"
+  },
+  "trick": {
+    "empty": "Nessuna carta giocata ancora in questa presa.",
+    "header": "Presa corrente:",
+    "line": "  Giocatore {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Giocatore {player_id}: {points} punti",
+    "trump_info": "Seme di briscola: {trump_suit}",
+    "trump_info_deck": "Seme di briscola: {trump_suit} | Carte rimaste nel mazzo: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPunteggi: {scores}\n{trump_info}\n\nGioca una carta utilizzando [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Utilizza [play X] dove X è la posizione della carta (1, 2, 3, ecc.)",
+    "out_of_range": "Posizione della carta non valida. Hai {count} carte (1-{count})"
+  },
+  "action": {
+    "played": "Giocatore {player_id} ha giocato {card}",
+    "trick_win": "Giocatore {winner} vince la presa con {card} e guadagna {points} punti!"
+  },
+  "outcome": {
+    "head": "Partita finita! Giocatore {winner} vince con {points} punti!\n\nPunteggi finali:\n{scores}",
+    "player_line": "Giocatore {player_id}: {points} punti ({tricks} prese)\n"
+  }
+}

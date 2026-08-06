@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} v Hra o vyjednávaní.\nMáte niektoré zdroje a váš úlohou je obchodovať tak, aby sa celková hodnota vašich zdrojov zvýšila.\nZdroje a pridružené hodnoty, ktoré máte v súčasnosti, sú:\n\t+ {resource_value_list}\nV každom ťahu môžete rozprávať so svojím súperom a urobiť obchodnú ponuku.\nPoužite nasledujúce špeciálne tokeny pre akcie:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Ponúkané zdroje -> Požadované zdroje]\n  - '[Accept]': Akceptovať prichádzajúcu ponuku.\n  - '[Deny]': Odmietnuť prichádzajúcu ponuku (predvolené).\nHra trvá {max_turns} ťahov celkovo."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Hráč sa pokúsil prijať obchod bez potrebných zdrojov.",
+    "out_of_range": "Hráč {player_id}, neplatná akcia. Stĺpec {col} je mimo hraníc.",
+    "already_full": "Hráč {player_id}, neplatná akcia. Stĺpec {col} je plný.",
+    "proposing_with_no_resource": "Hráč {player_id} sa pokúsil urobiť obchodnú ponuku bez potrebných zdrojov.",
+    "incorrect_offer_format": "Hráč {player_id} urobil obchodnú ponuku v nesprávnom formáte.",
+    "no_new_offer": "Hráč {player_id} neurobil žiadnu novú obchodnú ponuku."
+  },
+  "offers": {
+    "reject": "Hráč {player_id} odmietol obchodnú ponuku.",
+    "accept": "Hráč {acceptor_id} prijal obchodnú ponuku od Hráča {proposer_id}.",
+    "proposal": "Hráč {player_id} urobil nasledujúcu ponuku Hráčovi {opponent_id}: Ponúkané položky: {offered} -> Požadované položky: {requested}"
+  },
+  "outcome": {
+    "win": "Hráč {winner_id} vyhral tým, že mal väčší zisk v hodnote inventára.",
+    "draw": "Rovnaká zmena v hodnote inventára pre všetkých hráčov. Remíza."
+  }
+}

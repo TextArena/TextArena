@@ -1,0 +1,55 @@
+{
+  "_comment": "Cadeias de caracteres voltadas para o usuário do Liar's Dice. Tokens de ação entre colchetes ('[Bid: X, Y]', '[Call]'), IDs de jogador, valores de face de dados, quantidades e contagens são slots neutros e nunca devem ser traduzidos.",
+  "_slots": {
+    "player_id": "índice do jogador (inteiro)",
+    "num_players": "número de jogadores no jogo (inteiro)",
+    "dice_summary": "contagens de dados restantes pré-renderizadas por jogador, unidas por '; '",
+    "your_dice": "lista pré-renderizada de valores de face de dados do jogador atual, unidos por vírgula",
+    "p": "índice do jogador (inteiro)",
+    "d": "contagem de dados restantes para esse jogador (inteiro)",
+    "current_player_id": "índice do jogador que chamou (inteiro)",
+    "face_value": "valor de face de dados sendo contado (1-6)",
+    "count": "número real de dados correspondentes (inteiro)",
+    "quantity": "quantidade de lance (inteiro)",
+    "loser_id": "índice do jogador que perde um dado (inteiro)",
+    "new_quantity": "quantidade de lance recém-enviada (inteiro)",
+    "current_quantity": "quantidade de lance atual (inteiro)",
+    "new_face_value": "valor de face de lance recém-enviado (inteiro)",
+    "current_face_value": "valor de face de lance atual (inteiro)",
+    "action": "string de ação bruta enviada pelo jogador",
+    "reason": "motivo de rejeição de lance aninhado",
+    "winner": "índice do jogador que vence (inteiro)",
+    "final_ranking": "lista de índices de jogadores, do primeiro eliminado ao vencedor"
+  },
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id} em um jogo de Liar's Dice com {num_players} jogadores.\nRegras:\n- Em sua vez, você pode:\n  1) Fazer um novo lance com uma quantidade maior ou um valor de face maior (ou ambos) do que o lance atual; ou seja, '[Bid: 3, 4]',\n  2) Chamar o último lance digitando '[Call]'.\n\nSe você chamar:\n  - Se a contagem real desse valor de face entre todos os dados for menor do que o lance, o último licitante perde um dado.\n  - Caso contrário, o chamador perde um dado.\nUm jogador que atinge 0 dados é eliminado. O último jogador restante vence."
+  },
+  "board": {
+    "per_player": "\tJogador {p}: {d}",
+    "new_round": "\nNova rodada - Dados restantes: {dice_summary}\nSeus dados atuais são: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Jogador {current_player_id} chama! A contagem real do valor de face {face_value} é {count}, que é MENOR do que {quantity}.\nJogador {loser_id} (o último licitante) perde um dado.",
+    "caller_loses": "Jogador {current_player_id} chama! A contagem real do valor de face {face_value} é {count}, que é >= {quantity}.\nJogador {loser_id} (o chamador) perde um dado."
+  },
+  "action": {
+    "bid_announce": "Jogador {player_id} aposta {quantity} do valor de face {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Chamada feita sem lance anterior.",
+    "invalid_bid": "Lance inválido: {reason}",
+    "not_recognized": "Ação não reconhecida como um lance válido '[Bid: X, Y]' ou '[Call]'. Ação enviada: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nova quantidade {new_quantity} é menor do que a atual {current_quantity}.",
+    "face_lower": "Novo valor de face {new_face_value} é menor do que o atual {current_face_value}.",
+    "identical": "O lance é idêntico ao lance atual.",
+    "face_range": "O valor de face deve estar entre 1 e 6."
+  },
+  "message": {
+    "eliminated_invalid": "Jogador {player_id} foi eliminado por movimento inválido."
+  },
+  "outcome": {
+    "win": "Jogador {winner} vence! Classificação final: {final_ranking}"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} žaidime HighSociety (2 žaidėjų versija).\nŽaidimo eiga: dešimt prestižo kortų aukcionuojamos viena po kitos.\nLicitacija: kiekvieną aukcioną slapta pasirinkite pinigų kortą 1-11 ir atskleiskite.\n            • Aukštesnė licitacija laimi prestižo kortą ir išmeta tą pinigų kortą.\n            • Žemesnė licitacija išlaiko savo pinigų kortą.\n            • Lygiosios -> abi licitacijos yra grąžinamos ir tas pats prestižo kortas yra vėl aukcionuojamas.\nVertinimas: po visų dešimties aukcionų, pridėkite **likusius pinigus + prestižo taškus**.\n            Aukštesnė *grynoji vertė* laimi (tikslus lygumas -> lygiosios).\n\n**Veiksmų sintaksė**  →  licituokite vieną kortą kaip '[7]' arba '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Aukcionas {round}/10  |  Prestižo korta: {prize}"
+  },
+  "board": {
+    "money_cards": "Jūsų likę pinigų kortos: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Turi būti tik viena [X] pinigų korta.",
+    "card_not_held": "Jūs nebeturite tos pinigų kortos."
+  },
+  "message": {
+    "tie": "Lygiosios - licitacijos grąžintos. Pakartokite!",
+    "auction_result": "P0 licitavo {bid0}, P1 licitavo {bid1}. Žaidėjas {winner} laimi prestižą {prize} (viso {total})."
+  },
+  "outcome": {
+    "p0_wins": "Grynoji vertė {nw0} > {nw1}",
+    "p1_wins": "Grynoji vertė {nw1} > {nw0}",
+    "draw": "Abiejų grynoji vertė {nw0} – tikslus lygumas."
+  }
+}

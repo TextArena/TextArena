@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa **Ultimate Tic Tac Toe**.\nIsalin ang iyong pagkilos bilang **[macro  micro]** (dalawang numero 0-8):\n• *macro*  = kung aling mini-board ka maglalaro\n• *micro* = kung aling parisukat sa loob ng mini-board na iyon\nHalimbawa `[7 8]` ➜ ilagay ang iyong marka sa mini-board 7, parisukat 8, at\npuwersahin ang iyong kalaban na maglaro sa mini-board 8 sa susunod.\n\nIkaw ay `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Kasalukuyang board:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ang pagkilos ay dapat nasa anyo ng [macro micro] na may mga numero 0-8.",
+    "out_of_range": "Ang mga indeks ay dapat nasa pagitan ng 0 at 8.",
+    "index_out_of_range": "Ang micro_board, row, o col ay labas ng saklaw.",
+    "cell_occupied": "Ang cell ay nakuha na.",
+    "wrong_micro_board": "Ang manlalaro ay dapat maglaro sa susunod na micro board.",
+    "micro_board_won": "Ang micro board ay napanalunan na."
+  },
+  "next_board": {
+    "any": "kahit anong micro board",
+    "specific": "micro board {nxt}"
+  },
+  "game_action": {
+    "played": "Ang Player {player_id} ay naglaro sa micro board {macro_idx}, cell {micro_idx} (row {row}, col {col}). Ang Player {opponent_id} ay dapat maglaro ngayon sa {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Ang Player {player_id} ay nanalo sa Ultimate Tic Tac Toe!",
+    "draw": "Ang laro ay isang tabla!"
+  }
+}

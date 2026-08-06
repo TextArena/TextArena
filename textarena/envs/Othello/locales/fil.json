@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} na naglalaro ng {colour} ({piece}) sa isang laro ng Othello.\nAng iyong layunin ay magkaroon ng mas maraming mga piraso ng iyong kulay sa board sa pagtatapos ng laro.\nSa iyong pagkakataon, ilagay ang isang piraso sa paraang ito ay nasa pagitan ng isa o higit pang mga piraso ng iyong kalaban - sa anumang direksyon (pahalang, patayo, o diagonal) - sa pagitan ng iyong bagong piraso at isa pang umiiral na piraso mo. Ang lahat ng mga piraso ng kalaban na nasa pagitan ay ibabaliktad sa iyong kulay.\nIbigay ang iyong pagkilos sa format na '[row, col]'."
+  },
+  "board": {
+    "game_board": "Board ng Laro:\n{board}",
+    "valid_moves": "{observation}\nMga Pagkilos na Magagamit: {moves}",
+    "no_valid_moves_reset": "{observation}\nWalang mga pagkilos na magagamit - maaaring kailangan mong lumaktaw.",
+    "no_valid_moves_step": "{observation}\nWalang mga pagkilos na magagamit – maaaring kailangan mong lumaktaw.",
+    "scores_reset": "{observation}\nKasalukuyang Iskor - Itim: {black_count}, Puti: {white_count}\n",
+    "scores_step": "{observation}\nIskor - Itim: {black_count}, Puti: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Ang pagkilos ay dapat na nasa anyo ng [row, col].",
+    "illegal": "Iligal na pagkilos. Mga pagkilos na magagamit: {valid}"
+  },
+  "game_action": {
+    "skipped": "Ang Player {pid} ay kailangang lumaktaw ng kanilang pagkakataon",
+    "played": "Ang Player {pid} ({piece}) ay naglaro ng [{r}, {c}] na nagbaliktad ng {flipped} piraso"
+  },
+  "game_message": {
+    "must_skip": "Ang Player {pid} ({piece}) ay walang mga pagkilos na magagamit at kailangang lumaktaw."
+  },
+  "outcome": {
+    "black_wins": "Ang Itim ay nanalo {black_count}-{white_count}.",
+    "white_wins": "Ang Puti ay nanalo {white_count}-{black_count}.",
+    "draw": "Tabla {black_count}-{white_count}."
+  }
+}

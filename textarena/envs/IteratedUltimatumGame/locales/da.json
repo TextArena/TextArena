@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame lokalisationsfil. Oversæt ikke nøgler (venstre side). Oversæt kun værdier (højre side).",
+  "_slots": {
+    "{player_id}": "Spillerens nummer, 0 eller 1",
+    "{other_id}": "Den anden spillers nummer, 1 eller 0",
+    "{num_rounds}": "Totalt antal runder",
+    "{pool}": "Beløb til rådighed hver runde (et tal)",
+    "{round_number}": "Aktuel rundenummer",
+    "{proposer_id}": "Forslagsspillers nummer, 0 eller 1",
+    "{responder_id}": "Svarspillers nummer, 0 eller 1",
+    "{offer}": "Tilbudt beløb (et tal)",
+    "{keep}": "Beløbet forslagsstilleren beholder (et tal)",
+    "{proposer_gain}": "Penge forslagsstilleren fik denne runde (et tal)",
+    "{responder_gain}": "Penge svareren fik denne runde (et tal)",
+    "{total_0}": "Spiller 0's akkumulerede total (et tal)",
+    "{total_1}": "Spiller 1's akkumulerede total (et tal)",
+    "{winner}": "Vindende spillers nummer",
+    "{loser}": "Tabende spillers nummer",
+    "{winner_total}": "Vinderens totale penge (et tal)",
+    "{loser_total}": "Taberens totale penge (et tal)",
+    "{total}": "Hver spillers uafgjorte sluttotal (et tal)"
+  },
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} og spiller {num_rounds} runder af Iterated Ultimatum Game.\nDu har ${pool} at fordele denne runde mellem dig selv og Spiller {other_id}.\n\nForslagsstiller:\n  - Lav et tilbud: [Offer: $X] (0 <= X <= pool)\n  - Hvis accepteret → Du får $(pool - X), den anden spiller får $X\n  - Hvis afvist → Begge får $0\n  - Eksempel: [Offer: $3]  eller  'Jeg synes dette er retfærdigt. [Offer: $5]'\n\nSvarer:\n  - Beslut om tilbuddet med enten [Accept] eller [Reject]\n  - Eksempel: 'Det ser rimeligt ud. [Accept]'\n            'For uretfærdigt. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Runde {round_number} begynder! ---\nSpiller {proposer_id} er forslagsstiller, Spiller {responder_id} er svarer.",
+    "offer": "Runde {round_number}: Spiller {proposer_id} tilbyder ${offer} til Spiller {responder_id} (beholder ${keep}).",
+    "accepted": "Spiller {responder_id} accepterede! Runde {round_number} gevinster: Spiller {proposer_id} +${proposer_gain}, Spiller {responder_id} +${responder_gain}. Nye totaler: Spiller 0: ${total_0}, Spiller 1: ${total_1}.",
+    "rejected": "Spiller {responder_id} afviste tilbuddet! Runde {round_number} gevinster: Begge spillere +$0. Totalerne forbliver: Spiller 0: ${total_0}, Spiller 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Forslagsstilleren skal lave et tilbud med formatet [Offer: $X].",
+    "bad_integer": "Tilbudsbeløbet skal være et gyldigt heltal.",
+    "out_of_range": "Tilbuddet skal være mellem $0 og ${pool}.",
+    "no_current_offer": "Der er intet aktuel tilbud at svare på.",
+    "accept_or_reject": "Svareren skal enten [Accept] eller [Reject] tilbuddet."
+  },
+  "outcome": {
+    "win": "Spiller {winner} vandt med ${winner_total} total mod Spiller {loser}'s ${loser_total}.",
+    "draw": "Uafgjort! Begge spillere sluttede med ${total} total."
+  }
+}

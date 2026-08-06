@@ -1,0 +1,74 @@
+{
+  "_comment": "Datoteka s lokalizacijom za Klondike Solitaire. NE PREVODITE ključeve (lijeva strana). Samo prevodite vrijednosti (desna strana).",
+  "_slots": {
+    "{n}": "Indeks akcije unutar komande odvojene zarezom, temeljen na 1",
+    "{msg}": "Ugniježđena poruka o rezultatu akcije (već lokalizirana)",
+    "{count}": "Broj karata koje se pomiču licem gore",
+    "{src}": "Broj izvorne gomile tableau, temeljen na 1",
+    "{dst}": "Broj odredišne gomile, temeljen na 1",
+    "{cmd}": "Nepoznata komanda koju je igrač upisao (nije prevedena)",
+    "{max_turns}": "Maksimalni broj poteza prije kraja igre",
+    "{score}": "Broj karata trenutno u temeljnim gomilama",
+    "{board}": "Iscrtana ASCII ploča (nikad ne prevodite)",
+    "{turn}": "Trenutni broj poteza",
+    "{stock}": "Broj karata koje su ostale u zalihu",
+    "{waste}": "Gornja karta otpada, ili '--' ako je prazna (nikad ne prevodite)",
+    "{cards}": "Karte u gomili kao neutralne oznake, ili '--' ako je prazna (nikad ne prevodite)"
+  },
+  "player_prompt": {
+    "intro": "Igrate Klondike Solitaire. Vaš cilj je premjestiti sve karte u temeljne gomile.\n\nPravila igre:\n- Temeljne gomile (F1-F4): Gradite od Asa do Kralja u boji\n- Gomile tableau (T1-T7): Gradite dolje naizmjeničnim bojama (crvena na crnoj, crna na crvenoj)\n- Zalihu: Vučite karte u otpad\n- Otpad (W): Gornja karta dostupna za igru\n\nKomande:\n- 'draw' - Vučite karte iz zalihu u otpad\n- 'move <izvor> <odredište> [broj]' - Premjestite karte između gomila\n  Primjeri: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Broj također može biti 'all', što će pokušati premjestiti sve karte licem gore.\n- 'forfeit' - Završite igru odmah i zaključajte trenutni rezultat\n- Imena gomila: W (otpad), F1-F4 (temeljne), T1-T7 (tableau)\n\nMožete izvršiti više akcija u jednom potezu odvajajući ih zarezima:\n  Primjer: 'draw, move W T1, move T2 F1'\n\nSamo Kraljevi mogu biti postavljeni na prazne gomile tableau.\nAkcije se izvršavaju po redu - ako jedna ne uspije, preostale akcije se preskaču.\nKoristite 'forfeit' ako mislite da je igra nemoguća za pobijediti."
+  },
+  "format_error": {
+    "no_brackets": "Neispravan format akcije. Akcija bi trebala biti u zagradama.",
+    "no_closing_bracket": "Neispravan format akcije. Nedostaje zatvorena zagrada ']'",
+    "empty_command": "Prazna komanda. Upišite 'draw' ili 'move <izvor> <odredište> [broj]'",
+    "empty_action": "Prazna akcija",
+    "move_needs_args": "Komanda premještanja zahtijeva izvor i odredište. Uporaba: 'move <izvor> <odredište> [broj]'",
+    "count_positive": "Broj mora biti pozitivan ili 'all'",
+    "count_invalid": "Neispravan broj. Koristite broj ili 'all'",
+    "unknown_command": "Nepoznata komanda '{cmd}'. Koristite 'draw', 'move <izvor> <odredište> [broj]', ili 'forfeit'",
+    "wrapped": "Akcija {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Akcija {n}: {msg}",
+    "before_failure": "Izvršeno {n} akcija prije neuspjeha.",
+    "failed": "Akcija {n} nije uspjela: {msg}"
+  },
+  "move_result": {
+    "drew": "Vučene su karte iz zalihu u otpad.",
+    "cannot_draw": "Nije moguće vući. I zalih i otpad su prazni.",
+    "invalid_pile": "Neispravno ime gomile. Koristite W, F1-F4, ili T1-T7",
+    "foundation_one_card": "Može se premjestiti samo jedna karta u temeljnu gomilu",
+    "waste_to_foundation_ok": "Premještena je karta iz otpada u temeljnu gomilu F{dst}",
+    "waste_to_foundation_bad": "Nije moguće premjestiti kartu otpada u tu temeljnu gomilu",
+    "tableau_to_foundation_ok": "Premještena je karta iz gomile tableau T{src} u temeljnu gomilu F{dst}",
+    "tableau_to_foundation_bad": "Nije moguće premjestiti kartu gomile tableau u tu temeljnu gomilu",
+    "foundation_to_foundation": "Nije moguće premjestiti iz temeljne gomile u drugu temeljnu gomilu",
+    "waste_to_tableau_one_card": "Može se premjestiti samo jedna karta iz otpada u gomilu tableau",
+    "waste_to_tableau_ok": "Premještena je karta iz otpada u gomilu tableau T{dst}",
+    "waste_to_tableau_bad": "Nije moguće postaviti kartu otpada na tu gomilu tableau",
+    "no_face_up": "Nema karata licem gore za premještanje",
+    "tableau_to_tableau_ok": "Premješteno je {count} karata iz gomile tableau T{src} u T{dst}",
+    "tableau_to_tableau_bad": "Nije moguće premjestiti {count} karata iz T{src} u T{dst}",
+    "foundation_to_tableau_one_card": "Može se premjestiti samo jedna karta iz temeljne gomile u gomilu tableau",
+    "foundation_empty": "Temeljna gomila F{src} je prazna",
+    "foundation_to_tableau_ok": "Premještena je karta iz temeljne gomile F{src} u gomilu tableau T{dst}",
+    "foundation_to_tableau_bad": "Nije moguće postaviti kartu temeljne gomile na gomilu tableau T{dst}",
+    "to_waste_or_stock": "Nije moguće premjestiti u otpad ili zalihu"
+  },
+  "outcome": {
+    "forfeit": "Igra je prekinuta. Konačni rezultat: {score} karata u temeljnim gomilama.",
+    "won": "Čestitamo! Pobijedili ste Klondike Solitaire!",
+    "turn_limit": "Igra je gotova! Dostigli ste maksimalni broj od {max_turns} poteza. Rezultat: {score} karata u temeljnim gomilama."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Potez: {turn}/{max_turns}",
+    "stock": "Zalih: {stock} karata",
+    "waste": "Otpad (W): {waste}",
+    "foundations_header": "Temeljne gomile:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Gomile tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

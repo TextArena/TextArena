@@ -1,0 +1,37 @@
+{
+  "_comment": "Filipino locale para sa Word Search. Ang mga susi (kaliwa) ay nakapirme; isalin lamang ang mga halaga (kanan). Panatilihin ang bawat {placeholder} nang walang pagbabago. Ang mga label ng grid (R00/C00), mga coordinate, at ang format ng pagkilos sa bracket '[start_row start_col end_row end_col]' at mga halimbawa tulad ng '[1 1 1 5]' ay NEUTRAL at hindi dapat isalin. Ang {board} at {words} ay neutral na nilalaman ng laro.",
+  "_slots": {
+    "{player_id}": "Numero ng manlalaro (integer)",
+    "{mode}": "Label ng mode ng laro (nakalokalisa na: Basic/Hardcore)",
+    "{tries}": "Bilang ng mga maling pagtatangka na natitira (integer)",
+    "{board}": "Ang rendered grid (neutral; huwag isalin)",
+    "{words}": "Listahan ng mga nakatagong salita na nakahiwalay ng comma (neutral tokens)",
+    "{coords}": "Ang mga coordinate na 'start_row start_col end_row end_col' (neutral)",
+    "{word}": "Isang nakatagong salita na natagpuan (neutral token)",
+    "{found}": "Bilang ng mga salita na natagpuan sa ngayon (integer)",
+    "{total}": "Kabuuang bilang ng mga nakatagong salita (integer)",
+    "{pct}": "Porsyento ng mga salita na natagpuan (integer)"
+  },
+  "prompt": {
+    "mode_basic": "Basic",
+    "mode_hardcore": "Hardcore",
+    "intro": "Ikaw ay Player {player_id}, at ikaw ay lumahok sa isang Word Search challenge na ginaya bilang {mode}. Ang layunin ay hanapin at i-highlight ang mga nakatagong salita sa grid sa ibaba. Ang mga hilera at hanay ay may numero para sa iyong reference.\n\nNarito ang kasalukuyang estado ng Word Search board:\n----------------------------------------\nAng mga salita na iyong natagpuan na ay nakamarka sa mga bracket na [ ]. Ang bawat hilera at hanay ay may numero para sa klaridad.\n\n\nUpang hanapin ang isang salita, itukoy ang hilera at hanay ng simula at katapusan ng mga titik nito. Tandaan na ang mga salita ay nasa ibabaw o pababa lamang.\nMaaari kang mag-type ng iyong sagot at mga iniisip sa anumang paraan. Ngunit maaari kang mag-sumite ng isang pagtatangka lamang sa isang pagkakataon. Para sa iyong mga pagtatangka, gamitin ang format na '[start_row start_col end_row end_col]'.\nHalimbawa, kung gusto mong hanapin ang salitang 'HELLO' na nagsisimula sa hilera 1, hanay 1 at nagtatapos sa hilera 1, hanay 5, ipasok ang '[1 1 1 5]'.\n\nMga Gabay:\n- Ang bawat hula ay dapat unique; hindi mo maaaring ulitin ang parehong hula.\n- Mayroon kang kabuuang {tries} maling pagtatangka na natitira.\n- Ang kasaysayan ng iyong mga pagtatangka ay ire-rekord sa ibaba.\n\nGawin ang iyong mga hula nang maingat at estratehiko. Good luck, Player {{player_id}}! Tingnan natin kung ilang salita ang iyong mahahanap!\n"
+  },
+  "board": {
+    "state": "Kasalukuyang Board:\n\n{board}\nMga Salita na Inilagay: {words}\nMaling Pagtatangka na Natitira: {tries}"
+  },
+  "invalid": {
+    "wrong_format": "Maling format ng pagkilos. Ang Player {player_id} ay hindi sumagot ng wastong 'start_row, start_col, end_row, end_col'.",
+    "out_of_range": "Maling format ng pagkilos. Ang Player {player_id} ay hindi sumagot ng wastong 'start_row, start_col, end_row, end_col'.",
+    "already_attempted": "Maling pagkilos. Ang pagkilos ay nangyari na."
+  },
+  "feedback": {
+    "incorrect": "[{coords}] ay isang maling pagtatangka. {tries} maling pagtatangka na natitira.",
+    "correct": "[{coords}] ay isang wastong pagtatangka. Natagpuan mo ang salitang '{word}'.",
+    "correct_unknown": "[{coords}] ay isang wastong pagtatangka, ngunit ang salita ay hindi natagpuan sa mga inilagay na salita."
+  },
+  "outcome": {
+    "no_tries": "Walang maling pagtatangka na natitira. Natagpuan mo ang {found} sa {total} salita ({pct}%).",
+    "win": "Binabati kita! Nakumpleto mo ang Word Search puzzle."
+  }
+}

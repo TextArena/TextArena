@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "شما بازیکن {player_id} هستید که با رنگ {colour} ({piece}) در بازی اتللو بازی می‌کنید.\nهدف شما این است که تا پایان بازی، تعداد بیشتری از مهره‌های رنگ خود را بر روی تخته داشته باشید.\nدر نوبت خود، یک مهره بگذارید به طوری که یکی یا چند مهره از حریف خود را در هر جهتی (افقی، عمودی یا مورب) بین مهره جدید خود و یکی دیگر از مهره‌های موجود خود قرار دهد. همه مهره‌های حریف که در بین قرار گرفته‌اند، به رنگ شما تغییر خواهند کرد.\nحرکت خود را در قالب '[row, col]' ارائه دهید."
+  },
+  "board": {
+    "game_board": "تخته بازی:\n{board}",
+    "valid_moves": "{observation}\nحرکات معتبر: {moves}",
+    "no_valid_moves_reset": "{observation}\nحرکات معتبری وجود ندارد - ممکن است مجبور به رد کردن نوبت شوید.",
+    "no_valid_moves_step": "{observation}\nحرکات معتبری وجود ندارد – ممکن است مجبور به رد کردن نوبت شوید.",
+    "scores_reset": "{observation}\nامتیازهای فعلی - سیاه: {black_count}، سفید: {white_count}\n",
+    "scores_step": "{observation}\nامتیازها - سیاه: {black_count}، سفید: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "حرکت باید به شکل [row, col] باشد.",
+    "illegal": "حرکت غیرقانونی است. حرکات معتبر: {valid}"
+  },
+  "game_action": {
+    "skipped": "بازیکن {pid} مجبور به رد کردن نوبت خود شد",
+    "played": "بازیکن {pid} ({piece}) در خانه [{r}, {c}] بازی کرد و {flipped} مهره را تغییر داد"
+  },
+  "game_message": {
+    "must_skip": "بازیکن {pid} ({piece}) هیچ حرکت معتبری ندارد و باید نوبت خود را رد کند."
+  },
+  "outcome": {
+    "black_wins": "سیاه با نتیجه {black_count}-{white_count} برنده شد.",
+    "white_wins": "سفید با نتیجه {white_count}-{black_count} برنده شد.",
+    "draw": "بازی با نتیجه {black_count}-{white_count} مساوی شد."
+  }
+}

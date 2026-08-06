@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "আপনি কর্নেল ব্লটো-তে {role}।\nআপনার লক্ষ্য হল আপনার প্রতিপক্ষের চেয়ে বেশি রাউন্ড জিতা।\nপ্রতিটি রাউন্ডে, {field_names} ক্ষেত্রে জুড়ে ঠিক {num_total_units} ইউনিট বরাদ্দ করুন।\nযে খেলোয়াড় একটি ক্ষেত্রে বেশি ইউনিট বরাদ্দ করে সেই ক্ষেত্রটি জিতে নেয়, এবং যে খেলোয়াড় বেশি ক্ষেত্র জিতে নেয় সে রাউন্ডটি জিতে নেয়।\nউদাহরণস্বরূপ, '[A7 B7 C6]' A-তে 7 ইউনিট, B-তে 7 এবং C-তে 6 বরাদ্দ করে।",
+    "commander_alpha": "কমান্ডার আলফা",
+    "commander_beta": "কমান্ডার বিটা"
+  },
+  "game_state": {
+    "header_round": "=== কর্নেল ব্লটো - রাউন্ড {current_round}/{num_rounds} ===\nরাউন্ড জিতেছেন - কমান্ডার আলফা: {alpha_score}, কমান্ডার বিটা: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nরাউন্ড {current_round}\nকমান্ডার আলফা বরাদ্দ করেছেন: {p0_allocations}\nকমান্ডার বিটা বরাদ্দ করেছেন: {p1_allocations}\n",
+    "winner_alpha": "{message}বিজয়ী: কমান্ডার আলফা",
+    "winner_beta": "{message}বিজয়ী: কমান্ডার বিটা",
+    "tie": "{message}টাই!"
+  },
+  "invalid_move": {
+    "wrong_format": "ভুল ইনপুট ফর্ম্যাট। ব্যবহার করুন: A:5, B:10, C:5",
+    "invalid_field": "ভুল ক্ষেত্রের নাম। বৈধ ক্ষেত্র: {field_names}",
+    "wrong_allocation_value": "সমস্ত বরাদ্দ অবশ্যই অ-নেতিবাচক পূর্ণসংখ্যা হতে হবে।",
+    "incorrect_total_units": "আপনাকে ঠিক {num_total_units} ইউনিট বরাদ্দ করতে হবে। বর্তমান যোগফল: {current_sum}",
+    "good_allocations": "বরাদ্দ ভালো।"
+  },
+  "outcome": {
+    "winner_alpha": "কমান্ডার আলফা {score_0}-{score_1} জিতেছেন {num_rounds} রাউন্ডের পরে!",
+    "winner_beta": "কমান্ডার বিটা {score_1}-{score_0} জিতেছেন {num_rounds} রাউন্ডের পরে!",
+    "draw": "খেলাটি {score_0}-{score_1} টাইতে শেষ হয়েছে {num_rounds} রাউন্ডের পরে!",
+    "early_winner_alpha": "কমান্ডার আলফা {scores_0}-{scores_1} জিতেছেন (সংখ্যাগরিষ্ঠতা অর্জিত)!",
+    "early_winner_beta": "কমান্ডার বিটা {scores_1}-{scores_0} জিতেছেন (সংখ্যাগরিষ্ঠতা অর্জিত)!"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Jy is {role} in Kolonel Blotto.\nJou doel is om meer rondtes as jou teenstander te wen.\nIn elke rondte, verdeel presies {num_total_units} eenhede oor velde {field_names}.\nDie speler wat meer eenhede aan 'n veld toeken, wen daardie veld, en die speler wat meer velde wen, wen die rondte.\nByvoorbeeld, '[A7 B7 C6]' verdeel 7 eenhede aan A, 7 aan B, en 6 aan C.",
+    "commander_alpha": "Bevelvoerder Alfa",
+    "commander_beta": "Bevelvoerder Beta"
+  },
+  "game_state": {
+    "header_round": "=== KOLONEL BLOTTO - Rondte {current_round}/{num_rounds} ===\nRondtes Gewen - Bevelvoerder Alfa: {alpha_score}, Bevelvoerder Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRondte {current_round}\nBevelvoerder Alfa het toegewys: {p0_allocations}\nBevelvoerder Beta het toegewys: {p1_allocations}\n",
+    "winner_alpha": "{message}Wenner: Bevelvoerder Alfa",
+    "winner_beta": "{message}Wenner: Bevelvoerder Beta",
+    "tie": "{message}Gelykop!"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldige invoerformaat. Gebruik: A:5, B:10, C:5",
+    "invalid_field": "Ongeldige veldnaam(s). Geldige velde: {field_names}",
+    "wrong_allocation_value": "Alle toewysings moet nie-negatiewe heelgetalle wees.",
+    "incorrect_total_units": "Jy moet presies {num_total_units} eenhede toewys. Huidige som: {current_sum}",
+    "good_allocations": "Toewysing is goed."
+  },
+  "outcome": {
+    "winner_alpha": "Bevelvoerder Alfa wen {score_0}-{score_1} na {num_rounds} rondtes!",
+    "winner_beta": "Bevelvoerder Beta wen {score_1}-{score_0} na {num_rounds} rondtes!",
+    "draw": "Spel eindig in 'n {score_0}-{score_1} gelykop na {num_rounds} rondtes!",
+    "early_winner_alpha": "Bevelvoerder Alfa wen {scores_0}-{scores_1} (meerderheid behaal)!",
+    "early_winner_beta": "Bevelvoerder Beta wen {scores_1}-{scores_0} (meerderheid behaal)!"
+  }
+}

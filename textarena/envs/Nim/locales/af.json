@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in Nim.\nJou doel is om die laaste oorblywende voorwerp te neem.\nMet elke beurt, kies presies een hoop en verwyder een of meer voorwerpe daaruit.\nGebruik die formaat '[hoop hoeveelheid]', waar hoop die hoop-indeks is en hoeveelheid die aantal voorwerpe is om te verwyder.\nByvoorbeeld, '[0 3]' verwyder 3 voorwerpe uit hoop 0."
+  },
+  "state": {
+    "current_pile": "Huidige Hoop:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Geen geldige skuif-formaat gevind nie. Gebruik '[hoop hoeveelheid]'.",
+    "correct_format_wrong_fields": "Speler {player_id}, Ongeldige aksie. Kolom {col} is buite perke.",
+    "out_of_range": "Hoop-indeks {pile_index} is buite reikwydte.",
+    "non_positive": "Moet ten minste 1 voorwerp verwyder.",
+    "exceeds_pile": "Kan nie {quantity} uit hoop {pile_index} verwyder nie (net {pile_count} oor)."
+  },
+  "observation": {
+    "removed_from_piles": "Speler {player_id} het [{pile_index} {quantity}] gespeel, {quantity} voorwerp(e) uit hoop {pile_index} verwyder."
+  },
+  "outcome": {
+    "win": "Speler {player_id} het die laaste voorwerp(e) geneem!"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} Iteroidussa Vangin Dilemmassa, joka koostuu {num_rounds} kierroksesta.\n\nPelirakenne:\n- Ennen jokaista päätöstä sinulla on {total_conversation_rounds} vuoroa keskustella vapaasti.\n- Sen jälkeen molemmat pelaajat valitsevat samanaikaisesti, tekevätkö he yhteistyötä vai pettävätkö.\n\nPalkintomatriisi (kiinteä joka kierroksella):\n- Molemmat tekevät yhteistyötä ➜ kumpikin {cooperate_reward}\n- Molemmat pettävät ➜ kumpikin {mutual_defect_reward}\n- Toinen pettää, toinen tekee yhteistyötä ➜ pettäjä {defect_reward}, yhteistyössä oleva {sucker_reward}\n\nPeliohjeet:\n- Keskustelun aikana: kirjoita haluamasi teksti.\n- Päätösvaiheessa: sisällytä '[Cooperate]' tai '[Defect]' (kirjainkoko ei ole merkityksellinen). Voit lisätä ylimääräistä tekstiä ennen/jälkeen tokenin."
+  },
+  "phases": {
+    "conversation_finished": "Keskustelu päättyi kierrokselle {round}. Vastaa '[Cooperate]' tai '[Defect]' sisällä \\boxed{{}}.",
+    "starting_round": "--- Kierros {round} alkaa ---",
+    "round_summary": "Kierroksen {round} tulokset:\n{outcome}\nPelaaja 0 ansaitsi {r0} (yhteensä {score_0}), Pelaaja 1 ansaitsi {r1} (yhteensä {score_1})."
+  },
+  "outcome": {
+    "winner": "Pelaaja {winner} voittaa {win_score} - {lose_score}.",
+    "draw": "Tasapeli! Molemmat pelaajat saivat {s0}.",
+    "round_both_cooperate": "Molemmat pelaajat tekivät yhteistyötä.",
+    "round_both_defect": "Molemmat pelaajat pettivät.",
+    "round_p0_cooperates_p1_defects": "Pelaaja 0 teki yhteistyötä, Pelaaja 1 petti.",
+    "round_p0_defects_p1_cooperates": "Pelaaja 0 petti, Pelaaja 1 teki yhteistyötä."
+  }
+}
