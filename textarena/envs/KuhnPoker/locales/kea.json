@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Bu é Player {player_id} nun djogu di Kuhn Poker di {max_rounds} ronda.\nRegras di Djogu:\n- Kuhn Poker uza un baralhu di 3 kartas ku J, Q, K (J más baixu, K más altu)\n- Kada djogadór paga {ante} ficha i risibi 1 karta kada ronda (nota ki kartas são distribuídas sin remplasu, antão bu ka pode teni a mesma karta ki oponenti).\n- Djogu kontinua pa {max_rounds} rondas\n- Djogadór ku mais fichas después di todas rondas ganha\nRegras di Aksaun:\n- '[check]': Pasa sin apostar (solamente si ka teni apostas na mesa)\n- '[bet]': Adisiona 1 ficha na mesa (solamente si ka teni apostas na mesa)\n- '[call]': Iguala a aposta di oponenti adicionando 1 ficha na mesa\n- '[fold]': Abandona a mão i dexa oponenti ganhar a mesa"
+  },
+  "init_round": {
+    "round_start": "### Inisiu di ronda {current_round} di {max_rounds} rondas. A sua karta é: '{player_card}'",
+    "available_actions": "Bu pode faze kes kuza li: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksaun debe ser [Check], [Bet], [Call], ou [Fold].",
+    "not_legal": "Ason debe ser {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Djogadór {player_id}, submeteu a sua aksaun: '[{move}]'.",
+    "valid_actions": "Bu pode faze kes kuza li: {legal_actions}.",
+    "round_summary": "{reason} Pontuaçon atual: Djogadór 0: '{player_0_chips}'; Djogadór 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Djogadór {winner}'s {winner_card} bati Djogadór {loser}'s {loser_card}. Djogadór {winner} ganha a mesa di {pot_value} fichas."
+  },
+  "outcome": {
+    "draw": "Na fin di {max_rounds} ronda, tudu dôs jogador tinha mesmu númeru di fitxeras.",
+    "round_win": "Jogu {player_id} dja foldadu.",
+    "winner_player0": "Jogu 0 ganha pamodi el tinha más fitxéus na fin di tudu {max_rounds} ronda.",
+    "winner_player1": "Jogu 1 ganha pamodi el tinha más fitxéus na fin di tudu {max_rounds} ronda."
+  }
+}

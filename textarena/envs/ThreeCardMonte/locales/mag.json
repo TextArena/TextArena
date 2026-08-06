@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte locale file. DO NOT translate keys (left side). Only translate values (right side).",
+  "_slots": {
+    "{line}": "The rendered row of cups",
+    "{step}": "The current shuffle step number",
+    "{steps}": "The total number of shuffle steps",
+    "{i}": "The first cup index involved in a swap",
+    "{j}": "The second cup index involved in a swap",
+    "{prompt}": "The localized prompt fragment appended after the cups",
+    "{max_index}": "The highest valid cup index, i.e. num_cups-1",
+    "{ball_pos}": "The cup index the ball is under"
+  },
+  "player_prompt": {
+    "intro": "प्यालों के शफ़ल होने पर छुपी हुई गेंद 'X' का अनुसरण करें।\nशफ़ल होने के बाद, इसके स्थान का अनुमान `[k]` से लगाएं।"
+  },
+  "game_message": {
+    "ball_starts": "गेंद शुरू होवो हय: {line}",
+    "shuffle": "मिलावट {step}/{steps}: कप {i} आ {j} बदलल गेल.",
+    "cups": "कप: {line}  {prompt}",
+    "guess_now": "(अब अनुमान लगा लेवे के चाही !)",
+    "reveal": "(खुलासाः {ball_pos} के नीचे गेंद)"
+  },
+  "invalid_move": {
+    "wrong_format": "गलत कार्रवाई। `[k]` का उपयोग करें।",
+    "out_of_range": "इंडेक्स 0-{max_index} सीमा से बाहर हई।"
+  },
+  "outcome": {
+    "win": "सही हइ, तूँ तो बॉल के खोज कइलहो हल ।",
+    "lose": "गलत  गेंद कप के नीचे हलय {ball_pos}।"
+  }
+}

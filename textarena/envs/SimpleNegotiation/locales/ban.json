@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam Permainan Negosiasi.\nAnda memiliki beberapa sumber daya, dan tugas Anda adalah untuk berdagang sehingga nilai total sumber daya Anda meningkat.\nSumber daya dan nilai yang terkait yang Anda miliki saat ini adalah:\n\t+ {resource_value_list}\nPada setiap giliran, Anda dapat berbicara dengan lawan Anda dan membuat penawaran perdagangan.\nGunakan token khusus berikut untuk tindakan:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': Untuk menerima penawaran masuk.\n  - '[Deny]': Untuk menolak penawaran masuk (default).\nPermainan berlangsung selama {max_turns} giliran secara total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Pamain nyoba nerima perdagangan tanpa sumber daya sané kaperluang.",
+    "out_of_range": "Pemain {player_id}, Tindakan salah. Kolom {col} dados kaluwihan.",
+    "already_full": "Pemain {player_id}, Tindakan salah. Kolom {col} dados kebek.",
+    "proposing_with_no_resource": "Pamain {player_id} nyobak antuk makarya tawaran perdagangan tanpa madué sumber daya sané kaperluang.",
+    "incorrect_offer_format": "Pamain {player_id} makarya tawaran perdagangan ring format sané nénten patut.",
+    "no_new_offer": "Pamain {player_id} nénten ngicén tawaran perdagangan anyar."
+  },
+  "offers": {
+    "reject": "Pamain {player_id} nolak tawaran perdagangan.",
+    "accept": "Pemain {acceptor_id} nampi tawaran perdagangan saking Pemain {proposer_id}.",
+    "proposal": "Pemain {player_id} ngawéntenin tawaran perdagangan ring Pemain {opponent_id}: Barang sané Kaotéri: {offered} -> Barang sané Katuran: {requested}"
+  },
+  "outcome": {
+    "win": "Pamain {winner_id} menang antuk madué pikolih sané ageng ring nilai persediaan.",
+    "draw": "Pauwahan sané pateh ring pikolih inventaris majeng makasami pemain."
+  }
+}

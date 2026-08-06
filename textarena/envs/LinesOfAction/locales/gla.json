@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Is tusa Cluicheadair {player_id} ann an geama LinesOfAction.\nTha pìosan agad '{side}', tha pìosan nàimhde '{other}'.\nFòrmat siubhail: `[b1b3]` (co-chomharra tùs gu co-chomharra ceann-uidhe). Siubhail laghail a' gluasad air feadh, suas no sìos, no trasnadh àireamh cheàrnagan co-ionann ris an àireamh pìosan (dath sam bith) anns an loidhne sin. Faodaidh tu leum thar pìosan agad fhèin, ach chan fhaod thu leum thar pìosan nàimhde; ma laigh thu air pìos nàimhde, ghlacas tu e.  Buannaich nuair a tha pìosan uile agad ceangailte ri 8 nàbaidhean."
+  },
+  "board": {
+    "current_board": "Bòrd: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Feumaidh an cruth a bhith e2e4 (bho,gu co-chomharran).",
+    "no_piece": "Chan eil pìos {side} air an {coord}.",
+    "identical": "Tha tùs agus ceann-uidhe co-ionann.",
+    "not_straight_or_diagonal": "Feumaidh gluasad a bhith dìreach no diagonal.",
+    "wrong_distance": "Feumaidh e gluasad air astar co-ionann ri pìosan ann an loidhne.",
+    "enemy_blocks": "Tha pìos nàmhaid a' cur bacadh air an t-slighe.",
+    "destination_own": "Ceann-uidhe air a ghabhail le pìos fhèin."
+  },
+  "game_action": {
+    "moved": "Cluichiche {player_id} ghluais {from} -> {to}",
+    "captured_suffix": "Cluichiche {player_id} ghluais {from} -> {to} a' glacadh nàmhad."
+  },
+  "outcome": {
+    "win": "Tha na pìosan uile ceangailte.",
+    "draw_no_capture": "60 gluasad gun ghabhadh.",
+    "draw_repetition": "Suidheachadh a 'aithris trì tursan."
+  }
+}

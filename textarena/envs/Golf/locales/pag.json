@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Say ka ampanmo a Golf (Card Game) - Player {player_id}.\nGoal: Get say lowest total score a diad single round. No say columns share say same value, say anggad summed a 0.\nCard Values: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (usaren exact brackets):\n- '[draw]' - Draw manlapud deck\n- '[take]' - Take manlapud discard pile\n- '[swap X Y]' - Swap drawn card with position X (row) Y (column)\n- '[discard]' - Discard say drawn card\n"
+  },
+  "board": {
+    "drew": "Nidrew ka: {card}\nNatan, say ka must [swap X Y] or [discard] it.",
+    "took": "Nintook ka: {card} manlapud discard pile\nSay ka must [swap X Y] it (agga cannot discard).",
+    "peeked": "Ninpeek ka a diad position ({row},{col}): {card}",
+    "turn_view": "Say impanmo:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Anggapoy anggan sakey ed saratan."
+  },
+  "options": {
+    "final_turns": "Final turns! Say impanmo a options: [draw], [take], [peek X Y]",
+    "draw": "Say impanmo a options: [draw], [take]",
+    "must_swap": "Kaukolan mon: [swap X Y] (agmo naekal iray kard ed saray karga ya isesebel)",
+    "swap_or_discard": "Say ka must: [swap X Y] or [discard]"
+  },
+  "hand": {
+    "no_cards": "Anggapoy kard.",
+    "header": "Kol: 1 2 3 Saray kol ya agni apigeren et 12",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Inswap na {pid} so {new} ed {old} diad posisyon ({row},{col})",
+    "discarded": "Player {pid} indiscard na {card}"
+  },
+  "message": {
+    "deck_empty": "Anggapo lay karga na deck! Asumpal a tampol so laro.",
+    "knocked": "Kinabog na {pid}! Makarekord pay metung a turno kada arum a mangilista.",
+    "final_round": "Agmamano {pid} {reason}! Minayam ya isan toka so arum a agmamano."
+  },
+  "reason": {
+    "all_revealed": "wala'y nabalot a karta"
+  },
+  "invalid": {
+    "wrong_action": "Usaren mo exactly ONE bracketed action: [draw], [take], [swap X Y], [discard], [knock], or [peek X Y]",
+    "discard_empty": "Anggapo lay karga na saray basura!",
+    "must_draw_first": "Say ka must umuna a [draw], [take], [knock], or [peek X Y]",
+    "cannot_discard_taken": "Agmo nayarin ibantak so sakey a kard ya inala ed saray karga na panangibantak, nepeg mon salatan itan.",
+    "have_drawn_card": "Wala kay naidik na karta. Nabalang kay man [swap X Y] o [discard] ita.",
+    "need_drawn_swap": "Kaukolan moy aka-draw a kard pian makapansalat.",
+    "need_drawn_discard": "Kaukolan moy aka-draw a kard pian naekal itan.",
+    "out_of_bounds": "Position out of bounds. Usaren mo row 1-{max_row}, column 1-{max_col}",
+    "knock_with_card": "Agmo nayarin man-knock ed sakey a card ya inusar mo. Sumpal mon unona so turn mo.",
+    "already_knocked": "Walay sakey a nanggawa la na sayan round.",
+    "already_revealed": "Napatnagan la itan a kard!"
+  },
+  "summary": {
+    "full": "Nagmaliw ya ing palaro! Mangilista {winner} ya ing manalo ed puntos a {score}!\n\nPuntos a Pangwakas:\n{scores}",
+    "line": "Player {pid}: {score} points\n"
+  },
+  "board_str": {
+    "title": "=== GOLF GAYAR=== Ag-ira manpapaliis ed saray totoo.",
+    "discard": "Pilayan na karta: {card}",
+    "knocked": "Player {pid} inknocked na!",
+    "player_header": "Mangilista {pid} (Puntos: {score}):"
+  }
+}

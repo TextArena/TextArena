@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "আপুনি খেলোয়াড় {player_id} একটি {num_players}-খেলোয়াড়ৰ Liar's Dice খেলত।\nনিয়ম:\n- আপোনার পালাত, আপুনি হয়:\n  1) বর্তমান বিডটোকো অপেক্ষা বেশী পরিমাণ বা বেশী মুখ (বা দুয়োটাই) সহ একটি নতুন বিড করতে পারেন; যেমন '[Bid: 3, 4]',\n  2) '[Call]' টাইপ করি 'শেষ বিডটো কল করতে পারেন।\n\nযদি আপুনি কল করেন:\n  - যদি সকল পাশুলির মধ্যে সেই মুখ মানটোৰ প্রকৃত গণনা বিডটোকো অপেক্ষা কম হয়, শেষ বিডাৰ একটি পাশুলি হারায়।\n  - অন্যথায়, কলাৰ একটি পাশুলি হারায়।\nএকজন খেলোয়াড় যি 0 পাশুলি পাহৰে সেই বাদ পৰে। শেষ অবশিষ্ট খেলোয়াড় জিকে।"
+  },
+  "board": {
+    "per_player": "খেলুৱৈ {p}: {d}",
+    "new_round": "নতুন ৰাউণ্ড - বাকী থকা ডাইচসমূহঃ {dice_summary} আপোনাৰ বৰ্তমানৰ ডাইচসমূহ হৈছেঃ {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "খেলুৱৈ {current_player_id}ৰ কল! প্ৰকৃত সংখ্যা {face_value} হৈছে {count}, যিটো {quantity}তকৈ কম। খেলুৱৈ {loser_id} (শেষ বিডাৰ) এটাকৈ ডাই হেৰুৱায়।",
+    "caller_loses": "খেলুৱৈ {current_player_id}ৰ কল! প্ৰকৃত সংখ্যা {face_value} হৈছে {count}, যি হৈছে >= {quantity}। খেলুৱৈ {loser_id} (কলাৰ) এজনে এটা ডাই হেৰুৱায়।"
+  },
+  "action": {
+    "bid_announce": "খেলুৱৈ {player_id}ৰ বিড {quantity}ৰ মুখ {face_value}।"
+  },
+  "invalid_move": {
+    "call_no_bid": "কোনো আগৰ নিবিদা অবিহনে কৰা হৈছে।",
+    "invalid_bid": "অবৈধ নিবিদাঃ {reason}",
+    "not_recognized": "আবেদনখন বৈধ \"[Bid: X, Y]\" বা \"[Call]\" হিচাপে স্বীকৃতি দিয়া হোৱা নাই। দাখিল কৰা আবেদনঃ {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "নতুন পৰিমাণ {new_quantity} বৰ্তমানৰ {current_quantity}তকৈ কম।",
+    "face_lower": "নতুন নামমাত্ৰ মূল্য {new_face_value} বৰ্তমানৰ {current_face_value}তকৈ কম।",
+    "identical": "এই নিবিদা বৰ্তমানৰ নিবিদাটোৰ সৈতে একে।",
+    "face_range": "নাম্বাৰ মান ১ আৰু ৬ ৰ মাজত থাকিব লাগিব।"
+  },
+  "message": {
+    "eliminated_invalid": "খেলুৱৈ {player_id} অবৈধ পদক্ষেপৰ বাবে বাহিৰ হয়।"
+  },
+  "outcome": {
+    "win": "খেলুৱৈ {winner} বিজয়ী! চূড়ান্ত স্থানঃ {final_ranking}"
+  }
+}

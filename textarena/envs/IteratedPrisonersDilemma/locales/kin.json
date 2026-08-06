@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ni wowe Umukinnyi {player_id} muri Iterated Prisoner's Dilemma igera kwa mizunguko {num_rounds}.\n\nImiterere y'Umukino:\n- Mbere ya kila uamuzi ufite imyanya {total_conversation_rounds} yo kuganiriza ukwishaka.\n- Nyuma yaho, abakinnyi bombi batora icyo bakora kwa wakati mwe.\n\nMatiti y'Umukino (yahinduwe kwa kila mzunguko):\n- Bombi bashingira hamwe ➜ buri {cooperate_reward}\n- Bombi bahagaritse ➜ buri {mutual_defect_reward}\n- Umwe ahagaritse, umwe ashyingira hamwe ➜ Uwahagaritse {defect_reward}, Uwashyingira hamwe {sucker_reward}\n\nUko wakinnye:\n- Mugihe cya kuganiriza: andika icyo ushaka.\n- Mugihe cya kufanya uamuzi: ongera '[Cooperate]' cyangwa '[Defect]' (ntacyo kigira ingaruka). Ushobora kongeza ibindi byo kwandika mbere cyangwa nyuma y'ikimenyetso."
+  },
+  "phases": {
+    "conversation_finished": "Ijambo ryarangiye kwa mzunguko wa {round}. Nyemerera kuyasubiza na '[Cooperate]' cyangwa '[Defect]' muri \\boxed{{}}.",
+    "starting_round": "--- Icyiciro gitangira {round} ---",
+    "round_summary": "Emewe ya cyiciro {round}:\n{outcome}\nUmukinnyi 0 afite {r0} (jumla {score_0}), Umukinnyi 1 afite {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Umukinnyi {winner} afite {win_score} - {lose_score}.",
+    "draw": "Tasaza! Abakinnyi bose bashitse {s0}.",
+    "round_both_cooperate": "Abo bakinnyi bombi bakoranye.",
+    "round_both_defect": "Abo bakinnyi bombi bahise bacika intege.",
+    "round_p0_cooperates_p1_defects": "Umukinnyi 0 yakoranye, Umukinnyi 1 yatemye.",
+    "round_p0_defects_p1_cooperates": "Umukinnyi wa 0 yaracitse, naho uwa 1 arafatanya."
+  }
+}

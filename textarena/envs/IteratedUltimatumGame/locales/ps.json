@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "تاسو لوبغاړی {player_id} یاست، د تکرار شوي الټیماتوم لوبې {num_rounds} پړاو لوبیږئ. تاسو ${pool} لرئ چې دا پړاو د ځان او لوبغاړي {other_id} ترمینځ ویشئ. وړاندیز کونکی: - وړاندیز وکړئ: [Offer: $X] (0 <= X <= حوض) - که منل شوی وي → تاسو $ ((جهيل - X) ترلاسه کوئ ، بل لوبغاړی $ X ترلاسه کوي - که رد شوی وي → دواړه $ 0 ترلاسه کوي - مثال: [Offer: $3] یا 'زه فکر کوم چې دا عادلانه دی. [Offer: $5]' ځواب ورکوونکی: - د وړاندیز په اړه پریکړه وکړئ یا د [Accept] یا [Reject] سره - مثال: 'دا مناسب ښکاري. [Accept]' 'ډیر غیر عادلانه. [Reject]'"
+  },
+  "round": {
+    "begins": "--- د {round_number} دور پیل کیږي! --- لوبغاړی {proposer_id} د وړاندیز کونکی دی ، لوبغاړی {responder_id} د ځواب ویونکي دی.",
+    "offer": "راؤنډ {round_number}: لوبغاړی {proposer_id} وړاندیز کوي ${offer} لوبغاړی {responder_id} ته (ساتی ${keep}).",
+    "accepted": "لوبغاړی {responder_id} منل شوی! د دورې {round_number} ګټې: لوبغاړی {proposer_id} + ${proposer_gain} ، لوبغاړی {responder_id} + ${responder_gain}. نوي مجموعې: لوبغاړی 0: ${total_0} ، لوبغاړی 1: ${total_1}.",
+    "rejected": "لوبغاړی {responder_id} وړاندیز رد کړ! د دورې {round_number} ګټې: دواړه لوبغاړي + $ 0. مجموعي پاتې دي: لوبغاړی 0: ${total_0} ، لوبغاړی 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "وړاندیز کوونکی باید د [Offer: $X] په بڼه وړاندیز وړاندې کړي.",
+    "bad_integer": "د وړاندیز مقدار باید یو باوري عدد وي.",
+    "out_of_range": "وړاندیز باید تر منځ $0 او ${pool} وي.",
+    "no_current_offer": "د ځواب ورکولو لپاره اوسني وړاندیز نه دی.",
+    "accept_or_reject": "ځواب ورکوونکی باید یا [Accept] یا [Reject] د وړاندیز وړاندیز وکړي."
+  },
+  "outcome": {
+    "win": "لوبغاړی {winner} د ${winner_total} ټولټال سره د لوبغاړي {loser} د ${loser_total} په مقابل کې وګټله.",
+    "draw": "مساوي! دواړه لوبغاړي په مجموع کې ${total} سره پای ته ورسیدل."
+  }
+}

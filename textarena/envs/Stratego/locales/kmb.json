@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Nge ujila Player {player_id} mu Stratego.\nKutu kwenu kwiya kwakukwata bandera ya kikwaba kenu au kwakukwata mabandi yote ya kikwaba kenu.\nMabandi enu mekwesha kubandikwa kwa nge mu tábua, ikwata bandera enu, mabomba, na mabandi amu ya nkangu zingi.\n\n### Mbadikizo ya Mchezo\n1. **Mbadikizo ya Kusogea:**\n   - Mu wakati wenu, nge mungasogea kibandu kimoja kwa kusogea kimoja kwa mraba ulio karibu (juu, chini, kushoto, au kulia) ambao tayari uko na mabandi enu.\n   - Mfano: Kibandu kinaweza kusogea kutoka A1 hadi B1 au A1 hadi A2 ikiwa B1 na A2 haziko na mabandi ya mchezaji mwenyewe.\n   - Ikiwa kibandu kilichochaguliwa ni Bomba au Bandera, hakiruhusiwi kusogezwa.\n2. **Mapigano:**\n   - Ikiwa nge utasogea kwenye mraba ulio na kibandu cha kikwaba, basi mapigano yatatokea:\n     - Kibandu cha ngazi ya juu kinashinda na kuondoa kibandu cha kikwaba.\n     - Ikiwa ngazi ni sawa, mabandi yote mawili huondolewa kutoka kwenye tábua.\n     - **Matukio Maalum:**\n       - Mabomba hukwata mabandi mengi ya kushambulia isipokuwa Wachimbaji, ambao hufuta Mabomba.\n       - Vipelelezi vinaweza kushinda Marejesho ikiwa Kipelelezi kinashambulia kwanza lakini kushindwa kwa mabandi mengine yote.\n3. **Malengo ya Kimkakati:**\n   - Tambua mabandi ya kikwaba kwa njia ya harakati zao na mapigano.\n   - Linda bandera yako wakati wa kujaribu kukwata bandera ya kikwaba kenu.\n   - Tumia Vichunguzi kwa ujanja ili kupata habari kuhusu mabandi ya kikwaba na kushambulia mabandi dhaifu.\n\n### Jinsi ya Kufanya Hatua:\n1. Bainisha viwianishi vya kibandu unachotaka kusogea na eneo lake la kufika.\n2. Tumia muundo: [A0 B0], ambapo A0 ni nafasi ya awali, na B0 ni eneo la kufika.\n   - Mfano: Ili kusogea kibandu kutoka safu 0, safu 0 hadi safu 1, safu 0, ingiza [A0 B0].\n3. Hakikisha eneo la kufika ni halali kulingana na kanuni za kusogea hapo juu.\n\n### Kumbukumbu Muhimu:\n- Tábua itaonyesha mabandi yako na nafasi zao, kwa mfano MN, MS.\n- Tábua pia itaonyesha nafasi zinazojulikana za mabandi ya kikwaba bila kufichua ngazi zao, kwa mfano ?.\n- Miraba yenye ~ ni maziwa na haiwezi kusogezwa.\n- Kama pendekezo, anza mchezo wako kwa kusogea mabandi yako yaliyo kwenye mstari wa mbele ili kupata habari kuhusu mabandi ya kikwaba. Mchezaji 0 na mchezaji 1 wana mstari wa mbele wa safu D na G mtawalia.\n\nHii ndio hali ya sasa ya tábua:\n"
+  },
+  "board": {
+    "current_board": "Tábua ya Sasa:\n\n{board}\nHatua Zinazopatikana: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Muundo wa hatua si sahihi. Mchezaji {player_id} hakuingiza hatua kwa muundo [A0 B0].",
+    "invalid_coordinates": "O muendexi {player_id} ka soneka o kididi.",
+    "not_own_piece": "Mbiso ya kufanya si ya kimateka. Muiteji {player_id} afwane kusokela kimosi kya mpiteji.",
+    "scout_through_pieces": "Muundo wa hatua si sahihi. Mchezaji {player_id} hawezi kusogea kipelelezi kupitia mabandi mengine.",
+    "scout_diagonal": "O muendexi {player_id} ka tena kutambuisa o disoladi.",
+    "non_scout_multi_square": "O jimbandu joso, ki ji tena ku kala ni ima ia soko.",
+    "move_into_lake": "O ukexilu ua ku jokala ki u tokala, mukonda o muadikime {player_id} ka tena kubokona mu ditadi.",
+    "move_onto_own_piece": "Muundo wa hatua si sahihi. Mchezaji {player_id} hawezi kusogea kwenye kibandu chake mwenyewe.",
+    "move_bomb_or_flag": "O muendexi {player_id} ka tena kutakula jibomba mba jinvela."
+  },
+  "game_action": {
+    "you_moved": "Umesogeza kibandu chako kutoka {source} hadi {dest}.",
+    "opponent_moved": "Mchezaji {player_id} amesogeza kibandu kutoka {source} hadi {dest}.",
+    "you_equal_ranks": "Umesogeza kibandu chako kutoka {source} hadi {dest}. Kibandu cha kushambulia kilikuwa {attacking_rank} na kibandu cha eneo la kufika kilikuwa {target_rank}. Kwa kuwa ngazi ni sawa, mabandi yote mawili yamepotea.",
+    "opponent_equal_ranks": "Mchezaji {player_id} amesogeza kibandu kutoka {source} hadi {dest}. Kibandu cha kushambulia kilikuwa {attacking_rank} na kibandu cha eneo la kufika kilikuwa {target_rank}. Kwa kuwa ngazi ni sawa, mabandi yote mawili yamepotea.",
+    "you_miner_defused": "Umesogeza kibandu chako kutoka {source} hadi {dest}. Kibandu cha kushambulia kilikuwa {attacking_rank} na kibandu cha eneo la kufika kilikuwa {target_rank}. Kwa kuwa wachimbaji wanaweza kufuta mabomba, umeishinda mapigano.",
+    "opponent_miner_defused": "Mchezaji {player_id} amesogeza kibandu kutoka {source} hadi {dest}. Kibandu cha kushambulia kilikuwa {attacking_rank} na kibandu cha eneo la kufika kilikuwa {target_rank}. Kwa kuwa wachimbaji wanaweza kufuta mabomba, umeishindwa mapigano.",
+    "you_bomb_lost": "Umesogeza kibandu chako kutoka {source} hadi {dest}. Kibandu cha kushambulia kilikuwa {attacking_rank} na kibandu cha eneo la kufika kilikuwa {target_rank}. Kwa kuwa kibandu cha kushambulia si kibandu cha wachimbaji, umeishindwa mapigano.",
+    "opponent_bomb_won": "Mchezaji {player_id} amesogeza kibandu kutoka {source} hadi {dest}. Kibandu cha kushambulia kilikuwa {attacking_rank} na kibandu cha eneo la kufika kilikuwa {target_rank}. Kwa kuwa kibandu cha kushambulia si kibandu cha wachimbaji, umeishinda mapigano.",
+    "you_spy_won": "Umesogeza kibandu chako kutoka {source} hadi {dest}. Kibandu cha kushambulia kilikuwa {attacking_rank} na kibandu cha eneo la kufika kilikuwa {target_rank}. Kwa kuwa kibandu cha kushambulia ni kipelelezi na eneo la kufika ni marejesho, umeishinda mapigano.",
+    "opponent_spy_lost": "Mchezaji {player_id} amesogeza kibandu kutoka {source} hadi {dest}. Kibandu cha kushambulia kilikuwa {attacking_rank} na kibandu cha eneo la kufika kilikuwa {target_rank}. Kwa kuwa kibandu cha kushambulia ni kipelelezi na eneo la kufika ni marejesho, umeishindwa mapigano.",
+    "you_higher_won": "Umesogeza kibandu chako kutoka {source} hadi {dest}. Kibandu cha kushambulia kilikuwa {attacking_rank} na kibandu cha eneo la kufika kilikuwa {target_rank}. Kwa kuwa kibandu cha kushambulia kina ngazi ya juu kuliko eneo la kufika, umeishinda mapigano.",
+    "opponent_higher_lost": "Mchezaji {player_id} amesogeza kibandu kutoka {source} hadi {dest}. Kibandu cha kushambulia kilikuwa {attacking_rank} na kibandu cha eneo la kufika kilikuwa {target_rank}. Kwa kuwa kibandu cha kushambulia kina ngazi ya juu kuliko eneo la kufika, umeishindwa mapigano.",
+    "you_lower_lost": "Umesogeza kibandu chako kutoka {source} hadi {dest}. Kibandu cha kushambulia kilikuwa {attacking_rank} na kibandu cha eneo la kufika kilikuwa {target_rank}. Kwa kuwa kibandu cha kushambulia kina ngazi ya chini kuliko eneo la kufika, umeishindwa mapigano.",
+    "opponent_lower_won": "Mchezaji {player_id} amesogeza kibandu kutoka {source} hadi {dest}. Kibandu cha kushambulia kilikuwa {attacking_rank} na kibandu cha eneo la kufika kilikuwa {target_rank}. Kwa kuwa kibandu cha kushambulia kina ngazi ya chini kuliko eneo la kufika, umeishinda mapigano."
+  },
+  "outcome": {
+    "flag_captured": "O muadikime {player_id} ua kuata o mbangala ia nguma iê!",
+    "no_movable_pieces": "Mchezaji {winner_id} anashinda! Mchezaji {loser_id} hana mabandi ya kusogezwa tena."
+  }
+}

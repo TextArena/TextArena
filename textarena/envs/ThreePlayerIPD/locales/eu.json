@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Zu zara Jokalari {player_id} 3 jokalariko Iterated Prisoner's Dilemmaren parte. Partida {num_rounds} itzullduran irauten du.\nItzuliaren egitura:\n• {conv_rounds} doako txat-itzulaldiak\n• 1 erabaki-itzulaldia - bidali token bat etsai bakoitzeko: '[<opp-id> cooperate]' edo '[<opp-id> defect]' (hau da, '[1 defect] [2 cooperate]'; lehenetsia 'lankidetza' da). \nBikotezko ordainsari-matriza (aplikatuta bikote desordenatu bakoitzari):\n  - Biak lankidetzan  ->  {reward}\n  - Biak traizionatzen ->  {punishment}\n  - Zu traizionatzen duzu, haiek lankidetzan -> {temptation}\n  - Zu lankidetzan, haiek traizionatzen -> {sucker}\nJokalariak (jokalariak) puntuazio altuena lortzen du (dute) itzuli guztien amaieran irabazten du (dute)."
+  },
+  "round": {
+    "start": "─── {round}. itzulia hasten –──\tZu mintegi librean aritu zara hurrengo {conv_rounds} itzuldietan.",
+    "chat_finished": "Txat amaitu da {round} txandarako. Bidali zure erabakiak, token bat aurkari bakoitzeko: `[pid cooperate]` edo `[pid defect]`."
+  },
+  "results": {
+    "header": "### {round}. itzulia - Emaitzak:",
+    "pair_line": "{observation} Jokalariak {i} vs. Jokalariak {j} {choice_i} eta {choice_j} aukeratu zituen hurrenez hurren (Jokalariak {i} {gain_i} eskuratu zuen, Jokalariak {j} {gain_j} eskuratu zuen)",
+    "scores_open": "{observation} -> Gaur egungo emaitzak: ",
+    "score_first": "{observation}Jokalari {player_id} ({score})",
+    "score_next": "{observation}; Jokalari {player_id} ({score})",
+    "finalize": "{observation}  Berriz diot, ezkerra."
+  },
+  "outcome": {
+    "final": "Azken puntuak: {scores}.  Taldeak sailkatuta (txarrena→hobena): {groups}"
+  }
+}

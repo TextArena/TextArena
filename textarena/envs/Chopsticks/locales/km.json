@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "អ្នកជា Player {player_id} ក្នុង Chopsticks. នៅលើកំណាត់របស់អ្នក, ជ្រើសរើសមួយនៃ: + Attack: '[attack M O] 'ដែល M = ដៃរបស់អ្នក (0 ឬ 1), O = ដៃគូគូ (0 ឬ 1). - ចំនួនដៃគូរបស់គូប្រឆាំងកើនឡើងដោយដៃរបស់អ្នក; ប្រសិនបើ > = 5, វាក្លាយជា 0. + Split: '[split L R] 'ដើម្បីចែករំលែកចំនួនចង្អុលរបស់អ្នកទៅជា L និង R (L + R = សរុបរបស់អ្នក) ។ ឆ្លើយតបដោយបញ្ជាមួយនេះ។"
+  },
+  "board": {
+    "current_board": "តុបច្ចុប្បន្ន: កីឡាករ 0: {hands_0} កីឡាករ 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "ដៃរបស់អ្នក {my_idx} ស្លាប់ហើយ",
+    "opp_hand_dead": "ដៃគូ {opp_idx} របស់គូប្រកួតបានស្លាប់រួចហើយ",
+    "split_sum": "ការបែងចែកត្រូវមានចំនួនដល់ {total}",
+    "split_no_change": "Split ត្រូវតែផ្លាស់ប្តូរការចែកចាយដៃរបស់អ្នក។",
+    "invalid_command": "ល្បឿនមិនត្រឹមត្រូវ: ប្រើ [attack M O] ឬ [split L R]"
+  },
+  "game_action": {
+    "attack": "P{player_id} វាយប្រហារដៃ P{opp_id} {opp_idx}: វាចេញពី {opp_val} ទៅ {new_val} ។",
+    "split": "P{player_id} បំបែកទៅ [{L}, {R}]។"
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "ដៃគូ ប្រឆាំង ទាំងពីរ ស្លាប់",
+    "draw": "កំណត់បត់បានឈានដល់។"
+  }
+}

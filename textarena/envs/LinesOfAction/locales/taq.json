@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Nekk d Umari {player_id} deg urar n LinsOfAction.\nIsiggen-ik d '{side}', isiggen n umarir nniḍen d '{other}'.\nTawala n uɛiwed: `[b1b3]` (akkat n tazwara - akkat n tazzwara). Aɛiwed amahaluz yetturar s uɣerbaz, neɣ s uɣerbaz nniḍen, neɣ s uɣerbaz nniḍen, s wuṭṭun n isiggen (nniḍen) deg wuṭṭun-ik. Tzemreḍ ad tɛiwdeḍ ɣef isiggen-ik, maca ur tzemreḍ ara ad tɛiwdeḍ ɣef isiggen n umarir nniḍen; ad tɛkkeḍ isiggen-nsen.  Ad irbeḥ wakken meṛṛa isiggen-ik d-qqnen ɣer 8 n imaslaḍen."
+  },
+  "board": {
+    "current_board": "ⵜⴰⵖⵉⵎⵉⵜ: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Asaɣel n wamek s ɛinna d adreɣ e2e4 (zɣ,ɣer tisura).",
+    "no_piece": "Ur izi {side} ɣer {coord}.",
+    "identical": "Tama n yikali d tama n yimɣur yant tukalen.",
+    "not_straight_or_diagonal": "Imɣri maɣ as-d ɣlin neɣ ɣlin s aɣerbaz.",
+    "wrong_distance": "ⵉⵇⵏⴻⵏ ⴰⴷ ⵢⴰⵣⵣⵓⵣ ⴰⴱⴰⵔⴰ ⵉⵣⴷⵉⵢⵏ ⴷ ⵜⴰⴳⴳⴰⵢⵉⵏ ⴳ ⵓⵡⵔⵉⴽ.",
+    "enemy_blocks": "Asalas n imdukal isɣab aɣerbaz.",
+    "destination_own": "Aẓi aneggaru yut asalas nneɣ."
+  },
+  "game_action": {
+    "moved": "Umarir {player_id} iɛiwed {from} -> {to}",
+    "captured_suffix": "Umarir {player_id} iɛiwed {from} -> {to} iɣdel asekkil n umarir nniḍen."
+  },
+  "outcome": {
+    "win": "Ifarɣanen akk d imenzayen.",
+    "draw_no_capture": "60 imikaten war tukal.",
+    "draw_repetition": "Tama n yikali tukalen krad n tikali."
+  }
+}

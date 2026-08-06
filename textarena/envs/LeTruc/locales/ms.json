@@ -1,0 +1,42 @@
+{
+  "_comment": "Fail bahasa Le Truc. JANGAN terjemahkan kunci (sebelah kiri). Terjemahkan nilai sahaja (sebelah kanan). Kekalkan setiap {placeholder} betul-betul seperti asal. Jangan sekali-kali terjemahkan token tindakan ('[play]', '[raise]', '[accept]', '[fold]'), label kad/simbol daun (cth. 3♠, A♥, K♦), label pemain (P0, P1) atau nilai mata berangka.",
+  "_slots": {
+    "{pid}": "A player number, 0 or 1",
+    "{winner}": "The player number who won the trick or hand",
+    "{points}": "A hand point value, e.g. 1, 2 or 4",
+    "{p0}": "Player 0's running match score",
+    "{p1}": "Player 1's running match score",
+    "{cards}": "A space-separated list of the player's card labels, e.g. 'A♦ 3♠ A♥'",
+    "{card}": "A single card label, e.g. '3♠'",
+    "{legal}": "A comma-separated list of the currently legal action tokens"
+  },
+  "player_prompt": {
+    "intro": "Anda sedang bermain Le Truc, permainan pusingan untuk 2 pemain dengan dek 40 kad (pangkat tinggi ke rendah: 3 2 A K Q J 7 6 5 4).\nSetiap tangan anda mendapat 3 kad dan bermain sehingga tiga pusingan satu kad. Pangkat lebih tinggi memenangi pusingan tanpa mengira daun; pangkat yang sama menghasilkan seri ('terbatal'). Menangi tangan dengan mengambil dua pusingan, atau dengan memenangi pusingan pertama apabila yang satu lagi seri; pusingan terbatal dikira untuk sesiapa yang memenangi pusingan pertama, dan jika ketiga-tiganya seri tiada sesiapa mendapat mata.\nSatu tangan bernilai 1 mata. Pada giliran anda, anda boleh '[raise]' (truc) untuk menaikkan pertaruhan: 1->2, kemudian +2 bagi setiap kenaikan seterusnya sehingga 12. Lawan anda mesti '[accept]', '[fold]' atau '[raise]' semula. Pemain yang melipat menyerahkan tangan itu, dan penaik memperoleh pertaruhan sebelum kenaikan tersebut.\nTindakan: '[play <rank>]' (cth. '[play 3]'), '[raise]', '[accept]', '[fold]'. Yang pertama mencapai 12 mata memenangi perlawanan."
+  },
+  "board": {
+    "new_hand": "### Tangan baharu bernilai {points} mata\nKad anda: {cards}",
+    "valid_actions": "Sah sekarang: {legal}."
+  },
+  "invalid_move": {
+    "unrecognised": "Tindakan tidak dikenali.",
+    "already_raised": "Sudah dinaikkan.",
+    "no_raise_to_accept": "Tiada kenaikan untuk diterima.",
+    "cannot_fold": "Tidak boleh lipat sekarang.",
+    "wrong_rank": "Anda tidak memegang pangkat itu (simbol daun diabaikan dalam input).",
+    "must_respond": "Ada kenaikan yang belum dijawab - jawab dengan '[accept]', '[fold]' atau '[raise]' semula sebelum bermain kad.",
+    "max_stake": "Tangan sudah bernilai maksimum (12); anda tidak boleh menaikkan lagi."
+  },
+  "action": {
+    "raise": "P{pid} melaung truc - tangan kini bernilai {points} mata. Lawan mesti '[accept]', '[fold]' atau '[raise]' semula.",
+    "accept": "P{pid} menerima - tangan bernilai {points} mata.",
+    "lead": "P{pid} membuka dengan {card}.",
+    "play": "P{pid} bermain {card}. Pusingan kepada P{winner}.",
+    "spoilt": "P{pid} bermain {card}. Pangkat seri - pusingan terbatal."
+  },
+  "outcome": {
+    "folded": "Lawan melipat.",
+    "hand_won": "Tangan dimenangi oleh P{winner} (+{points} mata). Skor - P0: {p0}, P1: {p1}.",
+    "void": "Ketiga-tiga pusingan terbatal - tiada mata untuk tangan ini. Skor - P0: {p0}, P1: {p1}.",
+    "reached_twelve": "Mencapai 12 mata."
+  }
+}

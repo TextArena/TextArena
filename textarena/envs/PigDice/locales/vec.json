@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Tu sei Zugador {player_id} che zoga a un zogo de dadi Pig.\n\nRegole:\n- Sui tu turni, tu poi '[roll]' o '[hold]'\n- Tiro un 2-6: Agiunge al tuo totale de turno\n- Tiro un 1: Perdi el totale de turno e finisci el turno\n- Ferma: Agiunge el totale de turno al tuo punteggio e finisci el turno\n- El primo a {winning_score} punti vince\n\nQuando che el turno el xe tuo, tu verà i punti e el totale atuali.\nRispondi con '[roll]' par tirar el dado o '[hold]' par incassar i tu punti."
+  },
+  "invalid_move": {
+    "invalid_action": "Formato de azion no valido. Usa '[roll]' o '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Zugador {player_id} el ga perso, perdendo {turn_total} punti!",
+    "player_hold": "Giugador {player_id} tien e mete via {turn_total} punti."
+  },
+  "board": {
+    "player": "Giugador 0: '{score_0}'; Giugador 1: '{score_1}'",
+    "current_total_scores": "Punti totali atuali: {scores}\nEl tuo totale di turno atuale è {turn_total}.",
+    "roll_history": "{observation}\nLa tua storia de tiri per questo turno: {roll_history}",
+    "first_roll": "{observation} Questo xe el primo tiro del tuo turno.",
+    "available_actions": "{observation}\nAzzioni disponibili: '[roll]' o '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Zugador {winner_id} el ga vinto avendo un punteggio pì alto al limite de turno ({scores})",
+    "winner_by_score": "Zugador {winner_id} el ga vinto raggiungendo el punteggio bersaglio de {winning_score}!",
+    "draw": "El limite de turno el xe stà rivà e tuti i zugadori ga la stesa puntega: {scores}"
+  }
+}

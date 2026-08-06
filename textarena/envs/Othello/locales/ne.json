@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "तपाईं Player {player_id} हुनुहुन्छ जो {colour} ({piece}) खेल्दैछन् ओथेल्लोको खेलमा。\nतपाईंको लक्ष्य खेल समाप्त हुनेसम्म बोर्डमा तपाईंको रङ्गका धेरै टुक्रा हुनु हो।\nतपाईंको पालोमा, तपाईंको विरोधीहरूका एक वा एकभन्दा धेरै टुक्राहरू-कुनai दिशा (क्षैतिज, उल्लम्ब, वा तिर्यक)-तपाईंको नभएको टुक्रा र तपाईंको अर्को अस्तित्वमा टुक्राको बीचमा छोएर राख्नुहोस्। सम्पूर्ण फ्लाङ्क विरोधी टुक्राहरू तपाईंको रङ्गमा उल्टिने छन्。\n'[row, col]' को स्वरूपमा तपाईंको चाल दिनुहोस्।"
+  },
+  "board": {
+    "game_board": "खेल बोर्ड: {board}",
+    "valid_moves": "{observation} मान्य चालहरू: {moves}",
+    "no_valid_moves_reset": "{observation} कुनै मान्य चाल छैन - तपाईंले छोड्नु पर्ने हुन सक्छ।",
+    "no_valid_moves_step": "{observation} कुनै मान्य चालहरू छैनन्  तपाईंले छोड्नु पर्ने हुन सक्छ।",
+    "scores_reset": "{observation} क्यारेन स्कोर - कालो: {black_count}, सेतो: {white_count} ",
+    "scores_step": "{observation} स्कोर - कालो: {black_count}, सेतो: {white_count} "
+  },
+  "invalid_move": {
+    "wrong_format": "चाल [row, col] को रूपमा हुनुपर्दछ।",
+    "illegal": "अवैध चालहरू वैध चालहरू: {valid}"
+  },
+  "game_action": {
+    "skipped": "खेलाडी {pid} ले आफ्नो पालो छोड्नुपर्यो",
+    "played": "खेलाडी {pid} ({piece}) ले [{r}, {c}] खेलेर {flipped} टुक्रा(हरू) फ्लिप गर्यो"
+  },
+  "game_message": {
+    "must_skip": "Player {pid} ({piece}) को कुनै वैध चाल नभएको र स्किप गर्नु पर्ने छ."
+  },
+  "outcome": {
+    "black_wins": "कालोले जित्छ {black_count}-{white_count}।",
+    "white_wins": "सेतोले जित्छ {white_count}-{black_count}।",
+    "draw": "{black_count}-{white_count} रेखाङ्कित गर्नुहोस्।"
+  }
+}

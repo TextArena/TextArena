@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Agay-ayam ka iti Klondike Solitaire. Ti gannuat mo ket mapan amin a cards iti foundation piles.\n\nDagiti Alagaden ti Game:\n- Dagiti foundation piles (F1-F4): Builta ti ngato manipud Ace agingga King iti suit\n- Dagiti tableau piles (T1-T7): Builta ti baba a simsuot dagiti maris (nalabbaga iti nangisit, nangisit iti nalabbaga)\n- Stock: Draw cards iti waste pile\n- Waste (W): Top card a magagam iti panagay-ayam\n\nDagiti Komando:\n- 'draw' - Draw cards manipud stock iti waste\n- 'move <source> <destination> [count]' - Mapan cards iti nagbaetan dagiti piles\n  Dagiti Panangipatarus: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Ti count ket mabalin a 'all', a mangtay-ak a mapan amin a face-up cards.\n- 'forfeit' - Patingga iti game itan a lok-in ti agdama a score mo\n- Dagiti nagan ti pile: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nMabalin a mapan dagiti adu a aksion iti maysa a turn babaen ti panagkomi dagiti komma:\n  Panangipatarus: 'draw, move W T1, move T2 F1'\n\nDagiti Kings laeng ti mabalin a mapan iti awan a tableau piles.\nDagiti aksion ket mapan iti urnos - no maysa ket agfallo, dagiti nabati a aksion ket maliklikan.\nUsaren 'forfeit' no namnamaen mo a ti game ket imposible a mapanen."
+  },
+  "format_error": {
+    "no_brackets": "Saan a mabalin nga aramiden ti format. Ti aramid ket nasken iti parentehe.",
+    "no_closing_bracket": "Saan a mabalin nga aramiden ti format. Awan dagiti agngudo a kurtina ']'",
+    "empty_command": "Awan ti bilin. I-type 'draw' wenno 'move <source><destination> [count]'",
+    "empty_action": "Awan ti aksionna",
+    "move_needs_args": "Ti bilin ti move ket agkasapulan iti taudan ken pagturongan. Panagusar: 'move <source> <destination> [count]'",
+    "count_positive": "Ti count nasken a positibo wenno 'all'",
+    "count_invalid": "Saan a nasayaat a count. Usaren numero wenno 'all'",
+    "unknown_command": "Saannot a komento '{cmd}'. Usaren 'draw', 'move <source> <destination> [count]', wenno 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Naaramid {n} nga aramid sakbay ti pannakapaay.",
+    "failed": "Action {n} naballigi: {msg}"
+  },
+  "move_result": {
+    "drew": "Naala ti kard manipud iti stock agingga kadagiti basura.",
+    "cannot_draw": "Saan a makaala, awanen ti suplay ken basura.",
+    "invalid_pile": "Saan a mabalin nga usaren ti nagan iti pila. Usaren ti W, F1-F4, wenno T1-T7",
+    "foundation_one_card": "Mabalin a mangiyalis laeng ti 1 a kard iti pundasion",
+    "waste_to_foundation_ok": "Naiyalis ti kard manipud iti basura a naikabil idiay pundasion F{dst}",
+    "waste_to_foundation_bad": "Saan a maiyalis ti karga nga awanen iti dayta a pundasion",
+    "tableau_to_foundation_ok": "Inlugan ti card manipud tableau T{src} iti foundation F{dst}",
+    "tableau_to_foundation_bad": "Saan a maiyalis ti tabla kard iti dayta a pundasion nga urnong",
+    "foundation_to_foundation": "Saan a mabalin nga agakar manipud iti pundasion agingga ti pundasion",
+    "waste_to_tableau_one_card": "Mabalin a mangiyalis laeng ti 1 a kard manipud iti basura idiay tabla",
+    "waste_to_tableau_ok": "Naiyalis ti kard manipud iti basura idiay tabla T{dst}",
+    "waste_to_tableau_bad": "Saan a makaikabil ti karga iti basura idiay tabla nga urnong",
+    "no_face_up": "Awan ti agparang a kard nga iyalis.",
+    "tableau_to_tableau_ok": "Inlugan ti {count} card(s) manipud tableau T{src} iti T{dst}",
+    "tableau_to_tableau_bad": "Saannot a lumiket ti {count} card(s) manipud T{src} iti T{dst}",
+    "foundation_to_tableau_one_card": "Mabalin a mangiyalis laeng ti 1 a kard manipud iti pundasion nga agturong idiay tabla",
+    "foundation_empty": "Sentro ti F{src} ket awan linaonna.",
+    "foundation_to_tableau_ok": "Inlugan ti card manipud foundation F{src} iti tableau T{dst}",
+    "foundation_to_tableau_bad": "Saan a mabalin nga ikabil ti card iti base idiay tabla T{dst}",
+    "to_waste_or_stock": "Saan a maipan iti basura wenno stock"
+  },
+  "outcome": {
+    "forfeit": "Naikkat ti ay-ayam. Panagbalbaliw: {score} dagiti kard iti pundasion.",
+    "won": "Kablaawak, nangabakkayo iti Klondike Solitaire!",
+    "turn_limit": "Nakapintas ti game! Nakala ti umuna ti maksimum ti {max_turns} turns. Puntos: {score} cards iti foundations."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stock: {stock} dagiti kard",
+    "waste": "Dagiti basura (W): {waste}",
+    "foundations_header": "Dagiti pundasion:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "أنت لاعب {player_id} في لعبة LinesOfAction.\nقطعك هي '{side}'، قطع الخصم هي '{other}'.\nتنسيق الحركة: `[b1b3]` (من الإحداثية إلى الإحداثية). الحركة القانونية تسافر أفقيًا أو رأسيًا أو قطريًا عددًا من المربعات يساوي إجمالي القطع (أي لون) في تلك الخط. يمكنك القفز فوق قطعك الخاصة، ولكن ليس قطع الخصم؛ الهبوط على الخصم يلتقطه. ربح عندما تكون جميع قطعك متصلة ب 8 جيران."
+  },
+  "board": {
+    "current_board": "مجلس: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "الشكل لازم يكون e2e4 (من،إلى الإحداثيات).",
+    "no_piece": "لا قطعة {side} على {coord}.",
+    "identical": "المصدر والمقصد متطابقين.",
+    "not_straight_or_diagonal": "الحركة لازم تكون مستقيمة او قطرية.",
+    "wrong_distance": "لازم يتحرك مسافة متساوية للقطع في صف.",
+    "enemy_blocks": "قطعة العدو بتعترق الطريق.",
+    "destination_own": "وجهة مأخوذة من قطعة خاصة."
+  },
+  "game_action": {
+    "moved": "اللاعب {player_id} نقل {from} -> {to}",
+    "captured_suffix": "اللاعب {player_id} نقل {from} -> {to} وأسر عدوًا."
+  },
+  "outcome": {
+    "win": "كل القطع متصلة.",
+    "draw_no_capture": "60 حركة من غير التقاط.",
+    "draw_repetition": "الموقف تكرر ثلاث مرات."
+  }
+}

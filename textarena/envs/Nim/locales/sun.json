@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Anjeun nyaéta Pamaén {player_id} dina Nim.\nTujuan anjeun nyaéta ngambil objék nu tinggal.\nDina unggal giliran, pilih sahiji pile jeung ngalikeun sahiji atawa leuwih objék tina éta.\nGunnakan format '[pile quantity]', di mana pile nyaéta indeks pile jeung quantity nyaéta jumlah objék nu bakal dibéréngkeun.\nContona, '[0 3]' ngalikeun 3 objék tina pile 0."
+  },
+  "state": {
+    "current_pile": "Ayeuna tumpukan: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Teu aya format mindahkeun nu valid. Paké \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Pamaén {player_id}, Aksi teu sah. Kolom {col} kaluar wates.",
+    "out_of_range": "Indéks tumpukan {pile_index} teu aya dina kisaran.",
+    "non_positive": "Kudu ngaleupaskeun sahanteuna 1 objék.",
+    "exceeds_pile": "Teu bisa ngalikeun {quantity} tina pile {pile_index} (ngan {pile_count} nu tinggal)."
+  },
+  "observation": {
+    "removed_from_piles": "Pamaen {player_id} maén [{pile_index} {quantity}], ngangkat {quantity} objék ti tumpukan {pile_index}."
+  },
+  "outcome": {
+    "win": "Pamaén {player_id} nyokot objék pamungkas ((s)!"
+  }
+}

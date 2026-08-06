@@ -1,0 +1,54 @@
+{
+  "_comment": "Deutsche Lokalisierung für LetterAuction. Schlüssel (links) sind fest; übersetze nur die Werte (rechts). Behalte jeden {placeholder} unverändert bei. Spielernummern, Buchstaben-Token ({letter}), Münz-/Zahlenwerte und die Klammerbeispiele ([bid 2], [pass], [dog], [Game]) sind neutrale Spielsyntax und müssen unverändert bleiben.",
+  "_slots": {
+    "{player_id}": "Eine Spielernummer (0 oder 1)",
+    "{opponent_id}": "Die Nummer des anderen Spielers (0 oder 1)",
+    "{current_player}": "Der Spieler, der als Nächstes an der Reihe ist (0 oder 1)",
+    "{coins}": "Verbleibende Münzen eines Spielers (Ganzzahl)",
+    "{letters}": "Die gesammelten Buchstaben eines Spielers (eine Liste, z. B. [] oder ['A', 'B'])",
+    "{letter}": "Der einzelne versteigerte Buchstabe (ein Spiel-Token, nicht übersetzen)",
+    "{bid_amount}": "Anzahl gebotener Münzen (Ganzzahl)",
+    "{current_bid}": "Das aktuell höchste zu überbietende Gebot (Ganzzahl)",
+    "{action}": "Die vom Spieler eingereichte rohe Aktionszeichenkette",
+    "{word}": "Ein von einem Spieler eingereichtes Wort (ein Spiel-Token, nicht übersetzen)",
+    "{word_value}": "Der Punktwert eines eingereichten Wortes (Ganzzahl)",
+    "{score}": "Die Endpunktzahl eines Spielers (Ganzzahl)",
+    "{cont}": "Eine neutrale Fortsetzungsnachricht (bereits lokalisiert; nicht übersetzen)"
+  },
+
+  "prompt": {
+    "intro": "Du bist Spieler {player_id}. Du befindest dich gerade im Spiel Letter Auction.\nZiel des Spiels ist es, strategisch auf Buchstaben zu bieten, um das wertvollste Wort zu bilden. So funktioniert das Spiel.\nDu musst auf die Anweisungen des Spielleiters hören, um das Spiel zu spielen.\nDas Spiel besteht aus einer Reihe von Runden. In jeder Runde wird ein Buchstabe versteigert.\nDu kannst mit deinen Münzen auf den Buchstaben bieten. Der Spieler mit dem höchsten Gebot gewinnt den Buchstaben.\nDer Buchstabe wird deiner Sammlung hinzugefügt, und die gebotenen Münzen werden von deinem Gesamtbetrag abgezogen.\nDieses Bieten auf Buchstaben wiederholt sich, bis alle Buchstaben versteigert wurden. Für das Sparen von Münzen wirst du nicht belohnt.\nNachdem alle Buchstaben versteigert wurden, verwendest du die Buchstaben, um aus den gewonnenen Buchstaben das wertvollste Wort zu bilden.\nDer Spieler mit dem wertvollsten Wort gewinnt das Spiel.\nWenn du bieten möchtest, gib deinen Gebotsbetrag in eckigen Klammern an, z. B. [bid 2] oder [bid 10].\nWenn du nicht bieten möchtest, gib [pass] ein.\nFür die Einreichung des wertvollsten Wortes wirst du am Ende des Spiels aufgefordert, es in eckigen Klammern einzureichen, z. B. [dog].\nHier sind deine Startinformationen:\nDeine aktuellen Münzen: {coins}\nDeine aktuellen Buchstaben: {letters}\n\n[Game] Spieler 0 beginnt. Der erste Buchstabe für das Gebot: {letter}.\nDas Startgebot beträgt {bid_amount} Münze. Du kannst eine beliebige Anzahl an Münzen bieten oder nicht bieten.\n"
+  },
+
+  "invalid": {
+    "bad_bid_format": "Ungültige Aktion: {action}. Bitte gib eine gültige Aktion ein: '[bid <amount>]' oder '[pass]'.",
+    "bad_word_format": "Ungültige Aktion: {action}. Bitte gib eine gültige Aktion ein: '[<word>]'.",
+    "not_enough_coins": "Ungültiges Gebot: {bid_amount}. Du hast nicht genug Münzen.",
+    "bid_too_low": "Ungültiges Gebot: {bid_amount}. Du musst mehr als das aktuelle Gebot von {current_bid} bieten.",
+    "not_a_word": "Ungültiges Wort: {word}. Bitte gib ein gültiges deutsches Wort ein.",
+    "missing_letter": "Ungültiges Wort: {word}. Du besitzt den Buchstaben '{letter}' nicht."
+  },
+
+  "turn": {
+    "bid_more": " Spieler {current_player}, möchtest du auf den Buchstaben '{letter}' mehr als {bid_amount} bieten?",
+    "start_bid": " Spieler {current_player}, möchtest du das Gebot auf den Buchstaben '{letter}' für {bid_amount} beginnen?",
+    "auction_over": "Die Auktion ist vorbei. Nun verwenden die Spieler die gewonnenen Buchstaben, um aus den gewonnenen Buchstaben das wertvollste Wort zu bilden. Der Spieler mit dem wertvollsten Wort gewinnt das Spiel. Um das Wort einzureichen, gib es in eckigen Klammern ein, z. B. [dog]."
+  },
+
+  "auction": {
+    "pass": "Spieler {player_id} passt beim Buchstaben '{letter}'.{cont}",
+    "pass_opp_wins": "Spieler {player_id} passt beim Buchstaben '{letter}'. Spieler {opponent_id} erhält '{letter}' für {bid_amount}.{cont}",
+    "pass_both": "Spieler {player_id} passt beim Buchstaben '{letter}'. Spieler {opponent_id} passt ebenfalls beim Buchstaben '{letter}'. Also erhält niemand den Buchstaben.{cont}",
+    "bid": "Spieler {player_id} bietet {bid_amount} auf den Buchstaben '{letter}'.{cont}",
+    "bid_opp_pass": "Spieler {player_id} bietet {bid_amount} auf den Buchstaben '{letter}'. Da Spieler {opponent_id} beim Buchstaben '{letter}' passt, erhält Spieler {player_id} ihn für {bid_amount}.{cont}"
+  },
+
+  "word": {
+    "chosen": "Spieler {player_id} wählt das Wort '{word}' mit einem Wert von {word_value}."
+  },
+
+  "outcome": {
+    "win": "Spieler {player_id} gewinnt mit einer Punktzahl von {score}",
+    "draw": "Es ist ein Unentschieden!"
+  }
+}

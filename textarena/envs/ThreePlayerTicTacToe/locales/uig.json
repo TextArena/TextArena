@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "سىز ۈچ ئويناشچىلىق تىك تاك توئۇدە {player_id}-ئويناشچىسىز.\nسىزning بەلگىڭىز '{symbol}'.\nسىز بەلگىڭىزنى بەشكە بەش تەختە ئۈستىگە قويۇپ، تۆت بەلگىنىڭ زېنجىرىنى شەكىللەندۈرۈش ئارقىلىق يېڭىڭ.\nبۇ زېنجىر گىرەلى، تىك ۋە دىئاگونال بولۇشى مۈمكىن.\n'[4]' فۇرماتى بويىچە 4-نومۇرلۇق خەلنى بەلگىلەش ئۈچۈن قەدەم بەرىڭ."
+  },
+  "board": {
+    "current_board": "ھازىرقى تەختە:\n\n{board}\n\nئەمەلىي قىلىشقا بولىدىغان قەدەملەر: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "خاتا يۆتكىلىش شەكلى. ھۈجەيرە 0-{max_cell} بولسا \"[cell]\" نى ئىشلىتىڭ.",
+    "out_of_range": "توغرا ئەمەس، خاتا خەل يېزىلغان: {cell}. 0 ۋە {max_cell} نىڭ ئارىلىقىدا بولۇشى كېرەك.",
+    "already_occupied": "ھۈجەيرە {cell} ئاللىقاچان ئىشلەندى.",
+    "made_invalid": "ئويۇنچى {player_id} خاتا يۈرۈش قىلدى."
+  },
+  "game_action": {
+    "placed": "ئويناشچى {player_id} ئۆزىنىڭ بەلگىسى ({symbol}) نى ({row}, {col}) مайдاندا قويىدۇ."
+  },
+  "outcome": {
+    "win": "{player_id} نۇمۇرلۇق ئويۇنچى ({symbol}) غەلىبە قىلدى!",
+    "draw": "ئۇيۇن تەڭلىشىپ قالدى!"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Siti Giucaturi {player_id} 'n nu jocu di {max_rounds} turni di Poker Kuhn.\nReguli dû Jocu:\n- Lu Poker Kuhn usa nu mazzu di 3 carti cu J, Q, K (J è la carta cchiù vascia, K è la carta cchiù àuta)\n- Ogni giucaturi metti {ante} fichi e arricivi 1 carta ogni turnu (nota ca li carti vennu distribbuiti senza rimpiazzu, dunca nun pò aviri la stissa carta dû tò avvirsariu).\n- Lu jocu cuntinua pi {max_rounds} turni\n- Lu giucaturi ca havi cchiù fichi doppu tutti li turni vinci\nReguli di l'Azioni:\n- '[check]': Passa senza puntari (sulu si nun c'è nudda puntata ntâ tavula)\n- '[bet]': Aggiungi 1 fichi ô piattu (sulu si nun c'è nudda puntata ntâ tavula)\n- '[call]': Pari la puntata di l'avvirsariu agghiuncennu 1 fichi ô piattu\n- '[fold]': Arrennuni la to carta e lassa vinciri l'avvirsariu"
+  },
+  "init_round": {
+    "round_start": "### Accumincia lu turnu {current_round} di {max_rounds} turni. La to carta è: '{player_card}'",
+    "available_actions": "Li tò azzioni dispunìbbili sunnu: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'azioni devi essiri [Check], [Bet], [Call], o [Fold].",
+    "not_legal": "L'azzioni havi a èssiri {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Giucaturi {player_id}, mannau lu muvimentu: '[{move}]'.",
+    "valid_actions": "Li tò azzioni dispunìbbili sunnu: {legal_actions}.",
+    "round_summary": "{reason} Puntuazzioni attuali: Giucaturi 0: '{player_0_chips}'; Giucaturi 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: La carta {winner_card} dû Giucaturi {winner} supera la carta {loser_card} dû Giucaturi {loser}. Lu Giucaturi {winner} vinci lu piattu di {pot_value} fichi."
+  },
+  "outcome": {
+    "draw": "A la fini di {max_rounds} giri, tutti dui jucatura avìanu lu stissu nùmmuru di fiches.",
+    "round_win": "Lu jucaturi {player_id} s'è ritiratu.",
+    "winner_player0": "Lu jucaturi 0 vinciu avennu cchiù fichi a la fini di tutti li turni {max_rounds}.",
+    "winner_player1": "Lu jucaturi 1 vincìu avennu cchiù fichi a la fini di tutti li turni {max_rounds}."
+  }
+}

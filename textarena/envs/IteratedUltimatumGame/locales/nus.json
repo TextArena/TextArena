@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Yɛ̈ɛ̈ŋ Nɔ̈ɔ̈ŋ {player_id}, kɛ̈ɛ̈ŋ {num_rounds} kɛ̈ɛ̈ŋ Iterated Ultimatum Game.\nYɛ̈ɛ̈ŋ $ {pool} kɛ̈ɛ̈ŋ kɛ̈ɛ̈ŋ kɛ̈ɛ̈ŋ kɛ̈ɛ̈ŋ kɛ̈ɛ̈ŋ Nɔ̈ɔ̈ŋ {other_id}.\n\nNɔ̈ɔ̈ŋ kɛ̈ɛ̈ŋ:\n  - Kɔɛɛr kɔ̈ɔ̈ kɛ̈ɛ̈ŋ: [Offer: $X] (0 <= X <= pool)\n  - Kɔɛɛr kɔ̈ɔ̈ kɛ̈ɛ̈ŋ → Yɛ̈ɛ̈ŋ $(pool - X), Nɔ̈ɔ̈ŋ kɛ̈ɛ̈ŋ kɛ̈ɛ̈ŋ $X\n  - Kɔɛɛr kɔ̈ɔ̈ kɛ̈ɛ̈ŋ → Kɛ̈ɛ̈ŋ kɛ̈ɛ̈ŋ kɛ̈ɛ̈ŋ $0\n  - Kɔɛɛr kɔ̈ɔ̈: [Offer: $3]  kɔ̈ɔ̈  'Aɣɔɔn kɛ̈ɛ̈ŋ kɛ̈ɛ̈ŋ. [Offer: $5]'\n\nNɔ̈ɔ̈ŋ kɛ̈ɛ̈ŋ kɛ̈ɛ̈ŋ:\n  - Kɔɛɛr kɔ̈ɔ̈ kɛ̈ɛ̈ŋ kɛ̈ɛ̈ŋ [Accept] kɔ̈ɔ̈ [Reject]\n  - Kɔɛɛr kɔ̈ɔ̈: 'Kɛ̈ɛ̈ŋ kɛ̈ɛ̈ŋ kɛ̈ɛ̈ŋ. [Accept]'\n            'Kɛ̈ɛ̈ŋ kɛ̈ɛ̈ŋ kɛ̈ɛ̈ŋ. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Duɔ̱ɔ̱m {round_number} kɛ cit! ---\nRaani {proposer_id} ee raani ci ɛŋɔ, Raani {responder_id} ee raani ci wɛɛr.",
+    "offer": "Weŋ {round_number}: Thiaan {proposer_id} ee yen ee cɔl ${offer} kɛn thiaan {responder_id} (kɛn ${keep}).",
+    "accepted": "Thiaan {responder_id} aci luɔi! Weŋ {round_number} kɛn thiaan {proposer_id} +${proposer_gain}, thiaan {responder_id} +${responder_gain}. Thiaan kuɛr: Thiaan 0: ${total_0}, Thiaan 1: ${total_1}.",
+    "rejected": "Thiaan {responder_id} aci kuɛr tiŋ! Weŋ {round_number} kɛn thiaan kuɛr +$0. Thiaan kuɛr: Thiaan 0: ${total_0}, Thiaan 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Kä ram min thöp duɔ̱ɔ̱r bɛ yiöw ti ba ka̱m raar la̱t kɛ ta̱a̱ in ca gɔ̱r [Offer: $X].",
+    "bad_integer": "Mi̱ ci̱ pek in ca thöp ɛ mi̱ lot rɔ kɛ jɛ.",
+    "out_of_range": "Ɛn yuɔ̱p yiöwni bɛ tä kam $0 kɛnɛ ${pool}.",
+    "no_current_offer": "Thiɛlɛ mi̱ ca thöp kɛ ɣöö ba loc thi̱n.",
+    "accept_or_reject": "Nɔ̈ɔ̈ŋ kɛ̈ɛ̈ŋ kɔɛɛr kɔ̈ɔ̈ [Accept] kɔ̈ɔ̈ [Reject] kɛ̈ɛ̈ŋ."
+  },
+  "outcome": {
+    "win": "Thiaan {winner} aci luɔi kɛn ${winner_total} kɛn thiaan {loser} ee ${loser_total}.",
+    "draw": "Kɛn ŋar ɛ rɛw diaal cukɛ thuɔ̱k kɛ ${total} matdiɛn."
+  }
+}

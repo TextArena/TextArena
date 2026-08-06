@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "អ្នកជាអ្នកលេង {player_id} នៅក្នុង Nim. គោលបំណងរបស់អ្នកគឺដើម្បីយកវត្ថុចុងក្រោយដែលនៅសល់។ នៅគ្រប់ជំហាន, ជ្រើសរើសត្រឹមតែគំនរមួយនិងលុបវត្ថុមួយឬច្រើនពីវា។ ប្រើប្រាស់ទម្រង់ '[pile quantity]', ដែលគំនរគឺជាតារាងគំនរនិងចំនួនគឺចំនួនវត្ថុដែលត្រូវលុបចោល។ ឧទាហរណ៍ '[0 3]' លុបវត្ថុ 3 ពីគំនរ 0 ។"
+  },
+  "state": {
+    "current_pile": "បច្ចុប្បន្ន Pile: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "មិនមានទម្រង់ចលនាត្រឹមត្រូវត្រូវបានរកឃើញ។ ប្រើ '[pile quantity]'។",
+    "correct_format_wrong_fields": "កីឡាករ {player_id}, សកម្មភាពមិនត្រឹមត្រូវ ស្លាក {col} ស្ថិតនៅក្រៅព្រំដែន។",
+    "out_of_range": "អណ្តាតលេខ {pile_index} មិនស្ថិតក្នុងដែនកំណត់។",
+    "non_positive": "ត្រូវយកចេញយ៉ាងហោចណាស់វត្ថុមួយ។",
+    "exceeds_pile": "មិនអាចដក {quantity} ចេញពីគំនរ {pile_index} (មានតែ {pile_count} នៅសល់) ។"
+  },
+  "observation": {
+    "removed_from_piles": "អ្នកលេង {player_id} លេង [{pile_index} {quantity}] ដក {quantity} វត្ថុ(ស) ពីជួរ {pile_index}។"
+  },
+  "outcome": {
+    "win": "កីឡាករ {player_id} បាន យក វត្ថុ ចុងក្រោយ (((s)!"
+  }
+}

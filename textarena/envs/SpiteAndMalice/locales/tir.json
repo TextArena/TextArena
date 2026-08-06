@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "አንተ ተጫዋች {player_id} አንደ ሁለት ተጫዋቾች በስፓይት እና ማሊስ ጌም አንደሚጫወት ነው። አንተ ግብ አንደ አንደኛ ከአንተ ተከፈለ ከለላ እንደሚያስወግድ ነው።\n\n### ጌም አጠቃላይ እይታ፡\n- አንደ አንደኛ ከአንተ ተከፈለ ከለላ እንደሚያስወግድ ነው።\n- አንተ ካርዶች ከሦስት ምንጮች ማጫወት ይችላለህ፡\n  1. አንተ **እጅ** (አንተ እያንዳንዱ ጊዜ እስከ 5 ካርዶች እንደሚጀምር ነው)።\n  2. **አንተ ተከፈለ ከለላ ከላይ ካርድ**።\n  3. **አንተ ከለላ ከላይ ካርድ ከምንም ከለላ ከላይ**።\n\n### ጌም ህጎች፡\n- አንተ ካርድ ከማእከላይ ከለላ እንደሚጫወት ነው እያንዳንዱ ካርድ ከማእከላይ ከለላ ከላይ ካርድ **አንድ ረንክ ከፍ እንደሚሆን** (ማእከላይ ከለላ ከአስ እንደሚጀምር እና እስከ ንግስት ድረስ እንደሚሄድ ነው፤ ንግስት አስተዋይ ናቸው - እንደሚጫወት ነው ከማንኛውም ካርድ ላይ ንግስት እንደሚጫወት ነው ነገር ግን ረንክ ተከታታይ እንደማይቀይር ነው። እንደሚሆን ነው ንግስት ከ4 በኋላ እንደሚጫወት ነው እንደሚሆን ነው ንግስት ረንክ 5 እንደሚሆን ነው እና እንደሚቀጥል ነው 6 ካርድ እንደሚሆን ነው)።\n- አንተ ካርዶች እንደማይጫወት ነው እንደሚሆን ነው አንተ **ካርድ እንደሚጥል** ነው ከአንተ ከለላ ከላይ እንደሚጥል ነው አንተ ጊዜ እንደሚያልቅ ነው።\n- አንደ ማእከላይ ከለላ ንግስት እንደሚደርስ ነው እንደሚሆን ነው እንደሚያስወግድ ነው።\n- ረንክ ተከታታይ እንደሚሆን ነው፡ A=1, 2=2, ..., 9=9, J=10, Q=11, K አስተዋይ።\n\n### እርምጃዎች፡\n1. **አስተዋይ**: አንተ ጊዜ እንደሚጀምር ነው ካርዶች እንደሚያስወግድ ነው እስከ 5 ካርዶች እንደሚያስወግድ ነው። **[draw]** እንደሚጀምር ነው።\n2. **ካርድ ጫወት**: ካርድ እንደሚጫወት ነው ካርድ እና ማእከላይ ከለላ እንደሚጫወት ነው እንደሚሆን ነው **[play A♠ 0]** (እንደሚሆን ነው 'A♠' ካርድ እና '0' ማእከላይ ከለላ አድራሻ ነው)።\n3. **ካርድ ጥል**: አንተ ካርዶች እንደማይጫወት ነው እንደሚሆን ነው ካርድ እንደሚጥል ነው ከአንተ እጅ እንደሚጥል ነው ከከለላ ከላይ እንደሚጥል ነው አንተ ጊዜ እንደሚያልቅ ነው። **[discard A♠ 1]** እንደሚጥል ነው (እንደሚሆን ነው 'A♠' ካርድ እና '1' ከለላ አድራሻ ነው)። እንደሚሆን ነው አንተ ካርድ ከከለላ ከላይ እንደማይጥል ነው። አንተ ካርዶች ከአንተ እጅ እንደሚጥል ነው።\n\n"
+  },
+  "board": {
+    "current_board": "አሁን ቦርድ፡\n\n{board}\nአሁን እርምጃዎች፡ {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- ማእከላይ ምሰሶታት -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- ተጫዋች {player_id} እይታ ---\n",
+    "payoff": "{observation}ከለላ ከላይ ካርድ: {top_card}, ከለላ ርዝመት: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}ከለላ: {discard}\n",
+    "empty": "ባዶ እዩ"
+  },
+  "game_message": {
+    "no_cards_left": "ካብ'ዚ ዝስዕብ ምንጭታት ካርድ ክትጻወት ከም እትኽእል ዘክር፡ 1. ኢድካ 2. ናይ ዓስቢ ምሰሶኻ ላዕለዋይ ካርዲ 3. ናይ ዝኾነ ይኹን መወገድቲ ምሰሶም ላዕላይ ካርዲ። "
+  },
+  "invalid_move": {
+    "wrong_format": "ዘይቅኑዕ ናይ ምንቅስቓስ ቅርጺ። ተጻዋታይ {player_id} ብክፍሊ ሓጹር ቅቡል ዝኾነ ስጉምቲ ኣይገበረን።",
+    "invalid_play": "ዘይግቡእ አጫወት። ተጫዋች {player_id} ካርታ {card} ን ማእከላይ ካርታ ሰረዝ {index} ላይ አጫወተ።",
+    "discard_from_payoff": "ዘይቅቡል ምጥፍፋእ። ተጻዋታይ {player_id} ካብ ናይ ዓስቢ ክራማት ሓደ ካርድ ንምጥፋእ ፈቲኑ።",
+    "discard_not_in_hand": "ዘይቅቡል ምጥፍፋእ። ተጻዋታይ {player_id} ኣብ ኢዱ ዘየለ ካርድ ንምጥፋእ ፈቲኑ እዩ።",
+    "wrong_move_type": "ዘይቅኑዕ ዓይነት ስጉምቲ ተጻዋታይ {player_id} ብቑዕ ናይ ስጕምቲ ዓይነት ኣይመለሰን።"
+  },
+  "game_action": {
+    "you_drew": "ካርዲ ሰሓብካ ኢኻ።",
+    "opponent_drew": "ተጻዋታይ {player_id} ካርድ ሰሓበ።",
+    "you_played": "ካርታ {card} ን ማእከላይ ካርታ ሰረዝ {index} ላይ አጫወካ።",
+    "opponent_played": "ተጫዋች {player_id} ካርታ {card} ን ማእከላይ ካርታ ሰረዝ {index} ላይ አጫወተ።",
+    "you_discarded": "አንተ {card} ካርታ አሰራርህ ከማስወገድ ካርታ ስብስብ {index} አሰራርህ። እዚህ እንኳን አንተ የተጫዋች ዑደት አልቋል። አሁን የአንተ እርምጃዎች ለዚህ እንኳን አይቆጠሩም። ተጫዋች {next_player_id} በቀጣይ ይጫወታል።",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "ተጫዋች {current_player} ከለላ አስወግዱ። ተጫዋች {current_player} አሸንፈ።",
+    "deadlock_player_0": "እርምጃ እንደማይቀጥል ነው። ተጫዋች 0 አሸንፈ። ከለላ ርዝመት {player_0_payoff} ከለላ ርዝመት {player_1_payoff} ከለላ ርዝመት።",
+    "deadlock_player_1": "እርምጃ እንደማይቀጥል ነው። ተጫዋች 1 አሸንፈ። ከለላ ርዝመት {player_1_payoff} ከለላ ርዝመት {player_0_payoff} ከለላ ርዝመት።",
+    "deadlock_tie": "ምርጫ ተደረሰ ከሙሉ እኩልነት! ሁለቱ ተጫዋቾች {player_0_payoff} ካርታዎች ቀሪ አሏቸው። ተጫዋች {current_player} በተወሰነ አሸነፈ።"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "អ្នកជាអ្នកលេងលេខ {player_id} ក្នុងល្បែងអីនឌាពូគឺរ។\n- ដំណរ 52 ប័ណ្ណ; អ្នកឃើញតែប័ណ្ណរបស់គូប្រកួតប៉ុណ្ណោះ។\n- ការដាក់ប្រាក់អន្ទាក់ {ante} ក្នុងមួយជុំ, {max_rounds} ជុំសរុប។\n- ចលនាដែលអនុញ្ញាត: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ជាចំនួនគត់វិជ្ជមាន <= ចំនួនប្រាក់របស់អ្នក)។\n- ប័ណ្ណលាក់ខ្ពស់បំផុតឈ្នះប្រាក់នៅពេលបង្ហាញ។\n"
+  },
+  "round": {
+    "announce": "### ជុំ {current_round}/{max_rounds} កាតរបស់គូប្រកួតរបស់អ្នកគឺ: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "ផ្តល់ឱ្យបានត្រឹមតែ ONE សកម្មភាព bracketed, ឧទាហរណ៍ \"[check]\", \"[bet 2]\", \"[call]\", \"[raise 3]\", ឬ \"[fold]\" ។",
+    "cannot_check": "មិនអាច [check] - អ្នកកំពុងប្រឈមនឹងការភ្នាល់។",
+    "amount_min": "ចំនួនប្រាក់ឈ្នួល / ការដំឡើងប្រាក់ត្រូវមាន ≥ 1 ។",
+    "cannot_bet": "មិនអាច [bet] - ត្រូវ [call] / [raise] / [fold] ។",
+    "nothing_to_call": "គ្មានអ្វីត្រូវហៅទេ; អ្នកអាច [check] ជំនួស។",
+    "no_bet_to_raise": "ប្រើ [bet X] ដើម្បី បើក; គ្មាន ការ ភ្នាល់ ដើម្បី បង្កើន ។",
+    "insufficient": "មិនមានសំបកគ្រប់គ្រាន់សម្រាប់សកម្មភាពនោះទេ។"
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "\"[check]\", \"[bet X]\"",
+    "actions_facing_bet": "\"[call]\" (តម្លៃ {to_call}) \"[raise X]\" \"[fold]\"",
+    "possible_actions": "សកម្មភាពដែលអាចធ្វើបានរបស់អ្នក: {legal}"
+  },
+  "message": {
+    "round_result": "{reason} Pot {pot} → Player {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "កីឡាករ {player_id} បានបោះបង់ចោល។",
+    "showdown_win": "ការបង្ហាញ: {card_win} វាយ {card_lose} ។",
+    "showdown_tie": "ស្មើនៅពេលបង្ហាញ: ទាំងពីរ {card}។ ប្រាក់ចែក – នីមួយៗទទួល {split}។"
+  },
+  "outcome": {
+    "p0_wins": "កីឡាករ 0 ឈ្នះ ({bank0} > {bank1})",
+    "p1_wins": "កីឡាករ 1 ឈ្នះ ({bank1} > {bank0})",
+    "draw": "Chips ស្មើគ្នា ក្រោយការប្រកួតទាំងអស់"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "تو دەیگولف (یاری کارتی) - یاریکەر {player_id}.\nئامانج: کەمترین خاڵی گشتی لەم خولە تاکەدا بەدەست بھێنی. ئەگەر ستوونەکان ھەمان بەھای ھەبێت، وەک 0 لەگەڵ یەکدا دەژمێردرێن.\nنرخی کارتی: A=1, 2-10=نرخی ڕووی کارتی, J/Q=10, K=0\n\nچالاکییەکان (بەکارھێنانی براکەتییەکان):\n- '[draw]' - کێشان لە دەستە\n- '[take]' - گرتنی لە کۆمەڵە ڕەت کراوەکان\n- '[swap X Y]' - گۆڕینی کارتی کێشراو لەگەڵ جێگەی X (رەت) Y (ستوون)\n- '[discard]' - ڕەت کردنەوەی کارتی کێشراو"
+  },
+  "board": {
+    "drew": "تو {card}ی کێشایەوە:\nئێستا تو [swap X Y] یان [discard] دەبێت",
+    "took": "ئێوە کارتێکیان گرت: {card} لە پاشەڕۆی لابردن\nئێوە دەبێت [swap X Y] لەگەڵی بکەن (ناتوانن لابردن).",
+    "peeked": "تو لە جێگەی ({row},{col}) چاوەڕێی کەوت: {card}",
+    "turn_view": "دەستی تو:\n{hand}\nکۆمەڵە ڕەت کراوەکان: {discard}\n{options}",
+    "none": "هیچ نییە."
+  },
+  "options": {
+    "final_turns": "گۆڕانکارییەکانی کۆتایی! ھەڵیبژاردەکانی تو: [draw], [take], [peek X Y]",
+    "draw": "ھەڵیبژاردەکانی تو: [draw], [take]",
+    "must_swap": "تو دەبێت: [swap X Y] (ناتوانی کارتەکان لە کۆمەڵە ڕەت کراوەکان ڕەت بکات)",
+    "swap_or_discard": "تو دەبێت: [swap X Y] یان [discard]"
+  },
+  "hand": {
+    "no_cards": "هیچ کاردێک نییە.",
+    "header": "کۆل: ١٢٣",
+    "row": "رەتی {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "یاریکەر {pid} {new}ی لەگەڵ {old} لە جێگەی ({row},{col}) گۆڕی",
+    "discarded": "یاریکەر {pid} {card}ی ڕەت کرد"
+  },
+  "message": {
+    "deck_empty": "گەمەکە بەتاڵە، یارییەکە دەستبەجێ کۆتایی دێت.",
+    "knocked": "یاریزان {pid} لێدرا! ھەر یاریزانە یەک وەرچەرخەی تر وەردەگرێت.",
+    "final_round": "یاریکەر {pid} {reason}! ھەر یاریکەرێکی دیکە یەک گۆڕانکاری تری ھەیە"
+  },
+  "reason": {
+    "all_revealed": "هەموو کارتەکان ئاشکرا کراون"
+  },
+  "invalid": {
+    "wrong_action": "بەکارھێنانی یەک چالاکیی براکەتی: [draw], [take], [swap X Y], [discard], [knock], یان [peek X Y]",
+    "discard_empty": "کۆی پاشەکەوتەکان بەتاڵە!",
+    "must_draw_first": "تو یەکەم دەبێت [draw], [take], [knock], یان [peek X Y] بکەی",
+    "cannot_discard_taken": "ناتوانیت کارتێک لە کۆی ڕەتکراوەکان هەڵبگریت، دەبێت بیگۆڕیت.",
+    "have_drawn_card": "تو کارتێکی کێشراوەتی. تو دەبێت [swap X Y] یان [discard] بەکاری بھێنی",
+    "need_drawn_swap": "تۆ پێویستت بە کارتی کێشراو هەیە بۆ ئاڵوگۆڕکردن.",
+    "need_drawn_discard": "تۆ پێویستت بە کارتی هەڵکێشراو هەیە بۆ فڕێدان.",
+    "out_of_bounds": "جێگەی دەرەوەی سنوورەکانە. بەکارھێنانی رەت 1-{max_row}, ستوون 1-{max_col}",
+    "knock_with_card": "ناتوانیت بە کارتی دەرهێنراوەوە لێ بدەیت، سەرەتا وەرچەرخانی خۆت تەواو بکە.",
+    "already_knocked": "کەسێک ئەم گەڕەی بردۆتەوە.",
+    "already_revealed": "ئەو کارتە پێشتر ئاشکرا کراوە!"
+  },
+  "summary": {
+    "full": "یاری کۆتایی ھات! یاریکەر {winner} براوە بە {score} خاڵ!\n\nخاڵەکانی کۆتایی:\n{scores}",
+    "line": "یاریکەر {pid}: {score} خاڵ\n"
+  },
+  "board_str": {
+    "title": "=== یاری گۆڵف===",
+    "discard": "کۆی فڕێدان: {card}",
+    "knocked": "یاریزان {pid} لە دەرگا دراوە!",
+    "player_header": "یاریکەر {pid} (خاڵ: {score}):"
+  }
+}

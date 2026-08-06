@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Bo ê Jogadôr {player_id} n' Dilema di Prisonéu Iteradu ku abrange {num_rounds} rondas.\n\nEstrutura di Jógu:\n- Antis di kada desijon bo tene {total_conversation_rounds} turnu pa komuniká liberu.\n- Depois di es, ambos jogadôr si eliji simultaneamente pa kooperá ô traí.\n\nMatriz di Pagamentu (fiku pa kada ronda):\n- Ambos Kooperen ➜ kada unu {cooperate_reward}\n- Ambos Traí ➜ kada unu {mutual_defect_reward}\n- Unu Traí, unu Koopera ➜ Traidor {defect_reward}, Kooperadôr {sucker_reward}\n\nKumo Joga:\n- Durante konversa: tipo kualke tekstu bo ke.\n- Durante faze di desijon: inklui '[Cooperate]' ô '[Defect]' (insensível pa kazu). Bo podi adiciona tekstu ekstra antes/dispens di token."
+  },
+  "phases": {
+    "conversation_finished": "Konversa terminada pa ronda {round}. Por favor, responde ku '[Cooperate]' ô '[Defect]' drentu \\boxed{{}}.",
+    "starting_round": "--- Rondadi di kumesu {round} ---",
+    "round_summary": "Rezultadu ronda {round}:\n{outcome}\nJogadôr 0 ganha {r0} (total {score_0}), Jogadôr 1 ganha {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Jogador {winner} ganhó {win_score} - {lose_score}.",
+    "draw": "Tudu dôs djugadoris marka {s0}.",
+    "round_both_cooperate": "Es dôs ta trabadjaba djuntu.",
+    "round_both_defect": "Es tudu dôs dizisti.",
+    "round_p0_cooperates_p1_defects": "Jogu 0 kolabora, jogador 1 dizisti.",
+    "round_p0_defects_p1_cooperates": "Jogador 0 dizidi, jogador 1 kolabora."
+  }
+}

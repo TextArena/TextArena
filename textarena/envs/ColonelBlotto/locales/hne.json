@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "तुम्हार {role} के रूप में कोलोनेल ब्लोटो में हो।\nतुम्हार लक्ष्य तुम्हार विरोधी के तुलना में अधिक राउंड जीतना है।\nहर राउंड में, {field_names} फील्ड में {num_total_units} यूनिट आवंटित करो।\nजो खिलाड़ी एक फील्ड में अधिक यूनिट आवंटित करता है वह फील्ड जीतता है, और जो खिलाड़ी अधिक फील्ड जीतता है वह राउंड जीतता है।\nउदाहरण के लिए, '[A7 B7 C6]' A में 7 यूनिट, B में 7 और C में 6 आवंटित करता है।",
+    "commander_alpha": "कमांडर अल्फा, हे एलएफए!",
+    "commander_beta": "कमांडर बीटा, हे पीटर!"
+  },
+  "game_state": {
+    "header_round": "=== कर्नल ब्लोटो - राउंड {current_round}/{num_rounds} ===\nराउंड जीते - कमांडर अल्फा: {alpha_score}, कमांडर बीटा: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nराउंड {current_round}\nकमांडर अल्फा आवंटित: {p0_allocations}\nकमांडर बीटा आवंटित: {p1_allocations}\n",
+    "winner_alpha": "{message}विजेता: कमांडर अल्फा",
+    "winner_beta": "{message}विजेता: कमांडर बीटा",
+    "tie": "{message}टीई! (टाय) हावे !"
+  },
+  "invalid_move": {
+    "wrong_format": "अवैध इनपुट प्रारूप. उपयोगः ए: 5, बी 10: 10, सी 5: 5",
+    "invalid_field": "अमान्य क्षेत्र नाम. मान्य क्षेत्र: {field_names}",
+    "wrong_allocation_value": "जम्मो आबंटन गैर-ऋणात्मक पूर्णांक होना चाहि।",
+    "incorrect_total_units": "आपको ठीक {num_total_units} यूनिट आवंटित करना होगा। वर्तमान योग: {current_sum}",
+    "good_allocations": "आवंटन अच्छा हवय ।"
+  },
+  "outcome": {
+    "winner_alpha": "कमांडर अल्फा {score_0}-{score_1} जीतता है {num_rounds} राउंड के बाद!",
+    "winner_beta": "कमांडर बीटा {score_1}-{score_0} जीतता है {num_rounds} राउंड के बाद!",
+    "draw": "गेम {score_0}-{score_1} टाई में {num_rounds} राउंड के बाद समाप्त होता है!",
+    "early_winner_alpha": "कमांडर अल्फा {scores_0}-{scores_1} जीतता है (बहुमत हासिल किया गया)!",
+    "early_winner_beta": "कमांडर बीटा {scores_1}-{scores_0} जीतता है (बहुमत हासिल किया गया)!"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Vi ludas Klondike Solitaire. Via celo estas movi ĉiujn kartojn al la fondaj stakoj.\n\nLudreguloj:\n- Fondaj stakoj (F1-F4): Konstruu supren de As ĝis Reĝo laŭ emblemo\n- Tablaj stakoj (T1-T7): Konstruu malsupren alternante kolorojn (ruĝa sur nigra, nigra sur ruĝa)\n- Stoko: Tiru kartojn al ruba stako\n- Ruba stako (W): Supra karto disponebla por ludo\n\nKomandoj:\n- 'draw' - Tiru kartojn de stoko al ruba stako\n- 'move <source> <destination> [count]' - Movu kartojn inter stakoj\n  Ekzemploj: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count ankaŭ povas esti 'all', kiu provos movi ĉiujn kartojn kun vizaĝo supren.\n- 'forfeit' - Finu la ludon tuj kaj fiksu vian nunan poentaron\n- Nomoj de stakoj: W (ruba stako), F1-F4 (fondaj stakoj), T1-T7 (tablaj stakoj)\n\nVi povas plenumi plurajn agojn en unu vico apartigante ilin per komoj:\n  Ekzemplo: 'draw, move W T1, move T2 F1'\n\nNur Reĝoj povas esti metitaj sur malplenajn tablajn stakojn.\nAgoj plenumiĝas laŭorde - se unu malsukcesas, la restantaj agoj estas preterlasitaj.\nUzu 'forfeit' se vi kredas, ke la ludo estas neebla por gajni."
+  },
+  "format_error": {
+    "no_brackets": "Malvalida agformato. Agado devus esti en parentezo.",
+    "no_closing_bracket": "Malvalida agformato. Mankas ferma krampo ']'",
+    "empty_command": "Malplena komando. Tajpu \"draw\" aŭ \"move <source> <destination> [count]\".",
+    "empty_action": "Malplena ago.",
+    "move_needs_args": "Movi komandon postulas fonton kaj celon. Uzo: \"move <source> <destination> [count]\"",
+    "count_positive": "Nombro devas esti pozitiva aŭ 'all'",
+    "count_invalid": "Nevalida nombro. Uzu nombron aŭ 'all'",
+    "unknown_command": "Nekonata komando '{cmd}'. Uzu 'draw', 'move <source> <destination> [count]', aŭ 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Plenumis {n} agon(jn) antaŭ malsukceso.",
+    "failed": "Ago {n} malsukcesis: {msg}"
+  },
+  "move_result": {
+    "drew": "Tiris karton(jn) de stoko al rubujo.",
+    "cannot_draw": "Ne eblas tiri. Kaj la stoko kaj rubo estas malplenaj.",
+    "invalid_pile": "Malvalida stako nomo. Uzu W, F1-F4, aŭ T1-T7",
+    "foundation_one_card": "Povas movi nur unu karton al la bazo.",
+    "waste_to_foundation_ok": "Moviĝis karto de rubo al fonduso F{dst}",
+    "waste_to_foundation_bad": "Ne eblas movi forĵetajn kartojn al tiu fundamento-stako.",
+    "tableau_to_foundation_ok": "Movis karton el tablo T{src} al fundamento F{dst}",
+    "tableau_to_foundation_bad": "Ne eblas movi tabulkarton al tiu fundamento-stako.",
+    "foundation_to_foundation": "Ne povas moviĝi de fundamento al fondumo.",
+    "waste_to_tableau_one_card": "Povas movi nur unu karton el rubo al tabulo.",
+    "waste_to_tableau_ok": "Moviĝis karto de rubo al tablo T{dst}",
+    "waste_to_tableau_bad": "Ne eblas meti malŝparkarton sur tiun tabulstakon.",
+    "no_face_up": "Neniujn suprenrigarditajn kartojn por moviĝi.",
+    "tableau_to_tableau_ok": "Movis {count} karton(oj)n el tablo T{src} al T{dst}",
+    "tableau_to_tableau_bad": "Ne povas movi {count} karton (s) de T{src} al T{dst}",
+    "foundation_to_tableau_one_card": "Povas movi nur unu karton de fundamento al tabulo.",
+    "foundation_empty": "Fundamento F{src} estas malplena.",
+    "foundation_to_tableau_ok": "Movis karton el fundamento F{src} al tablo T{dst}",
+    "foundation_to_tableau_bad": "Ne eblas meti fondokarton sur tabelon T{dst}",
+    "to_waste_or_stock": "Ne povas moviĝi al rubo aŭ stoko."
+  },
+  "outcome": {
+    "forfeit": "Ludo konfesita. Fina poentaro: {score} kartoj en fundamentoj.",
+    "won": "Gratulon, vi gajnis la Klondican Soliton!",
+    "turn_limit": "Ludo finiĝis! Vi atingis la maksimumon de {max_turns} vicoj. Poento: {score} kartoj en fundamentaj piloj."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE === La anglalingva traduko de la nomoj estas:",
+    "turn": "Vico: {turn}/{max_turns}",
+    "stock": "Stoko: {stock} kartoj",
+    "waste": "Depagoj (W): {waste}",
+    "foundations_header": "Fondusoj:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tablo:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

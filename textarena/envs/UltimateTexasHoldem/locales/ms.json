@@ -20,29 +20,24 @@
     "{max_turns}": "Bilangan maksimum pusingan",
     "{winner_rounds}": "Bilangan pusingan yang telah diselesaikan"
   },
-
   "player_prompt": {
     "no_cards": "Belum ada kad",
     "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Pemain Tunggal lawan Dealer\n\n📖 GAMBARAN KESELURUHAN PERMAINAN:\n• Anda bermula dengan {start_chips} cip\n• Satu dek 52 kad (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Anda bermain melawan dealer (rumah)\n• Setiap pusingan mengikut struktur Ultimate Texas Hold'em: anda meletakkan pertaruhan ANTE dan BLIND, menerima 2 kad hole, membuat keputusan mengenai pertaruhan PLAY pilihan merentasi fasa pertaruhan, kemudian mendedahkan kad komuniti dan membandingkan tangan 5-kad terbaik anda dengan tangan dealer. Matlamat anda adalah memaksimumkan kemenangan anda (apabila anda memiliki tangan yang lebih baik), sambil meminimumkan kerugian anda (apabila anda memiliki tangan yang lebih lemah).\n• Permainan tamat apabila anda mencapai 0 cip atau ke bawah pada permulaan pusingan (KALAH) atau menyelesaikan 1000 pusingan dengan cip (MENANG)\n\n💰 STRUKTUR PERTARUHAN:\n• ANTE: Pertaruhan ${ante} wajib setiap pusingan\n• BLIND: Pertaruhan ${ante} wajib setiap pusingan\n• PLAY: Pertaruhan pilihan semasa permainan. Sepanjang pusingan, anda boleh memilih HANYA SATU daripada berikut: (${ante4} jika dibuat pada PRE-FLOP, ${ante2} jika dibuat pada FLOP, atau ${ante} jika dibuat pada RIVER. Boleh juga fold di river, menyerah tangan, dan tidak membuat pertaruhan.)\n\n🎴 PENGEDARAN KAD:\n• Anda menerima 2 kad tertelentang (kad hole anda)\n• Dealer menerima 2 kad tertiarap (tersembunyi daripada anda)\n• 5 kad komuniti diedarkan tertiarap pada mulanya\n• Kad komuniti didedahkan secara beransur-ansur sepanjang fasa permainan\n\n🏆 KELAYAKAN DEALER:\n• Dealer mesti memiliki sekurang-kurangnya sebuah PAIR (2 kad dengan pangkat yang sama) untuk melayakkan diri, menggunakan 2 kad di tangannya dan 5 kad komuniti.\n• Kelayakan dealer mempengaruhi keputusan pertaruhan, seperti yang akan dijelaskan kemudian.\n\n🎮 FASA PERMAINAN & TINDAKAN:\n📋 PRE-FLOP:\n  • Tindakan: [4x] (${ante4}) atau [check]\n  • [4x]: Letak pertaruhan PLAY ${ante4}, mendedahkan 3 kad komuniti pertama\n  • [check]: Tiada pertaruhan tambahan, mendedahkan 3 kad komuniti pertama\n\n📋 FLOP:\n  • Jika pertaruhan 4x diletakkan: Hanya [skip] tersedia (mendedahkan 2 kad komuniti terakhir secara automatik)\n  • Jika tiada pertaruhan 4x: [2x] (${ante2}) atau [check]\n  • [2x]: Letak pertaruhan PLAY ${ante2}, mendedahkan 2 kad komuniti terakhir\n  • [check]: Tiada pertaruhan tambahan, mendedahkan 2 kad komuniti terakhir\n\n📋 RIVER:\n  • Jika pertaruhan 4x atau 2x diletakkan: Hanya [skip] tersedia (meneruskan secara automatik ke showdown)\n  • Jika tiada pertaruhan PLAY sebelumnya: [1x] (${ante}) atau [fold]\n  • [1x]: Letak pertaruhan PLAY ${ante}, meneruskan ke showdown\n  • [fold]: Menyerah tangan, kehilangan pertaruhan ANTE dan BLIND\n\n📋 SHOWDOWN:\n  • Semua kad didedahkan dan dinilai\n  • Tangan 5-kad terbaik daripada 7 kad (2 hole + 5 komuniti)\n  • Pertaruhan diselesaikan mengikut peraturan bayaran\n\n💎 BAYARAN PERTARUHAN:\n📊 PERTARUHAN ANTE:\n  • Dealer tidak melayakkan diri: PUSH (pertaruhan dikembalikan)\n  • Dealer melayakkan diri & anda menang: bayaran 1:1 (pertaruhan + kemenangan)\n  • Dealer melayakkan diri & anda kalah: Pertaruhan hilang\n  • Seri: PUSH (pertaruhan dikembalikan)\n\n📊 PERTARUHAN BLIND:\n  • Tidak dipengaruhi oleh kelayakan dealer\n  • Anda menang: Pertaruhan dikembalikan dan bayaran tambahan berdasarkan kekuatan tangan anda\n  • Anda kalah: Pertaruhan hilang\n  • Seri: PUSH (pertaruhan dikembalikan)\n\n📊 JADUAL BAYARAN PERTARUHAN BLIND:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Kurang daripada Straight: Tiada bayaran tambahan\n\n📊 PERTARUHAN PLAY:\n  • Tidak dipengaruhi oleh kelayakan dealer\n  • Perbandingan terus: Tangan terbaik anda lawan tangan terbaik dealer\n  • Anda menang: bayaran 1:1 (pertaruhan + kemenangan)\n  • Anda kalah: Pertaruhan hilang\n  • Seri: PUSH (pertaruhan dikembalikan)\n\n🎯 PANGKAT TANGAN POKER (Terbaik ke Terburuk):\n  1. Royal Flush: A-K-Q-J-10 sut yang sama\n  2. Straight Flush: 5 kad berturutan sut yang sama\n  3. Four of a Kind: 4 kad pangkat yang sama\n  4. Full House: 3 sejenis + 2 sejenis\n  5. Flush: 5 kad sut yang sama\n  6. Straight: 5 kad berturutan\n  7. Three of a Kind: 3 kad pangkat yang sama\n  8. Two Pair: 2 pasang pangkat berbeza\n  9. One Pair: 2 kad pangkat yang sama\n  10. High Card: Kad tertinggi menang\n\n⌨️  ARAHAN TINDAKAN:\n• [4x] atau [play bet 4x]: Letak pertaruhan PLAY ${{self.ante_amount*4}}\n• [2x] atau [play bet 2x]: Letak pertaruhan PLAY ${{self.ante_amount*2}}\n• [1x] atau [play bet 1x]: Letak pertaruhan PLAY ${{self.ante_amount*1}}\n• [check] atau [c]: Check (tiada pertaruhan tambahan)\n• [fold] atau [f]: Fold (menyerah tangan)\n• [skip] atau [s]: Langkau ke fasa seterusnya (apabila tiada tindakan diperlukan)\n\n💡 PETUA STRATEGI:\n• Tangan permulaan yang kuat (pair, kad tinggi) selalunya mewajarkan pertaruhan 4x\n• Pertimbangkan kelayakan dealer - tangan lemah mungkin push jika dealer tidak melayakkan diri\n• Pertaruhan BLIND boleh sangat menguntungkan dengan tangan yang kuat (Royal Flush = 500:1!)\n• Perhatikan timbunan cip anda! Jika ia menjadi 0 atau ke bawah pada permulaan pusingan, anda kalah.\n\n⚠️  NOTA PENTING:\n• Pertaruhan ANTE dan BLIND adalah wajib setiap pusingan\n• Pertaruhan PLAY adalah pilihan dan strategik\n• Pastikan anda memasukkan tindakan yang betul, dan hanya satu tindakan pada satu masa.\n\n",
     "state": "🎯 PUSINGAN {round}\n💰 Cip: {chips}\n🎴 Tangan anda: {hand}\n📊 Pertaruhan semasa: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fasa: {phase}\n🎯 Tindakan tersedia: {actions}\n\n"
   },
-
   "board": {
     "round_start": "🎮 Pusingan {round} bermula! Pertaruhan: ANTE ${ante}, BLIND ${blind}. Anda mempunyai {chips} cip yang tinggal.",
     "your_hand": "🎴 Tangan anda: {hand}",
     "flop_revealed": "🃏 FLOP didedahkan: {cards}",
     "river_revealed": "🃏 RIVER didedahkan: {cards}"
   },
-
   "invalid_move": {
     "reason": "Tindakan tidak sah untuk fasa semasa. Tindakan tersedia: {available}",
     "message": "❌ Tindakan tidak sah! Tindakan tersedia: {available}"
   },
-
   "action": {
     "folded": "🃏 Anda fold."
   },
-
   "showdown": {
     "dealer_hand": "🏁 SHOWDOWN! Tangan dealer: {cards}",
     "community_cards": "🃏 Kad komuniti: {cards}",
@@ -63,7 +58,6 @@
     "net_loss": "💸 Pusingan {round} selesai! Kerugian bersih: ${net}",
     "separator": "──────────────────────────────────────────────────"
   },
-
   "outcome": {
     "game_over_win": "🏁 PERMAINAN TAMAT! {max_turns} pusingan selesai. Anda mempunyai ${chips} cip - ANDA MENANG!",
     "game_over_lose": "🏁 PERMAINAN TAMAT! Anda kehabisan cip. Dealer menang!",
@@ -71,18 +65,17 @@
     "reward_lose": "Pemain kehabisan cip pada pusingan {round}",
     "reward_win_max": "Pemain menyelesaikan {max_turns} pusingan dengan ${chips} cip"
   },
-
   "hand_names": {
-    "royal_flush": "Royal Flush",
-    "straight_flush": "Straight Flush",
-    "four_of_a_kind": "Four of a Kind",
-    "full_house": "Full House",
+    "royal_flush": "Flush Diraja",
+    "straight_flush": "Flush Lurus",
+    "four_of_a_kind": "Empat Kartu yang Sama",
+    "full_house": "Rumah Penuh",
     "flush": "Flush",
     "straight": "Straight",
-    "three_of_a_kind": "Three of a Kind",
-    "two_pair": "Two Pair",
-    "one_pair": "One Pair",
-    "high_card": "High Card",
+    "three_of_a_kind": "Tiga Kartu yang Sama",
+    "two_pair": "Dua Pasang",
+    "one_pair": "Satu Pasang",
+    "high_card": "Kartu Tertinggi",
     "unknown": "Tangan Tidak Diketahui"
   }
 }

@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ngeye Mwana {player_id} mu Iterated Prisoner's Dilemma ikalanga {num_rounds} mizungu.\n\nMfumo wa Muziki:\n- Kabla ya kila kufanya uamuzi una {total_conversation_rounds} mizungu ya kujadiliana kwa uhuru.\n- Baada ya hapo, wachezaji wote wawili huchagua kushirikiana au kutoa wakati huo huo.\n\nMatrix ya Kulipwa (imehifadhiwa kila mzunguko):\n- Wote wawili Wanaungana ➜ kila {cooperate_reward}\n- Wote wawili Wanaacha ➜ kila {mutual_defect_reward}\n- Mmoja Anaacha, mmoja Anaungana ➜ Anaacha {defect_reward}, Anaungana {sucker_reward}\n\nJinsi ya Kucheza:\n- Wakati wa mazungumzo: andika maandishi yoyote unayotaka.\n- Wakati wa kufanya uamuzi: ongeza '[Cooperate]' au '[Defect]' (bila kujali herufi kubwa au ndogo). Unaweza kuongeza maandishi ya ziada kabla/ baada ya kiashiria."
+  },
+  "phases": {
+    "conversation_finished": "Mazungumzo yamekwisha kwa mzunguko {round}. Tafadhali jibu na '[Cooperate]' au '[Defect]' ndani ya \\boxed{{}}.",
+    "starting_round": "--- Tshikondo tshia ntuadijilu {round} ---",
+    "round_summary": "Matokeo ya mzunguko {round}:\n{outcome}\nMchezaji 0 alipata {r0} (jumla {score_0}), Mchezaji 1 alipata {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Mchezaji {winner} anashinda {win_score} - {lose_score}.",
+    "draw": "Bamue ba ku babadi bavua batue tshipatshila {s0}.",
+    "round_both_cooperate": "Bamue ba kudibu bakenza mudimu pamue.",
+    "round_both_defect": "Bamue ba kudibu bakanyema.",
+    "round_p0_cooperates_p1_defects": "Muena manaya 0 wakenza mudimu, muena manayi 1 wakabenga.",
+    "round_p0_defects_p1_cooperates": "Muena manaya 0 wakanyema, muena manaya 1 uvua wenza mudimu."
+  }
+}

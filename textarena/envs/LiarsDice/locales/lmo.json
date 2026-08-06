@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Ti seet Giugador {player_id} in d'on gioeugh de Dadi del Busiard in {num_players} giugador.\nRegol:\n- Al tò turn, te pòdet o:\n  1) Fà 'na noeuva oferta con 'na quantità o 'na faccia pussee volta (o tutt e duu) rispet a l'offerta atual; esempi: '[Bid: 3, 4]',\n  2) Ciamà l'ultima oferta scrivend '[Call]'.\n\nSe te ciamet:\n  - Se 'l contegg atual de chela faccia tra tucc i dadi l'è men del oferta, l'ultim oferent el perdet vun di.\n  - Se l'è inscì, el ciamador el perdet vun di.\nOn giugador che 'l riva a 0 di l'è eliminad. L'ultim giugador che 'l resta el vens."
+  },
+  "board": {
+    "per_player": "\tGiugadore {p}: {d}",
+    "new_round": "\nGir noeuv - Dadis restants: {dice_summary}\nI vostri dadis atuaj a hinn: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Giugadore {current_player_id} ciamà! El numer real de faccia {face_value} a l'è {count}, che l'è MEN de {quantity}.\nGiugadore {loser_id} (l'ultim a fà l'offerta) el perden vun di.",
+    "caller_loses": "Giugadore {current_player_id} ciamà! El numer real de faccia {face_value} a l'è {count}, che l'è >= {quantity}.\nGiugadore {loser_id} (el ciamador) el perden vun di."
+  },
+  "action": {
+    "bid_announce": "Giugadore {player_id} fa 'n offerta de {quantity} de faccia {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Chiamàda fàta senza 'na preziusa.",
+    "invalid_bid": "Offerta no valida: {reason}",
+    "not_recognized": "Azzion minga recognossuda 'me 'na valida '[Bid: X, Y]' o '[Call]'. Azzion presentada: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "La noeuva quantità {new_quantity} l'è pussee bassa de la atual {current_quantity}.",
+    "face_lower": "La noeuva faccia {new_face_value} l'è pussee bassa de la atual {current_face_value}.",
+    "identical": "L'offerta l'è identica a quella attuala.",
+    "face_range": "El valor nominal el dev vess intra 1 e 6."
+  },
+  "message": {
+    "eliminated_invalid": "El Giugador {player_id} l'è stat eliminad per mossa no valida."
+  },
+  "outcome": {
+    "win": "Giugadore {winner} el veng! Classifica final: {final_ranking}"
+  }
+}

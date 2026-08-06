@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Q'ankay Pukllaykachaq {player_id} Stratego nisqapi.\nQ'ankay q'ellayninqa q'awanaylla wak pukllaykachaqpa Bandera nisqata, ichataq wak k'utukunata tukuylla q'umayta.\nQ'ankay awqaqkuna q'ellayninta q'umaykacharqanku, chaymanta q'ankay Bandera, Wakakuna, wak k'utukunapas.\n\n### Pukllay Yachaykuna\n1. **K'utu Q'umay:**\n   - Q'ankay turnopi, huk k'ututa huk q'umayman apayayta atinki (hanan, urin, k'uchu icha paña) wak k'utukunawan q'umaykuna.\n   - Shimi: Huk k'utu A1manta B1man icha A1manta A2man apayayta atin, B1, A2 q'ankay k'utukunawan mana q'umaykaptin.\n   - Bandera icha Wakakuna k'utukuna mana q'umayta atinku.\n2. **Maqanakuykuna:**\n   - Huk k'utu wak pukllaykachaqpa k'utuwan q'umaykaptin, maqanakuyqa kanqa:\n     - Aswan hatun k'utu atin wak k'ututa q'umayta.\n     - K'utukuna kaqlla kaptin, iskay k'utukunapas q'umaykunku.\n     - **Wakakuna:**\n       - Wakakuna atin wak k'utukunata q'umayta, Mineros wakakunata q'umaykaptin.\n       - Espías Marshal nisqata atipayta atin, ichataq wak k'utukunawan q'awanayta.\n3. **Estratégico Q'ellaykuna:**\n   - Wak pukllaykachaqpa k'utukunata q'awanku, paykuna k'utukunata maqanakuykunawan.\n   - Q'ankay Bandera amachayta, ichataq wak pukllaykachaqpa Banderata q'awanayta.\n   - Scoutkuna estratégicamente q'umayta, wak pukllaykachaqpa k'utukunamanta willaykita.\n\n### Q'umay Ruway:\n1. K'utu q'umayta munanki, q'umayta nisqa k'utu q'ellayninta qillqay.\n2. [A0 B0] hinachu qillqay, A0 q'umayta nisqa k'utu q'ellayninta, B0 q'umayta nisqa k'utu q'ellayninta.\n   - Shimi: Huk k'utu A0manta B0man apayayta munanki, [A0 B0] qillqay.\n3. Q'umayta nisqa k'utu q'ellayninta allin k'utu q'umaykuna.\n\n### Wakakuna:\n- Tablero q'ankay k'utukunata q'ellayninta q'umaykunku, e.g. MN, MS.\n- Tablero wak pukllaykachaqpa k'utukunata q'ellayninta q'umaykunku, mana k'utukunata q'umaykaptin, e.g. ?.\n- Q'uchakuna ~ hinachu q'umaykunku, mana k'utu q'umayta atinku.\n- Sugerencia, q'ankay pukllayta q'allayta, q'ankay k'utukunata ñawpa q'umaykuna, wak pukllaykachaqpa k'utukunamanta willaykita. Pukllaykachaq 0, pukllaykachaq 1 ñawpa q'umaykuna D, G hinachu.\n\nKayqa kunan tablero q'ellayninqa:\n"
+  },
+  "board": {
+    "current_board": "Kamaya p'unchaypi:\n\n{board}\nRikuykuna: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Mana k'amiyuq k'utu. Pukllaykachaq {player_id} mana k'utu [A0 B0] hinachu qillqarqan.",
+    "invalid_coordinates": "Mana k'amiyuq k'utu. Pukllaykachaq {player_id} mana allin k'utu qillqarqan.",
+    "not_own_piece": "Mana allin ruray: {player_id} pukllaq kikinpa huk p'anqapis churan.",
+    "scout_through_pieces": "Mana k'amiyuq k'utu. Pukllaykachaq {player_id} mana atin scout k'ututa wak k'utukunamanta.",
+    "scout_diagonal": "Mana allin ruray formatu. {player_id} pukllaqqa mana atichwanchu huk qhawaq runata diagonalpi muyuyta.",
+    "non_scout_multi_square": "Mana allin formata churay. P'anqa, qhawachiqkunawan mana kikinchu kanku, sapa kuti huk cuadratalla puririyta atinku.",
+    "move_into_lake": "Mana allin ruray formatu. Runakuna {player_id} mana wayq'uman yaykunmanchu.",
+    "move_onto_own_piece": "Mana allin ruray formatu. {player_id} pukllaqqa mana kikinpa p'anpanman rinmanchu.",
+    "move_bomb_or_flag": "Mana allin ruray formatu. Runakuna {player_id} mana atinkuchu bomba utaq bandera apanapaqqa."
+  },
+  "game_action": {
+    "you_moved": "Q'awachkamunwanki {source}-manta {dest}-man.",
+    "opponent_moved": "Pukara {player_id} q'awachkamunwan {source}-manta {dest}-man.",
+    "you_equal_ranks": "Q'awachkamunwanki {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Ranks ch'iqanmi, iskaynintin piecekuna wañuchkanku.",
+    "opponent_equal_ranks": "Pukara {player_id} q'awachkamunwan {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Ranks ch'iqanmi, iskaynintin piecekuna wañuchkanku.",
+    "you_miner_defused": "Q'awachkamunwanki {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Miners bombakunata defusachkanku, allin p'unchayki.",
+    "opponent_miner_defused": "Pukara {player_id} q'awachkamunwan {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Miners bombakunata defusachkanku, q'umirpunchayki.",
+    "you_bomb_lost": "Q'awachkamunwanki {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Q'awachkachkaq mana miner, q'umirpunchayki.",
+    "opponent_bomb_won": "Pukara {player_id} q'awachkamunwan {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Q'awachkachkaq mana miner, allin p'unchayki.",
+    "you_spy_won": "Q'awachkamunwanki {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Q'awachkachkaq spy, ch'iqan marshall, allin p'unchayki.",
+    "opponent_spy_lost": "Pukara {player_id} q'awachkamunwan {source}-manta {dest}-man. Q'awachkachkaq piece {attacking_rank}, ch'iqan piece {target_rank}. Q'awachkachkaq spy, ch'iqan marshall, q'umirpunchayki.",
+    "you_higher_won": "Q'umir q'alla {source} mant'api {dest} mant'aman rik'urqanki. Atakakuq q'allaqa {attacking_rank} karqa, chaymant'api q'allaqa {target_rank} karqa. Atakakuq q'allaqa chaymant'api q'allaqamanta aswan hatun kaptin, q'awanaykita atiparqanki.",
+    "opponent_higher_lost": "Pukllaq {player_id} {source} mant'api {dest} mant'aman rik'urqan. Atakakuq q'allaqa {attacking_rank} karqa, chaymant'api q'allaqa {target_rank} karqa. Atakakuq q'allaqa chaymant'api q'allaqamanta aswan hatun kaptin, q'awanaykita chinkarqan.",
+    "you_lower_lost": "Q'umiranka q'illayta {source}mantam {dest}man aypurqanki. Atakaq q'illayqa {attacking_rank} karqan, chaymanta chaypi kaq q'illayqa {target_rank} karqan. Atakaq q'illayqa chaypi kaq q'illaymanta pisi rakinayuq kaspa, maqanakuytaqa q'illurqanki.",
+    "opponent_lower_won": "Jugador {player_id} pieza nisqakunata {source} nisqamanta {dest} nisqaman movimientos nisqakunku. Atacante pieza nisqakuna {attacking_rank} nisqakuna, destino pieza nisqakuna {target_rank} nisqakuna. Atacante rango nisqakuna bajo kaptin, q'umir yanapakunku."
+  },
+  "outcome": {
+    "flag_captured": "¡Player {player_id}qa contranpi kaqpa bandera-ninta hap'irqan!",
+    "no_movable_pieces": "Pukllaykachaq {winner_id} atin! Pukllaykachaq {loser_id} mana k'utu q'umayta atinku."
+  }
+}

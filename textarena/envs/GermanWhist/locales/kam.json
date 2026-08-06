@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Mchezo unaanza. Suti ya nguvu: {trump_suit} (kadi ya nguvu: {trump_str}).",
+    "no_trump_card": "vai ũmwe"
+  },
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Whist ya Kijerumani.\n{phase_info}\nUna kadi {hand_size}.\nCheza kadi kwa kutumia '[play N]', ambapo N ni nafasi yake katika mkono wako (kwa mfano '[play 3]').",
+    "phase_learning": "ĨSOMO YA KŨMANYĨASYA: Mũndũ ũla ũkasinda akakwata kaati yĩ na ĩsyĩtwa yake (face-up) na mũndũ ũla ũkaema kũkwata akosa ĩla ĩngĩ ĩatĩĩe. O tondũ twoona, maũndũ ala meanĩw'a ĩvindanĩ yĩĩ ti ma vata mũno nĩ kana tũsinde mũisyo ũsu.",
+    "phase_playing": "MWONGOZO WA KUCHEZA: sitaha imeisha. Kila mchezo kutoka sasa utahesabiwa kuelekea ushindi."
+  },
+  "next_card": {
+    "playing_phase": "Vai kaati ya kũthaũka ĩũngamĩwe nĩ mũndũ. No nginya ala mekũkita methĩwe me aĩkĩĩku na mayĩthĩwa maĩlĩte kũtaĩwa.",
+    "deck_empty": "Ĩsandũkũ yĩu yĩthĩawa yusĩe mavali na yĩĩla ĩveny'e vaasa.",
+    "available": "Kaati ya kumya ũkũsĩ: {card}",
+    "available_trump": "Kaati ya kumya ũkũsĩ: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Ĩtambya ĩte ya w'o. Tũmĩa \"[play N]\" kũthaũka kaati ĩla yĩ nthũnĩ yaku.",
+    "bad_position": "Nafasi hiyo ya kadi haipo. Una kadi {hand_size}.",
+    "must_follow_suit": "Lazima ufuate suti na ucheze kadi ya {lead_suit}.",
+    "invalid_play": "Kadi hiyo haiwezi kucheza."
+  },
+  "game_action": {
+    "played": "Mchezaji {player_id} alicheza {card}."
+  },
+  "trick": {
+    "won": "Mchezaji {winner_id} anashinda mchezo kwa {card}.",
+    "won_learning": "Mchezaji {winner_id} anashinda mchezo kwa {card} na kuchukua kadi iliyo wazi."
+  },
+  "phase": {
+    "learning_complete": "Kĩla kĩminĩte kũseũvw'a no ũndũ ũmwe na ĩvali yasũngawa. Vai ĩngĩ yĩkaema kwĩkala ta ĩvũĩ!"
+  },
+  "draw": {
+    "winner_received": "Ulishinda mchezo na kupokea {card}.",
+    "loser_received": "Ulishindwa mchezo na kuchora {card} kutoka kwenye sitaha.",
+    "winner_preview": "Kadi inayofuata inayotolewa ni {card}."
+  },
+  "turn": {
+    "board": "〕{phase}\n〕{scores}\n〕{next_card}\n\n〕{trick}\n\n〕{hand}",
+    "scores_learning": "Michezo iliyoshinda hadi sasa - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
+    "scores_playing": "Michezo inayohesabiwa - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
+    "phase": "Kĩlungu kya: {phase}",
+    "phase_learning": "Hatua: {phase} ({remaining_cards} kadi zimesalia kwenye sitaha)"
+  },
+  "hand": {
+    "no_cards": "Ndũkatũmĩe kaati sya kwĩyonany'a!",
+    "no_cards_in_hand": "Vai kaati ya kũthaũka ĩthaũ yĩu.",
+    "header": "Kĩĩmĩ kyaku:",
+    "trump_indicator": "(Kavuku ka Ũvoo Mũseo)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Hakuna kadi imechezwa bado katika mchezo huu.",
+    "header": "Nzĩa ĩla ĩtũmĩawa ũmũnthĩ:",
+    "trump_indicator": "(Kavuku ka Ũvoo Mũseo)",
+    "card_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Mchezo haujaanza",
+    "header": "=== WHIST YA KIJERUMANI ===",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nSuti ya nguvu: {trump_suit}",
+    "trump_card": "{observation}\nKadi ya nguvu: {card}",
+    "cards_left": "{observation}\nKadi zimesalia kwenye sitaha: {count}",
+    "next_card": "{observation}\nKadi inayofuata kwa mshindi: {card}",
+    "blank": "{observation}  makwatawa nĩ ũwau ta ũsu.",
+    "current_trick": "{observation} Kĩndũ kya kũkenga mũndũ:",
+    "trump_indicator": "(Kavuku ka Ũvoo Mũseo)",
+    "trick_line": "{observation}\n  Mchezaji {player_id}: {card}〕{trump_indicator}",
+    "player_line": "{observation}\nMchezaji {player_id}: {scoring} michezo inayohesabiwa ({tricks} jumla), {hand_size} kadi katika mkono"
+  },
+  "outcome": {
+    "summary": "Hatua ya kujifunza - Mchezaji 0: {l0}, Mchezaji 1: {l1}. Hatua ya kucheza - Mchezaji 0: {p0}, Mchezaji 1: {p1}. Mchezaji {winner_id} anashinda kwa {winner_tricks} michezo inayohesabiwa!"
+  }
+}

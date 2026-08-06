@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Droe neu Player {player_id} lam jeu Spite and Malice ngon dua droe. Tujuan droe neu nyan keu peubloe payoff pile droe.\n\n### Gambaran Jeu:\n- Tujuan jeu nyan keu peubloe payoff pile droe ngon main kartu keu center piles.\n- Droe neu bisa main kartu dari tiga sumber:\n  1. **Tangan** droe (droe mulai ngon 5 kartu di tangan).\n  2. **Kartu paling aseh di payoff pile** droe.\n  3. **Kartu paling aseh di salah saboh discard piles** droe.\n\n### Aturan Main:\n- Droe neu bisa main kartu keu center pile jika kartu nyan **satu tingkat leubeh** dari kartu paling aseh di pile nyan (center piles mulai ngon Ace ngon troh keu Queen; Kings nyan kartu bebas - bisa main ngon kartu laen tapi hana meutuka urutan tingkat. Nyan keuh meukeusud ngon King nyan digunakan lepas 4, maka King nyan tingkat 5 ngon kartu lheueh nyan harus 6).\n- Jika droe neu hana bisa main kartu laen, droe neu harus **buwang kartu** keu salah saboh discard piles droe ngon akhe turn droe.\n- Jika center pile troh keu Queen, pile nyan akan peubloe ngon otomatis.\n- Urutan tingkat nyan: A=1, 2=2, ..., 9=9, J=10, Q=11, K ngon kartu bebas.\n\n### Aksi:\n1. **Ngambil**: Di awal turn droe, ngambil kartu ngon isi tangan droe troh keu 5 kartu. Masukkan **[draw]** ngon mulai.\n2. **Main Kartu**: Ngom main kartu, sebut kartu ngon center pile ngon cara nyan: **[play A♠ 0]** (di mana 'A♠' nyan kartu ngon '0' nyan indeks center pile).\n3. **Buwang**: Jika droe neu hana bisa main kartu laen, buwang kartu dari tangan droe keu discard pile ngon akhe turn droe. Masukkan **[discard A♠ 1]** (di mana 'A♠' nyan kartu ngon '1' nyan indeks discard pile). Perlu diingat ngon droe neu hana bisa buwang kartu dari payoff pile. Droe neu bisa buwang kartu dari tangan droe.\n\n"
+  },
+  "board": {
+    "current_board": "Papan Jeu Sekarang:\n\n{board}\nGerakan Tersedia: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Center Piles ---\n",
+    "pile": "{observation}Tumpukan {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Tampakan Player {player_id} ---\n",
+    "payoff": "{observation}Payoff Pile (Kartu Paling Aseh): {top_card}, Panjang Payoff Pile: {payoff_length}\n",
+    "hand": "{observation}Tangan: {hand}\n",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "Hana meuasoe."
+  },
+  "game_message": {
+    "no_cards_left": "Hana leubeh kareueng kadeh bak geuboh. Ingat, droe neupeulheueh kareueng nibak teumpat-teumpat nyoe:\n  1. **Tangan** droe.\n  2. **Kareueng paling aseu bak timbunan payoff** droe.\n  3. **Kareueng paling aseu bak timbunan peusaneut** droe.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Format langkah hana sah. Peumeuén {player_id} han geu respon deungen saboh gerakan nyang valid lam kurung peut sagoe.",
+    "invalid_play": "Meulakèe jeu. Peumeulakèe {player_id} meu'usaha meulakèe {card} bak tumpukan teungöh {index}.",
+    "discard_from_payoff": "Buang kartu salah. Player {player_id} mencoba buwang kartu dari payoff pile.",
+    "discard_not_in_hand": "Pengucilan yang hana sah. Peumeuén {player_id} meucuba untuk geupeutulak kartu nyang kon bak jaroe jih.",
+    "wrong_move_type": "Jenis gerakan salah. Player {player_id} hana menjawab ngon jenis gerakan ngon benar."
+  },
+  "game_action": {
+    "you_drew": "Gata geutarek kartu.",
+    "opponent_drew": "Player {player_id} ngambil kartu.",
+    "you_played": "Droe neu main {card} ngon center pile {index}.",
+    "opponent_played": "Player {player_id} main {card} ngon center pile {index}.",
+    "you_discarded": "Droe neu buwang {card} keu discard pile {index}, ngon nyan juga berarti droe neu akhe turn. Hana aksi laen ngon droe neu ngon turn nyan. Player {next_player_id} akan melanjutkan.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Peumeulakèe {current_player} meu'akhir tumpukan bayaran! Peumeulakèe {current_player} meu'menang!",
+    "deadlock_player_0": "Keuadaan meu'imbak! Peumeulakèe 0 meu'menang ngon {player_0_payoff} kartu meu'sisa vs {player_1_payoff} kartu Peumeulakèe 1.",
+    "deadlock_player_1": "Keuadaan meu'imbak! Peumeulakèe 1 meu'menang ngon {player_1_payoff} kartu meu'sisa vs {player_0_payoff} kartu Peumeulakèe 0.",
+    "deadlock_tie": "Deadlock tercapai ngon seri! Kedua player memiliki {player_0_payoff} kartu tersisa. Player {current_player} menang secara default."
+  }
+}

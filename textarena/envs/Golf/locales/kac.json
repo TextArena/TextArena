@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Nan gaw Golf (Lahkam Hkrai) hkam la - Lahkru {player_id}.\nHpung: Rai hkam shi hkrai shi hku shi hpe hkan hkam sha rai hku hkra. Lahkam shi hku shi gaw rai hku hkra yang, shi hku shi gaw 0 hkra.\nLahkam Hkrai hpung: A=1, 2-10=hkrai hpung, J/Q=10, K=0\n\nHkam la (hkrai hte hku hkam sha yu yu):\n- '[draw]' - Hkrai hkam sha deck hkrai\n- '[take]' - Hkrai hkam sha lahkam hkrai hku\n- '[swap X Y]' - Hkrai hkam sha lahkam hkrai X (hkrai) Y (hkrai) hku hkam sha\n- '[discard]' - Hkrai hkam sha lahkam hkrai hku hkam sha yu"
+  },
+  "board": {
+    "drew": "Nang pawt ai: {card}\nNang must [swap X Y] amyu [discard] ai.",
+    "took": "Nang tsun ai: {card} kasha tsun hpun kaw\nNa kasha [swap X Y] shangun ra ai (kasha tsun hkan n ra ai).",
+    "peeked": "Nan kaji hkrai ({row},{col}) na: {card}",
+    "turn_view": "Nang hand:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Hpa mung n nga ai."
+  },
+  "options": {
+    "final_turns": "Final turns! Nang options: [draw], [take], [peek X Y]",
+    "draw": "Na a lata la mai ai lam ni gaw: [draw], [take]",
+    "must_swap": "Nang gaw: [swap X Y] (hkum kau ai hta na card ni hpe n kabai kau lu)",
+    "swap_or_discard": "Nang gaw: [swap X Y] or [discard] hpe ra ai."
+  },
+  "hand": {
+    "no_cards": "Hkaw tsun ladat ni n nga ai.",
+    "header": "Col: 1 2 3 (Shinggyim masha ni a matu)",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Miwa {pid} kasha {new} hte {old} shangun ai ({row},{col}) kaw",
+    "discarded": "Player {pid} discarded {card}"
+  },
+  "message": {
+    "deck_empty": "Hpakant hta hpa mung n nga sai. Dai ginsup poi gaw kalang ta htum mat ai.",
+    "knocked": "Miwa {pid} kasha shangun ai! Miwa mungdan kasha shangai wa hte shangun ra ai.",
+    "final_round": "Miwa {pid} {reason}! Miwa mungdan kasha shangai wa hte shangun ra ai."
+  },
+  "reason": {
+    "all_revealed": "lahkam hkrai shagu hku hkra"
+  },
+  "invalid": {
+    "wrong_action": "Use exactly ONE bracketed action: [draw], [take], [swap X Y], [discard], [knock], amyu [peek X Y]",
+    "discard_empty": "Hprawng kau ai arung arai ni gaw n nga sai!",
+    "must_draw_first": "Nan hkan [draw], [take], [knock], hkam [peek X Y] sha rai hkrai.",
+    "cannot_discard_taken": "Hkum di kau ai hta na lata la wa ai laika hpe n kabai kau lu ai. Dai hpe galai ra ai.",
+    "have_drawn_card": "Nanhte a lam the e kaji hkam la. Nanhte [swap X Y] kanau [discard] hkam ra.",
+    "need_drawn_swap": "Dai hpe galai na matu, lata da ai laika buk ra ai.",
+    "need_drawn_discard": "Dai hpe kabai kau na matu, lata da ai laika buk ra nga ai.",
+    "out_of_bounds": "Position out of bounds. Use row 1-{max_row}, column 1-{max_col}",
+    "knock_with_card": "Nang gaw, nang hpe jaw da ai laika hte n mai htu sai. Shawng nnan na a hkringdat ngut u.",
+    "already_knocked": "Ndai lang na zuphpawng hta marai langai ngai gaw shang lawm wa sai.",
+    "already_revealed": "Dai sumla gaw madun da ngut sai."
+  },
+  "summary": {
+    "full": "Kasha shangai wa sai! Miwa {winner} kasha shangun ai, {score} kasha mu ra ai!\n\nKasha mu shangai wa sai:\n{scores}",
+    "line": "Player {pid}: {score} points\n"
+  },
+  "board_str": {
+    "title": "GOLF GAMING hpe galaw u. (sh) Hkaw tsun ladat ni hte madun u.",
+    "discard": "Kabai kau ai sumpum: {card}",
+    "knocked": "Player {pid} has knocked!",
+    "player_header": "Player {pid} (Score: {score}):"
+  }
+}

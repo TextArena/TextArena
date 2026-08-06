@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Doe speuls Klondike Solitaire. Diene doel is óm alle kaarte nao de fundamènt-pile te verplaatsen.\n\nSpelregele:\n- Fundamènt-pile (F1-F4): Opboewe van Aas tot Keuning in kleur\n- Tableau-pile (T1-T7): Aafboewe in aafwisselende kleure (roed op zwart, zwart op roed)\n- Veurraod: Tèk kaarte nao aafval-pile\n- Aafval (W): Boveste kaart besjikbaar veur 't speul\n\nCommando's:\n- 'draw' - Tèk kaarte van veurraod nao aafval\n- 'move <source> <destination> [count]' - Verplaats kaarte tösse pile\n  Veurbiljer: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count kin ouch 'all' zien, wat perbeert alle kaarte nao baove te verplaatsen.\n- 'forfeit' - Beëindig 't speul metein en bevestig diene huidige score\n- Pile-name: W (aafval), F1-F4 (fundamènt), T1-T7 (tableau)\n\nDoe kins meerdere acties in ein beurt oetveure door ze mèt komma's te sjeije:\n  Veurbild: 'draw, move W T1, move T2 F1'\n\nAllein Keuninge kinne op laeg tableau-pile geplaats waere.\nActies waere in volgorde oetgeveurd - es ein faalt, waere de euvergebleve acties euvergeslage.\nGebruuk 'forfeit' es doe geluifs dat 't speul ónmeugelek is te winne."
+  },
+  "format_error": {
+    "no_brackets": "Ongeldige actieformaat. 't Aktieformulier moet in haakjes zien.",
+    "no_closing_bracket": "Ongeljige actie-formaat. Óntbrekende aafsluutende haksklauwe ']'",
+    "empty_command": "Leeg commando. Typ 'draw' of 'move <source> <destination> [count]'.",
+    "empty_action": "Leeg actie",
+    "move_needs_args": "Verplaats-commando haet brón en bestemming nuuedig. Gebruuk: 'move <source> <destination> [count]'",
+    "count_positive": "Aantal mót posetief of 'all' zien",
+    "count_invalid": "Ongeljig aantal. Gebruuk e getal of 'all'",
+    "unknown_command": "Onbekind commando '{cmd}'. Gebruuk 'draw', 'move <source> <destination> [count]', of 'forfeit'",
+    "wrapped": "Actie {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Actie {n}: {msg}",
+    "before_failure": "Exekutie {n} actie (s) veur mislukking.",
+    "failed": "Actie {n} gefaald: {msg}"
+  },
+  "move_result": {
+    "drew": "De kaart is van de stook nao 't afval gehaold.",
+    "cannot_draw": "We kunnen niks aafsjlepen. 't Stook en de afvalstof is leeg.",
+    "invalid_pile": "Ongeldige naam van de stapel. Gebroek W, F1-F4 of T1-T7",
+    "foundation_one_card": "Kins allein 1 kaart nao de foundation verplaatsen",
+    "waste_to_foundation_ok": "Verplaatsde kaart van afval naor stichting F{dst}",
+    "waste_to_foundation_bad": "Kan de kaart neet verplaote nao die gróndstapel.",
+    "tableau_to_foundation_ok": "Kaart verhuisd van tableau T{src} nao foundation F{dst}",
+    "tableau_to_foundation_bad": "Kan tableurekaart niet verplaatsen naor die fundatie stapel.",
+    "foundation_to_foundation": "Kan neet van fundatie naor fondasie verplaote.",
+    "waste_to_tableau_one_card": "Kan 1 kaart van de rest naor 't bordje verplaatsen.",
+    "waste_to_tableau_ok": "Verplaatsde kaart van afval naar tabel T{dst}",
+    "waste_to_tableau_bad": "Kan de kaart niet op die tableau stapel plaatsen.",
+    "no_face_up": "Gein opzichte kaarte te verplaatse.",
+    "tableau_to_tableau_ok": "Verhuisd {count} kaart(s) van tableau T{src} nao T{dst}",
+    "tableau_to_tableau_bad": "Kènt {count} kaart(s) neet verhuise van T{src} nao T{dst}",
+    "foundation_to_tableau_one_card": "Kins allein 1 kaart van de foundation nao 't tableau verplaatsen",
+    "foundation_empty": "Stichting F{src} is leeg.",
+    "foundation_to_tableau_ok": "Kaart verhuisd van foundation F{src} nao tableau T{dst}",
+    "foundation_to_tableau_bad": "Kunt nie de foundation kaart op tableau T{dst} plaatsen.",
+    "to_waste_or_stock": "Kan niet verplaatsj waere nao afval of op 't bestand."
+  },
+  "outcome": {
+    "forfeit": "Sjpel opgegaeve. Eindjscore: {score} kaarte in de foundations.",
+    "won": "Gefeliciteerd, ge haet Klondike Solitaire gewonnen!",
+    "turn_limit": "Sjpel aafgeloupe! Geer höb 't maximum van {max_turns} beurten bereik. Score: {score} kaarte in de foundations."
+  },
+  "board": {
+    "title": "=== KLONDIKE PATIENCE ===",
+    "turn": "Beurt: {turn}/{max_turns}",
+    "stock": "Stock: {stock} kaarten",
+    "waste": "Afval (W): {waste}",
+    "foundations_header": "Stichting:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabel: - Deesj.",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

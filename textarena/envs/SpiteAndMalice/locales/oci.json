@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Sètz Jogaire {player_id} dins un jòc de dos jogaires de Spite e Malice. Vòstre objectiu es d'èsser lo primièr a voidar vòstra pila de pagament.\n\n### Vista generala del jòc:\n- L'objectiu es de voidar vòstra pila de pagament en jogant de cartas sus las pilas centralas.\n- Podètz jogar de cartas dempuèi tres fonts:\n  1. Vòstra **man** (començatz cada torn amb fins a 5 cartas en man).\n  2. La **carta de dessús de vòstra pila de pagament**.\n  3. La **carta de dessús de quina que siá de vòstras pilas de rebut**.\n\n### Reglas de jòc:\n- Podètz jogar una carta sus una pila centrala se es **una graduacion mai nauta** que la carta de dessús sus aquela pila (las pilas centralas començan amb l'As e van fins a la Reina; los Reis son salvatges - podon èsser jogats sus quina que siá carta mas cambian pas l'òrdre de las graduacions. Aquò significa que se un Rei es utilizat après un 4, alara aquel Rei es graduat 5 e la carta seguenta deu èsser un 6).\n- Se podètz pas jogar mai de cartas, devètz **rebutar una carta** sus una de vòstras pilas de rebut per acabar vòstre torn.\n- Se una pila centrala atenh la Reina, serà voidada automaticament.\n- L'òrdre de las graduacions es: A=1, 2=2, ..., 9=9, J=10, Q=11, K coma salvatge.\n\n### Accions:\n1. **Tirar**: Al començament de vòstre torn, tiratz de cartas per emplenar vòstra man fins a 5 cartas. Picatz **[draw]** per començar.\n2. **Jogar una carta**: Per jogar una carta, especificatz la carta e la pila centrala coma aquò: **[play A♠ 0]** (ont 'A♠' es la carta e '0' es l'indice de la pila centrala).\n3. **Rebutar**: Se podètz pas jogar mai de cartas, rebutatz una carta de vòstra man sus una pila de rebut per acabar vòstre torn. Picatz **[discard A♠ 1]** (ont 'A♠' es la carta e '1' es l'indice de la pila de rebut). Notatz que podètz pas rebutar quina que siá carta de la pila de pagament. Podètz rebutar sonque las cartas de vòstra man.\n\n"
+  },
+  "board": {
+    "current_board": "Taula actual:\n\n{board}\nMovements disponibles: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pièlas centralas -- ",
+    "pile": "{observation}Pila {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vista del Jogador {player_id} ---\n",
+    "payoff": "{observation}Pila de pèrda (Carta superiora): {top_card}, Longor de la pila de pèrda: {payoff_length}\n",
+    "hand": "{observation}Man: {hand}\n",
+    "discard": "{observation}Pilas de descartes: {discard}\n",
+    "empty": "Es buòu."
+  },
+  "game_message": {
+    "no_cards_left": "I a pas mai de cartas per tirar. Remembratz que podètz jogar las cartas d'aquestas fonts: 1. vòstra man 2. la primièra carta del pichon pilòt 3. la primièira carta dels pichons pilòts. "
+  },
+  "invalid_move": {
+    "wrong_format": "Format de movement invalid. Lo jogaire {player_id} respondèt pas amb un moviment valid dins los parentèsis carrats.",
+    "invalid_play": "Jòc invalid. Jogador {player_id} a temptat de jogar {card} a la pila centrala {index}.",
+    "discard_from_payoff": "Descart invalid. Lo jogaire {player_id} a ensajat de descartar una carta de la pila de pagament.",
+    "discard_not_in_hand": "Descart invalid. Joguèt {player_id} a ensajat de descartar una carta qu'es pas dins la man.",
+    "wrong_move_type": "Tip de movement invalid. Lo jogaire {player_id} respondèt pas amb un tipe de moviment valid."
+  },
+  "game_action": {
+    "you_drew": "Ai tirat las cartas.",
+    "opponent_drew": "Lo jogaire {player_id} tirèt de cartas.",
+    "you_played": "Joguèt {card} sus la pila centrala {index}.",
+    "opponent_played": "Jogador {player_id} a jogat {card} a la pila centrala {index}.",
+    "you_discarded": "Avètz descartat {card} a la pila de descartes {index}, çò que significa que finís vòstre torn. Cap autre accion de la vostra part es presa en compte per aquest torn. Jogador {next_player_id} serà lo seguent.",
+    "opponent_discarded": "Jogador {player_id} a descartat {card} a la pila de descartes {index}, çò que significa tanben que finís son torn. Cap autre accion del Jogador {player_id} es presa en compte per aquest torn. Jogador {next_player_id}, serà lo seu torn. Si us plau, introduïsca la seva accion al format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Lo jogaire {current_player} a acabat sa pila de pagament! Lo jogaire {current_player} ganha!",
+    "deadlock_player_0": "Blocatge atengut! Jogador 0 ganha amb {player_0_payoff} cartas restantas contra {player_1_payoff} cartas del Jogador 1.",
+    "deadlock_player_1": "Blocatge atengut! Jogador 1 ganha amb {player_1_payoff} cartas restantas contra {player_0_payoff} cartas del Jogador 0.",
+    "deadlock_tie": "Arribada a un punt mort amb egalitat ! Los dos jogaires an {player_0_payoff} cartas demoradas. Lo Joueur {current_player} ganha per defaut."
+  }
+}

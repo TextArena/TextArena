@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Jūs spēlējat Golfu (Kārtīgu spēli) - Spēletajs {player_id}.\nMērķis: Iegūt zemāko kopējo rezultātu šajā vienīgajā kārtā. Ja kolonnām ir vienādi vērtības, tās tiek sumētas kā 0.\nKārtīgu vērtības: A=1, 2-10=pakāpes vērtība, J/Q=10, K=0\n\nDarbības (lietojiet precīzas iekavas):\n- '[draw]' - Izvilkt no kārtīgu kaudzes\n- '[take]' - Aizņemt no norādīšanas kaudzes\n- '[swap X Y]' - Aizmainīt izvilkto kārti ar pozīciju X (rinda) Y (kolonna)\n- '[discard]' - Norādīt izvilkto kārti\n"
+  },
+  "board": {
+    "drew": "Jūs izņēmāt: {card}\nTagad jums ir jāsamainā [swap X Y] vai jāatmet [discard] tā.",
+    "took": "Jūs paņēmāt: {card} no atkritumu kaudzes\nJums ir jāsamainā [swap X Y] ar to (nevar atmest).",
+    "peeked": "Jūs pārskatījāt pozīciju ({row},{col}): {card}",
+    "turn_view": "Jūsu roka:\n{hand}\nNorādīšanas kaudze: {discard}\n{options}",
+    "none": "Nivīns"
+  },
+  "options": {
+    "final_turns": "Pēdējie gājieni! Jūsu iespējas: [draw], [take], [peek X Y]",
+    "draw": "Jūsu iespējas: [draw], [take]",
+    "must_swap": "Tev ir juobyut: [swap X Y] (nav īspiejams izlītuot kartis nu atlaižamūs kuortu krūga)",
+    "swap_or_discard": "Jums jā[swap X Y] vai jā[discard]"
+  },
+  "hand": {
+    "no_cards": "Bez kartis.",
+    "header": "Kolns: 1 2 3",
+    "row": "Rinda {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Spēletajs {pid} aizmainīja {new} ar {old} pozīcijā ({row},{col})",
+    "discarded": "Spēlētājs {pid} atmeta {card}"
+  },
+  "message": {
+    "deck_empty": "Koloda ir tukša! Spēle beidzas nekavējoties.",
+    "knocked": "Spēletajs {pid} sita! Katram citam spēletājam ir vēl viena gājiens.",
+    "final_round": "Spēletajs {pid} {reason}! Katram citam spēletājam ir vēl viena gājiens."
+  },
+  "reason": {
+    "all_revealed": "voi vysys kartis ir atkluotys?"
+  },
+  "invalid": {
+    "wrong_action": "Lietojiet tieši VIENU iekavās norādīto darbību: [draw], [take], [swap X Y], [discard], [knock], vai [peek X Y]",
+    "discard_empty": "Atmetņu kūpa ir tukša!",
+    "must_draw_first": "Jūs pirmā kārtā jā[draw], [take], [knock], vai [peek X Y]",
+    "cannot_discard_taken": "Navar iznycynuot kartis, kas ir atjimtys nu aizlīgšonys krūga. Tev juosamaina tuos.",
+    "have_drawn_card": "Jums ir izņemta kārts. Jums ir jāsamainā [swap X Y] vai jāatmet [discard] tā.",
+    "need_drawn_swap": "Kab izmaineitu, tev vajag kartis.",
+    "need_drawn_discard": "Lai izdzīduotu, tev vajag īsuoktū karteņu.",
+    "out_of_bounds": "Pozīcija ārpus robežām. Lietojiet rindu 1-{max_row}, kolonnu 1-{max_col}",
+    "knock_with_card": "Navar izkuopt ar atlaseitū karteņu. Pyrma pabeidz sovu sūli.",
+    "already_knocked": "Kaids jau ir nūspīž itū raundi.",
+    "already_revealed": "Taida karte jau ir atrūnoma!"
+  },
+  "summary": {
+    "full": "Spēle beigusies! Spēletajs {winner} uzvar ar {score} punktiem!\n\nPēdējie rezultāti:\n{scores}",
+    "line": "Spēletajs {pid}: {score} punkti\n"
+  },
+  "board_str": {
+    "title": "=== GOLFA LUOGI===",
+    "discard": "Atmetšonys kuojis: {card}",
+    "knocked": "Spālātuojs {pid} nūdarēja!",
+    "player_header": "Spēletajs {pid} (Rezultāts: {score}):"
+  }
+}

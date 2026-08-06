@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Kamu lagèe Golf (Ureuëng Game) - Ureuëng {player_id}.\nTujuan: Dapeuta nilai poin paléng randah lam ronde tunggal nyoe. Meunyoë kolom na keuh nilai, banda nyang geusumah 0.\nNilai Ureuëng: A=1, 2-10=nilai muka, J/Q=10, K=0\n\nPeurintah (gunayana kurungan teupat):\n- '[draw]' - Kureuëng dari dek\n- '[take]' - Kureuëng dari tumpukan buwang\n- '[swap X Y]' - Geutukar ureuëng nyang kureuëng ngon posisi X (baré) Y (kolom)\n- '[discard]' - Buwang ureuëng nyang kureuëng\n"
+  },
+  "board": {
+    "drew": "Kamu kureuëng: {card}\nJinoe kamu wajéb [swap X Y] atawa [discard] banda.",
+    "took": "Kamu kureuëng: {card} nibak tumpukan buwang\nKamu wajéb [swap X Y] ngon banda (h'an buwang).",
+    "peeked": "Kamu kureuëng nibak posisi ({row},{col}): {card}",
+    "turn_view": "Ureuëng gata:\n{hand}\nTumpukan buwang: {discard}\n{options}",
+    "none": "Hana meu saboh pih."
+  },
+  "options": {
+    "final_turns": "Giliran akhé! Peurintah droe: [draw], [take], [peek X Y]",
+    "draw": "Peurintah droe: [draw], [take]",
+    "must_swap": "Awak harus: [swap X Y] (hana jeut tapeulaku kartu dari tumpukan peuleusu)",
+    "swap_or_discard": "Kamu wajéb: [swap X Y] atawa [discard]"
+  },
+  "hand": {
+    "no_cards": "Hana kartu.",
+    "header": "Kol: 1 2 3 Meuh-meuh, meuh-meu...",
+    "row": "Baris {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Ureuëng {pid} geutukar {new} ngon {old} nibak posisi ({row},{col})",
+    "discarded": "Ureuëng {pid} buwang {card}"
+  },
+  "message": {
+    "deck_empty": "Dek habé! Game tamat sigra.",
+    "knocked": "Ureuëng {pid} ketok! Ureuëng la'én na geubri satu giliran deui.",
+    "final_round": "Ureuëng {pid} {reason}! Ureuëng la'én na geubri satu giliran deui."
+  },
+  "reason": {
+    "all_revealed": "ka mandum kartu jih diungkapkan?"
+  },
+  "invalid": {
+    "wrong_action": "Gunayana kurungan peurintah saboh: [draw], [take], [swap X Y], [discard], [knock], atawa [peek X Y]",
+    "discard_empty": "Tumpukan buwang habé!",
+    "must_draw_first": "Kamu wajéb kureuëng [draw], [take], [knock], atawa [peek X Y] phôn",
+    "cannot_discard_taken": "Droeneuh hanjeut tapeulaku kartu nyang ka teucok nibak tumpukan. Droeneueh haroh neu gantoe jih.",
+    "have_drawn_card": "Kamu na ureuëng kureuëng. Kamu wajéb [swap X Y] atawa [discard] banda.",
+    "need_drawn_swap": "Awak perle kartu nyang ka ditarik keu ji tukeran.",
+    "need_drawn_discard": "Neukreuh kartu nyang ka teuek keu neutip.",
+    "out_of_bounds": "Posisi luwa baté. Gunayana baré 1-{max_row}, kolom 1-{max_col}",
+    "knock_with_card": "Droeneuh hanjeut neugrok ngon kartu nyang ka teuek. Peuseuleusoe kheueh giliran droeneuh leubeh ilée.",
+    "already_knocked": "Na nyang ka ji peuglah.",
+    "already_revealed": "Ureuëng nyan ka geubuka!"
+  },
+  "summary": {
+    "full": "Game Tamat! Ureuëng {winner} meunang ngon nilai {score} poin!\n\nNilai Akhé:\n{scores}",
+    "line": "Ureuëng {pid}: {score} poin\n"
+  },
+  "board_str": {
+    "title": "=== GAME GOLF ===",
+    "discard": "Tumpukan buwang: {card}",
+    "knocked": "Ureuëng {pid} ka ketok!",
+    "player_header": "Ureuëng {pid} (Nilai: {score}):"
+  }
+}

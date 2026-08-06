@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Muli Mchezaji {player_id} katika mchezo wa 3 wa Mfumo wa Kifungo cha Mkosaji. Mchezo unadumu {num_rounds} mipigo.\nMuundo wa mpigo:\n• {conv_rounds} zungulio za maongezi ya bure\n• Zungulio 1 la kufanya maamuzi - wasilishe tokeni moja kwa kila mpinzani: '[<opp-id> cooperate]' au '[<opp-id> defect]' (yaani '[1 defect] [2 cooperate]'; chaguo la awali ni 'cooperate').\nMatrix ya malipo ya jozi (inayotumika kwa kila jozi isiyo na utaratibu):\n  - Wote wawili wanashirikiana  ->  {reward}\n  - Wote wawili wanakataa     ->  {punishment}\n  - Muna kataa, wao wanashirikiana -> {temptation}\n  - Muna ushirikiano, wao wanakataa -> {sucker}\nMchezaji (au wachezaji) aliye na alama ya juu zaidi mwishoni mwa mipigo yote anashinda."
+  },
+  "round": {
+    "start": "─── Kuanza Zipondo {round} ───\tUnaweza kuongolana kwa uhuru kwa zipondo {conv_rounds} zijazo.",
+    "chat_finished": "Mlandu wa maongezi unamalizika kwa mpigo {round}. Perekani maamuzi yenu, tokeni moja kwa kila mpinzani: `[pid cooperate]` au `[pid defect]`."
+  },
+  "results": {
+    "header": "### Zipondo {round} - Matokeo:",
+    "pair_line": "{observation}\n\t Mchezaji {i} dhidi ya Mchezaji {j} walichagua {choice_i} na {choice_j} mtawalia (Mchezaji {i} alipata {gain_i}, Mchezaji {j} alipata {gain_j})",
+    "scores_open": "{observation}\n-> Alama za sasa: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Alama za mwisho: {scores}.  Vikundi vya utaratibu (mbaya→nzuri): {groups}"
+  }
+}

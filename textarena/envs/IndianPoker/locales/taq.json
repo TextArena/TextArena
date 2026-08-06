@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Keddi Player {player_id} deg iman n Poker n Hind.\n- 52-kart tamawt; kattanfat adrar n imaslaɣ deg kart n imaslaɣ.\n- Ante {ante} chip(s) kul adrar, {max_rounds} adrar(s) aked.\n- Imyaten iman: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X d azgen aɣelsan ≤ chip nnek.)\n- Kart n imaslaɣ n iman iɣelnawen tewhid iman n pot deg showdown.\n"
+  },
+  "round": {
+    "announce": "### Adrar {current_round}/{max_rounds}\nKart n imaslaɣ n imaslaɣ nnek d: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Sukkël ikan adad amzay ayyi, si '[check]', '[bet 2]', '[call]', '[raise 3]', neɣ '[fold]'.",
+    "cannot_check": "ⵓⴰⵔ ⴰⴷⴷⵓⴱⴰⵜ [check] - ⴰⵜ-ⵓ-ⴰⴾⵏⴰⵏ ⵉⵢ ⵜⴰⴱⴰⵍⵉⵜ.",
+    "amount_min": "ⵉⵇⵇⴰⵏⴷ ⴰⴷ ⵢⵉⵍⵉ ⵡⴰⵜⵉⴳ ⵏ ⵓⵙⵙⴰⵔⵓ/ⵜⴰⵎⵔⵏⵓⵜ ≥ 1.",
+    "cannot_bet": "Ur izdar [bet] - illa izdar [call] / [raise] / [fold].",
+    "nothing_to_call": "ⵓⴰⵔ ⵉⵍⵍⴰ ⵎⴰⴷ ⵜⵢⵔⴰⵎ, ⵉⵖⵉⵢ [check] ⴳ ⵡⴰⵏⵙⴰ ⵏ ⵡⴰ.",
+    "no_bet_to_raise": "ⵙⵎⵔⴰⵙ [bet X] ⵉ ⵓⴱⵔⵉⵜ; ⵓⵔ ⵉⵍⵍⵉ ⵡⴰⵜⵉⴳ ⵏ ⵓⵙⵜⴰⵔ.",
+    "insufficient": "ⵓⴰⵔ ⵜⵉⵍⴰ ⴰⴶⵓⴷⵉⴾⴰⵏ ⵛⵂⵉⴱⵙ ⵉⴰ ⵜⴰⵆⴰⵍⵜ ⵜⴻⵏ."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "ⵜⵉⵍⴰⵍ ⵜⵉⵏ ⴰⴷⴷⵓⵔⵏ ⵏⵏⴽ: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Imudar {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "ⴰⵎⵓⵔⴰⵔ {player_id} ⵢⴻⵙⵙⴰⴷⴰⴱ.",
+    "showdown_win": "Showdown: {card_win} iɣelnawen {card_lose}.",
+    "showdown_tie": "Showdown tie: kul {card}. Pot split – kul adrar {split}."
+  },
+  "outcome": {
+    "p0_wins": "Imudar 0 yettɛedda ({bank0} > {bank1})",
+    "p1_wins": "Imudar 1 yettɛedda ({bank1} > {bank0})",
+    "draw": "ⵆⴰⵙⴰⵏ ⵜⵉⵛⵉⴱⵙ ⵓⴰⵔ ⵏ ⵉⴾⵎⴰⵍ ⴰⵗⴰⵍⴰⵉ"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Káma káwù {player_id} shi kárà {num_players}-káwù Liar's Dice ká fìrì.\nKárá:\n- Ká shí káwù, ká má ká:\n  1) Fìrì mbàrà káwù kwánì shí káwù kwánì fìrì mbàrà (kó kwánì káwù); kólè '[Bid: 3, 4]',\n  2) Kólè ká mbàrà kólè shí káwù '[Call]'.\n\nKólè ká mbàrà:\n  - Kólè ká mbàrà káwù shí káwù kwánì káwù kólè ká mbàrà, ká mbàrà káwù kólè ká die.\n  - Kólè káwù, ká mbàrà kólè ká die.\nKáwù kólè 0 ká die shí káwù kólè. Káwù kólè káwù shí káwù kólè."
+  },
+  "board": {
+    "per_player": "\tƊon ƙwara {p}: {d}",
+    "new_round": "\nSabon zagaye - Dice masu rage: {dice_summary}\nDice na yanzu suna: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Káma {current_player_id} ká call! Káma wane ka face {face_value} ka wane {count}, ka wane ka LESS ka {quantity}.\nKáma {loser_id} (káma bidder káma) ka wane ka die ka wane.",
+    "caller_loses": "Ɗon ƙwara {current_player_id} ya kira! Jimillar adadin fuska {face_value} shine {count}, wanda >= {quantity}.\nƊon ƙwara {loser_id} (mai kira) ya rasa die daya."
+  },
+  "action": {
+    "bid_announce": "Ɗon ƙwara {player_id} yin bidda {quantity} na fuska {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Am dәye awo laa gәnyi ro tәdin ba lan bowozana.",
+    "invalid_bid": "Bidatǝ ba wo: {reason}",
+    "not_recognized": "Aikin ba a gane shi a matsayin ko '[Bid: X, Y]' ko '[Call]' na halal. Aikin da aka gabatar: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Sabon adadin {new_quantity} ƙasa ce fiye da na yanzu {current_quantity}.",
+    "face_lower": "Sabon darasin fuska {new_face_value} ƙasa ce fiye da na yanzu {current_face_value}.",
+    "identical": "Tartip donyi kǝrma dǝ shima tartip do kәlanzǝye wo.",
+    "face_range": "Nəm tamanne dә kate 1 kuru 6 lan kara."
+  },
+  "message": {
+    "eliminated_invalid": "Kambiwu {player_id} dә letәgәnyiye sәkkә."
+  },
+  "outcome": {
+    "win": "Ɗon ƙwara {winner} ya lashe! Zaɓen ƙarshe: {final_ranking}"
+  }
+}

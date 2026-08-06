@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Izy no Mpilalao {player_id} ao amin'ny Stratego.\nLengo fanananao dia miteny ny Fanja ny mpifanandrina na manala ny sakafona rehetra azon'ny mpifanandrina.\nNy tafikao efa nesorana ao amin'ny bato, anisan'izany ny Fanja, bôma, ary ny sakafona hafa maro.\n\n### Instruktion ny Fampilezana\n1. **Reglementation ny Fihetsizana:**\n   - Amin'ny fandehananao, afaka mihetsy ny sakafona iray amin'ny hatramin'ny iray safidro (ambony, ambany, ankavia, na ankavanana) izay efa misy ny sakafonao.\n   - Ohatra: Sakafona afaka mihetsy avy any A1 any B1 na A1 any A2 raha B1 sy A2 tsy nesorana tamin'ny mpilalao.\n   - Raha ny sakafona voafidy dia bôma na fanja, tsy afaka mihetsy.\n2. **Ady:**\n   - Raha mihetsy any amin'ny safidro misy ny sakafona mpifanandrina, ady hatao:\n     - Ny sakafona masoandro ambony no manana ny ady ary manala ny sakafona mpifanandrina.\n     - Raha ny masoandro mitovy, roa sakafona no sesorana amin'ny bato.\n     - **Kasoana:**\n       - Bôma manala ny sakafona mpitifitra isan'izany minera, izay manala ny bôma.\n       - Spy afaka manana ny marshall raha spy no mpitifitra voalohany fa resy amin'ny sakafona hafa rehetra.\n3. **Lengo:**\n   - Tadiavina ny sakafona mpifanandrina amin'ny alalan'ny fihetsizana sy ady.\n   - Sampirihitra ny Fanjao fa miteny ny Fanja mpifanandrina.\n   - Ampiasa ny Scouts amin'ny alalan'ny fampahalalana ny sakafona mpifanandrina ary ady ny sakafona madinika.\n\n### Fomba Fihetsizana:\n1. Tadiavina ny koordinata ny sakafona te hihetsy ary toerana nipetraka.\n2. Ampiasa ny fomba: [A0 B0], A0 no toerana nipetraka, B0 no toerana nipetraka.\n   - Ohatra: Raha hihetsy sakafona avy any laharana 0, kolona 0 any laharana 1, kolona 0, ovana [A0 B0].\n3. Ampia ny toerana nipetraka dia validy amin'ny alalan'ny reglementation ny fihetsizana.\n\n### Fanamarihana:\n- Ny bato hita ny sakafonao ary toerana nipetraka, ohatra MN, MS.\n- Ny bato hita ny toerana nipetraka sakafona mpifanandrina tsy tafiditra ny masoandro, ohatra ?.\n- Safidro ~ dia renirano ary tsy afaka mihetsy.\n- Ho valin'ny filalana, manomboka ny filalanao amin'ny fihetsizana ny sakafona any amin'ny front, mba hitadiavina ny sakafona mpifanandrina. Mpilalao 0 sy mpilalao 1 front any laharana D sy G.\n\nIty ny bato ankehitriny:\n"
+  },
+  "board": {
+    "current_board": "Birao ankehitriny: {board} Hetsika azo atao: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Tsy mety ny endrika hetsika. Tsy nampiditra hetsika amin'ny endrika [A0 B0] ny mpilalao {player_id} .",
+    "invalid_coordinates": "Tsy mety ny endrika hetsika. Tsy nampiditra ny mari-pamantarana marina ny mpilalao {player_id} .",
+    "not_own_piece": "Tsy mety ny endrika hetsika. Tsy maintsy mihetsika ny iray amin'ireo sombin-dry zareo ny mpilalao {player_id}.",
+    "scout_through_pieces": "Tsy mety ny endrika hetsika. Ny mpilalao {player_id} dia tsy afaka mamindra ny scout amin'ny alàlan'ny sombin-javatra hafa.",
+    "scout_diagonal": "Tsy mety ny endrika hetsika. Ny mpilalao {player_id} dia tsy afaka mihetsika amin'ny diagonal.",
+    "non_scout_multi_square": "Tsy mety ny endrika hetsika. Ny sombin-javatra, ankoatra ny scouts, dia afaka mihetsika kianja iray ihany isaky ny mandeha.",
+    "move_into_lake": "Tsy mety ny endrika hetsika. Tsy afaka miditra ao amin'ny farihy ny mpilalao {player_id}.",
+    "move_onto_own_piece": "Tsy mety ny endrika hetsika. Tsy afaka mihetsika amin'ny sombin-tsainy ny mpilalao {player_id}.",
+    "move_bomb_or_flag": "Tsy mety ny endrika hetsika. Ny mpilalao {player_id} dia tsy afaka mihetsika baomba na sainam-pirenena."
+  },
+  "game_action": {
+    "you_moved": "Nampihetsika ny sombinao avy amin'ny {source} ho any amin'ny {dest} ianao.",
+    "opponent_moved": "Ny mpilalao {player_id} dia nanetsika ny sombiny avy amin'ny {source} ho any amin'ny {dest}.",
+    "you_equal_ranks": "Nanorimandry ny sakafonao avy ao {source} any {dest}. Ny sakafona mpitifitra ilay no {attacking_rank} ary ny toerana nipetraka ilay sakafona no {target_rank}. Satria ny masoandro mitovy, roa sakafona no nesorana.",
+    "opponent_equal_ranks": "Ny mpilalao {player_id} dia nanova ny tsatòka avy amin'ny {source} ho {dest}. Ny tsatòka nanafika dia {attacking_rank} ary ny tsatòka nanatratra dia {target_rank}. Satria mitovy ny laharana, dia very ny tsatòka roa.",
+    "you_miner_defused": "Nanorimandry ny sakafonao avy ao {source} any {dest}. Ny sakafona mpitifitra ilay no {attacking_rank} ary ny toerana nipetraka ilay sakafona no {target_rank}. Satria ny minera mety manala ny bôma, nandresy ny ady io.",
+    "opponent_miner_defused": "Ny mpilalao {player_id} dia nanetsika ny sombin-javatra iray avy {source} ho {dest}. Ny sombin-javatra nanafika dia {attacking_rank} ary ny sombin-javatra tonga dia {target_rank}. Satria afaka manafoana baomba ny mpitrandraka, resy ianao tamin'ny ady.",
+    "you_bomb_lost": "Nindrianao ny kipao nareo avy any {source} nankany {dest}. Ny kipao nanafika dia {attacking_rank} ary ny kipao nalefa dia {target_rank}. Noho ny mpitafika tsy mpanefy volamena, resy ianao tamin'ny ady.",
+    "opponent_bomb_won": "Ny mpilalao {player_id} dia nanetsika ny sombin-javatra iray avy amin'ny {source} ho {dest}. Ny sombin-javatra nanafika dia {attacking_rank} ary ny sombin-javatra tonga dia {target_rank}. Satria tsy mpitrandraka ny mpanafika, nandresy ny ady ianao.",
+    "you_spy_won": "Nanorimandry ny sakafonao avy ao {source} any {dest}. Ny sakafona mpitifitra ilay no {attacking_rank} ary ny toerana nipetraka ilay sakafona no {target_rank}. Satria ny mpitifitra spy ary ny toerana nipetraka marshall, nandresy ny ady io.",
+    "opponent_spy_lost": "Ny mpilalao {player_id} dia nanetsika ny sombin-javatra iray avy amin'ny {source} ho {dest}. Ny sombin-javatra nanafika dia {attacking_rank} ary ny sombin-javatra hoentina dia {target_rank}. Satria ny mpanafika dia mpitsikilo ary ny tanjona dia marshall, resinao ny ady.",
+    "you_higher_won": "Nanorimandry ny sakafonao avy ao {source} any {dest}. Ny sakafona mpitifitra ilay no {attacking_rank} ary ny toerana nipetraka ilay sakafona no {target_rank}. Satria ny mpitifitra masoandro ambony noho ny toerana nipetraka, nandresy ny ady io.",
+    "opponent_higher_lost": "Ny mpilalao {player_id} dia nanetsika ny sombin-javatra iray avy amin'ny {source} ho {dest}. Ny sombin-javatra nanafika dia {attacking_rank} ary ny sombin-javatra tonga dia {target_rank}. Satria ny mpanafika dia ambony laharana noho ny toerana haleha, dia resy ianao.",
+    "you_lower_lost": "Nanorimandry ny sakafonao avy ao {source} any {dest}. Ny sakafona mpitifitra ilay no {attacking_rank} ary ny toerana nipetraka ilay sakafona no {target_rank}. Satria ny mpitifitra masoandro ambany noho ny toerana nipetraka, resy ny ady io.",
+    "opponent_lower_won": "Ny mpilalao {player_id} dia nanova ny tsatòka avy amin'ny {source} ho {dest}. Ny tsatòka nanafika dia {attacking_rank} ary ny tsatòka nanatratra dia {target_rank}. Satria ny mpanafika dia ambany laharana noho ny toerana, nandresy ianao tamin'ny ady."
+  },
+  "outcome": {
+    "flag_captured": "Mpilalao {player_id} no naka ny sainan'ny mpanohitra!",
+    "no_movable_pieces": "Mandresy ny mpilalao {winner_id}! Tsy manana sombin-javatra azo afindra intsony ny mpilalao {loser_id}."
+  }
+}

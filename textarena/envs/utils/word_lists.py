@@ -228,8 +228,14 @@ DEFAULT_MIN_ZIPF = 2.5
 
 # Scripts that are not letter-based; excluded from per-letter games (Wordle,
 # Hangman, SpellingBee) where "a word of N letters" / letter guessing is
-# meaningless. Documented per game.
-NON_ALPHABETIC_LANGS = {"zh"}
+# meaningless. Documented per game. Japanese (kana/kanji, no inter-word spaces)
+# joins the logographic/abugida set.
+NON_ALPHABETIC_LANGS = {"zh", "ja", "ko", "hi", "bn", "ta"}
+
+# UI language codes whose wordfreq data lives under a different code.
+# Serbian ("sr") and Croatian ("hr") both draw on wordfreq's Serbo-Croatian
+# macrolanguage data ("sh"); they share word content and differ only in UI locale.
+WORDFREQ_ALIASES = {"sr": "sh", "hr": "sh"}
 
 
 class WordFreqDictionary:
@@ -244,10 +250,13 @@ class WordFreqDictionary:
                 f"package. Install it with:  pip install textarena[wordgames]  "
                 f"(or: pip install wordfreq). English needs no extra install."
             ) from e
-        if lang not in wordfreq.available_languages():
+        self.ui_lang = lang
+        # Some UI codes differ from wordfreq's (e.g. Serbian "sr" -> "sh").
+        wf_lang = WORDFREQ_ALIASES.get(lang, lang)
+        if wf_lang not in wordfreq.available_languages():
             raise ValueError(f"wordfreq has no word data for language '{lang}'.")
         self._wf = wordfreq
-        self.lang = lang
+        self.lang = wf_lang
         self.min_zipf = min_zipf
         self.pool_size = pool_size
         self._pool = None  # lazily built alphabetic token set
@@ -255,6 +264,13 @@ class WordFreqDictionary:
     def is_valid(self, word: str) -> bool:
         """A token is valid if its wordfreq Zipf frequency clears the threshold."""
         return self._wf.zipf_frequency(word.lower(), self.lang) >= self.min_zipf
+
+    def zipf(self, word: str) -> float:
+        """Zipf frequency (0..~8) of a token in this language (alias-resolved).
+
+        Lets callers rank words by frequency without touching the raw UI code
+        (which may differ from wordfreq's, e.g. sr -> sh)."""
+        return self._wf.zipf_frequency(word.lower(), self.lang)
 
     def get_all_words(self) -> set[str]:
         """The set of frequent, single-token alphabetic words for this language."""

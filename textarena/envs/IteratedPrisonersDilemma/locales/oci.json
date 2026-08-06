@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ètz jogaire {player_id} dins un Dilema del Prisonièr Iterat que dura {num_rounds} torns.\n\nEstructura del Jòc:\n- Abans cada decision, avètz {total_conversation_rounds} torns per comunicar liurament.\n- Aprèp, ambedos jogaires causisson simultanèament de cooperar o de traïr.\n\nMatritz de Pagament (fixa a cada torn):\n- Totes dos Cooperan ➜ cadun {cooperate_reward}\n- Totes dos Traïsson ➜ cadun {mutual_defect_reward}\n- Un traïs, un Cooperan ➜ Traïdor {defect_reward}, Cooperador {sucker_reward}\n\nComa jogar:\n- Pendent la conversation: podètz escriure quin texte que volgatz.\n- Pendent la fasa de decision: inclutz '[Cooperate]' o '[Defect]' (insensible a la casuda). Podètz apondre de tèxt extra abans/aprèp lo geton."
+  },
+  "phases": {
+    "conversation_finished": "Conversation acabada per lo torn {round}. Respondez amb '[Cooperate]' o '[Defect]' dins \\boxed{{}}.",
+    "starting_round": "--- Començament de la ronda {round} ---",
+    "round_summary": "Resultats del torn {round}:\n{outcome}\nLo Jogaire 0 a ganhat {r0} (total {score_0}), lo Jogaire 1 a ganhat {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Jogador {winner} ganha {win_score} - {lose_score}.",
+    "draw": "Ambedos jogaires marquèron {s0}.",
+    "round_both_cooperate": "Ambedos jogaires cooperèron.",
+    "round_both_defect": "Ambedos jogaires deserguèron.",
+    "round_p0_cooperates_p1_defects": "Lo jogaire 0 cooperèt, lo 1 desertèt.",
+    "round_p0_defects_p1_cooperates": "Lo jogaire 0 desertèt, lo 1èr cooperèt."
+  }
+}

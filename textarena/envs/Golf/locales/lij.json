@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Ti stæ xugando a-o Golf (Giögo de Carte) - Giugador {player_id}.\nObiettivo: Ottegni o punteggio totale ciù basso in questa man sola. Se e colonne condividde o mæximo valô, son sommæ comme 0.\nValori de Carta: A=1, 2-10=valô faciale, J/Q=10, K=0\n\nAçion (dövra e parentexi esatte):\n- '[draw]' - Pescia da-o mazzo\n- '[take]' - Piggia da-a pila de scarto\n- '[swap X Y]' - Scambia a carta pesciâ con a poxision X (riga) Y (colonna)\n- '[discard]' - Scarta a carta pesciâ\n"
+  },
+  "board": {
+    "drew": "Ti æ pesciou: {card}\nOra ti devi [swap X Y] o [discard] la.",
+    "took": "Ti ê pigiò: {card} da-o disco de carte scartae\nTi devi [swap X Y] con lô (nò pôi scartâ)",
+    "peeked": "Ti ê guardò a-a poxiçion ({row},{col}): {card}",
+    "turn_view": "A ti mano:\n{hand}\nDisco de carte scartae: {discard}\n{options}",
+    "none": "Nisciun"
+  },
+  "options": {
+    "final_turns": "Torni finæ! E tê opçioin: [draw], [take], [peek X Y]",
+    "draw": "E tê opçioin: [draw], [take]",
+    "must_swap": "Ti devi: [swap X Y] (no ti peu scartâ de carte da pila d'escartamento)",
+    "swap_or_discard": "Ti devi: [swap X Y] o [discard]"
+  },
+  "hand": {
+    "no_cards": "No gh'é carte.",
+    "header": "  Col:   1    2    3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Giougadô {pid} a scangiò {new} con {old} a-a poxiçion ({row},{col})",
+    "discarded": "Giougadô {pid} a descartò {card}"
+  },
+  "message": {
+    "deck_empty": "A pòrta a l'é sciortia, o zeneize finisce.",
+    "knocked": "O zugatô {pid} o l'é sciortîo! Ogni atro zùgno o gh'à un turno de ciù.",
+    "final_round": "Giougadô {pid} {reason}! Ogni atro giougadô o l'ha 'n atro tornò"
+  },
+  "reason": {
+    "all_revealed": "o l'à tutte e càrte scovèrte"
+  },
+  "invalid": {
+    "wrong_action": "Dêuvi un'açion con brachette: [draw], [take], [swap X Y], [discard], [knock], o [peek X Y]",
+    "discard_empty": "A pila de scarto a l'é sciù!",
+    "must_draw_first": "Ti devi primma [draw], [take], [knock], o [peek X Y]",
+    "cannot_discard_taken": "No ti peu scartâ unna carta piggiâ da-a pila de scarto, l'é beseugno cangiâla.",
+    "have_drawn_card": "Ti ê tirò 'na carta. Ti devi [swap X Y] o [discard]",
+    "need_drawn_swap": "Ti gh'æ beseugno de unna carta desegnâ pe scambiâ.",
+    "need_drawn_discard": "Ti gh'æ beseugno de unna carta desfâ pe scartâla.",
+    "out_of_bounds": "Poxiçion fêua di limiti. Dêuvi a riga 1-{max_row}, colonna 1-{max_col}",
+    "knock_with_card": "No ti peu batte con unna carta tirâ.",
+    "already_knocked": "Unn'atra persoña a l'à za fæto sto giro.",
+    "already_revealed": "Sta carta a l'é za stæta rivelaa!"
+  },
+  "summary": {
+    "full": "Giögo Finito! Giugador {winner} o vince con un punteggio de {score} punti!\n\nPunteggi Finâ:\n{scores}",
+    "line": "Zögô {pid}: {score} punti\n"
+  },
+  "board_str": {
+    "title": "=== ZÊUGO DO GOLF ===",
+    "discard": "A-o scartâ: {card}",
+    "knocked": "O zugatô {pid} o l'à battou!",
+    "player_header": "Giugador {pid} (Punteggio: {score}):"
+  }
+}

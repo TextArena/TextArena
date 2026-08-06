@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Anda sadang bamain Klondike Solitaire. Tujuan Anda adolah mamindahkan kartu sadonyo ka tumpukan pondasi.\n\nAturan Permainan:\n- Tumpukan pondasi (F1-F4): Bangun dari As hinggo Rajo dalam satuan warna\n- Tumpukan tableau (T1-T7): Bangun turun jo warna selang-seling (merah di ateh itam, itam di ateh merah)\n- Stock: Ambiak kartu ka tumpukan sampah\n- Sampah (W): Kartu paling ateh tasadio untuak dimainkan\n\nPerintah:\n- 'draw' - Ambiak kartu dari stock ka sampah\n- 'move <source> <destination> [count]' - Pindahkan kartu antaro tumpukan\n  Contoh: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count dapek pulo 'all', nan akan mancubo mamindahkan kartu sadonyo nan tatuo.\n- 'forfeit' - Akhiri permainan langsung jo kunci skor kini\n- Namo tumpukan: W (sampah), F1-F4 (pondasi), T1-T7 (tableau)\n\nAnda dapek malakukan aksi-aksi babarapo dalam ciek giliran jo mamisahkan mareka jo koma:\n  Contoh: 'draw, move W T1, move T2 F1'\n\nHanyo Rajo dapek ditempatkan di ateh tumpukan tableau kosong.\nAksi-aksi bajalan sacaro baturuik - jiko ciek gagal, aksi-aksi salanjuiknyo diabaikan.\nGunokan 'forfeit' jiko Anda picayo permainan ko mustahil dimenangkan."
+  },
+  "format_error": {
+    "no_brackets": "Format tindakan indak sah. Tindakan harus ado dalam kurung-kurung.",
+    "no_closing_bracket": "Format tindakan indak sah. Indak ado kurung panutuik \"]\"",
+    "empty_command": "Parintah kosong. Ketik \"draw\" atau 'move <source> <destination> [count]'",
+    "empty_action": "Aksi nan indak ado gunonyo",
+    "move_needs_args": "Parintah pindah mamaraluan sumber jo tujuan. Panggunoan: 'move <source> <destination> [count]'",
+    "count_positive": "Jumlah harus positif atau 'all'",
+    "count_invalid": "Jumlah tidak valid. Gunakan angka atau 'all'",
+    "unknown_command": "Perintah tidak diketahui '{cmd}'. Gunakan 'draw', 'move <source> <destination> [count]', atau 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Dilaksanakannyo {n} tindakan (s) sabalun gagal.",
+    "failed": "Aksi {n} gagal: {msg}"
+  },
+  "move_result": {
+    "drew": "Tarik kartu (s) dari stok ka limbah.",
+    "cannot_draw": "Indak dapek dibuek. Kaduo stok jo limbah lah kosong.",
+    "invalid_pile": "Namo tumpukan indak sah. Gunakannyo W, F1-F4, atau T1-T7",
+    "foundation_one_card": "Hanyo dapek mamindahkan 1 kartu ka pangkalan.",
+    "waste_to_foundation_ok": "Kad dipindahan dari limbah ka pondasi F{dst}",
+    "waste_to_foundation_bad": "Indak dapek mamindahkan kartu limbah ka tumpukan pondasi tu",
+    "tableau_to_foundation_ok": "Pindahkan kartu dari tableau T{src} ke fondasi F{dst}",
+    "tableau_to_foundation_bad": "Indak dapek mamindahkan kartu tableau ka tumpukan pondasi tu",
+    "foundation_to_foundation": "Indak dapek bapindah dari pandirian ka pandirian lain.",
+    "waste_to_tableau_one_card": "Hanyo dapek mamindahkan 1 kartu dari sampah ka tableau",
+    "waste_to_tableau_ok": "Pindah kardus dari limbah ka tabel T{dst}",
+    "waste_to_tableau_bad": "Indak dapek mamasang kartu limbah pado tumpukan tableau tu",
+    "no_face_up": "Indak ado kartu nan dicaliak ka ateh untuak dipindahan.",
+    "tableau_to_tableau_ok": "Pindahkan {count} kartu dari tableau T{src} ke T{dst}",
+    "tableau_to_tableau_bad": "Tidak bisa memindahkan {count} kartu dari T{src} ke T{dst}",
+    "foundation_to_tableau_one_card": "Hanyo dapek mamindahkan 1 kartu dari pandirian ka tableau.",
+    "foundation_empty": "Yayasan F{src} indak ado.",
+    "foundation_to_tableau_ok": "Pindahkan kartu dari fondasi F{src} ke tableau T{dst}",
+    "foundation_to_tableau_bad": "Indak dapek mamasang kartu pandirian pado tabel T{dst}",
+    "to_waste_or_stock": "Indak dapek dipindahan ka limbah atau stok."
+  },
+  "outcome": {
+    "forfeit": "Game dibuek. Skor akhir: {score} kartu dalam pondasi.",
+    "won": "Tahniah, awak lah manang di Klondike Solitaire!",
+    "turn_limit": "Permainan berakhir! Anda mencapai batas maksimum {max_turns} giliran. Skor: {score} kartu di fondasi."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== Panek Di Awak Kayo Dek Urang ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stok: {stock} kartu nan ado di dalamnyo.",
+    "waste": "Sampah (W): {waste}",
+    "foundations_header": "Yayasan:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabel:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

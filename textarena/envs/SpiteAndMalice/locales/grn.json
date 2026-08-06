@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Nde Player {player_id} reiko peteĩ ñembosarái mokõiha Spite and Malice pegua. Ne remiandu niko ñañoambue nde ñemuhape.\n\n### Ñembosarái Rechauka:\n- Upe marandu niko oñemuhape ne ñemuhape ojapo ñembosarái katu ojapo karta kuatia mbytépe.\n- Nde ikatu ojapo karta kuatia mbytépe umi ñe'ẽ:\n  1. Ne **pó** (nde oñepyrũ ñembosarái ojapo poteĩ karta pópe).\n  2. **Karta oĩva ári ne ñemuhape**.\n  3. **Karta oĩva ári ne mbytépe ñemuhape**.\n\n### Ñembosarái Rekorãnguéra:\n- Nde ikatu ojapo karta kuatia mbytépe oĩva **peteĩ rango ijyvateve** karta oĩva ári upe kuatiape (kuatia mbytépe oñepyrũ A ha oho Q peve; K niko ojapo opaite karta ári, ha katu ndoikói rango ñembyaty. Ko'ãva he'ise K ojapova 4 rire, upe K ojapo 5 ha karta oĩva ojapo 6).\n- Nde ikatu'ỹ ojapo karta ambué, nde ikatu **oñembyai karta** mbytépe ñemuhape nde oñembyai hag̃ua ne ñembosarái.\n- Kuatia mbytépe ojapo Q, oñembyai automaticamente.\n- Rango ñembyaty niko: A=1, 2=2, ..., 9=9, J=10, Q=11, K ojapo opaite karta ári.\n\n### Tembiaporãnguéra:\n1. **Ñembyaty**: Ñembosarái oñepyrũ nde ñembosarái, ñembyaty karta ojapo nde pó ojapo 5 karta. Eingresa **[draw]** oñepyrũ.\n2. **Ojapo Karta**: Ojapo karta, ehecha karta ha kuatia mbytépe ko'ãicha: **[play A♠ 0]** (nde 'A♠' niko karta ha '0' niko kuatia mbytépe index).\n3. **Ñembyai**: Nde ikatu'ỹ ojapo karta ambué, ñembyai karta nde pógui mbytépe ñemuhape nde oñembyai hag̃ua ne ñembosarái. Eingresa **[discard A♠ 1]** (nde 'A♠' niko karta ha '1' niko mbytépe ñemuhape index). Nde ikatu'ỹ ñembyai karta ñemuhape pegua, nde ikatu ñembyai karta pógui.\n\n"
+  },
+  "board": {
+    "current_board": "Kuatiape Ag̃agua:\n\n{board}\nTekotevẽ oñeha'ã: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Píla central kuérape g̃uarã -- ",
+    "pile": "{observation}Pila {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Player {player_id} Teku'a ---\n",
+    "payoff": "{observation}Ñembyaty Payoff (Karta Peteĩha): {top_card}, Ñembyaty Payoff Kuatia: {payoff_length}\n",
+    "hand": "{observation}Peteĩ póra: {hand} ",
+    "discard": "{observation}Ñembyaty Ñe'ẽmbyre: {discard}\n",
+    "empty": "Okaháre'ÿva"
+  },
+  "game_message": {
+    "no_cards_left": "Ndaipóri karta oñeha'ã. Nde ikatu ojapo karta kuatia ñe'ẽmbyregui:\n  1. Nde **ñepyrũ**.\n  2. **Karta peteĩha ñembyaty payoff pile**.\n  3. **Karta peteĩha ñembyaty ñe'ẽmbyre**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movimiento no válido. Jokuaha {player_id} nombohovái peteĩ movimiento válido paréntesis cuadrado-pe.",
+    "invalid_play": "Tekotevẽ oñeha'ã karta. Player {player_id} ojapo {card} kuatiape {index}.",
+    "discard_from_payoff": "Oheja rei. Jokuaha {player_id} oñeha'ã ohejarei peteĩ tarjeta ñembopaga rehegua pila-gui.",
+    "discard_not_in_hand": "Oheja rei. Jokuaha {player_id} oñeha'ã ohejarei peteĩ tarjeta ndoguerekóiva ipópe.",
+    "wrong_move_type": "Tipo de movimiento noĩporãiva. Jokuaha {player_id} nombohovái peteĩ tipo de movimiénto válido reheve."
+  },
+  "game_action": {
+    "you_drew": "Nde rejogua tarjeta.",
+    "opponent_drew": "Jugador {player_id} ojogua karta.",
+    "you_played": "Nde rejapo {card} pe pila central-pe {index}.",
+    "opponent_played": "Jokuaihára {player_id} ombopuva'ekue {card} pila central-pe {index}.",
+    "you_discarded": "Erekóma ehecha {card} karta oñembotýva pile {index}-pe, upéicha avei eñembohasa eñe término. Ndaikatúi eñe remiandu oñembohetave ko término aja. Jugador {next_player_id} ohasáta iñe término.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Jugador {current_player} ojapóma iñemuhaku! Jugador {current_player} ipu'aka!",
+    "deadlock_player_0": "Oñomoirũ! Jugador 0 ohenói {player_0_payoff} karta reheve, Jugador 1 oguerekóva {player_1_payoff} karta.",
+    "deadlock_player_1": "Oñomoirũ! Jugador 1 ohenói {player_1_payoff} karta reheve, Jugador 0 oguerekóva {player_0_payoff} karta.",
+    "deadlock_tie": "Deadlock reached with tie! Both players have {player_0_payoff} cards remaining. Player {current_player} wins by default."
+  }
+}

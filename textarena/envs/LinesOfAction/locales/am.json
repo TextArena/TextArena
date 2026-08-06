@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "አንተ ተጫዋቹ {player_id} በላይኖች አክሽን ጌም ነህ.\nአንተ አክሽኖች '{side}' ናቸው, ተወዳዳሪው አክሽኖች '{other}' ናቸው.\nየንቅስ ፎርማት: `[b1b3]` (ከ-ኮኦርዲኔት ወደ-ኮኦርዲኔት). ህጋዊ ንቅስ በአንድ አይነት ቀጥታ, በአንድ አይነት አንፃራዊ, ወይም በአንድ አይነት ግራኝ አንፃራዊ እንደ ቦርድ ላይ ያሉት አክሽኖች (ማንኛውም ቀለም) ቁጥር እንደሆነ እንደዚያ ብዛት አድርጎ እንደሚንቀሳቀስ. አንተ ራስህን አክሽኖች ላይ አግለለው ብለህ ሊያልፍ ትችላለህ, ተወዳዳሪውን አክሽኖች ላይ አግለለው ብለህ አልፈው ሊያልፍ አትችልም; ተወዳዳሪውን አክሽን ላይ ሲያርፍ አሸንፎታል. ሁሉም አክሽኖችህ 8-ተናባቢ ተያያዙ ሲሆኑ አሸንፈሀል."
+  },
+  "board": {
+    "current_board": "ቦርድ: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ቅርጸት e2e4 መሆን አለበት (ከ,ወደ መጋጠሚያዎች) ።",
+    "no_piece": "ማንኛውም ኤሌሞን �{side} በ �{coord} ላይ የለም.",
+    "identical": "ምንጭና መድረሻ አንድ ናቸው።",
+    "not_straight_or_diagonal": "እንቅስቃሴው ቀጥተኛ ወይም አግድም መሆን አለበት።",
+    "wrong_distance": "ከመስመር ጋር እኩል ርቀት መጓዝ አለበት።",
+    "enemy_blocks": "የጠላት ቁራጭ መንገድን ይዘጋል.",
+    "destination_own": "በገዛ መሣሪያው የተያዘ መድረሻ።"
+  },
+  "game_action": {
+    "moved": "ተጫዋች {player_id} ከ {from} ወደ {to} ተንቀሳቀሰ",
+    "captured_suffix": "ኤሌሞን �{player_id} ተሻጋረ �{from} -> {to} የጠላትን አካቶ"
+  },
+  "outcome": {
+    "win": "ሁሉም ቁርጥራጮች ተገናኝተዋል።",
+    "draw_no_capture": "60 እንቅስቃሴዎች ያለ መያዝ.",
+    "draw_repetition": "ቦታው ሦስት ጊዜ ተደጋግሟል።"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "D ak i d-uwanek {player_id} deg Three-Player Tic Tac Toe.\nAzamul inek d '{symbol}'.\nTettekkiḍ lawan iɛeddan azamul inek ɣef takarḍa 5x5 i wakken ad teskelsiḍ aɣris n kuẓ.\nIɣrisen zemren ad ilin ufella, ubeqqeḍ, neɣ aɣris aɛewwaḍ.\nSekkelsiḍ iɣewwaṛ inek s tifinaghin '[4]' i wakken ad teskelsiḍ takarḍa 4."
+  },
+  "board": {
+    "current_board": "Takarḍa n wass:\n\n{board}\n\nIɣewwaṛen iɛeddanen: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Asebter n usiweḍ ur yelhi ara. Seqdec \"[cell]\" anda tazeqqa d 0-{max_cell} .",
+    "out_of_range": "Uṭṭun n tzelɣa ur nelli ara d win: {cell}. Ilaq ad yili gar 0 akked {max_cell} .",
+    "already_occupied": "Taɣeṭṭa {cell} tella tura.",
+    "made_invalid": "Amyurar {player_id} iga-d amussu ur nlaq ara."
+  },
+  "game_action": {
+    "placed": "Aneggaru {player_id} yettwaṭṭas isemlal-is ({symbol}) deg meṛṛa ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Aneggaru {player_id} ({symbol}) yettwassen!",
+    "draw": "Urar-a d amennuɣ!"
+  }
+}

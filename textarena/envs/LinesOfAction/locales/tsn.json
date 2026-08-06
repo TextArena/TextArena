@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "O motshameki {player_id} mo papading ya LinesOfAction.\nMabole a gago ke '{side}', mabole a mmotsheki ke '{other}'.\nTsela ya tsamaya: `[b1b3]` (koordinete ya motswedi le koordinete ya bokhutlo). Tsamaya e e siameng e tsamaya ka mokgwa wa tlhogo, wa tshimologo, kgotsa wa diagonal ka palo ya mabole (mabole a mofuta ope) mo mokgweng oo. O ka tshwara mabole a gago, mme o se ka wa tshwara mabole a mmotsheki; go goroga mo mmotshekeng o a mo tshwara.  O wina fa mabole a gago a kgatlhanong."
+  },
+  "board": {
+    "current_board": "Lekgotla: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Sebopego e tshwanetse go nna e2e4 (go tswa,go ya kwa dilekanyetsong).",
+    "no_piece": "Ga go na {side} karolo mo go {coord}.",
+    "identical": "Motswedi le kwa o yang teng di a tshwana.",
+    "not_straight_or_diagonal": "Go tsamaya go tshwanetse ga nna ka tlhamalalo kana ka tsela e e sekameng.",
+    "wrong_distance": "E tshwanetse go tsamaya sekgala se se lekanang le sa dikarolwana tse di mo moleng.",
+    "enemy_blocks": "Setshwantsho sa mmaba se thibile tsela.",
+    "destination_own": "Lefelo le o yang kwa go lone ke la gago."
+  },
+  "game_action": {
+    "moved": "Player {player_id} o ile a tsamaya {from} -> {to}",
+    "captured_suffix": "Player {player_id} o ile a tsamaya {from} -> {to} a tsaya mosidi wa setlhopha se sengwe."
+  },
+  "outcome": {
+    "win": "Dilo tsotlhe di a tshwana.",
+    "draw_no_capture": "Ditsamaya tse 60 tse di sa tshwarang mole.",
+    "draw_repetition": "Boemo bo ne jwa ipoeletsa gararo."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing a game of Pig Dice.\n\nRules:\n- On your turn, you can either '[roll]' or '[hold]'\n- Roll a 2-6: Add to your turn total\n- Roll a 1: Lose turn total and end turn\n- Hold: Add turn total to your score and end turn\n- First to {winning_score} points wins\n\nWhen it's your turn, you'll see the current scores and turn total.\nRespond with '[roll]' to roll the die or '[hold]' to bank your points."
+  },
+  "invalid_move": {
+    "invalid_action": "Yanlış addım formatı. '[roll]' və ya '[hold]' istifadə edin."
+  },
+  "actions": {
+    "player_busted": "Oyuncu {player_id} iflasa düşdü, {turn_total} xal itu verdi!",
+    "player_hold": "Player {player_id} holds and banks {turn_total} points."
+  },
+  "board": {
+    "player": "Player 0: '{score_0}'; Player 1: '{score_1}'",
+    "current_total_scores": "Cari Ümumi Xallar: {scores}\nCari dövrünüzün ümumi xalı {turn_total}.",
+    "roll_history": "{observation}\nBu dövrünüzün zar atma tarixi: {roll_history}",
+    "first_roll": "{observation} بو، سیزین نؤوبه نین ایلک آتیشی دیر.",
+    "available_actions": "{observation}\nMövcud addımlar: '[roll]' və ya '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Player {winner_id} won by having a higher score at the turn limit ({scores})",
+    "winner_by_score": "Oyuncu {winner_id} {winning_score} hədəf xalına çataraq qalib gəldi!",
+    "draw": "دورون حدینه چاتدی و بوتون اویونچولارین سکورلاری برابر دیر: {scores}"
+  }
+}

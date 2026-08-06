@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "E te Tagata Taʻalo {player_id} i se taʻaloga a toʻalua o Spite and Malice. Lou manumalo o le a faʻatoa tuʻuina atu lou puipui faʻaleleia.\n\n### Faʻamatalaga o le Taʻaloga:\n- O le manumalo o le a faʻatoa faʻaleleia lou puipui faʻaleleia e ala i le taʻalo o kaʻati i puipui tūtū.\n- E mafai ona e taʻalo kaʻati mai nofoaga e toʻalua:\n  1. Lou **lima** (e amata ai lou taeao ma kaʻati e 5 i lou lima).\n  2. Le **kaʻati muamua o lou puipui faʻaleleia**.\n  3. Le **kaʻati muamua o soʻo se puipui tuʻuina atu a lou**.\n\n### Faʻatonu o le Taʻaloga:\n- E mafai ona e taʻalo se kaʻati i se puipui tūtū pe a o i luga aʻe nai lo le kaʻati i luga o le puipui (puipui tūtū amata mai i le Ace ma e oo i le Queen; Kings o loʻo i luga o soʻo se kaʻati ae le ai se suiga i le faʻasologa o le kaʻati. O lenei uiga, pe a faʻaoga se King i luga o le 4, o lea King o le a i luga o le 5 ma le kaʻati luma o le a i luga o le 6).\n- Pe a e le mafai ona e taʻalo soʻo se kaʻati, e tatau ona e tuʻuina atu se kaʻati **i se puipui tuʻuina atu** e faʻaiʻu ai lou taeao.\n- Pe a oʻo se puipui tūtū i le Queen, o le a faʻaleleia faʻatasi.\n- O le faʻasologa o le kaʻati: A=1, 2=2, ..., 9=9, J=10, Q=11, K o loʻo i luga o soʻo se kaʻati.\n\n### Faʻagaioiga:\n1. **Togi**: I le amata o lou taeao, togisaga kaʻati e faʻaopoopo lou lima i kaʻati e 5. Faʻaofi **[draw]** e amata ai.\n2. **Taʻalo se Kaʻati**: E taʻalo se kaʻati, faʻamatala le kaʻati ma le puipui tūtū pei o: **[play A♠ 0]** (lea **A♠** o le kaʻati ma **0** o le puipui tūtū).\n3. **Tuʻuina atu**: Pe a e le mafai ona e taʻalo soʻo se kaʻati, tuʻuina atu se kaʻati mai lou lima i se puipui tuʻuina atu e faʻaiʻu ai lou taeao. Faʻaofi **[discard A♠ 1]** (lea **A♠** o le kaʻati ma **1** o le puipui tuʻuina atu). Faʻamolemole, e le mafai ona e tuʻuina atu soʻo se kaʻati mai lou puipui faʻaleleia. E mafai ona e tuʻuina atu kaʻati mai lou lima."
+  },
+  "board": {
+    "current_board": "Le Papa o Loa:\n\n{board}\nGaioiga e Mafai: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Faʻatauga o le Nofoaga Tutotonu --- ",
+    "pile": "{observation}Puipui {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vaʻaiga a Tagata Taʻalo {player_id} ---\n",
+    "payoff": "{observation}Puipui Faʻaleleia (Kaʻati muamua): {top_card}, Uiga o le Puipui Faʻaleleia: {payoff_length}\n",
+    "hand": "{observation}Lima: {hand}\n",
+    "discard": "{observation}Puipui Tuʻuina atu: {discard}\n",
+    "empty": "E leai se mea o iai."
+  },
+  "game_message": {
+    "no_cards_left": "E lē toe iai ni pepa e mafai ona tāina mai. Ia manatua, o le a taʻalo ai lau kata i mea nei: 1. O lou lima 2. Le pito i luga o au tupe maua 3. Pepa sili atu o so o se faaputuga ua teena.**"
+  },
+  "invalid_move": {
+    "wrong_format": "E le sa'o se faiga o lea ta'aloga. O le tagata taaalo {player_id} e lei tali mai i se gaoioiga talafeagai ua tusia i puipui sikuea.",
+    "invalid_play": "Taʻaloga leaga. Tagata Taʻalo {player_id} sa faʻaoga {card} i luga o puipui tūtū {index}.",
+    "discard_from_payoff": "Taʻalo {player_id} taumafai e lafo se kata mai le faaputuga payoff.",
+    "discard_not_in_hand": "O le tagata taalo {player_id} na taumafai e lafo se kata lea ua lē o iai i lona lima.",
+    "wrong_move_type": "E le sa'o se ituaiga taina. e lei tali mai lava le tagata taaalo {player_id} i se gaoioiga talafeagai."
+  },
+  "game_action": {
+    "you_drew": "Sa e tusiina ni kata.",
+    "opponent_drew": "Na tāina e le tagata taalo {player_id} ni kata.",
+    "you_played": "Sa e taaalo {card} i le faaputuga tutotonu {index}.",
+    "opponent_played": "O le tagata taalo {player_id} na taaalo i le {card} o loo iai i luga o le faaputuga tutotonu {index}.",
+    "you_discarded": "E te tuʻuina atu {card} i totonu o puipui tuʻuina atu {index}, lea e faʻaalia ai o lou taeao ua maeʻa. E leʻi faʻatagaina soʻo se faʻagaioiga a lou mo lenei taeao. Tagata Taʻalo {next_player_id} o le a sili atu.",
+    "opponent_discarded": "Tagata Taʻalo {player_id} na tuʻuina atu {card} i totonu o puipui tuʻuina atu {index}, lea e faʻaalia ai o ia ua maeʻa lona taeao. E leʻi faʻatagaina soʻo se faʻagaioiga a Tagata Taʻalo {player_id} mo lenei taeao. Tagata Taʻalo {next_player_id}, e sili atu lou taeao. Faʻamolemole, faʻaofi lou gaioiga i le faʻaupuga [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Tagata Taʻalo {current_player} ua maeʻa lona puipui faʻaleleia! Tagata Taʻalo {current_player} na manumalo!",
+    "deadlock_player_0": "O le taʻaloga ua oʻo i le faʻaiʻuga! Tagata Taʻalo 0 na manumalo ma {player_0_payoff} kaʻati toesea i lugā o Tagata Taʻalo 1 e {player_1_payoff} kaʻati.",
+    "deadlock_player_1": "O le taʻaloga ua oʻo i le faʻaiʻuga! Tagata Taʻalo 1 na manumalo ma {player_1_payoff} kaʻati toesea i lugā o Tagata Taʻalo 0 e {player_0_payoff} kaʻati.",
+    "deadlock_tie": "Ua maua se faʻalavelave ma se faiʻai! O le lua taaloga e {player_0_payoff} pepa e totoe. Le Taaloga {current_player} ua manumalo e ala i le faʻatonuga."
+  }
+}

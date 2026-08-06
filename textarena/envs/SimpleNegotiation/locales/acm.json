@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في لعبة التفاوض.\n لديك بعض الموارد، ومهمتك هي التبادل بحيث يزيد القيمة الإجمالية لمواردك.\nالموارد والقيم المرتبطة بها التي تمتلكها حاليًا هي:\n\t+ {resource_value_list}\nفي كل دورة، يمكنك التحدث مع خصمك وطرح عرض تبادل.\nاستخدم الرموز الخاصة التالية للإجراءات:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': لقبول عرض قادم.\n  - '[Deny]': لرفض عرض قادم (افتراضي).\nاللعبة تستمر ل {max_turns} دورات في المجموع."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "لاعب حاول قبول تبادل بدون ما يملك الموارد اللازمة.",
+    "out_of_range": "اللاعب {player_id}، إجراء غير صالح. العمود {col} خارج الحدود.",
+    "already_full": "اللاعب {player_id}، إجراء غير صالح. العمود {col} ممتلئ.",
+    "proposing_with_no_resource": "لاعب {player_id} حاول ان يقدم عرض تجاري بدون الموارد اللازمة.",
+    "incorrect_offer_format": "لاعب {player_id} قدم عرض تجاري بصيغة غير صحيحه.",
+    "no_new_offer": "لاعب {player_id} ما قدم عرض تجاري جديد."
+  },
+  "offers": {
+    "reject": "لاعب {player_id} رفض عرض التبادل.",
+    "accept": "اللاعب {acceptor_id} قبل عرض التبادل من اللاعب {proposer_id}.",
+    "proposal": "اللاعب {player_id} قدم العرض التالي إلى اللاعب {opponent_id}: العناصر المعروضة: {offered} -> العناصر المطلوبة: {requested}"
+  },
+  "outcome": {
+    "win": "لاعب {winner_id} فاز بكون له زيادة اكبر في قيمة المخزون.",
+    "draw": "نفس التغير في قيمة المخزون لكل اللاعبين. تعادل."
+  }
+}

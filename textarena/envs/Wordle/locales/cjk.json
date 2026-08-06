@@ -1,0 +1,28 @@
+{
+  "_comment": "English locale for Wordle. Keys (left) are fixed; translate only the values (right). Keep every {placeholder} verbatim, and keep the feedback letters G/Y/X unchanged (they are the game's per-letter markers).",
+  "_slots": {
+    "{word_length}": "Length of the secret word (integer)",
+    "{num_guesses}": "Number of allowed guesses (integer)",
+    "{word}": "A guessed word",
+    "{view}": "Neutral rendered letters + G/Y/X feedback (do not translate)",
+    "{guesses_left}": "Remaining guesses (integer)",
+    "{pct}": "Percentage of correctly-placed letters (integer)",
+    "{secret}": "The secret word"
+  },
+  "prompt": {
+    "intro": "Uli na ku tchova Wordle.\nKazima ya {word_length}-litandi kazima kawililiwa. Uli na {num_guesses} matiyo ya ku kazima.\nKwa kazima kila, ku binda kazima kuwa na maboko ya miraba (k.mf., '[apple]').\nKulungwana kwa kila litandi kuti pwelekedwa kama ifuatavyo:\n  - G (ndimba): litandi lili sahihi pa nafasi sahihi\n  - Y (njano): litandi lili mu kazima lakini pa nafasi yasiyo sahihi\n  - X (siyo): litandi siyo mu kazima\nLeka kazima yako ianze.\n"
+  },
+  "invalid": {
+    "wrong_format": "Uli jaribu ku tuma kazima mu fomu yasiyo sahihi. Leka uwe na uhakika wa kutumia maboko ya miraba.",
+    "wrong_length": "Kazima yako lazima iwe na {word_length} litandi haswa.",
+    "already_guessed": "Uli tayari kubahatisha '{word}' hapo awali. Leka ujaribu kazima nyingine.",
+    "not_a_word": "'{word}' siyo kazima halali."
+  },
+  "feedback": {
+    "submitted": "Uli tuma [{word}].\nKulungwana:\n{view}\nUli na {guesses_left} matiyo yaliyosalia."
+  },
+  "outcome": {
+    "win": "Hongera! Uli bahatisha kazima kwa usahihi!",
+    "turn_limit": "Mwisho wa zamu umefikiwa. Uli kushindwa kubahatisha kazima, lakini bahatisho lako bora liliendana na {pct}% ya litandi mu nafasi sahihi.\nKazima ya siri ilikuwa: **{secret}**."
+  }
+}

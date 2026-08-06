@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} we Trzech-Graczowym Tic Tac Toe.\nTwoj symbol to '{symbol}'.\nRoz wůnczas umjysztůwjasz swój symbol na 5x5 szachownicy, coby utwořić linię z cztero. \nLiniům mogům być poziomy, pionowy abo ukośny.\nZatwierdź swój ruch we formacie '[4]', coby zaznaczyć komůrku 4."
+  },
+  "board": {
+    "current_board": "Aktualno szachownica:\n\n{board}\n\nDostępne posuněćia: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Niyprawidłowy format przesuwanio. Użyj \"[cell]\", kaj kōmōrka to 0-{max_cell}.",
+    "out_of_range": "Niyprawidłowy numer kōmōrki: {cell}. Musi być miyndzy 0 a {max_cell}.",
+    "already_occupied": "Kōmōrka {cell} je już zajyńto.",
+    "made_invalid": "Gracz {player_id} zrobiōł niyważny ruch."
+  },
+  "game_action": {
+    "placed": "Gracz {player_id} umjysztůwjo swój symbol ({symbol}) we polu ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Gracz {player_id} ({symbol}) wygrywa!",
+    "draw": "Mecz je remis!"
+  }
+}

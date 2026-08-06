@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Oli Player {player_id} mu mizannyo ya Iterated Prisoner's Dilemma egenda mu {num_rounds} mizannyo.\n\nMuundo gw'Omuzanyo:\n- Nga wakati wa kulonda, olina {total_conversation_rounds} mizunguko ya kuyogera ky'oyagala.\n- Oluvanyuma, bazannya bombi bwe bwereere balyoke bafuuse kuwa wamu oba baleme.\n\nMatirikiro ga Payoff (tegekeddwa buli muzanyo):\n- Bombi Bafuuse Wamu ➜ buli {cooperate_reward}\n- Bombi Baleme ➜ buli {mutual_defect_reward}\n- Omuntu Omulema, omulala Afuuse Wamu ➜ Omulema {defect_reward}, Omuwamu {sucker_reward}\n\nEngeri ya Kuzannya:\n- Nga wakati wa kuyogera: andika ky'oyagala.\n- Nga wakati wa kulonda: weka '[Cooperate]' oba '[Defect]' (si ya kisawaziso). Oyinza kuongeza ebigambo ebirala ku ntandikwa/ku mukono gwa token."
+  },
+  "phases": {
+    "conversation_finished": "Okukubagana kwakkulu kwa mzunguko {round}. Tandika '[Cooperate]' or '[Defect]' mu {{}} eddibba.",
+    "starting_round": "--- Okutandikawo {round} ----",
+    "round_summary": "Mazengo ga mzunguko {round}:\n{outcome}\nOmuzannyi 0 yassa {r0} (jumla {score_0}), Omuzannyi 1 yassa {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Omuzannyi {winner} awangula {win_score} - {lose_score}.",
+    "draw": "Abazannyi bombi baakuba ggoolo {s0}.",
+    "round_both_cooperate": "Abazannyi bombi baakolaganye.",
+    "round_both_defect": "Abazannyi bombi baabuuka.",
+    "round_p0_cooperates_p1_defects": "Omuzannyi 0 yakolera wamu, Omuzannyi 1 yadduka.",
+    "round_p0_defects_p1_cooperates": "Omuzannyi 0 yadduka, Omuzannyi 1 yakolera wamu."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "ئەتۆ یاریزان {player_id}ی یارییەکەی LinesOfAction.\nپارچەکانت '{side}'ن، پارچەکانی بەرامبەر '{other}'ن.\nفۆرماتی جوڵە: `[b1b3]` (کۆردیناتی سەرچاوە بۆ کۆردیناتی گەیشتن). جوڵەیەکی یاسایی بە شێوەی ئاسۆیی، ستوونی، یان لار بە ژمارەیەک لە چوارگۆشەکان دەڕوات کە یەکسانە بە کۆی گشتی پارچەکان (بە هەر ڕەنگێک) لەو ڕیزەدا. ئەتۆ دەتوانی بەسەر پارچەکانی خۆتدا بپەڕیتەوە، بەڵام ناتوانی بەسەر پارچەکانی بەرامبەردا بپەڕیتەوە؛ گەیشتن بە پارچەیەکی بەرامبەر دەیگرێتەوە.  سەرکەوتن کاتێکە کە گشتی پارچەکانت پێکەوە بەستراون بە 8 هاوسێ."
+  },
+  "board": {
+    "current_board": "ئەنجومەنی: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "فۆرماتەکە دەبێت e2e4 بێت (لە، بۆ کۆئوردینات).",
+    "no_piece": "هیچ {side} پارچە لە سەر {coord}.",
+    "identical": "سەرچاوەو مەبەست یەکسانن.",
+    "not_straight_or_diagonal": "پێویستە جوڵەکە ڕاست بێت یان بە تەریب.",
+    "wrong_distance": "پێویستە بە دووری یەکسان لەگەڵ پارچەکانی ڕیزدا بجوڵێت.",
+    "enemy_blocks": "کەشتی دوژمن ڕێگا دەگرێتەوە.",
+    "destination_own": "ئامانجەکە لەلایەن خۆیەوە داگیرکراوە."
+  },
+  "game_action": {
+    "moved": "یاریکەر {player_id} جوڵەی {from} -> {to}ی کرد",
+    "captured_suffix": "یاریکەر {player_id} جوڵەی {from} -> {to}ی کرد، یەک جوڵەی دووشمەنی گرت."
+  },
+  "outcome": {
+    "win": "هەموو پارچەکان پێکەوە گرێدراون.",
+    "draw_no_capture": "٦٠ جوڵە بەبێ گرتن.",
+    "draw_repetition": "سێ جار شوێنی دووبارەکردەوە."
+  }
+}

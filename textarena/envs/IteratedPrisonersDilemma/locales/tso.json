@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "U nga Muvhimi {player_id} eka Iterated Prisoner's Dilemma ya {num_rounds} mabanga.\n\nMpangwa wa Mihlala:\n- Pembheni ya kona ku amukela u amukela {total_conversation_rounds} mabanga ya ku vulavula hi ku ntshuxeka.\n- Endzhaku ka swona, vamvhimi vabedi va hlawula ku tirhisana kumbe ku hlangana.\n\nMatriki ya Vuyelo (yimisiwa kona mabanga):\n- Vabedi va Tirhisana ➜ kuna {cooperate_reward} kuna wena\n- Vabedi va Hlangana ➜ kuna {mutual_defect_reward} kuna wena\n- Munhu a Hlangana, munhu a Tirhisana ➜ Muhlanganisi {defect_reward}, Mutirhisani {sucker_reward}\n\nNdlela ya Mihlala:\n- Hi nkarhi wa vulavula: tsala matsalwa wawena.\n- Hi nkarhi wa kona ku hlawula: katsa '[Cooperate]' kumbe '[Defect]' (ku katsiwi ka nchumu a ku engetela). U nga engeta matsalwa man'wana pebheni/endlwini ka token."
+  },
+  "phases": {
+    "conversation_finished": "Mbheje ya vulavisisi ya mugodi {round} yi herile. Ngempela, hlamula ka '[Cooperate]' kumbe '[Defect]' endzeni ka \\boxed{{}}.",
+    "starting_round": "--- Ku sungula ka Nxaxamelo {round} ---",
+    "round_summary": "Mato ya magidi {round}:\n{outcome}\nMukatifu 0 u kume {r0} (jumla {score_0}), Mukatifu 1 u kume {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Mukatifu {winner} u hlula {win_score} - {lose_score}.",
+    "draw": "Tintlangu timbirhi ti ve na {s0}.",
+    "round_both_cooperate": "Vatlangi havambirhi va tirhisanile.",
+    "round_both_defect": "Vatlangi havambirhi va balekile.",
+    "round_p0_cooperates_p1_defects": "Mutlangi wa 0 u tirhisanile na vona, mutlangi 1 a nga tshembekanga.",
+    "round_p0_defects_p1_cooperates": "Mutlangi wa 0 u hlanukile, mutlangi 1 a tirhisana."
+  }
+}

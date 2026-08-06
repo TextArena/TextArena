@@ -1,0 +1,32 @@
+{
+  "_comment": "English locale for Wordle. Keys (left) are fixed; translate only the values (right). Keep every {placeholder} verbatim, and keep the feedback letters G/Y/X unchanged (they are the game's per-letter markers).",
+  "_slots": {
+    "{word_length}": "Length of the secret word (integer)",
+    "{num_guesses}": "Number of allowed guesses (integer)",
+    "{word}": "A guessed word",
+    "{view}": "Neutral rendered letters + G/Y/X feedback (do not translate)",
+    "{guesses_left}": "Remaining guesses (integer)",
+    "{pct}": "Percentage of correctly-placed letters (integer)",
+    "{secret}": "The secret word"
+  },
+
+  "prompt": {
+    "intro": "You are Playing Wordle.\nA secret {word_length}-letter word has been chosen. You have {num_guesses} attempts to guess it.\nFor each guess, wrap your word in square brackets (e.g., '[apple]').\nFeedback for each letter will be given as follows:\n  - G (green): correct letter in the correct position\n  - Y (yellow): letter exists in the word but in the wrong position\n  - X (wrong): letter is not in the word\nEnter your guess to begin.\n"
+  },
+
+  "invalid": {
+    "wrong_format": "You tried submitting a word in the wrong format. Please make sure to use squared brackets.",
+    "wrong_length": "Your word must be exactly {word_length} letters.",
+    "already_guessed": "You have already guessed '{word}' before. Please try a different word.",
+    "not_a_word": "'{word}' is not a valid word."
+  },
+
+  "feedback": {
+    "submitted": "You submitted [{word}].\nFeedback:\n{view}\nYou have {guesses_left} guesses left."
+  },
+
+  "outcome": {
+    "win": "Congratulations! You guessed the word correctly!",
+    "turn_limit": "The turn limit has been reached. You didn't guess the word, but your best guess matched {pct}% of the letters in the correct positions.\nThe secret word was: **{secret}**."
+  }
+}

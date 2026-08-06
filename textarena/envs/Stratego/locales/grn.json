@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Nde ha'e pe ñembosarái {player_id} pe Stratego-pe.\nNe remiandu ha'e jeguereko pe bandera oponente térã ojukávo opaite umi ita ikatu oñemboja.\nNe ejército oñembojaite pe tablero-pe, pe bandera, umi mba'eyru ha ambue ita opaichagua.\n\n### Ñembosarái Ñe'ẽ\n1. **Ñemboja Reglas:**\n   - Pe ñemboja, ikatu reñemboja peteĩ ita peteĩ kurusu rire pe tablero-pe (arriba, abajo, izquierda térã derecha).\n   - Techapyrã: Peteĩ ita ikatu oñemboja A1 guive B1 térã A1 guive A2, B1 ha A2 ndaha'éi pe ñembosarái mba'éva.\n   - Ikatu pe ita oñemboja ha'e peteĩ mba'eyru térã peteĩ bandera, ndaikatúi oñemboja.\n2. **Ñorairõ:**\n   - Ikatu reñemboja peteĩ kurusu oñembojaite pe oponente mba'éva, upéicha oiko peteĩ ñorairõ:\n     - Pe ita oguerekóva mbovy kuñakarai rekaime ha ojukávo pe oponente mba'éva.\n     - Ikatu umi kuñakarai mbovy reko, opaite umi ita oñembojaite.\n     - **Techaukarã:**\n       - Umi mba'eyru ojukávo opaite umi ita oso'ãva, ndaha'éi kuñakarai.\n       - Umi kuñakarai ikatu ombogue pe Marshal, ikatu reñemboja peteĩha, pero rekaime opaite umi ita ambue.\n3. **Ñembosarái Remiandu:**\n   - Jeguereko pe oponente mba'éva umi ñemboja rupi ha ñorairõ.\n   - Jeguereko ne bandera oponente mba'éva, ha'e reñemboja.\n   - Ikatu reipuru umi Scouts ñembosarái ñe'ẽme, jeguereko umi ita oponente mba'éva ha reñemboja umi ita mbovy reko.\n\n### Ñemboja Ñe'ẽ:\n1. Erika pe ita rembojaite ha pe kurusu reñembojaite.\n2. Ikatu reipuru pe formato: [A0 B0], A0 ha'e pe ita rembojaite ha B0 ha'e pe kurusu reñembojaite.\n   - Techapyrã: Reñemboja peteĩ ita A0 guive B0, reipuru [A0 B0].\n3. Jeguereko pe kurusu reñembojaite ha'e heko peteĩ ñemboja reglas.\n\n### Ñe'ẽ Ñemiandu:\n- Pe tablero oñembojaite ne ita ha umi kurusu, techapyrã: MN, MS.\n- Pe tablero oñembojaite avei umi kurusu oponente mba'éva, ndaha'éi kuñakarai, techapyrã: ?.\n- Umi kurusu ~ ha'e umi ysyry ha ndaikatúi oñemboja.\n- Techaukarã, reñemboja ne ita oñembojaite pe ñembosarái ñe'ẽme, jeguereko umi ita oponente mba'éva ha reñemboja. Pe ñembosarái 0 ha 1 ñembosarái ñe'ẽme ha'e pe D ha G."
+  },
+  "board": {
+    "current_board": "Tablero Agagua:\n\n{board}\nÑe'ẽ Teku'a: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de acción no válido. Jokuaha {player_id} nombohasaichéne peteĩ movimiento formato [A0 B0]-pe.",
+    "invalid_coordinates": "Formato de acción no válido. Jokuaha {player_id} nomboajéi umi coordenada hekopeteva'ekue.",
+    "not_own_piece": "Formato de acción no válido. Pe jugador {player_id} omomýiva'erã peteĩ umi ikuaandy rehegua.",
+    "scout_through_pieces": "Formato de acción no válido. Pe jugador {player_id} ndaikatúi omomýi peteĩ explorador ambue pieza rupi.",
+    "scout_diagonal": "Formato de acción no válido. Pe jugador {player_id} ndaikatúi omomýi peteĩ explorador diagonal-pe.",
+    "non_scout_multi_square": "Formato de acción noĩporãva. Umi pieza, explorador-kuérape g̃uarã añónte ikatu omomýi peteĩ cuadrado peteĩteĩme.",
+    "move_into_lake": "Formato de acción no válido. Jokuaha {player_id} ndaikatúi oike yguasu gotyo.",
+    "move_onto_own_piece": "Formato de acción no válido. Pe jugador {player_id} ndaikatúi oike ijyvyrápe ha'eño.",
+    "move_bomb_or_flag": "Formato de acción no válido. Pe jugador {player_id} ndaikatúi omomýi peteĩ bomba térã bandera."
+  },
+  "game_action": {
+    "you_moved": "Nde emoĩ ne kuéra {source} guive {dest}.",
+    "opponent_moved": "Jugador {player_id} emoĩ peteĩ kuéra {source} guive {dest}.",
+    "you_equal_ranks": "Nde emoĩ ne kuéra {source} guive {dest}. Kuéra emoĩva ha'e {attacking_rank} ha kuéra emoĩva ha'e {target_rank}. Iporã jahecha, mokõi kuéra ohejava.",
+    "opponent_equal_ranks": "Jugador {player_id} emoĩ peteĩ kuéra {source} guive {dest}. Kuéra emoĩva ha'e {attacking_rank} ha kuéra emoĩva ha'e {target_rank}. Iporã jahecha, mokõi kuéra ohejava.",
+    "you_miner_defused": "Ereipuru pe ita eñembyky {source} peve {dest}. Pe ita oso'ãva ha'e {attacking_rank} ha pe ita oñembykyva ha'e {target_rank}. Kóva kuñakarai ikatu ombogue umi mba'eyru, upéicha reipuru",
+    "opponent_miner_defused": "Jugador {player_id} emoĩ peteĩ kuéra {source} guive {dest}. Kuéra emoĩva ha'e {attacking_rank} ha kuéra emoĩva ha'e {target_rank}. Iporã jahecha, Minéro kuéra ohejava Bomba.",
+    "you_bomb_lost": "Nde emoĩ ne kuéra {source} guive {dest}. Kuéra emoĩva ha'e {attacking_rank} ha kuéra emoĩva ha'e {target_rank}. Iporã jahecha, emoĩva ndaha'éi Minéro.",
+    "opponent_bomb_won": "Pe ñembosarái {player_id} oñemboja pe ita {source} peve {dest}. Pe ita oso'ãva ha'e {attacking_rank} ha pe ita oñembykyva ha'e {target_rank}. Kóva oso'ãva ndaha'éi kuñakarai, upéicha reipuru",
+    "you_spy_won": "Ereipuru pe ita eñembyky {source} peve {dest}. Pe ita oso'ãva ha'e {attacking_rank} ha pe ita oñembykyva ha'e {target_rank}. Kóva oso'ãva ha'e peteĩ kuñakarai ha pe ita oñembykyva ha'e peteĩ mburuvicha, upéicha reipuru",
+    "opponent_spy_lost": "Pe ñembosarái {player_id} oñemboja pe ita {source} peve {dest}. Pe ita oso'ãva ha'e {attacking_rank} ha pe ita oñembykyva ha'e {target_rank}. Kóva oso'ãva ha'e peteĩ kuñakarai ha pe ita oñembykyva ha'e peteĩ mburuvicha, upéicha rekaime",
+    "you_higher_won": "Nde emoĩ ne kuéra {source} guive {dest}. Kuéra emoĩva ha'e {attacking_rank} ha kuéra emoĩva ha'e {target_rank}. Iporã jahecha, emoĩva ha'e ñande aty tuichavéva.",
+    "opponent_higher_lost": "Jugador {player_id} emoĩ peteĩ kuéra {source} guive {dest}. Kuéra emoĩva ha'e {attacking_rank} ha kuéra emoĩva ha'e {target_rank}. Iporã jahecha, emoĩva ha'e ñande aty tuichavéva.",
+    "you_lower_lost": "Nde emoĩ ne kuéra {source} guive {dest}. Kuéra emoĩva ha'e {attacking_rank} ha kuéra emoĩva ha'e {target_rank}. Iporã jahecha, emoĩva ha'e ñande aty michĩvéva.",
+    "opponent_lower_won": "Jugador {player_id} emoĩ peteĩ kuéra {source} guive {dest}. Kuéra emoĩva ha'e {attacking_rank} ha kuéra emoĩva ha'e {target_rank}. Iporã jahecha, emoĩva ha'e ñande aty michĩvéva."
+  },
+  "outcome": {
+    "flag_captured": "Pe ñembosarái {player_id} oñemboja pe bandera!",
+    "no_movable_pieces": "Jugador {winner_id} ohecha! Jugador {loser_id} ndoikói ñande aty emoĩva."
+  }
+}

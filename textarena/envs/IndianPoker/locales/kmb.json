@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Ngeye Mukishi {player_id} mu kijogo cha Indian Poker.\n- Kikasha cha makadi 52; ngeye kuwana kadi ya mukwenu.\n- Kukolaya malonda {ante} kwa kila kipindi, {max_rounds} kipindi kwa jumla.\n- Mijogo ya kufwete: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ni nambari nzuri <= kiwango chako cha malonda.)\n- Kadi ya kufichika inayofwete kubeta kipindi cha kuzemba.\n"
+  },
+  "round": {
+    "announce": "### Kipindi {current_round}/{max_rounds}\nKadi ya mukwenu ni: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Pese kiakulu kimosi kya kuakisa, kima ki: '[check]', '[bet 2]', '[call]', '[raise 3]', kana '[fold]'.",
+    "cannot_check": "Kikulayi ku [check] - ngeye kuwana kipindi cha malonda.",
+    "amount_min": "O kitadi kia tokala ku ki bandekesa, a tokala ku i ta mu 1.",
+    "cannot_bet": "Kikulayi ku [bet] - kufwete [call] / [raise] / [fold].",
+    "nothing_to_call": "Se ki bhuala kima, u tena ku [check] sota mu kididi kiki.",
+    "no_bet_to_raise": "Bhanga [bet X] phala ku jikula o kijimbuete; kana kuta dingi kitadi.",
+    "insufficient": "O athu ka kexile ni kitadi kiavulu phala ku sumba o ima íii."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kuela {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "O ima i u tena kubhanga: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Kipindi cha malonda {pot} → Mukishi {winner}. (Kukolaya kwa P0:{p0}, P1:{p1})",
+    "folded": "O muadikime {player_id} uexana o mutelembe.",
+    "showdown_win": "Kipindi cha kuzemba: {card_win} kubeta {card_lose}.",
+    "showdown_tie": "Kipindi cha kusokana: zote mbili {card}. Kipindi kya malonda – kila muntu akwata {split}."
+  },
+  "outcome": {
+    "p0_wins": "Mukishi wa 0 ufwa ( {bank0} > {bank1} )",
+    "p1_wins": "Mukishi wa 1 ufwa ( {bank1} > {bank0} )",
+    "draw": "O jimbandu joso ja jokala, ki ji lunguluka."
+  }
+}

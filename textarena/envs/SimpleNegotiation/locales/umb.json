@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Manji umue wa seteka oku linga omĩlu yaco, pole ka kuatele olombongo vioku yi landa.",
+    "out_of_range": "Mwimbangi {player_id}, Kitendo kisivyo. Koluna {col} iko nje ya mipaka.",
+    "already_full": "Mwimbangi {player_id}, Kitendo kisivyo. Koluna {col} imejaa.",
+    "proposing_with_no_resource": "Ocimunga comanu ka va kuelele {player_id}, ca seteka oku linga omĩlu yaco. Pole ka va kuatele olombongo vioku yi landa.",
+    "incorrect_offer_format": "Mwimbangi {player_id} akakwasha ofa ya kwakwasha kwa njia isiyofaa.",
+    "no_new_offer": "Mwimbangi {player_id} hakukwasha ofa mpya."
+  },
+  "offers": {
+    "reject": "Mwimbangi {player_id} akakana ofa ya kwakwasha.",
+    "accept": "Mwimbangi {acceptor_id} akakwidisha ofa ya kwakwasha kutoka kwa Mwimbangi {proposer_id}.",
+    "proposal": "Mwimbangi {player_id} akakwasha ofa ifuatayo kwa Mwimbangi {opponent_id}: Vikwakwa vya Ofwa: {offered} -> Vikwakwa vya Kwidishwa: {requested}"
+  },
+  "outcome": {
+    "win": "Mwene {winner_id} wuna kwa kuwa na zala zinze za kulwana ku vela.",
+    "draw": "Mabadiliko sawa ya thamani ya vikwakwa kwa wote wapinzani. Kichwa kichwa."
+  }
+}

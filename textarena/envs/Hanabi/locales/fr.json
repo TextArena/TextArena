@@ -1,0 +1,105 @@
+{
+  "_comment": "Fichier de langue Hanabi en français. Ne traduis AUCUNE clé (partie gauche) ; traduis uniquement les valeurs. Conserve chaque {placeholder} exactement tel quel. Ne traduis jamais les jetons d'action ('[Reveal]', '[Play]', '[Discard]'), les formats d'entrée littéraux 'player N card X color C' etc., ni les rangs numériques / nombres de jetons. Les noms de couleurs des cartes ('white', 'yellow', 'green', 'blue', 'red') apparaissent en prose et DOIVENT être traduits via le bloc 'color' ; garde-les cohérents partout (étiquettes des feux d'artifice, descriptions de cartes). Dans la liste des couleurs valides, les mots restent en anglais car ils constituent l'entrée acceptée.",
+  "_slots": {
+    "{player_id}": "Un numéro de joueur (index), p. ex. 0 ou 1",
+    "{num_players}": "Nombre total de joueurs dans la partie",
+    "{pid}": "Un numéro de joueur (index)",
+    "{player}": "Un numéro de joueur (index) mentionné dans un indice, conservé comme nombre neutre",
+    "{color}": "Un mot de couleur de carte, ou la chaîne de couleur brute tapée par le joueur (conservée telle quelle en cas d'entrée invalide)",
+    "{rank}": "Un rang de carte 1-5, ou la chaîne de rang brute tapée par le joueur",
+    "{card}": "Une description de carte rendue, p. ex. 'a white card with rank 4'",
+    "{idx}": "Un index de position de carte dans une main",
+    "{card_index}": "Un index de position de carte",
+    "{fuse}": "Nombre de jetons mèche restants",
+    "{info}": "Nombre de jetons info restants",
+    "{fuse_tokens}": "Nombre de jetons mèche restants après un coup raté",
+    "{fw_white}": "Progression du feu d'artifice (0-5) pour la couleur blanc",
+    "{fw_yellow}": "Progression du feu d'artifice pour la couleur jaune",
+    "{fw_green}": "Progression du feu d'artifice pour la couleur vert",
+    "{fw_blue}": "Progression du feu d'artifice pour la couleur bleu",
+    "{fw_red}": "Progression du feu d'artifice pour la couleur rouge",
+    "{c_white}": "Le mot de couleur traduit pour blanc (imbriqué)",
+    "{c_yellow}": "Le mot de couleur traduit pour jaune (imbriqué)",
+    "{c_green}": "Le mot de couleur traduit pour vert (imbriqué)",
+    "{c_blue}": "Le mot de couleur traduit pour bleu (imbriqué)",
+    "{c_red}": "Le mot de couleur traduit pour rouge (imbriqué)",
+    "{visible_cards}": "Bloc pré-rendu listant les cartes visibles des coéquipiers",
+    "{discard_pile}": "Bloc pré-rendu listant les cartes défaussées",
+    "{count}": "Nombre de coups invalides effectués d'affilée",
+    "{max_player}": "L'index de joueur valide le plus élevé (num_players - 1)",
+    "{max_card}": "L'index de carte valide le plus élevé (hand_size - 1)"
+  },
+
+  "color": {
+    "white": "blanc",
+    "yellow": "jaune",
+    "green": "vert",
+    "blue": "bleu",
+    "red": "rouge"
+  },
+
+  "card": {
+    "desc": "une carte {color} de rang {rank}"
+  },
+
+  "player_prompt": {
+    "intro": "Tu es le joueur {player_id} dans une partie de Hanabi à {num_players} joueurs. Hanabi est un jeu de cartes coopératif dans lequel les joueurs travaillent ensemble pour créer une série de feux d'artifice en jouant des cartes dans l'ordre numérique croissant à partir de 1. Chaque joueur tient ses cartes tournées vers l'extérieur, de sorte que tous les joueurs peuvent voir les cartes de tous les autres mais pas les leurs.\n\nObjectif :\nL'objectif est de jouer les cartes dans l'ordre (1 à 5) pour chaque couleur sans faire d'erreurs. Il y a 5 couleurs différentes et chaque couleur possède des cartes numérotées de 1 à 5.\n\nRègles clés :\nÀ ton tour, tu disposes de trois types d'actions possibles :\n1. Donner un indice (Reveal) : Fournis un indice à un autre joueur sur ses cartes, en précisant soit une couleur soit un nombre présent dans sa main. Les indices doivent être exacts et ne peuvent révéler que les positions des cartes correspondant à l'indice.\n2. Défausser une carte : Défausse l'une de tes propres cartes pour éventuellement gagner un jeton info.\n3. Jouer une carte : Tente de jouer une carte de ta main. Si elle est jouée correctement dans l'ordre, elle s'ajoute aux feux d'artifice ; sinon, elle fait perdre un jeton mèche.\n\nJetons :\nJetons mèche : Retirés lorsqu'une mauvaise carte est jouée.\nJetons info : Utilisés pour donner des indices.\n\nCoups interdits :\nJouer une carte qui ne peut pas être placée correctement coûte un jeton mèche. Si les jetons mèche atteignent zéro, la partie se termine par un échec.\n\nFin de partie :\nLa partie se termine lorsque tous les feux d'artifice sont achevés (score parfait de 25), ou lorsque la pioche est épuisée et que chaque joueur a joué un dernier tour, ou lorsque les joueurs n'ont plus de jetons mèche.\n\nReprésentation de l'état :\nL'état du jeu est représenté avec les détails suivants :\nJetons mèche : Nombre de jetons mèche restants.\nJetons info : Nombre de jetons d'information disponibles.\nFeux d'artifice : Progression actuelle de chaque couleur de feu d'artifice.\nDéfausses : Cartes qui ont été défaussées.\n\nTon rôle :\nTu es l'un des joueurs, coopérant avec les autres pour maximiser le score total des feux d'artifice (le nombre de cartes jouées correctement dans l'ordre).\nBien que tu ne puisses pas voir tes propres cartes, tu peux voir les cartes dans les mains de tes coéquipiers.\nUtilise les indices, les défausses et les coups de manière stratégique pour guider l'équipe vers des séquences réussies.\nQuand c'est ton tour, ta réponse doit être dans l'un des formats suivants entre guillemets :\n\n'[Reveal] player N card X color C', pour donner un indice sur la couleur C de la carte X au joueur d'index N.\n'[Reveal] player N card X rank R', pour donner un indice sur le rang R de la carte X au joueur d'index N.\n'[Play] X', pour jouer la carte en position X de ta main.\n'[Discard] X', pour défausser la carte en position X de ta main.\n\nSouviens-toi : la communication est limitée aux indices sur les couleurs ou les nombres uniquement, et partager des informations interdites ou superflues n'est pas autorisé. Travaillez ensemble, suivez les règles et visez le score coopératif le plus élevé possible !\n\n"
+  },
+
+  "state": {
+    "description": "Tu es le joueur {pid}. \n\nÉtat actuel du jeu :\nJetons mèche : il reste {fuse} jetons mèche.\nJetons info : il reste {info} jetons info.\n\nFeux d'artifice : La progression actuelle de chaque couleur de feu d'artifice est :\n\t{c_white} : {fw_white}.\n\t{c_yellow} : {fw_yellow}.\n\t{c_green} : {fw_green}.\n\t{c_blue} : {fw_blue}.\n\t{c_red} : {fw_red}.\n\nTes coéquipiers ont les cartes suivantes dans leur main :\n{visible_cards}\nDéfausses : Les cartes suivantes ont été défaussées :\n{discard_pile}\n",
+    "player_cards_header": "- Le joueur {pid} a les cartes :\n",
+    "card_line": "\tcarte {idx} : {card}\n"
+  },
+
+  "reveal": {
+    "hint_color": "La carte {card_index} du joueur {player} est {color}.",
+    "hint_rank": "La carte {card_index} du joueur {player} a le rang {rank}."
+  },
+
+  "play": {
+    "success": "Le joueur {pid} tente de jouer {card}. La carte a été jouée avec succès.",
+    "fail": "Le joueur {pid} tente de jouer {card}. La carte ne correspondait pas à l'état actuel des feux d'artifice. Cela coûte un jeton mèche. Il reste {fuse_tokens} jetons mèche."
+  },
+
+  "discard": {
+    "replenished": "Le joueur {pid} défausse {card}. Cela regarnit un jeton info.",
+    "cap_reached": "Le joueur {pid} défausse {card}. Cela ne regarnit pas de jeton info car la limite de jetons est atteinte."
+  },
+
+  "skip_turn": "Le joueur {pid} a effectué {count} coups invalides d'affilée et passe son tour. ",
+  "final_round": "Il ne reste plus de cartes dans la pioche. Ceci est le dernier tour.",
+
+  "invalid": {
+    "generic_action_reason": "Le joueur a fourni une action invalide. Les joueurs ne peuvent que '[reveal]', '[play]' ou '[discard]'.",
+    "reveal_no_info_reason": "Le joueur a tenté de donner un indice sans posséder de jeton info.",
+    "reveal_own_reason": "Le joueur tente de révéler des informations sur ses propres cartes.",
+    "reveal_own_detail": "Tu as tenté de révéler des informations sur tes propres cartes. Ce n'est pas autorisé.",
+    "reveal_bad_teammate_reason": "Le joueur tente de révéler des informations sur un coéquipier inexistant.",
+    "reveal_bad_teammate_detail": "Tu as tenté de révéler des informations sur un coéquipier inexistant. Considère les coéquipiers entre 0 et {max_player} (inclus). Note que tu ne peux pas révéler d'informations sur toi-même, tu es le joueur {pid}.",
+    "reveal_bad_card_reason": "Le joueur tente de révéler des informations sur une carte inexistante.",
+    "reveal_bad_card_detail": "Tu as tenté de révéler des informations sur une carte inexistante. L'index de carte doit être compris entre 0 et {max_card} (inclus). Tu as fourni {card_index}. ",
+    "reveal_bad_color_reason": "Le joueur a fourni une couleur qui n'existe pas dans le jeu.",
+    "reveal_bad_color_detail": "Tu as fourni une couleur invalide. Les couleurs valides sont 'white', 'yellow', 'green', 'red' et 'blue'. Tu as essayé : '{color}'.",
+    "reveal_bad_rank_reason": "Le joueur a fourni un rang invalide.",
+    "reveal_bad_rank_detail": "Tu as fourni un rang invalide. Les rangs valides sont compris entre 1 et 5 (inclus). Tu as fourni : '{rank}'.",
+    "reveal_bad_rank_format_reason": "Le joueur a fourni un format de rang invalide.",
+    "reveal_bad_rank_format_detail": "Tu as fourni un format de rang invalide. Les rangs valides sont compris entre 1 et 5 (inclus). Tu as fourni : '{rank}'.",
+    "reveal_incomplete_reason": "Le joueur a fourni un indice incomplet.",
+    "reveal_incomplete_detail": "Tu as fourni une action invalide. Si tu veux révéler une carte, tape :\n '[Reveal] player N card X color C', pour donner un indice sur la couleur C de la carte X au joueur d'index N.\nou\n'[Reveal] player N card X rank R', pour donner un indice sur le rang R de la carte X au joueur d'index N.\n\nPar exemple : '[Reveal] player 0 card 0 color green' révèle que la carte 0 du joueur 0 est verte.",
+    "play_nonexist_reason": "Le joueur tente de jouer une carte inexistante.",
+    "play_nonexist_detail": "Tu as tenté de jouer une carte inexistante. Considère les cartes entre 0 et {max_card} (inclus). Tu as fourni {card_index}.",
+    "play_parse_reason": "Le joueur a fourni une action invalide.",
+    "play_parse_detail": "Tu as fourni une action invalide. Si tu veux jouer une carte, tape :\n '[Play] X', pour jouer la carte en position X de ta main. Par exemple : '[Play] 0' joue la carte en position 0.",
+    "discard_nonexist_reason": "Le joueur tente de défausser une carte inexistante.",
+    "discard_nonexist_detail": "Tu as tenté de défausser une carte inexistante. Considère les cartes entre 0 et {max_card} (inclus). Tu as fourni {card_index}.",
+    "discard_parse_reason": "Le joueur a fourni une action invalide.",
+    "discard_parse_detail": "Tu as fourni une action invalide. Si tu veux défausser une carte, tape :\n '[Discard] X', pour défausser la carte en position X de ta main. Par exemple : '[Discard] 0' défausse la carte en position 0."
+  },
+
+  "outcome": {
+    "deck_empty": "La pioche est épuisée.",
+    "fuse_empty": "L'équipe n'a plus de jetons mèche.",
+    "win": "Tous les 5 ont été joués avec succès."
+  }
+}

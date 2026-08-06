@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "રમત શરૂ થાય છે. ટ્રમ્પ પોશાક: {trump_suit} (ટ્રમ્પ કાર્ડઃ {trump_str}).",
+    "no_trump_card": "કોઈ નહીં"
+  },
+  "player_prompt": {
+    "intro": "તમે જર્મન વ્હિસ્ટમાં પ્લેયર {player_id} છો. {phase_info} તમે {hand_size} કાર્ડ્સ ધરાવો છો. '[play N]' સાથે કાર્ડ રમો, જ્યાં N તમારા હાથમાં તેની સ્થિતિ છે (ઉદાહરણ તરીકે '[play 3]').",
+    "phase_learning": "શીખવાની તબક્કો: દરેક યુક્તિનો વિજેતા ચહેરા ઉપરનું કાર્ડ લે છે અને હારનાર ડેકમાંથી આગળનું કાર્ડ ખેંચે છે. આ તબક્કામાં જીતી ગયેલી યુક્તિઓ જીત માટે ગણાતી નથી.",
+    "phase_playing": "રમતનું તબક્કોઃ ડેક ખાલી છે. હવેથી દરેક યુક્તિ વિજય તરફ ગણતરી કરે છે."
+  },
+  "next_card": {
+    "playing_phase": "કોઈ કાર્ડ ઓફર કરવામાં આવતું નથી - રમતા તબક્કામાં શરૂ થઈ ગયું છે.",
+    "deck_empty": "ડેક ખાલી છે - કોઈ કાર્ડ ઓફર કરવામાં આવતું નથી.",
+    "available": "ઓફર પર કાર્ડઃ {card}",
+    "available_trump": "કાર્ડ ઓફર પરઃ {card} (ટ્રમ્પ)"
+  },
+  "invalid_move": {
+    "wrong_format": "અમાન્ય ચાલનું બંધારણ. તમારા હાથમાં એનથ કાર્ડ રમવા માટે '[play N]' નો ઉપયોગ કરો.",
+    "bad_position": "તે કાર્ડ પોઝિશન અસ્તિત્વમાં નથી. તમે {hand_size} કાર્ડ્સ રાખો છો.",
+    "must_follow_suit": "તમારે અનુસરવું જોઈએ અને {lead_suit} કાર્ડ રમવું જોઈએ.",
+    "invalid_play": "આ કાર્ડ રમી શકાતું નથી."
+  },
+  "game_action": {
+    "played": "ખેલાડી {player_id} {card} રમ્યો."
+  },
+  "trick": {
+    "won": "ખેલાડી {winner_id} {card} સાથેની યુક્તિ જીતે છે.",
+    "won_learning": "ખેલાડી {winner_id} {card} સાથેની યુક્તિ જીતે છે અને ચહેરો-અપ કાર્ડ લે છે."
+  },
+  "phase": {
+    "learning_complete": "ડેક ખાલી છે. શીખવાની તબક્કો સમાપ્ત થઈ ગયો છે - દરેક બાકીની યુક્તિ વિજય તરફ ગણાય છે."
+  },
+  "draw": {
+    "winner_received": "તમે યુક્તિ જીતી અને પ્રાપ્ત {card}.",
+    "loser_received": "તમે યુક્તિ ગુમાવી અને તૂતક માંથી {card} દોર્યું.",
+    "winner_preview": "આગામી કાર્ડ {card} છે."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "અત્યાર સુધી જીતી ગયેલી યુક્તિઓ - ખેલાડી 0: {tricks0}, ખેલાડી 1: {tricks1}",
+    "scores_playing": "સ્કોરિંગ યુક્તિઓ - ખેલાડી 0: {tricks0}, ખેલાડી 1: {tricks1}",
+    "phase": "તબક્કોઃ {phase}",
+    "phase_learning": "તબક્કોઃ {phase} ({remaining_cards} કાર્ડ્સ ડેકમાં બાકી છે)"
+  },
+  "hand": {
+    "no_cards": "કોઈ કાર્ડ્સ",
+    "no_cards_in_hand": "હાથમાં કોઈ કાર્ડ નથી",
+    "header": "તમારો હાથ:",
+    "trump_indicator": "(ટ્રમ્પ)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "કોઈ કાર્ડ્સ હજુ સુધી આ યુક્તિ રમી નથી.",
+    "header": "વર્તમાન યુક્તિઃ",
+    "trump_indicator": "(ટ્રમ્પ)",
+    "card_line": "{observation} ખેલાડી {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "રમત શરૂ થઈ નથી",
+    "header": "=== જર્મન વ્હિસ્ટ ગેમ ===",
+    "phase": "{observation} તબક્કોઃ {phase}",
+    "trump_suit": "{observation} ટ્રમ્પ પોશાક: {trump_suit}",
+    "trump_card": "{observation} ટ્રમ્પ કાર્ડઃ {card}",
+    "cards_left": "{observation} ડેકમાં બાકી કાર્ડ્સઃ {count}",
+    "next_card": "{observation} વિજેતા માટે આગામી કાર્ડઃ {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} વર્તમાન યુક્તિઃ",
+    "trump_indicator": "(ટ્રમ્પ)",
+    "trick_line": "{observation} ખેલાડી {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} ખેલાડી {player_id}: {scoring} સ્કોરિંગ યુક્તિઓ ({tricks} કુલ), {hand_size} હાથમાં કાર્ડ્સ"
+  },
+  "outcome": {
+    "summary": "શીખવાની તબક્કા - ખેલાડી 0: {l0}, ખેલાડી 1: {l1}. રમવાની તબક્કા - ખેલાડી 0: {p0}, ખેલાડી 1: {p1}. ખેલાડી {winner_id} {winner_tricks} સ્કોરિંગ યુક્તિઓ સાથે જીતે છે!"
+  }
+}

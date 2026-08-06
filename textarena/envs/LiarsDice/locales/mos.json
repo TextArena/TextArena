@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Yɛ̀rɛ la Player {player_id} kɛ̀rɛ wɛ̀rɛ {num_players} la Liar's Dice kɛlɛ.\nKɛ̀rɛ:\n- Yɛ̀rɛ pʋ̀ʋ̀rɛ, yɛ̀ kɛ̀rɛ:\n  1) Kʋ̀rɛ kɛlɛ pʋ̀ʋ̀rɛ kɛ̀rɛ wɛ̀rɛ yɛ̀rɛ nɛ̀ kʋ̀rɛ kɛlɛ pʋ̀ʋ̀rɛ kɛ̀rɛ wɛ̀rɛ yɛ̀rɛ '[Bid: 3, 4]',\n  2) Kɛ̀rɛ kɛlɛ yɛ̀rɛ '[Call]'.\n\nYɛ̀rɛ kɛ̀rɛ:\n  - Yɛ̀rɛ kɛlɛ pʋ̀ʋ̀rɛ kɛ̀rɛ wɛ̀rɛ yɛ̀rɛ nɛ̀ kʋ̀rɛ kɛlɛ pʋ̀ʋ̀rɛ kɛ̀rɛ wɛ̀rɛ yɛ̀rɛ, kɛlɛ pʋ̀ʋ̀rɛ kɛ̀rɛ wɛ̀rɛ yɛ̀rɛ nɛ̀ kʋ̀rɛ kɛlɛ pʋ̀ʋ̀rɛ kɛ̀rɛ wɛ̀rɛ yɛ̀rɛ nɛ̀ dɛ̀ɛ̀ kʋ̀ŋɛ.\n  - Kɛ̀rɛ kɛlɛ, kɛlɛ pʋ̀ʋ̀rɛ kɛ̀rɛ wɛ̀rɛ yɛ̀rɛ nɛ̀ dɛ̀ɛ̀ kʋ̀ŋɛ.\nKɛlɛ pʋ̀ʋ̀rɛ kɛ̀rɛ wɛ̀rɛ yɛ̀rɛ nɛ̀ 0 dɛ̀ɛ̀ kʋ̀ŋɛ kɛ̀rɛ wɛ̀rɛ yɛ̀rɛ. Kɛlɛ pʋ̀ʋ̀rɛ kɛ̀rɛ wɛ̀rɛ yɛ̀rɛ nɛ̀ kʋ̀rɛ kɛlɛ."
+  },
+  "board": {
+    "per_player": "\tPlayer {p}: {d}",
+    "new_round": "\nKɛlɛ kɔmɔgɔ wɛɛlɛ - Dice kɔmɔgɔ wɛɛlɛ: {dice_summary}\nYɛrɛ Dice kɔmɔgɔ wɛɛlɛ: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Player {current_player_id} kɔlɛ! Face {face_value} kɔmɔgɔ wɛɛlɛ yɛrɛ {count}, yɛrɛ LESS kɔmɔgɔ wɛɛlɛ {quantity}.\nPlayer {loser_id} (kɔmɔgɔ wɛɛlɛ bidder) kɔmɔgɔ wɛɛlɛ die.",
+    "caller_loses": "Player {current_player_id} kɔlɛ! Face {face_value} kɔmɔgɔ wɛɛlɛ yɛrɛ {count}, yɛrɛ >= kɔmɔgɔ wɛɛlɛ {quantity}.\nPlayer {loser_id} (kɔlɛrɛ) kɔmɔgɔ wɛɛlɛ die."
+  },
+  "action": {
+    "bid_announce": "Player {player_id} kɛlɛ {quantity} kɔm face {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "B sẽn bool-a wã pa yɩ ne ligd ye.",
+    "invalid_bid": "Sẽn pa zemse: {reason}",
+    "not_recognized": "Kɛlɛ kɔmɔgɔ wɛɛlɛ yɛrɛ '[Bid: X, Y]' yɛrɛ '[Call]'. Kɛlɛ wɛɛlɛ: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Kɔmɔgɔ wɛɛlɛ {new_quantity} yɛrɛ kɔmɔgɔ wɛɛlɛ {current_quantity}.",
+    "face_lower": "Face kɔmɔgɔ wɛɛlɛ {new_face_value} yɛrɛ kɔmɔgɔ wɛɛlɛ {current_face_value}.",
+    "identical": "B sẽn kõ ligd ningã zemsa ne b sẽn da kõt rũnda wã.",
+    "face_range": "B sẽn boond tɩ \"face value\" wã segd n yɩɩ 1 ne 6."
+  },
+  "message": {
+    "eliminated_invalid": "B sẽn yãk a soab t'a {player_id} yaa ne so-toak sẽn pa zemse."
+  },
+  "outcome": {
+    "win": "Player {winner} wɛɛ! Kɔmɔgɔ wɛɛlɛ ranking: {final_ranking}"
+  }
+}

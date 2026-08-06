@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Bu é Player {player_id} nun djogu di Indian Poker.\n- Baralha di 52 karta; bu ta odja so karta di adversáriu.\n- Ante {ante} ficha(s) kada ronda, {max_rounds} ronda(s) total.\n- Djogadas válidas: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X é un înteru pozitivu <= konta di ficha di bu.)\n- Karta skondida mais alta ganha o pot na final.\n"
+  },
+  "round": {
+    "announce": "### Ronda {current_round}/{max_rounds}\nKarta di adversáriu é: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Furnesi só un aksaun entre parêntesis, p.eks. '[check]', '[bet 2]', '[call]', '[raise 3]', ou '[fold]'.",
+    "cannot_check": "N ka pode [check] - bu sta ta faze un aposta.",
+    "amount_min": "Suma di aposta / levantamentu ten ki ser ≥ 1.",
+    "cannot_bet": "Nun pudi [bet] - débi [call] / [raise] / [fold].",
+    "nothing_to_call": "Nada pa txoma; bu pode [check] envês.",
+    "no_bet_to_raise": "Uza [bet X] pa abri; ka ten aposta ki bu pode poi.",
+    "insufficient": "Ka ten chips sufisienti pa kel-li."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Bu pode faze kes kuza li: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Player {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Jogu {player_id} ta diskansa.",
+    "showdown_win": "Konbérsu: {card_win} ta bate {card_lose}.",
+    "showdown_tie": "Na showdown, tudu dôs ta ganha {card}. Pot é divididu y kada un di es ta resebe {split}."
+  },
+  "outcome": {
+    "p0_wins": "Player 0 ganha ({bank0} > {bank1})",
+    "p1_wins": "Player 1 ganha ({bank1} > {bank0})",
+    "draw": "Txeu fijon sima tudu runhu."
+  }
+}

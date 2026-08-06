@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Nge uá Mufwasa {player_id} mu Iterated Prisoner's Dilemma kuluka {num_rounds} dikanda.\n\nMfumo wa Jogo:\n- Mbele ya kuamua, nge una {total_conversation_rounds} mviringo ya kupaneka maluveru.\n- Kuamua, bantu babiri bafanya kuamua kwa kusunga kana kubula.\n\nTabela ya Mbalansi (ifwa kuwa sawa kwa kila dikanda):\n- Bantu babiri Basunga ➜ kila mmoja {cooperate_reward}\n- Bantu babiri Babula ➜ kila mmoja {mutual_defect_reward}\n- Mufwasa umwe Ubula, umwe Usunga ➜ Mbuli {defect_reward}, Mfwasa {sucker_reward}\n\nNge uá Mufwasa:\n- Ku paneka maluveru: tanga maluveru nge ufwete.\n- Kuamua: tanga '[Cooperate]' kana '[Defect]' (kana kikokoto kuwa na kisikwama). Nge ufwete kuongeza maluveru mbele/ku mwanda wa token."
+  },
+  "phases": {
+    "conversation_finished": "Kuluta kukomana imwena kwa {round}. Nika ulwe na '[Cooperate]' or '[Defect]' mu 📦{{}}.",
+    "starting_round": "--- Ku dimatekenu dia mbandu {round} ---",
+    "round_summary": "Matokeo ya dibwe {round}:\n{outcome}\nMubadi 0 akwate {r0} (jumla {score_0}), Mubadi 1 akwate {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Mubadi {winner} ukwate {win_score} - {lose_score}.",
+    "draw": "Kusokana! Badi zombili zikwate {s0}.",
+    "round_both_cooperate": "O kiiadi kiki, a kalakala kumoxi.",
+    "round_both_defect": "Badi zombili zisolole.",
+    "round_p0_cooperates_p1_defects": "Mubadi 0 asokane, Mubadi 1 asolole.",
+    "round_p0_defects_p1_cooperates": "Mubadi 0 asolole, Mubadi 1 asokane."
+  }
+}

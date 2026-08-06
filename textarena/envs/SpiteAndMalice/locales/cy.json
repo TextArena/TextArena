@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Rydych chi Chwaraewr {player_id} mewn gêm ddau-chwaraewr o Spite a Malice. Eich nod yw bod y cyntaf i ddileu eich pile payoff.\n\n### Golwg ar y Gêm:\n- Y nod yw i lanhau eich pile payoff drwy chwarae cardiau i'r pileau canolog.\n- Gallwch chwarae cardiau o dri ffynhonnell:\n  1. Eich **llaw** (rydych chi'n dechrau pob tro â hyd at 5 cardiau yn eich llaw).\n  2. Y **gard top eich pile payoff**.\n  3. Y **gard top unrhyw un o'ch pileau gollwng**.\n\n### Rheolau Chwarae:\n- Gallwch chwarae card i pile canolog os yw **un radd uwch** na'r gard top ar y pile honno (pileau canolog yn dechrau â Ace ac yn mynd i fyny i Queen; Kings sy'n wyll - gallant gael eu chwarae ar unrhyw gard ond nid yw'n newid y dilyniant radd. Hynny yw, os caiff King ei ddefnyddio ar ôl 4, yna y King hwnnw yn radd 5 a'r card nesaf yn rhaid bod yn 6).\n- Os na allwch chwarae mwy o gardiau, rhaid i chi **gollwng card** i un o'ch pileau gollwng i gorffen eich tro.\n- Os yw pile canolog yn cyrraedd Queen, caiff ei lanhau yn awtomatig.\n- Y drefn radd yw: A=1, 2=2, ..., 9=9, J=10, Q=11, K fel gwyll.\n\n### Gweithredoedd:\n1. **Dwyn**: Ar ddechrau eich tro, dwyn cardiau i lenwi eich llaw hyd at 5 cardiau. Rhowch **[draw]** i ddechrau.\n2. **Chwarae Card**: I chwarae card, nodwch y card a'r pile canolog fel hyn: **[play A♠ 0]** (lle 'A♠' yw'r card a '0' yw'r pile canolog index).\n3. **Gollwng**: Os na allwch chwarae mwy o gardiau, gollwng card o'ch llaw i pile gollwng i gorffen eich tro. Rhowch **[discard A♠ 1]** (lle 'A♠' yw'r card a '1' yw'r pile gollwng index). Nodwch nad yw'n bosib gollwng unrhyw gard o'r pile payoff. Dim ond cardiau o'ch llaw y gallwch eu gollwng.\n\n"
+  },
+  "board": {
+    "current_board": "Bwrdd presennol: {board} Symudiadau ar gael: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pylnau Canol --- ",
+    "pile": "{observation}Pile {i}: {pile} ",
+    "player_view_header": "{observation}\n--- Golwg Chwaraewr {player_id} ---\n",
+    "payoff": "{observation}Pil y Gwerth (Card Uwch): {top_card}, Pail y Gwerth: {payoff_length} ",
+    "hand": "{observation}Llaw: {hand} ",
+    "discard": "{observation}Disgyn Pyllau: {discard} ",
+    "empty": "Gwag"
+  },
+  "game_message": {
+    "no_cards_left": "Nid oes mwy o gardiau i'w dynnu. Cofiwch y gallwch chwarae cardiau o'r ffynonellau hyn: 1. Eich llaw. 2. Cerdyn uchaf eich pentyrrau talu. 3. Cerdyn uchaf unrhyw un o'ch pentyrrau gwastraffu."
+  },
+  "invalid_move": {
+    "wrong_format": "Fformat symudiad anghywir. Nid yw chwaraewr {player_id} wedi ymateb gyda symudiad dilys mewn braced sgwâr.",
+    "invalid_play": "Chwaraewr {player_id} a geisiodd chwarae {card} ar y pentwr canol {index}.",
+    "discard_from_payoff": "Gwrthod anghywir. Ceisiodd y chwaraewr {player_id} wrthod cerdyn o'r pentwr talu.",
+    "discard_not_in_hand": "Gwrthod anghywir. Ceisiodd y chwaraewr {player_id} wrthod cerdyn nad yw'n ei law.",
+    "wrong_move_type": "Nid yw'r chwaraewr {player_id} wedi ymateb gyda math cywir o symudiad."
+  },
+  "game_action": {
+    "you_drew": "Rydych yn tynnu cardiau.",
+    "opponent_drew": "Tynnodd chwaraewr {player_id} cardiau.",
+    "you_played": "Chwaraeoch {card} ar y pentwr canol {index}.",
+    "opponent_played": "Chwaraewr {player_id} chwaraeodd {card} ar y pentwr canol {index}.",
+    "you_discarded": "Rydych wedi disgardio {card} i'r pwll disgardio {index}, sy'n golygu eich bod wedi gorffen eich tro hefyd. Ni fydd unrhyw weithredoedd pellach gennych yn cael eu hystyried ar gyfer y tro hwn. Bydd chwaraewr {next_player_id} yn mynd nesaf.",
+    "opponent_discarded": "Chwaraewr {player_id} a gollodd {card} i domen gollwng {index}, sy'n golygu eu bod wedi gorffen eu tro hefyd. Nid yw unrhyw weithredoedd pellach Chwaraewr {player_id} yn cael eu hystyried ar gyfer y tro hwn. Chwaraewr {next_player_id}, byddwch chi'n mynd nesaf. Rhowch eich gweithred yn y fformat [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mae chwaraewr {current_player} wedi gorffen eu stail talu! Mae chwaraewr {current_player} yn ennill!",
+    "deadlock_player_0": "Mae'r gêm wedi cyrraedd y cyfnod o ddal i ben! Mae Chwaraewr 0 yn ennill gyda {player_0_payoff} cardiau yn weddill yn erbyn Cwaraewr 1 {player_1_payoff} cardiau.",
+    "deadlock_player_1": "Mae'r gêm wedi cyrraedd y cyfnod o ddalfa! Mae Chwaraewr 1 yn ennill gyda {player_1_payoff} cardiau yn weddill yn erbyn cerdynnau {player_0_payoff} Chwaraewr 0.",
+    "deadlock_tie": "Cyflwr anghyfnewid â chywir! Mae'r ddau chwaraewr â {player_0_payoff} cardiau ar ôl. Mae Chwaraewr {current_player} yn ennill yn awtomatig."
+  }
+}

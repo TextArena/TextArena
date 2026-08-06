@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} di Nim.\nTujuan Anda adalah mengambil objek yang tersisa terakhir.\nPada setiap giliran, pilih satu tumpukan dan ambil satu atau lebih objek dari itu.\nGunakan format '[pile quantity]', di mana tumpukan adalah indeks tumpukan dan kuantitas adalah jumlah objek yang diambil.\nContohnya, '[0 3]' mengambil 3 objek dari tumpukan 0."
+  },
+  "state": {
+    "current_pile": "Tumpukan Sekarang:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kadada format pamindahan nang sah ditamuakan. Guna \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Pemain {player_id}, Aksi tidak valid. Kolom {col} keluar dari batas.",
+    "out_of_range": "Indeks tumpukan {pile_index} kada dalam kisaran.",
+    "non_positive": "Harus mahapus paling kada 1 objek.",
+    "exceeds_pile": "Tidak bisa mengambil {quantity} dari tumpukan {pile_index} (hanya {pile_count} yang tersisa)."
+  },
+  "observation": {
+    "removed_from_piles": "Pemain {player_id} memainkan [{pile_index} {quantity}], menghapus {quantity} objek dari tumpukan {pile_index}."
+  },
+  "outcome": {
+    "win": "Pamain {player_id} maambil objek tarakhir!"
+  }
+}

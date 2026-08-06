@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Вы гулец {player_id} у гульні індыйскага покера. - 52-картачная калода; вы бачыце толькі карту суперніка. - Антэ {ante} чып (ы) кожны раўнд, {max_rounds} раўнд (ы) у агульнай складанасці. - Правільныя хады: '[check]' │ '[bet X]' │ '[call]' │ '[raise X] │ '[fold]' (X з'яўляецца станоўчым цэлым лікам <= колькасць чыпаў.) - Найвышэйшая схаваная карта выйграе ў поце на паказе. "
+  },
+  "round": {
+    "announce": "### Круг {current_round}/{max_rounds} Карта вашага суперніка: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Даць менавіта АДНА акцыю, уключаную ў дужкі, напрыклад, \"[check]\", \"[bet 2]\", \"[call]\", \"[raise 3]\" або \"[fold]\".",
+    "cannot_check": "Нельга [check] - вы сутыкаецеся з стаўкай.",
+    "amount_min": "Сума стаўкі / падвышэння павінна быць ≥ 1.",
+    "cannot_bet": "Не можа [bet] - павінен [call] / [raise] / [fold].",
+    "nothing_to_call": "Нічога не называць; вы можаце [check] замест гэтага.",
+    "no_bet_to_raise": "Выкарыстоўвайце [bet X] для адкрыцця; няма стаўкі, каб падняць.",
+    "insufficient": "Недастатковыя фішкі для гэтай дзейнасці."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "\"[check]\", \"[bet X]\"",
+    "actions_facing_bet": "\"[call]\" (кошт {to_call}), \"[raise X]\", \"[fold]\"",
+    "possible_actions": "Вашы магчымыя дзеянні: {legal}"
+  },
+  "message": {
+    "round_result": "{reason} Пот {pot} → Гулец {winner}. (Банкролы P0:{p0}, P1:{p1})",
+    "folded": "Гулец {player_id} адступіў.",
+    "showdown_win": "Паказ: {card_win} б'е {card_lose}.",
+    "showdown_tie": "Шоўдаўн-нічыя: абодва {card}. Банк дзеліцца – кожны атрымлівае {split}."
+  },
+  "outcome": {
+    "p0_wins": "Гулец 0 выйграе ({bank0} > {bank1})",
+    "p1_wins": "Гулец 1 выйграе ({bank1} > {bank0})",
+    "draw": "Роўныя фішкі пасля ўсіх раўндаў"
+  }
+}

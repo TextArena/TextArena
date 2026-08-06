@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "I Klondike Solitaire khelh i ni. I tum ber chu card zawng zawng foundation piles-ah sawn tur a ni.\n\nGame Dan:\n- Foundation piles (F1-F4): Ace atanga King thleng suit anga siam\n- Tableau piles (T1-T7): Dang sei zawngin color inang lo (sen hmangah dum, dum hmangah sen)\n- Stock: Waste pile-ah card lak\n- Waste (W): Card hawn chung ber khel theih\n\nHriattirna:\n- 'draw' - Stock atanga waste-ah card lak\n- 'move <source> <destination> [count]' - Piles karah card sawn\n  Entirna: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count 'all'-ah pawh dah theih, card hawn zawng zawng sawn tum ang.\n- 'forfeit' - Game titawp nghal leh score tunlai hmuh theih\n- Pile hming: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nThiltih tam tak khatah action pahnih aia tam theih, comma hmangin then darh:\n  Entirna: 'draw, move W T1, move T2 F1'\n\nTableau piles awm loha King chiah dah theih.\nAction-te hmaih kaia theih, pakhat a hlawhchham chuan a dangte thulh leh a ni.\nGame khelh theih tawh lo tia i ring chuan 'forfeit' hmang rawh."
+  },
+  "format_error": {
+    "no_brackets": "Action format diklo a ni. Action hi bracket-ah dah tur a ni e.",
+    "no_closing_bracket": "Action format diklo. A tawpna bracket a awm lo ']'",
+    "empty_command": "Hriattirna awm lo. 'draw' emaw 'move <source> <destination> [count]' ziah rawh",
+    "empty_action": "Hna engmah nei lo",
+    "move_needs_args": "Move hriattirna-ah source leh destination dah tel tur. Hman dan: 'move <source> <destination> [count]'",
+    "count_positive": "A chhiar zawng chu a positive emaw, 'all' emaw ni tur a ni.",
+    "count_invalid": "A dik lo a chhiar. Number emaw 'all' hmang ang che.",
+    "unknown_command": "Command hriat loh '{cmd}'. 'draw', 'move <source> <destination> [count]', or 'forfeit' hi i hman rawh",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "{n} action(s) te hi thlak chhuah hmaa failure a thleng.",
+    "failed": "Action {n} hi a tlawh loh: {msg}"
+  },
+  "move_result": {
+    "drew": "Stock aṭanga thil paih a ni.",
+    "cannot_draw": "A la thei lo, a dah leh hman loh chu an awm tawh si lo.",
+    "invalid_pile": "A hming diklo. W, F1-F4, T1-T7 hmang ang che",
+    "foundation_one_card": "Foundation-ah card 1 chauh a dah theih.",
+    "waste_to_foundation_ok": "Card a\\\\anga Foundation-a kalpui F{dst}",
+    "waste_to_foundation_bad": "Foundation stack-ah waste card dah theih a ni lo.",
+    "tableau_to_foundation_ok": "Card chu tableau T{src} atangin foundation F{dst} ah kal phut",
+    "tableau_to_foundation_bad": "Foundation stack-ah tableau card dah theih a ni lo. @info: whatsthis",
+    "foundation_to_foundation": "Foundation pakhat aṭangin a dangin an kal thei lo.",
+    "waste_to_tableau_one_card": "Card 1 chauh chu waste aṭanga tableau-ah a thlak theih.",
+    "waste_to_tableau_ok": "Card chu bawlhhlawh aṭangin table T{dst}-ah a dah ta.",
+    "waste_to_tableau_bad": "Tableau khata waste card dah theih loh a ni e.",
+    "no_face_up": "Hma lam hawi card awm lo va, insawn theih a ni lo.",
+    "tableau_to_tableau_ok": "{count} card(s) chu tableau T{src} atangin T{dst} ah kal phut",
+    "tableau_to_tableau_bad": "T{src} atangin T{dst} ah {count} card(s) kal phut theih loh",
+    "foundation_to_tableau_one_card": "Foundation aṭanga tableau-a card 1 chauh a thlak theih.",
+    "foundation_empty": "Foundation F{src} chu a awm lo.",
+    "foundation_to_tableau_ok": "Card chu foundation F{src} atangin tableau T{dst} ah kal phut",
+    "foundation_to_tableau_bad": "Table T{dst}-ah foundation card dah theih a ni lo.",
+    "to_waste_or_stock": "Chhiah leh thil dahkhawmna lamah a kal thei lo."
+  },
+  "outcome": {
+    "forfeit": "Inkhel chu bansan a ni. Point hnuhnung ber: {score} card te foundation-ah.",
+    "won": "Ka lawmpui e, Klondike Solitaire i hneh ta!",
+    "turn_limit": "Inkhel zawh tawh! I turn {max_turns} tling tawh. Point: {score} card te foundation-ah."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== A hming chu \"K\" a ni.",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stock: {stock} card-te chu a ni.",
+    "waste": "Chhia leh thau (W): {waste}",
+    "foundations_header": "Foundation:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

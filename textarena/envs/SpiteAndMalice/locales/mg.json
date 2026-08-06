@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Mpilalao {player_id} ianao ao amin'ny lalao Spite and Malice miaraka amin'ny mpilalao roa. Tanjona dia ho voalohany hanafoana ny payoff pile.\n\n### Fampahafantarana ny Lalao:\n- Ny tanjona dia hanafoana ny payoff pile amin'ny alalan'ny fanatanjehana karto any amin'ny piles afovoany.\n- Afaka milalao karto avy amin'ny loharano telo:\n  1. Ny **tanana** (manomboka amin'ny karto 5 an-tanana isaky ny fihodinana).\n  2. Ny **karto ambony amin'ny payoff pile**.\n  3. Ny **karto ambony amin'ny discard piles rehetra**.\n\n### Dina Lalao:\n- Afaka milalao karto any amin'ny pile afovoany raha **tokony iray ambony** noho ny karto ambony amin'io pile io (ny piles afovoany manomboka amin'ny Ace ka hatramin'ny Queen; ny Kings dia wild - azo atao amin'ny karto rehetra fa tsy miova ny filaharana. Izany hoe raha King no atao aorian'ny 4, dia ranked 5 ilay King ary ny karto manaraka dia tsy maintsy ho 6).\n- Raha tsy afaka milalao karto intsony, tsy maintsy **hanafoana karto** any amin'ny discard piles iray mba hahatapitra ny fihodinana.\n- Raha ny pile afovoany iray tonga Queen, dia hanafoan'ny maharitra.\n- Ny filaharana dia: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Hetsika:\n1. **Draw**: Amin'ny fiandohan'ny fihodinana, kala karto mba ahafeno ny tanana hatramin'ny karto 5. Ameo **[draw]** mba hanombohana.\n2. **Play a Card**: Mba hanatanjehana karto, soraty ny karto sy ny pile afovoany tahaka ity: **[play A♠ 0]** (izay 'A♠' no karto ary '0' no index pile afovoany).\n3. **Discard**: Raha tsy afaka milalao karto intsony, hanafoana karto avy amin'ny tanana any amin'ny discard pile iray mba hahatapitra ny fihodinana. Ameo **[discard A♠ 1]** (izay 'A♠' no karto ary '1' no index discard pile). Tsy azo atao ny hanafoana karto avy amin'ny payoff pile. Afaka milalao karto avy amin'ny tanana ihany.\n\n"
+  },
+  "board": {
+    "current_board": "Birao ankehitriny: {board} Hetsika azo atao: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Fitaovana afovoany --- ",
+    "pile": "{observation}Fanisana {i}: {pile} ",
+    "player_view_header": "{observation} --- Ny fijerin'ny mpilalao {player_id} --- ",
+    "payoff": "{observation}Fanomezana (karatra ambony): {top_card}, Fandresena: {payoff_length} ",
+    "hand": "{observation}Tanana: {hand} ",
+    "discard": "{observation}Alefaso ny Fikarakarana: {discard} ",
+    "empty": "Feno"
+  },
+  "game_message": {
+    "no_cards_left": "Tsy misy karatra intsony azo alaina. Tadidio fa afaka milalao karatra avy amin'ireto loharano ireto ianao: 1. Ny tànanao. 2. Ny karatra ambony indrindra amin'ny taila fandoavanao. 3. Ny karatra ambony indrindra amin'ny taila fanarianao."
+  },
+  "invalid_move": {
+    "wrong_format": "Tsy mety ny endrika fihetsika. Tsy namaly ny mpilalao {player_id} tamin'ny fihetsika mety ao anaty fononteny.",
+    "invalid_play": "Lalao tsy mety. Niezaka ny hilalao {card} teo amin'ny tsatokazo afovoany {index} ny mpilalao {player_id} .",
+    "discard_from_payoff": "Tsy mety ny fanariana. Niezaka ny hanary karatra iray avy amin'ny antontam-bola ny mpilalao {player_id}.",
+    "discard_not_in_hand": "Tsy mety ny fanariana. Niezaka ny hanary karatra tsy eo am-pelatanany ny mpilalao {player_id}.",
+    "wrong_move_type": "Tsy mety ny karazana hetsika. Tsy namaly tamin'ny karazana hetsika mety ny mpilalao {player_id} ."
+  },
+  "game_action": {
+    "you_drew": "Nanao karatra ianao.",
+    "opponent_drew": "Nanao karatra ny mpilalao {player_id}.",
+    "you_played": "Nilalao {card} teo amin'ny tsatokazo afovoany {index} ianao.",
+    "opponent_played": "Ny mpilalao {player_id} dia nilalao {card} teo amin'ny tsatoka afovoany {index}.",
+    "you_discarded": "Manao hoe nandoro {card} any amin'ny pile fandoroana {index}, izay midika koa fa ve mavitana ny fiainganao. Tsy misy fanombohan'ny asa hafa aminao noho ny fiainganao. Mpilalao {next_player_id} no hijoro tsy ho ela.",
+    "opponent_discarded": "Mpilalao {player_id} nandroaka {card} mba handroaka ny antontam-bato {index}, izay midika ihany koa fa tapitra ny anjarany. Tsy misy hetsika hafa ataon'ny mpilalao {player_id} no raisina ho an'ity fihodinana ity. Mpilalao {next_player_id}, ianao no manaraka. Azafady ampidiro ny hetsikao amin'ny endrika [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Ny mpilalao {current_player} dia nahavita ny tambin-karaman'izy ireo! Mandresy ny mpilalao {current_player}!",
+    "deadlock_player_0": "Tapaka ny toerana tsy azo aleha! Mandresy ny Mpilalao 0 miaraka amin'ny karatra {player_0_payoff} sisa tavela vs ny karatra {player_1_payoff} an'ny Mpilalao 1.",
+    "deadlock_player_1": "Efa tonga ny fotoana tsy azo ialana! Mandresy ny Mpilalao 1 miaraka amin'ny {player_1_payoff} karatra sisa tavela vs. ny karatra {player_0_payoff} an'ny Mpilalao 0.",
+    "deadlock_tie": "Nahazoana ny fiatoan'ny filalaovana amin'ny fahaleman'ny filana! Mpilalao roa samy manana {player_0_payoff} karata sisa. Mpilalao {current_player} mitana amin'ny alalan'ny fanapahan-kevitra."
+  }
+}

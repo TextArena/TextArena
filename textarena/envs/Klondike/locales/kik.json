@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Ũrangĩra Klondike Solitaire. Irĩo yako ni kuhamisha karata zote kwenye mirundo ya msingi.\n\nSheria za Mchezo:\n- Mirundo ya msingi (F1-F4): Jenga kutoka Ace hadi King kwa rangi\n- Mirundo ya meza (T1-T7): Jenga chini kwa rangi zinazobadilika (nyekundu juu ya nyeusi, nyeusi juu ya nyekundu)\n- Hifadhi: Chora karata kwenye mirundo ya taka\n- Taka (W): Karata ya juu inapatikana kwa mchezo\n\nMaagizo:\n- 'draw' - Chora karata kutoka kwa hifadhi hadi taka\n- 'move <source> <destination> [count]' - Hamisha karata kati ya mirundo\n  Mifano: 'move W T1', 'move T1 F2', 'move T3 T5 2'. idadi pia inaweza kuwa 'all', ambayo itajaribu kuhamisha karata zote zilizo wazi.\n- 'forfeit' - Maliza mchezo mara moja na uweke alama yako ya sasa\n- Majina ya mirundo: W (taka), F1-F4 (msingi), T1-T7 (meza)\n\nUnaweza kutekeleza vitendo vingi katika zamu moja kwa kuzitenganisha na alama za makoma:\n  Mfano: 'draw, move W T1, move T2 F1'\n\nWafalme pekee wanaweza kuwekwa kwenye mirundo tupu ya meza.\nVitendo vinafanywa kwa mpangilio - ikiwa kimoja kinafeli, vitendo vilivyobaki vinapuuzwa.\nTumia 'forfeit' ikiwa unaamini kuwa mchezo hauwezekani kushinda."
+  },
+  "format_error": {
+    "no_brackets": "Njĩra ya kũruta wĩra ndĩagĩrĩire. Ĩngĩoneka na ndemwa cia kĩrũgamo.",
+    "no_closing_bracket": "Mũbango wa kĩama ũtarĩ mwega. Kũrema gatembe ga kũhingĩrĩria ']'",
+    "empty_command": "Amri tupu. Andika 'draw' au 'move <source> <destination> [count]'",
+    "empty_action": "Hatua tupu",
+    "move_needs_args": "Amri ya kusogeza inahitaji chanzo na lengo. Matumizi: 'move <source> <destination> [count]'",
+    "count_positive": "Idadi lazima iwe chanya au 'all'",
+    "count_invalid": "Idadi isiyo sahihi. Tumia nambari au 'all'",
+    "unknown_command": "Komanda isiyojulikana '{cmd}'. Tumia 'draw', 'move <source> <destination> [count]', au 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Ĩtiro {n} ĩhingĩtio mbere ya kũremwo.",
+    "failed": "Action {n} igai: {msg}"
+  },
+  "move_result": {
+    "drew": "Nĩ ũndũ ũcio, nĩ aambĩrĩirie kũhũthĩra kaarĩhi kau.",
+    "cannot_draw": "Tũtingĩhota kũruta indo, tũhũ na iria ingĩ itarĩ nacio.",
+    "invalid_pile": "Rĩĩtwa rĩtarĩ rĩa kĩguni. Thiĩ na W, F1-F4, kana T1-T7",
+    "foundation_one_card": "No kũhota gũtwara kandi ĩmwe tu mũthingi-inĩ.",
+    "waste_to_foundation_ok": "Karatathi ga gũthamĩrio kuuma gĩko-inĩ nginya mũthingi F{dst}",
+    "waste_to_foundation_bad": "Ndũngĩhota gũtwara kaadi ya kũhũrwo harĩ mũthingi ũcio wa kabati ĩyo.",
+    "tableau_to_foundation_ok": "Ilifanya kadi kutoka tableau T{src} hadi foundation F{dst}",
+    "tableau_to_foundation_bad": "Ndũngĩhota gũtwara kandi ya kĩbungo gĩaku harĩ mũthingi ũcio wa kabuku kau.",
+    "foundation_to_foundation": "Ndũngĩhota gũthiĩ kuuma mũthingi ũmwe nginya ũrĩa ũngĩ.",
+    "waste_to_tableau_one_card": "No ĩhote gũthamia o kaarti kamwe tu kuuma gĩkoinĩ kĩa mathaga nginya mũcoro-inĩ wa karati.",
+    "waste_to_tableau_ok": "Kadi imehamishwa kutoka kwa taka hadi jedwali T{dst}",
+    "waste_to_tableau_bad": "Ndũngĩiga karati ya kũhũrwo kĩronda-inĩ kĩu kĩa tableau",
+    "no_face_up": "Gũtirĩ kaarĩ ga kũguucĩrĩrio karĩa gakũgarũrũkaga.",
+    "tableau_to_tableau_ok": "Ilifanya {count} kadi(s) kutoka tableau T{src} hadi T{dst}",
+    "tableau_to_tableau_bad": "Haiwezi kusogea {count} kadi(s) kutoka T{src} hadi T{dst}",
+    "foundation_to_tableau_one_card": "No ĩhote gũthamia kadi ĩmwe tu kuuma mũthingi nginya gĩtarainĩ kĩa mbere.",
+    "foundation_empty": "Foundation F{src} nĩ ĩtarĩ kĩndũ.",
+    "foundation_to_tableau_ok": "Ilifanya kadi kutoka foundation F{src} hadi tableau T{dst}",
+    "foundation_to_tableau_bad": "Ndũngĩhota kũiga kaarĩki ya mũthingi gĩtara-inĩ T{dst}",
+    "to_waste_or_stock": "Ndũngĩhota gũtwarwo gĩkoinĩ kĩa mĩtarakwa kana indo iria irĩ kuo."
+  },
+  "outcome": {
+    "forfeit": "Mchezo umefutwa. Alama ya mwisho: {score} kadi katika msingi.",
+    "won": "Nĩ mũhotete gũtooria kĩhĩtahĩtano gĩa Klondike Solitaire!",
+    "turn_limit": "Mchezo umemalizika! Umeifikia idadi ya juu ya {max_turns} midundo. Alama: {score} kadi katika msingi."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== Gĩthũngũ: Mũrũngarũ wa mũtiiri.",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Hifadhi: {stock} kadi",
+    "waste": "Mĩthaiga (W): {waste}",
+    "foundations_header": "Mabũrũri:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Mũbango:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "O wina Mwana nkenda {player_id} na Bamwana tolo Tatu ya GOPS.\n- O zola kota 13 A-K (kila mosi mwaka ntete).\n- Kwa kila mviringo, mbongo ikosolwa. Pesa kota mosi lokola `[Q]`, `[10]`, `[2]` …\n- Kota ya juu ikunda mbongo (+ na mbongo yankaka). Vita vitambula mbongo kwa mviringo una kwiza.\n- Baada ya mviringo 13, kota ya juu ikunda. Maboko mabaya = kufwa."
+  },
+  "round": {
+    "header": "### Lulendo {round}/13 - Kifwa: {prize} (kieno {worth})",
+    "hand": "Diboko na nge ya nsuka: {hand}"
+  },
+  "reveal": {
+    "win": "Bids » {bids} - Mwana nkenda {winner} akunda {pot}.",
+    "tie": "Bo ke pesa mbongo  {bids} - ata kima mosi ve, bo me tula yo ntangu yai {pot}.",
+    "scores": "Matadi → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "Kisalu fwete vanda ti karti yina kele na kati ya bisono bonso \"[Q]\"",
+    "bad_card": "karte yina bo mesadila dezia to ya kele ve na mfunu"
+  },
+  "elimination": {
+    "player": "Muntu ya kebula {pid} bo me katula yandi na match sambu yandi salaka diaka ve kitambi mosi."
+  },
+  "outcome": {
+    "auto_win": "Bantu zole yina bo mebasisa na nsaka yango menunga.",
+    "final": "Balutangu ya nsuka: {scores}"
+  }
+}

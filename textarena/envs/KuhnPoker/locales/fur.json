@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Tu sês Zogador {player_id} in un zûc a {max_rounds} turns di Kuhn Poker.\nRegolaments dal zûc:\n- Il Kuhn Poker al dopre un mazzo di 3 cartis cu la J, Q, K (J plui basse, K plui alte)\n- Ognidun zogador bute {ante} fich e riceve 1 carte a ogni turn (note che lis cartis a son distribuidis senza sostituzion, cussì no puoi vê la stesse carte dal aversari).\n- Il zûc al continue par {max_rounds} turns\n- Il zogador cun plui fichs dopo ducj i turns al vinç\nRegolaments azions:\n- '[check]': Passi senza bet (soltant se no ai bets sul tavol)\n- '[bet]': Zonte 1 fich al pot (soltant se no ai bets sul tavol)\n- '[call]': Corespon a un bet dal aversari zontant 1 fich al pot\n- '[fold]': Rinunzie a la tô man e lasse che il tô aversari vinç il pot"
+  },
+  "init_round": {
+    "round_start": "### Inizi dal turn {current_round} su {max_rounds} turns. La tô carte e je: '{player_card}'",
+    "available_actions": "Lis azions disponibilis a son: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'azion al à di jessi [Check], [Bet], [Call], o [Fold].",
+    "not_legal": "La azion e à di jessi {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Zugadôr {player_id}, azion inviade: '[{move}]'.",
+    "valid_actions": "Lis azions disponibilis a son: {legal_actions}.",
+    "round_summary": "{reason} Punteggi atuals: Zogador 0: '{player_0_chips}'; Zogador 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Sfide: La cjarte {winner_card} dal Zugadôr {winner} e bat la cjarte {loser_card} dal Zugadôr {loser}. Il Zugadôr {winner} al vinç un piat di {pot_value} fichis."
+  },
+  "outcome": {
+    "draw": "Tal finâl dai turnis {max_rounds}, ducj i doi zuiadôrs a vevin il stes numar di fiestis.",
+    "round_win": "Il zuiadôr {player_id} al à molât.",
+    "winner_player0": "Il zuiadôr 0 al vinç avendo plui fiches a la fin di ducj i turnis {max_rounds}.",
+    "winner_player1": "Il zuiadôr 1 al vinç avendo plui fiches a la fin di ducj i turnis {max_rounds}."
+  }
+}

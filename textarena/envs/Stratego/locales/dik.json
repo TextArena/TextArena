@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Yin ee Player {player_id} ee Stratego.\nGol yin ee dom ee Flag ee opponent ku ee eliminate ee pieces zote ee movable ee opponent.\nArmy yin ee kuat ee yin ee board, ee Flag, Bombs, ku pieces zingatia ranks.\n\n### Thuɔŋ ee Gameplay\n1. **Movement Rules:**\n   - Ee turn yin, yin ee kuat ee move ee piece ee tok ee ku ee adjacent square (up, down, left, or right) ee occupied ee pieces yin.\n   - Thuɔŋ: Piece ee move ee A1 ee B1 or A1 ee A2 ee B1 ku A2 ee not kuat ee pieces yin.\n   - Ee piece ee Bomb or Flag, ee cannot ee move.\n2. **Battles:**\n   - Ee yin ee move ee square occupied ee piece ee opponent, ee battle ee occur:\n     - Piece ee rank ee higher ee wins ee eliminates ee piece ee opponent.\n     - Ee ranks ee equal, ee pieces ee removed ee board.\n     - **Special Cases:**\n       - Bombs ee eliminate ee pieces ee most ee attacking ee Miners, ee defuse ee Bombs.\n       - Spies ee defeat ee Marshal ee Spy ee attacks ee first ee lose ee pieces zote.\n3. **Strategic Goals:**\n   - Yin ee identify ee pieces ee opponent ee movements ee battles.\n   - Yin ee protect ee Flag yin ee attempt ee capture ee Flag ee opponent.\n   - Yin ee use ee Scouts ee strategically ee gain ee information ee pieces ee opponent ee attack ee weak ones.\n\n### Thuɔŋ ee Make ee Move:\n1. Yin ee specify ee coordinates ee piece yin ee move ee destination.\n2. Yin ee use ee format: [A0 B0], ee A0 ee source position, ee B0 ee destination.\n   - Thuɔŋ: Ee move ee piece ee row 0, column 0 ee row 1, column 0, input [A0 B0].\n3. Yin ee ensure ee destination ee valid ee movement rules ee above.\n\n### Thuɔŋ ee Important:\n- Board ee show ee pieces yin ee positions, ee MN, MS.\n- Board ee show ee positions ee pieces ee opponent ee revealing ee ranks, ee ?.\n- Grids ee ~ ee lakes ee cannot ee move ee onto.\n- Thuɔŋ, yin ee start ee game ee moving ee pieces ee front lines ee gain ee information ee pieces ee opponent. Player 0 ku player 1 ee frontlines ee row D ku G respectively.\n\nThuɔŋ ee current board state:\n"
+  },
+  "board": {
+    "current_board": "Kë ye pɛ̈i ëë nïn:\n\n{board}\nKë ye looi ëë nïn: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Käärë kekë cïn ë bëny. Wär {player_id} acë timë kekë cïn ë rok tënë kuɛt ë [A0 B0] guöp.",
+    "invalid_coordinates": "Acie këpuɔth. Raan ye cɔl {player_id} akëc wël cï kek gɔ̈ɔ̈r tääu thïn.",
+    "not_own_piece": "Aci loi yic. Raan ye gɔ̈ɔ̈r {player_id} adhil biäkde ya waar në këden tök.",
+    "scout_through_pieces": "Acie këpuɔth. Raan ye gɔ̈ɔ̈r {player_id} acïï lëu bï raan cï yen döt lɔ tueŋ në biäk kɔ̈k yiic.",
+    "scout_diagonal": "Acie kë puɔth. Raan ye cɔl {player_id} acïï lëu bï raan cï yen döt ya cɔk lɔ tueŋ në biäk dɛ̈t yic.",
+    "non_scout_multi_square": "Acie kë puɔth. Kä ye kek cuat, agut kɔc cï keek ŋic, alëu bïk lɔ në ɣän tök ëbɛ̈n yic kedhiɛ.",
+    "move_into_lake": "Acie këpuɔth. Raan ye cɔl {player_id} acïï lëu bï lɔ në adɛ̈kdiɛɛt yic.",
+    "move_onto_own_piece": "Acie këpuɔth. Raan ye gɔ̈ɔ̈r {player_id} acïï lëu bï lɔ në biäkde yic.",
+    "move_bomb_or_flag": "Acie këpuɔth. Raan ye cɔl {player_id} acïï lëu bï bom ku dɛɛp lɔ̈ɔ̈m."
+  },
+  "game_action": {
+    "you_moved": "Ya cë timë kekë cïn ë rok tënë kuɛt ë {source} guöp ë {dest}.",
+    "opponent_moved": "Wär {player_id} acë timë kekë cïn ë rok tënë kuɛt ë {source} guöp ë {dest}.",
+    "you_equal_ranks": "Ya cë timë kekë cïn ë rok tënë kuɛt ë {source} guöp ë {dest}. Kekë cïn ë bëny acë {attacking_rank} kuɛt ë guöp acë {target_rank}. Ka cïn acë bëny kuɛt ë bëny, kuɛt ë bëny acë kɛk ë lɔ.",
+    "opponent_equal_ranks": "Wär {player_id} acë timë kekë cïn ë rok tënë kuɛt ë {source} guöp ë {dest}. Kekë cïn ë bëny acë {attacking_rank} kuɛt ë guöp acë {target_rank}. Ka cïn acë bëny kuɛt ë bëny, kuɛt ë bëny acë kɛk ë lɔ.",
+    "you_miner_defused": "Ya cë timë kekë cïn ë rok tënë kuɛt ë {source} guöp ë {dest}. Kekë cïn ë bëny acë {attacking_rank} kuɛt ë guöp acë {target_rank}. Ka cïn acë bëny kuɛt ë bëny, kuɛt ë bëny acë kɛk ë lɔ, ya wön löökcë.",
+    "opponent_miner_defused": "Player {player_id} ee moved ee piece ee {source} ee {dest}. Piece ee attacking ee {attacking_rank} ee piece ee destination ee {target_rank}. Ee miners ee defuse ee bombs, yin ee lost ee battle.",
+    "you_bomb_lost": "Yin ee moved ee piece yin ee {source} ee {dest}. Piece ee attacking ee {attacking_rank} ee piece ee destination ee {target_rank}. Ee attacker ee not ee miner, yin ee lost ee battle.",
+    "opponent_bomb_won": "Player {player_id} ee moved ee piece ee {source} ee {dest}. Piece ee attacking ee {attacking_rank} ee piece ee destination ee {target_rank}. Ee attacker ee not ee miner, yin ee won ee battle.",
+    "you_spy_won": "Yin ee moved ee piece yin ee {source} ee {dest}. Piece ee attacking ee {attacking_rank} ee piece ee destination ee {target_rank}. Ee attacker ee spy ee destination ee marshall, yin ee won ee battle.",
+    "opponent_spy_lost": "Player {player_id} ee moved ee piece ee {source} ee {dest}. Piece ee attacking ee {attacking_rank} ee piece ee destination ee {target_rank}. Ee attacker ee spy ee destination ee marshall, yin ee lost ee battle.",
+    "you_higher_won": "Ya cë timë kekë cïn ë rok tënë kuɛt ë {source} guöp ë {dest}. Kekë cïn ë bëny acë {attacking_rank} kuɛt ë guöp acë {target_rank}. Ka cïn acë bëny kuɛt ë bëny, kuɛt ë bëny acë kɛk ë lɔ, ya wön löökcë.",
+    "opponent_higher_lost": "Raani {player_id} acëë këër nhïïm ku {source} tɛ̈ {dest}. Këër nhïïmëë kɔɔc ku {attacking_rank} ku këër nhïïmëë kɔɔc ku {target_rank}. Kɔɔc këër nhïïmëë aye kɔɔc nhïïmëë kɔɔc nhïïm, yïnëë kɔa.",
+    "you_lower_lost": "Ya cë timë kekë cïn ë rok tënë kuɛt ë {source} guöp ë {dest}. Kekë cïn ë bëny acë {attacking_rank} kuɛt ë guöp acë {target_rank}. Ka cïn acë bëny kuɛt ë bëny, kuɛt ë bëny acë kɛk ë lɔ, ya lɔkcë.",
+    "opponent_lower_won": "Player {player_id} ee moved ee piece ee {source} ee {dest}. Piece ee attacking ee {attacking_rank} ee piece ee destination ee {target_rank}. Ee attacker ee rank ee lower ee destination, yin ee won ee battle."
+  },
+  "outcome": {
+    "flag_captured": "Raan ye gɔ̈ɔ̈r {player_id} acï bɛ̈n dɔm në biäk de kɔc kɔ̈k!",
+    "no_movable_pieces": "Raani {winner_id} acëë yïn! Raani {loser_id} alëu bëëi kë ye mïth yiëu kë looi."
+  }
+}

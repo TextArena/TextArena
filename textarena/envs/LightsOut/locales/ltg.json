@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Sveicieni Lights Out spēlē! Jums ir {size}x{size} gaismiņu režģis.\nJūsu mērķis ir izslēgt VISAS gaismiņas (parādītas ar '.').\nKad nospiedat gaismiņu, tā pārslēdzas pati UN arī tās blakus kaimiņi (augšā/lejā/kreisā/labā).\nRakstiet [row col], lai nospiedat gaismiņu (0-indeksēts, tāpēc derīgais diapazons ir 0-{max_index}).\nJums ir līdz {max_turns} gājieniem, lai atrisinātu mīklu.\nLeģenda: 'O' = gaismiņa IR IEŠLEGTAS, '.' = gaismiņa IR IZSLĒGTA"
+  },
+  "board": {
+    "current_state": "Pašreizējā režģa stāvoklis (Soļs {moves_made}, {moves_left} soļi atlikuši, {completion}% pabeigts):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Darbība jābūt formātā [row col], kur rinda un kolonna ir veseli skaitļi no 0 līdz {max_index}.",
+    "out_of_range": "Koordinātām jābūt starp 0 un {max_index}. Jūs ievadījāt [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Apsveicu! Tu atrysynuoji gryudu {moves_used} kusteibā!",
+    "loss": "Spēle beigusies! Jūs izmantojāt visus {max_turns} gājienus bez mīklas atrisināšanas. Gala pabeigums: {completion}%\nGala stāvoklis:\n{grid}"
+  }
+}

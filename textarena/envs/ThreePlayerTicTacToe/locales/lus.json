@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "I Player {player_id} i ni Three-Player Tic Tac Toe-ah.\nI symbol chu '{symbol}' a ni.\nI in turn-in i symbol dah tur a ni 5x5 board-ah line 4 siam turin.\nLine chu horizontal, vertical, emaw diagonal a ni thei.\nI move thehluh format '[4]' hmangin cell 4 mark turin."
+  },
+  "board": {
+    "current_board": "Board Hmanmek:\n\n{board}\n\nTih theih Moves: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Move format dik lo. '[cell]' hmangin cell 0-{max_cell} a ni.",
+    "out_of_range": "Invalid cell number: {cell}. 0 leh {max_cell} inkar a ni.",
+    "already_occupied": "Cell {cell} chu a luah tawh.",
+    "made_invalid": "Player {player_id} chuan tih dik loh a ti"
+  },
+  "game_action": {
+    "placed": "Player {player_id} an symbol ({symbol}) dahin field ({row}, {col})-ah."
+  },
+  "outcome": {
+    "win": "Player {player_id} ({symbol}) chak!",
+    "draw": "Inkhel chu a inhnehtawk!"
+  }
+}

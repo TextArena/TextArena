@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "ਤੁਸੀਂ ਤਿੰਨ-ਖਿਡਾਰੀ ਟਿਕ ਟੋਅ ਵਿਚ ਖਿਡਾਰੀ {player_id} ਹੋ. ਤੁਹਾਡਾ ਪ੍ਰਤੀਕ '{symbol} ਹੈ. ਤੁਸੀਂ ਚਾਰ ਦੀ ਇੱਕ ਲਾਈਨ ਬਣਾਉਣ ਲਈ ਆਪਣੇ ਪ੍ਰਤੀਕ ਨੂੰ 5x5 ਬੋਰਡ ਤੇ ਲਗਾਉਂਦੇ ਹੋ. ਲਾਈਨਾਂ ਹਰੀਜ਼ਟਲ, ਵਰਟੀਕਲ ਜਾਂ ਡਾਇਗਨੋਲ ਹੋ ਸਕਦੀਆਂ ਹਨ. ਸੈੱਲ 4 ਨੂੰ ਮਾਰਕ ਕਰਨ ਲਈ ਫਾਰਮੈਟ '[4] ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੀ ਚਾਲ ਨੂੰ ਜਮ੍ਹਾਂ ਕਰੋ."
+  },
+  "board": {
+    "current_board": "ਮੌਜੂਦਾ ਬੋਰਡ: {board} ਉਪਲਬਧ ਚਾਲਾਂਃ {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "ਗਲਤ ਮੂਵ ਫਾਰਮੈਟ. '[cell]' ਦੀ ਵਰਤੋਂ ਕਰੋ ਜਿੱਥੇ ਸੈੱਲ 0-{max_cell} ਹੈ।",
+    "out_of_range": "ਅਵੈਧ ਸੈੱਲ ਨੰਬਰ: {cell}। 0 ਅਤੇ {max_cell} ਦੇ ਵਿਚਕਾਰ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।",
+    "already_occupied": "ਸੈੱਲ {cell} ਪਹਿਲਾਂ ਹੀ ਭਰਿਆ ਹੋਇਆ ਹੈ।",
+    "made_invalid": "ਖਿਡਾਰੀ {player_id} ਨੇ ਇੱਕ ਅਵੈਧ ਚਾਲ ਕੀਤੀ"
+  },
+  "game_action": {
+    "placed": "ਖਿਡਾਰੀ {player_id} ਆਪਣੇ ਨਿਸ਼ਾਨ ({symbol}) ਨੂੰ ਖੇਤਰ ({row}, {col}) ਵਿੱਚ ਰੱਖਦਾ ਹੈ।"
+  },
+  "outcome": {
+    "win": "ਖਿਡਾਰੀ {player_id} ({symbol}) ਜਿੱਤਦਾ ਹੈ!",
+    "draw": "ਇਹ ਮੈਚ ਬਰਾਬਰ ਹੈ!"
+  }
+}

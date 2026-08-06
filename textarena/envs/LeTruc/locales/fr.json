@@ -1,0 +1,42 @@
+{
+  "_comment": "Fichier de langue de Le Truc. NE traduis PAS les clés (côté gauche). Traduis uniquement les valeurs (côté droit). Conserve chaque {placeholder} exactement tel quel. Ne traduis jamais les jetons d'action ('[play]', '[raise]', '[accept]', '[fold]'), les étiquettes de cartes/couleurs (p. ex. 3♠, A♥, K♦), les étiquettes de joueur (P0, P1) ni les valeurs numériques de points.",
+  "_slots": {
+    "{pid}": "A player number, 0 or 1",
+    "{winner}": "The player number who won the trick or hand",
+    "{points}": "A hand point value, e.g. 1, 2 or 4",
+    "{p0}": "Player 0's running match score",
+    "{p1}": "Player 1's running match score",
+    "{cards}": "A space-separated list of the player's card labels, e.g. 'A♦ 3♠ A♥'",
+    "{card}": "A single card label, e.g. '3♠'",
+    "{legal}": "A comma-separated list of the currently legal action tokens"
+  },
+  "player_prompt": {
+    "intro": "Vous jouez à Le Truc, un jeu de plis pour 2 joueurs avec un jeu de 40 cartes (rang du plus fort au plus faible : 3 2 A K Q J 7 6 5 4).\nÀ chaque main, vous recevez 3 cartes et jouez jusqu'à trois plis d'une carte. Le rang le plus élevé remporte le pli quelle que soit la couleur ; des rangs égaux font égalité ('nul'). Gagnez la main en prenant deux plis, ou en remportant le premier pli lorsque l'autre est nul ; un pli nul compte pour celui qui a gagné le premier pli, et si les trois sont nuls personne ne marque.\nUne main vaut 1 point. À votre tour, vous pouvez '[raise]' (truc) pour augmenter l'enjeu : 1->2, puis +2 pour chaque relance suivante jusqu'à 12. Votre adversaire doit '[accept]', '[fold]' ou de nouveau '[raise]'. Le joueur qui se couche concède la main, et le relanceur marque l'enjeu d'avant cette relance.\nActions : '[play <rank>]' (p. ex. '[play 3]'), '[raise]', '[accept]', '[fold]'. Le premier à 12 points gagne la partie."
+  },
+  "board": {
+    "new_hand": "### Nouvelle main valant {points} pt(s)\nVos cartes : {cards}",
+    "valid_actions": "Autorisées maintenant : {legal}."
+  },
+  "invalid_move": {
+    "unrecognised": "Action non reconnue.",
+    "already_raised": "Déjà relancé.",
+    "no_raise_to_accept": "Aucune relance à accepter.",
+    "cannot_fold": "Impossible de se coucher maintenant.",
+    "wrong_rank": "Vous ne possédez pas ce rang (les couleurs sont ignorées en entrée).",
+    "must_respond": "Une relance est en attente - répondez par '[accept]', '[fold]' ou de nouveau '[raise]' avant de jouer une carte.",
+    "max_stake": "La main vaut déjà le maximum (12) ; vous ne pouvez plus relancer."
+  },
+  "action": {
+    "raise": "P{pid} annonce truc - la main vaut maintenant {points} pt(s). L'adversaire doit '[accept]', '[fold]' ou de nouveau '[raise]'.",
+    "accept": "P{pid} accepte - la main vaut {points} pt(s).",
+    "lead": "P{pid} entame avec {card}.",
+    "play": "P{pid} joue {card}. Pli pour P{winner}.",
+    "spoilt": "P{pid} joue {card}. Les rangs sont à égalité - le pli est nul."
+  },
+  "outcome": {
+    "folded": "L'adversaire s'est couché.",
+    "hand_won": "Main gagnée par P{winner} (+{points} pt(s)). Score - P0: {p0}, P1: {p1}.",
+    "void": "Les trois plis nuls - aucun point cette main. Score - P0: {p0}, P1: {p1}.",
+    "reached_twelve": "12 points atteints."
+  }
+}

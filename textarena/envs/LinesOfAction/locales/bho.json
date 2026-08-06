@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "आप लाइन्स ऑफ एक्शन के खेल में खिलाड़ी {player_id} हैं।\nआपके टुकड़े '{side}' हैं, विरोधी के टुकड़े '{other}' हैं।\nमूव फॉर्मेट: `[b1b3]` (निर्देशांक से निर्देशांक तक)। एक वैध मूव क्षैतिज, ऊर्ध्वाधर, या तिरछे एक निश्चित संख्या में वर्गों की यात्रा करता है जो उस पंक्ति में कुल टुकड़ों (किसी भी रंग) के बराबर होता है। आप अपने स्वयं के टुकड़ों पर कूद सकते हैं, लेकिन विरोधी के टुकड़ों पर नहीं; विरोधी पर उतरने से उसे पकड़ लिया जाता है।  जब आपके सभी टुकड़े 8-नेबर कनेक्टेड हों तो जीतें।"
+  },
+  "board": {
+    "current_board": "बोर्ड: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "फॉर्मेट e2e4 (coordinates से,के ओर) होखे के चाहीं.",
+    "no_piece": "कोई {side} पीस {coord} पे नइखे.",
+    "identical": "स्रोत आ गंतव्य एके जइसन बा।",
+    "not_straight_or_diagonal": "चाल सीधा या तिरछा होखे के चाही.",
+    "wrong_distance": "लाइन में बराबर दूरी पर टुकड़ा के आगे बढ़ावल जाय.",
+    "enemy_blocks": "दुश्मन के टुकड़ा रास्ता रोक देले बा.",
+    "destination_own": "आपन खुद के टुकड़ा से कब्जा कइल गंतव्य."
+  },
+  "game_action": {
+    "moved": "प्लेयर {player_id} {from} -> {to} ले जाके",
+    "captured_suffix": "प्लेयर {player_id} {from} -> {to} ले जाके एक दुश्मन के पकड़ लिहिस."
+  },
+  "outcome": {
+    "win": "सब टुकड़ा जुड़ल बा.",
+    "draw_no_capture": "60 गो चाल बिना कैच के चलल गइल.",
+    "draw_repetition": "स्थिति तीन बेर दोहरावल गइल."
+  }
+}

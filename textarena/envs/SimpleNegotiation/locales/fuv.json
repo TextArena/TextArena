@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "A si Player {player_id} e Negotiation Game.\nA ina arande, bee e taski a be trading haa arande a be increase.\nArande e resources bee e values a ina be: \n\t+ {resource_value_list}\nE turn, a be haaŋŋe bee e opponent a be jibi trade offer.\nUse e following special tokens haa actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': Haa accept incoming offer.\n  - '[Deny]': Haa deny incoming offer (default).\nE game be lasts haa {max_turns} turns e total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Jaawal foodi jaɓugo nastugo be wala kujeji je larni.",
+    "out_of_range": "Player {player_id}, Aiki baaŋŋe. Column {col} woni out of bounds.",
+    "already_full": "Player {player_id}, Aiki baaŋŋe. Column {col} woni full.",
+    "proposing_with_no_resource": "Jaawal {player_id} footi waɗa jaɓɓol feere bila mo mari kujeji je haani.",
+    "incorrect_offer_format": "Jaawal {player_id} waɗi jaabawol feere ha nder dabare je wala goonga.",
+    "no_new_offer": "Jaawal {player_id} waɗaayi jaabawol kesol."
+  },
+  "offers": {
+    "reject": "Jaawal {player_id} sali jaɓɓol feere.",
+    "accept": "Toɓo {acceptor_id} njaɓi eɗe ndaɗɗo ndaɓɓe toɓo {proposer_id}.",
+    "proposal": "Toɓo {player_id} wadi eɗe ndaɗɗo ndaɓɓe to toɓo {opponent_id}: Koɗe eɗe ndaɗɗo: {offered} -> Koɗe eɗe ndaɓɓe: {requested}"
+  },
+  "outcome": {
+    "win": "Jaawal {winner_id} heɓi ngam heɓugo ɓesdugo nder daraja kujeji.",
+    "draw": "Waylitolji feere ha nder limtol kuje ngam kala moodi fijo."
+  }
+}

@@ -134,7 +134,6 @@ class Board:
 
     def build_settlement(self, cid: CornerID, player: Player):
         corner = self.corners[cid]
-        print(cid, self.corners[cid])
         assert corner.piece is None, "intersection already taken"
         corner.piece  = Piece.SETTLEMENT
         corner.owner  = player.color

@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēletājs {player_id}, kas spēlējat Pig Dice spēli.\n\nNoteikumi:\n- Jūsu gājienā jūs varat izvēlēties '[roll]' vai '[hold]'\n- Metiens no 2 līdz 6: Pievienojiet jūsu gājiena punktu summai\n- Metiens 1: Zaudējiet gājiena punktu summu un beidziet gājienu\n- Turiet: Pievienojiet gājiena punktu summu jūsu punktu skaitam un beidziet gājienu\n- Pirmais, kas sasniedz {winning_score} punktus, uzvar!\n\nKad būs jūsu gājiens, jūs redzēsiet pašreizējos punktus un gājiena punktu summu.\nAtbildēt ar '[roll]', lai mestu dzīvu, vai '[hold]', lai iegūtu punktus."
+  },
+  "invalid_move": {
+    "invalid_action": "Nederīga darbības formāts. Lietojiet '[roll]' vai '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Spēletājs {player_id} zaudēja, zaudējot {turn_total} punktus!",
+    "player_hold": "Spēletājs {player_id} tur un iegūst {turn_total} punktus."
+  },
+  "board": {
+    "player": "Spēletājs 0: '{score_0}'; Spēletājs 1: '{score_1}'",
+    "current_total_scores": "Pašreizējie kopējie punkti: {scores}\nJūsu pašreizējais gājiena punktu summa ir {turn_total}.",
+    "roll_history": "{observation}\nTava kauliņu metēšanas vēsture šajā gājienā: {roll_history}",
+    "first_roll": "{observation} Tys ir pyrmais tovys reiceibys lūks.",
+    "available_actions": "{observation}\nPieejamās darbības: '[roll]' vai '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Spēletājs {winner_id} uzvarēja, jo viņam bija augstāks punktu skaits gājiena limitā ({scores})",
+    "winner_by_score": "Spēletājs {winner_id} uzvarēja, sasniedzot mērķa punktu skaitu {winning_score}!",
+    "draw": "Pīdaruma limitu ir sasnāguši i vysim spēlnīkim ir vīnaids rezultats: {scores}"
+  }
+}

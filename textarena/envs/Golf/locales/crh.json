@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Siz Golf (Kart Oyunu) oynaymadasınız - Oyuncu {player_id}.\nMaqsat: Bu bir raundda eñ az toplam ballı almasıdır. Eğer sütunlar aynı değerini paylaşsalar, olar 0 olaraq hesablanır.\nKart Değerleri: A=1, 2-10=yüz değer, J/Q=10, K=0\n\nHareketler (aynı parantezleri qullanıñız):\n- '[draw]' - Desteden al\n- '[take]' - Atılğan kartlardan al\n- '[swap X Y]' - Çizilgen kartı X (sıra) Y (sutun) pozisyonınen deñiştir\n- '[discard]' - Çizilgen kartı at\n"
+  },
+  "board": {
+    "drew": "Sen çektin: {card}\nŞimdi sen [swap X Y] yada [discard] etmelisin",
+    "took": "Siz: {card} atılğan yığınnı aldıñız. O ile beraber siz de (atıp olamay) [swap X Y] olmalısıñız.",
+    "peeked": "Sen pozitsiya ({row},{col}) da bakdıñ: {card}",
+    "turn_view": "Senin elin:\n{hand}\nAtılğan kartlar yığını: {discard}\n{options}",
+    "none": "Yoq olğan."
+  },
+  "options": {
+    "final_turns": "Sonraqı turlar! Senin seçenekler: [draw], [take], [peek X Y]",
+    "draw": "Senin seçenekler: [draw], [take]",
+    "must_swap": "Siz: [swap X Y] (qartlarnı taşlama yığınından çıqarıp olamaysıñız)",
+    "swap_or_discard": "Sen: [swap X Y] yada [discard] etmelisin"
+  },
+  "hand": {
+    "no_cards": "Kartlar yoq.",
+    "header": "Kol: 1 2 3 (Aqyarnıñ)",
+    "row": "Qat {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Oyuncu {pid} {new} ni {old} ile pozitsiya ({row},{col}) de almashtı",
+    "discarded": "Oyuncu {pid} {card} atdı"
+  },
+  "message": {
+    "deck_empty": "Qapunı boşatıñız! Oyun birden bite.",
+    "knocked": "Oyuncu {pid} qapadı! Başqa oyuncular bir defe daha oynayacaq",
+    "final_round": "Oyuncu {pid} {reason}! Başqa oyuncular bir defe daha oynayacaq"
+  },
+  "reason": {
+    "all_revealed": "episi kartları açılğan"
+  },
+  "invalid": {
+    "wrong_action": "Tek bir köşeli işaretleme qullanıñız: [draw], [take], [swap X Y], [discard], [knock], yada [peek X Y]",
+    "discard_empty": "Atılğanlar yığını boş!",
+    "must_draw_first": "Sen ilk [draw], [take], [knock], yada [peek X Y] etmelisin",
+    "cannot_discard_taken": "Atılğan kartnı atıp olamaysıñız. Onı deñiştirmek kereksiñiz.",
+    "have_drawn_card": "Sen çektin bir kart. Sen [swap X Y] yada [discard] etmelisin",
+    "need_drawn_swap": "Deñişmek içün bir kart kerek.",
+    "need_drawn_discard": "Atmaq içün bir kart kerek.",
+    "out_of_bounds": "Pozitsiya sınırı dışındadır. 1-{max_row} sıra, 1-{max_col} sütun qullanıñız",
+    "knock_with_card": "Qabaqnı çekilgen kartnen qalamaysıñız. İlk evelâ nevbetni tamamlañız.",
+    "already_knocked": "Birisi bu raundnı endi keçirdi.",
+    "already_revealed": "Bu kart endi açılğan!"
+  },
+  "summary": {
+    "full": "Oynı bitti! Oyuncu {winner} {score} bali ile utdı!\n\nSonuçlar:\n{scores}",
+    "line": "Oyuncu {pid}: {score} bali\n"
+  },
+  "board_str": {
+    "title": "=== GOLF oyunı===",
+    "discard": "Atılğan yığın: {card}",
+    "knocked": "Oyuncı {pid} qapını qaqtı!",
+    "player_header": "Oyuncu {pid} (Bali: {score}):"
+  }
+}

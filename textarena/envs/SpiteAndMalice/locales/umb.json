@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ove uwe Muthu {player_id} muthu wabari wa pili wakuvana Spite na Malice. Othikiliro lyove ni kuwa muthu wa kwanza kupungula kupungula kwa payoff pile.\n\n### Kuvana Kwa Muthu:\n- Othikiliro ni kupungula payoff pile kwa kuvana kadi ku kipungelo cha kati.\n- Ove ungavane kadi kwa mitaka mitatu:\n  1. **Moko wove** (ove utangala kila wakati na kadi 5 moko).\n  2. **Kadi ya juu ya payoff pile yove**.\n  3. **Kadi ya juu ya kipungelo chochole cha discard yove**.\n\n### Milingo ya Kuvana:\n- Ove ungavane kadi ku kipungelo cha kati kama **kadi ya juu** ya kipungelo kile (kipungelo cha kati kianza na Ace na kuya kufikia Queen; Kings ni kadi zisizo na mamlaka - zinaweza kuvanwa juu ya kadi chochole lakini hazibadilishi mfuatano wa kadi. Hii inamaanisha kama King inatumiwa baada ya 4, basi King hiyo ina mamlaka ya 5 na kadi inayofuata lazima iwe 6).\n- Kama ove ungaweza kuvana kadi chochole, ove lazima **atunguze kadi** ku kipungelo chochole cha discard yove ili kumaliza wakati wove.\n- Kama kipungelo cha kati kifike Queen, kitatunguzwa kiotomatiki.\n- Mfuatano wa kadi ni: A=1, 2=2, ..., 9=9, J=10, Q=11, K kama kadi isiyobadilika.\n\n### Vitendo:\n1. **Tenga**: Kuanza wakati wove, tenga kadi ili kujaza moko wove hadi kadi 5. Ingiza **[draw]** ili kuanza.\n2. **Vane Kadi**: Ili kuvana kadi, taja kadi na kipungelo cha kati kama hii: **[play A♠ 0]** (ambapo 'A♠' ni kadi na '0' ni kipungelo cha kati).\n3. **Tunguze**: Kama ove ungaweza kuvana kadi chochole, tunguze kadi kutoka moko wove ku kipungelo chochole cha discard yove ili kumaliza wakati wove. Ingiza **[discard A♠ 1]** (ambapo 'A♠' ni kadi na '1' ni kipungelo cha discard).\n\n"
+  },
+  "board": {
+    "current_board": "Omba ya Kuunga:\n\n{board}\nMiketo Iliyopatikana: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Ocimunga Coku Tetulula Ovitangi Vokati Kokayike --- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Muthu {player_id} wa Kuvana ---\n",
+    "payoff": "{observation}Payoff Pile (Kadi ya Juu): {top_card}, Urefu wa Payoff Pile: {payoff_length}\n",
+    "hand": "{observation}Mkono: {hand}\n",
+    "discard": "{observation}Mikaka ya Kutupwa: {discard}\n",
+    "empty": "Ocitumãlo caco ca yelisiwa."
+  },
+  "game_message": {
+    "no_cards_left": "Ku ka kape vali o mapa. Ivaluka okuti, ove o pondola oku kuata olopapelo evi: 1. Opapelo yove yo peka 2. Okapa ya tete yi kasi vocipete cove 3. Oku kapa vokasia yikuavo ku sangiwa pokasapi kovipelekese viove viocina cimue ci koka ohele.**"
+  },
+  "invalid_move": {
+    "wrong_format": "Mfumo wa kuvana si sahihi. Muthu {player_id} hakujibu na mfumo wa kuvana sahihi katika mabano.",
+    "invalid_play": "Kuvana si sahihi. Muthu {player_id} alijaribu kuvana {card} ku kipungelo cha kati {index}.",
+    "discard_from_payoff": "Oku imba ka kua sungulukile. Ukuakuimba o tukuiwa hati {player_id} wa seteka oku imba okadivulu kamue koku eca olombongo viaco.",
+    "discard_not_in_hand": "Oku imba ka kua sungulukile. Ukuakuimba o tukuiwa hati {player_id} wa seteka oku imba opapelo yimue okuti hayoko a kuatele peka.",
+    "wrong_move_type": "Aina ya kuvana si sahihi. Muthu {player_id} hakujibu na aina ya kuvana sahihi."
+  },
+  "game_action": {
+    "you_drew": "Ove wa kala locituwa coku imba ovikanda.",
+    "opponent_drew": "Ocimunga comanu {player_id} ci tambula ovikanda.",
+    "you_played": "Ove wa imba {card} vokati kombunje {index}.",
+    "opponent_played": "Muthu {player_id} alivana {card} ku kipungelo cha kati {index}.",
+    "you_discarded": "Ove uthunguze {card} ku kipungelo cha discard {index}, ambacho pia kunamaanisha ove umemaliza wakati wove. Hakuna vitendo vingine vya wakati huu. Muthu {next_player_id} atakwenda kisha.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Muthu {current_player} amemaliza payoff pile yake! Muthu {current_player} anashinda!",
+    "deadlock_player_0": "Kufikia kwa kusawazisha! Muthu 0 anashinda na {player_0_payoff} kadi zilizobaki dhidi ya {player_1_payoff} kadi za Muthu 1.",
+    "deadlock_player_1": "Kufikia kwa kusawazisha! Muthu 1 anashinda na {player_1_payoff} kadi zilizobaki dhidi ya {player_0_payoff} kadi za Muthu 0.",
+    "deadlock_tie": "Kufikia kwa kusawazisha! Wote muthu wawili wana {player_0_payoff} kadi zilizobaki. Muthu {current_player} anashinda kwa kawaida."
+  }
+}

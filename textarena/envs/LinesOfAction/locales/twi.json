@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Wo ne Player {player_id} wɔ LinesOfAction agorɔ mu.\nWo pieces ne '{side}', ɔpono pieces ne '{other}'.\nNkrɔfoɔ format: `[b1b3]` (firi-coord kɔ-coord). Nkrɔfoɔ a ɛfata ɛkɔ ho kɔ ho, akyirikyiri, anaa ɔkɔtɔ kɔkɔmɛ ɛsɛ ɛyɛ squares dodoɔ a ɛyɛ pieces dodoɔ (kɔla biara) wɔ saa line no mu. Wo betumi akɔtɔ wo pieces ankasa, nanso ɔpono pieces nni; ɛba wo ɔpono so a, wo kyere no.  Wo di nkunim wɔ bere a wo pieces nyinaa ɛne wo pieces foforɔ bɛn wɔ 8-neighbour connected."
+  },
+  "board": {
+    "current_board": "Boayikuw: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ɛsɛ sɛ ne mfoni no yɛ e2e4 (fi,kɔ coordinates).",
+    "no_piece": "{side} no piece on {coord}.",
+    "identical": "Baabi a efi ne baabi a ɛkɔ yɛ pɛ.",
+    "not_straight_or_diagonal": "Ɛsɛ sɛ ɛyɛ tee anaa ɛkwan a wɔfa so.",
+    "wrong_distance": "Ɛsɛ sɛ wɔtwe wɔn ho kɔ akyiri te sɛ nea wɔde akosi ɔfã biara so pɛpɛɛpɛ.",
+    "enemy_blocks": "Ɔtamfo bi a ɔwɔ kwan no mu.",
+    "destination_own": "Baabi a wɔrekɔ no, wɔn ankasa de wɔn nsa ka."
+  },
+  "game_action": {
+    "moved": "Ɔdan {player_id} tu kɔ {from} -> {to}",
+    "captured_suffix": "Ɔdan {player_id} tu kɔ {from} -> {to} de kɔto nneɛma a ɛyɛ dɔm."
+  },
+  "outcome": {
+    "win": "Nneɛma no nyinaa hyia.",
+    "draw_no_capture": "Wɔatu mmirika 60 a wɔannya hwee.",
+    "draw_repetition": "Wɔsan yɛɛ no mprɛnsa."
+  }
+}

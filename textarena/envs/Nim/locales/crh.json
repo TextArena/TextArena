@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Nim'de Oyuncu {player_id}'sınız.\nSon kalan nesneyi almak sizin hedefiniz.\nHer turda, tam olarak bir yığın seçin ve ondan bir veya daha fazla nesne çıkarın.\n'[pile quantity]' formatını kullanın, burada yığın, yığın indeksi ve miktar, kaldırılacak nesne sayısını gösterir.\nÖrneğin, '[0 3]', 0 numaralı yığından 3 nesne kaldırır."
+  },
+  "state": {
+    "current_pile": "Şimdiki Yığın:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Deñiştirüv formatı tapılmadı. '[pile quantity]' qullanıñız.",
+    "correct_format_wrong_fields": "{player_id} oyuncusı, Geçersiz areket. {col} sütunı çarçuvadan taşa.",
+    "out_of_range": "Qolumdaki {pile_index} indeks aralıqtan tışta.",
+    "non_positive": "Eñ az 1 obyektni çıqarmaq kerek.",
+    "exceeds_pile": "{pile_index} qurucıqdan {quantity} obyekt çıqarıp taşlamaq mümkün degil (faqat {pile_count} qaldı)."
+  },
+  "observation": {
+    "removed_from_piles": "{player_id} oyuncusı [{pile_index} {quantity}] oynadı, {quantity} obyekt(ler)ni {pile_index} qurucıqdan çıqarıp taşladı."
+  },
+  "outcome": {
+    "win": "{player_id} oyuncusı soñki obyekt(ler)ni aldı!"
+  }
+}

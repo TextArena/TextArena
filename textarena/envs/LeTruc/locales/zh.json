@@ -1,0 +1,42 @@
+{
+  "_comment": "Le Truc 语言文件。请勿翻译键名（左侧）。仅翻译值（右侧）。保持每个 {placeholder} 完全不变。切勿翻译动作标记（'[play]'、'[raise]'、'[accept]'、'[fold]'）、牌面标签/花色（如 3♠、A♥、K♦）、玩家标签（P0、P1）或数字点数。",
+  "_slots": {
+    "{pid}": "A player number, 0 or 1",
+    "{winner}": "The player number who won the trick or hand",
+    "{points}": "A hand point value, e.g. 1, 2 or 4",
+    "{p0}": "Player 0's running match score",
+    "{p1}": "Player 1's running match score",
+    "{cards}": "A space-separated list of the player's card labels, e.g. 'A♦ 3♠ A♥'",
+    "{card}": "A single card label, e.g. '3♠'",
+    "{legal}": "A comma-separated list of the currently legal action tokens"
+  },
+  "player_prompt": {
+    "intro": "你正在玩 Le Truc，一款双人吃墩游戏，使用 40 张牌（点数从大到小：3 2 A K Q J 7 6 5 4）。\n每一局你获得 3 张牌，最多打三墩、每墩一张牌。点数较高者赢得该墩，与花色无关；点数相同则打平（'作废'）。赢下两墩即可赢得该局，或在另一墩打平时赢得第一墩；作废的一墩归赢得第一墩的一方，若三墩全部打平则无人得分。\n一局价值 1 点。轮到你时，你可以 '[raise]'（truc）来提高赌注：1->2，此后每次再加为 +2，最高至 12。你的对手必须 '[accept]'、'[fold]' 或再次 '[raise]'。弃牌的一方让出该局，加注方得到该次加注之前的赌注。\n动作：'[play <rank>]'（如 '[play 3]'）、'[raise]'、'[accept]'、'[fold]'。率先达到 12 点者赢得整场比赛。"
+  },
+  "board": {
+    "new_hand": "### 新一局价值 {points} 点\n你的牌：{cards}",
+    "valid_actions": "当前可用：{legal}。"
+  },
+  "invalid_move": {
+    "unrecognised": "无法识别的动作。",
+    "already_raised": "已经加注。",
+    "no_raise_to_accept": "没有可接受的加注。",
+    "cannot_fold": "现在无法弃牌。",
+    "wrong_rank": "你没有该点数的牌（输入时忽略花色）。",
+    "must_respond": "有一个加注待回应 - 在出牌前请用 '[accept]'、'[fold]' 或再次 '[raise]' 回应。",
+    "max_stake": "本局已达最高价值（12）；你无法再加注。"
+  },
+  "action": {
+    "raise": "P{pid} 叫 truc - 本局现在价值 {points} 点。对手必须 '[accept]'、'[fold]' 或再次 '[raise]'。",
+    "accept": "P{pid} 接受 - 本局价值 {points} 点。",
+    "lead": "P{pid} 首出 {card}。",
+    "play": "P{pid} 打出 {card}。该墩归 P{winner}。",
+    "spoilt": "P{pid} 打出 {card}。点数相同 - 该墩作废。"
+  },
+  "outcome": {
+    "folded": "对手弃牌。",
+    "hand_won": "本局由 P{winner} 赢得（+{points} 点）。比分 - P0：{p0}，P1：{p1}。",
+    "void": "三墩全部作废 - 本局无得分。比分 - P0：{p0}，P1：{p1}。",
+    "reached_twelve": "达到 12 点。"
+  }
+}

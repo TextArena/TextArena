@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "खिलाड़ी हर आवश्यक संसाधनमन के बिना व्यापार ल स्वीकार करे के कोशिश करीस ।",
+    "out_of_range": "खिलाड़ी {player_id}, अमान्य क्रिया। कॉलम {col} सीमा से बाहर है।",
+    "already_full": "खिलाड़ी {player_id}, अमान्य क्रिया। कॉलम {col} भरा हुआ है।",
+    "proposing_with_no_resource": "खिलाड़ी {player_id} आवश्यक संसाधनमन के बिना व्यापार प्रस्ताव करे के कोशिश करिस।",
+    "incorrect_offer_format": "{player_id} खिलाड़ीने एक गलत फॉर्मेट में व्यापार का प्रस्ताव दिया हे.",
+    "no_new_offer": "{player_id} खिलाड़ीने कोनो नया व्यापार का प्रस्ताव नहीं दिया हे."
+  },
+  "offers": {
+    "reject": "खिलाड़ी {player_id} हर व्यापार प्रस्ताव ल अस्वीकार कर दिस।",
+    "accept": "खिलाड़ी {acceptor_id} ने खिलाड़ी {proposer_id} से व्यापार प्रस्ताव स्वीकार किया।",
+    "proposal": "खिलाड़ी {player_id} ने खिलाड़ी {opponent_id} को निम्नलिखित प्रस्ताव दिया: प्रस्तावित वस्तुएं: {offered} -> अनुरोधित वस्तुएं: {requested}"
+  },
+  "outcome": {
+    "win": "खिलाड़ी {winner_id} स्टॉक मूल्य म एकठन बडखा लाभ के साथ जीते।",
+    "draw": "जम्मो खिलाड़ियों बर इन्वेंट्री मूल्य म समान परिवर्तन। ड्रॉ."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Ikaw si Player {player_id} sa dula sa LinesOfAction.\nAng mga piraso nimo mao ang '{side}', ang mga piraso sa kaaway mao ang '{other}'.\nFormat sa paglihok: `[b1b3]` (gikan sa koordinado ngadto sa koordinado). Ang usa ka legal nga paglihok nagbiyahe sa pahalang, patindog, o diagonally sa usa ka numero sa mga kwadrado nga sama sa total nga mga piraso (bisag unsa nga kolor) sa linya. Pwede kang lumukso sa ibabaw sa imong mga piraso, apan dili sa mga piraso sa kaaway; ang pag-landing sa ibabaw sa kaaway nagdakop niini.  Daog kung ang tanan nimo mga piraso konektado sa 8-ka-siliran."
+  },
+  "board": {
+    "current_board": "Board: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ang format kinahanglan nga e2e4 (gikan,hangtod coordinates).",
+    "no_piece": "Walay {side} nga piraso sa {coord}.",
+    "identical": "Ang gigikanan ug destinasyon managsama.",
+    "not_straight_or_diagonal": "Ang paglihok kinahanglang tul-id o diagonal.",
+    "wrong_distance": "Kinahanglang molihok ang gilay-on nga katumbas sa mga piraso diha sa linya.",
+    "enemy_blocks": "Ang kaaway nga piraso nag-block sa dalan.",
+    "destination_own": "Destinasyon nga giokupar sa kaugalingong piraso."
+  },
+  "game_action": {
+    "moved": "Ang Player {player_id} naglihok {from} -> {to}",
+    "captured_suffix": "Ang Player {player_id} naglihok {from} -> {to} nga nakakuha og kaaway."
+  },
+  "outcome": {
+    "win": "Ang tanang piraso konektado.",
+    "draw_no_capture": "60 ka lihok nga walay nakuha.",
+    "draw_repetition": "Ang posisyon gibalik-balik sa tulo ka beses."
+  }
+}

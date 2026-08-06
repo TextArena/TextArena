@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "توسِ کھلاڑی {player_id} LinesOfAction گیمس مَنز۔\nتوہندے ٹکڑے '{side}' نیں، مخالف کھلاڑی ٹکڑے '{other}' نیں۔\nموو فارمیٹ: `[b1b3]` (ماخذ-کوآرڈینیٹ توں منزل-کوآرڈینیٹ)۔ ایک قانونی موو اُفق، عمودی، یا ترچھے طور پر اس لائن وچ ٹکڑوں (کسی بھی رنگ) دے برابر مربعوں دا سفر کرتا ہے۔ تسی اپنے ٹکڑوں اُتے چھلانگ لاگتے ہو، لیکن مخالف ٹکڑوں اُتے نہیں؛ مخالف ٹکڑے اُتے اُترنا اسنوں قبضہ کرلیتا ہے۔ جتھے توہندے سارے ٹکڑے 8-پڑوسی کنیکٹ ہوجان۔"
+  },
+  "board": {
+    "current_board": "बोर्डः {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "فارمیٹ e2e4 (ماخذ، منزل کوآرڈینیٹ) ہونا چاہئے۔",
+    "no_piece": "{side} पिक्चर नो ऑन {coord}.",
+    "identical": "ماخذ تے منزل ایک ہی ہیں۔",
+    "not_straight_or_diagonal": "موو سدھا یا ترچھا ہونا چاہئے۔",
+    "wrong_distance": "لائن وچ ٹکڑوں دے برابر فاصلے اُتے حرکت کرنا چاہئے۔",
+    "enemy_blocks": "مخالف ٹکڑا راہ روک رہا ہے۔",
+    "destination_own": "منزل اپنے ٹکڑے نال مقبوضہ ہے۔"
+  },
+  "game_action": {
+    "moved": "کھلاڑی {player_id} نے {from} -> {to} موو کیتا",
+    "captured_suffix": "کھلاڑی {player_id} نے {from} -> {to} موو کیتا تے ایک مخالف ٹکڑا قبضہ کیتا۔"
+  },
+  "outcome": {
+    "win": "سارے ٹکے جوڑے ہوئے ہن۔",
+    "draw_no_capture": "60 چالاں بنا کسے قبضے دے۔",
+    "draw_repetition": "پزیشن تن واری دوہرائی گئی ہے۔"
+  }
+}

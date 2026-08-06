@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Vi estas Ludanto {player_id} en Iteracia Dilemo de la Kaptitoj dum {num_rounds} raŭndoj.\n\nLuda Strukturo:\n- Antaŭ ĉiu decido vi havas {total_conversation_rounds} vicojn por libere komuniki.\n- Post tio, ambaŭ ludantoj samtempe elektas kooperacii aŭ defekti.\n\nRezult-Matrico (fiksa ĉiu raŭndo):\n- Ambaŭ Kooperacias ➜ ĉiu {cooperate_reward}\n- Ambaŭ Defektas ➜ ĉiu {mutual_defect_reward}\n- Unu Defektas, unu Kooperacias ➜ Defektanto {defect_reward}, Kooperacianto {sucker_reward}\n\nKiel Ludi:\n- Dum konversacio: tajpu iun ajn tekston, kiun vi deziras.\n- Dum decida fazo: inkludu '[Cooperate]' aŭ '[Defect]' (sen konsidero al uskleco). Vi povas aldoni ekstran tekston antaŭ/ post la simbolo."
+  },
+  "phases": {
+    "conversation_finished": "Konversacio finiĝis por raŭndo {round}. Bonvole respondu per '[Cooperate]' aŭ '[Defect]' ene de \\boxed{{}}.",
+    "starting_round": "--- Komenca Rondo {round} ---",
+    "round_summary": "Rezultoj de raŭndo {round}:\n{outcome}\nLudanto 0 gajnis {r0} (suma {score_0}), Ludanto 1 gajnis {r1} (suma {score_1})."
+  },
+  "outcome": {
+    "winner": "Ludanto {winner} gajnas {win_score} - {lose_score}.",
+    "draw": "Ambaŭ ludantoj gajnis {s0}.",
+    "round_both_cooperate": "Ambaŭ ludantoj kunlaboris.",
+    "round_both_defect": "Ambaŭ ludantoj perfidis.",
+    "round_p0_cooperates_p1_defects": "Ludanto 0 kunlaboris, Ludanto 1 perfidis.",
+    "round_p0_defects_p1_cooperates": "Ludanto 0 transfuĝis, ludanto 1 kunlaboris."
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Ti ê giôcatô {player_id} into Trì-Giôcatô Tic Tac Toe.\nO tò sìmbolo o l'é '{symbol}'.\nTi fæ ti vòlte a mette o tò sìmbolo into 'na tavoliêre 5x5 pe fòrma 'na riga de quàttro.\nE rîghe pònnan êse orizontâli, verticâli, ò diagonâli.\nInvia o tò môvo dòppo o fòrmato '[4]' pe segnâ a célula 4."
+  },
+  "board": {
+    "current_board": "Tavoliêre atoâle:\n\n{board}\n\nMôvi disponìbili: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de spostamento invalido. Deuvia \"[cell]\" donde a çellola l'é 0-{max_cell}.",
+    "out_of_range": "Nùmero de célula no vâlido: {cell}. O déve êse tra 0 e {max_cell}.",
+    "already_occupied": "A çellola {cell} a l'é za occupâ.",
+    "made_invalid": "Giôcatô {player_id} o l'à fæto 'n môvo no vâlido"
+  },
+  "game_action": {
+    "placed": "Giôcatô {player_id} mette o sò sìmbolo ({symbol}) into o càmpo ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Giôcatô {player_id} ({symbol}) o vinse!",
+    "draw": "A partïa a l'é un pareggio!"
+  }
+}

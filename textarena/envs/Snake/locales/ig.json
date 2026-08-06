@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Onye na-egwu egwu agwọ na {width}×{height} grid. Ị na-achịkwa agwọ {player_id}. Mgbanwe ndị dị irè: '[up]'/'[down]'/'[left]'/'[right]' (ma ọ bụ w / s / a / d). Ebumnuche: lanarị ogologo oge ma ọ bụ bụrụ onye kachasị ogologo ma nweta akara kachasị elu (ntụgharị ntụgharị {max_turns})."
+  },
+  "board": {
+    "current": "Oche Ugbu a:\n{board}",
+    "after_moves": "Steeti Board ugbu a: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Agwọ {player_id} nwụrụ n'ihi ngagharị na-abaghị uru."
+  },
+  "outcome": {
+    "survived_win": "Onye na-egwu egwu {player_id} lanarịrị; ndị ọzọ niile nwụrụ.",
+    "all_dead_simul": "Agwọ niile nwụrụ n'otu oge.",
+    "outlived": "Onye na-egwu egwu dị ndụ karịa ndị ọzọ niile.",
+    "all_dead": "Agwọ niile nwụrụ.",
+    "turn_limit": "E ruola oke ntụgharị - onye kacha nwee akara ga-emeri tie-break.",
+    "ranking": "{reason} Ndị otu ikpeazụ (ka njọ→ka mma): {groups}"
+  }
+}

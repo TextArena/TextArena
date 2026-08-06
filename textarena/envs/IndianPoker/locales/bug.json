@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Sida Player {player_id} ri olahraga Indian Poker.\n- Dek 52 kartu; nuwia kartu lawanmu.\n- Ante {ante} chip(s) sati ronde, {max_rounds} ronde(s) total.\n- Gawe riil: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X iya positif integer <= jumla chipmu.)\n- Kartu tersembunyi paling tinggi menang pot ri showdown.\n"
+  },
+  "round": {
+    "announce": "### Ronde {current_round}/{max_rounds}\nKartu lawanmu iya: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Pasra' satu aksi ri bracket, conto '[check]', '[bet 2]', '[call]', '[raise 3]', atawa '[fold]'.",
+    "cannot_check": "De'na wedding [check] - muoloiwi taruhan.",
+    "amount_min": "Bet / Raise jumlahna waji' mancaji ≥ 1.",
+    "cannot_bet": "Tidak bisa [bet] - harus [call] / [raise] / [fold].",
+    "nothing_to_call": "Degaga aga-aga untu' riobbi; wedding mu [check] naiyya.",
+    "no_bet_to_raise": "Pakkegunai [bet X] untu' mabbukka; degaga taruhan ri pattamba.",
+    "insufficient": "De'na genne chips untu' akkegunanna."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (biaya {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Aksi riil nuwia: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Player {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Player {player_id} mundur.",
+    "showdown_win": "Showdown: {card_win} mengalahkan {card_lose}.",
+    "showdown_tie": "Showdown seri: keduanya {card}. Pot dibagi – keduanya terima {split}."
+  },
+  "outcome": {
+    "p0_wins": "Player 0 menang ({bank0} > {bank1})",
+    "p1_wins": "Player 1 menang ({bank1} > {bank0})",
+    "draw": "Pada-padanna keripik purana sininna ronde'e."
+  }
+}

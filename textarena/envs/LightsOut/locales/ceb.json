@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Malipayong pag-abot sa Lights Out! Aduna kay {size}x{size} grid sa mga suga.\nAng imong tuyo mao ang pagpatay sa TANANG mga suga (girepresentahan sa '.').\nInig pindot nimo sa usa ka suga, kini mabalhin ug iyang mga silingan (ibabaw/paubos/wala/tuo).\nI-type ang [row col] aron pindoton ang usa ka suga (0-indexed, busa ang balido nga sakop mao ang 0-{max_index}).\nAduna kay hangtud {max_turns} mga lihok aron sulbadon ang puzzle.\nLeyenda: 'O' = suga ON, '.' = suga OFF"
+  },
+  "board": {
+    "current_state": "Kasamtangang kahimtang sa grid (Lihok {moves_made}, {moves_left} mga lihok nga natapos, {completion}% kompletado):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action kinahanglan nga sa format [row col] diin linya ug col mao ang integers gikan 0 ngadto sa {max_index}.",
+    "out_of_range": "Ang mga koordinado kinahanglan nga anaa sa taliwala sa 0 ug {max_index}. Imong gisulod ang [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Congratulations! Nakahimo ka sa pag-solve og puzzle nga {moves_used} ang mga lakang niini.",
+    "loss": "Katapusan sa larong! Gigamit mo ang tanan {max_turns} mga lihok nga wala masulbad ang puzzle. Katapusan nga kompletado: {completion}%\nKatapusan nga kahimtang:\n{grid}"
+  }
+}

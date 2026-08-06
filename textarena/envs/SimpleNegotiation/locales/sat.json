@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Aam tima Player {player_id} Negotiation Game-re.\nAam tima khan baha resources aakar, aam tima kaam aakar resources-ar total value badhaota.\nAam tima resources aakar associated values ji aaj-o aakar:\n\t+ {resource_value_list}\nPratyek turn-re, aam tima aam tima opponent-re katha kora aakar trade offer kora.\nNiche special tokens-ko actions-re use kora:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': Incoming offer accept kora.\n  - '[Deny]': Incoming offer deny kora (default).\nGame {max_turns} turn-re aakar total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "ᱞᱟᱹᱠᱛᱤᱭᱟᱱ ᱟᱹᱢᱤᱞ ᱵᱟᱝ ᱛᱟᱦᱮᱸ ᱠᱟᱛᱮ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ ᱢᱤᱫ ᱵᱮᱯᱟᱨ ᱮ ᱯᱩᱨᱟᱣ ᱠᱮᱫᱼᱟ ᱾",
+    "out_of_range": "ᱦᱚᱲ {player_id}, ᱵᱟ.ᱲᱤᱡ ᱠᱟᱹᱢᱤ᱾ ᱞᱟᱭᱤᱱ {col} ᱥᱤᱢᱟᱹ ᱵᱟᱦᱮᱨᱮ ᱢᱮᱱᱟᱜ-ᱟ᱾",
+    "already_full": "ᱦᱚᱲ {player_id}, ᱵᱟ.ᱲᱤᱡ ᱠᱟᱹᱢᱤ᱾ ᱞᱟᱭᱤᱱ {col} ᱯᱮᱨᱮᱡ ᱟᱠᱟᱱᱟ᱾",
+    "proposing_with_no_resource": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱞᱟᱹᱠᱛᱤᱭᱟᱱ ᱟᱹᱢᱤᱞ ᱵᱟᱝ ᱛᱟᱦᱮᱸ ᱠᱟᱛᱮ ᱵᱮᱯᱟᱨ ᱨᱮᱱᱟᱜ ᱟᱵᱷᱚᱨ ᱮᱢᱟᱫᱮᱭᱟ ᱾",
+    "incorrect_offer_format": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱢᱤᱫ ᱵᱷᱮᱜᱟᱨ ᱯᱷᱚᱨᱢᱚᱴ ᱨᱮ ᱴᱨᱮᱠᱥ ᱚᱯᱨᱮᱥ ᱮ ᱵᱮᱱᱟᱣ ᱞᱮᱫᱼᱟ ᱾",
+    "no_new_offer": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱱᱟᱣᱟ ᱵᱮᱯᱟᱨᱮᱭᱟᱜ ᱟᱵᱮᱫᱚᱱ ᱵᱟᱭ ᱞᱟᱹᱭᱟᱠᱟᱫᱟ᱾"
+  },
+  "offers": {
+    "reject": "ᱠᱷᱮᱞᱚᱸᱰᱤ {player_id} ᱫᱚ ᱵᱮᱯᱟᱨ ᱨᱮᱭᱟᱜ ᱯᱨᱚᱥᱛᱟᱵ ᱠᱚ ᱢᱟᱱᱟ ᱵᱟᱠᱚ ᱠᱟᱱᱟ᱾",
+    "accept": "ᱦᱚᱲ {acceptor_id} ᱦᱚᱲ {proposer_id} ᱠᱷᱚᱱ ᱵᱮᱯᱟᱨ ᱠᱟᱹᱢᱤ ᱜᱚᱲᱚᱠ ᱠᱮᱫᱟ᱾",
+    "proposal": "ᱯᱞᱮᱭᱟᱨ {player_id} ᱯᱞᱮᱭᱟᱨ {opponent_id} ᱴᱷᱮᱱ ᱞᱟᱛᱟᱨ ᱨᱮᱭᱟᱜ ᱟᱯᱷᱚᱨ ᱮ ᱪᱟᱞ ᱟᱫᱮᱭᱟ: ᱟᱯᱷᱚᱨ ᱟᱠᱟᱱ ᱥᱟᱢᱟᱱ: {offered} -> ᱠᱚᱭᱟᱜ ᱥᱟᱢᱟᱱ: {requested}"
+  },
+  "outcome": {
+    "win": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {winner_id} ᱫᱚ ᱥᱚᱛ-ᱵᱟᱫᱽ ᱨᱮ ᱢᱟᱨᱟᱝ ᱜᱚᱲᱦᱚᱱ ᱠᱟᱛᱮᱭ ᱡᱤᱛᱠᱟᱹᱨ ᱞᱮᱱᱟ ᱾",
+    "draw": "ᱡᱚᱛᱚ ᱠᱷᱮᱞᱚᱱᱰᱤᱭᱟᱹ ᱠᱚ ᱞᱟᱹᱜᱤᱫ ᱥᱩᱪᱤ ᱨᱮᱱᱟᱜ ᱮᱠᱞᱟ ᱵᱟᱨᱟᱵᱟᱹᱨᱤᱭᱟᱜ ᱠᱟᱱᱟ ᱾ ᱰᱨᱟᱭ ᱢᱮ."
+  }
+}

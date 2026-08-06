@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "איר זענט שפּילער {player_id} אין אַ 3-שפּילער איטערירט פּריזנער'ס דילעמאַ. די מאַטש דויערט {num_rounds} רונדן.\nרונד סטרוקטור:\n• {conv_rounds} פֿרי־טשאַט טורנס\n• 1 באַשלוס טורן - שיקן אַיין טאָקען פֿער אָפּאָנענט: '[<opp-id> cooperate]' אָדער '[<opp-id> defect]' (ד.ה. '[1 defect] [2 cooperate]'; די דעפֿאָלט איז 'קאָאָפּעראַט'). \nפּעאַר-ווייז פּאַי־אָף מאַטריץ (אַנגעוואַנדן צו יעדער אומגעאָרדנטער פּעאַר):\n  - ביידע קאָאָפּעראַט  ->  {reward}\n  - ביידע דעפֿעקט     ->  {punishment}\n  - איר דעפֿעקט, זיי קאָאָפּעראַט ->  {temptation}\n  - איר קאָאָפּעראַט, זיי דעפֿעקט ->  {sucker}\nדי שפּילער(ס) מיט די העכסטע סקאָר אין די ענדע פֿון אַלע רונדן געווינט."
+  },
+  "round": {
+    "start": "─── אָנהייבנדיק רונד {round} ───\tאיר קענט קאָנווערסירן פֿרי־ליך פֿאַר די נעקסטע {conv_rounds} רונדן.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### קייַלעכיק {round} - רעזולטאַטן:",
+    "pair_line": "{observation}\n\t שפּילער {i} קעגן שפּילער {j} האָט באַשלאָסן צו {choice_i} און {choice_j} רעספּעקטיוולי (שפּילער {i} האָט געוואונען {gain_i}, שפּילער {j} האָט געוואונען {gain_j})",
+    "scores_open": "{observation} -> קראַנט סקאָרז: ",
+    "score_first": "{observation}שפּילער {player_id} ({score})",
+    "score_next": "{observation}; שפּילער {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "פֿינאַלע סקאָרס: {scores}.  ראַנקינג גרופּעס (ווערסט→בעסט): {groups}"
+  }
+}

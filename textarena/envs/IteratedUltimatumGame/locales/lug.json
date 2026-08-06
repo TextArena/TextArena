@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Oli Mujjawulo {player_id}, olukola {num_rounds} mizungo ya Iterated Ultimatum Game.\nOliina ${pool} kusambaza mzungu uno kati yowe na Mujjawulo {other_id}.\n\nMujjawulo wa ofa:\n  - Fanya ofa: [Offer: $X] (0 <= X <= pool)\n  - Ikiwa ikikubaliwa → Oli mpaka $(pool - X), omulala apata $X\n  - Ikiwa ikikanwa → Abantu bonna babate $0\n  - Kifaano: [Offer: $3]  oba  'Nakiri ku munafair. [Offer: $5]'\n\nMujjawulo wa kukubali:\n  - Leta uamuzi kwenye ofa na [Accept] oba [Reject]\n  - Kifaano: 'Inaonekana kuwa na busu. [Accept]'\n            'Ni isiyofaa sana. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Mzunguko {round_number} unaanza! ---\nMchezaji {proposer_id} ndiye anayetoa pendekezo, Mchezaji {responder_id} ndiye anayejibu.",
+    "offer": "Mzunguko {round_number}: Mchezaji {proposer_id} anatoa pendekezo la ${offer} kwa Mchezaji {responder_id} (akihifadhi ${keep}).",
+    "accepted": "Mchezaji {responder_id} alikubali! Mzunguko {round_number} faida: Mchezaji {proposer_id} +${proposer_gain}, Mchezaji {responder_id} +${responder_gain}. Jumla mpya: Mchezaji 0: ${total_0}, Mchezaji 1: ${total_1}.",
+    "rejected": "Mujjawulo {responder_id} yakakanwa ofa! Mzungu {round_number} unapata: Abantu bonna +$0. Jumla huwa: Mujjawulo 0: ${total_0}, Mujjawulo 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Oyo awaayo ekiteeso alina okuwaayo nga akozesa ekiwandiiko [Offer: $X].",
+    "bad_integer": "Ssente eziri mu kivuganyo zirina okuba ennamba entuufu.",
+    "out_of_range": "Okuwaayo kulina okubeera wakati wa $0 ne ${pool}.",
+    "no_current_offer": "Tewali kyewaggula ky'oyinza kuddamu.",
+    "accept_or_reject": "Mujjawulo lazima akebe [Accept] oba [Reject] ofa."
+  },
+  "outcome": {
+    "win": "Mujjawulo {winner} yassa na ${winner_total} zote kubandingana na Mujjawulo {loser}'s ${loser_total}.",
+    "draw": "Abazannyi bombi baamaliriza n'ebitundu ${total}."
+  }
+}

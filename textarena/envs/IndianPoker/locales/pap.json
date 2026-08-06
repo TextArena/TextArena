@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Bo ta Hungador {player_id} den un wega di Poker Indian.\n- 52 karton; bo solo mira e karton di oponente.\n- Ante {ante} ficha(ki) cada rondo, {max_rounds} rondo(s) total.\n- Moveshon valido: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ta un numero positivo <= bo konta di ficha.)\n- E karton mas haltu gana e pot na e showdown.\n"
+  },
+  "round": {
+    "announce": "### Rondo {current_round}/{max_rounds}\nE karton di bo oponente ta: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Supli eksaktamente UN akshon entre parentesis, p.e. '[check]', '[bet 2]', '[call]', '[raise 3]', o '[fold]'.",
+    "cannot_check": "No por [check] - bo ta enfrentando un apòstel.",
+    "amount_min": "E kantidat di e aposta/raise mester ta ≥ 1.",
+    "cannot_bet": "No por [bet] - mester [call] / [raise] / [fold].",
+    "nothing_to_call": "No tin nada pa yama; bo por [check] na su lugá.",
+    "no_bet_to_raise": "Usa [bet X] pa habri; no tin un aposta di lanta.",
+    "insufficient": "No tin sufisiente chip pa e akshon ei."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kosto {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Bo akshonnan posibel: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Hungador {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "E hungadó {player_id} a foldá.",
+    "showdown_win": "Showdown: {card_win} ta bati {card_lose}.",
+    "showdown_tie": "Showdown tie: ambos {card}. Pot split  kada un ta risibí {split}."
+  },
+  "outcome": {
+    "p0_wins": "Hungador 0 gana ({bank0} > {bank1})",
+    "p1_wins": "Hungador 1 gana ({bank1} > {bank0})",
+    "draw": "Chip igual despues di tur ronde."
+  }
+}

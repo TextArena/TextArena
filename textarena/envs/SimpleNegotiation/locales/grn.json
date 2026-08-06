@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Usted es el Player {player_id} en el Juego de Negociación.\nUsted tiene algunos recursos, y su tarea es comerciar de tal manera que el valor total de sus recursos aumente.\nLos recursos y los valores asociados que actualmente tiene son:\n\t+ {resource_value_list}\nEn cada turno, puede hablar con su oponente y hacer una oferta de intercambio.\nUtilice los siguientes tokens especiales para acciones:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': Para aceptar una oferta entrante.\n  - '[Deny]': Para rechazar una oferta entrante (predeterminado).\nEl juego dura {max_turns} turnos en total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Jokuaihára oñeha'ã omoneĩ peteĩ ñemyengovia ndorekóiva recurso oikotevẽtava.",
+    "out_of_range": "Jugador {player_id}, Acción inválida. Columna {col} oĩ ñembyaípe.",
+    "already_full": "Jugador {player_id}, Acción inválida. Columna {col} oĩ mbegue.",
+    "proposing_with_no_resource": "Jugador {player_id} ojapo'ỹ peteĩ propuesta recursos iñambue'ỹre.",
+    "incorrect_offer_format": "Jugador {player_id} ojapo peteĩ propuesta formato he'ỹ.",
+    "no_new_offer": "Jugador {player_id} ndojapo propuesta pyahu."
+  },
+  "offers": {
+    "reject": "Jugador {player_id} oñemoneĩ'ỹ peteĩ propuesta.",
+    "accept": "Jugador {acceptor_id} ooneĩ peteĩ propuesta Jugador {proposer_id} pegua.",
+    "proposal": "Jugador {player_id} ojapo ko'ã propuesta Jugador {opponent_id} pe: Mba'e ome'ẽva: {offered} -> Mba'e ojerureva: {requested}"
+  },
+  "outcome": {
+    "win": "Jokuaihára {winner_id} ogana oguerekógui hetave mba'e ojehupytýva.",
+    "draw": "Oikoháicha avei valor inventario-pe opavave jugador rehe."
+  }
+}

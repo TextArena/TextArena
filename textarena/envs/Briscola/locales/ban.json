@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Pertandingan Briscola sampun kawitin! Gambar pamungkah: {trump_suit} (Kertu pamungkah: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Cai ngmain Briscola - Pemain {player_id}.\nTetujon: Menang trik miwah ngumpulang poin paling akeh (120 poin total ring deck).\nPoin Kartu: A=11, 3=10, K=4, Q=3, J=2, liyanan=0\nKakuatan Kartu: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKartu Trump ngalahin kartu non-trump tiosan saking kakuatan.\n\nTindakan: '[play X]' di mana X inggih punika genah (1-{max_pos}) kartu ring tangan cainé\n"
+  },
+  "hand": {
+    "none": "Nénten wénten kartu.",
+    "empty": "Nenten wenten kartu ring tangan.",
+    "header": "Tangan ragane:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP) Ring sajeroning basa Inggris."
+  },
+  "trick": {
+    "empty": "Nénten wénten kartu sané maputer.",
+    "header": "Trik sané mangkin:",
+    "line": "  Pemain {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Pemain {player_id}: {points} poin",
+    "trump_info": "Gambar pamungkah: {trump_suit}",
+    "trump_info_deck": "Kartu pilih: {trump_suit} | Kartu sané kantun ring dek: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nSkor: {scores}\n{trump_info}\n\nMainang kartu nganggén [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Anggén [play X] ring dija X inggih punika genah kartu (1, 2, 3, miwah sané lianan)",
+    "out_of_range": "Posisi kartu sané nénten sah. Iraga madué {count} kartu (1-{count})"
+  },
+  "action": {
+    "played": "Pemain {player_id} main {card}",
+    "trick_win": "Pemain {winner} menang trik antuk {card} tur ngmolihang {points} poin!"
+  },
+  "outcome": {
+    "head": "Pertandingan Sampun! Pemain {winner} menang antuk {points} poin!\n\nPoin Pungkasan:\n{scores}",
+    "player_line": "Pemain {player_id}: {points} poin ({tricks} trik)\n"
+  }
+}

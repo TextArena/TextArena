@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Sètz lo Jogaire {player_id} dins Three-Player GOPS.\n- Tenètz las 13 cartas A-K (cada una exactament un còp).\n- Cada torn, un prèmi es revelat. Sometatz UNA carta coma `[Q]`, `[10]`, `[2]` …\n- La carta mai nauta ganha lo prèmi (+ lo pot reportat). Los ligams fan rotlar lo prèmi dins lo torn seguent.\n- Après 13 torns, la puntuacion totala mai nauta ganha. Los movements invalids = eliminacion."
+  },
+  "round": {
+    "header": "### Torn {round}/13 - Prèmi : {prize} (valor {worth})",
+    "hand": "Ta man demorant: {hand}"
+  },
+  "reveal": {
+    "win": "Ofèrtas » {bids} - Jòcaire {winner} ganha {pot}.",
+    "tie": "Las ofèrtas  {bids} - empate, pot ara {pot}.",
+    "scores": "Pòtz → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "L'accion necessita una carta entre parentèsis coma \"[Q]\"",
+    "bad_card": "Carta ja utilizada o invalida"
+  },
+  "elimination": {
+    "player": "Joguador {pid} eliminat après de movements invalids repetits."
+  },
+  "outcome": {
+    "auto_win": "Dos jogaires eliminats - victòria automatica.",
+    "final": "Los resultats finalas: {scores}"
+  }
+}

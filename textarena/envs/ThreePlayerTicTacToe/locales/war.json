@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Ikaw an Player {player_id} ha Three-Player Tic Tac Toe.\nAn imo simbolo amo an '{symbol}'.\nIkaw naghahatag han imo simbolo ha 5x5 nga bangga para makab-ot han usa ka linya han upat.\nAn mga linya puyde horizontal, vertical, o diagonal.\nIsumite imo mugna ha pormato '[4]' para markahan an selula 4."
+  },
+  "board": {
+    "current_board": "Karuhaan nga Bangga:\n\n{board}\n\nMga Baraan nga Mugna: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Diri-makatuman nga format han pagbalhin. Gamit an \"[cell]\" kun diin an selyula 0 - {max_cell} .",
+    "out_of_range": "Baliw nga numero han selula: {cell}. Kinahanglan makasakop ha 0 ngan {max_cell}.",
+    "already_occupied": "An cell {cell} in na-okupar.",
+    "made_invalid": "An player {player_id} in naghimo hin diri-makatarunganon nga paglihok."
+  },
+  "game_action": {
+    "placed": "Nagpapahiang Player {player_id} han ira simbolo ({symbol}) ha sukod ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Nadaog han Player {player_id} ({symbol})!",
+    "draw": "An dula waray mag-iba!"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ko koe te Kaiwhakataetae {player_id} i te kēmu Spite and Malice mā rua. Ko tō whāinga kia tuatahi koe ki te whakawātea i tō pūhui utu.\n\n### Tirohanga Kēmu:\n- Ko te whāinga kia wātea i tō pūhui utu mā te tākaro kāri ki ngā pūhui pokapū.\n- Ka taea e koe te tākaro kāri mai i ngā pūtake e toru:\n  1. Tō **ringa** (ka tīmata koe i ia tānga ki te 5 kāri i tō ringa).\n  2. Te **kāri o runga o tō pūhui utu**.\n  3. Te **kāri o runga o tētahi o ō pūhui whakakore**.\n\n### Ture Tākaro:\n- Ka taea e koe te tākaro kāri ki te pūhui pokapū mēnā he **tētahi tīma ake** i te kāri o runga o taua pūhui (ka tīmata ngā pūhui pokapū ki te Ace, ā, ka haere ki te Kuīni; ko ngā Kīngi he korokoro - ka taea e rātou te tākaro ki runga i tētahi kāri, engari kaore e huri te tīma. Ko te tikanga, mēnā ka whakamahia he Kīngi i muri i te 4, kaore taua Kīngi i te tīma 5, ā, ko te kāri e whai ake ko te 6).\n- Mēnā kaore koe e taea te tākaro i ētahi atu kāri, me **whakakore koe i tētahi kāri** ki tētahi o ō pūhui whakakore hei whakamutu i tō tānga.\n- Mēnā ka tae te pūhui pokapū ki te Kuīni, ka wātea aunoatia.\n- Ko te tīma o te kāri: A=1, 2=2, ..., 9=9, J=10, Q=11, K hei korokoro.\n\n### Mahi:\n1. **Tīkina**: I te tīmatanga o tō tānga, tīkina kāri hei whakakī i tō ringa ki te 5 kāri. Whakauruhia **[draw]** hei tīmata.\n2. **Tākaro Kāri**: Hei tākaro kāri, whakauruhia te kāri me te pūhui pokapū pēnei: **[play A♠ 0]** (ko 'A♠' te kāri, ā, '0' te tīma o te pūhui pokapū).\n3. **Whakakore**: Mēnā kaore koe e taea te tākaro i ētahi atu kāri, whakakore tētahi kāri mai i tō ringa ki te pūhui whakakore hei whakamutu i tō tānga. Whakauruhia **[discard A♠ 1]** (ko 'A♠' te kāri, ā, '1' te tīma o te pūhui whakakore). Kia mahara, kaore koe e taea te whakakore i tētahi kāri mai i te pūhui utu. Ka taea e koe te whakakore i ngā kāri mai i tō ringa anake.\n\n"
+  },
+  "board": {
+    "current_board": "Papa Kāri Whāriki:\n\n{board}\nNeke Atu: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Nga Pire o te Waenganui --- ",
+    "pile": "{observation}Puranga {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Tirohanga o Kaitakaro {player_id} ---\n",
+    "payoff": "{observation}Puranga Utu (Kāri Tuatahi): {top_card}, Roa o Puranga Utu: {payoff_length}\n",
+    "hand": "{observation}Ringa: {hand}\n",
+    "discard": "{observation}Puranga Whakarere: {discard}\n",
+    "empty": "He kau."
+  },
+  "game_message": {
+    "no_cards_left": "Kāore he kāri hei tāpiri atu. Kia mahara ka taea e koe te tākaro i ngā kāri mai ēnei pūtake: 1. Ko tō ringa 2. Te kāri runga o ō kōpaki utu 3. Te kāti tihi o tētahi o ō pōkai whakahētia. "
+  },
+  "invalid_move": {
+    "wrong_format": "Kāore i te tika. Kaore he kaitākaro {player_id} i whakautu ki tetahi nekehanga whaimana kei roto i nga kaakaariki tapawha.",
+    "invalid_play": "Kāore i tika te tākaro. I whakamātau Kaitākaro {player_id} ki te tākaro i te kāri {card} ki runga i te pūhui waenga {index}.",
+    "discard_from_payoff": "Whakakahoretia te kore. I ngana te kaitakaro {player_id} ki te whakakore i tetahi kaari mai i te puranga utu.",
+    "discard_not_in_hand": "Whakakahoretia he kore. I ngana te kaitakaro {player_id} ki te whakakore i tetahi kaari kaore i roto i nga ringa.",
+    "wrong_move_type": "Kāore i te tika. Kaore he momo nekehanga e whakautu ana a kaitākaro {player_id} ki tētahi momo nekenga whaimana."
+  },
+  "game_action": {
+    "you_drew": "I tāpaetia e koe ngā kāri.",
+    "opponent_drew": "I whakairihia e te kaitākaro {player_id} ngā kāri.",
+    "you_played": "I tākaro koe i {card} ki runga i te puranga pokapū {index}.",
+    "opponent_played": "Kaitakaro {player_id} i tākaro {card} ki runga i te puranga pokapū {index}.",
+    "you_discarded": "Kua whakarere atu koe i {card} ki te puranga whakarere {index}, koia hoki i whakaatu koe kua mutu tou tu. Kahore he mahi anō ou e whakaarohia mō tēnei tu. Kaitakaro {next_player_id} ka haere i muri.",
+    "opponent_discarded": "Kaitākaro {player_id} i whakakore {card} ki te pūnga whakakore {index}, e whakaatu ana hoki kua mutu tā rātou tāima. Kāore he mahi āpiti o Kaitākaro {player_id} e whakaarohia ana mō tēnei tāima. Kaitākaro {next_player_id}, ko koe ka haere ake. Tēnā koa tāu mahi ki te tauira [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Kaitakaro {current_player} kua mutu tana puranga utu! Kaitakaro {current_player} ka wini!",
+    "deadlock_player_0": "Kua tae ki te tūpono! Ka toa Kaitākaro 0 ki ētahi kāri {player_0_payoff} e toe ana, ki ētahi kāri {player_1_payoff} a Kaitākaro 1.",
+    "deadlock_player_1": "Kua tae ki te tūpono! Ka toa Kaitākaro 1 ki ētahi kāri {player_1_payoff} e toe ana, ki ētahi kāri {player_0_payoff} a Kaitākaro 0.",
+    "deadlock_tie": "Taukumeke! Kua tae ki te whakataetae tautīteti! E {player_0_payoff} ngā kāri e toe ana ki ngā kaitākaro e rua. Kaitākaro {current_player} ka wini nā te tikanga."
+  }
+}

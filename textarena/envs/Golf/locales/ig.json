@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Ị na-egwu Golf (Card Game) - Player {player_id}. Ihe mgbaru ọsọ: Nweta akara kachasị dị ala na nke a. Ọ bụrụ na ogidi nwere otu uru, a na-agbakọta ha dị ka 0. Kaadị Kaadị: A = 1, 2-10 = ọnụ ahịa ọnụ, J / Q = 10, K = 0 Omume (jiri ezigbo brackets): - '[draw]' - Dọrọ site na oche - '[take]' - Were site na ikpochapụ ikpo - '[swap X Y]' - Gbanwee kaadị a dọtara na ọnọdụ X (ahịrị) Y (ogidi) - '[discard]' - Wepụ kaadị ahụ dọtara "
+  },
+  "board": {
+    "drew": "Ị dọtara: {card} Ugbu a ị ga- [swap X Y] ma ọ bụ [discard] ya.",
+    "took": "Ị were: {card} site na ọkpụkpụ efu\nỊ ga-eme [swap X Y] na ya (enweghị ike ịhapụ).",
+    "peeked": "Ị na-ele anya na ọnọdụ ({row},{col}): {card}",
+    "turn_view": "Aka gị: {hand} Tụfuo ikpo: {discard} {options}",
+    "none": "Enweghị"
+  },
+  "options": {
+    "final_turns": "Oge ikpeazụ! Nhọrọ gị: [draw], [take], [peek X Y]",
+    "draw": "Nhọrọ gị: [draw], [take]",
+    "must_swap": "Ị ga: [swap X Y] (enweghị ike ịtụfu kaadị site na ikpochapụ ikpo)",
+    "swap_or_discard": "Ị ga-emerịrị: [swap X Y] ma ọ bụ [discard]"
+  },
+  "hand": {
+    "no_cards": "Enweghị kaadị",
+    "header": "Ndị na-agba: 1 2 3",
+    "row": "Ahịrị {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Onye na-egwu egwu {pid} gbanwere {new} na {old} na ọnọdụ ({row},{col})",
+    "discarded": "Onye na-egwu egwu {pid} tụfuru {card}"
+  },
+  "message": {
+    "deck_empty": "Okpokoro ahụ tọgbọ chakoo! Egwuregwu ahụ na-agwụ ozugbo.",
+    "knocked": "Onye ọkpụkpọ {pid} kụrụ! Onye ọkpụkpọ ọ bụla ọzọ na-enweta otu ntụgharị ọzọ.",
+    "final_round": "Onye ọkpụkpọ {pid} {reason}! Onye ọkpụkpọ ọ bụla ọzọ na-enweta otu ntụgharị ọzọ."
+  },
+  "reason": {
+    "all_revealed": "ka a kpughere kaadị niile"
+  },
+  "invalid": {
+    "wrong_action": "Jiri kpọmkwem otu ihe omume dị na bracket: [draw], [take], [swap X Y], [discard], [knock], ma ọ bụ [peek X Y]",
+    "discard_empty": "Ọkpụkpụ ahụ efu!",
+    "must_draw_first": "Ị ga-ebu ụzọ [draw], [take], [knock], ma ọ bụ [peek X Y]",
+    "cannot_discard_taken": "Ị pụghị ịtụfu kaadị e si n'ụyọkọ ndị a tụfuru atụfu. Ị ghaghị ịgbanwe ya.",
+    "have_drawn_card": "I nwere kaadị e ji agba chaa chaa. Ị ghaghị [swap X Y] ma ọ bụ [discard] ya.",
+    "need_drawn_swap": "Ị ga-achọ kaadị e sere ese iji gbanwere.",
+    "need_drawn_discard": "Ị ga-achọ kaadị e sere ese iji tụfuo ya.",
+    "out_of_bounds": "Ọnọdụ na-enweghị oke. Jiri ahịrị 1-{max_row}, kọlụm 1-{max_col}",
+    "knock_with_card": "Ị pụghị iji kaadị e sere akụ aka.",
+    "already_knocked": "Onye ọzọ emeela nke a.",
+    "already_revealed": "E kpugheworị kaadị ahụ!"
+  },
+  "summary": {
+    "full": "Egwuregwu Agwụla! Onye ọkpụkpọ {winner} na-emeri na akara nke {score} isi! Akara ikpeazụ: {scores}",
+    "line": "Onye na-egwu egwu {pid}: {score} isi "
+  },
+  "board_str": {
+    "title": "=== Egwuregwu GOLF ===",
+    "discard": "Tụfuo ikpo: {card}",
+    "knocked": "Onye egwuregwu {pid} akpọọla!",
+    "player_header": "Onye na-egwu egwu {pid} (Score: {score}):"
+  }
+}

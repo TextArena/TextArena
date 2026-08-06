@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "O kerekere mo ni Player {player_id}. O kerekere tiko mo ni vakasama Sudoku.\nE a tiko eke na kerekere ni grid ni Sudoku. E a namaki tu mai na 1 ki na 9 eke na kerekere ni yalayala, kei na kerekere ni kena colo.\nNa kerekere ni lala vakaloloma e a vakaraitaki tu mai na '.', kei na kerekere ni kena digit mai na 1 ki na 9.\n\nNa kerekere ni Sudoku e a tiko qo:\nNa nomu icakacaka e a vakasama mo ni fill na kerekere ni lala vakaloloma eke na grid ni 9x9 kei na digit mai na 1 ki na 9 me:\n1. E a kerekere tu mai na digit mai na 1 ki na 9 eke na kerekere ni yalayala, kei na sega ni vakarua.\n2. E a kerekere tu mai na digit mai na 1 ki na 9 eke na kerekere ni colo, kei na sega ni vakarua.\n3. E a kerekere tu mai na digit mai na 1 ki na 9 eke na kerekere ni 3x3 subgrid, kei na sega ni vakarua.\n\nNa lawa kei na ivakasala:\n1. **Kua ni vakaraitaka** na nambari ni kerekere ni grid.\n2. **Vakaraitaka ga** na kerekere ni lala vakaloloma e a vakaraitaki tu mai na '.'.\n3. O sa na vakasama mo ni respond eke na kerekere ni gauna o sa na prefer, ia o sa na vakadeitaka mo ni kerekere ni format ni '[row column number]'.\n4. **Vakadeitaka** mo ni nomu icakacaka e a sega ni vakaloloma na lawa ni Sudoku. Na icakacaka e a sega ni dodonu e a na qai vakaloloma na penalty.\nIvakasala:\n- **Icakacaka dodonu**:\n  - Grid Snippet Before Move:\n  \n  - Move: `[5 3 7]`\n  - Ivakamacala: Na kerekere ni 7 eke na yalayala 5, colo 3 e a sega ni vakaloloma na lawa ni Sudoku.\n\n- **Icakacaka sega dodonu** (Vakaraitaka na kerekere ni pre-filled):\n  - Grid Snippet Before Move:\n  \n  - Move: `[1 1 9]`\n  - Ivakamacala: Na kerekere (1,1) e a kerekere tu mai na 5. O sa na sega ni vakaraitaka.\n\n- **Icakacaka sega dodonu** (Vakaloloma na lawa ni Sudoku):\n  - Grid Snippet Before Move:\n  \n  - Move: `[1 3 5]`\n  - Ivakamacala: Na kerekere ni 5 eke na yalayala 1, colo 3 e a vakaloloma na lawa ni Sudoku, ni kerekere ni 5 e a kerekere tu mai eke na yalayala 1.\n\nNa itukutuku ni nomu icakacaka kei na nomu vakasama e a na qai vakaloloma me o sa na vakasama mo ni rounds. Vakayagataka na itukutuku ni nomu icakacaka mo ni vakadeitaka mo ni nomu vakasama ka o sa na sega ni vakatara na icakacaka o sa na cakava. Vinaka saka!\n\n"
+  },
+  "board": {
+    "game_board": "Na iYaya ni Qito: {board}",
+    "board_state": "Mata ni borodi: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Na ivakarau ni toso e sega ni dodonu. Sega ni sauma na dauqito {player_id} ena 'iwiliwili ni duru' donu.",
+    "out_of_bounds": "Vakadidike ni kena ibalebale. Player {player_id} e a vakayagataki me vakarautaki {num} ena ({row}, {col}), ka sa ikoya e sega ni kena ibalebale.",
+    "overwrite": "Vakadidike ni kena ibalebale. Player {player_id} e a vakayagataki me vakadonui cell e pre-filled ({row}, {col}).",
+    "violates_rules": "Vakadidike ni kena ibalebale. Player {player_id} e a vakayagataki me vakarautaki {num} ena ({row}, {col}), ka sa ikoya e vakadidike na lawa ni Sudoku."
+  },
+  "outcome": {
+    "win": "Ni sa vakacavara na dauqito {player_id} na Sudoku.",
+    "turn_limit": "Sa yaco na iyalayala ni gauna. O sa vakatawana vakavinaka {percent}% ni sela lala."
+  }
+}

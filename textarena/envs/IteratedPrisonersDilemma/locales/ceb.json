@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ang Player {player_id} sa usa ka Iterated Prisoner's Dilemma nga umabot sa {num_rounds} ka round.\n\nEstruktura sa Laro:\n- Sa pag-una sa matag desisyon may {total_conversation_rounds} ka higayon ka makahisgot libre.\n- Human niana, ang mga duha ka mga player nagpili sa pag-usab o pagpabuwag sa samang higayon.\n\nPayoff Matrix (nagpabilin sa matag round):\n- Nag-usab ang duha ➜ ang matag usa {cooperate_reward}\n- Nagpabuwag ang duha ➜ ang matag usa {mutual_defect_reward}\n- Usa ka nagpabuwag, usa ka nag-usab ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nUnsaon pag-laro:\n- Sa panahon sa hisgot: i-type ang bisan unsang teksto nga gihanan.\n- Sa panahon sa desisyon: apil ang '[Cooperate]' o '[Defect]' (walay sensibilidad sa kaso). Makapalit og daghan nga teksto sa pag-una/paghuman sa token."
+  },
+  "phases": {
+    "conversation_finished": "Human sa paghisgot alang sa round {round}. Palihug sumagot sa '[Cooperate]' o '[Defect]' sulod sa \\boxed{{}}.",
+    "starting_round": "--- Pagsugod sa Round {round} ---",
+    "round_summary": "Mga resulta sa round {round}:\n{outcome}\nAng Player 0 nakadawat {r0} (kabtangan {score_0}), Ang Player 1 nakadawat {r1} (kabtangan {score_1})."
+  },
+  "outcome": {
+    "winner": "Ang player {winner} modaog sa {win_score} - {lose_score}.",
+    "draw": "Parehas! Ang duha ka magdudula nagpunting {s0}.",
+    "round_both_cooperate": "Ang duha ka magdudula nagkooperar.",
+    "round_both_defect": "Ang duha ka magdudula milayas.",
+    "round_p0_cooperates_p1_defects": "Ang Manlalaro 0 mitabang, ang Manlalaro 1 milapas.",
+    "round_p0_defects_p1_cooperates": "Ang Manlalaro 0 milapas, ang Manlalaro 1 mitabang."
+  }
+}

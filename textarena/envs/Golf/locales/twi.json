@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Woreyɛ Golf (Akwaduo mu) - Odwumayɛni {player_id}.\nBotaeɛ: Nyaa akontabuo ketewa wɔ round yi mu. Sɛ kɔlɔm no kyerɛ sɛnea ɛbɛyɛ a, wɔbɛtumi asi 0.\nKɔpɛ Mũ: A=1, 2-10=face value, J/Q=10, K=0\n\nNsɛm a wobɛyɛ (fa bracket a ɛwɔ mu no): \n- '[draw]' - Draw from deck\n- '[take]' - Take from discard pile\n- '[swap X Y]' - Swap drawn card with position X (row) Y (column)\n- '[discard]' - Discard the drawn card\n"
+  },
+  "board": {
+    "drew": "Woduu: {card}\nNia wɔ hɔ sɛ wotumi [swap X Y] anaa [discard] no.",
+    "took": "Wo fae: {card} firi sere a wosere no mu\n Wo behwe [swap X Y] ne no (wo ntumi nsere).",
+    "peeked": "Wohuu wɔ adansedi ({row},{col}): {card}",
+    "turn_view": "Wo nsa:\n{hand}\nNsaman wa: {discard}\n{options}",
+    "none": "Ɛnni hɔ."
+  },
+  "options": {
+    "final_turns": "Nkɔmhyɛ a etwa! Wo options: [draw], [take], [peek X Y]",
+    "draw": "Wo mfaso: [draw], [take]",
+    "must_swap": "Ɛsɛ sɛ: [swap X Y] (ntumi ntwe kaad no mfi nea wɔtow gu mu)",
+    "swap_or_discard": "Wopɛ sɛ wotumi: [swap X Y] anaa [discard]"
+  },
+  "hand": {
+    "no_cards": "Karte biara nni hɔ.",
+    "header": "Kɔla: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Ɔdan {pid} bedu {new} mu {old} wɔ adansedi ({row},{col})",
+    "discarded": "Ɔdan {pid} de {card}"
+  },
+  "message": {
+    "deck_empty": "Nsaman no asa! Agorɔ no awie seisei.",
+    "knocked": "Odwumfoɔ {pid} abɔ nkuku! Odwumfoɔ biara bɛnya turn baako.",
+    "final_round": "Odwumfoɔ {pid} {reason}! Odwumfoɔ biara bɛnya turn baako."
+  },
+  "reason": {
+    "all_revealed": "wɔaka kɔpem kɔpem"
+  },
+  "invalid": {
+    "wrong_action": "Fa bracketed action baako pɛ: [draw], [take], [swap X Y], [discard], [knock], anaa [peek X Y]",
+    "discard_empty": "Nneɛma a wɔtow gu no nni hɔ!",
+    "must_draw_first": "Wo bɛbɔ [draw], [take], [knock], anaa [peek X Y] kan.",
+    "cannot_discard_taken": "Wuntumi ntwe kaade a wɔayi afi nea wɔde ato hɔ no mu. Ɛsɛ sɛ wosesa bi.",
+    "have_drawn_card": "Woduu card. Wopɛ sɛ wotumi [swap X Y] anaa [discard] no.",
+    "need_drawn_swap": "Wuhia nkrataa a wɔatwa ato hɔ de asesa.",
+    "need_drawn_discard": "Wo hia karte a woapaw no sere.",
+    "out_of_bounds": "Adansedi no abɔ ho ban. Fa row 1-{max_row}, column 1-{max_col}",
+    "knock_with_card": "Wuntumi mfa krataa a wɔato no nto hɔ. Di kan yɛ nea wopɛ sɛ woyɛ ma awie wo bere so.",
+    "already_knocked": "Obi abɔ nkuku saa no.",
+    "already_revealed": "Wɔayi saa agyiraehyɛde no adi dedaw!"
+  },
+  "summary": {
+    "full": "Akwaduo no awieeɛ! Odwumayɛni {winner} di nkunim a ɔwɔ akontabuo {score}!\n\nAkontabuo a ɛwɔ awieeɛ:\n{scores}",
+    "line": "Odwumfoɔ {pid}: {score} pɔinti\n"
+  },
+  "board_str": {
+    "title": "=== AGORɔ GOLF ===",
+    "discard": "Ɔbo a wɔtow gu: {card}",
+    "knocked": "Odwumfoɔ {pid} abɔ nkuku!",
+    "player_header": "Odwumayɛni {pid} (Akontabuo: {score}):"
+  }
+}

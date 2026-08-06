@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Uwite Umukino {player_id} mu Tic Tac Toe ya ba Mitsindiri.\nIbaro ryawe ni '{symbol}'.\nUzatwara imyitozo ukwiyandikisha ibaro ryawe kweneshuri 5x5 ukora mpatanishi wa 4.\nImpatani zishobora kuba mu maji, hejuru, cyangwa ku kiyindi.\nTangaza umwito wawe utumaye ifomati '[4]' ukubeshya gitebo 4."
+  },
+  "board": {
+    "current_board": "Kibanza kijyewe:\n\n{board}\n\nImyitozo Ikwiye: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Uburyo budasobanutse bwo kwimuka. Koresha \"[cell]\" aho iseri ari 0-{max_cell} .",
+    "out_of_range": "Umubare w'urupapuro udafite agaciro: {cell}. Ugomba kuba uri hagati ya 0 na {max_cell} .",
+    "already_occupied": "Icyumba {cell} cyamaze guturwa.",
+    "made_invalid": "Umukinnyi {player_id} yakoze umukino utagira agaciro."
+  },
+  "game_action": {
+    "placed": "Umukino {player_id} wunganira ibaro ryawe ({symbol}) mu gitebo ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Umukino {player_id} ({symbol}) yatsinze!",
+    "draw": "Umukino warangiye ari ubusa ku busa!"
+  }
+}

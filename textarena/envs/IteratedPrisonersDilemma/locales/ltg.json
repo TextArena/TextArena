@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} Iterētā Prisonieru Dilemmā, kas ilgst {num_rounds} kārtas.\n\nSpēles Struktūra:\n- Pirms katras lēmuma jums ir {total_conversation_rounds} gājienu brīva saruna.\n- Pēc tam abiem spēlētājiem vienlaicīgi jāizvēlas sadarboties vai nodevēt.\n\nAtlīdzības Matrica (fiksēta katrā kārtā):\n- Abi Sadarbojas ➜ katram {cooperate_reward}\n- Abi Nodevējas ➜ katram {mutual_defect_reward}\n- Viens Nodevējas, otrs Sadarbojas ➜ Nodevējam {defect_reward}, Sadarbotājam {sucker_reward}\n\nKā Spēlēt:\n- Sarunas laikā: ierakstiet jebko, ko vēlaties.\n- Lēmuma posmā: iekļaut '[Cooperate]' vai '[Defect]' (mazās/bēras burtus nelieto). Jūs varat pievienot papildu tekstu pirms/ēķā tokena."
+  },
+  "phases": {
+    "conversation_finished": "Sarunu beidzās {round}. atbildiet, izmantojot '[Cooperate]' vai '[Defect]' \\boxed{{}} robežās.",
+    "starting_round": "--- Suokuma raunds {round} ---",
+    "round_summary": "{round}. kārtas rezultāti:\n{outcome}\nSpēlētājs 0 nopelnīja {r0} (kopā {score_0}), Spēlētājs 1 nopelnīja {r1} (kopā {score_1})."
+  },
+  "outcome": {
+    "winner": "Spēlētājs {winner} uzvar {win_score} - {lose_score}.",
+    "draw": "Obeji spēlētāji īsaceja {s0}.",
+    "round_both_cooperate": "Obeji dalinīki sadarbeibā.",
+    "round_both_defect": "Obeji dalinīki puorguoja.",
+    "round_p0_cooperates_p1_defects": "Spālātuojs 0 sadarbeja, spālātuoji 1 puorlauze.",
+    "round_p0_defects_p1_cooperates": "Spēlētājs 0 izvēlējās nodevēt, Spēlētājs 1 sadarbojās."
+  }
+}

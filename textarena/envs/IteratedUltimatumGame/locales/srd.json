@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Tzes Player {player_id}, giogande {num_rounds} turnos de Iterated Ultimatum Game.\nTenes ${pool} a spartzire pro custu turnu tra tze e Player {other_id}.\n\nPropositore:\n  - Fae un'oferta: [Offer: $X] (0 <= X <= pool)\n  - Si est aceta → Tu otzienis $(pool - X), s'àteru giocadore otzienit $X\n  - Si est refudada → Ambos duos otzienint $0\n  - Esèmpiu: [Offer: $3]  o  'Penzu chi custa siat giusta. [Offer: $5]'\n\nResponder:\n  - Decida s'oferta cun [Accept] o [Reject]\n  - Esèmpiu: 'Custu parìt razu. [Accept]'\n            'Tropu inzustu. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Su turno {round_number} incumentzat! ---\nSu jocadore {proposer_id} est su proposidore, su jocadore {responder_id} est su rispondidore.",
+    "offer": "Turnu {round_number}: Giocadore {proposer_id} oferit ${offer} a Giocadore {responder_id} (teninde ${keep}).",
+    "accepted": "Giocadore {responder_id} at aceta! Turnu {round_number} guadagnos: Giocadore {proposer_id} +${proposer_gain}, Giocadore {responder_id} +${responder_gain}. Noas totales: Giocadore 0: ${total_0}, Giocadore 1: ${total_1}.",
+    "rejected": "Giocadore {responder_id} at refudadu s'oferta! Turnu {round_number} guadagnos: Ambos duos giogadores +$0. Totales abarrant: Giocadore 0: ${total_0}, Giocadore 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Su proponente depet fàghere un'oferta impreende su formadu [Offer: $X].",
+    "bad_integer": "S'importu de s'oferta depet èssere unu nùmeru intreu vàlidu.",
+    "out_of_range": "S'oferta depet èssere intre $0 e ${pool}.",
+    "no_current_offer": "Non b'at peruna oferta atuale pro rispòndere.",
+    "accept_or_reject": "Responder deve tzèrerer EITHER [Accept] o [Reject] s'oferta."
+  },
+  "outcome": {
+    "win": "Giocadore {winner} at winnings cun ${winner_total} totale vs Giocadore {loser} de ${loser_total}.",
+    "draw": "Parigi! Ambos giogadores ant acabadu cun ${total} totale."
+  }
+}

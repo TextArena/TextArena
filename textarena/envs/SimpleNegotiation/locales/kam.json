@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Mchezaji alijaribu kupokea biashara bila kuwa na rasilimali zinazohitajika.",
+    "out_of_range": "Mchezaji {player_id}, Kitendo kisichofaa. Safu {col} iko nje ya mipaka.",
+    "already_full": "Mchezaji {player_id}, Kitendo kisichofaa. Safu {col} imejaa.",
+    "proposing_with_no_resource": "Mchezaji {player_id} alijaribu kufanya ofa ya biashara bila kuwa na rasilimali zinazohitajika.",
+    "incorrect_offer_format": "Mũvĩla wa ĩsavu (Player {player_id}) nĩwatũmĩie nzĩa ĩtosanĩte na mĩao kũandĩka valũa wake.",
+    "no_new_offer": "Mchezaji {player_id} hakufanya ofa mpya ya biashara."
+  },
+  "offers": {
+    "reject": "Mchezaji {player_id} alikataa ofa ya biashara.",
+    "accept": "Mchezaji {acceptor_id} alikubali ofa ya biashara kutoka kwa Mchezaji {proposer_id}.",
+    "proposal": "Mchezaji {player_id} alifanya ofa ifuatayo kwa Mchezaji {opponent_id}: Vifaa vilivyotolewa: {offered} -> Vifaa vinavyohitajika: {requested}"
+  },
+  "outcome": {
+    "win": "Mchezaji {winner_id} alishinda kwa kuwa na ongezeko kubwa la thamani ya orodha yake.",
+    "draw": "Mabadiliko sawa ya thamani ya orodha kwa wachezaji wote. Sawa."
+  }
+}

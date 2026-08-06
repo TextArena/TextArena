@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Uyimdlali {player_id} kwiStratego.\nInjongo yakho kukwabela iflegi yomdlali wakho noma ukuphela iziqondo zake zonakayo.\nImpi yakho ibekwe kwakho kwenkwenkwe, ikhange iflegi yakho, amabhomu, na iziqondo zezinga zonke.\n\n### Ixesha lokudlala\n1. **Irinka zokudlala:**\n   - Kwenye usuku lwakho, uyakwazi ukudlala iqondo nganye nganye kusuka kwiinkwenkwe eziliqela (phezulu, phantsi, kushoto, noma kumanzi) eziliqelelweyo ngamaqondo akho.\n   - Umbhalo: Iqondo lingakwazi ukudlala kusuka A1 kuB1 noma A1 kuA2 ukuba B1 na A2 azikho zibeke zizwe lakho.\n   - Ukuba iqondo elidlalileyo liyibhomu noma iflegi, hayi kwazi ukudlalwa.\n2. **Imibhango:**\n   - Ukuba udilile kwiinkwenkwe ezikhethiwe ngomdlali wakho, kuzakuba imibhango:\n     - Iqondo elingaphezulu linganqabile na liphinde iqondo lomdlali wakho.\n     - Ukuba imibala iphelele, iziqondo zombili zingapheli kwenkwenkwe.\n     - **Izinto ezihamba phambili:**\n       - Amabhomu anqabile iziqondo zonke ngaphandle kwabagwali, abo bangabamba amabhomu.\n       - Izipayi zinganqabile imashal ukuba ziphinde zidlale kwanze kodwa zingaphele kuzonke iziqondo zingaphi nazo.\n3. **Injongo zokudlala:**\n   - Thatha iziqondo zomdlali wakho ngokwenzela kuzo na kuzibhanga.\n   - Linda iflegi yakho wakhe wakhe ukuba uthande ukukwabela iflegi yomdlali wakho.\n   - Sebenzisa abadlali bezikhukhula ngokwenza ukuthatha iziqondo zomdlali wakho na kuzibhanga.\n\n### Ukudlala:\n1. Beka amanani aqondo olifunayo ukudlala na indawo yakho.\n2. Sebenzisa ifomati: [A0 B0], lapho A0 liyindawo yakho, na B0 liyindawo yakho.\n   - Umbhalo: Ukudlala iqondo lakuhambe kusuka iri 0, ikoloni 0 ku ri 1, ikoloni 0, ucingo [A0 B0].\n3. Xela ukuba indawo yakho inezidingo zokudlala zokwenza.\n\n### Izinto ezidinga kuzi ziwe:\n- Inkkwenkwe iyakubonisa iziqondo zakho na indawo zazo, njenge MN, MS.\n- Inkkwenkwe iyakubonisa na iziqondo zomdlali wakho zibeke zingaphi, njengomgca ?.\n- Iinkwenkwe ezine ~ zizilwane na azikwazi ukudlalwa kuzo.\n- Ngokwesithethe, qala udle ukudlala iziqondo zakho zibeke phezulu ukuthatha iziqondo zomdlali wakho. Abadlali 0 na 1 bafike phezulu ri D na G kule mihla.\n\nHapa kwenkwenkwe yokuqala:"
+  },
+  "board": {
+    "current_board": "Bhozeni yebhodi yokuqala:\n\n{board}\nImikhiqizo eya kuthiwa: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ifomathi yesenzo engavumelekanga. Umdlali {player_id} akazange afake intshukumo kwifomati [A0 B0] .",
+    "invalid_coordinates": "Ifomathi yesenzo engavumelekanga. Umdlali {player_id} akazange afake iikoordinethi ezifanelekileyo.",
+    "not_own_piece": "Umdlali {player_id} kufuneka ahambise enye yeempawu zakhe.",
+    "scout_through_pieces": "Umdlali {player_id} akanakuhambisa i-scout kwezinye iziqwenga.",
+    "scout_diagonal": "Ifomathi yesenzo engavumelekanga. Umdlali {player_id} akanakuhambisa i-scout ngokuthe tye.",
+    "non_scout_multi_square": "Ifomathi yesenzo engekhoyo. Iiteki, ngaphandle kwee scouts, zinokuhamba isikwere esinye kuphela ngexesha elinye.",
+    "move_into_lake": "Ifomathi yesenzo engavumelekanga. Umdlali {player_id} akanakuhamba aye echibini.",
+    "move_onto_own_piece": "Isenzo esingavunywa. Umthathi {player_id} akakwazi kuhamba kwenye ipyesi yakhe.",
+    "move_bomb_or_flag": "Umdlali {player_id} akanakuhambisa ibhombu okanye iflegi."
+  },
+  "game_action": {
+    "you_moved": "Ungenye ukunyakaza impawu yakho ukusuka {source} ukuya {dest}.",
+    "opponent_moved": "Umdlali {player_id} uhambise iqhekeza ukusuka ku-{source} ukuya kwi-{dest}.",
+    "you_equal_ranks": "Ungenye ukunyakaza impawu yakho ukusuka {source} ukuya {dest}. Impawu etshayayo inerank {attacking_rank} ne-impawu edestinasyon inerank {target_rank}. Njengoko i-rank zilingana, zombini iimpawu zilahlekiwe.",
+    "opponent_equal_ranks": "Umdlali {player_id} ungenye ukunyakaza impawu ukusuka {source} ukuya {dest}. Impawu etshayayo inerank {attacking_rank} ne-impawu edestinasyon inerank {target_rank}. Njengoko i-rank zilingana, zombini iimpawu zilahlekiwe.",
+    "you_miner_defused": "Ungenye ukunyakaza impawu yakho ukusuka {source} ukuya {dest}. Impawu etshayayo inerank {attacking_rank} ne-impawu edestinasyon inerank {target_rank}. Njengoko i-miners inaweza ukuyichitha i-bombs, ungenye ukunqoba impi.",
+    "opponent_miner_defused": "Umdlali {player_id} ungenye ukunyakaza impawu ukusuka {source} ukuya {dest}. Impawu etshayayo inerank {attacking_rank} ne-impawu edestinasyon inerank {target_rank}. Njengoko i-miners inaweza ukuyichitha i-bombs, ulahlekiwe impi.",
+    "you_bomb_lost": "Ungenye ukunyakaza impawu yakho ukusuka {source} ukuya {dest}. Impawu etshayayo inerank {attacking_rank} ne-impawu edestinasyon inerank {target_rank}. Njengoko otshayayo akayi-miner, ulahlekiwe impi.",
+    "opponent_bomb_won": "Umthathi {player_id} usikhulule kwenye ipyesi ukusuka {source} ukuya {dest}. Ipyesi ethe ngumthathi yayi {attacking_rank} neyayikuyo yayi {target_rank}. Kuba umthathi akadobi, uwine impi.",
+    "you_spy_won": "Ungenye ukunyakaza impawu yakho ukusuka {source} ukuya {dest}. Impawu etshayayo inerank {attacking_rank} ne-impawu edestinasyon inerank {target_rank}. Njengoko otshayayo yi-spy ne-destination yi-marshal, ungenye ukunqoba impi.",
+    "opponent_spy_lost": "Umdlali {player_id} ungenye ukunyakaza impawu ukusuka {source} ukuya {dest}. Impawu etshayayo inerank {attacking_rank} ne-impawu edestinasyon inerank {target_rank}. Njengoko otshayayo yi-spy ne-destination yi-marshal, ulahlekiwe impi.",
+    "you_higher_won": "Ungenye ukunyakaza impawu yakho ukusuka {source} ukuya {dest}. Impawu etshayayo inerank {attacking_rank} ne-impawu edestinasyon inerank {target_rank}. Njengoko otshayayo unerank ephakamileyo, ungenye ukunqoba impi.",
+    "opponent_higher_lost": "Umthathi {player_id} usikhulule kwenye ipyesi ukusuka {source} ukuya {dest}. Ipyesi ethe ngumthathi yayi {attacking_rank} neyayikuyo yayi {target_rank}. Kuba umthathi ngumgangatho ophakamileyo kuneyayikuyo, ulahlekelwe yimpi.",
+    "you_lower_lost": "Ungenye ukunyakaza impawu yakho ukusuka {source} ukuya {dest}. Impawu etshayayo inerank {attacking_rank} ne-impawu edestinasyon inerank {target_rank}. Njengoko otshayayo unerank ephantsi, ulahlekiwe impi.",
+    "opponent_lower_won": "Umthathi {player_id} usikhulule kwenye ipyesi ukusuka {source} ukuya {dest}. Ipyesi ethe ngumthathi yayi {attacking_rank} neyayikuyo yayi {target_rank}. Kuba umthathi ngumgangatho ophantsi kune yayikuyo, uwine impi."
+  },
+  "outcome": {
+    "flag_captured": "Umdlali {player_id} uthathe iflegi yomchasi!",
+    "no_movable_pieces": "Mdlali {winner_id} unqabile! Mdlali {loser_id} akunazo iziqondo ezidlayo."
+  }
+}

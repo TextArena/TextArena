@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "તમે ત્રણ ખેલાડીઓની ઇટેરેટેડ કેદીની દુવિધામાં ખેલાડી {player_id} છો. મેચ {num_rounds} રાઉન્ડ સુધી ચાલે છે. રાઉન્ડનું માળખુંઃ • {conv_rounds} ફ્રી-ચેટ ટર્ન • 1 નિર્ણયનો વળાંક - પ્રતિસ્પર્ધી દીઠ એક ટોકન સબમિટ કરોઃ '[<opp-id> cooperate]' અથવા '[<opp-id> defect]' (એટલે કે '[1 defect] [2 cooperate]; ડિફૉલ્ટ એ 'સહકાર' છે). જોડી મુજબની ચૂકવણીની મેટ્રિક્સ (દરેક અનઓર્ડર્ડ જોડી પર લાગુ): - બંને સહકાર -> {reward} - બંને ખામી -> {punishment} - તમે ખામી છો, તેઓ સહકાર -> {temptation} - તમે સહકાર કરો, તેઓ ખામી -> {sucker} બધા રાઉન્ડના અંતે સૌથી વધુ સ્કોર ધરાવતા ખેલાડી જીતે છે."
+  },
+  "round": {
+    "start": "─── શરૂઆત રાઉન્ડ {round} ─── તમે આગામી {conv_rounds} રાઉન્ડ માટે મુક્તપણે વાતચીત કરી શકો છો.",
+    "chat_finished": "રાઉન્ડ {round} માટે ચેટ પૂર્ણ થઈ ગઈ છે. તમારા નિર્ણયો સબમિટ કરો, પ્રતિ વિરોધી માટે એક ટોકન: `[pid cooperate]` અથવા `[pid defect]`."
+  },
+  "results": {
+    "header": "### રાઉન્ડ {round} - પરિણામોઃ",
+    "pair_line": "{observation} ખેલાડી {i} વિ ખેલાડી {j}એ અનુક્રમે {choice_i} અને {choice_j} પસંદ કર્યા (ખેલાડી {i}એ {gain_i} મેળવ્યું, ખેલાડી {j}એ {gain_j} મેળવ્યું)",
+    "scores_open": "{observation} -> વર્તમાન સ્કોર્સઃ ",
+    "score_first": "{observation}ખેલાડી {player_id} ({score})",
+    "score_next": "{observation}; ખેલાડી {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "અંતિમ સ્કોર્સઃ {scores}. રેન્કિંગ જૂથો (સૌથી ખરાબ→શ્રેષ્ઠ): {groups}"
+  }
+}

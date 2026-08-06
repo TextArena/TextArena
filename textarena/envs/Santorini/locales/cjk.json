@@ -1,0 +1,39 @@
+{
+  "_comment": "Santorini locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} intact. Never translate the ASCII {board}, the color names passed as {color}/{winner_color}/etc. (Navy/White/Grey), worker labels (N1, N2, W1, W2, G1, G2), the move token format [worker_id source dest build] / examples like [N1C1C2B2], board coordinates (A-E, 1-5), or level numbers.",
+  "_slots": {
+    "{color}": "The player's color/role name (Navy, White or Grey) - do not translate",
+    "{color_initial}": "First letter of the player's color, used to build the move token (N, W or G) - do not translate",
+    "{board}": "The rendered ASCII board - insert as-is, do not translate",
+    "{valid_moves}": "Comma-separated list of valid move tokens - do not translate",
+    "{expected_color}": "Color of the worker that was addressed - do not translate",
+    "{player_color}": "The acting player's own color - do not translate",
+    "{worker_num}": "A worker number, 1 or 2",
+    "{source}": "Source board coordinate, e.g. C2 - do not translate",
+    "{dest}": "Destination board coordinate, e.g. C3 - do not translate",
+    "{build}": "Build board coordinate, e.g. B2 - do not translate",
+    "{player_id}": "A player's number, e.g. 0 or 1",
+    "{winner_id}": "The winning player's number",
+    "{winner_color}": "The winning player's color - do not translate",
+    "{loser_id}": "The losing player's number",
+    "{loser_color}": "The losing player's color - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Wena uli kutamba {color} mu michezo ya Santorini.\n\nMvila ya Michezo:\n1. Kuendelea:\n   - Vatamba vangana kuenda kwa miraba iliyo karibu (kujumuisha diagonal)\n   - Vatamba vangana kwenda kwa miraba iliyo na vatamba vingine au kupala\n   - Vatamba vangana kupanda kiwango kimoja, lakini vangana kushuka kiwango chochote\n\n2. Kujenga:\n   - Lazima mujenge kwa mraba ulio karibu na ambapo mtumaji wako alienda\n   - Vatamba vangana kujenga ambapo mtumaji yeyote aliwima\n   - Vatamba vangana kujenga juu ya kupala (kiwango 4)\n   - Kujenga kuongeza kiwango kimoja (au kuunda kupala kwa kiwango 3)\n\n3. Masharti ya Kushinda:\n   - Ushinde kwa kuhamisha mtumaji hadi kiwango 3\n   - Ushinde ikiwa mshindani hana michezo halali\n\nFanya mchezo wako kwa umbo [worker_id source dest build]\nMfano: [{color_initial}1C1C2B2] inamaanisha hamisha {color} mtumaji 1 kutoka C1 hadi C2 na ujenzi kwa B2\nUnaweza kuongeza maandishi zaidi katika ujumbe wako, lakini lazima utaje tu muundo wa mchezo halali mara moja.\n",
+    "board_state": "\nHali ya sasa ya ubao:\n{board}\n",
+    "valid_moves": "\nMichezo halali: {valid_moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Umbo la mchezo si sahihi. Umbo unalotarajiwa: [worker_id source dest build], kwa mfano [N1C1C2B2]",
+    "wrong_player": "Vatamba vangana kusonga {expected_color} mtumaji (wena uli {player_color})",
+    "no_worker": "Hakuna mtumaji {worker_num} kwa nafasi {source}",
+    "bad_move": "Mchezo si sahihi kutoka {source} hadi {dest}",
+    "bad_build": "Ujenzi si sahihi kwa {build}"
+  },
+  "game_action": {
+    "moved": "Mchezaji {player_id} ({color}) alihamisha mtumaji {worker_num} kutoka {source} hadi {dest} na ujenzi kwa {build}"
+  },
+  "outcome": {
+    "win_level3": "Mchezaji {winner_id} ({winner_color}) alishinda kwa kuhamisha mtumaji hadi kiwango 3!",
+    "no_moves": "Mchezaji {loser_id} ({loser_color}) hana michezo halali. Mchezaji {winner_id} ({winner_color}) anashinda!"
+  }
+}

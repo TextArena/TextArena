@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "သင်ဟာ ကစားသမား {player_id} ဖြစ်တယ်။ သင့်ရဲ့ သင်္ကေတက '{symbol}' ဖြစ်ပါတယ်။ သင့်ရဲ့ သင်္ကေတကို ၅x၅ ဘုတ်ပေါ်တွင် ၄ ခုစီလိုင်းတစ်ခုဖွဲ့ဖို့ အလှည့်ကျထားပါ။ လိုင်းတွေဟာ အလျားလိုက်၊ ထောင်လိုက် သို့မဟုတ် ထောင့်ဖြတ်ဖြစ်နိုင်ပါတယ်။ ဆဲလ် ၄ ကို မှတ်သားဖို့ '[4]' ပုံစံကို အသုံးပြုပြီး သင့်ရဲ့ ရွေ့လျားမှုကို ပေးပို့ပါ။"
+  },
+  "board": {
+    "current_board": "လက်ရှိဘုတ်အဖွဲ့: {board} လက်ရှိပြောင်းရွှေ့မှုများ: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "အကွက်သည် 0-{max_cell} ဖြစ်သည့်နေရာတွင် \"[cell]\" ကို အသုံးပြုပါ။",
+    "out_of_range": "မမှန်သော ကွက်နံပါတ်: {cell} ၀ နှင့် {max_cell} ကြားတွင်ရှိရမည်။",
+    "already_occupied": "အခန်း {cell} သည် နေရာယူပြီးသား ဖြစ်သည်။",
+    "made_invalid": "ကစားသမား {player_id} သည် မမှန်ကန်သော လှုပ်ရှားမှုတစ်ခု ပြုလုပ်ခဲ့သည်။"
+  },
+  "game_action": {
+    "placed": "ကစားသမား {player_id} သည် မိမိ၏ အမှတ်အသား ({symbol}) ကို ကွင်း ({row}, {col}) တွင် ထားသည်။"
+  },
+  "outcome": {
+    "win": "ကစားသမား {player_id} ({symbol}) နိုင်တယ်။",
+    "draw": "ကစားပွဲက နိုင်ပွဲမရှိဘဲနဲ့ အဆုံးသတ်သွားခဲ့တယ်။"
+  }
+}

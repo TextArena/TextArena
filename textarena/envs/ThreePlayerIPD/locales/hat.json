@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ou se Jwè {player_id} nan yon 3-jwè Iterated Prisoner's Dilemma. Match la dure {num_rounds} tou. \nEstrikti tou: \n• {conv_rounds} tou chach pou pale \n• 1 tou desizyon - soumèt yon token pa opozan: '[<opp-id> cooperate]' oswa '[<opp-id> defect]' (sa vle di '[1 defect] [2 cooperate]'; defo ou se 'koopere'). \nMatris pey pa pey pou chak pe (apliye a chak pe san odre):\n  - Tout moun koopere  ->  {reward}\n  - Tout moun defye     ->  {punishment}\n  - Ou defye, yo koopere ->  {temptation}\n  - Ou koopere, yo defye ->  {sucker}\nJwè(a) ak skò pi wo a la fin tou yo genyen."
+  },
+  "round": {
+    "start": "─── Kòmanse Tou {round} ───\tOu ka pale lib pou {conv_rounds} tou ki vin.",
+    "chat_finished": "Chat la fini pou tou {round}. Soumèt desizyon ou, yon token pou chak adversè: `[pid cooperate]` oswa `[pid defect]`."
+  },
+  "results": {
+    "header": "### Tou {round} - Rezilta:",
+    "pair_line": "{observation}\n\t Jwè {i} vs Jwè {j} deside {choice_i} ak {choice_j} respè (Jwè {i} genyen {gain_i}, Jwè {j} genyen {gain_j})",
+    "scores_open": "{observation} -> Nòt aktyèl: ",
+    "score_first": "{observation}Jwè {player_id} ({score})",
+    "score_next": "{observation}; Jwè {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Skò fini: {scores}.  Gwoupman ranking (pi mal→pi byen): {groups}"
+  }
+}

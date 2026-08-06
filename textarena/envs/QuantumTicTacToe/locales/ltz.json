@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Dir sidd Spiller {player_id} a Quantum Tic Tac Toe.\nÄert Symbol ass '{symbol}', an Äer Zuchzuelen sinn ëmmer {parity} (z.B. X1, X3 oder O2, O4).\n\nZil: Gewënnt duerch d'Bilden vun enger Linn vu dräi klassesche Marken (verfestegt aus Superpositiounen).\n\nWéi spillt een:\n- Plazéiert bei jiddwer Zuch e spooky Mark an zwou verschidde leere Quadraten am Format '[a,b]'.\n- Dës Marken sinn verknëppt an etikettéiert wéi 'X1 / X1' oder 'O4 / O4'.\n- Dir kënnt keng spooky Marken an engem Quadrat plazéieren, dat scho verfestegt ass.\n\nKollapsreegel:\n- Wann Äer Zuch e Zyklus am Verknëppungsgraph schaaft, kollabéiert e automatesch.\n- Jiddwer spooky Mark am Zyklus wandelt sech an eng klassesch Mark an enger vu sengen zwou Positiounen.\n- All ofhängeg spooky Marken kollabéieren och.\n\nVictoire:\n- D'Spill endegt, wann e Spiller dräi klassesch Marken an enger Rei huet.\n- Wann béid Spiller eng Linn wärend dem selwechten Kollaps kréien, gewënnt deen mat der niddregster maximaler Zuchzuel.\n\nBeispillzuch: '[0,4]' plazéiert e spooky Mark an den Zellen 0 an 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Board:\n\n{board}\n\nÄntwert Är Iwwerweisung als '[a,b]' fir eng quantumesch Mark an zwee Plazen ze setzen."
+  },
+  "invalid_move": {
+    "wrong_format": "Ongülteg Format. Benotzt \"[a,b]\".",
+    "invalid_cells": "Ongëlteg oder duplizéiert Zellindex.",
+    "already_solidified": "Eng vun den Zellen ass schonn ofgehale ginn."
+  },
+  "game_action": {
+    "placed": "Spiller {player_id} huet seng Symbol an enger Superpositioun tëscht den Zellen {pos_a} an {pos_b} gesat."
+  },
+  "game_message": {
+    "dependent_resolved": "Ofhängeg Superpositioun geléist. Zell ({r}, {c}) ass elo {symbol}.",
+    "last_cell_resolved": "Superpositioun fir déi lescht Zell geléist. Zell ({r}, {c}) ass elo {symbol}.",
+    "superposition_resolved": "Superpositioun geléist. Zell ({r}, {c}) ass elo {symbol}."
+  },
+  "outcome": {
+    "win": "De Spiller {player_id} gewënnt mat gefestegt Marken!",
+    "draw": "D'Spill ass eng Rei!"
+  }
+}

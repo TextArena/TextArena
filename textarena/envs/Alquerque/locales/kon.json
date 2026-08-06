@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} ({piece}). Opponent is ({opp}).\nSubmit moves as '[a2 a3]' (from → to).\n- A normal move is one forward step to an adjacent empty vertex.\n- A capture is a jump over an adjacent enemy piece landing on the empty node beyond.\nEach capture yields {score_per_capture} points.\nGame ends after {max_moves} moves or when a player has no legal move."
+  },
+  "board": {
+    "current_board": "Sukula #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "Yo kele mbote ve. Sadila \"[a2 a3]\".",
+    "unknown_square": "Kisika ya bo mezaba ve.",
+    "not_your_piece": "Nge kele ve ti kiyeka ya kutuba mambu yina me katuka na muntu mosi.",
+    "dest_not_empty": "Kisika ya bo kekwenda kele ve mpamba.",
+    "illegal": "Kusala mutindu yina kele ve na nsiku."
+  },
+  "game_action": {
+    "captured": "Mwana {player_id} meka muntu mosi! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Muntu ya kebula {player_id} kele ve ti bibende.",
+    "cannot_move": "Muntu yina kebula {player_id} lenda tambula ve.",
+    "higher_score": "Bo me nunga na kukanga bantu mingi.",
+    "move_limit": "Bo me kuma na ndilu ya bo lenda tambula."
+  }
+}

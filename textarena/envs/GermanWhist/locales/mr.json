@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "खेळ सुरू होतो. ट्रम्प सूट: {trump_suit} (ट्रम्प कार्ड: {trump_str}).",
+    "no_trump_card": "नाही"
+  },
+  "player_prompt": {
+    "intro": "तुम्ही जर्मन व्हिस्टमध्ये प्लेअर {player_id} आहात. {phase_info} तुम्ही {hand_size} कार्ड धारण करता. '[play N]' असलेले कार्ड खेळा, जेथे एन आपल्या हातात त्याचे स्थान आहे (उदाहरणार्थ '[play 3]').",
+    "phase_learning": "शिकण्याची अवस्था: प्रत्येक युक्तीचा विजेता तोंडावर असलेले कार्ड घेतो आणि हरणारा डेकमधून पुढील कार्ड काढतो. या टप्प्यात जिंकलेल्या युक्त्या विजयासाठी मोजल्या जात नाहीत.",
+    "phase_playing": "खेळण्याची अवस्था: डेक संपला आहे. आतापासून प्रत्येक युक्ती विजयासाठी मोजली जाते."
+  },
+  "next_card": {
+    "playing_phase": "कोणतेही कार्ड ऑफर केले जात नाही - खेळण्याची अवस्था सुरू झाली आहे.",
+    "deck_empty": "डेक रिक्त आहे - कोणतेही कार्ड ऑफर केलेले नाही.",
+    "available": "कार्ड ऑफर: {card}",
+    "available_trump": "कार्ड ऑफर: {card} (ट्रम्प)"
+  },
+  "invalid_move": {
+    "wrong_format": "अवैध चाल स्वरूप. आपल्या हातात असलेले एनथ कार्ड खेळण्यासाठी '[play N]' वापरा.",
+    "bad_position": "ती कार्ड स्थिती अस्तित्वात नाही. तुमच्याकडे {hand_size} कार्ड आहेत.",
+    "must_follow_suit": "तुम्हाला सूटचे अनुसरण करावे लागेल आणि {lead_suit} कार्ड खेळावे लागेल.",
+    "invalid_play": "ते कार्ड खेळता येणार नाही."
+  },
+  "game_action": {
+    "played": "खेळाडू {player_id} खेळला {card}."
+  },
+  "trick": {
+    "won": "{winner_id} खेळाडू {card} सह युक्ती जिंकतो.",
+    "won_learning": "{winner_id} खेळाडू {card} सह युक्ती जिंकतो आणि चेहरा-अप कार्ड घेतो."
+  },
+  "phase": {
+    "learning_complete": "डेक संपला आहे. शिकण्याची अवस्था संपली आहे - प्रत्येक उर्वरित युक्ती विजयासाठी मोजली जाते."
+  },
+  "draw": {
+    "winner_received": "तुम्ही हा खेळ जिंकला आणि तुम्हाला {card} मिळाले.",
+    "loser_received": "तुम्ही हा ट्रिक गमावला आणि डेक वरून {card} काढला.",
+    "winner_preview": "पुढील कार्ड {card} आहे."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "आतापर्यंत जिंकलेली युक्ती - खेळाडू ०: {tricks0}, खेळाडू १: {tricks1}",
+    "scores_playing": "स्कोअरिंग ट्रिक्स - खेळाडू ०: {tricks0}, खेळाडू १: {tricks1}",
+    "phase": "टप्पा: {phase}",
+    "phase_learning": "टप्पा: {phase} ({remaining_cards} डेकमध्ये सोडलेले कार्ड)"
+  },
+  "hand": {
+    "no_cards": "कार्ड नाही",
+    "no_cards_in_hand": "हाताने कार्ड नाही",
+    "header": "तुझा हात:",
+    "trump_indicator": "(ट्रम्प)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "अद्याप ही युक्ती खेळलेली नाही.",
+    "header": "चालू युक्ती:",
+    "trump_indicator": "(ट्रम्प)",
+    "card_line": "{observation} खेळाडू {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "खेळ सुरू झाला नाही",
+    "header": "=== जर्मन व्हिस्ट गेम ===",
+    "phase": "{observation} टप्पा: {phase}",
+    "trump_suit": "{observation} ट्रम्प सूट: {trump_suit}",
+    "trump_card": "{observation} ट्रंप कार्ड: {card}",
+    "cards_left": "{observation} डेकमध्ये सोडलेले कार्डः {count}",
+    "next_card": "{observation} विजेत्यासाठी पुढील कार्ड: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} सध्याची युक्ती:",
+    "trump_indicator": "(ट्रम्प)",
+    "trick_line": "{observation} खेळाडू {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} खेळाडू {player_id}: {scoring} गुण मिळवण्याच्या युक्त्या ({tricks} एकूण), {hand_size} कार्ड हातात"
+  },
+  "outcome": {
+    "summary": "शिकण्याची अवस्था - खेळाडू ०: {l0}, खेळाडू १: {l1}. खेळण्याची अवस्था - खेळाडू ०: {p0}, खेळाडू १: {p1}. खेळाडू {winner_id} ने {winner_tricks} गुणांची युक्ती करून जिंकले!"
+  }
+}

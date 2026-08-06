@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ame wò {player_id} le agbalẽ a ƒe awuawu kple Malice. Ðoɖo wò ƒe ɖoƒe nye be wòaxɔ ɖe eƒe payoff pile la ƒe agbalẽ.\n\n### Agbalẽ ƒe Nukpɔkpɔ:\n- Ðoɖo wò ƒe ɖoƒe nye be wòaɖe eƒe payoff pile la ƒe agbalẽ le center piles la dzi.\n- Wòateŋu agbalẽ tso afisia:\n  1. Wò **alo** (wòaxɔ ɖe eƒe ƒe agbalẽ 5 le alo la).\n  2. Eƒe **payoff pile ƒe agbalẽ ɖeka**.\n  3. Eƒe **discard piles ƒe agbalẽ ɖeka**.\n\n### Agbalẽ ƒe Ɖoɖo:\n- Wòateŋu agbalẽ ɖe center pile dzi be wòaɖe **akpa ɖeka gɔ̃** eƒe agbalẽ ɖeka dzi (center piles la xɔ ɖe Ace kple Queen; Kings wòateŋu le agbalẽ ɖeka dzi gake menɔaɖe akpa ɖeka ƒe ɖoɖo. Esi wòakpɔ King le 4 dzi la, wòateŋu King la 5 kple agbalẽ ɖeka ƒe ɖoɖo 6).\n- Esi wòateŋu agbalẽ aɖeke o, wòaɖe **agbalẽ ɖeka** ɖe eƒe discard piles la ɖe eƒe ɖoƒe ƒe agbalẽ.\n- Esi center pile la xɔ Queen la, wòaɖe agbalẽ la ɖe eƒe agbalẽ.\n- Akpa ɖeka ƒe ɖoɖo nye: A=1, 2=2, ..., 9=9, J=10, Q=11, K le agbalẽ ɖeka dzi.\n\n### Ɖoɖo:\n1. **Draw**: Le eƒe ɖoƒe ƒe agbalẽ la, draw agbalẽ ɖe eƒe alo ɖe 5. Enter **[draw]** be wòaɖe.\n2. **Play a Card**: Be wòateŋu agbalẽ ɖe center pile dzi, specify agbalẽ kple center pile la: **[play A♠ 0]** (be 'A♠' nye agbalẽ kple '0' nye center pile index).\n3. **Discard**: Esi wòateŋu agbalẽ aɖeke o, discard agbalẽ ɖeka ɖe eƒe discard piles la ɖe eƒe ɖoƒe ƒe agbalẽ. Enter **[discard A♠ 1]** (be 'A♠' nye agbalẽ kple '1' nye discard pile index). Note be wòateŋu agbalẽ ɖeka ɖe payoff pile la o. Wòateŋu agbalẽ ɖeka ɖe eƒe alo la.\n\n"
+  },
+  "board": {
+    "current_board": "Dɔwɔla Tɔxɔ Dɔwɔla:\n\n{board}\nDɔwɔla Tɔxɔ Wɔna: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Titina ƒe Dzogbewo --- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Ame {player_id} ƒe Nukpɔkpɔ ---\n",
+    "payoff": "{observation}Payoff Pile (Agbalẽ ɖeka): {top_card}, Payoff Pile ƒe Dzi: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "Womegatsɔ naneke o."
+  },
+  "game_message": {
+    "no_cards_left": "Meka agbalẽ aɖeke o le draw ɖe. Ðɔ wò ƒe agbalẽ tso afisia:\n  1. Wò **alo**.\n  2. Eƒe **payoff pile ƒe agbalẽ ɖeka**.\n  3. Eƒe **discard piles ƒe agbalẽ ɖeka**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Mɔnu si ŋu womeɖe mɔ ɖo o. Fefewɔla {player_id} meɖo eŋu kple mɔnu nyui aɖe le akplowo dome o.",
+    "invalid_play": "Ɖoɖo ƒe agbalẽ ɖeke o. Ame {player_id} ƒe agbalẽ {card} le center pile {index} dzi.",
+    "discard_from_payoff": "Ðela {player_id} dze agbagba be yeatsɔ ka aɖe si le fefenu la me aƒu gbe.",
+    "discard_not_in_hand": "Ðela {player_id} dze agbagba be yeatsɔ ka si mele esi o aƒu gbe.",
+    "wrong_move_type": "Mɔnu si mesɔ o. Fefewɔla {player_id} meɖo eŋu kple mɔnu nyuitɔ o."
+  },
+  "game_action": {
+    "you_drew": "Èda ka.",
+    "opponent_drew": "Fefewɔla {player_id} ɖe ka.",
+    "you_played": "Èƒo {card} le titinaƒuka dzi {index}.",
+    "opponent_played": "Fefewɔla {player_id} ƒoa {card} le titinaƒome dzi {index}.",
+    "you_discarded": "Mi dɔ {card} si dɔwɔla tɔxɔ {index}, eye wɔ nyɛ mi si wɔ tɔxɔ. Dɔla {next_player_id} na ɖe tɔxɔ.",
+    "opponent_discarded": "Dɔla {player_id} wɔ dɔ {card} si dɔwɔla tɔxɔ {index}, eye wɔ nyɛ dɔla si wɔ tɔxɔ. Dɔla {player_id} ɖe wɔna tɔxɔ ɖi ɖi wɔna ɖe si. Dɔla {next_player_id}, mi wɔ na ɖe tɔxɔ. Ɖe na mi kɔmi tɔxɔ ɖe si na ɖɛsi [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Dɔla {current_player} ɖe dɔ wɔna dɔwɔla tɔxɔ! Dɔla {current_player} di ɖe!",
+    "deadlock_player_0": "Dɔwɔla tɔxɔ ɖi ɖi! Dɔla 0 di ɖe na {player_0_payoff} kɔmitɔ wɔna si dɔla 1 ɖe {player_1_payoff} kɔmitɔ.",
+    "deadlock_player_1": "Dɔwɔla tɔxɔ ɖi ɖi! Dɔla 1 di ɖe na {player_1_payoff} kɔmitɔ wɔna si dɔla 0 ɖe {player_0_payoff} kɔmitɔ.",
+    "deadlock_tie": "Deadlock aɖe kple tie! Ame ƒe agbalẽ ɖeka ɖe {player_0_payoff} kple Ame {current_player} aɖe eƒe ɖoƒe."
+  }
+}

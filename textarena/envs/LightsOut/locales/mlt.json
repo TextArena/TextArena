@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Merħba għal Lights Out! Għandek grid ta' {size}x{size} ta' dwal.\nL-għan tiegħek hu li tixgħel IL-DWAL KOLLHA (rappreżentati b'.')\nMeta tħabbar dawl, jinxtegħel hu stess u ġirien tiegħu tad-dawra (fuq/isfel/xellug/lemin).\nIkteb [row col] biex tħabbar dawl (0-indiċjat, hekk għaldaqstant firxa valida hi 0-{max_index}).\nGħandek sa {max_turns} movimenti biex tissolvi l-puzzle.\nLeġġenda: 'O' = dawl MIXGĦEL, '.' = dawl MITFI"
+  },
+  "board": {
+    "current_state": "Stat attwali tal-grilja (Mossa {moves_made}, {moves_left} mossi fadal, {completion}% kompleta):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "L-azzjoni għandha tkun fil-format [row col] fejn ir-ringiela u l-kolonna jkunu numri interji minn 0 sa {max_index}.",
+    "out_of_range": "Il-koordinati jridu jkunu bejn 0 u {max_index}. Int ħadt [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Congratulations! Inti solvut il-puzzle fil {moves_used} jiċċaqlaq!",
+    "loss": "Logħba hija spiċċata! Int uża l-mozzjonijiet kollha {max_turns} mingħajr ma ssolvja l-puzzola. Komplut finali: {completion}%\nStat finali:\n{grid}"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "إنتا لعّاب {player_id} تلعب بلون {colour} ({piece}) في لعبة أوتيللو.\nهدفك هو يكون عندك قطع أكثر بلونك على الطابلة في نهاية اللعبة.\nفي دورك، حط قطعة بحيث تكون جنب قطعة أو أكثر من قطع الخصم-في أي اتجاه (أفقي، عمودي أو قطر)-بين قطعتك الجديدة وقطعة تانية من قطعك الموجودة. كل قطع الخصم المحصورة هتقلب لبلونك.\nدير حركتك بالشكل '[row, col]'."
+  },
+  "board": {
+    "game_board": "لوحة اللعبة:\n{board}",
+    "valid_moves": "{observation}\nالحركات الصحيحة: {moves}",
+    "no_valid_moves_reset": "{observation}\nما فيش تحركات صالحة - قد إكون لازم تنتظر دور تاني.",
+    "no_valid_moves_step": "{observation} ما فما حركات صالحة، يمكن تخطيها.",
+    "scores_reset": "{observation}\nالنقاط الحالية - الأسود: {black_count}، الأبيض: {white_count}\n",
+    "scores_step": "{observation}\nالنقاط - الأسود: {black_count}، الأبيض: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "المنتقلات لازم تكون في شكل [row, col].",
+    "illegal": "حركة غير قانونية. الحركات الصحيحة: {valid}"
+  },
+  "game_action": {
+    "skipped": "لاعب {pid} كان لازم يخلي دورو يمر",
+    "played": "لاعب {pid} ({piece}) لعبت [{r}, {c}] وقلبت {flipped} قطعة(ات)"
+  },
+  "game_message": {
+    "must_skip": "اللاعب {pid} ({piece}) ليس لديه حركات صحيحة ويتعين عليه التخطي."
+  },
+  "outcome": {
+    "black_wins": "الأسود يفوز {black_count}-{white_count}.",
+    "white_wins": "الأبيض يفوز {white_count}-{black_count}.",
+    "draw": "تعادل {black_count}-{white_count}."
+  }
+}

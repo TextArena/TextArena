@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Dilemma ya Mfungwa wa Mchezaji 3. Mchezo huu utadumu kwa {num_rounds} mizunguko.\nMuundo wa mzunguko:\n• {conv_rounds} mizunguko ya kuongea kwa uhuru\n• Mzunguko 1 wa kufanya maamuzi - tuma kipande kimoja kwa mpinzani: '[<opp-id> cooperate]' au '[<opp-id> defect]' (yaani '[1 defect] [2 cooperate]'; chaguo la awali ni 'cooperate'). \nMatrix ya malipo ya jozi (inayotumika kwa kila jozi isiyo na mpangilio):\n  - Wote wanashirikiana  ->  {reward}\n  - Wote wanakataa     ->  {punishment}\n  - Wewe unakataa, wao wanashirikiana -> {temptation}\n  - Wewe unashirikiana, wao wanakataa -> {sucker}\nMchezaji (wachezaji) aliye na alama ya juu zaidi mwishoni mwa mizunguko yote atashinda."
+  },
+  "round": {
+    "start": "─── Kuanza Mzunguko {round} ───\tUnaweza kujadiliana kwa uhuru kwa mizunguko {conv_rounds} ijayo.",
+    "chat_finished": "Mawazo ya kuongea yamekwisha kwa mzunguko {round}. Tuma maamuzi yako, kipande kimoja kwa mpinzani: `[pid cooperate]` au `[pid defect]`."
+  },
+  "results": {
+    "header": "### Gũtambia {round} - Ciĩga:",
+    "pair_line": "{observation}\n\t Mchezaji {i} dhidi ya Mchezaji {j} walichagua {choice_i} na {choice_j} mtawalia (Mchezaji {i} alipata {gain_i}, Mchezaji {j} alipata {gain_j})",
+    "scores_open": "{observation} -> Ngathĩti cia mahinda maya: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}  nĩ ũndũ wa gũkua gwakwa."
+  },
+  "outcome": {
+    "final": "Alama za mwisho: {scores}.  Vikundi vya utaratibu (mbaya→nzuri): {groups}"
+  }
+}

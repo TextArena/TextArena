@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jumakamasi Player {player_id} uka Quantum Tic Tac Toe.\nQ'arañamasi '{symbol}', ukatwa move numeronkama q'araña {parity} (e.g., X1, X3 o O2, O4).\n\nObjetivo: Gana ukhamawa clasico tres mark'akapampi (superposiciones solidificadas).\n\nKunjamsa Play:\n- Turno uka, ch'ama mark'a pusiña pampa dos diferentes vacíos cuadrados formato '[a,b]' ukan.\n- Mark'akapampi entrelazados, ukatwa etiquetados 'X1 / X1' o 'O4 / O4' jik'isitan.\n- Jumakamasipuniw ch'ama mark'akapampi cuadrado ukhamawa ya kolido (solidificado).\n\nRegla Kolido:\n- Jik'isitasi move ukhamawa ciclo uka entrelazamiento gráfico, kolido automatico.\n- Ch'ama mark'a ciclo uka ukhamawa clasico mark'a dos posiciones ukan.\n- Mark'akapampi dependientes ukatwa kolido.\n\nVictoria:\n- Juego uka tukuyiwa jumakamasi tres clasico mark'akapampi fila ukan.\n- Jumakamasipuniw dos jugadores fila ukan kolido, uno ukhamawa bajo max move numero gana.\n\nEjemplo move: '[0,4]' ch'ama mark'a pusiña celdas 0 ukatwa 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Pampa:\n\n{board}\n\nPresenta move ukhamawa '[a,b]' ch'ama mark'a pusiña dos ubicaciones."
+  },
+  "invalid_move": {
+    "wrong_format": "Jani chiqapa. \"[a,b]\" ukampiwa lurasiña.",
+    "invalid_cells": "Jan wali qillqatanaka, jan ukax payar qillqt'ata.",
+    "already_solidified": "Maynix niyaw k'ullk'u tukuwayxi."
+  },
+  "game_action": {
+    "placed": "Jugador {player_id} uñt'ayiw jisk'a qillqata wakichawipa k'itk'anaka {pos_a} ukat {pos_b} kati."
+  },
+  "game_message": {
+    "dependent_resolved": "Ch'iqanaka yapu q'alla. Ch'alla ({r}, {c}) k'iwita {symbol}.",
+    "last_cell_resolved": "Q'alla ch'iqanaka yapu. Ch'alla ({r}, {c}) k'iwita {symbol}.",
+    "superposition_resolved": "Ch'iqanaka yapu. Ch'alla ({r}, {c}) k'iwita {symbol}."
+  },
+  "outcome": {
+    "win": "¡Jugador {player_id} ukax wali suma ch'ullqhiñchatanakampiw atipt'i!",
+    "draw": "¡Ukax ch'usawja!"
+  }
+}

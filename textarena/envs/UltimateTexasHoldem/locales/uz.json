@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Hali hech qanday karta yoʻq",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Yagona o'yinchi vs diler\n\n📖 O'YIN HAQIDA:\n• Siz {start_chips} chip bilan boshlaysiz\n• 52 kartadan iborat bitta koloda (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Siz diler (uy) ga qarshi o'ynaysiz\n• Har bir raund Ultimate Texas Hold'em strukturasi bilan amalga oshiriladi: siz ANTE va BLIND betlarni qo'ydasiz, 2 teshik kartasini olasiz, bosqichlar davomida ixtiyoriy PLAY betlarni qo'ydasiz, so'ngra jamoat kartalarini ochib, eng yaxshi 5-kartalik qo'lingizni diler bilan solishtirasiz. Sizning maqsadingiz g'alaba miqdorini maksimallashtirish (sizning qo'lingiz yaxshiroq bo'lganda), yo'qotishlaringizni minimallashtirish (sizning qo'lingiz yomonroq bo'lganda).\n• O'yin siz 0 chip yoki undan kam bo'lganda (MAG'LUBIYAT) yoki 1000 raundni chip bilan tugatganda (G'ALABA) tugaydi\n\n💰 BETTING STRUKTURASI:\n• ANTE: Majburiy ${ante} bet har raundda\n• BLIND: Majburiy ${ante} bet har raundda\n• PLAY: Ixtiyoriy bet o'yin davomida. Raund davomida siz faqat quyidagilardan birini tanlashingiz mumkin: (${ante4} agar PRE-FLOP da, ${ante2} agar FLOP da, yoki ${ante} agar RIVER da. Shuningdek, siz RIVER da fold qilishingiz mumkin, qo'lni berib, hech qanday bet qo'ymasdan.)\n\n🎴 KARTA TARQATISH:\n• Siz 2 ochiq kartani olasiz (sizning teshik kartalaringiz)\n• Diler 2 yopiq kartani oladi (sizdan yashirin)\n• 5 jamoat kartasi dastlab yopiq tarzda tarqatiladi\n• Jamoat kartalari bosqichlar davomida progressiv ravishda ochiladi\n\n🏆 DILER MALAKASI:\n• Diler kamida bir juft (bir xil rangdagi 2 karta) ga ega bo'lishi kerak, 2 kartasidan va 5 jamoat kartasidan foydalanib.\n• Diler malakasi bet natijalariga ta'sir qiladi, keyinchalik tushuntiriladi.\n\n🎮 O'YIN BOSQICHLARI & HARAKATLAR:\n📋 PRE-FLOP:\n  • Harakatlar: [4x] (${ante4}) yoki [check]\n  • [4x]: ${ante4} PLAY bet qo'yish, birinchi 3 jamoat kartasini ochish\n  • [check]: Qo'shimcha bet qo'ymasdan, birinchi 3 jamoat kartasini ochish\n\n📋 FLOP:\n  • Agar 4x bet qo'yilgan bo'lsa: Faqat [skip] mavjud (avtomatik ravishda oxirgi 2 jamoat kartasini ochadi)\n  • Agar 4x bet qo'yilmagan bo'lsa: [2x] (${ante2}) yoki [check]\n  • [2x]: ${ante2} PLAY bet qo'yish, oxirgi 2 jamoat kartasini ochish\n  • [check]: Qo'shimcha bet qo'ymasdan, oxirgi 2 jamoat kartasini ochish\n\n📋 RIVER:\n  • Agar 4x yoki 2x bet qo'yilgan bo'lsa: Faqat [skip] mavjud (avtomatik ravishda shouga o'tish)\n  • Agar hech qanday PLAY bet qo'yilmagan bo'lsa: [1x] (${ante}) yoki [fold]\n  • [1x]: ${ante} PLAY bet qo'yish, shouga o'tish\n  • [fold]: Qo'lni berish, ANTE va BLIND betlarni yo'qotish\n\n📋 SHOWDOWN:\n  • Barcha kartalar ochiladi va baholanadi\n  • 7 kartadan (2 teshik + 5 jamoat) eng yaxshi 5-kartalik qo'l\n  • Betlar to'lov qoidalariga ko'ra hal qilinadi\n\n💎 BET TO'LOVLARI:\n📊 ANTE BET:\n  • Diler malakasi yo'q: PUSH (bet qaytariladi)\n  • Diler malakasi bor & siz g'alaba qozonasiz: 1:1 to'lov (bet + g'alaba)\n  • Diler malakasi bor & siz mag'lub bo'lasiz: Bet yo'qotiladi\n  • Durang: PUSH (bet qaytariladi)\n\n📊 BLIND BET:\n  • Diler malakasidan ta'sirlanmaydi\n  • Siz g'alaba qozonasiz: Bet qaytariladi va qo'lingiz kuchiga qarab qo'shimcha to'lov\n  • Siz mag'lub bo'lasiz: Bet yo'qotiladi\n  • Durang: PUSH (bet qaytariladi)\n\n📊 BLIND BET TO'LOV JADVALI:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Qo'shimcha to'lov yo'q\n\n📊 PLAY BET:\n  • Diler malakasidan ta'sirlanmaydi\n  • To'g'ridan-to'g'ri solishtirish: Sizning eng yaxshi qo'lingiz vs Dilerning eng yaxshi qo'li\n  • Siz g'alaba qozonasiz: 1:1 to'lov (bet + g'alaba)\n  • Siz mag'lub bo'lasiz: Bet yo'qotiladi\n  • Durang: PUSH (bet qaytariladi)\n\n🎯 POKER QO'L REYTINLARI (Eng yaxshidan eng yomoniga):\n  1. Royal Flush: A-K-Q-J-10 bir xil rangda\n  2. Straight Flush: 5 ketma-ket karta bir xil rangda\n  3. Four of a Kind: 4 karta bir xil rangda\n  4. Full House: 3 karta bir xil rangda + 2 karta boshqa rangda\n  5. Flush: 5 karta bir xil rangda\n  6. Straight: 5 ketma-ket karta\n  7. Three of a Kind: 3 karta bir xil rangda\n  8. Two Pair: 2 juft karta boshqa rangda\n  9. One Pair: 2 karta bir xil rangda\n  10. High Card: Eng yuqori karta g'alaba qozonadi\n\n⌨️  HARAKAT KOMANDALARI:\n• [4x] yoki [play bet 4x]: ${{self.ante_amount*4}} PLAY bet qo'yish\n• [2x] yoki [play bet 2x]: ${{self.ante_amount*2}} PLAY bet qo'yish\n• [1x] yoki [play bet 1x]: ${{self.ante_amount*1}} PLAY bet qo'yish\n• [check] yoki [c]: Check (qo'shimcha bet qo'ymasdan)\n• [fold] yoki [f]: Fold (qo'lni berish)\n• [skip] yoki [s]: Keyingi bosqichga o'tish (hech qanday harakat qo'ymasdan)\n\n💡 STRATEGIYA TIPS:\n• Kuchli boshlang'ich qo'llar (juftlar, yuqori kartalar) ko'pincha 4x betlarni oqlaydi\n• Diler malakasini hisobga oling - zaif qo'llar diler malakasi bo'lmasa, push bo'lishi mumkin\n• BLIND bet kuchli qo'llar bilan juda foydali bo'lishi mumkin (Royal Flush = 500:1!)\n• Chip stekingizni kuzatib boring! Agar u 0 yoki undan kam bo'lsa, siz mag'lub bo'lasiz.\n\n⚠️  MUHIM ESLATMALAR:\n• ANTE va BLIND betlar har raundda majburiy\n• PLAY betlar ixtiyoriy va strategik\n• Tog'ri harakatni kiritishingizni va faqat bitta harakatni bir vaqtda qilishingizni ta'minlang.\n\n",
+    "state": " ROUND {round}  Chips: {chips}  Sizning qo'lingiz: {hand}  Joriy garovlar: Ante ${ante}, Blind ${blind}, Play ${play}  Faza: {phase}  Mavjud harakatlar: {actions} "
+  },
+  "board": {
+    "round_start": " Raund {round} boshlandi! Qimor: ANTE ${ante}, BLIND ${blind}. Sizda {chips} chiplar qolgan.",
+    "your_hand": " Sizning qo'lingiz: {hand}",
+    "flop_revealed": " FLOP oshkor boʻldi: {cards}",
+    "river_revealed": " RIVER oshkor qildi: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Joriy bosqich uchun haqiqiy bo'lmagan harakatlar. Mavjud harakatlar: {available}",
+    "message": " Noto'g'ri harakat! Mavjud harakatlar: {available}"
+  },
+  "action": {
+    "folded": " Siz qo'lingizdan tushdingiz."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Deylerning qo'li: {cards}",
+    "community_cards": " Umumiy kartalar: {cards}",
+    "player_best": " O'yinchining eng yaxshi qo'li: {name} ({cards})",
+    "dealer_best": " Deylerning eng yaxshi qo'li: {name} ({cards})",
+    "ante_lost_folded": " ANTE tikish yo'qoldi! - ${ante} (katta)",
+    "blind_lost_folded": " BLAIND bahosi yo'qoldi! - ${blind} (katlangan)",
+    "ante_won": "✅ ANTE garov G'OLDI! +${amount}",
+    "ante_pushed": " ANTE tikish PUSHED! ${ante} qaytarildi",
+    "ante_lost": "❌ ANTE bet YO'QOTILDI! -${ante}",
+    "blind_won": "✅ BLAIND tikish G'OLDI! +${amount}",
+    "blind_pushed": " BLAIND tikish PUSHED! ${blind} qaytarildi",
+    "blind_lost": "❌ BLIND beti YO'QOTILDI! -${blind}",
+    "play_won": "✅ O'YIN BET G'OLDI! +${amount}",
+    "play_pushed": " PLAY tikish PUSHED! ${play} qaytarildi",
+    "play_lost": "❌ PLAY beti YO'QOTILDI! -${play}",
+    "net_gain": " Raund {round} yakunlandi! Sof foyda: +${net}",
+    "net_loss": " Raund {round} yakunlandi! Sof zarar: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": " O'YIN O'TDI! {max_turns} turlar yakunlandi. Sizda ${chips} chiplar bor - SIZ G'OLDINGIZ!",
+    "game_over_lose": "O'yin tugadi! Sizda chiplar tugadi. Diler g'alaba qozonadi!",
+    "reward_win": "O'yinchi ${chips} chiplari bilan {winner_rounds} turni yakunladi",
+    "reward_lose": "O'yinchining chiplari tugab qoldi {round}",
+    "reward_win_max": "O'yinchi ${chips} chiplari bilan {max_turns} turni yakunladi"
+  },
+  "hand_names": {
+    "royal_flush": "Qirollik toʻlqin",
+    "straight_flush": "Toʻgʻri toʻldirish",
+    "four_of_a_kind": "Toʻrtta bir xil",
+    "full_house": "Toʻla uy",
+    "flush": "Toʻldirish",
+    "straight": "Toʻgʻri",
+    "three_of_a_kind": "Bir xil uchta",
+    "two_pair": "Ikki juft",
+    "one_pair": "Bir juftlik",
+    "high_card": "Yuqori karta",
+    "unknown": "Nomaʼlum qoʻl"
+  }
+}

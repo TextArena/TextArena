@@ -1,0 +1,42 @@
+{
+  "_comment": "Le-Truc-Sprachdatei. Übersetze KEINE Schlüssel (linke Seite). Übersetze nur Werte (rechte Seite). Behalte jeden {placeholder} exakt bei. Übersetze niemals die Aktions-Tokens ('[play]', '[raise]', '[accept]', '[fold]'), die Kartenbezeichnungen/Farben (z. B. 3♠, A♥, K♦), die Spielerbezeichnungen (P0, P1) oder numerische Punktwerte.",
+  "_slots": {
+    "{pid}": "A player number, 0 or 1",
+    "{winner}": "The player number who won the trick or hand",
+    "{points}": "A hand point value, e.g. 1, 2 or 4",
+    "{p0}": "Player 0's running match score",
+    "{p1}": "Player 1's running match score",
+    "{cards}": "A space-separated list of the player's card labels, e.g. 'A♦ 3♠ A♥'",
+    "{card}": "A single card label, e.g. '3♠'",
+    "{legal}": "A comma-separated list of the currently legal action tokens"
+  },
+  "player_prompt": {
+    "intro": "Du spielst Le Truc, ein Stichspiel für 2 Spieler mit einem 40-Karten-Deck (Rang von hoch nach niedrig: 3 2 A K Q J 7 6 5 4).\nJede Hand erhältst du 3 Karten und spielst bis zu drei Stiche mit je einer Karte. Der höhere Rang gewinnt einen Stich unabhängig von der Farbe; gleiche Ränge sind unentschieden ('ungültig'). Gewinne die Hand, indem du zwei Stiche machst oder den ersten Stich gewinnst, wenn der andere unentschieden ist; ein ungültiger Stich zählt für denjenigen, der den ersten Stich gewonnen hat, und wenn alle drei unentschieden sind, punktet niemand.\nEine Hand ist 1 Punkt wert. In deinem Zug kannst du '[raise]' (truc), um den Einsatz zu erhöhen: 1->2, dann +2 für jede weitere Erhöhung bis 12. Dein Gegner muss '[accept]', '[fold]' oder erneut '[raise]'. Wer foldet, gibt die Hand auf, und der Erhöhende erhält den Einsatz von vor dieser Erhöhung.\nAktionen: '[play <rank>]' (z. B. '[play 3]'), '[raise]', '[accept]', '[fold]'. Wer zuerst 12 Punkte erreicht, gewinnt das Match."
+  },
+  "board": {
+    "new_hand": "### Neue Hand im Wert von {points} Pkt.\nDeine Karten: {cards}",
+    "valid_actions": "Jetzt erlaubt: {legal}."
+  },
+  "invalid_move": {
+    "unrecognised": "Unbekannte Aktion.",
+    "already_raised": "Bereits erhöht.",
+    "no_raise_to_accept": "Keine Erhöhung zum Annehmen.",
+    "cannot_fold": "Jetzt kann nicht gefoldet werden.",
+    "wrong_rank": "Du hältst diesen Rang nicht (Farben werden bei der Eingabe ignoriert).",
+    "must_respond": "Eine Erhöhung steht aus - antworte mit '[accept]', '[fold]' oder erneut '[raise]', bevor du eine Karte spielst.",
+    "max_stake": "Die Hand ist bereits das Maximum (12) wert; du kannst nicht weiter erhöhen."
+  },
+  "action": {
+    "raise": "P{pid} sagt truc an - die Hand ist jetzt {points} Pkt. wert. Der Gegner muss '[accept]', '[fold]' oder erneut '[raise]'.",
+    "accept": "P{pid} nimmt an - die Hand ist {points} Pkt. wert.",
+    "lead": "P{pid} spielt aus: {card}.",
+    "play": "P{pid} spielt {card}. Stich geht an P{winner}.",
+    "spoilt": "P{pid} spielt {card}. Ränge gleich - der Stich ist ungültig."
+  },
+  "outcome": {
+    "folded": "Gegner hat gefoldet.",
+    "hand_won": "Hand gewonnen von P{winner} (+{points} Pkt.). Spielstand - P0: {p0}, P1: {p1}.",
+    "void": "Alle drei Stiche ungültig - keine Punkte in dieser Hand. Spielstand - P0: {p0}, P1: {p1}.",
+    "reached_twelve": "12 Punkte erreicht."
+  }
+}

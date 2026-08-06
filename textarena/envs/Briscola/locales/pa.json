@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "ਬ੍ਰਿਸਕੋਲਾ ਗੇਮ ਸ਼ੁਰੂ ਹੋਈ! ਟਰੰਪ ਸੂਟ: {trump_suit} (ਟਰੰਪ ਕਾਰਡ: {trump_card})"
+  },
+  "prompt": {
+    "intro": "ਤੁਸੀਂ ਬ੍ਰਿਸਕੋਲਾ - ਖਿਡਾਰੀ {player_id} ਖੇਡ ਰਹੇ ਹੋ. ਟੀਚਾਃ ਚਾਲਾਂ ਜਿੱਤੋ ਅਤੇ ਸਭ ਤੋਂ ਵੱਧ ਅੰਕ ਇਕੱਠਾ ਕਰੋ (ਡੇਕ ਵਿਚ ਕੁੱਲ 120 ਅੰਕ). ਕਾਰਡ ਪੁਆਇੰਟਃ ਏ = 11, 3 = 10, ਕੇ = 4, ਕਿ Q = 3, ਜੇ = 2, ਹੋਰ = 0 ਕਾਰਡ ਪਾਵਰਃ ਏ > 3 > ਕੇ > ਕਿ > ਜੇ > 7 > 6 > 5 > 4 > 2 ਟਰੰਪ ਕਾਰਡ ਗੈਰ-ਟਰੰਪ ਕਾਰਡਾਂ ਨੂੰ ਹਰਾਉਂਦੇ ਹਨ ਭਾਵੇਂ ਸ਼ਕਤੀ ਦੀ ਪਰਵਾਹ ਕੀਤੇ ਬਿਨਾਂ. ਐਕਸ਼ਨਃ '[play X]' ਜਿੱਥੇ X ਤੁਹਾਡੇ ਹੱਥ ਵਿਚ ਕਾਰਡ ਦੀ ਸਥਿਤੀ (1-{max_pos}) ਹੈ "
+  },
+  "hand": {
+    "none": "ਕੋਈ ਕਾਰਡ ਨਹੀਂ",
+    "empty": "ਹੱਥ ਵਿੱਚ ਕੋਈ ਕਾਰਡ ਨਹੀਂ",
+    "header": "ਤੁਹਾਡਾ ਹੱਥ:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(ਟਰੰਪ)"
+  },
+  "trick": {
+    "empty": "ਅਜੇ ਤੱਕ ਕੋਈ ਵੀ ਕਾਰਡ ਇਸ ਚਾਲ ਨੂੰ ਨਹੀਂ ਖੇਡਿਆ।",
+    "header": "ਵਰਤਮਾਨ ਚਾਲ:",
+    "line": "ਖਿਡਾਰੀ {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "ਖਿਡਾਰੀ {player_id}: {points} ਪੰਨੇ",
+    "trump_info": "ਟਰੰਪ ਸੂਟ: {trump_suit}",
+    "trump_info_deck": "ਟਰੰਪ ਸੂਟ: {trump_suit} │ ਡੈਕ ਵਿਚ ਬਚੇ ਕਾਰਡ: {deck_count}",
+    "board": "{hand} {trick} ਸਕੋਰਃ {scores} {trump_info} [play X] ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੱਕ ਕਾਰਡ ਖੇਡੋ"
+  },
+  "invalid_move": {
+    "wrong_format": "[play X] ਦੀ ਵਰਤੋਂ ਕਰੋ ਜਿੱਥੇ X ਕਾਰਡ ਦੀ ਸਥਿਤੀ (1, 2, 3, ਆਦਿ) ਹੈ।",
+    "out_of_range": "ਅਵੈਧ ਕਾਰਡ ਸਥਿਤੀ. ਤੁਹਾਡੇ ਕੋਲ {count} ਕਾਰਡ ਹਨ (1-{count})"
+  },
+  "action": {
+    "played": "ਖਿਡਾਰੀ {player_id} ਖੇਡਿਆ {card}",
+    "trick_win": "ਖਿਡਾਰੀ {winner} {card} ਨਾਲ ਚਾਲ ਜਿੱਤਦਾ ਹੈ ਅਤੇ {points} ਅੰਕ ਪ੍ਰਾਪਤ ਕਰਦਾ ਹੈ!"
+  },
+  "outcome": {
+    "head": "ਗੇਮ ਓਵਰ! ਖਿਡਾਰੀ {winner} {points} ਅੰਕ ਨਾਲ ਜਿੱਤਦਾ ਹੈ! ਫਾਈਨਲ ਸਕੋਰਃ {scores}",
+    "player_line": "ਖਿਡਾਰੀ {player_id}: {points} ਅੰਕ ({tricks} ਚਾਲਾਂ) "
+  }
+}

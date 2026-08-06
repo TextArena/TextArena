@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "आप खिलाड़ी {player_id} बानी कइल बाड़न Iterated Prisoner's Dilemma खेल में जे {num_rounds} राउंड तक चली।\n\nखेल के संरचना:\n- हर निर्णय से पहिले आपके {total_conversation_rounds} पाली बातचीत करे के लिए मिली।\n- ओकर बाद दुनो खिलाड़ी एक साथ सहयोग करे या धोखा देबे के निर्णय लेबे।\n\nपेऑफ मैट्रिक्स (हर राउंड में एके जइसन):\n- दुनो सहयोग करी ➜ हर एक {cooperate_reward}\n- दुनो धोखा दी ➜ हर एक {mutual_defect_reward}\n- एक धोखा दी, एक सहयोग करी ➜ धोखेबाज {defect_reward}, सहयोगी {sucker_reward}\n\nखेल कइसे खेला जाए:\n- बातचीत के दौरान: आप कोई भी टेक्स्ट टाइप कर सकेनी।\n- निर्णय के चरण में: '[Cooperate]' या '[Defect]' (केस-इनसेंसिटिव) शामिल करें। आप टोकन से पहिले/बाद में अतिरिक्त टेक्स्ट जोड़ सकेनी।"
+  },
+  "phases": {
+    "conversation_finished": "बातचीत समाप्त हो गइल बा राउंड {round} खातिर. कृपया '[Cooperate]' या '[Defect]' के साथ जवाब दीजिए \\boxed{{}} में।",
+    "starting_round": "--- आरंभिक दौर {round} --- सुरु भइल",
+    "round_summary": "राउंड {round} के परिणाम:\n{outcome}\nप्लेयर 0 के {r0} मिलल (कुल {score_0}), प्लेयर 1 के {r1} मिलल (कुल {score_1})."
+  },
+  "outcome": {
+    "winner": "खिलाड़ी {winner} {win_score} - {lose_score} से जीतल।",
+    "draw": "दुनों खिलाड़ी गोल कइलें {s0}.",
+    "round_both_cooperate": "दुनों खिलाड़ी सहयोग कइले.",
+    "round_both_defect": "दुनों खिलाड़ी धोखा दिहलस।",
+    "round_p0_cooperates_p1_defects": "खिलाड़ी 0 सहयोग कइलस, खेलाड़ी 1 भटक गइल.",
+    "round_p0_defects_p1_cooperates": "खिलाड़ी 0 भागल, खेलाड़ी 1 सहयोग कइलस."
+  }
+}

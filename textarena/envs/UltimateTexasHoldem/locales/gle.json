@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Níl cártaí fós.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Imreoir Aonair i gcoinne an Díoltóra\n\n📖 FORBHREATHNÚ CHLUICHE:\n• Tosaíonn tú le {start_chips} chip\n• Deac cártaí amháin 52 cárta (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Imríonn tú i gcoinne an díoltóra (teach)\n• Leanann gach babhta struchtúr Ultimate Texas Hold'em: cuireann tú ANTE agus BLIND bets, faigheann tú 2 cárta poill, cinneann tú ar bhets PLAY roghnach trasna na gcéimeanna geallta, ansin nochtann tú cártaí pobail agus comparáidíonn tú do lámh 5 cárta is fearr i gcoinne lámh an díoltóra. Is é do sprioc do bhuannachas a uasmhéadú (nuair a bhfuil lámh níos fearr agat), agus do chaillteanais a íoslaghdú (nuair a bhfuil lámh níos measa agat).\n• Críochnaíonn an cluiche nuair a shroicheann tú 0 chip nó thíos ag tús an bhabhta (CAILLTEANAS) nó nuair a chríochnaíonn tú 1000 babhta le chip (BUA)\n\n💰 STRUCHTÚR GEALLTA:\n• ANTE: Geall ${ante} éigeantach gach babhta\n• BLIND: Geall ${ante} éigeantach gach babhta\n• PLAY: Geall roghnach le linn an chluiche. Tríd an babhta, féadfaidh tú aon cheann amháin de na roghanna seo a leanas a roghnú: (${ante4} má dhéantar ag PRE-FLOP, ${ante2} má dhéantar ag FLOP, nó ${ante} má dhéantar ag RIVER. Féadfaidh tú freisin fold ag river, ag tabhairt suas ar an lámh, agus gan aon gheall a dhéanamh.)\n\n🎴 DÁILEADH CÁRTAÍ:\n• Faigheann tú 2 cárta os cionn (do cártaí poill)\n• Faigheann an díoltóir 2 cárta os ís (folaithe ón gcroílár)\n• Dáiltear 5 cárta pobail os ís ar dtús\n• Nochtann cártaí pobail go progresach trí na gcéimeanna cluiche\n\n🏆 CÁILÍOCHT DÍOLTÓRA:\n• Caithfidh an díoltóir a bheith ag amháin le PAIR (2 cárta den rang céanna) chun cáiliú, ag úsáid na 2 cárta ina lámh agus na 5 cárta pobail.\n• Tá cáilíocht an díoltóra ag cur isteach ar thorthaí na ngeallta, mar a mhíneofar ina dhiaidh seo.\n\n🎮 CÉIMEANNA CLUICHE & GNIOMHAÍOCHTAÍ:\n📋 PRE-FLOP:\n  • Gníomhaíochtaí: [4x] (${ante4}) nó [check]\n  • [4x]: Cuir ${ante4} PLAY bet, nochtann na 3 cárta pobail chéad\n  • [check]: Gan aon gheall breise, nochtann na 3 cárta pobail chéad\n\n📋 FLOP:\n  • Má tá geall 4x déanta: Níl aon rogha ach [skip] (nochtann na 2 cárta pobail dheireanach go huathoibríoch)\n  • Mura bhfuil geall 4x déanta: [2x] (${ante2}) nó [check]\n  • [2x]: Cuir ${ante2} PLAY bet, nochtann na 2 cárta pobail dheireanach\n  • [check]: Gan aon gheall breise, nochtann na 2 cárta pobail dheireanach\n\n📋 RIVER:\n  • Má tá geall 4x nó 2x déanta: Níl aon rogha ach [skip] (leanann go huathoibríoch go dtí an showdown)\n  • Mura bhfuil aon gheall PLAY déanta roimhe seo: [1x] (${ante}) nó [fold]\n  • [1x]: Cuir ${ante} PLAY bet, leanann go dtí an showdown\n  • [fold]: Tabhair suas ar an lámh, cailltear ANTE agus BLIND bets\n\n📋 SHOWDOWN:\n  • Nochtann na cártaí go léir agus déantar iad a mheas\n  • Lámh 5 cárta is fearr ó 7 cárta (2 phoill + 5 phobail)\n  • Socraítear geallta de réir rialacha íocaíochta\n\n💎 ÍOCAÍOCHTAÍ GEALLTA:\n📊 ANTE BET:\n  • Níl an díoltóir cáilithe: PUSH (geall ar ais)\n  • Tá an díoltóir cáilithe & tú a bhuaigh: 1:1 íocaíocht (geall + buannachas)\n  • Tá an díoltóir cáilithe & tú a chaill: Geall caillte\n  • Comhscór: PUSH (geall ar ais)\n\n📊 BLIND BET:\n  • Níl aon tionchar ag cáilíocht an díoltóra\n  • Tú a bhuaigh: Geall ar ais agus íocaíocht bhreise bunaithe ar neart do lámh\n  • Tú a chaill: Geall caillte\n  • Comhscór: PUSH (geall ar ais)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Gan aon íocaíocht bhreise\n\n📊 PLAY BET:\n  • Níl aon tionchar ag cáilíocht an díoltóra\n  • Comparáid dhíreach: Do lámh is fearr i gcoinne lámh an díoltóra\n  • Tú a bhuaigh: 1:1 íocaíocht (geall + buannachas)\n  • Tú a chaill: Geall caillte\n  • Comhscór: PUSH (geall ar ais)\n\n🎯 RANGANNA LÁIMHE PÓCAIR (is fearr go measa):\n  1. Royal Flush: A-K-Q-J-10 den aon dath\n  2. Straight Flush: 5 cárta comhleanúnacha den aon dath\n  3. Four of a Kind: 4 cárta den rang céanna\n  4. Full House: 3 den aon rang + 2 den aon rang\n  5. Flush: 5 cárta den aon dath\n  6. Straight: 5 cárta comhleanúnacha\n  7. Three of a Kind: 3 cárta den rang céanna\n  8. Two Pair: 2 phéire den aon rang\n  9. One Pair: 2 cárta den rang céanna\n  10. High Card: An cárta is airde a bhuaigh\n\n⌨️  AICMÍ GNIOMHAÍOCHTA:\n• [4x] nó [play bet 4x]: Cuir ${{self.ante_amount*4}} PLAY bet\n• [2x] nó [play bet 2x]: Cuir ${{self.ante_amount*2}} PLAY bet\n• [1x] nó [play bet 1x]: Cuir ${{self.ante_amount*1}} PLAY bet\n• [check] nó [c]: Seiceáil (gan aon gheall breise)\n• [fold] nó [f]: Tabhair suas ar an lámh\n• [skip] nó [s]: Skip go dtí an chéad chéim eile (nuair nach bhfuil aon ghníomhaíocht de dhíth)\n\n💡 LEIDINNÍ STRAITÉISE:\n• Tosaíonn láimhe láidre (péirí, cártaí arda) go minic le geall 4x\n• Meas cáilíocht an díoltóra - láimhe laghdha féadfaidh push má tá an díoltóir gan cháilíocht\n• Féadfaidh geall BLIND a bheith an-ghnóthach le láimhe láidre (Royal Flush = 500:1!)\n• Féach do stóras chip! Má théann sé go 0 nó thíos ag tús an bhabhta, cailltear.\n\n⚠️  NÓTAÍ TÁBHACHTACHA:\n• Tá geallta ANTE agus BLIND éigeantach gach babhta\n• Tá geallta PLAY roghnach agus straitéiseach\n• Déan cinnte go gcuireann tú isteach an ghníomhaíocht cheart, agus aon ghníomhaíocht amháin ag an am.\n\n",
+    "state": "🎯 BÁBHAR {round}\n💰 Sliotáin: {chips}\n🎴 Do lámh: {hand}\n📊 Geallta reatha: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Céim: {phase}\n🎯 Gníomhartha ar fáil: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Round {round} started! Bets: ANTE ${ante}, BLIND ${blind}. Tá {chips} chip réamhshocraithe agat.",
+    "your_hand": " Do lámh: {hand}",
+    "flop_revealed": " FLOP nochtadh: {cards}",
+    "river_revealed": " RÍO nochtadh: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Gníomh neamhbhailí don chéim reatha.Gníomhaíochtaí atá ar fáil: {available}",
+    "message": " Gníomh neamhbhailí!Gníomhaíochtaí atá ar fáil: {available}"
+  },
+  "action": {
+    "folded": " D'fhilleadh tú."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! lámh an díliste: {cards}",
+    "community_cards": " Cártaí Comhphobail: {cards}",
+    "player_best": "🎴 Lámh is fearr an imreora: {name} ({cards})",
+    "dealer_best": "🎴 Lámh is fearr an déileálaí: {name} ({cards})",
+    "ante_lost_folded": " ANTE geall caillte! -${ante} (clóite)",
+    "blind_lost_folded": " BET BLIND LOST! -${blind} (clóite)",
+    "ante_won": "✅ ANTE geall WON! + ${amount}",
+    "ante_pushed": " ANTE geall PUSHED! ${ante} ar ais.",
+    "ante_lost": " ANTE geall caillte! -${ante}",
+    "blind_won": "✅ CÓINNÍON BET WON! +${amount}",
+    "blind_pushed": " BET BLIND PUSHED! ${blind} ar ais.",
+    "blind_lost": " BET BLIND LOST! -${blind}",
+    "play_won": "✅ PLAY geall WON! + ${amount}",
+    "play_pushed": " PLAY geall PUSHED! ${play} ar ais.",
+    "play_lost": " PLAY geall caillte! -${play}",
+    "net_gain": "🎉 Cluiche {round} críochnaithe! Buntáiste líon: +${net}",
+    "net_loss": "💸 Babhta {round} críochnaithe! Glancaillteanas: ${net}",
+    "separator": "Tá an t-amhrán seo ag teacht chun cinn i Meitheamh na bliana seo caite."
+  },
+  "outcome": {
+    "game_over_win": "🏁 CLUICHE THART! {max_turns} cluichí críochnaithe. Tá ${chips} chip agat - TÁ BUACHAILL AGAT!",
+    "game_over_lose": "🏁 TÁ AN CLUICHE THART! Tá tú as chips. Buaiteoir an déileálaí!",
+    "reward_win": "Chuir an imreoir {winner_rounds} cluichí i gcríoch le ${chips} chip",
+    "reward_lose": "D'éirigh leis an imreoir a bheith gan chips sa bhabhta {round}",
+    "reward_win_max": "Chuir an imreoir {max_turns} cluichí i gcríoch le ${chips} chip"
+  },
+  "hand_names": {
+    "royal_flush": "Cluiche Ríoga Flush",
+    "straight_flush": "Straight Flush (Slándáil)",
+    "four_of_a_kind": "Ceithre de chineál amháin",
+    "full_house": "Full Teach",
+    "flush": "Flush",
+    "straight": "Díreach.",
+    "three_of_a_kind": "Trí Chéine den Cineál céanna",
+    "two_pair": "Dhá Phéire",
+    "one_pair": "Pair amháin.",
+    "high_card": "Cárta Ard",
+    "unknown": "lámh anaithnid"
+  }
+}

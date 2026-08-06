@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "لوبه پیل کیږي. د ټرمپ سوټ: {trump_suit} (ټرمپ کارت: {trump_str}).",
+    "no_trump_card": "نه شته"
+  },
+  "player_prompt": {
+    "intro": "تاسو په آلمان کې د لوبغاړي {player_id} یاست. {phase_info} تاسو د {hand_size} کارتونه لرئ. د '[play N]' سره کارت ولوبوئ ، چیرې چې N ستاسو په لاس کې د هغې موقعیت دی (د مثال په توګه '[play 3]').",
+    "phase_learning": "د زده کړې مرحله: د هرې چال ګټونکی مخ پورته کارت اخلي او له لاسه ورکوونکی د ډیک څخه بل کارت راوباسي. پدې مرحله کې ګټل شوي چالونه د بریا لپاره نه شمیرل کیږي.",
+    "phase_playing": "د لوبې مرحله: ډیک ختم شوی دی. له دې وروسته هره چال د بریا لپاره حساب کیږي."
+  },
+  "next_card": {
+    "playing_phase": "هیڅ کارت په وړاندیز کې نه دی - د لوبې مرحله پیل شوې.",
+    "deck_empty": "ډیک خالي دی - هیڅ کارت په وړاندیز کې ندي.",
+    "available": "د کارت په وړاندې کول: {card}",
+    "available_trump": "د کارت په وړاندې: {card} (ټرمپ)"
+  },
+  "invalid_move": {
+    "wrong_format": "د حرکت غیرقانوني بڼه. د خپل لاس کې د NTH کارت لوبولو لپاره '[play N]' وکاروئ.",
+    "bad_position": "د کارتونو دا مقام شتون نه لري. تاسو {hand_size} کارتونه لرئ.",
+    "must_follow_suit": "تاسو باید د هغه په څیر عمل وکړئ او د {lead_suit} کارت ولوبیږئ.",
+    "invalid_play": "دا کارت نه شي لوبېدلی."
+  },
+  "game_action": {
+    "played": "لوبغاړی {player_id} د {card} لوبې وکړې."
+  },
+  "trick": {
+    "won": "لوبغاړی {winner_id} د {card} سره چال ګټي.",
+    "won_learning": "لوبغاړی {winner_id} د {card} سره ټرک ګټي او مخ پورته کارت اخلي."
+  },
+  "phase": {
+    "learning_complete": "د ډیک کار ختم شوی دی. د زده کړې مرحله پای ته رسیدلې - هر پاتې چال د بریا لپاره حساب کوي."
+  },
+  "draw": {
+    "winner_received": "تاسو دا ټرک وګټله او {card} مو ترلاسه کړ.",
+    "loser_received": "تاسو دا چال له لاسه ورکړ او {card} مو له ډیک څخه راوبلل.",
+    "winner_preview": "د وړاندیز په اړه بل کارت {card} دی."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand} د کډوالو د استوګنې د کمېټې غړی",
+    "scores_learning": "تر دې دمه ګټل شوي چلونه - لوبغاړی 0: {tricks0} ، لوبغاړی 1: {tricks1}",
+    "scores_playing": "د سکور کولو چلونه - لوبغاړی 0: {tricks0} ، لوبغاړی 1: {tricks1}",
+    "phase": "مرحله: {phase}",
+    "phase_learning": "مرحله: {phase} ({remaining_cards} کارتونه په ډیک کې پاتې دي)"
+  },
+  "hand": {
+    "no_cards": "د کارتونو نه",
+    "no_cards_in_hand": "په لاس کې کارتونه نشته",
+    "header": "ستاسو لاس:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "تر اوسه پورې د دې ټرک لپاره کوم کارت نه دی لوبول شوی.",
+    "header": "اوسنی ټیک:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation} لوبغاړی {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "لوبه نه ده پيل شوې",
+    "header": "=== د جرمني د ويست لوبې ===",
+    "phase": "{observation} پړاو: {phase}",
+    "trump_suit": "{observation} د ټرمپ د جامو: {trump_suit}",
+    "trump_card": "{observation} د ټرمپ کارت: {card}",
+    "cards_left": "{observation} په ډیک کې پاتې کارتونه: {count}",
+    "next_card": "{observation} د ګټونکي لپاره بل کارت: {card}",
+    "blank": "{observation}  د",
+    "current_trick": "{observation} اوسنی چال:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation} لوبغاړی {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} لوبغاړی {player_id}: {scoring} د ټاکلو ټرکونه ({tricks} ټول) ، {hand_size} کارتونه په لاس کې"
+  },
+  "outcome": {
+    "summary": "د زده کړې مرحله - لوبغاړی 0: {l0}، لوبغاړی 1: {l1}. د لوبې مرحله - لوبغاړی 0: {p0}، لوبغاړی 1: {p1}. لوبغاړی {winner_id} د {winner_tricks} سکور کولو چلونو سره ګټي!"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Uri umukinnyi {player_id} muri Stratego.\nInshingano yawe ni kugwiza Bendera ya mpanzi wawe cyangwa kuondoa ibice byose by'ingabo zake.\nIngabo yawe yashyizwe kuri urubuga, harimo Bendera yawe, Mabomu, na ibindi bice by'ingabo zitandukanye.\n\n### Mabwiriza ya Muziki\n1. **Amategeko ya Kugenda:**\n   - Ku ngiro yawe, urashobora kugenda kwa kimwe mu gace gakurikirana (hepfo, juu, iburyo, cyangwa ibumoso) kikaba kiri kubakwa n'ibice byawe.\n   - Urugero: Igice kinashobora kugenda kutoka A1 hadi B1 cyangwa A1 hadi A2 niba B1 na A2 zitaba zikubakwa n'ibice by'umukinnyi wenyine.\n   - Ikiwa igice ulichague ni Bomu cyangwa Bendera, ntikigenda.\n2. **Intambara:**\n   - Ikiwa ugenda kuri gace kikaba kiri kubakwa n'igice cya mpanzi wawe, hanyuma intambara itabaho:\n     - Igice kinagira ipete rya juu kinatsinda kikacyemura igice cya mpanzi wawe.\n     - Ikiwa ipete rya juu ni sawa, ibice byombi birasukwa kuri urubuga.\n     - **Imyanzuro Iderwa:**\n       - Mabomu anacyemura ibice byinshi by'igice gikigenda isipokuwa Abakoroni, bakadufasha Mabomu.\n       - Abaspyi bashobora gutsinda Marshal iyo Abaspyi bafashe ntambwe ya kwanza ariko bakagwa n'ibice byose.\n3. **Inshingano za Kimwe:**\n   - Tumenya ibice bya mpanzi wawe binyuze imyitwarire yabo n'intambara.\n   - Winda Bendera yawe ukanakaribisha kugwiza Bendera ya mpanzi wawe.\n   - Koresha Abakoroni mu buryo bwiza kugira ngo ujye ufite amakuru kuhusu ibice bya mpanzi wawe ukanagwiza ibice bishaje.\n\n### Ukoresha Intambwe:\n1. Bwira inyandiko za kimwe ulichagua kugenda n'inyandiko za kimwe ulichagua kugenda.\n2. Koresha mu buryo: [A0 B0], aho A0 ni inyandiko za kimwe za kimwe ulichagua kugenda, na B0 ni inyandiko za kimwe ulichagua kugenda.\n   - Urugero: Kugenda igice kutoka safu 0, safu 0 hadi safu 1, safu 0, ingiza [A0 B0].\n3. Hakikisha inyandiko za kimwe ulichagua kugenda zikurikiza amategeko ya kugenda yavuzwe haruguru.\n\n### Ibindi Wabwire:\n- Urubuga ruzagaragaza ibice byawe n'inyandiko zabyo, urugero MN, MS.\n- Urubuga ruzagaragaza inyandiko za kimwe za mpanzi wawe ataragaragaza ipete rya juu, urugero ?.\n- Gridi zikaba na ~ ni ibiyaga kandi ntizikinjirwa.\n- Nk'igitekerezo, tanga umuziki wawe ukikinjira ibice byawe biri ku mstari wa mbele kugira ngo ujye ufite amakuru kuhusu ibice bya mpanzi wawe. Umukinnyi 0 na umukinnyi 1 bafite imstari ya mbele ya safu D na G mtawaliwa.\n\nHano ni hali ya sasa ya urubuga:\n"
+  },
+  "board": {
+    "current_board": "Urubuga rwa sasa:\n\n{board}\nIntambwe zishoboka: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Umukinyi {player_id} ntiyagize intambwe mu buryo bwa [A0 B0].",
+    "invalid_coordinates": "Uburyo bwo gukora budafise agaciro. Umukinnyi {player_id} ntiyashiramwo ibiharuro bibereye.",
+    "not_own_piece": "Umukinyi {player_id} ategerezwa kwimura kimwe mu bipande vyiwe.",
+    "scout_through_pieces": "Umukinyi {player_id} ntashobora gutwara umusoda mu zindi nkino.",
+    "scout_diagonal": "Umukinyi {player_id} ntashobora kwimura umuskuti mu buryo bw'iburyo.",
+    "non_scout_multi_square": "Ibirwanisho vyose, kiretse ivyo bita abacunguzi gusa, bishobora kwimuka ikibanza kimwe.",
+    "move_into_lake": "Umukinyi {player_id} ntashobora kuja mu kiyaga.",
+    "move_onto_own_piece": "Umukinyi {player_id} ntashobora kuja ku gikoresho ciwe.",
+    "move_bomb_or_flag": "Umukinyi {player_id} ntashobora kwimura bombe canke ibendera."
+  },
+  "game_action": {
+    "you_moved": "Wagize igice cye kutoka {source} hadi {dest}.",
+    "opponent_moved": "Umukinyi {player_id} yashize igikoresho ku ruhande rwa {source} mu kibanza ca {dest}.",
+    "you_equal_ranks": "Wagize igice cye kutoka {source} hadi {dest}. Igice kinagira ipete rya juu cya {attacking_rank} na igice cya {target_rank} cya gace ulikinjirwa. Kuko ipete rya juu ni sawa, ibice byombi byarasukwa.",
+    "opponent_equal_ranks": "Mchezaji {player_id} amahamishije umweso kutoka {source} ujende kwa {dest}. Umweso wari wumushinga wari {attacking_rank} na umweso wa karahava wari {target_rank}. Kuko vyeo ni sawa, mipira yote miwili ikapoteza.",
+    "you_miner_defused": "Wagize igice cye kutoka {source} hadi {dest}. Igice kinagira ipete rya juu cya {attacking_rank} na igice cya {target_rank} cya gace ulikinjirwa. Kuko Abakoroni bashobora kudufasha Mabomu, wagize intambara.",
+    "opponent_miner_defused": "Mwana {player_id} amesogea kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha mwisho kilikuwa {target_rank}. Kwa kuwa wana migodi wanaweza kufuta mabomu, umepoteza mapigano.",
+    "you_bomb_lost": "Wahamuyeze umweso wawe kutoka {source} ujende kwa {dest}. Umweso wari wumushinga wari {attacking_rank} na umweso wa karahava wari {target_rank}. Kuko umushinga si mukazi, wakayikosa inkuru.",
+    "opponent_bomb_won": "Mchezaji {player_id} amahamishije umweso kutoka {source} ujende kwa {dest}. Umweso wari wumushinga wari {attacking_rank} na umweso wa karahava wari {target_rank}. Kuko umushinga si mukazi, watsindiye inkuru.",
+    "you_spy_won": "Wagize igice cye kutoka {source} hadi {dest}. Igice kinagira ipete rya juu cya {attacking_rank} na igice cya {target_rank} cya gace ulikinjirwa. Kuko umugenda ni Umuspyi na gace ulikinjirwa ni Umumarshall, wagize intambara.",
+    "opponent_spy_lost": "Mchezaji {player_id} amahamishije umweso kutoka {source} ujende kwa {dest}. Umweso wari wumushinga wari {attacking_rank} na umweso wa karahava wari {target_rank}. Kuko umushinga ari mwigeme na karahava ari jenerali, wakayikosa inkuru.",
+    "you_higher_won": "Wahamuyeze umweso wawe kutoka {source} ujende kwa {dest}. Umweso wari wumushinga wari {attacking_rank} na umweso wa karahava wari {target_rank}. Kuko umushinga ari na cheo kinini zaidi ya karahava, watsindiye inkuru.",
+    "opponent_higher_lost": "Mchezaji {player_id} amahamishije umweso kutoka {source} ujende kwa {dest}. Umweso wari wumushinga wari {attacking_rank} na umweso wa karahava wari {target_rank}. Kuko umushinga ari na cheo kinini zaidi ya karahava, wakayikosa inkuru.",
+    "you_lower_lost": "Wahamuyeze umweso wawe kutoka {source} ujende kwa {dest}. Umweso wari wumushinga wari {attacking_rank} na umweso wa karahava wari {target_rank}. Kuko umushinga ari na cheo kidogo zaidi ya karahava, wakayikosa inkuru.",
+    "opponent_lower_won": "Mchezaji {player_id} amahamishije umweso kutoka {source} ujende kwa {dest}. Umweso wari wumushinga wari {attacking_rank} na umweso wa karahava wari {target_rank}. Kuko umushinga ari na cheo kidogo zaidi ya karahava, watsindiye inkuru."
+  },
+  "outcome": {
+    "flag_captured": "Umukinyi {player_id} yafashe ibendera ry'uwo bahanganye!",
+    "no_movable_pieces": "Umukinnyi {winner_id} atsinze! Umukinnyi {loser_id} nta bipande vy'akwirakwiza afite."
+  }
+}

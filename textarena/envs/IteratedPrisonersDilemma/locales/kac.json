@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Nanhte Player {player_id} Iterated Prisoner's Dilemma hpang {num_rounds} round ni.\n\nGame Structure:\n- Shaloi kam hpe shanhte {total_conversation_rounds} turns jawm shakut shai.\n- Dai hku shanhte, laban player num shanhte cooperate shai, defect shai.\n\nPayoff Matrix (fixed each round):\n- Laban Cooperate ➜ shanhte {cooperate_reward}\n- Laban Defect ➜ shanhte {mutual_defect_reward}\n- Kaja Defects, kaja Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nKam hpe shai:\n- Conversation hku: shanhte ngai text jawm shakut shai.\n- Decision phase hku: '[Cooperate]' shai, '[Defect]' shai (case-insensitive). Shanhte ngai text jawm shakut shai."
+  },
+  "phases": {
+    "conversation_finished": "Conversation hpang shakut shai round {round}. '[Cooperate]' shai, '[Defect]' shai \\boxed{{}} hku reply jawm shakut shai.",
+    "starting_round": "--- Shawng lam Round {round} -----",
+    "round_summary": "Round {round} result:\n{outcome}\nPlayer 0 {r0} jawm shakut shai (total {score_0}), Player 1 {r1} jawm shakut shai (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} {win_score} - {lose_score} jawm shakut shai.",
+    "draw": "Hkrak sha! ginsup ninghkring lahkawng yan gaw {s0} hpe lu ma ai.",
+    "round_both_cooperate": "Hpung lahkawng yan gaw jawm galaw wa ai.",
+    "round_both_defect": "Hpung lahkawng yan gaw, hpyen hprawng mat ai.",
+    "round_p0_cooperates_p1_defects": "Lata madu 0 gaw karum ya ai, 1 gaw hprawng yen mat wa ai.",
+    "round_p0_defects_p1_cooperates": "Masha 0 gawng ai, Masha 1 hpang ai."
+  }
+}

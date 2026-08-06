@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "ਤੁਸੀਂ ਨਿਮ ਵਿਚ ਖਿਡਾਰੀ {player_id} ਹੋ. ਤੁਹਾਡਾ ਟੀਚਾ ਆਖਰੀ ਬਚੀ ਹੋਈ ਵਸਤੂ ਨੂੰ ਲੈਣਾ ਹੈ. ਹਰ ਵਾਰੀ, ਇਕ ਪੈਕ ਦੀ ਚੋਣ ਕਰੋ ਅਤੇ ਇਸ ਵਿਚੋਂ ਇਕ ਜਾਂ ਵਧੇਰੇ ਵਸਤੂਆਂ ਨੂੰ ਹਟਾਓ. ਫਾਰਮੈਟ '[pile quantity]' ਦੀ ਵਰਤੋਂ ਕਰੋ, ਜਿੱਥੇ ਪੈਕ ਪੈਕ ਇੰਡੈਕਸ ਹੈ ਅਤੇ ਮਾਤਰਾ ਹਟਾਉਣ ਵਾਲੀਆਂ ਵਸਤੂਆਂ ਦੀ ਗਿਣਤੀ ਹੈ. ਉਦਾਹਰਣ ਵਜੋਂ, '[0 3]' ਪੈਕ 0 ਤੋਂ 3 ਵਸਤੂਆਂ ਨੂੰ ਹਟਾਉਂਦਾ ਹੈ."
+  },
+  "state": {
+    "current_pile": "ਮੌਜੂਦਾ ਪਾਈਲ: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "ਕੋਈ ਵੈਧ ਮੂਵ ਫਾਰਮੈਟ ਨਹੀਂ ਮਿਲਿਆ। '[pile quantity]' ਵਰਤੋ.",
+    "correct_format_wrong_fields": "ਖਿਡਾਰੀ {player_id}, ਅਵੈਧ ਕਾਰਵਾਈ. ਕਾਲਮ {col} ਸੀਮਾ ਤੋਂ ਬਾਹਰ ਹੈ.",
+    "out_of_range": "ਸਟੈਕ ਇੰਡੈਕਸ {pile_index} ਰੇਂਜ ਤੋਂ ਬਾਹਰ ਹੈ।",
+    "non_positive": "ਘੱਟੋ-ਘੱਟ 1 ਵਸਤੂ ਹਟਾਉਣੀ ਚਾਹੀਦੀ ਹੈ।",
+    "exceeds_pile": "ਪਾਈ {pile_index} ਤੋਂ {quantity} ਨੂੰ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ (ਸਿਰਫ {pile_count} ਛੱਡ ਦਿੱਤਾ ਗਿਆ ਹੈ) ।"
+  },
+  "observation": {
+    "removed_from_piles": "ਪਲੇਅਰ {player_id} ਨੇ [{pile_index} {quantity}] ਖੇਡਿਆ, ਢੇਰ {pile_index} ਤੋਂ {quantity} ਵਸਤੂ(ਆਂ) ਹਟਾ ਦਿੱਤੀਆਂ।"
+  },
+  "outcome": {
+    "win": "ਖਿਡਾਰੀ {player_id} ਨੇ ਆਖਰੀ ਵਸਤੂ ਨੂੰ ਲਿਆ!"
+  }
+}

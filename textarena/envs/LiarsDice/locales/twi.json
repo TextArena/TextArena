@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Woyɛ Player {player_id} wɔ {num_players}-player Liar's Dice agorɔ mu.\nMmara:\n- Wɔ wo turn, wobɛtumi:\n  1) Yɛ bid foforɔ a ɛwɔ quantity kɛseɛ anaa face kɛseɛ (anaa ne nyinaa) sen sɛdeɛ ɛteɛ; i.e. '[Bid: 3, 4]',\n  2) Frɛ last bid no denam '[Call]'.\n\nSɛ wofrɛ a:\n  - Sɛ actual count no yɛ face value no mu wɔ dice nyinaa mu no yɛ kɔm deɛ bid no, last bidder no hwɛ die baako.\n  - Sɛ ɛnteɛ a, caller no hwɛ die baako.\nAkyerɛwfoɔ a ɔhwɛ dice 0 no pɛ agorɔ no. Akyerɛwfoɔ a ɔsɛe no di nkunim."
+  },
+  "board": {
+    "per_player": "\tPlayer {p}: {d}",
+    "new_round": "\nRound foforɔ - Remaining dice: {dice_summary}\nWo Dice a wɔde di agorɔ no ne: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Player {current_player_id} frɛe! Actual count no yɛ face {face_value} no mu yɛ {count}, a ɛyɛ kɔm deɛ {quantity}.\nPlayer {loser_id} (last bidder) hwɛ die baako.",
+    "caller_loses": "Player {current_player_id} frɛe! Actual count no yɛ face {face_value} no mu yɛ {count}, a ɛyɛ kɛseɛ deɛ {quantity}.\nPlayer {loser_id} (caller) hwɛ die baako."
+  },
+  "action": {
+    "bid_announce": "Player {player_id} bid {quantity} wɔ face {face_value} so."
+  },
+  "invalid_move": {
+    "call_no_bid": "Wɔfrɛɛ no bere a na wɔnkaa ho asɛm.",
+    "invalid_bid": "Nnnni mu: {reason}",
+    "not_recognized": "Action yɛn hu sɛ ɛyɛ '[Bid: X, Y]' anaa '[Call]' valid. Action a ɛsɛe: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Quantity foforɔ {new_quantity} no yɛ kɔm deɛ sɛdeɛ ɛteɛ {current_quantity}.",
+    "face_lower": "Face value foforɔ {new_face_value} no yɛ kɔm deɛ sɛdeɛ ɛteɛ {current_face_value}.",
+    "identical": "Ɛho ka yɛ pɛ sɛ ɛboro nea wɔabɔ ho dawuru no so.",
+    "face_range": "Ɛsɛ sɛ ne din no yɛ 1 kosi 6."
+  },
+  "message": {
+    "eliminated_invalid": "Ɔbɔadeɛ {player_id} no twaa ne ho a na ɔnte ase."
+  },
+  "outcome": {
+    "win": "Player {winner} di nkunim! Final ranking: {final_ranking}"
+  }
+}

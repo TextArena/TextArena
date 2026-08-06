@@ -1,11 +1,13 @@
 import re, random
-from typing import Optional, Tuple, Dict, Any, List
+from typing import Optional, Tuple, Dict, Any, List, Callable
 
 import textarena as ta
 
 import nltk
 nltk.download("words")
 from nltk.corpus import words
+
+from textarena.envs.utils.word_lists import WordFreqDictionary, NON_ALPHABETIC_LANGS
 
 en_uk_dict = set(words.words())
 
@@ -15,23 +17,79 @@ class LetterAuctionEnv(ta.Env):
     def __init__(self, starting_coins: int = 100, max_turns: int = 26):
         """
         Initialize the environment for Letter Auction Game.
-        
+
         Args:
-            starting_coins (int): 
+            starting_coins (int):
         """
         self.letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         self.letter_values = [1 for _ in self.letters]
         self.starting_coins = starting_coins
-        self.max_turns = max_turns 
+        self.max_turns = max_turns
+        # English keeps its bundled A-Z / NLTK-dictionary path unchanged (no new
+        # deps, byte-identical output). Non-English content languages are handled
+        # lazily via the optional wordfreq backend (see _lang_setup); cached here.
+        self._ml_cache: Dict[str, Any] = {}
 
     @property
     def terminal_render_keys(self):
         return ["rendered_text", "turn"]
 
+    def _content_lang(self) -> str:
+        """The single language the auction letters / words are drawn from.
+
+        LetterAuction is single-content-language (all players auction the same
+        letters and form words in one language); per-player UI language still
+        varies via the locale layer. When players request different languages we
+        take player 0's as the content language.
+        """
+        lang = getattr(self, "lang", "en")
+        if isinstance(lang, dict):
+            values = set(lang.values())
+            return next(iter(values)) if len(values) == 1 else lang.get(0, "en")
+        return lang or "en"
+
+    def _lang_setup(self, lang: str) -> Tuple[List[str], Callable[[str], bool]]:
+        """Return (auctionable letters, word-validity checker) for the content language.
+
+        English uses the fixed A-Z alphabet and the bundled NLTK dictionary,
+        exactly as before. Any other alphabetic language uses the language's own
+        letters (most-frequent first, uppercased/deduplicated) and validates
+        final words via wordfreq. Per-language results are cached.
+        """
+        if lang == "en":
+            return list("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), (lambda w: w.lower() in en_uk_dict)
+        if lang not in self._ml_cache:
+            if lang in NON_ALPHABETIC_LANGS:
+                raise ValueError(
+                    f"LetterAuction auctions individual letters and does not "
+                    f"support the non-alphabetic language '{lang}'."
+                )
+            d = WordFreqDictionary(lang)
+            # Take the most-frequent distinct letters of this language. CAP at 26
+            # so the auction has the same structure/length as the English game
+            # (26 rounds, default max_turns=26); longer alphabets are truncated to
+            # their 26 most common letters.
+            letters: List[str] = []
+            for ch in d.alphabet():
+                u = ch.upper()
+                if u not in letters:
+                    letters.append(u)
+                if len(letters) >= 26:
+                    break
+            if not letters:
+                raise ValueError(f"No letters available for language '{lang}'.")
+            self._ml_cache[lang] = (letters, d.is_valid)
+        return self._ml_cache[lang]
+
     def reset(self, num_players: int, seed: Optional[int] = None):
         """ Reset the environment to start a new game """
         # Initialize the game state
         self.state = ta.TwoPlayerState(num_players=num_players, seed=seed, max_turns=self.max_turns)
+
+        # Resolve the content language: fixed A-Z + NLTK for English, otherwise
+        # the language's own alphabet + wordfreq validity.
+        self.letters, self._is_valid_word = self._lang_setup(self._content_lang())
+        self.letter_values = [1 for _ in self.letters]
 
         # Initialize the player state
         self.player_states = {
@@ -58,11 +116,11 @@ class LetterAuctionEnv(ta.Env):
         }
 
         # Initialize the game
-        self.current_player = 0 
-        random.shuffle(self.letters) 
-        self.round_number = 0 
+        self.current_player = 0
+        random.shuffle(self.letters)
+        self.round_number = 0
         self.round_letter = self.letters[self.round_number]
-        self.bid_amount = self.letter_values[self.round_number] 
+        self.bid_amount = self.letter_values[self.round_number]
 
         # intialize the game states
         game_state = {
@@ -71,32 +129,19 @@ class LetterAuctionEnv(ta.Env):
             "turn": self.current_player,
         }
         self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
-    
+
 
     def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
         """ Generate the prompt for the current player """
-        prompt = (
-            f"You are Player {player_id}. You are currently in the Letter Auction game.\n"
-            "The goal of the game is to strategically bid on letters to form the highest value word. This is how the game works.\n"
-            "You must listen to the gamemaster for guidance to play the game.\n"
-            "The game consists of a series of rounds. In each round, a letter will be put up for auction.\n"
-            "You can bid on the letter using your coins. The player with the highest bid wins the letter.\n"
-            "The letter will be added to your collection, and the coins you bid will be deducted from your total.\n"
-            "This bidding of letters will repeat till all the letters have been auctioned off. You are not rewarded for saving your coins.\n"
-            "After all the letters have been auctioned, you will use the letters to form the highest value english word from the letters won.\n"
-            "The player with the highest value word wins the game.\n"
-            "If you want to bid, submit your bid amount in square brackets like [bid 2] or [bid 10].\n"
-            "If you do not want to bid, submit [pass].\n"
-            "For the submission of the highest value word, you will be prompted at the end of the game to submit them in square brackets like [dog].\n"
-            "Here is your starting information:\n"
-            f"Your current coins: {self.player_states[player_id]['coins']}\n"
-            f"Your current letters: {self.player_states[player_id]['letters']}\n"
-            "\n"
-            f"[Game] Player 0 will go first. The first letter for bid: {self.round_letter}.\n"
-            f"Starting bid is {self.bid_amount} coin. You can bid any amount of coins, or choose not to bid.\n"
+        return self.m(
+            "prompt", "intro",
+            player_id=player_id,
+            coins=self.player_states[player_id]["coins"],
+            letters=self.player_states[player_id]["letters"],
+            letter=self.round_letter,
+            bid_amount=self.bid_amount,
         )
-        return prompt
-    
+
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         """Execute the player's action in the environment."""
         player_id = self.state.current_player_id
@@ -108,7 +153,6 @@ class LetterAuctionEnv(ta.Env):
         # Record player's action
         self.state.add_observation(from_id=player_id, to_id=-1, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
 
-        self.auction_over_prompt = ""
         next_player = True  # default behavior
 
         if self.round_number < len(self.letters):
@@ -116,8 +160,7 @@ class LetterAuctionEnv(ta.Env):
             match = re.search(r"\[(bid \d+|pass)\]", action, re.IGNORECASE)
 
             if not match:
-                reason = f"Invalid action: {action}. Please enter a valid action: '[bid <amount>]' or '[pass]'."
-                self.state.set_invalid_move(reason=reason)
+                self.state.set_invalid_move(reason=self.m("invalid", "bad_bid_format", action=action))
             else:
                 action_text = match.group(1).lower()
                 # Update bid history if it's the player's first move this round
@@ -134,8 +177,7 @@ class LetterAuctionEnv(ta.Env):
             # Word-submission phase
             match = re.search(r"\[([a-zA-Z]+)\]", action)
             if not match:
-                reason = f"Invalid action: {action}. Please enter a valid action: '[<word>]'."
-                self.state.set_invalid_move(reason=reason)
+                self.state.set_invalid_move(reason=self.m("invalid", "bad_word_format", action=action))
             else:
                 word = match.group(1).lower()
                 self._calculate_word_value(player_id, word)
@@ -149,15 +191,15 @@ class LetterAuctionEnv(ta.Env):
             p1_score = self.player_states[1]["word_value"]
 
             if p0_score > p1_score:
-                self.state.set_winner(player_id=0, reason=f"Player 0 wins with a score of {p0_score}")
+                self.state.set_winner(player_id=0, reason=self.m("outcome", "win", player_id=0, score=p0_score))
             elif p1_score > p0_score:
-                self.state.set_winner(player_id=1, reason=f"Player 1 wins with a score of {p1_score}")
+                self.state.set_winner(player_id=1, reason=self.m("outcome", "win", player_id=1, score=p1_score))
             else:
-                self.state.set_draw(reason="It's a draw!")
+                self.state.set_draw(reason=self.m("outcome", "draw"))
 
         return self.state.step(rotate_player=next_player)
 
-    
+
     def _pass_bid(self, player_id: int) -> bool:
         """Pass on the current letter, allowing opponent to bid if they haven't yet."""
         opponent_id = 1 - player_id
@@ -165,28 +207,28 @@ class LetterAuctionEnv(ta.Env):
         round_num = self.round_number
         bid_status = self.player_states[opponent_id]["letter_bid_history"][round_num]
 
-        prompt = f"Player {player_id} passes on the letter '{letter}'."
-        
         # Decide next_player and round progression based on opponent's status
         if bid_status is None:
             # Opponent hasn't bid yet — it's now their turn
             next_player = True
-            prompt += self._turn_manager(next_round=False, next_player=next_player)
+            cont = self._turn_manager(next_round=False, next_player=next_player)
+            message = self.m("auction", "pass", player_id=player_id, letter=letter, cont=cont)
 
         elif bid_status == "bid":
             # Opponent already bid — they win the letter
-            self._assign_letter(opponent_id, letter, self.bid_amount)
-            prompt += f" Player {opponent_id} will have '{letter}' for {self.bid_amount}."
+            won_amount = self.bid_amount
+            self._assign_letter(opponent_id, letter, won_amount)
             next_player = False
-            prompt += self._turn_manager(next_round=True, next_player=next_player)
+            cont = self._turn_manager(next_round=True, next_player=next_player)
+            message = self.m("auction", "pass_opp_wins", player_id=player_id, opponent_id=opponent_id, letter=letter, bid_amount=won_amount, cont=cont)
 
         else:
             # Opponent also passed — no one gets the letter
-            prompt += f" Player {opponent_id} also passes on the letter '{letter}'. So, no one will gain the letter."
             next_player = False
-            prompt += self._turn_manager(next_round=True, next_player=next_player)
+            cont = self._turn_manager(next_round=True, next_player=next_player)
+            message = self.m("auction", "pass_both", player_id=player_id, opponent_id=opponent_id, letter=letter, cont=cont)
 
-        self.state.add_observation(message=prompt, observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
 
         return next_player
 
@@ -199,23 +241,20 @@ class LetterAuctionEnv(ta.Env):
 
         # Check for invalid bid - not enough coins
         if self.player_states[player_id]["coins"] < bid_amount:
-            reason = f"Invalid bid: {bid_amount}. You do not have enough coins."
-            self.state.set_invalid_move(reason=reason)
+            self.state.set_invalid_move(reason=self.m("invalid", "not_enough_coins", bid_amount=bid_amount))
             return False
 
         # NEW: Check if bid is high enough when opponent has already bid
         if opponent_status == "bid" and bid_amount <= self.bid_amount:
-            reason = f"Invalid bid: {bid_amount}. You must bid more than the current bid of {self.bid_amount}."
-            self.state.set_invalid_move(reason=reason)
+            self.state.set_invalid_move(reason=self.m("invalid", "bid_too_low", bid_amount=bid_amount, current_bid=self.bid_amount))
             return False
-
-        prompt = f"Player {player_id} bids {bid_amount} on the letter '{letter}'."
 
         # Case 1: Opponent has not bid yet
         if opponent_status is None:
             self.bid_amount = bid_amount
             next_player = True
-            prompt += self._turn_manager(next_round=False, next_player=next_player)
+            cont = self._turn_manager(next_round=False, next_player=next_player)
+            message = self.m("auction", "bid", player_id=player_id, bid_amount=bid_amount, letter=letter, cont=cont)
 
         # Case 2: Opponent has already bid
         elif opponent_status == "bid":
@@ -223,17 +262,18 @@ class LetterAuctionEnv(ta.Env):
             # This player becomes the top bidder; opponent will be asked again
             self.bid_amount = bid_amount
             next_player = True
-            prompt += self._turn_manager(next_round=False, next_player=next_player)
+            cont = self._turn_manager(next_round=False, next_player=next_player)
+            message = self.m("auction", "bid", player_id=player_id, bid_amount=bid_amount, letter=letter, cont=cont)
 
         # Case 3: Opponent passed
         else:
             # This player automatically wins the letter
-            prompt += f" Since Player {opponent_id} passes on the letter '{letter}', Player {player_id} will have it for {bid_amount}."
             self._assign_letter(player_id, letter, bid_amount)
             next_player = True
-            prompt += self._turn_manager(next_round=True, next_player=next_player)
+            cont = self._turn_manager(next_round=True, next_player=next_player)
+            message = self.m("auction", "bid_opp_pass", player_id=player_id, opponent_id=opponent_id, letter=letter, bid_amount=bid_amount, cont=cont)
 
-        self.state.add_observation(message=prompt, observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
 
         return next_player
 
@@ -244,16 +284,17 @@ class LetterAuctionEnv(ta.Env):
         self.player_states[player_id]["letter_values"].append(bid_amount)
         self.player_states[player_id]["coins"] -= bid_amount
 
-    def _turn_manager(self, next_round: bool = False, next_player: Optional[bool] = False) -> str:
+    def _turn_manager(self, next_round: bool = False, next_player: Optional[bool] = False):
         """
-        Manage the turns and rounds in the game, and return the prompt for the next player or announces end of auction.
+        Manage the turns and rounds in the game, and return the continuation
+        message (a localized message) for the next player or the end of auction.
 
         Args:
             next_round (bool, optional): Move to the next round. Defaults to False.
             next_player (bool, optional): Move to the next player. Defaults to False.
-        
+
         Returns:
-            str: The prompt for the next player or the end of auction.
+            A LocalizedMessage for the next prompt / end-of-auction announcement.
         """
 
         if next_player:
@@ -266,15 +307,12 @@ class LetterAuctionEnv(ta.Env):
             if self.round_number < len(self.letters):
                 self.round_letter = self.letters[self.round_number]
                 self.bid_amount = self.letter_values[self.round_number]
-                next_prompt = f" Player {self.current_player}, do you want to start bid on the letter '{self.round_letter}' for {self.bid_amount}?"
+                return self.m("turn", "start_bid", current_player=self.current_player, letter=self.round_letter, bid_amount=self.bid_amount)
             else:
                 # the auction is over
-                next_prompt = "The auction is over. Now, players will use the letters they've won to form the highest value english word from the letters won. The player with the highest value word wins the game. To submit the word, submit it in square brackets like [dog]."
+                return self.m("turn", "auction_over")
 
-        else:
-            next_prompt = f" Player {self.current_player}, do you want to bid on the letter '{self.round_letter}' for more than {self.bid_amount}?"
-
-        return next_prompt
+        return self.m("turn", "bid_more", current_player=self.current_player, letter=self.round_letter, bid_amount=self.bid_amount)
 
 
     def _calculate_word_value(self, player_id: int, word: str) -> None:
@@ -282,21 +320,20 @@ class LetterAuctionEnv(ta.Env):
         # check if the word is valid
         word = word.upper()
 
-        if word.lower() not in en_uk_dict:
+        if not self._is_valid_word(word):
             self.player_states[player_id]["word"] = ""
             self.player_states[player_id]["word_value"] = 0
 
-            reason=f"Invalid word: {word}. Please enter a valid English word."
-            self.state.set_invalid_move(reason=reason)
+            self.state.set_invalid_move(reason=self.m("invalid", "not_a_word", word=word))
             return
-        
+
         # check if the word is valid based on the letters
         for letter in word:
             if letter not in self.player_states[player_id]["letters"]:
                 self.player_states[player_id]["word"] = ""
                 self.player_states[player_id]["word_value"] = 0
 
-                self.state.set_invalid_move(reason=f"Invalid word: {word}. You do not have the letter '{letter}'.")
+                self.state.set_invalid_move(reason=self.m("invalid", "missing_letter", word=word, letter=letter))
                 return
 
         # calculate the word value
@@ -304,7 +341,7 @@ class LetterAuctionEnv(ta.Env):
         self.player_states[player_id]["word"] = word
         self.player_states[player_id]["word_value"] = word_value
 
-        message=f"Player {player_id} chooses the word '{word}' with a value of {self.player_states[player_id]['word_value']}."
+        message = self.m("word", "chosen", player_id=player_id, word=word, word_value=self.player_states[player_id]["word_value"])
         self.state.add_observation(from_id=ta.GAME_ID, to_id=-1, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
         # move to the next round
@@ -315,13 +352,13 @@ class LetterAuctionEnv(ta.Env):
         for player_id in self.player_states:
             if self.player_states[player_id]["word"] is None:
                 return False
-            
+
         return True
-    
+
     def render_text(self) -> str:
         """
         Render the game state.
-        
+
         Returns:
             str: The rendered game state.
         """
@@ -332,4 +369,4 @@ class LetterAuctionEnv(ta.Env):
         rendered_text += f"Player 1: {self.player_states[1]['coins']} coins, {self.player_states[1]['letters']}\n"
         rendered_text += f"Current player: {self.current_player}\n"
         return rendered_text
-    
+

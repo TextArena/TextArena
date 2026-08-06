@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ses Giogadore {player_id} in Tic Tac Toe Cuànticu.\nSu sìmbolu tuo est '{symbol}', e is nùmeros de mòvida tua sunt semper {parity} (p.e., X1, X3 o O2, O4).\n\nOgetivu: Bìnchi cunformende una lìnia de tres marcas clàssicas (solidificadas dae is superposiduras).\n\nComu Giogare:\n- In cada mòvida, poni una marca spaventosa in duas casellas bòidas diferentes impreende su formatu '[a,b]'.\n- Custas marcas sunt entangled, e etichetadas comente 'X1 / X1' o 'O4 / O4'.\n- No podes poni marcas spaventosas in una casella chi est giai collassada (solidificada).\n\nRegula de Collassu:\n- Si sa mòvida tua creat unu tziclu in su grafu de entanglement, collassat in automàticu.\n- Cada marca spaventosa in su tziclu si trasformat in una marca clàssica in una de is duas posiduras suas.\n- Is marcas spaventosas dependentes collassant fintzas.\n\nVitòria:\n- Su giogu acabat cando unu giogadore tenet tres marcas clàssicas in fila.\n- Si ambos giogadores ottenent una lìnia durante su matessi collassu, su chi tenet su nùmeru de mòvida màssimu prus bàsciu bìnchit.\n\nEsempiu de mòvida: '[0,4]' poni una marca spaventosa in is casellas 0 e 4."
+  },
+  "board": {
+    "current_board": "Tavoliere de Tic Tac Toe Quantu:\n\n{board}\n\nInvia sa muva tua che a siat '[a,b]' pro ponere unu marchu quantu in duas positziones."
+  },
+  "invalid_move": {
+    "wrong_format": "Formadu non vàlidu. Utilizade \"[a,b]\".",
+    "invalid_cells": "Indicos de tzèllula no vàlidos o duplicados.",
+    "already_solidified": "Una de sas tzèllulas est giai solidificada."
+  },
+  "game_action": {
+    "placed": "Giocadore {player_id} at ponidu su simbulu in una superpositzione intre cellas {pos_a} e {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superpositzione dipendente resolta. Sa cella ({r}, {c}) est oe {symbol}.",
+    "last_cell_resolved": "Superpositzione de s'ultima cella resolta. Sa cella ({r}, {c}) est oe {symbol}.",
+    "superposition_resolved": "Superpositzione resolta. Sa cella ({r}, {c}) est oe {symbol}."
+  },
+  "outcome": {
+    "win": "Su giogadore {player_id} binchet cun sos puntos consolidados!",
+    "draw": "Sa partida est unu pariggiu!"
+  }
+}

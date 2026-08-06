@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "သင်ဟာ ကစားသမား {player_id}၊ အဖန်တလဲလဲ အဆုံးသတ် ဂိမ်းရဲ့ {num_rounds} ပတ် ကစားနေတာပါ။ ဒီတစ်ပတ်ကို သင်နဲ့ ကစားသမား {other_id} တို့ကြား ခွဲဖို့ သင့်မှာ ${pool} ရှိတယ်။ အဆိုပြုသူ - ကမ်းလှမ်းချက်တစ်ခု ပြုလုပ်ပါ။ [Offer: $X] (0 <= X <= pool) - လက်ခံတယ်ဆိုရင် $(pool - X ရတယ်၊ အခြားကစားသမားက $X ရတယ် - ငြင်းပယ်တယ်ဆိုရင် $0 ရတယ်။ ဥပမာ: [Offer: $3] သို့မဟုတ် 'ငါက မျှတတယ်ထင်တယ်။ [Offer: $5]' တုံ့ပြန်သူ - ကမ်းလှမ်းမှုကို [Accept] သို့မဟုတ် [Reject] နှစ်ခုလုံးနဲ့ ဆုံးဖြတ်ပါ။ ဥပမာ: 'ဒါဟာ သင့်တင့်တယ်ထင်တယ်။ [Accept]' 'မမျှတလွန်းတယ်။ [Reject]'"
+  },
+  "round": {
+    "begins": "--- ဂိုးစဉ် {round_number} စတင်သည် --- ကစားသမား {proposer_id} သည် အဆိုပြုသူဖြစ်ပြီး ကစားသမား {responder_id} သည် ဖြေသူဖြစ်သည်။",
+    "offer": "အဝိုင်း {round_number}: ကစားသမား {proposer_id} က ကစားသမား {responder_id} ကို ဒေါ်လာ {offer} ကမ်းလှမ်း (ဒေါ်လာ {keep} ကို ထိန်းသိမ်းထားခြင်း) ။",
+    "accepted": "ကစားသမား {responder_id} လက်ခံ! အလှည့် {round_number} အနိုင်ရ: ကစားသမား {proposer_id} + ${proposer_gain}, ကစားသမား {responder_id} + ${responder_gain}. အသစ်စုစုပေါင်း: ကစားသမား ၀: ${total_0}, ကစားသမား ၁: ${total_1}.",
+    "rejected": "Player {responder_id} က တင်ပြချက်ကို ပယ်ချလိုက်ပါသည်။ Round {round_number} အမြတ်အစွန်း၊ နှစ်ဦးသော ကစားသမား +$0 ရရှိ။ စုစုပေါင်း ငွေပေးချေမှု တည်တံ့သည်။ Player 0: ${total_0}, Player 1: ${total_1}"
+  },
+  "invalid_move": {
+    "no_offer_format": "အဆိုပြုသူသည် [Offer: $X] ပုံစံကို အသုံးပြု၍ ကမ်းလှမ်းချက်ပြုလုပ်ရမည်။",
+    "bad_integer": "ကမ်းလှမ်းငွေပမာဏဟာ ကိန်းပြည့်တစ်ခုဖြစ်ရပါမယ်။",
+    "out_of_range": "ကမ်းလှမ်းချက်က $0 နဲ့ ${pool} ကြားမှာ ဖြစ်ရမယ်။",
+    "no_current_offer": "လက်ရှိတွင် တုံ့ပြန်ရန် ကမ်းလှမ်းချက် မရှိပါ။",
+    "accept_or_reject": "Responder သည် ၎င်းတို့ကို [Accept] သို့ [Reject] လက်ခံ/ပယ်ချရမည်။"
+  },
+  "outcome": {
+    "win": "ကစားသမား {winner}က စုစုပေါင်း ${winner_total}နဲ့ ကစားသမား {loser}ရဲ့ ${loser_total}နဲ့ နိုင်တယ်။",
+    "draw": "ထီပေါက်! နှစ်ယောက်လုံးက စုစုပေါင်း ${total} ရတယ်။"
+  }
+}

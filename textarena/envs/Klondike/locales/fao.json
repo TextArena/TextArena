@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Tú ert at spæla Klondike Solitaire. Í þínum máli er at flytja øll spjøl til grundapottarnar.\n\nLeikareglur:\n- Grundapottar (F1-F4): Byggja upp frá Ás til Kong í lit\n- Borðapottar (T1-T7): Byggja niður í skiftandi litum (reytt á svart, svart á reytt)\n- Stokk: Dreg spjøl til ónýtspott\n- Ónýt (W): Øversta spjald er til leik\n\nBoð:\n- 'draw' - Dreg spjøl frá stokki til ónýt\n- 'move <source> <destination> [count]' - Flyt spjøl millum pottar\n  Dømi: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Tal kann eisini vera 'all', sum royndir at flytja øll andlits spjøl.\n- 'forfeit' - Enda leikin ómidla og læs í tína núverandi stig\n- Pottarnøvn: W (ónýt), F1-F4 (grundir), T1-T7 (borð)\n\nTú kannst útføra fleiri handlingar í einum vendingi við at skilja tey sundur við kommu:\n  Dømi: 'draw, move W T1, move T2 F1'\n\nEinungis Kongar kann settast á tómar borðapottar.\nHandlingar verða útførdir í røð - um ein misslykkast, verða tey afturstaðandi handlingarnir sleppaðar.\nNýta 'forfeit' um tú truir, at leikin er ómøguligur at vinna."
+  },
+  "format_error": {
+    "no_brackets": "Ógilda tiltakið. Tiltakið skal standa í parentesum.",
+    "no_closing_bracket": "Ógilda tiltakið. Vantandi lokandi parament ']'",
+    "empty_command": "Tólt boð. Skriva \"draw\" ella \"move <source> <destination> [count]\".",
+    "empty_action": "Týdningarleysur gerningur",
+    "move_needs_args": "Flytarabod kravar kelda og endamál. Nýtsla: 'move <source> <destination> [count]'",
+    "count_positive": "Talan skal vera jalig ella \"all\" (allir)",
+    "count_invalid": "Ógildilig teljing. Brúka eitt tal ella \"all\" (øll)",
+    "unknown_command": "Ókendur boð '{cmd}'. Nýta 'draw', 'move <source> <destination> [count]', eller 'forfeit'",
+    "wrapped": "Handling {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Handling {n}: {msg}",
+    "before_failure": "Gerað {n} tiltøk áðrenn ólukkan.",
+    "failed": "Handling {n} mistókst: {msg}"
+  },
+  "move_result": {
+    "drew": "Tær hava tikið kortini frá stovninum til burturkast.",
+    "cannot_draw": "Vit kunnu ikki draga, bæði tilfeingið og burturkast er tómt.",
+    "invalid_pile": "Ógildiligt stavn. Vís W, F1-F4, ella T1-T7",
+    "foundation_one_card": "Kann bert flyta 1 kort til grundarlagið.",
+    "waste_to_foundation_ok": "Flytt kort frá burturkasti til stovnin F{dst}",
+    "waste_to_foundation_bad": "Kann ikki flyta burturkastkort til hesa grundstavnu",
+    "tableau_to_foundation_ok": "Fyrt spjald frá borði T{src} til grund F{dst}",
+    "tableau_to_foundation_bad": "Kann ikki flyta borðkort til hesa grundstavnu",
+    "foundation_to_foundation": "Kann ikki flyta frá grundarlagi til grundarlag.",
+    "waste_to_tableau_one_card": "Kann bert flyta 1 kort frá burturkasti til borðbræv.",
+    "waste_to_tableau_ok": "Flytt kort frá burturkasti til mynd T{dst}",
+    "waste_to_tableau_bad": "Kann ikki leggja avlopskort á ta pallbondstapuna",
+    "no_face_up": "Eingin uppvíst kort at flyta.",
+    "tableau_to_tableau_ok": "Fyrt {count} spjøl frá borði T{src} til T{dst}",
+    "tableau_to_tableau_bad": "Kann ei flytja {count} spjøl frá T{src} til T{dst}",
+    "foundation_to_tableau_one_card": "Kann bert flyta 1 kort frá grundarlag til borðbræv.",
+    "foundation_empty": "Grunnur F{src} er tómur.",
+    "foundation_to_tableau_ok": "Fyrt spjald frá grund F{src} til borð T{dst}",
+    "foundation_to_tableau_bad": "Kann ikki seta grundarlagskort á borð T{dst}",
+    "to_waste_or_stock": "Kann ikki flytast til avlop ella goymslu."
+  },
+  "outcome": {
+    "forfeit": "Endaspæl: {score} kort í grundstøðum.",
+    "won": "Til lukku, tit hava vunnið Klondike Solitaire!",
+    "turn_limit": "Leikur liðugur! Tú náddi máli av {max_turns} vendingum. Stig: {score} spjøl á grundum."
+  },
+  "board": {
+    "title": "=== KLONDIKE EINSÆTAN ===",
+    "turn": "Vendingur: {turn}/{max_turns}",
+    "stock": "Vørur: {stock} kort",
+    "waste": "Avfall (W): {waste}",
+    "foundations_header": "Grunnur:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabell: Sí myndina niðanfyri.",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

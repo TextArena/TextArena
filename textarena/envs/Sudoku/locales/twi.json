@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Wo ne Player {player_id}. Wo reko Sudoku.\nSaa ha yi ne Sudoku grid no mu te. Row biara wɔ number 1 kosi 9, na column biara nso wɔ number 1 kosi 9.\nCells a wɔntumi nnyɛ wɔ '.' ase, na cells a wɔde digits ahyɛ mu no wɔ digits 1 kosi 9.\n\nSudoku Grid a wɔde di dwuma seesei:\nBotae a wopɛ ne sɛ wode digits 1 kosi 9 bɛhyɛ cells a wɔntumi nnyɛ wɔ 9x9 grid no mu sɛdeɛ:\n1. Row biara wɔ digits 1 kosi 9 nyinaa, na wɔntumi nnyɛ wɔ repetition.\n2. Column biara wɔ digits 1 kosi 9 nyinaa, na wɔntumi nnyɛ wɔ repetition.\n3. Subgrids 3x3 a wɔwɔ no nyinaa wɔ digits 1 kosi 9 nyinaa, na wɔntumi nnyɛ wɔ repetition.\n\nMmara ne Nkyerɛkyerɛmu:\n1. **Mma wɔnnsan** numbers a wɔde maa wɔ grid no mu.\n2. **Mma wɔnhyɛ** cells a wɔntumi nnyɛ wɔ '.' ase.\n3. Wobɛtumi abɔ mu sɛdeɛ wopɛ, nanso gyina sɛ wɔahyɛ format ase sɛ '[row column number]'.\n4. **Gyina sɛ** wɔn move no mma wɔnnsan Sudoku mmara. Moves a wɔnnsan no bɛma wɔn penalties.\nExamples:\n- **Move a wɔde yɛ**:\n  - Grid Snippet Ansana Move:\n  \n  - Move: `[5 3 7]`\n  - Explanation: Sɛ wode 7 bɛhyɛ row 5, column 3 a, wɔnnsan Sudoku mmara.\n\n- **Move a wɔnnsan** (Overwriting a pre-filled cell):\n  - Grid Snippet Ansana Move:\n  \n  - Move: `[1 1 9]`\n  - Explanation: Cell (1,1) wɔ 5 ahyɛ mu dedaw. Wɔnnsan sɛ wode bɛhyɛ.\n\n- **Move a wɔnnsan** (Violating Sudoku rules):\n  - Grid Snippet Ansana Move:\n  \n  - Move: `[1 3 5]`\n  - Explanation: Sɛ wode 5 bɛhyɛ row 1, column 3 a, wɔnnsan Sudoku mmara, efisɛ 5 wɔ row 1 mu dedaw.\n\nAbakɔsɛm a wɔahyɛ wɔ moves ne thoughts no bɛba wɔ round a wɔbɛdi no akyi. Fa abakɔsɛm a wɔahyɛ wɔ move no mu sɛ wɔbɛyɛ decision a ɛbɛyɛ papa, na wɔnnsan moves a wɔahyɛ dedaw no.\n\n"
+  },
+  "board": {
+    "game_board": "Agodi Akwankyerɛ: {board}",
+    "board_state": "Ɔman a wɔhwɛ so no: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nsakrae a enni mu. Ɔbɔadeɛ {player_id} antumi amfa 'row column number' no amma mmuaeɛ.",
+    "out_of_bounds": "Mfosoo twe. Ōdi {player_id} hyɛɛ bɔ {num} wɔ ({row}, {col}), a ɛyɛ baabi a ɛnsɛe.",
+    "overwrite": "Move no mma yɛ. Player {player_id} pɛ sɛ ɔde cell a wɔde digits ahyɛ mu ({row}, {col}) no bɛhyɛ.",
+    "violates_rules": "Mfosoo twe. Ōdi {player_id} hyɛɛ bɔ {num} wɔ ({row}, {col}), a ɛyɛ nsɛmmɔnedi a ɛyɛ baabi a ɛnsɛe."
+  },
+  "outcome": {
+    "win": "Anigyesɛm! Ɔpanyin {player_id} wiee Sudoku mu asumasɛm no.",
+    "turn_limit": "Woadi nea w'aka no so. Wode {percent}% ahyɛ nkwammoaa a ɛnni hwee mu pɛpɛɛpɛ."
+  }
+}

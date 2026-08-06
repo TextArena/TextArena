@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Oli mchezaji {player_id} mu mupiira wa Kuhn Poker ogwa {max_rounds}.\nNnono za Mupiira:\n- Kuhn Poker esimba kadi 3 za J, Q, K (J ndiyo ya chini kabisa, K ndiyo ya juu kabisa)\n- Buli mchezaji atandika {ante} chip na anapokea kadi 1 buli mwendo (kumbuka nti kadi zibagibwa bila kubadilishwa, kwa hivyo toliweza kuwa na kadi ile ile na adui wo).\n- Mupiira uja kuendelea kwa {max_rounds} mwendo\n- Mchezaji aliye na chips nyingi zaidi baada ya mwendo wote atawangula\nNnono za Kikolerezo:\n- '[check]': Pita bila kubadilisha (bila kubadilisha kama hakuna bet iko kwenye meza)\n- '[bet]': Ongeza chip 1 kwenye pot (bila kubadilisha kama hakuna bet iko kwenye meza)\n- '[call]': Linganisha bet ya adui wo kwa kuongeza chip 1 kwenye pot\n- '[fold]': Achilia mkono wo na omukisa adui wo atawangule pot"
+  },
+  "init_round": {
+    "round_start": "### Kuzannyira round {current_round} mu {max_rounds} ezizannyibwa. Kaadi yo: '{player_card}'",
+    "available_actions": "Ebikolwa byo ebiriwo bye bino: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Masulani yakwata [Check], [Bet], [Call], oba [Fold].",
+    "not_legal": "Ekikolwa kirina okuba {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Mchezaji {player_id}, atandika kikolerezo: '[{move}]'.",
+    "valid_actions": "Ebikolwa byo ebiriwo bye bino: {legal_actions}.",
+    "round_summary": "{reason} Ekikomo kya sasa: Omuzannyi 0: '{player_0_chips}'; Omuzannyi 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Kuonyesha: Omuzannyi {winner} '{winner_card}' alishinda Omuzannyi {loser} '{loser_card}'. Omuzannyi {winner} ashinda poti ya {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Ku nkomerero ya {max_rounds} round, abazannyi bombi baalina omuwendo gwe gumu ogw'ebipapula.",
+    "round_win": "Omuzannyo {player_id} guwedde.",
+    "winner_player0": "Omuzannyi 0 awangudde nga alina chip ezisinga ku nkomerero ya {max_rounds} round zonna.",
+    "winner_player1": "Omuzannyi 1 awangudde ng'alina chips ezisinga ku nkomerero ya {max_rounds} round zonna."
+  }
+}

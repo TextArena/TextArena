@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Tu sês Zugador {player_id} in un zûc di LinesOfAction.\nLis tôs pedinis son '{side}', lis pedinis dal aversari son '{other}'.\nFormat di moviment: `[b1b3]` (coordenade di partence - coordenade di destinazion). Un moviment leçâl si sposte orizontalmentri, verticalmentri o diagonalmentri di un numar di cjasis compagn al numar di pedinis (di cualsiasi colôr) in chê linie. Tu puedis saltâ soredi lis tôs pedinis, ma no soredi lis pedinis dal aversari; rivâ parsore di un aversari lu cjape.  Vince cuant che dutis lis tôs pedinis son colegadis in maniere 8-vicin."
+  },
+  "board": {
+    "current_board": "Comitât: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Il formât al à di jessi e2e4 (da,aes coordenadis).",
+    "no_piece": "Nissun pezo {side} su {coord}.",
+    "identical": "Origjin e destinazion identichis.",
+    "not_straight_or_diagonal": "La mosse e à di jessi drete o diagonale.",
+    "wrong_distance": "Al à di lâ a distance avuâl ai tocs in linie.",
+    "enemy_blocks": "La pice nemie e bloche il percors.",
+    "destination_own": "Destinazion ocupade di un sôl."
+  },
+  "game_action": {
+    "moved": "Zogador {player_id} si è mosso {from} -> {to}",
+    "captured_suffix": "Zogador {player_id} si è mosso {from} -> {to} caturendi un nemì."
+  },
+  "outcome": {
+    "win": "Ducj i tocs a son leâts.",
+    "draw_no_capture": "60 moviments cence cjapâ.",
+    "draw_repetition": "La posizion e je ripetude trê voltis."
+  }
+}

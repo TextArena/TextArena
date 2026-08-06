@@ -10,14 +10,23 @@
     "{board}": "Das gerenderte ASCII-Spielfeld (nicht übersetzen)",
     "{moves}": "Die durch Kommas getrennte Liste verfügbarer Zug-Token wie '[4]' (nicht übersetzen)"
   },
-  "player_prompt": { "intro": "Du bist Spieler {player_id} bei Tic Tac Toe für drei Spieler.\nDein Symbol ist '{symbol}'.\nIhr platziert abwechselnd euer Symbol auf einem 5x5-Feld, um eine Viererreihe zu bilden.\nReihen können horizontal, vertikal oder diagonal sein.\nGib deinen Zug im Format '[4]' ein, um Feld 4 zu markieren." },
-  "board": { "current_board": "Aktuelles Spielfeld:\n\n{board}\n\nVerfügbare Züge: {moves}" },
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} bei Tic Tac Toe für drei Spieler.\nDein Symbol ist '{symbol}'.\nIhr platziert abwechselnd euer Symbol auf einem 5x5-Feld, um eine Viererreihe zu bilden.\nReihen können horizontal, vertikal oder diagonal sein.\nGib deinen Zug im Format '[4]' ein, um Feld 4 zu markieren."
+  },
+  "board": {
+    "current_board": "Aktuelles Spielfeld:\n\n{board}\n\nVerfügbare Züge: {moves}"
+  },
   "invalid_move": {
-    "wrong_format": "Ungültiges Zugformat. Verwende '[Feld]', wobei Feld 0-{max_cell} ist.",
+    "wrong_format": "Ungültiges Zugeingabeformat. Verwenden Sie '[cell]', wobei Zelle 0-{max_cell} ist.",
     "out_of_range": "Ungültige Feldnummer: {cell}. Muss zwischen 0 und {max_cell} liegen.",
     "already_occupied": "Feld {cell} ist bereits besetzt.",
     "made_invalid": "Spieler {player_id} hat einen ungültigen Zug gemacht"
   },
-  "game_action": { "placed": "Spieler {player_id} setzt sein Symbol ({symbol}) auf Feld ({row}, {col})." },
-  "outcome": { "win": "Spieler {player_id} ({symbol}) gewinnt!", "draw": "Das Spiel endet unentschieden!" }
+  "game_action": {
+    "placed": "Spieler {player_id} setzt sein Symbol ({symbol}) auf Feld ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Spieler {player_id} ({symbol}) gewinnt!",
+    "draw": "Das Spiel endet unentschieden!"
+  }
 }

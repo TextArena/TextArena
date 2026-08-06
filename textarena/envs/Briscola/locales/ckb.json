@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "یاریی بریسکۆلا دەستی پێکرد! خەتەی باڵا: {trump_suit} (کارتی باڵا: {trump_card})"
+  },
+  "prompt": {
+    "intro": "دەی یاریی بریسکۆلا یاری دەکەیت - یاریکەر {player_id}.\nئامانج: براوەی تریکەکان بۆ کۆکردنەوەی زۆرترین خال (مۆتەل 120 خال لە دێکی کارتەکان).\nخالەکانی کارت: A=11, 3=10, K=4, Q=3, J=2, ئەوانی تر=0\nھێزی کارت: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nکارتەکانی ترەمپ کارتە نا-ترەمپەکان دەبەن بەبێ ئەوەی ھێزێکیان بێت.\n\nچالاکی: '[play X]' لەوێ X پۆزیسیۆنە (1-{max_pos})ی کارتەکە لە دەستی تۆ"
+  },
+  "hand": {
+    "none": "هیچ کاردێک نییە.",
+    "empty": "هیچ کاردێک لە دەستدا نییە.",
+    "header": "دەستەکەت:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(ترەمپ)"
+  },
+  "trick": {
+    "empty": "هیچ کارتێک هێشتا ئەم فێڵەی نەکردووە.",
+    "header": "فێڵێکی ئێستا:",
+    "line": "  یاریکەر {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "یاریکەر {player_id}: {points} خال",
+    "trump_info": "جلی ترەمپ: {trump_suit}",
+    "trump_info_deck": "پۆکەی ترەمپ: {trump_suit} | کارتەکانی ماوە لە دێک: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\n خالەکان: {scores}\n{trump_info}\n\n کارتێک بە کاربەستی [play X] بەکار بە"
+  },
+  "invalid_move": {
+    "wrong_format": "بەکاربێنە [play X] کە X شوێنی کارتە (1, 2, 3, هتد.)",
+    "out_of_range": "پۆزیسیۆنی کارتێکی بەتەواوی نادروستە. {count} کارتەکانی هەیە (1-{count})"
+  },
+  "action": {
+    "played": "یاریکەر {player_id} {card} یاری کرد",
+    "trick_win": "یاریکەر {winner} براوەی تریک دەبێت بە {card} و {points} خال دەستەبەر دەکات!"
+  },
+  "outcome": {
+    "head": "یاری کۆتایی هات! یاریکەر {winner} براوەیە بە {points} خال!\n\n خالەکانی کۆتایی:\n{scores}",
+    "player_line": "یاریزان {player_id}: {points} خاڵ ({tricks} حەوتە)\n"
+  }
+}

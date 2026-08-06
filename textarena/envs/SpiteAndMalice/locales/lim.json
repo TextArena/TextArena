@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Geer zeen Speler {player_id} in e twie-speler sjpel van Spite en Malice. Uw doel is óm es ierste uw payoff sjtack leeg te kriege.\n\n### Sjpel Euverzich:\n- 't Doel is óm uw payoff sjtack te kriege door kaarte te sjpele nao de centraal sjtacke.\n- Geer kèn kaarte sjpele van drei bronne:\n  1. Uw **hand** (geer begint eder beurt mit bis 5 kaarte in hand).\n  2. De **baoveste kaart van uw payoff sjtack**.\n  3. De **baoveste kaart van ein van uw aafsjtacke**.\n\n### Sjpelregele:\n- Geer meug 'n kaart sjpele nao 'n centraal sjtack es ze **ein rang hoeger** is dan de baoveste kaart op dae sjtack (centraal sjtacke beginne mit Ace en gaon op bis Koningin; Keuninge zeen wild - ze kènne gesjpeeld waere op eder kaart mer verangere neet de rangvolgorde. Dit beteikent det es 'n Keuning gebruuk wuurt nao 4, dan wuurt dae Keuning gerangschikt es 5 en de volgende kaart mót 'n 6 zeen).\n- Es geer gein kaarte mie kèn sjpele, mót geer **'n kaart aafsjmette** nao ein van uw aafsjtacke óm uw beurt te beëindige.\n- Es 'n centraal sjtack de Koningin bereikt, wuurt ze automatisch geklaord.\n- De rangvolgorde is: A=1, 2=2, ..., 9=9, J=10, Q=11, K es wild.\n\n### Akties:\n1. **Trekke**: Aan 't begin van uw beurt, trek kaarte óm uw hand aan te völle bis 5 kaarte. Gief **[draw]** in óm te beginne.\n2. **'n Kaart sjpele**: Óm 'n kaart te sjpele, sjpecificeer de kaart en de centraal sjtack zoea: **[play A♠ 0]** (wao 'A♠' de kaart is en '0' de centraal sjtack-index is).\n3. **Aafsjmette**: Es geer gein kaarte mie kèn sjpele, sjmet 'n kaart van uw hand aaf nao 'n aafsjtack óm uw beurt te beëindige. Gief **[discard A♠ 1]** in (wao 'A♠' de kaart is en '1' de aafsjtack-index is). Merk op det geer gein kaart van de payoff sjtack kèn aafsjmette. Geer meug allèng kaarte van uw hand aafsjmette.\n\n"
+  },
+  "board": {
+    "current_board": "Hujig spelbord:\n\n{board}\nBesjikbare zètte: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Centrumstapel -- ",
+    "pile": "{observation}Hoep {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Speler {player_id} ziene översich ---\n",
+    "payoff": "{observation}Payoff-hoep (Topkaart): {top_card}, Lengde van payoff-hoep: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand} ",
+    "discard": "{observation}Aaflegstapels: {discard}\n",
+    "empty": "Leeg ."
+  },
+  "game_message": {
+    "no_cards_left": "De kaarte die weej zien te vergaete, zeen neet mie. 't Is de handj waat geer kint sjpeule: 1. Euze haand 2. d'n hoegste kaart van eur betaolstapel 3. d'ne hoegte kaart vaan e paar oetsjtèlle stapele. "
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid move format. Speler {player_id} reageerde neet mèt 'n geldige sjpelling in haakjes.",
+    "invalid_play": "Óngeldige zèt. Speler {player_id} heet geprobeerd om {card} te speele op centraal hoep {index}.",
+    "discard_from_payoff": "Invalide verwerpe. Speler {player_id} probeerde 'n kaart oet de payoff-stapel te werpe.",
+    "discard_not_in_hand": "Invalide verwerpe. Speler {player_id} probeerde 'n kaarte te goon die neet in de hand is.",
+    "wrong_move_type": "Ongeljigde zètsoort. Speler {player_id} haet neet gereageerd mèt 'n geldjige zètsoort."
+  },
+  "game_action": {
+    "you_drew": "Je hebt kaarten getrokke.",
+    "opponent_drew": "Speler {player_id} trok kaarte.",
+    "you_played": "Ge speulde {card} op de middelste stapel {index}.",
+    "opponent_played": "Speler {player_id} heet {card} gespeeld op centraal hoep {index}.",
+    "you_discarded": "Doe höbs {card} aafgegoej op aafgoejhoep {index}, wat ouch beteikent det doe dien beurt aafgeslote höbs. Gein wijtere acties van dich waere bie deze beurt in aonmerking gekómme. Speler {next_player_id} kump aan de beurt.",
+    "opponent_discarded": "Speler {player_id} heet {card} aafgegoej op aafgoejhoep {index}, wat ouch beteikent det ze hun beurt aafgeslote höbbe. Gein wijtere acties van Speler {player_id} waere bie deze beurt in aonmerking gekómme. Speler {next_player_id}, doe kóm aan de beurt. Vul asjeblieft dien actie in in 't formaat [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Speler {current_player} heet ziene payoff-hoep leeggespeeld! Speler {current_player} wint!",
+    "deadlock_player_0": "Doadlop bereik! Speler 0 wint mit {player_0_payoff} kaarte blieve taegeüber Speler 1 ziene {player_1_payoff} kaarte.",
+    "deadlock_player_1": "Doadlop bereik! Speler 1 wint mit {player_1_payoff} kaarte blieve taegeüber Speler 0 ziene {player_0_payoff} kaarte.",
+    "deadlock_tie": "Doodsjleeg bereikt mit gelieke stand! Beide spelers höbbe {player_0_payoff} kaarte euvergebleve. Speler {current_player} wint bij gebrek aan beter."
+  }
+}

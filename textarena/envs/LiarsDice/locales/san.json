@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "त्वं खेलकः {player_id} असि {num_players}-खेलकानां मिथ्यापाशक-खेले।\nनियमाः\n- स्वकीये पाले त्वं वा कर्तुं शक्नोषि:\n  १) नवीनां विदां उच्चतरेण परिमाणेन वा उच्चतरेण मुखेन (वा उभाभ्यां) वर्तमानात् विदात् समुन्नतां कर्तुं; यथा '[Bid: 3, 4]',\n  २) अन्तिमां विदां '[Call]' इति लिखित्वा आह्वातुं।\n\nयदि त्वं आह्वासि:\n  - यदि सर्वेषु पाशकेषु विदितस्य मुखमूल्यस्य वास्तविकसंख्या विदितात् न्यूना भवति, अन्तिमः विदकः एकं पाशकं हारयति।\n  - अन्यथा, आह्वायकः एकं पाशकं हारयति।\nखेलकः यः शून्यं पाशकं प्राप्नोति सः निराकृतः भवति। अन्तिमः अवशिष्टः खेलकः जयति।"
+  },
+  "board": {
+    "per_player": "\tखिलाड़ी {p}: {d}",
+    "new_round": "\nनवीन चक्र - अवशिष्ट पासाक्रीडा: {dice_summary}\nतव वर्तमान पासाक्रीडा सन्ति: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "क्रीडकः {current_player_id} आह्वयति । वास्तविकमुखमूल्य {face_value} गणना {count} वर्तते, यत् {quantity} अपेक्षया न्यूनम् ।\nक्रीडकः {loser_id} (अन्तिमः प्रगणकः) एकं पाशकं हारयति ।",
+    "caller_loses": "क्रीडकः {current_player_id} आह्वयति । वास्तविकमुखमूल्य {face_value} गणना {count} वर्तते, यत् {quantity} तुल्यं वा अधिकम् ।\nक्रीडकः {loser_id} (आह्वायकः) एकं पाशकं हारयति ।"
+  },
+  "action": {
+    "bid_announce": "क्रीडकः {player_id} मुखमूल्य {face_value} संख्यायाः {quantity} प्रगणयति ।"
+  },
+  "invalid_move": {
+    "call_no_bid": "पूर्वं निवेदनेन विना सम्भाषणम् अकरोत्।",
+    "invalid_bid": "अमान्यम् निवेदः {reason}",
+    "not_recognized": "विद्युत्क्रियात्मकं नैव आह्वयितुं वा '[Bid: X, Y]' वा '[Call]' इति वैध रूपेण प्रस्तुतं । प्रस्तुत विद्युत्क्रियात्मकं: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "नवीन परिमाण {new_quantity} वर्तमान {current_quantity} न्यूनं अस्ति ।",
+    "face_lower": "नवीन मुखमूल्य {new_face_value} वर्तमान {current_face_value} न्यूनं अस्ति ।",
+    "identical": "अधुना प्रदत्तं निवेद्य समानम् अस्ति।",
+    "face_range": "नाममात्रं मूल्यम् १ तः ६ यावत् भवेत् ।"
+  },
+  "message": {
+    "eliminated_invalid": "क्रीडकः {player_id} अवैधगत्या निराकृतः ।"
+  },
+  "outcome": {
+    "win": "खिलाडि {winner} जयति! अन्तिम क्रम: {final_ranking}"
+  }
+}

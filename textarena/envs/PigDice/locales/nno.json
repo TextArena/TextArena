@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Du er spelar {player_id} som spelar eit spel med Pig Dice.\n\nReglar:\n- På din tur kan du anten '[roll]' eller '[hold]'\n- Rull ein 2-6: Legg til din turtotal\n- Rull ein 1: Tap turtotal og avslutt tur\n- Hold: Legg til turtotal til din poengsum og avslutt tur\n- Første til {winning_score} poeng vinn\n\nNår det er din tur, ser du dei noverande poengsummane og turtotal.\nSvar med '[roll]' for å rulle terningen eller '[hold]' for å spare poenga dine."
+  },
+  "invalid_move": {
+    "invalid_action": "Ugyldig handlingsformat. Bruk '[roll]' eller '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Spelar {player_id} gjekk over, og tapte {turn_total} poeng!",
+    "player_hold": "Spelar {player_id} held og sparer {turn_total} poeng."
+  },
+  "board": {
+    "player": "Spelar 0: '{score_0}'; Spelar 1: '{score_1}'",
+    "current_total_scores": "Noverande totale poengsummar: {scores}\nDin noverande turtotal er {turn_total}.",
+    "roll_history": "{observation}\nDin rullingshistorikk for denne turen: {roll_history}",
+    "first_roll": "{observation} Dette er fyrste kastet av rolla.",
+    "available_actions": "{observation}\nTilgjengelege handlingar: '[roll]' eller '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Spelar {winner_id} vann ved å ha høgare poengsum ved turgrensa ({scores})",
+    "winner_by_score": "Spelar {winner_id} vann ved å nå målpoengsummen på {winning_score}!",
+    "draw": "Turgrensemålet er nådd og alle spelarane har same poengsum: {scores}"
+  }
+}

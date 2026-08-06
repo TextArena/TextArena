@@ -1,0 +1,39 @@
+{
+  "_comment": "Localized strings for the Tak environment. Keep {placeholders} intact. Piece tokens (F/W/C + player id), grid coordinates like (2,2), the action format [ACTION SOURCE ALLOCATION], and the ASCII board are neutral and must not be translated.",
+  "_slots": {
+    "player_id": "player number (0 or 1)",
+    "current_player_id": "player number of the acting player",
+    "board": "pre-rendered ASCII board (neutral, do not translate)",
+    "flat_stones": "number of flat stones available to the current player",
+    "capstones": "number of capstones available to the current player",
+    "cells": "neutral list of target coordinates, e.g. [(0, 0)]",
+    "source": "neutral source coordinate tuple, e.g. (0, 0)",
+    "targets": "neutral list of target coordinates, e.g. [(1, 0)]",
+    "winner": "player number who won (0 or 1)",
+    "flats0": "player 0's flat-stone count at game end",
+    "flats1": "player 1's flat-stone count at game end"
+  },
+  "player_prompt": {
+    "intro": "Wena ule mukwenu {player_id} mu Tak (cipimo cakupungulwa: misungi ya miraba mingi ikwata kwa kuti kutoka kwa ntwikalo badala ya mstari ulio na mwelekeo; sheria zote zilizo hapa chini zinatendeka).\nLengo lako ni kufunga kingo mbili za ubao kwa vipande vyako ili kuunda barabara wakati wa kuzuia mpinzani wako kufanya vivyo hivyo.\nMchezo pia unakoma wakati ubao unajaa au mchezaji anapoteza vipande: basi mchezaji aliye na mawe mengi ya tambarare ('F') yanayoonekana juu ya misungi anashinda kuhesabu tambarare (kuta na mawe ya juu hayahesabiwi), na kuhesabu tambarare sawa ni sare. Kikomo cha zamu kinatendeka kama ulinzi, na ikiwa kinafikiwa kuhesabu tambarare huamua matokeo.\nUnaweza kufanya vitendo vifuatavyo kwenye zamu yako:\n- Weka kipande kwenye mraba mtupu.\n- Hamisha msungi wa vipande kutoka mraba mmoja hadi miraba mingine. Unaweza kuweka vipande vyako juu ya vipande vingine kwenye mraba wa lengo. Kipande cha juu zaidi kinabainisha umiliki wa msungi.\n- Gawa msungi wa vipande katika misungi miwili au zaidi na kuyasambaza kwenye miraba ya karibu.\n- Rata kipande cha ukuta kuwa kipande cha tambarare kwa kutumia kipande cha juu.\n- Weka kipande cha juu kwenye mraba mtupu.\n- Hamisha kipande cha juu kutoka mraba mmoja hadi miraba mingine. Kipande cha juu pia kinaweza kurata kipande cha ukuta wakati wa kusonga.\n\nKwa kila hatua, wasilisha kitendo chako kwa kutumia muundo:\n[ACTION SOURCE ALLOCATION]\n- ACTION: Aina ya hatua unayofanya ('place' au 'move').\n- SOURCE: Viwianishi vya gridi ambapo mawe yanatoka. Tumia () kwa 'place'.\n- ALLOCATION: Kamusi ambapo vijiti ni viwianishi vya gridi vya lengo na thamani ni mawe au vipande vinavyohamishwa au kuwekwa.\n\nAina za Mawe na Uwezo Wao:\n- Mawe ya Tambarare ('F'):\n  - Huunda sehemu ya barabara (inayotumika kuunganisha kingo za ubao).\n  - Yanaweza kuwekwa juu ya vipande vingine au kuwa na vipande vingine vilivyowekwa juu yake.\n  - Yanaweza kuhamishwa kama sehemu ya msungi au kibinafsi.\n\n- Mawe ya Ukuta ('W'):\n  - Huuza barabara na kuzuia wapinzani kutekeleza malengo yao.\n  - Hayawezi kuwa sehemu ya barabara.\n  - Yanaweza kuratwa kuwa mawe ya tambarare na kipande cha juu.\n\n- Mawe ya Juu ('C'):\n  - Hutenda kama mawe ya tambarare na yanaweza kuunda sehemu ya barabara.\n  - Yanaweza kuratwa mawe ya ukuta, kuondoa athari zao za kuzuia.\n  - Hayawezi kufunikwa na vipande vingine, daima hubaki juu ya msungi.\n  - Ni zana yenye nguvu kwa ajili ya kujenga barabara na kuharibu mipango ya mpinzani.\n\nMawe yataitambuliwa na mchezaji kama ifuatavyo:\n- Mawe ya Tambarare kwa Mchezaji 0: 'F0'\n- Mawe ya Ukuta kwa Mchezaji 1: 'W1'\n- Mawe ya Juu kwa Mchezaji 1: 'C1'\n\nMifano:\n- Ili kuweka kipande cha juu kwenye (3,2):\n  [place () {{(3,2): [C0]}}]\n- Ili kuhamisha vipande vyote kutoka (2,2) hadi (2,3):\n  [move (2,2) {{(2,3): [F0]}}]\n- Ili kugawa msungi wa vipande 5 kutoka (2,2) katika miraba miwili:\n  [move (2,2) {{(2,3): [F0, F0], (2,4): [W0, F0, C0]}}]\n- Ili kuhamisha na kuweka kipande kimoja kutoka (2,2) juu ya msungi uliopo kwenye (2,3):\n  [move (2,2) {{(2,3): [F0]}}]\n\nWakati wa kuwasilisha hatua yako, fikiria kwa makini malengo yako ya kujenga barabara na hatua zinazowezekana za mpinzani wako.\n"
+  },
+  "board": {
+    "current_state": "Kuvuka kwa Sasa:\n\n{board}\nMawe ya Kuweka: {flat_stones}, Mawe ya Kufunika: {capstones}\n"
+  },
+  "invalid_move": {
+    "invalid_format": "Muundo wa hatua si sahihi. Mchezaji {current_player_id} hakuwahi kujibu na hatua halali katika mabano ya mraba.",
+    "invalid_placement": "Uwekaji si sahihi. Mchezaji {current_player_id} alijaribu kuweka kipande kwenye mraba usio sahihi.",
+    "invalid_movement": "Kusonga si sahihi. Mchezaji {current_player_id} alijaribu kuhamisha vipande kwa njia isiyo sahihi.",
+    "invalid_action": "Hatua si sahihi. Mchezaji {current_player_id} alijaribu kufanya kitendo kisichojulikana."
+  },
+  "action": {
+    "placement": "Mchezaji {current_player_id} aliweka kipande kwenye ({cells}).",
+    "movement": "Mchezaji {current_player_id} alihamisha vipande kutoka {source} hadi {targets}."
+  },
+  "outcome": {
+    "winner": "Mchezaji {current_player_id} amefunga kingo mbili za ubao.",
+    "flat_win": "Ubao umejaa. Mchezaji {winner} anashinda kuhesabu tambarare {flats0}-{flats1}.",
+    "flat_win_capped": "Kikomo cha zamu kilifikwa. Mchezaji {winner} anashinda kuhesabu tambarare {flats0}-{flats1}.",
+    "draw": "Ubao umejaa na kuhesabu tambarare ni sawa {flats0}-{flats1}. Mchezo ni sare.",
+    "draw_capped": "Kikomo cha zamu kilifikwa na kuhesabu tambarare ni sawa {flats0}-{flats1}. Mchezo ni sare."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "आप खिलाड़ी {player_id} हैं, जो {num_rounds} राउंडों का Iterated Ultimatum Game खेल रहे हैं।\nआपके पास इस राउंड में ${pool} है, जिसे आप खिलाड़ी {other_id} के साथ बांट सकते हैं।\n\nप्रस्तावक:\n  - एक प्रस्ताव बनाएं: [Offer: $X] (0 <= X <= pool)\n  - यदि स्वीकार किया जाता है → आपको $(pool - X) मिलता है, दूसरे खिलाड़ी को $X मिलता है\n  - यदि अस्वीकार किया जाता है → दोनों को $0 मिलता है\n  - उदाहरण: [Offer: $3]  या  'मुझे लगता है कि यह उचित है। [Offer: $5]'\n\nउत्तरदाता:\n  - प्रस्ताव पर निर्णय लें या तो [Accept] या [Reject]\n  - उदाहरण: 'यह उचित लगता है। [Accept]'\n            'यह अनुचित है। [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- राउंड {round_number} शुरू होता है! ---\nखिलाड़ी {proposer_id} प्रस्तावक है, खिलाड़ी {responder_id} उत्तरदाता है।",
+    "offer": "राउंड {round_number}: खिलाड़ी {proposer_id} खिलाड़ी {responder_id} को ${offer} का प्रस्ताव देता है ( ${keep} रखकर)।",
+    "accepted": "खिलाड़ी {responder_id} ने स्वीकार किया! राउंड {round_number} के लाभ: खिलाड़ी {proposer_id} +${proposer_gain}, खिलाड़ी {responder_id} +${responder_gain}। नए कुल: खिलाड़ी 0: ${total_0}, खिलाड़ी 1: ${total_1}।",
+    "rejected": "खिलाड़ी {responder_id} ने प्रस्ताव को अस्वीकार कर दिया! राउंड {round_number} के लाभ: दोनों खिलाड़ियों को +$0। कुल यथावत रहते हैं: खिलाड़ी 0: ${total_0}, खिलाड़ी 1: ${total_1}।"
+  },
+  "invalid_move": {
+    "no_offer_format": "प्रस्तावकर्ता [Offer: $X] इति स्वरूपेण प्रस्तावाणि कुर्यात् ।",
+    "bad_integer": "प्रस्तावितस्य राशिः एकं वैधम् पूर्णाङ्कं भवेत् ।",
+    "out_of_range": "प्रस्तावः $० तः ${pool} इत्यस्य मध्ये भवितुम् अर्हति ।",
+    "no_current_offer": "न वर्तमान प्रस्तावः प्रत्युत्तरदानाय।",
+    "accept_or_reject": "प्रतिस्पन्दनकर्ता अवश्यं प्रस्तावं [Accept] वा [Reject] करोतु।"
+  },
+  "outcome": {
+    "win": "खिलाड़ी {winner} ने ${winner_total} कुल के साथ जीत हासिल की, जबकि खिलाड़ी {loser} का कुल ${loser_total} था।",
+    "draw": "समः! उभयतः ${total} सम्पत्तयः प्राप्ताः।"
+  }
+}

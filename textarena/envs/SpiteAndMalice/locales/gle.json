@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Tá tú mar Imreoir {player_id} i gcluiche dhá imreoir de Spite and Malice. Is é do chuspóir a bheith ar an gcéad duine a ghlanann do phile íocaíochta.\n\n### Forbhreathnú ar an gCluiche:\n- Is é an cuspóir ná do phile íocaíochta a ghlanadh trí chártaí a imirt go dtí na pilí lárnacha.\n- Is féidir leat cártaí a imirt ó thrí fhoinse:\n  1. Do **lámh** (tosaíonn tú gach uair le suas le 5 chárta i do lámh).\n  2. **Cárta barr do phile íocaíochta**.\n  3. **Cárta barr aon cheann de do philí dioscáide**.\n\n### Rialacha Imirt:\n- Is féidir leat cárta a imirt go pilé lárnach má tá sé **céim amháin níos airde** ná an cárta barr ar an bpilé sin (tosaíonn pilí lárnacha le hAis agus téann suas go Banríon; tá Ríthe fiáin - is féidir iad a imirt ar aon chárta ach ní dhéanann siad athrú ar an gcéim shraith. Ciallaíonn sé seo má úsáidtear Rí tar éis 4, go bhfuil an Rí sin rangaithe mar 5 agus caithfidh an chárta ina dhiaidh sin a bheith 6).\n- Mura féidir leat aon chártaí eile a imirt, caithfidh tú **cárta a dhíscáradh** go ceann de do philí dioscáide chun do throth a chríochnú.\n- Má shroicheann pilé lárnach an Bhanríon, déanfar é a ghlanadh go huathoibríoch.\n- Is é an t-ordú céime: A=1, 2=2, ..., 9=9, J=10, Q=11, K mar fhiáin.\n\n### Gníomhartha:\n1. **Tarraing**: Ag tús do throth, tarraing cártaí chun do lámh a líonadh suas go 5 chárta. Cuir isteach **[draw]** chun tús a chur.\n2. **Imir Cárta**: Chun cárta a imirt, sonraigh an cárta agus an pilé lárnach mar seo: **[play A♠ 0]** (áit a bhfuil 'A♠' an cárta agus '0' an innéacs pilé lárnach).\n3. **Díscáradh**: Mura féidir leat aon chártaí eile a imirt, díscáradh cárta ó do lámh go pilé dioscáide chun do throth a chríochnú. Cuir isteach **[discard A♠ 1]** (áit a bhfuil 'A♠' an cárta agus '1' an innéacs pilé dioscáide). Tabhair faoi deara nach féidir leat aon chárta a dhíscáradh ón bpile íocaíochta. Níl cead agat ach cártaí a dhíscáradh ó do lámh."
+  },
+  "board": {
+    "current_board": "Cláir Reatha:\n\n{board}\nGluaisne Ar Fáil: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pílí Ionad -- ",
+    "pile": "{observation}Cruachán {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Radharc Imreora {player_id} ---\n",
+    "payoff": "{observation}Cruachán Páigh (Cárta Barr): {top_card}, Fad an Chruachán Páigh: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Cruacháin Dícheallta: {discard}\n",
+    "empty": "Folamh."
+  },
+  "game_message": {
+    "no_cards_left": "Níl aon chártaí eile le tarraingt as. Cuimhnigh gur féidir leat cártaí a imirt ó na foinsí seo: 1. Do ** lámh ** 2. An ** top card de do phíle pá** 3. an ** top cart ar bith de do piles scartha ** . "
+  },
+  "invalid_move": {
+    "wrong_format": "Formáid imeachta neamhbhailí. Ní fhreagair imreoir {player_id} le gluaiseacht bailí i gclaonadh cearnach.",
+    "invalid_play": "Imirt neamhghnácha. Thriail Imreoir {player_id} {card} a imirt ar chruachán lárnach {index}.",
+    "discard_from_payoff": "Caith neamhbhailí. Rinne an t-imreoir {player_id} iarracht cárta a dhiúscairt ón bpaill íocaíochta .",
+    "discard_not_in_hand": "Caith neamhbhailí. Rinne an t-imreoir {player_id} iarracht cárta nach bhfuil i láimh a dhiúscairt.",
+    "wrong_move_type": "Ní raibh cineál gluaiseachta bailí ag an imreoir {player_id}."
+  },
+  "game_action": {
+    "you_drew": "D'éirigh tú cártaí.",
+    "opponent_drew": "D'éirigh an cluicheoir {player_id} cártaí.",
+    "you_played": "D'imir tú {card} ar an bpáirc lárnach {index}.",
+    "opponent_played": "Bhí an t-imreoir {player_id} ag imirt ar {card} sa chúlchiste lárnach {index}.",
+    "you_discarded": "Tá {card} dícheallta agat chun cruachán dícheallta {index}, rud a chiallaíonn freisin go raibh do thiarnaíocht críochnaithe agat. Ní dhéanfar aon ghluaisne eile de do chuid a mheasúnú don thiarnaíocht seo. Rachaidh Imreoir {next_player_id} ar aghaidh anois.",
+    "opponent_discarded": "Dícheallann Imreoir {player_id} {card} chun cruachán dícheallta {index}, rud a chiallaíonn freisin go raibh a thiarnaíocht críochnaithe acu. Ní dhéanfar aon ghluaisne eile de chuid Imreoir {player_id} a mheasúnú don thiarnaíocht seo. Imreoir {next_player_id}, rachaidh tú ar aghaidh anois. Iontráil do ghluaisne i bhformáid [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Tá cruachán páigh Imreora {current_player} críochnaithe! Buann Imreoir {current_player}!",
+    "deadlock_player_0": "Tá staic bhuaite! Buann Imreoir 0 le {player_0_payoff} cártaí fágtha in aghaidh {player_1_payoff} cártaí Imreora 1.",
+    "deadlock_player_1": "Tá staic bhuaite! Buann Imreoir 1 le {player_1_payoff} cártaí fágtha in aghaidh {player_0_payoff} cártaí Imreora 0.",
+    "deadlock_tie": "Tá dlúthbhaint bainte le comhscór! Tá {player_0_payoff} cártaí fágtha ag an dá imreoir. Buaileann Imreoir {current_player} go réidh."
+  }
+}

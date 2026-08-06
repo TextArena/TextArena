@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are playing the Minesweeper game.\nThe objective of the game is to reveal all cells that do not contain mines.\nTo make a move, simply specify the row and column coordinates you want to reveal using the format:\n- `[row col]`: Reveal the cell at the specified row and column.\nFor example:\n- `[3 2]` to reveal the cell in Row 3, Column 2.\n- `[5 6]` to reveal the cell in Row 5, Column 6.\nOn your first move, you will reveal an area around the cell you choose to ensure a safe start.\nThe current board layout is shown below. Cells that are unrevealed are represented by a dot ('.'), revealed numbers show the count of adjacent mines.\nBe mindful not to choose already revealed cells.\nHere is the current board layout:\n"
+  },
+  "board": {
+    "game_board": "បន្ទប់លេងហ្គេម: {board}",
+    "current_board": "ក្តារបច្ចុប្បន្ន៖\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "អ្នកមិនបានឆ្លើយតបជាមួយតួអង្គសរុបត្រឹមត្រូវនៅក្នុងកញ្ចប់បាត។",
+    "out_of_bounds": "កូអរដោនេជួរ និងជួរដែលបានកំណត់មានព្រំដែនហួសពីក្តារ។",
+    "already_revealed": "កោសិកានៅ ({row}, {col}) ត្រូវបានបង្ហាញរួចហើយ",
+    "hit_mine": "អ្នកបានវាយប្រហារអណ្តូងរ៉ែនៅ ({row}, {col}) ។"
+  },
+  "game_action": {
+    "revealed": "អ្នកបានបង្ហាញសំបុត្រក្នុង ({row}, {col}) ។"
+  },
+  "outcome": {
+    "win": "សូមអបអរសាទរ! អ្នកបានលុបបំបាត់ផ្ទាំង Minesweeper ដោយជោគជ័យ។",
+    "turn_limit": "កំណត់ត្រាបានសម្រេចហើយ អ្នកបានរកឃើញដោយជោគជ័យ {percent}% នៃបន្ទប់សុវត្ថិភាព"
+  }
+}

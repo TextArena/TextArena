@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Wo ne Player {player_id} wɔ agorɔ a ɛyɛ Spite ne Malice a wɔn baanu bɛdi. Wo botae ne sɛ wo bɛyɛ ɔhene a wobɛwie wo payoff pile no.\n\n### Agorɔ Ho Nhwehwɛmu:\n- Botae ne sɛ wo bɛwie wo payoff pile no denam kɔpɛ wɔ center piles no so.\n- Wo betumi akɔpɛ kɔpɛ afi mmeaɛ abiɛsa:\n  1. Wo **nsa** (wo hyɛ aseɛ kwa noa ɛkɔpɛ 5 wɔ wo nsa mu).\n  2. **Wo payoff pile no kɔpɛ a ɛwɔ soro**.\n  3. **Wo discard piles no kɔpɛ a ɛwɔ soro**.\n\n### Agorɔ Mmara:\n- Wo betumi akɔpɛ kɔpɛ wɔ center pile no so sɛ ɛyɛ **kɔpɛ korɔ** sen kɔpɛ a ɛwɔ soro no (center piles no hyɛ aseɛ Ace na ɛkɔpɛ Queen; Kings yɛ wild - wɔ betumi akɔpɛ wɔ kɔpɛ biara so nanso wɔnnyɛ rank sequence no. Eyi kyerɛ sɛ sɛ King bi wɔmaa wɔde kɔpɛ 4 akyi a, na King no bɛyɛ kɔpɛ 5 na kɔpɛ a edi akyi no bɛyɛ 6).\n- Sɛ wo nni kɔpɛ biara a, wo bɛwie wo turn no denam kɔpɛ a wobɛtumi wɔ wo discard piles no mu.\n- Sɛ center pile no duu Queen a, ɛbɛwie no ara.\n- Rank order no yɛ: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Nsɛm:\n1. **Draw**: Wɔ aseɛ wo turn no, draw kɔpɛ a wobɛwie wo nsa no kwa 5 kɔpɛ. Bɔ **[draw]** aseɛ.\n2. **Play a Card**: Sɛ wo bɛkɔpɛ kɔpɛ bi a, bɔ kɔpɛ no ne center pile no sɛ: **[play A♠ 0]** (ɛne kɔpɛ no ne 0 ne center pile index).\n3. **Discard**: Sɛ wo nni kɔpɛ biara a, wobɛwie wo turn no denam kɔpɛ a wobɛtumi wɔ wo nsa mu wɔ discard pile no mu. Bɔ **[discard A♠ 1]** (ɛne kɔpɛ no ne 1 ne discard pile index). Hwɛ sɛ wo nni kɔpɛ biara a wobɛtumi wɔ payoff pile no mu. Wo betumi wɔ kɔpɛ a wobɛtumi wɔ wo nsa mu no.\n\n"
+  },
+  "board": {
+    "current_board": "Bɔɔde akyɛ:\n\n{board}\nAdeyɛ nhyehyɛe: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Mfinimfini Nkwamafo -- ",
+    "pile": "{observation}Ntɔsoo {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- ɔkɔmhyɛni {player_id} View ---\n",
+    "payoff": "{observation}Adwuma Ntɔsoo (Tɔɔ a ɛwɔ so): {top_card}, Adwuma Ntɔsoo Mu Kɛseɛ: {payoff_length}\n",
+    "hand": "{observation}Nsa: {hand}\n",
+    "discard": "{observation}Asɔre Ntɔsoo: {discard}\n",
+    "empty": "Nkyene biara nni hɔ."
+  },
+  "game_message": {
+    "no_cards_left": "Wonni nkrataa biara bio a wobɛtwe. Kae sɛ wubetumi adi kan de wo nsa aka nea edidi so yi: 1. Wo nsam 2. Kaad no a ɛwɔ w'aboboano 3. Kaad a ɛkorɔn wɔ nneɛma bi mu a wubu gu hɔ nyinaa. "
+  },
+  "invalid_move": {
+    "wrong_format": "Nsakrae a enni mu. Odifo {player_id} antumi amfa ne nsa anka nea ɛwɔ hɔ wɔ ntweaseɛ no so.",
+    "invalid_play": "Nsɛm a wobɛyɛ no yɛ saa. Player {player_id} pɛ sɛ ɔbɛkɔpɛ {card} wɔ center pile {index} no so.",
+    "discard_from_payoff": "Ɔbɔadeɛ {player_id} bɔɔ mmɔden sɛ ɔbɛtu ka krataa bi afiri mu.",
+    "discard_not_in_hand": "Ɔbɔadeɛ {player_id} bɔɔ mmɔden sɛ ɔbɛtow krataa a ɔnni ne nsam.",
+    "wrong_move_type": "Ɔbɔadeɛ {player_id} antumi amfa ɔkwapa bi ammua."
+  },
+  "game_action": {
+    "you_drew": "Wode nkrataa bɔɔ so.",
+    "opponent_drew": "Ɔbɔfo {player_id} twee nkrataa.",
+    "you_played": "Wode {card} wɔ mfinimfini ntɔsoo {index}.",
+    "opponent_played": "ɔkɔmhyɛni {player_id} de {card} wɔ mfinimfini ntɔsoo {index}.",
+    "you_discarded": "Wo wie kɔpɛ {card} wɔ discard pile {index} no mu, ɛno kyerɛ sɛ wo wie wo turn no. Nni nsɛm biara a wobɛtumi yɛ bio wɔ turn no mu. Player {next_player_id} bɛkɔ so.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "ɔkɔmhyɛni {current_player} atintim wɔn adwuma ntɔsoo! ɔkɔmhyɛni {current_player} di nkonim!",
+    "deadlock_player_0": "Adeyɛ akyɛ! ɔkɔmhyɛni 0 di nkonim wɔ {player_0_payoff} kɔɔde gye ɔkɔmhyɛni 1 no {player_1_payoff} kɔɔde.",
+    "deadlock_player_1": "Adeyɛ akyɛ! ɔkɔmhyɛni 1 di nkonim wɔ {player_1_payoff} kɔɔde gye ɔkɔmhyɛni 0 no {player_0_payoff} kɔɔde.",
+    "deadlock_tie": "Adeyɛ akyɛ wɔ nhyɛso! Mmerɛ nyinaa wɔ {player_0_payoff} kɔɔde. ɔkɔmhyɛni {current_player} di nkonim wɔ nhyɛso mu."
+  }
+}

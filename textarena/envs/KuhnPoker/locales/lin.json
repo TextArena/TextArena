@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ozali Joueur {player_id} na mokili ya {max_rounds} ya Kuhn Poker.\nMikano ya Mokili:\n- Kuhn Poker eutili kopo ya 3 ya kala na J, Q, K (J nde ya mwasi, K nde ya juu)\n- Kila joueur akotisi {ante} chip na akokoli 1 kala kila round (kumbuka kwamba kala ezwamaka bila kobadilisha, kasi okoki kozwa kala sawa na mokonzi nayo).\n- Mokili ekauki kwa {max_rounds} rounds\n- Joueur na chips mingi zaidi baada ya mokili yonso akokunda\nMikano ya Action:\n- '[check]': Pasa bila kobeti (kaka si beti ezali na mokili)\n- '[bet]': Ongeza 1 chip na pot (kaka si beti ezali na mokili)\n- '[call]': Lingana na mokonzi beti na ongeza 1 chip na pot\n- '[fold]': Suka maboko nayo na kasi mokonzi akokunda pot"
+  },
+  "init_round": {
+    "round_start": "### Kuanza round {current_round} kati ya {max_rounds} rounds. Kadi yako ni: '{player_card}'",
+    "available_actions": "Misala na yo ezali: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action inabidi iwe [Check], [Bet], [Call], au [Fold].",
+    "not_legal": "Likambo esengeli kozala {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Joueur {player_id}, atikisi mokili: '[{move}]'.",
+    "valid_actions": "Misala na yo ezali: {legal_actions}.",
+    "round_summary": "{reason} Ntalo za sasa: Mbazé 0: '{player_0_chips}'; Mbazé 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Mbanda ya kati: Mbazé {winner} akonzi na {winner_card} akoki Mbazé {loser} akonzi na {loser_card}. Mbazé {winner} akomi mbonda ya {pot_value} mbeti."
+  },
+  "outcome": {
+    "draw": "Na nsuka ya milɔngɔ́ {max_rounds}, basani nyonso mibale bazalaki na motángo moko.",
+    "round_win": "Mosani {player_id} atiki.",
+    "winner_player0": "Mosani 0 alongaki na kozala na ba fiches mingi na nsuka ya milulu nyonso {max_rounds}.",
+    "winner_player1": "Mosani 1 alongi na kozala na ba fiches mingi na nsuka ya milulu nyonso {max_rounds}."
+  }
+}

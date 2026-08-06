@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Ti seet Giugadur {player_id} in Nim.\nEl to obietiv l'è quell de ciapà l'ultim oget restant.\nA ogni turn, seletta esattament vuna pila e cava via vun o pussee oget de lee.\nDopra el format '[pile quantity]', indove pila l'è l'indic de la pila e quantità l'è el numer de oget da cavà via.\nPer esempi, '[0 3]' el cava via 3 oget da la pila 0."
+  },
+  "state": {
+    "current_pile": "Pila Atual:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": " Minga tròvada formaàt vàlid per la mòssa. Doperè '[pile quantity]'.",
+    "correct_format_wrong_fields": "Giugadur {player_id}, Azion no valida. Colonna {col} l'è foeura da l'interval.",
+    "out_of_range": "Index de pila {pile_index} l'è foeura del rang.",
+    "non_positive": "Bisogna levà almanch 1 oget.",
+    "exceeds_pile": "L'è minga possìbil trà via {quantity} da la pila {pile_index} (gh'è dumà {pile_count} lassà)."
+  },
+  "observation": {
+    "removed_from_piles": "El Giugador {player_id} l'ha zugà [{pile_index} {quantity}], trà via {quantity} oggett da la pila {pile_index}."
+  },
+  "outcome": {
+    "win": "El giugador {player_id} l'ha ciapad i ultem oget!"
+  }
+}

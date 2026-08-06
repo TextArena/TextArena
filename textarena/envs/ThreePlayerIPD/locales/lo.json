@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "ທ່ານເປັນ Player {player_id} ໃນ 3 ຜູ້ນ Iterated Prisoner's Dilemma. ການແຂ່ງຂັນໃຊ້ເວລາ {num_rounds} ຮອບ. ໂຄງສ້າງຮອບ: • {conv_rounds} ຮອບສົນທະນາຟຣີ • 1 ການຕັດສິນໃຈ - ສົ່ງໂຕ໊ກນ ຫນຶ່ງ ຕໍ່ຄູ່ແຂ່ງ: '[<opp-id> cooperate]' ຫຼື '[<opp-id> defect]' (ເຊັ່ນ: '[1 defect] [2 cooperate]'; ຕົວເລືອກແມ່ນ 'ຮ່ວມມືກັບ'). ແມັດມິດຊັ່ນການຈ່າຍເງິນຄູ່ (ນໍາໃຊ້ກັບແຕ່ລະຄູ່ທີ່ບໍ່ຖືກຈັດລຽງ): - ທັງສອງຮ່ວມມືກັບ -> {reward} - ທັງສອງຂໍ້ບົກຜ່ອງ -> {punishment} - ທ່ານຜິດ, ພວກເຂົາຮ່ວມມືກັບ -> {temptation} - ທ່ານຮ່ວມມືກັບ, ພວກເຂົາຜິດ -> {sucker} ຜູ້ນທີ່ມີຄະແນນສູງສຸດໃນຕອນທ້າຍຂອງຮອບທັງ ຫມົດ ຊະນະ."
+  },
+  "round": {
+    "start": "─── ເລີ່ມຕົ້ນຮອບ {round} ─── ທ່ານສາມາດສົນທະນາໄດ້ຢ່າງເສລີສໍາລັບຮອບ {conv_rounds} ຕໍ່ໄປ.",
+    "chat_finished": "ການສົນທະນາສຳເລັດແລ້ວໃນຮອບ {round} ກະລຸນາສົ່ງຕົວເລືອກຂອງທ່ານ ໜຶ່ງ Token ຕໍ່ຄູ່ແຂ່ງ: `[pid cooperate]` ຫຼື `[pid defect]`."
+  },
+  "results": {
+    "header": "### ຮອບ {round} - ຜົນໄດ້ຮັບ:",
+    "pair_line": "{observation} ຜູ້ນ {i} vs ຜູ້ນ {j} ເລືອກ {choice_i} ແລະ {choice_j} ຕາມ ລໍາ ດັບ (ຜູ້ນ {i} ໄດ້ຮັບ {gain_i}, ຜູ້ນ {j} ໄດ້ຮັບ {gain_j})",
+    "scores_open": "{observation} -> ຄະແນນປະຈຸບັນ: ",
+    "score_first": "{observation}ນັກເຕະ {player_id} ({score})",
+    "score_next": "{observation}; ນັກເຕະ {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "ຄະແນນສຸດທ້າຍ: {scores}. ກຸ່ມຈັດອັນດັບ (ຮ້າຍແຮງທີ່ສຸດ→ດີທີ່ສຸດ): {groups}"
+  }
+}

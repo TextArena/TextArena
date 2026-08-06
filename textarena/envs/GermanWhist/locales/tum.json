@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Mchezo unaanza. Suti ya trump: {trump_suit} (kadi ya trump: {trump_str}).",
+    "no_trump_card": "palije"
+  },
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Whist ya Kijerumani.\n{phase_info}\nUshikilia {hand_size} kadi.\nCheza kadi kwa '[play N]', ambapo N ni nafasi yake katika mkono wako (kwa mfano '[play 3]').",
+    "phase_learning": "KUKHALA NA MAZGU: Uyo watonda pa maseŵero ghose wakutorapo kadi lakunyoloskeka ndipo uyo watondeka wakupokaso khadi linyake. Maseŵera agho ghathereskeka mu chigaŵa ichi ghakutovwira yayi kuti titonde nkhondo iyi.",
+    "phase_playing": "KIPINDI CHA KUCHEZA: sitaha ya kadi imekwisha. Kila trick kutoka sasa inahesabiwa kuelekea ushindi."
+  },
+  "next_card": {
+    "playing_phase": "Palije khadi ilo likupelekeka - maseŵero gha kwambira.",
+    "deck_empty": "Sitaha ya kadi imekwisha - hakuna kadi iliyo wazi.",
+    "available": "Khadi ilo likupelekeka: {card}",
+    "available_trump": "Kadi iliyo wazi: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Chosankha cholakwika. Gwiritsani ntchito '[play N]' kusewera khadi la Nth m'manja mwanu.",
+    "bad_position": "Palije apo pali makadi agha. Mukukora {hand_size} khadi.",
+    "must_follow_suit": "Mukwenera kulondezga ivyo wakuyowoya na kuseŵera khadi la {lead_suit}.",
+    "invalid_play": "Tikwenera yayi kugwiliskira nchito khadi ili."
+  },
+  "game_action": {
+    "played": "Woseŵera {player_id} wakaseŵereska {card}."
+  },
+  "trick": {
+    "won": "Mchezaji {winner_id} akupha trick na {card}.",
+    "won_learning": "Mchezaji {winner_id} anashinda chwajo hicho na {card} na akatwala kadi iliyo wazi."
+  },
+  "phase": {
+    "learning_complete": "Sitaha ya kadi imekwisha. Kipindi cha kujifunza kimekwisha - kila trick iliyobaki inahesabiwa kuelekea ushindi."
+  },
+  "draw": {
+    "winner_received": "Mukatchova njuga ndipo mukapokera {card}.",
+    "loser_received": "Mwaleka ciphalizgano ndipo mwalemba {card} pa deck.",
+    "winner_preview": "Khadi lakulondezgapo ni {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Trick zilizoshinda mpaka sasa - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
+    "scores_playing": "Michezo ya kufunga - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
+    "phase": "Chigawo: {phase}",
+    "phase_learning": "Kipindi: {phase} ({remaining_cards} kadi zimesalia kwenye sitaha)"
+  },
+  "hand": {
+    "no_cards": "Kuleka kupeleka makadi.",
+    "no_cards_in_hand": "Palije makadi mu woko.",
+    "header": "Woko linu:",
+    "trump_indicator": "(TRUMP) Kasi ni njani uyo wakumanya?",
+    "suit_line": "{observation}\n  {suit}〕{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Bado hakuna kadi zilizochezwa katika trick hii.",
+    "header": "Upusikizgi wa sono:",
+    "trump_indicator": "(TRUMP) Kasi ni njani uyo wakumanya?",
+    "card_line": "{observation}\n  Mchezaji {player_id}: {card}〕{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Maseŵera ghakaleka yayi.",
+    "header": "=== MPIRA WA KADI WA KIJERUMANI ===",
+    "phase": "{observation}\nMzunguko: {phase}",
+    "trump_suit": "{observation}\nSuti ya trump: {trump_suit}",
+    "trump_card": "{observation}\nKadi ya trump: {card}",
+    "cards_left": "{observation}\nKadi zili ziko: {count}",
+    "next_card": "{observation}\nKadi inayofuata kwa mshindi: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Upusikizgi wa sono:",
+    "trump_indicator": "(TRUMP) Kasi ni njani uyo wakumanya?",
+    "trick_line": "{observation}\n  Mchezaji {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nMchezaji {player_id}: {scoring} trick za alama ({tricks} jumla), {hand_size} kadi mikononi"
+  },
+  "outcome": {
+    "summary": "Mpindo wa kujifunza - Mchezaji 0: {l0}, Mchezaji 1: {l1}. Mpindo wa kucheza - Mchezaji 0: {p0}, Mchezaji 1: {p1}. Mchezaji {winner_id} ameshinda na {winner_tricks} khadi zinazohesabiwa!"
+  }
+}

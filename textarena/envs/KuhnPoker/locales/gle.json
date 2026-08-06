@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Tusa Imreoir {player_id} i gcluiche {max_rounds} bhabhta de Phócaer Kuhn.\nRialacha an Chluiche:\n- Úsáideann Pócaer Kuhn deic chárta 3 le J, Q, K (J an íseal, K an uachtar)\n- Cuireann gach imreoir {ante} fichille san áit agus faigheann siad cárta amháin gach babhta (tabhair faoi deara go ndáiltear na cártaí gan athsholáthar, mar sin ní féidir leat an cárta céanna a bheith agat le d'fhreasúra).\n- Leanann an cluiche ar aghaidh ar feadh {max_rounds} bhabhta\n- An t-imreoir leis na fichillí is mó tar éis na babhta go léir a bhuaigh\nRialacha na nGníomhaíochtaí:\n- '[check]': Pasáil gan a bheith ag sábháil (ní hamháin má tá sábháil ar an mbord)\n- '[bet]': Cuir 1 fichille leis an phot (ní hamháin má tá sábháil ar an mbord)\n- '[call]': Comhoiriú sábhála do fhreasúra trí 1 fichille a chur leis an phot\n- '[fold]': Tabhair suas do lámh agus lig do fhreasúra an pot a bhuachan"
+  },
+  "init_round": {
+    "round_start": "### Tús rond {current_round} as {max_rounds} rond. Is é do chárta: '{player_card}'",
+    "available_actions": "Is iad na gníomhaíochtaí atá ar fáil agat: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ní mór don ghníomh a bheith [Check], [Bet], [Call], nó [Fold].",
+    "not_legal": "Ní mór go mbeadh an gníomh {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Imreoir {player_id}, ghníomh curtha isteach: '[{move}]'.",
+    "valid_actions": "Is iad na gníomhartha atá ar fáil agat ná: {legal_actions}.",
+    "round_summary": "{reason} Scóir reatha: Imreoir 0: '{player_0_chips}'; Imreoir 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Buaileann cárta {winner_card} Imreoir {winner} cárta {loser_card} Imreoir {loser}. Buaileann Imreoir {winner} pot {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "Ag deireadh {max_rounds} babhtaí, bhí an líon céanna sliseanna ag an dá imreoir.",
+    "round_win": "Tá an t-imreoir {player_id} imithe.",
+    "winner_player0": "Bhuaigh Imreoir 0 toisc go raibh níos mó fichille aige ag deireadh na {max_rounds} bhabhta go léir.",
+    "winner_player1": "Bhuaigh Imreoir 1 toisc go raibh níos mó fichille aige ag deireadh na {max_rounds} bhabhta go léir."
+  }
+}

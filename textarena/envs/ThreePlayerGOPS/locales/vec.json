@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Ti si Xugador {player_id} in Three-Player GOPS.\n- Ti tegni łe 13 carte A-K (una volta soła).\n- Ogni ronda un premio xe svelà. Invia una carta come `[Q]`, `[10]`, `[2]` …\n- Ła carta pì alta vince el premio (+ ła posta reportada). I pari fałi el premio in ła ronda sucesiva.\n- Dopo 13 ronde, el totałe pì alto vince. Mosse no vałide = ełiminasion."
+  },
+  "round": {
+    "header": "### Turno {round}/13 - Premio: {prize} (vàl {worth})",
+    "hand": "La to man restante: {hand}"
+  },
+  "reveal": {
+    "win": "Oferte » {bids} - Giocador {winner} vinse {pot}.",
+    "tie": "Offerte  {bids} - pareggio, piatto ora {pot}.",
+    "scores": "Punti → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "l'azion la ga bisogno de na carta fra parentesi come \"[Q]\"",
+    "bad_card": "carta già usata o invalida"
+  },
+  "elimination": {
+    "player": "Giocatore {pid} eliminà dopo ripetute mosse invalide."
+  },
+  "outcome": {
+    "auto_win": "Do zugadori eliminà - vinto automatico.",
+    "final": "Punti finali: {scores}"
+  }
+}

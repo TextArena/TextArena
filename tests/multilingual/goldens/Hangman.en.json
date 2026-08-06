@@ -3,7 +3,7 @@
     "game_info": {
       "0": {
         "invalid_move": false,
-        "reason": "Congratulations! You have completed the Hangman puzzle.",
+        "reason": "Congratulations! You completed the Hangman puzzle.",
         "role": "Player 0",
         "turn_count": 5
       }
@@ -140,6 +140,12 @@
         "text": "Your guess of 'HOUSE' is not the target word.",
         "to": 0,
         "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current board:\n\nC00 C01 C02 C03 C04 C05\n  S   I   _   _   _   _ \nYou have 4 tries left.\nGuessed letters: I, S, Z",
+        "to": 0,
+        "type": "GAME_BOARD"
       },
       {
         "action": "[SILVER]",

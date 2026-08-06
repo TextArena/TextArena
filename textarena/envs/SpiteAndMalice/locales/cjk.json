@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Wena ule muthu wakupanga {player_id} mu mutambo wa vantu vavili wa Spite na Malice. Kukolopa kwako ni kuwa muthu wakutangulia kukolopa kwenyu kwenyu kwa kucheza kadi kwenye mizungu ya katikati.\n\n### Kukolopa Mutambo:\n- Kukolopa kwa mutambo ni kukolopa kwenyu kwa kucheza kadi kwenye mizungu ya katikati.\n- Ungakwata kucheza kadi kutoka kwa mizungu mitatu:\n  1. **Mukono wako** (ukatangulia kila zamu na kadi zisizo zaidi ya 5 mukononi).\n  2. **Kadi ya juu ya kwenyu kwa malipo**.\n  3. **Kadi ya juu ya mojawapo ya mizungu yako ya kukolopa**.\n\n### Vidhibiti vya Kucheza:\n- Ungacheza kadi kwenye mzungu wa katikati kama ni **cheo kimoja juu** kuliko kadi ya juu kwenye mzungu huo (mizungu ya katikati huanza na Ace na kupanda hadi Queen; Wafalme ni wakubwa - wanaweza kucheza kwenye kadi yoyote lakini hawabadilishi mpangilio wa cheo. Hii ina maana kama Mfalme anatumika baada ya 4, basi Mfalme huyo ana cheo cha 5 na kadi inayofuata lazima iwe 6).\n- Kama huwezi kucheza kadi zaidi, lazima **ukolope kadi** kwenye mojawapo ya mizungu yako ya kukolopa ili kumaliza zamu yako.\n- Kama mzungu wa katikati unafikia Queen, utakolopwa kiotomatiki.\n- Mpangilio wa cheo ni: A=1, 2=2, ..., 9=9, J=10, Q=11, K kama mkubwa.\n\n### Vitendo:\n1. **Kuchora**: Kwa mwanzo wa zamu yako, chora kadi ili kujaza mukono wako hadi kadi 5. Ingiza **[draw]** ili kuanza.\n2. **Kucheza Kadi**: Ili kucheza kadi, taja kadi na mzungu wa katikati kama hii: **[play A♠ 0]** (ambapo 'A♠' ni kadi na '0' ni index ya mzungu wa katikati).\n3. **Kukolopa**: Kama huwezi kucheza kadi zaidi, kolopa kadi kutoka kwa mukono wako kwenye mzungu wa kukolopa ili kumaliza zamu yako. Ingiza **[discard A♠ 1]** (ambapo 'A♠' ni kadi na '1' ni index ya mzungu wa kukolopa). Kumbuka kwamba huwezi kukolopa kadi yoyote kutoka kwa kwenyu kwa malipo. Ungaweza tu kukolopa kadi kutoka kwa mukono wako.\n\n"
+  },
+  "board": {
+    "current_board": "Bodi ya Sasa:\n\n{board}\nMichezo Inayopatikana: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Michezo ya Katikati ---\n",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Mtazamo wa Player {player_id} ---\n",
+    "payoff": "{observation}Malipo (Kadi ya Juu): {top_card}, Urefu wa Malipo: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Michezo ya Kukataa: {discard}\n",
+    "empty": "Cj"
+  },
+  "game_message": {
+    "no_cards_left": "Hakuna kadi zaidi za kuchora. Kumbuka kuwa unaweza kucheza kadi kutoka kwa vyanzo hivi:\n  1. **Mkono wako**.\n  2. **Kadi ya juu ya malipo yako**.\n  3. **Kadi ya juu ya michezo yoyote ya kukataa**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Muundo usio sahihi wa mchezo. Player {player_id} hakujibu na mchezo sahihi katika mabano ya mraba.",
+    "invalid_play": "Mchezo usio sahihi. Player {player_id} alijaribu kucheza {card} kwenye mchezo wa katikati {index}.",
+    "discard_from_payoff": "Kukata kadi kutoka kwa malipo. Player {player_id} alijaribu kukata kadi kutoka kwa malipo.",
+    "discard_not_in_hand": "Kukata kadi ambayo haipo mkononi. Player {player_id} alijaribu kukata kadi ambayo haipo mkononi.",
+    "wrong_move_type": "Aina isiyofaa ya mchezo. Player {player_id} hakujibu na aina sahihi ya mchezo."
+  },
+  "game_action": {
+    "you_drew": "Ulichora kadi.",
+    "opponent_drew": "Player {player_id} alichora kadi.",
+    "you_played": "Ulicheza {card} kwenye mchezo wa katikati {index}.",
+    "opponent_played": "Player {player_id} alicheza {card} kwenye mchezo wa katikati {index}.",
+    "you_discarded": "Umeondoa {card} hadi mchezo wa kukataa {index}, ambayo pia ina maana umemaliza zamu yako. Hakuna vitendo vingine vya kwako vinavyozingatiwa kwa zamu hii. Player {next_player_id} atakwenda kisha.",
+    "opponent_discarded": "Muthu {player_id} atikisa {card} ku mushitu wa makasa {index}, kuyantikisa kwakuti wamaliza zamu yao. Kukwata zamu yao kwa Muthu {player_id} kwakwasha. Muthu {next_player_id}, wena utayenda. Tafadhalala leka kitendo chako mu fomu [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Muthu wakupanga {current_player} amemaliza kwenyu kwa malipo! Muthu wakupanga {current_player} anashinda!",
+    "deadlock_player_0": "Kufika kwa kuswana! Mchezaji 0 anashinda na {player_0_payoff} kadi zilizobaki dhidi ya {player_1_payoff} kadi za Mchezaji 1.",
+    "deadlock_player_1": "Kufika kwa kuswana! Mchezaji 1 anashinda na {player_1_payoff} kadi zilizobaki dhidi ya {player_0_payoff} kadi za Mchezaji 0.",
+    "deadlock_tie": "Kufikia kizuizi kwa usawa! Wachezaji wote wawili wana {player_0_payoff} kadi zilizobaki. Player {current_player} anashinda kwa chaguo-msingi."
+  }
+}

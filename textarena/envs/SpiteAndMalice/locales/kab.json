@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "D akken d Amurar {player_id} deg urar n sin n yimurar n Spite and Malice. Lmeɛna-ik d lliɣ ad d-tɣerreq tiddart-ik n tɣellist.\n\n### Aglam n Urar:\n- Lmeɛna d asensi n tiddart-ik n tɣellist s tɣellist n yikarḍiwen ɣer tiddart n tlemmast.\n- Tezmer ad d-tɣerreq ikarḍiwen seg kraḍ n yimukan:\n  1. **Afa-ik** (ad tɣerreq kraygat dduṛ s ikarḍiwen 5 deg ufa-ik).\n  2. **Ikard n uɣelluy n tiddart-ik n tɣellist**.\n  3. **Ikard n uɣelluy n yimukan n tɣellist-ik**.\n\n### Tiwtilin n Urar:\n- Tezmer ad d-tɣerreq ikard ɣer tiddart n tlemmast ma yella **yiwet n tedwilt iɛlayan** ɣef uɣelluy n tiddart-ik (tiddart n tlemmast tɣerreq s Ace d tɣellist ɣer Queen; Kings d yikarḍiwen n yal - zemren ad tɣerreqen ɣef yal ikard maca ur d-ssaqdacen ara tɣellist. Ayagi anamek ma yella King yettwasqeddec seld 4, ad yili wakud King-agi yiwet n tedwilt 5 d ikard-agi ɣer-s ad yili 6).\n- Ma yella ur tezmirem ara ad d-tɣerreq ikarḍiwen, ilaq ad **tɣerreq ikard** ɣer yimukan-ik n tɣellist-ik akken ad tɣerreq dduṛ-ik.\n- Ma yella tiddart n tlemmast tɣerreq Queen, ad tɣerreq yiman-nes.\n- Tɣellist n tedwilin d: A=1, 2=2, ..., 9=9, J=10, Q=11, K am yikarḍiwen n yal.\n\n### Tiɣriwin:\n1. **Ssekcem**: Deg tɣellist n dduṛ-ik, ssekcem ikarḍiwen akken ad tɣerreq afa-ik ɣer 5 n ikarḍiwen. Ad d-tiniḍ **[draw]** akken ad tɣerreq.\n2. **Sɣerreq ikard**: Akken ad tɣerreq ikard, ɣer ikard d tiddart n tlemmast am wagi: **[play A♠ 0]** (ɣef 'A♠' d ikard d '0' d tiddart n tlemmast).\n3. **Sɣerreq**: Ma yella ur tezmirem ara ad d-tɣerreq ikarḍiwen, sɣerreq ikard seg ufa-ik ɣer tiddart n tɣellist-ik akken ad tɣerreq dduṛ-ik. Ad d-tiniḍ **[discard A♠ 1]** (ɣef 'A♠' d ikard d '1' d tiddart n tɣellist-ik). Ayagi anamek ur tezmirem ara ad tɣerreq ikard seg tiddart-ik n tɣellist. Tezmer kan ad tɣerreq ikarḍiwen seg ufa-ik.\n\n"
+  },
+  "board": {
+    "current_board": "Asseɛqeɛ n tɛɛburt:\n\n{board}\nIɣeṭṭafen ikelman: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Iɣẓeṛ n tlemmast -- ",
+    "pile": "{observation}Tɛɛburt {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Talɣa n Aɛjwad {player_id} ---\n",
+    "payoff": "{observation}Tɛɛburt n wakud (Tikart n tɛɛburt): {top_card}, Addad n tɛɛburt n wakud: {payoff_length}\n",
+    "hand": "{observation}Afus: {hand}\n",
+    "discard": "{observation}Tɛɛburin n ukaru: {discard}\n",
+    "empty": "Ilemmuden."
+  },
+  "game_message": {
+    "no_cards_left": "Ur d-qqimen ara kra n yikarḍiyen i ssexdem. Mmektit belli tzemrem ad turarem tikarḍaḍ seg imukan agi: 1. afus ik 2. takart tamezwarut deg uḥric amennif 3. takart tamenzwert di yal yiwen si yiɣallen iwumi tettekkim.** "
+  },
+  "invalid_move": {
+    "wrong_format": "Ahil ur nlaq ara. Amyurar {player_id} ur d-yerri s yiwen uḥewwes i yellan deg imgerraden imezganen.",
+    "invalid_play": "Aɣeṭṭaf ur ɣilen. Aɛjwad {player_id} yessaweɛ ad yefk {card} ɣer tɛɛburt n wadda {index}.",
+    "discard_from_payoff": "Aḍebsi ur nlaq ara. Amyurar {player_id} yeεreḍ ad d-yeǧǧ takarḍa seg tqacuct i yettwaḥerzen.",
+    "discard_not_in_hand": "Aḍebsi ur nlaq ara. Amyurar {player_id} yeεreḍ ad d-yeǧǧ takarḍa i yellan mačči deg ufus.",
+    "wrong_move_type": "Ahil ur nlaq ara. Amyurar {player_id} ur d-yerri s yiwen uḥric i yellan deg umata."
+  },
+  "game_action": {
+    "you_drew": "Tḍeggreḍ lkarṭa.",
+    "opponent_drew": "Amyurar {player_id} yeṭṭef-d tikarḍiwin.",
+    "you_played": "Turarem {card} deg tqacuct n tlemmast {index}.",
+    "opponent_played": "Aɛjwad {player_id} yefka-as {card} ɣer tɛɛburt n wadda {index}.",
+    "you_discarded": "Tefka-t-as {card} ɣer tɛɛburt n ukaru {index}, d acu kan, tefka-t-as aṭas n wakud-ik. Ur tezmer ad tefk aṭas n yinig nnek deg wakud-a. Aɛjwad {next_player_id} ad yekcem ɣer wakud amezwaru.",
+    "opponent_discarded": "Aɛjwad {player_id} yefka-as {card} ɣer tɛɛburt n ukaru {index}, d acu kan, yefka-as aṭas n wakud-ines. Ur yezmer ad yefk aṭas n yinig n Aɛjwad {player_id} deg wakud-a. Aɛjwad {next_player_id}, tura d reknem. Nadi ɣer usmel n wakud-ik deg wumuɣ n [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Aɛjwad {current_player} yefka-as aṭas n tɛɛburt n wakud ! Aɛjwad {current_player} yettwafeg !",
+    "deadlock_player_0": "Yewweḍ uḍḍif! Amaru 0 irebḥa s {player_0_payoff} waraq ɣas Amaru 1 yesɛa {player_1_payoff} waraq.",
+    "deadlock_player_1": "Tettwafeg tilelli ! Aɛjwad 1 yettwafeg s  {player_1_payoff} tikartyan ṣṣaḥaḥen maḍi d Aɛjwad 0 s  {player_0_payoff} tikartyan ṣṣaḥaḥen.",
+    "deadlock_tie": "Tɣellist n tɣerreq tɣerreq s azbu! Yimurar yezrin {player_0_payoff} n ikarḍiwen. Amurar {current_player} yernu s leḥsab."
+  }
+}

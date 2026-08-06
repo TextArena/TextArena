@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Welcome to Lights Out! You have a {size}x{size} grid of lights.\nYour goal is to turn ALL lights OFF (represented by '.')\nWhen you press a light, it toggles itself AND its adjacent neighbors (up/down/left/right).\nType [row col] to press a light (0-indexed, so valid range is 0-{max_index}).\nYou have up to {max_turns} moves to solve the puzzle.\nLegend: 'O' = light ON, '.' = light OFF"
+  },
+  "board": {
+    "current_state": "Häzirki görnüş (Hereket {moves_made}, {moves_left} hereketler galýar, {completion}% tamamlanan):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hereket [row col] formatinda bolmaly, gdzie row we col 0 dan {max_index} çenli integerdir.",
+    "out_of_range": "Koordinatalar 0 we {max_index} aralygynda bolmaly. Siz [{row},{col}] ýazdyňyz."
+  },
+  "outcome": {
+    "win": "Gural! Siz tapmaçany {moves_used} hereketlerde çözdüňiz!",
+    "loss": "Oyun tamam! Sen puzzleý çözmänk için {max_turns} hereketleri ulanmadyŋ. Final tamamlanma: {completion}%\nFinal görnüş:\n{grid}"
+  }
+}

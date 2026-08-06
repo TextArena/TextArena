@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Bo ta Hungador {player_id} den un Dilema di Prisonero Iterado ku ta abarka {num_rounds} rondónan.\n\nStruktura di Juego:\n- Promé ku cada desishon bo tin {total_conversation_rounds} bira pa komuniká liber.\n- Despues di esey, ambos hungadó simultáneamente skohe pa kooperá o desertá.\n\nMatris di Pago (fiksá pa cada rondo):\n- Ambos Kooperá ➜ kada unu {cooperate_reward}\n- Ambos Desertá ➜ kada unu {mutual_defect_reward}\n- Unu Desertá, unu Kooperá ➜ Desertador {defect_reward}, Kooperador {sucker_reward}\n\nKomo pa Hungá:\n- Durante konversashon: tipo kualke tekstu bo ke.\n- Durante fase di desishon: inkluí '[Cooperate]' o '[Defect]' (sin sensibilidat pa kaso). Bo por agregá tekstu ekstra promé o despues di e token."
+  },
+  "phases": {
+    "conversation_finished": "Konversashon a termina pa rondo {round}. Por favor responde ku '[Cooperate]' o '[Defect]' den ◄boxed{{}}.",
+    "starting_round": "--- Ronda di Kuminsamentu {round} ---",
+    "round_summary": "Resultado di rondo {round}:\n{outcome}\nHungador 0 a gana {r0} (total {score_0}), Hungador 1 a gana {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "E hungadó {winner} ta gana e wega di {win_score} - {lose_score}.",
+    "draw": "Ambos hungadó a skor {s0}.",
+    "round_both_cooperate": "Ambos hungadó a koperá.",
+    "round_both_defect": "Ambos hungadó a desertá.",
+    "round_p0_cooperates_p1_defects": "Hòmber 0 a koperá, hòmber 1 a desertá.",
+    "round_p0_defects_p1_cooperates": "Hòmber 0 a desertá, hòmber 1 tabata kooperativo."
+  }
+}

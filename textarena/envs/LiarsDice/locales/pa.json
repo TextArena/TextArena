@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "ਤੁਸੀਂ ਇੱਕ {num_players}-ਖਿਡਾਰੀ ਝੂਠੇ ਦੇ ਡਾਈਸ ਗੇਮ ਵਿੱਚ ਖਿਡਾਰੀ {player_id} ਹੋ ਨਿਯਮਃ - ਤੁਹਾਡੀ ਵਾਰੀ ਤੇ, ਤੁਸੀਂ ਜਾਂ ਤਾਂ: 1) ਮੌਜੂਦਾ ਬੋਲੀ ਨਾਲੋਂ ਉੱਚ ਮਾਤਰਾ ਜਾਂ ਉੱਚ ਚਿਹਰੇ (ਜਾਂ ਦੋਵੇਂ) ਨਾਲ ਇੱਕ ਨਵੀਂ ਬੋਲੀ ਬਣਾ ਸਕਦੇ ਹੋ; ਭਾਵ '[Bid: 3, 4]', 2) ਆਖਰੀ ਬੋਲੀ ਨੂੰ '[Call]' ਟਾਈਪ ਕਰਕੇ ਕਾਲ ਕਰੋ. ਜੇ ਤੁਸੀਂ ਕਾਲ ਕਰਦੇ ਹੋਃ - ਜੇ ਸਾਰੇ ਡਾਈਸ ਦੇ ਵਿਚਕਾਰ ਉਸ ਚਿਹਰੇ ਦੇ ਮੁੱਲ ਦੀ ਅਸਲ ਗਿਣਤੀ ਬੋਲੀ ਤੋਂ ਘੱਟ ਹੈ, ਤਾਂ ਆਖਰੀ ਬੋਲੀਕਾਰ ਇੱਕ ਡਾਈ ਗੁਆ ਦਿੰਦਾ ਹੈ. - ਨਹੀਂ ਤਾਂ, ਕਾਲ ਕਰਨ ਵਾਲਾ ਇੱਕ ਡਾਈ ਗੁਆ ਦਿੰਦਾ ਹੈ. ਇੱਕ ਖਿਡਾਰੀ ਜੋ 0 ਡਾਈਸ ਤੱਕ ਪਹੁੰਚਦਾ ਹੈ, ਬਾਹਰ ਕੱ .ਿਆ ਜਾਂਦਾ ਹੈ. ਆਖਰੀ ਬਚਿਆ ਖਿਡਾਰੀ ਜਿੱਤਦਾ ਹੈ."
+  },
+  "board": {
+    "per_player": "ਖਿਡਾਰੀ {p}: {d}",
+    "new_round": "ਨਵਾਂ ਗੇੜ - ਬਾਕੀ ਡਾਈਸ: {dice_summary} ਤੁਹਾਡੇ ਮੌਜੂਦਾ ਡਾਈਸ ਹਨਃ {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "ਖਿਡਾਰੀ {current_player_id} ਕਾਲ ਕਰਦਾ ਹੈ! ਚਿਹਰੇ ਦੀ ਅਸਲ ਗਿਣਤੀ {face_value} {count} ਹੈ, ਜੋ {quantity} ਤੋਂ ਘੱਟ ਹੈ। ਖਿਡਾਰੀ {loser_id} (ਆਖਰੀ ਬੋਲੀਕਾਰ) ਇੱਕ ਡਾਈ ਗੁਆ ਦਿੰਦਾ ਹੈ।",
+    "caller_loses": "ਖਿਡਾਰੀ {current_player_id} ਕਾਲ ਕਰਦਾ ਹੈ! ਚਿਹਰੇ ਦੀ ਅਸਲ ਗਿਣਤੀ {face_value} {count} ਹੈ, ਜੋ ਕਿ >= {quantity} ਹੈ. ਖਿਡਾਰੀ {loser_id} (ਕਾਲ ਕਰਨ ਵਾਲਾ) ਇੱਕ ਡਾਈ ਗੁਆ ਦਿੰਦਾ ਹੈ."
+  },
+  "action": {
+    "bid_announce": "ਖਿਡਾਰੀ {player_id} ਬੋਲੀ {quantity} ਦੇ ਚਿਹਰੇ {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "ਬਿਨਾਂ ਕਿਸੇ ਪੂਰਵ ਬੋਲੀ ਦੇ ਕੀਤੀ ਗਈ ਕਾਲ।",
+    "invalid_bid": "ਅਵੈਧ ਬੋਲੀਃ {reason}",
+    "not_recognized": "ਅਪੀਲ ਨੂੰ ਵੈਧ \"[Bid: X, Y]\" ਜਾਂ \"[Call]\" ਵਜੋਂ ਮਾਨਤਾ ਨਹੀਂ ਦਿੱਤੀ ਗਈ। ਜਮ੍ਹਾਂ ਕੀਤੀ ਗਈ ਅਪੀਲਃ {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "ਨਵੀਂ ਮਾਤਰਾ {new_quantity} ਮੌਜੂਦਾ {current_quantity} ਤੋਂ ਘੱਟ ਹੈ।",
+    "face_lower": "ਨਵਾਂ ਨਮੂਨਾ ਮੁੱਲ {new_face_value} ਮੌਜੂਦਾ {current_face_value} ਤੋਂ ਘੱਟ ਹੈ।",
+    "identical": "ਬੋਲੀ ਮੌਜੂਦਾ ਬੋਲੀ ਦੇ ਸਮਾਨ ਹੈ।",
+    "face_range": "ਨਮੂਨਾ ਮੁੱਲ 1 ਅਤੇ 6 ਦੇ ਵਿਚਕਾਰ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।"
+  },
+  "message": {
+    "eliminated_invalid": "ਖਿਡਾਰੀ {player_id} ਨੂੰ ਅਵੈਧ ਚਾਲ ਨਾਲ ਬਾਹਰ ਕਰ ਦਿੱਤਾ ਗਿਆ ਸੀ।"
+  },
+  "outcome": {
+    "win": "ਖਿਡਾਰੀ {winner} ਜਿੱਤਦਾ ਹੈ! ਅੰਤਿਮ ਰੈਂਕਿੰਗਃ {final_ranking}"
+  }
+}

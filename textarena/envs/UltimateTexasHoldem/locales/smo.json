@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "E leai ni kata i le taimi nei.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Pela Tasi vs Dealer\n\n📖 FAAMATALAGA O LE TAALO:\n• E amata ou ma {start_chips} sipuni\n• Tupe o kaarteni 52 (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• E taalo ou i le dealer (fale)\n• Ia taalo uma raipega e pei o le faiga a le Ultimate Texas Hold'em: ou te faia ai pepa ANTE ma BLIND, maua 2 kaarteni hole, filifili i pepa faavalo PLAY i vaitaimi o le taalo, ona mae’a lea faia le faatalofa o kaarteni komuniti ma faatusatusa le lima kaarteni sili lea ou te maua i le lima kaarteni sili a le dealer. Ou te manaomia le faaleleia o lau faatauaina (pe a fai ou se kaarteni sili), faapea le puipuia o ou faatauaina (pe a fai ou se kaarteni leaga).\n• Taalo e mae’a pe a e oo i le 0 sipuni pe lalo ifo i le amataina o le raipega (FALE) pe e maua 1000 raipega ma sipuni (TAGI)\n\n💰 FAIGA O PEPA:\n• ANTE: Pepa faamau ${ante} i uma raipega\n• BLIND: Pepa faamau ${ante} i uma raipega\n• PLAY: Pepa faavalo i le vaitaimi o le taalo. I le taalo, e mafai ona e filifili ai se tasi o nei: (${ante4} pe a fai i le PRE-FLOP, ${ante2} pe a fai i le FLOP, pe ${ante} pe a fai i le RIVER. E mafai fo’i ona e tuusao i le RIVER, faapea le faamauina o le lima, ma le faia o pepa.\n\n🎴 TOGI KAARTENI:\n• E maua e oe 2 kaarteni faalogo (kaarteni hole a oe)\n• Dealer maua 2 kaarteni faalogo (puupuu mai ia te oe)\n• 5 kaarteni komuniti e togia faalogo i le amata\n• Kaarteni komuniti e faatalofa atu i vaitaimi o le taalo\n\n🏆 FAAMAUINA O LE DEALER:\n• Dealer e manaomia se PAIR (2 kaarteni o le tulaga e tasi) e faamauina, e aofia ai le 2 kaarteni i lona lima ma le 5 kaarteni komuniti.\n• Faamauina o le dealer e aafia ai le faaiuga o le pepa, e pei o le a faamatala mai.\n\n🎮 VAITAIMI O LE TAALO & GAOIOIGA:\n📋 PRE-FLOP:\n  • Gaoioiga: [4x] (${ante4}) pe [check]\n  • [4x]: Faia le pepa PLAY ${ante4}, faatalofa atu le muamua 3 kaarteni komuniti\n  • [check]: Aisea pepa faavalo, faatalofa atu le muamua 3 kaarteni komuniti\n\n📋 FLOP:\n  • Pe a faia le pepa 4x: O le [skip] e manaomia (faatalofa atu le 2 kaarteni komuniti mulimuli)\n  • Pe a leai se pepa 4x: [2x] (${ante2}) pe [check]\n  • [2x]: Faia le pepa PLAY ${ante2}, faatalofa atu le 2 kaarteni komuniti mulimuli\n  • [check]: Aisea pepa faavalo, faatalofa atu le 2 kaarteni komuniti mulimuli\n\n📋 RIVER:\n  • Pe a faia le pepa 4x pe 2x: O le [skip] e manaomia (faatalofa atu i le faaiuga)\n  • Pe a leai se pepa PLAY muamua: [1x] (${ante}) pe [fold]\n  • [1x]: Faia le pepa PLAY ${ante}, faatalofa atu i le faaiuga\n  • [fold]: Tuusao le lima, faamauina le ANTE ma le BLIND\n\n📋 SHOWDOWN:\n  • O le a faatalofa atu uma kaarteni ma faatusatusa\n  • Le 5 kaarteni sili lea e maua mai i le 7 kaarteni (2 hole + 5 komuniti)\n  • Pepa e faaiuina e pei o le faiga o le faatauaina\n\n💎 PEPA O LE FAATAUAINA:\n📊 ANTE BET:\n  • Dealer e leai se faamauina: PUSH (pepa return)\n  • Dealer faamauina ma e tagi oe: 1:1 faatauaina (pepa + faatauaina)\n  • Dealer faamauina ma e fale oe: Pepa faamauina\n  • Tie: PUSH (pepa return)\n\n📊 BLIND BET:\n  • E leai se aafia i le faamauina o le dealer\n  • E tagi oe: Pepa return ma le faatauaina faapitoa e pei o le malosi o le lima\n  • E fale oe: Pepa faamauina\n  • Tie: PUSH (pepa return)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Aisea faatauaina faapitoa\n\n📊 PLAY BET:\n  • E leai se aafia i le faamauina o le dealer\n  • Faatusatusa faalogo: Le lima sili lea a oe i le lima sili a le dealer\n  • E tagi oe: 1:1 faatauaina (pepa + faatauaina)\n  • E fale oe: Pepa faamauina\n  • Tie: PUSH (pepa return)\n\n🎯 FAIGA O LE LIMA (Sili i le Leaga):\n  1. Royal Flush: A-K-Q-J-10 o le suit e tasi\n  2. Straight Flush: 5 kaarteni faatasi o le suit e tasi\n  3. Four of a Kind: 4 kaarteni o le tulaga e tasi\n  4. Full House: 3 o le tulaga e tasi + 2 o le tulaga e tasi\n  5. Flush: 5 kaarteni o le suit e tasi\n  6. Straight: 5 kaarteni faatasi\n  7. Three of a Kind: 3 kaarteni o le tulaga e tasi\n  8. Two Pair: 2 pairs o tulaga eseese\n  9. One Pair: 2 kaarteni o le tulaga e tasi\n  10. High Card: Le kaarteni sili e tagi\n\n⌨️  FAIGA O GAOIOIGA:\n• [4x] pe [play bet 4x]: Faia le pepa PLAY ${{self.ante_amount*4}}\n• [2x] pe [play bet 2x]: Faia le pepa PLAY ${{self.ante_amount*2}}\n• [1x] pe [play bet 1x]: Faia le pepa PLAY ${{self.ante_amount*1}}\n• [check] pe [c]: Check (aisea pepa faavalo)\n• [fold] pe [f]: Fold (tuusao le lima)\n• [skip] pe [s]: Skip to next phase (pe a leai se gaoioiga manaomia)\n\n💡 FAAMATALAGA O LE FAIGA:\n• Kaarteni amata sili (pairs, high cards) e manaomia le pepa 4x\n• Faalogo i le faamauina o le dealer - kaarteni leaga e mafai ona push pe a leai se faamauina o le dealer\n• BLIND bet e mafai ona faatauaina tele ma kaarteni sili (Royal Flush = 500:1!)\n• Faalogo i lau sipuni! Pe a oo i le 0 sipuni pe lalo ifo i le amataina o le raipega, e fale oe.\n\n⚠️  FAAMATALAGA TAITASI:\n• ANTE ma BLIND bets e faamau i uma raipega\n• PLAY bets e faavalo ma faiga\n• Faamauina le gaoioiga sahi, ma le tasi gaoioiga i le taimi.\n\n",
+    "state": "🎯 RAIPEGA {round}\n💰 Sipuni: {chips}\n🎴 Le lima a oe: {hand}\n📊 Pepa faaleleia: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Vaitaimi: {phase}\n🎯 Gaoioiga manaomia: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Raipega {round} amata! Pepa: ANTE ${ante}, BLIND ${blind}. E {chips} sipuni ou te leai.",
+    "your_hand": " O lou lima: {hand}",
+    "flop_revealed": " Faʻaalia le FLOP: {cards}",
+    "river_revealed": " RIVER faaalia: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Faʻasalaga e le aoga mo le taimi nei. Gaoioiga avanoa: {available}",
+    "message": " Faʻasalaga e le aoga! Gaoioiga avanoa: {available}"
+  },
+  "action": {
+    "folded": " Ua e lē toe auai."
+  },
+  "showdown": {
+    "dealer_hand": " FAAALIA! O le lima o lē e tuuina atu: {cards}",
+    "community_cards": " Faʻailoga a le Community: {cards}",
+    "player_best": "🎴 Le lima sili a le pela: {name} ({cards})",
+    "dealer_best": "🎴 Le lima sili a le dealer: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (tuʻu)",
+    "blind_lost_folded": "❌ Malaga BLIND ua leiloa! -${blind} (ua fa'aulu)",
+    "ante_won": "✅ ANTE manumalo le peti! +${amount}",
+    "ante_pushed": " ANTE peti TUTUU! ${ante} toe faafoi mai",
+    "ante_lost": " ANTE ua LEiloa le peti! -${ante}",
+    "blind_won": "✅ Malaga BLIND ua manumalo! +${amount}",
+    "blind_pushed": "🔄 Malaga BLIND ua toe fa'afo'i! ${blind} ua toe fa'afo'i",
+    "blind_lost": " E LEʻI MAFAIA le peti! -${blind}",
+    "play_won": "✅ Malaga PLAY ua manumalo! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} toe faafoi mai",
+    "play_lost": " E LEAI se peti! -${play}",
+    "net_gain": "🎉 Raipega {round} mae’a! Net gain: +${net}",
+    "net_loss": "💸 Raipega {round} mae’a! Net loss: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 TAALO IA! {max_turns} raipega na oso. E ${chips} sipuni ou te leai - E TAGI OU!",
+    "game_over_lose": "Ua uma au chips, ua manumalo le tagata na te tuuina atu!",
+    "reward_win": "Pela na oso {winner_rounds} raipega ma ${chips} sipuni",
+    "reward_lose": "Sa leai ni chips a le tagata taalo i le taimi o le {round} faataamilosaga.",
+    "reward_win_max": "Pela na oso {max_turns} raipega ma ${chips} sipuni"
+  },
+  "hand_names": {
+    "royal_flush": "Faʻasalaga a le Royal Flush",
+    "straight_flush": "Faʻasalaga saʻo",
+    "four_of_a_kind": "E Toʻafā o le Ituaiga e Tasi",
+    "full_house": "Faatumu le Fale",
+    "flush": "Faʻasusu le vai",
+    "straight": "Faʻasaʻo saʻo",
+    "three_of_a_kind": "Tolu o se ituaiga",
+    "two_pair": "Lua Faaluaina",
+    "one_pair": "O se Ituaiga e Tasi",
+    "high_card": "Kata Maualuga",
+    "unknown": "Le Lima e Lē Iloa"
+  }
+}

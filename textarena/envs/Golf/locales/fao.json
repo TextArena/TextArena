@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Tú ert við at spæla Golf (Kortspæl) - Leikari {player_id}.\nMál: Fáa lægsta samlaða stig í hesi einstaku omgang. Um kolonnur deila sama virði, verða tær roknaðar sum 0.\nKortvirði: A=1, 2-10=andlitvirði, J/Q=10, K=0\n\nÁvirkanir (nýt nákvæm liggi):\n- '[draw]' - Dreg til úr dekki\n- '[take]' - Taka úr kastabunka\n- '[swap X Y]' - Skift dregið kort við posiðjon X (røð) Y (kolonna)\n- '[discard]' - Kasta dregið kort"
+  },
+  "board": {
+    "drew": "Tú dro ❗️: {card}\nNú mást tú [swap X Y] eller [discard] ta",
+    "took": "Tú hevur tikið: {card} úr burturkastastokkinum. Tær nýtist at [swap X Y] við tí (kann ikki kasta).",
+    "peeked": "Tú kikkaði á posiðjon ({row},{col}): {card}",
+    "turn_view": "Tín hond:\n{hand}\nKastabunki: {discard}\n{options}",
+    "none": "Eingin atkvøða"
+  },
+  "options": {
+    "final_turns": "Endaligir omgangir! Tínar valmøguleikar: [draw], [take], [peek X Y]",
+    "draw": "Tínar valmøguleikar: [draw], [take]",
+    "must_swap": "Tú mást: [swap X Y] (tú kanst ikki vraka kort úr avlopsstaðnum)",
+    "swap_or_discard": "Tú mást: [swap X Y] eller [discard]"
+  },
+  "hand": {
+    "no_cards": "Eingin kort.",
+    "header": "Kol: 1 2 3 (sjálvtøka)",
+    "row": "Røð {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Leikari {pid} skifti {new} við {old} á posiðjon ({row},{col})",
+    "discarded": "Leikari {pid} kastaði {card}"
+  },
+  "message": {
+    "deck_empty": "Talvan er tóm! Leikurin endar straks.",
+    "knocked": "Leikarin {pid} er tikin! Hvør annar leikari fær eitt umfar afturat.",
+    "final_round": "Spælari {pid} {reason}! Hvør annar spælari fær ein umfar til."
+  },
+  "reason": {
+    "all_revealed": "hevur øll kortini víst seg?"
+  },
+  "invalid": {
+    "wrong_action": "Nýt nákvæmlega EITT bracketraðað ávirkan: [draw], [take], [swap X Y], [discard], [knock], eller [peek X Y]",
+    "discard_empty": "Kastbúnkin er tóm!",
+    "must_draw_first": "Tú mást fyrst [draw], [take], [knock], ella [peek X Y]",
+    "cannot_discard_taken": "Tú kanst ikki vraka eitt kort, sum tú hevur tikið úr avlopsbunkuni.",
+    "have_drawn_card": "Tú hevur eitt dregið kort. Tú mást [swap X Y] eller [discard] ta",
+    "need_drawn_swap": "Tú hevur brúk fyri einum kortum til at skifta.",
+    "need_drawn_discard": "Tú mást hava ein dregin kort at kasta burtur.",
+    "out_of_bounds": "Posiðjon úti av marki. Nýt røð 1-{max_row}, kolonna 1-{max_col}",
+    "knock_with_card": "Tú kanst ikki sláa við einum útgreiddum korti. Endurfør fyrst títt umfar.",
+    "already_knocked": "Onkur hevur longu vunnið hendan túrin.",
+    "already_revealed": "Henda kortið er longu avdúkað!"
+  },
+  "summary": {
+    "full": "Leikur liðugur! Leikari {winner} vinnur við stigatali á {score} stig!\n\nEndalig stig:\n{scores}",
+    "line": "Leikari {pid}: {score} stig\n"
+  },
+  "board_str": {
+    "title": "=== GOLF-leikur ===",
+    "discard": "Avlopsstaða: {card}",
+    "knocked": "Leikarin {pid} hevur bankað!",
+    "player_header": "Spælari {pid} (Stig: {score}):"
+  }
+}

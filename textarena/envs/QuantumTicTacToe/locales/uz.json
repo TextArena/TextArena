@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Siz Quantum Tic Tac Toe o'yinida {player_id} o'yinchi siz.\nSizning belgizingiz '{symbol}', va sizning harakat raqamlaringiz har doim {parity} (masalan, X1, X3 yoki O2, O4).\n\nMaqsad: Uch klassik belgidan iborat chiziq hosil qilib, g'alaba qozonish.\n\nQanday o'ynash kerak:\n- Har bir navbatda, ikki bo'sh kvadratga 'spooky mark' qo'ying, '[a,b]' formatidan foydalaning.\n- Bu belgilar 'X1 / X1' yoki 'O4 / O4' kabi yorliqlangan va bog'langan.\n- Siz allaqachon qulagan (qotib qolgan) kvadratga 'spooky mark' qo'ya olmaysiz.\n\nQulash qoidasi:\n- Agar sizning harakatingiz bog'lanish grafikida tsikl hosil qilsa, u avtomatik ravishda qulaydi.\n- Tsikldagi har bir 'spooky mark' ikki pozitsiyasidan birida klassik belgi hosil bo'ladi.\n- Bog'liq 'spooky mark'lar ham qulaydi.\n\nG'alaba:\n- O'yin bir o'yinchi uchta klassik belgidan iborat qator hosil qilganda tugaydi.\n- Agar ikkala o'yinchi bir xil qulash paytida qator hosil qilsa, pastki maksimal harakat raqamiga ega bo'lgan o'yinchi g'olib bo'ladi.\n\nNamuna harakat: '[0,4]' 0 va 4 hujayralariga 'spooky mark' qo'yadi."
+  },
+  "board": {
+    "current_board": "Kvant tik-tak-to'plar taxta: {board} Kvant belgisini ikki joyga joylashtirish uchun harakatingizni \"[a,b]\" sifatida yuboring."
+  },
+  "invalid_move": {
+    "wrong_format": "Noto'g'ri format. \"[a,b] \" dan foydalaning.",
+    "invalid_cells": "Noto'g'ri yoki bir xil raqamli raqamlar.",
+    "already_solidified": "Hujayralardan biri allaqachon qattiqlashgan."
+  },
+  "game_action": {
+    "placed": "O'yinchi {player_id} o'z ramzini {pos_a} va {pos_b} kataklar o'rtasida superpozitsiyaga qo'ydi."
+  },
+  "game_message": {
+    "dependent_resolved": "Tartibga bogʻliq superpozitsiya hal qilindi. Katak ({r}, {c}) endi {symbol} hisoblanadi.",
+    "last_cell_resolved": "So'nggi katak uchun superpozitsiya hal qilindi. Katak ({r}, {c}) endi {symbol} hisoblanadi.",
+    "superposition_resolved": "Superpozitsiya hal qilindi. Katak ({r}, {c}) endi {symbol} hisoblanadi."
+  },
+  "outcome": {
+    "win": "O'yinchi {player_id} mustahkamlangan ballar bilan g'alaba qozonadi!",
+    "draw": "O'yin teng bo'lib chiqdi!"
+  }
+}

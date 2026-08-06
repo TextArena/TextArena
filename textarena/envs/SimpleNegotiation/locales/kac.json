@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Nanhte Player {player_id} Negotiation Game na re.\nNanhte shi resources na re, nanhte resources hta lu ai kaw na shi hta wa shi hku shi ra ai.\nNanhte hku shi resources na re:\n\t+ {resource_value_list}\n Shi hta turn shi hku, nanhte opponent hte rau rau ai kaw na trade offer shi hku shi ra ai.\n Shi hta special tokens hte action na re:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': Shi incoming offer hku shi ai.\n  - '[Deny]': Shi incoming offer hku shi n ra ai (default).\nGame {max_turns} turn shi hku re."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Hpungtau gaw, ra ai lam ni n nga tim hpaga ga sadi hpe hkap la na matu shakut wa ai.",
+    "out_of_range": "Player {player_id}, Shi action na re. Column {col} na shi hku n re.",
+    "already_full": "Player {player_id}, Shi action na re. Column {col} na shi hku kau re.",
+    "proposing_with_no_resource": "Player {player_id} gaw ra ai resource n lu shi yang trade offer jaw na shakut wa sai.",
+    "incorrect_offer_format": "Player {player_id} gaw n jaw ai hkrang hte trade offer galaw dat sai.",
+    "no_new_offer": "Player {player_id} gaw hpa mung n jaw ai."
+  },
+  "offers": {
+    "reject": "Player {player_id} gaw dai trade offer hpe nhkap la ai.",
+    "accept": "Masha {acceptor_id} gawng kasha {proposer_id} na shang lawm ai.",
+    "proposal": "Player {player_id} hku shi offer na Player {opponent_id} hte rau ai: Offered items: {offered} -> Requested items: {requested}"
+  },
+  "outcome": {
+    "win": "Player {winner_id} gaw inventory value hta grau kaba ai hku nna dang la lu sai.",
+    "draw": "Shi inventory value na re, shi hku shi n ra ai. Draw re."
+  }
+}

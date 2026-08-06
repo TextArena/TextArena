@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "O ṣe Player {player_id}. O ṣe Sudoku.\nEyi ni ipo ti Sudoku grid wa lọwọlọwọ. Oju-iwe kọọkan ti a nọmba lati 1 si 9, ati kọlọm kọọkan pẹlu ti a nọmba lati 1 si 9.\nAwọn sẹli tí kò sí nlára wọn ni '.' , ati awọn sẹli tí a ti kún pẹlu nọmba lati 1 si 9.\n\nIpo ti Sudoku Grid lọwọlọwọ:\nEre rẹ ni lati kún awọn sẹli tí kò sí nlára wọn nínú 9x9 grid pẹlu nọmba lati 1 si 9 bẹẹ:\n1. Oju-iwe kọọkan gbọdọ̀ kún pẹlu gbogbo nọmba lati 1 si 9 láìsí ìjánu.\n2. Kọlọm kọọkan gbọdọ̀ kún pẹlu gbogbo nọmba lati 1 si 9 láìsí ìjánu.\n3. Kọọkan nínú awọn 3x3 subgrids mẹsan gbọdọ̀ kún pẹlu gbogbo nọmba lati 1 si 9 láìsí ìjánu.\n\nIlana ati Ọrọ-ìdìbọ̀:\n1. **Má ṣe àtúnṣe** awọn nọmba àkọ́kọ́ tí a ti pèsè nínú grid.\n2. **Kún** sẹli tí kò sí nlára wọn pẹlu '.'.\n3. O lè dáhùn lórí ọ̀nà tí o fẹ́, ṣùgbọ́n ṣe àṣẹ̀ṣẹ̀ pé ìdáhùn rẹ̀ bá gbẹ̀yìn '[row column number]'.\n4. **Ṣe àṣẹ̀ṣẹ̀** pé ìgbé rẹ̀ kò ṣe ìjánu ilana Sudoku. Awọn ìgbé tí kò bọ̀wọ̀ yóò mú kí a pàṣẹ̀.\nÀpẹẹrẹ:\n- **Ìgbé Tọ́**:\n  - Grid Snippet Tí Ìgbé Kọjá:\n  \n  - Ìgbé: `[5 3 7]`\n  - Ìtumọ̀: Sísọ 7 sí oju-iwe 5, kọlọm 3 kò ṣe ìjánu ilana Sudoku.\n\n- **Ìgbé Àìtọ́** (Àtúnṣe sẹli tí a ti kún):\n  - Grid Snippet Tí Ìgbé Kọjá:\n  \n  - Ìgbé: `[1 1 9]`\n  - Ìtumọ̀: Sẹli (1,1) ti kún pẹlu 5. O kò lè àtúnṣe e.\n\n- **Ìgbé Àìtọ́** (Ìjánu ilana Sudoku):\n  - Grid Snippet Tí Ìgbé Kọjá:\n  \n  - Ìgbé: `[1 3 5]`\n  - Ìtumọ̀: Sísọ 5 sí oju-iwe 1, kọlọm 3 ṣe ìjánu ilana nítorí 5 ti wà nínú oju-iwe 1.\n\nÌtàn ìgbé rẹ̀ ati àwọn ẹ̀rọ̀ rẹ̀ yóò jẹ̀rì sí bí o ṣe ń gbá ìrẹ̀. Lọ́tọ̀ ìtàn ìgbé rẹ̀ láti mú ìgbé rẹ̀ dara si.\n\n"
+  },
+  "board": {
+    "game_board": "Àwòrán eré: {board}",
+    "board_state": "Ipinle igbimọ: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Àdàkọ ìgbésẹ̀ tí kò bágbà mu. Olùṣeré {player_id} kò dábàá 'nọ́mbà ọ̀pá ìlà' tó bágbà mu.",
+    "out_of_bounds": "Àṣeyọrí tí kò bá bófin mu. Ẹ̀yin òṣèré {player_id} gbìyànjú láti gbé {num} sí ({row}, {col}), èyí tí kò bófin mu.",
+    "overwrite": "Àtúnṣe tí kò bá bófin mu. Olùṣeré {player_id} gbìyànjú láti kọ sára sẹẹli tí ó ti kún tẹ́lẹ̀ ({row}, {col}).",
+    "violates_rules": "Igbesẹ ti ko wulo. Olùṣeré {player_id} gbìyànjú láti gbé {num} sí ({row}, {col}), èyí tí ó rú òfin Sudoku."
+  },
+  "outcome": {
+    "win": "Ẹ kú ìkíni! Olùṣeré {player_id} parí àdììtú Sudoku.",
+    "turn_limit": "O ti de opin iyipo. O ti kun {percent}% ti awọn sẹẹli ofo."
+  }
+}

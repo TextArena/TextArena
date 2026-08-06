@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Int qed ikun Plejer {player_id} f'Stratego.\nL-għan tiegħek huwa li tikseb il-Bandiera tal-avversarju jew telimina kull biċċa li tista' tiċċaqlaq.\nL-armata tiegħek ġiet imqiegħda fuq il-bord għalik, inkluż il-Bandiera, il-Bombi, u biċċiet oħra ta' rangu differenti.\n\n### Istruzzjonijiet tal-Logħba\n1. **Regoli tal-Moviment:**\n   - Matul il-ħin tiegħek, tista' tċaqlaq biċċa waħda b'pass wieħed lejn kaxxa ġirien (fuq, isfel, xellug, jew lemin) li diġà hija okkupata bil-biċċiet tiegħek.\n   - Eżempju: Biċċa tista' tċaqlaq minn A1 għal B1 jew A1 għal A2 jekk B1 u A2 mhumiex okkupati bil-biċċiet tal-plejer stess.\n   - Jekk il-biċċa magħżula hija Bomba jew Bandiera, ma tistax tiċċaqlaq.\n2. **Battalji:**\n   - Jekk tċaqlaq fuq kaxxa okkupata minn biċċa tal-avversarju, imbagħad se jkun hemm battalja:\n     - Il-biċċa bl-ogħla rangu tirbaħ u telimina l-biċċa tal-avversarju.\n     - Jekk ir-rang hija l-istess, iż-żewġ biċċiet jitneħħew mill-bord.\n     - **Każi Speċjali:**\n       - Il-Bombi jeliminaw il-biċċiet tal-attakk l-aktar ħlief il-Minaturi, li jiddefendu l-Bombi.\n       - L-Ispji jistgħu jegħlbu l-Marixxall jekk l-Ispju jattakka l-ewwel imma jitilfu kontra kull biċċa oħra.\n3. **Għanijiet Strateġiċi:**\n   - Identifika l-biċċiet tal-avversarju permezz tal-movimenti u l-battalji tagħhom.\n   - Ipproteġi l-Bandiera tiegħek filwaqt li tipprova tikseb il-Bandiera tal-avversarju.\n   - Uża l-Iskawti b'mod strateġiku biex tikseb informazzjoni dwar il-biċċiet tal-avversarju u tattakka dawk li huma dgħajfa.\n\n### Kif tagħmel Moviment:\n1. Speċifika l-koordinati tal-biċċa li tixtieq tċaqlaq u d-destinazzjoni tagħha.\n2. Uża l-format: [A0 B0], fejn A0 huwa l-pożizzjoni tal-bidu, u B0 huwa d-destinazzjoni.\n   - Eżempju: Biex tċaqlaq biċċa minn saf 0, kolonna 0 għal saf 1, kolonna 0, idħol [A0 B0].\n3. Assigura li d-destinazzjoni hija valida skont ir-regoli tal-moviment hawn fuq.\n\n### Noti Importanti:\n- Il-bord se juri l-biċċiet tiegħek u l-pożizzjonijiet tagħhom, eż. MN, MS.\n- Il-bord se juri wkoll il-pożizzjonijiet magħrufa tal-biċċiet tal-avversarju mingħajr ma jiżvela r-rang tagħhom, eż. ?.\n- Il-grilji bil-~ huma lagi u ma jistgħux jiċċaqalqu fuqhom.\n- Bħala suġġeriment, ibda l-logħba tiegħek billi tċaqlaq il-biċċiet tiegħek li huma fuq il-linji tal-front biex tikseb informazzjoni dwar il-biċċiet tal-avversarju. Il-plejer 0 u l-plejer 1 għandhom il-linji tal-front f'saf D u G rispettivament.\n\nHawn huwa l-istat attwali tal-bord:\n"
+  },
+  "board": {
+    "current_board": "Bord Attwali:\n\n{board}\nMovimenti Disponibbli: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format ta' azzjoni invalidu. Il-plejer {player_id} ma daħħalx pass fil-format [A0 B0] .",
+    "invalid_coordinates": "Format ta' azzjoni invalidu. Il-plejer {player_id} ma daħħalx koordinati validi.",
+    "not_own_piece": "Format ta' azzjoni invalidu. Il-plejer {player_id} għandu jmexxi waħda mill-biċċiet tiegħu stess.",
+    "scout_through_pieces": "Format ta' azzjoni invalidu. Il-plejer {player_id} ma jistax jimxi b'scout minn biċċiet oħra.",
+    "scout_diagonal": "Format ta' azzjoni invalidu. Il-plejer {player_id} ma jistax jimxi fuq scout b'mod dijagonali.",
+    "non_scout_multi_square": "Il-biċċiet, minbarra l-iskutisti, jistgħu jiċċaqilqu kwadru wieħed biss kull darba.",
+    "move_into_lake": "Format ta 'azzjoni invalidu. Il-plejer {player_id} ma jistax jimxi fil-lag.",
+    "move_onto_own_piece": "Format ta' azzjoni invalidu. Il-plejer {player_id} ma jistax jimxi fuq il-biċċa tiegħu stess.",
+    "move_bomb_or_flag": "Format ta 'azzjoni invalidu. Il-plejer {player_id} ma jistax jimxi bomba jew bandiera."
+  },
+  "game_action": {
+    "you_moved": "Int mċaqlaq il-biċċa tiegħek minn {source} għal {dest}.",
+    "opponent_moved": "Player {player_id} għamel moviment bi pjaċe minn {source} għal {dest}.",
+    "you_equal_ranks": "Int għamilt moviment bi pjaċe tiegħek minn {source} għal {dest}. Il-pjaċe attakkanta kienet {attacking_rank} u l-pjaċe destinazzjoni kienet {target_rank}. Peress li r-ranks huma l-istess, iż-żewġ pjaċi tilfu.",
+    "opponent_equal_ranks": "Player {player_id} għamel moviment bi pjaċe minn {source} għal {dest}. Il-pjaċe attakkanta kienet {attacking_rank} u l-pjaċe destinazzjoni kienet {target_rank}. Peress li r-ranks huma l-istess, iż-żewġ pjaċi tilfu.",
+    "you_miner_defused": "Int għamilt moviment bi pjaċe tiegħek minn {source} għal {dest}. Il-pjaċe attakkanta kienet {attacking_rank} u l-pjaċe destinazzjoni kienet {target_rank}. Peress li minaturi jista' jneħħu bomby, int rebaħ il-battalja.",
+    "opponent_miner_defused": "Player {player_id} għamel moviment bi pjaċe minn {source} għal {dest}. Il-pjaċe attakkanta kienet {attacking_rank} u l-pjaċe destinazzjoni kienet {target_rank}. Peress li minaturi jista' jneħħu bomby, int tilef il-battalja.",
+    "you_bomb_lost": "Int għamilt moviment bi pjaċe tiegħek minn {source} għal {dest}. Il-pjaċe attakkanta kienet {attacking_rank} u l-pjaċe destinazzjoni kienet {target_rank}. Peress li l-attakkant mhuwiex minatur, int tilef il-battalja.",
+    "opponent_bomb_won": "Player {player_id} għamel moviment bi pjaċe minn {source} għal {dest}. Il-pjaċe attakkanta kienet {attacking_rank} u l-pjaċe destinazzjoni kienet {target_rank}. Peress li l-attakkant mhuwiex minatur, int rebaħ il-battalja.",
+    "you_spy_won": "Int għamilt moviment bi pjaċe tiegħek minn {source} għal {dest}. Il-pjaċe attakkanta kienet {attacking_rank} u l-pjaċe destinazzjoni kienet {target_rank}. Peress li l-attakkant huwa spijun u l-destinazzjoni hija marshall, int rebaħ il-battalja.",
+    "opponent_spy_lost": "Player {player_id} għamel moviment bi pjaċe minn {source} għal {dest}. Il-pjaċe attakkanta kienet {attacking_rank} u l-pjaċe destinazzjoni kienet {target_rank}. Peress li l-attakkant huwa spijun u l-destinazzjoni hija marshall, int tilef il-battalja.",
+    "you_higher_won": "Int għamilt moviment bi pjaċe tiegħek minn {source} għal {dest}. Il-pjaċe attakkanta kienet {attacking_rank} u l-pjaċe destinazzjoni kienet {target_rank}. Peress li l-attakkant huwa rank ogħla mill-destinazzjoni, int rebaħ il-battalja.",
+    "opponent_higher_lost": "Player {player_id} għamel moviment bi pjaċe minn {source} għal {dest}. Il-pjaċe attakkanta kienet {attacking_rank} u l-pjaċe destinazzjoni kienet {target_rank}. Peress li l-attakkant huwa rank ogħla mill-destinazzjoni, int tilef il-battalja.",
+    "you_lower_lost": "Int għamilt moviment bi pjaċe tiegħek minn {source} għal {dest}. Il-pjaċe attakkanta kienet {attacking_rank} u l-pjaċe destinazzjoni kienet {target_rank}. Peress li l-attakkant huwa rank inferjuri mill-destinazzjoni, int tilef il-battalja.",
+    "opponent_lower_won": "Player {player_id} għamel moviment bi pjaċe minn {source} għal {dest}. Il-pjaċe attakkanta kienet {attacking_rank} u l-pjaċe destinazzjoni kienet {target_rank}. Peress li l-attakkant huwa rank inferjuri mill-destinazzjoni, int rebaħ il-battalja."
+  },
+  "outcome": {
+    "flag_captured": "Il-plejer {player_id} qabad il-bandiera tal-avversarju!",
+    "no_movable_pieces": "Il-plejer {winner_id} rebħa! Il-plejer {loser_id} m'għandux aktar biċċiet li jistgħu jiċċaqalqu."
+  }
+}

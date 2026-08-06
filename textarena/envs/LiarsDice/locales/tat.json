@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Сез Уенчы {player_id} сез {num_players}-уенчы Ларис Дайс уенында.\nКагыйдәләр:\n- Сезнең чиратта, сез либо:\n  1) Яңа бирүне хәзерге бирүдән югарырак сан яки югарырак йөз (яки икесе дә) белән ясый аласыз; мәсәлән, '[Bid: 3, 4]',\n  2) Соңгы бирүне '[Call]' тип язу белән чакыра аласыз.\n\nСез чакырган тәкъдимне:\n  - Әгәр шул йөз күчәренең чын саны барлык күпмәкчәкләр арасында бирүдән азрак булса, соңгы бирүче бер күпмәкчәген югалта.\n  - Башкачә, чакыручы бер күпмәкчәген югалта.\nБер күпмәкчәккә ия булмаган уенчы эшләнә. Соңгы калган уенчы җиңә."
+  },
+  "board": {
+    "per_player": "\tУенчы {p}: {d}",
+    "new_round": "\nЯңа раунд - Калган күпмәкчәкләр: {dice_summary}\nСезнең хәзерге күпмәкчәкләрегез: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Уенчы {current_player_id} чакыра! {face_value} йөзенең чын саны {count}, ул {quantity} дан азрак.\nУенчы {loser_id} (соңгы бирүче) бер күпмәкчәген югалта.",
+    "caller_loses": "Уенчы {current_player_id} чакыра! {face_value} йөзенең чын саны {count}, ул {quantity} дан >= .\nУенчы {loser_id} (чакыручы) бер күпмәкчәген югалта."
+  },
+  "action": {
+    "bid_announce": "Уенчы {player_id} {quantity} суммасын {face_value} йөзе белән бирә."
+  },
+  "invalid_move": {
+    "call_no_bid": "Бернинди дә алдан тәкъдимнәрсез чакыру.",
+    "invalid_bid": "Дөрес булмаган тәкъдим: {reason}",
+    "not_recognized": "Гамәл танылмаган рәсми '[Bid: X, Y]' яки '[Call]' буларак. Тәкъдим ителгән гамәл: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Яңа сан {new_quantity} хәзерге {current_quantity} дан түбәнрәк.",
+    "face_lower": "Яңа йөз {new_face_value} хәзерге {current_face_value} дан түбәнрәк.",
+    "identical": "Бу тәкъдим хәзерге тәкъдимнеке белән бер үк.",
+    "face_range": "1 һәм 6 арасында булырга тиеш."
+  },
+  "message": {
+    "eliminated_invalid": "Уенчы {player_id} дөрес булмаган хәрәкәт белән чыгарылган."
+  },
+  "outcome": {
+    "win": "Уенчы {winner} җиңә! Төгәл рейтинг: {final_ranking}"
+  }
+}

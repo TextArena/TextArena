@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Briscola ကစားပွဲ စတင်ပါပြီ! အဓိကစုံ: {trump_suit} (အဓိကစုံ ကစားတုံး: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Nanhte Briscola shawng e - Shawngpa {player_id} re.\nMungdan: Mawng shawng hte shawng shagu hta e mungdan shagu hpe mung (deck hta 120 mungdan shagu re).\nMawng Mungdan: A=11, 3=10, K=4, Q=3, J=2, shagu=0\nMawng Shang: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTrump mawng shawng shagu hpe non-trump mawng shawng shagu hpe shang e law.\n\nMawng hte: '[play X]' X hte mawng shawng shagu hta e shawng shagu hte hka (1-{max_pos}) re.\n"
+  },
+  "hand": {
+    "none": "Hkaw tsun ladat ni n nga ai.",
+    "empty": "Hkaw tsun ladat ni n nga ai.",
+    "header": "Na a lata:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP) hpe tsun ai."
+  },
+  "trick": {
+    "empty": "Ndai zawn re ai lam hpe gara laika buk mung n madun da ya shi ai.",
+    "header": "Ya aten na hkalem ai lam:",
+    "line": "  Player {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "ကစားသမား {player_id}: {points} အမှတ်",
+    "trump_info": "အဓိကစုံ: {trump_suit}",
+    "trump_info_deck": "အဓိကစုံ: {trump_suit} | ကစားတုံး အလျား အရေအတွက်: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nအမှတ်များ: {scores}\n{trump_info}\n\nကစားတုံး ရိုက်ပါ [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "[play X] ကို အသုံးပြုပါ ကစားသမား လက်ထဲတွင် ကစားတုံး နေရာ (၁, ၂, ၃, စသည်)",
+    "out_of_range": "Majan shabrang ma shawng ai. Nan lata hta e majan {count} shi ai (1-{count})"
+  },
+  "action": {
+    "played": "ကစားသမား {player_id} က {card} ရိုက်သည်",
+    "trick_win": "ကစားသမား {winner} က {card} ဖြင့် ကစားတုံး နိုင်ပြီး {points} အမှတ် ရရှိသည်!"
+  },
+  "outcome": {
+    "head": "ကစားပွဲ ပြီးပါပြီ! ကစားသမား {winner} က {points} အမှတ်ဖြင့် နိုင်သည်!\n\nနောက်ဆုံး အမှတ်များ:\n{scores}",
+    "player_line": "ကစားသမား {player_id}: {points} အမှတ် ({tricks} ကစားတုံး)\n"
+  }
+}
