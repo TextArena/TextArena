@@ -1,0 +1,11 @@
+{
+  "name": "say_little",
+  "enforcement": "action_validation",
+  "behavioral_rules": {
+    "max_words_per_message": 15,
+    "violation_message": "Say Little violation: {word_count} words (max 15 allowed)"
+  },
+  "instructions": "This is zero-sum bargaining and you are to get as much of the $2.00 as you possibly can. Please try really hard.\n\nHere is your special instruction: pick an expectation of what you will try to get and stick to it if you can, but say as little as possible. If you can, try to get away with saying essentially nothing at all, except for the amount you want. You may listen courteously as much as you want but try as hard as you reasonably can not to talk. If you absolutely have to, make up a story to bolster your claim, but try to (if you can) not to talk at all except for stating an amount of money.",
+  "victory_condition": "Follow silence strategy AND reach any deal",
+  "failure_condition": "Exceed word limits 3+ times OR no deal reached"
+}

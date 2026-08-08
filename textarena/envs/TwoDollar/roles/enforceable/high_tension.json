@@ -1,0 +1,11 @@
+{
+  "name": "high_tension",
+  "enforcement": "action_validation",
+  "behavioral_rules": {
+    "max_concession": 0.01,
+    "violation_message": "High Tension violation: ${concession:.2f} concession (max $0.01 allowed)"
+  },
+  "instructions": "This is zero-sum bargaining. You should get as much of the $2.00 as you can, with any story you like.\n\nPlease keep up a high level of tension. Act concerned, repeat demands; don't give in at all, if you can help it. If you do give in, come down only one cent at a time. Please be tough.",
+  "victory_condition": "Make only 1-cent concessions AND reach any deal",
+  "failure_condition": "Make concessions >$0.01 three times OR no deal reached"
+}
