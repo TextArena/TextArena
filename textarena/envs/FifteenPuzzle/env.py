@@ -45,11 +45,33 @@ class FifteenPuzzleEnv(ta.Env):
         )
     
     def _generate_board(self):
-        """ Generate a shuffled board configuration """
+        """ Generate a shuffled board configuration that is guaranteed solvable """
         tiles = list(range(1, 16)) + [None]
         random.shuffle(tiles)
+        if not self._is_solvable(tiles):
+            # A single transposition of two non-blank tiles flips the inversion
+            # parity (and leaves the blank's row untouched), turning an
+            # unsolvable layout into a solvable one.
+            i, j = [k for k, t in enumerate(tiles) if t is not None][:2]
+            tiles[i], tiles[j] = tiles[j], tiles[i]
         return [tiles[i:i + 4] for i in range(0, 16, 4)] # e.g. [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, None]]
-    
+
+    def _is_solvable(self, tiles: List[Optional[int]]) -> bool:
+        """ A 4-wide sliding puzzle is solvable iff the blank sits on an
+        even row counting from the bottom with an odd inversion count, or on an
+        odd row from the bottom with an even inversion count. """
+        values = [t for t in tiles if t is not None]
+        inversions = sum(
+            1
+            for i in range(len(values))
+            for j in range(i + 1, len(values))
+            if values[i] > values[j]
+        )
+        blank_row_from_bottom = 4 - (tiles.index(None) // 4)
+        if blank_row_from_bottom % 2 == 0:
+            return inversions % 2 == 1
+        return inversions % 2 == 0
+
     def _render_board(self, board):
         """ Render the current board layout """
         rendered_board = ""
