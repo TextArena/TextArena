@@ -235,7 +235,7 @@ class TakEnv(ta.Env):
         if self._check_win(self.state.current_player_id): ## check if the game is over
             ## game is over
             reason=f"Player {self.state.current_player_id} has connected two opposite edges of the board."
-            self.state.set_winner( player_ids=self.state.current_player_id, reason=reason)
+            self.state.set_winner(player_id=self.state.current_player_id, reason=reason)
 
         result = self.state.step()
         self._observe_current_state()

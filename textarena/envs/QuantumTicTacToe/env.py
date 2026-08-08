@@ -108,6 +108,49 @@ class QuantumTicTacToeEnv(ta.Env):
                 self._collapse_superpositions(involved_ids)
                 break
 
+    def _collapse_dependent_superpositions(self):
+        while True:
+            has_collapsed = False
+            for move_id, (player_id, (r0, c0), (r1, c1)) in self.state.game_state["superpositions"].items():
+                if self.state.game_state["board"][r0][c0]:
+                    assert not self.state.game_state["board"][r1][c1], "The other cell cannot be filled."
+                    symbol = 'X' if player_id == 1 else 'O'
+                    self.state.game_state["board"][r1][c1] = symbol
+                    self.state.add_observation(message=f"Dependent superposition resolved. Cell ({r1}, {c1}) is now {symbol}.", observation_type=ta.ObservationType.GAME_MESSAGE)
+                    del self.state.game_state["superpositions"][move_id]
+                    has_collapsed = True
+                    break
+
+                if self.state.game_state["board"][r1][c1]:
+                    assert not self.state.game_state["board"][r0][c0], "The other cell cannot be filled."
+                    symbol = 'X' if player_id == 1 else 'O'
+                    self.state.game_state["board"][r0][c0] = symbol
+                    self.state.add_observation(message=f"Dependent superposition resolved. Cell ({r0}, {c0}) is now {symbol}.", observation_type=ta.ObservationType.GAME_MESSAGE)
+                    del self.state.game_state["superpositions"][move_id]
+                    has_collapsed = True
+                    break
+            if not has_collapsed: break
+
+    def _get_empty_cells(self):
+        empty_cells = []
+        for r in range(3):
+            for c in range(3):
+                if not self.state.game_state["board"][r][c]: empty_cells.append((r, c))
+        return empty_cells
+
+    def _collapse_last_empty_cell(self):
+        empty_cells = self._get_empty_cells()
+        if len(empty_cells) != 1: return
+
+        r, c = empty_cells[0]
+        next_player_symbol = 'X' if self.state.current_player_id == 0 else 'O'
+        self.state.game_state["board"][r][c] = next_player_symbol
+        self.state.add_observation(message=f"Superposition for last cell resolved. Cell ({r}, {c}) is now {next_player_symbol}.", observation_type=ta.ObservationType.GAME_MESSAGE)
+
+    def _check_superpositions(self):
+        for _, (_, (r0, c0), (r1, c1)) in self.state.game_state["superpositions"].items():
+            assert not self.state.game_state["board"][r0][c0] and not self.state.game_state["board"][r1][c1], "Both cells cannot be filled."
+
     def _collapse_superpositions(self, move_ids: List[int]):
         board = self.state.game_state["board"]
         superpositions = self.state.game_state["superpositions"]
@@ -121,11 +164,20 @@ class QuantumTicTacToeEnv(ta.Env):
                     board[r][c] = symbol
                     self.state.add_observation(message=f"Superposition resolved. Cell ({r}, {c}) is now {symbol}.", observation_type=ta.ObservationType.GAME_MESSAGE)
                     break  # collapse to the first available cell
-        
+        # Collapse dependent superpositions
+        self._collapse_dependent_superpositions()
+        # Validate superpositions
+        self._check_superpositions()
+        # Collapse last empty cell
+        self._collapse_last_empty_cell()
         # Check for a win
         for pid in range(2):
             symbol = 'X' if pid == 1 else 'O'
             if self._check_winner(symbol): self.state.set_winner(player_id=pid, reason=f"Player {pid} wins with solidified marks!")
+
+        # Check for a draw
+        if not self._get_empty_cells():
+            self.state.set_draw(reason="The game is a draw!")
 
     def _check_winner(self, symbol: str) -> bool:
         board = self.state.game_state["board"]
@@ -134,4 +186,5 @@ class QuantumTicTacToeEnv(ta.Env):
             if board[0][i] == board[1][i] == board[2][i] == symbol: return True
         if board[0][0] == board[1][1] == board[2][2] == symbol: return True
         if board[0][2] == board[1][1] == board[2][0] == symbol: return True
+
         return False

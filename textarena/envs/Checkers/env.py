@@ -22,7 +22,7 @@ class CheckersEnv(ta.Env):
     def _render_board(self) -> str:
         header = "\n     " + "  ".join(str(col) for col in range(8)) + "\n"
         divider = "   +" + "-" * 25 + "\n"
-        rows = "\n".join(f" {row} |" + "".join(f" {self.state.game_state["board"][row][col]} " for col in range(8)) for row in range(8))
+        rows = "\n".join(f" {row} |" + "".join(f" {self.state.game_state['board'][row][col]} " for col in range(8)) for row in range(8))
         return header + divider + rows + "\n"
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
@@ -103,8 +103,10 @@ class CheckersEnv(ta.Env):
         if red_pieces == 0: self.state.set_winner(player_id=1, reason="Red has no pieces left. Black wins!"); return
         if black_pieces == 0: self.state.set_winner(player_id=0, reason="Black has no pieces left. Red wins!"); return
         # If either player has no legal moves, that player loses.
+        if not self._has_legal_move(1 - self.state.current_player_id): # The other player wins
+            self.state.set_winner(player_id=self.state.current_player_id, reason=f"Player {1 - self.state.current_player_id} has no moves left."); return
         if not self._has_legal_move(self.state.current_player_id): # The other player wins
-            self.state.set_winners(player_id=1-self.state.current_player_id, reason=f"Player {self.state.current_player_id} has no moves left."); return
+            self.state.set_winner(player_id=1-self.state.current_player_id, reason=f"Player {self.state.current_player_id} has no moves left."); return
         if self.state.check_turn_limit(): self.state.set_draw(reason="The turn limit has been reached.")
 
     def _has_legal_move(self, player_id: int) -> bool:
