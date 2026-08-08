@@ -488,6 +488,10 @@ register_with_versions(id="SecretMafia-v0", entry_point="textarena.envs.SecretMa
 # WinAsMuchAsYouCanEnv [4 Players]
 register_with_versions(id="WinAsMuchAsYouCan-v0", entry_point="textarena.envs.WinAsMuchAsYouCan.env:WinAsMuchAsYouCanEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
 
+# NegotiateToSurvive [5 Players] - Resource trading survival game
+register_with_versions(id="NegotiateToSurvive-v0-distributive", entry_point="textarena.envs.NegotiateToSurvive.env:NegotiateToSurviveEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": DEFAULT_WRAPPERS}, game_variant="distributive", max_rounds=100, starting_coins=50)
+register_with_versions(id="NegotiateToSurvive-v0-integrative",  entry_point="textarena.envs.NegotiateToSurvive.env:NegotiateToSurviveEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": DEFAULT_WRAPPERS}, game_variant="integrative", max_rounds=100, starting_coins=50)
+
 # RandomizedTicTacToe [2 Player]
 # register(id="RandomizedTicTacToe-v0", entry_point="textarena.envs.RandomizedTicTacToe.env:RandomizedTicTacToeEnv", default_wrappers=DEFAULT_WRAPPERS)
 # register(id="RandomizedTicTacToe-v0-raw", entry_point="textarena.envs.RandomizedTicTacToe.env:RandomizedTicTacToeEnv")
