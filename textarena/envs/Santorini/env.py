@@ -34,13 +34,16 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
     # Player colors
     PLAYER_COLORS = ["Navy", "White", "Grey"]
 
-    def __init__(self, error_allowance: int=10):
+    def __init__(self, is_open: bool=True, show_valid: bool=True, error_allowance: int=10):
         """Initialize the Santorini game environment.
         
         Args:
+            is_open (bool): If True, all players can see the current board state.
             show_valid (bool): If True, players can see a list of valid moves.
             error_allowance (int): Number of invalid moves allowed before a player loses.
         """
+        self.is_open = is_open
+        self.show_valid = show_valid
         self.error_allowance = error_allowance
 
         # Regex pattern for moves: [worker(N1|N2|W1|W2|G1|G2)source(A-E)(1-5)dest(A-E)(1-5)build(A-E)(1-5)]
@@ -107,11 +110,12 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
             "You can include additional text in your messages, but you must only mention the valid move pattern once.\n"
         )
 
-        #add initial board state if it's player 0
-        if player_id == 0:
-            prompt+=create_board_str(self.board)
-            prompt+=f"\nValid Moves: {self._get_valid_moves(0)}"
-        
+        if self.is_open:
+            prompt += f"\nCurrent board state:\n{create_board_str(self.board)}\n"
+
+        if self.show_valid:
+            prompt += f"\nValid moves: {self._get_valid_moves(player_id)}"
+
         return prompt
 
     def _get_valid_moves(self, player_id: int) -> str:
@@ -254,12 +258,14 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
         # Check if game is over
         self._check_gameover()
 
-        self.state.add_observation(
-            from_id=ta.GAME_ID,
-            to_id=-1,
-            message=create_board_str(self.board, self.state.game_state["valid_moves"]),
-            observation_type = ta.ObservationType.GAME_BOARD
-        )
+        # Add board state to observations if game is open
+        if self.is_open:
+            self.state.add_observation(
+                from_id=ta.GAME_ID,
+                to_id=-1,
+                message=create_board_str(self.board),
+                observation_type = ta.ObservationType.GAME_BOARD
+            )
 
         return self.state.step()
 

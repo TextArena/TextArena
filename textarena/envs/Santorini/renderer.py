@@ -1,6 +1,6 @@
 from typing import List, Optional, Tuple
 
-def create_board_str(board: List[List[Tuple[int, Optional[Tuple[int, int]]]]], valid_moves:str=None) -> str:
+def create_board_str(board: List[List[Tuple[int, Optional[Tuple[int, int]]]]]) -> str:
     """
     Renders the Santorini board using ASCII art with clear separation of building height and worker.
     
@@ -66,8 +66,5 @@ Legend:
 - Height: 0-3 for building levels, 4 for dome
 - Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)
 """
-
-    if valid_moves:
-      board_template+=f"\nValid Moves: {valid_moves}"
     
     return board_template.format(**squares)
