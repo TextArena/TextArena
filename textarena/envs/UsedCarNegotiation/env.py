@@ -59,6 +59,7 @@ class UsedCarNegotiationEnv(ta.Env):
 
     def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
         return (
+            f"You are Player {player_id}.\n"
             f"You are in a price negotiation with {self.state.num_players} players and a maximum of {self.state.max_turns} rounds.\n"
             f"{self.player_instructions[player_id]}\n\n"
             f"{self.blue_book}\n\n"

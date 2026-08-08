@@ -97,9 +97,10 @@ general todos:
 | 47      | [`Tak-v0`](#tak)                                             |      ✗      |                                            |                      |                     |          |
 | 48      | [`TicTacToe-v0`](#tictactoe)                                 |      ✗      |                                            |                      |          ✓          |          |
 | 49      | [`TruthAndDeception-v0`](#truthanddeception)                 |      ✗      |                                            |                      |          ✓          |          |
-| 50      | [`UltimateTicTacToe-v0`](#ultimatetictactoe)                 |      ✗      |                                            |                      |          ✓          |          |
-| 51      | [`WildTicTacToe-v0`](#wildtictactoe)                         |      ✗      |                                            |                      |          ✓          |          |
-| 52      | [`WordChains-v0`](#wordchains)                               |      ✗      |                                            |                      |          ✓          |          |
+| 50      | [`TwoDollar-v0`](#twodollar)                                 |      ✗      |                                            |         ✓            |          ✓          |          |
+| 51      | [`UltimateTicTacToe-v0`](#ultimatetictactoe)                 |      ✗      |                                            |                      |          ✓          |          |
+| 52      | [`WildTicTacToe-v0`](#wildtictactoe)                         |      ✗      |                                            |                      |          ✓          |          |
+| 53      | [`WordChains-v0`](#wordchains)                               |      ✗      |                                            |                      |          ✓          |          |
 
 
 
@@ -2433,6 +2434,87 @@ No env params.
 
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
+<hr></details><details><summary><strong>Two Dollar [2 Player]</strong></summary><a id="twodollar"></a><hr>
+
+## `TwoDollar`
+**Two Dollar** Negotiation is a classic two-player bargaining game where both players must agree on how to split $2.00. Each player has secret role instructions (constraints or stylistic behaviors) unknown to the opponent, introducing asymmetric information and strategic tension. Resource: [ocw.mit.edu](https://ocw.mit.edu/courses/15-667-negotiation-and-conflict-management-spring-2001/pages/lecture-notes/)
+
+**Action Space:** 
+Players communicate freely but must include exactly one bracketed action per turn.
+Examples:
+- [Propose] $X.XX → offer $X.XX for self, remainder goes to opponent
+- [Accept] → accept current proposal
+- [Reject] → reject current proposal
+
+Only the first valid bracketed action is executed; rationale text before the action is allowed.
+
+| **Reward Setting**      | **Player Role**  | **Reward** |
+|-------------------------|------------------|-----------:|
+| Deal accepted, role satisfied         | Both           | `+1`       |
+| Reached max rounds  | Both            | `0`       |
+| Made an invalid move    | Offending player | `-1`       |
+
+**Env-ids:** 
+The environment supports configurable parameters for `max_rounds`, `total_amount`, and `error_allowance`.
+
+| **Env-ID**               | **total_amount** | **max_rounds** | **error_allowance** |
+|--------------------------|------------------|----------------|---------------------|
+| `TwoDollar-v0`           | `$2.00`          |`20`            | `3`                 |
+
+| **Full Env-ID Format**             | **Default Wrappers**                                   |
+|------------------------------------|--------------------------------------------------------|
+| `TruthAndDeception-v0-{...}`       | `LLMObservationWrapper`, `ActionFormattingWrapper`     |
+| `TruthAndDeception-v0-{...}-raw`   | `None`                                                 |
+| `TruthAndDeception-v0-{...}-train` | `LLMObservationWrapper`, `ClipCharactersActionWrapper` |
+
+### Role System
+
+Each player is secretly assigned a **role** at the start of the game. Roles introduce asymmetric information and strategic variety:
+
+- **Enforceable Roles** → rules enforced by the environment  
+  - *say_little*: Max 15 words before each action  
+  - *high_tension*: Can only reduce proposals by ≤ $0.01  
+  - *50_cents*, *80_cents*, *1_dollar*, etc.: Must receive at least the threshold amount or end with $0.00  
+  - *x_rounds*: Must reach a deal by a certain deadline round  
+
+- **Non-Enforceable Roles** → behavioral or stylistic prompts  
+  - *battle_ax*: Aggressive competitor  
+  - *dependent*: Focused on long-term relationships  
+  - *public_figure*: Concerned about fairness/reputation  
+  - *vanilla*: Standard negotiator with no special constraints  
+
+**Usage:**
+- By default, roles are assigned randomly:  
+  ```python
+  env = ta.make(env_id="TwoDollar-v0")
+  env.reset(num_players=2)
+  ```
+- Or specify roles explicitly:
+  ```python
+  env = ta.make(enc_id="TwoDollar-v0", player_roles=["dependent", "50_cents"])
+  env.reset(num_players=2)
+  ```
+
+### Testing
+
+The Two Dollar environment includes a dedicated test suite (currently in `test_env.py`).  
+It covers:  
+- Action validation (proposal formats, accept/reject rules)  
+- Role enforcement (word limits, concession limits, thresholds)  
+- Turn structure and round counting  
+- Game end conditions (deal accepted, timeout, invalid moves)  
+
+Run the full suite:  
+```bash
+# Run all tests
+python -m pytest textarena/envs/TwoDollar/test_env.py -v
+
+# Run specific test categories
+python -m pytest textarena/envs/TwoDollar/test_env.py::TestTwoDollarValidation -v
+python -m pytest textarena/envs/TwoDollar/test_env.py::TestTwoDollarRoles -v
+```
+
+**Contact:** For issues or questions regarding this environment, please reach out to **charipol@amazon.com**.
 
 
 <hr></details><details><summary><strong>Ultimate Tic Tac Toe [2 Player]</strong></summary><a id="ultimatetictactoe"></a><hr>

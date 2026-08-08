@@ -174,6 +174,9 @@ class SecretMafiaEnv(ta.Env):
             if next_phase == Phase.DAY_DISCUSSION:
                 self._resolve_night_outcome()
 
+        # Check if game has concluded
+        if self.state.done: return
+
         # Advance to next phase
         self.phase = self._compute_next_phase()
         self.state.game_state["phase"] = self.phase
