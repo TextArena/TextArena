@@ -819,7 +819,7 @@ SCORING:
         self.state.done = True
     
     def _finalize_accepted_deal(self):
-        """Finalize an accepted deal and determine scores."""
+        """Finalize an accepted deal, determine scores, and assign rewards based on thresholds."""
         deal_str = ", ".join([f"{k}:{v}" for k, v in self.current_deal.items()])
         
         self.state.add_observation(
@@ -829,76 +829,91 @@ SCORING:
             observation_type=ta.ObservationType.GAME_ADMIN
         )
         
-        # Calculate final scores
+        # Step 1: Calculate final scores
         final_scores = {}
         unanimity_achieved = self._check_unanimity()
         bonus_player_id = self._get_player_by_role(self.unanimity_bonus_role)
         
-        for player_id in range(self.state.num_players):
-            score = self._calculate_player_score(player_id, self.current_deal)
+        for pid in range(self.state.num_players):
+            score = self._calculate_player_score(pid, self.current_deal)
             
-            # Apply unanimity bonus for configured role (default: P1)
-            if unanimity_achieved and player_id == bonus_player_id:
+            # Apply unanimity bonus if applicable
+            if unanimity_achieved and pid == bonus_player_id:
                 score += 10
-                role_name = self.player_configs[player_id]["agent_name"]
-                bonus_message = f"{role_name} unanimity bonus: +10 points (all players accepted)"
+                role_name = self.player_configs[pid]["agent_name"]
                 self.state.add_observation(
                     from_id=ta.GAME_ID,
-                    to_id=player_id,
-                    message=bonus_message,
+                    to_id=pid,
+                    message=f"{role_name} unanimity bonus: +10 points",
                     observation_type=ta.ObservationType.GAME_ADMIN
                 )
             
-            final_scores[player_id] = score
+            final_scores[pid] = score
             
-            config = self.player_configs[player_id]
-            threshold = self.player_scores[player_id].get("threshold", 0)
+            # Save raw score in game_info
+            self.state.game_info[pid]["score"] = score
             
-            score_message = f"{config['agent_name']} final score: {score} points (threshold: {threshold})"
+            # Announce score vs threshold
+            threshold = self.player_scores[pid].get("threshold", 0)
+            config = self.player_configs[pid]
             self.state.add_observation(
                 from_id=ta.GAME_ID,
-                to_id=player_id,
-                message=score_message,
+                to_id=pid,
+                message=f"{config['agent_name']} final score: {score} points (threshold: {threshold})",
                 observation_type=ta.ObservationType.GAME_ADMIN
             )
         
-        # Determine winners (players who met their threshold)
-        winners = []
-        for player_id, score in final_scores.items():
-            threshold = self.player_scores[player_id].get("threshold", 0)
-            if score >= threshold:
-                winners.append(player_id)
+        # Step 2: Threshold-based rewards
+        rewards = {}
+        winners = [pid for pid, score in final_scores.items()
+                if score >= self.player_scores[pid].get("threshold", 0)]
         
         if winners:
-            # Find the highest scorer among those who met threshold
+            # Players who meet threshold → +1, others → -1
+            for pid in range(self.state.num_players):
+                rewards[pid] = 1.0 if pid in winners else -1.0
+        else:
+            # No players met threshold → everyone gets 0 (draw)
+            rewards = {pid: 0.0 for pid in final_scores}
+        
+        self.state.rewards = rewards
+        
+        # Step 3: Winner/draw annotation
+        if winners:
             best_score = max(final_scores[pid] for pid in winners)
             best_players = [pid for pid in winners if final_scores[pid] == best_score]
             
             if len(best_players) == 1:
-                # Set winner info
+                self.state.step_info["winner_reason"] = (
+                    f"{self.player_configs[best_players[0]]['agent_name']} wins "
+                    f"with highest score {best_score} (meeting threshold)"
+                )
                 for pid in range(self.state.num_players):
                     self.state.game_info[pid]["winner"] = pid in best_players
-                self.state.step_info["winner_reason"] = f"Highest score ({best_score}) among players meeting threshold"
             else:
-                # Set draw
+                self.state.step_info["draw_reason"] = f"Tie with score {best_score} among {len(best_players)} players"
                 for pid in range(self.state.num_players):
-                    self.state.game_info[pid]["winner"] = False
-                self.state.step_info["draw_reason"] = f"Tie with score {best_score} among players meeting threshold"
+                    self.state.game_info[pid]["winner"] = pid in best_players
         else:
-            # Set draw - no one met threshold
+            self.state.step_info["draw_reason"] = "No players met their minimum acceptable score"
             for pid in range(self.state.num_players):
                 self.state.game_info[pid]["winner"] = False
-            self.state.step_info["draw_reason"] = "No players met their minimum acceptable score"
         
-        # Set rewards based on scores
-        rewards = {}
-        max_possible_score = max(final_scores.values()) if final_scores else 1
-        for player_id, score in final_scores.items():
-            # Normalize score to 0-100 range
-            normalized_score = int((score / max_possible_score) * 100) if max_possible_score > 0 else 0
-            rewards[player_id] = max(0, normalized_score)  # Ensure non-negative
+        # Step 4: Log scores + rewards together
+        lines = ["=== Final Scores and Rewards (Threshold-Based) ==="]
+        for pid in range(self.state.num_players):
+            config = self.player_configs[pid]
+            score = final_scores[pid]
+            reward = rewards[pid]
+            threshold = self.player_scores[pid].get("threshold", 0)
+            lines.append(f"{config['agent_name']}: {score} points (threshold {threshold}) → reward {reward:+.1f}")
         
-        self.state.rewards = rewards
+        self.state.add_observation(
+            from_id=ta.GAME_ID,
+            to_id=-1,
+            message="\n".join(lines),
+            observation_type=ta.ObservationType.GAME_ADMIN
+        )
     
     def _handle_no_deal(self):
         """Handle case where no deal was reached - give players their minimum acceptable scores."""
@@ -959,3 +974,56 @@ SCORING:
             observation.append((ta.GAME_ID, combined_summary, ta.ObservationType.GAME_BOARD))
         
         return player_id, observation
+
+    def get_board_str(self) -> str:
+        """
+        Return a formatted string representation of the negotiation state.
+        - Ongoing: current deal with scores and voting status
+        - Done: final results (deal accepted with scores OR no deal with thresholds)
+        """
+        # If the game is over
+        if getattr(self.state, "done", False):
+            lines = ["=== FINAL OUTCOME ===", ""]
+            
+            if self.current_deal:
+                deal_str = ", ".join([f"{k}:{v}" for k, v in sorted(self.current_deal.items())])
+                lines.append(f"Final Deal Accepted: {deal_str}")
+            else:
+                lines.append("No deal was reached.")
+            
+            lines.append("")
+            lines.append("=== PLAYER RESULTS ===")
+            
+            # Show each player's score and threshold
+            for pid, config in self.player_configs.items():
+                agent_name = config["agent_name"]
+                
+                # Use raw score stored in game_info, not normalized reward
+                score = self.state.game_info[pid].get("score", 0)
+                threshold = self.player_scores[pid].get("threshold", 0)
+                reward = self.state.rewards.get(pid, 0)
+                
+                status = "✅ Met threshold" if score >= threshold else "❌ Below threshold"
+                lines.append(
+                    f"{agent_name}: {score} points (threshold {threshold}) {status} → reward {reward:+.1f}"
+                )
+            
+            return "\n".join(lines)
+        
+        # If the game is ongoing
+        current_pid = self.state.current_player_id
+        config = self.player_configs.get(current_pid, {"agent_name": f"Player {current_pid}"})
+        agent_name = config["agent_name"]
+        
+        if self.current_deal:
+            return render_deal_with_scores_and_votes(
+                deal_state=self.current_deal,
+                issues=self.issues,
+                player_scores=self.player_scores[current_pid],
+                player_name=agent_name,
+                player_votes=self.player_votes,
+                player_configs=self.player_configs
+            )
+        else:
+            # No deal yet: show available issues
+            return render_game_issues(self.issues)
