@@ -114,7 +114,7 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
             prompt += f"\nCurrent board state:\n{create_board_str(self.board)}\n"
 
         if self.show_valid:
-            prompt += f"\nValid moves: {game_state['valid_moves']}"
+            prompt += f"\nValid moves: {self._get_valid_moves(player_id)}"
 
         return prompt
 
