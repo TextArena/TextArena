@@ -137,8 +137,8 @@ CRITICAL GAME RULES:
         if num_players != 3:
             raise ValueError("UgliOrange requires exactly 3 players (Roland, Jones, and Judge)")
             
-        self.state = ta.FFAMultiPlayerState(num_players=num_players, max_turns=self.max_rounds, seed=seed)
-        
+        self.state = ta.FFAMultiPlayerState(num_players=num_players, max_turns=self.max_rounds, seed=seed, error_allowance=self.error_allowance)
+
         game_state = {
             "proposals": [],  # List of all proposals with numbers
             "current_proposal_number": 0,
@@ -192,7 +192,7 @@ CRITICAL GAME RULES:
             
             valid_move = self._process_negotiation_action(action)
             if not valid_move:
-                return False, self.state.step_info
+                return self.state.done, self.state.step_info
         
         # Check end conditions
         if self.state.turn >= self.max_rounds - 1 and not self.state.game_state["negotiation_complete"]:
@@ -226,15 +226,13 @@ CRITICAL GAME RULES:
         # Check for accept first
         if self.accept_pattern.search(action):
             if not self.state.game_state["proposals"]:
-                self.state.set_invalid_move("No proposals to accept")
-                return False
-                
+                return self._invalid(current_player, "No proposals to accept")
+
             latest_proposal = self.state.game_state["proposals"][-1]
-            
+
             if latest_proposal["proposer"] == current_player:
-                self.state.set_invalid_move("You cannot accept your own proposal")
-                return False
-            
+                return self._invalid(current_player, "You cannot accept your own proposal")
+
             return self._accept_proposal(current_player, latest_proposal["number"])
             
         # Check for proposal
@@ -246,6 +244,13 @@ CRITICAL GAME RULES:
         
         # Free text discussion is always valid
         return True
+
+    def _invalid(self, player: int, reason: str) -> bool:
+        """Register an invalid move; on exhausting the error allowance the offender forfeits to the opponent. Returns False so the turn is retried until then."""
+        if self.state.set_invalid_move(reason):
+            opponent = 1 - player
+            self.state.set_winners([opponent], f"{self.state.role_mapping[player]} forfeited after repeated invalid moves.")
+        return False
 
     def _make_proposal(self, proposer: int, proposal_text: str):
         """Create a new proposal with auto-incremented number."""
@@ -383,13 +388,9 @@ Remember: Roland needs 3000 or more oranges for rind at 250000 dollars or less, 
         
         if winner == "Roland":
             self.state.set_winners([0], final_decision)
-            self.rewards = {0:1, 1:-1}
         elif winner == "Jones":
             self.state.set_winners([1], final_decision)
-            self.rewards = {0:-1, 1:1}
         elif winner == "Both":
             self.state.set_winners([0, 1], final_decision)
-            self.rewards = {0:1, 1:1}
         else:
             self.state.set_winners([], final_decision)
-            self.rewards = {0:0, 1:0}
