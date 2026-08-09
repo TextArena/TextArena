@@ -84,7 +84,7 @@ Prepare for your meeting with Sally Soprano's agent.
         if num_players != 3:
             raise ValueError("SallySoprano requires exactly 3 players (Sally's Agent, Business Manager, and LLM Judge)")
             
-        self.state = ta.FFAMultiPlayerState(num_players=num_players, max_turns=self.max_rounds, seed=seed)
+        self.state = ta.FFAMultiPlayerState(num_players=num_players, max_turns=self.max_rounds, seed=seed, error_allowance=self.error_allowance)
         
         game_state = {
             "current_proposal": None,
@@ -146,10 +146,10 @@ Prepare for your meeting with Sally Soprano's agent.
                 observation_type=ta.ObservationType.PLAYER_ACTION
             )
             valid_move = self._process_negotiation_action(action)
-            
-            # Only advance turn if move was valid
+
+            # Only advance turn if move was valid; a repeated-invalid forfeit may have ended the game.
             if not valid_move:
-                return False, self.state.step_info  # Invalid move, don't advance turn
+                return self.state.done, self.state.step_info
         
         # Check if we've reached max turns before stepping
         if self.state.turn >= self.max_rounds - 1 and not self.state.game_state["negotiation_complete"]:
@@ -213,10 +213,8 @@ Prepare for your meeting with Sally Soprano's agent.
                 amount = int(propose_match.group(1))
                 self._make_proposal(current_player, amount, action)
                 return True  # Valid move
-            else:
-                self.state.set_invalid_move("Invalid proposal format. Use [Propose] followed by a number (e.g., [Propose] 25000)")
-                return False  # Invalid move
-            
+            return self._invalid(current_player, "Invalid proposal format. Use [Propose] followed by a number (e.g., [Propose] 25000)")
+
         # Check for accept
         if self.accept_pattern.search(action):
             if self.state.game_state["current_proposal"]:
@@ -224,16 +222,19 @@ Prepare for your meeting with Sally Soprano's agent.
                 if current_player != proposer:
                     self._accept_proposal(current_player, action)
                     return True  # Valid move
-                else:
-                    self.state.set_invalid_move("You cannot accept your own proposal")
-                    return False  # Invalid move
-            else:
-                self.state.set_invalid_move("No current proposal to accept")
-                return False  # Invalid move
-        
+                return self._invalid(current_player, "You cannot accept your own proposal")
+            return self._invalid(current_player, "No current proposal to accept")
+
         # If no bracketed action, treat as free text discussion
         # Player action already displayed by TextArena framework
         return True  # Free text is always valid
+
+    def _invalid(self, player: int, reason: str) -> bool:
+        """Register an invalid move; on exhausting the error allowance the offender forfeits to the opponent. Returns False so the turn is retried until then."""
+        if self.state.set_invalid_move(reason):
+            opponent = 1 - player
+            self.state.set_winners([opponent], f"{self.state.role_mapping[player]} forfeited after repeated invalid moves.")
+        return False
 
     def _make_proposal(self, proposer: int, amount: int, full_action: str):
         # Extract rationale (text before [Propose])
@@ -321,24 +322,19 @@ Prepare for your meeting with Sally Soprano's agent.
     
     def _process_judge_decision(self, decision: str):
         """Process the judge's final decision."""
-        import re
-        
         # Parse bracket format: [winner] Sally's Agent | Business Manager | Draw
         winner_match = re.search(r'\[winner\]\s*(.+?)(?:\n|\[|$)', decision, re.IGNORECASE)
         if winner_match:
             winner = winner_match.group(1).strip()
-            
+
             if winner == "Sally's Agent":
                 self.state.set_winners([0], decision)
-                self.rewards = {0: 1, 1: -1}
                 return
             elif winner == "Business Manager":
                 self.state.set_winners([1], decision)
-                self.rewards = {0: -1, 1: 1}
                 return
             elif winner == "Draw":
                 self.state.set_draw(decision)
-                self.rewards = {0: 0, 1: 0}
                 return
         
         # If parsing fails, default to draw
