@@ -1,5 +1,5 @@
 import re, random
-from typing import Any, Dict, List, Tuple, Optional, Union, Literal
+from typing import Any, Dict, List, Tuple, Optional, Literal
 
 import textarena as ta
 from textarena.envs.FifteenPuzzle.renderer import create_board_str
