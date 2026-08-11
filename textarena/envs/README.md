@@ -1,13 +1,13 @@
 
 
-Game Count 99
+<!-- Game Count 99
 
 TODO = implemented but not updated
 
 general todos:
 - add readme for three player IPD
 - add readme for babyai-text
-- add readme for two rooms and a boom
+- add readme for two rooms and a boom -->
 
 <!-- | # | Game | Mode | Players | Multilingual | Comments |
 |--:|------|:----:|:-------:|:------------:|----------|
@@ -119,144 +119,161 @@ general todos:
 | 106 | [WinAsMuchAsYouCan](#winasmuchasyoucan) | ?? | ??? | | | -->
 
 
-# Single Player
+# TextArena — Game Catalog
 
-| # | Game | Players | Multilingual | Comments |
-|--:|------|:-------:|:------------:|----------|
-| 1 | [2048](#2048) | 1 | 🌐 | |
-| 2 | [BabyAiText](#babyaitext) | 1 | | |
-| 3 | [Bandit](#bandit) | 1 | 🌐 | |
-| 4 | [Blackjack](#blackjack) | 1 | 🌐 | |
-| 5 | [Countdown](#countdown) | 1 | 🌐 | |
-| 6 | [Crosswords](#crosswords) | 1 | | |
-| 7 | [Cryptarithm](#cryptarithm) | 1 | 🌐 | |
-| 8 | [FifteenPuzzle](#fifteenpuzzle) | 1 | 🌐 | |
-| 9 | [FrozenLake](#frozenlake) | 1 | 🌐 | |
-| 10 | [GuessTheNumber](#guessthenumber) | 1 | 🌐 | |
-| 11 | [GuessWho](#guesswho) | 1 | | |
-| 12 | [Hangman](#hangman) | 1 | 🌐 | |
-| 13 | [LightsOut](#lightsout) | 1 | 🌐 | |
-| 14 | [LogicPuzzle](#logicpuzzle) | 1 | | |
-| 15 | [Mastermind](#mastermind) | 1 | 🌐 | |
-| 16 | [Minesweeper](#minesweeper) | 1 | 🌐 | |
-| 17 | [PegJump](#pegjump) | 1 | 🌐 | |
-| 18 | [RushHour](#rushhour) | 1 | 🌐 | |
-| 19 | [Secretary](#secretary) | 1 | 🌐 | |
-| 20 | [Slitherlink](#slitherlink) | 1 | 🌐 | |
-| 21 | [Sokoban](#sokoban) | 1 | 🌐 | |
-| 22 | [Sudoku](#sudoku) | 1 | 🌐 | |
-| 23 | [ThreeCardMonte](#threecardmonte) | 1 | 🌐 | |
-| 24 | [TowerOfHanoi](#towerofhanoi) | 1 | 🌐 | |
-| 25 | [TwentyQuestions](#twentyquestions) | 1 | | |
-| 26 | [WordLadder](#wordladder) | 1 | | |
-| 27 | [Wordle](#wordle) | 1 | | |
-| 28 | [WordSearch](#wordsearch) | 1 | | |
+**106 games total** · 🌐 = multilingual support
 
-Two-Player
-| # | Game | Players | Multilingual | Comments |
-|--:|------|:-------:|:------------:|----------|
-| 1 | [Alquerque](#alquerque) | 2 | 🌐 | |
-| 2 | [Battleship](#battleship) | 2 | 🌐 | |
-| 3 | [Breakthrough](#breakthrough) | 2 | 🌐 | |
-| 4 | [Checkers](#checkers) | 2 | 🌐 | |
-| 5 | [Chess](#chess) | 2 | 🌐 | |
-| 6 | [Chopsticks](#chopsticks) | 2 | 🌐 | |
-| 7 | [ColonelBlotto](#colonelblotto) | 2 | 🌐 | |
-| 8 | [ConnectFour](#connectfour) | 2 | 🌐 | |
-| 9 | [Crusade](#crusade) | 2 | 🌐 | |
-| 10 | [Debate](#debate) | 2 | | |
-| 11 | [DontSayIt](#dontsayit) | 2 | | |
-| 12 | [GameOfPureStrategy](#gameofpurestrategy) | 2 | 🌐 | |
-| 13 | [GermanWhist](#germanwhist) | 2 | 🌐 | |
-| 14 | [HighSociety](#highsociety) | 2 | 🌐 | |
-| 15 | [IndianPoker](#indianpoker) | 2 | 🌐 | |
-| 16 | [IteratedMatchingPennies](#iteratedmatchingpennies) | 2 | 🌐 | |
-| 17 | [IteratedPrisonersDilemma](#iteratedprisonersdilemma) | 2 | 🌐 | |
-| 18 | [IteratedRockPaperScissors](#iteratedrockpaperscissors) | 2 | 🌐 | |
-| 19 | [IteratedTwoThirdsAverage](#iteratedtwothirdsaverage) | 2 | 🌐 | |
-| 20 | [IteratedStagHunt](#iteratedstaghunt) | 2 | 🌐 | |
-| 21 | [KuhnPoker](#kuhnpoker) | 2 | 🌐 | |
-| 22 | [LeducHoldem](#leducholdem) | 2 | 🌐 | |
-| 23 | [LeTruc](#letruc) | 2 | 🌐 | |
-| 24 | [LinesOfAction](#linesofaction) | 2 | 🌐 | |
-| 25 | [LetterAuction](#letterauction) | 2 | | |
-| 26 | [MemoryGame](#memorygame) | 2 | 🌐 | |
-| 27 | [Nim](#nim) | 2 | 🌐 | |
-| 28 | [Othello](#othello) | 2 | 🌐 | |
-| 29 | [PigDice](#pigdice) | 2 | 🌐 | |
-| 30 | [QuantumTicTacToe](#quantumtictactoe) | 2 | 🌐 | |
-| 31 | [ReverseTicTacToe](#reversetictactoe) | 2 | 🌐 | |
-| 32 | [ScenarioPlanning](#scenarioplanning) | 2 | | |
-| 33 | [SimpleBlindAuction](#simpleblindauction) | 2 | | |
-| 34 | [SimpleNegotiation](#simplenegotiation) | 2 | 🌐 | |
-| 35 | [SimpleTak](#simpletak) | 2 | 🌐 | |
-| 36 | [SpellingBee](#spellingbee) | 2 | | |
-| 37 | [SpiteAndMalice](#spiteandmalice) | 2 | 🌐 | |
-| 38 | [Stratego](#stratego) | 2 | 🌐 | |
-| 39 | [Tak](#tak) | 2 | 🌐 | |
-| 40 | [TicTacToe](#tictactoe) | 2 | 🌐 | |
-| 41 | [TruthAndDeception](#truthanddeception) | 2 | | |
-| 42 | [TwoDollar](#twodollar) | 2 | | |
-| 43 | [UltimateTicTacToe](#ultimatetictactoe) | 2 | 🌐 | |
-| 44 | [WildTicTacToe](#wildtictactoe) | 2 | 🌐 | |
-| 45 | [WordChains](#wordchains) | 2 | | |
+| Category | Games | Multilingual |
+|----------|:-----:|:------------:|
+| [Single-Player](#single-player) | 28 | 22 |
+| [Two-Player](#two-player) | 45 | 34 |
+| [Multi-Player](#multi-player) | 19 | 9 |
+| [To Verify](#to-verify) | 14 | 6 |
 
-# Multi-PLayer
-| # | Game | Players | Multilingual | Comments |
-|--:|------|:-------:|:------------:|----------|
-| 1 | [Coup](#coup) | 2–6 | 🌐 | |
-| 2 | [LiarsDice](#liarsdice) | 2–15 | 🌐 | |
-| 3 | [Poker](#poker) | 2–15 | | |
-| 4 | [Santorini](#santorini) | 2–3 | 🌐 | |
-| 5 | [Snake](#snake) | 2–15 | 🌐 | |
-| 6 | [Surround](#surround) | 2–15 | 🌐 | |
-| 7 | [Briscola](#briscola) | 2–4 | 🌐 | |
-| 8 | [Golf](#golf) | 2–4 | 🌐 | |
+---
+
+## Single-Player
+
+28 games · 1 player each
+
+| # | Game | 🌐 | Comments |
+|--:|------|:--:|----------|
+| 1 | [2048](#2048) | 🌐 | |
+| 2 | [BabyAiText](#babyaitext) | | |
+| 3 | [Bandit](#bandit) | 🌐 | |
+| 4 | [Blackjack](#blackjack) | 🌐 | |
+| 5 | [Countdown](#countdown) | 🌐 | |
+| 6 | [Crosswords](#crosswords) | | |
+| 7 | [Cryptarithm](#cryptarithm) | 🌐 | |
+| 8 | [FifteenPuzzle](#fifteenpuzzle) | 🌐 | |
+| 9 | [FrozenLake](#frozenlake) | 🌐 | |
+| 10 | [GuessTheNumber](#guessthenumber) | 🌐 | |
+| 11 | [GuessWho](#guesswho) | | |
+| 12 | [Hangman](#hangman) | 🌐 | |
+| 13 | [LightsOut](#lightsout) | 🌐 | |
+| 14 | [LogicPuzzle](#logicpuzzle) | | |
+| 15 | [Mastermind](#mastermind) | 🌐 | |
+| 16 | [Minesweeper](#minesweeper) | 🌐 | |
+| 17 | [PegJump](#pegjump) | 🌐 | |
+| 18 | [RushHour](#rushhour) | 🌐 | |
+| 19 | [Secretary](#secretary) | 🌐 | |
+| 20 | [Slitherlink](#slitherlink) | 🌐 | |
+| 21 | [Sokoban](#sokoban) | 🌐 | |
+| 22 | [Sudoku](#sudoku) | 🌐 | |
+| 23 | [ThreeCardMonte](#threecardmonte) | 🌐 | |
+| 24 | [TowerOfHanoi](#towerofhanoi) | 🌐 | |
+| 25 | [TwentyQuestions](#twentyquestions) | | |
+| 26 | [WordLadder](#wordladder) | | |
+| 27 | [Wordle](#wordle) | | |
+| 28 | [WordSearch](#wordsearch) | | |
+
+## Two-Player
+
+45 games · 2 players each
+
+| # | Game | 🌐 | Comments |
+|--:|------|:--:|----------|
+| 1 | [Alquerque](#alquerque) | 🌐 | |
+| 2 | [Battleship](#battleship) | 🌐 | |
+| 3 | [Breakthrough](#breakthrough) | 🌐 | |
+| 4 | [Checkers](#checkers) | 🌐 | |
+| 5 | [Chess](#chess) | 🌐 | |
+| 6 | [Chopsticks](#chopsticks) | 🌐 | |
+| 7 | [ColonelBlotto](#colonelblotto) | 🌐 | |
+| 8 | [ConnectFour](#connectfour) | 🌐 | |
+| 9 | [Crusade](#crusade) | 🌐 | |
+| 10 | [Debate](#debate) | | |
+| 11 | [DontSayIt](#dontsayit) | | |
+| 12 | [GameOfPureStrategy](#gameofpurestrategy) | 🌐 | |
+| 13 | [GermanWhist](#germanwhist) | 🌐 | |
+| 14 | [HighSociety](#highsociety) | 🌐 | |
+| 15 | [IndianPoker](#indianpoker) | 🌐 | |
+| 16 | [IteratedMatchingPennies](#iteratedmatchingpennies) | 🌐 | |
+| 17 | [IteratedPrisonersDilemma](#iteratedprisonersdilemma) | 🌐 | |
+| 18 | [IteratedRockPaperScissors](#iteratedrockpaperscissors) | 🌐 | |
+| 19 | [IteratedStagHunt](#iteratedstaghunt) | 🌐 | |
+| 20 | [IteratedTwoThirdsAverage](#iteratedtwothirdsaverage) | 🌐 | |
+| 21 | [KuhnPoker](#kuhnpoker) | 🌐 | |
+| 22 | [LeducHoldem](#leducholdem) | 🌐 | |
+| 23 | [LetterAuction](#letterauction) | | |
+| 24 | [LeTruc](#letruc) | 🌐 | |
+| 25 | [LinesOfAction](#linesofaction) | 🌐 | |
+| 26 | [MemoryGame](#memorygame) | 🌐 | |
+| 27 | [Nim](#nim) | 🌐 | |
+| 28 | [Othello](#othello) | 🌐 | |
+| 29 | [PigDice](#pigdice) | 🌐 | |
+| 30 | [QuantumTicTacToe](#quantumtictactoe) | 🌐 | |
+| 31 | [ReverseTicTacToe](#reversetictactoe) | 🌐 | |
+| 32 | [ScenarioPlanning](#scenarioplanning) | | |
+| 33 | [SimpleBlindAuction](#simpleblindauction) | | |
+| 34 | [SimpleNegotiation](#simplenegotiation) | 🌐 | |
+| 35 | [SimpleTak](#simpletak) | 🌐 | |
+| 36 | [SpellingBee](#spellingbee) | | |
+| 37 | [SpiteAndMalice](#spiteandmalice) | 🌐 | |
+| 38 | [Stratego](#stratego) | 🌐 | |
+| 39 | [Tak](#tak) | 🌐 | |
+| 40 | [TicTacToe](#tictactoe) | 🌐 | |
+| 41 | [TruthAndDeception](#truthanddeception) | | |
+| 42 | [TwoDollar](#twodollar) | | |
+| 43 | [UltimateTicTacToe](#ultimatetictactoe) | 🌐 | |
+| 44 | [WildTicTacToe](#wildtictactoe) | 🌐 | |
+| 45 | [WordChains](#wordchains) | | |
+
+## Multi-Player
+
+19 games · sorted alphabetically
+
+| # | Game | Players | 🌐 | Comments |
+|--:|------|:-------:|:--:|----------|
+| 1 | [BlindAuction](#blindauction) | 3–15 | | |
+| 2 | [Briscola](#briscola) | 2–4 | 🌐 | |
+| 3 | [CharacterConclave](#characterconclave) | 3–15 | | |
+| 4 | [Codenames](#codenames) | 4 | | |
+| 5 | [Coup](#coup) | 2–6 | 🌐 | |
+| 6 | [Diplomacy](#diplomacy) | 3–7 | | |
+| 7 | [Golf](#golf) | 2–4 | 🌐 | |
+| 8 | [LiarsDice](#liarsdice) | 2–15 | 🌐 | |
 | 9 | [Negotiation](#negotiation) | 2–15 | | |
-| 10 | [CharacterConclave](#characterconclave) | 3–15 | | |
-| 11 | [Codenames](#codenames) | 4 | | |
-| 12 | [Diplomacy](#diplomacy) | 3–7 | | |
-| 13 | [BlindAuction](#blindauction) | 3–15 | | |
-| 14 | [SecretMafia](#secretmafia) | 6–15 | | |
+| 10 | [Poker](#poker) | 2–15 | | |
+| 11 | [Santorini](#santorini) | 2–3 | 🌐 | |
+| 12 | [SecretMafia](#secretmafia) | 6–15 | | |
+| 13 | [Snake](#snake) | 2–15 | 🌐 | |
+| 14 | [Surround](#surround) | 2–15 | 🌐 | |
 | 15 | [Taboo](#taboo) | 4–8 | | |
 | 16 | [ThreePlayerGOPS](#threeplayergops) | 3 | 🌐 | |
-| 17 | [ThreePlayerTicTacToe](#threeplayertictactoe) | 3 | 🌐 | |
-| 18 | [ThreePlayerIPD](#threeplayeripd) | 3 | 🌐 | |
+| 17 | [ThreePlayerIPD](#threeplayeripd) | 3 | 🌐 | |
+| 18 | [ThreePlayerTicTacToe](#threeplayertictactoe) | 3 | 🌐 | |
 | 19 | [TwoRoomsAndABoom](#tworoomsandaboom) | 6–20 | | |
 
+## To Verify
 
-# Other Games to double check
+14 games with unknown mode and/or player count
 
-| # | Game | Mode | Players | Multilingual | Comments |
-|--:|------|:----:|:-------:|:------------:|----------|
-| 1 | [Hanabi](#hanabi) | ? | | 🌐 | |
+| # | Game | Mode | Players | 🌐 | Comments |
+|--:|------|:----:|:-------:|:--:|----------|
+| 1 | [Hanabi](#hanabi) | ? | ? | 🌐 | |
 | 2 | [ImTheBoss](#imtheboss) | ? | ? | | |
 | 3 | [IteratedUltimatumGame](#iteratedultimatumgame) | ? | ? | 🌐 | |
-| 4 | [Klondike](#klondike) | ? | | 🌐 | |
+| 4 | [Klondike](#klondike) | ? | ? | 🌐 | |
 | 5 | [MarketEntryGame](#marketentrygame) | ? | ? | | |
 | 6 | [NewRecruit](#newrecruit) | ? | ? | | |
 | 7 | [PublicGoodsGame](#publicgoodsgame) | ? | ? | | |
 | 8 | [ScorableGames](#scorablegames) | ? | ? | | |
-| 9 | [Set](#set) | ? | | 🌐 | |
+| 9 | [Set](#set) | ? | ? | 🌐 | |
 | 10 | [SettlersOfCatan](#settlersofcatan) | ? | ? | | |
-| 11 | [UltimateTexasHoldem](#ultimatetexasholdem) | ? | | 🌐 | |
-| 12 | [UsedCarNegotiation](#usedcarnegotiation) | ? | ? | | |
-| 13 | [VendorNegotiation](#vendornegotiation) | ? | ? | | |
+| 11 | [UltimateTexasHoldem](#ultimatetexasholdem) | ? | ? | 🌐 |  |
+| 12 | [UsedCarNegotiation](#usedcarnegotiation) | ? | ? | |  |
+| 13 | [VendorNegotiation](#vendornegotiation) | ? | ? | |  |
 | 14 | [WinAsMuchAsYouCan](#winasmuchasyoucan) | ? | ? | | |
-
-# Other TODOS:
-- sort the below section according to the table (i.e. by num players and then alphabetically)
-- update Online availability in the table above
-
 
 
 
 <br>
 
-# Single-Player
+# 1-Player
 
 <a id="2048"></a>
-<details><summary><strong>2048 [Single Player]</strong></summary>
+<details><summary><strong>2048</strong></summary>
 <hr>
 
 ## `2048`
@@ -295,7 +312,7 @@ Two-Player
 
 
 <a id="bandit"></a>
-<details><summary><strong>Bandit [Single Player]</strong></summary>
+<details><summary><strong>Bandit</strong></summary>
 <hr>
 
 ## `Bandit`
@@ -325,7 +342,7 @@ The task in the Bandit environment is Best-Arm Identification. The agent pushes 
 </details>
 
 <a id="blackjack"></a>
-<details><summary><strong>Blackjack [1 Player]</strong></summary>
+<details><summary><strong>Blackjack</strong></summary>
 <hr>
 
 ## `Blackjack`  
@@ -363,8 +380,9 @@ If you have questions or face issues with this specific environment, please reac
 </details>
 
 
-
-<hr></details><details><summary><strong>Countdown [Single Player]</strong></summary><a id="countdown"></a><hr>
+<a id="countdown"></a>
+<details><summary><strong>Countdown</strong></summary>
+<hr>
 
 ## `Countdown`
 
@@ -391,12 +409,13 @@ Combine a given set of numbers using **addition, subtraction, multiplication, or
 | `Countdown-v0-raw`     | *None*                                                                     |
 | `Countdown-v0-train`   | `GameMessagesAndCurrentBoardObservationWrapper`, `ActionFormattingWrapper` |
 
+</details>
 
+<a id="crosswords"></a>
+<details><summary><strong>Crosswords</strong></summary>
+<hr>
 
-
-<hr></details><details><summary><strong>Crosswords [1 Player]</strong></summary><hr>
-
-## `Crosswords` <a id="crosswords"></a>
+## `Crosswords`
 **Crosswords** is a single-player puzzle game where the player fills in a crossword grid using clues. The objective is to correctly place all the letters to complete each word, based on the positions and hints given. Words are aligned either across or down, and players must deduce the correct word letter by letter.
 
 **Action Space:** Actions are strings in the format `[row col letter]`, where `row` and `col` are 0-indexed positions in the crossword grid, and `letter` is the character to insert at that location.
@@ -426,8 +445,11 @@ The environment provides rewards based on the following conditions:
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to **chengxy@i2r.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>Chess [2 Player]</strong></summary><a id="chess"></a><hr>
+<a id="chess"></a>
+<details><summary><strong>Chess</strong></summary>
+<hr>
 
 ## `Chess` 
 
@@ -457,7 +479,12 @@ The environment provides rewards based on the following conditions:
 
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to Guertlerlo@cfar.a-star.edu.sg
 
-<hr></details><details><summary><strong>Cryptarithm [Single Player]</strong></summary><a id="cryptarithm"></a><hr>
+</details>
+
+<a id="cryptarithm"></a>
+<details><summary><strong>Cryptarithm</strong></summary>
+<hr>
+
 
 ## `Cryptarithm`
 
@@ -487,7 +514,12 @@ Solve classic alphametic puzzles such as **SEND + MORE = MONEY** by assigning **
 
 
 
-<hr></details><details><summary><strong>Fifteen Puzzle [1 Player]</strong></summary><a id="fifteenpuzzle"></a><hr>
+</details>
+
+<a id="fifteenpuzzle"></a>
+<details><summary><strong>Fifteen Puzzle</strong></summary>
+<hr>
+
 
 ## `Fifteen Puzzle` 
 **Fifteen Puzzle** is a single-player sliding tile puzzle game played on a 4×4 board. The objective is to arrange the numbered tiles from 1 to 15 in ascending order, ending with the empty space (`__`) in the bottom-right corner. The player slides tiles adjacent to the empty space in the direction of the gap to solve the puzzle. The game ends when the correct configuration is achieved or the player runs out of moves. [Wikipedia](https://en.wikipedia.org/wiki/15_puzzle)
@@ -520,12 +552,13 @@ The environment provides rewards based on the following conditions:
 **Contact:**  
 If you have questions or face issues with this specific environment, please reach out directly to **chengxy@i2r.a-star.edu.sg**
 
+</details>
 
+<a id="frozenlake"></a>
+<details><summary><strong>Frozen Lake</strong></summary>
+<hr>
 
-
-<hr></details><details><summary><strong>Frozen Lake [1 Player]</strong></summary><hr>
-
-## `Frozen Lake` <a id="frozenlake"></a>
+## `Frozen Lake`
 **Frozen Lake** is a deterministic, single-player grid-navigation puzzle. The player starts at the top-left corner of an $N\\times N$ grid and must reach the Goal tile (`G`) at the bottom-right, while avoiding Holes (`H`). There is no slipping—each action moves exactly one cell if valid. [Wikipedia](https://en.wikipedia.org/wiki/Frozen_Lake_(reinforcement_learning))
 
 **Action Space:** Actions are case-insensitive strings containing bracketed tokens. Only the first valid token is used.  
@@ -561,9 +594,12 @@ The environment provides rewards based on the following conditions:
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to **chengxy@i2r.a-star.edu.sg**
 
 
+</details>
 
+<a id="guessthenumber"></a>
+<details><summary><strong>Guess The Number</strong></summary>
+<hr>
 
-<hr></details><details><summary><strong>Guess The Number [1 Player]</strong></summary><a id="guessthenumber"></a><hr>
 
 ## `Guess The Number` 
 **Guess The Number** is a single-player game where the player attempts to guess a randomly chosen number within a specified range. After each guess, the player receives feedback in the form of hints ("higher" or "lower"). The player wins by guessing the number within the allowed number of turns. [Wikipedia](https://en.wikipedia.org/wiki/Bulls_and_Cows)
@@ -593,9 +629,12 @@ The environment provides rewards based on the following conditions:
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to **chengxy@i2r.a-star.edu.sg**
 
 
+</details>
 
+<a id="guesswho"></a>
+<details><summary><strong>Guess Who</strong></summary>
+<hr>
 
-<hr></details><details><summary><strong>Guess Who [1 Player]</strong></summary><a id="guesswho"></a><hr>
 
 ## `Guess Who` 
 **Guess Who** is a single-player question-driven deduction game. The player attempts to determine a secret character selected by the gamemaster by asking yes-or-no questions. The gamemaster replies with "Yes", "No", or "I don't know" based on the character's attributes. The player may guess the character at any point using the format `[Name]`. [Wikipedia](https://en.wikipedia.org/wiki/Guess_Who%3F)
@@ -624,9 +663,11 @@ The environment provides rewards based on the following conditions:
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to chengxy@i2r.a-star.edu.sg
 
 
+</details>
 
-
-<hr></details><details><summary><strong>Hangman [1 Player]</strong></summary><a id="hangman"></a><hr>
+<a id="hangman"></a>
+<details><summary><strong>Hangman</strong></summary>
+<hr>
 
 ## `Hangman` 
 **Hangman** is a single-player word-guessing game where the player tries to identify a hidden word by guessing one letter at a time or the entire word. The goal is to guess the word before running out of allowed incorrect guesses. In hardcore mode, words are selected from a larger vocabulary for added difficulty. [Wikipedia](https://en.wikipedia.org/wiki/Hangman_(game))
@@ -658,13 +699,11 @@ The environment provides rewards based on the following conditions:
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to **chengxy@i2r.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>LightsOut [1 Player]</strong></summary><a id="lightsout"></a><hr>
-
-## `LightsOut`
-# TODO
-
-<details><summary><strong>Lights Out [1 Player]</strong></summary><a id="lightsout"></a>
+<a id="lightsout"></a>
+<details><summary><strong>LightsOut</strong></summary>
+<hr>
 
 ## `LightsOut`  
 **Lights Out** is a classic logic puzzle game played on a grid of lights. The objective is to turn all lights off by toggling them strategically. Pressing a light toggles its state and that of its orthogonal neighbors (up/down/left/right). The player has a limited number of moves to reach the all-off state. This environment offers full rendering, grid manipulation, and progress tracking. [Wikipedia](https://en.wikipedia.org/wiki/Lights_Out_(game))
@@ -697,10 +736,9 @@ Examples:
 
 </details>
 
-
-
-
-<hr></details><details><summary><strong>Logic Puzzle [1 Player]</strong></summary><a id="logicpuzzle"></a><hr>
+<a id="logicpuzzle"></a>
+<details><summary><strong>LogicPuzzle</strong></summary>
+<hr>
 
 ## `Logic Puzzle` 
 **Logic Puzzle** is a single-player deduction game where the player assigns correct associations across multiple categories (e.g., people, locations, times) using clues. Players interact with labeled grids and mark relationships with either 'X' (exclusion) or 'O' (inclusion). The objective is to deduce all correct associations before exhausting the allowed number of turns.
@@ -732,8 +770,11 @@ The environment provides rewards based on the following conditions:
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to **chengxy@i2r.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>Mastermind [1 Player]</strong><a id="mastermind"></a></summary><hr>
+<a id="mastermind"></a>
+<details><summary><strong>Mastermind</strong></summary>
+<hr>
 
 ## `Mastermind` 
 **Mastermind** is a code-breaking puzzle game where the player tries to guess a hidden sequence of digits. After each guess, feedback is given in the form of black and white pegs — black indicates correct digit in correct position, white indicates correct digit in wrong position. The goal is to deduce the exact code within the given number of attempts. [Wikipedia](https://en.wikipedia.org/wiki/Mastermind_(board_game))
@@ -766,10 +807,11 @@ The environment provides rewards based on the following conditions:
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to **chengxy@i2r.a-star.edu.sg**
 
 
+</details>
 
-
-
-<hr></details><details><summary><strong>Minesweeper [1 Player]</strong><a id="minesweeper"></a></summary><hr>
+<a id="minesweeeper"></a>
+<details><summary><strong>Minesweeper</strong></summary>
+<hr>
 
 ## `Minesweeper` 
 **Minesweeper** is a single-player logic puzzle where the goal is to reveal all non-mine cells on a grid without triggering a mine. Clues are provided in the form of numbers representing the count of adjacent mines. Players may flag suspected mines and must use logic to navigate the board safely.
@@ -800,10 +842,11 @@ The environment provides rewards based on the following conditions:
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to **chengxy@i2r.a-star.edu.sg**
 
 
+</details>
 
-
-
-<hr></details><details><summary><strong>PegJump [Single Player]</strong></summary><a id="pegjump"></a><hr>
+<a id="pegjump"></a>
+<details><summary><strong>PegJump</strong></summary>
+<hr>
 
 ## `PegJump`
 
@@ -832,9 +875,11 @@ Classic triangular peg solitaire (15 holes). Each move **jumps** one peg over an
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to **[guertlerlo@cfar.a-star.edu.sg](mailto:guertlerlo@cfar.a-star.edu.sg)**
 
 
+</details>
 
-
-<hr></details><details><summary><strong>RushHour [Single Player]</strong></summary><a id="rushhour"></a><hr>
+<a id="rushhour"></a>
+<details><summary><strong>RushHour</strong></summary>
+<hr>
 
 ## `RushHour`
 
@@ -861,7 +906,11 @@ A 6 × 6 sliding-block puzzle. Each vehicle occupies 2–3 squares and can move 
 
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to **guertlerlo@cfar.a-star.edu.sg**
 
-<hr></details><details><summary><strong>Slitherlink [Single Player]</strong></summary><a id="slitherlink"></a>
+</details>
+
+<a id="slitherlink"></a>
+<details><summary><strong>Slitherlink</strong></summary>
+<hr>
 
 ## `Slitherlink`
 
@@ -890,8 +939,11 @@ Toggle edges with `[h r c]` (horizontal) or `[v r c]` (vertical), where `(r,c)` 
 | `Slitherlink-v0-train` | `GameMessagesAndCurrentBoardObservationWrapper`, `ActionFormattingWrapper` |
 
 
+</details>
 
-<hr></details><details><summary><strong>Secretary [Single Player]</strong></summary><a id="secretary"></a><hr>
+<a id="secretary"></a>
+<details><summary><strong>Secretary</strong></summary>
+<hr>
 
 ## `Secretary`
 
@@ -923,8 +975,11 @@ Toggle edges with `[h r c]` (horizontal) or `[v r c]` (vertical), where `(r,c)` 
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to **[guertlerlo@cfar.a-star.edu.sg](mailto:guertlerlo@cfar.a-star.edu.sg)**
 
 
+</details>
 
-<hr></details><details><summary><strong>Sokoban [1 Player]</strong></summary><a id="sokoban"></a><hr>
+<a id="sokoban"></a>
+<details><summary><strong>Sokoban</strong></summary>
+<hr>
 
 ## `Sokoban`  
 **Sokoban** is a classic single-player puzzle game where the player (a warehouse keeper) pushes boxes onto designated goal tiles within a grid-based warehouse. The player must plan moves carefully as boxes can only be pushed (not pulled), and only one box can be pushed at a time. The objective is to place all boxes on goal tiles using the fewest moves possible.
@@ -963,8 +1018,11 @@ Each environment variant differs by board size and layout complexity.
 If you have questions or face issues with this specific environment, please reach out directly to **tim.grams339@outlook.de**
 
 
+</details>
 
-<hr></details><details><summary><strong>Sudoku [1 Player]</strong></summary><a id="sudoku"></a><hr>
+<a id="sudoku"></a>
+<details><summary><strong>Sudoku</strong></summary>
+<hr>
 
 ## `Sudoku`  
 **Sudoku** is a single-player logic-based number placement puzzle played on a 9×9 grid. The objective is to fill all empty cells with digits from 1 to 9 such that each row, column, and 3×3 subgrid contains all digits without repetition. This environment generates puzzles with a guaranteed unique solution and configurable difficulty via the number of starting clues.
@@ -1001,8 +1059,11 @@ Each environment variant is defined by its initial clue count and max turns allo
 If you have questions or face issues with this specific environment, please reach out directly to **chengxy@i2r.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>Tower of Hanoi [1 Player]</strong></summary><a id="towerofhanoi"></a><hr>
+<a id="towerofhanoi"></a>
+<details><summary><strong>Tower of Hanoi</strong></summary>
+<hr>
 
 ## `Tower of Hanoi` 
 **Tower of Hanoi** is a classic single-player puzzle game involving three rods and a number of disks of different sizes. The player must move the stack of disks from the first rod to the third, obeying two rules: only one disk can be moved at a time, and a larger disk may never be placed on top of a smaller one. The challenge increases with the number of disks.
@@ -1037,17 +1098,24 @@ The environment provides rewards based on the following conditions:
 
 
 
-<hr></details><details><summary><strong>Three Card Monte [1 Player]</strong></summary><a id="threecardmonte"></a><hr>
+</details>
+
+<a id="threecardmonte"></a>
+<details><summary><strong>Three Card Monte</strong></summary>
+<hr>
 
 ## `Three Card Monte` 
 # TODO
 
 
 
+</details>
 
-<hr></details><details><summary><strong>Twenty Questions [1 Player]</strong></summary><hr>
+<a id="twentyquestions"></a>
+<details><summary><strong>Twenty Questions</strong></summary>
+<hr>
 
-## `Twenty Questions` <a id="twentyquestions"></a>
+## `Twenty Questions`
 **Twenty Questions** is a single-player, question-driven guessing game where the player attempts to identify a hidden object or word chosen by a gamemaster. The player may ask up to 20 yes-or-no questions before making a final guess. In hardcore mode, the game uses a more difficult vocabulary with longer or uncommon nouns. [Wikipedia](https://en.wikipedia.org/wiki/Twenty_Questions)
 
 **Action Space:** Actions can be either a question or a final guess in brackets `[word]`. For example:
@@ -1079,9 +1147,14 @@ The environment provides rewards based on the following conditions:
 
 
 
-<hr></details><details><summary><strong>Word Ladder [1 Player]</strong></summary><hr>
+</details>
 
-## `Word Ladder` <a id="wordladder"></a>
+<a id="wordladder"></a>
+<details><summary><strong>Word Ladder</strong></summary>
+<hr>
+
+
+## `Word Ladder`
 **Word Ladder** is a single-player puzzle game where the player transforms a start word into a target word by changing one letter at a time. Each intermediate word must be valid and differ by exactly one letter from the previous word. The game challenges the player’s vocabulary and logical reasoning. [Wikipedia](https://en.wikipedia.org/wiki/Word_ladder)
 
 **Action Space:** Actions are strings in the format `[word]`, where `word` is the player’s guess for the next valid word in the ladder. For example:
@@ -1113,7 +1186,11 @@ The environment provides rewards based on the following conditions:
 
 
 
-<hr></details><details><summary><strong>Wordle [1 Player]</strong></summary><a id="wordle"></a><hr>
+</details>
+
+<a id="wordle"></a>
+<details><summary><strong>Wordle</strong></summary>
+<hr>
 
 ## `Wordle` 
 **Wordle** is a single-player word-guessing game where the player attempts to deduce a hidden English word of fixed length (e.g., 5 or 7 letters) within a limited number of guesses. After each attempt, players receive structured feedback for each letter: correct and in-place (green), correct but misplaced (yellow), or incorrect (gray). [Wikipedia](https://en.wikipedia.org/wiki/Wordle)
@@ -1145,9 +1222,11 @@ The environment provides rewards based on the following conditions:
 **Contact:** For questions or improvements, please reach out to **ananyabalehithlu@gmail.com**
 
 
+</details>
 
-
-<hr></details><details><summary><strong>Word Search [1 Player]</strong></summary><a id="wordsearch"></a><hr>
+<a id="wordsearch"></a>
+<details><summary><strong>WordSearch</strong></summary>
+<hr>
 
 ## `WordSearch`  
 **Word Search** is a single-player puzzle game in which the player finds hidden words in a grid of letters. The player is provided a list of words to locate, and each word appears either horizontally (across) or vertically (down) in the grid. The objective is to correctly identify all word locations by specifying the start and end coordinates.
@@ -1193,7 +1272,9 @@ If you have questions or face issues with this specific environment, please reac
 # 2 Player
 
 
-<details><summary><strong>Alquerque [2 Player]</strong></summary><a id="alquerque"></a><hr>
+<a id="alquerque"></a>
+<details><summary><strong>Alquerque</strong></summary>
+<hr>
 
 ## `Alquerque`
 **Alquerque** is a game played on an 5x5 grid.  Red pieces on the bottom two rows of the board and black pieces on the top two rows of the board.  Pieces can move forward one step along lines connecting vertices or can jump over and capture an opponent's piece provided there is an empty square on the opposite side.  Each player gets 10 points for each piece captured.  The game terminates on move 60 or when one of the players has no more pieces to move. Game idea and description take from [Gamemaster Stanford](http://gamemaster.stanford.edu/homepage/showgames.php)
@@ -1225,9 +1306,11 @@ No env params.
 **Contact:** For questions or issues, email **Guertlerlo@cfar.a-star.edu.sg**.
 
 
+</details>
 
-
-<hr></details><details><summary><strong>Battleship [2 Player]</strong></summary><a id="battleship"></a><hr>
+<a id="battleship"></a>
+<details><summary><strong>Battleship</strong></summary>
+<hr>
 
 ## `Battleship`  
 **Battleship** is a two-player turn-based strategy game played on hidden grids, where players aim to locate and sink the opposing fleet. Players take turns firing at coordinates to deduce and destroy the opponent's ships. Hits and misses are shown using 'X' and 'O' respectively. Victory is achieved by sinking all of the opponent’s ships. [Wikipedia](https://en.wikipedia.org/wiki/Battleship_(game))
@@ -1258,8 +1341,11 @@ No env params.
 **Contact:** For questions or issues with this environment, email **chengxy@i2r.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>Breakthrough [2 Player]</strong></summary><a id="breakthrough"></a><hr>
+<a id="breakthrough"></a>
+<details><summary><strong>Breakthrough</strong></summary>
+<hr>
 
 ## `Breakthrough` 
 **Breakthrough** is a two-player abstract strategy game played on an n×n board. Each player starts with two rows of pawns, with White occupying rows 0 and 1 and Black occupying rows 6 and 7. The objective is to either move one of your pawns to the opponent's home row or capture all of your opponent's pawns. [Wikipedia](https://en.wikipedia.org/wiki/Breakthrough_(board_game))
@@ -1294,14 +1380,20 @@ No env params.
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to Guertlerlo@cfar.a-star.edu.sg
 
 
+</details>
 
-
-<hr></details><details><summary><strong>Briscola [2 Player]</strong></summary><a id="briscola"></a><hr>
+<a id="briscola"></a>
+<details><summary><strong>Briscola</strong></summary>
+<hr>
 
 ## `Briscola` 
 
 
-<hr></details><details><summary><strong>Checkers [2 Player]</strong></summary><a id="checkers"></a><hr>
+</details>
+
+<a id="checkers"></a>
+<details><summary><strong>Checkers</strong></summary>
+<hr>
 
 ## `Checkers` 
 **Checkers** (or **Draughts**) is a two-player strategy game played on an 8 × 8 board. Each side starts with 12 pieces; the goal is to **capture** or **block** all opponent pieces. Pieces move diagonally forward; reaching the far rank “kings” the piece, allowing backward moves as well. [Wikipedia](https://en.wikipedia.org/wiki/Draughts)
@@ -1331,8 +1423,11 @@ No env params.
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>Chess [2 Player]</strong></summary><a id="chess"></a><hr>
+<a id="chess"></a>
+<details><summary><strong>Chess</strong></summary>
+<hr>
 
 ## `Chess` 
 
@@ -1363,9 +1458,11 @@ No env params.
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to Guertlerlo@cfar.a-star.edu.sg
 
 
+</details>
 
-
-<hr></details><details><summary><strong>Chopsticks [2 Player]</strong></summary><a id="chopsticks"></a><hr>
+<a id="chopsticks"></a>
+<details><summary><strong>Chopsticks</strong></summary>
+<hr>
 
 ## `Chopsticks` 
 **Chopsticks** is a fast-paced finger-counting duel in which each player manages two “hands.” On your turn you may **attack** with one hand to add its fingers to an opponent hand (wrapping to 0 at 5), or **split** to redistribute your own fingers.  
@@ -1399,9 +1496,13 @@ The first player to leave both opponent hands at 0 wins. [Wikipedia](https://en.
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to guertlerlo@cfar.a-star.edu.sg
 
 
-<hr></details><details><summary><strong>ColonelBlotto [2 Player]</strong></summary><a id="colonelblotto"></a><hr>
+</details>
 
-## `ColonelBlotto`
+<a id="colonelblotto"></a>
+<details><summary><strong>Colonel Blotto</strong></summary>
+<hr>
+
+## `Colonel Blotto`
 
 **Colonel Blotto** is a strategic two-player zero-sum game that presents a conflict between two players (officers) who are tasks to simultaneously allocate limited units across multiple battlefields[1]. In each round, players have to allocate all of their units across all fields. The outcome of each battlefield skirmish is based on who has the most units on that battlefield gaining a point for each such majority, and the outcome of the round is set according to who has won the most battlefields. The game does not allow communications between the agents before each allocation, and only allows the player to learn and improve it's understanding of its opponent based on  previous rounds. 
 
@@ -1434,12 +1535,11 @@ The first player to leave both opponent hands at 0 wins. [Wikipedia](https://en.
 __[1]__ Borel, Emile. “The Theory of Play and Integral Equations with Skew Symmetric Kernels.” *Econometrica*, vol. 21, no. 1, 1953, pp. 97–100. [https://doi.org/10.2307/1906946](https://doi.org/10.2307/1906946).
 
 
+</details>
 
-
-
-
-
-<hr></details><details><summary><strong>ConnectFour [2 Player]</strong></summary><a id="connectfour"></a><hr>
+<a id="connectfour"></a>
+<details><summary><strong>ConnectFour</strong></summary>
+<hr>
 
 ## `ConnectFour` 
 **Connect Four** is a two-player connection game played on a vertical grid. Players drop discs into columns, and each disc falls to the lowest available cell. The first player to align **four discs in a row**—vertically, horizontally, or diagonally—wins. [Wikipedia](https://en.wikipedia.org/wiki/Connect_Four)  
@@ -1470,8 +1570,11 @@ __[1]__ Borel, Emile. “The Theory of Play and Integral Equations with Skew Sym
 **Contact:** If you have questions or face issues with this specific environment, please reach out directly to guertlerlo@cfar.a-star.edu.sg
 
 
+</details>
 
-<hr></details><details><summary><strong>Crusade [2 Player]</strong></summary><a id="crusade"></a><hr>
+<a id="crusade"></a>
+<details><summary><strong>Crusade</strong></summary>
+<hr>
 
 ## `Crusade`
 **Crusade** Crusade is a game played on an 8x8 rectangular board. White pieces on the bottom two rows of the board and and black pieces on the top two rows of the board. Pieces move like chess knights. The goal of the game is to take as many of the opponent's pieces as possible. The game ends after 40 moves, and each player receives a score based on the number of pieces captured. Game idea and description take from [Gamemaster Stanford](http://gamemaster.stanford.edu/homepage/showgames.php)
@@ -1502,8 +1605,11 @@ No env params
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>Debate [2 Player]</strong></summary><a id="debate"></a><hr>
+<a id="debate"></a>
+<details><summary><strong>Debate</strong></summary>
+<hr>
 
 ## `Debate` 
 **Debate** pits two speakers - **Affirmative** and **Negative** - against one another on a randomly chosen topic. After a fixed number of alternating turns, a simulated jury re-votes; the side that shifts the most jurors wins.
@@ -1536,8 +1642,11 @@ No env params
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>Dont Say It [2 Player]</strong></summary><a id="dontsayit"></a><hr>
+<a id="dontsayit"></a>
+<details><summary><strong>DontSayIt</strong></summary>
+<hr>
 
 ## `DontSayIt` 
 **Don’t Say It** is a conversational duel; each player receives a **secret word** and tries to coax the other into saying it - while trying not to say the opponents secret word.  
@@ -1567,8 +1676,11 @@ No env params
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>Game Of Pure Strategy (GOPS) [2 Player]</strong></summary><a id="gameofpurestrategy"></a><hr>
+<a id="gameofpurestrategy"></a>
+<details><summary><strong>Game of Pure Strategy</strong></summary>
+<hr>
 
 ## `GameOfPureStrategy` 
 **Game of Pure Strategy** - also called **GOPS** or *One-Card War* - is a simultaneous-bidding card duel played with the 13 cards **A–K**. Each round reveals a prize card; both players secretly bid one of their remaining cards. Higher bid wins the prize **plus** any carry-over pot from tied rounds. After all 13 prizes the higher total score wins. [Wikipedia](https://en.wikipedia.org/wiki/Game_of_Pure_Strategy)
@@ -1598,8 +1710,11 @@ No instance specific parameters.
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>GermanWhist [2 Player]</strong></summary><a id="germanwhist"></a><hr>
+<a id="germanwhist"></a>
+<details><summary><strong>German Whist</strong></summary>
+<hr>
 
 ## `GermanWhist`  
 **German Whist** is a two-player trick-taking game played in two phases over 26 rounds. In the first 13 tricks, known as the learning phase, players draw cards from the deck after each trick. In the final 13 tricks, hands are fixed and players compete based on what they've acquired. The objective is to win the **majority of tricks (14 or more)**. Trump suit is revealed at the start and remains fixed throughout. [Wikipedia (Whist)](https://en.wikipedia.org/wiki/Whist)
@@ -1628,8 +1743,11 @@ No instance specific parameters.
 **Contact:** For questions or issues with this environment, email **chengxy@i2r.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>HighSociety [2 Player]</strong></summary><a id="highsociety"></a><hr>
+<a id="highsociety"></a>
+<details><summary><strong>High Society</strong></summary>
+<hr>
 
 ## `HighSociety` 
 A streamlined, two-player take on Reiner Knizia’s **High Society**. Ten prestige cards (values 1 - 10) are auctioned, one at a time. Each auction, players secretly choose a **single money card** (1 – 11) to bid. **Higher bid** wins the prestige card **and discards** that money card. Lower bid keeps their card. Ties return both bids and the same prestige card is re-auctioned. After all ten auctions, each player adds **prestige points**; higher net-worth wins.
@@ -1660,8 +1778,11 @@ No env params.
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>Indian Poker [2 Player]</strong></summary><a id="indianpoker"></a><hr>
+<a id="indianpoker"></a>
+<details><summary><strong>Indian Poker</strong></summary>
+<hr>
 
 ## `IndianPoker` 
 **Indian Poker** - also called *Blind-Man’s-Bluff* - is a two-player no-limit hold-a-single-card showdown. Each round both players ante, receive **one hidden card visible only to their opponent**, then play a single betting street with unlimited raises. Highest card at showdown—or the last player still in—wins the pot. [Wikipedia](https://en.wikipedia.org/wiki/Blind_man%27s_bluff_(poker))
@@ -1694,8 +1815,11 @@ Variants differ by `max_rounds` (the number of hands played).
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>IteratedMatchingPennies [2 Player]</strong></summary><a id="iteratedmatchingpennies"></a><hr>
+<a id="iteratedmatchingpennies"></a>
+<details><summary><strong>Iterated Matching Pennies</strong></summary>
+<hr>
 
 ## `IteratedMatchingPennies`
 **Iterated Matching Pennies** is a multi-round zero-sum game between two players. Player 0 plays the **Matcher** role: they win if both players pick the same value. Player 1 plays the **Mismatcher** role: they win if the values differ. Each round, both players simultaneously choose either `[heads]` or `[tails]`. Shorthand `[h]` and `[t]` are also accepted. The player whose role aligns with the outcome wins that round. After a fixed number of rounds (default: 5), the player with the most wins is declared the overall winner.
@@ -1730,7 +1854,11 @@ Variants differ by `max_rounds` (the number of hands played).
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
-<hr></details><details><summary><strong>IteratedPrisonersDilemma [2 Player]</strong></summary><a id="iteratedprisonersdilemma"></a><hr>
+</details>
+
+<a id="iteratedprisonersdilemma"></a>
+<details><summary><strong>Iterated Prisoners Dilemma</strong></summary>
+<hr>
 
 ## `IteratedPrisonersDilemma (not finished)` 
 **Iterated Prisoner's Dilemma** is a repeated negotiation game with 2 players. Each round consists of 3 **communication turns**, followed by 1 **decision turn**.  On decision turns, players choose to `"cooperate"` or `"defect"`. [Wikipedia](https://en.wikipedia.org/wiki/Prisoner's_dilemma)
@@ -1773,7 +1901,11 @@ Variants differ by `max_rounds` (the number of hands played).
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
-<hr></details><details><summary><strong>IteratedRockPaperScissors [2 Player]</strong></summary><a id="iteratedrockpaperscissors"></a><hr>
+</details>
+
+<a id="iteratedrockpaperscissors"></a>
+<details><summary><strong>Iterated Rock Paper Scissors</strong></summary>
+<hr>
 
 ## `IteratedRockPaperScissors` 
 **Iterated Rock-Paper-Scissors** is a multi-round version of the classic hand game. Players play one of `[rock]`, `[paper]`, or `[scissors]` for each round (or `[r]`, `[p]`, `[s]` as shorthand).  After 5 rounds (default), the player with the most round wins is declared the overall match winner. [Wikipedia](https://en.wikipedia.org/wiki/Rock_paper_scissors)
@@ -1811,7 +1943,11 @@ Variants differ by `max_rounds` (the number of hands played).
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
-<hr></details><details><summary><strong>IteratedTwoThirdsAverage [2 Player]</strong></summary><a id="iteratedtwothirdsaverage"></a><hr>
+</details>
+
+<a id="iteratedtwothirdsaverage"></a>
+<details><summary><strong>Iterated Two Thirds Average</strong></summary>
+<hr>
 
 ## `IteratedTwoThirdsAverage` 
 **Iterated Two-Thirds of the Average** is a multi-round game where both players simultaneously submit numeric guesses in each round. The target value is calculated as **two-thirds of the average** of the two guesses. The player whose guess is closest to the target wins the round. After a fixed number of rounds (default: 5), the player with the most round-wins wins the overall game.
@@ -1844,7 +1980,11 @@ Variants differ by `max_rounds` (the number of hands played).
 
 
 
-<hr></details><details><summary><strong>IteratedStagHunt [2 Player]</strong></summary><a id="iteratedstaghunt"></a><hr>
+</details>
+
+<a id="iteratedstaghunt"></a>
+<details><summary><strong>Iterated Stag Hunt</strong></summary>
+<hr>
 
 ## `IteratedStagHunt`
 
@@ -1882,10 +2022,11 @@ Variants differ by `max_rounds` (the number of hands played).
 
 
 
+</details>
 
-
-
-<hr></details><details><summary><strong>Kuhn Poker [2 Player]</strong></summary><a id="kuhnpoker"></a><hr>
+<a id="kuhnpoker"></a>
+<details><summary><strong>Kuhn Poker</strong></summary>
+<hr>
 
 ## `KuhnPoker` 
 **Kuhn Poker** is a minimalist two-player poker variant played with the three-card deck **J Q K**. Each player antes one chip, receives a single hidden card, then takes turns **betting, checking, calling, or folding** in a single betting round. The higher card at showdown - or the last player still in - wins the pot. Despite its simplicity, Kuhn Poker is a textbook example of a zero-sum imperfect-information game with a mixed-strategy Nash equilibrium. [Wikipedia](https://en.wikipedia.org/wiki/Kuhn_poker)
@@ -1919,19 +2060,31 @@ Variants differ by `max_rounds` (the number of hands played).
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
-<hr></details><details><summary><strong>LeducHoldem [2 Player]</strong></summary><a id="leducholdem"></a><hr>
+</details>
+
+<a id="leducholdem"></a>
+<details><summary><strong>Leduc Holdem</strong></summary>
+<hr>
 
 ## `LeducHoldem` 
 # TODO
 
 
-<hr></details><details><summary><strong>LeTruc [2 Player]</strong></summary><a id="letruc"></a><hr>
+</details>
+
+<a id="letruc"></a>
+<details><summary><strong>LeTruc</strong></summary>
+<hr>
 
 ## `LeTruc` 
 # TODO
 
 
-<hr></details><details><summary><strong>Letter Auction [2 Player]</strong></summary><a id="letterauction"></a><hr>
+</details>
+
+<a id="letterauction"></a>
+<details><summary><strong>Letter Auction</strong></summary>
+<hr>
 
 ## `LetterAuction`  
 **Letter Auction** is a two-player bidding game where players compete to acquire letters through auctions. Each player starts with a fixed number of coins and takes turns bidding or passing on a revealed letter. After all letters are auctioned, players use their collected letters to form an English word. The player whose word has the highest total coin value (based on the coins spent on the letters used) wins. Ties result in a draw. [Wikipedia: Auction Game](https://en.wikipedia.org/wiki/Auction) *(conceptual reference)*
@@ -1966,7 +2119,11 @@ Specify actions using one of the following bracketed formats:
 **Contact:** For questions or issues with this environment, email **chengxy@i2r.a-star.edu.sg**
 
 
-<hr></details><details><summary><strong>LinesOfAction [2 Player]</strong></summary><a id="linesofaction"></a><hr>
+</details>
+
+<a id="linesofaction"></a>
+<details><summary><strong>Lines of Action</strong></summary>
+<hr>
 
 ## `LinesOfAction`
 
@@ -1997,7 +2154,11 @@ No env params.
 
 
 
-<hr></details><details><summary><strong>Memory Game [2 Player]</strong></summary><a id="memorygame"></a><hr>
+</details>
+
+<a id="memorygame"></a>
+<details><summary><strong>Memory Game</strong></summary>
+<hr>
 
 ## `MemoryGame`  
 **Memory Game** (also known as Concentration) is a two-player game played on a grid of face-down cards. Players take turns flipping two cards to find matching pairs. If the cards match, they remain face-up and the player scores a point. The game ends when all pairs have been found. The player with the most matches wins. [Wikipedia](https://en.wikipedia.org/wiki/Concentration_(card_game))
@@ -2028,8 +2189,11 @@ No env params.
 **Contact:** For questions or issues with this environment, email **chengxy@i2r.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>Nim [2 Player]</strong></summary><a id="nim"></a><hr>
+<a id="nim"></a>
+<details><summary><strong>Nim</strong></summary>
+<hr>
 
 ## `Nim` 
 **Nim** is a classic impartial-combinatorial game played with several piles of objects. Players alternate turns; on each turn a player removes **one or more** objects from **exactly one** pile. The player who takes the **last object** wins. [Wikipedia](https://en.wikipedia.org/wiki/Nim)
@@ -2060,8 +2224,11 @@ No env params.
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>Othello [2 Player]</strong></summary><a id="othello"></a><hr>
+<a id="othello"></a>
+<details><summary><strong>Othello</strong></summary>
+<hr>
 
 ## `Othello`
 **Othello** ( *Reversi* ) is an n × n perfect-information board game where each move “flips” enclosed opponent pieces to your colour. The goal is to finish with the **majority of pieces** showing your colour. [Wikipedia](https://en.wikipedia.org/wiki/Reversi)
@@ -2098,7 +2265,11 @@ No env params.
 
 
 
-<hr></details><details><summary><strong>Pig Dice [2 Player]</strong></summary><a id="pigdice"></a><hr>
+</details>
+
+<a id="pigdice"></a>
+<details><summary><strong>Pig Dice</strong></summary>
+<hr>
 
 ## `PigDice`
 **Pig Dice** is a press-your-luck dice race: on each turn you may **roll** a six-sided die to build a turn subtotal or **hold** to bank it - roll a **1** and you lose everything for that turn. First player to reach the target score wins. [Wikipedia](https://en.wikipedia.org/wiki/Pig_(dice_game))
@@ -2131,7 +2302,11 @@ No env params.
 
 
 
-<hr></details><details><summary><strong>QuantumTicTacToe [2 Player]</strong></summary><a id="quantumtictactoe"></a><hr>
+</details>
+
+<a id="quantumtictactoe"></a>
+<details><summary><strong>Quantum Tic Tac Toe</strong></summary>
+<hr>
 
 ## `QuantumTicTacToe` 
 **Quantum Tic Tac Toe** extends the classic 3 × 3 grid with quantum superposition. Each turn a player places a **spooky mark** entangling **two empty cells**. When an entanglement cycle forms, all marks in that cycle **collapse** into classical marks, potentially triggering chain reactions. First to show three classical marks in a row wins. [Wiki](https://en.wikipedia.org/wiki/Quantum_tic-tac-toe)
@@ -2162,8 +2337,11 @@ No env params
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>ReverseTicTacToe [2 Player]</strong></summary><a id="reversetictactoe"></a><hr>
+<a id="reversetictactoe"></a>
+<details><summary><strong>Reverse Tic Tac Toe</strong></summary>
+<hr>
 
 ## `ReverseTicTacToe`
 **ReverseTicTacToe** inverts the classic game: the goal is to **avoid** completing a line of three identical marks. If you accidentally place your third 'X' or 'O' in a row, **you lose**, and your opponent wins. [Wikipedia](https://en.wikipedia.org/wiki/Misere#Mis%C3%A9re_tic-tac-toe)
@@ -2194,8 +2372,11 @@ No env params.
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>ScenarioPlanning [2 Player]</strong></summary><a id="scenarioplanning"></a><hr>
+<a id="scenarioplanning"></a>
+<details><summary><strong>Scenario Planning</strong></summary>
+<hr>
 
 ## `ScenarioPlanning` 
 **Scenario Planning** challenges two players to craft the best survival (or solution) strategy for a randomly chosen hypothetical scenario. After both strategies are submitted, an LLM-powered jury votes on which plan is more **effective, feasible, creative, and thorough**.
@@ -2234,7 +2415,11 @@ No env params.
 
 
 
-<hr></details><details><summary><strong>SimpleBlindAuction [2 Player]</strong></summary><a id="simpleblindauction"></a><hr>
+</details>
+
+<a id="simpleblindauction"></a>
+<details><summary><strong>Simple Blind Auction</strong></summary>
+<hr>
 
 ## `SimpleBlindAuction` 
 A concise two-phase auction game. During the **Conversation** phase, players freely chat in public for a fixed number of rounds. Subsequently during the  **Bidding** phase, players submit simultaneous **blind bids** for each item. Each player starts with the same capital and a private valuation for every item (±20 % variation). Highest **net-worth** after the auction (remaining coins + value of won items) wins.
@@ -2286,9 +2471,11 @@ Invalid bid (over budget / bad format) – offender: **`-1`**, opponent: **`0`**
 
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
+</details>
 
-
-<hr></details><details><summary><strong>SimpleNegotiation [2 Player]</strong></summary><a id="simplenegotiation"></a><hr>
+<a id="simplenegotiation"></a>
+<details><summary><strong>Simple Negotiation</strong></summary>
+<hr>
 
 ## `SimpleNegotiation` 
 **SimpleNegotiation** is a two-player barter game. Each player begins with five resources—**Wheat, Wood, Sheep, Brick, Ore**—and their own private valuation for each. Players negotiate by sending free-form messages and **structured trade commands**. After a fixed number of turns, the player whose inventory value (using their personal prices) has grown the most wins.
@@ -2326,8 +2513,11 @@ Send conversational text and **optionally** one command in your turn:
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>SimpleTak [2 Player]</strong></summary><a id="simpletak"></a><hr>
+<a id="simpletak"></a>
+<details><summary><strong>Simple Tak</strong></summary>
+<hr>
 
 ## `SimpleTak` 
 **SimpleTak** is a minimalist variant of the Tak board game. Players alternate placing stones on an empty NxN grid. The first player to form an unbroken path connecting **two opposite edges** of the board wins.
@@ -2361,7 +2551,11 @@ The `board_size` determines the board size ... shocking.
 
 
 
-<hr></details><details><summary><strong>Spelling Bee [2 Player]</strong></summary><a id="spellingbee"></a><hr>
+</details>
+
+<a id="spellingbee"></a>
+<details><summary><strong>Spelling Bee</strong></summary>
+<hr>
 
 ## `SpellingBee` 
 **Spelling Bee** Given a fixed set of unique letters, players alternate submitting valid English words - each **at least as long as the previous one** - until one player fails. Letter sets are drawn with frequency weighting for playability.
@@ -2393,7 +2587,11 @@ The `board_size` determines the board size ... shocking.
 
 
 
-<hr></details><details><summary><strong>Spite and Malice [2 Player]</strong></summary><a id="spiteandmalice"></a><hr>
+</details>
+
+<a id="spiteandmalice"></a>
+<details><summary><strong>Spite And Malice</strong></summary>
+<hr>
 
 ## `SpiteAndMalice`  
 **Spite and Malice** is a two-player competitive card game blending solitaire mechanics with strategic play. Each player tries to empty their **payoff pile** by building up shared **center piles** in ascending order. Kings act as wild cards. Players manage their hand, discard piles, and payoff pile while blocking opponents from progressing. The first to empty their payoff pile wins. [Wikipedia](https://en.wikipedia.org/wiki/Spite_and_Malice)
@@ -2426,7 +2624,11 @@ Specify your move using bracketed commands:
 
 
 
-<hr></details><details><summary><strong>Stratego [2 Player]</strong></summary><a id="stratego"></a><hr>
+</details>
+
+<a id="stratego"></a>
+<details><summary><strong>Stratego</strong></summary>
+<hr>
 
 ## `Stratego`  
 **Stratego** is a two-player strategy game where players aim to capture their opponent's Flag or eliminate all their movable pieces. The game is played on a 10×10 grid with hidden information: piece identities are hidden until battles occur. Special pieces like Bombs, Scouts, and Spies add unique tactical depth. The game simulates full Stratego rules with movement, battle resolution, and board rendering for agent-based gameplay. [Wikipedia](https://en.wikipedia.org/wiki/Stratego)
@@ -2454,8 +2656,11 @@ Specify your move using bracketed commands:
 **Contact:** For questions or issues with this environment, email **chengxy@i2r.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>Tak [2 Player]</strong></summary><a id="tak"></a><hr>
+<a id="tak"></a>
+<details><summary><strong>Tak</strong></summary>
+<hr>
 
 ## `Tak`  
 **Tak** is a two-player abstract strategy game where players attempt to build a connected road of flat stones or capstones across the board. With flexible piece types and stack movement rules, players must strategically place, move, and flatten stones while preventing their opponent from doing the same. The game ends when a player completes a valid road or when the board fills up, triggering a flat-stone count tiebreaker. [Wikipedia](https://en.wikipedia.org/wiki/Tak_(game))
@@ -2492,7 +2697,11 @@ Examples:
 
 
 
-<hr></details><details><summary><strong>TicTacToe [2 Player]</strong></summary><a id="tictactoe"></a><hr>
+</details>
+
+<a id="tictactoe"></a>
+<details><summary><strong>TicTacToe</strong></summary>
+<hr>
 
 ## `TicTacToe` 
 **TicTacToe** ( *Noughts & Crosses* ) is a 3 × 3 grid race to align **three symbols in a row** - horizontally, vertically, or diagonally. Player 0 plays **O**, Player 1 plays **X**. [Wikipedia](https://en.wikipedia.org/wiki/Tic-tac-toe)
@@ -2522,7 +2731,11 @@ No env params.
 
 
 
-<hr></details><details><summary><strong>TruthAndDeception [2 Player]</strong></summary><a id="truthanddeception"></a><hr>
+</details>
+
+<a id="truthanddeception"></a>
+<details><summary><strong>Truth And Deception</strong></summary>
+<hr>
 
 ## `TruthAndDeception` 
 **TruthAndDeception** is a two-player social deduction game. One player is the **Deceiver** (Player 0), whose goal is to convince the **Guesser** (Player 1) to choose the wrong fact from a pair of facts. After a set number of conversational turns, the Guesser selects either `[Fact 1]` or `[Fact 2]`.
@@ -2556,7 +2769,11 @@ No env params.
 
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
-<hr></details><details><summary><strong>Two Dollar [2 Player]</strong></summary><a id="twodollar"></a><hr>
+</details>
+
+<a id="twodollar"></a>
+<details><summary><strong>Two Dollar</strong></summary>
+<hr>
 
 ## `TwoDollar`
 **Two Dollar** Negotiation is a classic two-player bargaining game where both players must agree on how to split $2.00. Each player has secret role instructions (constraints or stylistic behaviors) unknown to the opponent, introducing asymmetric information and strategic tension. Resource: [ocw.mit.edu](https://ocw.mit.edu/courses/15-667-negotiation-and-conflict-management-spring-2001/pages/lecture-notes/)
@@ -2639,7 +2856,11 @@ python -m pytest textarena/envs/TwoDollar/test_env.py::TestTwoDollarRoles -v
 **Contact:** For issues or questions regarding this environment, please reach out to **charipol@amazon.com**.
 
 
-<hr></details><details><summary><strong>Ultimate Tic Tac Toe [2 Player]</strong></summary><a id="ultimatetictactoe"></a><hr>
+</details>
+
+<a id="ultimatetictactoe"></a>
+<details><summary><strong>Ultimate TicTacToe</strong></summary>
+<hr>
 
 ## `UltimateTicTacToe`  
 **Ultimate Tic Tac Toe** adds a macro-level twist to the classic game by embedding nine micro Tic Tac Toe boards into one larger meta-game. Each move dictates where the opponent must play next. The goal is to win three micro boards in a row on the macro board. This environment enforces legal move rules, micro/macro win conditions, and strategic dynamics. [Wikipedia](https://en.wikipedia.org/wiki/Ultimate_tic-tac-toe)
@@ -2672,7 +2893,11 @@ Examples:
 
 
 
-<hr></details><details><summary><strong>WildTicTacToe [2 Player]</strong></summary><a id="wildtictactoe"></a><hr>
+</details>
+
+<a id="wildtictactoe"></a>
+<details><summary><strong>Wild TicTacToe</strong></summary>
+<hr>
 
 ## `WildTicTacToe` 
 **WildTicTacToe** is a variant of TicTacToe where players can choose to place **either 'X' or 'O'** on any turn. You win by completing a line of **three identical symbols** (all Xs or all Os)—regardless of who placed the earlier ones. [Wikipedia](https://en.wikipedia.org/wiki/Wild_tic-tac-toe)
@@ -2702,7 +2927,11 @@ No env params.
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
-<hr></details><details><summary><strong>WordChains [2 Player]</strong></summary><a id="word-chains"></a><hr>
+</details>
+
+<a id="wordchains"></a>
+<details><summary><strong>Word Chains</strong></summary>
+<hr>
 
 ## `WordChains` 
 **WordChains** is a turn-based game where players alternate supplying valid English words. Each word must start with the last letter of the previous word, cannot be repeated, and must be a real English word. The game ends when a player fails to provide a valid word or when the maximum number of turns is reached.
@@ -2738,25 +2967,9 @@ No env params.
 
 # Multi-Player
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<details><summary><strong>Briscola [2–4 Player]</strong></summary><a id="briscola"></a><hr>
+<a id="briscola"></a>
+<details><summary><strong>Briscola</strong></summary>
+<hr>
 
 ## `Briscola`  
 **Briscola** is a traditional Italian trick-taking card game played with a 40-card deck. Players take turns playing cards to win tricks and collect points based on card values. Trump cards beat all non-trumps, and the game ends when all cards are played. The player or team with the most total points wins. [Wikipedia](https://en.wikipedia.org/wiki/Briscola)
@@ -2784,7 +2997,11 @@ No env params.
 **Contact:** For questions or issues with this environment, email **chengxy@i2r.a-star.edu.sg**
 
 
-<hr></details><details><summary><strong>Character Conclave [3-15 Player]</strong></summary><a id="characterconclave"></a><hr>
+</details>
+
+<a id="characterconclave"></a>
+<details><summary><strong>Character Conclave</strong></summary>
+<hr>
 
 ## `CharacterConclave` 
 **Character Conclave** is a two-phase social game that tests concise communication. Players have a **fixed character budget** in the discussion phase, then cast a single vote for the most impressive participant (not themselves) after. The player(s) with the most votes win.
@@ -2816,8 +3033,11 @@ Players are ranked by the number of votes they received and the reward is linear
 **Contact:** For questions or issues with this environment, email **simone.m.romeo@gmail.com**
 
 
+</details>
 
-<hr></details><details><summary><strong>Codenames [4 Player]</strong></summary><a id="codenames"></a><hr>
+<a id="codenames"></a>
+<details><summary><strong>Codenames</strong></summary>
+<hr>
 
 ## `Codenames`
 A 4-player word-association battle: two teams - **Red** and **Blue** - each consist of a **Spymaster** and an **Operative**. Spymasters see the secret map of the 25-word board and give one-word clues describing a number of words; Operatives guess words. First team to reveal all of its words wins - unless someone uncovers the single **Assassin**, which causes an instant loss.
@@ -2856,8 +3076,11 @@ if `hardcore` is True, a set of more difficult words is used.
 **Contact:** For questions or issues with this environment, email **ananyabalehithlu@gmail.com**
 
 
+</details>
 
-<hr></details><details><summary><strong>Golf [2–4 Player]</strong></summary><a id="golf"></a><hr>
+<a id="golf"></a>
+<details><summary><strong>Golf</strong></summary>
+<hr>
 
 ## `Golf`  
 **Golf** simulates the 6-card version of the classic card game *Golf*. Each player manages a 2×3 grid of hidden cards, aiming to minimize their final score through drawing, swapping, and revealing cards. Vertical pairs cancel each other to zero. The game ends when all cards are revealed. The lowest score wins. [Wikipedia](https://en.wikipedia.org/wiki/Golf_(card_game))
@@ -2894,7 +3117,11 @@ Submit actions using one of the following formats:
 
 
 
-<hr></details><details><summary><strong>Liar's Dice [2-15 Player]</strong></summary><a id="liarsdice"></a><hr>
+</details>
+
+<a id="liarsdice"></a>
+<details><summary><strong>Liars Dice</strong></summary>
+<hr>
 
 ## `LiarsDice` 
 **Liar’s Dice** is a simultaneous-reveal bluffing game. Each round the active player may either **raise** the current bid `[Bid: <quantity>, <face>]` or **challenge** with `[Call]`. All dice are then revealed; the loser of the challenge removes one die. The last player with dice remaining wins.
@@ -2930,7 +3157,11 @@ Players are ranked by when they ran out of dice and the reward is linearly scale
 
 
 
-<hr></details></details><details><summary><strong>ThreePlayerGOPS [3 Player]</strong></summary><a id="threeplayergops"></a><hr>
+</details>
+
+<a id="threeplayergops"></a>
+<details><summary><strong>Three Player GOPS</strong></summary>
+<hr>
 
 ## `ThreePlayerGOPS`
 A three-player extension of the GameOfPureStrategy game. Each round reveals a prize card (1–13). Players secretly bid one of their remaining cards (A–K). Highest bid wins the prize plus any carry-over pot; ties roll the prize into the next round. Invalid moves **eliminate** that player. If two players are eliminated at any time, the lone survivor wins. Otherwise the game runs 13 rounds, with final payouts determined by total prizes won and tie rules.
@@ -2958,7 +3189,11 @@ No env params.
 
 
 
-<hr></details><details><summary><strong>Poker (Texas Hold’em) [2-15 Player]</strong></summary><a id="poker"></a><hr>
+</details>
+
+<a id="poker"></a>
+<details><summary><strong>Poker (Texas Hold'em)</strong></summary>
+<hr>
 
 
 ## `Poker` 
@@ -2998,7 +3233,11 @@ The is played for `num_rounds` hands. Players start with `starting_chips` many c
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
 
-<hr></details><details><summary><strong>SecretMafia [6-15 Player]</strong></summary><a id="secretmafia"></a><hr>
+</details>
+
+<a id="secretmafia"></a>
+<details><summary><strong>Secret Mafia</strong></summary>
+<hr>
 
 ## `SecretMafia`
 A classic social-deduction showdown between the **Village** and the hidden **Mafia**. Play cycles through **Night** (secret role actions) and **Day** (open discussion → vote). Villagers win by eliminating every Mafia member; Mafia win once they equal or outnumber the Village.
@@ -3038,9 +3277,11 @@ If somebody makes an invalid move, they are considered eliminated.
 
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
+</details>
 
-
-<hr></details><details><summary><strong>Snake [2-15 Player]</strong></summary><a id="snake"></a><hr>
+<a id="snake"></a>
+<details><summary><strong>Snake</strong></summary>
+<hr>
 
 ## `Snake` 
 **Snake** is a simultaneous-move, multi-player adaptation of the classic arcade game. Each player controls a snake on a shared grid, growing by eating apples and dying on collisions. Last snake alive—or highest score at the turn limit—wins.
@@ -3068,9 +3309,11 @@ The game board is initialized as a `width`x`height` grid and will always have `n
 
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
+</details>
 
-
-<hr></details><details><summary><strong>Surround [2-15 Player]</strong></summary><a id="surround"></a><hr>
+<a id="surround"></a>
+<details><summary><strong>Surround</strong></summary>
+<hr>
 
 ## `Surround`
 **Surround** is a simultaneous-move arena game inspired by the classic “light‐cycle” mode. Each player begins on a shared grid and leaves a **solid trail** behind as they move. Crashing into a wall, any trail, or colliding head-on eliminates a snake. The **last player alive** wins - or, if everyone dies, the one(s) who lasted longest.
@@ -3096,9 +3339,11 @@ The board is a `width × height` grid. If >1 players remain, play stops after `m
 
 **Contact:** For questions or issues with this environment, email **guertlerlo@cfar.a-star.edu.sg**
 
+</details>
 
-
-<hr></details><details><summary><strong>Taboo [4-8 Player]</strong></summary><a id="taboo"></a><hr>
+<a id="taboo"></a>
+<details><summary><strong>Taboo</strong></summary>
+<hr>
 
 ## `Taboo`  
 **Taboo** is a team-based communication game where teams compete to guess as many words as possible. Each team has 1 Clue Giver who provide hints and 1 or more Guessers who identify secret words without the clue giver using any of the associated taboo words. Teams alternate turns with a fixed number of attempts per round. The team with the highest score after all rounds wins. [Wikipedia](https://en.wikipedia.org/wiki/Taboo_(game))
@@ -3138,8 +3383,11 @@ The board is a `width × height` grid. If >1 players remain, play stops after `m
 **Contact:** For questions or issues with this environment, email **chengxy@i2r.a-star.edu.sg**
 
 
+</details>
 
-<hr></details><details><summary><strong>ThreePlayerTicTacToe [3 Player]</strong></summary><a id="threeplayertictactoe"></a><hr>
+<a id="threeplayertictactoe"></a>
+<details><summary><strong>Three Player TicTacToe</strong></summary>
+<hr>
 
 ## `ThreePlayerTicTacToe` 
 **Three-Player Tic Tac Toe** is played on a **5 × 5** grid with three symbols: Player 0 → `A`, Player 1 → `B`, Player 2 → `C`. On your turn you mark one empty cell; the first player to align **four identical symbols** horizontally, vertically, or diagonally wins.
