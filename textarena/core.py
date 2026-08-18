@@ -130,67 +130,6 @@ class State:
         return self.rewards, self.game_info
 
 
-# class Env(ABC):
-#     """
-#     Abstract base class for text-based game environments.
-#     """
-#     game_state: State  # the state of the environment
-
-#     def set_lang(self, lang: str):
-#         self.lang = lang
-#         self._locale = build_locale(self.__class__, lang=lang)
-        
-#         if self._locale is None and lang != "en":
-#             raise FileNotFoundError(
-#                 f"{self.__class__.__name__} does not support lang='{lang}'. "
-#                 f"Please add a locales/ folder with a '{lang}.json' file."
-#             )
-        
-#         # State.lang = lang
-#         Agent.lang = lang
-
-#     def t(self, *keys: str, _pid: int = None, **kwargs: Any) -> str:
-#         if self._locale is None:
-#             raise ValueError(f"Environment {self.__class__.__name__} has no locale data. Cannot call t() for translation. Please ensure there is a locales/ directory with the appropriate language files, or set lang='en' to use the default (which is just the keys).")
-#         return self._locale.t(*keys, _pid=_pid, **kwargs)
-    
-#     def m(self, *keys, **kwargs):
-#         return LocalizedMessage(key=keys, kwargs=kwargs, loader=self._locale)
-
-#     @abstractmethod
-#     def reset(self, num_players: int, seed: Optional[int]=None):
-#         """
-#         Resets the environment to an initial state.
-
-#         Args:
-#             num_players (int): Number of players in the game.
-#             seed (Optional[int]): Seed for the random number generator to ensure reproducibility.
-#         """
-#         raise NotImplementedError
-
-#     @abstractmethod
-#     def step(self, action: str) -> Tuple[bool, Info]:
-#         """
-#         Performs a single step in the environment.
-
-#         Args:
-#             player_id (int): The ID of the player taking the action.
-#             action (str): The action to be taken by the player.
-
-#         Returns:
-#             Tuple containing:
-#                 - done (bool): Whether the episode has concluded
-#                 - info (Dict[str, Any]): Additional information about the environment.
-#         """
-#         raise NotImplementedError
-
-#     def get_observation(self):
-#         return self.state.current_player_id, self.state.get_current_player_observation()
-
-#     def close(self):
-#         rewards = self.state.close()
-#         return rewards
-
 class Env(ABC):
     """
     Abstract base class for text-based game environments.
@@ -292,6 +231,7 @@ class Env(ABC):
     def close(self):
         rewards = self.state.close()
         return rewards
+
 
 class Wrapper(Env):
     """ Base class for environment wrappers. """

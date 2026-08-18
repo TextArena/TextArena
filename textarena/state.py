@@ -23,7 +23,6 @@ class SinglePlayerState(ta.State):
         super().__init__(num_players=num_players, seed=seed, max_turns=max_turns)
 
     def reset(self, game_state: Optional[Dict[str, Any]]=None, player_prompt_function: Optional[Callable]=None, role_mapping: Optional[Dict[int, str]]=None, secret_roles: Optional[Dict[int, str]]=None):
-        # if role_mapping is None: role_mapping = {pid: self.t("SinglePlayerState", "player", pid=pid) for pid in range(self.num_players)}
         self.standard_resets(game_state=game_state, player_prompt_function=player_prompt_function, role_mapping=role_mapping, secret_roles=secret_roles)
         self.error_count = 0
         self.made_invalid_move = False
@@ -139,7 +138,6 @@ class FFAMultiPlayerState(ta.State):
         super().__init__(num_players=num_players, seed=seed, max_turns=max_turns)
 
     def reset(self, game_state: Optional[Dict[str, Any]]=None, player_prompt_function: Optional[Callable]=None, role_mapping: Optional[Dict[int, str]]=None, secret_roles: Optional[Dict[int, str]]=None):
-        # if role_mapping is None: role_mapping = {pid: self.t("MultiPlayerState", "player", pid=pid) for pid in range(self.num_players)}
         self.standard_resets(game_state=game_state, player_prompt_function=player_prompt_function, role_mapping=role_mapping, secret_roles=secret_roles)
         self.error_count = 0
         self.made_invalid_move = False
@@ -241,7 +239,6 @@ class TeamMultiPlayerState(ta.State):
         super().__init__(num_players=num_players, seed=seed, max_turns=max_turns)
 
     def reset(self, game_state: Optional[Dict[str, Any]]=None, player_prompt_function: Optional[Callable]=None, role_mapping: Optional[Dict[int, str]]=None, secret_roles: Optional[Dict[int, str]]=None):
-        # if role_mapping is None: role_mapping = {pid: self.t("MultiPlayerState", "player", pid=pid) for pid in range(self.num_players)}
         self.standard_resets(game_state=game_state, player_prompt_function=player_prompt_function, role_mapping=role_mapping, secret_roles=secret_roles)
         self.error_count = 0
         self.made_invalid_move = False
@@ -303,7 +300,6 @@ class MinimalMultiPlayerState(ta.State):
         super().__init__(num_players=num_players, seed=seed, max_turns=max_turns)
 
     def reset(self, game_state: Optional[Dict[str, Any]]=None, player_prompt_function: Optional[Callable]=None, role_mapping: Optional[Dict[int, str]]=None, secret_roles: Optional[Dict[int, str]]=None):
-        # if role_mapping is None: role_mapping = {pid: self.t("MultiPlayerState", "player", pid=pid) for pid in range(self.num_players)}
         self.standard_resets(game_state=game_state, player_prompt_function=player_prompt_function, role_mapping=role_mapping, secret_roles=secret_roles)
         self.error_count = 0
         self.made_invalid_move = False
