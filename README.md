@@ -25,7 +25,7 @@ A suite of 100+ single-, two-, and multi-player text-based games for benchmarkin
 
 **TextArena** is an open-source framework for evaluating and training language-model agents through competitive and cooperative text-based games.
 
-It provides **100+ single-, two-, and multi-player environments** through an OpenAI Gym-style interface, ranging from classic board and card games to negotiation, social deduction, and multi-agent reasoning tasks. TextArena makes it easy to plug in language-model agents, run self-play or model-vs-model evaluations, and build training pipelines around interactive environments. TextArena also supports 192 languages, allowing agents to interact with the same environments through different language interfaces.
+It provides **100+ single-, two-, and multi-player environments** through an interface styled after [OpenAI Gym](https://github.com/openai/gym), ranging from classic board and card games to negotiation, social deduction, and multi-agent reasoning tasks. TextArena makes it easy to plug in language-model agents, run self-play or model-vs-model evaluations, and build training pipelines around interactive environments. It also supports 192 languages, enabling the same environments to be presented to agents through different language interfaces.
 
 ## Updates
 
