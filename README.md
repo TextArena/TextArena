@@ -160,6 +160,8 @@ warn_if_flagged(lang)
 
 This emits a `UserWarning` for non-certified locales.
 
+For those interested in how these localizations were generated and validated at scale, the multilingual generation pipeline, including the tooling used to translate, verify, repair, and evaluate localizations, is available on the [`multilingual`](https://github.com/TextArena/TextArena/tree/multilingual) branch.
+
 For research using these localizations, we recommend reporting the confidence tier of each language and distinguishing machine-verified translations from native-reviewed ones.
 
 </details>
