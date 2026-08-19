@@ -1,0 +1,89 @@
+{
+  "entry": "textarena.envs.Klondike.env:KlondikeEnv",
+  "num_players": 1,
+  "seed": 42,
+  "scenarios": {
+    "play_moves": [
+      "[move T4 T2]",
+      "[move T6 T2]",
+      "[move T7 T2]",
+      "[move T2 T3 3]",
+      "[draw]",
+      "[move W T2]"
+    ],
+    "tableau_to_foundation": [
+      "[move T4 T2]",
+      "[move T6 T2]",
+      "[move T6 F1]"
+    ],
+    "waste_to_foundation": [
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[move W F1]"
+    ],
+    "waste_to_tableau": [
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[draw]",
+      "[move W T1]"
+    ],
+    "move_all": [
+      "[move T1 T6 all]",
+      "[move T1 T2 all]"
+    ],
+    "multi_action": [
+      "[draw, move W F1]",
+      "[move T4 T2]",
+      "[move T6 T2]",
+      "[move T6 F1]",
+      "[move F1 T1]"
+    ],
+    "illegal_moves": [
+      "[move W X1]",
+      "[move T1 F1 2]",
+      "[move F1 F2]",
+      "[move W T1 2]",
+      "[move T1 F1]",
+      "[draw]",
+      "[move W F1]",
+      "[move F1 T1 2]",
+      "[move F1 T1]",
+      "[move T1 W]",
+      "[move T2 T3]"
+    ],
+    "format_errors_a": [
+      "draw",
+      "[draw",
+      "[]",
+      "[ ,draw]",
+      "[foo]"
+    ],
+    "format_errors_b": [
+      "[move W]",
+      "[move T1 T2 0]",
+      "[move T1 T2 x]"
+    ],
+    "forfeit": [
+      "[draw]",
+      "[forfeit]"
+    ]
+  }
+}

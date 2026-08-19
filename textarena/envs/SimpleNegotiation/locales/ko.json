@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "당신은 협상 게임의 플레이어 {player_id}입니다.\n일부 자원을 가지고 있으며, 목표는 보유 자원의 총 가치를 증가시키는 것입니다.\n현재 가지고 있는 자원과 관련된 가치는 다음과 같습니다:\n\t+ {resource_value_list}\n각 차례에 상대방과 대화를 나누고 거래 제안을 할 수 있습니다.\n다음 특수 토큰을 사용하여 행동을 수행하세요:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: 제시한 자원 -> 요청한 자원]\n  - '[Accept]': 들어온 제안을 수락합니다.\n  - '[Deny]': 들어온 제안을 거절합니다 (기본).\n게임은 총 {max_turns} 차례 동안 진행됩니다."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "플레이어가 필요한 자원 없이 거래를 수락하려고 했습니다.",
+    "out_of_range": "플레이어 {player_id}, 유효하지 않은 행동. 열 {col}이 범위를 벗어났습니다.",
+    "already_full": "플레이어 {player_id}, 유효하지 않은 행동. 열 {col}이 가득 차 있습니다.",
+    "proposing_with_no_resource": "플레이어 {player_id}가 필요한 자원 없이 거래 제안을 하려고 했습니다.",
+    "incorrect_offer_format": "플레이어 {player_id}가 형식이 올바르지 않은 거래 제안을 했습니다.",
+    "no_new_offer": "플레이어 {player_id}가 새로운 거래 제안을 하지 않았습니다."
+  },
+  "offers": {
+    "reject": "플레이어 {player_id}가 거래 제안을 거절했습니다.",
+    "accept": "플레이어 {acceptor_id}가 플레이어 {proposer_id}의 거래 제안을 수락했습니다.",
+    "proposal": "플레이어 {player_id}가 플레이어 {opponent_id}에게 다음과 같은 제안을 했습니다: 제시한 항목: {offered} -> 요청한 항목: {requested}"
+  },
+  "outcome": {
+    "win": "플레이어 {winner_id}가 인벤토리 가치 증가가 더 커서 이겼습니다.",
+    "draw": "모든 플레이어의 인벤토리 가치 변화가 같아 무승부입니다."
+  }
+}

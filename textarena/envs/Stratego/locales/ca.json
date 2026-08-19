@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} a Stratego.\nEl teu objectiu és capturar la bandera del teu oponent o eliminar totes les seves peces mòbils.\nEl teu exèrcit ha estat col·locat per tu al tauler, incloent la teva bandera, bombes i altres peces de diferents rangs.\n\n### Instruccions de joc\n1. **Regles de moviment:**\n   - En el teu torn, pots moure una peça un pas a una casella adjacent (amunt, avall, esquerra o dreta) que ja està ocupada per les teves peces.\n   - Exemple: Una peça pot moure's d'A1 a B1 o A1 a A2 si B1 i A2 no estan col·locades amb les peces pròpies del jugador.\n   - Si la peça seleccionada és una bomba o una bandera, no pot ser moguda.\n2. **Batalles:**\n   - Si et mous a una casella ocupada per una peça de l'oponent, llavors es produirà una batalla:\n     - La peça amb el rang més alt guanya i elimina la peça de l'oponent.\n     - Si els rangs són iguals, ambdues peces són eliminades del tauler.\n     - **Casos especials:**\n       - Les bombes eliminen la majoria de les peces atacants excepte els miners, que desactiven les bombes.\n       - Els espies poden derrotar el mariscal si l'espia ataca primer, però perden davant de totes les altres peces.\n3. **Objectius estratègics:**\n   - Identifica les peces de l'oponent a través dels seus moviments i batalles.\n   - Protegeix la teva bandera mentre intentes capturar la bandera de l'oponent.\n   - Utilitza els exploradors de manera estratègica per obtenir informació sobre les peces de l'oponent i atacar les febles.\n\n### Com fer un moviment:\n1. Especifica les coordenades de la peça que vols moure i el seu destí.\n2. Utilitza el format: [A0 B0], on A0 és la posició d'origen i B0 és el destí.\n   - Exemple: Per moure una peça de la fila 0, columna 0 a la fila 1, columna 0, introdueix [A0 B0].\n3. Assegura't que el destí sigui vàlid segons les regles de moviment anteriors.\n\n### Notes importants:\n- El tauler mostrarà les teves peces i les seves posicions, per exemple, MN, MS.\n- El tauler també mostrarà les posicions conegudes de les peces de l'oponent sense revelar els seus rangs, per exemple, ?.\n- Les quadrícules amb ~ són llacs i no es poden moure.\n- Com a suggeriment, comença el joc movent les peces que estan a les línies del front per obtenir informació sobre les peces de l'oponent. Les línies del front del jugador 0 i del jugador 1 són la fila D i la fila G, respectivament.\n\nAquí tens l'estat actual del tauler:\n"
+  },
+  "board": {
+    "current_board": "Tauler actual:\n\n{board}\nMoviments disponibles: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format d'acció invàlid. El jugador {player_id} no ha introduït un moviment en el format [A0 B0].",
+    "invalid_coordinates": "Format d'acció invàlid. El jugador {player_id} no ha introduït coordenades vàlides.",
+    "not_own_piece": "Format d'acció invàlid. El jugador {player_id} ha de moure una de les seves pròpies peces.",
+    "scout_through_pieces": "Format d'acció invàlid. El jugador {player_id} no pot moure un explorador a través d'altres peces.",
+    "scout_diagonal": "Format d'acció invàlid. El jugador {player_id} no pot moure un explorador en diagonal.",
+    "non_scout_multi_square": "Format d'acció invàlid. Les peces, excepte els exploradors, només poden moure's una casella a la vegada.",
+    "move_into_lake": "Format d'acció invàlid. El jugador {player_id} no pot moure's al llac.",
+    "move_onto_own_piece": "Format d'acció invàlid. El jugador {player_id} no pot moure's sobre la seva pròpia peça.",
+    "move_bomb_or_flag": "Format d'acció invàlid. El jugador {player_id} no pot moure una bomba o una bandera."
+  },
+  "game_action": {
+    "you_moved": "Has mogut la teva peça de {source} a {dest}.",
+    "opponent_moved": "El jugador {player_id} ha mogut una peça de {source} a {dest}.",
+    "you_equal_ranks": "Has mogut la teva peça de {source} a {dest}. La peça atacant era {attacking_rank} i la peça de destí era {target_rank}. Com que els rangs són iguals, ambdues peces han perdut.",
+    "opponent_equal_ranks": "El jugador {player_id} ha mogut una peça de {source} a {dest}. La peça atacant era {attacking_rank} i la peça de destí era {target_rank}. Com que els rangs són iguals, ambdues peces han perdut.",
+    "you_miner_defused": "Has mogut la teva peça de {source} a {dest}. La peça atacant era {attacking_rank} i la peça de destí era {target_rank}. Com que els miners poden desactivar les bombes, has guanyat la batalla.",
+    "opponent_miner_defused": "El jugador {player_id} ha mogut una peça de {source} a {dest}. La peça atacant era {attacking_rank} i la peça de destí era {target_rank}. Com que els miners poden desactivar les bombes, has perdut la batalla.",
+    "you_bomb_lost": "Has mogut la teva peça de {source} a {dest}. La peça atacant era {attacking_rank} i la peça de destí era {target_rank}. Com que l'atacant no és un miner, has perdut la batalla.",
+    "opponent_bomb_won": "El jugador {player_id} ha mogut una peça de {source} a {dest}. La peça atacant era {attacking_rank} i la peça de destí era {target_rank}. Com que l'atacant no és un miner, has guanyat la batalla.",
+    "you_spy_won": "Has mogut la teva peça de {source} a {dest}. La peça atacant era {attacking_rank} i la peça de destí era {target_rank}. Com que l'atacant és un espia i el destí és un mariscal, has guanyat la batalla.",
+    "opponent_spy_lost": "El jugador {player_id} ha mogut una peça de {source} a {dest}. La peça atacant era {attacking_rank} i la peça de destí era {target_rank}. Com que l'atacant és un espia i el destí és un mariscal, has perdut la batalla.",
+    "you_higher_won": "Has mogut la teva peça de {source} a {dest}. La peça atacant era {attacking_rank} i la peça de destí era {target_rank}. Com que l'atacant és de rang superior al destí, has guanyat la batalla.",
+    "opponent_higher_lost": "El jugador {player_id} ha mogut una peça de {source} a {dest}. La peça atacant era {attacking_rank} i la peça de destí era {target_rank}. Com que l'atacant és de rang superior al destí, has perdut la batalla.",
+    "you_lower_lost": "Has mogut la teva peça de {source} a {dest}. La peça atacant era {attacking_rank} i la peça de destí era {target_rank}. Com que l'atacant és de rang inferior al destí, has perdut la batalla.",
+    "opponent_lower_won": "El jugador {player_id} ha mogut una peça de {source} a {dest}. La peça atacant era {attacking_rank} i la peça de destí era {target_rank}. Com que l'atacant és de rang inferior al destí, has guanyat la batalla."
+  },
+  "outcome": {
+    "flag_captured": "El jugador {player_id} ha capturat la bandera de l'oponent!",
+    "no_movable_pieces": "El jugador {winner_id} guanya! El jugador {loser_id} no té més peces mòbils."
+  }
+}

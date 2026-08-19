@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Igra počinje. Adut: {trump_suit} (adut karta: {trump_str}).",
+    "no_trump_card": "nema"
+  },
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} u Njemačkom Vistu.\n{phase_info}\nDržite {hand_size} karata.\nOdigrajte kartu s '[play N]', gdje je N njena pozicija u vašoj ruci (na primjer '[play 3]').",
+    "phase_learning": "FAZA UČENJA: pobjednik svake runde uzima licem okrenutu kartu, a gubitnik vuče sljedeću kartu iz špila. Runde osvojene u ovoj fazi ne računaju se prema pobjedi.",
+    "phase_playing": "FAZA IGRE: špil je iscrpljen. Svaka runda od sada računa prema pobjedi."
+  },
+  "next_card": {
+    "playing_phase": "Nema karte za ponudu - faza igre je počela.",
+    "deck_empty": "Špil je prazan - nema karte za ponudu.",
+    "available": "Karta za ponudu: {card}",
+    "available_trump": "Karta za ponudu: {card} (ADUT)"
+  },
+  "invalid_move": {
+    "wrong_format": "Neispravan format poteza. Koristite '[play N]' za odigravanje N-te karte u vašoj ruci.",
+    "bad_position": "Ta pozicija karte ne postoji. Držite {hand_size} karata.",
+    "must_follow_suit": "Morate pratiti boju i odigrati {lead_suit} kartu.",
+    "invalid_play": "Ta karta ne može biti odigrana."
+  },
+  "game_action": {
+    "played": "Igrač {player_id} odigrao {card}."
+  },
+  "trick": {
+    "won": "Igrač {winner_id} osvaja rundu s {card}.",
+    "won_learning": "Igrač {winner_id} osvaja rundu s {card} i uzima licem okrenutu kartu."
+  },
+  "phase": {
+    "learning_complete": "Špil je iscrpljen. Faza učenja je gotova - svaka preostala runda računa prema pobjedi."
+  },
+  "draw": {
+    "winner_received": "Osvojili ste rundu i primili {card}.",
+    "loser_received": "Izgubili ste rundu i izvukli {card} iz špila.",
+    "winner_preview": "Sljedeća karta za ponudu je {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Runde osvojene do sada - Igrač 0: {tricks0}, Igrač 1: {tricks1}",
+    "scores_playing": "Bodovne runde - Igrač 0: {tricks0}, Igrač 1: {tricks1}",
+    "phase": "Faza: {phase}",
+    "phase_learning": "Faza: {phase} ({remaining_cards} karata preostalo u špilu)"
+  },
+  "hand": {
+    "no_cards": "Nema karata",
+    "no_cards_in_hand": "Nema karata u ruci",
+    "header": "Vaša ruka:",
+    "trump_indicator": " (ADUT)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Nema karata odigranih još u ovoj rundi.",
+    "header": "Trenutna runda:",
+    "trump_indicator": " (ADUT)",
+    "card_line": "{observation}\n  Igrač {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Igra nije počela",
+    "header": "=== NJEMAČKI VIST ===",
+    "phase": "{observation}\nFaza: {phase}",
+    "trump_suit": "{observation}\nAdut: {trump_suit}",
+    "trump_card": "{observation}\nAdut karta: {card}",
+    "cards_left": "{observation}\nKarte preostale u špilu: {count}",
+    "next_card": "{observation}\nSljedeća karta za pobjednika: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nTrenutna runda:",
+    "trump_indicator": " (ADUT)",
+    "trick_line": "{observation}\n  Igrač {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nIgrač {player_id}: {scoring} bodovnih rundi ({tricks} ukupno), {hand_size} karata u ruci"
+  },
+  "outcome": {
+    "summary": "Faza učenja - Igrač 0: {l0}, Igrač 1: {l1}. Faza igre - Igrač 0: {p0}, Igrač 1: {p1}. Igrač {winner_id} pobjeđuje s {winner_tricks} bodovnih rundi!"
+  }
+}

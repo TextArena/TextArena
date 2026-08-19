@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Du är {role} i Colonel Blotto.\nDitt mål är att vinna fler omgångar än din motståndare.\nI varje omgång, fördela exakt {num_total_units} enheter över fälten {field_names}.\nSpelaren som fördelar fler enheter till ett fält vinner det fältet, och spelaren som vinner fler fält vinner omgången.\nTill exempel fördelar '[A7 B7 C6]' 7 enheter till A, 7 till B och 6 till C.",
+    "commander_alpha": "Befälhavare Alfa",
+    "commander_beta": "Befälhavare Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Omgång {current_round}/{num_rounds} ===\nVunna omgångar - Befälhavare Alfa: {alpha_score}, Befälhavare Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nOmgång {current_round}\nBefälhavare Alfa fördelade: {p0_allocations}\nBefälhavare Beta fördelade: {p1_allocations}\n",
+    "winner_alpha": "{message}Vinnare: Befälhavare Alfa",
+    "winner_beta": "{message}Vinnare: Befälhavare Beta",
+    "tie": "{message}Oavgjort!"
+  },
+  "invalid_move": {
+    "wrong_format": "Ogiltigt inmatningsformat. Använd: A:5, B:10, C:5",
+    "invalid_field": "Ogiltigt fältnamn. Giltiga fält: {field_names}",
+    "wrong_allocation_value": "Alla fördelningar måste vara icke-negativa heltal.",
+    "incorrect_total_units": "Du måste fördela exakt {num_total_units} enheter. Aktuell summa: {current_sum}",
+    "good_allocations": "Fördelningen är korrekt."
+  },
+  "outcome": {
+    "winner_alpha": "Befälhavare Alfa vinner {score_0}-{score_1} efter {num_rounds} omgångar!",
+    "winner_beta": "Befälhavare Beta vinner {score_1}-{score_0} efter {num_rounds} omgångar!",
+    "draw": "Spelet slutar oavgjort {score_0}-{score_1} efter {num_rounds} omgångar!",
+    "early_winner_alpha": "Befälhavare Alfa vinner {scores_0}-{scores_1} (majoritet uppnådd)!",
+    "early_winner_beta": "Befälhavare Beta vinner {scores_1}-{scores_0} (majoritet uppnådd)!"
+  }
+}

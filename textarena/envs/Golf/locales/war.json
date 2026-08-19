@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Naglalar ka hin Golf (Card Game) - Player {player_id}.\nTuyo: Makakuha han pinakabababa nga total nga iskor ha ini nga usa ka round. Kon an mga column may pareho nga bili, ginsumahan hira komo 0.\nMga Bili han Kard: A=1, 2-10=face value, J/Q=10, K=0\n\nMga Aksyon (gamita an eksakto nga mga bracket):\n- '[draw]' - Draw tikang ha deck\n- '[take]' - Kuhai tikang ha discard pile\n- '[swap X Y]' - Ipalit an drawn kard ha posisyon X (row) Y (column)\n- '[discard]' - Iwaksi an drawn kard\n"
+  },
+  "board": {
+    "drew": "Nag-draw ka: {card}\nKinahanglan ka [swap X Y] o [discard] it.",
+    "took": "Nakakuha ka: {card} tikang ha discard pile\nKinahanglan ka mag [swap X Y] ini (diri pwede magdiskartha).",
+    "peeked": "Nakita mo an posisyon ({row},{col}): {card}",
+    "turn_view": "Imo kamot:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Waray"
+  },
+  "options": {
+    "final_turns": "Final turns! Imo mga opsyon: [draw], [take], [peek X Y]",
+    "draw": "Imo mga opsyon: [draw], [take]",
+    "must_swap": "Kinahanglan mo: [swap X Y] (diri makakabantad hin mga kard tikang han ginkakawat nga kadamo)",
+    "swap_or_discard": "Kinahanglan ka: [swap X Y] o [discard]"
+  },
+  "hand": {
+    "no_cards": "Waray mga kard.",
+    "header": "Col: 1 2 3 An mga tawo nga nag-uukoy ha Roma.",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} nagpalit {new} ha {old} ha posisyon ({row},{col})",
+    "discarded": "Player {pid} nagdiskartha {card}"
+  },
+  "message": {
+    "deck_empty": "An deck waray na! Natatapos an dula dayon.",
+    "knocked": "Player {pid} nag-knock! Kada iba nga player may usa pa ka turno.",
+    "final_round": "Ang manugdula nga {pid} {reason}! Kada iba nga manugdula may usa pa ka turno."
+  },
+  "reason": {
+    "all_revealed": "may ada tanan kartas na nabunyagan"
+  },
+  "invalid": {
+    "wrong_action": "Gamita an usa ka bracketed action: [draw], [take], [swap X Y], [discard], [knock], o [peek X Y]",
+    "discard_empty": "An mga basura waray na!",
+    "must_draw_first": "Kinahanglan ka muna mag [draw], [take], [knock], o [peek X Y]",
+    "cannot_discard_taken": "Diri mo makukuha an kard nga ginkuha tikang ha tinigib, kinahanglan ibaylo ito.",
+    "have_drawn_card": "Mayda ka nakakuha nga card. Kinahanglan ka mag [swap X Y] o [discard] ini.",
+    "need_drawn_swap": "Kinahanglan mo hin gin-iibanan nga kard basi magbaylo.",
+    "need_drawn_discard": "Kinahanglan mo hin gin-ihap nga kard basi makalikay.",
+    "out_of_bounds": "Posisyon ha gawas han mga limit. Gamita an row 1-{max_row}, column 1-{max_col}",
+    "knock_with_card": "Diri ka makakagtuktok nga may-ada ginkuha nga kard. Taposon anay an imo turno.",
+    "already_knocked": "May-ada na nagpirma hini nga ronda.",
+    "already_revealed": "Iginpakita na ito nga kard!"
+  },
+  "summary": {
+    "full": "Kataposan! Player {winner} nagdaog ha iskor nga {score} puntos!\n\nKataposan nga mga Iskor:\n{scores}",
+    "line": "Player {pid}: {score} puntos\n"
+  },
+  "board_str": {
+    "title": "=== GOLF NGA DALAGAN===",
+    "discard": "Paglabay hin mga piraso: {card}",
+    "knocked": "An manlalaro {pid} in nagtuktok!",
+    "player_header": "Player {pid} (Scoring: {score}):"
+  }
+}

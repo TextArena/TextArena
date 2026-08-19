@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} ({piece}). Vastustaja on ({opp}). Lähetä siirrot muodossa '[b1 c3]' (alku → loppu). Kaikki palat liikkuvat shakin ratsujen tavoin.\nJokainen nappaus tuo {score_per_capture} pistettä. Peli päättyy {max_moves} siirron jälkeen tai kun pelaajalla ei ole laillisia siirtoja / paloja. Korkeampi pistemäärä voittaa."
+  },
+  "board": {
+    "current_board": "Siirto #{move_count}\n\n{board}\n\nSaatavilla olevat siirrot: {moves}"
+  },
+  "invalid_move": {
+    "bad_format": "Väärä muoto. Käytä '[b1 c3]'.",
+    "unknown_square": "Tuntematon ruutu.",
+    "not_your_piece": "Lähtöruudussa ei ole omaa palaa.",
+    "own_piece": "Ei voi laskeutua oman palan päälle.",
+    "not_knight": "Ei ratsun siirto."
+  },
+  "game_action": {
+    "moved": "Pelaaja {player_id} siirsi palansa ruudusta {frm} ruutuun {to}.",
+    "capture": "{observation} Nappaa palan! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Pelaajalla {player_id} ei ole paloja.",
+    "cannot_move": "Pelaaja {player_id} ei voi siirtää.",
+    "higher_score": "Korkeampi nappaustulos.",
+    "move_limit": "Siirtorajoitus saavutettu."
+  }
+}

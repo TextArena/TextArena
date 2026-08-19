@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i et spill av Indian Poker.\n- 52-korts stokk; du ser bare motstanderens kort.\n- Innsats {ante} chip(s) hver runde, {max_rounds} runde(r) totalt.\n- Gyldige trekk: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X er et positivt heltall ≤ din chip-teller.)\n- Høyeste skjulte kort vinner potten ved showdown.\n"
+  },
+  "round": {
+    "announce": "### Runde {current_round}/{max_rounds}\nMotstanderens kort er: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Oppgi nøyaktig ÉN parentesert handling, f.eks. '[check]', '[bet 2]', '[call]', '[raise 3]', eller '[fold]'.",
+    "cannot_check": "Kan ikke [check] - du står overfor et veddemål.",
+    "amount_min": "Veddemål / Økning må være ≥ 1.",
+    "cannot_bet": "Kan ikke [bet] - må [call] / [raise] / [fold].",
+    "nothing_to_call": "Ingenting å kalde; du kan [check] i stedet.",
+    "no_bet_to_raise": "Bruk [bet X] for å åpne; det er ingen veddemål å øke.",
+    "insufficient": "Utilstrekkelig med chip for den handlingen."
+  },
+  "game_action": {
+    "action": "Spiller {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kostnad {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Dine mulige handlinger: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Spiller {winner}. (Bankroller P0:{p0}, P1:{p1})",
+    "folded": "Spiller {player_id} ga opp.",
+    "showdown_win": "Showdown: {card_win} slår {card_lose}.",
+    "showdown_tie": "Showdown uavgjort: begge {card}. Pot delt – hver mottar {split}."
+  },
+  "outcome": {
+    "p0_wins": "Spiller 0 vinner ({bank0} > {bank1})",
+    "p1_wins": "Spiller 1 vinner ({bank1} > {bank0})",
+    "draw": "Like mange chip etter alle runder"
+  }
+}

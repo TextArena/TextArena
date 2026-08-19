@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Eres el jugador {player_id}. Estás jugando al Juego de Memoria.\nTu objetivo es emparejar más pares de cartas del tablero que tu oponente.\nEn tu turno, selecciona dos cartas para darles la vuelta introduciendo los números de fila y columna de la primera y la segunda carta, respectivamente, como '[0 1 1 0]', donde la primera carta se encuentra en la fila 0 y la columna 1, y la segunda carta se encuentra en la fila 1 y la columna 0.\nSi las dos cartas coinciden, obtienes un punto y las cartas permanecen boca arriba. Si no coinciden, vuelven a colocarse boca abajo, por ejemplo, '.'.\nLa partida termina cuando se han emparejado todos los pares."
+  },
+  "board": {
+    "current_board": "Tablero actual:\n{board}",
+    "current_game_board": "Tablero de juego actual:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movimiento no válido. El jugador {player_id} no respondió con una dirección válida entre corchetes.",
+    "out_of_bounds": "Movimiento no válido. El jugador {player_id} seleccionó una posición fuera de los límites.",
+    "same_card_twice": "Movimiento no válido. El jugador {player_id} seleccionó la misma carta dos veces.",
+    "already_matched": "Movimiento no válido. El jugador {player_id} seleccionó una o ambas cartas que ya habían sido emparejadas."
+  },
+  "game_message": {
+    "cards_match": "¡Las cartas seleccionadas por el jugador {player_id} en las posiciones [{r1} {c1}] y [{r2} {c2}] coinciden!",
+    "cards_no_match": "Las cartas seleccionadas por el jugador {player_id} no coinciden. Las cartas en las posiciones [{r1} {c1}] y [{r2} {c2}] son {pos1} y {pos2}, respectivamente."
+  },
+  "outcome": {
+    "draw": "Ambos jugadores emparejaron el mismo número de pares de cartas.",
+    "win": "¡El jugador {winner_id} ha ganado!",
+    "turn_limit": "Se ha alcanzado el límite de turnos. La partida ha terminado. El jugador 0 obtuvo {score_0} puntos y el jugador 1 obtuvo {score_1} puntos.",
+    "turn_limit_win": "{reason} ¡El jugador {winner_id} ha ganado!"
+  }
+}

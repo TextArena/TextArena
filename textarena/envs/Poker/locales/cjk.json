@@ -1,0 +1,80 @@
+{
+  "_comment": "Texas Hold'em Poker locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[Check]', '[Call]', '[Fold]', '[Bet N]', '[Raise N]'), the card labels (ranks 2-10/J/Q/K/A and suits ♠/♥/♦/♣), the SB/BB blind abbreviations, or numeric chip/pot/bet amounts.",
+  "_slots": {
+    "{player_id}": "A player number",
+    "{pid}": "A player number",
+    "{winner}": "The player number who wins",
+    "{num_players}": "Total number of players at the table",
+    "{num_rounds}": "Total number of hands in the game",
+    "{starting_chips}": "Starting chip stack, e.g. 1000",
+    "{small_blind}": "Small blind amount, e.g. 10",
+    "{big_blind}": "Big blind amount, e.g. 20",
+    "{round}": "Current hand number",
+    "{street}": "The current betting street name (Pre-flop/Flop/Turn/River), pre-localized",
+    "{pot}": "Current pot size",
+    "{current_bet}": "The current bet to match",
+    "{comm}": "Comma-separated visible community cards, e.g. '6♥, 4♥, 3♥'",
+    "{lines}": "Newline-joined per-player status lines, pre-localized",
+    "{hole0}": "The player's first hole card, e.g. '3♣'",
+    "{hole1}": "The player's second hole card, e.g. '9♠'",
+    "{role_txt}": "Pre-localized role annotation in parentheses, or empty",
+    "{chips}": "A chip amount formatted with two decimals, e.g. '990.00'",
+    "{bet}": "A bet amount formatted with two decimals, e.g. '10.00'",
+    "{status}": "Pre-localized player status (active/folded/all-in)",
+    "{amount}": "A chip amount",
+    "{total}": "A player's total committed bet amount",
+    "{c0}": "A revealed hole card, e.g. '3♣'",
+    "{c1}": "A revealed hole card, e.g. '9♠'",
+    "{reveals}": "Newline-joined per-player showdown reveal lines, pre-localized",
+    "{community}": "Comma-separated community cards",
+    "{winners}": "A list of tied winner player numbers, e.g. [0, 1]",
+    "{share}": "The chip share each tied winner receives",
+    "{ranking}": "The final ranking list of player numbers, low to high"
+  },
+  "player_prompt": {
+    "intro": "Uli mwine wa kufikisha {player_id} mu kisomo cha Poker cha Texas Hold'em cha {num_players} bantu.\nMashishi ya kisomo:\n- {num_rounds} mikono yote\n- Kusokota kwa ntandiko: {starting_chips} chipu\n- Mabinda: {small_blind}/{big_blind}\n\nMikakati iliyopo (tokeni sahihi):\n  '[Check]'  - wakati hakuna beti iliyopo\n  '[Call]'   - lingana na beti iliyopo\n  '[Fold]'   - suka mkono wako\n  '[Bet N]'  - fungua kwa N chipu\n  '[Raise N]'- ongeza kwa N chipu\n"
+  },
+  "game": {
+    "start": "Kuanza kisomo kipya cha Poker cha Texas Hold'em cha {num_rounds}-round na {num_players} bantu."
+  },
+  "board": {
+    "panel": "===== Mkono {round} / {num_rounds} - {street} =====\nNtandiko: {pot} | Beti iliyopo: {current_bet}\nBodi iliyopo: [{comm}]\n{lines}\nShimo lako: {hole0}, {hole1}\n==============================================",
+    "player_line": "P{pid}{role_txt}: {chips} chipu | beti {bet} | {status}",
+    "street_preflop": "Kabla ya kufikisha",
+    "street_flop": "Flop",
+    "street_turn": "Turn",
+    "street_river": "River",
+    "role_dealer": "Dealer",
+    "role_sb": "SB",
+    "role_bb": "BB",
+    "status_active": "active",
+    "status_folded": "folded",
+    "status_all_in": "all-in"
+  },
+  "invalid_move": {
+    "wrong_action": "Kakati ya Poker isiyofaa.",
+    "check_facing_bet": "Hauwezi kuangalia ukikabiliwa na beti.",
+    "raise_too_small": "Kuongeza lazima iwe kubwa kuliko beti iliyopo.",
+    "game_complete": "Kisomo tayari kimekamilika."
+  },
+  "message": {
+    "eliminated_invalid": "Mwine wa kufikisha {pid} aliondolewa kwa sababu ya kakati isiyofaa."
+  },
+  "action": {
+    "fold": "Mwine wa kufikisha {pid} anakunja.",
+    "check": "Muthemba {pid} osokola.",
+    "call": "Mwine wa kufikisha {pid} anaita {amount}.",
+    "bet": "Mwine wa kufikisha {pid} anafungua hadi {total}.",
+    "raise": "Mwine wa kufikisha {pid} anaongeza hadi {total}."
+  },
+  "showdown": {
+    "fold_win": "Mwine wa kufikisha {winner} anashinda ntandiko wa {pot} chipu (wote wengine wamekunja).",
+    "reveal_line": "Player {pid}: {c0} {c1}",
+    "reveal": "Mzunguko wa kuonyesha {round}:\n{reveals}\nKadi za jumuiya: {community}",
+    "win": "Mwine wa kufikisha {winner} anashinda ntandiko wa {pot} chipu.",
+    "tie": "Usawa kati ya wachezaji {winners}. Kila mmoja anapokea {share} chipu."
+  },
+  "outcome": {
+    "final": "Uainishaji wa mwisho (chini→juu): {ranking}. Mshindi: Mwine wa kufikisha {winner}"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "_comment": "Tệp ngôn ngữ TicTacToe. KHÔNG được dịch các khóa (bên trái). Chỉ dịch các giá trị (bên phải).",
+  "_slots": {
+    "{player_id}": "Số thứ tự của người chơi, ví dụ 0 hoặc 1",
+    "{symbol}": "Dấu của người chơi, hoặc X hoặc O",
+    "{opponent_symbol}": "Dấu của đối thủ, hoặc X hoặc O",
+    "{cell}": "Số ô trên bàn cờ từ 0 đến 8"
+  },
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong Tic Tac Toe.\nMục tiêu của bạn là thắng ba ô liên tiếp (ngang, dọc hoặc chéo) trên bàn cờ.\nLượt của bạn, bạn nên chọn số ô (0-8) bạn muốn đặt dấu tiếp theo.\nVí dụ, '[4]' đặt dấu của bạn vào ô giữa của bàn cờ.\nLà Người chơi {player_id}, bạn sẽ là '{symbol}', trong khi đối thủ của bạn là '{opponent_symbol}'."
+  },
+  "board": {
+    "current_board": "Bàn cờ hiện tại:\n\n{board}\n\nCác nước đi có thể thực hiện: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nước đi đã gửi không đúng định dạng.",
+    "out_of_range": "{cell} không phải là ô hợp lệ. Phải nằm trong khoảng từ 0 đến 8.",
+    "already_occupied": "Ô {cell} đã bị chiếm."
+  },
+  "game_action": {
+    "placed": "Người chơi {player_id} đã đặt dấu ({symbol}) vào ô {cell}."
+  },
+  "outcome": {
+    "win": "Người chơi {player_id} đã thắng!",
+    "draw": "Trò chơi hòa!"
+  }
+}

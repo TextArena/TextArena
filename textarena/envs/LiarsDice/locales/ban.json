@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Iraga Pemain {player_id} ring permainan Liar's Dice antuk {num_players} pemain.\nAturan:\n- Ring giliran Iraga, Iraga dados:\n  1) Ngajukan bid anyar antuk kuantitas utawi nilai wajah sing lebih tegeh (utawi makakalih) tinimbang bid kantun; contone '[Bid: 3, 4]',\n  2) Nelpon bid pinih anyar antuk ngetik '[Call]'.\n\nYen Iraga nelpon:\n  - Yen cacah dadu sing cocok ring nilai wajah sing diitung kurang saking bid, pemain bid pinih anyar kalah.\n  - Wenten Iraga, pemain sing nelpon kalah.\nPemain sing kalah dados 0 dados kalah. Pemain sing kantun pinih anyar menang."
+  },
+  "board": {
+    "per_player": "\tPemain {p}: {d}",
+    "new_round": "\nGiliran anyar - Cacah dados sing kantun: {dice_summary}\nDadu Iraga kantun: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Pemain {current_player_id} nelpon! Cacah dadu sing cocok ring nilai wajah {face_value} inggih {count}, sing kurang saking {quantity}.\nPemain {loser_id} (pemain bid pinih anyar) kalah.",
+    "caller_loses": "Pemain {current_player_id} nelpon! Cacah dadu sing cocok ring nilai wajah {face_value} inggih {count}, sing lebih utawi pateh {quantity}.\nPemain {loser_id} (pemain sing nelpon) kalah."
+  },
+  "action": {
+    "bid_announce": "Pemain {player_id} ngajukan bid {quantity} ring nilai wajah {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Ngundang kagelar tanpa bid sadurungné.",
+    "invalid_bid": "Bid sing salah: {reason}",
+    "not_recognized": "Aksi sing dikirim pemain tanpa dikenal dados '[Bid: X, Y]' utawi '[Call]'. Aksi sing dikirim: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Kuantitas anyar {new_quantity} kurang saking kuantitas kantun {current_quantity}.",
+    "face_lower": "Nilai muka anyar {new_face_value} luwih alit tekén {current_face_value} sané mangkin.",
+    "identical": "Bid sing dikirim pateh antuk bid kantun.",
+    "face_range": "Nilai nominal patut pantaraning 1 miwah 6."
+  },
+  "message": {
+    "eliminated_invalid": "Pamain {player_id} kaicalang antuk pamargi nénten patut."
+  },
+  "outcome": {
+    "win": "Pemain {winner} menang! Peringkat pinih anyar: {final_ranking}"
+  }
+}

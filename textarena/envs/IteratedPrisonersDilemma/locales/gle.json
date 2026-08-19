@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Tú an Imreoir {player_id} i gcluiche Dilemma Príosúin Athdhéanach a dhéanann {num_rounds} babhta.\n\nStruchtúr an Chluiche:\n- Roimh gach cinneadh tá {total_conversation_rounds} babhta agat chun cumarsáid a dhéanamh saor.\n- Ina dhiaidh sin, roghnaíonnimid beirt imreoir comhoibriú nó éirí as comhoibriú go comhuaineach.\n\nMaigheach Payoff (daingean gach babhta):\n- Comhoibriú beirt ➜ gach duine {cooperate_reward}\n- Éirí as comhoibriú beirt ➜ gach duine {mutual_defect_reward}\n- Duine amháin ag éirí as, duine amháin ag comhoibriú ➜ an Duine a d'Éirigh as {defect_reward}, an Comhoibrí {sucker_reward}\n\nConas Imirt:\n- Le linn comhrá: cuir aon téacs is mian leat.\n- Le linn chineadh: áireamh '[Cooperate]' nó '[Defect]' (gan cás a chur san áireamh). Tá tú in ann téacs breise a chur roimh nó tar éis an tóicin."
+  },
+  "phases": {
+    "conversation_finished": "Tá an comhrá críochnaithe don bhbabhta {round}. Freagair le '[Cooperate]' nó '[Defect]' laistigh de \\boxed{{}}.",
+    "starting_round": "--- Ag Tús Bhabhta {round} ---",
+    "round_summary": "Torthaí bhabhta {round}:\n{outcome}\nThug an Imreoir 0 {r0} (iomlán {score_0}), thug an Imreoir 1 {r1} (iomlán {score_1})."
+  },
+  "outcome": {
+    "winner": "Buann an Imreoir {winner} {win_score} - {lose_score}.",
+    "draw": "Scóráil an dá imreoir {s0}.",
+    "round_both_cooperate": "D'oibrigh an dá imreoir le chéile.",
+    "round_both_defect": "D'imigh an dá imreoir.",
+    "round_p0_cooperates_p1_defects": "Comhoibrigh imreoir 0, d'éirigh Imreoir 1 as.",
+    "round_p0_defects_p1_cooperates": "Imreoir 0 defected, comhoibrigh imreoir 1."
+  }
+}

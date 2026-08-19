@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Uri kucheza Klondike Solitaire. Chinangwa chako ndicho kubvisa kero zese kuenda kwenye matundu ekuumba.\n\nMiongozo ya Mchezo:\n- Matundu ekuumba (F1-F4): Vaka mberi kubva Ace kuenda King mune zviviri\n- Matundu ematope (T1-T7): Vaka shure kuchinjana mavara (tsvuku pamusoro pechena, chena pamusoro petsvuku)\n- Chigavatigavi: Bvisa kero kuenda kwenye matundu emasuru\n- Masuru (W): Kero yepamusoro inovakwa\n\nMicomando:\n- 'draw' - Bvisa kero kubva kwenye chigavatigavi kuenda kwenye masuru\n- 'move <source> <destination> [count]' - Bvisa kero kati kematundu\n  Mifano: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count inaweza kuva 'all', inodzinga kubvisa kero zese zineuso.\n- 'forfeit' - Mhere game marira moira kupera na kubata mukundo wako wa sasa\n- Mazita ematundu: W (masuru), F1-F4 (matundu ekuumba), T1-T7 (matundu ematope)\n\nUnaweza kutevedza zvimwe zvimwe mukati mezuva imwe nekuchinjana nazvo nemakoma:\n  Mfano: 'draw, move W T1, move T2 F1'\n\nMambo anogona kubvisa pamusoro pematundu ematope asina kero.\nMicomando inotevedzwa mukati mezuva - ikabva imwe ikashaya, zvimwe zvimwe hazvichaitwa.\nTumia 'forfeit' ukatenda kunge kuimba kwemchezo kushaya kukunda."
+  },
+  "format_error": {
+    "no_brackets": "Chimiro chechiito chisina kukodzera. Chiito chinofanira kuva pakati pemabhenji.",
+    "no_closing_bracket": "Maitiro asina kukodzera. Kushaiwa kwekupedzisa bracket ']'",
+    "empty_command": "Komando kupuka. Nyora 'draw' kana 'move <source> <destination> [count]'",
+    "empty_action": "Chiito chisina chinhu",
+    "move_needs_args": "Komando ye 'move' inohitaji chikwata na chinozokwata. Maitiro: 'move <source> <destination> [count]'",
+    "count_positive": "Idadi inapaswa kuwa chanya au 'all'",
+    "count_invalid": "Idadi isiyo sahihi. Tumia nambari au 'all'",
+    "unknown_command": "Komando isingazivikanwi '{cmd}'. Shandisa 'draw', 'move <source> <destination> [count]', kana 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Kuitwa {n} chiito ((s) pamberi pokukundikana.",
+    "failed": "Hatua {n} ilishindwa: {msg}"
+  },
+  "move_result": {
+    "drew": "Akadhirowa kadhi ((s) kubva kuzvitoro kuenda kurara.",
+    "cannot_draw": "Havagoni kudhonza. Zvose zviri zviviri zvinhu zvomugove nezvokurasikirwa hazvina chinhu.",
+    "invalid_pile": "Zita risina kukodzera. Shandisa W, F1-F4, kana T1-T7",
+    "foundation_one_card": "Inogona kutamisa kadhi rimwe chete kufanogadzira.",
+    "waste_to_foundation_ok": "Kadhi rakatamiswa kubva mumarara kuenda kufanotangira F{dst}",
+    "waste_to_foundation_bad": "Haikwanise kutamisa kadhi rezvinhu zvisina basa kune iyo nheyo yemapuranga",
+    "tableau_to_foundation_ok": "Kardhu yakawuma kubva tableau T{src} ku foundation F{dst}",
+    "tableau_to_foundation_bad": "Haikwanise kutamisa tafura kadhi kune iyo nheyo yemapuranga",
+    "foundation_to_foundation": "Haikwanisi kufamba kubva pachikumbaridzo kuenda pane chimwe chikumbaradzo.",
+    "waste_to_tableau_one_card": "Inogona kungofambisa kadhi rimwe chete kubva pane zvakaraswa kuenda kutafura.",
+    "waste_to_tableau_ok": "Kutamiswa kadhi kubva tsvina kuti tafura T{dst}",
+    "waste_to_tableau_bad": "Haikwanise kuisa kadhi rekurasikirwa pane iyo tafura murwi",
+    "no_face_up": "Hapana makadhi akatarisana kuti afambise.",
+    "tableau_to_tableau_ok": "Kardhu {count} zikawuma kubva tableau T{src} ku T{dst}",
+    "tableau_to_tableau_bad": "Haitungamiri kubvisa {count} kardhu(s) kubva T{src} ku T{dst}",
+    "foundation_to_tableau_one_card": "Inogona kungofambisa kadhi rimwe chete kubva pahwaro kuenda patafura.",
+    "foundation_empty": "Foundation F{src} haina chinhu.",
+    "foundation_to_tableau_ok": "Kardhu yakawuma kubva foundation F{src} ku tableau T{dst}",
+    "foundation_to_tableau_bad": "Haikwanise kuisa hwaro kadhi patafura T{dst}",
+    "to_waste_or_stock": "Haikwanisi kutamiswa kunzvimbo dzinoshandiswa kana kuti dzinogadzirwa zvinhu."
+  },
+  "outcome": {
+    "forfeit": "Mutambo wakarasikirwa. Chiitiko chekupedzisira: {score} makadhi mune nheyo.",
+    "won": "Makorokoto, makakunda muKlondike Solitaire!",
+    "turn_limit": "Mchezo umemalizika! Umeifikia kiwango cha juu cha {max_turns} mizunguko. Alama: {score} kadi katika msingi."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== (Mashoko)",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Zvitoro: {stock} makadhi",
+    "waste": "Marara (W): {waste}",
+    "foundations_header": "Nheyo:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Chati:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

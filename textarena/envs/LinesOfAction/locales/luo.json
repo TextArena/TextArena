@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Inwe Player {player_id} katika mchezo wa LinesOfAction.\nGoli yako ni '{side}', goli la piny owacho ni '{other}'.\nMfumo wa kusonga: `[b1b3]` (kutoka-eneo hadi-eneo). Sunga mweri huruka kando, juu-mbali, au diagonally nambari ya miraba sawa na jumla ya goli (rangi yoyote) katika mstari ule. Inaweza kuruka juu ya goli yako mwenyewe, lakini si goli la piny owacho; kudhi kwa piny owacho kunaikamata.  Winwe wakati goli zako zote zimeunganishwa na jirani 8."
+  },
+  "board": {
+    "current_board": "Board: {board} mar ariyo e wi weche mag siasa."
+  },
+  "invalid_move": {
+    "wrong_format": "Yo ma ondikgo weche nyaka bed e2e4 (a,to coordinates).",
+    "no_piece": "Onge {side} kidieny e {coord}.",
+    "identical": "Kama ne giae koda kama ne gidhiyoe chalre.",
+    "not_straight_or_diagonal": "Nyaka ng'ato wuothi tir kata kochomo komachielo.",
+    "wrong_distance": "Nyaka ochwalgi e bor maromre gi kuonde ma gichokoree.",
+    "enemy_blocks": "Kit kodi kwa adui kawo koro.",
+    "destination_own": "Destination ma ne idhi chopoe en achiel kuom kuondego."
+  },
+  "game_action": {
+    "moved": "Player {player_id} ochung' {from} -> {to}",
+    "captured_suffix": "Player {player_id} osonga {from} -> {to} akakamata adui."
+  },
+  "outcome": {
+    "win": "Gik moko duto te oriwore.",
+    "draw_no_capture": "Owuotho 60 to ok omake.",
+    "draw_repetition": "Kituo kisikiwa mara tatu."
+  }
+}

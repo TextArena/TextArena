@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong Quantum Tic Tac Toe.\nBiểu tượng của bạn là '{symbol}', và số nước đi của bạn luôn là {parity} (ví dụ, X1, X3 hoặc O2, O4).\n\nMục tiêu: Thắng bằng cách tạo thành một đường thẳng gồm ba dấu cổ điển (được cố định từ các trạng thái chồng chất).\n\nCách chơi:\n- Mỗi lượt, đặt một dấu ma quái vào hai ô trống khác nhau theo định dạng '[a,b]'.\n- Các dấu này được liên kết và được đánh dấu như 'X1 / X1' hoặc 'O4 / O4'.\n- Bạn không thể đặt dấu ma quái vào ô đã bị sụp đổ (đã cố định).\n\nLuật sụp đổ:\n- Nếu nước đi của bạn tạo thành một chu trình trong đồ thị liên kết, nó sẽ tự động sụp đổ.\n- Mỗi dấu ma quái trong chu trình sẽ biến thành một dấu cổ điển ở một trong hai vị trí của nó.\n- Bất kỳ dấu ma quái phụ thuộc nào cũng sẽ sụp đổ.\n\nThắng cuộc:\n- Trò chơi kết thúc khi một người chơi có ba dấu cổ điển liên tiếp.\n- Nếu cả hai người chơi đều có một đường thẳng trong cùng một lần sụp đổ, người chơi có số nước đi lớn nhất thấp hơn sẽ thắng.\n\nVí dụ nước đi: '[0,4]' đặt một dấu ma quái vào ô 0 và 4."
+  },
+  "board": {
+    "current_board": "Bàn cờ Quantum Tic Tac Toe:\n\n{board}\n\nGửi nước đi của bạn theo định dạng '[a,b]' để đặt một dấu lượng tử vào hai vị trí."
+  },
+  "invalid_move": {
+    "wrong_format": "Định dạng không hợp lệ. Sử dụng '[a,b]'.",
+    "invalid_cells": "Chỉ số ô không hợp lệ hoặc trùng lặp.",
+    "already_solidified": "Một trong các ô đã bị sụp đổ."
+  },
+  "game_action": {
+    "placed": "Người chơi {player_id} đã đặt biểu tượng của họ trong trạng thái chồng chất giữa các ô {pos_a} và {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Trạng thái chồng chất phụ thuộc đã được giải quyết. Ô ({r}, {c}) hiện là {symbol}.",
+    "last_cell_resolved": "Trạng thái chồng chất cho ô cuối cùng đã được giải quyết. Ô ({r}, {c}) hiện là {symbol}.",
+    "superposition_resolved": "Trạng thái chồng chất đã được giải quyết. Ô ({r}, {c}) hiện là {symbol}."
+  },
+  "outcome": {
+    "win": "Người chơi {player_id} thắng với các dấu đã cố định!",
+    "draw": "Trò chơi hòa!"
+  }
+}

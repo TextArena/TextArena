@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Դուք խաղացողը {player_id} եք երեք խաղացողների Tic Tac Toe- ում: Ձեր խորհրդանիշը '{symbol} է: Դուք հերթով տեղադրում եք ձեր խորհրդանիշը 5x5 տախտակի վրա ՝ չորսից մի գիծ կազմելու համար: Գծերը կարող են լինել հորիզոնական, ուղղահայաց կամ շառավիղ: Ձեր քայլը ներկայացրեք '[4] ձեւաչափով ՝ նշելով 4-րդ բջիջը:"
+  },
+  "board": {
+    "current_board": "Ներկայիս խորհուրդը: {board} Առկա քայլերը: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Անհաստատված շարժման ձեւաչափ: Օգտագործեք \"[cell]\", որտեղ բջիջը 0-{max_cell} է:",
+    "out_of_range": "Անհաստատ բջիջի համարը: {cell}: Պետք է լինի 0-ից {max_cell}:",
+    "already_occupied": "Բջիջը {cell} արդեն զբաղված է:",
+    "made_invalid": "Խաղացողը {player_id} կատարեց անվավեր քայլ"
+  },
+  "game_action": {
+    "placed": "Խաղացողը {player_id} դնում է իր խորհրդանիշը ({symbol}) դաշտում ({row}, {col}) ։"
+  },
+  "outcome": {
+    "win": "Խաղացող {player_id} ({symbol}) հաղթեց:",
+    "draw": "Խաղը հավասար է:"
+  }
+}

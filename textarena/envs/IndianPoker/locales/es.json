@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id} en una partida de Indian Poker.\n- Baraja de 52 cartas; solo ves la carta del rival.\n- Apuesta inicial de {ante} ficha(s) en cada ronda, con un total de {max_rounds} ronda(s).\n- Movimientos válidos: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X es un número entero positivo <= tu cantidad de fichas.)\n- La carta oculta más alta gana el bote al mostrar las cartas.\n"
+  },
+  "round": {
+    "announce": "### Ronda {current_round}/{max_rounds}\nLa carta de tu rival es: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Proporciona exactamente UNA acción entre corchetes, p. ej., '[check]', '[bet 2]', '[call]', '[raise 3]' o '[fold]'.",
+    "cannot_check": "No puedes usar [check] - estás enfrentando una apuesta.",
+    "amount_min": "La cantidad de Bet / Raise debe ser ≥ 1.",
+    "cannot_bet": "No puedes usar [bet] - debes usar [call] / [raise] / [fold].",
+    "nothing_to_call": "No hay nada que igualar; puedes usar [check] en su lugar.",
+    "no_bet_to_raise": "Usa [bet X] para abrir; no hay ninguna apuesta que subir.",
+    "insufficient": "No tienes suficientes fichas para esa acción."
+  },
+  "game_action": {
+    "action": "Jugador {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (coste {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Tus acciones posibles: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Bote {pot} → Jugador {winner}. (Saldos P0:{p0}, P1:{p1})",
+    "folded": "El Jugador {player_id} se retiró.",
+    "showdown_win": "Revelación: {card_win} vence a {card_lose}.",
+    "showdown_tie": "Empate en la revelación: ambos tienen {card}. El bote se divide – cada uno recibe {split}."
+  },
+  "outcome": {
+    "p0_wins": "El Jugador 0 gana ({bank0} > {bank1})",
+    "p1_wins": "El Jugador 1 gana ({bank1} > {bank0})",
+    "draw": "Misma cantidad de fichas después de todas las rondas"
+  }
+}

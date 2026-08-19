@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in un gioco a due giocatori di Spite and Malice. Il tuo obiettivo è essere il primo a svuotare la tua pila di payoff.\n\n### Panoramica del gioco:\n- L'obiettivo è svuotare la tua pila di payoff giocando carte alle pile centrali.\n- Puoi giocare carte da tre fonti:\n  1. La tua **mano** (inizia ogni turno con fino a 5 carte in mano).\n  2. La **carta in cima alla tua pila di payoff**.\n  3. La **carta in cima a una delle tue pile di scarto**.\n\n### Regole di gioco:\n- Puoi giocare una carta a una pila centrale se è **di un rango superiore** alla carta in cima a quella pila (le pile centrali iniziano con l'Asso e vanno fino alla Regina; i Re sono jolly - possono essere giocati su qualsiasi carta ma non cambiano la sequenza di rango. Ciò significa che se un Re viene utilizzato dopo il 4, allora quel Re è classificato come 5 e la carta successiva deve essere un 6).\n- Se non puoi giocare altre carte, devi **scartare una carta** in una delle tue pile di scarto per terminare il tuo turno.\n- Se una pila centrale raggiunge la Regina, verrà svuotata automaticamente.\n- L'ordine di rango è: A=1, 2=2, ..., 9=9, J=10, Q=11, K come jolly.\n\n### Azioni:\n1. **Pescare**: All'inizio del tuo turno, pesca carte per riempire la tua mano fino a 5 carte. Inserisci **[draw]** per iniziare.\n2. **Giocare una carta**: Per giocare una carta, specifica la carta e la pila centrale in questo modo: **[play A♠ 0]** (dove 'A♠' è la carta e '0' è l'indice della pila centrale).\n3. **Scartare**: Se non puoi giocare altre carte, scarta una carta dalla tua mano in una pila di scarto per terminare il tuo turno. Inserisci **[discard A♠ 1]** (dove 'A♠' è la carta e '1' è l'indice della pila di scarto). Nota che non puoi scartare alcuna carta dalla pila di payoff. Puoi scartare solo le carte dalla tua mano.\n\n"
+  },
+  "board": {
+    "current_board": "Tavola attuale:\n\n{board}\nMosse disponibili: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pile centrali ---\n",
+    "pile": "{observation}Pila {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vista del Giocatore {player_id} ---\n",
+    "payoff": "{observation}Pila di payoff (Carta in cima): {top_card}, Lunghezza della pila di payoff: {payoff_length}\n",
+    "hand": "{observation}Mano: {hand}\n",
+    "discard": "{observation}Pile di scarto: {discard}\n",
+    "empty": "Vuoto"
+  },
+  "game_message": {
+    "no_cards_left": "Non ci sono più carte da pescare. Ricorda che puoi giocare carte da queste fonti:\n  1. La tua **mano**.\n  2. La **carta in cima alla tua pila di payoff**.\n  3. La **carta in cima a una delle tue pile di scarto**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato di mossa non valido. Il Giocatore {player_id} non ha risposto con una mossa valida tra parentesi quadre.",
+    "invalid_play": "Gioco non valido. Il Giocatore {player_id} ha cercato di giocare {card} sulla pila centrale {index}.",
+    "discard_from_payoff": "Scarto non valido. Il Giocatore {player_id} ha cercato di scartare una carta dalla pila di payoff.",
+    "discard_not_in_hand": "Scarto non valido. Il Giocatore {player_id} ha cercato di scartare una carta che non è nella sua mano.",
+    "wrong_move_type": "Tipo di mossa non valido. Il Giocatore {player_id} non ha risposto con un tipo di mossa valido."
+  },
+  "game_action": {
+    "you_drew": "Hai pescato carte.",
+    "opponent_drew": "Il Giocatore {player_id} ha pescato carte.",
+    "you_played": "Hai giocato {card} sulla pila centrale {index}.",
+    "opponent_played": "Il Giocatore {player_id} ha giocato {card} sulla pila centrale {index}.",
+    "you_discarded": "Hai scartato {card} nella pila di scarto {index}, il che significa anche che hai terminato il tuo turno. Nessun'altra azione tua sarà considerata per questo turno. Il Giocatore {next_player_id} andrà avanti.",
+    "opponent_discarded": "Il Giocatore {player_id} ha scartato {card} nella pila di scarto {index}, il che significa anche che ha terminato il suo turno. Nessun'altra azione del Giocatore {player_id} sarà considerata per questo turno. Giocatore {next_player_id}, andrai avanti. Inserisci la tua azione nel formato [azione carta indice_centrale]."
+  },
+  "outcome": {
+    "payoff_cleared": "Il Giocatore {current_player} ha svuotato la sua pila di payoff! Il Giocatore {current_player} vince!",
+    "deadlock_player_0": "Raggiunto un punto morto! Il Giocatore 0 vince con {player_0_payoff} carte rimanenti contro le {player_1_payoff} carte del Giocatore 1.",
+    "deadlock_player_1": "Raggiunto un punto morto! Il Giocatore 1 vince con {player_1_payoff} carte rimanenti contro le {player_0_payoff} carte del Giocatore 0.",
+    "deadlock_tie": "Raggiunto un punto morto con pareggio! Entrambi i giocatori hanno {player_0_payoff} carte rimanenti. Il Giocatore {current_player} vince per default."
+  }
+}

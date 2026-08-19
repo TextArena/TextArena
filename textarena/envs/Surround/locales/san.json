@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-खिलाड़ी परिवेष्टन {width}x{height} ग्रिड पर।\nआप खिलाड़ी {player_id} हैं। वैध चालें: '[up]' '[down]' '[left]' '[right]' या w/s/a/d।\nउद्देश्य: सभी दूसरों को जीवित रहना। निशान घातक हैं; दीवार के प्रहार मारते हैं; सिर-पर टकराव दोनों को मारते हैं।"
+  },
+  "board": {
+    "current": "वर्तमानः बोर्ड: {board}",
+    "after_moves": "समवर्ती गतिः {board}"
+  },
+  "game_action": {
+    "invalid_death": "खिलाडी {player_id} अवैधचलनेन मृतोऽभवत्।"
+  },
+  "outcome": {
+    "survived_win": "क्रीडाकरः {player_id} जीवितवान्; अन्यैः सर्वेभ्यः दुर्घटना अभवत् ।",
+    "all_crashed": "सर्वेषु क्रीडालयेषु समवेतं दुर्घटना अभवत् ।",
+    "outlived": "सर्वान् पराजित्य खिलाडी जीवितोऽभवत्।",
+    "all_dead": "सर्वेषु क्रीडालयेष्वपि मृताः।",
+    "turn_limit": "वक्रस्य सीमां प्राप्तः - यः अधिककालम् जीवितो भवति सः विजयी।",
+    "ranking": "{reason} अन्तिम क्रमवारी समूह (उत्तम→अधम): {groups}"
+  }
+}

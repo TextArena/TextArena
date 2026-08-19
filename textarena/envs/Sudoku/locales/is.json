@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id}. Þú ert að spila Sudoku.\nHér er núverandi staða Sudokuborðsins. Hver röð er númeruð frá 1 til 9, og hver dálkur er líka númeraður frá 1 til 9.\nTómir reitir eru táknaðir með '.', og fylltir reitir innihalda tölur frá 1 til 9.\n\nNúverandi Sudokuborð:\nMarkmið þitt er að fylla tóma reiti í 9x9 borðinu með tölum frá 1 til 9 þannig að:\n1. Hver röð inniheldur allar tölur frá 1 til 9 án endurtekningar.\n2. Hver dálkur inniheldur allar tölur frá 1 til 9 án endurtekningar.\n3. Hver af níu 3x3 undirborðum inniheldur allar tölur frá 1 til 9 án endurtekningar.\n\nReglur og leiðbeiningar:\n1. **Ekki yfirskrifa** upphaflegtölur sem eru veittar í borðinu.\n2. **Aðeins fylla** tóma reiti sem eru táknaðir með '.'.\n3. Þú mátt svara á hvaða máta sem þú vilt, en tryggja að svar þitt innihaldi sniðið '[röð dálkur tala]'.\n4. **Tryggja** að leikur þinn sé ekki ógiltur af Sudoku reglum. Ógiltir leikir munu leiða til refsinga.\nDæmi:\n- **Gildur Leikur**:\n  - Borðssnið fyrir Leik:\n  \n  - Leikur: `[5 3 7]`\n  - Skýring: Að setja 7 í röð 5, dálkur 3 brýtur ekki gegn neinum Sudoku reglum.\n\n- **Ógildur Leikur** (Yfirskrifa fylltan reit):\n  - Borðssnið fyrir Leik:\n  \n  - Leikur: `[1 1 9]`\n  - Skýring: Reitur (1,1) er þegar fylltur með 5. Þú getur ekki yfirskrifað hann.\n\n- **Ógildur Leikur** (Brýtur gegn Sudoku reglum):\n  - Borðssnið fyrir Leik:\n  \n  - Leikur: `[1 3 5]`\n  - Skýring: Að setja 5 í röð 1, dálkur 3 brýtur gegn reglu þar sem 5 er þegar til í röð 1.\n\nSaga leikja þinna og hugsana verður viðhengin þegar þú spilar fleiri umferðir. Notaðu sögu leikja þinna til að bæta ákvarðanir þínar með því að forðast leiki sem þú hefur reynt. Gangi þér vel!\n\n"
+  },
+  "board": {
+    "game_board": "Leikborð:\n{board}",
+    "board_state": "Staða borðs: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ógilt snið leiks. Leikmaður {player_id} svaraði ekki með gildu 'röð dálkur tala'.",
+    "out_of_bounds": "Ógiltur leikur. Leikmaður {player_id} reyndi að setja {num} í ({row}, {col}), sem er utan við mörk.",
+    "overwrite": "Ógiltur leikur. Leikmaður {player_id} reyndi að yfirskrifa fylltan reit ({row}, {col}).",
+    "violates_rules": "Ógiltur leikur. Leikmaður {player_id} reyndi að setja {num} í ({row}, {col}), sem brýtur gegn Sudoku reglum."
+  },
+  "outcome": {
+    "win": "Til hamingju! Leikmaður {player_id} kláraði Sudokuspilinu.",
+    "turn_limit": "Takmörk umferða hefur verið náð. Þú fylltir rétt {percent}% af tómum reitum."
+  }
+}

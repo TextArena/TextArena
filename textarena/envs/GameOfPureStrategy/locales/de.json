@@ -1,0 +1,32 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in einer Partie GameOfPureStrategy.\n- Du hältst die 13 Karten A bis K; jede Karte kann nur einmal verwendet werden.\n- In jeder Runde wird eine Preiskarte aufgedeckt. Spiele genau EINE Karte, indem du etwas schreibst, das ein Kartenkürzel in eckigen Klammern enthält, zum Beispiel '[Q]', '[10]', '[2]' ...\n- Die höhere Karte gewinnt den Preis einschließlich eines übertragenen Pots. Bei einem Gleichstand wird der Preis in den Pot für die nächste Runde übertragen.\n- Wer nach 13 Runden die höchste Gesamtpunktzahl hat, gewinnt."
+  },
+
+  "round": {
+    "announce": "### Runde {round}/13 - Preis: {prize}  (Wert {worth})"
+  },
+
+  "board": {
+    "hand": "Deine verbleibende Hand: {hand}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Die Aktion muss genau EIN Kartenkürzel in eckigen Klammern enthalten.",
+    "card_not_held": "Du hast diese Karte nicht mehr."
+  },
+
+  "message": {
+    "bids": "Gebote: S0 {card0} gegen S1 {card1} - ",
+    "p0_wins": "{observation}Spieler 0 gewinnt {pot_value}.",
+    "p1_wins": "{observation}Spieler 1 gewinnt {pot_value}.",
+    "tie": "{observation}Gleichstand -> Pot beträgt jetzt {carry_pot}.",
+    "scores": "Punktestand -> S0:{score0}  S1:{score1}"
+  },
+
+  "outcome": {
+    "p0_wins": "S0 {s0} gegen S1 {s1}",
+    "p1_wins": "S1 {s1} gegen S0 {s0}",
+    "draw": "Beide erzielten {s0}"
+  }
+}

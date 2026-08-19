@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "نت لعب لعبة Countdown د الأعداد!\nالهدف: خليط الأعداد باستعمال +، -، *، / باش توصل للعدد الهدف.\nالصيغة د الفعل: [i j op] فين i، j هما لمؤشرات و op هي العملية.\nمثال: [0 2 *] كيتضرب الرقم ف مؤشر 0 مع الرقم ف مؤشر 2.\nالقسمة خاصها تعطي نتيجة عدد صحيح بلا شك."
+  },
+  "board": {
+    "header": "الهدف: {target}\n\nالأرقام المتاحة:\n{numbers}",
+    "best": "{observation}\n\nالأفضل حتى الآن: {best_value} (المسافة: {distance})\nأفضل تعبير: {best_expression}",
+    "history": "{observation}\n\nتاريخ الحركات:\n{moves}",
+    "progress": "{observation}\nدرجة التقدم الحالية: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "صيغة الفعل غلط. استعمل `[i j op]` فين i، j هما مؤشرات و op هي +، -، *، /",
+    "invalid_indices": "المؤشرات غير صالحة. خاص تكون مختلفة ويكونوا في حدود 0-{max_index}",
+    "invalid_operation": "التشغيل غير صالح (الجزء على الصفر أو نتيجة ليست رقم صحيح)"
+  },
+  "outcome": {
+    "win": "رائع، لقيت الهدف بالضبط: {target}",
+    "no_moves": "لا مزيد من الحركات. أفضل نتيجة: {best_value} (الهدف: {target})",
+    "turn_limit": "تم الوصول إلى حد الدورات. أفضل نتيجة: {best_value} (الهدف: {target})"
+  }
+}

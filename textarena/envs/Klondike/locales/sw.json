@@ -1,0 +1,74 @@
+{
+  "_comment": "Faili ya lugha ya Klondike Solitaire. USITAFSIRI funguo (upande wa kushoto). Tafsiri maadili tu (upande wa kulia).",
+  "_slots": {
+    "{n}": "Nambari ya hatua ndani ya amri iliyotenganishwa na alama ya mkato, kuanzia 1",
+    "{msg}": "Ujumbe wa matokeo ya hatua iliyojumuishwa (tayari imefasiriwa)",
+    "{count}": "Idadi ya kadi zinazoonyeshwa zinazohamishwa",
+    "{src}": "Nambari ya safu ya kadi ya asili, kuanzia 1",
+    "{dst}": "Nambari ya safu ya kadi ya lengo, kuanzia 1",
+    "{cmd}": "Amri isiyojulikana ambayo mchezaji aliandika (haijatafsiriwa)",
+    "{max_turns}": "Idadi ya juu ya mizunguko kabla ya mchezo kumalizika",
+    "{score}": "Idadi ya kadi zilizo katika safu za msingi",
+    "{board}": "Ubao uliotengenezwa kwa ASCII (usitafsiri)",
+    "{turn}": "Nambari ya mzunguko wa sasa",
+    "{stock}": "Idadi ya kadi zilizobaki katika hisa",
+    "{waste}": "Lebo ya kadi ya juu ya taka, au '--' ikiwa tupu (usitafsiri)",
+    "{cards}": "Kadi katika safu kama lebo zisizoegemea upande wowote, au '--' ikiwa tupu (usitafsiri)"
+  },
+  "player_prompt": {
+    "intro": "Unacheza Klondike Solitaire. Lengo lako ni kuhamisha kadi zote hadi safu za msingi.\n\nSheria za Mchezo:\n- Safu za msingi (F1-F4): Jenga kutoka Ace hadi King kwa suti\n- Safu za kadi (T1-T7): Jenga chini kwa kubadilisha rangi (nyekundu juu ya nyeusi, nyeusi juu ya nyekundu)\n- Hisa: Chora kadi hadi taka\n- Taka (W): Kadi ya juu inapatikana kwa mchezo\n\nAmri:\n- 'chora' - Chora kadi kutoka kwa hisa hadi taka\n- 'hamisha <asili> <lengo> [idadi]' - Hamisha kadi kati ya safu\n  Mifano: 'hamisha W T1', 'hamisha T1 F2', 'hamisha T3 T5 2'. idadi pia inaweza kuwa 'zote', ambayo itajaribu kuhamisha kadi zote zinazoonyeshwa.\n- 'achana' - Maliza mchezo mara moja na weka alama yako ya sasa\n- Majina ya safu: W (taka), F1-F4 (msingi), T1-T7 (kadi)\n\nUnaweza kutekeleza hatua nyingi katika mzunguko mmoja kwa kuzitenganisha na alama za mkato:\n  Mfano: 'chora, hamisha W T1, hamisha T2 F1'\n\nWafalme pekee wanaweza kuwekwa kwenye safu tupu za kadi.\nHatua zinafanya kazi kwa mpangilio - ikiwa moja itashindwa, hatua zilizobaki zitapuuzwa.\nTumia 'achana' ikiwa unaamini mchezo hauwezekani kushinda."
+  },
+  "format_error": {
+    "no_brackets": "Muundo wa hatua sio sahihi. Hatua inapaswa kuwa katika mabano.",
+    "no_closing_bracket": "Muundo wa hatua sio sahihi. Mabano ya kufunga hayapo ']'",
+    "empty_command": "Amri tupu. Andika 'chora' au 'hamisha <asili> <lengo> [idadi]'",
+    "empty_action": "Hatua tupu",
+    "move_needs_args": "Amri ya kuhamisha inahitaji asili na lengo. Matumizi: 'hamisha <asili> <lengo> [idadi]'",
+    "count_positive": "Idadi inapaswa kuwa chanya au 'zote'",
+    "count_invalid": "Idadi sio sahihi. Tumia nambari au 'zote'",
+    "unknown_command": "Amri isiyojulikana '{cmd}'. Tumia 'chora', 'hamisha <asili> <lengo> [idadi]', au 'achana'",
+    "wrapped": "Hatua {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Hatua {n}: {msg}",
+    "before_failure": "Imetekelezwa {n} hatua kabla ya kushindwa.",
+    "failed": "Hatua {n} imeshindwa: {msg}"
+  },
+  "move_result": {
+    "drew": "Imechora kadi kutoka kwa hisa hadi taka.",
+    "cannot_draw": "Haiwezi kuchora. Hisa na taka zote mbili zimekwisha.",
+    "invalid_pile": "Jina la safu sio sahihi. Tumia W, F1-F4, au T1-T7",
+    "foundation_one_card": "Inaweza tu kuhamisha kadi 1 hadi msingi",
+    "waste_to_foundation_ok": "Imehamisha kadi kutoka kwa taka hadi msingi F{dst}",
+    "waste_to_foundation_bad": "Haiwezi kuhamisha kadi ya taka hadi safu hiyo ya msingi",
+    "tableau_to_foundation_ok": "Imehamisha kadi kutoka kwa safu ya kadi T{src} hadi msingi F{dst}",
+    "tableau_to_foundation_bad": "Haiwezi kuhamisha kadi ya safu hadi safu hiyo ya msingi",
+    "foundation_to_foundation": "Haiwezi kuhamisha kutoka kwa msingi hadi msingi",
+    "waste_to_tableau_one_card": "Inaweza tu kuhamisha kadi 1 kutoka kwa taka hadi safu ya kadi",
+    "waste_to_tableau_ok": "Imehamisha kadi kutoka kwa taka hadi safu ya kadi T{dst}",
+    "waste_to_tableau_bad": "Haiwezi kuweka kadi ya taka kwenye safu hiyo ya kadi",
+    "no_face_up": "Hakuna kadi zinazoonyeshwa za kuhamisha",
+    "tableau_to_tableau_ok": "Imehamisha {count} kadi kutoka kwa safu ya kadi T{src} hadi T{dst}",
+    "tableau_to_tableau_bad": "Haiwezi kuhamisha {count} kadi kutoka T{src} hadi T{dst}",
+    "foundation_to_tableau_one_card": "Inaweza tu kuhamisha kadi 1 kutoka kwa msingi hadi safu ya kadi",
+    "foundation_empty": "Msingi F{src} umekwisha",
+    "foundation_to_tableau_ok": "Imehamisha kadi kutoka kwa msingi F{src} hadi safu ya kadi T{dst}",
+    "foundation_to_tableau_bad": "Haiwezi kuweka kadi ya msingi kwenye safu ya kadi T{dst}",
+    "to_waste_or_stock": "Haiwezi kuhamisha hadi taka au hisa"
+  },
+  "outcome": {
+    "forfeit": "Mchezo umeachwa. Alama ya mwisho: {score} kadi katika msingi.",
+    "won": "Hongera! Umeshinda Klondike Solitaire!",
+    "turn_limit": "Mchezo umemalizika! Umefikia kiwango cha juu cha {max_turns} mizunguko. Alama: {score} kadi katika msingi."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Mzunguko: {turn}/{max_turns}",
+    "stock": "Hisa: {stock} kadi",
+    "waste": "Taka (W): {waste}",
+    "foundations_header": "Msingi:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Safu ya kadi:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

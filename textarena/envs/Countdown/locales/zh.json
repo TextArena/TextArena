@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "你正在玩 Countdown 数字游戏！\n目标：使用 +、-、*、/ 组合数字，以达到目标数字。\n操作格式：[i j op]，其中 i 和 j 是索引，op 是运算符。\n示例：[0 2 *] 表示将索引 0 的数字与索引 2 的数字相乘。\n除法结果必须是整数。"
+  },
+
+  "board": {
+    "header": "目标：{target}\n\n可用数字：\n{numbers}",
+    "best": "{observation}\n\n目前最佳结果：{best_value}（距离：{distance}）\n最佳表达式：{best_expression}",
+    "history": "{observation}\n\n移动历史：\n{moves}",
+    "progress": "{observation}\n当前进度分数：{progress}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "操作格式无效。请使用 `[i j op]`，其中 i 和 j 是索引，op 为 +、-、*、/ 之一",
+    "invalid_indices": "索引无效。两个索引必须不同，并且位于 0-{max_index} 范围内",
+    "invalid_operation": "运算无效（除以零或结果不是整数）"
+  },
+
+  "outcome": {
+    "win": "完美！准确达到目标：{target}",
+    "no_moves": "没有更多可用操作。最佳结果：{best_value}（目标：{target}）",
+    "turn_limit": "已达到回合上限。最佳结果：{best_value}（目标：{target}）"
+  }
+}

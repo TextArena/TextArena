@@ -1,0 +1,42 @@
+{
+  "_comment": "קובץ שפה של Le Truc. אין לתרגם את המפתחות (צד שמאל). יש לתרגם רק את הערכים (צד ימין). יש לשמור כל {placeholder} בדיוק כפי שהוא. לעולם אין לתרגם את אסימוני הפעולה ('[play]', '[raise]', '[accept]', '[fold]'), את תוויות הקלפים/הצורות (למשל 3♠, A♥, K♦), את תוויות השחקן (P0, P1) או את ערכי הנקודות המספריים.",
+  "_slots": {
+    "{pid}": "A player number, 0 or 1",
+    "{winner}": "The player number who won the trick or hand",
+    "{points}": "A hand point value, e.g. 1, 2 or 4",
+    "{p0}": "Player 0's running match score",
+    "{p1}": "Player 1's running match score",
+    "{cards}": "A space-separated list of the player's card labels, e.g. 'A♦ 3♠ A♥'",
+    "{card}": "A single card label, e.g. '3♠'",
+    "{legal}": "A comma-separated list of the currently legal action tokens"
+  },
+  "player_prompt": {
+    "intro": "אתה משחק Le Truc, משחק לקיחות לשני שחקנים עם חפיסה של 40 קלפים (דירוג מהגבוה לנמוך: 3 2 A K Q J 7 6 5 4).\nבכל יד אתה מקבל 3 קלפים ומשחק עד שלוש לקיחות של קלף בודד. הדרגה הגבוהה יותר זוכה בלקיחה ללא קשר לצורה; דרגות שוות מסתיימות בתיקו ('מבוטלת'). זכה ביד על ידי לקיחת שתי לקיחות, או על ידי זכייה בלקיחה הראשונה כאשר האחרת מסתיימת בתיקו; לקיחה מבוטלת נחשבת למי שזכה בלקיחה הראשונה, ואם כל השלוש שוות אף אחד אינו מקבל נקודות.\nיד שווה נקודה אחת. בתורך אתה יכול '[raise]' (truc) כדי להעלות את ההימור: 1->2, ואז +2 לכל העלאה נוספת עד 12. היריב שלך חייב '[accept]', '[fold]' או '[raise]' חוזר. מי שפורש מוותר על היד, והמעלה זוכה בהימור שלפני אותה העלאה.\nפעולות: '[play <rank>]' (למשל '[play 3]'), '[raise]', '[accept]', '[fold]'. הראשון שמגיע ל-12 נקודות מנצח במשחק."
+  },
+  "board": {
+    "new_hand": "### יד חדשה בשווי {points} נק'\nהקלפים שלך: {cards}",
+    "valid_actions": "חוקי כעת: {legal}."
+  },
+  "invalid_move": {
+    "unrecognised": "פעולה לא מזוהה.",
+    "already_raised": "כבר הועלה.",
+    "no_raise_to_accept": "אין העלאה לקבל.",
+    "cannot_fold": "אי אפשר לפרוש כעת.",
+    "wrong_rank": "אין ברשותך דרגה זו (מתעלמים מהצורות בקלט).",
+    "must_respond": "יש העלאה ממתינה - השב '[accept]', '[fold]' או '[raise]' חוזר לפני שאתה משחק קלף.",
+    "max_stake": "היד כבר שווה את המקסימום (12); אי אפשר להעלות עוד."
+  },
+  "action": {
+    "raise": "P{pid} מכריז truc - היד כעת שווה {points} נק'. היריב חייב '[accept]', '[fold]' או '[raise]' חוזר.",
+    "accept": "P{pid} מקבל - היד שווה {points} נק'.",
+    "lead": "P{pid} פותח עם {card}.",
+    "play": "P{pid} משחק {card}. הלקיחה ל-P{winner}.",
+    "spoilt": "P{pid} משחק {card}. הדרגות שוות - הלקיחה מבוטלת."
+  },
+  "outcome": {
+    "folded": "היריב פרש.",
+    "hand_won": "P{winner} זכה ביד (+{points} נק'). ניקוד - P0: {p0}, P1: {p1}.",
+    "void": "כל שלוש הלקיחות מבוטלות - אין ניקוד ביד זו. ניקוד - P0: {p0}, P1: {p1}.",
+    "reached_twelve": "הושגו 12 נקודות."
+  }
+}

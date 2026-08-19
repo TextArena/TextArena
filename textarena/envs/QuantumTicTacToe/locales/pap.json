@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Bo ta Jugador {player_id} den Quantum Tic Tac Toe.\nBo símbolo ta '{symbol}', i bo nùmero di move semper ta {parity} (p.e., X1, X3 o O2, O4).\n\nMeta: Gana formando un lìnea di tres marka klasiko (solidifika for di superposishon).\n\nKomo pa Joga:\n- Na kada turno, poné un marka spooky den dos kuadrá vakío usando e formato '[a,b]'.\n- E marka nan ta entrelasa, i etiketa manera 'X1 / X1' o 'O4 / O4'.\n- Bo no por poné marka spooky den un kuadrá ku ya kollapsa (solidifika).\n\nRegla di Kollaps:\n- Si bo move krea un siklo den e grafiko di entrelasamentu, e kollapsa outomatikamente.\n- Kada marka spooky den e siklo bira un marka klasiko den un di su dos posishon.\n- Kualke marka spooky dependiente tambe kollapsa.\n\nVictoria:\n- E wega termina ora un jugador tin tres marka klasiko den un lìnea.\n- Si ambos jugador obtene un lìnea durante e mes mismo kollaps, esun ku tin e nùmero di move maksimo mas abou gana.\n\nEhèmpel di move: '[0,4]' poné un marka spooky den sel 0 i 4."
+  },
+  "board": {
+    "current_board": "Tablero di Quantum Tic Tac Toe:\n\n{board}\n\nPresenta bo move como '[a,b]' pa poné un marka kuántiko den dos lokashon."
+  },
+  "invalid_move": {
+    "wrong_format": "Format no válido. Usa \"[a,b]\".",
+    "invalid_cells": "Indices di cel no ta valido of duplicado.",
+    "already_solidified": "Un di e celnan ya a solidifica."
+  },
+  "game_action": {
+    "placed": "E hungadó {player_id} a pone su símbolo den un superposishon entre e celnan {pos_a} i {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposishon dependiente resuelto. Sel ({r}, {c}) awor ta {symbol}.",
+    "last_cell_resolved": "Superposishon pa sel último resuelto. Sel ({r}, {c}) awor ta {symbol}.",
+    "superposition_resolved": "Superposishon resuelto. Sel ({r}, {c}) awor ta {symbol}."
+  },
+  "outcome": {
+    "win": "E hungadó {player_id} ta gana ku marka solidifiká!",
+    "draw": "E wega ta un empate!"
+  }
+}

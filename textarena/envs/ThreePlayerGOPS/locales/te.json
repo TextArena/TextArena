@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "మీరు మూడు-ఆటగాళ్ల GOPSలో ఆటగాడు {player_id}.\n- మీకు 13 కార్డ్‌లు A-K (ఒక్కొక్కటి ఖచ్చితంగా ఒకసారి) ఉన్నాయి.\n- ప్రతి రౌండ్‌లో ఒక బహుమతి బహిర్గతమవుతుంది. [Q], [10], [2] వంటి ఒక కార్డ్‌ను సమర్పించండి…\n- అత్యధిక కార్డ్ బహుమతిని (క్యారీ-ఓవర్ పాట్‌తో సహా) గెలుచుకుంటుంది. టైలు బహుమతిని తదుపరి రౌండ్‌లోకి రోల్ చేస్తాయి.\n- 13 రౌండ్‌ల తర్వాత, అత్యధిక మొత్తం గెలుచుకుంటుంది. చెల్లని కదలికలు = తొలగింపు."
+  },
+  "round": {
+    "header": "### రౌండ్ {round}/13 - బహుమతి: {prize} (విలువ {worth})",
+    "hand": "మీ మిగిలిన చేతి: {hand}"
+  },
+  "reveal": {
+    "win": "బిడ్  {bids} - ఆటగాడు {winner} గెలుస్తాడు {pot}.",
+    "tie": "బిడ్  {bids} - టై, పాట్ ఇప్పుడు {pot}.",
+    "scores": "స్కోర్లు → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "చర్యకు '[Q]' వంటి బ్రాకెట్ కార్డు అవసరం",
+    "bad_card": "ఇప్పటికే ఉపయోగించిన లేదా చెల్లని కార్డు"
+  },
+  "elimination": {
+    "player": "ఆటగాడు {pid} పలు అక్రమ కదలికల తర్వాత తొలగించబడ్డాడు."
+  },
+  "outcome": {
+    "auto_win": "ఇద్దరు ఆటగాళ్ళు తొలగించబడ్డారు - స్వయంచాలక విజయం.",
+    "final": "తుది స్కోర్లు: {scores}"
+  }
+}

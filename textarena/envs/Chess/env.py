@@ -28,7 +28,8 @@ class ChessEnv(ta.Env):
         self._agument_observations()
 
     def _prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
-        return f"You are playing {'White' if player_id==0 else 'Black'} in a game of Chess.\n Make your moves in UCI format enclosed in square brackets (e.g., [e2e4])."
+        color = 'White' if player_id==0 else 'Black'
+        return self.m("player_prompt", "intro", color=color)
     
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
@@ -39,27 +40,35 @@ class ChessEnv(ta.Env):
 
     def _execute_player_move(self, action: str):
         match = re.compile(r"\[[a-h][1-8][a-h][1-8][qrbn]?\]", re.IGNORECASE).search(action.strip())
-        if match is None: self.state.set_invalid_move(reason=f"Wrong move format.") # check if a move was provided
+        if match is None: self.state.set_invalid_move(reason=self.m("invalid_move", "wrong_format")) # check if a move was provided
         else:
             move_uci = match.group(0).lower().replace("[", "").replace("]", "") # Extract the move from within the brackets
             move = chess.Move.from_uci(move_uci) # Attempt to make the move
             if move in self.state.game_state["board"].legal_moves:
                 self.state.game_state["board"].push(move) # execute move
-                self.state.add_observation(message=f"Player {self.state.current_player_id} made the following move: {move_uci}", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-            else: self.state.set_invalid_move(reason=f"Illegal move.") # illegal move
+                self.state.add_observation(message=self.m("game_action", "moved", player_id=self.state.current_player_id, move_uci=move_uci), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+            else: self.state.set_invalid_move(reason=self.m("invalid_move", "illegal")) # illegal move
 
     def _check_gameover(self):
         if self.state.game_state["board"].is_game_over():
             outcome = self.state.game_state["board"].outcome().result()
-            if outcome == "1/2-1/2": self.state.set_draw(reason=f"Game ended in a draw.") # check for draw
+            if outcome == "1/2-1/2": self.state.set_draw(reason=self.m("outcome", "draw")) # check for draw
             else:
                 winner_id = 0 if outcome == "1-0" else 1
-                self.state.set_winner(player_id=winner_id, reason=f"Player {winner_id} wins the match.")
+                self.state.set_winner(player_id=winner_id, reason=self.m("outcome", "win", player_id=winner_id))
 
     def _agument_observations(self):
-        message = ""
-        if self.is_open: message+=f"Current board:\n{self._board_with_coords(self.state.game_state['board'])}" #f"Current board:\n{str(self.state.game_state["board"])}" # display the board state
-        if self.show_valid: message+=f"\nValid moves: {', '.join([f'[{move.uci()}]' for move in self.state.game_state["board"].legal_moves])}"# show the valid moves
+        board = self._board_with_coords(self.state.game_state['board'])
+        moves = ', '.join([f'[{move.uci()}]' for move in self.state.game_state["board"].legal_moves])
+        if self.is_open and self.show_valid: # display the board state and show the valid moves
+            observation = self.m("board", "current_board", board=board)
+            message = self.m("board", "valid_moves", observation=observation, moves=moves)
+        elif self.is_open: # display the board state
+            message = self.m("board", "current_board", board=board)
+        elif self.show_valid: # show the valid moves
+            message = self.m("board", "valid_moves", observation="", moves=moves)
+        else:
+            message = ""
         self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_BOARD)
 
     @staticmethod

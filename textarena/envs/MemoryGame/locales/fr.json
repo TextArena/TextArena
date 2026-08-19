@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le joueur {player_id}. Vous jouez au jeu de mémoire.\nVotre objectif est de former davantage de paires de cartes sur le plateau que votre adversaire.\nÀ votre tour, sélectionnez deux cartes à retourner en saisissant les numéros de ligne et de colonne de la première puis de la deuxième carte, comme dans '[0 1 1 0]'. La première carte se trouve alors à la ligne 0 et à la colonne 1, tandis que la deuxième se trouve à la ligne 1 et à la colonne 0.\nSi les deux cartes correspondent, vous marquez un point et elles restent face visible. Si elles ne correspondent pas, elles sont de nouveau retournées face cachée, par exemple sous la forme '.'.\nLa partie se termine lorsque toutes les paires ont été trouvées."
+  },
+
+  "board": {
+    "current_board": "Plateau actuel :\n{board}",
+    "current_game_board": "Plateau de jeu actuel :\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format de coup non valide. Le joueur {player_id} n'a pas répondu avec une direction valide entre crochets.",
+    "out_of_bounds": "Coup non valide. Le joueur {player_id} a sélectionné une position située hors des limites.",
+    "same_card_twice": "Coup non valide. Le joueur {player_id} a sélectionné deux fois la même carte.",
+    "already_matched": "Coup non valide. Le joueur {player_id} a sélectionné une ou deux cartes appartenant déjà à une paire trouvée."
+  },
+
+  "game_message": {
+    "cards_match": "Les cartes sélectionnées par le joueur {player_id} aux positions [{r1} {c1}] et [{r2} {c2}] correspondent !",
+    "cards_no_match": "Les cartes sélectionnées par le joueur {player_id} ne correspondent pas. Les cartes aux positions [{r1} {c1}] et [{r2} {c2}] sont respectivement {pos1} et {pos2}."
+  },
+
+  "outcome": {
+    "draw": "Les deux joueurs ont trouvé le même nombre de paires de cartes.",
+    "win": "Le joueur {winner_id} a gagné !",
+    "turn_limit": "La limite de tours a été atteinte. La partie est terminée. Le joueur 0 a marqué {score_0} points et le joueur 1 a marqué {score_1} points.",
+    "turn_limit_win": "{reason} Le joueur {winner_id} a gagné !"
+  }
+}

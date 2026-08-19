@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong trò chơi Indian Poker.\n- Bộ bài 52 lá; bạn chỉ thấy lá bài của đối thủ.\n- Đặt cược {ante} chip mỗi vòng, tổng cộng {max_rounds} vòng.\n- Các nước đi hợp lệ: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X là số nguyên dương ≤ số chip bạn có.)\n- Lá bài ẩn cao nhất thắng pot khi mở bài.\n"
+  },
+  "round": {
+    "announce": "### Vòng {current_round}/{max_rounds}\nLá bài của đối thủ là: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Cung cấp chính xác MỘT hành động trong dấu ngoặc vuông, ví dụ: '[check]', '[bet 2]', '[call]', '[raise 3]', hoặc '[fold]'.",
+    "cannot_check": "Không thể [check] - bạn đang đối mặt với một cược.",
+    "amount_min": "Số tiền cược / tăng cược phải ≥ 1.",
+    "cannot_bet": "Không thể [bet] - phải [call] / [raise] / [fold].",
+    "nothing_to_call": "Không có gì để gọi; bạn có thể [check] thay vì thế.",
+    "no_bet_to_raise": "Sử dụng [bet X] để mở; không có cược nào để tăng.",
+    "insufficient": "Không đủ chip cho hành động đó."
+  },
+  "game_action": {
+    "action": "Người chơi {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (chi phí {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Các hành động có thể của bạn: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Người chơi {winner}. (Số chip P0:{p0}, P1:{p1})",
+    "folded": "Người chơi {player_id} đã bỏ cuộc.",
+    "showdown_win": "Mở bài: {card_win} đánh bại {card_lose}.",
+    "showdown_tie": "Mở bài hòa: cả hai {card}. Pot chia đều – mỗi người nhận {split}."
+  },
+  "outcome": {
+    "p0_wins": "Người chơi 0 thắng ({bank0} > {bank1})",
+    "p1_wins": "Người chơi 1 thắng ({bank1} > {bank0})",
+    "draw": "Số chip bằng nhau sau tất cả các vòng"
+  }
+}

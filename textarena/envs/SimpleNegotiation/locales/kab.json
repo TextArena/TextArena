@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Amur-nni yeεreḍ ad iqbel ameslay mebla ma yesɛa ayen ilaqen.",
+    "out_of_range": "Amiraz {player_id}, Aseqdec ur nelli. Tawlaft {col} d tin iɣezzifen.",
+    "already_full": "Amiraz {player_id}, Aseqdec ur nelli. Tawlaft {col} d tin iɛeggen.",
+    "proposing_with_no_resource": "Amyurar {player_id} yeεreḍ ad d-yefk taweṛt n uṣewwi mebla ma yesɛa ayen ilaqen.",
+    "incorrect_offer_format": "Amyurar {player_id} yefka-d asefk n uṣewweṛ s usebter ur nelhi.",
+    "no_new_offer": "Amur {player_id} ur d-yefki ara taweṛt tamaynut."
+  },
+  "offers": {
+    "reject": "Amur {player_id} yugi asumer n umeslay.",
+    "accept": "Amiraz {acceptor_id} qeble asfel n tanegt seg Amiraz {proposer_id}.",
+    "proposal": "Amiraz {player_id} yesɛedda asfel-agi i Amiraz {opponent_id}: Yifecka iɛeddan: {offered} -> Yifecka iɣewwaɣen: {requested}"
+  },
+  "outcome": {
+    "win": "Amyurar {winner_id} yerbeḥ s uḥric n lfenǧal.",
+    "draw": "Amgarad am wa deg uṣurdi n usentel i yal yiwen seg imurar."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i et to-spillerspill av Spite and Malice. Målet ditt er å være den første til å tømme din utbetalingsstabel.\n\n### Spilloversikt:\n- Målet er å rydde din utbetalingsstabel ved å spille kort til sentraltabellene.\n- Du kan spille kort fra tre kilder:\n  1. Din **hånd** (du starter hver tur med opptil 5 kort i hånden).\n  2. Det **øverste kortet på din utbetalingsstabel**.\n  3. Det **øverste kortet på noen av dine kastehauger**.\n\n### Spilleregler:\n- Du kan spille et kort til en sentralstabell hvis det er **én rang høyere** enn det øverste kortet på den stabellen (sentralstabeller starter med Ess og går opp til Dronning; Konger er vilde - de kan spilles på hvilket som helst kort, men endrer ikke rangsekvensen. Dette betyr at hvis en Konge brukes etter 4, så er den Kongen rangert som 5 og neste kort må være en 6).\n- Hvis du ikke kan spille flere kort, må du **kaste et kort** til en av dine kastehauger for å avslutte turen din.\n- Hvis en sentralstabell når Dronning, vil den bli ryddet automatisk.\n- Rangordenen er: A=1, 2=2, ..., 9=9, J=10, Q=11, K som vilde.\n\n### Handlinger:\n1. **Trekke**: Ved starten av turen din, trekker du kort for å fylle hånden din opp til 5 kort. Skriv inn **[draw]** for å begynne.\n2. **Spille et kort**: For å spille et kort, spesifiser kortet og sentralstabellen slik: **[play A♠ 0]** (hvor 'A♠' er kortet og '0' er sentralstabellindeksen).\n3. **Kaste**: Hvis du ikke kan spille flere kort, kast et kort fra hånden din til en kastehaug for å avslutte turen din. Skriv inn **[discard A♠ 1]** (hvor 'A♠' er kortet og '1' er kastehaugindeksen). Merk at du ikke kan kaste noen kort fra utbetalingsstabellen. Du kan bare kaste kort fra hånden din.\n\n"
+  },
+  "board": {
+    "current_board": "Nåværende brett:\n\n{board}\nTilgjengelige trekk: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Sentralstabeller ---\n",
+    "pile": "{observation}Stabel {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Spiller {player_id}s visning ---\n",
+    "payoff": "{observation}Utbetalingsstabel (Øverste kort): {top_card}, Utbetalingsstabel lengde: {payoff_length}\n",
+    "hand": "{observation}Hånd: {hand}\n",
+    "discard": "{observation}Kastehauger: {discard}\n",
+    "empty": "Tom"
+  },
+  "game_message": {
+    "no_cards_left": "Det er ingen flere kort å trekke fra. Husk at du kan spille kort fra disse kildene:\n  1. Din **hånd**.\n  2. Det **øverste kortet på din utbetalingsstabel**.\n  3. Det **øverste kortet på noen av dine kastehauger**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldig trekkformat. Spiller {player_id} svarte ikke med et gyldig trekk i firkantede parenteser.",
+    "invalid_play": "Ugyldig spill. Spiller {player_id} prøvde å spille {card} på sentralstabel {index}.",
+    "discard_from_payoff": "Ugyldig kast. Spiller {player_id} prøvde å kaste et kort fra utbetalingsstabellen.",
+    "discard_not_in_hand": "Ugyldig kast. Spiller {player_id} prøvde å kaste et kort som ikke er i hånden.",
+    "wrong_move_type": "Ugyldig trekktype. Spiller {player_id} svarte ikke med en gyldig trekktype."
+  },
+  "game_action": {
+    "you_drew": "Du trakk kort.",
+    "opponent_drew": "Spiller {player_id} trakk kort.",
+    "you_played": "Du spilte {card} på sentralstabel {index}.",
+    "opponent_played": "Spiller {player_id} spilte {card} på sentralstabel {index}.",
+    "you_discarded": "Du har kastet {card} til kastehaug {index}, noe som også betyr at du har avsluttet turen din. Ingen flere handlinger dine vil bli vurdert for denne turen. Spiller {next_player_id} vil gå neste.",
+    "opponent_discarded": "Spiller {player_id} kastet {card} til kastehaug {index}, noe som også betyr at de har avsluttet turen sin. Ingen flere handlinger fra Spiller {player_id} vil bli vurdert for denne turen. Spiller {next_player_id}, du vil gå neste. Vennligst skriv inn din handling i formatet [handling kort sentralstabelindeks]."
+  },
+  "outcome": {
+    "payoff_cleared": "Spiller {current_player} har fullført sin utbetalingsstabel! Spiller {current_player} vinner!",
+    "deadlock_player_0": "Dødpunkt nådd! Spiller 0 vinner med {player_0_payoff} kort igjen vs Spiller 1s {player_1_payoff} kort.",
+    "deadlock_player_1": "Dødpunkt nådd! Spiller 1 vinner med {player_1_payoff} kort igjen vs Spiller 0s {player_0_payoff} kort.",
+    "deadlock_tie": "Dødpunkt nådd med uavgjort! Begge spillere har {player_0_payoff} kort igjen. Spiller {current_player} vinner som standard."
+  }
+}

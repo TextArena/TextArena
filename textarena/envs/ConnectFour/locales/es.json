@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Eres el jugador {player_id} en Conecta Cuatro.\nTu símbolo de ficha: {symbol}.\nEl tablero tiene {num_rows} filas y {num_cols} columnas.\nLos jugadores se turnan para soltar su ficha en una de las columnas (0 a {end_col}).\nEl primero en conectar cuatro fichas propias vertical, horizontal o diagonalmente gana.\nEn tu turno, introduce el número de columna entre corchetes para hacer tu movimiento.\nPor ejemplo: '[col 4]' o '[col 1]'."
+  },
+
+  "board": {
+    "board_visible_state": "Estado del tablero:\n{board_visual}",
+    "board_notvisible_state": "El tablero no es visible para los jugadores."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Jugador {player_id}, formato de acción no válido. Formato esperado: '[col x]'.",
+    "out_of_range": "Jugador {player_id}, acción no válida. La columna {col} está fuera de rango.",
+    "already_full": "Jugador {player_id}, acción no válida. La columna {col} está llena."
+  },
+
+  "action": {
+    "dropped_disk": "El jugador {player_id} dejó caer su ficha ({player_symbol}) en la columna {col}."
+  },
+
+  "outcome": {
+    "win": "¡El jugador {player_id} gana conectando cuatro!",
+    "draw": "La partida terminó en empate."
+  }
+}

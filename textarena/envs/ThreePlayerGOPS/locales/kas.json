@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "آپ تھری پلیئر GOPS میں کھلاڑی {player_id} ہیں۔\n- آپ کے پاس 13 کارڈز A-K (ہر ایک بالکل ایک بار) ہیں۔\n- ہر راؤنڈ میں ایک انعام ظاہر ہوتا ہے۔ ایک کارڈ جیسے `[Q]`، `[10]`، `[2]` جمع کریں …\n- سب سے زیادہ کارڈ انعام جیتتا ہے (+ کسی بھی کیری اوور پوٹ)۔ ٹائی راؤنڈ کو اگلے راؤنڈ میں رول کرتی ہے۔\n- 13 راؤنڈز کے بعد، سب سے زیادہ کل جیتتا ہے۔ غلط حرکت = خاتمہ۔"
+  },
+  "round": {
+    "header": "### راؤنڈ {round}/13 - انعام: {prize} (قیمت {worth})",
+    "hand": "آپ کی باقی ہاتھ: {hand}"
+  },
+  "reveal": {
+    "win": "بولیں » {bids} - کھلاڑی {winner} {pot} جیتتا ہے۔",
+    "tie": "بولیں » {bids} - ٹائی، پوٹ اب {pot} ہے۔",
+    "scores": "स्कोर → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "عمل کو '[Q]' وانگے بریکٹ کارد د‏ی ضرورت ہُندی اے",
+    "bad_card": "کارد پہلے ہی استعمال کیا گیا ہے یا غیر قانونی ہے"
+  },
+  "elimination": {
+    "player": "کھلاڑی {pid} بار بار غلط حرکتوں کے بعد ختم ہو گیا ہے۔"
+  },
+  "outcome": {
+    "auto_win": "دو کھلاڑی ختم ہو گئے ہیں - خودکار جیت۔",
+    "final": "حتمی اسکورز: {scores}"
+  }
+}

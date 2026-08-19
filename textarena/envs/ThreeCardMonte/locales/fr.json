@@ -1,0 +1,31 @@
+{
+  "_comment": "Fichier de paramètres régionaux de ThreeCardMonte. NE PAS traduire les clés (côté gauche). Traduire uniquement les valeurs (côté droit).",
+  "_slots": {
+    "{line}": "La rangée de gobelets affichée",
+    "{step}": "Le numéro de l'étape de mélange actuelle",
+    "{steps}": "Le nombre total d'étapes de mélange",
+    "{i}": "L'indice du premier gobelet impliqué dans un échange",
+    "{j}": "L'indice du second gobelet impliqué dans un échange",
+    "{prompt}": "Le fragment d'invite localisé ajouté après les gobelets",
+    "{max_index}": "L'indice maximal valide des gobelets, soit num_cups-1",
+    "{ball_pos}": "L'indice du gobelet sous lequel se trouve la balle"
+  },
+  "player_prompt": {
+    "intro": "Suivez la balle cachée 'X' pendant que les gobelets sont mélangés.\nAprès le mélange, devinez sa position avec `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Position initiale de la balle : {line}",
+    "shuffle": "Mélange {step}/{steps} : les gobelets {i} et {j} ont été échangés.",
+    "cups": "Gobelets : {line}  {prompt}",
+    "guess_now": "(Devinez MAINTENANT !)",
+    "reveal": "(Révélation : balle sous le gobelet {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Action incorrecte. Utilisez `[k]`.",
+    "out_of_range": "Indice hors de la plage 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Correct ! Vous avez trouvé la balle.",
+    "lose": "Incorrect — la balle était sous le gobelet {ball_pos}."
+  }
+}

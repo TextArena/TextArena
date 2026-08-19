@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "UnguPlayer {player_id} kwiThree-Player GOPS.\n- Uyawina amakhadi 13 A-K (ngamanye amaxesha).\n- Kwi-round nganye iprize iyavelwa. Ngenisa khadi enye njengo `[Q]`, `[10]`, `[2]` …\n- Ikhadi ephakamileyo inqoba iprize (+ neyiphi na pot). I-Tie isongela iprize kwi-round elandelayo.\n- Emva kwee-round 13, ixabiso eliphezulu linqoba. Iinqobo ezibhityileyo = ukupheliswa."
+  },
+  "round": {
+    "header": "### Mzuzu {round}/13 - Iphondo: {prize} (iphathelele {worth})",
+    "hand": "Isandla sakho esiseleyo: {hand}"
+  },
+  "reveal": {
+    "win": "Ibhidi  {bids} - Umdlali {winner} uphumelele {pot}.",
+    "tie": "Ibhidi  {bids} - tie, ibhodwe ngoku {pot}.",
+    "scores": "Amanqaku → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "isenzo sidinga ikhadi elifakwe kwizakhelo ezifana ne \"[Q]\"",
+    "bad_card": "ikhadi esele lisetyenzisiwe okanye elingasasebenziyo"
+  },
+  "elimination": {
+    "player": "Umdlali {pid} ugxothwe emva kokuphindaphinda iintshukumo ezingekho mthethweni."
+  },
+  "outcome": {
+    "auto_win": "Abadlali ababini abagxothwayo - ngokuzenzekelayo bayaphumelela.",
+    "final": "Amanqaku okugqibela: {scores}"
+  }
+}

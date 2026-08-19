@@ -1,0 +1,47 @@
+{
+  "player_prompt": {
+    "intro": "你是双人 Spite and Malice 游戏中的玩家 {player_id}。你的目标是成为第一个清空自己目标牌堆的玩家。\n\n### 游戏概述：\n- 游戏目标是通过将牌打到中央牌堆，清空你的目标牌堆。\n- 你可以从三个来源出牌：\n  1. 你的**手牌**（每个回合开始时，你的手牌最多补至 5 张）。\n  2. 你的**目标牌堆顶部的牌**。\n  3. 你的**任意弃牌堆顶部的牌**。\n\n### 出牌规则：\n- 当一张牌的点数比某个中央牌堆顶部的牌**正好高一级**时，你可以将其打到该中央牌堆上（中央牌堆从 Ace 开始，依次上升至 Queen；King 是万能牌，可以打在任何牌上，但不会改变点数序列。这意味着，如果在 4 之后使用 King，该 King 会被视为 5，下一张牌必须是 6）。\n- 当你无法继续出牌时，必须将一张牌**弃置**到你的一个弃牌堆中，以结束你的回合。\n- 当中央牌堆达到 Queen 时，该牌堆会被自动清空。\n- 点数顺序为：A=1、2=2、...、9=9、J=10、Q=11，K 为万能牌。\n\n### 操作：\n1. **抽牌**：在你的回合开始时，抽牌直到手中有 5 张牌。输入 **[draw]** 开始。\n2. **出牌**：要打出一张牌，请按以下格式指定牌和中央牌堆：**[play A♠ 0]**（其中 'A♠' 是牌，'0' 是中央牌堆索引）。\n3. **弃牌**：如果你无法继续出牌，请将一张手牌弃置到一个弃牌堆中，以结束你的回合。输入 **[discard A♠ 1]**（其中 'A♠' 是牌，'1' 是弃牌堆索引）。请注意，你不能弃置目标牌堆中的牌。你只能弃置手牌中的牌。\n\n"
+  },
+
+  "board": {
+    "current_board": "当前游戏面板：\n\n{board}\n可用操作：{moves}"
+  },
+
+  "render": {
+    "center_piles_header": "--- 中央牌堆 ---\n",
+    "pile": "{observation}牌堆 {i}：{pile}\n",
+    "player_view_header": "{observation}\n--- 玩家 {player_id} 的视角 ---\n",
+    "payoff": "{observation}目标牌堆（顶部牌）：{top_card}，目标牌堆长度：{payoff_length}\n",
+    "hand": "{observation}手牌：{hand}\n",
+    "discard": "{observation}弃牌堆：{discard}\n",
+    "empty": "空"
+  },
+
+  "game_message": {
+    "no_cards_left": "已经没有牌可以抽取。请记住，你可以从以下来源出牌：\n  1. 你的**手牌**。\n  2. 你的**目标牌堆顶部的牌**。\n  3. 你的**任意弃牌堆顶部的牌**。\n\n"
+  },
+
+  "invalid_move": {
+    "wrong_format": "操作格式无效。玩家 {player_id} 未使用方括号提交有效操作。",
+    "invalid_play": "出牌无效。玩家 {player_id} 尝试将 {card} 打到中央牌堆 {index}。",
+    "discard_from_payoff": "弃牌无效。玩家 {player_id} 尝试弃置目标牌堆中的牌。",
+    "discard_not_in_hand": "弃牌无效。玩家 {player_id} 尝试弃置一张不在手中的牌。",
+    "wrong_move_type": "操作类型无效。玩家 {player_id} 未提交有效的操作类型。"
+  },
+
+  "game_action": {
+    "you_drew": "你抽取了牌。",
+    "opponent_drew": "玩家 {player_id} 抽取了牌。",
+    "you_played": "你将 {card} 打到了中央牌堆 {index}。",
+    "opponent_played": "玩家 {player_id} 将 {card} 打到了中央牌堆 {index}。",
+    "you_discarded": "你已将 {card} 弃置到弃牌堆 {index}，这也表示你的回合已经结束。本回合中你之后提交的任何操作都不会被考虑。接下来由玩家 {next_player_id} 行动。",
+    "opponent_discarded": "玩家 {player_id} 将 {card} 弃置到弃牌堆 {index}，这也表示其回合已经结束。本回合中玩家 {player_id} 之后提交的任何操作都不会被考虑。玩家 {next_player_id}，接下来由你行动。请按 [action card center_index] 格式输入操作。"
+  },
+
+  "outcome": {
+    "payoff_cleared": "玩家 {current_player} 已清空目标牌堆！玩家 {current_player} 获胜！",
+    "deadlock_player_0": "游戏陷入僵局！玩家 0 剩余 {player_0_payoff} 张牌，少于玩家 1 剩余的 {player_1_payoff} 张牌，因此玩家 0 获胜。",
+    "deadlock_player_1": "游戏陷入僵局！玩家 1 剩余 {player_1_payoff} 张牌，少于玩家 0 剩余的 {player_0_payoff} 张牌，因此玩家 1 获胜。",
+    "deadlock_tie": "游戏陷入僵局且双方平局！两位玩家都剩余 {player_0_payoff} 张牌。玩家 {current_player} 默认获胜。"
+  }
+}

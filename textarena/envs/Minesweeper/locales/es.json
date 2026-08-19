@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Estás jugando al Buscaminas.\nEl objetivo del juego es descubrir todas las casillas que no contienen minas.\nPara realizar un movimiento, simplemente indica las coordenadas de fila y columna de la casilla que deseas descubrir usando el siguiente formato:\n- `[row col]`: Descubre la casilla en la fila y columna indicadas.\nPor ejemplo:\n- `[3 2]` para descubrir la casilla de la Fila 3, Columna 2.\n- `[5 6]` para descubrir la casilla de la Fila 5, Columna 6.\nEn tu primer movimiento, se descubrirá un área alrededor de la casilla que elijas para garantizar un comienzo seguro.\nLa disposición actual del tablero se muestra a continuación. Las casillas no descubiertas se representan con un punto ('.'); los números descubiertos indican la cantidad de minas adyacentes.\nProcura no seleccionar casillas que ya hayan sido descubiertas.\nEsta es la disposición actual del tablero:\n"
+  },
+  "board": {
+    "game_board": "Tablero de juego:\n\n{board}",
+    "current_board": "Tablero actual:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "No respondiste con coordenadas válidas entre corchetes.",
+    "out_of_bounds": "Las coordenadas de fila y columna indicadas están fuera de los límites.",
+    "already_revealed": "La casilla en ({row}, {col}) ya ha sido descubierta.",
+    "hit_mine": "Has tocado una mina en ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Has descubierto la casilla en ({row}, {col})."
+  },
+  "outcome": {
+    "win": "¡Felicidades! Has despejado correctamente el tablero de Buscaminas.",
+    "turn_limit": "Se alcanzó el límite de turnos. Descubriste correctamente el {percent}% de las casillas seguras."
+  }
+}

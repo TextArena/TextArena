@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "O jẹ oṣere {player_id}, ti o nṣire {num_rounds} awọn iyipo ti Iterated Ultimatum Game. O ni ${pool} lati pin iyipo yii laarin ara rẹ ati oṣere {other_id}. Olufunni: - Ṣe ipese kan: [Offer: $X] (0 <= X <= pool) - Ti o ba gba → O gba $ ((pool - X), oṣere miiran gba $ X - Ti o ba kọ → Awọn mejeeji gba $ 0 - Apẹẹrẹ: [Offer: $3] tabi 'Mo ro pe eyi jẹ ododo. [Offer: $5]' Oluranlowo: - Pinnu lori ipese pẹlu boya [Accept] tabi [Reject] - Apẹẹrẹ: 'O dabi ẹni ti o tọ. [Accept]' 'Kọ si aiṣedeede. [Reject]' "
+  },
+  "round": {
+    "begins": "--- Igba {round_number} bẹ̀rẹ̀! ---\nAgbára {proposer_id} ni ẹni tí ó gbé ètò rẹ̀ wá, Agbára {responder_id} ni ẹni tí yóò dáhùn.",
+    "offer": "Ìyí {round_number}: Ẹ̀yin {proposer_id} fi ${offer} fún Ẹ̀yin {responder_id} (tí ó sì pa ${keep}).",
+    "accepted": "Ọmọ orílẹ̀-èdè {responder_id} gbà á! Ìgbà {round_number} gbà: Ọmọ orílẹ̀-èdè {proposer_id} +${proposer_gain}, ọmọ orílẹ̀-èdè {responder_id} +${responder_gain}. Iye tuntun: Ọmọ orílẹ̀-èdè 0: ${total_0}, ọmọ orílẹ̀-èdè 1: ${total_1}.",
+    "rejected": "Ọmọ orílẹ̀-èdè {responder_id} kọ̀ á! Ìgbà {round_number} gbà: Àwọn méjéèjì gbà $0. Iye wà ní ìdọ̀tí: Ọmọ orílẹ̀-èdè 0: ${total_0}, ọmọ orílẹ̀-èdè 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Olùfèrò gbọdọ ṣe ìfèrò nípa lílo àdàkọ [Offer: $X].",
+    "bad_integer": "Iye tí a fi ń rajà ní láti jẹ iye tó péye.",
+    "out_of_range": "Àmọ̀ṣe náà gbọdọ̀ wà láàrin $0 àti ${pool}.",
+    "no_current_offer": "Kò sí ìfúnnilókun láti dáhùn.",
+    "accept_or_reject": "Olùdáhùn gbọdọ̀ [Accept] tàbí [Reject] fún ọ̀rọ̀ náà."
+  },
+  "outcome": {
+    "win": "Ọmọ orílẹ̀-èdè {winner} gbé pẹ̀lú ${winner_total} gbogbo vs ọmọ orílẹ̀-èdè {loser} ${loser_total}.",
+    "draw": "Àgbá! Àwọn agbábọ́ọ̀lù méjèèjì parí pẹ̀lú ${total} ní àpapọ̀."
+  }
+}

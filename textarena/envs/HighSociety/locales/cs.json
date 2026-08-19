@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} ve hře HighSociety (verze pro dva hráče).\nPrůběh hry: Deset karet prestiže je aukcionováno jednu po druhé.\nSázení: V každé aukci tajně vyberte kartu peněz 1-11 a odhalte.\n• Vyšší nabídka vyhraje kartu prestiže a zahodí kartu peněz.\n• Nižší nabídka si ponechá kartu peněz.\n• Remíza → obě nabídky jsou vráceny a stejná karta prestiže je znovu aukcionována.\nBodování: Po všech deseti aukcích přidejte **zbylé peníze + body prestiže**.\nVyšší *čistá hodnota* vyhraje (přesná remíza → remíza).\n\n**Syntaxe akce** → vsaďte jednu kartu jako '[7]' nebo '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Aukce {round}/10  |  Karta prestiže: {prize}"
+  },
+  "board": {
+    "money_cards": "Vaše zbývající karty peněz: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Musí obsahovat přesně jednu kartu peněz [X].",
+    "card_not_held": "Tuto kartu peněz již nevlastníte."
+  },
+  "message": {
+    "tie": "Remíza - nabídky vráceny. Znovu vsaďte!",
+    "auction_result": "Hráč 0 nabídl {bid0}, hráč 1 nabídl {bid1}. Hráč {winner} vyhraje prestiž {prize} (celkem {total})."
+  },
+  "outcome": {
+    "p0_wins": "Čistá hodnota {nw0} > {nw1}",
+    "p1_wins": "Čistá hodnota {nw1} > {nw0}",
+    "draw": "Obě čisté hodnoty {nw0} – přesná remíza."
+  }
+}

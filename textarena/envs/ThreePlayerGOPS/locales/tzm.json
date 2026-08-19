@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "D uwanek {player_id} i Three-Player GOPS.\n- Tesɛedda 13 n tkart A-K (yiwet kan).\n- Yal turart, tkart n tifin tettusfid. Azen ONE tkart am `[Q]`, `[10]`, `[2]` …\n- Tkart n tifin i rebḥen + tin n tuqqna. Tifin n tifin tettusfid ɣer turart n ddaw.\n- Seld 13 n turart, uwanek i rebḥen aṭṭan. Azalen n tifin = tixxamin."
+  },
+  "round": {
+    "header": "### Aseggas {round}/13 - Tawla tamettant: {prize} (acu-ynes {worth})",
+    "hand": "ⵜⴰⴳⴰⴼⵜ ⵏⵏⴽ ⵢⴰⴹⵏ: {hand}"
+  },
+  "reveal": {
+    "win": "Tazmilt » {bids} - Uwanek {winner} i rebḥen {pot}.",
+    "tie": " {bids} - ⵜⴰⵣⴳⵉⵍⵜ, ⵜⴱⵓⵜ ⵖⵉⵍⴰⴷ {pot}.",
+    "scores": "ⵜⵉⵖⵓⵔⵉⵡⵉⵏ → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "ⵜⴰⵡⵓⵔⵉ ⵜⵔⴰ ⵢⴰⵜ ⵜⵡⵍⴰⴼⵜ ⴳ ⵓⴳⵏⵙⵓ ⴰⵎⵎ \"[Q]\"",
+    "bad_card": "ⵜⴰⴽⴰⵕⴹⴰ ⵉⵜⵜⵓⵙⵎⵔⴰⵙⵏ ⵏⵖⴷ ⵓⵔ ⵉⵃⵍⵉⵏ."
+  },
+  "elimination": {
+    "player": "ⴰⵎⵓⵔⴰⵔ {pid} ⵉⵜⵜⵓⵙⵏⵖⵍ ⴷⴼⴼⵉⵔ ⵏ ⵉⵎⵓⵙⵙⵓⵜⵏ ⵓⵔ ⵉⵃⵍⵉⵏ ⵉⵙⵎⵓⵜⵜⴳ."
+  },
+  "outcome": {
+    "auto_win": "ⵙⵉⵏ ⵉⵎⵓⵔⴰⵔⵏ ⵉⵜⵜⵓⵙⵏⴼⴰⵍⵏ - ⵜⴰⴳⴳⴰⵢⵜ ⵜⴰⵎⵙⵍⴰⵃⵜ.",
+    "final": "ⵜⵉⵡⵉⵍⴰⵢⵉⵏ ⵜⵉⵎⴳⴳⵓⵔⴰ: {scores}"
+  }
+}

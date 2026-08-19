@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Welkom bij Lights Out! U hebt een {size}x{size} raster van lichten.\nUw doel is om ALLE lichten UIT te schakelen (weergegeven door '.').\nWanneer u op een licht klikt, schakelt het zichzelf EN zijn aangrenzende buren (boven/onder/links/rechts) om.\nTyp [rij kol] om een licht in te drukken (0-geïndexeerd, dus geldig bereik is 0-{max_index}).\nU hebt maximaal {max_turns} zetten om de puzzel op te lossen.\nLegenda: 'O' = licht AAN, '.' = licht UIT"
+  },
+  "board": {
+    "current_state": "Huidige rasterstatus (Zet {moves_made}, {moves_left} zetten resterend, {completion}% voltooid):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Actie moet in formaat [rij kol] zijn, waarbij rij en kol gehele getallen zijn van 0 tot {max_index}.",
+    "out_of_range": "Coördinaten moeten tussen 0 en {max_index} liggen. U hebt [{row},{col}] ingevoerd."
+  },
+  "outcome": {
+    "win": "Gefeliciteerd! U hebt de puzzel opgelost in {moves_used} zetten!",
+    "loss": "Game over! U hebt alle {max_turns} zetten gebruikt zonder de puzzel op te lossen. Eindvoltooiing: {completion}%\nEindstatus:\n{grid}"
+  }
+}

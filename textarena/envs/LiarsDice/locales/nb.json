@@ -1,0 +1,55 @@
+{
+  "_comment": "Brukerorienterte strenger for Liar's Dice. Parenteserte aksjonstoken ('[Bid: X, Y]', '[Call]'), spillernavn, terningverdier, mengder og tellinger er nøytrale plassholdere og må aldri oversettes.",
+  "_slots": {
+    "player_id": "spillerindeks (heltall)",
+    "num_players": "antall spillere i spillet (heltall)",
+    "dice_summary": "forhåndsrenderet '; '-sammenkoblet liste over hver spillers gjenværende terninger",
+    "your_dice": "forhåndsrenderet komma-sammenkoblet liste over denne spillerens terningverdier",
+    "p": "spillerindeks (heltall)",
+    "d": "gjenværende terningantall for den spilleren (heltall)",
+    "current_player_id": "spillerindeks som kalte (heltall)",
+    "face_value": "terningverdi som telles (1-6)",
+    "count": "faktisk antall treffende terninger (heltall)",
+    "quantity": "budmengde (heltall)",
+    "loser_id": "spillerindeks som mister en terning (heltall)",
+    "new_quantity": "ny budmengde som nettopp ble sendt inn (heltall)",
+    "current_quantity": "gjeldende budmengde (heltall)",
+    "new_face_value": "ny terningverdi som nettopp ble sendt inn (heltall)",
+    "current_face_value": "gjeldende terningverdi (heltall)",
+    "action": "rå aksjonsstrengen som spilleren sendte inn",
+    "reason": "en innbygd årsak til avvist bud",
+    "winner": "spillerindeks som vinner (heltall)",
+    "final_ranking": "liste over spillerindekser fra første eliminert til vinner"
+  },
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i et {num_players}-spiller Liar's Dice-spill.\nRegler:\n- På din tur kan du enten:\n  1) Lage et nytt bud med en høyere mengde eller høyere verdi (eller begge) enn det gjeldende budet; dvs. '[Bid: 3, 4]',\n  2) Kalle det siste budet ved å skrive '[Call]'.\n\nHvis du kaller:\n  - Hvis det faktiske antallet av den terningverdien blant alle terninger er mindre enn budet, mister den siste budgiveren en terning.\n  - Ellers mister kalleren en terning.\nEn spiller som når 0 terninger er eliminert. Den siste gjenværende spilleren vinner."
+  },
+  "board": {
+    "per_player": "\tSpiller {p}: {d}",
+    "new_round": "\nNy runde - Gjenværende terninger: {dice_summary}\nDine nåværende terninger er: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Spiller {current_player_id} kaller! Det faktiske antallet av terningverdi {face_value} er {count}, som er MINDRE enn {quantity}.\nSpiller {loser_id} (den siste budgiveren) mister en terning.",
+    "caller_loses": "Spiller {current_player_id} kaller! Det faktiske antallet av terningverdi {face_value} er {count}, som er >= {quantity}.\nSpiller {loser_id} (kalleren) mister en terning."
+  },
+  "action": {
+    "bid_announce": "Spiller {player_id} byr {quantity} av terningverdi {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Kall gjort uten forrige bud.",
+    "invalid_bid": "Ugyldig bud: {reason}",
+    "not_recognized": "Aksjon ikke gjenkjent som enten et gyldig '[Bid: X, Y]' eller '[Call]'. Sendt aksjon: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Ny mengde {new_quantity} er lavere enn gjeldende {current_quantity}.",
+    "face_lower": "Ny terningverdi {new_face_value} er lavere enn gjeldende {current_face_value}.",
+    "identical": "Budet er identisk med det gjeldende budet.",
+    "face_range": "Terningverdi må være mellom 1 og 6."
+  },
+  "message": {
+    "eliminated_invalid": "Spiller {player_id} ble eliminert på grunn av ugyldig trekk."
+  },
+  "outcome": {
+    "win": "Spiller {winner} vinner! Sluttrangering: {final_ranking}"
+  }
+}

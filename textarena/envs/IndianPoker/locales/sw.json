@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika mchezo wa Indian Poker.\n- Sitaha ya kadi 52; unaweza tu kuona kadi ya mpinzani wako.\n- Ante {ante} chip(s) kila raundi, {max_rounds} raundi kwa jumla.\n- Hatua halali: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ni nambari chanya <= hesabu yako ya chip.)\n- Kadi iliyojificha yenye thamani kubwa zaidi inashinda poti katika mchezo wa mwisho.\n"
+  },
+  "round": {
+    "announce": "### Raundi {current_round}/{max_rounds}\nKadi ya mpinzani wako ni: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Toa hatua moja tu iliyo na mabano, kwa mfano '[check]', '[bet 2]', '[call]', '[raise 3]', au '[fold]'.",
+    "cannot_check": "Hauwezi [check] - unakabiliwa na beti.",
+    "amount_min": "Kiasi cha beti / kuongeza lazima kiwe ≥ 1.",
+    "cannot_bet": "Hauwezi [bet] - lazima [call] / [raise] / [fold].",
+    "nothing_to_call": "Hakuna kitu cha kuita; unaweza [check] badala yake.",
+    "no_bet_to_raise": "Tumia [bet X] kufungua; hakuna beti ya kuongeza.",
+    "insufficient": "Chipsi zisizotosha kwa hatua hiyo."
+  },
+  "game_action": {
+    "action": "Mchezaji {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (gharama {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Hatua zinazowezekana: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Poti {pot} → Mchezaji {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Mchezaji {player_id} amejiondoa.",
+    "showdown_win": "Mchezo wa mwisho: {card_win} inashinda {card_lose}.",
+    "showdown_tie": "Mchezo wa mwisho uliopatana: zote mbili {card}. Poti imegawanywa – kila mmoja anapokea {split}."
+  },
+  "outcome": {
+    "p0_wins": "Mchezaji 0 anashinda ({bank0} > {bank1})",
+    "p1_wins": "Mchezaji 1 anashinda ({bank1} > {bank0})",
+    "draw": "Chipsi sawa baada ya raundi zote"
+  }
+}

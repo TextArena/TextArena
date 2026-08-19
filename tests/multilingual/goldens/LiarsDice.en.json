@@ -1,0 +1,609 @@
+{
+  "bid_and_call_bidder_bluff": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 1
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Liar's Dice game.\nRules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\nIf you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "\nNew round - Remaining dice: \tPlayer 0: 5; \tPlayer 1: 5\nYour current Dice are: 6, 1, 1, 6, 3",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[Bid: 4, 5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in an 2-player Liar's Dice game.\nRules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\nIf you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "\nNew round - Remaining dice: \tPlayer 0: 5; \tPlayer 1: 5\nYour current Dice are: 2, 2, 2, 6, 1",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[Bid: 4, 5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bids 4 of face 5.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Call]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Bid: 4, 5]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bids 4 of face 5.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[Call]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 calls! The actual count of face 5 is 0, which is LESS than 4.\nPlayer 0 (the last bidder) loses one die.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\nNew round - Remaining dice: \tPlayer 0: 4; \tPlayer 1: 5\nYour current Dice are: 6, 6, 5, 1",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "call_caller_loses": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 1
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Liar's Dice game.\nRules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\nIf you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "\nNew round - Remaining dice: \tPlayer 0: 5; \tPlayer 1: 5\nYour current Dice are: 6, 1, 1, 6, 3",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[Bid: 3, 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in an 2-player Liar's Dice game.\nRules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\nIf you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "\nNew round - Remaining dice: \tPlayer 0: 5; \tPlayer 1: 5\nYour current Dice are: 2, 2, 2, 6, 1",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[Bid: 3, 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bids 3 of face 1.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Call]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Bid: 3, 1]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bids 3 of face 1.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[Call]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 calls! The actual count of face 1 is 3, which is >= 3.\nPlayer 1 (the caller) loses one die.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\nNew round - Remaining dice: \tPlayer 0: 5; \tPlayer 1: 4\nYour current Dice are: 6, 6, 5, 1, 5",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "invalid_elimination": {
+    "game_info": {
+      "0": {
+        "invalid_move": true,
+        "reason": "Player 1 wins! Final ranking: [0, 1]",
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 1 wins! Final ranking: [0, 1]",
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Liar's Dice game.\nRules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\nIf you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "\nNew round - Remaining dice: \tPlayer 0: 5; \tPlayer 1: 5\nYour current Dice are: 6, 1, 1, 6, 3",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "bad",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "bad",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Action not recognized as either a valid '[Bid: X, Y]' or '[Call]'. Submitted action: bad Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "worse",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "worse",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 was eliminated by invalid move.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\nNew round - Remaining dice: \tPlayer 0: 0; \tPlayer 1: 5\nYour current Dice are: ",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": -1.0,
+      "1": 1.0
+    }
+  },
+  "invalid_reasons": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 3
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 3
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Liar's Dice game.\nRules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\nIf you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "\nNew round - Remaining dice: \tPlayer 0: 5; \tPlayer 1: 5\nYour current Dice are: 6, 1, 1, 6, 3",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[Call]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Call]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Call made with no prior bid. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[Bid: 3, 3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in an 2-player Liar's Dice game.\nRules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\nIf you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "\nNew round - Remaining dice: \tPlayer 0: 5; \tPlayer 1: 5\nYour current Dice are: 2, 2, 2, 6, 1",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[Call]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[Bid: 3, 3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bids 3 of face 3.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "notmove",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "notmove",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 attempted an invalid move. Reason: Action not recognized as either a valid '[Bid: X, Y]' or '[Call]'. Submitted action: notmove Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 1,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[Bid: 3, 4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Bid: 3, 3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bids 3 of face 3.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "notmove",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "[Bid: 3, 4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 bids 3 of face 4.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Bid: 2, 4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Bid: 2, 4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid bid: New quantity 2 is lower than current 3. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[Bid: 3, 5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Bid: 3, 4]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 bids 3 of face 4.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 0,
+        "text": "[Bid: 2, 4]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[Bid: 3, 5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bids 3 of face 5.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Bid: 3, 4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Bid: 3, 4]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 attempted an invalid move. Reason: Invalid bid: New face value 4 is lower than current 5. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 1,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[Bid: 4, 6]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Bid: 3, 5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bids 3 of face 5.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[Bid: 3, 4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "[Bid: 4, 6]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 bids 4 of face 6.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Bid: 4, 6]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Bid: 4, 6]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid bid: Bid is identical to the current bid. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[Bid: 5, 6]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Bid: 4, 6]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 bids 4 of face 6.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 0,
+        "text": "[Bid: 4, 6]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[Bid: 5, 6]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bids 5 of face 6.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "action": "[Bid: 5, 7]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Bid: 5, 7]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 attempted an invalid move. Reason: Invalid bid: Face value must be between 1 and 6. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 1,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[Call]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Bid: 5, 6]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 bids 5 of face 6.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[Bid: 5, 7]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "[Call]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 calls! The actual count of face 6 is 3, which is LESS than 5.\nPlayer 0 (the last bidder) loses one die.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\nNew round - Remaining dice: \tPlayer 0: 4; \tPlayer 1: 5\nYour current Dice are: 6, 6, 5, 1",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "བྲི་སི་ཀོ་ལ་རྩེད་མོ་འགོ་ཚུགས། རྒྱལ་རིགས། {trump_suit} （རྒྱལ་པོ་མིང་། {trump_card}）"
+  },
+  "prompt": {
+    "intro": "ཁྱེད་ཀྱིས་བྲི་སི་ཀོ་ལ་རྩེད་མོ་འགོ་ཚུགས་ཡོད། མི་སྣ་{player_id}\nདམིགས་པ། རྒྱལ་ཁ་ཐོབ་པ་དང་གཏང་མང་པོ་འཛིན་པ། （རྒྱལ་ཁ་གྱི་རྩ་མོ་གཅིག་གི་ནང་གཏང་༡༢༠）\nརྩ་མོ་གཏང་། A=༡༡、 ༣=༡༠、 K=༤、 Q=༣、 J=༢、 གཞན་པ་=༠\nརྩ་མོ་དབང་། A > ༣ > K > Q > J > ༧ > ༦ > ༥ > ༤ > ༢\nརྒྱལ་རིགས་ཀྱི་རྩ་མོ་རྒྱལ་རིགས་མིན་པའི་རྩ་མོ་ལས་དབང་ཆེ།\n\nའགུལ་སྐྱོད། '[play X]' ནི་ཁྱེད་ཀྱི་ལག་ཏུ་ཡོད་པའི་རྩ་མོ་{max_pos} གྱི་གནས་ཚུལ་"
+  },
+  "hand": {
+    "none": "གཤམ་འཁོད་མེད།",
+    "empty": "ལག་པར་ལག་འཁྱེར་མེད་པ།",
+    "header": "ཁྱོད་ཀྱི་ལག་པ།",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(ཊར་མ་ཕཱི)"
+  },
+  "trick": {
+    "empty": "ད་ལྟའི་བར་ལ་ལག་རྡུལ་འདི་འདྲ་ཞིག་རྩེད་མེད།",
+    "header": "ད་ལྟའི་རྣམ་གཞག་:",
+    "line": "  མི་སྣ་{player_id}། {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "མི་སྣ་{player_id}། {points} གཏང་",
+    "trump_info": "{trump_suit}གི་རོགས་རིགས།",
+    "trump_info_deck": "རྒྱལ་རིགས། {trump_suit} | འདུམ་ཚོགས་ནང་ཡོད་པའི་རྩ་མོ་{deck_count}",
+    "board": "{hand}\n\n{trick}\n\nརྩིས་འབྲས། {scores}\n{trump_info}\n\n[play X] སྤྱོད་བཟོས་པའི་རྩ་མོ་ཞིག་བཟུང་"
+  },
+  "invalid_move": {
+    "wrong_format": "[play X] འདི་ X ནི་ལག་རྟགས་ཀྱི་གནས་བབ་ (1, 2, 3, etc) ཡིན་པའི་ནང་འཇུག་བྱེད།",
+    "out_of_range": "རྩེད་མོ་མི་འདུག་པའི་རྣམ་པ། ཁྱེད་ཀྱིས་{count} རྩ་མོ་ཡོད་（༡-{count}）"
+  },
+  "action": {
+    "played": "མི་སྣ་{player_id} གྱིས་{card} བཟུང་",
+    "trick_win": "མི་སྣ་{winner} གྱིས་{card} དང་{points} གཏང་བས་རྒྱལ་ཁ་ཐོབ་"
+  },
+  "outcome": {
+    "head": "རྩེད་མོ་མཇུག་རྫོགས། མི་སྣ་{winner} གྱིས་{points} གཏང་བས་རྒྱལ་ཁ་ཐོབ།\n\nམཇུག་གི་རྩིས་འབྲས།\n{scores}",
+    "player_line": "མི་སྣ་{player_id}། {points} གཏང་（{tricks} རྒྱལ་ཁ་）\n"
+  }
+}

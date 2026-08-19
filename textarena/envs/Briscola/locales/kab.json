@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Wakud n Briscola yebda! Uɣerbaz: {trump_suit} (Takarḍa n uɣerbaz: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Tiririt daɣen Briscola - Wammud {player_id}.\nAɣilif: Rebḥ takarḍi d akeccem ḍḍay n poinṭi (120 poinṭi deg wakud).\nPoinṭi n takarḍa: A=11, 3=10, K=4, Q=3, J=2, wiyaḍ=0\nTazmert n takarḍa: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTakarḍi n uɣerbaz rebḥen takarḍi nniḍen.\n\nAɛewwel: '[play X]' anda X d waddad (1-{max_pos}) n takarḍa deg wammud\n"
+  },
+  "hand": {
+    "none": "Ulac tikarḍiwin.",
+    "empty": "Ulac tikarḍiwin deg ufus.",
+    "header": "Afus-ik:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP) D acu i d-yenna?"
+  },
+  "trick": {
+    "empty": "Mazal ur d-yuri ara lmeṣnuε agi.",
+    "header": "Aḥric n tura:",
+    "line": "  Player {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Player {player_id}: {points} n point",
+    "trump_info": "Aɣawas n uḍil: {trump_suit}",
+    "trump_info_deck": "Tasert n trumb: {trump_suit} | Tikwal timeqqṛin deg ufaw: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nScore: {scores}\n{trump_info}\n\nAɛewwel takarḍa s [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Seqdec [play X] anda X d amkan n tkarḍa (1, 2, 3, atg.)",
+    "out_of_range": "Waddad n takarḍa ur yezmir. Ɣur-k {count} takarḍi (1-{count})"
+  },
+  "action": {
+    "played": "Wammud {player_id} yuran {card}",
+    "trick_win": "Player {winner} yettwagʷez amek azekku akked {card} akked yettwafek {points} n point!"
+  },
+  "outcome": {
+    "head": "Tallit yettwaxṭer! Player {winner} yettwagʷez akked {points} n point!\n\nIsekna ifeḍlen:\n{scores}",
+    "player_line": "Wammud {player_id}: {points} poinṭi ({tricks} wakud)\n"
+  }
+}

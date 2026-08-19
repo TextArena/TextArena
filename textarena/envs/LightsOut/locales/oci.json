@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Benvengut a Lights Out ! Avètz una grilla de {size}x{size} luses.\nVòstre objectiu es d'apagar TOTAS las luses (representadas per '.')</nQuand pressatz una lus, toggla ela meteissa E sos vesins adjacents (naut/bas/esquèrra/drecha).\nTipeu [row col] per pressar una lus (0-indexada, donc la gama valida es 0-{max_index}).\nAvètz fins a {max_turns} moviments per resòlvre l'ensenhament.\nLegenda: 'O' = lus ENHAUT, '.' = lus APAGAT"
+  },
+  "board": {
+    "current_state": "Estat actual de la grilla (Moviment {moves_made}, {moves_left} moviments demorats, {completion}% completat):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'accion deu èsser en format [row col] ont la linha e colon son entièrs de 0 a {max_index}.",
+    "out_of_range": "Las coordenadas devon èsser entre 0 e {max_index}. Avètz entrat [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Felicitacions! Avètz resolgut lo puzzle en {moves_used} movements !",
+    "loss": "Jòc terminat ! Avètz utilizat tots {max_turns} moviments sens resòlvre l'ensenhament. Complèament final : {completion}%\nEstat final:\n{grid}"
+  }
+}

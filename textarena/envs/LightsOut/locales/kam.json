@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Welcome to Lights Out! You have a {size}x{size} grid of lights.\nYour goal is to turn ALL lights OFF (represented by '.')\nWhen you press a light, it toggles itself AND its adjacent neighbors (up/down/left/right).\nType [row col] to press a light (0-indexed, so valid range is 0-{max_index}).\nYou have up to {max_turns} moves to solve the puzzle.\nLegend: 'O' = light ON, '.' = light OFF"
+  },
+  "board": {
+    "current_state": "Hali ya sasa ya gridi (Zamu {moves_made}, {moves_left} zamu zimesalia, {completion}% imekamilika):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action must be in format [row col] where row and col are integers from 0 to {max_index}.",
+    "out_of_range": "Kuratibu lazima ziwe kati ya 0 na {max_index}. Umeingiza [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Hongera! Umetatua tatizo katika {moves_used} zamu!",
+    "loss": "Mchezo umemalizika! Umetumia zamu zote {max_turns} bila kutatua tatizo. Ukweli wa mwisho: {completion}%\nHali ya mwisho:\n{grid}"
+  }
+}

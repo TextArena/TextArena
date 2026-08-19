@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Kuna da Mai kunnawa {player_id} a cikin wasan Liar's Dice na {num_players}-mai kunnawa. Dokoki: - A lokacin da kuka juya, zaku iya: 1) Yi sabon tayin tare da adadi mafi girma ko fuska mafi girma (ko duka biyun) fiye da tayin na yanzu; watau '[Bid: 3, 4]', 2) Kira na ƙarshe ta hanyar buga '[Call]'. Idan kun kira: - Idan ainihin ƙididdigar wannan ƙimar fuska a cikin duk dice ya fi ƙasa da tayin, mai ba da kyauta na ƙarshe ya rasa ɗaya. - In ba haka ba, mai kiran ya rasa ɗaya. An cire ɗan wasan da ya kai 0 dice. Mai kunnawa na ƙarshe ya ci nasara."
+  },
+  "board": {
+    "per_player": "Mai kunnawa {p}: {d}",
+    "new_round": "Sabuwar zagaye - Ragowar dice: {dice_summary} Dice dinka na yanzu sune: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Mai kunnawa {current_player_id} kira! Lambar fuska ta ainihi {face_value} ita ce {count}, wanda ya KASANCE {quantity}. Mai kunnawa {loser_id} (mai sayarwa na ƙarshe) ya rasa ɗaya.",
+    "caller_loses": "Dan wasa {current_player_id} ya kira! Adadin halin {face_value} a zahiri shine {count}, wanda yake >= {quantity}.\nDan wasa {loser_id} (wanda ya kira) ya rasa daya daga cikin kubba."
+  },
+  "action": {
+    "bid_announce": "Mai kunnawa {player_id} tayi {quantity} na fuska {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Kira da aka yi ba tare da wani tayin da ya gabata ba.",
+    "invalid_bid": "Ƙimar da ba ta da inganci: {reason}",
+    "not_recognized": "Aikin ba a tantance shi a matsayin ko aikin '[Bid: X, Y]' na multiplicand ko '[Call]'. An gabatar da aiki: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Sabuwar adadin {new_quantity} ya fi na yanzu {current_quantity} ƙasa.",
+    "face_lower": "Sabuwar darajar {new_face_value} ta fi ƙasa da halin yanzu {current_face_value}.",
+    "identical": "Farashin daidai yake da farashin da ake bayarwa a yanzu.",
+    "face_range": "Lambar da aka ambata dole ne ta kasance tsakanin 1 da 6."
+  },
+  "message": {
+    "eliminated_invalid": "An cire mai kunnawa {player_id} ta hanyar motsawa mara inganci."
+  },
+  "outcome": {
+    "win": "Mai kunnawa {winner} ya ci nasara! Matsayi na ƙarshe: {final_ranking}"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "تاسو د درې لوبغاړو ټیک ټیک ټو کې لوبغاړی {player_id} یاست. ستاسو سمبول '{symbol}' دی. تاسو په خپل سمبول د 5x5 بورډ کې ځای په ځای کوئ ترڅو د څلورو کرښه جوړه کړئ. کرښې افقي ، عمودي یا مخطوط کیدی شي. خپل حرکت د '[4]' ب formatه په کارولو سره وسپارئ ترڅو د 4 حجره په نښه کړئ."
+  },
+  "board": {
+    "current_board": "اوسنی بورډ: {board} د لاسرسي وړ حرکتونه: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "د حرکت غیر معتبر بڼه. د \"[cell]\" کارول چیرې چې حجره 0-{max_cell} ده.",
+    "out_of_range": "د حجرو نه منل شوی شمیره: {cell}. باید د 0 او {max_cell} ترمنځ وي.",
+    "already_occupied": "حجره {cell} لا دمخه نیول شوې ده.",
+    "made_invalid": "لوبغاړي {player_id} یو ناقانونه حرکت کړی"
+  },
+  "game_action": {
+    "placed": "لوبغاړی {player_id} خپل سمبول ({symbol}) په ساحه کې ({row}، {col}) کې ځای په ځای کوي."
+  },
+  "outcome": {
+    "win": "لوبغاړی {player_id} ({symbol}) ګټي!",
+    "draw": "لوبه مساوي ده!"
+  }
+}

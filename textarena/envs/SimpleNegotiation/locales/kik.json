@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Mũrũgithi nĩ aageririe gwĩtĩkĩra kũgarũrũka atarĩ na indo iria ciabataranagia.",
+    "out_of_range": "Mwathani {player_id}, Utendakazi usio halali. Safu {col} iko nje ya mipaka.",
+    "already_full": "Mwathani {player_id}, Utendakazi usio halali. Safu {col} imejaa.",
+    "proposing_with_no_resource": "Mũingĩ wa mũbira {player_id} nĩ wageririe kũruta thogora ũtarĩ na indo iria ciagĩrĩire.",
+    "incorrect_offer_format": "Mũteng'eri {player_id} nĩ aheanire mũhothi wa kũgarũrĩra na njĩra ĩtarĩ njega.",
+    "no_new_offer": "Mũingĩ wa {player_id} ndwarĩ na ũndũ ũngĩ weranĩire."
+  },
+  "offers": {
+    "reject": "Mũteng'eri {player_id} nĩ aaregire kũgarũrũkwo.",
+    "accept": "Player {acceptor_id} accepted the trade offer from Player {proposer_id}.",
+    "proposal": "Mwathani {player_id} ametoa ofa ifuatayo kwa Mwathani {opponent_id}: Vitu vilivyotolewa: {offered} -> Vitu vinavyohitajika: {requested}"
+  },
+  "outcome": {
+    "win": "Mũingĩ wa mũbira {winner_id} nĩ ũhootanĩte na njĩra ya kũgĩa mbeca nyingĩ.",
+    "draw": "Ũgarũrũku ũrĩa ũkoragwo harĩ indo cia gũtegwo nĩ wahanaine kũrĩ athaki othe."
+  }
+}

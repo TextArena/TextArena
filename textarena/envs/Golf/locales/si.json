@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "ඔබ ගොල්ෆ් ක් රීඩාවක යෙදී සිටිනවා - ක් රීඩකයා {player_id}. ඉලක්කය: මෙම එක් වටයේ අඩුම මුළු ලකුණු ලබා ගන්න. තීරු එකම අගය බෙදාගන්නේ නම් ඒවා 0 ලෙස එකතු වේ. කාඩ්පත් අගයන්: A = 1, 2-10 = නාමික අගය, J / Q = 10, K = 0 ක් රියා (නිශ්චිත වරහන් භාවිතා කරන්න): - '[draw]' - තට්ටුවෙන් ඇද ගන්න - '[take]' - ඉවතලන ගොඩෙන් ගන්න - '[swap X Y]' - X (පේළ) Y (තීරුව) ස්ථානය සහිත ඇදගත් කාඩ්පත හුවමාරු කරන්න - '[discard]' - ඇදගත් කාඩ්පත ඉවතලන්න "
+  },
+  "board": {
+    "drew": "ඔයා ඇඳලා තියෙන්නේ: {card} දැන් ඔයා [swap X Y] නැත්නම් [discard] කරන්න ඕනේ.",
+    "took": "ඔයා ගන්නෙ: {card}අවතාර ගොඩෙන් ඔයා [swap X Y]එයත් එක්ක (අවතාර කරන්න බෑ).",
+    "peeked": "ඔයා ස්ථානයේ ({row},{col}) දෑස් පියාගත්තා: {card}",
+    "turn_view": "ඔයාගේ අත: {hand} ඉවතලන්න ගොඩ: {discard} {options}",
+    "none": "නැහැ"
+  },
+  "options": {
+    "final_turns": "අන්තිම වාරය! ඔයාගේ විකල්ප: [draw], [take], [peek X Y]",
+    "draw": "ඔබේ විකල්පයන්: [draw], [take]",
+    "must_swap": "ඔයා: [swap X Y] (අවතාර ගබඩාවෙන් කාඩ්පත් ඉවත දැමිය නොහැක)",
+    "swap_or_discard": "ඔබ කළ යුත්තේ: [swap X Y] හෝ [discard]"
+  },
+  "hand": {
+    "no_cards": "කාඩ් නෑ.",
+    "header": "කොළ: 1 2 3",
+    "row": "පේළිය {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "ක් රීඩකයා {pid} ස්ථානයේ {new} සමඟ {old} සමඟ හුවමාරු කර ඇත ({row},{col})",
+    "discarded": "ක් රීඩකයා {pid} ඉවත දමා ඇත {card}"
+  },
+  "message": {
+    "deck_empty": "තට්ටුව හිස්! ක් රීඩාව වහාම අවසන් වේ.",
+    "knocked": "ක්‍රීඩක {pid} ගැසුවා! අනෙක් සෑම ක්‍රීඩකයන්ටම තවත් වරයක් ලැබේ.",
+    "final_round": "ක් රීඩකයා {pid} {reason}! අනිත් ක් රීඩකයින්ට තව එක වාරයක් ලැබෙනවා."
+  },
+  "reason": {
+    "all_revealed": "සියලුම කාඩ්පත් හෙළි කර තිබෙනවා"
+  },
+  "invalid": {
+    "wrong_action": "හරියටම එක කුටීර ක් රියාවක් භාවිතා කරන්න: [draw], [take], [swap X Y], [discard], [knock], හෝ [peek X Y]",
+    "discard_empty": "ඉවතලන ගොඩ හිස්!",
+    "must_draw_first": "ඔයා මුලින්ම [draw], [take], [knock], නැත්නම් [peek X Y]",
+    "cannot_discard_taken": "ඔබ ඉවත් ගොඩගැසීමේ ගොඩ වෙතින් ගත් කාඩ් ඉවත් කළ නොහැක. ඔබ එය හුවමාරු කළ යුතුය.",
+    "have_drawn_card": "ඔයා ගාව කාඩ් එකක් තියෙනවා. ඔයා ඒක [swap X Y] හෝ [discard] කරන්න ඕනේ.",
+    "need_drawn_swap": "ඔයාට හුවමාරු කරන්න කාඩ් එකක් ඕන.",
+    "need_drawn_discard": "ඔයාලට ඕනේ අදින්න පුළුවන් කාඩ් එකක්.",
+    "out_of_bounds": "සීමාවෙන් පිටත පිහිටීම. 1-{max_row} පේළිය, 1-{max_col} තීරුව භාවිතා කරන්න.",
+    "knock_with_card": "ඔබ අඳින ලද කාඩ් එකක් සමග ගැසීමට නොහැක. ඔබගේ වරය සම්පූර්ණ කරන්න.",
+    "already_knocked": "කවුරුහරි මේ වටේට දැනටමත් ගහලා ඉවරයි.",
+    "already_revealed": "ඒ කාඩ් එක දැනටමත් හෙළි වෙලා!"
+  },
+  "summary": {
+    "full": "ගේම් අවසන්! ක්‍රීඩක {winner} ලකුණු {score} ගණනක් සමග ජයග්‍රහණය ලබයි!\n\nඅවසාන ලකුණු:\n{scores}",
+    "line": "ක් රීඩකයා {pid}: {score} ලකුණු "
+  },
+  "board_str": {
+    "title": "=== ගොල්ෆ් ක් රීඩාව ===",
+    "discard": "ඉවත දැමිය යුතු ගොඩ: {card}",
+    "knocked": "ක් රීඩකයා {pid}ට තට්ටු කළා!",
+    "player_header": "ක් රීඩකයා {pid} (ගණන්: {score}):"
+  }
+}

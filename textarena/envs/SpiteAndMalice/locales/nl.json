@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in een spel voor twee spelers van Spite and Malice. Uw doel is om als eerste uw afrekenstapel leeg te maken.\n\n### Overzicht van het spel:\n- Het doel is om uw afrekenstapel leeg te maken door kaarten naar de centrale stapels te spelen.\n- U kunt kaarten spelen vanuit drie bronnen:\n  1. Uw **hand** (u begint elke beurt met maximaal 5 kaarten in uw hand).\n  2. De **bovenste kaart van uw afrekenstapel**.\n  3. De **bovenste kaart van een van uw aflegstapels**.\n\n### Spelregels:\n- U kunt een kaart naar een centrale stapel spelen als deze **één rang hoger** is dan de bovenste kaart op die stapel (centrale stapels beginnen met Aas en gaan tot Koningin; Koningen zijn wild - ze kunnen op elke kaart worden gespeeld, maar veranderen de rangvolgorde niet. Dit betekent dat als een Koning wordt gebruikt na een 4, die Koning dan als 5 wordt gerangschikt en de volgende kaart een 6 moet zijn).\n- Als u geen kaarten meer kunt spelen, moet u **een kaart afleggen** naar een van uw aflegstapels om uw beurt te beëindigen.\n- Als een centrale stapel de Koningin bereikt, wordt deze automatisch geleegd.\n- De rangvolgorde is: A=1, 2=2, ..., 9=9, J=10, Q=11, K als wild.\n\n### Acties:\n1. **Trekken**: Aan het begin van uw beurt, trek kaarten om uw hand aan te vullen tot 5 kaarten. Voer **[draw]** in om te beginnen.\n2. **Een kaart spelen**: Om een kaart te spelen, specificeer de kaart en de centrale stapel als volgt: **[play A♠ 0]** (waar 'A♠' de kaart is en '0' de index van de centrale stapel is).\n3. **Afwijzen**: Als u geen kaarten meer kunt spelen, leg een kaart van uw hand af naar een aflegstapel om uw beurt te beëindigen. Voer **[discard A♠ 1]** in (waar 'A♠' de kaart is en '1' de index van de aflegstapel is). Houd er rekening mee dat u geen kaarten van de afrekenstapel kunt afleggen. U kunt alleen kaarten van uw hand afleggen.\n\n"
+  },
+  "board": {
+    "current_board": "Huidig bord:\n\n{board}\nBeschikbare zetten: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Centrale stapels ---\n",
+    "pile": "{observation}Stapel {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Speler {player_id}'s weergave ---\n",
+    "payoff": "{observation}Afrekenstapel (bovenste kaart): {top_card}, Afrekenstapel lengte: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Aflegstapels: {discard}\n",
+    "empty": "Leeg"
+  },
+  "game_message": {
+    "no_cards_left": "Er zijn geen kaarten meer om te trekken. Onthoud dat u kaarten kunt spelen vanuit de volgende bronnen:\n  1. Uw **hand**.\n  2. De **bovenste kaart van uw afrekenstapel**.\n  3. De **bovenste kaart van een van uw aflegstapels**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldig formaat voor de zet. Speler {player_id} heeft geen geldige zet in vierkante haken ingevoerd.",
+    "invalid_play": "Ongeldige speelzet. Speler {player_id} heeft geprobeerd {card} te spelen op centrale stapel {index}.",
+    "discard_from_payoff": "Ongeldige aflegging. Speler {player_id} heeft geprobeerd een kaart van de afrekenstapel af te leggen.",
+    "discard_not_in_hand": "Ongeldige aflegging. Speler {player_id} heeft geprobeerd een kaart af te leggen die niet in zijn hand is.",
+    "wrong_move_type": "Ongeldig type zet. Speler {player_id} heeft geen geldig type zet ingevoerd."
+  },
+  "game_action": {
+    "you_drew": "U hebt kaarten getrokken.",
+    "opponent_drew": "Speler {player_id} heeft kaarten getrokken.",
+    "you_played": "U hebt {card} gespeeld op centrale stapel {index}.",
+    "opponent_played": "Speler {player_id} heeft {card} gespeeld op centrale stapel {index}.",
+    "you_discarded": "U hebt {card} afgelegd naar aflegstapel {index}, wat ook betekent dat u uw beurt hebt beëindigd. Er worden geen verdere acties van u in aanmerking genomen voor deze beurt. Speler {next_player_id} zal als volgende gaan.",
+    "opponent_discarded": "Speler {player_id} heeft {card} afgelegd naar aflegstapel {index}, wat ook betekent dat hij zijn beurt heeft beëindigd. Er worden geen verdere acties van Speler {player_id} in aanmerking genomen voor deze beurt. Speler {next_player_id}, u gaat als volgende. Voer uw actie in in het formaat [actie kaart centrale_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Speler {current_player} heeft zijn afrekenstapel leeg gemaakt! Speler {current_player} wint!",
+    "deadlock_player_0": "Een patstelling is bereikt! Speler 0 wint met {player_0_payoff} kaarten over tegenover Speler 1's {player_1_payoff} kaarten.",
+    "deadlock_player_1": "Een patstelling is bereikt! Speler 1 wint met {player_1_payoff} kaarten over tegenover Speler 0's {player_0_payoff} kaarten.",
+    "deadlock_tie": "Een patstelling is bereikt met gelijkspel! Beide spelers hebben {player_0_payoff} kaarten over. Speler {current_player} wint standaard."
+  }
+}

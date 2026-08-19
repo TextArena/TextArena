@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola file ng lokasyon. HUWAG isalin ang mga susi (kaliwang bahagi). Isalin lamang ang mga halaga (kanang bahagi).",
+  "_slots": {
+    "{player_id}": "Ang numero ng manlalaro, hal. 0 o 1",
+    "{trump_suit}": "Ang simbolo ng trump suit (♠♥♦♣) - huwag isalin",
+    "{trump_card}": "Ang label ng trump card, hal. '7♠' - huwag isalin",
+    "{card}": "Ang label ng card, hal. 'A♥' - huwag isalin",
+    "{trump_mark}": "Ang pre-rendered '(TRUMP)' marker, o walang laman",
+    "{max_pos}": "Ang pinakamataas na posisyon ng card sa kamay ng manlalaro",
+    "{count}": "Ang bilang ng mga card na hawak ng manlalaro",
+    "{pos}": "Ang numero ng posisyon ng card sa kamay",
+    "{points}": "Ang bilang ng puntos (halaga ng card o accumulated score)",
+    "{hand}": "Ang pre-rendered, multi-line na listahan ng kamay",
+    "{trick}": "Ang pre-rendered na listahan ng kasalukuyang trick",
+    "{scores}": "Ang pre-rendered na linya ng score, o ang final na block ng score ng bawat manlalaro",
+    "{trump_info}": "Ang pre-rendered na linya ng trump suit / bilang ng deck",
+    "{winner}": "Ang numero ng manlalaro na nanalo ng trick o laro",
+    "{tricks}": "Ang bilang ng mga trick na nanalo ng manlalaro",
+    "{deck_count}": "Ang bilang ng mga card na natitira sa deck"
+  },
+  "game": {
+    "start": "Nagsimula ang laro ng Briscola! Trump suit: {trump_suit} (Trump card: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Ikaw ay naglalaro ng Briscola - Manlalaro {player_id}.\nLayunin: Manalo ng mga trick at kolektahin ang pinakamaraming puntos (120 kabuuang puntos sa deck).\nMga Puntos ng Card: A=11, 3=10, K=4, Q=3, J=2, iba=0\nKapangyarihan ng Card: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nAng mga trump card ay nanalo sa mga non-trump card anuman ang kapangyarihan.\n\nAksiyon: '[play X]' kung saan X ay ang posisyon (1-{max_pos}) ng card sa iyong kamay\n"
+  },
+  "hand": {
+    "none": "Walang mga card",
+    "empty": "Walang mga card sa kamay",
+    "header": "Ang iyong kamay:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Walang mga card na nilalaro pa sa trick na ito.",
+    "header": "Kasalukuyang trick:",
+    "line": "  Manlalaro {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Manlalaro {player_id}: {points} pts",
+    "trump_info": "Trump suit: {trump_suit}",
+    "trump_info_deck": "Trump suit: {trump_suit} | Mga card na natitira sa deck: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nMga Score: {scores}\n{trump_info}\n\nLaro ng isang card gamit ang [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Gumamit ng [play X] kung saan X ay ang posisyon ng card (1, 2, 3, atbp.)",
+    "out_of_range": "Hindi wastong posisyon ng card. Mayroon kang {count} mga card (1-{count})"
+  },
+  "action": {
+    "played": "Ang Manlalaro {player_id} ay naglaro ng {card}",
+    "trick_win": "Ang Manlalaro {winner} ay nanalo ng trick na may {card} at nakakuha ng {points} puntos!"
+  },
+  "outcome": {
+    "head": "Tapos na ang laro! Ang Manlalaro {winner} ay nanalo na may {points} puntos!\n\nMga Final na Score:\n{scores}",
+    "player_line": "Manlalaro {player_id}: {points} puntos ({tricks} mga trick)\n"
+  }
+}

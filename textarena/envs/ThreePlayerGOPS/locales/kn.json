@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "ನೀವು ಮೂರು-ಆಟಗಾರ GOPS ನಲ್ಲಿ ಆಟಗಾರ {player_id} ಆಗಿದ್ದೀರಿ.\n- ನೀವು 13 ಕಾರ್ಡ್‌ಗಳನ್ನು A-K (ಪ್ರತಿಯೊಂದು ಖಚಿತವಾಗಿ ಒಮ್ಮೆ) ಹೊಂದಿದ್ದೀರಿ.\n- ಪ್ರತಿ ಸುತ್ತಿನಲ್ಲಿ ಬಹುಮಾನವನ್ನು ಬಹಿರಂಗಪಡಿಸಲಾಗುತ್ತದೆ. `[Q]`, `[10]`, `[2]` … ರೀತಿಯಲ್ಲಿ ಒಂದು ಕಾರ್ಡ್ ಸಲ್ಲಿಸಿ\n- ಅತ್ಯಧಿಕ ಕಾರ್ಡ್ ಬಹುಮಾನವನ್ನು (+ ಯಾವುದೇ ಮುಂದುವರೆದ ಪಾತ್ರೆ) ಗೆಲ್ಲುತ್ತದೆ. ಟೈಗಳು ಬಹುಮಾನವನ್ನು ಮುಂದಿನ ಸುತ್ತಿಗೆ ರೋಲ್ ಮಾಡುತ್ತವೆ.\n- 13 ಸುತ್ತುಗಳ ನಂತರ, ಅತ್ಯಧಿಕ ಒಟ್ಟು ಗೆಲ್ಲುತ್ತದೆ. ಅಮಾನ್ಯ ಚಲನೆಗಳು = ಹೊರಹಾಕುವಿಕೆ."
+  },
+  "round": {
+    "header": "### ಸುತ್ತು {round}/13 - ಬಹುಮಾನ: {prize} (ಮೌಲ್ಯ {worth})",
+    "hand": "ನಿಮ್ಮ ಉಳಿದ ಕೈ: {hand}"
+  },
+  "reveal": {
+    "win": "ಬಿಡ್  {bids} - ಆಟಗಾರ {winner} ಗೆಲುವು {pot}.",
+    "tie": "ಬಿಡ್  {bids} - ಟೈ, ಪಾಟ್ ಈಗ {pot}.",
+    "scores": "ಅಂಕಗಳು → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "ಕ್ರಿಯೆಗೆ \"[Q]\" ನಂತಹ ಬ್ರಾಕೆಟ್ ಕಾರ್ಡ್ ಅಗತ್ಯವಿದೆ.",
+    "bad_card": "ಈಗಾಗಲೇ ಬಳಸಿದ ಅಥವಾ ಅಮಾನ್ಯ ಕಾರ್ಡ್"
+  },
+  "elimination": {
+    "player": "ಆಟಗಾರ {pid} ಪುನರಾವರ್ತಿತ ಅಮಾನ್ಯ ಚಲನೆಗಳ ನಂತರ ಹೊರಹಾಕಲ್ಪಟ್ಟರು."
+  },
+  "outcome": {
+    "auto_win": "ಎರಡು ಆಟಗಾರರು ಹೊರಗಿಡಲಾಗಿದೆ - ಸ್ವಯಂಚಾಲಿತ ಗೆಲುವು.",
+    "final": "ಅಂತಿಮ ಅಂಕಗಳು: {scores}"
+  }
+}

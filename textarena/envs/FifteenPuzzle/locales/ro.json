@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id}. Jucați jocul 15-Puzzle.\nObiectivul jocului este de a aranja plăcile numerotate în ordine crescătoare de la 1 la 15, cu spațiul gol situat în colțul din dreapta jos.\nPentru a face o mutare, puteți aluneca o placă în spațiul gol (reprezentat de două linii orizontale, de exemplu __) folosind una dintre următoarele comenzi:\n- 'up': Mută placa de sub spațiul gol în sus.\n- 'down': Mută placa de deasupra spațiului gol în jos.\n- 'left': Mută placa din dreapta spațiului gol în stânga.\n- 'right': Mută placa din stânga spațiului gol în dreapta.\nPentru a trimite mutarea, tastați direcția (de exemplu, 'up', 'down', 'left' sau 'right') în paranteze pătrate, de exemplu [up].\nConfigurația actuală a tablei este afișată mai jos. Folosiți informațiile pentru a rezolva puzzle-ul.\n"
+  },
+  "board": {
+    "current_board": "Tablă curentă:\n\n{board}\nMutări disponibile: {moves}",
+    "game_board": "Tablă de joc:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de mutare invalid. Jucătorul {player_id} nu a răspuns cu o direcție validă în paranteze pătrate.",
+    "illegal_move": "Mutare invalidă. Placa nu poate fi mutată în direcția specificată."
+  },
+  "outcome": {
+    "win": "Felicitări! Jucătorul {player_id} a rezolvat cu succes puzzle-ul 15-Puzzle.",
+    "turn_limit": "Limita de ture a fost atinsă. Modelul a completat {percent} la sută din puzzle"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Vi estas Ludanto {player_id} en {num_players}-luda Mensogaj Ĵetkuboj-ludo.\nReguloj:\n- Dum via vico, vi povas aŭ:\n  1) Fari novan oferton kun pli alta kvanto aŭ pli alta aspekto (aŭ ambaŭ) ol la nuna oferto; t.e. '[Bid: 3, 4]',\n  2) Voki la lastan oferton skribante '[Call]'.\n\nSe vi vokas:\n  - Se la efektiva nombro de tiu aspekta valoro inter ĉiuj ĵetkuboj estas malpli ol la oferto, la lasta ofertanto perdas unu ĵetkubon.\n  - Alie, la vokanto perdas unu ĵetkubon.\nLudanto, kiu atingas 0 ĵetkubojn, estas forigita. La lasta restanta ludanto gajnas."
+  },
+  "board": {
+    "per_player": "\tLudanto {p}: {d}",
+    "new_round": "\nNova raŭndo - Restantaj ĵetkuboj: {dice_summary}\nViaj nunaj ĵetkuboj estas: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Ludanto {current_player_id} vokas! La efektiva nombro de aspekto {face_value} estas {count}, kio estas MALPLI ol {quantity}.\nLudanto {loser_id} (la lasta ofertanto) perdas unu ĵetkubon.",
+    "caller_loses": "Ludanto {current_player_id} vokas! La efektiva nombro de aspekto {face_value} estas {count}, kio estas >= {quantity}.\nLudanto {loser_id} (la vokanto) perdas unu ĵetkubon."
+  },
+  "action": {
+    "bid_announce": "Ludanto {player_id} ofertas {quantity} de aspekto {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "La alvoko estis farita sen antaŭa oferto.",
+    "invalid_bid": "Malvalida oferto: {reason}",
+    "not_recognized": "Ago ne agnoskita kiel valida '[Bid: X, Y]' aŭ '[Call]'. Prezenta ago: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nova kvanto {new_quantity} estas pli malalta ol nuna {current_quantity}.",
+    "face_lower": "Nova nominala valoro {new_face_value} estas pli malalta ol nuna {current_face_value}.",
+    "identical": "La oferto estas identa al la nuna propono.",
+    "face_range": "La nominala valoro devas esti inter 1 kaj 6."
+  },
+  "message": {
+    "eliminated_invalid": "Ludanto {player_id} estis eliminita per malvalida movo."
+  },
+  "outcome": {
+    "win": "Ludanto {winner} gajnas! Fina rangordo: {final_ranking}"
+  }
+}

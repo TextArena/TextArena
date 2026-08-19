@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Sayıları Birleştir oyununu oynuyorsunuz!\nHedef: Sayıları +, -, *, / kullanarak hedefe ulaşmak.\nEylem formatı: [i j op] burada i,j indisler ve op işlemdir.\nÖrnek: [0 2 *] indis 0'daki sayıyı indis 2'deki sayı ile çarpar.\nBölme işleminin sonucu sadece tam sayı olabilir."
+  },
+  "board": {
+    "header": "HEDEF: {target}\n\nKullanılabilir sayılar:\n{numbers}",
+    "best": "{observation}\n\nŞimdiye kadarki en iyisi: {best_value} (mesafe: {distance})\nEn iyi ifade: {best_expression}",
+    "history": "{observation}\n\nHamle geçmişi:\n{moves}",
+    "progress": "{observation}\nMevcut ilerleme puanı: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Geçersiz eylem formatı. `[i j op]` formatını kullanın, burada i,j indisler ve op +,-,*,/",
+    "invalid_indices": "Geçersiz indisler. Farklı ve 0-{max_index} aralığında olmalıdır.",
+    "invalid_operation": "Geçersiz işlem (sıfıra bölme veya tam sayı olmayan sonuç)"
+  },
+  "outcome": {
+    "win": "Mükemmel! Hedefi tam olarak buldunuz: {target}",
+    "no_moves": "Daha fazla hamle yok. En iyi sonuç: {best_value} (hedef: {target})",
+    "turn_limit": "Tur sınırına ulaşıldı. En iyi sonuç: {best_value} (hedef: {target})"
+  }
+}

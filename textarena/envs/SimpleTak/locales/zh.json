@@ -1,0 +1,20 @@
+{
+    "player_prompt": {
+      "intro": "你是 SimpleTak 中的玩家 {player_id}。\n在棋盘上，你的棋子显示为 '{player_stone}'，对手的棋子显示为 '{opponent_stone}'。\n\n在你的回合中，选择一个空格，并使用其编号索引将你的棋子放在那里。\n例如，'[12]' 表示将你的棋子放在第 12 格。\n\n你的目标是用你的棋子形成一条连续路径，连接棋盘上两条相对的边，可以是从上到下，也可以是从左到右。"
+    },
+    "invalid_move": {
+      "invalid_move_format": "无效的移动格式",
+      "cell_out_of_range": "无效的格子编号 {cell_num}。必须在 0 到 {max_board_num} 之间。",
+      "cell_already_occupied": "格子 {cell_num} 已被占用。请选择一个空格。"
+    },
+    "board": {
+      "current_state": "当前棋盘状态：\n\n{rendered_board}\n可用移动：{available_moves}"
+    },
+    "action": {
+      "placement": "玩家 {current_player_id} 将其符号（{symbol}）放在格子 {cell_num}。"
+    },
+    "outcome": {
+      "winner": "玩家 {current_player_id}（'{symbol}'）连接了两条相对的边！",
+      "draw": "棋盘已满。平局！"
+    }
+  }

@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Tu sês Zugador {player_id} in un Dileme dal Presonîr Iterât che si davuelç sô {num_rounds} tornadis.\n\nStruture dal Zûc:\n- Prin di ogni decision tu âs {total_conversation_rounds} tornadis par comunicâ libramentri.\n- Dopo, ducj i doi zugadors sielzin contemporaneamentri di cooperâ o di tradî.\n\nMatrice dai Pajaments (fisse ogni tornade):\n- Ducj i doi Cooperin ➜ ognidun {cooperate_reward}\n- Ducj i doi Tradissin ➜ ognidun {mutual_defect_reward}\n- Un Tradìs, un Cooperi ➜ il Traditôr {defect_reward}, il Cooperadôr {sucker_reward}\n\nCemût Zugâ:\n- Durante la conversazion: scrîf il test che tu vûs.\n- Durante la fasi di decision: includi '[Cooperate]' o '[Defect]' (no è impuartant la maiuscole o minuscole). Tu puedis zontâ test adizionâl prin o dopo il token."
+  },
+  "phases": {
+    "conversation_finished": "Conversazion finide par torn {round}. Rispondi par plesê cu '[Cooperate]' o '[Defect]' dentri \\boxed{{}}.",
+    "starting_round": "--- Ronde di partence {round} ---",
+    "round_summary": "Risultâts de tornade {round}:\n{outcome}\nIl Zugadôr 0 al à vint {r0} (totâl {score_0}), il Zugadôr 1 al à vint {r1} (totâl {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} vinç {win_score} - {lose_score}.",
+    "draw": "Parie! Ducj i doi zuiadôrs a àn segnât {s0}.",
+    "round_both_cooperate": "Ducj i doi zuiadôrs a àn colaborât.",
+    "round_both_defect": "Ducj i doi zuiadôrs a àn disert.",
+    "round_p0_cooperates_p1_defects": "Il zuiadôr 0 al à colaborât, il zuiadòr 1 al è disert.",
+    "round_p0_defects_p1_cooperates": "Il zuiadôr 0 al à tradît, il zuiadôr 1 al à cooperât."
+  }
+}

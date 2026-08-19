@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Oe o le Tagata {player_id} i se ta'aloga Liar's Dice e {num_players} tagata.\nTulafono:\n- I lou taimi, e mafai ona e:\n  1) Fa'aulu se fa'atau fou ma se aofa'i e sili atu po'o se tulaga mata e sili atu (po'o fa'apena uma) nai lo le fa'atau lenei; i.e. '[Bid: 3, 4]',\n  2) Vala'au le fa'atau mulimuli e ala i le tusi '[Call]'.\n\nA e vala'au:\n  - A e itiiti ifo le faitauga o lena tulaga mata i fasi uma nai lo le fa'atau, le tagata na fa'atau mulimuli e leiloa se fasi.\n  - A leai, le tagata na vala'au e leiloa se fasi.\nO le tagata e sili atu i le 0 fasi e leiloa. Le tagata mulimuli e sili atu e manumalo."
+  },
+  "board": {
+    "per_player": "\tTagata taʻalo {p}: {d}",
+    "new_round": "\nRaunou fou - Taunu o loʻo toe: {dice_summary}\nO au taunu e teu nei: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Tagata {current_player_id} vala'au! Le faitauga o tulaga mata {face_value} e {count}, lea e itiiti ifo nai lo {quantity}.\nTagata {loser_id} (le tagata na fa'atau mulimuli) e leiloa se fasi.",
+    "caller_loses": "O le taʻaloga {current_player_id} ua valaau! O le aofai moni o le mata {face_value} o {count}, lea e >= {quantity}.\nO le taʻaloga {loser_id} (o le valaau) ua leiloa se tasi o ana tiʻitiʻi."
+  },
+  "action": {
+    "bid_announce": "O le ta'aloga {player_id} ua ofo {quantity} o le mata {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "O se valaauga na faia e aunoa ma ni tauofoga muamua.",
+    "invalid_bid": "Faʻatauga le aoga: {reason}",
+    "not_recognized": "Le faʻagauga le iloa e pei o se '[Bid: X, Y]' poʻo se '[Call]' faʻamaoni. Faʻagauga na tuʻuina atu: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "O le aofaʻi fou {new_quantity} e laʻititi ifo nai lo le taimi nei {current_quantity}.",
+    "face_lower": "O le tau fou {new_face_value} e maualalo ifo nai lo le taimi nei {current_face_value}.",
+    "identical": "E tutusa le tauofoga ma le tau o loo iai nei.",
+    "face_range": "O le tau e tatau ona i ai i le va o le 1 ma le 6."
+  },
+  "message": {
+    "eliminated_invalid": "O le tagata taalo {player_id} na faʻateʻaina e ala i se gaioiga le aoga."
+  },
+  "outcome": {
+    "win": "Tagata taʻalo {winner} manumalo! Faʻaiʻuga o le faʻasologa: {final_ranking}"
+  }
+}

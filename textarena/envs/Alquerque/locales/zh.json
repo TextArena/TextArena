@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "你是玩家 {player_id}（{piece}）。对手是（{opp}）。\n请使用 '[a2 a3]' 格式提交移动（从 → 到）。\n- 普通移动是向前一步，移动到相邻的空节点。\n- 吃子是跳过一个相邻的敌方棋子，并落到其后方的空节点上。\n每次吃子可获得 {score_per_capture} 分。\n游戏会在 {max_moves} 步后结束，或在某位玩家没有合法移动时结束。"
+  },
+  "board": {
+    "current_board": "第 {move_count} 步\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "格式错误。请使用 '[a2 a3]'。",
+    "unknown_square": "未知格位。",
+    "not_your_piece": "起始位置不是你的棋子。",
+    "dest_not_empty": "目标位置不为空。",
+    "illegal": "非法移动。"
+  },
+  "game_action": {
+    "captured": "玩家 {player_id} 吃掉了一个棋子！(+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "玩家 {player_id} 已无棋子。",
+    "cannot_move": "玩家 {player_id} 无法移动。",
+    "higher_score": "吃子得分更高。",
+    "move_limit": "已达到移动上限。"
+  }
+}

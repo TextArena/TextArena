@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "당신은 플레이어 {player_id} ({piece})입니다. 상대방은 ({opp})입니다. 수를 '[b1 c3]' 형식으로 제출하세요 (출발 → 도착). 모든 조각은 체스 나이트처럼 움직입니다.\n각 포획은 {score_per_capture} 점을 얻습니다. 게임은 {max_moves} 수 후 또는 플레이어가 합법적인 수나 조각이 없을 때 종료됩니다. 높은 점수가 승리합니다."
+  },
+  "board": {
+    "current_board": "수 #{move_count}\n\n{board}\n\n가능한 수: {moves}"
+  },
+  "invalid_move": {
+    "bad_format": "형식이 잘못되었습니다. '[b1 c3]' 형식을 사용하세요.",
+    "unknown_square": "알 수 없는 칸입니다.",
+    "not_your_piece": "출발점에 당신의 조각이 없습니다.",
+    "own_piece": "자신의 조각 위에 착수할 수 없습니다.",
+    "not_knight": "나이트의 움직임이 아닙니다."
+  },
+  "game_action": {
+    "moved": "플레이어 {player_id}가 조각을 {frm}에서 {to}로 이동했습니다.",
+    "capture": "{observation} 조각을 포획했습니다! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "플레이어 {player_id}가 조각이 없습니다.",
+    "cannot_move": "플레이어 {player_id}가 움직일 수 없습니다.",
+    "higher_score": "더 높은 포획 점수.",
+    "move_limit": "수 제한에 도달했습니다."
+  }
+}

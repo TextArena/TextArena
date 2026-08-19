@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Бозии Брищола оғоз шуд! Сути трумп: {trump_suit} (Карти трумп: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Шумо Брищоларо бозӣ мекунед - Бозигар {player_id}.\nМақсад: Трюкҳоро гирифтан ва ҷамъ кардани бештарин хол (120 хол дар колода).\nХолҳои карт: А=11, 3=10, К=4, Д=3, В=2, дигарон=0\nИқтидори карт: А > 3 > К > Д > В > 7 > 6 > 5 > 4 > 2\nКартҳои трумп картҳои гайритрумпиро беэътибор мекунанд.\n\nАмал: '[play X]' ҷои ки X-шумо мавқеи (1-{max_pos}) карта дар дасти шумост\n"
+  },
+  "hand": {
+    "none": "Бе кортҳо.",
+    "empty": "Дар даст кортҳо нестанд.",
+    "header": "Дасти шумо:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(ТРУМП)"
+  },
+  "trick": {
+    "empty": "Ҳанӯз ин ҳилларо касе бо кортҳо иҷро накардааст.",
+    "header": "Ҳилаҳои ҳозира:",
+    "line": "  Бозигар {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Бозигар {player_id}: {points} хол",
+    "trump_info": "Либоси Трамп: {trump_suit}",
+    "trump_info_deck": "Маънои кортҳои бартарӣ: {trump_suit} | Кортҳо дар колода: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nБаллҳо: {scores}\n{trump_info}\n\nКорти бозӣ кунед бо [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Истифодаи [play X], ки дар он X мавқеъи корт аст (1, 2, 3, ва ғайра)",
+    "out_of_range": "Мавқеи гитифи карта неаён. Шумо {count} картаро доред (1-{count})"
+  },
+  "action": {
+    "played": "Бозигар {player_id} {card}-ро бозид",
+    "trick_win": "Бозигар {winner} трюкро бо {card} ва {points} хол гирифт!"
+  },
+  "outcome": {
+    "head": "Бозии анҷом шуд! Бозигар {winner} бо {points} хол ғолиб шуд!\n\nНатиҷаҳои ниҳоӣ:\n{scores}",
+    "player_line": "Бозигар {player_id}: {points} хол ({tricks} трюк)\n"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Ade ti wara carte oko ape.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Môlêngê tî sozo\n\n📖 KÔTÂ MOKONZI:\n• O kômanda na {start_chips} môlêngê\n• Môlôkô 52 karta (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• O môlêngê tî sozo na môlôkô (nzela)\n• Môlôkô ôko ôtômbêla môlôkô Ultimate Texas Hold'em: o môlêngê ANTE na BLIND, oko 2 karta môlôkô, oko môlôkô PLAY ôko ôtômbêla, ôko ôtômbêla karta môlôkô na môlôkô ôtômbêla.\n• Môlôkô ôko ôtômbêla 0 môlêngê ôko ôtômbêla nzela (LOSS) ôko ôtômbêla 1000 môlôkô na môlêngê (WIN)\n\n💰 NZELA MOKONZI:\n• ANTE: Môlôkô ${ante} ôko ôtômbêla\n• BLIND: Môlôkô ${ante} ôko ôtômbêla\n• PLAY: Môlôkô ôko ôtômbêla. Ôko ôtômbêla, o môlêngê ôko ôtômbêla: (${ante4} ôko ôtômbêla PRE-FLOP, ${ante2} ôko ôtômbêla FLOP, ôko ${ante} ôko ôtômbêla RIVER. Ôko ôtômbêla fold ôko ôtômbêla river, ôko ôtômbêla môlôkô, ôko ôtômbêla bet.)\n\n🎴 KARTA MOKONZI:\n• O môlêngê 2 karta môlôkô (ôko môlôkô)\n• Môlôkô ôko ôtômbêla 2 karta môlôkô (ôko môlôkô ôko ôtômbêla)\n• 5 karta môlôkô ôko ôtômbêla ôko ôtômbêla\n• Karta môlôkô ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla\n\n🏆 NZELA MOKONZI:\n• Môlôkô ôko ôtômbêla ôko ôtômbêla PAIR (2 karta môlôkô ôko ôtômbêla) ôko ôtômbêla, ôko ôtômbêla 2 karta môlôkô ôko ôtômbêla na 5 karta môlôkô ôko ôtômbêla.\n• Nzela môlôkô ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla.\n\n🎮 MOKONZI ÔKO ÔTÔMBÊLA & NZELA:\n📋 PRE-FLOP:\n  • Nzela: [4x] (${ante4}) ôko ôtômbêla [check]\n  • [4x]: Môlôkô ${ante4} PLAY ôko ôtômbêla, ôko ôtômbêla 3 karta môlôkô ôko ôtômbêla\n  • [check]: Ôko ôtômbêla bet, ôko ôtômbêla 3 karta môlôkô ôko ôtômbêla\n\n📋 FLOP:\n  • Ôko 4x ôko ôtômbêla: Ôko ôtômbêla [skip] ôko ôtômbêla (ôko ôtômbêla ôko ôtômbêla 2 karta môlôkô ôko ôtômbêla)\n  • Ôko ôko ôtômbêla 4x ôko ôtômbêla: [2x] (${ante2}) ôko ôtômbêla [check]\n  • [2x]: Môlôkô ${ante2} PLAY ôko ôtômbêla, ôko ôtômbêla 2 karta môlôkô ôko ôtômbêla\n  • [check]: Ôko ôtômbêla bet, ôko ôtômbêla 2 karta môlôkô ôko ôtômbêla\n\n📋 RIVER:\n  • Ôko 4x ôko ôtômbêla ôko ôtômbêla 2x ôko ôtômbêla: Ôko ôtômbêla [skip] ôko ôtômbêla (ôko ôtômbêla ôko ôtômbêla showdown)\n  • Ôko ôko ôtômbêla PLAY ôko ôtômbêla: [1x] (${ante}) ôko ôtômbêla [fold]\n  • [1x]: Môlôkô ${ante} PLAY ôko ôtômbêla, ôko ôtômbêla showdown\n  • [fold]: Ôko ôtômbêla môlôkô, ôko ôtômbêla ANTE na BLIND ôko ôtômbêla\n\n📋 SHOWDOWN:\n  • Karta môlôkô ôko ôtômbêla ôko ôtômbêla\n  • Môlôkô ôko ôtômbêla ôko ôtômbêla 5 karta môlôkô ôko ôtômbêla (2 karta môlôkô + 5 karta môlôkô ôko ôtômbêla)\n  • Bet ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla\n\n💎 NZELA PAYOUTS:\n📊 ANTE BET:\n  • Môlôkô ôko ôtômbêla ôko ôtômbêla: PUSH (bet ôko ôtômbêla)\n  • Môlôkô ôko ôtômbêla ôko ôtômbêla & o môlêngê ôko ôtômbêla: 1:1 payout (bet + winnings)\n  • Môlôkô ôko ôtômbêla ôko ôtômbêla & o môlêngê ôko ôtômbêla: Bet ôko ôtômbêla\n  • Tie: PUSH (bet ôko ôtômbêla)\n\n📊 BLIND BET:\n  • Ôko ôtômbêla môlôkô ôko ôtômbêla\n  • O môlêngê ôko ôtômbêla: Bet ôko ôtômbêla na payout ôko ôtômbêla ôko ôtômbêla\n  • O môlêngê ôko ôtômbêla: Bet ôko ôtômbêla\n  • Tie: PUSH (bet ôko ôtômbêla)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Ôko ôtômbêla payout\n\n📊 PLAY BET:\n  • Ôko ôtômbêla môlôkô ôko ôtômbêla\n  • O môlêngê ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla\n  • O môlêngê ôko ôtômbêla: 1:1 payout (bet + winnings)\n  • O môlêngê ôko ôtômbêla: Bet ôko ôtômbêla\n  • Tie: PUSH (bet ôko ôtômbêla)\n\n🎯 POKER HAND RANKINGS (Best to Worst):\n  1. Royal Flush: A-K-Q-J-10 ôko ôtômbêla\n  2. Straight Flush: 5 karta ôko ôtômbêla ôko ôtômbêla\n  3. Four of a Kind: 4 karta ôko ôtômbêla ôko ôtômbêla\n  4. Full House: 3 karta ôko ôtômbêla ôko ôtômbêla + 2 karta ôko ôtômbêla ôko ôtômbêla\n  5. Flush: 5 karta ôko ôtômbêla ôko ôtômbêla\n  6. Straight: 5 karta ôko ôtômbêla ôko ôtômbêla\n  7. Three of a Kind: 3 karta ôko ôtômbêla ôko ôtômbêla\n  8. Two Pair: 2 karta ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla\n  9. One Pair: 2 karta ôko ôtômbêla ôko ôtômbêla\n  10. High Card: Karta ôko ôtômbêla ôko ôtômbêla\n\n⌨️  ACTION COMMANDS:\n• [4x] ôko ôtômbêla [play bet 4x]: Môlôkô ${{self.ante_amount*4}} PLAY ôko ôtômbêla\n• [2x] ôko ôtômbêla [play bet 2x]: Môlôkô ${{self.ante_amount*2}} PLAY ôko ôtômbêla\n• [1x] ôko ôtômbêla [play bet 1x]: Môlôkô ${{self.ante_amount*1}} PLAY ôko ôtômbêla\n• [check] ôko ôtômbêla [c]: Check (ôko ôtômbêla bet)\n• [fold] ôko ôtômbêla [f]: Fold (ôko ôtômbêla môlôkô)\n• [skip] ôko ôtômbêla [s]: Skip ôko ôtômbêla ôko ôtômbêla (ôko ôtômbêla ôko ôtômbêla)\n\n💡 STRATEGY TIPS:\n• Môlôkô ôko ôtômbêla ôko ôtômbêla (pairs, high cards) ôko ôtômbêla 4x ôko ôtômbêla\n• Ôko ôtômbêla môlôkô ôko ôtômbêla - ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla\n• BLIND ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla (Royal Flush = 500:1!)\n• Ôko ôtômbêla môlôkô ôko ôtômbêla! Ôko ôtômbêla ôko ôtômbêla 0 ôko ôtômbêla ôko ôtômbêla, ôko ôtômbêla ôko ôtômbêla.\n\n⚠️  IMPORTANT NOTES:\n• ANTE na BLIND ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla\n• PLAY ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla\n• Ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla ôko ôtômbêla.\n\n",
+    "state": "🎯 ROUND {round}\n💰 Môlêngê: {chips}\n🎴 Môlôkô ôko ôtômbêla: {hand}\n📊 Bet ôko ôtômbêla: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Phase: {phase}\n🎯 Nzela ôko ôtômbêla: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Round {round} ôko ôtômbêla! Bet ôko ôtômbêla: ANTE ${ante}, BLIND ${blind}. O môlêngê {chips} ôko ôtômbêla ôko ôtômbêla.",
+    "your_hand": " Tâ maboko ti mo: {hand}",
+    "flop_revealed": " FLOP afa ni: {cards}",
+    "river_revealed": " RIVER afa ni: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Ye so a sara na ngoi ti fadeso ayeke nzoni pëpe. {available} Aye ni alingbi awe:",
+    "message": " Ye so ayeke na lege ni pëpe! Aye ti sarango ni: {available}"
+  },
+  "action": {
+    "folded": "Mo zia lege ni."
+  },
+  "showdown": {
+    "dealer_hand": " Fa na gigi! maboko ti zo so ayeke kä ye: {cards}",
+    "community_cards": " Akarte ti kodoro: {cards}",
+    "player_best": "🎴 Môlôkô ôko ôtômbêla ôko ôtômbêla: {name} ({cards})",
+    "dealer_best": "🎴 Môlôkô ôko ôtômbêla ôko ôtômbêla: {name} ({cards})",
+    "ante_lost_folded": " ANTE BET LOST! -${ante} (a zi yâ ni)",
+    "blind_lost_folded": " KOTA MAMA-NDIA ni agirisa! - ${blind} (a zi yâ ti lo)",
+    "ante_won": "✅ ANTE WON! +${amount} ti pari ni ayeke na gbe ti mo.",
+    "ante_pushed": " ANTE BET PUSHED! ${ante} akiri na peko ti lo.",
+    "ante_lost": " ANTE BET LOST! -${ante} A yeke mbeni ye ti ngia.",
+    "blind_won": "✅ KOTA MAMA-NDIA ni asö benda! +${amount}",
+    "blind_pushed": " KOTA MAMA-NDIA A GIGI NA NDO NI! ${blind} akiri na peko ti lo.",
+    "blind_lost": " KOTA MAMA-NDIA ni agirisa! - ${blind}",
+    "play_won": "✅ TËNGA KOTA MAMA-NDIA A HINDA! +${amount}",
+    "play_pushed": " TËNGA KOTA MAMA-NDIA A GIGI NA NDO NI! ${play} akiri na peko ti lo.",
+    "play_lost": " Mû peko ti ye so mo zia na sese! -${play}",
+    "net_gain": "🎉 Round {round} ôko ôtômbêla! Net gain: +${net}",
+    "net_loss": "💸 Round {round} ôko ôtômbêla! Net loss: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 GAME OVER! {max_turns} ôko ôtômbêla ôko ôtômbêla. O môlêngê ${chips} ôko ôtômbêla - O WIN!",
+    "game_over_lose": "Mo yeke na alê ti kobe oko pëpe.",
+    "reward_win": "Môlôkô ôko ôtômbêla {winner_rounds} ôko ôtômbêla ôko ôtômbêla ${chips} ôko ôtômbêla",
+    "reward_lose": "Na yâ ti tour ni, a hunzi na zo so ayeke sara ngia ni {round}.",
+    "reward_win_max": "Môlôkô ôko ôtômbêla {max_turns} ôko ôtômbêla ôko ôtômbêla ${chips} ôko ôtômbêla"
+  },
+  "hand_names": {
+    "royal_flush": "Popo ti gbia ni so ayeke na nduzu mingi",
+    "straight_flush": "Na lege ni ti tuku ngu na lê ni kue",
+    "four_of_a_kind": "A yeke gi mara ti ala osio la ayeke dä.",
+    "full_house": "A si na ndo kue.",
+    "flush": "Furu yâ ti ngu ni kue",
+    "straight": "Luti kpô.",
+    "three_of_a_kind": "A yeke mara ti aye ota so ayeke nde mingi",
+    "two_pair": "A-oko use so ayeke nde nde",
+    "one_pair": "Mbeni use ni oko",
+    "high_card": "Kota carte ni so ayeke na nduzu mingi",
+    "unknown": "A hinga maboko ti lo pëpe"
+  }
+}

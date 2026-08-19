@@ -197,7 +197,7 @@ register_with_versions(id="ConnectFour-v0-blind", entry_point="textarena.envs.Co
 register_with_versions(id="ConnectFour-v0-large", entry_point="textarena.envs.ConnectFour.env:ConnectFourEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS}, is_open=True,  num_rows=12, num_cols=15 )
 
 # Coup [2 Player]
-# TODO
+register_with_versions(id="Coup-v0",       entry_point="textarena.envs.Coup.env:CoupEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
 
 # Crusade [2 Player]
 register_with_versions(id="Crusade-v0", entry_point="textarena.envs.Crusade.env:CrusadeEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
@@ -237,6 +237,7 @@ register_with_versions(id="IteratedMatchingPennies-v0", entry_point="textarena.e
 
 # IteratedPrisonersDilemma [2 Player]
 register_with_versions(id="IteratedPrisonersDilemma-v0", entry_point="textarena.envs.IteratedPrisonersDilemma.env:IteratedPrisonersDilemmaEnv", wrappers={"default": CONVERSATIONAL_WRAPPERS, "-train": CONVERSATIONAL_WRAPPERS}, num_rounds=10, communication_turns=1, cooperate_reward=3, defect_reward=5, sucker_reward=0, mutual_defect_reward=1)
+register_with_versions(id="IteratedPrisonersDilemma-v0-short", entry_point="textarena.envs.IteratedPrisonersDilemma.env:IteratedPrisonersDilemmaEnv", wrappers={"default": CONVERSATIONAL_WRAPPERS, "-train": CONVERSATIONAL_WRAPPERS}, num_rounds=5, communication_turns=1, cooperate_reward=3, defect_reward=5, sucker_reward=0, mutual_defect_reward=1)
 
 # IteratedRockPaperScissors [2 Player]
 register_with_versions(id="IteratedRockPaperScissors-v0", entry_point="textarena.envs.IteratedRockPaperScissors.env:IteratedRockPaperScissorsEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameMessagesObservationWrapper, ActionFormattingWrapper]}, num_rounds=9)
@@ -255,22 +256,23 @@ register_with_versions(id="KuhnPoker-v0-medium",  entry_point="textarena.envs.Ku
 register_with_versions(id="KuhnPoker-v0-long",    entry_point="textarena.envs.KuhnPoker.env:KuhnPokerEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS}, max_rounds=15  )
 register_with_versions(id="KuhnPoker-v0-extreme", entry_point="textarena.envs.KuhnPoker.env:KuhnPokerEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS}, max_rounds=25  )
 
-# # LeducHoldem [2 Player]
-# register(id="LeducHoldem-v0", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=5)
-# register(id="LeducHoldem-v0-medium", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=9)
-# register(id="LeducHoldem-v0-long", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=15)
-# register(id="LeducHoldem-v0-extreme", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=25)
-# register(id="LeducHoldem-v0-raw", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=5)
-# register(id="LeducHoldem-v0-raw-medium", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=9)
-# register(id="LeducHoldem-v0-raw-long", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=15)
-# register(id="LeducHoldem-v0-raw-extreme", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=25)
-# register(id="LeducHoldem-v0-train", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=5)
-# register(id="LeducHoldem-v0-train-medium", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=9)
-# register(id="LeducHoldem-v0-train-long", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=15)
-# register(id="LeducHoldem-v0-train-extreme", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=25)
+# LeducHoldem [2 Player]
+register(id="LeducHoldem-v0", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=5)
+register(id="LeducHoldem-v0-medium", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=9)
+register(id="LeducHoldem-v0-long", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=15)
+register(id="LeducHoldem-v0-extreme", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=DEFAULT_WRAPPERS, max_rounds=25)
+register(id="LeducHoldem-v0-raw", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=5)
+register(id="LeducHoldem-v0-raw-medium", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=9)
+register(id="LeducHoldem-v0-raw-long", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=15)
+register(id="LeducHoldem-v0-raw-extreme", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", max_rounds=25)
+register(id="LeducHoldem-v0-train", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=5)
+register(id="LeducHoldem-v0-train-medium", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=9)
+register(id="LeducHoldem-v0-train-long", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=15)
+register(id="LeducHoldem-v0-train-extreme", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper], max_rounds=25)
 
 # LeTruc [2 Player]
-# TODO 
+register(id="LeTruc-v0", entry_point="textarena.envs.LeTruc.env:LeTrucEnv", default_wrappers=DEFAULT_WRAPPERS)
+register(id="LeTruc-v0-train", entry_point="textarena.envs.LeTruc.env:LeTrucEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper])
 
 # LinesOfAction [2 Player]
 register_with_versions(id="LinesOfAction-v0", entry_point="textarena.envs.LinesOfAction.env:LinesOfActionEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
@@ -357,6 +359,9 @@ register_with_versions(id="Tak-v0-hard",    entry_point="textarena.envs.Tak.env:
 # TicTacToe [2 Player]
 register_with_versions(id="TicTacToe-v0", entry_point="textarena.envs.TicTacToe.env:TicTacToeEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
 
+# JoJoJoin [2 Player]
+register_with_versions(id="JoJoJoin-v0", entry_point="textarena.envs.JoJoJoin.env:JoJoJoinEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
+
 # TruthAndDeception [2 Player]
 register_with_versions(id="TruthAndDeception-v0",         entry_point="textarena.envs.TruthAndDeception.env:TruthAndDeceptionEnv", wrappers={"default": [LLMObservationWrapper], "-train": CONVERSATIONAL_WRAPPERS}, max_turns=6    )
 register_with_versions(id="TruthAndDeception-v0-long",    entry_point="textarena.envs.TruthAndDeception.env:TruthAndDeceptionEnv", wrappers={"default": [LLMObservationWrapper], "-train": CONVERSATIONAL_WRAPPERS}, max_turns=12   )
@@ -388,39 +393,6 @@ register_with_versions(id="WildTicTacToe-v0", entry_point="textarena.envs.WildTi
 
 # WordChains [2 Player]
 register_with_versions(id="WordChains-v0", entry_point="textarena.envs.WordChains.env:WordChainsEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Hex [2 Player]
-#register_with_versions(id="Hex-v0", entry_point="textarena.envs.Hex.env:HexEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # Snake [2-15 Players]
 register_with_versions(id="Snake-v0",           entry_point="textarena.envs.Snake.env:SnakeEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameBoardObservationWrapper, ActionFormattingWrapper]}, width=5,   height=5,   num_apples=2, max_turns=40  )
@@ -488,73 +460,15 @@ register_with_versions(id="SecretMafia-v0", entry_point="textarena.envs.SecretMa
 # WinAsMuchAsYouCanEnv [4 Players]
 register_with_versions(id="WinAsMuchAsYouCan-v0", entry_point="textarena.envs.WinAsMuchAsYouCan.env:WinAsMuchAsYouCanEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
 
-# RandomizedTicTacToe [2 Player]
-# register(id="RandomizedTicTacToe-v0", entry_point="textarena.envs.RandomizedTicTacToe.env:RandomizedTicTacToeEnv", default_wrappers=DEFAULT_WRAPPERS)
-# register(id="RandomizedTicTacToe-v0-raw", entry_point="textarena.envs.RandomizedTicTacToe.env:RandomizedTicTacToeEnv")
-
-
-
-
-
-# # Stratego (two-player)
-# register(id="Stratego-v0", entry_point="textarena.envs.Stratego.env:StrategoEnv", default_wrappers=[LLMObservationWrapper])
-# register(id="Stratego-v0-raw", entry_point="textarena.envs.Stratego.env:StrategoEnv")
-
-
-# # SpiteAndMalice (two-player)
-# register(id="SpiteAndMalice-v0", entry_point="textarena.envs.SpiteAndMalice.env:SpiteAndMaliceEnv", default_wrappers=[LLMObservationWrapper])
-# register(id="SpiteAndMalice-v0-raw", entry_point="textarena.envs.SpiteAndMalice.env:SpiteAndMaliceEnv")
-
-
-# # Tak (two-player)
-# register(id="Tak-v0", entry_point="textarena.envs.Tak.env:TakEnv", default_wrappers=[LLMObservationWrapper], board_size=4, stones=15, capstones=1)
-# register(id="Tak-v0-medium", entry_point="textarena.envs.Tak.env:TakEnv", default_wrappers=[LLMObservationWrapper], board_size=5, stones=21, capstones=1)
-# register(id="Tak-v0-hard", entry_point="textarena.envs.Tak.env:TakEnv", default_wrappers=[LLMObservationWrapper], board_size=6, stones=30, capstones=1)
-# register(id="Tak-v0-raw", entry_point="textarena.envs.Tak.env:TakEnv", board_size=4, stones=15, capstones=1)
-# register(id="Tak-v0-raw-medium", entry_point="textarena.envs.Tak.env:TakEnv", board_size=5, stones=21, capstones=1)
-# register(id="Tak-v0-raw-hard", entry_point="textarena.envs.Tak.env:TakEnv", board_size=6, stones=30, capstones=1)
-
-
-
-
-
-# # UltimateTicTacToe (two-player)
-# register(id="UltimateTicTacToe-v0", entry_point="textarena.envs.UltimateTicTacToe.env:UltimateTicTacToeEnv", default_wrappers=DEFAULT_WRAPPERS)
-# register(id="UltimateTicTacToe-v0-raw", entry_point="textarena.envs.UltimateTicTacToe.env:UltimateTicTacToeEnv")
-# register(id="UltimateTicTacToe-v0-train", entry_point="textarena.envs.UltimateTicTacToe.env:UltimateTicTacToeEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper])
-
-
-# # WordChains (two-player)
-# register(id="WordChains-v0", entry_point="textarena.envs.WordChains.env:WordChainsEnv", default_wrappers=DEFAULT_WRAPPERS)
-# register(id="WordChains-v0-raw", entry_point="textarena.envs.WordChains.env:WordChainsEnv")
-# register(id="WordChains-v0-train", entry_point="textarena.envs.WordChains.env:WordChainsEnv", default_wrappers=[GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper])
-
-
 # # Negotiation (2-15 players)
 # register(id="Negotiation-v0", entry_point="textarena.envs.Negotiation.env:NegotiationEnv", default_wrappers=[LLMObservationWrapper], turn_multiple=8)
-# register(id="Negotiation-v0-long", entry_point="textarena.envs.Negotiation.env:NegotiationEnv", default_wrappers=[LLMObservationWrapper], turn_multiple=15)
-# register(id="Negotiation-v0-raw", entry_point="textarena.envs.Negotiation.env:NegotiationEnv", turn_multiple=8)
-# register(id="Negotiation-v0-raw-long", entry_point="textarena.envs.Negotiation.env:NegotiationEnv", turn_multiple=15)
-
 
 # # BlindAuction (3-15 players)
 # register(id="BlindAuction-v0", entry_point="textarena.envs.BlindAuction.env:BlindAuctionEnv", default_wrappers=[LLMObservationWrapper], starting_capital=1000, num_items=5, conversation_rounds=3)
-# register(id="BlindAuction-v0-high", entry_point="textarena.envs.BlindAuction.env:BlindAuctionEnv", default_wrappers=[LLMObservationWrapper], starting_capital=2500, num_items=8, conversation_rounds=5)
-# register(id="BlindAuction-v0-fast", entry_point="textarena.envs.BlindAuction.env:BlindAuctionEnv", default_wrappers=[LLMObservationWrapper], starting_capital=750,  num_items=3, conversation_rounds=1)
-# register(id="BlindAuction-v0-complex", entry_point="textarena.envs.BlindAuction.env:BlindAuctionEnv", default_wrappers=[LLMObservationWrapper], starting_capital=1500, num_items=12, conversation_rounds=8)
-# register(id="BlindAuction-v0-raw", entry_point="textarena.envs.BlindAuction.env:BlindAuctionEnv", starting_capital=1000, num_items=5, conversation_rounds=3)
-# register(id="BlindAuction-v0-raw-high", entry_point="textarena.envs.BlindAuction.env:BlindAuctionEnv", starting_capital=2500, num_items=8, conversation_rounds=5)
-# register(id="BlindAuction-v0-raw-fast", entry_point="textarena.envs.BlindAuction.env:BlindAuctionEnv", starting_capital=750,  num_items=3, conversation_rounds=1)
-# register(id="BlindAuction-v0-raw-complex", entry_point="textarena.envs.BlindAuction.env:BlindAuctionEnv", starting_capital=1500, num_items=12, conversation_rounds=8)
-
 
 # # Diplomacy (3-7 players)
 # register(id="Diplomacy-v0", entry_point="textarena.envs.Diplomacy.env:DiplomacyEnv", default_wrappers=[LLMObservationWrapper], max_turns=1_000)
 # register(id="Diplomacy-v0-raw", entry_point="textarena.envs.Diplomacy.env:DiplomacyEnv", max_turns=1_000)
-
-
-# TabMWP - Tabular Math Word Problems
-# register(id="TABMWP-v0", entry_point="textarena.envs.ClassicalReasoningEvals.env:ClassicalReasoningEvalsEnv", file_name="tabmwp/test.jsonl", n_samples=None)
 
 # Santorini Base Version with Fixed Worker Placement 
 register_with_versions(id="SantoriniBaseFixed-v0", entry_point="textarena.envs.Santorini.env:SantoriniBaseFixedWorkerEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": DEFAULT_WRAPPERS})

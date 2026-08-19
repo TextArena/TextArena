@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Selamat datang di Lights Out! Anda memiliki grid lampu berukuran {size}x{size}.\nTujuan Anda adalah mematikan SEMUA lampu (ditandai dengan '.').\nKetika Anda menekan sebuah lampu, lampu tersebut dan tetangga-tetangganya (atas/bawah/kiri/kanan) akan berubah.\nKetik [row col] untuk menekan lampu (indeks 0, jadi rentang yang valid adalah 0-{max_index}).\nAnda memiliki hingga {max_turns} langkah untuk menyelesaikan teka-teki.\nLegenda: 'O' = lampu HIDUP, '.' = lampu MATI"
+  },
+  "board": {
+    "current_state": "Keadaan grid saat ini (Langkah {moves_made}, {moves_left} langkah tersisa, {completion}% selesai):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Tindakan harus dalam format [row col] di mana row dan col adalah bilangan bulat dari 0 hingga {max_index}.",
+    "out_of_range": "Koordinat harus antara 0 dan {max_index}. Anda memasukkan [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Selamat! Anda menyelesaikan teka-teki dalam {moves_used} langkah!",
+    "loss": "Game over! Anda telah menggunakan semua {max_turns} langkah tanpa menyelesaikan teka-teki. Persentase selesai akhir: {completion}%\nKeadaan akhir:\n{grid}"
+  }
+}

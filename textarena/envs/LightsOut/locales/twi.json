@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Akwaaba Lights Out! Wɔde {size}x{size} grid of lights ama wo.\nWo botae ne sɛ wobɛma dɔn nyinaa NKOGUO (kyerɛw 'nkyerɛmu' no '.')\nBerɛ a wɔbɛpɛ dɔn bi, ɛno ankasa ne ne nɔrepɛn (soro/ase/benkum/nifa) no bɛdan.\nKyerɛw [row col] sɛ wopɛ dɔn bi (0-indexed, enti berɛmo koraa ne 0-{max_index}).\nWo wɔ {max_turns} nhyehyeɛ sɛ wobɛtumi ato botae no.\nNsɛm: 'O' = dɔn YƐ, '.' = dɔn NKOGUO"
+  },
+  "board": {
+    "current_state": "Grid no mu sɛso (Move {moves_made}, {moves_left} moves aka, {completion}% complete):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Tumi nyɛ sɛ ɛwɔ [row col] mu baabi row ne col yɛ nkonimdie a ɛfiri 0 kɔsi {max_index}.",
+    "out_of_range": "Nsɛm a wɔde kyerɛ no bɛyɛ 0 ne {max_index} ntam. Wo de [{row},{col}] kɔe."
+  },
+  "outcome": {
+    "win": "Wode {moves_used} akwan mu na esii asɛm no!",
+    "loss": "Agɔ no awie! Wo de {max_turns} moves nyinaa bɔɔ mu na wo antumi ansi puzzle no. Completion a etwa to: {completion}%\nSɛso a etwa to:\n{grid}"
+  }
+}

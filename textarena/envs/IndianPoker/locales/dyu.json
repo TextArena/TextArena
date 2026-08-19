@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "I ye Player {player_id} ye kɛlɛ lajɛnɛ Indian Poker.\n- 52-kɛlɛ deck; i ye kɛlɛ kelen ye oponɛnɛ kɛlɛ.\n- Ante {ante} chip(s) kɔlɔn, {max_rounds} kɔlɔn(s) jumɛnɛ.\n- Kɛlɛ wɛlɛ: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ye pɔsitiɲɛnɛ integer <= i chip count.)\n- Kɛlɛ kɔnɔnɛ kɛlɛ ye pot lajɛnɛ showdown.\n"
+  },
+  "round": {
+    "announce": "### Kɔnɔ {current_round}/{max_rounds}\nI dɔgɔtigɛ kɛlɛ ye: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Kɛlɛ kɛlɛ kɔlɔnɛ kɛlɛ, e.g. '[check]', '[bet 2]', '[call]', '[raise 3]', wa '[fold]'.",
+    "cannot_check": "I tɛ se k'a kɛ [check] - i be jɔrɔla.",
+    "amount_min": "Wari/kafo ka kan ka se 1 ma.",
+    "cannot_bet": "I ka fɛ [bet] - min bɛ [call] / [raise] / [fold].",
+    "nothing_to_call": "Foyi tɛ ka wele; i bɛ se k'i [check] weele.",
+    "no_bet_to_raise": "I ka [bet X] kɛ k'a dayɛlɛ; i tɛ se ka wari bɔ.",
+    "insufficient": "Nka, o tɛ se ka kɛ."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kɛlɛ {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "I be se ka koo minw kɛ: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Jokɛla {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Jurusirabaga {player_id} ka bɔ.",
+    "showdown_win": "Ɲiningali laban: {card_win} beats {card_lose}.",
+    "showdown_tie": "Ɲiningali laban: u fila {card}. Banakɔrɔnin tilan na  kelen-kelen bɛɛ be sɔrɔ {split} ."
+  },
+  "outcome": {
+    "p0_wins": "Jokɛla 0 taa ({bank0} > {bank1})",
+    "p1_wins": "Jokɛla 1 taa ({bank1} > {bank0})",
+    "draw": "Sumanw bɛɛ ka kan ni ɲɔgɔn ye laban na."
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "player_prompt": {
+    "intro": "你是 GameOfPureStrategy 对局中的玩家 {player_id}。\n- 你持有从 A 到 K 的 13 张牌，每张牌只能使用一次。\n- 每回合会翻开一张奖励牌。请只打出一张牌，方法是输入包含一个方括号卡牌标记的内容，例如 '[Q]'、'[10]'、'[2]'……\n- 牌面较高者赢得奖励及累积奖池。若双方平局，奖励将累积至下一回合的奖池。\n- 13 回合后，总分最高的玩家获胜。"
+  },
+
+  "round": {
+    "announce": "### 回合 {round}/13 - 奖励牌：{prize}  （价值 {worth}）"
+  },
+
+  "board": {
+    "hand": "你的剩余手牌：{hand}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "操作必须恰好包含一个以方括号括起的卡牌标记。",
+    "card_not_held": "你已经没有这张牌了。"
+  },
+
+  "message": {
+    "bids": "出牌：玩家 0 {card0} 对玩家 1 {card1} - ",
+    "p0_wins": "{observation}玩家 0 赢得 {pot_value}。",
+    "p1_wins": "{observation}玩家 1 赢得 {pot_value}。",
+    "tie": "{observation}平局 -> 当前奖池为 {carry_pot}。",
+    "scores": "得分 -> 玩家 0：{score0}  玩家 1：{score1}"
+  },
+
+  "outcome": {
+    "p0_wins": "玩家 0：{s0}，玩家 1：{s1}",
+    "p1_wins": "玩家 1：{s1}，玩家 0：{s0}",
+    "draw": "双方均得到 {s0} 分"
+  }
+}

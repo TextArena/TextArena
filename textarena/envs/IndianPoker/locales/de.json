@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in einer Partie Indian Poker.\n- 52-Karten-Deck; du siehst nur die Karte des Gegners.\n- Grundeinsatz von {ante} Chip(s) pro Runde, insgesamt {max_rounds} Runde(n).\n- Gültige Züge: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ist eine positive ganze Zahl <= deinem Chipbestand.)\n- Die höchste verdeckte Karte gewinnt beim Showdown den Pot.\n"
+  },
+  "round": {
+    "announce": "### Runde {current_round}/{max_rounds}\nDie Karte deines Gegners ist: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Gib genau EINE Aktion in eckigen Klammern an, z. B. '[check]', '[bet 2]', '[call]', '[raise 3]' oder '[fold]'.",
+    "cannot_check": "[check] ist nicht möglich - du musst auf einen Einsatz reagieren.",
+    "amount_min": "Der Bet-/Raise-Betrag muss ≥ 1 sein.",
+    "cannot_bet": "[bet] ist nicht möglich - du musst [call] / [raise] / [fold] verwenden.",
+    "nothing_to_call": "Es gibt nichts mitzugehen; du kannst stattdessen [check] verwenden.",
+    "no_bet_to_raise": "Verwende [bet X], um zu eröffnen; es gibt keinen Einsatz, der erhöht werden kann.",
+    "insufficient": "Nicht genügend Chips für diese Aktion."
+  },
+  "game_action": {
+    "action": "Spieler {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (Kosten {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Deine möglichen Aktionen: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Spieler {winner}. (Chipstände P0:{p0}, P1:{p1})",
+    "folded": "Spieler {player_id} hat gefoldet.",
+    "showdown_win": "Showdown: {card_win} schlägt {card_lose}.",
+    "showdown_tie": "Unentschieden beim Showdown: beide haben {card}. Der Pot wird geteilt – jeder erhält {split}."
+  },
+  "outcome": {
+    "p0_wins": "Spieler 0 gewinnt ({bank0} > {bank1})",
+    "p1_wins": "Spieler 1 gewinnt ({bank1} > {bank0})",
+    "draw": "Nach allen Runden haben beide gleich viele Chips"
+  }
+}

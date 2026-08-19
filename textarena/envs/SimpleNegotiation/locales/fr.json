@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le joueur {player_id} dans le jeu de négociation.\nVous disposez de certaines ressources, et votre tâche consiste à effectuer des échanges afin d’augmenter la valeur totale de vos ressources.\nLes ressources et les valeurs associées que vous possédez actuellement sont :\n\t+ {resource_value_list}\nÀ chaque tour, vous pouvez parler à votre adversaire et faire une offre d’échange.\nUtilisez les jetons spéciaux suivants pour les actions :\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]' : [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]' : Pour accepter une offre reçue.\n  - '[Deny]' : Pour refuser une offre reçue (par défaut).\nLe jeu dure {max_turns} tours au total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Le joueur a essayé d’accepter un échange sans avoir les ressources nécessaires.",
+    "out_of_range": "Joueur {player_id}, action invalide. La colonne {col} est hors limites.",
+    "already_full": "Joueur {player_id}, action invalide. La colonne {col} est pleine.",
+    "proposing_with_no_resource": "Le joueur {player_id} a essayé de proposer un échange sans les ressources nécessaires.",
+    "incorrect_offer_format": "Le joueur {player_id} a proposé un échange dans un format incorrect.",
+    "no_new_offer": "Le joueur {player_id} n’a fait aucune nouvelle offre."
+  },
+  "offers": {
+    "reject": "Le joueur {player_id} a refusé l’offre.",
+    "accept": "Le joueur {acceptor_id} a accepté l’offre du joueur {proposer_id}.",
+    "proposal": "Le joueur {player_id} a fait l’offre suivante au joueur {opponent_id} : Objets offerts : {offered} -> Objets demandés : {requested}"
+  },
+  "outcome": {
+    "win": "Le joueur {winner_id} a gagné en obtenant un plus grand gain de valeur d’inventaire.",
+    "draw": "Même variation de valeur d’inventaire pour tous les joueurs. Match nul."
+  }
+}

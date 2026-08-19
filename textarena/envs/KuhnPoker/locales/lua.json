@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ndi Player {player_id} mu kisalu cha {max_rounds} cha Kuhn Poker.\nMikano ya Kisalu:\n- Kuhn Poker ukasangisha kadi 3 na J, Q, K (J ndi ya kusekama, K ndi ya kubidi)\n- Kila muntu asekama {ante} chip na kupokelela kadi 1 kila lupi (kumbuka kwamba kadi ukasangishwa bila kubadilishwa, kwa hivyo ngeya kuwa na kadi ile ile na mwenzi wako).\n- Kisalu kikasangisha kwa {max_rounds} lupi\n- Muntu na chipi nyingi zaidi baada ya lupi zote akashinda\nMikano ya Vitendo:\n- '[check]': Pita bila kubedi (kama hakuna bedi kwenye meza)\n- '[bet]': Ongeza chip 1 kwenye poti (kama hakuna bedi kwenye meza)\n- '[call]': Linganisha bedi ya mwenzi wako kwa kuongeza chip 1 kwenye poti\n- '[fold]': Achilia mkono wako na mwenzi wako akashinda poti"
+  },
+  "init_round": {
+    "round_start": "### Kuanza round {current_round} kati ya {max_rounds} mizunguko. Kadi yako ni: '{player_card}'",
+    "available_actions": "Malu audi mua kuenza adi: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hatua inabidi [Check], [Bet], [Call], au [Fold].",
+    "not_legal": "Tshienzedi tshidi ne bua kuikala {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, alituma kitendo: '[{move}]'.",
+    "valid_actions": "Malu audi mua kuenza aa: {legal_actions}.",
+    "round_summary": "{reason} Makomi ya sasa: Mchezaji 0: '{player_0_chips}'; Mchezaji 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Mweshi wa nsungi: Mchezaji {winner} alama {winner_card} akubwa kuliko Mchezaji {loser} alama {loser_card}. Mchezaji {winner} apata malupi {pot_value} ya kopo."
+  },
+  "outcome": {
+    "draw": "Ku ndekelu kua nseke {max_rounds} yonso ibidi, banayi bonso babidi bavua ne tshiamu tshiabu tshimue.",
+    "round_win": "Muena manaya {player_id} mmulekele.",
+    "winner_player0": "Muena manaya 0 uvua mupete makuta a bungi ku ndekelu kua nseke yonso {max_rounds}.",
+    "winner_player1": "Muena manaya 1 udi upeta difutu dia kuikala ne biamu bia bungi ku ndekelu kua nseke yonso {max_rounds}."
+  }
+}

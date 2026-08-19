@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Ga go na dikarata le ga bjale.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Modiri a le mongwe vs Dealer\n\n📖 TSEBISO YA GAME:\n• O thoma ka {start_chips} chips\n• Deki e le nngwe ya dikarata tša 52 (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• O bapala kgahlanong le dealer (ntlo)\n• Mafase a bjalo a latela mokgwa wa Ultimate Texas Hold'em: o bea ANTE le BLIND bets, o amohela dikarata tše 2 tša hole, o kgetha go bapala PLAY bets ka mafase a bjalo, o senola dikarata tša setšhaba le go bapetša bjalo bja gago bja dikarata tše 5 kgahlanong le bjalo bja dealer. Sepheo sa gago ke go oketša mafelo a gago (ge o na le bjalo bjo bobe), ao o loketše mabedi a gago (ge o na le bjalo bjo mpe).\n• Game e fela ge o fihla 0 chips goba ka tlase ya fihla ya mafase (LOSS) goba o phetha mafase a 1000 ka chips (WIN)\n\n💰 MOKGWATHLO WA BETTING:\n• ANTE: Mokgwa wa kgetho ${ante} o mongwe le o mongwe wa mafase\n• BLIND: Mokgwa wa kgetho ${ante} o mongwe le o mongwe wa mafase\n• PLAY: Mokgwa wa go bapala o sa kgethegile. Ka mafase a bjalo, o ka kgetha mokgwa o le mongwe wa mafelo a latelago: (${ante4} ge o dirwa ka PRE-FLOP, ${ante2} ge o dirwa ka FLOP, goba ${ante} ge o dirwa ka RIVER. O ka goga le ka river, o tlogela bjalo, le go se be mokgwa.)\n\n🎴 MOKGWATHLO WA GO BEA KARATA:\n• O amohela dikarata tše 2 tša hole\n• Dealer o amohela dikarata tše 2 tša hole (tše di sa bonwago)\n• Dikarata tše 5 tša setšhaba di beilwe ka tlase\n• Dikarata tša setšhaba di senolwa ka mafase a bjalo\n\n🏆 MOKGWATHLO WA GO KGETHA DEALER:\n• Dealer o swanetše go ba le bjalo bjo bobe (dikarata tše 2 tša mofuta o mongwe) go kgetha, o diriša dikarata tše 2 tša bjalo le dikarata tše 5 tša setšhaba.\n• Mokgwa wa go kgetha wa dealer o ama mafelo a betting, ao a tlaleletšwe ka morago.\n\n🎮 MAFASE A GAME LE DITIRO:\n📋 PRE-FLOP:\n  • Ditiro: [4x] (${ante4}) goba [check]\n  • [4x]: Be mokgwa wa ${ante4} PLAY, o senola dikarata tše 3 tša setšhaba\n  • [check]: Ga go na mokgwa wa go oketša, o senola dikarata tše 3 tša setšhaba\n\n📋 FLOP:\n  • Ge mokgwa wa 4x o beilwe: Mokgwa wa [skip] o fela (o senola dikarata tše 2 tša setšhaba ka bošego)\n  • Ge mokgwa wa 4x o se beilwe: [2x] (${ante2}) goba [check]\n  • [2x]: Be mokgwa wa ${ante2} PLAY, o senola dikarata tše 2 tša setšhaba\n  • [check]: Ga go na mokgwa wa go oketša, o senola dikarata tše 2 tša setšhaba\n\n📋 RIVER:\n  • Ge mokgwa wa 4x goba 2x o beilwe: Mokgwa wa [skip] o fela (o tšwela pele go showdown)\n  • Ge mokgwa wa PLAY o se beilwe: [1x] (${ante}) goba [fold]\n  • [1x]: Be mokgwa wa ${ante} PLAY, o tšwela pele go showdown\n  • [fold]: O tlogela bjalo, o lahleha ANTE le BLIND bets\n\n📋 SHOWDOWN:\n  • Dikarata tše di senolwa le go lekolwa\n  • Bjalo bja dikarata tše 5 bja bjalo bja 7 (2 hole + 5 setšhaba)\n  • Mokgwa wa betting o ahlaahlwa ka mokgwa wa payout\n\n💎 MOKGWATHLO WA PAYOUT:\n📊 ANTE BET:\n  • Dealer ga a kgethe: PUSH (mokgwa o bušetšwa)\n  • Dealer o kgetha & o wina: 1:1 payout (mokgwa + mafelo)\n  • Dealer o kgetha & o lahleha: Mokgwa o lahleha\n  • Tie: PUSH (mokgwa o bušetšwa)\n\n📊 BLIND BET:\n  • Ga o amiwe ke mokgwa wa go kgetha wa dealer\n  • O wina: Mokgwa o bušetšwa le mafelo a oketšegilego ka bjalo bja gago\n  • O lahleha: Mokgwa o lahleha\n  • Tie: PUSH (mokgwa o bušetšwa)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Ga go na mafelo a oketšegilego\n\n📊 PLAY BET:\n  • Ga o amiwe ke mokgwa wa go kgetha wa dealer\n  • Papatšo e lekantšwe: Bjalo bja gago bja bjalo kgahlanong le bjalo bja dealer\n  • O wina: 1:1 payout (mokgwa + mafelo)\n  • O lahleha: Mokgwa o lahleha\n  • Tie: PUSH (mokgwa o bušetšwa)\n\n🎯 MAFASE A BJALO A POKER (Bobe go Mpe):\n  1. Royal Flush: A-K-Q-J-10 ya mofuta o mongwe\n  2. Straight Flush: Dikarata tše 5 tše di latelago tša mofuta o mongwe\n  3. Four of a Kind: Dikarata tše 4 tša mofuta o mongwe\n  4. Full House: 3 tša mofuta o mongwe + 2 tša mofuta o mongwe\n  5. Flush: Dikarata tše 5 tša mofuta o mongwe\n  6. Straight: Dikarata tše 5 tše di latelago\n  7. Three of a Kind: Dikarata tše 3 tša mofuta o mongwe\n  8. Two Pair: 2 pairs tša mofuta o mongwe\n  9. One Pair: 2 tša mofuta o mongwe\n  10. High Card: Karata e kgolo e wina\n\n⌨️  DITIRO TŠA DITOKEN:\n• [4x] goba [play bet 4x]: Be mokgwa wa ${{self.ante_amount*4}} PLAY\n• [2x] goba [play bet 2x]: Be mokgwa wa ${{self.ante_amount*2}} PLAY\n• [1x] goba [play bet 1x]: Be mokgwa wa ${{self.ante_amount*1}} PLAY\n• [check] goba [c]: Check (ga go na mokgwa wa go oketša)\n• [fold] goba [f]: Fold (o tlogela bjalo)\n• [skip] goba [s]: Skip go fase e latelago (ge mokgwa o se a hlokomele)\n\n💡 DITŠHELETE TŠA STRATEGY:\n• Bjalo bja tshepetšo bja bjalo bja go kgetha (pairs, dikarata tše kgolo) bjalo bja kgetha mokgwa wa 4x\n• Leba mokgwa wa go kgetha wa dealer - bjalo bja mpe bjalo bja push ge dealer ga a kgethe\n• Mokgwa wa BLIND o ka ba o le mabedi ka bjalo bja tshepetšo (Royal Flush = 500:1!)\n• Leba tshelete ya gago! Ge e fihla 0 goba ka tlase ya fihla ya mafase, o lahleha.\n\n⚠️  DITŠHELETE TŠE DI TLHAGIŠAGO:\n• ANTE le BLIND bets di a kgethegile mafase o mongwe le o mongwe\n• PLAY bets di sa kgethegile le di le stratetiki\n• Ikgantšha gore o bea mokgwa o swanetše, le mokgwa o le mongwe ka nako.\n\n",
+    "state": "🎯 ROUND {round}\n💰 Chips: {chips}\n🎴 Bjalo bja gago: {hand}\n📊 Mokgwa wa bjalo: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fase: {phase}\n🎯 Ditiro tša go kgetha: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Round {round} started! Bets: ANTE ${ante}, BLIND ${blind}. O na le {chips} chips di sa mmoho.",
+    "your_hand": " Letsogo la gago: {hand}",
+    "flop_revealed": " Go palelwa go utolotšwe: {cards}",
+    "river_revealed": " RIVER o utolotše: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Kgato yeo e sa šomego ya kgato ye. Dikgato tšeo di lego gona: {available}",
+    "message": " Kgato yeo e sa šomego! Dikgato tšeo di lego gona: {available}"
+  },
+  "action": {
+    "folded": "O ile wa ineela."
+  },
+  "showdown": {
+    "dealer_hand": " BONTŠHA! Letsogo la morekiši: {cards}",
+    "community_cards": " Dikarata tša setšhaba: {cards}",
+    "player_best": "🎴 Bjalo bja gago bja bjalo: {name} ({cards})",
+    "dealer_best": "🎴 Bjalo bja dealer bja bjalo: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (e phuthetšwe)",
+    "blind_lost_folded": " BOELETŠO BJA LEFU! -${blind} (o phuthetšwe)",
+    "ante_won": "✅ ANTE bet WON! +${amount} (Go be go tla ba le phadišano ya dipapadi tša kgwele ya maoto)",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} e bušeditšwe morago",
+    "ante_lost": " ANTE bet LOST! -${ante}",
+    "blind_won": "✅ PEGO YA LEHLOKO E FETILE! +${amount}",
+    "blind_pushed": " PUSHED BET! ${blind} e bušeditšwe morago.",
+    "blind_lost": " KGOPOLO YA LEŠOU E FETILE! -${blind}",
+    "play_won": "✅ GO BETHA PELE O FENYE! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} e bušeditšwe morago",
+    "play_lost": " GO BETHA PELE YA HWETŠWA! -${play}",
+    "net_gain": "🎉 Round {round} e phethile! Net gain: +${net}",
+    "net_loss": "💸 Round {round} e phethile! Net loss: ${net}",
+    "separator": "Ka baka leo, ge e ba o ka kgona go hwetša motho yo a nago le bokgoni bja go bolela leleme la gabo gabotse gomme wa mo nea kopi ya gago goba kgatišo yeo e ngwadilwego leina la gagwe."
+  },
+  "outcome": {
+    "game_over_win": "🏁 GAME OVER! {max_turns} rounds completed. O na le ${chips} chips - OENA!",
+    "game_over_lose": "O feletšwe ke ditšhipi, morekiši o a fenya!",
+    "reward_win": "Modiri o phethile {winner_rounds} mafase ka ${chips} chips",
+    "reward_lose": "Sebapadi se ile sa felelwa ke ditšhipi ka gare ga potologo {round}",
+    "reward_win_max": "Modiri o phethile {max_turns} mafase ka ${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush (Go tšhologela ga Mmala)",
+    "straight_flush": "Mokgwa o Tshwane",
+    "four_of_a_kind": "Ba Bane ba Mohuta o Tee",
+    "full_house": "Ntlo e Tletše ka mo go Feletšego",
+    "flush": "Flush",
+    "straight": "Go ya thwii",
+    "three_of_a_kind": "Tše Tharo tša Mohuta o Tee",
+    "two_pair": "Dipara tše Pedi tša Mebala e Mebedi",
+    "one_pair": "Sehlopha se Tee sa Bana ba Motho",
+    "high_card": "Karata ya Godimo-dimo",
+    "unknown": "Letsogo le sa Tsebjego"
+  }
+}

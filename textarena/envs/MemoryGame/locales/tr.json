@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Oyuncu {player_id}'siniz. Hafıza Oyunu oynuyorsunuz.\nHedefiniz, rakibinizden daha fazla kart çiftini tahtada eşleştirmektir.\nSıranızda, iki kartı çevirmek için ilk ve ikinci kartın sırasıyla satır ve sütun numaralarını '[0 1 1 0]' gibi girin, burada ilk kart 0. satırda ve 1. sütundadır, ikinci kart ise 1. satırda ve 0. sütundadır.\nEğer iki kart eşleşirse, bir puan kazanırsınız ve kartlar yüz üstü kalır. Eşleşmezlerse, kartlar yüz aşağı çevrilir, örneğin '.'.\nOyun, tüm çiftler eşleştirildiğinde sona erer."
+  },
+  "board": {
+    "current_board": "Mevcut Tahta:\n{board}",
+    "current_game_board": "Mevcut Oyun Tahtası:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Geçersiz hamle formatı. Oyuncu {player_id} geçerli bir yönle köşeli parantez içinde yanıt vermedi.",
+    "out_of_bounds": "Geçersiz hamle. Oyuncu {player_id} sınırların dışındaki bir pozisyon seçti.",
+    "same_card_twice": "Geçersiz hamle. Oyuncu {player_id} aynı kartı iki kez seçti.",
+    "already_matched": "Geçersiz hamle. Oyuncu {player_id} zaten eşleştirilmiş bir veya iki kart seçti."
+  },
+  "game_message": {
+    "cards_match": "Oyuncu {player_id} tarafından seçilen kartlar [{r1} {c1}] ve [{r2} {c2}] pozisyonlarında eşleşiyor!",
+    "cards_no_match": "Oyuncu {player_id} tarafından seçilen kartlar eşleşmiyor. [{r1} {c1}] ve [{r2} {c2}] pozisyonlarındaki kartlar sırasıyla {pos1} ve {pos2}."
+  },
+  "outcome": {
+    "draw": "Her iki oyuncu da aynı sayıda kart çiftini eşleştirdi.",
+    "win": "Oyuncu {winner_id} kazandı!",
+    "turn_limit": "Tur sınırına ulaşıldı. Oyun sona erdi. Oyuncu 0 {score_0} puan, Oyuncu 1 {score_1} puan aldı.",
+    "turn_limit_win": "{reason} Oyuncu {winner_id} kazandı!"
+  }
+}

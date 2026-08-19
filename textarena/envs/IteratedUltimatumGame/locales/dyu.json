@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "I ye Player {player_id}, ka taa {num_rounds} kɛlɛkɛla lajɛnɛnɛ Iterated Ultimatum Game.\nI ye ${pool} ka kɛnɛ fɔɔ ka bɔnɔ kɔrɔnɔ kɔnɔ Player {other_id}.\n\nProposer:\n  - Kɛlɛ ka ɲɛ: [Offer: $X] (0 <= X <= pool)\n  - Ni a y'a ka gɛlɛ → I ye $(pool - X), Player kɔrɔnɔ ye $X\n  - Ni a taa ka gɛlɛ → I ye $0, Player kɔrɔnɔ ye $0\n  - Sɛbɛn: [Offer: $3]  wa  'N ye fɔɔ ka di. [Offer: $5]'\n\nResponder:\n  - Kɛlɛ ka ɲɛ ka gɛlɛ ni [Accept] wa [Reject]\n  - Sɛbɛn: 'O ye ka di. [Accept]'\n            'A taa ka di. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Jɛkulu {round_number} kɛ! ---\nJɛkulu {proposer_id} yɛ Proposer, Jɛkulu {responder_id} yɛ Responder.",
+    "offer": "Jɛkulu {round_number}: Jɛkulu {proposer_id} faama ${offer} kɛ Jɛkulu {responder_id} (a na ${keep}).",
+    "accepted": "Jɛnkɛla {responder_id} ta ɲɛ! Kalo {round_number} ka fafara: Jɛnkɛla {proposer_id} +${proposer_gain}, Jɛnkɛla {responder_id} +${responder_gain}. Kalo bɛɛ kɔkan: Jɛnkɛla 0: ${total_0}, Jɛnkɛla 1: ${total_1}.",
+    "rejected": "Jɛkulu {responder_id} rɔ kɔnɔnɔ a la! Jɛkulu {round_number} kɛ: Jɛkulu ya don ni $0. Kɛ kɛ: Jɛkulu 0: ${total_0}, Jɛkulu 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Proposer ye kɛlɛ ka ɲɛ ni format [Offer: $X].",
+    "bad_integer": "Sariya b'a yira ko sara hakɛ ka kan ka kɛ nimɔrɔ ye.",
+    "out_of_range": "O wari ka kan ka kɛ dolar 0 ani ${pool} cɛ.",
+    "no_current_offer": "Nka, an ma se k'a lɔn u tun bena min kɛ.",
+    "accept_or_reject": "Responder ye kɛlɛ ka gɛlɛ ni [Accept] wa [Reject] ka ɲɛ."
+  },
+  "outcome": {
+    "win": "Jɛnkɛla {winner} sera ka ${winner_total} kɔkan vs Jɛnkɛla {loser} ka ${loser_total} kɔkan.",
+    "draw": "Tɛ̀ɛ kɛlɛ! Mɔgɔ bɛɛ fɔlen don na ${total} kɛlɛ."
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Jògatz al Klondike Solitaire. Vòstre objectiu es de desplaçar totas las cartas cap als jòcs de fondacion.\n\nReglas del jòc:\n- Jòcs de fondacion (F1-F4): Construire de l'As al Rei de la meteissa color\n- Jòcs de taula (T1-T7): Construire en baissant en alternant las colors (roge sus negre, negre sus roge)\n- Estòc: Tiratz de cartas cap al jòc de rebut\n- Rebut (W): La carta del dessús es disponible per jogar\n\nComandas:\n- 'draw' - Tiratz de cartas de l'estòc cap al rebut\n- 'move <source> <destination> [count]' - Desplaçatz de cartas entre los jòcs\n  Exemples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count pòt tanben èsser 'all', que ensajarà de desplaçar totas las cartas viradas.\n- 'forfeit' - Acabatz lo jòc immediatament e blocatz vòstra marca actuala\n- Noms dels jòcs: W (rebut), F1-F4 (fondacions), T1-T7 (taula)\n\nPodètz executar d'accions multiplas en un torn en las separant amb de virgulas:\n  Exemple: 'draw, move W T1, move T2 F1'\n\nSonque los Reis pòdon èsser plaçats sus de jòcs de taula voides.\nLas accions s'executan en òrdre - se una fracassa, las accions restantas son passadas.\nUtilizatz 'forfeit' se pensatz que lo jòc es impossible de ganhar."
+  },
+  "format_error": {
+    "no_brackets": "Format d'accion incorrècte. L'accions deu èsser entre parentèsis.",
+    "no_closing_bracket": "Format d'accion invalid. Brèca de clausura \"]\"",
+    "empty_command": "Comanda buida. Tapejatz \"draw\" o \"move <source><destination> [count]\".",
+    "empty_action": "Accion buida.",
+    "move_needs_args": "Lo comandament move demanda una font e una destinacion. Utiliza: \"move <source> <destination> [count]\"",
+    "count_positive": "Lo compte deu èsser positiu o 'all'",
+    "count_invalid": "Compte invalid. Utilizatz un nombre o 'all'",
+    "unknown_command": "Comanda desconeguda '{cmd}'. Utiliza 'draw', 'move <source> <destination> [count]', o 'forfeit'",
+    "wrapped": "Accions {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Accions {n}: {msg}",
+    "before_failure": "Executat {n} accion (s) abans lo falliment.",
+    "failed": "Accions {n} falhadas: {msg}"
+  },
+  "move_result": {
+    "drew": "Tirèt la carta de las pèças del stock a l'escart.",
+    "cannot_draw": "Impossible de tirar. Lo talh e lo rebut son vuèges.",
+    "invalid_pile": "Nom de pila invalid. Utilizar W, F1-F4, o T1-T7",
+    "foundation_one_card": "Podètz pas desplaçar qu'una carta cap a la fondacion",
+    "waste_to_foundation_ok": "Carta desplaçada dels residus cap a la fondacion F{dst}",
+    "waste_to_foundation_bad": "Podètz pas desplaçar la carta de rebut a aquela pila fondamentala.",
+    "tableau_to_foundation_ok": "Carta desplaçada del tableau T{src} a la fondacion F{dst}",
+    "tableau_to_foundation_bad": "Podètz pas desplaçar la carta de tablèu cap a aquela pila fondamentala.",
+    "foundation_to_foundation": "Se pòt pas desplaçar d'una fondacion a l'autra.",
+    "waste_to_tableau_one_card": "Podètz pas desplaçar qu'una carta de la pèrda cap al tablèu.",
+    "waste_to_tableau_ok": "Movuda de la carta dels residus al tablèu T{dst}",
+    "waste_to_tableau_bad": "Podètz pas plaçar la carta de rebut sus aquela pila del tablèu.",
+    "no_face_up": "Pas de cartas dobèrtas per se desplaçar.",
+    "tableau_to_tableau_ok": "Desplaçament de {count} carta(s) del tableau T{src} a T{dst}",
+    "tableau_to_tableau_bad": "Impossible de desplaçar {count} carta(s) de T{src} a T{dst}",
+    "foundation_to_tableau_one_card": "Podètz pas desplaçar qu'una carta de la fondacion al tablèu.",
+    "foundation_empty": "La fondacion F{src} es buida.",
+    "foundation_to_tableau_ok": "Carta desplaçada de la fondacion F{src} al tableau T{dst}",
+    "foundation_to_tableau_bad": "Se pòt pas plaçar la carta de fondacion sul tablèu T{dst}",
+    "to_waste_or_stock": "Se pòt pas desplaçar cap a degalhs o estocar."
+  },
+  "outcome": {
+    "forfeit": "La partida es perduda. Scòre final: {score} cartas dins las fondacions.",
+    "won": "Felicitacions, avètz ganhat lo Klondike Solitaire!",
+    "turn_limit": "Jòc terminat! Avètz atengut lo maximum de {max_turns} torns. Puntuacion: {score} cartas dins las fondacions."
+  },
+  "board": {
+    "title": "=== SOLITARI DE KLONDIKE ===",
+    "turn": "Torn: {turn}/{max_turns}",
+    "stock": "Estoc: {stock} cartas",
+    "waste": "Los residus (W): {waste}",
+    "foundations_header": "Fondacions:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tablèu:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

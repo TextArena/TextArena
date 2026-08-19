@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "ਤੁਸੀਂ ਖਿਡਾਰੀ {player_id} ਹੋ, ਦੁਹਰਾਇਆ ਗਿਆ ਅਲਟੀਮੇਟਮ ਗੇਮ ਦੇ {num_rounds} ਗੇੜ ਖੇਡ ਰਹੇ ਹੋ। ਤੁਹਾਡੇ ਕੋਲ ਇਸ ਗੇੜ ਨੂੰ ਆਪਣੇ ਅਤੇ ਖਿਡਾਰੀ {other_id} ਵਿਚਕਾਰ ਵੰਡਣ ਲਈ ${pool} ਹਨ। ਪ੍ਰਸਤਾਵਕ: - ਇੱਕ ਪੇਸ਼ਕਸ਼ ਕਰੋਃ [Offer: $X] (0 <= X <= ਪੂਲ) - ਜੇ ਸਵੀਕਾਰ ਕੀਤਾ ਗਿਆ → ਤੁਹਾਨੂੰ $ ((ਪੂਲ - ਐਕਸ), ਹੋਰ ਖਿਡਾਰੀ $ ਐਕਸ ਪ੍ਰਾਪਤ ਕਰਦਾ ਹੈ - ਜੇ ਰੱਦ ਕੀਤਾ ਗਿਆ → ਦੋਵਾਂ ਨੂੰ $ 0 ਮਿਲਦਾ ਹੈ - ਉਦਾਹਰਣਃ [Offer: $3] ਜਾਂ 'ਮੈਨੂੰ ਲਗਦਾ ਹੈ ਕਿ ਇਹ ਨਿਰਪੱਖ ਹੈ. [Offer: $5]' ਜਵਾਬ ਦੇਣ ਵਾਲਾਃ - ਪੇਸ਼ਕਸ਼ ਬਾਰੇ ਫੈਸਲਾ ਕਰੋ ਜਾਂ ਤਾਂ [Accept] ਜਾਂ [Reject] - ਉਦਾਹਰਣਃ 'ਇਹ ਵਾਜਬ ਲੱਗਦਾ ਹੈ. [Accept]' 'ਬਹੁਤ ਬੇਇਨਸਾਫੀ. [Reject]'"
+  },
+  "round": {
+    "begins": "--- ਗੇੜ {round_number} ਸ਼ੁਰੂ ਹੁੰਦਾ ਹੈ! --- ਖਿਡਾਰੀ {proposer_id} ਪ੍ਰਸਤਾਵਕ ਹੈ, ਖਿਡਾਰੀ {responder_id} ਜਵਾਬ ਦੇਣ ਵਾਲਾ ਹੈ।",
+    "offer": "ਰਾਊਂਡ {round_number}: ਖਿਡਾਰੀ {proposer_id} ਖਿਡਾਰੀ {responder_id} ਨੂੰ ${offer} ਦੀ ਪੇਸ਼ਕਸ਼ ਕਰਦਾ ਹੈ (${keep} ਰੱਖਦਾ ਹੈ) ।",
+    "accepted": "ਖਿਡਾਰੀ {responder_id} ਸਵੀਕਾਰਿਆ ਗਿਆ! ਗੇੜ {round_number} ਲਾਭਃ ਖਿਡਾਰੀ {proposer_id} + ${proposer_gain}, ਖਿਡਾਰੀ {responder_id} + ${responder_gain}. ਨਵੇਂ ਕੁੱਲਃ ਖਿਡਾਰੀ 0: ${total_0}, ਖਿਡਾਰੀ 1: ${total_1}.",
+    "rejected": "ਖਿਡਾਰੀ {responder_id} ਨੇ ਪੇਸ਼ਕਸ਼ ਨੂੰ ਰੱਦ ਕਰ ਦਿੱਤਾ! ਗੇੜ {round_number} ਲਾਭਃ ਦੋਵੇਂ ਖਿਡਾਰੀ + $ 0. ਕੁੱਲ ਰਕਮ ਬਾਕੀ ਹੈ: ਖਿਡਾਰੀ 0: ${total_0}, ਖਿਡਾਰੀ 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "ਪ੍ਰਸਤਾਵਕ ਨੂੰ [Offer: $X] ਫਾਰਮੈਟ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੱਕ ਪੇਸ਼ਕਸ਼ ਕਰਨੀ ਚਾਹੀਦੀ ਹੈ।",
+    "bad_integer": "ਪੇਸ਼ਕਸ਼ ਰਕਮ ਇੱਕ ਵੈਧ ਪੂਰਨ ਅੰਕ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ।",
+    "out_of_range": "ਪੇਸ਼ਕਸ਼ $0 ਅਤੇ ${pool} ਦੇ ਵਿਚਕਾਰ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ।",
+    "no_current_offer": "ਜਵਾਬ ਦੇਣ ਲਈ ਕੋਈ ਮੌਜੂਦਾ ਪੇਸ਼ਕਸ਼ ਨਹੀਂ।",
+    "accept_or_reject": "ਜਵਾਬ ਦੇਣ ਵਾਲੇ ਨੂੰ ਜਾਂ ਤਾਂ [Accept] ਜਾਂ [Reject] ਪੇਸ਼ਕਸ਼ ਕਰਨੀ ਚਾਹੀਦੀ ਹੈ।"
+  },
+  "outcome": {
+    "win": "ਖਿਡਾਰੀ {winner} ਨੇ ${winner_total} ਕੁੱਲ ਬਨਾਮ ਖਿਡਾਰੀ {loser} ਦੇ ${loser_total} ਨਾਲ ਜਿੱਤ ਪ੍ਰਾਪਤ ਕੀਤੀ।",
+    "draw": "ਡਰਾਅ! ਦੋਵੇਂ ਖਿਡਾਰੀ ${total} ਕੁੱਲ ਨਾਲ ਸਮਾਪਤ ਹੋਏ।"
+  }
+}

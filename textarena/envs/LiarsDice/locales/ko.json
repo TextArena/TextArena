@@ -1,0 +1,55 @@
+{
+  "_comment": "라이어의 주사위 사용자 인터페이스 문자열. 괄호 안의 액션 토큰('[Bid: X, Y]', '[Call]'), 플레이어 ID, 주사위 면 값, 수량 및 카운트는 중립적인 슬롯이므로 번역해서는 안 됩니다.",
+  "_slots": {
+    "player_id": "플레이어 인덱스 (정수)",
+    "num_players": "게임에 참여하는 플레이어 수 (정수)",
+    "dice_summary": "플레이어별 남은 주사위 수를 ';'로 연결한 사전 렌더링된 문자열",
+    "your_dice": "이 플레이어의 주사위 면 값을 ','로 연결한 사전 렌더링된 문자열",
+    "p": "플레이어 인덱스 (정수)",
+    "d": "해당 플레이어의 남은 주사위 수 (정수)",
+    "current_player_id": "호출한 플레이어 인덱스 (정수)",
+    "face_value": "계산 중인 주사위 면 값 (1-6)",
+    "count": "일치하는 주사위의 실제 수 (정수)",
+    "quantity": "입찰 수량 (정수)",
+    "loser_id": "주사위를 잃는 플레이어 인덱스 (정수)",
+    "new_quantity": "제출된 새로운 입찰 수량 (정수)",
+    "current_quantity": "현재 입찰 수량 (정수)",
+    "new_face_value": "제출된 새로운 입찰 면 값 (정수)",
+    "current_face_value": "현재 입찰 면 값 (정수)",
+    "action": "플레이어가 제출한 원시 액션 문자열",
+    "reason": "중첩된 입찰 거부 이유",
+    "winner": "승리한 플레이어 인덱스 (정수)",
+    "final_ranking": "첫 번째 탈락자부터 승리자까지의 플레이어 인덱스 목록"
+  },
+  "player_prompt": {
+    "intro": "당신은 {num_players}명의 플레이어가 참여하는 라이어의 주사위 게임의 플레이어 {player_id}입니다.\n규칙:\n- 당신의 차례에는 다음 중 하나를 선택할 수 있습니다:\n  1) 현재 입찰보다 높은 수량이나 높은 면 값 (또는 둘 다)으로 새로운 입찰을 합니다; 예: '[Bid: 3, 4]',\n  2) '[Call]'을 입력하여 마지막 입찰을 부릅니다.\n\n만약 부르는 경우:\n  - 만약 모든 주사위 중 해당 면 값의 실제 수가 입찰보다 적다면, 마지막 입찰자는 하나의 주사위를 잃습니다.\n  - 그렇지 않으면, 부른 플레이어가 하나의 주사위를 잃습니다.\n주사위가 0개가 되면 플레이어는 탈락합니다. 마지막으로 남은 플레이어가 승리합니다."
+  },
+  "board": {
+    "per_player": "\t플레이어 {p}: {d}",
+    "new_round": "\n새 라운드 - 남은 주사위: {dice_summary}\n현재 주사위: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "플레이어 {current_player_id}가 부릅니다! 면 값 {face_value}의 실제 수는 {count}로, {quantity}보다 적습니다.\n플레이어 {loser_id} (마지막 입찰자)가 하나의 주사위를 잃습니다.",
+    "caller_loses": "플레이어 {current_player_id}가 부릅니다! 면 값 {face_value}의 실제 수는 {count}로, {quantity}보다 크거나 같습니다.\n플레이어 {loser_id} (부른 플레이어)가 하나의 주사위를 잃습니다."
+  },
+  "action": {
+    "bid_announce": "플레이어 {player_id}가 {quantity}개의 면 값 {face_value}을 입찰합니다."
+  },
+  "invalid_move": {
+    "call_no_bid": "이전 입찰 없이 부르기 시도.",
+    "invalid_bid": "잘못된 입찰: {reason}",
+    "not_recognized": "제출된 액션이 유효한 '[Bid: X, Y]'나 '[Call]'로 인식되지 않습니다. 제출된 액션: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "새로운 수량 {new_quantity}가 현재 {current_quantity}보다 낮습니다.",
+    "face_lower": "새로운 면 값 {new_face_value}가 현재 {current_face_value}보다 낮습니다.",
+    "identical": "입찰이 현재 입찰과 동일합니다.",
+    "face_range": "면 값은 1과 6 사이어야 합니다."
+  },
+  "message": {
+    "eliminated_invalid": "플레이어 {player_id}가 잘못된 행동으로 탈락했습니다."
+  },
+  "outcome": {
+    "win": "플레이어 {winner}가 승리했습니다! 최종 순위: {final_ranking}"
+  }
+}

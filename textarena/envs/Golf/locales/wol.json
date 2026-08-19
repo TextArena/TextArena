@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Yaa ngone Golf (Kart Ginnaaw) - Kóko {player_id}.\nJëfandikoo: Ajjëlëëlë totalu ñaareelu ci arafu benn ronde. Su kulum yu bari ñaareelu ñu ngone, ñu nekk ci 0.\nWàllu Kart: A=1, 2-10=wàll, J/Q=10, K=0\n\nCi tontu (jëfandikoo bekk-brackets):\n- '[draw]' - Ci ndawul deck\n- '[take]' - Ci ndawul pile bu ñàkk\n- '[swap X Y]' - Ci ndawul kart ak position X (ràng) Y (kulum)\n- '[discard]' - Ci ñàkk kart bi\n"
+  },
+  "board": {
+    "drew": "Yaa ndaw: {card}\nLéegi yaa ngone [swap X Y] mbaa [discard] moom.",
+    "took": "Yaa jël: {card} ci pile bu ñàkk\nYaa ngone [swap X Y] ak moom (manu ñàkk).",
+    "peeked": "Yaa xool ci position ({row},{col}): {card}",
+    "turn_view": "Kartu yaa ngone:\n{hand}\nPile bu ñàkk: {discard}\n{options}",
+    "none": "Amul benn."
+  },
+  "options": {
+    "final_turns": "Tournées yi ñaare! Njëriñ yi: [draw], [take], [peek X Y]",
+    "draw": "Njëriñ yi: [draw], [take]",
+    "must_swap": "Danga war a: [swap X Y] (bu mënul sànni ay kaar yu nekk ci daara)",
+    "swap_or_discard": "Yaa ngone: [swap X Y] mbaa [discard]"
+  },
+  "hand": {
+    "no_cards": "Du ay kaarêe.",
+    "header": "Kol: 1 2 3",
+    "row": "Ligne {n} : {cards}"
+  },
+  "action_desc": {
+    "swapped": "Kóko {pid} jël {new} ak {old} ci position ({row},{col})",
+    "discarded": "Këru {pid} bàyyi {card}"
+  },
+  "message": {
+    "deck_empty": "Géej gi dafa jeex ba tey.",
+    "knocked": "Jëfandikukat {pid} dañ koo tëj ! Képp jëtun ci yeneen yi am na benn yoon.",
+    "final_round": "Kóko {pid} {reason}! Kóko béle nekk na ci benn tur."
+  },
+  "reason": {
+    "all_revealed": "am na ay kaar yu ñu feeñal yépp?"
+  },
+  "invalid": {
+    "wrong_action": "Jëfandiku ak jëf jëmm ci biiru brackets bi: [draw], [take], [swap X Y], [discard], [knock], walla [peek X Y]",
+    "discard_empty": "Géej gi ñu sànni dafa wéet!",
+    "must_draw_first": "Ndaw màm ngone [draw], [take], [knock], walla [peek X Y]",
+    "cannot_discard_taken": "Mënuloo sànni kaar-dëgg bu ñu jële ci ndab li ñuy sànne. Dangaa war koo soppi.",
+    "have_drawn_card": "Yaa am kartu ndawul. Yaa ngone [swap X Y] mbaa [discard] moom.",
+    "need_drawn_swap": "Dafa soxla ab kaarê bu ñu leen di soppi.",
+    "need_drawn_discard": "Dafa soxla ab kaarê bu ñu leen di sànni.",
+    "out_of_bounds": "Posisyon bi dikk na. Jëfandikoo liggi 1-{max_row}, kolu 1-{max_col}",
+    "knock_with_card": "Mënuloo tënk ak kaar-dëgg bu ñu la jël. Jëf sa wàll bi jëkk a mat sëkk.",
+    "already_knocked": "Kenn a ko jàppe woon.",
+    "already_revealed": "Dafa am benn xalaat!"
+  },
+  "summary": {
+    "full": "Jëfandikoo jàll! Kóko {winner} jàll na ak ñaareelu {score} póint!\n\nÑaareelu yu mujj:\n{scores}",
+    "line": "Këru {pid}: {score} poin\n"
+  },
+  "board_str": {
+    "title": "=== GOLF Yëre bi===",
+    "discard": "Jëfandikukat: {card}",
+    "knocked": "Këru {pid} dafa xëcce!",
+    "player_header": "Këru {pid} (Njël: {score}):"
+  }
+}

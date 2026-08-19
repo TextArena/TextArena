@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Yorug'liklarni o'chirishga xush kelibsiz! Sizda {size}x{size} chiroqlar to'plami mavjud. Sizning maqsadingiz - BUTUN yorug'liklarni OFF qilish (.' bilan ifodalanadi). Yorug'likni bosganingizda, u o'zini VA uning qo'shnilarini (yuqori / pastga / chapga / o'ngga) o'zgartiradi. Yorug'likni bosish uchun [row col] ni bosing (0-indekslangan, shuning uchun haqiqiy oraliq 0-{max_index}). Sizda jumboqni hal qilish uchun {max_turns} harakatlar mavjud. Afsona: 'O' = yorug'lik ON, '.' = yorug'lik OFF"
+  },
+  "board": {
+    "current_state": "Joriy tarmoq holati (Ko'chirish {moves_made}, {moves_left} qolgan ko'chirishlar, {completion}% to'liq): {grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Harakatlar [row col] formatda boʻlishi kerak, bu yerda satr va ustun 0 dan {max_index} gacha boʻlgan butun sonlardir.",
+    "out_of_range": "Koordinatalar 0 va {max_index} orasida bo'lishi kerak. Siz [{row},{col}] kiritdingiz."
+  },
+  "outcome": {
+    "win": "Tabriklayman! Siz jumboqni {moves_used} harakatlarda hal qildingiz!",
+    "loss": "O'yin tugadi! Siz jumboqni hal qilmasdan barcha {max_turns} harakatlarni ishlatdingiz. Yakuniy yakunlash: {completion}% Yakuniy holat: {grid}"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Sampeyan iku Player {player_id} ing Negotiation Game.\nSampeyan duwe sumber daya, lan tugas sampeyan yaiku njaluk supaya rega sumber daya sampeyan mundak.\nSumber daya lan rega kang sampeyan miliki saiki yaiku:\n\t+ {resource_value_list}\nSaben giliran, sampeyan bisa ngobrol karo lawan sampeyan lan nggawe panawaran njaluk.\nGunakake token spesial kanggo aksi:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': Nrima panawaran kang teka.\n  - '[Deny]': Nolak panawaran kang teka (baku).\nGame iki lumaku {max_turns} giliran ing total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Pemain nyoba nampa perdagangan tanpa duwe sumber daya sing dibutuhake.",
+    "out_of_range": "Player {player_id}, Tindakan ora sah. Kolom {col} ana njaba wates.",
+    "already_full": "Player {player_id}, Tindakan ora sah. Kolom {col} wis kebak.",
+    "proposing_with_no_resource": "Pemain {player_id} nyoba kanggo nggawe tawaran perdagangan tanpa gadhah sumber daya sing perlu.",
+    "incorrect_offer_format": "Pemain {player_id} nggawe tawaran perdagangan ing format sing salah.",
+    "no_new_offer": "Pemain {player_id} ora nggawe tawaran dagang anyar."
+  },
+  "offers": {
+    "reject": "Pemain {player_id} nolak tawaran perdagangan.",
+    "accept": "Pemain {acceptor_id} nampa tawaran perdagangan saka Player {proposer_id}.",
+    "proposal": "Pemain {player_id} nggawe tawaran iki marang Pemain {opponent_id}: Barang ditawarkan: {offered} -> Barang diminta: {requested}"
+  },
+  "outcome": {
+    "win": "Pemain {winner_id} menang kanthi entuk bathi luwih gedhe ing nilai persediaan.",
+    "draw": "Owah-owahan sing padha ing nilai persediaan kanggo kabeh pemain."
+  }
+}

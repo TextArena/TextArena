@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "ଆପଣ ଜଣେ ଖେଳାଳି {player_id} {num_players}-ଖେଳାଳି ମିଥ୍ୟା କଦଳୀ ଖେଳ ରେ । ନିୟମ: - ଆପଣଙ୍କ ପାଳି ରେ ଆପଣ ହୁଏତ: 1) ବର୍ତ୍ତମାନର ବିଡ ଠାରୁ ଅଧିକ ପରିମାଣ କିମ୍ବା ଅଧିକ ଚେହେରା (କିମ୍ବା ଉଭୟ) ସହିତ ଏକ ନୂତନ ବିଡ କରିପାରିବେ; ଅର୍ଥାତ୍ '[Bid: 3, 4]', 2) '[Call]' ଟାଇପ୍ କରି ଶେଷ ବିଡକୁ କଲ୍ କରନ୍ତୁ । ଯଦି ଆପଣ କଲ୍ କରନ୍ତି: - ଯଦି ସମସ୍ତ ଡାଏସ୍ ମଧ୍ୟରେ ସେହି ଚେହେରା ମୂଲ୍ୟର ପ୍ରକୃତ ଗଣନା ବିଡ ଠାରୁ କମ୍ ହୁଏ, ଶେଷ ବିଡର୍ ଏକ ଡାଏସ୍ ହରାଇଥାଏ _ ଅନ୍ୟଥା, କଲର ଏକ ଡାଏସ୍ ହରାଇଥାଏ _ 0 ଡାଏସ୍ ପର୍ଯ୍ୟନ୍ତ ପହଞ୍ଚୁଥିବା ଜଣେ ଖେଳାଳି ଛିନ୍ନ ହୋଇଯାଆନ୍ତି _ ଶେଷ ଅବଶିଷ୍ଟ ଖେଳାଳି ଜିତିଥାନ୍ତି _"
+  },
+  "board": {
+    "per_player": "ଖେଳାଳି {p}: {d}",
+    "new_round": "ନୂଆ ରାଉଣ୍ଡ - ବାକି ଡାଏସ୍: {dice_summary} ଆପଣଙ୍କ ବର୍ତ୍ତମାନ ଡାଏସ୍ ହେଉଛି: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "ଖେଳାଳି {current_player_id} କଲ୍ କରନ୍ତି! ପ୍ରକୃତ ଚେହେରା {face_value}ର ଗଣନା {count}, ଯାହା {quantity} ଠାରୁ କମ୍ ଅଟେ। ଖେଳାଳି {loser_id} (ଶେଷ ବିଡର) ଗୋଟିଏ ଡାଏସ୍ ହରାଇଥାଏ ।",
+    "caller_loses": "ଖେଳାଳି {current_player_id} କଲ୍ କରେ! ପ୍ରକୃତ ଚେହେରା {face_value}ର ଗଣନା ହେଉଛି {count}, ଯାହା ହେଉଛି >= {quantity}। ଖେଳାଳି {loser_id} (କଲ୍ କରୁଥିବା) ଗୋଟିଏ ଡାଏସ୍ ହରାଇଥାଏ ।"
+  },
+  "action": {
+    "bid_announce": "ଖେଳାଳୀ {player_id} {quantity} ଗୋଟି {face_value} ମୁଖ ମୂଲ୍ୟ ପାଇଁ ବିଡ କରେ।"
+  },
+  "invalid_move": {
+    "call_no_bid": "କୌଣସି ପୂର୍ବ ନିଲାମ ବିନା କଲ୍ କରାଯାଇଛି ।",
+    "invalid_bid": "ଅନାବଶ୍ୟକ ନିଲାମ: {reason}",
+    "not_recognized": "ଆବେଦନକୁ ବୈଧ \"[Bid: X, Y]\" କିମ୍ବା \"[Call]\" ଭାବରେ ମାନ୍ୟତା ଦିଆଯାଇନାହିଁ । ଦାଖଲ କରାଯାଇଥିବା ଆବେଦନ: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "ନୂଆ ପରିମାଣ {new_quantity} ବର୍ତ୍ତମାନର {current_quantity} ଠାରୁ କମ୍ ।",
+    "face_lower": "ନୂଆ ନାମମାତ୍ର ମୂଲ୍ୟ {new_face_value} ବର୍ତ୍ତମାନର {current_face_value} ଠାରୁ କମ୍ ।",
+    "identical": "ବର୍ତ୍ତମାନର ନିଲାମ ସହିତ ଏହାର ନିଲାମ ସମାନ ।",
+    "face_range": "ମୂଳ ମୂଲ୍ୟ 1 ରୁ 6 ମଧ୍ୟରେ ହେବା ଉଚିତ ।"
+  },
+  "message": {
+    "eliminated_invalid": "ଖେଳାଳି {player_id} ଅଯୋଗ୍ୟ ଚାଲ ଦ୍ବାରା ବାଦ୍ ପଡ଼ିଥିଲେ ।"
+  },
+  "outcome": {
+    "win": "ଖେଳାଳି {winner} ଜିତିଲେ ! ଚୂଡ଼ାନ୍ତ ରାଙ୍କିଙ୍ଗ: {final_ranking}"
+  }
+}

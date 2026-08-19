@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Ị na-egwu Klondike Solitaire. Ọrụ gị bụ ịkwaga kaadị niile gaa na ihe ndị mkpali.\n\nEgwuregwu:\n- Ihe mkpali (F1-F4): Wụnye site na Ace ruo King na uwe\n- Ihe ndị a na-egwu (T1-T7): Wụnye ala na-aga n'ihu na-acha ọbara ọbara na oji\n- Ọgbụgba: Kọwaa kaadị gaa na ihe mkpofu\n- Ihe mkpofu (W): Kaadị dị n'elu dị maka egwuregwu\n\nỊdịri:\n- 'draw' - Kọwaa kaadị site na ọgbụgba gaa na ihe mkpofu\n- 'move <source> <destination> [count]' - Kwaga kaadị n'etiti ihe ndị a na-egwu\n  Ọmụmaatụ: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count nwekwara ike ịbụ 'all', nke ga-agbalị ịkwaga kaadị niile dị n'ihu.\n- 'forfeit' - Kwụsị egwuregwu ozugbo na kọọ akara gị ugbu a\n- Aha ihe ndị a na-egwu: W (ihe mkpofu), F1-F4 (ihe mkpali), T1-T7 (ihe ndị a na-egwu)\n\nỊ nwere ike ịrụ ọtụtụ ihe n'otu egwuregwu site na kewaa ha na commas:\n  Ọmụmaatụ: 'draw, move W T1, move T2 F1'\n\nNaanị Eze nwere ike ịbụ ebe a na-etinye na ihe ndị a na-egwu efu.\nIhe ịrụ ga-agbaso usoro - ọ bụrụ na otu dara, ndị fọdụrụ ga-atụgharị.\nJiri 'forfeit' ọ bụrụ na ị kwenyere na egwuregwu ahụ adịghị mma ịmeri."
+  },
+  "format_error": {
+    "no_brackets": "Ọdịdị ihe na-abaghị uru. Ihe kwesịrị ịdị n'etiti parentheses.",
+    "no_closing_bracket": "Ọkpụkpọ ihe na-abaghị uru. Enweghị mmechi mmechi ']'",
+    "empty_command": "Ịdịri efu. Dere 'draw' ma ọ bụ 'move <source> <destination> [count]'",
+    "empty_action": "Emeghị ihe ọ bụla",
+    "move_needs_args": "Iwu mbugharị chọrọ isi mmalite na ebe njedebe. Ojiji: 'move <source> <destination> [count]'",
+    "count_positive": "Ọnụ ọgụgụ kwesịrị ịbụ chanya ma ọ bụ 'all'",
+    "count_invalid": "Ọnụ ọgụgụ ezighi ezi. Jiri nọmba ma ọ bụ 'all'",
+    "unknown_command": "Ịdịri amaghị '{cmd}'. Jiri 'draw', 'move <source> <destination> [count]', ma ọ bụ 'forfeit'",
+    "wrapped": "Omume {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Omume {n}: {msg}",
+    "before_failure": "Emejuputa {n} omume ((s) tupu ọdịda.",
+    "failed": "Mkpesa {n} dara: {msg}"
+  },
+  "move_result": {
+    "drew": "Kaadị dọtara (s) site na ngwaahịa gaa na mkpofu.",
+    "cannot_draw": "Enweghị ike ịdọrọ. Ma ngwaahịa ma ihe mkpofu efuola.",
+    "invalid_pile": "Aha nchịkọta na-abaghị uru. Jiri W, F1-F4, ma ọ bụ T1-T7",
+    "foundation_one_card": "Nwere ike ịkwaga naanị kaadị 1 na ntọala",
+    "waste_to_foundation_ok": "Kaadị si na mkpofu gaa ntọala F{dst}",
+    "waste_to_foundation_bad": "Enweghi ike ịkwaga kaadị mkpofu na ntọala ntọala ahụ",
+    "tableau_to_foundation_ok": "Kaadị si na tebụl T{src} gaa na ntọala F{dst}",
+    "tableau_to_foundation_bad": "Enweghi ike ịkwaga kaadị tableau na ntọala ntọala ahụ",
+    "foundation_to_foundation": "Enweghi ike ịkwaga site na ntọala gaa na ntọala",
+    "waste_to_tableau_one_card": "Nwere ike ịkwaga naanị kaadị 1 site na mkpofu gaa na tableau",
+    "waste_to_tableau_ok": "Kaadị si na mkpofu gaa na tebụl T{dst}",
+    "waste_to_tableau_bad": "Enweghi ike itinye kaadị mkpofu na nchịkọta tableau ahụ",
+    "no_face_up": "Enweghị kaadị ihu na-agagharị",
+    "tableau_to_tableau_ok": "Ebugharị {count} kaadị ((s) site na tebụl T{src} gaa na T{dst}",
+    "tableau_to_tableau_bad": "Enweghi ike ịkwaga {count} kaadị (s) site na T{src} gaa na T{dst}",
+    "foundation_to_tableau_one_card": "Nwere ike ịkwaga naanị kaadị 1 site na ntọala gaa na tableau",
+    "foundation_empty": "Ntọala F{src} bụ ihe efu",
+    "foundation_to_tableau_ok": "Kaadị si na ntọala F{src} gaa na tebụl T{dst}",
+    "foundation_to_tableau_bad": "Enweghị ike itinye kaadị ntọala na tebụl T{dst}",
+    "to_waste_or_stock": "Enweghị ike ịkwaga n'ime mkpofu ma ọ bụ ngwaahịa"
+  },
+  "outcome": {
+    "forfeit": "Egwuregwu a na-atụfu. Akara ikpeazụ: {score} kaadị na ntọala.",
+    "won": "Ekele, I meriela na Klondike Solitaire!",
+    "turn_limit": "Egwuregwu agwụla! Ị ruru oke nke {max_turns} na-atụgharị. Akara: {score} kaadị na ntọala."
+  },
+  "board": {
+    "title": "=== EGWUREGWU KLONDIKE ===",
+    "turn": "Gbanwee: {turn}/{max_turns}",
+    "stock": "N'ụlọ: {stock} kaadị",
+    "waste": "Ihe mkpofu (W): {waste}",
+    "foundations_header": "Ntọala:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Ihe osise:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

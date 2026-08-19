@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in Stratego.\nIl tuo obiettivo è catturare la bandiera del tuo avversario o eliminare tutte le sue pedine mobili.\nIl tuo esercito è stato posizionato per te sulla tavola, compresa la tua bandiera, le bombe e le altre pedine di vario rango.\n\n### Istruzioni di gioco\n1. **Regole di movimento:**\n   - Nel tuo turno, puoi muovere una pedina di un passo in una casella adiacente (su, giù, sinistra o destra) che è già occupata dalle tue pedine.\n   - Esempio: una pedina può muoversi da A1 a B1 o da A1 a A2 se B1 e A2 non sono occupate dalle pedine del giocatore.\n   - Se la pedina selezionata è una bomba o una bandiera, non può essere mossa.\n2. **Battaglie:**\n   - Se ti muovi in una casella occupata da una pedina dell'avversario, si verifica una battaglia:\n     - La pedina con il rango più alto vince ed elimina la pedina dell'avversario.\n     - Se i ranghi sono uguali, entrambe le pedine vengono rimosse dalla tavola.\n     - **Casi speciali:**\n       - Le bombe eliminano la maggior parte delle pedine attaccanti, tranne i minatori, che disinnescano le bombe.\n       - Le spie possono sconfiggere il maresciallo se la spia attacca per prima, ma perdono contro tutte le altre pedine.\n3. **Obiettivi strategici:**\n   - Identifica le pedine dell'avversario attraverso i loro movimenti e le battaglie.\n   - Proteggi la tua bandiera mentre cerchi di catturare la bandiera dell'avversario.\n   - Utilizza gli scout in modo strategico per ottenere informazioni sulle pedine dell'avversario e attaccare quelle deboli.\n\n### Come fare una mossa:\n1. Specifica le coordinate della pedina che vuoi muovere e la sua destinazione.\n2. Utilizza il formato: [A0 B0], dove A0 è la posizione di partenza e B0 è la destinazione.\n   - Esempio: per muovere una pedina dalla riga 0, colonna 0 alla riga 1, colonna 0, inserisci [A0 B0].\n3. Assicurati che la destinazione sia valida secondo le regole di movimento sopra.\n\n### Note importanti:\n- La tavola mostrerà le tue pedine e le loro posizioni, ad esempio MN, MS.\n- La tavola mostrerà anche le posizioni note delle pedine dell'avversario senza rivelare i loro ranghi, ad esempio ?.\n- Le griglie con ~ sono laghi e non possono essere mosse.\n- Come suggerimento, inizia il tuo gioco muovendo le pedine che sono nelle linee di fronte per ottenere informazioni sulle pedine dell'avversario. Le linee di fronte dei giocatori 0 e 1 sono rispettivamente la riga D e la riga G.\n\nEcco lo stato attuale della tavola:\n"
+  },
+  "board": {
+    "current_board": "Tavola attuale:\n\n{board}\nMosse disponibili: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato di azione non valido. Il giocatore {player_id} non ha inserito una mossa nel formato [A0 B0].",
+    "invalid_coordinates": "Formato di azione non valido. Il giocatore {player_id} non ha inserito coordinate valide.",
+    "not_own_piece": "Formato di azione non valido. Il giocatore {player_id} deve muovere una delle sue pedine.",
+    "scout_through_pieces": "Formato di azione non valido. Il giocatore {player_id} non può muovere uno scout attraverso altre pedine.",
+    "scout_diagonal": "Formato di azione non valido. Il giocatore {player_id} non può muovere uno scout in diagonale.",
+    "non_scout_multi_square": "Formato di azione non valido. Le pedine, a parte gli scout, possono muoversi solo di un quadrato alla volta.",
+    "move_into_lake": "Formato di azione non valido. Il giocatore {player_id} non può muoversi nel lago.",
+    "move_onto_own_piece": "Formato di azione non valido. Il giocatore {player_id} non può muoversi sulla sua stessa pedina.",
+    "move_bomb_or_flag": "Formato di azione non valido. Il giocatore {player_id} non può muovere una bomba o una bandiera."
+  },
+  "game_action": {
+    "you_moved": "Hai mosso la tua pedina da {source} a {dest}.",
+    "opponent_moved": "Il giocatore {player_id} ha mosso una pedina da {source} a {dest}.",
+    "you_equal_ranks": "Hai mosso la tua pedina da {source} a {dest}. La pedina attaccante era {attacking_rank} e la pedina di destinazione era {target_rank}. Poiché i ranghi sono uguali, entrambe le pedine hanno perso.",
+    "opponent_equal_ranks": "Il giocatore {player_id} ha mosso una pedina da {source} a {dest}. La pedina attaccante era {attacking_rank} e la pedina di destinazione era {target_rank}. Poiché i ranghi sono uguali, entrambe le pedine hanno perso.",
+    "you_miner_defused": "Hai mosso la tua pedina da {source} a {dest}. La pedina attaccante era {attacking_rank} e la pedina di destinazione era {target_rank}. Poiché i minatori possono disinnescare le bombe, hai vinto la battaglia.",
+    "opponent_miner_defused": "Il giocatore {player_id} ha mosso una pedina da {source} a {dest}. La pedina attaccante era {attacking_rank} e la pedina di destinazione era {target_rank}. Poiché i minatori possono disinnescare le bombe, hai perso la battaglia.",
+    "you_bomb_lost": "Hai mosso la tua pedina da {source} a {dest}. La pedina attaccante era {attacking_rank} e la pedina di destinazione era {target_rank}. Poiché l'attaccante non è un minatore, hai perso la battaglia.",
+    "opponent_bomb_won": "Il giocatore {player_id} ha mosso una pedina da {source} a {dest}. La pedina attaccante era {attacking_rank} e la pedina di destinazione era {target_rank}. Poiché l'attaccante non è un minatore, hai vinto la battaglia.",
+    "you_spy_won": "Hai mosso la tua pedina da {source} a {dest}. La pedina attaccante era {attacking_rank} e la pedina di destinazione era {target_rank}. Poiché l'attaccante è una spia e la destinazione è un maresciallo, hai vinto la battaglia.",
+    "opponent_spy_lost": "Il giocatore {player_id} ha mosso una pedina da {source} a {dest}. La pedina attaccante era {attacking_rank} e la pedina di destinazione era {target_rank}. Poiché l'attaccante è una spia e la destinazione è un maresciallo, hai perso la battaglia.",
+    "you_higher_won": "Hai mosso la tua pedina da {source} a {dest}. La pedina attaccante era {attacking_rank} e la pedina di destinazione era {target_rank}. Poiché l'attaccante è di rango superiore alla destinazione, hai vinto la battaglia.",
+    "opponent_higher_lost": "Il giocatore {player_id} ha mosso una pedina da {source} a {dest}. La pedina attaccante era {attacking_rank} e la pedina di destinazione era {target_rank}. Poiché l'attaccante è di rango superiore alla destinazione, hai perso la battaglia.",
+    "you_lower_lost": "Hai mosso la tua pedina da {source} a {dest}. La pedina attaccante era {attacking_rank} e la pedina di destinazione era {target_rank}. Poiché l'attaccante è di rango inferiore alla destinazione, hai perso la battaglia.",
+    "opponent_lower_won": "Il giocatore {player_id} ha mosso una pedina da {source} a {dest}. La pedina attaccante era {attacking_rank} e la pedina di destinazione era {target_rank}. Poiché l'attaccante è di rango inferiore alla destinazione, hai vinto la battaglia."
+  },
+  "outcome": {
+    "flag_captured": "Il giocatore {player_id} ha catturato la bandiera dell'avversario!",
+    "no_movable_pieces": "Il giocatore {winner_id} vince! Il giocatore {loser_id} non ha più pedine mobili."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ti seet Giugador {player_id} in d'on gioco a {max_rounds} rounds de Kuhn Poker.\nRegol del Gioco:\n- El Kuhn Poker el dopera on mazzo de 3 cart con J, Q, K (J el pù bass, K el pù alt)\n- On giugador el mett {ante} fich in la banchera e el ricev 1 carta a ogni round (nota che i cart i hinn distribuii senza sostituzion, donca ti podet no avè la midema carta del to aversari).\n- El gioco el va inanz per {max_rounds} rounds\n- El giugador con pù fich al fin de tuts i rounds el venc\nRegol d'Azion:\n- '[check]': Passa senza puntà (domà se gh'è nissun punt in su la tabela)\n- '[bet]': Aggiunta 1 fich al pot (domà se gh'è nissun punt in su la tabela)\n- '[call]': Corrispond a la puntazione del aversari aggiungend 1 fich al pot\n- '[fold]': Rinnegà la tua carta e lassà che el to aversari el vinga el pot"
+  },
+  "init_round": {
+    "round_start": "### Inizi del round {current_round} su {max_rounds} rounds. La tua carta l'è: '{player_card}'",
+    "available_actions": "I tò azion disponibil hinn: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'azion la gh'ha de vesser [Check], [Bet], [Call], o [Fold].",
+    "not_legal": "L'azion la dev esercità {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Giugador {player_id}, l'ha inviad la mossa: '[{move}]'.",
+    "valid_actions": "I tò azion disponibil hinn: {legal_actions}.",
+    "round_summary": "{reason} Puntegiadura atual: Giugador 0: '{player_0_chips}'; Giugador 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Confront a la fin: La carta {winner_card} del Giugador {winner} la bat la carta {loser_card} del Giugador {loser}. El Giugador {winner} el venc el pot de {pot_value} fich."
+  },
+  "outcome": {
+    "draw": "A la fin di {max_rounds} rond, i duu giugador gh'aveven el stess numar de fiches.",
+    "round_win": "El giugador {player_id} l'è staccà.",
+    "winner_player0": "Al giugador 0 al vinci avend piò fich a la fin di {max_rounds} rond.",
+    "winner_player1": "Al giugador 1 al vinci avend piò fich a la fin di {max_rounds} rond."
+  }
+}

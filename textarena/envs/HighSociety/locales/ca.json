@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} en un joc de HighSociety (versió de 2 jugadors).\nFlux del joc: Deu cartes de prestigi són subhastades una darrere l'altra.\nLicitació: Cada subhasta, tria en secret una carta de diners del 1 al 11 i revela.\n            • La licitació més alta guanya la carta de prestigi i descarta la carta de diners.\n            • La licitació més baixa conserva la carta de diners.\n            • Empat → les dues licitacions són retornades i la mateixa carta de prestigi és subhastada de nou.\nPuntuació: Després de les deu subhastes, suma **diners restants + punts de prestigi**.\n            La *valor net* més alta guanya (empat exacte → empat).\n\n**Sintaxi d'acció**  →  licita una carta individual com '[7]' o '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Subhasta {round}/10  |  Carta de prestigi: {prize}"
+  },
+  "board": {
+    "money_cards": "Les teves cartes de diners restants: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ha d'incloure exactament una carta de diners [X].",
+    "card_not_held": "Ja no tens aquesta carta de diners."
+  },
+  "message": {
+    "tie": "Empat - les licitacions són retornades. Torna a licitar!",
+    "auction_result": "P0 ha licitat {bid0}, P1 ha licitat {bid1}. El Jugador {winner} guanya prestigi {prize} (total {total})."
+  },
+  "outcome": {
+    "p0_wins": "Valor net {nw0} > {nw1}",
+    "p1_wins": "Valor net {nw1} > {nw0}",
+    "draw": "Ambdós valors nets {nw0} – empat exacte."
+  }
+}

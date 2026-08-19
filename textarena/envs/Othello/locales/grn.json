@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Joguapyha: {board}",
+    "valid_moves": "{observation}\nMba'e porãva: {moves}",
+    "no_valid_moves_reset": "{observation} Ndaipóri movimiento válido - ikatu rehesape'a.",
+    "no_valid_moves_step": "{observation} Ndaipóri movimiento válido ikatu rehesape'a.",
+    "scores_reset": "{observation}\nArapapaha Tembikua - Kuñangy: {black_count}, Morotî: {white_count}\n",
+    "scores_step": "{observation}\nTembikua - Kuñangy: {black_count}, Morotî: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Movimiento oiko va'erã [row, col]-pe.",
+    "illegal": "Movimiento ilegal. Mova válido: {valid}"
+  },
+  "game_action": {
+    "skipped": "Jokuaihára {pid} omboyke va'erã ijerure.",
+    "played": "Jugador {pid} ({piece}) ojapó [{r}, {c}] ombogue {flipped} mburuvicha(kuéra)"
+  },
+  "game_message": {
+    "must_skip": "Jogador {pid} ({piece}) naiñupi mba'e porãva ha ohopa'e."
+  },
+  "outcome": {
+    "black_wins": "Hũ ogana {black_count}-{white_count}.",
+    "white_wins": "Morotĩ ogana {white_count}-{black_count}.",
+    "draw": "Embohape {black_count}-{white_count}."
+  }
+}

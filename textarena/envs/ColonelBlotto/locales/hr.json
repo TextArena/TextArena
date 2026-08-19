@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste {role} u Colonel Blotto.\nVaš cilj je pobijediti više rundi od vašeg protivnika.\nU svakoj rundi, rasporedite točno {num_total_units} jedinica preko polja {field_names}.\nIgrač koji rasporedi više jedinica u polje pobjeđuje to polje, a igrač koji pobjeđuje više polja pobjeđuje rundu.\nNa primjer, '[A7 B7 C6]' raspoređuje 7 jedinica u A, 7 u B i 6 u C.",
+    "commander_alpha": "Zapovjednik Alfa",
+    "commander_beta": "Zapovjednik Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Runda {current_round}/{num_rounds} ===\nRunde pobijedene - Zapovjednik Alfa: {alpha_score}, Zapovjednik Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRunda {current_round}\nZapovjednik Alfa rasporedio: {p0_allocations}\nZapovjednik Beta rasporedio: {p1_allocations}\n",
+    "winner_alpha": "{message}Pobjednik: Zapovjednik Alfa",
+    "winner_beta": "{message}Pobjednik: Zapovjednik Beta",
+    "tie": "{message}Neriješeno!"
+  },
+  "invalid_move": {
+    "wrong_format": "Neispravan format unosa. Koristite: A:5, B:10, C:5",
+    "invalid_field": "Neispravno ime polja. Valjana polja: {field_names}",
+    "wrong_allocation_value": "Sve raspodjele moraju biti nenegativni cijeli brojevi.",
+    "incorrect_total_units": "Morate rasporediti točno {num_total_units} jedinica. Trenutna suma: {current_sum}",
+    "good_allocations": "Raspodjela je dobra."
+  },
+  "outcome": {
+    "winner_alpha": "Zapovjednik Alfa pobjeđuje {score_0}-{score_1} nakon {num_rounds} rundi!",
+    "winner_beta": "Zapovjednik Beta pobjeđuje {score_1}-{score_0} nakon {num_rounds} rundi!",
+    "draw": "Igra završava neriješeno {score_0}-{score_1} nakon {num_rounds} rundi!",
+    "early_winner_alpha": "Zapovjednik Alfa pobjeđuje {scores_0}-{scores_1} (postignuta većina)!",
+    "early_winner_beta": "Zapovjednik Beta pobjeđuje {scores_1}-{scores_0} (postignuta većina)!"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (kart oyunu) yerli faylı. Açarları (sol tərəf) tərcümə etməyin. Yalnız dəyərləri (sağ tərəf) tərcümə edin.",
+  "_slots": {
+    "{player_id}": "Oyunçunun nömrəsi, məsələn 0 və ya 1",
+    "{pid}": "Oyunçunun nömrəsi, məsələn 0 və ya 1",
+    "{winner}": "Ən aşağı hesabla oyunçu",
+    "{score}": "Xal hesabı",
+    "{card}": "Kart etiketi, məsələn A♠, 10♥, K♦ və ya Q♣",
+    "{new}": "Şəbəkəyə yerləşdirilən kart etiketi",
+    "{old}": "Şəbəkədən silinən kart etiketi",
+    "{row}": "Sətir nömrəsi",
+    "{col}": "Sütun nömrəsi",
+    "{max_row}": "Ən böyük sətir nömrəsi",
+    "{max_col}": "Ən böyük sütun nömrəsi",
+    "{reason}": "Son raundun başlama səbəbi",
+    "{n}": "Sətir nömrəsi",
+    "{cards}": "Bir sətirin şəbəkə hücrələri",
+    "{hand}": "Oyunçunun şəbəkə bloku",
+    "{discard}": "Atılan kart etiketi və ya 'heç bir'",
+    "{options}": "Mövcud hərəkətlərin siyahısı",
+    "{scores}": "Oyunçuların son hesablarının siyahısı"
+  },
+  "player_prompt": {
+    "intro": "Siz Golf (Kart Oyunu) - Oyunçu {player_id} oynuyorsunuz.\nHədəf: Bu raundda ən aşağı hesab qazanmaq. Eyni dəyərə malik sütunlar 0 kimi hesablanır.\nKart dəyərləri: A=1, 2-10=üz dəyəri, J/Q=10, K=0\n\nHərəkətlər (dəqiq mötərizələrdən istifadə edin):\n- '[draw]' - Dəstədən çəkin\n- '[take]' - Atılan kartları götürün\n- '[swap X Y]' - Çəkilən kartı mövqe X (sətir) Y (sütun) ilə dəyişdirin\n- '[discard]' - Çəkilən kartı atın\n"
+  },
+  "board": {
+    "drew": "Siz çəkdiniz: {card}\nİndi siz [swap X Y] və ya [discard] etməlisiniz.",
+    "took": "Siz götürdünüz: {card} atılan kartlardan\nSiz [swap X Y] etməlisiniz (kartı atmaq olmaz).",
+    "peeked": "Siz mövqeyə baxdınız ({row},{col}): {card}",
+    "turn_view": "Əliniz:\n{hand}\nAtılan kartlar: {discard}\n{options}",
+    "none": "Heç bir"
+  },
+  "options": {
+    "final_turns": "Son gedişlər! Mövcud hərəkətlər: [draw], [take], [peek X Y]",
+    "draw": "Mövcud hərəkətlər: [draw], [take]",
+    "must_swap": "Siz [swap X Y] etməlisiniz (atılan kartları atmaq olmaz)",
+    "swap_or_discard": "Siz [swap X Y] və ya [discard] etməlisiniz"
+  },
+  "hand": {
+    "no_cards": "Heç bir kart",
+    "header": "  Sütun:   1    2    3",
+    "row": "Sətir {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Oyunçu {pid} {new} kartını {old} kartı ilə mövqe ({row},{col})-də dəyişdirdi",
+    "discarded": "Oyunçu {pid} {card} kartını atdı"
+  },
+  "message": {
+    "deck_empty": "Dəstə boşdur! Oyun dərhal bitir.",
+    "knocked": "Oyunçu {pid} vurdu! Digər oyunçular bir gediş daha alır.",
+    "final_round": "Oyunçu {pid} {reason}! Digər oyunçular bir gediş daha alır."
+  },
+  "reason": {
+    "all_revealed": "bütün kartları açdı"
+  },
+  "invalid": {
+    "wrong_action": "Dəqiq bir mötərizəli hərəkət istifadə edin: [draw], [take], [swap X Y], [discard], [knock], və ya [peek X Y]",
+    "discard_empty": "Atılan kartlar boşdur!",
+    "must_draw_first": "Siz ilk olaraq [draw], [take], [knock], və ya [peek X Y] etməlisiniz",
+    "cannot_discard_taken": "Siz atılan kartlardan götürülmüş kartı atmaq olmaz. Siz onu dəyişdirməlisiniz.",
+    "have_drawn_card": "Siz çəkilən kartı var. Siz [swap X Y] və ya [discard] etməlisiniz.",
+    "need_drawn_swap": "Siz çəkilən kartı dəyişdirmək üçün ehtiyacınız var.",
+    "need_drawn_discard": "Siz çəkilən kartı atmaq üçün ehtiyacınız var.",
+    "out_of_bounds": "Mövqe sərhədləri xaricindədir. Sətir 1-{max_row}, sütun 1-{max_col} istifadə edin",
+    "knock_with_card": "Siz çəkilən kartla vuramazsınız. Əvvəlcə gedişinizi tamamlayın.",
+    "already_knocked": "Bu raundda kimsə artıq vurub.",
+    "already_revealed": "Bu kart artıq açıqdır!"
+  },
+  "summary": {
+    "full": "Oyun Bitdi! Oyunçu {winner} {score} xalla qazandı!\n\nSon Hesablar:\n{scores}",
+    "line": "Oyunçu {pid}: {score} xal\n"
+  },
+  "board_str": {
+    "title": "=== GOLF OYUNU ===",
+    "discard": "Atılan kartlar: {card}",
+    "knocked": "Oyunçu {pid} vurdu!",
+    "player_header": "Oyunçu {pid} (Hesab: {score}):"
+  }
+}

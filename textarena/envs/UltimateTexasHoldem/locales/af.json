@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em-lokaalleêr. MAAK NIE sleutels (linkerkant) oor nie. Vertaal net waardes (regterkant).",
+  "_slots": {
+    "{start_chips}": "Begin-chip-telling, bv. 1000",
+    "{ante}": "Die ante/blind-wedbedrag, bv. 25",
+    "{ante4}": "Vier keer die ante, bv. 100",
+    "{ante2}": "Twee keer die ante, bv. 50",
+    "{round}": "Die huidige ronde-nommer",
+    "{chips}": "Die speler se huidige chip-telling",
+    "{hand}": "'n Komma-geskeide lys van kaart-etikette, bv. 'A♠, K♥', of die gelokaliseerde geen-kaarte-tekst",
+    "{phase}": "Die huidige fase-etiket-token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "'n Komma-geskeide lys van hakie-aksie-tokens, bv. '[play_bet_4x], [check]'",
+    "{available}": "'n Komma-geskeide lys van tans wettige hakie-aksie-tokens",
+    "{blind}": "Die blind-wedbedrag",
+    "{play}": "Die speel-wedbedrag",
+    "{cards}": "'n Komma-geskeide lys van kaart-etikette, bv. 'Q♣, 7♦, 2♠'",
+    "{name}": "'n Gelokaliseerde pokershand-naam, ingevoeg soos dit is",
+    "{amount}": "'n Chip-bedrag",
+    "{net}": "Die netto chip-verandering vir die ronde (kan negatief wees)",
+    "{max_turns}": "Die maksimum aantal rondes",
+    "{winner_rounds}": "Die aantal rondes voltooi"
+  },
+  "player_prompt": {
+    "no_cards": "Nog geen kaarte",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Enkel Speler vs Dealer\n\n📖 SPEL OORSIG:\n• Jy begin met {start_chips} chips\n• Enkel dek van 52 kaarte (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Jy speel teen die dealer (huis)\n• Elke ronde volg die Ultimate Texas Hold'em-struktuur: jy plaas ANTE en BLIND-wedde, ontvang 2 gate-kaarte, besluit oor opsionele SPEEL-wedde oor die wedfases, wys dan gemeenskaplike kaarte en vergelyk jou beste 5-kaart-hand teen die dealer s'n. Jou doel is om jou winste te maksimeer (wanneer jy die beter hand het), terwyl jy jou verliese minimizeer (wanneer jy die swakker hand het).\n• Spel eindig wanneer jy 0 chips of minder by die begin van 'n ronde bereik (VERLIES) of 1000 rondes met chips voltooi (WEN)\n\n💰 WEDSTRUKTUUR:\n• ANTE: Verpligte ${ante} wedde elke ronde\n• BLIND: Verpligte ${ante} wedde elke ronde\n• SPEEL: Opsionele wedde tydens spel. Deur die ronde kan jy slegs EEN van die volgende kies: (${ante4} as dit by PRE-FLOP gedoen word, ${ante2} as dit by FLOP gedoen word, of ${ante} as dit by RIVER gedoen word. Kan ook by RIVER vou, wat hand opgee, en geen wedde maak nie.)\n\n🎴 KAART-DEALING:\n• Jy ontvang 2 opgedraaide kaarte (jou gate-kaarte)\n• Dealer ontvang 2 afgdraaide kaarte (verborge van jou)\n• 5 gemeenskaplike kaarte word aanvanklik afgdraai\n• Gemeenskaplike kaarte word progressief deur die spel-fases onthul\n\n🏆 DEALER-KWALIFIKASIE:\n• Dealer moet ten minste 'n PAAR (2 kaarte van dieselfde rang) hê om te kwalifiseer, deur die 2 kaarte in hul hand en die 5 gemeenskaplike kaarte te gebruik.\n• Dealer-kwalifikasie beïnvloed die wed-uitkomste, soos later verduidelik sal word.\n\n🎮 SPEL-FASES & AKSIES:\n📋 PRE-FLOP:\n  • Aksies: [4x] (${ante4}) of [check]\n  • [4x]: Plaas ${ante4} SPEEL-wedde, wys eerste 3 gemeenskaplike kaarte\n  • [check]: Geen bykomende wedde, wys eerste 3 gemeenskaplike kaarte\n\n📋 FLOP:\n  • As 4x-wedde geplaas is: Slegs [skip] beskikbaar (outomaties wys laaste 2 gemeenskaplike kaarte)\n  • As geen 4x-wedde: [2x] (${ante2}) of [check]\n  • [2x]: Plaas ${ante2} SPEEL-wedde, wys laaste 2 gemeenskaplike kaarte\n  • [check]: Geen bykomende wedde, wys laaste 2 gemeenskaplike kaarte\n\n📋 RIVER:\n  • As 4x of 2x-wedde geplaas is: Slegs [skip] beskikbaar (outomaties na showdown)\n  • As geen vorige SPEEL-wedde: [1x] (${ante}) of [fold]\n  • [1x]: Plaas ${ante} SPEEL-wedde, na showdown\n  • [fold]: Gee hand op, verloor ANTE en BLIND-wedde\n\n📋 SHOWDOWN:\n  • Alle kaarte word onthul en geëvalueer\n  • Beste 5-kaart-hand van 7 kaarte (2 gate + 5 gemeenskaplike)\n  • Wedde word volgens uitbetalingsreëls gesettle\n\n💎 WED-UITBETALINGS:\n📊 ANTE-WEDDE:\n  • Dealer kwalifiseer nie: PUSH (wedde terugbetaal)\n  • Dealer kwalifiseer & jy wen: 1:1 uitbetaling (wedde + winste)\n  • Dealer kwalifiseer & jy verloor: Wedde verloor\n  • Gelykop: PUSH (wedde terugbetaal)\n\n📊 BLIND-WEDDE:\n  • Nie beïnvloed deur dealer-kwalifikasie\n  • Jy wen: Wedde terugbetaal en bykomende uitbetaling gebaseer op jou hand-sterkte\n  • Jy verloor: Wedde verloor\n  • Gelykop: PUSH (wedde terugbetaal)\n\n📊 BLIND-WEDDE-UITBETALINGSTABEL:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Minder as Straight: Geen bykomende uitbetaling\n\n📊 SPEEL-WEDDE:\n  • Nie beïnvloed deur dealer-kwalifikasie\n  • Direkte vergelyking: Jou beste hand vs Dealer se beste hand\n  • Jy wen: 1:1 uitbetaling (wedde + winste)\n  • Jy verloor: Wedde verloor\n  • Gelykop: PUSH (wedde terugbetaal)\n\n🎯 POKER-HAND-RANGorde (Beste tot Swakste):\n  1. Royal Flush: A-K-Q-J-10 van dieselfde soort\n  2. Straight Flush: 5 opeenvolgende kaarte van dieselfde soort\n  3. Four of a Kind: 4 kaarte van dieselfde rang\n  4. Full House: 3 van 'n soort + 2 van 'n soort\n  5. Flush: 5 kaarte van dieselfde soort\n  6. Straight: 5 opeenvolgende kaarte\n  7. Three of a Kind: 3 kaarte van dieselfde rang\n  8. Two Pair: 2 pare van verskillende rang\n  9. One Pair: 2 kaarte van dieselfde rang\n  10. High Card: Hoogste kaart wen\n\n⌨️  AKSIE-KOMMANDO'S:\n• [4x] of [play bet 4x]: Plaas ${{self.ante_amount*4}} SPEEL-wedde\n• [2x] of [play bet 2x]: Plaas ${{self.ante_amount*2}} SPEEL-wedde\n• [1x] of [play bet 1x]: Plaas ${{self.ante_amount*1}} SPEEL-wedde\n• [check] of [c]: Check (geen bykomende wedde)\n• [fold] of [f]: Vou (gee hand op)\n• [skip] of [s]: Slaan oor na volgende fase (wanneer geen aksie nodig)\n\n💡 STRATEGIE-TIPS:\n• Sterk begin-hande (pare, hoë kaarte) regverdig dikwels 4x-wedde\n• Oorweeg dealer-kwalifikasie - swak hande mag push as dealer nie kwalifiseer\n• BLIND-wedde kan baie winsgewend wees met sterk hande (Royal Flush = 500:1!)\n• Hou jou chip-stapel dop! As dit 0 of minder by die begin van 'n ronde bereik, verloor jy.\n\n⚠️  BELANGRIKE NOTAS:\n• ANTE en BLIND-wedde is verpligtend elke ronde\n• SPEEL-wedde is opsioneel en strategies\n• Maak seker jy voer die korrekte aksie in, en slegs een aksie op 'n slag.\n\n",
+    "state": "🎯 RONDE {round}\n💰 Chips: {chips}\n🎴 Jou hand: {hand}\n📊 Huidige wedde: Ante ${ante}, Blind ${blind}, Speel ${play}\n📋 Fase: {phase}\n🎯 Beskikbare aksies: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Ronde {round} begin! Wedde: ANTE ${ante}, BLIND ${blind}. Jy het {chips} chips oor.",
+    "your_hand": "🎴 Jou hand: {hand}",
+    "flop_revealed": "🃏 FLOP onthul: {cards}",
+    "river_revealed": "🃏 RIVER onthul: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Ongeldige aksie vir huidige fase. Beskikbare aksies: {available}",
+    "message": "❌ Ongeldige aksie! Beskikbare aksies: {available}"
+  },
+  "action": {
+    "folded": "🃏 Jy het gevou."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Dealer se hand: {cards}",
+    "community_cards": "🃏 Gemeenskaplike kaarte: {cards}",
+    "player_best": "🎴 Speler se beste hand: {name} ({cards})",
+    "dealer_best": "🎴 Dealer se beste hand: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE-wedde VERLOOR! -${ante} (gevou)",
+    "blind_lost_folded": "❌ BLIND-wedde VERLOOR! -${blind} (gevou)",
+    "ante_won": "✅ ANTE-wedde GEWEN! +${amount}",
+    "ante_pushed": "🔄 ANTE-wedde TERUGBETAAL! ${ante} terugbetaal",
+    "ante_lost": "❌ ANTE-wedde VERLOOR! -${ante}",
+    "blind_won": "✅ BLIND-wedde GEWEN! +${amount}",
+    "blind_pushed": "🔄 BLIND-wedde TERUGBETAAL! ${blind} terugbetaal",
+    "blind_lost": "❌ BLIND-wedde VERLOOR! -${blind}",
+    "play_won": "✅ SPEEL-wedde GEWEN! +${amount}",
+    "play_pushed": "🔄 SPEEL-wedde TERUGBETAAL! ${play} terugbetaal",
+    "play_lost": "❌ SPEEL-wedde VERLOOR! -${play}",
+    "net_gain": "🎉 Ronde {round} voltooi! Netto wins: +${net}",
+    "net_loss": "💸 Ronde {round} voltooi! Netto verlies: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 SPEL OOR! {max_turns} rondes voltooi. Jy het ${chips} chips - JY WEN!",
+    "game_over_lose": "🏁 SPEL OOR! Jy is uit chips. Dealer wen!",
+    "reward_win": "Speler het {winner_rounds} rondes voltooi met ${chips} chips",
+    "reward_lose": "Speler het uit chips geraak in ronde {round}",
+    "reward_win_max": "Speler het {max_turns} rondes voltooi met ${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Vier van 'n Soort",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Drie van 'n Soort",
+    "two_pair": "Twee Pare",
+    "one_pair": "Een Paar",
+    "high_card": "Hoogste Kaart",
+    "unknown": "Onbekende Hand"
+  }
+}

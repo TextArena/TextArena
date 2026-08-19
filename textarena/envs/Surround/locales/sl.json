@@ -1,0 +1,30 @@
+{
+  "_comment": "Datoteka s prevodom za Surround. NE PREVADIJ ključev (levo), samo vrednosti (desno).",
+  "_slots": {
+    "{num_players}": "Število igralcev v tekmi",
+    "{width}": "Širina plošče v celicah",
+    "{height}": "Višina plošče v celicah",
+    "{player_id}": "Številka igralca (0-temeljena)",
+    "{board}": "Izrisana ASCII mreža; ohrani nevtralno, nikoli ne prevajaj znakov",
+    "{reason}": "Izrisana fraza razloga za konec igre",
+    "{groups}": "Nevtralni podatki o uvrstitvi (seznam skupin igralcev, od najboljših do najslabših); ne prevajaj"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Igralec Surround na {width}x{height} mreži.\nVi ste igralec {player_id}. Veljavne poteze: '[up]' '[down]' '[left]' '[right]' ali w/s/a/d.\nCilj: preživeti vse ostale. Tiri so smrtni; zadeti v steno ubije; trki glavo na glavo ubijejo oba."
+  },
+  "board": {
+    "current": "Trenutna plošča:\n{board}",
+    "after_moves": "Plošča po simultanih potezah:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Igralec {player_id} je umrl zaradi neveljavne poteze."
+  },
+  "outcome": {
+    "survived_win": "Igralec {player_id} je preživel; vsi ostali so se zaleteli.",
+    "all_crashed": "Vsi igralci so se zaleteli hkrati.",
+    "outlived": "Igralec je preživel vse ostale.",
+    "all_dead": "Vsi igralci so mrtvi.",
+    "turn_limit": "Dosežen je bil limit potez - najdaljši preživeli zmaga.",
+    "ranking": "{reason} Končne skupine uvrstitve (najboljši→najslabši): {groups}"
+  }
+}

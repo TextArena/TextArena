@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id}, grającym {num_rounds} rund Iterated Ultimatum Game.\nMasz ${pool} do podziału w tej rundzie pomiędzy siebie a Gracza {other_id}.\n\nOfiarujący:\n  - Złóż ofertę: [Offer: $X] (0 <= X <= pool)\n  - Jeśli zaakceptowano → Zdobędziesz $(pool - X), inny gracz zdobędzie $X\n  - Jeśli odrzucono → Obydwaj dostają $0\n  - Przykład: [Offer: $3]  lub  'Uważam, że to jest uczciwe. [Offer: $5]'\n\nOdpowiadający:\n  - Zdecyduj na ofertę albo [Accept] lub [Reject]\n  - Przykład: 'To wydaje się rozsądne. [Accept]'\n            'Zbyt niesprawiedliwe. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Runda {round_number} zaczyno sie! ---\nGracz {proposer_id} je propozycjůń, Gracz {responder_id} je uodpowjedźůł.",
+    "offer": "Runda {round_number}: Gracz {proposer_id} oferuje ${offer} Graczowi {responder_id} (zatrzymując ${keep}).",
+    "accepted": "Gracz {responder_id} zaakceptował! Runda {round_number} zyski: Gracz {proposer_id} +${proposer_gain}, Gracz {responder_id} +${responder_gain}. Nowe sumy: Gracz 0: ${total_0}, Gracz 1: ${total_1}.",
+    "rejected": "Gracz {responder_id} odrzucił ofertę! Runda {round_number} zyski: Obydwaj gracze +$0. Sumy pozostają: Gracz 0: ${total_0}, Gracz 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Propōnujōncy musi złożyć propozycyjō we formacie [Offer: $X].",
+    "bad_integer": "Wielość ôferta musi być ważnōm liczbōm cołkowityj.",
+    "out_of_range": "Ôferta musi być miyndzy $0 a ${pool}.",
+    "no_current_offer": "Żŏdno aktualnŏ oferta do ôdpowiydzyniŏ.",
+    "accept_or_reject": "Odgoworca musi abo [Accept] abo [Reject] propozycyjo."
+  },
+  "outcome": {
+    "win": "Gracz {winner} wygrał z ${winner_total} łącznie vs Gracz {loser}'s ${loser_total}.",
+    "draw": "Ôba gracze ôsiōngli ${total} w cołkości."
+  }
+}

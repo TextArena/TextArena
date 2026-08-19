@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Kedda d-ɣileɣ Player {player_id} ɣ-ye-s wu-sen ɣ-ɣileɣ n Spite and Malice. Aɣilas d-ɣileɣ n wu-sen ad d-ye-s ɣ-ɣileɣ n payoff pile.\n\n### Aɣilas n Ye-s:\n- Aɣilas d-ɣileɣ n wu-sen ad d-ye-s ɣ-ɣileɣ n center piles.\n- Kedda d-ɣileɣ n wu-sen ad d-ye-s ɣ-ɣileɣ n kaɣ ɣ-ɣileɣ n:\n  1. **Aɣilas** (kedda d-ɣileɣ n wu-sen ad d-ye-s ɣ-ɣileɣ n 5 kaɣ ɣ-ɣileɣ n hand).\n  2. **Aɣilas n wu-sen n payoff pile**.\n  3. **Aɣilas n wu-sen n discard piles**.\n\n### Tifin n Ye-s:\n- Kedda d-ɣileɣ n wu-sen ad d-ye-s ɣ-ɣileɣ n card ɣ-ɣileɣ n center pile maɣaɣ d-ɣileɣ n **yiwet n rank** ɣ-ɣileɣ n top card ɣ-ɣileɣ n pile (center piles ad d-ye-s ɣ-ɣileɣ n Ace ɣ-ɣileɣ n Queen; Kings ad d-ye-s ɣ-ɣileɣ n wild - ad d-ye-s ɣ-ɣileɣ n kaɣ maɣaɣ d-ɣileɣ n rank sequence. Maɣaɣ d-ɣileɣ n King ad d-ye-s ɣ-ɣileɣ n 5 ɣ-ɣileɣ n 4, ɣ-ɣileɣ n King ad d-ye-s ɣ-ɣileɣ n 6).\n- Maɣaɣ d-ɣileɣ n wu-sen ad d-ye-s ɣ-ɣileɣ n kaɣ, kedda d-ɣileɣ n wu-sen ad d-ye-s ɣ-ɣileɣ n **discard kaɣ** ɣ-ɣileɣ n discard piles ad d-ye-s ɣ-ɣileɣ n turn.\n- Maɣaɣ d-ɣileɣ n center pile ad d-ye-s ɣ-ɣileɣ n Queen, ad d-ye-s ɣ-ɣileɣ n cleared automatically.\n- Aɣilas n rank d-ɣileɣ: A=1, 2=2, ..., 9=9, J=10, Q=11, K maɣaɣ d-ɣileɣ n wild.\n\n### Aɣilas n Ye-s:\n1. **Draw**: Kedda d-ɣileɣ n wu-sen ad d-ye-s ɣ-ɣileɣ n kaɣ ɣ-ɣileɣ n hand ad d-ye-s ɣ-ɣileɣ n 5 kaɣ. Enter **[draw]** ad d-ye-s ɣ-ɣileɣ n.\n2. **Play kaɣ**: Ad d-ye-s ɣ-ɣileɣ n kaɣ, specify kaɣ ɣ-ɣileɣ n center pile maɣaɣ d-ɣileɣ: **[play A♠ 0]** (maɣaɣ d-ɣileɣ 'A♠' d-ɣileɣ n kaɣ ɣ-ɣileɣ '0' d-ɣileɣ n center pile index).\n3. **Discard**: Maɣaɣ d-ɣileɣ n wu-sen ad d-ye-s ɣ-ɣileɣ n kaɣ, discard kaɣ ɣ-ɣileɣ n hand ɣ-ɣileɣ n discard pile ad d-ye-s ɣ-ɣileɣ n turn. Enter **[discard A♠ 1]** (maɣaɣ d-ɣileɣ 'A♠' d-ɣileɣ n kaɣ ɣ-ɣileɣ '1' d-ɣileɣ n discard pile index). Maɣaɣ d-ɣileɣ n kaɣ ad d-ye-s ɣ-ɣileɣ n payoff pile. Kedda d-ɣileɣ n wu-sen ad d-ye-s ɣ-ɣileɣ n kaɣ ɣ-ɣileɣ n hand.\n\n"
+  },
+  "board": {
+    "current_board": "Alabord amaynut:\n\n{board}\nIswi imawan: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- ⴰⴱⴰⵔⴰⵣ ⵏ ⵡⴰⵎⵎⴰⵙ -- ",
+    "pile": "{observation}Tasɣunt {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Amagay {player_id} ---\n",
+    "payoff": "{observation}Tasɣunt n ussan (Tikart tamaynut): {top_card}, Addad n tasɣunt n ussan: {payoff_length}\n",
+    "hand": "{observation}Afus: {hand}\n",
+    "discard": "{observation}Tasɣunt n uskayel: {discard}\n",
+    "empty": "ⴱⵍⴰ ⴽⵔⴰ ⵏ ⵡⴰⵜⵉⴳⵏ."
+  },
+  "game_message": {
+    "no_cards_left": "ⵓⴰⵔ ⵉⵍⵍⴻⵏ ⴾⴰⵔⵜⴰⵏ ⵉⵉⴰⴷ ⴰⵂⵓⵙⴾⴰⵜⵏⵢⵏ. ⴰⵍⵎⴻⴷ ⴰⵙ ⴰⴷⵓⴱⴰⵜ ⵏⴰⵜ ⵜⴰⵔⵔⴰⵉⵜ ⴰⵏ ⵜⵉⴼⵔⵉⵙⵜ ⵜⴰⵏ: 1. \"\"ⴰⵛⴰⵍ\"\" ⵉⵏⴻⵙ 2. \"ⵜⴰⴱⴻⵔ ⵜoⵓ ⵙⵓⵏⴷ ⴱⴰⵉ oⵓⴼ\" ⵓⴰⵏ ⵎⵓⵛⴰⵎ\". 3. \"ⵜⵉⴱⴰⴶⵓⵜ ⵜⴰⵙⵉⵏⴷⴰⵗ ⴷⴰⵗ ⵎⴰⵋⵔⴰⴷ ⴼⵓⴾ ⵏ ⴰⵎⵎⴰⵙ\"\"."
+  },
+  "invalid_move": {
+    "wrong_format": "ⴰⵛⴰⵆⵉⵍ ⵓⴰⵔ ⵏ ⵉⵍⴰ ⴰⵍⵎⴰⵗⵏⴰ. {player_id} ⵓⵔ ⵢⵔⴷⴰⵂ ⵙ ⵜⴰⴾⴰⵍⵜ ⵜⴰⵏ ⵜⵉⴷⵉⵜ ⴷⴰⵗ ⴱⵔⴰⵛⴻⵔⵜⵙ ⵛⵓⴻⵔⴰⵜⵢⵔⵙ.",
+    "invalid_play": "Aɣbalu ur yuzmir. Amagay {player_id} ira ad iskayel {card} ɣer tasɣunt tamaynut {index}.",
+    "discard_from_payoff": "ⴰⴾⴰⵔⵉⴷ ⵓⴰ ⵉⵍⴰⵏ ⴰⵍⵆⵓⵔⵉⵉⴰⵜ. {player_id} ⴰⴷⴰⵍⵓⵋ ⵢⵔⴰⵎ ⴰⵙⵉⵔⵜⴰⵉ ⵏ ⵜⴰⴱⴰⵏⴶⵉⵜ ⵜⴰⵏ ⵜⵉⴼⵔⵓⵜ",
+    "discard_not_in_hand": "ⴰⴾⴰⵔⵉⴷ ⵓⴰ ⵉⵍⴰⵏ ⴰⵍⵆⵓⵔⵉⵉⴰⵜ. ⴰⵎⵓⵙⵙⴰⵏ {player_id} ⵢⵔⴰⵎ ⴰⴷ ⴰⵙⵉⵍⵎⴰⴷ ⵜⴰⴱⵔⵉⵜ ⵜⴰⵏ ⵜⵉⵍⴰⵜ ⴷⴰⵗ ⴰⵔⵓⵔ ⵏⴻⵜ .",
+    "wrong_move_type": "ⴰⵛⴰⴾⵉⵍ ⵏ ⵜⴰⵙⴰⴶⵂⵜ ⵓⴰⵔ ⵉⵍⴰ ⴰⵍⵆⵉⴷⵎⴰⵜ. {player_id} ⵓⵔ ⵂⴻⵙⵙⴰⵏ ⵙ ⴻⴷⴰⴶ ⵓⴰⵏ ⵜⵉⵙⴰⴶⵗⴰⵜ ⵜ-ⵉⵋⵋⵔⴰⵓⴻⵏ ⴷⴰⵗ ⴰⵙⵉⵙⵜⴰⴱ ⵜⴰⵏ ⴰⴷⴷⵉⵏⴰⵜ ."
+  },
+  "game_action": {
+    "you_drew": "ⵜⴰⵙⵙⴰⴾⵏⴰⵛ-ⴰⵙ ⴰⴱⴰⵔⴰ.",
+    "opponent_drew": "ⴰⵎⵓⵔⴰⵔ {player_id} ⵉⴾⵔⴰⵛ ⵜⴰⴱⵓⵍⴰⵜ.",
+    "you_played": "Tettwafkayt {card} ɣer tasɣunt tamaynut {index}.",
+    "opponent_played": "Amagay {player_id} ira ad iskayel {card} ɣer tasɣunt tamaynut {index}.",
+    "you_discarded": "Tettwafkayt {card} ɣer tasɣunt n uskayel {index}, s umata ɣur-k ad tettwafk tizwiri n ussan. Ur izdin ad tt-yettwafk ussan inu. Amagay {next_player_id} ad yettan assan.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Player {current_player} ad d-ye-s ɣ-ɣileɣ n payoff pile! Player {current_player} ad d-ye-s ɣ-ɣileɣ!",
+    "deadlock_player_0": "Tettwabdu tazwara! Amagay 0 yettwafka s {player_0_payoff} tikartyin zrinin maṣ {player_1_payoff} n Amagay 1.",
+    "deadlock_player_1": "Tettwabdu tazwara! Amagay 1 yettwafka s {player_1_payoff} tikartyin zrinin maṣ {player_0_payoff} n Amagay 0.",
+    "deadlock_tie": "Tettwabdu tazwara s waddad! Sin imanayn gan {player_0_payoff} tikartyin zrinin. Amagay {current_player} yettwafka s waddad."
+  }
+}

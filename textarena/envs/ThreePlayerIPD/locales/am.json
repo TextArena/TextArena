@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "እርስዎ ከሌሎች ሁለት ተጫዋች አንድ ተጫዋች {player_id} በ3-ተጫዋች ማረሚያ እንቅስቃሴ ናቸው. ይዘት ማጣቀሻ {num_rounds} ማረሚያዎችን ይዟል.\nማረሚያ ስሌት:\n• {conv_rounds} ነፃ ንግግር ማረሚያዎች\n• 1 የማስተማር ማረሚያ - ለተቃራኒ ተጫዋች አንድ ታይል አቅርቡ: '[<opp-id> cooperate]' ወይም '[<opp-id> defect]' (ማለት ከሆነ '[1 defect] [2 cooperate]'; የተለመደው ነው 'ተባብረው ሂዱ'). \nተዛማጅ ባለቤት ማረሚያ ማትሪክስ (ለእያንዳንዱ አስተማረ ባለቤት):\n  - ሁለቱም ተባብረው ሂዱ  ->  {reward}\n  - ሁለቱም ተበራረቁ     ->  {punishment}\n  - እኔ ተበራረቅሁ, እነሱ ተባብረው ሂዱ ->  {temptation}\n  - እኔ ተባብረው ሂድሁ, እነሱ ተበራረቁ ->  {sucker}\nተጫዋች(ዎች) በሁሉም ማረሚያዎች እስከ መጨረሻ የሚኖሩ ከፍተኛ ሸንጎር ያላቸው ይሸንፋሉ."
+  },
+  "round": {
+    "start": "─── ማረሚያ {round}ን እንወስድ ───\tለቀሪዎች {conv_rounds} ማረሚያዎች ነፃ ንግግር ማድረግ ይችላሉ.",
+    "chat_finished": "የምሥራት ውይይት ለሙሉ {round} ተጠናቋል። የእርስዎን ውሳኔዎች አስገቡ፣ አንድ ቶኬን ለአንድ ተወዳዳሪ፡ `[pid cooperate]` ወይም `[pid defect]`።"
+  },
+  "results": {
+    "header": "### ዙር {round} - ውጤቶች:",
+    "pair_line": "{observation}\n\t ተጫዋች {i} ከ ተጫዋች {j} ጋር ለ{choice_i} እና {choice_j} ተራ ሲሆን (ተጫዋች {i} {gain_i}ን አገኘ, ተጫዋች {j} {gain_j}ን አገኘ)",
+    "scores_open": "{observation} -> የአሁኑ ውጤቶች: ",
+    "score_first": "{observation}ተጫዋች {player_id} ({score})",
+    "score_next": "{observation}; ተጫዋች {player_id} ({score})",
+    "finalize": "{observation}  የኤች."
+  },
+  "outcome": {
+    "final": "የመጨረሻ ሸንጎሮች: {scores}.  ማካተት አቅድ (ከቅርጽራፍ ወደ አስተዋጽኦ): {groups}"
+  }
+}

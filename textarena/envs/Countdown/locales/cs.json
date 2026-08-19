@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Hrajete hru Countdown s čísly!\nCíl: Kombinujte čísla pomocí +, -, *, /, abyste dosáhli cíle.\nFormát akce: [i j op], kde i, j jsou indexy a op je operace.\nPříklad: [0 2 *] násobí číslo na indexu 0 číslem na indexu 2.\nDělení musí mít za následek pouze celá čísla."
+  },
+  "board": {
+    "header": "CÍL: {target}\n\nDostupná čísla:\n{numbers}",
+    "best": "{observation}\n\nDosud nejlepší: {best_value} (vzdálenost: {distance})\nNejlepší výraz: {best_expression}",
+    "history": "{observation}\n\nHistorie tahů:\n{moves}",
+    "progress": "{observation}\nAktuální skóre pokroku: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát akce. Použijte `[i j op]`, kde i, j jsou indexy a op je +, -, *, /",
+    "invalid_indices": "Neplatné indexy. Musí být různé a v rozsahu 0-{max_index}",
+    "invalid_operation": "Neplatná operace (dělení nulou nebo necelekým výsledkem)"
+  },
+  "outcome": {
+    "win": "Perfektní! Nalezen přesný cíl: {target}",
+    "no_moves": "Žádné další tahy. Nejlepší výsledek: {best_value} (cíl: {target})",
+    "turn_limit": "Limit tahů dosažen. Nejlepší výsledek: {best_value} (cíl: {target})"
+  }
+}

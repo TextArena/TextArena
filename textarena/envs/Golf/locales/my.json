@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "သင်ဟာ ဂေါက်သီးကစားနေပါတယ် - ကစားသမား {player_id} ပန်းတိုင်: ဒီတစ်ပတ်တည်းမှာအနိမ့်ဆုံးစုစုပေါင်းရမှတ်ကိုရယူပါ။ အတိုင်တွေကတူညီတဲ့တန်ဖိုးရှိရင် ၀ အဖြစ်ပေါင်းပါ ကတ်တန်ဖိုးများ: A = 1, 2-10 = မျက်နှာတန်ဖိုး, J / Q = 10, K = 0 လုပ်ဆောင်ချက်များ (တိကျတဲ့အကန့်အသတ်များကိုသုံးပါ) - '[draw]' - deck မှဆွဲပါ - '[take]' - discard pile မှယူပါ - '[swap X Y]' - X (တန်း) Y (တိုင်) နေရာရှိဆွဲထားတဲ့ကတ်ကိုလဲလှယ်ပါ - '[discard]' - ဆွဲထားတဲ့ကတ်ကိုစွန့်ပစ်ပါ "
+  },
+  "board": {
+    "drew": "သင် ဆွဲထားသော ကစ်: {card}\nယခု သင် လဲလှယ် [swap X Y] သို့မဟုတ် စွန့်ပစ် [discard] ပါ။",
+    "took": "သင်ယူခဲ့သည်: စွန့်ပစ်ပုံမှ {card} သင်နှင့်အတူ (စွန့်ပစ်လို့မရ) [swap X Y] ရမည်။",
+    "peeked": "နေရာ ({row},{col}) ကို သင်ငေးကြည့်တယ်: {card}",
+    "turn_view": "သင့်လက်: {hand} စွန့်ပစ်ပုံ: {discard} {options}",
+    "none": "မရှိဘူး။"
+  },
+  "options": {
+    "final_turns": "နောက်ဆုံးအလှည့်! သင့်ရွေးချယ်မှုတွေက [draw], [take], [peek X Y]",
+    "draw": "သင့်ရွေးချယ်စရာများ: [draw], [take]",
+    "must_swap": "သင်ဟာ: [swap X Y] (စွန့်ပစ်ပုံမှ ကဒ်များကို စွန့်ပစ်၍မရ)",
+    "swap_or_discard": "သင်ဟာ: [swap X Y] သို့မဟုတ် [discard]"
+  },
+  "hand": {
+    "no_cards": "ကဒ်မရှိဘူး",
+    "header": "အညမည:",
+    "row": "အတန်း {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "ကစားသမား {pid} သည် {new} ကို {old} နှင့် အပြောင်းအလဲပြုလုပ်ကာ ({row},{col}) နေရာတွင် ရပ်တည်နေသည်။",
+    "discarded": "ကစားသမား {pid} သည် {card} ကို စွန့်ပစ်ခဲ့သည်။"
+  },
+  "message": {
+    "deck_empty": "ကွင်းလွတ်ပြီ၊ ဂိမ်းက ချက်ချင်း ပြီးသွားပြီ။",
+    "knocked": "ကစားသမား {pid} ထိုးခံရ။ အခြားကစားသမားတိုင်း တစ်လှည့်စီ ထပ်ရတယ်။",
+    "final_round": "ကစားသမား {pid} {reason} အခြားကစားသမားတိုင်းဟာ တစ်လှည့်စီ ထပ်ကစားနိုင်တယ်။"
+  },
+  "reason": {
+    "all_revealed": "ကဒ်တွေအားလုံး ဖွင့်ထားလား။"
+  },
+  "invalid": {
+    "wrong_action": "အတိအကျ ONE ကို bracketed လုပ်ဆောင်ချက်အသုံးပြုပါ: [draw], [take], [swap X Y], [discard], [knock], သို့မဟုတ် [peek X Y]",
+    "discard_empty": "စွန့်ပစ်ပစ္စည်း အပုံက ဘာမှမရှိတော့ဘူး!",
+    "must_draw_first": "ပထမဦးဆုံး [draw]၊ [take]၊ [knock] သို့မဟုတ် [peek X Y]",
+    "cannot_discard_taken": "စွန့်ပစ်ထားသည့် ဖဲကို ရယူထားသည့် ဖဲကို စွန့်ပစ်၍ မရနိုင်ပါ။ လဲလှယ်ရန် လိုအပ်ပါသည်။",
+    "have_drawn_card": "သင် ဆွဲထားသော ကစ် ရှိပါသည်။ သင် လဲလှယ် [swap X Y] သို့မဟုတ် စွန့်ပစ် [discard] ပါ။",
+    "need_drawn_swap": "ဖလှယ်ဖို့ အလှည့်ကျ ကဒ်တစ်ကဒ်တော့ လိုတာပေါ့။",
+    "need_drawn_discard": "စွန့်ပစ်ဖို့ ဆွဲထားတဲ့ ကဒ်တစ်ကဒ်တော့ လိုတာပေါ့။",
+    "out_of_bounds": "နေရာအပြင်သို့ ရောက်နေသည်၊ အတန်း ၁-{max_row}၊ အတိုင် ၁-{max_col} ကို အသုံးပြုပါ။",
+    "knock_with_card": "ကဒ်တစ်ကဒ်နဲ့ မရိုက်နိုင်ဘူး၊ အလှည့်ကို အရင်ပြီးအောင်လုပ်ပါ။",
+    "already_knocked": "တစ်ယောက်ယောက်က ဒီတစ်ချီပြီး ရိုက်ယူထားတယ်။",
+    "already_revealed": "အဲဒီကဒ်ကို ဖွင့်ထားပြီးသား။"
+  },
+  "summary": {
+    "full": "ဂိမ်းအဆုံး! ကစားသမား {winner} သည် {score} မှတ်ဖြင့်နိုင်သည်။ နောက်ဆုံးရမှတ်များ: {scores}",
+    "line": "ကစားသမား {pid}: {score} အမှတ်များ "
+  },
+  "board_str": {
+    "title": "=== ဂေါက်သီးကစားပွဲ ===",
+    "discard": "စွန့်ပစ်ပုံ: {card}",
+    "knocked": "ကစားသမား {pid} သည် နှိပ်လိုက်ပြီ!",
+    "player_header": "ကစားသမား {pid} (မှတ်: {score}):"
+  }
+}

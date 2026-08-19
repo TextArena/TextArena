@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Anjeun nyaéta Pamaen {player_id} dina Stratego.\nTujuan anjeun nyaéta nyerep Bendera lawan atawa ngaleungitkeun sakabéh porsi nu bisa dipindahkeun lawan.\nPasukan anjeun geus ditempatkeun pikeun anjeun di papan, kaasup Bendera, Bom, jeung porsi-porsi séjénna nu bervariasi pangkatna.\n\n### Instruksi Permainan\n1. **Aturan Gerak:**\n   - Dina giliran anjeun, anjeun bisa mindahkeun hiji porsi ku hiji langkah ka kotak nu aya di sabudeureun (luhur, handap, kénca, atawa katuhu) nu geus aya porsi anjeun.\n   - Conto: Porsi bisa dipindahkeun ti A1 ka B1 atawa A1 ka A2 lamun B1 jeung A2 henteu ditempati ku porsi anjeun sorangan.\n   - Upami porsi nu dipilih téh Bom atawa Bendera, éta porsi henteu bisa dipindahkeun.\n2. **Patempuran:**\n   - Upami anjeun gerak ka kotak nu ditempati ku porsi lawan, mangka patempuran baris lumangsung:\n     - Porsi nu pangkatna leuwih luhur meunang jeung ngaleungitkeun porsi lawan.\n     - Upami pangkatna sarua, dua porsi éléh.\n     - **Kasus Husus:**\n       - Bom ngaleungitkeun porsi nu nyerang kajaba Miner, nu bisa ngaleungitkeun Bom.\n       - Mata-mata bisa ngéléhkeun Maréshal upami mata-mata nyerang mimiti tapi éléh ka porsi lianna.\n3. **Tujuan Strategis:**\n   - Nangtukeun porsi lawan ngaliwatan gerakan jeung patempuran.\n   - Lindung Bendera anjeun sedengkeun nyoba nyerep Bendera lawan.\n   - Gunakeun Kursus strategis pikeun meunang informasi ngeunaan porsi lawan jeung nyerang nu lemah.\n\n### Cara Ngagerakkeun:\n1. Spesifikasikan koordinat porsi nu anjeun hayang gerakkeun jeung tujuanna.\n2. Gunakeun format: [A0 B0], di mana A0 nyaéta posisi sumber, jeung B0 nyaéta tujuan.\n   - Conto: Pikeun mindahkeun porsi ti baris 0, kolom 0 ka baris 1, kolom 0, asupkeun [A0 B0].\n3. Pastikeun tujuan téh sah dumasar kana aturan gerak di luhur.\n\n### Catetan Penting:\n- Papan baris nunjukkeun porsi anjeun jeung posisina, contona MN, MS.\n- Papan ogé baris nunjukkeun posisi porsi lawan nu dipikanyaho tanpa ngabéakeun pangkatna, contona ?.\n- Grid nu ditandaan ku ~ téh danau jeung henteu bisa dipindahkeun.\n- Salaku saran, mulai permainan anjeun ku mindahkeun porsi anjeun nu aya di garis hareup pikeun meunang informasi ngeunaan porsi lawan. Garis hareup pikeun Pamaen 0 jeung Pamaen 1 nyaéta baris D jeung G.\n\nIeu mangrupa keadaan papan saiki:\n"
+  },
+  "board": {
+    "current_board": "Papan Saiki:\n\n{board}\nGerak Nu Tersedia: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format aksi teu valid. Pamaén {player_id} henteu asupkeun gerakan dina format [A0 B0] .",
+    "invalid_coordinates": "Format aksi teu valid. Pamaén {player_id} henteu ngasupkeun koordinat nu bener.",
+    "not_own_piece": "Format aksi anu teu valid. Pamaén {player_id} kudu mindahkeun salah sahiji potongan sorangan.",
+    "scout_through_pieces": "Format aksi anu teu valid. Pamaén {player_id} henteu bisa mindahkeun pamariksa ngaliwatan potongan séjénna.",
+    "scout_diagonal": "Format aksi anu teu valid. Pamaén {player_id} henteu bisa mindahkeun pramuka diagonalna.",
+    "non_scout_multi_square": "Format aksi anu teu valid. Pilem, sajaba ti pramuka, ngan bisa mindahkeun hiji kotak dina waktu nu sarua.",
+    "move_into_lake": "Format aksi henteu valid. Pamaén {player_id} teu bisa pindah ka danau.",
+    "move_onto_own_piece": "Format aksi anu teu valid. Pamaén {player_id} henteu bisa pindah ka lembar sorangan.",
+    "move_bomb_or_flag": "Format aksi anu teu valid. Pamaén {player_id} henteu bisa mindahkeun bom atawa bendera."
+  },
+  "game_action": {
+    "you_moved": "Anjeun geus mindahkeun porsi anjeun ti {source} ka {dest}.",
+    "opponent_moved": "Pamaén {player_id} geus mindahkeun hiji potongan ti {source} ka {dest}.",
+    "you_equal_ranks": "Anjeun geus mindahkeun porsi anjeun ti {source} ka {dest}. Porsi nu nyerang téh {attacking_rank} sedengkeun tujuan porsi téh {target_rank}. Ku lantaran pangkatna sarua, dua porsi éléh.",
+    "opponent_equal_ranks": "Pamaen {player_id} geus mindahkeun porsi ti {source} ka {dest}. Porsi nu nyerang téh {attacking_rank} sedengkeun tujuan porsi téh {target_rank}. Ku lantaran pangkatna sarua, dua porsi éléh.",
+    "you_miner_defused": "Anjeun geus mindahkeun porsi anjeun ti {source} ka {dest}. Porsi nu nyerang téh {attacking_rank} sedengkeun tujuan porsi téh {target_rank}. Ku lantaran miner bisa ngaleungitkeun bom, anjeun meunang patempuran.",
+    "opponent_miner_defused": "Pamaen {player_id} geus mindahkeun porsi ti {source} ka {dest}. Porsi nu nyerang téh {attacking_rank} sedengkeun tujuan porsi téh {target_rank}. Ku lantaran miner bisa ngaleungitkeun bom, anjeun éléh dina patempuran.",
+    "you_bomb_lost": "Anjeun geus mindahkeun porsi anjeun ti {source} ka {dest}. Porsi nu nyerang téh {attacking_rank} sedengkeun tujuan porsi téh {target_rank}. Ku lantaran panyerang henteu miner, anjeun éléh dina patempuran.",
+    "opponent_bomb_won": "Pamaen {player_id} geus mindahkeun porsi ti {source} ka {dest}. Porsi nu nyerang téh {attacking_rank} sedengkeun tujuan porsi téh {target_rank}. Ku lantaran panyerang henteu miner, anjeun meunang patempuran.",
+    "you_spy_won": "Anjeun geus mindahkeun porsi anjeun ti {source} ka {dest}. Porsi nu nyerang téh {attacking_rank} sedengkeun tujuan porsi téh {target_rank}. Ku lantaran panyerang téh mata-mata sedengkeun tujuan téh maréshal, anjeun meunang patempuran.",
+    "opponent_spy_lost": "Pamaen {player_id} geus mindahkeun porsi ti {source} ka {dest}. Porsi nu nyerang téh {attacking_rank} sedengkeun tujuan porsi téh {target_rank}. Ku lantaran panyerang téh mata-mata sedengkeun tujuan téh maréshal, anjeun éléh dina patempuran.",
+    "you_higher_won": "Anjeun geus mindahkeun porsi anjeun ti {source} ka {dest}. Porsi nu nyerang téh {attacking_rank} sedengkeun tujuan porsi téh {target_rank}. Ku lantaran panyerang leuwih luhur ti tujuan, anjeun meunang patempuran.",
+    "opponent_higher_lost": "Pamaen {player_id} geus mindahkeun porsi ti {source} ka {dest}. Porsi nu nyerang téh {attacking_rank} sedengkeun tujuan porsi téh {target_rank}. Ku lantaran panyerang leuwih luhur ti tujuan, anjeun éléh dina patempuran.",
+    "you_lower_lost": "Anjeun geus mindahkeun porsi anjeun ti {source} ka {dest}. Porsi nu nyerang téh {attacking_rank} sedengkeun tujuan porsi téh {target_rank}. Ku lantaran panyerang handap ti tujuan, anjeun éléh dina patempuran.",
+    "opponent_lower_won": "Pamaen {player_id} geus mindahkeun porsi ti {source} ka {dest}. Porsi nu nyerang téh {attacking_rank} sedengkeun tujuan porsi téh {target_rank}. Ku lantaran panyerang handap ti tujuan, anjeun meunang patempuran."
+  },
+  "outcome": {
+    "flag_captured": "Pamaén {player_id} geus nyita bendera lawan!",
+    "no_movable_pieces": "Pamaen {winner_id} meunang! Pamaen {loser_id} henteu boga porsi nu bisa dipindahkeun deui."
+  }
+}

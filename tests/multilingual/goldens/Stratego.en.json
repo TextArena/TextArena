@@ -1,0 +1,1123 @@
+{
+  "battle_equal": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 3
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 3
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[D8 E8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 has moved a piece from D8 to E8.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    ?   ?   ?   ?   ?   ?   ?   ?   .   ? \nE    .   .   ~   ~   .   .   ~   ~   ?   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG   MN  SC  SG  CL  SC  MN  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [G0 F0], [G1 F1], [G1 E1], [G1 D1], [G4 F4], [G4 E4], [G4 D4], [G5 F5], [G8 F8], [G9 F9]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[G5 F5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[D8 E8]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from D8 to E8.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    ?   ?   ?   ?   ?   ?   ?   ?   .   ? \nE    .   .   ~   ~   .   .   ~   ~   ?   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG   MN  SC  SG  CL  SC  MN  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [G0 F0], [G1 F1], [G1 E1], [G1 D1], [G4 F4], [G4 E4], [G4 D4], [G5 F5], [G8 F8], [G9 F9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 has moved a piece from G5 to F5.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL   .  SC \nE    .   .   ~   ~   .   .   ~   ~  MN   . \nF    .   .   ~   ~   .   ?   ~   ~   .   . \nG    ?   ?   ?   ?   ?   .   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D7 D8], [D9 E9], [D9 F9], [D9 G9], [D9 D8], [E8 D8], [E8 F8], [E8 E9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[E8 F8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[G5 F5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from G5 to F5.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL   .  SC \nE    .   .   ~   ~   .   .   ~   ~  MN   . \nF    .   .   ~   ~   .   ?   ~   ~   .   . \nG    ?   ?   ?   ?   ?   .   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D7 D8], [D9 E9], [D9 F9], [D9 G9], [D9 D8], [E8 D8], [E8 F8], [E8 E9]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 has moved a piece from E8 to F8.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    ?   ?   ?   ?   ?   ?   ?   ?   .   ? \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .  MN   ~   ~   ?   . \nG   MN  SC  SG  CL  SC   .  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [F5 E5], [F5 G5], [F5 F4], [G0 F0], [G1 F1], [G1 E1], [G1 D1], [G4 F4], [G4 E4], [G4 D4], [G4 G5], [G6 G5], [G8 F8], [G9 F9], [H5 G5]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[F5 G5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[E8 F8]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from E8 to F8.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    ?   ?   ?   ?   ?   ?   ?   ?   .   ? \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .  MN   ~   ~   ?   . \nG   MN  SC  SG  CL  SC   .  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [F5 E5], [F5 G5], [F5 F4], [G0 F0], [G1 F1], [G1 E1], [G1 D1], [G4 F4], [G4 E4], [G4 D4], [G4 G5], [G6 G5], [G8 F8], [G9 F9], [H5 G5]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 has moved a piece from F5 to G5.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL   .  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~  MN   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D7 D8], [D9 E9], [D9 F9], [D9 G9], [D9 D8], [F8 E8], [F8 G8], [F8 F9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[F8 G8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[F5 G5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from F5 to G5.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL   .  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~  MN   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D7 D8], [D9 E9], [D9 F9], [D9 G9], [D9 D8], [F8 E8], [F8 G8], [F8 F9]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 has moved a piece from F8 to G8. The attacking piece was Miner and the destination piece was Miner. As the ranks are the same, both pieces lost.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    ?   ?   ?   ?   ?   ?   ?   ?   .   ? \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG   MN  SC  SG  CL  SC  MN  SC  SC   .  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [G0 F0], [G1 F1], [G1 E1], [G1 D1], [G4 F4], [G4 E4], [G4 D4], [G5 F5], [G7 G8], [G9 F9], [G9 G8], [H8 G8]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[G5 F5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[F8 G8]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from F8 to G8. The attacking piece was Miner and the destination piece was Miner. As the ranks are the same, both pieces lost.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    ?   ?   ?   ?   ?   ?   ?   ?   .   ? \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG   MN  SC  SG  CL  SC  MN  SC  SC   .  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [G0 F0], [G1 F1], [G1 E1], [G1 D1], [G4 F4], [G4 E4], [G4 D4], [G5 F5], [G7 G8], [G9 F9], [G9 G8], [H8 G8]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 has moved a piece from G5 to F5.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL   .  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   ?   ~   ~   .   . \nG    ?   ?   ?   ?   ?   .   ?   ?   .   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D7 D8], [D9 E9], [D9 F9], [D9 G9], [D9 D8]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "battle_higher": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 3
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 3
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[D1 E1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 has moved a piece from D1 to E1.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    ?   .   ?   ?   ?   ?   ?   ?   ?   ? \nE    .   ?   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG   MN  SC  SG  CL  SC  MN  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [G0 F0], [G1 F1], [G1 E1], [G4 F4], [G4 E4], [G4 D4], [G5 F5], [G8 F8], [G9 F9]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[G5 F5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[D1 E1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from D1 to E1.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    ?   .   ?   ?   ?   ?   ?   ?   ?   ? \nE    .   ?   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG   MN  SC  SG  CL  SC  MN  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [G0 F0], [G1 F1], [G1 E1], [G4 F4], [G4 E4], [G4 D4], [G5 F5], [G8 F8], [G9 F9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 has moved a piece from G5 to F5.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP   .  LT  BM  SG  SG  LT  CL  MN  SC \nE    .  LT   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   ?   ~   ~   .   . \nG    ?   ?   ?   ?   ?   .   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [C1 D1], [D0 E0], [D0 D1], [D2 D1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9], [E1 D1], [E1 F1], [E1 E0]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[E1 F1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[G5 F5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from G5 to F5.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP   .  LT  BM  SG  SG  LT  CL  MN  SC \nE    .  LT   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   ?   ~   ~   .   . \nG    ?   ?   ?   ?   ?   .   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [C1 D1], [D0 E0], [D0 D1], [D2 D1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9], [E1 D1], [E1 F1], [E1 E0]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 has moved a piece from E1 to F1.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    ?   .   ?   ?   ?   ?   ?   ?   ?   ? \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   ?   ~   ~   .  MN   ~   ~   .   . \nG   MN  SC  SG  CL  SC   .  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [F5 E5], [F5 G5], [F5 F4], [G0 F0], [G1 F1], [G4 F4], [G4 E4], [G4 D4], [G4 G5], [G6 G5], [G8 F8], [G9 F9], [H5 G5]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[F5 G5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[E1 F1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from E1 to F1.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    ?   .   ?   ?   ?   ?   ?   ?   ?   ? \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   ?   ~   ~   .  MN   ~   ~   .   . \nG   MN  SC  SG  CL  SC   .  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [F5 E5], [F5 G5], [F5 F4], [G0 F0], [G1 F1], [G4 F4], [G4 E4], [G4 D4], [G4 G5], [G6 G5], [G8 F8], [G9 F9], [H5 G5]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 has moved a piece from F5 to G5.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP   .  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .  LT   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [C1 D1], [C1 E1], [D0 E0], [D0 D1], [D2 D1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9], [F1 E1], [F1 G1], [F1 F0]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[F1 G1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[F5 G5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from F5 to G5.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP   .  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .  LT   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [C1 D1], [C1 E1], [D0 E0], [D0 D1], [D2 D1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9], [F1 E1], [F1 G1], [F1 F0]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 has moved a piece from F1 to G1. The attacking piece was Lieutenant and the destination piece was Scout. As the attacker is a higher rank than the destination, you lost the battle.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    ?   .   ?   ?   ?   ?   ?   ?   ?   ? \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG   MN   ?  SG  CL  SC  MN  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [G0 F0], [G0 G1], [G2 G1], [G4 F4], [G4 E4], [G4 D4], [G5 F5], [G8 F8], [G9 F9], [H1 G1]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[G5 F5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[F1 G1]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from F1 to G1. The attacking piece was Lieutenant and the destination piece was Scout. As the attacker is a higher rank than the destination, you won the battle.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    ?   .   ?   ?   ?   ?   ?   ?   ?   ? \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG   MN   ?  SG  CL  SC  MN  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [G0 F0], [G0 G1], [G2 G1], [G4 F4], [G4 E4], [G4 D4], [G5 F5], [G8 F8], [G9 F9], [H1 G1]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 has moved a piece from G5 to F5.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP   .  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   ?   ~   ~   .   . \nG    ?  LT   ?   ?   ?   .   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [C1 D1], [C1 E1], [C1 F1], [D0 E0], [D0 D1], [D2 D1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9], [G1 F1], [G1 H1], [G1 G0], [G1 G2]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "battle_lower": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 3
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 3
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[D0 E0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 has moved a piece from D0 to E0.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    .   ?   ?   ?   ?   ?   ?   ?   ?   ? \nE    ?   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG   MN  SC  SG  CL  SC  MN  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [G0 F0], [G1 F1], [G1 E1], [G1 D1], [G4 F4], [G4 E4], [G4 D4], [G5 F5], [G8 F8], [G9 F9]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[G5 F5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[D0 E0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from D0 to E0.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    .   ?   ?   ?   ?   ?   ?   ?   ?   ? \nE    ?   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG   MN  SC  SG  CL  SC  MN  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [G0 F0], [G1 F1], [G1 E1], [G1 D1], [G4 F4], [G4 E4], [G4 D4], [G5 F5], [G8 F8], [G9 F9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 has moved a piece from G5 to F5.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD    .  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE   SP   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   ?   ~   ~   .   . \nG    ?   ?   ?   ?   ?   .   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [C0 D0], [D1 E1], [D1 D0], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9], [E0 D0], [E0 F0], [E0 E1]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[E0 F0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[G5 F5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from G5 to F5.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD    .  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE   SP   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   ?   ~   ~   .   . \nG    ?   ?   ?   ?   ?   .   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [C0 D0], [D1 E1], [D1 D0], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9], [E0 D0], [E0 F0], [E0 E1]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 has moved a piece from E0 to F0.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    .   ?   ?   ?   ?   ?   ?   ?   ?   ? \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    ?   .   ~   ~   .  MN   ~   ~   .   . \nG   MN  SC  SG  CL  SC   .  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [F5 E5], [F5 G5], [F5 F4], [G0 F0], [G1 F1], [G1 E1], [G1 D1], [G4 F4], [G4 E4], [G4 D4], [G4 G5], [G6 G5], [G8 F8], [G9 F9], [H5 G5]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[F5 G5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[E0 F0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from E0 to F0.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    .   ?   ?   ?   ?   ?   ?   ?   ?   ? \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    ?   .   ~   ~   .  MN   ~   ~   .   . \nG   MN  SC  SG  CL  SC   .  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [F5 E5], [F5 G5], [F5 F4], [G0 F0], [G1 F1], [G1 E1], [G1 D1], [G4 F4], [G4 E4], [G4 D4], [G4 G5], [G6 G5], [G8 F8], [G9 F9], [H5 G5]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 has moved a piece from F5 to G5.",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD    .  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF   SP   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [C0 D0], [C0 E0], [D1 E1], [D1 D0], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9], [F0 E0], [F0 G0], [F0 F1]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[F0 G0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[F5 G5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from F5 to G5.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD    .  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF   SP   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [C0 D0], [C0 E0], [D1 E1], [D1 D0], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9], [F0 E0], [F0 G0], [F0 F1]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 has moved a piece from F0 to G0. The attacking piece was Spy and the destination piece was Miner. As the attacker is a lower rank than the destination, you won the battle.",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    .   ?   ?   ?   ?   ?   ?   ?   ?   ? \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG   MN  SC  SG  CL  SC  MN  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [G0 F0], [G1 F1], [G1 E1], [G1 D1], [G4 F4], [G4 E4], [G4 D4], [G5 F5], [G8 F8], [G9 F9]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[G5 F5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[F0 G0]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You have moved your piece from F0 to G0. The attacking piece was Spy and the destination piece was Miner. As the attacker is a lower rank than the destination, you lost the battle.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    .   ?   ?   ?   ?   ?   ?   ?   ?   ? \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG   MN  SC  SG  CL  SC  MN  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [G0 F0], [G1 F1], [G1 E1], [G1 D1], [G4 F4], [G4 E4], [G4 D4], [G5 F5], [G8 F8], [G9 F9]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 has moved a piece from G5 to F5.",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD    .  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   ?   ~   ~   .   . \nG    ?   ?   ?   ?   ?   .   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [C0 D0], [C0 E0], [C0 F0], [C0 G0], [D1 E1], [D1 D0], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "into_lake": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[D2 E2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[D2 E2]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid action format. Player 0 cannot move into the lake. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "move_empty": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[D0 E0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "trailing_to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 has moved a piece from D0 to E0.",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nB    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nC    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nD    .   ?   ?   ?   ?   ?   ?   ?   ?   ? \nE    ?   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG   MN  SC  SG  CL  SC  MN  SC  SC  MN  SG \nH   MS  MN  CL  MN  BM  MJ  BM  SC  LT  SC \nI   LT  SG  CP  BM  FL  BM  SP  BM  CP  LT \nJ   GN  MJ  SC  CP  BM  SC  SG  LT  MJ  CP \n\nAvailable Moves: [G0 F0], [G1 F1], [G1 E1], [G1 D1], [G4 F4], [G4 E4], [G4 D4], [G5 F5], [G8 F8], [G9 F9]",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "not_own_piece": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[E0 E1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[E0 E1]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid action format. Player 0 must move one of their own pieces. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "not_scout_one_square": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[D0 F0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[D0 F0]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid action format. Pieces, apart from scouts, can only move one square at a time. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "onto_own": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[D0 D1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[D0 D1]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid action format. Player 0 cannot move onto their own piece. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "scout_diagonal": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[C0 E1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[C0 E1]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid action format. Player 0 cannot move a scout diagonally. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "scout_through": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[C0 C4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[C0 C4]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid action format. Player 0 cannot move a scout through other pieces. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "wrong_format": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Stratego.\nYour goal is to capture your opponent's Flag or eliminate all of their movable pieces.\nYour army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - On your turn, you can move one piece by one step to an adjacent square (up, down, left, or right) that is already occupied with your pieces.\n   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n2. **Battles:**\n   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n     - The piece with the higher rank wins and eliminates the opponent's piece.\n     - If the ranks are equal, both pieces are removed from the board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify your opponent's pieces through their movements and battles.\n   - Protect your Flag while attempting to capture your opponent's Flag.\n   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n\n### How to Make a Move:\n1. Specify the coordinates of the piece you want to move and its destination.\n2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.\n   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure the destination is valid according to the movement rules above.\n\n### Important Notes:\n- The board will show your pieces and their positions, e.g. MN, MS.\n- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n- Grids with ~ are lakes and cannot be moved onto.\n- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n\nHere is the current board state:\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "not a move",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "not a move",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid action format. Player 0 did not input a move in the format [A0 B0]. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n\n     0   1   2   3   4   5   6   7   8   9\nA   FL  BM  CL  MN  CP  MN  MN  GN  SC  CP \nB   BM  MN  LT  SC  MJ  SG  SC  MS  SC  MJ \nC   SC  SC  BM  SG  SC  CP  MJ  CP  BM  BM \nD   SP  LT  LT  BM  SG  SG  LT  CL  MN  SC \nE    .   .   ~   ~   .   .   ~   ~   .   . \nF    .   .   ~   ~   .   .   ~   ~   .   . \nG    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nH    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nI    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \nJ    ?   ?   ?   ?   ?   ?   ?   ?   ?   ? \n\nAvailable Moves: [D0 E0], [D1 E1], [D4 E4], [D5 E5], [D8 E8], [D9 E9], [D9 F9], [D9 G9]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in a 3-player Iterated Prisoner's Dilemma. The match lasts {num_rounds} rounds.\nRound structure:\n• {conv_rounds} free-chat turns\n• 1 decision turn - submit one token per opponent: '[<opp-id> cooperate]' or '[<opp-id> defect]' (i.e. '[1 defect] [2 cooperate]'; the default is 'cooperate'). \nPair-wise payoff matrix (applied to each unordered pair):\n  - Both cooperate  ->  {reward}\n  - Both defect     ->  {punishment}\n  - You defect, they cooperate -> {temptation}\n  - You cooperate, they defect -> {sucker}\nThe player(s) with the highest score at the end of all rounds wins."
+  },
+  "round": {
+    "start": "─── Tnefra {round} tetwasɛa ───\tTzemreḍ ad tmedyez ṣṣaḥ maḍi deg {conv_rounds} n tnefrayin.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### Tazzla {round} - Tiɣri:",
+    "pair_line": "{observation}\n\t Aɣerbaz {i} mgal Aɣerbaz {j} yexdem {choice_i} d {choice_j} (Aɣerbaz {i} yewwi {gain_i}, Aɣerbaz {j} yewwi {gain_j})",
+    "scores_open": "{observation} -> Tiqeddicin n tura: ",
+    "score_first": "{observation}Amseqdac {player_id} ({score})",
+    "score_next": "{observation}; Amseqdac {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Isenfaṛen imikk: {scores}.  Tuṣka n tɣawsiwin (meṛṛa→amezzwar): {groups}"
+  }
+}

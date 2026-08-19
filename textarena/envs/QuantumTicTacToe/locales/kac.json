@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Nanhte Player {player_id} Quantum Tic Tac Toe a na re.\nNanhte symbol '{symbol}' re, nanhte move numbers {parity} re (e.g., X1, X3 shi O2, O4).\n\nMungdan: Classical marks (superpositions kaw nna) thum kaw nna shang kaw nna nanhte win re.\n\nKadai Mung:\n- Turn kaba, format '[a,b]' nna empty squares kaw nna spooky mark 2 kaw nna re.\n- Marks kaw nna entangled re, 'X1 / X1' shi 'O4 / O4' kaw nna label re.\n- Square kaba collapsed (solidified) kaw nna spooky marks kaw nna re nna.\n\nCollapse Rule:\n- Move kaba cycle kaw nna entanglement graph kaw nna, auto collapse re.\n- Cycle kaw nna spooky mark kaw nna classical mark kaw nna 2 position kaw nna re.\n- Dependent spooky marks kaw nna collapse re.\n\nVictory:\n- Game kaba player kaba 3 classical marks kaw nna shang kaw nna re.\n- Player 2 kaba line kaw nna same collapse kaw nna, max move number kaba lower kaw nna win re.\n\nExample move: '[0,4]' kaw nna spooky mark kaw nna cells 0 shi 4 kaw nna re."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Board:\n\n{board}\n\nMove nanhte '[a,b]' nna quantum mark 2 kaw nna re."
+  },
+  "invalid_move": {
+    "wrong_format": "N htuk ai format. \"[a,b]\" hpe lang u.",
+    "invalid_cells": "N jaw ai (sh) duplicate cell index ni hpe lang na matu.",
+    "already_solidified": "Hkum hkrang gaw n-gun yawm mat sai."
+  },
+  "game_action": {
+    "placed": "Player {player_id} kaba symbol kaw nna superposition kaw nna cells {pos_a} shi {pos_b} kaw nna re."
+  },
+  "game_message": {
+    "dependent_resolved": "Dependent superposition kaw nna resolved re. Cell ({r}, {c}) kaba {symbol} re.",
+    "last_cell_resolved": "Superposition kaw nna last cell kaw nna resolved re. Cell ({r}, {c}) kaba {symbol} re.",
+    "superposition_resolved": "Superposition kaw nna resolved re. Cell ({r}, {c}) kaba {symbol} re."
+  },
+  "outcome": {
+    "win": "Player {player_id} gaw, masat dingsat ni hpe lu la ai hte dang kau sai!",
+    "draw": "Dai gaw dang ai hku byin wa sai."
+  }
+}

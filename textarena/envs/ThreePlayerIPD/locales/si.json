@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "ඔබ ක් රීඩකයා {player_id} ක් රීඩකයන් තිදෙනෙකුගේ පුනරාවර්තන සිරකරුවන්ගේ දුෂ්කරතාවය. තරගය වට {num_rounds} ක් පවතී. වට ව් යුහය: • {conv_rounds} නිදහස් කතාබස් හැරීම් • 1 තීරණ හැරීම - ප් රතිවාදියෙකු එක් ටෝකනයක් ඉදිරිපත් කරන්න: '[<opp-id> cooperate]' හෝ '[<opp-id> defect]' (එනම් '[1 defect] [2 cooperate]; පෙරනිමි 'සහයෝගයෙන් කටයුතු කිරීම'). යුගල අනුව ගෙවීම් අනුකෘතිය (එක් එක් නොගැලපෙන යුගලයට අදාළ වේ): - දෙකම සහයෝගයෙන් -> {reward} - දෙකම දෝෂය -> {punishment} - ඔබ දෝෂය, ඔවුන් සහයෝගයෙන් -> {temptation} - ඔබ සහයෝගයෙන්, ඔවුන් දෝෂය -> {sucker} සියලුම වට අවසානයේදී වැඩිම ලකුණු ලබා ගත් ක් රීඩකයා ජයග් රහණය කරයි."
+  },
+  "round": {
+    "start": "{round} ආරම්භක වටය {conv_rounds} ඊළඟ වටය සඳහා ඔබට නිදහසේ කතා කළ හැකිය.",
+    "chat_finished": "වටය {round} සඳහා සංවාදය අවසන්. ඔබගේ තීරණ ඉදිරිපත් කරන්න, එදිරියාට එක් ටෝකනයක්: `[pid cooperate]` හෝ `[pid defect]`."
+  },
+  "results": {
+    "header": "### වටය {round} - ප් රතිඵල:",
+    "pair_line": "{observation} ක් රීඩකයා {i} vs ක් රීඩකයා {j} පිළිවෙලින් {choice_i} සහ {choice_j} තෝරා ගත්තේය (ක් රීඩකයා {i} ලබා ගත්තේ {gain_i}, ක් රීඩකයා {j} ලබා ගත්තේ {gain_j})",
+    "scores_open": "{observation} -> වර්තමාන ලකුණු: ",
+    "score_first": "{observation} ක් රීඩකයා {player_id} ({score})",
+    "score_next": "{observation}; ක් රීඩකයා {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "අවසාන ලකුණු: {scores}. ශ් රේණිගත කිරීමේ කණ්ඩායම් (නරකම → හොඳම): {groups}"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Uyu muntu alefwaya ukusenda uyu mwiminishi ukwabula ukukwata indalama sha kushitamo.",
+    "out_of_range": "Player {player_id}, Kuchita kosa. Koloni {col} ikalamba ukuboko.",
+    "already_full": "Player {player_id}, Kuchita kosa. Koloni {col} imfikwa.",
+    "proposing_with_no_resource": "Umwina {player_id} aeseshe ukupeela insambu sha kushitamo ukwabula ukukwata ifyuma.",
+    "incorrect_offer_format": "Umulashi {player_id} alilembele ifyo alefwaya ukubwekeshapo mu nshila yabipa.",
+    "no_new_offer": "Umulashi {player_id} taile mu kucita icipangano cipya."
+  },
+  "offers": {
+    "reject": "Umulashi {player_id} akaana ukwingisha icipe.",
+    "accept": "Player {acceptor_id} alikubali kufanya biashara na Player {proposer_id}.",
+    "proposal": "Player {player_id} alitoa ofa kwa Player {opponent_id}: Vifaa vilivyotolewa: {offered} -> Vifaa vinavyohitajika: {requested}"
+  },
+  "outcome": {
+    "win": "Umulashi {winner_id} alicimfishe pa kukwata umutengo wa fintu ifingi.",
+    "draw": "Ukupusanako kwa fintu fyonse ifyalipo kuli bonse abaleteya."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Siz LinesOfAction o'yinida {player_id}-o'yinchi siz.\nSizning qismlaringiz '{side}', raqqib qismlari '{other}'.\nHarakat formati: `[b1b3]` (boshlang'ich koordinata - yakuniy koordinata). Qonuniy harakat gorizontal, vertikal yoki diagonal ravishda bo'lib, shu qatordagi jami qismlar (har qanday rang) soniga teng bo'lgan kvadratlarni bosib o'tadi. Siz o'z qismlaringiz ustidan sakrash mumkin, lekin raqqib qismlari ustidan emas; raqqib qismiga qo'nish uni qo'lga kiritishga olib keladi.  Barcha qismlaringiz 8-qo'shni bog'langanda g'alaba qozonishingiz mumkin."
+  },
+  "board": {
+    "current_board": "Boshqaruv Kengashi: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format e2e4 bo'lishi kerak (koordinatlardan,ga).",
+    "no_piece": "{side} qismida {coord} yo'q.",
+    "identical": "Manba va manzil bir xil.",
+    "not_straight_or_diagonal": "Harakat to'g'ri yoki diagonal bo'lishi kerak.",
+    "wrong_distance": "Chiziqdagi bo'laklarga teng masofani bosib o'tishi kerak.",
+    "enemy_blocks": "Dushman buyumlari yo'lni to'sib qo'ydi.",
+    "destination_own": "Manzil o'z qo'li bilan egallab olingan."
+  },
+  "game_action": {
+    "moved": "O'yinchi {player_id} harakat qildi {from} -> {to}",
+    "captured_suffix": "O'yinchi {player_id} harakat qildi {from} -> {to} dushmanni qo'lga kiritdi."
+  },
+  "outcome": {
+    "win": "Hamma qismlar bir-biriga bog'liq.",
+    "draw_no_capture": "60 ta harakatda to'plam yo'q.",
+    "draw_repetition": "Jozibali uch marta takrorlanadi."
+  }
+}

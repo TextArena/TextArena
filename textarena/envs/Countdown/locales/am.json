@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "አንተ ካውንትዳውን አንተ ትጫወታለህ!\nግብ: ቁጥሮችን በ+, -, *, / በመጠቀም አላማውን ለማግኘት.\nእርምጃ ቅርጸት: [i j op] እዚህ i,j ኢንዴክሶች እና op እንቅስቃሴው ነው.\nምሳሌ: [0 2 *] ቁጥር በኢንዴክስ 0 ቁጥር በኢንዴክስ 2 ጋር ይበላለጣል.\nክፍለጥ ሙሉ ቁጥሮችን ብቻ ማስገኘት አለበት."
+  },
+  "board": {
+    "header": "የተለየ ቁጥር: {target}\n\nየተጠቀሰ ቁጥሮች:\n{numbers}",
+    "best": "{observation}\n\nበስተር እስካሁን: {best_value} (እቅድ: {distance})\nበጣም የተሻለ ምሳሌ: {best_expression}",
+    "history": "{observation}\n\nንብረት ታሪክ:\n{moves}",
+    "progress": "{observation}\nአሁን የተሻለ እቅድ ቁጥር: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "የእርምጃ ቅርጸት ተገቢ አይደለም. `[i j op]` በመጠቀም እዚህ i,j ኢንዴክሶች እና op +,-,*,/ ነው",
+    "invalid_indices": "ልክ ያልሆኑ ኢንዴክሶች: የተለያዩ መሆን አለባቸው እና ከ 0-{max_index} ክልል ውስጥ።",
+    "invalid_operation": "ልክ ያልሆነ አሰራር (በዜሮ መከፋፈል ወይም ሙሉ ቁጥር የሌለው ውጤት)"
+  },
+  "outcome": {
+    "win": "ፍጹም! ትክክለኛ ዒላማ አግኝቷል: {target}",
+    "no_moves": "ምንም ንብረት የለም. በጣም የተሻለ ውጤት: {best_value} (የተለየ: {target})",
+    "turn_limit": "የንብረት ደረጃ ተሞላ. በጣም የተሻለ ውጤት: {best_value} (የተለየ: {target})"
+  }
+}

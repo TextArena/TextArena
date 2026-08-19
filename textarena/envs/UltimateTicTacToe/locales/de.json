@@ -1,0 +1,32 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in **Ultimate Tic Tac Toe**.\nGib deinen Zug als **[macro  micro]** ein, also als zwei Zahlen von 0 bis 8:\n• *macro* = in welchem kleinen Spielfeld du spielst\n• *micro* = auf welchem Feld innerhalb dieses kleinen Spielfelds du spielst\nBeispiel: `[7 8]` ➜ Setze dein Zeichen im kleinen Spielfeld 7 auf Feld 8 und\nzwinge deinen Gegner, als Nächstes im kleinen Spielfeld 8 zu spielen.\n\nDu spielst als `{symbol}`.\n"
+  },
+
+  "board": {
+    "current_board": "Aktuelles Spielfeld:\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Der Zug muss die Form [macro micro] mit Zahlen von 0 bis 8 haben.",
+    "out_of_range": "Beide Indizes müssen jeweils zwischen 0 und 8 liegen.",
+    "index_out_of_range": "micro_board, Zeile oder Spalte liegt außerhalb des gültigen Bereichs.",
+    "cell_occupied": "Das Feld ist bereits belegt.",
+    "wrong_micro_board": "Der Spieler muss im vorgegebenen nächsten kleinen Spielfeld spielen.",
+    "micro_board_won": "Das kleine Spielfeld wurde bereits gewonnen."
+  },
+
+  "next_board": {
+    "any": "einem beliebigen kleinen Spielfeld",
+    "specific": "dem kleinen Spielfeld {nxt}"
+  },
+
+  "game_action": {
+    "played": "Spieler {player_id} spielte im kleinen Spielfeld {macro_idx} auf Feld {micro_idx} (Zeile {row}, Spalte {col}). Spieler {opponent_id} muss nun in {nxt_txt} spielen."
+  },
+
+  "outcome": {
+    "win": "Spieler {player_id} gewinnt Ultimate Tic Tac Toe!",
+    "draw": "Das Spiel endet unentschieden!"
+  }
+}

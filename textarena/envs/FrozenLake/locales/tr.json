@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Donmuş Göl'e hoş geldiniz!\n\nIzgarada 'P' ile temsil ediliyorsunuz.\nIzgara sembolleri:\n  ' ' = Donmuş yüzey (üzerinde yürümek güvenli)\n  'H' = Çukur (düşün ve kaybet!)\n  'G' = Hedef (bunu kazanmak için ulaşın!)\n  'P' = Mevcut konumunuz\n\nKullanılabilir eylemler: yukarı, aşağı, sola, sağa (veya w, a, s, d)\nEyleminizi şu şekilde yazın: [up], [down], [left], [right] veya [w], [a], [s], [d]\n\nHedef: Başlangıçtan (sol üst) hedefe (sağ alt) herhangi bir çukura düşmeden ilerleyin!\n"
+  },
+  "board": {
+    "current_board": "Mevcut Tahta:\n\n{board}\n\nKullanılabilir Eylemler: {actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Geçersiz eylem formatı. [up], [down], [left], [right] veya [w], [a], [s], [d] kullanın.",
+    "unknown_action": "Bilinmeyen eylem '{action}'. Yukarı, aşağı, sola, sağa veya w, a, s, d kullanın.",
+    "hit_wall": "{action} yönüne hareket etmeye çalıştınız ama duvara çarptınız!"
+  },
+  "game_action": {
+    "moved": "{action} yönüne ({row}, {col}) konumuna hareket ettiniz."
+  },
+  "outcome": {
+    "win": "Tebrikler! Hedefe ulaştınız!",
+    "fell_in_hole": "Bir çukura düştünüz! Oyun bitti. Hedefe yolculuğun %{pct}'sini tamamladınız.",
+    "turn_limit": "Tur sınırına ulaştınız! Oyun bitti. Hedefe yolculuğun %{pct}'sini tamamladınız."
+  }
+}

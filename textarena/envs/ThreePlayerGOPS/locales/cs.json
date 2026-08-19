@@ -1,0 +1,39 @@
+{
+  "_comment": "Soubor lokalizace pro ThreePlayerGOPS. NEpřekládávejte klíče (levá strana). Překládávejte pouze hodnoty (pravá strana).",
+  "_slots": {
+    "{player_id}": "Číslo hráče, 0, 1 nebo 2",
+    "{round}": "Aktuální kolo, 1..13",
+    "{prize}": "Odkrytá karta ceny (A, 2..10, J, Q, K) - nepřekládávejte",
+    "{worth}": "Celková hodnota ceny včetně případného nespotřebovaného banku",
+    "{hand}": "Zbývající karty hráče, zobrazené jako hranaté tokeny jako '[A]' '[2]' - nepřekládávejte",
+    "{bids}": "Neutrální seznam odehraných karet oddělených čárkami jako 'P0:10, P1:J, P2:Q' - nepřekládávejte",
+    "{winner}": "Číslo hráče, který vyhrál kolo",
+    "{pot}": "Hodnota banku uděleného nebo přeneseného v tomto kole",
+    "{scoreline}": "Neutrální běží skóre jako 'P0:0  P1:0  P2:11' - nepřekládávejte",
+    "{pid}": "Číslo hráče, který byl eliminován",
+    "{scores}": "Konečné skóre jako surová mapa čísla hráče na skóre - nepřekládávejte"
+  },
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} ve hře Three-Player GOPS.\n- Držíte 13 karet A-K (každou přesně jednou).\n- Každé kolo je odhalena cena. Odešlete JEDNU kartu jako `[Q]`, `[10]`, `[2]` …\n- Nejvyšší karta vyhrává cenu (+ jakýkoli nespotřebovaný bank). Remízy přesouvají cenu do dalšího kola.\n- Po 13 kolech vyhrává nejvyšší celkové skóre. Neplatné tahy = eliminace."
+  },
+  "round": {
+    "header": "### Kolo {round}/13 - Cena: {prize} (hodnota {worth})",
+    "hand": "Vaše zbývající karty: {hand}"
+  },
+  "reveal": {
+    "win": "Příhozy » {bids} - Hráč {winner} vyhrává {pot}.",
+    "tie": "Příhozy » {bids} - remíza, bank nyní {pot}.",
+    "scores": "Skóre → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "akce vyžaduje hranatou kartu jako '[Q]'",
+    "bad_card": "karta již byla použita nebo je neplatná"
+  },
+  "elimination": {
+    "player": "Hráč {pid} byl eliminován po opakovaných neplatných tazích."
+  },
+  "outcome": {
+    "auto_win": "Dva hráči byli eliminováni - automatické vítězství.",
+    "final": "Konečné skóre: {scores}"
+  }
+}

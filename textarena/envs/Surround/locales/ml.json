@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-ഒരു {width}x{height} ഗ്രിഡിലെ പ്ലേയർ സർറൌണ്ട്. നിങ്ങൾ കളിക്കാരനാണ് {player_id}. സാധുവായ നീക്കങ്ങൾഃ '[up]' '[down]' '[left]' '[right]' അല്ലെങ്കിൽ w / s / a / d. ലക്ഷ്യംഃ എല്ലാവരെയും മറികടക്കുക. പാതകൾ മാരകമാണ്; മതിൽ തട്ടുന്നത് കൊല്ലുന്നു; തലകീഴായി തകർക്കുന്നവർ രണ്ടും കൊല്ലുന്നു."
+  },
+  "board": {
+    "current": "നിലവിലെ ബോർഡ്: {board}",
+    "after_moves": "ഒരേസമയം നീക്കങ്ങൾ നടത്തിയ ശേഷം ബോർഡ്: {board}"
+  },
+  "game_action": {
+    "invalid_death": "കളിക്കാരൻ {player_id} അസാധുവായ നീക്കം മൂലം മരിച്ചു."
+  },
+  "outcome": {
+    "survived_win": "കളിക്കാരൻ {player_id} അതിജീവിച്ചു; മറ്റുള്ളവർ തകർന്നു.",
+    "all_crashed": "എല്ലാ കളിക്കാരും ഒരേ സമയം തകരാറിലായി.",
+    "outlived": "കളിക്കാരന് മറ്റുള്ളവരെ അതിജീവിച്ചു.",
+    "all_dead": "എല്ലാ കളിക്കാരും മരിച്ചു.",
+    "turn_limit": "ടേൺ പരിധി കൈവരിച്ചു - ഏറ്റവും കൂടുതൽ സമയം അതിജീവിച്ചയാൾ വിജയിക്കുന്നു.",
+    "ranking": "{reason} അന്തിമ റാങ്കിംഗ് ഗ്രൂപ്പുകൾ (മികച്ചത്→മോശം): {groups}"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS-Sprachdatei. Übersetze KEINE Schlüssel (linke Seite). Übersetze nur Werte (rechte Seite). Behalte jeden {Platzhalter} exakt bei. Übersetze niemals die Kartentoken in eckigen Klammern (z. B. [A], [10], [Q], [K]), die neutralen Gebots-/Punktefragmente wie 'P0:10', die '### '-Markdown oder die Symbole '»' und '→'.",
+  "_slots": {
+    "{player_id}": "Die Nummer des Spielers, 0, 1 oder 2",
+    "{round}": "Die aktuelle Rundennummer, 1..13",
+    "{prize}": "Das Kartensymbol des aufgedeckten Preises (A, 2..10, J, Q, K) - nicht übersetzen",
+    "{worth}": "Der Gesamtwert des Preises einschließlich eines übertragenen Pots",
+    "{hand}": "Die verbleibenden Karten des Spielers als Token in Klammern wie '[A]' '[2]' - nicht übersetzen",
+    "{bids}": "Die neutrale, kommagetrennte Liste gespielter Karten wie 'P0:10, P1:J, P2:Q' - nicht übersetzen",
+    "{winner}": "Die Nummer des Spielers, der die Runde gewonnen hat",
+    "{pot}": "Der in dieser Runde vergebene oder übertragene Pot-Wert",
+    "{scoreline}": "Der neutrale laufende Punktestand wie 'P0:0  P1:0  P2:11' - nicht übersetzen",
+    "{pid}": "Die Nummer des ausgeschiedenen Spielers",
+    "{scores}": "Die Endpunkte als rohe Zuordnung von Spielernummer zu Punktzahl - nicht übersetzen"
+  },
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in Three-Player GOPS.\n- Du hältst die 13 Karten A-K (jede genau einmal).\n- Jede Runde wird ein Preis aufgedeckt. Reiche EINE Karte ein, z. B. `[Q]`, `[10]`, `[2]` …\n- Die höchste Karte gewinnt den Preis (+ jeglichen übertragenen Pot). Gleichstände übertragen den Preis in die nächste Runde.\n- Nach 13 Runden gewinnt die höchste Gesamtzahl. Ungültige Züge = Ausscheiden."
+  },
+  "round": {
+    "header": "### Runde {round}/13 - Preis: {prize} (Wert {worth})",
+    "hand": "Deine verbleibende Hand: {hand}"
+  },
+  "reveal": {
+    "win": "Gebote » {bids} - Spieler {winner} gewinnt {pot}.",
+    "tie": "Gebote » {bids} - Gleichstand, Pot jetzt {pot}.",
+    "scores": "Punkte → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "Aktion benötigt eine Karte in Klammern wie '[Q]'",
+    "bad_card": "Karte bereits benutzt oder ungültig"
+  },
+  "elimination": {
+    "player": "Spieler {pid} nach wiederholten ungültigen Zügen ausgeschieden."
+  },
+  "outcome": {
+    "auto_win": "Zwei Spieler ausgeschieden - automatischer Sieg.",
+    "final": "Endpunkte: {scores}"
+  }
+}

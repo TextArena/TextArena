@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w Grze Negocjacyjnej.\nMasz pewne zasoby, a twoim zadaniem jest handlować w taki sposób, aby całkowita wartość twoich zasobów wzrosła.\nZasoby i powiązane wartości, które obecnie posiadasz, to:\n\t+ {resource_value_list}\nW każdej turze możesz porozmawiać ze swoim przeciwnikiem i złożyć ofertę handlową.\nUżyj następujących specjalnych tokenów dla akcji:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Oferowane Zasoby -> Żądane Zasoby]\n  - '[Accept]': Aby zaakceptować przychodzącą ofertę.\n  - '[Deny]': Aby odrzucić przychodzącą ofertę (domyślnie).\nGra trwa {max_turns} tur w sumie."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Gracz próbował zaakceptować handel bez posiadania niezbędnych zasobów.",
+    "out_of_range": "Gracz {player_id}, Nieprawidłowa akcja. Kolumna {col} jest poza granicami.",
+    "already_full": "Gracz {player_id}, Nieprawidłowa akcja. Kolumna {col} jest pełna.",
+    "proposing_with_no_resource": "Gracz {player_id} próbował złożyć ofertę handlową bez posiadania niezbędnych zasobów.",
+    "incorrect_offer_format": "Gracz {player_id} złożył ofertę handlową w nieprawidłowym formacie.",
+    "no_new_offer": "Gracz {player_id} nie złożył nowej oferty handlowej."
+  },
+  "offers": {
+    "reject": "Gracz {player_id} odrzucił ofertę handlową.",
+    "accept": "Gracz {acceptor_id} zaakceptował ofertę handlową od Gracza {proposer_id}.",
+    "proposal": "Gracz {player_id} złożył następującą ofertę Graczowi {opponent_id}: Oferowane przedmioty: {offered} -> Żądane przedmioty: {requested}"
+  },
+  "outcome": {
+    "win": "Gracz {winner_id} wygrał dzięki większemu wzrostowi wartości inwentarza.",
+    "draw": "Taka sama zmiana wartości inwentarza dla wszystkich graczy. Remis."
+  }
+}

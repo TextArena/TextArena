@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Is tu Player {player_id}, a' cluich {num_rounds} cuairtean de Geama Ultimatum Ath-riochdaichte.\nTha ${pool} agad airson a roinn eadar thu fhèin is Player {other_id} anns an cuairt seo.\n\nTairgse:\n  - Dèan tairgse: [Offer: $X] (0 <= X <= pool)\n  - Ma ghabh thu ri → Gheibh thu $(pool - X), gheibh an tèilean eile $X\n  - Ma dhiùlt thu → Gheibh an dithis $0\n  - Eisimpleir: [Offer: $3]  no  'Saoilidh mi gu bheil seo cothromach. [Offer: $5]'\n\nFreagairt:\n  - Ro-inn an tairgse le [Accept] no [Reject]\n  - Eisimpleir: 'Tha sin a' coimhead reusanta. [Accept]'\n            'Rò mhòr an t-ainneart. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Tha Cuairt {round_number} a' tòiseachadh! ---\nTha Cluicheadair {proposer_id} na thagraiche, tha Cluicheadair {responder_id} na freagairtiche.",
+    "offer": "Cuairt {round_number}: Tha Cluicheadair {proposer_id} a' tabhann ${offer} do Chluicheadair {responder_id} (a' giùlan ${keep}).",
+    "accepted": "Chaidh Cluicheadair {responder_id} a ghabhail! Cuairt {round_number}: Cluicheadair {proposer_id} +${proposer_gain}, Cluicheadair {responder_id} +${responder_gain}. Iomraidhean ùra: Cluicheadair 0: ${total_0}, Cluicheadair 1: ${total_1}.",
+    "rejected": "Dhiùlt Player {responder_id} an tairgse! Cuairt {round_number} duaisean: An dithis +$0. Tha na h-uimhirean a' fuireach mar a tha iad: Player 0: ${total_0}, Player 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Feumaidh an t-solaraiche tairgse a dhèanamh le bhith a' cleachdadh cruth [Offer: $X].",
+    "bad_integer": "Feumaidh suim an tairgse a bhith na fhìor àireamh iomlan.",
+    "out_of_range": "Feumaidh an tairgse a bhith eadar $0 agus ${pool}.",
+    "no_current_offer": "Chan eil tairgse gnàthach ri freagairt.",
+    "accept_or_reject": "Feumaidh an Freagairtiche [Accept] no [Reject] a' chuideachaidh a ghabhail."
+  },
+  "outcome": {
+    "win": "Bhuannaich Cluicheadair {winner} le ${winner_total} iomlan an aghaidh ${loser_total} aig Cluicheadair {loser}.",
+    "draw": "Dealbhaich! Chrìochnaich an dà chluicheadair le ${total} gu h-iomlan."
+  }
+}

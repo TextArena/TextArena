@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola dil dosyası. Anahtarları (sol taraf) çevirme. Yalnızca değerleri (sağ taraf) çevir.",
+  "_slots": {
+    "{player_id}": "Oyuncunun numarası, örneğin 0 veya 1",
+    "{trump_suit}": "Asma sembolü (♠♥♦♣) - çevirme",
+    "{trump_card}": "Asma kartı etiketi, örneğin '7♠' - çevirme",
+    "{card}": "Bir kart etiketi, örneğin 'A♥' - çevirme",
+    "{trump_mark}": "Önceden oluşturulmuş '(ASMA)' işareti, veya boş",
+    "{max_pos}": "Oyuncunun elindeki en yüksek yasal kart pozisyonu",
+    "{count}": "Oyuncunun elindeki kart sayısı",
+    "{pos}": "Bir kartın eldeki pozisyon numarası",
+    "{points}": "Bir puan sayısı (kart değeri veya birikmiş puan)",
+    "{hand}": "Önceden oluşturulmuş, çok satırlı el listesi",
+    "{trick}": "Önceden oluşturulmuş, mevcut hile listesi",
+    "{scores}": "Önceden oluşturulmuş puan çizgisi, veya final oyuncu puan bloğu",
+    "{trump_info}": "Önceden oluşturulmuş asma takımı / destedeki kart sayısı çizgisi",
+    "{winner}": "Hileyi veya oyunu kazanan oyuncu numarası",
+    "{tricks}": "Bir oyuncu tarafından kazanılan hile sayısı",
+    "{deck_count}": "Destedeki kart sayısı"
+  },
+  "game": {
+    "start": "Briscola oyunu başladı! Asma takımı: {trump_suit} (Asma kartı: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Briscola oynuyorsunuz - Oyuncu {player_id}.\nHedef: Hileleri kazan ve en çok puanı topla (toplam 120 puan).\nKart Puanları: A=11, 3=10, K=4, Q=3, J=2, diğerleri=0\nKart Gücü: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nAsma kartları, güçten bağımsız olarak, asma olmayan kartları yener.\n\nEylem: '[play X]' burada X, elinizdeki kartın pozisyonudur (1-{max_pos})\n"
+  },
+  "hand": {
+    "none": "Kart yok",
+    "empty": "Elinizde kart yok",
+    "header": "Eliniz:",
+    "card_line": "  {pos}. {card} [{points} puan]{trump_mark}",
+    "trump_mark": " (ASMA)"
+  },
+  "trick": {
+    "empty": "Bu turda henüz kart oynanmadı.",
+    "header": "Mevcut hile:",
+    "line": "  Oyuncu {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Oyuncu {player_id}: {points} puan",
+    "trump_info": "Asma takımı: {trump_suit}",
+    "trump_info_deck": "Asma takımı: {trump_suit} | Destedeki kart sayısı: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPuanlar: {scores}\n{trump_info}\n\nBir kart oynayın [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "[play X] kullanın, burada X kart pozisyonudur (1, 2, 3, vb.)",
+    "out_of_range": "Geçersiz kart pozisyonu. {count} kartınız var (1-{count})"
+  },
+  "action": {
+    "played": "Oyuncu {player_id} {card} oynadı",
+    "trick_win": "Oyuncu {winner} {card} ile hileyi kazanır ve {points} puan alır!"
+  },
+  "outcome": {
+    "head": "Oyun Bitti! Oyuncu {winner} {points} puanla kazanır!\n\nFinal Puanları:\n{scores}",
+    "player_line": "Oyuncu {player_id}: {points} puan ({tricks} hile)\n"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Tu sês Zugadôr {player_id} in Stratego.\nIl tô obietîf al è di cjapâ la Bandiere dal to aversari o di eliminâ dutis lis tôs piesis moviblis.\nLa tô armade e je stade metude sul tabel par te, comprese la tô Bandiere, lis tôs Bombs e altris piesis di varis grads.\n\n### Istruzions di Zûc\n1. **Regulis di Moviment:**\n   - Intal tô turn, tu puedis movi une piese di un pas in un cjamp adiacent (sù, jù, a çampe o a drete) che al è za ocupât des tôs piesis.\n   - Esempi: Une piese e pues movi di A1 a B1 o di A1 a A2 se B1 e A2 no son ocupâts des piesis dal zugadôr.\n   - Se la piese selezionade e je une Bombe o une Bandiere, no pues jessi movude.\n2. **Bataiis:**\n   - Se tu movis in un cjamp ocupât di une piese dal to aversari, allore une bataie e capitarà:\n     - La piese cul grad plui alt e vinç e elimine la piese dal aversari.\n     - Se i grads son compagns, dutis dôs lis piesis a son eliminadis dal tabel.\n     - **Câs speciâi:**\n       - Lis Bombs a eliminin la plui part des piesis atacantis, fûr che i Minadôrs, che a disativin lis Bombs.\n       - I Spias a puedin sconfiti il Marescjâl se il Spias al atacje prin, ma a pierdin cuintri dutis lis altris piesis.\n3. **Obietîfs Strategjics:**\n   - Identificâ lis piesis dal to aversari midiant i lôr moviments e bataiis.\n   - Protezi la tô Bandiere intant che tu ciris di cjapâ la Bandiere dal to aversari.\n   - Dopri i Scouts in maniere strategjiche par vê informazions sulis piesis dal to aversari e atacâ chês debulis.\n\n### Côme Fâ un Moviment:\n1. Specificâ lis coordenadis de piese che tu vuelis movi e la sô destinazion.\n2. Dopri il format: [A0 B0], dulà che A0 e je la posizion di partence e B0 e je la destinazion.\n   - Esempi: Par movi une piese di rie 0, colone 0 a rie 1, colone 0, inserìs [A0 B0].\n3. Assicurati che la destinazion e sedi valide seont lis regulis di moviment di sora.\n\n### Notis Importantis:\n- Il tabel al mostrarà lis tôs piesis e lis lôr posizions, par esempli MN, MS.\n- Il tabel al mostrarà ancje lis posizions cognossudis des piesis dal to aversari cence rivelâ i lôr grads, par esempli ?.\n- I cjamps cun ~ a son lâcs e no puedin jessi ocupâts.\n- Côme sugjeriment, scomence il tô zûc movint lis tôs piesis che a son sul front par vê informazions sulis piesis dal to aversari. I Zugadôrs 0 e 1 a àn lis lôr frontalis rispetivis in rie D e G.\n\nAchì e je la situazion atuâl dal tabel:\n"
+  },
+  "board": {
+    "current_board": "Tavoliere corrent:\n\n{board}\nMozions disponibils: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format di azion no valid. Zogador {player_id} no à inserît une mozion tal format [A0 B0].",
+    "invalid_coordinates": "Format di azion invadibil. Il zuiadôr {player_id} nol à jentrât coordenadis validis.",
+    "not_own_piece": "Format di azion invalit. Il Zugadôr {player_id} al à di movi une des sôs piesis.",
+    "scout_through_pieces": "Formât di azion invalide. Il zuiadôr {player_id} nol pues movisi un spietant traviers altris pioris.",
+    "scout_diagonal": "Formât di azion invalide. Il zuiadôr {player_id} nol pues spostâ un esploradôr in diagjonâl.",
+    "non_scout_multi_square": "Formât di azion invalide. I peçs, fûr dai esploradôrs, puedin movisi dome une casele ogni volte.",
+    "move_into_lake": "Formât di azion invalide. Il zuiadôr {player_id} nol pues movisi tal lûc dal lâc.",
+    "move_onto_own_piece": "Formât di azion invalide. Il zuiadôr {player_id} nol pues movisi su la sô pice.",
+    "move_bomb_or_flag": "Formât di azion invadibil. Il zuiadôr {player_id} nol pues movisi une bombe o la bandiere."
+  },
+  "game_action": {
+    "you_moved": "Tu à muçât la tô pièce da {source} a {dest}.",
+    "opponent_moved": "Zogador {player_id} al à muçât une pièce da {source} a {dest}.",
+    "you_equal_ranks": "Tu à muçât la tô pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che i gradi a son i stessis, ambis dôs piècis a àn pierdût.",
+    "opponent_equal_ranks": "Zogador {player_id} al à muçât une pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che i gradi a son i stessis, ambis dôs piècis a àn pierdût.",
+    "you_miner_defused": "Tu à muçât la tô pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che i minadôrs a puedin smontâ i bombs, tu à vinçût la bataie.",
+    "opponent_miner_defused": "Il Zugadôr {player_id} al à movût une piese di {source} a {dest}. La piese atacante e jere {attacking_rank} e la piese destinazion e jere {target_rank}. Côme che i Minadôrs a puedin disativâ lis Bombs, tu âs pierdût la bataie.",
+    "you_bomb_lost": "Tu à muçât la tô pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant no jere un minadôr, tu à pierdût la bataie.",
+    "opponent_bomb_won": "Zogador {player_id} al à muçât une pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant no jere un minadôr, tu à vinçût la bataie.",
+    "you_spy_won": "Tu à muçât la tô pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant al è un spie e la destinazion e je un maršal, tu à vinçût la bataie.",
+    "opponent_spy_lost": "Zogador {player_id} al à muçât une pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant al è un spie e la destinazion e je un maršal, tu à pierdût la bataie.",
+    "you_higher_won": "Tu à muçât la tô pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant al è un grad plui alt di chel di destinazion, tu à vinçût la bataie.",
+    "opponent_higher_lost": "Zogador {player_id} al à muçât une pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant al è un grad plui alt di chel di destinazion, tu à pierdût la bataie.",
+    "you_lower_lost": "Tu à muçât la tô pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant al è un grad plui bas di chel di destinazion, tu à pierdût la bataie.",
+    "opponent_lower_won": "Zogador {player_id} al à muçât une pièce da {source} a {dest}. La pièce atacante jere {attacking_rank} e la pièce di destinazion jere {target_rank}. Parcè che l'atacant al è un grad plui bas di chel di destinazion, tu à vinçût la bataie."
+  },
+  "outcome": {
+    "flag_captured": "Il zuiadôr {player_id} al à cjapât la bandiere dal aversari!",
+    "no_movable_pieces": "Zogador {winner_id} al à vinçût! Zogador {loser_id} no à plui piècis muçabils."
+  }
+}

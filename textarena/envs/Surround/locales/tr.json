@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround dil dosyası. Anahtarları (sol taraf) çevirme. Yalnızca değerleri (sağ taraf) çevir.",
+  "_slots": {
+    "{num_players}": "Maçtaki oyuncu sayısı",
+    "{width}": "Tahta genişliği (hücre sayısı)",
+    "{height}": "Tahta yüksekliği (hücre sayısı)",
+    "{player_id}": "Bir oyuncunun numarası (0 tabanlı)",
+    "{board}": "Oluşturulmuş ASCII ızgara; tarafsız tutun, karakterlerini asla çevirme",
+    "{reason}": "Oyun sonu nedeni cümlesi",
+    "{groups}": "Nötr sıralama verileri (oyuncu kimliği gruplarının bir listesi, en iyiden en kötüye); çevirme"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Oyunculu Surround, {width}x{height} ızgarasında.\nSiz oyuncu {player_id}'siniz. Geçerli hamleler: '[up]' '[down]' '[left]' '[right]' veya w/s/a/d.\nHedef: herkesi hayatta kalma süresini geçmek. İzler ölümcüldür; duvar çarpmaları öldürür; kafa kafaya çarpışmalar her ikisini de öldürür."
+  },
+  "board": {
+    "current": "Mevcut Tahta:\n{board}",
+    "after_moves": "Eş zamanlı hamlelerden sonraki tahta:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Oyuncu {player_id}, geçersiz hamle nedeniyle öldü."
+  },
+  "outcome": {
+    "survived_win": "Oyuncu {player_id} hayatta kaldı; diğerleri çarpıştı.",
+    "all_crashed": "Tüm oyuncular aynı anda çarpıştı.",
+    "outlived": "Oyuncu diğerlerini hayatta kalma süresini geçti.",
+    "all_dead": "Tüm oyuncular öldü.",
+    "turn_limit": "Tur sınırına ulaşıldı - en uzun süre hayatta kalan kazanır.",
+    "ranking": "{reason} Nihai sıralama grupları (en iyi→en kötü): {groups}"
+  }
+}

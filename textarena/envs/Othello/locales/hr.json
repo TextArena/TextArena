@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} koji igra {colour} ({piece}) u igri Othello.\nVaš cilj je imati više komada vaše boje na ploči do kraja igre.\nNa vašoj šansi, postavite komad tako da okružuje jedan ili više komada vašeg protivnika u bilo kojem smjeru (vodoravno, okomito ili dijagonalno) između vašeg novog komada i drugog postojećeg komada. Svi okruženi komadi protivnika će biti okrenuti u vašu boju.\nNavedite svoj potez u formatu '[redak, stupac]'."
+  },
+  "board": {
+    "game_board": "Ploča igre:\n{board}",
+    "valid_moves": "{observation}\nValjani potezi: {moves}",
+    "no_valid_moves_reset": "{observation}\nNema valjanih poteza - možda ćete morati preskočiti.",
+    "no_valid_moves_step": "{observation}\nNema valjanih poteza – možda ćete morati preskočiti.",
+    "scores_reset": "{observation}\nTrenutni rezultati - Crni: {black_count}, Bijeli: {white_count}\n",
+    "scores_step": "{observation}\nRezultati - Crni: {black_count}, Bijeli: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Potez mora biti u obliku [redak, stupac].",
+    "illegal": "Nedopušteni potez. Valjani potezi: {valid}"
+  },
+  "game_action": {
+    "skipped": "Igrač {pid} je morao preskočiti svoju šansu",
+    "played": "Igrač {pid} ({piece}) je odigrao [{r}, {c}] okrećući {flipped} komad(a)"
+  },
+  "game_message": {
+    "must_skip": "Igrač {pid} ({piece}) nema valjanih poteza i mora preskočiti."
+  },
+  "outcome": {
+    "black_wins": "Crni pobjeđuje {black_count}-{white_count}.",
+    "white_wins": "Bijeli pobjeđuje {white_count}-{black_count}.",
+    "draw": "Neriješeno {black_count}-{white_count}."
+  }
+}

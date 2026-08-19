@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Sidae makkita Player {player_id} ri laro Kuhn Poker {max_rounds} ronde.\nParaturan Laro:\n- Kuhn Poker ma'gunkana dek 3 kadi ri J, Q, K (J paling randah, K paling tuinggi)\n- Tiap pamain mappasang {ante} cip ri menerima 1 kadi tiap ronde (perlu diingat kadi dibagi tanpa diganti, jadi Sidae makkita tidak bisa memiliki kadi yang sama ri lawan).\n- Laro berlanjut selama {max_rounds} ronde\n- Pamain ri cip paling banyak setelah semua ronde menang\nParaturan Aksi:\n- '[check]': Lewati tanpa bertaruh (hanya jika tidak ada taruhan di atas meja)\n- '[bet]': Tambah 1 cip ke pot (hanya jika tidak ada taruhan di atas meja)\n- '[call]': Cocokkan taruhan lawan dengan menambah 1 cip ke pot\n- '[fold]': Menyerah ri membiarkan lawan menang pot"
+  },
+  "init_round": {
+    "round_start": "### Memulai ronde {current_round} dari {max_rounds} ronde. Kadi Sidae makkita adalah: '{player_card}'",
+    "available_actions": "Aksi-aksiyamu engkae iyanaritu: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksi harus [Check], [Bet], [Call], atau [Fold].",
+    "not_legal": "Aksi'e waji mancaji {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Pemain {player_id}, mengirimkan aksi: '[{move}]'.",
+    "valid_actions": "Aksi-aksiyena mu engkae iyanaritu: {legal_actions}.",
+    "round_summary": "{reason} Skor saat ini: Pemain 0: '{player_0_chips}'; Pemain 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Kadi {winner_card} Pemain {winner} mengalahkan kadi {loser_card} Pemain {loser}. Pemain {winner} menang pot {pot_value} cip."
+  },
+  "outcome": {
+    "draw": "Ri paccappurenna ronde {max_rounds}, duwa tau maccule punnai nomoro' chip iya pada.",
+    "round_win": "Pemaen {player_id} pura gulung.",
+    "winner_player0": "Pemaen 0 menang nasaba punnai lebbi maega chip ri paccappurenna sininna ronde {max_rounds}.",
+    "winner_player1": "Pemain 1 menang karena memiliki cip labih banyak ri tawakkalina {max_rounds} ronde."
+  }
+}

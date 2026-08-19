@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Oraindik ez dago txartelik.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Jokalari Bakarra vs Saleroslea\n\n📖 JOKOAREN LABURPENA:\n• Jokoa hasten duzunean {start_chips} fichak dituzu\n• 52 karten bakarra (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Saleroslearen (etxeko) aurka jokatzen duzu\n• Erronda bakoitza Ultimate Texas Hold'em egitura jarraitzen du: ANTE eta BLIND apustuak egin, 2 karta ezkutuak jasotzen dituzu, aukeratu apustuak aukeraketa-faseetan zehar, eta, azkenik, karta komunitarioak agerpena eta zure 5 karta onenak konparatzen dituzu saleroslearen 5 karte onenen aurka. Zure helburua irabaziak maximizatzea da (zure eskua hobeagoa denean), eta galerak minimizatzea (zure eskua txarragoa denean).\n• Jokoa amaitzen da zure fichek 0ra edo gutxiago jaisten direnean erronda baten hasieran (GALDU) edo 1000 errondak osatzen dituzunean fichekin (IRABAZI)\n\n💰 APUSTU-EGITURA:\n• ANTE: Apustu derrigorrezkoa ${ante} erronda bakoitzean\n• BLIND: Apustu derrigorrezkoa ${ante} erronda bakoitzean\n• JOKOA: Aukerako apustua jokoan zehar. Erronda osoan zehar, aukeratu dezakezu bakarrik ondorengoa: (${ante4} PRE-FLOPean eginaz gero, ${ante2} FLOPean eginaz gero, edo ${ante} RIVERrean eginaz gero. Erretiratzea ere egin dezakezu ibaian, eskuaren gainetik uzten duzuna, eta ez duzu apusturik egingo.)\n\n🎴 KARTEN BANAKETA:\n• 2 karta aurkezten zaizkizu (zure karta ezkutuak)\n• Salerosleak 2 karta ezkutuak jasotzen ditu (zulatuta zaizkizkizu)\n• 5 karta komunitarioak hasieran aurkezten dira\n• Komunitateko kartak faseetan zehar agertzen dira\n\n🏆 SALEROSLEAREN KALIFIKAZIOA:\n• Salerosleak gutxienez PAIR bat (2 karta maila berekoak) izan behar du kalifikatzeko, bere eskuaren 2 kartak eta 5 karta komunitarioak erabiliz.\n• Saleroslearen kalifikazioak apustuen emaitzak eragiten ditu, geroago azalduko den bezala.\n\n🎮 JOKO-FASEAK & EKINTZAK:\n📋 PRE-FLOP:\n  • Ekintzak: [4x] (${ante4}) edo [check]\n  • [4x]: ${ante4} JOKOA apustua egin, lehen 3 karta komunitarioak agertzen dira\n  • [check]: Ez da apustu gehiagaririk, lehen 3 karta komunitarioak agertzen dira\n\n📋 FLOP:\n  • 4x apustua egin bada: Bakarrik [skip] eskuragarri dago (azken 2 karta komunitarioak automatikoki agertzen dira)\n  • 4x apusturik ezean: [2x] (${ante2}) edo [check]\n  • [2x]: ${ante2} JOKOA apustua egin, azken 2 karta komunitarioak agertzen dira\n  • [check]: Ez da apustu gehiagaririk, azken 2 karta komunitarioak agertzen dira\n\n📋 RIVER:\n  • 4x edo 2x apustua egin bada: Bakarrik [skip] eskuragarri dago (automatikoki aurreratzen da aurkezpenera)\n  • Aurretik JOKOA apusturik ezean: [1x] (${ante}) edo [fold]\n  • [1x]: ${ante} JOKOA apustua egin, aurkezpenera aurreratzen da\n  • [fold]: Eskua uzten duzu, ANTE eta BLIND apustuak galtzen dituzu\n\n📋 AURKEZPENA:\n  • Kartak guztiak agertzen dira eta ebaluatzen dira\n  • 7 kartetatik (2 ezkutu + 5 komunitario) onenak aukeratzen dira\n  • Apustuak ordaintzen dira ordainketa-arauen arabera\n\n💎 APUSTUEN ORDAINKETAK:\n📊 ANTE APUSTUA:\n  • Salerosleak kalifikatzen ez badu: BERRIZ (apustua itzultzen da)\n  • Salerosleak kalifikatzen du eta zu irabazten duzunean: 1:1 ordainketa (apustua + irabaziak)\n  • Salerosleak kalifikatzen du eta zu galtzen duzunean: Apustua galtzen da\n  • Berdinketa: BERRIZ (apustua itzultzen da)\n\n📊 BLIND APUSTUA:\n  • Saleroslearen kalifikazioak eraginik gabe\n  • Zu irabazten duzunean: Apustua itzultzen da eta irabazi gehigarriak ordaintzen dira zure eskuaren indararen arabera\n  • Zu galtzen duzunean: Apustua galtzen da\n  • Berdinketa: BERRIZ (apustua itzultzen da)\n\n📊 BLIND APUSTUAREN ORDAINKETA-TAULA:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Straight baino gutxiago: Ez da ordainketa gehiagaririk\n\n📊 JOKOA APUSTUA:\n  • Saleroslearen kalifikazioak eraginik gabe\n  • Konparazio zuzena: Zure esku onena vs Saleroslearen esku onena\n  • Zu irabazten duzunean: 1:1 ordainketa (apustua + irabaziak)\n  • Zu galtzen duzunean: Apustua galtzen da\n  • Berdinketa: BERRIZ (apustua itzultzen da)\n\n🎯 POKER ESNUEN SAILKAPENA (Onenetik Txarrenara):\n  1. Royal Flush: A-K-Q-J-10 karta berekoak\n  2. Straight Flush: 5 karta jarraian karta berekoak\n  3. Four of a Kind: 4 karta maila berekoak\n  4. Full House: 3 karta maila berekoak + 2 karta maila berekoak\n  5. Flush: 5 karta karta berekoak\n  6. Straight: 5 karta jarraian\n  7. Three of a Kind: 3 karta maila berekoak\n  8. Bi Pare: 2 pare karta desberdinak\n  9. Pare bat: 2 karta maila berekoak\n  10. Karta altuena: Karta altuena irabazten du\n\n⌨️  EKINTZA-AGINDUAK:\n• [4x] edo [play bet 4x]: ${{self.ante_amount*4}} JOKOA apustua egin\n• [2x] edo [play bet 2x]: ${{self.ante_amount*2}} JOKOA apustua egin\n• [1x] edo [play bet 1x]: ${{self.ante_amount*1}} JOKOA apustua egin\n• [check] edo [c]: Berrikusi (apustu gehiagaririk gabe)\n• [fold] edo [f]: Erretiratu (eskuaren gainetik uzten duzuna)\n• [skip] edo [s]: Hurrengo fasera joan (ekintzarik ez dagoenean)\n\n💡 ESTRATEGIAREN Aholkuak:\n• Hasierako esku indartsuak (pareak, karta altuak) askotan 4x apustuak justifikatzen dituzte\n• Saleroslearen kalifikazioa kontuan hartu - esku ahulak apustuak egin ditzake salerosleak kalifikatzen ez badu\n• BLIND apustua oso irabazgarria izan daiteke esku indartsuekin (Royal Flush = 500:1!)\n• Zure ficheen pilaketa begiratu! Fichak 0ra edo gutxiago jaisten badira erronda baten hasieran, galtzen duzu.\n\n⚠️  OHARRA GARRANZKOAK:\n• ANTE eta BLIND apustuak derrigorrezkoak dira erronda bakoitzean\n• JOKOA apustuak aukerakoak eta estrategikoak dira\n• Ziurtatu zure ekintza zuzena sartzen duzula, eta ekintza bakarra aldi bakoitzean.",
+    "state": " ROUND {round}  Txipak: {chips}  Zure eskua: {hand}  Apustuak: Ante ${ante}, Blind ${blind}, Play ${play}  Fasea: {phase}  Eskuragarri diren ekintzak: {actions} "
+  },
+  "board": {
+    "round_start": "🎮 {round}. erronda hasi da! Eskakizunak: ANTE ${ante}, BLIND ${blind}. {chips} fichak geratzen zaizkizu.",
+    "your_hand": "🎴 Zure eskua: {hand}",
+    "flop_revealed": " FLOP agerian geratu da: {cards}",
+    "river_revealed": "🃏 RIVER agerian jarri da: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Ekintza baliogabea fase honetan. Ekintza eskuragarriak: {available}",
+    "message": " Ekintza baliogabea! Erabilgarri dauden ekintzak: {available}"
+  },
+  "action": {
+    "folded": "-Bakarrik utzi nauzu."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 AURKEZPENA! Saleroslearen eskua: {cards}",
+    "community_cards": " Batasuneko txartelak: {cards}",
+    "player_best": " Jokalariaren esku onena: {name} ({cards})",
+    "dealer_best": " Banatzailearen esku onena: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE apustua GALDU DA! -${ante} (eskua utzita)",
+    "blind_lost_folded": "❌ BLIND apustua GALDU DA! -${blind} (eskua utzita)",
+    "ante_won": "✅ ANTE apustua IRABAZI DA! +${amount}",
+    "ante_pushed": " ANTE apustua Bultzatu! ${ante} itzuli",
+    "ante_lost": "❌ ANTE apustua GALDU DA! -${ante}",
+    "blind_won": "✅ Apustua irabazi duzu! +${amount}",
+    "blind_pushed": "🔄 BLIND apustua BERRIZ DA! ${blind} itzultzen da",
+    "blind_lost": "❌ BLIND apustua GALDU DA! -${blind}",
+    "play_won": "✅ JOKOaren apustua irabazi duzu! +${amount}",
+    "play_pushed": " JOKOAREN apustua Bultzatu! ${play} itzuli",
+    "play_lost": "❌ PLAY apustua GALDU DA! -${play}",
+    "net_gain": "🎉 Txanda {round} osatu da! Irabazi garbia: +${net}",
+    "net_loss": "💸 {round}. erronda amaitu da! Galera netoa: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": " JOKOA BATAL! {max_turns} roundak bukatuta. ${chips} fitxak dituzu - GANBA!",
+    "game_over_lose": "🏁 JOKOA AMAITU DA! Chipak agortu dira. Etxeak irabazi du!",
+    "reward_win": "Jokalariak {winner_rounds} errondak osatu zituen ${chips} ficharekin",
+    "reward_lose": "Jokalariak fichak amaitu zituen {round}. errondan",
+    "reward_win_max": "Jokalariak {max_turns} errondak osatu zituen ${chips} ficharekin"
+  },
+  "hand_names": {
+    "royal_flush": "Erregearen kolorea.",
+    "straight_flush": "-Bide zuzenetik zoaz.",
+    "four_of_a_kind": "Lau dira.",
+    "full_house": "Etxe osoa betea.",
+    "flush": "Flush",
+    "straight": "Zuzen eta zuzen.",
+    "three_of_a_kind": "Hiru dira.",
+    "two_pair": "Bi bikote.",
+    "one_pair": "Bikote bat",
+    "high_card": "Goian dago.",
+    "unknown": "Esku ezezagun bat."
+  }
+}

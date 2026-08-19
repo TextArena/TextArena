@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le Joueur {player_id} dans un Dilemme du prisonnier itéré sur {num_rounds} manches.\n\nStructure du jeu :\n- Avant chaque décision, vous avez {total_conversation_rounds} tours pour communiquer librement.\n- Ensuite, les deux joueurs choisissent simultanément de coopérer ou de trahir.\n\nMatrice des gains, fixe à chaque manche :\n- Les deux coopèrent ➜ chacun reçoit {cooperate_reward}\n- Les deux trahissent ➜ chacun reçoit {mutual_defect_reward}\n- L’un trahit et l’autre coopère ➜ celui qui trahit reçoit {defect_reward}, celui qui coopère reçoit {sucker_reward}\n\nComment jouer :\n- Pendant la conversation : écrivez le texte que vous voulez.\n- Pendant la phase de décision : incluez '[Cooperate]' ou '[Defect]', sans tenir compte de la casse. Vous pouvez ajouter du texte avant ou après le jeton."
+  },
+  "phases": {
+    "conversation_finished": "La conversation est terminée pour la manche {round}. Veuillez répondre avec '[Cooperate]' ou '[Defect]' à l’intérieur de \\boxed{{}}.",
+    "starting_round": "--- Début de la manche {round} ---",
+    "round_summary": "Résultats de la manche {round} :\n{outcome}\nLe Joueur 0 a gagné {r0} total {score_0}, le Joueur 1 a gagné {r1} total {score_1}."
+  },
+  "outcome": {
+    "winner": "Le Joueur {winner} gagne {win_score} - {lose_score}.",
+    "draw": "Égalité ! Les deux joueurs ont marqué {s0}.",
+    "round_both_cooperate": "Les deux joueurs ont coopéré.",
+    "round_both_defect": "Les deux joueurs ont trahi.",
+    "round_p0_cooperates_p1_defects": "Le Joueur 0 a coopéré, le Joueur 1 a trahi.",
+    "round_p0_defects_p1_cooperates": "Le Joueur 0 a trahi, le Joueur 1 a coopéré."
+  }
+}

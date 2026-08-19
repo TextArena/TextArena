@@ -1,0 +1,88 @@
+{
+  "game_start": {
+    "intro": "تبدأ اللعبة. النوع الرابح: {trump_suit} (الورقة الرابحة: {trump_str}).",
+    "no_trump_card": "لا توجد"
+  },
+
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في German Whist.\n{phase_info}\nلديك {hand_size} ورقة.\nالعب ورقة باستخدام '[play N]'، حيث N هو موضعها في يدك، مثل '[play 3]'.",
+    "phase_learning": "مرحلة التعلّم: يأخذ الفائز بكل خدعة الورقة المكشوفة، بينما يسحب الخاسر الورقة التالية من الرزمة. لا تُحتسب الخدع التي تُربح في هذه المرحلة ضمن نتيجة الفوز.",
+    "phase_playing": "مرحلة اللعب: نفدت الرزمة. تُحتسب كل خدعة من الآن فصاعدًا ضمن نتيجة الفوز."
+  },
+
+  "next_card": {
+    "playing_phase": "لا توجد ورقة معروضة - بدأت مرحلة اللعب.",
+    "deck_empty": "الرزمة فارغة - لا توجد ورقة معروضة.",
+    "available": "الورقة المعروضة: {card}",
+    "available_trump": "الورقة المعروضة: {card} (رابحة)"
+  },
+
+  "invalid_move": {
+    "wrong_format": "تنسيق الحركة غير صالح. استخدم '[play N]' للعب الورقة رقم N في يدك.",
+    "bad_position": "موضع الورقة هذا غير موجود. لديك {hand_size} ورقة.",
+    "must_follow_suit": "يجب أن تتبع النوع وتلعب ورقة من نوع {lead_suit}.",
+    "invalid_play": "لا يمكن لعب هذه الورقة."
+  },
+
+  "game_action": {
+    "played": "لعب اللاعب {player_id} الورقة {card}."
+  },
+
+  "trick": {
+    "won": "يفوز اللاعب {winner_id} بالخدعة باستخدام {card}.",
+    "won_learning": "يفوز اللاعب {winner_id} بالخدعة باستخدام {card} ويأخذ الورقة المكشوفة."
+  },
+
+  "phase": {
+    "learning_complete": "نفدت الرزمة. انتهت مرحلة التعلّم - تُحتسب كل خدعة متبقية ضمن نتيجة الفوز."
+  },
+
+  "draw": {
+    "winner_received": "فزت بالخدعة وحصلت على {card}.",
+    "loser_received": "خسرت الخدعة وسحبت {card} من الرزمة.",
+    "winner_preview": "الورقة التالية المعروضة هي {card}."
+  },
+
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "الخدع التي تم الفوز بها حتى الآن - اللاعب 0: {tricks0}، اللاعب 1: {tricks1}",
+    "scores_playing": "خدع التسجيل - اللاعب 0: {tricks0}، اللاعب 1: {tricks1}",
+    "phase": "المرحلة: {phase}",
+    "phase_learning": "المرحلة: {phase} (تبقّت {remaining_cards} ورقة في الرزمة)"
+  },
+
+  "hand": {
+    "no_cards": "لا توجد أوراق",
+    "no_cards_in_hand": "لا توجد أوراق في اليد",
+    "header": "أوراقك:",
+    "trump_indicator": " (رابحة)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+
+  "trick_view": {
+    "empty": "لم تُلعب أي أوراق بعد في هذه الخدعة.",
+    "header": "الخدعة الحالية:",
+    "trump_indicator": " (رابحة)",
+    "card_line": "{observation}\n  اللاعب {player_id}: {card}{trump_indicator}"
+  },
+
+  "board_str": {
+    "not_started": "لم تبدأ اللعبة",
+    "header": "=== لعبة GERMAN WHIST ===",
+    "phase": "{observation}\nالمرحلة: {phase}",
+    "trump_suit": "{observation}\nالنوع الرابح: {trump_suit}",
+    "trump_card": "{observation}\nالورقة الرابحة: {card}",
+    "cards_left": "{observation}\nالأوراق المتبقية في الرزمة: {count}",
+    "next_card": "{observation}\nالورقة التالية للفائز: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nالخدعة الحالية:",
+    "trump_indicator": " (رابحة)",
+    "trick_line": "{observation}\n  اللاعب {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nاللاعب {player_id}: {scoring} من خدع التسجيل ({tricks} إجمالًا)، ولديه {hand_size} ورقة"
+  },
+
+  "outcome": {
+    "summary": "مرحلة التعلّم - اللاعب 0: {l0}، اللاعب 1: {l1}. مرحلة اللعب - اللاعب 0: {p0}، اللاعب 1: {p1}. يفوز اللاعب {winner_id} بعد تحقيق {winner_tricks} من خدع التسجيل!"
+  }
+}

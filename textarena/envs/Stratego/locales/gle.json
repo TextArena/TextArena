@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Tusa an t-imreoir {player_id} i Stratego.\nIs é do sprioc an Bhratach a ghabháil nó gach píosa inghluaiste a bhfuil ag do chéile comhraic a dhíothú.\nTá do threallamh curtha ar an mbord duit, lena n-áirítear do Bhratach, Buamaí, agus píosaí eile de chéimeanna éagsúla.\n\n### Treoracha Imeartha\n1. **Rialacha Ghluaiseachta:**\n   - Ar do throimh, is féidir leat píosa amháin a bhogadh trí chéim go dtí cearnóg in aice láimhe (suas, síos, ar chlé, nó ar dheis) atá áitithe cheana le do phíosaí.\n   - Sampla: Is féidir le píosa bogadh ó A1 go B1 nó ó A1 go A2 má tá B1 agus A2 gan píosaí an imreora.\n   - Má tá an píosa roghnaithe ina Bhuama nó Bratach, ní féidir é a bhogadh.\n2. **Cathanna:**\n   - Má bhogann tú go cearnóg atá áitithe ag píosa de chuid do chéile comhraic, beidh cath ann:\n     - An píosa leis an gcéim is airde a bhuaigh agus a dhíothú píosa an chéile comhraic.\n     - Má tá na céimeanna cothrom, tá an dá phíosa á bhaint den mbord.\n     - **Cásanna Speisialta:**\n       - Buamaí a dhíothú formhór na bpíosaí ionsaitheacha ach amháin Mianadóirí, a dhí-armálaíonn Buamaí.\n       - Spiair a bhuaigh an Mharascal má tá an Spiaire ag ionsaí ar dtús, ach cailltear do gach píosa eile.\n3. **Spriocanna Straitéiseacha:**\n   - Aithin píosaí do chéile comhraic trína ngluaiseachtaí agus cathanna.\n   - Cosain do Bhratach agus déan iarracht Bratach do chéile comhraic a ghabháil.\n   - Úsáid Scabhta go straitéiseach chun eolas a fháil faoi phíosaí do chéile comhraic agus ionsaí a dhéanamh ar na cinn lag.\n\n### Conas gluaiseacht a dhéanamh:\n1. Sonraigh comhordanáidí an phíosa atá tú ag iarraidh a bhogadh agus a cheann scríbe.\n2. Úsáid an fhoirm: [A0 B0], áit a bhfuil A0 an suíomh foinse, agus B0 an suíomh ceann scríbe.\n   - Sampla: Chomh maith le píosa a bhogadh ó ró 0, colún 0 go ró 1, colún 0, iontráil [A0 B0].\n3. Dearbh go bhfuil an ceann scríbe bailí de réir na rialacha gluaiseachta thuas.\n\n### Nótaí Tábhachtacha:\n- Taispeánfaidh an mbord do phíosaí agus a suíomh, e.g. MN, MS.\n- Taispeánfaidh an mbord freisin suíomhanna aitheanta de phíosaí do chéile comhraic gan a gcéimeanna a nochtadh, e.g. ?.\n- Gréasanna le ~ locha agus ní féidir iad a bhogadh orthu.\n- Mar mholadh, tosaigh do chluiche trí phíosaí atá ar na línte tosaigh a bhogadh chun eolas a fháil faoi phíosaí do chéile comhraic. Tá línte tosaigh imreora 0 agus imreora 1 ina ró D agus G faoi seach.\n\nSeo an stádas reatha an mbord:"
+  },
+  "board": {
+    "current_board": "Cláir Reatha:\n\n{board}\nGluaisne Ar Fáil: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formáid gníomh neamhbhailí. Ní chuir Imreoir {player_id} gluaiseacht isteach sa fhormáid [A0 B0] .",
+    "invalid_coordinates": "Formáid ghníomh neamhbhailí. Ní chuir an t-imreoir {player_id} comhordanáidí bailí isteach.",
+    "not_own_piece": "Formáid ghníomhaíochta neamhbhailí. Ní mór do Imreoir {player_id} ceann dá phíosa féin a bhogadh.",
+    "scout_through_pieces": "Formáid ghníomhaíochta neamhbhailí. Ní féidir le imreoir {player_id} scout a bhogadh trí phíosaí eile.",
+    "scout_diagonal": "Formáid ghníomhaíochta neamhbhailí. Ní féidir le imreoir {player_id} scout a bhogadh go diagonally.",
+    "non_scout_multi_square": "Tá an t-aistriú neamhbhailí. Ní féidir le píosaí, seachas scouts, ach cearnóg amháin a bhogadh ag an am céanna.",
+    "move_into_lake": "Formáid ghníomhaíochta neamhbhailí. Ní féidir le imreoir {player_id} bogadh isteach sa loch.",
+    "move_onto_own_piece": "Formáid ghníomhaíochta neamhbhailí. Ní féidir le imreoir {player_id} bogadh ar a phíosa féin.",
+    "move_bomb_or_flag": "Formáid ghníomhaíochta neamhbhailí. Ní féidir le imreoir {player_id} buama nó bratach a bhogadh."
+  },
+  "game_action": {
+    "you_moved": "Tá do phíosa á bogadh ó {source} go dtí {dest}.",
+    "opponent_moved": "Tá imeacht déanta ag Imreoir {player_id} píosa ó {source} go {dest}.",
+    "you_equal_ranks": "Tá imeacht déanta agat do píosa ó {source} go {dest}. Ba ea an píosa ionsaitheach {attacking_rank} agus ba ea an píosa críche {target_rank}. Mar atá na ranganna céanna, cailltear an dá píosa.",
+    "opponent_equal_ranks": "Tá imeacht déanta ag Imreoir {player_id} píosa ó {source} go {dest}. Ba ea an píosa ionsaitheach {attacking_rank} agus ba ea an píosa críche {target_rank}. Mar atá na ranganna céanna, cailltear an dá píosa.",
+    "you_miner_defused": "Tá imeacht déanta agat do píosa ó {source} go {dest}. Ba ea an píosa ionsaitheach {attacking_rank} agus ba ea an píosa críche {target_rank}. Mar is féidir le mianadóirí buamaí a dhí-ghreamú, bhuaigh tú an cath.",
+    "opponent_miner_defused": "Tá an t-imreoir {player_id} tar éis píosa a bhogadh ó {source} go {dest}. Ba é {attacking_rank} an píosa ionsaitheach agus ba é {target_rank} an píosa ceann scríbe. Toisc go bhfuil mianadóir in ann buamaí a dhí-armáil, chaill tú an cath.",
+    "you_bomb_lost": "Tá imeacht déanta agat do píosa ó {source} go {dest}. Ba ea an píosa ionsaitheach {attacking_rank} agus ba ea an píosa críche {target_rank}. Mar nár bhain an ionsaitheoir le mianadóir, caill tú an cath.",
+    "opponent_bomb_won": "Tá an t-imreoir {player_id} tar éis píosa a bhogadh ó {source} go {dest}. Ba é {attacking_rank} an píosa ionsaitheach agus ba é {target_rank} an píosa ceann scríbe. Toisc nach mianadóir é an t-ionsaitheoir, bhuaigh tú an cath.",
+    "you_spy_won": "Tá imeacht déanta agat do píosa ó {source} go {dest}. Ba ea an píosa ionsaitheach {attacking_rank} agus ba ea an píosa críche {target_rank}. Mar atá an ionsaitheoir ina spiaire agus an críoch ina mharascail, bhuaigh tú an cath.",
+    "opponent_spy_lost": "Tá imeacht déanta ag Imreoir {player_id} píosa ó {source} go {dest}. Ba ea an píosa ionsaitheach {attacking_rank} agus ba ea an píosa críche {target_rank}. Mar atá an ionsaitheoir ina spiaire agus an críoch ina mharascail, caill tú an cath.",
+    "you_higher_won": "Tá imeacht déanta agat do píosa ó {source} go {dest}. Ba ea an píosa ionsaitheach {attacking_rank} agus ba ea an píosa críche {target_rank}. Mar atá an ionsaitheoir ina rang níos airde ná an críoch, bhuaigh tú an cath.",
+    "opponent_higher_lost": "Tá an t-imreoir {player_id} tar éis píosa a bhogadh ó {source} go {dest}. Ba é {attacking_rank} an píosa ionsaitheach agus ba é {target_rank} an píosa ceann scríbe. Toisc go bhfuil an t-ionsaitheoir ina cheim níos airde ná an ceann scríbe, chaill tú an cath.",
+    "you_lower_lost": "Tá imeacht déanta agat do píosa ó {source} go {dest}. Ba ea an píosa ionsaitheach {attacking_rank} agus ba ea an píosa críche {target_rank}. Mar atá an ionsaitheoir ina rang níos ísle ná an críoch, caill tú an cath.",
+    "opponent_lower_won": "Tá an t-imreoir {player_id} tar éis píosa a bhogadh ó {source} go {dest}. Ba é {attacking_rank} an píosa ionsaitheach agus ba é {target_rank} an píosa ceann scríbe. Toisc go bhfuil an t-ionsaitheoir ina cheim níos ísle ná an ceann scríbe, bhuaigh tú an cath."
+  },
+  "outcome": {
+    "flag_captured": "Tá an cluicheoir {player_id} tar éis bratach a chéile na hiomaitheoirí a ghabháil!",
+    "no_movable_pieces": "Tá Imreoir {winner_id} tar éis an cluiche a bhuachan! Níl aon phíosaí inghluaiste ag Imreoir {loser_id} a thuilleadh."
+  }
+}

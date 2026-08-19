@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Ndiye Mukandi {player_id} katika mchezo wa Liar's Dice wa {num_players} mukandi.\nKanuni:\n- Katika zamu yako, unaweza ama:\n  1) Fanya ofa mpya na wingi mkubwa au uso wa juu (au zote mbili) kuliko ofa ya sasa; yaani '[Bid: 3, 4]',\n  2) Toa ofa ya mwisho kwa kuandika '[Call]'.\n\nIkiwa unatoa ofa:\n  - Ikiwa hesabu halisi ya adili ya uso wa ndenge kati ya ndenge zote ni chini ya ofa, mtoa ofa wa mwisho anapoteza ndenge moja.\n  - Vinginevyo, mtoa ofa anapoteza ndenge moja.\nMukandi anayefikia ndenge 0 anashindwa. Mukandi wa mwisho anayebaki anashinda."
+  },
+  "board": {
+    "per_player": "\tMukala {p}: {d}",
+    "new_round": "\nMvula mpya - Mafuta yamaboko: {dice_summary}\nMafuta yako yamaboko ni: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Mukandi {current_player_id} anatoa ofa! Hesabu halisi ya uso {face_value} ni {count}, ambayo ni CHINI ya {quantity}.\nMukandi {loser_id} (mtoa ofa wa mwisho) anapoteza ndenge moja.",
+    "caller_loses": "Mukandi {current_player_id} anatoa ofa! Hesabu halisi ya uso {face_value} ni {count}, ambayo ni >= {quantity}.\nMukandi {loser_id} (mtoa ofa) anapoteza ndenge moja."
+  },
+  "action": {
+    "bid_announce": "Mukala {player_id} ukala {quantity} kwa nzamba {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "O muthu ua kexile mu uixana, ka zuela se nanhi a mu bhana o kitadi.",
+    "invalid_bid": "O kitadi kia bhana ki kiexile kia kidi: {reason}",
+    "not_recognized": "Hatua haijatambuliwa kama ofa halali '[Bid: X, Y]' au '[Call]'. Hatua iliyotolewa: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Wingi mpya {new_quantity} ni chini ya {current_quantity} ya sasa.",
+    "face_lower": "Adili mpya ya uso {new_face_value} ni chini ya {current_face_value} ya sasa.",
+    "identical": "O kitadi kia bhana, ki sokela ni kima kiala na-kiu o muthu.",
+    "face_range": "O itambuijilu ia tokala i kala bhu kaxi ka 1 ni 6."
+  },
+  "message": {
+    "eliminated_invalid": "O mu jokala {player_id} a mu katula o kididi mukonda dia ku kamba nguzu."
+  },
+  "outcome": {
+    "win": "Mukala {winner} ashinde! Matokeo ya mwisho: {final_ranking}"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "TicTacToe 简体中文语言包。请勿翻译左侧的键名，只翻译右侧的值。",
+  "_slots": {
+    "{player_id}": "玩家编号，例如 0 或 1",
+    "{symbol}": "玩家的标记，X 或 O",
+    "{opponent_symbol}": "对手的标记，X 或 O",
+    "{cell}": "棋盘格子编号，0 到 8 之间"
+  },
+
+  "player_prompt": {
+    "intro":            "你是井字棋游戏中的玩家 {player_id}。\n你的目标是在棋盘上连成三个（横向、纵向或对角线）。\n轮到你时，请选择一个格子编号（0-8）来放置你的标记。\n例如，'[4]' 将你的标记放在棋盘中央格子。\n作为玩家 {player_id}，你的标记是 '{symbol}'，对手的标记是 '{opponent_symbol}'。"
+  },
+
+  "board": {
+    "current_board":    "当前棋盘：\n\n{board}\n\n可用落子位置：{moves}"
+  },
+
+  "invalid_move": {
+    "wrong_format":     "提交的落子格式不正确。",
+    "out_of_range":     "{cell} 不是有效的格子编号，必须在 0 到 8 之间。",
+    "already_occupied": "格子 {cell} 已被占用。"
+  },
+
+  "game_action": {
+    "placed":           "玩家 {player_id} 将标记（{symbol}）放入格子 {cell}。"
+  },
+
+  "outcome": {
+    "win":              "玩家 {player_id} 获胜！",
+    "draw":             "游戏平局！"
+  }
+}

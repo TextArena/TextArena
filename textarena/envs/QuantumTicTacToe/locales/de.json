@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in Quantum Tic Tac Toe.\nDein Zeichen ist '{symbol}', und deine Zugnummern sind immer {parity}, zum Beispiel X1 und X3 oder O2 und O4.\n\nZiel: Gewinne, indem du eine Reihe aus drei klassischen Zeichen bildest, die aus Superpositionen verfestigt wurden.\n\nSpielablauf:\n- Setze in jedem Zug ein Spukzeichen auf zwei verschiedene leere Felder. Verwende dazu das Format '[a,b]'.\n- Diese Zeichen sind miteinander verschränkt und werden beispielsweise als 'X1 / X1' oder 'O4 / O4' bezeichnet.\n- Du kannst keine Spukzeichen auf ein Feld setzen, das bereits kollabiert und verfestigt ist.\n\nKollapsregel:\n- Wenn dein Zug einen Zyklus im Verschränkungsgraphen erzeugt, kollabiert dieser automatisch.\n- Jedes Spukzeichen im Zyklus wird an einer seiner beiden Positionen zu einem klassischen Zeichen.\n- Alle davon abhängigen Spukzeichen kollabieren ebenfalls.\n\nSieg:\n- Das Spiel endet, sobald ein Spieler drei klassische Zeichen in einer Reihe hat.\n- Erhalten beide Spieler während desselben Kollapses eine Reihe, gewinnt der Spieler mit der niedrigeren maximalen Zugnummer.\n\nBeispielzug: '[0,4]' setzt ein Spukzeichen auf die Felder 0 und 4."
+  },
+
+  "board": {
+    "current_board": "Quantum-Tic-Tac-Toe-Spielbrett:\n\n{board}\n\nGib deinen Zug als '[a,b]' ein, um ein Quantenzeichen an zwei Positionen zu setzen."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Ungültiges Format. Verwende '[a,b]'.",
+    "invalid_cells": "Ungültige oder doppelte Feldindizes.",
+    "already_solidified": "Eines der Felder ist bereits verfestigt."
+  },
+
+  "game_action": {
+    "placed": "Spieler {player_id} setzte sein Zeichen in eine Superposition zwischen den Feldern {pos_a} und {pos_b}."
+  },
+
+  "game_message": {
+    "dependent_resolved": "Abhängige Superposition aufgelöst. Feld ({r}, {c}) ist jetzt {symbol}.",
+    "last_cell_resolved": "Superposition des letzten Feldes aufgelöst. Feld ({r}, {c}) ist jetzt {symbol}.",
+    "superposition_resolved": "Superposition aufgelöst. Feld ({r}, {c}) ist jetzt {symbol}."
+  },
+
+  "outcome": {
+    "win": "Spieler {player_id} gewinnt mit verfestigten Zeichen!",
+    "draw": "Das Spiel endet unentschieden!"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Siz Kuhn Pokerning {max_rounds} tur o'yinida {player_id} o'yinchisiz. O'yin qoidalari: - Kuhn Pokerda J, Q, K (J eng past, K eng yuqori) bilan 3 ta karta to'plamidan foydalanadi - Har bir o'yinchi {ante} chipni qo'yadi va har turda 1 ta karta oladi (qarangki, kartalar almashtirishsiz taqsimlanadi, shuning uchun siz raqibingiz bilan bir xil kartaga ega bo'lolmaysiz). - O'yin {max_rounds} turlari uchun davom etadi - Barcha turlardan keyin eng ko'p chiplarga ega bo'lgan o'yinchi g'olib chiqadi Harakat qoidalari: - '[check]': Pass qo'shmasdan (agar stolda garov bo'lmasa) - '[bet]': Potga 1 ta chip qo'shing (agar stolda garov bo'lmasa) - '[call]': Potga 1 ta qo'shish orqali raqibning garovini moslashtiring - [fold]': Qo'lingizni taslim bering va raqibingiz potni yutib bersin"
+  },
+  "init_round": {
+    "round_start": "### Boshlanish davri {current_round} davri {max_rounds} davri. Sizning kartangiz: \"{player_card}\"",
+    "available_actions": "Sizda quyidagi harakatlar mavjud: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Amal [Check], [Bet], [Call] yoki [Fold] boʻlishi kerak.",
+    "not_legal": "Amal {legal_actions} boʻlishi kerak."
+  },
+  "action": {
+    "submit_move": "{player_id}-o'yinchi, '[{move}]' harakatini amalga oshirdi.",
+    "valid_actions": "Sizda quyidagi harakatlar mavjud: {legal_actions}.",
+    "round_summary": "{reason} Joriy natijalar: 0 o'yinchi: \"{player_0_chips}\"; 1 o'yinchi: \"{player_1_chips}\""
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: O'yinchi {winner}ning {winner_card} o'yinchi {loser}ning {loser_card}ni mag'lub qiladi. O'yinchi {winner} {pot_value} chiplar idishini yutib oladi."
+  },
+  "outcome": {
+    "draw": "{max_rounds} turning oxirida ikkala o'yinchi ham bir xil miqdordagi chiplarga ega bo'lgan.",
+    "round_win": "O'yinchi {player_id} to'xtadi.",
+    "winner_player0": "0 o'yinchi barcha {max_rounds} turlar oxirida ko'proq chiplarga ega bo'lgan holda g'alaba qozondi.",
+    "winner_player1": "1-o'yinchi barcha {max_rounds} turlar oxirida ko'proq chiplarga ega bo'lgan holda g'alaba qozondi."
+  }
+}

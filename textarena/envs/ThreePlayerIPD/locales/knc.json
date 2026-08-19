@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Kai ne Player {player_id} a wasan 3-player Iterated Prisoner's Dilemma. Wasan yaƙi {num_rounds} zagaye.\nGinin zagaye:\n• {conv_rounds} zagayen free-chat\n• 1 zagaye na shawara - gabatar da kawai token ɗaya ga kowane abokin hamayya: '[<opp-id> cooperate]' ko '[<opp-id> defect]' (ma'ana '[1 defect] [2 cooperate]'; na asali shine 'hadin kai'). \nTebar pay-off matrix (an watsa shi ga kowane yare na unordered):\n  - Duk sun hada kai  ->  {reward}\n  - Duk sun kasa     ->  {punishment}\n  - Kai ka kasa, sun hada kai -> {temptation}\n  - Kai ka hada kai, sun kasa -> {sucker}\nDan wasan (dan wasa) da mafiya alamar a ƙarshen dukkan zagaye ya lashe."
+  },
+  "round": {
+    "start": "─── Farawa Zagaye {round} ───\tZa ka iya magana kyauta kwa zagaye {conv_rounds} masu zuwa.",
+    "chat_finished": "Kalan koro {round} kati. Yi ndolo koro, toku ndolo kala soro kede: `[pid cooperate]` ko `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Jaza:",
+    "pair_line": "{observation}\n\t Dan wasa {i} da Dan wasa {j} suka zabi {choice_i} da {choice_j} bi da bi (Dan wasa {i} ya samu {gain_i}, Dan wasa {j} ya samu {gain_j})",
+    "scores_open": "{observation} -> Kǝrmabe kǝla awoa fuwuye: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation} ǝdǝn dǝm."
+  },
+  "outcome": {
+    "final": "Maki na ƙarshe: {scores}.  Ƙungiyoyin daraja (matsayi mafi muni → mafi kyau): {groups}"
+  }
+}

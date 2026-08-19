@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Kamu adalah Pemain {player_id} di Quantum Tic Tac Toe.\nSimbolmu adalah '{symbol}', dan nomor langkahmu selalu {parity} (misalnya, X1, X3 atau O2, O4).\n\nTujuan: Menang dengan membentuk garis tiga tanda klasik (dipegang dari superposisi).\n\nCara Bermain:\n- Pada setiap giliran, letakkan tanda seram di dua kotak kosong yang berbeda menggunakan format '[a,b]'.\n- Tanda-tanda ini terjalin, dan diberi label seperti 'X1 / X1' atau 'O4 / O4'.\n- Kamu tidak bisa meletakkan tanda seram di kotak yang sudah runtuh (dipegang).\n\nAturan Runtuh:\n- Jika langkahmu membuat siklus dalam grafik terjalin, maka akan runtuh secara otomatis.\n- Setiap tanda seram dalam siklus berubah menjadi tanda klasik di salah satu dari dua posisinya.\n- Tanda-tanda seram tergantung juga runtuh.\n\nKemenangan:\n- Permainan berakhir ketika pemain memiliki tiga tanda klasik dalam baris.\n- Jika kedua pemain mendapatkan garis selama runtuh yang sama, maka pemain dengan nomor langkah maksimum yang lebih rendah memenangkan.\n\nContoh langkah: '[0,4]' meletakkan tanda seram di sel 0 dan 4."
+  },
+  "board": {
+    "current_board": "Papan Tic Tac Toe Quantum:\n\n{board}\n\nKirim langkahmu sebagai '[a,b]' untuk meletakkan tanda kuantum di dua lokasi."
+  },
+  "invalid_move": {
+    "wrong_format": "Format ora valid. Gunakake \"[a,b]\".",
+    "invalid_cells": "Indeks sel sing ora valid utawa duplikat.",
+    "already_solidified": "Salah siji sel wis dadi padhet."
+  },
+  "game_action": {
+    "placed": "Pemain {player_id} meletakkan simbolnya dalam superposisi antara sel {pos_a} dan {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposisi tergantung telah terpecahkan. Sel ({r}, {c}) sekarang {symbol}.",
+    "last_cell_resolved": "Superposisi untuk sel terakhir telah terpecahkan. Sel ({r}, {c}) sekarang {symbol}.",
+    "superposition_resolved": "Superposisi telah terpecahkan. Sel ({r}, {c}) sekarang {symbol}."
+  },
+  "outcome": {
+    "win": "Pemain {player_id} menang kanthi tandha-tandha sing padhet!",
+    "draw": "Pertandhingané ora ana sing menang!"
+  }
+}

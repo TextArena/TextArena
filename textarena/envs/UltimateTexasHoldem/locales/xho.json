@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Akukho makhadi okwangoku.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Umntu odlala ngokwakhe vs Umthengisi\n\n📖 ISAZISO SEGAME:\n• Uqala ne-{start_chips} chips\n• Ideshi elilodwa la-52 kartye (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Udlala ngokwakhe vs umthengisi (indlu)\n• Ilungu lolunye lolunye lalandela isakhiwo se-Ultimate Texas Hold'em: uposta ANTE na BLIND bets, ufumana 2 kartye zemali, uqala ukubetsa PLAY bets kuzo zonke izikhathi zokuphela, uveza kartye zemali zokwabelana nokulinganisa isandla lakho lesi-5 kartye vs umthengisi. Injongo yakho kukhulisa imali yakho (ukhona isandla lesi-better), ukhulisa ukhasi wakho (ukhona isandla lesi-worse).\n• Igame iphela ukhona 0 chips okanye ngaphantsi komqala we-round (LOSS) okanye ukhona 1000 mizunguko nemali (WIN)\n\n💰 ISAKHIWO SEBET:\n• ANTE: Ibet eyenzekayo ${ante} yaminye mizunguko\n• BLIND: Ibet eyenzekayo ${ante} yaminye mizunguko\n• PLAY: Ibet eyenzekayo ngokwakhe. Kuzo zonke izikhathi zokuphela, unaweza ukukhetha kuphela INYE yezilandelayo: (${ante4} ukhona PRE-FLOP, ${ante2} ukhona FLOP, okanye ${ante} ukhona RIVER. Unaweza ukufolda ukhona river, ukususa isandla, ukwenza ibet.)\n\n🎴 UKUPHILA KWEKARTYE:\n• Ufumana 2 kartye zemali (kartye zemali zakho)\n• Umthengisi ufumana 2 kartye zemali (ezifihliwe kuwe)\n• 5 kartye zemali zokwabelana zikhutshwa ngokwenzekayo\n• Kartye zemali zokwabelana zivezwa ngokuthuthuzela kuzo zonke izikhathi zokuphela\n\n🏆 UKUFIHLA KWEDEALER:\n• Umthengisi kumele abe nayo inye PAIR (2 kartye zemali zesandla lesi-better) ukhona, ukhutshwa kuzo zonke izikhathi zokuphela.\n• Ukufihla kwe-dealer kuthinta imiphumela yebet, njengekutsho kutheni.\n\n🎮 IZIKHATHI ZOKUPHELA & MIDLA:\n📋 PRE-FLOP:\n  • Midlalo: [4x] (${ante4}) okanye [check]\n  • [4x]: Betsa ${ante4} PLAY bet, veza kartye zemali zokwabelana zokuqala\n  • [check]: Akukho bet, veza kartye zemali zokwabelana zokuqala\n\n📋 FLOP:\n  • Ukuba 4x bet iphinde: Kuphela [skip] ekhoyo (auto-veza kartye zemali zokwabelana zokugqibela)\n  • Ukuba akukho 4x bet: [2x] (${ante2}) okanye [check]\n  • [2x]: Betsa ${ante2} PLAY bet, veza kartye zemali zokwabelana zokugqibela\n  • [check]: Akukho bet, veza kartye zemali zokwabelana zokugqibela\n\n📋 RIVER:\n  • Ukuba 4x okanye 2x bet iphinde: Kuphela [skip] ekhoyo (auto-ya kwenye showdown)\n  • Ukuba akukho bet ye-PLAY: [1x] (${ante}) okanye [fold]\n  • [1x]: Betsa ${ante} PLAY bet, ya kwenye showdown\n  • [fold]: Susa isandla, ulahle ibet ye-ANTE na BLIND\n\n📋 SHOWDOWN:\n  • Kartye zemali zonke zivezwa nokulinganiswa\n  • Isandla lesi-5 kartye lesi-better ukhona 7 kartye (2 kartye zemali + 5 kartye zemali zokwabelana)\n  • Ibet isettle ngokwemiphumela ye-payout\n\n💎 IMIPHUMELA YEBET:\n📊 ANTE BET:\n  • Umthengisi akakwazi ukhona: PUSH (bet ibuyiselwe)\n  • Umthengisi ukwazi ukhona & uwin: 1:1 payout (bet + imali)\n  • Umthengisi ukwazi ukhona & ulahle: Bet ilahle\n  • Tie: PUSH (bet ibuyiselwe)\n\n📊 BLIND BET:\n  • Ayathintwa ukwazi kwe-dealer\n  • Uwin: Bet ibuyiselwe nokuphuma kwezandla\n  • Ulahle: Bet ilahle\n  • Tie: PUSH (bet ibuyiselwe)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Akukho payout\n\n📊 PLAY BET:\n  • Ayathintwa ukwazi kwe-dealer\n  • Ukulinganisa ngokwakhe: Isandla lakho lesi-better vs umthengisi\n  • Uwin: 1:1 payout (bet + imali)\n  • Ulahle: Bet ilahle\n  • Tie: PUSH (bet ibuyiselwe)\n\n🎯 IZINYE ZESANDLA ZEPOKER (Best to Worst):\n  1. Royal Flush: A-K-Q-J-10 ye-suit enye\n  2. Straight Flush: 5 kartye zemali zokulandela ye-suit enye\n  3. Four of a Kind: 4 kartye zemali zesandla lesi-better\n  4. Full House: 3 kartye zemali zesandla lesi-better + 2 kartye zemali zesandla lesi-better\n  5. Flush: 5 kartye zemali ye-suit enye\n  6. Straight: 5 kartye zemali zokulandela\n  7. Three of a Kind: 3 kartye zemali zesandla lesi-better\n  8. Two Pair: 2 pairs ye-sandla lesi-better\n  9. One Pair: 2 kartye zemali zesandla lesi-better\n  10. High Card: Kartye ye-sandla lesi-better\n\n⌨️  AMAGAMA EMIDLALO:\n• [4x] okanye [play bet 4x]: Betsa ${{self.ante_amount*4}} PLAY bet\n• [2x] okanye [play bet 2x]: Betsa ${{self.ante_amount*2}} PLAY bet\n• [1x] okanye [play bet 1x]: Betsa ${{self.ante_amount*1}} PLAY bet\n• [check] okanye [c]: Check (akukho bet)\n• [fold] okanye [f]: Fold (susa isandla)\n• [skip] okanye [s]: Skip kwenye phase enye (ukhona akukho midlalo)\n\n💡 IZIPHUZO ZESTRATEGY:\n• Izandla zokwakha zesandla (pairs, high cards) zinaweza kuthemba 4x bets\n• Ucinge ukwazi kwe-dealer - izandla ezinjani zinaweza push ukhona umthengisi akakwazi\n• BLIND bet inaweza kuthemba kakhulu ne-sandla lesi-better (Royal Flush = 500:1!)\n• Jonga isitokhwe sakho! Ukuba siya kwenye 0 okanye ngaphantsi komqala we-round, ulahle.\n\n⚠️  IZIPHUZO EZIKHULU:\n• ANTE na BLIND bets zinenzekayo yaminye mizunguko\n• PLAY bets zinaweza kuthemba nokwakha\n• Qiniseka ukuba unguqule midlalo ngokwakhe, nokuba kuphela midlalo enye ngexesha.\n\n",
+    "state": "🎯 ROUND {round}\n💰 Chips: {chips}\n🎴 Isandla lakho: {hand}\n📊 Ibet yamanje: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Iphase: {phase}\n🎯 Midlalo ekhoyo: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Round {round} iqalile! Ibet: ANTE ${ante}, BLIND ${blind}. Unayo {chips} chips iliyobaki.",
+    "your_hand": " Isandla sakho: {hand}",
+    "flop_revealed": " I-FLOP ityhilwe: {cards}",
+    "river_revealed": " UMlambo utyhile: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Isenzo esingekhoyo kwisigaba sangoku. Izenzo ezikhoyo: {available}",
+    "message": " Isenzo esingekhoyo! Izenzo ezikhoyo: {available}"
+  },
+  "action": {
+    "folded": " Uyekile."
+  },
+  "showdown": {
+    "dealer_hand": " BONISA! Isandla somthengisi: {cards}",
+    "community_cards": " Amakhadi oluntu: {cards}",
+    "player_best": "🎴 Isandla lesi-better la-player: {name} ({cards})",
+    "dealer_best": "🎴 Isandla lesi-better le-dealer: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (isongwe)",
+    "blind_lost_folded": " BET INKQUBO Ilahlekile! -${blind} (isongwe)",
+    "ante_won": "✅ Umthemba wakho we-ANTE uthathe izandla! +${amount}",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} ibuyisiwe",
+    "ante_lost": " ANTE bet LOST! -${ante}",
+    "blind_won": "✅ IBLIND bet WON! +${amount}",
+    "blind_pushed": " BET INKQUBO ICHUKULISWE! ${blind} ibuyiselwe umva",
+    "blind_lost": " BET INKQUBO Ilahlekile! -${blind}",
+    "play_won": "✅ Umthemba wakho we-PLAY uthathe izandla! +${amount}",
+    "play_pushed": " BHINGA ukubheja KUNYANZELWE! ${play} ibuyisiwe",
+    "play_lost": " DLA ukubheja KUHLULE! -${play}",
+    "net_gain": "🎉 Round {round} iqalile! Inzuzo: +${net}",
+    "net_loss": "💸 Round {round} iqalile! Hasara: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 GAME OVER! {max_turns} mizunguko iqalile. Unayo ${chips} chips - UWINILE!",
+    "game_over_lose": "UMdlalo uphelile! Awunazo iichips. Umthengisi uyaphumelela!",
+    "reward_win": "Player uqalile {winner_rounds} mizunguko ne-${chips} chips",
+    "reward_lose": "Umdlali waphelelwa ziichips kumjikelo {round}",
+    "reward_win_max": "Player uqalile {max_turns} mizunguko ne-${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "I-Royal Flush",
+    "straight_flush": "Ukugxotha okuKhawulezayo",
+    "four_of_a_kind": "Abantu Abane Abakhethekileyo",
+    "full_house": "Indlu egcwele",
+    "flush": "Ukugutyulwa kwamanzi",
+    "straight": "Ngqo",
+    "three_of_a_kind": "Iintlobo Ezithathu Ezifanayo",
+    "two_pair": "Izibini eziBini",
+    "one_pair": "Isibini Esinye",
+    "high_card": "Ikhadi Eliphezulu",
+    "unknown": "Isandla Esingaziwayo"
+  }
+}

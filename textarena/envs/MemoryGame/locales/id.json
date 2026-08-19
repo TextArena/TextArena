@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id}. Anda sedang memainkan Permainan Memory.\nTujuan Anda adalah mencocokkan lebih banyak pasangan kartu di papan daripada lawan Anda.\nPada giliran Anda, pilih dua kartu untuk dibalik dengan memasukkan nomor baris dan kolom dari kartu pertama dan kedua secara berurutan seperti '[0 1 1 0]', di mana kartu pertama berada di baris 0 dan kolom 1, dan kartu kedua berada di baris 1 dan kolom 0.\nJika kedua kartu cocok, Anda mendapatkan satu poin dan kartu tersebut tetap menghadap ke atas. Jika tidak cocok, kartu tersebut dibalik kembali menghadap ke bawah, misalnya '.'.\nPermainan berakhir ketika semua pasangan telah cocok."
+  },
+  "board": {
+    "current_board": "Papan Saat Ini:\n{board}",
+    "current_game_board": "Papan Permainan Saat Ini:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format gerakan tidak valid. Pemain {player_id} tidak merespons dengan arah yang valid dalam tanda kurung siku.",
+    "out_of_bounds": "Gerakan tidak valid. Pemain {player_id} memilih posisi di luar batas.",
+    "same_card_twice": "Gerakan tidak valid. Pemain {player_id} memilih kartu yang sama dua kali.",
+    "already_matched": "Gerakan tidak valid. Pemain {player_id} memilih satu atau kedua kartu yang sudah cocok."
+  },
+  "game_message": {
+    "cards_match": "Kartu yang dipilih oleh Pemain {player_id} di posisi [{r1} {c1}] dan [{r2} {c2}] cocok!",
+    "cards_no_match": "Kartu yang dipilih oleh Pemain {player_id} tidak cocok. Kartu di posisi [{r1} {c1}] dan [{r2} {c2}] adalah {pos1} dan {pos2} secara berurutan."
+  },
+  "outcome": {
+    "draw": "Kedua pemain mencocokkan jumlah pasangan kartu yang sama.",
+    "win": "Pemain {winner_id} menang!",
+    "turn_limit": "Batas giliran telah tercapai. Permainan berakhir. Pemain 0 mendapatkan {score_0} poin, Pemain 1 mendapatkan {score_1} poin.",
+    "turn_limit_win": "{reason} Pemain {winner_id} menang!"
+  }
+}

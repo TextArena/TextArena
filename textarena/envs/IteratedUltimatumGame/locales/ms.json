@@ -1,0 +1,47 @@
+{
+  "_comment": "Fail bahasa IteratedUltimatumGame — Bahasa Melayu. JANGAN terjemahkan kunci (sebelah kiri). Terjemahkan nilai sahaja (sebelah kanan). Kekalkan setiap {placeholder} dengan tepat; jangan terjemah token tindakan [Offer: $X] / [Accept] / [Reject]. Kekalkan simbol mata wang '$' dan semua nombor.",
+  "_slots": {
+    "{player_id}": "Nombor pemain, 0 atau 1",
+    "{other_id}": "Nombor pemain lain, 1 atau 0",
+    "{num_rounds}": "Jumlah pusingan",
+    "{pool}": "Jumlah wang yang tersedia setiap pusingan (satu nombor)",
+    "{round_number}": "Nombor pusingan semasa",
+    "{proposer_id}": "Nombor pemain pencadang, 0 atau 1",
+    "{responder_id}": "Nombor pemain penjawab, 0 atau 1",
+    "{offer}": "Jumlah yang ditawarkan (satu nombor)",
+    "{keep}": "Jumlah yang disimpan oleh pencadang (satu nombor)",
+    "{proposer_gain}": "Wang yang diperoleh pencadang pusingan ini (satu nombor)",
+    "{responder_gain}": "Wang yang diperoleh penjawab pusingan ini (satu nombor)",
+    "{total_0}": "Jumlah terkumpul Pemain 0 (satu nombor)",
+    "{total_1}": "Jumlah terkumpul Pemain 1 (satu nombor)",
+    "{winner}": "Nombor pemain yang menang",
+    "{loser}": "Nombor pemain yang kalah",
+    "{winner_total}": "Jumlah wang pemenang (satu nombor)",
+    "{loser_total}": "Jumlah wang yang kalah (satu nombor)",
+    "{total}": "Jumlah akhir seri setiap pemain (satu nombor)"
+  },
+
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id}, bermain {num_rounds} pusingan Permainan Ultimatum Lelaran.\nAnda mempunyai ${pool} untuk dibahagi pusingan ini antara anda dan Pemain {other_id}.\n\nPencadang:\n  - Buat tawaran: [Offer: $X] (0 <= X <= pool)\n  - Jika diterima → Anda dapat $(pool - X), pemain lain dapat $X\n  - Jika ditolak → Kedua-duanya dapat $0\n  - Contoh: [Offer: $3]  atau  'Saya rasa ini adil. [Offer: $5]'\n\nPenjawab:\n  - Buat keputusan tentang tawaran dengan [Accept] atau [Reject]\n  - Contoh: 'Itu nampak munasabah. [Accept]'\n            'Terlalu tidak adil. [Reject]'\n"
+  },
+
+  "round": {
+    "begins":   "--- Pusingan {round_number} bermula! ---\nPemain {proposer_id} ialah pencadang, Pemain {responder_id} ialah penjawab.",
+    "offer":    "Pusingan {round_number}: Pemain {proposer_id} menawarkan ${offer} kepada Pemain {responder_id} (menyimpan ${keep}).",
+    "accepted": "Pemain {responder_id} menerima! Perolehan pusingan {round_number}: Pemain {proposer_id} +${proposer_gain}, Pemain {responder_id} +${responder_gain}. Jumlah baharu: Pemain 0: ${total_0}, Pemain 1: ${total_1}.",
+    "rejected": "Pemain {responder_id} menolak tawaran! Perolehan pusingan {round_number}: Kedua-dua pemain +$0. Jumlah kekal: Pemain 0: ${total_0}, Pemain 1: ${total_1}."
+  },
+
+  "invalid_move": {
+    "no_offer_format":  "Pencadang mesti membuat tawaran menggunakan format [Offer: $X].",
+    "bad_integer":      "Jumlah tawaran mesti nombor bulat yang sah.",
+    "out_of_range":     "Tawaran mesti antara $0 dan ${pool}.",
+    "no_current_offer": "Tiada tawaran semasa untuk dijawab.",
+    "accept_or_reject": "Penjawab mesti sama ada menerima [Accept] atau menolak [Reject] tawaran."
+  },
+
+  "outcome": {
+    "win":  "Pemain {winner} menang dengan jumlah ${winner_total} berbanding ${loser_total} Pemain {loser}.",
+    "draw": "Seri! Kedua-dua pemain menamatkan dengan jumlah ${total}."
+  }
+}

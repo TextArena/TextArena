@@ -1,0 +1,80 @@
+{
+  "_comment": "Fichier de langue du Solitaire Klondike en français. NE traduis PAS les clés (côté gauche), seulement les valeurs (côté droit). Conserve chaque {marqueur} exactement tel quel. Ne traduis JAMAIS les étiquettes/couleurs des cartes (par ex. A, 10, K, ♣️, ♦️, ♥️, ♠️), les jetons de pile W, F1-F4, T1-T7, le plateau ASCII dans {board}, ni les commandes 'draw', 'move', 'forfeit', 'all'. La syntaxe entre crochets comme 'move W T1' doit rester en alphabet latin telle quelle.",
+  "_slots": {
+    "{n}": "Index de l'action au sein d'une commande séparée par des virgules, à partir de 1",
+    "{msg}": "Un message de résultat imbriqué par action (déjà localisé)",
+    "{count}": "Nombre de cartes face visible déplacées",
+    "{src}": "Numéro de la pile de tableau source, à partir de 1",
+    "{dst}": "Numéro de la pile de destination, à partir de 1",
+    "{cmd}": "La commande inconnue saisie par le joueur (ne pas traduire)",
+    "{max_turns}": "Le nombre maximal de tours avant la fin de la partie",
+    "{score}": "Nombre de cartes actuellement dans les piles de fondation",
+    "{board}": "Le plateau ASCII rendu (ne jamais traduire)",
+    "{turn}": "Numéro du tour actuel",
+    "{stock}": "Nombre de cartes restantes dans la pioche",
+    "{waste}": "La carte du dessus de la défausse, ou '--' si vide (ne jamais traduire)",
+    "{cards}": "Les cartes d'une pile sous forme d'étiquettes neutres, ou '--' si vide (ne jamais traduire)"
+  },
+
+  "player_prompt": {
+    "intro": "Tu joues au Solitaire Klondike. Ton objectif est de déplacer toutes les cartes vers les piles de fondation.\n\nRègles du jeu :\n- Piles de fondation (F1-F4) : Construis de l'As au Roi par couleur, en ordre croissant\n- Piles de tableau (T1-T7) : Construis en ordre décroissant en alternant les couleurs (rouge sur noir, noir sur rouge)\n- Pioche : Tire des cartes vers la défausse\n- Défausse (W) : La carte du dessus est disponible pour jouer\n\nCommandes :\n- 'draw' - Tire des cartes de la pioche vers la défausse\n- 'move <source> <destination> [count]' - Déplace des cartes entre les piles\n  Exemples : 'move W T1', 'move T1 F2', 'move T3 T5 2'. count peut aussi être 'all', ce qui tentera de déplacer toutes les cartes face visible.\n- 'forfeit' - Termine la partie immédiatement et fige ton score actuel\n- Noms des piles : W (défausse), F1-F4 (fondations), T1-T7 (tableau)\n\nTu peux exécuter plusieurs actions en un tour en les séparant par des virgules :\n  Exemple : 'draw, move W T1, move T2 F1'\n\nSeuls les Rois peuvent être placés sur les piles de tableau vides.\nLes actions s'exécutent dans l'ordre ; si l'une échoue, les actions restantes sont ignorées.\nUtilise 'forfeit' si tu penses que la partie est impossible à gagner."
+  },
+
+  "format_error": {
+    "no_brackets": "Format d'action invalide. L'action doit être entre crochets.",
+    "no_closing_bracket": "Format d'action invalide. Crochet fermant ']' manquant",
+    "empty_command": "Commande vide. Tape 'draw' ou 'move <source> <destination> [count]'",
+    "empty_action": "Action vide",
+    "move_needs_args": "La commande move requiert une source et une destination. Usage : 'move <source> <destination> [count]'",
+    "count_positive": "count doit être positif ou 'all'",
+    "count_invalid": "count invalide. Utilise un nombre ou 'all'",
+    "unknown_command": "Commande inconnue '{cmd}'. Utilise 'draw', 'move <source> <destination> [count]' ou 'forfeit'",
+    "wrapped": "Action {n} : {msg}"
+  },
+
+  "action_result": {
+    "success": "Action {n} : {msg}",
+    "before_failure": "{n} action(s) exécutée(s) avant l'échec.",
+    "failed": "Action {n} échouée : {msg}"
+  },
+
+  "move_result": {
+    "drew": "Carte(s) tirée(s) de la pioche vers la défausse.",
+    "cannot_draw": "Impossible de tirer. La pioche et la défausse sont toutes deux vides.",
+    "invalid_pile": "Nom de pile invalide. Utilise W, F1-F4 ou T1-T7",
+    "foundation_one_card": "On ne peut déplacer qu'1 carte vers une fondation",
+    "waste_to_foundation_ok": "Carte déplacée de la défausse vers la fondation F{dst}",
+    "waste_to_foundation_bad": "Impossible de déplacer la carte de la défausse vers cette pile de fondation",
+    "tableau_to_foundation_ok": "Carte déplacée du tableau T{src} vers la fondation F{dst}",
+    "tableau_to_foundation_bad": "Impossible de déplacer la carte du tableau vers cette pile de fondation",
+    "foundation_to_foundation": "Impossible de déplacer de fondation à fondation",
+    "waste_to_tableau_one_card": "On ne peut déplacer qu'1 carte de la défausse vers le tableau",
+    "waste_to_tableau_ok": "Carte déplacée de la défausse vers le tableau T{dst}",
+    "waste_to_tableau_bad": "Impossible de placer la carte de la défausse sur cette pile de tableau",
+    "no_face_up": "Aucune carte face visible à déplacer",
+    "tableau_to_tableau_ok": "{count} carte(s) déplacée(s) du tableau T{src} vers T{dst}",
+    "tableau_to_tableau_bad": "Impossible de déplacer {count} carte(s) de T{src} vers T{dst}",
+    "foundation_to_tableau_one_card": "On ne peut déplacer qu'1 carte de la fondation vers le tableau",
+    "foundation_empty": "La fondation F{src} est vide",
+    "foundation_to_tableau_ok": "Carte déplacée de la fondation F{src} vers le tableau T{dst}",
+    "foundation_to_tableau_bad": "Impossible de placer la carte de fondation sur le tableau T{dst}",
+    "to_waste_or_stock": "Impossible de déplacer vers la défausse ou la pioche"
+  },
+
+  "outcome": {
+    "forfeit": "Partie abandonnée. Score final : {score} cartes dans les fondations.",
+    "won": "Félicitations ! Tu as gagné au Solitaire Klondike !",
+    "turn_limit": "Partie terminée ! Tu as atteint le maximum de {max_turns} tours. Score : {score} cartes dans les fondations."
+  },
+
+  "board": {
+    "title": "=== SOLITAIRE KLONDIKE ===",
+    "turn": "Tour : {turn}/{max_turns}",
+    "stock": "Pioche : {stock} cartes",
+    "waste": "Défausse (W) : {waste}",
+    "foundations_header": "Fondations :",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau :",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

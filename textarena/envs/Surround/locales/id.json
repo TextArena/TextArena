@@ -1,0 +1,30 @@
+{
+  "_comment": "Berkas lokal Surround. JANGAN menerjemahkan kunci (sisi kiri). Hanya terjemahkan nilai (sisi kanan). Simpan setiap {placeholder} persis seperti yang ada. JANGAN menerjemahkan token gerakan/arah yang diketik pemain ([up], [down], [left], [right], w, s, a, d) atau papan ASCII yang dirender ke dalam {board}.",
+  "_slots": {
+    "{num_players}": "Jumlah pemain dalam pertandingan",
+    "{width}": "Lebar papan dalam sel",
+    "{height}": "Tinggi papan dalam sel",
+    "{player_id}": "Nomor pemain (berbasis 0)",
+    "{board}": "Grid ASCII yang dirender; simpan netral, jangan pernah menerjemahkan karakternya",
+    "{reason}": "Frasa alasan akhir permainan yang dirender",
+    "{groups}": "Data peringkat netral (daftar kelompok id pemain, terbaik hingga terburuk); jangan menerjemahkan"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Pemain Surround pada grid {width}x{height}.\nAnda adalah pemain {player_id}. Gerakan yang valid: '[up]' '[down]' '[left]' '[right]' atau w/s/a/d.\nTujuan: bertahan hidup lebih lama dari semua orang. Jejak berbahaya; tabrakan dengan dinding membunuh; tabrakan head-on membunuh keduanya."
+  },
+  "board": {
+    "current": "Papan Saat Ini:\n{board}",
+    "after_moves": "Papan setelah gerakan simultan:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Pemain {player_id} mati karena gerakan tidak valid."
+  },
+  "outcome": {
+    "survived_win": "Pemain {player_id} bertahan hidup; semua yang lain menabrak.",
+    "all_crashed": "Semua pemain menabrak secara simultan.",
+    "outlived": "Pemain bertahan hidup lebih lama dari semua orang.",
+    "all_dead": "Semua pemain mati.",
+    "turn_limit": "Batas giliran tercapai - pemain yang bertahan paling lama menang.",
+    "ranking": "{reason} Grup peringkat akhir (terbaik→terburuk): {groups}"
+  }
+}

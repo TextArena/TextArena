@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake dil dosyası. Anahtarları (sol taraf) çevirme. Yalnızca değerleri (sağ taraf) çevir.",
+  "_slots": {
+    "{num_players}": "Maçtaki oyuncu sayısı",
+    "{width}": "Tahta genişliği (hücre sayısı)",
+    "{height}": "Tahta yüksekliği (hücre sayısı)",
+    "{max_turns}": "Maç için tur sınırı",
+    "{player_id}": "Bir oyuncunun numarası (0 tabanlı)",
+    "{board}": "Render edilmiş ASCII ızgara; tarafsız tutun, karakterlerini asla çevirme",
+    "{reason}": "Render edilmiş oyun sonu nedeni cümlesi",
+    "{groups}": "Tarafsız sıralama verileri (oyuncu kimliği gruplarının listesi, en kötüden en iyiye); çevirme"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Oyunculu Snake {width}×{height} ızgarasında.\nSiz yılan {player_id}'yi kontrol ediyorsunuz. Geçerli hamleler: '[up]'/'[down]'/'[left]'/'[right]' (veya w/s/a/d).\nHedef: en uzun süre hayatta kalmak veya en uzun olup en yüksek puanı almak (tur sınırı {max_turns} tur)."
+  },
+  "board": {
+    "current": "Mevcut Tahta:\n{board}",
+    "after_moves": "Mevcut Tahta Durumu:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Yılan {player_id} geçersiz hamle nedeniyle öldü."
+  },
+  "outcome": {
+    "survived_win": "Oyuncu {player_id} hayatta kaldı; diğerleri yok oldu.",
+    "all_dead_simul": "Tüm yılanlar aynı anda öldü.",
+    "outlived": "Oyuncu diğer tüm oyuncuları geride bıraktı.",
+    "all_dead": "Tüm yılanlar öldü.",
+    "turn_limit": "Tur sınırına ulaşıldı - en iyi puan tie-break'i kazanıyor.",
+    "ranking": "{reason} Nihai sıralama grupları (en kötü→en iyi): {groups}"
+  }
+}

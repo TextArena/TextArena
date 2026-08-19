@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id}. Anda sedang memainkan permainan 15-Puzzle.\nTujuan permainan ini adalah untuk menyusun ubin bernomor dalam urutan naik dari 1 hingga 15, dengan ruang kosong berada di pojok kanan bawah.\nUntuk melakukan gerakan, Anda dapat menggeser ubin ke ruang kosong (ditandai dengan garis bawah ganda, misalnya __) dengan menggunakan salah satu perintah berikut:\n- 'up': Geser ubin di bawah ruang kosong ke atas.\n- 'down': Geser ubin di atas ruang kosong ke bawah.\n- 'left': Geser ubin di sebelah kanan ruang kosong ke kiri.\n- 'right': Geser ubin di sebelah kiri ruang kosong ke kanan.\nUntuk mengirim gerakan Anda, ketik arah (misalnya, 'up', 'down', 'left', atau 'right') dalam tanda kurung siku, misalnya [up].\nTata letak papan saat ini ditampilkan di bawah ini. Gunakan informasi ini untuk menyelesaikan teka-teki.\n"
+  },
+  "board": {
+    "current_board": "Papan Saat Ini:\n\n{board}\nGerakan Tersedia: {moves}",
+    "game_board": "Papan Permainan:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format gerakan tidak valid. Pemain {player_id} tidak merespons dengan arah yang valid dalam tanda kurung siku.",
+    "illegal_move": "Gerakan tidak valid. Ubin tidak dapat digeser dalam arah yang ditentukan."
+  },
+  "outcome": {
+    "win": "Selamat! Pemain {player_id} telah berhasil menyelesaikan 15-Puzzle.",
+    "turn_limit": "Batas giliran telah tercapai. Model menyelesaikan {percent} persen dari teka-teki."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "Používateľské reťazce pre Liar's Dice. Akčné tokeny v zátvorkách ('[Bid: X, Y]', '[Call]'), indexy hráčov, hodnoty na kockách, množstvá a počty sú neutrálne sloty a nikdy sa nesmú prekladať.",
+  "_slots": {
+    "player_id": "index hráča (celé číslo)",
+    "num_players": "počet hráčov v hre (celé číslo)",
+    "dice_summary": "predrenderovaná '; '-spojená zoznam zostávajúcich počtov kockiek pre každého hráča",
+    "your_dice": "predrenderovaná čárkou oddelená zoznam hodnôt na vašich kockách",
+    "p": "index hráča (celé číslo)",
+    "d": "zostávajúci počet kockiek pre daného hráča (celé číslo)",
+    "current_player_id": "index hráča, ktorý zavolal (celé číslo)",
+    "face_value": "hodnota na kocke, ktorá sa počíta (1-6)",
+    "count": "skutočný počet zhodných kockiek (celé číslo)",
+    "quantity": "množstvo v stávke (celé číslo)",
+    "loser_id": "index hráča, ktorý stráca kocku (celé číslo)",
+    "new_quantity": "množstvo v stávke, ktoré bolo práve odoslané (celé číslo)",
+    "current_quantity": "aktuálne množstvo v stávke (celé číslo)",
+    "new_face_value": "hodnota na kocke, ktorá bola práve odoslaná (celé číslo)",
+    "current_face_value": "aktuálna hodnota na kocke v stávke (celé číslo)",
+    "action": "surový reťazec akcie, ktorú hráč odoslal",
+    "reason": "vnorený dôvod zamietnutia stávky",
+    "winner": "index víťazného hráča (celé číslo)",
+    "final_ranking": "zoznam indexov hráčov od prvého eliminovaného po víťaza"
+  },
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} v {num_players}-hráčskej hre Liar's Dice.\nPravidlá:\n- Počas svojej ťahy môžete buď:\n  1) Urobiť novú stávku s vyšším množstvom alebo vyššou hodnotou (alebo obojím) ako je aktuálna stávka; t. j. '[Bid: 3, 4]',\n  2) Zavolať poslednú stávku zadáním '[Call]'.\n\nAk zavoláte:\n  - Ak je skutočný počet tejto hodnoty medzi všetkými kockami nižší ako stávka, posledný stávkujúci hráč stráca jednu kocku.\n  - Inak, volajúci hráč stráca jednu kocku.\nHráč, ktorý dosiahne 0 kockiek, je eliminovaný. Posledný zostávajúci hráč víťazí."
+  },
+  "board": {
+    "per_player": "\tHráč {p}: {d}",
+    "new_round": "\nNové kolo - Zostávajúce kocky: {dice_summary}\nVaše aktuálne kocky sú: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Hráč {current_player_id} zavolal! Skutočný počet hodnoty {face_value} je {count}, čo je MENEJ ako {quantity}.\nHráč {loser_id} (posledný stávkujúci) stráca jednu kocku.",
+    "caller_loses": "Hráč {current_player_id} zavolal! Skutočný počet hodnoty {face_value} je {count}, čo je >= {quantity}.\nHráč {loser_id} (volajúci) stráca jednu kocku."
+  },
+  "action": {
+    "bid_announce": "Hráč {player_id} stávkujúci {quantity} hodnoty {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Zavolanie bez predchádzajúcej stávky.",
+    "invalid_bid": "Neplatná stávka: {reason}",
+    "not_recognized": "Akcia nebola rozpoznaná ako platná '[Bid: X, Y]' alebo '[Call]'. Odoslaná akcia: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nové množstvo {new_quantity} je nižšie ako aktuálne {current_quantity}.",
+    "face_lower": "Nová hodnota {new_face_value} je nižšia ako aktuálna {current_face_value}.",
+    "identical": "Stávka je identická s aktuálnou stávkou.",
+    "face_range": "Hodnota musí byť medzi 1 a 6."
+  },
+  "message": {
+    "eliminated_invalid": "Hráč {player_id} bol eliminovaný neplatným ťahom."
+  },
+  "outcome": {
+    "win": "Hráč {winner} víťazí! Konečné poradie: {final_ranking}"
+  }
+}

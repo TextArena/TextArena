@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "U kurula Golf (Keki ya Kari) - Mkuruleni {player_id}.\nNchumu: U ku na skorho lowu ngana ku sungula. Hikwalaho koloni zi sungula skorho lowu fanana, zi hlanganisa ku sungula 0.\nMavuthu ya Keki: A=1, 2-10=mavuthu, J/Q=10, K=0\n\nNguvu (sebetela nguvu wo sungula):\n- '[draw]' - Sungula ku sungula\n- '[take]' - Teka ku sungula tshikani\n- '[swap X Y]' - Kombisa kaki leri ku sunguriwe na sungula X (sungula) Y (koloni)\n- '[discard]' - Tshika kaki leri ku sunguriwe\n"
+  },
+  "board": {
+    "drew": "U a ku: {card}\nKu fana na u [swap X Y] or [discard] yona.",
+    "took": "U teke: {card} eka nhulu ya thyaka. U fanele u [swap X Y] na yona (a yi nge lahliwi).",
+    "peeked": "U a ku vona ku sungula ({row},{col}): {card}",
+    "turn_view": "Lwangu:\n{hand}\nTshikani: {discard}\n{options}",
+    "none": "A ku na nchumu."
+  },
+  "options": {
+    "final_turns": "Sunguri wo mahlweni! Swivangelo swa wena: [draw], [take], [peek X Y]",
+    "draw": "Swivangelo swa wena: [draw], [take]",
+    "must_swap": "U fanele: [swap X Y] (a wu nge swi koti ku lahla makhadi lama nga eka xikatsa xa leswi lahliwaka)",
+    "swap_or_discard": "U fanele: [swap X Y] kumbe [discard]"
+  },
+  "hand": {
+    "no_cards": "A ku na makhadi.",
+    "header": "Nhlayo ya tinhla leti u ti tsaleke: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Mkuruleni {pid} wa kombisa {new} na {old} ku sungula ({row},{col})",
+    "discarded": "Mkuruleni {pid} wa tshika {card}"
+  },
+  "message": {
+    "deck_empty": "Ntlangu wu hela hi ku hatlisa.",
+    "knocked": "Mutlangi {pid} u tluriwile! Un'wana ni un'wana wa vatlangi lavan'wana va kuma nkarhi wun'we.",
+    "final_round": "Mkuruleni {pid} {reason}! Vangani vambirhi va vaya na sungula yin'wana."
+  },
+  "reason": {
+    "all_revealed": "ana khadi zote zilizofichuliwa"
+  },
+  "invalid": {
+    "wrong_action": "Tumia kitendo kimoja tu kilichowekwa mabano: [draw], [take], [swap X Y], [discard], [knock], au [peek X Y]",
+    "discard_empty": "Nhulu ya thyaka yi hava nchumu!",
+    "must_draw_first": "U fanele ku sungula [draw], [take], [knock], or [peek X Y]",
+    "cannot_discard_taken": "A wu nge swi koti ku lahla khadi leri tekiweke eka nhulu ya makhadi lama lahliwaka. U fanele u ri cinca.",
+    "have_drawn_card": "U na kaki leri ku sunguriwe. U fanele [swap X Y] or [discard] yona.",
+    "need_drawn_swap": "U fanele u va ni khadi leri nga ta ku pfuna leswaku u kota ku xava.",
+    "need_drawn_discard": "U fanele u va ni khadi leri nga ta ku pfuna leswaku u kota ku ri lahla.",
+    "out_of_bounds": "Sungula leri ku n'walungu. U sebetela sungula 1-{max_row}, koloni 1-{max_col}",
+    "knock_with_card": "A wu nge bi riqingho u nga si humesa khadi. Rhanga hi ku heta ntirho wa wena.",
+    "already_knocked": "Un'wana ana se u belele xirhendzevutana lexi.",
+    "already_revealed": "Khadi rero se ri humelerile!"
+  },
+  "summary": {
+    "full": "Keki yi file! Mkuruleni {winner} a winga na skorho ya {score} pointi!\n\nSkorho ya mahlweni:\n{scores}",
+    "line": "Mkuruleni {pid}: {score} pointi\n"
+  },
+  "board_str": {
+    "title": "=== GOLF GAME=== Ku Hlayisa Xiyenge Xa Vumbirhi:",
+    "discard": "Ku cukumeta nhulu: {card}",
+    "knocked": "Mutlangi {pid} u gongondzile!",
+    "player_header": "Mchezaji {pid} (Alama: {score}):"
+  }
+}

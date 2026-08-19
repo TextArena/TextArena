@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Ozali Joueur {player_id}, ozali na {num_rounds} tours ya Iterated Ultimatum Game.\nOzali na ${pool} ya kusala matabishi yako na Joueur {other_id} oyo round.\n\nOmobangi:\n  - Tanga lokumu: [Offer: $X] (0 <= X <= pool)\n  - Soki ekweyi → Ozwi $(pool - X), mosala mosusu azwi $X\n  - Soki ebimisi → Ndeko zote zwi $0\n  - Exemple: [Offer: $3]  to  'Nalingi eloko oyo ezali na bokasi. [Offer: $5]'\n\nOyebi:\n  - Sambaza lokumu na [Accept] to [Reject]\n  - Exemple: 'Ezali na bokasi. [Accept]'\n            'Ezali mabe mingi. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Mputu {round_number} ekosaka! ---\nMwana mboka {proposer_id} azali mpeki mbongo, Mwana mboka {responder_id} azali mpeki kozwa.",
+    "offer": "Mputu {round_number}: Mwana mboka {proposer_id} abiki mbongo ${offer} na Mwana mboka {responder_id} (akoki ${keep}).",
+    "accepted": "Mwana mboka {responder_id} ekweyi! Mputu {round_number} bazwi: Mwana mboka {proposer_id} +${proposer_gain}, Mwana mboka {responder_id} +${responder_gain}. Jumla mpaya: Mwana mboka 0: ${total_0}, Mwana mboka 1: ${total_1}.",
+    "rejected": "Mwana mboka {responder_id} atikaki mbongo! Mputu {round_number} bazwi: Bana mboka zote +$0. Jumla ibaki: Mwana mboka 0: ${total_0}, Mwana mboka 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Omobangi azali na obligation ya kotanga lokumu na formati [Offer: $X].",
+    "bad_integer": "Motango ya lifuti esengeli kozala motángo mobimba oyo ebongi.",
+    "out_of_range": "Motango ya mbongo esengeli kozala na kati $0 mpe ${pool}.",
+    "no_current_offer": "Ezali na eloko moko te oyo tokoki kopesa ye.",
+    "accept_or_reject": "Oyo akokaki azali na makasi ya kosekela to [Accept] to [Reject] lolenge."
+  },
+  "outcome": {
+    "win": "Mwana mboka {winner} aboti na ${winner_total} kwa jumla, kasi na Mwana mboka {loser} aza na ${loser_total}.",
+    "draw": "Tekisi! Bana mboka zote zikwi na ${total} kwa jumla."
+  }
+}

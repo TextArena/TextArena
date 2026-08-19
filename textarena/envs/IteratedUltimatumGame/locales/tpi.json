@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Yu em Pleya {player_id}, pilaiim {num_rounds} raun bilong Iterated Ultimatum Gem.\nYu gat ${pool} long splitem dispela raun bilong yu na Pleya {other_id}.\n\nProposer:\n  - Meekim ofa: [Offer: $X] (0 <= X <= pool)\n  - If aceptim → Yu kisim $(pool - X), nather pleya i kisim $X\n  - If rijeetim → Tupela i kisim $0\n  - Example: [Offer: $3]  or  'Mi thinkim dispela em fare. [Offer: $5]'\n\nResponder:\n  - Desisim long ofa wantaim either [Accept] or [Reject]\n  - Example: 'Dispela em i lukim olsem riasonabel. [Accept]'\n            'Tupela i no fare. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Raun {round_number} i stat! ---\nPleya {proposer_id} em i proposer, Pleya {responder_id} em i responder.",
+    "offer": "Raun {round_number}: Pleya {proposer_id} ofa ${offer} long Pleya {responder_id} (kisim ${keep}).",
+    "accepted": "Pleya {responder_id} aceptim! Raun {round_number} gains: Pleya {proposer_id} +${proposer_gain}, Pleya {responder_id} +${responder_gain}. Nupela totols: Pleya 0: ${total_0}, Pleya 1: ${total_1}.",
+    "rejected": "Pleya {responder_id} rijeetim ofa! Raun {round_number} gains: Tupela pleya i kisim $0. Totols i stap: Pleya 0: ${total_0}, Pleya 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Man i mekim dispela wok, em i mas raitim wanpela ofa long kain fom olsem [Offer: $X].",
+    "bad_integer": "Namba bilong ol mani i mas stap long wanpela integer.",
+    "out_of_range": "Ol i mas givim mani namel long $0 na ${pool}.",
+    "no_current_offer": "I no gat wanpela tok bilong bekim long dispela.",
+    "accept_or_reject": "Responder mas either [Accept] or [Reject] ofa."
+  },
+  "outcome": {
+    "win": "Pleya {winner} winim na ${winner_total} totol vs Pleya {loser}'s ${loser_total}.",
+    "draw": "Tupela man i winim resis wantaim ${total}."
+  }
+}

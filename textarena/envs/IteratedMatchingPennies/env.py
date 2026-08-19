@@ -16,10 +16,7 @@ class IteratedMatchingPenniesEnv(ta.Env):
 
     def _make_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
         role = "Matcher" if player_id == 0 else "Mismatcher"
-        return (
-            f"You are Player {player_id} ({role}) in a {self.num_rounds}-round Matching Pennies game.\n- Each round, submit [heads] or [tails] (or [h], [t]).\n"
-            "- If your choice matches your opponent’s, Player 0 wins the round; otherwise Player 1 wins.\nReply with your choice in the format '[heads]' or '[tails]'.\n"
-        )
+        return self.m("player_prompt", "intro", player_id=player_id, role=role, num_rounds=self.num_rounds)
 
     def get_board_str(self) -> str:
         gs = self.state.game_state
@@ -33,7 +30,7 @@ class IteratedMatchingPenniesEnv(ta.Env):
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         pid = self.state.current_player_id
         m = self._choice_re.search(action)
-        if not m: self.state.set_invalid_move(reason="Invalid format; please submit '[heads]' or '[tails]'.")
+        if not m: self.state.set_invalid_move(reason=self.m("invalid_move", "wrong_format"))
         else:
             token = m.group(1).lower()
             choice = "heads" if token in ("heads", "h") else "tails"
@@ -43,13 +40,15 @@ class IteratedMatchingPenniesEnv(ta.Env):
                 same = (moves[0] == moves[1])
                 winner = 0 if same else 1
                 self.state.game_state["history"].append(moves.copy())
-                self.state.add_observation(message=f"Player 0 picked {self.state.game_state['moves'][0]}; Player 1 picked {self.state.game_state['moves'][1]}. {'Match -> Player 0 wins' if same else 'Mismatch -> Player 1 wins.'}", observation_type=ta.ObservationType.GAME_MESSAGE)
+                if same: message = self.m("message", "round_match", choice0=self.state.game_state['moves'][0], choice1=self.state.game_state['moves'][1])
+                else:    message = self.m("message", "round_mismatch", choice0=self.state.game_state['moves'][0], choice1=self.state.game_state['moves'][1])
+                self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
                 self.state.game_state["points"][winner] += 1
                 self.state.game_state["round"] += 1
                 self.state.game_state["moves"].clear()
                 if self.state.game_state["round"] > self.num_rounds:
                     p0, p1 = self.state.game_state["points"][0], self.state.game_state["points"][1]
-                    if p0 > p1:     self.state.set_winner(0, reason="Player 0 won more rounds.")
-                    elif p1 > p0:   self.state.set_winner(1, reason="Player 1 won more rounds.")
-                    else:           self.state.set_draw(reason="Overall game is a draw.")
+                    if p0 > p1:     self.state.set_winner(0, reason=self.m("outcome", "p0_wins"))
+                    elif p1 > p0:   self.state.set_winner(1, reason=self.m("outcome", "p1_wins"))
+                    else:           self.state.set_draw(reason=self.m("outcome", "draw"))
         return self.state.step()

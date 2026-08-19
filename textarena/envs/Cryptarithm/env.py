@@ -30,17 +30,17 @@ class CryptarithmEnv(ta.Env):
         self._observe()
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(self.state.current_player_id, action, ta.ObservationType.PLAYER_ACTION)
+        self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
 
         m = self._ACTION_RE.fullmatch(action.strip())
-        if not m: self.state.set_invalid_move(self._progress(), "Bad action format. Use `[A 5]`."); return self.state.step()
+        if not m: self.state.set_invalid_move(self.m("invalid_move", "wrong_format"), self._progress()); return self.state.step()
 
         letter, digit = m.group(1).upper(), int(m.group(2))
 
         # basic validity checks
-        if letter not in self.letters:                                  self.state.set_invalid_move(self._progress(), f"Letter {letter} not in puzzle.");                           return self.state.step()
-        if digit in self.digit_used and self.digit_used[digit]!=letter: self.state.set_invalid_move(self._progress(), f"Digit {digit} already used by {self.digit_used[digit]}.");  return self.state.step()
-        if letter in self.first_letters and digit == 0:                 self.state.set_invalid_move(self._progress(), "Leading digit of a word cannot be 0.");                      return self.state.step()
+        if letter not in self.letters:                                  self.state.set_invalid_move(self.m("invalid_move", "letter_not_in_puzzle", letter=letter), self._progress());                           return self.state.step()
+        if digit in self.digit_used and self.digit_used[digit]!=letter: self.state.set_invalid_move(self.m("invalid_move", "digit_used", digit=digit, used_letter=self.digit_used[digit]), self._progress());  return self.state.step()
+        if letter in self.first_letters and digit == 0:                 self.state.set_invalid_move(self.m("invalid_move", "leading_zero"), self._progress());                      return self.state.step()
 
         # apply (re)assignment
         prev_digit = self.mapping.get(letter)
@@ -53,12 +53,12 @@ class CryptarithmEnv(ta.Env):
 
         # check win / max-turn
         if len(self.mapping) == len(self.letters):
-            if self._equation_holds():      self.state.set_outcome(1.0, "Correct! Equation satisfied.")
-            else:                           self.state.set_outcome(0.0, "Mapping complete but equation incorrect.")
-        elif self.state.check_turn_limit(): self.state.set_outcome(self._progress(), "Move limit reached.")
+            if self._equation_holds():      self.state.set_outcome(1.0, self.m("outcome", "correct"))
+            else:                           self.state.set_outcome(0.0, self.m("outcome", "incorrect"))
+        elif self.state.check_turn_limit(): self.state.set_outcome(self._progress(), self.m("outcome", "limit"))
         return self.state.step()
 
-    def _prompt(self, player_id, game_state) -> str:    return "Map each letter to a unique digit so the arithmetic holds.\nAssign with `[A 5]`, re-assign anytime.\n"
+    def _prompt(self, player_id, game_state) -> str:    return self.m("player_prompt", "intro")
     def _word_value(self, word: str) -> int:            return int(''.join(str(self.mapping[ch]) for ch in word))
     def _equation_holds(self) -> bool:                  return sum(self._word_value(w) for w in self.addends) == self._word_value(self.result) # leading-zero guard already enforced, so just compute integers
     def _progress(self) -> float:                       return len(self.mapping) / len(self.letters)
@@ -73,14 +73,15 @@ class CryptarithmEnv(ta.Env):
         eq_digits = ' + '.join(show_word(w) for w in self.addends) + f' = {show_word(self.result)}'
 
         # 3) Current mapping table
-        mapping_lines = ["Mapping:"]
+        mapping_lines = [self.t("board", "mapping_header", _pid=0)]
         mapping_lines += [f"  {l} → {d}" for l, d in sorted(self.mapping.items())]
         if len(mapping_lines) == 1:
-            mapping_lines.append("  (none yet)")
+            mapping_lines.append(self.t("board", "none_yet", _pid=0))
 
         # Combine everything
         return "\n"+'\n'.join([eq_letters, eq_digits, *mapping_lines])
 
 
     def _observe(self):
-        self.state.add_observation(message=self._render_board()+f"\nAssigned: {len(self.mapping)}/{len(self.letters)} ({self._progress():.0%})", observation_type=ta.ObservationType.GAME_MESSAGE)
+        assigned = self.t("board", "assigned", _pid=0, assigned=len(self.mapping), total=len(self.letters), pct=f"{self._progress():.0%}")
+        self.state.add_observation(message=self._render_board()+assigned, observation_type=ta.ObservationType.GAME_MESSAGE)

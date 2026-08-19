@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Mchezo unaanza. Suti ya Trump: {trump_suit} (kadi ya Trump: {trump_str}).",
+    "no_trump_card": "hakuna"
+  },
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Whist ya Kijerumani.\n{phase_info}\nUna {hand_size} kadi.\nCheza kadi kwa kutumia '[play N]', ambapo N ni nafasi yake katika mkono wako (kwa mfano '[play 3]').",
+    "phase_learning": "MWONGOZO WA KUJIFUNZA: mshindi wa kila mchezo huchukua kadi iliyo wazi na mshindi anachora kadi inayofuata kutoka kwenye sitaha. Mchezo uliowekwa katika hatua hii hauhesabiki kuelekea ushindi.",
+    "phase_playing": "MWONGOZO WA KUCHEZA: sitaha imekamilika. Kila mchezo kutoka sasa utahesabiwa kuelekea ushindi."
+  },
+  "next_card": {
+    "playing_phase": "Hakuna kadi inayotolewa - mwongozo wa kucheza umeanza.",
+    "deck_empty": "Sitaha imekamilika - hakuna kadi inayotolewa.",
+    "available": "Kadi inayotolewa: {card}",
+    "available_trump": "Kadi inayotolewa: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Muundo wa hatua si sahihi. Tumia '[play N]' ili kucheza kadi ya N katika mkono wako.",
+    "bad_position": "Nafasi hiyo ya kadi haipo. Una {hand_size} kadi.",
+    "must_follow_suit": "Lazima ufuate suti na kucheza kadi ya {lead_suit}.",
+    "invalid_play": "Kadi hiyo haiwezi kucheza."
+  },
+  "game_action": {
+    "played": "Mchezaji {player_id} alicheza {card}."
+  },
+  "trick": {
+    "won": "Mchezaji {winner_id} anashinda mchezo kwa {card}.",
+    "won_learning": "Mchezaji {winner_id} anashinda mchezo kwa {card} na kuchukua kadi iliyo wazi."
+  },
+  "phase": {
+    "learning_complete": "Sitaha imekamilika. Mwongozo wa kujifunza umekamilika - kila mchezo uliobaki utahesabiwa kuelekea ushindi."
+  },
+  "draw": {
+    "winner_received": "Ulishinda mchezo na kupokea {card}.",
+    "loser_received": "Ulishindwa mchezo na kuchora {card} kutoka kwenye sitaha.",
+    "winner_preview": "Kadi inayofuata inayotolewa ni {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Michezo iliyoshinda hadi sasa - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
+    "scores_playing": "Michezo inayohesabika - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
+    "phase": "Hatua: {phase}",
+    "phase_learning": "Hatua: {phase} ({remaining_cards} kadi zimesalia kwenye sitaha)"
+  },
+  "hand": {
+    "no_cards": "Hakuna kadi",
+    "no_cards_in_hand": "Hakuna kadi katika mkono",
+    "header": "Mkono wako:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Hakuna kadi zilizochewa bado katika mchezo huu.",
+    "header": "Mchezo wa sasa:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Mchezaji {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Mchezo haujaanza",
+    "header": "=== MCHEZO WA WHIST YA KIJERUMANI ===",
+    "phase": "{observation}\nHatua: {phase}",
+    "trump_suit": "{observation}\nSuti ya Trump: {trump_suit}",
+    "trump_card": "{observation}\nKadi ya Trump: {card}",
+    "cards_left": "{observation}\nKadi zilizobaki kwenye sitaha: {count}",
+    "next_card": "{observation}\nKadi inayofuata kwa mshindi: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nMchezo wa sasa:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Mchezaji {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nMchezaji {player_id}: {scoring} michezo inayohesabika ({tricks} jumla), {hand_size} kadi katika mkono"
+  },
+  "outcome": {
+    "summary": "Mwongozo wa kujifunza - Mchezaji 0: {l0}, Mchezaji 1: {l1}. Mwongozo wa kucheza - Mchezaji 0: {p0}, Mchezaji 1: {p1}. Mchezaji {winner_id} anashinda kwa {winner_tricks} michezo inayohesabika!"
+  }
+}

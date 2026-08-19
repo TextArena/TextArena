@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Oyo nde Ozali Joueur {player_id} na Tic Tac Toe ya Batu Bato.\nElembo na yo ezali '{symbol}'.\nOzali komima na kutambola elembo na yo kati ya planche ya 5 kwa 5 mpo na kotonga ngumba ya minei.\nNgumba ikoki kozala ya mbala-mbala, ya kati, to ya diagonal.\nTambola kimia na formati '[4]' mpo na kombo cellule 4."
+  },
+  "board": {
+    "current_board": "Ebale ya Sika:\n\n{board}\n\nLisolo lya Mikono: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Na lolenge ya kobaluka ezali na ntina te. Salela \"[cell]\" esika oyo cellule eza 0-{max_cell} .",
+    "out_of_range": "Motango ya cellule oyo ezali na ntina te: {cell}. Esengeli kozala kati 0 mpe {max_cell} .",
+    "already_occupied": "Cellule {cell} ezali deja occupée.",
+    "made_invalid": "Mosani {player_id} asali lisano ya mabe."
+  },
+  "game_action": {
+    "placed": "Mokeli {player_id} akeli simba na ye ({symbol}) kwenye seka ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Mokeli {player_id} ({symbol}) azali na mokano!",
+    "draw": "Mokili ekoti libala!"
+  }
+}

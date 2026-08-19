@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Du spielst {color} in einer Partie Breakthrough. Du bewegst dich auf einem {board_size}x{board_size}-Spielfeld in Richtung {direction}.\nIn deinem Zug kannst du einen einzelnen Spielstein ein Feld vorwärts oder diagonal vorwärts bewegen.\nEin Spielstein darf sich nur diagonal bewegen, wenn sich dort ein gegnerischer Spielstein befindet, und darf ein besetztes Feld nur durch einen diagonalen Schritt betreten.\nWenn du ein Feld mit einem gegnerischen Spielstein betrittst, schlägst du ihn, und der gegnerische Spielstein wird dauerhaft vom Spielfeld entfernt.\nVerwende eine UCI-ähnliche Notation in eckigen Klammern, z. B. [a2a3], um von a2 nach a3 zu ziehen.\n* 'a' entspricht der linken Spalte, '1' ist die unterste Reihe (aus Sicht von White).\n* Die Grundreihe von Black ist die oberste Reihe (Reihe 8 bei einem 8x8-Spielfeld). Die Grundreihe von White ist die unterste Reihe (Reihe 1 bei einem 8x8-Spielfeld).\nDer erste Spieler, dessen Spielstein die gegnerische Grundreihe erreicht, gewinnt. Wenn alle deine Spielsteine geschlagen wurden, verlierst du."
+  },
+  "invalid_move": {
+    "wrong_format": "Bitte verwende algebraische Notation in eckigen Klammern wie [a2a3].",
+    "out_of_bounds": "Der Zug liegt außerhalb des Spielfelds.",
+    "illegal": "Dieser Zug entspricht nicht den Breakthrough-Regeln oder der Spielstein gehört dir nicht."
+  },
+  "game_action": {
+    "moved": "Spieler {player_id} zieht {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "White hat die Grundreihe von Black erreicht.",
+    "black_reached": "Black hat die Grundreihe von White erreicht.",
+    "white_captured": "Alle White-Spielsteine wurden geschlagen.",
+    "black_captured": "Alle Black-Spielsteine wurden geschlagen.",
+    "no_moves": "Spieler {player_id} hat keine Züge mehr."
+  }
+}

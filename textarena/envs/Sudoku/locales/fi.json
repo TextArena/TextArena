@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id}. Pelaat Sudokua.\nTässä on Sudokun ruudukon nykytila. Jokainen rivi on numeroitu 1:stä 9:ään, ja jokainen sarake on myös numeroitu 1:stä 9:ään.\nTyhjät solut on merkitty '.', ja esitäytetyt solut sisältävät numeroita 1:stä 9:ään.\n\nNykyinen Sudoku-ruudukko:\nTavoitteesi on täyttää tyhjät solut 9x9-ruudukossa numeroilla 1:stä 9:ään siten, että:\n1. Jokainen rivi sisältää kaikki numerot 1:stä 9:ään ilman toistoa.\n2. Jokainen sarake sisältää kaikki numerot 1:stä 9:ään ilman toistoa.\n3. Jokainen yhdeksän 3x3-aliruudukkoa sisältää kaikki numerot 1:stä 9:ään ilman toistoa.\n\nSäännöt ja ohjeet:\n1. **Älä korvaa** ruudukossa annettuja alkuperäisiä numeroita.\n2. **Täytä vain** tyhjiä soluja, jotka on merkitty '.'.\n3. Voit vastata haluamallasi tavalla, mutta varmista, että vastauksesi sisältää muodon '[rivi sarake numero]'.\n4. **Varmista**, että siirto ei riko Sudokun sääntöjä. Virheelliset siirrot johtavat rangaistuksiin.\nEsimerkit:\n- **Kelvollinen siirto**:\n  - Ruudukon pätkä ennen siirtoa:\n  \n  - Siirto: `[5 3 7]`\n  - Selitys: Numeron 7 sijoittaminen riville 5, sarakkeeseen 3 ei riko Sudokun sääntöjä.\n\n- **Virheellinen siirto** (esitäytetyn solun korvaaminen):\n  - Ruudukon pätkä ennen siirtoa:\n  \n  - Siirto: `[1 1 9]`\n  - Selitys: Solut (1,1) on jo täytetty numerolla 5. Et voi korvata sitä.\n\n- **Virheellinen siirto** (Sudokun sääntöjen rikkominen):\n  - Ruudukon pätkä ennen siirtoa:\n  \n  - Siirto: `[1 3 5]`\n  - Selitys: Numeron 5 sijoittaminen riville 1, sarakkeeseen 3 rikkoo sääntöä, koska numero 5 on jo olemassa rivillä 1.\n\nSiirtosi ja ajatuksesi historia liitetään pelin edetessä. Käytä siirtosi historiaa parantamaan päätöksentekoa välttämällä yritettyjä siirtoja. Onnea!\n\n"
+  },
+  "board": {
+    "game_board": "Pelilauta:\n{board}",
+    "board_state": "Laudan tila: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Virheellinen siirtomuoto. Pelaaja {player_id} ei vastannut kelvollisella 'rivi sarake numero' -muodolla.",
+    "out_of_bounds": "Virheellinen siirto. Pelaaja {player_id} yritti sijoittaa numeron {num} kohtaan ({row}, {col}), joka on laudan ulkopuolella.",
+    "overwrite": "Virheellinen siirto. Pelaaja {player_id} yritti korvata esitäytetyn solun ({row}, {col}).",
+    "violates_rules": "Virheellinen siirto. Pelaaja {player_id} yritti sijoittaa numeron {num} kohtaan ({row}, {col}), mikä rikkoo Sudokun sääntöjä."
+  },
+  "outcome": {
+    "win": "Onnea! Pelaaja {player_id} täytti Sudokun.",
+    "turn_limit": "Vuororaja on saavutettu. Täytit oikein {percent}% tyhjistä soluista."
+  }
+}

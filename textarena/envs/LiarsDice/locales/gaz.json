@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Ati kijibicha {player_id} Liar's Dice gurguddaa {num_players}-kijibicha keessa jirta.\nSeerota:\n- Yeroo kee, ati waan kana gochuu dandeessa:\n  1) Kijibicha haaraa bayinaa olaanaa ykn facettaa olaanaa (ykn lachuu) kijibicha ammaa caalaa; '[Bid: 3, 4]' jedhamu,\n  2) Kijibicha dhumaa '[Call]' jedhee galuu.\n\nYoo ati galuu:\n  - Yoo lakkofsa facettaa ilaalchaa kijibichaa hundumaa kijibicha dhumaa caalaa ta'e, kijibicha dhumaa facettaa tokko dhaba.\n  - Alaa, waamicha facettaa tokko dhaba.\nKijibicha facettaa 0 gahe moo'ame. Kijibicha hafee tokko moo'ata."
+  },
+  "board": {
+    "per_player": "\tPlayer {p}: {d}",
+    "new_round": "\nDhuma haaraa - Facettaa hafee: {dice_summary}\nFacettaa kee ammaa: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Taphattuu {current_player_id} waamicha godhe! Qabee duraan {face_value} qabenyi dhugaa {count} dha, kanas < {quantity}.\nTaphattuu {loser_id} (taphattuu bidde xumuraa) sikkarrii tokko dhabde.",
+    "caller_loses": "Taphattuu {current_player_id} waamicha godhe! Qabee duraan {face_value} qabenyi dhugaa {count} dha, kanas >= {quantity}.\nTaphattuu {loser_id} (waamicha godhee) sikkarrii tokko dhabde."
+  },
+  "action": {
+    "bid_announce": "Taphattuu {player_id} {quantity} qabee {face_value} bide."
+  },
+  "invalid_move": {
+    "call_no_bid": "Waamichi kan godhame, gatii utuu hin dhiheessin dura ture.",
+    "invalid_bid": "Kijibicha diddaa: {reason}",
+    "not_recognized": "Sochii hin beekamne kijibicha '[Bid: X, Y]' ykn '[Call]' miti. Sochii ergamaa: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "New quantity {new_quantity} current {current_quantity}'tti dhahaa.",
+    "face_lower": "New face value {new_face_value} current {current_face_value}'tti dhahaa.",
+    "identical": "Kaffaltiin yeroo ammaa kaffalamuu wajjin wal fakkaata.",
+    "face_range": "Gatiin mul'ataa 1 fi 6 gidduutti ta'uu qaba."
+  },
+  "message": {
+    "eliminated_invalid": "Taphachiisaa {player_id} taphattuu hin taanee waliin dhabamsiifame."
+  },
+  "outcome": {
+    "win": "Kijibicha {winner} moo'ate! Tarree kijibichoota kaasee hanga moo'ataa: {final_ranking}"
+  }
+}

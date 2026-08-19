@@ -1,0 +1,39 @@
+{
+  "_comment": "Fail bahasa ThreePlayerGOPS. JANGAN terjemahkan kunci (sebelah kiri). Terjemahkan nilai sahaja (sebelah kanan). Kekalkan setiap {ruang letak} betul-betul seperti asal. Jangan sekali-kali terjemahkan token kad dalam kurungan (cth. [A], [10], [Q], [K]), serpihan bidaan/mata neutral seperti 'P0:10', tanda '### ' atau simbol '»' dan '→'.",
+  "_slots": {
+    "{player_id}": "Nombor pemain, 0, 1 atau 2",
+    "{round}": "Nombor pusingan semasa, 1..13",
+    "{prize}": "Label kad hadiah yang didedahkan (A, 2..10, J, Q, K) - jangan terjemah",
+    "{worth}": "Jumlah nilai hadiah termasuk sebarang pot yang dibawa ke hadapan",
+    "{hand}": "Kad pemain yang berbaki, dipaparkan sebagai token dalam kurungan seperti '[A]' '[2]' - jangan terjemah",
+    "{bids}": "Senarai neutral kad yang dimainkan dipisahkan koma seperti 'P0:10, P1:J, P2:Q' - jangan terjemah",
+    "{winner}": "Nombor pemain yang memenangi pusingan",
+    "{pot}": "Nilai pot yang dianugerahkan atau dibawa ke hadapan pusingan ini",
+    "{scoreline}": "Papan mata semasa yang neutral seperti 'P0:0  P1:0  P2:11' - jangan terjemah",
+    "{pid}": "Nombor pemain yang telah disingkirkan",
+    "{scores}": "Mata akhir sebagai pemetaan mentah nombor pemain kepada mata - jangan terjemah"
+  },
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam Three-Player GOPS.\n- Anda memegang 13 kad A-K (setiap satu tepat sekali).\n- Setiap pusingan satu hadiah didedahkan. Hantar SATU kad seperti `[Q]`, `[10]`, `[2]` …\n- Kad tertinggi memenangi hadiah (+ sebarang pot yang dibawa ke hadapan). Seri membawa hadiah ke pusingan berikutnya.\n- Selepas 13 pusingan, jumlah tertinggi menang. Gerakan tidak sah = penyingkiran."
+  },
+  "round": {
+    "header": "### Pusingan {round}/13 - Hadiah: {prize} (bernilai {worth})",
+    "hand": "Kad anda yang berbaki: {hand}"
+  },
+  "reveal": {
+    "win": "Bidaan » {bids} - Pemain {winner} menang {pot}.",
+    "tie": "Bidaan » {bids} - seri, pot kini {pot}.",
+    "scores": "Mata → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "tindakan memerlukan kad dalam kurungan seperti '[Q]'",
+    "bad_card": "kad sudah digunakan atau tidak sah"
+  },
+  "elimination": {
+    "player": "Pemain {pid} disingkirkan selepas gerakan tidak sah berulang."
+  },
+  "outcome": {
+    "auto_win": "Dua pemain disingkirkan - kemenangan automatik.",
+    "final": "Mata akhir: {scores}"
+  }
+}

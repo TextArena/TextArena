@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Yaa ngone Player {player_id} ci geexu Spite and Malice ngone ñaari-player. Liggéey ngone la ngone di bàyyi pile ngone payoff.\n\n### Nataal Geexu:\n- Liggéey bi la ngone bàyyi pile ngone payoff ci diiru kaart ci center piles.\n- Màng ni ngone man cee kaart ci ñetti surs:\n  1. Ngone **loxo** (ngone tàmbali kër ci ñaari kaart ci loxo).\n  2. Kaart **ci kow payoff pile**.\n  3. Kaart **ci kow discard piles**.\n\n### Nataal Dox:\n- Ngone màng cee kaart ci center pile bu nu ngone **benn rànk kër** kaart ci kow pile (center piles tàmbali ci Ace ba Queen; Kings ñoo ngone wild - ñoo màng ci kaart bépp, waaye ñoo bàyyul rànk seqoo. Nii la bu nu ngone King ci 4, kon King mòy rànk 5, kaart bu nu ngone ci des ba 6).\n- Bu ngone màngul kaart, ngone **discard kaart** ci discard piles ngone bàyyi ngone tàmbali.\n- Bu center pile bàyyee Queen, ngone bàyyee ci boppam.\n- Rànk seqoo la: A=1, 2=2, ..., 9=9, J=10, Q=11, K ngone wild.\n\n### Liggeeyi:\n1. **Draw**: Ci tàmbali ngone tàmbali, draw kaart ngone bàyyi loxo ngone 5 kaart. Bind **[draw]** ngone tàmbali.\n2. **Play kaart**: Ngone màng kaart, bind kaart ak center pile nii: **[play A♠ 0]** (kaart 'A♠' ak '0' center pile index).\n3. **Discard**: Bu ngone màngul kaart, discard kaart ci loxo ngone discard pile ngone bàyyi ngone tàmbali. Bind **[discard A♠ 1]** (kaart 'A♠' ak '1' discard pile index). Xanaa ngone discard kaart ci payoff pile. Ngone màng kaart ci loxo.\n\n"
+  },
+  "board": {
+    "current_board": "Taabel benn bi:\n\n{board}\nLiggéy yu xool: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pile yu digg yi -- ",
+    "pile": "{observation}Ñuul {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Jigéén {player_id} ---\n",
+    "payoff": "{observation}Kàttan gu gën a sàmm (Koom-koom gu ndaw): {top_card}, Kàttan gu gën a sàmm gu bari: {payoff_length}\n",
+    "hand": "{observation}Ku ngéen am: {hand}\n",
+    "discard": "{observation}Ñuul ñaari: {discard}\n",
+    "empty": "Du am benn baat."
+  },
+  "game_message": {
+    "no_cards_left": "Amul ay kaar yu mën a jël. fàttaliku ne man nga di jëfandikoo xar-jàngu yii: 1. sa loxo 2. kaaraange ji ci kaw bi ngay jot 3. kaaraangu ku nekk ci say tukki yi ñu sànni . "
+  },
+  "invalid_move": {
+    "wrong_format": "Jëf ju amul solo. Njiitu {player_id} tontuwul ak jëfam gu am solo ci ay tëriin yu ñu defare.",
+    "invalid_play": "Jël bu njëkk. Jigéén {player_id} jëlee {card} ñuul gu ndaw {index}.",
+    "discard_from_payoff": "Doxul ngone discard. Player {player_id} bàyyul ngone discard kaart ci payoff pile.",
+    "discard_not_in_hand": "Jëfandikukat {player_id} jéem na a sànni kaarê bu nekkul ci loxoom.",
+    "wrong_move_type": "Jëf ju amul solo. Njiit {player_id} tontuwul ak jëfam gu am solo."
+  },
+  "game_action": {
+    "you_drew": "Dafa nga jël ay kaar.",
+    "opponent_drew": "Jëfandikukat {player_id} jël na ay kaar.",
+    "you_played": "Ngéen jël na {card} ñuul gu ndaw {index}.",
+    "opponent_played": "Jigéén {player_id} jël na {card} ñuul gu ndaw {index}.",
+    "you_discarded": "Ngéen lañu wàcce {card} ñuul ñaari {index}, loolu itam moo taxoon naa la jënd ci jaglé gu ngéen ci wàcc bu leer. Jigéén {next_player_id} di ko def.",
+    "opponent_discarded": "Jëfandikukat {player_id} wàcce {card} ci paxu buuxu {index}, te itam man nañu nekkoon ñu ngone seen tur. Amul benn jëfandikoo bu Jëfandikukat {player_id} ñuy xool ci tur gii. Jëfandikukat {next_player_id}, yaw la ñuy dikkal. Ndawal ma sa jëfandikoo ci njëlbeen [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Jàngoro {current_player} mën naa xamleen seen kuur payóof! Jàngoro {current_player} mën naa gane!",
+    "deadlock_player_0": "Deadlock tàmbalee! Jigéén 0 gën a sàmm ci kàttanakon ci {player_0_payoff} koom-koom kon ci jigéén 1 ci {player_1_payoff} kàttan.",
+    "deadlock_player_1": "Deadlock ngone bàyyi! Player 1 ngone jànde ci {player_1_payoff} kaart ngone bàyyi vs Player 0 {player_0_payoff} kaart.",
+    "deadlock_tie": "Deadlock ngone bàyyi ci tie! Ñaari player ngone {player_0_payoff} kaart ngone bàyyi. Player {current_player} ngone jànde ci boppam."
+  }
+}

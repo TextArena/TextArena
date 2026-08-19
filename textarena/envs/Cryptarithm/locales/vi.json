@@ -1,0 +1,30 @@
+{
+  "_comment": "Tệp ngôn ngữ Cryptarithm. KHÔNG được dịch các khóa (bên trái). Chỉ dịch các giá trị (bên phải). Giữ nguyên mọi {placeholder}; không dịch token gán `[A 5]`, các chữ cái đơn, hoặc số.",
+  "_slots": {
+    "{letter}": "Một chữ cái trong bài đố, ví dụ S hoặc E",
+    "{digit}": "Một số từ 0-9",
+    "{used_letter}": "Chữ cái đã được gán cho một số",
+    "{assigned}": "Số chữ cái đã được gán",
+    "{total}": "Tổng số chữ cái khác nhau",
+    "{pct}": "Tiến độ dưới dạng phần trăm, ví dụ 50%"
+  },
+  "player_prompt": {
+    "intro": "Gán mỗi chữ cái với một số duy nhất để phép tính đúng.\nGán bằng `[A 5]`, có thể thay đổi bất kỳ lúc nào.\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Định dạng hành động không đúng. Sử dụng `[A 5]`.",
+    "letter_not_in_puzzle": "Chữ cái {letter} không có trong bài đố.",
+    "digit_used": "Số {digit} đã được sử dụng bởi {used_letter}.",
+    "leading_zero": "Chữ số hàng đầu của một từ không thể là 0."
+  },
+  "outcome": {
+    "correct": "Đúng! Phương trình đã được thỏa mãn.",
+    "incorrect": "Đã gán đầy đủ nhưng phương trình không đúng.",
+    "limit": "Đã đạt giới hạn lượt di chuyển."
+  },
+  "board": {
+    "mapping_header": "Gán:",
+    "none_yet": "  (chưa có)",
+    "assigned": "\nĐã gán: {assigned}/{total} ({pct})"
+  }
+}

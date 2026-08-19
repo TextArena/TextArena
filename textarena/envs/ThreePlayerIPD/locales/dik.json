@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Yin ee Player {player_id} ee 3-player Iterated Prisoner's Dilemma. Match ee dhieth {num_rounds} rounds.\nKoc ee round:\n• {conv_rounds} akuen kek thiaan\n• 1 akuen kek bany - cuet akuen tok per opponent: '[<opp-id> cooperate]' ku '[<opp-id> defect]' (kec. '[1 defect] [2 cooperate]'; default ee 'cooperate'). \nMatrix ee payoff ee riinic (applied ee koor ee unordered pair):\n  - Koor ee cooperate  ->  {reward}\n  - Koor ee defect     ->  {punishment}\n  - Yin defect, kek cooperate -> {temptation}\n  - Yin cooperate, kek defect -> {sucker}\nPlayer(s) ee adhieth score ee koor ee rounds aacuei ee win."
+  },
+  "round": {
+    "start": "─── Yin ee koor Round {round} ───\tYin aakuem converse freely ee {conv_rounds} rounds.",
+    "chat_finished": "Chat ee koor ee round {round}. Cuet kek decisions, akuen tok per opponent: `[pid cooperate]` ku `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Kë cï yök:",
+    "pair_line": "{observation}\n\t Jɛnɛ {i} ku Jɛnɛ {j} aake ye {choice_i} ku {choice_j} ɣɔ̈ɔ̈r (Jɛnɛ {i} aake ciɛ̈ɛ̈ŋ {gain_i}, Jɛnɛ {j} aake ciɛ̈ɛ̈ŋ {gain_j})",
+    "scores_open": "{observation} -> Kä ye kek yök në yemɛɛn: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}  ye kɔc cï gam ke puɔ̈th miɛt."
+  },
+  "outcome": {
+    "final": "Kɛmken ë riɛl: {scores}.  Thökëric ë bɛ̈i (kɛm ë bɛ̈n → kɛm ë lɔ): {groups}"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_comment": "Skedari i lokalizimit për Klondike Solitaire. MOS përkthej çelësat (ana e majtë). Përkthej vetëm vlerat (ana e djathtë).",
+  "_slots": {
+    "{n}": "Indeksi i veprimit brenda një komande të ndarë me presje, bazuar në 1",
+    "{msg}": "Një mesazh i rezultatit të veprimit të brendshëm (tashmë i lokalizuar)",
+    "{count}": "Numri i kartave me fytyrë lart që po lëvizin",
+    "{src}": "Numri i grumbullimit të tabelës burimore, bazuar në 1",
+    "{dst}": "Numri i grumbullimit të destinacionit, bazuar në 1",
+    "{cmd}": "Komanda e panjohur që ka shkruar lojtari (nuk është përkthyer)",
+    "{max_turns}": "Numri maksimal i radhëve përpara se loja të mbarojë",
+    "{score}": "Numri i kartave aktualisht në grumbullimet e themelit",
+    "{board}": "Bordi i ASCII i vizatuar (nuk përkthehet kurrë)",
+    "{turn}": "Numri aktual i radhës",
+    "{stock}": "Numri i kartave të mbetura në stoq",
+    "{waste}": "Etiketa e kartës së mbeturisë së sipërme, ose '--' nëse është bosh (nuk përkthehet kurrë)",
+    "{cards}": "Kartat në një grumbull si etiketa neutrale, ose '--' nëse është bosh (nuk përkthehet kurrë)"
+  },
+  "player_prompt": {
+    "intro": "Ju po luani Klondike Solitaire. Qëllimi juaj është të lëvizni të gjitha kartat në grumbullimet e themelit.\n\nRregullat e Lojës:\n- Grumbullimet e themelit (F1-F4): Ndërtoni lart nga Açi në Mbret në ngjyrë\n- Grumbullimet e tabelës (T1-T7): Ndërtoni poshtë duke alternuar ngjyrat (e kuqe në të zezë, e zezë në të kuqe)\n- Stoq: Tërheqni kartat në grumbullimin e mbeturisë\n- Mbeturisë (W): Kartë e sipërme në dispozicion për të luajtur\n\nKomandat:\n- 'draw' - Tërheqni kartat nga stoq në mbeturisë\n- 'move <burim> <destinacion> [numër]' - Lëvizni kartat midis grumbullimeve\n  Shembuj: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Numri mund të jetë gjithashtu 'all', i cili do të përpiqet të lëvizë të gjitha kartat me fytyrë lart.\n- 'forfeit' - Mbaroni lojën menjëherë dhe bllokojeni rezultatin tuaj aktual\n- Emrat e grumbullimeve: W (mbeturisë), F1-F4 (themel), T1-T7 (tabelë)\n\nJu mund të ekzekutoni veprime të shumta në një radhë duke i ndarë ato me presje:\n  Shembull: 'draw, move W T1, move T2 F1'\n\nVetëm Mbretërit mund të vendosen në grumbullimet e tabelës bosh.\nVeprimet ekzekutohen sipas radhës - nëse njëra dështon, veprimet e mbetura anulohen.\nPërdorni 'forfeit' nëse besoni se loja është e pamundur të fitohet."
+  },
+  "format_error": {
+    "no_brackets": "Format i gabuar i veprimit. Veprimi duhet të jetë në kllapa.",
+    "no_closing_bracket": "Format i gabuar i veprimit. Mungon kllapa e mbylljes ']'",
+    "empty_command": "Komandë bosh. Shkruani 'draw' ose 'move <burim> <destinacion> [numër]'",
+    "empty_action": "Veprim bosh",
+    "move_needs_args": "Komanda 'move' kërkon burim dhe destinacion. Përdorimi: 'move <burim> <destinacion> [numër]'",
+    "count_positive": "Numri duhet të jetë pozitiv ose 'all'",
+    "count_invalid": "Numër i gabuar. Përdorni një numër ose 'all'",
+    "unknown_command": "Komandë e panjohur '{cmd}'. Përdorni 'draw', 'move <burim> <destinacion> [numër]', ose 'forfeit'",
+    "wrapped": "Veprimi {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Veprimi {n}: {msg}",
+    "before_failure": "Ekzekutuan {n} veprim(e) përpara dështimit.",
+    "failed": "Veprimi {n} dështoi: {msg}"
+  },
+  "move_result": {
+    "drew": "Tërheqën kartë(n) nga stoq në mbeturisë.",
+    "cannot_draw": "Nuk mund të tërheqni. Të dyja stoq dhe mbeturisë janë bosh.",
+    "invalid_pile": "Emër i gabuar i grumbullimit. Përdorni W, F1-F4, ose T1-T7",
+    "foundation_one_card": "Mund të lëvizni vetëm 1 kartë në themel",
+    "waste_to_foundation_ok": "Lëvizën kartën nga mbeturisë në themel F{dst}",
+    "waste_to_foundation_bad": "Nuk mund të lëvizni kartën e mbeturisë në atë grumbullim të themelit",
+    "tableau_to_foundation_ok": "Lëvizën kartën nga tabelë T{src} në themel F{dst}",
+    "tableau_to_foundation_bad": "Nuk mund të lëvizni kartën e tabelës në atë grumbullim të themelit",
+    "foundation_to_foundation": "Nuk mund të lëvizni nga themeli në themel",
+    "waste_to_tableau_one_card": "Mund të lëvizni vetëm 1 kartë nga mbeturisë në tabelë",
+    "waste_to_tableau_ok": "Lëvizën kartën nga mbeturisë në tabelë T{dst}",
+    "waste_to_tableau_bad": "Nuk mund të vendosni kartën e mbeturisë në atë grumbullim të tabelës",
+    "no_face_up": "Nuk ka kartë me fytyrë lart për të lëvizur",
+    "tableau_to_tableau_ok": "Lëvizën {count} kartë(n) nga tabelë T{src} në T{dst}",
+    "tableau_to_tableau_bad": "Nuk mund të lëvizni {count} kartë(n) nga T{src} në T{dst}",
+    "foundation_to_tableau_one_card": "Mund të lëvizni vetëm 1 kartë nga themeli në tabelë",
+    "foundation_empty": "Themeli F{src} është bosh",
+    "foundation_to_tableau_ok": "Lëvizën kartën nga themeli F{src} në tabelë T{dst}",
+    "foundation_to_tableau_bad": "Nuk mund të vendosni kartën e themelit në tabelë T{dst}",
+    "to_waste_or_stock": "Nuk mund të lëvizni në mbeturisë ose stoq"
+  },
+  "outcome": {
+    "forfeit": "Loja është dorëzuar. Rezultati final: {score} kartë në themel.",
+    "won": "Urime! Ju keni fituar Klondike Solitaire!",
+    "turn_limit": "Loja mbaroi! Ju arritët në maksimumin e {max_turns} radhëve. Rezultati: {score} kartë në themel."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Rradha: {turn}/{max_turns}",
+    "stock": "Stoq: {stock} kartë",
+    "waste": "Mbeturisë (W): {waste}",
+    "foundations_header": "Themel:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabelë:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

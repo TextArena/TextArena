@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Igrate {color} u igri Breakthrough. Krećete se {direction} na ploči veličine {board_size}x{board_size}.\nU svom potezu možete pomaknuti jednu figuru jedan korak naprijed ili dijagonalno naprijed.\nFigura se može kretati dijagonalno samo ako se na tom mjestu nalazi protivnikova figura, a samo se može pomaknuti u takav zauzet kvadrat dijagonalnim korakom.\nKada stupite u kvadrat s protivnikovom figurom, zarobljavate je i protivnikova figura se trajno uklanja s ploče.\nKoristite UCI-sličnu notaciju u zagradama, npr. [a2a3] za pomicanje iz a2 u a3.\n* 'a' odgovara lijevom stupcu, '1' je donji red (iz perspektive bijelog).\n* Početni red crnog je gornji red (red 8 za 8x8). Početni red bijelog je donji red (red 1 za 8x8).\nPrvi igrač čija figura dosegne protivnikov početni red pobjeđuje. Ako su sve vaše figure zarobljene, gubite."
+  },
+  "invalid_move": {
+    "wrong_format": "Molimo koristite zagradama algebraičku notaciju kao [a2a3].",
+    "out_of_bounds": "Potez je izvan granica ploče.",
+    "illegal": "Taj potez ne slijedi pravila Breakthrough ili nije vaša figura."
+  },
+  "game_action": {
+    "moved": "Igrač {player_id} pomiče {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Bijeli je dosegao crni početni red.",
+    "black_reached": "Crni je dosegao bijeli početni red.",
+    "white_captured": "Sve bijele figure su zarobljene.",
+    "black_captured": "Sve crne figure su zarobljene.",
+    "no_moves": "Igrač {player_id} nema više poteza."
+  }
+}

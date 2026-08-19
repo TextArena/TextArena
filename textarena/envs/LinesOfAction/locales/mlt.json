@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Inti Plejer {player_id} f'logħba ta' LinesOfAction.\nIl-biċċiet tiegħek huma '{side}', il-biċċiet tal-avversarju huma '{other}'.\nFormat tal-mossa: `[b1b3]` (mill-koordinata tal-oriġini sal-koordinata tad-destinazzjoni). Mossa legali tas-saqaf tivvjaġġa orizzontalment, vertikalment, jew diagonalment numru ta' kwadri ugwali għat-totalità tal-biċċiet (kull kulur) f'dik il-linja. Tista' taqbeż il-biċċiet tiegħek stess, imma mhux il-biċċiet tal-avversarju; it-tiniżża fuq avversarju jieħu.  Rebħa meta il-biċċiet kollha tiegħek huma konnessi 8-ġirien."
+  },
+  "board": {
+    "current_board": "Il-Bord: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Il-format għandu jkun e2e4 (minn,sa koordinati).",
+    "no_piece": "L-ebda biċċa {side} fuq {coord}.",
+    "identical": "Is-sors u d-destinazzjoni huma identiċi.",
+    "not_straight_or_diagonal": "Il-moviment għandu jkun dritta jew dijagonali.",
+    "wrong_distance": "Irid jimxi distanza ugwali għal biċċiet f'linja.",
+    "enemy_blocks": "Il-biċċa ta 'l-għadu timblokka t-triq.",
+    "destination_own": "Destinata okkupata minn biċċa proprja."
+  },
+  "game_action": {
+    "moved": "Player {player_id} mova {from} -> {to}",
+    "captured_suffix": "Il-plejer {player_id} mexa {from} -> {to} u qabża għadu."
+  },
+  "outcome": {
+    "win": "Il- biċċiet kollha huma konnessi.",
+    "draw_no_capture": "60 miexja mingħajr ma jinqabad.",
+    "draw_repetition": "Pożizzjoni ripetuta tliet darbiet."
+  }
+}

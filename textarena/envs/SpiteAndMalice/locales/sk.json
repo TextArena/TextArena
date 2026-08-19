@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} v dvojhráčskej hre Spite and Malice. Váš cieľ je byť prvý, kto vyprázdni svoj výplatný stĺp.\n\n### Prehľad hry:\n- Cieľom je vyčistiť váš výplatný stĺp hraním kariet do centrálnych stĺpcov.\n- Môžete hrať karty z troch zdrojov:\n  1. Vaša **ruka** (začína každý ťah s až 5 kartami v ruke).\n  2. **Horná karta vášho výplatného stĺpu**.\n  3. **Horná karta ktoréhokoľvek vášho odhadzovacieho stĺpu**.\n\n### Pravidlá hry:\n- Môžete hrať kartu do centrálného stĺpu, ak je **o jednu hodnotu vyššia** ako horná karta na tom stĺpe (centrálne stĺpy začínajú esom a pokračujú až po kráľovnú; králi sú divokí - môžu byť hraní na ľubovoľnú kartu, ale nezmenia poradie hodnôt. To znamená, že ak je kráľ použitý po 4, potom je ten kráľ hodnotený ako 5 a ďalšia karta musí byť 6).\n- Ak nemôžete hrať žiadne ďalšie karty, musíte **odhodiť kartu** do jedného z vašich odhadzovacích stĺpcov, aby ste ukončili váš ťah.\n- Ak centrálny stĺp dosiahne kráľovnú, bude automaticky vyčistený.\n- Poradie hodnôt je: A=1, 2=2, ..., 9=9, J=10, Q=11, K ako divoký.\n\n### Akcie:\n1. **Ľútosť**: Na začiatku vášho ťahu, ťúpte karty, aby ste naplnili vašu ruku až na 5 kariet. Zadajte **[draw]**, aby ste začali.\n2. **Hrajte kartu**: Ak chcete hrať kartu, špecifikujte kartu a centrálny stĺp takto: **[play A♠ 0]** (kde 'A♠' je karta a '0' je index centrálného stĺpu).\n3. **Odhodiť**: Ak nemôžete hrať žiadne ďalšie karty, odhodiť kartu z vašej ruky do odhadzovacieho stĺpu, aby ste ukončili váš ťah. Zadajte **[discard A♠ 1]** (kde 'A♠' je karta a '1' je index odhadzovacieho stĺpu). Poznámka: Nemôžete odhodiť žiadnu kartu z výplatného stĺpu. Môžete odhodiť iba karty z vašej ruky.\n\n"
+  },
+  "board": {
+    "current_board": "Aktuálna doska:\n\n{board}\nDostupné ťahy: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Centrálne stĺpy ---\n",
+    "pile": "{observation}Stĺp {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Pohľad hráča {player_id} ---\n",
+    "payoff": "{observation}Výplatný stĺp (horná karta): {top_card}, dĺžka výplatného stĺpu: {payoff_length}\n",
+    "hand": "{observation}Ruka: {hand}\n",
+    "discard": "{observation}Odhadzovacie stĺpy: {discard}\n",
+    "empty": "Prázdny"
+  },
+  "game_message": {
+    "no_cards_left": "Nie sú žiadne ďalšie karty na ťúpanie. Nezabudnite, že môžete hrať karty z týchto zdrojov:\n  1. Vaša **ruka**.\n  2. **Horná karta vášho výplatného stĺpu**.\n  3. **Horná karta ktoréhokoľvek vášho odhadzovacieho stĺpu**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát ťahu. Hráč {player_id} neodpovedal s platným ťahom v hranatých zátvorkách.",
+    "invalid_play": "Neplatná hra. Hráč {player_id} sa pokúsil hrať {card} na centrálny stĺp {index}.",
+    "discard_from_payoff": "Neplatné odhodenie. Hráč {player_id} sa pokúsil odhodiť kartu z výplatného stĺpu.",
+    "discard_not_in_hand": "Neplatné odhodenie. Hráč {player_id} sa pokúsil odhodiť kartu, ktorá nie je v ruke.",
+    "wrong_move_type": "Neplatný typ ťahu. Hráč {player_id} neodpovedal s platným typom ťahu."
+  },
+  "game_action": {
+    "you_drew": "Ťúpite karty.",
+    "opponent_drew": "Hráč {player_id} ťúpal karty.",
+    "you_played": "Hrali ste {card} na centrálny stĺp {index}.",
+    "opponent_played": "Hráč {player_id} hral {card} na centrálny stĺp {index}.",
+    "you_discarded": "Odhodili ste {card} do odhadzovacieho stĺpu {index}, čo tiež znamená, že ste ukončili váš ťah. Žiadne ďalšie akcie sa už nebudú považovať za váš ťah. Hráč {next_player_id} bude hrať ďalej.",
+    "opponent_discarded": "Hráč {player_id} odhodil {card} do odhadzovacieho stĺpu {index}, čo tiež znamená, že ukončil svoj ťah. Žiadne ďalšie akcie sa už nebudú považovať za ťah hráča {player_id}. Hráč {next_player_id}, budete hrať ďalej. Zadajte svoju akciu v formáte [akcia karta centrálny_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Hráč {current_player} dokončil svoj výplatný stĺp! Hráč {current_player} zvíťazil!",
+    "deadlock_player_0": "Dosiahnutý pat! Hráč 0 zvíťazil s {player_0_payoff} kartami zostávajúcimi oproti {player_1_payoff} kartám hráča 1.",
+    "deadlock_player_1": "Dosiahnutý pat! Hráč 1 zvíťazil s {player_1_payoff} kartami zostávajúcimi oproti {player_0_payoff} kartám hráča 0.",
+    "deadlock_tie": "Dosiahnutý pat s remízou! Oba hráči majú {player_0_payoff} kariet zostávajúcich. Hráč {current_player} zvíťazil predvolene."
+  }
+}

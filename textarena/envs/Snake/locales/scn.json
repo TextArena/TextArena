@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Jucaturi di Serpi supra a na {width}×{height} griglia.\nTu cuntrolli serpi {player_id}. Muvimenti validi: '[up]'/'[down]'/'[left]'/'[right]' (o w/s/a/d).\nObbiettivu: sopravviviri più longu o essiri lu più longu e ottèniri lu punteggiu più àutu (limiti di turni {max_turns} turni)."
+  },
+  "board": {
+    "current": "Cunsigliu attuale: {board}",
+    "after_moves": "Statu attuale di u Cunsigliu: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Snake {player_id} murìu pi via di na mossa nun valida."
+  },
+  "outcome": {
+    "survived_win": "Lu jucaturi {player_id} supravivìu; tutti l'àutri pirìaru.",
+    "all_dead_simul": "Tutti li serpenti mureru simultaneamente.",
+    "outlived": "Lu jocaturi supiravi tutti l'àutri.",
+    "all_dead": "Tutti li serpenti morti.",
+    "turn_limit": "Limitu di curva raggiunutu - u megliu punteggiu vince a parità.",
+    "ranking": "{reason} Classifica finali dei gruppi (peggiu→migliuri): {groups}"
+  }
+}

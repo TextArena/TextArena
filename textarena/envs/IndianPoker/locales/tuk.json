@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Siz Hindistan Pokeri oýunynyň {player_id} oýunçysy.\n- 52 kartlyk kolleksiýa; siz diňe garşydaşyň kartyny görýärsiňiz.\n- Her raundda {ante} žeton(lar)ýňyz, jemi {max_rounds} raund(lar).\n- Düzgün hereketler: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X sanyňyzdaky žetonlardan az ýa-da deň bolan ýokary san.)\n- Görlenmeýän iň ýokary kart ýeňiş kassynda ýeňýär.\n"
+  },
+  "round": {
+    "announce": "### Tur {current_round}/{max_rounds}\nGarşydaşyňyz ýaly kart: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Bir käti ýaly ýeke-täk gaplaň action goý, mysal: '[check]', '[bet 2]', '[call]', '[raise 3]', ýa-da '[fold]'.",
+    "cannot_check": "[check] edip bilmeris - sen bahana durýarsyň.",
+    "amount_min": "Wepalylyk / köpelme möçberi ≥ 1 bolmaly.",
+    "cannot_bet": "Siz [bet] edip bilmeýsiz - [call] / [raise] / [fold] bilmelisiz.",
+    "nothing_to_call": "Hiç zat aýtma; siz [check] etmeseňiz bolar.",
+    "no_bet_to_raise": "Açmak üçin [bet X] ulanyň; artdyrmaga bahasy ýok.",
+    "insufficient": "Şeýle hereket üçin ýeterlik jeton ýok."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (maliýe {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Siziň mümkin hereketleriňiz: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Kazyna {pot} → Oýnaýjy {winner}. (Bankroll P0:{p0}, P1:{p1})",
+    "folded": "Oýunçy {player_id} ýykyldy.",
+    "showdown_win": "Showdown: {card_win} beats {card_lose}.",
+    "showdown_tie": "Showdown tie: both {card}. Pot split – each receives {split}."
+  },
+  "outcome": {
+    "p0_wins": "Oýnaýjy 0 ýeňýär ({bank0} > {bank1})",
+    "p1_wins": "Oýnaýjy 1 ýeňýär ({bank1} > {bank0})",
+    "draw": "Hemme turlardan soň deň çepiň bolmagy ."
+  }
+}

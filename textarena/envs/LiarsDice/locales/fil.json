@@ -1,0 +1,55 @@
+{
+  "_comment": "Mga string na nakaharap sa user para sa Liar's Dice. Ang mga bracketed na token ng pagkilos ('[Bid: X, Y]', '[Call]'), mga id ng manlalaro, mga halaga ng mukha ng dice, mga kantidad at mga bilang ay mga neutral na slot at hindi dapat isalin.",
+  "_slots": {
+    "player_id": "indeks ng manlalaro (integer)",
+    "num_players": "bilang ng mga manlalaro sa laro (integer)",
+    "dice_summary": "naunang rendered na '; '-nakasali na mga natitirang bilang ng dice sa bawat manlalaro",
+    "your_dice": "naunang rendered na comma-nakasali na listahan ng mga halaga ng mukha ng dice ng manlalarong ito",
+    "p": "indeks ng manlalaro (integer)",
+    "d": "natitirang bilang ng dice para sa manlalarong iyon (integer)",
+    "current_player_id": "indeks ng manlalaro na tumawag (integer)",
+    "face_value": "halaga ng mukha ng dice na binibilang (1-6)",
+    "count": "aktwal na bilang ng mga tumutugmang dice (integer)",
+    "quantity": "kantidad ng bid (integer)",
+    "loser_id": "indeks ng manlalaro na nawalan ng isang die (integer)",
+    "new_quantity": "kantidad ng bid na bagong isinumite (integer)",
+    "current_quantity": "kasalukuyang kantidad ng bid (integer)",
+    "new_face_value": "halaga ng mukha ng bid na bagong isinumite (integer)",
+    "current_face_value": "kasalukuyang halaga ng mukha ng bid (integer)",
+    "action": "ang raw na string ng pagkilos na isinumite ng manlalaro",
+    "reason": "isang nested na dahilan ng pagtanggi ng bid",
+    "winner": "indeks ng manlalaro na nanalo (integer)",
+    "final_ranking": "listahan ng mga indeks ng manlalaro mula sa unang naalis hanggang sa nanalo"
+  },
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa isang {num_players}-manlalarong laro ng Liar's Dice.\nMga Patakaran:\n- Sa iyong pagkakataon, maaari kang:\n  1) Gumawa ng isang bagong bid na may mas mataas na kantidad o mas mataas na mukha (o pareho) kaysa sa kasalukuyang bid; hal. '[Bid: 3, 4]',\n  2) Tawagan ang huling bid sa pamamagitan ng pag-type ng '[Call]'.\n\nKung tatawag ka:\n  - Kung ang aktwal na bilang ng halagang iyon ng mukha sa lahat ng dice ay mas mababa kaysa sa bid, ang huling bidder ay nawalan ng isang die.\n  - Kung hindi, ang tumawag ay nawalan ng isang die.\nAng manlalaro na umabot sa 0 dice ay naalis. Ang huling natitirang manlalaro ay nanalo."
+  },
+  "board": {
+    "per_player": "\tManlalaro {p}: {d}",
+    "new_round": "\nBagong round - Mga natitirang dice: {dice_summary}\nAng iyong kasalukuyang Dice ay: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Manlalaro {current_player_id} tumawag! Ang aktwal na bilang ng mukha {face_value} ay {count}, na mas mababa kaysa sa {quantity}.\nManlalaro {loser_id} (ang huling bidder) ay nawalan ng isang die.",
+    "caller_loses": "Manlalaro {current_player_id} tumawag! Ang aktwal na bilang ng mukha {face_value} ay {count}, na mas mataas o katumbas ng {quantity}.\nManlalaro {loser_id} (ang tumawag) ay nawalan ng isang die."
+  },
+  "action": {
+    "bid_announce": "Manlalaro {player_id} ay nag-bid ng {quantity} ng mukha {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Tawag na ginawa nang walang naunang bid.",
+    "invalid_bid": "Hindi wastong bid: {reason}",
+    "not_recognized": "Pagkilos na hindi kinikilala bilang isang wastong '[Bid: X, Y]' o '[Call]'. Isinumiteng pagkilos: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Bagong kantidad {new_quantity} ay mas mababa kaysa sa kasalukuyang {current_quantity}.",
+    "face_lower": "Bagong halaga ng mukha {new_face_value} ay mas mababa kaysa sa kasalukuyang {current_face_value}.",
+    "identical": "Bid ay magkapareho sa kasalukuyang bid.",
+    "face_range": "Halaga ng mukha ay dapat nasa pagitan ng 1 at 6."
+  },
+  "message": {
+    "eliminated_invalid": "Manlalaro {player_id} ay naalis dahil sa hindi wastong pagkilos."
+  },
+  "outcome": {
+    "win": "Manlalaro {winner} ay nanalo! Pangwakas na ranggo: {final_ranking}"
+  }
+}

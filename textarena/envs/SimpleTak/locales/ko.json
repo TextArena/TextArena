@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "당신은 SimpleTak의 플레이어 {player_id}입니다.\n보드에서 당신의 돌은 '{player_stone}'로 표시되고, 상대방의 돌은 '{opponent_stone}'로 표시됩니다.\n\n당신의 차례에는 빈 셀(번호로 지정)을 하나 선택하여 돌을 놓아야 합니다.\n예를 들어, '[12]'는 셀 12에 돌을 놓습니다.\n\n당신의 목표는 보드의 두 반대쪽 가장자리(상하 또는 좌우)를 연결하는 연속적인 돌의 경로를 만드는 것입니다."
+  },
+  "invalid_move": {
+    "invalid_move_format": "잘못된 수 형식",
+    "cell_out_of_range": "잘못된 셀 번호 {cell_num}. 0과 {max_board_num} 사이여야 합니다.",
+    "cell_already_occupied": "셀 {cell_num}은 이미 차지되어 있습니다. 빈 셀을 선택하세요."
+  },
+  "board": {
+    "current_state": "현재 보드:\n\n{rendered_board}\n가능한 수: {available_moves}"
+  },
+  "action": {
+    "placement": "플레이어 {current_player_id}가 셀 {cell_num}에 돌({symbol})을 놓았습니다."
+  },
+  "outcome": {
+    "winner": "플레이어 {current_player_id} ('{symbol}')가 두 반대쪽 가장자리를 연결했습니다!",
+    "draw": "보드가 가득 찼습니다. 무승부입니다!"
+  }
+}

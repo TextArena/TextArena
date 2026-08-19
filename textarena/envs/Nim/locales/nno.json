@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spelar {player_id} i Nim.\nMålet ditt er å ta den siste gjenverande objektet.\nPå kvar omgang, vel ein haug og fjern ein eller fleire objekter frå han.\nBruk formatet '[pile quantity]', der haug er haugindeks og mengd er talet på objekter å fjerna.\nTil dømes, '[0 3]' fjernar 3 objekter frå haug 0."
+  },
+  "state": {
+    "current_pile": "I dag: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Det finst ikkje gyldig format for flyt. Bruk \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Spelar {player_id}, Ugyldig handling. Kolonne {col} er utanfor grensene.",
+    "out_of_range": "Pileindeksen {pile_index} er ute av området.",
+    "non_positive": "Må fjerne minst 1 objekt.",
+    "exceeds_pile": "Kan ikkje fjerna {quantity} frå haug {pile_index} (berre {pile_count} att)."
+  },
+  "observation": {
+    "removed_from_piles": "Spelar {player_id} spelte [{pile_index} {quantity}], og fjerna {quantity} objekt frå haug {pile_index}."
+  },
+  "outcome": {
+    "win": "Spelaren {player_id} tok den siste objektet ((s)!)"
+  }
+}

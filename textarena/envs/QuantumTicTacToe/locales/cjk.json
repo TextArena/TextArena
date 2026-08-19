@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Nwi uka Player {player_id} mu Quantum Tic Tac Toe.\nChisimbolo chako ni '{symbol}', na nambari za kucheza kwako zilizo na {parity} (kwa mfano, X1, X3 au O2, O4).\n\nLengo: Ushinde kwa kuunda mstari wa alama tatu za kitamaduni (zilizotengenezwa kutoka kwa hali ya juu).\n\nJinsi ya Kucheza:\n- Katika kila zamu, weka alama ya kutisha katika miraba miwili tofauti tupu kwa kutumia fomu '[a,b]'.\n- Alama hizi zimeunganishwa, na zimeandikwa kama 'X1 / X1' au 'O4 / O4'.\n- Huwezi kuweka alama za kutisha katika mraba ambao tayari umekuwa imara (uliotengenezwa).\n\nKanuni ya Kuanguka:\n- Ikiwa hatua yako inaunda mzunguko katika grafu ya kuunganisha, inaanguka kiotomatiki.\n- Kila alama ya kutisha katika mzunguko inabadilika kuwa alama ya kitamaduni katika moja ya nafasi zake mbili.\n- Alama zozote zinazotegemea alama za kutisha pia huanguka.\n\nUshindi:\n- Mchezo unaisha wakati mchezaji ana alama tatu za kitamaduni mfululizo.\n- Ikiwa wachezaji wote wawili wanapata mstari wakati wa kuanguka kwa wakati mmoja, yule aliye na nambari ndogo ya juu ya kucheza anashinda.\n\nMfano wa hatua: '[0,4]' huweka alama ya kutisha katika seli 0 na 4."
+  },
+  "board": {
+    "current_board": "Bodi ya Quantum Tic Tac Toe:\n\n{board}\n\nTuma hatua yako kama '[a,b]' ili kuweka alama ya quantum katika maeneo mawili."
+  },
+  "invalid_move": {
+    "wrong_format": "Muundo usio sahihi. Tumia '[a,b]'.",
+    "invalid_cells": "Vitengo vya seli visivyo sahihi au vinavyojirudia.",
+    "already_solidified": "Kengele ya seli yeyi yi binika."
+  },
+  "game_action": {
+    "placed": "Mchezaji {player_id} aliweka chisimbolo chake katika hali ya juu kati ya seli {pos_a} na {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Hali ya juu inayotegemea imepatikana. Seli ({r}, {c}) sasa ni {symbol}.",
+    "last_cell_resolved": "Hali ya juu ya seli ya mwisho imepatikana. Seli ({r}, {c}) sasa ni {symbol}.",
+    "superposition_resolved": "Hali ya juu imepatikana. Seli ({r}, {c}) sasa ni {symbol}."
+  },
+  "outcome": {
+    "win": "Mchezaji {player_id} anashinda na alama zilizotengenezwa!",
+    "draw": "Mchezo ni sare!"
+  }
+}

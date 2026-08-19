@@ -1,0 +1,34 @@
+{
+    "player_prompt": {
+        "intro": "Anda ialah {role} dalam permainan Colonel Blotto.\nMatlamat anda adalah untuk memenangi lebih banyak pusingan daripada pihak lawan.\nDalam setiap pusingan, agihkan tepat {num_total_units} unit merentasi medan {field_names}.\nPemain yang memperuntukkan lebih banyak unit pada sesuatu medan memenangi medan tersebut, dan pemain yang memenangi lebih banyak medan memenangi pusingan itu.\nSebagai contoh, '[A7 B7 C6]' memperuntukkan 7 unit kepada A, 7 kepada B dan 6 kepada C.",
+        "commander_alpha": "Komander Alpha",
+        "commander_beta": "Komander Beta"
+    },
+
+    "game_state": {
+        "header_round": "=== COLONEL BLOTTO - Pusingan {current_round}/{num_rounds} ===\nPusingan dimenangi - Komander Alpha: {alpha_score}, Komander Beta: {beta_score}"
+    },
+
+    "round_battle": {
+        "field_result": "\nPusingan {current_round}\nKomander Alpha mengagihkan: {p0_allocations}\nKomander Beta mengagihkan: {p1_allocations}\n",
+        "winner_alpha": "{message}Pemenang: Komander Alpha",
+        "winner_beta": "{message}Pemenang: Komander Beta",
+        "tie": "{message}Seri!"
+    },
+
+    "invalid_move": {
+        "wrong_format": "Format input tidak sah. Gunakan: A:5, B:10, C:5",
+        "invalid_field": "Nama medan tidak sah. Medan yang sah: {field_names}",
+        "wrong_allocation_value": "Semua agihan mestilah nombor bulat bukan negatif.",
+        "incorrect_total_units": "Anda mesti mengagihkan tepat {num_total_units} unit. Jumlah semasa: {current_sum}",
+        "good_allocations": "Agihan adalah betul."
+    },
+
+    "outcome": {
+        "winner_alpha": "Komander Alpha menang {score_0}-{score_1} selepas {num_rounds} pusingan!",
+        "winner_beta": "Komander Beta menang {score_1}-{score_0} selepas {num_rounds} pusingan!",
+        "draw": "Permainan berakhir seri {score_0}-{score_1} selepas {num_rounds} pusingan!",
+        "early_winner_alpha": "Komander Alpha menang {scores_0}-{scores_1} (majoriti dicapai)!",
+        "early_winner_beta": "Komander Beta menang {scores_1}-{scores_0} (majoriti dicapai)!"
+    }
+}

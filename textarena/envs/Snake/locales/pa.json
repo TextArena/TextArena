@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-ਪਲੇਅਰ ਸਨੇਕ ਇੱਕ {width}×{height} ਗ੍ਰਿਡ 'ਤੇ।\nਤੁਸੀਂ ਸਨੇਕ {player_id} ਨੂੰ ਕੰਟਰੋਲ ਕਰਦੇ ਹੋ। ਵਾਜੀ ਮੂਵਜ਼: '[up]'/'[down]'/'[left]'/'[right]' (ਜਾਂ w/s/a/d)।\nਉਦੇਸ਼: ਸਭ ਤੋਂ ਲੰਬੇ ਸਮੇਂ ਤੱਕ ਬਚੇ ਰਹੋ ਜਾਂ ਸਭ ਤੋਂ ਲੰਬਾ ਹੋਵੋ ਅਤੇ ਸਭ ਤੋਂ ਉੱਚਾ ਸਕੋਰ ਪ੍ਰਾਪਤ ਕਰੋ (ਮੋੜ ਸੀਮਾ {max_turns} ਮੋੜ)।"
+  },
+  "board": {
+    "current": "ਮੌਜੂਦਾ ਬੋਰਡ: {board}",
+    "after_moves": "ਮੌਜੂਦਾ ਬੋਰਡ ਰਾਜ: {board}"
+  },
+  "game_action": {
+    "invalid_death": "ਸੱਪ {player_id} ਦੀ ਮੌਤ ਅਵੈਧ ਚਾਲ ਕਾਰਨ ਹੋਈ।"
+  },
+  "outcome": {
+    "survived_win": "ਖਿਡਾਰੀ {player_id} ਬਚ ਗਿਆ; ਬਾਕੀ ਸਾਰੇ ਮਾਰੇ ਗਏ।",
+    "all_dead_simul": "ਸਾਰੇ ਸੱਪ ਇੱਕੋ ਵੇਲੇ ਮਰ ਗਏ।",
+    "outlived": "ਖਿਡਾਰੀ ਨੇ ਹੋਰਨਾਂ ਸਾਰਿਆਂ ਨੂੰ ਪਛਾੜ ਦਿੱਤਾ।",
+    "all_dead": "ਸਾਰੇ ਸੱਪ ਮਰੇ ਹੋਏ ਹਨ।",
+    "turn_limit": "ਵਾਰੀ ਦੀ ਸੀਮਾ ਪਹੁੰਚ ਗਈ - ਸਭ ਤੋਂ ਵਧੀਆ ਸਕੋਰ ਜਿੱਤ-ਤੋੜ ਜਿੱਤਦਾ ਹੈ।",
+    "ranking": "{reason} ਅੰਤਮ ਰੈਂਕਿੰਗ ਸਮੂਹ (ਸਭ ਤੋਂ ਬੁਰਾ→ਸਭ ਤੋਂ ਵਧੀਆ): {groups}"
+  }
+}

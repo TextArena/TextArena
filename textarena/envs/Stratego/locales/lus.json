@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "I Stratego-ah Player {player_id} i ni.\nI tum ber chu i khingpui Flag emaw, an piece sawi theih zawng zawng emaw i lakluh a ni.\nI sipai te chu board-ah i tan dah a ni tawh, Flag, Bomb, leh piece dangte pawh rank hrang hrang neiin.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - I turn-ah chuan piece pakhat i sawi thei, a thawl khat i sawi thei a, square pawn lam (up, down, left, or right) ah i sawi thei a, i piece ngei a awm tawh kher a ni.\n   - Example: Piece pakhat chuan A1 atangin B1 emaw, A1 atangin A2 ah i sawi thei a, B1 leh A2 ah i piece ngei a awm loh chuan.\n   - I thlan piece chu Bomb emaw, Flag emaw a nih chuan i sawi thei lo.\n2. **Battles:**\n   - I sawi a, khingpui piece a awmna square-ah chuan inbeihna a awm ang:\n     - Rank sang zawk piece chuan a chak a, khingpui piece a lakluh.\n     - Rank a inang chuan piece pahnih a lak a ni.\n     - **Special Cases:**\n       - Bomb chuan a lakluh a, Miner chuan Bomb a tichhe thei.\n       - Spy chuan Marshal a hneh thei a, Spy in a hmasa a, a chak a, a thua leh piece dang zawng zawng.\n3. **Strategic Goals:**\n   - I khingpui piece te i hriat a, an movement leh inbeihna atangin.\n   - I Flag i ven a, i khingpui Flag i lakluh tum a.\n   - Scout i hmang fai a, i khingpui piece te i hriat a, a hneh theih loh piece i bei.\n\n### How to Make a Move:\n1. I sawi duh piece leh a kalna i sawi.\n2. Format hman tur: [A0 B0], A0 chu source position a ni a, B0 chu destination a ni.\n   - Example: Piece pakhat i sawi a, row 0, column 0 atangin row 1, column 0 ah i sawi a, input [A0 B0].\n3. Destination a valid a, movement rules a zulzui a ni.\n\n### Important Notes:\n- Board chuan i piece leh an position a show ang, e.g. MN, MS.\n- Board chuan i khingpui piece position a show bawk a, an rank a show lo, e.g. ?.\n- ~ a awmna grid chu dil a ni a, a sawi theih loh.\n- Suggestion: I game i tan a, i piece i sawi a, front line-ah a awm a, i khingpui piece i hriat a. Player 0 leh player 1 front line chu row D leh G a ni.\n\nBoard state tunlai:\n"
+  },
+  "board": {
+    "current_board": "Board tunlai:\n\n{board}\nSawi theihna: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action format a dik lo. Player {player_id} chuan move a input format [A0 B0] a hmang lo.",
+    "invalid_coordinates": "Action format a dik lo. Player {player_id} chuan coordinate a dik lo a hmang.",
+    "not_own_piece": "Action format diklo. Player {player_id} chuan mahni piece pakhat a thlak tur a ni.",
+    "scout_through_pieces": "Action format diklo. Player {player_id} chuan scout chu piece dangin a thlak thei lo.",
+    "scout_diagonal": "Action format diklo. Player {player_id} chuan scout chu a diagonal-a sawn thei lo ang.",
+    "non_scout_multi_square": "Thiltih dan dik loh. Scout tih loh piece dangte chuan vawi khat ah square khat chiah an kal thei.",
+    "move_into_lake": "Action format diklo. Player {player_id} chuan lake-ah a lut thei lo ang.",
+    "move_onto_own_piece": "Action format diklo. Player {player_id} chuan mahni piece-ah a lut thei lo.",
+    "move_bomb_or_flag": "Action format diklo. Player {player_id} chuan bomb emaw, flag emaw a hnutchhiah thei lo ang."
+  },
+  "game_action": {
+    "you_moved": "Nang chuan nang piece a awmna atanga {source} ah a kal a, a kalna hmun ah {dest} a thleng a.",
+    "opponent_moved": "Player {player_id} chuan a piece a awmna atanga {source} ah a kal a, a kalna hmun ah {dest} a thleng a.",
+    "you_equal_ranks": "Nang chuan nang piece a awmna atanga {source} ah a kal a, a kalna hmun ah {dest} a thleng a. Attacking piece chu {attacking_rank} a ni a, destination piece chu {target_rank} a ni. Rank te chu an in ang ve va, chuvangin piece pahnih te chu an chawl ve ta.",
+    "opponent_equal_ranks": "Player {player_id} chuan a piece a awmna atanga {source} ah a kal a, a kalna hmun ah {dest} a thleng a. Attacking piece chu {attacking_rank} a ni a, destination piece chu {target_rank} a ni. Rank te chu an in ang ve va, chuvangin piece pahnih te chu an chawl ve ta.",
+    "you_miner_defused": "Nang chuan nang piece a awmna atanga {source} ah a kal a, a kalna hmun ah {dest} a thleng a. Attacking piece chu {attacking_rank} a ni a, destination piece chu {target_rank} a ni. Miners chu bomb an defuse thei va, chuvangin nang chak zawk e.",
+    "opponent_miner_defused": "Player {player_id} chuan a piece a awmna atanga {source} ah a kal a, a kalna hmun ah {dest} a thleng a. Attacking piece chu {attacking_rank} a ni a, destination piece chu {target_rank} a ni. Miners chu bomb an defuse thei va, chuvangin i chak lo e.",
+    "you_bomb_lost": "Nang chuan nang piece a awmna atanga {source} ah a kal a, a kalna hmun ah {dest} a thleng a. Attacking piece chu {attacking_rank} a ni a, destination piece chu {target_rank} a ni. Attacker chu miner ni lova, chuvangin nang chak lo e.",
+    "opponent_bomb_won": "Player {player_id} chuan a piece a awmna atanga {source} ah a kal a, a kalna hmun ah {dest} a thleng a. Attacking piece chu {attacking_rank} a ni a, destination piece chu {target_rank} a ni. Attacker chu miner ni lova, chuvangin i chak zawk e.",
+    "you_spy_won": "Nang chuan nang piece a awmna atanga {source} ah a kal a, a kalna hmun ah {dest} a thleng a. Attacking piece chu {attacking_rank} a ni a, destination piece chu {target_rank} a ni. Attacker chu spy a ni a, destination chu marshall a ni va, chuvangin nang chak zawk e.",
+    "opponent_spy_lost": "Player {player_id} chuan a piece a awmna atanga {source} ah a kal a, a kalna hmun ah {dest} a thleng a. Attacking piece chu {attacking_rank} a ni a, destination piece chu {target_rank} a ni. Attacker chu spy a ni a, destination chu marshall a ni va, chuvangin i chak lo e.",
+    "you_higher_won": "Nang chuan nang piece a awmna atanga {source} ah a kal a, a kalna hmun ah {dest} a thleng a. Attacking piece chu {attacking_rank} a ni a, destination piece chu {target_rank} a ni. Attacker chu destination ai a sang zawk a, chuvangin nang chak zawk e.",
+    "opponent_higher_lost": "Player {player_id} chuan a piece a awmna atanga {source} ah a kal a, a kalna hmun ah {dest} a thleng a. Attacking piece chu {attacking_rank} a ni a, destination piece chu {target_rank} a ni. Attacker chu destination ai a sang zawk a, chuvangin i chak lo e.",
+    "you_lower_lost": "Nang chuan nang piece a awmna atanga {source} ah a kal a, a kalna hmun ah {dest} a thleng a. Attacking piece chu {attacking_rank} a ni a, destination piece chu {target_rank} a ni. Attacker chu destination ai a tlem zawk a, chuvangin nang chak lo e.",
+    "opponent_lower_won": "Player {player_id} chuan piece a sawi a, {source} atangin {dest} ah. A piece rank a {attacking_rank} a ni a, destination piece rank a {target_rank} a ni. Attacker a rank a hniam zawk a ni a, a chak a ni."
+  },
+  "outcome": {
+    "flag_captured": "Player {player_id} chuan a khingpui flag chu a man ta!",
+    "no_movable_pieces": "Player {winner_id} chuan a chak! Player {loser_id} chuan piece kal thei a nei tawh lo."
+  }
+}

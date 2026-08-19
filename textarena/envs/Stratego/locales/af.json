@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in Stratego.\nJou doel is om jou teenstander se Vlag te verower of al hul beweegbare stukke te elimineer.\nJou leër is vir jou op die bord geplaas, insluitend jou Vlag, Bomme en ander stukke van wisselende range.\n\n### Speelreëls\n1. **Bewegingsreëls:**\n   - Op jou beurt kan jy een stuk een stap na 'n aangrensende vierkant (bo, onder, links of regs) beweeg wat reeds deur jou stukke beset is.\n   - Voorbeeld: 'n Stuk kan van A1 na B1 of A1 na A2 beweeg as B1 en A2 nie deur die speler se eie stukke beset is nie.\n   - As die geselekteerde stuk 'n Bom of 'n Vlag is, kan dit nie beweeg word nie.\n2. **Gevegte:**\n   - As jy op 'n vierkant beweeg wat deur 'n teenstander se stuk beset is, sal 'n geveg plaasvind:\n     - Die stuk met die hoër rang wen en elimineer die teenstander se stuk.\n     - As die range gelyk is, word beide stukke van die bord verwyder.\n     - **Spesiale Gevalle:**\n       - Bomme elimineer die meeste aanvallende stukke behalwe Mynwerkers, wat Bomme ontlont.\n       - Spioene kan die Maarskalk verslaan as die Spioen eerste aanval, maar verloor teen alle ander stukke.\n3. **Strategiese Doelwitte:**\n   - Identifiseer jou teenstander se stukke deur hul bewegings en gevegte.\n   - Beskerm jou Vlag terwyl jy probeer om jou teenstander se Vlag te verower.\n   - Gebruik Verkenners strategies om inligting oor jou teenstander se stukke te verkry en swak stukke aan te val.\n\n### Hoe om 'n Beweging te Maak:\n1. Spesifiseer die koördinate van die stuk wat jy wil beweeg en sy bestemming.\n2. Gebruik die formaat: [A0 B0], waar A0 die bronposisie is en B0 die bestemming.\n   - Voorbeeld: Om 'n stuk van ry 0, kolom 0 na ry 1, kolom 0 te beweeg, voer [A0 B0] in.\n3. Verseker dat die bestemming geldig is volgens die bewegingsreëls hierbo.\n\n### Belangrike Notas:\n- Die bord sal jou stukke en hul posisies wys, bv. MN, MS.\n- Die bord sal ook bekende posisies van jou teenstander se stukke wys sonder om hul range te openbaar, bv. ?.\n- Roste met ~ is mere en kan nie beweeg word nie.\n- As 'n voorstel, begin jou spel deur jou stukke wat op die voorste linies is te beweeg om inligting oor jou teenstander se stukke te verkry. Speler 0 en speler 1 se voorste linies is ry D en G onderskeidelik.\n\nHier is die huidige bordtoestand:\n"
+  },
+  "board": {
+    "current_board": "Huidige Bord:\n\n{board}\nBeskikbare Skuiwe: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldige aksieformaat. Speler {player_id} het nie 'n skuif in die formaat [A0 B0] ingevoer nie.",
+    "invalid_coordinates": "Ongeldige aksieformaat. Speler {player_id} het nie geldige koördinate ingevoer nie.",
+    "not_own_piece": "Ongeldige aksieformaat. Speler {player_id} moet een van hul eie stukke beweeg.",
+    "scout_through_pieces": "Ongeldige aksieformaat. Speler {player_id} kan nie 'n verkenningsstuk deur ander stukke beweeg nie.",
+    "scout_diagonal": "Ongeldige aksieformaat. Speler {player_id} kan nie 'n verkenningsstuk diagonaal beweeg nie.",
+    "non_scout_multi_square": "Ongeldige aksieformaat. Stukke, behalwe verkenningsstukke, kan slegs een vierkant op 'n slag beweeg.",
+    "move_into_lake": "Ongeldige aksieformaat. Speler {player_id} kan nie in die meer beweeg nie.",
+    "move_onto_own_piece": "Ongeldige aksieformaat. Speler {player_id} kan nie op hul eie stuk beweeg nie.",
+    "move_bomb_or_flag": "Ongeldige aksieformaat. Speler {player_id} kan nie 'n bom of vlag beweeg nie."
+  },
+  "game_action": {
+    "you_moved": "Jy het jou stuk van {source} na {dest} beweeg.",
+    "opponent_moved": "Speler {player_id} het 'n stuk van {source} na {dest} beweeg.",
+    "you_equal_ranks": "Jy het jou stuk van {source} na {dest} beweeg. Die aanvallende stuk was {attacking_rank} en die bestemmingsstuk was {target_rank}. Aangesien die range gelyk is, het beide stukke verloor.",
+    "opponent_equal_ranks": "Speler {player_id} het 'n stuk van {source} na {dest} beweeg. Die aanvallende stuk was {attacking_rank} en die bestemmingsstuk was {target_rank}. Aangesien die range gelyk is, het beide stukke verloor.",
+    "you_miner_defused": "Jy het jou stuk van {source} na {dest} beweeg. Die aanvallende stuk was {attacking_rank} en die bestemmingsstuk was {target_rank}. Aangesien mynwerkers bomme kan ontlont, het jy die geveg gewen.",
+    "opponent_miner_defused": "Speler {player_id} het 'n stuk van {source} na {dest} beweeg. Die aanvallende stuk was {attacking_rank} en die bestemmingsstuk was {target_rank}. Aangesien mynwerkers bomme kan ontlont, het jy die geveg verloor.",
+    "you_bomb_lost": "Jy het jou stuk van {source} na {dest} beweeg. Die aanvallende stuk was {attacking_rank} en die bestemmingsstuk was {target_rank}. Aangesien die aanvaller nie 'n mynwerker is nie, het jy die geveg verloor.",
+    "opponent_bomb_won": "Speler {player_id} het 'n stuk van {source} na {dest} beweeg. Die aanvallende stuk was {attacking_rank} en die bestemmingsstuk was {target_rank}. Aangesien die aanvaller nie 'n mynwerker is nie, het jy die geveg gewen.",
+    "you_spy_won": "Jy het jou stuk van {source} na {dest} beweeg. Die aanvallende stuk was {attacking_rank} en die bestemmingsstuk was {target_rank}. Aangesien die aanvaller 'n spioen is en die bestemmingsstuk 'n maarskalk is, het jy die geveg gewen.",
+    "opponent_spy_lost": "Speler {player_id} het 'n stuk van {source} na {dest} beweeg. Die aanvallende stuk was {attacking_rank} en die bestemmingsstuk was {target_rank}. Aangesien die aanvaller 'n spioen is en die bestemmingsstuk 'n maarskalk is, het jy die geveg verloor.",
+    "you_higher_won": "Jy het jou stuk van {source} na {dest} beweeg. Die aanvallende stuk was {attacking_rank} en die bestemmingsstuk was {target_rank}. Aangesien die aanvaller 'n hoër rang het as die bestemmingsstuk, het jy die geveg gewen.",
+    "opponent_higher_lost": "Speler {player_id} het 'n stuk van {source} na {dest} beweeg. Die aanvallende stuk was {attacking_rank} en die bestemmingsstuk was {target_rank}. Aangesien die aanvaller 'n hoër rang het as die bestemmingsstuk, het jy die geveg verloor.",
+    "you_lower_lost": "Jy het jou stuk van {source} na {dest} beweeg. Die aanvallende stuk was {attacking_rank} en die bestemmingsstuk was {target_rank}. Aangesien die aanvaller 'n laer rang het as die bestemmingsstuk, het jy die geveg verloor.",
+    "opponent_lower_won": "Speler {player_id} het 'n stuk van {source} na {dest} beweeg. Die aanvallende stuk was {attacking_rank} en die bestemmingsstuk was {target_rank}. Aangesien die aanvaller 'n laer rang het as die bestemmingsstuk, het jy die geveg gewen."
+  },
+  "outcome": {
+    "flag_captured": "Speler {player_id} het die teenstander se vlag verower!",
+    "no_movable_pieces": "Speler {winner_id} wen! Speler {loser_id} het geen meer beweegbare stukke nie."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في لعبة Chopsticks. في دورك، اختر واحد من:\n  + هجوم: '[attack M O]' حيث M=يدك (0 أو 1)، O=يد الخصم (0 أو 1).\n    - عدد أصابع الخصم يزيد بمقدار أصابعك؛ إذا كان >=5، يصبح 0.\n  + تقسيم: '[split L R]' لإعادة توزيع أصابعك الإجمالية إلى L و R (L+R = إجمالي أصابعك).\nأجِب بأحد هذه الأوامر فقط."
+  },
+  "board": {
+    "current_board": "اللوحة الحالية:\nاللاعب 0: {hands_0}\nاللاعب 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "يدك {my_idx} ميتة.",
+    "opp_hand_dead": "يد الخصم {opp_idx} ميتة.",
+    "split_sum": "يجب ان يكون مجموع القسمة {total}.",
+    "split_no_change": "لا بد ان سبليت يغير توزيع اليدين.",
+    "invalid_command": "الحركة غير صالحة. استخدم “[attack M O]” أو “[split L R]”."
+  },
+  "game_action": {
+    "attack": "اللاعب {player_id} يهاجم يد اللاعب {opp_id} {opp_idx}: تنتقل من {opp_val} إلى {new_val}.",
+    "split": "P{player_id} splits into [{L}, {R}]."
+  },
+  "history": {
+    "entry": "اللاعب {player_id} {desc}"
+  },
+  "outcome": {
+    "win": "كِلا يَدَي الخصم ميتين.",
+    "draw": "حد التحول وصل."
+  }
+}

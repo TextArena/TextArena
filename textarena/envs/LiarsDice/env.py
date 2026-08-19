@@ -23,12 +23,7 @@ class LiarsDiceEnv(ta.Env):
         self._roll_new_dice()
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are Player {player_id} in an {self.state.num_players}-player Liar's Dice game.\n"
-            "Rules:\n- On your turn, you may either:\n  1) Make a new bid with a higher quantity or higher face (or both) than the current bid; i.e. '[Bid: 3, 4]',\n  2) Call the last bid by typing '[Call]'.\n\n"
-            "If you call:\n  - If the actual count of that face value among all dice is less than the bid, the last bidder loses one die.\n"
-            "  - Otherwise, the caller loses one die.\nA player who reaches 0 dice is eliminated. The last remaining player wins."
-        )
+        return self.m("player_prompt", "intro", player_id=player_id, num_players=self.state.num_players)
 
     def _roll_new_dice(self):
         self.state.game_state["current_bid"] = {"quantity": 0, "face_value": 0}
@@ -39,7 +34,8 @@ class LiarsDiceEnv(ta.Env):
             new_dice_rolls[pid] = [random.randint(1, 6) for _ in range(count)]
         self.state.game_state["dice_rolls"] = new_dice_rolls
         for pid, rolled in new_dice_rolls.items(): # Send each player their new private dice
-            message = "\nNew round - Remaining dice: " + "; ".join([f"\tPlayer {p}: {d}" for p, d in self.state.game_state["remaining_dice"].items()]) + f"\nYour current Dice are: {', '.join(map(str, rolled))}"
+            dice_summary = "; ".join([self.m("board", "per_player", p=p, d=d).render(_pid=pid) for p, d in self.state.game_state["remaining_dice"].items()])
+            message = self.m("board", "new_round", dice_summary=dice_summary, your_dice=', '.join(map(str, rolled)))
             self.state.add_observation(to_id=pid, message=message, observation_type=ta.ObservationType.GAME_BOARD)
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
@@ -51,7 +47,7 @@ class LiarsDiceEnv(ta.Env):
             last_bidder_id = self.state.game_state["last_bidder_id"]
 
             if last_bidder_id is None or current_bid["quantity"] == 0: # No existing bid to call
-                self._handle_invalid_move(reason="Call made with no prior bid.")
+                self._handle_invalid_move(reason=self.m("invalid_move", "call_no_bid"))
                 return self.state.step(rotate_player=False)
 
             # Count how many dice across all players match face_value
@@ -61,10 +57,10 @@ class LiarsDiceEnv(ta.Env):
 
             if total_face_count < current_bid["quantity"]: # If the actual count is lower, last bidder was bluffing -> last bidder loses a die
                 loser_id = last_bidder_id
-                msg = f"Player {self.state.current_player_id} calls! The actual count of face {current_bid['face_value']} is {total_face_count}, which is LESS than {current_bid['quantity']}.\nPlayer {loser_id} (the last bidder) loses one die."
+                msg = self.m("call", "bidder_loses", current_player_id=self.state.current_player_id, face_value=current_bid['face_value'], count=total_face_count, quantity=current_bid['quantity'], loser_id=loser_id)
             else: # Otherwise, the caller loses a die
                 loser_id = self.state.current_player_id
-                msg = f"Player {self.state.current_player_id} calls! The actual count of face {current_bid['face_value']} is {total_face_count}, which is >= {current_bid['quantity']}.\nPlayer {loser_id} (the caller) loses one die."
+                msg = self.m("call", "caller_loses", current_player_id=self.state.current_player_id, face_value=current_bid['face_value'], count=total_face_count, quantity=current_bid['quantity'], loser_id=loser_id)
 
             self._apply_die_loss(loser_id, msg)
             self._rotate_players()
@@ -79,15 +75,15 @@ class LiarsDiceEnv(ta.Env):
             if is_valid:
                 self.state.game_state["current_bid"] = {"quantity": new_quantity, "face_value": new_face_value}
                 self.state.game_state["last_bidder_id"] = self.state.current_player_id
-                self.state.add_observation(message=f"Player {self.state.current_player_id} bids {new_quantity} of face {new_face_value}.", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+                self.state.add_observation(message=self.m("action", "bid_announce", player_id=self.state.current_player_id, quantity=new_quantity, face_value=new_face_value), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
                 self._rotate_players()
-            else: 
-                self._handle_invalid_move(reason=f"Invalid bid: {reason}")
+            else:
+                self._handle_invalid_move(reason=self.m("invalid_move", "invalid_bid", reason=reason))
             
             return self.state.step(rotate_player=False)
 
         # 3. If neither a valid call nor bid, it's invalid
-        self._handle_invalid_move(reason=f"Action not recognized as either a valid '[Bid: X, Y]' or '[Call]'. Submitted action: {action}")
+        self._handle_invalid_move(reason=self.m("invalid_move", "not_recognized", action=action))
         return self.state.step(rotate_player=False)
     
     def _handle_invalid_move(self, reason: str):
@@ -95,7 +91,7 @@ class LiarsDiceEnv(ta.Env):
         was_eliminated = self.state.set_invalid_move(reason=reason)
         if was_eliminated:
             # need to handle environment. Rotate players and start next round
-            self.state.add_observation(from_id=ta.GAME_ID, to_id=-1, message=f"Player {self.state.current_player_id} was eliminated by invalid move.", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(from_id=ta.GAME_ID, to_id=-1, message=self.m("message", "eliminated_invalid", player_id=self.state.current_player_id), observation_type=ta.ObservationType.GAME_MESSAGE)
             self.state.game_state["remaining_dice"][self.state.current_player_id] = 0
             # self.state.add_elimination(self.state.current_player_id)
             self._roll_new_dice()
@@ -116,10 +112,10 @@ class LiarsDiceEnv(ta.Env):
 
     def _is_valid_bid(self, new_quantity: int, new_face_value: int, current_bid: Dict[str, int]) -> Tuple[bool, str]:
         # Standard Liar's Dice rule: new bid must be "higher" in either quantity or face  You cannot lower either value, and the new bid can't be exactly the same.
-        if new_quantity < current_bid['quantity']: return False, f"New quantity {new_quantity} is lower than current {current_bid['quantity']}."
-        if new_face_value < current_bid['face_value']: return False, f"New face value {new_face_value} is lower than current {current_bid['face_value']}."
-        if new_quantity == current_bid['quantity'] and new_face_value == current_bid['face_value']: return False, "Bid is identical to the current bid."
-        if not (1 <= new_face_value <= 6): return False, "Face value must be between 1 and 6."
+        if new_quantity < current_bid['quantity']: return False, self.m("bid_reason", "quantity_lower", new_quantity=new_quantity, current_quantity=current_bid['quantity'])
+        if new_face_value < current_bid['face_value']: return False, self.m("bid_reason", "face_lower", new_face_value=new_face_value, current_face_value=current_bid['face_value'])
+        if new_quantity == current_bid['quantity'] and new_face_value == current_bid['face_value']: return False, self.m("bid_reason", "identical")
+        if not (1 <= new_face_value <= 6): return False, self.m("bid_reason", "face_range")
         return True, ""
 
     def _set_outcome(self):
@@ -128,4 +124,4 @@ class LiarsDiceEnv(ta.Env):
         for rank, pid in enumerate(final_ranking):
             reward = -1.0 + 2.0 * (rank / (self.state.num_players - 1))
             reward_dict[pid] = reward
-        self.state.set_game_outcome(reward_dict=reward_dict, reason=f"Player {final_ranking[-1]} wins! Final ranking: {final_ranking}")
+        self.state.set_game_outcome(reward_dict=reward_dict, reason=self.m("outcome", "win", winner=final_ranking[-1], final_ranking=final_ranking))

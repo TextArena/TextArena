@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në Chopsticks. Në radhën tuaj, zgjidhni një nga:\n  + Sulm:  '[attack M O]'  ku M=dora juaj (0 ose 1), O=dora e kundërshtarit (0 ose 1).\n    - Numri i gishtave të dorës së kundërshtarit rritet me numrin e gishtave të dorës suaj; nëse >=5, bëhet 0.\n  + Ndarje:   '[split L R]'  për të ridistribuuar gishtat tuaj të përgjithshëm në L dhe R (L+R = totali juaj).\nPërgjigjuni me saktësisht një nga këto komanda."
+  },
+  "board": {
+    "current_board": "Bordi aktual:\nLojtari 0: {hands_0}\nLojtari 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Dora juaj {my_idx} është e vdekur.",
+    "opp_hand_dead": "Dora e kundërshtarit {opp_idx} është tashmë e vdekur.",
+    "split_sum": "Ndarja duhet të jetë e barabartë me {total}.",
+    "split_no_change": "Ndarja duhet të ndryshojë shpërndarjen e dorës suaj.",
+    "invalid_command": "Lëvizje e pavlefshme. Përdorni “[attack M O]” ose “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} sulmon dorën {opp_idx} të P{opp_id}: ajo kalon nga {opp_val} në {new_val}.",
+    "split": "P{player_id} ndahet në [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Të dyja duart e kundërshtarit janë të vdekura.",
+    "draw": "Kufiri i radhëve është arritur."
+  }
+}

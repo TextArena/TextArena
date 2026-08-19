@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "খেলা শুরু হয়েছে। ট্রাম্প স্যুট: {trump_suit} (ট্রাম্প কার্ড: {trump_str})।",
+    "no_trump_card": "কোনো ট্রাম্প কার্ড নেই"
+  },
+  "player_prompt": {
+    "intro": "আপনি জার্মান হুইস্টে খেলোয়াড় {player_id}।\n{phase_info}\nআপনার হাতে {hand_size} কার্ড আছে।\n'[play N]' ব্যবহার করে একটি কার্ড খেলুন, যেখানে N হল আপনার হাতে কার্ডের অবস্থান (উদাহরণস্বরূপ '[play 3]')।",
+    "phase_learning": "শিক্ষার পর্যায়: প্রতিটি ট্রিকের বিজয়ী মুখোমুখি কার্ডটি নেয় এবং পরাজিত ব্যক্তি ডেক থেকে পরবর্তী কার্ডটি আঁকেন। এই পর্যায়ে জিতে নেওয়া ট্রিকগুলি বিজয়ের দিকে গণনা করা হয় না।",
+    "phase_playing": "খেলার পর্যায়: ডেকটি শেষ হয়ে গেছে। এখন থেকে প্রতিটি ট্রিক বিজয়ের দিকে গণনা করা হয়।"
+  },
+  "next_card": {
+    "playing_phase": "কোনো কার্ড প্রস্তাব করা হয়নি - খেলার পর্যায় শুরু হয়েছে।",
+    "deck_empty": "ডেকটি খালি - কোনো কার্ড প্রস্তাব করা হয়নি।",
+    "available": "কার্ড প্রস্তাব করা হয়েছে: {card}",
+    "available_trump": "কার্ড প্রস্তাব করা হয়েছে: {card} (ট্রাম্প)"
+  },
+  "invalid_move": {
+    "wrong_format": "ভুল চাল বিন্যাস। '[play N]' ব্যবহার করে আপনার হাতে Nম কার্ডটি খেলুন।",
+    "bad_position": "সেই কার্ডের অবস্থান বিদ্যমান নেই। আপনার হাতে {hand_size} কার্ড আছে।",
+    "must_follow_suit": "আপনাকে অবশ্যই স্যুট অনুসরণ করতে হবে এবং একটি {lead_suit} কার্ড খেলতে হবে।",
+    "invalid_play": "সেই কার্ডটি খেলা যাবে না।"
+  },
+  "game_action": {
+    "played": "খেলোয়াড় {player_id} {card} খেলেছেন।"
+  },
+  "trick": {
+    "won": "খেলোয়াড় {winner_id} {card} দিয়ে ট্রিকটি জিতেছেন।",
+    "won_learning": "খেলোয়াড় {winner_id} {card} দিয়ে ট্রিকটি জিতেছেন এবং মুখোমুখি কার্ডটি নিয়েছেন।"
+  },
+  "phase": {
+    "learning_complete": "ডেকটি শেষ হয়ে গেছে। শিক্ষার পর্যায় শেষ হয়েছে - প্রতিটি অবশিষ্ট ট্রিক বিজয়ের দিকে গণনা করা হয়।"
+  },
+  "draw": {
+    "winner_received": "আপনি ট্রিকটি জিতেছেন এবং {card} পেয়েছেন।",
+    "loser_received": "আপনি ট্রিকটি হেরেছেন এবং ডেক থেকে {card} আঁকেন।",
+    "winner_preview": "পরবর্তী কার্ডটি প্রস্তাব করা হয়েছে {card}।"
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "এখন পর্যন্ত জিতে নেওয়া ট্রিক - খেলোয়াড় 0: {tricks0}, খেলোয়াড় 1: {tricks1}",
+    "scores_playing": "স্কোরিং ট্রিক - খেলোয়াড় 0: {tricks0}, খেলোয়াড় 1: {tricks1}",
+    "phase": "পর্যায়: {phase}",
+    "phase_learning": "পর্যায়: {phase} ({remaining_cards} কার্ড ডেকে বাকি আছে)"
+  },
+  "hand": {
+    "no_cards": "কোনো কার্ড নেই",
+    "no_cards_in_hand": "হাতে কোনো কার্ড নেই",
+    "header": "আপনার হাত:",
+    "trump_indicator": " (ট্রাম্প)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "এই ট্রিকে এখনো কোনো কার্ড খেলা হয়নি।",
+    "header": "বর্তমান ট্রিক:",
+    "trump_indicator": " (ট্রাম্প)",
+    "card_line": "{observation}\n  খেলোয়াড় {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "খেলা শুরু হয়নি",
+    "header": "=== জার্মান হুইস্ট খেলা ===",
+    "phase": "{observation}\nপর্যায়: {phase}",
+    "trump_suit": "{observation}\nট্রাম্প স্যুট: {trump_suit}",
+    "trump_card": "{observation}\nট্রাম্প কার্ড: {card}",
+    "cards_left": "{observation}\nডেকে কার্ড বাকি আছে: {count}",
+    "next_card": "{observation}\nবিজয়ীর জন্য পরবর্তী কার্ড: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nবর্তমান ট্রিক:",
+    "trump_indicator": " (ট্রাম্প)",
+    "trick_line": "{observation}\n  খেলোয়াড় {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nখেলোয়াড় {player_id}: {scoring} স্কোরিং ট্রিক ({tricks} মোট), {hand_size} কার্ড হাতে"
+  },
+  "outcome": {
+    "summary": "শিক্ষার পর্যায় - খেলোয়াড় 0: {l0}, খেলোয়াড় 1: {l1}। খেলার পর্যায় - খেলোয়াড় 0: {p0}, খেলোয়াড় 1: {p1}। খেলোয়াড় {winner_id} {winner_tricks} স্কোরিং ট্রিক দিয়ে জিতেছেন!"
+  }
+}

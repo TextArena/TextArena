@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction-lokaalitiedosto. ÄLÄ käännä avaimia (vasen puoli). Käännä vain arvot (oikea puoli). Älä koskaan käännä pelilaudan koordinaatteja (a-h, 1-8), palojen kirjaimia (O, X), siirron muotoa tai {board}-ruudukkoa.",
+  "_slots": {
+    "{player_id}": "Pelaajan numero, joko 0 tai 1",
+    "{side}": "Pelaajan palan kirjain, joko O tai X",
+    "{other}": "Vastustajan palan kirjain, joko O tai X",
+    "{board}": "Pelilaudan ASCII-esitys; säilytä sellaisenaan",
+    "{coord}": "Pelilaudan koordinaatti, kuten b1 tai a3",
+    "{from}": "Siirron lähtökoordinaatti, kuten b1",
+    "{to}": "Siirron kohdekoordinaatti, kuten b3"
+  },
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} LinesOfAction-pelissä.\nPalasi ovat '{side}', vastustajan palat ovat '{other}'.\nSiirron muoto: `[b1b3]` (lähtökoordinaatti kohdekoordinaattiin). Laillinen siirto kulkee vaakasuunnassa, pystysuunnassa tai diagonaalisesti ruutujen määrän verran, joka on yhtä suuri kuin linjassa olevien palojen (minkä tahansa värin) määrä. Voit hypätä oman palasi yli, mutta et vastustajan palaa; laskeutuminen vastustajan palalle vie sen. Voita, kun kaikki palasi ovat 8-naapurustossa yhteydessä toisiinsa."
+  },
+  "board": {
+    "current_board": "Pelilauta:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Muodon on oltava e2e4 (lähtö- ja kohdekoordinaatit).",
+    "no_piece": "Ei {side}-palaa koordinaatissa {coord}.",
+    "identical": "Lähtö- ja kohdekoordinaatit ovat samat.",
+    "not_straight_or_diagonal": "Siirron on oltava suora tai diagonaalinen.",
+    "wrong_distance": "Siirron on oltava yhtä pitkä kuin linjassa olevien palojen määrä.",
+    "enemy_blocks": "Vastustajan pala estää polun.",
+    "destination_own": "Kohde on varattu oman palan toimesta."
+  },
+  "game_action": {
+    "moved": "Pelaaja {player_id} siirsi {from} -> {to}",
+    "captured_suffix": "Pelaaja {player_id} siirsi {from} -> {to} ja otti vastustajan palan."
+  },
+  "outcome": {
+    "win": "Kaikki palat ovat yhteydessä toisiinsa.",
+    "draw_no_capture": "60 siirtoa ilman palan ottamista.",
+    "draw_repetition": "Asema on toistunut kolme kertaa."
+  }
+}

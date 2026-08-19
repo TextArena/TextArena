@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Qanmi Klondike Solitariota pukllachkanki. Qanpaq tiksi ukhupi kartakunata astayta atinapaqmi.\n\nPukllay Kamachikuna:\n- Tiksi ukhukuna (F1-F4): Aswanmanta Reykama llimp'iy\n- Q'anch'a ukhukuna (T1-T7): Ch'iqan k'umuykunawan (puka k'umuyta yana k'umuyman, yana k'umuyta puka k'umuyman)\n- Q'umir q'anch'a: Kartakunata ch'iqan q'anch'aman kutichiy\n- Ch'iqan q'anch'a (W): Hanaq kartata pukllanapaqmi\n\nKamachikuna:\n- 'draw' - Q'umir q'anch'amanta kartakunata ch'iqan q'anch'aman kutichiy\n- 'move <source> <destination> [count]' - Kartakunata ukhukunapura astay\n  Shuwarakuna: 'move W T1', 'move T1 F2', 'move T3 T5 2'. 'all' nisqapas kanmi, mayqen kartakunatapas astayta munaspa.\n- 'forfeit' - Pukllayta sasachö atichiy\n- Ukhukunap sutikuna: W (ch'iqan q'anch'a), F1-F4 (tiksi ukhukuna), T1-T7 (q'anch'a ukhukuna)\n\nMayqen kamaykunatapas huk pukllaypi ruwachiyta atinki, wakich'allawan kutichaspa:\n  Shuwarakuna: 'draw, move W T1, move T2 F1'\n\nReykuna k'iti q'anch'a ukhukunaman churayta atinku.\nKamaykuna ruwaykunapi - hukqa mana atiptinqa, wakin kamaykuna q'ulliyan.\n'forfeit'ta llamk'achiyta munanki pukllay atiptiymanchu."
+  },
+  "format_error": {
+    "no_brackets": "Mana allin ruwaykuna, mana allinta ruwasqa.",
+    "no_closing_bracket": "Mana allin ruwaykuna. mana tukukuq paréntesis \"]\"",
+    "empty_command": "Mana ima kamachiy. \"draw\" icha \"move <source> <destination> [count]\" nisqaman qillqay.",
+    "empty_action": "Mana imapaq ruwakunchu.",
+    "move_needs_args": "Move kamachiyqa maymantachus, imawantaq ripunanta munan. Usualidad: 'move <source> <destination> [count]'",
+    "count_positive": "Ñiqiqa chani icha 'all' kanman.",
+    "count_invalid": "Mana allin willakuy. \"all\" nisqawan qillqay, icha huk yupayta utilizay.",
+    "unknown_command": "Mana riqsisqa q'anq'ay '{cmd}'. 'draw', 'move <source> <destination> [count]', utaq 'forfeit' q'anq'ay",
+    "wrapped": "Accion {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Accion {n}: {msg}",
+    "before_failure": "{n} ruwaykuna ñawpaq pukllay.",
+    "failed": "Ruway {n} p'asñachisqa: {msg}"
+  },
+  "move_result": {
+    "drew": "Karta(kuna) q'umir q'anch'awan kutimurqan.",
+    "cannot_draw": "Mana atichwanchu, mana ima qollqe kanqachu.",
+    "invalid_pile": "Mana allin sutin. W, F1-F4, T1-T7 nisqakunawan qillqay",
+    "foundation_one_card": "1 cartallataqmi fundacionman apachikuyta atin.",
+    "waste_to_foundation_ok": "Cartilla de residuos nisqawan fundacionman apasqa F{dst}",
+    "waste_to_foundation_bad": "Mana atinmachu ch'iqan kartata tiksi ukhupi churay.",
+    "tableau_to_foundation_ok": "K'atakuna wasi T{src} tukuy wasiman F{dst} tiyaykachiy.",
+    "tableau_to_foundation_bad": "Mana atinmachu q'anch'a kartata tiksi ukhupi churay.",
+    "foundation_to_foundation": "Mana ima sayaymantapas maymanpis riyta atinchu.",
+    "waste_to_tableau_one_card": "Uchuymanta q'illaymanqa huk kartallata apanapaq.",
+    "waste_to_tableau_ok": "Cartilla de residuos nisqawan T{dst} tablapi churasqa.",
+    "waste_to_tableau_bad": "Manan tarjeta q'epikunataqa chay tablero-man churayta atinchu.",
+    "no_face_up": "Mana ima cartatapis chʼichichanmanchu.",
+    "tableau_to_tableau_ok": "{count} k'atakuna wasi T{src} wasi T{dst} tiyaykachiy.",
+    "tableau_to_tableau_bad": "Mana {count} k'atakuna wasi T{src} wasi T{dst} tiyaykachiy atin.",
+    "foundation_to_tableau_one_card": "Uchuymanta ch'ulla t'ikamanqa huk kartallata apakunman.",
+    "foundation_empty": "Fundación F{src} ch'usaqmi.",
+    "foundation_to_tableau_ok": "K'atakuna tukuy wasi F{src} wasi T{dst} tiyaykachiy.",
+    "foundation_to_tableau_bad": "Mana atispa tarjeta de fundaciónpi t'ikrasqa T{dst}",
+    "to_waste_or_stock": "Mana ima q'ipis, ni imapas tarikuyta atinchu."
+  },
+  "outcome": {
+    "forfeit": "Pukllay tukuku. Qhipa tarjeta: {score} karta(kuna) tiksi ukhupi.",
+    "won": "¡Klondikepi Solitary pukllayta atipanki!",
+    "turn_limit": "Pukllay tukuy ñiqiwan tiyaykachisqa! {max_turns} ñiqikuna tukusqa. Q'umirayki ñiqi: {score} k'atakuna tukuy wasikunapi."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITARIU ===",
+    "turn": "Turno: {turn}/{max_turns}",
+    "stock": "Ima cartakunachus: {stock} kartakunapi",
+    "waste": "Waste (W): {waste} Wastaqa, maypichus kan.",
+    "foundations_header": "Fundación:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Qelqa:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

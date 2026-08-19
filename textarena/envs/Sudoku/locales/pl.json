@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id}. Grajesz w Sudoku.\nOto aktualny stan siatki Sudoku. Każdy wiersz jest numerowany od 1 do 9, a każda kolumna również jest numerowana od 1 do 9.\nPuste komórki są reprezentowane przez '.', a wstępnie wypełnione komórki zawierają cyfry od 1 do 9.\n\nAktualna siatka Sudoku:\nTwoim celem jest wypełnienie pustych komórek w siatce 9x9 cyframi od 1 do 9 tak, aby:\n1. Każdy wiersz zawierał wszystkie cyfry od 1 do 9 bez powtórzeń.\n2. Każda kolumna zawierała wszystkie cyfry od 1 do 9 bez powtórzeń.\n3. Każda z dziewięciu siatek 3x3 zawierała wszystkie cyfry od 1 do 9 bez powtórzeń.\n\nZasady i instrukcje:\n1. **Nie nadpisuj** początkowych liczb podanych w siatce.\n2. **Wypełniaj tylko** puste komórki reprezentowane przez '.'.\n3. Możesz odpowiedzieć w dowolny sposób, ale upewnij się, że Twoja odpowiedź zawiera format '[wiersz kolumna liczba]'.\n4. **Upewnij się**, że Twój ruch nie narusza zasad Sudoku. Nieprawidłowe ruchy spowodują kary.\nPrzykłady:\n- **Prawidłowy ruch**:\n  - Fragment siatki przed ruchem:\n  \n  - Ruch: `[5 3 7]`\n  - Wyjaśnienie: Umieszczenie 7 w wierszu 5, kolumnie 3 nie narusza żadnych zasad Sudoku.\n\n- **Nieprawidłowy ruch** (nadpisanie wstępnie wypełnionej komórki):\n  - Fragment siatki przed ruchem:\n  \n  - Ruch: `[1 1 9]`\n  - Wyjaśnienie: Komórka (1,1) jest już wypełniona liczbą 5. Nie możesz jej nadpisać.\n\n- **Nieprawidłowy ruch** (naruszenie zasad Sudoku):\n  - Fragment siatki przed ruchem:\n  \n  - Ruch: `[1 3 5]`\n  - Wyjaśnienie: Umieszczenie 5 w wierszu 1, kolumnie 3 narusza zasadę, ponieważ 5 już istnieje w wierszu 1.\n\nHistoria Twoich ruchów i myśli będzie dołączana w miarę rozgrywania kolejnych rund. Wykorzystaj historię swoich ruchów, aby poprawić swoje decyzje, unikając ruchów, które już próbowałeś. Powodzenia!\n\n"
+  },
+  "board": {
+    "game_board": "Plansza gry:\n{board}",
+    "board_state": "Stan planszy: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nieprawidłowy format ruchu. Gracz {player_id} nie odpowiedział prawidłowym 'wiersz kolumna liczba'.",
+    "out_of_bounds": "Nieprawidłowy ruch. Gracz {player_id} próbował umieścić {num} w ({row}, {col}), co jest poza granicami.",
+    "overwrite": "Nieprawidłowy ruch. Gracz {player_id} próbował nadpisać wstępnie wypełnioną komórkę ({row}, {col}).",
+    "violates_rules": "Nieprawidłowy ruch. Gracz {player_id} próbował umieścić {num} w ({row}, {col}), co narusza zasady Sudoku."
+  },
+  "outcome": {
+    "win": "Gratulacje! Gracz {player_id} ukończył puzzle Sudoku.",
+    "turn_limit": "Osiągnięto limit tur. Prawidłowo wypełniłeś {percent}% pustych komórek."
+  }
+}

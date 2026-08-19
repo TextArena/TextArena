@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a Memória Játékban.\nCélja, hogy több párt találjon a táblán, mint az ellenfele.\nA következő lépésnél két kártyát kell kiválasztania a sor és oszlop számának megadásával, mint például '[0 1 1 0]', ahol az első kártya a 0. sorban és az 1. oszlopban, a második kártya pedig az 1. sorban és a 0. oszlopban található.\nHa a két kártya egyezik, egy pontot kap, és a kártyák felfordítva maradnak. Ha nem egyeznek, a kártyák visszafordulnak, például '.'.\nA játék akkor ér véget, ha az összes párt megtalálták."
+  },
+  "board": {
+    "current_board": "Aktuális tábla:\n{board}",
+    "current_game_board": "Aktuális Játéktábla:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Érvénytelen lépésformátum. A {player_id}. játékos nem adott meg érvényes irányt szögletes zárójelekben.",
+    "out_of_bounds": "Érvénytelen lépés. A {player_id}. játékos egy határon kívüli pozíciót választott.",
+    "same_card_twice": "Érvénytelen lépés. A {player_id}. játékos ugyanazt a kártyát választotta kétszer.",
+    "already_matched": "Érvénytelen lépés. A {player_id}. játékos egy vagy mindkét kártyát választotta, amelyeket már korábban párosítottak."
+  },
+  "game_message": {
+    "cards_match": "A {player_id}. játékos által kiválasztott kártyák az [{r1} {c1}] és [{r2} {c2}] pozíciókban egyeznek!",
+    "cards_no_match": "A {player_id}. játékos által kiválasztott kártyák nem egyeznek. A [{r1} {c1}] és [{r2} {c2}] pozíciókban található kártyák {pos1} és {pos2} értékekkel rendelkeznek."
+  },
+  "outcome": {
+    "draw": "Mindkét játékos ugyanannyi párt talált.",
+    "win": "A {winner_id}. játékos nyert!",
+    "turn_limit": "A lépésszám korlátja elérésre került. A játék véget ért. A 0. játékos {score_0} pontot, az 1. játékos {score_1} pontot ért el.",
+    "turn_limit_win": "{reason} A {winner_id}. játékos nyert!"
+  }
+}

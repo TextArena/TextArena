@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe-lokaalitiedosto. ÄLÄ käännä avaimia (vasen puoli). Käännä vain arvot (oikea puoli).",
+  "_slots": {
+    "{player_id}": "Pelaajan numero, esim. 0, 1 tai 2",
+    "{symbol}": "Pelaajan merkki, joko A, B tai C",
+    "{cell}": "Pelilaudan ruutunumero",
+    "{max_cell}": "Suurin kelvollinen ruutunumero (pelilaudan koko^2 - 1)",
+    "{row}": "Pelilaudan rivin indeksi, johon merkki on asetettu",
+    "{col}": "Pelilaudan sarakkeen indeksi, johon merkki on asetettu",
+    "{board}": "Tulostettu ASCII-pelilauta (älä käännä)",
+    "{moves}": "Pilkuilla erotettu lista saatavilla olevista siirtotokeneista, kuten '[4]' (älä käännä)"
+  },
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} Kolmen Pelaajan Tic Tac Toe -pelissä.\nMerkkisi on '{symbol}'.\nVuorotellen asetat merkkisi 5x5-pelilaudalle muodostaaksesi neljän suoran linjan.\nLinjat voivat olla vaakasuoria, pystysuoria tai diagonaalisia.\nLähetä siirtosi käyttäen muotoa '[4]' merkitäksesi ruutua 4."
+  },
+  "board": {
+    "current_board": "Nykyinen pelilauta:\n\n{board}\n\nSaatavilla olevat siirrot: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Virheellinen siirtomuoto. Käytä muotoa '[ruutu]', jossa ruutu on 0-{max_cell}.",
+    "out_of_range": "Virheellinen ruutunumero: {cell}. Tulee olla välillä 0 ja {max_cell}.",
+    "already_occupied": "Ruutu {cell} on jo varattu.",
+    "made_invalid": "Pelaaja {player_id} teki virheellisen siirron"
+  },
+  "game_action": {
+    "placed": "Pelaaja {player_id} asettaa merkkinsä ({symbol}) ruutuun ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Pelaaja {player_id} ({symbol}) voittaa!",
+    "draw": "Peli on tasapeli!"
+  }
+}

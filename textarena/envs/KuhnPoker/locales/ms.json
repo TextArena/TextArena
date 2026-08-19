@@ -1,0 +1,32 @@
+{
+    "player_prompt": {
+        "intro": "Anda ialah pemain {player_id} dalam permainan Kuhn Poker sebanyak {max_rounds} pusingan.\nPeraturan permainan:\n- Kuhn Poker menggunakan dek 3 kad: J, Q, K (J paling rendah, K paling tinggi)\n- Setiap pemain meletakkan {ante} cip sebagai ante dan menerima 1 kad setiap pusingan (nota: kad diagihkan tanpa penggantian, jadi anda tidak boleh mempunyai kad yang sama seperti lawan)\n- Permainan berlangsung selama {max_rounds} pusingan\n- Pemain dengan jumlah cip terbanyak selepas semua pusingan menang\nPeraturan tindakan:\n- '[check]': Semak tanpa bertaruh (hanya jika tiada taruhan di atas meja)\n- '[bet]': Tambah 1 cip ke dalam pot (hanya jika tiada taruhan di atas meja)\n- '[call]': Samakan taruhan lawan dengan menambah 1 cip\n- '[fold]': Menyerah dan membiarkan lawan memenangi pot"
+    },
+
+    "init_round": {
+        "round_start": "### Memulakan pusingan {current_round} daripada {max_rounds}. Kad anda ialah: '{player_card}'",
+        "available_actions": "Tindakan yang tersedia untuk anda ialah: {available_actions}"
+    },
+
+    "invalid_move": {
+        "wrong_format": "Tindakan mestilah [Check], [Bet], [Call], atau [Fold].",
+        "not_legal": "Tindakan mestilah salah satu daripada: {legal_actions}."
+    },
+
+    "action": {
+        "submit_move": "Pemain {player_id} telah membuat tindakan: '[{move}]'.",
+        "valid_actions": "Tindakan yang tersedia untuk anda ialah: {legal_actions}.",
+        "round_summary": "{reason} Skor semasa: Pemain 0: '{player_0_chips}'; Pemain 1: '{player_1_chips}'"
+    },
+
+    "showdown": {
+        "showdown_summary": "Pendedahan: Kad pemain {winner} ({winner_card}) mengalahkan kad pemain {loser} ({loser_card}). Pemain {winner} memenangi pot sebanyak {pot_value} cip."
+    },
+
+    "outcome": {
+        "draw": "Pada akhir {max_rounds} pusingan, kedua-dua pemain mempunyai jumlah cip yang sama.",
+        "round_win": "Pemain {player_id} telah menyerah.",
+        "winner_player0": "Pemain 0 menang dengan mempunyai lebih banyak cip pada akhir semua {max_rounds} pusingan.",
+        "winner_player1": "Pemain 1 menang dengan mempunyai lebih banyak cip pada akhir semua {max_rounds} pusingan."
+    }
+}

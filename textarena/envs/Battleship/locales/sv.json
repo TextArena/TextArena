@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Du är spelare {player_id}. Du spelar spelet Sänka fartyg.\nDitt mål är att sänka alla dina motståndares fartyg innan de sänker dina.\nPå din tur kan du avfyra missiler mot specifika koordinater i följande format: '[a4]'. Om missilen träffar ett fartyg markeras det med 'X'. Om den missar markeras den med 'O'. I båda fallen kommer spelmiljön att informera dig om dina träffar. Om du har sänkt ett fartyg kommer spelmiljön att berätta det för dig!\nSpelet slutar när alla fartyg tillhörande en spelare har sänkts.\nDitt initiala bräde visar alla dina fartyg placerade och dina motståndares träffar på dig, samt dina träffar och missar på motståndarens bräde utan att visa motståndarens fartyg.\nHär är det initiala brädet:\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Spelaren svarade inte med en giltig koordinat inom hakparenteser.",
+    "out_of_board": "Koordinaten {coord} ligger utanför brädet.",
+    "already_fired": "Koordinaten {coord} har redan beskjutits."
+  },
+  "game_action": {
+    "you_sunk": "Sänkt! Du sänkte ett fartyg på {coord}! Ditt uppdaterade bräde:\n{view}",
+    "opp_sunk": "Motståndaren sänkte ditt fartyg på {coord}! Ditt uppdaterade bräde:\n{view}",
+    "you_hit": "Träff! Du träffade ett fartyg på {coord}! Ditt uppdaterade bräde:\n{view}",
+    "opp_hit": "Motståndaren träffade ditt fartyg på {coord}! Ditt uppdaterade bräde:\n{view}",
+    "you_miss": "Miss! Du missade fartyget på {coord}! Ditt uppdaterade bräde:\n{view}",
+    "opp_miss": "Motståndaren missade ditt fartyg på {coord}! Ditt uppdaterade bräde:\n{view}"
+  },
+  "outcome": {
+    "win": "Spelare {player_id} har sänkt alla sina motståndares fartyg!"
+  }
+}

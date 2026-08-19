@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Is tu Player {player_id} ann an geama dà-chluicheadair de Spite and Malice. Is e do dh'amas a bhith a' chiad duine a lorgas do phàilean duais.\n\n### Ro-shealladh Geama:\n- Is e an amas a' ghlanadh do phàilean duais le bhith a' cluich cairtean dhan phàilean meadhan.\n- Faodaidh tu cairtean a chluich bho trì thùsan:\n  1. Do **làmh** (tòisichidh tu gach turas le suas ri 5 cairtean ann an làmh).\n  2. **A' chiad chairt de do phàilean duais**.\n  3. **A' chiad chairt de dhuilleagan diùltadh sam bith agad**.\n\n### Riaghailtean Cluiche:\n- Faodaidh tu chairt a chluich dhan phàilean meadhan ma tha e **aon ìre nas àirde** na a' chiad chairt air a' phàilean sin (tòisichidh pàileanan meadhan le Ace agus a' dol suas gu Queen; tha Kings uaine - faodaidh iad a bhith air a' chluich air cairt sam bith ach chan eil iad a' atharrachadh an òrdugh ìre. Tha seo a' ciallachadh ma tha King air a chleachdadh às dèidh 4, tha a' King sin air a rangachadh 5 agus feumaidh a' chiad chairt eile a bhith 6).\n- Mura faodaidh tu cairtean eile a chluich, feumaidh tu **cairt a dhiùltadh** dhan dhuilleag diùltadh agad airson do thuras a chrìochnachadh.\n- Mura ruige pàilean meadhan Queen, thèid a ghlanadh gu fèin-obrachail.\n- Tha an òrdugh ìre: A=1, 2=2, ..., 9=9, J=10, Q=11, K mar uaine.\n\n### Gnìomhan:\n1. **Tarraing**: Aig tòiseach do thuras, tarraing cairtean gus do làmh a lìonadh suas ri 5 cairtean. Cuir a-steach **[draw]** airson tòiseachadh.\n2. **Cluich Chairt**: Airson chairt a chluich, sònrach a' chairt agus a' phàilean meadhan mar seo: **[play A♠ 0]** (far a bheil 'A♠' a' chairt agus '0' an ìndex phàilean meadhan).\n3. **Diùltadh**: Mura faodaidh tu cairtean eile a chluich, diùlt a' chairt bho do làmh dhan dhuilleag diùltadh airson do thuras a chrìochnachadh. Cuir a-steach **[discard A♠ 1]** (far a bheil 'A♠' a' chairt agus '1' an ìndex dhuilleag diùltadh). Tha e cudromach nach faodaidh tu cairt sam bith a dhiùltadh bho do phàilean duais. Faodaidh tu dìreach cairtean bho do làmh a dhiùltadh.\n\n"
+  },
+  "board": {
+    "current_board": "Bòrd Làithreach:\n\n{board}\nGluasaidhean Riaghailteach: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Stòran Meadhan ---\n",
+    "pile": "{observation}Pailtean {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Sealladh a' Chluichiche {player_id} ---\n",
+    "payoff": "{observation}Pàirt a Lìbhrigeadh (Càradh aig Mullach): {top_card}, Fad a' Phàirt a Lìbhrigeadh: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Fàinnean Sgudail: {discard}\n",
+    "empty": "Gun ghnàth."
+  },
+  "game_message": {
+    "no_cards_left": "Chan eil càirtean eile ann airson tarraing. Cuimhnich gu bheil thu comasach air càirtean a chluich bho na bunathan seo:\n  1. Do **làmh**.\n  2. **A' chiad chairt den stòr-duais agad**.\n  3. **A' chiad chairt den stòr-dhiùltadh sam bith agad**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Foirm ceum neo-dhligheach. Cha do fhreagair cluicheadair {player_id} le gluasad dligheach ann am bragantean ceàrnagach.",
+    "invalid_play": "Cluich neo-chèile. Dh'fhàg Cluichiche {player_id} {card} air pailtean meadhanach {index}.",
+    "discard_from_payoff": "Cha b' urrainn dha a bhith air an toirt seachad. 'S e cluicheadair {player_id} a bha airson cairt às na h-aibhnean pàighidh a thoirt dheth.",
+    "discard_not_in_hand": "Cha b' urrainn dha a bhith air an toirt seachad. 'S e cluicheadair {player_id} a bha airson cairt nach eil na làimh aige a thilgeil às.",
+    "wrong_move_type": "Chan eil seòrsa gluasad ceàrr ann. Cha do fhreagair cluicheadair {player_id} le seòrsa gluasaid dligheach."
+  },
+  "game_action": {
+    "you_drew": "Thug thu cairtean.",
+    "opponent_drew": "Dh'agharraich cluicheadair {player_id} chairtean.",
+    "you_played": "Chluich thu {card} air a' chlach mheadhan {index}.",
+    "opponent_played": "Cluichiche {player_id} chluich {card} air pailtean meadhanach {index}.",
+    "you_discarded": "Tha thu air {card} a dh'fhàgail aig pailtean dh'fhàgail {index}, a bheil a' ciallachadh gu bheil thu air crìoch a chur air do thuras. Chan eil tuilleadh gnìomhan agad air a mheasg airson an turais seo. Bidh Cluichiche {next_player_id} a' dol an ath dh'fhàs.",
+    "opponent_discarded": "Dh'fhàg Player {player_id} {card} dhan dhuilleag diùltadh {index}, a tha cuideachd a' ciallachadh gun do chrìochnaich iad an turas aca. Chan eil gnìomh eile de Player {player_id} air a bhith a' smaointinn airson an turas seo. Player {next_player_id}, thèid thu dhan ath thuras. Cuir a-steach do ghniomh anns an fhoirm [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Tha Cluichiche {current_player} air a' phàirt a lìbhrigeadh! Tha Cluichiche {current_player} a' buannachd!",
+    "deadlock_player_0": "Tàinig dùbhlan! Tha Cluichiche 0 a' buannachd le {player_0_payoff} càraichean air fhàgail an aghaidh {player_1_payoff} càraichean aig Cluichiche 1.",
+    "deadlock_player_1": "Tàinig dùbhlan! Tha Cluichiche 1 a' buannachd le {player_1_payoff} càraichean air fhàgail an aghaidh {player_0_payoff} càraichean aig Cluichiche 0.",
+    "deadlock_tie": "Tàinig dùbhlan le co-ionannachd! Tha an dà chluichiche aig {player_0_payoff} càraichean air fhàgail. Tha Cluichiche {current_player} a' buannachd le ùghdarras."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Tu Lêker {player_id} î di lîstika du-lêker a Spite û Malice de. Armanca te ew e ku yekemîn pileya xelata xwe vala bikî.\n\n### Nêrîna Lîstikê:\n- Armanca wê ew e ku pileya xelata xwe bi vê yekê vala bikî ka kartên li ser pileyan yên navendî têne lîstin.\n- Tu dikarî kartên ji sê çavkaniyan bilîzî:\n  1. **Destê te** (tu dest pê dike bi 5 kartan di destê xwe de).\n  2. **Karta jorîn a pileya xelata te**.\n  3. **Karta jorîn a yek ji pileyan tevdekirî yên te**.\n\n### Rêzên Lîstinê:\n- Tu dikarî karteke li ser pileyeke navendî bilîzî ger ew **yek pîle bilindtir** be ji karta jorîn li ser wê pileyê (pileyên navendî bi Ace dest pê dikin û heta Queenê; Padîşah wekî karteke dîwar e - ew dikare li ser her karteke were lîstin lê pîleya wê naguherîne. Ev tê wê wateyê ku ger Padîşah piştî 4 were bikar anîn, wê demê Padîşah 5 e û karta din divê 6 be).\n- Ger tu nikarî kartên din bilîzî, divê **karteke tevdeke** li yek ji pileyan tevdekirî yên xwe da ku dawiya gavê xwe bike.\n- Ger pileyeke navendî heta Queenê were, ew ê bi otomatîkî were valakirin.\n- Rêza pîleyan ew e: A=1, 2=2, ..., 9=9, J=10, Q=11, K wekî karteke dîwar.\n\n### Çalakiyên:\n1. **Wergirtin**: Di destpêka gavê te de, kartan werbigire da ku destê te heta 5 kartan tije bike. Ji bo destpêkirinê **[draw]** binivîse.\n2. **Lîstina Karteke**: Ji bo karteke lîstin, karta û pileya navendî wekî vê binivîse: **[play A♠ 0]** (ku 'A♠' karta ye û '0' indeksa pileya navendî ye).\n3. **Tevdekirin**: Ger tu nikarî kartên din bilîzî, karteke ji destê xwe tevdeke li pileyeke tevdekirî da ku dawiya gavê xwe bike. Ji bo tevdekirinê **[discard A♠ 1]** binivîse (ku 'A♠' karta ye û '1' indeksa pileya tevdekirî ye). Bala bike ku tu nikarî karteke ji pileya xelata tevdeke. Tu tenê dikarî kartên ji destê xwe tevdeke.\n\n"
+  },
+  "board": {
+    "current_board": "Taqeta Heyîn:\n\n{board}\nGavên Berfireh: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Navenda Piles -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Nîşana Lîstikvan {player_id} ---\n",
+    "payoff": "{observation}Pileya Payoff (Karta Serê): {top_card}, Dirêjahiya Pileya Payoff: {payoff_length}\n",
+    "hand": "{observation} Dest: {hand} ",
+    "discard": "{observation}Pileyên Berfireh: {discard}\n",
+    "empty": "Bê kesî ye."
+  },
+  "game_message": {
+    "no_cards_left": "Tu kartên din ji bo kişandina tune ne. Bîr bînin ku hûn dikarin karta van çavkaniyan bilîzin: 1. Destê xwe ** 2. Kartê sereke yê pileya we ya xelata te ** 3. Karta jorîn a tu tiþtên hilweşandin ên we** . ️🏻 ?? ♀️🏼♂️🇪❤️✨👏🙏👍👌"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatê tevgerên neheq. Lîstikvan {player_id} bi tevgera rast a di parantezên çargoşe de bersiv neda.",
+    "invalid_play": "Lîstina neşik. Lîstikvan {player_id} gavê {card} li ser pileya navîn {index} lîstin.",
+    "discard_from_payoff": "Destûra bêbandor. Lîstikvan {player_id} hewl da ku kartek ji pileya xelata xwe hilweşîne.",
+    "discard_not_in_hand": "Destûra neqanûnî. Lîstikvan {player_id} hewl da ku kartek destûrê bide, ew di destê xwe de tune ye.",
+    "wrong_move_type": "Tîpa tevgera neheq. Lîstikvan {player_id} bi tîpeke tevgerê ya rast re bersîng neda."
+  },
+  "game_action": {
+    "you_drew": "Te kart kişandin.",
+    "opponent_drew": "Lîstikvan {player_id} kart kişand.",
+    "you_played": "Hûn gavê {card} li ser pileya navîn {index} lîst.",
+    "opponent_played": "Lîstikvan {player_id} gavê {card} li ser pileya navîn {index} lîst.",
+    "you_discarded": "Hûn gavê {card} berda pileya berfireh {index}, ku jî wê wê gavê xwe temam kiriye. Ti gavan din ên we ji bo vê gavê nayê hesibandin. Lîstikvan {next_player_id} carek din ê gavê bike.",
+    "opponent_discarded": "Lîstikvan {player_id} gavê {card} berda pileya berfireh {index}, ku jî wê wî gavê xwe temam kiriye. Ti gavan din ên Lîstikvan {player_id} ji bo vê gavê nayê hesibandin. Lîstikvan {next_player_id}, hûn carek din ê gavê bikin. Ji kerema xwe gava xwe wek [action card center_index] binivîse."
+  },
+  "outcome": {
+    "payoff_cleared": "Lîstikvan {current_player} pileya payoff xwe temam kiriye! Lîstikvan {current_player} bi serkeftî ye!",
+    "deadlock_player_0": "Deadlock hat! Lîstikvan 0 bi {player_0_payoff} kartên mayî zêdetirî Lîstikvan 1 ên {player_1_payoff} kartên mayî ye.",
+    "deadlock_player_1": "Deadlock hat! Lîstikvan 1 bi {player_1_payoff} kartên mayî zêdetirî Lîstikvan 0 ên {player_0_payoff} kartên mayî ye.",
+    "deadlock_tie": "Deadlock hat bi beraberiya! Her du lîstikvan {player_0_payoff} kartên mayî hene. Lîstikvan {current_player} bi serkeftî ye."
+  }
+}

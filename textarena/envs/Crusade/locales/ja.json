@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "あなたはプレイヤー {player_id} ({piece}) です。相手は ({opp}) です。手を '[b1 c3]' の形式で提出してください（from → to）。すべての駒はチェスのナイトのように動きます。\n各獲得は {score_per_capture} ポイントになります。ゲームは {max_moves} 手後、またはプレイヤーが合法的な手や駒がなくなった時点で終了します。高いスコアが勝利します。"
+  },
+  "board": {
+    "current_board": "手数 #{move_count}\n\n{board}\n\n利用可能な手: {moves}"
+  },
+  "invalid_move": {
+    "bad_format": "形式が不正です。'[b1 c3]' を使用してください。",
+    "unknown_square": "不明なマスです。",
+    "not_your_piece": "出発点が自分の駒ではありません。",
+    "own_piece": "自分の駒の上には着地できません。",
+    "not_knight": "ナイトの動きではありません。"
+  },
+  "game_action": {
+    "moved": "プレイヤー {player_id} が駒を {frm} から {to} に動かしました。",
+    "capture": "{observation} 駒を獲得しました！ (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "プレイヤー {player_id} には駒がありません。",
+    "cannot_move": "プレイヤー {player_id} は手を打てません。",
+    "higher_score": "高い獲得スコア。",
+    "move_limit": "手数制限に達しました。"
+  }
+}

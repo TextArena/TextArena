@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i et spill av HighSociety (2-spillerversjon).\nSpillflyt: Ti prestisjekort auksjoneres ett etter ett.\nBudgivning: Ved hver auksjon, velg i hemmelighet et pengeskort 1-11 og avslør.\n            • Høyere bud vinner prestisjekortet og kasserer det pengeskortet.\n            • Lavere bud beholder pengeskortet.\n            • Uavgjort -> begge bud returneres og samme prestisjekort auksjoneres på nytt.\nPoenggivning: Etter alle ti auksjoner, legg til **gjenstående kontanter + prestisjepoeng**.\n            Høyere *nettoverdi* vinner (eksakt uavgjort -> uavgjort).\n\n**Handlingssyntaks**  →  by på et enkelt kort som '[7]' eller '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Auksjon {round}/10  |  Prestisjekort: {prize}"
+  },
+  "board": {
+    "money_cards": "Dine gjenstående pengeskort: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Må inkludere nøyaktig ett [X] pengeskort.",
+    "card_not_held": "Du har ikke lenger det pengeskortet."
+  },
+  "message": {
+    "tie": "Uavgjort - bud returnert. By på nytt!",
+    "auction_result": "P0 budde {bid0}, P1 budde {bid1}. Spiller {winner} vinner prestisje {prize} (totalt {total})."
+  },
+  "outcome": {
+    "p0_wins": "Nettoverdi {nw0} > {nw1}",
+    "p1_wins": "Nettoverdi {nw1} > {nw0}",
+    "draw": "Begge nettoverdi {nw0} – eksakt uavgjort."
+  }
+}

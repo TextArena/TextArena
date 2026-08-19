@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "A nyi azɔnwá {player_id} to azɔnwá {num_players} tɔn Liar's Dice xwéxwé lɛ.\nNùkpɛ̀:\n- Tɔ̀n wà nwí, a nyi sɔ̀n:\n  1) Fà xwéxwé yíyí ɖò nwí ɖò azɔ̀n wà ɖì nwí ɖì tɛ̀lɛ̀, kà wàkà '[Bid: 3, 4]',\n  2) Xɔ̀ azɔ̀n wà godo tɛ̀lɛ̀ '[Call]'.\n\nNù a xɔ̀:\n  - Nù azɔ̀n wà yíyí ɖò tɛ̀lɛ̀ wàkà xwéxwé yíyí ɖò nwí lɛ̀, azɔnwá wà godo tɛ̀lɛ̀ wàkà ɖò kùn ɖò.\n  - Kà wàkà, xɔ̀wá wàkà ɖò kùn ɖò.\nAzɔnwá wà ɖò kùn ɖò lɛ̀, wàkà wà xwéxwé lɛ̀."
+  },
+  "board": {
+    "per_player": "\tAzo {p}: {d}",
+    "new_round": "\nNɔnɔ azɛ - Gbɛtɔ wɔnɔ: {dice_summary}\nAzo wɔnɔ si wɔ: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Azo {current_player_id} ɖi! Nɔnɔ si face {face_value} wɔ na {count}, si na ɖɛ wɔ na {quantity}.\nAzo {loser_id} (azɛ gãnu) yɔnɔ wɔnɔ.",
+    "caller_loses": "Azo {current_player_id} ɖi! Nɔnɔ si face {face_value} wɔ na {count}, si na >= {quantity}.\nAzo {loser_id} (azɛ ɖi) yɔnɔ wɔnɔ."
+  },
+  "action": {
+    "bid_announce": "Azo {player_id} wɔ na {quantity} si face {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "È ɖɔ xó bɔ è ma sɔ́ dó akwɛ jí ǎ.",
+    "invalid_bid": "Akwɛ́ e è sɔ́ dó xɔ ɔ́ ná é nyí nǔtí ǎ: {reason}",
+    "not_recognized": "Azo na ɖɛ wɔnɔ na '[Bid: X, Y]' kple '[Call]'. Azo si na: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Numɛro dɔ bid tɔn wɛkɔ wɛkɔ {new_quantity} wɛ LESS wɛ numɛro dɔ bid tɔn wɛkɔ {current_quantity}.",
+    "face_lower": "nùjɔnǔ ɔ {new_face_value} nɔ jɛji hú ée ɖò azɔ̌ jí é {current_face_value}.",
+    "identical": "Akwɛ e è na dó ɔ́ cí ée ɖò fí din é ɖɔhun.",
+    "face_range": "Akwɛ́ e è nɔ mɔ é ɖó na ɖò 1 jɛ 6."
+  },
+  "message": {
+    "eliminated_invalid": "{player_id} è ɖè mɛ ɖó nùɖé wú ǎ."
+  },
+  "outcome": {
+    "win": "Azo {winner} ɖi! Nɔnɔ si wɔnɔ: {final_ranking}"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id}. Estàs jugant al Joc de Memòria.\nEl teu objectiu és fer més parells de cartes al tauler que el teu oponent.\nEn el teu torn, selecciona dues cartes per girar introduint els números de fila i columna de la primera i segona carta respectivament com '[0 1 1 0]', on la primera carta és a la fila 0 i columna 1, i la segona carta és a la fila 1 i columna 0.\nSi les dues cartes coincideixen, guanyes un punt i les cartes romanen cara amunt. Si no coincideixen, les cartes es giren cara avall, per exemple '.'.\nEl joc acaba quan s'han fet tots els parells."
+  },
+  "board": {
+    "current_board": "Tauler actual:\n{board}",
+    "current_game_board": "Tauler de joc actual:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de moviment invàlid. El Jugador {player_id} no ha respost amb una direcció vàlida entre claudàtors.",
+    "out_of_bounds": "Moviment invàlid. El Jugador {player_id} ha seleccionat una posició fora dels límits.",
+    "same_card_twice": "Moviment invàlid. El Jugador {player_id} ha seleccionat la mateixa carta dues vegades.",
+    "already_matched": "Moviment invàlid. El Jugador {player_id} ha seleccionat una o dues cartes que ja han estat emparellades."
+  },
+  "game_message": {
+    "cards_match": "Les cartes seleccionades pel Jugador {player_id} a les posicions [{r1} {c1}] i [{r2} {c2}] coincideixen!",
+    "cards_no_match": "Les cartes seleccionades pel Jugador {player_id} no coincideixen. Les cartes a les posicions [{r1} {c1}] i [{r2} {c2}] són {pos1} i {pos2} respectivament."
+  },
+  "outcome": {
+    "draw": "Tots dos jugadors han emparellat el mateix nombre de parells de cartes.",
+    "win": "El Jugador {winner_id} ha guanyat!",
+    "turn_limit": "S'ha assolit el límit de torns. El joc ha acabat. El Jugador 0 ha aconseguit {score_0} punts, el Jugador 1 ha aconseguit {score_1} punts.",
+    "turn_limit_win": "{reason} El Jugador {winner_id} ha guanyat!"
+  }
+}

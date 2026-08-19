@@ -1,0 +1,31 @@
+{
+  "_comment": "Set locale file. DO NOT translate keys (left side); only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the card-attribute words (one/two/three, red/green/purple, open/striped/solid, oval/diamond/squiggle) shown as examples, the bracket examples like [1, 4, 11] / [2, 4, 8] / [card1, card2, card3], the ASCII header '=== BOARD ===', or the word 'Set' when used as the game/term name. The board rows ({rows}) are game-generated and neutral.",
+  "_slots": {
+    "{rows}": "Game-generated, neutral numbered card list (each line 'index: number color fill shape'); do not translate",
+    "{cards_dealt}": "Number of extra cards dealt (an integer)",
+    "{max_idx}": "The highest valid card index on the board (an integer)"
+  },
+
+  "player_prompt": {
+    "intro": "You are playing a single-player game of Set. Your goal is to find as many Sets as you can in 20 turns, without making mistakes. The board contains a numbered list of 12 or more cards with (number, color, fill, shape). A Set is a set of 3 cards where, for each attribute, they're all 3 the same, or all 3 different. For instance, 'one red open squiggle', 'two green open squiggle', 'three purple open squiggle' would be a Set. Each turn, you select a list of 3 cards from the board by their numbered index. For example, \"[1, 4, 11]\". If it is a Set, you score and the cards are replaced. If it is not a Set, that turn was wasted. The game ends when you run out of turns. You MUST return your cards in brackets, like [2, 4, 8], or they will not be parsed."
+  },
+
+  "board": {
+    "state": "=== BOARD ==={rows}"
+  },
+
+  "game_message": {
+    "dealt_cards": "No valid sets found on board. Dealt {cards_dealt} additional cards.",
+    "found_set": "You found a Set! +1 point!",
+    "not_a_set": "That is not a Set. No point for you."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Return a list of ints like [card1, card2, card3].",
+    "out_of_range": "Invalid action. Card indices must be between 1 and {max_idx}."
+  },
+
+  "outcome": {
+    "game_over": "You've taken 20 turns. The game is over."
+  }
+}

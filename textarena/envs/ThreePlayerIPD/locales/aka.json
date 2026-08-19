@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Wɔyɛ Player {player_id} wɔ 3-player Iterated Prisoner's Dilemma. Kɔɔtoɔ no da {num_rounds} rounds.\nKɔɔtoɔ fɔm:\n• {conv_rounds} free-chat turns\n• 1 decision turn - submit one token per opponent: '[<opp-id> cooperate]' or '[<opp-id> defect]' (i.e. '[1 defect] [2 cooperate]'; default no ne 'cooperate'). \nPair-wise payoff matrix (applied to each unordered pair):\n  - Both cooperate  ->  {reward}\n  - Both defect     -> {punishment}\n  - Wɔyɛ defect, wɔn cooperate -> {temptation}\n  - Wɔyɛ cooperate, wɔn defect -> {sucker}\nPlayer(s) a ɔwɔ score kɔɔsoɔ sen biara wɔ kɔɔtoɔ no mu no di nkonim."
+  },
+  "round": {
+    "start": "─── Rekɔ Round {round} ───\tWo betumi akasa pɛpɛɛpɛ maa {conv_rounds} round akyi.",
+    "chat_finished": "Kasa no awiee maa round {round}. Kɔma w'adwen, token baako pɛ ma opponent: `[pid cooperate]` anaa `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Nkɔso:",
+    "pair_line": "{observation}\n\t Ogyefo {i} ne Ogyefo {j} yii {choice_i} ne {choice_j} pɛpɛɛpɛ (Ogyefo {i} nyaa {gain_i}, Ogyefo {j} nyaa {gain_j})",
+    "scores_open": "{observation} -> Nkrataa a w'akyerɛw no seesei: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Akorɔ a wɔwɔ wiee: {scores}.  Ranking kuo (bɔne→sen): {groups}"
+  }
+}

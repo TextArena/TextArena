@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ti sei o Zugador {player_id} in te un zughi de Spite e Malice a doi zugadori. O teu obiettivo o l'é de ese o primmo a svöiä a teu pila de pagament.\n\n### Panorama do Zughi:\n- L'obiettivo o l'é de svöiä a teu pila de pagament zugando carte a-e pile do centro.\n- Ti pöi zugä carte da trei fonti:\n  1. A **teu man** (ti incomensi ogni vòtta con scin a 5 carte in man).\n  2. A **carta in simma a-a teu pila de pagament**.\n  3. A **carta in simma a quæ se sæ de tue pile de scarto**.\n\n### Regole do Zughi:\n- Ti pöi zugä 'na carta a 'na pila do centro se a l'é **un rengo ciù erto** da-a carta in simma a quella pila (e pile do centro incomensan con l'asso e van scin a-a regiña; i re son selvadeghi - pöan ese zugæ in scia quæ se sæ carta ma no cangian a sequensa di rengi. Questo o vö dî che se un re o vegne döpò o 4, alôa quello re o l'é rengo 5 e a carta succesciva a dev'ese un 6).\n- Se no ti pöi zugä altre carte, ti devi **scartä 'na carta** in te 'na de tue pile de scarto pe finî o teu tùrno.\n- Se 'na pila do centro a riva a-a regiña, a vegniä scancelä in moddo automatico.\n- A sequensa di rengi a l'é: A=1, 2=2, ..., 9=9, J=10, Q=11, K comme selvadegho.\n\n### Açioin:\n1. **Tirä**: A l'inizio do teu tùrno, tira e carte pe impiä a teu man scin a 5 carte. Insëri **[draw]** pe incomensä.\n2. **Zugä 'na Carta**: Pe zugä 'na carta, specifica a carta e a pila do centro coscì: **[play A♠ 0]** (dove 'A♠' a l'é a carta e '0' a l'é l'indice da pila do centro).\n3. **Scartä**: Se no ti pöi zugä altre carte, scartä 'na carta da-a teu man in te 'na pila de scarto pe finî o teu tùrno. Insëri **[discard A♠ 1]** (dove 'A♠' a l'é a carta e '1' a l'é l'indice da pila de scarto). Nòta che no ti pöi scartä quæ se sæ carta da-a pila de pagament. Ti pöi scartä solo e carte da-a teu man.\n\n"
+  },
+  "board": {
+    "current_board": "Tavoliêre atoale:\n\n{board}\nMövi disponibili: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pile de çentro -- ",
+    "pile": "{observation}Mögio {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vista do Giöatore {player_id} ---\n",
+    "payoff": "{observation}Mögio de paga (Càrta de däto): {top_card}, Lônghezza do Mögio de paga: {payoff_length}\n",
+    "hand": "{observation}Màn: {hand} ",
+    "discard": "{observation}Mögi de scarto: {discard}\n",
+    "empty": "Empty"
+  },
+  "game_message": {
+    "no_cards_left": "No gh'é ciù de carte da levâ. Ti te ricordi che ti peu giou e carte di sti ponti: 1. a teu man 2. a carta in sciô çimma do tò pilato 3. a carta into çimmo d'un quæxi tutti i tocchi scartæ. "
+  },
+  "invalid_move": {
+    "wrong_format": "Formâto de mòssa no valido. O Giugador {player_id} no ha risposto con una mòssa valida in parentexi quadre.",
+    "invalid_play": "Zögò no valìo. Giöatore {player_id} o tentò de zögâ {card} into o mögio centrale {index}.",
+    "discard_from_payoff": "Discartamento invalido. O zugatô {player_id} o l'à provou à descartâ unna carta da pila de pagamento.",
+    "discard_not_in_hand": "Discartamento invalido. O zugatô {player_id} o l'à provou à discardâ unna carta ch'a no gh'é inta man.",
+    "wrong_move_type": "Tipo de mossa invalido. O zugatô {player_id} o no l'à rispòsto co-o tipo de mosse valido."
+  },
+  "game_action": {
+    "you_drew": "Ti t'æ fæto de carte.",
+    "opponent_drew": "O zugatô {player_id} o l'à tirou de carte.",
+    "you_played": "Ti t'æ zûgòu {card} in sciâ pila çentrâ {index}.",
+    "opponent_played": "O zugatô {player_id} o l'à zuòu {card} in sciâ pila çentrâ {index}.",
+    "you_discarded": "Ti te sei scartò {card} into o mögio de scarto {index}, o che vö dì che ti te sei finî o turn. Nisciün atro açión da parte toa a vëgnì consideä pe sto turn. Giöatore {next_player_id} o vegni dopo.",
+    "opponent_discarded": "O zugao {player_id} o l'ha scartou {card} into a pila di scarti {index}, o che voeu dî che l'ha finîo o seu turno. No gh'é de azioin ulterioî de zugao {player_id} in sto turno. Zugao {next_player_id}, ti và a zugâ. Prego, inserisci a to azione into o formato [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Giöatore {current_player} o l'é finî o mögio de paga! Giöatore {current_player} o vince!",
+    "deadlock_player_0": "Stallo razonso! Giöatore 0 o vince con {player_0_payoff} carte remanenti contra {player_1_payoff} carte do Giöatore 1.",
+    "deadlock_player_1": "Stallo razonso! Giöatore 1 o vince con {player_1_payoff} carte remanenti contra {player_0_payoff} carte do Giöatore 0.",
+    "deadlock_tie": "Stallo razonso con pari! Ambi giöatoî àn {player_0_payoff} carte remanenti. Giöatore {current_player} o vince pe defeito."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Iwe ndiwe Mchezaji {player_id} michezo ya Liar's Dice ya {num_players}.\nMiongozo:\n- Pa zamu yako, unaweza kuchagua:\n  1) Utekelezwe kubai kwa wingi mwingi kana kwa uso mwingi (kana zote mbiri) kuliko kubai kwakati hiki; yaani '[Bid: 3, 4]',\n  2) Ite simu ya kubai la mwisho kwa kuandika '[Call]'.\n\nUkaita simu:\n  - Ikiwa kuhesabiwa kwakweli kwa thamani ya uso huo kati ya mabai yote ni chini ya kubai, mchezaji wa mwisho wa kubai anapoteza bai moja.\n  - Vinginevyo, maiti anapoteza bai moja.\nMchezaji anayefikia 0 bai anatolewa. Mchezaji wa mwisho anayesalia anashinda."
+  },
+  "board": {
+    "per_player": "\tMwari {p}: {d}",
+    "new_round": "\nMwaka mitsva - Tsvimbo dzerudo: {dice_summary}\nTsvimbo dzauno dziri kuna: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Mchezaji {current_player_id} anaita simu! Kuhesabiwa kwakweli kwa uso {face_value} ni {count}, ambayo ni CHINI ya {quantity}.\nMchezaji {loser_id} (mchezaji wa mwisho wa kubai) anapoteza bai moja.",
+    "caller_loses": "Mchezaji {current_player_id} anaita simu! Kuhesabiwa kwakweli kwa uso {face_value} ni {count}, ambayo ni >= {quantity}.\nMchezaji {loser_id} (maiti) anapoteza bai moja."
+  },
+  "action": {
+    "bid_announce": "Mwari {player_id} anobisha {quantity} kubva pauso {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Kutaura kwakaitwa pasina bhidha yapfuura.",
+    "invalid_bid": "Bhodhi risina kukodzera: {reason}",
+    "not_recognized": "Shanda harikwanisi kuzivikanwa kana '[Bid: X, Y]' kana '[Call]' chete. Shanda rakapihwa: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Huwandu hutsva {new_quantity} hwakaderera pane hwazvino {current_quantity}.",
+    "face_lower": "Mutengo mutsva wezita {new_face_value} wakaderera pane uripo iye zvino {current_face_value}.",
+    "identical": "Bhodhi rakafanana nebhodhi razvino.",
+    "face_range": "Kukosha kunofanira kuva pakati pe1 ne6."
+  },
+  "message": {
+    "eliminated_invalid": "Mutambi {player_id} akabviswa nechiito chisina kukodzera."
+  },
+  "outcome": {
+    "win": "Mwari {winner} anotsva! Mabasa akapera: {final_ranking}"
+  }
+}

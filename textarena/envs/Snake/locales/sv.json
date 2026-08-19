@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake-lokaliseringsfil. ÖVERSÄTT INTE nycklar (vänster sida). Översätt endast värden (höger sida). Behåll varje {placeholder} exakt som det är. Översätt inte flytt/riktningstoken som spelaren skriver in ([up], [down], [left], [right], w, s, a, d) eller ASCII-brädet som återges i {board}.",
+  "_slots": {
+    "{num_players}": "Antal spelare i matchen",
+    "{width}": "Brädbredd i celler",
+    "{height}": "Brädhöjd i celler",
+    "{max_turns}": "Tidsgräns för matchen",
+    "{player_id}": "En spelares nummer (0-baserat)",
+    "{board}": "Det återgivna ASCII-rutnätet; behåll neutralt, översätt aldrig dess tecken",
+    "{reason}": "Den återgivna slut-på-spelet-frasen",
+    "{groups}": "Neutralt rankningsdata (en lista med spelar-id-grupper, sämst till bäst); översätt inte"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-spelars orm på en {width}×{height}-ruta.\nDu kontrollerar orm {player_id}. Giltiga drag: '[up]'/'[down]'/'[left]'/'[right]' (eller w/s/a/d).\nMål: överlev längst eller var längst och få högst poäng (tidsgräns {max_turns} omgångar)."
+  },
+  "board": {
+    "current": "Aktuell bräda:\n{board}",
+    "after_moves": "Aktuell brädstatus:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Orm {player_id} dog på grund av ogiltigt drag."
+  },
+  "outcome": {
+    "survived_win": "Spelare {player_id} överlevde; alla andra dog.",
+    "all_dead_simul": "Alla ormar dog samtidigt.",
+    "outlived": "Spelare överlevde alla andra.",
+    "all_dead": "Alla ormar döda.",
+    "turn_limit": "Tidsgränsen nåddes - bästa poäng vinner vid lika resultat.",
+    "ranking": "{reason} Slutliga rankningsgrupper (sämst→bäst): {groups}"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} **Ultimate Tic Tac Toe** -pelissä.\nLähetä siirtosi muodossa **[makro  mikro]** (kaksi numeroa 0-8):\n• *makro*  = missä minipelissä pelaat\n• *mikro* = missä ruudussa kyseisessä minipelissä\nEsimerkki `[7 8]` ➜ aseta merkkinsi minipelissä 7, ruudussa 8, ja\npakota vastustajasi pelaamaan seuraavaksi minipelissä 8.\n\nOlet `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Nykyinen pelilauta:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Siirron on oltava muodossa [makro mikro] numeroilla 0-8.",
+    "out_of_range": "Indeksien on oltava välillä 0 ja 8.",
+    "index_out_of_range": "Mikropelilauta, rivi tai sarake on ulottumattomissa.",
+    "cell_occupied": "Ruutu on jo varattu.",
+    "wrong_micro_board": "Pelaajan on pelattava seuraavassa mikropelissä.",
+    "micro_board_won": "Mikropelilauta on jo voitettu."
+  },
+  "next_board": {
+    "any": "mikä tahansa mikropeli",
+    "specific": "mikropeli {nxt}"
+  },
+  "game_action": {
+    "played": "Pelaaja {player_id} pelasi mikropelissä {macro_idx}, ruudussa {micro_idx} (rivillä {row}, sarakkeessa {col}). Pelaaja {opponent_id} on nyt pakko pelata {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Pelaaja {player_id} voittaa Ultimate Tic Tac Toen!",
+    "draw": "Peli on tasapeli!"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Pas cap de cartas encara.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Jòc en solitari contra lo dealer\n\n📖 RESUMIT DEL JÒC:\n• Començatz amb {start_chips} fichas\n• Jòc de 52 cartas (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Jògatz contra lo dealer (casa)\n• Cada torn segueix l'estructura de l'Ultimate Texas Hold'em: postatz ANTE e BLIND bets, recebutz 2 cartas de trauc, decidissètz sus PLAY bets opcionals pendent las fasas de jòc, puèi revelatz las cartas de la comunautat e comparatz la vòstra melhor man de 5 cartas contra la del dealer. Vòstra objectiu es de maximizar los vòstres guanhs (quand avètz la man melhor), mentre que minimizatz las vòstras pèrdas (quand avètz la man pièger).\n• Lo jòc s'acaba quand arribatz a 0 fichas o en dessús al començament del torn (PÈRDA) o completatz 1000 torns amb fichas (GANH)\n\n💰 ESTRUCTURA DE LAS BETS:\n• ANTE: Bet obligatòria de ${ante} cada torn\n• BLIND: Bet obligatòria de ${ante} cada torn\n• PLAY: Bet opcionala pendent lo jòc. Pendent lo torn, podètz causir SONQUE UN dels seguents: (${ante4} se fach al PRE-FLOP, ${ante2} se fach al FLOP, o ${ante} se fach al RIVER. Podètz tanben foldar al river, abandonar la man, e far pas cap de bet.)\n\n🎴 DISTRIBUCION DE LAS CARTAS:\n• Recebutz 2 cartas de cara (vòstras cartas de trauc)\n• Lo dealer receb 2 cartas de cara amagada (amagadas de vos)\n• 5 cartas de la comunautat son distribuidas de cara amagada inicialament\n• Las cartas de la comunautat son reveladas progressivament pendent las fasas del jòc\n\n🏆 QUALIFICACION DEL DEALER:\n• Lo dealer deu aver almens un PARI (2 cartas del meteis reng) per qualificar, en utilizant las 2 cartas de sa man e las 5 cartas de la comunautat.\n• La qualificacion del dealer afecta los resultats de las bets, coma serà explicat mai tard.\n\n🎮 FASAS DEL JÒC E ACCIONS:\n📋 PRE-FLOP:\n  • Accions: [4x] (${ante4}) o [check]\n  • [4x]: Plaçatz ${ante4} bet PLAY, revelatz las primièras 3 cartas de la comunautat\n  • [check]: Pas cap de bet suplementària, revelatz las primièras 3 cartas de la comunautat\n\n📋 FLOP:\n  • Se la bet 4x es plaçada: Sonque [skip] disponible (auto-revela las darrièras 2 cartas de la comunautat)\n  • Se pas cap de bet 4x: [2x] (${ante2}) o [check]\n  • [2x]: Plaçatz ${ante2} bet PLAY, revelatz las darrièras 2 cartas de la comunautat\n  • [check]: Pas cap de bet suplementària, revelatz las darrièras 2 cartas de la comunautat\n\n📋 RIVER:\n  • Se la bet 4x o 2x es plaçada: Sonque [skip] disponible (auto-avança al showdown)\n  • Se pas cap de bet PLAY anteriora: [1x] (${ante}) o [fold]\n  • [1x]: Plaçatz ${ante} bet PLAY, avançatz al showdown\n  • [fold]: Abandonatz la man, perdetz las bets ANTE e BLIND\n\n📋 SHOWDOWN:\n  • Totas las cartas son reveladas e evaluadas\n  • Melhor man de 5 cartas a partir de 7 cartas (2 trauc + 5 comunautat)\n  • Las bets son regladas segon las règlas de pagament\n\n💎 PAGAMENTS DE LAS BETS:\n📊 BET ANTE:\n  • Lo dealer se qualifica pas: PUSH (bet tornada)\n  • Lo dealer se qualifica e vos ganhatz: pagament 1:1 (bet + guanhs)\n  • Lo dealer se qualifica e vos perdetz: bet perduda\n  • Empat: PUSH (bet tornada)\n\n📊 BET BLIND:\n  • Pas afectada per la qualificacion del dealer\n  • Vos ganhatz: bet tornada e pagament suplementari segon la fòrça de la vòstra man\n  • Vos perdetz: bet perduda\n  • Empat: PUSH (bet tornada)\n\n📊 TABLA DE PAGAMENT DE LA BET BLIND:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Quatre d'un reng: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Mens de Straight: pas cap de pagament suplementari\n\n📊 BET PLAY:\n  • Pas afectada per la qualificacion del dealer\n  • Comparason dirècta: la vòstra melhor man contra la melhor man del dealer\n  • Vos ganhatz: pagament 1:1 (bet + guanhs)\n  • Vos perdetz: bet perduda\n  • Empat: PUSH (bet tornada)\n\n🎯 CLASSIFICACION DE LAS MANS DE PÒKER (Melhor a Pièger):\n  1. Royal Flush: A-K-Q-J-10 del meteis pal\n  2. Straight Flush: 5 cartas consecutivas del meteis pal\n  3. Quatre d'un reng: 4 cartas del meteis reng\n  4. Full House: 3 d'un reng + 2 d'un reng\n  5. Flush: 5 cartas del meteis pal\n  6. Straight: 5 cartas consecutivas\n  7. Tres d'un reng: 3 cartas del meteis reng\n  8. Dos parelhs: 2 parelhs de rengs diferents\n  9. Un parelh: 2 cartas del meteis reng\n  10. Carta Nauta: la carta mai nauta ganha\n\n⌨️ COMANDAS D'ACCION:\n• [4x] o [play bet 4x]: Plaçatz ${{self.ante_amount*4}} bet PLAY\n• [2x] o [play bet 2x]: Plaçatz ${{self.ante_amount*2}} bet PLAY\n• [1x] o [play bet 1x]: Plaçatz ${{self.ante_amount*1}} bet PLAY\n• [check] o [c]: Check (pas cap de bet suplementària)\n• [fold] o [f]: Fold (abandonar la man)\n• [skip] o [s]: Skip al torn seguent (quand pas cap d'accion es necessària)\n\n💡 CONSEILS DE STRATEGIA:\n• Las mans de començament fòrtas (parelhs, cartas nautas) justifican sovent las bets 4x\n• Consideratz la qualificacion del dealer - las mans flacas pòdon pushar se lo dealer se qualifica pas\n• La bet BLIND pòt èsser fòrça profitabla amb las mans fòrtas (Royal Flush = 500:1!)\n• Vigilatz lo vòstre pòt de fichas! Se va a 0 o en dessús al començament del torn, vos perdètz.\n\n⚠️  NOTAS IMPORTANTAS:\n• Las bets ANTE e BLIND son obligatòrias cada torn\n• Las bets PLAY son opcionals e estrategicas\n• Asseguratz-vos d'intrar la comanda correcta, e sonque una comanda a la vegada.\n\n",
+    "state": "🎯 RONDA {round}\n💰 Fichas: {chips}\n🎴 Vòstra man: {hand}\n📊 Parièrs actuals: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fasa: {phase}\n🎯 Accions disponiblas: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Round {round} començada! Parièrs: ANTE ${ante}, BLIND ${blind}. Avètz {chips} fichas demoradas.",
+    "your_hand": " Ta man: {hand}",
+    "flop_revealed": " FLOP revelat: {cards}",
+    "river_revealed": " RIVER revelèt: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Accion invalida per la fasa actuala. Acions disponiblas: {available}",
+    "message": " Accion invalida! Acions disponiblas: {available}"
+  },
+  "action": {
+    "folded": "- Que't vau desbrembar."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 CONFRONTACION! La man del dealer: {cards}",
+    "community_cards": " Carts comunautaris: {cards}",
+    "player_best": "🎴 La melhora man del jogaire: {name} ({cards})",
+    "dealer_best": "🎴 La melhora man del dealer: {name} ({cards})",
+    "ante_lost_folded": "❌ Enjòc d'ANTE perdut ! -${ante} (abandonat)",
+    "blind_lost_folded": "❌ Enjòc de BLIND perdut ! -${blind} (abandonat)",
+    "ante_won": "✅ ANTE parièr ganhat! +${amount}",
+    "ante_pushed": " ANTE parièr PUSHED! ${ante} retornada",
+    "ante_lost": " Anteriorament la parièra perdèt! -${ante}",
+    "blind_won": "✅ Enjòc de BLIND ganhat ! +${amount}",
+    "blind_pushed": "🔄 PARIÈR BLIND EMPATAT! ${blind} tornat",
+    "blind_lost": "❌ Enjòc de BLIND perdut ! -${blind}",
+    "play_won": "✅ Jòga aposta ganhada! +${amount}",
+    "play_pushed": " Jòga aposta PUSHED! ${play} retornada",
+    "play_lost": " Jòga aposta pèrda! -${play}",
+    "net_gain": "🎉 Ronda {round} completada! Guanhs nets: +${net}",
+    "net_loss": "💸 Ronda {round} completada! Pèrdas nets: ${net}",
+    "separator": "Lo nom de la vila es lo vilatge d'Aubrac, en Auvèrnhe. La municipalitat a situat al nòrd-es del departament dels Vòges e sus una riba drecha entre las vallées de l'Eure et de la Dôme (en valon) #que se tròba sul marge esquèrra de la Seine."
+  },
+  "outcome": {
+    "game_over_win": "🏁 PARTIDA TERMINADA! {max_turns} rondas completadas. Avètz ${chips} fichas - VENCÈTZ!",
+    "game_over_lose": "Lo crompaire ganha!",
+    "reward_win": "Jogador completèt {winner_rounds} rondas amb ${chips} fichas",
+    "reward_lose": "Lo jogaire a mancat de fichas dins lo torn {round}",
+    "reward_win_max": "Jogador completèt {max_turns} rondas amb ${chips} fichas"
+  },
+  "hand_names": {
+    "royal_flush": "La color reiala.",
+    "straight_flush": "Flush drech",
+    "four_of_a_kind": "Quatre d'una mena",
+    "full_house": "La casa plena .",
+    "flush": "Flush",
+    "straight": "D' èstre drech .",
+    "three_of_a_kind": "Tres d'un tipe",
+    "two_pair": "Dos parelhs.",
+    "one_pair": "Un parelh.",
+    "high_card": "Carta nauta",
+    "unknown": "Man desconeguda."
+  }
+}

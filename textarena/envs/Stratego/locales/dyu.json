@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "I ye Player {player_id} ye Stratego.\nKɛlɛɛ kɔ ni ye a ka o kɛlɛɛ Flag walima a ka o kɛlɛɛ bɔnɛ bɛɛ lajɛlen.\nA ka o kɛlɛɛ sɔrɔ a ye a ka o kɛlɛɛ Flag, Bombs, nɔɔ bɛɛ lajɛlen ye.\n\n### Kɛlɛɛ Kɔnɔ\n1. **Kɛlɛɛ Sirilan:**\n   - A ka o tɔɔ kɔnɔ, a ye kɛlɛɛ kɔnɔ kɔfɛ kelen ye.\n   - Sɛri: Kɛlɛɛ kɔnɔ A1 ka taa B1 walima A1 ka taa A2, ni B1 nɔɔ A2 bɛ a ka o kɛlɛɛ ye.\n   - Ni a ka o kɛlɛɛ ye Bomb walima Flag, a tɛ kɛlɛɛ kɔnɔ.\n2. **Kɛlɛɛ Kɛlɛɛ:**\n   - Ni a ka o kɛlɛɛ kɔnɔ kɔfɛ a ka o kɛlɛɛ ye, kɛlɛɛ kɛlɛɛ bɛɛ:\n     - Kɛlɛɛ ye rank ye kɔnɔ kɔfɛ a ka o kɛlɛɛ ye.\n     - Ni rank ye kelen ye, kɛlɛɛ bɛɛ lajɛlen.\n     - **Sirilan Sirilan:**\n       - Bombs ye kɛlɛɛ bɛɛ lajɛlen, kɔfɛ Miners ye Bombs lajɛlen.\n       - Spies ye Marshal lajɛlen, ni Spies ye kɛlɛɛ kɔnɔ kɔfɛ, walima a ka o kɛlɛɛ ye.\n3. **Kɛlɛɛ Kɔnɔ:**\n   - A ka o kɛlɛɛ ye a ka o kɛlɛɛ kɔnɔ kɔfɛ a ka o kɛlɛɛ ye.\n   - A ka o kɛlɛɛ Flag lajɛlen, a ka o kɛlɛɛ ye a ka o kɛlɛɛ Flag lajɛlen.\n   - Scouts ye a ka o kɛlɛɛ ye a ka o kɛlɛɛ kɔnɔ kɔfɛ a ka o kɛlɛɛ ye.\n\n### Kɛlɛɛ Kɔnɔ:\n1. A ka o kɛlɛɛ ye a ka o kɛlɛɛ kɔnɔ kɔfɛ a ka o kɛlɛɛ ye.\n2. A ka o kɛlɛɛ ye [A0 B0] ye.\n   - Sɛri: A ka o kɛlɛɛ ye row 0, column 0 ka taa row 1, column 0, input [A0 B0].\n3. A ka o kɛlɛɛ ye kɛlɛɛ kɔnɔ kɔfɛ a ka o kɛlɛɛ ye.\n\n### Kɛlɛɛ Kɔnɔ:\n- A ka o kɛlɛɛ ye a ka o kɛlɛɛ ye, e.g. MN, MS.\n- A ka o kɛlɛɛ ye a ka o kɛlɛɛ ye, e.g. ?.\n- Grids ye ~ ye lakes ye, a tɛ kɛlɛɛ kɔnɔ.\n- A ka o kɛlɛɛ ye a ka o kɛlɛɛ ye, Player 0 nɔɔ Player 1 ye row D nɔɔ row G.\n\nA ka o kɛlɛɛ ye a ka o kɛlɛɛ ye:\n"
+  },
+  "board": {
+    "current_board": "Kɛlɛɛ Kɔnɔ:\n\n{board}\nKɛlɛɛ Kɔnɔ: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "A fɔ cogoya min na, o tɛ se ka kɛ. Ɲininkɛla {player_id} ma a ta bɔcogo don nin fɔta kɔnɔ: [A0 B0] .",
+    "invalid_coordinates": "Kɛɛ kɔɔ tunɛ. Jɛnkɛ {player_id} ma tɛɛ kɔɔrɔɔnɛ.",
+    "not_own_piece": "O tɛ wale ye. Ɲinɛnkɛla {player_id} ka kan k'a yɛrɛ ta dɔ kɛ a la.",
+    "scout_through_pieces": "A fɔrɔgɔman tɛ se ka kɛ. Ɲinɛnbaa {player_id} t'a fɛ k'u dɔ bila a tɔɲɔgɔn kɔ.",
+    "scout_diagonal": "A fɔrɔgɔman tɛ se ka kɛ. Ɲinɛnbaa {player_id} t'a fɛ k'u tabaga dɔ bila sira a yɛrɛ ma.",
+    "non_scout_multi_square": "Kɛɛ kɔɔ tunɛ. Tɔgɔw, o tɛɛ kɛɛ kɔɔ, sɔɔ ka kɔɔrɔɔnɛ kelen kelen.",
+    "move_into_lake": "Kɛɛ kɔɔ tunɛ. Jɛnkɛ {player_id} tɛ sɔɔ ka ji.",
+    "move_onto_own_piece": "Kɛɛ kɔɔ tunɛ. Jɛnkɛ {player_id} tɛ sɔɔ ka tɔgɔ tɛɛ kɔ.",
+    "move_bomb_or_flag": "Bɛɛ tɛ se ka bɔ a kala ma. Ɲininkɛla {player_id} t'a fɛ k'u dɔ bila sira ani fana, u si kana taga yɔrɔ wɛrɛ la."
+  },
+  "game_action": {
+    "you_moved": "A ka o kɛlɛɛ ye {source} ka taa {dest}.",
+    "opponent_moved": "Player {player_id} ye kɛlɛɛ kɔnɔ {source} ka taa {dest}.",
+    "you_equal_ranks": "A ka o kɛlɛɛ ye {source} ka taa {dest}. Kɛlɛɛ ye rank ye {attacking_rank} nɔɔ kɛlɛɛ ye rank ye {target_rank}. Ni rank ye kelen ye, kɛlɛɛ bɛɛ lajɛlen.",
+    "opponent_equal_ranks": "Player {player_id} ye kɛlɛɛ kɔnɔ {source} ka taa {dest}. Kɛlɛɛ ye rank ye {attacking_rank} nɔɔ kɛlɛɛ ye rank ye {target_rank}. Ni rank ye kelen ye, kɛlɛɛ bɛɛ lajɛlen.",
+    "you_miner_defused": "A ka o kɛlɛɛ ye {source} ka taa {dest}. Kɛlɛɛ ye rank ye {attacking_rank} nɔɔ kɛlɛɛ ye rank ye {target_rank}. Ni Miners ye Bombs lajɛlen, a ka o kɛlɛɛ ye.",
+    "opponent_miner_defused": "Player {player_id} ye kɛlɛɛ kɔnɔ {source} ka taa {dest}. Kɛlɛɛ ye rank ye {attacking_rank} nɔɔ kɛlɛɛ ye rank ye {target_rank}. Ni Miners ye Bombs lajɛlen, a ka o kɛlɛɛ ye.",
+    "you_bomb_lost": "I tun bɛ taga i kɛlɛ ka tɛmɛ {source} ba {dest}. Kɛlɛ mina ka kɛlɛ tun bɛna ni {attacking_rank} ɛni kɛlɛ tun bɛna {target_rank}. Sababu kɛlɛ mina ka kɛlɛ tun bɛna mana ka taɲi, i tun bɛna ka kɔlɔsi.",
+    "opponent_bomb_won": "Jɛnkɛla {player_id} tun bɛ taga kɛlɛ ka tɛmɛ {source} ba {dest}. Kɛlɛ mina ka kɛlɛ tun bɛna ni {attacking_rank} ɛni kɛlɛ tun bɛna {target_rank}. Sababu kɛlɛ mina ka kɛlɛ tun bɛna mana ka taɲi, i y'a fɔ.",
+    "you_spy_won": "A ka o kɛlɛɛ ye {source} ka taa {dest}. Kɛlɛɛ ye rank ye {attacking_rank} nɔɔ kɛlɛɛ ye rank ye {target_rank}. Ni a ka o kɛlɛɛ ye Spy ye, a ka o kɛlɛɛ ye.",
+    "opponent_spy_lost": "Player {player_id} ye kɛlɛɛ kɔnɔ {source} ka taa {dest}. Kɛlɛɛ ye rank ye {attacking_rank} nɔɔ kɛlɛɛ ye rank ye {target_rank}. Ni a ka o kɛlɛɛ ye Spy ye, a ka o kɛlɛɛ ye.",
+    "you_higher_won": "A ka o kɛlɛɛ ye {source} ka taa {dest}. Kɛlɛɛ ye rank ye {attacking_rank} nɔɔ kɛlɛɛ ye rank ye {target_rank}. Ni a ka o kɛlɛɛ ye rank ye kɔnɔ kɔfɛ, a ka o kɛlɛɛ ye.",
+    "opponent_higher_lost": "Player {player_id} ye kɛlɛɛ kɔnɔ {source} ka taa {dest}. Kɛlɛɛ ye rank ye {attacking_rank} nɔɔ kɛlɛɛ ye rank ye {target_rank}. Ni a ka o kɛlɛɛ ye rank ye kɔnɔ kɔfɛ, a ka o kɛlɛɛ ye.",
+    "you_lower_lost": "I ma donso kan kɔnɔ {source} cɛma {dest}. Donso ye kanimɔgɔw ye {attacking_rank}, cɛma donso ina ye {target_rank}. Ka donso ye kanimɔgɔw ye tɛ cɛma donso ina, i ye kɛɛla.",
+    "opponent_lower_won": "Jokɛla {player_id} ma donso kan kɔnɔ {source} cɛma {dest}. Donso ye kanimɔgɔw ye {attacking_rank}, cɛma donso ina ye {target_rank}. Ka donso ye kanimɔgɔw ye tɛ cɛma donso ina, i ye kɛɛla."
+  },
+  "outcome": {
+    "flag_captured": "Player {player_id} ye a ka o kɛlɛɛ Flag lajɛlen!",
+    "no_movable_pieces": "Jɔgɔ {winner_id} tagara! Jɔgɔ {loser_id} tɛna figurinɛ kɛ fɔɲɔ mana."
+  }
+}

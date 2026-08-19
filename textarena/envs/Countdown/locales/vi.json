@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Bạn đang chơi trò chơi số Countdown!\nMục tiêu: Kết hợp các số bằng cách sử dụng +, -, *, / để đạt được mục tiêu.\nĐịnh dạng hành động: [i j op] trong đó i, j là chỉ số và op là phép toán.\nVí dụ: [0 2 *] nhân số ở chỉ số 0 với số ở chỉ số 2.\nPhép chia phải cho kết quả là số nguyên."
+  },
+  "board": {
+    "header": "MỤC TIÊU: {target}\n\nCác số có sẵn:\n{numbers}",
+    "best": "{observation}\n\nTốt nhất cho đến nay: {best_value} (khoảng cách: {distance})\nBiểu thức tốt nhất: {best_expression}",
+    "history": "{observation}\n\nLịch sử nước đi:\n{moves}",
+    "progress": "{observation}\nĐiểm tiến trình hiện tại: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Định dạng hành động không hợp lệ. Sử dụng `[i j op]` trong đó i, j là chỉ số và op là +,-,*,/",
+    "invalid_indices": "Chỉ số không hợp lệ. Phải khác nhau và nằm trong khoảng 0-{max_index}",
+    "invalid_operation": "Phép toán không hợp lệ (chia cho zero hoặc kết quả không phải số nguyên)"
+  },
+  "outcome": {
+    "win": "Hoàn hảo! Đã tìm thấy mục tiêu chính xác: {target}",
+    "no_moves": "Không còn nước đi. Kết quả tốt nhất: {best_value} (mục tiêu: {target})",
+    "turn_limit": "Đã đạt giới hạn lượt. Kết quả tốt nhất: {best_value} (mục tiêu: {target})"
+  }
+}

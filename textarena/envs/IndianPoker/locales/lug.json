@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Oli Player {player_id} mu mizanyo ya Indian Poker.\n- Dekki ya karati 52; oliyengera karati ya munyaga wako.\n- Ante {ante} chip(s) buli mwendo, {max_rounds} mwendo(mwendo) kikome.\n- Mizanyo egwanidde: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ni nambari nzijuvu <= namba ya chip zo.\n- Karati ekyama ekyawaggulu efuna pot ku showdown.\n"
+  },
+  "round": {
+    "announce": "### Muzannyo {current_round}/{max_rounds}\nKadi ya mukwano wo: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Pewuka ekikomo kya moja kibaju, kama '[check]', '[bet 2]', '[call]', '[raise 3]', au '[fold]'.",
+    "cannot_check": "Tosobola [check] - olina okuteesa.",
+    "amount_min": "Ssente z'okukuba/okuzannya zirina okuba nga ≥ 1.",
+    "cannot_bet": "Tojja kutumia [bet] - lyawe osabe [call] / [raise] / [fold].",
+    "nothing_to_call": "Tewali kya kuyita; oyinza [check] mu kifo ky'ekyo.",
+    "no_bet_to_raise": "Kozesa [bet X] okuggulawo; tewali kusasula kw'ogenda okwongeza.",
+    "insufficient": "Si kivve ekimala okukola ekintu ng'ekyo."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kisa {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Ebikolwa byo ebisoboka: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Omuzannyi {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Omuzanyi {player_id} yalekedde.",
+    "showdown_win": "Showdown: {card_win} yamalako {card_lose}.",
+    "showdown_tie": "Showdown tie: bombi {card}. Pot split  buli omu afuna {split}."
+  },
+  "outcome": {
+    "p0_wins": "Omuzannyi 0 awangula ({bank0} > {bank1})",
+    "p1_wins": "Omuzannyi 1 awangula ({bank1} > {bank0})",
+    "draw": "Ebipupuli ebyenkanankana oluvannyuma lw'emipiira gyonna."
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "_comment": "Fichier de langue de Golf (jeu de cartes). NE traduisez PAS les clés (côté gauche). Traduisez uniquement les valeurs (côté droit). Conservez chaque {placeholder} exactement tel quel. Ne traduisez jamais les jetons d'action ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), les étiquettes de cartes (A, 2-10, J, Q, K), les symboles de couleur, les lettres X/Y utilisées comme espaces réservés de ligne/colonne dans les jetons, ni les scores/positions numériques. Conservez la disposition de la grille ASCII (espacement, numéros de colonne, '?', alignement de 'Col', 'Row') intacte pour que le plateau reste lisible.",
+  "_slots": {
+    "{player_id}": "Un numéro de joueur, p. ex. 0 ou 1",
+    "{pid}": "Un numéro de joueur, p. ex. 0 ou 1",
+    "{winner}": "Le numéro du joueur ayant le score le plus bas",
+    "{score}": "Un total de points numérique",
+    "{card}": "Une étiquette de carte comme A♠, 10♥, K♦ ou Q♣",
+    "{new}": "L'étiquette de la carte placée dans la grille",
+    "{old}": "L'étiquette de la carte retirée de la grille",
+    "{row}": "Un numéro de ligne",
+    "{col}": "Un numéro de colonne",
+    "{max_row}": "Le plus grand numéro de ligne valide",
+    "{max_col}": "Le plus grand numéro de colonne valide",
+    "{reason}": "Une phrase pré-rendue décrivant pourquoi la manche finale a commencé",
+    "{n}": "Un numéro de ligne affiché au début d'une ligne de la grille",
+    "{cards}": "Les cellules pré-rendues et sensibles à la mise en page d'une ligne de la grille",
+    "{hand}": "Le bloc de grille du joueur pré-rendu",
+    "{discard}": "L'étiquette de la carte au sommet de la pile de défausse, ou le mot pour 'aucune'",
+    "{options}": "La ligne pré-rendue énumérant les actions disponibles",
+    "{scores}": "La liste pré-rendue des scores finaux par joueur"
+  },
+
+  "player_prompt": {
+    "intro": "Vous jouez à Golf (jeu de cartes) - Joueur {player_id}.\nObjectif : Obtenir le score total le plus bas dans cette unique manche. Si des colonnes partagent la même valeur, elles sont comptées comme 0.\nValeurs des cartes : A=1, 2-10=valeur faciale, J/Q=10, K=0\n\nActions (utilisez les crochets exacts) :\n- '[draw]' - Piocher dans la pioche\n- '[take]' - Prendre de la pile de défausse\n- '[swap X Y]' - Échanger la carte piochée avec la position X (ligne) Y (colonne)\n- '[discard]' - Défausser la carte piochée\n"
+  },
+
+  "board": {
+    "drew": "Vous avez pioché : {card}\nMaintenant vous devez la [swap X Y] ou la [discard].",
+    "took": "Vous avez pris : {card} de la pile de défausse\nVous devez la [swap X Y] (impossible de défausser).",
+    "peeked": "Vous avez regardé à la position ({row},{col}) : {card}",
+    "turn_view": "Votre main :\n{hand}\nPile de défausse : {discard}\n{options}",
+    "none": "Aucune"
+  },
+
+  "options": {
+    "final_turns": "Tours finaux ! Vos options : [draw], [take], [peek X Y]",
+    "draw": "Vos options : [draw], [take]",
+    "must_swap": "Vous devez : [swap X Y] (impossible de défausser les cartes de la pile de défausse)",
+    "swap_or_discard": "Vous devez : [swap X Y] ou [discard]"
+  },
+
+  "hand": {
+    "no_cards": "Aucune carte",
+    "header": "  Col:   1    2    3",
+    "row": "Row {n}: {cards}"
+  },
+
+  "action_desc": {
+    "swapped": "Le Joueur {pid} a échangé {new} avec {old} à la position ({row},{col})",
+    "discarded": "Le Joueur {pid} a défaussé {card}"
+  },
+
+  "message": {
+    "deck_empty": "La pioche est vide ! La partie se termine immédiatement.",
+    "knocked": "Le Joueur {pid} a frappé ! Chaque autre joueur a un tour de plus.",
+    "final_round": "Le Joueur {pid} {reason} ! Chaque autre joueur a un tour de plus."
+  },
+
+  "reason": {
+    "all_revealed": "a toutes ses cartes révélées"
+  },
+
+  "invalid": {
+    "wrong_action": "Utilisez exactement UNE action entre crochets : [draw], [take], [swap X Y], [discard], [knock] ou [peek X Y]",
+    "discard_empty": "La pile de défausse est vide !",
+    "must_draw_first": "Vous devez d'abord [draw], [take], [knock] ou [peek X Y]",
+    "cannot_discard_taken": "Vous ne pouvez pas défausser une carte prise de la pile de défausse. Vous devez l'échanger.",
+    "have_drawn_card": "Vous avez une carte piochée. Vous devez la [swap X Y] ou la [discard].",
+    "need_drawn_swap": "Il vous faut une carte piochée pour échanger.",
+    "need_drawn_discard": "Il vous faut une carte piochée pour défausser.",
+    "out_of_bounds": "Position hors limites. Utilisez la ligne 1-{max_row}, la colonne 1-{max_col}",
+    "knock_with_card": "Vous ne pouvez pas frapper avec une carte piochée. Terminez d'abord votre tour.",
+    "already_knocked": "Quelqu'un a déjà frappé lors de cette manche.",
+    "already_revealed": "Cette carte est déjà révélée !"
+  },
+
+  "summary": {
+    "full": "Partie terminée ! Le Joueur {winner} gagne avec un score de {score} points !\n\nScores finaux :\n{scores}",
+    "line": "Joueur {pid} : {score} points\n"
+  },
+
+  "board_str": {
+    "title": "=== JEU DE GOLF ===",
+    "discard": "Pile de défausse : {card}",
+    "knocked": "Le Joueur {pid} a frappé !",
+    "player_header": "Joueur {pid} (Score : {score}) :"
+  }
+}

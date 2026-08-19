@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame-lokaliseringsfil. OVERSETT IKKE nøkler (venstre side). Oversett bare verdier (høyre side). Behold hver {placeholder} eksakt som den er; oversett ikke aksjonstokenene [Offer: $X] / [Accept] / [Reject]. Behold valutasymbolet '$' og alle tall eksakt som de er.",
+  "_slots": {
+    "{player_id}": "Spillerens nummer, 0 eller 1",
+    "{other_id}": "Den andre spillerens nummer, 1 eller 0",
+    "{num_rounds}": "Totalt antall runder",
+    "{pool}": "Beløp tilgjengelig hver runde (et tall)",
+    "{round_number}": "Aktuell rundenummer",
+    "{proposer_id}": "Forslagsspillerens nummer, 0 eller 1",
+    "{responder_id}": "Svarspillerens nummer, 0 eller 1",
+    "{offer}": "Beløpet som tilbys (et tall)",
+    "{keep}": "Beløpet forslagsspilleren beholder (et tall)",
+    "{proposer_gain}": "Penger forslagsspilleren tjente denne runden (et tall)",
+    "{responder_gain}": "Penger svarspilleren tjente denne runden (et tall)",
+    "{total_0}": "Spiller 0s akkumulerte total (et tall)",
+    "{total_1}": "Spiller 1s akkumulerte total (et tall)",
+    "{winner}": "Vinnerens spillernummer",
+    "{loser}": "Tapernes spillernummer",
+    "{winner_total}": "Vinnerens totale penger (et tall)",
+    "{loser_total}": "Tapernes totale penger (et tall)",
+    "{total}": "Hver spillers like sluttotal (et tall)"
+  },
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id}, og spiller {num_rounds} runder av Iterated Ultimatum Game.\nDu har ${pool} å fordele denne runden mellom deg selv og Spiller {other_id}.\n\nForslagsspiller:\n  - Kom med et tilbud: [Offer: $X] (0 <= X <= pool)\n  - Hvis det aksepteres → Du får $(pool - X), den andre spilleren får $X\n  - Hvis det avvises → Begge får $0\n  - Eksempel: [Offer: $3]  eller  'Jeg tror dette er rettferdig. [Offer: $5]'\n\nSvarspiller:\n  - Bestem deg for tilbudet med enten [Accept] eller [Reject]\n  - Eksempel: 'Det ser rimelig ut. [Accept]'\n            'For urettferdig. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Runde {round_number} begynner! ---\nSpiller {proposer_id} er forslagsspiller, Spiller {responder_id} er svarspiller.",
+    "offer": "Runde {round_number}: Spiller {proposer_id} tilbyr ${offer} til Spiller {responder_id} (beholder ${keep}).",
+    "accepted": "Spiller {responder_id} aksepterte! Runde {round_number} gevinster: Spiller {proposer_id} +${proposer_gain}, Spiller {responder_id} +${responder_gain}. Nye totaler: Spiller 0: ${total_0}, Spiller 1: ${total_1}.",
+    "rejected": "Spiller {responder_id} avviste tilbudet! Runde {round_number} gevinster: Begge spillere +$0. Totalene forblir: Spiller 0: ${total_0}, Spiller 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Forslagsspiller må komme med et tilbud ved å bruke formatet [Offer: $X].",
+    "bad_integer": "Tilbudsbeløpet må være et gyldig heltall.",
+    "out_of_range": "Tilbudet må være mellom $0 og ${pool}.",
+    "no_current_offer": "Ingen nåværende tilbud å svare på.",
+    "accept_or_reject": "Svarspiller må enten [Accept] eller [Reject] tilbudet."
+  },
+  "outcome": {
+    "win": "Spiller {winner} vant med ${winner_total} totalt mot Spiller {loser}s ${loser_total}.",
+    "draw": "Uavgjort! Begge spillere endte med ${total} totalt."
+  }
+}

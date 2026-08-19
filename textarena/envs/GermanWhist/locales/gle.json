@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Tosaíonn an cluiche. Suíochán trump: {trump_suit} (cárta trump: {trump_str}).",
+    "no_trump_card": "aon cheann acu"
+  },
+  "player_prompt": {
+    "intro": "Tú Imreoir {player_id} i Whist Ghearmánach.\n{phase_info}\nTá {hand_size} cártaí agat.\nImir cárta le '[play N]', áit a bhfuil N ina shuíomh in do lámh (mar shampla '[play 3]').",
+    "phase_learning": "Céim Foghlama: an buaiteoir gach cleas a thógann an cárta aghaidh suas agus cailleach tarraingíonn an chéad chárta eile as an deic. Ní chomhaireamh le haghaidh bhuaigh na cleachtaí a fuair sa chéim seo .",
+    "phase_playing": "CÉIM NA hIMEARCTHA: tá an stócaigh éirithe as. Tá gach cleas ón bpointe seo ar aghaidh ag comhaireamh i dtreo na buaite."
+  },
+  "next_card": {
+    "playing_phase": "Níl aon chárta ar fáil - tá an chéim imréitigh tosaithe.",
+    "deck_empty": "Tá an deic folamh - níl aon chárta ar fáil.",
+    "available": "Cárta ar fáil: {card}",
+    "available_trump": "Cárta ar fáil: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Formáid imeartha neamhbhailí. Úsáid '[play N]' chun an n-ú cárta atá i do láimh a imirt.",
+    "bad_position": "Níl an suíomh cárta sin ann. Tá tú ag {hand_size} páipéar.",
+    "must_follow_suit": "Ní mór duit a leanúint agus cárta {lead_suit} a imirt.",
+    "invalid_play": "Ní féidir an cárta sin a imirt."
+  },
+  "game_action": {
+    "played": "Imreoir {player_id} imir {card}."
+  },
+  "trick": {
+    "won": "Faigheann imreoir {winner_id} an cleas le {card}.",
+    "won_learning": "Bhuaigh Imreoir {winner_id} an cleas le {card} agus ghlac siad an cárta atá os cionn."
+  },
+  "phase": {
+    "learning_complete": "Tá an deic tuirseach. Is é deireadh na céime foghlama - tá gach cleas fágtha ag brath chun bua a bhaint amach."
+  },
+  "draw": {
+    "winner_received": "Bhuaigh tú an cleas agus fuair {card}.",
+    "loser_received": "Chaill tú an cleas agus tharraing {card} ón deic.",
+    "winner_preview": "Is é an chéad chárta eile atá ar fáil ná {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Cártaí buaite go dtí seo - Imreoir 0: {tricks0}, Imreoir 1: {tricks1}",
+    "scores_playing": "Cártaí scóráil - Imreoir 0: {tricks0}, Imreoir 1: {tricks1}",
+    "phase": "Céim: {phase}",
+    "phase_learning": "Fás: {phase} ({remaining_cards} cártaí atá fágtha sa deck)"
+  },
+  "hand": {
+    "no_cards": "Gan cártaí.",
+    "no_cards_in_hand": "Níl cártaí i láimh.",
+    "header": "Do lámh:",
+    "trump_indicator": "(TRUMP) Tá sé seo go maith.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Níl cártaí a bhí ag an trick seo go fóill.",
+    "header": "Triail reatha:",
+    "trump_indicator": "(TRUMP) Tá sé seo go maith.",
+    "card_line": "{observation}\n  Imreoir {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Ní thosaigh an cluiche",
+    "header": "=== GAME WHIST Gearmánach===",
+    "phase": "{observation}\nFás: {phase}",
+    "trump_suit": "{observation}\nSuíochán trump: {trump_suit}",
+    "trump_card": "{observation}\nCárta trump: {card}",
+    "cards_left": "{observation}\nCártaí atá fágtha sa deck: {count}",
+    "next_card": "{observation}\nCárta ina dhiaidh don buaiteoir: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Trick reatha:",
+    "trump_indicator": "(TRUMP) Tá sé seo go maith.",
+    "trick_line": "{observation}\n  Imreoir {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nImreoir {player_id}: {scoring} scóráil cártaí ({tricks} iomlán), {hand_size} cártaí in láimh"
+  },
+  "outcome": {
+    "summary": "Céim fhoghlama - Imreoir 0: {l0}, Imreoir 1: {l1}. Céim sheinnte - Imreoir 0: {p0}, Imreoir 1: {p1}. Buaiteoir Imreoir {winner_id} le {winner_tricks} cleasanna scórála!"
+  }
+}

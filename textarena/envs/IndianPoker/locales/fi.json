@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} Intialaisessa Pokerissa.\n- 52 kortin pakka; näet vain vastustajan kortin.\n- Panos {ante} pelimerkki(ä) joka kierros, {max_rounds} kierrosta yhteensä.\n- Kelvolliset siirrot: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X on positiivinen kokonaisluku ≤ pelimerkkien määrä.)\n- Korkein piilotettu kortti voittaa potin näytössä.\n"
+  },
+  "round": {
+    "announce": "### Kierros {current_round}/{max_rounds}\nVastustajasi kortti on: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Anna tasan YKSI hakasulkeissa oleva toiminto, esim. '[check]', '[bet 2]', '[call]', '[raise 3]' tai '[fold]'.",
+    "cannot_check": "Ei voi [check] - olet vastakkain panoksen kanssa.",
+    "amount_min": "Panos / Korotusmäärä on oltava ≥ 1.",
+    "cannot_bet": "Ei voi [bet] - on pakko [call] / [raise] / [fold].",
+    "nothing_to_call": "Ei mitään kutsuttavaa; voit [check] sen sijaan.",
+    "no_bet_to_raise": "Käytä [bet X] avataksesi; ei ole panosta korotettavaksi.",
+    "insufficient": "Riittämätön määrä pelimerkkejä toimintaa varten."
+  },
+  "game_action": {
+    "action": "Pelaaja {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (maksaa {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Mahdolliset toimintasi: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Pelaaja {winner}. (Pankkitilanteet P0:{p0}, P1:{p1})",
+    "folded": "Pelaaja {player_id} luopui.",
+    "showdown_win": "Näytös: {card_win} voittaa {card_lose}.",
+    "showdown_tie": "Näytös tasapeli: molemmat {card}. Poti jaetaan – kumpikin saa {split}."
+  },
+  "outcome": {
+    "p0_wins": "Pelaaja 0 voittaa ({bank0} > {bank1})",
+    "p1_wins": "Pelaaja 1 voittaa ({bank1} > {bank0})",
+    "draw": "Tasapelit kaikkien kierrosten jälkeen"
+  }
+}

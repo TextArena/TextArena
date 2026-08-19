@@ -1,0 +1,36 @@
+{
+  "_comment": "Súbor lokalizácie LinesOfAction. NEPREKLADAJTE kľúče (ľavá strana). Prekladajte iba hodnoty (pravá strana).",
+  "_slots": {
+    "{player_id}": "Číslo hráča, buď 0 alebo 1",
+    "{side}": "Písmeno figúrky hráča, buď O alebo X",
+    "{other}": "Písmeno figúrky súpera, buď O alebo X",
+    "{board}": "ASCII zobrazenie dosky; ponechajte ako je",
+    "{coord}": "Súradnica na doske, napr. b1 alebo a3",
+    "{from}": "Zdrojová súradnica ťahu, napr. b1",
+    "{to}": "Cieľová súradnica ťahu, napr. b3"
+  },
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} v hre LinesOfAction.\nVaše figúrky sú '{side}', figúrky súpera sú '{other}'.\nFormát ťahu: `[b1b3]` (od súradnice k súradnici). Legálny ťah sa pohybuje horizontálne, vertikálne alebo diagonálne o počet štvorcov rovný celkovému počtu figúrok (ľubovoľnej farby) v tejto línii. Môžete preskočiť vlastné figúrky, ale nie figúrky súpera; pristátie na súperovi ho zajme.  Vyhráte, keď všetky vaše figúrky budú 8-susedovo prepojené."
+  },
+  "board": {
+    "current_board": "Doska:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formát musí byť e2e4 (súradnice od-do).",
+    "no_piece": "Žiadna figúrka {side} na {coord}.",
+    "identical": "Zdrojová a cieľová súradnica sú identické.",
+    "not_straight_or_diagonal": "Ťah musí byť priamy alebo diagonálny.",
+    "wrong_distance": "Musíte sa pohybovať o vzdialenosť rovnú počtu figúrok v línii.",
+    "enemy_blocks": "Figúrka súpera blokuje cestu.",
+    "destination_own": "Cieľová pozícia je obsadená vlastnou figúrkou."
+  },
+  "game_action": {
+    "moved": "Hráč {player_id} sa pohnul z {from} na {to}",
+    "captured_suffix": "Hráč {player_id} sa pohnul z {from} na {to} a zajal nepriateľa."
+  },
+  "outcome": {
+    "win": "Všetky figúrky sú prepojené.",
+    "draw_no_capture": "60 ťahov bez zajatia.",
+    "draw_repetition": "Pozícia sa opakovala trikrát."
+  }
+}

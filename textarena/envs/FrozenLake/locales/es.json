@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro":            "¡Bienvenido a Frozen Lake!\n\nEstás representado por 'P' en la cuadrícula.\nSímbolos de la cuadrícula:\n  ' ' = Superficie congelada (segura para caminar)\n  'H' = Agujero (¡si caes, pierdes!)\n  'G' = Meta (¡llega hasta aquí para ganar!)\n  'P' = Tu posición actual\n\nAcciones disponibles: up, down, left, right (o w, a, s, d)\nEscribe tu acción de esta manera: [up], [down], [left], [right] o [w], [a], [s], [d]\n\nObjetivo: Desplázate desde el inicio, en la esquina superior izquierda, hasta la meta, en la esquina inferior derecha, sin caer en ningún agujero.\n"
+  },
+
+  "board": {
+    "current_board":    "Tablero actual:\n\n{board}\n\nAcciones disponibles: {actions}"
+  },
+
+  "invalid_move": {
+    "wrong_format":     "Formato de acción no válido. Usa [up], [down], [left], [right] o [w], [a], [s], [d].",
+    "unknown_action":   "Acción desconocida '{action}'. Usa up, down, left, right o w, a, s, d.",
+    "hit_wall":         "Intentaste moverte hacia {action}, pero chocaste contra una pared."
+  },
+
+  "game_action": {
+    "moved":            "Te moviste hacia {action} hasta la posición ({row}, {col})."
+  },
+
+  "outcome": {
+    "win":              "¡Felicidades! ¡Has llegado a la meta!",
+    "fell_in_hole":     "¡Caíste en un agujero! Fin del juego. Completaste el {pct}% del recorrido hasta la meta.",
+    "turn_limit":       "¡Alcanzaste el límite de turnos! Fin del juego. Completaste el {pct}% del recorrido hasta la meta."
+  }
+}

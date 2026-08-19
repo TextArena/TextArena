@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Kana taka leda Golf (Wasannin Kati) - Ɗan {player_id}.\nManufa: Sami maki mafi ƙaranci a karon daya. Idan safai suna da ɗaya iri, suna ƙara a matsayin 0.\nKadatu: A=1, 2-10=maƙallin daraja, J/Q=10, K=0\n\nAyyuka (amfani da brackets mai tsari):\n- '[draw]' - Ja daga tsaƙa\n- '[take]' - ɗauka daga tarin yin yi\n- '[swap X Y]' - Canza katin da aka ja da matsayin X (jerin) Y (safai)\n- '[discard]' - Yi yin yi da katin da aka ja"
+  },
+  "board": {
+    "drew": "Ka jawo: {card}\nYanzu ka ɗauka [swap X Y] ko [discard] shi.",
+    "took": "A yiɓa: {card} daga puɗɗirɗe ɓaawo\nA ɗo ɓeyda [swap X Y] bee (a ɗo ɗaɓɓa ɓaawo).",
+    "peeked": "Ka taɓa wuri ({row},{col}): {card}",
+    "turn_view": "Haninka:\n{hand}\nTarin yin yi: {discard}\n{options}",
+    "none": "Walaa ko ɗon"
+  },
+  "options": {
+    "final_turns": "Toowii ɓurnde! Hakkilanko'en: [draw], [take], [peek X Y]",
+    "draw": "Hakkilanko'en: [draw], [take]",
+    "must_swap": "A haani: [swap X Y] (a waawataa ittuki kaaruuji diga ko ɓe ɓesdi)",
+    "swap_or_discard": "Ka gana: [swap X Y] ko [discard]"
+  },
+  "hand": {
+    "no_cards": "Wala kaadiji.",
+    "header": "Col: 1 2 3 Ɗoftol manjum",
+    "row": "Jerin {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Ɗan {pid} ya canza {new} da {old} a matsayin ({row},{col})",
+    "discarded": "Korijo {pid} yiɗi kaadii {card}"
+  },
+  "message": {
+    "deck_empty": "Deck wala ko mari! Fijirde timmi.",
+    "knocked": "Jaawal {pid} knocked! Koomoye jaawal feere heɓata go'o.",
+    "final_round": "Korijo {pid} {reason}! Kila korijo goɗɗo heɓi toowii gooto."
+  },
+  "reason": {
+    "all_revealed": "ɓe don haala kaadii"
+  },
+  "invalid": {
+    "wrong_action": "Amfani da aiki mai brackets ɗaya kawai: [draw], [take], [swap X Y], [discard], [knock], ko [peek X Y]",
+    "discard_empty": "Wuro wurtinol wala kujeji!",
+    "must_draw_first": "Ka gana fara [draw], [take], [knock], ko [peek X Y]",
+    "cannot_discard_taken": "A yi hakki karta din ka jeya daga caka wakkati, ka sai mayar da ita.",
+    "have_drawn_card": "A woodi karta a yiɓa. A ɗo ɓeyda [swap X Y] bee a ɗo ɓeyda [discard] karta.",
+    "need_drawn_swap": "A yi bukata karta din ka firji don a mayar.",
+    "need_drawn_discard": "A yi bukata karta din ka firji don a jeya.",
+    "out_of_bounds": "Wuri ba a cikin iyaka. Amfani da jerin 1-{max_row}, safai 1-{max_col}",
+    "knock_with_card": "A waawataa wurtinugo dabare be kaarji je a jaɓɓaayi. Timmin darnde ma arandeje.",
+    "already_knocked": "Goɗɗo ɗon mari nasaraaku nder ndu'u fijirde.",
+    "already_revealed": "Binndi man ɗon nder ɓernde!"
+  },
+  "summary": {
+    "full": "Wasan ya ƙare! Ɗan {winner} ya lashe da maki {score} points!\n\nMaki ƙarshe:\n{scores}",
+    "line": "Ɗan {pid}: {score} points\n"
+  },
+  "board_str": {
+    "title": "=== KORIJO GOLF ===",
+    "discard": "Luttolji je ɗon laara: {card}",
+    "knocked": "{pid} fijoowo ɗon do'a!",
+    "player_header": "Ɗan {pid} (Maki: {score}):"
+  }
+}

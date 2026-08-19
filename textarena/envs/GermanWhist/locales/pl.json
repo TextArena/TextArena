@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Gra się rozpoczyna. Kolor atutowy: {trump_suit} (karta atutowa: {trump_str}).",
+    "no_trump_card": "brak"
+  },
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w niemieckim Whist.\n{phase_info}\nMasz {hand_size} kart.\nZagraj kartę za pomocą '[play N]', gdzie N to jej pozycja w Twojej ręce (na przykład '[play 3]').",
+    "phase_learning": "FAZA UCZENIA: zwycięzca każdego rozdania bierze kartę odkrytą, a przegrany dobiera następną kartę z talii. Rozdania wygrane w tej fazie nie są wliczane do zwycięstwa.",
+    "phase_playing": "FAZA GRY: talia jest wyczerpana. Każde rozdanie od tej pory jest wliczane do zwycięstwa."
+  },
+  "next_card": {
+    "playing_phase": "Nie ma karty do wzięcia - rozpoczęła się faza gry.",
+    "deck_empty": "Talia jest pusta - nie ma karty do wzięcia.",
+    "available": "Karta do wzięcia: {card}",
+    "available_trump": "Karta do wzięcia: {card} (ATUT)"
+  },
+  "invalid_move": {
+    "wrong_format": "Nieprawidłowy format ruchu. Użyj '[play N]', aby zagrać N-tą kartę w Twojej ręce.",
+    "bad_position": "Ta pozycja karty nie istnieje. Masz {hand_size} kart.",
+    "must_follow_suit": "Musisz dołożyć do koloru i zagrać kartę {lead_suit}.",
+    "invalid_play": "Ta karta nie może być zagrana."
+  },
+  "game_action": {
+    "played": "Gracz {player_id} zagrał {card}."
+  },
+  "trick": {
+    "won": "Gracz {winner_id} wygrywa rozdanie kartą {card}.",
+    "won_learning": "Gracz {winner_id} wygrywa rozdanie kartą {card} i bierze kartę odkrytą."
+  },
+  "phase": {
+    "learning_complete": "Talia jest wyczerpana. Faza uczenia się jest zakończona - każde kolejne rozdanie jest wliczane do zwycięstwa."
+  },
+  "draw": {
+    "winner_received": "Wygrałeś rozdanie i otrzymałeś kartę {card}.",
+    "loser_received": "Przegrałeś rozdanie i dobrałeś kartę {card} z talii.",
+    "winner_preview": "Następna karta do wzięcia to {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Rozdania wygrane dotąd - Gracz 0: {tricks0}, Gracz 1: {tricks1}",
+    "scores_playing": "Rozdania punktowane - Gracz 0: {tricks0}, Gracz 1: {tricks1}",
+    "phase": "Faza: {phase}",
+    "phase_learning": "Faza: {phase} ({remaining_cards} kart pozostałych w talii)"
+  },
+  "hand": {
+    "no_cards": "Brak kart",
+    "no_cards_in_hand": "Brak kart w ręce",
+    "header": "Twoja ręka:",
+    "trump_indicator": " (ATUT)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Nie ma jeszcze kart zagranych w tym rozdaniu.",
+    "header": "Aktualne rozdanie:",
+    "trump_indicator": " (ATUT)",
+    "card_line": "{observation}\n  Gracz {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Gra nie została rozpoczęta",
+    "header": "=== NIEMIECKI WHIST ===",
+    "phase": "{observation}\nFaza: {phase}",
+    "trump_suit": "{observation}\nKolor atutowy: {trump_suit}",
+    "trump_card": "{observation}\nKarta atutowa: {card}",
+    "cards_left": "{observation}\nKarty pozostałe w talii: {count}",
+    "next_card": "{observation}\nNastępna karta dla zwycięzcy: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nAktualne rozdanie:",
+    "trump_indicator": " (ATUT)",
+    "trick_line": "{observation}\n  Gracz {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nGracz {player_id}: {scoring} punktowane rozdania ({tricks} łącznie), {hand_size} kart w ręce"
+  },
+  "outcome": {
+    "summary": "Faza uczenia się - Gracz 0: {l0}, Gracz 1: {l1}. Faza gry - Gracz 0: {p0}, Gracz 1: {p1}. Gracz {winner_id} wygrywa z {winner_tricks} punktowanymi rozdaniami!"
+  }
+}

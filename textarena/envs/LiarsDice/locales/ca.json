@@ -1,0 +1,55 @@
+{
+  "_comment": "Cadenes d'usuari per a Liar's Dice. Els tokens d'acció entre claudàtors ('[Bid: X, Y]', '[Call]'), els identificadors de jugador, els valors de les cares dels daus, les quantitats i els recomptes són ranures neutrals i mai no s'han de traduir.",
+  "_slots": {
+    "player_id": "índex del jugador (enter)",
+    "num_players": "nombre de jugadors al joc (enter)",
+    "dice_summary": "compte de daus restants per jugador, units amb '; '",
+    "your_dice": "llista de valors de les cares dels daus d'aquest jugador, separats per comes",
+    "p": "índex del jugador (enter)",
+    "d": "compte de daus restants per a aquest jugador (enter)",
+    "current_player_id": "índex del jugador que ha cridat (enter)",
+    "face_value": "valor de la cara del dau que es compta (1-6)",
+    "count": "nombre real de daus coincidents (enter)",
+    "quantity": "quantitat de la licitació (enter)",
+    "loser_id": "índex del jugador que perd un dau (enter)",
+    "new_quantity": "quantitat de la licitació acabada de presentar (enter)",
+    "current_quantity": "quantitat actual de la licitació (enter)",
+    "new_face_value": "valor de la cara de la licitació acabada de presentar (enter)",
+    "current_face_value": "valor actual de la cara de la licitació (enter)",
+    "action": "cadena d'acció bruta presentada pel jugador",
+    "reason": "motiu de rebuig de la licitació",
+    "winner": "índex del jugador que guanya (enter)",
+    "final_ranking": "llista d'índexs de jugadors des del primer eliminat fins al guanyador"
+  },
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} en un joc de Liar's Dice de {num_players} jugadors.\nRegles:\n- En el teu torn, pots:\n  1) Fer una nova licitació amb una quantitat o valor de cara més alt (o tots dos) que la licitació actual; és a dir, '[Bid: 3, 4]',\n  2) Cridar l'última licitació teclejant '[Call]'.\n\nSi crides:\n  - Si el compte real d'aquest valor de cara entre tots els daus és menor que la licitació, l'últim licitador perd un dau.\n  - Altrament, el cridador perd un dau.\nUn jugador que arriba a 0 daus queda eliminat. El darrer jugador que queda guanya."
+  },
+  "board": {
+    "per_player": "\tJugador {p}: {d}",
+    "new_round": "\nNova ronda - Daus restants: {dice_summary}\nEls teus daus actuals són: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "El Jugador {current_player_id} crida! El compte real de cara {face_value} és {count}, que és MENYS que {quantity}.\nEl Jugador {loser_id} (l'últim licitador) perd un dau.",
+    "caller_loses": "El Jugador {current_player_id} crida! El compte real de cara {face_value} és {count}, que és >= {quantity}.\nEl Jugador {loser_id} (el cridador) perd un dau."
+  },
+  "action": {
+    "bid_announce": "El Jugador {player_id} licita {quantity} de cara {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Crida realitzada sense cap licitació prèvia.",
+    "invalid_bid": "Licitació invàlida: {reason}",
+    "not_recognized": "Acció no reconeguda com una '[Bid: X, Y]' o '[Call]' vàlida. Acció presentada: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "La nova quantitat {new_quantity} és inferior a l'actual {current_quantity}.",
+    "face_lower": "El nou valor de cara {new_face_value} és inferior a l'actual {current_face_value}.",
+    "identical": "La licitació és idèntica a la licitació actual.",
+    "face_range": "El valor de cara ha de ser entre 1 i 6."
+  },
+  "message": {
+    "eliminated_invalid": "El Jugador {player_id} ha estat eliminat per un moviment invàlid."
+  },
+  "outcome": {
+    "win": "El Jugador {winner} guanya! Classificació final: {final_ranking}"
+  }
+}

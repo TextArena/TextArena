@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Ön a Számlálás játékot játssza!\nCél: Kombinálja a számokat +, -, *, / műveletekkel, hogy elérje a célt.\nLépés formátuma: [i j op], ahol i, j az indexek és op a művelet.\nPéldául: [0 2 *] megszorozza a 0. indexű számot a 2. indexű számmal.\nAz osztásnak csak egész számot eredményezhet."
+  },
+  "board": {
+    "header": "CÉL: {target}\n\nElérhető számok:\n{numbers}",
+    "best": "{observation}\n\nEddigi legjobb: {best_value} (távolság: {distance})\nLegjobb kifejezés: {best_expression}",
+    "history": "{observation}\n\nLépési előzmények:\n{moves}",
+    "progress": "{observation}\nAktuális haladási pontszám: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Érvénytelen lépés formátum. Használja a `[i j op]` formátumot, ahol i, j az indexek és op a +, -, *, / művelet.",
+    "invalid_indices": "Érvénytelen indexek. Különbözőnek kell lenniük és a 0-{max_index} tartományban kell lenniük.",
+    "invalid_operation": "Érvénytelen művelet (nullával való osztás vagy nem egész szám eredmény)"
+  },
+  "outcome": {
+    "win": "Tökéletes! Pontosan megtalálta a célt: {target}",
+    "no_moves": "Nincs több lépés. Legjobb eredmény: {best_value} (cél: {target})",
+    "turn_limit": "Lépéshatár elérve. Legjobb eredmény: {best_value} (cél: {target})"
+  }
+}

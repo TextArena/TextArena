@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Та Klondike Солитер тоглоом тоглож байна. Таны зорилго бол бүх картыг суурь цамхагуудад шилжүүлэх явдал юм.\n\nТоглоомын дүрэм:\n- Суурь цамхагууд (F1-F4): Ace-ээс King хүртэл өнгөөр нэмэх\n- Табло цамхагууд (T1-T7): Өнгөөр солих (улаан дээр хар, хар дээр улаан)\n- Нөөц: Картыг хаягдсан цамхагт татах\n- Хаягдсан (W): Дээд карт тоглоомд бэлэн байна\n\nКомандууд:\n- 'draw' - Нөөцөөс картыг хаягдсан цамхагт татах\n- 'move <source> <destination> [count]' - Цамхагуудын хооронд карт шилжүүлэх\n  Жишээ: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count 'all' байж болно, бүх нүүрээ харсан картыг шилжүүлэх оролдлого хийнэ.\n- 'forfeit' - Тоглоомыг даруй дуусгах ба одоогийн оноогоо бүртгэнэ\n- Цамхагийн нэрс: W (хаягдсан), F1-F4 (суурь), T1-T7 (табло)\n\nТа нэг ээлжинд олон үйлдлийг хэрэгжүүлэх боломжтой, тэдгээрийг таслалаар тусгаарлах:\n  Жишээ: 'draw, move W T1, move T2 F1'\n\nХоосон табло цамхагуудад зөвхөн Хаадууд тавигдах боломжтой.\nҮйлдлүүд хэрэгжиж байх үед - нэг нь бүтэлгүйтвэл, үлдсэн үйлдлүүд алгасагдах болно.\nТоглоом ялагдахгүй гэж бодсон тохиолдолд 'forfeit' ашиглах боломжтой."
+  },
+  "format_error": {
+    "no_brackets": "Ажил үйлдлийн формат нь хүчингүй. Ажил үйлдэл нь хаалганд байх ёстой.",
+    "no_closing_bracket": "Гэмт үйлдлийн формат. Хаалтын дугуй нь алга \"]\"",
+    "empty_command": "Худалгүй команд. \"draw\" эсвэл \"move <source> <destination> [count]\" гэж бичнэ.",
+    "empty_action": "Хугацаагүй арга хэмжээ",
+    "move_needs_args": "Хөдлөх команд нь эх үүсвэр болон зорилтыг шаарддаг. Хэрэглээ: 'move <source> <destination> [count]'",
+    "count_positive": "Тоо нь эерэг байх ёстой эсвэл 'all'",
+    "count_invalid": "Хүчингүй тоо. Тоо эсвэл 'all' ашиглах",
+    "unknown_command": "Мэдэхгүй команд \"{cmd}\". \"draw\", \"move <source> <destination> [count]\", эсвэл \"forfeit\" ашиглана",
+    "wrapped": "Үйл ажиллагаа {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Үйл ажиллагаа {n}: {msg}",
+    "before_failure": "Амжилтгүй байсан өмнө {n} үйлдлүүдийг гүйцэтгэв.",
+    "failed": "Үйлдэл {n} амжилтгүй боллоо: {msg}"
+  },
+  "move_result": {
+    "drew": "Карт нь хөрөнгөөс хаягдал руу шилжиж байна.",
+    "cannot_draw": "Хадгаламж болон хаягдал аль аль нь хоосон байна.",
+    "invalid_pile": "Нэр нь хүчингүй байна. W, F1-F4, T1-T7 ашиглана",
+    "foundation_one_card": "Зөвхөн 1 картг суурь руу шилжүүлж болно",
+    "waste_to_foundation_ok": "Хаягдлын картыг сууц руу F{dst} зөөв.",
+    "waste_to_foundation_bad": "Цайрын картны цогцолборыг шилжүүлэхгүй байна",
+    "tableau_to_foundation_ok": "Табле Т{src}-аас Ф{dst}-д шилжих картыг шилжүүлжээ",
+    "tableau_to_foundation_bad": "Таблерийн картыг үндэсний баганад шилжүүлэхгүй байна",
+    "foundation_to_foundation": "Суурь барилгаас суурь руу шилжих боломжгүй",
+    "waste_to_tableau_one_card": "Зөвхөн нэг картг хаягдлаас тавилга руу шилжүүлж болно",
+    "waste_to_tableau_ok": "Картыг хаягдлаас Т{dst} хүснэгт рүү шилжүүлэв",
+    "waste_to_tableau_bad": "Картыг тавиад тавиад болохгүй",
+    "no_face_up": "Хөдөлгөөнд оролцох ямар ч нүүрээ харуусан карт байхгүй",
+    "tableau_to_tableau_ok": "Т{src} хүснэгтээс Т{dst} хүснэгт рүү шилжүүлсэн {count} карт",
+    "tableau_to_tableau_bad": "T{src}-ээс T{dst}-д {count} карт (((s) -ийг шилжүүлж чадахгүй",
+    "foundation_to_tableau_one_card": "Зөвхөн 1 картг суурьгаас тавилга руу шилжүүлж болно",
+    "foundation_empty": "Foundation F{src} нь хоосон байна",
+    "foundation_to_tableau_ok": "F{src} суурьгаас T{dst} хүснэгт рүү шилжин ирсэн карт",
+    "foundation_to_tableau_bad": "Табле Т{dst} дээр үндэсний картыг байрлуулж чадахгүй",
+    "to_waste_or_stock": "Хог хаягдал эсвэл хөрөнгөөс авч чадахгүй"
+  },
+  "outcome": {
+    "forfeit": "Тоглолт дууссан. Эцсийн оноо: {score} картыг үндэслэлд.",
+    "won": "Та Клондайк Солитер тоглолтод түрүүлсэн!",
+    "turn_limit": "Тоглоом дууслаа! Та {max_turns} ээлжийн хязгаарт хүрлээ. Оноо: {score} үндсэн цуглуулгад байгаа каартууд."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE === Хөгжлийн хөшөөний бөмбөг ===",
+    "turn": "Худалдан авах: {turn}/{max_turns}",
+    "stock": "Хадгаламж: {stock} карт",
+    "waste": "Хог хаягдал (W): {waste}",
+    "foundations_header": "Суурь:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Таблету:",
+    "tableau_row": "Т{n}: {cards}"
+  }
+}

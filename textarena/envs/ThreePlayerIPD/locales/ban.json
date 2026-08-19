@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Cira dados Pemain {player_id} ring Dilema Tahanan Iteratif 3-pemain. Pertandingan puniki kalaksanayang {num_rounds} ronde.\nStruktur ronde:\n• {conv_rounds} giliran pawarta bebas\n• 1 giliran keputusan - serahang satunggal token per lawan: '[<opp-id> cooperate]' utawi '[<opp-id> defect]' (inggih punika '[1 defect] [2 cooperate]'; baku 'cooperate'). \nMatriks pembayaran pasangan (katerapang ring pasangan tanpa urutan):\n  - Makakalih nyawiji  ->  {reward}\n  - Makakalih nyimpang     ->  {punishment}\n  - Cira nyimpang, ipun nyawiji -> {temptation}\n  - Cira nyawiji, ipun nyimpang -> {sucker}\nPemain sane madue skor paling tegeh ring ungkur ronde dados jayanti."
+  },
+  "round": {
+    "start": "─── Ngawit Putaran {round} ───\tIa dados ngobrol bebas ring {conv_rounds} putaran salanturne.",
+    "chat_finished": "Pawarta sampun puput ring ronde {round}. Serahang keputusan Cira, satunggal token per lawan: `[pid cooperate]` utawi `[pid defect]`."
+  },
+  "results": {
+    "header": "### Putaran {round} - Hasil:",
+    "pair_line": "{observation}\n\t Pemain {i} lawan Pemain {j} milih {choice_i} miwah {choice_j} (Pemain {i} ngamolihang {gain_i}, Pemain {j} ngamolihang {gain_j})",
+    "scores_open": "{observation} -> Skor sané mangkin: ",
+    "score_first": "{observation}Pemain {player_id} ({score})",
+    "score_next": "{observation}; Pemain {player_id} ({score})",
+    "finalize": "{observation}  sané"
+  },
+  "outcome": {
+    "final": "Skor final: {scores}.  Kelompok peringkat (paling jelek→paling becik): {groups}"
+  }
+}

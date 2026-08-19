@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Keng Kaarten nach ëmmer.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Eenzelspiller géint den Dealer\n\n📖 IWWERSICHT IWWER D'SPILL:\n• Du fänks mat {start_chips} Chippen un\n• Eenzel Deck vu 52 Kaarten (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Du spillst géint den Dealer (Haus)\n• Jiddwer Rond follegt der Ultimate Texas Hold'em Struktur: du posts ANTE a BLIND Bets, kréis 2 Lachkaarten, entscheeds iwwer optional PLAY Bets an de verschiddene Phasen, dann weisen d'Gemeinschaftskaarten an vergläichen déi bescht 5-Kaartenhand mat där vum Dealer. Däi Zil ass et, däi Gewënner ze maximéieren (wann du déi besser Hand hues), wärend du däi Verloschter miniméierst (wann du déi schlechter Hand hues).\n• D'Spill endegt wann du 0 Chippen oder manner um Ufank vun enger Rond hues (VERLOSST) oder 1000 Ronden mat Chippen (GEWËNNT)\n\n💰 BET-STRUKTUR:\n• ANTE: Obligatoresche ${ante} Bet all Rond\n• BLIND: Obligatoresche ${ante} Bet all Rond\n• PLAY: Optionalen Bet wärend dem Spill. Du kanns nëmmen EEN vun de folgenden auswielen: (${ante4} wann et an PRE-FLOP gemaach gëtt, ${ante2} wann et an FLOP gemaach gëtt, oder ${ante} wann et an RIVER gemaach gëtt. Kann och an RIVER gefaalt ginn, fir op d'Hand opzeginn an keen Bet ze maachen.)\n\n🎴 KAARTEN AUSTEILEN:\n• Du kréis 2 opgedeckt Kaarten (däin Lachkaarten)\n• Den Dealer kréis 2 verdeckt Kaarten (verstoppt fir dech)\n• 5 Gemeinschaftskaarten ginn ufanks verdeckt ausgedeilt\n• D'Gemeinschaftskaarten ginn progressiv wärend de Spillphasen opgedeckt\n\n🏆 DEALER QUALIFIKATIOUN:\n• Den Dealer muss op d'mannst eng PAIR (2 Kaarten vum selwechte Rang) hunn, fir sech ze qualifizéieren, mat den 2 Kaarten an hirer Hand an den 5 Gemeinschaftskaarten.\n• D'Qualifikatioun vum Dealer beaflosst d'Bet-Ausgäng, wéi spéider erkläert gëtt.\n\n🎮 SPILLPHASEN & AKTIOUNEN:\n📋 PRE-FLOP:\n  • Aktiounen: [4x] (${ante4}) oder [check]\n  • [4x]: Plazéieren ${ante4} PLAY Bet, weist déi éischt 3 Gemeinschaftskaarten op\n  • [check]: Keen zousätzleche Bet, weist déi éischt 3 Gemeinschaftskaarten op\n\n📋 FLOP:\n  • Wann 4x Bet placéiert gëtt: Nëmmen [skip] disponibel (auto-weist déi lescht 2 Gemeinschaftskaarten op)\n  • Wann keen 4x Bet: [2x] (${ante2}) oder [check]\n  • [2x]: Plazéieren ${ante2} PLAY Bet, weist déi lescht 2 Gemeinschaftskaarten op\n  • [check]: Keen zousätzleche Bet, weist déi lescht 2 Gemeinschaftskaarten op\n\n📋 RIVER:\n  • Wann 4x oder 2x Bet placéiert gëtt: Nëmmen [skip] disponibel (auto-geet an d'Showdown)\n  • Wann keen PLAY Bet virdrun: [1x] (${ante}) oder [fold]\n  • [1x]: Plazéieren ${ante} PLAY Bet, geet an d'Showdown\n  • [fold]: Op d'Hand verzichten, verléiert ANTE a BLIND Bets\n\n📋 SHOWDOWN:\n  • All Kaarten opgedeckt an ausgewäert\n  • Bescht 5-Kaartenhand aus 7 Kaarten (2 Lachkaarten + 5 Gemeinschaftskaarten)\n  • Bets ginn no de Payout Regele gerechent\n\n💎 BET PAYOUTS:\n📊 ANTE BET:\n  • Den Dealer qualifizéiert sech net: PUSH (Bet zeréck)\n  • Den Dealer qualifizéiert sech a du gewënns: 1:1 Payout (Bet + Gewënn)\n  • Den Dealer qualifizéiert sech a du verléiers: Bet verluer\n  • Gläichstand: PUSH (Bet zeréck)\n\n📊 BLIND BET:\n  • Net beaflosst vun der Qualifikatioun vum Dealer\n  • Du gewënns: Bet zeréck an zousätzleche Payout no der Handstäerkt\n  • Du verléiers: Bet verluer\n  • Gläichstand: PUSH (Bet zeréck)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Keen zousätzleche Payout\n\n📊 PLAY BET:\n  • Net beaflosst vun der Qualifikatioun vum Dealer\n  • Direkte Verglach: Déi bescht Hand géint déi vum Dealer\n  • Du gewënns: 1:1 Payout (Bet + Gewënn)\n  • Du verléiers: Bet verluer\n  • Gläichstand: PUSH (Bet zeréck)\n\n🎯 POKER HAND RANKINGS (Bescht bis Schlëmmst):\n  1. Royal Flush: A-K-Q-J-10 vum selwechte Symbol\n  2. Straight Flush: 5 Kaarten an enger Rei vum selwechte Symbol\n  3. Four of a Kind: 4 Kaarten vum selwechte Rang\n  4. Full House: 3 vun enger Zort + 2 vun enger anerer Zort\n  5. Flush: 5 Kaarten vum selwechte Symbol\n  6. Straight: 5 Kaarten an enger Rei\n  7. Three of a Kind: 3 Kaarten vum selwechte Rang\n  8. Two Pair: 2 Päre vu verschiddene Räng\n  9. One Pair: 2 Kaarten vum selwechte Rang\n  10. High Card: Déi héchst Kaart gewënnt\n\n⌨️  AKTIOUNSKOMMANDEN:\n• [4x] oder [play bet 4x]: Plazéieren ${{self.ante_amount*4}} PLAY Bet\n• [2x] oder [play bet 2x]: Plazéieren ${{self.ante_amount*2}} PLAY Bet\n• [1x] oder [play bet 1x]: Plazéieren ${{self.ante_amount*1}} PLAY Bet\n• [check] oder [c]: Check (keen zousätzleche Bet)\n• [fold] oder [f]: Fold (op d'Hand verzichten)\n• [skip] oder [s]: Skippen an d'nächst Phas (wann keng Aktioun néideg ass)\n\n💡 STRATEGIE TIPS:\n• Stäerk Hänn (Päre, héich Kaarten) rechtfertegen dacks 4x Bets\n• Denk un d'Qualifikatioun vum Dealer - schwach Hänn kënnen pushen, wann den Dealer sech net qualifizéiert\n• BLIND Bet kann ganz profitabel sinn mat stäerken Hänn (Royal Flush = 500:1!)\n• Behalt däi Chipstack am A! Wann et op 0 oder manner geet, verléiers du.\n\n⚠️  WICHTIG NOTIZEN:\n• ANTE a BLIND Bets sinn obligatoresch all Rond\n• PLAY Bets sinn optional a strategesch\n• Stell sécher, datt du déi richteg Aktioun auswielst, an nëmmen eng Aktioun op eemol.\n\n",
+    "state": "🎯 ROND {round}\n💰 Chippen: {chips}\n🎴 Däin Hand: {hand}\n📊 Aktuell Bets: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Phas: {phase}\n🎯 Verfügbar Aktiounen: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Ronn {round} gestart! Wetteën: ANTE ${ante}, BLIND ${blind}. Dir hun {chips} Chippen iwwreg.",
+    "your_hand": " Är Hand: {hand}",
+    "flop_revealed": " FLOP opgedeckt: {cards}",
+    "river_revealed": " RIVER verroden: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Ongëlteg Aktioun fir déi aktuell Phase. {available}",
+    "message": " Ongëlteg Aktioun! Verfügbar Handlungen: {available}"
+  },
+  "action": {
+    "folded": " Dir hutt geklappt."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Deeler Hand: {cards}",
+    "community_cards": " Gemeinschaftskaarte: {cards}",
+    "player_best": "🎴 Spiller seng bescht Hand: {name} ({cards})",
+    "dealer_best": "🎴 Dealer seng bescht Hand: {name} ({cards})",
+    "ante_lost_folded": " ANTE Wette verluer! - ${ante} (gefalt)",
+    "blind_lost_folded": " D'Blind-Wett ass verluer! -${blind} (gefalt)",
+    "ante_won": "✅ ANTE wetten gewënnt! +${amount}",
+    "ante_pushed": " ANTE Wette PUSHED! ${ante} zréckginn",
+    "ante_lost": " ANTE Wette verluer! -${ante}",
+    "blind_won": "✅ Blind wetten gewënnt! +${amount}",
+    "blind_pushed": " Blind Wette PUSHED! ${blind} zréckginn",
+    "blind_lost": " Blind wetten verluer! - ${blind}",
+    "play_won": "✅ PLAY wetten gewënnt! + ${amount}",
+    "play_pushed": " PLAY wetten PUSHED! ${play} zréckginn",
+    "play_lost": " PLAY wetten verluer! - ${play}",
+    "net_gain": "🎉 Ronn {round} ofgeschloss! Netto-Gewënn: +${net}",
+    "net_loss": "💸 Ronn {round} ofgeschloss! Netto-Verlust: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 SPIEL ERiWERT! {max_turns} Ronnen ofgeschloss. Dir hun ${chips} Chippen - DU HAST GEWONNEN!",
+    "game_over_lose": "D'Spill ass eriwwer, Dir hutt keng Chips méi. De Händler gewënnt!",
+    "reward_win": "Spiller huet {winner_rounds} Ronnen mat ${chips} Chippen ofgeschloss",
+    "reward_lose": "De Spiller huet keng Chips an der Ronn {round} verluer.",
+    "reward_win_max": "Spiller huet {max_turns} Ronnen mat ${chips} Chippen ofgeschloss"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush (Kinneklech Floss)",
+    "straight_flush": "Straight Flush (Strait Floss)",
+    "four_of_a_kind": "Véier vun enger Aart",
+    "full_house": "Full House (Full Haus)",
+    "flush": "Flush (Flëss)",
+    "straight": "Direkt",
+    "three_of_a_kind": "Dräi vun enger Aart",
+    "two_pair": "Zwee Pair",
+    "one_pair": "Eent Pär",
+    "high_card": "Héich Kaart",
+    "unknown": "Onbekannt Hand"
+  }
+}

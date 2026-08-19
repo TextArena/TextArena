@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} al Tic Tac Toe Quàntic.\nLa teva marca és '{symbol}', i els números de moviment sempre són {parity} (per exemple, X1, X3 o O2, O4).\n\nObjectiu: Guanya formant una línia de tres marques clàssiques (solidificades a partir de superposicions).\n\nCom jugar:\n- A cada torn, col·loca una marca espantosa en dues caselles buides diferents utilitzant el format '[a,b]'.\n- Aquestes marques estan entrellaçades i etiquetades com 'X1 / X1' o 'O4 / O4'.\n- No pots col·locar marques espantoses en una casella que ja s'ha col·lapsat (solidificat).\n\nRegla de col·lapse:\n- Si el teu moviment crea un cicle en el graf d'entrellaçament, es col·lapsa automàticament.\n- Cada marca espantosa del cicle es converteix en una marca clàssica en una de les dues posicions.\n- Qualsevol marca espantosa dependent també es col·lapsa.\n\nVictòria:\n- El joc acaba quan un jugador té tres marques clàssiques en línia.\n- Si tots dos jugadors obtenen una línia durant el mateix col·lapse, el que té el número màxim de moviment més baix guanya.\n\nExemple de moviment: '[0,4]' col·loca una marca espantosa a les cel·les 0 i 4."
+  },
+  "board": {
+    "current_board": "Tauler de Tic Tac Toe Quàntic:\n\n{board}\n\nEnvia el teu moviment com '[a,b]' per col·locar una marca quàntica en dues ubicacions."
+  },
+  "invalid_move": {
+    "wrong_format": "Format invàlid. Utilitza '[a,b]'.",
+    "invalid_cells": "Índexs de cel·la invàlids o duplicats.",
+    "already_solidified": "Una de les cel·les ja està solidificada."
+  },
+  "game_action": {
+    "placed": "El Jugador {player_id} ha col·locat la seva marca en una superposició entre les cel·les {pos_a} i {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposició dependent resolta. La cel·la ({r}, {c}) ara és {symbol}.",
+    "last_cell_resolved": "Superposició per a l'última cel·la resolta. La cel·la ({r}, {c}) ara és {symbol}.",
+    "superposition_resolved": "Superposició resolta. La cel·la ({r}, {c}) ara és {symbol}."
+  },
+  "outcome": {
+    "win": "El Jugador {player_id} guanya amb marques solidificades!",
+    "draw": "El joc és un empat!"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro":            "Bienvenue dans Frozen Lake !\n\nVous êtes représenté par 'P' sur la grille.\nSymboles de la grille :\n  ' ' = Surface gelée (vous pouvez marcher dessus sans danger)\n  'H' = Trou (tombez dedans et vous perdez !)\n  'G' = Objectif (atteignez-le pour gagner !)\n  'P' = Votre position actuelle\n\nActions disponibles : up, down, left, right (ou w, a, s, d)\nSaisissez votre action sous la forme suivante : [up], [down], [left], [right] ou [w], [a], [s], [d]\n\nObjectif : Déplacez-vous du point de départ, en haut à gauche, jusqu'à l'objectif, en bas à droite, sans tomber dans un trou !\n"
+  },
+
+  "board": {
+    "current_board":    "Grille actuelle :\n\n{board}\n\nActions disponibles : {actions}"
+  },
+
+  "invalid_move": {
+    "wrong_format":     "Format d'action invalide. Utilisez [up], [down], [left], [right] ou [w], [a], [s], [d].",
+    "unknown_action":   "Action inconnue '{action}'. Utilisez up, down, left, right ou w, a, s, d.",
+    "hit_wall":         "Vous avez essayé de vous déplacer vers {action}, mais vous avez heurté un mur !"
+  },
+
+  "game_action": {
+    "moved":            "Vous vous êtes déplacé vers {action} jusqu'à la position ({row}, {col})."
+  },
+
+  "outcome": {
+    "win":              "Félicitations ! Vous avez atteint l'objectif !",
+    "fell_in_hole":     "Vous êtes tombé dans un trou ! La partie est terminée. Vous avez parcouru {pct}% du chemin jusqu'à l'objectif.",
+    "turn_limit":       "Vous avez atteint la limite de tours ! La partie est terminée. Vous avez parcouru {pct}% du chemin jusqu'à l'objectif."
+  }
+}

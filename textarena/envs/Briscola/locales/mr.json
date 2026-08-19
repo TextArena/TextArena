@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "ब्रिस्कोला खेळ सुरू झाला! ट्रम्प सूट: {trump_suit} (ट्रम्प कार्डः {trump_card})"
+  },
+  "prompt": {
+    "intro": "आपण ब्रिस्कोला खेळत आहात - प्लेअर {player_id}. ध्येय: युक्त्या जिंकून सर्वाधिक गुण गोळा करा (डेकमध्ये एकूण 120 गुण). कार्ड पॉईंट्स: ए = 11, 3 = 10, के = 4, क्यू = 3, जे = 2, इतर = 0 कार्ड पॉवरः ए > 3 > के > क्यू > जे > 7 > 6 > 5 > 4 > 2 ट्रम्प कार्ड्स नॉन-ट्रम्प कार्ड्सला पराभूत करतात. शक्तीची पर्वा न करता क्रियाः '[play X]' जेथे एक्स आपल्या हातात असलेल्या कार्डची (1-{max_pos}) स्थिती आहे "
+  },
+  "hand": {
+    "none": "कार्ड नाही",
+    "empty": "हाताने कार्ड नाही",
+    "header": "तुझा हात:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(ट्रम्प)"
+  },
+  "trick": {
+    "empty": "अद्याप ही युक्ती खेळलेली नाही.",
+    "header": "चालू युक्ती:",
+    "line": "प्लेअर {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "खेळाडू {player_id}: {points} pts",
+    "trump_info": "ट्रम्प सूट: {trump_suit}",
+    "trump_info_deck": "ट्रम्प सूट: {trump_suit} │ डेकमध्ये सोडलेले कार्ड: {deck_count}",
+    "board": "{hand} {trick} स्कोअरः {scores} {trump_info} [play X] चा वापर करून कार्ड खेळा"
+  },
+  "invalid_move": {
+    "wrong_format": "[play X] वापरा जेथे X म्हणजे कार्डची स्थिती (1, 2, 3, इत्यादी)",
+    "out_of_range": "अवैध कार्ड स्थिती. तुमच्याकडे {count} कार्ड्स (1-{count}) आहेत"
+  },
+  "action": {
+    "played": "खेळाडू {player_id} खेळला {card}",
+    "trick_win": "{winner} खेळाडू {card} सह युक्ती जिंकतो आणि {points} गुण मिळवतो!"
+  },
+  "outcome": {
+    "head": "गेम ओवर! खेळाडू {winner} जिंकतो {points} गुणांसह! अंतिम स्कोअरः {scores}",
+    "player_line": "खेळाडू {player_id}: {points} गुण ({tricks} युक्त्या) "
+  }
+}

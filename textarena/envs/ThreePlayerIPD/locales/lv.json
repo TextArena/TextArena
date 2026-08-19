@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} 3 spēlētāju Iterētā Cietuma Dilemmā. Mačs ilgst {num_rounds} kārtas.\nKārtas struktūra:\n• {conv_rounds} brīvā čata gājieni\n• 1 lēmuma gājiens - iesniedziet vienu žetonu katram pretiniekam: '[<opp-id> cooperate]' vai '[<opp-id> defect]' (piemēram, '[1 defect] [2 cooperate]'; noklusējums ir 'sadarboties'). \nPāru izmaksu matrica (piemērota katram nesakārtotam pārim):\n  - Abi sadarbojas  ->  {reward}\n  - Abi nodevē     ->  {punishment}\n  - Jūs nodevējat, viņi sadarbojas -> {temptation}\n  - Jūs sadarbojaties, viņi nodevē -> {sucker}\nSpēlētājs(i) ar augstāko punktu skaitu visu kārtu beigās uzvar."
+  },
+  "round": {
+    "start": "─── Sākot Kārtu {round} ───\tJūs varat brīvi sarunāties nākamās {conv_rounds} kārtas.",
+    "chat_finished": "Čats pabeigts Kārtai {round}. Iesniedziet savus lēmumus, viens žetons katram pretiniekam: `[pid cooperate]` vai `[pid defect]`."
+  },
+  "results": {
+    "header": "### Kārta {round} - Rezultāti:",
+    "pair_line": "{observation}\n\t Spēlētājs {i} vs Spēlētājs {j} izvēlējās {choice_i} un {choice_j} attiecīgi (Spēlētājs {i} ieguva {gain_i}, Spēlētājs {j} ieguva {gain_j})",
+    "scores_open": "{observation}\n-> Pašreizējie punkti: ",
+    "score_first": "{observation}Spēlētājs {player_id} ({score})",
+    "score_next": "{observation}; Spēlētājs {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Galīgie punkti: {scores}.  Rangu grupas (sliktākais→labākais): {groups}"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Ị bụ Onye egwuregwu {player_id} na egwuregwu LinesOfAction.\nEgwuregwu gị bụ '{side}', egwuregwu mmegide bụ '{other}'.\nNhazi njem: `[b1b3]` (site na nhazi ruo nhazi). Njem iwu kwadoro na-agafe n'usoro kwụ ọtọ, n'ụkwụ, ma ọ bụ n'ụkwụ ọnụ Ọgụgụ nke mgbidi dị n'usoro ahụ. Ị nwere ike ịwụli elu egwuregwu gị, mana ọ bụghị egwuregwu mmegide; ịdakwasị n'elu mmegide na-ịgba ya.  Merie mgbe egwuregwu gị niile jikọtara ọnụ 8."
+  },
+  "board": {
+    "current_board": "Board: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ọdịdị ga-abụ e2e4 (site na,ka nhazi).",
+    "no_piece": "Enweghị {side} iberibe na {coord}.",
+    "identical": "Ebe e si enweta ya na ebe a na-aga ya bụ otu.",
+    "not_straight_or_diagonal": "Ịgagharị agagharị ga-abụrịrị nke kwụ ọtọ ma ọ bụ nke dị n'akụkụ.",
+    "wrong_distance": "A ghaghị ịkwaga ebe dị anya dịka iberibe n'ahịrị.",
+    "enemy_blocks": "Onye iro na-egbochi ụzọ.",
+    "destination_own": "Ebe a na-aga bụ nke onye ọ bụla n'ime anyị."
+  },
+  "game_action": {
+    "moved": "Onye na-egwu egwu {player_id} kpaliri {from} -> {to}",
+    "captured_suffix": "Onye na-egwu egwu {player_id} kwagara {from} -> {to} na-ejide onye iro."
+  },
+  "outcome": {
+    "win": "Ihe nile jikọtara ọnụ.",
+    "draw_no_capture": "Ọ na-aga 60 na-enweghị capture.",
+    "draw_repetition": "A na-ekwughachi ọnọdụ ugboro atọ."
+  }
+}

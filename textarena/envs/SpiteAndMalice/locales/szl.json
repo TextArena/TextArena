@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ty je gracz {player_id} we dwuosobowyj grze Spite and Malice. Twojim celem je być pjyrszym, kery wypłyni swój kupkę wygranyj.\n\n### Przegląd Gry:\n- Cel je wyczyszczenie kupki wygranyj poprzez grę kartami na kupki środkowe.\n- Możesz grać kartami ze trzech źródeł:\n  1. Twojij **ręki** (rozpoczynasz każdą turę z do piyńciu kart we ręce).\n  2. **Wierzchnij karty twojij kupki wygranyj**.\n  3. **Wierzchnij karty ktorejkolwiek twojij kupki wyrzucanych**.\n\n### Zasady Gry:\n- Możesz zagrać kartę na kupkę środkową, jeśli je **o jeden stopień wyższa** niż wierzchnia karta na tej kupce (kupki środkowe zaczynają się od Asa i idą do Królowej; Króle są dzikie - mogą być zagrywane na dowolnej karcie, ale nie zmieniają kolejności stopni. To oznacza, że jeśli Król je użyt po 4, to ten Król je oceniany jako 5 i następna karta musi być 6).\n- Jeśli nie możesz zagrać już kart, musisz **wyrzucić kartę** do jednej ze swojich kupki wyrzucanych, aby zakończyć turę.\n- Jeśli kupka środkowa osiągnie Królową, zostanie automatycznie wyczyszczona.\n- Kolejność stopni je: A=1, 2=2, ..., 9=9, J=10, Q=11, K jako dziki.\n\n### Działania:\n1. **Dobierz**: Na początku twojej tury, dobierz karty, aby wypełnić twoją rękę do piyńciu kart. Wpisz **[draw]**, aby rozpocząć.\n2. **Zagraj Kartę**: Aby zagrać kartę, określ kartę i kupkę środkową w ten sposób: **[play A♠ 0]** (gdzie 'A♠' je karta, a '0' je indeks kupki środkowej).\n3. **Wyrzuć**: Jeśli nie możesz zagrać już kart, wyrzuć kartę z twojej ręki do kupki wyrzucanych, aby zakończyć turę. Wpisz **[discard A♠ 1]** (gdzie 'A♠' je karta, a '1' je indeks kupki wyrzucanych). Zwróć uwagę, że nie możesz wyrzucić żadnej karty z kupki wygranyj. Możesz wyrzucać tylko karty z twojej ręki.\n\n"
+  },
+  "board": {
+    "current_board": "Aktualno płyta:\n\n{board}\nDostępne posunięcia: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Środkowe Piylki -- ",
+    "pile": "{observation}Stos {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Widok Gracza {player_id} ---\n",
+    "payoff": "{observation}Stos wypłaty (górna karta): {top_card}, Długość stosu wypłaty: {payoff_length}\n",
+    "hand": "{observation}Roka: {hand} ",
+    "discard": "{observation}Stosy odrzuceń: {discard}\n",
+    "empty": "Pustŏ."
+  },
+  "game_message": {
+    "no_cards_left": "Niy ma już kart do wyciōnganio. Pamiyntejcie, iże idzie grać z tych zdrzōdł: 1. Twoja **rōma** 2. Gōrno karta twojigo szpile wypłat** 3. Gōrna karta kożdego ze twojich ôdkludzōnych szpilōw**. "
+  },
+  "invalid_move": {
+    "wrong_format": "Niyprawidłowy format ruchu. Gracz {player_id} niy ôdpowiōł prawidłym ruchem w nawiōnzanych klamrōwkach.",
+    "invalid_play": "Błędne posunięcie. Gracz {player_id} próbował zagrać {card} na stosie centralnym {index}.",
+    "discard_from_payoff": "Niyważne ôdciepniynie. Gracz {player_id} prōbowoł ôddŏwać karta z kupy wypłat.",
+    "discard_not_in_hand": "Niyważne ôdciepniynie. Gracz {player_id} prōbowoł ôddŏwać karta, co niy ma w rynce.",
+    "wrong_move_type": "Niyprawidłowy typ ruchu. Gracz {player_id} niy ôdpowiadoł prawidłym rodzinnym ruchem."
+  },
+  "game_action": {
+    "you_drew": "Tyś wyciōngnōł karty.",
+    "opponent_drew": "Gracz {player_id} wyciōngnōł karty.",
+    "you_played": "Zagraliście {card} na środkowym stōnie {index}.",
+    "opponent_played": "Gracz {player_id} zagrał {card} na centralnym sztosie {index}.",
+    "you_discarded": "Odrzuciłeś {card} do stosu odrzuceń {index}, co oznacza, że zakończyłeś swoją turę. Nie będą brane pod uwagę żadne dalsze działania twoje w tej turze. Gracz {next_player_id} będzie następny.",
+    "opponent_discarded": "Gracz {player_id} odrzucił {card} do stosu odrzuceń {index}, co oznacza, że zakończył swoją turę. Nie będą brane pod uwagę żadne dalsze działania Gracza {player_id} w tej turze. Gracz {next_player_id}, twoja kolej. Wprowadź swoją akcję w formacie [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Gracz {current_player} wyczyścił swój stos wypłaty! Gracz {current_player} wygrywa!",
+    "deadlock_player_0": "Zakończono remis! Gracz 0 wygrywa z {player_0_payoff} kartami pozostałymi w stosie w porównaniu z {player_1_payoff} kartami Gracza 1.",
+    "deadlock_player_1": "Zakończono remis! Gracz 1 wygrywa z {player_1_payoff} kartami pozostałymi w stosie w porównaniu z {player_0_payoff} kartami Gracza 0.",
+    "deadlock_tie": "Zakończono remis z remisem! Obaj gracze mają {player_0_payoff} kart pozostałych. Gracz {current_player} wygrywa domyślnie."
+  }
+}

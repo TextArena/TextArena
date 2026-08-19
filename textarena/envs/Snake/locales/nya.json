@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "Njoka ya {num_players}-Wosewera pa gridi ya {width}×{height}.\nUnakontrola njoka {player_id}. Zunguliro zinazokubalika: '[up]'/'[down]'/'[left]'/'[right]' (kapena w/s/a/d).\nLengo: kukaa ndi uhai wautali zaidi kapena uwe m'refu zaidi na upate alama ya juu (mpaka wa zunguliro {max_turns})."
+  },
+  "board": {
+    "current": "Bungwe la pakali pano: {board}",
+    "after_moves": "Boma la Board lomwe lilipo: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Njoka {player_id} anamwalira chifukwa chosayenda bwino."
+  },
+  "outcome": {
+    "survived_win": "Wosewera {player_id} anapulumuka; ena onse anafa.",
+    "all_dead_simul": "Njoka zonse zinafa nthaŵi imodzi.",
+    "outlived": "Woseŵera anapulumuka kuposa ena onse.",
+    "all_dead": "Njoka zonse zinafa.",
+    "turn_limit": "Kufikira malire a kutembenuka - wopambana kupambana pa tie-break.",
+    "ranking": "{reason} Malo a ranking (wodziwa→wobiri): {groups}"
+  }
+}

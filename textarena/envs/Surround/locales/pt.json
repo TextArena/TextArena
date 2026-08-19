@@ -1,0 +1,30 @@
+{
+  "_comment": "Arquivo de localização do Surround. NÃO traduza as chaves (lado esquerdo). Traduza apenas os valores (lado direito). Mantenha cada {placeholder} exatamente como está.",
+  "_slots": {
+    "{num_players}": "Número de jogadores na partida",
+    "{width}": "Largura do tabuleiro em células",
+    "{height}": "Altura do tabuleiro em células",
+    "{player_id}": "Número do jogador (baseado em 0)",
+    "{board}": "A grade ASCII renderizada; mantenha neutra, nunca traduza seus caracteres",
+    "{reason}": "A frase de motivo de fim de jogo renderizada",
+    "{groups}": "Dados de classificação neutros (uma lista de grupos de IDs de jogadores, do melhor para o pior); não traduza"
+  },
+  "player_prompt": {
+    "intro": "Surround de {num_players} jogadores em uma grade de {width}x{height}.\nVocê é o jogador {player_id}. Movimentos válidos: '[up]' '[down]' '[left]' '[right]' ou w/s/a/d.\nObjetivo: sobreviver a todos os outros. Trilhas são mortais; colisões com a parede matam; colisões frontais matam ambos."
+  },
+  "board": {
+    "current": "Tabuleiro Atual:\n{board}",
+    "after_moves": "Tabuleiro após movimentos simultâneos:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "O jogador {player_id} morreu devido a um movimento inválido."
+  },
+  "outcome": {
+    "survived_win": "O jogador {player_id} sobreviveu; todos os outros colidiram.",
+    "all_crashed": "Todos os jogadores colidiram simultaneamente.",
+    "outlived": "O jogador sobreviveu a todos os outros.",
+    "all_dead": "Todos os jogadores estão mortos.",
+    "turn_limit": "Limite de turnos alcançado - o sobrevivente mais longo vence.",
+    "ranking": "{reason} Grupos de classificação finais (melhor→pior): {groups}"
+  }
+}

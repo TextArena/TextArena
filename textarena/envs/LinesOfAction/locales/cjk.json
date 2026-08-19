@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Uli Muthu {player_id} mu nthanda ya LinesOfAction.\nVipande vyako ni '{side}', vipande vya muthu mwingine ni '{other}'.\nMfumo wa kusogea: `[b1b3]` (kutoka-kumbukumbu hadi-kumbukumbu).  Mlusuko wa sheria unatembea wima, mlalo, au diagonally idadi ya miraba sawa na jumla ya vipande (rang yoyote) kwenye mstari huo.  Unaweza kuruka juu ya vipande vyako mwenyewe, lakini si vipande vya muthu mwingine;  kutua kwenye muthu mwingine kumkamata.  Ushinde wakati vipande vyako vyote vimeunganishwa kwa 8-majirani."
+  },
+  "board": {
+    "current_board": "Board:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Mfumo lazima uwe e2e4 (kutoka, hadi viwianishi).",
+    "no_piece": "No {side} piece on {coord}.",
+    "identical": "Chanzo na mahali pa kusogea ni sawa.",
+    "not_straight_or_diagonal": "Kutwela kufwani kwa mstari au kwa kimbundi.",
+    "wrong_distance": "Cj, esengeli ku sende k'akata na kilo.",
+    "enemy_blocks": "Kyangala ndundu ya lunda nzila.",
+    "destination_own": "Kwangaya cjk'a nga b'o ng'ama."
+  },
+  "game_action": {
+    "moved": "Muthu {player_id} alisogea {from} -> {to}",
+    "captured_suffix": "Muthu {player_id} alisogea {from} -> {to} akamkamata muthu mwingine."
+  },
+  "outcome": {
+    "win": "Kwangalu nderi ma cj.",
+    "draw_no_capture": "Mlusuko 60 bila kumkamata muthu mwingine.",
+    "draw_repetition": "Kengele ya cjk ikatiwa mara tatu."
+  }
+}

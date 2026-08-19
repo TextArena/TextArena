@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} ({piece}). L'avversario è ({opp}).\nInvia le mosse come '[a2 a3]' (da → a).\n- Una mossa normale è un passo in avanti verso un vertice adiacente vuoto.\n- Una cattura è un salto sopra un pezzo nemico adiacente atterrando sul nodo vuoto oltre.\nOgni cattura vale {score_per_capture} punti.\nLa partita termina dopo {max_moves} mosse o quando un giocatore non ha più mosse valide."
+  },
+  "board": {
+    "current_board": "Mossa #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "Formato errato. Usa '[a2 a3]'.",
+    "unknown_square": "Casella sconosciuta.",
+    "not_your_piece": "La casella di partenza non è un tuo pezzo.",
+    "dest_not_empty": "La destinazione non è vuota.",
+    "illegal": "Mossa illegale."
+  },
+  "game_action": {
+    "captured": "Il Giocatore {player_id} ha catturato un pezzo! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Il Giocatore {player_id} non ha più pezzi.",
+    "cannot_move": "Il Giocatore {player_id} non può muovere.",
+    "higher_score": "Punteggio di cattura più alto.",
+    "move_limit": "Limite di mosse raggiunto."
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "আপুনি গল্ফ খেলি আছে - খেলুৱৈ {player_id}। লক্ষ্যঃ এই একক ৰাউণ্ডৰ সৰ্বনিম্ন মুঠ স্ক'ৰ লাভ কৰক। যদি স্তম্ভবোৰ একে মূল্যৰ হয়, তেন্তে তেওঁলোকক ০ যোগ কৰা হয়। কাৰ্ডৰ মানঃ A = 1, 2-10 = মুখমণ্ডল, J / Q = 10, K = 0 ক্ৰিয়া (সঠিক বন্ধনী ব্যৱহাৰ কৰক): - '[draw]' - ডেকৰ পৰা টান - '[take]' - পেলাই থোৱা স্তূপৰ পৰা লওক - '[swap X Y]' - X (শাৰী) Y (স্তম্ভ) ৰ সৈতে টান কৰা কাৰ্ড সলনি কৰক - '[discard]' - টান কৰা কাৰ্ডটো পেলাই দিয়ক "
+  },
+  "board": {
+    "drew": "আপুনি আঁকিছেঃ {card} এতিয়া আপুনি [swap X Y] বা [discard] কৰিব লাগিব।",
+    "took": "তুমি নিয়াঃ {card} পেলনীয়া বস্তুৰ পৰা তুমি ইয়াৰ সৈতে [swap X Y] কৰিব লাগিব (নকৰাব পাৰি) ।",
+    "peeked": "আপুনি স্থিতি ({row},{col}) ত চকু ফুৰালেঃ {card}",
+    "turn_view": "তোমাৰ হাত: {hand} পেলাই দিয়া গুটি: {discard} {options}",
+    "none": "নাই"
+  },
+  "options": {
+    "final_turns": "শেষৰটো পাল! আপোনাৰ বিকল্পসমূহঃ [draw], [take], [peek X Y]",
+    "draw": "আপোনাৰ বিকল্পসমূহঃ [draw], [take]",
+    "must_swap": "আপুনি কৰিব লাগিবঃ [swap X Y] (আৰম্ভ কৰা নকলৰ পৰা কাৰ্ড আঁতৰাব নোৱাৰি)",
+    "swap_or_discard": "আপুনি কৰিব লাগিবঃ [swap X Y] বা [discard]"
+  },
+  "hand": {
+    "no_cards": "কাৰ্ড নাই",
+    "header": "কলঃ ১ ২ ৩",
+    "row": "শাৰী {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "খেলুৱৈ {pid} ৰ সৈতে {new} ৰ সলনি {old} ৰ স্থানত ({row},{col})",
+    "discarded": "খেলুৱৈ {pid} আঁতৰোৱা হয় {card}"
+  },
+  "message": {
+    "deck_empty": "ডেক খালী! গেম তৎক্ষণাৎ শেষ হয়।",
+    "knocked": "খেলোয়াড় {pid} নক করেছেন! অন্য প্রতিটি খেলোয়াড় আরও একটি পালা পান।",
+    "final_round": "খেলুৱৈ {pid} {reason}! প্ৰতিজন খেলুৱৈয়ে আন এজন খেলুৱৈক বেট দিব পাৰে।"
+  },
+  "reason": {
+    "all_revealed": "সকলো কাৰ্ড উন্মোচিত কৰিছে"
+  },
+  "invalid": {
+    "wrong_action": "একেবাৰে এটা বন্ধকত থকা ক্ৰিয়া ব্যৱহাৰ কৰকঃ [draw], [take], [swap X Y], [discard], [knock], বা [peek X Y]",
+    "discard_empty": "পেলনীয়া সামগ্ৰী খালী!",
+    "must_draw_first": "আপুনি প্ৰথমে [draw], [take], [knock], বা [peek X Y]",
+    "cannot_discard_taken": "আপুনি বাতিল কৰা কার্ডৰ পৰা লোৱা কার্ডটো নাকচ কৰিব নোৱাৰে। আপুনি ইয়াক সলনি কৰিব লাগিব।",
+    "have_drawn_card": "আপোনাৰ হাতত এখন ড্ৰয়িং কাৰ্ড আছে। আপুনি ইয়াক [swap X Y] বা [discard] কৰিব লাগিব।",
+    "need_drawn_swap": "বিনিময় কৰিবলৈ এখন কাৰ্ডৰ প্ৰয়োজন।",
+    "need_drawn_discard": "আপুনি একটা ড্ৰন কাৰ্ড প্ৰয়োজন বাতিল কৰাবলৈ।",
+    "out_of_bounds": "সীমাৰ বাহিৰত অৱস্থান। ৰেখা ১-{max_row}, স্তম্ভ ১-{max_col} ব্যৱহাৰ কৰক",
+    "knock_with_card": "আপুনি এখন ড্ৰ' কাৰ্ড লৈ নক কৰিব নোৱাৰে। প্ৰথমে আপোনাৰ টাৰ্ণ সম্পূৰ্ণ কৰক।",
+    "already_knocked": "এই রাউণ্ডত কোনোবা ইতিমধ্যেই নক কৰিছে।",
+    "already_revealed": "সেই কাৰ্ডখন ইতিমধ্যে প্ৰকাশ কৰা হৈছে!"
+  },
+  "summary": {
+    "full": "খেল শেষ! খেলুৱৈ {winner}য়ে {score}পইণ্ট লাভ কৰি জয়ী হয়! চূড়ান্ত স্ক'ৰঃ {scores}",
+    "line": "খেলুৱৈ {pid}: {score} পইণ্ট "
+  },
+  "board_str": {
+    "title": "=== গল্ফ খেল ===",
+    "discard": "পেলাই থোৱা পিকঃ {card}",
+    "knocked": "খেলুৱৈ {pid}য়ে টোকৰ মাৰিছে!",
+    "player_header": "খেলুৱৈ {pid} (স্ক'ৰঃ {score}):"
+  }
+}

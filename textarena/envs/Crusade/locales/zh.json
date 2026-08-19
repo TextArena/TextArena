@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "你是玩家 {player_id}（{piece}）。对手是（{opp}）。请以 '[b1 c3]' 的格式提交移动（起点 → 终点）。所有棋子都像国际象棋中的马一样移动。\n每次吃子可得 {score_per_capture} 分。游戏会在 {max_moves} 次移动后结束，或在某位玩家没有合法移动 / 没有棋子时结束。分数较高者获胜。"
+  },
+  "board": {
+    "current_board": "第 #{move_count} 步\n\n{board}\n\n可用移动：{moves}"
+  },
+  "invalid_move": {
+    "bad_format": "格式错误。请使用 '[b1 c3]'。",
+    "unknown_square": "未知格子。",
+    "not_your_piece": "起始格不是你的棋子。",
+    "own_piece": "不能落在自己的棋子上。",
+    "not_knight": "这不是马步。"
+  },
+  "game_action": {
+    "moved": "玩家 {player_id} 将其棋子从 {frm} 移动到 {to}。",
+    "capture": "{observation} 吃掉一枚棋子！(+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "玩家 {player_id} 已无棋子。",
+    "cannot_move": "玩家 {player_id} 无法移动。",
+    "higher_score": "吃子得分更高。",
+    "move_limit": "已达到移动上限。"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "U nga Player {player_id} eka michezo ya Spite na Malice ya vataki va vimbirhi. Xikongomelo xa wena i ku va u tshama wa sungula ku tsema phayiphi ya wena ya ku pfuneta.\n\n### Nhlahlo wa Michezo:\n- Xikongomelo i ku tsema phayiphi ya wena ya ku pfuneta hi ku tsema khadi eka mitsambu ya kati.\n- U nga tsema khadi ku suka eka tindhawu tinharhu:\n  1. **Makhasi ya wena** (u thoma ku tirhisa khadi zinharhu ku ya eka tano eka makhasi ya wena).\n  2. **Khadi ya le henhla ya phayiphi ya wena ya ku pfuneta**.\n  3. **Khadi ya le henhla ya phayiphi yin'wana ya wena ya ku lahleka**.\n\n### Milawu ya Ku Tirhisa:\n- U nga tsema khadi eka mitsambu ya kati loko i **yin'we ya le henhla** ku ya eka khadi ya le henhla eka mitsambu leyo (mitsambu ya kati yi thoma na Ace na yi ya eka Queen; Makhosi i ya ku tirhisa eka khadi yin'wana yihi na yihi kambe yi nga yi shayi mpimo wa khadi. Leswi swi vula loko Makhosi yi tirhisiwa endzhaku ka 4, Makhosi yi le yin'we ya le henhla na khadi ya landzela yi fanele yi va 6).\n- Loko u nga yi khoni ku tirhisa khadi yin'wana yihi, u fanele **ku lahleka khadi** eka phayiphi yin'wana ya wena ya ku lahleka ku herisa mpimo wa wena.\n- Loko mitsambu ya kati yi fika eka Queen, yi ta tsema yona.\n- Mpimo wa khadi i: A=1, 2=2, ..., 9=9, J=10, Q=11, K i ya ku tirhisa eka khadi yin'wana yihi na yihi.\n\n### Mitsakani:\n1. **Tsema**: Eka thoma ka mpimo wa wena, tsema khadi ku tala makhasi ya wena ku ya eka khadi zinharhu ku ya eka tano. Nghenisa **[draw]** ku sungula.\n2. **Tsema Khadi**: Ku tsema khadi, tsala khadi na mitsambu ya kati hi ndlela leyi: **[play A♠ 0]** (la 'A♠' i khadi na '0' i mitsambu ya kati ya ku tirhisa).\n3. **Lahleka**: Loko u nga yi khoni ku tirhisa khadi yin'wana yihi, lahleka khadi ku suka eka makhasi ya wena eka phayiphi ya ku lahleka ku herisa mpimo wa wena. Nghenisa **[discard A♠ 1]** (la 'A♠' i khadi na '1' i phayiphi ya ku lahleka ya ku tirhisa). Kumbuka leswi u nga yi khoni ku lahleka khadi yin'wana yihi ku suka eka phayiphi ya ku pfuneta. U fanele ku lahleka khadi ku suka eka makhasi ya wena."
+  },
+  "board": {
+    "current_board": "Bhoza ra Bhoza leyo:\n\n{board}\nMavala ya Kusuka: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Mihlangano ya Kati ---\n",
+    "pile": "{observation}Tiphini {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- View ya Mutsari {player_id} ---\n",
+    "payoff": "{observation}Ntokoto (Kadi ya Kona): {top_card}, Ntokoto ku Fika: {payoff_length}\n",
+    "hand": "{observation}Lembe: {hand}\n",
+    "discard": "{observation}Tiphini ta Ku Tira: {discard}\n",
+    "empty": "A yi na nchumu."
+  },
+  "game_message": {
+    "no_cards_left": "A ka ha ri na makhadi yo huma eka wona. Tsundzuka leswaku u nga tlanga hi makhadi lama humaka eswihlobyeni leswi: 1. Voko ra wena 2. Khadi ro sungula leri ku vuyerisaka 3. Khadi lerikulu ngopfu leri lahliwaka. "
+  },
+  "invalid_move": {
+    "wrong_format": "Muxaka wa ku famba lowu nga tirhiki. Mutlangi {player_id} a nga hlamulanga hi goza leri faneleke eka swirhendzevutana swa xirhendzevu.",
+    "invalid_play": "Mutlangi {player_id} u ringete ku tlanga {card} eka nhulu ya le xikarhi {index}.",
+    "discard_from_payoff": "Mutlangi {player_id} u ringete ku cukumeta khadi eka xitshamo xa mali leyi hakeriwaka.",
+    "discard_not_in_hand": "Ku cukumeta loku nga riki ka ntiyiso. Mutlangi {player_id} u ringete ku cukumetela khadi leri a ri nga kona evokweni rakwe.",
+    "wrong_move_type": "Muxaka wa ku famba lowu nga tirhiki. Mutlangi {player_id} a nga hlamulanga hi muxaka wo tirha kahle wa maendlelo."
+  },
+  "game_action": {
+    "you_drew": "U tlange hi makhadi.",
+    "opponent_drew": "Mutlangi {player_id} u dirowe makhadi.",
+    "you_played": "U tlange {card} eka xithezi xa le xikarhi {index}.",
+    "opponent_played": "Mutlangi {player_id} u tlange {card} eka xikhomo xa le xikarhi {index}.",
+    "you_discarded": "U tire {card} ku ndhawu ya ku tira {index}, hi ku vulavula leswaku u pfunike ntokoto wakwe. Swiviko swin'wana swa wena swi nga tiyisiwi ku hlayisa. Mutsari {next_player_id} a ta hlayisa mbelo.",
+    "opponent_discarded": "Mutsari {player_id} u tire {card} ku ndhawu ya ku tira {index}, hi ku vulavula leswaku a pfunike ntokoto wake. Swiviko swin'wana swa Mutsari {player_id} swi nga tiyisiwi ku hlayisa. Mutsari {next_player_id}, u ta hlayisa mbelo. N'wana, u ngaphati makungu ya wena ku aniki [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mutsari {current_player} u pfuni ntokoto wake! Mutsari {current_player} u tsandza!",
+    "deadlock_player_0": "Ku fikeleriwe nkarhi wo hetelela! Mutlangi wa 0 u hlula hi {player_0_payoff} khadi leri saleke vs. mutlangi 1 a ri na makhadi ya {player_1_payoff} .",
+    "deadlock_player_1": "Ku hlanganisa ka mavala! Mutsari 1 u tsandza na {player_1_payoff} kadi dzikarike mpfhuva Mutsari 0 u fikelela na {player_0_payoff} kadi.",
+    "deadlock_tie": "Ku fikile ku hela na ku ringana! Vamathori vambirhi va na {player_0_payoff} kadi zin'wana zisale. Player {current_player} a hlule hi ku va na ntirho wa ku herisa."
+  }
+}

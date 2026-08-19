@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in het Onderhandelingsspel.\nU hebt enkele middelen en uw taak is om te handelen zodat de totale waarde van uw middelen toeneemt.\nDe middelen en bijbehorende waarden die u momenteel heeft zijn:\n\t+ {resource_value_list}\nBij elke beurt kunt u met uw tegenstander praten en een handelaanbod doen.\nGebruik de volgende speciale tokens voor acties:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Aangeboden middelen -> Gevraagde middelen]\n  - '[Accept]': Om een inkomend aanbod te accepteren.\n  - '[Deny]': Om een inkomend aanbod te weigeren (standaard).\nHet spel duurt {max_turns} beurten in totaal."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Speler probeerde een handel te accepteren zonder de nodige middelen te hebben.",
+    "out_of_range": "Speler {player_id}, Ongeldige actie. Kolom {col} is buiten de grenzen.",
+    "already_full": "Speler {player_id}, Ongeldige actie. Kolom {col} is vol.",
+    "proposing_with_no_resource": "Speler {player_id} probeerde een handelaanbod te doen zonder de nodige middelen te hebben.",
+    "incorrect_offer_format": "Speler {player_id} deed een handelaanbod in een onjuist formaat.",
+    "no_new_offer": "Speler {player_id} deed geen nieuw handelaanbod."
+  },
+  "offers": {
+    "reject": "Speler {player_id} wees het handelaanbod af.",
+    "accept": "Speler {acceptor_id} accepteerde het handelaanbod van Speler {proposer_id}.",
+    "proposal": "Speler {player_id} deed het volgende aanbod aan Speler {opponent_id}: Aangeboden items: {offered} -> Gevraagde items: {requested}"
+  },
+  "outcome": {
+    "win": "Speler {winner_id} won door een grotere winst in de waarde van de inventaris te hebben.",
+    "draw": "Zelfde verandering in de waarde van de inventaris voor alle spelers. Gelijkspel."
+  }
+}

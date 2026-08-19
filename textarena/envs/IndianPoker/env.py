@@ -31,9 +31,9 @@ class IndianPokerEnv(ta.Env):
         # check if match finished
         if gs["current_round"] > self.max_rounds:
             bank0, bank1 = gs["player_chips"].values()
-            if bank0 > bank1:   self.state.set_winner(0, f"Player 0 wins ({bank0} > {bank1})")
-            elif bank1 > bank0: self.state.set_winner(1, f"Player 1 wins ({bank1} > {bank0})")
-            else:               self.state.set_draw("Equal chips after all rounds")
+            if bank0 > bank1:   self.state.set_winner(0, self.m("outcome", "p0_wins", bank0=bank0, bank1=bank1))
+            elif bank1 > bank0: self.state.set_winner(1, self.m("outcome", "p1_wins", bank1=bank1, bank0=bank0))
+            else:               self.state.set_draw(self.m("outcome", "draw"))
             return
 
         deck = self.full_deck.copy()
@@ -52,14 +52,11 @@ class IndianPokerEnv(ta.Env):
         gs["starting_player"] = 1-gs["starting_player"]
         self.state.manually_set_current_player_id(gs["starting_player"])
         for pid in (0, 1):
-            self.state.add_observation(to_id=pid, message=f"### Round {gs['current_round']}/{self.max_rounds}\nYour opponent's card is: {self._rank_to_str(gs['player_cards'][1-pid])}", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(to_id=pid, message=self.m("round", "announce", current_round=gs['current_round'], max_rounds=self.max_rounds, card=self._rank_to_str(gs['player_cards'][1-pid])), observation_type=ta.ObservationType.GAME_MESSAGE)
         self._announce_actions(self.state.current_player_id)
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are Player {player_id} in a game of Indian Poker.\n- 52-card deck; you see only the opponent's card.\n- Ante {self.ante} chip(s) each round, {self.max_rounds} round(s) total.\n"
-            f"- Valid moves: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X is a positive integer <= your chip count.)\n- Highest hidden card wins the pot at showdown.\n"
-        )
+        return self.m("player_prompt", "intro", player_id=player_id, ante=self.ante, max_rounds=self.max_rounds)
     
     def _find_token(self, msg: str):
         patterns = [("check", re.compile(r"\[check\]", re.I)), ("fold", re.compile(r"\[fold\]", re.I)), ("call", re.compile(r"\[call\]", re.I)), ("bet", re.compile(r"\[bet (\d+)\]", re.I)), ("raise", re.compile(r"\[raise (\d+)\]", re.I))]
@@ -77,17 +74,17 @@ class IndianPokerEnv(ta.Env):
 
         move, amount = self._find_token(action)
         if move is None:
-            self.state.set_invalid_move("Supply exactly ONE bracketed action, e.g. '[check]', '[bet 2]', '[call]', '[raise 3]', or '[fold]'.")
+            self.state.set_invalid_move(self.m("invalid_move", "ambiguous"))
             return self.state.step()
 
         to_call = chips_to_call()
 
         # legality checks
-        if move == "check" and to_call != 0:            self.state.set_invalid_move("Cannot [check] - you are facing a bet.");          return self.state.step()
-        if move in ("bet", "raise") and amount <= 0:    self.state.set_invalid_move("Bet / Raise amount must be ≥ 1.");                 return self.state.step()
-        if move == "bet" and to_call != 0:              self.state.set_invalid_move("Cannot [bet] - must [call] / [raise] / [fold].");  return self.state.step()
-        if move == "call" and to_call == 0:             self.state.set_invalid_move("Nothing to call; you may [check] instead.");       return self.state.step()
-        if move == "raise" and to_call == 0:            self.state.set_invalid_move("Use [bet X] to open; there is no bet to raise.");  return self.state.step()
+        if move == "check" and to_call != 0:            self.state.set_invalid_move(self.m("invalid_move", "cannot_check"));          return self.state.step()
+        if move in ("bet", "raise") and amount <= 0:    self.state.set_invalid_move(self.m("invalid_move", "amount_min"));                 return self.state.step()
+        if move == "bet" and to_call != 0:              self.state.set_invalid_move(self.m("invalid_move", "cannot_bet"));  return self.state.step()
+        if move == "call" and to_call == 0:             self.state.set_invalid_move(self.m("invalid_move", "nothing_to_call"));       return self.state.step()
+        if move == "raise" and to_call == 0:            self.state.set_invalid_move(self.m("invalid_move", "no_bet_to_raise"));  return self.state.step()
         
         # bankroll check
         cost = 0
@@ -95,10 +92,11 @@ class IndianPokerEnv(ta.Env):
         elif move == "call":    cost = to_call
         elif move == "raise":   cost = to_call + amount
 
-        if cost > gs["player_chips"][pid]:              self.state.set_invalid_move("Insufficient chips for that action.");             return self.state.step()
+        if cost > gs["player_chips"][pid]:              self.state.set_invalid_move(self.m("invalid_move", "insufficient"));             return self.state.step()
 
         rotate = True
-        self.state.add_observation(message=f"Player {pid} -> [{move}{' ' + str(amount) if amount else ''}]", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        token = f"{move}{' ' + str(amount) if amount else ''}"
+        self.state.add_observation(message=self.m("game_action", "action", player_id=pid, token=token), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
         if move == "check":
             gs["prev_action"], rotate = ("check", True)
@@ -135,7 +133,7 @@ class IndianPokerEnv(ta.Env):
             gs["prev_action"] = "raise"
 
         elif move == "fold":
-            self._end_round(1-pid, f"Player {pid} folded.")
+            self._end_round(1-pid, self.m("message", "folded", player_id=pid))
             rotate = False
 
         # prompt next player if round continues
@@ -145,14 +143,14 @@ class IndianPokerEnv(ta.Env):
     def _announce_actions(self, to_pid: int):
         gs = self.state.game_state
         to_call = gs["highest_bet"] - gs["current_bets"][to_pid]
-        if to_call == 0:    legal = "'[check]', '[bet X]'"
-        else:               legal = f"'[call]' (cost {to_call}), '[raise X]', '[fold]'"
-        self.state.add_observation(to_id=to_pid, message=f"Your possible actions: {legal}", observation_type=ta.ObservationType.GAME_BOARD)
+        if to_call == 0:    legal = self.m("board", "actions_no_bet")
+        else:               legal = self.m("board", "actions_facing_bet", to_call=to_call)
+        self.state.add_observation(to_id=to_pid, message=self.m("board", "possible_actions", legal=legal), observation_type=ta.ObservationType.GAME_BOARD)
 
     def _end_round(self, winner: int, reason: str):
         gs = self.state.game_state
         gs["player_chips"][winner] += gs["pot"]
-        self.state.add_observation(message=f"{reason}  Pot {gs['pot']} → Player {winner}. (Bankrolls P0:{gs['player_chips'][0]}, P1:{gs['player_chips'][1]})", observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(message=self.m("message", "round_result", reason=reason, pot=gs['pot'], winner=winner, p0=gs['player_chips'][0], p1=gs['player_chips'][1]), observation_type=ta.ObservationType.GAME_MESSAGE)
         self._init_round()
 
     def _showdown(self):
@@ -160,11 +158,11 @@ class IndianPokerEnv(ta.Env):
         c0, c1 = gs["player_cards"][0], gs["player_cards"][1]
         r0, r1 = self._rank(c0), self._rank(c1)
 
-        if r0 > r1:     self._end_round(0, f"Showdown: {self._rank_to_str(c0)} beats {self._rank_to_str(c1)}.")
-        elif r1 > r0:   self._end_round(1, f"Showdown: {self._rank_to_str(c1)} beats {self._rank_to_str(c0)}.")
+        if r0 > r1:     self._end_round(0, self.m("message", "showdown_win", card_win=self._rank_to_str(c0), card_lose=self._rank_to_str(c1)))
+        elif r1 > r0:   self._end_round(1, self.m("message", "showdown_win", card_win=self._rank_to_str(c1), card_lose=self._rank_to_str(c0)))
         else:  # tie – split pot
             split = gs["pot"] // 2
             gs["player_chips"][0] += split
             gs["player_chips"][1] += gs["pot"] - split
-            self.state.add_observation(message=f"Showdown tie: both {self._rank_to_str(c0)}. Pot split – each receives {split}.", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=self.m("message", "showdown_tie", card=self._rank_to_str(c0), split=split), observation_type=ta.ObservationType.GAME_MESSAGE)
             self._init_round()

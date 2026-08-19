@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "तपाईं LinesOfAction खेलमा खेलाडी {player_id} हुनुहुन्छ।\nतपाईंका टुकडाहरू '{side}' हुन्, विपक्षी टुकडाहरू '{other}' हुन्।\nसार-फर्म्याट: `[b1b3]` (निर्देशांकबाट निर्देशांकसम्म)। कानुनी सारले क्षितिजसमान, अनुलम्ब, वा तिर्यक रूपमा वर्गहरूको संख्या समान हुन्छ जुन त्यस पंक्तिमा टुकडाहरूको कुल संख्या हुन्छ। तपाईं आफ्नै टुकडाहरूमाथि उड्न सक्नुहुन्छ, तर विपक्षी टुकडाहरूमाथि हoina; विपक्षी टुकडामा उत्रने बित्तिकै त्यो कब्जा गर्न सकिन्छ।  जित्नका लागि तपाईंका सबै टुकडाहरू ८-चक्रवर्ती जोडिएका हुनुपर्छ।"
+  },
+  "board": {
+    "current_board": "बोर्ड: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ढाँचा e2e4 (बाट,कोर्डिनेट) हुनुपर्छ।",
+    "no_piece": "कुनै {side} खेल को {coord} मा छैन.",
+    "identical": "स्रोत र गन्तव्य समान छन्।",
+    "not_straight_or_diagonal": "चाल सीधा वा विकर्ण हुनुपर्छ।",
+    "wrong_distance": "रेखामा टुक्राहरू बराबर दूरीमा जानुपर्छ।",
+    "enemy_blocks": "शत्रु टुक्राले बाटो रोक्छ।",
+    "destination_own": "गन्तव्य आफ्नै टुक्रा द्वारा कब्जा।"
+  },
+  "game_action": {
+    "moved": "खेलाडी {player_id} ले {from} -> {to}",
+    "captured_suffix": "खेलाडी {player_id} ले {from} -> {to} शत्रुलाई कब्जा गर्दै सरे।"
+  },
+  "outcome": {
+    "win": "सबै टुक्राहरू जोडिएका छन्।",
+    "draw_no_capture": "६० चालमा कुनै पकड छैन।",
+    "draw_repetition": "स्थिति तीन पटक दोहोर्याइयो।"
+  }
+}

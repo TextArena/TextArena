@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "तुम्ही तीन-खेळाडू GOPS मध्ये खेळाडू {player_id} आहात.\n- तुम्ही 13 कार्ड A-K (प्रत्येक एकदा अचूकपणे) धारण करता.\n- प्रत्येक फेरीत एक पुरस्कार उघड केला जातो. एक कार्ड जसे `[Q]`, `[10]`, `[2]` … सबमिट करा\n- सर्वोच्च कार्ड पुरस्कार जिंकते (+ कोणत्याही पोटाचा समावेश असलेला).\n- 13 फेऱ्यांनंतर, सर्वोच्च एकूण जिंकते. अवैध हल्ले = बाद."
+  },
+  "round": {
+    "header": "### फेरी {round}/13 - बक्षीस: {prize} (मूल्य {worth})",
+    "hand": "तुमचे उर्वरित हात: {hand}"
+  },
+  "reveal": {
+    "win": "बोली  {bids} - खेळाडू {winner} जिंकतो {pot}.",
+    "tie": "बोली  {bids} - टाई, भांडे आता {pot}.",
+    "scores": "गुण → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "कृतीसाठी '[Q]' सारख्या कंसात कार्डची आवश्यकता आहे.",
+    "bad_card": "कार्ड आधीच वापरले गेले आहे किंवा अवैध आहे"
+  },
+  "elimination": {
+    "player": "खेळाडू {pid} वारंवार अवैध हालचाली केल्यानंतर काढून टाकले."
+  },
+  "outcome": {
+    "auto_win": "दोन खेळाडू बाहेर पडले - स्वयंचलित विजय.",
+    "final": "अंतिम गुण: {scores}"
+  }
+}

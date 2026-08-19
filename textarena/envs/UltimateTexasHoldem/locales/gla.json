@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Chan eil cairtean fhathast.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Aon Chluicheadair an aghaidh an Dèiliche\n\n📖 ROINN A' GHEAMA:\n• Tha thu a' tòiseachadh le {start_chips} chips\n• Pacaidh cairt tè de 52 cairt (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Tha thu a' cluich an aghaidh an dèiliche (taigh)\n• Tha gach seisean a' leantainn structar Ultimate Texas Hold'em: tha thu a' cur ANTE agus BLIND bets, a' faighinn 2 cairt falaichte, a' taghadh air PLAY bets roghainneil thar na pàsan geama, an uair sin a' taisbeanadh cairt coimhearsnachd agus a' coimhead ri làimh 5-càirt as fheàrr an aghaidh làimh an dèiliche. 'S e do dh'amas gum b' e a' ghlasadh do bhuannachdan (nuair a tha làimh nas fheàrr agad), fhad 's a tha thu a' lùghdachadh do chall (nuair a tha làimh nas miosa agad).\n• Tha an geama a' crìochnachadh nuair a ruigeas tu 0 chips no nas ìsle aig tòiseachadh an t-seisein (CALL) no nuair a chluicheas tu 1000 seiseanan le chips (BUANNAICH)\n\n💰 STRUCTAR A' BHET:\n• ANTE: Bet dha-rìribh ${ante} gach seisean\n• BLIND: Bet dha-rìribh ${ante} gach seisean\n• PLAY: Bet roghainneil rè na cluiche. Tron t-seisean, faodaidh tu aon de na leanas a thaghadh: (${ante4} ma tha e air a dhèanamh aig PRE-FLOP, ${ante2} ma tha e air a dhèanamh aig FLOP, no ${ante} ma tha e air a dhèanamh aig RIVER. Faodaidh tu cuideachd fold aig river, a' togail làimh, agus a' dèanamh bet sam bith.)\n\n🎴 DÈANAMH CAIRT:\n• Tha thu a' faighinn 2 cairt falaichte (do làimh falaichte)\n• Tha an dèiliche a' faighinn 2 cairt falaichte (air an dol falach bhuat)\n• Tha 5 cairt coimhearsnachd air an dealachadh falach bhuat an toiseach\n• Tha cairt coimhearsnachd air an taisbeanadh mean air mhean tron t-seisean\n\n🏆 DÈANADH an DÈILICH:\n• Feumaidh an dèiliche co-dhiù PAIR (2 cairt den aon rang) a bhith aige airson a bhith comasach, a' cleachdadh na 2 cairt ann an làimh aige agus na 5 cairt coimhearsnachd.\n• Tha comasachd an dèiliche a' toirt buaidh air na bets, mar a tha air a mhìneachadh nas fhaide sìos.\n\n🎮 PÀSAN A' GHEAMA & GNÌOMHAN:\n📋 PRE-FLOP:\n  • Gnìomhan: [4x] (${ante4}) no [check]\n  • [4x]: Cuir ${ante4} PLAY bet, a' taisbeanadh na 3 cairt coimhearsnachd a' chiad\n  • [check]: Gun bet sam bith, a' taisbeanadh na 3 cairt coimhearsnachd a' chiad\n\n📋 FLOP:\n  • Ma tha bet 4x air a chur: [skip] a-mhàin comasach (a' taisbeanadh na 2 cairt coimhearsnachd mu dheireadh)\n  • Ma tha bet 4x gun chur: [2x] (${ante2}) no [check]\n  • [2x]: Cuir ${ante2} PLAY bet, a' taisbeanadh na 2 cairt coimhearsnachd mu dheireadh\n  • [check]: Gun bet sam bith, a' taisbeanadh na 2 cairt coimhearsnachd mu dheireadh\n\n📋 RIVER:\n  • Ma tha bet 4x no 2x air a chur: [skip] a-mhàin comasach (a' dol air adhart gu showdown)\n  • Ma tha bet sam bith gun chur: [1x] (${ante}) no [fold]\n  • [1x]: Cuir ${ante} PLAY bet, a' dol air adhart gu showdown\n  • [fold]: Tog làimh, caill ANTE agus BLIND bets\n\n📋 SHOWDOWN:\n  • Na cairt a tha air an taisbeanadh agus air an luachadh\n  • Làimh 5-càirt as fheàrr bho 7 cairt (2 falaichte + 5 coimhearsnachd)\n  • Bets air an socrachadh a rèir riaghailtean pàigh\n\n💎 PÀIGH BHET:\n📊 ANTE BET:\n  • Ma tha an dèiliche gun chomasachd: PUSH (bet air a thilleadh)\n  • Ma tha an dèiliche comasach agus tha thu a' buannachadh: 1:1 pàigh (bet + buannachdan)\n  • Ma tha an dèiliche comasach agus tha thu a' call: Bet caillte\n  • Co-thàth: PUSH (bet air a thilleadh)\n\n📊 BLIND BET:\n  • Gun bhuaidh air comasachd an dèiliche\n  • Ma tha thu a' buannachadh: Bet air a thilleadh agus pàigh a bharrachd a rèir neart do làimh\n  • Ma tha thu a' call: Bet caillte\n  • Co-thàth: PUSH (bet air a thilleadh)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Gun pàigh a bharrachd\n\n📊 PLAY BET:\n  • Gun bhuaidh air comasachd an dèiliche\n  • Coimhearsnachd dhìreach: Do làimh as fheàrr an aghaidh làimh an dèiliche\n  • Ma tha thu a' buannachadh: 1:1 pàigh (bet + buannachdan)\n  • Ma tha thu a' call: Bet caillte\n  • Co-thàth: PUSH (bet air a thilleadh)\n\n🎯 RANGANAN LÀIMHE PÒCAIR (As Fheàrr gu As Miosa):\n  1. Royal Flush: A-K-Q-J-10 den aon dath\n  2. Straight Flush: 5 cairt leannda den aon dath\n  3. Four of a Kind: 4 cairt den aon rang\n  4. Full House: 3 den aon rang + 2 den aon rang\n  5. Flush: 5 cairt den aon dath\n  6. Straight: 5 cairt leannda\n  7. Three of a Kind: 3 cairt den aon rang\n  8. Two Pair: 2 paidh den aon rang\n  9. One Pair: 2 cairt den aon rang\n  10. High Card: An cairt as àirde a' buannachadh\n\n⌨️  ÀITHNEAN GNÌOMH:\n• [4x] no [play bet 4x]: Cuir ${{self.ante_amount*4}} PLAY bet\n• [2x] no [play bet 2x]: Cuir ${{self.ante_amount*2}} PLAY bet\n• [1x] no [play bet 1x]: Cuir ${{self.ante_amount*1}} PLAY bet\n• [check] no [c]: Check (gun bet sam bith)\n• [fold] no [f]: Fold (tog làimh)\n• [skip] no [s]: Skip gu pàs eile (nuair nach eil gnìomh sam bith a dhìth)\n\n💡 LEASAN STRATHÈIGE:\n• Tha làimhan tòiseachaidh làidir (paidh, cairt àirde) a' ciallachadh gu bheil 4x bets comasach\n• Beachdaich air comasachd an dèiliche - tha làimhan lagha a' dol a dh'fhàgail ma tha an dèiliche gun chomasachd\n• Tha BLIND bet a' dol a bhith glè bhuannachdail le làimhan làidir (Royal Flush = 500:1!)\n• Fèath an stòras chips agad! Ma tha e a' dol sìos gu 0 no nas ìsle aig tòiseachadh an t-seisein, tha thu a' call.\n\n⚠️  NÒTAICHEAN CUDROMACH:\n• Tha ANTE agus BLIND bets dha-rìribh gach seisean\n• Tha PLAY bets roghainneil agus strathèigeach\n• Dèan cinnteach gu bheil thu a' cur a-steach an gnìomh cheart, agus aon gnìomh a-mhàin aig an àm.\n\n",
+    "state": "🎯 SEISEAN {round}\n💰 Chips: {chips}\n🎴 Do làimh: {hand}\n📊 Bets làithreach: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Pàs: {phase}\n🎯 Gnìomhan comasach: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Seisean {round} air a thòiseachadh! Bets: ANTE ${ante}, BLIND ${blind}. Tha {chips} chips agad fhathast.",
+    "your_hand": " Do làmh: {hand}",
+    "flop_revealed": " FLOP air fhoillseachadh: {cards}",
+    "river_revealed": " RIVER air fhoillseachadh: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Gnìomh neo-dhligheach airson an ìre làithreach.Gnìomhan ri fhaighinn: {available}",
+    "message": " Gnìomh neo-dhligheach!Gnìomhan ri fhaighinn: {available}"
+  },
+  "action": {
+    "folded": " Tha thu air do philleadh."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Làimhe an neach-reic: {cards}",
+    "community_cards": " Cairtean coimhearsnachd: {cards}",
+    "player_best": "🎴 Làimh as fheàrr a' chluicheadair: {name} ({cards})",
+    "dealer_best": "🎴 Làimh as fheàrr an dèiliche: {name} ({cards})",
+    "ante_lost_folded": " ANTE geall LOST! -${ante} (air a philleadh)",
+    "blind_lost_folded": " BET BLIND LOST! - ${blind} (air a philleadh)",
+    "ante_won": "✅ ANTE geall WON! + ${amount}",
+    "ante_pushed": " ANTE geall PUSHED! ${ante} air ais",
+    "ante_lost": " ANTE geall LOST! -${ante}",
+    "blind_won": "✅ BET BLIND WON! +${amount}",
+    "blind_pushed": " BET BLIND PUSHED! ${blind} air a thilleadh",
+    "blind_lost": "❌ Geall BLIND air a dh'fhàgail! -${blind}",
+    "play_won": "✅ PLAY geall WON! + ${amount}",
+    "play_pushed": " PLAY geall PUSHED! ${play} air ais",
+    "play_lost": " PLAY geall LOST! -${play}",
+    "net_gain": "🎉 Seisean {round} air a chrìochnachadh! Buannachd net: +${net}",
+    "net_loss": "💸 Seisean {round} air a chrìochnachadh! Call net: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 GEAMA THAIRIS! {max_turns} seiseanan air a chluich. Tha ${chips} chips agad - THA THU AIR BUANNAICH!",
+    "game_over_lose": "Tha thu a-mach à chips. Dealers buannaicheas!",
+    "reward_win": "Chluicheadair a' chrìochnachadh {winner_rounds} seiseanan le ${chips} chips",
+    "reward_lose": "Cha robh chips aig an cluicheadair ann am cuairt {round}",
+    "reward_win_max": "Chluicheadair a' chrìochnachadh {max_turns} seiseanan le ${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "Flush rìoghail",
+    "straight_flush": "Straight Flush (Flùthaireachd)",
+    "four_of_a_kind": "Ceithir de na Seòrsa",
+    "full_house": "Taigh-òsta làn.",
+    "flush": "Flush (Fluasad)",
+    "straight": "Dìreach",
+    "three_of_a_kind": "Trì de na Seòrsach",
+    "two_pair": "Dà Phàir",
+    "one_pair": "Aon Phàirleach",
+    "high_card": "Cairt Àrd",
+    "unknown": "Làimhe neo-aithnichte"
+  }
+}

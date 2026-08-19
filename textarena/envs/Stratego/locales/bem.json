@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Nga ni Player {player_id} mu Stratego.\nLengo lyenu ni kufwata bendera ya mwenzi wenu nanti ukomokela vipande vyote vya mwenzi wenu.\nKikosi chenu kimepangwa kwa ajili yenu pa bodo, ikijumuisha bendera yenu, mabomu, na vipande vingine vya mafungu mbalimbali.\n\n### Mafundisho ya Mchezo\n1. **Kanuni za Kuhamisha:**\n   - Pa zamu yenu, mungashinji kuhamisha kipande kimoja kwa hatua moja ku kwamba mraba ulio karibu (juu, chini, kushoto, au kulia) ambao tayari umepangwa na vipande vyenu.\n   - Mfano: Kipande kinaweza kuhamisha kutoka A1 hadi B1 au A1 hadi A2 kama B1 na A2 hazijapangwa na vipande vya mchezaji mwenyewe.\n   - Ikiwa kipande kilichochaguliwa ni Bomu au Bendera, hakikinaweza kuhamishwa.\n2. **Mapigano:**\n   - Ikiwa uhamishaji kwenye mraba uliopangwa na kipande cha mwenzi wenu, basi mapigano yatatokea:\n     - Kipande cha ngazi ya juu kinashinda na kuondoa kipande cha mwenzi wenu.\n     - Ikiwa ngazi ni sawa, vipande vyote viwili vinatolewa kwenye bodo.\n     - **Matukio Maalum:**\n       - Mabomu yanafuta vipande vingi vya kushambulia isipokuwa Wachimbaji, ambao hutegua Mabomu.\n       - Vipelelezi vinaweza kushinda Marshal ikiwa Kipelelezi kinafanya mashambulizi ya kwanza lakini kupoteza kwa vipande vyote vingine.\n3. **Malengo ya Kimkakati:**\n   - Tambua vipande vya mwenzi wenu kupitia harakati zao na mapigano.\n   - Linda bendera yenu wakati wa kujaribu kufwata bendera ya mwenzi wenu.\n   - Tumia Vipelelezi kwa ujanja ili kupata taarifa kuhusu vipande vya mwenzi wenu na kushambulia vile dhaifu.\n\n### Jinsi ya Kufanya Hatua:\n1. Bainisha viwianishi vya kipande unachotaka kuhamisha na lengo lake.\n2. Tumia muundo: [A0 B0], ambapo A0 ni nafasi ya chanzo, na B0 ni lengo.\n   - Mfano: Ili kuhamisha kipande kutoka safu 0, safu 0 hadi safu 1, safu 0, ingiza [A0 B0].\n3. Hakikisha lengo ni halali kulingana na kanuni za kuhamisha hapo juu.\n\n### Kumbukumbu Muhimu:\n- Bodo itaonyesha vipande vyenu na nafasi zao, kwa mfano MN, MS.\n- Bodo pia itaonyesha nafasi zinazojulikana za vipande vya mwenzi wenu bila kufichua ngazi zao, kwa mfano ?.\n- Gridi zenye ~ ni maziwa na hazinawezi kuhamishwa.\n- Kama pendekezo, anza mchezo wenu kwa kuhamisha vipande vilivyo mstari wa mbele ili kupata taarifa kuhusu vipande vya mwenzi wenu. Mchezaji 0 na mchezaji 1 wana mstari wa mbele wa safu D na G mtawalia.\n\nHapa ni hali ya sasa ya bodo:\n"
+  },
+  "board": {
+    "current_board": "Board Ili Kwa Sasa:\n\n{board}\nMazao Yanayopatikana: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Fomu ya hatua si halali. Mchezaji {player_id} hajatoa hatua kwa fomu [A0 B0].",
+    "invalid_coordinates": "Ifyacitikile fyalifye. Umulashi {player_id} talembepo ifikope fyakwe ifya cine.",
+    "not_own_piece": "Ukubomba kwabula inshila. Uuleteya {player_id} afwile ukufumyapo cimo pa fipe fyakwe umwine.",
+    "scout_through_pieces": "Ifya kucita ifishili fya cine. Uuleteya {player_id} tekuti asende icimpashanya ukupitila mu fipe fimbi.",
+    "scout_diagonal": "Ifya kucita ifishili fya cine. Uuleteya {player_id} tekuti asende umusango wa mushilika mu nshila ya kusontapo.",
+    "non_scout_multi_square": "Ifimpashanya fyabipa. Amabwe, ukufumyako fye abacenjela kuti bayaluka pa cipande cimo cila nshita.",
+    "move_into_lake": "Ifya kucita fyafye. Uuleteya {player_id} tekuti afike mu cishiba.",
+    "move_onto_own_piece": "Ifya kucita ifishili fya cine. Uuleteya {player_id} tekuti afume pa cipande cakwe umwine.",
+    "move_bomb_or_flag": "Ifya kucita fyafye. Uuleteya {player_id} tekuti asende bomba nangu ifikope fyakwe."
+  },
+  "game_action": {
+    "you_moved": "Umehamisha kipande chako kutoka {source} hadi {dest}.",
+    "opponent_moved": "Umulayi {player_id} alifumya icipande ukufuma ku {source} ukuya kuli {dest}.",
+    "you_equal_ranks": "Umehamisha kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha lengo kilikuwa {target_rank}. Kwa kuwa ngazi ni sawa, vipande vyote viwili vimepotea.",
+    "opponent_equal_ranks": "Mchezaji {player_id} amehamisha kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha lengo kilikuwa {target_rank}. Kwa kuwa ngazi ni sawa, vipande vyote viwili vimepotea.",
+    "you_miner_defused": "Umehamisha kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha lengo kilikuwa {target_rank}. Kwa kuwa wachimbaji wanaweza kutegeua mabomu, umeshinda mapigano.",
+    "opponent_miner_defused": "Mchezaji {player_id} amehamisha kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha lengo kilikuwa {target_rank}. Kwa kuwa wachimbaji wanaweza kutegeua mabomu, umepoteza mapigano.",
+    "you_bomb_lost": "Umehamisha kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha lengo kilikuwa {target_rank}. Kwa kuwa mshambuliaji si mchimbaji, umepoteza mapigano.",
+    "opponent_bomb_won": "Mchezaji {player_id} amehamisha kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha lengo kilikuwa {target_rank}. Kwa kuwa mshambuliaji si mchimbaji, umeshinda mapigano.",
+    "you_spy_won": "Umehamisha kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha lengo kilikuwa {target_rank}. Kwa kuwa mshambuliaji ni kipelelezi na lengo ni marekani, umeshinda mapigano.",
+    "opponent_spy_lost": "Mchezaji {player_id} amehamisha kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha lengo kilikuwa {target_rank}. Kwa kuwa mshambuliaji ni kipelelezi na lengo ni marekani, umepoteza mapigano.",
+    "you_higher_won": "Umehamisha kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha lengo kilikuwa {target_rank}. Kwa kuwa mshambuliaji ana ngazi ya juu kuliko lengo, umeshinda mapigano.",
+    "opponent_higher_lost": "Mchezaji {player_id} amehamisha kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha lengo kilikuwa {target_rank}. Kwa kuwa mshambuliaji ana ngazi ya juu kuliko lengo, umepoteza mapigano.",
+    "you_lower_lost": "Umehamisha kipande chako kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha lengo kilikuwa {target_rank}. Kwa kuwa mshambuliaji ana ngazi ya chini kuliko lengo, umepoteza mapigano.",
+    "opponent_lower_won": "Mchezaji {player_id} amehamisha kipande kutoka {source} hadi {dest}. Kipande cha kushambulia kilikuwa {attacking_rank} na kipande cha lengo kilikuwa {target_rank}. Kwa kuwa mshambuliaji ana ngazi ya chini kuliko lengo, umeshinda mapigano."
+  },
+  "outcome": {
+    "flag_captured": "Umulashi {player_id} alicimfya ifikondo fya balwani!",
+    "no_movable_pieces": "Mchezaji {winner_id} anashinda! Mchezaji {loser_id} hana vipande vya kuhamisha tena."
+  }
+}

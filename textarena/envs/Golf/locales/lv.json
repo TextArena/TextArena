@@ -1,0 +1,79 @@
+{
+  "_comment": "Golfa (kāršu spēle) lokalizācijas fails. NEtulkojiet atslēgas (kreisā puse). Tulkojiet tikai vērtības (labā puse).",
+  "_slots": {
+    "{player_id}": "Spēlētāja numurs, piemēram, 0 vai 1",
+    "{pid}": "Spēlētāja numurs, piemēram, 0 vai 1",
+    "{winner}": "Spēlētāja numurs ar zemāko punktu skaitu",
+    "{score}": "Punktu skaits",
+    "{card}": "Kāršu nosaukums, piemēram, A♠, 10♥, K♦ vai Q♣",
+    "{new}": "Kāršu nosaukums, kas tika ievietots režģī",
+    "{old}": "Kāršu nosaukums, kas tika noņemts no režģa",
+    "{row}": "Rindas numurs",
+    "{col}": "Kolonas numurs",
+    "{max_row}": "Lielākais derīgais rindas numurs",
+    "{max_col}": "Lielākais derīgais kolonas numurs",
+    "{reason}": "Iepriekš sagatavota frāze, kas apraksta, kāpēc sākās pēdējā kārta",
+    "{n}": "Rindas numurs, kas tiek rādīts režģa rindas sākumā",
+    "{cards}": "Iepriekš sagatavotas režģa rindas šūnas",
+    "{hand}": "Iepriekš sagatavots spēlētāja režģa bloks",
+    "{discard}": "Kāršu nosaukums, kas atrodas uz izmestās kāršu kaudzes, vai vārds 'neviens'",
+    "{options}": "Iepriekš sagatavota rinda ar pieejamām darbībām",
+    "{scores}": "Iepriekš sagatavots punktu saraksts katram spēlētājam"
+  },
+  "player_prompt": {
+    "intro": "Jūs spēlējat Golfu (Kāršu Spēli) - Spēlētājs {player_id}.\nMērķis: Iegūt zemāko punktu skaitu šajā vienā kartā. Ja kolonas dalās ar vienu un to pašu vērtību, tās tiek summētas kā 0.\nKāršu vērtības: A=1, 2-10=sejas vērtība, J/Q=10, K=0\n\nDarbības (izmantojiet tieši iekavas):\n- '[draw]' - Ņemt no kāršu kavas\n- '[take]' - Ņemt no izmestās kāršu kaudzes\n- '[swap X Y]' - Samainīt izņemto kārti ar pozīciju X (rinda) Y (kolonna)\n- '[discard]' - Izmest izņemto kārti\n"
+  },
+  "board": {
+    "drew": "Jūs izņēmāt: {card}\nTagad jūs vajadzētu [swap X Y] vai [discard] to.",
+    "took": "Jūs ņēmāt: {card} no izmestās kāršu kaudzes\nJūs vajadzētu [swap X Y] ar to (nevar izmest).",
+    "peeked": "Jūs paskatījāties pozīcijā ({row},{col}): {card}",
+    "turn_view": "Jūsu roka:\n{hand}\nIzmestās kāršu kaudze: {discard}\n{options}",
+    "none": "Neviens"
+  },
+  "options": {
+    "final_turns": "Pēdējās kārtas! Jūsu iespējas: [draw], [take], [peek X Y]",
+    "draw": "Jūsu iespējas: [draw], [take]",
+    "must_swap": "Jūs vajadzētu: [swap X Y] (nevar izmest kārtis no izmestās kāršu kaudzes)",
+    "swap_or_discard": "Jūs vajadzētu: [swap X Y] vai [discard]"
+  },
+  "hand": {
+    "no_cards": "Nav kāršu",
+    "header": "  Kolonna:   1    2    3",
+    "row": "Rinda {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Spēlētājs {pid} samainīja {new} ar {old} pozīcijā ({row},{col})",
+    "discarded": "Spēlētājs {pid} izmeta {card}"
+  },
+  "message": {
+    "deck_empty": "Kāršu kava ir tukša! Spēle beidzas nekavējoties.",
+    "knocked": "Spēlētājs {pid} noklikšķināja! Katram citam spēlētājam ir vēl viena kārta.",
+    "final_round": "Spēlētājs {pid} {reason}! Katram citam spēlētājam ir vēl viena kārta."
+  },
+  "reason": {
+    "all_revealed": "ir atklājis visas kārtis"
+  },
+  "invalid": {
+    "wrong_action": "Izmantojiet tieši vienu iekavu darbību: [draw], [take], [swap X Y], [discard], [knock], vai [peek X Y]",
+    "discard_empty": "Izmestās kāršu kaudze ir tukša!",
+    "must_draw_first": "Jūs vajadzētu vispirms [draw], [take], [knock], vai [peek X Y]",
+    "cannot_discard_taken": "Jūs nevarat izmest kārti, kas tika ņemta no izmestās kāršu kaudzes. Jūs vajadzētu samainīt to.",
+    "have_drawn_card": "Jūs jau izņēmāt kārti. Jūs vajadzētu [swap X Y] vai [discard] to.",
+    "need_drawn_swap": "Jūs vajadzētu izņemtu kārti, lai samainītu.",
+    "need_drawn_discard": "Jūs vajadzētu izņemtu kārti, lai izmestu.",
+    "out_of_bounds": "Pozīcija ārpus robežām. Izmantojiet rindu 1-{max_row}, kolonnu 1-{max_col}",
+    "knock_with_card": "Jūs nevarat noklikšķināt ar izņemtu kārti. Pabeidziet savu kārtu vispirms.",
+    "already_knocked": "Kāds jau ir noklikšķinājis šajā kartā.",
+    "already_revealed": "Šī kārts jau ir atklāta!"
+  },
+  "summary": {
+    "full": "Spēle beigusies! Spēlētājs {winner} uzvar ar punktu skaitu {score}!\n\nGalīgie punkti:\n{scores}",
+    "line": "Spēlētājs {pid}: {score} punkti\n"
+  },
+  "board_str": {
+    "title": "=== GOLFA SPĒLE ===",
+    "discard": "Izmestās kāršu kaudze: {card}",
+    "knocked": "Spēlētājs {pid} ir noklikšķinājis!",
+    "player_header": "Spēlētājs {pid} (Punkti: {score}):"
+  }
+}

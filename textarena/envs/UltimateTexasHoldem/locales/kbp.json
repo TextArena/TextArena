@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Ɛlɛ patɩna kaartaŋ nakʋyʋ.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Asɩm ɛyaa kɛ dealer\n\n📖 GAME OVERVIEW:\n• Iɛyaa kɛ pɩɣa {start_chips} chips\n• Kɔɔrɩ kɛ 52 cards (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Iɛyaa kɛ dealer (house)\n• Kɩlaʋ kɛ Ultimate Texas Hold'em structure: iɛyaa kɛ ANTE nɛ BLIND bets, pɩɣa 2 hole cards, kɛʋ kɩlaʋ PLAY bets pɩɣa betting phases, kɔɔrɩ community cards nɛ kɛʋ iɛyaa kɛ best 5-card hand kɛ dealer’s. Iɛyaa kɛ goal kɛ maximize iɛyaa winnings (kɛ iɛyaa kɛ better hand), kɛ minimizing iɛyaa losses (kɛ iɛyaa kɛ worse hand).\n• Game kɛ ends kɛ iɛyaa kɛ 0 chips kɛ below kɛ start kɛ round (LOSS) kɛ complete 1000 rounds kɛ chips (WIN)\n\n💰 BETTING STRUCTURE:\n• ANTE: Mandatory ${ante} bet kɛ every round\n• BLIND: Mandatory ${ante} bet kɛ every round\n• PLAY: Optional bet kɛ gameplay. Throughout kɛ round, iɛyaa kɛ choose ONLY ONE kɛ following: (${ante4} kɛ done kɛ PRE-FLOP, ${ante2} kɛ done kɛ FLOP, kɛ ${ante} kɛ done kɛ RIVER. Can kɛ fold kɛ river, giving kɛ hand, nɛ making kɛ bet.)\n\n🎴 CARD DEALING:\n• Iɛyaa kɛ pɩɣa 2 face-up cards (iɛyaa hole cards)\n• Dealer kɛ pɩɣa 2 face-down cards (hidden kɛ iɛyaa)\n• 5 community cards kɛ dealt face-down initially\n• Community cards kɛ revealed progressively kɛ game phases\n\n🏆 DEALER QUALIFICATION:\n• Dealer kɛ must kɛ at least kɛ PAIR (2 cards kɛ same rank) kɛ qualify, using kɛ 2 cards kɛ dealer’s hand nɛ kɛ 5 community cards.\n• Dealer qualification kɛ affects kɛ betting outcomes, kɛ will kɛ explained later.\n\n🎮 GAME PHASES & ACTIONS:\n📋 PRE-FLOP:\n  • Actions: [4x] (${ante4}) kɛ [check]\n  • [4x]: Place ${ante4} PLAY bet, kɔɔrɩ first 3 community cards\n  • [check]: No additional bet, kɔɔrɩ first 3 community cards\n\n📋 FLOP:\n  • If 4x bet placed: Only [skip] available (auto-reveals last 2 community cards)\n  • If no 4x bet: [2x] (${ante2}) kɛ [check]\n  • [2x]: Place ${ante2} PLAY bet, kɔɔrɩ last 2 community cards\n  • [check]: No additional bet, kɔɔrɩ last 2 community cards\n\n📋 RIVER:\n  • If 4x kɛ 2x bet placed: Only [skip] available (auto-proceeds kɛ showdown)\n  • If no prior PLAY bet: [1x] (${ante}) kɛ [fold]\n  • [1x]: Place ${ante} PLAY bet, kɛ proceeds kɛ showdown\n  • [fold]: Give kɛ hand, lose ANTE nɛ BLIND bets\n\n📋 SHOWDOWN:\n  • All cards kɛ revealed nɛ evaluated\n  • Best 5-card hand kɛ 7 cards (2 hole + 5 community)\n  • Bets kɛ settled according kɛ payout rules\n\n💎 BET PAYOUTS:\n📊 ANTE BET:\n  • Dealer doesn't qualify: PUSH (bet returned)\n  • Dealer qualifies & iɛyaa win: 1:1 payout (bet + winnings)\n  • Dealer qualifies & iɛyaa lose: Bet lost\n  • Tie: PUSH (bet returned)\n\n📊 BLIND BET:\n  • Unaffected kɛ dealer qualification\n  • Iɛyaa win: Bet returned nɛ additional payout kɛ iɛyaa hand strength\n  • Iɛyaa lose: Bet lost\n  • Tie: PUSH (bet returned)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four kɛ a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less kɛ Straight: No additional payout\n\n📊 PLAY BET:\n  • Unaffected kɛ dealer qualification\n  • Direct comparison: Iɛyaa best hand vs Dealer's best hand\n  • Iɛyaa win: 1:1 payout (bet + winnings)\n  • Iɛyaa lose: Bet lost\n  • Tie: PUSH (bet returned)\n\n🎯 POKER HAND RANKINGS (Best kɛ Worst):\n  1. Royal Flush: A-K-Q-J-10 kɛ same suit\n  2. Straight Flush: 5 consecutive cards kɛ same suit\n  3. Four kɛ a Kind: 4 cards kɛ same rank\n  4. Full House: 3 kɛ a kind + 2 kɛ a kind\n  5. Flush: 5 cards kɛ same suit\n  6. Straight: 5 consecutive cards\n  7. Three kɛ a Kind: 3 cards kɛ same rank\n  8. Two Pair: 2 pairs kɛ different ranks\n  9. One Pair: 2 cards kɛ same rank\n  10. High Card: Highest card wins\n\n⌨️  ACTION COMMANDS:\n• [4x] kɛ [play bet 4x]: Place ${{self.ante_amount*4}} PLAY bet\n• [2x] kɛ [play bet 2x]: Place ${{self.ante_amount*2}} PLAY bet\n• [1x] kɛ [play bet 1x]: Place ${{self.ante_amount*1}} PLAY bet\n• [check] kɛ [c]: Check (no additional bet)\n• [fold] kɛ [f]: Fold (give kɛ hand)\n• [skip] kɛ [s]: Skip kɛ next phase (kɛ no action needed)\n\n💡 STRATEGY TIPS:\n• Strong starting hands (pairs, high cards) often justify 4x bets\n• Consider dealer qualification - weak hands may push kɛ dealer doesn't qualify\n• BLIND bet can kɛ very profitable kɛ strong hands (Royal Flush = 500:1!)\n• Watch iɛyaa chip stack! If it goes kɛ 0 kɛ below kɛ start kɛ round, iɛyaa lose.\n\n⚠️  IMPORTANT NOTES:\n• ANTE nɛ BLIND bets kɛ mandatory kɛ every round\n• PLAY bets kɛ optional nɛ strategic\n• Make sure iɛyaa input kɛ correct action, nɛ only one action kɛ time.\n\n",
+    "state": "🎯 Tɛmɛ {round}\n💰 Kɩɖaŋ: {chips}\n🎴 Aŋaŋa aŋa: {hand}\n📊 Sɔɖɛ nɛɛ: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Tɛmɛɛ: {phase}\n🎯 Lɩmaɣzɛɛ wɛɛ: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Tɛmɛ {round} paɣa! Sɔɖɛ: ANTE ${ante}, BLIND ${blind}. Aŋa wɛɛ {chips} kɩɖaŋ.",
+    "your_hand": " Ña-nesi: {hand}",
+    "flop_revealed": " FLOP wɩlaa se: {cards}",
+    "river_revealed": " RIVER yɔɔdɩ tɔm: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Lɩmaɣzɛɛ kaɣa tɛmɛɛ. Lɩmaɣzɛɛ wɛɛ: {available}",
+    "message": " Kɩlabɩm mbʋ pɩfɛyɩ ɖeu yɔ! Lɩmaɣzɩyɛ nɖɩ ɖɩ-yɔɔ papɩzɩɣ nɛ pala tʋmɩyɛ: {available}"
+  },
+  "action": {
+    "folded": "Ŋtisi nɛ ŋɖɛɛ."
+  },
+  "showdown": {
+    "dealer_hand": " WƆWƲ! Tʋma ɖɩlaɖɛ taa tʋmlaɖʋ nesi: {cards}",
+    "community_cards": " Etaazuunii tɛ takayaɣ: {cards}",
+    "player_best": "🎴 Iɛyaa best hand: {name} ({cards})",
+    "dealer_best": "🎴 Dealer's best hand: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (pɩtɔlɩ)",
+    "blind_lost_folded": " KƖYAKƲ YƆƐ TILIMI! -${blind} (pɩtɔlɩ)",
+    "ante_won": "✅ ANTE ŋɖʋwa se ŋwakɩ! +${amount}",
+    "ante_pushed": " ANTE PUSHED! ${ante} pɩpɩsɩɣ kɩ-wayɩ.",
+    "ante_lost": " ANTE Bet LOST! -${ante} Pɩlabɩ ɛzɩma nɛ ŋtɩɖʋna?",
+    "blind_won": "✅ ƐSƆTƲ ɛ-taa se ɛmʋ! +${amount}",
+    "blind_pushed": " KƖYAKƲ kɩlɛlʋʋ TƆM! ${blind} pɩpɩsɩwa",
+    "blind_lost": " KƖYAKƲ kɩlɛlʋʋ! -${blind}",
+    "play_won": "✅ MAAKAƔ NƐ ŊWƆ! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} pɩpɩsɩwa",
+    "play_lost": " PƖYƐLƲA-M nɛ mɛntɛzɩ maʋ! -${play}",
+    "net_gain": "🎉 Round {round} completed! Net gain: +${net}",
+    "net_loss": "💸 Round {round} completed! Net loss: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 Tɛmɛɛ PAɣA! {max_turns} tɛmɛɛ paɣa. Aŋa wɛɛ ${chips} kɩɖaŋ - Aŋa ŊƐNA!",
+    "game_over_lose": "🏁 PIYA KPALIM! Ka kpayaŋ nɛɛrɩ. Kpayaŋ ŋga wabɩ!",
+    "reward_win": "Iɛyaa completed {winner_rounds} rounds with ${chips} chips",
+    "reward_lose": "Ɛyʊ ɛnʊ ɛfɛyɩna mbʊ pɩ-taa ɛwɛɛ yɔ {round}",
+    "reward_win_max": "Iɛyaa completed {max_turns} rounds with ${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "Ɛ-hɩɖɛ sɛwa yɔ: Royal Flush.",
+    "straight_flush": "Kpɛlɩ kpɛlɛkʋʋ (Straight Flush)",
+    "four_of_a_kind": "Nɛɛrɩ Naanaza",
+    "full_house": "Aŋaŋa Sɔɖɛ",
+    "flush": "Kpɛlɩ kpɛlɛkʋʋ",
+    "straight": "Ñɩtʋʋzɩ camɩyɛ",
+    "three_of_a_kind": "Pa-naadozo pɛwɛ ndɩ nɛ ɖama",
+    "two_pair": "Pa-naalɛ paawɛ ɖama cɔlɔ.",
+    "one_pair": "Kɛɛyʊ kʊyʊm",
+    "high_card": "Kaarɩtɩ sɔsɔʋ",
+    "unknown": "Ɛyʋ nɔɔyʋ tɩna-ɩ."
+  }
+}

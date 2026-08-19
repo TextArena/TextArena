@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id}. Estás xogando ao Sudoku.\nAquí está o estado actual da grella de Sudoku. Cada fila está numerada do 1 ao 9, e cada columna tamén está numerada do 1 ao 9.\nAs celas baleiras están representadas por '.', e as celas preenchidas conteñen díxitos do 1 ao 9.\n\nGrella de Sudoku actual:\nO teu obxectivo é encher as celas baleiras na grella 9x9 con díxitos do 1 ao 9 de xeito que:\n1. Cada fila conteña todos os díxitos do 1 ao 9 sen repetición.\n2. Cada columna conteña todos os díxitos do 1 ao 9 sen repetición.\n3. Cada unha das nove subgrellas 3x3 conteña todos os díxitos do 1 ao 9 sen repetición.\n\nRegras e instrucións:\n1. **Non sobreescribas** os números iniciais proporcionados na grella.\n2. **Só enche** as celas baleiras representadas por '.'.\n3. Podes responder de calquera xeito que prefiras, pero asegúrate de que a túa resposta inclúa o formato de '[fila columna número]'.\n4. **Asegúrate** de que o teu movemento non viole as regras do Sudoku. Os movementos inválidos resultarán en penalizacións.\nExemplos:\n- **Movemento válido**:\n  - Fragmento da grella antes do movemento:\n  \n  - Movemento: `[5 3 7]`\n  - Explicación: Colocar o 7 na fila 5, columna 3 non viola ningunha regra do Sudoku.\n\n- **Movemento inválido** (Sobreescribir unha cela preenchida):\n  - Fragmento da grella antes do movemento:\n  \n  - Movemento: `[1 1 9]`\n  - Explicación: A cela (1,1) xa está encheita co 5. Non podes sobreescribila.\n\n- **Movemento inválido** (Violar as regras do Sudoku):\n  - Fragmento da grella antes do movemento:\n  \n  - Movemento: `[1 3 5]`\n  - Explicación: Colocar o 5 na fila 1, columna 3 viola a regra xa que o 5 xa existe na fila 1.\n\nO historial dos teus movementos e pensamentos será engadido a medida que xogues máis roldas. Utiliza o historial dos teus movementos para mellorar a túa toma de decisións evitando os movementos que xa probaches. Boa sorte!\n\n"
+  },
+  "board": {
+    "game_board": "Taboleiro do xogo:\n{board}",
+    "board_state": "Estado do taboleiro: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movemento inválido. O xogador {player_id} non respondeu con 'fila columna número' válido.",
+    "out_of_bounds": "Movemento inválido. O xogador {player_id} intentou colocar {num} en ({row}, {col}), que está fóra dos límites.",
+    "overwrite": "Movemento inválido. O xogador {player_id} intentou sobreescribir unha cela preenchida ({row}, {col}).",
+    "violates_rules": "Movemento inválido. O xogador {player_id} intentou colocar {num} en ({row}, {col}), o que viola as regras do Sudoku."
+  },
+  "outcome": {
+    "win": "Parabéns! O xogador {player_id} completou o puzzle de Sudoku.",
+    "turn_limit": "O límite de roldas foi alcanzado. Enchiches correctamente o {percent}% das celas baleiras."
+  }
+}

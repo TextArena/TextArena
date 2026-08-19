@@ -1,0 +1,618 @@
+{
+  "invalid_format": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing a single-player game of Set. Your goal is to find as many Sets as you can in 20 turns, without making mistakes. The board contains a numbered list of 12 or more cards with (number, color, fill, shape). A Set is a set of 3 cards where, for each attribute, they're all 3 the same, or all 3 different. For instance, 'one red open squiggle', 'two green open squiggle', 'three purple open squiggle' would be a Set. Each turn, you select a list of 3 cards from the board by their numbered index. For example, \"[1, 4, 11]\". If it is a Set, you score and the cards are replaced. If it is not a Set, that turn was wasted. The game ends when you run out of turns. You MUST return your cards in brackets, like [2, 4, 8], or they will not be parsed.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: one green striped squiggle\n2: one red striped oval\n3: two red solid squiggle\n4: two red striped diamond\n5: two red open diamond\n6: one green solid squiggle\n7: one green striped diamond\n8: three green solid oval\n9: one green open squiggle\n10: three red open oval\n11: one red striped diamond\n12: three purple solid diamond",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "hello",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "hello",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Invalid action format. Return a list of ints like [card1, card2, card3]. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      }
+    ],
+    "rewards": null
+  },
+  "invalid_index": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing a single-player game of Set. Your goal is to find as many Sets as you can in 20 turns, without making mistakes. The board contains a numbered list of 12 or more cards with (number, color, fill, shape). A Set is a set of 3 cards where, for each attribute, they're all 3 the same, or all 3 different. For instance, 'one red open squiggle', 'two green open squiggle', 'three purple open squiggle' would be a Set. Each turn, you select a list of 3 cards from the board by their numbered index. For example, \"[1, 4, 11]\". If it is a Set, you score and the cards are replaced. If it is not a Set, that turn was wasted. The game ends when you run out of turns. You MUST return your cards in brackets, like [2, 4, 8], or they will not be parsed.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: one green striped squiggle\n2: one red striped oval\n3: two red solid squiggle\n4: two red striped diamond\n5: two red open diamond\n6: one green solid squiggle\n7: one green striped diamond\n8: three green solid oval\n9: one green open squiggle\n10: three red open oval\n11: one red striped diamond\n12: three purple solid diamond",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1, 2, 99]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1, 2, 99]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Invalid action. Card indices must be between 1 and 12. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      }
+    ],
+    "rewards": null
+  },
+  "not_a_set": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing a single-player game of Set. Your goal is to find as many Sets as you can in 20 turns, without making mistakes. The board contains a numbered list of 12 or more cards with (number, color, fill, shape). A Set is a set of 3 cards where, for each attribute, they're all 3 the same, or all 3 different. For instance, 'one red open squiggle', 'two green open squiggle', 'three purple open squiggle' would be a Set. Each turn, you select a list of 3 cards from the board by their numbered index. For example, \"[1, 4, 11]\". If it is a Set, you score and the cards are replaced. If it is not a Set, that turn was wasted. The game ends when you run out of turns. You MUST return your cards in brackets, like [2, 4, 8], or they will not be parsed.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: one green striped squiggle\n2: one red striped oval\n3: two red solid squiggle\n4: two red striped diamond\n5: two red open diamond\n6: one green solid squiggle\n7: one green striped diamond\n8: three green solid oval\n9: one green open squiggle\n10: three red open oval\n11: one red striped diamond\n12: three purple solid diamond",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1, 2, 3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1, 2, 3]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "That is not a Set. No point for you.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "playthrough": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "You've taken 20 turns. The game is over.",
+        "role": "Player 0",
+        "turn_count": 20
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing a single-player game of Set. Your goal is to find as many Sets as you can in 20 turns, without making mistakes. The board contains a numbered list of 12 or more cards with (number, color, fill, shape). A Set is a set of 3 cards where, for each attribute, they're all 3 the same, or all 3 different. For instance, 'one red open squiggle', 'two green open squiggle', 'three purple open squiggle' would be a Set. Each turn, you select a list of 3 cards from the board by their numbered index. For example, \"[1, 4, 11]\". If it is a Set, you score and the cards are replaced. If it is not a Set, that turn was wasted. The game ends when you run out of turns. You MUST return your cards in brackets, like [2, 4, 8], or they will not be parsed.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: one green striped squiggle\n2: one red striped oval\n3: two red solid squiggle\n4: two red striped diamond\n5: two red open diamond\n6: one green solid squiggle\n7: one green striped diamond\n8: three green solid oval\n9: one green open squiggle\n10: three red open oval\n11: one red striped diamond\n12: three purple solid diamond",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1, 6, 9]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1, 6, 9]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: one red striped oval\n2: two red solid squiggle\n3: two red striped diamond\n4: two red open diamond\n5: one green striped diamond\n6: three green solid oval\n7: three red open oval\n8: one red striped diamond\n9: three purple solid diamond\n10: three purple open oval\n11: two red open oval\n12: two red open squiggle",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2, 3, 11]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2, 3, 11]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: one red striped oval\n2: two red open diamond\n3: one green striped diamond\n4: three green solid oval\n5: three red open oval\n6: one red striped diamond\n7: three purple solid diamond\n8: three purple open oval\n9: two red open squiggle\n10: three green open diamond\n11: three purple open diamond\n12: one purple solid diamond",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2, 3, 7]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2, 3, 7]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: one red striped oval\n2: three green solid oval\n3: three red open oval\n4: one red striped diamond\n5: three purple open oval\n6: two red open squiggle\n7: three green open diamond\n8: three purple open diamond\n9: one purple solid diamond\n10: two purple open oval\n11: two green striped squiggle\n12: two green solid squiggle",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1, 2, 10]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1, 2, 10]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: three red open oval\n2: one red striped diamond\n3: three purple open oval\n4: two red open squiggle\n5: three green open diamond\n6: three purple open diamond\n7: one purple solid diamond\n8: two green striped squiggle\n9: two green solid squiggle\n10: two red solid diamond\n11: one purple solid squiggle\n12: three purple solid squiggle",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1, 7, 8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1, 7, 8]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: one red striped diamond\n2: three purple open oval\n3: two red open squiggle\n4: three green open diamond\n5: three purple open diamond\n6: two green solid squiggle\n7: two red solid diamond\n8: one purple solid squiggle\n9: three purple solid squiggle\n10: three purple striped diamond\n11: two green open diamond\n12: three purple striped oval",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1, 2, 6]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1, 2, 6]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: two red open squiggle\n2: three green open diamond\n3: three purple open diamond\n4: two red solid diamond\n5: one purple solid squiggle\n6: three purple solid squiggle\n7: three purple striped diamond\n8: two green open diamond\n9: three purple striped oval\n10: two purple solid oval\n11: one red open oval\n12: two purple striped oval",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[3, 5, 12]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[3, 5, 12]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: two red open squiggle\n2: three green open diamond\n3: two red solid diamond\n4: three purple solid squiggle\n5: three purple striped diamond\n6: two green open diamond\n7: three purple striped oval\n8: two purple solid oval\n9: one red open oval\n10: one green open diamond\n11: three red solid oval\n12: three green striped diamond",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2, 6, 10]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2, 6, 10]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: two red open squiggle\n2: two red solid diamond\n3: three purple solid squiggle\n4: three purple striped diamond\n5: three purple striped oval\n6: two purple solid oval\n7: one red open oval\n8: three red solid oval\n9: three green striped diamond\n10: one purple striped oval\n11: three green solid squiggle\n12: one green open oval",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1, 2, 3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1, 2, 3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "No valid sets found on board. Dealt 3 additional cards.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: two red open squiggle\n2: two red solid diamond\n3: three purple solid squiggle\n4: three purple striped diamond\n5: three purple striped oval\n6: two purple solid oval\n7: one red open oval\n8: three red solid oval\n9: three green striped diamond\n10: one purple striped oval\n11: three green solid squiggle\n12: one green open oval\n13: three purple open squiggle\n14: two purple open squiggle\n15: one red solid oval",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": -1,
+        "text": "That is not a Set. No point for you.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[8, 9, 13]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[8, 9, 13]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: two red open squiggle\n2: two red solid diamond\n3: three purple solid squiggle\n4: three purple striped diamond\n5: three purple striped oval\n6: two purple solid oval\n7: one red open oval\n8: one purple striped oval\n9: three green solid squiggle\n10: one green open oval\n11: two purple open squiggle\n12: one red solid oval",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[8, 10, 12]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[8, 10, 12]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: two red open squiggle\n2: two red solid diamond\n3: three purple solid squiggle\n4: three purple striped diamond\n5: three purple striped oval\n6: two purple solid oval\n7: one red open oval\n8: three green solid squiggle\n9: two purple open squiggle\n10: one red striped squiggle\n11: one purple solid oval\n12: two green solid oval",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2, 8, 11]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2, 8, 11]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: two red open squiggle\n2: three purple solid squiggle\n3: three purple striped diamond\n4: three purple striped oval\n5: two purple solid oval\n6: one red open oval\n7: two purple open squiggle\n8: one red striped squiggle\n9: two green solid oval\n10: one purple striped diamond\n11: two green open squiggle\n12: one green solid diamond",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1, 4, 12]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1, 4, 12]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: three purple solid squiggle\n2: three purple striped diamond\n3: two purple solid oval\n4: one red open oval\n5: two purple open squiggle\n6: one red striped squiggle\n7: two green solid oval\n8: one purple striped diamond\n9: two green open squiggle\n10: one red open squiggle\n11: three green striped oval\n12: one red solid diamond",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1, 6, 9]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1, 6, 9]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: three purple striped diamond\n2: two purple solid oval\n3: one red open oval\n4: two purple open squiggle\n5: two green solid oval\n6: one purple striped diamond\n7: one red open squiggle\n8: three green striped oval\n9: one red solid diamond\n10: two green striped diamond\n11: three red solid diamond\n12: two purple open diamond",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1, 5, 7]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1, 5, 7]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: two purple solid oval\n2: one red open oval\n3: two purple open squiggle\n4: one purple striped diamond\n5: three green striped oval\n6: one red solid diamond\n7: two green striped diamond\n8: three red solid diamond\n9: two purple open diamond\n10: three red solid squiggle\n11: three red striped diamond\n12: one purple open squiggle",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1, 2, 5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1, 2, 5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: two purple open squiggle\n2: one purple striped diamond\n3: one red solid diamond\n4: two green striped diamond\n5: three red solid diamond\n6: two purple open diamond\n7: three red solid squiggle\n8: three red striped diamond\n9: one purple open squiggle\n10: one purple open diamond\n11: three green striped squiggle\n12: one purple open oval",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2, 4, 8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2, 4, 8]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: two purple open squiggle\n2: one red solid diamond\n3: three red solid diamond\n4: two purple open diamond\n5: three red solid squiggle\n6: one purple open squiggle\n7: one purple open diamond\n8: three green striped squiggle\n9: one purple open oval\n10: two green striped oval\n11: three red open diamond\n12: three purple solid oval",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[3, 6, 10]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[3, 6, 10]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: two purple open squiggle\n2: one red solid diamond\n3: two purple open diamond\n4: three red solid squiggle\n5: one purple open diamond\n6: three green striped squiggle\n7: one purple open oval\n8: three red open diamond\n9: three purple solid oval\n10: one red open diamond\n11: two red solid oval\n12: three red striped squiggle",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2, 4, 11]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2, 4, 11]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: two purple open squiggle\n2: two purple open diamond\n3: one purple open diamond\n4: three green striped squiggle\n5: one purple open oval\n6: three red open diamond\n7: three purple solid oval\n8: one red open diamond\n9: three red striped squiggle\n10: two green solid diamond\n11: three red open squiggle\n12: three green open squiggle",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[4, 6, 7]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[4, 6, 7]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You found a Set! +1 point!",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== BOARD ===\n1: two purple open squiggle\n2: two purple open diamond\n3: one purple open diamond\n4: one purple open oval\n5: one red open diamond\n6: three red striped squiggle\n7: two green solid diamond\n8: three red open squiggle\n9: three green open squiggle\n10: one purple striped squiggle\n11: three green solid diamond\n12: two green open oval",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": 19
+    }
+  }
+}

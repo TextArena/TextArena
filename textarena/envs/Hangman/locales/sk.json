@@ -1,0 +1,31 @@
+{
+  "_comment": "Slovenská lokalizácia pre Hangman. Kľúče (ľavá strana) sú pevne dané; prekladajte iba hodnoty (pravá strana). Zachovajte každý {placeholder}verbatim.",
+  "_slots": {
+    "{board}": "Neutrálna vykreslená doska (hlavičky stĺpcov C00/C01, odhalené písmená, '_' prázdne miesta); neprekladajte",
+    "{tries_left}": "Zostávajúce nesprávne pokusy (celé číslo)",
+    "{guessed}": "Čiarkou oddelený zoznam už uhádnutých písmen",
+    "{letter}": "Uhádnuté písmeno alebo celé slovo (ponechané tak, ako bolo napísané)",
+    "{pct}": "Percento správne uhádnutých znakov, formátované na 2 desatinné miesta",
+    "{target_word}": "Skryté cieľové slovo"
+  },
+  "prompt": {
+    "intro": "Hrajete Hangman. Cieľom hry je uhádnuť slovo poskytovaním jednotlivých písmen alebo celého slova.\nKaždý stĺpec je očíslovaný. Bunky, ktoré treba vyplniť písmenami, sú zastúpené '_'.\n\nExistujú dva spôsoby, ako môžete odpovedať. Môžete poskytovať jednotlivé písmená v formáte '[L]', alebo môžete uhádnuť celé slovo v formáte '[LIGHT]'.\nAk dané písmeno je v slove, bude odhalené v mriežke.\nAk dané slovo je správne, vyhráte.\nPočas hry bude história vašich výberov pridaná nižšie. Použite informácie na zistenie slova a víťazstvo.\nMáte 6 nesprávnych pokusov predtým, ako hra skončí.\n\n"
+  },
+  "board": {
+    "status": "Aktuálna doska:\n{board}\nMáte {tries_left} pokusov zostávajúcich.\nUhádnuté písmená: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Nesprávny formát ťahu. Neodpovedali ste platným 'písmenom' alebo 'slovom'.",
+    "already_guessed": "Uhádnuté písmeno '{letter}' už bolo uhádnuté."
+  },
+  "message": {
+    "wrong_word": "Vaše uhádnutie '{letter}' nie je cieľové slovo.",
+    "letter_in": "Vaše uhádnutie {letter} je v slove",
+    "letter_not_in": "Vaše uhádnutie {letter} nie je v slove. Máte {tries_left} životov zostávajúcich."
+  },
+  "outcome": {
+    "win_word": "Gratulujeme! Dokončili ste Hangman puzzle.",
+    "win_board": "Gratulujeme! Dokončili ste Hangman puzzle.",
+    "out_of_tries": "Došli ste pokusy. Uhádnuté ste {pct} percento znakov správne. Cieľové slovo bolo: {target_word}"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "_comment": "Archivo de idioma de Cryptarithm en español. NO traduzcas las claves, solo los valores. Mantén cada {marcador}; no traduzcas el token `[A 5]`, las letras ni los dígitos.",
+  "_slots": {
+    "{letter}": "Una letra del puzzle, p. ej. S o E",
+    "{digit}": "Un dígito 0-9",
+    "{used_letter}": "La letra que ya reclamó un dígito",
+    "{assigned}": "Cuántas letras están asignadas hasta ahora",
+    "{total}": "Número total de letras distintas",
+    "{pct}": "Progreso en porcentaje, p. ej. 50%"
+  },
+  "player_prompt": { "intro": "Asigna a cada letra un dígito único para que la aritmética se cumpla.\nAsigna con `[A 5]`, puedes reasignar en cualquier momento.\n" },
+  "invalid_move": {
+    "wrong_format": "Formato de acción no válido. Usa `[A 5]`.",
+    "letter_not_in_puzzle": "La letra {letter} no está en el puzzle.",
+    "digit_used": "El dígito {digit} ya lo usa {used_letter}.",
+    "leading_zero": "El dígito inicial de una palabra no puede ser 0."
+  },
+  "outcome": {
+    "correct": "¡Correcto! Ecuación satisfecha.",
+    "incorrect": "Asignación completa pero la ecuación es incorrecta.",
+    "limit": "Se alcanzó el límite de movimientos."
+  },
+  "board": {
+    "mapping_header": "Asignación:",
+    "none_yet": "  (ninguna aún)",
+    "assigned": "\nAsignadas: {assigned}/{total} ({pct})"
+  }
+}

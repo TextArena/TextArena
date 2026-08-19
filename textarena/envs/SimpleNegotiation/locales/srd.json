@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Su giogadore at proadu a retzire unu cummèrtziu sena tènnere sas risorsas netzessàrias.",
+    "out_of_range": "Giogadore {player_id}, Atzu ineitzu. Colonna {col} est foras de sos limites.",
+    "already_full": "Giogadore {player_id}, Atzu ineitzu. Colonna {col} est plena.",
+    "proposing_with_no_resource": "Giogadore {player_id} at chircadu de fàghere un'oferta cumertziale sena tènnere sas risorsas netzessàrias.",
+    "incorrect_offer_format": "Giogadore {player_id} at fatu un'oferta de cummèrtziu in unu formadu no curretu.",
+    "no_new_offer": "Su giogadore {player_id} no at fatu peruna oferta noa de cummèrtziu."
+  },
+  "offers": {
+    "reject": "Giogadore {player_id} at refudadu s'oferta de cummèrtziu.",
+    "accept": "Giogadore {acceptor_id} at acollidu s'oferta de scambiu de Giogadore {proposer_id}.",
+    "proposal": "Giogadore {player_id} at fattu s'oferta sighente a Giogadore {opponent_id}: Benes offeridos: {offered} -> Benes domandados: {requested}"
+  },
+  "outcome": {
+    "win": "Giogadore {winner_id} at bintu tenende unu guadagnamentu prus mannu in su balore de s'inventàriu.",
+    "draw": "Su matessi cambiamentu in su balore de s'inventàriu pro totu sos giogadores."
+  }
+}

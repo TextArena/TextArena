@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Pasianssi -lokaalitiedosto. ÄLÄ käännä avaimia (vasen puoli). Käännä vain arvot (oikea puoli).",
+  "_slots": {
+    "{n}": "Toiminnon indeksi pilkulla erotetussa komennossa, 1-pohjainen",
+    "{msg}": "Sisäkkäinen toimintokohtainen tulosviesti (jo lokalisoitu)",
+    "{count}": "Käännetyssä asennossa olevien korttien lukumäärä",
+    "{src}": "Lähdepakanumero, 1-pohjainen",
+    "{dst}": "Kohdepakanumero, 1-pohjainen",
+    "{cmd}": "Tuntematon komento, jonka pelaaja kirjoitti (ei käännetty)",
+    "{max_turns}": "Maksimivuorojen määrä ennen pelin päättymistä",
+    "{score}": "Korttien lukumäärä perustuissa",
+    "{board}": "Renderöity ASCII-lauta (ei koskaan käännetty)",
+    "{turn}": "Nykyinen vuoronumero",
+    "{stock}": "Korttien lukumäärä pakassa",
+    "{waste}": "Ylin jätekortti, tai '--' jos tyhjä (ei koskaan käännetty)",
+    "{cards}": "Kortit pinossa neutraaleina leimoina, tai '--' jos tyhjä (ei koskaan käännetty)"
+  },
+  "player_prompt": {
+    "intro": "Pelaat Klondike Pasianssia. Tavoitteesi on siirtää kaikki kortit perustuihin.\n\nPelisäännöt:\n- Perustat (F1-F4): Rakenna ylöspäin Ässästä Kuningas saakka maan mukaan\n- Pöytäpinot (T1-T7): Rakenna alaspäin vuorotellen värejä (punainen mustan päällä, musta punaisen päällä)\n- Pakka: Nosta kortteja jätepinosta\n- Jäte (W): Ylin kortti käytettävissä peliin\n\nKomennot:\n- 'draw' - Nosta kortteja pakasta jätepinosta\n- 'move <lähde> <kohde> [lukumäärä]' - Siirrä kortteja pinosta toiseen\n  Esimerkit: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Lukumäärä voi olla myös 'all', jolloin yritetään siirtää kaikki käännetyssä asennossa olevat kortit.\n- 'forfeit' - Lopeta peli välittömästi ja lukitse nykyinen pistemääräsi\n- Pinon nimet: W (jäte), F1-F4 (perustat), T1-T7 (pöytäpinot)\n\nVoit suorittaa useita toimintoja yhdellä vuorolla erottamalla ne pilkuilla:\n  Esimerkki: 'draw, move W T1, move T2 F1'\n\nVain Kuningas voidaan asettaa tyhjään pöytäpinoon.\nToiminnot suoritetaan järjestyksessä - jos yksi epäonnistuu, loput toiminnot ohitetaan.\nKäytä 'forfeit', jos uskot, että peli on mahdotonta voittaa."
+  },
+  "format_error": {
+    "no_brackets": "Virheellinen toimintomuoto. Toiminnon pitäisi olla hakasuluissa.",
+    "no_closing_bracket": "Virheellinen toimintomuoto. Puuttuva sulkeva hakasulku ']'",
+    "empty_command": "Tyhjä komento. Kirjoita 'draw' tai 'move <lähde> <kohde> [lukumäärä]'",
+    "empty_action": "Tyhjä toiminto",
+    "move_needs_args": "Siirto-komennolla on oltava lähde ja kohde. Käyttö: 'move <lähde> <kohde> [lukumäärä]'",
+    "count_positive": "Lukumäärän on oltava positiivinen tai 'all'",
+    "count_invalid": "Virheellinen lukumäärä. Käytä numeroa tai 'all'",
+    "unknown_command": "Tuntematon komento '{cmd}'. Käytä 'draw', 'move <lähde> <kohde> [lukumäärä]', tai 'forfeit'",
+    "wrapped": "Toiminto {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Toiminto {n}: {msg}",
+    "before_failure": "Suoritettiin {n} toiminto(a) ennen epäonnistumista.",
+    "failed": "Toiminto {n} epäonnistui: {msg}"
+  },
+  "move_result": {
+    "drew": "Nosti kortteja pakasta jätepinosta.",
+    "cannot_draw": "Ei voida nostaa. Sekä pakka että jäte ovat tyhjiä.",
+    "invalid_pile": "Virheellinen pinon nimi. Käytä W, F1-F4, tai T1-T7",
+    "foundation_one_card": "Voi siirtää vain yhden kortin perustaan",
+    "waste_to_foundation_ok": "Siirsi kortin jätepinosta perustaan F{dst}",
+    "waste_to_foundation_bad": "Ei voida siirtää jätekorttia siihen perustaan",
+    "tableau_to_foundation_ok": "Siirsi kortin pöytäpinosta T{src} perustaan F{dst}",
+    "tableau_to_foundation_bad": "Ei voida siirtää pöytäkorttia siihen perustaan",
+    "foundation_to_foundation": "Ei voida siirtää perustasta toiseen perustaan",
+    "waste_to_tableau_one_card": "Voi siirtää vain yhden kortin jätepinosta pöytäpinoon",
+    "waste_to_tableau_ok": "Siirsi kortin jätepinosta pöytäpinoon T{dst}",
+    "waste_to_tableau_bad": "Ei voida asettaa jätekorttia siihen pöytäpinoon",
+    "no_face_up": "Ei käännetyssä asennossa olevia kortteja siirrettäväksi",
+    "tableau_to_tableau_ok": "Siirsi {count} korttia pöytäpinosta T{src} pöytäpinoon T{dst}",
+    "tableau_to_tableau_bad": "Ei voida siirtää {count} korttia pöytäpinosta T{src} pöytäpinoon T{dst}",
+    "foundation_to_tableau_one_card": "Voi siirtää vain yhden kortin perustasta pöytäpinoon",
+    "foundation_empty": "Perusta F{src} on tyhjä",
+    "foundation_to_tableau_ok": "Siirsi kortin perustasta F{src} pöytäpinoon T{dst}",
+    "foundation_to_tableau_bad": "Ei voida asettaa peruskorttia pöytäpinoon T{dst}",
+    "to_waste_or_stock": "Ei voida siirtää jäte- tai pakkaan"
+  },
+  "outcome": {
+    "forfeit": "Peli luovutettiin. Lopullinen pistemäärä: {score} korttia perustoissa.",
+    "won": "Onneksi olkoon! Olet voittanut Klondike Pasianssin!",
+    "turn_limit": "Peli päättyi! Saavutit maksimimäärän {max_turns} vuoroja. Pistemäärä: {score} korttia perustoissa."
+  },
+  "board": {
+    "title": "=== KLONDIKE PASIANSI ===",
+    "turn": "Vuoro: {turn}/{max_turns}",
+    "stock": "Pakka: {stock} korttia",
+    "waste": "Jäte (W): {waste}",
+    "foundations_header": "Perustat:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Pöytäpinot:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "તમે {num_players}-ખેલાડીઓ વચ્ચેની જૂઠ્ઠાણાની ડાઇસ રમતમાં ખેલાડી {player_id} છો. નિયમોઃ - તમારા વારા પર, તમે ક્યાં તો: 1) વર્તમાન બોલી કરતા વધારે જથ્થા અથવા ઉચ્ચ ચહેરો (અથવા બંને) સાથે નવી બોલી લગાવી શકો છો; એટલે કે '[Bid: 3, 4]', 2) '[Call]' લખીને છેલ્લી બોલી બોલાવો. જો તમે બોલાવો છોઃ - જો તમામ ડાઇસ વચ્ચેની ચહેરાના મૂલ્યની વાસ્તવિક ગણતરી બોલી કરતા ઓછી હોય, તો છેલ્લી બોલી લગાવનાર એક ડાઇસ ગુમાવે છે. - અન્યથા, ક callલર એક ડાઇસ ગુમાવે છે. જે ખેલાડી 0 ડાઇસ સુધી પહોંચે છે તે દૂર કરવામાં આવે છે. છેલ્લો બાકી ખેલાડી જીતે છે."
+  },
+  "board": {
+    "per_player": "ખેલાડી {p}: {d}",
+    "new_round": "નવો રાઉન્ડ - બાકીના ડાઇસઃ {dice_summary} તમારા વર્તમાન ડાઇસ છેઃ {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "ખેલાડી {current_player_id} કોલ્સ! વાસ્તવિક ચહેરાની ગણતરી {face_value} {count} છે, જે {quantity} કરતા ઓછી છે. ખેલાડી {loser_id} (છેલ્લા બિડર) એક ડાઇસ ગુમાવે છે.",
+    "caller_loses": "ખેલાડી {current_player_id} કોલ્સ! વાસ્તવિક ચહેરાની ગણતરી {face_value} છે {count}, જે >= {quantity} છે. ખેલાડી {loser_id} (કૉલર) એક ડાઇસ ગુમાવે છે."
+  },
+  "action": {
+    "bid_announce": "ખેલાડી {player_id} ચહેરા {face_value} ની બિડ્સ {quantity} કરે છે."
+  },
+  "invalid_move": {
+    "call_no_bid": "કોઈ પૂર્વ બિડ વગર કૉલ કરવામાં આવે છે.",
+    "invalid_bid": "અમાન્ય બોન્ડઃ {reason}",
+    "not_recognized": "કાર્યવાહીને માન્ય \"[Bid: X, Y]\" અથવા \"[Call]\" તરીકે માન્યતા આપવામાં આવી નથી. રજૂ કરેલી કાર્યવાહીઃ {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "નવી માત્રા {new_quantity} વર્તમાન {current_quantity} કરતા ઓછી છે.",
+    "face_lower": "નવું નકલી મૂલ્ય {new_face_value} વર્તમાન {current_face_value} કરતા ઓછું છે.",
+    "identical": "બોલી વર્તમાન બોલી જેવી જ છે.",
+    "face_range": "નોમિનેટ મૂલ્ય 1 અને 6 ની વચ્ચે હોવું જોઈએ."
+  },
+  "message": {
+    "eliminated_invalid": "ખેલાડી {player_id} અમાન્ય ચાલ દ્વારા બહાર નીકળી ગયો."
+  },
+  "outcome": {
+    "win": "ખેલાડી {winner} જીતે છે! અંતિમ રેન્કિંગઃ {final_ranking}"
+  }
+}

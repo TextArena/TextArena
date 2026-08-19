@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Sa oled {role} Colonel Blotto mängus.\nSinu eesmärk on võita rohkem voorusid kui vastane.\nIgal voorul jagada täpselt {num_total_units} üksust väljadele {field_names}.\nMängija, kes jagab rohkem üksusi väljale, võidab selle välja, ja mängija, kes võidab rohkem välju, võidab vooru.\nNäiteks, '[A7 B7 C6]' jagab 7 üksust A-le, 7 B-le ja 6 C-le.",
+    "commander_alpha": "Komandör Alfa",
+    "commander_beta": "Komandör Beeta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Voor {current_round}/{num_rounds} ===\nVoorude võidud - Komandör Alfa: {alpha_score}, Komandör Beeta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nVoor {current_round}\nKomandör Alfa jagas: {p0_allocations}\nKomandör Beeta jagas: {p1_allocations}\n",
+    "winner_alpha": "{message}Võitja: Komandör Alfa",
+    "winner_beta": "{message}Võitja: Komandör Beeta",
+    "tie": "{message}Viik!"
+  },
+  "invalid_move": {
+    "wrong_format": "Vigane sisendivorming. Kasuta: A:5, B:10, C:5",
+    "invalid_field": "Vigane välja nimi. Kehtivad väljad: {field_names}",
+    "wrong_allocation_value": "Kõik jagamised peavad olema mitte-negatiivsed täisarvud.",
+    "incorrect_total_units": "Sa pead jagama täpselt {num_total_units} üksust. Praegune summa: {current_sum}",
+    "good_allocations": "Jagamine on hea."
+  },
+  "outcome": {
+    "winner_alpha": "Komandör Alfa võidab {score_0}-{score_1} pärast {num_rounds} voorusid!",
+    "winner_beta": "Komandör Beeta võidab {score_1}-{score_0} pärast {num_rounds} voorusid!",
+    "draw": "Mäng lõpeb {score_0}-{score_1} viigiga pärast {num_rounds} voorusid!",
+    "early_winner_alpha": "Komandör Alfa võidab {scores_0}-{scores_1} (enamus saavutatud)!",
+    "early_winner_beta": "Komandör Beeta võidab {scores_1}-{scores_0} (enamus saavutatud)!"
+  }
+}

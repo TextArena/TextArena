@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Jūs spēlējat skaitļu spēli Countdown!\nMērķis: Savienot skaitļus, izmantojot +, -, *, /, lai sasniegtu mērķi.\nDarbības formāts: [i j op], kur i, j ir indeksi, bet op ir operācija.\nPiemērs: [0 2 *] reizinājumā skaitli ar indeksu 0 ar skaitli ar indeksu 2.\nDalīšana ir jāveic tikai uz veseliem skaitļiem."
+  },
+  "board": {
+    "header": "MĒRĶIS: {target}\n\nPieejamie cipari:\n{numbers}",
+    "best": "{observation}\n\nLabāk līdz šim: {best_value} (attālums: {distance})\nLabākais izteikums: {best_expression}",
+    "history": "{observation}\n\nSoļu vēsture:\n{moves}",
+    "progress": "{observation}\nPašreizējais progresa punktu skaits: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nederīgs darbības formāts. Izmantojiet `[i j op]`, kur i,j ir indeksi un op ir +,-,*,/",
+    "invalid_indices": "Nederīgi indeksi. Jābūt atšķirīgiem un diapazonā 0-{max_index}",
+    "invalid_operation": "Naatbylstūša darbeiba (dalejums ar nulli voi rezultats, kas nav vasals skaitlis)"
+  },
+  "outcome": {
+    "win": "Izpyldi! Atpazeistameibys mierkis atroduots: {target}",
+    "no_moves": "Vairs nav izņēmumu. Labākais rezultāts: {best_value} (mērķis: {target})",
+    "turn_limit": "Sasniegts izņēmumu limits. Labākais rezultāts: {best_value} (mērķis: {target})"
+  }
+}

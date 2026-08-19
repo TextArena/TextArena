@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "El joc comença. Pal de trumfo: {trump_suit} (carta de trumfo: {trump_str}).",
+    "no_trump_card": "cap"
+  },
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} al Whist alemany.\n{phase_info}\nTens {hand_size} cartes.\nJuga una carta amb '[play N]', on N és la seva posició a la mà (per exemple '[play 3]').",
+    "phase_learning": "FASE D'APRENENTATGE: el guanyador de cada truc pren la carta boca amunt i el perdedor roba la següent carta de la baralla. Els trucs guanyats en aquesta fase no compten cap a la victòria.",
+    "phase_playing": "FASE DE JOC: la baralla està esgotada. Cada truc a partir d'ara compta cap a la victòria."
+  },
+  "next_card": {
+    "playing_phase": "No hi ha carta disponible - la fase de joc ha començat.",
+    "deck_empty": "La baralla està buida - no hi ha carta disponible.",
+    "available": "Carta disponible: {card}",
+    "available_trump": "Carta disponible: {card} (TRUMFO)"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de moviment invàlid. Utilitza '[play N]' per jugar la Nena carta de la mà.",
+    "bad_position": "La posició de la carta no existeix. Tens {hand_size} cartes.",
+    "must_follow_suit": "Has de seguir el pal i jugar una carta de {lead_suit}.",
+    "invalid_play": "La carta no pot ser jugada."
+  },
+  "game_action": {
+    "played": "El Jugador {player_id} ha jugat {card}."
+  },
+  "trick": {
+    "won": "El Jugador {winner_id} guanya el truc amb {card}.",
+    "won_learning": "El Jugador {winner_id} guanya el truc amb {card} i pren la carta boca amunt."
+  },
+  "phase": {
+    "learning_complete": "La baralla està esgotada. La fase d'aprenentatge ha acabat - cada truc restant compta cap a la victòria."
+  },
+  "draw": {
+    "winner_received": "Has guanyat el truc i has rebut {card}.",
+    "loser_received": "Has perdut el truc i has robat {card} de la baralla.",
+    "winner_preview": "La següent carta disponible és {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Trucs guanyats fins ara - Jugador 0: {tricks0}, Jugador 1: {tricks1}",
+    "scores_playing": "Trucs de puntuació - Jugador 0: {tricks0}, Jugador 1: {tricks1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Fase: {phase} ({remaining_cards} cartes restants a la baralla)"
+  },
+  "hand": {
+    "no_cards": "Cap carta",
+    "no_cards_in_hand": "Cap carta a la mà",
+    "header": "La teva mà:",
+    "trump_indicator": " (TRUMFO)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Encara no s'han jugat cartes en aquest truc.",
+    "header": "Truc actual:",
+    "trump_indicator": " (TRUMFO)",
+    "card_line": "{observation}\n  Jugador {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Joc no iniciat",
+    "header": "=== JOC DE WHIST ALEMANY ===",
+    "phase": "{observation}\nFase: {phase}",
+    "trump_suit": "{observation}\nPal de trumfo: {trump_suit}",
+    "trump_card": "{observation}\nCarta de trumfo: {card}",
+    "cards_left": "{observation}\nCartes restants a la baralla: {count}",
+    "next_card": "{observation}\nSegüent carta per al guanyador: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nTruc actual:",
+    "trump_indicator": " (TRUMFO)",
+    "trick_line": "{observation}\n  Jugador {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nJugador {player_id}: {scoring} trucs de puntuació ({tricks} totals), {hand_size} cartes a la mà"
+  },
+  "outcome": {
+    "summary": "Fase d'aprenentatge - Jugador 0: {l0}, Jugador 1: {l1}. Fase de joc - Jugador 0: {p0}, Jugador 1: {p1}. El Jugador {winner_id} guanya amb {winner_tricks} trucs de puntuació!"
+  }
+}

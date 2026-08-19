@@ -1,0 +1,30 @@
+{
+  "_comment": "Cryptarithm dil dosyası. Anahtarları (sol taraf) çevirme. Yalnızca değerleri (sağ taraf) çevir.",
+  "_slots": {
+    "{letter}": "Bulmaca harfi, örneğin S veya E",
+    "{digit}": "Bir rakam 0-9",
+    "{used_letter}": "Zaten bir rakam atanmış olan harf",
+    "{assigned}": "Şu ana kadar eşlenen harf sayısı",
+    "{total}": "Farklı harflerin toplam sayısı",
+    "{pct}": "İlerleme yüzdesi, örneğin %50"
+  },
+  "player_prompt": {
+    "intro": "Her harfi benzersiz bir rakama eşleyin ki aritmetik doğru olsun.\n`[A 5]` ile atayın, istediğiniz zaman yeniden atayabilirsiniz.\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Hatalı eylem formatı. `[A 5]` kullanın.",
+    "letter_not_in_puzzle": "Harf {letter} bulmacada yok.",
+    "digit_used": "Rakam {digit} zaten {used_letter} tarafından kullanılıyor.",
+    "leading_zero": "Bir kelimenin başlangıç rakamı 0 olamaz."
+  },
+  "outcome": {
+    "correct": "Doğru! Denklem sağlandı.",
+    "incorrect": "Eşleme tamamlandı ancak denklem hatalı.",
+    "limit": "Hamle sınırına ulaşıldı."
+  },
+  "board": {
+    "mapping_header": "Eşleme:",
+    "none_yet": "  (henüz yok)",
+    "assigned": "\nAtanan: {assigned}/{total} ({pct})"
+  }
+}

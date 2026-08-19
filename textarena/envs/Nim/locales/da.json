@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i Nim.\nDit mål er at tage det sidste tilbageværende objekt.\nPå hver tur skal du vælge præcis én bunke og fjerne ét eller flere objekter fra den.\nBrug formatet '[bunke antal]', hvor bunke er bunkens indeks og antal er antallet af objekter at fjerne.\nFor eksempel fjerner '[0 3]' 3 objekter fra bunke 0."
+  },
+  "state": {
+    "current_pile": "Aktuel bunke:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ingen gyldig træksformat fundet. Brug '[bunke antal]'.",
+    "correct_format_wrong_fields": "Spiller {player_id}, Ugyldig handling. Kolonne {col} er uden for grænserne.",
+    "out_of_range": "Bunkeindeks {pile_index} er uden for rækkevidde.",
+    "non_positive": "Skal fjerne mindst 1 objekt.",
+    "exceeds_pile": "Kan ikke fjerne {quantity} fra bunke {pile_index} (kun {pile_count} tilbage)."
+  },
+  "observation": {
+    "removed_from_piles": "Spiller {player_id} spillede [{pile_index} {quantity}], fjernede {quantity} objekt(er) fra bunke {pile_index}."
+  },
+  "outcome": {
+    "win": "Spiller {player_id} tog det sidste objekt(ter)!"
+  }
+}

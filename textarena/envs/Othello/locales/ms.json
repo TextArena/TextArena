@@ -1,0 +1,34 @@
+{
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} yang bermain sebagai {colour} ({piece}) dalam permainan Othello.\nMatlamat anda adalah untuk mempunyai lebih banyak buah berwarna anda di atas papan pada akhir permainan.\nPada giliran anda, letakkan satu buah supaya ia mengepit satu atau lebih buah pihak lawan dalam mana-mana arah, sama ada mendatar, menegak atau menyerong, antara buah baharu anda dengan satu lagi buah anda yang sedia ada. Semua buah lawan yang dikepit akan diterbalikkan kepada warna anda.\nBerikan langkah anda dalam format '[row, col]'."
+  },
+
+  "board": {
+    "game_board": "Papan permainan:\n{board}",
+    "valid_moves": "{observation}\nLangkah sah: {moves}",
+    "no_valid_moves_reset": "{observation}\nTiada langkah sah - anda mungkin perlu melangkau giliran.",
+    "no_valid_moves_step": "{observation}\nTiada langkah sah – anda mungkin perlu melangkau giliran.",
+    "scores_reset": "{observation}\nMata semasa - Hitam: {black_count}, Putih: {white_count}\n",
+    "scores_step": "{observation}\nMata - Hitam: {black_count}, Putih: {white_count}\n"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Langkah mesti dalam format [row, col].",
+    "illegal": "Langkah tidak sah. Langkah yang sah: {valid}"
+  },
+
+  "game_action": {
+    "skipped": "Pemain {pid} terpaksa melangkau gilirannya",
+    "played": "Pemain {pid} ({piece}) bermain di [{r}, {c}] dan menterbalikkan {flipped} buah"
+  },
+
+  "game_message": {
+    "must_skip": "Pemain {pid} ({piece}) tidak mempunyai langkah sah dan mesti melangkau giliran."
+  },
+
+  "outcome": {
+    "black_wins": "Hitam menang {black_count}-{white_count}.",
+    "white_wins": "Putih menang {white_count}-{black_count}.",
+    "draw": "Seri {black_count}-{white_count}."
+  }
+}

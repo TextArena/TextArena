@@ -1,0 +1,6600 @@
+{
+  "draw_all_matched": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Both players matched the same number of pairs of cards.",
+        "role": "Player 0",
+        "turn_count": 5
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Both players matched the same number of pairs of cards.",
+        "role": "Player 1",
+        "turn_count": 4
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current board:\n  0 1 2 3\n0 . . . .\n1 . . . .\n2 . . . .\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 0 2 3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 2 3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 0] and [2 3] match!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H . . .\n1 . . . .\n2 . . . H\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 1 2 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 2 0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 1] and [2 0] match!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B . .\n1 . . . .\n2 B . . H\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 2 2 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 2 2 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 2] and [2 2] match!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B F .\n1 . . . .\n2 B . F H\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 3 1 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 3 1 0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 3] and [1 0] match!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B F G\n1 G . . .\n2 B . F H\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1 1 1 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current board:\n  0 1 2 3\n0 . . . .\n1 . . . .\n2 . . . .\n3 . . . .\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 2 3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 0] and [2 3] match!",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H . . .\n1 . . . .\n2 . . . H\n3 . . . .\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 2 0]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 1] and [2 0] match!",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B . .\n1 . . . .\n2 B . . H\n3 . . . .\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0 2 2 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 2] and [2 2] match!",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B F .\n1 . . . .\n2 B . F H\n3 . . . .\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0 3 1 0]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 3] and [1 0] match!",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B F G\n1 G . . .\n2 B . F H\n3 . . . .\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[1 1 1 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [1 1] and [1 2] are C and E respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[1 1 2 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1 1 2 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 at positions [1 1] and [2 1] match!",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B F G\n1 G C . .\n2 B C F H\n3 . . . .\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1 2 3 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1 2 3 0]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 at positions [1 2] and [3 0] match!",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B F G\n1 G C E .\n2 B C F H\n3 E . . .\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1 3 3 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1 3 3 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 at positions [1 3] and [3 2] match!",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B F G\n1 G C E A\n2 B C F H\n3 E . A .\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[3 1 3 3]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[3 1 3 3]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 at positions [3 1] and [3 3] match!",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B F G\n1 G C E A\n2 B C F H\n3 E D A D\n",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": 0,
+      "1": 0
+    }
+  },
+  "invalid_format_oob": {
+    "game_info": {
+      "0": {
+        "invalid_move": true,
+        "reason": "Invalid move. Player 0 selected an out-of-bounds position.",
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Invalid move. Player 0 selected an out-of-bounds position.",
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current board:\n  0 1 2 3\n0 . . . .\n1 . . . .\n2 . . . .\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "hello",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "hello",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid move format. Player 0 did not respond with a valid direction in square brackets. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[4 4 4 4]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[4 4 4 4]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      }
+    ],
+    "rewards": {
+      "0": -1,
+      "1": 1
+    }
+  },
+  "invalid_samecard_matched": {
+    "game_info": {
+      "0": {
+        "invalid_move": true,
+        "reason": "Invalid move. Player 0 selected one or both cards that have already been matched.",
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Invalid move. Player 0 selected one or both cards that have already been matched.",
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current board:\n  0 1 2 3\n0 . . . .\n1 . . . .\n2 . . . .\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 0 2 3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 2 3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 0] and [2 3] match!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H . . .\n1 . . . .\n2 . . . H\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1 1 1 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1 1 1 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid move. Player 0 selected the same card twice. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[0 0 1 2]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 1 2]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      }
+    ],
+    "rewards": {
+      "0": -1,
+      "1": 1
+    }
+  },
+  "sweep_win_p0": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 has won!",
+        "role": "Player 0",
+        "turn_count": 8
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 has won!",
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current board:\n  0 1 2 3\n0 . . . .\n1 . . . .\n2 . . . .\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 0 2 3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 2 3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 0] and [2 3] match!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H . . .\n1 . . . .\n2 . . . H\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 1 2 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 2 0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 1] and [2 0] match!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B . .\n1 . . . .\n2 B . . H\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 2 2 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 2 2 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 2] and [2 2] match!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B F .\n1 . . . .\n2 B . F H\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 3 1 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 3 1 0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 3] and [1 0] match!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B F G\n1 G . . .\n2 B . F H\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1 1 2 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1 1 2 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [1 1] and [2 1] match!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B F G\n1 G C . .\n2 B C F H\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1 2 3 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1 2 3 0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [1 2] and [3 0] match!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B F G\n1 G C E .\n2 B C F H\n3 E . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1 3 3 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1 3 3 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [1 3] and [3 2] match!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B F G\n1 G C E A\n2 B C F H\n3 E . A .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[3 1 3 3]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[3 1 3 3]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [3 1] and [3 3] match!",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H B F G\n1 G C E A\n2 B C F H\n3 E D A D\n",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": 1,
+      "1": -1
+    }
+  },
+  "turn_limit_draw": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "The turn limit has been reached. The game is over. Player 0 scored 0 points, Player 1 scored 0 points.",
+        "role": "Player 0",
+        "turn_count": 51
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "The turn limit has been reached. The game is over. Player 0 scored 0 points, Player 1 scored 0 points.",
+        "role": "Player 1",
+        "turn_count": 50
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current board:\n  0 1 2 3\n0 . . . .\n1 . . . .\n2 . . . .\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current board:\n  0 1 2 3\n0 . . . .\n1 . . . .\n2 . . . .\n3 . . . .\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 0 0 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 0 0 1]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 0 1]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 0] and [0 1] are H and B respectively.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": {
+      "0": 0,
+      "1": 0
+    }
+  },
+  "turn_limit_win": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "The turn limit has been reached. The game is over. Player 0 scored 1 points, Player 1 scored 0 points. Player 0 has won!",
+        "role": "Player 0",
+        "turn_count": 51
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "The turn limit has been reached. The game is over. Player 0 scored 1 points, Player 1 scored 0 points. Player 0 has won!",
+        "role": "Player 1",
+        "turn_count": 50
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current board:\n  0 1 2 3\n0 . . . .\n1 . . . .\n2 . . . .\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 0 2 3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 0 2 3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 0] and [2 3] match!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H . . .\n1 . . . .\n2 . . . H\n3 . . . .\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1. You are playing the Memory Game.\nYour goal is to match more pairs of cards on the board, than your opponent.\nOn your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like '[0 1 1 0]', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\nIf the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.\nThe game ends when all pairs have been matched.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current board:\n  0 1 2 3\n0 . . . .\n1 . . . .\n2 . . . .\n3 . . . .\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0 0 2 3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 at positions [0 0] and [2 3] match!",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Current Game Board:\n  0 1 2 3\n0 H . . .\n1 . . . .\n2 . . . H\n3 . . . .\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "[0 1 0 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 0 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[0 1 0 2]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0 1 0 2]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "The cards selected by Player 1 do not match. Cards at positions [0 1] and [0 2] are B and F respectively.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": {
+      "0": 1,
+      "1": -1
+    }
+  }
+}

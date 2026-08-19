@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Siz Golf (Karta oyi) - Oyuncu {player_id} oynyaysiz.\nMaqsad: Eng kam ball toplash. Agar ustunlar bir xil qiymatga ega bolsa, ular 0 deb hisoblanadi.\nKarta qiymatlari: A=1, 2-10=qiymati, J/Q=10, K=0\n\nHarakatlar (to'g'ri qavs ishlétishingiz kerak):\n- '〕[draw]' - Kartani chiqarish\n- '〕[take]' - Bétilgen tepadan olish\n- '〕[swap X Y]' - Chiqarilgan kartani X (qat) Y (ustun) orin bilan almashtirish\n- '〕[discard]' - Chiqarilgan kartani béttik"
+  },
+  "board": {
+    "drew": "سىز چېكىپ تۇرۇسىز: {card}\nھازىر سىز [swap X Y] ياكى [discard] قىلىشىڭىز كېرەك.",
+    "took": "سىز تاشلىغان كارتىلاردىن بىرنى ئالدىڭىز: {card}\nسىز [swap X Y] قىلىشىڭىز كېرەك (تاشلىيالمايسىز).",
+    "peeked": "Siz (〕{row},〕{col}) orinda qarap chiqdingiz: {card}",
+    "turn_view": "Sizning qoliniڭiz:\n〕{hand}\nBétilgen tepa: {discard}\n〕{options}",
+    "none": "ھېچقايسى يوق."
+  },
+  "options": {
+    "final_turns": "Akhiriy tur! Sizning imkaniyatlar: [draw], [take], [peek X Y]",
+    "draw": "Sizning imkaniyatlar: [draw], [take]",
+    "must_swap": "سىز چوقۇم: [swap X Y] (ئاشكارىلارنى تاشلاپ قويۇش كومىلىدىن تاشلىۋەتكىلى بولمايدۇ)",
+    "swap_or_discard": "Siz: [swap X Y] yoki [discard] qilishiڭiz kerak"
+  },
+  "hand": {
+    "no_cards": "كارتا يوق.",
+    "header": "كول: 1 2 3",
+    "row": "Qat {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "ئويۇنچى {pid} كارتە {new} نى كارتە {old} بىلەن قۇر ({row},{col}) غا ئالماشتۇردى",
+    "discarded": "Oyuncu {pid} {card}ni béttik"
+  },
+  "message": {
+    "deck_empty": "گەۋدە بوش! ئويۇن دەرھال ئاخىرلاشتى.",
+    "knocked": "Oyuncu {pid} qapaldi! Bashqa oyunchilar bir marta qilishiڭiz mumkin",
+    "final_round": "Oyuncu {pid} {reason}! Bashqa oyunchilar bir marta qilishiڭiz mumkin"
+  },
+  "reason": {
+    "all_revealed": "ھەممە كارتا ئاشكارىلاندىمۇ؟"
+  },
+  "invalid": {
+    "wrong_action": "Pitirilgan harakatni toghri ishlétishingiz kerak: [draw], [take], [swap X Y], [discard], [knock], yoki [peek X Y]",
+    "discard_empty": "تاشلاندۇق توپ خالىي!",
+    "must_draw_first": "Siz avval [draw], [take], [knock], yoki [peek X Y] qilishiڭiz kerak",
+    "cannot_discard_taken": "سىز تاشلاپ قويۇلغان كارتا توپىدىن بىرنى تاشلىيالمايسىز.سىز ئۇنى ئالماشتۇرۇشىڭىز كېرەك.",
+    "have_drawn_card": "Siz chiqarilgan kartaniڭiz bar. Siz [swap X Y] yoki [discard] qilishiڭiz kerak",
+    "need_drawn_swap": "سىز ئالماشتۇرۇش ئۈچۈن بىر كارتىنى چىقىرىشىڭىز كېرەك.",
+    "need_drawn_discard": "سىز تاشلىماق ئۈچۈن بىر كارتىنى چىقىرىشىڭىز كېرەك.",
+    "out_of_bounds": "Orin chegaradan chiqib ketdi. 1-〕{max_row} qat, 1-〕{max_col} ustun ishlétishingiz kerak",
+    "knock_with_card": "سىز بىر تال كارتا بىلەن ئۇرۇپ تاشلاپ بولالمايسىز. ئالدى بىلەن نۆۋىتىڭىزنى تاماملاڭ.",
+    "already_knocked": "بۇ ئايلانما ئۈچۈن بىرى تەپكە چېكىپ بولدى.",
+    "already_revealed": ".بۇ كارتا ئاللىقاچان ئېچىلدى"
+  },
+  "summary": {
+    "full": "ئويۇن تۈگىدى! {winner} نومۇرلۇق ئويۇنچى {score} نومۇر بىلەن غەلىبە قىلدى!\n\nئاخىرقى نومۇرلار:\n{scores}",
+    "line": "Oyuncu {pid}: {score} ball"
+  },
+  "board_str": {
+    "title": "=== گولف ئويۇنى===",
+    "discard": "تاشلىغان كارتىلار: {card}",
+    "knocked": "{pid} نومۇرلۇق ئويۇنچى تەپكە چېكىپ بولدى!",
+    "player_header": "{pid} نومۇرلۇق ئويۇنچى (نومۇرى: {score}):"
+  }
+}

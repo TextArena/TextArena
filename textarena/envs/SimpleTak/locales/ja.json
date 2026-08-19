@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "あなたは SimpleTak のプレイヤー {player_id} です。\nボード上では、あなたの石は '{player_stone}' として表示され、相手の石は '{opponent_stone}' として表示されます。\n\nあなたの番になったら、空いているセル（番号で指定）を選んでそこに石を置きます。\n例えば、'[12]' はセル 12 に石を置きます。\n\nあなたの目標は、ボードの反対側（上から下、または左から右）を結ぶ連続した石の道を作ることです。"
+  },
+  "invalid_move": {
+    "invalid_move_format": "無効な手の形式",
+    "cell_out_of_range": "無効なセル番号 {cell_num}。0 から {max_board_num} の間でなければなりません。",
+    "cell_already_occupied": "セル {cell_num} はすでに占有されています。空いているセルを選んでください。"
+  },
+  "board": {
+    "current_state": "現在のボード:\n\n{rendered_board}\n利用可能な手: {available_moves}"
+  },
+  "action": {
+    "placement": "プレイヤー {current_player_id} がセル {cell_num} にシンボル ({symbol}) を置きました。"
+  },
+  "outcome": {
+    "winner": "プレイヤー {current_player_id} ('{symbol}') がボードの反対側を結びました！",
+    "draw": "ボードが埋まりました。引き分けです！"
+  }
+}

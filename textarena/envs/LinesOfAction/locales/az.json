@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction yerli faylı. Açarları (sol tərəf) tərcümə etməyin. Yalnız dəyərləri (sağ tərəf) tərcümə edin.",
+  "_slots": {
+    "{player_id}": "Oyunçunun nömrəsi, ya 0 ya da 1",
+    "{side}": "Oyunçunun fiquru, ya O ya da X",
+    "{other}": "Rəqibin fiquru, ya O ya da X",
+    "{board}": "Taxtanın ASCII təsviri; olduğu kimi saxlayın",
+    "{coord}": "Taxta koordinatı, məsələn b1 və ya a3",
+    "{from}": "Hərəkətin mənbə koordinatı, məsələn b1",
+    "{to}": "Hərəkətin hədəf koordinatı, məsələn b3"
+  },
+  "player_prompt": {
+    "intro": "Siz LinesOfAction oyununda Oyunçu {player_id}-siniz.\nSizin fiqurlarınız '{side}', rəqib fiqurları '{other}'-dir.\nHərəkət formatı: `[b1b3]` (mənbə koordinatından hədəf koordinatına). Qanuni hərəkət üfüqi, şaquli və ya diaqonal olaraq xəttəki bütün fiqurların (hər hansı rəngdə) sayına bərabər kvadratlar sayı ilə hərəkət edir. Siz öz fiqurlarınız üzərindən tullan bilərsiniz, lakin rəqib fiqurları üzərindən deyil; rəqibin üzərinə enməklə onu ələ keçirirsiniz.  Qazanmaq üçün bütün fiqurlarınızın 8-qonşu bağlı olması lazımdır."
+  },
+  "board": {
+    "current_board": "Taxta:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format e2e4 (mənbə, hədəf koordinatları) olmalıdır.",
+    "no_piece": "{coord} üzərində {side} fiquru yoxdur.",
+    "identical": "Mənbə və hədəf eynidir.",
+    "not_straight_or_diagonal": "Hərəkət düz və ya diaqonal olmalıdır.",
+    "wrong_distance": "Xəttəki fiqurların sayına bərabər məsafə ilə hərəkət etmək lazımdır.",
+    "enemy_blocks": "Rəqib fiquru yolu bağlayır.",
+    "destination_own": "Hədəf öz fiquru ilə tutulub."
+  },
+  "game_action": {
+    "moved": "Oyunçu {player_id} {from} -> {to} hərəkət etdi",
+    "captured_suffix": "Oyunçu {player_id} {from} -> {to} hərəkət edərək rəqibi ələ keçirdi."
+  },
+  "outcome": {
+    "win": "Bütün fiqurlar bağlıdır.",
+    "draw_no_capture": "60 hərəkət ərzində heç bir ələ keçirmə olmadı.",
+    "draw_repetition": "Vəziyyət üç dəfə təkrarlandı."
+  }
+}

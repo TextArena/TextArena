@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i et spil HighSociety (2-spiller version).\nSpilforløb: Ti prestige-kort auktioneres ét efter ét.\nBudgivning: Ved hver auktion skal du i hemmelighed vælge et pengekort 1-11 og afsløre det.\n            • Højere bud vinder prestige-kortet og kasserer det pengekort.\n            • Lavere bud beholder deres pengekort.\n            • Uafgjort -> begge bud returneres og samme prestige-kort auktioneres igen.\nScoring:    Efter alle ti auktioner, tilføj **resterende kontanter + prestige-point**.\n            Højere *nettoformue* vinder (eksakt uafgjort -> uafgjort).\n\n**Handlingssyntax**  →  byd på ét enkelt kort som '[7]' eller '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Auktion {round}/10  |  Prestige-kort: {prize}"
+  },
+  "board": {
+    "money_cards": "Dine resterende pengekort: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Skal indeholde nøjagtigt ét [X] pengekort.",
+    "card_not_held": "Du har ikke længere det pengekort."
+  },
+  "message": {
+    "tie": "Uafgjort - bud returneret. Byd igen!",
+    "auction_result": "P0 bød {bid0}, P1 bød {bid1}. Spiller {winner} vinder prestige {prize} (total {total})."
+  },
+  "outcome": {
+    "p0_wins": "Nettoformue {nw0} > {nw1}",
+    "p1_wins": "Nettoformue {nw1} > {nw0}",
+    "draw": "Begge nettoformuer {nw0} – eksakt uafgjort."
+  }
+}

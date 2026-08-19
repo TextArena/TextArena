@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Breakthrough oyununda {color} oynuyorsunuz. {board_size}x{board_size} tahtasında {direction} hareket ediyorsunuz.\nSıranızda tek bir taşınızı bir adım ileri veya çapraz ileri hareket ettirebilirsiniz.\nBir taş ancak rakip bir taş varsa çapraz hareket edebilir ve böyle bir önceden işgal edilmiş kareye yalnızca çapraz adımda girebilir.\nRakip bir taşla dolu bir kareye adım attığınızda, onu yakalarsınız ve rakibin taşı tahtadan kalıcı olarak kaldırılır.\nÖrneğin [a2a3] gibi parantez içinde UCI benzeri gösterimi kullanın, a2'den a3'e hareket etmek için.\n* 'a', en soldaki sütuna karşılık gelir, '1' beyazın bakış açısına göre alt satırdır.\n* Siyahın ev satırı üst satırdır (8x8 için 8. satır). Beyazın ev satırı alt satırdır (8x8 için 1. satır).\nTaşlarından biri rakibin ev satırına ulaşan ilk oyuncu kazanır. Tüm taşlarınız yakalanırsa, kaybedersiniz."
+  },
+  "invalid_move": {
+    "wrong_format": "Lütfen [a2a3] gibi parantez içinde cebirsel gösterimi kullanın.",
+    "out_of_bounds": "Hamle tahta sınırlarının dışındadır.",
+    "illegal": "Bu hamle Breakthrough kurallarına uymuyor veya sizin taşınız değil."
+  },
+  "game_action": {
+    "moved": "Oyuncu {player_id}, {move_str} ({piece}) hareket etti."
+  },
+  "outcome": {
+    "white_reached": "Beyaz, Siyah'ın ev satırına ulaştı.",
+    "black_reached": "Siyah, Beyaz'ın ev satırına ulaştı.",
+    "white_captured": "Tüm Beyaz taşları yakalandı.",
+    "black_captured": "Tüm Siyah taşları yakalandı.",
+    "no_moves": "Oyuncu {player_id}'nin daha fazla hamlesi yok."
+  }
+}

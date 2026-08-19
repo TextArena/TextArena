@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} v Nim.\nVašim cieľom je zobrať posledný zostávajúci objekt.\nPočas každého ťahu vyberte presne jednu hromadu a odstráňte z nej jeden alebo viac objektov.\nPoužite formát '[hromada množstvo]', kde hromada je index hromady a množstvo je počet objektov, ktoré chcete odstrániť.\nNapríklad, '[0 3]' odstráni 3 objekty z hromady 0."
+  },
+  "state": {
+    "current_pile": "Aktuálna hromada:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nebol nájdený platný formát ťahu. Použite '[hromada množstvo]'.",
+    "correct_format_wrong_fields": "Hráč {player_id}, Neplatná akcia. Stĺpec {col} je mimo hraníc.",
+    "out_of_range": "Index hromady {pile_index} je mimo rozsah.",
+    "non_positive": "Musíte odstrániť aspoň 1 objekt.",
+    "exceeds_pile": "Nie je možné odstrániť {quantity} z hromady {pile_index} (zostáva iba {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "Hráč {player_id} zohral [{pile_index} {quantity}], odstránil {quantity} objekt(ov) z hromady {pile_index}."
+  },
+  "outcome": {
+    "win": "Hráč {player_id} zobral posledný objekt(y)!"
+  }
+}

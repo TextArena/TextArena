@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Inda ka ten karton.",
+    "rules": "🎯 TEXAS HOLD'EM ULTIMU - Djogadór uniku kontra Dealer\n\n📖 PANORAMA DJOGU:\n• Bu ka starts ku {start_chips} fichas\n• Djogo uniku di 52 kartas (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Bu djoga kontra Dealer (kasa)\n• Kada ronda sigui strutura di Ultimate Texas Hold'em: bu posta ANTE i BLIND bets, risibi 2 kartas di buraku, desidi sobri bets fakultativu di PLAY durante fases di djogo, dispois rivela kartas komunitáriu i kompara bu mélhor mão di 5 kartas kontra Dealer. Bu objetivu é di maksimizá bu ganhos (ku bu tenha mélhor mão), mantén minimizá bu perdas (ku bu tenha piór mão).\n• Djogo termina ku bu chega 0 fichas o menos na kuminsa di ronda (PERDA) o kompleta 1000 rondas ku fichas (VITÓRIA)\n\n💰 STRUTURA DI BETS:\n• ANTE: Bet obrigatóriu di ${ante} kada ronda\n• BLIND: Bet obrigatóriu di ${ante} kada ronda\n• PLAY: Bet fakultativu durante djogo. Durante ronda, bu pode escolhi APENAS UM di seguinti: (${ante4} si bu faz na PRE-FLOP, ${ante2} si bu faz na FLOP, o ${ante} si bu faz na RIVER. Pode também fold na river, desistí di mão, i fazê ningun bet.)\n\n🎴 DISTRIBUIÇÃO DI KARTAS:\n• Bu risibi 2 kartas di buraku (bu kartas di buraku)\n• Dealer risibi 2 kartas di buraku (skondí di bu)\n• 5 kartas komunitáriu são distríbuidas di buraku inicialmente\n• Kartas komunitáriu são rivela progresivamente durante fases di djogo\n\n🏆 KUALIFIKASAUN DI DEALER:\n• Dealer ten ki tenha pelo menus um PAR (2 kartas di mesmo rank) pa kualifiká, usando 2 kartas di mão i 5 kartas komunitáriu.\n• Kualifikasaun di Dealer afeta bets, komu será ekspliká dispois.\n\n🎮 FASES DI DJOGU & AKSION:\n📋 PRE-FLOP:\n  • Aksion: [4x] (${ante4}) o [check]\n  • [4x]: Fazê bet di ${ante4} di PLAY, rivela 3 kartas komunitáriu di priméru\n  • [check]: Ningun bet adisional, rivela 3 kartas komunitáriu di priméru\n\n📋 FLOP:\n  • Si bet 4x postá: Apenas [skip] disponíbil (auto-rivela últimas 2 kartas komunitáriu)\n  • Si ningun bet 4x: [2x] (${ante2}) o [check]\n  • [2x]: Fazê bet di ${ante2} di PLAY, rivela últimas 2 kartas komunitáriu\n  • [check]: Ningun bet adisional, rivela últimas 2 kartas komunitáriu\n\n📋 RIVER:\n  • Si bet 4x o 2x postá: Apenas [skip] disponíbil (auto-prossegue pa showdown)\n  • Si ningun bet PLAY anterior: [1x] (${ante}) o [fold]\n  • [1x]: Fazê bet di ${ante} di PLAY, prossegue pa showdown\n  • [fold]: Desistí di mão, perdi bets ANTE i BLIND\n\n📋 SHOWDOWN:\n  • Todas kartas rivela i avaliá\n  • Mélhor mão di 5 kartas di 7 kartas (2 kartas di buraku + 5 kartas komunitáriu)\n  • Bets pagá segundu regras di pagamentu\n\n💎 PAGAMENTU DI BETS:\n📊 ANTE BET:\n  • Dealer não kualifiká: PUSH (bet devolvida)\n  • Dealer kualifiká i bu ganha: 1:1 pagamentu (bet + ganhos)\n  • Dealer kualifiká i bu perdi: Bet perdi\n  • Tie: PUSH (bet devolvida)\n\n📊 BLIND BET:\n  • Não afetá kualifikasaun di Dealer\n  • Bu ganha: Bet devolvida i pagamentu adisional segundu forsa di mão\n  • Bu perdi: Bet perdi\n  • Tie: PUSH (bet devolvida)\n\n📊 TABELA DI PAGAMENTU DI BLIND BET:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Menus di Straight: Ningun pagamentu adisional\n\n📊 PLAY BET:\n  • Não afetá kualifikasaun di Dealer\n  • Komparason direta: Bu mélhor mão kontra Dealer mélhor mão\n  • Bu ganha: 1:1 pagamentu (bet + ganhos)\n  • Bu perdi: Bet perdi\n  • Tie: PUSH (bet devolvida)\n\n🎯 RANKING DI MÃOS DI POKER (Mélhor pa Piór):\n  1. Royal Flush: A-K-Q-J-10 di mesmo suit\n  2. Straight Flush: 5 kartas konsekutivas di mesmo suit\n  3. Four of a Kind: 4 kartas di mesmo rank\n  4. Full House: 3 di um rank + 2 di outru rank\n  5. Flush: 5 kartas di mesmo suit\n  6. Straight: 5 kartas konsekutivas\n  7. Three of a Kind: 3 kartas di mesmo rank\n  8. Two Pair: 2 pares di diferente ranks\n  9. One Pair: 2 kartas di mesmo rank\n  10. High Card: Karta mais alta ganha\n\n⌨️  KOMANDOS DI AKSION:\n• [4x] o [play bet 4x]: Fazê bet di ${{self.ante_amount*4}} di PLAY\n• [2x] o [play bet 2x]: Fazê bet di ${{self.ante_amount*2}} di PLAY\n• [1x] o [play bet 1x]: Fazê bet di ${{self.ante_amount*1}} di PLAY\n• [check] o [c]: Check (ningun bet adisional)\n• [fold] o [f]: Fold (desistí di mão)\n• [skip] o [s]: Skip pa próxima fase (ku ningun aksion nesesária)\n\n💡 Dicas di Estratégia:\n• Mãos fortes di partída (pares, kartas altas) justifikam bets 4x\n• Kunsidirá kualifikasaun di Dealer - mãos débéis podem push si Dealer não kualifiká\n• Bet BLIND pode ser muito profitável ku mãos fortes (Royal Flush = 500:1!)\n• Vigia bu stack di fichas! Si bu chega 0 o menos na kuminsa di ronda, bu perdi.\n\n⚠️  NOTAS IMPORTANTES:\n• Bets ANTE i BLIND são obrigatóriu kada ronda\n• Bets PLAY são fakultativu i estratégiku\n• Sigurá ku bu input aksion korreta, i apenas uma aksion de cada vez.\n\n",
+    "state": "🎯 RONDA {round}\n💰 Fichas: {chips}\n🎴 Bu mão: {hand}\n📊 Bets atuais: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fase: {phase}\n🎯 Aksion disponíbil: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Rodada {round} iniciada! Apostas: ANTE ${ante}, BLIND ${blind}. Bo tem {chips} fichas restantes.",
+    "your_hand": " Bu mô: {hand}",
+    "flop_revealed": " FLOP reveladu: {cards}",
+    "river_revealed": "🃏 RIVER rivela: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Ason inválidu pa faze atual. Ason ki sta disponível: {available}",
+    "message": " Ason inválidu! Akson ki sta disponível: {available}"
+  },
+  "action": {
+    "folded": "🃏 Bu desisti."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Mão di kenha ki ta da: {cards}",
+    "community_cards": " Kartidus di Komunitadi: {cards}",
+    "player_best": "🎴 Mélhor mão di djogadór: {name} ({cards})",
+    "dealer_best": "🎴 Melhor mão do dealer: {name} ({cards})",
+    "ante_lost_folded": " ANTE ta perdi! -${ante} (dobadu)",
+    "blind_lost_folded": " BETU DI SEGURIDADI PERDidu! - ${blind} (dobadu)",
+    "ante_won": "✅ ANTE ta ganha! +${amount}",
+    "ante_pushed": " ANTE aposta PUSHED! ${ante} torna dadu",
+    "ante_lost": " ANTE ta perdi! -${ante}",
+    "blind_won": "✅ BEDJA NA SEGUINTA GANHA! +${amount} (N ta atxa ma bu ka ten ninhun prubléma)",
+    "blind_pushed": "🔄 APOSTA CEGA ta EMPURRADA! ${blind} devolvida",
+    "blind_lost": "❌ Bet BLIND PERDI! -${blind}",
+    "play_won": "✅ JOKU aposta ganha! +${amount}",
+    "play_pushed": " JOGA aposta PUSHED! ${play} torna dadu",
+    "play_lost": " Jogu di aposta PERDIDU! -${play}",
+    "net_gain": "🎉 Rodada {round} concluída! Ganho líquido: +${net}",
+    "net_loss": "💸 Rodada {round} concluída! Perda líquida: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 DJOGO TERMINA! {max_turns} rondas kompleta. Bu tenha ${chips} fichas - BU GANHA!",
+    "game_over_lose": "Dja ka ten más fichas.",
+    "reward_win": "Djogadór kompleta {winner_rounds} rondas ku ${chips} fichas",
+    "reward_lose": "Jogu ka tinha más fódja na ronda {round}",
+    "reward_win_max": "Djogadór kompleta {max_turns} rondas ku ${chips} fichas"
+  },
+  "hand_names": {
+    "royal_flush": "Txuba di Rei.",
+    "straight_flush": "Dizenhu di agu na txon",
+    "four_of_a_kind": "Kuatu di un tipu.",
+    "full_house": "Tudu algen sta na kaza.",
+    "flush": "N ta fla-u:",
+    "straight": "Sima ki bu fla.",
+    "three_of_a_kind": "Três di kel mésmu tipu",
+    "two_pair": "Dos par di algen",
+    "one_pair": "Un par di algen.",
+    "high_card": "Karta más altu di pósteru",
+    "unknown": "Mão Diskonxedu"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Tù ses su Giogadore {player_id} in Three-Player GOPS.\n- Tù tenes is 13 cartas A-K (onnia una esattamente una borta).\n- In dogna ronda unu prèmiu est reveladu. Invia una carta comente `[Q]`, `[10]`, `[2]` …\n- Sa carta prus arta bint su prèmiu (+ su monte portadu in avantu). Is paritàs faghent girare su prèmiu in sa ronda imbeniente.\n- A pustis de 13 rondas, su totale prus artu bint. Movimentos non vàlidus = eliminatzione."
+  },
+  "round": {
+    "header": "### Turnu {round}/13 - Premiu: {prize} (balore {worth})",
+    "hand": "Sa manu chi ti abarrat: {hand}"
+  },
+  "reveal": {
+    "win": "Ponziones » {bids} - Giogadore {winner} bincit {pot}.",
+    "tie": "Bids  {bids} - tie, pot now {pot}. (su chi cheret est su matessi)",
+    "scores": "Sas punnas → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "s'atzione recheret una carta in parentesi comente \"[Q]\"",
+    "bad_card": "carta giai impreada o non vàlida"
+  },
+  "elimination": {
+    "player": "Giogadore {pid} eliminadu a pustis de movimentos inàlidos repìtidos."
+  },
+  "outcome": {
+    "auto_win": "Duos giogadores eliminados - binchidora automàtica.",
+    "final": "Sas punnassiones finales: {scores}"
+  }
+}

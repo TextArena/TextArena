@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id} ({piece}). O oponente é ({opp}).\nSubmeta movimentos como '[a2 a3]' (de → para).\n- Um movimento normal é um passo à frente para um vértice adjacente vazio.\n- Uma captura é um salto sobre uma peça inimiga adjacente, aterrissando no nó vazio além.\nCada captura rende {score_per_capture} pontos.\nO jogo termina após {max_moves} movimentos ou quando um jogador não tem movimento legal."
+  },
+  "board": {
+    "current_board": "Movimento #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "Formato incorreto. Use '[a2 a3]'.",
+    "unknown_square": "Quadrado desconhecido.",
+    "not_your_piece": "A origem não é sua peça.",
+    "dest_not_empty": "Destino não está vazio.",
+    "illegal": "Movimento ilegal."
+  },
+  "game_action": {
+    "captured": "O Jogador {player_id} capturou uma peça! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "O Jogador {player_id} não tem peças.",
+    "cannot_move": "O Jogador {player_id} não pode se mover.",
+    "higher_score": "Pontuação de captura mais alta.",
+    "move_limit": "Limite de movimentos alcançado."
+  }
+}

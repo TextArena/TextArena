@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "UnguMdlali {player_id} kwi-Iterated Prisoner's Dilemma esikhulu {num_rounds} izikhathi.\n\nIsakhiwo seGame:\n- Phambi kokuthatha isigqibo, unazo {total_conversation_rounds} amathuba okuthetha ngokukhululeka.\n- Emva koko, abadlali bobabini bakhetha ukusebenzisana okanye ukukhetha ukungasebenzisani ngaxesha nye.\n\nImatrix yePhumelelo (eyiliwe kila xesha):\n- Bobabini Basebenzisana ➜ ilungu ngalinye {cooperate_reward}\n- Bobabini Bakhethe Ukungasebenzisani ➜ ilungu ngalinye {mutual_defect_reward}\n- Omnye Ukhethe Ukungasebenzisani, omnye Usebenzisana ➜ Ongakhetha Ukungasebenzisani {defect_reward}, Osebenzisana {sucker_reward}\n\nIndlela yokudlala:\n- Ngexesha lokuthetha: bhala nantoni na ufuna.\n- Ngexesha lokuthatha isigqibo: bandakanya '[Cooperate]' okanye '[Defect]' (ayikho kubaluleka ukubhala ngobuninzi). Ungafaka izwi zantsi ngaphambi/ emva kwesigqibo."
+  },
+  "phases": {
+    "conversation_finished": "Ingxoxo iphelile kwi-round {round}. Nceda phendula ngokuthi '[Cooperate]' okanye '[Defect]' ngaphakathi kwe-\\boxed{{}}.",
+    "starting_round": "--- Ukuqalisa Umjikelo {round} ---",
+    "round_summary": "Imiphumela yeXesha {round}:\n{outcome}\nMdlali 0 uphumelele {r0} (jikelele {score_0}), Mdlali 1 uphumelele {r1} (jikelele {score_1})."
+  },
+  "outcome": {
+    "winner": "Mdlali {winner} uphumelele {win_score} - {lose_score}.",
+    "draw": "Bobabini abadlali bafumana amanqaku {s0}.",
+    "round_both_cooperate": "Bobabini abadlali basebenzisana.",
+    "round_both_defect": "Abadlali bobabini bakhethe ukungasebenzisani.",
+    "round_p0_cooperates_p1_defects": "Umdlali 0 wasebenzisana, uMdlali 1 wasaba.",
+    "round_p0_defects_p1_cooperates": "Umthandi 0 uyephule, Umthandi 1 uyesebenzisana."
+  }
+}

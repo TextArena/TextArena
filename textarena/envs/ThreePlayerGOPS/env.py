@@ -25,12 +25,12 @@ class ThreePlayerGOPSEnv(ta.Env):
         if not eliminated_now: return self.state.step(rotate_player=False) # warning only – let the same player retry (no rotation)
         # player eliminated
         pid = self.state.current_player_id
-        self.state.add_observation(message=f"Player {pid} eliminated after repeated invalid moves.", observation_type=ta.ObservationType.GAME_MESSAGE,)
+        self.state.add_observation(message=self.m("elimination", "player", pid=pid), observation_type=ta.ObservationType.GAME_MESSAGE,)
         alive = [p for p in range(self.state.num_players) if self.state.is_player_alive(p)]
         if len(alive) == 1:                      # instant win
             winner = alive[0]
             rewards = {p: (+1 if p == winner else -1) for p in range(self.state.num_players)}
-            self.state.set_game_outcome(reward_dict=rewards, reason="Two players eliminated - automatic win.")
+            self.state.set_game_outcome(reward_dict=rewards, reason=self.m("outcome", "auto_win"))
             return True, self.state.step_info
 
         # hand control to next alive player
@@ -54,15 +54,7 @@ class ThreePlayerGOPSEnv(ta.Env):
         self._start_round()
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are Player {player_id} in Three-Player GOPS.\n"
-            "- You hold the 13 cards A-K (each exactly once).\n"
-            "- Each round a prize is revealed. Submit ONE card like `[Q]`, "
-            "`[10]`, `[2]` …\n"
-            "- Highest card wins the prize (+ any carry-over pot). "
-            "Ties roll the prize into the next round.\n"
-            "- After 13 rounds, highest total wins. Invalid moves = elimination."
-        )
+        return self.m("player_prompt", "intro", player_id=player_id)
 
     def _start_round(self):
         gs = self.state.game_state
@@ -79,7 +71,7 @@ class ThreePlayerGOPSEnv(ta.Env):
                 if len(top_tied) == 2:  rewards = {p: (+1 if p in top_tied else -1) for p in scores} # tie for first
                 else:                   rewards = {p: (-1 if p in low_tied else +1) for p in scores} # tie for last
             else: rewards = {ranked[0]: +1, ranked[1]: 0, ranked[2]: -1} # distinct scores
-            self.state.set_game_outcome(reward_dict=rewards, reason=f"Final scores: {scores}")
+            self.state.set_game_outcome(reward_dict=rewards, reason=self.m("outcome", "final", scores=scores))
             return
 
         gs["current_prize"] = gs["prize_deck"][gs["round"] - 1]
@@ -87,18 +79,18 @@ class ThreePlayerGOPSEnv(ta.Env):
 
         for pid in range(3):
             hand_str = " ".join(f"'[{self._val_to_face(c)}]'" for c in gs["player_hands"][pid])
-            self.state.add_observation(to_id=pid, message=(f"### Round {gs['round']}/13 - Prize: {self._val_to_face(gs['current_prize'])} (worth {gs['current_prize'] + gs['carry_pot']})"), observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.state.add_observation(to_id=pid, message=f"Your remaining hand: {hand_str}", observation_type=ta.ObservationType.GAME_BOARD)
+            self.state.add_observation(to_id=pid, message=self.m("round", "header", round=gs['round'], prize=self._val_to_face(gs['current_prize']), worth=gs['current_prize'] + gs['carry_pot']), observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(to_id=pid, message=self.m("round", "hand", hand=hand_str), observation_type=ta.ObservationType.GAME_BOARD)
 
     def step(self, action: str) -> Tuple[bool, Dict[str, Any]]:
         pid = self.state.current_player_id
         gs = self.state.game_state
         self.state.add_observation(from_id=pid, to_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION) # record player action for themselves
         tokens = self.action_space.findall(action.lower())
-        if not tokens: return self._handle_invalid("action needs a bracketed card like '[Q]'") # no valid token at all
+        if not tokens: return self._handle_invalid(self.m("invalid_move", "no_token")) # no valid token at all
         bid_val = self._face_to_val(tokens[-1])              # <- take the final match
         if bid_val not in gs["player_hands"][pid]:
-            return self._handle_invalid("card already used or invalid")
+            return self._handle_invalid(self.m("invalid_move", "bad_card"))
         
         gs["pending_bids"][pid] = bid_val
         gs["player_hands"][pid].remove(bid_val)
@@ -112,16 +104,17 @@ class ThreePlayerGOPSEnv(ta.Env):
         max_bid = max(bids.values())
         winners = [p for p, v in bids.items() if v == max_bid]
 
+        bids_str = ", ".join(f"P{p}:{self._val_to_face(v)}" for p, v in bids.items())
         if len(winners) == 1:
             winner = winners[0]
             gs["player_scores"][winner] += pot
-            reveal = (f"Bids » " + ", ".join(f"P{p}:{self._val_to_face(v)}" for p, v in bids.items()) + f" - Player {winner} wins {pot}.")
+            reveal = self.m("reveal", "win", bids=bids_str, winner=winner, pot=pot)
         else:
             gs["carry_pot"] = pot
-            reveal = (f"Bids » " + ", ".join(f"P{p}:{self._val_to_face(v)}" for p, v in bids.items()) + f" - tie, pot now {gs['carry_pot']}.")
+            reveal = self.m("reveal", "tie", bids=bids_str, pot=gs['carry_pot'])
 
         self.state.add_observation(message=reveal, observation_type=ta.ObservationType.GAME_MESSAGE)
-        self.state.add_observation(message="Scores → " + "  ".join(f"P{p}:{s}" for p, s in gs["player_scores"].items()), observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(message=self.m("reveal", "scores", scoreline="  ".join(f"P{p}:{s}" for p, s in gs["player_scores"].items())), observation_type=ta.ObservationType.GAME_MESSAGE)
 
         self._start_round()
         return self.state.step()

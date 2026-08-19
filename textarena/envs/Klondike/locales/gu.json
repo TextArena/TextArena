@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "તમે ક્લોન્ડાઇક સોલિટેર રમી રહ્યા છો. તમારો લક્ષ્ય તમામ કાર્ડ્સને ફાઉન્ડેશન પાઈલ્સમાં ખસેડવાનો છે.\n\nરમતના નિયમો:\n- ફાઉન્ડેશન પાઈલ્સ (F1-F4): એસ થી કિંગ સુધી સૂટ બનાવો\n- ટેબ્લો પાઈલ્સ (T1-T7): રંગોની વચ્ચે બદલાતી રીતે નીચે બનાવો (લાલ પર કાળું, કાળું પર લાલ)\n- સ્ટોક: કાર્ડ્સને વેસ્ટ પાઈલમાં ખેંચો\n- વેસ્ટ (W): ટોચનું કાર્ડ રમવા માટે ઉપલબ્ધ છે\n\nઆદેશો:\n- 'draw' - સ્ટોકમાંથી કાર્ડ્સને વેસ્ટ પાઈલમાં ખેંચો\n- 'move <source> <destination> [count]' - પાઈલ્સ વચ્ચે કાર્ડ્સ ખસેડો\n  ઉદાહરણો: 'move W T1', 'move T1 F2', 'move T3 T5 2'. કાઉન્ટ 'all' પણ હોઈ શકે છે, જે તમામ ખુલ્લા કાર્ડ્સ ખસેડવાનો પ્રયાસ કરશે.\n- 'forfeit' - રમત તરત જ પૂરી કરો અને તમારો વર્તમાન સ્કોર લોક કરો\n- પાઈલ નામો: W (વેસ્ટ), F1-F4 (ફાઉન્ડેશન્સ), T1-T7 (ટેબ્લો)\n\nતમે એક ટર્નમાં ઘણી ક્રિયાઓ કરી શકો છો અને તેને કોમા દ્વારા અલગ કરી શકો છો:\n  ઉદાહરણ: 'draw, move W T1, move T2 F1'\n\nમાત્ર રાજાઓ ખાલી ટેબ્લો પાઈલ્સ પર મૂકી શકાય છે.\nક્રિયાઓ ક્રમમાં કાર્યાન્વિત થાય છે - જો એક નિષ્ફળ જાય, તો બાકીની ક્રિયાઓ વિસ્મિત થઈ જાય છે.\n'forfeit' ઉપયોગ કરો જો તમને લાગે છે કે રમત જીતવી અશક્ય છે."
+  },
+  "format_error": {
+    "no_brackets": "અમાન્ય ક્રિયા ફોર્મેટ. ક્રિયા કૌંસમાં હોવી જોઈએ.",
+    "no_closing_bracket": "અમાન્ય ક્રિયા ફોર્મેટ. બંધ કૌંસ ખૂટે છે ']'",
+    "empty_command": "ખાલી આદેશ. પ્રકાર 'draw' અથવા 'move <source> <destination> [count]'",
+    "empty_action": "ખાલી ક્રિયા",
+    "move_needs_args": "ખસેડો આદેશને સ્રોત અને ગંતવ્યની જરૂર છે. ઉપયોગઃ 'move <source> <destination> [count]'",
+    "count_positive": "કાઉન્ટ ધનાત્મક અથવા 'all' હોવી જોઈએ",
+    "count_invalid": "અમાન્ય કાઉન્ટ. એક સંખ્યા અથવા 'all' ઉપયોગ કરો",
+    "unknown_command": "અજ્ઞાત આદેશ '{cmd}'. 'draw', 'move <source> <destination> [count]', અથવા 'forfeit' નો ઉપયોગ કરો",
+    "wrapped": "ક્રિયા {n}: {msg}"
+  },
+  "action_result": {
+    "success": "ક્રિયા {n}: {msg}",
+    "before_failure": "નિષ્ફળતા પહેલાં અમલમાં {n} ક્રિયાઓ.",
+    "failed": "કાર્યવાહી {n} નિષ્ફળઃ {msg}"
+  },
+  "move_result": {
+    "drew": "કાર્ડ્સને સ્ટોકમાંથી કચરામાં ખેંચીને",
+    "cannot_draw": "ડ્રો કરી શકાતું નથી. સ્ટોક અને કચરો બંને ખાલી છે.",
+    "invalid_pile": "અમાન્ય પાયલ નામ. W, F1-F4, અથવા T1-T7 નો ઉપયોગ કરો",
+    "foundation_one_card": "ફાઉન્ડેશનમાં ફક્ત 1 કાર્ડ ખસેડી શકે છે",
+    "waste_to_foundation_ok": "કચરામાંથી ફાઉન્ડેશનમાં ખસેડવામાં આવેલ કાર્ડ F{dst}",
+    "waste_to_foundation_bad": "ફાઉન્ડેશન ખૂંટોમાં કચરો કાર્ડ ખસેડી શકાતું નથી",
+    "tableau_to_foundation_ok": "ટેબલ T{src} થી ફાઉન્ડેશન F{dst} માં ખસેડવામાં આવેલ કાર્ડ",
+    "tableau_to_foundation_bad": "તે ફાઉન્ડેશન સ્ટેક પર ટેબ્લો કાર્ડ ખસેડી શકાતું નથી",
+    "foundation_to_foundation": "ફાઉન્ડેશનથી ફાઉન્ડેશન સુધી ખસેડી શકાતું નથી",
+    "waste_to_tableau_one_card": "માત્ર 1 કાર્ડને કચરામાંથી ટેબ્લોમાં ખસેડી શકે છે",
+    "waste_to_tableau_ok": "વેસ્ટમાંથી T{dst} ટેબ્લોમાં કાર્ડ ખસેડવામાં આવ્યું",
+    "waste_to_tableau_bad": "તે ટેબ્લો સ્ટેક પર કચરો કાર્ડ મૂકી શકતા નથી",
+    "no_face_up": "કોઈ ચહેરો-અપ કાર્ડ્સ ખસેડવા માટે",
+    "tableau_to_tableau_ok": "T{src} ટેબ્લોમાંથી T{dst} ટેબ્લોમાં {count} કાર્ડ(સ) ખસેડવામાં આવ્યા",
+    "tableau_to_tableau_bad": "T{src} થી T{dst} સુધી {count} કાર્ડ (((s) ખસેડી શકાતું નથી",
+    "foundation_to_tableau_one_card": "ફાઉન્ડેશનથી ટેબ્લોમાં ફક્ત 1 કાર્ડ ખસેડી શકે છે",
+    "foundation_empty": "ફાઉન્ડેશન F{src} ખાલી છે",
+    "foundation_to_tableau_ok": "ફાઉન્ડેશન F{src} થી ટેબલ T{dst} માં ખસેડવામાં આવેલ કાર્ડ",
+    "foundation_to_tableau_bad": "પાયા કાર્ડને ટેબ્લો T{dst} પર મૂકી શકાતું નથી",
+    "to_waste_or_stock": "કચરો અથવા સ્ટોકમાં ખસેડી શકાતું નથી"
+  },
+  "outcome": {
+    "forfeit": "રમત છોડવામાં આવી. અંતિમ ગણતરી: {score} કાર્ડ પાયામાં.",
+    "won": "અભિનંદન, તમે ક્લોન્ડાઇક સોલિટેર જીતી ગયા છો!",
+    "turn_limit": "રમત સમાપ્ત! તમે મહત્તમ {max_turns} વળાંક સુધી પહોંચી ગયા છો. સ્કોરઃ ફાઉન્ડેશનમાં {score} કાર્ડ્સ."
+  },
+  "board": {
+    "title": "=== ક્લોન્ડીક સોલિટેર ===",
+    "turn": "વળાંકઃ {turn}/{max_turns}",
+    "stock": "સ્ટોકઃ {stock} કાર્ડ્સ",
+    "waste": "કચરો (ડબલ્યુ): {waste}",
+    "foundations_header": "ફાઉન્ડેશનોઃ",
+    "foundation_row": "એફ {n}: {cards}",
+    "tableau_header": "ટેબલઃ",
+    "tableau_row": "ટી {n}: {cards}"
+  }
+}

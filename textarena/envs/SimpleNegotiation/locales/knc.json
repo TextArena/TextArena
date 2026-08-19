@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Kam bikke makkarye dәbe cida laa kasatsana kәla karewa mәradәnzә ba ro.",
+    "out_of_range": "Ndugo {player_id}, Kazi kuɾ̃a. Kɾ̃ɛ {col} kawɾ̃a wɾ̃i kawɾ̃a.",
+    "already_full": "Ndugo {player_id}, Kazi kuɾ̃a. Kɾ̃ɛ {col} kawɾ̃a kuɾ̃a.",
+    "proposing_with_no_resource": "Player {player_id} dәye awowa mәradәna ba ro cinzaye sadin.",
+    "incorrect_offer_format": "Player {player_id}ye cinna kasuduwa dәga fasal kalkallo gәnyi sәdә.",
+    "no_new_offer": "Player {player_id} dǝye cinzǝwa bisketaye gǝnazәnyi."
+  },
+  "offers": {
+    "reject": "Kam kәla kungunabe {player_id} dәye awo faltinma dǝga kasatsǝnyi.",
+    "accept": "Kasan {acceptor_id} kala kadi kulana amma Kasan {proposer_id}.",
+    "proposal": "Kasan {player_id} kọrọ kadi amma na Kasan {opponent_id}: Kadi ngomna: {offered} -> Kadi kulana: {requested}"
+  },
+  "outcome": {
+    "win": "Player {winner_id} də taman kərmaaye ngəwu səbandənaro kənasar.",
+    "draw": "Faltǝma fal suro taman karewabe dәye am samma so ro."
+  }
+}

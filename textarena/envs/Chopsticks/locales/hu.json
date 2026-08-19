@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a Chopsticks-ben. A következő lépésnél válasszon az alábbi lehetőségek közül:\n  + Támadás: '[attack M O]'  ahol M=az Ön keze (0 vagy 1), O=ellenfél keze (0 vagy 1).\n    - Ellenfél kezének száma nő az Ön kezével; ha >=5, akkor 0 lesz.\n  + Szétosztás: '[split L R]'  az Ön összes ujjának újraelosztásához L és R között (L+R = az Ön összes ujja).\nVálaszoljon pontosan az egyik parancsra."
+  },
+  "board": {
+    "current_board": "Aktuális tábla:\n0. játékos: {hands_0}\n1. játékos: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Az Ön {my_idx} keze halott.",
+    "opp_hand_dead": "Ellenfél {opp_idx} keze már halott.",
+    "split_sum": "A szétosztásnak {total} összegűnek kell lennie.",
+    "split_no_change": "A szétosztásnak meg kell változtatnia az Ön kezeinek elosztását.",
+    "invalid_command": "Érvénytelen lépés. Használja a “[attack M O]” vagy “[split L R]” parancsot."
+  },
+  "game_action": {
+    "attack": "{player_id}. játékos megtámadja {opp_id}. játékos {opp_idx} kezét: {opp_val}-ról {new_val}-ra változik.",
+    "split": "{player_id}. játékos szétosztja kezét [{L}, {R}] között."
+  },
+  "history": {
+    "entry": "{player_id}. játékos {desc}"
+  },
+  "outcome": {
+    "win": "Mindkét ellenfél keze halott.",
+    "draw": "A lépésszám korlátja elérve."
+  }
+}

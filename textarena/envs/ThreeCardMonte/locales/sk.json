@@ -1,0 +1,31 @@
+{
+  "_comment": "Súbor lokalizácie ThreeCardMonte. NEPREKLADAJTE kľúče (ľavá strana). Prekladajte iba hodnoty (pravá strana).",
+  "_slots": {
+    "{line}": "Vykreslený riadok pohárov",
+    "{step}": "Aktuálny krok čísla miešania",
+    "{steps}": "Celkový počet krokov miešania",
+    "{i}": "Index prvého pohára zapojeného do výmeny",
+    "{j}": "Index druhého pohára zapojeného do výmeny",
+    "{prompt}": "Lokalizovaný fragment výzvy pripojený za poháre",
+    "{max_index}": "Najvyšší platný index pohára, t. j. num_cups-1",
+    "{ball_pos}": "Index pohára, pod ktorým sa nachádza lopta"
+  },
+  "player_prompt": {
+    "intro": "Sledujte skrytú loptu 'X', kým sa poháre miešajú.\nPo miešaní uhádnete jej polohu pomocou `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Lopta začína: {line}",
+    "shuffle": "Miešanie {step}/{steps}: vymenené poháre {i} a {j}.",
+    "cups": "Poháre: {line}  {prompt}",
+    "guess_now": "(Uhádni TERAZ!)",
+    "reveal": "(Odkryť: lopta pod {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Nesprávna akcia. Použite `[k]`.",
+    "out_of_range": "Index mimo rozsah 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Správne! Našli ste loptu.",
+    "lose": "Nesprávne — lopta bola pod pohárom {ball_pos}."
+  }
+}

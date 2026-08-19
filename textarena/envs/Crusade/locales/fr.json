@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le Joueur {player_id} ({piece}). L'adversaire est ({opp}). Soumettez vos coups sous la forme '[b1 c3]' (départ → arrivée). Toutes les pièces se déplacent comme des cavaliers aux échecs.\nChaque capture rapporte {score_per_capture} point. La partie se termine après {max_moves} coups ou lorsqu'un joueur n'a plus de coup légal / de pièce. Le score le plus élevé l'emporte."
+  },
+  "board": {
+    "current_board": "Coup #{move_count}\n\n{board}\n\nCoups disponibles : {moves}"
+  },
+  "invalid_move": {
+    "bad_format": "Format incorrect. Utilisez '[b1 c3]'.",
+    "unknown_square": "Case inconnue.",
+    "not_your_piece": "La case de départ ne contient pas votre pièce.",
+    "own_piece": "Impossible d'atterrir sur votre propre pièce.",
+    "not_knight": "Ce n'est pas un déplacement de cavalier."
+  },
+  "game_action": {
+    "moved": "Le Joueur {player_id} a déplacé sa pièce de {frm} à {to}.",
+    "capture": "{observation} Une pièce est capturée ! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Le Joueur {player_id} n'a plus de pièces.",
+    "cannot_move": "Le Joueur {player_id} ne peut pas se déplacer.",
+    "higher_score": "Score de captures supérieur.",
+    "move_limit": "La limite de coups a été atteinte."
+  }
+}

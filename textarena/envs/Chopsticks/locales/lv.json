@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} Chopsticks spēlē. Savā gājienā jūs vajadzētu izvēlēties vienu no:\n  + Uzbrukums: '[attack M O]'  kur M=jūsu roka (0 vai 1), O=pretinieka roka (0 vai 1).\n    - Pretinieka rokas skaits palielinās par jūsu rokas skaitu; ja >=5, tas kļūst par 0.\n  + Sadalīšana: '[split L R]'  lai pārdalītu jūsu kopējo pirkstu skaitu L un R (L+R = jūsu kopējais skaitlis).\nAtbildiet ar tieši vienu no šiem komandiem."
+  },
+  "board": {
+    "current_board": "Pašreizējais galdiņš:\nSpēlētājs 0: {hands_0}\nSpēlētājs 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Jūsu roka {my_idx} ir mirusi.",
+    "opp_hand_dead": "Pretinieka roka {opp_idx} jau ir mirusi.",
+    "split_sum": "Sadalīšanai jābūt kopējam skaitam {total}.",
+    "split_no_change": "Sadalīšanai jāmaina jūsu rokas sadalījums.",
+    "invalid_command": "Nederīgs gājiens. Izmantojiet “[attack M O]” vai “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} uzbrūk P{opp_id} rokai {opp_idx}: tā pāriet no {opp_val} uz {new_val}.",
+    "split": "P{player_id} sadala savas rokas [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Abas pretinieka rokas ir mirušas.",
+    "draw": "Gājienu limits ir sasniegts."
+  }
+}

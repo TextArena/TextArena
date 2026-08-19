@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ati Taphaataa {player_id} Stratego keessa jirta.\nKaayyoon kee faajjii diinaa kee qabachuufi ykn piyesa isaanii hundumaa irratti argamuufi.\nWarana kee kan Stratego irratti argamu, faajjii, baaburaa fi piyesa biroo sadarkaa adda addaa qabu.\n\n### Taphaataa Ittisaa\n1. **Seera Tarkaanfii:**\n   - Guyyaa kee, piyesa tokko tarkaanfii tokko fagaataa irratti argamu danda'a (gara olii, gara gaditti, mirga ykn bitaa).\n   - Fakkeenya: Piyesa tokko A1 irraa B1 ykn A1 irraa A2 tarkaanfii danda'a yoo B1 fi A2 irratti piyesa kee hin argamin.\n   - Yoo piyesa filatame baaburaa ykn faajjii ta'e, tarkaanfii hin danda'u.\n2. **Duula:**\n   - Yoo piyesa diinaa irratti argamu, duula uumama:\n     - Piyesa sadarkaa guddaa qabu moo'ata.\n     - Yoo sadarkaa wal qixa ta'an, piyesa lamaan irratti argamu.\n     - **Haala addaa:**\n       - Baaburaa piyesa duulaaf ykn Mineroota dha.\n       - Spyoonni marshaalii yoo duulaaf ykn hundumaa kadhachuu danda'u.\n3. **Kaayyoo Araataa:**\n   - Piyesa diinaa kee tarkaanfii isaanii fi duulaan beeku.\n   - Faajjii kee eegu ykn faajjii diinaa kee qabachuuf yaalu.\n   - Scoutiin piyesa diinaa kee beeku fi piyesa xiqqaa kadhachuu danda'a.\n\n### Tarkaanfii Ittisaa:\n1. Piyesa tarkaanfii jirtu fi bakka bu'aa isaa mirkaneessi.\n2. Foormaatti [A0 B0] fayyadami, A0 bakka bu'aa piyesa tarkaanfii jirtu, B0 immoo bakka bu'aa piyesa bu'aa.\n   - Fakkeenya: Piyesa A0 irraa B0 tarkaanfii jirtu, [A0 B0] barreessi.\n3. Bakka bu'aa tarkaanfii seera tarkaanfii irratti argamu mirkaneessi.\n\n### Dhimmoota Barbaachisaa:\n- Waraqaa piyesa kee fi bakka bu'aan isaanii agarsiisa, kan akka MN, MS.\n- Waraqaa bakka bu'aa piyesa diinaa kee sadarkaa isaanii hin agarsiisu, kan akka ?.\n- Gridi ~ haroo waan ta'eef tarkaanfii hin danda'u.\n- Ijoollee, tapha kee piyesa qarqara tarkaanfii jirtuun eegali, piyesa diinaa kee beekuuf.\n\nWaraqaa ammaa:\n"
+  },
+  "board": {
+    "current_board": "Boordeeti hundinuu:\n\n{board}\nGolee dhiyeessuu: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Foormaatti sochii hin taane. Player {player_id} sochii foormaatti [A0 B0] tti hin galchine.",
+    "invalid_coordinates": "Qajeelfama sochii hin ta'u. Taphachiisaa {player_id} koordiineetii sirrii galchuu dideera.",
+    "not_own_piece": "Taphattuun {player_id} tokko bifa taphaatiin miila isaa keessaa isa tokkoo sochoosuu qaba.",
+    "scout_through_pieces": "Taphachiiftuun {player_id} ga'ee biraatiin nama tokko sochoosuu hin danda'u.",
+    "scout_diagonal": "Taphachiiftuun {player_id} nama qorattuu ta'e gara qaxxaamuraatti sochoosuu hin danda'u.",
+    "non_scout_multi_square": "Foormatii sochii hin ta'u. Qaamoleen, basaastota irraa kan hafe yeroo tokkotti bakka tokko qofa deemuu danda'u .",
+    "move_into_lake": "Taphachiiftuun {player_id} gara laggichaatti socho'uu hin danda'u.",
+    "move_onto_own_piece": "Taphachiiftuun {player_id} ga'ee ofii irratti socho'uu hin danda'u.",
+    "move_bomb_or_flag": "Taphattuun {player_id} boombii ykn alaabaa sochoosuu hin danda'u."
+  },
+  "game_action": {
+    "you_moved": "Pireesi kee yeroo {source} irraa gara {dest}tti geessuun dhaabbatu.",
+    "opponent_moved": "Player {player_id} pireesi isaa yeroo {source} irraa gara {dest}tti geessuun dhaabbatu.",
+    "you_equal_ranks": "Piyeessi kee {source} irraa {dest} tti sochite. Piyeessi hamlaa {attacking_rank} fi piyeessi bu'aa {target_rank} sadarkaa wal qixa, piyeessota lamaanuu balleessan.",
+    "opponent_equal_ranks": "Player {player_id} piyeessi isaa {source} irraa {dest} tti sochite. Piyeessi hamlaa {attacking_rank} fi piyeessi bu'aa {target_rank} sadarkaa wal qixa, piyeessota lamaanuu balleessan.",
+    "you_miner_defused": "Piyeessi kee {source} irraa {dest} tti sochite. Piyeessi hamlaa {attacking_rank} fi piyeessi bu'aa {target_rank} Miners bombii fa'u, ati lolliin moo'ite.",
+    "opponent_miner_defused": "Player {player_id} pireesi isaa yeroo {source} irraa gara {dest}tti geessuun dhaabbatu. Pireesi dhaabbatuu {attacking_rank} yeroo pireesi guutuu {target_rank} ture. Kanaafuu minersi bomba dhaabuu, si ba'u.",
+    "you_bomb_lost": "Kan si qabduu kutaa {source} irraa gara {dest} tarkaanfate. Kutaa humnaa kan banuu {attacking_rank} yoo ta'u, kutaa bakka bu'aa {target_rank} ture. Kan si qabduu bara barootuu miti, lola kan moo'ame.",
+    "opponent_bomb_won": "Taphataa {player_id} kutaa {source} irraa gara {dest} tarkaanfate. Kutaa humnaa kan banuu {attacking_rank} yoo ta'u, kutaa bakka bu'aa {target_rank} ture. Kan banuu bara barootuu miti, lola kan moo'ate.",
+    "you_spy_won": "Kan si qabduu kutaa {source} irraa gara {dest} tarkaanfate. Kutaa humnaa kan banuu {attacking_rank} yoo ta'u, kutaa bakka bu'aa {target_rank} ture. Kan si qabduu ergamaa yoo ta'e, fi bakka bu'aa marsalii yoo ta'e, lola kan moo'ate.",
+    "opponent_spy_lost": "Taphataa {player_id} kutaa {source} irraa gara {dest} tarkaanfate. Kutaa humnaa kan banuu {attacking_rank} yoo ta'u, kutaa bakka bu'aa {target_rank} ture. Kan banuu ergamaa yoo ta'e, fi bakka bu'aa marsalii yoo ta'e, lola kan moo'ame.",
+    "you_higher_won": "Kan si qabduu kutaa {source} irraa gara {dest} tarkaanfate. Kutaa humnaa kan banuu {attacking_rank} yoo ta'u, kutaa bakka bu'aa {target_rank} ture. Humnoonni banuu humnoonni bakka bu'aa caalaa yoo ta'e, lola kan moo'ate.",
+    "opponent_higher_lost": "Taphataa {player_id} kutaa {source} irraa gara {dest} tarkaanfate. Kutaa humnaa kan banuu {attacking_rank} yoo ta'u, kutaa bakka bu'aa {target_rank} ture. Humnoonni banuu humnoonni bakka bu'aa caalaa yoo ta'e, lola kan moo'ame.",
+    "you_lower_lost": "Pireesi kee yeroo {source} irraa gara {dest}tti geessuun dhaabbatu. Pireesi dhaabbatuu {attacking_rank} yeroo pireesi guutuu {target_rank} ture. Kanaafuu dhaabbatichi rangi xiqqaa guutuu irraa, kee ba'u.",
+    "opponent_lower_won": "Taphataa {player_id} tapha qabduu {source} irraa {dest} tti fidee jira. Tapha banamee {attacking_rank} yoo ta'u, tapha bakka bu'ee {target_rank} ture. Yoo tapha banamee sadarkaa xiqqaa ta'e, ati lollii moo'ate."
+  },
+  "outcome": {
+    "flag_captured": "Taphattuun {player_id} alaabaa mormituu qabatte!",
+    "no_movable_pieces": "Taphattuu {winner_id} moo'icha! Taphattuu {loser_id} tapha sochoosu tokko illee hin qabu."
+  }
+}

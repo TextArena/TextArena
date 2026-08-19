@@ -22,9 +22,9 @@ class LLMObservationWrapper(ObservationWrapper):
         if player_id in self.full_observations:
             for sender_id, message, _ in self.full_observations[player_id]:
                 if sender_id == ta.GAME_ID:
-                    sender_name = "GAME"
+                    sender_name = self.t("LLMObservationWrappers", "game", _pid=self.env.state.current_player_id)
                 else:
-                    sender_name = self.env.state.role_mapping.get(sender_id, f"Player {sender_id}")
+                    sender_name = self.env.state.role_mapping.get(sender_id, self.t("LLMObservationWrappers", "player", _pid=self.env.state.current_player_id, sender_id=sender_id))
                 str_observation += f"\n[{sender_name}] {message}"
 
         return str_observation
@@ -53,9 +53,9 @@ class DiplomacyObservationWrapper(LLMObservationWrapper):
         history = []
         for sender_id, message, _ in self.full_observations[player_id][1:]:
             if sender_id == ta.GAME_ID:
-                sender_name = "GAME"
+                sender_name = self.t("LLMObservationWrappers", "game", _pid=self.env.state.current_player_id)
             else:
-                sender_name = self.env.state.role_mapping.get(sender_id, f"Player {sender_id}")
+                sender_name = self.env.state.role_mapping.get(sender_id, self.t("LLMObservationWrappers", "player", _pid=self.env.state.current_player_id, sender_id=sender_id))
             history.append(f"[{sender_name}] {message}")
         return "\n".join(history)
 
@@ -81,7 +81,7 @@ class FirstLastObservationWrapper(ObservationWrapper):
         if len(self.full_observations[player_id]) > 1:
             return_str += "\n\n" + self.full_observations[player_id][-1][1]
 
-        return return_str + "\n\n" + "Next Action:"
+        return return_str + "\n\n" + self.t("LLMObservationWrappers", "next_action", _pid=self.env.state.current_player_id)
 
     def observation(self, player_id: int, observation: Optional[ta.Observations]):
         if observation is None:
@@ -203,8 +203,8 @@ class SettlersOfCatanObservationWrapper(ObservationWrapper):
             if obs_type==ObservationType.GAME_BOARD: idx_final_board=i
         return_str = ""
         for i, (sender_id, message, obs_type) in enumerate(self.full_observations.get(player_id, [])):
-            if sender_id == ta.GAME_ID: sender_name = "GAME"
-            else: sender_name = self.env.state.role_mapping.get(sender_id, f"Player {sender_id}")
+            if sender_id == ta.GAME_ID: sender_name = self.t("LLMObservationWrappers", "game", _pid=self.env.state.current_player_id)
+            else: sender_name = self.env.state.role_mapping.get(sender_id, self.t("LLMObservationWrappers", "player", sender_id=sender_id))
 
             if obs_type != ObservationType.GAME_BOARD:
                 return_str += f"\n[{sender_name}]\t{message}"

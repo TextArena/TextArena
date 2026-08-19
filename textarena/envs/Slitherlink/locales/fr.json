@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Vous jouez à Slitherlink sur une grille de {R}×{C} !\nTracez une seule boucle continue de sorte que chaque case numérotée possède exactement ce nombre d'arêtes sur son contour.\nBasculez les arêtes avec :\n  [h r c] - bascule l'arête horizontale au-dessus des points de la ligne r, colonne c\n  [v r c] - bascule l'arête verticale à gauche des points de la ligne r, colonne c\nLes nombres indiquent le nombre d'arêtes requis ; '.' signifie qu'il n'y a aucune contrainte.\nVous disposez de {max_turns} mouvements au maximum pour résoudre le puzzle."
+  },
+  "board": {
+    "current_board": "{board}\nIndices satisfaits : {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format d'action incorrect. Utilisez [h row col] ou [v row col].",
+    "out_of_bounds": "L'arête se trouve hors du plateau."
+  },
+  "outcome": {
+    "win": "🎉 Vous avez formé une seule boucle ! Puzzle résolu !",
+    "turn_limit": "La limite de mouvements a été atteinte. Le puzzle n'est pas terminé."
+  }
+}

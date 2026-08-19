@@ -1,0 +1,471 @@
+{
+  "incorrect_complete": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Mapping complete but equation incorrect.",
+        "role": "Player 0",
+        "turn_count": 8
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "Map each letter to a unique digit so the arithmetic holds.\nAssign with `[A 5]`, re-assign anytime.\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n____ + ____ = _____\nMapping:\n  (none yet)\nAssigned: 0/8 (0%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[S 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[S 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n1___ + ____ = _____\nMapping:\n  S → 1\nAssigned: 1/8 (12%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[E 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[E 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n12__ + ___2 = ___2_\nMapping:\n  E → 2\n  S → 1\nAssigned: 2/8 (25%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[N 3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N 3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n123_ + ___2 = __32_\nMapping:\n  E → 2\n  N → 3\n  S → 1\nAssigned: 3/8 (38%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[D 4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[D 4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n1234 + ___2 = __32_\nMapping:\n  D → 4\n  E → 2\n  N → 3\n  S → 1\nAssigned: 4/8 (50%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[M 5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[M 5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n1234 + 5__2 = 5_32_\nMapping:\n  D → 4\n  E → 2\n  M → 5\n  N → 3\n  S → 1\nAssigned: 5/8 (62%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[O 6]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[O 6]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n1234 + 56_2 = 5632_\nMapping:\n  D → 4\n  E → 2\n  M → 5\n  N → 3\n  O → 6\n  S → 1\nAssigned: 6/8 (75%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[R 7]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[R 7]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n1234 + 5672 = 5632_\nMapping:\n  D → 4\n  E → 2\n  M → 5\n  N → 3\n  O → 6\n  R → 7\n  S → 1\nAssigned: 7/8 (88%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Y 8]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Y 8]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n1234 + 5672 = 56328\nMapping:\n  D → 4\n  E → 2\n  M → 5\n  N → 3\n  O → 6\n  R → 7\n  S → 1\n  Y → 8\nAssigned: 8/8 (100%)",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": {
+      "0": 0.0
+    }
+  },
+  "invalids": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 3
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "Map each letter to a unique digit so the arithmetic holds.\nAssign with `[A 5]`, re-assign anytime.\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n____ + ____ = _____\nMapping:\n  (none yet)\nAssigned: 0/8 (0%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "garbage",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "garbage",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Bad action format. Use `[A 5]`. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[S 9]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[S 9]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n9___ + ____ = _____\nMapping:\n  S → 9\nAssigned: 1/8 (12%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Z 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Z 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Letter Z not in puzzle. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[E 5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[E 5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n95__ + ___5 = ___5_\nMapping:\n  E → 5\n  S → 9\nAssigned: 2/8 (25%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[M 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[M 0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Leading digit of a word cannot be 0. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[N 6]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N 6]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n956_ + ___5 = __65_\nMapping:\n  E → 5\n  N → 6\n  S → 9\nAssigned: 3/8 (38%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[E 9]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[E 9]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Digit 9 already used by S. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      }
+    ],
+    "rewards": null
+  },
+  "solve": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Correct! Equation satisfied.",
+        "role": "Player 0",
+        "turn_count": 8
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "Map each letter to a unique digit so the arithmetic holds.\nAssign with `[A 5]`, re-assign anytime.\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n____ + ____ = _____\nMapping:\n  (none yet)\nAssigned: 0/8 (0%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[S 9]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[S 9]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n9___ + ____ = _____\nMapping:\n  S → 9\nAssigned: 1/8 (12%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[E 5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[E 5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n95__ + ___5 = ___5_\nMapping:\n  E → 5\n  S → 9\nAssigned: 2/8 (25%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[N 6]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N 6]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n956_ + ___5 = __65_\nMapping:\n  E → 5\n  N → 6\n  S → 9\nAssigned: 3/8 (38%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[D 7]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[D 7]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n9567 + ___5 = __65_\nMapping:\n  D → 7\n  E → 5\n  N → 6\n  S → 9\nAssigned: 4/8 (50%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[M 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[M 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n9567 + 1__5 = 1_65_\nMapping:\n  D → 7\n  E → 5\n  M → 1\n  N → 6\n  S → 9\nAssigned: 5/8 (62%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[O 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[O 0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n9567 + 10_5 = 1065_\nMapping:\n  D → 7\n  E → 5\n  M → 1\n  N → 6\n  O → 0\n  S → 9\nAssigned: 6/8 (75%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[R 8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[R 8]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n9567 + 1085 = 1065_\nMapping:\n  D → 7\n  E → 5\n  M → 1\n  N → 6\n  O → 0\n  R → 8\n  S → 9\nAssigned: 7/8 (88%)",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Y 2]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Y 2]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "\nSEND + MORE = MONEY\n9567 + 1085 = 10652\nMapping:\n  D → 7\n  E → 5\n  M → 1\n  N → 6\n  O → 0\n  R → 8\n  S → 9\n  Y → 2\nAssigned: 8/8 (100%)",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": {
+      "0": 1.0
+    }
+  }
+}

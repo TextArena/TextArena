@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "ᱟᱢ ᱠᱞᱚᱱᱰᱟᱭᱤᱠ ᱥᱳᱞᱤᱴᱮᱭᱟᱨ ᱠᱷᱮᱞ ᱮᱫᱟᱢ. ᱟᱢᱟᱜ ᱞᱟᱦᱟ ᱥᱮᱡ ᱥᱟᱱᱟᱢ ᱠᱟᱨᱰ ᱯᱷᱟᱣᱩᱱᱰᱮᱥᱚᱱ ᱯᱟᱭᱤᱞᱥ ᱛᱮ ᱤᱫᱤᱜ ᱠᱟᱱᱟ.\n\nᱠᱷᱮᱞ ᱱᱤᱭᱚᱢ:\n- ᱯᱷᱟᱣᱩᱱᱰᱮᱥᱚᱱ ᱯᱟᱭᱤᱞᱥ (F1-F4): ᱮᱥ ᱠᱷᱚᱱ ᱠᱤᱝ ᱫᱷᱟᱹᱵᱤᱡ ᱥᱩᱴ ᱛᱮ ᱵᱮᱱᱟᱣ ᱢᱮ\n- ᱴᱮᱵᱞᱳ ᱯᱟᱭᱤᱞᱥ (T1-T7): ᱨᱚᱝ ᱵᱚᱫᱚᱞ ᱠᱟᱛᱮ ᱞᱟᱛᱟᱨ ᱥᱮᱡ ᱵᱮᱱᱟᱣ ᱢᱮ (ᱞᱟᱞ ᱨᱚᱝ ᱨᱮ ᱦᱮᱸᱫᱮ, ᱦᱮᱸᱫᱮ ᱨᱚᱝ ᱨᱮ ᱞᱟᱞ)\n- ᱥᱴᱳᱠ: ᱣᱮᱥᱴ ᱯᱟᱭᱤᱞ ᱛᱮ ᱠᱟᱨᱰ ᱰᱨᱳ ᱢᱮ\n- ᱣᱮᱥᱴ (W): ᱪᱮᱛᱟᱱ ᱠᱟᱨᱰ ᱠᱷᱮᱞ ᱞᱟᱹᱜᱤᱫ ᱡᱚᱜᱟᱣ ᱢᱮ\n\nᱠᱚᱢᱟᱱᱰᱥ:\n- 'draw' - ᱥᱴᱳᱠ ᱠᱷᱚᱱ ᱣᱮᱥᱴ ᱯᱟᱭᱤᱞ ᱛᱮ ᱠᱟᱨᱰ ᱰᱨᱳ ᱢᱮ\n- 'move <source> <destination> [count]' - ᱯᱟᱭᱤᱞᱥ ᱛᱟᱞᱟ ᱨᱮ ᱠᱟᱨᱰ ᱤᱫᱤᱜ ᱢᱮ\n  ᱫᱟᱹᱭᱠᱟᱹ: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count ᱫᱚ 'all' ᱦᱚᱸ ᱦᱩᱭ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ, ᱡᱟᱦᱟᱸ ᱥᱟᱱᱟᱢ ᱯᱟᱦᱴᱟ ᱠᱟᱨᱰ ᱤᱫᱤᱜ ᱞᱟᱹᱜᱤᱫ ᱠᱩᱨᱩᱢᱩᱴᱩ ᱮᱫᱟᱭ.\n- 'forfeit' - ᱠᱷᱮᱞ ᱚᱠᱛᱚᱜᱚᱛ ᱛᱮᱜᱮ ᱢᱩᱪᱟᱹᱫ ᱢᱮ ᱟᱨ ᱱᱤᱛᱟᱜ ᱥᱠᱳᱨ ᱞᱚᱠ ᱢᱮ\n- ᱯᱟᱭᱤᱞ ᱧᱩᱛᱩᱢ: W (ᱣᱮᱥᱴ), F1-F4 (ᱯᱷᱟᱣᱩᱱᱰᱮᱥᱚᱱ), T1-T7 (ᱴᱮᱵᱞᱳ)\n\nᱢᱤᱫ ᱴᱟᱲᱤ ᱨᱮ ᱟᱭᱢᱟ ᱠᱟᱹᱢᱤ ᱮᱫᱟᱢ ᱠᱷᱟᱱ ᱠᱚᱢᱟ ᱛᱮ ᱦᱟᱹᱴᱤᱧ ᱢᱮ:\n  ᱫᱟᱹᱭᱠᱟᱹ: 'draw, move W T1, move T2 F1'\n\nᱴᱮᱵᱞᱳ ᱯᱟᱭᱤᱞᱥ ᱨᱮ ᱠᱤᱝ ᱜᱮ ᱯᱷᱟᱸᱠᱟ ᱯᱟᱭᱤᱞ ᱨᱮ ᱫᱚᱦᱚ ᱜᱟᱱᱚᱜ-ᱟ.\nᱠᱟᱹᱢᱤ ᱠᱚ ᱟᱹᱨᱩ ᱛᱮᱜᱮ ᱪᱟᱞᱟᱜ-ᱟ - ᱢᱤᱫ ᱵᱟᱝ ᱯᱟᱨᱚᱢ ᱠᱷᱟᱱ, ᱥᱟᱨᱮᱡ ᱠᱟᱹᱢᱤ ᱠᱚ ᱵᱟᱝ ᱪᱟᱞᱟᱜ-ᱟ.\n'forfeit' ᱵᱮᱵᱷᱟᱨ ᱢᱮ ᱡᱩᱫᱤ ᱟᱢ ᱠᱷᱮᱞ ᱡᱤᱛᱟᱹᱣ ᱵᱟᱝ ᱜᱟᱱᱚᱜ ᱵᱚᱲᱤ ᱠᱷᱟᱱ."
+  },
+  "format_error": {
+    "no_brackets": "ᱵᱟᱹᱞᱤ ᱠᱟᱹᱢᱤ ᱯᱷᱚᱨᱢᱮᱴ ᱾ ᱠᱟᱹᱣᱰᱤ ᱫᱚ ᱯᱟᱨᱟᱠᱚᱛ ᱨᱮ ᱛᱟᱦᱮᱸᱱᱟ᱾",
+    "no_closing_bracket": "ᱵᱟᱹᱞᱤ ᱠᱟᱹᱢᱤ ᱯᱷᱚᱨᱢᱮᱴ ᱾ ᱢᱩᱪᱟᱹᱫ ᱫᱟᱠᱟ ᱵᱟᱭ ᱧᱟᱢ ᱟᱠᱟᱱᱟ ']'",
+    "empty_command": "ᱵᱷᱤᱛᱨᱤ ᱠᱟᱹᱢᱤ ᱾ 'draw' ᱥᱮ 'move <source> <destination> [count] ᱚᱞ ᱢᱮ",
+    "empty_action": "ᱵᱟᱱᱩᱜ ᱠᱟᱹᱢᱤ",
+    "move_needs_args": "ᱢᱩᱴᱷᱟᱹᱱ ᱪᱟᱞᱟᱣ ᱞᱟᱹᱜᱤᱫ ᱫᱚ ᱥᱚᱨᱚᱥ ᱟᱨ ᱰᱮᱥᱠᱤᱴᱮᱥᱤᱱᱟ ᱨᱮᱱᱟᱜ ᱵᱮᱵᱷᱟᱨ ᱦᱩᱭᱩᱜ ᱠᱟᱱᱟ ᱾ 'move <source> <destination> [count]'",
+    "count_positive": "ᱮᱞ ᱫᱚ ᱯᱚᱡᱤᱴᱤᱵᱷ ᱥᱮ 'all' ᱦᱩᱭᱩᱜ ᱞᱟᱹᱠᱛᱤ ᱾",
+    "count_invalid": "ᱵᱟᱹᱞᱤ ᱞᱮᱠᱷᱟ ᱾ ᱢᱤᱫ ᱮᱞ ᱥᱮ 'all' ᱵᱮᱵᱷᱟᱨ ᱢᱮ",
+    "unknown_command": "ᱵᱟᱝ ᱪᱤᱱᱦᱟᱹᱣ ᱠᱚᱢᱟᱱᱰ '{cmd}'. 'draw', 'move <source> <destination> [count]', ᱟᱨᱵᱟᱝ 'forfeit' ᱵᱮᱵᱷᱟᱨ ᱢᱮ",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "{n} ᱠᱟᱹᱢᱤ (s) ᱵᱟᱝ ᱯᱩᱨᱟᱣ ᱞᱟᱹᱜᱤᱫ ᱛᱮ ᱪᱟᱞᱟᱜ ᱠᱟᱱᱟ ᱾",
+    "failed": "ᱠᱟᱹᱢᱤ {n} ᱵᱟᱝ ᱯᱟᱨᱚᱢ ᱟᱲᱮᱭᱟᱜ-ᱟ: {msg}"
+  },
+  "move_result": {
+    "drew": "ᱥᱴᱚᱠ ᱠᱷᱚᱱ ᱰᱮᱦᱨᱟᱰᱩᱱ (Drawn card) ᱪᱟᱥᱵᱟᱥ ᱨᱮ ᱾",
+    "cannot_draw": "ᱰᱨᱚᱝ ᱵᱟᱝ ᱦᱩᱭ ᱫᱟᱲᱮᱭᱟᱜᱼᱟ ᱾ ᱥᱴᱳᱠ ᱟᱨ ᱚᱵᱷᱤᱥᱮᱹᱞ ᱵᱟᱱᱟᱨ ᱜᱮ ᱵᱟᱱᱩᱜ-ᱟ᱾",
+    "invalid_pile": "ᱵᱟᱹᱞᱤ ᱯᱷᱟᱤᱞ ᱧᱩᱛᱩᱢ ᱾ W, F1-F4, ᱥᱮ T1-T7 ᱵᱮᱵᱷᱟᱨ ᱢᱮ",
+    "foundation_one_card": "ᱢᱤᱫᱴᱮᱱ ᱠᱟᱨᱰ ᱜᱮ ᱯᱷᱚᱸᱰᱮᱥᱚᱱ ᱨᱮ ᱥᱮᱞᱮᱫ ᱫᱟᱲᱮᱭᱟᱜᱼᱟ ᱾",
+    "waste_to_foundation_ok": "ᱡᱟᱹᱯᱤᱫ ᱠᱷᱚᱱ ᱯᱷᱩᱱᱰᱮᱥᱚᱱ ᱨᱮ ᱥᱮᱱ ᱟᱠᱟᱱ ᱠᱟᱨᱰ F{dst}",
+    "waste_to_foundation_bad": "ᱱᱚᱶᱟ ᱯᱷᱩᱱᱰᱮᱥᱚᱱ ᱯᱟᱭᱞ ᱨᱮ ᱡᱷᱚᱞᱚᱠ ᱠᱟᱨᱰ ᱵᱟᱝ ᱥᱮᱴᱮᱨ ᱫᱟᱲᱮᱭᱟᱜ- ᱟ",
+    "tableau_to_foundation_ok": "ᱴᱮᱵᱞᱳ T{src} ᱠᱷᱚᱱ ᱯᱷᱟᱣᱩᱱᱰᱮᱥᱚᱱ F{dst} ᱨᱮ ᱠᱟᱨᱰ ᱢᱩᱵ ᱟᱲᱮᱭᱟᱜ-ᱟ",
+    "tableau_to_foundation_bad": "ᱱᱚᱶᱟ ᱯᱷᱩᱱᱰᱮᱥᱚᱱ ᱯᱟᱭᱞ ᱨᱮ ᱴᱚᱵᱷᱮᱞ ᱠᱟᱨᱰ ᱵᱟᱭ ᱥᱮᱱ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ",
+    "foundation_to_foundation": "ᱯᱷᱩᱱᱰᱮᱥᱚᱱ ᱠᱷᱚᱱ ᱯᱷᱩᱱᱫᱮᱥᱟᱱ ᱨᱮ ᱵᱟᱭ ᱥᱮᱱ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ ᱾",
+    "waste_to_tableau_one_card": "ᱡᱟᱹᱯᱤᱫ ᱠᱷᱚᱱ ᱪᱤᱛᱟᱹᱨ ᱨᱮ ᱢᱤᱫᱴᱮᱱ ᱠᱟᱨᱰ ᱜᱮ ᱥᱮᱱ ᱫᱟᱲᱮᱭᱟᱜ ᱟ.",
+    "waste_to_tableau_ok": "ᱠᱟᱨᱰ ᱫᱚ waste ᱠᱷᱚᱱ ᱪᱷᱟᱸᱪ T{dst} ᱨᱮ ᱥᱮᱞᱮᱫ ᱟᱠᱟᱱᱟ ᱾",
+    "waste_to_tableau_bad": "ᱱᱚᱶᱟ ᱛᱚᱦᱚᱨ ᱨᱮ ᱠᱟᱨᱰ ᱵᱟᱭ ᱥᱮᱞᱮᱫ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ᱾",
+    "no_face_up": "ᱪᱟᱞᱟᱣ ᱞᱟᱹᱜᱤᱫ ᱚᱞ ᱟᱠᱟᱱ ᱠᱟᱨᱰ ᱵᱟᱹᱱᱩᱜᱼᱟ ᱾",
+    "tableau_to_tableau_ok": "ᱴᱮᱵᱞᱳ T{src} ᱠᱷᱚᱱ T{dst} ᱨᱮ {count} ᱠᱟᱨᱰ ᱠᱚ ᱢᱩᱵ ᱟᱲᱮᱭᱟᱜ-ᱟ",
+    "tableau_to_tableau_bad": "T{src} ᱠᱷᱚᱱ T{dst} ᱨᱮ {count} ᱠᱟᱨᱰ ᱠᱚ ᱵᱟᱝ ᱢᱩᱵ ᱟᱲᱮᱭᱟᱜ-ᱟ",
+    "foundation_to_tableau_one_card": "ᱯᱷᱩᱱᱰᱮᱥᱚᱱ ᱠᱷᱚᱱ ᱴᱮᱵᱩᱞ ᱨᱮ ᱢᱤᱫᱴᱮᱱ ᱠᱟᱨᱰ ᱜᱮ ᱥᱮᱱ ᱫᱟᱲᱮᱭᱟᱜ ᱟ.",
+    "foundation_empty": "ᱯᱷᱩᱱᱰᱮᱥᱚᱱ F{src} ᱫᱚ ᱵᱟᱱᱩᱜ-ᱟ᱾",
+    "foundation_to_tableau_ok": "ᱯᱷᱟᱣᱩᱱᱰᱮᱥᱚᱱ F{src} ᱠᱷᱚᱱ ᱴᱮᱵᱞᱳ T{dst} ᱨᱮ ᱠᱟᱨᱰ ᱢᱩᱵ ᱟᱲᱮᱭᱟᱜ-ᱟ",
+    "foundation_to_tableau_bad": "ᱛᱚᱦᱚᱨ T ᱨᱮ ᱯᱷᱩᱱᱰᱮᱥᱚᱱ ᱠᱟᱨᱰ ᱫᱚ ᱵᱟᱝ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ {dst}",
+    "to_waste_or_stock": "ᱡᱟᱹᱯᱤᱫ ᱟᱨᱵᱟᱝ ᱥᱴᱚᱠ ᱨᱮ ᱵᱟᱝ ᱥᱮᱱ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ"
+  },
+  "outcome": {
+    "forfeit": "ᱠᱷᱮᱞ ᱫᱚ ᱵᱚᱫᱚᱞ ᱮᱱᱟ ᱾ ᱢᱩᱪᱟᱹᱫ ᱥᱠᱳᱨ: {score} ᱯᱷᱮᱰᱟᱥᱚᱱ ᱨᱮ ᱠᱟᱨᱰ ᱠᱚ.",
+    "won": "ᱥᱟᱨᱦᱟᱣ, ᱟᱢ ᱠᱞᱳᱱᱰᱟᱭᱠ ᱥᱟᱚᱞᱤᱴᱮᱭᱟᱨ ᱡᱤᱛᱠᱟ. ᱞᱮᱱᱟᱢ ᱾",
+    "turn_limit": "ᱜᱮᱢ ᱪᱟᱵᱟᱜ ᱟᱲᱮᱭᱟᱜ-ᱟ! ᱟᱢᱮ {max_turns} ᱴᱚᱨᱱ ᱨᱮᱱᱟᱜ ᱢᱮᱠᱥᱤᱢᱚᱢ ᱮᱢ ᱟᱲᱮᱭᱟᱜ-ᱟ. ᱥᱠᱳᱨ: {score} ᱠᱟᱨᱰ ᱯᱷᱟᱣᱩᱱᱰᱮᱥᱚᱱ ᱨᱮ."
+  },
+  "board": {
+    "title": "=== ᱠᱞᱚᱱᱰᱟᱭᱤᱠ ᱥᱚᱞᱤᱴᱮᱭᱟᱨ ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "ᱥᱴᱚᱠ: {stock} ᱠᱟᱨᱰ ᱠᱚ",
+    "waste": "ᱡᱟᱹᱛᱤ (W): {waste}",
+    "foundations_header": "ᱯᱷᱩᱱᱰᱮᱥᱚᱱ:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "ᱪᱷᱟᱸᱪ:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "ਤੁਸੀਂ ਕਲੋਂਡਾਇਕ ਸੋਲੀਟੇਅਰ ਖੇਡ ਰਹੇ ਹੋ। ਤੁਹਾਡਾ ਟੀਚਾ ਸਾਰੀਆਂ ਕਾਰਡਾਂ ਨੂੰ ਫਾਊਂਡੇਸ਼ਨ ਪਾਈਲਾਂ ਵਿੱਚ ਲਿਜਾਣਾ ਹੈ।\n\nਖੇਡ ਦੇ ਨਿਯਮ:\n- ਫਾਊਂਡੇਸ਼ਨ ਪਾਈਲਾਂ (F1-F4): ਏਸ ਤੋਂ ਕਿੰਗ ਤੱਕ ਸੂਟ ਵਿੱਚ ਬਣਾਓ\n- ਟੇਬਲੇਊ ਪਾਈਲਾਂ (T1-T7): ਰੰਗਾਂ ਨੂੰ ਬਦਲਦਿਆਂ ਹੇਠਾਂ ਬਣਾਓ (ਲਾਲ ਕਾਲੇ ਉੱਤੇ, ਕਾਲਾ ਲਾਲ ਉੱਤੇ)\n- ਸਟਾਕ: ਕਾਰਡਾਂ ਨੂੰ ਵੇਸਟ ਪਾਈਲ ਵਿੱਚ ਡਰਾਓ\n- ਵੇਸਟ (W): ਖੇਡ ਲਈ ਉਪਲਬਧ ਸਭ ਤੋਂ ਉੱਪਰਲਾ ਕਾਰਡ\n\nਕਮਾਂਡਾਂ:\n- 'draw' - ਸਟਾਕ ਤੋਂ ਵੇਸਟ ਪਾਈਲ ਵਿੱਚ ਕਾਰਡ ਡਰਾਓ\n- 'move <source> <destination> [count]' - ਪਾਈਲਾਂ ਵਿੱਚ ਕਾਰਡ ਲਿਜਾਓ\n  ਉਦਾਹਰਣਾਂ: 'move W T1', 'move T1 F2', 'move T3 T5 2'। ਗਿਣਤੀ ਵੀ 'all' ਹੋ ਸਕਦੀ ਹੈ, ਜੋ ਸਾਰੇ ਖੁੱਲ੍ਹੇ ਕਾਰਡ ਲਿਜਾਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੇਗੀ।\n- 'forfeit' - ਖੇਡ ਨੂੰ ਤੁਰੰਤ ਖਤਮ ਕਰੋ ਅਤੇ ਆਪਣਾ ਮੌਜੂਦਾ ਸਕੋਰ ਲਾਕ ਕਰੋ\n- ਪਾਈਲ ਨਾਮ: W (ਵੇਸਟ), F1-F4 (ਫਾਊਂਡੇਸ਼ਨ), T1-T7 (ਟੇਬਲੇਊ)\n\nਤੁਸੀਂ ਇੱਕ ਮੋੜ ਵਿੱਚ ਕਈ ਕਾਰਵਾਈਆਂ ਕਰ ਸਕਦੇ ਹੋ ਜਿਨ੍ਹਾਂ ਨੂੰ ਕੰਮਾਂ ਨਾਲ ਵੱਖ ਕਰਦੇ ਹੋ:\n  ਉਦਾਹਰਣ: 'draw, move W T1, move T2 F1'\n\nਸਿਰਫ ਕਿੰਗ ਖਾਲੀ ਟੇਬਲੇਊ ਪਾਈਲਾਂ ਉੱਤੇ ਰੱਖੇ ਜਾ ਸਕਦੇ ਹਨ।\nਕਾਰਵਾਈਆਂ ਕ੍ਰਮ ਵਿੱਚ ਕਾਰਜ ਕਰਦੀਆਂ ਹਨ - ਜੇਕਰ ਇੱਕ ਅਸਫਲ ਹੋ ਜਾਂਦੀ ਹੈ, ਤਾਂ ਬਾਕੀ ਦੀਆਂ ਕਾਰਵਾਈਆਂ ਛੱਡ ਦਿੱਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।\n'forfeit' ਦੀ ਵਰਤੋਂ ਕਰੋ ਜੇਕਰ ਤੁਸੀਂ ਸਮਝਦੇ ਹੋ ਕਿ ਖੇਡ ਜਿੱਤਣਾ ਅਸੰਭਵ ਹੈ।"
+  },
+  "format_error": {
+    "no_brackets": "ਅਵੈਧ ਐਕਸ਼ਨ ਫਾਰਮੈਟ। ਐਕਸ਼ਨ ਨੂੰ ਬਰੈਕਟ ਵਿੱਚ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।",
+    "no_closing_bracket": "ਅਵੈਧ ਐਕਸ਼ਨ ਫਾਰਮੈਟ. ਬੰਦ ਕਰਨ ਵਾਲੀ ਬਰੈਕਟ ਗੁੰਮ ਹੈ ']'",
+    "empty_command": "ਖਾਲੀ ਕਮਾਂਡ. ਟਾਈਪ ਕਰੋ 'draw' ਜਾਂ 'move <source> <destination> [count]'",
+    "empty_action": "ਖਾਲੀ ਕਾਰਵਾਈ",
+    "move_needs_args": "ਮੂਵ ਕਮਾਂਡ ਲਈ ਸਰੋਤ ਅਤੇ ਮੰਜ਼ਿਲ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ। ਵਰਤੋਂਃ 'move <source> <destination> [count]'",
+    "count_positive": "ਗਿਣਤੀ ਸਕਾਰਾਤਮਕ ਜਾਂ 'all' ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
+    "count_invalid": "ਅਮਾਨਤ ਗਿਣਤੀ। ਇੱਕ ਨੰਬਰ ਜਾਂ 'all' ਦੀ ਵਰਤੋਂ ਕਰੋ",
+    "unknown_command": "ਅਣਜਾਣ ਕਮਾਂਡ '{cmd}'. 'draw', 'move <source> <destination> [count]', ਜਾਂ 'forfeit' ਦੀ ਵਰਤੋਂ ਕਰੋ",
+    "wrapped": "ਕਾਰਵਾਈ {n}: {msg}"
+  },
+  "action_result": {
+    "success": "ਕਾਰਵਾਈ {n}: {msg}",
+    "before_failure": "ਅਸਫਲਤਾ ਤੋਂ ਪਹਿਲਾਂ ਕੀਤੀ ਗਈ {n} ਕਾਰਵਾਈ।",
+    "failed": "ਕਾਰਵਾਈ {n} ਅਸਫਲ: {msg}"
+  },
+  "move_result": {
+    "drew": "ਸਟਾਕ ਤੋਂ ਕੂੜੇਦਾਨ ਤੱਕ ਡ੍ਰਾਅ ਕਾਰਡ।",
+    "cannot_draw": "ਡਰਾਅ ਨਹੀਂ ਕਰ ਸਕਦੇ। ਸਟਾਕ ਅਤੇ ਕੂੜਾ ਦੋਵੇਂ ਖਾਲੀ ਹਨ।",
+    "invalid_pile": "ਅਵੈਧ ਪਾਈਲ ਨਾਮ. W, F1-F4, ਜਾਂ T1-T7 ਵਰਤੋ",
+    "foundation_one_card": "ਸਿਰਫ 1 ਕਾਰਡ ਨੂੰ ਫਾਊਂਡੇਸ਼ਨ ਵਿੱਚ ਭੇਜ ਸਕਦਾ ਹੈ",
+    "waste_to_foundation_ok": "ਕਾਰਡ ਨੂੰ ਕੂੜੇ ਤੋਂ ਫਾਊਂਡੇਸ਼ਨ ਵਿੱਚ ਲਿਜਾਇਆ ਗਿਆ F{dst}",
+    "waste_to_foundation_bad": "ਕਾਰਡ ਨੂੰ ਫਾਊਂਡੇਸ਼ਨ ਦੇ ਢੇਰ ਵਿੱਚ ਨਹੀਂ ਲਿਜਾਇਆ ਜਾ ਸਕਦਾ",
+    "tableau_to_foundation_ok": "ਟੇਬਲ ਟ{src} ਤੋਂ ਫਾਊਂਡੇਸ਼ਨ F{dst} ਤੱਕ ਕਾਰਡ ਭੇਜਿਆ ਗਿਆ",
+    "tableau_to_foundation_bad": "ਫਾਊਂਡੇਸ਼ਨ ਸਟੈਕ 'ਤੇ ਟੇਬਲ ਕਾਰਡ ਨਹੀਂ ਭੇਜਿਆ ਜਾ ਸਕਦਾ",
+    "foundation_to_foundation": "ਬੁਨਿਆਦ ਤੋਂ ਬੁਨਿਆਦ ਤੱਕ ਨਹੀਂ ਜਾ ਸਕਦਾ",
+    "waste_to_tableau_one_card": "ਸਿਰਫ 1 ਕਾਰਡ ਨੂੰ ਕੂੜੇ ਤੋਂ ਟੇਬਲ ਵਿੱਚ ਭੇਜ ਸਕਦਾ ਹੈ",
+    "waste_to_tableau_ok": "ਕਾਰਡ ਨੂੰ ਕੂੜੇ ਤੋਂ ਟੇਬਲ ਟ{dst} ਵਿੱਚ ਭੇਜਿਆ ਗਿਆ",
+    "waste_to_tableau_bad": "ਇਸ ਟੇਬਲੂ ਸਟੈਕ 'ਤੇ ਰੱਦੀ ਕਾਰਡ ਨਹੀਂ ਰੱਖ ਸਕਦਾ",
+    "no_face_up": "ਕੋਈ ਵੀ ਕਾਰਡ ਨਹੀਂ ਜੋ ਚਾਲੂ ਕਰਨ ਲਈ ਹੈ",
+    "tableau_to_tableau_ok": "ਟੇਬਲ T{src} ਤੋਂ T{dst} ਵਿੱਚ ਚਲੇ ਗਏ {count} ਕਾਰਡ",
+    "tableau_to_tableau_bad": "{count} ਕਾਰਡ ਨੂੰ T{src} ਤੋਂ T{dst} ਤੱਕ ਨਹੀਂ ਭੇਜਿਆ ਜਾ ਸਕਦਾ",
+    "foundation_to_tableau_one_card": "ਸਿਰਫ 1 ਕਾਰਡ ਨੂੰ ਫਾਊਂਡੇਸ਼ਨ ਤੋਂ ਟੇਬਲ ਵਿੱਚ ਭੇਜ ਸਕਦਾ ਹੈ",
+    "foundation_empty": "ਫਾਊਂਡੇਸ਼ਨ F{src} ਖਾਲੀ ਹੈ",
+    "foundation_to_tableau_ok": "ਫਾਊਂਡੇਸ਼ਨ F{src} ਤੋਂ ਟੇਬਲ ਟ{dst} ਤੱਕ ਕਾਰਡ ਭੇਜਿਆ ਗਿਆ",
+    "foundation_to_tableau_bad": "ਫਾਊਂਡੇਸ਼ਨ ਕਾਰਡ ਨੂੰ ਟੇਬਲ ਟ{dst} ਉੱਤੇ ਨਹੀਂ ਰੱਖ ਸਕਦਾ",
+    "to_waste_or_stock": "ਕੂੜੇ ਜਾਂ ਸਟਾਕ ਵਿੱਚ ਨਹੀਂ ਭੇਜਿਆ ਜਾ ਸਕਦਾ"
+  },
+  "outcome": {
+    "forfeit": "ਗੇਮ ਛੱਡ ਦਿੱਤੀ ਗਈ। ਅੰਤਿਮ ਸਕੋਰ: {score} ਕਾਰਡ ਫਾਊਂਡੇਸ਼ਨ ਵਿੱਚ।",
+    "won": "ਵਧਾਈਆਂ! ਤੁਸੀਂ ਕਲੌਂਡਾਈਕ ਸੋਲਟੇਅਰ ਜਿੱਤ ਲਿਆ ਹੈ!",
+    "turn_limit": "ਗੇਮ ਆਵਰ! ਤੁਸੀਂ ਵੱਧ ਤੋਂ ਵੱਧ {max_turns} ਵਾਰੀ ਤੱਕ ਪਹੁੰਚ ਗਏ ਹੋ. ਸਕੋਰਃ {score} ਫਾਊਂਡੇਸ਼ਨ ਵਿੱਚ ਕਾਰਡ."
+  },
+  "board": {
+    "title": "=== ਕਲੋਂਡਾਇਕ ਸੋਲੀਟੇਅਰ ===",
+    "turn": "ਵਾਰੀਃ {turn}/{max_turns}",
+    "stock": "ਸਟਾਕਃ {stock} ਕਾਰਡ",
+    "waste": "ਕੂੜਾ (W): {waste}",
+    "foundations_header": "ਬੁਨਿਆਦਃ",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "ਸਾਰਣੀ:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

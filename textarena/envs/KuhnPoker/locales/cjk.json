@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Wena ule Muthandeni {player_id} mu muthandeni wa Kuhn Poker wa mizungu {max_rounds}.\nMilao ya Muthandeni:\n- Kuhn Poker ikutisa kadi 3 za J, Q, K (J ndiyo ya kwanza, K ndiyo ya mwisho)\n- Kila muthandeni ataya {ante} chip na kupokea kadi 1 kila mzungu (kumbuka kwamba kadi zinagawanywa bila kubadilishwa, kwa hivyo huwezi kuwa na kadi sawa na mpinzani wako).\n- Muthandeni uendelee kwa mizungu {max_rounds}\n- Muthandeni aliye na chipi nyingi zaidi baada ya mizungu yote akashinda\nMilao ya Vitendo:\n- '[check]': Pita bila kubeti (tu kama hakuna beti kwenye jedwali)\n- '[bet]': Ongeza chip 1 kwenye poti (tu kama hakuna beti kwenye jedwali)\n- '[call]': Linganisha beti ya mpinzani kwa kuongeza chip 1 kwenye poti\n- '[fold]': Achilia mkono wako na acha mpinzani wako akashinde poti"
+  },
+  "init_round": {
+    "round_start": "### Kuanza mzunguko {current_round} kati ya {max_rounds} mizungu. Kadi yako ni: '{player_card}'",
+    "available_actions": "Matendo yako yanayopatikana ni: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hatua lazima iwe [Check], [Bet], [Call], au [Fold].",
+    "not_legal": "Hatua lazima iwe {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, alituma hatua: '[{move}]'.",
+    "valid_actions": "Matendo yako yanayopatikana ni: {legal_actions}.",
+    "round_summary": "{reason} Vikwiza vya sasa: Mchezaji 0: '{player_0_chips}'; Mchezaji 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Kukabiliana: Kadi ya Mchezaji {winner} {winner_card} inashinda kadi ya Mchezaji {loser} {loser_card}. Mchezaji {winner} anashinda kiasi cha {pot_value} vikwiza."
+  },
+  "outcome": {
+    "draw": "Mwishoni mwa {max_rounds} mizungu, wachezaji wote wawili walikuwa na idadi sawa ya chips.",
+    "round_win": "Player {player_id} amejikunja.",
+    "winner_player0": "Player 0 alishinda kwa kuwa na chips nyingi zaidi mwishoni mwa mizungu yote {max_rounds}.",
+    "winner_player1": "Player 1 alishinda kwa kuwa na chips nyingi zaidi mwishoni mwa mizungu yote {max_rounds}."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "Lelu o jipondo ja beta-o-kota: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ki bhuala kijimbuete kia tokala phala o ima íii. Mu kiki, soneka \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Mubadi {player_id}, Kukwata kubeba. Koluna {col} iko nje ya mipaka.",
+    "out_of_range": "O kaxa ia kijimbuete {pile_index} iala ku thandu dia dikalu.",
+    "non_positive": "Ua tokala kukatula-mu kima kimoxi.",
+    "exceeds_pile": "Kapena kuondoa {quantity} kwa kisika {pile_index} (kisika {pile_count} pe)."
+  },
+  "observation": {
+    "removed_from_piles": "Mubadi {player_id} akubeba [{pile_index} {quantity}], kuondoa {quantity} kisika (s) kwa kisika {pile_index}."
+  },
+  "outcome": {
+    "win": "O muadikime {player_id} u katula o kima kia suku-ku ((s)!)"
+  }
+}

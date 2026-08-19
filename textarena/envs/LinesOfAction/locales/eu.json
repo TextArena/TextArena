@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Zu zara Jokalaria {player_id} LinesOfAction jokoan.\nZure piezak '{side}' dira, aurkariaren piezak '{other}' dira.\nMugimenduaren formatua: `[b1b3]` (hasierako koordenatua helmugako koordenatura). Mugimendu legalak horizontalki, bertikalki edo diagonalki egiten dira, lerroan dauden pieza guztien (edozein kolore) kopuruaren arabera. Zure piezak salto egin dezakezu, baina ez aurkariaren piezak; aurkariaren gainean lurreratzeak harrapatzen du. Irabazi orduan zure pieza guztiak 8 auzokide konektatuta daudenean."
+  },
+  "board": {
+    "current_board": "Taula:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatua e2e4 izan behar da (koordenatuetatik, koordenatuetara).",
+    "no_piece": "Ez {side} pieza bat {coord}-n.",
+    "identical": "Hasiera eta helmuga berdinak dira.",
+    "not_straight_or_diagonal": "Mugimenduak zuzenak edo diagonalak izan behar du.",
+    "wrong_distance": "Mugitu behar da ilarako piezen kopuruaren distantzia berdina.",
+    "enemy_blocks": "Etsaiaren pieza bat da, bidea mozten.",
+    "destination_own": "Helmuga zure pieza batek okupatzen du."
+  },
+  "game_action": {
+    "moved": "Jokalariak {player_id} mugitu zuen {from} -> {to}",
+    "captured_suffix": "Jokalariak {player_id} mugitu zuen {from} -> {to} etsai bat harrapatzen."
+  },
+  "outcome": {
+    "win": "Pieza guztiak elkartzen ditu.",
+    "draw_no_capture": "60 mugimenduk ez dute ezer harrapatu.",
+    "draw_repetition": "Jarri hiru aldiz."
+  }
+}

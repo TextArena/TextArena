@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in Quantum Tic Tac Toe.\nUw symbool is '{symbol}', en uw zetnummers zijn altijd {parity} (bijv. X1, X3 of O2, O4).\n\nDoel: Win door een lijn van drie klassieke markeringen te vormen (gevormd uit superposities).\n\nHoe te spelen:\n- Op elke beurt plaatst u een spookachtige markering in twee verschillende lege vierkanten met behulp van het formaat '[a,b]'.\n- Deze markeringen zijn verstrengeld en gelabeld als 'X1 / X1' of 'O4 / O4'.\n- U kunt geen spookachtige markeringen plaatsen in een vierkant dat al is ingestort (gevormd).\n\nInstortingsregel:\n- Als uw zet een cyclus creëert in de verstrengelingsgraaf, stort deze automatisch in.\n- Elke spookachtige markering in de cyclus verandert in een klassieke markering in een van de twee posities.\n- Eventuele afhankelijke spookachtige markeringen storten ook in.\n\nOverwinning:\n- Het spel eindigt wanneer een speler drie klassieke markeringen op een rij heeft.\n- Als beide spelers een lijn krijgen tijdens dezelfde instorting, wint de speler met het laagste maximale zetnummer.\n\nVoorbeeldzet: '[0,4]' plaatst een spookachtige markering in cellen 0 en 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Bord:\n\n{board}\n\nDien uw zet in als '[a,b]' om een kwantummarkering in twee locaties te plaatsen."
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldig formaat. Gebruik '[a,b]'.",
+    "invalid_cells": "Ongeldige of dubbele celindices.",
+    "already_solidified": "Een van de cellen is al gevormd."
+  },
+  "game_action": {
+    "placed": "Speler {player_id} plaatste hun symbool in een superpositie tussen cellen {pos_a} en {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Afhankelijke superpositie opgelost. Cel ({r}, {c}) is nu {symbol}.",
+    "last_cell_resolved": "Superpositie voor laatste cel opgelost. Cel ({r}, {c}) is nu {symbol}.",
+    "superposition_resolved": "Superpositie opgelost. Cel ({r}, {c}) is nu {symbol}."
+  },
+  "outcome": {
+    "win": "Speler {player_id} wint met gevormde markeringen!",
+    "draw": "Het spel is gelijk!"
+  }
+}

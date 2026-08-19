@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id}. Stai giocando al Memory Game.\nIl tuo obiettivo è trovare più coppie di carte sulla tavola rispetto al tuo avversario.\nNel tuo turno, seleziona due carte da girare inserendo i numeri di riga e colonna della prima e della seconda carta, rispettivamente, come '[0 1 1 0]', dove la prima carta si trova nella riga 0 e nella colonna 1, e la seconda carta si trova nella riga 1 e nella colonna 0.\nSe le due carte corrispondono, ottieni un punto e le carte rimangono scoperte. Se non corrispondono, le carte vengono girate nuovamente a faccia in giù, ad esempio '.'.\nIl gioco termina quando tutte le coppie sono state trovate."
+  },
+  "board": {
+    "current_board": "Tavola attuale:\n{board}",
+    "current_game_board": "Tavola di gioco attuale:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato di mossa non valido. Il Giocatore {player_id} non ha risposto con una direzione valida tra parentesi quadre.",
+    "out_of_bounds": "Mossa non valida. Il Giocatore {player_id} ha selezionato una posizione fuori dai limiti.",
+    "same_card_twice": "Mossa non valida. Il Giocatore {player_id} ha selezionato la stessa carta due volte.",
+    "already_matched": "Mossa non valida. Il Giocatore {player_id} ha selezionato una o entrambe le carte che sono già state abbinate."
+  },
+  "game_message": {
+    "cards_match": "Le carte selezionate dal Giocatore {player_id} nelle posizioni [{r1} {c1}] e [{r2} {c2}] corrispondono!",
+    "cards_no_match": "Le carte selezionate dal Giocatore {player_id} non corrispondono. Le carte nelle posizioni [{r1} {c1}] e [{r2} {c2}] sono {pos1} e {pos2} rispettivamente."
+  },
+  "outcome": {
+    "draw": "Entrambi i giocatori hanno trovato lo stesso numero di coppie di carte.",
+    "win": "Il Giocatore {winner_id} ha vinto!",
+    "turn_limit": "È stato raggiunto il limite di turni. Il gioco è terminato. Il Giocatore 0 ha segnato {score_0} punti, il Giocatore 1 ha segnato {score_1} punti.",
+    "turn_limit_win": "{reason} Il Giocatore {winner_id} ha vinto!"
+  }
+}

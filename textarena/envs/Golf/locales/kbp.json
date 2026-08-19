@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "A kɛɛɖɛ Golf (Kɔɔri Kɛɛɖɛ) - Kɛɛ {player_id}.\nKɛɛɖɛ: Kɛɛ kɛɛɖɛɛ kɛɛ kɛɛɖɛɛ tɛɛ kɛɛɖɛɛ. Kɛɛɖɛ kɛɛ kɛɛɖɛɛ kɛɛ kɛɛɖɛɛ tɛɛ kɛɛɖɛɛ, kɛɛ kɛɛɖɛɛ kɛɛ kɛɛɖɛɛ tɛɛ 0.\nKɔɔri Kɛɛɖɛ: A=1, 2-10=kɛɛɖɛɛ kɛɛɖɛɛ, J/Q=10, K=0\n\nKɛɛɖɛɛ (lɛzɩɩ kɛɛɖɛɛ):\n- '[draw]' - Labɩɩɩ tɛɛ kɔɔri\n- '[take]' - Labɩɩɩ tɛɛ labɩɩɩ tɛɛ\n- '[swap X Y]' - Lɛzɩɩ kɔɔri kɛɛ kɔɔri X (ligi) Y (kɩkɩŋ)\n- '[discard]' - Taasɩɩ kɔɔri kɛɛ"
+  },
+  "board": {
+    "drew": "Wezuu: {card}\nIyi, ɛyʊ kɔɔ kɩɖɛzɩŋga [swap X Y] ɛlɛ ɛtɩŋa ɖɔɖɔ [discard]",
+    "took": "A labɩɩɩ: {card} labɩɩɩ tɛɛ\nA kɔɔrɩɩ [swap X Y] kɛɛ kɔɔri (taasɩɩ kɛɛ).",
+    "peeked": "Weleŋa taa ({row},{col}): {card}",
+    "turn_view": "Kɩlaŋmɛ kɩlaŋmɛ:\n{hand}\nKɩlaŋmɛ kɩlaŋmɛ kɩlaŋmɛ: {discard}\n{options}",
+    "none": "Pa-taa nɔɔyʋ fɛyɩ."
+  },
+  "options": {
+    "final_turns": "Kɩɖɛzɩŋga ŋga kɛɛ! Kɩɖɛzɩŋga ŋga kɛɛ: [draw], [take], [peek X Y]",
+    "draw": "Kɩɖɛzɩŋga ŋga kɛɛ: [draw], [take]",
+    "must_swap": "Pɩwɛɛ se: [swap X Y] (pɩfɛyɩ ɖeu se ŋyele wondu ndʋ tɩ-taa paɖʋʋ yɔ)",
+    "swap_or_discard": "Iyi, ɛyʊ kɔɔ kɩɖɛzɩŋga: [swap X Y] ɛlɛ ɛtɩŋa [discard]"
+  },
+  "hand": {
+    "no_cards": "Kaarɩdɩwaa fɛyɩ.",
+    "header": "Ñɩɣyʋʋ: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Kɩlaŋmɛ {pid} kɩlaŋmɛ {new} kɩlaŋmɛ {old} kɩlaŋmɛ kɩlaŋmɛ ({row},{col})",
+    "discarded": "Kɩlaŋmɛ {pid} kɩlaŋmɛ kɩlaŋmɛ {card}"
+  },
+  "message": {
+    "deck_empty": "Kaɖaɣ fɛyɩ, aleɣya tɛma kpaagbaa.",
+    "knocked": "Aleɣya {pid} taa weyi ɛ-taa wɛ kɩmaŋ yɔ, paa anɩ lɛ ɛwɛna waɖɛ se ɛla lɛɛɖɛ.",
+    "final_round": "Kɩlaŋmɛ {pid} {reason}! Kɩlaŋmɛ kɩlaŋmɛ kɩlaŋmɛ kɩlaŋmɛ kɩlaŋmɛ kɩlaŋmɛ."
+  },
+  "reason": {
+    "all_revealed": "kaa naŋ kɔɔri yɔɔ"
+  },
+  "invalid": {
+    "wrong_action": "Kpɛlɛɛ kɩlaŋmɛ kɩlaŋmɛ kɩlaŋmɛ: [draw], [take], [swap X Y], [discard], [knock], ɖɔɖɔ [peek X Y]",
+    "discard_empty": "Kʋñɔŋ ŋgʋ kɩ-taa paawɛɛ yɔ, kɩɩtalɩɣ!",
+    "must_draw_first": "Kɩlaŋmɛ kɩlaŋmɛ kɩlaŋmɛ [draw], [take], [knock], ɖɔɖɔ [peek X Y]",
+    "cannot_discard_taken": "A taasɩɩ kɛɛ kɔɔri kɛɛ labɩɩɩ tɛɛ. A kɔɔrɩɩ lɛzɩɩ.",
+    "have_drawn_card": "Kɩlaŋmɛ kɩlaŋmɛ kɩlaŋmɛ kɩlaŋmɛ. Kɩlaŋmɛ [swap X Y] ɖɔɖɔ [discard] kɩlaŋmɛ.",
+    "need_drawn_swap": "Pɩpɔzʋʋ se ŋla ɖʋtʋ nɛ ña-maɣmaɣ ŋkpaɣ.",
+    "need_drawn_discard": "Pɩpɔzʋʋ se ŋlɩzɩ takayaɣ nakɛyɛ nɛ ŋkpaɣ-kɛ.",
+    "out_of_bounds": "Ɖɔɖɛɛ ɛjaɖɛ kɛ kɛdɛŋ. Lɛɛtɛ ɛjaɖɛ wɛɛ 1-{max_row}, kɔlɔm 1-{max_col}",
+    "knock_with_card": "A taasɩɩ kɛɛ kɔɔri kɛɛ labɩɩɩ tɛɛ. Kɔɔrɩɩ a tɛɛ kɛɛ.",
+    "already_knocked": "Nɔɔyʋ tɛm labʋ you ŋgʋ.",
+    "already_revealed": "Pɔkɔm nɛ patɩlɩ mbʋ pɩ-tɔm pɔyɔɔdʋʋ yɔ!"
+  },
+  "summary": {
+    "full": "Kɩlaŋmɛ kɩlaŋmɛ! Kɩlaŋmɛ {winner} kɩlaŋmɛ kɩlaŋmɛ kɩlaŋmɛ {score} kɩlaŋmɛ!\n\nKɩlaŋmɛ kɩlaŋmɛ kɩlaŋmɛ:\n{scores}",
+    "line": "Kɩlaŋmɛ {pid}: {score} kɩlaŋmɛ\n"
+  },
+  "board_str": {
+    "title": "=== GOLF PƖ-TƆM KPAƔLƲ=== Ñɔɔzɩtʋ:",
+    "discard": "Pɩtɛ wondu: {card}",
+    "knocked": "Aleɣya laɖʋ {pid} tɔlɩ!",
+    "player_header": "Kɩlaŋmɛ {pid} (Kɩlaŋmɛ: {score}):"
+  }
+}

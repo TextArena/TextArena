@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Udlala umdlalo weKlondike Solitaire. Injongo yakho kukususa zonke ikhadi ukuyisa kwikhadi zesiseko.\n\nImithetho yeMdlalo:\n- Ikhadi zesiseko (F1-F4): Yakha ukusuka kwiAce ukuya kwiKing ngokwesuti\n- Ikhadi zetafula (T1-T7): Yakha ukusuka phezulu ukuya phantsi ngokwembala ehlukanayo (ebomvu phezu kwesikhundla esikhundla phezu kwesikhundla ebomvu)\n- Isitokisi: Thatha ikhadi ukuyisa kwikhadi ezikhundleni\n- Ikhadi ezikhundleni (W): Ikhadi eliphezulu elikhoyo ukudlala\n\nImiyalelo:\n- 'draw' - Thatha ikhadi esitokisini ukuyisa kwikhadi ezikhundleni\n- 'move <source> <destination> [count]' - Susa ikhadi phakathi kwekhadi\n  Iminzeko: 'move W T1', 'move T1 F2', 'move T3 T5 2'. isibalo sinaweza naku 'all', esizama ukususa zonke ikhadi eziphakanyisiweyo.\n- 'forfeit' - Qeda umdlalo ngokukhawuleza ukulocka iskoru yakho yamanje\n- Amagama ekhadi: W (ikhadi ezikhundleni), F1-F4 (ikhadi zesiseko), T1-T7 (ikhadi zetafula)\n\nUngakwazi ukwenza izenzo ezininzi ngexesha elinye ngokuzihambanisa ngokwethutyana:\n  Umzeko: 'draw, move W T1, move T2 F1'\n\nIzikhothane kuphela ezinaweza ukubekwa phezu kwekhadi zetafula ezikhaliweyo.\nIzenzo zikwenziwa ngokulandelelana - ukuba eyodwa iqhube, izenzo ezisele zisatyhiniwe.\nSebenzisa 'forfeit' ukuba ukholelwa ukuba umdlalo awunakwenziwa ukunqoba."
+  },
+  "format_error": {
+    "no_brackets": "Ifomathi yesenzo engavumelekanga. Isenzo kufuneka sibe phakathi kweekhonkco.",
+    "no_closing_bracket": "Ifomathi yesenzo engavumelekanga. Ukungabikho kwesibiyeli sokuvala ']'",
+    "empty_command": "Ingxelo ithe vetsiwe. Tika 'draw' okanye 'move <source> <destination> [count]'",
+    "empty_action": "Intshukumo engenanto",
+    "move_needs_args": "Umyalelo wokuhambisa ufuna umthombo kunye nendawo ekuyiwa kuyo. Ukusetyenziswa: 'move <source> <destination> [count]'",
+    "count_positive": "I-Count inaweza ukuba chaphaza okanye 'all'",
+    "count_invalid": "I-Count ayifanelanga. Sebenzisa inombolo okanye 'all'",
+    "unknown_command": "Komanda isiyojulikana '{cmd}'. Tumia 'draw', 'move <source> <destination> [count]', or 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Izenzo ezenziweyo {n} ngaphambi kokungaphumeleli.",
+    "failed": "Action {n} imiphile: {msg}"
+  },
+  "move_result": {
+    "drew": "I-Drew card ((s) ukusuka kwisitokhwe ukuya kwilahleko.",
+    "cannot_draw": "Ayikwazi ukutsala. Zombini isitokhwe nenkunkuma zingenanto.",
+    "invalid_pile": "Igama lomqulu elingalunganga. Sebenzisa uW, F1-F4, okanye T1-T7",
+    "foundation_one_card": "Unokuhambisa ikhadi elinye kuphela kwisiseko.",
+    "waste_to_foundation_ok": "Ikhadi elifakwe kwiinkunkuma ukuya kwisiseko F{dst}",
+    "waste_to_foundation_bad": "Ayikwazi ukuhambisa ikhadi elilahliweyo kwelo qela lesiseko",
+    "tableau_to_foundation_ok": "Kwahamishwa ikadi ukusuka kwitabulo T{src} ukuya kwisiseko F{dst}",
+    "tableau_to_foundation_bad": "Ayikwazi ukuhambisa ikhadi le-tableau kwisitya sesiseko",
+    "foundation_to_foundation": "Ayikwazi ukufuduka ukusuka kwisiseko ukuya kwesinye isiseko",
+    "waste_to_tableau_one_card": "Inokuhambisa ikhadi elinye kuphela ukusuka kwi-waste ukuya kwitheyibhile",
+    "waste_to_tableau_ok": "Kwahamishwa ikadi ukusuka kwisibala ukuya kwi-tabulo T{dst}",
+    "waste_to_tableau_bad": "Ayikwazi ukubeka ikhadi elilahliweyo kwintaba yetabhulele",
+    "no_face_up": "Akukho makhadi ajongelwe phezulu ekufuneka ahambe nawo .",
+    "tableau_to_tableau_ok": "Kwahamishwa {count} kadi(s) ukusuka kwitabulo T{src} ukuya kwiT{dst}",
+    "tableau_to_tableau_bad": "Haiwezi kuhamisha {count} karti(s) kutoka T{src} hadi T{dst}",
+    "foundation_to_tableau_one_card": "Inokuhambisa ikhadi elinye kuphela ukusuka kwisiseko ukuya kwi-tableau",
+    "foundation_empty": "Isiseko F{src} asinanto.",
+    "foundation_to_tableau_ok": "Kwahamishwa ikadi ukusuka kwisiseko F{src} ukuya kwi-tabulo T{dst}",
+    "foundation_to_tableau_bad": "Ayikwazi ukubeka ikhadi lesiseko kwitheyibhile T{dst}",
+    "to_waste_or_stock": "Ayikwazi ukuhanjiswa kwilahleko okanye isitokhwe"
+  },
+  "outcome": {
+    "forfeit": "Umdlalo uphelisiwe. Amanqaku okugqibela: {score} amakhadi kwiziseko.",
+    "won": "Ndiyakuvuyisana, uphumelele iKlondike Solitaire!",
+    "turn_limit": "Mchezo umemaliza! Umeifikia kiwango cha juu cha {max_turns} mizunguko. Alama: {score} karti kwenye foundation."
+  },
+  "board": {
+    "title": "=== I-KLONDIKE SOLITAIRE=== (Umdlali weqonga lomdlalo)",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Iphepha eliqhelekileyo: {stock} amakhadi",
+    "waste": "Inkunkuma (W): {waste}",
+    "foundations_header": "Iziseko:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Umzobo:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

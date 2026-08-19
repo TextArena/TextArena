@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í Nim.\nMarkmið þitt er að taka síðasta eftirstandandi hlut.\nÁ hverri rönd skalt þú velja nákvæmlega einn haug og fjarlægja einn eða fleiri hluti úr honum.\nNotaðu sniðið '[haug fjöldi]', þar sem haug er haugnúmer og fjöldi er fjöldi hluta sem á að fjarlægja.\nTil dæmis, '[0 3]' fjarlægir 3 hluti úr haug 0."
+  },
+  "state": {
+    "current_pile": "Núverandi Haugur:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Engin gilt snið fyrir leik fannst. Notaðu '[haug fjöldi]'.",
+    "correct_format_wrong_fields": "Leikmaður {player_id}, Ógilt aðgerð. Dálkur {col} er utan marka.",
+    "out_of_range": "Haugnúmer {pile_index} er utan marka.",
+    "non_positive": "Verður að fjarlægja að minnsta kosti 1 hlut.",
+    "exceeds_pile": "Getur ekki fjarlægt {quantity} úr haug {pile_index} (aðeins {pile_count} eftir)."
+  },
+  "observation": {
+    "removed_from_piles": "Leikmaður {player_id} spilaði [{pile_index} {quantity}], fjarlægjandi {quantity} hlut(a) úr haug {pile_index}."
+  },
+  "outcome": {
+    "win": "Leikmaður {player_id} tók síðasta hlut(a)!"
+  }
+}

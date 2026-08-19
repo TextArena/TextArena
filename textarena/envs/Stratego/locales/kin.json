@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Uwawe ni umukino {player_id} mu mukino wa Stratego.\nLengo lyawe ni kugenzura ifarasi ry'umukino wawe cyangwa kubeshya imyitozo yose iri kugenzwa.\nIngano yawe imewekwa kwa wewe kwenye bord, ikijumlisha ifarasi ryawe, bombi, na imyitozo mingine ya amarangi tofauti.\n\n### Ibimenyetso by'umukino\n1. **Ibimenyetso byo kugenzura:**\n   - Mu gihe cyawe, uwawe unashobora kugenzura ikiyitozo kimoja kwa hatua moja hadi kwenye umurongo wa karibu (juju, kabiri, gushize, cyangwa kumanuka) ukoreshwa na imyitozo yawe.\n   - Ifarasi rinashobora kugenzura kuva A1 hadi B1 au A1 hadi A2 ikiwa B1 na A2 zimejwe na imyitozo yawe.\n   - Ikiwa ikiyitozo cyahitwe ni bombi cyangwa ifarasi, si shyobora kugenzurwa.\n2. **Intambara:**\n   - Ikiwa uwawe ukagende kwenye umurongo wa karibu ukoreshwa na umukino wawe, intambara izabera:\n     - Ikiyitozo cyo hejuru cy'amarangi cyawusha na kubeshya ikiyitozo cy'umukino wawe.\n     - Ikiwa amarangi ni sawa, imyitozo yose iri kugenzwa irashwa.\n     - **Imibereho mikuru:**\n       - Bombi zibeshya imyitozo yose ishobora kuzigenzura isiva abungeri, bafite ubushobozi bwo kugenzura bombi.\n       - Abaspyi bashobora kubeshya umarishali ikiwa abaspyi bazageza kwanjye beshya kwa bombi zingine zose.\n3. **Lengo za kimyitwaro:**\n   - Kumenya imyitozo y'umukino wawe kwa kuzigenzura na kuzibeshya.\n   - Kuvirinda ifarasi ryawe wakati ukigenga kugenzura ifarasi ry'umukino wawe.\n   - Kutumia abascouti kwa kimyitwaro kumenya imyitozo y'umukino wawe na kuzibeshya zidoshwe.\n\n### Uko uwawe ukagende:\n1. Shyiramo koordinati za ikiyitozo uwawe ukagende na ahantu cyageze.\n2. Tumia ifomati: [A0 B0], A0 ni ahantu cy'ikiyitozo, B0 ni ahantu cyageze.\n   - Ifarasi rinashobora kugenzura kuva safu ya 0, koroni 0 hadi safu ya 1, koroni 0, uwawe usome [A0 B0].\n3. Hanga uhakika ahantu cyageze ni sahili kwa ibimenyetso byo kugenzura.\n\n### Ibimenyetso bikuru:\n- Bord izobika imyitozo yawe na ahantu zayo, k.b. MN, MS.\n- Bord kizobika nayo ahantu z'umukino wawe zimejwe bivuze amarangi, k.b. ?.\n- Gridi zilimo ~ ni mazi na zishobora kugenzurwa.\n- Kama ngamba, tanza umukino wawe kwa kugenzura imyitozo yawe yari kwenye mupaka wa mbere kumenya imyitozo y'umukino wawe. Umukino 0 na umukino 1 wari kwenye mupaka wa mbere ni safu D na G mtawaliwa.\n\nHapa kuna hali ya bord yakuze:\n"
+  },
+  "board": {
+    "current_board": "Bord yakuze:\n\n{board}\nImyitozo iri kugenzwa: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Imyitozo idafite agaciro. Umukinnyi {player_id} ntabwo yinjije ingendo muburyo bwa [A0 B0] .",
+    "invalid_coordinates": "Imiterere y'ibikorwa idakwiriye. Umukinnyi {player_id} ntabwo yinjije ubufatanye bukwiye.",
+    "not_own_piece": "Imyitozo idakwiriye. Umukinnyi {player_id} agomba kwimura kimwe mu bice bye bwite.",
+    "scout_through_pieces": "Imyitozo idakwiriye. Umukinnyi {player_id} ntashobora kwimura umuskuti mu bindi bice.",
+    "scout_diagonal": "Imyitozo idakwiriye. Umukinnyi {player_id} ntashobora kwimura umuskuti muburyo bw'iburyo.",
+    "non_scout_multi_square": "Imyitozo idakwiriye. Ibice, uretse abasora, birashobora kwimuka ahantu hamwe gusa icyarimwe.",
+    "move_into_lake": "Imyitozo idakwiriye. Umukinnyi {player_id} ntashobora kujya mu kiyaga.",
+    "move_onto_own_piece": "Imyitozo idakwiriye. Umukinnyi {player_id} ntashobora kujya ku gikoresho cye bwite.",
+    "move_bomb_or_flag": "Imikino idakwiriye. Umukinnyi {player_id} ntashobora kwimura bombe cyangwa ibendera."
+  },
+  "game_action": {
+    "you_moved": "Uwaje umukino wawe ukagende ku {source} hadi {dest}.",
+    "opponent_moved": "Umukinnyi {player_id} yimutse agace kuva ku {source} kugera kuri {dest}.",
+    "you_equal_ranks": "Uwaje umukino wawe ukagende ku {source} hadi {dest}. Ikiyitozo cyaraje cyari {attacking_rank} na ikiyitozo cyageze cyari {target_rank}. Kuko amarangi ni sawa, imyitozo yose yari yinshiwe.",
+    "opponent_equal_ranks": "Umukino {player_id} araje kandi akagende ku {source} hadi {dest}. Ikiyitozo cyaraje cyari {attacking_rank} na ikiyitozo cyageze cyari {target_rank}. Kuko amarangi ni sawa, imyitozo yose yari yinshiwe.",
+    "you_miner_defused": "Uwaje umukino wawe ukagende ku {source} hadi {dest}. Ikiyitozo cyaraje cyari {attacking_rank} na ikiyitozo cyageze cyari {target_rank}. Kuko abungeri bafite ubushobozi bwo kugenzura bombi, uwanye intambara.",
+    "opponent_miner_defused": "Umukinnyi {player_id} yahamishije igipande kuva {source} yerekeza {dest}. Igipande gishambuye cyari {attacking_rank} na igipande cyo kuhagarikwa cyari {target_rank}. Kuko abahimbira bafite ubushobozi bwo kurenganisha imipira, wabuze igitero.",
+    "you_bomb_lost": "Uwaje umukino wawe ukagende ku {source} hadi {dest}. Ikiyitozo cyaraje cyari {attacking_rank} na ikiyitozo cyageze cyari {target_rank}. Kuko ikiyitozo cyaraje si umwungeri, uwanye intambara.",
+    "opponent_bomb_won": "Umukino {player_id} araje kandi akagende ku {source} hadi {dest}. Ikiyitozo cyaraje cyari {attacking_rank} na ikiyitozo cyageze cyari {target_rank}. Kuko ikiyitozo cyaraje si umwungeri, uwanye intambara.",
+    "you_spy_won": "Uwaje umukino wawe ukagende ku {source} hadi {dest}. Ikiyitozo cyaraje cyari {attacking_rank} na ikiyitozo cyageze cyari {target_rank}. Kuko ikiyitozo cyaraje ni ispyi na ikiyitozo cyageze ni umarishali, uwanye intambara.",
+    "opponent_spy_lost": "Mugenzi {player_id} yahinduye igice kutoka {source} hadi {dest}. Igice kinini cya kigaye cyari {attacking_rank} na igice cya kujyamo cyari {target_rank}. Nk'uko umugaye ni iseserano na igice cya kujyamo ni marechal, watsinzwe intambara.",
+    "you_higher_won": "Uwaje umukino wawe ukagende ku {source} hadi {dest}. Ikiyitozo cyaraje cyari {attacking_rank} na ikiyitozo cyageze cyari {target_rank}. Kuko ikiyitozo cyaraje kiri hejuru ya ikirango cy'ikiyitozo cyageze, uwanye intambara.",
+    "opponent_higher_lost": "Mugenzi {player_id} yahinduye igice kutoka {source} hadi {dest}. Igice kinini cya kigaye cyari {attacking_rank} na igice cya kujyamo cyari {target_rank}. Nk'uko umugaye ni wa nguvu zirenga igice cya kujyamo, watsinzwe intambara.",
+    "you_lower_lost": "Uwaje umukino wawe ukagende ku {source} hadi {dest}. Ikiyitozo cyaraje cyari {attacking_rank} na ikiyitozo cyageze cyari {target_rank}. Kuko ikiyitozo cyaraje kiri hasi ya ikirango cy'ikiyitozo cyageze, uwanye intambara.",
+    "opponent_lower_won": "Umukinnyi {player_id} yahamishije igipande kuva {source} yerekeza {dest}. Igipande gishambuye cyari {attacking_rank} na igipande cyo kuhagarikwa cyari {target_rank}. Kuko umushambuzi afite ipete rya chini ugereranyije n’aho yahagaritse, watsinze igitero."
+  },
+  "outcome": {
+    "flag_captured": "Umukinnyi {player_id} yafashe ibendera ry'umwanzi!",
+    "no_movable_pieces": "Umukino {winner_id} uwanye! Umukino {loser_id} atavuga imyitozo iri kugenzwa."
+  }
+}

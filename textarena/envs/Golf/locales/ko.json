@@ -1,0 +1,79 @@
+{
+  "_comment": "골프(카드 게임) 지역화 파일. 키(왼쪽)는 번역하지 마세요. 값(오른쪽)만 번역하세요. 모든 {placeholder}는 그대로 유지하세요. 액션 토큰('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), 카드 라벨(A, 2-10, J, Q, K), 무늬 기호, 행/열 플레이스홀더(X/Y), 숫자 점수/위치는 번역하지 마세요. ASCII 그리드 레이아웃(간격, 열 번호, '?', 'Col', 'Row' 정렬)을 그대로 유지하여 보드가 읽을 수 있도록 하세요.",
+  "_slots": {
+    "{player_id}": "플레이어 번호, 예: 0 또는 1",
+    "{pid}": "플레이어 번호, 예: 0 또는 1",
+    "{winner}": "가장 낮은 점수를 가진 플레이어 번호",
+    "{score}": "숫자 점수 합계",
+    "{card}": "카드 라벨, 예: A♠, 10♥, K♦ 또는 Q♣",
+    "{new}": "그리드에 배치된 카드 라벨",
+    "{old}": "그리드에서 제거된 카드 라벨",
+    "{row}": "행 번호",
+    "{col}": "열 번호",
+    "{max_row}": "가장 큰 유효한 행 번호",
+    "{max_col}": "가장 큰 유효한 열 번호",
+    "{reason}": "최종 라운드가 시작된 이유를 설명하는 미리 렌더링된 문구",
+    "{n}": "그리드 행의 시작에 표시되는 행 번호",
+    "{cards}": "한 그리드 행의 미리 렌더링된, 레이아웃에 영향을 미치는 셀들",
+    "{hand}": "미리 렌더링된 플레이어 그리드 블록",
+    "{discard}": "버려진 카드 더미의 맨 위 카드 라벨, 또는 '없음'이라는 단어",
+    "{options}": "사용 가능한 액션을 나열한 미리 렌더링된 줄",
+    "{scores}": "플레이어별 최종 점수 목록"
+  },
+  "player_prompt": {
+    "intro": "골프(카드 게임)을 플레이하고 있습니다 - 플레이어 {player_id}.\n목표: 이 단일 라운드에서 가장 낮은 총점을 얻으세요. 열이 같은 값을 공유하면 0으로 합산됩니다.\n카드 값: A=1, 2-10=표면 값, J/Q=10, K=0\n\n액션(정확한 괄호 사용):\n- '[draw]' - 덱에서 카드를 뽑습니다.\n- '[take]' - 버려진 카드 더미에서 카드를 가져옵니다.\n- '[swap X Y]' - 뽑은 카드를 위치 X(행) Y(열)와 교환합니다.\n- '[discard]' - 뽑은 카드를 버립니다.\n"
+  },
+  "board": {
+    "drew": "당신이 뽑은 카드: {card}\n이제 [swap X Y] 또는 [discard]해야 합니다.",
+    "took": "당신이 버려진 카드 더미에서 가져온 카드: {card}\n이제 [swap X Y]해야 합니다(버릴 수 없습니다).",
+    "peeked": "당신이 위치 ({row},{col})를 확인했습니다: {card}",
+    "turn_view": "당신의 손:\n{hand}\n버려진 카드 더미: {discard}\n{options}",
+    "none": "없음"
+  },
+  "options": {
+    "final_turns": "최종 턴! 당신의 옵션: [draw], [take], [peek X Y]",
+    "draw": "당신의 옵션: [draw], [take]",
+    "must_swap": "당신은 [swap X Y]해야 합니다(버려진 카드 더미에서 가져온 카드는 버릴 수 없습니다).",
+    "swap_or_discard": "당신은 [swap X Y] 또는 [discard]해야 합니다."
+  },
+  "hand": {
+    "no_cards": "카드가 없습니다.",
+    "header": "  Col:   1    2    3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "플레이어 {pid}가 위치 ({row},{col})에서 {new}를 {old}와 교환했습니다.",
+    "discarded": "플레이어 {pid}가 {card}를 버렸습니다."
+  },
+  "message": {
+    "deck_empty": "덱이 비었습니다! 게임이 즉시 종료됩니다.",
+    "knocked": "플레이어 {pid}가 노크했습니다! 다른 플레이어들은 한 번 더 턴을 가집니다.",
+    "final_round": "플레이어 {pid}가 {reason}! 다른 플레이어들은 한 번 더 턴을 가집니다."
+  },
+  "reason": {
+    "all_revealed": "모든 카드가 공개되었습니다"
+  },
+  "invalid": {
+    "wrong_action": "정확히 하나의 괄호 안의 액션을 사용하세요: [draw], [take], [swap X Y], [discard], [knock], 또는 [peek X Y]",
+    "discard_empty": "버려진 카드 더미가 비어 있습니다!",
+    "must_draw_first": "먼저 [draw], [take], [knock], 또는 [peek X Y]해야 합니다.",
+    "cannot_discard_taken": "버려진 카드 더미에서 가져온 카드는 버릴 수 없습니다. 교환해야 합니다.",
+    "have_drawn_card": "당신이 뽑은 카드가 있습니다. [swap X Y] 또는 [discard]해야 합니다.",
+    "need_drawn_swap": "교환하려면 뽑은 카드가 필요합니다.",
+    "need_drawn_discard": "버리려면 뽑은 카드가 필요합니다.",
+    "out_of_bounds": "위치가 범위를 벗어났습니다. 행 1-{max_row}, 열 1-{max_col}를 사용하세요.",
+    "knock_with_card": "뽑은 카드가 있는 상태에서는 노크할 수 없습니다. 먼저 턴을 완료하세요.",
+    "already_knocked": "이 라운드에서 이미 누군가가 노크했습니다.",
+    "already_revealed": "그 카드는 이미 공개되어 있습니다!"
+  },
+  "summary": {
+    "full": "게임 종료! 플레이어 {winner}가 {score}점으로 승리했습니다!\n\n최종 점수:\n{scores}",
+    "line": "플레이어 {pid}: {score}점\n"
+  },
+  "board_str": {
+    "title": "=== GOLF GAME ===",
+    "discard": "버려진 카드 더미: {card}",
+    "knocked": "플레이어 {pid}가 노크했습니다!",
+    "player_header": "플레이어 {pid} (점수: {score}):"
+  }
+}

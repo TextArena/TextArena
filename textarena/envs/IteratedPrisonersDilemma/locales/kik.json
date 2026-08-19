@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Wee ni Mchezaji {player_id} katika Iterated Prisoner's Dilemma inayojumuisha {num_rounds} raundi.\n\nMuundo wa Mchezo:\n- Kabla ya kila uamuzi una {total_conversation_rounds} zamu za kuwasiliana kwa uhuru.\n- Baada ya hapo, wachezaji wote wawili huchagua kushirikiana au kutoridhika kwa wakati mmoja.\n\nMatrix ya Matokeo (imeimarishwa kila raundi):\n- Wote wawili Washirikiane ➜ kila {cooperate_reward}\n- Wote wawili Watoridhike ➜ kila {mutual_defect_reward}\n- Mmoja atoridhike, mmoja ashirikiane ➜ Mtoridhika {defect_reward}, Mshirikishi {sucker_reward}\n\nJinsi ya Kucheza:\n- Wakati wa mazungumzo: andika maandishi yoyote unayotaka.\n- Wakati wa uamuzi: jumuisha '[Cooperate]' au '[Defect]' (bila kujali herufi kubwa au ndogo). Unaweza kuongeza maandishi ya ziada kabla/ baada ya kiashiria."
+  },
+  "phases": {
+    "conversation_finished": "Mazungumzo yamekwisha kwa raundi {round}. Tafadhali jibu na '[Cooperate]' au '[Defect]' ndani ya \\boxed{{}}.",
+    "starting_round": "--- Kĩambi kĩa mbere {round} ---",
+    "round_summary": "Matokeo ya Raundi {round}:\n{outcome}\nMchezaji 0 alipata {r0} (jumla {score_0}), Mchezaji 1 alipata {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Mwathani {winner} aninda {win_score} - {lose_score}.",
+    "draw": "Athaaki acio erĩ nĩ maacokire makĩiga {s0}.",
+    "round_both_cooperate": "Athaki acio erĩ nĩ maarutithirie wĩra hamwe.",
+    "round_both_defect": "Athaki acio erĩ nĩ maathamire.",
+    "round_p0_cooperates_p1_defects": "Mũteng'eri wa namba 0 nĩ aanyitanĩire, no ũrĩa wa mbere akĩrega.",
+    "round_p0_defects_p1_cooperates": "Mũteng'eri wa namba 0 nĩ aathamire, na ũrĩa wa mbere akĩnyitanĩra."
+  }
+}

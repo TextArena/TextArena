@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Du är Spelare {player_id} i Förhandlingspelet.\nDu har vissa resurser, och din uppgift är att handla så att det totala värdet av dina resurser ökar.\nDe resurser och associerade värden du för närvarande har är:\n\t+ {resource_value_list}\nVid varje tur kan du prata med din motståndare och göra ett handelsbud.\nAnvänd följande specialtoken för åtgärder:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Erbjudna resurser -> Begärda resurser]\n  - '[Accept]': För att acceptera ett inkommande bud.\n  - '[Deny]': För att avvisa ett inkommande bud (standard).\nSpelet varar i {max_turns} turer totalt."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Spelaren försökte acceptera en handel utan att ha de nödvändiga resurserna.",
+    "out_of_range": "Spelare {player_id}, Ogiltig åtgärd. Kolumn {col} är utanför gränserna.",
+    "already_full": "Spelare {player_id}, Ogiltig åtgärd. Kolumn {col} är full.",
+    "proposing_with_no_resource": "Spelare {player_id} försökte göra ett handelsbud utan att ha de nödvändiga resurserna.",
+    "incorrect_offer_format": "Spelare {player_id} gjorde ett handelsbud i ett felaktigt format.",
+    "no_new_offer": "Spelare {player_id} gjorde inget nytt handelsbud."
+  },
+  "offers": {
+    "reject": "Spelare {player_id} avvisade handelsbudet.",
+    "accept": "Spelare {acceptor_id} accepterade handelsbudet från Spelare {proposer_id}.",
+    "proposal": "Spelare {player_id} gjorde följande bud till Spelare {opponent_id}: Erbjudna objekt: {offered} -> Begärda objekt: {requested}"
+  },
+  "outcome": {
+    "win": "Spelare {winner_id} vann genom att ha en större ökning i lager-värde.",
+    "draw": "Samma förändring i lager-värde för alla spelare. Oavgjort."
+  }
+}

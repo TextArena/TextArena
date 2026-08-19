@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Vi estas Ludanto {player_id} en ludo de Barata Pokero.\n- 52-karta ludkarto; vi vidas nur la kontraŭulan karton.\n- Antaŭludo {ante} ĉipo(j) ĉiun raŭndon, {max_rounds} raŭndo(j) entute.\n- Validaj movoj: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X estas pozitiva entjero <= via ĉipokonto.)\n- La plej alta kaŝita karto gajnas la pokalon ĉe montrado.\n"
+  },
+  "round": {
+    "announce": "### Raŭndo {current_round}/{max_rounds}\nLa kontraŭula karto estas: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Provizu ekzakte UNU kramparan agon, ekz. '[check]', '[bet 2]', '[call]', '[raise 3]', aŭ '[fold]'.",
+    "cannot_check": "Ne eblas [check] - vi alfrontas veton.",
+    "amount_min": "La sumo de la veto/la levado devas esti ≥ 1.",
+    "cannot_bet": "Ne eblas [bet] - devas [call] / [raise] / [fold].",
+    "nothing_to_call": "Nenio por voki; vi povas [check] anstataŭe.",
+    "no_bet_to_raise": "Uzu [bet X] por malfermi; ne estas veto altiĝi.",
+    "insufficient": "Ne sufiĉas ĉipoj por tiu agado."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kosto {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Viaj eblaj agoj: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pokalo {pot} → Ludanto {winner}. (Bankoj P0:{p0}, P1:{p1})",
+    "folded": "Ludanto {player_id} faldiĝis.",
+    "showdown_win": "Konfrontiĝo: {card_win} batas {card_lose}.",
+    "showdown_tie": "La fina matĉo estas egaleca: ambaŭ {card}. Pot dividita  ĉiu ricevas {split} ."
+  },
+  "outcome": {
+    "p0_wins": "Ludanto 0 gajnas ({bank0} > {bank1})",
+    "p1_wins": "Ludanto 1 gajnas ({bank1} > {bank0})",
+    "draw": "Egalaj blatoj post ĉiuj rondoj."
+  }
+}

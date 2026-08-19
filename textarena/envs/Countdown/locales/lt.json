@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Žaidite Countdown skaičių žaidimą!\nTikslas: Kombinuoti skaičius naudojant +, -, *, /, kad pasiekti tikslą.\nVeiksmo formatas: [i j op], kur i, j yra indeksai, o op yra operacija.\nPavyzdys: [0 2 *] daugina skaičių indekse 0 su skaičiumi indekse 2.\nDalyba turi rezultuoti tik sveikuosius skaičius."
+  },
+  "board": {
+    "header": "TIKSLAS: {target}\n\nGalimi skaičiai:\n{numbers}",
+    "best": "{observation}\n\nGeriausias iki šiol: {best_value} (atstumas: {distance})\nGeriausias reiškinys: {best_expression}",
+    "history": "{observation}\n\nĖjimų istorija:\n{moves}",
+    "progress": "{observation}\nDabartinis progreso rezultatas: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neteisingas veiksmo formatas. Naudokite `[i j op]`, kur i, j yra indeksai, o op yra +,-,*,/",
+    "invalid_indices": "Neteisingi indeksai. Turi būti skirtingi ir diapazone 0-{max_index}",
+    "invalid_operation": "Neteisinga operacija (dalyba iš nulio arba ne sveikasis rezultatas)"
+  },
+  "outcome": {
+    "win": "Puiku! Rastas tikslus tikslas: {target}",
+    "no_moves": "Daugiau ėjimų nėra. Geriausias rezultatas: {best_value} (tikslas: {target})",
+    "turn_limit": "Ėjimų limitas pasiektas. Geriausias rezultatas: {best_value} (tikslas: {target})"
+  }
+}

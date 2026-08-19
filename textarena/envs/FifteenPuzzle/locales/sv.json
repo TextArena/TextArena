@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Du är spelare {player_id}. Du spelar 15-pusslet.\nMålet med spelet är att ordna de numrerade brickorna i stigande ordning från 1 till 15, med det tomma utrymmet placerat i det nedre högra hörnet.\nFör att göra ett drag kan du flytta en bricka till det tomma utrymmet (som representeras av ett dubbelt understreck, t.ex. __) genom att använda någon av följande kommandon:\n- 'up': Flytta brickan under det tomma utrymmet uppåt.\n- 'down': Flytta brickan ovanför det tomma utrymmet nedåt.\n- 'left': Flytta brickan till höger om det tomma utrymmet till vänster.\n- 'right': Flytta brickan till vänster om det tomma utrymmet till höger.\nFör att skicka in ditt drag, skriv riktningen (t.ex. 'up', 'down', 'left' eller 'right') i hakparenteser, t.ex. [up].\nDen aktuella brädlayouten visas nedan. Använd informationen för att lösa pusslet.\n"
+  },
+  "board": {
+    "current_board": "Aktuellt bräde:\n\n{board}\nTillgängliga drag: {moves}",
+    "game_board": "Spelbräde:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ogiltigt dragformat. Spelare {player_id} svarade inte med en giltig riktning i hakparenteser.",
+    "illegal_move": "Ogiltigt drag. Brickan kan inte flyttas i den angivna riktningen."
+  },
+  "outcome": {
+    "win": "Grattis! Spelare {player_id} har löst 15-pusslet.",
+    "turn_limit": "Tidsgränsen har nåtts. Modellen har slutfört {percent} procent av pusslet"
+  }
+}

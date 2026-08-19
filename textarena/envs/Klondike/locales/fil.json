@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire file ng lokasyon. HUWAG isalin ang mga susi (kaliwang bahagi). Isalin lamang ang mga halaga (kanang bahagi).",
+  "_slots": {
+    "{n}": "Indeks ng aksyon sa loob ng isang comma-separated na utos, 1-based",
+    "{msg}": "Isang nested na mensahe ng resulta ng aksyon (na-lokalize na)",
+    "{count}": "Bilang ng mga card na nakaharap na inilipat",
+    "{src}": "Numero ng pinagmulang tableau pile, 1-based",
+    "{dst}": "Numero ng destinasyon pile, 1-based",
+    "{cmd}": "Ang hindi kilalang utos na itinayp ng manlalaro (hindi isinalin)",
+    "{max_turns}": "Ang pinakamataas na bilang ng mga pagliko bago matapos ang laro",
+    "{score}": "Bilang ng mga card na kasalukuyang nasa mga pundasyon",
+    "{board}": "Ang rendered na ASCII board (hindi isasalin)",
+    "{turn}": "Kasalukuyang numero ng pagliko",
+    "{stock}": "Bilang ng mga card na natitira sa stock",
+    "{waste}": "Ang label ng nangungunang waste card, o '--' kung walang laman (hindi isasalin)",
+    "{cards}": "Ang mga card sa isang pile bilang neutral na mga label, o '--' kung walang laman (hindi isasalin)"
+  },
+  "player_prompt": {
+    "intro": "Ikaw ay naglalaro ng Klondike Solitaire. Ang iyong layunin ay ilipat ang lahat ng mga card sa mga pundasyon.\n\nMga Tuntunin ng Laro:\n- Mga pundasyon (F1-F4): Itayo mula sa Ace hanggang King sa suit\n- Mga tableau pile (T1-T7): Itayo pababa ng mga kulay na nag-aalitan (pula sa itim, itim sa pula)\n- Stock: Gumawa ng mga card sa waste pile\n- Waste (W): Ang nangungunang card ay magagamit para sa paglalaro\n\nMga Utos:\n- 'draw' - Gumawa ng mga card mula sa stock hanggang waste\n- 'move <source> <destination> [count]' - Ilipat ang mga card sa pagitan ng mga pile\n  Halimbawa: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Ang count ay maaari ring 'all', na susubukang ilipat ang lahat ng mga card na nakaharap.\n- 'forfeit' - Tapusin ang laro agad at i-lock ang iyong kasalukuyang iskor\n- Mga pangalan ng pile: W (waste), F1-F4 (mga pundasyon), T1-T7 (tableau)\n\nMaaari kang magpaganap ng maraming aksyon sa isang pagliko sa pamamagitan ng paghihiwalay sa kanila ng mga comma:\n  Halimbawa: 'draw, move W T1, move T2 F1'\n\nAng mga Hari lamang ang maaaring ilagay sa mga walang-laman na tableau pile.\nAng mga aksyon ay magpapaganap sa pagkakasunud-sunod - kung ang isa ay nabigo, ang mga natitirang aksyon ay iskipping."
+  },
+  "format_error": {
+    "no_brackets": "Hindi wastong format ng aksyon. Ang aksyon ay dapat nasa loob ng mga bracket.",
+    "no_closing_bracket": "Hindi wastong format ng aksyon. Nawawala ang closing bracket ']'",
+    "empty_command": "Walang-laman na utos. Itayp ang 'draw' o 'move <source> <destination> [count]'",
+    "empty_action": "Walang-laman na aksyon",
+    "move_needs_args": "Ang utos ng paglipat ay nangangailangan ng pinagmulan at destinasyon. Paggamit: 'move <source> <destination> [count]'",
+    "count_positive": "Ang count ay dapat positibo o 'all'",
+    "count_invalid": "Hindi wastong count. Gumamit ng isang numero o 'all'",
+    "unknown_command": "Hindi kilalang utos '{cmd}'. Gumamit ng 'draw', 'move <source> <destination> [count]', o 'forfeit'",
+    "wrapped": "Aksyon {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Aksyon {n}: {msg}",
+    "before_failure": "Nagpaganap ng {n} aksyon bago ang pagkabigo.",
+    "failed": "Aksyon {n} nabigo: {msg}"
+  },
+  "move_result": {
+    "drew": "Gumawa ng mga card mula sa stock hanggang waste.",
+    "cannot_draw": "Hindi maaaring gumawa. Ang stock at waste ay parehong walang laman.",
+    "invalid_pile": "Hindi wastong pangalan ng pile. Gumamit ng W, F1-F4, o T1-T7",
+    "foundation_one_card": "Maaari lamang ilipat ang 1 card sa pundasyon",
+    "waste_to_foundation_ok": "Inilipat ang card mula sa waste hanggang pundasyon F{dst}",
+    "waste_to_foundation_bad": "Hindi maaaring ilipat ang waste card sa pundasyon na iyon",
+    "tableau_to_foundation_ok": "Inilipat ang card mula sa tableau T{src} hanggang pundasyon F{dst}",
+    "tableau_to_foundation_bad": "Hindi maaaring ilipat ang tableau card sa pundasyon na iyon",
+    "foundation_to_foundation": "Hindi maaaring ilipat mula sa pundasyon hanggang pundasyon",
+    "waste_to_tableau_one_card": "Maaari lamang ilipat ang 1 card mula sa waste hanggang tableau",
+    "waste_to_tableau_ok": "Inilipat ang card mula sa waste hanggang tableau T{dst}",
+    "waste_to_tableau_bad": "Hindi maaaring ilagay ang waste card sa tableau na iyon",
+    "no_face_up": "Walang mga card na nakaharap na maaaring ilipat",
+    "tableau_to_tableau_ok": "Inilipat ang {count} card(s) mula sa tableau T{src} hanggang T{dst}",
+    "tableau_to_tableau_bad": "Hindi maaaring ilipat ang {count} card(s) mula sa T{src} hanggang T{dst}",
+    "foundation_to_tableau_one_card": "Maaari lamang ilipat ang 1 card mula sa pundasyon hanggang tableau",
+    "foundation_empty": "Ang pundasyon F{src} ay walang laman",
+    "foundation_to_tableau_ok": "Inilipat ang card mula sa pundasyon F{src} hanggang tableau T{dst}",
+    "foundation_to_tableau_bad": "Hindi maaaring ilagay ang pundasyon card sa tableau T{dst}",
+    "to_waste_or_stock": "Hindi maaaring ilipat hanggang waste o stock"
+  },
+  "outcome": {
+    "forfeit": "Ang laro ay tinapos. Huling iskor: {score} card(s) sa mga pundasyon.",
+    "won": "Binabati kita! Ikaw ay nanalo sa Klondike Solitaire!",
+    "turn_limit": "Tapos na ang laro! Ikaw ay nakarating sa pinakamataas na {max_turns} pagliko. Iskor: {score} card(s) sa mga pundasyon."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Pagliko: {turn}/{max_turns}",
+    "stock": "Stock: {stock} card(s)",
+    "waste": "Waste (W): {waste}",
+    "foundations_header": "Mga Pundasyon:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

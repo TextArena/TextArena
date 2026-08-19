@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í Samningaleiknum.\nÞú hefur einhverjar auðlindir, og verkefni þitt er að versla þannig að heildarvirði auðlindanna þinna eykst.\nAuðlindirnar og tengdar virði sem þú hefur nú eru:\n\t+ {resource_value_list}\nÍ hverri umferð getur þú talað við andstæðing þinn og lagt fram kaupboð.\nNotaðu eftirfarandi sérstök tókna fyrir aðgerðir:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Auðlindir sem eru lagðar fram -> Auðlindir sem eru óskaðar]\n  - '[Accept]': Til að samþykkja innkomandi kaupboð.\n  - '[Deny]': Til að hafna innkomandi kaupboði (sjálfgefið).\nLeikurinn varir í {max_turns} umferðir í heild."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Leikmaður reyndi að samþykkja kaup án þess að hafa nauðsynlegar auðlindir.",
+    "out_of_range": "Leikmaður {player_id}, Ógild aðgerð. Dálkur {col} er utan marka.",
+    "already_full": "Leikmaður {player_id}, Ógild aðgerð. Dálkur {col} er fullur.",
+    "proposing_with_no_resource": "Leikmaður {player_id} reyndi að leggja fram kaupboð án þess að hafa nauðsynlegar auðlindir.",
+    "incorrect_offer_format": "Leikmaður {player_id} lagði fram kaupboð í röngu sniði.",
+    "no_new_offer": "Leikmaður {player_id} lagði ekki fram nýtt kaupboð."
+  },
+  "offers": {
+    "reject": "Leikmaður {player_id} hafnaði kaupboðinu.",
+    "accept": "Leikmaður {acceptor_id} samþykkti kaupboðið frá Leikmanni {proposer_id}.",
+    "proposal": "Leikmaður {player_id} lagði fram eftirfarandi kaupboð til Leikmanns {opponent_id}: Auðlindir sem eru lagðar fram: {offered} -> Auðlindir sem eru óskaðar: {requested}"
+  },
+  "outcome": {
+    "win": "Leikmaður {winner_id} vann með því að hafa stærra hagnað í virði á lager.",
+    "draw": "Sama breyting í virði á lager fyrir alla leikmenn. Jafntefli."
+  }
+}

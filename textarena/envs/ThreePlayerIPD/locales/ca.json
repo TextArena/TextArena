@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} en un Dilema del Presoner Iterat de 3 jugadors. El partit dura {num_rounds} rondes.\nEstructura de la ronda:\n• {conv_rounds} torns de xat lliure\n• 1 torn de decisió - envia un token per oponent: '[<opp-id> cooperate]' o '[<opp-id> defect]' (per exemple, '[1 defect] [2 cooperate]'; el valor per defecte és 'cooperar'). \nMatriu de pagaments per parells (aplicada a cada parell no ordenat):\n  - Tots dos cooperen  ->  {reward}\n  - Tots dos deserten     ->  {punishment}\n  - Tu desertes, ells cooperen -> {temptation}\n  - Tu cooperes, ells deserten -> {sucker}\nEl jugador (o jugadors) amb la puntuació més alta al final de totes les rondes guanya."
+  },
+  "round": {
+    "start": "─── Iniciant la Ronda {round} ───\tPots conversar lliurement durant les properes {conv_rounds} rondes.",
+    "chat_finished": "Xat finalitzat per la ronda {round}. Envia les teves decisions, un token per oponent: `[pid cooperate]` o `[pid defect]`."
+  },
+  "results": {
+    "header": "### Ronda {round} - Resultats:",
+    "pair_line": "{observation}\n\t El Jugador {i} vs El Jugador {j} van triar {choice_i} i {choice_j} respectivament (El Jugador {i} va guanyar {gain_i}, El Jugador {j} va guanyar {gain_j})",
+    "scores_open": "{observation}\n-> Puntuacions actuals: ",
+    "score_first": "{observation}El Jugador {player_id} ({score})",
+    "score_next": "{observation}; El Jugador {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Puntuacions finals: {scores}.  Grups de classificació (pitjor→millor): {groups}"
+  }
+}

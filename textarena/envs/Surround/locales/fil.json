@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround file ng lokasyon. HUWAG isalin ang mga susi (kaliwang bahagi). Isalin lamang ang mga halaga (kanang bahagi). Panatilihin ang bawat {placeholder} eksakto bilang ito ay.",
+  "_slots": {
+    "{num_players}": "Bilang ng mga manlalaro sa laban",
+    "{width}": "Lapad ng board sa mga cell",
+    "{height}": "Taas ng board sa mga cell",
+    "{player_id}": "Numero ng manlalaro (batay sa 0)",
+    "{board}": "Ang rendered na ASCII grid; panatilihin ang neutral, huwag isalin ang mga karakter nito",
+    "{reason}": "Ang rendered na dahilan ng pagtatapos ng laro",
+    "{groups}": "Neutral na datos ng ranggo (isang listahan ng mga grupo ng player-id, pinakamahusay hanggang pinakamahina); huwag isalin"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Manlalaro Surround sa isang {width}x{height} grid.\nIkaw ay manlalaro {player_id}. Mga wastong pagkilos: '[up]' '[down]' '[left]' '[right]' o w/s/a/d.\nLayunin: mabuhay nang mas matagal kaysa sa iba. Ang mga trail ay nakamamatay; ang mga pagtama sa pader ay nakakamatay; ang mga pagbanggaan ng ulo ay nakakamatay sa parehong panig."
+  },
+  "board": {
+    "current": "Kasalukuyang Board:\n{board}",
+    "after_moves": "Board pagkatapos ng sabay-sabay na mga pagkilos:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Ang manlalaro {player_id} ay namatay dahil sa hindi wastong pagkilos."
+  },
+  "outcome": {
+    "survived_win": "Ang manlalaro {player_id} ay nabuhay; ang lahat ng iba ay bumangga.",
+    "all_crashed": "Ang lahat ng mga manlalaro ay bumangga nang sabay-sabay.",
+    "outlived": "Ang manlalaro ay nabuhay nang mas matagal kaysa sa lahat ng iba.",
+    "all_dead": "Ang lahat ng mga manlalaro ay patay.",
+    "turn_limit": "Ang limitasyon ng pagliko ay naabot - ang pinakamahabang survivor ay panalo.",
+    "ranking": "{reason} Mga pangkat ng panghuling ranggo (pinakamahusay→pinakamahina): {groups}"
+  }
+}

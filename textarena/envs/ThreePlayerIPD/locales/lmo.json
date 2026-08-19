@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Seet el Giugadur {player_id} in d'una partita a 3 giugadur de Iterated Prisoner's Dilemma. La partita la dura {num_rounds} turni.\nStruttura del turn:\n• {conv_rounds} turni de chat liber\n• 1 turn de decision - invia vun token per ognidun di che l'è tò aversari: '[<opp-id> cooperate]' o '[<opp-id> defect]' (per esempi '[1 defect] [2 cooperate]'; el valor per defect el è 'cooperate'). \nMatris de payoff a coppia (aplicada a ogni coppia senza ordine):\n  - Tucc du cooperen  ->  {reward}\n  - Tucc du deserten     ->  {punishment}\n  - Te se deserten, lur cooperen -> {temptation}\n  - Te se cooperen, lur deserten -> {sucker}\nEl giugadur(i) con el puntagi più alt a la fin de tucc i turni el veng el vincitor."
+  },
+  "round": {
+    "start": "─── Inizi del Turn {round} ───\tPòdet conversà liberament per i prossim {conv_rounds} turni.",
+    "chat_finished": "Ciaciarà finida per el gir {round}. Mandà i tò decisiù, on token per aversari: `[pid cooperate]` o `[pid defect]`."
+  },
+  "results": {
+    "header": "### Rond {round} - Risultà:",
+    "pair_line": "{observation}\n\t Giugadur {i} vs Giugadur {j} ha scernii de {choice_i} e {choice_j} rispettivament (Giugadur {i} ha guadagnaa {gain_i}, Giugadur {j} ha guadagnaa {gain_j})",
+    "scores_open": "{observation} -> Score attuali: ",
+    "score_first": "{observation}Giugadur {player_id} ({score})",
+    "score_next": "{observation}; Giugadur {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Puntegi final: {scores}.  Grup de classifega (peggior→mijor): {groups}"
+  }
+}

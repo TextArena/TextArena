@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Kāore he kāri i te wā nei.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Kaiwhakatūpato Tahi ki te Kaitākaro\n\n📖 Tirohanga Whānui o te Kēmu:\n• Ka tīmata koe ki te {start_chips} karaihe\n• Wharau kotahi o 52 kāri (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Ka tākaro koe ki te kaitākaro (whare)\n• Ka whai te rārangi o te Ultimate Texas Hold'em: ka whakapau koe ki te ANTE me te BLIND, ka whiwhi koe ki te 2 kāri hōro, ka whakatau koe ki te PLAY bets, ka whakaatu koe ki te kāri hapori, ka whakaritea koe ki te ringa pai o te kaitākaro. Ko tōu whāinga ko te whakanui i ōu utu (ka pai ake tōu ringa), me te whakaiti i ōu ngaromanga (ka pai ake te ringa o te kaitākaro).\n• Ka mutu te kēmu ka tae koe ki te 0 karaihe, ka tīmata rānei koe ki te 1000 rārangi me te karaihe (WIN)\n\n💰 Te Rārangi o te Whakapau:\n• ANTE: Whakapau wāhi ${ante} i ia rārangi\n• BLIND: Whakapau wāhi ${ante} i ia rārangi\n• PLAY: Whakapau kōwhiringa i te wā o te kēmu. Ka taea e koe te kōwhiri KO TE TĀNAHI: (${ante4} ki te mahia i te PRE-FLOP, ${ante2} ki te mahia i te FLOP, ${ante} rānei ki te mahia i te RIVER. Ka taea hoki e koe te koropiko i te awa, ka tuku i te ringa, ka kore e whakapau.)\n\n🎴 Te Tuku Kāri:\n• Ka whiwhi koe ki te 2 kāri kanohi-mai (ōu kāri hōro)\n• Ka whiwhi te kaitākaro ki te 2 kāri kanohi-whakaaro (huna i a koe)\n• Ka tuku te 5 kāri hapori kanohi-whakaaro i te tīmatanga\n• Ka whakaatuhia te kāri hapori i te wā o te kēmu\n\n🏆 Te Whakarite o te Kaitākaro:\n• Ka whai te kaitākaro ki te iti rawa o te PAIR (2 kāri o te rite tonu) ki te whakarite, ki te whakamahi i te 2 kāri i tōna ringa me te 5 kāri hapori.\n• Ka pā te whakarite o te kaitākaro ki te whakapau, ka whakamāramatia ki muri.\n\n🎮 Ngā Wāhanga o te Kēmu me ngā Mahi:\n📋 PRE-FLOP:\n  • Mahi: [4x] (${ante4}) ki te [check]\n  • [4x]: Whakapau ${ante4} PLAY, whakaatu te 3 kāri hapori tuatahi\n  • [check]: Kore e whakapau, whakaatu te 3 kāri hapori tuatahi\n\n📋 FLOP:\n  • Ki te whakapau 4x: Ko te [skip] anake e wātea ana (auto-whakaatu te 2 kāri hapori whakamutunga)\n  • Ki te kore e whakapau 4x: [2x] (${ante2}) ki te [check]\n  • [2x]: Whakapau ${ante2} PLAY, whakaatu te 2 kāri hapori whakamutunga\n  • [check]: Kore e whakapau, whakaatu te 2 kāri hapori whakamutunga\n\n📋 RIVER:\n  • Ki te whakapau 4x ki te 2x: Ko te [skip] anake e wātea ana (auto-whakahaere ki te showdown)\n  • Ki te kore e whakapau PLAY: [1x] (${ante}) ki te [fold]\n  • [1x]: Whakapau ${ante} PLAY, whakahaere ki te showdown\n  • [fold]: Tuku te ringa, ngaro te ANTE me te BLIND\n\n📋 SHOWDOWN:\n  • Whakaatuhia ngā kāri katoa, whakaritea\n  • Ko te ringa pai rawa o te 7 kāri (2 hōro + 5 hapori)\n  • Whakaritea ngā whakapau ki te ture whakapau\n\n💎 Ngā Utu o te Whakapau:\n📊 ANTE BET:\n  • Ka kore te kaitākaro e whakarite: PUSH (whakapau whakahoki)\n  • Ka whakarite te kaitākaro, ka wini koe: 1:1 utu (whakapau + utu)\n  • Ka whakarite te kaitākaro, ka hinga koe: Whakapau ngaro\n  • Tie: PUSH (whakapau whakahoki)\n\n📊 BLIND BET:\n  • Ka kore e pā te whakarite o te kaitākaro\n  • Ka wini koe: Whakapau whakahoki, utu tāpiri ki te kaha o tōu ringa\n  • Ka hinga koe: Whakapau ngaro\n  • Tie: PUSH (whakapau whakahoki)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Kore e utu tāpiri\n\n📊 PLAY BET:\n  • Ka kore e pā te whakarite o te kaitākaro\n  • Whakarite tōtika: Tōu ringa pai ki te ringa pai o te kaitākaro\n  • Ka wini koe: 1:1 utu (whakapau + utu)\n  • Ka hinga koe: Whakapau ngaro\n  • Tie: PUSH (whakapau whakahoki)\n\n🎯 Ngā Rārangi o ngā Ringa Poka (Pai ki te Kōaro):\n  1. Royal Flush: A-K-Q-J-10 o te rite tonu\n  2. Straight Flush: 5 kāri tata o te rite tonu\n  3. Four of a Kind: 4 kāri o te rite tonu\n  4. Full House: 3 o te rite tonu + 2 o te rite tonu\n  5. Flush: 5 kāri o te rite tonu\n  6. Straight: 5 kāri tata\n  7. Three of a Kind: 3 kāri o te rite tonu\n  8. Two Pair: 2 pairs o te rite rerekē\n  9. One Pair: 2 kāri o te rite tonu\n  10. High Card: Te kāri teitei rawa e wini ana\n\n⌨️  Ngā Tohutohu Mahi:\n• [4x] ki te [play bet 4x]: Whakapau ${{self.ante_amount*4}} PLAY\n• [2x] ki te [play bet 2x]: Whakapau ${{self.ante_amount*2}} PLAY\n• [1x] ki te [play bet 1x]: Whakapau ${{self.ante_amount*1}} PLAY\n• [check] ki te [c]: Check (kore e whakapau)\n• [fold] ki te [f]: Fold (tuku te ringa)\n• [skip] ki te [s]: Skip ki te wāhanga whakamutunga (ka kore e mahi)\n\n💡 Ngā Kupu Tohutohu:\n• Ngā ringa tīmata kaha (pairs, kāri teitei) he pai ki te whakapau 4x\n• Whakaarohia te whakarite o te kaitākaro - ngā ringa kōaro he pai ki te whakapau ki te kore e whakarite te kaitākaro\n• Te whakapau BLIND he pai ki te whakapau ki te ringa kaha (Royal Flush = 500:1!)\n• Tirohia tōu karaihe! Ki te tae ki te 0 ki te tīmatanga o te rārangi, ka hinga koe.\n\n⚠️  Ngā Kupu Whakamārama:\n• Ngā whakapau ANTE me te BLIND he wāhi wāhi i ia rārangi\n• Ngā whakapau PLAY he kōwhiringa, he rautaki\n• Whakapau koe ki te tohu tika, ki te tohu kotahi anake i te wā.\n\n",
+    "state": "🎯 RAUNGA {round}\n💰 Chips: {chips}\n🎴 To ringa: {hand}\n📊 Nga pūtea o naianei: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Wa: {phase}\n🎯 Nga mahi waiho: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Raunga {round} kua timata! Pūtea: ANTE ${ante}, BLIND ${blind}. Kei a koe {chips} chips e toe ana.",
+    "your_hand": " Ko tō ringa: {hand}",
+    "flop_revealed": " I whakakitea te FLOP: {cards}",
+    "river_revealed": " RIVER i whakakitea: {cards}"
+  },
+  "invalid_move": {
+    "reason": "He mahi kāore mō te wāhanga o nāianei. Ngā mahi e wātea ana: {available}",
+    "message": " He mahi kore! Ngā mahi e wātea ana: {available}"
+  },
+  "action": {
+    "folded": " Kua takahia e koe."
+  },
+  "showdown": {
+    "dealer_hand": " Whakaatu! Te ringa o te kaihoko: {cards}",
+    "community_cards": " Ngā kāri o te Hapori: {cards}",
+    "player_best": "🎴 To kaha pai rawa a te kaitakaro: {name} ({cards})",
+    "dealer_best": "🎴 To kaha pai rawa a te kaitakaro: {name} ({cards})",
+    "ante_lost_folded": "❌ Te tāpae ANTE kua NGARO! -${ante} (kua whakakopa)",
+    "blind_lost_folded": " KO TE petipeti matapo KAUPAKAUA! - ${blind} (kua takahia)",
+    "ante_won": "✅ Kitea te utu ANTE, KA TOA! +${amount}",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} i whakahokia mai.",
+    "ante_lost": "❌ Te tāpae ANTE kua NGARO! -${ante}",
+    "blind_won": "✅ Kitea te utu BLIND, KA TOA! +${amount}",
+    "blind_pushed": "🔄 Te tāpae BLIND kua WHAKATŪ! ${blind} kua whakahoki",
+    "blind_lost": " KO TE petipeti matapo KAUPAKAUA! -${blind}",
+    "play_won": "✅ Kitea te utu PLAY, KA TOA! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} i whakahokia mai.",
+    "play_lost": "❌ Te tāpae PLAY kua NGARO! -${play}",
+    "net_gain": "🎉 Raunga {round} kua oti! Whiwhinga whakapapa: +${net}",
+    "net_loss": "💸 Raunga {round} kua oti! Whakapouri: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 MUTU TE TAKARO! {max_turns} raunga kua oti. Kei a koe ${chips} chips - KUA WIN KOE!",
+    "game_over_lose": " GAME OVER! Kua pau i a koe ngā tūtohi. Ka wikitoria te kaihokohoko!",
+    "reward_win": "Kaitakaro kua oti {winner_rounds} raunga ki runga i ${chips} chips",
+    "reward_lose": "I pau i te kaitākaro ngā tūtohu ki roto i te rauna {round}",
+    "reward_win_max": "Kaitakaro kua oti {max_turns} raunga ki runga i ${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "Ko te Royal Flush",
+    "straight_flush": "He rerenga tika",
+    "four_of_a_kind": "E whā o te Rōpū Kotahi",
+    "full_house": "Ko te Whare Katoa",
+    "flush": "Te whakaheke i te wai.",
+    "straight": "He tika te rārangi.",
+    "three_of_a_kind": "E Tokotoru o te Rōpū Kotahi",
+    "two_pair": "E rua ngā takirua.",
+    "one_pair": "Kotahi te Tokorua",
+    "high_card": "Kāri Runga",
+    "unknown": "Ringa Kāore i mōhiotia"
+  }
+}

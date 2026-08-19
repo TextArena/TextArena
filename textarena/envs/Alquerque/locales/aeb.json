@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} ({piece}). الخصم هو ({opp}).\nأدخل النقلات على شكل '[a2 a3]' (من → إلى).\n- النقلة العادية هي خطوة واحدة إلى قمة مجاورة فارغة.\n- الحصار هو قفزة فوق قطعة عدو مجاورة وهبوط على العقدة الفارغة بعدها.\nكل حصار يمنح {score_per_capture} نقطة.\nاللعبة تنتهي بعد {max_moves} نقلات أو عندما لا يملك لاعب أي نقلة قانونية"
+  },
+  "board": {
+    "current_board": "النقلة #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "صيغة سيئة. إستخدم \"[a2 a3]\".",
+    "unknown_square": "مربع مجهول.",
+    "not_your_piece": "مصدره ما يخصكش.",
+    "dest_not_empty": "الوجهة ما تخليتش فارغة.",
+    "illegal": "حركة غير قانونية."
+  },
+  "game_action": {
+    "captured": "اللاعب {player_id} أسر قطعة! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "لاعب {player_id} ما عندهش قطع.",
+    "cannot_move": "لاعب {player_id} ما يقدرش يتحرك.",
+    "higher_score": "نقطة أسر أعلى.",
+    "move_limit": "الحد الأقصى للحركات تم الوصول إليه."
+  }
+}

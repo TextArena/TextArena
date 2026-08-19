@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Vi estas Ludanto {player_id} en Chopsticks. Dum via vico, elektu unu el:\n  + Ataki:  '[attack M O]'  kie M=via mano (0 aŭ 1), O=malamika mano (0 aŭ 1).\n    - La malamika mano nombro pliiĝas per via mano; se >=5, ĝi iĝas 0.\n  + Dividi:   '[split L R]'  por redistribui vian totalan fingrojn en L kaj R (L+R = via totalo).\nRespondu per ekzakte unu el tiuj komandoj."
+  },
+  "board": {
+    "current_board": "Nuna Tabulo:\nLudanto 0: {hands_0}\nLudanto 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Via mano {my_idx} estas morta.",
+    "opp_hand_dead": "La mano de la kontraŭulo {opp_idx} jam estas morta.",
+    "split_sum": "Dividita sumo devas esti {total}.",
+    "split_no_change": "Split devas ŝanĝi vian mandistribuon.",
+    "invalid_command": "Nevalida movo. Uzvu „[attack M O]” aŭ „[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} atakas la manon de P{opp_id} {opp_idx}: ĝi iras el {opp_val} al {new_val}.",
+    "split": "P{player_id} dividas en [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Ambaŭ manoj de la kontraŭulo estas mortintaj.",
+    "draw": "La limo de vicoj estas atingita."
+  }
+}

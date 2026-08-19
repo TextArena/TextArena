@@ -1,0 +1,31 @@
+{
+  "_comment": "English locale for Hangman. Keys (left) are fixed; translate only the values (right). Keep every {placeholder} verbatim. Keep neutral tokens untranslated: the '[L]' / '[LIGHT]' bracket formats, the single-letter guess {letter}, the column headers (C00, C01, ...) and '_' blanks inside {board}.",
+  "_slots": {
+    "{board}": "Neutral rendered board (C00/C01 column headers, revealed letters, '_' blanks); do not translate",
+    "{tries_left}": "Remaining incorrect tries (integer)",
+    "{guessed}": "Comma-separated list of already-guessed letters",
+    "{letter}": "The guessed letter or full word (kept as typed)",
+    "{pct}": "Percentage of characters guessed correctly, formatted to 2 decimals",
+    "{target_word}": "The hidden target word"
+  },
+  "prompt": {
+    "intro": "Mwana kufwila Hangman. Ntendwa ya mchezo ni kuvanga ngeji kwa kutoa malipilo ya vifwili vyamoja au ngeji yote.\nKila safu ina nambari. Vifwili vya kuzingwa na vifwili ni vya kuwakilishwa na '_'.\n\nKuna njia mbili za kuyuka. Ungaweza kutoa malipilo ya vifwili vyamoja kwa fomu ya '[L]', au ungeweza kuvanga ngeji yote kwa fomu ya '[LIGHT]'.\nIkiwa vifwili vilivyotolewa viliwamo ngeji, vitakutolewa kwenye gridi.\nIkiwa ngeji iliyotolewa ni sahihi, ungeshinda.\nKama unacheza, historia ya malipilo yako itaongezwa hapa chini. Tumia habari hiyo kufikiria ngeji na ushinde.\nUna malipilo 6 yasiyo sahihi kabla ya mchezo kuisha.\n\n"
+  },
+  "board": {
+    "status": "Bodi ya sasa:\n{board}\nUli na {tries_left} mawona yaliyobaki.\nMawona yaliyowekwa: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Fomu ya kusakala si sahihi. Ungaweza kujibu gha fomu ya 'herufi' kana 'cipande'.",
+    "already_guessed": "Wavambile herufi '{letter}' ambayo yavambile tayari."
+  },
+  "message": {
+    "wrong_word": "Kutoweka kwako kwa '{letter}' si cipande cakusakala.",
+    "letter_in": "Kuvamba kwako kwa {letter} kukwamo mu nziyi",
+    "letter_not_in": "Kuvamba kwako kwa {letter} kukwamo hayi mu nziyi. Una {tries_left} miyoyo iliyobaki."
+  },
+  "outcome": {
+    "win_word": "Hongera! Uliweza kukamilisha puzzle ya Hangman.",
+    "win_board": "Hongera! Uliweza kukamilisha puzzle ya Hangman.",
+    "out_of_tries": "Wakwela kwa majaribu. Wavambile {pct} pesenti ya vithu viswamu. Nziyi ya kulombelwa yalikuwa : {target_word}"
+  }
+}

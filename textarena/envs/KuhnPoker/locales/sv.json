@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Du är Spelare {player_id} i ett {max_rounds} omgångars spel av Kuhn Poker.\nSpelregler:\n- Kuhn Poker använder en 3-kortslek med J, Q, K (J lägst, K högst)\n- Varje spelare lägger {ante} marker och får 1 kort varje omgång (observera att korten delas ut utan ersättning, så du kan inte ha samma kort som din motståndare).\n- Spelet fortsätter i {max_rounds} omgångar\n- Spelaren med flest marker efter alla omgångar vinner\nAktionsregler:\n- '[check]': Passa utan att satsa (endast om ingen satsning ligger på bordet)\n- '[bet]': Lägg till 1 marker i potten (endast om ingen satsning ligger på bordet)\n- '[call]': Matcha motståndarens satsning genom att lägga till 1 marker i potten\n- '[fold]': Ge upp din hand och låt din motståndare vinna potten"
+  },
+  "init_round": {
+    "round_start": "### Startar omgång {current_round} av {max_rounds} omgångar. Ditt kort är: '{player_card}'",
+    "available_actions": "Dina tillgängliga åtgärder är: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Åtgärden måste vara [Check], [Bet], [Call] eller [Fold].",
+    "not_legal": "Åtgärden måste vara {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Spelare {player_id} har skickat in åtgärd: '[{move}]'.",
+    "valid_actions": "Dina tillgängliga åtgärder är: {legal_actions}.",
+    "round_summary": "{reason} Aktuella poäng: Spelare 0: '{player_0_chips}'; Spelare 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Spelare {winner}s {winner_card} slår Spelare {loser}s {loser_card}. Spelare {winner} vinner potten på {pot_value} marker."
+  },
+  "outcome": {
+    "draw": "Efter {max_rounds} omgångar hade båda spelarna samma antal marker.",
+    "round_win": "Spelare {player_id} har gett upp.",
+    "winner_player0": "Spelare 0 vann genom att ha fler marker i slutet av alla {max_rounds} omgångar.",
+    "winner_player1": "Spelare 1 vann genom att ha fler marker i slutet av alla {max_rounds} omgångar."
+  }
+}

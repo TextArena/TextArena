@@ -1,0 +1,41 @@
+{
+  "_comment": "Archivo de idioma de LinesOfAction en español. NO traduzcas las claves, solo los valores. Nunca traduzcas las coordenadas del tablero (a-h, 1-8), las letras de las piezas (O, X), el token del formato de movimiento ni la cuadrícula ASCII {board}.",
+  "_slots": {
+    "{player_id}": "El número del jugador, 0 o 1",
+    "{side}": "La letra de la pieza del jugador, O o X",
+    "{other}": "La letra de la pieza del oponente, O o X",
+    "{board}": "La representación ASCII del tablero; déjala tal cual",
+    "{coord}": "Una coordenada del tablero como b1 o a3",
+    "{from}": "La coordenada de origen de un movimiento, como b1",
+    "{to}": "La coordenada de destino de un movimiento, como b3"
+  },
+
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id} en la partida de LinesOfAction.\nTus piezas son '{side}', las piezas del oponente son '{other}'.\nFormato de movimiento: `[b1b3]` (coordenada de origen, coordenada de destino). Un movimiento legal se desplaza horizontal, vertical o diagonalmente un número de casillas igual al total de piezas (de cualquier color) en esa línea. Puedes saltar sobre tus propias piezas, pero no sobre las del oponente; caer sobre una pieza del oponente la captura.  Ganas cuando todas tus piezas están conectadas por sus 8 vecinos."
+  },
+
+  "board": {
+    "current_board": "Tablero:\n\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "El formato debe ser e2e4 (coordenadas de origen, destino).",
+    "no_piece": "No hay ninguna pieza {side} en {coord}.",
+    "identical": "El origen y el destino son idénticos.",
+    "not_straight_or_diagonal": "El movimiento debe ser recto o diagonal.",
+    "wrong_distance": "Debes mover una distancia igual a las piezas en la línea.",
+    "enemy_blocks": "Una pieza enemiga bloquea el camino.",
+    "destination_own": "El destino está ocupado por una pieza propia."
+  },
+
+  "game_action": {
+    "moved": "El Jugador {player_id} movió {from} -> {to}",
+    "captured_suffix": "El Jugador {player_id} movió {from} -> {to} capturando una pieza enemiga."
+  },
+
+  "outcome": {
+    "win": "Todas las piezas conectadas.",
+    "draw_no_capture": "60 movimientos sin captura.",
+    "draw_repetition": "Posición repetida tres veces."
+  }
+}

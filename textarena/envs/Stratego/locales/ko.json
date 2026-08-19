@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "당신은 스트라테고의 플레이어 {player_id}입니다.\n당신의 목표는 상대방의 깃발을 포착하거나 상대방의 모든 이동 가능한 조각을 제거하는 것입니다.\n당신의 군대는 이미 보드에 배치되어 있으며, 깃발, 폭탄, 그리고 다양한 등급의 다른 조각들이 포함되어 있습니다.\n\n### 게임 플레이 지침\n1. **이동 규칙:**\n   - 당신의 차례에는 인접한 정사각형(up, down, left, or right)으로 한 칸 이동할 수 있습니다. 이미 당신의 조각이 있는 칸으로 이동할 수 있습니다.\n   - 예: 조각은 A1에서 B1 또는 A1에서 A2로 이동할 수 있습니다. B1과 A2가 플레이어의 조각으로 차지되어 있지 않은 경우에만 가능합니다.\n   - 선택한 조각이 폭탄이나 깃발인 경우 이동할 수 없습니다.\n2. **전투:**\n   - 상대방의 조각이 있는 칸으로 이동하면 전투가 발생합니다:\n     - 높은 등급의 조각이 승리하여 상대방의 조각을 제거합니다.\n     - 등급이 같으면 두 조각 모두 보드에서 제거됩니다.\n     - **특별한 경우:**\n       - 폭탄은 군인을 제외한 대부분의 공격 조각을 제거합니다. 군인은 폭탄을 해체합니다.\n       - 스파이는 스파이가 먼저 공격할 경우 원수를 이길 수 있지만, 다른 모든 조각에게는 패배합니다.\n3. **전략적 목표:**\n   - 상대방의 조각을 그들의 이동과 전투를 통해 식별합니다.\n   - 깃발을 보호하면서 상대방의 깃발을 포착하려고 노력합니다.\n   - 정찰병을 전략적으로 사용하여 상대방의 조각에 대한 정보를 얻고 약한 조각을 공격합니다.\n\n### 수를 둘 방법:\n1. 이동하려는 조각의 좌표와 목적지를 지정합니다.\n2. [A0 B0] 형식을 사용합니다. 여기서 A0는 출발 위치이고, B0는 목적지입니다.\n   - 예: 0행 0열에서 1행 0열로 조각을 이동하려면 [A0 B0]를 입력합니다.\n3. 위의 이동 규칙에 따라 목적지가 유효한지 확인합니다.\n\n### 중요한 사항:\n- 보드는 당신의 조각과 그 위치를 보여줍니다. 예: MN, MS.\n- 보드는 상대방의 조각의 알려진 위치를 등급을 공개하지 않고 보여줍니다. 예: ?.\n- ~ 표시된 격자는 호수로, 이동할 수 없습니다.\n- 제안으로, 게임을 시작할 때 전방에 있는 조각을 이동하여 상대방의 조각에 대한 정보를 얻으세요. 플레이어 0과 플레이어 1의 전방은 각각 D행과 G행입니다.\n\n현재 보드 상태는 다음과 같습니다:\n"
+  },
+  "board": {
+    "current_board": "현재 보드:\n\n{board}\n가능한 수: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "잘못된 행동 형식입니다. 플레이어 {player_id}는 [A0 B0] 형식으로 수를 입력해야 합니다.",
+    "invalid_coordinates": "잘못된 행동 형식입니다. 플레이어 {player_id}는 유효한 좌표를 입력해야 합니다.",
+    "not_own_piece": "잘못된 행동 형식입니다. 플레이어 {player_id}는 자신의 조각을 이동해야 합니다.",
+    "scout_through_pieces": "잘못된 행동 형식입니다. 플레이어 {player_id}는 정찰병을 다른 조각을 통해 이동할 수 없습니다.",
+    "scout_diagonal": "잘못된 행동 형식입니다. 플레이어 {player_id}는 정찰병을 대각선으로 이동할 수 없습니다.",
+    "non_scout_multi_square": "잘못된 행동 형식입니다. 정찰병을 제외한 조각은 한 번에 한 칸만 이동할 수 있습니다.",
+    "move_into_lake": "잘못된 행동 형식입니다. 플레이어 {player_id}는 호수로 이동할 수 없습니다.",
+    "move_onto_own_piece": "잘못된 행동 형식입니다. 플레이어 {player_id}는 자신의 조각 위로 이동할 수 없습니다.",
+    "move_bomb_or_flag": "잘못된 행동 형식입니다. 플레이어 {player_id}는 폭탄이나 깃발을 이동할 수 없습니다."
+  },
+  "game_action": {
+    "you_moved": "당신은 조각을 {source}에서 {dest}로 이동했습니다.",
+    "opponent_moved": "플레이어 {player_id}는 조각을 {source}에서 {dest}로 이동했습니다.",
+    "you_equal_ranks": "당신은 조각을 {source}에서 {dest}로 이동했습니다. 공격 조각은 {attacking_rank}이고 목적지 조각은 {target_rank}입니다. 등급이 같으므로 두 조각 모두 패배했습니다.",
+    "opponent_equal_ranks": "플레이어 {player_id}는 조각을 {source}에서 {dest}로 이동했습니다. 공격 조각은 {attacking_rank}이고 목적지 조각은 {target_rank}입니다. 등급이 같으므로 두 조각 모두 패배했습니다.",
+    "you_miner_defused": "당신은 조각을 {source}에서 {dest}로 이동했습니다. 공격 조각은 {attacking_rank}이고 목적지 조각은 {target_rank}입니다. 군인은 폭탄을 해체할 수 있으므로 전투에서 승리했습니다.",
+    "opponent_miner_defused": "플레이어 {player_id}는 조각을 {source}에서 {dest}로 이동했습니다. 공격 조각은 {attacking_rank}이고 목적지 조각은 {target_rank}입니다. 군인은 폭탄을 해체할 수 있으므로 전투에서 패배했습니다.",
+    "you_bomb_lost": "당신은 조각을 {source}에서 {dest}로 이동했습니다. 공격 조각은 {attacking_rank}이고 목적지 조각은 {target_rank}입니다. 공격자가 군인이 아닌 경우 전투에서 패배했습니다.",
+    "opponent_bomb_won": "플레이어 {player_id}는 조각을 {source}에서 {dest}로 이동했습니다. 공격 조각은 {attacking_rank}이고 목적지 조각은 {target_rank}입니다. 공격자가 군인이 아닌 경우 전투에서 승리했습니다.",
+    "you_spy_won": "당신은 조각을 {source}에서 {dest}로 이동했습니다. 공격 조각은 {attacking_rank}이고 목적지 조각은 {target_rank}입니다. 공격자가 스파이이고 목적지가 원수인 경우 전투에서 승리했습니다.",
+    "opponent_spy_lost": "플레이어 {player_id}는 조각을 {source}에서 {dest}로 이동했습니다. 공격 조각은 {attacking_rank}이고 목적지 조각은 {target_rank}입니다. 공격자가 스파이이고 목적지가 원수인 경우 전투에서 패배했습니다.",
+    "you_higher_won": "당신은 조각을 {source}에서 {dest}로 이동했습니다. 공격 조각은 {attacking_rank}이고 목적지 조각은 {target_rank}입니다. 공격자가 목적지보다 높은 등급인 경우 전투에서 승리했습니다.",
+    "opponent_higher_lost": "플레이어 {player_id}는 조각을 {source}에서 {dest}로 이동했습니다. 공격 조각은 {attacking_rank}이고 목적지 조각은 {target_rank}입니다. 공격자가 목적지보다 높은 등급인 경우 전투에서 패배했습니다.",
+    "you_lower_lost": "당신은 조각을 {source}에서 {dest}로 이동했습니다. 공격 조각은 {attacking_rank}이고 목적지 조각은 {target_rank}입니다. 공격자가 목적지보다 낮은 등급인 경우 전투에서 패배했습니다.",
+    "opponent_lower_won": "플레이어 {player_id}는 조각을 {source}에서 {dest}로 이동했습니다. 공격 조각은 {attacking_rank}이고 목적지 조각은 {target_rank}입니다. 공격자가 목적지보다 낮은 등급인 경우 전투에서 승리했습니다."
+  },
+  "outcome": {
+    "flag_captured": "플레이어 {player_id}가 상대방의 깃발을 포착했습니다!",
+    "no_movable_pieces": "플레이어 {winner_id}가 승리했습니다! 플레이어 {loser_id}는 더 이상 이동 가능한 조각이 없습니다."
+  }
+}

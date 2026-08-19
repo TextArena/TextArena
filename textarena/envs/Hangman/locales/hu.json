@@ -1,0 +1,31 @@
+{
+  "_comment": "Magyar nyelvi fájl a Hangman játékhoz. A kulcsok (bal oldal) rögzítettek; csak az értékeket (jobb oldal) fordítsa le. Minden {helyőrzőt} változatlanul hagyjon.",
+  "_slots": {
+    "{board}": "Semleges tábla (C00/C01 oszlopfejlécek, felfedett betűk, '_' üres helyek); ne fordítsa le",
+    "{tries_left}": "Helytelen próbálkozások száma (egész szám)",
+    "{guessed}": "Már kitalált betűk vesszővel elválasztott listája",
+    "{letter}": "A kitalált betű vagy teljes szó (eredeti beírás szerint)",
+    "{pct}": "Helyesen kitalált karakterek százaléka, 2 tizedesjegyre formázva",
+    "{target_word}": "A rejtett cél szó"
+  },
+  "prompt": {
+    "intro": "Hangman játékot játszik. A játék célja, hogy kitalálja a szót egy betűs tippelések vagy a teljes szó megadásával.\nMinden oszlop számozott. A betűkkel feltöltendő cellákat '_' jelöli.\n\nKét módon válaszolhat. Egy betűs tippeket adhat meg '[L]' formátumban, vagy kitalálhatja a teljes szót '[LIGHT]' formátumban.\nHa a megadott betű szerepel a szóban, akkor felfedésre kerül a rácsban.\nHa a megadott szó helyes, akkor nyer.\nAhogy játszik, a választásai előzményei alább kerülnek felsorolásra. Használja az információt, hogy kitalálja a szót és nyerjen.\n6 helytelen próbálkozása van, mielőtt a játék véget ér.\n\n"
+  },
+  "board": {
+    "status": "Aktuális tábla:\n{board}\n{tries_left} próbálkozás maradt.\nKitalált betűk: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Érvénytelen lépésformátum. Nem válaszolt érvényes 'betűvel' vagy 'szóval'.",
+    "already_guessed": "Már kitalálta a '{letter}' betűt, amelyet már korábban kitalált."
+  },
+  "message": {
+    "wrong_word": "A '{letter}' tippje nem a cél szó.",
+    "letter_in": "A {letter} tippje szerepel a szóban",
+    "letter_not_in": "A {letter} tippje nem szerepel a szóban. {tries_left} élet maradt."
+  },
+  "outcome": {
+    "win_word": "Gratulálunk! Teljesítette a Hangman feladványt.",
+    "win_board": "Gratulálunk! Teljesítette a Hangman feladványt.",
+    "out_of_tries": "Elfogytak a próbálkozásai. {pct} százalékban találta el a karaktereket helyesen. A cél szó: {target_word}"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake lokalisationsfil. Oversæt ikke nøgler (venstre side). Oversæt kun værdier (højre side). Hold hver {placeholder} nøjagtigt som den er. Oversæt ikke flytte/retningstoken som spilleren indtaster ([up], [down], [left], [right], w, s, a, d) eller det ASCII-bræt, der gengives i {board}.",
+  "_slots": {
+    "{num_players}": "Antallet af spillere i kampen",
+    "{width}": "Brættets bredde i celler",
+    "{height}": "Brættets højde i celler",
+    "{max_turns}": "Tidsgrænse for kampen",
+    "{player_id}": "En spillers nummer (0-baseret)",
+    "{board}": "Det gengivede ASCII-gitter; hold neutralt, oversæt aldrig dets tegn",
+    "{reason}": "Den gengivede slutspilsårsagsfase",
+    "{groups}": "Neutrale rangdata (en liste af spiller-id-grupper, værst til bedst); oversæt ikke"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-spillers Snake på et {width}×{height} gitter.\nDu kontrollerer slangen {player_id}. Gyldige træk: '[up]'/'[down]'/'[left]'/'[right]' (eller w/s/a/d).\nMål: overlev længst eller være den længste og få den højeste score (tidsgrænse på {max_turns} ture)."
+  },
+  "board": {
+    "current": "Aktuelt bræt:\n{board}",
+    "after_moves": "Aktuel brættilstand:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Slange {player_id} døde på grund af ugyldigt træk."
+  },
+  "outcome": {
+    "survived_win": "Spiller {player_id} overlevede; alle andre omkom.",
+    "all_dead_simul": "Alle slanger døde samtidigt.",
+    "outlived": "Spiller overlevede alle andre.",
+    "all_dead": "Alle slanger døde.",
+    "turn_limit": "Tidsgrænsen nået - bedste score vinder uafgjort.",
+    "ranking": "{reason} Endelig rangordningsgrupper (værst→bedst): {groups}"
+  }
+}

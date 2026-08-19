@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Nagsugod ang dula. Trump suit: {trump_suit} (trump card: {trump_str}).",
+    "no_trump_card": "walay bisan usa"
+  },
+  "player_prompt": {
+    "intro": "Ikaw ang Player {player_id} sa German Whist.\n{phase_info}\nGipanag-iya mo ang {hand_size} ka mga card.\nPagdula og card pinaagi sa '[play N]', diin N mao ang iyang posisyon sa imong kamot (ingon man '[play 3]').",
+    "phase_learning": "PAGKATIKAN NG PALAHON: ang mananaog sa matag trick magkuha ug maputol nga kard, samtang ang nawad-an mogamit og sunod nga card gikan sa deck. Ang mga tricks nga nadawat niining panahona dili iapil ngadto sa kadaugan.",
+    "phase_playing": "ANG PAGKAIGAD: ang deck naubos. Ang matag limbong gikan karon mag-agad ngadto sa kadaogan."
+  },
+  "next_card": {
+    "playing_phase": "Walay gihalad nga kard - nagsugod na ang yugto sa pagdula.",
+    "deck_empty": "Ang deck walay sulod - wala nay gihalad nga kard.",
+    "available": "Ang card nga gitanyag: {card}",
+    "available_trump": "Ang card nga gitanyag: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Dili balido nga format sa paglihok. Gamita ang '[play N]' aron ma-play ang Nth card diha sa imong kamot.",
+    "bad_position": "Wala kana nga posisyon sa kard. Ikaw naghupot ug {hand_size} ka mga karton.",
+    "must_follow_suit": "Kinahanglan nga sundon nimo ang panig-ingnan ug magpatugtog og {lead_suit} ka kard.",
+    "invalid_play": "Dili na kana mabuhat."
+  },
+  "game_action": {
+    "played": "Player {player_id} gipatugtog sa {card}."
+  },
+  "trick": {
+    "won": "Player {winner_id} modaog sa trick uban sa {card}.",
+    "won_learning": "Player {winner_id} nagdaog sa trick uban sa {card} ug mipakuha sa face-up card."
+  },
+  "phase": {
+    "learning_complete": "Ang deck naubos. Nahuman ang yugto sa pagkat-on - matag nahibilin nga limbong maoy magpasabot alang sa kadaogan."
+  },
+  "draw": {
+    "winner_received": "Nagdaog ka sa trick ug nakadawat og {card}.",
+    "loser_received": "Nawala ang trick ug nagdalag {card} gikan sa deck.",
+    "winner_preview": "Ang sunod nga kard mao ang {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Mga trik nga naangkon karon - Manlalaro 0: {tricks0}, Manlalaro 1: {tricks1}",
+    "scores_playing": "Pagscore sa mga trik - Manlalaro 0: {tricks0}, Manlalaro 1: {tricks1}",
+    "phase": "Ang yugto: {phase}",
+    "phase_learning": "Phase: {phase} ({remaining_cards} ka mga card left sa deck)"
+  },
+  "hand": {
+    "no_cards": "Walay mga kard.",
+    "no_cards_in_hand": "Walay mga kard sa kamot.",
+    "header": "Ang imong kamot:",
+    "trump_indicator": "(TRUMP) Ang mga tawo sa Amerika.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Walay mga kard nga gipatugtog pa niining maong limbong.",
+    "header": "Kasamtangang limbong:",
+    "trump_indicator": "(TRUMP) Ang mga tawo sa Amerika.",
+    "card_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Ang dula wala masugdan.",
+    "header": "=== DUYOG SA GERMAN WHIST ===",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nTrumpa nga suit: {trump_suit}",
+    "trump_card": "{observation}\nTrump nga karta: {card}",
+    "cards_left": "{observation}\nKatin-a nga mga card sa deck: {count}",
+    "next_card": "{observation}\nSunod nga card alang sa winner: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Kasamtangan nga limbong:",
+    "trump_indicator": "(TRUMP) Ang mga tawo sa Amerika.",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nSi Player {player_id}: {scoring} mga trick nga magamit alang sa kadaogan ({tricks} total), {hand_size} ka mga karta sa kamot"
+  },
+  "outcome": {
+    "summary": "Yugto sa pagtuon - Manlalaro 0: {l0}, Manlalaro 1: {l1}. Yugto sa pagdula - Manlalaro 0: {p0}, Manlalaro 1: {p1}. Ang Manlalaro {winner_id} midaog uban sa {winner_tricks} mga trik nga pagscore!"
+  }
+}

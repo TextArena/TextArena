@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola nyelvi fájl. NE fordítsa le a kulcsokat (bal oldal). Csak a értékeket fordítsa le (jobb oldal).",
+  "_slots": {
+    "{player_id}": "A játékos száma, pl. 0 vagy 1",
+    "{trump_suit}": "A adu szín szimbóluma (♠♥♦♣) - ne fordítsa le",
+    "{trump_card}": "Az adu kártya címke, pl. '7♠' - ne fordítsa le",
+    "{card}": "Egy kártya címke, pl. 'A♥' - ne fordítsa le",
+    "{trump_mark}": "Az előre megjelenített '(TRUMP)' jelölő, vagy üres",
+    "{max_pos}": "A legmagasabb érvényes kártya pozíció a játékos kezében",
+    "{count}": "A kártyák száma, amelyeket a játékos tart",
+    "{pos}": "Egy kártya pozíciószáma a kézben",
+    "{points}": "Pontok száma (kártya értéke vagy felhalmozott pontszám)",
+    "{hand}": "Az előre megjelenített, többsoros kézlista",
+    "{trick}": "Az előre megjelenített aktuális trükk lista",
+    "{scores}": "Az előre megjelenített pontsor, vagy a végső játékosonkénti pontblokk",
+    "{trump_info}": "Az előre megjelenített adu szín / pakli szám sor",
+    "{winner}": "A játékos száma, aki megnyerte a trükköt vagy a játékot",
+    "{tricks}": "A trükkök száma, amelyeket a játékos nyert",
+    "{deck_count}": "A pakliban maradt kártyák száma"
+  },
+  "game": {
+    "start": "Briscola játék indult! Adu szín: {trump_suit} (Adu kártya: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Briscola-t játszik - Játékos {player_id}.\nCél: Nyerjen trükköket és gyűjtsön a legtöbb pontot (120 pont összesen a pakliban).\nKártya pontok: A=11, 3=10, K=4, Q=3, J=2, mások=0\nKártya erő: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nAdu kártyák legyőzik a nem adu kártyákat, függetlenül az erőtől.\n\nMűvelet: '[play X]', ahol X a kártya pozíciója (1-{max_pos}) a kezében\n"
+  },
+  "hand": {
+    "none": "Nincs kártya",
+    "empty": "Nincs kártya a kézben",
+    "header": "Keze:",
+    "card_line": "  {pos}. {card} [{points} pont]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Még nincs kártya lejátszva ebben a trükkben.",
+    "header": "Aktuális trükk:",
+    "line": "  Játékos {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Játékos {player_id}: {points} pont",
+    "trump_info": "Adu szín: {trump_suit}",
+    "trump_info_deck": "Adu szín: {trump_suit} | Kártyák száma a pakliban: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPontok: {scores}\n{trump_info}\n\nJátsszon egy kártyát a [play X] paranccsal"
+  },
+  "invalid_move": {
+    "wrong_format": "Használja a [play X] parancsot, ahol X a kártya pozíciója (1, 2, 3, stb.)",
+    "out_of_range": "Érvénytelen kártya pozíció. {count} kártyája van (1-{count})"
+  },
+  "action": {
+    "played": "Játékos {player_id} lejátszotta a {card} kártyát",
+    "trick_win": "Játékos {winner} megnyerte a trükköt a {card} kártyával és {points} pontot szerzett!"
+  },
+  "outcome": {
+    "head": "Játék vége! Játékos {winner} nyert {points} ponttal!\n\nVégső pontszámok:\n{scores}",
+    "player_line": "Játékos {player_id}: {points} pont ({tricks} trükk)\n"
+  }
+}

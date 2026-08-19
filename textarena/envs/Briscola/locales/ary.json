@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "بدأت لعبة بريسكولا! البستوني: {trump_suit} (البطاقة البستونية: {trump_card})"
+  },
+  "prompt": {
+    "intro": "نت لعب بيريسكولا - لاعيب {player_id}.\nالهدف: ربح الدورات و جمع أكبر عدد ديال النقاط (مجموع النقاط 120 فاللعبة).\nنقاط الكارت: A=11، 3=10، K=4، Q=3، J=2، لخرين=0\nقوة الكارت: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nكارت الترامپ كتسبق على الكارت لخرين بغض النظر على القوة.\n\nفعل: '[play X]' حيث X هو الترتيب (1-{max_pos}) ديال الكارت فاليد ديالك\n"
+  },
+  "hand": {
+    "none": "ماكاينش كارتات.",
+    "empty": "ماكاينش البطاقات فيدك.",
+    "header": "يدك:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(ترومب)"
+  },
+  "trick": {
+    "empty": "ماكانش هاد البطاقات لعبو حتى دابا.",
+    "header": "خدعة الجارية:",
+    "line": "  Player {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "اللاعب {player_id}: {points} نقطة",
+    "trump_info": "سوت ديال الترامپ: {trump_suit}",
+    "trump_info_deck": "البستوني: {trump_suit} | البطاقات المتبقية في الكومة: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nالنتائج: {scores}\n{trump_info}\n\nالعب بطاقة باستخدام [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "استخدم [play X] حيث X هو موقع البطاقة (1, 2, 3، إلخ.)",
+    "out_of_range": "موقع البطاقة غير صالح. لديك {count} بطاقات (1-{count})"
+  },
+  "action": {
+    "played": "اللاعب {player_id} لعب {card}",
+    "trick_win": "اللاعب {winner} يفوز بالحيلة مع {card} ويكسب {points} نقطة!"
+  },
+  "outcome": {
+    "head": "انتهت اللعبة! اللاعب {winner} يفوز بنقاط {points}!\n\nالنتائج النهائية:\n{scores}",
+    "player_line": "اللاعب {player_id}: {points} نقطة ({tricks} حيل)\n"
+  }
+}

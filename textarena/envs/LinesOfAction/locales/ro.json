@@ -1,0 +1,36 @@
+{
+  "_comment": "Fișier de localizare pentru LinesOfAction. NU traduceți cheile (partea stângă). Traduceți doar valorile (partea dreaptă).",
+  "_slots": {
+    "{player_id}": "Numărul jucătorului, fie 0, fie 1",
+    "{side}": "Litera piesei jucătorului, fie O, fie X",
+    "{other}": "Litera piesei adversarului, fie O, fie X",
+    "{board}": "Reprezentarea ASCII a tablei; păstrați ca atare",
+    "{coord}": "O coordonată a tablei, cum ar fi b1 sau a3",
+    "{from}": "Coordonata sursă a unei mutări, cum ar fi b1",
+    "{to}": "Coordonata destinației unei mutări, cum ar fi b3"
+  },
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} în jocul LinesOfAction.\nPiesele dvs. sunt '{side}', piesele adversarului sunt '{other}'.\nFormatul mutării: `[b1b3]` (de la coordonata de început la coordonata de sfârșit). O mutare legală se deplasează orizontal, vertical sau diagonal cu un număr de pătrate egal cu numărul total de piese (de orice culoare) din acea linie. Puteți sări peste propriile piese, dar nu peste piesele adversarului; aterizarea pe o piesă a adversarului o capturează. Câștigați când toate piesele dvs. sunt conectate într-un grup de 8 vecini."
+  },
+  "board": {
+    "current_board": "Tablă:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatul trebuie să fie e2e4 (coordonate de la și până la).",
+    "no_piece": "Nu există piesă {side} pe {coord}.",
+    "identical": "Sursa și destinația sunt identice.",
+    "not_straight_or_diagonal": "Mutarea trebuie să fie dreaptă sau diagonală.",
+    "wrong_distance": "Trebuie să mutați o distanță egală cu numărul de piese din linie.",
+    "enemy_blocks": "Piesa adversarului blochează calea.",
+    "destination_own": "Destinația este ocupată de propria piesă."
+  },
+  "game_action": {
+    "moved": "Jucătorul {player_id} a mutat {from} -> {to}",
+    "captured_suffix": "Jucătorul {player_id} a mutat {from} -> {to} capturând o piesă a adversarului."
+  },
+  "outcome": {
+    "win": "Toate piesele sunt conectate.",
+    "draw_no_capture": "60 de mutări fără captură.",
+    "draw_repetition": "Poziția s-a repetat de trei ori."
+  }
+}

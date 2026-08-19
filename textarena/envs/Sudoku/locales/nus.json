@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Yin ee Player {player_id}. Yin ee Sudoku.\nKa ciɛ̈ɛ̈n ke Sudoku grid de. Rin ke ciɛ̈ɛ̈n ke 1 ne 9, ku col ke ciɛ̈ɛ̈n ke 1 ne 9.\nCells ke ciɛ̈ɛ̈n ke '.' ke, ku cells ke pre-filled ke ke ciɛ̈ɛ̈n ke 1 ne 9.\n\nSudoku Grid ciɛ̈ɛ̈n:\nYin ee objective ee fill cells ke ciɛ̈ɛ̈n ke 9x9 grid ke ciɛ̈ɛ̈n ke 1 ne 9:\n1. Rin ke ciɛ̈ɛ̈n ke 1 ne 9 kuɔ̈ɔ̈ ke.\n2. Col ke ciɛ̈ɛ̈n ke 1 ne 9 kuɔ̈ɔ̈ ke.\n3. Subgrids ke ciɛ̈ɛ̈n ke 3x3 ke ciɛ̈ɛ̈n ke 1 ne 9 kuɔ̈ɔ̈ ke.\n\nRules ku Instructions:\n1. **Käc wäc** ciɛ̈ɛ̈n ke grid ke.\n2. **Fill** cells ke ciɛ̈ɛ̈n ke '.' ke.\n3. Yin ee respond ee format ke '[row column number]'.\n4. **Käc wäc** ee move ke ciɛ̈ɛ̈n ke Sudoku rules. Invalid moves ke penalties ke.\nExamples:\n- **Valid Move**:\n  - Grid Snippet Before Move:\n  \n  - Move: `[5 3 7]`\n  - Explanation: Placing 7 ee row 5, column 3 ciɛ̈ɛ̈n ke.\n\n- **Invalid Move** (Overwriting ee pre-filled cell):\n  - Grid Snippet Before Move:\n  \n  - Move: `[1 1 9]`\n  - Explanation: Cell (1,1) ee filled ke 5. Yin ee overwrite ke.\n\n- **Invalid Move** (Violating Sudoku rules):\n  - Grid Snippet Before Move:\n  \n  - Move: `[1 3 5]`\n  - Explanation: Placing 5 ee row 1, column 3 ciɛ̈ɛ̈n ke.\n\nYin ee history ke moves ke thoughts ke appended ee play more rounds. Yin ee history ke move ee improve decision making ee avoiding moves ke tried. Yin ee luck!\n\n"
+  },
+  "board": {
+    "game_board": "Ciɛrkä min la̱tkɛ kɛ kui̱ ŋarä: {board}",
+    "board_state": "Kuär in tä kä kumɛ: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ci̱ ŋar ɛ /ciɛ thuɔ̱k. Jɔk {player_id} cɛ luɔc kɛ 'rɛy in ca gɔ̱r kä ciɛr'.",
+    "out_of_bounds": "Kɛmɛt de ŋuɛn. Player {player_id} cɛ̈ŋ ciɛ̈l {num} kɛn ({row}, {col}), kɛn aci kɛm kuɛny.",
+    "overwrite": "Kɛmɛt de ŋuɛn. Player {player_id} cɛ̈ŋ ciɛ̈l kɛn pre-filled cell ({row}, {col}).",
+    "violates_rules": "Kɛmɛt de ŋuɛn. Player {player_id} cɛ̈ŋ ciɛ̈l {num} kɛn ({row}, {col}), kɛn aci kɛm kuɛny thɛɛr de Sudoku."
+  },
+  "outcome": {
+    "win": "Cuu ŋar ɛ {player_id} Sudoku thuɔ̱k.",
+    "turn_limit": "Kä pek in ca mat piny ɛ jɛn min bi̱ ben raar kä thɛl tin /thiɛlɛ luɔt. Ji̱n ci kɛ gɔ̱a̱r i̱ mi̱ thuɔ̱k {percent}% duŋ thi̱lɛ̈li̱ ti̱ te baaŋ (empty cells)."
+  }
+}

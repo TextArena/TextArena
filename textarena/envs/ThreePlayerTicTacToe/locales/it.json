@@ -1,0 +1,32 @@
+{
+  "_comment": "File di localizzazione di ThreePlayerTicTacToe. NON tradurre le chiavi (lato sinistro). Tradurre solo i valori (lato destro).",
+  "_slots": {
+    "{player_id}": "Il numero del giocatore, ad esempio 0, 1 o 2",
+    "{symbol}": "Il segno del giocatore, uno di A, B o C",
+    "{cell}": "Un numero di cella della tavola",
+    "{max_cell}": "Il numero di cella più alto valido (dimensione_tavola^2 - 1)",
+    "{row}": "L'indice di riga della tavola del segno inserito",
+    "{col}": "L'indice di colonna della tavola del segno inserito",
+    "{board}": "La tavola ASCII renderizzata (non tradurre)",
+    "{moves}": "L'elenco separato da virgole dei token di mossa disponibili come '[4]' (non tradurre)"
+  },
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in Tic Tac Toe a tre giocatori.\nIl tuo simbolo è '{symbol}'.\nA turno, inserisci il tuo simbolo su una tavola 5x5 per formare una linea di quattro.\nLe linee possono essere orizzontali, verticali o diagonali.\nInvia la tua mossa utilizzando il formato '[4]' per segnare la cella 4."
+  },
+  "board": {
+    "current_board": "Tavola attuale:\n\n{board}\n\nMosse disponibili: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato di mossa non valido. Utilizza '[cell]' dove cell è 0-{max_cell}.",
+    "out_of_range": "Numero di cella non valido: {cell}. Deve essere tra 0 e {max_cell}.",
+    "already_occupied": "La cella {cell} è già occupata.",
+    "made_invalid": "Il Giocatore {player_id} ha effettuato una mossa non valida"
+  },
+  "game_action": {
+    "placed": "Il Giocatore {player_id} inserisce il suo simbolo ({symbol}) nel campo ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Il Giocatore {player_id} ({symbol}) vince!",
+    "draw": "La partita è finita in parità!"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w Stratego.\nTwoim celem jest zdobycie flagi przeciwnika lub wyeliminowanie wszystkich jego ruchomych pionków.\nTwoja armia została umieszczona na planszy, w tym Twoja flaga, bomby i inne pionki o różnych rangach.\n\n### Instrukcje gry\n1. **Zasady ruchu:**\n   - W swojej turze możesz ruszyć jednym pionkiem o jeden krok do sąsiedniego kwadratu (w górę, w dół, w lewo lub w prawo), który jest już zajęty przez Twoje pionki.\n   - Przykład: Pionek może ruszyć z A1 do B1 lub A1 do A2, jeśli B1 i A2 nie są zajęte przez pionki gracza.\n   - Jeśli wybrany pionek jest bombą lub flagą, nie może być ruszony.\n2. **Bitwy:**\n   - Jeśli ruszysz na kwadrat zajęty przez pionek przeciwnika, nastąpi bitwa:\n     - Pionek o wyższej randze wygrywa i eliminuje pionek przeciwnika.\n     - Jeśli rangi są równe, oba pionki są usuwane z planszy.\n     - **Specjalne przypadki:**\n       - Bomby eliminują większość atakujących pionków, z wyjątkiem minerów, którzy rozbrajają bomby.\n       - Szpiedzy mogą pokonać marszałka, jeśli szpieg zaatakuje pierwszy, ale przegrywają z wszystkimi innymi pionkami.\n3. **Cele strategiczne:**\n   - Rozpoznaj pionki przeciwnika poprzez ich ruchy i bitwy.\n   - Chroń swoją flagę, próbując zdobyć flagę przeciwnika.\n   - Użyj zwiadowców strategicznie, aby uzyskać informacje o pionkach przeciwnika i zaatakować słabe.\n\n### Jak wykonać ruch:\n1. Określ współrzędne pionka, który chcesz ruszyć, i jego miejsce przeznaczenia.\n2. Użyj formatu: [A0 B0], gdzie A0 jest pozycją źródłową, a B0 jest miejscem przeznaczenia.\n   - Przykład: Aby ruszyć pionek z wiersza 0, kolumny 0 do wiersza 1, kolumny 0, wprowadź [A0 B0].\n3. Upewnij się, że miejsce przeznaczenia jest ważne zgodnie z powyższymi zasadami ruchu.\n\n### Ważne uwagi:\n- Plansza pokaże Twoje pionki i ich pozycje, np. MN, MS.\n- Plansza pokaże również znane pozycje pionków przeciwnika bez ujawniania ich rang, np. ?.\n- Pola z ~ są jeziorami i nie mogą być zajęte.\n- Jako sugestię, rozpocznij grę, ruszając pionkami, które są na linii frontu, aby uzyskać informacje o pionkach przeciwnika. Linie frontu gracza 0 i gracza 1 to odpowiednio wiersz D i G.\n\nOto aktualny stan planszy:\n"
+  },
+  "board": {
+    "current_board": "Aktualna plansza:\n\n{board}\nDostępne ruchy: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nieprawidłowy format akcji. Gracz {player_id} nie wprowadził ruchu w formacie [A0 B0].",
+    "invalid_coordinates": "Nieprawidłowy format akcji. Gracz {player_id} nie wprowadził ważnych współrzędnych.",
+    "not_own_piece": "Nieprawidłowy format akcji. Gracz {player_id} musi ruszyć jednym ze swoich własnych pionków.",
+    "scout_through_pieces": "Nieprawidłowy format akcji. Gracz {player_id} nie może ruszyć zwiadowcą przez inne pionki.",
+    "scout_diagonal": "Nieprawidłowy format akcji. Gracz {player_id} nie może ruszyć zwiadowcą po przekątnej.",
+    "non_scout_multi_square": "Nieprawidłowy format akcji. Pionki, z wyjątkiem zwiadowców, mogą ruszyć tylko o jeden kwadrat na raz.",
+    "move_into_lake": "Nieprawidłowy format akcji. Gracz {player_id} nie może ruszyć do jeziora.",
+    "move_onto_own_piece": "Nieprawidłowy format akcji. Gracz {player_id} nie może ruszyć na własny pionek.",
+    "move_bomb_or_flag": "Nieprawidłowy format akcji. Gracz {player_id} nie może ruszyć bombą lub flagą."
+  },
+  "game_action": {
+    "you_moved": "Ruszyłeś swoim pionkiem z {source} do {dest}.",
+    "opponent_moved": "Gracz {player_id} ruszył pionkiem z {source} do {dest}.",
+    "you_equal_ranks": "Ruszyłeś swoim pionkiem z {source} do {dest}. Atakujący pionek miał rangę {attacking_rank}, a pionek w miejscu przeznaczenia miał rangę {target_rank}. Ponieważ rangi są równe, oba pionki przegrały.",
+    "opponent_equal_ranks": "Gracz {player_id} ruszył pionkiem z {source} do {dest}. Atakujący pionek miał rangę {attacking_rank}, a pionek w miejscu przeznaczenia miał rangę {target_rank}. Ponieważ rangi są równe, oba pionki przegrały.",
+    "you_miner_defused": "Ruszyłeś swoim pionkiem z {source} do {dest}. Atakujący pionek miał rangę {attacking_rank}, a pionek w miejscu przeznaczenia miał rangę {target_rank}. Ponieważ minerzy mogą rozbroić bomby, wygrałeś bitwę.",
+    "opponent_miner_defused": "Gracz {player_id} ruszył pionkiem z {source} do {dest}. Atakujący pionek miał rangę {attacking_rank}, a pionek w miejscu przeznaczenia miał rangę {target_rank}. Ponieważ minerzy mogą rozbroić bomby, przegrałeś bitwę.",
+    "you_bomb_lost": "Ruszyłeś swoim pionkiem z {source} do {dest}. Atakujący pionek miał rangę {attacking_rank}, a pionek w miejscu przeznaczenia miał rangę {target_rank}. Ponieważ atakujący nie jest minerem, przegrałeś bitwę.",
+    "opponent_bomb_won": "Gracz {player_id} ruszył pionkiem z {source} do {dest}. Atakujący pionek miał rangę {attacking_rank}, a pionek w miejscu przeznaczenia miał rangę {target_rank}. Ponieważ atakujący nie jest minerem, wygrałeś bitwę.",
+    "you_spy_won": "Ruszyłeś swoim pionkiem z {source} do {dest}. Atakujący pionek miał rangę {attacking_rank}, a pionek w miejscu przeznaczenia miał rangę {target_rank}. Ponieważ atakujący jest szpiegiem, a pionek w miejscu przeznaczenia jest marszałkiem, wygrałeś bitwę.",
+    "opponent_spy_lost": "Gracz {player_id} ruszył pionkiem z {source} do {dest}. Atakujący pionek miał rangę {attacking_rank}, a pionek w miejscu przeznaczenia miał rangę {target_rank}. Ponieważ atakujący jest szpiegiem, a pionek w miejscu przeznaczenia jest marszałkiem, przegrałeś bitwę.",
+    "you_higher_won": "Ruszyłeś swoim pionkiem z {source} do {dest}. Atakujący pionek miał rangę {attacking_rank}, a pionek w miejscu przeznaczenia miał rangę {target_rank}. Ponieważ atakujący ma wyższą rangę niż pionek w miejscu przeznaczenia, wygrałeś bitwę.",
+    "opponent_higher_lost": "Gracz {player_id} ruszył pionkiem z {source} do {dest}. Atakujący pionek miał rangę {attacking_rank}, a pionek w miejscu przeznaczenia miał rangę {target_rank}. Ponieważ atakujący ma wyższą rangę niż pionek w miejscu przeznaczenia, przegrałeś bitwę.",
+    "you_lower_lost": "Ruszyłeś swoim pionkiem z {source} do {dest}. Atakujący pionek miał rangę {attacking_rank}, a pionek w miejscu przeznaczenia miał rangę {target_rank}. Ponieważ atakujący ma niższą rangę niż pionek w miejscu przeznaczenia, przegrałeś bitwę.",
+    "opponent_lower_won": "Gracz {player_id} ruszył pionkiem z {source} do {dest}. Atakujący pionek miał rangę {attacking_rank}, a pionek w miejscu przeznaczenia miał rangę {target_rank}. Ponieważ atakujący ma niższą rangę niż pionek w miejscu przeznaczenia, wygrałeś bitwę."
+  },
+  "outcome": {
+    "flag_captured": "Gracz {player_id} zdobył flagę przeciwnika!",
+    "no_movable_pieces": "Gracz {winner_id} wygrywa! Gracz {loser_id} nie ma już ruchomych pionków."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "_comment": "Fichier de langue Cryptarithm en français. Ne traduisez PAS les clés, uniquement les valeurs. Conservez chaque {placeholder} ; ne traduisez pas le jeton `[A 5]`, les lettres ni les chiffres.",
+  "_slots": {
+    "{letter}": "Une lettre du puzzle, p. ex. S ou E",
+    "{digit}": "Un chiffre 0-9",
+    "{used_letter}": "La lettre qui a déjà pris un chiffre",
+    "{assigned}": "Combien de lettres sont attribuées jusqu'ici",
+    "{total}": "Nombre total de lettres distinctes",
+    "{pct}": "Progression en pourcentage, p. ex. 50%"
+  },
+  "player_prompt": { "intro": "Associez chaque lettre à un chiffre unique pour que le calcul soit correct.\nAttribuez avec `[A 5]`, réattribuable à tout moment.\n" },
+  "invalid_move": {
+    "wrong_format": "Format d'action invalide. Utilisez `[A 5]`.",
+    "letter_not_in_puzzle": "La lettre {letter} n'est pas dans le puzzle.",
+    "digit_used": "Le chiffre {digit} est déjà utilisé par {used_letter}.",
+    "leading_zero": "Le premier chiffre d'un mot ne peut pas être 0."
+  },
+  "outcome": {
+    "correct": "Correct ! Équation satisfaite.",
+    "incorrect": "Correspondance complète mais équation incorrecte.",
+    "limit": "Limite de coups atteinte."
+  },
+  "board": {
+    "mapping_header": "Correspondance :",
+    "none_yet": "  (aucune pour l'instant)",
+    "assigned": "\nAttribuées : {assigned}/{total} ({pct})"
+  }
+}

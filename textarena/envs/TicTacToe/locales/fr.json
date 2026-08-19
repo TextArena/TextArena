@@ -1,0 +1,32 @@
+{
+  "_comment": "Fichier de langue TicTacToe en français. Ne traduisez PAS les clés, uniquement les valeurs.",
+  "_slots": {
+    "{player_id}": "Le numéro du joueur, par exemple 0 ou 1",
+    "{symbol}": "Le symbole du joueur, X ou O",
+    "{opponent_symbol}": "Le symbole de l’adversaire, X ou O",
+    "{cell}": "Le numéro d’une case entre 0 et 8"
+  },
+
+  "player_prompt": {
+    "intro": "Vous êtes le joueur {player_id} au Morpion.\nVotre objectif est d’aligner trois symboles (horizontalement, verticalement ou en diagonale).\nÀ votre tour, choisissez le numéro de case (0-8) où vous souhaitez placer votre symbole.\nPar exemple, '[4]' place votre symbole dans la case centrale.\nEn tant que joueur {player_id}, votre symbole est '{symbol}', tandis que celui de votre adversaire est '{opponent_symbol}'."
+  },
+
+  "board": {
+    "current_board": "Plateau actuel :\n\n{board}\n\nCoups disponibles : {moves}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Le coup soumis ne respecte pas le bon format.",
+    "out_of_range": "{cell} n’est pas une case valide. Doit être entre 0 et 8.",
+    "already_occupied": "La case {cell} est déjà occupée."
+  },
+
+  "game_action": {
+    "placed": "Le joueur {player_id} a placé son symbole ({symbol}) dans la case {cell}."
+  },
+
+  "outcome": {
+    "win": "Le joueur {player_id} a gagné !",
+    "draw": "La partie se termine par un match nul !"
+  }
+}

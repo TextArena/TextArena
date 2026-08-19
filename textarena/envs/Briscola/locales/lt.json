@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola lokalės failas. NERVERSIKITE raktažodžių (kairėje pusėje). Vertėkite tik reikšmes (dešinėje pusėje). Palikite kiekvieną {placeholder} lygiai taip pat. NERVERSIKITE veiksmo žetoną '[play X]', kortų etikečių (A, 2..7, J, Q, K), taurės simbolių (pernešti į {card}/{trump_card} slots), arba skaitinių kiekių/taškų/rezultatų.",
+  "_slots": {
+    "{player_id}": "Žaidėjo numeris, pvz. 0 arba 1",
+    "{trump_suit}": "Taurės simbolis (♠♥♦♣) - nerversikite",
+    "{trump_card}": "Taurės kortos etiketė, pvz. '7♠' - nerversikite",
+    "{card}": "Kortos etiketė, pvz. 'A♥' - nerversikite",
+    "{trump_mark}": "Iš anksto sugeneruotas '(TRUMP)' žymeklis, arba tuščias",
+    "{max_pos}": "Aukščiausia legali kortos pozicija žaidėjo rankoje",
+    "{count}": "Kortų kiekis, kurį žaidėjas laiko",
+    "{pos}": "Kortos pozicijos numeris rankoje",
+    "{points}": "Taškų kiekis (kortos vertė arba sukauptas rezultatas)",
+    "{hand}": "Iš anksto sugeneruotas, daugiailinis rankos sąrašas",
+    "{trick}": "Iš anksto sugeneruotas esamo triuko sąrašas",
+    "{scores}": "Iš anksto sugeneruotas rezultatų eilutė, arba galutinis kiekvieno žaidėjo rezultato blokas",
+    "{trump_info}": "Iš anksto sugeneruotas taurės / kortų kiekio eilutė",
+    "{winner}": "Žaidėjo numeris, kuris laimėjo triuką arba žaidimą",
+    "{tricks}": "Triukų kiekis, kurį laimėjo žaidėjas",
+    "{deck_count}": "Kortų kiekis, kuris liko kaladėje"
+  },
+  "game": {
+    "start": "Briscola žaidimas prasidėjo! Taurė: {trump_suit} (Taurės korta: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Jūs žaidžiate Briscola - Žaidėjas {player_id}.\nTikslas: Laimėti triukus ir surinkti daugiausia taškų (viso 120 taškų kaladėje).\nKortų taškai: A=11, 3=10, K=4, Q=3, J=2, kiti=0\nKortų galia: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTaurės kortos nugali ne taurės kortas nepriklausomai nuo galios.\n\nVeiksmas: '[play X]' kur X yra kortos pozicija (1-{max_pos}) jūsų rankoje\n"
+  },
+  "hand": {
+    "none": "Nėra kortų",
+    "empty": "Nėra kortų rankoje",
+    "header": "Jūsų ranka:",
+    "card_line": "  {pos}. {card} [{points} taškų]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Dar nėra sužaistų kortų šiame triuke.",
+    "header": "Esamas triukas:",
+    "line": "  Žaidėjas {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Žaidėjas {player_id}: {points} taškų",
+    "trump_info": "Taurė: {trump_suit}",
+    "trump_info_deck": "Taurė: {trump_suit} | Kortų liko kaladėje: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nRezultatai: {scores}\n{trump_info}\n\nSužaiskite kortą naudodami [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Naudokite [play X] kur X yra kortos pozicija (1, 2, 3, ir t.t.)",
+    "out_of_range": "Neteisinga kortos pozicija. Jūs turite {count} kortų (1-{count})"
+  },
+  "action": {
+    "played": "Žaidėjas {player_id} sužaidė {card}",
+    "trick_win": "Žaidėjas {winner} laimėjo triuką su {card} ir gavo {points} taškų!"
+  },
+  "outcome": {
+    "head": "Žaidimas baigtas! Žaidėjas {winner} laimėjo su {points} taškais!\n\nGalutiniai rezultatai:\n{scores}",
+    "player_line": "Žaidėjas {player_id}: {points} taškų ({tricks} triukų)\n"
+  }
+}

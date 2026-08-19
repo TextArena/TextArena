@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong một trò chơi 3 người Dilemma Tù nhân Lặp lại. Cuộc đấu kéo dài {num_rounds} vòng.\nCấu trúc vòng:\n• {conv_rounds} lượt trò chuyện tự do\n• 1 lượt quyết định - nộp một token cho mỗi đối thủ: '[<opp-id> cooperate]' hoặc '[<opp-id> defect]' (ví dụ: '[1 defect] [2 cooperate]'; mặc định là 'cooperate'). \nMa trận trả thưởng đôi (áp dụng cho mỗi cặp không theo thứ tự):\n  - Cả hai hợp tác  ->  {reward}\n  - Cả hai phản bội  ->  {punishment}\n  - Bạn phản bội, họ hợp tác -> {temptation}\n  - Bạn hợp tác, họ phản bội -> {sucker}\nNgười chơi có điểm cao nhất sau tất cả các vòng sẽ thắng."
+  },
+  "round": {
+    "start": "─── Bắt đầu Vòng {round} ───\tBạn có thể trò chuyện tự do trong {conv_rounds} lượt tiếp theo.",
+    "chat_finished": "Cuộc trò chuyện đã kết thúc cho vòng {round}. Nộp quyết định của bạn, một token cho mỗi đối thủ: `[pid cooperate]` hoặc `[pid defect]`."
+  },
+  "results": {
+    "header": "### Vòng {round} - Kết quả:",
+    "pair_line": "{observation}\n\t Người chơi {i} vs Người chơi {j} đã chọn {choice_i} và {choice_j} tương ứng (Người chơi {i} được {gain_i}, Người chơi {j} được {gain_j})",
+    "scores_open": "{observation}\n-> Điểm hiện tại: ",
+    "score_first": "{observation}Người chơi {player_id} ({score})",
+    "score_next": "{observation}; Người chơi {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Điểm cuối cùng: {scores}.  Nhóm xếp hạng (tệ nhất→tốt nhất): {groups}"
+  }
+}

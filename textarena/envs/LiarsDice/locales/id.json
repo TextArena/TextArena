@@ -1,0 +1,55 @@
+{
+  "_comment": "String yang dihadapkan pengguna untuk Liar's Dice. Token aksi yang berada dalam tanda kurung siku ('[Bid: X, Y]', '[Call]'), indeks pemain, nilai sisi dadu, kuantitas, dan jumlah adalah slot netral dan tidak boleh diterjemahkan.",
+  "_slots": {
+    "player_id": "indeks pemain (bilangan bulat)",
+    "num_players": "jumlah pemain dalam permainan (bilangan bulat)",
+    "dice_summary": "ringkasan jumlah dadu yang tersisa per pemain yang telah dirender sebelumnya",
+    "your_dice": "daftar nilai sisi dadu pemain ini yang telah dirender sebelumnya",
+    "p": "indeks pemain (bilangan bulat)",
+    "d": "jumlah dadu yang tersisa untuk pemain tersebut (bilangan bulat)",
+    "current_player_id": "indeks pemain yang memanggil (bilangan bulat)",
+    "face_value": "nilai sisi dadu yang dihitung (1-6)",
+    "count": "jumlah dadu yang sesuai (bilangan bulat)",
+    "quantity": "kuantitas taruhan (bilangan bulat)",
+    "loser_id": "indeks pemain yang kehilangan satu dadu (bilangan bulat)",
+    "new_quantity": "kuantitas taruhan yang baru saja diserahkan (bilangan bulat)",
+    "current_quantity": "kuantitas taruhan saat ini (bilangan bulat)",
+    "new_face_value": "nilai sisi taruhan yang baru saja diserahkan (bilangan bulat)",
+    "current_face_value": "nilai sisi taruhan saat ini (bilangan bulat)",
+    "action": "string aksi mentah yang diserahkan pemain",
+    "reason": "alasan penolakan taruhan yang bersarang",
+    "winner": "indeks pemain yang menang (bilangan bulat)",
+    "final_ranking": "daftar indeks pemain dari yang pertama tersingkir hingga pemenang"
+  },
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam permainan Liar's Dice dengan {num_players} pemain.\nAturan:\n- Pada giliran Anda, Anda dapat:\n  1) Membuat taruhan baru dengan kuantitas yang lebih tinggi atau nilai sisi yang lebih tinggi (atau keduanya) daripada taruhan saat ini; yaitu '[Bid: 3, 4]',\n  2) Memanggil taruhan terakhir dengan mengetik '[Call]'.\n\nJika Anda memanggil:\n  - Jika jumlah nilai sisi yang sebenarnya di antara semua dadu kurang dari taruhan, pemain yang terakhir bertaruh kehilangan satu dadu.\n  - Jika tidak, pemanggil kehilangan satu dadu.\nPemain yang mencapai 0 dadu disingkirkan. Pemain yang tersisa terakhir menang."
+  },
+  "board": {
+    "per_player": "\tPemain {p}: {d}",
+    "new_round": "\nPutaran baru - Dadu yang tersisa: {dice_summary}\nDadu Anda saat ini: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Pemain {current_player_id} memanggil! Jumlah nilai sisi {face_value} yang sebenarnya adalah {count}, yang lebih KECIL dari {quantity}.\nPemain {loser_id} (pembuat taruhan terakhir) kehilangan satu dadu.",
+    "caller_loses": "Pemain {current_player_id} memanggil! Jumlah nilai sisi {face_value} yang sebenarnya adalah {count}, yang >= {quantity}.\nPemain {loser_id} (pemanggil) kehilangan satu dadu."
+  },
+  "action": {
+    "bid_announce": "Pemain {player_id} bertaruh {quantity} dari nilai sisi {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Pemanggilan dibuat tanpa taruhan sebelumnya.",
+    "invalid_bid": "Taruhan tidak valid: {reason}",
+    "not_recognized": "Aksi tidak dikenali sebagai '[Bid: X, Y]' atau '[Call]' yang valid. Aksi yang diserahkan: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Kuantitas baru {new_quantity} lebih rendah dari {current_quantity} saat ini.",
+    "face_lower": "Nilai sisi baru {new_face_value} lebih rendah dari {current_face_value} saat ini.",
+    "identical": "Taruhan identik dengan taruhan saat ini.",
+    "face_range": "Nilai sisi harus antara 1 dan 6."
+  },
+  "message": {
+    "eliminated_invalid": "Pemain {player_id} disingkirkan oleh gerakan tidak valid."
+  },
+  "outcome": {
+    "win": "Pemain {winner} menang! Peringkat akhir: {final_ranking}"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw si Player {player_id} sa usa ka duha-ka-player nga dula sa Spite ug Malice. Ang imong tuyo mao ang mahimong una nga mawagtang ang imong payoff pile.\n\n### Pangkalahatang Panglantaw sa Dula:\n- Ang tumong mao ang paglimpyo sa imong payoff pile pinaagi sa pagdula sa mga karta ngadto sa mga sentrong mga pilo.\n- Pwede kang magdula sa mga karta gikan sa tulo ka mga tinubdan:\n  1. Ang imong **kamot** (nagsugod ka sa matag turno uban sa hangtud 5 ka mga karta sa kamot).\n  2. Ang **ibabaw nga karta sa imong payoff pile**.\n  3. Ang **ibabaw nga karta sa bisan unsa sa imong mga pilo sa pagtaphaw**.\n\n### Mga Panuntunan sa Pagdula:\n- Pwede kang magdula sa usa ka karta ngadto sa usa ka sentrong pilo kung kini **usa ka ranggo nga mas taas** kay sa ibabaw nga karta sa pilo (ang mga sentrong pilo nagsugod sa Ace ug padulong sa Queen; ang mga Hari mao ang mga wild - pwede sila magdula sa bisan unsa nga karta apan dili mag-usab sa sunud-sunod sa ranggo. Kini nagpasabot nga kung usa ka Hari ang gigamit human sa 4, dayon ang Hari mao ang ranggo 5 ug ang sunod nga karta kinahanglan nga usa ka 6).\n- Kung dili ka makadula sa bisan unsa pang mga karta, kinahanglan kang **magtaphaw sa usa ka karta** ngadto sa usa sa imong mga pilo sa pagtaphaw aron matapos ang imong turno.\n- Kung ang usa ka sentrong pilo makab-ot sa Queen, kini awtomatikong malimpyo.\n- Ang sunud-sunod sa ranggo mao ang: A=1, 2=2, ..., 9=9, J=10, Q=11, K ingon wild.\n\n### Mga Lihi:\n1. **Pagkuha**: Sa sinugdanan sa imong turno, kuhai mga karta aron mapuno ang imong kamot hangtud 5 ka mga karta. Ibutang **[draw]** aron magsugod.\n2. **Pagdula sa Karta**: Aron magdula sa usa ka karta, ilahi ang karta ug ang sentrong pilo ingon niini: **[play A♠ 0]** (diin 'A♠' mao ang karta ug '0' mao ang indeks sa sentrong pilo).\n3. **Pagtaphaw**: Kung dili ka makadula sa bisan unsa pang mga karta, itaphaw ang usa ka karta gikan sa imong kamot ngadto sa usa ka pilo sa pagtaphaw aron matapos ang imong turno. Ibutang **[discard A♠ 1]** (diin 'A♠' mao ang karta ug '1' mao ang indeks sa pilo sa pagtaphaw). Hinumdomi nga dili ka pwede magtaphaw sa bisan unsa nga karta gikan sa payoff pile. Pwede ka lamang magtaphaw sa mga karta gikan sa imong kamot.\n\n"
+  },
+  "board": {
+    "current_board": "Kasalukuyang Board:\n\n{board}\nMga Galamhan nga Lihi: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Mga Pilo sa Butnga nga Dapit --- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Panglantaw sa Player {player_id} ---\n",
+    "payoff": "{observation}Pilo sa Payoff (Ibabaw nga Karta): {top_card}, Gitas-on sa Pilo sa Payoff: {payoff_length}\n",
+    "hand": "{observation}Lapad: {hand} ",
+    "discard": "{observation}Mga Pilo sa Pagtaphaw: {discard}\n",
+    "empty": "Wala nay sulod."
+  },
+  "game_message": {
+    "no_cards_left": "Walay dugang nga mga kard sa pag-draw gikan. Hinumdomi nga kamo makahimo og dula cards gikan niini nga mga tinubdan: 1. imong ** kamot** 2. ang top card sa inyong payoff pile ** 3. ang topcard sa bisan unsa sa imong discard piles ** . "
+  },
+  "invalid_move": {
+    "wrong_format": "Dili balido nga format sa paglihok. Player {player_id} wala motubag uban ang usa ka balido molihok diha sa square parentesis.",
+    "invalid_play": "Baliwala nga dula. Ang Player {player_id} nag-attempt nga magdula {card} sa center pile {index}.",
+    "discard_from_payoff": "Player {player_id} misulay sa paglabay sa usa ka kard gikan sa payoff pundok.",
+    "discard_not_in_hand": "Dili balido nga paglabay. Player {player_id} misulay sa pagsalikway sa usa ka kard nga dili diha sa kamot.",
+    "wrong_move_type": "Sayop nga tipo sa lihi. Ang Player {player_id} wala tumubag uban sa usa ka balido nga tipo sa lihi."
+  },
+  "game_action": {
+    "you_drew": "Nag-draw ka ug mga kard.",
+    "opponent_drew": "Ang magdudula {player_id} nagdalag mga kard.",
+    "you_played": "Nagdula ka {card} sa center pile {index}.",
+    "opponent_played": "Ang Player {player_id} nagdula {card} sa center pile {index}.",
+    "you_discarded": "Nagtapon ka {card} sa discard pile {index}, kung saad ang nakahulog usab sa imong turn. Walay laing mga aksyon sa imo ang gikonsiderar alang niining turn. Ang Player {next_player_id} ang sunod mong buhaton.",
+    "opponent_discarded": "Ang Player {player_id} nagtapon {card} sa discard pile {index}, kung saad ang nakahulog usab sa ilang turn. Walay laing mga aksyon sa Player {player_id} ang gikonsiderar alang niining turn. Ang Player {next_player_id}, ikaw ang sunod mong buhaton. Palihug isulat ang imong aksyon sa format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Ang Player {current_player} nahuman na ang ilang payoff pile! Ang Player {current_player} mao ang nakadaog!",
+    "deadlock_player_0": "Nakaabot sa deadlock! Ang Player 0 mao ang nakadaog uban sa {player_0_payoff} ka mga karta nga nahabilin vs {player_1_payoff} ka mga karta sa Player 1.",
+    "deadlock_player_1": "Nakaabot sa deadlock! Ang Player 1 mao ang nakadaog uban sa {player_1_payoff} ka mga karta nga nahabilin vs {player_0_payoff} ka mga karta sa Player 0.",
+    "deadlock_tie": "Nakab-ot ang deadlock sa tie! Ang tanan mga players adunay {player_0_payoff} ka cards natapos. Ang Player {current_player} ang midaog pinaagi sa default."
+  }
+}

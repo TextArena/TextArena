@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Du spiller Mastermind.\nDu må finne koden som er {code_length} siffer lang, hver siffer fra 1 til {num_numbers}, {repeats}.\nI ditt svar kan du sende inn din gjetning i følgende format: '[2 1 4 5]'.\nEtter hver gjetning vil du motta tilbakemelding i form av sorte og hvite kroker.\nEn sort krok indikerer et korrekt siffer i korrekt posisjon, mens en hvit krok indikerer et korrekt siffer i feil posisjon.\nDu har {max_turns} omganger til å gjette koden.\n",
+    "with_repeats": "med mulige gjentakelser",
+    "no_duplicates": "uten duplikater"
+  },
+  "invalid_move": {
+    "wrong_format": "Du svarte ikke med en liste over tall adskilt med mellomrom og innpakket i firkantede parenteser.",
+    "not_integers": "Alle oppføringer må være gyldige heltall.",
+    "wrong_length": "Gjetningen bør inneholde nøyaktig {code_length} tall.",
+    "out_of_range": "Alle tall må være mellom 1 og {num_numbers}.",
+    "duplicates_not_allowed": "Duplikattall er ikke tillatt.",
+    "repeated_guess": "Du har allerede gjettet {guess}. Prøv en annen gjetning."
+  },
+  "game_action": {
+    "feedback": "Sendt inn [{guess}]. Tilbakemelding: {black_pegs} sorte kroker, {white_pegs} hvite kroker."
+  },
+  "outcome": {
+    "win": "Du har knekket koden og løst {black_pegs} av {code_length} kroker korrekt",
+    "turn_limit": "Omgangsgrensen er nådd. Du gjettet {percent} prosent av tallene korrekt."
+  }
+}

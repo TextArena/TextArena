@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Mayın Tarlası oyununu oynuyorsunuz.\nOyunun amacı, mayın içermeyen tüm hücreleri açığa çıkarmaktır.\nBir hamle yapmak için, açığa çıkarmak istediğiniz satır ve sütun koordinatlarını aşağıdaki formatta belirtin:\n- `[satır sütun]`: Belirtilen satır ve sütundaki hücreyi açığa çıkarır.\nÖrneğin:\n- `[3 2]` 3. Satır, 2. Sütundaki hücreyi açığa çıkarmak için.\n- `[5 6]` 5. Satır, 6. Sütundaki hücreyi açığa çıkarmak için.\nİlk hamlenizde, güvenli bir başlangıç sağlamak için seçtiğiniz hücrenin etrafındaki alanı açığa çıkaracaksınız.\nMevcut tahta düzeni aşağıda gösterilmiştir. Açığa çıkarılmamış hücreler bir nokta ('.') ile temsil edilir, açığa çıkarılmış sayılar bitişik mayınların sayısını gösterir.\nZaten açığa çıkarılmış hücreleri seçmemeye dikkat edin.\nMevcut tahta düzeni aşağıdadır:\n"
+  },
+  "board": {
+    "game_board": "Oyun Tahtası:\n\n{board}",
+    "current_board": "Mevcut Tahta:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Geçerli koordinatları köşeli parantez içinde belirtmediniz.",
+    "out_of_bounds": "Belirtilen satır ve sütun koordinatları sınırların dışındadır.",
+    "already_revealed": "({row}, {col}) hücresi zaten açığa çıkarılmıştır.",
+    "hit_mine": "({row}, {col}) konumunda bir mayına çarptınız."
+  },
+  "game_action": {
+    "revealed": "({row}, {col}) hücresini açığa çıkardınız."
+  },
+  "outcome": {
+    "win": "Tebrikler! Mayın Tarlası tahtasını başarıyla temizlediniz.",
+    "turn_limit": "Hamle sınırına ulaşıldı. Güvenli hücrelerin %{percent}'ini başarıyla açığa çıkardınız."
+  }
+}

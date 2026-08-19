@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Player Snake on a {width}×{height} grid.\nAnao kontrola ilay {player_id}. Latsaky ny hatramin'ny '[up]'/'[down]'/'[left]'/'[right]' (na w/s/a/d).\nTantana: velona lavitra indrindra na ho lavitra indrindra ary ahazoana ny marika avo indrindra (sehatra ny fiposahan'ny {max_turns} fiposahan)."
+  },
+  "board": {
+    "current": "Birao ankehitriny: {board}",
+    "after_moves": "Fivoriambe amin'ny fanjakana: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Maty noho ny hetsika tsy mety ny bibilava {player_id}."
+  },
+  "outcome": {
+    "survived_win": "Ny mpilalao {player_id} no tafavoaka velona; maty ny hafa rehetra.",
+    "all_dead_simul": "Maty niaraka tamin'izay ny bibilava rehetra.",
+    "outlived": "Nihoatra ny an'ny hafa rehetra ny mpilalao.",
+    "all_dead": "Maty avokoa ny bibilava rehetra.",
+    "turn_limit": "Nahatratra ny fetran'ny fihodinana - ny isa tsara indrindra no mandresy amin'ny fifandirana.",
+    "ranking": "{reason} Vondrona farany (ratsy indrindra→tsara indrindra): {groups}"
+  }
+}

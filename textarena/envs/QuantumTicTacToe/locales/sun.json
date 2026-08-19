@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Anjeun nyaéta Pamaén {player_id} dina Quantum Tic Tac Toe.\nSimbol anjeun nyaéta '{symbol}', jeung nomer langkah anjeun salawasna {parity} (contona, X1, X3 atawa O2, O4).\n\nTujuan: Meunang ku ngabentuk garis tilu tanda klasik (ngahéntian tina superposisi).\n\nCara Maén:\n- Dina unggal giliran, asah tandaan aneh dina dua buah pasagi kosong maké format '[a,b]'.\n- Tanda-tanda éta téh entangled, jeung dilébélan saperti 'X1 / X1' atawa 'O4 / O4'.\n- Anjeun teu bisa ngasah tandaan aneh dina pasagi anu geus kolaps (ngahéntian).\n\nAturan Kolaps:\n- Lamun langkah anjeun ngabentuk siklus dina graf éntangléman, éta kolaps otomatis.\n- Unggal tandaan aneh dina siklus jadi tandaan klasik dina salah sahiji ti dua posisina.\n- Tanda-tanda aneh dépendén ogé kolaps.\n\nKamenangan:\n- Maénan réngsé nalika saurang pamaén boga tilu tandaan klasik dina baris.\n- Lamun dua pamaén meunang garis dina kolaps anu sama, anu kalawan nomer langkah maksimum panghandapna meunang.\n\nConto langkah: '[0,4]' ngasah tandaan aneh dina sél 0 jeung 4."
+  },
+  "board": {
+    "current_board": "Papan Tic Tac Toe Quantum:\n\n{board}\n\nSarérang langkah anjeun salaku '[a,b]' pikeun ngasah tandaan quantum dina dua lokasi."
+  },
+  "invalid_move": {
+    "wrong_format": "Format anu teu valid. Paké \"[a,b]\".",
+    "invalid_cells": "Indéks sél anu teu valid atawa duplikat.",
+    "already_solidified": "Salah sahiji sélna geus jadi padet."
+  },
+  "game_action": {
+    "placed": "Pamaén {player_id} ngasah simbolna dina superposisi antara sél {pos_a} jeung {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposisi dépendén réngsé. Sél ({r}, {c}) ayeuna {symbol}.",
+    "last_cell_resolved": "Superposisi pikeun sél terakhir réngsé. Sél ({r}, {c}) ayeuna {symbol}.",
+    "superposition_resolved": "Superposisi réngsé. Sél ({r}, {c}) ayeuna {symbol}."
+  },
+  "outcome": {
+    "win": "Pamaén {player_id} meunang kalawan tanda anu dipadetkeun!",
+    "draw": "Kaulinan ieu draw!"
+  }
+}

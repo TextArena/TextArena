@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Heta niha kart tuneye.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Lîstikvanê Tek vs Dealer\n\n📖 TÊGIHÎSTINA LÎSTIKÊ:\n• Tu bi {start_chips} çîpên destpêkê di dest pêkê\n• Dekêka tenê ya 52 kartan (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Tu dijî dealer (mal)\n• Her qonax li gorî struktura Ultimate Texas Hold'em dimeşe: tu ANTE û BLIND bets dipostî, 2 kartên hole distînî, biryarê li ser PLAY bets di qonaxên bettingê de didî, paşê kartên komînîtiyê diparêzî û destê xwe yê herî baş bi destê dealerê re berawirdî dike. Armanca te ew e ku qezencên xwe (wexta ku tu destê çêtirî heye) zêde bikî, wexta ku tu destê xerabtirî heye, ziyana xwe kêm bikî.\n• Lîstik diqede dema tu 0 çîp an jî kêmtir dest pêkê bike (LOSS) an jî 1000 qonax bi çîpên te qedandin (WIN)\n\n💰 STRUKTURA BETTINGÊ:\n• ANTE: Betê mecbûrî ya ${ante} di her qonaxê de\n• BLIND: Betê mecbûrî ya ${ante} di her qonaxê de\n• PLAY: Betê vebijarkî di dema lîstikê de. Di her qonaxê de, tu dikarî TEK YEK ji vanê bijartî: (${ante4} eger di PRE-FLOP de, ${ante2} eger di FLOP de, an jî ${ante} eger di RIVER de. Dikarî di river de jî fold bike, destê xwe bide û betê neke.)\n\n🎴 Kartên DEALING:\n• Tu 2 kartên rûyê jorîn distînî (kartên hole)\n• Dealer 2 kartên rûyê jêrîn distîne (veşartî ji te)\n• 5 kartên komînîtiyê rûyê jêrîn di dest pêkê de têne danîn\n• Kartên komînîtiyê di qonaxên lîstikê de têne parêzandin\n\n🏆 QUALIFICATION ya DEALER:\n• Dealer lazim bike ku kêmtirînînêk PAIR (2 kartên bi heman reng) hebe, bi karanîna 2 kartên di destê wî de û 5 kartên komînîtiyê.\n• Qualification ya dealer bandorê li ser encamên bettingê dike, wêneyê paşê têne ravekirin.\n\n🎮 QONAXÊN LÎSTIKÊ & ÇALAKÎYÊN:\n📋 PRE-FLOP:\n  • Çalakiyên: [4x] (${ante4}) an jî [check]\n  • [4x]: Betê ${ante4} PLAY bike, 3 kartên komînîtiyê yên pêşîn diparêzî\n  • [check]: Betê zêde nake, 3 kartên komînîtiyê yên pêşîn diparêzî\n\n📋 FLOP:\n  • Eger betê 4x hate kirin: Tenê [skip] heye (otomatîkî 2 kartên komînîtiyê yên dawîn diparêzî)\n  • Eger betê 4x nehat kirin: [2x] (${ante2}) an jî [check]\n  • [2x]: Betê ${ante2} PLAY bike, 2 kartên komînîtiyê yên dawîn diparêzî\n  • [check]: Betê zêde nake, 2 kartên komînîtiyê yên dawîn diparêzî\n\n📋 RIVER:\n  • Eger betê 4x an jî 2x hate kirin: Tenê [skip] heye (otomatîkî diçî showdown)\n  • Eger betê PLAY nehat kirin: [1x] (${ante}) an jî [fold]\n  • [1x]: Betê ${ante} PLAY bike, diçî showdown\n  • [fold]: Destê xwe bide, betên ANTE û BLIND winda bike\n\n📋 SHOWDOWN:\n  • Hemû kartên diparêzî û têne pîvandin\n  • Destê herî baş ji 7 kartên (2 kartên hole + 5 kartên komînîtiyê)\n  • Betên li gorî rêgezên xelatê têne çareser kirin\n\n💎 XELATÊN BET:\n📊 BET ya ANTE:\n  • Dealer nakeve: PUSH (bet tê vegerandin)\n  • Dealer keve û tu qezenc bike: 1:1 xelat (bet + qezenc)\n  • Dealer keve û tu winda bike: Bet winda\n  • Tie: PUSH (bet tê vegerandin)\n\n📊 BET ya BLIND:\n  • Bê bandor ji qualification ya dealer\n  • Tu qezenc bike: Bet tê vegerandin û xelat li gorî hêza destê te\n  • Tu winda bike: Bet winda\n  • Tie: PUSH (bet tê vegerandin)\n\n📊 TABLOYA XELATÊN BLIND:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Bê xelat\n\n📊 BET ya PLAY:\n  • Bê bandor ji qualification ya dealer\n  • Berawirdiya rasterast: Destê te yê herî baş vs Destê dealerê yê herî baş\n  • Tu qezenc bike: 1:1 xelat (bet + qezenc)\n  • Tu winda bike: Bet winda\n  • Tie: PUSH (bet tê vegerandin)\n\n🎯 RÊZEYA DESTÊN POKER (Herî baş heta Herî xerab):\n  1. Royal Flush: A-K-Q-J-10 bi heman reng\n  2. Straight Flush: 5 kartên bi heman reng û bi awayekî domdar\n  3. Four of a Kind: 4 kartên bi heman reng\n  4. Full House: 3 kartên bi heman reng + 2 kartên bi heman reng\n  5. Flush: 5 kartên bi heman reng\n  6. Straight: 5 kartên bi awayekî domdar\n  7. Three of a Kind: 3 kartên bi heman reng\n  8. Two Pair: 2 jojên bi rengên cuda\n  9. One Pair: 2 kartên bi heman reng\n  10. High Card: Karta herî bilind qezenc dike\n\n⌨️  FERMANÊN ÇALAKÎYÊN:\n• [4x] an jî [play bet 4x]: Betê ${{self.ante_amount*4}} PLAY bike\n• [2x] an jî [play bet 2x]: Betê ${{self.ante_amount*2}} PLAY bike\n• [1x] an jî [play bet 1x]: Betê ${{self.ante_amount*1}} PLAY bike\n• [check] an jî [c]: Check bike (bet zêde nake)\n• [fold] an jî [f]: Fold bike (destê xwe bide)\n• [skip] an jî [s]: Diçî qonaxa din (wexta ku çalakiyek pêwîst nîne)\n\n💡 TÎPSên STRATEJÎYÊ:\n• Destên baş ên destpêkê (joj, kartên bilind) gelek caran 4x bets dikin\n• Bifikirin qualification ya dealer - destên xerab dikarin push bikin eger dealer nakeve\n• Betê BLIND dikare gelek qezencdar be bi destên xurt (Royal Flush = 500:1!)\n• Çavdêriya steka çîpên xwe bike! Eger ew di dest pêkê de 0 an jî kêmtir bibe, tu winda dikî.\n\n⚠️  NOTên GÎRING:\n• Betên ANTE û BLIND mecbûrî ne di her qonaxê de\n• Betên PLAY vebijarkî û stratejîk in\n• Ji kerema xwe pê ewlehiya çalakiya xwe bike, û tenê yek çalakiyê di wextek de bike.\n\n",
+    "state": "🎯 RAUND {round}\n💰 Çîp: {chips}\n🎴 Desta te: {hand}\n📊 Betên niha: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Faza niha: {phase}\n🎯 Biryarên berçav: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Raund {round} dest pêk tê! Bet: ANTE ${ante}, BLIND ${blind}. Te de {chips} çîpên mayî hene.",
+    "your_hand": " Destê te: {hand}",
+    "flop_revealed": " FLOP aşkere kir: {cards}",
+    "river_revealed": " RIVER eşkere kir: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Kariya neheq ji bo qonaxa niha. Kariyên peyda: {available}",
+    "message": "❌ Kariya neheq! Kariyên peyda: {available}"
+  },
+  "action": {
+    "folded": "- Te xwe berda."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Destê Dealer: {cards}",
+    "community_cards": " Kartên Civakî: {cards}",
+    "player_best": "🎴 Yekê baştirîn a lîstikvan: {name} ({cards})",
+    "dealer_best": "🎴 Yekê baştirîn a dealer: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! - ${ante} (li hev kirin)",
+    "blind_lost_folded": " BET BLIND LOST! - ${blind} (folded)",
+    "ante_won": "✅ Betê ANTE qezenc kir! +${amount}",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} vegerand",
+    "ante_lost": " ANTE bet LOST! -${ante}",
+    "blind_won": "✅ Blind bet WON! + ${amount}",
+    "blind_pushed": " BET BLIND PUSHED! ${blind} vegerand",
+    "blind_lost": " BETA KURDÎ DAIŞ! -${blind}",
+    "play_won": "✅ Play bet WON! + ${amount}",
+    "play_pushed": " Play bet PUSHED! ${play} vegerand.",
+    "play_lost": " Play bet Lost! - ${play}",
+    "net_gain": "🎉 Raund {round} hatiye temam kirin! Zêdekirina net: +${net}",
+    "net_loss": "💸 Qonax {round} qedandin! Ziyana net: ${net}",
+    "separator": "-Çawa? Çawa ku hûn bi xwe re bikin, çawa ku hûn ji bo me bibin."
+  },
+  "outcome": {
+    "game_over_win": "🏁 YARIYA BI DAWÎ BÛ! {max_turns} raundên hatine temam kirin. Te de ${chips} çîp hene - TU SERKEFTÎ!",
+    "game_over_lose": "🏁 LÎSTIK QEDÎ! Tu çîpên xwe winda kirî. Dealer qezenc kir!",
+    "reward_win": "Lîstikvan {winner_rounds} raund bi ${chips} çîpan temam kir",
+    "reward_lose": "Lîstikvan di gera {round} de ji çîpên xwe derket.",
+    "reward_win_max": "Lîstikvan {max_turns} raund bi ${chips} çîpan temam kir"
+  },
+  "hand_names": {
+    "royal_flush": "Fluşa Keyserî",
+    "straight_flush": "Fluşa Rast",
+    "four_of_a_kind": "Çar ji cureyekê",
+    "full_house": "Mala Tijî",
+    "flush": "Flush",
+    "straight": "Rastî",
+    "three_of_a_kind": "Sê ji cureyekî",
+    "two_pair": "Du Pair",
+    "one_pair": "Yek Pair",
+    "high_card": "Kartê Bilind",
+    "unknown": "Destê Nediyar"
+  }
+}

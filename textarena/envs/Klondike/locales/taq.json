@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Tadakalt tamashek n Klondike Solitaire. Tanegga nnek wad aɣaras n uzzuzzu n wayyuren akken ad ten-teǧǧeɣ ɣer ussudu n uɣaras.\n\nTawuriwin n uzzuzzu:\n- Ussudu n uɣaras (F1-F4): Rnu ɣer wayyur n Ace ɣer wayyur n King di tɣessa\n- Ussudu n tawla (T1-T7): Rnu ɣer wadda n warawen (awraɣ ɣef abayɣur, abayɣur ɣef awraɣ)\n- Aɣaras n yiccaren: Ssuɣel wayyuren ɣer uɣaras n yirɣan\n- Uɣaras n yirɣan (W): Wayyur wiss sin yella ɣer uɣaras\n\nTawuriwin:\n- 'draw' - Ssuɣel wayyuren ɣer uɣaras n yirɣan\n- 'move <source> <destination> [count]' - Ssuɣel wayyuren ɣer uɣaras n wayyuren\n  Imedyaten: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count yezmer ad yili 'all', wad yezmer ad yili akken ad ten-teǧǧeɣ wayyuren wiss sin yella.\n- 'forfeit' - Tfad adrar n uzzuzzu s yiddeɣ ɣer wakud n yimɣuren\n- Isemawen n uɣaras: W (yirɣan), F1-F4 (ussudu n uɣaras), T1-T7 (ussudu n tawla)\n\nTazmert ad ten-teǧǧeɣ tawuriwin tuɣac di wakud wiss sin s yisekaren s tukkuzt:\n  Imedyat: 'draw, move W T1, move T2 F1'\n\nWayyuren n King wiss sin yella yezmer ad yili ɣer uɣaras n tawla wiss sin yella.\nTawuriwin ten-teǧǧeɣ di wakud wiss sin - wad yezmer ad yili wiss sin yella, tawuriwin wiss sin yella ten-teǧǧeɣ.\nSseqdec 'forfeit' wad yezmer ad yili uzzuzzu yezmer ad yili wiss sin yella."
+  },
+  "format_error": {
+    "no_brackets": "ⵜⴰⵍⵖⴰ ⵏ ⵜⵉⴳⴰⵡⵜ ⵓⵔ ⵜⵓⵙⵍⵉⴳ. ⵉⵇⵇⴰⵏⴷ ⴰⴷ ⵢⵉⵍⵉ ⵓⵙⴽⵛⵎ ⴳ ⵉⵏⵙⴰⵜⵏ.",
+    "no_closing_bracket": "ⵜⴰⵍⵖⴰ ⵏ ⵜⵉⴳⴰⵡⵜ ⵓⵔ ⵉⴳⵉⵏ ⴰⵣⵔⴼⴰⵏ. ⵉⵛⵜⵜⵉ ⵓⴽⵕⵓⵎ \"]\"",
+    "empty_command": "Tawuri wiss sin yella yezmer ad yili wiss sin yella. Tira 'draw' neɣ 'move <source> <destination> [count]'",
+    "empty_action": "ⵜⵉⴳⴰⵡⵜ ⵜⴰⵍⵍⵉⵍⵏ.",
+    "move_needs_args": "ⴷⴰ ⵉⵜⵜⵉⵔⵉ ⵓⴱⵕⵓⴹ ⵏ ⵓⵎⵣⵉⵣⵣⵍ ⴰⵙⵏⴼⵔ ⴷ ⵜⴰⵏⴰⴼⵓⵜ. ⴰⵙⵙⵎⵔⵙ: \"move <source> <destination> [count]\"",
+    "count_positive": "Tawuri wiss sin yella yezmer ad yili wiss sin yella neɣ 'all'",
+    "count_invalid": "Tawuri wiss sin yella yezmer ad yili wiss sin yella. Sseqdec wakud neɣ 'all'",
+    "unknown_command": "Tawuri wiss sin yella ur yezmir '{cmd}'. Sseqdec 'draw', 'move <source> <destination> [count]', neɣ 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "ⵜⵉⴳⴰⵡⵜ {n} ⵏⵏⴰ ⵉⵜⵜⵓⵙⴽⴰⵔⵏ ⴷⴰⵜ ⵓⴱⴰⵢⵢⵓⵔ.",
+    "failed": "Tifinagh n uɣawas {n} ur d-yettwakkes: {msg}"
+  },
+  "move_result": {
+    "drew": "ⴹⵔⵓ ⴽⴰⵔⴷ (ⵙ) ⵙⴳ ⵉⵙⵓⴳⴰⵎ ⴰⵔ ⴰⴱⵍⴰ.",
+    "cannot_draw": "ⵓⴰⵔ ⴰⴷⴷⵓⴱⴰⵜ ⴰⴾⴰⵉⴰⴷ. ⵆⴰⵙⴰⵏ ⴷ ⵉⵋⵉⵜⵜⴰⵓⴻⵏ ⵉⵍⵍⴰⵏ ⴷⴰⵗ ⴰⵓⴰ ⵙⴰⵎⵎⵓⵜⵉⴰⵏ",
+    "invalid_pile": "ⵉⵙⵎ ⵏ ⵓⴽⵙⴰⵢ ⵓⵔ ⵉⴳⵉ ⵡⴰⵍⵍⵉ. ⵙⵔⵙ W, F1-F4, ⵏⵖ T1-T7",
+    "foundation_one_card": "ⴰⴷⴷⵓⴱⴰⵜ ⴰⴾⴰⵉⴰⴷ ⵏ ⵆⴰⵔⵜⵉ ⵉⵉⵉⴰⵏ ⵗⴰⵙ ⴷⴰⵗ ⴼⵓⵓⵏⴷⴻⵛⵔ",
+    "waste_to_foundation_ok": "ⵜⴽⴰⵕⴹⴰ ⵉⵜⵜⵓⵙⵏⴼⵍⵏ ⵙⴳ ⵉⵣⴰⵍⵖⴰⵏ ⵖⵔ ⵜⵎⵔⵙⵉⵍⵜ F{dst}",
+    "waste_to_foundation_bad": "ⵓⵔ ⵜⵣⵎⵔⴷ ⴰⴷ ⵜⴰⵡⵉⵖ ⵜⵉⴽⴰⵕⴹⴰ ⵏ ⵓⵙⵙⵓⴼⵖ ⵖⴼ ⵓⵙⵏⵙⵓ ⴰⵢⴰ.",
+    "tableau_to_foundation_ok": "Nɛkk di tazwart ɣer tɛɛbunat s T{src} ɣer F{dst}",
+    "tableau_to_foundation_bad": "ⵓⵔ ⵜⵣⵎⵔⴷ ⴰⴷ ⵜⴰⵙⵙⴼⵍⵙⴽⴰⵔⵜ ⵏ ⵓⵙⵏⵖⴰⵍ ⵖⵔ ⵜⵙⵔⵙⵉ ⵏⵏⴰ ⴷ ⵢⵓⵛⴽⴰⵏ.",
+    "foundation_to_foundation": "ⵓⵔ ⵉⵣⵎⵉⵔ ⴰⴷ ⵢⴰⴽⵣ ⵙⴳ ⵜⴰⵙⵉⵍⴰ ⴰⵔ ⵜⵙⵉⵍⴰ.",
+    "waste_to_tableau_one_card": "ⴰⴷⴷⵓⴱⴰⵜ ⴰⴾⴰⵉⴰⴷ ⵏ ⵆⴰⵔⵜⵉ ⵉⵉⵉⴰⵏ ⵗⴰⵙ ⴷⴰⵗ ⵙⴰⴱⵂⵢⵔ ⵜⴰⵏ",
+    "waste_to_tableau_ok": "ⵜⴽⴰⵕⴹⴰ ⵉⵜⵜⵓⵙⵏⴼⵍⵏ ⵙⴳ ⵓⵅⵛⴰⵏ ⵖⵔ ⵜⴰⵡⵍⴰⴼⵜ T{dst}",
+    "waste_to_tableau_bad": "ⵓⵔ ⵜⵥⴹⴰⵕ ⴰⴷ ⵜⴰⵢⴷ ⴽⴰⵔⵜⵉ ⵏ ⵓⵙⵙⵓⴼⵖ ⵖⴼ ⵓⴳⵔⵔⵓⴱ ⴰ ⵡⴰⵏⵉⵜⵉⵏ.",
+    "no_face_up": "ⵓⴰⵔ ⵉⵍⵍⵉ ⴽⵔⴰ ⵏ ⵜⴽⴰⵕⴹⵉⵡⵉⵏ ⵉⵍⴰⵏ ⵜⴰⵡⵍⴰⴼⵜ ⴰⴼⵍⵍⴰ.",
+    "tableau_to_tableau_ok": "Nɛkk di tazwart {count} tiyzwarin s T{src} ɣer T{dst}",
+    "tableau_to_tableau_bad": "Ur tɛɛǧabu ad tɛǧǧu {count} tiyzwarin s T{src} ɣer T{dst}",
+    "foundation_to_tableau_one_card": "ⴰⴷⴷⵓⴱⴰⵜ ⴰⴾⵉ ⵏ ⵆⴰⵔⵜⵉ ⵉⵉⵉⴰⵏ ⵗⴰⵙ ⴷⴰⵗ ⴱⵓⵓⵏⴷⴻⵛⵔ ⵙ ⵜⵂⴰⴱⵍⵢⵓⵔⴻ",
+    "foundation_empty": "ⵜⵉⵔⵙⴰⵍ F{src} ⵜⴳⴰ ⵜⵍⴻⵍⵍⵉ.",
+    "foundation_to_tableau_ok": "Nɛkk di tazwart ɣer tɛɛbunat s F{src} ɣer T{dst}",
+    "foundation_to_tableau_bad": "ⵓⵔ ⵉⵣⵎⵔ ⴰⴷ ⵢⴰⴽ ⵜⴰⴱⵔⴰⵜ ⵏ ⵓⵙⵉⵍⴰ ⵅⴼ ⵜⵏⴰⴼⵓⵜ T{dst}",
+    "to_waste_or_stock": "ⵓⵔ ⵉⵣⵎⵉⵔ ⴰⴷ ⵉⵜⵜⵓⵙⵏⴼⵍ ⵖⵔ ⵓⵥⵕⵉⴹ ⵏⵖⴷ ⵉⵙⵓⴳⴰⵎⵏ."
+  },
+  "outcome": {
+    "forfeit": "ⵜⴰⴱⴰⵔⴰⵜ ⵉⴾⵔⴰⵛ. {score} ⵏⴰⵍⵓⴰⵈ ⵓⴰⵏ ⵙⴰⵎⴰⵏⴷⵓ: ⵜⵉⴼⵔⵉⵙⴻⵏ ⴷⴰⵗ ⴰⵗⴰⴱⴰⴷ ⴰⵏ ⵂⵉⵏⵉⴶⵔⴻⵜ ⵜⴰⵏ ⵓⵂⵓⵏ ⴰⴷⵓⴱⵉⵜ, ⴷⵓⵎⵓⵙⵏⵢⴷ ⴰⵙ ⵎⵉⵍⵍⵓⵍⵢⵏ ⵜⵓⵔⴷⴰ.",
+    "won": "ⴰⵂⵓⵙⴾⴻⵏ, ⵜⴰⴶⵔⴰⵓⴻⵜ ⵙⵓⵍⵉⵜⴻⵔ ⵓⴰⵏ ⵛⵍoⵏⴷⵉⵛⴻ.",
+    "turn_limit": "Tallit ɣɣilan! Tawɛet ma ɣer akud n wakud illan n {max_turns} n tɛɛbunatin. Akud: {score} n tiyzwarin ɣer tɛɛbunatin n usɛid"
+  },
+  "board": {
+    "title": "=== ⴽⵍⵓⵏⴷⵉⴽ ⵙⵓⵍⵉⵜⴰⵔⵢ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "ⴰⵙⴰⴷⴰ: {stock} ⵏ ⵜⴽⴰⵔⴹⵉⵡⵉⵏ.",
+    "waste": "ⵉⴼⵔⴰ (W): {waste}",
+    "foundations_header": "ⵜⵉⵔⵙⴰⵍ:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "ⵜⴰⴱⵍⵓⵜ:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

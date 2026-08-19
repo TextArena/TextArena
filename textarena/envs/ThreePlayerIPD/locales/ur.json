@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "آپ 3 کھلاڑیوں کے پرائزنر ڈائلوما میں کھلاڑی {player_id} ہیں۔ میچ {num_rounds} راؤنڈز تک چلتا ہے۔\nراؤنڈ کی ساخت:\n• {conv_rounds} آزاد چیٹ موڑ\n• 1 فیصلہ موڑ - ہر مخالف کے لیے ایک ٹوکن جمع کریں: '[<opp-id> cooperate]' یا '[<opp-id> defect]' (مثلاً '[1 defect] [2 cooperate]'; ڈیفالٹ 'cooperate' ہے)\nہر غیر ترتیب شدہ جوڑے پر لاگو ہونے والا جوڑے کی ادائیگی میٹرکس:\n  - دونوں تعاون کریں -> {reward}\n  - دونوں عیب دار ہیں -> {punishment}\n  - آپ عیب دار ہیں، وہ تعاون کرتے ہیں -> {temptation}\n  - آپ تعاون کرتے ہیں، وہ عیب دار ہیں -> {sucker}\nسب سے زیادہ اسکور والا کھلاڑی تمام راؤنڈز کے اختتام پر جیتتا ہے۔"
+  },
+  "round": {
+    "start": "─── راؤنڈ {round} شروع کر رہا ہے ───\tآپ اگلے {conv_rounds} راؤنڈز کے لیے آزادانہ طور پر بات چیت کر سکتے ہیں۔",
+    "chat_finished": "راؤنڈ {round} کے لیے چیٹ ختم ہو گئی ہے۔ اپنے فیصلے جمع کریں، ہر مخالف کے لیے ایک ٹوکن: `[pid cooperate]` یا `[pid defect]`۔"
+  },
+  "results": {
+    "header": "### راؤنڈ {round} - نتائج:",
+    "pair_line": "{observation}\n\t کھلاڑی {i} نے کھلاڑی {j} کے خلاف {choice_i} اور {choice_j} کا انتخاب کیا (کھلاڑی {i} نے {gain_i} حاصل کیا، کھلاڑی {j} نے {gain_j} حاصل کیا)",
+    "scores_open": "{observation}\n-> موجودہ اسکور: ",
+    "score_first": "{observation}کھلاڑی {player_id} ({score})",
+    "score_next": "{observation}; کھلاڑی {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "حتمی اسکور: {scores}۔  درجہ بندی گروپ (بدترین سے بہترین): {groups}"
+  }
+}

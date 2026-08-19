@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "U speelt {color} in een spel van Breakthrough. U beweegt {direction} op een {board_size}x{board_size} bord.\nIn uw beurt kunt u één stuk één stap vooruit of diagonaal vooruit verplaatsen.\nEen stuk mag alleen diagonaal bewegen als er een stuk van de tegenstander staat, en alleen in zo'n bezette vierkant in een diagonale stap.\nWanneer u in een vierkant met een stuk van de tegenstander stapt, neemt u het en het stuk van de tegenstander wordt permanent van het bord verwijderd.\nGebruik UCI-achtige notatie in haakjes, bijv. [a2a3] om van a2 naar a3 te verplaatsen.\n* 'a' komt overeen met de meest linkse kolom, '1' is de onderste rij (vanuit het perspectief van Wit).\n* De thuisrij van Zwart is de bovenste rij (rij 8 voor een 8x8). De thuisrij van Wit is de onderste rij (rij 1 voor een 8x8).\nDe eerste speler wiens stuk de thuisrij van de tegenstander bereikt, wint. Als al uw stukken zijn ingenomen, verliest u."
+  },
+  "invalid_move": {
+    "wrong_format": "Gebruik alstublieft haakjes algebraïsche notatie zoals [a2a3].",
+    "out_of_bounds": "De zet is buiten de grenzen van het bord.",
+    "illegal": "Die zet volgt niet de regels van Breakthrough of is niet uw stuk."
+  },
+  "game_action": {
+    "moved": "Speler {player_id} verplaatst {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Wit heeft de thuisrij van Zwart bereikt.",
+    "black_reached": "Zwart heeft de thuisrij van Wit bereikt.",
+    "white_captured": "Alle stukken van Wit zijn ingenomen.",
+    "black_captured": "Alle stukken van Zwart zijn ingenomen.",
+    "no_moves": "Speler {player_id} heeft geen zetten meer."
+  }
+}

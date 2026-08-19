@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Ikaw an Player {player_id} ha Three-Player GOPS.\n- Ikaw an nagkakaptan han 13 ka karta A-K (kada usa la).\n- Kada round mayda premyo nga ginbubuklad. Isumite USA ka karta pareho `[Q]`, `[10]`, `[2]` …\n- An pinakamataas nga karta nangdaog han premyo (+ bisan ano nga naipon nga pot). An ties nagpapalit han premyo ngadto ha sunod nga round.\n- Kahuman han 13 ka round, an pinakamataas nga total nangdaog. Mga invalid nga mga lihok = eliminasyon."
+  },
+  "round": {
+    "header": "### Round {round}/13 - Premyo: {prize} (kayanan nga {worth})",
+    "hand": "An imo nahibilin nga kamot: {hand}"
+  },
+  "reveal": {
+    "win": "Mga Puja » {bids} - Ang Manlalaro {winner} nakadaog {pot}.",
+    "tie": "Mga bid  {bids} - tie, pot now {pot}.",
+    "scores": "Mga marka → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "An aksyon nagkikinahanglan hin card nga gin-praket sugad han \"[Q]\"",
+    "bad_card": "card nga gin-gamit na o diri balido"
+  },
+  "elimination": {
+    "player": "An magdudula {pid} gin-iwas katapos hin pagbalikbalik nga diri balido nga mga pagliwat."
+  },
+  "outcome": {
+    "auto_win": "Duha nga magdudula an nawawara - awtomatiko nga kadaogan.",
+    "final": "Katapusan nga mga marka: {scores}"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Droe neuh Player {player_id} lam dilema tahanan 3 ureueng. Patandingan nyan truk {num_rounds} ronde.\nStruktur ronde:\n• {conv_rounds} giliran chat bebas\n• 1 giliran keputusan - kirim saboh token per lawan: '[<opp-id> cooperate]' atawa '[<opp-id> defect]' (mis. '[1 defect] [2 cooperate]'; lalok 'cooperate'). \nMatriks bayaran pasangan (diterapkan ke pasangan tak teratur):\n  - Duwa-duwe cooperate  ->  {reward}\n  - Duwa-duwe defect     ->  {punishment}\n  - Droe defect, gata cooperate -> {temptation}\n  - Droe cooperate, gata defect -> {sucker}\nUreueng nyang na leubeh poin di akhir ronde nyan meunang."
+  },
+  "round": {
+    "start": "─── Mulai Ronde {round} ───\tDroeueuh bebas ngob selama {conv_rounds} ronde.",
+    "chat_finished": "Chat tamat bak round {round}. Kirim keputusan droe, saboh token per lawan: `[pid cooperate]` atawa `[pid defect]`."
+  },
+  "results": {
+    "header": "### Bulat {round} - Keuneulheuh:",
+    "pair_line": "{observation}\n\t Peulaku {i} lawan Peulaku {j} meu'ilih {choice_i} ngon {choice_j} bak beungeh (Peulaku {i} meu'hasilkan {gain_i}, Peulaku {j} meu'hasilkan {gain_j})",
+    "scores_open": "{observation} -> Skor saat nyoe: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Pemain {player_id} ({score})",
+    "finalize": "{observation}  meubahsa:"
+  },
+  "outcome": {
+    "final": "Poin akhir: {scores}.  Kelompok peringkat (jelek→baik): {groups}"
+  }
+}

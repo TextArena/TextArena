@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "ཁྱེད་ཀྱིས་རྩེད་མོ་ཀློན་དིག་སོ་ལི་ཏིར་རྩེད་བཞིན་ཡོད། ཁྱེད་ཀྱི་དམིགས་ཡུལ་ནི་རིམ་པ་ཐམས་ཅད་གཏེར་སྟེགས་སུ་སྤོ་བ་ཡིན།\n\nརྩེད་མོའི་སྒྲིག་འཇུག།\n- གཏེར་སྟེགས་(F1-F4)། རིམ་པ་སྒྲིག་འཇུག་གི་སྟེགས་སུ་རིམ་པ་སྒྲིག་པ།\n- སྟོང་རིམ་གྱི་སྟེགས་(T1-T7)། ཁ་དོག་གི་སྟེགས་སུ་རིམ་པ་སྒྲིག་པ།\n- སྟོང་རིམ། རིམ་པ་གསར་པ་བླངས་ཏེ་སྟེགས་སུ་བཞག\n- སྟེགས་སུ་བཞག་པའི་རིམ་པ། རིམ་པ་སྟེགས་སུ་བཞག་པའི་གོང་གི་རིམ་པ།\n\nབཀོད་པ།\n- 'draw' - རིམ་པ་གསར་པ་བླངས་ཏེ་སྟེགས་སུ་བཞག\n- 'move <source> <destination> [count]' - རིམ་པ་སྟེགས་སུ་སྤོ་བ། དཔེར་ན། 'move W T1', 'move T1 F2', 'move T3 T5 2' རིམ་པའི་གྲངས་ཀྱང་ 'all' ཡིན་པའི་དུས་སྟེགས་སུ་བཞག་པའི་རིམ་པ་ཐམས་ཅད་སྤོ་བར་བྱེད།\n- 'forfeit' - རྩེད་མོ་མྱུར་དུ་བསྡམས་ཏེ་ཁྱེད་ཀྱི་གྲལ་གྲོགས་བཀག་འགོག་བྱེད།\n- རིམ་པའི་མིང་། W (སྟེགས་སུ་བཞག་པའི་རིམ་པ།), F1-F4 (གཏེར་སྟེགས།), T1-T7 (སྟོང་རིམ་གྱི་སྟེགས།)\n\nཁྱེད་ཀྱིས་རྩེད་མོའི་བྱ་བ་མང་པོ་གཅིག་གི་སྟེགས་སུ་བཞག་པའི་དུས་བྱ་བ་དེ་དག་བར་སྟོང་རིམ་གྱིས་ཕྱེ་བ། དཔེར་ན། 'draw, move W T1, move T2 F1'\n\nརྒྱལ་པོ་རིམ་པ་ཁོ་ན་སྟོང་རིམ་གྱི་སྟེགས་སུ་བཞག་པའི་དུས་སྟེགས་སུ་བཞག་པའི་རིམ་པ་མེད་པའི་དུས། བྱ་བ་དེ་དག་རིམ་པའི་སྒྲིག་འཇུག་གི་སྟེགས་སུ་བཞག་པའི་དུས་བྱེད་པ། བྱ་བ་གཅིག་འཛོལ་བའི་དུས་བྱ་བ་གཞན་དག་བསྡམས་པ། 'forfeit' བཀོད་པའི་དུས་ཁྱེད་ཀྱིས་རྩེད་མོ་རྒྱལ་བའི་དུས་མེད་པར་བསམ་པའི་དུས།"
+  },
+  "format_error": {
+    "no_brackets": "ལས་འགན་རྣམ་པ་མི་མཐུན་པ། བྱ་བ་དེ་ཚིགས་སུ་བཅད་པ་དགོས་པ་ཡིན།",
+    "no_closing_bracket": "ལས་འགན་རྣམ་པ་མི་མཐུན་པ། ཟུར་འཇུག་གི་སྒྲོམ་མེད་པ ']'",
+    "empty_command": "སྟོང་པའི་བཀའ་བསྒོས་ཤིག་། \"draw\" ཡང་ན་ \"move <source> <destination> [count]\"ཡིག་དཔར་བྱེད།",
+    "empty_action": "སྟོང་པའི་ལས་འགུལ་ཞིག",
+    "move_needs_args": "ཕྱོགས་སྤེལ་བཀའ་རྒྱ་ལ་འབྱུང་ཁུངས་དང་གནས་ཡུལ་དགོས་ཀྱི་ཡོད། ལག་ལེན་: 'move <source> <destination> [count]'",
+    "count_positive": "གྲངས་ཀྱི་གནས་ཚད་ལྷག་པར་བཀོད་པ་དང་ 'all' ཡིན་པའི་དུས།",
+    "count_invalid": "གྲངས་ཀྱི་གནས་ཚད་ནོར་བ། གྲངས་ཀྱི་གནས་ཚད་བཀོད་པ་དང་ 'all' བཀོད་པ།",
+    "unknown_command": "བྱ་བ་མི་ཤེས་པ། {cmd}། བྱ་བ་འགྲིག་པ་ནི་ 'draw', 'move <source> <destination> [count]', ཡང་ན་ 'forfeit'",
+    "wrapped": "འགུཕ་སྒྲུབ་{n}: {msg}"
+  },
+  "action_result": {
+    "success": "འགུཕ་སྒྲུབ་{n}: {msg}",
+    "before_failure": "{n}ལས་རིམ་དེ་སྔོན་དུ་ལག་བསྟར་བྱས་ཡོད།",
+    "failed": "འགུཕ་སྒྲུབ་{n} མི་སྟེར་བ།: {msg}"
+  },
+  "move_result": {
+    "drew": "ཤོག་གྲངས་ཀ་དེ་གཟུགས་མི་བསྒྱུར་བར་དགོས།",
+    "cannot_draw": "ཕྱིར་འདོན་བྱེད་མ་ཐུབ། སྣུམ་འཁོར་དང་བུན་རྫས་གཉིས་ཀ་རླག་སྟོར་ཡོད།",
+    "invalid_pile": "སྦྲེལ་མིང་དེ་ཆ་མེད་འདུག W, F1-F4 ཡང་ན་ T1-T7 ལག་ལེན་འཐབ་དགོས།",
+    "foundation_one_card": "གཞི་རྟེན་དུ་ལག་རྟགས་གཅིག་ཙམ་སྤོ་ཐུབ།",
+    "waste_to_foundation_ok": "འབོར་ལས་གཞི་རྟེན་དུ་སྤོས་པའི་ལག་འཁྱེར་ F{dst}",
+    "waste_to_foundation_bad": "གཞི་གྲངས་ཀྱི་སྒམ་དེར་ waste card སྤོ་མི་ཐུབ།",
+    "tableau_to_foundation_ok": "པགས་པ་རྟ་མེ་རིམ་ T{src} ནས་མེ་རིམ་ F{dst} ལ་གཡོག",
+    "tableau_to_foundation_bad": "གཞི་གྲངས་ཀྱི་རྡུལ་དུ་ tableau card སྤོ་མ་ཐུབ་པ།",
+    "foundation_to_foundation": "གཞི་རིམ་ནས་གཞི་རིམ་དུ་སྤོ་མི་ཐུབ།",
+    "waste_to_tableau_one_card": "ཤོག་ངོས་གཅིག་པུ་ལས་སྣེ་སྟོན་ནང་བསྐྱོད་ཐུབ།",
+    "waste_to_tableau_ok": "ཤོག་གྲངས་ཀ་དེ་གཟུགས་མི་བསྒྱུར་བར་དགོས། T{dst}",
+    "waste_to_tableau_bad": "དེ་འདྲའི་སྟོང་རིམ་གྱི་སྟེགས་སུ་རིམ་པ་གསར་པ་བཞག་མི་ཆོག",
+    "no_face_up": "གདོང་ཁ་བཀབ་པའི་ལག་འཁྱེར་མ་སྤེལ་བ།",
+    "tableau_to_tableau_ok": "{count} པགས་པ་རྣམས་རྟ་མེ་རིམ་ T{src} ནས་ T{dst} ལ་གཡོག",
+    "tableau_to_tableau_bad": "{count} པགས་པ་རྣམས་ T{src} ནས་ T{dst} ལ་གཡོ་མི་ཤེས",
+    "foundation_to_tableau_one_card": "གཞི་ནས་ཐེའུ་མིག་ལ་ལག་རྟགས་གཅིག་ཙམ་སྤོ་ཐུབ།",
+    "foundation_empty": "གཞི་རྟེན་ F{src} སྟོན།",
+    "foundation_to_tableau_ok": "པགས་པ་མེ་རིམ་ F{src} ནས་རྟ་མེ་རིམ་ T{dst} ལ་གཡོག",
+    "foundation_to_tableau_bad": "མེ་རིམ་གྱི་པགས་པ་རྟ་མེ་རིམ་ T{dst} ལ་འཇོག་མི་ཤེས",
+    "to_waste_or_stock": "འབོར་དང་རྒྱུ་དངོས་སོགས་ལ་སྤོ་མི་ཆོག།"
+  },
+  "outcome": {
+    "forfeit": "རྩེད་འགྲན་མཇུག་བསྡུས། {score} ཁང་མིག་ནང་ཡོད་པའི་ལག་རྟགས་ཡིན།",
+    "won": "ཁྱེད་ལ་དགའ་བསུ་ཞུ། Klondike Solitaire རྒྱལ་ཁ་ཐོབ་སོང་།",
+    "turn_limit": "རྩེད་མོ་འཇུག་སོང་། ཁྱེད་ཀྱིས་སྒྲིག་འཇུག་གི་མང་མཐའ་{max_turns} ལ་སླེབས་སོང་། གྲལ་གྲོགས། {score} རིམ་པ་གཏེར་སྟེགས་སུ་ཡོད།"
+  },
+  "board": {
+    "title": "=== ཀྲོན་ཌི་ཁེ་སོ་ལཊ་ཡེར་===",
+    "turn": "རིམ་པ།: {turn}/{max_turns}",
+    "stock": "ཤོག་གྲངས་: {stock}།",
+    "waste": "ཕྱུགས་རྫས་ (W): {waste}",
+    "foundations_header": "གཞི་རྩའི་ཁག:",
+    "foundation_row": " མེ་རིམ་ F{n}: {cards}",
+    "tableau_header": "ཤོག་ངོས་:",
+    "tableau_row": " མེ་རིམ་ T{n}: {cards}"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "Uživatelsky orientované řetězce pro Liar's Dice. Akční tokeny v hranatých závorkách ('[Bid: X, Y]', '[Call]'), ID hráčů, hodnoty na kostkách, množství a počty jsou neutrální sloty a nikdy by neměly být překládány.",
+  "_slots": {
+    "player_id": "index hráče (celé číslo)",
+    "num_players": "počet hráčů ve hře (celé číslo)",
+    "dice_summary": "předem vykreslený seznam počtu zbývajících kostek pro každého hráče oddělený středníkem",
+    "your_dice": "předem vykreslený seznam hodnot kostek tohoto hráče oddělený čárkami",
+    "p": "index hráče (celé číslo)",
+    "d": "počet zbývajících kostek pro tohoto hráče (celé číslo)",
+    "current_player_id": "index hráče, který zavolal (celé číslo)",
+    "face_value": "hodnota na kostce, která se počítá (1-6)",
+    "count": "skutečný počet odpovídajících kostek (celé číslo)",
+    "quantity": "množství nabídky (celé číslo)",
+    "loser_id": "index hráče, který ztrácí kostku (celé číslo)",
+    "new_quantity": "množství nabídky, které bylo právě odesláno (celé číslo)",
+    "current_quantity": "aktuální množství nabídky (celé číslo)",
+    "new_face_value": "hodnota na kostce, která byla právě nabídnuta (celé číslo)",
+    "current_face_value": "aktuální hodnota na kostce nabídky (celé číslo)",
+    "action": "surový řetězec akce, který hráč odeslal",
+    "reason": "vnořený důvod odmítnutí nabídky",
+    "winner": "index hráče, který vyhrál (celé číslo)",
+    "final_ranking": "seznam indexů hráčů od prvního eliminovaného po vítěze"
+  },
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} ve hře Liar's Dice s {num_players} hráči.\nPravidla:\n- Na Vaši řadu můžete buď:\n  1) Učinit novou nabídku s vyšším množstvím nebo vyšší hodnotou (nebo obojí) než aktuální nabídka; tj. '[Bid: 3, 4]',\n  2) Zavolat poslední nabídku zadáním '[Call]'.\n\nPokud zavoláte:\n  - Pokud je skutečný počet této hodnoty mezi všemi kostkami nižší než nabídka, poslední nabízející ztrácí jednu kostku.\n  - Jinak zavolající ztrácí jednu kostku.\nHráč, který dosáhne 0 kostek, je eliminován. Poslední zbývající hráč vyhrává."
+  },
+  "board": {
+    "per_player": "\tHráč {p}: {d}",
+    "new_round": "\nNové kolo - Zbývající kostky: {dice_summary}\nVaše aktuální kostky jsou: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Hráč {current_player_id} zavolal! Skutečný počet hodnoty {face_value} je {count}, což je MENŠÍ než {quantity}.\nHráč {loser_id} (poslední nabízející) ztrácí jednu kostku.",
+    "caller_loses": "Hráč {current_player_id} zavolal! Skutečný počet hodnoty {face_value} je {count}, což je >= {quantity}.\nHráč {loser_id} (zavolající) ztrácí jednu kostku."
+  },
+  "action": {
+    "bid_announce": "Hráč {player_id} nabízí {quantity} hodnoty {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Zavolání bez předchozí nabídky.",
+    "invalid_bid": "Neplatná nabídka: {reason}",
+    "not_recognized": "Akce nebyla rozpoznána jako platná '[Bid: X, Y]' nebo '[Call]'. Odeslaná akce: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nové množství {new_quantity} je nižší než aktuální {current_quantity}.",
+    "face_lower": "Nová hodnota {new_face_value} je nižší než aktuální {current_face_value}.",
+    "identical": "Nabídka je identická s aktuální nabídkou.",
+    "face_range": "Hodnota musí být mezi 1 a 6."
+  },
+  "message": {
+    "eliminated_invalid": "Hráč {player_id} byl eliminován neplatným tahem."
+  },
+  "outcome": {
+    "win": "Hráč {winner} vyhrál! Konečné pořadí: {final_ranking}"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i et {max_rounds} runders spill av Kuhn Poker.\nSpilleregler:\n- Kuhn Poker bruker en 3-korts stokk med J, Q, K (J lavest, K høyest)\n- Hver spiller legger inn {ante} chip og mottar 1 kort hver runde (merk at kortene deles uten erstattning, så du kan ikke ha samme kort som motstanderen din).\n- Spillet fortsetter i {max_rounds} runder\n- Spilleren med flest chips etter alle runder vinner\nHandlingregler:\n- '[check]': Pass uten å satse (bare hvis ingen sats er på bordet)\n- '[bet]': Legg til 1 chip i potten (bare hvis ingen sats er på bordet)\n- '[call]': Match en motstanders sats ved å legge til 1 chip i potten\n- '[fold]': Overgi din hånd og la motstanderen din vinne potten"
+  },
+  "init_round": {
+    "round_start": "### Runde {current_round} av {max_rounds} runder starter. Ditt kort er: '{player_card}'",
+    "available_actions": "Dine tilgjengelige handlinger er: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Handling må være [Check], [Bet], [Call] eller [Fold].",
+    "not_legal": "Handling må være {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Spiller {player_id} sendte inn flyttet: '[{move}]'.",
+    "valid_actions": "Dine tilgjengelige handlinger er: {legal_actions}.",
+    "round_summary": "{reason} Nåværende poeng: Spiller 0: '{player_0_chips}'; Spiller 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Spiller {winner}s {winner_card} slår Spiller {loser}s {loser_card}. Spiller {winner} vinner potten på {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Ved slutten av {max_rounds} runder hadde begge spillere samme antall chips.",
+    "round_win": "Spiller {player_id} har foldet.",
+    "winner_player0": "Spiller 0 vant ved å ha flere chips ved slutten av alle {max_rounds} runder.",
+    "winner_player1": "Spiller 1 vant ved å ha flere chips ved slutten av alle {max_rounds} runder."
+  }
+}

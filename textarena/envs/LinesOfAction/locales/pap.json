@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Abou ta Hungadó {player_id} den e wega di LinesOfAction.\nBo piesanan ta '{side}', e piesanan di e kontrahent ta '{other}'.\nFormato di move: `[b1b3]` (koordinátnan di origen pa koordinátnan di destinashon). Un move legal ta viaja horizontalmente, vertikalmente, òf diagonalmente un kantidat di kuadrátnan igual na e total di piesanan (di kualke koló) den e línea. Abou por salta riba bo piesanan propio, pero no riba e piesanan di e kontrahent; aterisando riba un kontrahent ta kaptur'é.  Gana ora tur bo piesanan ta konektá den 8-vizindario."
+  },
+  "board": {
+    "current_board": "Board: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "E forma mester ta e2e4 (for di, pa koordinatanan).",
+    "no_piece": "No {side} piece on {coord}.",
+    "identical": "E origen i e destinashon ta identiko.",
+    "not_straight_or_diagonal": "E moveshon mester ta direkto òf diagonal.",
+    "wrong_distance": "Mester move e distansia igual na piezanan den liña.",
+    "enemy_blocks": "E arma enemigo ta blokia e kaminda.",
+    "destination_own": "Destino okupá pa su mes arma."
+  },
+  "game_action": {
+    "moved": "Player {player_id} a movi {from} -> {to}",
+    "captured_suffix": "Player {player_id} a movi {from} -> {to} capturando un enemigo."
+  },
+  "outcome": {
+    "win": "Tur e partinan ta konektá.",
+    "draw_no_capture": "60 move sin captura.",
+    "draw_repetition": "E posishon a ser ripiti tres biaha."
+  }
+}

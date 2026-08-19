@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Ati Leensa {player_id} ti, raundi {num_rounds} Iterated Ultimatum Game tiritaa.\nQarshii ${pool} raundi kanaaf siifaa fi Leensa {other_id} gidduu qoodaa.\n\nAjaja:\n  - Dhiyeessa: [Offer: $X] (0 <= X <= pool)\n  - Yoo fudhatame → $(pool - X) argatta, leensa bira $X argata\n  - Yoo didame → Lachuu $0 argatta\n  - Fakkeenya: [Offer: $3]  ykn  'Naaf akkaataa kanaa firooma. [Offer: $5]'\n\nDeebii:\n  - Dhiyeessiin irratti [Accept] ykn [Reject] filadhu\n  - Fakkeenya: 'Akkaataa kanaa waan gadi jiru natti fakkaata. [Accept]'\n            'Kanumaan waan gadi jiru natti hin fakkaatu. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Raundi {round_number} jalqaba! ---\nLeensa {proposer_id} ajaja, Leensa {responder_id} deebiidha.",
+    "offer": "Raundi {round_number}: Leensa {proposer_id} $ {offer} Leensa {responder_id} dhiyeessa ( $ {keep} harkaa qabu).",
+    "accepted": "Leensa {responder_id} fudhate! Raundi {round_number} irraa: Leensa {proposer_id} +$ {proposer_gain}, Leensa {responder_id} +$ {responder_gain}. Jumla haaraa: Leensa 0: $ {total_0}, Leensa 1: $ {total_1}.",
+    "rejected": "Leensa {responder_id} didate! Raundi {round_number} irraa: Lachuu +$0. Jumla yeroo jalqabaa: Leensa 0: $ {total_0}, Leensa 1: $ {total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Namni yaada dhiyeessu foormii [Offer: $X] fayyadamee dhiheessuu qaba.",
+    "bad_integer": "Qarshiin kennamu lakkoofsa guutuu ta'uu qaba.",
+    "out_of_range": "Kaffaltiin $0 fi ${pool} jidduu ta'uu qaba.",
+    "no_current_offer": "Yeroo ammaa deebii kennuuf waamicha hin qabnu.",
+    "accept_or_reject": "Deebitee [Accept] ykn [Reject] qofa qabaachuu qaba."
+  },
+  "outcome": {
+    "win": "Player {winner} yoo ta'e, {winner_total} dolaraan ala jiru vs Player {loser}'s {loser_total} dolara",
+    "draw": "Taphattoonni lamaanuu waliigalaan ${total} argataniiru."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} en Nim.\nO teu obxectivo é coller o último obxecto restante.\nEn cada turno, escolle exactamente unha pila e elimina un ou máis obxectos dela.\nUsa o formato '[pila cantidade]', onde pila é o índice da pila e cantidade é o número de obxectos que eliminar.\nPor exemplo, '[0 3]' elimina 3 obxectos da pila 0."
+  },
+  "state": {
+    "current_pile": "Pila actual:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Non se atopou un formato de movemento válido. Usa '[pila cantidade]'.",
+    "correct_format_wrong_fields": "Xogador {player_id}, acción inválida. A columna {col} está fóra dos límites.",
+    "out_of_range": "O índice da pila {pile_index} está fóra do rango.",
+    "non_positive": "Debes eliminar polo menos 1 obxecto.",
+    "exceeds_pile": "Non se pode eliminar {quantity} da pila {pile_index} (só quedan {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "O Xogador {player_id} xogou [{pile_index} {quantity}], eliminando {quantity} obxecto(s) da pila {pile_index}."
+  },
+  "outcome": {
+    "win": "O Xogador {player_id} colleu o(s) último(s) obxecto(s)!"
+  }
+}

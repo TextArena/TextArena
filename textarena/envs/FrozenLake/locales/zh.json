@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro":            "欢迎来到 Frozen Lake！\n\n你在网格中由符号 'P' 表示。\n网格符号：\n  ' ' = 冰冻表面（可以安全行走）\n  'H' = 冰洞（掉进去就会失败！）\n  'G' = 目标（到达这里即可获胜！）\n  'P' = 你当前的位置\n\n可用动作：up、down、left、right（或 w、a、s、d）\n请按以下格式输入动作：[up]、[down]、[left]、[right] 或 [w]、[a]、[s]、[d]\n\n目标：从左上角的起点移动到右下角的目标，同时避免掉入任何冰洞！\n"
+  },
+
+  "board": {
+    "current_board":    "当前棋盘：\n\n{board}\n\n可用动作：{actions}"
+  },
+
+  "invalid_move": {
+    "wrong_format":     "动作格式无效。请使用 [up]、[down]、[left]、[right] 或 [w]、[a]、[s]、[d]。",
+    "unknown_action":   "未知动作 '{action}'。请使用 up、down、left、right 或 w、a、s、d。",
+    "hit_wall":         "你尝试向 {action} 移动，但撞到了墙！"
+  },
+
+  "game_action": {
+    "moved":            "你向 {action} 移动到了位置 ({row}, {col})。"
+  },
+
+  "outcome": {
+    "win":              "恭喜！你到达了目标！",
+    "fell_in_hole":     "你掉进了冰洞！游戏结束。你完成了前往目标路程的 {pct}%。",
+    "turn_limit":       "你已达到回合上限！游戏结束。你完成了前往目标路程的 {pct}%。"
+  }
+}

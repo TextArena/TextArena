@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "Surround ya Bapalami ba {num_players} holim'a gridi ya {width}x{height}.\nUena ke mopalami {player_id}. Menyetla efe kapa efe ya ho tsamaya: '[up]' '[down]' '[left]' '[right]' kapa w/s/a/d.\nSepheo: phela ho feta bohle ba bang. Metsamao e bolaya; ho kgathisa lebota la bolaya; ho kgathisa ka hlooho ho bolaya bobedi."
+  },
+  "board": {
+    "current": "Boto ea hajoale: {board}",
+    "after_moves": "Boto ka mor'a hore e tsamaee hammoho: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Sebapali {player_id} o shoele ka lebaka la ho falla ha hae."
+  },
+  "outcome": {
+    "survived_win": "Sebapali {player_id} o ile a pholoha; ba bang kaofela ba ile ba oa.",
+    "all_crashed": "Libapali tsohle li ile tsa oa ka nako e le 'ngoe.",
+    "outlived": "Sebapali se ile sa phela ho feta ba bang kaofela.",
+    "all_dead": "Libapali tsohle li shoele.",
+    "turn_limit": "Ho fihleloa moeli oa ho fetoha - ea pholohang nako e telele ka ho fetisisa oa hlōla.",
+    "ranking": "{reason} Theko e felletseng ea dikolo (e ntle le e nyane): {groups}"
+  }
+}

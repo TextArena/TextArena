@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a SimpleTak-ban.\nA táblán az Ön kövei '{player_stone}'-ként, míg az ellenfele kövei '{opponent_stone}'-ként jelennek meg.\n\nAz Ön lépésénél válasszon egy üres cellát (a számozott indexe alapján) és helyezze el ott a kövét.\nPéldául, '[12]' a követ a 12. cellába helyezi.\n\nAz Ön célja, hogy egy folyamatos utat alkosson a köveiből, amely összeköti a tábla két ellentétes szélét (fentről lefelé vagy balról jobbra)."
+  },
+  "invalid_move": {
+    "invalid_move_format": "Érvénytelen lépésformátum",
+    "cell_out_of_range": "Érvénytelen cellaszám: {cell_num}. 0 és {max_board_num} között kell lennie.",
+    "cell_already_occupied": "A {cell_num} cella már foglalt. Válasszon egy üres cellát."
+  },
+  "board": {
+    "current_state": "Aktuális tábla:\n\n{rendered_board}\nElérhető lépések: {available_moves}"
+  },
+  "action": {
+    "placement": "A {current_player_id}. játékos elhelyezte a szimbólumát ({symbol}) a {cell_num} cellában."
+  },
+  "outcome": {
+    "winner": "A {current_player_id}. játékos ('{symbol}') összekötött két ellentétes szélet!",
+    "draw": "A tábla tele van. Döntetlen!"
+  }
+}

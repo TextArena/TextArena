@@ -1,0 +1,31 @@
+{
+  "_comment": "Česká lokalizace pro Hangman. Klíče (vlevo) jsou pevné; překládávejte pouze hodnoty (vpravo). Zachovejte každý {placeholder} beze změny. Zachovejte neutrální tokeny nepřeložené: formáty závorek '[L]' / '[LIGHT]', hádané písmeno {letter}, záhlaví sloupců (C00, C01, ...) a '_' mezery uvnitř {board}.",
+  "_slots": {
+    "{board}": "Neutrální vykreslená deska (záhlaví sloupců C00/C01, odhalená písmena, '_' mezery); nepřekládávejte",
+    "{tries_left}": "Zbývající nesprávné pokusy (celé číslo)",
+    "{guessed}": "Čárkami oddělený seznam již hádaných písmen",
+    "{letter}": "Hádané písmeno nebo celé slovo (ponecháno tak, jak bylo zadáno)",
+    "{pct}": "Procento správně hádaných znaků, formátováno na 2 desetinná místa",
+    "{target_word}": "Skryté cílové slovo"
+  },
+  "prompt": {
+    "intro": "Hrajete Hangman. Cílem hry je uhodnout slovo zadáním jednoho písmene nebo celého slova.\nKaždý sloupec je očíslován. Buňky, které je třeba vyplnit písmeny, jsou zastoupeny '_'.\n\nExistují dva způsoby, jak můžete odpovědět. Můžete zadat jedno písmeno v formátu '[L]', nebo můžete hádat celé slovo v formátu '[LIGHT]'.\nPokud je dané písmeno ve slově, bude odhaleno v mřížce.\nPokud je dané slovo správné, vyhráváte.\nBěhem hry bude historie vašich voleb připojena níže. Použijte tyto informace k uhodnutí slova a výhře.\nMáte 6 nesprávných pokusů, než hra skončí.\n\n"
+  },
+  "board": {
+    "status": "Aktuální deska:\n{board}\nMáte {tries_left} pokusů zbývajících.\nHádaná písmena: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Neplatný formát tahu. Nezodpověděli jste platným 'písmenem' nebo 'slovem'.",
+    "already_guessed": "Hádal jste písmeno '{letter}', které již bylo hádáno."
+  },
+  "message": {
+    "wrong_word": "Vaše hádání '{letter}' není cílové slovo.",
+    "letter_in": "Vaše hádání {letter} je ve slově",
+    "letter_not_in": "Vaše hádání {letter} není ve slově. Máte {tries_left} životů zbývajících."
+  },
+  "outcome": {
+    "win_word": "Gratulujeme! Dokončili jste hádanku Hangman.",
+    "win_board": "Gratulujeme! Dokončili jste hádanku Hangman.",
+    "out_of_tries": "Došli jste pokusů. Uhodli jste {pct} procent znaků správně. Cílové slovo bylo: {target_word}"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa isang {max_rounds} round na laro ng Kuhn Poker.\nMga Tuntunin ng Laro:\n- Ang Kuhn Poker ay gumagamit ng isang 3-card na baraha na may J, Q, K (J ang pinakamababa, K ang pinakamataas)\n- Bawat manlalaro ay nag-aambag ng {ante} chip at nakatanggap ng 1 card bawat round (tandaan na ang mga card ay naibibigay nang walang kapalit, kaya hindi ka pwedeng magkaroon ng parehong card bilang ang iyong kalaban).\n- Ang laro ay nagpapatuloy sa loob ng {max_rounds} rounds\n- Ang manlalaro na may pinakamaraming chip pagkatapos ng lahat ng rounds ay mananalo\nMga Tuntunin ng Pagkilos:\n- '[check]': Pumasa nang walang pagtaya (kung walang taya sa mesa)\n- '[bet]': Magdagdag ng 1 chip sa pot (kung walang taya sa mesa)\n- '[call]': Tumugma sa taya ng kalaban sa pamamagitan ng pagdaragdag ng 1 chip sa pot\n- '[fold]': Isuko ang iyong kamay at hayaan ang iyong kalaban na manalo ng pot"
+  },
+  "init_round": {
+    "round_start": "### Nagsisimula ang round {current_round} sa {max_rounds} rounds. Ang iyong card ay: '{player_card}'",
+    "available_actions": "Ang mga pagkilos na magagamit mo ay: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ang pagkilos ay dapat na [Check], [Bet], [Call], o [Fold].",
+    "not_legal": "Ang pagkilos ay dapat na {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, nagsumite ng pagkilos: '[{move}]'.",
+    "valid_actions": "Ang mga pagkilos na magagamit mo ay: {legal_actions}.",
+    "round_summary": "{reason} Kasalukuyang mga iskor: Player 0: '{player_0_chips}'; Player 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Ang {winner_card} ni Player {winner} ay tinalo ang {loser_card} ni Player {loser}. Ang Player {winner} ay nanalo ng pot na {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "Sa pagtatapos ng {max_rounds} rounds, parehong manlalaro ay may parehong bilang ng chip.",
+    "round_win": "Ang Player {player_id} ay sumuko.",
+    "winner_player0": "Ang Player 0 ay nanalo dahil sa pagkakaroon ng higit pang chip sa pagtatapos ng lahat ng {max_rounds} rounds.",
+    "winner_player1": "Ang Player 1 ay nanalo dahil sa pagkakaroon ng higit pang chip sa pagtatapos ng lahat ng {max_rounds} rounds."
+  }
+}

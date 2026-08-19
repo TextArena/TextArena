@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ove uakalenge uakalenge {player_id} mu Iterated Prisoner's Dilemma iheke {num_rounds} ikuhaku.\n\nEstrutura ya Jogo:\n- Kabla ya kila desisaão ove na {total_conversation_rounds} ovingila vya kuuliza kwa ulolondji.\n- Ondaka, imwe ya maweka mawili ya ulolondji hinyikisa kubambeka kwa kusunga kana kuhinyikisa.\n\nMatrix ya Pagamento (fixe kwa kila ikuhaku):\n- Imwe yombili ya kusunga ➜ kila {cooperate_reward}\n- Imwe yombili ya kuhinyikisa ➜ kila {mutual_defect_reward}\n- Imwe inahinyikisa, imwe inasunga ➜ inahinyikisa {defect_reward}, inasunga {sucker_reward}\n\nKukwasha Jogo:\n- Pa ulolondji: tanga ulolondji waco.\n- Pa kipindi cha desisaão: tanga '[Cooperate]' kana '[Defect]' (kana kikwasha). Ove ungaweza kuongeza ulolondji waco kabla/ondaka ya token."
+  },
+  "phases": {
+    "conversation_finished": "Kupangana kwawe kwa milonga {round}. Tanga '[Cooperate]' kana '[Defect]' munda \\boxed{{}}.",
+    "starting_round": "--- Oku fetika ohongele {round} ---",
+    "round_summary": "Zikwiza {round} zisikwiza:\n{outcome}\nMwana 0 akwata {r0} (jumla {score_0}), Mwana 1 akwata {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Mukwiyu {winner} ukala {win_score} - {lose_score}.",
+    "draw": "Kupata nawa! Omatu wawili oshinge {s0}.",
+    "round_both_cooperate": "Omatu wawili a kwamba ndi ame.",
+    "round_both_defect": "Omatu wawili a kwamba ndi kala.",
+    "round_p0_cooperates_p1_defects": "Omutu wa 0 a kwamba ndi ame, omutu wa 1 a kwamba ndi kala.",
+    "round_p0_defects_p1_cooperates": "Mwana 0 akubuluka, Mwana 1 akupambana."
+  }
+}

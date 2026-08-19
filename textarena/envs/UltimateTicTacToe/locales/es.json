@@ -1,0 +1,32 @@
+{
+  "player_prompt": {
+    "intro": "Eres el jugador {player_id} en **Ultimate Tic Tac Toe**.\nEnvía tu movimiento como **[macro  micro]** (dos números del 0 al 8):\n• *macro* = en qué minitablero juegas\n• *micro* = en qué casilla de ese minitablero juegas\nEjemplo: `[7 8]` ➜ coloca tu marca en el minitablero 7, casilla 8, y\nobliga a tu oponente a jugar en el minitablero 8 a continuación.\n\nEres `{symbol}`.\n"
+  },
+
+  "board": {
+    "current_board": "Tablero actual:\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "El movimiento debe tener la forma [macro micro], con números del 0 al 8.",
+    "out_of_range": "Cada índice debe estar entre 0 y 8.",
+    "index_out_of_range": "El micro_board, la fila o la columna están fuera del intervalo permitido.",
+    "cell_occupied": "La casilla ya está ocupada.",
+    "wrong_micro_board": "El jugador debe jugar en el siguiente minitablero.",
+    "micro_board_won": "Ese minitablero ya ha sido ganado."
+  },
+
+  "next_board": {
+    "any": "cualquier minitablero",
+    "specific": "el minitablero {nxt}"
+  },
+
+  "game_action": {
+    "played": "El jugador {player_id} jugó en el minitablero {macro_idx}, casilla {micro_idx} (fila {row}, columna {col}). Ahora, el jugador {opponent_id} debe jugar en {nxt_txt}."
+  },
+
+  "outcome": {
+    "win": "¡El jugador {player_id} gana Ultimate Tic Tac Toe!",
+    "draw": "¡La partida termina en empate!"
+  }
+}

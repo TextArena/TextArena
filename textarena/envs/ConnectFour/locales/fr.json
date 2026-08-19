@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le joueur {player_id} dans Puissance 4.\nLe symbole de votre jeton : {symbol}.\nLe plateau de jeu comporte {num_rows} lignes et {num_cols} colonnes.\nLes joueurs jouent à tour de rôle en laissant tomber leur jeton dans l’une des colonnes (0 à {end_col}).\nLe premier à aligner quatre de ses propres jetons verticalement, horizontalement ou en diagonale gagne.\nÀ votre tour, entrez le numéro de colonne entre crochets pour jouer votre coup.\nPar exemple : '[col 4]' ou '[col 1]'."
+  },
+
+  "board": {
+    "board_visible_state": "État du plateau :\n{board_visual}",
+    "board_notvisible_state": "Le plateau n’est pas visible pour les joueurs."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Joueur {player_id}, format d’action invalide. Format attendu : '[col x]'.",
+    "out_of_range": "Joueur {player_id}, action invalide. La colonne {col} est hors limites.",
+    "already_full": "Joueur {player_id}, action invalide. La colonne {col} est pleine."
+  },
+
+  "action": {
+    "dropped_disk": "Le joueur {player_id} a déposé son jeton ({player_symbol}) dans la colonne {col}."
+  },
+
+  "outcome": {
+    "win": "Le joueur {player_id} gagne en alignant quatre jetons !",
+    "draw": "La partie se termine par un match nul."
+  }
+}

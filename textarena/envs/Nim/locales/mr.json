@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "तुम्ही Nim मध्ये खेळाडू {player_id} आहात. तुमचा उद्देश शेवटची उर्वरित वस्तू घेणे आहे. प्रत्येक वळणावर, एक स्टॅक निवडा आणि त्यातून एक किंवा अधिक वस्तू काढा. '[pile quantity]' स्वरूप वापरा, जेथे स्टॅक स्टॅक इंडेक्स आहे आणि प्रमाण काढून टाकण्याच्या वस्तूंची संख्या आहे. उदाहरणार्थ, '[0 3]' स्टॅक 0 मधील 3 वस्तू काढून टाकते."
+  },
+  "state": {
+    "current_pile": "चालू पाइल: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "कोणताही वैध हलवा स्वरूप आढळला नाही. '[pile quantity]' वापरा.",
+    "correct_format_wrong_fields": "खेळाडू {player_id}, अवैध क्रिया. स्तंभ {col} बाहेरील आहे.",
+    "out_of_range": "पाइल इंडेक्स {pile_index} श्रेणीबाहेर आहे.",
+    "non_positive": "किमान 1 वस्तू काढून टाकावी.",
+    "exceeds_pile": "{quantity} ला {pile_index} या रांगेतून काढून टाकता येत नाही (फक्त {pile_count} बाकी आहे)."
+  },
+  "observation": {
+    "removed_from_piles": "खेळाडू {player_id} ने [{pile_index} {quantity}] खेळले, पाइल {pile_index} मधून {quantity} वस्तू(ओं) काढून टाकल्या."
+  },
+  "outcome": {
+    "win": "खेळाडू {player_id}ने शेवटचा ऑब्जेक्ट घेतला!"
+  }
+}

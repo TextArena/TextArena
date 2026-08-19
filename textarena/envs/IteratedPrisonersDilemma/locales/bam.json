@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "I ni Player {player_id} ye Iterated Prisoner's Dilemma kɔnɔ {num_rounds} turu la.\n\nJɛŋɛ Kɔnɔ:\n- Kɛlɛ kɔ kɔnɔ, i ni {total_conversation_rounds} turu la ka kuma dɔɔnin dɔɔnin.\n- O kɔ fɛ, n'ga player wɛrɛ wɛlɛ ka cooperate bee ka defect kɛlɛ kɔ.\n\nPayoff Matrix (kɛlɛ kɔnɔ):\n- Wɛrɛ wɛrɛ Cooperate ➜ kɛlɛ {cooperate_reward}\n- Wɛrɛ wɛrɛ Defect ➜ kɛlɛ {mutual_defect_reward}\n- Kɛlɛ kɔ Defects, kɛlɛ kɔ Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nJɛŋɛ Kɛlɛ:\n- Kuma dɔɔnin dɔɔnin: i ni kuma dɔɔnin i ni baara.\n- Kɛlɛ kɔ fɛ: '[Cooperate]' bee '[Defect]' kɔ (case-insensitive). I ni kuma dɔɔnin i ni baara pɛrɛ/pɛrɛn token."
+  },
+  "phases": {
+    "conversation_finished": "Kabara donni kɛlɛnkɛla ye round {round}. An bɛ a yɛrɛ '[Cooperate]' wa '[Defect]' kɔnɔ \\boxed{{}}.",
+    "starting_round": "--- Sisan Round {round} ---",
+    "round_summary": "Séri {round} kɔnɔ:\n{outcome}\nJwé 0 bɛna {r0} (kɔnɔ {score_0}), Jwé 1 bɛna {r1} (kɔnɔ {score_1})."
+  },
+  "outcome": {
+    "winner": "Jwé {winner} kɛlɛ {win_score} - {lose_score}.",
+    "draw": "A ye bɔlɔlɔw bɛɛ ka bara kɛ {s0}.",
+    "round_both_cooperate": "Jagolaw fila bɛɛ ye dɛmɛ don ɲɔgɔn na.",
+    "round_both_defect": "O fɔlikɛla fila bɛɛ y'u yɛrɛ di.",
+    "round_p0_cooperates_p1_defects": "Jwé 0 ka kɛlɛ, Jwé 1 ka kɛlɛw kɔrɔ.",
+    "round_p0_defects_p1_cooperates": "Jagokɛla 0 ye cɛsiri kɛ, jogucɛ 1 bɛ dɛmɛ don."
+  }
+}

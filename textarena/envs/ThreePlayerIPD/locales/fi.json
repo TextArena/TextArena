@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} 3-pelaajan Iteroidussa Vangin Dilemmassa. Ottelu kestää {num_rounds} kierrosta.\nKierroksen rakenne:\n• {conv_rounds} vapaata keskustelukierrosta\n• 1 päätöksentekokierros - lähetä yksi token per vastustaja: '[<opp-id> cooperate]' tai '[<opp-id> defect]' (esim. '[1 defect] [2 cooperate]'; oletus on 'yhteistyö'). \nParivälisten voittotaulukoiden matriisi (sovelletaan jokaiseen järjestämättömään pariin):\n  - Molemmat tekevät yhteistyötä  ->  {reward}\n  - Molemmat pettävät     ->  {punishment}\n  - Sinä petät, he tekevät yhteistyötä -> {temptation}\n  - Sinä teet yhteistyötä, he pettävät -> {sucker}\nPelaaja(t) korkeimmalla pistemäärällä kaikkien kierrosten lopussa voittaa."
+  },
+  "round": {
+    "start": "─── Aloittamassa kierros {round} ───\tVoit keskustella vapaasti seuraavien {conv_rounds} kierrosten ajan.",
+    "chat_finished": "Keskustelu kierrokselle {round} on päättynyt. Lähetä päätöksesi, yksi token per vastustaja: `[pid cooperate]` tai `[pid defect]`."
+  },
+  "results": {
+    "header": "### Kierros {round} - Tulokset:",
+    "pair_line": "{observation}\n\t Pelaaja {i} vs Pelaaja {j} valitsi {choice_i} ja {choice_j} vastaavasti (Pelaaja {i} sai {gain_i}, Pelaaja {j} sai {gain_j})",
+    "scores_open": "{observation}\n-> Nykyiset pisteet: ",
+    "score_first": "{observation}Pelaaja {player_id} ({score})",
+    "score_next": "{observation}; Pelaaja {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Lopulliset pisteet: {scores}.  Sijoitusryhmät (huonoin→paras): {groups}"
+  }
+}

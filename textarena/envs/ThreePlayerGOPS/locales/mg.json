@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Ianao no Mpilalao {player_id} ao amin'ny Three-Player GOPS.\n- Ianao no mitazona ny kaody 13 A-K (tsirairay indray mandeha).\n- Isaky ny fihodinana dia lany ny lohateny no aseho. Alefaso kaody iray toy ny `[Q]`, `[10]`, `[2]` …\n- Ny kaody ambony indrindra no mahazo ny lany (+ pot nentina). Ny fifaninanana dia mitondra ny lany ho amin'ny fihodinana manaraka.\n- Aorian'ny fihodinana 13, ny totoben'ny mpilalao ambony indrindra no mahazo. Ny hetsika tsy mety = elimine."
+  },
+  "round": {
+    "header": "### Fihodinana {round}/13 - Loka: {prize} (mitentina {worth})",
+    "hand": "Ny tananao sisa: {hand}"
+  },
+  "reveal": {
+    "win": "Fividianana  {bids} - Mandresy ny mpilalao {winner} {pot}.",
+    "tie": "Fividianana  {bids} - tsy misy fifandirana, ny pot izao {pot}.",
+    "scores": "Isa → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "Mila karatra misy fononteny toy ny \"[Q]\" ny hetsika",
+    "bad_card": "karatra efa nampiasaina na tsy manan-kery"
+  },
+  "elimination": {
+    "player": "Mpilalao {pid} voafafa taorian'ny fihetsika tsy manan-kery miverimberina."
+  },
+  "outcome": {
+    "auto_win": "Mpilalao roa nesorina - fandresena mandeha ho azy.",
+    "final": "Famaritana farany: {scores}"
+  }
+}

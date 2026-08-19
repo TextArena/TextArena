@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Kana ndugo {player_id} cikin Wasan Tic Tac Toe na Mutum Uku.\nAlama nka ita ce '{symbol}'.\nKana dauka wuri na alama nka a kan allo na 5x5 domin kirkirar layi na hudu.\nLayi na iya zama kwarai, tsaye, ko kwance.\nMika wuri nka da salon '[4]' domin kada kuri 4."
+  },
+  "board": {
+    "current_board": "Allo na Yanzu:\n\n{board}\n\nMiyagun Wuri: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kala ndolo mana. Kisa '[cell]' kwa kala {max_cell} ɗawɗo.",
+    "out_of_range": "Lambar kuri ba daidai ba: {cell}. Dole ne iya zama tsakanin 0 da {max_cell}.",
+    "already_occupied": "Cell {cell} dǝ kulashinzǝ kǝrma ro.",
+    "made_invalid": "Kambiwu {player_id}be letәgәnyi sәdәna."
+  },
+  "game_action": {
+    "placed": "Ndugo {player_id} ya sa alama nsa ({symbol}) a filin ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Ndugo {player_id} ({symbol}) ya yi nasara!",
+    "draw": "Kәndodǝ shima kangiwo!"
+  }
+}

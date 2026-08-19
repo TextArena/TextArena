@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Yin rɛ̈n Golf (Card Game) - Riäŋ {player_id}.\nKuɛ̈t: Yin yen kuɛ̈ɛ̈t kuɛ̈t kɛ̈ kɛn. Kɛn yen kuɛ̈ɛ̈t kuɛ̈t, yen kuɛ̈ɛ̈t 0.\nKuɛ̈t riɛ̈l: A=1, 2-10=kuɛ̈t, J/Q=10, K=0\n\nKuɛ̈t (yen kuɛ̈ɛ̈t wec kuɛ̈t):\n- '[draw]' - Cɛ̈t kɛ̈ kuɛ̈t\n- '[take]' - Cɛ̈t kɛ̈ kuɛ̈t riɛ̈l\n- '[swap X Y]' - Kuɛ̈ɛ̈t kuɛ̈t cɛ̈t kɛ̈ kɛn X (kɛn) Y (kɛn)\n- '[discard]' - Kuɛ̈ɛ̈t kuɛ̈t cɛ̈t"
+  },
+  "board": {
+    "drew": "Yin cɛ̈t: {card}\nCin yen kuɛ̈ɛ̈t [swap X Y] kɛ̈n [discard]",
+    "took": "Yin cɛ̈t: {card} kɛ̈ kuɛ̈t riɛ̈l\nYin kuɛ̈ɛ̈t [swap X Y] kɛ̈n (cin yen kuɛ̈ɛ̈t riɛ̈l)",
+    "peeked": "Yin lɔ̈ɔ̈t kɛ̈ kɛn ({row}, {col}): {card}",
+    "turn_view": "Kuɛ̈t yin:\n{hand}\nKuɛ̈t riɛ̈l: {discard}\n{options}",
+    "none": "Thiɛlɛ mi̱ te thi̱n."
+  },
+  "options": {
+    "final_turns": "Kuɛ̈t kɛ̈! Yin kuɛ̈t: [draw], [take], [peek X Y]",
+    "draw": "Yin kuɛ̈t: [draw], [take]",
+    "must_swap": "Ji̱n biɛ: [swap X Y] (/ca kɛkdɛ luäŋ kä ɣöö bɛ jiɛn rɛy duëël)",
+    "swap_or_discard": "Yin kuɛ̈ɛ̈t: [swap X Y] kɛ̈n [discard]"
+  },
+  "hand": {
+    "no_cards": "/Thiɛlɛ kaar ti̱ te thi̱n.",
+    "header": "Col: 1 2 3 kɛ̈lkɛ̱l",
+    "row": "Kɛn {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Riäŋ {pid} kuɛ̈ɛ̈t {new} thiɛ̈k {old} kɛ̈ kɛn ({row}, {col})",
+    "discarded": "Riäŋ {pid} kuɛ̈ɛ̈t {card}"
+  },
+  "message": {
+    "deck_empty": "Deck ɛ mi̱ /thiɛl ŋu! Ciɛ̈t cɛ thuuk kɛ pɛ̈th.",
+    "knocked": "Ji̱ ŋarä {pid} caa kɛ däk piny! Ŋat kɛl kä nɛy tin kɔ̱kiɛn bɛ wɔ̱ ni̱kɛ gua̱a̱th ɛ dɔ̱ŋ.",
+    "final_round": "Riäŋ {pid} {reason}! Riäŋ kɛ̈ yen kuɛ̈ɛ̈t kɛn"
+  },
+  "reason": {
+    "all_revealed": "ci kuak diaal jɔɔc?"
+  },
+  "invalid": {
+    "wrong_action": "Yin kuɛ̈ɛ̈t wec kuɛ̈t: [draw], [take], [swap X Y], [discard], [knock], kɛ̈n [peek X Y]",
+    "discard_empty": "Kä tin ca lo̱k /ciɛ ti ŋuan!",
+    "must_draw_first": "Yin kuɛ̈ɛ̈t cɛ̈t, [draw], [take], [knock], kɛ̈n [peek X Y]",
+    "cannot_discard_taken": "/Ci̱ raan bi̱ ka̱m raar mi̱ caa naŋ kä tin ca lo̱k, derɛ rɔ gɛr.",
+    "have_drawn_card": "Yin cɛ̈t kuɛ̈t. Yin kuɛ̈ɛ̈t [swap X Y] kɛ̈n [discard]",
+    "need_drawn_swap": "Ji̱n go̱o̱ri kaar mi ca yɔt kɛ ɣöö bi jɛ loc.",
+    "need_drawn_discard": "Ji̱n go̱o̱ri ɣöö bi kɛ jiek.",
+    "out_of_bounds": "Kɛn lɔ̈ɔ̈t kɛ̈ kɛn. Yin yen kuɛ̈ɛ̈t kɛn 1-{max_row}, kɛn 1-{max_col}",
+    "knock_with_card": "/Ci̱ raan dee kɛ̈k la̱t mi̱ cɛ ka̱m ji̱ kaar. Duundɛ ɣöö, biɛ ku thuuk ni̱ nhiam.",
+    "already_knocked": "Tëëkɛ ram mi ci ku thuŋ yiöw ti̱ti̱.",
+    "already_revealed": "Ɛn kaar ɛmɔ ca nyoth!"
+  },
+  "summary": {
+    "full": "Kuɛ̈t kɛ̈! Riäŋ {winner} yen kuɛ̈ɛ̈t kuɛ̈t {score} kuɛ̈t!\n\nKuɛ̈t kɛ̈ kɛn:\n{scores}",
+    "line": "Riäŋ {pid}: {score} kuɛ̈t\n"
+  },
+  "board_str": {
+    "title": "=== CIËËM KËËR ===",
+    "discard": "Kuenɛ kɛ mi̱ ci̱ rɔ riɛk: {card}",
+    "knocked": "Ji̱ ŋarä {pid} ci kɛ kuɔk!",
+    "player_header": "Riäŋ {pid} (Kuɛ̈t: {score}):"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "Berkas lokal LinesOfAction. JANGAN menerjemahkan kunci (sisi kiri). Hanya terjemahkan nilai (sisi kanan). Jangan menerjemahkan koordinat papan (a-h, 1-8), huruf potongan (O, X), token format gerakan, atau grid ASCII {board}.",
+  "_slots": {
+    "{player_id}": "Nomor pemain, baik 0 atau 1",
+    "{side}": "Huruf potongan pemain, baik O atau X",
+    "{other}": "Huruf potongan lawan, baik O atau X",
+    "{board}": "Penggambaran ASCII papan; tetapkan seperti adanya",
+    "{coord}": "Koordinat papan seperti b1 atau a3",
+    "{from}": "Koordinat sumber gerakan, seperti b1",
+    "{to}": "Koordinat tujuan gerakan, seperti b3"
+  },
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam permainan LinesOfAction.\nPotongan Anda adalah '{side}', potongan lawan adalah '{other}'.\nFormat gerakan: `[b1b3]` (koordinat-sumber ke-koordinat-tujuan). Gerakan yang sah bergerak secara horizontal, vertikal, atau diagonal sejumlah kotak yang sama dengan total potongan (warna apa pun) dalam garis tersebut. Anda dapat melompati potongan sendiri, tetapi tidak potongan lawan; mendarat di potongan lawan akan menangkapnya. Menang ketika semua potongan Anda terhubung 8-neighbor."
+  },
+  "board": {
+    "current_board": "Papan:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format harus e2e4 (koordinat dari,ke).",
+    "no_piece": "Tidak ada potongan {side} di {coord}.",
+    "identical": "Sumber dan tujuan identik.",
+    "not_straight_or_diagonal": "Gerakan harus lurus atau diagonal.",
+    "wrong_distance": "Harus bergerak sejauh jumlah potongan dalam garis.",
+    "enemy_blocks": "Potongan lawan menghalangi jalur.",
+    "destination_own": "Tujuan ditempati oleh potongan sendiri."
+  },
+  "game_action": {
+    "moved": "Pemain {player_id} bergerak {from} -> {to}",
+    "captured_suffix": "Pemain {player_id} bergerak {from} -> {to} menangkap potongan lawan."
+  },
+  "outcome": {
+    "win": "Semua potongan terhubung.",
+    "draw_no_capture": "60 gerakan tanpa penangkapan.",
+    "draw_repetition": "Posisi berulang tiga kali."
+  }
+}

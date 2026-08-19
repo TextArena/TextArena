@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "খেল আৰম্ভ হয়। ট্ৰাম্পৰ সাজঃ {trump_suit} (ট্ৰাম্প কাৰ্ডঃ {trump_str}) ।",
+    "no_trump_card": "নাই"
+  },
+  "player_prompt": {
+    "intro": "আপুনি জাৰ্মান ৱিষ্টত প্লেয়াৰ {player_id}। {phase_info} আপুনি হাতত {hand_size} কাৰ্ড ৰাখে। '[play N]' থকা কাৰ্ড এটা খেলক, য'ত N হৈছে আপোনাৰ হাতত থকা কাৰ্ডৰ স্থান (যেনে '[play 3]') ।",
+    "phase_learning": "শিক্ষণ পৰ্যায়ঃ প্ৰতিখন ট্ৰিকৰ বিজয়ীয়ে মুখা-উপস্থিত কাৰ্ড লয় আৰু পৰাজিতজনে ডেকৰ পৰা পৰৱৰ্তী কাৰ্ড টানি লয়। এই পৰ্যায়ত অৰ্জন কৰা ট্ৰিক বিজয়ৰ বাবে গণ্য নহয়।",
+    "phase_playing": "খেলৰ পৰ্যায়ঃ ডেকৰ সংখ্যা শেষ হৈছে। এতিয়াৰ পৰা প্ৰতিটো কৌশল বিজয়ৰ বাবে গণ্য কৰা হয়।"
+  },
+  "next_card": {
+    "playing_phase": "কোনো কাৰ্ড দিয়া নহয় - খেলৰ পৰ্যায় আৰম্ভ হৈছে।",
+    "deck_empty": "ডেক খালী - কোনো কাৰ্ড অফাৰ কৰা নহয়।",
+    "available": "কাৰ্ডৰ প্ৰস্তাৱঃ {card}",
+    "available_trump": "কাৰ্ডৰ প্ৰস্তাৱঃ {card} (ট্ৰাম্প)"
+  },
+  "invalid_move": {
+    "wrong_format": "অচল চুইচ ফৰ্মেট. আপোনাৰ হাতত থকা এনথ কাৰ্ডটো খেলিবলৈ '[play N]' ব্যৱহাৰ কৰক।",
+    "bad_position": "সেই কাৰ্ডৰ স্থান অস্তিত্বত নাই। আপোনাৰ হাতত {hand_size} কাৰ্ড আছে।",
+    "must_follow_suit": "আপুনিও সেইদৰে কৰিব লাগিব আৰু {lead_suit} কাৰ্ড এটা খেলিব লাগিব।",
+    "invalid_play": "সেই কাৰ্ডটো খেলিব নোৱাৰি।"
+  },
+  "game_action": {
+    "played": "খেলুৱৈ {player_id}য়ে খেলিছিল {card}।"
+  },
+  "trick": {
+    "won": "খেলুৱৈ {winner_id} য়ে {card} ৰ সৈতে ট্ৰিকটো জয় কৰে।",
+    "won_learning": "খেলুৱৈ {winner_id} য়ে {card} ৰ সৈতে ট্ৰিকটো জয় কৰে আৰু মুখা-উপস্থিত কাৰ্ডটো লয়।"
+  },
+  "phase": {
+    "learning_complete": "ডেকটি শেষ হৈছে। শিকনৰ পৰ্যায় শেষ হৈছে - বাকী থকা প্রতিটো টোপ জয়ৰ দিশে গণনা কৰা হব।"
+  },
+  "draw": {
+    "winner_received": "আপুনি ট্ৰিকটো জিকিলে আৰু {card} লাভ কৰিলে।",
+    "loser_received": "আপুনি ট্ৰিকটো হেৰুৱাই ডেকৰ পৰা {card} টানিলে।",
+    "winner_preview": "পৰৱৰ্তী কাৰ্ড {card}।"
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "এতিয়ালৈকে জয়ী হোৱা ট্ৰিকসমূহ - খেলুৱৈ ০ঃ {tricks0}, খেলুৱৈ ১ঃ {tricks1}",
+    "scores_playing": "স্ক'ৰিং ট্ৰিক - খেলুৱৈ ০ঃ {tricks0}, খেলুৱৈ ১ঃ {tricks1}",
+    "phase": "পৰ্যায়ঃ {phase}",
+    "phase_learning": "পৰ্যায়ঃ {phase} ({remaining_cards} কাৰ্ডসমূহ ডেকত ৰৈ যায়)"
+  },
+  "hand": {
+    "no_cards": "কাৰ্ড নাই",
+    "no_cards_in_hand": "হাতত কাৰ্ড নাই",
+    "header": "তোমাৰ হাতঃ",
+    "trump_indicator": "(ট্ৰাম্প)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "কাৰ্ডবোৰে এই কৌশলটো এতিয়াও খেলি পোৱা নাই।",
+    "header": "বৰ্তমানৰ কৌশলঃ",
+    "trump_indicator": "(ট্ৰাম্প)",
+    "card_line": "{observation} খেলুৱৈ {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "খেল আৰম্ভ কৰা হোৱা নাই",
+    "header": "=== জাৰ্মান ৱিষ্ট গেম ===",
+    "phase": "{observation} পৰ্যায়ঃ {phase}",
+    "trump_suit": "{observation} ট্ৰাম্পৰ সাজ: {trump_suit}",
+    "trump_card": "{observation} ট্ৰাম্প কাৰ্ডঃ {card}",
+    "cards_left": "{observation} কাৰ্ডসমূহ ডেকত এৰি দিয়া হৈছেঃ {count}",
+    "next_card": "{observation} বিজয়ীৰ বাবে পৰৱৰ্তী কাৰ্ডঃ {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} বৰ্তমানৰ কৌশল:",
+    "trump_indicator": "(ট্ৰাম্প)",
+    "trick_line": "{observation} খেলুৱৈ {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} খেলুৱৈ {player_id}: {scoring} স্ক'ৰিং ট্ৰিক ({tricks} মুঠ), {hand_size} হাতত থকা কাৰ্ড"
+  },
+  "outcome": {
+    "summary": "শিক্ষণ পৰ্যায় - খেলুৱৈ ০ঃ {l0}, খেলুৱৈ ১ঃ {l1}। খেল পৰ্যায় - খেলুৱৈ ০ঃ {p0}, খেলুৱৈ ১ঃ {p1}। খেলুৱৈ {winner_id}য়ে {winner_tricks} স্ক'ৰিং ট্ৰিকৰ জৰিয়তে জয়লাভ কৰে!"
+  }
+}

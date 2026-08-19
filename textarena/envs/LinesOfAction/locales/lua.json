@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Owe udi Mwana {player_id} mu ndamba ya LinesOfAction.\nBikunda byobe ni '{side}', bikunda bya mukonda ni '{other}'.\nMfumo wa kusonga: `[b1b3]` (kuva-kwenda). Songa ya kikatengo kikendeke kwa mpimo wa kisonga, kwa kisonga, kwa mpimo wa kisonga, kwa kusonga munda wa bikunda byonso (wa mutengo wowote) mu kisonga kile. Owe usonga kupita bikunda byobe, kansi si bikunda bya mukonda; kusonga kwa mukonda kikukwata.  Owe ushinda loko bikunda byobe byonso bikatengele."
+  },
+  "board": {
+    "current_board": "Kabadi: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Tshikebelu tshidi ne bua kuikala e2e4 (ku, too ne ku) muinshi mua bikadilu.",
+    "no_piece": "Kakuena mukanda {side} mu tshibejibeji tshia {coord} to.",
+    "identical": "Tshia kufila ne tshia kuya nabi bidi bifuanangane.",
+    "not_straight_or_diagonal": "Udi ne bua kuya buludiludi anyi mu diagon.",
+    "wrong_distance": "Udi ne bua kuya mutantshi mule mu mulongo umue.",
+    "enemy_blocks": "Baluishi badi bakanga njila.",
+    "destination_own": "Kifula kya kwenda kikuti kibwata na kibindi kyetu."
+  },
+  "game_action": {
+    "moved": "Mwadi {player_id} akwisa {from} -> {to}",
+    "captured_suffix": "Mwadi {player_id} akwisa {from} -> {to} akwisha muntu wa musangidi."
+  },
+  "outcome": {
+    "win": "Malu onso adi mu diumvuangana.",
+    "draw_no_capture": "60 kayi muanji kukosa.",
+    "draw_repetition": "Bimanyinu ebi biakavulangana misangu isatu."
+  }
+}

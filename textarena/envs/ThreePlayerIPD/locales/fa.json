@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "شما بازیکن {player_id} در یک بازی ۳-بازیکنی از معضل زندانی تکراری هستید. مسابقه {num_rounds} دور به طول می‌انجامد.\nساختار دور:\n• {conv_rounds} نوبت گفتگوی آزاد\n• ۱ نوبت تصمیم‌گیری - برای هر حریف یک توکن ارسال کنید: '[<opp-id> cooperate]' یا '[<opp-id> defect]' (مثلاً '[1 defect] [2 cooperate]'; پیش‌فرض 'همکاری' است).\n ماتریس سود جفت‌جفت (برای هر جفت نامرتب اعمال می‌شود):\n  - هر دو همکاری می‌کنند -> {reward}\n  - هر دو خیانت می‌کنند -> {punishment}\n  - شما خیانت می‌کنید، آنها همکاری می‌کنند -> {temptation}\n  - شما همکاری می‌کنید، آنها خیانت می‌کنند -> {sucker}\nبازیکن(ها) با بالاترین امتیاز در پایان همه دورها برنده می‌شوند."
+  },
+  "round": {
+    "start": "─── شروع دور {round} ───\tشما می‌توانید به صورت آزادانه برای {conv_rounds} دور بعدی گفتگو کنید.",
+    "chat_finished": "گفتگوی دور {round} به پایان رسید. تصمیمات خود را ارسال کنید، یک توکن برای هر حریف: `[pid cooperate]` یا `[pid defect]`."
+  },
+  "results": {
+    "header": "### دور {round} - نتایج:",
+    "pair_line": "{observation}\n\t بازیکن {i} در مقابل بازیکن {j} تصمیم به {choice_i} و {choice_j} گرفتند (بازیکن {i} {gain_i} و بازیکن {j} {gain_j} به دست آورد)",
+    "scores_open": "{observation}\n-> امتیازات فعلی: ",
+    "score_first": "{observation}بازیکن {player_id} ({score})",
+    "score_next": "{observation}; بازیکن {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "امتیازات نهایی: {scores}. گروه‌های رده‌بندی (بدترین→بهترین): {groups}"
+  }
+}

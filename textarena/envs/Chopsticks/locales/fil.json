@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa Chopsticks. Sa iyong pagkakataon, pumili ng isa sa:\n  + Atake: '[attack M O]' kung saan M=iyong kamay (0 o 1), O=kamay ng kalaban (0 o 1).\n    - Ang bilang ng kamay ng kalaban ay tumataas ng iyong kamay; kung >=5, ito ay nagiging 0.\n  + Hatiin: '[split L R]' upang muling ipamahagi ang iyong kabuuang daliri sa L at R (L+R = iyong kabuuan).\nTumugon ng eksaktong isa sa mga utos na iyon."
+  },
+  "board": {
+    "current_board": "Kasalukuyang Board:\nPlayer 0: {hands_0}\nPlayer 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Ang iyong kamay {my_idx} ay patay na.",
+    "opp_hand_dead": "Ang kamay ng kalaban {opp_idx} ay patay na.",
+    "split_sum": "Ang paghahati ay dapat sumang {total}.",
+    "split_no_change": "Ang paghahati ay dapat magbago ng iyong pamamahagi ng kamay.",
+    "invalid_command": "Hindi wastong pagkilos. Gamitin ang “[attack M O]” o “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} ay umatake sa kamay {opp_idx} ni P{opp_id}: ito ay nagmula sa {opp_val} hanggang {new_val}.",
+    "split": "P{player_id} ay nahati sa [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Ang dalawang kamay ng kalaban ay patay na.",
+    "draw": "Ang hangganan ng pagkakataon ay naabot na."
+  }
+}

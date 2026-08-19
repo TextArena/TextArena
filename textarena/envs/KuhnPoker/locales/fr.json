@@ -1,0 +1,32 @@
+{
+    "player_prompt": {
+        "intro": "Vous êtes le joueur {player_id} dans une partie de Kuhn Poker en {max_rounds} manches.\nRègles du jeu :\n- Le Kuhn Poker utilise un jeu de 3 cartes : J, Q, K (J est la plus faible, K la plus forte)\n- Chaque joueur mise {ante} jeton en entrée et reçoit 1 carte à chaque manche (remarque : les cartes sont distribuées sans remise, vous ne pouvez donc pas avoir la même carte que votre adversaire)\n- La partie se déroule sur {max_rounds} manches\n- Le joueur ayant le plus de jetons à la fin de toutes les manches gagne\nRègles des actions :\n- '[check]' : Passer sans miser (uniquement si aucune mise n’est en cours)\n- '[bet]' : Ajouter 1 jeton au pot (uniquement si aucune mise n’est en cours)\n- '[call]' : Suivre la mise de l’adversaire en ajoutant 1 jeton\n- '[fold]' : Se coucher et laisser l’adversaire remporter le pot"
+    },
+
+    "init_round": {
+        "round_start": "### Début de la manche {current_round} sur {max_rounds}. Votre carte est : '{player_card}'",
+        "available_actions": "Vos actions disponibles sont : {available_actions}"
+    },
+
+    "invalid_move": {
+        "wrong_format": "L’action doit être [Check], [Bet], [Call] ou [Fold].",
+        "not_legal": "L’action doit être l’une des suivantes : {legal_actions}."
+    },
+
+    "action": {
+        "submit_move": "Le joueur {player_id} a effectué l’action : '[{move}]'.",
+        "valid_actions": "Vos actions disponibles sont : {legal_actions}.",
+        "round_summary": "{reason} Scores actuels : Joueur 0 : '{player_0_chips}' ; Joueur 1 : '{player_1_chips}'"
+    },
+
+    "showdown": {
+        "showdown_summary": "Abattage : la carte du joueur {winner} ({winner_card}) bat celle du joueur {loser} ({loser_card}). Le joueur {winner} remporte le pot de {pot_value} jetons."
+    },
+
+    "outcome": {
+        "draw": "À la fin de {max_rounds} manches, les deux joueurs avaient le même nombre de jetons.",
+        "round_win": "Le joueur {player_id} s’est couché.",
+        "winner_player0": "Le joueur 0 a gagné en ayant plus de jetons à la fin des {max_rounds} manches.",
+        "winner_player1": "Le joueur 1 a gagné en ayant plus de jetons à la fin des {max_rounds} manches."
+    }
+}

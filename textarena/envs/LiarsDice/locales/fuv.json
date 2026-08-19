@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Kai ne Maccido {player_id} a wasan Liar's Dice na {num_players}-player.\nKa'idoji:\n- A zagayen ku, ku na iya:\n  1) Yi sabon bid tare da adadi mafi girma ko face mafi girma (ko biyun) fiye da bid na yanzu; ma'ana '[Bid: 3, 4]',\n  2) Kira bid na ƙarshe ta hanyar rubuta '[Call]'.\n\nIdan ku kira:\n  - Idan adadin gaskiya na face value a tsakanin duka dice yake ƙasa da bid, na ƙarshe bid na asara daya die.\n  - A sahali, mai kira ya asara daya die.\nMaccido wanda ya kai dice 0 an cire shi. Maccido na ƙarshe ya ci."
+  },
+  "board": {
+    "per_player": "\tMaccido {p}: {d}",
+    "new_round": "\nSabon zagaye - Dice masu kulla: {dice_summary}\nDice na yanzu: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Maccido {current_player_id} ya kira! Adadin gaskiya na face {face_value} shi ne {count}, wanda yake ƙasa da {quantity}.\nMaccido {loser_id} (na ƙarshe bid) asara daya die.",
+    "caller_loses": "Maccido {current_player_id} ya kira! Adadin gaskiya na face {face_value} shi ne {count}, wanda yake >= {quantity}.\nMaccido {loser_id} (mai kira) asara daya die."
+  },
+  "action": {
+    "bid_announce": "Maccido {player_id} ina bid {quantity} na ngel face {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Wukki waɗama bilaa jaɓugo ceede.",
+    "invalid_bid": "Jaɓɓorgo CENI: {reason}",
+    "not_recognized": "Aiki on baŋŋitaako ina mayaama '[Bid: X, Y]' walla '[Call]'. Aiki in nodditaama: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Sabuwar adadi {new_quantity} kasa da na yanzu {current_quantity}.",
+    "face_lower": "Sabuwar face value {new_face_value} kasa da na yanzu {current_face_value}.",
+    "identical": "Jaɓɓorgo Caka jaɓugo jawdi je ɗon jooni.",
+    "face_range": "Lartol man ɗon ha yaake 1 be 6."
+  },
+  "message": {
+    "eliminated_invalid": "Jaawal {player_id} wurtinaama ngam fijirde je wala sembe."
+  },
+  "outcome": {
+    "win": "Maccido {winner} ya ci! Zaɓen ƙarshe: {final_ranking}"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire ロケールファイル。キー（左側）は翻訳しないでください。値（右側）のみを翻訳します。すべての {placeholder} はそのままにしてください。カードのラベルやスート（例：A, 10, K, ♣️, ♦️, ♥️, ♠️）、ピラミッドトークン（W, F1-F4, T1-T7）、{board} 内の ASCII ボード、'draw', 'move', 'forfeit', 'all' などのコマンドはそのままにしてください。'move W T1' のようなブラケット構文もラテン文字のままにしてください。",
+  "_slots": {
+    "{n}": "コンマ区切りのコマンド内のアクションインデックス、1ベース",
+    "{msg}": "アクションごとの結果メッセージ（すでにローカライズ済み）",
+    "{count}": "移動する表向きのカードの数",
+    "{src}": "出発元のテーブルピラミッド番号、1ベース",
+    "{dst}": "目的地のピラミッド番号、1ベース",
+    "{cmd}": "プレイヤーが入力した未知のコマンド（翻訳しない）",
+    "{max_turns}": "ゲームが終了するまでの最大ターン数",
+    "{score}": "ファンデーションピラミッドに現在あるカードの数",
+    "{board}": "描画された ASCII ボード（翻訳しない）",
+    "{turn}": "現在のターン数",
+    "{stock}": "ストックに残っているカードの数",
+    "{waste}": "廃棄ピラミッドの最上位カードのラベル、または空の場合は '--'（翻訳しない）",
+    "{cards}": "ピラミッド内のカードの中立的なラベル、または空の場合は '--'（翻訳しない）"
+  },
+  "player_prompt": {
+    "intro": "あなたは Klondike Solitaire をプレイしています。あなたの目標は、すべてのカードをファンデーションピラミッドに移動させることです。\n\nゲームルール:\n- ファンデーションピラミッド (F1-F4): 同じスートでエースからキングまで順に積む\n- テーブルピラミッド (T1-T7): 色を交互に（赤の上に黒、黒の上に赤）順に積む\n- ストック: カードを廃棄ピラミッドに引き出す\n- 廃棄ピラミッド (W): 最上位のカードがプレイ可能\n\nコマンド:\n- 'draw' - ストックから廃棄ピラミッドにカードを引く\n- 'move <source> <destination> [count]' - ピラミッド間でカードを移動する\n  例: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count には 'all' も指定可能で、すべての表向きのカードを移動します。\n- 'forfeit' - ゲームを即終了し、現在のスコアを確定する\n- ピラミッド名: W (廃棄ピラミッド), F1-F4 (ファンデーションピラミッド), T1-T7 (テーブルピラミッド)\n\n1つのターンで複数のアクションを実行できます。コンマで区切って入力します:\n  例: 'draw, move W T1, move T2 F1'\n\n空のテーブルピラミッドにはキングのみを置くことができます。\nアクションは順に実行され、1つが失敗すると残りのアクションはスキップされます。\nゲームが勝てないと判断した場合は 'forfeit' を使用してください。"
+  },
+  "format_error": {
+    "no_brackets": "無効なアクション形式。アクションはブラケットで囲む必要があります。",
+    "no_closing_bracket": "無効なアクション形式。閉じブラケット ']' がありません。",
+    "empty_command": "空のコマンド。'draw' または 'move <source> <destination> [count]' を入力してください。",
+    "empty_action": "空のアクション",
+    "move_needs_args": "Move コマンドには出発元と目的地が必要です。使用例: 'move <source> <destination> [count]'",
+    "count_positive": "Count は正の数か 'all' でなければなりません。",
+    "count_invalid": "無効な Count。数値か 'all' を使用してください。",
+    "unknown_command": "不明なコマンド '{cmd}'。'draw', 'move <source> <destination> [count]', または 'forfeit' を使用してください。",
+    "wrapped": "アクション {n}: {msg}"
+  },
+  "action_result": {
+    "success": "アクション {n}: {msg}",
+    "before_failure": "失敗前に {n} 個のアクションを実行しました。",
+    "failed": "アクション {n} に失敗しました: {msg}"
+  },
+  "move_result": {
+    "drew": "ストックから廃棄ピラミッドにカードを引きました。",
+    "cannot_draw": "引くことができません。ストックと廃棄ピラミッドの両方が空です。",
+    "invalid_pile": "無効なピラミッド名。W, F1-F4, または T1-T7 を使用してください。",
+    "foundation_one_card": "ファンデーションには1枚のカードのみを移動できます。",
+    "waste_to_foundation_ok": "廃棄ピラミッドからファンデーション F{dst} にカードを移動しました。",
+    "waste_to_foundation_bad": "そのファンデーションピラミッドに廃棄ピラミッドのカードを移動できません。",
+    "tableau_to_foundation_ok": "テーブルピラミッド T{src} からファンデーション F{dst} にカードを移動しました。",
+    "tableau_to_foundation_bad": "そのファンデーションピラミッドにテーブルピラミッドのカードを移動できません。",
+    "foundation_to_foundation": "ファンデーションからファンデーションへの移動はできません。",
+    "waste_to_tableau_one_card": "廃棄ピラミッドからテーブルピラミッドに1枚のカードのみを移動できます。",
+    "waste_to_tableau_ok": "廃棄ピラミッドからテーブルピラミッド T{dst} にカードを移動しました。",
+    "waste_to_tableau_bad": "そのテーブルピラミッドに廃棄ピラミッドのカードを置くことはできません。",
+    "no_face_up": "表向きのカードがありません。",
+    "tableau_to_tableau_ok": "テーブルピラミッド T{src} から T{dst} に {count} 枚のカードを移動しました。",
+    "tableau_to_tableau_bad": "T{src} から T{dst} に {count} 枚のカードを移動できません。",
+    "foundation_to_tableau_one_card": "ファンデーションからテーブルピラミッドに1枚のカードのみを移動できます。",
+    "foundation_empty": "ファンデーション F{src} は空です。",
+    "foundation_to_tableau_ok": "ファンデーション F{src} からテーブルピラミッド T{dst} にカードを移動しました。",
+    "foundation_to_tableau_bad": "テーブルピラミッド T{dst} にファンデーションのカードを置くことはできません。",
+    "to_waste_or_stock": "廃棄ピラミッドやストックへの移動はできません。"
+  },
+  "outcome": {
+    "forfeit": "ゲームを投了しました。最終スコア: ファンデーションに {score} 枚のカード。",
+    "won": "おめでとうございます！Klondike Solitaire に勝ちました！",
+    "turn_limit": "ゲームオーバー！最大ターン数 {max_turns} ターンに達しました。スコア: ファンデーションに {score} 枚のカード。"
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "ターン: {turn}/{max_turns}",
+    "stock": "ストック: {stock} 枚のカード",
+    "waste": "廃棄ピラミッド (W): {waste}",
+    "foundations_header": "ファンデーション:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "テーブルピラミッド:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

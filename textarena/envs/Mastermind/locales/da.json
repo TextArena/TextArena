@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Du spiller Mastermind.\nDu skal finde koden, som er {code_length} cifre lang, hver ciffer fra 1 til {num_numbers}, {repeats}.\nI din svar kan du indsende din gætning i følgende format: '[2 1 4 5]'.\nEfter hver gætning vil du modtage feedback i form af sorte og hvide knopper.\nEn sort knop indikerer et korrekt ciffer i korrekt position, mens en hvid knop indikerer et korrekt ciffer i forkert position.\nDu har {max_turns} ture til at gætte koden.\n",
+    "with_repeats": "med mulige gentagelser",
+    "no_duplicates": "uden gentagelser"
+  },
+  "invalid_move": {
+    "wrong_format": "Du har ikke svaret med en liste af tal adskilt af mellemrum og omgivet af firkantede parenteser.",
+    "not_integers": "Alle indgange skal være gyldige heltal.",
+    "wrong_length": "Gætningen skal indeholde nøjagtigt {code_length} tal.",
+    "out_of_range": "Alle tal skal være mellem 1 og {num_numbers}.",
+    "duplicates_not_allowed": "Gentagne tal er ikke tilladt.",
+    "repeated_guess": "Du har allerede gættet {guess}. Prøv en anden gætning."
+  },
+  "game_action": {
+    "feedback": "Indsendt [{guess}]. Feedback: {black_pegs} sorte knop(pe), {white_pegs} hvide knop(pe)."
+  },
+  "outcome": {
+    "win": "Du har knækket koden og løst {black_pegs} ud af {code_length} knopper korrekt",
+    "turn_limit": "Tidsgrænsen er nået. Du gættede {percent} procent af tallene korrekt."
+  }
+}

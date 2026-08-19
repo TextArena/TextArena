@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-کھلاڑی سراؤنڈ {width}x{height} گرڈ پہ.\nتوہ کھلاڑی {player_id} ہوہ. وازہ حرکتاں: '[up]' '[down]' '[left]' '[right]' یا w/s/a/d.\nمقصد: باقی سب کھلاڑیاں نالوہ بچنہ. پگڈنڈیاں جانگہ ختم کرنہ; دیواراں نال ٹکراں مارنہ; آمنے سامنے ٹکراں دونوں کھلاڑیاں ختم کرنہ."
+  },
+  "board": {
+    "current": "موجودہ بورڈ:\n{board}",
+    "after_moves": "بیک وقت چالوں دے بعد بورڈ:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "کھلاڑی {player_id} غیر قانونی حرکت کی وجہ سے مر گیا."
+  },
+  "outcome": {
+    "survived_win": "کھلاڑی {player_id} بچ گیا; باقی سب کھلاڑیاں ٹکراں مارنہ.",
+    "all_crashed": "سارے کھلاڑی اکو ویلے ہی ڈھے گئے۔",
+    "outlived": "کھلاڑی نے باقی سارے کھلاڑیوں نوں پیچھے چھڈ دتا۔",
+    "all_dead": "سارے کھلاڑی مر گئے ہن۔",
+    "turn_limit": "چالوں دی حد پہنچ گئی ہے - سب توں زیادہ بچن والا جتدا ہے۔",
+    "ranking": "{reason} آخری درجہ بندی گروپ (بہترین→بدترین): {groups}"
+  }
+}

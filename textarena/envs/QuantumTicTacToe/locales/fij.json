@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "O iko o Player {player_id} ena Quantum Tic Tac Toe.\nNa nomu symbol e '{symbol}', kei na nomu move numbers e sa {parity} (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- Ena nomu turn, tara na spooky mark ena dua na empty squares using na format '[a,b]'.\n- Na marks oqo e entangled, kei labeled me 'X1 / X1' or 'O4 / O4'.\n- O na tara spooky marks ena square e sa collapse oqo (solidified).\n\nCollapse Rule:\n- Ya nomu move e create a cycle ena entanglement graph, e collapse automatically.\n- Na spooky mark ena cycle e turn into a classical mark ena dua na positions.\n- Na dependent spooky marks e collapse talega.\n\nVictory:\n- Na game e muri ena nomu player e tara three classical marks ena row.\n- Ya both players get a line ena same collapse, na player e sa tara na lower max move number e win.\n\nExample move: '[0,4]' e tara na spooky mark ena cells 0 kei 4."
+  },
+  "board": {
+    "current_board": "Bilo Quantum Tic Tac Toe:\n\n{board}\n\nCuru mai na nomu move me '[a,b]' ka me tara na quantum mark ena dua na vanua."
+  },
+  "invalid_move": {
+    "wrong_format": "Na kena ibulibuli e sega ni dodonu. Vakayagataka na \"[a,b]\".",
+    "invalid_cells": "Na idusidusi ni sela e sega ni dodonu se tautauvata.",
+    "already_solidified": "Dua na sela e sa kaukaua tu."
+  },
+  "game_action": {
+    "placed": "Player {player_id} e tara na symbol ena superposition ena kelekele ni cells {pos_a} kei {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Dependent superposition resolved. Cell ({r}, {c}) e sa tara kina oqo {symbol}.",
+    "last_cell_resolved": "Superposition ni last cell resolved. Cell ({r}, {c}) e sa tara kina oqo {symbol}.",
+    "superposition_resolved": "Superposition resolved. Cell ({r}, {c}) e sa tara kina oqo {symbol}."
+  },
+  "outcome": {
+    "win": "Na dauqito {player_id} ena qaqa ni sa dei na nona maka!",
+    "draw": "E tautauvata na qito!"
+  }
+}

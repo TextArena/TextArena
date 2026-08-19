@@ -1,0 +1,32 @@
+{
+  "_comment": "ÜçOyunçuTicTacToe yerli faylı. Açarları (sol tərəf) tərcümə etməyin. Yalnız dəyərləri (sağ tərəf) tərcümə edin.",
+  "_slots": {
+    "{player_id}": "Oyunçunun nömrəsi, məsələn 0, 1 və ya 2",
+    "{symbol}": "Oyunçunun işarəsi, A, B və ya C",
+    "{cell}": "Taxta hücrəsinin nömrəsi",
+    "{max_cell}": "Ən yüksək etibarlı hücrə nömrəsi (taxta ölçüsü^2 - 1)",
+    "{row}": "Taxtada yerləşdirilmiş işarənin sətir indeksi",
+    "{col}": "Taxtada yerləşdirilmiş işarənin sütun indeksi",
+    "{board}": "Render edilmiş ASCII taxtası (tərcümə etməyin)",
+    "{moves}": "Mövcud hərəkət tokenlərinin vergül ilə ayrılmış siyahısı, məsələn '[4]' (tərcümə etməyin)"
+  },
+  "player_prompt": {
+    "intro": "Siz Üç-Oyunçu Tic Tac Toe-da Oyunçu {player_id}-siniz.\nSizin işarəniz '{symbol}'-dir.\nSiz 5x5 ölçülü taxtada növbə ilə işarənizi qoyaraq dördü bir sırada əmələ gətirməyə çalışırsınız.\nSətirlər üfüqi, şaquli və ya diaqonal ola bilər.\nHərəkətinizi '[4]' formatında göndərin ki, 4 nömrəli hücrəni işarələyəsiniz."
+  },
+  "board": {
+    "current_board": "Cari Taxta:\n\n{board}\n\nMövcud Hərəkətlər: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Yanlış hərəkət formatı. '[hücrə]' formatını istifadə edin, burada hücrə 0-{max_cell} arasında olmalıdır.",
+    "out_of_range": "Etibarsız hücrə nömrəsi: {cell}. 0 və {max_cell} arasında olmalıdır.",
+    "already_occupied": "{cell} hücrəsi artıq tutulub.",
+    "made_invalid": "Oyunçu {player_id} etibarsız hərəkət etdi"
+  },
+  "game_action": {
+    "placed": "Oyunçu {player_id} simvolunu ({symbol}) sahədə ({row}, {col}) yerləşdirdi."
+  },
+  "outcome": {
+    "win": "Oyunçu {player_id} ({symbol}) qazandı!",
+    "draw": "Oyun heç-heçədir!"
+  }
+}

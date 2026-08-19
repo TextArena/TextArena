@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "आप 3-खिलाड़ी पुनरावृत्ति कैदी की दुविधा में खिलाड़ी {player_id} हैं। मैच {num_rounds} राउंड तक चलता है।\nराउंड संरचना:\n• {conv_rounds} नि:शुल्क चैट टर्न\n• 1 निर्णय टर्न - प्रति प्रतिद्वंद्वी एक टोकन जमा करें: '[<opp-id> cooperate]' या '[<opp-id> defect]' (उदाहरण के लिए '[1 defect] [2 cooperate]'; डिफ़ॉल्ट 'सहयोग' है)। \nजोड़ी-वार भुगतान मैट्रिक्स (प्रत्येक अनियंत्रित जोड़ी पर लागू होता है):\n  - दोनों सहयोग ->  {reward}\n  - दोनों दोष     ->  {punishment}\n  - आप दोष, वे सहयोग -> {temptation}\n  - आप सहयोग, वे दोष -> {sucker}\nसभी राउंड के अंत में उच्चतम स्कोर वाले खिलाड़ी जीतते हैं।"
+  },
+  "round": {
+    "start": "─── राउंड {round} शुरू हो रहा है ───\tआप अगले {conv_rounds} राउंड के लिए स्वतंत्र रूप से बातचीत कर सकते हैं।",
+    "chat_finished": "राउंड {round} के लिए चैट समाप्त हो गई है। अपने निर्णय जमा करें, प्रति प्रतिद्वंद्वी एक टोकन: `[pid cooperate]` या `[pid defect]`।"
+  },
+  "results": {
+    "header": "### राउंड {round} - परिणाम:",
+    "pair_line": "{observation}\n\t खिलाड़ी {i} बनाम खिलाड़ी {j} ने क्रमशः {choice_i} और {choice_j} चुना (खिलाड़ी {i} ने {gain_i} प्राप्त किया, खिलाड़ी {j} ने {gain_j} प्राप्त किया)",
+    "scores_open": "{observation}\n-> वर्तमान स्कोर: ",
+    "score_first": "{observation}खिलाड़ी {player_id} ({score})",
+    "score_next": "{observation}; खिलाड़ी {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "अंतिम स्कोर: {scores}।  रैंकिंग समूह (सबसे खराब → सबसे अच्छा): {groups}"
+  }
+}

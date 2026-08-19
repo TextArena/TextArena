@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame keelefail. ÄRGE tõlgige võtmeid (vasak pool). Tõlgige ainult väärtused (parem pool). Jätke iga {placeholder} täpselt samaks; ärge tõlgige tegevuste žetoone [Offer: $X] / [Accept] / [Reject]. Jätke '$' valuuta sümbol ja kõik numbrid samaks.",
+  "_slots": {
+    "{player_id}": "Mängija number, 0 või 1",
+    "{other_id}": "Teise mängija number, 1 või 0",
+    "{num_rounds}": "Ringide koguarv",
+    "{pool}": "Iga ringi saadaval olev raha (number)",
+    "{round_number}": "Praegune ringi number",
+    "{proposer_id}": "Pakkujamängija number, 0 või 1",
+    "{responder_id}": "Vastajamängija number, 0 või 1",
+    "{offer}": "Pakutav summa (number)",
+    "{keep}": "Pakkujale jääv summa (number)",
+    "{proposer_gain}": "Raha, mille pakkujamängija selle ringi võitis (number)",
+    "{responder_gain}": "Raha, mille vastajamängija selle ringi võitis (number)",
+    "{total_0}": "Mängija 0 kogutud summa (number)",
+    "{total_1}": "Mängija 1 kogutud summa (number)",
+    "{winner}": "Võitja mängija number",
+    "{loser}": "Kaotaja mängija number",
+    "{winner_total}": "Võitja koguraha (number)",
+    "{loser_total}": "Kaotaja koguraha (number)",
+    "{total}": "Iga mängija viigist lõppsumma (number)"
+  },
+  "player_prompt": {
+    "intro": "Oled mängija {player_id}, kes mängib {num_rounds} ringi Iterated Ultimatum Game'i.\nSul on ${pool} jagada selle ringi jooksul enda ja mängija {other_id} vahel.\n\nPakkujana:\n  - Tee pakkumine: [Offer: $X] (0 <= X <= pool)\n  - Kui vastatakse → Saad $(pool - X), teine mängija saab $X\n  - Kui lükatakse tagasi → Mõlemad saavad $0\n  - Näide: [Offer: $3]  või  'Arvan, et see on õiglane. [Offer: $5]'\n\nVastajana:\n  - Otsusta pakkumise üle kas [Accept] või [Reject]\n  - Näide: 'See tundub mõistlik. [Accept]'\n            'Liiga ebaõiglane. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Ring {round_number} algab! ---\nMängija {proposer_id} on pakkujana, mängija {responder_id} on vastajana.",
+    "offer": "Ring {round_number}: Mängija {proposer_id} pakub ${offer} mängijale {responder_id} (jättes ${keep}).",
+    "accepted": "Mängija {responder_id} nõustus! Ring {round_number} võidud: Mängija {proposer_id} +${proposer_gain}, mängija {responder_id} +${responder_gain}. Uued summad: Mängija 0: ${total_0}, mängija 1: ${total_1}.",
+    "rejected": "Mängija {responder_id} lükkas pakkumise tagasi! Ring {round_number} võidud: Mõlemad mängijad +$0. Summad jäävad samaks: Mängija 0: ${total_0}, mängija 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Pakkujana peab pakkumise tegema vormingus [Offer: $X].",
+    "bad_integer": "Pakkumise summa peab olema kehtiv täisarv.",
+    "out_of_range": "Pakkumine peab olema vahemikus $0 kuni ${pool}.",
+    "no_current_offer": "Praegu pole pakkumist, millele vastata.",
+    "accept_or_reject": "Vastajana peab kas [Accept] või [Reject] pakkumisele."
+  },
+  "outcome": {
+    "win": "Mängija {winner} võitis ${winner_total} kogusumma vs mängija {loser} ${loser_total} kogusumma.",
+    "draw": "Viik! Mõlemad mängijad lõpetasid ${total} kogusummaga."
+  }
+}

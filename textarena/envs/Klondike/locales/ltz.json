@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Dir spillt Klondike Solitaire. Äert Zil ass et, all Kaarte op d'Grondlagspäiler ze plazen.\n\nSpillreegelen:\n- Grondlagspäiler (F1-F4): Opbau vun Ass bis Kinnek an der selwechter Faarf\n- Tableaupäiler (T1-T7): Ofbau a wiesselnde Faarwen (rout op schwaarz, schwaarz op rout)\n- Stock: Zeechnen vu Kaarten op den Ofallpäil\n- Ofall (W): Déi iewescht Kaart steet fir d'Spill zur Verfügung\n\nKommanden:\n- 'draw' - Zeechnen vu Kaarten vum Stock op den Ofall\n- 'move <source> <destination> [count]' - Plazen vu Kaarten tëscht de Päiler\n  Beispiller: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count kann och 'all' sinn, wat probéiert, all Kaarten ze plazen, déi opgedeckt sinn.\n- 'forfeit' - D'Spill direkt beenden an Äeren aktuelle Score festhalen\n- Päilnimm: W (Ofall), F1-F4 (Grondlagspäiler), T1-T7 (Tableaupäiler)\n\nDir kënnt méi Aktiounen an engem Zuch ausféieren, andeems Dir se mat Kommaen trennt:\n  Beispill: 'draw, move W T1, move T2 F1'\n\nNëmmen Kinneken kënnen op eide Tableaupäiler gesat ginn.\nAktiounen gi an der Reihefolleg ausgeféiert - wann eng feilt, ginn déi iwwereg Aktiounen iwwergangen.\nBenotzt 'forfeit', wann Dir mengt, d'Spill ass onméiglech ze gewannen."
+  },
+  "format_error": {
+    "no_brackets": "Ongëlteg Aktioun Format. Action soll an Klammern sinn.",
+    "no_closing_bracket": "Ongülteg Aktioun Format. Verléiert Schléissung Klammer ']'",
+    "empty_command": "Eidel Kommando. Typ \"draw\" oder \"move <source> <destination> [count]\".",
+    "empty_action": "Leer Handlung",
+    "move_needs_args": "Beweeg Kommando erfuerdert Quell an Destinatioun. Benotzung: 'move <source> <destination> [count]'",
+    "count_positive": "D'Zuel muss positiv sinn oder \"all\"",
+    "count_invalid": "Ongëlteg Zählung. Benotzt eng Zuel oder \"all\"",
+    "unknown_command": "Onbekannte Kommando '{cmd}'. Benotzt 'draw', 'move <source> <destination> [count]', oder 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Ausgefouert {n} Aktioun (((s) virum Versagen.",
+    "failed": "Aktioun {n} fehlgeschlag: {msg}"
+  },
+  "move_result": {
+    "drew": "D'Karte vun der Stock- an de Rescht vum Lager goufen zeréckgezunn.",
+    "cannot_draw": "Kann net ausbezuelen. Souwuel de Stock wéi och d'Ausrüstung sinn eidel.",
+    "invalid_pile": "Ongëlteg Pile Numm. Benotzt W, F1-F4, oder T1-T7",
+    "foundation_one_card": "Kann nëmmen 1 Kaart op d'Basis bewegen.",
+    "waste_to_foundation_ok": "Verréckelt Kaart vu Offall op Fondatioun F{dst}",
+    "waste_to_foundation_bad": "Kann net verschwonnen Kaart op déi Fondatiounstapel bewegen",
+    "tableau_to_foundation_ok": "Kaart vu Tableau T{src} op Fondatioun F{dst} gezunn",
+    "tableau_to_foundation_bad": "Kann Tableau Kaart net op déi Fondatiounstapel bewegen",
+    "foundation_to_foundation": "Kann net vun engem Fondatiounsstapel op en aneren Fondatiounsstapel plënneren.",
+    "waste_to_tableau_one_card": "Kann nëmmen 1 Kaart aus de Rescht an d'Tabell bewegen.",
+    "waste_to_tableau_ok": "Verréckelt Kaart vun Offall op Tableau T{dst}",
+    "waste_to_tableau_bad": "Kann net d'Ausrutschkarte op deen Tableau-Pile setzen.",
+    "no_face_up": "Keng opgedeckt Kaarten fir ze bewegen.",
+    "tableau_to_tableau_ok": "{count} Kaarte vu Tableau T{src} op T{dst} gezunn",
+    "tableau_to_tableau_bad": "Kann {count} Kaarten net vu T{src} op T{dst} zéien",
+    "foundation_to_tableau_one_card": "Kann nëmmen 1 Kaart vun der Fondatioun op Tableau bewegen.",
+    "foundation_empty": "D'Fondatioun F{src} ass eidel.",
+    "foundation_to_tableau_ok": "Kaart vu Fondatioun F{src} op Tableau T{dst} gezunn",
+    "foundation_to_tableau_bad": "Kann net Fondatiounskarte op Tableau T{dst} setzen.",
+    "to_waste_or_stock": "Kann net op Offall oder Lager bewegt ginn."
+  },
+  "outcome": {
+    "forfeit": "D'Spill ass verluer. Finale Punkt: {score} Kaarten an de Fondatiounen.",
+    "won": "Gratulatioun, Dir hutt de Klondike Solitaire gewonnen!",
+    "turn_limit": "Spill eriwwer! Dir hu déi maximal {max_turns} Ronnene erreecht. Punktezuel: {score} Kaarten a Fondatiounen."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Ronnumm: {turn}/{max_turns}",
+    "stock": "Stock: {stock} Kaarten",
+    "waste": "Offall (W): {waste}",
+    "foundations_header": "Fondatiounen:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

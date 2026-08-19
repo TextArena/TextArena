@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Ètz Jogador {player_id} dins lo Jòc de Negociacion.\nAvètz de ressorsas e vòstra tòca es de far de comèrcis per que la valor totala de las vòstras ressorsas aumente.\nLas ressorsas e las valors associadas que possedètz actualament son:\n\t+ {resource_value_list}\nA cada torn, podètz parlar amb vòstre adversari e far una ofèrta de comèrci.\nUtilizatz los segents tokens especials per las accions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': Per acceptar una ofèrta dintranta.\n  - '[Deny]': Per refusar una ofèrta dintranta (per defaut).\nLo jòc dura {max_turns} torns au total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Lo jogaire ensagèt d'acceptar un cambi sens aver las ressorsas necessàrias.",
+    "out_of_range": "Jogador {player_id}, Accion invalida. La colomna {col} es fòra dels limits.",
+    "already_full": "Jogador {player_id}, Accion invalida. La colomna {col} es plena.",
+    "proposing_with_no_resource": "Lo jogaire {player_id} ensagèt de far una ofèrta comerciala sens aver las ressorsas necessàrias.",
+    "incorrect_offer_format": "Lo jogaire {player_id} faguèt una ofèrta de cambi dins un format incorrècte.",
+    "no_new_offer": "Lo jogaire {player_id} faguèt pas cap d'ofèrta novèla."
+  },
+  "offers": {
+    "reject": "Lo jogaire {player_id} refusèt l'ofèrta de cambi.",
+    "accept": "Lo jogaire {acceptor_id} a acceptat l'ofèrta de cambi del jogaire {proposer_id}.",
+    "proposal": "Jogador {player_id} a fach l'ofèrta seguenta a Jogador {opponent_id}: Articles ofèrts: {offered} -> Articles demandats: {requested}"
+  },
+  "outcome": {
+    "win": "Lo jogaire {winner_id} ganhèt en avent un grand gain de valor d'inventari.",
+    "draw": "Tanben cambiament de valor d'inventari per totes los jogaires."
+  }
+}

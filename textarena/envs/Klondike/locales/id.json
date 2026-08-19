@@ -1,0 +1,74 @@
+{
+  "_comment": "Berkas lokal Klondike Solitaire. JANGAN menerjemahkan kunci (sisi kiri). Hanya terjemahkan nilai (sisi kanan). Simpan setiap {placeholder} persis seperti yang ada. JANGAN menerjemahkan label kartu/suit (misalnya A, 10, K, ♣️, ♦️, ♥️, ♠️), token tumpukan W, F1-F4, T1-T7, papan ASCII di {board}, atau perintah 'draw', 'move', 'forfeit', 'all'. Sintaks tanda kurung seperti 'move W T1' harus tetap dalam bahasa Latin seperti yang ada.",
+  "_slots": {
+    "{n}": "Indeks aksi dalam perintah yang dipisahkan koma, berbasis 1",
+    "{msg}": "Pesan hasil per aksi (sudah diterjemahkan)",
+    "{count}": "Jumlah kartu terbuka yang dipindahkan",
+    "{src}": "Nomor tumpukan tableau sumber, berbasis 1",
+    "{dst}": "Nomor tumpukan tujuan, berbasis 1",
+    "{cmd}": "Perintah yang tidak dikenal yang diketik pemain (tidak diterjemahkan)",
+    "{max_turns}": "Jumlah maksimum giliran sebelum permainan berakhir",
+    "{score}": "Jumlah kartu yang saat ini berada di tumpukan fondasi",
+    "{board}": "Papan ASCII yang dirender (tidak diterjemahkan)",
+    "{turn}": "Nomor giliran saat ini",
+    "{stock}": "Jumlah kartu yang tersisa di stok",
+    "{waste}": "Label kartu teratas di tumpukan sisa, atau '--' jika kosong (tidak diterjemahkan)",
+    "{cards}": "Kartu di tumpukan sebagai label netral, atau '--' jika kosong (tidak diterjemahkan)"
+  },
+  "player_prompt": {
+    "intro": "Anda sedang bermain Klondike Solitaire. Tujuan Anda adalah memindahkan semua kartu ke tumpukan fondasi.\n\nAturan Permainan:\n- Tumpukan fondasi (F1-F4): Bangun dari As ke Raja sesuai suit\n- Tumpukan tableau (T1-T7): Bangun turun bergantian warna (merah di atas hitam, hitam di atas merah)\n- Stok: Ambil kartu ke tumpukan sisa\n- Sisa (W): Kartu teratas yang tersedia untuk dimainkan\n\nPerintah:\n- 'draw' - Ambil kartu dari stok ke sisa\n- 'move <sumber> <tujuan> [jumlah]' - Pindahkan kartu antar tumpukan\n  Contoh: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Jumlah juga bisa 'all', yang akan mencoba memindahkan semua kartu terbuka.\n- 'forfeit' - Akhiri permainan segera dan kunci skor Anda saat ini\n- Nama tumpukan: W (sisa), F1-F4 (fondasi), T1-T7 (tableau)\n\nAnda dapat mengeksekusi beberapa aksi dalam satu giliran dengan memisahkannya dengan koma:\n  Contoh: 'draw, move W T1, move T2 F1'\n\nHanya Raja yang dapat ditempatkan di tumpukan tableau kosong.\nAksi dieksekusi secara berurutan - jika satu gagal, aksi sisa diabaikan.\nGunakan 'forfeit' jika Anda percaya permainan tidak mungkin dimenangkan."
+  },
+  "format_error": {
+    "no_brackets": "Format aksi tidak valid. Aksi harus dalam tanda kurung.",
+    "no_closing_bracket": "Format aksi tidak valid. Kurang tanda kurung penutup ']'.",
+    "empty_command": "Perintah kosong. Ketik 'draw' atau 'move <sumber> <tujuan> [jumlah]'",
+    "empty_action": "Aksi kosong",
+    "move_needs_args": "Perintah move memerlukan sumber dan tujuan. Penggunaan: 'move <sumber> <tujuan> [jumlah]'",
+    "count_positive": "Jumlah harus positif atau 'all'",
+    "count_invalid": "Jumlah tidak valid. Gunakan angka atau 'all'",
+    "unknown_command": "Perintah '{cmd}' tidak dikenal. Gunakan 'draw', 'move <sumber> <tujuan> [jumlah]', atau 'forfeit'",
+    "wrapped": "Aksi {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Aksi {n}: {msg}",
+    "before_failure": "Menjalankan {n} aksi sebelum gagal.",
+    "failed": "Aksi {n} gagal: {msg}"
+  },
+  "move_result": {
+    "drew": "Mengambil kartu dari stok ke sisa.",
+    "cannot_draw": "Tidak dapat mengambil. Stok dan sisa keduanya kosong.",
+    "invalid_pile": "Nama tumpukan tidak valid. Gunakan W, F1-F4, atau T1-T7",
+    "foundation_one_card": "Hanya dapat memindahkan 1 kartu ke fondasi",
+    "waste_to_foundation_ok": "Memindahkan kartu dari sisa ke fondasi F{dst}",
+    "waste_to_foundation_bad": "Tidak dapat memindahkan kartu sisa ke tumpukan fondasi tersebut",
+    "tableau_to_foundation_ok": "Memindahkan kartu dari tableau T{src} ke fondasi F{dst}",
+    "tableau_to_foundation_bad": "Tidak dapat memindahkan kartu tableau ke tumpukan fondasi tersebut",
+    "foundation_to_foundation": "Tidak dapat memindahkan dari fondasi ke fondasi",
+    "waste_to_tableau_one_card": "Hanya dapat memindahkan 1 kartu dari sisa ke tableau",
+    "waste_to_tableau_ok": "Memindahkan kartu dari sisa ke tableau T{dst}",
+    "waste_to_tableau_bad": "Tidak dapat menempatkan kartu sisa di tumpukan tableau tersebut",
+    "no_face_up": "Tidak ada kartu terbuka untuk dipindahkan",
+    "tableau_to_tableau_ok": "Memindahkan {count} kartu dari tableau T{src} ke T{dst}",
+    "tableau_to_tableau_bad": "Tidak dapat memindahkan {count} kartu dari T{src} ke T{dst}",
+    "foundation_to_tableau_one_card": "Hanya dapat memindahkan 1 kartu dari fondasi ke tableau",
+    "foundation_empty": "Fondasi F{src} kosong",
+    "foundation_to_tableau_ok": "Memindahkan kartu dari fondasi F{src} ke tableau T{dst}",
+    "foundation_to_tableau_bad": "Tidak dapat menempatkan kartu fondasi di tableau T{dst}",
+    "to_waste_or_stock": "Tidak dapat memindahkan ke sisa atau stok"
+  },
+  "outcome": {
+    "forfeit": "Permainan ditarik. Skor akhir: {score} kartu di fondasi.",
+    "won": "Selamat! Anda telah memenangkan Klondike Solitaire!",
+    "turn_limit": "Permainan berakhir! Anda telah mencapai maksimum {max_turns} giliran. Skor: {score} kartu di fondasi."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Giliran: {turn}/{max_turns}",
+    "stock": "Stok: {stock} kartu",
+    "waste": "Sisa (W): {waste}",
+    "foundations_header": "Fondasi:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame-localebestand. Vertaal GEEN sleutels (linkerkant). Vertaal alleen waarden (rechterkant).",
+  "_slots": {
+    "{player_id}": "Het nummer van de speler, 0 of 1",
+    "{other_id}": "Het nummer van de andere speler, 1 of 0",
+    "{num_rounds}": "Totaal aantal rondes",
+    "{pool}": "Het bedrag dat elke ronde beschikbaar is (een getal)",
+    "{round_number}": "Het huidige rondenummer",
+    "{proposer_id}": "Het nummer van de speler die het voorstel doet, 0 of 1",
+    "{responder_id}": "Het nummer van de speler die reageert, 0 of 1",
+    "{offer}": "Het geboden bedrag (een getal)",
+    "{keep}": "Het bedrag dat de speler die het voorstel doet, behoudt (een getal)",
+    "{proposer_gain}": "Het geld dat de speler die het voorstel doet, deze ronde heeft verdiend (een getal)",
+    "{responder_gain}": "Het geld dat de speler die reageert, deze ronde heeft verdiend (een getal)",
+    "{total_0}": "De totale score van speler 0 (een getal)",
+    "{total_1}": "De totale score van speler 1 (een getal)",
+    "{winner}": "Het nummer van de winnende speler",
+    "{loser}": "Het nummer van de verliezende speler",
+    "{winner_total}": "De totale score van de winnende speler (een getal)",
+    "{loser_total}": "De totale score van de verliezende speler (een getal)",
+    "{total}": "De gelijke eindscore van elke speler (een getal)"
+  },
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} en speelt {num_rounds} rondes van het Iterated Ultimatum Game.\nU heeft $ {pool} om deze ronde te verdelen tussen uzelf en Speler {other_id}.\n\nVoorsteller:\n  - Maak een voorstel: [Offer: $X] (0 <= X <= pool)\n  - Als het voorstel wordt geaccepteerd → U krijgt $(pool - X), de andere speler krijgt $X\n  - Als het voorstel wordt afgewezen → Beide spelers krijgen $0\n  - Voorbeeld: [Offer: $3]  of  'Ik denk dat dit eerlijk is. [Offer: $5]'\n\nReagerende speler:\n  - Beslis over het voorstel met [Accept] of [Reject]\n  - Voorbeeld: 'Dat lijkt redelijk. [Accept]'\n            'Te oneerlijk. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Ronde {round_number} begint! ---\nSpeler {proposer_id} is de voorsteller, Speler {responder_id} is de reagerende speler.",
+    "offer": "Ronde {round_number}: Speler {proposer_id} biedt $ {offer} aan Speler {responder_id} (en houdt $ {keep}).",
+    "accepted": "Speler {responder_id} heeft het voorstel geaccepteerd! Ronde {round_number} opbrengst: Speler {proposer_id} +$ {proposer_gain}, Speler {responder_id} +$ {responder_gain}. Nieuwe totals: Speler 0: $ {total_0}, Speler 1: $ {total_1}.",
+    "rejected": "Speler {responder_id} heeft het voorstel afgewezen! Ronde {round_number} opbrengst: Beide spelers +$0. Totals blijven: Speler 0: $ {total_0}, Speler 1: $ {total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "De voorsteller moet een voorstel doen met het formaat [Offer: $X].",
+    "bad_integer": "Het geboden bedrag moet een geldig getal zijn.",
+    "out_of_range": "Het voorstel moet tussen $0 en $ {pool} liggen.",
+    "no_current_offer": "Er is geen huidig voorstel om op te reageren.",
+    "accept_or_reject": "De reagerende speler moet het voorstel [Accept]eren of [Reject]eren."
+  },
+  "outcome": {
+    "win": "Speler {winner} heeft gewonnen met een totaal van $ {winner_total} tegen $ {loser_total} van Speler {loser}.",
+    "draw": "Gelijkspel! Beide spelers zijn geëindigd met een totaal van $ {total}."
+  }
+}

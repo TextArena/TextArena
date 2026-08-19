@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Xugador Surround nun tableru de {width}x{height}.\nTu yes el xugador {player_id}. Movimientos válidos: '[up]' '[down]' '[left]' '[right]' o w/s/a/d.\nOxetivu: sobrevivir a tolos demás. Los rastru son mortales; los golpes na paré maten; los choques frontales maten a dambos."
+  },
+  "board": {
+    "current": "El Conseyu actual: {board}",
+    "after_moves": "El tableru dempués de movimientos simultáneos: {board}"
+  },
+  "game_action": {
+    "invalid_death": "El xugador {player_id} morrió por un movimientu inválidu."
+  },
+  "outcome": {
+    "survived_win": "El xugador {player_id} sobrevivió; tolos demás estrelláronse.",
+    "all_crashed": "Tolos xugadores estrelláronse simultáneamente.",
+    "outlived": "El xugador sobrevivió a los demás.",
+    "all_dead": "Tolos xugadores muertos.",
+    "turn_limit": "El límite de vuelta algamáu - el superviviente más llargu gana.",
+    "ranking": "{reason} Clasificación final de grupos (meyor→peor): {groups}"
+  }
+}

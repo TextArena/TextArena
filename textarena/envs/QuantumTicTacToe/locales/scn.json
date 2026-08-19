@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Siti lu Jucaturi {player_id} 'n Tic Tac Toe Quànticu.\nLu vostro sìmmulu è '{symbol}', e li nummari dê vostri mossi sunu sempri {parity} (p'asempiu, X1, X3 o O2, O4).\n\nUbbiettivu: Vinci furmannu na linia di tri marchi clàssici (solidificati dê superposizioni).\n\nComu Jucari:\n- 'N ogni turnu, piazzati nu marchiu spavintosu 'n dui diversi quadrati vacanti usannu lu formatu '[a,b]'.\n- Sti marchi sunu ntirvinuti, e etichettati comu 'X1 / X1' o 'O4 / O4'.\n- Nun putiti piazzari marchi spavintosi 'n nu quadratu ca s'è già cullassatu (solidificatu).\n\nRegula di Cullassu:\n- Si lu vostro muvimentu crea nu ciclu 'n lu grafu di ntirvinimenti, iddu cullassa automaticamenti.\n- Ogni marchiu spavintosu 'n lu ciclu si trasforma 'n nu marchiu clàssicu 'n una dê dui posizioni.\n- Marchi spavintosi dipendenti cullassanu macari iddi.\n\nVittoria:\n- Lu jocu finisci quannu nu jucaturi havi tri marchi clàssici 'n fila.\n- Si tutti dui jucatura ottèninu na linia duranti lu stissu cullassu, chiddu ca havi lu nummaru di muvimentu màssimu cchiù vasciu vinci.\n\nAsèmpiu di muvimentu: '[0,4]' piazza nu marchiu spavintosu 'n celli 0 e 4."
+  },
+  "board": {
+    "current_board": "Tavuliera Tic Tac Toe Quantu:\n\n{board}\n\nPrisenta la tua mossa comu '[a,b]' pi piaciri na marca quantistica 'n dui lucali."
+  },
+  "invalid_move": {
+    "wrong_format": "Formatu nun validu. Usari \"[a,b]\".",
+    "invalid_cells": "Indici di cellula invalidi o duplicati.",
+    "already_solidified": "Na cellula è già solidificata."
+  },
+  "game_action": {
+    "placed": "Jucaturi {player_id} misi lu sò simbulu 'n superpusizzioni tra li celli {pos_a} e {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superpusizzioni dipinnenti risolta. La cella ({r}, {c}) ora è {symbol}.",
+    "last_cell_resolved": "Superpusizzioni pâ l'ùrtima cella risolta. La cella ({r}, {c}) ora è {symbol}.",
+    "superposition_resolved": "Superpusizzioni risolta. La cella ({r}, {c}) ora è {symbol}."
+  },
+  "outcome": {
+    "win": "Lu jocaturi {player_id} vinci cu li voti solidificati!",
+    "draw": "Lu jocu è pareggiu!"
+  }
+}

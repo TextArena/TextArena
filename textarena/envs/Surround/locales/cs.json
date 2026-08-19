@@ -1,0 +1,30 @@
+{
+  "_comment": "Soubor lokalizace pro Surround. NEpřekládávejte klíče (levá strana). Překládávejte pouze hodnoty (pravá strana).",
+  "_slots": {
+    "{num_players}": "Počet hráčů v zápase",
+    "{width}": "Šířka desky v buňkách",
+    "{height}": "Výška desky v buňkách",
+    "{player_id}": "Číslo hráče (0-založené)",
+    "{board}": "Vykreslená ASCII mřížka; ponechte neutrální, nikdy nepřekládávejte její znaky",
+    "{reason}": "Vykreslená fráze důvodu konce hry",
+    "{groups}": "Neutrální data o pořadí (seznam skupin hráčů podle pořadí, nejlepší→nejhorší); nepřekládávejte"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Hráčský Surround na {width}x{height} mřížce.\nJste hráč {player_id}. Platné tahy: '[up]' '[down]' '[left]' '[right]' nebo w/s/a/d.\nCíl: přežít déle než všichni ostatní. Stopy jsou smrtelné; nárazy do stěny zabíjejí; čelní srážky zabíjejí oba."
+  },
+  "board": {
+    "current": "Aktuální deska:\n{board}",
+    "after_moves": "Deska po současných tazích:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Hráč {player_id} zemřel kvůli neplatnému tahu."
+  },
+  "outcome": {
+    "survived_win": "Hráč {player_id} přežil; všichni ostatní havarovali.",
+    "all_crashed": "Všichni hráči havarovali současně.",
+    "outlived": "Hráč přežil déle než všichni ostatní.",
+    "all_dead": "Všichni hráči jsou mrtví.",
+    "turn_limit": "Byl dosažen limit tahů - nejdelší přeživší vyhrává.",
+    "ranking": "{reason} Konečné pořadí skupin (nejlepší→nejhorší): {groups}"
+  }
+}

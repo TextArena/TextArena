@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Tere tulemast Lights Out mängu! Sul on {size}x{size} suurune tulede võrk.\nSinu eesmärk on kustutada KÕIK tuled (esindatud punktiga '.')\nKui vajutad tulele, see lülitab end ning oma kõrval asuvad naabrid (üles/alla/vasak/parem).\nSisesta [rida veerg] vormingus, et vajutada tulele (0-indekseeritud, seega kehtiv vahemik on 0-{max_index}).\nSul on kuni {max_turns} käiku, et lahendada pusle.\nLegend: 'O' = tuli SEES, '.' = tuli VÄLJAS"
+  },
+  "board": {
+    "current_state": "Praegune võrgu seisund (Käik {moves_made}, {moves_left} käiku jäänud, {completion}% valmis):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Tegevus peab olema [rida veerg] vormingus, kus rida ja veerg on täisarvud 0-st {max_index}-ni.",
+    "out_of_range": "Koordinaadid peavad olema vahemikus 0 kuni {max_index}. Sisestasid [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Õnnitleme! Lahendasid pusle {moves_used} käiguga!",
+    "loss": "Mäng läbi! Kasutasid kõik {max_turns} käigud, ilma et oleksid pusle lahendanud. Lõplik valmimine: {completion}%\nLõplik seisund:\n{grid}"
+  }
+}

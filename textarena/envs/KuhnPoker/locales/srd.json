@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Tu ses Giogadore {player_id} in unu giogu {max_rounds} round de Poker Kuhn.\nRegulas de su Giogu:\n- Su Poker Kuhn impitza un mazzu de 3 cartas cun J, Q, K (J prus bassu, K prus artu)\n- Onni giogadore anteponit {ante} ficha e retzit 1 carta ogna round (notu chi sa cartas sun datadas sin sustitutzione, duncas no podes aber sa matessi carta de su toponente).\n- Su giogu continuat pro {max_rounds} rounds\n- Su giogadore cun prus fichas a pustis de ogna round binchet\nRegulas de Atzione:\n- '[check]': Passa sin betare (solu si no b'at betatzione in sa mesa)\n- '[bet]': Azunta 1 ficha a su potz (solu si no b'at betatzione in sa mesa)\n- '[call]': Cunfronta sa betatzione de su toponente azuntende 1 ficha a su potz\n- '[fold]': Abandonas sa tua manu e lassas bincher su potz a su toponente"
+  },
+  "init_round": {
+    "round_start": "### Initziat round {current_round} de {max_rounds} rounds. Sa tua carta est: '{player_card}'",
+    "available_actions": "Sas atziones a disponimentu tuas sunt: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Atzione debe esser [Check], [Bet], [Call], o [Fold].",
+    "not_legal": "S'atzione depet èssere {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Giogadore {player_id}, at presentadu sa mossa: '[{move}]'.",
+    "valid_actions": "Sas atziones a disponimentu tuas sunt: {legal_actions}.",
+    "round_summary": "{reason} Puntiziones atuales: Giogadore 0: '{player_0_chips}'; Giogadore 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Confrontu: Sa {winner_card} de Giogadore {winner} binchet sa {loser_card} de Giogadore {loser}. Giogadore {winner} binchet su potz de {pot_value} fichas."
+  },
+  "outcome": {
+    "draw": "A sa fine de {max_rounds} giogadas, ambos jugadores teniant su matessi nùmeru de fichas.",
+    "round_win": "Su giogadore {player_id} s'est arressu.",
+    "winner_player0": "Su giogadore 0 at bintu tenende prus tzircùitos a sa fine de totu sos giru {max_rounds}.",
+    "winner_player1": "Su giogadore 1 at bintu tenende prus tzircùitos a sa fine de totu sos giru {max_rounds}."
+  }
+}

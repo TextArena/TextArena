@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ou se Jwè {player_id} nan yon jwèt de moun de Spite and Malice. Objektif ou se pou ou vini premye a vide pil ou. \n\n### Apèsi sou Jwèt la:\n- Objektif la se pou ou retire pil ou lè ou jwe kat nan pil santral yo.\n- Ou ka jwe kat sòti nan twa sous:\n  1. **Men ou** (ou kòmanse chak tou ak jiska 5 kat nan men ou).\n  2. **Kat ki an tèt pil ou**.\n  3. **Kat ki an tèt nenpòt nan pil ou ki retire**.\n\n### Règ Jwèt:\n- Ou ka jwe yon kat nan yon pil santral si li **yon ran superiè** pase kat ki an tèt sou pil la (pil santral yo kòmanse ak As ak monte jiska Rèn; Wa yo se kat lib - yo ka jwe sou nenpòt kat men yo pa chanje sekans ran an. Sa vle di si yon Wa itilize apre 4, lè sa a Wa a ran 5 epi kat ki vini apre a dwe yon 6).\n- Si ou paka jwe ankò kat, ou dwe **retire yon kat** nan youn nan pil ou ki retire pou fini tou ou.\n- Si yon pil santral rive nan Rèn, li pral retire otomatikman.\n- Sekans ran an se: A=1, 2=2, ..., 9=9, J=10, Q=11, K kòm kat lib.\n\n### Aksyon:\n1. **Tire**: Nan koumansman tou ou, tire kat pou ranpli men ou jiska 5 kat. Antre **[draw]** pou kòmanse.\n2. **Jwe yon Kat**: Pou jwe yon kat, espesifye kat la ak pil santral la konsa: **[play A♠ 0]** (kote 'A♠' se kat la ak '0' se endèks pil santral la).\n3. **Retire**: Si ou paka jwe ankò kat, retire yon kat sòti nan men ou nan yon pil ki retire pou fini tou ou. Antre **[discard A♠ 1]** (kote 'A♠' se kat la ak '1' se endèks pil ki retire a). Sonje ke ou pa ka retire nenpòt kat sòti nan pil ou. Ou sèlman ka retire kat sòti nan men ou.\n\n"
+  },
+  "board": {
+    "current_board": "Bwod Aktyèl Aktuel:\n\n{board}\nDeplasman Disponib: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Sant pil yo -- ",
+    "pile": "{observation}Pak {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vue Jwè {player_id} ---\n",
+    "payoff": "{observation}Pak Peyman (Kat Anwo): {top_card}, Longè Pak Peyman: {payoff_length}\n",
+    "hand": "{observation}Men: {hand}\n",
+    "discard": "{observation}Pil ki Jete: {discard}\n",
+    "empty": "Vide"
+  },
+  "game_message": {
+    "no_cards_left": "Pa gen okenn plis kat pou trase soti nan. Sonje ke ou ka jwe kat ki sòti nan sous sa yo: 1. men ** Ou an** 2. la ** tèt kat de pay-off pil ou a ** 3. la ** anwo kat nenpòt nan jete pil ou ** . "
+  },
+  "invalid_move": {
+    "wrong_format": "Format mouvman envalid. Jwè {player_id} pa te reponn ak yon deplase valab nan parantès kare.",
+    "invalid_play": "Jwè {player_id} eseye jwe {card} sou pak sant {index}, men sa a pa valab.",
+    "discard_from_payoff": "Jwè {player_id} te eseye jete yon kat nan pil la peye.",
+    "discard_not_in_hand": "Jwè {player_id} te eseye jete yon kat ki pa nan men.",
+    "wrong_move_type": "Jwè {player_id} pa reponn ak yon kalite mouvman valab."
+  },
+  "game_action": {
+    "you_drew": "Ou te tire kat.",
+    "opponent_drew": "Jwè {player_id} te trase kat.",
+    "you_played": "Ou te jwe {card} sou pil santral la {index}.",
+    "opponent_played": "Jwè {player_id} te jwe {card} sou pil santral la {index}.",
+    "you_discarded": "Ou te deskiye {card} nan pak deskiye {index}, sa vle di ke ou fini tou nan toun ou. Pa gen lòt aksyon ou ki pral konsidere pou toun sa a. Jwè {next_player_id} pral pase apre.",
+    "opponent_discarded": "Jwè {player_id} te deskiye {card} nan pak deskiye {index}, sa vle di ke li fini tou nan toun li. Pa gen lòt aksyon Jwè {player_id} ki pral konsidere pou toun sa a. Jwè {next_player_id}, ou pral pase apre. Tanpri, antre aksyon ou nan fòmat [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Jwè {current_player} fini pak peyman li! Jwè {current_player} genyen!",
+    "deadlock_player_0": "Blokaj rive! Jwè 0 genyen ak {player_0_payoff} kat ki rete kont {player_1_payoff} kat Jwè 1.",
+    "deadlock_player_1": "Blokaj rive! Jwè 1 genyen ak {player_1_payoff} kat ki rete kont {player_0_payoff} kat Jwè 0.",
+    "deadlock_tie": "Blokaj rive ak egalite! De jwè gen {player_0_payoff} kat ki rete. Jwè {current_player} genyen pa defo."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Yes Player {player_id} n'un xuegu de 3 xugadores de Dilema del Prisioneru Iteráu. El partíu dura {num_rounds} rondes.\nEstructura de la ronda:\n• {conv_rounds} vueltes de charra llibre\n• 1 vuelta de decisión - unviar un token per oponente: '[<opp-id> cooperate]' o '[<opp-id> defect]' (por exemplu, '[1 defect] [2 cooperate]'; el predetermináu ye 'cooperar'). \nMatriz de pagu empareyada (aplicada a cada pareya ensin ordenar):\n  - Dambos cooperen  ->  {reward}\n  - Dambos falten     ->  {punishment}\n  - Tu faltes, ellos cooperen -> {temptation}\n  - Tu cooperes, ellos falten -> {sucker}\nEl xugador(s) con la puntuación más alta al final de toles rondes gana."
+  },
+  "round": {
+    "start": "─── Empecipiando Ronda {round} ───\tPuedes conversar llibremente mientres les próximes {conv_rounds} rondes.",
+    "chat_finished": "Chate termináu pa la ronda {round}. Unvia les tos decisiones, un token por oponente: `[pid cooperate]` o `[pid defect]`."
+  },
+  "results": {
+    "header": "### Ronda {round} - Resultáu:",
+    "pair_line": "{observation}\n\t Xugador {i} vs Xugador {j} escoyó a {choice_i} y {choice_j} respeutivamente (Xugador {i} llogró {gain_i}, Xugador {j} llogró {gain_j})",
+    "scores_open": "{observation} -> Resultáu actual: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Puntuaciones finales: {scores}.  Grupos de clasificación (peor→meyor): {groups}"
+  }
+}

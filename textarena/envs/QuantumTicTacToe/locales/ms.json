@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam permainan Tic Tac Toe Kuantum.\nSimbol anda ialah '{symbol}', dan nombor langkah anda sentiasa {parity}, contohnya X1 dan X3 atau O2 dan O4.\n\nMatlamat: Menang dengan membentuk satu garisan yang terdiri daripada tiga tanda klasik yang telah dimuktamadkan daripada superposisi.\n\nCara Bermain:\n- Pada setiap giliran, letakkan satu tanda bayangan pada dua petak kosong yang berbeza menggunakan format '[a,b]'.\n- Tanda-tanda ini terbelit dan dilabel seperti 'X1 / X1' atau 'O4 / O4'.\n- Anda tidak boleh meletakkan tanda bayangan pada petak yang telah runtuh dan dimuktamadkan.\n\nPeraturan Keruntuhan:\n- Jika langkah anda menghasilkan satu kitaran dalam graf keterbelitan, graf tersebut akan runtuh secara automatik.\n- Setiap tanda bayangan dalam kitaran akan menjadi tanda klasik pada salah satu daripada dua kedudukannya.\n- Semua tanda bayangan yang bergantung padanya juga akan runtuh.\n\nKemenangan:\n- Permainan berakhir apabila seorang pemain mempunyai tiga tanda klasik dalam satu garisan.\n- Jika kedua-dua pemain memperoleh satu garisan semasa keruntuhan yang sama, pemain yang mempunyai nombor langkah maksimum yang lebih rendah akan menang.\n\nContoh langkah: '[0,4]' meletakkan satu tanda bayangan pada sel 0 dan 4."
+  },
+
+  "board": {
+    "current_board": "Papan Tic Tac Toe Kuantum:\n\n{board}\n\nHantar langkah anda sebagai '[a,b]' untuk meletakkan satu tanda kuantum pada dua lokasi."
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format tidak sah. Gunakan '[a,b]'.",
+    "invalid_cells": "Indeks sel tidak sah atau berulang.",
+    "already_solidified": "Salah satu sel telah dimuktamadkan."
+  },
+
+  "game_action": {
+    "placed": "Pemain {player_id} meletakkan simbolnya dalam keadaan superposisi antara sel {pos_a} dan {pos_b}."
+  },
+
+  "game_message": {
+    "dependent_resolved": "Superposisi bersandar telah diselesaikan. Sel ({r}, {c}) kini ialah {symbol}.",
+    "last_cell_resolved": "Superposisi bagi sel terakhir telah diselesaikan. Sel ({r}, {c}) kini ialah {symbol}.",
+    "superposition_resolved": "Superposisi telah diselesaikan. Sel ({r}, {c}) kini ialah {symbol}."
+  },
+
+  "outcome": {
+    "win": "Pemain {player_id} menang dengan tanda yang telah dimuktamadkan!",
+    "draw": "Permainan berakhir dengan keputusan seri!"
+  }
+}

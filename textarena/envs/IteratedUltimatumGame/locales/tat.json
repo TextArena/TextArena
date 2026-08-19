@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Сез Уенчы {player_id}, Iterated Ultimatum Gameның {num_rounds} раундын уйныйсыз.\nСез бу раундны үзегез һәм Уенчы {other_id} арасында бүләр өчен ${pool} иясеңез.\n\nТәкъдим итүче:\n  - Тәкъдим итү: [Offer: $X] (0 <= X <= пуль)\n  - Кабул ителгән очракта → Сез $(пул - X) аласыз, икенче уенчы $X аласыз\n  - Кабул ителмәгән очракта → Икесе дә $0 аласыз\n  - Мисал: [Offer: $3]  яки  'Мин бу чакта хаклы дип уйлыйм. [Offer: $5]'\n\nҖавап бирүче:\n  - Тәкъдим белән [Accept] яки [Reject] белән карар кабул итү\n  - Мисал: 'Бу урынлы булып тоела. [Accept]'\n            'Бу бик золым. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Раунд {round_number} башлана! ---\nУенчы {proposer_id} - тәкъдим итүче, Уенчы {responder_id} - җавап бирүче.",
+    "offer": "Раунд {round_number}: Уенчы {proposer_id} Уенчы {responder_id}гә ${offer} тәкъдим итә (саклап ${keep}).",
+    "accepted": "Уенчы {responder_id} кабул итте! Раунд {round_number} кыйлды: Уенчы {proposer_id} +${proposer_gain}, Уенчы {responder_id} +${responder_gain}. Яңа гомуми: Уенчы 0: ${total_0}, Уенчы 1: ${total_1}.",
+    "rejected": "Уенчы {responder_id} тәкъдимне кире кагды! Раунд {round_number} кыйлды: Ике уенчыга да +$0. Гомуми калды: Уенчы 0: ${total_0}, Уенчы 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Тәкъдим итүче [Offer: $X] форматында тәкъдим ясарга тиеш.",
+    "bad_integer": "Суммасы тулы сан булырга тиеш.",
+    "out_of_range": "Тәкъдим $0 һәм ${pool} арасында булырга тиеш.",
+    "no_current_offer": "Хәзерге вакытта җавап бирергә тәкъдим юк.",
+    "accept_or_reject": "Җавап бирүче тәкъдимне [Accept] яки [Reject] белән карар итәргә тиеш."
+  },
+  "outcome": {
+    "win": "Уенчы {winner} ${winner_total} гомуми исәбе белән җиңде, Уенчы {loser} исә ${loser_total} гомуми исәпкә иреште.",
+    "draw": "Ике уенчы да ${total} сумма белән тәмамлады."
+  }
+}

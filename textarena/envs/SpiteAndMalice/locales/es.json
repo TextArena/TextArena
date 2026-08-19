@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Eres el jugador {player_id} en una partida de Spite and Malice para dos jugadores. Tu objetivo es ser el primero en vaciar tu pila objetivo.\n\n### Descripción general del juego:\n- El objetivo es vaciar tu pila objetivo jugando cartas en las pilas centrales.\n- Puedes jugar cartas desde tres lugares:\n  1. Tu **mano** (comienzas cada turno con hasta 5 cartas en la mano).\n  2. La **carta superior de tu pila objetivo**.\n  3. La **carta superior de cualquiera de tus pilas de descarte**.\n\n### Reglas de juego:\n- Puedes jugar una carta en una pila central si tiene **un rango más** que la carta superior de esa pila (las pilas centrales comienzan con un as y ascienden hasta la reina; los reyes son comodines: pueden jugarse sobre cualquier carta, pero no cambian la secuencia de rangos. Esto significa que, si se utiliza un rey después de un 4, ese rey cuenta como 5 y la siguiente carta debe ser un 6).\n- Si no puedes jugar más cartas, debes **descartar una carta** en una de tus pilas de descarte para terminar tu turno.\n- Si una pila central alcanza la reina, se vaciará automáticamente.\n- El orden de los rangos es: A=1, 2=2, ..., 9=9, J=10, Q=11 y K como comodín.\n\n### Acciones:\n1. **Robar**: Al comienzo de tu turno, roba cartas hasta tener 5 cartas en la mano. Introduce **[draw]** para comenzar.\n2. **Jugar una carta**: Para jugar una carta, indica la carta y la pila central de esta forma: **[play A♠ 0]** (donde 'A♠' es la carta y '0' es el índice de la pila central).\n3. **Descartar**: Si no puedes jugar más cartas, descarta una carta de tu mano en una pila de descarte para terminar tu turno. Introduce **[discard A♠ 1]** (donde 'A♠' es la carta y '1' es el índice de la pila de descarte). Ten en cuenta que no puedes descartar ninguna carta de la pila objetivo. Solo puedes descartar cartas de tu mano.\n\n"
+  },
+  "board": {
+    "current_board": "Tablero actual:\n\n{board}\nMovimientos disponibles: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pilas centrales ---\n",
+    "pile": "{observation}Pila {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vista del jugador {player_id} ---\n",
+    "payoff": "{observation}Pila objetivo (carta superior): {top_card}, tamaño de la pila objetivo: {payoff_length}\n",
+    "hand": "{observation}Mano: {hand}\n",
+    "discard": "{observation}Pilas de descarte: {discard}\n",
+    "empty": "Vacía"
+  },
+  "game_message": {
+    "no_cards_left": "No hay más cartas para robar. Recuerda que puedes jugar cartas de estas fuentes:\n  1. Tu **mano**.\n  2. La **carta superior de tu pila de pago**.\n  3. La **carta superior de cualquiera de tus pilas de descarte**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movimiento no válido. El jugador {player_id} no respondió con un movimiento válido entre corchetes.",
+    "invalid_play": "Jugada no válida. El jugador {player_id} intentó jugar {card} en la pila central {index}.",
+    "discard_from_payoff": "Descarte no válido. El jugador {player_id} intentó descartar una carta de la pila objetivo.",
+    "discard_not_in_hand": "Descarte no válido. El jugador {player_id} intentó descartar una carta que no está en su mano.",
+    "wrong_move_type": "Tipo de movimiento no válido. El jugador {player_id} no respondió con un tipo de movimiento válido."
+  },
+  "game_action": {
+    "you_drew": "Has robado cartas.",
+    "opponent_drew": "El jugador {player_id} robó cartas.",
+    "you_played": "Jugaste {card} en la pila central {index}.",
+    "opponent_played": "El jugador {player_id} jugó {card} en la pila central {index}.",
+    "you_discarded": "Has descartado {card} en la pila de descarte {index}, lo que también significa que has terminado tu turno. No se tendrá en cuenta ninguna otra acción tuya durante este turno. El jugador {next_player_id} jugará a continuación.",
+    "opponent_discarded": "El jugador {player_id} descartó {card} en la pila de descarte {index}, lo que también significa que terminó su turno. No se tendrá en cuenta ninguna otra acción del jugador {player_id} durante este turno. Jugador {next_player_id}, jugarás a continuación. Introduce tu acción con el formato [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "¡El jugador {current_player} ha vaciado su pila objetivo! ¡El jugador {current_player} gana!",
+    "deadlock_player_0": "¡Se ha llegado a un bloqueo! El jugador 0 gana con {player_0_payoff} cartas restantes, frente a las {player_1_payoff} cartas del jugador 1.",
+    "deadlock_player_1": "¡Se ha llegado a un bloqueo! El jugador 1 gana con {player_1_payoff} cartas restantes, frente a las {player_0_payoff} cartas del jugador 0.",
+    "deadlock_tie": "¡Se ha llegado a un bloqueo con empate! Ambos jugadores tienen {player_0_payoff} cartas restantes. El jugador {current_player} gana por defecto."
+  }
+}

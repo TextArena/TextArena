@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} en un Dilema del Presoner Iterat que abasta {num_rounds} rondes.\n\nEstructura del joc:\n- Abans de cada decisió tens {total_conversation_rounds} torns per comunicar-te lliurement.\n- Després, tots dos jugadors trien simultàniament cooperar o desertar.\n\nMatriu de recompenses (fixa cada ronda):\n- Tots dos cooperen ➜ cada un {cooperate_reward}\n- Tots dos deserten ➜ cada un {mutual_defect_reward}\n- Un deserta, l'altre coopera ➜ Desertor {defect_reward}, Cooperador {sucker_reward}\n\nCom jugar:\n- Durant la conversa: escriu qualsevol text que desitgis.\n- Durant la fase de decisió: inclou '[Cooperate]' o '[Defect]' (insensible a majúscules i minúscules). Pots afegir text addicional abans/després del token."
+  },
+  "phases": {
+    "conversation_finished": "La conversa ha finalitzat per a la ronda {round}. Si us plau, respon amb '[Cooperate]' o '[Defect]' dins \\boxed{{}}.",
+    "starting_round": "--- Iniciant la Ronda {round} ---",
+    "round_summary": "Resultats de la ronda {round}:\n{outcome}\nEl Jugador 0 ha guanyat {r0} (total {score_0}), el Jugador 1 ha guanyat {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "El Jugador {winner} guanya {win_score} - {lose_score}.",
+    "draw": "Empat! Tots dos jugadors han puntuat {s0}.",
+    "round_both_cooperate": "Tots dos jugadors han cooperat.",
+    "round_both_defect": "Tots dos jugadors han desertat.",
+    "round_p0_cooperates_p1_defects": "El Jugador 0 ha cooperat, el Jugador 1 ha desertat.",
+    "round_p0_defects_p1_cooperates": "El Jugador 0 ha desertat, el Jugador 1 ha cooperat."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a HighSociety (2 játékosos változat) játékban.\nJátékmenet: Tíz presztízskártyát árvereznek egymás után.\nLicitálás: Minden árverésnél titokban válasszon egy 1-11 értékű pénzkártyát és fedje fel.\n            • A magasabb licit nyeri a presztízskártyát és eldobja azt a pénzkártyát.\n            • Az alacsonyabb licit megtartja a pénzkártyát.\n            • Döntetlen -> mindkét licit visszatér és ugyanaz a presztízskártya újra árverezésre kerül.\nPontozás: Mind a tíz árverés után adjuk hozzá a **megmaradt készpénzt + presztízspontokat**.\n            A magasabb *nettó érték* nyer (pontos döntetlen -> döntetlen).\n\n**Akció szintaxis** → licitáljon egyetlen kártyát, például '[7]' vagy '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Árverés {round}/10  |  Presztízskártya: {prize}"
+  },
+  "board": {
+    "money_cards": "Megmaradt pénzkártyák: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Pontosan egy [X] pénzkártyát kell tartalmaznia.",
+    "card_not_held": "Már nem rendelkezik azzal a pénzkártyával."
+  },
+  "message": {
+    "tie": "Döntetlen - licitek visszatérnek. Újralicit!",
+    "auction_result": "P0 licitje {bid0}, P1 licitje {bid1}. A {winner} játékos nyeri a {prize} presztízst (összesen {total})."
+  },
+  "outcome": {
+    "p0_wins": "Nettó érték {nw0} > {nw1}",
+    "p1_wins": "Nettó érték {nw1} > {nw0}",
+    "draw": "Mindkét nettó érték {nw0} – pontos döntetlen."
+  }
+}

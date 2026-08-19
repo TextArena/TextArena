@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "თქვენ ხართ {role} პოლკოვნიკ ბლოტოში. თქვენი მიზანია მოიგოთ უფრო მეტი რაუნდი, ვიდრე თქვენი მოწინააღმდეგე. თითოეულ რაუნდზე, ზუსტად გამოყავით {num_total_units} ერთეული {field_names} სფეროებში. მოთამაშე, რომელიც უფრო მეტ ერთეულს გამოყოფს სფეროში, იმ სფეროს მოიგებს, ხოლო მოთამაშე, რომელიც უფრო მეტ სფეროს მოიგებს, რუნდს მოიგებს. მაგალითად, \"[A7 B7 C6] \" გამოყოფს 7 ერთეულს A- ს, 7 ერთეულს B- ს და 6 ერთეულს C- ს.",
+    "commander_alpha": "კაპთნარ ალფა",
+    "commander_beta": "კაპთნარ ბეტა."
+  },
+  "game_state": {
+    "header_round": "=== პოლკოვნიკ ბლოტო - რაუნდი {current_round}/{num_rounds} === რაუნდები მოგებული - მეთაური ალფა: {alpha_score}, მეთაური ბეტა: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "რაუნდი {current_round} მეთაური ალფა: {p0_allocations} მეთაური ბეტა: {p1_allocations} ",
+    "winner_alpha": "{message}გამარჯვებული: სარდალი ალფა",
+    "winner_beta": "{message}გამარჯვებული: სარდალი ბეტა",
+    "tie": "{message}გადაჯაჭვული!"
+  },
+  "invalid_move": {
+    "wrong_format": "შეყვანის არასწორი ფორმატი. გამოიყენეთ: A:5, B:10, C:5",
+    "invalid_field": "არასწორი ველის სახელი (((s). ველები: {field_names}",
+    "wrong_allocation_value": "ყველა ალოკაცია უნდა იყოს არა უარყოფითი მთელი რიცხვი.",
+    "incorrect_total_units": "თქვენ უნდა გამოყოთ ზუსტად {num_total_units} ერთეული. მიმდინარე თანხა: {current_sum}",
+    "good_allocations": "განაწილება კარგია."
+  },
+  "outcome": {
+    "winner_alpha": "სარდალი ალფა {score_0}-{score_1} {num_rounds} რაუნდის შემდეგ იმარჯვებს!",
+    "winner_beta": "სარდალი ბეტა {score_1}-{score_0} {num_rounds} რაუნდის შემდეგ იგებს!",
+    "draw": "თამაში მთავრდება {score_0}-{score_1} ფრედ {num_rounds} რაუნდის შემდეგ!",
+    "early_winner_alpha": "მეთაური ალფა {scores_0}-{scores_1} (მიღებული უმრავლესობა)!",
+    "early_winner_beta": "სარდალი ბეტა იგებს {scores_1}-{scores_0} (მიღებულია უმრავლესობა)!"
+  }
+}

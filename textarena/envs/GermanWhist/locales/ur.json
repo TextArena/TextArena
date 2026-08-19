@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "کھیل شروع ہوتا ہے۔ ٹرمپ سوٹ: {trump_suit} (ٹرمپ کارڈ: {trump_str})۔",
+    "no_trump_card": "کوئی نہیں"
+  },
+  "player_prompt": {
+    "intro": "آپ جرمن وہسٹ میں کھلاڑی {player_id} ہیں۔\n{phase_info}\nآپ کے پاس {hand_size} کارڈز ہیں۔\n'[play N]' کے ساتھ ایک کارڈ کھیلیں، جہاں N آپ کے ہاتھ میں اس کا پوزیشن ہے (مثال کے طور پر '[play 3]')۔",
+    "phase_learning": "سیکھنے کا مرحلہ: ہر ٹرک کا فاتح اوپر والا کارڈ لیتا ہے اور ہارنے والا ڈیک سے اگلا کارڈ نکالتا ہے۔ اس مرحلے میں جیتے گئے ٹرکس فتح کی طرف شمار نہیں ہوتے۔",
+    "phase_playing": "کھیلنے کا مرحلہ: ڈیک ختم ہو گیا ہے۔ اب سے ہر ٹرک فتح کی طرف شمار ہوتا ہے۔"
+  },
+  "next_card": {
+    "playing_phase": "کوئی کارڈ پیشکش پر نہیں ہے - کھیلنے کا مرحلہ شروع ہو گیا ہے۔",
+    "deck_empty": "ڈیک خالی ہے - کوئی کارڈ پیشکش پر نہیں ہے۔",
+    "available": "کارڈ پیشکش پر: {card}",
+    "available_trump": "کارڈ پیشکش پر: {card} (ٹرمپ)"
+  },
+  "invalid_move": {
+    "wrong_format": "غلط چال فارمیٹ۔ '[play N]' کے ساتھ Nth کارڈ کھیلنے کے لیے اپنے ہاتھ میں استعمال کریں۔",
+    "bad_position": "وہ کارڈ پوزیشن موجود نہیں ہے۔ آپ کے پاس {hand_size} کارڈز ہیں۔",
+    "must_follow_suit": "آپ کو سوٹ کا پابند ہونا چاہیے اور ایک {lead_suit} کارڈ کھیلنا چاہیے۔",
+    "invalid_play": "وہ کارڈ کھیلا نہیں جا سکتا۔"
+  },
+  "game_action": {
+    "played": "کھلاڑی {player_id} نے {card} کھیلا۔"
+  },
+  "trick": {
+    "won": "کھلاڑی {winner_id} نے {card} کے ساتھ ٹرک جیت لیا۔",
+    "won_learning": "کھلاڑی {winner_id} نے {card} کے ساتھ ٹرک جیت لیا اور اوپر والا کارڈ لیا۔"
+  },
+  "phase": {
+    "learning_complete": "ڈیک ختم ہو گیا ہے۔ سیکھنے کا مرحلہ ختم ہو گیا ہے - ہر باقی ٹرک فتح کی طرف شمار ہوتا ہے۔"
+  },
+  "draw": {
+    "winner_received": "آپ نے ٹرک جیت لیا اور {card} حاصل کیا۔",
+    "loser_received": "آپ نے ٹرک ہارا اور ڈیک سے {card} نکالا۔",
+    "winner_preview": "اگلا کارڈ پیشکش پر ہے: {card}۔"
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "اب تک جیتے گئے ٹرکس - کھلاڑی 0: {tricks0}, کھلاڑی 1: {tricks1}",
+    "scores_playing": "سکورنگ ٹرکس - کھلاڑی 0: {tricks0}, کھلاڑی 1: {tricks1}",
+    "phase": "مرحلہ: {phase}",
+    "phase_learning": "مرحلہ: {phase} ({remaining_cards} کارڈز ڈیک میں باقی ہیں)"
+  },
+  "hand": {
+    "no_cards": "کوئی کارڈز نہیں",
+    "no_cards_in_hand": "ہاتھ میں کوئی کارڈز نہیں",
+    "header": "آپ کا ہاتھ:",
+    "trump_indicator": " (ٹرمپ)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "ابھی تک کوئی کارڈز نہیں کھیلے گئے ہیں۔",
+    "header": "موجودہ ٹرک:",
+    "trump_indicator": " (ٹرمپ)",
+    "card_line": "{observation}\n  کھلاڑی {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "کھیل شروع نہیں ہوا",
+    "header": "=== جرمن وہسٹ کھیل ===",
+    "phase": "{observation}\nمرحلہ: {phase}",
+    "trump_suit": "{observation}\nٹرمپ سوٹ: {trump_suit}",
+    "trump_card": "{observation}\nٹرمپ کارڈ: {card}",
+    "cards_left": "{observation}\nڈیک میں کارڈز باقی ہیں: {count}",
+    "next_card": "{observation}\nفاتح کے لیے اگلا کارڈ: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nموجودہ ٹرک:",
+    "trump_indicator": " (ٹرمپ)",
+    "trick_line": "{observation}\n  کھلاڑی {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nکھلاڑی {player_id}: {scoring} سکورنگ ٹرکس ({tricks} کل), {hand_size} کارڈز ہاتھ میں"
+  },
+  "outcome": {
+    "summary": "سیکھنے کا مرحلہ - کھلاڑی 0: {l0}, کھلاڑی 1: {l1}۔ کھیلنے کا مرحلہ - کھلاڑی 0: {p0}, کھلاڑی 1: {p1}۔ کھلاڑی {winner_id} {winner_tricks} سکورنگ ٹرکس کے ساتھ جیتتا ہے!"
+  }
+}

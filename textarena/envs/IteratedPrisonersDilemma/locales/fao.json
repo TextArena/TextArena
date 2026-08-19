@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Tú ert Leikari {player_id} í einum Itereraðum Fangaprógvspæli, sum varir {num_rounds} umfar.\n\nLeikskipan:\n- Áðrenn hvørja avgerð hevur tú {total_conversation_rounds} rættir at frætta frítt.\n- Eftir tað velja báðir leikarar samstundis at samstarva ella svíkja.\n\nVinningargrund (fastur hvørja umfar):\n- Báðir samstarva ➜ hvør {cooperate_reward}\n- Báðir svíkja ➜ hvør {mutual_defect_reward}\n- Ein svíkjar, ein samstarvar ➜ Svíkjarin {defect_reward}, Samstarvandi {sucker_reward}\n\nHvussu leikast:\n- Meðan frættast: skriva tekst, sum tú ynskir.\n- Meðan avgerðartíð: skriva '[Cooperate]' ella '[Defect]' (ólíkir stórir og lítlir bókstavir). Tú kanst eisini addera extra tekst áðrenn/eftir token."
+  },
+  "phases": {
+    "conversation_finished": "Samrøða liðug fyri umfar {round}. Vinarliga svar við '[Cooperate]' eller '[Defect]' innan \\boxed{{}}.",
+    "starting_round": "--- Byrjanarumfarið {round} ---",
+    "round_summary": "Úrslit umfar {round}:\n{outcome}\nSpælar 0 tjenar {r0} (tilsamans {score_0}), Spælar 1 tjenar {r1} (tilsamans {score_1})."
+  },
+  "outcome": {
+    "winner": "Leikari {winner} vinnur {win_score} - {lose_score}.",
+    "draw": "Báðir leikarar skoraðu {s0}.",
+    "round_both_cooperate": "Báðir leikararnir vóru samdir.",
+    "round_both_defect": "Báðir leikarar sviku.",
+    "round_p0_cooperates_p1_defects": "Leikari 0 hevur samstarvað, leikari 1 er farin av.",
+    "round_p0_defects_p1_cooperates": "Leikari 0 flýddi, leikari 1 samstarvaði."
+  }
+}

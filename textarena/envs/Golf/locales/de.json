@@ -1,0 +1,89 @@
+{
+  "_comment": "Golf (Kartenspiel) Sprachdatei. Übersetze KEINE Schlüssel (linke Seite). Übersetze nur die Werte (rechte Seite). Behalte jeden {placeholder} exakt bei. Übersetze niemals die Aktions-Token ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), die Kartenbezeichnungen (A, 2-10, J, Q, K), die Farbsymbole, die als Zeilen-/Spaltenplatzhalter in Token verwendeten Buchstaben X/Y oder numerische Punktzahlen/Positionen. Behalte das ASCII-Rasterlayout (Abstände, Spaltennummern, '?', 'Col', 'Row'-Ausrichtung) bei, damit das Brett lesbar bleibt.",
+  "_slots": {
+    "{player_id}": "Eine Spielernummer, z. B. 0 oder 1",
+    "{pid}": "Eine Spielernummer, z. B. 0 oder 1",
+    "{winner}": "Die Spielernummer mit der niedrigsten Punktzahl",
+    "{score}": "Eine numerische Gesamtpunktzahl",
+    "{card}": "Eine Kartenbezeichnung wie A♠, 10♥, K♦ oder Q♣",
+    "{new}": "Die Kartenbezeichnung, die ins Raster gelegt wurde",
+    "{old}": "Die Kartenbezeichnung, die aus dem Raster entfernt wurde",
+    "{row}": "Eine Zeilennummer",
+    "{col}": "Eine Spaltennummer",
+    "{max_row}": "Die größte gültige Zeilennummer",
+    "{max_col}": "Die größte gültige Spaltennummer",
+    "{reason}": "Ein vorgerenderter Satz, der beschreibt, warum die Schlussrunde begann",
+    "{n}": "Eine am Anfang einer Rasterzeile angezeigte Zeilennummer",
+    "{cards}": "Die vorgerenderten, layoutabhängigen Zellen einer Rasterzeile",
+    "{hand}": "Der vorgerenderte Spielerrasterblock",
+    "{discard}": "Die Kartenbezeichnung oben auf dem Ablagestapel oder das Wort für 'keine'",
+    "{options}": "Die vorgerenderte Zeile mit den verfügbaren Aktionen",
+    "{scores}": "Die vorgerenderte Liste der Endpunktzahlen pro Spieler"
+  },
+
+  "player_prompt": {
+    "intro": "Du spielst Golf (Kartenspiel) - Spieler {player_id}.\nZiel: Erziele in dieser einzelnen Runde die niedrigste Gesamtpunktzahl. Wenn Spalten denselben Wert teilen, werden sie als 0 gewertet.\nKartenwerte: A=1, 2-10=Nennwert, J/Q=10, K=0\n\nAktionen (verwende exakte Klammern):\n- '[draw]' - Vom Stapel ziehen\n- '[take]' - Vom Ablagestapel nehmen\n- '[swap X Y]' - Gezogene Karte mit Position X (Zeile) Y (Spalte) tauschen\n- '[discard]' - Die gezogene Karte ablegen\n"
+  },
+
+  "board": {
+    "drew": "Du hast gezogen: {card}\nJetzt musst du sie [swap X Y] oder [discard].",
+    "took": "Du hast genommen: {card} vom Ablagestapel\nDu musst sie [swap X Y] (kannst nicht ablegen).",
+    "peeked": "Du hast an Position ({row},{col}) gespäht: {card}",
+    "turn_view": "Deine Hand:\n{hand}\nAblagestapel: {discard}\n{options}",
+    "none": "Keine"
+  },
+
+  "options": {
+    "final_turns": "Schlusszüge! Deine Optionen: [draw], [take], [peek X Y]",
+    "draw": "Deine Optionen: [draw], [take]",
+    "must_swap": "Du musst: [swap X Y] (Karten vom Ablagestapel können nicht abgelegt werden)",
+    "swap_or_discard": "Du musst: [swap X Y] oder [discard]"
+  },
+
+  "hand": {
+    "no_cards": "Keine Karten",
+    "header": "  Col:   1    2    3",
+    "row": "Row {n}: {cards}"
+  },
+
+  "action_desc": {
+    "swapped": "Spieler {pid} tauschte {new} mit {old} an Position ({row},{col})",
+    "discarded": "Spieler {pid} legte {card} ab"
+  },
+
+  "message": {
+    "deck_empty": "Der Stapel ist leer! Das Spiel endet sofort.",
+    "knocked": "Spieler {pid} hat geklopft! Jeder andere Spieler bekommt noch einen Zug.",
+    "final_round": "Spieler {pid} {reason}! Jeder andere Spieler bekommt noch einen Zug."
+  },
+
+  "reason": {
+    "all_revealed": "hat alle Karten aufgedeckt"
+  },
+
+  "invalid": {
+    "wrong_action": "Verwende genau EINE Aktion in Klammern: [draw], [take], [swap X Y], [discard], [knock] oder [peek X Y]",
+    "discard_empty": "Der Ablagestapel ist leer!",
+    "must_draw_first": "Du musst zuerst [draw], [take], [knock] oder [peek X Y]",
+    "cannot_discard_taken": "Du kannst eine vom Ablagestapel genommene Karte nicht ablegen. Du musst sie tauschen.",
+    "have_drawn_card": "Du hast eine gezogene Karte. Du musst sie [swap X Y] oder [discard].",
+    "need_drawn_swap": "Du brauchst eine gezogene Karte zum Tauschen.",
+    "need_drawn_discard": "Du brauchst eine gezogene Karte zum Ablegen.",
+    "out_of_bounds": "Position außerhalb des Bereichs. Verwende Zeile 1-{max_row}, Spalte 1-{max_col}",
+    "knock_with_card": "Du kannst nicht mit einer gezogenen Karte klopfen. Beende zuerst deinen Zug.",
+    "already_knocked": "Jemand hat in dieser Runde bereits geklopft.",
+    "already_revealed": "Diese Karte ist bereits aufgedeckt!"
+  },
+
+  "summary": {
+    "full": "Spiel vorbei! Spieler {winner} gewinnt mit einer Punktzahl von {score} Punkten!\n\nEndpunktzahlen:\n{scores}",
+    "line": "Spieler {pid}: {score} Punkte\n"
+  },
+
+  "board_str": {
+    "title": "=== GOLF-SPIEL ===",
+    "discard": "Ablagestapel: {card}",
+    "knocked": "Spieler {pid} hat geklopft!",
+    "player_header": "Spieler {pid} (Punktzahl: {score}):"
+  }
+}

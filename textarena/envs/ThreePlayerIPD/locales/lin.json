@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ozali mokili {player_id} na mokili 3 ya Iterated Prisoner's Dilemma. Matchi ekweyi {num_rounds} ronde.\nMokili ya ronde:\n• {conv_rounds} mipesami ya malobi\n• 1 mipesami ya kufanya decision - tokola token moke oyo kwa kila opponent: '[<opp-id> cooperate]' to '[<opp-id> defect]' (ndenge '[1 defect] [2 cooperate]'; default eza 'cooperate'). \nMatrice ya pair-wise ya payoff (etongama na kila pair ya unordered):\n  - Ndege zote zikosalana  ->  {reward}\n  - Ndege zote zikoboma     ->  {punishment}\n  - Ozali koboma, bazali kosala -> {temptation}\n  - Ozali kosala, bazali koboma -> {sucker}\nMokili (bazali) na score ya juu zaidi na suka ya ronde zote akokende."
+  },
+  "round": {
+    "start": "─── Koma Round {round} ───\tOyo ezali na liloba libre na mikolo ya {conv_rounds}.",
+    "chat_finished": "Malobi emesala kwa ronde {round}. Tokola decisions yako, token moke oyo kwa kila opponent: `[pid cooperate]` to `[pid defect]`."
+  },
+  "results": {
+    "header": "### Zulunalo {round} - Mituya:",
+    "pair_line": "{observation}\n\t Mokili {i} vs Mokili {j} bazali kosala {choice_i} na {choice_j} mtawalia (Mokili {i} akokende {gain_i}, Mokili {j} akokende {gain_j})",
+    "scores_open": "{observation} -> Ba notes ya sika: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}  ya liboso"
+  },
+  "outcome": {
+    "final": "Makomi mafuta: {scores}.  Makomi ya bokomi (mabaya→mazuri): {groups}"
+  }
+}

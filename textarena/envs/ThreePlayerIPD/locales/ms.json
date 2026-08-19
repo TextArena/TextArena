@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam Dilema Banduan Berulang untuk 3 pemain. Perlawanan berlangsung selama {num_rounds} pusingan.\nStruktur pusingan:\n• {conv_rounds} giliran perbualan bebas\n• 1 giliran keputusan — serahkan satu token bagi setiap pihak lawan: '[<opp-id> cooperate]' atau '[<opp-id> defect]' (contohnya, '[1 defect] [2 cooperate]'; pilihan lalai ialah 'cooperate').\nMatriks ganjaran berpasangan (digunakan pada setiap pasangan tidak tertib):\n  - Kedua-duanya memilih cooperate  ->  {reward}\n  - Kedua-duanya memilih defect     ->  {punishment}\n  - Anda memilih defect, pemain lain memilih cooperate -> {temptation}\n  - Anda memilih cooperate, pemain lain memilih defect -> {sucker}\nPemain dengan skor tertinggi selepas semua pusingan berakhir akan menang."
+  },
+
+  "round": {
+    "start": "─── Pusingan {round} Bermula ───\tAnda boleh berbual secara bebas untuk {conv_rounds} giliran perbualan yang seterusnya.",
+    "chat_finished": "Perbualan untuk pusingan {round} telah tamat. Serahkan keputusan anda, satu token bagi setiap pihak lawan: `[pid cooperate]` atau `[pid defect]`."
+  },
+
+  "results": {
+    "header": "### Pusingan {round} — Keputusan:",
+    "pair_line": "{observation}\n\t Pemain {i} dan Pemain {j} masing-masing memilih {choice_i} dan {choice_j} (Pemain {i} memperoleh {gain_i} mata, Pemain {j} memperoleh {gain_j} mata)",
+    "scores_open": "{observation}\n-> Skor semasa: ",
+    "score_first": "{observation}Pemain {player_id} ({score})",
+    "score_next": "{observation}; Pemain {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+
+  "outcome": {
+    "final": "Skor akhir: {scores}. Kumpulan kedudukan (paling buruk→terbaik): {groups}"
+  }
+}

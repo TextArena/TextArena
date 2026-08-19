@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Siz Danışıq Oyununda Oyunçu {player_id}-siniz.\nSizin bəzi resurslarınız var və vəzifəniz bu resursları elə dəyişməkdir ki, resurslarınızın ümumi dəyəri artsın.\nHal-hazırda sizin resurslarınız və onlara uyğun dəyərlər bunlardır:\n\t+ {resource_value_list}\nHər gedişdə siz rəqibinizlə danışa və ticarət təklifi edə bilərsiniz.\nAşağıdakı xüsusi tokenlərdən hərəkətlər üçün istifadə edin:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Təklif Edilən Resurslar -> İstenilən Resurslar]\n  - '[Accept]': Gələn təklifi qəbul etmək üçün.\n  - '[Deny]': Gələn təklifi rədd etmək üçün (əsas).\nOyun ümumilikdə {max_turns} gedişə qədər davam edir."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Oyunçu lazımi resursları olmadan ticarəti qəbul etməyə çalışdı.",
+    "out_of_range": "Oyunçu {player_id}, Etibarsız hərəkət. Sütun {col} sərhəddən kənarda.",
+    "already_full": "Oyunçu {player_id}, Etibarsız hərəkət. Sütun {col} doludur.",
+    "proposing_with_no_resource": "Oyunçu {player_id} lazımi resursları olmadan ticarət təklifi etməyə çalışdı.",
+    "incorrect_offer_format": "Oyunçu {player_id} ticarət təklifini səhv formatda etdi.",
+    "no_new_offer": "Oyunçu {player_id} heç bir yeni ticarət təklifi etmədi."
+  },
+  "offers": {
+    "reject": "Oyunçu {player_id} ticarət təklifini rədd etdi.",
+    "accept": "Oyunçu {acceptor_id} Oyunçu {proposer_id}-dən gələn ticarət təklifini qəbul etdi.",
+    "proposal": "Oyunçu {player_id} Oyunçu {opponent_id}-ə aşağıdakı təklifi etdi: Təklif edilən əşyalar: {offered} -> İstenilən əşyalar: {requested}"
+  },
+  "outcome": {
+    "win": "Oyunçu {winner_id} inventar dəyərində daha böyük qazanc əldə edərək qazandı.",
+    "draw": "Bütün oyunçular üçün inventar dəyərində eyni dəyişiklik. Heç-heçə."
+  }
+}

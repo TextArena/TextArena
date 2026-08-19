@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "የብሪስኮላ ጌም ተጀምሯል! የስውት ስውት: {trump_suit} (የስውት ካርድ: {trump_card})"
+  },
+  "prompt": {
+    "intro": "እዚህ ብሪስኮላ ጨዋታ ነው - ኤሌሞን {player_id}.\nዕላማ: ጨዋታዎችን አሸንፋ እና ብዙ ፕዮንቶችን ለማሰብ (120 በሙሉ ፕዮንቶች በካርድ ጠረጴት).\nካርድ ፕዮንቶች: A=11, 3=10, K=4, Q=3, J=2, ሌሎች=0\nካርድ ስልጣን: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nትራምፕ ካርዶች ሌሎች ካርዶችን ይሸነፋሉ የስልጣን አካል እንደሌለውም.\n\nእርምጃ: '[play X]' እንደ ኤሌሞን ቦታ (1-{max_pos}) ካርድ በእንቅስቃሴው"
+  },
+  "hand": {
+    "none": "ካርዶች የሉም",
+    "empty": "ምንም ካርዶች በእጅ ውስጥ የለም",
+    "header": "እጅህ፦",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(ትራምፕ)"
+  },
+  "trick": {
+    "empty": "እስካሁን ምንም ካርዶች ይህን ዘዴ ተጫውቷል.",
+    "header": "የአሁኑ ዘዴ:",
+    "line": "  ኤሌሞን {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "ኤሌሞን {player_id}: {points} ፕትስ",
+    "trump_info": "የትራምፕ ልብስ: {trump_suit}",
+    "trump_info_deck": "ትራምፕ ስብ: {trump_suit} | ካርዶች በጠረጴት: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nፕዮንቶች: {scores}\n{trump_info}\n\nካርድ በመምረጥ [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "[play X] ይጠቀሙ X የካርድ ቦታ (1, 2, 3, ወዘተ) ነው ።",
+    "out_of_range": "ካርድ ሥፍራ ተገልጿል። አንተ {count} ካርዶች (1-{count})"
+  },
+  "action": {
+    "played": "ኤሌሞን �{player_id} መለሰ �{card}",
+    "trick_win": "ኤሌሞን �{winner} አሸንፋለት በ �{card} እና አግኝቷል �{points} ፕዮንቶች!"
+  },
+  "outcome": {
+    "head": "ጌም አልቋል! ተጫዋቾት {winner} {points} ነጥቦች አሸንፏል!\n\nየመጨረሻ ነጥቦች:\n{scores}",
+    "player_line": "ተጫዋች {player_id}: {points} ነጥብ ({tricks} ትራይኮች)\n"
+  }
+}

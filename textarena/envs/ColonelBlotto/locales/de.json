@@ -1,0 +1,34 @@
+{
+    "player_prompt": {
+        "intro": "Du bist {role} in Colonel Blotto.\nDein Ziel ist es, mehr Runden als dein Gegner zu gewinnen.\nVerteile in jeder Runde genau {num_total_units} Einheiten auf die Felder {field_names}.\nDer Spieler, der einem Feld mehr Einheiten zuweist, gewinnt dieses Feld, und der Spieler, der mehr Felder gewinnt, gewinnt die Runde.\nZum Beispiel weist '[A7 B7 C6]' Feld A 7 Einheiten, Feld B 7 Einheiten und Feld C 6 Einheiten zu.",
+        "commander_alpha": "Kommandant Alpha",
+        "commander_beta": "Kommandant Beta"
+    },
+
+    "game_state": {
+        "header_round": "=== COLONEL BLOTTO - Runde {current_round}/{num_rounds} ===\nGewonnene Runden - Kommandant Alpha: {alpha_score}, Kommandant Beta: {beta_score}"
+    },
+
+    "round_battle": {
+        "field_result": "\nRunde {current_round}\nKommandant Alpha hat verteilt: {p0_allocations}\nKommandant Beta hat verteilt: {p1_allocations}\n",
+        "winner_alpha": "{message}Gewinner: Kommandant Alpha",
+        "winner_beta": "{message}Gewinner: Kommandant Beta",
+        "tie": "{message}Unentschieden!"
+    },
+
+    "invalid_move": {
+        "wrong_format": "Ungültiges Eingabeformat. Verwende: A:5, B:10, C:5",
+        "invalid_field": "Ungültige(r) Feldname(n). Gültige Felder: {field_names}",
+        "wrong_allocation_value": "Alle Zuweisungen müssen nicht-negative ganze Zahlen sein.",
+        "incorrect_total_units": "Du musst genau {num_total_units} Einheiten verteilen. Aktuelle Summe: {current_sum}",
+        "good_allocations": "Zuweisung ist korrekt."
+    },
+
+    "outcome": {
+        "winner_alpha": "Kommandant Alpha gewinnt {score_0}-{score_1} nach {num_rounds} Runden!",
+        "winner_beta": "Kommandant Beta gewinnt {score_1}-{score_0} nach {num_rounds} Runden!",
+        "draw": "Das Spiel endet unentschieden {score_0}-{score_1} nach {num_rounds} Runden!",
+        "early_winner_alpha": "Kommandant Alpha gewinnt {scores_0}-{scores_1} (Mehrheit erreicht)!",
+        "early_winner_beta": "Kommandant Beta gewinnt {scores_1}-{scores_0} (Mehrheit erreicht)!"
+    }
+}

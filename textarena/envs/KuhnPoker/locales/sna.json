@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Iwe ndiwe Mutambo {player_id} mukati me {max_rounds} mizunguko ye Kuhn Poker.\nMitemo ye Mutambo:\n- Kuhn Poker inoshandisa diki re 3-kadhi na J, Q, K (J ndiyo diki, K ndiyo refu zaidi)\n- Mutambo wega anopinda {ante} chip na kupokea kadhi 1 mizunguko yese (ona kuti kadhi dzinotambwa pasina kubadilishwa, kwa hivyo haungagone kadhi sawa na ya mhandu wako).\n- Mutambo unodzokera kwa {max_rounds} mizunguko\n- Mutambo ane chipi zaidi pamberi pe mizunguko yese anohwina\nMitemo ye Chiitiko:\n- '[check]': Pinda pasina kubheja (chete kana pasina bheji pa teburu)\n- '[bet]': Ongeza chipi 1 kwenye poti (chete kana pasina bheji pa teburu)\n- '[call]': Lingana na bheji ya mhandu wako kwa kuongeza chipi 1 kwenye poti\n- '[fold]': Tenguka mkono wako na rega mhandu wako ahwine poti"
+  },
+  "init_round": {
+    "round_start": "### Kuanza raundi {current_round} kubva pa {max_rounds} raundi. Kadi yako ni: '{player_card}'",
+    "available_actions": "Zviito zvako zviripo ndeizvi: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Shanda iri lazima iwe [Check], [Bet], [Call], kana [Fold].",
+    "not_legal": "Chiito chinofanira kuva {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Mutambo {player_id}, akaisa chiitiko: '[{move}]'.",
+    "valid_actions": "Zviito zvako zviripo ndeizvi: {legal_actions}.",
+    "round_summary": "{reason} Mafairo akutanga: Mwari 0: '{player_0_chips}'; Mwari 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Mashindano: Mwari {winner} '{winner_card}' anashinda Mwari {loser} '{loser_card}'. Mwari {winner} anashinda poti ya {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "Pakupera {max_rounds} kutenderera, vatambi vose vaiva nenhamba yakaenzana yechips.",
+    "round_win": "Mutambi {player_id} akasiya.",
+    "winner_player0": "Mutambi 0 akahwina nokuva nemachips akawanda pakupera kwedzose {max_rounds} dzorwendo.",
+    "winner_player1": "Mutambi 1 akahwina nokuva nemachips akawanda pakupera kwamarunduru ose {max_rounds}."
+  }
+}

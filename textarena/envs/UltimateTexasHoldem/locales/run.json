@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Nta makarata araboneka.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Umuntu Mmoja vs Dealer\n\n📖 ISHAKIRO RY'UMWAKA:\n• Utaanza na {start_chips} chips\n• Deki moja ya kadi 52 (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Utafanya kazi na dealer (nyumba)\n• Kila mzunguko utafuata muundo wa Ultimate Texas Hold'em: utaleta ANTE na BLIND bets, upokee kadi 2 za shimo, uamue kuhusu PLAY bets zinazowezekana katika mizunguko ya kuweka beti, kisha ufichue kadi za jumuiya na ulinganishe mkono wako bora wa kadi 5 dhidi ya wa dealer. Lengo lako ni kuongeza ushindi wako (wakati una mkono bora), wakati wa kupunguza hasara zako (wakati una mkono mbaya).\n• Mchezo utaisha wakati ufikia chips 0 au chini mwanzoni mwa mzunguko (HASARA) au ukamilishe mizunguko 1000 na chips (USHINDI)\n\n💰 MUUNDO WA KUWEKA BETI:\n• ANTE: Beti ya lazima ya ${ante} kila mzunguko\n• BLIND: Beti ya lazima ya ${ante} kila mzunguko\n• PLAY: Beti ya hiari wakati wa mchezo. Katika mzunguko mzima, unaweza kuchagua MOJA tu ya yafuatayo: (${ante4} ikiwa imefanywa katika PRE-FLOP, ${ante2} ikiwa imefanywa katika FLOP, au ${ante} ikiwa imefanywa katika RIVER. Unaweza pia kukunja katika river, ukitoa mkono, na kutofanya beti yoyote.)\n\n🎴 KUDEAL KADI:\n• Utapokea kadi 2 za uso juu (kadi zako za shimo)\n• Dealer atapokea kadi 2 za uso chini (zilizofichwa kwako)\n• Kadi 5 za jumuiya zitadealiwa uso chini mwanzoni\n• Kadi za jumuiya zitafichuliwa kwa utaratibu kupitia mizunguko ya mchezo\n\n🏆 UHALALI WA DEALER:\n• Dealer lazima awe na angalau JOI (kadi 2 za cheo kimoja) ili kuhalalishwa, akizingatia kadi 2 za mkononi mwake na kadi 5 za jumuiya.\n• Uhalali wa dealer unathiri matokeo ya kuweka beti, kama ilivyoelezwa baadaye.\n\n🎮 MIZUNGUKO YA MCHEZO & VITENDO:\n📋 PRE-FLOP:\n  • Vitendo: [4x] (${ante4}) au [check]\n  • [4x]: Weka beti ya ${ante4} PLAY, ufichue kadi 3 za kwanza za jumuiya\n  • [check]: Hakuna beti ya ziada, ufichue kadi 3 za kwanza za jumuiya\n\n📋 FLOP:\n  • Ikiwa beti ya 4x imefanywa: [skip] pekee inapatikana (inajifichua kadi 2 za mwisho za jumuiya)\n  • Ikiwa hakuna beti ya 4x: [2x] (${ante2}) au [check]\n  • [2x]: Weka beti ya ${ante2} PLAY, ufichue kadi 2 za mwisho za jumuiya\n  • [check]: Hakuna beti ya ziada, ufichue kadi 2 za mwisho za jumuiya\n\n📋 RIVER:\n  • Ikiwa beti ya 4x au 2x imefanywa: [skip] pekee inapatikana (inajisonga mbele hadi kwenye ushindani)\n  • Ikiwa hakuna beti ya awali ya PLAY: [1x] (${ante}) au [fold]\n  • [1x]: Weka beti ya ${ante} PLAY, uendelee hadi kwenye ushindani\n  • [fold]: Toa mkono, upoteze beti za ANTE na BLIND\n\n📋 SHOWDOWN:\n  • Kadi zote zitafichuliwa na kutathminiwa\n  • Mkono bora wa kadi 5 kutoka kwa kadi 7 (2 za shimo + 5 za jumuiya)\n  • Beti zitatatuliwa kulingana na sheria za malipo\n\n💎 MALIPO YA BETI:\n📊 BETI YA ANTE:\n  • Dealer hana uhalali: PUSH (beti iliyorejeshwa)\n  • Dealer ana uhalali na unashinda: malipo ya 1:1 (beti + ushindi)\n  • Dealer ana uhalali na unapoteza: Beti iliyopotea\n  • Shindano: PUSH (beti iliyorejeshwa)\n\n📊 BETI YA BLIND:\n  • Haiathiriwi na uhalali wa dealer\n  • Unashinda: Beti iliyorejeshwa na malipo ya ziada kulingana na nguvu ya mkono wako\n  • Unapoteza: Beti iliyopotea\n  • Shindano: PUSH (beti iliyorejeshwa)\n\n📊 MEZA YA MALIPO YA BLIND:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Chini ya Straight: Hakuna malipo ya ziada\n\n📊 BETI YA PLAY:\n  • Haiathiriwi na uhalali wa dealer\n  • Ulalinganisho wa moja kwa moja: Mkono wako bora dhidi ya mkono bora wa dealer\n  • Unashinda: malipo ya 1:1 (beti + ushindi)\n  • Unapoteza: Beti iliyopotea\n  • Shindano: PUSH (beti iliyorejeshwa)\n\n🎯 UAINISHAJI WA MIKONO YA POKER (Bora hadi Mbaya):\n  1. Royal Flush: A-K-Q-J-10 ya suti moja\n  2. Straight Flush: kadi 5 mfululizo za suti moja\n  3. Four of a Kind: kadi 4 za cheo kimoja\n  4. Full House: 3 za aina moja + 2 za aina moja\n  5. Flush: kadi 5 za suti moja\n  6. Straight: kadi 5 mfululizo\n  7. Three of a Kind: kadi 3 za cheo kimoja\n  8. Two Pair: jozi 2 za cheo tofauti\n  9. One Pair: kadi 2 za cheo kimoja\n  10. High Card: Kadi ya juu inashinda\n\n⌨️  AMRI ZA KITENDO:\n• [4x] au [play bet 4x]: Weka beti ya ${{self.ante_amount*4}} PLAY\n• [2x] au [play bet 2x]: Weka beti ya ${{self.ante_amount*2}} PLAY\n• [1x] au [play bet 1x]: Weka beti ya ${{self.ante_amount*1}} PLAY\n• [check] au [c]: Angalia (hakuna beti ya ziada)\n• [fold] au [f]: Kukunja (toa mkono)\n• [skip] au [s]: Ruka hadi hatua inayofuata (wakati hakuna kitendo kinachohitajika)\n\n💡 MAONI YA MKAKATI:\n• Mikono ya kuanzia yenye nguvu (jozi, kadi za juu) mara nyingi hukubalika kwa beti za 4x\n• Zingatia uhalali wa dealer - mikono dhaifu inaweza kubana ikiwa dealer hana uhalali\n• Beti ya BLIND inaweza kuwa faida kubwa na mikono yenye nguvu (Royal Flush = 500:1!)\n• Angalia kiasi cha chips chako! Ikiwa kitashuka hadi 0 au chini mwanzoni mwa mzunguko, utapoteza.\n\n⚠️  Kumbuka MUHIMU:\n• Beti za ANTE na BLIND ni lazima kila mzunguko\n• Beti za PLAY ni za hiari na za kimkakati\n• Hakikisha kuwa unaweka kitendo sahihi, na kitendo kimoja tu kwa wakati mmoja.\n\n",
+    "state": "🎯 MZUNGUKO {round}\n💰 Chips: {chips}\n🎴 Mkono wako: {hand}\n📊 Beti za sasa: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Hatua: {phase}\n🎯 Vitendo vinavyopatikana: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Round {round} imanza! Bets: ANTE ${ante}, BLIND ${blind}. Urike {chips} chips zisubili.",
+    "your_hand": " Ukuboko kwawe: {hand}",
+    "flop_revealed": " FLOP yerekanye: {cards}",
+    "river_revealed": " RIVER yahishuye: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Ibikorwa bidafise agaciro ku gice kiriho.Ibikorwa bihari: {available}",
+    "message": " Ibikorwa bidafise agaciro! Ibikenewe gukorwa: {available}"
+  },
+  "action": {
+    "folded": "🃏 Wawushije."
+  },
+  "showdown": {
+    "dealer_hand": " Kwerekana! Uruhande rw'uwutanga: {cards}",
+    "community_cards": "🃏 Karata za jumuiya: {cards}",
+    "player_best": "🎴 Mkono bora wa Mchezaji: {name} ({cards})",
+    "dealer_best": "🎴 Mkono bora wa Mwandishi: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (bisubiwemwo)",
+    "blind_lost_folded": " BET INKURU YACIWE! -${blind} (yasubiwemwo)",
+    "ante_won": "✅ Beti ya ANTE imeshinda! +${amount}",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} bagarutse",
+    "ante_lost": " ANTE bet LOST! -${ante}",
+    "blind_won": "✅ INTEGO Y'UMUTWARU WANZE! +${amount}",
+    "blind_pushed": " IBIGERANYO BITARATEGURA! ${blind} vyasubijwe inyuma.",
+    "blind_lost": " IBIGERANYO vy'amatora vyabaye! -${blind}",
+    "play_won": "✅ Malipo ya PLAY yatsinze! +${amount}",
+    "play_pushed": " Gukina bet PUSHED! ${play} bagarutse",
+    "play_lost": " Gukina bet BWA! -${play}",
+    "net_gain": "🎉 Raundi {round} imekwisha! Ushindi wa net: +${net}",
+    "net_loss": "💸 Mzunguko {round} umekamilika! Hasara ya jumla: ${net}",
+    "separator": "- - - mu gihe c'ubushomeri, igihe umuntu ari n'ivyo akeneye kugira ngo abeho."
+  },
+  "outcome": {
+    "game_over_win": "🏁 GAME OVER! {max_turns} rounds zimekwisha. Urike ${chips} chips - UWASHINDI!",
+    "game_over_lose": " UMUGEREKA W'INTAMBARA! Nta biceri mufise. Umudandaza aratsinda!",
+    "reward_win": "Mchezaji amemaliza {winner_rounds} rounds na ${chips} chips",
+    "reward_lose": "Umukinyi yarakoresheje chips mu gice {round}",
+    "reward_win_max": "Mchezaji amemaliza {max_turns} rounds na ${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "Umwobo w'umwami",
+    "straight_flush": "Umwobo ugororotse",
+    "four_of_a_kind": "Bane mu bwoko bumwe",
+    "full_house": "Umwanya wose w'ikoraniro",
+    "flush": "Kwuzura amazi",
+    "straight": "Ugororotse",
+    "three_of_a_kind": "Batatu mu bwoko bumwe",
+    "two_pair": "Imirwi ibiri y'abantu babiri",
+    "one_pair": "Umugwi umwe w'abantu babiri",
+    "high_card": "Agakarata k'inyuma",
+    "unknown": "Ikiganza kitazwi"
+  }
+}

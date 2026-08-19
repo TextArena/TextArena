@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Benvenuto in Lights Out! Hai una griglia di luci {size}x{size}.\nIl tuo obiettivo è spegnere TUTTE le luci (rappresentate da '.').\nQuando premi una luce, si attiva/disattiva essa stessa E i suoi vicini adiacenti (su/giù/sinistra/destra).\nDigita [row col] per premere una luce (indicizzata a 0, quindi il range valido è 0-{max_index}).\nHai fino a {max_turns} mosse per risolvere il puzzle.\nLegenda: 'O' = luce ACCESA, '.' = luce SPENTA"
+  },
+  "board": {
+    "current_state": "Stato attuale della griglia (Mossa {moves_made}, {moves_left} mosse rimanenti, {completion}% completato):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'azione deve essere nel formato [row col] dove row e col sono interi da 0 a {max_index}.",
+    "out_of_range": "Le coordinate devono essere tra 0 e {max_index}. Hai inserito [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Congratulazioni! Hai risolto il puzzle in {moves_used} mosse!",
+    "loss": "Game over! Hai utilizzato tutte le {max_turns} mosse senza risolvere il puzzle. Completamento finale: {completion}%\nStato finale:\n{grid}"
+  }
+}

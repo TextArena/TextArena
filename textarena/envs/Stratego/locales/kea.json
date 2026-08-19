@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Bu é Player {player_id} na Stratego.\nBu objetivu é captura bandeira di bu adversário ou elimina tudu bu peca móvel.\nBu exércitu ja foi kolokadu pa bu na tabuleiro, inklui bu bandeira, bombas, i outru peca di ranka variadu.\n\n### Instruções di Jogo\n1. **Regras di Movimentu:**\n   - Na bu vez, bu pode move un peca un paso pa un kuadrado adjacente (riba, baixo, esquerda, ou direita) ku ja é okupadu ku bu peca.\n   - Exemplu: Un peca pode move di A1 pa B1 ou A1 pa A2 si B1 i A2 não é okupadu ku peca di própio jogador.\n   - Si bu peca selezionadu é un bomba ou un bandeira, el não pode ser movidu.\n2. **Batalhas:**\n   - Si bu move pa un kuadrado okupadu ku un peca di adversário, então un batalha okorrerá:\n     - Peca ku ranka mais altu ganha i elimina peca di adversário.\n     - Si ranka é igual, ambos peca são removidu di tabuleiro.\n     - **Kazu Spesial:**\n       - Bombas eliminam maioria di peca atakante, eksepto Miner, ku desativa Bombas.\n       - Spies pode derrota Marshal si Spy ataka primeiro, mais perde pa tudu outru peca.\n3. **Objetivu Estratégiku:**\n   - Identifika peca di adversário través di movimentu i batalhas.\n   - Proteja bu bandeira enquanto tenta captura bandeira di adversário.\n   - Uza Scouts estrategikamente pa ganha informason sobri peca di adversário i ataka peca débil.\n\n### Komo Faze un Movimentu:\n1. Spesifika koordenada di peca ku bu ke move i destinu.\n2. Uza formatu: [A0 B0], onde A0 é pozisaun di orijin, i B0 é destinu.\n   - Exemplu: Pa move un peca di linha 0, koluna 0 pa linha 1, koluna 0, inputa [A0 B0].\n3. Garanti ku destinu é validu segundo regras di movimentu ariba.\n\n### Notas Importantes:\n- Tabuleiro mostrará bu peca i pozisaun, p.ex. MN, MS.\n- Tabuleiro mostrará pozisaun di peca di adversário sem revela ranka, p.ex. ?.\n- Grids ku ~ é lagu i não pode ser movidu pa.\n- Komo sugestão, inisia bu jogo movendo peca ku está na linha di frente pa ganha informason sobri peca di adversário. Jogador 0 i jogador 1 linha di frente é linha D i G respektivamente.\n\nEis tabuleiro aktual:\n"
+  },
+  "board": {
+    "current_board": "Tabuleiro Aktual:\n\n{board}\nMovimentu Disponível: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatu di ason invalidu. Jogu {player_id} ka inplementa un jogu na formatu [A0 B0] .",
+    "invalid_coordinates": "Formatu di ason invalidu. Jogador {player_id} ka inplementa koordenadas válidas.",
+    "not_own_piece": "Formatu di ason inválidu. Jogador {player_id} debe muda un di ses própi pezas.",
+    "scout_through_pieces": "Formatu di ason inválidu. Jogu {player_id} ka pode muda un spion pa otu pezas.",
+    "scout_diagonal": "Formatu di ason inválidu. Jogu {player_id} ka pode muda un skutador na diagonal.",
+    "non_scout_multi_square": "Formatu di ason invalidu. Tudu pezas, exetu espion-l ta muda un kuadru pur vez.",
+    "move_into_lake": "Formatu di ason inválidu. Jogador {player_id} ka pode muda pa laxu.",
+    "move_onto_own_piece": "Formatu di ason inválidu. Jogu {player_id} ka pode muda pa se própi pésa.",
+    "move_bomb_or_flag": "Formatu di ason inválidu. Jogu {player_id} ka pode muda un bomba ô bandera."
+  },
+  "game_action": {
+    "you_moved": "Bu moveu bu peca di {source} pa {dest}.",
+    "opponent_moved": "Jogador {player_id} moveu un peca di {source} pa {dest}.",
+    "you_equal_ranks": "Bu moveu bu peca di {source} pa {dest}. Peca atakante é {attacking_rank} i peca destinu é {target_rank}. Komo ranka é igual, ambos peca perderam.",
+    "opponent_equal_ranks": "Jogador {player_id} moveu un peca di {source} pa {dest}. Peca atakante é {attacking_rank} i peca destinu é {target_rank}. Komo ranka é igual, ambos peca perderam.",
+    "you_miner_defused": "Bu moveu bu peca di {source} pa {dest}. Peca atakante é {attacking_rank} i peca destinu é {target_rank}. Komo miner pode desativa bombas, bu ganhou batalha.",
+    "opponent_miner_defused": "Jogador {player_id} moveu un peca di {source} pa {dest}. Peca atakante é {attacking_rank} i peca destinu é {target_rank}. Komo miner pode desativa bombas, bu perdeu batalha.",
+    "you_bomb_lost": "Bu moveu bu peca di {source} pa {dest}. Peca atakante é {attacking_rank} i peca destinu é {target_rank}. Komo atakante não é miner, bu perdeu batalha.",
+    "opponent_bomb_won": "Jogador {player_id} moveu un peca di {source} pa {dest}. Peca atakante é {attacking_rank} i peca destinu é {target_rank}. Komo atakante não é miner, bu ganhou batalha.",
+    "you_spy_won": "Bu moveu bu peca di {source} pa {dest}. Peca atakante é {attacking_rank} i peca destinu é {target_rank}. Komo atakante é spy i destinu é marshall, bu ganhou batalha.",
+    "opponent_spy_lost": "Jogador {player_id} moveu un peca di {source} pa {dest}. Peca atakante é {attacking_rank} i peca destinu é {target_rank}. Komo atakante é spy i destinu é marshall, bu perdeu batalha.",
+    "you_higher_won": "Bu moveu bu peca di {source} pa {dest}. Peca atakante é {attacking_rank} i peca destinu é {target_rank}. Komo atakante é ranka mais altu ku destinu, bu ganhou batalha.",
+    "opponent_higher_lost": "Jogador {player_id} moveu un peca di {source} pa {dest}. Peca atakante é {attacking_rank} i peca destinu é {target_rank}. Komo atakante é ranka mais altu ku destinu, bu perdeu batalha.",
+    "you_lower_lost": "Bu moveu bu peca di {source} pa {dest}. Peca atakante é {attacking_rank} i peca destinu é {target_rank}. Komo atakante é ranka mais baixu ku destinu, bu perdeu batalha.",
+    "opponent_lower_won": "Jogador {player_id} moveu un peca di {source} pa {dest}. Peca atakante é {attacking_rank} i peca destinu é {target_rank}. Komo atakante é ranka mais baixu ku destinu, bu ganhou batalha."
+  },
+  "outcome": {
+    "flag_captured": "Jogu {player_id} dja kaptura bandera di oponenti!",
+    "no_movable_pieces": "Player {winner_id} wins! Player {loser_id} has no more movable pieces."
+  }
+}

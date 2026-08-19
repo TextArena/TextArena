@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "I ni Player {player_id} ye Negotiation Game la.\nI bɛna bɛɛ resources caman, a ni wale ka diɲɛ kɛlen kɔnɔ, i bɛna resources ɲinin kɛlen kɔnɔ.\nResources ani kɛlenw bɛɛ i bɛna sisan:\n\t+ {resource_value_list}\nKɔnɔ kɔnɔ, i bɛna i ka opponent kan ka wale ka trade offer kɛ.\nI bɛna special tokens wɛrɛw kan actions la:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': I bɛna incoming offer kɛ.\n  - '[Deny]': I bɛna incoming offer kɛ (default).\nJɛɲɛ bɛɛ {max_turns} kɔnɔ kɔnɔ."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Joueur b'a tagara ka taɲɛ ta ka kɛnɛ kɔnɔ, o bɛɛ ka diɲɛ tɛmɛnaw ta.",
+    "out_of_range": "Player {player_id}, Action kɛɛrɛɛ. Column {col} bɛɛ bɛɛ kɔnɔ.",
+    "already_full": "Jwèrè {player_id}, kɛlɛ kɔnɔ. Kolɔn {col} donna.",
+    "proposing_with_no_resource": "Joueur {player_id} b'a tagara ka taɲɛ ta ka kɛnɛ kɔnɔ, o bɛɛ ka diɲɛ tɛmɛnaw ta.",
+    "incorrect_offer_format": "Jagokɛla {player_id} ye jago kɛli waleya jira cogo fili la.",
+    "no_new_offer": "Jagokɛla {player_id} ma jago kura kɛ."
+  },
+  "offers": {
+    "reject": "Jalakɛla {player_id} banna jagoli waleyali la.",
+    "accept": "Jokelani {acceptor_id} ka daɲɛ kɔlɔsi a ye jokelani {proposer_id} la.",
+    "proposal": "Jokelani {player_id} ye jokelani {opponent_id} kɔ: Donkili ye: {offered} -> Donkili in bɛ se: {requested}"
+  },
+  "outcome": {
+    "win": "Joueur {winner_id} tagara k'a fɔɔta ka diɲɛ tɛmɛnaw ta ka kɛnɛ.",
+    "draw": "Yɛlɛma kelen bɛ kɛ fɛn marata hakɛ la ɲinan."
+  }
+}

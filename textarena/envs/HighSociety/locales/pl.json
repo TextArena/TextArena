@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w grze HighSociety (wersja dla 2 graczy).\nPrzebieg gry:  Dziesięć kart prestiżowych jest licytowanych jedna po drugiej.\nLicytacja:    W każdej licytacji, tajnie wybierz kartę pieniężną 1-11 i odkryj.\n            • Wyższa oferta wygrywa kartę prestiżową i odrzuca tę kartę pieniężną.\n            • Niższa oferta zachowuje swoją kartę pieniężną.\n            • Remis → obie oferty są zwracane i ta sama karta prestiżowa jest ponownie licytowana.\nPunktacja:    Po wszystkich dziesięciu licytacjach, dodaj **pozostałą gotówkę + punkty prestiżowe**.\n            Wyższa *wartość netto* wygrywa (dokładny remis → remis).\n\n**Składnia akcji**  →  licytuj jedną kartę, np. '[7]' lub '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Licytacja {round}/10  |  Karta prestiżowa: {prize}"
+  },
+  "board": {
+    "money_cards": "Twoje pozostałe karty pieniężne: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Musisz dołączyć dokładnie jedną kartę pieniężną [X].",
+    "card_not_held": "Nie masz już tej karty pieniężnej."
+  },
+  "message": {
+    "tie": "Remis - oferty zwrócone. Licytuj ponownie!",
+    "auction_result": "P0 zaoferował {bid0}, P1 zaoferował {bid1}. Gracz {winner} wygrywa prestiż {prize} (łącznie {total})."
+  },
+  "outcome": {
+    "p0_wins": "Wartość netto {nw0} > {nw1}",
+    "p1_wins": "Wartość netto {nw1} > {nw0}",
+    "draw": "Obie wartości netto {nw0} – dokładny remis."
+  }
+}

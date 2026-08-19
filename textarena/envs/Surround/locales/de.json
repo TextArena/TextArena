@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel, nur die Werte. Behalte jeden {platzhalter} exakt bei. Übersetze NICHT die Zug-/Richtungs-Token, die der Spieler eingibt ([up], [down], [left], [right], w, s, a, d), und auch nicht das ASCII-Brett in {board}.",
+  "_slots": {
+    "{num_players}": "Anzahl der Spieler in der Partie",
+    "{width}": "Brettbreite in Feldern",
+    "{height}": "Bretthöhe in Feldern",
+    "{player_id}": "Die Nummer eines Spielers (ab 0)",
+    "{board}": "Das gerenderte ASCII-Gitter; neutral lassen, Zeichen nie übersetzen",
+    "{reason}": "Der gerenderte Grund für das Spielende",
+    "{groups}": "Neutrale Ranglisten-Daten (Liste von Spieler-ID-Gruppen, beste bis schlechteste); nicht übersetzen"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Spieler-Surround auf einem {width}x{height}-Gitter.\nDu bist Spieler {player_id}. Gültige Züge: '[up]' '[down]' '[left]' '[right]' oder w/s/a/d.\nZiel: alle anderen überleben. Spuren sind tödlich; Wandtreffer töten; Frontalzusammenstöße töten beide."
+  },
+  "board": {
+    "current":     "Aktuelles Brett:\n{board}",
+    "after_moves": "Brett nach gleichzeitigen Zügen:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Spieler {player_id} starb durch einen ungültigen Zug."
+  },
+  "outcome": {
+    "survived_win": "Spieler {player_id} überlebte; alle anderen sind verunglückt.",
+    "all_crashed":  "Alle Spieler sind gleichzeitig verunglückt.",
+    "outlived":     "Spieler überlebte alle anderen.",
+    "all_dead":     "Alle Spieler sind tot.",
+    "turn_limit":   "Zuglimit erreicht - der Spieler mit der längsten Überlebenszeit gewinnt.",
+    "ranking":      "{reason} Rangliste (beste→schlechteste): {groups}"
+  }
+}

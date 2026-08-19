@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Sidae Player {player_id} ri Quantum Tic Tac Toe.\nSimbolu'mu '{symbol}', siagai nomoro giliranmu salare {parity} (mis., X1, X3 atawa O2, O4).\n\nTujuan: Menang ngasi membentuk garis tiga tanda klasik (mengeras dari superposisi).\n\nCara Main:\n- Ri setiap giliran, taruh tanda spooky ri dua kotak kosong beda menggunakan format '[a,b]'.\n- Tanda-tanda ini terjerat, siagai label 'X1 / X1' atawa 'O4 / O4'.\n- Sidae tidak bisa taruh tanda spooky ri kotak yang sudah mengeras (mengeras).\n\nAturan Runtuh:\n- Jika giliranmu menciptakan siklus ri grafik jeratan, maka runtuh secara otomatis.\n- Setiap tanda spooky ri siklus berubah menjadi tanda klasik ri salah satu posisinya.\n- Tanda spooky yang tergantung juga runtuh.\n\nKemenangan:\n- Permainan berakhir ketika pemain memiliki tiga tanda klasik berurutan.\n- Jika kedua pemain mendapatkan garis selama runtuh yang sama, maka pemain dengan nomor giliran maksimum lebih rendah menang.\n\nContoh giliran: '[0,4]' taruh tanda spooky ri sel 0 dan 4."
+  },
+  "board": {
+    "current_board": "Papan Quantum Tic Tac Toe:\n\n{board}\n\nKirim giliranmu sebagai '[a,b]' untuk taruh tanda kuantum ri dua lokasi."
+  },
+  "invalid_move": {
+    "wrong_format": "Format de'na valid. Pakkegunai '[a,b]'.",
+    "invalid_cells": "Indeks sel de'na valid iyarega duplikat.",
+    "already_solidified": "Sala seddi sel'e pura matedde."
+  },
+  "game_action": {
+    "placed": "Pemain {player_id} taruh simbolnya ri superposisi antara sel {pos_a} siyo {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposisi tergantung diselesaikan. Sel ({r}, {c}) sekarang {symbol}.",
+    "last_cell_resolved": "Superposisi untuk sel terakhir diselesaikan. Sel ({r}, {c}) sekarang {symbol}.",
+    "superposition_resolved": "Superposisi diselesaikan. Sel ({r}, {c}) sekarang {symbol}."
+  },
+  "outcome": {
+    "win": "Pemain {player_id} menang dengan tanda mengeras!",
+    "draw": "Pelengenna padai!"
+  }
+}

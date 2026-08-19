@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in una partita di HighSociety (versione a 2 giocatori).\nFlusso del gioco: Dieci carte di prestigio vengono messe all'asta una dopo l'altra.\nOfferta: Ogni asta, scegli segretamente una carta di denaro da 1 a 11 e rivela.\n• L'offerta più alta vince la carta di prestigio e scarta quella carta di denaro.\n• L'offerta più bassa mantiene la carta di denaro.\n• Pareggio → entrambe le offerte vengono restituite e la stessa carta di prestigio viene rimessa all'asta.\nPunteggio: Dopo tutte e dieci le aste, aggiungi **denaro rimanente + punti di prestigio**.\n• Il *patrimonio netto* più alto vince (pareggio esatto → pareggio).\n\n**Sintassi dell'azione** → offri una singola carta come '[7]' o '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Asta {round}/10  |  Carta di prestigio: {prize}"
+  },
+  "board": {
+    "money_cards": "Le tue carte di denaro rimanenti: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Deve includere esattamente una carta di denaro [X].",
+    "card_not_held": "Non hai più quella carta di denaro."
+  },
+  "message": {
+    "tie": "Pareggio - offerte restituite. Rilancia!",
+    "auction_result": "P0 ha offerto {bid0}, P1 ha offerto {bid1}. Il giocatore {winner} vince il prestigio {prize} (totale {total})."
+  },
+  "outcome": {
+    "p0_wins": "Patrimonio netto {nw0} > {nw1}",
+    "p1_wins": "Patrimonio netto {nw1} > {nw0}",
+    "draw": "Entrambi i patrimoni netti {nw0} – pareggio esatto."
+  }
+}

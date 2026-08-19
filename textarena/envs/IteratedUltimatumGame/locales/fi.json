@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame-lokaalitiedosto. ÄLÄ käännä avaimia (vasen puoli). Käännä vain arvot (oikea puoli).",
+  "_slots": {
+    "{player_id}": "Pelaajan numero, 0 tai 1",
+    "{other_id}": "Toisen pelaajan numero, 1 tai 0",
+    "{num_rounds}": "Kierrosten kokonaismäärä",
+    "{pool}": "Käytettävissä oleva rahamäärä kierroksella (numero)",
+    "{round_number}": "Nykyinen kierrosnumero",
+    "{proposer_id}": "Ehdottajan pelaajan numero, 0 tai 1",
+    "{responder_id}": "Vastaajan pelaajan numero, 0 tai 1",
+    "{offer}": "Tarjottu määrä (numero)",
+    "{keep}": "Ehdottajan pitämä määrä (numero)",
+    "{proposer_gain}": "Raha, jonka ehdottaja sai tässä kierroksessa (numero)",
+    "{responder_gain}": "Raha, jonka vastaaja sai tässä kierroksessa (numero)",
+    "{total_0}": "Pelaajan 0 kertynyt kokonaismäärä (numero)",
+    "{total_1}": "Pelaajan 1 kertynyt kokonaismäärä (numero)",
+    "{winner}": "Voittavan pelaajan numero",
+    "{loser}": "Häviävän pelaajan numero",
+    "{winner_total}": "Voittajan kokonaisraha (numero)",
+    "{loser_total}": "Häviäjän kokonaisraha (numero)",
+    "{total}": "Kummankin pelaajan tasapeliin päättyvä kokonaismäärä (numero)"
+  },
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id}, pelaat {num_rounds} kierrosta Iterated Ultimatum Game -peliä.\nSinulla on ${pool} jakaa tällä kierroksella itsesi ja Pelaajan {other_id} välillä.\n\nEhdottaja:\n  - Tee tarjous: [Offer: $X] (0 <= X <= pool)\n  - Jos hyväksytään → Saat $(pool - X), toinen pelaaja saa $X\n  - Jos hylätään → Molemmat saavat $0\n  - Esimerkki: [Offer: $3]  tai  'Luulen, että tämä on reilua. [Offer: $5]'\n\nVastaaja:\n  - Päätä tarjouksesta joko [Accept] tai [Reject]\n  - Esimerkki: 'Tämä vaikuttaa kohtuulliselta. [Accept]'\n            'Liian epäreilua. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Kierros {round_number} alkaa! ---\nPelaaja {proposer_id} on ehdottaja, Pelaaja {responder_id} on vastaaja.",
+    "offer": "Kierros {round_number}: Pelaaja {proposer_id} tarjoaa ${offer} Pelaajalle {responder_id} (pitäen ${keep}).",
+    "accepted": "Pelaaja {responder_id} hyväksyi! Kierros {round_number} voitot: Pelaaja {proposer_id} +${proposer_gain}, Pelaaja {responder_id} +${responder_gain}. Uudet kokonaismäärät: Pelaaja 0: ${total_0}, Pelaaja 1: ${total_1}.",
+    "rejected": "Pelaaja {responder_id} hylkäsi tarjouksen! Kierros {round_number} voitot: Molemmat pelaajat +$0. Kokonaismäärät pysyvät: Pelaaja 0: ${total_0}, Pelaaja 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Ehdottajan on tehtävä tarjous käyttäen muotoa [Offer: $X].",
+    "bad_integer": "Tarjousmäärän on oltava kelvollinen kokonaisluku.",
+    "out_of_range": "Tarjous on oltava välillä $0 ja ${pool}.",
+    "no_current_offer": "Ei ole nykyistä tarjousta, johon vastata.",
+    "accept_or_reject": "Vastaajan on joko [Accept] tai [Reject] tarjous."
+  },
+  "outcome": {
+    "win": "Pelaaja {winner} voitti ${winner_total} kokonaismäärällä vs Pelaajan {loser} ${loser_total}.",
+    "draw": "Tasapeli! Molemmat pelaajat päättyivät ${total} kokonaismäärällä."
+  }
+}

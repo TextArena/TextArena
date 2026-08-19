@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Oled mängija {player_id} Nimi mängus.\nSinu eesmärk on võtta viimane allesjäänud ese.\nIgal käigul vali täpselt üks kuhja ja eemalda sealt üks või mitu eset.\nKasuta vormingut '[kuhja kogus]', kus kuhja on kuhja indeks ja kogus on eemaldatavate esemete arv.\nNäiteks, '[0 3]' eemaldab 3 eset kuhjast 0."
+  },
+  "state": {
+    "current_pile": "Praegune kuhja:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ei leitud kehtivat käigu vormingut. Kasuta '[kuhja kogus]'.",
+    "correct_format_wrong_fields": "Mängija {player_id}, Vigane tegevus. Veerg {col} on väljaspool piire.",
+    "out_of_range": "Kuhja indeks {pile_index} on väljaspool vahemikku.",
+    "non_positive": "Tuleb eemaldada vähemalt 1 ese.",
+    "exceeds_pile": "Ei saa eemaldada {quantity} eset kuhjast {pile_index} (on alles vaid {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "Mängija {player_id} tegi käigu [{pile_index} {quantity}], eemaldades {quantity} ese(t) kuhjast {pile_index}."
+  },
+  "outcome": {
+    "win": "Mängija {player_id} võttis viimase ese(d)!"
+  }
+}

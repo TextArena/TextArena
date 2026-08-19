@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} og spiller {colour} ({piece}) i et spil Othello.\nDit mål er at have flere brikker af din farve på brættet ved spillets afslutning.\nPå din tur skal du placere en brik således, at den flankerer en eller flere af modstanderens brikker - i enhver retning (vandret, lodret eller diagonalt) - mellem din nye brik og en anden af dine eksisterende brikker. Alle flankerede modstanderbrikker vil blive vendt til din farve.\nAngiv dit træk i formatet '[række, kolonne]'."
+  },
+  "board": {
+    "game_board": "Spilbræt:\n{board}",
+    "valid_moves": "{observation}\nGyldige træk: {moves}",
+    "no_valid_moves_reset": "{observation}\nIngen gyldige træk - du måske skal springe over.",
+    "no_valid_moves_step": "{observation}\nIngen gyldige træk – du måske skal springe over.",
+    "scores_reset": "{observation}\nAktuelle resultater - Sort: {black_count}, Hvid: {white_count}\n",
+    "scores_step": "{observation}\nResultater - Sort: {black_count}, Hvid: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Trækket skal være på formen [række, kolonne].",
+    "illegal": "Ugyldigt træk. Gyldige træk: {valid}"
+  },
+  "game_action": {
+    "skipped": "Spiller {pid} måtte springe over deres tur",
+    "played": "Spiller {pid} ({piece}) spillede [{r}, {c}] og vendte {flipped} brik(ke)"
+  },
+  "game_message": {
+    "must_skip": "Spiller {pid} ({piece}) har ingen gyldige træk og må springe over."
+  },
+  "outcome": {
+    "black_wins": "Sort vinder {black_count}-{white_count}.",
+    "white_wins": "Hvid vinder {white_count}-{black_count}.",
+    "draw": "Uafgjort {black_count}-{white_count}."
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "ఆట ప్రారంభమవుతుంది. ట్రంప్ సూట్: {trump_suit} (ట్రంప్ కార్డు: {trump_str}).",
+    "no_trump_card": "ఏదీ లేదు"
+  },
+  "player_prompt": {
+    "intro": "మీరు జర్మన్ విస్ట్ లో ఆటగాడు {player_id}. {phase_info} మీరు {hand_size} కార్డులను కలిగి ఉంటారు. '[play N]' తో కార్డును ప్లే చేయండి, ఇక్కడ N మీ చేతిలో దాని స్థానం (ఉదాహరణకు '[play 3]').",
+    "phase_learning": "నేర్చుకునే దశ: ప్రతి ట్రిక్ విజేత ముఖం పైకి కార్డు తీసుకుంటాడు మరియు ఓడిపోయిన డెక్ నుండి తదుపరి కార్డును గీస్తాడు. ఈ దశలో గెలిచిన ట్రిక్స్ విజయం కోసం లెక్కించబడవు.",
+    "phase_playing": "ఆట దశ: డెక్ అయిపోయింది. ఇప్పటి నుండి ప్రతి ట్రిక్ విజయం కోసం లెక్కించబడుతుంది."
+  },
+  "next_card": {
+    "playing_phase": "ఏ కార్డును అందించలేదు - ఆట దశ ప్రారంభమైంది.",
+    "deck_empty": "డెక్ ఖాళీగా ఉంది - ఏ కార్డు అందించబడలేదు.",
+    "available": "కార్డు ఆఫర్: {card}",
+    "available_trump": "{card} (ట్రంప్)"
+  },
+  "invalid_move": {
+    "wrong_format": "చెల్లని తరలింపు ఫార్మాట్. మీ చేతిలో ఉన్న Nth కార్డును ఆడటానికి '[play N]' ఉపయోగించండి.",
+    "bad_position": "ఆ కార్డు స్థానం లేదు. మీరు {hand_size} కార్డులను కలిగి ఉన్నారు.",
+    "must_follow_suit": "మీరు కూడా ఆ విధంగా చేయాలి మరియు {lead_suit} కార్డును ఆడాలి.",
+    "invalid_play": "ఆ కార్డును ఆడలేము."
+  },
+  "game_action": {
+    "played": "ఆటగాడు {player_id} {card} ఆడాడు."
+  },
+  "trick": {
+    "won": "{winner_id} ఆటగాడు {card} తో ట్రిక్ గెలుస్తాడు.",
+    "won_learning": "{winner_id} ఆటగాడు {card}తో ట్రిక్ గెలుస్తాడు మరియు ముఖం పైకి కార్డు తీసుకుంటాడు."
+  },
+  "phase": {
+    "learning_complete": "డెక్ అయిపోయింది. నేర్చుకునే దశ ముగిసింది - ప్రతి మిగిలిన ట్రిక్ విజయం కోసం లెక్కించబడుతుంది."
+  },
+  "draw": {
+    "winner_received": "మీరు ట్రిక్ గెలిచారు మరియు {card} అందుకున్నారు.",
+    "loser_received": "మీరు ట్రిక్ కోల్పోయారు మరియు డెక్ నుండి {card} ను డ్రా చేసారు.",
+    "winner_preview": "తదుపరి కార్డు {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "ఇప్పటివరకు గెలిచిన ట్రిక్స్ - ప్లేయర్ 0: {tricks0}, ప్లేయర్ 1: {tricks1}",
+    "scores_playing": "స్కోరింగ్ ట్రిక్స్ - ప్లేయర్ 0: {tricks0}, ప్లేయర్ 1: {tricks1}",
+    "phase": "దశ: {phase}",
+    "phase_learning": "దశ: {phase} ({remaining_cards} డెక్లో మిగిలి ఉన్న కార్డులు)"
+  },
+  "hand": {
+    "no_cards": "కార్డులు లేవు",
+    "no_cards_in_hand": "చేతిలో కార్డులు లేవు",
+    "header": "మీ చేతి:",
+    "trump_indicator": "(ట్రంప్)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "ఇంకా ఈ ట్రిక్ ఏ కార్డులు ఆడాడు.",
+    "header": "ప్రస్తుత ట్రిక్:",
+    "trump_indicator": "(ట్రంప్)",
+    "card_line": "{observation} ఆటగాడు {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "ఆట ప్రారంభించబడలేదు",
+    "header": "=== జర్మన్ విస్ట్ గేమ్ ===",
+    "phase": "{observation} దశ: {phase}",
+    "trump_suit": "{observation} ట్రంప్ దావా: {trump_suit}",
+    "trump_card": "{observation} ట్రంప్ కార్డు: {card}",
+    "cards_left": "{observation} డెక్లో మిగిలి ఉన్న కార్డులు: {count}",
+    "next_card": "{observation} విజేతకు తదుపరి కార్డు: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} ప్రస్తుత ట్రిక్:",
+    "trump_indicator": "(ట్రంప్)",
+    "trick_line": "{observation} ఆటగాడు {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} ఆటగాడు {player_id}: {scoring} స్కోరింగ్ ట్రిక్స్ ({tricks} మొత్తం), {hand_size} కార్డులు చేతిలో"
+  },
+  "outcome": {
+    "summary": "నేర్చుకునే దశ - ఆటగాడు 0: {l0}, ఆటగాడు 1: {l1}. ఆడే దశ - ఆటగాడు 0: {p0}, ఆటగాడు 1: {p1}. ఆటగాడు {winner_id} {winner_tricks} స్కోరింగ్ ట్రిక్స్ తో గెలుస్తాడు!"
+  }
+}

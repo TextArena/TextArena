@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Һеҙ Klondike Solitaire уйынын уйнайһығыҙ. Һеҙҙең маҡсаты - бөтә карталарҙы нигеҙ өйөмдәренә күсереү.\n\nУйын ҡағиҙәләре:\n- Нигеҙ өйөмдәре (F1-F4): Масть буйынса Ace-тан King-ға тиклем төҙөлә\n- Өйөмдәр (T1-T7): Төҫтәрҙе алмаштырып, түбәнәйә (ҡыҙыл ҡара өҫтөнә, ҡара ҡыҙыл өҫтөнә)\n- Өйөм: Ҡалдыҡ өйөмөнә карталарҙы тарта\n- Ҡалдыҡ (W): Өҫкө карта уйын өсөн ҡулланыла\n\nКомандалар:\n- 'draw' - Өйөмдән ҡалдыҡ өйөмөнә карталарҙы тарта\n- 'move <source> <destination> [count]' - Өйөмдәр араһында карталарҙы күсерә\n  Миҫалдар: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count шулай уҡ 'all' булырға мөмкин, ул бөтә асыҡ карталарҙы күсереүгә тырышыр.\n- 'forfeit' - Уйынды шунда уҡ тамамла һәм хәҙерге иҫәпте нығыта\n- Өйөмдәрҙең исемдәре: W (ҡалдыҡ), F1-F4 (нигеҙҙәр), T1-T7 (өйөмдәр)\n\nҺеҙ бер йөрөүҙә күп ғәмәлдәрҙе өткәрергә мөмкин, уларҙы апострофтар менән айырып:\n  Миҫал: 'draw, move W T1, move T2 F1'\n\nТик корольдар буш өйөмдәргә ҡуйыла.\nҒәмәлдәр тәртип буйынса башҡарыла - береһе уңышһыҙ булһа, ҡалған ғәмәлдәр ҡалдырыла.\nУйынды еңеп булмаҫ тип иҫәпләһәгеҙ, 'forfeit' ҡулланығыҙ."
+  },
+  "format_error": {
+    "no_brackets": "Эш форматы дөрөҫ түгел. Эштәр икәүләшеп яҙылырға тейеш.",
+    "no_closing_bracket": "Ғәмәлдә булмаған формат. Ябылыу ҡыҫҡартмаһы юҡ \"]\"",
+    "empty_command": "Буш команда. 'draw' йәки 'move <source> <destination> [count]' тип яҙығыҙ",
+    "empty_action": "Буш эш итеү",
+    "move_needs_args": "Күсер командаһы сығанаҡ һәм тәғәйенләнеште талап итә. Ҡулланыу: \"move <source> <destination> [count]\"",
+    "count_positive": "Һанатлыҡ иҫәп булырға тейеш, йәки 'all'",
+    "count_invalid": "Һан дөрөҫ түгел. Һан йәки 'all' ҡулланығыҙ",
+    "unknown_command": "Билдәһеҙ команда '{cmd}'. 'draw', 'move <source> <destination> [count]', йәки 'forfeit' командаларын ҡулланығыҙ",
+    "wrapped": "Хәрәкәт {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Хәрәкәт {n}: {msg}",
+    "before_failure": "Эшләнгән {n} эш (ләр) уңышһыҙлыҡҡа осрағанға тиклем.",
+    "failed": "Хәрәкәт {n} уңышһыҙ булды: {msg}"
+  },
+  "move_result": {
+    "drew": "Карталарҙы запастан ташландыҡҡа әйләндерә.",
+    "cannot_draw": "Аҡсаны сығара алмайбыҙ. Баҫыу һәм ҡалдыҡтар ҙа буш торалар.",
+    "invalid_pile": "Баҫманың исеме дөрөҫ түгел. W, F1-F4 йәки T1-T7 ҡулланығыҙ",
+    "foundation_one_card": "Фондҡа 1 генә картаны күсереп була.",
+    "waste_to_foundation_ok": "Ҡалдыҡтарҙан фондҡа күсерелгән карта F{dst}",
+    "waste_to_foundation_bad": "Ҡалдыҡ картаны нигеҙ тауына күсереп булмай.",
+    "tableau_to_foundation_ok": "Таблицанан Ф{dst} нигеҙенә күсерелгән карта T{src}",
+    "tableau_to_foundation_bad": "Таҡтаны нигеҙ тауына күсереп булмай .",
+    "foundation_to_foundation": "Фондтан фондҡа күсә алмай.",
+    "waste_to_tableau_one_card": "Ҡалдыҡтан табельгә 1 генә карта күсереп була.",
+    "waste_to_tableau_ok": "Ҡалдыҡтарҙан Т{dst} таблицаһына күсерелгән карта.",
+    "waste_to_tableau_bad": "Ҡалдыҡ картаны таблица өмәһенә ҡуйырға ярамай.",
+    "no_face_up": "Йөҙө асыҡ карталар күсермәй.",
+    "tableau_to_tableau_ok": "Табло T{src} тәҙ T{dst} таблоға {count} карта(лар)ын күсерҙе",
+    "tableau_to_tableau_bad": "T{src} тәҙ Т{dst} таблоға {count} карта(лар)ын күсереү мөмкин түгел",
+    "foundation_to_tableau_one_card": "Фондтан табельгә 1 генә карта күсереп була.",
+    "foundation_empty": "Фонд F{src} буш тора.",
+    "foundation_to_tableau_ok": "Фондтан Т{dst} таблицаһына күсерелгән карта F{src}",
+    "foundation_to_tableau_bad": "Таблицаға нигеҙ картаһын урынлаштыра алмай T{dst}",
+    "to_waste_or_stock": "Ҡалдыҡтар йәки запасҡа күсереп булмай."
+  },
+  "outcome": {
+    "forfeit": "Уйынды юғалталар. Аҙаҡҡы һөҙөмтә: {score} нигеҙҙәрҙәге карталары.",
+    "won": "Ҡотлайым! Һеҙ Клондайк пасьянсында еңдегеҙ!",
+    "turn_limit": "Уйын тамам! Һеҙ maksималь рөхсәт ителгән {max_turns} хәрәкәтте үтәнең. Балл: {score} карта(лар) нигеҙҙә"
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Хәрәкәт: {turn}/{max_turns}",
+    "stock": "Карталар: {stock} карталары",
+    "waste": "Ҡалдыҡтар (W): {waste}",
+    "foundations_header": "Нигеҙҙәре:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Таблица:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

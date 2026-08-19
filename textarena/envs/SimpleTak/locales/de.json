@@ -1,0 +1,20 @@
+{
+    "player_prompt": {
+      "intro": "Du bist Spieler {player_id} in SimpleTak.\nAuf dem Brett erscheinen deine Steine als '{player_stone}' und die Steine deines Gegners als '{opponent_stone}'.\n\nWenn du am Zug bist, wähle ein leeres Feld anhand seiner nummerierten Position und platziere dort deinen Stein.\nZum Beispiel platziert '[12]' deinen Stein auf Feld 12.\n\nDein Ziel ist es, einen zusammenhängenden Pfad aus deinen Steinen zu bilden, der zwei gegenüberliegende Ränder des Bretts verbindet, entweder von oben nach unten oder von links nach rechts."
+    },
+    "invalid_move": {
+      "invalid_move_format": "Ungültiges Zugformat",
+      "cell_out_of_range": "Ungültige Feldnummer {cell_num}. Sie muss zwischen 0 und {max_board_num} liegen.",
+      "cell_already_occupied": "Feld {cell_num} ist bereits besetzt. Wähle ein leeres Feld."
+    },
+    "board": {
+      "current_state": "Aktueller Spielstand:\n\n{rendered_board}\nVerfügbare Züge: {available_moves}"
+    },
+    "action": {
+      "placement": "Spieler {current_player_id} hat sein Symbol ({symbol}) auf Feld {cell_num} platziert."
+    },
+    "outcome": {
+      "winner": "Spieler {current_player_id} ('{symbol}') hat zwei gegenüberliegende Ränder verbunden!",
+      "draw": "Das Brett ist voll. Es ist ein Unentschieden!"
+    }
+  }

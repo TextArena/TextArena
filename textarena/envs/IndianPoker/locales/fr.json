@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le Joueur {player_id} dans une partie d'Indian Poker.\n- Jeu de 52 cartes ; vous ne voyez que la carte de l'adversaire.\n- Mise initiale de {ante} jeton(s) à chaque manche, pour un total de {max_rounds} manche(s).\n- Coups valides : '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X est un entier positif <= à votre nombre de jetons.)\n- La carte cachée la plus élevée remporte le pot lors de l'abattage.\n"
+  },
+  "round": {
+    "announce": "### Manche {current_round}/{max_rounds}\nLa carte de votre adversaire est : {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Fournissez exactement UNE action entre crochets, par ex. '[check]', '[bet 2]', '[call]', '[raise 3]' ou '[fold]'.",
+    "cannot_check": "Impossible d'utiliser [check] - vous faites face à une mise.",
+    "amount_min": "Le montant du Bet / Raise doit être ≥ 1.",
+    "cannot_bet": "Impossible d'utiliser [bet] - vous devez utiliser [call] / [raise] / [fold].",
+    "nothing_to_call": "Il n'y a rien à suivre ; vous pouvez utiliser [check] à la place.",
+    "no_bet_to_raise": "Utilisez [bet X] pour ouvrir ; aucune mise ne peut être relancée.",
+    "insufficient": "Jetons insuffisants pour cette action."
+  },
+  "game_action": {
+    "action": "Joueur {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (coût {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Vos actions possibles : {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Joueur {winner}. (Réserves P0:{p0}, P1:{p1})",
+    "folded": "Le Joueur {player_id} s'est couché.",
+    "showdown_win": "Abattage : {card_win} bat {card_lose}.",
+    "showdown_tie": "Égalité à l'abattage : les deux ont {card}. Le pot est partagé – chacun reçoit {split}."
+  },
+  "outcome": {
+    "p0_wins": "Le Joueur 0 gagne ({bank0} > {bank1})",
+    "p1_wins": "Le Joueur 1 gagne ({bank1} > {bank0})",
+    "draw": "Nombre égal de jetons après toutes les manches"
+  }
+}

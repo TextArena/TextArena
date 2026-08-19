@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in Chopsticks. Nel tuo turno, scegli una delle seguenti opzioni:\n  + Attacco: '[attack M O]' dove M=la tua mano (0 o 1), O=la mano dell'avversario (0 o 1).\n    - Il conteggio della mano dell'avversario aumenta della tua mano; se >=5, diventa 0.\n  + Divisione: '[split L R]' per ridistribuire il totale delle tue dita in L e R (L+R = il tuo totale).\nRispondi con esattamente uno di questi comandi."
+  },
+  "board": {
+    "current_board": "Tavola attuale:\nGiocatore 0: {hands_0}\nGiocatore 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "La tua mano {my_idx} è morta.",
+    "opp_hand_dead": "La mano dell'avversario {opp_idx} è già morta.",
+    "split_sum": "La divisione deve sommare a {total}.",
+    "split_no_change": "La divisione deve cambiare la distribuzione delle tue mani.",
+    "invalid_command": "Mossa non valida. Utilizza “[attack M O]” o “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} attacca la mano {opp_idx} di P{opp_id}: passa da {opp_val} a {new_val}.",
+    "split": "P{player_id} si divide in [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Entrambe le mani dell'avversario sono morte.",
+    "draw": "È stato raggiunto il limite di turni."
+  }
+}

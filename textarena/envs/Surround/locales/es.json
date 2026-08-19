@@ -1,0 +1,30 @@
+{
+  "_comment": "Archivo de idioma de Surround en español. NO traduzcas las claves, solo los valores. Conserva cada {marcador} exactamente igual. NO traduzcas los tokens de movimiento/dirección que escribe el jugador ([up], [down], [left], [right], w, s, a, d) ni el tablero ASCII en {board}.",
+  "_slots": {
+    "{num_players}": "Número de jugadores en la partida",
+    "{width}": "Ancho del tablero en celdas",
+    "{height}": "Alto del tablero en celdas",
+    "{player_id}": "El número de un jugador (desde 0)",
+    "{board}": "La cuadrícula ASCII renderizada; mantener neutral, nunca traducir sus caracteres",
+    "{reason}": "La frase renderizada del motivo del fin de la partida",
+    "{groups}": "Datos neutrales de clasificación (lista de grupos de ID de jugador, del mejor al peor); no traducir"
+  },
+  "player_prompt": {
+    "intro": "Surround de {num_players} jugadores en una cuadrícula de {width}x{height}.\nEres el jugador {player_id}. Movimientos válidos: '[up]' '[down]' '[left]' '[right]' o w/s/a/d.\nObjetivo: sobrevivir más que los demás. Los rastros son mortales; chocar contra el muro mata; los choques frontales matan a ambos."
+  },
+  "board": {
+    "current":     "Tablero actual:\n{board}",
+    "after_moves": "Tablero tras los movimientos simultáneos:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "El jugador {player_id} murió por un movimiento no válido."
+  },
+  "outcome": {
+    "survived_win": "El jugador {player_id} sobrevivió; todos los demás se estrellaron.",
+    "all_crashed":  "Todos los jugadores se estrellaron simultáneamente.",
+    "outlived":     "El jugador sobrevivió a todos los demás.",
+    "all_dead":     "Todos los jugadores han muerto.",
+    "turn_limit":   "Límite de turnos alcanzado: gana quien sobrevivió más tiempo.",
+    "ranking":      "{reason} Grupos de clasificación (mejor→peor): {groups}"
+  }
+}

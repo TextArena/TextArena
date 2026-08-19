@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "¡Bienvenido a Lights Out! Tienes una cuadrícula de luces de {size}×{size}.\nTu objetivo es APAGAR todas las luces (representadas por '.').\nCuando pulsas una luz, cambia su estado Y el de sus vecinas adyacentes (arriba/abajo/izquierda/derecha).\nEscribe [row col] para pulsar una luz (los índices comienzan en 0, por lo que el rango válido es 0-{max_index}).\nTienes hasta {max_turns} movimientos para resolver el rompecabezas.\nLeyenda: 'O' = luz ENCENDIDA, '.' = luz APAGADA"
+  },
+  "board": {
+    "current_state": "Estado actual de la cuadrícula (Movimiento {moves_made}, quedan {moves_left} movimientos, {completion}% completado):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "La acción debe tener el formato [row col], donde row y col son números enteros entre 0 y {max_index}.",
+    "out_of_range": "Las coordenadas deben estar entre 0 y {max_index}. Introdujiste [{row},{col}]."
+  },
+  "outcome": {
+    "win": "¡Felicidades! ¡Resolviste el rompecabezas en {moves_used} movimientos!",
+    "loss": "¡Fin de la partida! Usaste los {max_turns} movimientos sin resolver el rompecabezas. Progreso final: {completion}%\nEstado final:\n{grid}"
+  }
+}

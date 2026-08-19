@@ -1,0 +1,2543 @@
+{
+  "deck_runs_out": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "The deck has run out.",
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "The deck has run out.",
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a red card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a white card with rank 4\n\tcard 1: a white card with rank 1\n\tcard 2: a yellow card with rank 5\n\tcard 3: a yellow card with rank 4\n\tcard 4: a red card with rank 4\n\nDiscards: The following cards have been discarded:\na red card with rank 1\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a red card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a yellow card with rank 3. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 1\n\tcard 1: a white card with rank 4\n\tcard 2: a red card with rank 1\n\tcard 3: a white card with rank 3\n\tcard 4: a blue card with rank 3\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a yellow card with rank 3. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a white card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a white card with rank 1\n\tcard 1: a yellow card with rank 5\n\tcard 2: a yellow card with rank 4\n\tcard 3: a red card with rank 4\n\tcard 4: a white card with rank 2\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a white card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a yellow card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a white card with rank 4\n\tcard 1: a red card with rank 1\n\tcard 2: a white card with rank 3\n\tcard 3: a blue card with rank 3\n\tcard 4: a white card with rank 1\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a yellow card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a white card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a yellow card with rank 5\n\tcard 1: a yellow card with rank 4\n\tcard 2: a red card with rank 4\n\tcard 3: a white card with rank 2\n\tcard 4: a yellow card with rank 1\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a white card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a white card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a red card with rank 1\n\tcard 1: a white card with rank 3\n\tcard 2: a blue card with rank 3\n\tcard 3: a white card with rank 1\n\tcard 4: a green card with rank 2\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a white card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a yellow card with rank 5. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a yellow card with rank 4\n\tcard 1: a red card with rank 4\n\tcard 2: a white card with rank 2\n\tcard 3: a yellow card with rank 1\n\tcard 4: a green card with rank 3\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a yellow card with rank 5. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a red card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a white card with rank 3\n\tcard 1: a blue card with rank 3\n\tcard 2: a white card with rank 1\n\tcard 3: a green card with rank 2\n\tcard 4: a red card with rank 5\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a red card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a yellow card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a red card with rank 4\n\tcard 1: a white card with rank 2\n\tcard 2: a yellow card with rank 1\n\tcard 3: a green card with rank 3\n\tcard 4: a white card with rank 2\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a yellow card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a white card with rank 3. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a blue card with rank 3\n\tcard 1: a white card with rank 1\n\tcard 2: a green card with rank 2\n\tcard 3: a red card with rank 5\n\tcard 4: a blue card with rank 1\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a white card with rank 3. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a red card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a white card with rank 2\n\tcard 1: a yellow card with rank 1\n\tcard 2: a green card with rank 3\n\tcard 3: a white card with rank 2\n\tcard 4: a yellow card with rank 3\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a red card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a blue card with rank 3. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a white card with rank 1\n\tcard 1: a green card with rank 2\n\tcard 2: a red card with rank 5\n\tcard 3: a blue card with rank 1\n\tcard 4: a blue card with rank 5\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a blue card with rank 3. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a white card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a yellow card with rank 1\n\tcard 1: a green card with rank 3\n\tcard 2: a white card with rank 2\n\tcard 3: a yellow card with rank 3\n\tcard 4: a blue card with rank 4\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a white card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a white card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a green card with rank 2\n\tcard 1: a red card with rank 5\n\tcard 2: a blue card with rank 1\n\tcard 3: a blue card with rank 5\n\tcard 4: a red card with rank 2\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a white card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a yellow card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a green card with rank 3\n\tcard 1: a white card with rank 2\n\tcard 2: a yellow card with rank 3\n\tcard 3: a blue card with rank 4\n\tcard 4: a blue card with rank 2\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a yellow card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a green card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a red card with rank 5\n\tcard 1: a blue card with rank 1\n\tcard 2: a blue card with rank 5\n\tcard 3: a red card with rank 2\n\tcard 4: a green card with rank 4\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a green card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a green card with rank 3. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a white card with rank 2\n\tcard 1: a yellow card with rank 3\n\tcard 2: a blue card with rank 4\n\tcard 3: a blue card with rank 2\n\tcard 4: a green card with rank 1\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a green card with rank 3. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a red card with rank 5. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a blue card with rank 1\n\tcard 1: a blue card with rank 5\n\tcard 2: a red card with rank 2\n\tcard 3: a green card with rank 4\n\tcard 4: a blue card with rank 1\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a red card with rank 5. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a white card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a blue card with rank 4\n\tcard 2: a blue card with rank 2\n\tcard 3: a green card with rank 1\n\tcard 4: a red card with rank 2\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a white card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a blue card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a blue card with rank 5\n\tcard 1: a red card with rank 2\n\tcard 2: a green card with rank 4\n\tcard 3: a blue card with rank 1\n\tcard 4: a green card with rank 1\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a blue card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a yellow card with rank 3. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a blue card with rank 4\n\tcard 1: a blue card with rank 2\n\tcard 2: a green card with rank 1\n\tcard 3: a red card with rank 2\n\tcard 4: a white card with rank 1\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a yellow card with rank 3. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a blue card with rank 5. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a red card with rank 2\n\tcard 1: a green card with rank 4\n\tcard 2: a blue card with rank 1\n\tcard 3: a green card with rank 1\n\tcard 4: a yellow card with rank 4\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a blue card with rank 5. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a blue card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a blue card with rank 2\n\tcard 1: a green card with rank 1\n\tcard 2: a red card with rank 2\n\tcard 3: a white card with rank 1\n\tcard 4: a blue card with rank 4\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a blue card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a red card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a green card with rank 4\n\tcard 1: a blue card with rank 1\n\tcard 2: a green card with rank 1\n\tcard 3: a yellow card with rank 4\n\tcard 4: a blue card with rank 1\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a red card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a blue card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a green card with rank 1\n\tcard 1: a red card with rank 2\n\tcard 2: a white card with rank 1\n\tcard 3: a blue card with rank 4\n\tcard 4: a green card with rank 4\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a blue card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a green card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a blue card with rank 1\n\tcard 1: a green card with rank 1\n\tcard 2: a yellow card with rank 4\n\tcard 3: a blue card with rank 1\n\tcard 4: a yellow card with rank 1\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a green card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a green card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a red card with rank 2\n\tcard 1: a white card with rank 1\n\tcard 2: a blue card with rank 4\n\tcard 3: a green card with rank 4\n\tcard 4: a yellow card with rank 2\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a green card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a blue card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a green card with rank 1\n\tcard 1: a yellow card with rank 4\n\tcard 2: a blue card with rank 1\n\tcard 3: a yellow card with rank 1\n\tcard 4: a red card with rank 4\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a blue card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a red card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a white card with rank 1\n\tcard 1: a blue card with rank 4\n\tcard 2: a green card with rank 4\n\tcard 3: a yellow card with rank 2\n\tcard 4: a green card with rank 3\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\na red card with rank 2\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a red card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a green card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 4\n\tcard 1: a blue card with rank 1\n\tcard 2: a yellow card with rank 1\n\tcard 3: a red card with rank 4\n\tcard 4: a white card with rank 5\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\na red card with rank 2\na green card with rank 1\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a green card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a white card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a blue card with rank 4\n\tcard 1: a green card with rank 4\n\tcard 2: a yellow card with rank 2\n\tcard 3: a green card with rank 3\n\tcard 4: a yellow card with rank 2\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\na red card with rank 2\na green card with rank 1\na white card with rank 1\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a white card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a yellow card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a blue card with rank 1\n\tcard 1: a yellow card with rank 1\n\tcard 2: a red card with rank 4\n\tcard 3: a white card with rank 5\n\tcard 4: a red card with rank 1\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\na red card with rank 2\na green card with rank 1\na white card with rank 1\na yellow card with rank 4\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a yellow card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a blue card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a green card with rank 4\n\tcard 1: a yellow card with rank 2\n\tcard 2: a green card with rank 3\n\tcard 3: a yellow card with rank 2\n\tcard 4: a green card with rank 1\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\na red card with rank 2\na green card with rank 1\na white card with rank 1\na yellow card with rank 4\na blue card with rank 4\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a blue card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a blue card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 1\n\tcard 1: a red card with rank 4\n\tcard 2: a white card with rank 5\n\tcard 3: a red card with rank 1\n\tcard 4: a green card with rank 5\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\na red card with rank 2\na green card with rank 1\na white card with rank 1\na yellow card with rank 4\na blue card with rank 4\na blue card with rank 1\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a blue card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a green card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a yellow card with rank 2\n\tcard 1: a green card with rank 3\n\tcard 2: a yellow card with rank 2\n\tcard 3: a green card with rank 1\n\tcard 4: a blue card with rank 2\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\na red card with rank 2\na green card with rank 1\na white card with rank 1\na yellow card with rank 4\na blue card with rank 4\na blue card with rank 1\na green card with rank 4\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a green card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a yellow card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a red card with rank 4\n\tcard 1: a white card with rank 5\n\tcard 2: a red card with rank 1\n\tcard 3: a green card with rank 5\n\tcard 4: a red card with rank 3\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\na red card with rank 2\na green card with rank 1\na white card with rank 1\na yellow card with rank 4\na blue card with rank 4\na blue card with rank 1\na green card with rank 4\na yellow card with rank 1\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a yellow card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a yellow card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a green card with rank 3\n\tcard 1: a yellow card with rank 2\n\tcard 2: a green card with rank 1\n\tcard 3: a blue card with rank 2\n\tcard 4: a blue card with rank 3\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\na red card with rank 2\na green card with rank 1\na white card with rank 1\na yellow card with rank 4\na blue card with rank 4\na blue card with rank 1\na green card with rank 4\na yellow card with rank 1\na yellow card with rank 2\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a yellow card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a red card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a white card with rank 5\n\tcard 1: a red card with rank 1\n\tcard 2: a green card with rank 5\n\tcard 3: a red card with rank 3\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\na red card with rank 2\na green card with rank 1\na white card with rank 1\na yellow card with rank 4\na blue card with rank 4\na blue card with rank 1\na green card with rank 4\na yellow card with rank 1\na yellow card with rank 2\na red card with rank 4\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a red card with rank 4. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a green card with rank 3. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a yellow card with rank 2\n\tcard 1: a green card with rank 1\n\tcard 2: a blue card with rank 2\n\tcard 3: a blue card with rank 3\n\tcard 4: a red card with rank 3\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\na red card with rank 2\na green card with rank 1\na white card with rank 1\na yellow card with rank 4\na blue card with rank 4\na blue card with rank 1\na green card with rank 4\na yellow card with rank 1\na yellow card with rank 2\na red card with rank 4\na green card with rank 3\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a green card with rank 3. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a white card with rank 5. This does not replenish an info token as the token cap is reached.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "There are no cards left in the deck. This is the final round.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a red card with rank 1\n\tcard 1: a green card with rank 5\n\tcard 2: a red card with rank 3\n\tcard 3: a white card with rank 3\n\tcard 4: a green card with rank 2\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\na red card with rank 2\na green card with rank 1\na white card with rank 1\na yellow card with rank 4\na blue card with rank 4\na blue card with rank 1\na green card with rank 4\na yellow card with rank 1\na yellow card with rank 2\na red card with rank 4\na green card with rank 3\na white card with rank 5\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a white card with rank 5. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "There are no cards left in the deck. This is the final round.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a yellow card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a green card with rank 1\n\tcard 1: a blue card with rank 2\n\tcard 2: a blue card with rank 3\n\tcard 3: a red card with rank 3\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\na red card with rank 2\na green card with rank 1\na white card with rank 1\na yellow card with rank 4\na blue card with rank 4\na blue card with rank 1\na green card with rank 4\na yellow card with rank 1\na yellow card with rank 2\na red card with rank 4\na green card with rank 3\na white card with rank 5\na yellow card with rank 2\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 0",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a yellow card with rank 2. This does not replenish an info token as the token cap is reached.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a red card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a green card with rank 5\n\tcard 1: a red card with rank 3\n\tcard 2: a white card with rank 3\n\tcard 3: a green card with rank 2\n\nDiscards: The following cards have been discarded:\na red card with rank 1\na yellow card with rank 3\na white card with rank 4\na yellow card with rank 1\na white card with rank 1\na white card with rank 4\na yellow card with rank 5\na red card with rank 1\na yellow card with rank 4\na white card with rank 3\na red card with rank 4\na blue card with rank 3\na white card with rank 2\na white card with rank 1\na yellow card with rank 1\na green card with rank 2\na green card with rank 3\na red card with rank 5\na white card with rank 2\na blue card with rank 1\na yellow card with rank 3\na blue card with rank 5\na blue card with rank 4\na red card with rank 2\na blue card with rank 2\na green card with rank 4\na green card with rank 1\na blue card with rank 1\na red card with rank 2\na green card with rank 1\na white card with rank 1\na yellow card with rank 4\na blue card with rank 4\na blue card with rank 1\na green card with rank 4\na yellow card with rank 1\na yellow card with rank 2\na red card with rank 4\na green card with rank 3\na white card with rank 5\na yellow card with rank 2\na red card with rank 1\n\n",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": {
+      "0": 0,
+      "1": 0
+    }
+  },
+  "discard_nonexisting_card": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 8",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] 8",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: The player attempts to discard a non-existing card. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "You attempted to discard a non-existing card. Please consider cards between 0 and 4 (Including). You provided 8.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "discard_token_cap": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "trailing_to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 discards a red card with rank 1. This does not replenish an info token as the token cap is reached.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a white card with rank 4\n\tcard 1: a white card with rank 1\n\tcard 2: a yellow card with rank 5\n\tcard 3: a yellow card with rank 4\n\tcard 4: a red card with rank 4\n\nDiscards: The following cards have been discarded:\na red card with rank 1\n\n",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "discard_unparseable": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] x",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Discard] x",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: The player provided an invalid action. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "You provided an invalid action. If you want to discard a card, type:\n '[Discard] X', to discard the card in position X from your hand. For example: '[Discard] 0' discards the card at position 0.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "fuse_tokens_run_out": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "The team ran out of fuse tokens.",
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "The team ran out of fuse tokens.",
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Play] 2",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 attempts to play a white card with rank 1. The card was played successfully.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 1.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a red card with rank 1\n\tcard 1: a white card with rank 4\n\tcard 2: a yellow card with rank 5\n\tcard 3: a yellow card with rank 4\n\tcard 4: a red card with rank 4\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Play] 2",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Play] 2",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 attempts to play a white card with rank 1. The card was played successfully.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 attempts to play a white card with rank 4. The card did not match the current state of the fireworks. This costs one fuse token. There are 2 fuse tokens remaining.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 2 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 1.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a red card with rank 1\n\tcard 3: a white card with rank 3\n\tcard 4: a blue card with rank 3\n\nDiscards: The following cards have been discarded:\na white card with rank 4\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Play] 2",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Play] 2",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 attempts to play a white card with rank 4. The card did not match the current state of the fireworks. This costs one fuse token. There are 2 fuse tokens remaining.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 attempts to play a yellow card with rank 5. The card did not match the current state of the fireworks. This costs one fuse token. There are 1 fuse tokens remaining.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 1 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 1.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a red card with rank 1\n\tcard 1: a white card with rank 4\n\tcard 2: a yellow card with rank 4\n\tcard 3: a red card with rank 4\n\tcard 4: a white card with rank 2\n\nDiscards: The following cards have been discarded:\na white card with rank 4\na yellow card with rank 5\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Play] 2",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Play] 2",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 attempts to play a yellow card with rank 5. The card did not match the current state of the fireworks. This costs one fuse token. There are 1 fuse tokens remaining.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 attempts to play a red card with rank 1. The card was played successfully.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 1 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 1.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 1.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 3\n\tcard 3: a blue card with rank 3\n\tcard 4: a white card with rank 1\n\nDiscards: The following cards have been discarded:\na white card with rank 4\na yellow card with rank 5\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Play] 2",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Play] 2",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 attempts to play a red card with rank 1. The card was played successfully.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 attempts to play a yellow card with rank 4. The card did not match the current state of the fireworks. This costs one fuse token. There are 0 fuse tokens remaining.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 0 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 1.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 1.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a red card with rank 1\n\tcard 1: a white card with rank 4\n\tcard 2: a red card with rank 4\n\tcard 3: a white card with rank 2\n\tcard 4: a yellow card with rank 1\n\nDiscards: The following cards have been discarded:\na white card with rank 4\na yellow card with rank 5\na yellow card with rank 4\n\n",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": {
+      "0": 2,
+      "1": 2
+    }
+  },
+  "hints_plays_discard": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 1 card 0 color yellow",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "Card 0 from player 1 is yellow.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 7 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a red card with rank 1\n\tcard 1: a white card with rank 4\n\tcard 2: a white card with rank 1\n\tcard 3: a yellow card with rank 5\n\tcard 4: a yellow card with rank 4\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 0 card 0 rank 1",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Reveal] player 1 card 0 color yellow",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Card 0 from player 1 is yellow.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Card 0 from player 0 has rank 1.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 6 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Play] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Reveal] player 0 card 0 rank 1",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Card 0 from player 0 has rank 1.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 attempts to play a red card with rank 1. The card was played successfully.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 6 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 1.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a white card with rank 4\n\tcard 1: a white card with rank 1\n\tcard 2: a yellow card with rank 5\n\tcard 3: a yellow card with rank 4\n\tcard 4: a red card with rank 4\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Discard] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Play] 0",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 attempts to play a red card with rank 1. The card was played successfully.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a yellow card with rank 3. This replenishes an info token.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 7 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 1.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 1\n\tcard 1: a white card with rank 4\n\tcard 2: a red card with rank 1\n\tcard 3: a white card with rank 3\n\tcard 4: a blue card with rank 3\n\nDiscards: The following cards have been discarded:\na yellow card with rank 3\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Play] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Discard] 0",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 discards a yellow card with rank 3. This replenishes an info token.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 attempts to play a white card with rank 4. The card did not match the current state of the fireworks. This costs one fuse token. There are 2 fuse tokens remaining.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 2 fuse tokens remaining.\nInfo tokens: there are 7 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 1.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a white card with rank 1\n\tcard 1: a yellow card with rank 5\n\tcard 2: a yellow card with rank 4\n\tcard 3: a red card with rank 4\n\tcard 4: a white card with rank 2\n\nDiscards: The following cards have been discarded:\na yellow card with rank 3\na white card with rank 4\n\n",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "invalid_action_and_skip": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "bogus",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "bogus",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: The player provided an invalid action. Players can only '[reveal]', '[play]' or '[discard]'. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "morebogus",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 made 2 invalid moves in a row, skipping a turn. ",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a red card with rank 1\n\tcard 1: a white card with rank 4\n\tcard 2: a white card with rank 1\n\tcard 3: a yellow card with rank 5\n\tcard 4: a yellow card with rank 4\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Play] 0",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "morebogus",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Player 0 made 2 invalid moves in a row, skipping a turn. ",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Player 1 attempts to play a yellow card with rank 3. The card did not match the current state of the fireworks. This costs one fuse token. There are 2 fuse tokens remaining.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 2 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 1\n\tcard 1: a white card with rank 4\n\tcard 2: a red card with rank 1\n\tcard 3: a white card with rank 3\n\tcard 4: a red card with rank 4\n\nDiscards: The following cards have been discarded:\na yellow card with rank 3\n\n",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "play_nonexisting_card": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Play] 8",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Play] 8",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: The player attempts to play a non-existing card. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "You attempted to play a non-existing card. Please consider cards between 0 and 4 (Including). You provided 8.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "play_unparseable": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Play] x",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Play] x",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: The player provided an invalid action. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "You provided an invalid action. If you want to play a card, type:\n '[Play] X', to play the card in position X from your hand. For example: '[Play] 0' plays the card at position 0.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "reveal_incomplete": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 1",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Reveal] player 1",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: The player provided an incomplete hint. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "You provided an invalid action. If you want to reveal a card, type:\n '[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\nor\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n\nFor example: '[Reveal] player 0 card 0 color green' Reveals that card 0 from player 0 is green.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "reveal_invalid_color": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 1 card 0 color purple",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Reveal] player 1 card 0 color purple",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: The player provided a color that is not in the game. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "You provided an invalid color. Valid colors are 'white', 'yellow', 'green', 'red' and 'blue'. You tried: 'purple'.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "reveal_invalid_rank": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 1 card 0 rank 9",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Reveal] player 1 card 0 rank 9",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: The player provided an invalid rank. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "You provided an invalid rank. Valid ranks are between 1 and 5 (including). You provided: '9'.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "reveal_no_info_tokens": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 1 card 0 rank 1",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "Card 0 from player 1 has rank 1.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 7 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a red card with rank 1\n\tcard 1: a white card with rank 4\n\tcard 2: a white card with rank 1\n\tcard 3: a yellow card with rank 5\n\tcard 4: a yellow card with rank 4\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 0 card 0 rank 1",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Reveal] player 1 card 0 rank 1",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Card 0 from player 1 has rank 1.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Card 0 from player 0 has rank 1.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 6 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 1 card 0 rank 1",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Reveal] player 0 card 0 rank 1",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Card 0 from player 0 has rank 1.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Card 0 from player 1 has rank 1.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 5 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a red card with rank 1\n\tcard 1: a white card with rank 4\n\tcard 2: a white card with rank 1\n\tcard 3: a yellow card with rank 5\n\tcard 4: a yellow card with rank 4\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 0 card 0 rank 1",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Reveal] player 1 card 0 rank 1",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Card 0 from player 1 has rank 1.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Card 0 from player 0 has rank 1.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 4 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 1 card 0 rank 1",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Reveal] player 0 card 0 rank 1",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Card 0 from player 0 has rank 1.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Card 0 from player 1 has rank 1.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 3 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a red card with rank 1\n\tcard 1: a white card with rank 4\n\tcard 2: a white card with rank 1\n\tcard 3: a yellow card with rank 5\n\tcard 4: a yellow card with rank 4\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 0 card 0 rank 1",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Reveal] player 1 card 0 rank 1",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Card 0 from player 1 has rank 1.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Card 0 from player 0 has rank 1.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 2 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 1 card 0 rank 1",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[Reveal] player 0 card 0 rank 1",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "Card 0 from player 0 has rank 1.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 0,
+        "text": "Card 0 from player 1 has rank 1.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 1. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 1 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 0 has cards:\n\tcard 0: a red card with rank 1\n\tcard 1: a white card with rank 4\n\tcard 2: a white card with rank 1\n\tcard 3: a yellow card with rank 5\n\tcard 4: a yellow card with rank 4\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 0 card 0 rank 1",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Reveal] player 1 card 0 rank 1",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "Card 0 from player 1 has rank 1.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": 1,
+        "text": "Card 0 from player 0 has rank 1.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 0 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 1 card 0 rank 1",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Reveal] player 1 card 0 rank 1",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Player attempted to give a hint without having any info tokens. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      }
+    ],
+    "rewards": null
+  },
+  "reveal_nonexisting_card": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 1 card 9 rank 3",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Reveal] player 1 card 9 rank 3",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: The player attempts to reveal information about a non-existing card. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "You attempted to reveal information about a non-existing card. The card index should be between 0 and 4 (including). You provided 9. ",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "reveal_nonexisting_teammate": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 5 card 0 rank 3",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Reveal] player 5 card 0 rank 3",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: The player attempts to reveal information about a non-existing teammate. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "You attempted to reveal information about a non-existing teammate. Please consider teammates between 0 and 1 (Including). Note that you cannot reveal information about yourself, you are player 0.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "reveal_own_cards": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in an 2-player Hanabi game. Hanabi is a cooperative card game where players work together to create a series of fireworks by playing cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all players can see everyone else's cards but not their own.\n\nObjective:\nThe objective is to play cards in sequence (1 through 5) for each color without making mistakes. There are 5 different colors and each color has cards numbered 1 to 5.\n\nKey Rules:\nOn your turn, you have three types of possible actions:\n1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a number present in their hand. Hints must be accurate and can only reveal positions of cards matching the hint.\n2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the fireworks; if not, it reduces one fuse token.\n\nTokens:\nFuse Tokens: Deducted when a wrong card is played.\nInfo Tokens: Used to give clues.\n\nIllegal Moves:\nPlaying a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in failure.\n\nGame End:\nThe game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted and each player has taken one final turn, or when the players run out of fuse tokens.\n\nState Representation:\nThe game state is represented with the following details:\nFuse tokens: Number of remaining fuse tokens.\nInfo tokens: Number of available information tokens.\nFireworks: Current progress on each firework color.\nDiscards: Cards that have been discarded.\n\nYour Role:\nYou are one of the players, cooperating with others to maximize the total score of the fireworks (the number of cards correctly played in sequence).\nAlthough you cannot see your own cards, you can see the cards in the hands of your teammates.\nUse hints, discards, and plays strategically to guide the team towards successful sequences.\nWhen it's your turn, your output should be in one of the following formats between quotes:\n\n'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.\n'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.\n'[Play] X', to play the card in position X from your hand.\n'[Discard] X', to discard the card in position X from your hand.\n\nRemember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!\n\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "You are player 0. \n\nCurrent game state:\nFuse tokens: there are 3 fuse tokens remaining.\nInfo tokens: there are 8 info tokens remaining.\n\nFireworks: The current progress on each firework color is:\n\twhite: 0.\n\tyellow: 0.\n\tgreen: 0.\n\tblue: 0.\n\tred: 0.\n\nYour teammates have the following cards in their hand:\n- Player 1 has cards:\n\tcard 0: a yellow card with rank 3\n\tcard 1: a yellow card with rank 1\n\tcard 2: a white card with rank 4\n\tcard 3: a red card with rank 1\n\tcard 4: a white card with rank 3\n\nDiscards: The following cards have been discarded:\n\n",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[Reveal] player 0 card 1 color red",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[Reveal] player 0 card 1 color red",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: The player attempts to reveal information about their own cards. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "You attempted to reveal information about your own cards. This is not allowed.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  }
+}

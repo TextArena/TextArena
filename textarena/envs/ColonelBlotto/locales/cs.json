@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Jste {role} v plukovníku Blottovi.\nVaším cílem je vyhrát více kol než váš soupeř.\nV každém kole rozdělte přesně {num_total_units} jednotek do polí {field_names}.\nHráč, který rozdělí více jednotek do pole, vyhraje to pole, a hráč, který vyhraje více polí, vyhraje kolo.\nNapříklad '[A7 B7 C6]' rozdělí 7 jednotek do A, 7 do B a 6 do C.",
+    "commander_alpha": "Velitel Alfa",
+    "commander_beta": "Velitel Beta"
+  },
+  "game_state": {
+    "header_round": "=== PLUKOVNÍK BLOTTO - Kolo {current_round}/{num_rounds} ===\nVyhraná kola - Velitel Alfa: {alpha_score}, Velitel Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nKolo {current_round}\nVelitel Alfa rozdělil: {p0_allocations}\nVelitel Beta rozdělil: {p1_allocations}\n",
+    "winner_alpha": "{message}Vítěz: Velitel Alfa",
+    "winner_beta": "{message}Vítěz: Velitel Beta",
+    "tie": "{message}Remíza!"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát vstupu. Použijte: A:5, B:10, C:5",
+    "invalid_field": "Neplatné jméno pole. Platná pole: {field_names}",
+    "wrong_allocation_value": "Všechny rozdělení musí být nezáporná celá čísla.",
+    "incorrect_total_units": "Musíte rozdělit přesně {num_total_units} jednotek. Aktuální součet: {current_sum}",
+    "good_allocations": "Rozdělení je dobré."
+  },
+  "outcome": {
+    "winner_alpha": "Velitel Alfa vyhraje {score_0}-{score_1} po {num_rounds} kolech!",
+    "winner_beta": "Velitel Beta vyhraje {score_1}-{score_0} po {num_rounds} kolech!",
+    "draw": "Hra končí remízou {score_0}-{score_1} po {num_rounds} kolech!",
+    "early_winner_alpha": "Velitel Alfa vyhraje {scores_0}-{scores_1} (dosáhl většiny)!",
+    "early_winner_beta": "Velitel Beta vyhraje {scores_1}-{scores_0} (dosáhl většiny)!"
+  }
+}

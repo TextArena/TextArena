@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Ia dados Pemain {player_id} ring permainan LinesOfAction.\nPotongan tiang dados '{side}', potongan musuh dados '{other}'.\nFormat gerakan: `[b1b3]` (saking-koordinat nuju koordinat). Gerakan legal ngentasin horizontal, vertikal, utawi diagonal ring akeh kotak sané pateh sareng total potongan (warna anyar) ring garis punika. Ia dados melompat ring duur potongan tiang, nanging nénten ring duur potongan musuh; mendarat ring duur musuh dados nangkap.  Menang ri kala potongan tiang makejang dados hubungan 8-tetangga."
+  },
+  "board": {
+    "current_board": "Dewan: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format patut e2e4 (saking,ngantos koordinat).",
+    "no_piece": "Nénten wénten {side} pahan ring {coord}.",
+    "identical": "Sumber miwah tujuan sané pateh.",
+    "not_straight_or_diagonal": "Gerak punika musti lurus utawi diagonal.",
+    "wrong_distance": "Patut magingsir jarak sané pateh sareng potongannyané.",
+    "enemy_blocks": "Wadua balane ngurung margi.",
+    "destination_own": "Destinasi sané kaanggén olih pasukané."
+  },
+  "game_action": {
+    "moved": "Pemain {player_id} melayangkan {from} -> {to}",
+    "captured_suffix": "Pemain {player_id} melayangkan {from} -> {to} menangkap musuh."
+  },
+  "outcome": {
+    "win": "Makasami gelah punika mapaiketan.",
+    "draw_no_capture": "60 kali majalan nénten polih prabéya.",
+    "draw_repetition": "Genah punika kaulang ping tiga."
+  }
+}

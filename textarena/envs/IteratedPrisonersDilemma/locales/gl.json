@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} nun Dilema do Prisioneiro Iterado que abrangue {num_rounds} rondas.\n\nEstrutura do xogo:\n- Antes de cada decisión tes {total_conversation_rounds} quendas para comunicarte libremente.\n- Despois diso, ambos xogadores elixen simultaneamente cooperar ou desertar.\n\nMatriz de recompensas (fixa cada ronda):\n- Ambos cooperan ➜ cada un {cooperate_reward}\n- Ambos desertan ➜ cada un {mutual_defect_reward}\n- Un deserta, outro coopera ➜ Desertor {defect_reward}, Cooperador {sucker_reward}\n\nComo xogar:\n- Durante a conversa: escribe calquera texto que desexes.\n- Durante a fase de decisión: inclúe '[Cooperate]' ou '[Defect]' (non ten en conta maiúsculas/minúsculas). Podes engadir texto extra antes/despois do token."
+  },
+  "phases": {
+    "conversation_finished": "Conversa rematada para a ronda {round}. Por favor, responde con '[Cooperate]' ou '[Defect]' dentro de \\boxed{{}}.",
+    "starting_round": "--- Comezando Ronda {round} ---",
+    "round_summary": "Resultados da ronda {round}:\n{outcome}\nO Xogador 0 gañou {r0} (total {score_0}), o Xogador 1 gañou {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "O Xogador {winner} gaña {win_score} - {lose_score}.",
+    "draw": "Empate! Ambos xogadores puntuaron {s0}.",
+    "round_both_cooperate": "Ambos xogadores cooperaron.",
+    "round_both_defect": "Ambos xogadores desertaron.",
+    "round_p0_cooperates_p1_defects": "O Xogador 0 cooperou, o Xogador 1 desertou.",
+    "round_p0_defects_p1_cooperates": "O Xogador 0 desertou, o Xogador 1 cooperou."
+  }
+}

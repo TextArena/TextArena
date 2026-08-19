@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Iraga Player {player_id} ring Tic Tac Toe Tiga Pemain.\nSimbol Iragane '{symbol}'.\nIraga ngambil giliran nyimpen simbol Iragane ring papan 5x5 anggén ngwangun garis empat.\nGarisé dados horizontal, vertikal, utawi diagonal.\nKirim tetanduran Iragane nganggén format '[4]' anggén ngenahin sel 4."
+  },
+  "board": {
+    "current_board": "Papan Saat Mikiwah:\n\n{board}\n\nTetanduran Apik: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format pindah nénten valid. Anggén \"[cell]\" ring genah selnyané 0-{max_cell}.",
+    "out_of_range": "Nomor sel tan sah: {cell}. Patut dados ring tengah 0 miwah {max_cell}.",
+    "already_occupied": "Sel {cell} sampun kaanggén.",
+    "made_invalid": "Pamain {player_id} ngalaksanayang pamargi sané nénten patut."
+  },
+  "game_action": {
+    "placed": "Player {player_id} ngwangun simbol ipun ({symbol}) ring lapangan ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Player {player_id} ({symbol}) menang!",
+    "draw": "Pertandingané punika gelah hasil imbang!"
+  }
+}

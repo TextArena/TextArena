@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} hrající hru Pig Dice.\n\nPravidla:\n- Na Vaši řadu můžete buď '[roll]' nebo '[hold]'\n- Hoďte 2-6: Přidejte k Vašemu celkovému skóre kola\n- Hoďte 1: Ztrácejte celkové skóre kola a ukončete kolo\n- Držte: Přidejte celkové skóre kola ke svému skóre a ukončete kolo\n- První hráč, který dosáhne {winning_score} bodů, vyhrává\n\nKdyž je na Vaši řadu, uvidíte aktuální skóre a celkové skóre kola.\nOdpovězte '[roll]', abyste hodili kostkou, nebo '[hold]', abyste si uložili body."
+  },
+  "invalid_move": {
+    "invalid_action": "Neplatný formát akce. Použijte '[roll]' nebo '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Hráč {player_id} prohrál {turn_total} bodů!",
+    "player_hold": "Hráč {player_id} drží a ukládá {turn_total} bodů."
+  },
+  "board": {
+    "player": "Hráč 0: '{score_0}'; Hráč 1: '{score_1}'",
+    "current_total_scores": "Aktuální celkové skóre: {scores}\nVaše aktuální celkové skóre kola je {turn_total}.",
+    "roll_history": "{observation}\nVaše historie hodů pro toto kolo: {roll_history}",
+    "first_roll": "{observation}\nToto je první hod Vašeho kola.",
+    "available_actions": "{observation}\nDostupné akce: '[roll]' nebo '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Hráč {winner_id} vyhrál díky vyššímu skóre při limitu kol ({scores})",
+    "winner_by_score": "Hráč {winner_id} vyhrál dosažením cílového skóre {winning_score}!",
+    "draw": "Byl dosažen limit kol a všichni hráči mají stejné skóre: {scores}"
+  }
+}

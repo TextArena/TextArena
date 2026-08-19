@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "ব্ৰিস্কোলা খেল আৰম্ভ হৈছে! ট্ৰাম্পৰ সাজঃ {trump_suit} (ট্ৰাম্প কাৰ্ডঃ {trump_card})"
+  },
+  "prompt": {
+    "intro": "আপুনি ব্ৰিস্কলা খেলি আছেন - খেলুৱৈ {player_id}।\nলক্ষ্য: ট্ৰিকসমূহ জিকি সৰ্বাধিক পইণ্ট সংগ্ৰহ কৰা (ডেকত মোট ১২০ পইণ্ট)।\nকাৰ্ড পইণ্ট: A=11, 3=10, K=4, Q=3, J=2, অন্যান্য=0\nকাৰ্ড শক্তি: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nট্ৰাম্প কাৰ্ডসমূহে ক্ষমতা নিৰ্বিশেষে নন-ট্ৰাম্প কাৰ্ডক পৰাস্ত কৰে।\n\nকাৰ্য: '[play X]' য'ত X হৈছে আপোনাৰ হাতত থকা কাৰ্ডটোৰ অবস্থান (1-{max_pos})"
+  },
+  "hand": {
+    "none": "কাৰ্ড নাই",
+    "empty": "হাতত কাৰ্ড নাই",
+    "header": "তোমাৰ হাতঃ",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(ট্ৰাম্প)"
+  },
+  "trick": {
+    "empty": "কাৰ্ডবোৰে এই কৌশলটো এতিয়াও খেলি পোৱা নাই।",
+    "header": "বৰ্তমানৰ কৌশলঃ",
+    "line": "খেলুৱৈ {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "খেলুৱৈ {player_id}: {points} pts",
+    "trump_info": "ট্ৰাম্পৰ সাজ: {trump_suit}",
+    "trump_info_deck": "ট্ৰাম্পৰ সাজঃ {trump_suit} │ কাৰ্ডসমূহ ডেকত বাকীঃ {deck_count}",
+    "board": "{hand} {trick} স্ক'ৰঃ {scores} {trump_info} [play X] ব্যৱহাৰ কৰি এখন কাৰ্ড খেলক"
+  },
+  "invalid_move": {
+    "wrong_format": "[play X] ব্যৱহাৰ কৰক য'ত X কাৰ্ডৰ অৱস্থান (1, 2, 3, ইত্যাদি)",
+    "out_of_range": "অবৈধ কাৰ্ডৰ স্থান। আপোনাৰ হাতত {count} কাৰ্ড আছে (1-{count})"
+  },
+  "action": {
+    "played": "খেলুৱৈ {player_id} খেলিছিল {card}",
+    "trick_win": "খেলুৱৈ {winner}য়ে {card}ৰ সৈতে ট্ৰিকটো জয় কৰে আৰু {points}পইণ্ট লাভ কৰে!"
+  },
+  "outcome": {
+    "head": "খেল শেষ! খেলুৱৈ {winner}য়ে {points}পইণ্ট লাভ কৰি জয়ী হয়! চূড়ান্ত স্ক'ৰঃ {scores}",
+    "player_line": "খেলুৱৈ {player_id}: {points} পইণ্ট ({tricks} ট্ৰিক) "
+  }
+}

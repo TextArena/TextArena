@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} v Nim.\nVaším cílem je vzít poslední zbývající objekt.\nV každém tahu vyberte přesně jednu hromadu a odstraňte z ní jeden nebo více objektů.\nPoužijte formát '[hromada množství]', kde hromada je index hromady a množství je počet objektů k odstranění.\nNapříklad '[0 3]' odstraní 3 objekty z hromady 0."
+  },
+  "state": {
+    "current_pile": "Aktuální hromada:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nebyl nalezen platný formát tahu. Použijte '[hromada množství]'.",
+    "correct_format_wrong_fields": "Hráč {player_id}, Neplatná akce. Sloupec {col} je mimo rozsah.",
+    "out_of_range": "Index hromady {pile_index} je mimo rozsah.",
+    "non_positive": "Musíte odstranit alespoň 1 objekt.",
+    "exceeds_pile": "Nelze odstranit {quantity} z hromady {pile_index} (zbývá pouze {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "Hráč {player_id} zahrál [{pile_index} {quantity}], odstranil {quantity} objekt(ů) z hromady {pile_index}."
+  },
+  "outcome": {
+    "win": "Hráč {player_id} vzal poslední objekt(y)!"
+  }
+}

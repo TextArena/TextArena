@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id}. Du spielst das 15-Puzzle.\nDas Ziel des Spiels besteht darin, die nummerierten Steine in aufsteigender Reihenfolge von 1 bis 15 anzuordnen, wobei sich das leere Feld unten rechts befinden muss.\nUm einen Zug auszuführen, kannst du einen Stein in das leere Feld schieben (dargestellt durch zwei Unterstriche, z. B. __), indem du einen der folgenden Befehle verwendest:\n- 'up': Bewege den Stein unterhalb des leeren Feldes nach oben.\n- 'down': Bewege den Stein oberhalb des leeren Feldes nach unten.\n- 'left': Bewege den Stein rechts vom leeren Feld nach links.\n- 'right': Bewege den Stein links vom leeren Feld nach rechts.\nUm deinen Zug abzugeben, gib die Richtung (z. B. 'up', 'down', 'left' oder 'right') in eckigen Klammern ein, z. B. [up].\nDie aktuelle Anordnung des Spielfelds ist unten dargestellt. Nutze diese Informationen, um das Puzzle zu lösen.\n"
+  },
+  "board": {
+    "current_board": "Aktuelles Spielfeld:\n\n{board}\nVerfügbare Züge: {moves}",
+    "game_board": "Spielfeld:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ungültiges Zugformat. Spieler {player_id} hat nicht mit einer gültigen Richtung in eckigen Klammern geantwortet.",
+    "illegal_move": "Ungültiger Zug. Der Stein kann nicht in die angegebene Richtung bewegt werden."
+  },
+  "outcome": {
+    "win": "Glückwunsch! Spieler {player_id} hat das 15-Puzzle erfolgreich gelöst.",
+    "turn_limit": "Die Zugbegrenzung wurde erreicht. Das Modell hat {percent} Prozent des Puzzles abgeschlossen."
+  }
+}

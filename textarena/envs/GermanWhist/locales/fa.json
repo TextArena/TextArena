@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "بازی آغاز می‌شود. خال برتر: {trump_suit} (کارت برتر: {trump_str}).",
+    "no_trump_card": "هیچ"
+  },
+  "player_prompt": {
+    "intro": "شما بازیکن {player_id} در ویست آلمانی هستید.\n{phase_info}\nشما {hand_size} کارت در دست دارید.\nیک کارت را با '[play N]' بازی کنید، که در آن N موقعیت کارت در دست شما است (به عنوان مثال '[play 3]').",
+    "phase_learning": "مرحله یادگیری: برنده هر دست، کارت رو به بالا را می‌گیرد و بازنده کارت بعدی را از دسته می‌کشد. دست‌های برنده در این مرحله به سمت پیروزی حساب نمی‌شوند.",
+    "phase_playing": "مرحله بازی: دسته تمام شده است. هر دست از این به بعد به سمت پیروزی حساب می‌شود."
+  },
+  "next_card": {
+    "playing_phase": "هیچ کارتی ارائه نشده است - مرحله بازی آغاز شده است.",
+    "deck_empty": "دسته خالی است - هیچ کارتی ارائه نشده است.",
+    "available": "کارت ارائه شده: {card}",
+    "available_trump": "کارت ارائه شده: {card} (برتر)"
+  },
+  "invalid_move": {
+    "wrong_format": "فرمت حرکت نامعتبر است. از '[play N]' برای بازی کردن کارت N ام در دست خود استفاده کنید.",
+    "bad_position": "موقعیت کارت وجود ندارد. شما {hand_size} کارت در دست دارید.",
+    "must_follow_suit": "شما باید از خال پیروی کنید و کارت {lead_suit} بازی کنید.",
+    "invalid_play": "این کارت نمی‌تواند بازی شود."
+  },
+  "game_action": {
+    "played": "بازیکن {player_id} کارت {card} را بازی کرد."
+  },
+  "trick": {
+    "won": "بازیکن {winner_id} دست را با کارت {card} برنده شد.",
+    "won_learning": "بازیکن {winner_id} دست را با کارت {card} برنده شد و کارت رو به بالا را گرفت."
+  },
+  "phase": {
+    "learning_complete": "دسته تمام شده است. مرحله یادگیری به پایان رسیده است - هر دست باقیمانده به سمت پیروزی حساب می‌شود."
+  },
+  "draw": {
+    "winner_received": "شما دست را برنده شدید و کارت {card} را دریافت کردید.",
+    "loser_received": "شما دست را باختید و کارت {card} را از دسته کشیدید.",
+    "winner_preview": "کارت بعدی ارائه شده {card} است."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "دست‌های برنده تاکنون - بازیکن 0: {tricks0}، بازیکن 1: {tricks1}",
+    "scores_playing": "دست‌های امتیازدهی - بازیکن 0: {tricks0}، بازیکن 1: {tricks1}",
+    "phase": "مرحله: {phase}",
+    "phase_learning": "مرحله: {phase} ({remaining_cards} کارت باقیمانده در دسته)"
+  },
+  "hand": {
+    "no_cards": "هیچ کارتی",
+    "no_cards_in_hand": "هیچ کارتی در دست",
+    "header": "دست شما:",
+    "trump_indicator": " (برتر)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "هنوز هیچ کارتی در این دست بازی نشده است.",
+    "header": "دست فعلی:",
+    "trump_indicator": " (برتر)",
+    "card_line": "{observation}\n  بازیکن {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "بازی آغاز نشده است",
+    "header": "=== بازی ویست آلمانی ===",
+    "phase": "{observation}\nمرحله: {phase}",
+    "trump_suit": "{observation}\nخال برتر: {trump_suit}",
+    "trump_card": "{observation}\nکارت برتر: {card}",
+    "cards_left": "{observation}\nکارت‌های باقیمانده در دسته: {count}",
+    "next_card": "{observation}\nکارت بعدی برای برنده: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nدست فعلی:",
+    "trump_indicator": " (برتر)",
+    "trick_line": "{observation}\n  بازیکن {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nبازیکن {player_id}: {scoring} دست‌های امتیازدهی ({tricks} مجموع)، {hand_size} کارت در دست"
+  },
+  "outcome": {
+    "summary": "مرحله یادگیری - بازیکن 0: {l0}، بازیکن 1: {l1}. مرحله بازی - بازیکن 0: {p0}، بازیکن 1: {p1}. بازیکن {winner_id} با {winner_tricks} دست‌های امتیازدهی برنده شد!"
+  }
+}

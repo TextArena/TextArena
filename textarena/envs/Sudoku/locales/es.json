@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id}. Estás jugando a Sudoku.\nEste es el estado actual de la cuadrícula de Sudoku. Cada fila está numerada del 1 al 9 y cada columna también está numerada del 1 al 9.\nLas casillas vacías se representan con '.', y las casillas ya rellenadas contienen dígitos del 1 al 9.\n\nCuadrícula de Sudoku actual:\nTu objetivo es rellenar las casillas vacías de la cuadrícula 9x9 con dígitos del 1 al 9 de forma que:\n1. Cada fila contenga todos los dígitos del 1 al 9 sin repetición.\n2. Cada columna contenga todos los dígitos del 1 al 9 sin repetición.\n3. Cada una de las nueve subcuadrículas 3x3 contenga todos los dígitos del 1 al 9 sin repetición.\n\nReglas e instrucciones:\n1. **No sobrescribas** los números iniciales proporcionados en la cuadrícula.\n2. **Rellena únicamente** las casillas vacías representadas por '.'.\n3. Puedes responder de la manera que prefieras, pero asegúrate de que tu respuesta incluya el formato '[row column number]'.\n4. **Asegúrate** de que tu movimiento no infrinja las reglas del Sudoku. Los movimientos no válidos conllevarán penalizaciones.\nEjemplos:\n- **Movimiento válido**:\n  - Fragmento de la cuadrícula antes del movimiento:\n  \n  - Movimiento: `[5 3 7]`\n  - Explicación: Colocar un 7 en la fila 5, columna 3 no infringe ninguna regla del Sudoku.\n\n- **Movimiento no válido** (sobrescribir una casilla ya rellenada):\n  - Fragmento de la cuadrícula antes del movimiento:\n  \n  - Movimiento: `[1 1 9]`\n  - Explicación: La casilla (1,1) ya contiene un 5. No puedes sobrescribirla.\n\n- **Movimiento no válido** (infringir las reglas del Sudoku):\n  - Fragmento de la cuadrícula antes del movimiento:\n  \n  - Movimiento: `[1 3 5]`\n  - Explicación: Colocar un 5 en la fila 1, columna 3 infringe la regla porque ya existe un 5 en la fila 1.\n\nEl historial de tus movimientos y razonamientos se irá añadiendo a medida que juegues más rondas. Utiliza el historial para mejorar tus decisiones y evitar los movimientos que ya hayas intentado. ¡Buena suerte!\n\n"
+  },
+  "board": {
+    "game_board": "Tablero de juego:\n{board}",
+    "board_state": "Estado del tablero: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movimiento no válido. El Jugador {player_id} no respondió con un formato válido de 'row column number'.",
+    "out_of_bounds": "Movimiento no válido. El Jugador {player_id} intentó colocar {num} en ({row}, {col}), una posición fuera de los límites.",
+    "overwrite": "Movimiento no válido. El Jugador {player_id} intentó sobrescribir una casilla ya rellenada en ({row}, {col}).",
+    "violates_rules": "Movimiento no válido. El Jugador {player_id} intentó colocar {num} en ({row}, {col}), lo que infringe las reglas del Sudoku."
+  },
+  "outcome": {
+    "win": "¡Felicidades! El Jugador {player_id} completó el Sudoku.",
+    "turn_limit": "Se alcanzó el límite de turnos. Rellenaste correctamente el {percent}% de las casillas vacías."
+  }
+}

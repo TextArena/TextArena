@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Yu Player {player_id} long Stratego.\nMipela i amamas long kisim flag bilong yu o rausim olgeta pisin bilong yu.\nMipela i putim army bilong yu long board, inklusiv flag, bomb, na arapela pisin bilong olgeta rang.\n\n### Pasin bilong Pley\n1. **Rul bilong Muvim:**\n   - Long turn bilong yu, yu ken muvim wanpela pisin long wanpela step long adjacent square (antap, daun, kais, o raun) we i gat pisin bilong yu.\n   - Eg: Wanpela pisin i ken muvim long A1 long B1 o A1 long A2 sapos B1 na A2 i no gat pisin bilong player yet.\n   - Sapos yu chusim pisin i bomb o flag, yu no ken muvim.\n2. **Pait:**\n   - Sapos yu muvim long square we gat pisin bilong opisit, orait pait i kamap:\n     - Pisin i gat rang i win na rausim pisin bilong opisit.\n     - Sapos rang i wankain, tupela pisin i raus.\n     - **Spesol Kes:**\n       - Bomb i rausim pisin i atakim, tasol Miner i difusim bomb.\n       - Spai i ken win long Marshal sapos Spai i atakim pastaim, tasol Spai i lus long arapela pisin.\n3. **Gol bilong Strateji:**\n   - Yu mas kilim pisin bilong opisit long muvim na pait.\n   - Yu mas protektim flag bilong yu long kisim flag bilong opisit.\n   - Yu ken usim Scout long ganim informesen long pisin bilong opisit na atakim pisin i weak.\n\n### Pasin bilong Mekim Muvim:\n1. Yu mas spesifim koordinet bilong pisin yu laik muvim na destiniesen.\n2. Yu ken usim format: [A0 B0], we A0 i posisen bilong pisin, na B0 i destiniesen.\n   - Eg: Long muvim pisin long row 0, column 0 long row 1, column 0, input [A0 B0].\n3. Yu mas ensurim destiniesen i valid akording long rul bilong muvim.\n\n### Notis bilong Importans:\n- Board i soim pisin bilong yu na posisen bilong ol, eg MN, MS.\n- Board i soim posisen bilong pisin bilong opisit tu, eg ?.\n- Grid i gat ~ i lake na yu no ken muvim long en.\n- Long sugestion, yu ken statim game bilong yu long muvim pisin i stap long front line long ganim informesen long pisin bilong opisit. Player 0 na player 1 i gat front line long row D na G rispektivli.\n\nHia i stap board state bilong nau:\n"
+  },
+  "board": {
+    "current_board": "Board bilong Nau:\n\n{board}\nMuvim i Availabul: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Man i pilai {player_id} em i no putim wanpela move long dispela kain pasin olsem [A0 B0] .",
+    "invalid_coordinates": "Invalid action format. Man {player_id} i no bin putim ol valid koordinet long en.",
+    "not_own_piece": "Pasin i no stret. Pleia {player_id} mas goim wanpela pisi bilong em yet.",
+    "scout_through_pieces": "Invalid action format. Player {player_id} i no ken putim wanpela skut long ol narapela piusen.",
+    "scout_diagonal": "Invalid action format. Man i pilai {player_id} em i no ken surikim wanpela skut long diagonally.",
+    "non_scout_multi_square": "Pasim i no stret. Ol pisi, ekseptim skaut, inap go wanpela skwea tasol long wan taim.",
+    "move_into_lake": "Format bilong aksen i rong. Player {player_id} i no ken muvim long lake.",
+    "move_onto_own_piece": "Dispela pasin i no stret. Man {player_id} em i no inap go long hap bilong em yet.",
+    "move_bomb_or_flag": "Format bilong aksen i rong. Player {player_id} i no ken muvim bomb o flag."
+  },
+  "game_action": {
+    "you_moved": "Yu muvim yu pis from {source} to {dest}.",
+    "opponent_moved": "Pleia {player_id} i goim wanpela pisi bilong em long {source} i go long {dest}.",
+    "you_equal_ranks": "Yu i muvim pisin bilong yu long {source} long {dest}. Pisin i atakim i {attacking_rank} na pisin i destiniesen i {target_rank}. Ol i wankain rang, tasol tupela pisin i raus.",
+    "opponent_equal_ranks": "Player {player_id} i muvim pisin long {source} long {dest}. Pisin i atakim i {attacking_rank} na pisin i destiniesen i {target_rank}. Ol i wankain rang, tasol tupela pisin i raus.",
+    "you_miner_defused": "Yu muvim yu pis from {source} to {dest}. Attakin pis em i {attacking_rank} na destinashen pis em i {target_rank}. Olsem miners i save defusim bombs, yu winim batel.",
+    "opponent_miner_defused": "Pleya {player_id} imus movim wanpela pis from {source} to {dest}. Attakin pis em i {attacking_rank} na destinashen pis em i {target_rank}. Olsem miners i save defusim bombs, yu losim batel.",
+    "you_bomb_lost": "Yu i muvim pisin bilong yu long {source} long {dest}. Pisin i atakim i {attacking_rank} na pisin i destiniesen i {target_rank}. Ataka i no Miner, yu i lusim pait.",
+    "opponent_bomb_won": "Pleya {player_id} imus movim wanpela pis from {source} to {dest}. Attakin pis em i {attacking_rank} na destinashen pis em i {target_rank}. Olsem attacker i no miner, yu winim batel.",
+    "you_spy_won": "Yu i muvim pisin bilong yu long {source} long {dest}. Pisin i atakim i {attacking_rank} na pisin i destiniesen i {target_rank}. Ataka i Spai na destiniesen i Marshal, yu i winim pait.",
+    "opponent_spy_lost": "Player {player_id} i muvim pisin long {source} long {dest}. Pisin i atakim i {attacking_rank} na pisin i destiniesen i {target_rank}. Ataka i Spai na destiniesen i Marshal, yu i lusim pait.",
+    "you_higher_won": "Yu muvim yu pis from {source} to {dest}. Attakin pis em i {attacking_rank} na destinashen pis em i {target_rank}. Olsem attacker i higher renk long destinashen, yu winim batel.",
+    "opponent_higher_lost": "Player {player_id} i muvim pisin long {source} long {dest}. Pisin i atakim i {attacking_rank} na pisin i destiniesen i {target_rank}. Ataka i rang i winim destiniesen, yu i lusim pait.",
+    "you_lower_lost": "Yu i muvim pisin bilong yu long {source} long {dest}. Pisin i atakim i {attacking_rank} na pisin i destiniesen i {target_rank}. Ataka i rang i lusim destiniesen, yu i lusim pait.",
+    "opponent_lower_won": "Player {player_id} i muvim pisin long {source} long {dest}. Pisin i atakim i {attacking_rank} na pisin i destiniesen i {target_rank}. Ataka i rang i lusim destiniesen, yu i winim pait."
+  },
+  "outcome": {
+    "flag_captured": "Man {player_id} i kisim plak bilong narapela man!",
+    "no_movable_pieces": "Pleya {winner_id} winim! Pleya {loser_id} i no gat moa pis we i ken muv."
+  }
+}

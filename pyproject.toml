@@ -9,7 +9,10 @@ description = "A Collection of Competitive Text-Based Games for Language Model E
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
-authors = [{name="Leon Guertler", email="Guertlerlo@cfar.a-star.edu.sg"},]
+authors = [
+    {name = "Leon Guertler", email = "Guertlerlo@cfar.a-star.edu.sg"},
+    {name = "Bobby Cheng", email = "bobbycxy1994@gmail.com"},
+]
 dependencies = ["openai", "rich", "nltk", "chess", "python-dotenv", "requests", "websockets"]
 
 [project.urls]
@@ -17,5 +20,9 @@ dependencies = ["openai", "rich", "nltk", "chess", "python-dotenv", "requests", 
 
 [project.optional-dependencies]
 all = ["sympy", "latex2sympy", "openai", "google-genai", "transformers", "cerebras-cloud-sdk", "boto3", "anthropic"]
+# Word games in non-English languages need per-language word data. wordfreq
+# (Apache-2.0) covers all supported languages; it is optional so the core
+# install stays lean and English word games work with no extra dependency.
+wordgames = ["wordfreq"]
 
 

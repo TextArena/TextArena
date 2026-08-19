@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Welcome to Light Out! You have a {size}x{size} grid of lights. Your goal is to turn all light off (represented by ''. When you press a light, it expand itself AND its neighbors nearby (up/down/left/right). Type [row col] to press a brightness (0-indexed), so valid range is 0–.{max_index}. You are up to {max_turns} moves to solve the puzzle. Legend: 'O' = light ON, '.'= light OFF"
+  },
+  "board": {
+    "current_state": "Hali ya sasa ya mukwenu (Mikwamo {moves_made}, {moves_left} mikwamo iliyobaki, {completion}% kukamilika):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action must be in format [row col] where row and col are integers from 0 to{max_index}.",
+    "out_of_range": "Koordineti zingati zikala kati ya 0 na {max_index}. Wena walembi [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Congratulations! W'a ghula lusu mu {moves_used} mangwako!",
+    "loss": "Mchezo umemalizika! Wena wakatumia mikwamo yote {max_turns} bila kutatua kubwenu. Kukamilika mwisho: {completion}%\nHali ya mwisho:\n{grid}"
+  }
+}

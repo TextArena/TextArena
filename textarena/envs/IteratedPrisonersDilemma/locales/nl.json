@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in een Herhaalde Gevangenisdilemma dat {num_rounds} rondes duurt.\n\nSpelstructuur:\n- Voor elke beslissing hebt u {total_conversation_rounds} beurten om vrij te communiceren.\n- Daarna kiezen beide spelers tegelijkertijd om samen te werken of af te vallen.\n\nBeloningsmatrix (vast per ronde):\n- Beide Samenwerken ➜ elk {cooperate_reward}\n- Beide Afvallen ➜ elk {mutual_defect_reward}\n- Eén Afvallen, één Samenwerken ➜ Afvaller {defect_reward}, Samenwerker {sucker_reward}\n\nHoe te Spelen:\n- Tijdens gesprek: typ de tekst die u wilt.\n- Tijdens beslissingsfase: voeg '[Cooperate]' of '[Defect]' toe (ongeacht hoofdletters). U kunt extra tekst toevoegen voor/na het token."
+  },
+  "phases": {
+    "conversation_finished": "Gesprek beëindigd voor ronde {round}. Gelieve te antwoorden met '[Cooperate]' of '[Defect]' binnen \\boxed{{}}.",
+    "starting_round": "--- Start Ronde {round} ---",
+    "round_summary": "Resultaten Ronde {round}:\n{outcome}\nSpeler 0 verdiende {r0} (totaal {score_0}), Speler 1 verdiende {r1} (totaal {score_1})."
+  },
+  "outcome": {
+    "winner": "Speler {winner} wint {win_score} - {lose_score}.",
+    "draw": "Gelijkspel! Beide spelers scoorden {s0}.",
+    "round_both_cooperate": "Beide spelers werkten samen.",
+    "round_both_defect": "Beide spelers vielen af.",
+    "round_p0_cooperates_p1_defects": "Speler 0 werkte samen, Speler 1 viel af.",
+    "round_p0_defects_p1_cooperates": "Speler 0 viel af, Speler 1 werkte samen."
+  }
+}

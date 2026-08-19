@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} nel Gioco di Negoziazione.\nHai alcune risorse e il tuo compito è quello di scambiarle in modo tale che il valore totale delle tue risorse aumenti.\nLe risorse e i valori associati che attualmente possiedi sono:\n\t+ {resource_value_list}\nA ogni turno, puoi parlare con il tuo avversario e fare un'offerta di scambio.\nUtilizza i seguenti token speciali per le azioni:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Risorse Offerte -> Risorse Richieste]\n  - '[Accept]': Per accettare un'offerta in arrivo.\n  - '[Deny]': Per rifiutare un'offerta in arrivo (predefinito).\nIl gioco dura per {max_turns} turni in totale."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Il giocatore ha cercato di accettare uno scambio senza avere le risorse necessarie.",
+    "out_of_range": "Giocatore {player_id}, azione non valida. La colonna {col} è fuori dai limiti.",
+    "already_full": "Giocatore {player_id}, azione non valida. La colonna {col} è piena.",
+    "proposing_with_no_resource": "Il giocatore {player_id} ha cercato di fare un'offerta di scambio senza avere le risorse necessarie.",
+    "incorrect_offer_format": "Il giocatore {player_id} ha fatto un'offerta di scambio in un formato non corretto.",
+    "no_new_offer": "Il giocatore {player_id} non ha fatto una nuova offerta di scambio."
+  },
+  "offers": {
+    "reject": "Il giocatore {player_id} ha rifiutato l'offerta di scambio.",
+    "accept": "Il giocatore {acceptor_id} ha accettato l'offerta di scambio del giocatore {proposer_id}.",
+    "proposal": "Il giocatore {player_id} ha fatto la seguente offerta al giocatore {opponent_id}: Oggetti offerti: {offered} -> Oggetti richiesti: {requested}"
+  },
+  "outcome": {
+    "win": "Il giocatore {winner_id} ha vinto avendo un maggior guadagno nel valore dell'inventario.",
+    "draw": "Stesso cambiamento nel valore dell'inventario per tutti i giocatori. Pareggio."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "Du befinner dig i ett rum med {num_buttons} knappar: {buttons}. Varje knapp är associerad med en Bernoullifördelning med ett fast men okänt medelvärde; medelvärdena för knapparna kan vara olika.\nFör varje knapp, när du trycker på den, får du en belöning som är sampelad från den associerade fördelningen.\nDu har {num_turns} tidssteg och, vid varje tidssteg, kan du välja vilken knapp som helst och ta emot belöningen.\nDitt mål är att strategiskt välja knappar vid varje tidssteg för att samla in information om deras belöningsfördelning, som kommer att låta dig välja knappen med det högsta medelvärdet för belöningen korrekt i slutet av {num_turns} omgångar."
+  },
+  "board": {
+    "stat_line": "{button}: {reward} (spelad {count} gånger)",
+    "summary": "Sammanfattning:\n{stats}"
+  },
+  "invalid_move": {
+    "wrong_format": "Spelaren svarade inte med ett giltigt åtgärdsformat.",
+    "invalid_button": "En ogiltig knapp har valts."
+  },
+  "game_action": {
+    "pressed": "Du tryckte på {button}-knappen och fick en belöning på {reward}."
+  },
+  "game_message": {
+    "final_decision": "Du har förbrukat din budget för att prova olika val och observera deras belöningar. Gör nu en slutledning om vad det bästa valet är."
+  },
+  "outcome": {
+    "win": "Grattis! Du valde den rätta knappen.",
+    "lose": "Du valde en felaktig knapp."
+  }
+}
