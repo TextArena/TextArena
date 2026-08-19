@@ -1,140 +1,17 @@
-
-
-<!-- Game Count 99
-
-TODO = implemented but not updated
-
-general todos:
-- add readme for three player IPD
-- add readme for babyai-text
-- add readme for two rooms and a boom -->
-
-<!-- | # | Game | Mode | Players | Multilingual | Comments |
-|--:|------|:----:|:-------:|:------------:|----------|
-| 1 | [2048](#2048) | Single | 1 | | |
-| 2 | [BabyAiText](#babyaitext) | Single | 1 | | |
-| 3 | [Bandit](#bandit) | Single | 1 | | |
-| 4 | [Blackjack](#blackjack) | Single | 1 | | |
-| 5 | [Countdown](#countdown) | Single | 1 | | |
-| 6 | [Crosswords](#crosswords) | Single | 1 | | |
-| 7 | [Cryptarithm](#cryptarithm) | Single | 1 | | |
-| 8 | [FifteenPuzzle](#fifteenpuzzle) | Single | 1 | | |
-| 9 | [FrozenLake](#frozenlake) | Single | 1 | 🌐 | |
-| 10 | [GuessTheNumber](#guessthenumber) | Single | 1 | | |
-| 11 | [GuessWho](#guesswho) | Single | 1 | | |
-| 12 | [Hangman](#hangman) | Single | 1 | 🌐 | |
-| 13 | [LightsOut](#lightsout) | Single | 1 | | |
-| 14 | [LogicPuzzle](#logicpuzzle) | Single | 1 | | |
-| 15 | [Mastermind](#mastermind) | Single | 1 | | |
-| 16 | [Minesweeper](#minesweeper) | Single | 1 | | |
-| 17 | [PegJump](#pegjump) | Single | 1 | | |
-| 18 | [RushHour](#rushhour) | Single | 1 | | |
-| 19 | [Secretary](#secretary) | Single | 1 | | |
-| 20 | [Slitherlink](#slitherlink) | Single | 1 | | |
-| 21 | [Sokoban](#sokoban) | Single | 1 | | |
-| 22 | [Sudoku](#sudoku) | Single | 1 | | |
-| 23 | [ThreeCardMonte](#threecardmonte) | Single | 1 | | |
-| 24 | [TowerOfHanoi](#towerofhanoi) | Single | 1 | 🌐 | |
-| 25 | [TwentyQuestions](#twentyquestions) | Single | 1 | | |
-| 26 | [WordLadder](#wordladder) | Single | 1 | 🌐 | |
-| 27 | [Wordle](#wordle) | Single | 1 | 🌐 | |
-| 28 | [WordSearch](#wordsearch) | Single | 1 | 🌐 | |
-| 29 | [Alquerque](#alquerque) | Two | 2 | | |
-| 30 | [Battleship](#battleship) | Two | 2 | | |
-| 31 | [Breakthrough](#breakthrough) | Two | 2 | | |
-| 32 | [Checkers](#checkers) | Two | 2 | | |
-| 33 | [Chess](#chess) | Two | 2 | | |
-| 34 | [Chopsticks](#chopsticks) | Two | 2 | | |
-| 35 | [ColonelBlotto](#colonelblotto) | Two | 2 | 🌐 | |
-| 36 | [ConnectFour](#connectfour) | Two | 2 | 🌐 | |
-| 37 | [Coup](#coup) | Multi | 2–6 | 🌐 | |
-| 38 | [Crusade](#crusade) | Two | 2 | | |
-| 39 | [Debate](#debate) | Two | 2 | | |
-| 40 | [DontSayIt](#dontsayit) | Two | 2 | | |
-| 41 | [GameOfPureStrategy](#gameofpurestrategy) | Two | 2 | | |
-| 42 | [GermanWhist](#germanwhist) | Two | 2 | | |
-| 43 | [HighSociety](#highsociety) | Two | 2 | | |
-| 44 | [IndianPoker](#indianpoker) | Two | 2 | | |
-| 45 | [IteratedMatchingPennies](#iteratedmatchingpennies) | Two | 2 | | |
-| 46 | [IteratedPrisonersDilemma](#iteratedprisonersdilemma) | Two | 2 | 🌐 | |
-| 47 | [IteratedRockPaperScissors](#iteratedrockpaperscissors) | Two | 2 | | |
-| 48 | [IteratedTwoThirdsAverage](#iteratedtwothirdsaverage) | Two | 2 | | |
-| 49 | [IteratedStagHunt](#iteratedstaghunt) | Two | 2 | | |
-| 50 | [KuhnPoker](#kuhnpoker) | Two | 2 | 🌐 | |
-| 51 | [LeducHoldem](#leducholdem) | Two | 2 | | |
-| 52 | [LeTruc](#letruc) | Two | 2 | | |
-| 53 | [LinesOfAction](#linesofaction) | Two | 2 | | |
-| 54 | [LetterAuction](#letterauction) | Two | 2 | 🌐 | |
-| 55 | [LiarsDice](#liarsdice) | Multi | 2–15 | | |
-| 56 | [MemoryGame](#memorygame) | Two | 2 | | |
-| 57 | [Nim](#nim) | Two | 2 | 🌐 | |
-| 58 | [Othello](#othello) | Two | 2 | | |
-| 59 | [PigDice](#pigdice) | Two | 2 | 🌐 | |
-| 60 | [Poker](#poker) | Multi | 2–15 | | |
-| 61 | [QuantumTicTacToe](#quantumtictactoe) | Two | 2 | | |
-| 62 | [ReverseTicTacToe](#reversetictactoe) | Two | 2 | | |
-| 63 | [ScenarioPlanning](#scenarioplanning) | Two | 2 | | |
-| 64 | [Santorini](#santorini) | Multi | 2–3 | | |
-| 65 | [SimpleBlindAuction](#simpleblindauction) | Two | 2 | | |
-| 66 | [SimpleNegotiation](#simplenegotiation) | Two | 2 | 🌐 | |
-| 67 | [SimpleTak](#simpletak) | Two | 2 | 🌐 | |
-| 68 | [Snake](#snake) | Multi | 2–15 | | |
-| 69 | [SpellingBee](#spellingbee) | Two | 2 | 🌐 | |
-| 70 | [SpiteAndMalice](#spiteandmalice) | Two | 2 | | |
-| 71 | [Stratego](#stratego) | Two | 2 | | |
-| 72 | [Surround](#surround) | Multi | 2–15 | | |
-| 73 | [Tak](#tak) | Two | 2 | | |
-| 74 | [TicTacToe](#tictactoe) | Two | 2 | 🌐 | |
-| 75 | [TruthAndDeception](#truthanddeception) | Two | 2 | | |
-| 76 | [TwoDollar](#twodollar) | Two | 2 | | |
-| 77 | [UltimateTicTacToe](#ultimatetictactoe) | Two | 2 | | |
-| 78 | [WildTicTacToe](#wildtictactoe) | Two | 2 | | |
-| 79 | [WordChains](#wordchains) | Two | 2 | 🌐 | |
-| 80 | [Briscola](#briscola) | Multi | 2–4 | 🌐 | |
-| 81 | [Golf](#golf) | Multi | 2–4 | | |
-| 82 | [Negotiation](#negotiation) | Multi | 2–15 | | |
-| 83 | [CharacterConclave](#characterconclave) | Multi | 3–15 | | |
-| 84 | [Codenames](#codenames) | Multi | 4 | | |
-| 85 | [Diplomacy](#diplomacy) | Multi | 3–7 | | |
-| 86 | [BlindAuction](#blindauction) | Multi | 3–15 | | |
-| 87 | [SecretMafia](#secretmafia) | Multi | 6–15 | | |
-| 88 | [Taboo](#taboo) | Multi | 4–8 | | |
-| 89 | [ThreePlayerGOPS](#threeplayergops) | Multi | 3 | | |
-| 90 | [ThreePlayerTicTacToe](#threeplayertictactoe) | Multi | 3 | | |
-| 91 | [ThreePlayerIPD](#threeplayeripd) | Multi | 3 | 🌐 | |
-| 92 | [TwoRoomsAndABoom](#tworoomsandaboom) | Multi | 6–20 | | |
-| 93 | [Hanabi](#Hanabi) | Multi | ??? | | |
-| 94 | [ImTheBoss](#ImTheBoss) | ??? | ??? | | |
-| 95 | [IteratedUltimatumGame](#IteratedUltimatumGame) | ?? | ??? | | |
-| 96 | [Klondlike](#Klondlike) | ?? | ??? | | |
-| 97 | [MarketEntryGame](#marketentrygame) | ?? | ??? |  | |
-| 98 | [NewRecruit](#newrecruit) | ?? | ??? | | |
-| 99 | [PublicGoodsGames](#publicgoodsgame) | ?? | ??? | | |
-| 100 | [ScorableGames](#scorablegames) | ?? | ??? | | |
-| 101 | [Set](#set) | ?? | ??? | | | 
-| 102 | [SettlersOfCatan](#settlersofcatan) | ?? | ??? | | |
-| 103 | [UltimateTexasHoldem](#ultimatetexasholdem) | ?? | ??? | | |
-| 104 | [UsedCarNegotiation](#usedcarnegotiation) |  ?? | ??? | |  |
-| 105 | [VendorNegotiation](#vendornegotiation) | ?? | ??? | | |
-| 106 | [WinAsMuchAsYouCan](#winasmuchasyoucan) | ?? | ??? | | | -->
-
-
-# TextArena — Game Catalog
+# TextArena Game Catalog
 
 **106 games total** · 🌐 = multilingual support
 
 | Category | Games | Multilingual |
 |----------|:-----:|:------------:|
-| [Single-Player](#single-player) | 28 | 22 |
-| [Two-Player](#two-player) | 45 | 34 |
-| [Multi-Player](#multi-player) | 19 | 9 |
-| [To Verify](#to-verify) | 14 | 6 |
+| [Single-Player](#single-player) | 28 | 20 |
+| [Two-Player](#two-player) | 45 | 36 |
+| [Multi-Player](#multi-player) | 19 | 10 |
+| [To Verify](#to-verify) | 14 | 5 |
 
 ---
 
 ## Single-Player
-
-28 games · 1 player each
 
 | # | Game | 🌐 | Comments |
 |--:|------|:--:|----------|
@@ -168,8 +45,6 @@ general todos:
 | 28 | [WordSearch](#wordsearch) | | |
 
 ## Two-Player
-
-45 games · 2 players each
 
 | # | Game | 🌐 | Comments |
 |--:|------|:--:|----------|
@@ -221,8 +96,6 @@ general todos:
 
 ## Multi-Player
 
-19 games · sorted alphabetically
-
 | # | Game | Players | 🌐 | Comments |
 |--:|------|:-------:|:--:|----------|
 | 1 | [BlindAuction](#blindauction) | 3–15 | | |
@@ -246,8 +119,6 @@ general todos:
 | 19 | [TwoRoomsAndABoom](#tworoomsandaboom) | 6–20 | | |
 
 ## To Verify
-
-14 games with unknown mode and/or player count
 
 | # | Game | Mode | Players | 🌐 | Comments |
 |--:|------|:----:|:-------:|:--:|----------|
