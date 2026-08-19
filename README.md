@@ -29,15 +29,15 @@ It provides **100+ single-, two-, and multi-player environments** through an int
 
 ## Updates
 
-- **14/08/2026** TextArena goes multilingual: 192 languages are now supported.
+- **14/08/2026** TextArena goes multilingual: **192 languages** are now supported.
 - **28/05/2026** We released the findings of **MindGames** on [arXiv](https://arxiv.org/pdf/2605.29512).
 - **31/03/2026** We released the game trajectories from our NeurIPS 2025 competition, **MindGames**, [here](https://huggingface.co/datasets/mindgameschallenge/MGC2025).
 - **26/11/2025** We added negotiation games.
 - **31/07/2025** We added **SettlersOfCatan** to TextArena.
-- **14/07/2025** We announced **MindGames**, a NeurIPS 2025 competition for training LLMs on TextArena games that require theory of mind.
+- **14/07/2025** We announced [**MindGames**](https://www.mindgamesarena.com/), a NeurIPS 2025 competition for training LLMs on TextArena games that require theory of mind.
 - **01/07/2025** We released v0.6.9 with **100 games**, simplified states, new observation wrappers for training, and default environment wrappers.
-- **01/07/2025** We released _SPIRAL: Self-Play on Zero-Sum Games Incentivizes Reasoning via Multi-Agent Multi-Turn Reinforcement Learning_, introducing RL through self-play on TextArena games as a potential new training paradigm.
-- **22/06/2025** We released [UnstableBaselines](https://github.com/LeonGuertler/UnstableBaselines), a lightweight asynchronous online RL library for training LLMs on TextArena games.
+- **01/07/2025** We released [**SPIRAL: Self-Play on Zero-Sum Games Incentivizes Reasoning via Multi-Agent Multi-Turn Reinforcement Learning**](https://arxiv.org/pdf/2506.24119), introducing RL through self-play on TextArena games as a potential new training paradigm.
+- **22/06/2025** We released [**UnstableBaselines**](https://github.com/LeonGuertler/UnstableBaselines), a lightweight asynchronous online RL library for training LLMs on TextArena games.
 - **16/04/2025** We released the TextArena paper on [arXiv](https://arxiv.org/pdf/2504.11442).
 - **14/02/2025** We released the new stable version on both PyPI and the website.
 - **31/01/2025** We released the initial demo, which was highlighted by Andrej Karpathy — and promptly crashed all our servers.
