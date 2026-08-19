@@ -94,7 +94,19 @@ rewards, game_info = env.close()
 
 ## Multilingual Support
 
-TextArena supports UI localization across **192 languages** for more than 60% of its games. See [`textarena/envs/README.md`](textarena/envs/README.md) for a complete list of games with multilingual support. Languages can be assigned independently to each player using `lang_mapping`, allowing the same environment to be presented through different language interfaces.
+TextArena supports UI localization across **192 languages** for more than 60% of its games. See [`textarena/envs/README.md`](textarena/envs/README.md) for a complete list of games with multilingual support, and [`textarena/utils/locales`](textarena/utils/locales) for the localization files covering all 192 supported languages. Languages can be assigned independently to each player using `lang_mapping`, allowing the same environment to be presented through different language interfaces.
+
+Examples of multilingual game interfaces:
+
+
+<div align="center">
+
+<img src="docs/othello.gif" alt="Multilingual Othello in TextArena" width="48%">
+<img src="docs/connectfour.gif" alt="Multilingual Connect Four in TextArena" width="48%">
+<img src="docs/simpletak.gif" alt="Multilingual SimpleTak in TextArena" width="48%">
+<img src="docs/nim.gif" alt="Multilingual Nim in TextArena" width="48%">
+
+</div>
 
 ### Language Coverage
 
