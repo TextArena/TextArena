@@ -299,9 +299,9 @@ class RenderWrapper(Wrapper):
     def step(self, action: str) -> Tuple[bool, Optional[Info]]:
         return self.env.step(action=action)
     
-    def reset(self, num_players: int , seed: Optional[int] = None):
+    def reset(self, num_players: int , seed: Optional[int] = None, lang_mapping: Optional[Dict[int, str]] = None):
         self.reset_render()
-        return self.env.reset(num_players=num_players, seed=seed)
+        return self.env.reset(num_players=num_players, seed=seed, lang_mapping=lang_mapping)
 
     def reset_render(self):
         raise NotImplementedError
