@@ -1,15 +1,24 @@
 import re, random
-from typing import Any, Dict, List, Tuple, Optional, Union
+from typing import Any, Dict, List, Tuple, Optional, Literal
 
 import textarena as ta
 from textarena.envs.FifteenPuzzle.renderer import create_board_str
 
 class FifteenPuzzleEnv(ta.Env):
     """ Fifteen Puzzle environment """
-    def __init__(self, max_turns: int = 50):
-        """ Initialize the Fifteen Puzzle environment """
+    _DIFFICULTY_MOVES = {"easy": (1, 5), "medium": (6, 10), "hard": (11, 20)}
+
+    def __init__(self, max_turns: int = 50, difficulty: Optional[Literal["easy", "medium", "hard"]] = None):
+        """ Initialize the Fifteen Puzzle environment.
+
+        difficulty: when set, the board is scrambled a bounded number of slides from the
+        solved layout (easy/medium/hard); when None, a fully shuffled solvable board is used.
+        """
         super().__init__()
+        if difficulty is not None and difficulty not in self._DIFFICULTY_MOVES:
+            raise ValueError(f"difficulty must be one of {sorted(self._DIFFICULTY_MOVES)} or None, got {difficulty!r}")
         self.max_turns = max_turns
+        self.difficulty = difficulty
 
     def get_board_str(self):
         return create_board_str(game_state=self.state.game_state)
@@ -35,11 +44,54 @@ class FifteenPuzzleEnv(ta.Env):
         return self.m("player_prompt", "intro", player_id=player_id)
     
     def _generate_board(self):
-        """ Generate a shuffled board configuration """
+        """ Generate a solvable board configuration. With a difficulty set the board is
+        scrambled a bounded number of slides from solved (solvable by construction);
+        otherwise it is fully shuffled and repaired to a solvable layout. """
+        if self.difficulty is not None:
+            return self._scramble_from_solved(random.randint(*self._DIFFICULTY_MOVES[self.difficulty]))
         tiles = list(range(1, 16)) + [None]
         random.shuffle(tiles)
+        if not self._is_solvable(tiles):
+            # A single transposition of two non-blank tiles flips the inversion
+            # parity (and leaves the blank's row untouched), turning an
+            # unsolvable layout into a solvable one.
+            i, j = [k for k, t in enumerate(tiles) if t is not None][:2]
+            tiles[i], tiles[j] = tiles[j], tiles[i]
         return [tiles[i:i + 4] for i in range(0, 16, 4)] # e.g. [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, None]]
-    
+
+    def _scramble_from_solved(self, n_moves: int) -> List[List[Optional[int]]]:
+        """ Slide the blank `n_moves` times from the solved layout. The result is always
+        solvable, and its distance from solved scales with n_moves (i.e. with difficulty). """
+        tiles = list(range(1, 16)) + [None]
+        board = [tiles[i:i + 4] for i in range(0, 16, 4)]
+        r, c = 3, 3  # the blank starts in the bottom-right corner
+        previous = None  # avoid immediately sliding the blank back where it came from
+        for _ in range(n_moves):
+            neighbors = [(nr, nc) for nr, nc in ((r-1, c), (r+1, c), (r, c-1), (r, c+1)) if 0 <= nr < 4 and 0 <= nc < 4]
+            if previous is not None and len(neighbors) > 1:
+                neighbors.remove(previous)
+            nr, nc = random.choice(neighbors)
+            board[r][c], board[nr][nc] = board[nr][nc], board[r][c]
+            previous = (r, c)
+            r, c = nr, nc
+        return board
+
+    def _is_solvable(self, tiles: List[Optional[int]]) -> bool:
+        """ A 4-wide sliding puzzle is solvable iff the blank sits on an
+        even row counting from the bottom with an odd inversion count, or on an
+        odd row from the bottom with an even inversion count. """
+        values = [t for t in tiles if t is not None]
+        inversions = sum(
+            1
+            for i in range(len(values))
+            for j in range(i + 1, len(values))
+            if values[i] > values[j]
+        )
+        blank_row_from_bottom = 4 - (tiles.index(None) // 4)
+        if blank_row_from_bottom % 2 == 0:
+            return inversions % 2 == 1
+        return inversions % 2 == 0
+
     def _render_board(self, board):
         """ Render the current board layout """
         rendered_board = ""
