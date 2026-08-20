@@ -10,6 +10,26 @@ class Phase(Enum):
     DAY_DISCUSSION = "Day-Discussion"
     DAY_VOTING = "Day-Voting"
 
+def _shared_rules(player_roles: Dict[int, str], num_discussion_rounds: int) -> str:
+    """Rules block shown to every role, so the setup and phase flow are described identically."""
+    roles = list(player_roles.values())
+    return (
+        f"Welcome to Secret Mafia!\n"
+        f"The game has {roles.count('Mafia')} Mafia, {roles.count('Doctor')} Doctor, "
+        f"{roles.count('Detective')} Detective, and {roles.count('Villager')} Villagers.\n"
+        f"The game progresses through Day and Night phases.\n"
+        f"- During the Day phase, there are {num_discussion_rounds} rounds of discussion followed by voting.\n"
+        f"- During discussions, wrap what you want to say in double quotes (e.g. \"I suspect Player 3.\"). "
+        f"Only quoted text is shared with the other players.\n"
+        f"- After discussions, everyone votes to eliminate one player; the player with the most votes is eliminated.\n"
+        f"- During the Night phase: the Mafia choose one Village member to eliminate; "
+        f"the Doctor chooses one player to protect; "
+        f"the Detective chooses one player to learn whether they are Mafia; "
+        f"the Villagers have no special action.\n\n"
+        f"The game ends when either all Mafia are eliminated (Village wins) or "
+        f"the Mafia equal or outnumber the remaining Villagers (Mafia wins).\n\n"
+    )
+
 class Role:
     name: str = "Role"
     team: str = "Unknown"
@@ -22,16 +42,11 @@ class Villager(Role):
     description = "A regular villager. Your goal is to identify and eliminate all Mafia members through voting during the day."
     def get_prompt(self, player_id, player_roles, num_players, num_discussion_rounds):
         return (
-            f"Welcome to Secret Mafia! You are Player {player_id}.\n"
+            _shared_rules(player_roles, num_discussion_rounds)
+            + f"You are Player {player_id}.\n"
             f"Your role: {self.name}\nTeam: {self.team}\nDescription: {self.description}\n\n"
             f"Players: {', '.join([f'Player {i}' for i in range(num_players)])}\n\n"
-            f"The game progresses through Day and Night phases.\n"
-            f"- During the Day phase, there are {num_discussion_rounds} rounds of discussion followed by voting.\n"
-            f"- During discussions, everything you say is automatically broadcasted to all players.\n"
-            f"- After discussions, all players must vote to eliminate one player.\n"
-            f"- During the Night phase, you have no special actions.\n\n"
-            f"The game ends when either all Mafia members are eliminated (Village wins) or\n"
-            f"Mafia members equal or outnumber Villagers (Mafia wins).\n"
+            f"Win by identifying and eliminating all Mafia members.\n"
         )
 
 class Mafia(Role):
@@ -41,13 +56,12 @@ class Mafia(Role):
     def get_prompt(self, player_id, player_roles, num_players, num_discussion_rounds):
         teammates = [f"Player {pid}" for pid, r in player_roles.items() if r == "Mafia"]
         return (
-            f"Welcome to Secret Mafia! You are Player {player_id}.\n"
+            _shared_rules(player_roles, num_discussion_rounds)
+            + f"You are Player {player_id}.\n"
             f"Your role: {self.name}\nTeam: {self.team}\nDescription: {self.description}\n\n"
             f"Players: {', '.join([f'Player {i}' for i in range(num_players)])}\n\n"
             f"Your teammates are: {', '.join(teammates)}.\n\n"
-            f"During DAY phase: Speak freely and vote.\n"
-            f"During NIGHT phase: '[Player X]' to vote and eliminate a villager.\n"
-            f"Win by eliminating villagers until Mafia equal or outnumber them.\n"
+            f"Win by eliminating villagers until the Mafia equal or outnumber them.\n"
         )
 
 class Doctor(Role):
@@ -56,11 +70,10 @@ class Doctor(Role):
     description = "Protect one player each night from Mafia elimination."
     def get_prompt(self, player_id, player_roles, num_players, num_discussion_rounds):
         return (
-            f"Welcome to Secret Mafia! You are Player {player_id}.\n"
+            _shared_rules(player_roles, num_discussion_rounds)
+            + f"You are Player {player_id}.\n"
             f"Your role: {self.name}\nTeam: {self.team}\nDescription: {self.description}\n\n"
             f"Players: {', '.join([f'Player {i}' for i in range(num_players)])}\n\n"
-            f"During DAY phase: Speak freely and vote.\n"
-            f"During NIGHT phase: '[Player X]' to protect a player.\n"
             f"Win by identifying and eliminating all Mafia members.\n"
         )
 
@@ -70,12 +83,10 @@ class Detective(Role):
     description = "Investigate players to find Mafia members."
     def get_prompt(self, player_id, player_roles, num_players, num_discussion_rounds):
         return (
-            f"Welcome to Secret Mafia! You are Player {player_id}.\n"
+            _shared_rules(player_roles, num_discussion_rounds)
+            + f"You are Player {player_id}.\n"
             f"Your role: {self.name}\nTeam: {self.team}\nDescription: {self.description}\n\n"
             f"Players: {', '.join([f'Player {i}' for i in range(num_players)])}\n\n"
-            f"During DAY phase: Speak freely and vote.\n"
-            f"During NIGHT phase: '[Player X]' to investigate.\n"
-            f"You'll learn immediately if the target is Mafia.\n"
             f"Win by identifying and eliminating all Mafia members.\n"
         )
 
@@ -97,6 +108,7 @@ class VoteHandler:
 
 class SecretMafiaEnv(ta.Env):
     voting_pattern = re.compile(r".*\[(?:player\s*)?(\d+)\].*", re.IGNORECASE)
+    discussion_pattern = re.compile(r'"([^"]*)"')
     _ROLE_FACTORY = {
         "Villager":  Villager,
         "Mafia":     Mafia,
@@ -204,33 +216,37 @@ class SecretMafiaEnv(ta.Env):
             mafia = [p for p in alive if self.player_roles[p] == "Mafia"]
             targets = [p for p in alive if p not in mafia]
             for p in mafia:
-                self.state.add_observation(to_id=p, message=f"Night has fallen. Mafia, agree on a victim.\nValid targets: {', '.join(f'[{t}]' for t in targets)}", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(to_id=p, message=f"Night has fallen. Mafia, choose one player to eliminate: {', '.join(f'[{t}]' for t in targets)}. Reply with only your target in the format [X].", observation_type=ta.ObservationType.GAME_MESSAGE)
             self.next_player_ids = random.sample(mafia, k=len(mafia))
 
         elif self.phase == Phase.NIGHT_DOCTOR:
             doc = next(p for p in alive if self.player_roles[p] == "Doctor")
             opts = ", ".join(f"[{t}]" for t in alive if t != doc)
-            self.state.add_observation(to_id=doc, message=f"Night phase - choose one player to protect: {opts}", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(to_id=doc, message=f"Night phase - choose one player to protect: {opts}. Reply with only your target in the format [X].", observation_type=ta.ObservationType.GAME_MESSAGE)
             self.next_player_ids = [doc]
 
         elif self.phase == Phase.NIGHT_DETECTIVE:
             det = next(p for p in alive if self.player_roles[p] == "Detective")
             opts = ", ".join(f"[{t}]" for t in alive if t != det)
-            self.state.add_observation(to_id=det, message=f"Night phase - choose one player to investigate: {opts}", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(to_id=det, message=f"Night phase - choose one player to investigate: {opts}. Reply with only your target in the format [X].", observation_type=ta.ObservationType.GAME_MESSAGE)
             self.next_player_ids = [det]
 
         elif self.phase == Phase.DAY_DISCUSSION:
             rounds = self.discussion_rounds
-            self.state.add_observation(to_id=-1, message=f"Day breaks. Discuss for {rounds} rounds, then a vote will follow.", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(to_id=-1, message=f"Day breaks. Discuss for {rounds} rounds, then a vote will follow. Put anything you want the other players to hear in double quotes \"...\"; only quoted text is shared.", observation_type=ta.ObservationType.GAME_MESSAGE)
             players = random.sample(alive, k=len(alive))
             self.next_player_ids = players * rounds
 
         elif self.phase == Phase.DAY_VOTING:
             opts = ", ".join(f"[{p}]" for p in alive)
-            self.state.add_observation(to_id=-1, message=f"Voting phase - submit one vote in format [X]. Valid: {opts}", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(to_id=-1, message=f"Voting phase - submit one vote: {opts}. Reply with only your vote in the format [X].", observation_type=ta.ObservationType.GAME_MESSAGE)
             self.next_player_ids = random.sample(alive, k=len(alive))
 
-    def _handle_discussion(self, pid: int, action: str):    self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+    def _handle_discussion(self, pid: int, action: str):
+        # Share only the double-quoted parts; fall back to the whole message if the player used no quotes.
+        spoken = self.discussion_pattern.findall(action)
+        message = " ".join(f'"{s}"' for s in spoken) if spoken else action
+        self.state.add_observation(from_id=pid, message=message, observation_type=ta.ObservationType.PLAYER_ACTION)
     def _handle_day_vote(self, pid: int, action: str):      self._record_vote(pid, action, broadcast_to_all=True)
     def _handle_mafia_vote(self, pid: int, action: str):    self._record_vote(pid, action, broadcast_to_mafia_only=True)
     def _handle_doctor_action(self, pid: int, action: str):
@@ -246,7 +262,7 @@ class SecretMafiaEnv(ta.Env):
         # save target
         if target == self.state.game_state["pending_elimination"]:
             self.state.game_state["pending_elimination"] = None
-        self.state.add_observation(from_id=pid, to_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+        self.state.add_observation(from_id=pid, to_id=pid, message=f"chooses to protect [{target}] during the night phase.", observation_type=ta.ObservationType.PLAYER_ACTION)
 
     def _handle_detective_action(self, pid: int, action: str):
         target = VoteHandler.parse(action)
@@ -273,11 +289,11 @@ class SecretMafiaEnv(ta.Env):
         self.state.game_state["votes"][pid] = target
 
         if broadcast_to_all:
-            self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+            self.state.add_observation(from_id=pid, message=f"votes for [{target}] during the day phase.", observation_type=ta.ObservationType.PLAYER_ACTION)
         elif broadcast_to_mafia_only:
             mafia = [p for p in self.state.game_state["alive_players"] if self.player_roles[p] == "Mafia"]
             for m in mafia:
-                self.state.add_observation(from_id=pid, to_id=m, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+                self.state.add_observation(from_id=pid, to_id=m, message=f"chooses to eliminate [{target}] during the night phase.", observation_type=ta.ObservationType.PLAYER_ACTION)
 
     def _mark_invalid(self, pid: int, reason: str):
         fatal = self.state.set_invalid_move(reason)
@@ -321,10 +337,11 @@ class SecretMafiaEnv(ta.Env):
     def _check_win(self):
         alive = self.state.game_state["alive_players"]
         mafia_alive = [p for p in alive if self.player_roles[p] == "Mafia"]
+        villagers_alive = [p for p in alive if self.player_roles[p] != "Mafia"]
 
         if not mafia_alive:
             villagers = [p for p in range(self.state.num_players) if self.player_roles[p] != "Mafia"]
             self.state.set_winners(player_ids=villagers, reason="All Mafia were eliminated. Village wins!")
-        elif len(mafia_alive) >= len(alive) / 2:
+        elif len(mafia_alive) >= len(villagers_alive):
             mafia = [p for p in range(self.state.num_players) if self.player_roles[p] == "Mafia"]
             self.state.set_winners(player_ids=mafia, reason="Mafia reached parity with villagers. Mafia wins!")
