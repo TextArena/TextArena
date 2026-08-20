@@ -388,6 +388,9 @@ register_with_versions(id="UsedCarNegotiation-v0-strong-buyer", entry_point="tex
 register_with_versions(id="UsedCarNegotiation-v0-strong-seller",entry_point="textarena.envs.UsedCarNegotiation.env:UsedCarNegotiationEnv", wrappers={"default": [LLMObservationWrapper], "-train": CONVERSATIONAL_WRAPPERS}, max_rounds=10, batna=("weak", "strong"))
 register_with_versions(id="UsedCarNegotiation-v0-balanced",     entry_point="textarena.envs.UsedCarNegotiation.env:UsedCarNegotiationEnv", wrappers={"default": [LLMObservationWrapper], "-train": CONVERSATIONAL_WRAPPERS}, max_rounds=10, batna=("strong", "strong"))
 
+# SallySoprano [3 Player: 2 negotiators + LLM judge]
+register_with_versions(id="SallySoprano-v0", entry_point="textarena.envs.SallySoprano.env:SallySopranoEnv", wrappers={"default": [LLMObservationWrapper], "-train": CONVERSATIONAL_WRAPPERS}, max_rounds=60)
+
 # WildTicTacToe [2 Player]
 register_with_versions(id="WildTicTacToe-v0", entry_point="textarena.envs.WildTicTacToe.env:WildTicTacToeEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
 
