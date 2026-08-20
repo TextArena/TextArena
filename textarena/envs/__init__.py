@@ -378,6 +378,9 @@ register_with_versions(id="VendorNegotiation-v0-heavy", entry_point="textarena.e
 # UltimateTicTacToe [2 Player]
 register_with_versions(id="UltimateTicTacToe-v0", entry_point="textarena.envs.UltimateTicTacToe.env:UltimateTicTacToeEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
 
+# UgliOrange [3 Player] - Negotiation with LLM Judge
+register_with_versions(id="UgliOrange-v0", entry_point="textarena.envs.UgliOrange.env:UgliOrangeEnv", wrappers={"default": [LLMObservationWrapper], "-train": CONVERSATIONAL_WRAPPERS}, max_rounds=60)
+
 # UltimatumGame [2 Player]
 register_with_versions(id="IteratedUltimatumGame-v0",           entry_point="textarena.envs.IteratedUltimatumGame.env:IteratedUltimatumGameEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": CONVERSATIONAL_WRAPPERS}, pool=50, max_turns=10, alternate_roles=False)
 register_with_versions(id="IteratedUltimatumGame-v0-alternate", entry_point="textarena.envs.IteratedUltimatumGame.env:IteratedUltimatumGameEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": CONVERSATIONAL_WRAPPERS}, pool=50, max_turns=12, alternate_roles=True)
