@@ -39,7 +39,7 @@ class TestBohnanzaEnv:
         """Test environment initialization with different parameters."""
         # Test default initialization
         env = BohnanzaEnv()
-        assert env.max_turns == 200
+        assert env.max_turns == 3000
         assert env.error_allowance == 3
         
         # Test custom initialization
@@ -1191,8 +1191,8 @@ class TestBohnanzaEnv:
         player_id = env.state.current_player_id
         
         # Should be able to create board string without errors
-        from textarena.envs.Bohnanza.renderer import create_board_str
-        board_output = create_board_str(board_str, player_id)
+        from textarena.envs.Bohnanza.renderer import get_board_str
+        board_output = get_board_str(board_str, player_id)
         
         assert isinstance(board_output, str)
         assert len(board_output) > 0
@@ -1406,3 +1406,56 @@ class TestBohnanzaEnv:
         
         # Should be close (some beans might be in mandatory plants or other temporary states)
         assert abs(initial_total - final_total) <= 10
+
+    # ===== TERMINATION =====
+
+    @staticmethod
+    def _play_first_valid(env, candidates, step_cap):
+        """Play the first candidate action that is valid in the current state."""
+        import copy
+        done, steps = False, 0
+        while not done and steps < step_cap:
+            env.get_observation()
+            for action in candidates:
+                trial = copy.deepcopy(env)
+                trial.step(action)
+                if not trial.state.made_invalid_move and not trial.state.elimination_order:
+                    break
+            done, _ = env.step(action)
+            steps += 1
+        return done
+
+    def test_exhausting_error_allowance_forfeits(self, reset_env_3p):
+        """A player who keeps making invalid moves loses and the game ends."""
+        env = reset_env_3p
+        offender = env.state.current_player_id
+        done = False
+        for _ in range(env.error_allowance + 1):
+            done, _ = env.step("not a valid action")
+        assert done
+        rewards, info = env.close()
+        assert rewards[offender] == -1
+        assert all(r == 0 for pid, r in rewards.items() if pid != offender)
+        assert "forfeits" in info[offender]["reason"]
+
+    def test_turn_limit_scores_game(self):
+        """Trading talk that never ends is cut off by max_turns and scored by coins."""
+        env = BohnanzaEnv(max_turns=30, error_allowance=3)
+        env.reset(num_players=3, seed=0)
+        # "[Draw]" during trading is free-text chat, so trading never ends on its own
+        candidates = ["[Draw]", "[Plant] 1", "[Plant] 2", "[Plant] 3", "[Pass]"]
+        assert self._play_first_valid(env, candidates, step_cap=200)
+        assert env.state.turn == 30
+        rewards, _ = env.close()
+        assert list(rewards.values()).count(1) == 1
+
+    def test_full_game_terminates_with_valid_play(self):
+        """Prompt valid play reaches the end of the third deck cycle."""
+        env = BohnanzaEnv()
+        env.reset(num_players=3, seed=1)
+        candidates = ["[EndTrading]", "[Draw]", "[Plant] 1", "[Plant] 2", "[Plant] 3", "[Pass]"]
+        candidates += [f"[Plant] {b} {f}" for b in BohnanzaEnv.BEAN_TYPES for f in (1, 2, 3)]
+        candidates += ["[Harvest] 1", "[Harvest] 2", "[Harvest] 3"]
+        assert self._play_first_valid(env, candidates, step_cap=2 * env.max_turns)
+        assert env.state.game_state["deck_cycles"] >= 3
+        assert env.state.turn < env.max_turns

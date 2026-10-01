@@ -30,12 +30,13 @@ class BohnanzaEnv(ta.Env):
         "Garden": {"count": 6, "payouts": {2: 2, 3: 3}}
     }
     
-    def __init__(self, max_turns: int = 200, error_allowance: int = 3):
+    def __init__(self, max_turns: int = 3000, error_allowance: int = 3):
         """
         Initialize the Bohnanza environment.
         
         Args:
-            max_turns: Maximum number of turns (high limit for deck-based ending)
+            max_turns: Maximum number of steps before the game is scored early. A full
+                game takes roughly 1000-1200 steps without much negotiation.
             error_allowance: Number of invalid moves allowed per player
         """
         super().__init__()
@@ -196,14 +197,28 @@ Game ends after deck is reshuffled 3 times. All remaining fields are harvested a
             if phase_ended:
                 self._check_phase_transition()
             self._check_game_end()
-        
+
+        # A player who exhausts their error allowance forfeits. Ending the game here
+        # also keeps state.step() from spinning forever over eliminated players.
+        if self.state.elimination_order and not self.state.done:
+            self._forfeit(self.state.elimination_order[-1])
+
         # Store the current player and phase before TextArena processes
         intended_current_player = self.state.current_player_id
         current_phase = self.state.game_state["current_phase"]
         
         # Let TextArena do its step processing
         done, info = self.state.step()
-        
+
+        # Turn limit backstop: score the game as if the deck had run out
+        if not self.state.done and self.state.turn >= self.max_turns:
+            self.state.add_observation(
+                message=f"Turn limit ({self.max_turns}) reached. Final harvest and scoring.",
+                observation_type=ta.ObservationType.GAME_MESSAGE
+            )
+            self._end_game()
+            return True, info
+
         # Override TextArena's turn advancement based on phase
         if not self.state.done:
             if current_phase == "draw_trade":
@@ -1087,7 +1102,16 @@ Game ends after deck is reshuffled 3 times. All remaining fields are harvested a
         
         self.state.rewards = rewards
         self.state.done = True
-    
+
+    def _forfeit(self, player_id: int):
+        """End the game because a player ran out of invalid moves."""
+        reason = f"Player {player_id} made too many invalid moves and forfeits the game."
+        self.state.add_observation(message=reason, observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.set_game_outcome(
+            reward_dict={pid: (-1 if pid == player_id else 0) for pid in range(self.state.num_players)},
+            reason=reason
+        )
+
     def get_observation(self):
         """Get observation for current player."""
         player_id = self.state.current_player_id
