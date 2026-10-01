@@ -51,7 +51,6 @@ class RetroSpaceDuelEnv(ta.Env):
         self.state.reset(
             game_state=game_state,
             player_prompt_function=self._generate_player_prompt,
-            role_mapping={0: "Player 1", 1: "Player 2"},
         )
         self.state.add_observation(message=self._get_arena_state(), observation_type=ta.ObservationType.GAME_BOARD)
 
@@ -125,7 +124,7 @@ class RetroSpaceDuelEnv(ta.Env):
         in_nebula = self.player_positions[player_id] in self.nebulas
         prompt = (
             f"=== RETRO SPACE DUEL - TURN {game_state['turn']}/{game_state['max_turns']} ===\n\n"
-            f"You are Player {player_id + 1} in Retro Space Duel.\n"
+            f"You are Player {player_id} in Retro Space Duel.\n"
             f"Your position: {self.player_positions[player_id]}\n"
             f"Your health: {self.player_health[player_id]}\n"
             f"Your shield: {self.player_shields[player_id]} remaining\n"
@@ -155,7 +154,7 @@ class RetroSpaceDuelEnv(ta.Env):
         player_id = self.state.current_player_id
         self.state.add_observation(
             from_id=player_id, to_id=-1,
-            message=f"Player {player_id + 1} chooses: {action}",
+            message=action,
             observation_type=ta.ObservationType.PLAYER_ACTION,
         )
 
@@ -166,7 +165,7 @@ class RetroSpaceDuelEnv(ta.Env):
         else:
             self.projectiles = []  # projectiles resolve instantly inside _fire_projectile
             self.state.add_observation(
-                message=f"=== Updated Arena After Player {player_id + 1}'s Move ===\n{self._get_arena_state()}",
+                message=f"=== Updated Arena After Player {player_id}'s Move ===\n{self._get_arena_state()}",
                 observation_type=ta.ObservationType.GAME_BOARD,
             )
             self._check_gameover()
@@ -220,14 +219,14 @@ class RetroSpaceDuelEnv(ta.Env):
             # Boundary or asteroid (indestructible) -> ricochets back and eliminates the shooter
             if px in (0, self.width - 1) or py in (0, self.height - 1):
                 self.state.add_observation(
-                    message=f"Player {player_id + 1}'s projectile hit the boundary and ricocheted back, eliminating them!",
+                    message=f"Player {player_id}'s projectile hit the boundary and ricocheted back, eliminating them!",
                     observation_type=ta.ObservationType.GAME_MESSAGE,
                 )
                 self.player_health[player_id] = 0
                 break
             if (px, py) in self.asteroids:
                 self.state.add_observation(
-                    message=f"Player {player_id + 1}'s projectile hit an asteroid and ricocheted back, eliminating them!",
+                    message=f"Player {player_id}'s projectile hit an asteroid and ricocheted back, eliminating them!",
                     observation_type=ta.ObservationType.GAME_MESSAGE,
                 )
                 self.player_health[player_id] = 0
@@ -245,7 +244,7 @@ class RetroSpaceDuelEnv(ta.Env):
                         self.player_health[i] = max(0, self.player_health[i] - damage)
                         if self.player_shields[i] > 0:
                             self.player_shields[i] -= 1
-                        self.state.add_observation(message=f"Player {i + 1} was hit by the mine explosion and took {damage} damage!", observation_type=ta.ObservationType.GAME_MESSAGE)
+                        self.state.add_observation(message=f"Player {i} was hit by the mine explosion and took {damage} damage!", observation_type=ta.ObservationType.GAME_MESSAGE)
                 break
             if (px, py) in self.powerups:  # Destructible
                 self.powerups.remove((px, py))
@@ -262,9 +261,9 @@ class RetroSpaceDuelEnv(ta.Env):
                     if self.player_shields[i] > 0:
                         self.player_shields[i] -= 1
                         damage = 5
-                        self.state.add_observation(message=f"Player {i + 1}'s shield absorbed some damage! {self.player_shields[i]} shield points remaining.", observation_type=ta.ObservationType.GAME_MESSAGE)
+                        self.state.add_observation(message=f"Player {i}'s shield absorbed some damage! {self.player_shields[i]} shield points remaining.", observation_type=ta.ObservationType.GAME_MESSAGE)
                     self.player_health[i] = max(0, self.player_health[i] - damage)
-                    self.state.add_observation(message=f"Player {i + 1} was hit by a projectile and took {damage} damage! Health: {self.player_health[i]}", observation_type=ta.ObservationType.GAME_MESSAGE)
+                    self.state.add_observation(message=f"Player {i} was hit by a projectile and took {damage} damage! Health: {self.player_health[i]}", observation_type=ta.ObservationType.GAME_MESSAGE)
                     hit_player = True
                     break
             if hit_player:
@@ -298,11 +297,11 @@ class RetroSpaceDuelEnv(ta.Env):
             self.player_health[player_id] = max(0, self.player_health[player_id] - damage)
             if self.player_shields[player_id] > 0:
                 self.player_shields[player_id] -= 1
-            self.state.add_observation(message=f"Player {player_id + 1} hit a mine and took {damage} damage!", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=f"Player {player_id} hit a mine and took {damage} damage!", observation_type=ta.ObservationType.GAME_MESSAGE)
 
     def _apply_powerup(self, player_id: int):
         powerup_type = random.choice(["shield", "speed", "weapon"])
-        message = f"Player {player_id + 1} collected a "
+        message = f"Player {player_id} collected a "
         if powerup_type == "shield":
             self.player_shields[player_id] = 3
             message += "shield power-up! +3 shields."
@@ -318,13 +317,13 @@ class RetroSpaceDuelEnv(ta.Env):
         for i, health in enumerate(self.player_health):
             if health <= 0:
                 winner_id = 1 - i
-                self.state.set_winner(player_id=winner_id, reason=f"Player {winner_id + 1} wins by eliminating Player {i + 1}.")
+                self.state.set_winner(player_id=winner_id, reason=f"Player {winner_id} wins by eliminating Player {i}.")
                 return
 
         if self.state.check_turn_limit():
             if self.player_health[0] > self.player_health[1]:
-                self.state.set_winner(player_id=0, reason=f"Turn limit reached. Player 1 wins with more health ({self.player_health[0]} vs {self.player_health[1]}).")
+                self.state.set_winner(player_id=0, reason=f"Turn limit reached. Player 0 wins with more health ({self.player_health[0]} vs {self.player_health[1]}).")
             elif self.player_health[1] > self.player_health[0]:
-                self.state.set_winner(player_id=1, reason=f"Turn limit reached. Player 2 wins with more health ({self.player_health[1]} vs {self.player_health[0]}).")
+                self.state.set_winner(player_id=1, reason=f"Turn limit reached. Player 1 wins with more health ({self.player_health[1]} vs {self.player_health[0]}).")
             else:
                 self.state.set_draw(reason=f"Turn limit reached with equal health ({self.player_health[0]} each). The duel ends in a draw.")
