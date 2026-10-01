@@ -27,7 +27,7 @@ class TwoPlayerBombermanEnv(ta.Env):
         self.EMPTY = " "
         self.INDESTRUCTIBLE_WALL = "#"
         self.DESTRUCTIBLE_WALL = "+"
-        self.PLAYER_SYMBOLS = ["1", "2"]
+        self.PLAYER_SYMBOLS = ["0", "1"]
         self.BOMB = "B"
         self.EXPLOSION = "*"
 
@@ -64,7 +64,6 @@ class TwoPlayerBombermanEnv(ta.Env):
         self.state.reset(
             game_state=game_state,
             player_prompt_function=self._generate_player_prompt,
-            role_mapping={0: "Player 1", 1: "Player 2"},
         )
         self.state.add_observation(message=self._generate_board_string(), observation_type=ta.ObservationType.GAME_BOARD)
 
@@ -101,9 +100,8 @@ class TwoPlayerBombermanEnv(ta.Env):
         return board_str
 
     def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        player_name = self.PLAYER_SYMBOLS[player_id]
         prompt = (
-            f"You are Player {player_name} in a turn-based Bomberman game.\n"
+            f"You are Player {player_id} in a turn-based Bomberman game.\n"
             "Make your move using one of these commands (in square brackets):\n"
             "[up] / [down] / [left] / [right] - move one cell\n"
             "[stay] - stay in place\n"
@@ -115,8 +113,8 @@ class TwoPlayerBombermanEnv(ta.Env):
             f"Current board state:\n{game_state['current_board']}\n\n"
             f"{game_state['turn_info']}\n\n"
             "Legend:\n"
-            f"{self.PLAYER_SYMBOLS[0]} - Player 1\n"
-            f"{self.PLAYER_SYMBOLS[1]} - Player 2\n"
+            f"{self.PLAYER_SYMBOLS[0]} - Player 0\n"
+            f"{self.PLAYER_SYMBOLS[1]} - Player 1\n"
             f"{self.INDESTRUCTIBLE_WALL} - Indestructible wall\n"
             f"{self.DESTRUCTIBLE_WALL} - Destructible wall\n"
             f"{self.BOMB} - Bomb\n"
@@ -151,11 +149,11 @@ class TwoPlayerBombermanEnv(ta.Env):
     def _execute_player_move(self, player_id: int, action: str) -> bool:
         match = self.move_pattern.search(action.strip())
         if match is None:
-            self.state.set_invalid_move(reason=f"Player {player_id + 1} did not provide a valid move, e.g. [up] or [bomb].")
+            self.state.set_invalid_move(reason=f"Player {player_id} did not provide a valid move, e.g. [up] or [bomb].")
             return False
 
         if self.player_positions[player_id] is None:
-            self.state.set_invalid_move(reason=f"Player {player_id + 1} has been eliminated and cannot move.")
+            self.state.set_invalid_move(reason=f"Player {player_id} has been eliminated and cannot move.")
             return False
 
         move = match.group(1).lower()
@@ -163,10 +161,10 @@ class TwoPlayerBombermanEnv(ta.Env):
 
         if move == "bomb":
             if any(b[0] == x and b[1] == y for b in self.bombs):
-                self.state.set_invalid_move(reason=f"Player {player_id + 1} tried to place a bomb where one already exists.")
+                self.state.set_invalid_move(reason=f"Player {player_id} tried to place a bomb where one already exists.")
                 return False
             self.bombs.append([x, y, self.bomb_timer])
-            self.state.add_observation(message=f"Player {player_id + 1} placed a bomb at ({x}, {y}).", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=f"Player {player_id} placed a bomb at ({x}, {y}).", observation_type=ta.ObservationType.GAME_MESSAGE)
             return True
 
         deltas = {"up": (0, -1), "down": (0, 1), "left": (-1, 0), "right": (1, 0), "stay": (0, 0)}
@@ -174,24 +172,24 @@ class TwoPlayerBombermanEnv(ta.Env):
         new_x, new_y = x + dx, y + dy
 
         if move == "stay":
-            self.state.add_observation(message=f"Player {player_id + 1} stayed in place.", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=f"Player {player_id} stayed in place.", observation_type=ta.ObservationType.GAME_MESSAGE)
             return True
 
         if not (0 <= new_x < self.grid_size and 0 <= new_y < self.grid_size):
-            self.state.set_invalid_move(reason=f"Player {player_id + 1} tried to move {move} but hit the boundary.")
+            self.state.set_invalid_move(reason=f"Player {player_id} tried to move {move} but hit the boundary.")
             return False
         if self.grid[new_y][new_x] in (self.INDESTRUCTIBLE_WALL, self.DESTRUCTIBLE_WALL):
-            self.state.set_invalid_move(reason=f"Player {player_id + 1} tried to move {move} but hit a wall.")
+            self.state.set_invalid_move(reason=f"Player {player_id} tried to move {move} but hit a wall.")
             return False
         if any(b[0] == new_x and b[1] == new_y for b in self.bombs):
-            self.state.set_invalid_move(reason=f"Player {player_id + 1} tried to move {move} but a bomb is there.")
+            self.state.set_invalid_move(reason=f"Player {player_id} tried to move {move} but a bomb is there.")
             return False
         if any(p is not None and p[0] == new_x and p[1] == new_y for i, p in enumerate(self.player_positions) if i != player_id):
-            self.state.set_invalid_move(reason=f"Player {player_id + 1} tried to move {move} but the other player is there.")
+            self.state.set_invalid_move(reason=f"Player {player_id} tried to move {move} but the other player is there.")
             return False
 
         self.player_positions[player_id] = [new_x, new_y]
-        self.state.add_observation(message=f"Player {player_id + 1} moved {move} to ({new_x}, {new_y}).", observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(message=f"Player {player_id} moved {move} to ({new_x}, {new_y}).", observation_type=ta.ObservationType.GAME_MESSAGE)
         return True
 
     def _update_bombs_and_explosions(self):
@@ -224,7 +222,7 @@ class TwoPlayerBombermanEnv(ta.Env):
         for player_id, pos in enumerate(self.player_positions):
             if pos is not None and pos[0] == x and pos[1] == y:
                 self.player_positions[player_id] = None
-                self.state.add_observation(message=f"Player {player_id + 1} was caught in an explosion and eliminated!", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=f"Player {player_id} was caught in an explosion and eliminated!", observation_type=ta.ObservationType.GAME_MESSAGE)
 
     def _check_gameover(self):
         if self.state.done:
@@ -234,4 +232,4 @@ class TwoPlayerBombermanEnv(ta.Env):
             self.state.set_draw(reason="Both players were eliminated in the same blast. The game ends in a draw.")
         elif len(alive) == 1:
             winner_id = alive[0]
-            self.state.set_winner(player_id=winner_id, reason=f"Player {winner_id + 1} wins - the other player was eliminated.")
+            self.state.set_winner(player_id=winner_id, reason=f"Player {winner_id} wins - the other player was eliminated.")
