@@ -12,6 +12,7 @@ class BanditEnv(ta.Env):
         self.p_gap = p_gap
         self.action_space = re.compile(rf"\[{'|'.join(self.buttons)}\]")
         self.include_summary = include_summary
+        self._button_lookup = {b.lower(): b for b in self.buttons}
 
     def reset(self, num_players: int, seed: Optional[int]=None):
         self.state = ta.SinglePlayerState(num_players=num_players, max_turns=self.num_turns, seed=seed)
@@ -30,15 +31,15 @@ class BanditEnv(ta.Env):
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        match = re.search(r'\[(.*)\]', action)
+        match = re.search(r'\[\s*([^\]]+?)\s*\]', action)
         if match is None: self.state.set_invalid_move(reason=self.m("invalid_move", "wrong_format"))
         else:
-            button = match.group(1)
+            button = self._button_lookup.get(match.group(1).lower())
             if button in self.buttons:
                 if self.state.turn == self.num_turns:
                     best_button = max(self.state.game_state['ground_truth'], key=lambda b: self.state.game_state['ground_truth'][b])
                     if button == best_button: self.state.set_outcome(reward=1.0, reason=self.m("outcome", "win"))
-                    else:                     self.state.set_outcome(reward=self._regret(button), reason=self.m("outcome", "lose"))
+                    else:                     self.state.set_outcome(reward=1.0 - self._regret(button), reason=self.m("outcome", "lose"))
                 else:
                     reward = 1.0 if random.random() < self.state.game_state['ground_truth'][button] else 0.0
                     self.state.game_state['history'][button].append(reward)

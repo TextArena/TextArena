@@ -3,13 +3,11 @@ from typing import Any, Dict, Optional, Tuple
 import textarena as ta
 from copy import deepcopy
 
-import gym
-
 try:
     import gym
 except ImportError:
     raise ImportError(
-        "gym-minigrid package is required for BabyAiText."
+        "gym-minigrid package is required for BabyAiText. "
         "Follow the installation instructions at "
         "https://github.com/flowersteam/Grounding_LLMs_with_online_RL/tree/main/babyai-text"
     )
