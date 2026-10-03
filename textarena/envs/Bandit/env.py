@@ -36,8 +36,9 @@ class BanditEnv(ta.Env):
             button = match.group(1)
             if button in self.buttons:
                 if self.state.turn == self.num_turns:
-                    if button == self.state.game_state['ground_truth']: self.state.set_outcome(reward=1.0, reason=self.m("outcome", "win")) 
-                    else:                                               self.state.set_outcome(reward=self._regret(button), reason=self.m("outcome", "lose")) 
+                    best_button = max(self.state.game_state['ground_truth'], key=lambda b: self.state.game_state['ground_truth'][b])
+                    if button == best_button: self.state.set_outcome(reward=1.0, reason=self.m("outcome", "win"))
+                    else:                     self.state.set_outcome(reward=self._regret(button), reason=self.m("outcome", "lose"))
                 else:
                     reward = 1.0 if random.random() < self.state.game_state['ground_truth'][button] else 0.0
                     self.state.game_state['history'][button].append(reward)
