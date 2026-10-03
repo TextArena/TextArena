@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Tu sês Zugadôr {player_id} in Tic Tac Toe Cuantistic.\nIl to simbul al è '{symbol}', e i tos numars di mossis a son simpri {parity} (par esempli, X1, X3 o O2, O4).\n\nObietîf: Vince formant une linie di trê marchis classicis (solidificadis di superposizions).\n\nCemût zughî:\n- In ogni torn, met un marchi spaventôs in doi diviers scuadrâts vueits doprant il format '[a,b]'.\n- Chescj marchis a son intrichêts, e etichetâts come 'X1 / X1' o 'O4 / O4'.\n- No pues meti marchis spaventôs in un scuadrât che al è za collassât (solidificât).\n\nRegule di collass:\n- Se la tô mosse e crê un cicli in graf di intrichiment, al collassa in automatic.\n- Ogni marchi spaventôs in cicli al devente un marchi classic in une des sôs dôs posizions.\n- Dusîs marchis spaventôs dipendents a collassin ancje lôr.\n\nVitorie:\n- Il zûc al finìs cuant un zugadôr al à trê marchis classicis in linie.\n- Se dôs zugadôrs a rivin a une linie tal stes collass, chel cun il numar di mosse plui bas al vinç.\n\nEsempi di mosse: '[0,4]' al met un marchi spaventôs in celulis 0 e 4."
+  },
+  "board": {
+    "current_board": "Taula di Tic Tac Toe Cuantistic:\n\n{board}\n\nInviêt la tô mosse come '[a,b]' par meti un marchi cuantistic in dôs posizions."
+  },
+  "invalid_move": {
+    "wrong_format": "Formât no valid. doprâ \"[a,b]\".",
+    "invalid_cells": "Indics di celulis invalidis o duplicâts.",
+    "already_solidified": "Une des celulis e je za solidificade."
+  },
+  "game_action": {
+    "placed": "Il Zugadôr {player_id} al à metût il so simbul in superposizion tra celulis {pos_a} e {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposizion dipendent e je stade risolte. La celule ({r}, {c}) e je cumò {symbol}.",
+    "last_cell_resolved": "Superposizion par l'ultime celule e je stade risolte. La celule ({r}, {c}) e je cumò {symbol}.",
+    "superposition_resolved": "Superposizion e je stade risolte. La celule ({r}, {c}) e je cumò {symbol}."
+  },
+  "outcome": {
+    "win": "Il zuiadôr {player_id} al vinç cun segns solidificâts!",
+    "draw": "La partide e je parie!"
+  }
+}

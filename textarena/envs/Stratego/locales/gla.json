@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Is tu cluicheadair {player_id} ann an Stratego.\nIs e do dh'amas an bratach a ghlacadh no a h-uile pìos gluasadach aige a dh'fhàgail às.\nChaidh do dh'arm a chur air a' bhòrd air do shon, a' gabhail a-steach do bhratach, bomaichean, agus pìosan eile de dh'ìrean eadar-dhealaichte.\n\n### Stiùireadh Cluiche\n1. **Riaghailtean Ghluasaid:**\n   - Air do thuras, faodaidh tu pìos a ghluasad aon cheum gu ceàrnach co-shìnte (suas, sìos, clì, no deas) a tha air a shàthachadh le do phìosan fhèin.\n   - Eisimpleir: Faodaidh pìos gluasad bho A1 gu B1 no A1 gu A2 ma tha B1 agus A2 gun phìosan aig a' chluicheadair fhèin.\n   - Mura h-eil an pìos air a thaghadh na boma no bratach, chan fhaod e gluasad.\n2. **Cathannan:**\n   - Ma ghluaiseas tu gu ceàrnach a tha air a shàthachadh le pìos aig an nàmhaid, thèid cath a dh'fhàs:\n     - Bidh an pìos leis an ìre as àirde a' bhuannachadh agus a' cur às don phìos aig an nàmhaid.\n     - Ma tha na h-ìrean co-ionann, thèid an dà phìos a chur às don bhòrd.\n     - **Cùisean Sònraichte:**\n       - Bidh bomaichean a' cur às don mhòr-chuid de na pìosan a tha a' dol an ionsaigh, ach chan eil iad a' cur às do mhèinnearan, a tha a' di-ghlasadh bomaichean.\n       - Faodaidh spìthean an Marshal a chur às ma tha an spìth a' dol an ionsaigh an toiseach, ach tha iad a' call do na pìosan eile uile.\n3. **Amasan Ro-innleachd:**\n   - Aithnich pìosan an nàimhaid troimh na gluasadan aca agus na cathannan.\n   - Dìon do bhratach fhad 's a tha thu a' feuchainn ri bratach an nàimhaid a ghlacadh.\n   - Cleachd sgiobairean gu ro-innleachdach airson fiosrachadh a chur air pìosan an nàimhaid agus a' dol an ionsaigh air na pìosan lagha.\n\n### Ciamar a nì thu gluasad:\n1. Sònaich comhordanan an pìos a tha thu airson gluasad agus an ceann-uidhe.\n2. Cleachd an fhoirm: [A0 B0], far a bheil A0 an suidheachadh tùsail, agus B0 an ceann-uidhe.\n   - Eisimpleir: Airson pìos a ghluasad bho ràn 0, colbh 0 gu ràn 1, colbh 0, cuir a-steach [A0 B0].\n3. Dèan cinnteach gu bheil an ceann-uidhe laghach a rèir riaghailtean gluasaid gu h-àrd.\n\n### Nòtaichean Chudromach:\n- Bidh a' bhòrd a' sealltainn do phìosan agus an suidheachaidhean aca, m.e. MN, MS.\n- Bidh a' bhòrd cuideachd a' sealltainn suidheachaidhean aithnichte de phìosan an nàimhaid gun an ìrean aca a nochdadh, m.e. ?.\n- Bidh ghrìdan le ~ nan lochan agus chan fhaod gluasad air.\n- Mar mhòladh, tòisich do gheama le gluasad do phìosan a tha air an loidhne toisich airson fiosrachadh a chur air pìosan an nàimhaid. Tha loidhne toisich cluicheadair 0 agus cluicheadair 1 nan ràin D agus G fa leth.\n\nSeo staid làithreach a' bhùird:\n"
+  },
+  "board": {
+    "current_board": "Clàr Làithreach:\n\n{board}\nGlèidheadh Gleus: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Dreuchd neo-chèileach. Chluichiche {player_id} cha do chuir iad a-steach gluasad anns a' chànan [A0 B0].",
+    "invalid_coordinates": "Cruth gnìomh neo-dhligheach. Cha do chuir cluicheadair {player_id} co-chomharran dhlùth a-steach.",
+    "not_own_piece": "Foirm gnìomh neo-dhligheach. Feumaidh cluicheadair {player_id} aon de na pìosan aca fhèin a ghluasad.",
+    "scout_through_pieces": "Foirm gnìomh neo-dhligheach. Chan urrainn do chluicheadair {player_id} scout a ghluasad tro pheirtean eile.",
+    "scout_diagonal": "Foirm gnìomh neo-dhligheach. Chan urrainn do chluicheadair {player_id} scout a ghluasad gu diagonal.",
+    "non_scout_multi_square": "Tha cruth gnìomh mì-dhligheach. Chan urrainn do pheacaidhean, a bharrachd air luchd-sgrùdaidh, ach aon cheàrnag a ghluasad aig an àm.",
+    "move_into_lake": "Foirm gnìomh neo-dhligheach. Chan urrainn do chluicheadair {player_id} gluasad a-steach don loch.",
+    "move_onto_own_piece": "Foirm gnìomh neo-dhligheach. Chan urrainn do chluicheadair {player_id} gluasad air a pìos fhèin.",
+    "move_bomb_or_flag": "Foirm gnìomh neo-dhligheach. Chan urrainn do chluicheadair {player_id} boma no bratach a ghluasad."
+  },
+  "game_action": {
+    "you_moved": "Tha thu air do phìos a ghluasad bho {source} gu {dest}.",
+    "opponent_moved": "Cluichiche {player_id} tha air pìos a ghluasad bho {source} gu {dest}.",
+    "you_equal_ranks": "Tha thu air do phìos a ghluasad bho {source} gu {dest}. B' e {attacking_rank} a' phìos a' dol a dh'fhàgail agus b' e {target_rank} a' phìos a' dol a dh'fhàgail. Mar sin a tha na rangachan co-ionann, tha an dà phìos air a dhol a dh'fhàgail.",
+    "opponent_equal_ranks": "Cluichiche {player_id} tha air pìos a ghluasad bho {source} gu {dest}. B' e {attacking_rank} a' phìos a' dol a dh'fhàgail agus b' e {target_rank} a' phìos a' dol a dh'fhàgail. Mar sin a tha na rangachan co-ionann, tha an dà phìos air a dhol a dh'fhàgail.",
+    "you_miner_defused": "Tha thu air do phìos a ghluasad bho {source} gu {dest}. B' e {attacking_rank} a' phìos a' dol a dh'fhàgail agus b' e {target_rank} a' phìos a' dol a dh'fhàgail. Mar sin a tha na mèinnearan a' dol a dh'fhàgail, tha thu air a' bhuidheann a bhuannachadh.",
+    "opponent_miner_defused": "Cluichiche {player_id} tha air pìos a ghluasad bho {source} gu {dest}. B' e {attacking_rank} a' phìos a' dol a dh'fhàgail agus b' e {target_rank} a' phìos a' dol a dh'fhàgail. Mar sin a tha na mèinnearan a' dol a dh'fhàgail, tha thu air a' bhuidheann a chailleadh.",
+    "you_bomb_lost": "Tha thu air do phìos a ghluasad bho {source} gu {dest}. Bha an pìos a bha a’ dol a dh’ionnsaigh {attacking_rank} agus bha an pìos a bha ann an {target_rank}. On a tha an tagairt chan e mèinniche, chaill thu an cath.",
+    "opponent_bomb_won": "Tha cluicheadair {player_id} air pìos a ghluasad bho {source} gu {dest}. Bha an pìos a bha a' dol a dh'ionsaigh {attacking_rank} agus bha an pìos a bha aig an ceann-uidhe {target_rank}. O chionn 's nach e mèineadair a th' anns an ionsaigheachd, bhuannaich thu a' bhlàr.",
+    "you_spy_won": "Tha thu air do phìos a ghluasad bho {source} gu {dest}. Bha an pìos a bha a’ dol a dh’ionnsaigh {attacking_rank} agus bha an pìos a bha ann an {target_rank}. On a tha an tagairt na spìonadair agus an ceann-uidhe na mharasgal, bhuannaich thu an cath.",
+    "opponent_spy_lost": "Tha cluicheadair {player_id} air pìos a ghluasad bho {source} gu {dest}. Bha an pìos a bha a’ dol a dh’ionnsaigh {attacking_rank} agus bha an pìos a bha ann an {target_rank}. On a tha an tagairt na spìonadair agus an ceann-uidhe na mharasgal, chaill thu an cath.",
+    "you_higher_won": "Tha thu air do phìos a ghluasad bho {source} gu {dest}. Bha an pìos a bha a’ dol a dh’ionnsaigh {attacking_rank} agus bha an pìos a bha ann an {target_rank}. On a tha an tagairt aig rang nas àirde na an ceann-uidhe, bhuannaich thu an cath.",
+    "opponent_higher_lost": "Tha cluicheadair {player_id} air pìos a ghluasad bho {source} gu {dest}. Bha an pìos a bha a’ dol a dh’ionnsaigh {attacking_rank} agus bha an pìos a bha ann an {target_rank}. On a tha an tagairt aig rang nas àirde na an ceann-uidhe, chaill thu an cath.",
+    "you_lower_lost": "Tha thu air do phìos a ghluasad bho {source} gu {dest}. Bha an pìos a bha a’ dol a dh’ionnsaigh {attacking_rank} agus bha an pìos a bha ann an {target_rank}. On a tha an tagairt aig rang nas ìsle na an ceann-uidhe, chaill thu an cath.",
+    "opponent_lower_won": "Tha cluicheadair {player_id} air pìos a ghluasad bho {source} gu {dest}. Bha an pìos a bha a' dol a dh'ionsaigh {attacking_rank} agus bha an pìos a bha aig an ceann-uidhe {target_rank}. O chionn 's gu bheil an ionsaigheachd air rang nas ìsle na an ceann-uidhe, bhuannaich thu a' bhlàr."
+  },
+  "outcome": {
+    "flag_captured": "Tha cluicheadair {player_id} air bratach an aghaidh a ghlacadh!",
+    "no_movable_pieces": "Cluichiche {winner_id} tha air a' gheama a bhuannachadh! Cluichiche {loser_id} cha eil pìosan gluasdaiche aca."
+  }
+}

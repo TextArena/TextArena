@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Siz {num_rounds} raunddan ibarət Iterativ Məhbusun Dilemmasında Oyunçu {player_id}-siniz.\n\nOyun Quruluşu:\n- Hər qərar qəbulundan əvvəl sizə {total_conversation_rounds} növbə verilir ki, sərbəst şəkildə ünsiyyət qurasınız.\n- Bundan sonra, hər iki oyunçu eyni vaxtda əməkdaşlıq etmək və ya xəyanət etmək qərarını verirlər.\n\nMükafat Matrisi (hər raundda sabit):\n- Hər iki tərəf Əməkdaşlıq edir ➜ hər biri {cooperate_reward}\n- Hər iki tərəf Xəyanət edir ➜ hər biri {mutual_defect_reward}\n- Biri Xəyanət edir, biri Əməkdaşlıq edir ➜ Xəyanət edən {defect_reward}, Əməkdaşlıq edən {sucker_reward}\n\nNecə Oynamaq:\n- Danışıq zamanı: istədiyiniz mətni yazın.\n- Qərar mərhələsində: '[Cooperate]' və ya '[Defect]' (böyük-kiçik hərfə həssas deyil) daxil edin. Siz token əvvəlində və ya sonra əlavə mətn əlavə edə bilərsiniz."
+  },
+  "phases": {
+    "conversation_finished": "Raund {round} üçün danışıq başa çatdı. Zəhmət olmasa, \\boxed{{}} daxilində '[Cooperate]' və ya '[Defect]' cavab verin.",
+    "starting_round": "--- Raund {round} Başlayır ---",
+    "round_summary": "Raund {round} nəticələri:\n{outcome}\nOyunçu 0 {r0} qazandı (cəmi {score_0}), Oyunçu 1 {r1} qazandı (cəmi {score_1})."
+  },
+  "outcome": {
+    "winner": "Oyunçu {winner} {win_score} - {lose_score} qazandı.",
+    "draw": "Heç-heçə! Hər iki oyunçu {s0} xal qazandı.",
+    "round_both_cooperate": "Hər iki oyunçu əməkdaşlıq etdi.",
+    "round_both_defect": "Hər iki oyunçu xəyanət etdi.",
+    "round_p0_cooperates_p1_defects": "Oyunçu 0 əməkdaşlıq etdi, Oyunçu 1 xəyanət etdi.",
+    "round_p0_defects_p1_cooperates": "Oyunçu 0 xəyanət etdi, Oyunçu 1 əməkdaşlıq etdi."
+  }
+}

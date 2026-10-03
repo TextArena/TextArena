@@ -1,0 +1,21 @@
+{
+    "player_prompt": {
+        "intro": "أنت اللاعب {player_id} في لعبة نيم.\nهدفك هو أخذ آخر عنصر متبقٍ.\nفي كل دور، اختر كومة واحدة بالضبط وأزل منها عنصراً واحداً أو أكثر.\nاستخدم الصيغة '[pile quantity]'، حيث يشير pile إلى رقم الكومة وquantity إلى عدد العناصر المراد إزالتها.\nعلى سبيل المثال، تؤدي '[0 3]' إلى إزالة 3 عناصر من الكومة 0."
+    },
+    "state": {
+        "current_pile": "الأكوام الحالية:\n{piles}"
+    },
+    "invalid_move": {
+        "wrong_format": "لم يتم العثور على حركة بصيغة صالحة. استخدم '[pile quantity]'.",
+        "correct_format_wrong_fields": "اللاعب {player_id}، الإجراء غير صالح. العمود {col} خارج النطاق.",
+        "out_of_range": "رقم الكومة {pile_index} خارج النطاق.",
+        "non_positive": "يجب إزالة عنصر واحد على الأقل.",
+        "exceeds_pile": "لا يمكن إزالة {quantity} من الكومة {pile_index} (المتبقي فيها {pile_count} فقط)."
+    },
+    "observation": {
+        "removed_from_piles": "لعب اللاعب {player_id} الحركة [{pile_index} {quantity}]، وأزال {quantity} عنصراً من الكومة {pile_index}."
+    },
+    "outcome": {
+        "win": "أخذ اللاعب {player_id} آخر عنصر أو عناصر!"
+    }
+}

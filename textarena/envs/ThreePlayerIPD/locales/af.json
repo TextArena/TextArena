@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in 'n 3-speler Herhaalde Gevangene se Dilemma. Die wedstryd duur {num_rounds} rondtes.\nRondtestruktuur:\n• {conv_rounds} vrye-geselsbeurte\n• 1 besluitbeurt - dien een teken per teenstander in: '[<opp-id> cooperate]' of '[<opp-id> defect]' (d.w.s. '[1 defect] [2 cooperate]'; die verstekwaarde is 'saamwerk'). \nPaarwyse uitbetalingmatriks (toegepas op elke ongeordende paar):\n  - Albei saamwerk  ->  {reward}\n  - Albei verraad     ->  {punishment}\n  - Jy verraad, hulle saamwerk -> {temptation}\n  - Jy saamwerk, hulle verraad -> {sucker}\nDie speler(s) met die hoogste telling aan die einde van alle rondtes wen."
+  },
+  "round": {
+    "start": "─── Begin van Rondte {round} ───\tJy kan vrylik gesels vir die volgende {conv_rounds} rondtes.",
+    "chat_finished": "Gesels is klaar vir rondte {round}. Dien jou besluite in, een teken per teenstander: `[pid cooperate]` of `[pid defect]`."
+  },
+  "results": {
+    "header": "### Rondte {round} - Uitslae:",
+    "pair_line": "{observation}\n\t Speler {i} teen Speler {j} het gekies om {choice_i} en {choice_j} onderskeidelik te doen (Speler {i} het {gain_i} gewen, Speler {j} het {gain_j} gewen)",
+    "scores_open": "{observation}\n-> Huidige tellings: ",
+    "score_first": "{observation}Speler {player_id} ({score})",
+    "score_next": "{observation}; Speler {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Finale tellings: {scores}.  Ranggroeperings (slegste→beste): {groups}"
+  }
+}

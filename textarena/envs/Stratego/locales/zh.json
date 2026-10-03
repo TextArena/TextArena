@@ -1,0 +1,43 @@
+{
+  "player_prompt": {
+    "intro": "你是 Stratego 游戏中的玩家 {player_id}。\n你的目标是夺取对手的军旗，或消灭对手所有能够移动的棋子。\n你的军队已经为你布置在棋盘上，其中包括军旗、炸弹以及其他具有不同军衔的棋子。\n\n### 游戏说明\n1. **移动规则：**\n   - 在你的回合中，你可以将一枚棋子向相邻格移动一步（向上、向下、向左或向右），该格已被你的棋子占据。\n   - 示例：如果 B1 和 A2 没有放置玩家自己的棋子，则棋子可以从 A1 移动到 B1，或从 A1 移动到 A2。\n   - 如果所选棋子是炸弹或军旗，则无法移动。\n2. **战斗：**\n   - 如果你移动到一个被对手棋子占据的格子，将会发生战斗：\n     - 军衔较高的棋子获胜，并消灭对手的棋子。\n     - 如果双方军衔相同，两枚棋子都会从棋盘上移除。\n     - **特殊情况：**\n       - 炸弹可以消灭大多数进攻棋子，但工兵除外，工兵可以拆除炸弹。\n       - 如果间谍率先发动进攻，则可以击败元帅，但会败给所有其他棋子。\n3. **战略目标：**\n   - 通过对手棋子的移动和战斗来识别其棋子。\n   - 在尝试夺取对手军旗的同时保护自己的军旗。\n   - 有策略地使用侦察兵，以获取有关对手棋子的信息并攻击较弱的棋子。\n\n### 如何执行移动：\n1. 指定你想要移动的棋子的坐标及其目标坐标。\n2. 使用格式 [A0 B0]，其中 A0 是起始位置，B0 是目标位置。\n   - 示例：要将一枚棋子从第 0 行、第 0 列移动到第 1 行、第 0 列，请输入 [A0 B0]。\n3. 请确保目标位置符合上述移动规则。\n\n### 重要说明：\n- 棋盘会显示你的棋子及其位置，例如 MN、MS。\n- 棋盘也会显示对手棋子的已知位置，但不会揭示其军衔，例如 ?。\n- 带有 ~ 的格子是湖泊，无法移动到这些格子上。\n- 建议你在游戏开始时移动位于前线的棋子，以获取有关对手棋子的信息。玩家 0 和玩家 1 的前线分别是 D 行和 G 行。\n\n以下是当前棋盘状态：\n"
+  },
+
+  "board": {
+    "current_board": "当前棋盘：\n\n{board}\n可用移动：{moves}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "操作格式无效。玩家 {player_id} 未按照 [A0 B0] 格式输入移动。",
+    "invalid_coordinates": "操作格式无效。玩家 {player_id} 未输入有效坐标。",
+    "not_own_piece": "操作格式无效。玩家 {player_id} 必须移动自己的一枚棋子。",
+    "scout_through_pieces": "操作格式无效。玩家 {player_id} 不能让侦察兵穿过其他棋子。",
+    "scout_diagonal": "操作格式无效。玩家 {player_id} 不能让侦察兵沿对角线移动。",
+    "non_scout_multi_square": "操作格式无效。除侦察兵外，其他棋子每次只能移动一格。",
+    "move_into_lake": "操作格式无效。玩家 {player_id} 不能移动到湖泊中。",
+    "move_onto_own_piece": "操作格式无效。玩家 {player_id} 不能移动到自己的棋子所在的格子。",
+    "move_bomb_or_flag": "操作格式无效。玩家 {player_id} 不能移动炸弹或军旗。"
+  },
+
+  "game_action": {
+    "you_moved": "你已将棋子从 {source} 移动到 {dest}。",
+    "opponent_moved": "玩家 {player_id} 已将一枚棋子从 {source} 移动到 {dest}。",
+    "you_equal_ranks": "你已将棋子从 {source} 移动到 {dest}。进攻棋子是 {attacking_rank}，目标位置的棋子是 {target_rank}。由于双方军衔相同，两枚棋子均被消灭。",
+    "opponent_equal_ranks": "玩家 {player_id} 已将一枚棋子从 {source} 移动到 {dest}。进攻棋子是 {attacking_rank}，目标位置的棋子是 {target_rank}。由于双方军衔相同，两枚棋子均被消灭。",
+    "you_miner_defused": "你已将棋子从 {source} 移动到 {dest}。进攻棋子是 {attacking_rank}，目标位置的棋子是 {target_rank}。由于工兵能够拆除炸弹，你赢得了战斗。",
+    "opponent_miner_defused": "玩家 {player_id} 已将一枚棋子从 {source} 移动到 {dest}。进攻棋子是 {attacking_rank}，目标位置的棋子是 {target_rank}。由于工兵能够拆除炸弹，你输掉了战斗。",
+    "you_bomb_lost": "你已将棋子从 {source} 移动到 {dest}。进攻棋子是 {attacking_rank}，目标位置的棋子是 {target_rank}。由于进攻者不是工兵，你输掉了战斗。",
+    "opponent_bomb_won": "玩家 {player_id} 已将一枚棋子从 {source} 移动到 {dest}。进攻棋子是 {attacking_rank}，目标位置的棋子是 {target_rank}。由于进攻者不是工兵，你赢得了战斗。",
+    "you_spy_won": "你已将棋子从 {source} 移动到 {dest}。进攻棋子是 {attacking_rank}，目标位置的棋子是 {target_rank}。由于进攻者是间谍，而目标棋子是元帅，你赢得了战斗。",
+    "opponent_spy_lost": "玩家 {player_id} 已将一枚棋子从 {source} 移动到 {dest}。进攻棋子是 {attacking_rank}，目标位置的棋子是 {target_rank}。由于进攻者是间谍，而目标棋子是元帅，你输掉了战斗。",
+    "you_higher_won": "你已将棋子从 {source} 移动到 {dest}。进攻棋子是 {attacking_rank}，目标位置的棋子是 {target_rank}。由于进攻者的军衔高于目标棋子，你赢得了战斗。",
+    "opponent_higher_lost": "玩家 {player_id} 已将一枚棋子从 {source} 移动到 {dest}。进攻棋子是 {attacking_rank}，目标位置的棋子是 {target_rank}。由于进攻者的军衔高于目标棋子，你输掉了战斗。",
+    "you_lower_lost": "你已将棋子从 {source} 移动到 {dest}。进攻棋子是 {attacking_rank}，目标位置的棋子是 {target_rank}。由于进攻者的军衔低于目标棋子，你输掉了战斗。",
+    "opponent_lower_won": "玩家 {player_id} 已将一枚棋子从 {source} 移动到 {dest}。进攻棋子是 {attacking_rank}，目标位置的棋子是 {target_rank}。由于进攻者的军衔低于目标棋子，你赢得了战斗。"
+  },
+
+  "outcome": {
+    "flag_captured": "玩家 {player_id} 夺取了对手的军旗！",
+    "no_movable_pieces": "玩家 {winner_id} 获胜！玩家 {loser_id} 已没有可移动的棋子。"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam SimpleTak.\nDi papan, batu Anda muncul sebagai '{player_stone}' dan batu lawan Anda muncul sebagai '{opponent_stone}'.\n\nPada giliran Anda, pilih satu sel kosong (berdasarkan indeks bernomor) dan tempatkan batu Anda di sana.\nMisalnya, '[12]' menempatkan batu Anda di sel 12.\n\nTujuan Anda adalah membentuk jalur berkelanjutan dari batu Anda yang menghubungkan dua tepi berlawanan papan (atas-ke-bawah atau kiri-ke-kanan)."
+  },
+  "invalid_move": {
+    "invalid_move_format": "Format gerakan tidak valid",
+    "cell_out_of_range": "Nomor sel {cell_num} tidak valid. Harus antara 0 dan {max_board_num}.",
+    "cell_already_occupied": "Sel {cell_num} sudah terisi. Pilih sel kosong."
+  },
+  "board": {
+    "current_state": "Papan Saat Ini:\n\n{rendered_board}\nGerakan Tersedia: {available_moves}"
+  },
+  "action": {
+    "placement": "Pemain {current_player_id} menempatkan simbol mereka ({symbol}) di sel {cell_num}."
+  },
+  "outcome": {
+    "winner": "Pemain {current_player_id} ('{symbol}') menghubungkan dua tepi berlawanan!",
+    "draw": "Papan penuh. Permainan seri!"
+  }
+}

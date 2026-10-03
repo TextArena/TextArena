@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Yin e Player {player_id} ee Stratego.\nYin ca leŋ yin opponent ee Flag wal ku yin e ciɛl wei yin opponent ee pieces ciɛl wei.\nYin army ee ciɛl wei yin ee board, ciɛl wei yin Flag, Bombs, ku yin pieces ciɛl wei.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - Yin turn, yin e move one piece by one step ee adjacent square (up, down, left, or right) ee already occupied ciɛl yin pieces.\n   - Example: Piece e move from A1 to B1 or A1 to A2 if B1 ku A2 a ciɛl wei yin own pieces.\n   - If selected piece e Bomb or Flag, e cannot e move.\n2. **Battles:**\n   - If yin e move onto square occupied by opponent ee piece, then battle e occur:\n     - Piece ee higher rank e win ku eliminate opponent ee piece.\n     - If ranks a equal, both pieces a remove from board.\n     - **Special Cases:**\n       - Bombs eliminate most attacking pieces except Miners, ciɛl defuse Bombs.\n       - Spies e defeat Marshal if Spy e attack first but lose to all other pieces.\n3. **Strategic Goals:**\n   - Identify yin opponent ee pieces through movements ku battles.\n   - Protect yin Flag while attempting to capture yin opponent ee Flag.\n   - Use Scouts strategically to gain information about yin opponent ee pieces ku attack weak ones.\n\n### How to Make a Move:\n1. Specify coordinates ee piece yin e want to move ku its destination.\n2. Use format: [A0 B0], where A0 e source position, ku B0 e destination.\n   - Example: To move piece from row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Ensure destination e valid according to movement rules above.\n\n### Important Notes:\n- Board e show yin pieces ku their positions, e.g. MN, MS.\n- Board e also show known positions ee yin opponent ee pieces without revealing their ranks, e.g. ?.\n- Grids ee ~ a lakes ku cannot e move onto.\n- As suggestion, start yin game by moving pieces ee front lines to gain information about yin opponent ee pieces. Player 0 ku player 1 ee frontlines a row D ku G respectively.\n\nHere e current board state:\n"
+  },
+  "board": {
+    "current_board": "Kɔ̈u Kɔ̈u Thɛ̈ɛ̈m:\n\n{board}\nKɔ̈u Ciɛ̈ɛ̈m Kɔ̈u: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kɔ̈u luui luui ɛ̈ɛ̈m. Raan {player_id} aɣɛ̈ɛ̈m aɣɛ̈ɛ̈m kɔ̈u ciɛ̈ɛ̈m ɛ̈ɛ̈m [A0 B0].",
+    "invalid_coordinates": "Ci̱kɛ lät ti̱ /ci̱ gɔw. Jɔk {player_id}/ka̱nɛ kuëŋ kɛ gua̱a̱th in de rɔ lot thi̱n ɛ la mi̱ bi̱ jɔɔc kä jɛ.",
+    "not_own_piece": "Cär mi̱ /ci̱ gɔaa. Bi̱i̱ ŋar {player_id} ɛ wɔ̱ kɛ ɣöö bɛ biɛl kɛl kä pi̱öthni̱kɛ ja̱k.",
+    "scout_through_pieces": "/Ci̱kɛ lät ti̱ gɔw. Jɔk {player_id}/ciɛ ram in la guic naath dee kɛ naŋ rɛy kuakni̱ tin kɔ̱ŋ.",
+    "scout_diagonal": "/Ci̱kɛ lät ti̱ gɔw. Ji̱ ŋarä {player_id}/ciɛ dee wä kɛ ram in ca la̱th piny kä bɛ ku lɛ wɔ̱ nhiam kiɛ jɔkdɛ.",
+    "non_scout_multi_square": "Ɛ jɛn duɔ̱ɔ̱p in /ciɛ thuɔ̱k kä lätkɛ. Kä pecni, ɛ nyɔk kɛ ɣöö ba guic i̱di̱, de kɛn rɔ̱ cu naŋ gua̱th kɛl kärɔa rɛy la̱tdiɛn ni̱ ciaaŋ.",
+    "move_into_lake": "/Ci̱kɛ lät ti̱ gɔw. Ji̱ ŋarä {player_id}/ci̱ kɛn rɔ bi luäŋ kɛ ɣöö de̱e̱ wä rɛy yiëër.",
+    "move_onto_own_piece": "/Ci̱kɛ lät ti̱ gɔw. Ji̱ ŋarä {player_id}/ci̱ kɛn rɔ bi luäŋ kɛ kuëŋ kä min caa la̱t ɛ ŋa̱a̱rdiɛn.",
+    "move_bomb_or_flag": "/Ci̱kɛ lät ti̱ gɔw. Ji̱ ŋarä {player_id}/ci̱ kɛn bom kiɛ biɛl dee luäŋ kɛ yiɛth piny."
+  },
+  "game_action": {
+    "you_moved": "Yin e moved piece from {source} to {dest}.",
+    "opponent_moved": "Raan {player_id} aɣɛ̈ɛ̈m kɔ̈u ciɛ̈ɛ̈m kɔ̈u nhɔ̈k {source} ɛ̈ɛ̈m {dest}.",
+    "you_equal_ranks": "Yin e moved piece from {source} to {dest}. Attacking piece e {attacking_rank} ku destination piece e {target_rank}. As ranks a equal, both pieces lost.",
+    "opponent_equal_ranks": "Player {player_id} e moved piece from {source} to {dest}. Attacking piece e {attacking_rank} ku destination piece e {target_rank}. As ranks a equal, both pieces lost.",
+    "you_miner_defused": "Yin e moved piece from {source} to {dest}. Attacking piece e {attacking_rank} ku destination piece e {target_rank}. As miners e defuse bombs, yin e won battle.",
+    "opponent_miner_defused": "Player {player_id} e moved piece from {source} to {dest}. Attacking piece e {attacking_rank} ku destination piece e {target_rank}. As miners e defuse bombs, yin e lost battle.",
+    "you_bomb_lost": "Yin e moved piece from {source} to {dest}. Attacking piece e {attacking_rank} ku destination piece e {target_rank}. As attacker e not miner, yin e lost battle.",
+    "opponent_bomb_won": "Player {player_id} e moved piece from {source} to {dest}. Attacking piece e {attacking_rank} ku destination piece e {target_rank}. As attacker e not miner, yin e won battle.",
+    "you_spy_won": "Yin e moved piece from {source} to {dest}. Attacking piece e {attacking_rank} ku destination piece e {target_rank}. As attacker e spy ku destination e marshall, yin e won battle.",
+    "opponent_spy_lost": "Player {player_id} e moved piece from {source} to {dest}. Attacking piece e {attacking_rank} ku destination piece e {target_rank}. As attacker e spy ku destination e marshall, yin e lost battle.",
+    "you_higher_won": "Yin e moved piece from {source} to {dest}. Attacking piece e {attacking_rank} ku destination piece e {target_rank}. As attacker e higher rank than destination, yin e won battle.",
+    "opponent_higher_lost": "Player {player_id} e moved piece from {source} to {dest}. Attacking piece e {attacking_rank} ku destination piece e {target_rank}. As attacker e higher rank than destination, yin e lost battle.",
+    "you_lower_lost": "Yin e moved piece from {source} to {dest}. Attacking piece e {attacking_rank} ku destination piece e {target_rank}. As attacker e lower rank than destination, yin e lost battle.",
+    "opponent_lower_won": "Player {player_id} e moved piece from {source} to {dest}. Attacking piece e {attacking_rank} ku destination piece e {target_rank}. As attacker e lower rank than destination, yin e won battle."
+  },
+  "outcome": {
+    "flag_captured": "Ji̱ ŋarä {player_id} ci kɛ̈l ɛ gɛr kä bi jiɛn!",
+    "no_movable_pieces": "Raan {winner_id} aɣɛ̈ɛ̈m kɔ̈u! Raan {loser_id} aɣɛ̈ɛ̈m kɔ̈u ciɛ̈ɛ̈m kɔ̈u bɛ̈ɛ̈i."
+  }
+}

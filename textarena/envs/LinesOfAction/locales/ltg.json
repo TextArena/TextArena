@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} LinesOfAction spēlē.\nJūsu figūras ir '{side}', pretinieka figūras ir '{other}'.\nGājiena formāts: `[b1b3]` (no-koordināta uz-koordināta). Legāls gājiens pārvietojas horizontāli, vertikāli vai diagonāli kvadrātu skaitu, kas vienāds ar kopējo figūru skaitu (jebkura krāsa) šajā līnijā. Jūs varat pārlēkt pāri savām figūrām, bet ne pretinieka figūrām; nosēšanās uz pretinieka figūras to sagrābj. Uzvarēt, kad visas jūsu figūras ir 8-kaimiņu savienotas."
+  },
+  "board": {
+    "current_board": "Bolva: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formats ir e2e4 (nu koordinatu leidz).",
+    "no_piece": "Na {side} dorba iz {coord}.",
+    "identical": "Izceļsme i mierķa vīnnūzeimeiga.",
+    "not_straight_or_diagonal": "Puorguoju taisnai voi diagonāli.",
+    "wrong_distance": "Juomeklej attuolums, kas ir vīnaids ar viersroksta figuram.",
+    "enemy_blocks": "Pretinīka kūks blokej ceļu.",
+    "destination_own": "Destinats īkuortuots ar sovu kūpu."
+  },
+  "game_action": {
+    "moved": "Spelejs {player_id} pārvietoja {from} -> {to}",
+    "captured_suffix": "Spēlētājs {player_id} pārvietojās {from} -> {to} sagrābjot pretinieku."
+  },
+  "outcome": {
+    "win": "Vysi kūpeigī lūcekli ir saisteiti.",
+    "draw_no_capture": "60 kusteibys bez īgivis.",
+    "draw_repetition": "Poziceja atsakuortuota treis reizis."
+  }
+}

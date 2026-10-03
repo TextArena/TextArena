@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw so Player {player_id} ed SimpleTak.\nEd board, ira bato mo so mairapen nga '{player_stone}' tan ira bato na kalaban mo so mairapen nga '{opponent_stone}'.\n\nEd turn mo, pilien mo met ung empty cell (no numero nga index) tan itakder mo ira bato mo edya.\nNo example, '[12]' itakder mo ira bato mo ed cell 12.\n\nObjective mo so bumawa met ung continuous path na ira bato mo a konecta ira dua opposite edges na board (top-to-bottom o left-to-right)."
+  },
+  "invalid_move": {
+    "invalid_move_format": "Aliwan balido so format na iyalis",
+    "cell_out_of_range": "Sala nga cell numero {cell_num}. Kinakailangan ya between 0 tan {max_board_num}.",
+    "cell_already_occupied": "Say selda {cell_num} et wala la. Pamili na anggapoy cell to."
+  },
+  "board": {
+    "current_state": "Kasalukuyan a Tabla:\n\n{rendered_board}\nSaray Panagayat ya Makasalukuyan: {available_moves}"
+  },
+  "action": {
+    "placement": "Player {current_player_id} naitakder ira simbolo ({symbol}) ed cell {cell_num}."
+  },
+  "outcome": {
+    "winner": "Player {current_player_id} ('{symbol}') nikonecta ira dua opposite edges!",
+    "draw": "Napno so board, anggapoy napili!"
+  }
+}

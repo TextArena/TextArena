@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Та LinesOfAction тоглоомын Тоглогч {player_id} байна.\nТа '{side}' тоглоомын хэлбэрээр тоглоно, өрсөлдөгч '{other}' тоглоомын хэлбэрээр тоглоно.\nХөдөлгөөний формат: `[b1b3]` (эхлэх координатаас очих координат). Хуулийн дагуу хөдөлгөөн нь хэвтээ, босоо, эсвэл диагональ чиглэлд тоглоомын хэлбэрүүдийн тоотой тэнцүү хэмжээгээр хөдлөнө. Та өөрийн тоглоомын хэлбэрүүдийг давах боломжтой, гэхдээ өрсөлдөгчийн тоглоомын хэлбэрүүдийг давахгүй; өрсөлдөгчийн тоглоомын хэлбэр дээр буулахад түүнийг олзлоно. Бүх тоглоомын хэлбэрүүд 8-н хөршөөр холбогдсон бол та ялна."
+  },
+  "board": {
+    "current_board": "Зөвлөл: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Формат нь e2e4 байх ёстой (coordinates-ээс,to).",
+    "no_piece": "No {side} хэсэг нь {coord} дээр.",
+    "identical": "Эх үүсвэр, хүрэх газар нь ижил.",
+    "not_straight_or_diagonal": "Хөдөлгөөн нь шууд эсвэл диагонал хэлбэртэй байх ёстой.",
+    "wrong_distance": "Хажууд байгаа хэсгүүдийн тэнцүү замыг алхдаг байх ёстой.",
+    "enemy_blocks": "Дайсны бөмбөг зам хааж байна.",
+    "destination_own": "Зорилго нь өөрийн гэсэн нэгжээр эзлэгддэг."
+  },
+  "game_action": {
+    "moved": "Тоглогч {player_id} хөдөлсөн {from} -> {to}",
+    "captured_suffix": "Тоглогч {player_id} хөдөлсөн {from} -> {to} дайсанг баривчилсан."
+  },
+  "outcome": {
+    "win": "Бүх зүйл нэгдэж байна.",
+    "draw_no_capture": "60 хөдөлгөөнд баригдаагүй.",
+    "draw_repetition": "Байрлагыг гурван удаа давтав."
+  }
+}

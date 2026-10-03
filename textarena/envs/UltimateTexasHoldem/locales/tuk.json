@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Heniz kartlar ýok.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Ýeke oýunçy garşy satyjy\n\n📖 OÝUN GÜNDEMİ:\n• Siz {start_chips} çipler bilen başlaýarsyňyz\n• 52 kartly ýeke destä (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Siz satyjy garşy oýnaýarsyňyz (ýaşaýyş jaýy)\n• Her raund Ultimate Texas Hold'em gurluşyny ýerine ýetirýär: siz ANTE we BLIND bahalaryny goýýarsyňyz, 2 ýaşyrtyn kart alýarsyňyz, oýun dowamynda PLAY bahalarynyň ýeke ýa-da käbirini saýlaýarsyňyz, soňra jemgyýet kartlaryny ýaşyrýarsyňyz we iň gowy 5-kartly golunyzy satyjynyňky bilen deňeşdirýärsiňiz. Siziň maksadyňyz ýeňişleriňizi (siz iň gowy golunyza eýe bolan ýagdaýyňyzda) artdyrmak, ýitgileriňizi bolsa (siz ýaramaz golunyza eýe bolan ýagdaýyňyzda) azaltmak.\n• Oýun siz raundyň başynda 0 çipe ýa-da ondan aşak gaçan ýagdaýyňyzda tamamlanýar (ÝITGI) ýa-da 1000 raundy tamamlanýar we çipleriňiz bar bolan ýagdaýyňyzda (ÝEŇIŞ)\n\n💰 BAHAR STRUKTURASY:\n• ANTE: Her raundda hökmany ${ante} bahasy\n• BLIND: Her raundda hökmany ${ante} bahasy\n• PLAY: Oýun dowamynda ýeke ýa-da käbir bahalary saýlaýarkaňyz, hökmany däl bahalar. Raundyň dowamynda siz ýeke ýa-da käbiriniň ýeke ýa-da käbirini saýlaýarkaňyz: (${ante4} PRE-FLOP-da ýerine ýetirilýän bolsa, ${ante2} FLOP-da ýerine ýetirilýän bolsa ýa-da ${ante} RIVER-de ýerine ýetirilýän bolsa. RIVER-de ýerine ýetirilýän bolsa, golunyzy ýitirip, bahasyny ýitirip bilersiňiz.)\n\n🎴 KART ÝARGYTMA:\n• Siz 2 ýaşyrtyn kart alýarsyňyz (ýaşyrtyn kartlaryňyz)\n• Satyjy 2 ýaşyrtyn kart alýar (sizden ýaşyrtyn)\n• 5 jemgyýet kartlary ýaşyrtyn ýerine ýetirilýär\n• Jemgyýet kartlary oýun fazalarynyň dowamynda ýaşyrtyn ýerine ýetirilýär\n\n🏆 SATYJYNYŇ ÝARAMLYLYGY:\n• Satyjynyň ýaramlylygy ýeňiş bahalarynyň ýagdaýyna täsir edýär, ýönekeý ýagdaýda bolsa.\n• Satyjynyň ýaramlylygy ýeňiş bahalarynyň ýagdaýyna täsir edýär, ýönekeý ýagdaýda bolsa.\n\n🎮 OÝUN FAZALARY & ÇÄRELER:\n📋 PRE-FLOP:\n  • Çäreler: [4x] (${ante4}) ýa-da [check]\n  • [4x]: ${ante4} PLAY bahasyny goýýarkaňyz, ilkinji 3 jemgyýet kartlaryny ýaşyrýarkaňyz\n  • [check]: Goşmaça bahasyny ýitirip, ilkinji 3 jemgyýet kartlaryny ýaşyrýarkaňyz\n\n📋 FLOP:\n  • 4x bahasy ýerine ýetirilýän bolsa: ýeke [skip] ýerine ýetirilýär (soňky 2 jemgyýet kartlaryny ýaşyrýarkaňyz)\n  • 4x bahasy ýerine ýetirilýän bolsa: [2x] (${ante2}) ýa-da [check]\n  • [2x]: ${ante2} PLAY bahasyny goýýarkaňyz, soňky 2 jemgyýet kartlaryny ýaşyrýarkaňyz\n  • [check]: Goşmaça bahasyny ýitirip, soňky 2 jemgyýet kartlaryny ýaşyrýarkaňyz\n\n📋 RIVER:\n  • 4x ýa-da 2x bahasy ýerine ýetirilýän bolsa: ýeke [skip] ýerine ýetirilýär (golunyzy ýaşyrýarkaňyz)\n  • 4x ýa-da 2x bahasy ýerine ýetirilýän bolsa: [1x] (${ante}) ýa-da [fold]\n  • [1x]: ${ante} PLAY bahasyny goýýarkaňyz, golunyzy ýaşyrýarkaňyz\n  • [fold]: Golunyzy ýitirip, ANTE we BLIND bahalaryny ýitirip bilersiňiz\n\n📋 SHOWDOWN:\n  • Ähli kartlary ýaşyrýarkaňyz we deňeşdirýärsiňiz\n  • Iň gowy 5-kartly golunyzy 7 kartdan (2 ýaşyrtyn + 5 jemgyýet)\n  • Bahalary ýeňiş ýagdaýyna laýyklykda ýerine ýetirilýär\n\n💎 BAHAR ÝEŇIŞLERI:\n📊 ANTE BAHASY:\n  • Satyjy ýaramly däl bolsa: PUSH (bahasyny ýitirip bilersiňiz)\n  • Satyjy ýaramly bolsa we siz ýeňýärsiňiz: 1:1 ýeňiş (bahasyny + ýeňiş)\n  • Satyjy ýaramly bolsa we siz ýitirýärsiňiz: Bahasyny ýitirip bilersiňiz\n  • Deňlik: PUSH (bahasyny ýitirip bilersiňiz)\n\n📊 BLIND BAHASY:\n  • Satyjynyň ýaramlylygyndan täsirlenmeýär\n  • Siz ýeňýärsiňiz: Bahasyny ýitirip we goşmaça ýeňiş\n  • Siz ýitirýärsiňiz: Bahasyny ýitirip bilersiňiz\n  • Deňlik: PUSH (bahasyny ýitirip bilersiňiz)\n\n📊 BLIND BAHASY ÝEŇIŞ TABLISASY:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Goşmaça ýeňiş ýok\n\n📊 PLAY BAHASY:\n  • Satyjynyň ýaramlylygyndan täsirlenmeýär\n  • Golunyzyň ýeňiş ýagdaýyna laýyklykda ýerine ýetirilýär\n  • Siz ýeňýärsiňiz: 1:1 ýeňiş (bahasyny + ýeňiş)\n  • Siz ýitirýärsiňiz: Bahasyny ýitirip bilersiňiz\n  • Deňlik: PUSH (bahasyny ýitirip bilersiňiz)\n\n🎯 POKER GOLUNYŇ ÝEŇIŞ ÝAGDAÝY (Iň gowydan ýaramaz ýagdaýa):\n  1. Royal Flush: A-K-Q-J-10 ýeke ýagdaýda\n  2. Straight Flush: 5 ýeke ýagdaýda ýerine ýetirilýän 5 kart\n  3. Four of a Kind: 4 ýeke ýagdaýda ýerine ýetirilýän 4 kart\n  4. Full House: 3 ýeke ýagdaýda ýerine ýetirilýän 3 kart + 2 ýeke ýagdaýda ýerine ýetirilýän 2 kart\n  5. Flush: 5 ýeke ýagdaýda ýerine ýetirilýän 5 kart\n  6. Straight: 5 ýeke ýagdaýda ýerine ýetirilýän 5 kart\n  7. Three of a Kind: 3 ýeke ýagdaýda ýerine ýetirilýän 3 kart\n  8. Two Pair: 2 ýeke ýagdaýda ýerine ýetirilýän 2 kart + 2 ýeke ýagdaýda ýerine ýetirilýän 2 kart\n  9. One Pair: 2 ýeke ýagdaýda ýerine ýetirilýän 2 kart\n  10. High Card: Ýokary kart ýeňýär\n\n⌨️  ÇÄRE KOMANDALARY:\n• [4x] ýa-da [play bet 4x]: ${{self.ante_amount*4}} PLAY bahasyny goýýarkaňyz\n• [2x] ýa-da [play bet 2x]: ${{self.ante_amount*2}} PLAY bahasyny goýýarkaňyz\n• [1x] ýa-da [play bet 1x]: ${{self.ante_amount*1}} PLAY bahasyny goýýarkaňyz\n• [check] ýa-da [c]: Check (goşmaça bahasyny ýitirip bilersiňiz)\n• [fold] ýa-da [f]: Fold (golunyzy ýitirip bilersiňiz)\n• [skip] ýa-da [s]: Skip (çäre ýitirip bilersiňiz)\n\n💡 STRATEGIÝA ÝEŇIŞLERI:\n• Güýçli başlangyç gollary (ýeke ýagdaýda ýerine ýetirilýän ýeke ýagdaýlar) ýeňiş bahalaryny ýitirip bilersiňiz\n• Satyjynyň ýaramlylygyny ýitirip bilersiňiz - ýeňiş bahalary ýitirip bilersiňiz\n• BLIND bahasy güýçli gollarda ýerine ýetirilýän ýeňiş bahalary ýitirip bilersiňiz (Royal Flush = 500:1!)\n• Çipleriňiziň ýagdaýyna laýyklykda ýitirip bilersiňiz! 0 ýa-da ondan aşak gaçan ýagdaýyňyzda ýitirip bilersiňiz.\n\n⚠️  ÝEŇIŞ ÝAGDAÝLAR:\n• ANTE we BLIND bahalary her raundda hökmany ýerine ýetirilýär\n• PLAY bahalary ýeke ýa-da käbir ýerine ýetirilýär we strategiýa ýerine ýetirilýär\n• Çäreleriňiziň ýagdaýyna laýyklykda ýitirip bilersiňiz, we ýeke çäre ýerine ýetirilýär.\n\n",
+    "state": "🎯 RAUND {round}\n💰 Žetonyňyz: {chips}\n🎴 Siziň golyňyz: {hand}\n📊 Häzirki bahyslaryňyz: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Faza: {phase}\n🎯 Ýerine ýetirýän ýerine ýetirişler: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Raund {round} başlady! Bahyslaryňyz: ANTE ${ante}, BLIND ${blind}. Sizde {chips} žetonyňyz galýar.",
+    "your_hand": " Eliň: {hand}",
+    "flop_revealed": " FLOP aýan boldy: {cards}",
+    "river_revealed": " RIVER aýan boldy: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Häzirki faza üçin ýeterlik hereket. Elýeterli hereketler: {available}",
+    "message": " Ykbal etmedik hereket! Elýeterli iş: {available}"
+  },
+  "action": {
+    "folded": " Sen ýykyldyň."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Dealeriň eli: {cards}",
+    "community_cards": " Umumiýet kartasy: {cards}",
+    "player_best": "🎴 Oýunçynyň iň gowşak ýeri: {name} ({cards})",
+    "dealer_best": "🎴 Dealeriň iň gowşak ýeri: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE ýatyryş ÝITIRDI! -${ante} (ýykylan)",
+    "blind_lost_folded": "❌ BLIND ýatyryş ÝITIRDI! -${blind} (ýykylan)",
+    "ante_won": "✅ ANTE bahasy WON! +${amount}",
+    "ante_pushed": " ANTE bahasy GÖÇÜRILDI! ${ante} yzyna gaýtaryldy.",
+    "ante_lost": " ANTE bahasy ýitdi! -${ante}",
+    "blind_won": "✅ BILIND bahasy GELDI! +${amount}",
+    "blind_pushed": " BILIND bahasy GÖÇÜNDIRIÝEDİ! ${blind} yzyna gaýtaryldy.",
+    "blind_lost": " BILIND bahasy ýitildi! -${blind}",
+    "play_won": "✅ BAŞARMA bahasy GELDİ! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} gaýdyp geldi.",
+    "play_lost": "❌ PLAY ýatyryş ÝITIRDI! -${play}",
+    "net_gain": "🎉 Raund {round} tamamlandy! Net ýeňiş: +${net}",
+    "net_loss": "💸 Raund {round} tamamlandy! Net ýitgi: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 OYUN TAMAM! {max_turns} raund tamamlandy. Siziňde ${chips} fishka bar - SIZ ÝEŞSİŇIZ!",
+    "game_over_lose": "ÖÝNÜŞ GÖRELDI! Çipleriňiz gutardy. Baryny paýlaýan ýeňdi!",
+    "reward_win": "Oýunçy {winner_rounds} raundlary ${chips} fishka bilen tamamlady",
+    "reward_lose": "Oýunçynyň çipleri gutardy {round} turda.",
+    "reward_win_max": "Oýunçy {max_turns} raundlary ${chips} fishka bilen tamamlady"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush (Royaleş)",
+    "straight_flush": "Çykmaçly aýyrmak",
+    "four_of_a_kind": "Dördüň Bir Jübüti",
+    "full_house": "Doly Ýaşaýyş",
+    "flush": "Flush",
+    "straight": "Dogruçyl",
+    "three_of_a_kind": "Birmeňzeş üç sany ýigit",
+    "two_pair": "Iki Jübüt",
+    "one_pair": "Bir juwanlyk",
+    "high_card": "Ýokary Kart",
+    "unknown": "Tanymsyz El"
+  }
+}

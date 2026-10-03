@@ -1,0 +1,47 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in einer Partie Spite and Malice für zwei Spieler. Dein Ziel ist es, als Erster deinen Zielstapel zu leeren.\n\n### Spielübersicht:\n- Das Ziel besteht darin, deinen Zielstapel zu leeren, indem du Karten auf die Mittelstapel spielst.\n- Du kannst Karten aus drei Quellen spielen:\n  1. Deiner **Hand** (du beginnst jeden Zug mit bis zu 5 Karten auf der Hand).\n  2. Der **obersten Karte deines Zielstapels**.\n  3. Der **obersten Karte eines beliebigen deiner Ablagestapel**.\n\n### Spielregeln:\n- Du darfst eine Karte auf einen Mittelstapel spielen, wenn sie **genau einen Rang höher** ist als die oberste Karte dieses Stapels (Mittelstapel beginnen mit einem Ass und steigen bis zur Dame auf; Könige sind Joker: Sie können auf jede Karte gespielt werden, verändern jedoch nicht die Rangfolge. Wird also ein König nach einer 4 gespielt, zählt dieser König als 5 und die nächste Karte muss eine 6 sein).\n- Wenn du keine weiteren Karten spielen kannst, musst du **eine Karte ablegen**, um deinen Zug zu beenden.\n- Wenn ein Mittelstapel die Dame erreicht, wird er automatisch entfernt.\n- Die Rangfolge lautet: A=1, 2=2, ..., 9=9, J=10, Q=11 und K als Joker.\n\n### Aktionen:\n1. **Ziehen**: Ziehe zu Beginn deines Zuges Karten, bis du 5 Karten auf der Hand hast. Gib zum Beginnen **[draw]** ein.\n2. **Eine Karte spielen**: Gib zum Spielen einer Karte die Karte und den Mittelstapel wie folgt an: **[play A♠ 0]** (wobei 'A♠' die Karte und '0' der Index des Mittelstapels ist).\n3. **Ablegen**: Wenn du keine weiteren Karten spielen kannst, lege eine Karte aus deiner Hand auf einen Ablagestapel, um deinen Zug zu beenden. Gib **[discard A♠ 1]** ein (wobei 'A♠' die Karte und '1' der Index des Ablagestapels ist). Beachte, dass du keine Karte aus dem Zielstapel ablegen darfst. Du darfst nur Karten aus deiner Hand ablegen.\n\n"
+  },
+
+  "board": {
+    "current_board": "Aktuelles Spielbrett:\n\n{board}\nVerfügbare Züge: {moves}"
+  },
+
+  "render": {
+    "center_piles_header": "--- Mittelstapel ---\n",
+    "pile": "{observation}Stapel {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Ansicht von Spieler {player_id} ---\n",
+    "payoff": "{observation}Zielstapel (oberste Karte): {top_card}, Länge des Zielstapels: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Ablagestapel: {discard}\n",
+    "empty": "Leer"
+  },
+
+  "game_message": {
+    "no_cards_left": "Es sind keine Karten mehr zum Ziehen vorhanden. Denke daran, dass du Karten aus folgenden Quellen spielen kannst:\n  1. Deiner **Hand**.\n  2. Der **obersten Karte deines Zielstapels**.\n  3. Der **obersten Karte eines beliebigen deiner Ablagestapel**.\n\n"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Ungültiges Zugformat. Spieler {player_id} hat nicht mit einem gültigen Zug in eckigen Klammern geantwortet.",
+    "invalid_play": "Ungültiger Spielzug. Spieler {player_id} hat versucht, {card} auf Mittelstapel {index} zu spielen.",
+    "discard_from_payoff": "Ungültiges Ablegen. Spieler {player_id} hat versucht, eine Karte aus dem Zielstapel abzulegen.",
+    "discard_not_in_hand": "Ungültiges Ablegen. Spieler {player_id} hat versucht, eine Karte abzulegen, die sich nicht auf der Hand befindet.",
+    "wrong_move_type": "Ungültiger Zugtyp. Spieler {player_id} hat nicht mit einem gültigen Zugtyp geantwortet."
+  },
+
+  "game_action": {
+    "you_drew": "Du hast Karten gezogen.",
+    "opponent_drew": "Spieler {player_id} hat Karten gezogen.",
+    "you_played": "Du hast {card} auf Mittelstapel {index} gespielt.",
+    "opponent_played": "Spieler {player_id} hat {card} auf Mittelstapel {index} gespielt.",
+    "you_discarded": "Du hast {card} auf Ablagestapel {index} abgelegt und damit deinen Zug beendet. Weitere Aktionen von dir werden in diesem Zug nicht berücksichtigt. Spieler {next_player_id} ist als Nächstes an der Reihe.",
+    "opponent_discarded": "Spieler {player_id} hat {card} auf Ablagestapel {index} abgelegt und damit seinen Zug beendet. Weitere Aktionen von Spieler {player_id} werden in diesem Zug nicht berücksichtigt. Spieler {next_player_id}, du bist als Nächstes an der Reihe. Gib deine Aktion im Format [action card center_index] ein."
+  },
+
+  "outcome": {
+    "payoff_cleared": "Spieler {current_player} hat seinen Zielstapel geleert! Spieler {current_player} gewinnt!",
+    "deadlock_player_0": "Stillstand erreicht! Spieler 0 gewinnt mit {player_0_payoff} verbleibenden Karten gegenüber {player_1_payoff} verbleibenden Karten von Spieler 1.",
+    "deadlock_player_1": "Stillstand erreicht! Spieler 1 gewinnt mit {player_1_payoff} verbleibenden Karten gegenüber {player_0_payoff} verbleibenden Karten von Spieler 0.",
+    "deadlock_tie": "Stillstand mit Gleichstand erreicht! Beide Spieler haben noch {player_0_payoff} Karten. Spieler {current_player} gewinnt standardmäßig."
+  }
+}

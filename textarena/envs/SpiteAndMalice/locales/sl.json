@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v igri Spite and Malice za dva igralca. Vaš cilj je prvi izprazniti svojo kupico izplačil.\n\n### Pregled igre:\n- Cilj je očistiti svojo kupico izplačil tako, da igrate karte na središčne kupice.\n- Lahko igrate karte iz treh virov:\n  1. Vaša **roka** (začnete vsak krog z do 5 kartami v roki).\n  2. **Zgornja karta vaše kupice izplačil**.\n  3. **Zgornja karta katere koli vaše kupice zavrnjenih kart**.\n\n### Pravila igranja:\n- Lahko igrate karto na središčno kupico, če je **ena stopnja višja** kot zgornja karta na tej kupici (središčne kupice se začnejo z Asom in gredo do Kraljice; Kralji so divji - lahko se igrajo na katero koli karto, vendar ne spreminjajo zaporedja stopenj. To pomeni, če se uporabi Kralj po 4, potem je ta Kralj rangiran kot 5 in naslednja karta mora biti 6).\n- Če ne morete igrati nobene karte, morate **odvreči karto** v eno od vaših kupic zavrnjenih kart, da zaključite svoj krog.\n- Če središčna kupica doseže Kraljico, bo avtomatsko očiščena.\n- Zaporedje stopenj je: A=1, 2=2, ..., 9=9, J=10, Q=11, K kot divji.\n\n### Dejanja:\n1. **Žreb**: Na začetku vašega kroga, žrebajte karte, da napolnite svojo roko do 5 kart. Vnesite **[draw]**, da začnete.\n2. **Igraj karto**: Da igrate karto, določite karto in središčno kupico tako: **[play A♠ 0]** (kjer je 'A♠' karta in '0' indeks središčne kupice).\n3. **Odvreči**: Če ne morete igrati nobene karte, odvreči karto iz vaše roke v kupico zavrnjenih kart, da zaključite svoj krog. Vnesite **[discard A♠ 1]** (kjer je 'A♠' karta in '1' indeks kupice zavrnjenih kart). Upoštevajte, da ne morete odvreči nobene karte iz kupice izplačil. Lahko odvrečete samo karte iz vaše roke.\n\n"
+  },
+  "board": {
+    "current_board": "Trenutna plošča:\n\n{board}\nRazpoložljive poteze: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Središčne kupice ---\n",
+    "pile": "{observation}Kupica {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Pogled igralca {player_id} ---\n",
+    "payoff": "{observation}Kupica izplačil (Zgornja karta): {top_card}, Dolžina kupice izplačil: {payoff_length}\n",
+    "hand": "{observation}Roka: {hand}\n",
+    "discard": "{observation}Kupice zavrnjenih kart: {discard}\n",
+    "empty": "Prazno"
+  },
+  "game_message": {
+    "no_cards_left": "Ni več kart za žreb. Upoštevajte, da lahko igrate karte iz teh virov:\n  1. Vaša **roka**.\n  2. **Zgornja karta vaše kupice izplačil**.\n  3. **Zgornja karta katere koli vaše kupice zavrnjenih kart**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Neveljaven format poteze. Igralec {player_id} ni odgovoril z veljavno potezo v oglatih oklepajih.",
+    "invalid_play": "Neveljavna igra. Igralec {player_id} je poskusil igrati {card} na središčno kupico {index}.",
+    "discard_from_payoff": "Neveljavno odvračanje. Igralec {player_id} je poskusil odvračati karto iz kupice izplačil.",
+    "discard_not_in_hand": "Neveljavno odvračanje. Igralec {player_id} je poskusil odvračati karto, ki ni v roki.",
+    "wrong_move_type": "Neveljaven tip poteze. Igralec {player_id} ni odgovoril z veljavnim tipom poteze."
+  },
+  "game_action": {
+    "you_drew": "Žrebali ste karte.",
+    "opponent_drew": "Igralec {player_id} je žrebali karte.",
+    "you_played": "Igrali ste {card} na središčno kupico {index}.",
+    "opponent_played": "Igralec {player_id} je igral {card} na središčno kupico {index}.",
+    "you_discarded": "Odvračili ste {card} v kupico zavrnjenih kart {index}, kar pomeni, da ste zaključili svoj krog. Nobene nadaljnje akcije vaše strani ne bodo upoštevane v tem krogu. Igralec {next_player_id} bo naslednji.",
+    "opponent_discarded": "Igralec {player_id} je odvračal {card} v kupico zavrnjenih kart {index}, kar pomeni, da je zaključil svoj krog. Nobene nadaljnje akcije igralca {player_id} ne bodo upoštevane v tem krogu. Igralec {next_player_id}, vi boste naslednji. Prosim, vnesite svojo akcijo v formatu [akcija karta indeks]."
+  },
+  "outcome": {
+    "payoff_cleared": "Igralec {current_player} je zaključil svojo kupico izplačil! Igralec {current_player} zmaga!",
+    "deadlock_player_0": "Dosežen je zastoj! Igralec 0 zmaga z {player_0_payoff} kartami, ki so ostale, proti {player_1_payoff} kartam igralca 1.",
+    "deadlock_player_1": "Dosežen je zastoj! Igralec 1 zmaga z {player_1_payoff} kartami, ki so ostale, proti {player_0_payoff} kartam igralca 0.",
+    "deadlock_tie": "Dosežen je zastoj z izenačenjem! Oba igralca imata {player_0_payoff} kart, ki so ostale. Igralec {current_player} zmaga po privzemu."
+  }
+}

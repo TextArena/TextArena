@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id} em um jogo de dois jogadores de Spite and Malice. Seu objetivo é ser o primeiro a esvaziar sua pilha de pagamento.\n\n### Visão Geral do Jogo:\n- O objetivo é limpar sua pilha de pagamento jogando cartas nas pilhas centrais.\n- Você pode jogar cartas de três fontes:\n  1. Sua **mão** (você começa cada turno com até 5 cartas na mão).\n  2. A **carta superior da sua pilha de pagamento**.\n  3. A **carta superior de qualquer uma das suas pilhas de descarte**.\n\n### Regras de Jogo:\n- Você pode jogar uma carta em uma pilha central se ela for **uma posição acima** da carta superior nessa pilha (as pilhas centrais começam com Ás e vão até Rainha; os Reis são curingas - eles podem ser jogados em qualquer carta, mas não alteram a sequência de posições. Isso significa que se um Rei for usado após o 4, então esse Rei é classificado como 5 e a próxima carta deve ser um 6).\n- Se você não puder jogar mais cartas, você deve **descartar uma carta** em uma de suas pilhas de descarte para encerrar seu turno.\n- Se uma pilha central atingir a Rainha, ela será limpa automaticamente.\n- A ordem de posições é: A=1, 2=2, ..., 9=9, J=10, Q=11, K como curinga.\n\n### Ações:\n1. **Comprar**: No início do seu turno, compre cartas para preencher sua mão até 5 cartas. Digite **[draw]** para começar.\n2. **Jogar uma Carta**: Para jogar uma carta, especifique a carta e a pilha central assim: **[play A♠ 0]** (onde 'A ' é a carta e '0' é o índice da pilha central).\n3. **Descartar**: Se você não puder jogar mais cartas, descarte uma carta da sua mão em uma pilha de descarte para encerrar seu turno. Digite **[discard A♠ 1]** (onde 'A ' é a carta e '1' é o índice da pilha de descarte). Observe que você não pode descartar nenhuma carta da pilha de pagamento. Você só pode descartar as cartas da sua mão.\n\n"
+  },
+  "board": {
+    "current_board": "Tabuleiro Atual:\n\n{board}\nMovimentos Disponíveis: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pilhas Centrais ---\n",
+    "pile": "{observation}Pilha {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Visão do Jogador {player_id} ---\n",
+    "payoff": "{observation}Pilha de Pagamento (Carta Superior): {top_card}, Tamanho da Pilha de Pagamento: {payoff_length}\n",
+    "hand": "{observation}Mão: {hand}\n",
+    "discard": "{observation}Pilhas de Descarte: {discard}\n",
+    "empty": "Vazio"
+  },
+  "game_message": {
+    "no_cards_left": "Não há mais cartas para comprar. Lembre-se de que você pode jogar cartas dessas fontes:\n  1. Sua **mão**.\n  2. A **carta superior da sua pilha de pagamento**.\n  3. A **carta superior de qualquer uma das suas pilhas de descarte**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movimento inválido. O Jogador {player_id} não respondeu com um movimento válido entre colchetes.",
+    "invalid_play": "Jogada inválida. O Jogador {player_id} tentou jogar {card} na pilha central {index}.",
+    "discard_from_payoff": "Descarte inválido. O Jogador {player_id} tentou descartar uma carta da pilha de pagamento.",
+    "discard_not_in_hand": "Descarte inválido. O Jogador {player_id} tentou descartar uma carta que não está na mão.",
+    "wrong_move_type": "Tipo de movimento inválido. O Jogador {player_id} não respondeu com um tipo de movimento válido."
+  },
+  "game_action": {
+    "you_drew": "Você comprou cartas.",
+    "opponent_drew": "O Jogador {player_id} comprou cartas.",
+    "you_played": "Você jogou {card} na pilha central {index}.",
+    "opponent_played": "O Jogador {player_id} jogou {card} na pilha central {index}.",
+    "you_discarded": "Você descartou {card} na pilha de descarte {index}, o que também significa que você terminou seu turno. Nenhuma ação adicional sua será considerada para este turno. O Jogador {next_player_id} irá em seguida.",
+    "opponent_discarded": "O Jogador {player_id} descartou {card} na pilha de descarte {index}, o que também significa que ele terminou seu turno. Nenhuma ação adicional do Jogador {player_id} será considerada para este turno. O Jogador {next_player_id}, você irá em seguida. Por favor, digite sua ação no formato [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "O Jogador {current_player} terminou sua pilha de pagamento! O Jogador {current_player} vence!",
+    "deadlock_player_0": "Empate alcançado! O Jogador 0 vence com {player_0_payoff} cartas restantes vs {player_1_payoff} cartas do Jogador 1.",
+    "deadlock_player_1": "Empate alcançado! O Jogador 1 vence com {player_1_payoff} cartas restantes vs {player_0_payoff} cartas do Jogador 0.",
+    "deadlock_tie": "Empate alcançado com empate! Ambos os jogadores têm {player_0_payoff} cartas restantes. O Jogador {current_player} vence por padrão."
+  }
+}

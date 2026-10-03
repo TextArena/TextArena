@@ -1,0 +1,55 @@
+{
+  "_comment": "Žaidėjo sąsajos eilutės Liar's Dice žaidimui. Skliaustuose esantys veiksmų ženklai ('[Bid: X, Y]', '[Call]'), žaidėjo indeksai, kauliukų veidų reikšmės, kiekiai ir skaičiai yra neutralūs slotai ir niekada neturi būti išversti.",
+  "_slots": {
+    "player_id": "žaidėjo indeksas (sveikasis skaičius)",
+    "num_players": "žaidėjų skaičius žaidime (sveikasis skaičius)",
+    "dice_summary": "iš anksto sugeneruotas '; '-jungtas kiekvieno žaidėjo likusių kauliukų skaičius",
+    "your_dice": "iš anksto sugeneruotas kableliais jungtas sąrašas žaidėjo kauliukų veidų reikšmių",
+    "p": "žaidėjo indeksas (sveikasis skaičius)",
+    "d": "likęs kauliukų skaičius tam žaidėjui (sveikasis skaičius)",
+    "current_player_id": "žaidėjo indeksas, kuris paskelbė (sveikasis skaičius)",
+    "face_value": "kauliuko veido reikšmė, kuri skaičiuojama (1-6)",
+    "count": "tikrasis atitinkančių kauliukų skaičius (sveikasis skaičius)",
+    "quantity": "statymo kiekis (sveikasis skaičius)",
+    "loser_id": "žaidėjo indeksas, kuris pralaimėjo kauliuką (sveikasis skaičius)",
+    "new_quantity": "ką tik pateiktas statymo kiekis (sveikasis skaičius)",
+    "current_quantity": "dabartinis statymo kiekis (sveikasis skaičius)",
+    "new_face_value": "ką tik pateikta kauliuko veido reikšmė (sveikasis skaičius)",
+    "current_face_value": "dabartinė kauliuko veido reikšmė (sveikasis skaičius)",
+    "action": "žaidėjo pateiktas veiksmo eilutė",
+    "reason": "įdėtinė statymo atmetimo priežastis",
+    "winner": "žaidėjo indeksas, kuris laimėjo (sveikasis skaičius)",
+    "final_ranking": "žaidėjų indeksų sąrašas nuo pirmo pašalinto iki laimėtojo"
+  },
+  "player_prompt": {
+    "intro": "Jūs esate Žaidėjas {player_id} {num_players}-žaidėjų Liar's Dice žaidime.\nTaisyklės:\n- Jūsų ėjimo metu, jūs galite arba:\n  1) Pateikti naują statymą su didesniu kiekiu ar didesne veido reikšme (ar abiem) nei dabartinis statymas; t. y. '[Bid: 3, 4]',\n  2) Paskelbti paskutinį statymą įvedant '[Call]'.\n\nJei jūs paskelbsite:\n  - Jei tikrasis to veido reikšmės skaičius tarp visų kauliukų yra mažesnis nei statymas, paskutinis statytojas pralaimėja vieną kauliuką.\n  - Kitu atveju, paskelbėjas pralaimėja vieną kauliuką.\nŽaidėjas, kuris pasiekia 0 kauliukų, yra pašalintas. Paskutinis likęs žaidėjas laimėja."
+  },
+  "board": {
+    "per_player": "\tŽaidėjas {p}: {d}",
+    "new_round": "\nNaujas raundas - Likę kauliukai: {dice_summary}\nJūsų dabartiniai kauliukai yra: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Žaidėjas {current_player_id} paskelbė! Tikrasis {face_value} veido reikšmės skaičius yra {count}, kuris yra MAŽESNIS nei {quantity}.\nŽaidėjas {loser_id} (paskutinis statytojas) pralaimėja vieną kauliuką.",
+    "caller_loses": "Žaidėjas {current_player_id} paskelbė! Tikrasis {face_value} veido reikšmės skaičius yra {count}, kuris yra >= {quantity}.\nŽaidėjas {loser_id} (paskelbėjas) pralaimėja vieną kauliuką."
+  },
+  "action": {
+    "bid_announce": "Žaidėjas {player_id} statyja {quantity} {face_value} veido reikšmės."
+  },
+  "invalid_move": {
+    "call_no_bid": "Paskelbimas padarytas be prieš tai buvusio statymo.",
+    "invalid_bid": "Neteisingas statymas: {reason}",
+    "not_recognized": "Veiksmas nepažįstamas kaip teisingas '[Bid: X, Y]' arba '[Call]'. Pateiktas veiksmas: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Naujas kiekis {new_quantity} yra mažesnis nei dabartinis {current_quantity}.",
+    "face_lower": "Nauja veido reikšmė {new_face_value} yra mažesnė nei dabartinė {current_face_value}.",
+    "identical": "Statymas yra identiškas dabartiniam statymui.",
+    "face_range": "Veido reikšmė turi būti tarp 1 ir 6."
+  },
+  "message": {
+    "eliminated_invalid": "Žaidėjas {player_id} buvo pašalintas dėl neteisingo ėjimo."
+  },
+  "outcome": {
+    "win": "Žaidėjas {winner} laimėjo! Galutinis reitingas: {final_ranking}"
+  }
+}

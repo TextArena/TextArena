@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Umdlalo weBriscola usuqalile! Isudi kaTrump: {trump_suit} (ikhadi likaTrump: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Udlala iBriscola - Umdlali {player_id}. Umgomo: Ukuwina amaqhinga nokuqoqa amaphuzu amaningi (amaphuzu angu-120 ephelele emgqeni). Amaphuzu ekhadi: A = 11, 3 = 10, K = 4, Q = 3, J = 2, abanye = 0 Amandla ekhadi: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2 Amakhadi weTrump ashaya amakhadi angewona ama-trump kungakhathalekile amandla. Isenzo: '[play X]' lapho i-X iyisikhundla (1-{max_pos}) sekhadi elisesandleni sakho "
+  },
+  "hand": {
+    "none": "Awekho amakhadi",
+    "empty": "Awekho amakhadi esandleni",
+    "header": "Isandla sakho:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Ayikho amakhadi adlalwa okwamanje leli qhinga.",
+    "header": "Iqhinga lamanje:",
+    "line": "Umdlali {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Umdlali {player_id}: {points} pts",
+    "trump_info": "Isudi kaTrump: {trump_suit}",
+    "trump_info_deck": "Isudi kaTrump: {trump_suit} │ Amakhadi asele emgqeni: {deck_count}",
+    "board": "{hand} {trick} Amaphuzu: {scores} {trump_info} Dlala ikhadi usebenzisa [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Sebenzisa [play X] lapho u-X eyisikhundla sekhadi (1, 2, 3, njll.)",
+    "out_of_range": "Isikhundla sekhadi esingekho emthethweni. Unamakhadi {count} (1-{count})"
+  },
+  "action": {
+    "played": "Umdlali {player_id} wadlala {card}",
+    "trick_win": "Umdlali {winner} uwina iqhinga nge {card} futhi uthola amaphuzu {points}!"
+  },
+  "outcome": {
+    "head": "Umdlalo Uphelile! Umdlali {winner} uyaphumelela ngamaphuzu {points}! Amanani Okugcina: {scores}",
+    "player_line": "Umdlali {player_id}: {points} amaphuzu ({tricks} amaqhinga) "
+  }
+}

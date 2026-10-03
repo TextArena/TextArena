@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire lokalisationsfil. Oversæt ikke nøgler (venstre side). Oversæt kun værdier (højre side).",
+  "_slots": {
+    "{n}": "Handlingens index i en kommaadskilt kommando, 1-baseret",
+    "{msg}": "Et indlejret resultatmeddelelse for hver handling (allerede oversat)",
+    "{count}": "Antallet af åbne kort, der flyttes",
+    "{src}": "Kilde-tableau-bunkenummer, 1-baseret",
+    "{dst}": "Destinationsbunkenummer, 1-baseret",
+    "{cmd}": "Den ukendte kommando, spilleren indtastede (ikke oversat)",
+    "{max_turns}": "Det maksimale antal ture før spillet slutter",
+    "{score}": "Antallet af kort i grundlagsbunkerne",
+    "{board}": "Det tegnede ASCII-bræt (aldrig oversæt)",
+    "{turn}": "Aktuel tur-nummer",
+    "{stock}": "Antallet af kort tilbage i bunken",
+    "{waste}": "Det øverste kort i affaldsbunken, eller '--' hvis tom (aldrig oversæt)",
+    "{cards}": "Kortene i en bunke som neutrale mærker, eller '--' hvis tom (aldrig oversæt)"
+  },
+  "player_prompt": {
+    "intro": "Du spiller Klondike Solitaire. Dit mål er at flytte alle kort til grundlagsbunkerne.\n\nSpilregler:\n- Grundlagsbunker (F1-F4): Byg op fra Es til Konge i kulør\n- Tableau-bunker (T1-T7): Byg ned i skiftevis farver (rød på sort, sort på rød)\n- Bunke: Træk kort til affaldsbunken\n- Affaldsbunke (W): Øverste kort tilgængeligt for spil\n\nKommandoer:\n- 'draw' - Træk kort fra bunken til affaldsbunken\n- 'move <kilde> <destination> [antal]' - Flyt kort mellem bunker\n  Eksempler: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Antallet kan også være 'all', som vil forsøge at flytte alle åbne kort.\n- 'forfeit' - Afslut spillet øjeblikkeligt og lås din aktuelle score\n- Bunkenavne: W (affaldsbunke), F1-F4 (grundlagsbunker), T1-T7 (tableau-bunker)\n\nDu kan udføre flere handlinger i en tur ved at adskille dem med kommaer:\n  Eksempel: 'draw, move W T1, move T2 F1'\n\nKun Konger kan placeres på tomme tableau-bunker.\nHandlinger udføres i rækkefølge - hvis en fejler, springes de resterende handlinger over.\nBrug 'forfeit' hvis du tror, spillet er umuligt at vinde."
+  },
+  "format_error": {
+    "no_brackets": "Ugyldig handlingformat. Handlingen skal være i parenteser.",
+    "no_closing_bracket": "Ugyldig handlingformat. Manglende afsluttende parentes ']'",
+    "empty_command": "Tom kommando. Indtast 'draw' eller 'move <kilde> <destination> [antal]'",
+    "empty_action": "Tom handling",
+    "move_needs_args": "Flyt-kommando kræver kilde og destination. Brug: 'move <kilde> <destination> [antal]'",
+    "count_positive": "Antallet skal være positivt eller 'all'",
+    "count_invalid": "Ugyldigt antal. Brug et tal eller 'all'",
+    "unknown_command": "Ukendt kommando '{cmd}'. Brug 'draw', 'move <kilde> <destination> [antal]', eller 'forfeit'",
+    "wrapped": "Handling {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Handling {n}: {msg}",
+    "before_failure": "Udført {n} handling(er) før fejl.",
+    "failed": "Handling {n} fejlede: {msg}"
+  },
+  "move_result": {
+    "drew": "Trak kort fra bunken til affaldsbunken.",
+    "cannot_draw": "Kan ikke trække. Både bunken og affaldsbunken er tomme.",
+    "invalid_pile": "Ugyldigt bunkenavn. Brug W, F1-F4 eller T1-T7",
+    "foundation_one_card": "Kan kun flytte 1 kort til grundlagsbunke",
+    "waste_to_foundation_ok": "Flyttede kort fra affaldsbunke til grundlagsbunke F{dst}",
+    "waste_to_foundation_bad": "Kan ikke flytte affaldskort til den grundlagsbunke",
+    "tableau_to_foundation_ok": "Flyttede kort fra tableau T{src} til grundlagsbunke F{dst}",
+    "tableau_to_foundation_bad": "Kan ikke flytte tableau-kort til den grundlagsbunke",
+    "foundation_to_foundation": "Kan ikke flytte fra grundlagsbunke til grundlagsbunke",
+    "waste_to_tableau_one_card": "Kan kun flytte 1 kort fra affaldsbunke til tableau",
+    "waste_to_tableau_ok": "Flyttede kort fra affaldsbunke til tableau T{dst}",
+    "waste_to_tableau_bad": "Kan ikke placere affaldskort på den tableau-bunke",
+    "no_face_up": "Ingen åbne kort at flytte",
+    "tableau_to_tableau_ok": "Flyttede {count} kort fra tableau T{src} til T{dst}",
+    "tableau_to_tableau_bad": "Kan ikke flytte {count} kort fra T{src} til T{dst}",
+    "foundation_to_tableau_one_card": "Kan kun flytte 1 kort fra grundlagsbunke til tableau",
+    "foundation_empty": "Grundlagsbunke F{src} er tom",
+    "foundation_to_tableau_ok": "Flyttede kort fra grundlagsbunke F{src} til tableau T{dst}",
+    "foundation_to_tableau_bad": "Kan ikke placere grundlagskort på tableau T{dst}",
+    "to_waste_or_stock": "Kan ikke flytte til affaldsbunke eller bunke"
+  },
+  "outcome": {
+    "forfeit": "Spillet opgivet. Endelig score: {score} kort i grundlagsbunker.",
+    "won": "Tillykke! Du har vundet Klondike Solitaire!",
+    "turn_limit": "Spillet er slut! Du nåede maksimum på {max_turns} ture. Score: {score} kort i grundlagsbunker."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Tur: {turn}/{max_turns}",
+    "stock": "Bunke: {stock} kort",
+    "waste": "Affaldsbunke (W): {waste}",
+    "foundations_header": "Grundlagsbunker:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

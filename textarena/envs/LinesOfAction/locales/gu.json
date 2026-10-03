@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "તમે LinesOfAction ની રમતમાં ખેલાડી {player_id} છો.\nતમારા પીસ '{side}' છે, વિરોધીના પીસ '{other}' છે.\nમૂવ ફોર્મેટ: `[b1b3]` (સ્ત્રોત-કોઓર્ડિનેટ થી ગંતવ્ય-કોઓર્ડિનેટ). કાયદેસરનો મૂવ આડો, ઊભો, અથવા તિર્યક હોય છે અને તે લાઇનમાં રહેલા પીસની સંખ્યા જેટલા ચોરસ ખસે છે. તમે તમારા પોતાના પીસ પર કૂદી શકો છો, પરંતુ વિરોધીના પીસ પર નહીં; વિરોધીના પીસ પર ઉતરતાં તે કેપ્ચર થાય છે. જ્યારે તમારા બધા પીસ 8-પડોશી જોડાયેલા હોય ત્યારે જીતો."
+  },
+  "board": {
+    "current_board": "બોર્ડઃ {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ફોર્મેટ e2e4 (સંકલનમાંથી,થી) હોવું જોઈએ.",
+    "no_piece": "{side} ભાગ પર કોઈ {coord} નથી.",
+    "identical": "સ્ત્રોત અને લક્ષ્યસ્થાન સમાન.",
+    "not_straight_or_diagonal": "ચાલ સીધી અથવા કર્ણ હોવી જોઈએ.",
+    "wrong_distance": "રેખામાં ટુકડાઓ જેટલું જ અંતર ખસેડવું જોઈએ.",
+    "enemy_blocks": "દુશ્મન ટુકડો પાથ અવરોધિત કરે છે.",
+    "destination_own": "લક્ષ્યસ્થાન પોતાના ટુકડા દ્વારા કબજો લેવામાં આવે છે."
+  },
+  "game_action": {
+    "moved": "ખેલાડી {player_id} ખસેડવામાં {from} -> {to}",
+    "captured_suffix": "ખેલાડી {player_id}એ દુશ્મન પકડતા {from} -> {to} ખસેડ્યું."
+  },
+  "outcome": {
+    "win": "બધા ટુકડાઓ જોડાયેલા છે.",
+    "draw_no_capture": "60 કેપ્ચર વગર ચાલ.",
+    "draw_repetition": "સ્થિતિ ત્રણ વખત પુનરાવર્તન."
+  }
+}

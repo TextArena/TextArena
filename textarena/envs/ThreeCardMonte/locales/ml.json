@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte locale file. DO NOT translate keys (left side). Only translate values (right side).",
+  "_slots": {
+    "{line}": "The rendered row of cups",
+    "{step}": "The current shuffle step number",
+    "{steps}": "The total number of shuffle steps",
+    "{i}": "The first cup index involved in a swap",
+    "{j}": "The second cup index involved in a swap",
+    "{prompt}": "The localized prompt fragment appended after the cups",
+    "{max_index}": "The highest valid cup index, i.e. num_cups-1",
+    "{ball_pos}": "The cup index the ball is under"
+  },
+  "player_prompt": {
+    "intro": "കപ്പുകൾ ഷഫിൾ ചെയ്യുമ്പോൾ 'X' എന്ന മറഞ്ഞിരിക്കുന്ന ബോൾ ട്രാക്ക് ചെയ്യുക.\nഷഫിൾ ചെയ്ത ശേഷം, അതിന്റെ സ്ഥാനം `[k]` ഉപയോഗിച്ച് ഊഹിക്കുക."
+  },
+  "game_message": {
+    "ball_starts": "പന്ത് തുടങ്ങുന്നു: {line}",
+    "shuffle": "ഷഫിൾ {step}/{steps}: കപ്പുകൾ പരസ്പരം മാറ്റി {i}, {j}.",
+    "cups": "കപ്പുകൾ: {line} {prompt}",
+    "guess_now": "(ഇപ്പോൾ ഊഹിക്കുക!",
+    "reveal": "(കാണിക്കുക: {ball_pos} എന്നതിനു താഴെയുള്ള പന്ത്)"
+  },
+  "invalid_move": {
+    "wrong_format": "തെറ്റായ പ്രവർത്തനം. `[k]` ഉപയോഗിക്കുക.",
+    "out_of_range": "സൂചിക 0-{max_index} പരിധിക്കു പുറത്താണ്."
+  },
+  "outcome": {
+    "win": "ശരിയാണ്, നീ പന്ത് കണ്ടെത്തി.",
+    "lose": "തെറ്റായ  പന്ത് കപ്പിനടിയിലായിരുന്നു {ball_pos}."
+  }
+}

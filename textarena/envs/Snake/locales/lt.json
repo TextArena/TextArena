@@ -1,0 +1,31 @@
+{
+  "_comment": "Slinkio lokalės failas. NERVERSIKITE raktažodžių (kairėje pusėje). Vertėkite tik reikšmes (dešinėje pusėje). Palikite kiekvieną {placeholder} lygiai taip, kaip yra. NERVERSIKITE žaidėjo įvestų judėjimo/krypties ženklų ([up], [down], [left], [right], w, s, a, d) arba ASCII lentos, atvaizduotos į {board}.",
+  "_slots": {
+    "{num_players}": "Žaidėjų skaičius mače",
+    "{width}": "Lentos plotis langeliuose",
+    "{height}": "Lentos aukštis langeliuose",
+    "{max_turns}": "Ėjimų limitas mače",
+    "{player_id}": "Žaidėjo numeris (0-bazėje)",
+    "{board}": "Atvaizduota ASCII tinklelis; palikite neutralų, niekada neversikite jo simbolių",
+    "{reason}": "Atvaizduota žaidimo pabaigos priežastis",
+    "{groups}": "Neutralus reitingo duomenys (žaidėjų grupių sąrašas, nuo blogiausio iki geriausio); neversikite"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-žaidėjų Slinkis {width}×{height} tinklelyje.\nJūs valdote gyvatę {player_id}. Galimi ėjimai: '[up]'/'[down]'/'[left]'/'[right]' (arba w/s/a/d).\nTikslas: išgyventi ilgiausiai arba būti ilgiausia ir gauti aukščiausią balą (ėjimų limitas {max_turns} ėjimų)."
+  },
+  "board": {
+    "current": "Dabartinė lentelė:\n{board}",
+    "after_moves": "Dabartinė lentelės būsena:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Gyvatė {player_id} mirė dėl neteisingo ėjimo."
+  },
+  "outcome": {
+    "survived_win": "Žaidėjas {player_id} išgyveno; visi kiti žuvo.",
+    "all_dead_simul": "Visos gyvatės mirė vienu metu.",
+    "outlived": "Žaidėjas pergyveno visus kitus.",
+    "all_dead": "Visos gyvatės mirė.",
+    "turn_limit": "Ėjimų limitas pasiektas - geriausias balas laimi lygiosios.",
+    "ranking": "{reason} Galutinės reitingo grupės (nuo blogiausio iki geriausio): {groups}"
+  }
+}

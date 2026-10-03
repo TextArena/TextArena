@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam Quantum Tic Tac Toe.\nSimbol Anda adalah '{symbol}', dan nomor langkah Anda selalu {parity} (misalnya, X1, X3 atau O2, O4).\n\nTujuan: Menang dengan membentuk garis tiga tanda klasik (dipadatkan dari superposisi).\n\nCara Bermain:\n- Pada setiap giliran, letakkan tanda menakutkan di dua kotak kosong yang berbeda menggunakan format '[a,b]'.\n- Tanda-tanda ini terjalin, dan diberi label seperti 'X1 / X1' atau 'O4 / O4'.\n- Anda tidak dapat meletakkan tanda menakutkan di kotak yang sudah runtuh (dipadatkan).\n\nAturan Runtuh:\n- Jika langkah Anda menciptakan siklus dalam grafik keterjalinan, maka akan runtuh secara otomatis.\n- Setiap tanda menakutkan dalam siklus berubah menjadi tanda klasik di salah satu dari dua posisinya.\n- Tanda-tanda menakutkan tergantung juga runtuh.\n\nKemenangan:\n- Permainan berakhir ketika pemain memiliki tiga tanda klasik dalam baris.\n- Jika kedua pemain mendapatkan garis selama runtuh yang sama, maka pemain dengan nomor langkah maksimum yang lebih rendah memenangkan permainan.\n\nContoh langkah: '[0,4]' meletakkan tanda menakutkan di sel 0 dan 4."
+  },
+  "board": {
+    "current_board": "Papan Tic Tac Toe Kuantum:\n\n{board}\n\nKirimkan langkah Anda sebagai '[a,b]' untuk meletakkan tanda kuantum di dua lokasi."
+  },
+  "invalid_move": {
+    "wrong_format": "Format hana sah. Guna '[a,b]'.",
+    "invalid_cells": "Indeks sel hana sah atau duplikat.",
+    "already_solidified": "Saboh sel nyan ka jeuet keu kreueh."
+  },
+  "game_action": {
+    "placed": "Pemain {player_id} meletakkan simbol mereka dalam superposisi antara sel {pos_a} dan {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposisi tergantung telah diselesaikan. Sel ({r}, {c}) sekarang {symbol}.",
+    "last_cell_resolved": "Superposisi untuk sel terakhir telah diselesaikan. Sel ({r}, {c}) sekarang {symbol}.",
+    "superposition_resolved": "Superposisi telah diselesaikan. Sel ({r}, {c}) sekarang {symbol}."
+  },
+  "outcome": {
+    "win": "Pemain {player_id} meunang deungen tanda-tanda nyang ka geupeukong!",
+    "draw": "Game nyan seri!"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Du er Spelar {player_id} i eit {num_players}-spelar Liar's Dice-spel.\nReglar:\n- På din tur, kan du enten:\n  1) Gjere eit nytt bud med høgare mengd eller høgare ansikt (eller begge) enn det noverande budet; dvs. '[Bid: 3, 4]',\n  2) Kalle det siste budet ved å skrive '[Call]'.\n\nOm du kallar:\n  - Om den faktiske tellinga av den ansiktsverdien blant alle terningane er mindre enn budet, mister den siste budgjevaren ein terning.\n  - Ellers mister kallaren ein terning.\nEin spelar som når 0 terningar vert eliminert. Den siste gjenverande spelaren vinn."
+  },
+  "board": {
+    "per_player": "\tSpelar {p}: {d}",
+    "new_round": "\nNy runde - Gjenverande terningar: {dice_summary}\nDine noverande terningar er: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Spelar {current_player_id} kallar! Den faktiske tellinga av ansikt {face_value} er {count}, som er MINDRE enn {quantity}.\nSpelar {loser_id} (den siste budgjevaren) mister ein terning.",
+    "caller_loses": "Spelar {current_player_id} kallar! Det faktiske talet på {face_value} er {count}, som er >= {quantity}.\nSpelar {loser_id} (kallaren) tapar ein terning."
+  },
+  "action": {
+    "bid_announce": "Spelar {player_id} byr {quantity} av ansikt {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Kall gjort utan føregåande bud.",
+    "invalid_bid": "Ugyldig bud: {reason}",
+    "not_recognized": "Handlinga vart ikkje gjenkjend som ein gyldig '[Bid: X, Y]' eller '[Call]'. Innlevert handling: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Ny mengd {new_quantity} er lægre enn gjeldende {current_quantity}.",
+    "face_lower": "Ny nominell verdi {new_face_value} er lægre enn gjeldende {current_face_value}.",
+    "identical": "Bøtet er det same som dagens bud.",
+    "face_range": "Nominalverda må vera mellom 1 og 6."
+  },
+  "message": {
+    "eliminated_invalid": "Spelaren {player_id} blei utvist ved ugyldig trekk."
+  },
+  "outcome": {
+    "win": "Spelar {winner} vinn! Endelig rangering: {final_ranking}"
+  }
+}

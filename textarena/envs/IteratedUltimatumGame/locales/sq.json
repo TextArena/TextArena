@@ -1,0 +1,43 @@
+{
+  "_comment": "Skedari i lokalizimit për IteratedUltimatumGame. MOS përkthej çelësat (ana e majtë). Përkthej vetëm vlerat (ana e djathtë). Mbaj çdo {placeholder} saktësisht ashtu siç është; mos përkthej tokenet e veprimit [Offer: $X] / [Accept] / [Reject]. Mbaj simbolin e valutës '$' dhe të gjitha numrat ashtu siç janë.",
+  "_slots": {
+    "{player_id}": "Numri i lojtarit, 0 ose 1",
+    "{other_id}": "Numri i lojtarit tjetër, 1 ose 0",
+    "{num_rounds}": "Numri total i raundeve",
+    "{pool}": "Shuma e parave të disponueshme në çdo raund (një numër)",
+    "{round_number}": "Numri i raundit aktual",
+    "{proposer_id}": "Numri i lojtarit që propozon, 0 ose 1",
+    "{responder_id}": "Numri i lojtarit që përgjigjet, 0 ose 1",
+    "{offer}": "Shuma e ofruar (një numër)",
+    "{keep}": "Shuma që mbajnë propozuesit (një numër)",
+    "{proposer_gain}": "Paratë që propozuesi fitoi në këtë raund (një numër)",
+    "{responder_gain}": "Paratë që përgjigjësi fitoi në këtë raund (një numër)",
+    "{total_0}": "Totali i akumuluar i lojtarit 0 (një numër)",
+    "{total_1}": "Totali i akumuluar i lojtarit 1 (një numër)",
+    "{winner}": "Numri i lojtarit fitues",
+    "{loser}": "Numri i lojtarit humbës",
+    "{winner_total}": "Totali i parave të fituesit (një numër)",
+    "{loser_total}": "Totali i parave të humbësit (një numër)",
+    "{total}": "Totali i fundit i barazimit të secilit lojtar (një numër)"
+  },
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id}, duke luajtur {num_rounds} raunde të Iterated Ultimatum Game.\nJu keni ${pool} për të ndarë në këtë raund midis vetes dhe Lojtarit {other_id}.\n\nPropozuesi:\n  - Bëj një ofertë: [Offer: $X] (0 <= X <= pool)\n  - Nëse pranohet → Ju merrni $(pool - X), lojtari tjetër merr $X\n  - Nëse refuzohet → Të dy merrni $0\n  - Shembull: [Offer: $3]  ose  'Mendoj se kjo është e drejtë. [Offer: $5]'\n\nPërgjigjësi:\n  - Vendos për ofertën me [Accept] ose [Reject]\n  - Shembull: 'Duket e arsyeshme. [Accept]'\n            'Shumë e padrejtë. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Raundi {round_number} fillon! ---\nLojtari {proposer_id} është propozuesi, Lojtari {responder_id} është përgjigjësi.",
+    "offer": "Raundi {round_number}: Lojtari {proposer_id} ofron ${offer} Lojtarit {responder_id} (mbajtjen ${keep}).",
+    "accepted": "Lojtari {responder_id} pranoi! Raundi {round_number} fitimet: Lojtari {proposer_id} +${proposer_gain}, Lojtari {responder_id} +${responder_gain}. Totali i ri: Lojtari 0: ${total_0}, Lojtari 1: ${total_1}.",
+    "rejected": "Lojtari {responder_id} refuzoi ofertën! Raundi {round_number} fitimet: Të dy lojtarët +$0. Totali mbetet: Lojtari 0: ${total_0}, Lojtari 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Propozuesi duhet të bëjë një ofertë duke përdorur formatin [Offer: $X].",
+    "bad_integer": "Shuma e ofruar duhet të jetë një numër i vlefshëm.",
+    "out_of_range": "Oferta duhet të jetë midis $0 dhe ${pool}.",
+    "no_current_offer": "Nuk ka ofertë aktuale për të përgjigjur.",
+    "accept_or_reject": "Përgjigjësi duhet të [Accept] ose [Reject] ofertën."
+  },
+  "outcome": {
+    "win": "Lojtari {winner} fitoi me ${winner_total} total kundër Lojtarit {loser} me ${loser_total}.",
+    "draw": "Barazim! Të dy lojtarët përfunduan me ${total} total."
+  }
+}

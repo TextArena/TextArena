@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Mo ye Player {player_id} na lêêê tî ndêêê tî 3 zo kûêêê Iterated Prisoner's Dilemma. Match ôko {num_rounds} lêêê.\nKêtêêê lêêê:\n• {conv_rounds} lêêê tî zo kpêêê\n• 1 lêêê tî zo sôndê - kpakpa token kûêêê ôko opponent: '[<opp-id> cooperate]' ou '[<opp-id> defect]' (tîpêêê '[1 defect] [2 cooperate]'; default ôko 'cooperate'). \nMatrice pair-wise tî ndêêê (tî kpakpa kûêêê unordered pair):\n  - Nîngô cooperate  ->  {reward}\n  - Nîngô defect     ->  {punishment}\n  - Mo defect, î cooperate -> {temptation}\n  - Mo cooperate, î defect -> {sucker}\nPlayer(s) tî score kûêêê ôko lêêê ndêêê ôko zo wina."
+  },
+  "round": {
+    "start": "─── Lôko tî âla {round} ───\tZî âla tî ngbâ tî ködörö na âla tî âla {conv_rounds}.",
+    "chat_finished": "Kpêêê kpakpa lêêê tî round {round}. Kpakpa decisions mo, token kûêêê ôko opponent: `[pid cooperate]` ou `[pid defect]`."
+  },
+  "results": {
+    "header": "### Tour {round} - Aye so asi:",
+    "pair_line": "{observation}\n\t Kötä {i} na Kötä {j} akeï tî {choice_i} na {choice_j} mbïï (Kötä {i} ayeke {gain_i}, Kötä {j} ayeke {gain_j})",
+    "scores_open": "{observation} -> Akete ye so a wara na yâ ti bungbi ni: ",
+    "score_first": "{observation}Ködörö {player_id} ({score})",
+    "score_next": "{observation}; Ködörö {player_id} ({score})",
+    "finalize": "{observation}  ti"
+  },
+  "outcome": {
+    "final": "Mängö tî finale: {scores}.  Kötä zo (kötä mbïï → kötä ndö): {groups}"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Arquivo de localização do Snake. NÃO traduza as chaves (lado esquerdo). Traduza apenas os valores (lado direito). Mantenha cada {placeholder} exatamente como está.",
+  "_slots": {
+    "{num_players}": "Número de jogadores na partida",
+    "{width}": "Largura do tabuleiro em células",
+    "{height}": "Altura do tabuleiro em células",
+    "{max_turns}": "Limite de turnos para a partida",
+    "{player_id}": "Número do jogador (baseado em 0)",
+    "{board}": "A grade ASCII renderizada; mantenha neutra, nunca traduza seus caracteres",
+    "{reason}": "A frase de motivo de fim de jogo renderizada",
+    "{groups}": "Dados de classificação neutros (uma lista de grupos de IDs de jogadores, do pior para o melhor); não traduza"
+  },
+  "player_prompt": {
+    "intro": "Snake de {num_players} jogadores em uma grade de {width}×{height}.\nVocê controla a cobra {player_id}. Movimentos válidos: '[up]'/'[down]'/'[left]'/'[right]' (ou w/s/a/d).\nObjetivo: sobreviver mais tempo ou ser o mais longo e obter a pontuação mais alta (limite de turnos de {max_turns} turnos)."
+  },
+  "board": {
+    "current": "Tabuleiro Atual:\n{board}",
+    "after_moves": "Estado Atual do Tabuleiro:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "A cobra {player_id} morreu devido a um movimento inválido."
+  },
+  "outcome": {
+    "survived_win": "O jogador {player_id} sobreviveu; todos os outros pereceram.",
+    "all_dead_simul": "Todas as cobras morreram simultaneamente.",
+    "outlived": "O jogador sobreviveu a todos os outros.",
+    "all_dead": "Todas as cobras estão mortas.",
+    "turn_limit": "Limite de turnos alcançado - a melhor pontuação vence o desempate.",
+    "ranking": "{reason} Grupos de classificação finais (do pior para o melhor): {groups}"
+  }
+}

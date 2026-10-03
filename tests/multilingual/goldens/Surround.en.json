@@ -1,0 +1,247 @@
+{
+  "all_crash": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "All players crashed simultaneously. Final ranking groups (best→worst): [[1, 0]]",
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "All players crashed simultaneously. Final ranking groups (best→worst): [[1, 0]]",
+        "role": "Player 1",
+        "turn_count": 5
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "2-Player Surround on a 10x10 grid.\nYou are player 0. Valid moves: '[up]' '[down]' '[left]' '[right]' or w/s/a/d.\nObjective: outlive everyone else. Trails are deadly; wall hits kill; head-on crashes kill both.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n+---------------------+\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . 0 . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . 1 . |\n| . . . . . . . . . . |\n+---------------------+",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[left]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "2-Player Surround on a 10x10 grid.\nYou are player 1. Valid moves: '[up]' '[down]' '[left]' '[right]' or w/s/a/d.\nObjective: outlive everyone else. Trails are deadly; wall hits kill; head-on crashes kill both.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n+---------------------+\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . 0 . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . 1 . |\n| . . . . . . . . . . |\n+---------------------+",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[up]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Board after simultaneous moves:\n+---------------------+\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . 0 # . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . 1 . |\n| . . . . . . . . # . |\n| . . . . . . . . . . |\n+---------------------+",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[left]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Board after simultaneous moves:\n+---------------------+\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . 0 # . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . 1 . |\n| . . . . . . . . # . |\n| . . . . . . . . . . |\n+---------------------+",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[up]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Board after simultaneous moves:\n+---------------------+\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| 0 # # . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . 1 . |\n| . . . . . . . . # . |\n| . . . . . . . . # . |\n| . . . . . . . . . . |\n+---------------------+",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[left]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Board after simultaneous moves:\n+---------------------+\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| 0 # # . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . 1 . |\n| . . . . . . . . # . |\n| . . . . . . . . # . |\n| . . . . . . . . . . |\n+---------------------+",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[down]",
+        "done": true,
+        "info": {}
+      }
+    ],
+    "rewards": {
+      "0": 0.0,
+      "1": 0.0
+    }
+  },
+  "invalid_move": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player outlived all others. Final ranking groups (best→worst): [[1], [0]]",
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player outlived all others. Final ranking groups (best→worst): [[1], [0]]",
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "2-Player Surround on a 10x10 grid.\nYou are player 0. Valid moves: '[up]' '[down]' '[left]' '[right]' or w/s/a/d.\nObjective: outlive everyone else. Trails are deadly; wall hits kill; head-on crashes kill both.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n+---------------------+\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . 0 . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . 1 . |\n| . . . . . . . . . . |\n+---------------------+",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "not a move",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Player 0 died due to invalid move.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      }
+    ],
+    "rewards": {
+      "0": -1.0,
+      "1": 1.0
+    }
+  },
+  "p1_survives": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 1 survived; all others crashed. Final ranking groups (best→worst): [[1], [0]]",
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 1 survived; all others crashed. Final ranking groups (best→worst): [[1], [0]]",
+        "role": "Player 1",
+        "turn_count": 5
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "2-Player Surround on a 10x10 grid.\nYou are player 0. Valid moves: '[up]' '[down]' '[left]' '[right]' or w/s/a/d.\nObjective: outlive everyone else. Trails are deadly; wall hits kill; head-on crashes kill both.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n+---------------------+\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . 0 . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . 1 . |\n| . . . . . . . . . . |\n+---------------------+",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[left]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "2-Player Surround on a 10x10 grid.\nYou are player 1. Valid moves: '[up]' '[down]' '[left]' '[right]' or w/s/a/d.\nObjective: outlive everyone else. Trails are deadly; wall hits kill; head-on crashes kill both.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Current Board:\n+---------------------+\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . 0 . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . 1 . |\n| . . . . . . . . . . |\n+---------------------+",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[up]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Board after simultaneous moves:\n+---------------------+\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . 0 # . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . 1 . |\n| . . . . . . . . # . |\n| . . . . . . . . . . |\n+---------------------+",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[left]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Board after simultaneous moves:\n+---------------------+\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . 0 # . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . 1 . |\n| . . . . . . . . # . |\n| . . . . . . . . . . |\n+---------------------+",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[up]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Board after simultaneous moves:\n+---------------------+\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| 0 # # . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . 1 . |\n| . . . . . . . . # . |\n| . . . . . . . . # . |\n| . . . . . . . . . . |\n+---------------------+",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[left]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "Board after simultaneous moves:\n+---------------------+\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| 0 # # . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . . . |\n| . . . . . . . . 1 . |\n| . . . . . . . . # . |\n| . . . . . . . . # . |\n| . . . . . . . . . . |\n+---------------------+",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[up]",
+        "done": true,
+        "info": {}
+      }
+    ],
+    "rewards": {
+      "0": -1.0,
+      "1": 1.0
+    }
+  }
+}

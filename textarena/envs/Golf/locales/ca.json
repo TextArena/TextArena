@@ -1,0 +1,79 @@
+{
+  "_comment": "Fitxer de localització del joc de cartes Golf. NO tradueixis les claus (costat esquerre). Només tradueix els valors (costat dret). Mantén cada {placeholder} exactament com està.",
+  "_slots": {
+    "{player_id}": "El número del jugador, per exemple 0 o 1",
+    "{pid}": "El número del jugador, per exemple 0 o 1",
+    "{winner}": "El número del jugador amb la puntuació més baixa",
+    "{score}": "Un total de punts numèric",
+    "{card}": "Una etiqueta de carta com A, 10, K o Q",
+    "{new}": "L'etiqueta de la carta que es va col·locar a la quadrícula",
+    "{old}": "L'etiqueta de la carta que es va eliminar de la quadrícula",
+    "{row}": "Un número de fila",
+    "{col}": "Un número de columna",
+    "{max_row}": "El número de fila vàlid més gran",
+    "{max_col}": "El número de columna vàlid més gran",
+    "{reason}": "Una frase pre-renderitzada que descriu per què va començar la ronda final",
+    "{n}": "Un número de fila que es mostra al principi d'una fila de quadrícula",
+    "{cards}": "Les cel·les pre-renderitzades d'una fila de quadrícula",
+    "{hand}": "El bloc de quadrícula del jugador pre-renderitzat",
+    "{discard}": "L'etiqueta de la carta a la part superior de la pila de descart, o la paraula per a 'cap'",
+    "{options}": "La línia pre-renderitzada que llista les accions disponibles",
+    "{scores}": "La llista pre-renderitzada de puntuacions finals per jugador"
+  },
+  "player_prompt": {
+    "intro": "Estàs jugant al Golf (Joc de Cartes) - Jugador {player_id}.\nObjectiu: Obtenir la puntuació total més baixa en aquesta ronda única. Si les columnes comparteixen el mateix valor, es sumen com a 0.\nValors de les cartes: A=1, 2-10=valor facial, J/Q=10, K=0\n\nAccions (utilitza els parèntesis exactes):\n- '[draw]' - Roba de la baralla\n- '[take]' - Agafa de la pila de descart\n- '[swap X Y]' - Intercanvia la carta robada amb la posició X (fila) Y (columna)\n- '[discard]' - Descarta la carta robada\n"
+  },
+  "board": {
+    "drew": "Has robat: {card}\nAra has de [swap X Y] o [discard] la carta.",
+    "took": "Has agafat: {card} de la pila de descart\nHas de [swap X Y] amb la carta (no pots descartar-la).",
+    "peeked": "Has mirat la posició ({row},{col}): {card}",
+    "turn_view": "La teva mà:\n{hand}\nPila de descart: {discard}\n{options}",
+    "none": "Cap"
+  },
+  "options": {
+    "final_turns": "Torns finals! Les teves opcions: [draw], [take], [peek X Y]",
+    "draw": "Les teves opcions: [draw], [take]",
+    "must_swap": "Has de: [swap X Y] (no pots descartar cartes de la pila de descart)",
+    "swap_or_discard": "Has de: [swap X Y] o [discard]"
+  },
+  "hand": {
+    "no_cards": "No hi ha cartes",
+    "header": "  Col:   1    2    3",
+    "row": "Fila {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "El jugador {pid} ha intercanviat {new} amb {old} a la posició ({row},{col})",
+    "discarded": "El jugador {pid} ha descartat {card}"
+  },
+  "message": {
+    "deck_empty": "La baralla està buida! El joc acaba immediatament.",
+    "knocked": "El jugador {pid} ha picat! Cada altre jugador té un torn més.",
+    "final_round": "El jugador {pid} {reason}! Cada altre jugador té un torn més."
+  },
+  "reason": {
+    "all_revealed": "té totes les cartes revelades"
+  },
+  "invalid": {
+    "wrong_action": "Utilitza exactament una acció entre parèntesis: [draw], [take], [swap X Y], [discard], [knock], o [peek X Y]",
+    "discard_empty": "La pila de descart està buida!",
+    "must_draw_first": "Has de [draw], [take], [knock], o [peek X Y] primer",
+    "cannot_discard_taken": "No pots descartar una carta agafada de la pila de descart. Has de intercanviar-la.",
+    "have_drawn_card": "Tens una carta robada. Has de [swap X Y] o [discard] la carta.",
+    "need_drawn_swap": "Necessites una carta robada per intercanviar.",
+    "need_drawn_discard": "Necessites una carta robada per descartar.",
+    "out_of_bounds": "Posició fora dels límits. Utilitza fila 1-{max_row}, columna 1-{max_col}",
+    "knock_with_card": "No pots picar amb una carta robada. Completa el teu torn primer.",
+    "already_knocked": "Algú ja ha picat aquesta ronda.",
+    "already_revealed": "Aquesta carta ja està revelada!"
+  },
+  "summary": {
+    "full": "Joc acabat! El jugador {winner} guanya amb una puntuació de {score} punts!\n\nPuntuacions finals:\n{scores}",
+    "line": "Jugador {pid}: {score} punts\n"
+  },
+  "board_str": {
+    "title": "=== JOC DE GOLF ===",
+    "discard": "Pila de descart: {card}",
+    "knocked": "El jugador {pid} ha picat!",
+    "player_header": "Jugador {pid} (Puntuació: {score}):"
+  }
+}

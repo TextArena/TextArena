@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (larong baraha) file ng lokasyon. HUWAG isalin ang mga susi (kaliwang bahagi). Isalin lamang ang mga halaga (kanang bahagi). Panatilihin ang bawat {placeholder} eksakto nang tulad ng dati. Huwag isalin ang mga token ng pagkilos ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), ang mga label ng baraha (A, 2-10, J, Q, K), ang mga simbolo ng suit, ang mga titik X/Y na ginagamit bilang mga placeholder ng row/column sa mga token, o mga numeric na iskor/posisyon. Panatilihin ang layout ng ASCII grid (spacing, numero ng kolumn, '?', 'Col', 'Row' alignment) intact upang ang board ay manatiling madaling basahin.",
+  "_slots": {
+    "{player_id}": "Ang numero ng manlalaro, hal. 0 o 1",
+    "{pid}": "Ang numero ng manlalaro, hal. 0 o 1",
+    "{winner}": "Ang numero ng manlalaro na may pinakamababang iskor",
+    "{score}": "Ang kabuuang puntos",
+    "{card}": "Ang label ng baraha tulad ng A♠, 10♥, K♦ o Q♣",
+    "{new}": "Ang label ng baraha na inilagay sa grid",
+    "{old}": "Ang label ng baraha na tinanggal sa grid",
+    "{row}": "Ang numero ng row",
+    "{col}": "Ang numero ng kolumn",
+    "{max_row}": "Ang pinakamalaking wastong numero ng row",
+    "{max_col}": "Ang pinakamalaking wastong numero ng kolumn",
+    "{reason}": "Ang pre-rendered na parirala na naglalarawan kung bakit nagsimula ang final round",
+    "{n}": "Ang numero ng row na ipinapakita sa simula ng isang row ng grid",
+    "{cards}": "Ang pre-rendered, layout-sensitive na mga cell ng isang row ng grid",
+    "{hand}": "Ang pre-rendered na block ng grid ng manlalaro",
+    "{discard}": "Ang label ng baraha sa ibabaw ng discard pile, o ang salita para sa 'wala'",
+    "{options}": "Ang pre-rendered na linya na naglilista ng mga magagamit na pagkilos",
+    "{scores}": "Ang pre-rendered na listahan ng mga final na iskor para sa bawat manlalaro"
+  },
+  "player_prompt": {
+    "intro": "Ikaw ay naglalaro ng Golf (Larong Baraha) - Manlalaro {player_id}.\nLayunin: Makakuha ng pinakamababang kabuuang iskor sa isang round na ito. Kung ang mga kolumn ay may parehong halaga, sila ay pinagsasama bilang 0.\nHalaga ng Baraha: A=1, 2-10=halaga ng mukha, J/Q=10, K=0\n\nMga Pagkilos (gamitin ang eksaktong mga bracket):\n- '[draw]' - Gumawa mula sa deck\n- '[take]' - Kumuha mula sa discard pile\n- '[swap X Y]' - Palitan ang ginawang baraha sa posisyon X (row) Y (kolumn)\n- '[discard]' - Itapon ang ginawang baraha\n"
+  },
+  "board": {
+    "drew": "Ikaw ay gumawa ng: {card}\nNgayon ay kailangan mong [swap X Y] o [discard] ito.",
+    "took": "Ikaw ay kumuha ng: {card} mula sa discard pile\nKailangan mong [swap X Y] dito (hindi maaaring itapon).",
+    "peeked": "Ikaw ay tumingin sa posisyon ({row},{col}): {card}",
+    "turn_view": "Ang iyong kamay:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Wala"
+  },
+  "options": {
+    "final_turns": "Mga huling pagliko! Ang iyong mga opsyon: [draw], [take], [peek X Y]",
+    "draw": "Ang iyong mga opsyon: [draw], [take]",
+    "must_swap": "Kailangan mong: [swap X Y] (hindi maaaring itapon ang mga baraha mula sa discard pile)",
+    "swap_or_discard": "Kailangan mong: [swap X Y] o [discard]"
+  },
+  "hand": {
+    "no_cards": "Walang mga baraha",
+    "header": "  Kolumn:   1    2    3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Ang Manlalaro {pid} ay pinalitan ang {new} sa {old} sa posisyon ({row},{col})",
+    "discarded": "Ang Manlalaro {pid} ay itinapon ang {card}"
+  },
+  "message": {
+    "deck_empty": "Ang deck ay walang laman! Ang laro ay nagtatapos kaagad.",
+    "knocked": "Ang Manlalaro {pid} ay kumnock! Ang bawat ibang manlalaro ay nakakakuha ng isang huling pagliko.",
+    "final_round": "Ang Manlalaro {pid} {reason}! Ang bawat ibang manlalaro ay nakakakuha ng isang huling pagliko."
+  },
+  "reason": {
+    "all_revealed": "ay may lahat ng mga baraha na ipinakita"
+  },
+  "invalid": {
+    "wrong_action": "Gamitin ang eksaktong isang bracketed na pagkilos: [draw], [take], [swap X Y], [discard], [knock], o [peek X Y]",
+    "discard_empty": "Ang discard pile ay walang laman!",
+    "must_draw_first": "Kailangan mong unang [draw], [take], [knock], o [peek X Y]",
+    "cannot_discard_taken": "Hindi mo maaaring itapon ang isang baraha na kinuha mula sa discard pile. Kailangan mong palitan ito.",
+    "have_drawn_card": "Ikaw ay may ginawang baraha. Kailangan mong [swap X Y] o [discard] ito.",
+    "need_drawn_swap": "Kailangan mo ng isang ginawang baraha upang palitan.",
+    "need_drawn_discard": "Kailangan mo ng isang ginawang baraha upang itapon.",
+    "out_of_bounds": "Ang posisyon ay labas ng hangganan. Gamitin ang row 1-{max_row}, kolumn 1-{max_col}",
+    "knock_with_card": "Hindi mo maaaring kumnock na may ginawang baraha. Kumpletuhin muna ang iyong pagliko.",
+    "already_knocked": "Mayroon nang kumnock sa round na ito.",
+    "already_revealed": "Ang baraha na iyon ay ipinakita na!"
+  },
+  "summary": {
+    "full": "Tapos na ang laro! Ang Manlalaro {winner} ay nanalo na may iskor na {score} puntos!\n\nMga Huling Iskor:\n{scores}",
+    "line": "Manlalaro {pid}: {score} puntos\n"
+  },
+  "board_str": {
+    "title": "=== LARO NG GOLF ===",
+    "discard": "Discard pile: {card}",
+    "knocked": "Ang Manlalaro {pid} ay kumnock!",
+    "player_header": "Manlalaro {pid} (Iskor: {score}):"
+  }
+}

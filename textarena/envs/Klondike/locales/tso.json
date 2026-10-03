@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "U tirhisa michezo ya Klondike Solitaire. Kuphikelela kwako ku hundzuluxa khadi yote eka misingi ya michezo.\n\nMilawu ya michezo:\n- Misingi ya michezo (F1-F4): Akha eka Ace ku ya eka King eka suti\n- Mipani ya michezo (T1-T7): Akha eka ku ya xiluva, ku hambana ka mabala (mabala ya ntima eka mabala ya basa, mabala ya basa eka mabala ya ntima)\n- Stoko: Hluta khadi ku ya eka mpani wa makhombo\n- Mpani wa makhombo (W): Khadi ya le henhla i tirhisiwa ku tirhisiwa\n\nMipimo:\n- 'draw' - Hluta khadi eka stoko ku ya eka mpani wa makhombo\n- 'move <source> <destination> [count]' - Hluta khadi eka mipani ya michezo\n  Swivuriso: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count yi nga tirhisiwa 'all', leyi yi ta ringeta ku hluta khadi yote ya le vini.\n- 'forfeit' - Fikisa michezo hi ku ya n'wina na ku pfala makhandlelo ya wena ya sweswi\n- Mipani ya michezo: W (mpani wa makhombo), F1-F4 (misingi ya michezo), T1-T7 (mipani ya michezo)\n\nU nga tirhisa michezo yin'wana eka nkarhi wun'we hi ku hambanisa na makhensa:\n  Swivuriso: 'draw, move W T1, move T2 F1'\n\nFikela Kings yi nga tirhisiwa eka mipani ya michezo ya xiluva.\nMichezo yi tirhisiwa hi ku ya mpangwana - loko yi hluleka, michezo yi salaka yi hlulekile.\nTirhisa 'forfeit' loko u kholwa ku ya michezo yi kona ku hlula."
+  },
+  "format_error": {
+    "no_brackets": "Fomete ya xiendlo leyi nga tirhiki. Xiendlo xi fanele ku va eka swiangi.",
+    "no_closing_bracket": "Fomete ya xiendlo leyi nga tirhiki. Ku kayivela ka kholomu yo pfala ']'",
+    "empty_command": "Xileriso lexi nga hava nchumu. Tsala 'draw' kumbe 'move <source><destination> [count]'.",
+    "empty_action": "Xiendlo lexi nga hava xikongomelo",
+    "move_needs_args": "Xileriso xa Move xi lava xihlovo na xikongomelo. Matirhiselo: 'move <source> <destination> [count]'",
+    "count_positive": "Nhlayo i fanela ku va chanya kumbe 'all'",
+    "count_invalid": "Nhlayo ya khwilo i fele. Tekela nambari kumbe 'all'",
+    "unknown_command": "Khomando ra ku tiva '{cmd}'. U na komanda 'draw', 'move <source> <destination> [count]', kana 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Ku endla {n} xiendlo (s) ku nga si va na xiphiqo.",
+    "failed": "Action {n} ku hela: {msg}"
+  },
+  "move_result": {
+    "drew": "Ku suka eka khadi ra nhundzu ku ya eka thyaka.",
+    "cannot_draw": "A swi koteki ku humesa mali, a ka ha ri na nchumu.",
+    "invalid_pile": "Vito ra xiphepherhele a ri tirhisiwi. Tirhisa W, F1-F4, kumbe T1-T7",
+    "foundation_one_card": "U nga rhurhisa khadi yi moja ntsena eka misava",
+    "waste_to_foundation_ok": "Khadi leri tekiweke eka thyaka ri yisiwa eka masungulo F{dst}",
+    "waste_to_foundation_bad": "A swi koteki ku yisa khadi ra thyaka eka nhulu ya masungulo",
+    "tableau_to_foundation_ok": "Ku huma kadi eka matabelu T{src} ku ya foundation F{dst}",
+    "tableau_to_foundation_bad": "A swi koteki ku fambisa khadi ra tafula eka nhulu ya masungulo",
+    "foundation_to_foundation": "A swi koti ku suka eka masungulo ya yindlu yin'wana u ya eka yin'wanyana.",
+    "waste_to_tableau_one_card": "U nga rhurhisa khadi rin'we ntsena eka thyaka ri ya eka tafula ra mintlangu.",
+    "waste_to_tableau_ok": "Khadi leri susiweke eka thyaka ri yisiwa eka tafula T{dst}",
+    "waste_to_tableau_bad": "A swi koteki ku veka khadi ra xikhale eka nhulu ya tafula rero.",
+    "no_face_up": "A ku na makhadi lama nga ni xikandza lexi pfuriweke leswaku u ma fambisa.",
+    "tableau_to_tableau_ok": "Ku humesiwa {count} kadi(s) eka matabelu T{src} ku ya T{dst}",
+    "tableau_to_tableau_bad": "A ku na ku humesiwa {count} kadi(s) eka T{src} ku ya T{dst}",
+    "foundation_to_tableau_one_card": "U nga rhurhisa khadi rin'we ntsena ku suka eka masungulo ya phepha ra le henhla ri ya eka ro sungula.",
+    "foundation_empty": "Xitirhisiwa F{src} a xi na nchumu.",
+    "foundation_to_tableau_ok": "Khadi yi rhurhisiwile kusuka eka misava ya F{src} yiya eka misava ya T{dst}",
+    "foundation_to_tableau_bad": "A swi koteki ku veka khadi ra masungulo eka tafula T{dst}",
+    "to_waste_or_stock": "A swi nge fambisiwi ku ya lahliwa kumbe ku hlayisiwa."
+  },
+  "outcome": {
+    "forfeit": "Ntlangu wu tshikiwile. Nhlayo yo hetelela: {score} makhadi eka masungulo ya ntlango lowu.",
+    "won": "Mawaku, mi winile eka ntlangu wa Klondike Solitaire!",
+    "turn_limit": "Muthuki u fele! U kota muthuki wa {max_turns} wa muthuki. Muthuki wa wena: {score} khadi kwenye mphakelo wa khadi."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== Ku Hlayisa Xiyenge Xa Vumbirhi:",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Xitoko: {stock} makhadi",
+    "waste": "Thyaka (W): {waste}",
+    "foundations_header": "Masungulo:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tafula:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

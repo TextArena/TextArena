@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} grającym {colour} ({piece}) w grze Othello.\nTwoim celem jest posiadanie większej liczby pionków swojego koloru na planszy pod koniec gry.\nW swojej turze umieść pionek tak, aby flankował jeden lub więcej pionków przeciwnika - w dowolnym kierunku (poziomo, pionowo lub ukośnie) - między nowym pionkiem a innym z Twoich istniejących pionków. Wszystkie flankowane pionki przeciwnika zostaną przewrócone na Twój kolor.\nPodaj swój ruch w formacie '[wiersz, kolumna]'."
+  },
+  "board": {
+    "game_board": "Plansza gry:\n{board}",
+    "valid_moves": "{observation}\nDostępne ruchy: {moves}",
+    "no_valid_moves_reset": "{observation}\nBrak dostępnych ruchów - możesz musieć pominąć turę.",
+    "no_valid_moves_step": "{observation}\nBrak dostępnych ruchów – możesz musieć pominąć turę.",
+    "scores_reset": "{observation}\nAktualne wyniki - Czarny: {black_count}, Biały: {white_count}\n",
+    "scores_step": "{observation}\nWyniki - Czarny: {black_count}, Biały: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Ruch musi mieć format [wiersz, kolumna].",
+    "illegal": "Nieprawidłowy ruch. Dostępne ruchy: {valid}"
+  },
+  "game_action": {
+    "skipped": "Gracz {pid} musiał pominąć swoją turę",
+    "played": "Gracz {pid} ({piece}) zagrał [{r}, {c}] przewracając {flipped} pionka/pionki"
+  },
+  "game_message": {
+    "must_skip": "Gracz {pid} ({piece}) nie ma dostępnych ruchów i musi pominąć turę."
+  },
+  "outcome": {
+    "black_wins": "Czarny wygrywa {black_count}-{white_count}.",
+    "white_wins": "Biały wygrywa {white_count}-{black_count}.",
+    "draw": "Remis {black_count}-{white_count}."
+  }
+}

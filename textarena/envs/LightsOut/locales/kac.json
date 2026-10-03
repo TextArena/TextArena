@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "လိုင်စ် အောက်ကို ကြိုဆိုပါ။ {size}x{size} အလင်း စာရွက် ရှိပါ။\nခင်ဗျားတို့၏ ပန်းတိုင်မှာ အလင်း အားလုံး ပိတ်ပါ (အမှတ် '.' နဲ့ ပြထားပါ။)\nအလင်း တစ်ခု နှိပ်လိုက်ရင် အဲ့ဒီ အလင်း နဲ့ အဲ့ဒီ အလင်း ပတ်ဝန်းကျင် အလင်းတွေ (အပေါ်/အောက်/ဘယ်/ညာ) အားလုံး လဲလှယ် ပါတယ်။\n[row col] ဟု ရိုက်ထည့်ပါ (0-စာရင်း ပါ။ အမှန် အကျယ် 0-{max_index} ပါ။)\nခင်ဗျားတို့ အများဆုံး {max_turns} လှုပ်ရှား ပါ။\nအမှတ်ပုံစံ: 'O' = အလင်း ဖွင့်၊ '.' = အလင်း ပိတ်"
+  },
+  "board": {
+    "current_state": "Hkum hpe gaw shani (Move {moves_made}, {moves_left} hte galaw ai, {completion}% shada): \n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hkum hpe gaw shani hkum sha ai [row col] ya ai, ci row col hkum sha 0 na {max_index} ya ai.",
+    "out_of_range": "Ningtau ninghpang hta rau ai gaw 0 hku {max_index} rau ai. Nanhte [{row},{col}] rau ai."
+  },
+  "outcome": {
+    "win": "Nga hpaji! Nga {moves_used} hte galaw ai puzzle hkum sha gaw re.",
+    "loss": "Mali ai hte! Na gaw {max_turns} lu hte sha rai nna, na kasha shing jaw ai. Kaja kasha shing jaw ai: {completion}%\nKaja mungdan:\n{grid}"
+  }
+}

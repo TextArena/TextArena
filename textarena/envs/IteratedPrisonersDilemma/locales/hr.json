@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} u Ponovljenom zatvorenikovom dilemi koji se proteže na {num_rounds} rundi.\n\nStruktura igre:\n- Prije svake odluke imate {total_conversation_rounds} poteza za slobodnu komunikaciju.\n- Nakon toga, oba igrača istovremeno biraju hoće li surađivati ili prevariti.\n\nMatrica isplate (fiksna svaku rundu):\n- Oboje surađuju ➜ svaki {cooperate_reward}\n- Oboje prevare ➜ svaki {mutual_defect_reward}\n- Jedan prevari, jedan surađuje ➜ Prevarant {defect_reward}, Suradnik {sucker_reward}\n\nKako igrati:\n- Tijekom razgovora: upišite bilo koji tekst koji želite.\n- Tijekom faze odluke: uključite '[Cooperate]' ili '[Defect]' (neosjetljivo na velika/mala slova). Možete dodati dodatni tekst prije/poslije tokena."
+  },
+  "phases": {
+    "conversation_finished": "Razgovor završen za rundu {round}. Molimo odgovorite s '[Cooperate]' ili '[Defect]' unutar \\boxed{{}}.",
+    "starting_round": "--- Početak Runde {round} ---",
+    "round_summary": "Rezultati runde {round}:\n{outcome}\nIgrač 0 je zaradio {r0} (ukupno {score_0}), Igrač 1 je zaradio {r1} (ukupno {score_1})."
+  },
+  "outcome": {
+    "winner": "Igrač {winner} pobjeđuje {win_score} - {lose_score}.",
+    "draw": "Neriješeno! Oba igrača su postigla {s0}.",
+    "round_both_cooperate": "Oba igrača su surađivala.",
+    "round_both_defect": "Oba igrača su prevarila.",
+    "round_p0_cooperates_p1_defects": "Igrač 0 je surađivao, Igrač 1 je prevario.",
+    "round_p0_defects_p1_cooperates": "Igrač 0 je prevario, Igrač 1 je surađivao."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "반복된 최후통첩게임 지역화 파일. 키(왼쪽)는 번역하지 마세요. 값(오른쪽)만 번역하세요. 모든 {placeholder}는 그대로 유지하고, [Offer: $X] / [Accept] / [Reject] 액션 토큰은 번역하지 마세요. '$' 화폐 기호와 모든 숫자는 그대로 유지하세요.",
+  "_slots": {
+    "{player_id}": "플레이어 번호, 0 또는 1",
+    "{other_id}": "다른 플레이어 번호, 1 또는 0",
+    "{num_rounds}": "총 라운드 수",
+    "{pool}": "각 라운드에서 사용할 수 있는 금액 (숫자)",
+    "{round_number}": "현재 라운드 번호",
+    "{proposer_id}": "제안자 플레이어 번호, 0 또는 1",
+    "{responder_id}": "응답자 플레이어 번호, 0 또는 1",
+    "{offer}": "제안된 금액 (숫자)",
+    "{keep}": "제안자가 유지할 금액 (숫자)",
+    "{proposer_gain}": "제안자가 이번 라운드에서 얻은 금액 (숫자)",
+    "{responder_gain}": "응답자가 이번 라운드에서 얻은 금액 (숫자)",
+    "{total_0}": "플레이어 0의 누적 총액 (숫자)",
+    "{total_1}": "플레이어 1의 누적 총액 (숫자)",
+    "{winner}": "승리한 플레이어 번호",
+    "{loser}": "패배한 플레이어 번호",
+    "{winner_total}": "승리한 플레이어의 총 금액 (숫자)",
+    "{loser_total}": "패배한 플레이어의 총 금액 (숫자)",
+    "{total}": "플레이어들의 동일한 최종 총액 (숫자)"
+  },
+  "player_prompt": {
+    "intro": "당신은 플레이어 {player_id}입니다. {num_rounds} 라운드의 반복된 최후통첩게임을 플레이합니다.\n당신은 이번 라운드에서 자신과 플레이어 {other_id} 사이에 ${pool}를 나누어야 합니다.\n\n제안자:\n  - 제안을 하세요: [Offer: $X] (0 <= X <= pool)\n  - 수락되면 → 당신은 $(pool - X)를 얻고, 다른 플레이어는 $X를 얻습니다.\n  - 거절되면 → 둘 다 $0를 얻습니다.\n  - 예: [Offer: $3]  또는  '이게 공평하다고 생각해. [Offer: $5]'\n\n응답자:\n  - 제안을 [Accept] 또는 [Reject]로 결정하세요.\n  - 예: '그것이 합리적으로 보인다. [Accept]'\n            '너무 불공평하다. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- 라운드 {round_number} 시작! ---\n플레이어 {proposer_id}가 제안자이고, 플레이어 {responder_id}가 응답자입니다.",
+    "offer": "라운드 {round_number}: 플레이어 {proposer_id}가 플레이어 {responder_id}에게 ${offer}를 제안합니다 (자신은 ${keep}를 유지).",
+    "accepted": "플레이어 {responder_id}가 수락했습니다! 라운드 {round_number}의 수익: 플레이어 {proposer_id} +${proposer_gain}, 플레이어 {responder_id} +${responder_gain}. 새로운 총액: 플레이어 0: ${total_0}, 플레이어 1: ${total_1}.",
+    "rejected": "플레이어 {responder_id}가 제안을 거절했습니다! 라운드 {round_number}의 수익: 둘 다 +$0. 총액은 그대로: 플레이어 0: ${total_0}, 플레이어 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "제안자는 [Offer: $X] 형식을 사용하여 제안해야 합니다.",
+    "bad_integer": "제안 금액은 유효한 정수여야 합니다.",
+    "out_of_range": "제안은 $0과 ${pool} 사이여야 합니다.",
+    "no_current_offer": "현재 응답할 제안이 없습니다.",
+    "accept_or_reject": "응답자는 제안을 [Accept] 또는 [Reject]해야 합니다."
+  },
+  "outcome": {
+    "win": "플레이어 {winner}가 ${winner_total} 총액으로 승리했습니다. 플레이어 {loser}는 ${loser_total} 총액입니다.",
+    "draw": "무승부! 둘 다 ${total} 총액으로 게임을 마쳤습니다."
+  }
+}

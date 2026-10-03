@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "O wena Player {player_id} mo kgweleng ya Iterated Prisoner's Dilemma ya batlhophi ba 3. Kgwele e tshwarelela {num_rounds} di round.\nMokgwelo wa round:\n• {conv_rounds} di turn tsa go bua ka mahala\n• 1 turn ya ditshwetso - romela token e le nngwe kwa mmaba o mongwe le o mongwe: '[<opp-id> cooperate]' goba '[<opp-id> defect]' (e.g. '[1 defect] [2 cooperate]'; default ke 'cooperate'). \nMatrix ya pair-wise payoff (e dirisiwa kwa mongwe wa dipalo tse di sa rangweng):\n  - Ba bedi ba cooperate  ->  {reward}\n  - Ba bedi ba defect     ->  {punishment}\n  - Wena o defect, bone ba cooperate -> {temptation}\n  - Wena o cooperate, bone ba defect -> {sucker}\nMothophi yo o na le tse di kwa godimo mo kgweleng e feleletseng o a fenya."
+  },
+  "round": {
+    "start": "─── Simologa Kgwedi {round} ───\tO ka buisana ka kgololesego ka dikgwedi tse {conv_rounds} tse di tlang.",
+    "chat_finished": "Puo e feleletse kwa round {round}. Romela ditshwetso tsa gago, token e le nngwe kwa mmaba o mongwe le o mongwe: `[pid cooperate]` goba `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Diphelelo:",
+    "pair_line": "{observation}\n\t Mothophi {i} le Mothophi {j} ba ile ba kgetha go {choice_i} le {choice_j} ka go latelana (Mothophi {i} a ne a bona {gain_i}, Mothophi {j} a ne a bona {gain_j})",
+    "scores_open": "{observation} -> Dipalo tsa gone jaanong: ",
+    "score_first": "{observation}Leseka {player_id} ({score})",
+    "score_next": "{observation}; Leseka {player_id} ({score})",
+    "finalize": "{observation}  go nna le mathata a botsogo."
+  },
+  "outcome": {
+    "final": "Maduo a bogodimo: {scores}.  Makopano a magae (o o ka wa o ka o ka tshehadi): {groups}"
+  }
+}

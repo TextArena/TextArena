@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "O cei Player {player_id} ena game Liar's Dice ni {num_players}-player.\nLawatu:\n- Ena nomuni turn, o na qai vinakata me:\n  1) Me bid e sivia na quantity se face e sivia (se both) na current bid; mena ga na '[Bid: 3, 4]',\n  2) Me call na last bid ena type '[Call]'.\n\nEna o call:\n  - Ena actual count ni face value oqo ena all dice e lailai sara ga na bid, na last bidder lose eka die.\n  - Na oka, na caller lose eka die.\nE dua na player e rawa ni 0 dice e eliminated. Na last remaining player win."
+  },
+  "board": {
+    "per_player": "\tPlayer {p}: {d}",
+    "new_round": "\nRaundi vou - Qito e se bula tiko: {dice_summary}\nNa qito ni nomu e: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Dauqito {current_player_id} kerekere! Na levu ni mata ni qito {face_value} e {count}, e lailai mai {quantity}.\nDauqito {loser_id} (na dauqito e qai oti) e dravudravua e dua na qito.",
+    "caller_loses": "Dauqito {current_player_id} kerekere! Na levu ni mata ni qito {face_value} e {count}, e >= {quantity}.\nDauqito {loser_id} (na kerekere) e dravudravua e dua na qito."
+  },
+  "action": {
+    "bid_announce": "Player {player_id} bidia {quantity} ni face {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "E sega ni dua e vakaliuliu me volia.",
+    "invalid_bid": "Sega ni vakadonui na bid: {reason}",
+    "not_recognized": "Action e sega ni recognized me vaka e valid '[Bid: X, Y]' se '[Call]'. Submitted action: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Na levu ni iwiliwili vou {new_quantity} e lailai sobu mai na kena sa tu oqo {current_quantity}.",
+    "face_lower": "New face value {new_face_value} e lailai sara ga na current {current_face_value}.",
+    "identical": "E tautauvata na isau ni ilavo e soli tiko.",
+    "face_range": "Na kena isau e dodonu me 1 ina 6."
+  },
+  "message": {
+    "eliminated_invalid": "Player {player_id} a vakawabokotaki ena sega ni dodonu na toso."
+  },
+  "outcome": {
+    "win": "Dauqito {winner} e qaleni! Lisi ni qaleni: {final_ranking}"
+  }
+}

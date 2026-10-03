@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} Chopsticks-pelissä. Vuorollasi valitse yksi seuraavista:\n  + Hyökkää:  '[attack M O]'  missä M=omakätesi (0 tai 1), O=vastustajan käsi (0 tai 1).\n    - Vastustajan käden lukumäärä kasvaa omakätesi verran; jos >=5, se muuttuu 0:ksi.\n  + Jaa:   '[split L R]'  jotta voit uudelleen jakaa sormesi L:ksi ja R:ksi (L+R = sormiesi yhteismäärä).\nVastaa täsmälleen yhdellä näistä komennoista."
+  },
+  "board": {
+    "current_board": "Nykyinen pelilauta:\nPelaaja 0: {hands_0}\nPelaaja 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Kätesi {my_idx} on kuollut.",
+    "opp_hand_dead": "Vastustajan käsi {opp_idx} on jo kuollut.",
+    "split_sum": "Jakaminen täytyy olla yhteensä {total}.",
+    "split_no_change": "Jakaminen täytyy muuttaa kätesi jakautumista.",
+    "invalid_command": "Virheellinen siirto. Käytä “[attack M O]” tai “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} hyökkää P{opp_id}:n käteen {opp_idx}: se muuttuu {opp_val}:sta {new_val}:ksi.",
+    "split": "P{player_id} jakaa kädet [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Molemmat vastustajan kädet ovat kuolleet.",
+    "draw": "Vuororajoitus on saavutettu."
+  }
+}

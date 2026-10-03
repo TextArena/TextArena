@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id}. U speelt Sudoku.\nHier is de huidige staat van het Sudoku-rooster. Elke rij is genummerd van 1 tot 9, en elke kolom is ook genummerd van 1 tot 9.\nLege cellen worden weergegeven door '.', en vooraf ingevulde cellen bevatten cijfers van 1 tot 9.\n\nHuidig Sudoku-rooster:\nUw doel is om de lege cellen in het 9x9-rooster in te vullen met cijfers van 1 tot 9, zodat:\n1. Elke rij alle cijfers van 1 tot 9 bevat zonder herhaling.\n2. Elke kolom alle cijfers van 1 tot 9 bevat zonder herhaling.\n3. Elk van de negen 3x3-subroosters alle cijfers van 1 tot 9 bevat zonder herhaling.\n\nRegels en instructies:\n1. **Overschrijf niet** de initiële nummers die in het rooster zijn opgegeven.\n2. **Vul alleen** lege cellen in die worden weergegeven door '.'.\n3. U kunt op elke manier reageren die u verkiest, maar zorg ervoor dat uw reactie het formaat '[rij kolom nummer]' bevat.\n4. **Zorg ervoor** dat uw zet geen Sudoku-regels schendt. Ongeldige zetten resulteren in straffen.\nVoorbeelden:\n- **Geldige zet**:\n  - Roosterfragment voor zet:\n  \n  - Zet: `[5 3 7]`\n  - Uitleg: Het plaatsen van 7 op rij 5, kolom 3 schendt geen Sudoku-regels.\n\n- **Ongeldige zet** (Overschrijven van een vooraf ingevulde cel):\n  - Roosterfragment voor zet:\n  \n  - Zet: `[1 1 9]`\n  - Uitleg: Cel (1,1) is al ingevuld met 5. U kunt deze niet overschrijven.\n\n- **Ongeldige zet** (Schenden van Sudoku-regels):\n  - Roosterfragment voor zet:\n  \n  - Zet: `[1 3 5]`\n  - Uitleg: Het plaatsen van 5 op rij 1, kolom 3 schendt de regel omdat 5 al bestaat op rij 1.\n\nDe geschiedenis van uw zetten en gedachten wordt toegevoegd naarmate u meer rondes speelt. Gebruik de geschiedenis van uw zet om uw besluitvorming te verbeteren door de zetten die u hebt geprobeerd te vermijden. Succes!\n\n"
+  },
+  "board": {
+    "game_board": "Spelbord:\n{board}",
+    "board_state": "Bordstatus: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldig zetformaat. Speler {player_id} reageerde niet met een geldig 'rij kolom nummer'.",
+    "out_of_bounds": "Ongeldige zet. Speler {player_id} probeerde {num} te plaatsen op ({row}, {col}), wat buiten de grenzen valt.",
+    "overwrite": "Ongeldige zet. Speler {player_id} probeerde een vooraf ingevulde cel ({row}, {col}) te overschrijven.",
+    "violates_rules": "Ongeldige zet. Speler {player_id} probeerde {num} te plaatsen op ({row}, {col}), wat de Sudoku-regels schendt."
+  },
+  "outcome": {
+    "win": "Gefeliciteerd! Speler {player_id} heeft het Sudoku-puzzel voltooid.",
+    "turn_limit": "De zetlimiet is bereikt. U hebt {percent}% van de lege cellen correct ingevuld."
+  }
+}

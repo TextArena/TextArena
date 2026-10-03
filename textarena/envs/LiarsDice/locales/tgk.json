@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Шумо бозигари {player_id} дар бозии зарикории {num_players}-нафара мебошед.\nҚоидаҳо:\n- Дар навбати худ, шумо метавонед ё:\n  1) Пешниҳоди нав бо миқдори зиёд ё рӯи баландтар (ё ҳарду) аз пешниҳоди ҷорӣ бикунед; яъне '[Bid: 3, 4]',\n  2) Пешниҳоди охиринро бо навиштани '[Call]' бихонед.\n\nАгар шумо бихонед:\n  - Агар шумораи воқеии қимати рӯи миёнгини дар тамоми зарҳо камтар аз пешниҳод бошад, бозигари охирин як зарро мегумояд.\n  - Вақте дигар, бозигари хонанда як зарро мегумояд.\nБозигаре, ки ба 0 зар мерасад, аз бозӣ берун мешавад. Бозигари охирин боқимонда ғолиб мегардад."
+  },
+  "board": {
+    "per_player": "\tБозигар {p}: {d}",
+    "new_round": "\nДаври нав - Шансҳои боқимонда: {dice_summary}\nШансҳои кунунии Шумо: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Бозигари {current_player_id} даъват мекунад! Шумораи воқеии рӯи зари {face_value} {count} аст, ки камтар аз {quantity} аст.\nБозигари {loser_id} (таклифкунандаи охирин) як зарро гум мекунад.",
+    "caller_loses": "Бозигари {current_player_id} бихонд! Шумораи воқеии рӯи {face_value} {count} аст, ки >= {quantity}.\nБозигари {loser_id} (хонанда) як зарро мегумояд."
+  },
+  "action": {
+    "bid_announce": "Бозигари {player_id} {quantity} зари рӯи {face_value} пешниҳод мекунад."
+  },
+  "invalid_move": {
+    "call_no_bid": "Боздошти бе пешниҳоди пешакӣ.",
+    "invalid_bid": "Пешниҳоди беэътибор: {reason}",
+    "not_recognized": "Амал ҳамчун ягон '[Bid: X, Y]' ё '[Call]' эътироф нашудааст. Амали пешниҳодшуда: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Миқдори нави {new_quantity} камтар аз {current_quantity}-и кунунӣ мебошад.",
+    "face_lower": "Арзиши нави рӯи {new_face_value} камтар аз {current_face_value}-и кунунӣ мебошад.",
+    "identical": "Пешниҳод ба пешниҳоди кунунӣ баробар аст.",
+    "face_range": "Арзиши номиналӣ бояд аз 1 то 6 бошад."
+  },
+  "message": {
+    "eliminated_invalid": "Бозингар {player_id} бо ҳаракати беэътибор барканор карда шуд."
+  },
+  "outcome": {
+    "win": "Бозигар {winner} пирӯз мешавад! Рейтинги ниҳоӣ: {final_ranking}"
+  }
+}

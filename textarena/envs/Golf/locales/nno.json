@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Du spelar Golf (Kortspel) - Spelar {player_id}.\nMål: Få den lågaste totale poengsummen i denne eine runden. Viss kolonnar deler same verdi, vert dei summerte som 0.\nKortverdiar: A=1, 2-10=ansiktverdi, J/Q=10, K=0\n\nHandlingar (bruk eksakte klammer):\n- '[draw]' - Trekk frå dekket\n- '[take]' - Ta frå discard-pile\n- '[swap X Y]' - Byt trekt kort med posisjon X (rad) Y (kolonne)\n- '[discard]' - Kast det trekte kortet"
+  },
+  "board": {
+    "drew": "Du trekte: {card}\nNo må du [swap X Y] eller [discard] det.",
+    "took": "Du tok: {card} frå discard-pile\nDu må [swap X Y] med det (kan ikkje kaste)",
+    "peeked": "Du kikka på posisjon ({row},{col}): {card}",
+    "turn_view": "Din hånd:\n{hand}\nAvfallsdyngen: {discard}\n{options}",
+    "none": "Ingen av dei."
+  },
+  "options": {
+    "final_turns": "Siste turar! Dine val: [draw], [take], [peek X Y]",
+    "draw": "Dine val: [draw], [take]",
+    "must_swap": "Du må: [swap X Y] (kan ikkje kasta kort frå kastestokk)",
+    "swap_or_discard": "Du må: [swap X Y] eller [discard]"
+  },
+  "hand": {
+    "no_cards": "Ikkje kort.",
+    "header": "Kol: 1 2 3 Det er ein del av eit samanhengande system.",
+    "row": "Rad {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Spelar {pid} byta {new} med {old} på posisjon ({row},{col})",
+    "discarded": "Spelar {pid} kasta {card}"
+  },
+  "message": {
+    "deck_empty": "Kortstokken er tom! Spelet endar med ein gong.",
+    "knocked": "Spelar {pid} slo! Kvar spelar får ein omgang til.",
+    "final_round": "Spelar {pid} {reason}! Kvar andre spelar får ein meir tur."
+  },
+  "reason": {
+    "all_revealed": "har alle kort blitt avsløra"
+  },
+  "invalid": {
+    "wrong_action": "Bruk nøyaktig ÉI bracketert handling: [draw], [take], [swap X Y], [discard], [knock] eller [peek X Y]",
+    "discard_empty": "Kvarleggjaren er tom!",
+    "must_draw_first": "Du må først [draw], [take], [knock] eller [peek X Y]",
+    "cannot_discard_taken": "Du kan ikkje kasta ein kort som er teken frå avkastningshaugen. Du må bytte det ut med noko anna.",
+    "have_drawn_card": "Du har trekt eit kort. Du må [swap X Y] eller [discard] det.",
+    "need_drawn_swap": "Du treng eit trukka kort for å bytte.",
+    "need_drawn_discard": "Du treng eit kort for å kasta.",
+    "out_of_bounds": "Posisjon utanfor grensene. Bruk rad 1-{max_row}, kolonne 1-{max_col}",
+    "knock_with_card": "Du kan ikkje slå med eit trekt kort. Fullfør turen din fyrst.",
+    "already_knocked": "Nokre har alt teke dette steget.",
+    "already_revealed": "Det kortet er allereie avdekt!"
+  },
+  "summary": {
+    "full": "Spelet er over! Spelar {winner} vinn med ein poengsum på {score} poeng!\n\nEndelige poengsummar:\n{scores}",
+    "line": "Spelar {pid}: {score} poeng\n"
+  },
+  "board_str": {
+    "title": "=== GOLFSPILLET ===",
+    "discard": "Kast-haug: {card}",
+    "knocked": "Spelaren {pid} har banka på!",
+    "player_header": "Spelar {pid} (Poeng: {score}):"
+  }
+}

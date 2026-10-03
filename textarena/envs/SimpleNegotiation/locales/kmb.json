@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "O muthu ua kexile mu jokala, ka tenene ku kala ni kitadi kia soko phala ku nganhala o joko.",
+    "out_of_range": "Mwana {player_id}, Nkita isoso. Ngonda {col} ikwela ku mpangwa.",
+    "already_full": "Mwana {player_id}, Nkita isoso. Ngonda {col} imemena.",
+    "proposing_with_no_resource": "O muthu ua kexile mu jokala, {player_id} a mesenene ku mu sumbisa sé kitadi.",
+    "incorrect_offer_format": "O muthu ua kexile mu jokala, {player_id} a mu tange kuala o mutelembe.",
+    "no_new_offer": "O muthu ua kexile mu jokala, {player_id} ka bhange ngolokela ia ubhe."
+  },
+  "offers": {
+    "reject": "Mukendi {player_id} kayiti kubasa kufungula kubadilisha.",
+    "accept": "O muendexi {acceptor_id} ua xikina o ujitu ua mukuá a mu bhana, Muendexi u {proposer_id}.",
+    "proposal": "Mwana {player_id} mezidila nkita ikwela kwa Mwana {opponent_id}: Zintu zilungidilwa: {offered} -> Zintu zikwela: {requested}"
+  },
+  "outcome": {
+    "win": "O muthu u jokala {winner_id}, ua nganhala dingi mukonda dia ku bandekesa o kitadi mu jibela.",
+    "draw": "O kuila o athu oso mu kibuka a tena ku katula mbote?"
+  }
+}

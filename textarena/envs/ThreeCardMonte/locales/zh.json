@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte 语言环境文件。不要翻译键（左侧），只翻译值（右侧）。",
+  "_slots": {
+    "{line}": "渲染后的杯子行",
+    "{step}": "当前洗牌步骤编号",
+    "{steps}": "洗牌步骤总数",
+    "{i}": "交换中涉及的第一个杯子索引",
+    "{j}": "交换中涉及的第二个杯子索引",
+    "{prompt}": "附加在杯子后面的本地化提示片段",
+    "{max_index}": "有效杯子索引的最大值，即 num_cups-1",
+    "{ball_pos}": "球所在杯子的索引"
+  },
+  "player_prompt": {
+    "intro": "在杯子被打乱时，持续跟踪隐藏的球 'X'。\n洗牌结束后，使用 `[k]` 猜测它的位置。"
+  },
+  "game_message": {
+    "ball_starts": "球的初始位置：{line}",
+    "shuffle": "洗牌 {step}/{steps}：交换了杯子 {i} 和 {j}。",
+    "cups": "杯子：{line}  {prompt}",
+    "guess_now": "（现在猜！）",
+    "reveal": "（揭晓：球在杯子 {ball_pos} 下方）"
+  },
+  "invalid_move": {
+    "wrong_format": "操作格式错误。请使用 `[k]`。",
+    "out_of_range": "索引超出范围 0-{max_index}。"
+  },
+  "outcome": {
+    "win": "正确！你找到了球。",
+    "lose": "错误——球在杯子 {ball_pos} 下方。"
+  }
+}

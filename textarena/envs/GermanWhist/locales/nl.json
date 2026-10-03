@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Het spel begint. Troefkleur: {trump_suit} (troefkaart: {trump_str}).",
+    "no_trump_card": "geen"
+  },
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in Duits Whist.\n{phase_info}\nU hebt {hand_size} kaarten.\nSpeel een kaart met '[play N]', waar N de positie van de kaart in uw hand is (bijvoorbeeld '[play 3]').",
+    "phase_learning": "LEERFASE: de winnaar van elke slag neemt de open kaart en de verliezer trekt de volgende kaart uit het spel. Slagen gewonnen in deze fase tellen niet mee voor de overwinning.",
+    "phase_playing": "SPELFASE: het spel is uitgeput. Elke slag vanaf nu telt mee voor de overwinning."
+  },
+  "next_card": {
+    "playing_phase": "Er is geen kaart beschikbaar - de spel fase is begonnen.",
+    "deck_empty": "Het spel is leeg - er is geen kaart beschikbaar.",
+    "available": "Kaart beschikbaar: {card}",
+    "available_trump": "Kaart beschikbaar: {card} (TROEF)"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldig formaat voor de zet. Gebruik '[play N]' om de N-de kaart in uw hand te spelen.",
+    "bad_position": "Die kaartpositie bestaat niet. U hebt {hand_size} kaarten.",
+    "must_follow_suit": "U moet de kleur volgen en een {lead_suit} kaart spelen.",
+    "invalid_play": "Die kaart kan niet worden gespeeld."
+  },
+  "game_action": {
+    "played": "Speler {player_id} speelde {card}."
+  },
+  "trick": {
+    "won": "Speler {winner_id} wint de slag met {card}.",
+    "won_learning": "Speler {winner_id} wint de slag met {card} en neemt de open kaart."
+  },
+  "phase": {
+    "learning_complete": "Het spel is uitgeput. De leerfase is voorbij - elke overgebleven slag telt mee voor de overwinning."
+  },
+  "draw": {
+    "winner_received": "U won de slag en ontving {card}.",
+    "loser_received": "U verloor de slag en trok {card} uit het spel.",
+    "winner_preview": "De volgende kaart beschikbaar is {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Slagen gewonnen tot nu toe - Speler 0: {tricks0}, Speler 1: {tricks1}",
+    "scores_playing": "Scorende slagen - Speler 0: {tricks0}, Speler 1: {tricks1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Fase: {phase} ({remaining_cards} kaarten over in het spel)"
+  },
+  "hand": {
+    "no_cards": "Geen kaarten",
+    "no_cards_in_hand": "Geen kaarten in hand",
+    "header": "Uw hand:",
+    "trump_indicator": " (TROEF)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Nog geen kaarten gespeeld in deze slag.",
+    "header": "Huidige slag:",
+    "trump_indicator": " (TROEF)",
+    "card_line": "{observation}\n  Speler {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Spel nog niet gestart",
+    "header": "=== DUITSE WHIST SPEL ===",
+    "phase": "{observation}\nFase: {phase}",
+    "trump_suit": "{observation}\nTroefkleur: {trump_suit}",
+    "trump_card": "{observation}\nTroefkaart: {card}",
+    "cards_left": "{observation}\nKaarten over in spel: {count}",
+    "next_card": "{observation}\nVolgende kaart voor winnaar: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nHuidige slag:",
+    "trump_indicator": " (TROEF)",
+    "trick_line": "{observation}\n  Speler {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nSpeler {player_id}: {scoring} scorende slagen ({tricks} totaal), {hand_size} kaarten in hand"
+  },
+  "outcome": {
+    "summary": "Leerfase - Speler 0: {l0}, Speler 1: {l1}. Spelfase - Speler 0: {p0}, Speler 1: {p1}. Speler {winner_id} wint met {winner_tricks} scorende slagen!"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Siz Iterated Prisoner's Dilemma oýunynyň {num_rounds} raundynyň içinde Player {player_id} ýaly ýer alýarsyňyz.\n\nOýun Struktury:\n- Her karara gelmezden öň siz {total_conversation_rounds} gezek ýalňyz ýazyp bilersiňiz.\n- Şondan soň, iki oýunçy hemişe bilelikde işbirlikde ýa-da ýalançylyk ýoluny saýlar.\n\nPayoff Matrix (her raundda sabit):\n- Iki tarap hem işbirlikde ➜ her biri {cooperate_reward}\n- Iki tarap hem ýalançylyk ➜ her biri {mutual_defect_reward}\n- Biri ýalançylyk, biri işbirlikde ➜ Ýalançy {defect_reward}, işbirlikçi {sucker_reward}\n\nNädip Oýnamaly:\n- Ýazşy ýazmak wagtynda: islendik ýazgy ýazyp bilersiňiz.\n- Karar ýazmak wagtynda: '[Cooperate]' ýa-da '[Defect]' (ýazgyň ýalňyşy ýok) ýazyp bilersiňiz. Ýazgyň öň ýa-da soňuna goşmaça ýazgy ýazyp bilersiňiz."
+  },
+  "phases": {
+    "conversation_finished": "Gürleşik {round} turu üçin sohbet tamamlandy. Lütfen \\boxed{{}} içinde '[Cooperate]' ýa-da '[Defect]' bilen jogap beriň.",
+    "starting_round": "--- Başlangyç döwri {round} ---",
+    "round_summary": "Tur {round} netijeleri:\n{outcome}\nOýunçy 0 {r0} gazandı (jemi {score_0}), Oýunçy 1 {r1} gazandı (jemi {score_1})."
+  },
+  "outcome": {
+    "winner": "Oýunçy {winner} {win_score} - {lose_score} ýeňdi.",
+    "draw": "Çakyr! Her iki oýunçy hem gol urdular {s0}.",
+    "round_both_cooperate": "Her iki oýunçy hem işleşdi.",
+    "round_both_defect": "Iki oýunçy hem yzlaryna gitdiler.",
+    "round_p0_cooperates_p1_defects": "0-nji oýunçy kömek etdi, 1-ji oýunçyk gaçdy.",
+    "round_p0_defects_p1_cooperates": "0-nji oýunçy gaçyp gidýär, 1-ji oýunçyk kömek edýär."
+  }
+}

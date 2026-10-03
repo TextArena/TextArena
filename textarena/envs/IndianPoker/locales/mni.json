@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "আপুনি প্লেয়ার {player_id} ইন্ডিয়ান পোকার খেলবা একটি গেমবু।\n- 52-কার্ড ডেক; আপুনি শুধু প্রতিপক্ষের কার্ড দেখবা।\n- এন্টি {ante} চিপ(স) প্রতি রাউন্ড, {max_rounds} রাউন্ড(স) মোট।\n- বৈধ চাল: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X একটি ধনাত্মক পূর্ণসংখ্যা <= আপুনার চিপ গণনা।)\n- সর্বোচ্চ লুকানো কার্ড শোডাউনবু পট জিতবা।\n"
+  },
+  "round": {
+    "announce": "### တုန္ {current_round}/{max_rounds}\nမိအဲ ပုန္ ကား မိအဲ: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Exactly ONE bracketed action supply yi, e.g. '[check]', '[bet 2]', '[call]', '[raise 3]', '[fold]' cha",
+    "cannot_check": "[check] তৌরবা লাইবা নত্তে - নম্মদি অনা বেট অমসুং অনা পাউরবা ।",
+    "amount_min": "বেট / রেইজ পরিমাণ অবশ্যই ≥ 1 হবা",
+    "cannot_bet": "[bet] তৌবা নত্তী - অবশ্যই [call] / [raise] / [fold] করবা",
+    "nothing_to_call": "কল তৌরবা অমা লাইবা নত্তে; [check] তৌরবা নম্মদি পাউরবা ।",
+    "no_bet_to_raise": "হাংদোক্নবা [bet X] শিজিন্নৌ; হেঙ্গৎহন্নবা বেত অমত্তা লৈতে।",
+    "insufficient": "অসিগুম্বা থবকশিং পাংথোক্নবগীদমক চিপ মরাং কায়না লৈতে।"
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "নহাক্না লৌখৎপা য়াবা থবকশিং: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  ပုတ {pot} → Player {winner}။ (ဘဏ္ ပီ 0:{p0}, ပီ 1:{p1})",
+    "folded": "প্লেয়ার {player_id} ফোল্ড করে",
+    "showdown_win": "শোডাউন: {card_win} {card_lose}কে পরাজিত করে",
+    "showdown_tie": "শোডাউন টাই: দোনো {card}। পট স্প্লিট – দোনোকেই {split} পাইখুমনি"
+  },
+  "outcome": {
+    "p0_wins": "Player 0 မိအဲ ပုကာ ({bank0} > {bank1})",
+    "p1_wins": "Player 1 မိအဲ ပုကာ ({bank1} > {bank0})",
+    "draw": "সমান চিপস সব রাউন্ড পরে"
+  }
+}

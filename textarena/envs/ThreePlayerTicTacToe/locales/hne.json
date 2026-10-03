@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "तुम्हार तीन खेलाड़ी टिक टॅक टो मा खेलाड़ी {player_id} हो।\nतुम्हार चिन्ह '{symbol}' हो।\nतुम्हार ५x५ बोर्ड मा अपन चिन्ह रख के चार कतार बनाओ।\nकतार आड़ी, सीधा या तिरछा हो सकत हो।\nअपन चाल '[4]' फॉर्मेट मा दे के चौथा सेल मा निशान लगाओ।"
+  },
+  "board": {
+    "current_board": "वर्तमान बोर्ड:\n\n{board}\n\nउपलब्ध चाल: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "अमान्य चाल प्रारूप। '[cell]' का उपयोग करें जहां सेल 0-{max_cell} है।",
+    "out_of_range": "अमान्य सेल नंबर: {cell}। ० आ {max_cell} के बीच होना चाही।",
+    "already_occupied": "सेल {cell} पहीली ले ही कब्जा कर लिस हे।",
+    "made_invalid": "{player_id} खेलाड़ी एक अवैध चाल बनाए हैं"
+  },
+  "game_action": {
+    "placed": "खेलाड़ी {player_id} अपन चिन्ह ({symbol}) को ({row}, {col}) मा रखत है।"
+  },
+  "outcome": {
+    "win": "खेलाड़ी {player_id} ({symbol}) जीत जात है!",
+    "draw": "खेल म बराबर के अंक रहिथे!"
+  }
+}

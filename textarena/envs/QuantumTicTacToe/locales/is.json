@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í Quantum Tic Tac Toe.\nMerki þitt er '{symbol}', og leiknúmer þín eru alltaf {parity} (t.d., X1, X3 eða O2, O4).\n\nMarkmið: Vinn með því að mynda línu af þremur klassískum merkjum (þéttað úr ofstæðingum).\n\nHvernig á að spila:\n- Á hverri rönd, settu draugamerki í tvo mismunandi tóma reiti með sniðinu '[a,b]'.\n- Þessi merki eru flækt, og merkt eins og 'X1 / X1' eða 'O4 / O4'.\n- Þú getur ekki sett draugamerki í reit sem hefur þegar fallið saman (þéttað).\n\nRegla um samfall:\n- Ef leikur þinn stofnar hring í flæktingargrafi, fellur hann saman sjálfkrafa.\n- Hvert draugamerki í hringnum breytist í klassískt merki í einni af tveimur stöðum sínum.\n- Allt flækt draugamerki fellur einnig saman.\n\nSigur:\n- Leikurinn endar þegar leikmaður hefur þrjú klassísk merki í röð.\n- Ef báðir leikmenn fá línu á sama tíma, vinnur sá með lægri hámarksleiknúmer.\n\nDæmi um leik: '[0,4]' setur draugamerki í reitina 0 og 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Borð:\n\n{board}\n\nSendaðu leikinn þinn sem '[a,b]' til að setja kvantamerki í tveimur stöðum."
+  },
+  "invalid_move": {
+    "wrong_format": "Rangt snið. Notaðu '[a,b]'.",
+    "invalid_cells": "Ógild eða tvítekin reitnúmer.",
+    "already_solidified": "Ein af reitunum er þegar þéttaður."
+  },
+  "game_action": {
+    "placed": "Leikmaður {player_id} setti merki sitt í ofstæðingu milli reitanna {pos_a} og {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Flækt ofstæðing lausin. Reitur ({r}, {c}) er nú {symbol}.",
+    "last_cell_resolved": "Ofstæðing fyrir síðasta reit lausin. Reitur ({r}, {c}) er nú {symbol}.",
+    "superposition_resolved": "Ofstæðing lausin. Reitur ({r}, {c}) er nú {symbol}."
+  },
+  "outcome": {
+    "win": "Leikmaður {player_id} vinnur með þéttaða merki!",
+    "draw": "Leikurinn er jafntefli!"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "A xlẽ nu Golf (Kaadi Ge) - Axlẽ {player_id}.\nGbọjẹ: Xlẽ nọ sogan gbigbọn gbigbọn to azọn ehe. Nọ xlẽ kọn wẹ gbọn ẹn, xlẽ nọ sogan 0.\nGbọjẹ Kaadi tọn: A=1, 2-10=gbọjẹ etọn, J/Q=10, K=0\n\nNu gbigbọn (do ogbọn he ehe):\n- '[draw]' - Xlẽ sọn kaadi\n- '[take]' - Xlẽ sọn ojó kaadi tọn\n- '[swap X Y]' - Pọn kaadi he xlẽ sọn pọn podo X (yí) Y (kọn)\n- '[discard]' - Jẹ kaadi he xlẽ sọn"
+  },
+  "board": {
+    "drew": "A xlẽ: {card}\nEgbẹ xlẽ nọ [swap X Y] kavi [discard] ẹ.",
+    "took": "A xlẽ: {card} sọn ojó kaadi tọn\nEgbẹ xlẽ nọ [swap X Y] podo ẹ (mọgọ jẹ).",
+    "peeked": "E lo to: ({row}, {col}): {card}",
+    "turn_view": "Aɖa ŋku:\n{hand}\nWɔnɖe: {discard}\n{options}",
+    "none": "Eɖesu ǎ."
+  },
+  "options": {
+    "final_turns": "Nɔnɔ alɔ! Nʋɖo ŋku: [draw], [take], [peek X Y]",
+    "draw": "Nʋɖo ŋku: [draw], [take]",
+    "must_swap": "A ɖó na: [swap X Y] (e ma sixu ɖè lɛ ɖò wema e è nɔ ɖe dó nǔ jí é mɛ ó)",
+    "swap_or_discard": "Nʋɖo ŋku: [swap X Y] ɖi [discard]"
+  },
+  "hand": {
+    "no_cards": "Akpá ɖé kún ɖò fí ó.",
+    "header": "Akpáxwé: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Akpɛvi {pid} gbɛ xɔ {new} kpɔ {old} tɔ {row},{col} ɖo",
+    "discarded": "Axlẽ {pid} jẹ {card}"
+  },
+  "message": {
+    "deck_empty": "Akpá ɔ vɔ! Kpo ɔ fó tlolo.",
+    "knocked": "{pid} ɔ́' è sú i! Mɛɖěvo lɛ́ɛ bǐ ná yí gbè nú yeɖée azɔn ɖokpo.",
+    "final_round": "Axlẽ {pid} {reason}! Axlẽ devo lẹpo nọ tindo azọn dopo dogọ."
+  },
+  "reason": {
+    "all_revealed": "kọn kaadi lẹpo"
+  },
+  "invalid": {
+    "wrong_action": "Ŋku yɔnɖe: [draw], [take], [swap X Y], [discard], [knock], ɖi [peek X Y]",
+    "discard_empty": "Nǔ e è nɔ jó dó lɛ́ɛ vɔ!",
+    "must_draw_first": "Egbẹ xlẽ nọ [draw], [take], [knock], kavi [peek X Y] whẹ",
+    "cannot_discard_taken": "A sixu ɖè wema e è ɖe sín kpò mɛ é ɖé dó ǎ. É ɖó na nyí nǔɖokan towe.",
+    "have_drawn_card": "A xlẽ kaadi. Egbẹ xlẽ nọ [swap X Y] kavi [discard] ẹ.",
+    "need_drawn_swap": "A ɖó na dó lɛ́ yí nǔ e è ɖè é.",
+    "need_drawn_discard": "A ɖó na dó mɔ nǔ e è ɖè é ɖé bo wá jó.",
+    "out_of_bounds": "Otẹn gbọn ẹn. Do yí 1-{max_row}, kọn 1-{max_col}",
+    "knock_with_card": "A sixu xò alɔ nú mɛ e a sɔ́ lɛ é ǎ. Dǒ gbè towe fó hwɛ̌.",
+    "already_knocked": "Mɛ ɖé ko ɖu ɖò mɛ e na yí é jí.",
+    "already_revealed": "Akpá enɛ ɔ ko nyí!"
+  },
+  "summary": {
+    "full": "Aɖa alɔ! Abla {winner} wɔ nɔnɔ {score} pɔnti!\n\nNɔnɔ alɔ:\n{scores}",
+    "line": "Abla {pid}: {score} pɔnti\n"
+  },
+  "board_str": {
+    "title": "=== GOLF JƆN ɔ́ => =",
+    "discard": "Hɔn nú nǔ lɛ́ɛ: {card}",
+    "knocked": "{pid} ɔ́ jɛ̀ bó xò hɔn!",
+    "player_header": "Abla {pid} (Nɔnɔ: {score}):"
+  }
+}

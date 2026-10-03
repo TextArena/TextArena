@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Ou se Jwè {player_id} nan Three-Player GOPS.\n- Ou kenbe 13 kat A-K (chak yon fwa).\n- Chak wonn, yon prim revele. Soumèt YON kat tankou `[Q]`, `[10]`, `[2]` …\n- Kat ki pi wo genyen prim lan (+ nenpòt pòt ki pote). Ekwalite woule prim lan nan pwochen wonn.\n- Apre 13 wonn, moun ki gen pi gwo total genyen. Deplasman invalid = eliminasyon."
+  },
+  "round": {
+    "header": "### Tou {round}/13 - Pri: {prize} (vale {worth})",
+    "hand": "Men ki rete ou: {hand}"
+  },
+  "reveal": {
+    "win": "Bid  {bids} - jwè {winner} genyen {pot}.",
+    "tie": "Bid  {bids} - mare, pot kounye a {pot}.",
+    "scores": "Nòt → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "aksyon bezwen yon kat ki nan parantès tankou \"[Q]\"",
+    "bad_card": "kat ki deja itilize oswa envalid"
+  },
+  "elimination": {
+    "player": "Jwè {pid} elimine apre repete mouvman envalid."
+  },
+  "outcome": {
+    "auto_win": "De jwè elimine - otomatikman genyen.",
+    "final": "Nòt final: {scores}"
+  }
+}

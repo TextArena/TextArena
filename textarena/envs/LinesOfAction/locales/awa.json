@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "आप खेल लाइन्सऑफएक्शन में खिलाड़ी {player_id} हउ।\nआपके टुकड़े '{side}' हउ, विरोधी के टुकड़े '{other}' हउ।\nचाल का फॉर्मेट: `[b1b3]` (पहले से दूसरे कोऑर्डिनेट तक)। एक कानूनी चाल क्षैतिज, ऊर्ध्वाधर, या तिरछे वर्गों की संख्या के बराबर चलती है जो उस रेखा में कुल टुकड़े (किसी भी रंग के) होते हैं। आप अपने स्वयं के टुकड़ों पर कूद सकते हैं, लेकिन विरोधी के टुकड़ों पर नहीं; विरोधी पर उतरने से वह पकड़ा जाता है। सभी अपने टुकड़े ८-नेबर कनेक्ट होने पर जीत होती है।"
+  },
+  "board": {
+    "current_board": "बोर्ड: {board} मा प म स ह ।"
+  },
+  "invalid_move": {
+    "wrong_format": "फ़ॉर्मेट ई 2 इ 4 (कोऑर्डिनट से,से) होना चाहिये.",
+    "no_piece": "No {side} piece on {coord}.",
+    "identical": "स्रोत अउर गंतव्य एक ही अहै।",
+    "not_straight_or_diagonal": "गति सीधे या विकर्ण मा होय चाही.",
+    "wrong_distance": "टुकड़ीन के संख्या के बराबर दूरी पर चाल चलना चाही।",
+    "enemy_blocks": "विरोधी का टुकड़ा रास्ते को अवरुद्ध करता है।",
+    "destination_own": "गंतव्य पर अपने टुकड़ी मौजूद बा।"
+  },
+  "game_action": {
+    "moved": "प्लेयर {player_id} {from} -> {to} ले गइल",
+    "captured_suffix": "प्लेयर {player_id} {from} -> {to} ले गइल जेकरा में एक दुश्मन के कब्जा कइल गइल"
+  },
+  "outcome": {
+    "win": "सभी टुकड़े जुड़े हुए हैं।",
+    "draw_no_capture": "60 चाल बिना कैप्चर के।",
+    "draw_repetition": "स्थिति का तीन बार दोहराव।"
+  }
+}

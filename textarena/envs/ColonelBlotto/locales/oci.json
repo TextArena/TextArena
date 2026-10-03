@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Sètz {role} dins Colonel Blotto.\nVòstre objectiu es de ganhar mai de torns que vòstre adversari.\nA cada torn, atribuissètz exactament {num_total_units} unitats als camps {field_names}.\nLo jogaire que atribuís mai d'unitats a un camp ganha aquel camp, e lo jogaire que ganha mai de camps ganha lo torn.\nPer exemple, '[A7 B7 C6]' atribuís 7 unitats a A, 7 a B, e 6 a C.",
+    "commander_alpha": "Comandant Alfa !",
+    "commander_beta": "Comandant Beta, lo cap de la batalha."
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Torn {current_round}/{num_rounds} ===\nTorns ganhats - Comandant Alfa: {alpha_score}, Comandant Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nTorn {current_round}\nLo Comandant Alfa a atribuït: {p0_allocations}\nLo Comandant Beta a atribuït: {p1_allocations}\n",
+    "winner_alpha": "{message}Ganhaire: Comandant Alfa",
+    "winner_beta": "{message}Ganhaire: Comandant Beta",
+    "tie": "{message}Tie! Lo jòc es acabat."
+  },
+  "invalid_move": {
+    "wrong_format": "Format d'entrada invalid. Utilizacion: A:5, B:10, C:5",
+    "invalid_field": "Nom de camp invalid (s). Camps validas: {field_names}",
+    "wrong_allocation_value": "Totas las asignacions devon èsser entièrs non negatius.",
+    "incorrect_total_units": "Devètz atribuir exactament {num_total_units} unitats. Soma actuala: {current_sum}",
+    "good_allocations": "L'assignacion es bona."
+  },
+  "outcome": {
+    "winner_alpha": "Lo Comandant Alfa ganha {score_0}-{score_1} après {num_rounds} torns!",
+    "winner_beta": "Lo Comandant Beta ganha {score_1}-{score_0} après {num_rounds} torns!",
+    "draw": "La partida s'acaba per un {score_0}-{score_1} empat après {num_rounds} torns!",
+    "early_winner_alpha": "Lo Comandant Alfa ganha {scores_0}-{scores_1} (majoritat atenguda)!",
+    "early_winner_beta": "Lo Comandant Beta ganha {scores_1}-{scores_0} (majoritat atenguda)!"
+  }
+}

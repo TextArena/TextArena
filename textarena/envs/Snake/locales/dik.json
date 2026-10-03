@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Wëër ë ŋɛn ku jɔl yɛn ë thɛɛr {width}×{height}.\nYin aya wëër ë ŋɛn {player_id}. Cɛŋ cɛ̈ wëër: '[up]'/'[down]'/'[left]'/'[right]' (kɛn a w/s/a/d).\nTiɛm ë yin: wɛ̈t lɔ ku jɔl yɛn ku bɛn ë lɔ̈k, kɛn a wëër ë lɔ̈k ku wɛ̈t tiŋ ë riɛl ku ɣɔ̈ɔ̈k (pɛ̈i ë tiŋ {max_turns} tiŋ)."
+  },
+  "board": {
+    "current": "Akutnhom de kɔc tɔ̈ thïn: {board}",
+    "after_moves": "Akutë akutnhom de kɔc tɔ̈ thïn: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Snake {player_id} acï thou në kë cenë yen lɔ̈ɔ̈m."
+  },
+  "outcome": {
+    "survived_win": "Raan ye gɔ̈ɔ̈r {player_id} acï pïïr; kɔc kɔ̈k ëbën aacï thou.",
+    "all_dead_simul": "Käpiɛny ëbën aacï thou në kaam töŋ yic.",
+    "outlived": "Raan ye kek gam acï bɛ̈n pïïr apɛi.",
+    "all_dead": "Käpiɛny ëbën aacï thou.",
+    "turn_limit": "Thëm cï bɛ̈n nhial acï thök - raan cë käŋ yök apɛi ee yen bï tiam.",
+    "ranking": "{reason} Kɛmken ë riɛl kuɛr (kɛm ë ɣɔ̈ɔ̈k → kɛm ë lɔ̈k): {groups}"
+  }
+}

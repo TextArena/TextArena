@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i Kvantum Tic Tac Toe.\nDit mærke er '{symbol}', og dine træktal er altid {parity} (f.eks. X1, X3 eller O2, O4).\n\nMål: Vind ved at danne en linje af tre klassiske mærker (solidificeret fra superpositioner).\n\nSådan spiller du:\n- På hver tur placerer du et spøgelsesmærke i to forskellige tomme kvadrater ved hjælp af formatet '[a,b]'.\n- Disse mærker er sammenfiltrede og mærkede som 'X1 / X1' eller 'O4 / O4'.\n- Du kan ikke placere spøgelsesmærker i et kvadrat, der allerede er kollapsede (solidificeret).\n\nKollapsereglen:\n- Hvis dit træk skaber en cyklus i sammenfiltringsgrafikken, kollapser det automatisk.\n- Hvert spøgelsesmærke i cyklen bliver til et klassisk mærke i en af dets to positioner.\n- Enhver afhængigt spøgelsesmærke kollapser også.\n\nSejr:\n- Spillet slutter, når en spiller har tre klassiske mærker på række.\n- Hvis begge spillere får en linje under samme kollaps, vinder den med det laveste maksimale træktal.\n\nEksempeltræk: '[0,4]' placerer et spøgelsesmærke i cellerne 0 og 4."
+  },
+  "board": {
+    "current_board": "Kvantum Tic Tac Toe-bræt:\n\n{board}\n\nIndsend dit træk som '[a,b]' for at placere et kvantummærke på to steder."
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldigt format. Brug '[a,b]'.",
+    "invalid_cells": "Ugyldige eller dubletterede celleindeks.",
+    "already_solidified": "En af cellerne er allerede solidificeret."
+  },
+  "game_action": {
+    "placed": "Spiller {player_id} har placeret deres mærke i en superposition mellem cellerne {pos_a} og {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Afhængig superposition løst. Celle ({r}, {c}) er nu {symbol}.",
+    "last_cell_resolved": "Superposition for sidste celle løst. Celle ({r}, {c}) er nu {symbol}.",
+    "superposition_resolved": "Superposition løst. Celle ({r}, {c}) er nu {symbol}."
+  },
+  "outcome": {
+    "win": "Spiller {player_id} vinder med solidificerede mærker!",
+    "draw": "Spillet er uafgjort!"
+  }
+}

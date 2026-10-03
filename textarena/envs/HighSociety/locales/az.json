@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Siz HighSociety (2 oyunçu versiyası) oyununda Oyunçu {player_id}-siniz.\nOyun axını: On prestij kartı bir-birinin ardınca auksiona çıxarılır.\nTəklif vermə: Hər auksionda, gizli şəkildə 1-11 arasında pul kartı seçin və açıqlayın.\n            • Daha yüksək təklif prestij kartını qazanır və həmin pul kartını atır.\n            • Daha aşağı təklif pul kartını saxlayır.\n            • Berabərlik -> hər iki təklif geri qaytarılır və eyni prestij kartı yenidən auksiona çıxarılır.\nHesablaşma:    Bütün on auksiondan sonra, **qalan pul + prestij xalları** əlavə edin.\n            Yüksək *net-dəyər* qazanır (dəqiq berabərlik -> heç-heçə).\n\n**Hərəkət sintaksisi**  →  tək kart kimi '[7]' və ya '[11]' təklif edin."
+  },
+  "auction": {
+    "announce": "\n### Auksion {round}/10  |  Prestij kartı: {prize}"
+  },
+  "board": {
+    "money_cards": "Qalan pul kartlarınız: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Dəqiq bir [X] pul kartı daxil edilməlidir.",
+    "card_not_held": "Artıq o pul kartınız yoxdur."
+  },
+  "message": {
+    "tie": "Berabərlik - təkliflər geri qaytarıldı. Yenidən təklif edin!",
+    "auction_result": "P0 {bid0} təklif etdi, P1 {bid1} təklif etdi. Oyunçu {winner} prestij {prize} qazandı (cəmi {total})."
+  },
+  "outcome": {
+    "p0_wins": "Net-dəyər {nw0} > {nw1}",
+    "p1_wins": "Net-dəyər {nw1} > {nw0}",
+    "draw": "Hər iki net-dəyər {nw0} – dəqiq berabərlik."
+  }
+}

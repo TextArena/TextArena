@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "你正在解决 Sokoban 谜题。你是玩家，需要将所有箱子推到目标位置。\n        当你紧挨着一个箱子时，可以通过朝同一方向移动来推动它。\n        你不能把箱子推过墙，也不能拉动箱子。\n        棋盘上的物体表示如下： \n        - 玩家（你）显示为 'P' \n        - 墙壁用 '#' 表示 \n        - 箱子用 'X' 标记 \n        - 空目标位置用 'O' 表示\n        - 位于目标上的箱子用 '√' 表示\n        你也可以使用 [w] 向上、[a] 向左、[s] 向下、[d] 向右。\n        "
+  },
+  "board": {
+    "current_board": "当前棋盘：\n\n{board}\n可用移动：{moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "提交的移动格式不正确。请使用 [up]、[down]、[left]、[right] 或 [w]、[a]、[s]、[d]。",
+    "not_valid_action": "提交的移动不是有效操作。",
+    "wall_collision": "你不能移动到墙里！",
+    "invalid_position": "无效移动——无法移动到该位置。"
+  },
+  "game_message": {
+    "moved": "你{pushed}移动了 [{action}]。",
+    "pushed_prefix": "推箱子的同时"
+  },
+  "outcome": {
+    "win": "恭喜！你已解开 Sokoban 谜题！",
+    "turn_limit": "已达到回合上限。你未能解开谜题。"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Leikurinn hefst. Trump súíta: {trump_suit} (trump kort: {trump_str}).",
+    "no_trump_card": "ekkert"
+  },
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í Þýskum Whist.\n{phase_info}\nÞú heldur {hand_size} kortum.\nSpilaðu kort með '[play N]', þar sem N er staða þess í höndinni þinni (t.d. '[play 3]').",
+    "phase_learning": "NÁMSFASA: sigurvegari hverrar leikja tekur upp kortið og tapari dregur næsta kort úr safninu. Leikir unnir í þessari fasu telja ekki með í sigur.",
+    "phase_playing": "LEIKFASA: safnið er tómt. Hver leikur frá nú í framtíðinni telur með í sigur."
+  },
+  "next_card": {
+    "playing_phase": "Ekkert kort er í boði - leikfasan hefst.",
+    "deck_empty": "Safnið er tómt - ekkert kort er í boði.",
+    "available": "Kort í boði: {card}",
+    "available_trump": "Kort í boði: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Rangt snið fyrir leik. Notaðu '[play N]' til að spila N-ta kortið í höndinni þinni.",
+    "bad_position": "Það kortastaða er ekki til. Þú heldur {hand_size} kortum.",
+    "must_follow_suit": "Þú verður að fylgja súítu og spila {lead_suit} kort.",
+    "invalid_play": "Það kort má ekki vera spilað."
+  },
+  "game_action": {
+    "played": "Leikmaður {player_id} spilaði {card}."
+  },
+  "trick": {
+    "won": "Leikmaður {winner_id} vinnur leikinn með {card}.",
+    "won_learning": "Leikmaður {winner_id} vinnur leikinn með {card} og tekur upp kortið."
+  },
+  "phase": {
+    "learning_complete": "Safnið er tómt. Námsfasan er lokið - hver eftirstandandi leikur telur með í sigur."
+  },
+  "draw": {
+    "winner_received": "Þú vannst leikinn og fékkst {card}.",
+    "loser_received": "Þú tapaðir leikinn og drógst {card} úr safninu.",
+    "winner_preview": "Næsta kort í boði er {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Leikir unnir hingað til - Leikmaður 0: {tricks0}, Leikmaður 1: {tricks1}",
+    "scores_playing": "Leikir sem telja með í sigur - Leikmaður 0: {tricks0}, Leikmaður 1: {tricks1}",
+    "phase": "Fasa: {phase}",
+    "phase_learning": "Fasa: {phase} ({remaining_cards} kort eftir í safninu)"
+  },
+  "hand": {
+    "no_cards": "Ekkert kort",
+    "no_cards_in_hand": "Ekkert kort í hönd",
+    "header": "Höndin þín:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Ekkert kort spilað ennþá í þessum leik.",
+    "header": "Núverandi leikur:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Leikmaður {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Leikurinn hefur ekki hafist",
+    "header": "=== ÞÝSKUR WHIST LEIKUR ===",
+    "phase": "{observation}\nFasa: {phase}",
+    "trump_suit": "{observation}\nTrump súíta: {trump_suit}",
+    "trump_card": "{observation}\nTrump kort: {card}",
+    "cards_left": "{observation}\nKort eftir í safninu: {count}",
+    "next_card": "{observation}\nNæsta kort fyrir sigurvegara: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nNúverandi leikur:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Leikmaður {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nLeikmaður {player_id}: {scoring} leikir sem telja með í sigur ({tricks} alls), {hand_size} kort í hönd"
+  },
+  "outcome": {
+    "summary": "Námsfasa - Leikmaður 0: {l0}, Leikmaður 1: {l1}. Leikfasa - Leikmaður 0: {p0}, Leikmaður 1: {p1}. Leikmaður {winner_id} vinnur með {winner_tricks} leikum sem telja með í sigur!"
+  }
+}

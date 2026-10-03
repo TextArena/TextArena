@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "آپ انڈین پوکر کے کھیل میں کھلاڑی {player_id} ہیں۔\n- 52 کارڈ کا ڈیک؛ آپ صرف مخالف کا کارڈ دیکھتے ہیں۔\n- ہر راؤنڈ میں {ante} چپ (ز) اینٹی، کل {max_rounds} راؤنڈز۔\n- درست چالیں: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ایک مثبت عدد ہے جو آپ کے چپ کاؤنٹ سے کم یا برابر ہے۔)\n- شو ڈاؤن پر سب سے زیادہ چھپا ہوا کارڈ پاٹ جیتتا ہے۔\n"
+  },
+  "round": {
+    "announce": "### راؤنڈ {current_round}/{max_rounds}\nآپ کے مخالف کا کارڈ ہے: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "ایک ہی بریکٹڈ ایکشن فراہم کریں، جیسے '[check]', '[bet 2]', '[call]', '[raise 3]', یا '[fold]'۔",
+    "cannot_check": "نہیں کر سکتے [check] - آپ ایک شرط کا سامنا کر رہے ہیں۔",
+    "amount_min": "شرط / بڑھانے کی رقم ≥ 1 ہونی چاہیے۔",
+    "cannot_bet": "نہیں کر سکتے [bet] - ضروری ہے [call] / [raise] / [fold]۔",
+    "nothing_to_call": "کچھ بھی نہیں ہے کہ آپ [check] کر سکتے ہیں۔",
+    "no_bet_to_raise": "کھولنے کے لیے [bet X] استعمال کریں؛ کوئی شرط نہیں ہے جسے بڑھایا جا سکے۔",
+    "insufficient": "اس ایکشن کے لیے کافی چپ نہیں ہیں۔"
+  },
+  "game_action": {
+    "action": "کھلاڑی {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (لاگت {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "آپ کی ممکنہ چالیں: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  پاٹ {pot} → کھلاڑی {winner}۔ (بینک رولز P0:{p0}, P1:{p1})",
+    "folded": "کھلاڑی {player_id} نے ہتھیار ڈال دیئے۔",
+    "showdown_win": "شو ڈاؤن: {card_win} {card_lose} کو ہرا دیتا ہے۔",
+    "showdown_tie": "شو ڈاؤن ٹائی: دونوں {card}۔ پاٹ تقسیم - ہر ایک کو {split} ملتا ہے۔"
+  },
+  "outcome": {
+    "p0_wins": "کھلاڑی 0 جیتتا ہے ({bank0} > {bank1})",
+    "p1_wins": "کھلاڑی 1 جیتتا ہے ({bank1} > {bank0})",
+    "draw": "تمام راؤنڈز کے بعد برابر چپ"
+  }
+}

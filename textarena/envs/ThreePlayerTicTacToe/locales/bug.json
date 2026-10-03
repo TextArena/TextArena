@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Riolo nuwiwi {player_id} ri Three-Player Tic Tac Toe.\nSimbolu nuwiwi ri '{symbol}'.\nRiolo nuwiwi mappasili simbolu nuwiwi ri papan 5x5 makkala liné empa.\nLiné éréngé horizontal, vertical, atawa diagonal.\nSérékka gau nuwiwi ri format '[4]' makkala cell 4."
+  },
+  "board": {
+    "current_board": "Papan Kini:\n\n{board}\n\nGau Makkala: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format appelleengeng de'na valid. Pakkegunai \"[cell]\" ri onrong sel e iyanaritu 0-{max_cell}.",
+    "out_of_range": "Cell nuwiwi salah: {cell}. Makkala riolo antara 0 sié {max_cell}.",
+    "already_occupied": "Sel {cell} pura riakkegunangi.",
+    "made_invalid": "Pelainang {player_id} makkebbu gerakang de'na magello."
+  },
+  "game_action": {
+    "placed": "Riolo {player_id} mappasili simbolu nuwiwi ({symbol}) ri tanété ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Riolo {player_id} ({symbol}) menanga!",
+    "draw": "Pelengenna padai!"
+  }
+}

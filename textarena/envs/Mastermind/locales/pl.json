@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Grając w Mastermind, musisz odgadnąć kod o długości {code_length} cyfr, każda cyfra od 1 do {num_numbers}, {repeats}.\nW swojej odpowiedzi możesz podać swoje przypuszczenie w następującym formacie: '[2 1 4 5]'.\nPo każdym przypuszczeniu otrzymasz informację zwrotną w postaci czarnych i białych kołków.\nCzarny kołek oznacza poprawną cyfrę w poprawnej pozycji, natomiast biały kołek oznacza poprawną cyfrę w złej pozycji.\nMasz {max_turns} tur, aby odgadnąć kod.\n",
+    "with_repeats": "z możliwymi powtórzeniami",
+    "no_duplicates": "bez duplikatów"
+  },
+  "invalid_move": {
+    "wrong_format": "Nie odpowiedziałeś listą liczb oddzielonych spacjami, zawartą w nawiasach kwadratowych.",
+    "not_integers": "Wszystkie wpisy muszą być ważnymi liczbami całkowitymi.",
+    "wrong_length": "Przypuszczenie powinno zawierać dokładnie {code_length} liczb.",
+    "out_of_range": "Wszystkie liczby muszą być między 1 a {num_numbers}.",
+    "duplicates_not_allowed": "Duplikaty liczb nie są dozwolone.",
+    "repeated_guess": "Już wcześniej zgadywałeś {guess}. Proszę spróbuj innego przypuszczenia."
+  },
+  "game_action": {
+    "feedback": "Przesłano [{guess}]. Informacja zwrotna: {black_pegs} czarny(ch) kołek(ów), {white_pegs} biały(ch) kołek(ów)."
+  },
+  "outcome": {
+    "win": "Rozgryzłeś kod, rozwiązując {black_pegs} z {code_length} kołków poprawnie",
+    "turn_limit": "Osiągnięto limit tur. Odgadłeś {percent} procent liczb poprawnie."
+  }
+}

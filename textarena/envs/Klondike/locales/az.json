@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire yerli faylı. Açarları (sol tərəf) tərcümə etməyin. Yalnız dəyərləri (sağ tərəf) tərcümə edin.",
+  "_slots": {
+    "{n}": "Vergül ilə ayrılmış komandadakı hərəkət indeksi, 1-əsaslı",
+    "{msg}": "Hərəkətə aid yerli nəticə mesajı (artıq yerliləşdirilib)",
+    "{count}": "Üzü-açıq kartların sayı",
+    "{src}": "Mənbə tableau yığınının nömrəsi, 1-əsaslı",
+    "{dst}": "Hədəf yığınının nömrəsi, 1-əsaslı",
+    "{cmd}": "Oyunçunun daxil etdiyi naməlum komanda (tərcümə olunmur)",
+    "{max_turns}": "Oyunun bitməsinə qədər maksimum gediş sayı",
+    "{score}": "Hal-hazırda əsas yığınlarda olan kartların sayı",
+    "{board}": "Render edilmiş ASCII lövhəsi (heç vaxt tərcümə olunmur)",
+    "{turn}": "Cari gedişin nömrəsi",
+    "{stock}": "Stokda qalan kartların sayı",
+    "{waste}": "Zibil yığınının üst kartının etiketi, və ya boşsa '--' (heç vaxt tərcümə olunmur)",
+    "{cards}": "Yığındakı kartlar bitərəf etiketlər kimi, və ya boşsa '--' (heç vaxt tərcümə olunmur)"
+  },
+  "player_prompt": {
+    "intro": "Siz Klondike Solitaire oynuyorsunuz. Hədəfiniz bütün kartları əsas yığınlara köçürməkdir.\n\nOyun Qaydaları:\n- Əsas yığınlarda (F1-F4): Ace-dən King-ə qədər eyni rəngdə qurun\n- Tableau yığınlarda (T1-T7): Rəngləri növbə ilə dəyişərək aşağıya qurun (qırmızı qara üzərində, qara qırmızı üzərində)\n- Stok: Kartları zibil yığınına çəkin\n- Zibil (W): Üst kart oynamaq üçün mövcuddur\n\nKomandalar:\n- 'draw' - Stokdan kartları zibil yığınına çəkin\n- 'move <mənbə> <hədəf> [say]' - Kartları yığınlar arasında köçürün\n  Nümunələr: 'move W T1', 'move T1 F2', 'move T3 T5 2'. say həm də 'all' ola bilər, bu bütün üzü-açıq kartları köçürməyə çalışacaq.\n- 'forfeit' - Oyunu dərhal bitirin və cari hesabınızı qıfıllayın\n- Yığın adları: W (zibil), F1-F4 (əsas yığınlarda), T1-T7 (tableau)\n\nSiz bir gedişdə vergül ilə ayıraraq bir neçə hərəkət edə bilərsiniz:\n  Nümunə: 'draw, move W T1, move T2 F1'\n\nYalnız Kral kartları boş tableau yığınlara qoyula bilər.\nHərəkətlər sıra ilə yerinə yetirilir - əgər biri uğursuz olsa, qalan hərəkətlər atlanır.\nOyunu qazanmağın mümkün olmadığını düşünürsünüzsə, 'forfeit' istifadə edin."
+  },
+  "format_error": {
+    "no_brackets": "Yanlış hərəkət formatı. Hərəkət mötərizədə olmalıdır.",
+    "no_closing_bracket": "Yanlış hərəkət formatı. Bağlayıcı mötərizə ']' çatışmır",
+    "empty_command": "Boş komanda. 'draw' və ya 'move <mənbə> <hədəf> [say]' daxil edin",
+    "empty_action": "Boş hərəkət",
+    "move_needs_args": "Move komandası mənbə və hədəf tələb edir. İstifadə: 'move <mənbə> <hədəf> [say]'",
+    "count_positive": "Say müsbət və ya 'all' olmalıdır",
+    "count_invalid": "Yanlış say. Bir ədəd və ya 'all' istifadə edin",
+    "unknown_command": "Naməlum komanda '{cmd}'. 'draw', 'move <mənbə> <hədəf> [say]', və ya 'forfeit' istifadə edin",
+    "wrapped": "Hərəkət {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Hərəkət {n}: {msg}",
+    "before_failure": "{n} hərəkət(lər) uğursuzluqdan əvvəl yerinə yetirildi.",
+    "failed": "Hərəkət {n} uğursuz oldu: {msg}"
+  },
+  "move_result": {
+    "drew": "Stokdan kart(lar) zibil yığınına çəkildi.",
+    "cannot_draw": "Çəkmək mümkün deyil. Həm stok, həm də zibil yığını boşdur.",
+    "invalid_pile": "Yanlış yığın adı. W, F1-F4, və ya T1-T7 istifadə edin",
+    "foundation_one_card": "Əsas yığınlara yalnız 1 kart köçürülə bilər",
+    "waste_to_foundation_ok": "Kart zibil yığınından əsas yığını F{dst}-ə köçürüldü",
+    "waste_to_foundation_bad": "Zibil kartı o əsas yığınına köçürülə bilməz",
+    "tableau_to_foundation_ok": "Kart tableau T{src}-dən əsas yığını F{dst}-ə köçürüldü",
+    "tableau_to_foundation_bad": "Tableau kartı o əsas yığınına köçürülə bilməz",
+    "foundation_to_foundation": "Əsas yığınlardan əsas yığınlara köçürmək mümkün deyil",
+    "waste_to_tableau_one_card": "Zibil yığınından tableau-ya yalnız 1 kart köçürülə bilər",
+    "waste_to_tableau_ok": "Kart zibil yığınından tableau T{dst}-ə köçürüldü",
+    "waste_to_tableau_bad": "Zibil kartı o tableau yığınına qoyula bilməz",
+    "no_face_up": "Üzü-açıq kart yoxdur",
+    "tableau_to_tableau_ok": "{count} kart(lar) tableau T{src}-dən T{dst}-ə köçürüldü",
+    "tableau_to_tableau_bad": "{count} kart(lar) T{src}-dən T{dst}-ə köçürülə bilməz",
+    "foundation_to_tableau_one_card": "Əsas yığınlardan tableau-ya yalnız 1 kart köçürülə bilər",
+    "foundation_empty": "Əsas yığını F{src} boşdur",
+    "foundation_to_tableau_ok": "Kart əsas yığını F{src}-dən tableau T{dst}-ə köçürüldü",
+    "foundation_to_tableau_bad": "Əsas kart tableau T{dst}-ə qoyula bilməz",
+    "to_waste_or_stock": "Zibil və ya stok yığınlara köçürmək mümkün deyil"
+  },
+  "outcome": {
+    "forfeit": "Oyun tərk edildi. Son hesab: {score} kart əsas yığınlarda.",
+    "won": "Təbrik edirik! Siz Klondike Solitaire-i qazandınız!",
+    "turn_limit": "Oyun bitdi! Siz maksimum {max_turns} gedişə çatdınız. Hesab: {score} kart əsas yığınlarda."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Gediş: {turn}/{max_turns}",
+    "stock": "Stok: {stock} kart",
+    "waste": "Zibil (W): {waste}",
+    "foundations_header": "Əsas yığınlarda:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

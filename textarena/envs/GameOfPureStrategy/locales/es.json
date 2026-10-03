@@ -1,0 +1,32 @@
+{
+  "player_prompt": {
+    "intro": "Eres el jugador {player_id} en una partida de GameOfPureStrategy.\n- Tienes las 13 cartas de la A a la K; cada una puede utilizarse una sola vez.\n- En cada ronda se revela una carta de premio. Juega exactamente UNA carta escribiendo algo que contenga una ficha entre corchetes, como '[Q]', '[10]', '[2]' ...\n- La carta más alta gana el premio, además del bote acumulado. En caso de empate, el premio pasa al bote de la siguiente ronda.\n- Gana quien tenga la puntuación total más alta después de 13 rondas."
+  },
+
+  "round": {
+    "announce": "### Ronda {round}/13 - Premio: {prize}  (valor {worth})"
+  },
+
+  "board": {
+    "hand": "Tu mano restante: {hand}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "La acción debe contener exactamente UNA ficha de carta entre corchetes.",
+    "card_not_held": "Ya no tienes esa carta."
+  },
+
+  "message": {
+    "bids": "Jugadas: J0 {card0} contra J1 {card1} - ",
+    "p0_wins": "{observation}El jugador 0 gana {pot_value}.",
+    "p1_wins": "{observation}El jugador 1 gana {pot_value}.",
+    "tie": "{observation}Empate -> el bote ahora es de {carry_pot}.",
+    "scores": "Puntuaciones -> J0:{score0}  J1:{score1}"
+  },
+
+  "outcome": {
+    "p0_wins": "J0 {s0} contra J1 {s1}",
+    "p1_wins": "J1 {s1} contra J0 {s0}",
+    "draw": "Ambos obtuvieron {s0}"
+  }
+}

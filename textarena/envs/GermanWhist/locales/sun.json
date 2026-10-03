@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Pémainan dimimitian. Jenis truf: {trump_suit} (kartu truf: {trump_str}).",
+    "no_trump_card": "teu aya"
+  },
+  "player_prompt": {
+    "intro": "Anjeun Pamaén {player_id} dina Jérman Whist.\n{phase_info}\nAnjeun boga {hand_size} kartu.\nMainkeun kartu kalawan '[play N]', di mana N mangrupa posisi kartu dina leungeun anjeun (contona '[play 3]').",
+    "phase_learning": "FASE PELAJARAN: nu meunang unggal trik nyokot kartu nyanghareup jeung loser draws kartu saterusna ti dek. Trik won dina fase ieu teu cacah arah kameunangan.",
+    "phase_playing": "FASE PELUANG: dek geus dihabiskeun. Unggal trik ti ayeuna ka hareup bakal ngahasilkeun kameunangan."
+  },
+  "next_card": {
+    "playing_phase": "Teu aya kartu anu ditawarkeun - fase maén parantos dimimitian.",
+    "deck_empty": "Dekna kosong - teu aya kartu anu ditawarkeun.",
+    "available": "Kartu dina tawaran: {card}",
+    "available_trump": "Kartu dina tawaran: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Format move anu teu valid. Paké '[play N]' pikeun maénkeun kartu Nth dina leungeun anjeun.",
+    "bad_position": "Posisi kartu éta henteu aya. Anjeun nyekel {hand_size} kartu.",
+    "must_follow_suit": "Anjeun kudu nuturkeun conto jeung maénkeun kartu {lead_suit}.",
+    "invalid_play": "Kartu nu teu bisa diputer."
+  },
+  "game_action": {
+    "played": "Pamaén {player_id} maénkeun {card}."
+  },
+  "trick": {
+    "won": "Pamaén {winner_id} meunang trik jeung {card}.",
+    "won_learning": "Pamaén {winner_id} meunang trik kalawan {card} jeung ngambil kartu nu bolak."
+  },
+  "phase": {
+    "learning_complete": "Dek geus réngsé. Fase diajarna parantos tamat - unggal trik anu tetep diitung pikeun meunangkeun kameunangan."
+  },
+  "draw": {
+    "winner_received": "Anjeun meunang trik jeung narima {card}.",
+    "loser_received": "Anjeun kaleungitan trik jeung narik {card} ti dek.",
+    "winner_preview": "Kartu saterusna anu ditawarkeun nyaéta {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Trik nu geus dimenangkeun - Pamaén 0: {tricks0}, Pamaén 1: {tricks1}",
+    "scores_playing": "Trik nu ngasah - Pamaén 0: {tricks0}, Pamaén 1: {tricks1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Fase: {phase} ({remaining_cards} kartu nu tinggal dina dék)"
+  },
+  "hand": {
+    "no_cards": "Teu aya kartu.",
+    "no_cards_in_hand": "Teu aya kartu di leungeun.",
+    "header": "Leungeun anjeun:",
+    "trump_indicator": "(TRUMP) Dina taun-taun ka tukang,",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Teu kartu dicoo acan trik ieu.",
+    "header": "Trik ayeuna:",
+    "trump_indicator": "(TRUMP) Dina taun-taun ka tukang,",
+    "card_line": "{observation}\n  Pamaén {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Kaulinan teu dimimitian",
+    "header": "=== Kaulinan German Whist ===",
+    "phase": "{observation}\nFase: {phase}",
+    "trump_suit": "{observation}\nJenis truf: {trump_suit}",
+    "trump_card": "{observation}\nKartu truf: {card}",
+    "cards_left": "{observation}\nKartu nu tinggal dina dék: {count}",
+    "next_card": "{observation}\nKartu nu bakal keur pemenang: {card}",
+    "blank": "{observation}  anu dihasilkeun ku:",
+    "current_trick": "{observation} Trik ayeuna:",
+    "trump_indicator": "(TRUMP) Dina taun-taun ka tukang,",
+    "trick_line": "{observation}\n  Pamaén {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPamaén {player_id}: {scoring} nilai trik ({tricks} total), {hand_size} kartu di leungeun"
+  },
+  "outcome": {
+    "summary": "Fase pembelajaran - Pamaén 0: {l0}, Pamaén 1: {l1}. Fase pémainan - Pamaén 0: {p0}, Pamaén 1: {p1}. Pamaén {winner_id} meunang dengan {winner_tricks} nilai trik!"
+  }
+}

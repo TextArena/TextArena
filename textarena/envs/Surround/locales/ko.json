@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround 지역화 파일. 키(왼쪽)는 번역하지 마세요. 값(오른쪽)만 번역하세요. 모든 {placeholder}는 그대로 유지하세요. 플레이어가 입력하는 이동/방향 토큰([up], [down], [left], [right], w, s, a, d)이나 {board}에 렌더링된 ASCII 보드는 번역하지 마세요.",
+  "_slots": {
+    "{num_players}": "매치에 참여하는 플레이어 수",
+    "{width}": "보드의 너비(셀 단위)",
+    "{height}": "보드의 높이(셀 단위)",
+    "{player_id}": "플레이어 번호(0부터 시작)",
+    "{board}": "렌더링된 ASCII 그리드; 중립적으로 유지, 문자 번역 금지",
+    "{reason}": "게임 종료 이유 문구",
+    "{groups}": "중립적인 순위 데이터(플레이어 ID 그룹 목록, 최고에서 최저 순); 번역 금지"
+  },
+  "player_prompt": {
+    "intro": "{num_players}명 플레이어 Surround, {width}x{height} 그리드에서 진행됩니다.\n당신은 플레이어 {player_id}입니다. 유효한 이동: '[up]' '[down]' '[left]' '[right]' 또는 w/s/a/d.\n목표: 다른 모든 플레이어보다 오래 생존하세요. 흔적은 치명적이고, 벽에 부딪히거나 정면 충돌은 모두 사망합니다."
+  },
+  "board": {
+    "current": "현재 보드:\n{board}",
+    "after_moves": "동시 이동 후 보드:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "플레이어 {player_id}가 유효하지 않은 이동으로 사망했습니다."
+  },
+  "outcome": {
+    "survived_win": "플레이어 {player_id}가 생존; 모든 다른 플레이어가 충돌했습니다.",
+    "all_crashed": "모든 플레이어가 동시에 충돌했습니다.",
+    "outlived": "플레이어가 모든 다른 플레이어보다 오래 생존했습니다.",
+    "all_dead": "모든 플레이어가 사망했습니다.",
+    "turn_limit": "턴 제한 도달 - 가장 오래 생존한 플레이어가 승리합니다.",
+    "ranking": "{reason} 최종 순위 그룹(최고→최저): {groups}"
+  }
+}

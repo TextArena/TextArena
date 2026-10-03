@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos egy {max_rounds} körös Kuhn Poker játékban.\nJátékszabályok:\n- A Kuhn Poker egy 3 lapos paklit használ J, Q, K lapokkal (J a legalacsonyabb, K a legmagasabb)\n- Minden játékos {ante} zsetont tesz be, és minden körben 1 lapot kap (figyelembe véve, hogy a lapokat pótlás nélkül osztják, így nem lehet ugyanaz a lap, mint az ellenfélnek).\n- A játék {max_rounds} körig tart\n- A legtöbb zsetonnal rendelkező játékos nyer a körök végén\nAkciószabályok:\n- '[check]': Passzolás téttel (csak akkor, ha nincs tét az asztalon)\n- '[bet]': 1 zseton hozzáadása a bankhoz (csak akkor, ha nincs tét az asztalon)\n- '[call]': Az ellenfél tétjének megfelelő 1 zseton hozzáadása a bankhoz\n- '[fold]': A kéz feladása és az ellenfél győzelme"
+  },
+  "init_round": {
+    "round_start": "### A {current_round}. kör kezdete a {max_rounds} körből. A lapja: '{player_card}'",
+    "available_actions": "Az elérhető akciói: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Az akciónak [Check], [Bet], [Call] vagy [Fold] kell lennie.",
+    "not_legal": "Az akciónak {legal_actions} kell lennie."
+  },
+  "action": {
+    "submit_move": "{player_id}. játékos, beküldött akció: '[{move}]'.",
+    "valid_actions": "Az elérhető akciói: {legal_actions}.",
+    "round_summary": "{reason} Aktuális pontszámok: 0. játékos: '{player_0_chips}'; 1. játékos: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Leszámolás: A {winner}. játékos {winner_card} lapja veri a {loser}. játékos {loser_card} lapját. A {winner}. játékos nyer {pot_value} zsetont."
+  },
+  "outcome": {
+    "draw": "A {max_rounds} kör végén mindkét játékos ugyanannyi zsetonnal rendelkezett.",
+    "round_win": "A {player_id}. játékos feladta.",
+    "winner_player0": "A 0. játékos nyert, mert több zsetonnal rendelkezett a {max_rounds} kör végén.",
+    "winner_player1": "Az 1. játékos nyert, mert több zsetonnal rendelkezett a {max_rounds} kör végén."
+  }
+}

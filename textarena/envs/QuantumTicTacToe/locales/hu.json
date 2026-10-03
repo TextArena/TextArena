@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a Kvantum Tic Tac Toe-ban.\nAz Ön jele '{symbol}', és a lépésszámok mindig {parity} (pl. X1, X3 vagy O2, O4).\n\nCél: Nyerjen egy sor három klasszikus jelet (szilárdult szuperpozíciókból) alkotva.\n\nHogyan játsszunk:\n- Minden körben helyezzen el egy kísérteties jelet két különböző üres négyzetben a '[a,b]' formátumban.\n- Ezek a jelek összefonódnak, és címkézve vannak, mint 'X1 / X1' vagy 'O4 / O4'.\n- Nem helyezhet el kísérteties jelet olyan négyzetben, amely már összeomlott (szilárdult).\n\nÖsszeomlás szabály:\n- Ha a lépése ciklust hoz létre az összefonódási gráfban, akkor automatikusan összeomlik.\n- A ciklusban lévő minden kísérteties jel klasszikus jellé válik az egyik pozíciójában.\n- Bármely függő kísérteties jel is összeomlik.\n\nGyőzelem:\n- A játék akkor ér véget, ha egy játékosnak három klasszikus jele van sorban.\n- Ha mindkét játékos sorban van ugyanabban az összeomlásban, akkor a kisebb maximális lépésszámú játékos nyer.\n\nPélda lépés: '[0,4]' kísérteties jelet helyez el a 0. és 4. cellában."
+  },
+  "board": {
+    "current_board": "Kvantum Tic Tac Toe Tábla:\n\n{board}\n\nKüldje el a lépését '[a,b]' formátumban, hogy kvantumjelet helyezzen el két helyen."
+  },
+  "invalid_move": {
+    "wrong_format": "Érvénytelen formátum. Használja a '[a,b]' formátumot.",
+    "invalid_cells": "Érvénytelen vagy ismétlődő cella indexek.",
+    "already_solidified": "Az egyik cella már szilárdult."
+  },
+  "game_action": {
+    "placed": "A {player_id}. játékos szimbólumát szuperpozícióban helyezte el a {pos_a} és {pos_b} cellák között."
+  },
+  "game_message": {
+    "dependent_resolved": "Függő szuperpozíció feloldva. A ({r}, {c}) cella most {symbol}.",
+    "last_cell_resolved": "Szuperpozíció feloldva az utolsó cellában. A ({r}, {c}) cella most {symbol}.",
+    "superposition_resolved": "Szuperpozíció feloldva. A ({r}, {c}) cella most {symbol}."
+  },
+  "outcome": {
+    "win": "A {player_id}. játékos nyer szilárdult jelekkel!",
+    "draw": "A játék döntetlen!"
+  }
+}

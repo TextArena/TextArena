@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "Sei in una stanza con {num_buttons} pulsanti: {buttons}. Ogni pulsante è associato a una distribuzione di Bernoulli con una media fissa ma sconosciuta; le medie per i pulsanti potrebbero essere diverse.\nPer ogni pulsante, quando lo premi, riceverai una ricompensa campionata dalla distribuzione associata.\nHai {num_turns} passaggi temporali e, in ogni passaggio, puoi scegliere qualsiasi pulsante e ricevere la ricompensa.\nIl tuo obiettivo è scegliere strategicamente i pulsanti in ogni passaggio per raccogliere informazioni sulla loro distribuzione di ricompensa, che ti permetterà di scegliere il pulsante con la ricompensa media più alta correttamente alla fine di {num_turns} turni."
+  },
+  "board": {
+    "stat_line": "{button}: {reward} (giocato {count} volte)",
+    "summary": "Riepilogo:\n{stats}"
+  },
+  "invalid_move": {
+    "wrong_format": "Il giocatore non ha risposto con un formato di azione valido.",
+    "invalid_button": "È stato selezionato un pulsante non valido."
+  },
+  "game_action": {
+    "pressed": "Hai premuto il pulsante {button} e hai ricevuto una ricompensa di {reward}."
+  },
+  "game_message": {
+    "final_decision": "Hai esaurito il tuo budget per provare diverse scelte e osservare le loro ricompense. Ora fai una deduzione su quale sia la scelta migliore."
+  },
+  "outcome": {
+    "win": "Congratulazioni! Hai scelto il pulsante corretto.",
+    "lose": "Hai scelto un pulsante errato."
+  }
+}

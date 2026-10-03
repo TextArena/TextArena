@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Igrate številko v igri Countdown!\nCilj: Kombinirajte številke z uporabo +, -, *, /, da dosežete cilj.\nFormat dejanja: [i j op], kjer sta i, j indeksa, op pa je operacija.\nPrimer: [0 2 *] pomnoži številko na indeksu 0 s številko na indeksu 2.\nDeljenje mora dati samo cela števila."
+  },
+  "board": {
+    "header": "CILJ: {target}\n\nRazpoložljive številke:\n{numbers}",
+    "best": "{observation}\n\nNajboljši rezultat doslej: {best_value} (razdalja: {distance})\nNajboljši izraz: {best_expression}",
+    "history": "{observation}\n\nZgodovina potez:\n{moves}",
+    "progress": "{observation}\nTrenutni napredek: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neveljaven format dejanja. Uporabite `[i j op]`, kjer sta i, j indeksa, op pa je +, -, *, /",
+    "invalid_indices": "Neveljavni indeksi. Mora biti različna in v razponu 0-{max_index}",
+    "invalid_operation": "Neveljavna operacija (deljenje z nič ali rezultat, ki ni celo število)"
+  },
+  "outcome": {
+    "win": "Popolno! Našli ste točen cilj: {target}",
+    "no_moves": "Ni več potez. Najboljši rezultat: {best_value} (cilj: {target})",
+    "turn_limit": "Dosežen je limit potez. Najboljši rezultat: {best_value} (cilj: {target})"
+  }
+}

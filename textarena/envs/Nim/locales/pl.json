@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w Nim.\nTwoim celem jest wzięcie ostatniego pozostałego obiektu.\nW każdej turze wybierz dokładnie jedną kupkę i usuń z niej jeden lub więcej obiektów.\nUżyj formatu '[kupka ilość]', gdzie kupka to indeks kupki, a ilość to liczba obiektów do usunięcia.\nNa przykład, '[0 3]' usuwa 3 obiekty z kupki 0."
+  },
+  "state": {
+    "current_pile": "Aktualna kupka:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nie znaleziono poprawnego formatu ruchu. Użyj '[kupka ilość]'.",
+    "correct_format_wrong_fields": "Gracz {player_id}, Nieprawidłowa akcja. Kolumna {col} jest poza granicami.",
+    "out_of_range": "Indeks kupki {pile_index} jest poza zakresem.",
+    "non_positive": "Musisz usunąć co najmniej 1 obiekt.",
+    "exceeds_pile": "Nie można usunąć {quantity} z kupki {pile_index} (tylko {pile_count} pozostało)."
+  },
+  "observation": {
+    "removed_from_piles": "Gracz {player_id} zagrał [{pile_index} {quantity}], usuwając {quantity} obiekt(ów) z kupki {pile_index}."
+  },
+  "outcome": {
+    "win": "Gracz {player_id} wziął ostatni obiekt(y)!"
+  }
+}

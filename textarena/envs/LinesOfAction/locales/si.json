@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "ඔබ LinesOfAction ක්‍රීඩාවේ ක්‍රීඩක {player_id} වෙනුවෙන් ක්‍රීඩා කරන්නෙහි.\nඔබගේ කොටස් '{side}' වශයෙන් ද, ප්‍රතිවාදි කොටස් '{other}' වශයෙන් ද දැක්වේ.\nගමන් ආකෘතිය: `[b1b3]` (ආරම්භ ඛණ්ඩාංකය සිට අවසාන ඛණ්ඩාංකය දක්වා). නීතිමය ගමනක් අදාළ රේඛාවේ මුළු කොටස් සංඛ්‍යාවට සමාන චතුරස්‍ර සංඛ්‍යාවක් තිරස්, සිරස්, හෝ විකර්ණව ගමන් කරයි. ඔබට ඔබගේ කොටස් මතින් පැනීමට අවසර ඇත, නමුත් ප්‍රතිවාදි කොටස් මතින් නොවේ; ප්‍රතිවාදි කොටසක් මත පතිත වීම එය අල්ලා ගැනීම සඳහා වේ. ඔබගේ සියලු කොටස් 8-අසල්වැසි සම්බන්ධ වූ විට ජය ගන්න."
+  },
+  "board": {
+    "current_board": "මණ්ඩලය: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ආකෘතිය e2e4 විය යුතුයි.",
+    "no_piece": "{side} කොටසක් {coord} මත නැත.",
+    "identical": "මූලාශ් රය සහ ගමනාන්තය සමානයි.",
+    "not_straight_or_diagonal": "චලනය කෙළින් හෝ විකර්ණ විය යුතුයි.",
+    "wrong_distance": "එක පෙළේ තියෙන කොටස් වලට සමාන දුරක් යන්න ඕන.",
+    "enemy_blocks": "සතුරු කෑල්ලක් පාර වහනවා.",
+    "destination_own": "ගමනාන්තය හිමිවන්නේ තමන්ගේම කැබැල්ලකට."
+  },
+  "game_action": {
+    "moved": "ක් රීඩකයා {player_id} ගෙනියනවා {from} -> {to}",
+    "captured_suffix": "ක් රීඩකයා {player_id} {from} -> {to} වෙත ගමන් කරමින් සතුරා අල්ලා ගනී."
+  },
+  "outcome": {
+    "win": "හැම කෑල්ලක්ම එකිනෙකට සම්බන්ධයි.",
+    "draw_no_capture": "අල්ලාගැනීමක් නැතිව පියවර 60ක්.",
+    "draw_repetition": "ස්ථානය තුන් වතාවක් නැවත නැවතත්."
+  }
+}

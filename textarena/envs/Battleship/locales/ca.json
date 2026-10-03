@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id}. Estàs jugant al joc de Batalla Naval.\nEl teu objectiu és enfonsar tots els vaixells del teu oponent abans que ells enfonsin els teus.\nEn el teu torn, pots disparar míssils a coordenades específiques en el següent format: '[a4]'. Si el míssil toca un vaixell, es marca amb 'X'. Si falla, es marca amb 'O'. En qualsevol dels dos escenaris, l'entorn del joc t'informarà dels teus impactes. Si has enfonsat un vaixell, l'entorn del joc t'ho dirà!\nEl joc acaba quan tots els vaixells d'un jugador han estat enfonsats.\nEl teu tauler inicial mostrarà tots els teus vaixells col·locats i els impactes del teu oponent sobre tu, i els teus impactes i errors en el tauler del teu oponent sense mostrar els vaixells del teu oponent.\nAquí tens el tauler inicial:\n"
+  },
+  "invalid_move": {
+    "wrong_format": "El jugador no ha respost amb una coordenada vàlida entre claudàtors.",
+    "out_of_board": "La coordenada {coord} està fora del tauler.",
+    "already_fired": "La coordenada {coord} ja ha estat disparada."
+  },
+  "game_action": {
+    "you_sunk": "Enfonsat! Has enfonsat un vaixell a {coord}! El teu tauler actualitzat:\n{view}",
+    "opp_sunk": "L'oponent ha enfonsat el teu vaixell a {coord}! El teu tauler actualitzat:\n{view}",
+    "you_hit": "Impacte! Has tocat un vaixell a {coord}! El teu tauler actualitzat:\n{view}",
+    "opp_hit": "L'oponent ha tocat el teu vaixell a {coord}! El teu tauler actualitzat:\n{view}",
+    "you_miss": "Error! Has fallat el vaixell a {coord}! El teu tauler actualitzat:\n{view}",
+    "opp_miss": "L'oponent ha fallat el teu vaixell a {coord}! El teu tauler actualitzat:\n{view}"
+  },
+  "outcome": {
+    "win": "El Jugador {player_id} ha enfonsat tots els vaixells del seu oponent!"
+  }
+}

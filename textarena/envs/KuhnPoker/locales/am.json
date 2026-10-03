@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "አንተ ተጫዋች {player_id} በ {max_rounds} ዙር የኩን ፖከር ጨዋታ ውስጥ ነህ።\nየጨዋታ ህጎች፦\n- ኩን ፖከር በ3 ካርድ ዲክ ከ J, Q, K (J ከሁሉ ዝቅተኛ, K ከሁሉ ከፍተኛ) ጋር ይጠቀማል\n- እያንዳንዱ ተጫዋች {ante} ቺፕ አንቴ እና እያንዳንዱ ዙር 1 ካርድ ይቀበላል (ካርዶች የሚደለሉ እንደሌለ እንደ ተቀባዩ ካርድ እንደ ተቀባዩ አይደለም)።\n- ጨዋታው ለ {max_rounds} ዙሮች ይቀጥላል\n- ከሁሉ ዙሮች በኋላ ከፍተኛ ቺፕ ባለቤት ተጫዋች ያሸንፋል\nየእርምጃ ህጎች፦\n- '[check]': ከማወራረስ አለያ (ብት በማዞራ ላይ ከሆነ ብቻ)\n- '[bet]': ከማወራረስ አለያ 1 ቺፕ በማንጠል (ብት በማዞራ ላይ ከሆነ ብቻ)\n- '[call]': ተጫዋቹ እንደ አሸንፎ በማወራረስ 1 ቺፕ በማንጠል\n- '[fold]': እጅህን አስለቅቀህ ተጫዋቹ ያሸንፎ ማንጠል"
+  },
+  "init_round": {
+    "round_start": "### ምዕራፍ {current_round} እንደገና ጀምሮ ከ{max_rounds} ምዕራፎች. ካርድህ: '{player_card}'",
+    "available_actions": "ሊወሰዱ የሚችሉ እርምጃዎች {available_actions} ናቸው:"
+  },
+  "invalid_move": {
+    "wrong_format": "ስራ መስማማት ማለት መስማማት [Check], [Bet], [Call], ወይም [Fold].",
+    "not_legal": "እርምጃው {legal_actions} መሆን አለበት።"
+  },
+  "action": {
+    "submit_move": "ተጫዋች {player_id}, እርምጃ አስገባ: '[{move}]'.",
+    "valid_actions": "ሊወሰዱ የሚችሉ እርምጃዎች {legal_actions} ናቸው ።",
+    "round_summary": "{reason} የአሁን ሸንጎሮች: ተጫዋች 0: '{player_0_chips}'; ተጫዋች 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "ሾውዳውን: ተጫዋች {winner} ካርድ {winner_card} ተጫዋች {loser} ካርድ {loser_card} ይቀድማል። ተጫዋች {winner} ጣም {pot_value} ቺፕ ያሸንፋል።"
+  },
+  "outcome": {
+    "draw": "በ{max_rounds} ምዕራፎች ላይ, ሁለት ተጫዋቾች እኩል ብዛት ቺፕስ አላቸው.",
+    "round_win": "ተጫዋቹ {player_id} አቋርጧል።",
+    "winner_player0": "ተጫዋች 0 በሁሉም {max_rounds} ዙሮች መጨረሻ ላይ ብዙ ቺፖችን በማግኘት አሸነፈ ።",
+    "winner_player1": "ተጫዋች 1 በሁሉም {max_rounds} ዙሮች መጨረሻ ላይ ብዙ ቺፖችን በማግኘት አሸነፈ ።"
+  }
+}

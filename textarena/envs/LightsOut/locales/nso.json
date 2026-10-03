@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Welcome to Lights Out! You have a {size}x{size} grid of lights.\nYour goal is to turn ALL lights OFF (represented by '.')\nWhen you press a light, it toggles itself AND its adjacent neighbors (up/down/left/right).\nType [row col] to press a light (0-indexed, so valid range is 0-{max_index}).\nYou have up to {max_turns} moves to solve the puzzle.\nLegend: 'O' = light ON, '.' = light OFF"
+  },
+  "board": {
+    "current_state": "Tshepo ya grid ya tshwane (Lekgetho {moves_made}, {moves_left} dikgetho di shwelwe, {completion}% e feletswe):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kgato e swanetše go ba ka sebopego sa [row col] moo molokoloko le kholomo di lego dinomoro tša gare ga 0 go ya go {max_index}.",
+    "out_of_range": "Koordinete e swanetse go ba gare ga 0 le {max_index}. O kgonne [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Mahlatse! O rarollotse puzzle ka {moves_used} tshwetso!",
+    "loss": "Ga e sa le! O dirisitse mabaka a {max_turns} a mabaka a go rarolla puzzle. Phetho ya mafelelo: {completion}%\nMaemo a mafelelo:\n{grid}"
+  }
+}

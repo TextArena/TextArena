@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Siz Oýunçy {player_id} üç oýunçyly Tik Tak Tody.\nSizin simwolunuz '{symbol}'.\nSiz öz simwolunyzy 5x5 tahtada dört sýzyň ýoly emele getirmek üçin ýerleşdirýärsiňiz.\nÝoly gorizontal, vertikal ýa diagonal bolup biler.\n'[4]' formatyny ulanyp, 4-nji hüjümi belläp ýazyň."
+  },
+  "board": {
+    "current_board": " Häzirki tahta:\n\n{board}\n\nÝörişler: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Natyjysyz format. '[cell]' ulanyň, ýöne hüjüm 0-{max_cell} aralygyndadyr.",
+    "out_of_range": "Natyjysyz hüjümsiz hüjüm: {cell}. 0 we {max_cell} aralygynda bolmaly.",
+    "already_occupied": "Çap {cell} eýýäm bosagada.",
+    "made_invalid": "Oýunçy {player_id} dereksiz hereket etdi."
+  },
+  "game_action": {
+    "placed": "Oýunçy {player_id} öz simwolyny ({symbol}) ({row}, {col}) mejduwa ýerleşdirýär."
+  },
+  "outcome": {
+    "win": "Oýunçy {player_id} ({symbol}) ýeňýär!",
+    "draw": "Hemme zat deň!"
+  }
+}

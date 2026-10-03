@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v kvantnem Tic Tac Toe.\nVaš znak je '{symbol}', in vaše številke potez so vedno {parity} (npr. X1, X3 ali O2, O4).\n\nCilj: Zmagajte tako, da ustvarite vrsto treh klasičnih označb (strditev iz superpozicij).\n\nKako igrati:\n- Na vsaki potezi postavite strašljivo označbo v dveh različnih praznih kvadratih z uporabo formata '[a,b]'.\n- Te označbe so zapletene in označene kot 'X1 / X1' ali 'O4 / O4'.\n- Ne morete postaviti strašljivih označb v kvadratu, ki je že propadel (strdil).\n\nPravilo propada:\n- Če vaša poteza ustvari cikel v grafu zapletenosti, se samodejno propade.\n- Vsaka strašljiva označba v ciklu se spremeni v klasično označbo v eni od dveh pozicij.\n- Tudi odvisne strašljive označbe propadejo.\n\nZmaga:\n- Igra se konča, ko ima igralec tri klasične označbe v vrsti.\n- Če oba igralca dobijo vrsto med istim propadom, zmaga tisti z nižjo maksimalno številko poteze.\n\nPrimer poteze: '[0,4]' postavi strašljivo označbo v celicah 0 in 4."
+  },
+  "board": {
+    "current_board": "Kvantna plošča Tic Tac Toe:\n\n{board}\n\nOddajte svojo potezo kot '[a,b]', da postavite kvantno označbo na dveh lokacijah."
+  },
+  "invalid_move": {
+    "wrong_format": "Neveljaven format. Uporabite '[a,b]'.",
+    "invalid_cells": "Neveljavne ali podvojene indekse celic.",
+    "already_solidified": "Ena od celic je že strdila."
+  },
+  "game_action": {
+    "placed": "Igralec {player_id} je postavil svoj znak v superpoziciji med celicama {pos_a} in {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Odvisna superpozicija je rešena. Celica ({r}, {c}) je zdaj {symbol}.",
+    "last_cell_resolved": "Superpozicija za zadnjo celico je rešena. Celica ({r}, {c}) je zdaj {symbol}.",
+    "superposition_resolved": "Superpozicija je rešena. Celica ({r}, {c}) je zdaj {symbol}."
+  },
+  "outcome": {
+    "win": "Igralec {player_id} zmaga z strdilimi označbami!",
+    "draw": "Igra je neodločena!"
+  }
+}

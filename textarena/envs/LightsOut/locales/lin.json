@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Mbote na Lights Out! Ozuwi {size}x{size} grid ya mianga.\nLokeli na yo ezali kobalula MIANGA yote (yinafwananishwa na '.').\nNga oya koba mianga, ekobalula yenyewe PE na mianga ya pembeni (juu/ chini/ kushoto/ kulia).\nTape [row col] po oya koba mianga (0-indexed, kwa hivyo safu ya kuweza kubala ezali 0-{max_index}).\nOzuwi kufika {max_turns} mikano po kutatua ndengele.\nLegend: 'O' = mianga ya kuwa, '.' = mianga ya kuzima"
+  },
+  "board": {
+    "current_state": "Etatɛ ya gridi ya sɛ́kɛ (Mabɛlɛ {moves_made}, mabɛlɛ {moves_left} ezali kozala, {completion}% komplɛtɛ):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action esengeli ezala na format [row col] esika molongo mpe col ezali ba integers kobanda 0 kino {max_index}.",
+    "out_of_range": "Koordinɛ́ti ekoki kozala kati ya 0 na {max_index}. Oyatɛki [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Matɔndi! Osilisi puzzle na {moves_used} biteni !",
+    "loss": "Mokɛsɛni ekomi! Oyatɛki mabɛlɛ {max_turns} yɔ́nsɔ bila kobɛlɛ puzzle. Komplɛsiɔnɛ ya mwɛsɛ: {completion}%\nEtatɛ ya mwɛsɛ:\n{grid}"
+  }
+}

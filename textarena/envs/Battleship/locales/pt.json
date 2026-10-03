@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id}. Você está jogando o jogo Batalha Naval.\nSeu objetivo é afundar todos os navios do seu oponente antes que eles afundem os seus.\nNa sua vez, você pode disparar mísseis em coordenadas específicas no seguinte formato: '[a4]'. Se o míssil atingir um navio, ele é marcado com 'X'. Se errar, é marcado com 'O'. Em ambos os cenários, o ambiente do jogo informará sobre seus acertos. Se você afundou um navio, o ambiente do jogo dirá!\nO jogo termina quando todos os navios de um jogador forem afundados.\nSeu tabuleiro inicial mostrará todos os seus navios posicionados e os acertos do seu oponente em você, e seus acertos e erros no tabuleiro do seu oponente sem mostrar os navios do seu oponente.\nAqui está o tabuleiro inicial:\n"
+  },
+  "invalid_move": {
+    "wrong_format": "O jogador não respondeu com uma coordenada válida entre colchetes.",
+    "out_of_board": "A coordenada {coord} está fora do tabuleiro.",
+    "already_fired": "A coordenada {coord} já foi disparada."
+  },
+  "game_action": {
+    "you_sunk": "Afundado! Você afundou um navio em {coord}! Seu tabuleiro atualizado:\n{view}",
+    "opp_sunk": "Oponente afundou seu navio em {coord}! Seu tabuleiro atualizado:\n{view}",
+    "you_hit": "Acertou! Você acertou um navio em {coord}! Seu tabuleiro atualizado:\n{view}",
+    "opp_hit": "Oponente acertou seu navio em {coord}! Seu tabuleiro atualizado:\n{view}",
+    "you_miss": "Errou! Você errou o navio em {coord}! Seu tabuleiro atualizado:\n{view}",
+    "opp_miss": "Oponente errou seu navio em {coord}! Seu tabuleiro atualizado:\n{view}"
+  },
+  "outcome": {
+    "win": "Jogador {player_id} afundou todos os navios do seu oponente!"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Oli Mchezaji {player_id} mu katemba kya Liar's Dice kya {num_players}.\nNnono:\n- Ku kikolwa chako, oyinza:\n  1) Kuteka kikolwa kipya na obungi bwingi oba maadi mangi (oba byombi) kuliko kikolwa kiriko; yaani '[Bid: 3, 4]',\n  2) Kuyita kikolwa kya mwisho kwa kutumia '[Call]'.\n\nBw'oyita:\n  - Bw'obungi bw'dice bw'enkanya businga kikolwa, mchezaji wa mwisho afiirwa dice limo.\n  - Oyinza, mchezaji atakayita afiirwa dice limo.\nMchezaji atakafikirwa 0 dice afiirwa. Mchezaji wa mwisho atawangula."
+  },
+  "board": {
+    "per_player": "\tOmuzannyi {p}: {d}",
+    "new_round": "\nMuzannyo mupya - Efumbi zisigalibwa: {dice_summary}\nEfumbi zako za sasa ziri: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Omuzanyi {current_player_id} ayita! Omuwendo gw'amaziso ag'omuwendo {face_value} guli {count}, oguli wansi wa {quantity}.\nOmuzanyi {loser_id} (eyali asabye) afiirwa kisolo kimo.",
+    "caller_loses": "Omuzanyi {current_player_id} ayita! Omuwendo gw'amaziso {face_value} gwa kweli ni {count}, ogusinga {quantity}.\nOmuzanyi {loser_id} (eyayita) afiirwa kifo kimoja."
+  },
+  "action": {
+    "bid_announce": "Mchezaji {player_id} ateka {quantity} ya maadi {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Okuyita kuno kukoleddwa nga tewaliwo kusasulwa kwonna.",
+    "invalid_bid": "Okuwaayo okutalina mugaso: {reason}",
+    "not_recognized": "Kuza kwakuwuliza tekutegekebwa kuwa '[Bid: X, Y]' au '[Call]'. Kuza kwakutumwa: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Omuwendo omupya {new_quantity} mutono okusinga ogwa kati {current_quantity}.",
+    "face_lower": "Omugaso omuggya {new_face_value} mutono okusinga ogwa kati {current_face_value}.",
+    "identical": "Okuguza kuno kufaanagana n'okugabula okwomu kiseera kino.",
+    "face_range": "Obukulu bw'ekika buteekwa okuba wakati wa 1 ne 6."
+  },
+  "message": {
+    "eliminated_invalid": "Omuzannyi {player_id} yagobwa olw'okutambula obutakkirizibwa."
+  },
+  "outcome": {
+    "win": "Omuzannyi {winner} asinga! Kujumula kwamalengo: {final_ranking}"
+  }
+}

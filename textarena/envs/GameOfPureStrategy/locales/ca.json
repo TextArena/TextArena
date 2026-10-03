@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} en una partida de GameOfPureStrategy.\n- Tens les 13 cartes A-K; cada una només es pot utilitzar una vegada.\n- Cada ronda es revela una carta premi. Juga exactament UNA carta escrivint alguna cosa que contingui un token entre claudàtors com '[Q]', '[10]', '[2]' ...\n- La carta més alta guanya el premi (més l'acumulat). Les empatades fan que el premi es torni a posar en joc per a la següent ronda.\n- El total més alt després de 13 rondes guanya."
+  },
+  "round": {
+    "announce": "### Ronda {round}/13 - Premi: {prize}  (valor {worth})"
+  },
+  "board": {
+    "hand": "La teva mà restant: {hand}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'acció ha de contenir exactament UN token de carta entre claudàtors.",
+    "card_not_held": "Ja no tens aquesta carta."
+  },
+  "message": {
+    "bids": "Ofertes: P0 {card0} vs P1 {card1} - ",
+    "p0_wins": "{observation}El Jugador 0 guanya {pot_value}.",
+    "p1_wins": "{observation}El Jugador 1 guanya {pot_value}.",
+    "tie": "{observation}Empat -> pot ara {carry_pot}.",
+    "scores": "Puntuacions -> P0:{score0}  P1:{score1}"
+  },
+  "outcome": {
+    "p0_wins": "P0 {s0} vs P1 {s1}",
+    "p1_wins": "P1 {s1} vs P0 {s0}",
+    "draw": "Tots dos han puntuat {s0}"
+  }
+}

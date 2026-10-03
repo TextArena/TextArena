@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "O Player {player_id} mo kgwelenyane ya batho ba 3 ya Iterated Prisoner's Dilemma. Kgwele ya kgwela e na le {num_rounds} diphofo.\nTsheelo ya phofolo:\n• {conv_rounds} matšatši a go ja a kgwafatša\n• 1 tsheko ya tšhošo - naya tšhošo e le nngwe ka motho yo mongwe: '[<opp-id> cooperate]' kapa '[<opp-id> defect]' (e, '[1 defect] [2 cooperate]'; e e kgonego ke 'go kgafatša'). \nKgwele ya dipono tsa kgwelagana (e kgona kgwelana le kgwelagana e seng ya tsheko):\n  - Ba kgafatša bobedi  ->  {reward}\n  - Ba tšwa bobedi     ->  {punishment}\n  - Wena o tšwa, ba kgafatša -> {temptation}\n  - Wena o kgafatša, ba tšwa -> {sucker}\nMotho(yo) a nang le tsore le le kgonego ka bogodu ya diphofo di sa felele o a kgona."
+  },
+  "round": {
+    "start": "─── Go thoma Round {round} ───\tO ka bua ka mahala ka di round tše {conv_rounds} tše di latelago.",
+    "chat_finished": "Puo e fedile ka round {round}. Romela diphetho tša gago, token e tee ka opponent e tee: `[pid cooperate]` goba `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Diphetho:",
+    "pair_line": "{observation}\n\t Modimo {i} vs Modimo {j} ilego go {choice_i} le {choice_j} ka go latelana (Modimo {i} ilego go hwetša {gain_i}, Modimo {j} ilego go hwetša {gain_j})",
+    "scores_open": "{observation} -> Dipalo tša gona bjale: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}  go ba gona ga tšona ka mehla"
+  },
+  "outcome": {
+    "final": "Mabala a bogodu: {scores}.  Dipono tsa kgwelagana (tse di khutshwane→tse di kgone): {groups}"
+  }
+}

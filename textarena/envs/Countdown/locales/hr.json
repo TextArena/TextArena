@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Igrate igru brojeva Countdown!\nCilj: Kombinirajte brojeve koristeći +, -, *, / kako biste dosegli cilj.\nFormat akcije: [i j op] gdje su i, j indeksi, a op je operacija.\nPrimjer: [0 2 *] množi broj na indeksu 0 s brojem na indeksu 2.\nDijeljenje mora rezultirati samo cijelim brojevima."
+  },
+  "board": {
+    "header": "CILJ: {target}\n\nDostupni brojevi:\n{numbers}",
+    "best": "{observation}\n\nNajbolje do sada: {best_value} (udaljenost: {distance})\nNajbolji izraz: {best_expression}",
+    "history": "{observation}\n\nPovijest poteza:\n{moves}",
+    "progress": "{observation}\nTrenutni rezultat napretka: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neispravan format akcije. Koristite `[i j op]` gdje su i, j indeksi, a op je +,-,*,/",
+    "invalid_indices": "Neispravni indeksi. Mora biti različiti i u rasponu 0-{max_index}",
+    "invalid_operation": "Neispravna operacija (dijeljenje s nulom ili rezultat koji nije cijeli broj)"
+  },
+  "outcome": {
+    "win": "Savršeno! Pronađen točan cilj: {target}",
+    "no_moves": "Nema više poteza. Najbolji rezultat: {best_value} (cilj: {target})",
+    "turn_limit": "Dosegnuta granica poteza. Najbolji rezultat: {best_value} (cilj: {target})"
+  }
+}

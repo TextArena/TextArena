@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS keelefail. ÄRGE tõlgige võtmeid (vasak pool). Tõlgige ainult väärtused (parem pool).",
+  "_slots": {
+    "{player_id}": "Mängija number, 0, 1 või 2",
+    "{round}": "Praegune vooru number, 1..13",
+    "{prize}": "Ilmutatud auhinnakaardi nägu (A, 2..10, J, Q, K) - ära tõlgi",
+    "{worth}": "Auhinna koguväärtus, sealhulgas ülekanne",
+    "{hand}": "Mängija allesjäänud kaardid, esitatud kui sulgudes olevad žetoonid nagu '[A]' '[2]' - ära tõlgi",
+    "{bids}": "Neutraalne komaga eraldatud loetelu mängitud kaartidest nagu 'P0:10, P1:J, P2:Q' - ära tõlgi",
+    "{winner}": "Mängija number, kes võitis vooru",
+    "{pot}": "Poti väärtus, mis antakse või kantakse üle selle vooru",
+    "{scoreline}": "Neutraalne jooksev skooritabel nagu 'P0:0  P1:0  P2:11' - ära tõlgi",
+    "{pid}": "Mängija number, kes elimineeriti",
+    "{scores}": "Lõplikud skoorid kui toormängija-number skoori vastendamine - ära tõlgi"
+  },
+  "player_prompt": {
+    "intro": "Oled mängija {player_id} Three-Player GOPS-is.\n- Sul on 13 kaarti A-K (igaüks täpselt üks kord).\n- Iga vooru ajal ilmub auhind. Esita ÜKS kaart nagu `[Q]`, `[10]`, `[2]` …\n- Kõrgeim kaart võidab auhinna (+ ülekanne). Viigid veeretavad auhinna järgmisesse vooru.\n- Pärast 13 vooru võidab kõrgeim kogusumma. Kehtetud käigud = elimineerimine."
+  },
+  "round": {
+    "header": "### Voor {round}/13 - Auhind: {prize} (väärtus {worth})",
+    "hand": "Sinu allesjäänud käsi: {hand}"
+  },
+  "reveal": {
+    "win": "Pakkumised » {bids} - Mängija {winner} võidab {pot}.",
+    "tie": "Pakkumised » {bids} - viik, poti väärtus nüüd {pot}.",
+    "scores": "Skoorid → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "tegevus vajab sulgudes olevat kaarti nagu '[Q]'",
+    "bad_card": "kaart on juba kasutatud või kehtetu"
+  },
+  "elimination": {
+    "player": "Mängija {pid} elimineeriti pärast korduvaid kehtetuid käike."
+  },
+  "outcome": {
+    "auto_win": "Kaks mängijat elimineeriti - automaatne võit.",
+    "final": "Lõplikud skoorid: {scores}"
+  }
+}

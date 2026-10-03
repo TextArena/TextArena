@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Oled mängija {player_id} kvantmehaanilises Tic Tac Toe mängus.\nSinu sümbol on '{symbol}', ja sinu käigu numbrid on alati {parity} (nt X1, X3 või O2, O4).\n\nEesmärk: võida, moodustades kolm klassikalist märki (superpositsioonist tahkestunud).\n\nKuidas mängida:\n- Igal käigul paiguta üleloomulik märk kahte erinevasse tühja ruutu, kasutades vormingut '[a,b]'.\n- Need märgid on põimunud ja märgistatud nagu 'X1 / X1' või 'O4 / O4'.\n- Sa ei saa paigutada üleloomulikke märke ruutu, mis on juba kokku varisenud (tahkestunud).\n\nKokkuvarisemise reegel:\n- Kui sinu käik loob tsükli põimunud graafis, see variseb automaatselt kokku.\n- Iga üleloomulik märk tsüklis muutub klassikaliseks märgiks ühes kahest positsioonist.\n- Sõltuvad üleloomulikud märgid varisevad samuti kokku.\n\nVõit:\n- Mäng lõpeb, kui mängijal on kolm klassikalist märki järjest.\n- Kui mõlemad mängijad saavad rea sama kokkuvarisemise ajal, võidab see, kellel on madalam maksimaalne käigu number.\n\nNäide käigust: '[0,4]' paigutab üleloomuliku märgi ruutudesse 0 ja 4."
+  },
+  "board": {
+    "current_board": "Kvantmehaaniline Tic Tac Toe laud:\n\n{board}\n\nSisesta oma käik kujul '[a,b]', et paigutada kvantmärk kahte kohta."
+  },
+  "invalid_move": {
+    "wrong_format": "Vale vorming. Kasuta '[a,b]'.",
+    "invalid_cells": "Valed või korduvad ruudu indeksid.",
+    "already_solidified": "Üks ruutudest on juba tahkestunud."
+  },
+  "game_action": {
+    "placed": "Mängija {player_id} paigutas oma sümboli superpositsiooni kahe ruudu {pos_a} ja {pos_b} vahel."
+  },
+  "game_message": {
+    "dependent_resolved": "Sõltuv superpositsioon lahendatud. Ruut ({r}, {c}) on nüüd {symbol}.",
+    "last_cell_resolved": "Superpositsioon viimase ruudu jaoks lahendatud. Ruut ({r}, {c}) on nüüd {symbol}.",
+    "superposition_resolved": "Superpositsioon lahendatud. Ruut ({r}, {c}) on nüüd {symbol}."
+  },
+  "outcome": {
+    "win": "Mängija {player_id} võidab tahkestunud märkidega!",
+    "draw": "Mäng on viik!"
+  }
+}

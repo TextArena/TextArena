@@ -1,0 +1,32 @@
+{
+  "_comment": "DrieSpelerTicTacToe-lokaalleêr. MAAK NIE sleutels (linkerkant) oor nie. Vertaal net waardes (regterkant).",
+  "_slots": {
+    "{player_id}": "Die speler se nommer, bv. 0, 1 of 2",
+    "{symbol}": "Die speler se merk, een van A, B of C",
+    "{cell}": " 'n Bord-selnommer",
+    "{max_cell}": "Die hoogste geldige selnommer (bordgrootte^2 - 1)",
+    "{row}": "Die bord-ry-indeks van die geplaasde merk",
+    "{col}": "Die bord-kolom-indeks van die geplaasde merk",
+    "{board}": "Die gerenderde ASCII-bord (moet nie vertaal word nie)",
+    "{moves}": "Die komma-geskeide lys van beskikbare skuif-tokens soos '[4]' (moet nie vertaal word nie)"
+  },
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in Drie-Speler Tic Tac Toe.\nJou simbool is '{symbol}'.\nJy neem beurte om jou simbool op 'n 5x5-bord te plaas om 'n lyn van vier te vorm.\nLyne kan horisontaal, vertikaal of diagonaal wees.\nDien jou skuif in deur die formaat '[4]' te gebruik om sel 4 te merk."
+  },
+  "board": {
+    "current_board": "Huidige Bord:\n\n{board}\n\nBeskikbare Skuiwe: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldige skuif-formaat. Gebruik '[sel]' waar sel 0-{max_cell} is.",
+    "out_of_range": "Ongeldige selnommer: {cell}. Moet tussen 0 en {max_cell} wees.",
+    "already_occupied": "Sel {cell} is reeds beset.",
+    "made_invalid": "Speler {player_id} het 'n ongeldige skuif gemaak"
+  },
+  "game_action": {
+    "placed": "Speler {player_id} plaas hul simbool ({symbol}) in veld ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Speler {player_id} ({symbol}) wen!",
+    "draw": "Die spel is 'n gelykopuitslag!"
+  }
+}

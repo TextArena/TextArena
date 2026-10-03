@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Oled mängija {player_id} kahemängijalises Spite and Malice mängus. Sinu eesmärk on olla esimene, kes tühjendab oma väljamakse kasti.\n\n### Mängu Ülevaade:\n- Eesmärk on tühjendada oma väljamakse kast, mängides kaarte keskmistesse kastidesse.\n- Saad mängida kaarte kolmest allikast:\n  1. Sinu **käest** (iga käigu alguses on sul kuni 5 kaarti käes).\n  2. Sinu **väljamakse kasti ülemine kaart**.\n  3. Sinu **mõne prügikasti ülemine kaart**.\n\n### Mängureeglid:\n- Saad mängida kaarti keskmisse kasti, kui see on **ühe astme kõrgem** kui selle kasti ülemine kaart (keskmised kastid algavad Ässaga ja ulatuvad Kuningannani; Kuningad on vabad - neid saab mängida mis tahes kaardile, kuid need ei muuda astme järjekorda. See tähendab, et kui Kuningas on kasutatud pärast 4, siis see Kuningas on 5. astmel ja järgmine kaart peab olema 6).\n- Kui sa ei saa mängida enam kaarte, pead **loobuma kaardist** ühte oma prügikastidesse, et lõpetada oma käik.\n- Kui keskmine kast jõuab Kuningannani, see tühjendatakse automaatselt.\n- Astme järjekord on: Ä=1, 2=2, ..., 9=9, J=10, Q=11, K kui vaba.\n\n### Tegevused:\n1. **Tõmba**: Käigu alguses tõmba kaarte, et täita oma käsi kuni 5 kaardini. Sisesta **[draw]**, et alustada.\n2. **Mängi kaart**: Mängi kaarti, määrates kaardi ja keskmise kasti järgmiselt: **[play A♠ 0]** (kus 'A♠' on kaart ja '0' on keskmise kasti indeks).\n3. **Loobu**: Kui sa ei saa mängida enam kaarte, loobu kaardist oma käest ühte prügikastidesse, et lõpetada oma käik. Sisesta **[discard A♠ 1]** (kus 'A♠' on kaart ja '1' on prügikasti indeks). Pange tähele, et sa ei saa loobuda kaardist väljamakse kastist. Sa võid loobuda ainult kaartidest oma käest.\n\n"
+  },
+  "board": {
+    "current_board": "Praegune laud:\n\n{board}\nSaadaolevad käigud: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Keskmised kastid ---\n",
+    "pile": "{observation}Kast {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Mängija {player_id} vaade ---\n",
+    "payoff": "{observation}Väljamakse kast (Ülemine kaart): {top_card}, Väljamakse kasti pikkus: {payoff_length}\n",
+    "hand": "{observation}Käsi: {hand}\n",
+    "discard": "{observation}Prügikastid: {discard}\n",
+    "empty": "Tühi"
+  },
+  "game_message": {
+    "no_cards_left": "Kaarte pole enam tõmbata. Pange tähele, et sa võid mängida kaarte järgmistest allikatest:\n  1. Sinu **käest**.\n  2. Sinu **väljamakse kasti ülemine kaart**.\n  3. Sinu **mõne prügikasti ülemine kaart**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Vigane käigu vorming. Mängija {player_id} ei vastanud kehtiva käiguga ruudusulgudes.",
+    "invalid_play": "Vigane mäng. Mängija {player_id} üritas mängida {card} keskmisele kastile {index}.",
+    "discard_from_payoff": "Vigane loobumine. Mängija {player_id} üritas loobuda kaardist väljamakse kastist.",
+    "discard_not_in_hand": "Vigane loobumine. Mängija {player_id} üritas loobuda kaardist, mis pole käes.",
+    "wrong_move_type": "Vigane käigu tüüp. Mängija {player_id} ei vastanud kehtiva käigu tüübiga."
+  },
+  "game_action": {
+    "you_drew": "Sa tõmbasid kaarte.",
+    "opponent_drew": "Mängija {player_id} tõmbas kaarte.",
+    "you_played": "Sa mängisid {card} keskmisele kastile {index}.",
+    "opponent_played": "Mängija {player_id} mängis {card} keskmisele kastile {index}.",
+    "you_discarded": "Sa loobusid {card} prügikasti {index}, mis tähendab, et sa lõpetasid oma käigu. Edaspidi ei võeta sinu tegevusi arvesse selle käigu jooksul. Mängija {next_player_id} järgmiseks.",
+    "opponent_discarded": "Mängija {player_id} loobus {card} prügikasti {index}, mis tähendab, et ta lõpetas oma käigu. Edaspidi ei võeta Mängija {player_id} tegevusi arvesse selle käigu jooksul. Mängija {next_player_id}, järgmiseks on sinu käik. Palun sisesta oma tegevus vormingus [tegevus kaart keskmine_indeks]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mängija {current_player} on lõpetanud oma väljamakse kasti! Mängija {current_player} võitis!",
+    "deadlock_player_0": "Tupikseis saavutatud! Mängija 0 võitis {player_0_payoff} kaarti jäänud vs Mängija 1 {player_1_payoff} kaarti.",
+    "deadlock_player_1": "Tupikseis saavutatud! Mängija 1 võitis {player_1_payoff} kaarti jäänud vs Mängija 0 {player_0_payoff} kaarti.",
+    "deadlock_tie": "Tupikseis saavutatud viigiga! Mõlemad mängijad on {player_0_payoff} kaarti jäänud. Mängija {current_player} võitis vaikimisi."
+  }
+}

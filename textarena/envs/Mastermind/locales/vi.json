@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Bạn đang chơi Mastermind.\nBạn cần tìm ra mã gồm {code_length} chữ số, mỗi chữ số từ 1 đến {num_numbers}, {repeats}.\nTrong câu trả lời của bạn, bạn có thể gửi dự đoán theo định dạng sau: '[2 1 4 5]'.\nSau mỗi lần dự đoán, bạn sẽ nhận được phản hồi dưới dạng các cọc đen và trắng.\nMột cọc đen chỉ ra một chữ số đúng ở đúng vị trí, trong khi một cọc trắng chỉ ra một chữ số đúng nhưng ở vị trí sai.\nBạn có {max_turns} lượt để đoán mã.\n",
+    "with_repeats": "có thể lặp lại",
+    "no_duplicates": "không có số trùng lặp"
+  },
+  "invalid_move": {
+    "wrong_format": "Bạn không trả lời bằng danh sách các số cách nhau bằng dấu cách và bao trong dấu ngoặc vuông.",
+    "not_integers": "Tất cả các mục phải là số nguyên hợp lệ.",
+    "wrong_length": "Dự đoán phải chứa chính xác {code_length} số.",
+    "out_of_range": "Tất cả các số phải nằm trong khoảng từ 1 đến {num_numbers}.",
+    "duplicates_not_allowed": "Các số trùng lặp không được phép.",
+    "repeated_guess": "Bạn đã đoán {guess}. Vui lòng thử một dự đoán khác."
+  },
+  "game_action": {
+    "feedback": "Đã gửi [{guess}]. Phản hồi: {black_pegs} cọc đen, {white_pegs} cọc trắng."
+  },
+  "outcome": {
+    "win": "Bạn đã phá mã, giải đúng {black_pegs} trên tổng số {code_length} cọc.",
+    "turn_limit": "Đã đạt giới hạn lượt. Bạn đã đoán đúng {percent} phần trăm số."
+  }
+}

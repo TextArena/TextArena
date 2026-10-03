@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Ìwọ ni ọjọgbọn {player_id} nínú Three-Player GOPS.\n- Ìwọ ní àwọn kárí 13 A-K (ọ̀kan ṣoṣo).\n- Lẹ́yìn ìgbà, ìwé àṣẹ àbò kan máa hàn. Ṣe àfisẹ́ kárí kan bí `[Q]`, `[10]`, `[2]` …\n- Kárí tó ga jùlọ gbé ìwé àṣẹ àbò (+ èrè gbogbo). Ìdọ̀tun máa rọ̀lẹ̀ ìwé àṣẹ àbò sí ìgbà tó ṣe.\n- Lẹ́yìn ìgbà 13, èrè tó ga jùlọ gbé. Àwọn ìṣẹ̀lẹ̀ àìtọ́ - ìjádé."
+  },
+  "round": {
+    "header": "### Ìyí {round}/13 - Èrè: {prize} (ìní {worth})",
+    "hand": "Ọwọ́ rẹ tó kù: {hand}"
+  },
+  "reveal": {
+    "win": "Awọn ipese  {bids} - Olùṣeré {winner} gba {pot}.",
+    "tie": "Àwọn ìfúntí  {bids} - ìdìpọ̀, ìkòkò nísinsìnyí {pot}.",
+    "scores": "Àwọn àmì-ìdíje → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "ìgbésẹ̀ nílò káàdì tí a fi sí àlàfo bí \"[Q]\"",
+    "bad_card": "kaadi ti a ti lo tẹlẹ tàbí tí kò bágbà mu"
+  },
+  "elimination": {
+    "player": "Ẹ̀yin òṣèré {pid} tí wọ́n yọ lẹ́yìn tí ó ṣe àwọn ìgbésẹ̀ tí kò bá òfin mu."
+  },
+  "outcome": {
+    "auto_win": "Àwọn méjì tí wọ́n yọ kúrò nínú eré náà - wọ́n á borí.",
+    "final": "Awọn ipari ipari: {scores}"
+  }
+}

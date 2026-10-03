@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "あなたは Colonel Blotto の {role} です。\nあなたの目標は、相手よりも多くのラウンドを勝ち取ることです。\n各ラウンドでは、{field_names} に正確に {num_total_units} ユニットを配分してください。\nフィールドに多くのユニットを配分したプレイヤーがそのフィールドを勝ち取り、多くのフィールドを勝ち取ったプレイヤーがラウンドを勝ち取ります。\n例えば、'[A7 B7 C6]' は A に 7 ユニット、B に 7 ユニット、C に 6 ユニットを配分します。",
+    "commander_alpha": "コマンダー アルファ",
+    "commander_beta": "コマンダー ベータ"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - ラウンド {current_round}/{num_rounds} ===\n勝利ラウンド - コマンダー アルファ: {alpha_score}, コマンダー ベータ: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nラウンド {current_round}\nコマンダー アルファの配分: {p0_allocations}\nコマンダー ベータの配分: {p1_allocations}\n",
+    "winner_alpha": "{message}勝者: コマンダー アルファ",
+    "winner_beta": "{message}勝者: コマンダー ベータ",
+    "tie": "{message}引き分け!"
+  },
+  "invalid_move": {
+    "wrong_format": "無効な入力形式です。使用例: A:5, B:10, C:5",
+    "invalid_field": "無効なフィールド名です。有効なフィールド: {field_names}",
+    "wrong_allocation_value": "すべての配分は非負の整数でなければなりません。",
+    "incorrect_total_units": "正確に {num_total_units} ユニットを配分する必要があります。現在の合計: {current_sum}",
+    "good_allocations": "配分は適切です。"
+  },
+  "outcome": {
+    "winner_alpha": "コマンダー アルファが {score_0}-{score_1} で {num_rounds} ラウンドを勝ち取りました！",
+    "winner_beta": "コマンダー ベータが {score_1}-{score_0} で {num_rounds} ラウンドを勝ち取りました！",
+    "draw": "{num_rounds} ラウンドの後、{score_0}-{score_1} で引き分けました！",
+    "early_winner_alpha": "コマンダー アルファが {scores_0}-{scores_1} で多数を獲得し、勝利しました！",
+    "early_winner_beta": "コマンダー ベータが {scores_1}-{scores_0} で多数を獲得し、勝利しました！"
+  }
+}

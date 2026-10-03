@@ -1,7 +1,7 @@
 from typing import List 
 
 def create_board_str(board: List[List[str]]) -> str:
-    piece_symbols = {'B': '●', 'W': '○', '': ' '}
+    piece_symbols = {'B': '○', 'W': '●', '': ' '}
     lines = []
     lines.append("    " + "   ".join(str(i) for i in range(8)))
     lines.append("  "+"┌" + "───┬" * 7 + "───┐")

@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "El xuegu entama. Palo de trunfu: {trump_suit} (carta de trunfu: {trump_str}).",
+    "no_trump_card": "Nun hai."
+  },
+  "player_prompt": {
+    "intro": "Yes xugador {player_id} en Whist alemán.\n{phase_info}\nTienes {hand_size} cartes.\nXuega una carta con '[play N]', onde N ye la so posición na to mano (por exemplu '[play 3]').",
+    "phase_learning": "FASE DE LA ENSINANZA: El ganador de cada trucu toma la carta abierta y el perdedor saca la siguiente tarxeta del mazo. Los trucos ganaos nesta fase nun cuenten pa ganar.",
+    "phase_playing": "FASE DE XUEGU: el mazu ta escosu. Cada trucu d'equí p'arriba cuenta pa la victoria."
+  },
+  "next_card": {
+    "playing_phase": "Nun se-y da tarxeta, la fase de xuegu empezó.",
+    "deck_empty": "La baraxa ta vacía, nun hai tarxeta disponible.",
+    "available": "La tarxeta ye de: {card}",
+    "available_trump": "La tarxeta en ufierta: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "El formatu de movimientu inválidu. Usa '[play N]' pa xugar la n-esima carta na to mano.",
+    "bad_position": "La posición de la carta nun esiste. tien cartes {hand_size}.",
+    "must_follow_suit": "Tienes de siguir palu y xugar una carta de {lead_suit}.",
+    "invalid_play": "Esa carta nun puede ser xugada."
+  },
+  "game_action": {
+    "played": "El xugador {player_id} xugaba con {card}."
+  },
+  "trick": {
+    "won": "El xugador {winner_id} gana l'acción con {card}.",
+    "won_learning": "Xugador {winner_id} gana la lliga con {card} y toma la carta boca arriba."
+  },
+  "phase": {
+    "learning_complete": "El mazo ta esgotáu, la fase d'aprendizaxe terminó... cada trucu que queda cuenta pa ganar."
+  },
+  "draw": {
+    "winner_received": "Ganaste'l trucu y recibi {card}.",
+    "loser_received": "Perdió'l trucu y sacó {card} del mazo.",
+    "winner_preview": "La siguiente carta ye {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Lligues ganaes hasta agora - Xugador 0: {tricks0}, Xugador 1: {tricks1}",
+    "scores_playing": "Lligues puntuables - Xugador 0: {tricks0}, Xugador 1: {tricks1}",
+    "phase": "La fase: {phase}",
+    "phase_learning": "Fase: {phase} ({remaining_cards} cartes restantes nel mazu)"
+  },
+  "hand": {
+    "no_cards": "Nun hai tarxetes.",
+    "no_cards_in_hand": "Nun hai cartes na mano.",
+    "header": "La to mano:",
+    "trump_indicator": "(Trump)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Nun se xugaron cartes con esti trucu.",
+    "header": "El trucu actual:",
+    "trump_indicator": "(Trump)",
+    "card_line": "{observation}\n  Xugador {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "El xuegu nun empezó.",
+    "header": "=== XUEGU DE WHIST ALEMÁN ===",
+    "phase": "{observation} Fase: {phase}",
+    "trump_suit": "{observation}\nPalo de trunfu: {trump_suit}",
+    "trump_card": "{observation} Tarxeta de triunfu: {card}",
+    "cards_left": "{observation}\nCartes restantes nel mazu: {count}",
+    "next_card": "{observation}\nSiguiente carta pal ganador: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} El trucu actual:",
+    "trump_indicator": "(Trump)",
+    "trick_line": "{observation}\n  Xugador {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nXugador {player_id}: {scoring} lligues puntuables ({tricks} total), {hand_size} cartes na mano"
+  },
+  "outcome": {
+    "summary": "Fase d'aprendizaxe - Xugador 0: {l0}, Xugador 1: {l1}. Fase de xuegu - Xugador 0: {p0}, Xugador 1: {p1}. Xugador {winner_id} gana con {winner_tricks} lligues puntuables!"
+  }
+}

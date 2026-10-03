@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Tu si Jucaturi {player_id} ntô Trì-Jucatura Tic Tac Toe.\nLu tò simbulu è '{symbol}'.\nTu fai turni mettennu lu tò simbulu supra na tavuliera 5x5 pî formari na linia di quattru.\nLi linii ponnu essiri orizzuntali, verticali, o diagonalî.\nPrisenta lu tò mossu usannu lu formatu '[4]' pî marcare la cella 4."
+  },
+  "board": {
+    "current_board": "Tavuliera current:\n\n{board}\n\nMossi disponibbili: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatu di muvimentu non validu. Utilizzari \"[cell]\" unni la cellula è 0-{max_cell}.",
+    "out_of_range": "Nùmmuru di cella non validu: {cell}. Havi à essiri tra 0 e {max_cell}.",
+    "already_occupied": "La cellula {cell} è già occupata.",
+    "made_invalid": "Lu jucaturi {player_id} fici na mossa nun valida."
+  },
+  "game_action": {
+    "placed": "Jucaturi {player_id} metti lu sò simbulu ({symbol}) ntô campu ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Jucaturi {player_id} ({symbol}) vinci!",
+    "draw": "Lu jocu è pareggiu!"
+  }
+}

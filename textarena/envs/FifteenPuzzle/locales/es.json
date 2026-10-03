@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id}. Estás jugando al rompecabezas de 15 piezas.\nEl objetivo del juego es ordenar las fichas numeradas en orden ascendente del 1 al 15, dejando el espacio vacío en la esquina inferior derecha.\nPara realizar un movimiento, puedes deslizar una ficha hacia el espacio vacío (representado por dos guiones bajos, p. ej., __) mediante uno de los siguientes comandos:\n- 'up': Mueve hacia arriba la ficha situada debajo del espacio vacío.\n- 'down': Mueve hacia abajo la ficha situada encima del espacio vacío.\n- 'left': Mueve hacia la izquierda la ficha situada a la derecha del espacio vacío.\n- 'right': Mueve hacia la derecha la ficha situada a la izquierda del espacio vacío.\nPara enviar tu movimiento, escribe la dirección (p. ej., 'up', 'down', 'left' o 'right') entre corchetes, p. ej., [up].\nA continuación se muestra la disposición actual del tablero. Utiliza esta información para resolver el rompecabezas.\n"
+  },
+  "board": {
+    "current_board": "Tablero actual:\n\n{board}\nMovimientos disponibles: {moves}",
+    "game_board": "Tablero de juego:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movimiento no válido. El Jugador {player_id} no respondió con una dirección válida entre corchetes.",
+    "illegal_move": "Movimiento no válido. La ficha no puede moverse en la dirección indicada."
+  },
+  "outcome": {
+    "win": "¡Felicidades! El Jugador {player_id} ha resuelto correctamente el rompecabezas de 15 piezas.",
+    "turn_limit": "Se ha alcanzado el límite de turnos. El modelo completó el {percent} por ciento del rompecabezas"
+  }
+}

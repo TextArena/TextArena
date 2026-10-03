@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "あなたは Player {player_id} として Pig Dice をプレイしています。\n\nルール:\n- あなたのターンでは、'[roll]' または '[hold]' を選択できます\n- 2-6 の目が出る: ターンの合計に加算\n- 1 の目が出る: ターンの合計を失い、ターン終了\n- Hold: ターンの合計をスコアに加算し、ターン終了\n- 最初に {winning_score} ポイントに到達したプレイヤーの勝利\n\nあなたのターンになったら、現在のスコアとターンの合計が表示されます。\n'[roll]' でサイコロを振るか、'[hold]' でポイントを確定させます。"
+  },
+  "invalid_move": {
+    "invalid_action": "無効なアクション形式です。'[roll]' または '[hold]' を使用してください。"
+  },
+  "actions": {
+    "player_busted": "Player {player_id} がバストし、{turn_total} ポイントを失いました！",
+    "player_hold": "Player {player_id} が Hold し、{turn_total} ポイントを確定させました。"
+  },
+  "board": {
+    "player": "Player 0: '{score_0}'; Player 1: '{score_1}'",
+    "current_total_scores": "現在の合計スコア: {scores}\nあなたの現在のターン合計は {turn_total} です。",
+    "roll_history": "{observation}\nこのターンの出目履歴: {roll_history}",
+    "first_roll": "{observation}\nこれはあなたのターンの最初の出目です。",
+    "available_actions": "{observation}\n利用可能なアクション: '[roll]' または '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Player {winner_id} がターン制限で高いスコアを獲得し、勝利しました ({scores})",
+    "winner_by_score": "Player {winner_id} が {winning_score} ポイントに到達し、勝利しました！",
+    "draw": "ターン制限に達し、すべてのプレイヤーのスコアが同じになりました: {scores}"
+  }
+}

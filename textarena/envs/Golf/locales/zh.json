@@ -1,0 +1,89 @@
+{
+  "_comment": "Golf（纸牌游戏）语言文件。请勿翻译键（左侧）。仅翻译值（右侧）。完整保留每个 {placeholder}。切勿翻译动作标记（'[draw]'、'[take]'、'[swap X Y]'、'[discard]'、'[knock]'、'[peek X Y]'）、牌面标签（A、2-10、J、Q、K）、花色符号、标记中用作行/列占位符的字母 X/Y，或数字分数/位置。保持 ASCII 网格布局（间距、列号、'?'、'Col'、'Row' 的对齐）不变，以便牌面保持可读。",
+  "_slots": {
+    "{player_id}": "玩家编号，例如 0 或 1",
+    "{pid}": "玩家编号，例如 0 或 1",
+    "{winner}": "分数最低的玩家编号",
+    "{score}": "数字总分",
+    "{card}": "牌面标签，如 A♠、10♥、K♦ 或 Q♣",
+    "{new}": "放入网格的牌面标签",
+    "{old}": "从网格移除的牌面标签",
+    "{row}": "行号",
+    "{col}": "列号",
+    "{max_row}": "最大有效行号",
+    "{max_col}": "最大有效列号",
+    "{reason}": "描述为何开始最后一轮的预渲染短语",
+    "{n}": "显示在网格行开头的行号",
+    "{cards}": "网格某一行的预渲染、对布局敏感的单元格",
+    "{hand}": "预渲染的玩家网格块",
+    "{discard}": "弃牌堆顶部的牌面标签，或表示“无”的词",
+    "{options}": "列出可用动作的预渲染行",
+    "{scores}": "每位玩家最终分数的预渲染列表"
+  },
+
+  "player_prompt": {
+    "intro": "你正在玩 Golf（纸牌游戏）- 玩家 {player_id}。\n目标：在这一局中获得最低总分。如果各列共享相同的值，则计为 0。\n牌面点数：A=1，2-10=面值，J/Q=10，K=0\n\n动作（使用精确的方括号）：\n- '[draw]' - 从牌堆抽牌\n- '[take]' - 从弃牌堆拿牌\n- '[swap X Y]' - 将抽到的牌与位置 X（行）Y（列）交换\n- '[discard]' - 弃掉抽到的牌\n"
+  },
+
+  "board": {
+    "drew": "你抽到了：{card}\n现在你必须对它执行 [swap X Y] 或 [discard]。",
+    "took": "你从弃牌堆拿了：{card}\n你必须用它执行 [swap X Y]（不能弃牌）。",
+    "peeked": "你在位置 ({row},{col}) 偷看了：{card}",
+    "turn_view": "你的手牌：\n{hand}\n弃牌堆：{discard}\n{options}",
+    "none": "无"
+  },
+
+  "options": {
+    "final_turns": "最后回合！你的选择：[draw]、[take]、[peek X Y]",
+    "draw": "你的选择：[draw]、[take]",
+    "must_swap": "你必须：[swap X Y]（不能弃掉来自弃牌堆的牌）",
+    "swap_or_discard": "你必须：[swap X Y] 或 [discard]"
+  },
+
+  "hand": {
+    "no_cards": "没有牌",
+    "header": "  Col:   1    2    3",
+    "row": "Row {n}: {cards}"
+  },
+
+  "action_desc": {
+    "swapped": "玩家 {pid} 在位置 ({row},{col}) 用 {new} 交换了 {old}",
+    "discarded": "玩家 {pid} 弃掉了 {card}"
+  },
+
+  "message": {
+    "deck_empty": "牌堆已空！游戏立即结束。",
+    "knocked": "玩家 {pid} 敲牌了！其他每位玩家再获得一个回合。",
+    "final_round": "玩家 {pid} {reason}！其他每位玩家再获得一个回合。"
+  },
+
+  "reason": {
+    "all_revealed": "已亮出所有牌"
+  },
+
+  "invalid": {
+    "wrong_action": "请恰好使用一个方括号动作：[draw]、[take]、[swap X Y]、[discard]、[knock] 或 [peek X Y]",
+    "discard_empty": "弃牌堆是空的！",
+    "must_draw_first": "你必须先执行 [draw]、[take]、[knock] 或 [peek X Y]",
+    "cannot_discard_taken": "你不能弃掉从弃牌堆拿来的牌。你必须交换它。",
+    "have_drawn_card": "你有一张抽到的牌。你必须对它执行 [swap X Y] 或 [discard]。",
+    "need_drawn_swap": "你需要一张抽到的牌才能交换。",
+    "need_drawn_discard": "你需要一张抽到的牌才能弃牌。",
+    "out_of_bounds": "位置超出范围。请使用行 1-{max_row}，列 1-{max_col}",
+    "knock_with_card": "你不能在手持抽到的牌时敲牌。请先完成你的回合。",
+    "already_knocked": "本轮已经有人敲牌了。",
+    "already_revealed": "那张牌已经亮出了！"
+  },
+
+  "summary": {
+    "full": "游戏结束！玩家 {winner} 以 {score} 分获胜！\n\n最终分数：\n{scores}",
+    "line": "玩家 {pid}：{score} 分\n"
+  },
+
+  "board_str": {
+    "title": "=== 高尔夫牌 ===",
+    "discard": "弃牌堆：{card}",
+    "knocked": "玩家 {pid} 已敲牌！",
+    "player_header": "玩家 {pid}（分数：{score}）："
+  }
+}

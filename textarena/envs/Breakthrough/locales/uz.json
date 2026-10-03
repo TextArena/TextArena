@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Siz {color} o'yinini o'ynayapsiz. Siz {direction}ni {board_size}x{board_size} taxtachasida ko'chirishingiz mumkin. O'z navbatingizda siz bitta piyola bir qadam oldinga yoki diagonal oldinga ko'chirishingiz mumkin. Piyola faqat raqibning pichasi bo'lsa diagonal ravishda harakat qilishi mumkin va faqat diagonal qadamda bunday mashg'ul bo'lgan kvadratga o'tishi mumkin. Raqibning pichasi bilan kvadratga kirganingizda, siz uni ushlab olasiz va raqibning pichasi doimo taxtadan chiqariladi. A2 dan a3 ga o'tish uchun qisqa ramkalarda UCIga o'xshash yozuvdan foydalaning, masalan [a2a3]. * 'a' eng chap ustunga mos keladi, '1' - pastki qator (oqning nuqtai nazaridan). * Qoralar uyasi - yuqori qator (8x8 uchun qator). Oqlarning uyasi - pastki qator (1x8 uchun qator). Agar raqibning uyini birinchi bo'lak ushlab olsa, barcha piyolalarini yo'qotasiz."
+  },
+  "invalid_move": {
+    "wrong_format": "Iltimos, [a2a3] kabi qavsli algebraik yozuvdan foydalaning.",
+    "out_of_bounds": "Harakat taxta chegaralaridan tashqarida.",
+    "illegal": "Bu harakat \"O'tish\" qoidalariga rioya qilmaydi yoki bu sizning qo'lingiz emas."
+  },
+  "game_action": {
+    "moved": "O'yinchi {player_id} harakat qiladi {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Oqlar qoralarning uy qatorlariga yetib bordi.",
+    "black_reached": "Qoralar oqlarning uy qatorlariga yetib borishdi.",
+    "white_captured": "Barcha oq piyolalar qo'lga olingan.",
+    "black_captured": "Barcha qora donalar qo'lga olindi.",
+    "no_moves": "O'yinchi {player_id} boshqa harakat qilmaydi."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} în Nim.\nScopul dvs. este să luați ultimul obiect rămas.\nLa fiecare tură, alegeți exact o grămadă și îndepărtați unul sau mai multe obiecte din ea.\nFolosiți formatul '[grămadă cantitate]', unde grămadă este indicele grămezii și cantitatea este numărul de obiecte de îndepărtat.\nDe exemplu, '[0 3]' îndepărtează 3 obiecte din grămada 0."
+  },
+  "state": {
+    "current_pile": "Grămadă curentă:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nu a fost găsit un format de mutare valid. Folosiți '[grămadă cantitate]'.",
+    "correct_format_wrong_fields": "Jucător {player_id}, Acțiune invalidă. Coloana {col} este în afara limitelor.",
+    "out_of_range": "Indicele grămezii {pile_index} este în afara intervalului.",
+    "non_positive": "Trebuie să îndepărtați cel puțin 1 obiect.",
+    "exceeds_pile": "Nu se poate îndepărta {quantity} din grămada {pile_index} (mai sunt doar {pile_count} rămase)."
+  },
+  "observation": {
+    "removed_from_piles": "Jucătorul {player_id} a jucat [{pile_index} {quantity}], îndepărtând {quantity} obiect(e) din grămada {pile_index}."
+  },
+  "outcome": {
+    "win": "Jucătorul {player_id} a luat ultimul(e) obiect(e)!"
+  }
+}

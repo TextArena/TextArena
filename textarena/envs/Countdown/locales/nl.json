@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "U speelt het Countdown-nummerspel!\nDoel: Combineer nummers met +, -, *, / om de doelwaarde te bereiken.\nActieformaat: [i j op] waarbij i,j indexen zijn en op de bewerking is.\nVoorbeeld: [0 2 *] vermenigvuldigt het nummer op index 0 met het nummer op index 2.\nDeling moet resulteren in hele getallen alleen."
+  },
+  "board": {
+    "header": "DOEL: {target}\n\nBeschikbare nummers:\n{numbers}",
+    "best": "{observation}\n\nBeste tot nu toe: {best_value} (afstand: {distance})\nBeste expressie: {best_expression}",
+    "history": "{observation}\n\nGeschiedenis van zetten:\n{moves}",
+    "progress": "{observation}\nHuidige voortgangsscore: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldig actieformaat. Gebruik `[i j op]` waarbij i,j indexen zijn en op +,-,*,/ is",
+    "invalid_indices": "Ongeldige indexen. Moeten verschillend zijn en binnen het bereik 0-{max_index} liggen",
+    "invalid_operation": "Ongeldige bewerking (deling door nul of niet-geheel getal als resultaat)"
+  },
+  "outcome": {
+    "win": "Perfect! Exacte doelwaarde gevonden: {target}",
+    "no_moves": "Geen zetten meer. Beste resultaat: {best_value} (doel: {target})",
+    "turn_limit": "Limiet voor beurten bereikt. Beste resultaat: {best_value} (doel: {target})"
+  }
+}

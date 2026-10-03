@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte locale file. DO NOT translate keys (left side). Only translate values (right side).",
+  "_slots": {
+    "{line}": "The rendered row of cups",
+    "{step}": "The current shuffle step number",
+    "{steps}": "The total number of shuffle steps",
+    "{i}": "The first cup index involved in a swap",
+    "{j}": "The second cup index involved in a swap",
+    "{prompt}": "The localized prompt fragment appended after the cups",
+    "{max_index}": "The highest valid cup index, i.e. num_cups-1",
+    "{ball_pos}": "The cup index the ball is under"
+  },
+  "player_prompt": {
+    "intro": "కప్పులు షఫుల్ చేయబడుతున్నప్పుడు దాగి ఉన్న బంతి 'X'ని ట్రాక్ చేయండి.\nషఫుల్ చేసిన తర్వాత, దాని స్థానాన్ని `[k]`తో ఊహించండి."
+  },
+  "game_message": {
+    "ball_starts": "బంతి ప్రారంభం: {line}",
+    "shuffle": "షఫుల్ {step}/{steps}: కప్పులు {i} మరియు {j} మార్చుకున్నారు.",
+    "cups": "కప్పులు: {line} {prompt}",
+    "guess_now": "(ఇప్పుడు ఊహించండి!",
+    "reveal": "(బంతిని {ball_pos} కింద చూపించు)"
+  },
+  "invalid_move": {
+    "wrong_format": "తప్పు చర్య. `[k]`ని ఉపయోగించండి.",
+    "out_of_range": "సూచిక 0-{max_index} పరిధిలో లేదు."
+  },
+  "outcome": {
+    "win": "సరైనది! మీరు బంతిని కనుగొన్నారు.",
+    "lose": "తప్పు  బంతి కప్పు కింద ఉంది {ball_pos}."
+  }
+}

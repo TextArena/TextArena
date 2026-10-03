@@ -1,0 +1,27 @@
+{
+  "_comment": "Berkas lokal TicTacToe. JANGAN menerjemahkan kunci (sisi kiri). Hanya terjemahkan nilai (sisi kanan).",
+  "_slots": {
+    "{player_id}": "Nomor pemain, misalnya 0 atau 1",
+    "{symbol}": "Tanda pemain, baik X atau O",
+    "{opponent_symbol}": "Tanda lawan, baik X atau O",
+    "{cell}": "Nomor sel papan antara 0 dan 8"
+  },
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam Tic Tac Toe.\nTujuan Anda adalah memenangkan tiga dalam satu baris (horizontal, vertikal, atau diagonal) di papan.\nPada giliran Anda, Anda harus memilih nomor kotak (0-8) yang ingin Anda tempati tanda Anda berikutnya.\nMisalnya, '[4]' menempatkan tanda Anda di sel tengah papan.\nSebagai Pemain {player_id}, Anda akan menjadi '{symbol}', sementara lawan Anda adalah '{opponent_symbol}'."
+  },
+  "board": {
+    "current_board": "Papan Saat Ini:\n\n{board}\n\nGerakan Tersedia: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Gerakan yang diajukan tidak mengikuti format yang benar.",
+    "out_of_range": "{cell} bukan sel yang valid. Harus antara 0 dan 8.",
+    "already_occupied": "Sel {cell} sudah terisi."
+  },
+  "game_action": {
+    "placed": "Pemain {player_id} menempatkan tanda mereka ({symbol}) di sel {cell}."
+  },
+  "outcome": {
+    "win": "Pemain {player_id} menang!",
+    "draw": "Permainan seri!"
+  }
+}

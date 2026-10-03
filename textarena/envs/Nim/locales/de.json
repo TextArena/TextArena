@@ -1,0 +1,21 @@
+{
+    "player_prompt": {
+        "intro": "Du bist Spieler {player_id} in Nim.\nDein Ziel ist es, das letzte verbleibende Objekt zu nehmen.\nWähle in jedem Zug genau einen Stapel und entferne ein oder mehrere Objekte daraus.\nVerwende das Format '[pile quantity]', wobei pile der Stapelindex und quantity die Anzahl der zu entfernenden Objekte ist.\nZum Beispiel entfernt '[0 3]' 3 Objekte aus Stapel 0."
+    },
+    "state": {
+        "current_pile": "Aktuelle Stapel:\n{piles}"
+    },
+    "invalid_move": {
+        "wrong_format": "Kein gültiges Zugformat gefunden. Verwende '[pile quantity]'.",
+        "correct_format_wrong_fields": "Spieler {player_id}, ungültige Aktion. Spalte {col} liegt außerhalb des gültigen Bereichs.",
+        "out_of_range": "Stapelindex {pile_index} liegt außerhalb des gültigen Bereichs.",
+        "non_positive": "Es muss mindestens 1 Objekt entfernt werden.",
+        "exceeds_pile": "Es können nicht {quantity} Objekte aus Stapel {pile_index} entfernt werden (nur noch {pile_count} vorhanden)."
+    },
+    "observation": {
+        "removed_from_piles": "Spieler {player_id} spielte [{pile_index} {quantity}] und entfernte {quantity} Objekt(e) aus Stapel {pile_index}."
+    },
+    "outcome": {
+        "win": "Spieler {player_id} hat das/die letzte(n) Objekt(e) genommen!"
+    }
+}

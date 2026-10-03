@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Siz Quantum Tic Tac Toe oyunda {player_id} oyuncusısınız.\nSizin simvolüñiz '{symbol}', ve sizin hamle sayılarıñız daima {parity} (meselâ, X1, X3 veya O2, O4).\n\nMaqsat: Üç klassik işareti bir sırada qoyaraq (üst-üstte superpozitsiyalardan) utmaq.\n\nNasıl Oynanılır:\n- Her turda, '[a,b]' formatında eki farklı boş kvadratqa bir qorqunç işareti qoyun.\n- Bu işaretler entangled olıp, 'X1 / X1' veya 'O4 / O4' kibi etiketlenilir.\n- Sizin bir kvadratqa qorqunç işaret qoymañız mümkün degil, eger o kvadrat artıq çöküntüge uğramışsa (katılaşmışsa).\n\nÇöküntü Qaidası:\n- Eger sizin hamleniz entanglement grafiqinde bir döngü yaratırsa, o avtomatik olarak çöküntüge uğrayır.\n- Döngüdeki her qorqunç işaret ikiye bölünerek klassik işaretlerden birine çevirilir.\n- Herangi bağlı qorqunç işaretler de çöküntüge uğrayır.\n\nUtmaq:\n- Oyun, bir oyuncunun üç klassik işaretini bir sırada qoyğanda bite.\n- Eger eki oyuncu bir sıradaki çöküntüde bir sırada utmağa nail olsa, max hamle sayısı az olanı utmağa nail olur.\n\nMisal hamle: '[0,4]' 0 ve 4 hücrelerge bir qorqunç işaret qoyur."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Tahtası:\n\n{board}\n\n'[a,b]' formatında bir kvant işaretini eki kvadratqa qoyaraq hamleniñizni bildirin."
+  },
+  "invalid_move": {
+    "wrong_format": "Uquqsız format. '[a,b]' qullanıñız.",
+    "invalid_cells": "Ucuz ya da eki qatlı hücre indeksleri.",
+    "already_solidified": "Üceyrelerden biri endi qattılaştı."
+  },
+  "game_action": {
+    "placed": "Oyuncu {player_id} simvolüni {pos_a} ve {pos_b} hücreleri arasında bir superpozitsiyağa qoydu."
+  },
+  "game_message": {
+    "dependent_resolved": "Bağlı superpozitsiya halloldu. Hücre ({r}, {c}) şimdi {symbol}.",
+    "last_cell_resolved": "Soñki hücrenin superpozitsiyası halloldu. Hücre ({r}, {c}) şimdi {symbol}.",
+    "superposition_resolved": "Superpozitsiya halloldu. Hücre ({r}, {c}) şimdi {symbol}."
+  },
+  "outcome": {
+    "win": "{player_id} oyuncısı, qatı işaretlernen ğalebe qazana!",
+    "draw": "Oyun teñ çıqtı!"
+  }
+}

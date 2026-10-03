@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Mirësevini në Lights Out! Ju keni një rrjetë {size}x{size} të dritave.\nQëllimi juaj është të fikni TË GJITHA dritat (të përfaqësuara nga '.').\nKur shtypni një dritë, ajo ndërrohet veten dhe fqinjët e saj të afërt (lart/poshtë/majtas/djathtas).\nShkruani [row col] për të shtypur një dritë (0-indekset, kështu që vargu i vlefshëm është 0-{max_index}).\nJu keni deri në {max_turns} lëvizje për të zgjidhur enigmën.\nLegjenda: 'O' = dritë e ndezur, '.' = dritë e fikur"
+  },
+  "board": {
+    "current_state": "Gjendja aktuale e rrjetës (Lëvizja {moves_made}, {moves_left} lëvizje të mbetura, {completion}% e plotë):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Veprimi duhet të jetë në formatin [row col] ku rreshti dhe kolona janë numra të plotë nga 0 në {max_index}.",
+    "out_of_range": "Koordinatat duhet të jenë midis 0 dhe {max_index}. Ju keni futur [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Urime! Ju zgjidhët enigmën në {moves_used} lëvizje!",
+    "loss": "Loja mbaroi! Ju përdorët të gjitha {max_turns} lëvizjet pa zgjidhur enigmën. Përfundimi i fundit: {completion}%\nGjendja e fundit:\n{grid}"
+  }
+}

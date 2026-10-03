@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "आप तीन खिलाड़ियों वाला GOPS में खिलाड़ी {player_id} हुन।\n- आपके हाथ में 13 पत्ती (प्रत्येक ठीक एक बार) A-K हुन।\n- प्रत्येक राउंड में एक पुरस्कार प्रकट होता है। `[Q]`, `[10]`, `[2]` जस्तो एक पत्ती जमा करू…\n- सब से ऊंचा पत्ती पुरस्कार (+ कोनो भी बचाव पुरस्कार) जितता है। बराबरी पुरस्कार को अगला राउंड में रोल कर देता है।\n- 13 राउंड के बाद, सब से ऊंचा कुल जितता है। अमान्य चाल = खारिज।"
+  },
+  "round": {
+    "header": "### राउंड {round}/१३ - पुरस्कार: {prize} (मूल्य {worth})",
+    "hand": "अहाँक शेष हाथ: {hand}"
+  },
+  "reveal": {
+    "win": "बोली » {bids} - खिलाड़ी {winner} {pot} जीतता है।",
+    "tie": "बिड  {bids} - टाई, पोट नाउ {pot}।",
+    "scores": "स्कोरसभ → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "क्रियाक लेल कोष्ठकमे लिखल कार्ड आवश्यक अछि जेना \"[Q]\"",
+    "bad_card": "कार्ड पहिनहि प्रयोग कएल गेल वा अवैध अछि."
+  },
+  "elimination": {
+    "player": "खेलाडी {pid} बेर-बेर अमान्य चाल के बाद बाहर भेल।"
+  },
+  "outcome": {
+    "auto_win": "दूटा खेलाड़ी बाहर भेल - स्वतः जीत।",
+    "final": "अन्तिम स्कोरसभ: {scores}"
+  }
+}

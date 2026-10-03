@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Taule dai zûcs: {board}",
+    "valid_moves": "{observation}\nMozions validis: {moves}",
+    "no_valid_moves_reset": "{observation} No moviments valids - tu podaressis vê di saltâ.",
+    "no_valid_moves_step": "{observation} No moviments valids. Tu puedis saltâ fûr di lôr.",
+    "scores_reset": "{observation}\nPuntegjis corrents - Ner: {black_count}, Blanc: {white_count}\n",
+    "scores_step": "{observation}\nPuntegjis - Ner: {black_count}, Blanc: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "La mosse e à di jessi de forme [row, col].",
+    "illegal": "Moviments ilegâi. moviments valids: {valid}"
+  },
+  "game_action": {
+    "skipped": "Il zuiadôr {pid} al à di saltâ il so turni.",
+    "played": "Il Zugadôr {pid} ({piece}) al à zugât [{r}, {c}] voltant {flipped} pedinis"
+  },
+  "game_message": {
+    "must_skip": "Zogadôr {pid} ({piece}) nol à mozions validis e al à di saltâ."
+  },
+  "outcome": {
+    "black_wins": "Ner al vinç {black_count}-{white_count}.",
+    "white_wins": "Blanc al vinç {white_count}-{black_count}.",
+    "draw": "Disegnâ {black_count}-{white_count}."
+  }
+}

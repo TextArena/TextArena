@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Tu sês Zogadôr {player_id} in un Dilemi dal Prisonîr Iterât a 3 zogadôrs. La partide dure {num_rounds} turnis.\nStruture dal turni:\n• {conv_rounds} turnis di ce che tu vuelis\n• 1 turni di decision - invii un token par opponent: '[<opp-id> cooperate]' o '[<opp-id> defect]' (par esempli '[1 defect] [2 cooperate]'; il default al è 'cooperâ'). \nMatris di payoff a pâr (aplicade a ogni pâr no ordenât):\n  - Tutis a cooperin  ->  {reward}\n  - Tutis a tradissin     ->  {punishment}\n  - Tu a tradîs, lôr a cooperin -> {temptation}\n  - Tu a cooperis, lôr a tradissin -> {sucker}\nIl zogadôr(i) cun il puntuâl plui alt a la fin di ducj i turnis a vinç."
+  },
+  "round": {
+    "start": "─── Inizi dal Turni {round} ───\tTu puedis conversâ liberamentri pei prossims {conv_rounds} turnis.",
+    "chat_finished": "Cjat finît pe ronde {round}. Invie i tiei decisis, un token par aversari: `[pid cooperate]` o `[pid defect]`."
+  },
+  "results": {
+    "header": "### Ronde {round} - Risultâts:",
+    "pair_line": "{observation}\n\t Zogadôr {i} vs Zogadôr {j} a scjernût di {choice_i} e {choice_j} rispetivamentri (Zogadôr {i} al à vût {gain_i}, Zogadôr {j} al à vût {gain_j})",
+    "scores_open": "{observation} -> Scores atuâi: ",
+    "score_first": "{observation}Zogadôr {player_id} ({score})",
+    "score_next": "{observation}; Zogadôr {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Puntegjis finâls: {scores}.  Classifiche grupis (pegjor→miglior): {groups}"
+  }
+}

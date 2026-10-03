@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "I ye Player {player_id} ye Quantum Tic Tac Toe.\nA ka kɛ {symbol}, ka kelenw ta ye {parity} (e.g., X1, X3 walima O2, O4).\n\nDɔɔnin: Kɛɲɛ ni kɛɛnɛ ka kelenw tɛɛnɛ sɔrɔ (a ka bɔnɛ ka superpositions).\n\nNiyɛɛnɛ:\n- Kɛɲɛ kelen, sigi ka spooky mark ye filɛ kelenw ye ka tɛɛnɛ '[a,b]' ka fɔrmɛ.\n- A ka marks ye entangled, ka kelenw ye 'X1 / X1' walima 'O4 / O4'.\n- I ka tɛɛnɛ spooky marks ye filɛ kelenw ka bɔnɛ ka collapsed (solidified).\n\nCollapse Rule:\n- Ni a ka kɛɲɛ kɛɛnɛ cycle ye entanglement graph, a ka collapse tɔɔ.\n- Kɛɲɛ spooky mark ye cycle ka bɔnɛ ka classical mark ye filɛ kelenw.\n- Ni dependent spooky marks ka bɔnɛ, a ka collapse.\n\nKɛɲɛ:\n- Dɔɔnin kɛɛnɛ ni player kelen kɛɛnɛ classical marks tɛɛnɛ sɔrɔ.\n- Ni player wɛɛ kɛɛnɛ line ye collapse kelen, a ka min max move number kɛɛnɛ kɛɛnɛ.\n\nExample move: '[0,4]' sigi ka spooky mark ye cells 0 ka 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Board:\n\n{board}\n\nSigi a ka move '[a,b]' ka tɛɛnɛ quantum mark ye filɛ kelenw."
+  },
+  "invalid_move": {
+    "wrong_format": "Nin ye cogoya fufafu le ye. Aw ka nin tagamasiɲɛ ta: \"[a,b]\".",
+    "invalid_cells": "Sɛbɛri kɔrɔw tɛ sɛbɛ ye.",
+    "already_solidified": "Filɛ kelen ye ka bɔnɛ ka solidified."
+  },
+  "game_action": {
+    "placed": "Jɛkulu {player_id} daa jɛkulu in ye so daɲɛ ma so {pos_a} ni {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Dependent superposition bɔnɛ. Filɛ ({r}, {c}) ye ka {symbol}.",
+    "last_cell_resolved": "Superposition ye last cell bɔnɛ. Filɛ ({r}, {c}) ye ka {symbol}.",
+    "superposition_resolved": "Kɔnɔ kɔnɔ ka ca. Kɔnɔ ({r}, {c}) ye {symbol}."
+  },
+  "outcome": {
+    "win": "Ɲininkɛla {player_id} be se ka see sɔrɔ n'a ye a makiri kɛ!",
+    "draw": "U bɛɛ bɛnna a la ko an tɛna bɔnɛ foyi sɔrɔ."
+  }
+}

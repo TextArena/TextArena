@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Yaa ngone Player {player_id}. Yaa ngone tegtal Sudoku.\nFii la xew-xewu wàccuwaayu Sudoku. Oo row moo ñu numérotee 1 ba 9, te oo column itam moo ñu numérotee 1 ba 9.\nOo cell wuute wu moo nekkul woon, moo ñu bindaate ko '.', te oo cell wi ñu bindaate woon ci biir ñu ngi bindaate ak yi digits 1 ba 9.\n\nWàccuwaayu Sudoku wu jekk:\nOo dalub ngone moo ñu xemme ba ñu ngi tegtale kaani cell wu wuute wu ci biir wàccuwaayu 9x9 ak yi digits 1 ba 9 ngir:\n1. Oo row moo ñu ngi bindaate yi digits 1 ba 9 te du ñu ci wuute.\n2. Oo column moo ñu ngi bindaate yi digits 1 ba 9 te du ñu ci wuute.\n3. Oo wàccuwaayu 3x3 subgrids jekk ñu ngi bindaate yi digits 1 ba 9 te du ñu ci wuute.\n\nYoon ak Njëlbeen:\n1. **Bul sonnal** yi limu yi ñu ngi bindaate woon ci biir wàccuwaayu.\n2. **Bul tegtale** kaani cell wu wuute wu ñu bindaate ko '.'.\n3. Ngone moo xemme ba ñu ngi tegtale, waaye xemme ba ñu ngi bindaate ko ci njëlbeen '[row column number]'.\n4. **Xemme** ba ñu ngi tegtale du ñu ci wuute kaani yoonu Sudoku. Yi tegtale yu ñu ngi sonnal du ñu ngi dénkoon.\nExamples:\n- **Tegtale yu baax**:\n  - Wàccuwaayu Snippet Biiru Tegtale:\n  \n  - Tegtale: `[5 3 7]`\n  - Njëlbeen: Tegtale 7 ci row 5, column 3 du ñu ci wuute kaani yoonu Sudoku.\n\n- **Tegtale yu ñu ngi sonnal** (Sonnal kaani cell wu ñu bindaate woon):\n  - Wàccuwaayu Snippet Biiru Tegtale:\n  \n  - Tegtale: `[1 1 9]`\n  - Njëlbeen: Cell (1,1) ñu ngi bindaate woon 5. Ngone du ñu ko sonnal.\n\n- **Tegtale yu ñu ngi sonnal** (Wuute kaani yoonu Sudoku):\n  - Wàccuwaayu Snippet Biiru Tegtale:\n  \n  - Tegtale: `[1 3 5]`\n  - Njëlbeen: Tegtale 5 ci row 1, column 3 wuute kaani yoonu Sudoku ngir 5 ñu ngi bindaate woon ci row 1.\n\nTaariixu yi tegtale yi ngone ak yi xalaat yi ngone du ñu ngi faral ci biir yi round yi ñu ngi tegtale. Jëfandikoo taariixu yi tegtale yi ngone ngir xemme ba ñu ngi tegtale baax ci biir yi round yi ñu ngi tegtale. Baal ma!\n\n"
+  },
+  "board": {
+    "game_board": "Jëfandikukat: {board}",
+    "board_state": "Tane bu jëkk: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Jëf ju amul solo. Njiitu {player_id} tontuwul ak \"nombarug téere bu am solo\".",
+    "out_of_bounds": "Xar-xar bu ñuul. Player {player_id} xaral {num} ci ({row}, {col}) te du ci xew-xewu grid.",
+    "overwrite": "Xar-xar bu ñuul. Player {player_id} xaral limu xar-xar yu ngone yi ({row}, {col}).",
+    "violates_rules": "Xar-xar bu ñuul. Player {player_id} xaral {num} ci ({row}, {col}) te tuddal limuy Sudoku."
+  },
+  "outcome": {
+    "win": "Congratulations! Jëfandikukat bi {player_id} matal na xelu Sudoku.",
+    "turn_limit": "Limu xar-xar yi ngaa ngi jeexal. Ngaa ngi tuddal {percent}% ci yaa xol yi ñu ngi lekkal."
+  }
+}

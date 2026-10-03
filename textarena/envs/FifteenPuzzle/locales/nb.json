@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id}. Du spiller 15-Puslespillet.\nMålet med spillet er å arrangere de nummererte flisene i stigende rekkefølge fra 1 til 15, med det tomme rommet plassert i nedre høyre hjørne.\nFor å gjøre et trekk, kan du flytte en flis inn i det tomme rommet (representert med doble understrek, f.eks. __) ved å bruke en av følgende kommandoer:\n- 'up': Flytt flisen under det tomme rommet opp.\n- 'down': Flytt flisen over det tomme rommet ned.\n- 'left': Flytt flisen til høyre for det tomme rommet til venstre.\n- 'right': Flytt flisen til venstre for det tomme rommet til høyre.\nFor å sende inn ditt trekk, skriv retningen (f.eks. 'up', 'down', 'left' eller 'right') i firkantede parenteser, f.eks. [up].\nDen nåværende brettlayouten vises nedenfor. Bruk informasjonen til å løse puslespillet.\n"
+  },
+  "board": {
+    "current_board": "Nåværende brett:\n\n{board}\nTilgjengelige trekk: {moves}",
+    "game_board": "Spillebrett:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldig trekkformat. Spiller {player_id} svarte ikke med en gyldig retning i firkantede parenteser.",
+    "illegal_move": "Ugyldig trekk. Flisen kan ikke flyttes i den spesifiserte retningen."
+  },
+  "outcome": {
+    "win": "Gratulerer! Spiller {player_id} har løst 15-Puslespillet.",
+    "turn_limit": "Tidsbegrensningen er nådd. Modellen fullførte {percent} prosent av puslespillet"
+  }
+}

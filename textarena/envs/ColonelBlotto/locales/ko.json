@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "당신은 콜론블로토의 {role}입니다.\n당신의 목표는 상대방보다 더 많은 라운드를 이기는 것입니다.\n각 라운드에서 {field_names}에 정확히 {num_total_units} 유닛을 배치해야 합니다.\n유닛을 더 많이 배치한 플레이어가 해당 필드를 이기고, 더 많은 필드를 이긴 플레이어가 라운드를 이깁니다.\n예를 들어, '[A7 B7 C6]'는 A에 7 유닛, B에 7 유닛, C에 6 유닛을 배치합니다.",
+    "commander_alpha": "사령관 알파",
+    "commander_beta": "사령관 베타"
+  },
+  "game_state": {
+    "header_round": "=== 콜론블로토 - 라운드 {current_round}/{num_rounds} ===\n라운드 승리 - 사령관 알파: {alpha_score}, 사령관 베타: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\n라운드 {current_round}\n사령관 알파 배치: {p0_allocations}\n사령관 베타 배치: {p1_allocations}\n",
+    "winner_alpha": "{message}승리자: 사령관 알파",
+    "winner_beta": "{message}승리자: 사령관 베타",
+    "tie": "{message}무승부!"
+  },
+  "invalid_move": {
+    "wrong_format": "잘못된 입력 형식입니다. 사용: A:5, B:10, C:5",
+    "invalid_field": "잘못된 필드 이름입니다. 유효한 필드: {field_names}",
+    "wrong_allocation_value": "모든 배치는 음수가 아닌 정수여야 합니다.",
+    "incorrect_total_units": "정확히 {num_total_units} 유닛을 배치해야 합니다. 현재 합계: {current_sum}",
+    "good_allocations": "배치가 올바릅니다."
+  },
+  "outcome": {
+    "winner_alpha": "사령관 알파가 {num_rounds} 라운드 후 {score_0}-{score_1}로 승리!",
+    "winner_beta": "사령관 베타가 {num_rounds} 라운드 후 {score_1}-{score_0}로 승리!",
+    "draw": "{num_rounds} 라운드 후 {score_0}-{score_1}로 무승부!",
+    "early_winner_alpha": "사령관 알파가 {scores_0}-{scores_1}로 (다수 확보) 승리!",
+    "early_winner_beta": "사령관 베타가 {scores_1}-{scores_0}로 (다수 확보) 승리!"
+  }
+}

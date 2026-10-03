@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} indiško pokero žaidime.\n- 52 kortų kaladė; jūs matote tik priešininko kortą.\n- Antė {ante} žetonų kiekvieną ratą, {max_rounds} ratų iš viso.\n- Leistini judėjimai: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X yra teigiamas sveikas skaičius ≤ jūsų žetonų skaičius.)\n- Aukščiausia paslėpta korta laimi banką atskleidimo metu.\n"
+  },
+  "round": {
+    "announce": "### Ratas {current_round}/{max_rounds}\nJūsų priešininko korta yra: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Pateikite tik vieną veiksmą su laužtiniais skliaustais, pvz. '[check]', '[bet 2]', '[call]', '[raise 3]', arba '[fold]'.",
+    "cannot_check": "Negalima [check] - jūs esate prieš betą.",
+    "amount_min": "Statymo / pakėlimo suma turi būti ≥ 1.",
+    "cannot_bet": "Negalima [bet] - reikia [call] / [raise] / [fold].",
+    "nothing_to_call": "Nėra ko kviesti; jūs galite [check] vietoje.",
+    "no_bet_to_raise": "Naudokite [bet X] atidaryti; nėra statymo, kurį reikia pakelti.",
+    "insufficient": "Nepakanka žetonų šiam veiksmui."
+  },
+  "game_action": {
+    "action": "Žaidėjas {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kaina {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Jūsų galimi veiksmai: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Bankas {pot} → Žaidėjas {winner}. (Bankai P0:{p0}, P1:{p1})",
+    "folded": "Žaidėjas {player_id} pasidavė.",
+    "showdown_win": "Atskleidimas: {card_win} nugalėjo {card_lose}.",
+    "showdown_tie": "Atskleidimo lygiosios: abu {card}. Bankas padalintas – kiekvienas gauna {split}."
+  },
+  "outcome": {
+    "p0_wins": "Žaidėjas 0 laimi ({bank0} > {bank1})",
+    "p1_wins": "Žaidėjas 1 laimi ({bank1} > {bank0})",
+    "draw": "Lygus žetonų skaičius po visų ratų"
+  }
+}

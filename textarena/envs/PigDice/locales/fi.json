@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} ja pelaat Pig Dice -peliä.\n\nSäännöt:\n- Vuorollasi voit joko '[roll]' tai '[hold]'\n- Heitä 2-6: Lisää vuoron kokonaissummaan\n- Heitä 1: Menetä vuoron kokonaissumma ja lopeta vuoro\n- Pidä: Lisää vuoron kokonaissumma pistemäärääsi ja lopeta vuoro\n- Ensimmäinen, joka saavuttaa {winning_score} pistettä, voittaa\n\nKun on vuorosi, näet nykyiset pistemäärät ja vuoron kokonaissumman.\nVastaa '[roll]', jos haluat heittää noppaa tai '[hold]', jos haluat pankata pisteet."
+  },
+  "invalid_move": {
+    "invalid_action": "Virheellinen toimintamuoto. Käytä '[roll]' tai '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Pelaaja {player_id} meni nurin ja menetti {turn_total} pistettä!",
+    "player_hold": "Pelaaja {player_id} pitää ja pankkaa {turn_total} pistettä."
+  },
+  "board": {
+    "player": "Pelaaja 0: '{score_0}'; Pelaaja 1: '{score_1}'",
+    "current_total_scores": "Nykyiset kokonaispisteet: {scores}\nVuorosi nykyinen kokonaissumma on {turn_total}.",
+    "roll_history": "{observation}\nVuorosi heittohistoria: {roll_history}",
+    "first_roll": "{observation}\nTämä on vuorosi ensimmäinen heitto.",
+    "available_actions": "{observation}\nKäytettävissä olevat toiminnot: '[roll]' tai '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Pelaaja {winner_id} voitti, koska hänellä oli korkeampi pistemäärä vuororajan lopussa ({scores})",
+    "winner_by_score": "Pelaaja {winner_id} voitti saavuttamalla kohdepistemäärän {winning_score}!",
+    "draw": "Vuororaja on saavutettu ja kaikilla pelaajilla on sama pistemäärä: {scores}"
+  }
+}

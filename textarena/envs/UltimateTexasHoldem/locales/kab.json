@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Mazal ulac tikarḍiwin.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Uwanek d uwanek vs Dealer\n\n📖 AḍRIS N UDLIS:\n• Tazmilt n yichipiyen n tazwara: {start_chips}\n• Uẓawan n yikarḍiyen: 52 yikarḍiyen (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Uwanek d uwanek vs Dealer (axxam)\n• Kraygat tawla tazeggaɣt tettwassen s yifasen n Ultimate Texas Hold'em: uwanek yesseɣra ANTE d BLIND, yesseɣra 2 yikarḍiyen n uwanek, yesseɣra PLAY n yikarḍiyen n uwanek, yeqqel 5 yikarḍiyen n uwanek, yeqqel yikarḍiyen n uwanek d yikarḍiyen n Dealer. Lmeɛna n uwanek d aḥraz n yichipiyen n uwanek (mi uwanek yesseɣra yikarḍi d-ameẓẓan), mi uwanek yesseɣra yikarḍi d-ameqqran.\n• Uwanek yeqqel mi uwanek yesseɣra 0 yichipiyen neɣ d-uleɣɣal n tazwara n tawla (TAYA) neɣ kammel 1000 tawliwin d yichipiyen (RAY)\n\n💰 TAZMILT N YIKARḌIYEN:\n• ANTE: Tazmilt n yikarḍiyen n ante ${ante} kraygat tawla\n• BLIND: Tazmilt n yikarḍiyen n blind ${ante} kraygat tawla\n• PLAY: Tazmilt n yikarḍiyen n play. Deg tawla, uwanek yezmer ad yili kan waḥed n yigawen n tɣawsa: (${ante4} mi d-yella deg PRE-FLOP, ${ante2} mi d-yella deg FLOP, neɣ ${ante} mi d-yella deg RIVER. Yezmer daɣen ad yeqqel deg river, ad yeqqel yikarḍi n uwanek, d ad yeqqel tazmilt n yikarḍiyen n uwanek.)\n\n🎴 TAZMILT N YIKARḌIYEN:\n• Uwanek yesseɣra 2 yikarḍiyen n uwanek\n• Dealer yesseɣra 2 yikarḍiyen n uwanek\n• 5 yikarḍiyen n uwanek ttwaqqeln deg tazwara\n• Yikarḍiyen n uwanek ttwaqqeln s yifasen n uwanek\n\n🏆 TAZMILT N DEALER:\n• Dealer yesseɣra kan PAIR (2 yikarḍiyen n uwanek n yikarḍi) ad yili, s yikarḍiyen n uwanek d 5 yikarḍiyen n uwanek.\n• Tazmilt n Dealer tettwassen s yifasen n uwanek, am ttwaqqel deg uḍris n uwanek.\n\n🎮 YIFASEN N UDLIS & TAZMILT N YIGAWEN:\n📋 PRE-FLOP:\n  • Tazmilt n yigawen: [4x] (${ante4}) neɣ [check]\n  • [4x]: Tazmilt n ${ante4} PLAY, ttwaqqel 3 yikarḍiyen n uwanek\n  • [check]: Ulac n tazmilt n yikarḍiyen, ttwaqqel 3 yikarḍiyen n uwanek\n\n📋 FLOP:\n  • Mi 4x bet yettwasen: Kan [skip] i yezmer ad yili (auto-reveals last 2 yikarḍiyen n uwanek)\n  • Mi ulac 4x bet: [2x] (${ante2}) neɣ [check]\n  • [2x]: Tazmilt n ${ante2} PLAY, ttwaqqel 2 yikarḍiyen n uwanek\n  • [check]: Ulac n tazmilt n yikarḍiyen, ttwaqqel 2 yikarḍiyen n uwanek\n\n📋 RIVER:\n  • Mi 4x neɣ 2x bet yettwasen: Kan [skip] i yezmer ad yili (auto-proceeds to showdown)\n  • Mi ulac PLAY bet: [1x] (${ante}) neɣ [fold]\n  • [1x]: Tazmilt n ${ante} PLAY, yeqqel s showdown\n  • [fold]: Yeqqel yikarḍi n uwanek, yeqqel tazmilt n yikarḍiyen n uwanek\n\n📋 SHOWDOWN:\n  • Yikarḍiyen n uwanek ttwaqqeln d yezmer ad yili\n  • Yikarḍi n uwanek yezmer ad yili s 7 yikarḍiyen (2 yikarḍiyen n uwanek + 5 yikarḍiyen n uwanek)\n  • Tazmilt n yikarḍiyen tettwassen s yifasen n uwanek\n\n💎 TAZMILT N YIKARḌIYEN:\n📊 ANTE BET:\n  • Dealer ur yezmir ara ad yili: PUSH (tazmilt n yikarḍiyen tettwabeddel)\n  • Dealer yezmir ad yili & uwanek yezmir ad yili: 1:1 payout (tazmilt n yikarḍiyen + yichipiyen)\n  • Dealer yezmir ad yili & uwanek ur yezmir ara ad yili: Tazmilt n yikarḍiyen tettwabeddel\n  • Tie: PUSH (tazmilt n yikarḍiyen tettwabeddel)\n\n📊 BLIND BET:\n  • Ur yezmir ara ad yili s tazmilt n Dealer\n  • Uwanek yezmir ad yili: Tazmilt n yikarḍiyen tettwabeddel d tazmilt n yikarḍiyen n uwanek\n  • Uwanek ur yezmir ara ad yili: Tazmilt n yikarḍiyen tettwabeddel\n  • Tie: PUSH (tazmilt n yikarḍiyen tettwabeddel)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Ulac n tazmilt n yikarḍiyen\n\n📊 PLAY BET:\n  • Ur yezmir ara ad yili s tazmilt n Dealer\n  • Tazmilt n yikarḍiyen n uwanek d yikarḍi n Dealer\n  • Uwanek yezmir ad yili: 1:1 payout (tazmilt n yikarḍiyen + yichipiyen)\n  • Uwanek ur yezmir ara ad yili: Tazmilt n yikarḍiyen tettwabeddel\n  • Tie: PUSH (tazmilt n yikarḍiyen tettwabeddel)\n\n🎯 TAZMILT N YIKARḌIYEN N UDLIS (Ameẓẓan s Umeqqran):\n  1. Royal Flush: A-K-Q-J-10 n yikarḍi n uwanek\n  2. Straight Flush: 5 yikarḍiyen n uwanek n yikarḍi\n  3. Four of a Kind: 4 yikarḍiyen n uwanek n yikarḍi\n  4. Full House: 3 yikarḍiyen n uwanek n yikarḍi + 2 yikarḍiyen n uwanek n yikarḍi\n  5. Flush: 5 yikarḍiyen n uwanek n yikarḍi\n  6. Straight: 5 yikarḍiyen n uwanek\n  7. Three of a Kind: 3 yikarḍiyen n uwanek n yikarḍi\n  8. Two Pair: 2 yikarḍiyen n uwanek n yikarḍi + 2 yikarḍiyen n uwanek n yikarḍi\n  9. One Pair: 2 yikarḍiyen n uwanek n yikarḍi\n  10. High Card: Yikarḍi n uwanek yezmer ad yili\n\n⌨️  TAZMILT N YIGAWEN:\n• [4x] neɣ [play bet 4x]: Tazmilt n ${{self.ante_amount*4}} PLAY\n• [2x] neɣ [play bet 2x]: Tazmilt n ${{self.ante_amount*2}} PLAY\n• [1x] neɣ [play bet 1x]: Tazmilt n ${{self.ante_amount*1}} PLAY\n• [check] neɣ [c]: Check (ulac n tazmilt n yikarḍiyen)\n• [fold] neɣ [f]: Fold (yeqqel yikarḍi n uwanek)\n• [skip] neɣ [s]: Skip s yifasen n uwanek (mi ulac n tazmilt n yikarḍiyen)\n\n💡 TAZMILT N YIGAWEN:\n• Yikarḍiyen n tazwara n uwanek (yikarḍiyen n uwanek, yikarḍiyen n uwanek) yezmer ad yili 4x bets\n• Yezmer ad yili tazmilt n Dealer - yikarḍiyen n uwanek yezmer ad yili push mi Dealer ur yezmir ara ad yili\n• BLIND bet yezmer ad yili d-ameẓẓan s yikarḍiyen n uwanek (Royal Flush = 500:1!)\n• Yezmer ad yili tazmilt n yichipiyen n uwanek! Mi tazmilt n yichipiyen n uwanek tettwabeddel s 0 neɣ d-uleɣɣal n tazwara n tawla, uwanek yezmer ad yili.\n\n⚠️  TAZMILT N YIGAWEN:\n• ANTE d BLIND bets yezmer ad yili kraygat tawla\n• PLAY bets yezmer ad yili d-ameẓẓan d yigawen n tɣawsa\n• Yezmer ad yili tazmilt n yigawen, d kan waḥed n yigawen n tɣawsa i yezmer ad yili.\n\n",
+    "state": "🎯 TAWLA {round}\n💰 Yichipiyen: {chips}\n🎴 Yikarḍi n uwanek: {hand}\n📊 Tazmilt n yikarḍiyen: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Phase: {phase}\n🎯 Tazmilt n yigawen: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Assektel {round} yettwabed ! Betres : ANTE ${ante}, BLIND ${blind}. Tella tesɛu {chips} tikwatin yettwaznen.",
+    "your_hand": " Afus-ik: {hand}",
+    "flop_revealed": " FLOP yettwasken: {cards}",
+    "river_revealed": " RIVER yefka-d: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Taɣawsa ur nlaq ara i tfaska-yagi. Tameḍliwin yellan: {available}",
+    "message": " Taɣawsa ur nelli ara d tin n lεali! Tameḍna i yellan: {available}"
+  },
+  "action": {
+    "folded": "Teǧǧiḍ-d."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! afus n umsensi: {cards}",
+    "community_cards": " Tikkarḍiwin n Tdukli: {cards}",
+    "player_best": "🎴 Tikart ines : {name} ({cards})",
+    "dealer_best": "🎴 Tikart n axxam : {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (yeqqen)",
+    "blind_lost_folded": " TAMURT IWERREN! -${blind} (teɣli)",
+    "ante_won": "✅ ANTE bet yezmer ad yili! +${amount}",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} yerra-d.",
+    "ante_lost": " ANTE bet LOST! -${ante}",
+    "blind_won": "✅ TAMURT n tmuɣliwin WIN! +${amount}",
+    "blind_pushed": " TAMURT TAWALA YETTEYYA! ${blind} i d-yuɣalen.",
+    "blind_lost": " TEBLIDT-IWALEN! -${blind}",
+    "play_won": "✅ TAMURT n tneqla YERREB! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} yerra-d.",
+    "play_lost": " IYERREN-d ṭṭraḍ YETTWAL! -${play}",
+    "net_gain": "🎉 Assektel {round} yettwattun ! Net gain : +${net}",
+    "net_loss": "💸 Tawla {round} tettwassen! Tazmilt n yichipiyen: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 Uwanek yezmer ad yili! {max_turns} tawliwin tettwassen. Uwanek yesseɣra ${chips} yichipiyen - Uwanek yezmer ad yili!",
+    "game_over_lose": " TAMURT! Ur tesεiḍ ara ticebbiwin. Win i d-yefkan taḥeqqit, yerbeḥ !",
+    "reward_win": "Anezraf yettwasekkel {winner_rounds} isektelen s ${chips} tikwatin",
+    "reward_lose": "Amur-nni yeffeɣ seg ticeṭṭiwin deg temlilit {round}.",
+    "reward_win_max": "Anezraf yettwasekkel {max_turns} isektelen s ${chips} tikwatin"
+  },
+  "hand_names": {
+    "royal_flush": "Taɣect n tnezzut.",
+    "straight_flush": "Aɣeṭṭa n tnezzayt.",
+    "four_of_a_kind": "Ẓẓer-d deg yiwet n ṣṣenf.",
+    "full_house": "Axxam yeččur d imdanen.",
+    "flush": "Taɣect n tnezzut.",
+    "straight": "Srid ɣer zdat.",
+    "three_of_a_kind": "Tlata n temsalin i yellan deg yiwet n telɣa.",
+    "two_pair": "Sin n yiqeddicen.",
+    "one_pair": "Yiwet n tserfit.",
+    "high_card": "Taɣawsa tameqqrant.",
+    "unknown": "Aḍar ur nessin ara."
+  }
+}

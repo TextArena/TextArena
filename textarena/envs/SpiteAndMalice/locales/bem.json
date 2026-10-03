@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Nga ni Player {player_id} mu game ya Spite and Malice ya baplayer babili. Lengo lyenu ni kuwa mweo wa kwanza kuimalisha payoff pile yenu.\n\n### Game Overview:\n- Lengo ni kuimalisha payoff pile yenu kwa kuteka kadi ku center piles.\n- Mungatheka kadi kutoka kwa mishoro mitatu:\n  1. **Mukono wenu** (mukwata kwa kila zamu na kadi pamo na 5).\n  2. **Kadi ya juu ya payoff pile yenu**.\n  3. **Kadi ya juu ya yoyote ya discard piles yenu**.\n\n### Playing Rules:\n- Mungatheka kadi ku center pile kama ni **moja ya juu** kuliko kadi ya juu kwenye ile pile (center piles zinatambulika na Ace na kupanda mpaka Queen; Mafumu ni yalube - yangaweza kutekwa kwa kadi yoyote lakini hayabadilishi mpangilio wa kadi. Ichi kama Mfumu ukatumiwa baada ya 4, kisha Mfumu uyo alipangwa 5 na kadi inayofuata lazima iwe 6).\n- Kama mungatheka kadi zaidi, mungalazimika **kutupa kadi** ku mojawapo ya discard piles yenu kumaliza zamu yenu.\n- Kama center pile ikafikia Queen, itaondolewa yenyewe.\n- Mpangilio wa kadi ni: A=1, 2=2, ..., 9=9, J=10, Q=11, K kama yalube.\n\n### Actions:\n1. **Kutambula**: Ku zamu yenu, tambuleni kadi kujaza mukono wenu mpaka kadi 5. Ingilisheni **[draw]** kuanza.\n2. **Kuteka Kadi**: Kuteka kadi, onyeseni kadi na center pile kama hii: **[play A♠ 0]** (kadi 'A♠' na '0' ni index ya center pile).\n3. **Kutupa**: Kama mungatheka kadi zaidi, tupeni kadi kutoka kwa mukono wenu ku discard pile kumaliza zamu yenu. Ingilisheni **[discard A♠ 1]** (kadi 'A♠' na '1' ni index ya discard pile). Kumbuka kwamba mungatupa kadi yoyote kutoka kwa payoff pile. Mungatupa kadi kutoka kwa mukono wenu tu.\n\n"
+  },
+  "board": {
+    "current_board": "Bodi ya Sasa:\n\n{board}\nMitego Inayopatikana: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Inshinga sha pa Kati (Center Piles) -- ",
+    "pile": "{observation}Mkeka {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Kuona kwa Player {player_id} ---\n",
+    "payoff": "{observation}Mkeka wa Malipo (Kadi ya Juu): {top_card}, Urefu wa Mkeka wa Malipo: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "Takwaba nangu cimo."
+  },
+  "game_message": {
+    "no_cards_left": "Mwilaibukisha ukuti kuti mwabomfya ifikope ifyaba muli ifi fipe: 1. **Imikono yenu**. 2. **Mukanda wa pa muulu uwa mu cikwama ca ndalama shenu**. 3. **Mukalata uuli pa ntanshi uwa mu nkumba shonse isha fikoti ifyo mwashipoosa.* "
+  },
+  "invalid_move": {
+    "wrong_format": "Ukuposa kwa bufi. Umulayi {player_id} tacitapo cimo mu kubomfya ukuputulako ukwa cine mukati ka makola yabili.",
+    "invalid_play": "Kuteka si sahihi. Player {player_id} alijaribu kuteka {card} kwa center pile {index}.",
+    "discard_from_payoff": "Ukupoosa kwa bufi. Uuleteya {player_id} aeseshe ukupoosa icikope ca ku mupokapoka ico balefwaya ukwisafusha.",
+    "discard_not_in_hand": "Ukupoosa kwa bufi. Uuleteya {player_id} aeseshe ukupoosa icikope ico ashakwete mu minwe yakwe.",
+    "wrong_move_type": "Aina ya hatua isiyo sahihi. Mchezaji {player_id} hakujibu na aina ya hatua sahihi."
+  },
+  "game_action": {
+    "you_drew": "Mwalipushishe.",
+    "opponent_drew": "Umulashi {player_id} aalepoka amakardi.",
+    "you_played": "Mwalishishe {card} pa kati ka cikota ca mu mpanga {index}.",
+    "opponent_played": "Mchezaji {player_id} alicheza {card} kwenye kundi la kati {index}.",
+    "you_discarded": "Umetupa {card} kwenye kundi la kuchupa {index}, ambalo pia linamaanisha umemaliza zamu yako. Hakuna hatua nyingine yako itazingatiwa katika zamu hii. Mchezaji {next_player_id} atakwenda kisha.",
+    "opponent_discarded": "Mchezaji {player_id} aliposa kadi {card} kuikwepa kwenye kisanduku cha kuposwa {index}, na pia ina maana kwamba wamemaliza zamu yao. Hakuna hatua zaidi za Mchezaji {player_id} zitazozingatiwa kwa zamu hii. Mchezaji {next_player_id}, utaenda ufuatao. Tafadhali ingiza hatua yako kwa muundo [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Umukalamba {current_player} amalilile salu ya malipiro! Umukalamba {current_player} alishinda!",
+    "deadlock_player_0": "Kufikia kwa Deadlock! Player 0 anashinda na {player_0_payoff} kadi zilizobaki dhidi ya {player_1_payoff} kadi za Player 1.",
+    "deadlock_player_1": "Kufikana kwa mipango! Mchezaji 1 alishinda na {player_1_payoff} kadi zilizobaki dhidi ya {player_0_payoff} kadi za Mchezaji 0.",
+    "deadlock_tie": "Kufikia kwa Deadlock na usawa! Wachezaji wote wawili wana {player_0_payoff} kadi zilizobaki. Player {current_player} anashinda kwa chaguo-msingi."
+  }
+}

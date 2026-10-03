@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Du bis speler {player_id} in Stratego.\nDin doel es óm din taegesjpeler ziene Vlag te pakke of alle ziene zètbare stukke oet te sjaoke.\nDin leger is al veur dich op 't bord gezat, inclusief din Vlag, Bomme en anger stukke van versjillende rangen.\n\n### Sjpelregels\n1. **Zètregels:**\n   - Bie din beurt, kèns du 'n stuk verplaatsen door 'n sjtap nao 'n aangrenzende veldj (baove, ónger, links of rechs) det al bezat is door stukke van dichzelf.\n   - Veurbeeld: 'n Stuk kènt verplaatsen van A1 nao B1 of A1 nao A2 es B1 en A2 neet bezat zint door stukke van dichzelf.\n   - Es 't geselecteerd stuk 'n Bom of 'n Vlag is, kènt 't neet verplaatsen waere.\n2. **Sjlaeg:**\n   - Es du 'n veldj binnegaas det bezat is door 'n stuk van din taegesjpeler, dan vundj 'n sjlaag plaats:\n     - 't Stuk mit de hoegste rang wint en sjakeelt 't stuk van din taegesjpeler oet.\n     - Es de rangen 't zelfde zint, waere allebei de stukke van 't bord gehaold.\n     - **Speciaal Gevalle:**\n       - Bomme sjakele alle aanvallende stukke oet, behalve Mienwerkers, die Bomme kènne óntsjaoke.\n       - Spione kènne 'ne Maarsjalk versjlaon es de Spion 't iers aanvalt, meh verleze taenge alle anger stukke.\n3. **Strategische Doele:**\n   - Din taegesjpeler ziene stukke identificere door hun bewaeginge en sjlaeg.\n   - Din Vlag besjerme terwiel du probeers óm din taegesjpeler ziene Vlag te pakke.\n   - Sjouts strategisch inzètte óm informatie euver din taegesjpeler ziene stukke te kriege en zwakke stukke aan te valle.\n\n### Hoe maak ich 'n zèt:\n1. Gief de coördinate van 't stuk det du wils verplaatsen en ziene bestimming.\n2. Gebruuk 't format: [A0 B0], wobie A0 de brónpositie is en B0 de bestimming.\n   - Veurbeeld: Óm 'n stuk te verplaatsen van rie 0, kolom 0 nao rie 1, kolom 0, gief [A0 B0] in.\n3. Zorg det de bestimming geldig is volges de zètregels baove.\n\n### Belangrieke Aopmerkinge:\n- 't Bord zuut din stukke en hun posities, b.v. MN, MS.\n- 't Bord zuut ouch de bekènde posities van din taegesjpeler ziene stukke zónder hun rangen te óntsjaoke, b.v. ?.\n- Roosters mit ~ zint mere en kènne neet betroffe waere.\n- Es 'n veurstèl, begin 't sjpael door din stukke det op de frontlinie staon te verplaatsen óm informatie euver din taegesjpeler ziene stukke te kriege. Speler 0 en speler 1 hun frontlinies zint rie D en G respectievelijk.\n\nHie is de hujige bordstoatis:"
+  },
+  "board": {
+    "current_board": "Hujig spelbord:\n\n{board}\nBesjikbare zètte: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Óngeldige actieformat. Speler {player_id} haet gein zèt ingegaeve in 't format [A0 B0].",
+    "invalid_coordinates": "Ongeldige actieformaat. Speler {player_id} haet gein geldige coördinate ingeleverd.",
+    "not_own_piece": "Invalide actieformaat. Speler {player_id} moot ein van zien eige stukke verplaote.",
+    "scout_through_pieces": "Invalide actieformaat. Speler {player_id} kèn 'ne scout neet door andere stukke verplaote.",
+    "scout_diagonal": "Invalide actieformaat. Speler {player_id} kèn 'ne scout neet diagonaal verplaote.",
+    "non_scout_multi_square": "Oetgezonderd de scouts, kènne alle stukke maar ein veerkant tegeliek verplaote.",
+    "move_into_lake": "Ongeldige actieformaat. Speler {player_id} kèn neet in 't meer trèkke.",
+    "move_onto_own_piece": "Invalide actieformaat. Speler {player_id} kèn neet op zien eige stuk trèkke.",
+    "move_bomb_or_flag": "Invalide actieformaat. Speler {player_id} kèn neet 'n bom of vlag verplaatse."
+  },
+  "game_action": {
+    "you_moved": "Du hes 'n stuk gesjaoke van {source} nao {dest}.",
+    "opponent_moved": "Speler {player_id} haet 'n stuk gesjaoke van {source} nao {dest}.",
+    "you_equal_ranks": "Du hes 'n stuk gesjaoke van {source} nao {dest}. 't Aanvallend stuk waor {attacking_rank} en 't doelstuk waor {target_rank}. Wiejer zint de rangen 't zelfde, zint allebei de stukke verlaore gegaon.",
+    "opponent_equal_ranks": "Speler {player_id} haet 'n stuk gesjaoke van {source} nao {dest}. 't Aanvallend stuk waor {attacking_rank} en 't doelstuk waor {target_rank}. Wiejer zint de rangen 't zelfde, zint allebei de stukke verlaore gegaon.",
+    "you_miner_defused": "Du hes 'n stuk gesjaoke van {source} nao {dest}. 't Aanvallend stuk waor {attacking_rank} en 't doelstuk waor {target_rank}. Wiejer kènne mienwerkers bomme óntsjaoke, höbs du de sjlaag gewonne.",
+    "opponent_miner_defused": "Speler {player_id} haet 'n stuk gesjaoke van {source} nao {dest}. 't Aanvallend stuk waor {attacking_rank} en 't doelstuk waor {target_rank}. Wiejer kènne mienwerkers bomme óntsjaoke, höbs se de sjlaag verlaore.",
+    "you_bomb_lost": "Se höb dien stök verplaetst van {source} nao {dest}. De aanvallende stök waas {attacking_rank} en de bestemmingsstök waas {target_rank}. Omdat de aanvaller gein Mienwerker is, höb se de sjlaag verlaore.",
+    "opponent_bomb_won": "Speler {player_id} haet 'n stök van {source} nao {dest} verplaats. 't Aanvallend stök waor {attacking_rank} en 't stök op de bestemming waor {target_rank}. Omdat d'n aanvaller gein mijnwèrker is, höb gae de sjlaag gewónne.",
+    "you_spy_won": "Du hes 'n stuk gesjaoke van {source} nao {dest}. 't Aanvallend stuk waor {attacking_rank} en 't doelstuk waor {target_rank}. Wiejer es de aanvaller 'n spion en 't doel 'n maarsjalk, höbs du de sjlaag gewonne.",
+    "opponent_spy_lost": "Speler {player_id} haet 'n stuk gesjaoke van {source} nao {dest}. 't Aanvallend stuk waor {attacking_rank} en 't doelstuk waor {target_rank}. Wiejer es de aanvaller 'n spion en 't doel 'n maarsjalk, höbs se de sjlaag verlaore.",
+    "you_higher_won": "Du hes 'n stuk gesjaoke van {source} nao {dest}. 't Aanvallend stuk waor {attacking_rank} en 't doelstuk waor {target_rank}. Wiejer es de aanvaller 'n hoeger rang dan 't doel, höbs du de sjlaag gewonne.",
+    "opponent_higher_lost": "Speler {player_id} haet 'n stuk gesjaoke van {source} nao {dest}. 't Aanvallend stuk waor {attacking_rank} en 't doelstuk waor {target_rank}. Wiejer es de aanvaller 'n hoeger rang dan 't doel, höbs se de sjlaag verlaore.",
+    "you_lower_lost": "Du hes 'n stuk gesjaoke van {source} nao {dest}. 't Aanvallend stuk waor {attacking_rank} en 't doelstuk waor {target_rank}. Wiejer es de aanvaller 'n lieger rang dan 't doel, höbs du de sjlaag verlaore.",
+    "opponent_lower_won": "Speler {player_id} haet 'n stuk gesjaoke van {source} nao {dest}. 't Aanvallend stuk waor {attacking_rank} en 't doelstuk waor {target_rank}. Wiejer es de aanvaller 'n lieger rang dan 't doel, höbs se de sjlaag gewonne."
+  },
+  "outcome": {
+    "flag_captured": "Speler {player_id} haet de vlag van d'n tegenstander gehawwe!",
+    "no_movable_pieces": "Speler {winner_id} wint! Speler {loser_id} haet gein zètbare stukke mie."
+  }
+}

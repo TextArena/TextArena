@@ -21,17 +21,7 @@ class HighSocietyEnv(ta.Env):
         self._next_auction()
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are Player {player_id} in a game of HighSociety (2-player version).\n"
-            f"Game flow:  Ten prestige cards are auctioned one after another.\n"
-            f"Bidding:    Each auction, secretly choose a money card 1-11 and reveal.\n"
-            f"            • Higher bid wins the prestige card and discards that money card.\n"
-            f"            • Lower bid keeps their money card.\n"
-            f"            • Tie -> both bids are returned and the same prestige card is re-auctioned.\n"
-            f"Scoring:    After all ten auctions, add **remaining cash + prestige points**.\n"
-            f"            Higher *net-worth* wins (exact tie -> draw).\n\n"
-            f"**Action syntax**  →  bid a single card like '[7]' or '[11]'."
-        )
+        return self.m("player_prompt", "intro", player_id=player_id)
 
     def _next_auction(self):
         gs = self.state.game_state
@@ -41,17 +31,17 @@ class HighSocietyEnv(ta.Env):
         gs["current_prize"] = prize
         gs["pending_bids"] = {}
         for pid in (0, 1):
-            self.state.add_observation(to_id=pid, message=f"\n### Auction {gs['round']}/10  |  Prestige card: {prize}", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.state.add_observation(to_id=pid, message=f"Your remaining money cards: {self._intlist_to_str(gs['player_money'][pid])}", observation_type=ta.ObservationType.GAME_BOARD)
+            self.state.add_observation(to_id=pid, message=self.m("auction", "announce", round=gs['round'], prize=prize), observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(to_id=pid, message=self.m("board", "money_cards", money=self._intlist_to_str(gs['player_money'][pid])), observation_type=ta.ObservationType.GAME_BOARD)
 
     def step(self, action: str) -> Tuple[bool, Dict[str, Any]]:
         pid = self.state.current_player_id
         gs  = self.state.game_state
         self.state.add_observation(from_id=pid, to_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
         t = self.action_space.findall(action)
-        if len(t) != 1: self.state.set_invalid_move("Must include exactly one [X] money card."); return self.state.step()
+        if len(t) != 1: self.state.set_invalid_move(self.m("invalid_move", "wrong_format")); return self.state.step()
         bid = int(t[0])
-        if bid not in gs["player_money"][pid]: self.state.set_invalid_move("You no longer have that money card."); return self.state.step()
+        if bid not in gs["player_money"][pid]: self.state.set_invalid_move(self.m("invalid_move", "card_not_held")); return self.state.step()
         gs["pending_bids"][pid] = bid
         if len(gs["pending_bids"]) == 1: return self.state.step(rotate_player=True)  # wait for opponent
         # both bids in
@@ -60,18 +50,18 @@ class HighSocietyEnv(ta.Env):
         if bid0 > bid1:     winner, loser = 0, 1
         elif bid1 > bid0:   winner, loser = 1, 0
         else:  # tie -> redraw bids
-            self.state.add_observation(message="Tie - bids returned. Rebid!", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=self.m("message", "tie"), observation_type=ta.ObservationType.GAME_MESSAGE)
             gs["pending_bids"] = {}
             return self.state.step(rotate_player=True)
         gs["player_prestige"][winner] += prize
         gs["player_money"][winner].remove(gs["pending_bids"][winner])  # pay cost
-        self.state.add_observation(message=f"P0 bid {bid0}, P1 bid {bid1}. Player {winner} wins prestige {prize} (total {gs['player_prestige'][winner]}).", observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(message=self.m("message", "auction_result", bid0=bid0, bid1=bid1, winner=winner, prize=prize, total=gs['player_prestige'][winner]), observation_type=ta.ObservationType.GAME_MESSAGE)
         self._next_auction()
         return self.state.step(rotate_player=False)
 
     def _end_match(self):
         def networth(pid: int) -> int: return self.state.game_state["player_prestige"][pid]
         nw0, nw1 = networth(0), networth(1)
-        if nw0 > nw1:   self.state.set_winner(0, f"Net-worth {nw0} > {nw1}")
-        elif nw1 > nw0: self.state.set_winner(1, f"Net-worth {nw1} > {nw0}")
-        else:           self.state.set_draw(f"Both net-worth {nw0} – exact tie.")
+        if nw0 > nw1:   self.state.set_winner(0, self.m("outcome", "p0_wins", nw0=nw0, nw1=nw1))
+        elif nw1 > nw0: self.state.set_winner(1, self.m("outcome", "p1_wins", nw1=nw1, nw0=nw0))
+        else:           self.state.set_draw(self.m("outcome", "draw", nw0=nw0))

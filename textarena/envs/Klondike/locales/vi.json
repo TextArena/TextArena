@@ -1,0 +1,74 @@
+{
+  "_comment": "Tệp ngôn ngữ Klondike Solitaire. KHÔNG được dịch các khóa (bên trái). Chỉ dịch các giá trị (bên phải). Giữ nguyên mọi {placeholder}. KHÔNG dịch các nhãn bài/suit (ví dụ A, 10, K, ♣️, ♦️, ♥️, ♠️), các token đống bài W, F1-F4, T1-T7, bảng ASCII trong {board}, hoặc các lệnh 'draw', 'move', 'forfeit', 'all'. Cú pháp ngoặc vuông như 'move W T1' phải giữ nguyên bằng chữ Latin.",
+  "_slots": {
+    "{n}": "Chỉ số hành động trong lệnh phân cách bằng dấu phẩy, bắt đầu từ 1",
+    "{msg}": "Thông điệp kết quả cho mỗi hành động (đã được dịch)",
+    "{count}": "Số lượng bài úp đang được di chuyển",
+    "{src}": "Số đống bài nguồn, bắt đầu từ 1",
+    "{dst}": "Số đống bài đích, bắt đầu từ 1",
+    "{cmd}": "Lệnh không xác định mà người chơi đã nhập (không dịch)",
+    "{max_turns}": "Số lượt tối đa trước khi trò chơi kết thúc",
+    "{score}": "Số lượng bài hiện tại trong các đống bài nền",
+    "{board}": "Bảng ASCII được hiển thị (không dịch)",
+    "{turn}": "Số lượt hiện tại",
+    "{stock}": "Số lượng bài còn lại trong đống bài dự trữ",
+    "{waste}": "Nhãn bài trên cùng của đống bài phế, hoặc '--' nếu trống (không dịch)",
+    "{cards}": "Các bài trong một đống bài dưới dạng nhãn trung lập, hoặc '--' nếu trống (không dịch)"
+  },
+  "player_prompt": {
+    "intro": "Bạn đang chơi Klondike Solitaire. Mục tiêu của bạn là di chuyển tất cả các bài đến các đống bài nền.\n\nLuật Trò Chơi:\n- Đống bài nền (F1-F4): Xây dựng từ Át đến Vua theo suit\n- Đống bài bảng (T1-T7): Xây dựng giảm dần xen kẽ màu (đỏ trên đen, đen trên đỏ)\n- Dự trữ: Rút bài từ đống bài dự trữ đến đống bài phế\n- Phế (W): Bài trên cùng có thể chơi\n\nLệnh:\n- 'draw' - Rút bài từ đống bài dự trữ đến đống bài phế\n- 'move <nguồn> <đích> [số lượng]' - Di chuyển bài giữa các đống\n  Ví dụ: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Số lượng cũng có thể là 'all', sẽ cố gắng di chuyển tất cả các bài úp.\n- 'forfeit' - Kết thúc trò chơi ngay lập tức và khóa điểm số hiện tại\n- Tên đống bài: W (phế), F1-F4 (nền), T1-T7 (bảng)\n\nBạn có thể thực hiện nhiều hành động trong một lượt bằng cách phân cách chúng bằng dấu phẩy:\n  Ví dụ: 'draw, move W T1, move T2 F1'\n\nChỉ có các Vua có thể được đặt vào các đống bài bảng trống.\nCác hành động được thực hiện theo thứ tự - nếu một hành động thất bại, các hành động còn lại sẽ bị bỏ qua.\nSử dụng 'forfeit' nếu bạn tin rằng trò chơi không thể thắng."
+  },
+  "format_error": {
+    "no_brackets": "Định dạng hành động không hợp lệ. Hành động phải nằm trong ngoặc vuông.",
+    "no_closing_bracket": "Định dạng hành động không hợp lệ. Thiếu ngoặc vuông đóng ']'",
+    "empty_command": "Lệnh trống. Nhập 'draw' hoặc 'move <nguồn> <đích> [số lượng]'",
+    "empty_action": "Hành động trống",
+    "move_needs_args": "Lệnh di chuyển yêu cầu nguồn và đích. Cách sử dụng: 'move <nguồn> <đích> [số lượng]'",
+    "count_positive": "Số lượng phải là số dương hoặc 'all'",
+    "count_invalid": "Số lượng không hợp lệ. Sử dụng số hoặc 'all'",
+    "unknown_command": "Lệnh không xác định '{cmd}'. Sử dụng 'draw', 'move <nguồn> <đích> [số lượng]', hoặc 'forfeit'",
+    "wrapped": "Hành động {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Hành động {n}: {msg}",
+    "before_failure": "Đã thực hiện {n} hành động trước khi thất bại.",
+    "failed": "Hành động {n} thất bại: {msg}"
+  },
+  "move_result": {
+    "drew": "Đã rút bài từ đống bài dự trữ đến đống bài phế.",
+    "cannot_draw": "Không thể rút. Cả đống bài dự trữ và đống bài phế đều trống.",
+    "invalid_pile": "Tên đống bài không hợp lệ. Sử dụng W, F1-F4, hoặc T1-T7",
+    "foundation_one_card": "Chỉ có thể di chuyển 1 bài đến đống bài nền",
+    "waste_to_foundation_ok": "Đã di chuyển bài từ đống bài phế đến đống bài nền F{dst}",
+    "waste_to_foundation_bad": "Không thể di chuyển bài từ đống bài phế đến đống bài nền đó",
+    "tableau_to_foundation_ok": "Đã di chuyển bài từ đống bài bảng T{src} đến đống bài nền F{dst}",
+    "tableau_to_foundation_bad": "Không thể di chuyển bài từ đống bài bảng đến đống bài nền đó",
+    "foundation_to_foundation": "Không thể di chuyển từ đống bài nền đến đống bài nền",
+    "waste_to_tableau_one_card": "Chỉ có thể di chuyển 1 bài từ đống bài phế đến đống bài bảng",
+    "waste_to_tableau_ok": "Đã di chuyển bài từ đống bài phế đến đống bài bảng T{dst}",
+    "waste_to_tableau_bad": "Không thể đặt bài từ đống bài phế lên đống bài bảng đó",
+    "no_face_up": "Không có bài úp để di chuyển",
+    "tableau_to_tableau_ok": "Đã di chuyển {count} bài từ đống bài bảng T{src} đến T{dst}",
+    "tableau_to_tableau_bad": "Không thể di chuyển {count} bài từ T{src} đến T{dst}",
+    "foundation_to_tableau_one_card": "Chỉ có thể di chuyển 1 bài từ đống bài nền đến đống bài bảng",
+    "foundation_empty": "Đống bài nền F{src} trống",
+    "foundation_to_tableau_ok": "Đã di chuyển bài từ đống bài nền F{src} đến đống bài bảng T{dst}",
+    "foundation_to_tableau_bad": "Không thể đặt bài từ đống bài nền lên đống bài bảng T{dst}",
+    "to_waste_or_stock": "Không thể di chuyển đến đống bài phế hoặc đống bài dự trữ"
+  },
+  "outcome": {
+    "forfeit": "Trò chơi bị từ bỏ. Điểm số cuối cùng: {score} bài trong các đống bài nền.",
+    "won": "Chúc mừng! Bạn đã thắng Klondike Solitaire!",
+    "turn_limit": "Trò chơi kết thúc! Bạn đã đạt đến số lượt tối đa {max_turns}. Điểm số: {score} bài trong các đống bài nền."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Lượt: {turn}/{max_turns}",
+    "stock": "Dự trữ: {stock} bài",
+    "waste": "Phế (W): {waste}",
+    "foundations_header": "Đống bài nền:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Đống bài bảng:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

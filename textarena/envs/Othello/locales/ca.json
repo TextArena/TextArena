@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} jugant amb {colour} ({piece}) en un joc d'Othello.\nEl teu objectiu és tenir més peces del teu color al tauler al final del joc.\nEn el teu torn, col·loca una peça de manera que flanquegi una o més peces del teu oponent en qualsevol direcció (horitzontal, vertical o diagonal) entre la teva nova peça i una altra de les teves peces existents. Totes les peces flanquejades de l'oponent seran girades al teu color.\nProporciona el teu moviment en el format '[fila, columna]'."
+  },
+  "board": {
+    "game_board": "Tauler de joc:\n{board}",
+    "valid_moves": "{observation}\nMoviments vàlids: {moves}",
+    "no_valid_moves_reset": "{observation}\nNo hi ha moviments vàlids - potser hauràs de saltar.",
+    "no_valid_moves_step": "{observation}\nNo hi ha moviments vàlids – potser hauràs de saltar.",
+    "scores_reset": "{observation}\nPuntuacions actuals - Negre: {black_count}, Blanc: {white_count}\n",
+    "scores_step": "{observation}\nPuntuacions - Negre: {black_count}, Blanc: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "El moviment ha de ser del format [fila, columna].",
+    "illegal": "Moviment il·legal. Moviments vàlids: {valid}"
+  },
+  "game_action": {
+    "skipped": "El Jugador {pid} ha hagut de saltar el seu torn",
+    "played": "El Jugador {pid} ({piece}) ha jugat [{r}, {c}] girant {flipped} peça(s)"
+  },
+  "game_message": {
+    "must_skip": "El Jugador {pid} ({piece}) no té moviments vàlids i ha de saltar."
+  },
+  "outcome": {
+    "black_wins": "El Negre guanya {black_count}-{white_count}.",
+    "white_wins": "El Blanc guanya {white_count}-{black_count}.",
+    "draw": "Empat {black_count}-{white_count}."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Ị bụ onye ọkpụkpọ {player_id} na egwuregwu {num_players}-onye na-egwu egwu Liar's Dice. Iwu: - Na oge gị, ị nwere ike: 1) Mee ọnụahịa ọhụrụ na ọnụ ọgụgụ dị elu ma ọ bụ ihu dị elu (ma ọ bụ ha abụọ) karịa ọnụahịa ugbu a; ya bụ '[Bid: 3, 4]', 2) Kpọọ ọnụahịa ikpeazụ site na ịpị '[Call]'. Ọ bụrụ na ị kpọọ: - Ọ bụrụ na ọnụ ọgụgụ ọnụahịa ahụ n'ezie n'etiti dice niile dị obere karịa ọnụahịa ahụ, onye ikpeazụ na-enye ego ga-atụfu otu die. - Ma ọ bụghị ya, onye na-akpọ oku ga-atụfu otu die. A na-ewepụ onye ọkpụkpọ nke ruru 0 dice. Onye ikpeazụ fọdụrụ na-emeri."
+  },
+  "board": {
+    "per_player": "Onye na-egwu egwu {p}: {d}",
+    "new_round": "\nOge ọhụrụ - Ndị fọdụrụ nke dice: {dice_summary}\nNdị dice gị ugbu a bụ: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Onye na-egwu egwu {current_player_id} na-akpọ! Ọnụ ọgụgụ ihu {face_value} bụ {count}, nke dị obere karịa {quantity}. Onye na-egwu egwu {loser_id} (onye ikpeazụ na-enye ego) na-efunahụ otu die.",
+    "caller_loses": "Onye na-egwu egwu {current_player_id} na-akpọ! Ọnụ ọgụgụ ihu {face_value} bụ {count}, nke bụ >= {quantity}. Onye na-egwu egwu {loser_id} (onye na-akpọ) na-efunahụ otu die."
+  },
+  "action": {
+    "bid_announce": "Onye na-egwu egwu {player_id} na-enye {quantity} nke ihu {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "A na-akpọ oku na-enweghị ihe ọ bụla e bu ụzọ kwuo.",
+    "invalid_bid": "Ihe na-abaghị uru: {reason}",
+    "not_recognized": "Arịrịọ a na-amaghị dị ka \"[Bid: X, Y]\" ma ọ bụ \"[Call]\" dị irè. Arịrịọ e nyere: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Ọnụ ọgụgụ ọhụrụ {new_quantity} dị ala karịa nke ugbu a {current_quantity}.",
+    "face_lower": "Ọnụ ọgụgụ ọhụrụ {new_face_value} dị ala karịa ugbu a {current_face_value}.",
+    "identical": "Ihe a na-enye bụ otu ihe ahụ a na-enye ugbu a.",
+    "face_range": "Ọnụ ọgụgụ ọnụahịa ga-adị n'etiti 1 na 6."
+  },
+  "message": {
+    "eliminated_invalid": "Onye na-egwu egwu {player_id} ka ewepụrụ site na ịgagharị na-abaghị uru."
+  },
+  "outcome": {
+    "win": "Onye na-egwu {winner} na-emeri! Nchịkọta ikpeazụ: {final_ranking}"
+  }
+}

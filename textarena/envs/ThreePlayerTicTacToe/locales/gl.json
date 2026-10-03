@@ -1,0 +1,32 @@
+{
+  "_comment": "Ficheiro de localización de ThreePlayerTicTacToe. NON traduzas as claves (lado esquerdo). Só traduce os valores (lado dereito).",
+  "_slots": {
+    "{player_id}": "O número do xogador, por exemplo, 0, 1 ou 2",
+    "{symbol}": "A marca do xogador, unha de A, B ou C",
+    "{cell}": "Un número de cela do taboleiro",
+    "{max_cell}": "O número de cela válido máis alto (tamaño_do_taboleiro^2 - 1)",
+    "{row}": "O índice de fila do taboleiro onde se colocou a marca",
+    "{col}": "O índice de columna do taboleiro onde se colocou a marca",
+    "{board}": "O taboleiro ASCII renderizado (non traduzas)",
+    "{moves}": "A lista de movementos dispoñibles separados por comas, como '[4]' (non traduzas)"
+  },
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} en Tic Tac Toe de tres xogadores.\nA túa marca é '{symbol}'.\nFaches quendas colocando a túa marca nun taboleiro de 5x5 para formar unha liña de catro.\nAs liñas poden ser horizontais, verticais ou diagonais.\nEnvía o teu movemento usando o formato '[4]' para marcar a cela 4."
+  },
+  "board": {
+    "current_board": "Taboleiro actual:\n\n{board}\n\nMovementos dispoñibles: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movemento incorrecto. Usa '[cela]' onde cela é 0-{max_cell}.",
+    "out_of_range": "Número de cela non válido: {cell}. Debe estar entre 0 e {max_cell}.",
+    "already_occupied": "A cela {cell} xa está ocupada.",
+    "made_invalid": "O Xogador {player_id} fixo un movemento non válido"
+  },
+  "game_action": {
+    "placed": "O Xogador {player_id} coloca a súa marca ({symbol}) no campo ({row}, {col})."
+  },
+  "outcome": {
+    "win": "O Xogador {player_id} ({symbol}) gaña!",
+    "draw": "O xogo é un empate!"
+  }
+}

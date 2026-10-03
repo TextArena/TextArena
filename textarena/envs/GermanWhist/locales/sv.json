@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Spelet börjar. Trumffärg: {trump_suit} (trumfkort: {trump_str}).",
+    "no_trump_card": "inget"
+  },
+  "player_prompt": {
+    "intro": "Du är Spelare {player_id} i Tysk Whist.\n{phase_info}\nDu har {hand_size} kort.\nSpela ett kort med '[play N]', där N är dess position i din hand (till exempel '[play 3]').",
+    "phase_learning": "INLÄRNINGSPHASE: vinnaren av varje trick tar det uppslagna kortet och förloraren drar nästa kort från leken. Trick vunna i denna fas räknas inte mot seger.",
+    "phase_playing": "SPELPHASE: leken är slut. Varje trick från och med nu räknas mot seger."
+  },
+  "next_card": {
+    "playing_phase": "Inget kort erbjuds - spelphasen har börjat.",
+    "deck_empty": "Leken är tom - inget kort erbjuds.",
+    "available": "Kort som erbjuds: {card}",
+    "available_trump": "Kort som erbjuds: {card} (TRUMF)"
+  },
+  "invalid_move": {
+    "wrong_format": "Ogiltigt dragformat. Använd '[play N]' för att spela det N:e kortet i din hand.",
+    "bad_position": "Den kortpositionen finns inte. Du har {hand_size} kort.",
+    "must_follow_suit": "Du måste följa färg och spela ett {lead_suit} kort.",
+    "invalid_play": "Det kortet kan inte spelas."
+  },
+  "game_action": {
+    "played": "Spelare {player_id} spelade {card}."
+  },
+  "trick": {
+    "won": "Spelare {winner_id} vinner trick med {card}.",
+    "won_learning": "Spelare {winner_id} vinner trick med {card} och tar det uppslagna kortet."
+  },
+  "phase": {
+    "learning_complete": "Leken är slut. Inlärningsfasen är över - varje återstående trick räknas mot seger."
+  },
+  "draw": {
+    "winner_received": "Du vann trick och fick {card}.",
+    "loser_received": "Du förlorade trick och drog {card} från leken.",
+    "winner_preview": "Nästa kort som erbjuds är {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Trick vunna hittills - Spelare 0: {tricks0}, Spelare 1: {tricks1}",
+    "scores_playing": "Poänggivande trick - Spelare 0: {tricks0}, Spelare 1: {tricks1}",
+    "phase": "Fas: {phase}",
+    "phase_learning": "Fas: {phase} ({remaining_cards} kort kvar i leken)"
+  },
+  "hand": {
+    "no_cards": "Inga kort",
+    "no_cards_in_hand": "Inga kort i handen",
+    "header": "Din hand:",
+    "trump_indicator": " (TRUMF)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Inga kort spelade ännu i detta trick.",
+    "header": "Aktuellt trick:",
+    "trump_indicator": " (TRUMF)",
+    "card_line": "{observation}\n  Spelare {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Spelet har inte börjat",
+    "header": "=== TYSK WHIST-SPEL ===",
+    "phase": "{observation}\nFas: {phase}",
+    "trump_suit": "{observation}\nTrumffärg: {trump_suit}",
+    "trump_card": "{observation}\nTrumfkort: {card}",
+    "cards_left": "{observation}\nKort kvar i leken: {count}",
+    "next_card": "{observation}\nNästa kort för vinnare: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nAktuellt trick:",
+    "trump_indicator": " (TRUMF)",
+    "trick_line": "{observation}\n  Spelare {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nSpelare {player_id}: {scoring} poänggivande trick ({tricks} totalt), {hand_size} kort i handen"
+  },
+  "outcome": {
+    "summary": "Inlärningsfas - Spelare 0: {l0}, Spelare 1: {l1}. Spelfas - Spelare 0: {p0}, Spelare 1: {p1}. Spelare {winner_id} vinner med {winner_tricks} poänggivande trick!"
+  }
+}

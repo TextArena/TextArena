@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v igri HighSociety (2-igralcev različica).\nPotek igre:  Deset prestižnih kartic se draži ena za drugo.\nDražba:    Vsaka dražba, skrivaj izberite denarno kartico 1-11 in razkrijte.\n            • Višja ponudba zmaga prestižno kartico in odstrani to denarno kartico.\n            • Nižja ponudba obdrži svojo denarno kartico.\n            • Izenačenje -> obe ponudbi sta vrnjeni in ista prestižna kartica se ponovno draži.\nTočkovanje:    Po vseh desetih dražbah dodajte **preostali denar + prestižne točke**.\n            Višja *neto vrednost* zmaga (natančno izenačenje -> neodločeno).\n\n**Sintaksa akcije**  →  ponudi eno kartico kot '[7]' ali '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Dražba {round}/10  |  Prestižna kartica: {prize}"
+  },
+  "board": {
+    "money_cards": "Vaše preostale denarne kartice: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Mora vključiti točno eno [X] denarno kartico.",
+    "card_not_held": "Vi ne posedujete več te denarne kartice."
+  },
+  "message": {
+    "tie": "Izenačenje - ponudbe so vrnjene. Ponovi dražbo!",
+    "auction_result": "P0 je ponudil {bid0}, P1 je ponudil {bid1}. Igralec {winner} zmaga prestiž {prize} (skupaj {total})."
+  },
+  "outcome": {
+    "p0_wins": "Neto vrednost {nw0} > {nw1}",
+    "p1_wins": "Neto vrednost {nw1} > {nw0}",
+    "draw": "Obe neto vrednosti {nw0} – natančno izenačenje."
+  }
+}

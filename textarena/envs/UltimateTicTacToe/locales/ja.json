@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "あなたは **Ultimate Tic Tac Toe** のプレイヤー {player_id} です。\n手を **[macro  micro]** （2つの数字 0-8）の形式で提出してください:\n• *macro*  = どのミニボードでプレイするか\n• *micro* = そのミニボード内のどのマスか\n例 `[7 8]` ➜ ミニボード 7 のマス 8 にマークを置き、\n次に相手がミニボード 8 でプレイすることを強制します。\n\nあなたは `{symbol}` です。\n"
+  },
+  "board": {
+    "current_board": "現在のボード:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "手は [macro micro] の形式で、数字は 0-8 でなければなりません。",
+    "out_of_range": "各インデックスは 0 から 8 の間でなければなりません。",
+    "index_out_of_range": "ミニボード、行、または列が範囲外です。",
+    "cell_occupied": "そのマスはすでに占有されています。",
+    "wrong_micro_board": "プレイヤーは次のミニボードでプレイしなければなりません。",
+    "micro_board_won": "そのミニボードはすでに勝利しています。"
+  },
+  "next_board": {
+    "any": "任意のミニボード",
+    "specific": "ミニボード {nxt}"
+  },
+  "game_action": {
+    "played": "プレイヤー {player_id} がミニボード {macro_idx}、マス {micro_idx}（行 {row}、列 {col}）にプレイしました。プレイヤー {opponent_id} は次に {nxt_txt} でプレイしなければなりません。"
+  },
+  "outcome": {
+    "win": "プレイヤー {player_id} が Ultimate Tic Tac Toe に勝利しました！",
+    "draw": "ゲームは引き分けです！"
+  }
+}

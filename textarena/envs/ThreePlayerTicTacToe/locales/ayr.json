@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Jumaxa Player {player_id} Three-Player Tic Tac Toe ukat.\nMarca ' {symbol}' ukat.\nTurnos ukat coloca marca 5x5 tablero ukat linea de cuatro formar.\nLineas ukat horizontal, vertical ukat diagonal ukat.\nMovimiento ukat formato '[4]' ukat celda 4 marca."
+  },
+  "board": {
+    "current_board": "Q'awiri P'acha:\n\n{board}\n\nJach'a Apthapi: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Janiw apthapinxa. Ukax '[cell]' sata, jupax 0-{max_cell}.",
+    "out_of_range": "Janiw apthapi sata: {cell}. K'amsa 0 ukhamaraki {max_cell}.",
+    "already_occupied": "{cell} uka celdax jichhaxa phuqt'atawa.",
+    "made_invalid": "Juchawi {player_id} mä jan wali luraw luratayna."
+  },
+  "game_action": {
+    "placed": "Wakichiri {player_id} ukhax jach'a q'alla ({symbol}) ukax q'awirinxa ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Wakichiri {player_id} ({symbol}) q'awirinxa!",
+    "draw": "¡Ukax ch'usawja!"
+  }
+}

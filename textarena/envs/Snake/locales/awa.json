@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-खिलाड़ी साँप {width}×{height} ग्रिड पर है।\nतुम साँप {player_id} नियंत्र करत हो। वैध चाल: '[up]'/'[down]'/'[left]'/'[right]' (या w/s/a/d)।\nउद्देश्य: सबसे लंबा जीवित रहो या सबसे लंबा होकर सबसे ऊंचा स्कोर प्राप्त करो (मोड़ी {max_turns} मोड़ तक)।"
+  },
+  "board": {
+    "current": "वर्तमान बोर्ड:\n{board}",
+    "after_moves": "वर्तमान बोर्ड स्थिति:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "सांप {player_id} अमान्य चाल कय कारण मर गवा ।"
+  },
+  "outcome": {
+    "survived_win": "खिलाड़ी {player_id} बच गया; बाकी सब खतम हो गए।",
+    "all_dead_simul": "सब सांप एक ही समय मा मर गयेन।",
+    "outlived": "खिलाड़ी सबसे लंबा जीवित रहा।",
+    "all_dead": "सब सांप मर गवा अहइँ।",
+    "turn_limit": "वक्र सीमा पहुंच गई - सबसे अच्छा स्कोर टाई-ब्रेक जीतता है।",
+    "ranking": "{reason} अंतिम रैंकिंग समूह (सबसे खराब→सबसे अच्छा): {groups}"
+  }
+}

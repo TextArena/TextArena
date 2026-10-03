@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "No at galu iscarrigadu.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Giugador Singulu vs Dealer\n\n📖 PANORAMICA DE SU GIOGU:\n• Tzocas cun {start_chips} fichas\n• Mazu singulu de 52 cartas (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Tzocas contra su dealer (casa)\n• Ogni ronda sighit sa struttura de Ultimate Texas Hold'em: tzocas ANTE e BLIND, ricevis 2 cartas de buca, decidis sa PLAY bet facultativa in is fases de betza, poi revelas is cartas de sa comunidade e comparas sa tua manu de 5 cartas cun sa de su dealer. Su tuo obiettivu est de maximizzare is tuas vincitas (candu as sa manu mellus), minimizzende is perditas (candu as sa manu peus).\n• Su giogu acabat candu arrivas a 0 fichas o in bassu a s'iniziu de sa ronda (PERDITA) o completas 1000 rondas cun fichas (VINCITA)\n\n💰 STRUTTURA DE SA BETZA:\n• ANTE: Betza obligatoria de ${ante} ogni ronda\n• BLIND: Betza obligatoria de ${ante} ogni ronda\n• PLAY: Betza facultativa durante su giogu. In totu sa ronda, podis scegliere ISCETI UNA de is sighentes: (${ante4} si fatta a PRE-FLOP, ${ante2} si fatta a FLOP, o ${ante} si fatta a RIVER. Podis puru foldare a river, renuntziende a sa manu, e no faghende peruna betza.)\n\n🎴 DISTRIBUZIONE DE IS CARTAS:\n• Tzocas 2 cartas de buca (is tuas cartas de buca)\n• Su dealer tzocat 2 cartas de buca (is cartas de buca de su dealer, iscondidas da te)\n• 5 cartas de sa comunidade sunt distribuidas de buca inizialmente\n• Is cartas de sa comunidade sunt reveladas progressivamente in is fases de su giogu\n\n🏆 QUALIFICAZIONE DE SU DEALER:\n• Su dealer devit avere a su mancu un PAIR (2 cartas de su matessi gradu) pro si qualificare, usende is 2 cartas in sa sua manu e is 5 cartas de sa comunidade.\n• Sa qualificazione de su dealer afectat is esitos de sa betza, comente est spiegadu in sighes.\n\n🎮 FASES DE SU GIOGU & AZIONES:\n📋 PRE-FLOP:\n  • Aziones: [4x] (${ante4}) o [check]\n  • [4x]: Poni ${ante4} PLAY bet, revelas is primas 3 cartas de sa comunidade\n  • [check]: Peruna betza addizionale, revelas is primas 3 cartas de sa comunidade\n\n📋 FLOP:\n  • Si 4x betza posta: ISCETI [skip] disponibile (auto-revelas is ultimas 2 cartas de sa comunidade)\n  • Si peruna 4x betza: [2x] (${ante2}) o [check]\n  • [2x]: Poni ${ante2} PLAY bet, revelas is ultimas 2 cartas de sa comunidade\n  • [check]: Peruna betza addizionale, revelas is ultimas 2 cartas de sa comunidade\n\n📋 RIVER:\n  • Si 4x o 2x betza posta: ISCETI [skip] disponibile (auto-procedis a sa showdown)\n  • Si peruna PLAY betza: [1x] (${ante}) o [fold]\n  • [1x]: Poni ${ante} PLAY bet, procedis a sa showdown\n  • [fold]: Renuntzias a sa manu, perdis ANTE e BLIND betzas\n\n📋 SHOWDOWN:\n  • Is cartas sunt reveladas e evaluadas\n  • Manu de 5 cartas de 7 cartas (2 de buca + 5 de sa comunidade)\n  • Is betzas sunt stetidas segundu is regolas de pagamentu\n\n💎 PAGAMENTOS DE SA BETZA:\n📊 ANTE BET:\n  • Su dealer no si qualificat: PUSH (betza retornada)\n  • Su dealer si qualificat e tù vincis: 1:1 pagamentu (betza + vincita)\n  • Su dealer si qualificat e tù perdis: Betza persa\n  • Parità: PUSH (betza retornada)\n\n📊 BLIND BET:\n  • No est afectada da sa qualificazione de su dealer\n  • Tù vincis: Betza retornada e pagamentu addizionale basadu in sa fortza de sa tua manu\n  • Tù perdis: Betza persa\n  • Parità: PUSH (betza retornada)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Peruna pagamentu addizionale\n\n📊 PLAY BET:\n  • No est afectada da sa qualificazione de su dealer\n  • Cumparatzione diretta: Sa tua manu mellus vs sa manu de su dealer\n  • Tù vincis: 1:1 pagamentu (betza + vincita)\n  • Tù perdis: Betza persa\n  • Parità: PUSH (betza retornada)\n\n🎯 CLASSIFICAZIONE DE IS MANUS DE POKER (Mellus a Peus):\n  1. Royal Flush: A-K-Q-J-10 de su matessi gradu\n  2. Straight Flush: 5 cartas de su matessi gradu in ordine\n  3. Four of a Kind: 4 cartas de su matessi gradu\n  4. Full House: 3 de un gradu + 2 de un gradu\n  5. Flush: 5 cartas de su matessi gradu\n  6. Straight: 5 cartas in ordine\n  7. Three of a Kind: 3 cartas de su matessi gradu\n  8. Two Pair: 2 paris de gradu diferente\n  9. One Pair: 2 cartas de su matessi gradu\n  10. High Card: Carta prus alta\n\n⌨️  COMANDOS DE AZIONE:\n• [4x] o [play bet 4x]: Poni ${{self.ante_amount*4}} PLAY bet\n• [2x] o [play bet 2x]: Poni ${{self.ante_amount*2}} PLAY bet\n• [1x] o [play bet 1x]: Poni ${{self.ante_amount*1}} PLAY bet\n• [check] o [c]: Check (peruna betza addizionale)\n• [fold] o [f]: Fold (renuntzia a sa manu)\n• [skip] o [s]: Skip a sa fase sighente (candu peruna azione est netzessaria)\n\n💡 CUNSILIOS DE STRATEGIA:\n• Manos de partenza fortes (paris, cartas altas) giustificant a s'ispissu betzas de 4x\n• Cunsidera sa qualificazione de su dealer - manos debiles podint pushare si su dealer no si qualificat\n• Sa betza de BLIND podet esser meda proficua cun manos fortes (Royal Flush = 500:1!)\n• Abbada a su tuo contu de fichas! Si calat a 0 o in bassu a s'iniziu de sa ronda, perdis.\n\n⚠️  NOTAS IMPORTANTES:\n• Is betzas de ANTE e BLIND sunt obligatorias ogni ronda\n• Is betzas de PLAY sunt facultativas e strategicas\n• Assigura de insertare sa azione giusta, e isceti una azione a sa volta.\n\n",
+    "state": "🎯 RONDA {round}\n💰 Fichas: {chips}\n🎴 Sa tua manu: {hand}\n📊 Betzas attuales: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fase: {phase}\n🎯 Aziones disponibiles: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Ronda {round} comintzada! Betzas: ANTE ${ante}, BLIND ${blind}. Tienes {chips} fichas abarradas.",
+    "your_hand": " Sa manu tua: {hand}",
+    "flop_revealed": " FLOP riveladu: {cards}",
+    "river_revealed": " Riu at isveladu: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Atzione non vàlida pro sa fase currente. Atziones disponìbiles: {available}",
+    "message": " Atzione non vàlida! Atziones disponìbiles: {available}"
+  },
+  "action": {
+    "folded": " T'ant fatu unu fallimentu."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Sa manu de su croupier: {cards}",
+    "community_cards": " Carteddas comunitarias: {cards}",
+    "player_best": "🎴 Manu mellus de su giugador: {name} ({cards})",
+    "dealer_best": "🎴 Manu mellus de su dealer: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (cortadu)",
+    "blind_lost_folded": " BETTA PERDU! -${blind} (cortadu)",
+    "ante_won": "✅ ANTE bet WON! +${amount} (su chi as postu in sa puntada)",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} at torradu sa puntada.",
+    "ante_lost": " ANTE sa puntada est pèrdida! -${ante}",
+    "blind_won": "✅ BET IN CLOUD WON! +${amount} (su chi est in sa puntada de su ciecu)",
+    "blind_pushed": " BETTA INCURSA! ${blind} est torradu a sa posta.",
+    "blind_lost": " Sa puntada de s'iscuru est pèrdida! -${blind}",
+    "play_won": "✅ GIOCA sa puntada BENNIDDA! +${amount}",
+    "play_pushed": " GIOCA aposta PRONTADA! ${play} torradu",
+    "play_lost": " GIOCA sa puntada PERDU! -${play}",
+    "net_gain": "🎉 Ronda {round} completada! Guadagnu netu: +${net}",
+    "net_loss": "💸 Ronda {round} completada! Perdita netta: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 GIOGU COMPLETU! {max_turns} rondas completadas. Tienes ${chips} fichas - TÙ VINCIS!",
+    "game_over_lose": "Sa partida est acabada, no tenes prus fichas e su crouperis at a bìnchere!",
+    "reward_win": "Giugador at completadu {winner_rounds} rondas cun ${chips} fichas",
+    "reward_lose": "Su giogadore no at prus tzircùitos in su giru {round}.",
+    "reward_win_max": "Giugador at completadu {max_turns} rondas cun ${chips} fichas"
+  },
+  "hand_names": {
+    "royal_flush": "Sas iscuadras de su coro reale.",
+    "straight_flush": "S'isparghidura de su flussu deretu.",
+    "four_of_a_kind": "Bator de unu tipu",
+    "full_house": "Sa domo est piena.",
+    "flush": "Iscàrriga su flush",
+    "straight": "In sa retza.",
+    "three_of_a_kind": "Tres de unu tipu",
+    "two_pair": "Duas paritzas.",
+    "one_pair": "Unu parru.",
+    "high_card": "Carte de su pius altu.",
+    "unknown": "Manos no connotas."
+  }
+}

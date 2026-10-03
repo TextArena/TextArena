@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Wewe u na tala Solitaire ya Klondike. Ovilo vyenu ni kusokola karta zose ku katululu.\n\nOvilo vya Mchezo:\n- Katululu (F1-F4): Tunga karta ku kamba kufwana na litente\n- Meza (T1-T7): Tunga karta ku kamba kufwana na mila (kuvungula ku kamba, kamba ku kuvungula)\n- Kabaza: Tanga karta ku kubaza\n- Kubaza (W): Karta ya juu ya kubaza i na kufwana na kutenda\n\nOvilo vya Kutenda:\n- 'draw' - Tanga karta ku kubaza\n- 'move <source> <destination> [count]' - Sokola karta kati ya katululu\n  Ovikalelo: 'move W T1', 'move T1 F2', 'move T3 T5 2'. kuyunga kufwana na 'all', i na kujaribu kusokola karta zose za kuoneka.\n- 'forfeit' - Omutengwa wa michezo mwine na kufunga pontu yenu\n- Maina ya katululu: W (kubaza), F1-F4 (katululu), T1-T7 (meza)\n\nWewe u na kutenda ovifanya vingi mu mwendeleko mmoja na kuwatenganisha na vitone:\n  Ovikalelo: 'draw, move W T1, move T2 F1'\n\nLitente peka i na kufwana na kuweka ku meza ishikola.\nOvifanya vya kutenda vyenda mu mwendeleko - kana kimoja kifwa, ovifanya vya kusalia vya kuteleka.\nTanga 'forfeit' kana wewe u na kufwana michezo iwe kushindwa kufwana na kushinda."
+  },
+  "format_error": {
+    "no_brackets": "Ocina caco ci kasi vocipakulo.",
+    "no_closing_bracket": "Ocinimbu caco ka ci kuete esilivilo. Ka kuli ondimbukiso ']'",
+    "empty_command": "Omutengwa wa kutenda. Tanga 'draw' kana 'move <source> <destination> [count]'",
+    "empty_action": "Ovithi vya kutwala kasheshe",
+    "move_needs_args": "Agizo la kuhamisha linahitaji chanzo na lengo. Matumizi: 'move <source> <destination> [count]'",
+    "count_positive": "Idadi lazima iwe chanya au 'all'",
+    "count_invalid": "Idadi batili. Tumia nambari au 'all'",
+    "unknown_command": "Kulaya esizwi '{cmd}'. Utumie 'draw', 'move <chikweti> <chilatu> [count]', or 'forfeit'",
+    "wrapped": "Ekintu {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Ekintu {n}: {msg}",
+    "before_failure": "Ekolwa {n} ekintu(s) kabili kukwata.",
+    "failed": "Ekintu {n} kaili: {msg}"
+  },
+  "move_result": {
+    "drew": "Kadi imechorwa kutoka hisa hadi taka.",
+    "cannot_draw": "Ovikũla viosi via nyõleha, ka vi kuete vali esilivilo.",
+    "invalid_pile": "Jina la mzunguko batili. Tumia W, F1-F4, au T1-T7",
+    "foundation_one_card": "Kufwaneka kusokola karta moja peka ku katululu",
+    "waste_to_foundation_ok": "Oku upa ocikasia caco vovinene oco o ci kape vocimano F{dst}",
+    "waste_to_foundation_bad": "Kashikola karta ya kubaza ku katululu kile",
+    "tableau_to_foundation_ok": "Lilaye kadi kuva tableau T{src} ku foundation F{dst}",
+    "tableau_to_foundation_bad": "Kashikola karta ya meza ku katululu kile",
+    "foundation_to_foundation": "Ka ci tava oku pitamo vali noke yoku sanga ociseveto.",
+    "waste_to_tableau_one_card": "O pondola lika oku kapa omapa yimosi vocikasia caco.",
+    "waste_to_tableau_ok": "Oku upa okakasia kosi yocitunu oku ka kapa vo tabela T{dst}",
+    "waste_to_tableau_bad": "O pondola oku kapa ovaleterio yaco vokakasia kaco konele yetosi li sangiwa vo tabela.",
+    "no_face_up": "Ka tu kuete ovikanda vioku eca komanu va sukila ekuatiso.",
+    "tableau_to_tableau_ok": "Lilaye {count} kadi(s) kuva tableau T{src} ku T{dst}",
+    "tableau_to_tableau_bad": "Ai kwata {count} kadi(s) kuva T{src} ku T{dst}",
+    "foundation_to_tableau_one_card": "Kufwaneka kusokola karta moja peka ku katululu ku meza",
+    "foundation_empty": "Ocitumãlo F{src} ka ci kuete omanu.",
+    "foundation_to_tableau_ok": "Lilaye kadi kuva foundation F{src} ku tableau T{dst}",
+    "foundation_to_tableau_bad": "Kashikola karta ya katululu ku meza T{dst}",
+    "to_waste_or_stock": "Ka ci tava oku yi kapa vociwo ale vovina vikuavo."
+  },
+  "outcome": {
+    "forfeit": "Omutengwa wa michezo. Pontu ya mwisho: {score} karta mu katululu.",
+    "won": "Wa yula omapalo yoku litipula lomanu ya lingiwa vo Klondike!",
+    "turn_limit": "Omutengwa wa michezo! Wafikwa mwaka wa {max_turns} za kutenda. Pontu: {score} karta mu katululu."
+  },
+  "board": {
+    "title": "=== SOLITAIRE YA KLONDIKE ===",
+    "turn": "Nkuluntu: {turn}/{max_turns}",
+    "stock": "Hisa: {stock} kadi",
+    "waste": "Ocimbaluku (W): {waste}",
+    "foundations_header": "Ocisoko Coku Tata Akundi Votembo Yosi:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Ociluvialuvia ca 2:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

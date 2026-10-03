@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Hrajete hru Minesweeper.\nCílem hry je odhalit všechny buňky, které neobsahují miny.\nChcete-li udělat tah, jednoduše zadejte souřadnice řádku a sloupce, které chcete odhalit, ve formátu:\n- `[řádek sloupec]`: Odhalte buňku na zadaném řádku a sloupci.\nNapříklad:\n- `[3 2]` pro odhalení buňky v řádku 3, sloupci 2.\n- `[5 6]` pro odhalení buňky v řádku 5, sloupci 6.\nPři vašem prvním tahu odhalíte oblast kolem buňky, kterou jste zvolili, aby byl zajištěn bezpečný start.\nAktuální rozložení desky je zobrazeno níže. Buňky, které nejsou odhaleny, jsou reprezentovány tečkou ('.'), odhalená čísla ukazují počet sousedních min.\nDávejte pozor, abyste nevybrali již odhalené buňky.\nZde je aktuální rozložení desky:\n"
+  },
+  "board": {
+    "game_board": "Herní deska:\n\n{board}",
+    "current_board": "Aktuální deska:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neodpověděli jste platnými souřadnicemi v hranatých závorkách.",
+    "out_of_bounds": "Zadané souřadnice řádku a sloupce jsou mimo rozsah.",
+    "already_revealed": "Buňka na ({row}, {col}) již byla odhalena.",
+    "hit_mine": "Narazili jste na minu na ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Odhalili jste buňku na ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Gratulujeme! Úspěšně jste vyčistili desku Minesweeper.",
+    "turn_limit": "Byl dosažen limit tahů. Úspěšně jste odhalili {percent}% bezpečných buněk."
+  }
+}

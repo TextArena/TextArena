@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Ikaw mao ang Player {player_id} sa usa ka {num_players}-player Liar's Dice game.\nMga pamaagi:\n- Sa imong turno, pwede ka mag:\n  1) Buhat ug bag-o nga bid nga adunay mas taas nga kantidad o mas taas nga face (o ang duha) kay sa kasamtangang bid; i.e. '[Bid: 3, 4]',\n  2) Tawag sa katapusan nga bid pinaagi sa pag-type '[Call]'.\n\nKung ikaw motawag:\n  - Kung ang tinuod nga kantidad sa face value sa tanan nga dice mas gamay kay sa bid, ang katapusan nga bidder mawala ug usa ka die.\n  - Sa laing bahin, ang nagtawag mawala ug usa ka die.\nAng usa ka player nga mikabat sa 0 dice gipahawa. Ang katapusan nga natanding nga player midaog."
+  },
+  "board": {
+    "per_player": "\tPlayer {p}: {d}",
+    "new_round": "\nBag-o nga round - Natanding dice: {dice_summary}\nAng imong kasamtangang Dice mao: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Ang Player {current_player_id} nagtawag! Ang tinuod nga kantidad sa face {face_value} mao {count}, nga mas gamay kay sa {quantity}.\nAng Player {loser_id} (ang last bidder) mawala ug usa ka die.",
+    "caller_loses": "Ang Player {current_player_id} nagtawag! Ang tinuod nga kantidad sa face {face_value} mao {count}, nga mas daghan o equal sa {quantity}.\nAng Player {loser_id} (ang nagtawag) mawala ug usa ka die."
+  },
+  "action": {
+    "bid_announce": "Ang Player {player_id} nagbid sa {quantity} sa face {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Ang tawag gihimo nga walay una pang bid.",
+    "invalid_bid": "Dili balido nga bid: {reason}",
+    "not_recognized": "Ang action dili gitawag nga usa ka valid '[Bid: X, Y]' o '[Call]'. Gipakita nga action: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Ang bag-ong gidaghanon {new_quantity} mas ubos kay sa kasamtangan nga {current_quantity}.",
+    "face_lower": "Ang bag-ong nominal nga bili {new_face_value} mas ubos kay sa kasamtangan nga kantidad {current_face_value}.",
+    "identical": "Ang bid susama sa presenteng bid.",
+    "face_range": "Ang nominal nga bili kinahanglang tali sa 1 ug 6."
+  },
+  "message": {
+    "eliminated_invalid": "Player {player_id} gibulag pinaagi sa dili balido nga paglihok."
+  },
+  "outcome": {
+    "win": "Ang Player {winner} midaog! Pangkat nga katapusan: {final_ranking}"
+  }
+}

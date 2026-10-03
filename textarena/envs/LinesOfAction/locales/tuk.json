@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Siz LinesOfAction oýunundaky {player_id} oýunçysyňyz.\nSiziň daşlaryňyz '{side}', duşmanyň daşlary '{other}'.\nHereket formaty: `[b1b3]` (başlangyç-koordinat ýetişýän-koordinat). Kanuny hereket ýatyrýan, ýokarda ýa-da diagonally bir san köp daşlaryň (hemişe reňk) ýolundaky sanyna deňdir. Öz daşlaryňyzdan atlap geçip bilersiňiz, emma duşmanyň daşlaryndan geçip bilmeýärsiňiz; duşmanyň daşyna ýetişýän ýerinde ony ele geçirýärsiňiz.  Ähli daşlaryňyz 8-gonşy birleşýän wagty ýeňiş gazanýarsyňyz."
+  },
+  "board": {
+    "current_board": "Ýolbaşçylyk maslahaty: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format e2e4 bolmaly (kordinatdan,ge)",
+    "no_piece": "No {side} piece on {coord}.",
+    "identical": "Aslynda, çykyş we netije birdir.",
+    "not_straight_or_diagonal": "Hareketiň düz ýa-da digonaly bolmaly.",
+    "wrong_distance": "Bir hatarda duran böleklere deň aralykda hereket etmeli.",
+    "enemy_blocks": "Duşman esgeri ýoly böleýär.",
+    "destination_own": "Maksady öz goşuny bilen basylyp alyndy."
+  },
+  "game_action": {
+    "moved": "Oýunçy {player_id} {from} -> {to} hereket etdi",
+    "captured_suffix": "Oýunçy {player_id} {from} -> {to} hereket etdi we ýeneşe duşmanlarynyň birini ele geçirdi."
+  },
+  "outcome": {
+    "win": "Hemme bölekler birleşdi.",
+    "draw_no_capture": "60 hereketde hiç hili toplanma.",
+    "draw_repetition": "Ýeriň üç gezek gaýtalanyldy."
+  }
+}

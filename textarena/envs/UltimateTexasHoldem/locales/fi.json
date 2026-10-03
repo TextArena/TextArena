@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em -lokaalitiedosto. ÄLÄ käännä avaimia (vasen puoli). Käännä vain arvot (oikea puoli).",
+  "_slots": {
+    "{start_chips}": "Aloituspelikkeiden määrä, esim. 1000",
+    "{ante}": "Pakollinen panos, esim. 25",
+    "{ante4}": "Nelinkertainen pakollinen panos, esim. 100",
+    "{ante2}": "Kaksinkertainen pakollinen panos, esim. 50",
+    "{round}": "Nykyinen kierrosnumero",
+    "{chips}": "Pelaajan nykyinen pelikeiden määrä",
+    "{hand}": "Korttien lista, esim. 'A♠, K♥', tai paikallistettu teksti 'Ei kortteja'",
+    "{phase}": "Nykyinen pelivaihe (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Toimintoluettelo, esim. '[play_bet_4x], [check]'",
+    "{available}": "Luettelo sallituista toiminnoista",
+    "{blind}": "Sokkopanos",
+    "{play}": "Peli-panos",
+    "{cards}": "Korttien lista, esim. 'Q♣, 7♦, 2♠'",
+    "{name}": "Paikallistettu pokerikäden nimi",
+    "{amount}": "Panoksen määrä",
+    "{net}": "Nettomuutos pelikeidoissa (voi olla negatiivinen)",
+    "{max_turns}": "Maksimikierrosten määrä",
+    "{winner_rounds}": "Voittajan suorittamien kierrosten määrä"
+  },
+  "player_prompt": {
+    "no_cards": "Ei kortteja",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Yksinpeli vs Dealer\n\n📖 PELIN YLEISKATSAUS:\n• Aloitat {start_chips} pelikeillä\n• Yksi 52 kortin pakka (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Pelit vastaan dealeria (taloa)\n• Jokainen kierros seuraa Ultimate Texas Hold'em -rakennetta: asetat ANTE- ja BLIND-panokset, saat 2 piilokorttia, päätät valinnaisista PLAY-panoksista eri panosvaiheissa, paljastat yhteiskortit ja vertaat parhaan 5-kortin kätesi dealerin käteen. Tavoitteesi on maksimoida voittosi (kun sinulla on parempi käsi), samalla kun minimoi tappiosi (kun sinulla on huonompi käsi).\n• Peli päättyy, kun pelikeesi määrä laskee 0:aan tai alle kierroksen alussa (HÄVIÖ) tai suoritat 1000 kierrosta pelikeillä (VOITTO)\n\n💰 PANOSRAKENNE:\n• ANTE: Pakollinen ${ante} panos jokaisella kierroksella\n• BLIND: Pakollinen ${ante} panos jokaisella kierroksella\n• PLAY: Valinnainen panos pelin aikana. Kierroksen aikana voit valita vain yhden seuraavista: (${ante4} jos tehty PRE-FLOP-vaiheessa, ${ante2} jos tehty FLOP-vaiheessa tai ${ante} jos tehty RIVER-vaiheessa. Voit myös luopua kierroksesta RIVER-vaiheessa, menettäen ANTE- ja BLIND-panokset.)\n\n🎴 KORTTIJAKO:\n• Saat 2 näkyvää korttia (piilokortit)\n• Dealer saa 2 piilokorttia (piilotettu sinulta)\n• 5 yhteiskorttia jaetaan aluksi piiloon\n• Yhteiskortit paljastetaan progressiivisesti pelivaiheiden aikana\n\n🏆 DEALERIN Kelpoisuus:\n• Dealerin tulee olla vähintään PAR (2 samaa arvoa) kelvollinen, käyttäen 2 korttia kädessään ja 5 yhteiskorttia.\n• Dealerin kelpoisuus vaikuttaa panosten lopputulemiin, kuten selitetään myöhemmin.\n\n🎮 PELIVAIHEET & TOIMINNOT:\n📋 PRE-FLOP:\n  • Toiminnot: [4x] (${ante4}) tai [check]\n  • [4x]: Aseta ${ante4} PLAY-panos, paljasta ensimmäiset 3 yhteiskorttia\n  • [check]: Ei lisäpanosta, paljasta ensimmäiset 3 yhteiskorttia\n\n📋 FLOP:\n  • Jos 4x-panos tehty: Vain [skip] saatavilla (automaattisesti paljastaa viimeiset 2 yhteiskorttia)\n  • Jos ei 4x-panosta: [2x] (${ante2}) tai [check]\n  • [2x]: Aseta ${ante2} PLAY-panos, paljasta viimeiset 2 yhteiskorttia\n  • [check]: Ei lisäpanosta, paljasta viimeiset 2 yhteiskorttia\n\n📋 RIVER:\n  • Jos 4x- tai 2x-panos tehty: Vain [skip] saatavilla (automaattisesti siirtyy SHOWDOWN-vaiheeseen)\n  • Jos ei aiempaa PLAY-panosta: [1x] (${ante}) tai [fold]\n  • [1x]: Aseta ${ante} PLAY-panos, siirtyy SHOWDOWN-vaiheeseen\n  • [fold]: Luopu kierroksesta, menetä ANTE- ja BLIND-panokset\n\n📋 SHOWDOWN:\n  • Kaikki kortit paljastetaan ja arvioidaan\n  • Paras 5-kortin käsi 7 kortista (2 piilokorttia + 5 yhteiskorttia)\n  • Panokset selvitetään maksujärjestelmän mukaan\n\n💎 PANOSMAKSUT:\n📊 ANTE-PANOS:\n  • Dealer ei ole kelvollinen: PUSH (panos palautetaan)\n  • Dealer on kelvollinen ja voitat: 1:1 maksu (panos + voitto)\n  • Dealer on kelvollinen ja häviät: Panos menetetään\n  • Tasapeli: PUSH (panos palautetaan)\n\n📊 BLIND-PANOS:\n  • Ei riipu dealerin kelpoisuudesta\n  • Voitat: Panos palautetaan ja lisämaksu käden vahvuuden mukaan\n  • Häviät: Panos menetetään\n  • Tasapeli: PUSH (panos palautetaan)\n\n📊 BLIND-PANOSMAKSUTAULUKKO:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Ei lisämaksua\n\n📊 PLAY-PANOS:\n  • Ei riipu dealerin kelpoisuudesta\n  • Suora vertailu: Paras käsi vs Dealerin paras käsi\n  • Voitat: 1:1 maksu (panos + voitto)\n  • Häviät: Panos menetetään\n  • Tasapeli: PUSH (panos palautetaan)\n\n🎯 POKERIKÄDEN ARVOSTUS (Paras huonoin):\n  1. Royal Flush: A-K-Q-J-10 samaa maata\n  2. Straight Flush: 5 peräkkäistä korttia samaa maata\n  3. Four of a Kind: 4 samaa arvoa\n  4. Full House: 3 samaa arvoa + 2 samaa arvoa\n  5. Flush: 5 samaa maata\n  6. Straight: 5 peräkkäistä korttia\n  7. Three of a Kind: 3 samaa arvoa\n  8. Two Pair: 2 paria eri arvoa\n  9. One Pair: 2 samaa arvoa\n  10. High Card: Korkein kortti voittaa\n\n⌨️  TOIMINTOKOMENNOT:\n• [4x] tai [play bet 4x]: Aseta ${{self.ante_amount*4}} PLAY-panos\n• [2x] tai [play bet 2x]: Aseta ${{self.ante_amount*2}} PLAY-panos\n• [1x] tai [play bet 1x]: Aseta ${{self.ante_amount*1}} PLAY-panos\n• [check] tai [c]: Tarkista (ei lisäpanosta)\n• [fold] tai [f]: Luopu kierroksesta\n• [skip] tai [s]: Ohita seuraavaan vaiheeseen (kun ei toimintoa tarvita)\n\n💡 STRATEGIAT:\n• Vahvat aloituskädet (parit, korkeat kortit) usein perustelevat 4x-panoksen\n• Huomioi dealerin kelpoisuus - heikot kädet voivat työntää, jos dealer ei ole kelvollinen\n• BLIND-panos voi olla erittäin kannattava vahvoilla käsillä (Royal Flush = 500:1!)\n• Seuraa pelikeesi määrää! Jos se laskee 0:aan tai alle kierroksen alussa, häviät.\n\n⚠️  TÄRKEÄT HUOMAUTUKSET:\n• ANTE- ja BLIND-panokset ovat pakollisia jokaisella kierroksella\n• PLAY-panokset ovat valinnaisia ja strategisia\n• Varmista, että syötät oikean toiminnon, ja vain yhden toiminnon kerrallaan.\n\n",
+    "state": "🎯 KIERROS {round}\n💰 Pelikeet: {chips}\n🎴 Käsi: {hand}\n📊 Nykyiset panokset: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Vaihe: {phase}\n🎯 Saatavilla olevat toiminnot: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Kierros {round} alkoi! Panokset: ANTE ${ante}, BLIND ${blind}. Sinulla on {chips} pelikeet jäljellä.",
+    "your_hand": "🎴 Käsi: {hand}",
+    "flop_revealed": "🃏 FLOP paljastettiin: {cards}",
+    "river_revealed": "🃏 RIVER paljastettiin: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Virheellinen toiminto nykyisessä vaiheessa. Saatavilla olevat toiminnot: {available}",
+    "message": "❌ Virheellinen toiminto! Saatavilla olevat toiminnot: {available}"
+  },
+  "action": {
+    "folded": "🃏 Luovuit kierroksesta."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Dealerin käsi: {cards}",
+    "community_cards": "🃏 Yhteiskortit: {cards}",
+    "player_best": "🎴 Pelaajan paras käsi: {name} ({cards})",
+    "dealer_best": "🎴 Dealerin paras käsi: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE-panos MENETETTIIN! -${ante} (luovuttiin)",
+    "blind_lost_folded": "❌ BLIND-panos MENETETTIIN! -${blind} (luovuttiin)",
+    "ante_won": "✅ ANTE-panos VOITETTIIN! +${amount}",
+    "ante_pushed": "🔄 ANTE-panos TYÖNNETTIIN! ${ante} palautettiin",
+    "ante_lost": "❌ ANTE-panos MENETETTIIN! -${ante}",
+    "blind_won": "✅ BLIND-panos VOITETTIIN! +${amount}",
+    "blind_pushed": "🔄 BLIND-panos TYÖNNETTIIN! ${blind} palautettiin",
+    "blind_lost": "❌ BLIND-panos MENETETTIIN! -${blind}",
+    "play_won": "✅ PLAY-panos VOITETTIIN! +${amount}",
+    "play_pushed": "🔄 PLAY-panos TYÖNNETTIIN! ${play} palautettiin",
+    "play_lost": "❌ PLAY-panos MENETETTIIN! -${play}",
+    "net_gain": "🎉 Kierros {round} suoritettiin! Nettovoitto: +${net}",
+    "net_loss": "💸 Kierros {round} suoritettiin! Nettotappio: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 PELI PÄÄTTYI! {max_turns} kierrosta suoritettiin. Sinulla on ${chips} pelikeet - VOITIT!",
+    "game_over_lose": "🏁 PELI PÄÄTTYI! Olet loppuun pelikeistä. Dealer voitti!",
+    "reward_win": "Pelaaja suoritti {winner_rounds} kierrosta ${chips} pelikeillä",
+    "reward_lose": "Pelaaja loppui pelikeistä kierroksella {round}",
+    "reward_win_max": "Pelaaja suoritti {max_turns} kierrosta ${chips} pelikeillä"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Neljä samaa",
+    "full_house": "Täysi talo",
+    "flush": "Väri",
+    "straight": "Suora",
+    "three_of_a_kind": "Kolme samaa",
+    "two_pair": "Kaksi paria",
+    "one_pair": "Yksi pari",
+    "high_card": "Korkein kortti",
+    "unknown": "Tuntematon käsi"
+  }
+}

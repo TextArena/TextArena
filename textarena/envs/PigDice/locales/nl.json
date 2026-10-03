@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} en speelt een spel van Pig Dice.\n\nRegels:\n- Op uw beurt kunt u kiezen tussen '[roll]' of '[hold]'\n- Rol een 2-6: Voeg toe aan uw totaal voor deze beurt\n- Rol een 1: Verlies uw totaal voor deze beurt en eindig uw beurt\n- Hold: Voeg uw totaal voor deze beurt toe aan uw score en eindig uw beurt\n- De eerste die {winning_score} punten behaalt, wint\n\nWanneer het uw beurt is, ziet u de huidige scores en het totaal voor deze beurt.\nReageer met '[roll]' om de dobbelsteen te rollen of '[hold]' om uw punten te banken."
+  },
+  "invalid_move": {
+    "invalid_action": "Ongeldig actieformaat. Gebruik '[roll]' of '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Speler {player_id} is afgegaan en verliest {turn_total} punten!",
+    "player_hold": "Speler {player_id} houdt vast en bankt {turn_total} punten."
+  },
+  "board": {
+    "player": "Speler 0: '{score_0}'; Speler 1: '{score_1}'",
+    "current_total_scores": "Huidige totaalscores: {scores}\nUw huidige totaal voor deze beurt is {turn_total}.",
+    "roll_history": "{observation}\nUw rolgeschiedenis voor deze beurt: {roll_history}",
+    "first_roll": "{observation}\nDit is de eerste rol van uw beurt.",
+    "available_actions": "{observation}\nBeschikbare acties: '[roll]' of '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Speler {winner_id} heeft gewonnen door een hogere score te hebben bij de beurtenlimiet ({scores})",
+    "winner_by_score": "Speler {winner_id} heeft gewonnen door de doelscore van {winning_score} te bereiken!",
+    "draw": "De beurtenlimiet is bereikt en alle spelers hebben dezelfde score: {scores}"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Mo ye zo {player_id} na Tic Tac Toe ti zo wale moko.\nMo ti zo '{symbol}'.\nMo ye ti na koli zo ti 5 koli 5 ti zo ligne ti 4.\nLigne ti ye ti koli na ndo, koli na pama, ndo ti pama.\nMo fa ti zo na format '[4]' ti zo ti koli 4."
+  },
+  "board": {
+    "current_board": "Koli ti zo sô:\n\n{board}\n\nKoli ti ye moko: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "A yeke na lege ni pëpe ti zia mbeni ye nde. Zia \"[cell]\" tongana a tene 0-{max_cell} so ayeke yâ ti da.",
+    "out_of_range": "Kɛt cɛl kuɔɔt: {cell}. Kɛkɛ̈ ye guɔ̈p 0 na {max_cell}.",
+    "already_occupied": "A zia mbeni tënë na yâ ti cellule {cell} awe.",
+    "made_invalid": "Zo ti pikango ndembo {player_id} asala mbeni ye so ayeke na lege ni pëpe."
+  },
+  "game_action": {
+    "placed": "Wɛ̈tɛ̈ {player_id} acɔɔl tɛ̈nɛ̈ ({symbol}) kɛ̈kɛ̈ thɛ̈ɛ̈r ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Wɛ̈tɛ̈ {player_id} ({symbol}) wɛ̈t!",
+    "draw": "A sara match ni na lege ti kpongo zo oko pëpe!"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Yin ee Player {player_id} ee game Spite and Malice ee raan dhiec. Yin ee lac gool kuɔny ba yin payoff pile.\n\n### Nhialic Game:\n- Kuɔny ee lac yin payoff pile ne yin dhiaac cards ne center piles.\n- Yin ee dhiaac cards ne kɛɛc:\n  1. Yin **hand** (yin ciɛɛŋ lac turn ne kɛɛc 5 cards ee hand).\n  2. **Top card ee yin payoff pile**.\n  3. **Top card ee yin discard piles**.\n\n### Nhialic Dhiaac:\n- Yin ee dhiaac card ne center pile ee yin ee **rok tok** ee top card ee pile (center piles ciɛɛŋ ne Ace ee go up ee Queen; Kings ee wild - ee dhiaac ee card ee tok ee change ee rok tok. Ee mean ee King ee dhiaac ee 4, ee King ee rok ee 5 ee next card ee lac ee 6).\n- Ee yin ciɛɛŋ dhiaac cards, yin ee **discard card** ee yin discard piles ee end turn.\n- Ee center pile ee gool Queen, ee ciɛɛŋ ee cleared tok.\n- Ee rok tok ee: A=1, 2=2, ..., 9=9, J=10, Q=11, K ee wild.\n\n### Nhialic Action:\n1. **Draw**: Ee start ee yin turn, draw cards ee fill yin hand ee kɛɛc 5 cards. Enter **[draw]** ee begin.\n2. **Dhiaac Card**: Ee dhiaac card, specify ee card ee center pile ee kɛɛc: **[play A♠ 0]** (ee 'A♠' ee card ee '0' ee center pile index).\n3. **Discard**: Ee yin ciɛɛŋ dhiaac cards, discard card ee yin hand ee discard pile ee end turn. Enter **[discard A♠ 1]** (ee 'A♠' ee card ee '1' ee discard pile index). Note ee yin ee discard card ee payoff pile. Yin ee discard cards ee hand.\n\n"
+  },
+  "board": {
+    "current_board": "Piny de Board:\n\n{board}\nWët de Kuɛr: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Kuɛ̈n cilic ë piny -- ",
+    "pile": "{observation}Piny de Kuɛr {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Wët {player_id}'s View ---\n",
+    "payoff": "{observation}Piny de Kuɛr (Kuɛr tiɛm): {top_card}, Piny de Kuɛr ë bë: {payoff_length}\n",
+    "hand": "{observation}Kuɛr: {hand}\n",
+    "discard": "{observation}Piny de Kuɛr: {discard}\n",
+    "empty": "Cɔl kë cïn raan tɔ̈ thïn."
+  },
+  "game_message": {
+    "no_cards_left": "Acie kaar kɔ̈k benë yïn ke puöl. Akɔɔr lɔn lëu ba käkë ya looi: 1. ye yïïn.* 2. ka cï gɔl në këdu yic.* 3. ka cï gël ë kuat de kuɛtku yiic.* "
+  },
+  "invalid_move": {
+    "wrong_format": "Acie këpuɔth. Raan ye cɔl {player_id} akëc bɛ̈n dhuk nhom ku leŋ kä puɔth cï gɔ̈t në biäk de kɔ̈ɔ̈th yiic.",
+    "invalid_play": "Kuɛr tiɛm. Wët {player_id} acë kuɛr {card} kɛnë piny de kuɛr {index}.",
+    "discard_from_payoff": "Cɔl kë cïï path. Raan ye gɔ̈ɔ̈r {player_id} acï them bï kaar de kä cï bɛ̈n bei në wëu ke kɔc cuat wei ëbɛ̈n ya nyaai.",
+    "discard_not_in_hand": "Cëmën cë gam. Raan ye gɔ̈ɔ̈r {player_id} acï them bï kaar cïï tɔ̈u në yen cuat piny.",
+    "wrong_move_type": "Acie këpuɔth. Raan ye cɔl {player_id} akëc bɛ̈n jam në wɛt kän yic ku ka cïï lëu bï yen lɔ tueŋ ke loi kënë."
+  },
+  "game_action": {
+    "you_drew": "Yïn acï kä ye ke gɔ̈ɔ̈r.",
+    "opponent_drew": "Raan ye gɔ̈ɔ̈r {player_id} acï kaar bɛ̈n cuɛt.",
+    "you_played": "Yïn acï {card} gɔ̈ɔ̈r në piiny ciɛl yic {index}.",
+    "opponent_played": "Wët {player_id} acë kuɛr {card} kɛnë piny de bë piny de kuɛr {index}.",
+    "you_discarded": "Yin discard {card} ee discard pile {index}, ee mean ee yin finish turn. Player {next_player_id} ee go next.",
+    "opponent_discarded": "Wët {player_id} acë kuɛr {card} kɛnë bë piny de kuɛr {index}, ke ye cɔl yic. Wëtde kuɛr kɛnë bë wët {player_id} acɔl yic kɛnë bë piny de wëtde. Wët {next_player_id}, yin acë kuɛr wëtde. Yin ë wët kuɛr yin bë fɔrmät [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Raandit {current_player} aci yök ci wäär thiëk! Raandit {current_player} a ciɛ̈ɛ̈n!",
+    "deadlock_player_0": "Këc apɛ̈ɛ̈i! Akɔ̈ɔ̈n 0 ee wɛ̈ɛ̈nɛ̈ {player_0_payoff} käd ee bɛ̈ɛ̈i akɔ̈ɔ̈n 1 ee {player_1_payoff} käd.",
+    "deadlock_player_1": "Këc apɛ̈ɛ̈i! Akɔ̈ɔ̈n 1 ee wɛ̈ɛ̈nɛ̈ {player_1_payoff} käd ee bɛ̈ɛ̈i akɔ̈ɔ̈n 0 ee {player_0_payoff} käd.",
+    "deadlock_tie": "Kɔc awääc wäär thiëk kek yök! Raandit käŋ aɣet {player_0_payoff} tiɔ̈ɔ̈ŋ ci wäär thiëk. Raandit {current_player} a ciɛ̈ɛ̈n kek yök."
+  }
+}

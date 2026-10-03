@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Είστε ο Παίκτης {player_id} σε ένα παιχνίδι Ινδικού Πόκερ.\n- Τράπουλα 52 καρτών. Βλέπετε μόνο την κάρτα του αντιπάλου σας.\n- Πρόσθετο {ante} chip(s) κάθε γύρο, {max_rounds} γύρος(οι) συνολικά.\n- Έγκυρες κινήσεις: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X είναι ένας θετικός ακέραιος <= ο αριθμός των chip σας.)\n- Η υψηλότερη κρυφή κάρτα κερδίζει το pot στο showdown.\n"
+  },
+  "round": {
+    "announce": "### Γύρος {current_round}/{max_rounds}\nΗ κάρτα του αντιπάλου σας είναι: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Παρακαλώ δώστε ακριβώς ΜΙΑ ενέργεια σε αγκύλες, π.χ. '[check]', '[bet 2]', '[call]', '[raise 3]', ή '[fold]'.",
+    "cannot_check": "Δεν μπορείτε να [check] - αντιμετωπίζετε ένα στοίχημα.",
+    "amount_min": "Το ποσό του στοιχήματος / της αύξησης πρέπει να είναι ≥ 1.",
+    "cannot_bet": "Δεν μπορείτε να [bet] - πρέπει να [call] / [raise] / [fold].",
+    "nothing_to_call": "Δεν υπάρχει τίποτα να καλέσετε. Μπορείτε να [check] αντ' αυτού.",
+    "no_bet_to_raise": "Χρησιμοποιήστε [bet X] για να ανοίξετε. Δεν υπάρχει στοίχημα για να αυξήσετε.",
+    "insufficient": "Ανεπαρκή chip για αυτήν την ενέργεια."
+  },
+  "game_action": {
+    "action": "Παίκτης {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (κόστος {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Οι πιθανές ενέργειές σας: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Παίκτης {winner}. (Ταμεία P0:{p0}, P1:{p1})",
+    "folded": "Ο Παίκτης {player_id} παραιτήθηκε.",
+    "showdown_win": "Showdown: {card_win} νικά {card_lose}.",
+    "showdown_tie": "Ισοπαλία στο Showdown: και οι δύο {card}. Το pot χωρίζεται - ο καθένας λαμβάνει {split}."
+  },
+  "outcome": {
+    "p0_wins": "Ο Παίκτης 0 κερδίζει ({bank0} > {bank1})",
+    "p1_wins": "Ο Παίκτης 1 κερδίζει ({bank1} > {bank0})",
+    "draw": "Ίσα chip μετά από όλους τους γύρους"
+  }
+}

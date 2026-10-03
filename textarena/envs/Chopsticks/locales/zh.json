@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "你是 Chopsticks 游戏中的玩家 {player_id}。轮到你时，请选择以下一种操作：\n  + 攻击：'[attack M O]'，其中 M=你的手（0 或 1），O=对手的手（0 或 1）。\n    - 对手该手的数值增加你所用手的数值；若结果 >=5，则变为 0。\n  + 分配：'[split L R]'，将你的手指总数重新分配到 L 和 R（L+R = 你的总数）。\n请只回复上述命令中的一个。"
+  },
+  "board": {
+    "current_board": "当前棋盘：\n玩家 0：{hands_0}\n玩家 1：{hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "你的手 {my_idx} 已死亡。",
+    "opp_hand_dead": "对手的手 {opp_idx} 已经死亡。",
+    "split_sum": "分配后的总和必须为 {total}。",
+    "split_no_change": "分配必须改变你的双手分布。",
+    "invalid_command": "无效移动。请使用“[attack M O]”或“[split L R]”。"
+  },
+  "game_action": {
+    "attack": "P{player_id} 攻击 P{opp_id} 的手 {opp_idx}：其数值从 {opp_val} 变为 {new_val}。",
+    "split": "P{player_id} 将手指分配为 [{L}, {R}]。"
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "对手的双手均已死亡。",
+    "draw": "已达到回合上限。"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} al Joc de Negociació.\nTens alguns recursos, i la teva tasca és comerciar de manera que el valor total dels teus recursos augmenti.\nEls recursos i els valors associats que tens actualment són:\n\t+ {resource_value_list}\nA cada torn, pots parlar amb el teu oponent i fer una oferta de comerç.\nUtilitza els següents tokens especials per a accions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Recursos Oferts -> Recursos Sol·licitats]\n  - '[Accept]': Per acceptar una oferta entrant.\n  - '[Deny]': Per rebutjar una oferta entrant (per defecte).\nEl joc dura {max_turns} torns en total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "El jugador ha intentat acceptar un comerç sense tenir els recursos necessaris.",
+    "out_of_range": "Jugador {player_id}, Acció invàlida. La columna {col} està fora dels límits.",
+    "already_full": "Jugador {player_id}, Acció invàlida. La columna {col} està plena.",
+    "proposing_with_no_resource": "El jugador {player_id} ha intentat fer una oferta de comerç sense tenir els recursos necessaris.",
+    "incorrect_offer_format": "El jugador {player_id} ha fet una oferta de comerç en un format incorrecte.",
+    "no_new_offer": "El jugador {player_id} no ha fet cap nova oferta de comerç."
+  },
+  "offers": {
+    "reject": "El jugador {player_id} ha rebutjat l'oferta de comerç.",
+    "accept": "El jugador {acceptor_id} ha acceptat l'oferta de comerç del jugador {proposer_id}.",
+    "proposal": "El jugador {player_id} ha fet la següent oferta al jugador {opponent_id}: Articles oferts: {offered} -> Articles sol·licitats: {requested}"
+  },
+  "outcome": {
+    "win": "El jugador {winner_id} ha guanyat per tenir un guany més gran en el valor de l'inventari.",
+    "draw": "El mateix canvi en el valor de l'inventari per a tots els jugadors. Empat."
+  }
+}

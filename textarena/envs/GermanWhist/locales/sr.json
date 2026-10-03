@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Игра почиње. Адут: {trump_suit} (адут карта: {trump_str}).",
+    "no_trump_card": "нема"
+  },
+  "player_prompt": {
+    "intro": "Ви сте играч {player_id} у Немачком Висту.\n{phase_info}\nВи држите {hand_size} карата.\nОдиграјте карту са '[play N]', где је N њена позиција у вашој руци (на пример '[play 3]').",
+    "phase_learning": "ФАЗА УЧЕЊА: победник сваког трика узима лицем нагоре карту и губитник вуче следећу карту из шпила. Трикови освојени у овој фази не рачунају се према победи.",
+    "phase_playing": "ФАЗА ИГРЕ: шпил је исцрпљен. Сваки трик од сада броји према победи."
+  },
+  "next_card": {
+    "playing_phase": "Нема карте на понуди - фаза игре је почела.",
+    "deck_empty": "Шпил је празан - нема карте на понуди.",
+    "available": "Карта на понуди: {card}",
+    "available_trump": "Карта на понуди: {card} (АДУТ)"
+  },
+  "invalid_move": {
+    "wrong_format": "Невалидан формат потеза. Користите '[play N]' да одиграте N-ту карту у вашој руци.",
+    "bad_position": "Та позиција карте не постоји. Ви држите {hand_size} карата.",
+    "must_follow_suit": "Морате пратити боју и одиграти {lead_suit} карту.",
+    "invalid_play": "Та карта не може бити одиграна."
+  },
+  "game_action": {
+    "played": "Играч {player_id} одиграо {card}."
+  },
+  "trick": {
+    "won": "Играч {winner_id} осваја трик са {card}.",
+    "won_learning": "Играч {winner_id} осваја трик са {card} и узима лицем нагоре карту."
+  },
+  "phase": {
+    "learning_complete": "Шпил је исцрпљен. Фаза учења је завршена - сваки преостали трик броји према победи."
+  },
+  "draw": {
+    "winner_received": "Ви сте освојили трик и примили {card}.",
+    "loser_received": "Ви сте изгубили трик и повукли {card} из шпила.",
+    "winner_preview": "Следећа карта на понуди је {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Трикови освојени до сада - Играч 0: {tricks0}, Играч 1: {tricks1}",
+    "scores_playing": "Трикови који се броје - Играч 0: {tricks0}, Играч 1: {tricks1}",
+    "phase": "Фаза: {phase}",
+    "phase_learning": "Фаза: {phase} ({remaining_cards} карата преостало у шпилу)"
+  },
+  "hand": {
+    "no_cards": "Нема карата",
+    "no_cards_in_hand": "Нема карата у руци",
+    "header": "Ваша рука:",
+    "trump_indicator": " (АДУТ)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Нема карата одиграних у овом трику.",
+    "header": "Тренутни трик:",
+    "trump_indicator": " (АДУТ)",
+    "card_line": "{observation}\n  Играч {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Игра није почела",
+    "header": "=== НЕМАЧКИ ВИСТ ===",
+    "phase": "{observation}\nФаза: {phase}",
+    "trump_suit": "{observation}\nАдут: {trump_suit}",
+    "trump_card": "{observation}\nАдут карта: {card}",
+    "cards_left": "{observation}\nКарата преостало у шпилу: {count}",
+    "next_card": "{observation}\nСледећа карта за победника: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nТренутни трик:",
+    "trump_indicator": " (АДУТ)",
+    "trick_line": "{observation}\n  Играч {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nИграч {player_id}: {scoring} трикова који се броје ({tricks} укупно), {hand_size} карата у руци"
+  },
+  "outcome": {
+    "summary": "Фаза учења - Играч 0: {l0}, Играч 1: {l1}. Фаза игре - Играч 0: {p0}, Играч 1: {p1}. Играч {winner_id} побеђује са {winner_tricks} трикова који се броје!"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} Quantum Tic Tac Toe -pelissä.\nMerkkisi on '{symbol}', ja siirtonumerosi ovat aina {parity} (esim. X1, X3 tai O2, O4).\n\nTavoite: Voita muodostamalla kolmen klassisen merkin rivi (kiinteytetty supervalta).\n\nPeliohjeet:\n- Jokaisella vuorolla aseta kaksi kummallista merkkiä eri tyhjiin ruutuihin käyttäen muotoa '[a,b]'.\n- Nämä merkit ovat lomittuneita ja nimettyjä kuten 'X1 / X1' tai 'O4 / O4'.\n- Et voi asettaa kummallista merkkiä ruutuun, joka on jo romahtanut (kiinteytynyt).\n\nRomahdusääntö:\n- Jos siirrossasi syntyy sykli lomittumisgraafissa, se romahtaa automaattisesti.\n- Jokainen syklin kummallinen merkki muuttuu klassiseksi merkiksi yhdessä sen kahdesta asemasta.\n- Minkä tahansa riippuvan kummallisen merkin romahdus.\n\nVoitto:\n- Peli päättyy, kun pelaajalla on kolme klassista merkkiä peräkkäin.\n- Jos molemmat pelaajat saavat rivin saman romahduksen aikana, pelaaja, jolla on alempi maksimisiirtonumero, voittaa.\n\nEsimerkki siirto: '[0,4]' asettaa kummallisen merkin ruutuihin 0 ja 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe -pelilauta:\n\n{board}\n\nLähetä siirtosi muodossa '[a,b]', jotta voit asettaa kvanttimerkin kahteen paikkaan."
+  },
+  "invalid_move": {
+    "wrong_format": "Virheellinen muoto. Käytä muotoa '[a,b]'.",
+    "invalid_cells": "Virheelliset tai kaksoisruutuindeksit.",
+    "already_solidified": "Yksi ruuduista on jo kiinteytynyt."
+  },
+  "game_action": {
+    "placed": "Pelaaja {player_id} asetti merkinsä supervaltaan ruutujen {pos_a} ja {pos_b} välillä."
+  },
+  "game_message": {
+    "dependent_resolved": "Riippuva supervalta ratkaistu. Ruutu ({r}, {c}) on nyt {symbol}.",
+    "last_cell_resolved": "Supervalta viimeiselle ruudulle ratkaistu. Ruutu ({r}, {c}) on nyt {symbol}.",
+    "superposition_resolved": "Supervalta ratkaistu. Ruutu ({r}, {c}) on nyt {symbol}."
+  },
+  "outcome": {
+    "win": "Pelaaja {player_id} voittaa kiinteytyneillä merkeillä!",
+    "draw": "Peli on tasapeli!"
+  }
+}

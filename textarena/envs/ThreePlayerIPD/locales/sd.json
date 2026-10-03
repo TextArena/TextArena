@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "توهان 3 رانديگرن جي Iterated Prisoner's Dilemma ۾ Player {player_id} آهيو. ميچ {num_rounds} رائونڊ تائين جاري آهي. رائونڊ جوڙجڪ: • {conv_rounds} مفت چيٽ وارو رخ • 1 فيصلو وارو رخ - مخالف جي هڪ ٽوڪن جمع ڪرائڻ: '[<opp-id> cooperate]' يا '[<opp-id> defect]' (يعني '[1 defect] [2 cooperate] ؛ ڊفالٽ 'ڪوآپريٽو') آهي. جوڙي وارين ادائيگي ميٽرڪس (هر غير ترتيب واري جوڙي تي لاڳو ٿيل): - ٻئي تعاون -> {reward} - ٻئي نقص -> {punishment} - توهان نقص ڪريو ، اهي تعاون -> {temptation} - توهان تعاون ڪريو ، اهي نقص -> {sucker} سڀني دورن جي آخر ۾ تمام اعليٰ اسڪور سان رانديگر) کٽي ٿو."
+  },
+  "round": {
+    "start": "─── شروعاتي دور {round} ─── توهان ايندڙ {conv_rounds} دورن لاءِ آزاديءَ سان ڳالهائي سگهو ٿا.",
+    "chat_finished": "Chat finished for round {round}. Submit your decisions, one token per opponent: `[pid cooperate]` or `[pid defect]`."
+  },
+  "results": {
+    "header": "### گول {round} - نتيجا:",
+    "pair_line": "{observation} پليئر {i} بمقابلي پليئر {j} ترتيب سان {choice_i} ۽ {choice_j} چونڊيو (پليئر {i} حاصل ڪيو {gain_i} ، پليئر {j} حاصل ڪيو {gain_j})",
+    "scores_open": "{observation} -> موجوده اسڪور: ",
+    "score_first": "{observation} پليئر {player_id} ({score})",
+    "score_next": "{observation}؛ پليئر {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "آخري اسڪور: {scores}. درجه بندي گروپ (بدترين→بهترين): {groups}"
+  }
+}

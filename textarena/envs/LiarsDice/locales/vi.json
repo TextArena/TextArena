@@ -1,0 +1,55 @@
+{
+  "_comment": "Các chuỗi hiển thị cho người dùng trong trò Liar's Dice. Các token hành động trong ngoặc vuông ('[Bid: X, Y]', '[Call]'), chỉ số người chơi, giá trị mặt xúc xắc, số lượng và số đếm là các khe trung lập và không được dịch.",
+  "_slots": {
+    "player_id": "chỉ số người chơi (số nguyên)",
+    "num_players": "số lượng người chơi trong trò chơi (số nguyên)",
+    "dice_summary": "số lượng xúc xắc còn lại của mỗi người chơi được kết nối bằng dấu ';' (đã được hiển thị)",
+    "your_dice": "danh sách các giá trị mặt xúc xắc của người chơi này được kết nối bằng dấu phẩy (đã được hiển thị)",
+    "p": "chỉ số người chơi (số nguyên)",
+    "d": "số lượng xúc xắc còn lại của người chơi đó (số nguyên)",
+    "current_player_id": "chỉ số người chơi đã đặt cược (số nguyên)",
+    "face_value": "giá trị mặt xúc xắc đang được đếm (1-6)",
+    "count": "số lượng xúc xắc khớp thực tế (số nguyên)",
+    "quantity": "số lượng đặt cược (số nguyên)",
+    "loser_id": "chỉ số người chơi mất một xúc xắc (số nguyên)",
+    "new_quantity": "số lượng đặt cược vừa được gửi (số nguyên)",
+    "current_quantity": "số lượng đặt cược hiện tại (số nguyên)",
+    "new_face_value": "giá trị mặt xúc xắc đặt cược vừa được gửi (số nguyên)",
+    "current_face_value": "giá trị mặt xúc xắc đặt cược hiện tại (số nguyên)",
+    "action": "chuỗi hành động thô mà người chơi đã gửi",
+    "reason": "lý do từ chối đặt cược được lồng nhau",
+    "winner": "chỉ số người chơi thắng (số nguyên)",
+    "final_ranking": "danh sách chỉ số người chơi từ người bị loại đầu tiên đến người chiến thắng"
+  },
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong trò Liar's Dice có {num_players} người chơi.\nLuật chơi:\n- Khi đến lượt của bạn, bạn có thể:\n  1) Đặt một cược mới với số lượng cao hơn hoặc giá trị mặt cao hơn (hoặc cả hai) so với cược hiện tại; ví dụ: '[Bid: 3, 4]',\n  2) Gọi cược cuối cùng bằng cách gõ '[Call]'.\n\nNếu bạn gọi:\n  - Nếu số lượng mặt xúc xắc thực tế ít hơn cược, người đặt cược cuối cùng sẽ mất một xúc xắc.\n  - Ngược lại, người gọi sẽ mất một xúc xắc.\nNgười chơi nào hết xúc xắc sẽ bị loại. Người chơi cuối cùng còn lại sẽ thắng."
+  },
+  "board": {
+    "per_player": "\tNgười chơi {p}: {d}",
+    "new_round": "\nVòng mới - Xúc xắc còn lại: {dice_summary}\nXúc xắc hiện tại của bạn: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Người chơi {current_player_id} gọi! Số lượng mặt {face_value} thực tế là {count}, ít hơn {quantity}.\nNgười chơi {loser_id} (người đặt cược cuối cùng) mất một xúc xắc.",
+    "caller_loses": "Người chơi {current_player_id} gọi! Số lượng mặt {face_value} thực tế là {count}, bằng hoặc nhiều hơn {quantity}.\nNgười chơi {loser_id} (người gọi) mất một xúc xắc."
+  },
+  "action": {
+    "bid_announce": "Người chơi {player_id} đặt cược {quantity} mặt {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Gọi cược khi chưa có cược trước.",
+    "invalid_bid": "Cược không hợp lệ: {reason}",
+    "not_recognized": "Hành động không được nhận diện là một cược hợp lệ '[Bid: X, Y]' hoặc '[Call]'. Hành động đã gửi: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Số lượng mới {new_quantity} thấp hơn số lượng hiện tại {current_quantity}.",
+    "face_lower": "Giá trị mặt mới {new_face_value} thấp hơn giá trị mặt hiện tại {current_face_value}.",
+    "identical": "Cược giống hệt cược hiện tại.",
+    "face_range": "Giá trị mặt phải nằm trong khoảng từ 1 đến 6."
+  },
+  "message": {
+    "eliminated_invalid": "Người chơi {player_id} bị loại do hành động không hợp lệ."
+  },
+  "outcome": {
+    "win": "Người chơi {winner} thắng! Xếp hạng cuối cùng: {final_ranking}"
+  }
+}

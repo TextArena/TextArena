@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "A yɛ Lɛɛla {player_id} kɛ Tic Tac Toe ɖe Lɛɛla Tatɔ.\nE-wele ŋɛ '{symbol}'.\nA kɛ mbɛlɛ yɛɛna e-wele kɛ tablo 5x5 kɛ kɔɔ kɛ naŋgbaŋgba.\nNaŋgbaŋgba kɛɛ kɛ kɛɛna, tɩŋa, kɛɛ kɛ kɛɛna.\nYɛɛ e-mbɛlɛ kɛ '[4]' kɛ kɔɔ kɛ 4."
+  },
+  "board": {
+    "current_board": "Tablo Hɛnɛ:\n\n{board}\n\nKɛɛ Kɛ Mbɛlɛ: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kɛɛ kɛ mbɛlɛ kɛ sɛɛ. Yɛɛ '[cell]' kɛ kɔɔ kɛ 0-{max_cell}.",
+    "out_of_range": "Kɔɔ kɛɛ kɛ sɛɛ: {cell}. Kɛ na 0 na {max_cell}.",
+    "already_occupied": "Seli {cell} wayɛ kɛlɛ.",
+    "made_invalid": "Aleɣya laɖʋ {player_id} labɩ aleɣya kɩbana."
+  },
+  "game_action": {
+    "placed": "Lɛɛla {player_id} yɛɛna e-wele ({symbol}) kɛ kɔɔ kɛ ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Lɛɛla {player_id} ({symbol}) yɛɛ!",
+    "draw": "Pɛlɛɣzɩ aleɣya!"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Kcemm iseqdac {player_id} g umukris n Indian Poker.\n- Uɣirsis 52 n tɣuriwin; tɣuri n umsɣazi ka tẓṛat.\n- Iɣtis {ante} n tɣuriwin n uɣris kraygat talɣa, {max_rounds} n talɣa(t) kullut.\n- Imenyuten imseɣten: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X d azwil azayku ≤ uṭṭun n tɣuriwin inu.)\n- Tɣuri tinzɣarin tisɣnin taf tɣuriwin n uɣris g ussudu.\n"
+  },
+  "round": {
+    "announce": "### Asrir {current_round}/{max_rounds}\nAkarṭi n ussugen-ik d: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Sekkes aya ad yefrek yiwet n tuccfa tazrayt, s tetturar '[check]', '[bet 2]', '[call]', '[raise 3]', neɣ '[fold]'.",
+    "cannot_check": "Ur tzemreḍ ara ad [check] - tllaḍ ṣṣerḥ ɣef wudm.",
+    "amount_min": "ⵉⵇⵇⴰⵏ ⴷ ⴰⴷ ⵢⵉⵍⵉ ⵡⴰⵜⵉⴳ ⵏ ⵓⵙⵙⴰⵔⵓ/ⵜⴰⵙⴳⵎⵉ ≥ 1.",
+    "cannot_bet": "Ur tzemreḍ ara ad [bet] - ilaq ad [call] / [raise] / [fold].",
+    "nothing_to_call": "ⵓⵔ ⵉⵍⵍⵉ ⵎⴰ ⴰⴷ ⵜⵙⵙⴰⵖ; ⵥⴹⴰⵕⴷ [check] ⴳ ⵓⴱⴰⵔⴰⵣ.",
+    "no_bet_to_raise": "ⵙⵎⵔⴰⵙ [bet X] ⴰⴼⴰⴷ ⴰⴷ ⵜⴱⵉⴷⴷ; ⵓⵔ ⵉⵍⵍⵉ ⵡⴰⵜⵉⴳ ⵉ ⵓⵙⴽⵛⵎ.",
+    "insufficient": "ⵓⵔ ⵍⵍⵉⵏ ⵉⴼⵔⴷⵉⵙⵏ ⵉⵅⴰⵜⴰⵔⵏ ⴳ ⵜⵡⵓⵔⵉ ⴰⴷ."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "ⵜⵉⴳⴰⵡⵉⵏ ⵏⵏⴽ ⵉⵖⵢⴰⵏⵏ: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Uḍebsi {pot} → Amarir {winner}. (Tɣimɣimt P0:{p0}, P1:{p1})",
+    "folded": "ⵓⵎⵓⵔⴰⵔ {player_id} ⵢⴰⵖ.",
+    "showdown_win": "Asɣiwel: {card_win} iɣel {card_lose}.",
+    "showdown_tie": "Asɣiwel yeqreb: sin {card}. Uḍebsi yeqreb – kray ig ḍaṛen {split}."
+  },
+  "outcome": {
+    "p0_wins": "Amarir 0 iɣel ({bank0} > {bank1})",
+    "p1_wins": "Amarir 1 iɣel ({bank1} > {bank0})",
+    "draw": "ⵜⵉⴼⵉⵛⵉⵜⵉⵏ ⵉⵎⵣⴰⵔⴰⵢⵏ ⴷⴼⴼⵉⵔ ⴽⵓⵍⵍⵓ ⵜⴽⵍⵢⴰⵏ."
+  }
+}

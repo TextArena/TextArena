@@ -1,0 +1,74 @@
+{
+  "_comment": "File di localizzazione di Klondike Solitaire. NON tradurre le chiavi (lato sinistro). Tradurre solo i valori (lato destro).",
+  "_slots": {
+    "{n}": "Indice dell'azione all'interno di un comando separato da virgole, basato su 1",
+    "{msg}": "Un messaggio di risultato annidato per azione (già localizzato)",
+    "{count}": "Numero di carte scoperte che vengono spostate",
+    "{src}": "Numero del mucchio di tabella sorgente, basato su 1",
+    "{dst}": "Numero del mucchio di destinazione, basato su 1",
+    "{cmd}": "Il comando sconosciuto digitato dal giocatore (non tradotto)",
+    "{max_turns}": "Il numero massimo di turni prima della fine del gioco",
+    "{score}": "Numero di carte attualmente nelle fondamenta",
+    "{board}": "La tavola ASCII resa (non tradurre)",
+    "{turn}": "Numero del turno attuale",
+    "{stock}": "Numero di carte rimaste nel mazzo",
+    "{waste}": "L'etichetta della carta di scarto superiore, o '--' se vuota (non tradurre)",
+    "{cards}": "Le carte in un mucchio come etichette neutrali, o '--' se vuote (non tradurre)"
+  },
+  "player_prompt": {
+    "intro": "Stai giocando a Klondike Solitaire. Il tuo obiettivo è spostare tutte le carte nelle fondamenta.\n\nRegole del gioco:\n- Fondamenta (F1-F4): Costruisci dal basso verso l'alto, dall'Asso al Re, dello stesso seme\n- Tavola (T1-T7): Costruisci in ordine decrescente, alternando i colori (rosso su nero, nero su rosso)\n- Mazzo: Pesca le carte per il mucchio di scarto\n- Scarto (W): La carta superiore disponibile per il gioco\n\nComandi:\n- 'draw' - Pesca le carte dal mazzo per lo scarto\n- 'move <sorgente> <destinazione> [conteggio]' - Sposta le carte tra i mucchi\n  Esempi: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Il conteggio può anche essere 'all', che cercherà di spostare tutte le carte scoperte.\n- 'forfeit' - Termina il gioco immediatamente e blocca il punteggio attuale\n- Nomi dei mucchi: W (scarto), F1-F4 (fondamenta), T1-T7 (tavola)\n\nPuoi eseguire più azioni in un turno separandole con virgole:\n  Esempio: 'draw, move W T1, move T2 F1'\n\nSolo i Re possono essere posizionati su mucchi di tavola vuoti.\nLe azioni vengono eseguite in ordine - se una fallisce, le azioni rimanenti vengono saltate.\nUsa 'forfeit' se pensi che il gioco sia impossibile da vincere."
+  },
+  "format_error": {
+    "no_brackets": "Formato di azione non valido. L'azione dovrebbe essere tra parentesi quadre.",
+    "no_closing_bracket": "Formato di azione non valido. Manca la parentesi quadra di chiusura ']'",
+    "empty_command": "Comando vuoto. Digita 'draw' o 'move <sorgente> <destinazione> [conteggio]'",
+    "empty_action": "Azione vuota",
+    "move_needs_args": "Il comando di spostamento richiede sorgente e destinazione. Utilizzo: 'move <sorgente> <destinazione> [conteggio]'",
+    "count_positive": "Il conteggio deve essere positivo o 'all'",
+    "count_invalid": "Conteggio non valido. Utilizza un numero o 'all'",
+    "unknown_command": "Comando sconosciuto '{cmd}'. Utilizza 'draw', 'move <sorgente> <destinazione> [conteggio]', o 'forfeit'",
+    "wrapped": "Azione {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Azione {n}: {msg}",
+    "before_failure": "Eseguite {n} azione(i) prima del fallimento.",
+    "failed": "Azione {n} fallita: {msg}"
+  },
+  "move_result": {
+    "drew": "Pescata(e) carta(e) dal mazzo per lo scarto.",
+    "cannot_draw": "Non è possibile pescare. Sia il mazzo che lo scarto sono vuoti.",
+    "invalid_pile": "Nome del mucchio non valido. Utilizza W, F1-F4, o T1-T7",
+    "foundation_one_card": "Puoi spostare solo 1 carta nella fondamenta",
+    "waste_to_foundation_ok": "Spostata carta dallo scarto alla fondamenta F{dst}",
+    "waste_to_foundation_bad": "Non è possibile spostare la carta di scarto in quel mucchio di fondamenta",
+    "tableau_to_foundation_ok": "Spostata carta dalla tavola T{src} alla fondamenta F{dst}",
+    "tableau_to_foundation_bad": "Non è possibile spostare la carta della tavola in quel mucchio di fondamenta",
+    "foundation_to_foundation": "Non è possibile spostare dalla fondamenta alla fondamenta",
+    "waste_to_tableau_one_card": "Puoi spostare solo 1 carta dallo scarto alla tavola",
+    "waste_to_tableau_ok": "Spostata carta dallo scarto alla tavola T{dst}",
+    "waste_to_tableau_bad": "Non è possibile posizionare la carta di scarto su quel mucchio di tavola",
+    "no_face_up": "Nessuna carta scoperta da spostare",
+    "tableau_to_tableau_ok": "Spostata(e) {count} carta(e) dalla tavola T{src} alla T{dst}",
+    "tableau_to_tableau_bad": "Non è possibile spostare {count} carta(e) da T{src} a T{dst}",
+    "foundation_to_tableau_one_card": "Puoi spostare solo 1 carta dalla fondamenta alla tavola",
+    "foundation_empty": "La fondamenta F{src} è vuota",
+    "foundation_to_tableau_ok": "Spostata carta dalla fondamenta F{src} alla tavola T{dst}",
+    "foundation_to_tableau_bad": "Non è possibile posizionare la carta della fondamenta sulla tavola T{dst}",
+    "to_waste_or_stock": "Non è possibile spostare nello scarto o nel mazzo"
+  },
+  "outcome": {
+    "forfeit": "Partita abbandonata. Punteggio finale: {score} carte nelle fondamenta.",
+    "won": "Congratulazioni! Hai vinto a Klondike Solitaire!",
+    "turn_limit": "Partita terminata! Hai raggiunto il massimo di {max_turns} turni. Punteggio: {score} carte nelle fondamenta."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Turno: {turn}/{max_turns}",
+    "stock": "Mazzo: {stock} carte",
+    "waste": "Scarto (W): {waste}",
+    "foundations_header": "Fondamenta:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tavola:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

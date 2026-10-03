@@ -1,0 +1,31 @@
+{
+  "_comment": "File di localizzazione di Hangman. Le chiavi (a sinistra) sono fisse; tradurre solo i valori (a destra). Mantenere ogni {placeholder} invariato. Mantenere token neutrali non tradotti: i formati di parentesi '[L]' / '[LIGHT]', la lettera singola indovinata {letter}, gli header di colonna (C00, C01, ...) e gli spazi vuoti '_' all'interno di {board}.",
+  "_slots": {
+    "{board}": "Tavola neutra renderizzata (header di colonna C00/C01, lettere rivelate, spazi vuoti '_'); non tradurre",
+    "{tries_left}": "Tentativi errati rimanenti (intero)",
+    "{guessed}": "Elenco di lettere già indovinate separate da virgola",
+    "{letter}": "La lettera o la parola intera indovinata (mantenuta come digitata)",
+    "{pct}": "Percentuale di caratteri indovinati correttamente, formattata a 2 decimali",
+    "{target_word}": "La parola nascosta obiettivo"
+  },
+  "prompt": {
+    "intro": "Stai giocando a Hangman. L'obiettivo del gioco è indovinare la parola fornendo singole lettere o l'intera parola.\nOgni colonna è numerata. Le celle che devono essere popolate con lettere sono rappresentate da '_'.\n\nCi sono due modi per rispondere. Puoi fornire singole lettere nel formato '[L]', oppure puoi indovinare l'intera parola nel formato '[LIGHT]'.\nSe la lettera data è nella parola, verrà rivelata nella griglia.\nSe la parola data è corretta, vinci.\nMentre giochi, la cronologia delle tue scelte verrà aggiunta qui sotto. Utilizza le informazioni per capire la parola e vincere.\nHai 6 tentativi errati prima che il gioco finisca.\n\n"
+  },
+  "board": {
+    "status": "Tavola attuale:\n{board}\nHai {tries_left} tentativi rimanenti.\nLettere indovinate: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Formato di mossa non valido. Non hai risposto con una 'lettera' o una 'parola' valida.",
+    "already_guessed": "Hai già indovinato la lettera '{letter}'."
+  },
+  "message": {
+    "wrong_word": "La tua ipotesi di '{letter}' non è la parola obiettivo.",
+    "letter_in": "La tua ipotesi di {letter} è nella parola",
+    "letter_not_in": "La tua ipotesi di {letter} non è nella parola. Hai {tries_left} vite rimanenti."
+  },
+  "outcome": {
+    "win_word": "Congratulazioni! Hai completato il puzzle di Hangman.",
+    "win_board": "Congratulazioni! Hai completato il puzzle di Hangman.",
+    "out_of_tries": "Sei senza tentativi. Hai indovinato il {pct} percento dei caratteri correttamente. La parola obiettivo era: {target_word}"
+  }
+}

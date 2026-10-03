@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Ianao no milalao Klondike Solitaire. Tanjona dia hanohy ny cartes rehetra ao amin'ny pile fondation.\n\nTantara ny lalao:\n- Pile fondation (F1-F4): Miroso avy amin'ny Ace hatramin'ny King amin'ny suit\n- Pile tableau (T1-T7): Miroso midina amin'ny loko mifanohitra (mena amin'ny mainty, mainty amin'ny mena)\n- Stock: Ora ny cartes ao amin'ny waste pile\n- Waste (W): Carte ambony azo atao\n\nKomandy:\n- 'draw' - Ora ny cartes avy amin'ny stock ao amin'ny waste\n- 'move <source> <destination> [count]' - Hanohy ny cartes amin'ny pile\n  Ohatra: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count azo atao ihany koa 'all', izay hanohy ny cartes rehetra ambony.\n- 'forfeit' - Tapitra ny lalao ary azo atao ny alahelo ankehitriny\n- Anaran'ny pile: W (waste), F1-F4 (fondation), T1-T7 (tableau)\n\nAfaka atao ny komandy maro amin'ny tour iray amin'ny fanasarana virgule:\n  Ohatra: 'draw, move W T1, move T2 F1'\n\nKings ihany no azo apetraka ao amin'ny pile tableau foana.\nAsa dia manaja ny filaharana - raha misy ny iray tsy fety, dia tsy atao ny asa sisa.\nAmpy 'forfeit' raha inoana fa tsy azo atao ny lalao."
+  },
+  "format_error": {
+    "no_brackets": "Tsy mety ny endrika fihetsika. Tokony ho ao anaty fononteny ny fihetsika.",
+    "no_closing_bracket": "Tsy mety ny endrika hetsika. Tsy hita ny bracket famaranana ']'",
+    "empty_command": "Komandy foana. Soraty 'draw' na 'move <source> <destination> [count]'",
+    "empty_action": "Hetsika tsy misy dikany",
+    "move_needs_args": "Ny baiko 'move' dia mila loharanon'ny karta sy ny tanjona. Fomba fampiasana: 'move <source> <destination> [count]'",
+    "count_positive": "Isan dia tsy maintsy ho pozitiva na 'all'",
+    "count_invalid": "Tsy mety ny isan'ny karta. Ampiasao isa na 'all'",
+    "unknown_command": "Komandy tsy fantatra '{cmd}'. Ampy 'draw', 'move <source> <destination> [count]', na 'forfeit'",
+    "wrapped": "Hetsika {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Hetsika {n}: {msg}",
+    "before_failure": "Nanao hetsika {n} talohan'ny tsy fahombiazana.",
+    "failed": "Tsy nahomby ny hetsika {n}: {msg}"
+  },
+  "move_result": {
+    "drew": "Nentina avy amin'ny tahiry ho any amin'ny fako ny karatra.",
+    "cannot_draw": "Tsy afaka misintona. Samy foana ny tahiry sy ny fako.",
+    "invalid_pile": "Anarana tsy mety amin'ny tabilao. Ampiasao ny W, F1-F4, na T1-T7",
+    "foundation_one_card": "Afaka mamindra karatra 1 ihany ho any amin'ny fototra",
+    "waste_to_foundation_ok": "Karatra nafindra avy amin'ny fako ho any amin'ny fototra F{dst}",
+    "waste_to_foundation_bad": "Tsy afaka mamindra karatra fako ho an'ilay antontam-panorenana",
+    "tableau_to_foundation_ok": "Karatra nafindra avy amin'ny tabilao T{src} mankany amin'ny fototra F{dst}",
+    "tableau_to_foundation_bad": "Tsy afaka mamindra ny karatra tableau ho amin'ilay antontam-panorenana",
+    "foundation_to_foundation": "Tsy afaka mifindra avy amin'ny fototra mankany amin'ny fototra",
+    "waste_to_tableau_one_card": "Afaka mamindra karatra 1 ihany avy amin'ny fako mankany amin'ny tabilao",
+    "waste_to_tableau_ok": "Karatra nafindra avy amin'ny fako mankany amin'ny tabilao T{dst}",
+    "waste_to_tableau_bad": "Tsy afaka mametraka karatra fako eo amin'io tabilao io",
+    "no_face_up": "Tsy misy karatra miokatra azo hifindra",
+    "tableau_to_tableau_ok": "Nentina {count} karatra (s) avy amin'ny tabilao T{src} mankany amin'ny T{dst}",
+    "tableau_to_tableau_bad": "Tsy afaka mamindra {count} karatra (s) avy amin'ny T{src} mankany amin'ny T{dst}",
+    "foundation_to_tableau_one_card": "Afaka mamindra karatra 1 ihany avy amin'ny fototra mankany amin'ny tableau",
+    "foundation_empty": "Foiben'ny F{src} tsy misy",
+    "foundation_to_tableau_ok": "Nentina avy tao amin'ny fototra F{src} ho any amin'ny tabilao T{dst} ny karatra",
+    "foundation_to_tableau_bad": "Tsy afaka mametraka karatra fototra amin'ny tabilao T{dst}",
+    "to_waste_or_stock": "Tsy afaka afindra any amin'ny fako na tahiry"
+  },
+  "outcome": {
+    "forfeit": "Tapaka ny lalao. Famaritana farany: {score} karatra ao amin'ny fototra.",
+    "won": "Arahabaina, nandresy tamin'ny lalao Klondike Solitaire ianao!",
+    "turn_limit": "Tapitra ny lalao! nahatratra ny isa ambony indrindra amin'ny fihodinana {max_turns} ianao. isa: {score} karatra ao amin'ny fototra."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE === Ny fanombohana ny tantara",
+    "turn": "Fihodinana: {turn}/{max_turns}",
+    "stock": "Fananana: {stock} karatra",
+    "waste": "Fako (W): {waste}",
+    "foundations_header": "Fototra:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Tabilao:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

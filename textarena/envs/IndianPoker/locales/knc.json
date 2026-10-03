@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Káma {player_id} ka nde ámá Indian Poker.\n- 52-kárdi dèkki; káma ámá kárdi ngá ámá opponent.\n- Ánté {ante} chíp(s) kóló rándu, {max_rounds} rándu(s) kóló.\n- Móvù kóló: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X kóló kárdi ngá kóló káma chíp ka nde.)\n- Kárdi ngá ámá kóló wínsi pót ámá shódaw.\n"
+  },
+  "round": {
+    "announce": "### Round {current_round}/{max_rounds}\nKarta ta ɓangal: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Tání móvù kóló ámá bracket kóló, e.g. '[check]', '[bet 2]', '[call]', '[raise 3]', or '[fold]'.",
+    "cannot_check": "Ba'a [check] - nyiye kasatsәna.",
+    "amount_min": "Bet/Raise kungәna dә mbu ro waljin.",
+    "cannot_bet": "Ayi ko [bet] - ɓata ko [call] / [raise] / [fold].",
+    "nothing_to_call": "Awo bowotiyin ba; nyiye raksa [check] ro waljin.",
+    "no_bet_to_raise": "Kǝla [bet X] lan faidatә baditaro; bet laa gәnyi.",
+    "insufficient": "Chipswa adәgai ro kalkal gǝnyi."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Awo mowonzәm wajin: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Kúli {pot} → Káma {winner}. (Kúli P0:{p0}, P1:{p1})",
+    "folded": "Kambiwu {player_id} dǝ cǝkkǝna.",
+    "showdown_win": "Showdown: {card_win} ɓata {card_lose}.",
+    "showdown_tie": "Showdown tie: indiso {card}. Pot split  ndasowosoye kǝla nza lan gǝrjin {split}."
+  },
+  "outcome": {
+    "p0_wins": "Player 0 ɓata ({bank0} > {bank1})",
+    "p1_wins": "Player 1 ɓata ({bank1} > {bank0})",
+    "draw": "Chipwa tilo ngawo awoa rowata sammaben."
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "ဂိမ်းစတင်သည်။ ထရမ့်ဝတ်စုံ: {trump_suit} (ထရမ့်ကတ်: {trump_str}) ။",
+    "no_trump_card": "မရှိဘူး"
+  },
+  "player_prompt": {
+    "intro": "သင်သည် ဂျာမန် ဝစ်စတ်တွင် Player {player_id} ဖြစ်သည်။\n{phase_info}\nသင်ကို {hand_size} ကတ်ဒ်များ ရှိသည်။\n'[play N]' ဖြင့် ကတ်ဒ် တစ်ခု ကစားပါ၊ ထို့၌ N သည် သင့်လက်ထဲမှ ပိုဇစ်ရှင်း ဖြစ်သည် (ဥပမာ '[play 3]')။",
+    "phase_learning": "သင်ကြားရေးအဆင့်: ထိုးဖောက်နိုင်သူက မျက်နှာပြင်ကဒ်ကို ယူပြီး ရှုံးသူက နောက်တစ်ကဒ်ကို ဆွဲယူတယ်။ ဒီအဆင့်မှာ ရတဲ့ ထိုးဖောက်မှုတွေဟာ နိုင်ပွဲအတွက် မတွက်ဆရဘူး။",
+    "phase_playing": "ကစားတဲ့ အဆင့်မှာ ဖဲချပ်တွေ အကုန်ကုန်သွားပြီ အခုကစပြီး လှည့်ကွက်တိုင်းဟာ နိုင်ပွဲအတွက် အရေးပါပါတယ်။"
+  },
+  "next_card": {
+    "playing_phase": "ကဒ်မရှိတော့ပါဘူး၊ ကစားတဲ့ အဆင့်စပါပြီ။",
+    "deck_empty": "ကဒ်ပြားက ဗလာပဲ၊ ကဒ်ပြားမရှိဘူး။",
+    "available": "ကမ်းလှမ်းသောကဒ်: {card}",
+    "available_trump": "ကမ်းလှမ်းထားသောကဒ်: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "မမှန်သောရွှေ့ပြောင်းပုံစံ၊ သင့်လက်ထဲက Nth ကဒ်ကို ကစားဖို့ '[play N]' ကိုသုံးပါ။",
+    "bad_position": "ကဒ်၏ နေရာ မရှိပါ။ သင်သည် {hand_size} ကဒ်များကို ကိုင်ထားပါသည်။",
+    "must_follow_suit": "သင်သည် အရောင်ကို လိုက်ပါရပါမည်။ {lead_suit} အရောင် ကဒ်တစ်ခုကို ကစားပါ။",
+    "invalid_play": "ဒီကဒ်ကို မကစားနိုင်ဘူး။"
+  },
+  "game_action": {
+    "played": "ကစားသမား {player_id} သည် {card} ကို ကစားသည်။"
+  },
+  "trick": {
+    "won": "ကစားသမား {winner_id} က {card} နဲ့ လှည့်ကွက်ကို နိုင်တယ်။",
+    "won_learning": "ကစားသမား {winner_id} က {card} နဲ့ ထိုးဖောက်ပြီး မျက်နှာပြင်ကဒ်ကို ယူတယ်။"
+  },
+  "phase": {
+    "learning_complete": "အပြင်ထွက်ပြီးနောက်မှာ ကစားစရာမရှိတော့ဘူး။ သင်ယူမှုအဆင့် ပြီးဆုံးသွားတယ်၊ ကျန်နေတဲ့ လှည့်ကွက်တိုင်းက နိုင်ဖို့ အရေးပါပါတယ်။"
+  },
+  "draw": {
+    "winner_received": "သင်ဟာ လှည့်ကွက်ကို နိုင်ပြီး {card} ကို ရတယ်။",
+    "loser_received": "ခင်ဗျားက ဂဏန်းတွက်စက်ကို ရှုံးသွားတယ် ပြီးတော့ အပုံထဲက {card}ကို ဆွဲထုတ်လိုက်တယ်။",
+    "winner_preview": "နောက်ကဒ်က {card} ပါ။"
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "ယခုအချိန်ထိအောင်မြင်ခဲ့သောနည်းလမ်းများ - ကစားသမား ၀: {tricks0}, ကစားသမား ၁: {tricks1}",
+    "scores_playing": "ဂိုးသွင်းနိုင်သောနည်း - ကစားသမား ၀: {tricks0}, ကစားသမား ၁: {tricks1}",
+    "phase": "အဆင့်: {phase}",
+    "phase_learning": "အဆင့်: {phase} ({remaining_cards} ကတ်များအား အခန်းထဲတွင် ကျန်ရစ်ခဲ့သည်)"
+  },
+  "hand": {
+    "no_cards": "ကဒ်မရှိဘူး",
+    "no_cards_in_hand": "လက်ထဲမှာ ကဒ်တွေ မရှိဘူး။",
+    "header": "မင်းရဲ့လက်။",
+    "trump_indicator": "(ထရမ့်)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index} {card}"
+  },
+  "trick_view": {
+    "empty": "ဒီကစားနည်းကို ဘယ်ကစားသမားမှ မကစားရသေးဘူး။",
+    "header": "လက်ရှိ လှည့်ကွက်က",
+    "trump_indicator": "(ထရမ့်)",
+    "card_line": "{observation} ကစားသမား {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "ကစားပွဲ မစတင်သေး",
+    "header": "=== ဂျာမန် ဝစ်ဂိမ်း ===",
+    "phase": "{observation} အဆင့်: {phase}",
+    "trump_suit": "{observation} ထရမ့်အဝတ်အစား: {trump_suit}",
+    "trump_card": "{observation} ထရမ့်ကတ်: {card}",
+    "cards_left": "{observation} ကတ်ပြားများ: {count}",
+    "next_card": "{observation} နောက်တစ်ကဒ်က အနိုင်ရသူ {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} လက်ရှိ လှည့်ကွက်:",
+    "trump_indicator": "(ထရမ့်)",
+    "trick_line": "{observation} ကစားသမား {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} ကစားသမား {player_id}: {scoring} ဂိုးသွင်းနိုင်မှု ({tricks} စုစုပေါင်း), {hand_size} လက်ရှိလက်ရှိကဒ်များ"
+  },
+  "outcome": {
+    "summary": "သင်ကြားမှုအဆင့် - ကစားသမား ၀: {l0}, ကစားသမား ၁: {l1} ကစားပွဲအဆင့် - ကစားသမား ၀: {p0}, ကစားသမား ၁: {p1} ကစားသမား {winner_id}သည် {winner_tricks}မှတ်ယူနည်းများဖြင့်နိုင်သည်။"
+  }
+}

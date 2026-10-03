@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id} ({piece}). El rival es ({opp}). Envía los movimientos como '[b1 c3]' (origen → destino). Todas las piezas se mueven como caballos de ajedrez.\nCada captura otorga {score_per_capture} punto. La partida termina después de {max_moves} movimientos o cuando un jugador no tiene movimientos legales / piezas. Gana quien tenga la puntuación más alta."
+  },
+  "board": {
+    "current_board": "Movimiento #{move_count}\n\n{board}\n\nMovimientos disponibles: {moves}"
+  },
+  "invalid_move": {
+    "bad_format": "Formato incorrecto. Usa '[b1 c3]'.",
+    "unknown_square": "Casilla desconocida.",
+    "not_your_piece": "La casilla de origen no contiene una pieza tuya.",
+    "own_piece": "No puedes caer sobre una pieza propia.",
+    "not_knight": "No es un movimiento de caballo."
+  },
+  "game_action": {
+    "moved": "El Jugador {player_id} movió su pieza de {frm} a {to}.",
+    "capture": "{observation} ¡Pieza capturada! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "El Jugador {player_id} no tiene piezas.",
+    "cannot_move": "El Jugador {player_id} no puede moverse.",
+    "higher_score": "Mayor puntuación de capturas.",
+    "move_limit": "Se alcanzó el límite de movimientos."
+  }
+}

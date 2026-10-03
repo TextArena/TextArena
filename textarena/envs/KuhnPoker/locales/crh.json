@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Sen {player_id} oynacısın {max_rounds} raundlıq Kuhn Poker oyunında.\nOyun qaydaları:\n- Kuhn Poker 3-kartlıq desteni J, Q, K (J - eñ aşağı, K - eñ yuqarı)\n- Her oynaci {ante} cip ante ete ve her raundda 1 kart ala (diqqat, kartlar ğayrı-qaytarılma usulı ile dağıtıla, şuñıñ içün sen rakibininki kibi kart alamazsın).\n- Oyun {max_rounds} raundqa devam ete.\n- Bütün raundlardan soñ eñ çok cipi olan oynaci yeñe.\nHareket qaydaları:\n- '[check]': Bahis qoymadan keç (faqat stol üstünde bahis yoqsa)\n- '[bet]': Potqa 1 cip qoş (faqat stol üstünde bahis yoqsa)\n- '[call]': Rakibin bahisinı 1 cip qoşarak potqa tämamlamaq\n- '[fold]': Qolıñnı terk et ve rakibine potnı yeñip almağa izin ber"
+  },
+  "init_round": {
+    "round_start": "### {current_round} raundni başlamaq, {max_rounds} raunddan. Seniñ kartıñ: '{player_card}'",
+    "available_actions": "Siziñ mevcut areketleriñiz: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Areket [Check], [Bet], [Call] yada [Fold] olmalı.",
+    "not_legal": "Areket {legal_actions} olmalı."
+  },
+  "action": {
+    "submit_move": "Oyuncu {player_id}, areketini bildirdi: '[{move}]'.",
+    "valid_actions": "Siziñ mevcut areketleriñiz: {legal_actions}.",
+    "round_summary": "{reason} Cariy hesablari: Oynaci 0: '{player_0_chips}'; Oynaci 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Oynaci {winner}niñ {winner_card} Oynaci {loser}niñ {loser_card}nı yeñdi. Oynaci {winner} {pot_value} cipli potnı yeñdi."
+  },
+  "outcome": {
+    "draw": "{max_rounds} turlarınıñ soñunda eki oyuncınıñ da aynı sayıda çipleri bar edi.",
+    "round_win": "Oyuncı {player_id} yıqıldı.",
+    "winner_player0": "0 oyuncısı, bütün {max_rounds} turlarnıñ soñunda daa çoq çipke saip olıp ğalebe qazandı.",
+    "winner_player1": "1-ci oyuncı, bütün {max_rounds} turlarnıñ soñunda daa çoq çipke saip olıp ğalebe qazandı."
+  }
+}

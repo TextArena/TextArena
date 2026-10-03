@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "మీరు మూడు-ఆటగాడు టిక్ టాక్ టోలో ఆటగాడు {player_id}. మీ చిహ్నం '{symbol}'. మీరు మీ చిహ్నాన్ని 5x5 బోర్డులో ఉంచడం ద్వారా నాలుగు వరుసలను ఏర్పరుస్తారు. పంక్తులు అడ్డంగా, నిలువుగా లేదా వికర్ణంగా ఉండవచ్చు. సెల్ 4 ను గుర్తించడానికి '[4]' ఫార్మాట్ ఉపయోగించి మీ కదలికను సమర్పించండి."
+  },
+  "board": {
+    "current_board": "ప్రస్తుత బోర్డు: {board} అందుబాటులో ఉన్న కదలికలు: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "చెల్లని తరలింపు ఫార్మాట్. సెల్ 0-{max_cell} ఉన్న చోట '[cell]' ను ఉపయోగించండి.",
+    "out_of_range": "చెల్లని సెల్ సంఖ్య: {cell}. 0 మరియు {max_cell} మధ్య ఉండాలి.",
+    "already_occupied": "సెల్ {cell} ఇప్పటికే నిండి ఉంది.",
+    "made_invalid": "ఆటగాడు {player_id} చెల్లని కదలికను చేశాడు"
+  },
+  "game_action": {
+    "placed": "ఆటగాడు {player_id} తన చిహ్నం ({symbol}) ను ఫీల్డ్ ({row}, {col}) లో ఉంచుతాడు."
+  },
+  "outcome": {
+    "win": "ఆటగాడు {player_id} ({symbol}) గెలుస్తాడు!",
+    "draw": "ఆట డ్రా ఉంది!"
+  }
+}

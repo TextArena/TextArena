@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Du är Spelare {player_id} i ett spel av Indian Poker.\n- 52-kortslek; du ser bara motståndarens kort.\n- Ante {ante} marker varje runda, {max_rounds} runda(r) totalt.\n- Giltiga drag: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X är ett positivt heltal ≤ din markräkning.)\n- Högsta dolda kort vinner potten vid showdown.\n"
+  },
+  "round": {
+    "announce": "### Runda {current_round}/{max_rounds}\nMotståndarens kort är: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Ange exakt ETT parenteserat drag, t.ex. '[check]', '[bet 2]', '[call]', '[raise 3]', eller '[fold]'.",
+    "cannot_check": "Kan inte [check] - du står inför ett bet.",
+    "amount_min": "Bet / Raise-belopp måste vara ≥ 1.",
+    "cannot_bet": "Kan inte [bet] - måste [call] / [raise] / [fold].",
+    "nothing_to_call": "Inget att calla; du kan [check] istället.",
+    "no_bet_to_raise": "Använd [bet X] för att öppna; det finns inget bet att höja.",
+    "insufficient": "Otillräckliga marker för den åtgärden."
+  },
+  "game_action": {
+    "action": "Spelare {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kostnad {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Dina möjliga åtgärder: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Potten {pot} → Spelare {winner}. (Bankrullar P0:{p0}, P1:{p1})",
+    "folded": "Spelare {player_id} gav upp.",
+    "showdown_win": "Showdown: {card_win} slår {card_lose}.",
+    "showdown_tie": "Showdown-likhet: båda {card}. Potten delas – varje får {split}."
+  },
+  "outcome": {
+    "p0_wins": "Spelare 0 vinner ({bank0} > {bank1})",
+    "p1_wins": "Spelare 1 vinner ({bank1} > {bank0})",
+    "draw": "Lika marker efter alla rundor"
+  }
+}

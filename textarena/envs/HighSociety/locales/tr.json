@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "HighSociety (2 oyunculu versiyon) oyununda Oyuncu {player_id}'siniz.\nOyun akışı: On prestij kartı birbiri ardına açık artırma ile satılır.\nTeklif verme: Her açık artırma, gizlice 1-11 arası bir para kartı seçin ve açıklayın.\n            • Daha yüksek teklif prestij kartını kazanır ve o para kartını atar.\n            • Daha düşük teklif para kartını korur.\n            • Beraberlik -> her iki teklif de iade edilir ve aynı prestij kartı yeniden açık artırma ile satılır.\nPuanlama:    Tüm on açık artırmadan sonra, **kalan nakit + prestij puanları** ekleyin.\n            Daha yüksek *net-değer* kazanır (tam beraberlik -> berabere).\n\n**Eylem sözdizimi**  →  tek bir kartı '[7]' veya '[11]' gibi teklif edin."
+  },
+  "auction": {
+    "announce": "\n### Açık Artırma {round}/10  |  Prestij kartı: {prize}"
+  },
+  "board": {
+    "money_cards": "Kalan para kartlarınız: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Tek bir [X] para kartı içermelidir.",
+    "card_not_held": "Artık o para kartına sahip değilsiniz."
+  },
+  "message": {
+    "tie": "Berabere - teklifler iade edildi. Tekrar teklif verin!",
+    "auction_result": "P0 {bid0} teklif etti, P1 {bid1} teklif etti. Oyuncu {winner} prestij {prize} kazandı (toplam {total})."
+  },
+  "outcome": {
+    "p0_wins": "Net-değer {nw0} > {nw1}",
+    "p1_wins": "Net-değer {nw1} > {nw0}",
+    "draw": "Her iki net-değer {nw0} – tam beraberlik."
+  }
+}

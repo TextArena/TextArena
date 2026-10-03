@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "თქვენ ხართ მოთამაშე {player_id} სამ მოთამაშეთა Tic Tac Toe- ში. თქვენი სიმბოლოა \"{symbol}\". თქვენ მორიგეობით განათავსებთ თქვენს სიმბოლოს 5x5 დაფაზე, რათა ჩამოაყალიბოთ ოთხი ხაზი. ხაზები შეიძლება იყოს ჰორიზონტალური, ვერტიკალური ან დიაგონალური. წარადგინეთ თქვენი ნაბიჯი ფორმატის გამოყენებით \"[4] \""
+  },
+  "board": {
+    "current_board": "მიმდინარე ბორდი: {board} ხელმისაწვდომი გადაადგილებები: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "მოძრაობის ფორმატი არასწორია. გამოიყენეთ \"[cell]\", სადაც უჯრედია 0-{max_cell}.",
+    "out_of_range": "უჯრედის არასწორი ნომერი: {cell}. უნდა იყოს 0-დან {max_cell}-მდე.",
+    "already_occupied": "უჯრედი {cell} უკვე დაკავებულია.",
+    "made_invalid": "მოთამაშემ {player_id} გააკეთა არასწორი ნაბიჯი"
+  },
+  "game_action": {
+    "placed": "მოთამაშე {player_id} აყენებს თავის სიმბოლოს ({symbol}) ველზე ({row}, {col})."
+  },
+  "outcome": {
+    "win": "მოთამაშე {player_id} ({symbol}) იმარჯვებს!",
+    "draw": "მატჩი ფრედ დასრულდა!"
+  }
+}

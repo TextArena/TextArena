@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Kamu adolah Pamain {player_id} dalam Tic Tac Toe Tigo Pamain.\nSimbol kamulah '{symbol}'.\nKamu bagiliran maletakkan simbol kamulah pado papan 5x5 untuak mambantuak garisan ampek.\nGaris-garis dapek horizontal, vertical, atau diagonal.\nSampaikan gerakan kamulah manggunoan format '[4]' untuak maletakkan sel 4."
+  },
+  "board": {
+    "current_board": "Papan Saat Ini:\n\n{board}\n\nGerakan Tersedia: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format pamindahan indak sah. Gunakannyo \"[cell]\" di mano sel adolah 0-{max_cell}.",
+    "out_of_range": "Nomor sel nan salah: {cell}. Harus antaro 0 dan {max_cell}.",
+    "already_occupied": "Sel {cell} alah diisi.",
+    "made_invalid": "Pamain {player_id} mambuek gerakan indak sah."
+  },
+  "game_action": {
+    "placed": "Pamain {player_id} maletakkan simbolnyo ({symbol}) di lapangan ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Pamain {player_id} ({symbol}) manang!",
+    "draw": "Pertandingan ko adolah undian seri!"
+  }
+}

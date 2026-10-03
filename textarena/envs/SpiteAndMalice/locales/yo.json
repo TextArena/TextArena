@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "O jẹ́ Agbá {player_id} nínú eré méjì ti Spite àti Malice. Àṣẹ rẹ̀ ni láti kọ́ṣẹ́ àkọ́kọ́ láti ṣẹ́gun pẹpẹ́ payoff rẹ̀.\n\n### Àkọ́lé Eré:\n- Àṣẹ ni láti ṣẹ́gun pẹpẹ́ payoff rẹ̀ nínú ṣíṣe kárì sí àwọn pẹpẹ́ àárín.\n- O lè ṣe kárì láti orísun mẹ́ta:\n  1. **Ọwọ́ rẹ** (o bẹ̀rẹ̀ ìgbà kọ̀ọ̀kan pẹ̀lú kárì mẹ́wàá mẹ́rin nínú ọwọ́ rẹ̀).\n  2. **Kárì òkè pẹpẹ́ payoff rẹ̀**.\n  3. **Kárì òkè pẹpẹ́ dísiká rẹ̀**.\n\n### Ìlànà Ṣíṣe:\n- O lè ṣe kárì sí pẹpẹ́ àárín bí ó bá jẹ́ **ọ̀kàn ìpele sẹ̀yìn** ju kárì òkè lórí pẹpẹ́ náà (pẹpẹ́ àárín bẹ̀rẹ̀ pẹ̀lú Ace àti gòkè dé Queen; Kings jẹ́ wild - wọn lè ṣe lórí kárì yìówù kọ̀ọ̀kan ṣùgbọ́n kò lè yí ìpele náà padà. Èyí túmọ̀ sí pé bí King bá wà lẹ́yìn 4, King náà jẹ́ 5 àti pé kárì tókàn tí ó gbẹ̀yìn gbọdọ̀ jẹ́ 6).\n- Bí o kò bá lè ṣe kárì mọ́, o gbọdọ̀ **dísiká kárì** sí pẹpẹ́ dísiká rẹ̀ kan láti parí ìgbà rẹ̀.\n- Bí pẹpẹ́ àárín bá dé Queen, yóò ṣẹ́gun ara rẹ̀.\n- Ìpele ìtẹ̀lé ni: A=1, 2=2, ..., 9=9, J=10, Q=11, K gẹ́gẹ́ bí wild.\n\n### Ìṣe:\n1. **Gbà**: Ní ìbẹ̀rẹ̀ ìgbà rẹ̀, gbà kárì láti tẹ̀ ọwọ́ rẹ̀ dé kárì mẹ́wàá mẹ́rin. Tẹ **[draw]** láti bẹ̀rẹ̀.\n2. **Ṣe Kárì**: Láti ṣe kárì, ṣàlàyé kárì náà àti pẹpẹ́ àárín gẹ́gẹ́ bí èyí: **[play A♠ 0]** (níbi tí 'A♠' jẹ́ kárì náà àti '0' jẹ́ ìpele pẹpẹ́ àárín).\n3. **Dísiká**: Bí o kò bá lè ṣe kárì mọ́, dísiká kárì láti ọwọ́ rẹ̀ sí pẹpẹ́ dísiká rẹ̀ kan láti parí ìgbà rẹ̀. Tẹ **[discard A♠ 1]** (níbi tí 'A♠' jẹ́ kárì náà àti '1' jẹ́ ìpele pẹpẹ́ dísiká). Ṣẹ́ kí o mọ̀ pé o kò lè dísiká kárì yìówù láti pẹpẹ́ payoff. O lè dísiká kárì láti ọwọ́ rẹ̀ nìkan.\n\n"
+  },
+  "board": {
+    "current_board": "Àwòrán: {board} Àwọn ìgbésẹ̀ tí ó wà: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Àwọn Òpó Ìlà --- ",
+    "pile": "{observation}Ìdìpò {i}: {pile} ",
+    "player_view_header": "{observation} --- Ìwòye Olùṣeré {player_id} --- ",
+    "payoff": "{observation}Àgbá Ìdọ́wọ́ (Kárí Àgbá): {top_card}, Ìtẹ́sí Àgbá Ìdọ́wọ́: {payoff_length}\n",
+    "hand": "{observation}Ọwọ: {hand} ",
+    "discard": "{observation}Gba Awọn apoti: {discard} ",
+    "empty": "Kò sí nǹkan"
+  },
+  "game_message": {
+    "no_cards_left": "Kò sí àwọn káàdì láti fà mọ́. Rántí pé o lè fi àwọn káàdì láti àwọn orísun wọ̀nyí: 1. Ọwọ́ rẹ. 2. Kaadi tó ga jùlọ nínú ìdìpọ̀ èrè rẹ. 3. Kaadi tó ga jùlọ nínú ìdìpọ̀ ìyọnu rẹ."
+  },
+  "invalid_move": {
+    "wrong_format": "Àdàkọ ìgbésẹ̀ tí kò bá òfin mu. Ẹ̀yà eré {player_id} kò dábàá ìgbésẹ̀ tó bá òfin mu nínú àlàfo.",
+    "invalid_play": "Ẹsẹ̀ tí kò bá bófin mu. Ẹlẹ́sẹ̀ {player_id} gbìyànjú láti gbá {card} lórí ìlà àárín {index}.",
+    "discard_from_payoff": "Àkọsílẹ̀ tí kò bá ìmúṣẹ. Ẹ̀yà eré {player_id} gbìyànjú láti yọ káàdì kan kúrò nínú ìdìpọ̀ tí wọ́n fi ń sanwó.",
+    "discard_not_in_hand": "Tu kaadi ti ko tọ. Player {player_id} gbiyanju tu kaadi ti ko si ninu ọwọ re.",
+    "wrong_move_type": "Ẹ̀yà ìgbésẹ̀ tí kò bá òfin mu. Ẹ̀yà ìgbésẹ̀ tí kò bá òfin mu ni {player_id} kò dáhùn."
+  },
+  "game_action": {
+    "you_drew": "O fi káàdì ta.",
+    "opponent_drew": "Ẹnìkan {player_id} fa káàdì.",
+    "you_played": "O ti ṣere {card} lori àárín ìdìpọ̀ {index}.",
+    "opponent_played": "Ẹ̀yin {player_id} ń ṣeré {card} lórí ìdìpọ̀ àárín {index}.",
+    "you_discarded": "O ti sọ {card} di àlàfo {index}, èyí tí ó tún túmọ̀ sí pé o ti parí ìyí wọn. Kò sí ìgbésẹ̀ rẹ tí a ó kà sí fún ìyí yìí. Olùṣeré {next_player_id} ni yóò tẹ̀lé.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. Kò sí ìgbésẹ̀ míì tí Player {player_id} ṣe tí a ó kà sí fún ìyí yìí. Player {next_player_id}, you will go next. Jọwọ tẹ ìgbésẹ̀ rẹ sínú ìtòlẹ́sẹẹsẹ [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Ẹ̀yin òṣèré {current_player} ti parí ìdìpọ̀ èrè yín! Ẹ̀yin òṣèré {current_player} ti borí!",
+    "deadlock_player_0": "A ti de ibi tí a kò lè wọlé! Ẹlẹ́dàá 0 ṣẹ́gun pẹ̀lú {player_0_payoff} káàdì tí ó kù vs Ẹlẹ́dàá 1's {player_1_payoff} káàdì.",
+    "deadlock_player_1": "A ti de ibi tí a kò lè wọlé! Ẹlẹ́dàá 1 ti borí pẹ̀lú {player_1_payoff} káàdì tí ó kù vs Ẹlẹ́dàá 0's {player_0_payoff} káàdì.",
+    "deadlock_tie": "Deadlock ti de pẹlu tie! Awọn oṣere mejeeji ni {player_0_payoff} awọn kaadi ti o ku. Olùṣere {current_player} ṣẹgun nipasẹ aiyipada."
+  }
+}

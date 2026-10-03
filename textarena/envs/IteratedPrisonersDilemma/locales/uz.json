@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Siz {player_id} o'yinchisiz. {num_rounds} turni o'z ichiga olgan qayta-qayta mahbuslarning dilemalari. O'yin tuzilishi: - Har bir qaror qabul qilishdan oldin siz {total_conversation_rounds} erkin muloqot qilish uchun aylanasiz. - Shundan so'ng, ikkala o'yinchi bir vaqtning o'zida hamkorlik qilish yoki xato qilishni tanlaydi. To'lov matrisi (har bir turda o'rnatilgan): - Ikkalasi ham hamkorlik qiladi ➜ har biri {cooperate_reward} - Ikkalasi ham xato qiladi ➜ har biri {mutual_defect_reward} - Birining xatolari, biri hamkorlik qiladi ➜ xato {defect_reward}, kooperator {sucker_reward} Qanday o'ynash: - Suhbat paytida: xohlagan matnni yozing. - Qaror qabul qilish paytida: \"[Cooperate]\" yoki \"[Defect]\" (katak-katakchaga sezgir) qo'shishingiz mumkin."
+  },
+  "phases": {
+    "conversation_finished": "Suhbat {round} turida tugadi. Iltimos, \\boxed{{}} ichida \"[Cooperate]\" yoki \"[Defect]\" bilan javob bering.",
+    "starting_round": "--- Boshlangʻich tur {round} ---",
+    "round_summary": "Raund {round} natijalari: {outcome} 0 o'yinchi {r0} (umumiy {score_0}), 1 o'yinchi {r1} (umumiy {score_1}) to'pladi."
+  },
+  "outcome": {
+    "winner": "O'yinchi {winner} g'olib chiqadi {win_score} - {lose_score}.",
+    "draw": "Durrang! Ikkala o'yinchi ham {s0} ball oldi.",
+    "round_both_cooperate": "Ikkala o'yinchi ham hamkorlik qildi.",
+    "round_both_defect": "Ikkala o'yinchi ham qochdi.",
+    "round_p0_cooperates_p1_defects": "O'yinchi 0 hamkorlik qildi, O'yinchi 1 xiyonat qildi.",
+    "round_p0_defects_p1_cooperates": "0 o'yinchi qochdi, 1 o'yinchi hamkorlik qildi."
+  }
+}

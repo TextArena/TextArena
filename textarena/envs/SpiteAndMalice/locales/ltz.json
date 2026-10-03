@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Du bis Spiller {player_id} an engem Zwei-Spiller-Spill vu Spite an Malice. Däi Zil ass et, éischten däi Payoff-Pile auszeraumen.\n\n### Spill-Iwwersiicht:\n- D'Zil ass et, däi Payoff-Pile z'klären, andeems du Kaarten op de Center-Häufele spillst.\n- Du kanns Kaarten aus dräi Quellen spille:\n  1. Däi **Hand** (du fänkst all Turn mat bis zu 5 Kaarten an der Hand un).\n  2. **Déi iewescht Kaart vun däiner Payoff-Pile**.\n  3. **Déi iewescht Kaart vun enger vun däine Discard-Pilen**.\n\n### Spill-Regelen:\n- Du kanns eng Kaart op en Center-Häufen spille, wa se **een Rang héijer** ass wéi déi iewescht Kaart op deem Häufen (Center-Häufele fänken mat Ass un a ginn bis zur Dame; Kinnen sinn wild - si kënne op all Kaart gespillt ginn, ändern awer d'Rangfolleg net. Dat heescht, wa Kinn no 4 gespillt gëtt, da gëtt dat Kinn als 5 bewäert an déi nächst Kaart muss 6 sinn).\n- Wa du keng Kaarten méi spille kanns, musst du **eng Kaart ofhéien** op een vun däine Discard-Häufele fir deen Turn ofzeschléissen.\n- Wa en Center-Häufen bis zur Dame erreecht, gëtt e vun alleine ofgeschafft.\n- D'Rangfolleg ass: A=1, 2=2, ..., 9=9, J=10, Q=11, K als wild.\n\n### Aktioune:\n1. **Zéien**: Ufank vun däinem Turn, zéi Kaarten, fir däi Hand op 5 Kaarten opzefëllen. Gitt **[draw]** an, fir ufan ze fänken.\n2. **Eng Kaart spille**: Fir eng Kaart ze spille, spezifizéier d'Kaart an de Center-Häufen wéi heiduerch: **[play A♠ 0]** (wou 'A♠' d'Kaart ass an '0' de Center-Häufen-Index ass).\n3. **Ofhéien**: Wa du keng Kaarten méi spille kanns, héi eng Kaart aus däiner Hand op en Discard-Häufen of, fir deen Turn ofzeschléissen. Gitt **[discard A♠ 1]** an (wou 'A♠' d'Kaart ass an '1' de Discard-Häufen-Index ass). Notéier, datt du keng Kaart vun der Payoff-Pile ofhéie kanns. Du kanns nëmme Kaarten aus däiner Hand ofhéien.\n\n"
+  },
+  "board": {
+    "current_board": "Aktuell Schachbriet:\n\n{board}\nVerfëgbar Zich: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Zentrum Pile -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Spiller {player_id} seng Siicht ---\n",
+    "payoff": "{observation}Payoff-Pile (Déi iewescht Kaart): {top_card}, Payoff-Pile-Längt: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Discard-Häufele: {discard}\n",
+    "empty": "Leer"
+  },
+  "game_message": {
+    "no_cards_left": "Et gëtt keng weider Kaarten méi, déi Dir zeechnen kënnt. Denkt drun, datt Dir Kaarten aus follgenden Quellen spillen kënnt:\n  1. Äer **Hand**.\n  2. D'**iewescht Kaart vun Ärem Payoff-Stapel**.\n  3. D'**iewescht Kaart vun engem vun Ären Ofworfstapel**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongülteg Bewegung Format. De Spiller {player_id} huet net mat enger gültege Beweging an quadratesche Klammern geäntwert.",
+    "invalid_play": "Ongülteg Zuch. Spiller {player_id} huet versicht, {card} op de Center-Häufen {index} ze spille.",
+    "discard_from_payoff": "Ongülteg Ofworf. Spiller {player_id} huet probéiert, eng Kaart vum Payoff-Stapel ofzewerfen.",
+    "discard_not_in_hand": "Spiller {player_id} huet probéiert eng Kaart ze werfen déi net an der Hand ass.",
+    "wrong_move_type": "Spiller {player_id} huet net mat engem gültege Schrëtt geäntwert."
+  },
+  "game_action": {
+    "you_drew": "Du hues d'Kaarten gezunn.",
+    "opponent_drew": "De Spiller {player_id} huet Kaarten gezunn.",
+    "you_played": "Dir hutt {card} op der Mëttelstack gespillt {index}.",
+    "opponent_played": "Spiller {player_id} huet {card} op de Center-Häufen {index} gespillt.",
+    "you_discarded": "Du hast {card} op den Discard-Häufen {index} gedroen, wat och bedeit, datt du deen Turn eriwwer ass. Keng weider Aktioune vun dir ginn fir dësen Turn an Rechnung gestallt. Spiller {next_player_id} wäerts du als nächstes.",
+    "opponent_discarded": "Spiller {player_id} huet {card} op den Discard-Häufen {index} gedroen, wat och bedeit, datt si hir Turn eriwwer ass. Keng weider Aktioune vum Spiller {player_id} ginn fir dësen Turn an Rechnung gestallt. Spiller {next_player_id}, dir wäerts du als nächstes. Wëllt dir w.e.g. däin Aktioun an dem Format [action card center_index] aginn."
+  },
+  "outcome": {
+    "payoff_cleared": "Spiller {current_player} huet seng Payoff-Pile ofgeschafft! Spiller {current_player} gewënnt!",
+    "deadlock_player_0": "Doudeläich erreecht! Spiller 0 gewënnt mat {player_0_payoff} Kaarte réckständeg géint Spiller 1 seng {player_1_payoff} Kaarten.",
+    "deadlock_player_1": "Doudeläich erreecht! Spiller 1 gewënnt mat {player_1_payoff} Kaarte réckständeg géint Spiller 0 seng {player_0_payoff} Kaarten.",
+    "deadlock_tie": "Stalemate erreecht mat Gläichstand! Béid Spiller hunn {player_0_payoff} Kaarten, déi nach iwwereg sinn. Spiller {current_player} gewënnt vun Rechts wégen."
+  }
+}

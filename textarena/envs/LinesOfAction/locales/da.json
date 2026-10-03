@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction lokalisationsfil. Oversæt ikke nøgler (venstre side). Oversæt kun værdier (højre side). Oversæt aldrig brætkoordinater (a-h, 1-8), brikbogstaver (O, X), flytteformat-token eller {board} ASCII-grid.",
+  "_slots": {
+    "{player_id}": "Spillerens nummer, enten 0 eller 1",
+    "{side}": "Spillerens brikbogstav, enten O eller X",
+    "{other}": "Modstanderens brikbogstav, enten O eller X",
+    "{board}": "ASCII-gengivelsen af brættet; behold som det er",
+    "{coord}": "En brætkoordinat som f.eks. b1 eller a3",
+    "{from}": "Kildekoordinaten for et træk, f.eks. b1",
+    "{to}": "Destinationskoordinaten for et træk, f.eks. b3"
+  },
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i spillet LinesOfAction.\nDine brikker er '{side}', modstanderens brikker er '{other}'.\nFlytteformat: `[b1b3]` (fra-koordinat til-koordinat). Et lovligt træk rejser vandret, lodret eller diagonalt et antal felter, der er lig med det samlede antal brikker (af enhver farve) på den linje. Du må hoppe over dine egne brikker, men ikke modstanderens brikker; landing på en modstander fanger den. Vind, når alle dine brikker er 8-nabo forbundet."
+  },
+  "board": {
+    "current_board": "Bræt:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format skal være e2e4 (fra- og til-koordinater).",
+    "no_piece": "Ingen {side}-brik på {coord}.",
+    "identical": "Kilde og destination er identiske.",
+    "not_straight_or_diagonal": "Træk skal være lige eller diagonalt.",
+    "wrong_distance": "Skal flytte en afstand, der er lig med antallet af brikker på linjen.",
+    "enemy_blocks": "Modstanderens brik blokerer vejen.",
+    "destination_own": "Destinationen er besat af egen brik."
+  },
+  "game_action": {
+    "moved": "Spiller {player_id} flyttede {from} -> {to}",
+    "captured_suffix": "Spiller {player_id} flyttede {from} -> {to} og fangede en fjende."
+  },
+  "outcome": {
+    "win": "Alle brikker forbundet.",
+    "draw_no_capture": "60 træk uden fangst.",
+    "draw_repetition": "Position gentaget tre gange."
+  }
+}

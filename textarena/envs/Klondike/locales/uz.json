@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Siz Klondike Solitaire o'ynayapsiz. Sizning maqsadingiz barcha kartalarni asosiy stullarga ko'chirish.\n\nO'yin qoidalari:\n- Asosiy stullar (F1-F4): Turlari bo'yicha Ace dan King gacha ortib borish\n- Jadvallar (T1-T7): Qizil va qora ranglarni almashlab, pasayib borish\n- Zaxira: Kartalarni chiqindilar stulliga chiqarish\n- Chiqindilar (W): Eng yuqori kartadan foydalanish mumkin\n\nBuyruqlar:\n- 'draw' - Zaxiradan chiqindilarga kartalarni chiqarish\n- 'move <source> <destination> [count]' - Kartalarni stullar orasida ko'chirish\n  Misollar: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Hisob 'all' ga ham bo'lishi mumkin, buning natijasida barcha ochiq kartalar ko'chiriladi.\n- 'forfeit' - O'yinni darhol to'xtatish va hozirgi ballni qayd etish\n- Stullar nomlari: W (chiqindilar), F1-F4 (asosiy), T1-T7 (jadvallar)\n\nSiz bir muddatda bir nechta harakatlarni bajarish uchun ularni vergul bilan ajratishingiz mumkin:\n  Misol: 'draw, move W T1, move T2 F1'\n\nFaqat Qirollar bo'sh jadvallar ustiga qo'yilishi mumkin.\nHarakatlar ketma-ket bajariladi - agar bittasi muvaffaqiyatsiz bo'lsa, qolgan harakatlar bekor qilinadi.\nAgar o'yin g'alaba qilib bo'lmaydi deb o'ylaysiz, 'forfeit' buyrug'idan foydalaning."
+  },
+  "format_error": {
+    "no_brackets": "Amalning haqiqiy emas shakli. Amal qavslar ichida boʻlishi kerak.",
+    "no_closing_bracket": "Amalning haqiqiy bo'lmagan formati. Yopiq qavs yo'q \"]\"",
+    "empty_command": "Boʻsh buyruq. \"draw\" yoki \"move <source> <destination> [count]\" ni kiriting.",
+    "empty_action": "Boʻsh harakat",
+    "move_needs_args": "Harakat buyrug'i manba va maqsadni talab qiladi. Foydalanish: 'move <source> <destination> [count]'",
+    "count_positive": "Son musbat yoki 'all' bo'lishi kerak",
+    "count_invalid": "Noto'g'ri son. Raqam yoki 'all' dan foydalaning",
+    "unknown_command": "Noma'lum buyruq \"{cmd}\". \"draw\", \"move <source> <destination> [count]\", yoki \"forfeit\" dan foydalaning",
+    "wrapped": "Amal {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Amal {n}: {msg}",
+    "before_failure": "Ishni bajarishdan oldin bajarilgan {n} harakatlar.",
+    "failed": "{n} da'vo rad etildi: {msg}"
+  },
+  "move_result": {
+    "drew": "Kartani zaxiralardan chiqindilarga olib tashlash.",
+    "cannot_draw": "Ishlab bo'lmaydi. Ham zaxira, ham chiqindilar bo'sh.",
+    "invalid_pile": "Toʻp nomining haqiqiy emasligi. W, F1-F4 yoki T1-T7 dan foydalaning",
+    "foundation_one_card": "Faqat bitta kartani asosga koʻchira oladi",
+    "waste_to_foundation_ok": "Chiqindilardan fondga ko'chirilgan karta F{dst}",
+    "waste_to_foundation_bad": "Chiqindilar qutisini toʻplamga koʻchira olmayapman",
+    "tableau_to_foundation_ok": "Kartani T{src} jadvaldan F{dst} asosga koʻchirish",
+    "tableau_to_foundation_bad": "Tablo kartasini ushbu fond toʻplamiga koʻchira olmaydi",
+    "foundation_to_foundation": "Asosiy ombordan asosiy omborga ko'chirish mumkin emas",
+    "waste_to_tableau_one_card": "Faqat bitta kartani chiqindilar to ' plamidan to ' plashga o ' tkazishi mumkin",
+    "waste_to_tableau_ok": "Kartani chiqindilar jadvalidan T{dst} jadvaliga koʻchirish",
+    "waste_to_tableau_bad": "Ushbu jadval toʻplamiga chiqindi karta qoʻyilmaydi",
+    "no_face_up": "Koʻchirish uchun ochiq kartalar yoʻq",
+    "tableau_to_tableau_ok": "T{src} jadvaldan T{dst} ga koʻchirilgan {count} karta",
+    "tableau_to_tableau_bad": "{count} kartalarini T{src} dan T{dst} ga koʻchira olmaydi",
+    "foundation_to_tableau_one_card": "Faqat bitta kartani asosdan stolga koʻchirish mumkin",
+    "foundation_empty": "F{src} asos boʻsh",
+    "foundation_to_tableau_ok": "F{src} asosidan T{dst} jadvalga koʻchirilgan karta",
+    "foundation_to_tableau_bad": "T{dst} jadvaliga fond kartasini joylashtirib boʻlmaydi",
+    "to_waste_or_stock": "Chiqindilar yoki zaxiraga koʻchirish mumkin emas"
+  },
+  "outcome": {
+    "forfeit": "O'yin bekor qilindi. Yakuniy natija: {score} kartalar fondlarda.",
+    "won": "Qutlug' Kechlik o'yinida g'olib bo'ldingiz!",
+    "turn_limit": "O'yin tugadi! Siz maksimal {max_turns} burilishga erishdingiz. Bal: {score} kartalar asoslarda."
+  },
+  "board": {
+    "title": "=== KLONDIKE PASYANSI ===",
+    "turn": "Qayta oʻrnatish: {turn}/{max_turns}",
+    "stock": "Joriy: {stock} kartalar",
+    "waste": "Chiqindilar (W): {waste}",
+    "foundations_header": "Jamgʻarmalar:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Rasm:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

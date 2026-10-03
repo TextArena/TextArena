@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Am  Player {player_id} Indian Poker khelāre ṭhāklena.\n- 52-ti kaṛḍa deck; aṃ ṣaḍe bāleka ṛīṛia kaṛḍa ḍhaka.\n- Prati ṭhāku {ante} chip ṭhāklena, {max_rounds} ṭhāku ṭoṭal.\n- Juṛwalā ṭhāk: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ṭhāklena aṃ ṣaḍe chip ṣaṅkhyā ṭoṭal ṭhāklena.)\n- Uḍḍa ḍhaka kaṛḍa ṭhāklena ṣoḍauna ṭhāklena.\n"
+  },
+  "round": {
+    "announce": "### ᱨᱟᱣᱩᱱᱰ {current_round}/{max_rounds}\nᱟᱢ ᱨᱮᱱ ᱵᱤᱨᱳᱫᱷᱤ ᱨᱮᱱ ᱠᱟᱨᱰ ᱫᱚ: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "ᱢᱤᱫ ᱵᱟᱜᱽᱪᱟ ᱟᱹᱭᱟᱹᱢ ᱮᱢ, ᱩᱫᱟᱹᱦᱚᱢ '[check]', '[bet 2]', '[call]', '[raise 3]', ᱟᱨᱵᱟᱝ '[fold]'.",
+    "cannot_check": "[check] ᱫᱟᱲᱮ ᱵᱟᱹᱱᱩᱜᱼᱟ - ᱟᱢᱟᱜ ᱥᱟᱢᱟᱝ ᱨᱮ ᱵᱮᱴ ᱢᱮᱱᱟᱜᱼᱟ᱾",
+    "amount_min": "ᱵᱮᱴ / ᱦᱟᱭᱤᱡᱩᱰ ᱢᱟᱨᱠᱥ ᱫᱚ ≥᱑ ᱦᱩᱭᱩᱜ ᱞᱟᱹᱠᱛᱤ ᱾",
+    "cannot_bet": "[bet] ᱵᱟᱠᱚ ᱫᱟᱲᱮᱭᱟᱜᱼᱟ - [call] / [raise] / [fold] ᱠᱚ ᱵᱮᱵᱷᱟᱨ ᱦᱩᱭᱩᱜ ᱛᱟᱠᱚ᱾",
+    "nothing_to_call": "ᱞᱟᱹᱠᱛᱤᱭᱟᱱ ᱫᱚ ᱵᱟᱝ ᱠᱟᱱᱟ, ᱟᱢ [check] ᱨᱮᱢ ᱫᱟᱲᱮᱭᱟᱜᱼᱟ ᱾",
+    "no_bet_to_raise": "[bet X] ᱵᱮᱵᱷᱟᱨ ᱢᱮ ᱮᱦᱚᱵ ᱞᱟᱹᱜᱤᱫ; ᱵᱟᱫ ᱵᱮᱴ ᱨᱟᱭᱡᱽ ᱞᱟᱹᱜᱤᱫ ᱵᱟᱹᱱᱩᱜᱼᱟ᱾",
+    "insufficient": "ᱱᱚᱝᱠᱟᱱ ᱠᱟᱹᱢᱤ ᱞᱟᱹᱜᱤᱫ ᱫᱚ ᱵᱟᱝ ᱥᱚᱢᱵᱚᱸᱫᱷᱚᱜᱼᱟ ᱾"
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (ᱫᱟᱢ {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "ᱟᱢᱟᱜ ᱫᱟᱲᱮᱭᱟᱜ ᱠᱟᱹᱢᱤ: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  ᱯᱚᱴ {pot} → ᱯᱞᱮᱭᱟᱨ {winner}. (ᱵᱮᱸᱠᱨᱚᱞ P0:{p0}, P1:{p1})",
+    "folded": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚᱭ ᱵᱚᱞᱚᱱ ᱮᱱᱟ ᱾",
+    "showdown_win": "ᱥᱚᱣᱫᱟᱣᱱᱼᱨᱮ ᱡᱤᱛᱠᱟᱹᱨᱼᱟ᱾ {card_win} ᱫᱚ {card_lose} ᱠᱚ ᱦᱟᱨᱟᱣ ᱟᱠᱟᱫᱼᱟ᱾",
+    "showdown_tie": "Showdown tie: dui {card}. Pot vag kore – pratyek {split} pai."
+  },
+  "outcome": {
+    "p0_wins": "ᱯᱞᱮᱭᱟᱨ 0 ᱡᱤᱛᱠᱟᱹᱨ ({bank0} > {bank1})",
+    "p1_wins": "ᱯᱞᱮᱭᱟᱨ 1 ᱡᱤᱛᱠᱟᱹᱨ ({bank1} > {bank0})",
+    "draw": "ᱡᱚᱛᱚ ᱨᱟᱣᱩᱱᱰ ᱛᱟᱭᱚᱢ ᱥᱚᱢᱟᱱ ᱪᱤᱯᱥ"
+  }
+}

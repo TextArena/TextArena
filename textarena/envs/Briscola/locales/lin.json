@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Mibu ya Briscola imela! Suitu ya trump: {trump_suit} (Kart ya trump: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Ozali kozinga Briscola - Mokeli {player_id}.\nNdinga: Zunga trick mpé kota pointi mingi (120 pointi ya mwanda na kart).\nPointi ya kart: A=11, 3=10, K=4, Q=3, J=2, moko: 0\nNguwa ya kart: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKart ya trump ezunga kart ya non-trump bato na nguya.\n\nNzela: '[play X]' wapi X ezali nzela (1-{max_pos}) ya kart na bomwana oyo"
+  },
+  "hand": {
+    "none": "Ba karte ezali te.",
+    "empty": "Ba carte ezali na maboko te.",
+    "header": "Lobɔkɔ na yo:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Ata moko te abɛtaki naino likɔnga yango.",
+    "header": "Mayele ya sika:",
+    "line": "  Mokeli {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Mokeli {player_id}: {points} pointi",
+    "trump_info": "Mokúmi ya kufúnga: {trump_suit}",
+    "trump_info_deck": "Suitu ya trump: {trump_suit} | Kart ya baku na deck: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nMakomi: {scores}\n{trump_info}\n\nKota kart na kutiya [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Salelá [play X] esika X ezali na kati ya karte (1, 2, 3, etc.)",
+    "out_of_range": "Nzela ya kart eza malamu. Oza na {count} kart (1-{count})"
+  },
+  "action": {
+    "played": "Mokeli {player_id} akeli {card}",
+    "trick_win": "Mokeli {winner} azungisa trick na {card} mpé akomata {points} pointi!"
+  },
+  "outcome": {
+    "head": "Mokili ekoti! Moyambi {winner} alongi na {points} pointi!\n\nMakomi ya mwisho:\n{scores}",
+    "player_line": "Mokeli {player_id}: {points} pointi ({tricks} trick)"
+  }
+}

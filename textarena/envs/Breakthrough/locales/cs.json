@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Hrajete {color} v hře Breakthrough. Pohybujete se {direction} na desce {board_size}x{board_size}.\nVe svém tahu můžete přesunout jednu figurku o jeden krok vpřed nebo diagonálně vpřed.\nFigurka se může pohybovat diagonálně pouze v případě, že je na cílovém poli soupeřova figurka, a může se přesunout pouze diagonálně do takového obsazeného pole.\nPři vstupu do pole se soupeřovou figurkou ji zajmete a soupeřova figurka je trvale odstraněna z desky.\nPoužijte notaci podobnou UCI v hranatých závorkách, např. [a2a3] pro přesun z a2 na a3.\n* 'a' odpovídá nejlevějšímu sloupci, '1' je spodní řádek (z pohledu bílého).\n* Domácí řádek černého je horní řádek (řádek 8 pro desku 8x8). Domácí řádek bílého je spodní řádek (řádek 1 pro desku 8x8).\nPrvní hráč, jehož figurka dosáhne soupeřova domácího řádku, vyhrává. Pokud jsou všechny vaše figurky zajaty, prohráváte."
+  },
+  "invalid_move": {
+    "wrong_format": "Prosím, použijte notaci v hranatých závorkách, jako je [a2a3].",
+    "out_of_bounds": "Tah je mimo hranice desky.",
+    "illegal": "Tento tah nedodržuje pravidla Breakthrough nebo se nejedná o vaši figurku."
+  },
+  "game_action": {
+    "moved": "Hráč {player_id} přesouvá {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Bílý dosáhl černého domácího řádku.",
+    "black_reached": "Černý dosáhl bílého domácího řádku.",
+    "white_captured": "Všechny bílé figurky byly zajaty.",
+    "black_captured": "Všechny černé figurky byly zajaty.",
+    "no_moves": "Hráč {player_id} nemá žádné další tahy."
+  }
+}

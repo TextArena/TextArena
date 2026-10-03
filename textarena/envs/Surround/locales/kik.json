@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Wachezaji wa Surround kwenye gridi ya {width}x{height}.\nWewe ni mchezaji {player_id}. Harakati zinazokubalika: '[up]' '[down]' '[left]' '[right]' au w/s/a/d.\nLengo: kuishi zaidi ya wengine wote. Njia zinaweza kuua; kugonga kuta kunaweza kuua; kugongana uso kwa uso kunaweza kuua wote wawili."
+  },
+  "board": {
+    "current": "Kĩama kĩa Ũtungatĩri: {board}",
+    "after_moves": "Kamĩtĩ thutha wa gũkuhanĩrĩria: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Mũthaaki {player_id} nĩ akuire tondũ wa ikinya rĩtarĩ rĩa kĩhooto."
+  },
+  "outcome": {
+    "survived_win": "Mũteng'eri {player_id} nĩ aahonokire; arĩa angĩ othe makĩgũa.",
+    "all_crashed": "Athaaki othe maakuire ihinda-inĩ rĩmwe.",
+    "outlived": "Mũgambo ũcio nĩ waatũũrire gũkĩra ũrĩa ũngĩ wothe.",
+    "all_dead": "Atungi othe nĩ makuĩte.",
+    "turn_limit": "Mũndũ ũrĩa ũgaakorũo e muoyo ihinda iraihu nĩwe ũkũhootana.",
+    "ranking": "{reason} Kuuma kwa kugawa makundi (nzuri→mbaya): {groups}"
+  }
+}

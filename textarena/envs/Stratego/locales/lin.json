@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ozali Player {player_id} na Stratego.\nLokola ya ozali ezali kobwaka bendera ya opponent na kobwaka biso yonso ya opponent.\nArmée ya ozali etikali mpo na bino na planche, kasi bendera, bombes, na biso mosusu ya rangi mingi.\n\n### Mambu ya Gameplay\n1. **Mambu ya Movement:**\n   - Na tour ya ozali, ozali koyeba kobwaka pièce moko na pasi moko na carré adjacent (juu, bas, kosa, ou droite) ozali etikali na pièces ya ozali.\n   - Exemple: pièce moko ekoki kobwaka A1 na B1 ou A1 na A2 si B1 na A2 bazali na pièces ya ozali.\n   - Si pièce ozali ekoti Bomb ou bendera, ekoki kobwaka te.\n2. **Batailles:**\n   - Si ozali kobwaka carré ozali etikali na pièce ya opponent, kasi bataille ekoki koseka:\n     - pièce ya rangi mingi ekoki kobwaka pièce ya opponent.\n     - Si rangi bazali sawa, pièces zomi bazali kobwaka na planche.\n     - **Mambu ma spéciaux:**\n       - Bombes ekoki kobwaka pièces zomi za opponent kasi Miners, bazali kobwaka Bombes.\n       - Spies bazali kobwaka Marshal si Spy ozali kobwaka kwanza kasi bazali kobwaka pièces zomi.\n3. **Mambu ya Stratégie:**\n   - Identifiez pièces ya opponent na kobwaka yango.\n   - Protégez bendera ya ozali kasi kobwaka bendera ya opponent.\n   - Utilisez Scouts stratégiquement mpo na kobwaka informations ya pièces ya opponent na kobwaka pièces zomi.\n\n### Mambu ya Kobwaka Move:\n1. Spécifiez coordonnées ya pièce ozali kobwaka na destination yango.\n2. Utilisez format: [A0 B0], kasi A0 ozali position ya source, na B0 ozali destination.\n   - Exemple: Kobwaka pièce na ligne 0, colonne 0 na ligne 1, colonne 0, input [A0 B0].\n3. Assurez destination ozali valide selon mambu ya movement olingi.\n\n### Mambu ya Importance:\n- Planche ekoki kobwaka pièces ya ozali na positions yango, e.g. MN, MS.\n- Planche ekoki kobwaka positions ya pièces ya opponent sans révéler rangi yango, e.g. ?.\n- Grids na ~ bazali lacs na ekoki kobwaka te.\n- Kasi suggestion, kobwaka jeu na kobwaka pièces ozali na frontières mpo na kobwaka informations ya pièces ya opponent. Player 0 na player 1 bazali na frontières D na G respectivement.\n\nOzali na état actuel ya planche:\n"
+  },
+  "board": {
+    "current_board": "Tata board:\n\n{board}\nMikano ya kozua: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Lolenge ya lisano oyo ezali na ndingisa te. Mosani {player_id} atyaki eloko moko te kati na lolenge [A0 B0] .",
+    "invalid_coordinates": "Lolenge ya misala ezalí na ndingisa te. Mosani {player_id} akomisaki ba coordonnées oyo eza malamu te.",
+    "not_own_piece": "Lolenge ya lisano oyo ezali na ntina te. Mosani {player_id} asengeli kokitisa moko kati na biteni na ye.",
+    "scout_through_pieces": "Mfumo wa kutenda si sawa. Moyibi {player_id} hawezi kusonga kipya kati ya vipya vingine.",
+    "scout_diagonal": "Lolenge ya lisano oyo ezali na ndingisa te. Moyembi {player_id} akoki kobalusa scout moko na diagonale te.",
+    "non_scout_multi_square": "Mfumo wa kutenda si sawa. Vipya, isipokuwa basi, vinaweza kusogea kwenye mraba mmoja tu kwa wakati mmoja.",
+    "move_into_lake": "Lolenge ya lisano oyo ezali na ntina te. Mosani {player_id} akoki kokende kati na laki te.",
+    "move_onto_own_piece": "Lolenge ya lisano oyo ezali na ntina te. Moyembi {player_id} akoki kokende esika moko te mpo na eteni na ye moko.",
+    "move_bomb_or_flag": "Lolenge ya lisano oyo ezali na ndingisa te. Moyembi {player_id} akoki kobalusa bombe to drapo te."
+  },
+  "game_action": {
+    "you_moved": "Ozali kobwaka pièce na {source} na {dest}.",
+    "opponent_moved": "Player {player_id} ozali kobwaka pièce na {source} na {dest}.",
+    "you_equal_ranks": "Ozali kobwaka pièce na {source} na {dest}. pièce ya attaque ozali {attacking_rank} na pièce ya destination ozali {target_rank}. Kasi rangi bazali sawa, pièces zomi bazali kobwaka.",
+    "opponent_equal_ranks": "Player {player_id} ozali kobwaka pièce na {source} na {dest}. pièce ya attaque ozali {attacking_rank} na pièce ya destination ozali {target_rank}. Kasi rangi bazali sawa, pièces zomi bazali kobwaka.",
+    "you_miner_defused": "Ozali kobwaka pièce na {source} na {dest}. pièce ya attaque ozali {attacking_rank} na pièce ya destination ozali {target_rank}. Kasi Miners bazali kobwaka bombes, ozali kobwaka bataille.",
+    "opponent_miner_defused": "Motopi {player_id} ameseni pièce na {source} kwenda {dest}. Pièce ya kozanga yalikuwa {attacking_rank} na pièce ya kujikuta yalikuwa {target_rank}. Kwa kuwa baba ya minda anaweza kuzima bomba, olipotea vita.",
+    "you_bomb_lost": "Ozali kobwaka pièce na {source} na {dest}. pièce ya attaque ozali {attacking_rank} na pièce ya destination ozali {target_rank}. Kasi attaquant ozali Miner te, ozali kobwaka bataille.",
+    "opponent_bomb_won": "Motopi {player_id} ameseni pièce na {source} kwenda {dest}. Pièce ya kozanga yalikuwa {attacking_rank} na pièce ya kujikuta yalikuwa {target_rank}. Kwa kuwa kozanga si baba ya minda, osinga vita.",
+    "you_spy_won": "Ozali kobwaka pièce na {source} na {dest}. pièce ya attaque ozali {attacking_rank} na pièce ya destination ozali {target_rank}. Kasi attaquant ozali Spy na destination ozali Marshal, ozali kobwaka bataille.",
+    "opponent_spy_lost": "Motopi {player_id} ameseni pièce na {source} kwenda {dest}. Pièce ya kozanga yalikuwa {attacking_rank} na pièce ya kujikuta yalikuwa {target_rank}. Kwa kuwa kozanga ni mokambi na kujikuta ni marechal, olipotea vita.",
+    "you_higher_won": "Ozali kobwaka pièce na {source} na {dest}. pièce ya attaque ozali {attacking_rank} na pièce ya destination ozali {target_rank}. Kasi attaquant ozali rangi mingi kuliko destination, ozali kobwaka bataille.",
+    "opponent_higher_lost": "Mwana mboka {player_id} asomboli pièce na {source} kwenda na {dest}. Pièce ya kozongisa ezalaki {attacking_rank} na pièce ya kozongwa ezalaki {target_rank}. Kasi mwana mboka azalaki na grade ya juu kuluta pièce ya kozongwa, ozwi ekolo.",
+    "you_lower_lost": "Omeseni pièce na yo na {source} kwenda {dest}. Pièce ya kozanga yalikuwa {attacking_rank} na pièce ya kujikuta yalikuwa {target_rank}. Kwa kuwa kozanga ana chefu ndogo kuliko kujikuta, olipotea vita.",
+    "opponent_lower_won": "Mwana mboka {player_id} asomboli pièce na {source} kwenda na {dest}. Pièce ya kozongisa ezalaki {attacking_rank} na pièce ya kozongwa ezalaki {target_rank}. Kasi mwana mboka azalaki na grade ya mabele na pièce ya kozongwa, ozwi ekolo."
+  },
+  "outcome": {
+    "flag_captured": "Mosani {player_id} akangi ndɛlɛ ya monguna!",
+    "no_movable_pieces": "Player {winner_id} ozali kobwaka jeu! Player {loser_id} ozali na pièces zomi za kobwaka te."
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golfo (kortų žaidimas) lokalės failas. NERVERSIKITE raktažodžių (kairėje pusėje). Vertikite tik reikšmes (dešinėje pusėje). Palikite kiekvieną {placeholder} lygiai taip pat. NERVERSIKITE veiksmų žetonų ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), kortų etikečių (A, 2-10, J, Q, K), kostiumų simbolių, raidžių X/Y, naudojamų kaip eilutės/stulpelio vietos rezervavimo ženklus žetonuose, arba skaitmeninių rezultatų/pozicijų. Palikite ASCII tinklelio išdėstymą (tarpai, stulpelių numeriai, '?', 'Col', 'Row' derinimas) nepakitęs, kad lentelė liktų skaitoma.",
+  "_slots": {
+    "{player_id}": "Žaidėjo numeris, pvz., 0 arba 1",
+    "{pid}": "Žaidėjo numeris, pvz., 0 arba 1",
+    "{winner}": "Žaidėjo numeris su mažiausiu rezultatu",
+    "{score}": "Skaitmeninis taškų suma",
+    "{card}": "Kortos etiketė, pvz., A♠, 10♥, K♦ arba Q♣",
+    "{new}": "Kortos etiketė, kuri buvo įdėta į tinklelį",
+    "{old}": "Kortos etiketė, kuri buvo pašalinta iš tinklelio",
+    "{row}": "Eilutės numeris",
+    "{col}": "Stulpelio numeris",
+    "{max_row}": "Didžiausias galimas eilutės numeris",
+    "{max_col}": "Didžiausias galimas stulpelio numeris",
+    "{reason}": "Iš anksto sugeneruota frazė, nurodanti, kodėl prasidėjo finalinis raundas",
+    "{n}": "Eilutės numeris, rodomas tinklelio eilutės pradžioje",
+    "{cards}": "Iš anksto sugeneruotos, išdėstymo jautrios tinklelio eilutės ląstelės",
+    "{hand}": "Iš anksto sugeneruotas žaidėjo tinklelio blokas",
+    "{discard}": "Kortos etiketė ant atmetimo krūvos viršaus, arba žodis 'nėra'",
+    "{options}": "Iš anksto sugeneruota eilutė, nurodanti galimas veiksmus",
+    "{scores}": "Iš anksto sugeneruotas kiekvieno žaidėjo galutinių rezultatų sąrašas"
+  },
+  "player_prompt": {
+    "intro": "Jūs žaidžiate Golfą (Kortų Žaidimas) - Žaidėjas {player_id}.\nTikslas: Gaukite mažiausią bendrą rezultatą šiame viename raunde. Jei stulpeliai turi tą patį vertę, jie sumuojami kaip 0.\nKortų Vertės: A=1, 2-10=veido vertė, J/Q=10, K=0\n\nVeiksmai (naudokite tiksliai žetonuose):\n- '[draw]' - Traukite iš kaladės\n- '[take]' - Paimkite iš atmetimo krūvos\n- '[swap X Y]' - Sukeitikite trauktą kortą su pozicija X (eilutė) Y (stulpelis)\n- '[discard]' - Atmestite trauktą kortą\n"
+  },
+  "board": {
+    "drew": "Jūs traukėte: {card}\nDabar jūs privalote [swap X Y] arba [discard] ją.",
+    "took": "Jūs paėmėte: {card} iš atmetimo krūvos\nJūs privalote [swap X Y] su ja (negalite atmesti).",
+    "peeked": "Jūs pažiūrėjote į poziciją ({row},{col}): {card}",
+    "turn_view": "Jūsų ranka:\n{hand}\nAtmetimo krūva: {discard}\n{options}",
+    "none": "Nėra"
+  },
+  "options": {
+    "final_turns": "Finaliniai ėjimai! Jūsų galimybės: [draw], [take], [peek X Y]",
+    "draw": "Jūsų galimybės: [draw], [take]",
+    "must_swap": "Jūs privalote: [swap X Y] (negalite atmesti kortų iš atmetimo krūvos)",
+    "swap_or_discard": "Jūs privalote: [swap X Y] arba [discard]"
+  },
+  "hand": {
+    "no_cards": "Nėra kortų",
+    "header": "  Stulpelis:   1    2    3",
+    "row": "Eilutė {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Žaidėjas {pid} sukeitė {new} su {old} pozicijoje ({row},{col})",
+    "discarded": "Žaidėjas {pid} atmestė {card}"
+  },
+  "message": {
+    "deck_empty": "Kaladė tuščia! Žaidimas baigiasi iš karto.",
+    "knocked": "Žaidėjas {pid} paspaudė! Kiekvienas kitas žaidėjas gauna dar vieną ėjimą.",
+    "final_round": "Žaidėjas {pid} {reason}! Kiekvienas kitas žaidėjas gauna dar vieną ėjimą."
+  },
+  "reason": {
+    "all_revealed": "turi visas kortas atskleistas"
+  },
+  "invalid": {
+    "wrong_action": "Naudokite tiksliai vieną žetonuotą veiksmą: [draw], [take], [swap X Y], [discard], [knock], arba [peek X Y]",
+    "discard_empty": "Atmetimo krūva tuščia!",
+    "must_draw_first": "Jūs privalote pirmiausia [draw], [take], [knock], arba [peek X Y]",
+    "cannot_discard_taken": "Jūs negalite atmesti kortos, kuri buvo paimta iš atmetimo krūvos. Jūs privalote ją sukeitikti.",
+    "have_drawn_card": "Jūs turite trauktą kortą. Jūs privalote [swap X Y] arba [discard] ją.",
+    "need_drawn_swap": "Jūs reikalinga trauktą kortą sukeitikti.",
+    "need_drawn_discard": "Jūs reikalinga trauktą kortą atmesti.",
+    "out_of_bounds": "Pozicija už ribų. Naudokite eilutę 1-{max_row}, stulpelį 1-{max_col}",
+    "knock_with_card": "Jūs negalite paspausti su traukta korta. Užbaikite savo ėjimą pirmiausia.",
+    "already_knocked": "Kažkas jau paspaudė šį raundą.",
+    "already_revealed": "Ta korta jau atskleista!"
+  },
+  "summary": {
+    "full": "Žaidimas baigtas! Žaidėjas {winner} laimi su rezultatu {score} taškų!\n\nGalutiniai rezultatai:\n{scores}",
+    "line": "Žaidėjas {pid}: {score} taškų\n"
+  },
+  "board_str": {
+    "title": "=== GOLFO ŽAIDIMAS ===",
+    "discard": "Atmetimo krūva: {card}",
+    "knocked": "Žaidėjas {pid} paspaudė!",
+    "player_header": "Žaidėjas {pid} (Rezultatas: {score}):"
+  }
+}

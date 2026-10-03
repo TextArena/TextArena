@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "あなたは3人参加の反復囚人のジレンマのプレイヤー {player_id} です。試合は {num_rounds} ラウンド続きます。\nラウンドの構造:\n• {conv_rounds} 回の自由チャットターン\n• 1つの意思決定ターン - 各相手に対して1つのトークンを提出します: '[<opp-id> cooperate]' または '[<opp-id> defect]' (例: '[1 defect] [2 cooperate]'; デフォルトは 'cooperate')。 \nペアごとのペイオフ行列 (各無順序ペアに適用):\n  - 両者が協力する  ->  {reward}\n  - 両者が裏切る     ->  {punishment}\n  - あなたが裏切り、相手が協力する -> {temptation}\n  - あなたが協力し、相手が裏切る -> {sucker}\nすべてのラウンド終了時の最高得点のプレイヤーが勝者となります。"
+  },
+  "round": {
+    "start": "─── ラウンド {round} 開始 ───\t次の {conv_rounds} ラウンドは自由に会話できます。",
+    "chat_finished": "ラウンド {round} のチャットが終了しました。各相手に対して意思決定を提出してください: `[pid cooperate]` または `[pid defect]`."
+  },
+  "results": {
+    "header": "### ラウンド {round} - 結果:",
+    "pair_line": "{observation}\n\t プレイヤー {i} とプレイヤー {j} はそれぞれ {choice_i} と {choice_j} を選びました (プレイヤー {i} は {gain_i}、プレイヤー {j} は {gain_j} を獲得しました)",
+    "scores_open": "{observation}\n-> 現在の得点: ",
+    "score_first": "{observation}プレイヤー {player_id} ({score})",
+    "score_next": "{observation}; プレイヤー {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "最終得点: {scores}.  ランキング (最下位→最上位): {groups}"
+  }
+}

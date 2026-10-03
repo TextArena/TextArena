@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "I Player {player_id} ni e, Spite and Malice khelhna ah khelmi pahnih kan ni. I tum ber chu payoff pile i clear hmasa ber tur a ni.\n\n### Khelh Dan Tlangpui:\n- Payoff pile i clear tur chuan center piles ah card khelh tur a ni.\n- Card khelh theihna hmun pathum a awm:\n  1. I **hand** (turn tin rei ah card 5 i nei thei).\n  2. I **payoff pile a card chungnung**.\n  3. I **discard piles a card chungnung**.\n\n### Khelh Dan:\n- Center pile a card chungnung aiin **rank pakhat a sang** card khelh theih a ni (center piles ah Ace in tanin Queen thleng a kal; Kings chu card reng reng ah khelh theih a ni, mahse rank sequence a thlak loh. Hei hi King chu 4 hnu ah khelh a nih chuan, King chu rank 5 a ni a, card leh chu 6 a ni tur a ni).\n- Card khelh theih tawh loh chuan, discard pile ah card **paih** tur a ni i turn tawp nan.\n- Center pile a Queen a thlen chuan, a rang thei angin a paih tur a ni.\n- Rank order chu: A=1, 2=2, ..., 9=9, J=10, Q=11, K chu card reng reng ah khelh theih.\n\n### Action-te:\n1. **Draw**: I turn tan dawn ah, card lak tur a ni i hand ah card 5 thlen thei nan. **[draw]** tiin tan tur a ni.\n2. **Card Khelh**: Card khelh tur chuan, card leh center pile chu heti hian ti: **[play A♠ 0]** (‘A♠’ chu card a ni a, ‘0’ chu center pile index a ni).\n3. **Discard**: Card khelh theih tawh loh chuan, i hand a card paih tur a ni discard pile ah i turn tawp nan. **[discard A♠ 1]** tiin paih tur a ni (‘A♠’ chu card a ni a, ‘1’ chu discard pile index a ni). I payoff pile a card reng reng paih theih a ni lo. I hand a card chauh paih theih a ni.\n\n"
+  },
+  "board": {
+    "current_board": "Board Hman Mek:\n\n{board}\nKhelh theihna: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Center Piles te chu -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Player {player_id} View ---\n",
+    "payoff": "{observation}Payoff Pile (Card Chungnung): {top_card}, Payoff Pile Length: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "A awm lo."
+  },
+  "game_message": {
+    "no_cards_left": "I card lak theih a awm tawh lo. Heng source atang hian i khelh thei tih hre reng ang che: 1.I **hand** 2.Na sum dawnna pile-a top card 3. Na discard piles zinga top card te chu. "
+  },
+  "invalid_move": {
+    "wrong_format": "A move format a diklo. Player {player_id} chuan square bracket-a awm movement tha tak chu a chhâng lo va.",
+    "invalid_play": "Khelh dan dik loh. Player {player_id} in {card} chu center pile {index} ah khelh a tum a.",
+    "discard_from_payoff": "A khelhtu {player_id} chuan a card chu pawisa chawi chhuahna pile-a mi kha paih tumin, a hlep ta lo.",
+    "discard_not_in_hand": "A hman loh a paih. Player {player_id} chuan kut chhunga card awm lo chu hlih tumin a chhuah ta mai a ni.",
+    "wrong_move_type": "Khelh dan dik loh. Player {player_id} in khelh dan dik loh a chhang a."
+  },
+  "game_action": {
+    "you_drew": "I khelh a.",
+    "opponent_drew": "Player {player_id} in laichuang a lak a.",
+    "you_played": "I {card} chu center pile {index} ah khelh a ni.",
+    "opponent_played": "Player {player_id} in {card} chu center pile {index} ah khelh a ni.",
+    "you_discarded": "I {card} chu discard pile {index} ah paih a ni, i turn a tawp bawk a. I action reng reng a ngaih a ni tawh loh. Player {next_player_id} in a khelh leh ang.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Player {current_player} in payoff pile a clear a ni! Player {current_player} in a chak a ni!",
+    "deadlock_player_0": "Inremna a thleng! Player 0 chu {player_0_payoff} laichuangin a chak a, Player 1 erawh {player_1_payoff} laichuangin a hneh a.",
+    "deadlock_player_1": "Inremna a thleng! Player 1 chu {player_1_payoff} laichuangin a chak a, Player 0 erawh {player_0_payoff} laichuangin a hneh a.",
+    "deadlock_tie": "Inremna a thleng a, inang reng! Player pahnih ten {player_0_payoff} card an nei tlang. Player {current_player} chuan default-in a chak."
+  }
+}

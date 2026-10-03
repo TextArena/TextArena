@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id} ({piece}). El oponente es ({opp}).\nEnvía los movimientos con el formato '[a2 a3]' (desde → hasta).\n- Un movimiento normal consiste en avanzar un paso hasta un vértice vacío adyacente.\n- Una captura consiste en saltar sobre una ficha enemiga adyacente y caer en el nodo vacío situado detrás.\nCada captura otorga {score_per_capture} puntos.\nLa partida termina después de {max_moves} movimientos o cuando un jugador no tiene ningún movimiento legal."
+  },
+  "board": {
+    "current_board": "Movimiento n.º {move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "Formato incorrecto. Usa '[a2 a3]'.",
+    "unknown_square": "Casilla desconocida.",
+    "not_your_piece": "La casilla de origen no contiene una ficha tuya.",
+    "dest_not_empty": "La casilla de destino no está vacía.",
+    "illegal": "Movimiento ilegal."
+  },
+  "game_action": {
+    "captured": "¡El Jugador {player_id} capturó una ficha! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "El Jugador {player_id} no tiene fichas.",
+    "cannot_move": "El Jugador {player_id} no puede moverse.",
+    "higher_score": "Mayor puntuación de capturas.",
+    "move_limit": "Se alcanzó el límite de movimientos."
+  }
+}

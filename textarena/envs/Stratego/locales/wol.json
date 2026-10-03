@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Yeen ngone Jàngoro {player_id} ci Stratego.\nWaxad yeen mooy jël fanal jàngoro jëfandikoojëfandikoo mbaa bàyyi pisa muñu yéene ci biir pànku yeen.\nPànku yeen dafa ñu wàkkeel ci biir pànku, ci biir pànku yeen dafa am fanal, bombi, ak pisa yu bari gannaawul.\n\n### Njëlbeenug Dóxande\n1. **Yëngu-yëngu:**\n   - Ci màndarga yeen, yeen mën tàkké pisa benn ci biir pànku yeen (kaw, suuf, gàddaayu, mbaa ndaw) bu ñu amul pisa yeen ci biir.\n   - Seetu: pisa mën tàkké ci A1 ba B1 mbaa A1 ba A2 bu B1 ak A2 ñu amul pisa yeen ci biir.\n   - Bu pisa bi ñu tàkké dafa bombu mbaa fanal, mënul tàkké.\n2. **Xare-xare:**\n   - Bu yeen tàkké ci biir pànku bu am pisa jàngoro jëfandikoojëfandikoo, xare dafa am:\n     - Pisa gannaawul jëngeka, pisa jàngoro jëfandikoojëfandikoo dafa bàyyi.\n     - Bu gannaawul ñu yam, pisa ñu dafa bàyyi ci biir pànku.\n     - **Xeex-xeex:**\n       - Bombi dafa bàyyi pisa jògekat yu bari, ndaxte Miners dafa wàkke bombi.\n       - Espiyoŋ dafa xeex Marshal bu Espiyoŋ bi dafa tàkké ci njëlbënjël, waaye Espiyoŋ bi dafa bàyyi ci biir pànku.\n3. **Waxad yeen:**\n   - Xam-xam pisa jàngoro jëfandikoojëfandikoo ci yëngu-yëngu ak xare-xare.\n   - Wàkke fanal yeen, ci biir bàyyi fanal jàngoro jëfandikoojëfandikoo.\n   - Jël-jël Scouts ngir xam-xam pisa jàngoro jëfandikoojëfandikoo ak bàyyi yu ñu lekk.\n\n### Naka la Ñu Dóxande:\n1. Bindu pisa bi yeen bëgg tàkké ak biir pànku mu tàkké.\n2. Jël-jël solo: [A0 B0], bu A0 mooy biir pànku pisa bi yeen tàkké, ak B0 mooy biir pànku mu tàkké.\n   - Seetu: Bu yeen bëgg tàkké pisa ci màndarga 0, wàlla 0 ba màndarga 1, wàlla 0, bindu [A0 B0].\n3. Wàkke biir pànku mu tàkké dafa rafet ci yëngu-yëngu yi ñu bind.\n\n### Baati-baati:\n- Pànku dafa wone pisa yeen ak biir pànku mu ne, seetu: MN, MS.\n- Pànku dafa wone pisa jàngoro jëfandikoojëfandikoo yu ñu xam ci biir pànku, seetu: ?.\n- Pànku yu ~ dafa jege, mënul tàkké ci biir.\n- Seetu, tàkké pisa yeen ci ndaw ñu ñu amul pisa jàngoro jëfandikoojëfandikoo, ngir xam-xam pisa jàngoro jëfandikoojëfandikoo. Jàngoro 0 ak jàngoro 1 dafa am ndaw ci màndarga D ak G.\n\nPànku bi dafa ne:\n"
+  },
+  "board": {
+    "current_board": "Kanbu gu Tay:\n\n{board}\nYëngu-yënguy Sëkk: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format bu action bu baaxul. Player {player_id} moo xélitul input bu move ci format [A0 B0].",
+    "invalid_coordinates": "Jëfandikukat bu baaxul. Njiitu {player_id} dugal nañ ay coordinate yu am solowul.",
+    "not_own_piece": "Format bi dëggëlul. Jëfandikukat {player_id} mën naa tàkkal benn ci ay piècesam.",
+    "scout_through_pieces": "Diggël bi dafa baaxul. Këru {player_id} du man a doxal ab scout ci biir pès-yëllë.",
+    "scout_diagonal": "Format bi dëggëlul. Jëfandikukat {player_id} mënul tàkkal éclaireur ba ci kaw-kaw.",
+    "non_scout_multi_square": "Jëfandikoo gu amul njariñ. Yéenekaay bi, bokkul ci ay seetkat yi rekk a mën di dox benn xët bu nekk.",
+    "move_into_lake": "Format bi dëggëlul. Jëfandikukat {player_id} mënul tàkkal ci ndox.",
+    "move_onto_own_piece": "Format bi dëggëlul. Jëfandikukat {player_id} mënul tàkkal ci benn ci ay piècesam.",
+    "move_bomb_or_flag": "Doo amul solo. Jàngoro {player_id} mënul tàkké bombu mbaa fanal."
+  },
+  "game_action": {
+    "you_moved": "Yaa ngone xélit xélitalekoppaalekoppa piece bu {source} ci {dest}.",
+    "opponent_moved": "Jigéén {player_id} tax a màggal ci {source} ba {dest}.",
+    "you_equal_ranks": "Ngaa tax a màggal ci {source} ba {dest}. Màggal wu njëkk wu màggal wu {attacking_rank}, màggal wu ñuul wu {target_rank}. Su màggal yi dëgg, màggal yi dox.",
+    "opponent_equal_ranks": "Jigéén {player_id} tax a màggal ci {source} ba {dest}. Màggal wu njëkk wu màggal wu {attacking_rank}, màggal wu ñuul wu {target_rank}. Su màggal yi dëgg, màggal yi dox.",
+    "you_miner_defused": "Ngaa tax a màggal ci {source} ba {dest}. Màggal wu njëkk wu màggal wu {attacking_rank}, màggal wu ñuul wu {target_rank}. Su màggal wu njëkk du wu màggal wu njur, ngaa yaw la bataxal.",
+    "opponent_miner_defused": "Jigéén {player_id} tax a màggal ci {source} ba {dest}. Màggal wu njëkk wu màggal wu {attacking_rank}, màggal wu ñuul wu {target_rank}. Su màggal wu njëkk du wu màggal wu njur, ngaa yaw la bataxal.",
+    "you_bomb_lost": "Ngaa tax a màggal ci {source} ba {dest}. Màggal wu njëkk wu màggal wu {attacking_rank}, màggal wu ñuul wu {target_rank}. Su màggal wu njëkk du wu màggal wu njur, ngaa yaw la bataxal.",
+    "opponent_bomb_won": "Jigéén {player_id} tax a màggal ci {source} ba {dest}. Màggal wu njëkk wu màggal wu {attacking_rank}, màggal wu ñuul wu {target_rank}. Su màggal wu njëkk du wu màggal wu njur, ngaa yaw la bataxal.",
+    "you_spy_won": "Ngaa tax a màggal ci {source} ba {dest}. Màggal wu njëkk wu màggal wu {attacking_rank}, màggal wu ñuul wu {target_rank}. Su màggal wu njëkk du wu màggal wu njur, ngaa yaw la bataxal.",
+    "opponent_spy_lost": "Jigéén {player_id} tax a màggal ci {source} ba {dest}. Màggal wu njëkk wu màggal wu {attacking_rank}, màggal wu ñuul wu {target_rank}. Su màggal wu njëkk du wu màggal wu njur, ngaa yaw la bataxal.",
+    "you_higher_won": "Yaa ngone xélit xélitalekoppaalekoppa piece bu {source} ci {dest}. Piece bu attacking bu {attacking_rank} ak piece bu destination bu {target_rank}. Bu attacker bu higher rank bu destination, yaa ngone won battle.",
+    "opponent_higher_lost": "Jigéén {player_id} tax a màggal ci {source} ba {dest}. Màggal wu njëkk wu màggal wu {attacking_rank}, màggal wu ñuul wu {target_rank}. Su màggal wu njëkk du wu màggal wu njur, ngaa yaw la bataxal.",
+    "you_lower_lost": "Yaa ngone xélit xélitalekoppaalekoppa piece bu {source} ci {dest}. Piece bu attacking bu {attacking_rank} ak piece bu destination bu {target_rank}. Bu attacker bu lower rank bu destination, yaa ngone lost battle.",
+    "opponent_lower_won": "Player {player_id} moo xélit xélitalekoppaalekoppa piece bu {source} ci {dest}. Piece bu attacking bu {attacking_rank} ak piece bu destination bu {target_rank}. Bu attacker bu lower rank bu destination, yaa ngone won battle."
+  },
+  "outcome": {
+    "flag_captured": "Jëfandikukat {player_id} jàpp na xët wi ci topp!",
+    "no_movable_pieces": "Këru {winner_id} dafa gënë! Këru {loser_id} du am pès-yëllë yoy man a dox."
+  }
+}

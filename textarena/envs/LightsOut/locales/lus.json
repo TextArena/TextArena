@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Lights Out ah chibai! {size}x{size} a grid lian i nei.\nI tum ber chu light zawng zawng OFF ( '.' in a entir) siam tur a ni.\nLight hmetin i hmet chuan a inthlak danglam a, a thenawm te (chung/lam/chhak/tlang) pawh a inthlak danglam bawk.\n[row col] type la, light hmet rawh (0 atanga index, chuvangin 0-{max_index} thleng a valid a ni).\n{max_turns} move thleng i nei a, puzzle chhuang turin.\nLegend: 'O' = light ON, '.' = light OFF"
+  },
+  "board": {
+    "current_state": "Hnaihnawk chungchang (Inchuk {moves_made}, {moves_left} inchuk la awm, {completion}% zo tawh):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action chu [row col] format a ni tur a ni, row leh col te chu 0 atanga {max_index} thlenga integer an ni tur a ni.",
+    "out_of_range": "Coordinate chu 0 leh {max_index} inkar a ni tur a ni. I lo lut chu [{row},{col}] a ni."
+  },
+  "outcome": {
+    "win": "Ka lawm e! {moves_used} kalpuiin puzzle i solve ta a ni.",
+    "loss": "Game over! {max_turns} move zawng i hmang zo a, puzzle i chhuak lo. Completion tawp: {completion}%\nDinhmun tawp:\n{grid}"
+  }
+}

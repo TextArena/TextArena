@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Играта започва. Коз: {trump_suit} (козова карта: {trump_str}).",
+    "no_trump_card": "няма"
+  },
+  "player_prompt": {
+    "intro": "Вие сте Играч {player_id} в Германски Вист.\n{phase_info}\nВие държите {hand_size} карти.\nИграйте карта с '[play N]', където N е нейната позиция в ръката ви (например '[play 3]').",
+    "phase_learning": "ФАЗА НА УЧЕНЕ: победителят от всеки козов взема лицето нагоре карта и губещият тегли следващата карта от тестето. Козовете, спечелени в тази фаза, не се броят към победата.",
+    "phase_playing": "ФАЗА НА ИГРА: тестето е изчерпано. Всяка следваща козова брои към победата."
+  },
+  "next_card": {
+    "playing_phase": "Няма карта на разположение - фазата на игра е започнала.",
+    "deck_empty": "Тестето е празно - няма карта на разположение.",
+    "available": "Карта на разположение: {card}",
+    "available_trump": "Карта на разположение: {card} (КОЗ)"
+  },
+  "invalid_move": {
+    "wrong_format": "Невалиден формат на ход. Използвайте '[play N]', за да изиграете N-тата карта в ръката си.",
+    "bad_position": "Тази позиция на карта не съществува. Вие държите {hand_size} карти.",
+    "must_follow_suit": "Трябва да следвате боята и да изиграете {lead_suit} карта.",
+    "invalid_play": "Тази карта не може да бъде изиграна."
+  },
+  "game_action": {
+    "played": "Играч {player_id} изигра {card}."
+  },
+  "trick": {
+    "won": "Играч {winner_id} печели козовата с {card}.",
+    "won_learning": "Играч {winner_id} печели козовата с {card} и взема лицето нагоре карта."
+  },
+  "phase": {
+    "learning_complete": "Тестето е изчерпано. Фазата на учене е приключила - всяка следваща козова брои към победата."
+  },
+  "draw": {
+    "winner_received": "Вие спечелихте козовата и получихте {card}.",
+    "loser_received": "Вие загубихте козовата и теглихте {card} от тестето.",
+    "winner_preview": "Следващата карта на разположение е {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Козови, спечелени досега - Играч 0: {tricks0}, Играч 1: {tricks1}",
+    "scores_playing": "Козови за победа - Играч 0: {tricks0}, Играч 1: {tricks1}",
+    "phase": "Фаза: {phase}",
+    "phase_learning": "Фаза: {phase} ({remaining_cards} карти остават в тестето)"
+  },
+  "hand": {
+    "no_cards": "Няма карти",
+    "no_cards_in_hand": "Няма карти в ръката",
+    "header": "Вашата ръка:",
+    "trump_indicator": " (КОЗ)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Още няма изиграни карти в тази козова.",
+    "header": "Текуща козова:",
+    "trump_indicator": " (КОЗ)",
+    "card_line": "{observation}\n  Играч {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Играта не е започнала",
+    "header": "=== ИГРА НА ГЕРМАНСКИ ВИСТ ===",
+    "phase": "{observation}\nФаза: {phase}",
+    "trump_suit": "{observation}\nКозова боя: {trump_suit}",
+    "trump_card": "{observation}\nКозова карта: {card}",
+    "cards_left": "{observation}\nКарти, оставащи в тестето: {count}",
+    "next_card": "{observation}\nСледваща карта за победителя: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nТекуща козова:",
+    "trump_indicator": " (КОЗ)",
+    "trick_line": "{observation}\n  Играч {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nИграч {player_id}: {scoring} козови за победа ({tricks} общо), {hand_size} карти в ръката"
+  },
+  "outcome": {
+    "summary": "Фаза на учене - Играч 0: {l0}, Играч 1: {l1}. Фаза на игра - Играч 0: {p0}, Играч 1: {p1}. Играч {winner_id} печели с {winner_tricks} козови за победа!"
+  }
+}
