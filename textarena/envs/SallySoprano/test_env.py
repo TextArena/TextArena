@@ -270,3 +270,42 @@ class TestSallySopranoEnv:
                 break
         
         assert found_round_counter, "Round counter not found in observations"
+
+    def _reach_judge(self):
+        self.env.reset(num_players=3, seed=0)
+        self.env.step("[Propose] 30000")
+        self.env.step("[Accept]")
+        assert self.env.state.current_player_id == 2
+        assert self.env.state.game_state["negotiation_complete"]
+
+    @pytest.mark.parametrize("verdict, rewards", [
+        ("[winner] sally’s agent.", {0: 1, 1: -1}),
+        ('[Winner] "Business Manager"', {0: -1, 1: 1}),
+        ("[winner] draw!", {0: 0, 1: 0}),
+    ])
+    def test_judge_verdict_parsing_is_lenient(self, verdict, rewards):
+        """Case, curly apostrophes, quotes and punctuation don't break the verdict."""
+        self._reach_judge()
+        done, _ = self.env.step(verdict)
+        assert done
+        result, _ = self.env.close()
+        assert {pid: result[pid] for pid in (0, 1)} == rewards
+
+    def test_unparsable_judge_verdict_is_retried(self):
+        """An unparsable verdict is an invalid move; the judge can resubmit."""
+        self._reach_judge()
+        done, _ = self.env.step("I think Sally did well")
+        assert not done
+        done, _ = self.env.step("[winner] Sally's Agent")
+        assert done
+        assert self.env.close()[0][0] == 1
+
+    def test_judge_out_of_retries_defaults_to_draw(self):
+        self._reach_judge()
+        done = False
+        for _ in range(self.env.error_allowance + 1):
+            done, _ = self.env.step("no verdict here")
+        assert done
+        rewards, info = self.env.close()
+        assert rewards[0] == rewards[1] == 0
+        assert "parsing failed" in info[0]["reason"]

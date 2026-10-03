@@ -126,8 +126,8 @@ Prepare for your meeting with Sally Soprano's agent.
                     observation_type=ta.ObservationType.PLAYER_ACTION
                 )
                 self._process_judge_decision(action)
-                # Game ends after judge decision
-                return True, self.state.step_info
+                # Game ends after a parsable judge decision (or once the judge runs out of retries)
+                return self.state.done, self.state.step_info
             else:
                 # Judge observes silently during negotiation - skip to next negotiating player
                 action = "*observing*"
@@ -325,17 +325,20 @@ Prepare for your meeting with Sally Soprano's agent.
         # Parse bracket format: [winner] Sally's Agent | Business Manager | Draw
         winner_match = re.search(r'\[winner\]\s*(.+?)(?:\n|\[|$)', decision, re.IGNORECASE)
         if winner_match:
-            winner = winner_match.group(1).strip()
+            # Tolerate case, curly apostrophes, quotes and trailing punctuation
+            winner = re.sub(r"[^a-z' ]", "", winner_match.group(1).replace("’", "'").lower()).strip()
 
-            if winner == "Sally's Agent":
+            if winner.startswith("sally's agent"):
                 self.state.set_winners([0], decision)
                 return
-            elif winner == "Business Manager":
+            elif winner.startswith("business manager"):
                 self.state.set_winners([1], decision)
                 return
-            elif winner == "Draw":
+            elif winner.startswith("draw"):
                 self.state.set_draw(decision)
                 return
-        
-        # If parsing fails, default to draw
-        self.state.set_draw(f"Judge decision parsing failed, defaulting to draw. Original decision: {decision}")
+
+        # Let the judge resubmit; default to a draw once its error allowance is used up
+        out_of_retries = self.state.set_invalid_move("State the verdict as '[winner] Sally's Agent', '[winner] Business Manager' or '[winner] Draw'.")
+        if out_of_retries:
+            self.state.set_draw(f"Judge decision parsing failed, defaulting to draw. Original decision: {decision}")
