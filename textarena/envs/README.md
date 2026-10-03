@@ -2673,9 +2673,9 @@ The environment supports configurable parameters for `max_rounds`, `total_amount
 
 | **Full Env-ID Format**             | **Default Wrappers**                                   |
 |------------------------------------|--------------------------------------------------------|
-| `TruthAndDeception-v0-{...}`       | `LLMObservationWrapper`, `ActionFormattingWrapper`     |
-| `TruthAndDeception-v0-{...}-raw`   | `None`                                                 |
-| `TruthAndDeception-v0-{...}-train` | `LLMObservationWrapper`, `ClipCharactersActionWrapper` |
+| `TwoDollar-v0-{...}`       | `LLMObservationWrapper`, `ActionFormattingWrapper`     |
+| `TwoDollar-v0-{...}-raw`   | `None`                                                 |
+| `TwoDollar-v0-{...}-train` | `LLMObservationWrapper`, `ClipCharactersActionWrapper` |
 
 ### Role System
 
