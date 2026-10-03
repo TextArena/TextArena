@@ -27,6 +27,7 @@ class KuhnPokerEnv(ta.Env):
             if self.state.game_state["player_chips"][0] > self.state.game_state["player_chips"][1]: self.state.set_winner(player_id=0, reason=self.m("outcome", "winner_player0", max_rounds=self.max_rounds))
             elif self.state.game_state["player_chips"][0] < self.state.game_state["player_chips"][1]: self.state.set_winner(player_id=1, reason=self.m("outcome", "winner_player1", max_rounds=self.max_rounds))
             else: self.state.set_draw(reason=self.m("outcome", "draw", max_rounds=self.max_rounds))
+            return
 
         random.shuffle(self.deck) # shuffle the deck 
         self.state.game_state["player_cards"] = {0: self.deck[0], 1: self.deck[1]} # assign player cards
