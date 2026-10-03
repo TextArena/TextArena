@@ -48,7 +48,10 @@ register_with_versions(id="Crosswords-v0-hardcore", entry_point="textarena.envs.
 register_with_versions(id="Cryptarithm-v0", entry_point="textarena.envs.Cryptarithm.env:CryptarithmEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameMessagesObservationWrapper, ActionFormattingWrapper]}, equation="SEND + MORE = MONEY", max_turns=100)
 
 # FifteenPuzzle [1 Player]
-register_with_versions(id="FifteenPuzzle-v0", entry_point="textarena.envs.FifteenPuzzle.env:FifteenPuzzleEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameBoardObservationWrapper, ActionFormattingWrapper]}, max_turns=200)
+register_with_versions(id="FifteenPuzzle-v0",        entry_point="textarena.envs.FifteenPuzzle.env:FifteenPuzzleEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameBoardObservationWrapper, ActionFormattingWrapper]}, max_turns=200)
+register_with_versions(id="FifteenPuzzle-v0-easy",   entry_point="textarena.envs.FifteenPuzzle.env:FifteenPuzzleEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameBoardObservationWrapper, ActionFormattingWrapper]}, max_turns=200, difficulty="easy")
+register_with_versions(id="FifteenPuzzle-v0-medium", entry_point="textarena.envs.FifteenPuzzle.env:FifteenPuzzleEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameBoardObservationWrapper, ActionFormattingWrapper]}, max_turns=200, difficulty="medium")
+register_with_versions(id="FifteenPuzzle-v0-hard",   entry_point="textarena.envs.FifteenPuzzle.env:FifteenPuzzleEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameBoardObservationWrapper, ActionFormattingWrapper]}, max_turns=200, difficulty="hard")
 
 # Bomberman [2 Player]
 register_with_versions(id="Bomberman-v0", entry_point="textarena.envs.Bomberman.env:TwoPlayerBombermanEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS}, grid_size=10, max_turns=100)
