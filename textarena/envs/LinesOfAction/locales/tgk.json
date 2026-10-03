@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Шумо Бозигари {player_id} дар бозии LinesOfAction ҳастед.\nҚисмҳои шумо '{side}' ҳастанд, қисмҳои рақиб '{other}' ҳастанд.\nФормати ҳаракат: `[b1b3]` (аз координатаи сарчашма ба координатаи мақсад). Ҳаракати қонунӣ дар самти уфуқӣ, амудӣ ё диагоналӣ ба шумораи мураббаъҳои баробар ба шумораи қисмҳои умумӣ (ранги ҳар гуна) дар он хатти ҳаракат мекунад. Шумо метавонед аз болои қисмҳои худ ҷаҳида, вале аз болои қисмҳои рақиб на; фуруд дар болои рақиб онро дастгирӣ мекунад.  Ғолибият ҳангоми пайвастани ҳамаи қисмҳои шумо ба ҳамсояҳои 8-тӯда."
+  },
+  "board": {
+    "current_board": "Шӯрои ташкилот: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Формат бояд e2e4 бошад (аз,ба координатаҳо).",
+    "no_piece": "Ҳеҷ {side} қисм дар бораи {coord}.",
+    "identical": "Сарчашма ва макон якхела аст.",
+    "not_straight_or_diagonal": "Ҳаракат бояд рост ё диагоналӣ бошад.",
+    "wrong_distance": "Бояд масофаи баробар бо қисмҳои дар як саф ҷойгиршударо ҳаракат кунад.",
+    "enemy_blocks": "Асли душманро ба роҳ монеъ мекунад.",
+    "destination_own": "Мақсад бо истифода аз қуттии худ."
+  },
+  "game_action": {
+    "moved": "Бозигар {player_id} {from}-ро ба {to} кучонд.",
+    "captured_suffix": "Бозигар {player_id} {from}-ро ба {to} кучонд, дushmanро гирифтааст."
+  },
+  "outcome": {
+    "win": "Ҳама қисмҳо ба ҳам пайваст шудаанд.",
+    "draw_no_capture": "60 ҳаракат бе дастгиркунӣ.",
+    "draw_repetition": "Мавқеъ се маротиба такрор карда мешавад."
+  }
+}

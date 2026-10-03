@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "თქვენ ხართ მოთამაშე {player_id}, რომელიც თამაშობს {num_rounds} რაუნდს განმეორებული ულტიმატუმის თამაშში.\nთქვენ გაქვთ ${pool} ამ რაუნდში გასაყოფად თქვენს და მოთამაშე {other_id} შორის.\n\nშემოთავაზებელი:\n  - შეთავაზება: [Offer: $X] (0 <= X <= pool)\n  - თუ მიღებული → თქვენ მიიღებთ $(pool - X), მეორე მოთამაშეს მიაქვს $X\n  - თუ უარი → ორივე მიიღებს $0\n  - მაგალითი: [Offer: $3]  ან  'მე მივიჩნევ, რომ ეს სამართლიანია. [Offer: $5]'\n\nპასუხის გაცემის პირი:\n  - გადაწყვეტეთ შეთავაზებაზე [Accept] ან [Reject]\n  - მაგალითი: 'ეს ჩანს, რომ შესაფერისია. [Accept]'\n            'ზიანიანია. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- რაუნდი {round_number} იწყება! --- მოთამაშე {proposer_id} არის შემოთავაზებელი, მოთამაშე {responder_id} არის პასუხის მიმცემი.",
+    "offer": "რაუნდი {round_number}: მოთამაშე {proposer_id} სთავაზობს ${offer} მოთამაშე {responder_id} (შენარჩუნებს ${keep}).",
+    "accepted": "მოთამაშე {responder_id} მიიღეს! რაუნდი {round_number} მოგება: მოთამაშე {proposer_id} +${proposer_gain}, მოთამაშე {responder_id} +${responder_gain}. ახალი ჯამური: მოთამაშე 0: ${total_0}, მოთამაშე 1: ${total_1}.",
+    "rejected": "მოთამაშე {responder_id} უარყო შეთავაზება! რაუნდი {round_number} მოგება: ორივე მოთამაშე +$0. დარჩა ჯამური: მოთამაშე 0: ${total_0}, მოთამაშე 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "შემოთავაზების შემსრულებელმა უნდა გააკეთოს შეთავაზება ფორმატის [Offer: $X] გამოყენებით.",
+    "bad_integer": "შეთავაზების თანხა უნდა იყოს სწორი მთელი რიცხვი.",
+    "out_of_range": "შეთავაზება უნდა იყოს $0 და ${pool} შორის.",
+    "no_current_offer": "არ არსებობს მიმდინარე შეთავაზება პასუხის გასაცემად.",
+    "accept_or_reject": "რესპონდენტმა უნდა [Accept] ან [Reject] შეთავაზება."
+  },
+  "outcome": {
+    "win": "მოთამაშე {winner} მოიგო ${winner_total} ჯამში მოთამაშის {loser} ${loser_total}-ის წინააღმდეგ.",
+    "draw": "ორივე მოთამაშე დაასრულა ${total} ჯამში."
+  }
+}

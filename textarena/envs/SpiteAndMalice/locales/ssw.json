@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Nguwe Mdlali {player_id} emdlalo wababili we-Spite and Malice. Inhloso yakho kukhulula isikhala sakho sokuphuma.\n\n### Lokuhlalwa kweMdlalo:\n- Inhloso kukhulula isikhala sakho sokuphuma ngokusebenzisa amakadi kuwo emakadi asekhaya.\n- Ungasebenzisa amakadi kuwo emasikhala amathathu:\n  1. Isandla sakho (uqala njalo ngokusebenzisa amakadi ayisihlanu esandleni sakho).\n  2. Ikadi lenyuka yesikhala sakho sokuphuma.\n  3. Ikadi lenyuka yesikhala sakho samakadi asaliwe.\n\n### Imithetho yokusebenzisa:\n- Ungasebenzisa ikadi kuwo emakadi asekhaya uma ikadi lenyuka kuleso sikhala ikhulu kunaleyo elenyuka kuleso sikhala (amakadi asekhaya aqala ngAce kuya kuQueen; iKings ayizwela - ingasebenziswa kwenye ikadi yinike kanti ayishintshi inhloso yamakadi. Lokhu kusho ukuthi uma iKing isebenziswe emuva kwe4, iKing lenyuka ikhulu kwe5 kanti ikadi elandelayo kumele ibe 6).\n- Uma ungasebenzisi amakadi ngempela, kumele usaliwe ikadi kuwo esikhala sakho samakadi asaliwe ukuphetha isikhala sakho.\n- Uma isikhala sasekhaya sifike kuQueen, siyokhululwa ngokuzwela.\n- Inhloso yamakadi ihamba kanje: A=1, 2=2, ..., 9=9, J=10, Q=11, K izwela.\n\n### Imisebenzi:\n1. **Thatha**: Kuqaleni kwekhaya lakho, thatha amakadi ukugcwalisa isandla sakho kuya ku5 amakadi. Ngene **[draw]** ukuqala.\n2. **Sebenzisa ikadi**: Ukusebenzisa ikadi, chaza ikadi kanti nekhaya lemakadi asekhaya kanje: **[play A♠ 0]** (lapho 'A♠' ikadi kanti '0' ikhaya lemakadi asekhaya).\n3. **Salisa**: Uma ungasebenzisi amakadi ngempela, salisa ikadi esandleni sakho kuwo esikhala sakho samakadi asaliwe ukuphetha isikhala sakho. Ngene **[discard A♠ 1]** (lapho 'A♠' ikadi kanti '1' ikhaya lesikhala sakho samakadi asaliwe). Gcina ukuthi awusalisi ikadi yinike kusikhala sakho sokuphuma. Ungasalisa amakadi esandleni sakho kuphela.\n\n"
+  },
+  "board": {
+    "current_board": "Bhoja Lebhoja:\n\n{board}\nImiyalo Iyaphi: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Tinsika Temakhemikhali Emkhatsini (Center Piles) --- ",
+    "pile": "{observation}Lebhoja {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- View YaMdlali {player_id} ---\n",
+    "payoff": "{observation}Inkaba Yokuphela (Ikadi Eliyiphakeme): {top_card}, Ubukhulu bwenkaba Yokuphela: {payoff_length}\n",
+    "hand": "{observation}Ihando: {hand}\n",
+    "discard": "{observation}Lebhoja Lokuthinta: {discard}\n",
+    "empty": "Lingenalutfo"
+  },
+  "game_message": {
+    "no_cards_left": "Akuna amakadi amaningi athathwe. Qaphela ukuthi ungasebenzisa amakadi kusuka kumaSiko:\n  1. Isandla sakho.\n  2. Ikhadi eliphezulu la isikhala sakho.\n  3. Ikhadi eliphezulu la isikhala sakho sesikhala.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Umdlali {player_id} akazange aphendvule ngekunyakata lokuvumelekile.",
+    "invalid_play": "Kudlala okungavunyi. Mdlali {player_id} wathatha ukudlala {card} kulebhoja lasempini {index}.",
+    "discard_from_payoff": "Umdlali {player_id} wetama kulahla likhadi lelisemgodzini wenkhokhelo.",
+    "discard_not_in_hand": "Umdlali {player_id} wetame kulahla likhadi lelingekho esandleni sakhe.",
+    "wrong_move_type": "Umdlali {player_id} akazange aphendvule ngekwenta luhlobo lwekuhamba lolusemtsetfweni."
+  },
+  "game_action": {
+    "you_drew": "Bewudlala ngemakhadi.",
+    "opponent_drew": "Umdlali {player_id} wadvwebela emakhadi.",
+    "you_played": "Wena wadlala {card} kulesisekelo semdlalo {index}.",
+    "opponent_played": "Umdlali {player_id} udlala {card} endvundvumeni lesemkhatsini {index}.",
+    "you_discarded": "Wathinte {card} kulebhoja lokuthinta {index}, lokho ke lokho akufani ukuthi wachitha isikhathi sakho. Akunakwenzeka kweminye imisebenzi yakho kuconsidwa kulesi sikhathi. Mdlali {next_player_id} uzothatha esikhathini esinguveni.",
+    "opponent_discarded": "Mdlali {player_id} wathinta {card} kulebhoja lokuthinta {index}, lokho ke lokho akufani ukuthi wachitha isikhathi sakhe. Akunakwenzeka kweminye imisebenzi ya Mdlali {player_id} kuconsidwa kulesi sikhathi. Mdlali {next_player_id}, uwena uthokoze ngokwakho. Ngena isenzo sakho ngendlela [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mdlali {current_player} ushaye isikhwama sakhe sokuphela! Mdlali {current_player} ushaye!",
+    "deadlock_player_0": "Kuvezwe isikhala! Umnikeli 0 uphezulu ngekhebula {player_0_payoff} ezisalayo vs {player_1_payoff} ekhebula laMnikeli 1.",
+    "deadlock_player_1": "Kuvezwe isikhala! Umnikeli 1 uphezulu ngekhebula {player_1_payoff} ezisalayo vs {player_0_payoff} ekhebula laMnikeli 0.",
+    "deadlock_tie": "Kunemfuneko nempate! Bobabili bangenele amakadi {player_0_payoff} asala. Nguhamba {current_player} unqobile ngokuzenzakalela."
+  }
+}

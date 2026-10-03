@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "O'yin boshlanadi. Tramp kostyumi: {trump_suit} (tramp kartasi: {trump_str}).",
+    "no_trump_card": "yoʻq"
+  },
+  "player_prompt": {
+    "intro": "Siz nemischa Whistda Player {player_id}siz. {phase_info} Sizda {hand_size} kartalar bor. \"[play N]\" bilan karta o'ynang, bu erda N sizning qo'lingizdagi o'rni (masalan, \"[play 3]\").",
+    "phase_learning": "O'rganish bosqichi: har bir hiyla-nayrangning g'olibi ko'z ostidagi kartani oladi va mag'lubiyat qozonadigan kishi to'plamdan keyingi kartani oladi. Ushbu bosqichda qozonilgan hiyla-nayranglar g'alaba uchun hisobga olinmaydi.",
+    "phase_playing": "O'YIN FAZASI: to'plam tugab bo'ldi. Bundan buyon har bir hiyla g'alaba uchun ahamiyatga ega."
+  },
+  "next_card": {
+    "playing_phase": "Hech qanday karta taklif qilinmaydi - o'yin boshlangan.",
+    "deck_empty": "Qopchiq bo'sh - hech qanday karta taklif qilinmaydi.",
+    "available": "Taklif qilingan karta: {card}",
+    "available_trump": "Taklif qilingan karta: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Noto'g'ri harakat format. Qo'lingizdagi Nth kartani o'ynash uchun \"[play N]\" dan foydalaning.",
+    "bad_position": "Ushbu karta mavqei mavjud emas. Sizda {hand_size} kartalar bor.",
+    "must_follow_suit": "Siz ham shunday qilishingiz va {lead_suit} karta o'ynashingiz kerak.",
+    "invalid_play": "Bu karta o'ynashi mumkin emas."
+  },
+  "game_action": {
+    "played": "O'yinchi {player_id} o'ynagan {card} ."
+  },
+  "trick": {
+    "won": "{winner_id} o'yinchisi {card} bilan g'alaba qozonadi.",
+    "won_learning": "O'yinchi {winner_id} {card} bilan g'alaba qozonadi va yuzi ochiq kartani oladi."
+  },
+  "phase": {
+    "learning_complete": "Qatlam tugab, o'rganish bosqichi tugaydi - har bir qolgan hiyla g'alaba uchun ahamiyatga ega."
+  },
+  "draw": {
+    "winner_received": "Siz g'alaba qozonib, {card}ni oldingiz.",
+    "loser_received": "Siz trikni yoʻqotdingiz va {card} kartani deckdan oldingiz.",
+    "winner_preview": "Keyingi karta {card} hisoblanadi."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "Hozirgacha yutib chiqqan hiylalar - 0 o'yinchi: {tricks0}, 1 o'yinchi: {tricks1}",
+    "scores_playing": "Gol urish hiylalari - 0 o'yinchi: {tricks0}, 1 o'yinchi: {tricks1}",
+    "phase": "Faza: {phase}",
+    "phase_learning": "Faza: {phase} ({remaining_cards} kartani to'plamda qoldirish)"
+  },
+  "hand": {
+    "no_cards": "Kartlar yoʻq",
+    "no_cards_in_hand": "Qoʻlda kartalar yoʻq",
+    "header": "Qoʻlingiz:",
+    "trump_indicator": "(TRUMP) \" Men bu ishni qilyapman .",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Bu hiyla bilan hali hech qanday karta o'ynamagan.",
+    "header": "Joriy hiyla:",
+    "trump_indicator": "(TRUMP) \" Men bu ishni qilyapman .",
+    "card_line": "{observation} O'yinchi {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Oʻyin boshlanmagan",
+    "header": "=== GERMAN WHIST GAME === (Germaniyalik oq otli o'yin)",
+    "phase": "{observation} Faza: {phase}",
+    "trump_suit": "{observation} Trampning kostyumi: {trump_suit}",
+    "trump_card": "{observation} Tramp kartasi: {card}",
+    "cards_left": "{observation} Qopchada qolgan kartalar: {count}",
+    "next_card": "{observation} G'olib uchun keyingi karta: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Hozirgi usul:",
+    "trump_indicator": "(TRUMP) \" Men bu ishni qilyapman .",
+    "trick_line": "{observation} O'yinchi {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} O'yinchi {player_id}: {scoring} gol urish ({tricks} jami), {hand_size} qo'lida kartalar"
+  },
+  "outcome": {
+    "summary": "O'rganish bosqichi - O'yinchi 0: {l0}, O'yinchi 1: {l1}. O'yin bosqichi - O'yinchi 0: {p0}, O'yinchi 1: {p1}. O'yinchi {winner_id} {winner_tricks} gol urish bilan g'alaba qozonadi!"
+  }
+}

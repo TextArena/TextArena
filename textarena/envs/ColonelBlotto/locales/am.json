@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "አንተ ኮሎኔል ብሎቶ ውስጥ {role} ነህ።\nአንተን የሚጠበቅ ግብ ከተወዳጅህ በላይ ብዙ ዙር ማሸንፈት ነው።\nበእያንዳንዱ ዙር ላይ፣ የሚታየውን {field_names} ሜዳዎች ላይ {num_total_units} ክፍሎችን ዝርጋ።\nአንድ ሜዳ ላይ ብዙ ክፍሎችን ዝርጋት ሜዳውን ያሸንፋል፣ እና ብዙ ሜዳዎችን ያሸንፋል ዙሩን ያሸንፋል።\nለምሳሌ፣ '[A7 B7 C6]' ሜዳ A ላይ 7 ክፍሎችን፣ ሜዳ B ላይ 7 ክፍሎችን፣ እና ሜዳ C ላይ 6 ክፍሎችን ዝርጋል።",
+    "commander_alpha": "ኮማንደር አልፋ!",
+    "commander_beta": "ኮማንደር ቤታ"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nሪንዶች የተሸነፈው - ኮማንደር አልፋ: {alpha_score}, ኮማንደር ቤታ: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nዙር {current_round}\nአዛዥ አልፋ ዝርጋለሁ: {p0_allocations}\nአዛዥ ቤታ ዝርጋለሁ: {p1_allocations}\n",
+    "winner_alpha": "{message}አሸናፊው: ኮማንደር አልፋ",
+    "winner_beta": "{message}አሸናፊው: ኮማንደር ቤታ",
+    "tie": "{message}አንድ ላይ ተጣበቁ!"
+  },
+  "invalid_move": {
+    "wrong_format": "ልክ ያልሆነ የግብዓት ቅርጸት: አ:5፣ ቢ:10 እና ሲ:5 ይጠቀሙ።",
+    "invalid_field": "ልክ ያልሆነ የመስክ ስም ()) ትክክለኛ መስኮች: {field_names}",
+    "wrong_allocation_value": "ሁሉም ምደባዎች አሉታዊ ያልሆኑ ሙሉ ቁጥሮች መሆን አለባቸው።",
+    "incorrect_total_units": "እንደ አስቀድሞ መስጠት እንዲሆን ሙሉ እንደ {num_total_units} አይነቶችን አስቀድም. የአሁን ስጋት: {current_sum}",
+    "good_allocations": "ምደባው ጥሩ ነው።"
+  },
+  "outcome": {
+    "winner_alpha": "ኮማንደር አልፋ በ{score_0}-{score_1} ድል አድርጎሀል በ{num_rounds} ሪንዶች!",
+    "winner_beta": "ኮማንደር ቤታ በ{score_1}-{score_0} ድል አድርጎሀል በ{num_rounds} ሪንዶች!",
+    "draw": "ጌም {score_0}-{score_1} አቻለሁ {num_rounds} ዙሮች በኋላ!",
+    "early_winner_alpha": "ኮማንደር አልፋ በ{scores_0}-{scores_1} ድል አድርጎሀል (ብዙሀንነት አስገኝቶሀል)!",
+    "early_winner_beta": "ኮማንደር ቤታ በ{scores_1}-{scores_0} ድል አድርጎሀል (ብዙሀንነት አስገኝቶሀል)!"
+  }
+}

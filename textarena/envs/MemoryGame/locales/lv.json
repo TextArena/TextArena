@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id}. Jūs spēlējat Atmiņas Spēli.\nJūsu mērķis ir sakārtot vairāk kāršu pāru uz galdiņa nekā jūsu pretinieks.\nSavā gājienā izvēlieties divas kārtis, lai apgrieztu, ievadot rindas un kolonnas numurus pirmajai un otrajai kārtij attiecīgi, piemēram, '[0 1 1 0]', kur pirmā kārts atrodas rindā 0 un kolonnā 1, un otrā kārts atrodas rindā 1 un kolonnā 0.\nJa abas kārtis sakrīt, jūs iegūstat punktu un kārtis paliek ar seju uz augšu. Ja tās nesakrīt, kārtis tiek apgrieztas atpakaļ ar seju uz leju, piemēram, '.'.\nSpēle beidzas, kad visas pāris ir sakārtotas."
+  },
+  "board": {
+    "current_board": "Pašreizējais galdiņš:\n{board}",
+    "current_game_board": "Pašreizējais Spēles Galdiņš:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nederīgs gājiens. Spēlētājs {player_id} neatbildēja ar derīgu virzienu kvadrātiekavās.",
+    "out_of_bounds": "Nederīgs gājiens. Spēlētājs {player_id} izvēlējās pozīciju ārpus robežām.",
+    "same_card_twice": "Nederīgs gājiens. Spēlētājs {player_id} izvēlējās vienu un to pašu kārti divreiz.",
+    "already_matched": "Nederīgs gājiens. Spēlētājs {player_id} izvēlējās vienu vai abas kārtis, kas jau ir sakārtotas."
+  },
+  "game_message": {
+    "cards_match": "Kārtis, ko izvēlējās Spēlētājs {player_id} pozīcijās [{r1} {c1}] un [{r2} {c2}], sakrīt!",
+    "cards_no_match": "Kārtis, ko izvēlējās Spēlētājs {player_id}, nesakrīt. Kārtis pozīcijās [{r1} {c1}] un [{r2} {c2}] ir {pos1} un {pos2} attiecīgi."
+  },
+  "outcome": {
+    "draw": "Abi spēlētāji sakārtoja vienu un to pašu skaitu kāršu pāru.",
+    "win": "Spēlētājs {winner_id} ir uzvarējis!",
+    "turn_limit": "Gājienu limits ir sasniegts. Spēle ir beigusies. Spēlētājs 0 ieguva {score_0} punktus, Spēlētājs 1 ieguva {score_1} punktus.",
+    "turn_limit_win": "{reason} Spēlētājs {winner_id} ir uzvarējis!"
+  }
+}

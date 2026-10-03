@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "Eres el jugador {player_id} en un Dilema del Prisionero Iterado para 3 jugadores. La partida dura {num_rounds} rondas.\nEstructura de cada ronda:\n• {conv_rounds} turnos de conversación libre\n• 1 turno de decisión: envía un token por cada oponente: '[<opp-id> cooperate]' o '[<opp-id> defect]' (por ejemplo, '[1 defect] [2 cooperate]'; la opción predeterminada es 'cooperate').\nMatriz de recompensas por parejas (se aplica a cada pareja no ordenada):\n  - Ambos eligen cooperate  ->  {reward}\n  - Ambos eligen defect     ->  {punishment}\n  - Tú eliges defect y el otro jugador elige cooperate -> {temptation}\n  - Tú eliges cooperate y el otro jugador elige defect -> {sucker}\nEl jugador o los jugadores con la puntuación más alta al terminar todas las rondas ganan."
+  },
+
+  "round": {
+    "start": "─── Comienza la ronda {round} ───\tPuedes conversar libremente durante los próximos {conv_rounds} turnos.",
+    "chat_finished": "La conversación de la ronda {round} ha terminado. Envía tus decisiones, un token por cada oponente: `[pid cooperate]` o `[pid defect]`."
+  },
+
+  "results": {
+    "header": "### Ronda {round} — Resultados:",
+    "pair_line": "{observation}\n\t El jugador {i} y el jugador {j} eligieron {choice_i} y {choice_j}, respectivamente (el jugador {i} obtuvo {gain_i} puntos y el jugador {j} obtuvo {gain_j} puntos)",
+    "scores_open": "{observation}\n-> Puntuaciones actuales: ",
+    "score_first": "{observation}Jugador {player_id} ({score})",
+    "score_next": "{observation}; Jugador {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+
+  "outcome": {
+    "final": "Puntuaciones finales: {scores}. Grupos de clasificación (peor→mejor): {groups}"
+  }
+}

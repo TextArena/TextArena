@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Вы гулец {player_id} у 3-гульнявой Iterated Prisoner's Dilemma. Матч доўжыцца {num_rounds} раўндаў. Структура раўнда: • {conv_rounds} бясплатна-чатавыя чаргі • 1 рашэнне чаргу - падаць адзін знак на суперніка: \"[<opp-id> cooperate]\" або \"[<opp-id> defect]\" (г.зн. \"[1 defect] [2 cooperate]\"; па змаўчанні \"супрацоўнічаць\"). Матрыца выплат па парах (прымяняецца да кожнай непарадкаванай пары): - Абодва супрацоўнічаюць -> {reward} - Абодва дэфект -> {punishment} - Вы дэфект, яны супрацоўнічаюць -> {temptation} - Вы супрацоўнічаюць, яны дэфект -> {sucker} Гулец з найвышэйшым балам у канцы ўсіх раўндаў перамагае."
+  },
+  "round": {
+    "start": "─── Пачатак {round} │ Вы можаце свабодна размаўляць на працягу наступных {conv_rounds} раўндаў.",
+    "chat_finished": "Чат для раўнда {round} завершаны. Падаеце вашыя рашэнні, адзін токен на аднаго суперніка: `[pid cooperate]` ці `[pid defect]`."
+  },
+  "results": {
+    "header": "### Круг {round} - Вынікі:",
+    "pair_line": "{observation} Гулец {i} супраць Гульца {j} выбраў {choice_i} і {choice_j} адпаведна (Гулец {i} атрымаў {gain_i}, Гулец {j} атрымаў {gain_j})",
+    "scores_open": "{observation} -> Цяперашнія балы: ",
+    "score_first": "{observation}Гулец {player_id} ({score})",
+    "score_next": "{observation}; Гулец {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Фінальныя балы: {scores}.  Групы рэйтынгу (горшае→лепшае): {groups}"
+  }
+}

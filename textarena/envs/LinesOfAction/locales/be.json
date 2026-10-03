@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Вы гулец {player_id} у гульні LinesOfAction.\nВашыя фігуры - '{side}', фігуры суперніка - '{other}'.\nФармат ходу: `[b1b3]` (ад каардынаты да каардынаты). Правільны ход праходзіць гарызантальна, вертыкальна або дыяганальна на колькасць квадратаў, роўную агульнай колькасці фігур (любы колер) у гэтай лініі. Вы можаце пераскокваць праз свае фігуры, але не праз фігуры суперніка; пасадка на фігуру суперніка захоплівае яе.  Выйграеце, калі ўсе вашыя фігуры злучаныя па 8-суседству."
+  },
+  "board": {
+    "current_board": "Камітэт: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Фармат павінен быць e2e4 (ад,да каардынат).",
+    "no_piece": "Не {side} частка на {coord}.",
+    "identical": "Крыніца і месца прызначэння ідэнтычныя.",
+    "not_straight_or_diagonal": "Рух павінен быць прамы або дыяганальнай.",
+    "wrong_distance": "Павінна перамяшчацца адлегласць роўная кавалкам у чарзе.",
+    "enemy_blocks": "Вораг кавалак блакуе шлях.",
+    "destination_own": "Мэта займаецца ўласнай часткі."
+  },
+  "game_action": {
+    "moved": "Гулец {player_id} перамясціўся {from} -> {to}",
+    "captured_suffix": "Гулец {player_id} перамяшчаецца {from} -> {to} захоплівае ворага."
+  },
+  "outcome": {
+    "win": "Усе часткі звязаныя.",
+    "draw_no_capture": "60 ходаў без захопу.",
+    "draw_repetition": "Пазіцыя паўтарылася тры разы."
+  }
+}

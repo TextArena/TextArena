@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Du bis Speler {player_id}, die {num_rounds} runde van Iterated Ultimatum Game speelt.\nDu häös ${pool} óm te dele in deze runde tösse dich en Speler {other_id}.\n\nVeursteler:\n  - Maak 'n aanbod: [Offer: $X] (0 <= X <= pool)\n  - Es 't aanbod weurt aangenómme → Du kriegs $(pool - X), de anger speler kriegs $X\n  - Es 't aanbod weurt aafgeweze → Beide kriege $0\n  - Veurbeeld: [Offer: $3]  of  'Ich vinde dit eerlik. [Offer: $5]'\n\nReagerende:\n  - Beslót euver 't aanbod mit [Accept] of [Reject]\n  - Veurbeeld: 'Det sjèntj mie redelik. [Accept]'\n            'Te oneerlik. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Runde {round_number} begint! ---\nSpeler {proposer_id} is de voorsteler, Speler {responder_id} is de reagerende.",
+    "offer": "Runde {round_number}: Speler {proposer_id} deilt ${offer} aan Speler {responder_id} (en hilt ${keep}).",
+    "accepted": "Speler {responder_id} haet 't aanbod aangenómme! Runde {round_number} wint: Speler {proposer_id} +${proposer_gain}, Speler {responder_id} +${responder_gain}. Nuuj totale: Speler 0: ${total_0}, Speler 1: ${total_1}.",
+    "rejected": "Speler {responder_id} haet 't aanbod aafgeweze! Runde {round_number} wint: Beide speulers +$0. Totale blieve: Speler 0: ${total_0}, Speler 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "De veursteller moot 'n biedrage make mèt de vorm [Offer: $X].",
+    "bad_integer": "'t Aanbodsbedraag moot ein geldig gans getal zeen.",
+    "out_of_range": "Bied mós ligke tösse $0 en ${pool}.",
+    "no_current_offer": "Gein aktueel aanbod om te reagere.",
+    "accept_or_reject": "Responder mos óngerwaerd [Accept] of [Reject] 't aanbod."
+  },
+  "outcome": {
+    "win": "Speler {winner} haet gewonne mit ${winner_total} totaal taenge Speler {loser} z'n ${loser_total}.",
+    "draw": "Allebei de speulers eindige mèt ${total} totaal."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id}. Igrate Igru Pamćenja.\nVaš cilj je upariti više parova karata na ploči nego vaš protivnik.\nNa vašoj šansi, odaberite dvije karte za okretanje tako što ćete unijeti brojeve redaka i stupaca prve i druge karte kao '[0 1 1 0]', gdje je prva karta u redu 0 i stupcu 1, a druga karta je u redu 1 i stupcu 0.\nAko se dvije karte podudaraju, dobivate bod i karte ostaju okrenute licem prema gore. Ako se ne podudaraju, karte se vraćaju licem prema dolje, npr. '.'.\nIgra završava kada su svi parovi upareni."
+  },
+  "board": {
+    "current_board": "Trenutna ploča:\n{board}",
+    "current_game_board": "Trenutna ploča igre:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neispravan format poteza. Igrač {player_id} nije odgovorio s valjanim smjerom u uglatim zagradama.",
+    "out_of_bounds": "Neispravan potez. Igrač {player_id} je odabrao poziciju izvan granica.",
+    "same_card_twice": "Neispravan potez. Igrač {player_id} je odabrao istu kartu dvaput.",
+    "already_matched": "Neispravan potez. Igrač {player_id} je odabrao jednu ili obje karte koje su već bile uparene."
+  },
+  "game_message": {
+    "cards_match": "Karte koje je odabrao Igrač {player_id} na pozicijama [{r1} {c1}] i [{r2} {c2}] se podudaraju!",
+    "cards_no_match": "Karte koje je odabrao Igrač {player_id} se ne podudaraju. Karte na pozicijama [{r1} {c1}] i [{r2} {c2}] su {pos1} i {pos2} respektivno."
+  },
+  "outcome": {
+    "draw": "Oba igrača su uparila isti broj parova karata.",
+    "win": "Igrač {winner_id} je pobijedio!",
+    "turn_limit": "Dosegnuta je granica poteza. Igra je gotova. Igrač 0 je osvojio {score_0} bodova, Igrač 1 je osvojio {score_1} bodova.",
+    "turn_limit_win": "{reason} Igrač {winner_id} je pobijedio!"
+  }
+}

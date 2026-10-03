@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Nawe ngumdlali {player_id} ku-Stratego.\nInhloso yakho kukhipha ifulegi yakho mngani akho noma ukususa zonke izitha zakhe ezinokunyakaza.\nIbutho lakho libekelwe kuwe phezu kwethabala, kuhlanganisa nefulegi yakho, izibhamu, nezinye izitha ezahlukahlukene ngobukhulu.\n\n### Imiyalo Yomdlalo\n1. **Imiyalo YokuHamba:**\n   - Ngokwakho ukusebenza, unaweza kuhamba isitha ngokunye kwenye isikwele esingakini (phezulu, phansi, ekunene, noma ekushonele) esingakini esikhona izitha zakho.\n   - Isibonelo: Isitha singahamba kusuka A1 kuze B1 noma A1 kuze A2 uma B1 no A2 azikho izitha zakho.\n   - Uma usetha osekile isibhamu noma ifulegi, asikwazi kuhamba.\n2. **Impi:**\n   - Uma uhambe phezu kwesikwele esikhona isitha somngani wakho, kuyoba nokulwa:\n     - Isitha esikhulu kakhulu singawina futhi sisuse isitha somngani wakho.\n     - Uma izikhulu zilingana, izitha zombili zisuswe ethabalen.\n     - **Izimo Ezikhethekile:**\n       - Izibhamu zisusa izitha ezinazihambela kakhulu ngaphandle kwezikhulu zokumba, ezikumba izibhamu.\n       - Izimpimpi zingawina uMnukwa uma impimpi ihambise kuqala kodwa zipote kuzitha zonke.\n3. **Inhloso Yokuqonda:**\n   - Qonda izitha zomngani wakho ngokuhamba kwazo nokulwa.\n   - Vikela ifulegi yakho ngokuhamba ukukhipha ifulegi yakho mngani wakho.\n   - Sebenzisa izikhulu zokungcebeleka ngokuhamba ukuze uthole ulwazi ngemizitha yomngani wakho futhi uhambe kuzitha ezintethe.\n\n### Indlela Yokwenza Ukunyakaza:\n1. Chaza izikoordinethi zesitha ofuna ukunyakaza kwayo noyakho.\n2. Sebenzisa ifomethi: [A0 B0], lapho A0 yisikhala sokuphuma, no B0 yisikhala sokungenela.\n   - Isibonelo: Ukunyakaza isitha kusuka umgwaqo 0, isikwele 0 kuze umgwaqo 1, isikwele 0, faka [A0 B0].\n3. Qinisekisa ukungenela kuhamba ngokulingana nemiyalo yokuhambe phezulu.\n\n### Imiyalo Eyabalulekile:\n- Ithabala lizobonisa izitha zakho nezikhala zazo, isibonelo MN, MS.\n- Ithabala lizobonisa nezikhala ezaziwa zomngani wakho ngaphandle kokubonisa izikhulu zazo, isibonelo ?.\n- Izikwele ezine ~ zingemanzini futhi azikwazi kuhamba phezu kwazo.\n- Njengesifiso, qala umdlalo wakho ngokunyakaza izitha zakho ezikhona phezulu kuze uthole ulwazi ngemizitha yomngani wakho. Umdlali 0 no umdlali 1 baphambili kuze umgwaqo D no G mtawalia.\n\nLena ithabala lamanje:\n"
+  },
+  "board": {
+    "current_board": "Sibhodi lesikhona:\n\n{board}\nEmadudvuza angenile: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Uhlobo lweminyango lisipheli. Mdlali {player_id} alingeneleli iminyango ngendlela [A0 B0].",
+    "invalid_coordinates": "Ifomethi yekusebenta lengasebenti. Umdlali {player_id} akazange afake tinombolo letivumelekile tekucondzisa tintfo.",
+    "not_own_piece": "Umdlali {player_id} kumele ahambe ngayinye yetincenye takhe.",
+    "scout_through_pieces": "Umdlali {player_id} angeke akhone kuhambisa i-scout kulamanye emagugu.",
+    "scout_diagonal": "Umdlali {player_id} angeke akhone kuhambisa i-scout ngekuhambisana.",
+    "non_scout_multi_square": "Umdlalo longasebenti. Letincenye, ngaphandle kwebafundzi, tingashintja sikwele sinye ngesikhatsi ngasinye.",
+    "move_into_lake": "Umdlali {player_id} angeke angene echibini.",
+    "move_onto_own_piece": "Umdlali {player_id} angeke akhone kuhamba endzaweni yakhe.",
+    "move_bomb_or_flag": "Umdlali {player_id} angeke akhone kuhambisa ibhomu nobe ifulegi."
+  },
+  "game_action": {
+    "you_moved": "Usikhulile kudvudvuza umshini wakho kusuka e{source} uye e{dest}.",
+    "opponent_moved": "Umnikeli {player_id} usikhulile kudvudvuza umshini kusuka e{source} uye e{dest}.",
+    "you_equal_ranks": "Uhambe iphese yakho ku{source} ku〕{dest}. Iphese elingena liliphuma ku{attacking_rank} kanti iphese edestini liliphuma ku{target_rank}. Ngokuba izihloko zilinganile, ziphese zonke zingenwa.",
+    "opponent_equal_ranks": "Mdlali {player_id} uhambe iphese ku{source} ku〕{dest}. Iphese elingena liliphuma ku{attacking_rank} kanti iphese edestini liliphuma ku{target_rank}. Ngokuba izihloko zilinganile, ziphese zonke zingenwa.",
+    "you_miner_defused": "Uhambe iphese yakho ku{source} ku〕{dest}. Iphese elingena liliphuma ku{attacking_rank} kanti iphese edestini liliphuma ku{target_rank}. Ngokuba amanini angabusa amabhomu, unile inguqu.",
+    "opponent_miner_defused": "Mdlali {player_id} uhambe iphese ku{source} ku〕{dest}. Iphese elingena liliphuma ku{attacking_rank} kanti iphese edestini liliphuma ku{target_rank}. Ngokuba amanini angabusa amabhomu, wunile inguqu.",
+    "you_bomb_lost": "Uhambe iphese yakho ku{source} ku〕{dest}. Iphese elingena liliphuma ku{attacking_rank} kanti iphese edestini liliphuma ku{target_rank}. Ngokuba iphese elingena ayimineri, unile inguqu.",
+    "opponent_bomb_won": "Umnikazi {player_id} utsintse ipisi yakhe kusuka ku{source} iye ku{dest}. Ipisi leyo eyayitsekela yayi{attacking_rank} kanti ipisi leyayitsekwa yayi{target_rank}. Njengoba ipisi leyo eyayitsekela akusi ngumdlobhilazana, wena uwine empi.",
+    "you_spy_won": "Uhambe iphese yakho ku{source} ku〕{dest}. Iphese elingena liliphuma ku{attacking_rank} kanti iphese edestini liliphuma ku{target_rank}. Ngokuba iphese elingena liyispayi kanti lendawo liyimashal, unile inguqu.",
+    "opponent_spy_lost": "Umnikeli {player_id} usikhulile kudvudvuza umshini kusuka e{source} uye e{dest}. Umshini owayehlasela wayengumshini we{attacking_rank} kanti umshini owayehlaselwa wayengumshini we{target_rank}. Njengoba umshini owayehlasela ngumgwegweli kanti umshini owayehlaselwa ngumshini we-marshal, ulahlekelwe.",
+    "you_higher_won": "Usikhulile kudvudvuza umshini wakho kusuka e{source} uye e{dest}. Umshini owayehlasela wayengumshini we{attacking_rank} kanti umshini owayehlaselwa wayengumshini we{target_rank}. Njengoba umshini owayehlasela ungowemtsetfo omkhulu kunomshini owayehlaselwa, utsiwe.",
+    "opponent_higher_lost": "Umnikeli {player_id} usikhulile kudvudvuza umshini kusuka e{source} uye e{dest}. Umshini owayehlasela wayengumshini we{attacking_rank} kanti umshini owayehlaselwa wayengumshini we{target_rank}. Njengoba umshini owayehlasela ungowemtsetfo omkhulu kunomshini owayehlaselwa, ulahlekelwe.",
+    "you_lower_lost": "Uhambe iphese yakho ku{source} ku〕{dest}. Iphese elingena liliphuma ku{attacking_rank} kanti iphese edestini liliphuma ku{target_rank}. Ngokuba iphese elingena liyinkonjane ephansi kulendawo, unile inguqu.",
+    "opponent_lower_won": "Mdlali {player_id} uhambe iphese ku{source} ku〕{dest}. Iphese elingena liliphuma ku{attacking_rank} kanti iphese edestini liliphuma ku{target_rank}. Ngokuba iphese elingena liyinkonjane ephezulu kulendawo, unile inguqu."
+  },
+  "outcome": {
+    "flag_captured": "Umdlali {player_id} utsatse ifulegi yemphikisi!",
+    "no_movable_pieces": "Mdlali {winner_id} ushaye! Mdlali {loser_id} akunandi iphese ezingenakwazi ukuthi zingene."
+  }
+}

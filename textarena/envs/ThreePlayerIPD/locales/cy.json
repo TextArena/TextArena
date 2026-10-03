@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Rydych yn chwaraewr {player_id} mewn Dylemma Prisoner Iterated 3-chwaraewr. Mae'r gêm yn para am {num_rounds} rownd. Strwythur rownd: • {conv_rounds} troedd sgwrsio am ddim • 1 troedd penderfyniad - cyflwyno un tocyn fesul gwrthwynebydd: '[<opp-id> cooperate]' neu '[<opp-id> defect]' (h.y. '[1 defect] [2 cooperate]'; y diffyn yw 'gydweithredu'). Matrix talu parol (a gymhwysir i bob pâr heb ei orchymyn): - Mae'r ddau yn cydweithredu -> {reward} - Mae'r ddau yn diffyg -> {punishment} - Rydych chi'n diffyg, maent yn cydweithredu -> {temptation} - Rydych chi'n cydweithredu, maent yn diffyg -> {sucker} Y chwaraewr sydd â'r sgôr uchaf ar ddiwedd yr holl rowndiau sy'n ennill."
+  },
+  "round": {
+    "start": "─── Cyfnod Cychwyn {round} ─── Gallwch sgwrsio'n rhydd ar gyfer y rowndiau {conv_rounds} nesaf.",
+    "chat_finished": "Wedi gorffen sgwrs ar gyfer rownd {round}. Cyflwynwch eich penderfyniadau, un tocyn fesul gwrthwynebydd: `[pid cooperate]` neu `[pid defect]`."
+  },
+  "results": {
+    "header": "### Cyfnod {round} - canlyniadau:",
+    "pair_line": "{observation} Chwaraewr {i} vs Chwaraewr {j} dewisodd {choice_i} a {choice_j} yn y drefn honno (Cwaraewr {i} a enillodd {gain_i}, Chwaraewr {j} a enillodd {gain_j})",
+    "scores_open": "{observation} -> Graddau presennol: ",
+    "score_first": "{observation}Cynhyrchydd {player_id} ({score})",
+    "score_next": "{observation}; Chwaraewr {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Sgôr terfynol: {scores}.  Grwpiau rhestru (waeth→gorau): {groups}"
+  }
+}

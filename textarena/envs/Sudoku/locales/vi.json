@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id}. Bạn đang chơi Sudoku.\nDưới đây là trạng thái hiện tại của lưới Sudoku. Mỗi hàng được đánh số từ 1 đến 9, và mỗi cột cũng được đánh số từ 1 đến 9.\nCác ô trống được biểu diễn bằng '.', và các ô đã được điền chứa các chữ số từ 1 đến 9.\n\nLưới Sudoku hiện tại:\nMục tiêu của bạn là điền các chữ số từ 1 đến 9 vào các ô trống trong lưới 9x9 sao cho:\n1. Mỗi hàng chứa tất cả các chữ số từ 1 đến 9 mà không lặp lại.\n2. Mỗi cột chứa tất cả các chữ số từ 1 đến 9 mà không lặp lại.\n3. Mỗi lưới con 3x3 chứa tất cả các chữ số từ 1 đến 9 mà không lặp lại.\n\nLuật và Hướng dẫn:\n1. **Không được ghi đè** các số ban đầu đã được cung cấp trong lưới.\n2. **Chỉ điền** vào các ô trống được biểu diễn bằng '.'.\n3. Bạn có thể trả lời theo cách bạn muốn, nhưng đảm bảo rằng câu trả lời của bạn bao gồm định dạng '[row column number]'.\n4. **Đảm bảo** rằng nước đi của bạn không vi phạm luật Sudoku. Các nước đi không hợp lệ sẽ bị phạt.\nVí dụ:\n- **Nước đi hợp lệ**:\n  - Đoạn lưới trước khi đi:\n  \n  - Nước đi: `[5 3 7]`\n  - Giải thích: Đặt 7 tại hàng 5, cột 3 không vi phạm bất kỳ luật Sudoku nào.\n\n- **Nước đi không hợp lệ** (Ghi đè lên ô đã được điền):\n  - Đoạn lưới trước khi đi:\n  \n  - Nước đi: `[1 1 9]`\n  - Giải thích: Ô (1,1) đã được điền với 5. Bạn không thể ghi đè lên nó.\n\n- **Nước đi không hợp lệ** (Vi phạm luật Sudoku):\n  - Đoạn lưới trước khi đi:\n  \n  - Nước đi: `[1 3 5]`\n  - Giải thích: Đặt 5 tại hàng 1, cột 3 vi phạm luật vì 5 đã tồn tại trong hàng 1.\n\nLịch sử các nước đi và suy nghĩ của bạn sẽ được bổ sung khi bạn chơi nhiều vòng hơn. Sử dụng lịch sử các nước đi của bạn để cải thiện quyết định của bạn bằng cách tránh các nước đi bạn đã thử. Chúc may mắn!\n\n"
+  },
+  "board": {
+    "game_board": "Bàn cờ:\n{board}",
+    "board_state": "Trạng thái bàn cờ: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Định dạng nước đi không hợp lệ. Người chơi {player_id} không trả lời với định dạng 'row column number' hợp lệ.",
+    "out_of_bounds": "Nước đi không hợp lệ. Người chơi {player_id} đã cố gắng đặt {num} tại ({row}, {col}), nằm ngoài giới hạn.",
+    "overwrite": "Nước đi không hợp lệ. Người chơi {player_id} đã cố gắng ghi đè lên một ô đã được điền ({row}, {col}).",
+    "violates_rules": "Nước đi không hợp lệ. Người chơi {player_id} đã cố gắng đặt {num} tại ({row}, {col}), vi phạm luật Sudoku."
+  },
+  "outcome": {
+    "win": "Chúc mừng! Người chơi {player_id} đã hoàn thành bài toán Sudoku.",
+    "turn_limit": "Hạn chế lượt đã đạt. Bạn đã điền đúng {percent}% các ô trống."
+  }
+}

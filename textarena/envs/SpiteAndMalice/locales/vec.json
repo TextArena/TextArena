@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ti xe Player {player_id} in un xogo a do giocatori de Spite and Malice. El to obietivo xe de esar el primo a svodar la to pila de payoff.\n\n### Panorama del Xogo:\n- L'obietivo xe de svodar la to pila de payoff xugando carte a le pile sentrali.\n- Ti pol xugar carte da tre fonti:\n  1. La to **man** (ti scumi ogni turno con fino a 5 carte in man).\n  2. La **carta in sima de la to pila de payoff**.\n  3. La **carta in sima de una de le to pile de scarto**.\n\n### Regole del Xogo:\n- Ti pol xugar na carta a una pila sentral se la xe **un rango pi alto** de la carta in sima de quella pila (le pile sentrali scumia con l'Asso e va fino a la Regina; i Re xe selvadeghi - i pol esar xugai su ogni carta ma no i canbia la sequensa dei ranghi. Sto vol dir che se un Re xe doparà dopo el 4, alora quel Re xe rango 5 e la proxima carta deve esar un 6).\n- Se no ti pol xugar altre carte, ti devi **scartar na carta** a una de le to pile de scarto par finir el to turno.\n- Se na pila sentral riva a la Regina, la sarà svodada automaticamente.\n- L'ordine dei ranghi xe: A=1, 2=2, ..., 9=9, J=10, Q=11, K come selvadeghi.\n\n### Azioni:\n1. **Tirar**: A l'inizio del to turno, tira carte par inpienar la to man fino a 5 carte. Inserisci **[draw]** par scumiar.\n2. **Xugar na Carta**: Par xugar na carta, specifica la carta e la pila sentral in sto modo: **[play A♠ 0]** (dove 'A♠' xe la carta e '0' xe l'indice de la pila sentral).\n3. **Scartar**: Se no ti pol xugar altre carte, scarta na carta da la to man a una pila de scarto par finir el to turno. Inserisci **[discard A♠ 1]** (dove 'A♠' xe la carta e '1' xe l'indice de la pila de scarto). Nota che no ti pol scartar nissuna carta da la pila de payoff. Ti pol scartar solo le carte da la to man.\n\n"
+  },
+  "board": {
+    "current_board": "Tabellone Atuale:\n\n{board}\nMosse Disponibili: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pile Sentrali ---\n",
+    "pile": "{observation}Mucchio {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vista del Giocatore {player_id} ---\n",
+    "payoff": "{observation}Pila de Payoff (Carta in sima): {top_card}, Lunghezza de la Pila de Payoff: {payoff_length}\n",
+    "hand": "{observation}Man: {hand} ",
+    "discard": "{observation}Pile de Scarto: {discard}\n",
+    "empty": "No ghe xe niente."
+  },
+  "game_message": {
+    "no_cards_left": "No ghe xe più carte da tirar. Recordève che podeu zugàr carte da ste fonti:\n  1. La vostra **man**.\n  2. La **carta in sima de ła vostra pila de pagamento**.\n  3. La **carta in sima de una de łe vostre pile de scarto**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de mossa invàlida. El xugador {player_id} no ga risposto co na mossa valida in parentesi quadrate.",
+    "invalid_play": "Xugo invalido. El giocatore {player_id} ha provà a xugar {card} su la pila sentral {index}.",
+    "discard_from_payoff": "Scartamento invalido. El xugador {player_id} el ga tentà de scartar na carta da ła pila del pagamento.",
+    "discard_not_in_hand": "Scartamento invalido. El xugador {player_id} el ga tentà de scartar na carta che no ła xe inteła man.",
+    "wrong_move_type": "Tipo de mossa invàlida. El xugador {player_id} no ga risposto co un tipo de mosse válido."
+  },
+  "game_action": {
+    "you_drew": "Te ga tirà le carte.",
+    "opponent_drew": "El xugador {player_id} el gà tirà carte.",
+    "you_played": "Te ga zogà {card} su la pila de centro {index}.",
+    "opponent_played": "El xugador {player_id} el zugava {card} su ła pila sentrałe {index}.",
+    "you_discarded": "Ti hai scartà {card} a la pila de scarto {index}, che vol dir che ti hai finio el to turno. Nissuna azione ulteriore xe considerada par sto turno. El giocatore {next_player_id} andrà dopo.",
+    "opponent_discarded": "Xugador {player_id} ga descardà {card} inte ła pila de scarto {index}, che vol dir che i ga finìo el so turno. Nisuna altra azion de Xugador {player_id} ła sarà considerada par sto turno. Xugador {next_player_id}, andarè vanti ti. Prego, inserissi ła to azion inte el formato [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "El giocatore {current_player} ha finio la so pila de payoff! El giocatore {current_player} vince!",
+    "deadlock_player_0": "Stallo ragiunto! El giocatore 0 vince con {player_0_payoff} carte rimanenti contro le {player_1_payoff} carte del giocatore 1.",
+    "deadlock_player_1": "Stallo ragiunto! El giocatore 1 vince con {player_1_payoff} carte rimanenti contro le {player_0_payoff} carte del giocatore 0.",
+    "deadlock_tie": "Stallo ragiunto con parità! I do giocatori hanno {player_0_payoff} carte rimanenti. El giocatore {current_player} vince par default."
+  }
+}

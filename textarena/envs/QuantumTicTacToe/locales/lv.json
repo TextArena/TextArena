@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} Kvantu Tic Tac Toe spēlē.\nJūsu zīme ir '{symbol}', un jūsu gājienu numuri vienmēr ir {parity} (piemēram, X1, X3 vai O2, O4).\n\nMērķis: Uzvarēt, izveidojot trīs klasiskas zīmes rindu (no superpozīcijām).\n\nKā spēlēt:\n- Katrā gājienā novietojiet spīķa zīmi divos dažādos tukšos kvadrātos, izmantojot formātu '[a,b]'.\n- Šīs zīmes ir sapinātas, un atzīmētas kā 'X1 / X1' vai 'O4 / O4'.\n- Jūs nevarat novietot spīķa zīmi kvadrātā, kas jau ir sabrukušas (solidificējies).\n\nSabrukšanas noteikums:\n- Ja jūsu gājiens izveido ciklu sapinājuma grafā, tas sabrūk automātiski.\n- Katra spīķa zīme ciklā pārvēršas par klasisku zīmi vienā no divām pozīcijām.\n- Jebkuras atkarīgās spīķa zīmes arī sabrūk.\n\nUzvara:\n- Spēle beidzas, kad spēlētājs ir ieguvis trīs klasiskas zīmes rindā.\n- Ja abi spēlētāji iegūst rindu vienā un tajā pašā sabrukšanā, uzvarētājs ir tas, kam ir zemākais maksimālais gājienu numurs.\n\nPiemēra gājiens: '[0,4]' novieto spīķa zīmi šūnās 0 un 4."
+  },
+  "board": {
+    "current_board": "Kvantu Tic Tac Toe galdiņš:\n\n{board}\n\nIesniegiet savu gājienu kā '[a,b]', lai novietotu kvantu zīmi divās vietās."
+  },
+  "invalid_move": {
+    "wrong_format": "Nepareizs formāts. Izmantojiet '[a,b]'.",
+    "invalid_cells": "Nepareizi vai dublēti šūnu indeksi.",
+    "already_solidified": "Viena no šūnām jau ir solidificējusies."
+  },
+  "game_action": {
+    "placed": "Spēlētājs {player_id} novietoja savu zīmi superpozīcijā starp šūnām {pos_a} un {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Atkarīgā superpozīcija izšķirta. Šūna ({r}, {c}) tagad ir {symbol}.",
+    "last_cell_resolved": "Superpozīcija pēdējai šūnai izšķirta. Šūna ({r}, {c}) tagad ir {symbol}.",
+    "superposition_resolved": "Superpozīcija izšķirta. Šūna ({r}, {c}) tagad ir {symbol}."
+  },
+  "outcome": {
+    "win": "Spēlētājs {player_id} uzvar ar solidificētām zīmēm!",
+    "draw": "Spēle ir neizšķirta!"
+  }
+}

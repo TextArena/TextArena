@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Siz Stratego-da Oyunçu {player_id}-siniz.\nHədəfiniz rəqibinizin Bayrağını ələ keçirmək və ya onların bütün hərəkətli hissələrini aradan qaldırmaqdır.\nSizin ordunuz taxtada sizin üçün yerləşdirilib, o cümlədən Bayrağınız, Bombalarınız və digər müxtəlif rütbəli hissələriniz.\n\n### Oyun Təlimatları\n1. **Hərəkət Qaydaları:**\n   - Sizin növbənizdə, siz bir hissəni bitişik kvadrata (yuxarı, aşağı, sola və ya sağa) bir addım hərəkət etdirə bilərsiniz.\n   - Məsələn: Bir hissə A1-dən B1-ə və ya A1-dən A2-yə hərəkət edə bilər, əgər B1 və A2 oyunçunun öz hissələri ilə yerləşdirilməyibsə.\n   - Əgər seçilmiş hissə Bomba və ya Bayraqdırsa, onu hərəkət etdirmək olmaz.\n2. **Döyüşlər:**\n   - Əgər siz rəqibin hissəsi ilə işğal olunmuş kvadrata hərəkət etsəniz, döyüş baş verəcək:\n     - Daha yüksək rütbəli hissə qalib gəlir və rəqibin hissəsini aradan qaldırır.\n     - Əgər rütbələr bərabərdirsə, hər iki hissə taxtadan çıxarılır.\n     - **Xüsusi Hallar:**\n       - Bombalar əksər hücum edən hissələri aradan qaldırır, lakin Mədənçilər Bombaları zərərsizləşdirir.\n       - Casuslar Marşal üzərində qələbə qazana bilər, əgər Casus ilk hücum etsə, lakin digər bütün hissələrə uduzur.\n3. **Strateji Məqsədlər:**\n   - Rəqibinizin hissələrini onların hərəkətləri və döyüşləri vasitəsilə tanımağa çalışın.\n   - Bayrağınızı qoruyarkən rəqibinizin Bayrağını ələ keçirməyə çalışın.\n   - Skautları strategiya ilə istifadə edin ki, rəqibinizin hissələri haqqında məlumat əldə edəsiniz və zəif hissələrə hücum edəsiniz.\n\n### Necə Hərəkət Etmək:\n1. Hərəkət etdirmək istədiyiniz hissənin koordinatlarını və onun təyinatını müəyyən edin.\n2. [A0 B0] formatını istifadə edin, burada A0 mənbə mövqeyi, B0 isə təyinat mövqeyidir.\n   - Məsələn: Bir hissəni 0-cı sətirdən, 0-cı sütundan 1-ci sətirdə, 0-cı sütuna hərəkət etdirmək üçün [A0 B0] daxil edin.\n3. Hərəkət qaydalarına uyğun olaraq təyinatın düzgün olduğunu yoxlayın.\n\n### Vacib Qeydlər:\n- Taxta sizin hissələrinizi və onların mövqelərini göstərəcək, məsələn MN, MS.\n- Taxta həmçinin rəqibinizin hissələrinin bilinən mövqelərini göstərəcək, lakin onların rütbələrini açığa vurmayacaq, məsələn ?.\n- ~ ilə işarələnmiş şəbəkələr göllərdir və onlara hərəkət etmək olmaz.\n- Oyunu sizin cəbhə xəttindəki hissələrinizi hərəkət etdirərək başlamaq tövsiyə olunur ki, rəqibinizin hissələri haqqında məlumat əldə edəsiniz. Oyunçu 0 və oyunçu 1-in cəbhə xəttləri müvafiq olaraq D və G sətirləridir.\n\nBurada cari taxta vəziyyəti var:\n"
+  },
+  "board": {
+    "current_board": "Cari Taxta:\n\n{board}\nMövcud Hərəkətlər: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Yanlış hərəkət formatı. Oyunçu {player_id} [A0 B0] formatında hərəkət daxil etmədi.",
+    "invalid_coordinates": "Yanlış hərəkət formatı. Oyunçu {player_id} düzgün koordinatlar daxil etmədi.",
+    "not_own_piece": "Yanlış hərəkət formatı. Oyunçu {player_id} öz hissəsini hərəkət etdirməlidir.",
+    "scout_through_pieces": "Yanlış hərəkət formatı. Oyunçu {player_id} skautu digər hissələrdən keçirə bilməz.",
+    "scout_diagonal": "Yanlış hərəkət formatı. Oyunçu {player_id} skautu diaqonal olaraq hərəkət etdirə bilməz.",
+    "non_scout_multi_square": "Yanlış hərəkət formatı. Skaut olmayan hissələr yalnız bir kvadrata hərəkət edə bilər.",
+    "move_into_lake": "Yanlış hərəkət formatı. Oyunçu {player_id} gölüə hərəkət edə bilməz.",
+    "move_onto_own_piece": "Yanlış hərəkət formatı. Oyunçu {player_id} öz hissəsinin üzərinə hərəkət edə bilməz.",
+    "move_bomb_or_flag": "Yanlış hərəkət formatı. Oyunçu {player_id} bomba və ya bayraq hərəkət etdirə bilməz."
+  },
+  "game_action": {
+    "you_moved": "Siz hissənizi {source}-dan {dest}-ə hərəkət etdirdiniz.",
+    "opponent_moved": "Oyunçu {player_id} hissəsini {source}-dan {dest}-ə hərəkət etdirdi.",
+    "you_equal_ranks": "Siz hissənizi {source}-dan {dest}-ə hərəkət etdirdiniz. Hücum edən hissə {attacking_rank} idi və hədəf hissə {target_rank} idi. Rütbələr bərabər olduğundan, hər iki hissə itirildi.",
+    "opponent_equal_ranks": "Oyunçu {player_id} hissəsini {source}-dan {dest}-ə hərəkət etdirdi. Hücum edən hissə {attacking_rank} idi və hədəf hissə {target_rank} idi. Rütbələr bərabər olduğundan, hər iki hissə itirildi.",
+    "you_miner_defused": "Siz hissənizi {source}-dan {dest}-ə hərəkət etdirdiniz. Hücum edən hissə {attacking_rank} idi və hədəf hissə {target_rank} idi. Mədənçi bombanı zərərsizləşdirdiyindən, siz döyüşü qazandınız.",
+    "opponent_miner_defused": "Oyunçu {player_id} hissəsini {source}-dan {dest}-ə hərəkət etdirdi. Hücum edən hissə {attacking_rank} idi və hədəf hissə {target_rank} idi. Mədənçi bombanı zərərsizləşdirdiyindən, siz döyüşü uduzdunuz.",
+    "you_bomb_lost": "Siz hissənizi {source}-dan {dest}-ə hərəkət etdirdiniz. Hücum edən hissə {attacking_rank} idi və hədəf hissə {target_rank} idi. Hücum edən hissə mədənçi olmadığından, siz döyüşü uduzdunuz.",
+    "opponent_bomb_won": "Oyunçu {player_id} hissəsini {source}-dan {dest}-ə hərəkət etdirdi. Hücum edən hissə {attacking_rank} idi və hədəf hissə {target_rank} idi. Hücum edən hissə mədənçi olmadığından, siz döyüşü qazandınız.",
+    "you_spy_won": "Siz hissənizi {source}-dan {dest}-ə hərəkət etdirdiniz. Hücum edən hissə {attacking_rank} idi və hədəf hissə {target_rank} idi. Casus Marşal üzərində qələbə qazandığından, siz döyüşü qazandınız.",
+    "opponent_spy_lost": "Oyunçu {player_id} hissəsini {source}-dan {dest}-ə hərəkət etdirdi. Hücum edən hissə {attacking_rank} idi və hədəf hissə {target_rank} idi. Casus Marşal üzərində qələbə qazandığından, siz döyüşü uduzdunuz.",
+    "you_higher_won": "Siz hissənizi {source}-dan {dest}-ə hərəkət etdirdiniz. Hücum edən hissə {attacking_rank} idi və hədəf hissə {target_rank} idi. Siz daha yüksək rütbəli olduğunuzdan, siz döyüşü qazandınız.",
+    "opponent_higher_lost": "Oyunçu {player_id} hissəsini {source}-dan {dest}-ə hərəkət etdirdi. Hücum edən hissə {attacking_rank} idi və hədəf hissə {target_rank} idi. Siz daha yüksək rütbəli olduğunuzdan, siz döyüşü uduzdunuz.",
+    "you_lower_lost": "Siz hissənizi {source}-dan {dest}-ə hərəkət etdirdiniz. Hücum edən hissə {attacking_rank} idi və hədəf hissə {target_rank} idi. Siz daha aşağı rütbəli olduğunuzdan, siz döyüşü uduzdunuz.",
+    "opponent_lower_won": "Oyunçu {player_id} hissəsini {source}-dan {dest}-ə hərəkət etdirdi. Hücum edən hissə {attacking_rank} idi və hədəf hissə {target_rank} idi. Siz daha aşağı rütbəli olduğunuzdan, siz döyüşü qazandınız."
+  },
+  "outcome": {
+    "flag_captured": "Oyunçu {player_id} rəqibin bayrağını ələ keçirdi!",
+    "no_movable_pieces": "Oyunçu {winner_id} qazandı! Oyunçu {loser_id} daha heç bir hərəkətli hissəyə malik deyil."
+  }
+}

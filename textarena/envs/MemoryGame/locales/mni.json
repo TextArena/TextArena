@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Nang Player {player_id} ni. Nang Memory Game khelgi khudammi.\nNang gi lakpa, board da leiriba card sagi khudingmak pair khudingmakta thokpa khudingmak nang gi opponent singgi.\nNang gi turn da, card 2 ta flip toukhiba row leiriba column number singbu first leiriba second card bu respectively '[0 1 1 0]' gi matamda, first card row 0 leiriba column 1 da, leiriba second card row 1 leiriba column 0 da.\nCard 2 ta match toukhiba, nang point 1 amasung card 2 ta face up toukhiba. Match toukhibasu, card 2 ta face down toukhiba, e.g. '.'.\nGame over toukhiba, pair khudingmak sagi khudingmakta thokpa toukhiba."
+  },
+  "board": {
+    "current_board": "Lairik-taba bor:\n{board}",
+    "current_game_board": "Lairik-taba khel-gi bor:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "{player_id} khut-thokki chei-thokki chei-thaba matamda leiriba thong-an-gi chei-thokki chei-thaba thagat-taba.",
+    "out_of_bounds": "{player_id}  ki player na position chei adu oina leirangba out-of-bounds chei adu leirangba.",
+    "same_card_twice": "{player_id} na card khan-naba thok-ee chei-thaba.",
+    "already_matched": "খেলর {player_id}না কার্দ অমত্তা নত্ত্রগা অনিমকপু হান্নদগী মেৎ তৌদুনা লৈরবা অদু খনখি।"
+  },
+  "game_message": {
+    "cards_match": "Khelgi {player_id} na leiriba card [{r1} {c1}] amasung [{r2} {c2}] khut ahongba!",
+    "cards_no_match": "The cards selected by Player {player_id} do not match. Cards at positions [{r1} {c1}] and [{r2} {c2}] are {pos1} and {pos2} respectively."
+  },
+  "outcome": {
+    "draw": "Khut-thokki khut-thaba chei-thokki chei-thaba pum-nom pang-gi man-naba.",
+    "win": "{winner_id} na jing-lam-ba!",
+    "turn_limit": "The turn limit has been reached. The game is over. Player 0 scored {score_0} points, Player 1 scored {score_1} points.",
+    "turn_limit_win": "{reason} {winner_id} na jing-lam-ba!"
+  }
+}

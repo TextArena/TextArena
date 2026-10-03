@@ -1,0 +1,1545 @@
+{
+  "forfeit": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Game forfeited. Final score: 0 cards in foundations.",
+        "role": "Player 0",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 0/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 1/200\n\nStock: 23 cards\nWaste (W): 5♥️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[forfeit]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[forfeit]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 2/200\n\nStock: 23 cards\nWaste (W): 5♥️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": 0
+    }
+  },
+  "format_errors_a": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 0/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "draw",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "draw",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Invalid action format. Action should be in brackets. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[draw",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Invalid action format. Missing closing bracket ']' Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Empty command. Type 'draw' or 'move <source> <destination> [count]' Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[ ,draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[ ,draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Action 1: Empty action Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[foo]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[foo]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Action 1: Unknown command 'foo'. Use 'draw', 'move <source> <destination> [count]', or 'forfeit' Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      }
+    ],
+    "rewards": null
+  },
+  "format_errors_b": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 0/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move W]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move W]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Action 1: Move command requires source and destination. Usage: 'move <source> <destination> [count]' Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[move T1 T2 0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T1 T2 0]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Action 1: Count must be positive or 'all' Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[move T1 T2 x]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T1 T2 x]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You attempted an invalid move. Reason: Action 1: Invalid count. Use a number or 'all' Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      }
+    ],
+    "rewards": null
+  },
+  "illegal_moves": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 11
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 0/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move W X1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move W X1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1 failed: Invalid pile name. Use W, F1-F4, or T1-T7",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[move T1 F1 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T1 F1 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1 failed: Can only move 1 card to foundation",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[move F1 F2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move F1 F2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1 failed: Cannot move from foundation to foundation",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[move W T1 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move W T1 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1 failed: Can only move 1 card from waste to tableau",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[move T1 F1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T1 F1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1 failed: Cannot move tableau card to that foundation pile",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 6/200\n\nStock: 23 cards\nWaste (W): 5♥️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move W F1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move W F1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1 failed: Cannot move waste card to that foundation pile",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[move F1 T1 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move F1 T1 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1 failed: Can only move 1 card from foundation to tableau",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[move F1 T1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move F1 T1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1 failed: Foundation F1 is empty",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[move T1 W]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T1 W]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1 failed: Cannot move to waste or stock",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[move T2 T3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T2 T3]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1 failed: Cannot move 1 card(s) from T2 to T3",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "move_all": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 0/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move T1 T6 all]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T1 T6 all]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Moved 1 card(s) from tableau T1 to T6",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 1/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: --\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️ 10♣️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move T1 T2 all]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T1 T2 all]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1 failed: No face-up cards to move",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "multi_action": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 5
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 0/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw, move W F1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw, move W F1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Executed 1 action(s) before failure.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Action 2 failed: Cannot move waste card to that foundation pile",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[move T4 T2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T4 T2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Moved 1 card(s) from tableau T4 to T2",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 2/200\n\nStock: 23 cards\nWaste (W): 5♥️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️ Q♣️\n  T3: XX XX K♥️\n  T4: XX XX 7♦️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move T6 T2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T6 T2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Moved 1 card(s) from tableau T6 to T2",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 3/200\n\nStock: 23 cards\nWaste (W): 5♥️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️ Q♣️ J♥️\n  T3: XX XX K♥️\n  T4: XX XX 7♦️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX A♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move T6 F1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T6 F1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Moved card from tableau T6 to foundation F1",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 4/200\n\nStock: 23 cards\nWaste (W): 5♥️\n\nFoundations:\n  F1: A♥️\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️ Q♣️ J♥️\n  T3: XX XX K♥️\n  T4: XX XX 7♦️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX J♣️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move F1 T1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move F1 T1]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1 failed: Cannot place foundation card on tableau T1",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "play_moves": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 6
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 0/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move T4 T2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T4 T2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Moved 1 card(s) from tableau T4 to T2",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 1/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️ Q♣️\n  T3: XX XX K♥️\n  T4: XX XX 7♦️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move T6 T2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T6 T2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Moved 1 card(s) from tableau T6 to T2",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 2/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️ Q♣️ J♥️\n  T3: XX XX K♥️\n  T4: XX XX 7♦️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX A♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move T7 T2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T7 T2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Moved 1 card(s) from tableau T7 to T2",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 3/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️ Q♣️ J♥️ 10♠️\n  T3: XX XX K♥️\n  T4: XX XX 7♦️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX A♥️\n  T7: XX XX XX XX XX 10♥️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move T2 T3 3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T2 T3 3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Moved 3 card(s) from tableau T2 to T3",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 4/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️ Q♣️ J♥️ 10♠️\n  T4: XX XX 7♦️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX A♥️\n  T7: XX XX XX XX XX 10♥️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 5/200\n\nStock: 23 cards\nWaste (W): 5♥️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️ Q♣️ J♥️ 10♠️\n  T4: XX XX 7♦️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX A♥️\n  T7: XX XX XX XX XX 10♥️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move W T2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move W T2]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1 failed: Cannot place waste card on that tableau pile",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": null
+  },
+  "tableau_to_foundation": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 3
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 0/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move T4 T2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T4 T2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Moved 1 card(s) from tableau T4 to T2",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 1/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️ Q♣️\n  T3: XX XX K♥️\n  T4: XX XX 7♦️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move T6 T2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T6 T2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Moved 1 card(s) from tableau T6 to T2",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 2/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️ Q♣️ J♥️\n  T3: XX XX K♥️\n  T4: XX XX 7♦️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX A♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move T6 F1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move T6 F1]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Moved card from tableau T6 to foundation F1",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 3/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: A♥️\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️ Q♣️ J♥️\n  T3: XX XX K♥️\n  T4: XX XX 7♦️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX J♣️\n  T7: XX XX XX XX XX XX 10♠️",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "waste_to_foundation": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 9
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 0/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 1/200\n\nStock: 23 cards\nWaste (W): 5♥️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 2/200\n\nStock: 22 cards\nWaste (W): 8♦️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 3/200\n\nStock: 21 cards\nWaste (W): 10♦️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 4/200\n\nStock: 20 cards\nWaste (W): K♣️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 5/200\n\nStock: 19 cards\nWaste (W): K♠️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 6/200\n\nStock: 18 cards\nWaste (W): 7♥️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 7/200\n\nStock: 17 cards\nWaste (W): 7♠️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 8/200\n\nStock: 16 cards\nWaste (W): A♦️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move W F1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move W F1]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Moved card from waste to foundation F1",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 9/200\n\nStock: 16 cards\nWaste (W): 7♠️\n\nFoundations:\n  F1: A♦️\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "waste_to_tableau": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 16
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\nGame Rules:\n- Foundation piles (F1-F4): Build up from Ace to King in suit\n- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n- Stock: Draw cards to waste pile\n- Waste (W): Top card available for play\n\nCommands:\n- 'draw' - Draw cards from stock to waste\n- 'move <source> <destination> [count]' - Move cards between piles\n  Examples: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count can also be 'all', which will try to move all face-up cards.\n- 'forfeit' - End the game immediately and lock in your current score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nYou can execute multiple actions in one turn by separating them with commas:\n  Example: 'draw, move W T1, move T2 F1'\n\nOnly Kings can be placed on empty tableau piles.\nActions execute in order - if one fails, the remaining actions are skipped.\nUse 'forfeit' if you believe the game is impossible to win.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 0/200\n\nStock: 24 cards\nWaste (W): --\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 1/200\n\nStock: 23 cards\nWaste (W): 5♥️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 2/200\n\nStock: 22 cards\nWaste (W): 8♦️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 3/200\n\nStock: 21 cards\nWaste (W): 10♦️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 4/200\n\nStock: 20 cards\nWaste (W): K♣️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 5/200\n\nStock: 19 cards\nWaste (W): K♠️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 6/200\n\nStock: 18 cards\nWaste (W): 7♥️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 7/200\n\nStock: 17 cards\nWaste (W): 7♠️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 8/200\n\nStock: 16 cards\nWaste (W): A♦️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 9/200\n\nStock: 15 cards\nWaste (W): 3♠️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 10/200\n\nStock: 14 cards\nWaste (W): J♠️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 11/200\n\nStock: 13 cards\nWaste (W): 3♣️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 12/200\n\nStock: 12 cards\nWaste (W): 2♥️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 13/200\n\nStock: 11 cards\nWaste (W): Q♥️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 14/200\n\nStock: 10 cards\nWaste (W): 6♣️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Drew card(s) from stock to waste.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 15/200\n\nStock: 9 cards\nWaste (W): 9♥️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[move W T1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[move W T1]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Action 1: Moved card from waste to tableau T1",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "=== KLONDIKE SOLITAIRE ===\nTurn: 16/200\n\nStock: 9 cards\nWaste (W): 6♣️\n\nFoundations:\n  F1: --\n  F2: --\n  F3: --\n  F4: --\n\nTableau:\n  T1: 10♣️ 9♥️\n  T2: XX K♦️\n  T3: XX XX K♥️\n  T4: XX XX XX Q♣️\n  T5: XX XX XX XX 6♥️\n  T6: XX XX XX XX XX J♥️\n  T7: XX XX XX XX XX XX 10♠️",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  }
+}

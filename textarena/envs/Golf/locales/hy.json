@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Դուք խաղում եք Գոլֆ (Քարտային խաղ) - Խաղացող {player_id}։\nՆպատակ՝ Ստանալ ամենացածր ընդհանուր միավորը այս մեկ փուլում։ Եթե սյուները նույն արժեքն ունեն, դրանք գումարվում են 0-ի տեսքով։\nՔարտերի արժեքներ՝ A=1, 2-10=սեփական արժեք, J/Q=10, K=0\n\nԳործողություններ (օգտագործեք ճշգրիտ փակագծերը)\n- '[draw]' - Վերցնել տեղակայումից\n- '[take]' - Վերցնել մերժված քարտերի կույտից\n- '[swap X Y]' - Փոխել վերցրած քարտը X (շարք) Y (սյուն)\n- '[discard]' - Մերժել վերցրած քարտը\n"
+  },
+  "board": {
+    "drew": "Դուք վերցրեցիք՝ {card}\nԱյժմ դուք պետք է [swap X Y] կամ [discard] այն։",
+    "took": "Դուք վերցրել եք: {card} նետվող կուտակից Դուք պետք է [swap X Y] դրա հետ (չի կարող նետվել):",
+    "peeked": "Դուք նայում եք դիրք ({row},{col}): {card}",
+    "turn_view": "Ձեր ձեռքը: {hand} Կտրեք կուտակվածը: {discard} {options}",
+    "none": "Ոչ մի"
+  },
+  "options": {
+    "final_turns": "Վերջին շրջադարձները: Ձեր տարբերակները: [draw], [take], [peek X Y]",
+    "draw": "Ձեր տարբերակները՝ [draw], [take]",
+    "must_swap": "Դուք պետք է: [swap X Y] (չկարող եք բաց թողնել քարտերը բաց թողնված կույտից)",
+    "swap_or_discard": "Դուք պետք է. [swap X Y] կամ [discard]"
+  },
+  "hand": {
+    "no_cards": "Ոչ մի քարտ",
+    "header": "Հավաքածու: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Խաղացողը {pid} փոխանակեց {new}-ը {old}-ի հետ դիրքում ({row},{col})",
+    "discarded": "Խաղացող {pid} մերժեց {card}"
+  },
+  "message": {
+    "deck_empty": "Դեկը դատարկ է: Խաղն ավարտվում է անմիջապես:",
+    "knocked": "Խաղացող {pid} նոկաուտ! Յուրաքանչյուր այլ խաղացող ստանում է եւս մեկ հերթ:",
+    "final_round": "Խաղացող {pid} {reason}! Յուրաքանչյուր այլ խաղացող ստանում է եւս մեկ հերթ:"
+  },
+  "reason": {
+    "all_revealed": "Բացահայտել է բոլոր քարտերը"
+  },
+  "invalid": {
+    "wrong_action": "Օգտագործեք ճիշտ մեկ կոտորակային գործողություն. [draw], [take], [swap X Y], [discard], [knock] կամ [peek X Y]",
+    "discard_empty": "Թափառվող կուտակը դատարկ է:",
+    "must_draw_first": "Դուք պետք է նախ [draw], [take], [knock] կամ [peek X Y]",
+    "cannot_discard_taken": "Չի կարելի բաց թողնել բաց թողնված քարտը, այն պետք է փոխել:",
+    "have_drawn_card": "Դուք ունեք քարտ, որը պետք է [swap X Y] կամ [discard]:",
+    "need_drawn_swap": "Դուք պետք է վերցրած քարտ ունենաք փոխելու համար։",
+    "need_drawn_discard": "Ձեզ անհրաժեշտ է մի նետված քարտ է թափել.",
+    "out_of_bounds": "Դիրքը սահմաններից դուրս է: Օգտագործեք շարք 1-{max_row}, սյուն 1-{max_col}",
+    "knock_with_card": "Դուք չեք կարող թակոց անել, եթե քարտը հանված է:",
+    "already_knocked": "Ինչ-որ մեկը արդեն խփել է այս շրջանը:",
+    "already_revealed": "Այդ քարտը արդեն բացահայտվել է:"
+  },
+  "summary": {
+    "full": "Խաղն ավարտված է! Խաղացող {winner}-ը հաղթում է {score} միավորով!\n\nՎերջնական հաշիվներ.\n{scores}",
+    "line": "Խաղացող {pid}: {score} միավոր "
+  },
+  "board_str": {
+    "title": "=== Գոլֆի խաղ ===",
+    "discard": "Թափանցման կուտակ: {card}",
+    "knocked": "Խաղացող {pid}-ը հարվածել է!",
+    "player_header": "Խաղացող {pid} (Միավորներ՝ {score}):"
+  }
+}

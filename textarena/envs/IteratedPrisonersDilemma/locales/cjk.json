@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Nwi uka Mwana {player_id} mu Iterated Prisoner's Dilemma ikalamba {num_rounds} mizungu.\n\nMfumo wa Mchezo:\n- Kabla ya kila uamuzi una {total_conversation_rounds} mizungu ya kuongea pasipo kizuizi.\n- Baada ya hapo, wachezaji wote wawili kwa wakati mmoja huchagua kuunga mkono au kutoridhika.\n\nMatrix ya Matokeo (yaliyowekwa kila mzunguko):\n- Wote Wawili Wanaunga Mkono ➜ kila {cooperate_reward}\n- Wote Wawili Wametoridhika ➜ kila {mutual_defect_reward}\n- Mmoja Anatridhika, mmoja Anaunga Mkono ➜ Mtoridhika {defect_reward}, Mshirikishi {sucker_reward}\n\nJinsi ya Kucheza:\n- Wakati wa mazungumzo: andika maandishi yoyote unayotaka.\n- Wakati wa uamuzi: ongeza '[Cooperate]' au '[Defect]' (bila kujali herufi kubwa au ndogo). Unaweza kuongeza maandishi ya ziada kabla/ baada ya kiashiria."
+  },
+  "phases": {
+    "conversation_finished": "Mazungumzo yamekwisha kwa mzunguko {round}. Tafadhali jibu na '[Cooperate]' au '[Defect]' ndani ya \\boxed{{}}.",
+    "starting_round": "--- Kuqalisa Round {round} ---",
+    "round_summary": "Matokeo ya mzunguko {round}:\n{outcome}\nMchezaji 0 alipata {r0} (jumla {score_0}), Mchezaji 1 alipata {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Mchezaji {winner} anashinda {win_score} - {lose_score}.",
+    "draw": "Kalombo! Vakwetuswa wose wakwata {s0}.",
+    "round_both_cooperate": "Bazannyi bombi ba bizana.",
+    "round_both_defect": "Bazannyi bombi bawile.",
+    "round_p0_cooperates_p1_defects": "Wopinzan'i 0 walinganye, wonson'i 1 awile.",
+    "round_p0_defects_p1_cooperates": "Wanzi 0 wawile, wanzi 1 wa lemuka."
+  }
+}

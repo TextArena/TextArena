@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS-localebestand. Vertaal GEEN sleutels (linkerkant). Vertaal alleen waarden (rechterkant).",
+  "_slots": {
+    "{player_id}": "Het nummer van de speler, 0, 1 of 2",
+    "{round}": "Het huidige rondennummer, 1..13",
+    "{prize}": "Het onthulde prijskaartlabel (A, 2..10, J, Q, K) - niet vertalen",
+    "{worth}": "De totale waarde van de prijs inclusief eventuele overgedragen pot",
+    "{hand}": "De overgebleven kaarten van de speler, weergegeven als ingesloten tokens zoals '[A]' '[2]' - niet vertalen",
+    "{bids}": "De neutrale komma-gescheiden lijst van gespeelde kaarten zoals 'P0:10, P1:J, P2:Q' - niet vertalen",
+    "{winner}": "Het spelernummer dat de ronde won",
+    "{pot}": "De potwaarde die deze ronde wordt toegekend of overgedragen",
+    "{scoreline}": "De neutrale actuele scorelijst zoals 'P0:0  P1:0  P2:11' - niet vertalen",
+    "{pid}": "Het spelernummer dat werd geëlimineerd",
+    "{scores}": "De eindscores als een onbewerkte toewijzing van spelernummer naar score - niet vertalen"
+  },
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in Three-Player GOPS.\n- U houdt de 13 kaarten A-K (elk exact één keer).\n- Elke ronde wordt een prijs onthuld. Dien één kaart in zoals `[Q]`, `[10]`, `[2]` …\n- De hoogste kaart wint de prijs (+ eventuele overgedragen pot). Gelijkspel rolt de prijs naar de volgende ronde.\n- Na 13 rondes wint de hoogste totaal. Ongeldige zetten = eliminatie."
+  },
+  "round": {
+    "header": "### Ronde {round}/13 - Prijs: {prize} (waarde {worth})",
+    "hand": "Uw overgebleven hand: {hand}"
+  },
+  "reveal": {
+    "win": "Biedingen » {bids} - Speler {winner} wint {pot}.",
+    "tie": "Biedingen » {bids} - gelijkspel, pot nu {pot}.",
+    "scores": "Scores → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "actie heeft een ingesloten kaart nodig zoals '[Q]'",
+    "bad_card": "kaart al gebruikt of ongeldig"
+  },
+  "elimination": {
+    "player": "Speler {pid} geëlimineerd na herhaalde ongeldige zetten."
+  },
+  "outcome": {
+    "auto_win": "Twee spelers geëlimineerd - automatische winst.",
+    "final": "Eindscores: {scores}"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Wax kaarar ah ma jiraan weli",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Ciyaartoyga keliya vs Dealer\n\n📖 MUUQAALKA CIYAARTA:\n• Waxaad bilawdaa {start_chips} chip\n• Dekkii kaararka ee keliya 52 kaarar (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Waxaad ciyaartaa dealer (guri)\n• Marhalkasta waxay raacdaa qaabka Ultimate Texas Hold'em: waxaad gudbisaan ANTE iyo BLIND bets, hesho 2 kaarar oo qarsoon, go'aan ka gaadho PLAY bets ahaan ee marhalka, kaddibna muuji kartida bulshada iyo barbardhigo gacaylkaaga ugu fiican 5-kaarar ee dealer's.\n• Ujeedadu waa inaad ugu badiso guushaada (marka aad leedahay gacayl fiican), halka aad yareysid khasaartada (marka aad leedahay gacayl xun).\n• Ciyaarta waxay dhammaata marka aad gaadho 0 chip ama ka yar bilawga marhalka (HASI) ama dhamaystirto 1000 marhal oo chip leh (GUUSH)\n\n💰 QAABKA BETTING:\n• ANTE: Qiyamka mandatory ${ante} bet marhalkasta\n• BLIND: Qiyamka mandatory ${ante} bet marhalkasta\n• PLAY: Bet ahaan oo la doorto inta lagu jiro ciyaarta. Marhalkasta, waxaad dooran kartaa HAL KALE oo soo socota: (${ante4} haddii la sameeyo PRE-FLOP, ${ante2} haddii la sameeyo FLOP, ama ${ante} haddii la sameeyo RIVER. Waxaad sidoo kale fold kartaa river, oo aad iska dayacarto gacaylka, oo aad sameyno bet ahayn.)\n\n🎴 KAARARKA QARSOON:\n• Waxaad hesho 2 kaarar oo qarsoon (kaararkaaga qarsoon)\n• Dealer waxay hesho 2 kaarar oo qarsoon (kaararka qarsoon ee dealer)\n• 5 kaarar oo bulsho ah waxay la baxaan qarsoon bilawga\n• Kaararka bulshada waxay muujiyanan marhalka kasta\n\n🏆 DEALER QUALIFICATION:\n• Dealer waxay u baahan tahay inay leedahay ugu yaraan PAIR (2 kaarar oo isku mid ah) si ay uga qalifyo, iyadoo adeegsanaysa 2 kaararka ee gacaylkeeda iyo 5 kaararka bulshada.\n• Uga qalifynta dealer waxay saameynaysaa natiijada betting, sida ay noqon doonto la soo bandhigay.\n\n🎮 MARHALKA CIYAARTA & FARIIMUHA:\n📋 PRE-FLOP:\n  • Fariimaha: [4x] (${ante4}) ama [check]\n  • [4x]: Gudbi ${ante4} PLAY bet, muuji 3 kaararka bulshada ee ugu horeeya\n  • [check]: Bet ahayn oo dheeraad ah, muuji 3 kaararka bulshada ee ugu horeeya\n\n📋 FLOP:\n  • Haddii la sameeyo 4x bet: [skip] oo keliya ayaa la heli karaa (auto-muuji 2 kaararka bulshada ee ugu dambeeya)\n  • Haddii la sameeyn 4x bet ahayn: [2x] (${ante2}) ama [check]\n  • [2x]: Gudbi ${ante2} PLAY bet, muuji 2 kaararka bulshada ee ugu dambeeya\n  • [check]: Bet ahayn oo dheeraad ah, muuji 2 kaararka bulshada ee ugu dambeeya\n\n📋 RIVER:\n  • Haddii la sameeyo 4x ama 2x bet: [skip] oo keliya ayaa la heli karaa (auto-dhaqaaqo showdown)\n  • Haddii la sameeyn PLAY bet ahayn: [1x] (${ante}) ama [fold]\n  • [1x]: Gudbi ${ante} PLAY bet, dhaqaaqo showdown\n  • [fold]: Iska dayacarto gacaylka, waayay ANTE iyo BLIND bets\n\n📋 SHOWDOWN:\n  • Kaararka oo dhan waxay muujiyanan oo la qiimeyn doona\n  • Gacaylka ugu fiican 5-kaarar ee 7 kaararka (2 qarsoon + 5 bulsho)\n  • Bets waxay la saxiix doonaan qaabka bixin\n\n💎 QAABKA BIXIN:\n📊 ANTE BET:\n  • Dealer ma u qalifyo: PUSH (bet la soo celiyay)\n  • Dealer u qalifyo & aad guuleysatay: 1:1 bixin (bet + guush)\n  • Dealer u qalifyo & aad waayay: Bet la waayay\n  • Tie: PUSH (bet la soo celiyay)\n\n📊 BLIND BET:\n  • Lama saameynayo uga qalifynta dealer\n  • Aad guuleysatay: Bet la soo celiyay oo bixin dheeraad ah oo ku salaysan awooda gacaylkaaga\n  • Aad waayay: Bet la waayay\n  • Tie: PUSH (bet la soo celiyay)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Kaarar ka yar Straight: Bixin dheeraad ah oo la hayo\n\n📊 PLAY BET:\n  • Lama saameynayo uga qalifynta dealer\n  • Barbardhig toosan: Gacaylkaaga ugu fiican vs Gacaylka dealer\n  • Aad guuleysatay: 1:1 bixin (bet + guush)\n  • Aad waayay: Bet la waayay\n  • Tie: PUSH (bet la soo celiyay)\n\n🎯 POKER HAND RANKINGS (Ugu fiican ilaa ugu xun):\n  1. Royal Flush: A-K-Q-J-10 oo isku mid ah\n  2. Straight Flush: 5 kaarar oo isku mid ah oo ku xiga\n  3. Four of a Kind: 4 kaarar oo isku mid ah\n  4. Full House: 3 kaarar oo isku mid ah + 2 kaarar oo isku mid ah\n  5. Flush: 5 kaarar oo isku mid ah\n  6. Straight: 5 kaarar oo ku xiga\n  7. Three of a Kind: 3 kaarar oo isku mid ah\n  8. Two Pair: 2 joyn oo kaarar oo isku mid ah\n  9. One Pair: 2 kaarar oo isku mid ah\n  10. High Card: Kaararka ugu sareeya oo guuleysta\n\n⌨️  FARIIMUHA AHAAN:\n• [4x] ama [play bet 4x]: Gudbi ${{self.ante_amount*4}} PLAY bet\n• [2x] ama [play bet 2x]: Gudbi ${{self.ante_amount*2}} PLAY bet\n• [1x] ama [play bet 1x]: Gudbi ${{self.ante_amount*1}} PLAY bet\n• [check] ama [c]: Check (bet ahayn oo dheeraad ah)\n• [fold] ama [f]: Fold (iska dayacarto gacaylka)\n• [skip] ama [s]: Skip ilaa marhalka xigay (haddii la hayo fariin ahayn)\n\n💡 TALLOOYINKA ISTIRAATIJI:\n• Gacaylka bilawga ee awood badan (joyn, kaararka sare) waxay si joyn ugu fiicnaan karaan 4x bets\n• Uga qalifynta dealer waxay saameynaysaa - gacaylka xun waxay noqon kartaa push haddii dealer u qalifyn waayo\n• BLIND bet waxay noqon kartaa awood badan oo ku salaysan gacaylkaaga (Royal Flush = 500:1!)\n• Ilaali tirada chip ee aad leedahay! Haddii ay gaadho 0 ama ka yar bilawga marhalka, aad waayaysid.\n\n⚠️  MUHIMAADKA:\n• ANTE iyo BLIND bets waa mandatory marhalkasta\n• PLAY bets waa la doorto oo ahaan\n• Hubi inaad gudbiso fariin sax ah, oo hal fariin oo keliya marhalkasta.\n\n",
+    "state": " Wareega {round}  Chips: {chips}  Gacantaada: {hand}  Khamaarka hadda jira: Ante ${ante}, Blind ${blind}, Play ${play}  Marxaladda: {phase}  Waxqabadyada la heli karo: {actions} "
+  },
+  "board": {
+    "round_start": " Wareega {round} ayaa bilaabmay! Khamaarista: ANTE ${ante}, BLIND ${blind}. Waxaad haysataa {chips} jajab oo haray.",
+    "your_hand": "🎴 Gacantaada: {hand}",
+    "flop_revealed": " FLOP ayaa la shaaciyay: {cards}",
+    "river_revealed": " RIVER ayaa shaaca ka qaaday: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Waxqabadka aan ansax ahayn ee marxaladda hadda jirta. Waxqabadyada la heli karo: {available}",
+    "message": " Waxqabadka aan ansax ahayn! Waxqabadyada la heli karo: {available}"
+  },
+  "action": {
+    "folded": "Waxaad ku laabtay."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Gacanta ganacsadaha: {cards}",
+    "community_cards": " Kaararka bulshada: {cards}",
+    "player_best": " Gacanta ugu fiican ee ciyaaryahanka: {name} ({cards})",
+    "dealer_best": " Gacanta ugu fiican ee ganacsadaha: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (laabtay)",
+    "blind_lost_folded": " sharad indha la' ayaa laga badiyay! - ${blind} (laabtay)",
+    "ante_won": "✅ ANTE waa la guuleystay! +${amount}",
+    "ante_pushed": " ANTE sharad la riixay! ${ante} dib loo soo celiyay",
+    "ante_lost": "❌ ANTE bet LOST! -${ante}",
+    "blind_won": "✅ WARSANKA oo la guuleystay! +${amount}",
+    "blind_pushed": "🔄 Zakada BLIND ayaa la dhul dhigay! ${blind} waa la celiyay",
+    "blind_lost": "❌ BLIND bet LOST! -${blind}",
+    "play_won": "✅ Ciyaar ku guuleystay! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} dib loo soo celiyay",
+    "play_lost": "❌ PLAY bet LOST! -${play}",
+    "net_gain": " Wareega {round} waa la dhameeyay! Faa'iidada saafiga ah: + ${net}",
+    "net_loss": " Wareega {round} waa la dhameeyay! Khasaaraha saafiga ah: ${net}",
+    "separator": "Waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay, waxaad ku soo gashay,"
+  },
+  "outcome": {
+    "game_over_win": " GAME OVER! {max_turns} wareegyada dhamaystiran. Waxaad leedahay ${chips} chips - WAAD GUULSAN!",
+    "game_over_lose": "Ciyaarta waa dhamaatay, jajabkiina wuu dhamaaday, ganacsaduhu wuu guuleystay!",
+    "reward_win": "Ciyaaryahanka ayaa dhammaystiray wareegyada {winner_rounds} oo leh ${chips} jajab",
+    "reward_lose": "Ciyaaryahanka ayaa ka dhamaaday jajabkii wareega {round}",
+    "reward_win_max": "Ciyaaryahanka ayaa dhammaystiray wareegyada {max_turns} oo leh ${chips} jajab"
+  },
+  "hand_names": {
+    "royal_flush": "Daadadka boqortooyada",
+    "straight_flush": "Isku dheelitir toos ah",
+    "four_of_a_kind": "Afar nooc oo kala ah",
+    "full_house": "Guri buuxo",
+    "flush": "Daadinta",
+    "straight": "Toosan oo toos ah",
+    "three_of_a_kind": "Saddex nooc oo kala ah",
+    "two_pair": "Laba lammaane oo isku xidhan",
+    "one_pair": "Labada nooc",
+    "high_card": "Kaarka ugu sarreeya",
+    "unknown": "Gacan aan la garanayn"
+  }
+}

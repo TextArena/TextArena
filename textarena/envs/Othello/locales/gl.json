@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} xogando {colour} ({piece}) nun xogo de Othello.\nO teu obxectivo é ter máis pezas da túa cor no taboleiro ao final do xogo.\nNo teu turno, coloca unha peza de tal xeito que flanquee unha ou máis pezas do teu opoñente-en calquera dirección (horizontal, vertical ou diagonal)-entre a túa nova peza e outra das túas pezas existentes. Todas as pezas do opoñente flanqueadas serán viradas á túa cor.\nFornece o teu movemento no formato '[fila, columna]'."
+  },
+  "board": {
+    "game_board": "Taboleiro do xogo:\n{board}",
+    "valid_moves": "{observation}\nMovementos válidos: {moves}",
+    "no_valid_moves_reset": "{observation}\nNon hai movementos válidos - podes ter que saltar.",
+    "no_valid_moves_step": "{observation}\nNon hai movementos válidos – podes ter que saltar.",
+    "scores_reset": "{observation}\nPuntuacións actuais - Negro: {black_count}, Branco: {white_count}\n",
+    "scores_step": "{observation}\nPuntuacións - Negro: {black_count}, Branco: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "O movemento debe ser do formato [fila, columna].",
+    "illegal": "Movemento ilegal. Movementos válidos: {valid}"
+  },
+  "game_action": {
+    "skipped": "O Xogador {pid} tivo que saltar o seu turno",
+    "played": "O Xogador {pid} ({piece}) xogou [{r}, {c}] virando {flipped} peza(s)"
+  },
+  "game_message": {
+    "must_skip": "O Xogador {pid} ({piece}) non ten movementos válidos e debe saltar."
+  },
+  "outcome": {
+    "black_wins": "O Negro gaña {black_count}-{white_count}.",
+    "white_wins": "O Branco gaña {white_count}-{black_count}.",
+    "draw": "Empate {black_count}-{white_count}."
+  }
+}

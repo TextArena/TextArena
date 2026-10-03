@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "U mothami {player_id} ka Ṋaledi-ḓipheko tsa Liar's Dice le batho ba {num_players}.\nMekgwa:\n- Ka nako ya hao, u ka:\n  1) Kenya tsebe e ncha ka bongata kapa mofuta o kholo (kapa bobedi) ho feta tsebe e tseng tsena; e.g. '[Bid: 3, 4]',\n  2) Bitsa tsebe ya pele ka ho ngola '[Call]'.\n\nUka u bitsa:\n  - Uka palo e sa tsebeng ya mofuta oo e feletseng ho tsebeng, mothami wa pele a fela difake tse ling.\n  - Kapa uwe, yo bitsang a fela difake tse ling.\nMothami yo a fihlang 0 difaeke o a tsoa. Mothami yo a salang a winna."
+  },
+  "board": {
+    "per_player": "\tMothami {p}: {d}",
+    "new_round": "\nSelemo se secha - Difaeke tse ding: {dice_summary}\nDifaeke tsa heno tsa hao ke: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Motsamaisi {current_player_id} o bitsa! Palo ya 'nete ya sefahle {face_value} ke {count}, e leng NYEANE ho feta {quantity}.\nMotsamaisi {loser_id} (motaki wa ho qetela) o lahleheloa ka letshwao le le leng.",
+    "caller_loses": "Mothami {current_player_id} a bitsa! Palo e sa tsebeng ya mofuta {face_value} ke {count}, e feletseng ho {quantity}.\nMothami {loser_id} (yo bitsang) a fela difake tse ling."
+  },
+  "action": {
+    "bid_announce": "Mothami {player_id} o bida {quantity} sa mofuta {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Ho letsetsa ho etsoang ntle le hore motho a beoe pele.",
+    "invalid_bid": "Tefiso e sa sebetseng: {reason}",
+    "not_recognized": "Tsebe e sa tsejohe e le tsebe e halalelang '[Bid: X, Y]' kapa '[Call]'. Tsebe e rometsoeng: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Palo e ncha {new_quantity} ke tlase ho feta ea hona joale {current_quantity}.",
+    "face_lower": "Boleng bo bocha ba nomoro {new_face_value} ke tlaase ho feta hona joale {current_face_value}.",
+    "identical": "Tefiso e tšoana le tefo ea hona joale.",
+    "face_range": "Boleng ba eona bo lokela ho tloha 1 ho ea 6."
+  },
+  "message": {
+    "eliminated_invalid": "Sebapali {player_id} se ile sa tlosoa ka ho tsamaea ha sona."
+  },
+  "outcome": {
+    "win": "Mothami {winner} a winna! Thebo ya mora: {final_ranking}"
+  }
+}

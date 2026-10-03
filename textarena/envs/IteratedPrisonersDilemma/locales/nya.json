@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Iterated Prisoner's Dilemma inayojumuisha {num_rounds} raundi.\n\nMuundo wa Game:\n- Kabla ya kila uamuzi una {total_conversation_rounds} mizunguko ya kujadili kimahiri.\n- Baada ya hapo, wachezaji wote wawili kwa wakati mmoja huchagua kuunga mkono au kukiuka.\n\nMatrix ya Malipo (imewekwa kila raundi):\n- Wote kuunga mkono ➜ kila mmoja {cooperate_reward}\n- Wote kukiuka ➜ kila mmoja {mutual_defect_reward}\n- Mmoja akikiuka, mwingine kuunga mkono ➜ Mkiuki {defect_reward}, Mkuunga mkono {sucker_reward}\n\nJinsi ya Kucheza:\n- Wakati wa mazungumzo: andika nambari yoyote unayotaka.\n- Wakati wa kipindi cha uamuzi: jumuisha '[Cooperate]' au '[Defect]' (bila kujali herufi kubwa au ndogo). Unaweza kuongeza maandishi ya ziada kabla au baada ya token."
+  },
+  "phases": {
+    "conversation_finished": "Mazungumzo yamekwisha kwa raundi {round}. Tafadhali jibu kwa '[Cooperate]' au '[Defect]' ndani ya \\boxed{{}}.",
+    "starting_round": "--- Kuyamba kwa Msonkhano {round} ---",
+    "round_summary": "Matokeo ya raundi {round}:\n{outcome}\nMchezaji 0 alipata {r0} (jumla {score_0}), Mchezaji 1 alipata {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Mchezaji {winner} anawina {win_score} - {lose_score}.",
+    "draw": "Onse awiri anaponya zigoli {s0}.",
+    "round_both_cooperate": "Onse aŵiri anagwirizana.",
+    "round_both_defect": "Osewera onse aŵiriwo anathaŵa.",
+    "round_p0_cooperates_p1_defects": "Woseŵera 0 anagwirizana, wosewera 1 anathaŵa.",
+    "round_p0_defects_p1_cooperates": "Woseŵera 0 anathaŵa, wosewera 1 anagwirizana."
+  }
+}

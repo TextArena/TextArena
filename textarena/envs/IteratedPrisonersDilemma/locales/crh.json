@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Siz {player_id} oyuncusısınız, {num_rounds} raunddan ibaret Iterated Prisoner's Dilemma oyınında.\n\nOyun Yapısı:\n- Her qarardan evel {total_conversation_rounds} tur serbestçe laqırdı yapmaq imkânıñız bar.\n- Soñra, eki oyuncu aynı vaqıtta iş birliği yapmağa ya da defekt etmağa qarar bere.\n\nÖdene Matrixi (her raund sabit):\n- Eki oyuncu da İş Birliği Yapqan ➜ her biri {cooperate_reward}\n- Eki oyuncu da Defekt Etqen ➜ her biri {mutual_defect_reward}\n- Biri Defekt Etqen, biri İş Birliği Yapqan ➜ Defektor {defect_reward}, İş Birlikçisi {sucker_reward}\n\nNasıl Oynalır:\n- Laqırdı vaqtında: istegeniz metn yazıp.\n- Qarar vaqtında: '[Cooperate]' ya da '[Defect]' (büyük/küçük harf duyarsız) yazmaq mümkün. Qarardan evel/soñra extra metn yazıp."
+  },
+  "phases": {
+    "conversation_finished": "Konuşma {round} raundı içün tamamlanıp qedildi. Lütfen \\boxed{{}} içün '[Cooperate]' yahut '[Defect]' ile cavap ber.",
+    "starting_round": "--- Başlav turı {round} ---",
+    "round_summary": "Raund {round} neticeleri:\n{outcome}\nOyuncu 0, {r0} aldı (cemi {score_0}), Oyuncu 1, {r1} aldı (cemi {score_1})."
+  },
+  "outcome": {
+    "winner": "Oyuncu {winner} {win_score} - {lose_score} utdı.",
+    "draw": "Beraberlik! Eki oyuncu da {s0} qazandı.",
+    "round_both_cooperate": "Eki oyuncı da işbirlik yaptı.",
+    "round_both_defect": "İki oyuncu da ihanet etti.",
+    "round_p0_cooperates_p1_defects": "Oyuncu 0 işbirliği yaptı, Oyuncu 1 ihanet etti.",
+    "round_p0_defects_p1_cooperates": "Oyuncu 0 ihanet etti, Oyuncu 1 işbirliği yaptı."
+  }
+}

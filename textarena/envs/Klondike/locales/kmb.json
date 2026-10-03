@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Osova ukuata Klondike Solitaire. Ondaka yawe ni kuendesa kadi zote ku mukulu wa kipungu.\n\nMukanda wa Mpira:\n- Mukulu wa kipungu (F1-F4): Kuzenga kadi ku mpangula ku kipungu\n- Mukulu wa kubaka (T1-T7): Kuzenga kadi ku mpangula ku ngola zinene (ngola nyama ku ngola ndombe, ngola ndombe ku ngola nyama)\n- Kikwama: Kuinza kadi ku mukulu wa kubula\n- Mukulu wa kubula (W): Kadi ya juu inafaa kubakwa\n\nMakandida:\n- 'draw' - Kuinza kadi ku kikwama ku mukulu wa kubula\n- 'move <source> <destination> [count]' - Kuhamisha kadi kati ya mukulu\n  Mifano: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count inaweza kuwa 'all', ambayo itajaribu kuhamisha kadi zote zinazoweza kuonekana.\n- 'forfeit' - Kuisha mpira mara moja na kufunga alama yawe\n- Majina ya mukulu: W (kubula), F1-F4 (kipungu), T1-T7 (kubaka)\n\nUnaweza kutekeleza matendo mengi katika zamu moja kwa kuyatenganisha na vigawanyiko:\n  Mfano: 'draw, move W T1, move T2 F1'\n\nKadi za Kifalme pekee zinaweza kuwekwa kwenye mukulu wa kubaka tupu.\nMatendo yanatekelezwa kwa mpangula - ikiwa moja inashindwa, matendo yaliyosalia yanapuuzwa.\nTumia 'forfeit' ikiwa unafikiri mpira hauwezekani kushinda."
+  },
+  "format_error": {
+    "no_brackets": "O kijimbuete kia tokala ku i soneka mu mukanda, o mbandu ia mukuá mu kamukanda.",
+    "no_closing_bracket": "Fomato ya kulemba kiengeji kisina mpangula. Kibaka kya kupendeka ']' kikukutalala",
+    "empty_command": "Kandida tupu. Teka 'draw' au 'move <source> <destination> [count]'",
+    "empty_action": "O ku bhanga o ima sé kuxinganeka",
+    "move_needs_args": "Kandida ya kuhamisha inahitaji chanzo na lengo. Matumizi: 'move <source> <destination> [count]'",
+    "count_positive": "Idadi lazima iwe chanya au 'all'",
+    "count_invalid": "Idadi isiyo sahihi. Tumia nambari au 'all'",
+    "unknown_command": "Kandida isiyofahamika '{cmd}'. Tumia 'draw', 'move <source> <destination> [count]', au 'forfeit'",
+    "wrapped": "O kima kia tokala o ku bhanga, {n}: {msg}"
+  },
+  "action_result": {
+    "success": "O kima kia tokala o ku bhanga, {n}: {msg}",
+    "before_failure": "Zazi{n} akionsi zakomwa mpela kufika kwa kosa.",
+    "failed": "Akionsi {n} ikosa: {msg}"
+  },
+  "move_result": {
+    "drew": "O athu a tena ku katula o ji kalatá jiji, phala kubhanga ima ia mukuá.",
+    "cannot_draw": "O ima ioso ia kexile mu álaka ki i nange ku kala dingi ni valolo.",
+    "invalid_pile": "Dikasa dia kulemba kiengeji kisina mpangula. Usa W, F1-F4, au T1-T7",
+    "foundation_one_card": "Kuweza kusokisa karta 1 kwenda ku musoko",
+    "waste_to_foundation_ok": "O kalatá ka katula o ixete phala ku kala bhu kididi kia tokala F{dst}",
+    "waste_to_foundation_bad": "Ka tena ku katula o jifalamenda ja tokala mu kaxa íii phala ku i jikula dingi.",
+    "tableau_to_foundation_ok": "Kadi imehamishwa kutoka kwa mukulu wa kubaka T{src} hadi kipungu F{dst}",
+    "tableau_to_foundation_bad": "Ka tena kulungulula o jifoto ja mbandu ia tokala mu fikula.",
+    "foundation_to_foundation": "Ngana kusokola kutoka ku fundamento ku fundamento",
+    "waste_to_tableau_one_card": "O muthu u tena kukatula ngó o kalatá kamoxi, anga u ka ta mu kididi kiéngi.",
+    "waste_to_tableau_ok": "O kalatá ka katula o ima ia texika, anga a kala mu kapa T{dst}",
+    "waste_to_tableau_bad": "Ka tena ku ta o jifalamenda ja mukuá mu kididi kimoxi ni íii iala-mu.",
+    "no_face_up": "Kana kuta ji kalatá ku pholo phala ka ku katule mu ima ia mukuá.",
+    "tableau_to_tableau_ok": "Kadi {count} zimehamishwa kutoka kwa mukulu wa kubaka T{src} hadi T{dst}",
+    "tableau_to_tableau_bad": "Haiwezi kuhamisha kadi {count} kutoka T{src} hadi T{dst}",
+    "foundation_to_tableau_one_card": "Kuweza kusokisa karta 1 kuva ku musoko kuenda ku mesa",
+    "foundation_empty": "O kididi kia F{src} ki kiala ni athu.",
+    "foundation_to_tableau_ok": "Kadi imehamishwa kutoka kipungu F{src} hadi mukulu wa kubaka T{dst}",
+    "foundation_to_tableau_bad": "Ki tu tena ku ta o kijimbuete kia mbandu ia kamukanda mu kitutu T{dst}",
+    "to_waste_or_stock": "O ima íii ki tu tena ku i texi mu jinzo mba mu ididi iéngi."
+  },
+  "outcome": {
+    "forfeit": "Jogo jafutwa. Ponto finali: {score} karte mu fundamento.",
+    "won": "Nga mi sakidila, mua tambula o kikoué!",
+    "turn_limit": "Jogo jafini! Wafikilako kiwango cha {max_turns} vijiti. Ponto: {score} karte mu fundamento."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Mwaka: {turn}/{max_turns}",
+    "stock": "Kikwama: {stock} kadi",
+    "waste": "Jimbandu ja kubula (W): {waste}",
+    "foundations_header": "O itambuijilu íii:",
+    "foundation_row": "F{n}: {cards} O ku di longa o Bibidia mu xikola, kua-nda kuatekesa kiavulu.",
+    "tableau_header": "Kibandekesu:",
+    "tableau_row": "T{n}: {cards} O ku di longa o Bibidia mu kilunga, kua-nda kuatekesa kiavulu."
+  }
+}

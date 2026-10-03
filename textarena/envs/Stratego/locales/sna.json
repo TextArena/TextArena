@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Uri Mutambo {player_id} mu Stratego.\nChimiro chako ndechekutamba bendera raumwe wako kana kudzima vose chipi chake chinogona kutamba.\nVana venyu vamwe vakawekwa paboard, kusanganisira bendera, mabomba, na chipi zvingine zvine chezi zvakasiyana.\n\n### Maitiro ekutamba\n1. **Maitiro ekutamba:**\n   - Pasi yako, unogona kutamba chipi chimwe nechimwe kwa hatua moja kuenda pachipi padhuze (juu, pasi, kushoto, kana kurudyi) pachipi pacho pachiri pake.\n   - Mfano: Chipi chinogona kutamba kubva A1 kuenda B1 kana A1 kuenda A2 kana B1 na A2 hazina chipi chako.\n   - Kana chipi chisarudzwa ndiBomba kana bendera, hachigoni kutamba.\n2. **Makombana:**\n   - Kana utamba pachipi pacho pachiri pake, ndipo kombana inotangira:\n     - Chipi chine chezi huru ndicho chinohwina na kudzima chipi chaumwe wako.\n     - Kana chezi dziri dzaka, chipi zote mbiri zinobviswa paboard.\n     - **Maitiro Ekupedzisira:**\n       - Mabomba anodzima zvikwata zvikuru zvinechitaka kana Miner, anodhifiza mabomba.\n       - Spy anogona kudzima Marshal kana Spy achitamba chekutanga asi anobirwa nachipi chingine.\n3. **Chimiro chaKutamba:**\n   - Tambira chipi chaumwe wako nekudzokera kwacho.\n   - Dzivirira bendera yako uchishanda kudzima bendera yaumwe wako.\n   - Tambisa Scout kwa njia yekutamba kudzidza chipi chaumwe wako na kudzima zvikwata zvidoko.\n\n### Kuita Kombana:\n1. Tambira koodheneti za chipi icho unoda kutamba nacho kuenda.\n2. Shandisa maitiro: [A0 B0], apo A0 ndiko kwa chipi kubva, na B0 ndiko chipi kuenda.\n   - Mfano: Kutamba chipi kubva safu 0, kulumu 0 kuenda safu 1, kulumu 0, shandisa [A0 B0].\n3. Ona koodheneti ya kuenda iri inzwana na maitiro ekutamba.\n\n### Mashoko muhimu:\n- Board inotamba chipi chako nacho chekutamba, mfano MN, MS.\n- Board inotamba chipi zinazikanwa zaumwe wako pasina kubudisa chezi, mfano ?.\n- Grids na ~ ndidziva na haziitiki.\n- Kwa maitiro, tamba chipi chako chiri mberi kudzidza chipi chaumwe wako. Mutambo 0 na mutambo 1 mberi dzavo dziri safu D na G zvichienderana.\n\nBoard iri pano:\n"
+  },
+  "board": {
+    "current_board": "Bhoja Rakuwanda:\n\n{board}\nMikanzvi Yopinduka: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Mfumo wekutamba hauna kunzwika. Mutambo {player_id} hauna kupindura kwa mfumo [A0 B0].",
+    "invalid_coordinates": "Mfumo wekutamba hauna kunzwika. Mutambo {player_id} hauna kupindura kuratidza kunzwika.",
+    "not_own_piece": "Muitiro usina kukodzera. Mutambi {player_id} anofanira kufambisa chimwe chezvimedu zvake.",
+    "scout_through_pieces": "Muitiro wechiito hauna kukodzera. Mutambi {player_id} haagoni kufambisa scout kuburikidza nezvimwe zvidimbu.",
+    "scout_diagonal": "Mfumo wekutamba hauna kunzwika. Mutambo {player_id} haikwanisi kusununguka vatengi kwa njia ya diagonal.",
+    "non_scout_multi_square": "Chimiro chechiito chisina kukodzera. Zvidimbu, kunze kwevasori, zvinogona kufamba chete nzvimbo imwe panguva.",
+    "move_into_lake": "Muitiro wechiito hauna kukodzera. Mutambi {player_id} haagoni kupinda mudziva.",
+    "move_onto_own_piece": "Muitiro usina kukodzera. Mutambi {player_id} haagoni kuenda pachigamba chake.",
+    "move_bomb_or_flag": "Muitiro wechiito hauna kukodzera. Mutambi {player_id} haigone kufambisa bhomba kana mureza."
+  },
+  "game_action": {
+    "you_moved": "Wakafambisa chidimbu chako kubva pa {source} kuenda ku {dest}.",
+    "opponent_moved": "Mwari {player_id} akatenga chikwata kuva {source} kuenda {dest}.",
+    "you_equal_ranks": "Wakazotenga chikwata chako kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa marudzi ane anodaidzwa, zvikwata zvizvi zvaora.",
+    "opponent_equal_ranks": "Mwari {player_id} akatenga chikwata kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa marudzi ane anodaidzwa, zvikwata zvizvi zvaora.",
+    "you_miner_defused": "Wakazotenga chikwata chako kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa miner inokwesa bomb, mwari wakawina musango.",
+    "opponent_miner_defused": "Mutambo {player_id} atakamwa chipi kubva {source} kuenda {dest}. Chipi chinechitaka chakanga {attacking_rank} na chipi chinechitakwa chakanga {target_rank}. Kwa kuwa maMiner anogona kudhifiza mabomba, wakabirwa.",
+    "you_bomb_lost": "Wakasunungura mwana wako kubva {source} kuenda {dest}. Mwana arikutamba ari {attacking_rank} na mwana aripano ari {target_rank}. Kwa kuwa mwana arikutamba si mukoroko, wakabirwa.",
+    "opponent_bomb_won": "Mutambo {player_id} atakamwa chipi kubva {source} kuenda {dest}. Chipi chinechitaka chakanga {attacking_rank} na chipi chinechitakwa chakanga {target_rank}. Kwa kuwa chipi chinechitaka si Miner, wakahwina.",
+    "you_spy_won": "Wakazotenga chikwata chako kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa chikwata cha kutengesa kuna spy na chikwata cha kuzorwa kuna marshall, mwari wakawina musango.",
+    "opponent_spy_lost": "Mutambo {player_id} atakamwa chipi kubva {source} kuenda {dest}. Chipi chinechitaka chakanga {attacking_rank} na chipi chinechitakwa chakanga {target_rank}. Kwa kuwa chipi chinechitaka chispy na chipi chinechitakwa chiri Marshal, wakabirwa.",
+    "you_higher_won": "Wakazotenga chikwata chako kuva {source} kuenda {dest}. Chikwata cha kutengesa chaita {attacking_rank} na chikwata cha kuzorwa chaita {target_rank}. Kwa kuwa chikwata cha kutengesa kuna marudzi akadzwa kwazvo, mwari wakawina musango.",
+    "opponent_higher_lost": "Mutambo {player_id} atakamwa chipi kubva {source} kuenda {dest}. Chipi chinechitaka chakanga {attacking_rank} na chipi chinechitakwa chakanga {target_rank}. Kwa kuwa chipi chinechitaka chine chezi huru kupfuura chipi chinechitakwa, wakabirwa.",
+    "you_lower_lost": "Wakasunungura mwana wako kubva {source} kuenda {dest}. Mwana arikutamba ari {attacking_rank} na mwana aripano ari {target_rank}. Kwa kuwa mwana arikutamba ari muduku kupfuura mwana aripano, wakabirwa.",
+    "opponent_lower_won": "Mutambo {player_id} atakamwa chipi kubva {source} kuenda {dest}. Chipi chinechitaka chakanga {attacking_rank} na chipi chinechitakwa chakanga {target_rank}. Kwa kuwa chipi chinechitaka chine chezi pfuti kupfuura chipi chinechitakwa, wakahwina."
+  },
+  "outcome": {
+    "flag_captured": "Mutambi {player_id} akabata mureza womuvengi!",
+    "no_movable_pieces": "Mwari {winner_id} anowina! Mwari {loser_id} hana chikwata chokutenga."
+  }
+}

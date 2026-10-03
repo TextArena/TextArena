@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Muziki wa Briscola utanguli! Mvula ya mpata: {trump_suit} (Khadi ya mpata: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Ovu wena ukwensha Briscola - Mutshami {player_id}.\nLengo: Ungana mizinga na kukusanya matalu mengi zaidi (matalu 120 kwa jumla katika sitaha).\nMatalu a kadi: A=11, 3=10, K=4, Q=3, J=2, zingine=0\nNguvu za kadi: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKadi za mpingo zinaushinda kadi zisizo za mpingo bila kujali nguvu.\n\nKitendo: '[play X]' ambapo X ni nafasi (1-{max_pos}) ya kadi mukononi mwako\n"
+  },
+  "hand": {
+    "none": "cj",
+    "empty": "Hakuna khadi kwenye mkono",
+    "header": "Mkono wako:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP)"
+  },
+  "trick": {
+    "empty": "Hakuna khadi zilizotolewa kwenye mkunjo huu.",
+    "header": "Mkunjo wa sasa:",
+    "line": "  Player {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Mchezaji {player_id}: {points} pointi",
+    "trump_info": "Mvula ya mpata: {trump_suit}",
+    "trump_info_deck": "Suti ya kutwala: {trump_suit} | Khadi zilizosalia kwenye sitaha: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nMalengo: {scores}\n{trump_info}\n\nFwasa kadi kwa kutumia [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Tumia [play X] ambapo X ni nafasi ya kadi (1, 2, 3, n.k.)",
+    "out_of_range": "Nafasi ya khadi si sahihi. Una {count} khadi (1-{count})"
+  },
+  "action": {
+    "played": "Mchezaji {player_id} alicheza {card}",
+    "trick_win": "Mchezaji {winner} anashinda mkunjo na {card} na kupata {points} pointi!"
+  },
+  "outcome": {
+    "head": "Muziki umemalizika! Mchezaji {winner} anashinda na {points} pointi!\n\nPointi za Mwisho:\n{scores}",
+    "player_line": "Mchezaji {player_id}: {points} pointi ({tricks} mikunjo)\n"
+  }
+}

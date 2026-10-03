@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Tú ert Spælarin {player_id} í Stratego.\nMálið títt er at fanga flagg mótpartin ella útrúka øll teirra flytibilar.\nHerur tín hevur verið settur á borðið fyri teg, eins og flagg, bumbur og aðrir bilar av ymiskum støðum.\n\n### Leiðbeiningar til spæl\n1. **Fyrisetingar fyri flyting:**\n   - Á tínari røð, kanst tú flyta ein bil ein skrid til ein næstliggjandi ruta (upp, niður, til vinstru ella til høgru), sum longu er upptikin av tínarum bilar.\n   - Dømi: Ein bil kann flyta frá A1 til B1 ella A1 til A2, um B1 og A2 ikki eru settir við spælarans egna bilar.\n   - Um valdi bilin er ein bumba ella eitt flagg, kann hann ikki flytast.\n2. **Bardagar:**\n   - Um tú flytur á ein ruta, sum er upptikin av mótpartin, so kemur ein bardagi:\n     - Bilin við hægri støði vinnur og útrúkar mótpartsbilin.\n     - Um støðirnar eru javnar, verða báðir bilar tiknir av borðinum.\n     - **Serligar tilfelli:**\n       - Bumbur útrúka flestar álopandi bilar, uttan námsmenn, sum desarmera bumbur.\n       - Spionar kann vinna á marskalkin, um spionin álopar fyrst, men tapa ímóti øllum øðrum bilum.\n3. **Strategiskir mál:**\n   - Kenna mótpartsbilar vegna teirra flytingar og bardagar.\n   - Verja flagg títt, meðan tú royndir at fanga flagg mótpartin.\n   - Nýtta speidarar strategiskt til at fáa kunning um mótpartsbilar og álopa veikum.\n\n### Hvussu flytur tú:\n1. Tilskil eina koordinatu fyri bilin, tú vilt flyta, og destinasjónina.\n2. Nýtta formatið: [A0 B0], har A0 er upprunanarstøðan, og B0 er destinasjónin.\n   - Dømi: Til at flyta ein bil frá rað 0, dálk 0 til rað 1, dálk 0, skriva [A0 B0].\n3. Tryggja, at destinasjónin er galdandi eftir flytingarreglurnar ovanfyri.\n\n### Viktarligir viðmerkingar:\n- Borðið vísur tínar bilar og teirra støður, t.d. MN, MS.\n- Borðið vísur eisini kendar støður av mótpartsbilar uttan at avdúka teirra støðir, t.d. ?.\n- Gridir við ~ eru vøtn og kann ikki flytast á.\n- Sum tilløg, byrja spælið títt við at flyta bilar, sum eru á fremstu linjum, til at fáa kunning um mótpartsbilar. Spælarin 0 og spælarin 1 hava fremstu linjurnar á rað D og G.\n\nHer er núverandi støða á borðinum:\n"
+  },
+  "board": {
+    "current_board": "Núverandi borð:\n\n{board}\nFáanlegir leikir: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ógilda handilsformatið. Leikarin {player_id} hevur ikki lagt inn ein leik í formatið [A0 B0] .",
+    "invalid_coordinates": "Ógildan handilsformati. Spælari {player_id} hevur ikki givið galdandi koordinatar inn.",
+    "not_own_piece": "Ógilda handilsformatið. Leikarin {player_id} má flyta ein av sínum egnu brotini.",
+    "scout_through_pieces": "Ógilda handilsformatið. Leikarin {player_id} kann ikki flyta ein skjútta ígjøgnum aðrar brikkir.",
+    "scout_diagonal": "Ógilda handilsformatið. Leikarin {player_id} kann ikki flyta ein skjútta diagonalt.",
+    "non_scout_multi_square": "Ógilda handilsformatið. Figurar, uttan skautarir, kunnu bert flyta eitt pláss í senn.",
+    "move_into_lake": "Ógilda handilsformatið. Leikarin {player_id} kann ikki flyta inn í fjøruna.",
+    "move_onto_own_piece": "Ógilda handilsformatið. Leikarin {player_id} kann ikki flyta á sín egna part.",
+    "move_bomb_or_flag": "Ógilda handilsformatið. Leikarin {player_id} kann ikki flyta eina bumbu ella eitt flagg."
+  },
+  "game_action": {
+    "you_moved": "Tú hevur flett títt part frá {source} til {dest}.",
+    "opponent_moved": "Leikari {player_id} hevur flett ein part frá {source} til {dest}.",
+    "you_equal_ranks": "Tú hevur flett títt part frá {source} til {dest}. Álopið var {attacking_rank} og destinasjons partið var {target_rank}. Sum røktin eru tær sami, mistu báðir partar.",
+    "opponent_equal_ranks": "Leikari {player_id} hevur flett ein part frá {source} til {dest}. Álopið var {attacking_rank} og destinasjons partið var {target_rank}. Sum røktin eru tær sami, mistu báðir partar.",
+    "you_miner_defused": "Tú hevur flett títt part frá {source} til {dest}. Álopið var {attacking_rank} og destinasjons partið var {target_rank}. Sum minarar kunnu avvæpna bombur, vann tú bardagan.",
+    "opponent_miner_defused": "Leikari {player_id} hevur flett ein part frá {source} til {dest}. Álopið var {attacking_rank} og destinasjons partið var {target_rank}. Sum minarar kunnu avvæpna bombur, misti tú bardagan.",
+    "you_bomb_lost": "Tú hevur flett títt part frá {source} til {dest}. Álopið var {attacking_rank} og destinasjons partið var {target_rank}. Sum álopið ikki er ein miner, misti tú bardagan.",
+    "opponent_bomb_won": "Leikari {player_id} hevur flett ein part frá {source} til {dest}. Álopið var {attacking_rank} og destinasjons partið var {target_rank}. Sum álopið ikki er ein miner, vann tú bardagan.",
+    "you_spy_won": "Tú hevur flett títt part frá {source} til {dest}. Álopið var {attacking_rank} og destinasjons partið var {target_rank}. Sum álopið er ein spion og destinasjons partið er ein marskálk, vann tú bardagan.",
+    "opponent_spy_lost": "Leikari {player_id} hevur flett ein part frá {source} til {dest}. Álopið var {attacking_rank} og destinasjons partið var {target_rank}. Sum álopið er ein spion og destinasjons partið er ein marskálk, misti tú bardagan.",
+    "you_higher_won": "Tú hevur flett títt part frá {source} til {dest}. Álopið var {attacking_rank} og destinasjons partið var {target_rank}. Sum álopið er hægri enn destinasjons partið, vann tú bardagan.",
+    "opponent_higher_lost": "Leikari {player_id} hevur flett ein part frá {source} til {dest}. Álopið var {attacking_rank} og destinasjons partið var {target_rank}. Sum álopið er hægri enn destinasjons partið, misti tú bardagan.",
+    "you_lower_lost": "Tú hevur flett títt part frá {source} til {dest}. Álopið var {attacking_rank} og destinasjons partið var {target_rank}. Sum álopið er lægri enn destinasjons partið, misti tú bardagan.",
+    "opponent_lower_won": "Leikari {player_id} hevur flett ein part frá {source} til {dest}. Álopið var {attacking_rank} og destinasjons partið var {target_rank}. Sum álopið er lægri enn destinasjons partið, vann tú bardagan."
+  },
+  "outcome": {
+    "flag_captured": "Spælari {player_id} hevur tikið flaggið hjá mótstøðuliðinum!",
+    "no_movable_pieces": "Leikari {winner_id} vinnur! Leikari {loser_id} hevur ikki fleiri flyttanlig partar."
+  }
+}

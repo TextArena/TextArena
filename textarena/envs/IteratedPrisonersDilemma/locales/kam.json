@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Wee ni Mchezaji {player_id} katika Mchezo wa Kifungo cha Wafungwa uliorudiwa unaodumu kwa mizunguko {num_rounds}.\n\nMuundo wa Mchezo:\n- Kabla ya kila uamuzi una mizunguko {total_conversation_rounds} ya kujadiliana kwa uhuru.\n- Baada ya hapo, wachezaji wote wawili huchagua kushirikiana au kukataa kwa wakati mmoja.\n\nMatrix ya Matokeo (imehifadhiwa kila mzunguko):\n- Wote wawili Washirikiane ➜ kila mmoja {cooperate_reward}\n- Wote wawili Wakate ➜ kila mmoja {mutual_defect_reward}\n- Mmoja Akate, mmoja Ashirikiane ➜ Mkatili {defect_reward}, Mshirikishi {sucker_reward}\n\nJinsi ya Kucheza:\n- Wakati wa mazungumzo: andika maandishi yoyote unayotaka.\n- Wakati wa uamuzi: jumuisha '[Cooperate]' au '[Defect]' (bila kujali herufi kubwa au ndogo). Unaweza kuongeza maandishi ya ziada kabla/ baada ya kiashiria."
+  },
+  "phases": {
+    "conversation_finished": "Mazungumzo yamekwisha kwa mzunguko {round}. Tafadhali jibu kwa '[Cooperate]' au '[Defect]' ndani ya \\boxed{{}}.",
+    "starting_round": "--- Kyongo kya mbee {round} ---",
+    "round_summary": "Matokeo ya mzunguko {round}:\n{outcome}\nMchezaji 0 alipata {r0} (jumla {score_0}), Mchezaji 1 alipata {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Mchezaji {winner} anashinda {win_score} - {lose_score}.",
+    "draw": "Sawa! Wachezaji wote wawili walipata {s0}.",
+    "round_both_cooperate": "Wachezaji wote wawili walishirikiana.",
+    "round_both_defect": "Wachezaji wote wawili walikataa.",
+    "round_p0_cooperates_p1_defects": "Mchezaji 0 alishirikiana, Mchezaji 1 alikataa kushirikiana.",
+    "round_p0_defects_p1_cooperates": "Mchezaji 0 alikataa, Mchezaji 1 alishirikiana."
+  }
+}

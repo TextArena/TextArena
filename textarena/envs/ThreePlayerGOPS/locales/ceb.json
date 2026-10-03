@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Ikaw si Player {player_id} sa Three-Player GOPS.\n- Ginahupot mo ang 13 ka mga karta A-K (matag usa eksakto usa ka beses).\n- Matag round may premyo nga igapakita. Isumite usa ka karta sama sa `[Q]`, `[10]`, `[2]` …\n- Ang karta nga pinakataas ang makadaog sa premyo (+ bisan unsang dala-dala nga pot). Ang mga tabla mag-roll sa premyo ngadto sa sunod nga round.\n- Human sa 13 ka mga round, ang kinatibuk-ang pinakataas ang makadaog. Ang mga invalid nga mga lihok = eliminasyon."
+  },
+  "round": {
+    "header": "### Round {round}/13 - Premyo: {prize} (kantidad {worth})",
+    "hand": "Ang imong nahibilin nga kamot: {hand}"
+  },
+  "reveal": {
+    "win": "Mga taya » {bids} - Ang manlalaro {winner} nakadaog {pot}.",
+    "tie": "Mga bid  {bids} - tie, pot karon {pot}.",
+    "scores": "Mga marka → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "action nagkinahanglan og bracketed card sama sa \"[Q]\"",
+    "bad_card": "card nga gigamit na o dili balido"
+  },
+  "elimination": {
+    "player": "Player {pid} gibulag human sa balik-balik nga dili balido molihok."
+  },
+  "outcome": {
+    "auto_win": "Duha ka magdudula nga gibulag - awtomatikong nakadaog.",
+    "final": "Katapusan nga mga marka: {scores}"
+  }
+}

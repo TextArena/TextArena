@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-ପ୍ଲେୟାର ସାପ ଏକ {width}×{height} ଗ୍ରିଡରେ。\nତୁମେ ସାପ {player_id} ନିୟନ୍ତ୍ରଣ କର। ବୈଧ ଗତି: '[up]'/'[down]'/'[left]'/'[right]' (କିମ୍ବା w/s/a/d)।\nଲକ୍ଷ: ସବୁଠାରୁ ଲମ୍ବା ସମୟ ପାଇଁ ବଞ୍ଚି ରହିବା କିମ୍ବା ସବୁଠାରୁ ଲମ୍ବା ହୋଇ ଉଚ୍ଚତମ ସ୍କୋର (ମୋଡ଼ {max_turns} ମୋଡ଼) ପାଇବ।"
+  },
+  "board": {
+    "current": "ବର୍ତ୍ତମାନର ବୋର୍ଡ: {board}",
+    "after_moves": "ବର୍ତ୍ତମାନର ବୋର୍ଡ ରାଜ୍ୟ: {board}"
+  },
+  "game_action": {
+    "invalid_death": "ସ୍ନେକ {player_id} ଅମାନ୍ୟ ଚାଲ ଯୋଗୁଁ ମୃତ୍ୟୁବରଣ କରିଥିଲେ ।"
+  },
+  "outcome": {
+    "survived_win": "Player {player_id} ବଞ୍ଚି ରହିଲା; ଅନ୍ୟ ସମସ୍ତ ମରିଗଲେ.",
+    "all_dead_simul": "ସମସ୍ତ ସାପ ଏକାସାଙ୍ଗରେ ମରିଗଲେ ।",
+    "outlived": "ଅନ୍ୟ ସମସ୍ତ ଖେଳାଳିଙ୍କ ଠାରୁ ଅଧିକ ସମୟ ବଞ୍ଚିଥିଲେ।",
+    "all_dead": "ସମସ୍ତ ସାପ ମରିଗଲେ ।",
+    "turn_limit": "ଟର୍ନ ଲିମିଟ ଛୁଇଁଲା - ଶ୍ରେଷ୍ଠ ସ୍କୋର ବିଜୟୀ, ଟାଇ ବ୍ରେକ ।",
+    "ranking": "{reason} ଅନ୍ତିମ ରାଙ୍କିଙ୍ଗ ଦଳ (ସବୁଠାରୁ ଖରାପ→ଶ୍ରେଷ୍ଠ): {groups}"
+  }
+}

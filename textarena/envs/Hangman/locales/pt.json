@@ -1,0 +1,31 @@
+{
+  "_comment": "Português do Brasil para Hangman. As chaves (à esquerda) são fixas; traduza apenas os valores (à direita). Mantenha cada {placeholder} inalterado. Mantenha os tokens neutros sem tradução: os formatos de colchetes '[L]' / '[LIGHT]', a letra única de adivinhação {letter}, os cabeçalhos de coluna (C00, C01, ...) e os espaços em branco '_' dentro de {board}.",
+  "_slots": {
+    "{board}": "Tabuleiro renderizado neutro (cabeçalhos de coluna C00/C01, letras reveladas, espaços em branco '_'); não traduza",
+    "{tries_left}": "Tentativas incorretas restantes (inteiro)",
+    "{guessed}": "Lista separada por vírgulas de letras já adivinhadas",
+    "{letter}": "A letra adivinhada ou palavra completa (mantida como digitada)",
+    "{pct}": "Porcentagem de caracteres adivinhados corretamente, formatada para 2 decimais",
+    "{target_word}": "A palavra-alvo oculta"
+  },
+  "prompt": {
+    "intro": "Você está jogando Hangman. O objetivo do jogo é adivinhar a palavra fornecendo adivinhações de uma letra ou a palavra inteira.\nCada coluna é numerada. As células que precisam ser preenchidas com letras são representadas por '_'.\n\nExistem duas maneiras de responder. Você pode fornecer adivinhações de uma letra no formato '[L]', ou pode adivinhar a palavra inteira no formato '[LIGHT]'.\nSe a letra fornecida estiver na palavra, ela será revelada na grade.\nSe a palavra fornecida estiver correta, você vence.\nÀ medida que você joga, o histórico de suas escolhas será anexado abaixo. Use as informações para descobrir a palavra e vencer.\nVocê tem 6 tentativas incorretas antes de o jogo terminar.\n\n"
+  },
+  "board": {
+    "status": "Tabuleiro atual:\n{board}\nVocê tem {tries_left} tentativas restantes.\nLetras adivinhadas: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Formato de movimento inválido. Você não respondeu com uma 'letra' ou 'palavra' válida.",
+    "already_guessed": "Você adivinhou a letra '{letter}' que já foi adivinhada."
+  },
+  "message": {
+    "wrong_word": "Sua adivinhação de '{letter}' não é a palavra-alvo.",
+    "letter_in": "Sua adivinhação de {letter} está na palavra",
+    "letter_not_in": "Sua adivinhação de {letter} não está na palavra. Você tem {tries_left} vidas restantes."
+  },
+  "outcome": {
+    "win_word": "Parabéns! Você completou o quebra-cabeça Hangman.",
+    "win_board": "Parabéns! Você completou o quebra-cabeça Hangman.",
+    "out_of_tries": "Você está sem tentativas. Você adivinhou {pct} por cento dos caracteres corretamente. A palavra-alvo era: {target_word}"
+  }
+}

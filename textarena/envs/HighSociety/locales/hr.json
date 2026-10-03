@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} u igri HighSociety (verzija za dva igrača).\nTijek igre: Deset prestižnih karata se aukcionira jedna za drugom.\nLicitacija: Svaka aukcija, tajno odaberite novčanu kartu 1-11 i otkrijte.\n            • Viša ponuda osvaja prestižnu kartu i odbacuje tu novčanu kartu.\n            • Niža ponuda čuva njihovu novčanu kartu.\n            • Izjednačeno → obje ponude se vraćaju i ista prestižna karta se ponovno aukcionira.\nBodovanje: Nakon svih deset aukcija, dodajte **preostali novac + prestižne bodove**.\n            Viša *neto vrijednost* pobjeđuje (točan izjednačaj → neriješeno).\n\n**Sintaksa akcije**  →  licitirajte jednu kartu kao '[7]' ili '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Aukcija {round}/10  |  Prestižna karta: {prize}"
+  },
+  "board": {
+    "money_cards": "Vaše preostale novčane karte: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Mora sadržavati točno jednu [X] novčanu kartu.",
+    "card_not_held": "Više nemate tu novčanu kartu."
+  },
+  "message": {
+    "tie": "Izjednačeno - ponude vraćene. Ponovno licitirajte!",
+    "auction_result": "P0 je ponudio {bid0}, P1 je ponudio {bid1}. Igrač {winner} osvaja prestiž {prize} (ukupno {total})."
+  },
+  "outcome": {
+    "p0_wins": "Neto vrijednost {nw0} > {nw1}",
+    "p1_wins": "Neto vrijednost {nw1} > {nw0}",
+    "draw": "Obje neto vrijednosti {nw0} – točan izjednačaj."
+  }
+}

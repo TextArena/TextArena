@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (kortspel) lokaliseringsfil. ÖVERSÄTT INTE nycklar (vänster sida). Översätt endast värden (höger sida). Behåll varje {placeholder} exakt som den är. Översätt aldrig åtgärdstoken ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), kortetiketter (A, 2-10, J, Q, K), färgsymboler, bokstäverna X/Y som används som rad/kolumnplatshållare i token, eller numeriska poäng/positioner. Behåll ASCII-gridlayouten (mellanrum, kolumnnummer, '?', 'Col', 'Row' justering) intakt så att brädet förblir läsbart.",
+  "_slots": {
+    "{player_id}": "Ett spelarnummer, t.ex. 0 eller 1",
+    "{pid}": "Ett spelarnummer, t.ex. 0 eller 1",
+    "{winner}": "Spelarnumret med den lägsta poängen",
+    "{score}": "En numerisk poängsumma",
+    "{card}": "En kortetikett som A, 10, K eller Q",
+    "{new}": "Den kortetikett som placerades i rutnätet",
+    "{old}": "Den kortetikett som togs bort från rutnätet",
+    "{row}": "Ett radnummer",
+    "{col}": "Ett kolumnnummer",
+    "{max_row}": "Det största giltiga radnumret",
+    "{max_col}": "Det största giltiga kolumnnumret",
+    "{reason}": "En förrenderad fras som beskriver varför den sista omgången startade",
+    "{n}": "Ett radnummer som visas i början av en rad",
+    "{cards}": "De förrenderade, layoutkänsliga cellerna i en rad",
+    "{hand}": "Den förrenderade spelargriden",
+    "{discard}": "Kortetiketten på toppen av kasthögen, eller ordet för 'ingen'",
+    "{options}": "Den förrenderade raden som listar tillgängliga åtgärder",
+    "{scores}": "Den förrenderade poänglistan per spelare"
+  },
+  "player_prompt": {
+    "intro": "Du spelar Golf (kortspel) - Spelare {player_id}.\nMål: Få den lägsta totala poängen i denna enda omgång. Om kolumner delar samma värde, summeras de som 0.\nKortvärden: A=1, 2-10=ansiktsvärde, J/Q=10, K=0\n\nÅtgärder (använd exakta hakparenteser):\n- '[draw]' - Dra från kortleken\n- '[take]' - Ta från kasthögen\n- '[swap X Y]' - Byt ut dragna kort med position X (rad) Y (kolumn)\n- '[discard]' - Kasta det dragna kortet\n"
+  },
+  "board": {
+    "drew": "Du drog: {card}\nNu måste du [swap X Y] eller [discard] det.",
+    "took": "Du tog: {card} från kasthögen\nDu måste [swap X Y] med det (kan inte kasta).",
+    "peeked": "Du tittade på position ({row},{col}): {card}",
+    "turn_view": "Din hand:\n{hand}\nKasthög: {discard}\n{options}",
+    "none": "Ingen"
+  },
+  "options": {
+    "final_turns": "Sista omgångarna! Dina alternativ: [draw], [take], [peek X Y]",
+    "draw": "Dina alternativ: [draw], [take]",
+    "must_swap": "Du måste: [swap X Y] (kan inte kasta kort från kasthögen)",
+    "swap_or_discard": "Du måste: [swap X Y] eller [discard]"
+  },
+  "hand": {
+    "no_cards": "Inga kort",
+    "header": "  Kolumn:   1    2    3",
+    "row": "Rad {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Spelare {pid} bytte {new} med {old} på position ({row},{col})",
+    "discarded": "Spelare {pid} kastade {card}"
+  },
+  "message": {
+    "deck_empty": "Kortleken är tom! Spelet slutar omedelbart.",
+    "knocked": "Spelare {pid} knackade! Varje annan spelare får en omgång till.",
+    "final_round": "Spelare {pid} {reason}! Varje annan spelare får en omgång till."
+  },
+  "reason": {
+    "all_revealed": "har alla kort avslöjade"
+  },
+  "invalid": {
+    "wrong_action": "Använd exakt en hakparentesåtgärd: [draw], [take], [swap X Y], [discard], [knock], eller [peek X Y]",
+    "discard_empty": "Kasthögen är tom!",
+    "must_draw_first": "Du måste först [draw], [take], [knock], eller [peek X Y]",
+    "cannot_discard_taken": "Du kan inte kasta ett kort som tagits från kasthögen. Du måste byta det.",
+    "have_drawn_card": "Du har ett dragna kort. Du måste [swap X Y] eller [discard] det.",
+    "need_drawn_swap": "Du behöver ett dragna kort för att byta.",
+    "need_drawn_discard": "Du behöver ett dragna kort för att kasta.",
+    "out_of_bounds": "Position utanför gränserna. Använd rad 1-{max_row}, kolumn 1-{max_col}",
+    "knock_with_card": "Du kan inte knacka med ett dragna kort. Avsluta din omgång först.",
+    "already_knocked": "Någon har redan knackat denna omgång.",
+    "already_revealed": "Det kortet är redan avslöjat!"
+  },
+  "summary": {
+    "full": "Spelet är slut! Spelare {winner} vinner med en poäng på {score} poäng!\n\nSlutpoäng:\n{scores}",
+    "line": "Spelare {pid}: {score} poäng\n"
+  },
+  "board_str": {
+    "title": "=== GOLF SPEL ===",
+    "discard": "Kasthög: {card}",
+    "knocked": "Spelare {pid} har knackat!",
+    "player_header": "Spelare {pid} (Poäng: {score}):"
+  }
+}

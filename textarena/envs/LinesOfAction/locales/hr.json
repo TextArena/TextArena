@@ -1,0 +1,36 @@
+{
+  "_comment": "Datoteka s lokalizacijom za LinesOfAction. NE PREVODITE ključeve (lijeva strana). Samo prevodite vrijednosti (desna strana). Nikad ne prevodite koordinate ploče (a-h, 1-8), slova komada (O, X), token format poteza ili {board} ASCII mrežu.",
+  "_slots": {
+    "{player_id}": "Broj igrača, ili 0 ili 1",
+    "{side}": "Slovo komada igrača, ili O ili X",
+    "{other}": "Slovo komada protivnika, ili O ili X",
+    "{board}": "ASCII prikaz ploče; ostavite kao što jest",
+    "{coord}": "Koordinata ploče kao što je b1 ili a3",
+    "{from}": "Izvorna koordinata poteza, kao što je b1",
+    "{to}": "Odredišna koordinata poteza, kao što je b3"
+  },
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} u igri LinesOfAction.\nVaši komadi su '{side}', komadi protivnika su '{other}'.\nFormat poteza: `[b1b3]` (od-koordinate do-koordinate). Zakoniti potez putuje vodoravno, okomito ili dijagonalno broj kvadrata jednak ukupnom broju komada (bilo koje boje) u tom redu. Možete preskočiti vlastite komade, ali ne komade protivnika; slijetanje na protivnika ga hvata. Pobijedite kada su svi vaši komadi 8-susjedno povezani."
+  },
+  "board": {
+    "current_board": "Ploča:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format mora biti e2e4 (od,do koordinate).",
+    "no_piece": "Nema {side} komada na {coord}.",
+    "identical": "Izvorna i odredišna koordinata su identične.",
+    "not_straight_or_diagonal": "Potez mora biti ravan ili dijagonalan.",
+    "wrong_distance": "Mora se pomicati udaljenost jednaka broju komada u redu.",
+    "enemy_blocks": "Komad protivnika blokira put.",
+    "destination_own": "Odredište je zauzeto vlastitim komadom."
+  },
+  "game_action": {
+    "moved": "Igrač {player_id} je pomicao {from} -> {to}",
+    "captured_suffix": "Igrač {player_id} je pomicao {from} -> {to} hvatajući neprijatelja."
+  },
+  "outcome": {
+    "win": "Svi komadi su povezani.",
+    "draw_no_capture": "60 poteza bez hvatanja.",
+    "draw_repetition": "Pozicija se ponovila tri puta."
+  }
+}

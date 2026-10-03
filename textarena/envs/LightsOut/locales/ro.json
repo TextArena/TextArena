@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Bun venit la Lights Out! Aveți o grilă de {size}x{size} lumini.\nScopul dvs. este să stingeți TOATE luminile (reprezentate de '.').\nCând apăsați o lumină, aceasta comută atât ea însăși, cât și vecinii săi adiacenți (sus/jos/stânga/dreapta).\nTastați [row col] pentru a apăsa o lumină (indexat de la 0, deci intervalul valid este 0-{max_index}).\nAveți până la {max_turns} mutări pentru a rezolva puzzle-ul.\nLegendă: 'O' = lumină aprinsă, '.' = lumină stinsă"
+  },
+  "board": {
+    "current_state": "Starea curentă a grilei (Mutare {moves_made}, {moves_left} mutări rămase, {completion}% completă):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Acțiunea trebuie să fie în formatul [row col], unde row și col sunt numere întregi de la 0 la {max_index}.",
+    "out_of_range": "Coordonatele trebuie să fie între 0 și {max_index}. Ați introdus [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Felicitări! Ați rezolvat puzzle-ul în {moves_used} mutări!",
+    "loss": "Jocul s-a terminat! Ați folosit toate cele {max_turns} mutări fără a rezolva puzzle-ul. Completare finală: {completion}%\nStarea finală:\n{grid}"
+  }
+}

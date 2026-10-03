@@ -1,0 +1,31 @@
+{
+  "_comment": "Slang-lokaalleêr. MAAK NIE sleutels (linkerkant) oor nie. Vertaal net waardes (regterkant).",
+  "_slots": {
+    "{num_players}": "Aantal spelers in die wedstryd",
+    "{width}": "Bordwydte in selle",
+    "{height}": "Bordhoogte in selle",
+    "{max_turns}": "Beurtdrempel vir die wedstryd",
+    "{player_id}": " 'n Speler se nommer (0-gebaseer)",
+    "{board}": "Die gerenderde ASCII-rooster; hou neutraal, vertaal nooit sy karakters",
+    "{reason}": "Die gerenderde einde-van-spel rede frase",
+    "{groups}": "Neutrale rangorde-data ( 'n lys van speler-id-groepe, slegste tot beste); vertaal nie"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Speler Slang op 'n {width}×{height}-rooster.\nJy beheer slang {player_id}. Geldige skuiwe: '[up]'/'[down]'/'[left]'/'[right]' (of w/s/a/d).\nDoel: oorleef die langste of wees die langste en kry die hoogste telling (beurtdrempel {max_turns} beurte)."
+  },
+  "board": {
+    "current": "Huidige Bord:\n{board}",
+    "after_moves": "Huidige Bordtoestand:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Slang {player_id} het gesterf weens 'n ongeldige skuif."
+  },
+  "outcome": {
+    "survived_win": "Speler {player_id} het oorleef; al die ander het omgekom.",
+    "all_dead_simul": "Al die slange het gelyktydig gesterf.",
+    "outlived": "Speler het al die ander oorleef.",
+    "all_dead": "Al die slange is dood.",
+    "turn_limit": "Beurtdrempel bereik - beste telling wen gelykopuitslag.",
+    "ranking": "{reason} Finale rangorde-groepe (slegste→beste): {groups}"
+  }
+}

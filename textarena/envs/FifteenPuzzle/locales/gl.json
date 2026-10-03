@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id}. Estás xogando ao xogo do 15-Puzzle.\nO obxectivo do xogo é ordenar as fichas numeradas en orde ascendente do 1 ao 15, co espazo baleiro situado na esquina inferior dereita.\nPara facer un movemento, podes deslizar unha ficha cara ao espazo baleiro (representado por un dobre subliñado, por exemplo, __) utilizando un dos seguintes comandos:\n- 'up': Move a ficha debaixo do espazo baleiro cara arriba.\n- 'down': Move a ficha enriba do espazo baleiro cara abaixo.\n- 'left': Move a ficha á dereita do espazo baleiro cara á esquerda.\n- 'right': Move a ficha á esquerda do espazo baleiro cara á dereita.\nPara enviar o teu movemento, escribe a dirección (por exemplo, 'up', 'down', 'left' ou 'right') entre corchetes, por exemplo, [up].\nA disposición actual do taboleiro móstrase abaixo. Utiliza a información para resolver o puzzle.\n"
+  },
+  "board": {
+    "current_board": "Taboleiro actual:\n\n{board}\nMovementos dispoñibles: {moves}",
+    "game_board": "Taboleiro do xogo:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movemento incorrecto. O Xogador {player_id} non respondeu cunha dirección válida entre corchetes.",
+    "illegal_move": "Movemento incorrecto. A ficha non se pode mover na dirección especificada."
+  },
+  "outcome": {
+    "win": "Parabéns! O Xogador {player_id} resolveu con éxito o 15-Puzzle.",
+    "turn_limit": "O límite de turnos foi alcanzado. O modelo completou o {percent} por cento do puzzle"
+  }
+}

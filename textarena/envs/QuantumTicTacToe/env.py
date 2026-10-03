@@ -14,23 +14,9 @@ class QuantumTicTacToeEnv(ta.Env):
         self._observer_current_state()
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are Player {player_id} in Quantum Tic Tac Toe.\n"
-            f"Your symbol is '{'X' if player_id == 1 else 'O'}', and your move numbers are always {'odd' if player_id == 1 else 'even'} (e.g., X1, X3 or O2, O4).\n\n"
-            "Goal: Win by forming a line of three classical marks (solidified from superpositions).\n\n"
-            "How to Play:\n"
-            "- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n"
-            "- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n"
-            "- You cannot place spooky marks in a square that has already collapsed (solidified).\n\n"
-            "Collapse Rule:\n"
-            "- If your move creates a cycle in the entanglement graph, it collapses automatically.\n"
-            "- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n"
-            "- Any dependent spooky marks also collapse.\n\n"
-            "Victory:\n"
-            "- The game ends when a player has three classical marks in a row.\n"
-            "- If both players get a line during the same collapse, the one with the lower max move number wins.\n\n"
-            "Example move: '[0,4]' places a spooky mark in cells 0 and 4."
-        )
+        symbol = 'X' if player_id == 1 else 'O'
+        parity = 'odd' if player_id == 1 else 'even'
+        return self.m("player_prompt", "intro", player_id=player_id, symbol=symbol, parity=parity)
 
     def _render_board(self):
         # Build a dictionary from cell -> list of marks
@@ -59,24 +45,24 @@ class QuantumTicTacToeEnv(ta.Env):
         return "\n" + "\n" + "\n---+----------+----------+---\n".join(rendered_rows) + "\n"
 
     def _observer_current_state(self):
-        self.state.add_observation(message=f"Quantum Tic Tac Toe Board:\n\n{self._render_board()}\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.", observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(message=self.m("board", "current_board", board=self._render_board()), observation_type=ta.ObservationType.GAME_BOARD)
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
         match = re.search(r"\[(\d+),(\d+)\]", action.replace(" ", ""))
-        if not match: self.state.set_invalid_move(reason="Invalid format. Use '[a,b]'.")
+        if not match: self.state.set_invalid_move(reason=self.m("invalid_move", "wrong_format"))
         else:
             a, b = int(match.group(1)), int(match.group(2))
-            if a == b or a not in self.cell_mapping or b not in self.cell_mapping: self.state.set_invalid_move(reason="Invalid or duplicate cell indices.")
+            if a == b or a not in self.cell_mapping or b not in self.cell_mapping: self.state.set_invalid_move(reason=self.m("invalid_move", "invalid_cells"))
             else:
                 pos_a, pos_b = self.cell_mapping[a], self.cell_mapping[b]
                 board = self.state.game_state["board"]
-                if board[pos_a[0]][pos_a[1]] or board[pos_b[0]][pos_b[1]]: self.state.set_invalid_move(reason="One of the cells is already solidified.")
+                if board[pos_a[0]][pos_a[1]] or board[pos_b[0]][pos_b[1]]: self.state.set_invalid_move(reason=self.m("invalid_move", "already_solidified"))
                 else:
                     self.state.game_state["superpositions"][self.move_count] = (self.state.current_player_id, pos_a, pos_b)
                     self.state.game_state["move_log"].append((self.move_count, self.state.current_player_id, pos_a, pos_b))
                     self.move_count += 1
-                    self.state.add_observation(message=f"Player {self.state.current_player_id} placed their symbol in a superposition between cells {pos_a} and {pos_b}.", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+                    self.state.add_observation(message=self.m("game_action", "placed", player_id=self.state.current_player_id, pos_a=pos_a, pos_b=pos_b), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
                     self._resolve_cycles()
         self._observer_current_state()
         return self.state.step()
@@ -116,7 +102,7 @@ class QuantumTicTacToeEnv(ta.Env):
                     assert not self.state.game_state["board"][r1][c1], "The other cell cannot be filled."
                     symbol = 'X' if player_id == 1 else 'O'
                     self.state.game_state["board"][r1][c1] = symbol
-                    self.state.add_observation(message=f"Dependent superposition resolved. Cell ({r1}, {c1}) is now {symbol}.", observation_type=ta.ObservationType.GAME_MESSAGE)
+                    self.state.add_observation(message=self.m("game_message", "dependent_resolved", r=r1, c=c1, symbol=symbol), observation_type=ta.ObservationType.GAME_MESSAGE)
                     del self.state.game_state["superpositions"][move_id]
                     has_collapsed = True
                     break
@@ -125,7 +111,7 @@ class QuantumTicTacToeEnv(ta.Env):
                     assert not self.state.game_state["board"][r0][c0], "The other cell cannot be filled."
                     symbol = 'X' if player_id == 1 else 'O'
                     self.state.game_state["board"][r0][c0] = symbol
-                    self.state.add_observation(message=f"Dependent superposition resolved. Cell ({r0}, {c0}) is now {symbol}.", observation_type=ta.ObservationType.GAME_MESSAGE)
+                    self.state.add_observation(message=self.m("game_message", "dependent_resolved", r=r0, c=c0, symbol=symbol), observation_type=ta.ObservationType.GAME_MESSAGE)
                     del self.state.game_state["superpositions"][move_id]
                     has_collapsed = True
                     break
@@ -145,7 +131,7 @@ class QuantumTicTacToeEnv(ta.Env):
         r, c = empty_cells[0]
         next_player_symbol = 'X' if self.state.current_player_id == 0 else 'O'
         self.state.game_state["board"][r][c] = next_player_symbol
-        self.state.add_observation(message=f"Superposition for last cell resolved. Cell ({r}, {c}) is now {next_player_symbol}.", observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(message=self.m("game_message", "last_cell_resolved", r=r, c=c, symbol=next_player_symbol), observation_type=ta.ObservationType.GAME_MESSAGE)
 
     def _check_superpositions(self):
         for _, (_, (r0, c0), (r1, c1)) in self.state.game_state["superpositions"].items():
@@ -162,7 +148,7 @@ class QuantumTicTacToeEnv(ta.Env):
             for r, c in [a, b]:
                 if board[r][c] == '':
                     board[r][c] = symbol
-                    self.state.add_observation(message=f"Superposition resolved. Cell ({r}, {c}) is now {symbol}.", observation_type=ta.ObservationType.GAME_MESSAGE)
+                    self.state.add_observation(message=self.m("game_message", "superposition_resolved", r=r, c=c, symbol=symbol), observation_type=ta.ObservationType.GAME_MESSAGE)
                     break  # collapse to the first available cell
         # Collapse dependent superpositions
         self._collapse_dependent_superpositions()
@@ -173,11 +159,11 @@ class QuantumTicTacToeEnv(ta.Env):
         # Check for a win
         for pid in range(2):
             symbol = 'X' if pid == 1 else 'O'
-            if self._check_winner(symbol): self.state.set_winner(player_id=pid, reason=f"Player {pid} wins with solidified marks!")
+            if self._check_winner(symbol): self.state.set_winner(player_id=pid, reason=self.m("outcome", "win", player_id=pid))
 
         # Check for a draw
         if not self._get_empty_cells():
-            self.state.set_draw(reason="The game is a draw!")
+            self.state.set_draw(reason=self.m("outcome", "draw"))
 
     def _check_winner(self, symbol: str) -> bool:
         board = self.state.game_state["board"]

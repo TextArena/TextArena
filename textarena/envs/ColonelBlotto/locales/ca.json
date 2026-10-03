@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Ets {role} al Coronel Blotto.\nEl teu objectiu és guanyar més rondes que el teu oponent.\nA cada ronda, assigna exactament {num_total_units} unitats als camps {field_names}.\nEl jugador que assigna més unitats a un camp guanya aquest camp, i el jugador que guanya més camps guanya la ronda.\nPer exemple, '[A7 B7 C6]' assigna 7 unitats a A, 7 a B i 6 a C.",
+    "commander_alpha": "Comandant Alfa",
+    "commander_beta": "Comandant Beta"
+  },
+  "game_state": {
+    "header_round": "=== CORONEL BLOTTO - Ronda {current_round}/{num_rounds} ===\nRondes guanyades - Comandant Alfa: {alpha_score}, Comandant Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRonda {current_round}\nEl Comandant Alfa ha assignat: {p0_allocations}\nEl Comandant Beta ha assignat: {p1_allocations}\n",
+    "winner_alpha": "{message}Guanyador: Comandant Alfa",
+    "winner_beta": "{message}Guanyador: Comandant Beta",
+    "tie": "{message}Empat!"
+  },
+  "invalid_move": {
+    "wrong_format": "Format d'entrada invàlid. Utilitza: A:5, B:10, C:5",
+    "invalid_field": "Nom(s) de camp invàlid(s). Camps vàlids: {field_names}",
+    "wrong_allocation_value": "Totes les assignacions han de ser números enters no negatius.",
+    "incorrect_total_units": "Has d'assignar exactament {num_total_units} unitats. Suma actual: {current_sum}",
+    "good_allocations": "L'assignació és correcta."
+  },
+  "outcome": {
+    "winner_alpha": "El Comandant Alfa guanya {score_0}-{score_1} després de {num_rounds} rondes!",
+    "winner_beta": "El Comandant Beta guanya {score_1}-{score_0} després de {num_rounds} rondes!",
+    "draw": "El joc acaba en un empat {score_0}-{score_1} després de {num_rounds} rondes!",
+    "early_winner_alpha": "El Comandant Alfa guanya {scores_0}-{scores_1} (majoria assolida)!",
+    "early_winner_beta": "El Comandant Beta guanya {scores_1}-{scores_0} (majoria assolida)!"
+  }
+}

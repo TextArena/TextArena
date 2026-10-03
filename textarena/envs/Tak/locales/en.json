@@ -1,0 +1,44 @@
+{
+    "_comment": "Localized strings for the Tak environment. Keep {placeholders} intact. Piece tokens (F/W/C + player id), grid coordinates like (2,2), the action format [ACTION SOURCE ALLOCATION], and the ASCII board are neutral and must not be translated.",
+    "_slots": {
+        "player_id": "player number (0 or 1)",
+        "current_player_id": "player number of the acting player",
+        "board": "pre-rendered ASCII board (neutral, do not translate)",
+        "flat_stones": "number of flat stones available to the current player",
+        "capstones": "number of capstones available to the current player",
+        "cells": "neutral list of target coordinates, e.g. [(0, 0)]",
+        "source": "neutral source coordinate tuple, e.g. (0, 0)",
+        "targets": "neutral list of target coordinates, e.g. [(1, 0)]",
+        "winner": "player number who won (0 or 1)",
+        "flats0": "player 0's flat-stone count at game end",
+        "flats1": "player 1's flat-stone count at game end"
+    },
+
+    "player_prompt": {
+        "intro": "You are Player {player_id} in Tak (a simplified variant: multi-square stack moves are checked by step distance from the origin rather than a strictly straight line; all other rules below are enforced).\nYour goal is to connect two opposite edges of the board with your pieces to form a road while blocking your opponent from doing the same.\nThe game also ends when the board fills up or a player runs out of pieces: then the player with more flat stones ('F') showing on top of stacks wins the flat count (walls and capstones do not count), and an equal flat count is a draw. A turn limit is enforced as a safeguard, and if it is reached the flat count decides the result.\nYou can perform the following actions on your turn:\n- Place a piece on an empty square.\n- Move a stack of pieces from one square to one or more squares. You can stack your pieces on top of other pieces on the target square. The topmost piece determines ownership of the stack.\n- Split a stack of pieces into two or more stacks and distribute them to adjacent squares.\n- Flatten a wall stone into a flat stone using your capstone.\n- Place a Capstone on an empty square.\n- Move a Capstone from one square to one or more squares. A capstone can also flatten a wall stone during its move.\n\nFor each move, submit your action using the format:\n[ACTION SOURCE ALLOCATION]\n- ACTION: The type of move you are making ('place' or 'move').\n- SOURCE: The grid coordinates where the stones originate. Use () for 'place'.\n- ALLOCATION: A dictionary where keys are target grid coordinates and values are the stones or pieces being moved or placed.\n\nStone Types and Their Abilities:\n- Flat Stone ('F'):\n  - Forms part of a road (used to connect edges of the board).\n  - Can be stacked on top of other pieces or have other pieces stacked on it.\n  - Can be moved as part of a stack or individually.\n\n- Wall Stone ('W'):\n  - Blocks roads and prevents opponents from completing their connections.\n  - Cannot be part of a road.\n  - Can be flattened into a flat stone by a capstone.\n\n- Capstone ('C'):\n  - Acts as a flat stone and can form part of a road.\n  - Can flatten wall stones, removing their blocking effect.\n  - Cannot be covered by other pieces, always remains on top of the stack.\n  - Is a powerful tool for both road-building and disrupting your opponent's plans.\n\nThe stones will be identified by the player as follows:\n- Flat Stone for Player 0: 'F0'\n- Wall Stone for Player 1: 'W1'\n- Capstone for Player 1: 'C1'\n\nExamples:\n- To place a capstone on (3,2):\n  [place () {{(3,2): [C0]}}]\n- To move all pieces from (2,2) to (2,3):\n  [move (2,2) {{(2,3): [F0]}}]\n- To split a stack of 5 pieces from (2,2) into two squares:\n  [move (2,2) {{(2,3): [F0, F0], (2,4): [W0, F0, C0]}}]\n- To move and stack one piece from (2,2) onto an existing stack at (2,3):\n  [move (2,2) {{(2,3): [F0]}}]\n\nWhen submitting your move, think strategically about your road-building goals and your opponent's potential moves.\n"
+    },
+
+    "board": {
+        "current_state": "Current Board:\n\n{board}\nAvailable Flat Stones: {flat_stones}, Available Capstones: {capstones}\n"
+    },
+
+    "invalid_move": {
+        "invalid_format": "Invalid move format. Player {current_player_id} did not respond with a valid move in square brackets.",
+        "invalid_placement": "Invalid placement. Player {current_player_id} tried to place a piece on an invalid square.",
+        "invalid_movement": "Invalid movement. Player {current_player_id} tried to move pieces in an invalid way.",
+        "invalid_action": "Invalid action. Player {current_player_id} tried to perform an unknown action."
+    },
+
+    "action": {
+        "placement": "Player {current_player_id} placed a piece on ({cells}).",
+        "movement": "Player {current_player_id} moved pieces from {source} to {targets}."
+    },
+
+    "outcome": {
+        "winner": "Player {current_player_id} has connected two opposite edges of the board.",
+        "flat_win": "The board is full. Player {winner} wins the flat count {flats0}-{flats1}.",
+        "flat_win_capped": "The turn limit was reached. Player {winner} wins the flat count {flats0}-{flats1}.",
+        "draw": "The board is full and the flat count is tied {flats0}-{flats1}. The game is a draw.",
+        "draw_capped": "The turn limit was reached with the flat count tied {flats0}-{flats1}. The game is a draw."
+    }
+}

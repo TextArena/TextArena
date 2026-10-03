@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في معضلة السجين المتكررة لثلاثة لاعبين. تستمر المباراة لمدة {num_rounds} جولات.\nبنية الجولة:\n• {conv_rounds} أدوار للمحادثة الحرة\n• دور واحد لاتخاذ القرار — أرسل رمزًا واحدًا لكل خصم: '[<opp-id> cooperate]' أو '[<opp-id> defect]' (مثل '[1 defect] [2 cooperate]'؛ الاختيار الافتراضي هو 'cooperate').\nمصفوفة العوائد لكل زوج من اللاعبين (تُطبق على كل زوج غير مرتب):\n  - كلاهما يختار cooperate  ->  {reward}\n  - كلاهما يختار defect     ->  {punishment}\n  - أنت تختار defect والطرف الآخر يختار cooperate -> {temptation}\n  - أنت تختار cooperate والطرف الآخر يختار defect -> {sucker}\nيفوز اللاعب أو اللاعبون أصحاب أعلى نتيجة بعد انتهاء جميع الجولات."
+  },
+
+  "round": {
+    "start": "─── بدء الجولة {round} ───\tيمكنك التحدث بحرية خلال أدوار المحادثة الـ {conv_rounds} التالية.",
+    "chat_finished": "انتهت المحادثة في الجولة {round}. أرسل قراراتك، رمزًا واحدًا لكل خصم: `[pid cooperate]` أو `[pid defect]`."
+  },
+
+  "results": {
+    "header": "### الجولة {round} — النتائج:",
+    "pair_line": "{observation}\n\t اختار اللاعب {i} واللاعب {j} الإجراءين {choice_i} و{choice_j} على الترتيب (حصل اللاعب {i} على {gain_i} نقطة، وحصل اللاعب {j} على {gain_j} نقطة)",
+    "scores_open": "{observation}\n-> النتائج الحالية: ",
+    "score_first": "{observation}اللاعب {player_id} ({score})",
+    "score_next": "{observation}؛ اللاعب {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+
+  "outcome": {
+    "final": "النتائج النهائية: {scores}. مجموعات الترتيب (الأسوأ→الأفضل): {groups}"
+  }
+}

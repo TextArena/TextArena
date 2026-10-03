@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Yin ee Player {player_id} ee game Liar's Dice ee kɔc {num_players}.\nKäŋɛɛk:\n- Yin ee wɛ̈ɛ̈r, yin ee kuɔny:\n  1) Cɔ̈ɔ̈l bid tɛ̈ɛ̈m ee kɔ̈k ë kɔ̈k kuɔ̈ɔ̈p, ku bïïd ee kɔ̈k ë kɔ̈k ë kuɔ̈ɔ̈p (ku bɛ̈ɛ̈i) ë bïïd yam; ee '[Bid: 3, 4]',\n  2) Yɛ̈ɛ̈l bïïd yam ee kuɔ̈ɔ̈p '[Call]'.\n\nYin ee yɛ̈ɛ̈l:\n  - Yɛ̈ɛ̈ ee kɔ̈k ë kuɔ̈ɔ̈p ee dɛ̈ɛ̈ ee kɔ̈k ë bïïd, kuɔ̈ɔ̈p ee kɔ̈k ë bïïd ee dɛ̈ɛ̈ ee yɛ̈ɛ̈ ee dɛ̈ɛ̈.\n  - Ku bɛ̈ɛ̈i, yɛ̈ɛ̈ ee dɛ̈ɛ̈ ee dɛ̈ɛ̈.\nRäɛ̈ɛ̈ ee kɔ̈k ë dɛ̈ɛ̈ ee 0, ee kɔ̈k ë yɛ̈ɛ̈ ee wɛ̈ɛ̈ɛ̈. Räɛ̈ɛ̈ ee kɔ̈k ë yɛ̈ɛ̈ ee wɛ̈ɛ̈ɛ̈ ee kɔ̈k."
+  },
+  "board": {
+    "per_player": "\tRaam {p}: {d}",
+    "new_round": "\nCiɛŋ riɛl - Kɛm de wäär: {dice_summary}\nWäär aye cɛɛl kuɔny: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Akɛ̈ɛ̈th nhïïm raan {current_player_id} kɔ̈ɔ̈c nhïïm! Kuɛ̈të nhïïm kɔ̈ɔ̈c nhïïm raan {face_value} aye {count}, aye LESS kuɛ̈të {quantity}.\nAkɛ̈ɛ̈th nhïïm raan {loser_id} (akɛ̈ɛ̈th nhïïm kɔ̈ɔ̈c nhïïm) aye tɛ̈ɛ̈ŋë nhïïm kɔ̈ɔ̈c nhïïm.",
+    "caller_loses": "Akɛ̈ɛ̈th nhïïm raan {current_player_id} kɔ̈ɔ̈c nhïïm! Kuɛ̈të nhïïm kɔ̈ɔ̈c nhïïm raan {face_value} aye {count}, aye >= kuɛ̈të {quantity}.\nAkɛ̈ɛ̈th nhïïm raan {loser_id} (akɛ̈ɛ̈th nhïïm kɔ̈ɔ̈c nhïïm) aye tɛ̈ɛ̈ŋë nhïïm kɔ̈ɔ̈c nhïïm."
+  },
+  "action": {
+    "bid_announce": "Akɛ̈ɛ̈th nhïïm raan {player_id} kɔ̈ɔ̈c nhïïm {quantity} kɔ̈ɔ̈c nhïïm raan {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Luɔ̈i cï looi ke cïn kë cë kɔn lueel.",
+    "invalid_bid": "Kë cë gam/të cïn kë cï lueel: {reason}",
+    "not_recognized": "Ciɛŋ aye kɛm cɔl kuɔny '[Bid: X, Y]' '[Call]'. Ciɛŋ aye cɛɛl: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Kä yam {new_quantity} aye tɔ̈u piny tënë kä thɛɛr {current_quantity}.",
+    "face_lower": "Kë ye cɔlë New face value {new_face_value} atɔ̈u piny tënë kë tɔ̈ thïn ëmɛɛn {current_face_value}.",
+    "identical": "Kë ye gam ë ɣɔɔc ee thöŋ kek kë cï gäm kɔc.",
+    "face_range": "Kë ye nyuɔɔth adhil rot looi në kaam de 1 ku 6."
+  },
+  "message": {
+    "eliminated_invalid": "Raan ye gɔ̈ɔ̈r {player_id} acï bɛ̈n cuɛt piny në kë cïï yen lɔtueŋ."
+  },
+  "outcome": {
+    "win": "Raam {winner} aye wɔn! Ciɛŋ de wäär: {final_ranking}"
+  }
+}

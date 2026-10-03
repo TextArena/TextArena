@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Juego de Briscola oñepyrũ! Palo de triunfo: {trump_suit} (Carta de triunfo: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Eha'o jaha Briscola - Jugador {player_id}.\nTekotevẽ: Epu'ã ñaní ñemiha ha emoĩporãve heta punto (120 punto opaite mbyja ka'aguýpe).\nPunto Mbyja: A=11, 3=10, K=4, Q=3, J=2, ambue=0\nTupã Mbyja: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nMbyja triunfo opo'i mbyja ndatriunfo g̃uarã.\n\nTembiapo: '[play X]' X-pehẽ (1-{max_pos}) mbyja nde pópe\n"
+  },
+  "hand": {
+    "none": "Ndaipóri tarjeta.",
+    "empty": "Ndaipóri tarjeta ipópe.",
+    "header": "Nde po:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP) Ha'e peteĩ mba'e porã."
+  },
+  "trick": {
+    "empty": "Ndaipóri gueteri ko'ã tarjeta ojepurúva.",
+    "header": "Tembipuru ko'ág̃a ojeiporúva:",
+    "line": "  Player {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Jugador {player_id}: {points} puntu",
+    "trump_info": "Palo de triunfo: {trump_suit}",
+    "trump_info_deck": "Palo de triunfo: {trump_suit} | Kartakuéra osẽva'ekue kajúpe: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPuntos: {scores}\n{trump_info}\n\nEha'ã mbyja [play X] rupive"
+  },
+  "invalid_move": {
+    "wrong_format": "Eipuru [play X] ha'ehápe X pe tarjeta renda (1, 2, 3, etc.)",
+    "out_of_range": "Mbarakaja rova ndaja. Nde reko {count} mbarakaja (1-{count})"
+  },
+  "action": {
+    "played": "Jugador {player_id} oñembosa {card}",
+    "trick_win": "Jugador {winner} oñemomba'e umi mbarakaja {card} ha ogana {points} puntu!"
+  },
+  "outcome": {
+    "head": "Juego ohasa! Jugador {winner} oñemomba'e {points} puntu!\n\nPuntuación kuéra paha:\n{scores}",
+    "player_line": "Jugador {player_id}: {points} puntu ({tricks} mbarakaja)\n"
+  }
+}

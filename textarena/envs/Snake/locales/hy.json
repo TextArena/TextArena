@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Օձ խաղացող մի {width}×{height} ցանցում։\nԴուք ղեկավարում եք օձ {player_id}-ը։ Վավեր քայլեր՝ '[up]'/'[down]'/'[left]'/'[right]' (կամ w/s/a/d)։\nՆպատակ՝ ապրել ամենաերկարը կամ լինել ամենաերկարը և ստանալ ամենաբարձր միավոր (սահմանափակում {max_turns} քայլ)։"
+  },
+  "board": {
+    "current": "Ներկայիս խորհուրդը' {board}",
+    "after_moves": "Խաղատախտակի Ներկայիս Վիճակը՝\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Օձ {player_id} մահացել է անվավեր քայլի պատճառով։"
+  },
+  "outcome": {
+    "survived_win": "Խաղացողը {player_id} ողջ մնաց, մյուսները մահացան:",
+    "all_dead_simul": "Բոլոր օձերը միաժամանակ մահացան:",
+    "outlived": "Խաղացողը բոլորից ավելի երկար է ապրել:",
+    "all_dead": "Բոլոր օձերը մեռած են:",
+    "turn_limit": "Մտեք սահմանը հասել է, լավագույն միավորը հաղթում է tie-break- ում:",
+    "ranking": "{reason} Վերջնական վարկանիշային խմբերը (վատագույն→լավագույն): {groups}"
+  }
+}

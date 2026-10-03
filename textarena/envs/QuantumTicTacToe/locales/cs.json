@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} v Quantum Tic Tac Toe.\nVaše značka je '{symbol}', a vaše čísla tahů jsou vždy {parity} (například X1, X3 nebo O2, O4).\n\nCíl: Vyhrát vytvořením řady tří klasických značek (upevněných ze superpozic).\n\nJak hrát:\n- V každém tahu umístěte strašidelnou značku do dvou různých prázdných čtverců pomocí formátu '[a,b]'.\n- Tyto značky jsou propletené a označené jako 'X1 / X1' nebo 'O4 / O4'.\n- Nemůžete umístit strašidelné značky do čtverce, který již zkolaboval (upevněný).\n\nPravidlo kolapsu:\n- Pokud váš tah vytvoří cyklus v grafu propletení, automaticky zkolabuje.\n- Každá strašidelná značka v cyklu se změní na klasickou značku v jedné ze dvou pozic.\n- Jakékoli závislé strašidelné značky také zkolabují.\n\nVítězství:\n- Hra končí, když hráč má tři klasické značky v řadě.\n- Pokud oba hráči získají řádek během stejného kolapsu, vyhraje ten s nižším maximálním číslem tahu.\n\nPříklad tahu: '[0,4]' umístí strašidelnou značku do buněk 0 a 4."
+  },
+  "board": {
+    "current_board": "Deska Quantum Tic Tac Toe:\n\n{board}\n\nOdešlete váš tah jako '[a,b]', aby jste umístili kvantovou značku na dvě místa."
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát. Použijte '[a,b]'.",
+    "invalid_cells": "Neplatné nebo duplicitní indexy buněk.",
+    "already_solidified": "Jedna z buněk je již upevněná."
+  },
+  "game_action": {
+    "placed": "Hráč {player_id} umístil svou značku do superpozice mezi buňkami {pos_a} a {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Závislá superpozice vyřešena. Buňka ({r}, {c}) je nyní {symbol}.",
+    "last_cell_resolved": "Superpozice pro poslední buňku vyřešena. Buňka ({r}, {c}) je nyní {symbol}.",
+    "superposition_resolved": "Superpozice vyřešena. Buňka ({r}, {c}) je nyní {symbol}."
+  },
+  "outcome": {
+    "win": "Hráč {player_id} vyhrává s upevněnými značkami!",
+    "draw": "Hra je remízou!"
+  }
+}

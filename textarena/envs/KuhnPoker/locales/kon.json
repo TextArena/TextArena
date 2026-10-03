@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ngeye Mwana {player_id} na mbanza ya {max_rounds} ya mbanza ya Kuhn Poker.\nMbanza ya Mbanza:\n- Kuhn Poker utaka kamba 3 ya kamba na J, Q, K (J ya kusema, K ya kubwa)\n- Kila mwana akota {ante} chip na kupokea kamba 1 kila mbanza (kumbuka kwamba kamba haziwezi kuwa na kamba sawa na kamba ya mpinzani wako).\n- Mbanza ikauka kwa {max_rounds} mbanza\n- Mwana na chips mingi zaidi baada ya mbanza zote akashinda\nMbanza ya Vitendo:\n- '[check]': Pita bila kubeti (tu ikiwa hakuna beti kwenye meza)\n- '[bet]': Ongeza chip 1 kwenye poti (tu ikiwa hakuna beti kwenye meza)\n- '[call]': Lingana na beti ya mpinzani wako kwa kuongeza chip 1 kwenye poti\n- '[fold]': Achilia mkono wako na uache mpinzani wako akashinde poti"
+  },
+  "init_round": {
+    "round_start": "### Kukoma kipindi {current_round} kati ya {max_rounds} kipindi. Kadi yako ni: '{player_card}'",
+    "available_actions": "Mambu ya nge lenda sala kele: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kitendo lazima kiwe [Check], [Bet], [Call], au [Fold].",
+    "not_legal": "Kisalu fwete vanda {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Mwana {player_id}, alitoa kitendo: '[{move}]'.",
+    "valid_actions": "Mambu ya nge lenda sala kele yai: {legal_actions}.",
+    "round_summary": "{reason} Makisi manimani: Mwana 0: '{player_0_chips}'; Mwana 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Mwana {winner}'s {winner_card} inashinda Mwana {loser}'s {loser_card}. Mwana {winner} akashinda poti ya {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Na nsuka ya ba rondes {max_rounds}, bantu yonso zole vandaka ti bakiti kiteso mosi.",
+    "round_win": "Muntu yina kebula {player_id} mebwa.",
+    "winner_player0": "Mwana 0 akashinda kwa kuwa na chips mingi zaidi mwishoni mwa mbanza zote {max_rounds}.",
+    "winner_player1": "Muntu ya ntete ke nungaka kana yandi me kuma ti batapi mingi na nsuka ya ba rondes {max_rounds} yonso."
+  }
+}

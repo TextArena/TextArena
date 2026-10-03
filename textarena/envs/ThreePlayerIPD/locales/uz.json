@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Siz {player_id} o'yinchi 3-o'yinchi Iterated Prisoner's Dilemma o'yinida. Musobaqa {num_rounds} raund davom etadi.\nRaund tuzilishi:\n• {conv_rounds} bepul chat aylanalari\n• 1 qaror aylanasi - har bir raqibga bir token taqdim qiling: '[<opp-id> cooperate]' yoki '[<opp-id> defect]' (masalan, '[1 defect] [2 cooperate]'; standart 'hamkorlik'). \nJuftlik daromadlari matritsasi (har bir tartibsiz juftga qo'llaniladi):\n  - Ikkala hamkorlik qilish  ->  {reward}\n  - Ikkala ham xiyonat qilish     ->  {punishment}\n  - Siz xiyonat qilsangiz, ular hamkorlik qilishadi -> {temptation}\n  - Siz hamkorlik qilsangiz, ular xiyonat qilishadi -> {sucker}\nEng yuqori ball to'plagan o'yinchi(lar) barcha raundlarning oxirida g'olib bo'ladi."
+  },
+  "round": {
+    "start": "─── Boshlash davri {round} ─── Keyingi {conv_rounds} turlarda erkin suhbatlashishingiz mumkin.",
+    "chat_finished": "Raund {round} uchun suhbat tugadi. O'zingizning qarorlaringizni, har bir raqib uchun bitta token bilan kiritib yuboring: `[pid cooperate]` yoki `[pid defect]`."
+  },
+  "results": {
+    "header": "### Raund {round} - Natijalar:",
+    "pair_line": "{observation}\n\t {i}-o'yinchi {j}-o'yinchiga qarshi {choice_i} va {choice_j} tanladi (mos ravishda {i}-o'yinchi {gain_i} ball, {j}-o'yinchi {gain_j} ball oldi)",
+    "scores_open": "{observation} -> Joriy natijalar: ",
+    "score_first": "{observation}O'yinchi {player_id} ({score})",
+    "score_next": "{observation}; O'yinchi {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Yakuniy ballar: {scores}. Reyting guruhlari (eng yomon→eng yaxshi): {groups}"
+  }
+}

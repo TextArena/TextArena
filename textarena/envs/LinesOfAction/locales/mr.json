@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "तुम्ही LinesOfAction खेळातील खेळाडू {player_id} आहात.\nतुमचे तुकडे '{side}' आहेत, विरोधकाचे तुकडे '{other}' आहेत.\nहलण्याचे स्वरूप: `[b1b3]` (समन्वयातून समन्वयाला). कायदेशीर हलणे आडवे, अनुलंब, किंवा विकर्ण एकूण तुकड्यांच्या संख्येच्या समान चौरसांवर प्रवास करते. तुम्ही स्वतःच्या तुकड्यांवर उडी मारू शकता, पण विरोधकाच्या तुकड्यांवर नाही; विरोधकावर उतरणे त्याला कॅप्चर करते.  जेव्हा तुमचे सर्व तुकडे 8-शेजारी जोडलेले असतात तेव्हा जिंका."
+  },
+  "board": {
+    "current_board": "बोर्ड: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "स्वरूप e2e4 (पासून,पर्यंत समन्वय) असणे आवश्यक आहे.",
+    "no_piece": "{side} वर {coord} नाही.",
+    "identical": "मूळ आणि गंतव्य एकच.",
+    "not_straight_or_diagonal": "चाल सरळ किंवा तिर्यक असावी.",
+    "wrong_distance": "पंक्तीमध्ये तुकड्यांच्या समान अंतरावर हलवावे.",
+    "enemy_blocks": "शत्रूचा तुकडा रस्ता अडवतो.",
+    "destination_own": "गंतव्यस्थान स्वतःच्या हाताने व्यापलेले आहे."
+  },
+  "game_action": {
+    "moved": "खेळाडू {player_id} हलविले {from} -> {to}",
+    "captured_suffix": "खेळाडू {player_id} ने {from} -> {to} ने शत्रूला पकडले."
+  },
+  "outcome": {
+    "win": "सर्व तुकडे जोडलेले आहेत.",
+    "draw_no_capture": "पकडल्याशिवाय ६० चाली.",
+    "draw_repetition": "स्थिती तीन वेळा पुनरावृत्ती."
+  }
+}

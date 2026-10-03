@@ -1,0 +1,31 @@
+{
+  "_comment": "Lietuvių lokalizacija žaidimui Hangman. Vertėkite tik reikšmes (dešinėje pusėje). Palikite kiekvieną {placeholder} kaip yra.",
+  "_slots": {
+    "{board}": "Neutralus atvaizduotas žaidimo laukas (C00/C01 stulpelių antraštės, atskleisti raidės, '_' tarpai); nerversti",
+    "{tries_left}": "Liko nepavykusių bandymų (sveikas skaičius)",
+    "{guessed}": "Kableliais atskirtas sąrašas jau spėtų raidžių",
+    "{letter}": "Spėta raidė arba visas žodis (paliktas tokio paties formato)",
+    "{pct}": "Teisingai atspėtų simbolių procentas, suapvalintas iki 2 skaičių po kablelio",
+    "{target_word}": "Paslėptas taikinys žodis"
+  },
+  "prompt": {
+    "intro": "Žaidžiate Hangman. Žaidimo tikslas yra atspėti žodį, pateikiant vienos raidės spėjimus arba visą žodį.\nKiekvienas stulpelis yra numeruotas. Langeliai, kuriuos reikia užpildyti raidėmis, yra žymimi '_'.\n\nYra du būdai, kaip galite atsakyti. Galite pateikti vienos raidės spėjimus formato '[L]', arba galite spėti visą žodį formato '[LIGHT]'.\nJei duota raidė yra žodyje, ji bus atskleista tinklelyje.\nJei duotas žodis yra teisingas, laimite.\nŽaidžiant, jūsų pasirinkimų istorija bus pridėta žemiau. Naudokite informaciją, kad išsiaiškintumėte žodį ir laimėtumėte.\nTurite 6 nepavykusių bandymų, kol žaidimas baigiasi.\n\n"
+  },
+  "board": {
+    "status": "Dabartinė lenta:\n{board}\nJums liko {tries_left} bandymų.\nSpėtos raidės: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Neteisingas ėjimo formatas. Jūs neatsakėte su galiojančia 'raidė' arba 'žodis'.",
+    "already_guessed": "Jūs spėjote raidę '{letter}', kuri jau buvo spėta."
+  },
+  "message": {
+    "wrong_word": "Jūsų spėjimas '{letter}' nėra taikinys žodis.",
+    "letter_in": "Jūsų spėjimas {letter} yra žodyje",
+    "letter_not_in": "Jūsų spėjimas {letter} nėra žodyje. Jums liko {tries_left} gyvybių."
+  },
+  "outcome": {
+    "win_word": "Sveikiname! Jūs užbaigėte Hangman galvosūkį.",
+    "win_board": "Sveikiname! Jūs užbaigėte Hangman galvosūkį.",
+    "out_of_tries": "Jūs išnaudojote visus bandymus. Jūs spėjote {pct} procentą simbolių teisingai. Taikinys žodis buvo: {target_word}"
+  }
+}

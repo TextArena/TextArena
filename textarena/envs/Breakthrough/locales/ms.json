@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Anda bermain sebagai {color} dalam permainan Breakthrough. Anda bergerak ke arah {direction} pada papan {board_size}x{board_size}.\nPada giliran anda, anda boleh menggerakkan satu buah satu langkah ke hadapan atau secara menyerong ke hadapan.\nSesuatu buah hanya boleh bergerak secara menyerong jika terdapat buah pihak lawan di situ, dan hanya boleh memasuki petak yang telah diduduki melalui langkah menyerong.\nApabila melangkah ke petak yang mengandungi buah pihak lawan, anda menangkapnya dan buah pihak lawan itu dikeluarkan secara kekal daripada papan.\nGunakan notasi seperti UCI dalam kurungan siku, contohnya [a2a3] untuk bergerak dari a2 ke a3.\n* 'a' merujuk kepada lajur paling kiri, dan '1' ialah baris paling bawah (dari perspektif White).\n* Baris asal Black ialah baris paling atas (baris 8 pada papan 8x8). Baris asal White ialah baris paling bawah (baris 1 pada papan 8x8).\nPemain pertama yang buahnya mencapai baris asal pihak lawan menang. Jika semua buah anda ditangkap, anda kalah."
+  },
+  "invalid_move": {
+    "wrong_format": "Sila gunakan notasi algebra dalam kurungan siku seperti [a2a3].",
+    "out_of_bounds": "Langkah berada di luar sempadan papan.",
+    "illegal": "Langkah itu tidak mematuhi peraturan Breakthrough atau buah itu bukan milik anda."
+  },
+  "game_action": {
+    "moved": "Pemain {player_id} bergerak {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "White mencapai baris asal Black.",
+    "black_reached": "Black mencapai baris asal White.",
+    "white_captured": "Semua buah White telah ditangkap.",
+    "black_captured": "Semua buah Black telah ditangkap.",
+    "no_moves": "Pemain {player_id} tidak mempunyai langkah lagi."
+  }
+}

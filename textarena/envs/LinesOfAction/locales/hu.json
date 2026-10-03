@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction nyelvi fájl. NE fordítsa le a kulcsokat (bal oldal). Csak a értékeket fordítsa le (jobb oldal).",
+  "_slots": {
+    "{player_id}": "A játékos száma, 0 vagy 1",
+    "{side}": "A játékos bábujának betűjele, O vagy X",
+    "{other}": "Az ellenfél bábujának betűjele, O vagy X",
+    "{board}": "A tábla ASCII megjelenítése; hagyja változatlanul",
+    "{coord}": "Egy tábla koordináta, például b1 vagy a3",
+    "{from}": "Egy lépés forrás koordinátája, például b1",
+    "{to}": "Egy lépés cél koordinátája, például b3"
+  },
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a LinesOfAction játékban.\nAz Ön bábui '{side}', az ellenfél bábui '{other}'.\nLépés formátuma: `[b1b3]` (forrás-koordináta cél-koordináta). Egy érvényes lépés vízszintesen, függőlegesen vagy átlósan annyi mezőt tesz meg, ahány bábu (bármilyen színű) van azon a vonalon. Átugorhatja a saját bábuit, de nem az ellenfél bábuit; ha egy ellenfél bábujára érkezik, elfoglalja azt.  Nyer, ha az összes bábuját 8-szomszédosan összekötötte."
+  },
+  "board": {
+    "current_board": "Tábla:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "A formátumnak e2e4-nek kell lennie (forrás-, cél-koordináták).",
+    "no_piece": "Nincs {side} bábu a {coord} koordinátán.",
+    "identical": "A forrás- és cél-koordináták azonosak.",
+    "not_straight_or_diagonal": "A lépésnek egyenesnek vagy átlósanak kell lennie.",
+    "wrong_distance": "A lépésnek annyi mezőt kell megtennie, ahány bábu van a vonalon.",
+    "enemy_blocks": "Ellenfél bábuja blokkolja az utat.",
+    "destination_own": "A cél-koordináta saját bábujával van elfoglalva."
+  },
+  "game_action": {
+    "moved": "{player_id}. játékos lépett {from} -> {to}",
+    "captured_suffix": "{player_id}. játékos lépett {from} -> {to} és elfoglalt egy ellenséges bábut."
+  },
+  "outcome": {
+    "win": "Az összes bábu összekötve van.",
+    "draw_no_capture": "60 lépés telt el foglalás nélkül.",
+    "draw_repetition": "A pozíció háromszor ismétlődött."
+  }
+}

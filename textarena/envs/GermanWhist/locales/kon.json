@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Mambu ya kisalu kianza. Mambu ya kikundi: {trump_suit} (kadi ya kikundi: {trump_str}).",
+    "no_trump_card": "ata mosi ve"
+  },
+  "player_prompt": {
+    "intro": "O wewe mukendi {player_id} na German Whist.\n{phase_info}\nO wewe udi na {hand_size} kadi.\nTambula kadi na '[play N]', wapi N i posisioni yake na maboko nge (kwa mfano '[play 3]').",
+    "phase_learning": "KIPindi cha KUJIFUNZA: mshindi wa kila kifuli akota kadi iliyo wazi na mshindiwa akota kadi inayofuata kutoka kwenye sitaha. Majaribio yaliyoshinda katika kipindi hiki hayahesabiwi kuelekea ushindi.",
+    "phase_playing": "Konso mayele ya mbi yina bo tasadila banda ntangu yai, tanatila beto kununga."
+  },
+  "next_card": {
+    "playing_phase": "Bo kepesa ve ata karti mosi - kitini ya bansaka meyantika.",
+    "deck_empty": "Sitaha imekwisha - hakuna kadi inayotolewa.",
+    "available": "Karti ya bo kepesa: {card}",
+    "available_trump": "Bo me pesa karti: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Mutindu ya kusala kitambi kele mbote ve. Sadila '[play N]' sambu na kubula karte N-THE yina nge kele ti yo na maboko.",
+    "bad_position": "Nge kele na bakarti {hand_size}.",
+    "must_follow_suit": "Nge fwete landa mbandu na yandi mpi kubula karte {lead_suit}.",
+    "invalid_play": "Beto lenda sadila ve karti yina."
+  },
+  "game_action": {
+    "played": "Mwana-salu {player_id} ametambula kadi {card}."
+  },
+  "trick": {
+    "won": "Muntu yina kebula {winner_id} kebakaka nsaka ya bo mebutila yandi na maboko ti {card}.",
+    "won_learning": "Mchezaji {winner_id} akunda mchezo na {card} na akota kadi iliyoko juu."
+  },
+  "phase": {
+    "learning_complete": "Mambu yonso ya bo vandaka kulonga na kati me mana - konso mayele yina kele mfunu sambu na kununga."
+  },
+  "draw": {
+    "winner_received": "Nge me nunga mpi nge me baka {card}.",
+    "loser_received": "Nge me vidisa mayele ya kusala nsaka mpi nge me baka {card} na zulu ya mesa.",
+    "winner_preview": "Karti ya kelanda kele {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Kadi zilizoshinda mpaka sasa - Mwana-salu 0: {tricks0}, Mwana-salu 1: {tricks1}",
+    "scores_playing": "Kadi zinazohesabiki - Mwana-salu 0: {tricks0}, Mwana-salu 1: {tricks1}",
+    "phase": "Kitini ya ntete: {phase}",
+    "phase_learning": "Kipindi: {phase} ({remaining_cards} kadi zimesalia kwenye sitaha)"
+  },
+  "hand": {
+    "no_cards": "Bo ta pesa nge ve bakarti.",
+    "no_cards_in_hand": "Hakuna kadi mikononi",
+    "header": "Diboko na nge:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Ata muntu mosi ve me sala yo.",
+    "header": "Mayele ya bubu yai:",
+    "trump_indicator": "(TRUMP) Beto kele na kyese mingi sambu beto mezaba nde:",
+    "card_line": "{observation}\n  Mchezaji {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Nsaka kuyantikaka ve.",
+    "header": "=== MCHESO WA WHIST WA KIJERUMANI ===",
+    "phase": "{observation}\nMzunguko: {phase}",
+    "trump_suit": "{observation}\nSuti ya trump: {trump_suit}",
+    "trump_card": "{observation}\nKadi ya trump: {card}",
+    "cards_left": "{observation}\nKajila kwa kudia: {count}",
+    "next_card": "{observation}\nKadi inayofuata kwa mshindi: {card}",
+    "blank": "{observation}  ya kele na ntu-dyambu \"M\"",
+    "current_trick": "{observation} Mayele ya bubu yai:",
+    "trump_indicator": "(TRUMP) Beto kele na kyese mingi sambu beto mezaba nde:",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nMwana-salu {player_id}: {scoring} kadi zinazohesabiki ({tricks} jumla), {hand_size} kadi kwenye maboko"
+  },
+  "outcome": {
+    "summary": "Kipindi cha kujifunza - Mwana-salu 0: {l0}, Mwana-salu 1: {l1}. Kipindi cha kutambula - Mwana-salu 0: {p0}, Mwana-salu 1: {p1}. Mwana-salu {winner_id} anashinda na {winner_tricks} kadi zinazohesabiki!"
+  }
+}

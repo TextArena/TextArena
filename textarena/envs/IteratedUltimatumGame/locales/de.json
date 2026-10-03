@@ -1,0 +1,47 @@
+{
+  "_comment": "IteratedUltimatumGame Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel (linke Seite), nur die Werte (rechte Seite). Behalte jeden {platzhalter} exakt bei; übersetze die Aktions-Token [Offer: $X] / [Accept] / [Reject] nicht. Behalte das Währungssymbol '$' und alle Zahlen bei.",
+  "_slots": {
+    "{player_id}": "Die Spielernummer, 0 oder 1",
+    "{other_id}": "Die Nummer des anderen Spielers, 1 oder 0",
+    "{num_rounds}": "Gesamtzahl der Runden",
+    "{pool}": "Der pro Runde verfügbare Geldbetrag (eine Zahl)",
+    "{round_number}": "Die aktuelle Rundennummer",
+    "{proposer_id}": "Die Nummer des vorschlagenden Spielers, 0 oder 1",
+    "{responder_id}": "Die Nummer des antwortenden Spielers, 0 oder 1",
+    "{offer}": "Der angebotene Betrag (eine Zahl)",
+    "{keep}": "Der Betrag, den der Vorschlagende behält (eine Zahl)",
+    "{proposer_gain}": "Geld, das der Vorschlagende in dieser Runde gewonnen hat (eine Zahl)",
+    "{responder_gain}": "Geld, das der Antwortende in dieser Runde gewonnen hat (eine Zahl)",
+    "{total_0}": "Angesammeltes Gesamtguthaben von Spieler 0 (eine Zahl)",
+    "{total_1}": "Angesammeltes Gesamtguthaben von Spieler 1 (eine Zahl)",
+    "{winner}": "Die Nummer des gewinnenden Spielers",
+    "{loser}": "Die Nummer des verlierenden Spielers",
+    "{winner_total}": "Das Gesamtguthaben des Gewinners (eine Zahl)",
+    "{loser_total}": "Das Gesamtguthaben des Verlierers (eine Zahl)",
+    "{total}": "Das gleiche Endguthaben beider Spieler (eine Zahl)"
+  },
+
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} und spielst {num_rounds} Runden des Iterierten Ultimatumspiels.\nDu hast ${pool} zum Aufteilen in dieser Runde zwischen dir und Spieler {other_id}.\n\nVorschlagender:\n  - Mache ein Angebot: [Offer: $X] (0 <= X <= pool)\n  - Wenn angenommen → Du bekommst $(pool - X), der andere Spieler bekommt $X\n  - Wenn abgelehnt → Beide bekommen $0\n  - Beispiel: [Offer: $3]  oder  'Ich finde das fair. [Offer: $5]'\n\nAntwortender:\n  - Entscheide über das Angebot mit entweder [Accept] oder [Reject]\n  - Beispiel: 'Das erscheint angemessen. [Accept]'\n            'Zu unfair. [Reject]'\n"
+  },
+
+  "round": {
+    "begins":   "--- Runde {round_number} beginnt! ---\nSpieler {proposer_id} ist der Vorschlagende, Spieler {responder_id} ist der Antwortende.",
+    "offer":    "Runde {round_number}: Spieler {proposer_id} bietet ${offer} an Spieler {responder_id} (behält ${keep}).",
+    "accepted": "Spieler {responder_id} hat angenommen! Gewinne der Runde {round_number}: Spieler {proposer_id} +${proposer_gain}, Spieler {responder_id} +${responder_gain}. Neue Gesamtstände: Spieler 0: ${total_0}, Spieler 1: ${total_1}.",
+    "rejected": "Spieler {responder_id} hat das Angebot abgelehnt! Gewinne der Runde {round_number}: Beide Spieler +$0. Gesamtstände bleiben: Spieler 0: ${total_0}, Spieler 1: ${total_1}."
+  },
+
+  "invalid_move": {
+    "no_offer_format":  "Der Vorschlagende muss ein Angebot im Format [Offer: $X] machen.",
+    "bad_integer":      "Der Angebotsbetrag muss eine gültige ganze Zahl sein.",
+    "out_of_range":     "Das Angebot muss zwischen $0 und ${pool} liegen.",
+    "no_current_offer": "Kein aktuelles Angebot zum Beantworten vorhanden.",
+    "accept_or_reject": "Der Antwortende muss das Angebot entweder mit [Accept] oder [Reject] beantworten."
+  },
+
+  "outcome": {
+    "win":  "Spieler {winner} hat mit insgesamt ${winner_total} gegen die ${loser_total} von Spieler {loser} gewonnen.",
+    "draw": "Unentschieden! Beide Spieler beendeten das Spiel mit insgesamt ${total}."
+  }
+}

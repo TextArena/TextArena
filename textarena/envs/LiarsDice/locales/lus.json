@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "I {player_id} na Player i ni, {num_players}-player Liar's Dice game-ah.\nDan:\n- I turn-ah, i ti thei ang:\n  1) Bid thar siam ula, quantity sang zawk emaw face sang zawk (emaw pahnih) current bid aiin; '[Bid: 3, 4]' tia.\n  2) Bid hnuhnung Call turin '[Call]' tiin type rawh.\n\nI Call chuan:\n  - Face value zawng zawng dice-ah a count dik tak chu bid aiin a tlem chuan, bidder hnuhnung die khat a hloh ang.\n  - A nih loh chuan, caller die khat a hloh ang.\nPlayer die 0 a thlen chuan eliminate a ni ang. Player hnuhnung a la awm chuan a chak ang."
+  },
+  "board": {
+    "per_player": "\tPlayer {p}: {d}",
+    "new_round": "\nRound thar - Dice la awm {dice_summary}\nI dice hi {your_dice} an ni."
+  },
+  "call": {
+    "bidder_loses": "Player {current_player_id} in au! Face {face_value} a awm zawng tak chu {count} niin, {quantity} aiin a tlem zawk a ni.\nPlayer {loser_id} (bidder hnuhnung ber) in die pakhat a hloh.",
+    "caller_loses": "Player {current_player_id} in auh a, Face {face_value} count tak chu {count} a ni, chu chu {quantity} aiin a sang bakah.\nPlayer {loser_id} (auhtu) in a die khat a hloh."
+  },
+  "action": {
+    "bid_announce": "Player {player_id} a bid {quantity} of face {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "A hma lam bid tel lovin an ko a ni.",
+    "invalid_bid": "Bid diklo: {reason}",
+    "not_recognized": "Action hi a ṭha tawk lo, '[Bid: X, Y]' emaw '[Call]' emaw a ni lo. Action pekte: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Thil thar {new_quantity} hi tunlai {current_quantity} aiin a tlem zawk a ni.",
+    "face_lower": "Thil thar {new_face_value} hi tunlai {current_face_value} aiin a tlem zawk a ni.",
+    "identical": "Bid chu tuna bid ang chiah a ni.",
+    "face_range": "A hming lam hlutna chu 1 leh 6 inkârah a ni tûr."
+  },
+  "message": {
+    "eliminated_invalid": "Player {player_id} chu tihdik lohvin a chawlhtir a ni."
+  },
+  "outcome": {
+    "win": "Player {winner} a chak! Final ranking: {final_ranking}"
+  }
+}

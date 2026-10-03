@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in SimpleTak.\nSulla tavola, le tue pietre appaiono come '{player_stone}' e le pietre del tuo avversario appaiono come '{opponent_stone}'.\n\nNel tuo turno, scegli una cella vuota (tramite il suo indice numerato) e posiziona la tua pietra lì.\nAd esempio, '[12]' posiziona la tua pietra nella cella 12.\n\nIl tuo obiettivo è formare un percorso continuo di pietre che collega due bordi opposti della tavola (dall'alto in basso o da sinistra a destra)."
+  },
+  "invalid_move": {
+    "invalid_move_format": "Formato di mossa non valido",
+    "cell_out_of_range": "Numero di cella non valido {cell_num}. Deve essere tra 0 e {max_board_num}.",
+    "cell_already_occupied": "La cella {cell_num} è già occupata. Scegli una cella vuota."
+  },
+  "board": {
+    "current_state": "Tavola attuale:\n\n{rendered_board}\nMosse disponibili: {available_moves}"
+  },
+  "action": {
+    "placement": "Il Giocatore {current_player_id} ha posizionato il suo simbolo ({symbol}) nella cella {cell_num}."
+  },
+  "outcome": {
+    "winner": "Il Giocatore {current_player_id} ('{symbol}') ha collegato due bordi opposti!",
+    "draw": "La tavola è piena. È un pareggio!"
+  }
+}

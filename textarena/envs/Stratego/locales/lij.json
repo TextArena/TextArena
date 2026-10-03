@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ti sei o Zugador {player_id} in Stratego.\nO teu obiettivo o l'é de catturâ a bandëa de l'avversäio ò de eliminâ tutte e sò peççe movibili.\nO teu esercito o l'é stæto posizionòu in sce a scacchêa, conpreizo a teu bandëa, e bombe e âtre peççe de diverso grado.\n\n### Istruzioin do Zêugo\n1. **Regole de Movimento:**\n   - In to turno, ti pêu muovere 'na peçça de 'n passo a 'n quadròu adiacente (in sciù, in zu, a manciña ò a drita) che o l'é za ocupòu da-e teu peççe.\n   - Esempio: 'na peçça a pêu muovere da A1 a B1 ò da A1 a A2 se B1 e A2 no son ocupæ da-e peççe do zugador.\n   - Se a peçça selezionâ a l'é 'na bomba ò 'na bandëa, a no pêu êse mosa.\n2. **Battagge:**\n   - Se ti muovi in sce 'n quadròu ocupòu da 'na peçça de l'avversäio, alôa 'na battaggia a ocorrë:\n     - A peçça co-o grado ciù âto a vince e a elimina a peçça de l'avversäio.\n     - Se i gradi son pægi, tutte e doe peççe son eliminæ da-a scacchêa.\n     - **Caxi Speçiali:**\n       - E bombe eliminan a ciù parte de peççe atacanti, eccetto i minatoî, che desativan e bombe.\n       - I spie pêuan sconfizze o maresciallo se o spia o l'atacca primma, ma perdan contra tutte e âtre peççe.\n3. **Obiettivi Strategichi:**\n   - Identifica e peççe de l'avversäio attraverso i sò movimenti e battagge.\n   - Proteggi a teu bandëa mentre ti çerchi de catturâ a bandëa de l'avversäio.\n   - Usa i scòuti strategicamente pe guägnâ informaçioin in sce e peççe de l'avversäio e atacâ e peççe debole.\n\n### Come Fâ 'n Movimento:\n1. Specifica e coordinæ da peçça che ti vêu muovere e a sò destinazion.\n2. Usa o formato: [A0 B0], dove A0 a l'é a poxizion de partensa e B0 a l'é a destinazion.\n   - Esempio: Pe muovere 'na peçça da riga 0, colonna 0 a riga 1, colonna 0, inserisci [A0 B0].\n3. Assicurati che a destinazion a sia valida segondo e regole de movimento de d'äto.\n\n### Nòtte Inportanti:\n- A scacchêa a mostrë e peççe e e sò poxizion, p.e. MN, MS.\n- A scacchêa a mostrë ascì e poxizion conosciue de e peççe de l'avversäio senza rivelâ i sò gradi, p.e. ?.\n- I quadræ con ~ son laghi e no pêuan êse mosa.\n- Come suggerimento, inizia o zêugo muovendo e peççe che son in sce a linia de fronte pe guägnâ informaçioin in sce e peççe de l'avversäio. O zugador 0 e o zugador 1 han a linia de fronte in sce a riga D e G rispetivamente.\n\nEcco o stato atuale da scacchêa:\n"
+  },
+  "board": {
+    "current_board": "Tavoliêre atoâle:\n\n{board}\nMövi disponibili: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato d'azione no valido. Giögaô {player_id} no l'à inserîo 'n möve into formato [A0 B0].",
+    "invalid_coordinates": "Formato d'açion invalido. O zugatô {player_id} o no l'à inserîo de coordinæ valide.",
+    "not_own_piece": "Formato de açion invalido. O zugador {player_id} o deve muovere 'na de sò peççe.",
+    "scout_through_pieces": "Formato de açion invalido. O zugador {player_id} no pêu muovere 'n scòuta attraverso âtre peççe.",
+    "scout_diagonal": "Formato de açion invalido. O zugador {player_id} no pêu muovere 'n scòuta in diagonale.",
+    "non_scout_multi_square": "A forma de l'açion a no va. I peçi, feua che i scovacci, se peu solo fâ unna piazza à vòtta.",
+    "move_into_lake": "Formato d'açion invalido. O zugatô {player_id} o no peu intrâ into lago.",
+    "move_onto_own_piece": "Formato d'açion invalido. O zugatô {player_id} o no peu spostâse inta seu pròpria pecca.",
+    "move_bomb_or_flag": "Formato d'açion invalido. O zugatô {player_id} o no peu spostâ unna bomba ò un drappo."
+  },
+  "game_action": {
+    "you_moved": "Ti te sæ spostòu o tö pezzo da {source} a {dest}.",
+    "opponent_moved": "Giögaô {player_id} o l'à spostòu 'n pezzo da {source} a {dest}.",
+    "you_equal_ranks": "Ti te sæ spostòu o tö pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto i graddi sòn uguali, amboi pezzi sòn stæti eliminaî.",
+    "opponent_equal_ranks": "Giögaô {player_id} o l'à spostòu 'n pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto i graddi sòn uguali, amboi pezzi sòn stæti eliminaî.",
+    "you_miner_defused": "Ti te sæ spostòu o tö pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto i minaôi pònn disinnescâ e bombe, ti à vinto a bataggia.",
+    "opponent_miner_defused": "O zugador {player_id} o l'ha muovuo 'na peçça da {source} a {dest}. A peçça atacante a l'ëa {attacking_rank} e a peçça de destinazion a l'ëa {target_rank}. Come i minatoî pêuan desativâ e bombe, ti æ perso a battaggia.",
+    "you_bomb_lost": "Ti te sæ spostòu o tö pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto l'atacante no l'è 'n minaô, ti à perduo a bataggia.",
+    "opponent_bomb_won": "Giögaô {player_id} o l'à spostòu 'n pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto l'atacante no l'è 'n minaô, ti à vinto a bataggia.",
+    "you_spy_won": "Ti te sæ spostòu o tö pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto l'atacante o l'è 'n spion e a destinaçion a l'è 'n maresciallo, ti à vinto a bataggia.",
+    "opponent_spy_lost": "O zugador {player_id} o l'ha muovuo 'na peçça da {source} a {dest}. A peçça atacante a l'ëa {attacking_rank} e a peçça de destinazion a l'ëa {target_rank}. Come l'atacante o l'é 'n spia e a destinazion a l'é 'n maresciallo, ti æ perso a battaggia.",
+    "you_higher_won": "Ti te sæ spostòu o tö pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto l'atacante o l'è 'n graddo superiô a-o de destinaçion, ti à vinto a bataggia.",
+    "opponent_higher_lost": "Giögaô {player_id} o l'à spostòu 'n pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto l'atacante o l'è 'n graddo superiô a-o de destinaçion, ti à perduo a bataggia.",
+    "you_lower_lost": "Ti ê spostòu o tò peçço da {source} a {dest}. O peçço ch'o l'attaccava o l'êa {attacking_rank} e o peçço de destinasion o l'êa {target_rank}. Comme l'attaccante o l'è de graduo ciù basso da-o destinatäio, ti ê perduo a battaggia.",
+    "opponent_lower_won": "Giögaô {player_id} o l'à spostòu 'n pezzo da {source} a {dest}. O pezzo atacante o l'êa {attacking_rank} e o pezzo de destinaçion o l'êa {target_rank}. Into quanto l'atacante o l'è 'n graddo inferiô a-o de destinaçion, ti à vinto a bataggia."
+  },
+  "outcome": {
+    "flag_captured": "O zugatô {player_id} o l'à catturou a bandiera do conträio!",
+    "no_movable_pieces": "Giögaô {winner_id} o l'à vinto! Giögaô {loser_id} no gh'à ciù pezzi möobili."
+  }
+}

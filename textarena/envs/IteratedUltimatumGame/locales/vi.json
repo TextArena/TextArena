@@ -1,0 +1,43 @@
+{
+  "_comment": "Tệp ngôn ngữ IteratedUltimatumGame. KHÔNG được dịch các khóa (bên trái). Chỉ dịch các giá trị (bên phải). Giữ mọi {placeholder} y như ban đầu; không dịch các token hành động [Offer: $X] / [Accept] / [Reject]. Giữ nguyên ký hiệu tiền tệ '$' và tất cả các số.",
+  "_slots": {
+    "{player_id}": "Số thứ tự của người chơi, 0 hoặc 1",
+    "{other_id}": "Số thứ tự của người chơi khác, 1 hoặc 0",
+    "{num_rounds}": "Tổng số vòng",
+    "{pool}": "Số tiền có sẵn mỗi vòng (một số)",
+    "{round_number}": "Số thứ tự vòng hiện tại",
+    "{proposer_id}": "Số thứ tự của người đề xuất, 0 hoặc 1",
+    "{responder_id}": "Số thứ tự của người phản hồi, 0 hoặc 1",
+    "{offer}": "Số tiền được đề xuất (một số)",
+    "{keep}": "Số tiền người đề xuất giữ lại (một số)",
+    "{proposer_gain}": "Số tiền người đề xuất kiếm được trong vòng này (một số)",
+    "{responder_gain}": "Số tiền người phản hồi kiếm được trong vòng này (một số)",
+    "{total_0}": "Tổng số tiền tích lũy của Người chơi 0 (một số)",
+    "{total_1}": "Tổng số tiền tích lũy của Người chơi 1 (một số)",
+    "{winner}": "Số thứ tự của người chơi thắng",
+    "{loser}": "Số thứ tự của người chơi thua",
+    "{winner_total}": "Tổng số tiền của người chơi thắng (một số)",
+    "{loser_total}": "Tổng số tiền của người chơi thua (một số)",
+    "{total}": "Tổng số tiền cuối cùng của mỗi người chơi (một số)"
+  },
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id}, chơi {num_rounds} vòng của Trò chơi Đề xuất Lặp lại.\nBạn có ${pool} để chia trong vòng này giữa bản thân và Người chơi {other_id}.\n\nNgười đề xuất:\n  - Đề xuất một số tiền: [Offer: $X] (0 <= X <= pool)\n  - Nếu được chấp nhận → Bạn nhận $(pool - X), người chơi khác nhận $X\n  - Nếu bị từ chối → Cả hai đều không nhận được gì\n  - Ví dụ: [Offer: $3]  hoặc  'Tôi nghĩ đây là công bằng. [Offer: $5]'\n\nNgười phản hồi:\n  - Quyết định về đề xuất bằng cách chọn [Accept] hoặc [Reject]\n  - Ví dụ: 'Điều này có vẻ hợp lý. [Accept]'\n            'Quá bất công. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Vòng {round_number} bắt đầu! ---\nNgười chơi {proposer_id} là người đề xuất, Người chơi {responder_id} là người phản hồi.",
+    "offer": "Vòng {round_number}: Người chơi {proposer_id} đề xuất ${offer} cho Người chơi {responder_id} (giữ lại ${keep}).",
+    "accepted": "Người chơi {responder_id} đã chấp nhận! Vòng {round_number} thu được: Người chơi {proposer_id} +${proposer_gain}, Người chơi {responder_id} +${responder_gain}. Tổng mới: Người chơi 0: ${total_0}, Người chơi 1: ${total_1}.",
+    "rejected": "Người chơi {responder_id} đã từ chối đề xuất! Vòng {round_number} thu được: Cả hai người chơi +$0. Tổng vẫn giữ nguyên: Người chơi 0: ${total_0}, Người chơi 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Người đề xuất phải sử dụng định dạng [Offer: $X] để đề xuất.",
+    "bad_integer": "Số tiền đề xuất phải là một số nguyên hợp lệ.",
+    "out_of_range": "Số tiền đề xuất phải nằm trong khoảng từ $0 đến ${pool}.",
+    "no_current_offer": "Không có đề xuất hiện tại để phản hồi.",
+    "accept_or_reject": "Người phản hồi phải chọn [Accept] hoặc [Reject] đề xuất."
+  },
+  "outcome": {
+    "win": "Người chơi {winner} thắng với tổng ${winner_total} so với ${loser_total} của Người chơi {loser}.",
+    "draw": "Hòa! Cả hai người chơi kết thúc với tổng ${total}."
+  }
+}

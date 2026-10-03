@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Du är spelare {player_id} ({piece}). Motståndaren är ({opp}).\nAnge drag som '[a2 a3]' (från → till).\n- Ett vanligt drag är ett steg framåt till en intilliggande tom nod.\n- En fångst är ett hopp över en intilliggande motståndarpjäs som landar på den tomma noden bortom.\nVarje fångst ger {score_per_capture} poäng.\nSpelet slutar efter {max_moves} drag eller när en spelare inte har något giltigt drag."
+  },
+  "board": {
+    "current_board": "Drag #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "Fel format. Använd '[a2 a3]'.",
+    "unknown_square": "Okänd ruta.",
+    "not_your_piece": "Källan är inte din pjäs.",
+    "dest_not_empty": "Destinationen är inte tom.",
+    "illegal": "Ogiltigt drag."
+  },
+  "game_action": {
+    "captured": "Spelare {player_id} tog en pjäs! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Spelare {player_id} har inga pjäser.",
+    "cannot_move": "Spelare {player_id} kan inte flytta.",
+    "higher_score": "Högre fångstpoäng.",
+    "move_limit": "Draggränsen har nåtts."
+  }
+}

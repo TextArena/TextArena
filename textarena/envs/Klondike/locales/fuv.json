@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "A yi waƙa Klondike Solitaire. Koɗume maɓɓe a yi waƙa ɗum waƙa foundation piles.\n\nDokkal Waƙa:\n- Foundation piles (F1-F4): A yi waƙa Ace zuwa King in suit\n- Tableau piles (T1-T7): A yi waƙa down alternating colors (red on black, black on red)\n- Stock: A yi waƙa cards zuwa waste pile\n- Waste (W): Top card available for play\n\nDokkal:\n- 'draw' - A yi waƙa cards daga stock zuwa waste\n- 'move <source> <destination> [count]' - A yi waƙa cards daga pile zuwa pile\n  Misal: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count a yi waƙa 'all', a yi waƙa a yi waƙa face-up cards duka.\n- 'forfeit' - A yi waƙa game immediately zuwa a yi waƙa score maɓɓe\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nA yi waƙa actions duka in one turn by separating them da commas:\n  Misal: 'draw, move W T1, move T2 F1'\n\nKings duka a yi waƙa a empty tableau piles.\nActions a yi waƙa in order - a yi waƙa one fails, a yi waƙa actions duka a skipped.\nA yi waƙa 'forfeit' a yi waƙa game a yi waƙa impossible zuwa yi waƙa."
+  },
+  "format_error": {
+    "no_brackets": "Dabare kuuɗe je wala kuugal. Aje haani wonda nder dabareji marɗi jaawal.",
+    "no_closing_bracket": "Nulal kuuɗe je wala bote. Walaa haɓɓol ɓernde ']'",
+    "empty_command": "Dokkal maɓɓe. A yi waƙa 'draw' ko 'move <source> <destination> [count]'",
+    "empty_action": "Kuugal je wala kujeji",
+    "move_needs_args": "Ummaatoore Move e yiɗi aslu be jaɓɓorde. Naftirol: 'move <source> <destination> [count]'",
+    "count_positive": "Count a yi waƙa positive ko 'all'",
+    "count_invalid": "Count maɓɓe. A yi waƙa number ko 'all'",
+    "unknown_command": "Dokkal maɓɓe '{cmd}'. A yi waƙa 'draw', 'move <source> <destination> [count]', ko 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "A̱yiyaakel {n}: {msg}",
+    "before_failure": "Naftirol {n} kuuɗe (s) hiddeko ɗum waɗa.",
+    "failed": "A̱yiyaakel {n} mbele: {msg}"
+  },
+  "move_result": {
+    "drew": "Bindi je ɗon nder kujeji be ko haani.",
+    "cannot_draw": "Wala ko wurtinata. Fuuji be kujeeji ɗon wala goɗɗum.",
+    "invalid_pile": "Innde pile je wala kuugal. Naftir W, F1-F4, mala T1-T7",
+    "foundation_one_card": "Waawai yahugo kaarji 1 tan haa babal man.",
+    "waste_to_foundation_ok": "Cardi je ɗon yahra diga kujeji yahugo to tiggol F{dst}",
+    "waste_to_foundation_bad": "Walaa ko yahata kujeji je ɗon nder tiggaaki maɓɓoore man.",
+    "tableau_to_foundation_ok": "Naɗa kaarti e tableau T{src} yimɓe foundation F{dst}",
+    "tableau_to_foundation_bad": "Wota jaɓɓa kartal tableau ha nder tiggaaki maɓɓoore nden",
+    "foundation_to_foundation": "Walaa yahugo diga tiggaaki ha taggaaki feere",
+    "waste_to_tableau_one_card": "Waawai yahugo kaarji 1 tan diga kujeeji ha tableau",
+    "waste_to_tableau_ok": "Jaɓɓorgo Casi ɓillaaji ha Tableau T{dst}",
+    "waste_to_tableau_bad": "Walaa dabare darnugo kart ha dow tabiru man.",
+    "no_face_up": "Wala kaadiji je ɗon fahin ngam yahugo.",
+    "tableau_to_tableau_ok": "Naɗa {count} kaarti e tableau T{src} yimɓe T{dst}",
+    "tableau_to_tableau_bad": "A̱ngaa naɗa {count} kaarti e T{src} yimɓe T{dst}",
+    "foundation_to_tableau_one_card": "Waawai yahugo kaarji 1 tan diga tiggol ha tableau",
+    "foundation_empty": "Foundation F{src} wala kujeji",
+    "foundation_to_tableau_ok": "Naɗa kaarti e foundation F{src} yimɓe tableau T{dst}",
+    "foundation_to_tableau_bad": "Walaa je foondi kaar ha dow table T{dst}",
+    "to_waste_or_stock": "Walaa ko yahata ha nder kujeji mala be kareeji"
+  },
+  "outcome": {
+    "forfeit": "Fijirde nde jaɓɓaama. Luttuɗum: {score} karte nder tiggol man.",
+    "won": "Koolaaɓe, on heɓii fijoji Klondike Solitaire!",
+    "turn_limit": "Waƙa ɓa! A yi waƙa maximum of {max_turns} turns. Score: {score} cards in foundations."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== Ɗownugo e jaɓɓol-ɓaawoore.",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Bande: {stock} karteji",
+    "waste": "Ladde (W): {waste}",
+    "foundations_header": "Duddumji:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabel:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

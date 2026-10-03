@@ -37,22 +37,11 @@ class MinesweeperEnv(ta.Env):
             "first_move": self.first_move, 
             "rendered_board": self._render_board()}
         self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
-        self.state.add_observation(message=f"Game Board:\n\n{self._render_board()}", observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(message=self.m("board", "game_board", board=self._render_board()), observation_type=ta.ObservationType.GAME_BOARD)
 
     
     def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
-        prompt = (
-            f"You are playing the Minesweeper game.\nThe objective of the game is to reveal all cells that do not contain mines.\n"
-            "To make a move, simply specify the row and column coordinates you want to reveal using the format:\n"
-            "- `[row col]`: Reveal the cell at the specified row and column.\n"
-            "For example:\n"
-            "- `[3 2]` to reveal the cell in Row 3, Column 2.\n"
-            "- `[5 6]` to reveal the cell in Row 5, Column 6.\n"
-            "On your first move, you will reveal an area around the cell you choose to ensure a safe start.\n"
-            "The current board layout is shown below. Cells that are unrevealed are represented by a dot ('.'), revealed numbers show the count of adjacent mines.\n"
-            "Be mindful not to choose already revealed cells.\n"
-            "Here is the current board layout:\n"
-        ) #+ game_state["rendered_board"]
+        prompt = self.m("player_prompt", "intro") #+ game_state["rendered_board"]
         return prompt
 
     def _observe_current_state(self) -> None:
@@ -61,7 +50,7 @@ class MinesweeperEnv(ta.Env):
         """
 
         self.state.add_observation(
-            message=f"Current Board:\n\n{self._render_board()}",
+            message=self.m("board", "current_board", board=self._render_board()),
             observation_type=ta.ObservationType.GAME_BOARD
         )
     
@@ -85,14 +74,14 @@ class MinesweeperEnv(ta.Env):
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION) ## Update the observation
         match = re.compile(r"\[(\d+)\s(\d+)\]").search(action) # e.g. [3 2]
         if match is None:
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason="You did not respond with valid coordinates in square brackets.")
+            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "wrong_format"))
         else:
             row, col = int(match.group(1)), int(match.group(2))
             if not (0 <= row < self.rows and 0 <= col < self.cols):
-                self.state.set_invalid_move(reward=self._get_percentage_completion(), reason="The specified row and column coordinates are out of bounds.")
+                self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "out_of_bounds"))
             else:
                 if self.revealed[row][col]:
-                    self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"The cell at ({row}, {col}) has already been revealed.")
+                    self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "already_revealed", row=row, col=col))
                 else:
                     if self.first_move: ## Handle the first move
                         self.clear_all_flags()
@@ -108,7 +97,7 @@ class MinesweeperEnv(ta.Env):
                         if self.grid[current_row][current_col] == -1:
                             pct_complete = self._get_percentage_completion()
                             self.revealed[row][col] = False  # Unmark the initial cell as revealed immediately
-                            self.state.set_invalid_move(reward=pct_complete, reason=f"You hit a mine at ({current_row}, {current_col}).")
+                            self.state.set_invalid_move(reward=pct_complete, reason=self.m("invalid_move", "hit_mine", row=current_row, col=current_col))
 
                         # If the cell has no adjacent mines, add its neighbors to the queue
                         if self.grid[current_row][current_col] == 0:
@@ -121,7 +110,7 @@ class MinesweeperEnv(ta.Env):
                                         queue.append((neighbor_row, neighbor_col))
 
                     self.state.add_observation(
-                        message=f"You revealed the cell at ({row}, {col}).",
+                        message=self.m("game_action", "revealed", row=row, col=col),
                         observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION
                     )
                     # self.state.add_observation(message=f"Game Board:\n{self._render_board()}", observation_type=ta.ObservationType.GAME_BOARD)
@@ -130,10 +119,10 @@ class MinesweeperEnv(ta.Env):
 
         ## Check if the game is terminated
         if self._is_solved():
-            self.state.set_outcome(reward=1, reason=f"Congratulations! You have successfully cleared the Minesweeper board.")
+            self.state.set_outcome(reward=1, reason=self.m("outcome", "win"))
         elif self.state.check_turn_limit():
             pct_complete = self._get_percentage_completion()
-            self.state.set_outcome(reward=pct_complete, reason=f"The turn limit has been reached. You successfully uncovered {round(pct_complete * 100)}% of the safe cells.")
+            self.state.set_outcome(reward=pct_complete, reason=self.m("outcome", "turn_limit", percent=round(pct_complete * 100)))
             
         self._observe_current_state()  ## Add the current state to the observations
         

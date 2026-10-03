@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "אתה שחקן {player_id} בדילמת האסיר החוזרת לשלושה שחקנים. המשחק נמשך {num_rounds} סיבובים.\nמבנה הסיבוב:\n• {conv_rounds} תורים של שיחה חופשית\n• תור החלטה אחד — שלח אסימון אחד לכל יריב: '[<opp-id> cooperate]' או '[<opp-id> defect]' (לדוגמה, '[1 defect] [2 cooperate]'; ברירת המחדל היא 'cooperate').\nמטריצת התגמולים לכל זוג שחקנים (מיושמת על כל זוג לא-סדור):\n  - שניהם בוחרים cooperate  ->  {reward}\n  - שניהם בוחרים defect     ->  {punishment}\n  - אתה בוחר defect והאחר בוחר cooperate -> {temptation}\n  - אתה בוחר cooperate והאחר בוחר defect -> {sucker}\nהשחקן או השחקנים בעלי הניקוד הגבוה ביותר בתום כל הסיבובים מנצחים."
+  },
+
+  "round": {
+    "start": "─── סיבוב {round} מתחיל ───\tניתן לשוחח בחופשיות במשך {conv_rounds} תורי השיחה הבאים.",
+    "chat_finished": "השיחה בסיבוב {round} הסתיימה. שלח את ההחלטות שלך, אסימון אחד לכל יריב: `[pid cooperate]` או `[pid defect]`."
+  },
+
+  "results": {
+    "header": "### סיבוב {round} — תוצאות:",
+    "pair_line": "{observation}\n\t שחקן {i} ושחקן {j} בחרו בהתאמה {choice_i} ו-{choice_j} (שחקן {i} קיבל {gain_i} נקודות ושחקן {j} קיבל {gain_j} נקודות)",
+    "scores_open": "{observation}\n-> הניקוד הנוכחי: ",
+    "score_first": "{observation}שחקן {player_id} ({score})",
+    "score_next": "{observation}; שחקן {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+
+  "outcome": {
+    "final": "תוצאות סופיות: {scores}. קבוצות דירוג (הגרועה ביותר→הטובה ביותר): {groups}"
+  }
+}

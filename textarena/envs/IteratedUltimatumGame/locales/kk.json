@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Сіз Итерациялық Ультиматум Ойынның {num_rounds} раундын ойнайтын {player_id} ойыншысыз. Бұл раундты өзіңіз бен {other_id} ойыншы арасында бөлуге ${pool} бар. Ұсынушы: - Ұсыныс жасаңыз: [Offer: $X] (0 <= X <= пул) - Егер қабылданса → Сіз $ ((pool - X) аласыз, басқа ойыншы $ X алады - Егер қабылданбаса → Екеуі де $ 0 алады - Мысал: [Offer: $3] немесе \"Менің ойымша, бұл әділетті. [Offer: $5]\" Жауап беруші: - Ұсынысты [Accept] немесе [Reject] - мысал: \"Бұл ақылға қонымды көрінеді. [Accept]\" 'Ата әділетсіз. [Reject]'"
+  },
+  "round": {
+    "begins": "--- Раунд {round_number} басталады! --- {proposer_id} ойыншы - ұсыныс беруші, {responder_id} ойыншы - жауап беруші.",
+    "offer": "Раунд {round_number}: Ойыншы {proposer_id} ойыншы {responder_id}ге ${offer} ұсынады (${keep} ұстап қалады).",
+    "accepted": "Ойыншы {responder_id} қабылданды! Раунд {round_number} пайда: Ойыншы {proposer_id} + ${proposer_gain}, Ойыншы {responder_id} + ${responder_gain}. Жаңа жиынтық: Ойыншы 0: ${total_0}, Ойыншы 1: ${total_1}.",
+    "rejected": "Ойыншы {responder_id} ұсынысты қабылдамады! Раунд {round_number} пайда: Екі ойыншы +$0. Жалпы саны қалды: Ойыншы 0: ${total_0}, Ойыншы 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Ұсынысты ұсынушы [Offer: $X] форматын пайдалана отырып, ұсыныс жасауы тиіс.",
+    "bad_integer": "Ұсынылған сома жарамды бүтін сан болуы тиіс.",
+    "out_of_range": "Ұсыныс $0 мен ${pool} аралығында болуы тиіс.",
+    "no_current_offer": "Қазіргі таңда жауап беруге ұсыныстар жоқ.",
+    "accept_or_reject": "Жауап беруші ұсынысты [Accept] немесе [Reject] беруі тиіс."
+  },
+  "outcome": {
+    "win": "Ойыншы {winner} ${winner_total} жалпы ұтысымен ойыншы {loser} ${loser_total} ұтысымен ұтысты.",
+    "draw": "Тең ойын! Екі ойыншы да ${total} жиналды."
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Sega ni dua na kadi se bera mai.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Vakalotu Dua vs Dealer\n\n📖 IVAKARAU NI QITO:\n• O sa tekivu mai {start_chips} chip\n• Deka dua ni 52 ka (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• O qito tiko vakalotu dua kei na dealer (vale)\n• Kila raundi e tekivu mai na fasa ni Ultimate Texas Hold'em: o post ANTE kei na BLIND bets, receive 2 hole ka, decide on optional PLAY bets across na fasa ni betting, then reveal community ka kei na compare nomu best 5-ka hand against na dealer’s. Nomu goal e maximize nomu winnings (ni o sa rawata na ligadra vinaka), while minimizing nomu losses (ni o sa rawata na ligadra ca).\n• Qito e oti ni o sa yaco 0 chip se lailai e tekivu ni raundi (LOSS) se oti 1000 raundi kei na chip (WIN)\n\n💰 IVAKARAU NI BETTING:\n• ANTE: Mandatory ${ante} bet e kila raundi\n• BLIND: Mandatory ${ante} bet e kila raundi\n• PLAY: Optional bet e gameplay. Throughout na raundi, o rawa ni cakava ga dua na ka: (${ante4} ni cakava e PRE-FLOP, ${ante2} ni cakava e FLOP, se ${ante} ni cakava e RIVER. E rawa ni fold e river, give up e ligadra, kei na cakava ga bet.)\n\n🎴 IVAKARAU NI KA:\n• O receive 2 face-up ka (nomu hole ka)\n• Dealer receive 2 face-down ka (hidden mai nomu)\n• 5 community ka e deal face-down initially\n• Community ka e reveal progressively e fasa ni qito\n\n🏆 IVAKARAU NI DEALER:\n• Dealer e rawa ni qualify, e rawa ni dua na PAIR (2 ka ni yaca vinaka) e ligadra, e rawa ni 2 ka e ligadra kei na 5 community ka.\n• Dealer qualification e affect na betting outcomes, e rawa ni explain e muri.\n\n🎮 FASA NI QITO & ACTIONS:\n📋 PRE-FLOP:\n  • Actions: [4x] (${ante4}) se [check]\n  • [4x]: Place ${ante4} PLAY bet, reveals first 3 community ka\n  • [check]: Ga bet, reveals first 3 community ka\n\n📋 FLOP:\n  • Ni 4x bet e cakava: Ga [skip] e rawa (auto-reveals last 2 community ka)\n  • Ni sega 4x bet: [2x] (${ante2}) se [check]\n  • [2x]: Place ${ante2} PLAY bet, reveals last 2 community ka\n  • [check]: Ga bet, reveals last 2 community ka\n\n📋 RIVER:\n  • Ni 4x se 2x bet e cakava: Ga [skip] e rawa (auto-proceeds e showdown)\n  • Ni sega prior PLAY bet: [1x] (${ante}) se [fold]\n  • [1x]: Place ${ante} PLAY bet, proceeds e showdown\n  • [fold]: Give up ligadra, lose ANTE kei na BLIND bets\n\n📋 SHOWDOWN:\n  • Ka kece e reveal kei na evaluate\n  • Best 5-ka hand mai 7 ka (2 hole + 5 community)\n  • Bets e settled according e payout rules\n\n💎 IVAKARAU NI PAYOUT:\n📊 ANTE BET:\n  • Dealer e sega ni qualify: PUSH (bet e lesu)\n  • Dealer e qualify & o win: 1:1 payout (bet + winnings)\n  • Dealer e qualify & o lose: Bet e lose\n  • Tie: PUSH (bet e lesu)\n\n📊 BLIND BET:\n  • E sega ni affect dealer qualification\n  • O win: Bet e lesu kei na additional payout e ligadra strength\n  • O lose: Bet e lose\n  • Tie: PUSH (bet e lesu)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Ga additional payout\n\n📊 PLAY BET:\n  • E sega ni affect dealer qualification\n  • Direct comparison: Nomu best hand vs Dealer's best hand\n  • O win: 1:1 payout (bet + winnings)\n  • O lose: Bet e lose\n  • Tie: PUSH (bet e lesu)\n\n🎯 IVAKARAU NI LIGADRA (Best e Worst):\n  1. Royal Flush: A-K-Q-J-10 ni yaca vinaka\n  2. Straight Flush: 5 ka ni yaca vinaka e ligadra\n  3. Four of a Kind: 4 ka ni yaca vinaka e ligadra\n  4. Full House: 3 ni yaca vinaka + 2 ni yaca vinaka\n  5. Flush: 5 ka ni yaca vinaka e ligadra\n  6. Straight: 5 ka ni yaca vinaka\n  7. Three of a Kind: 3 ka ni yaca vinaka e ligadra\n  8. Two Pair: 2 pairs ni yaca vinaka e ligadra\n  9. One Pair: 2 ka ni yaca vinaka e ligadra\n  10. High Card: Ka ni yaca vinaka e ligadra\n\n⌨️  IVAKARAU NI ACTION:\n• [4x] se [play bet 4x]: Place ${{self.ante_amount*4}} PLAY bet\n• [2x] se [play bet 2x]: Place ${{self.ante_amount*2}} PLAY bet\n• [1x] se [play bet 1x]: Place ${{self.ante_amount*1}} PLAY bet\n• [check] se [c]: Check (ga bet)\n• [fold] se [f]: Fold (give up ligadra)\n• [skip] se [s]: Skip e fasa e muri (ni sega action e rawa)\n\n💡 IVAKARAU NI STRATEGY:\n• Ligadra vinaka e starting hand (pairs, ka ni yaca vinaka) e rawa ni justify 4x bets\n• Consider dealer qualification - ligadra ca e rawa ni push ni dealer e sega ni qualify\n• BLIND bet e rawa ni profitable kei na ligadra vinaka (Royal Flush = 500:1!)\n• Watch nomu chip stack! Ni oti 0 se lailai e tekivu ni raundi, o lose.\n\n⚠️  IVAKARAU NI IMPORTANT:\n• ANTE kei na BLIND bets e mandatory e kila raundi\n• PLAY bets e optional kei na strategic\n• Make sure o input na correct action, kei na ga action e rawa e dua na gauna.\n\n",
+    "state": "🎯 RAUNI {round}\n💰 Cipisi: {chips}\n🎴 Ligadra na lima: {hand}\n📊 Vakalotu veiqaravi: Ante ${ante}, Blind ${blind}, Vakalotu ${play}\n📋 Fesi: {phase}\n🎯 Vakalotu e rawa: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Raundi {round} sa start! Bets: ANTE ${ante}, BLIND ${blind}. O iko vua {chips} chips e solia.",
+    "your_hand": " Na ligamu: {hand}",
+    "flop_revealed": " FLOP vakaraitaki: {cards}",
+    "river_revealed": " RIVER vakaraitaki: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Na cakacaka e sega ni dodonu me vakayacori ena gauna oqo. Veika sa rawa: {available}",
+    "message": " Na ka e caka sa sega ni dodonu! Ka me vakayacori: {available}"
+  },
+  "action": {
+    "folded": " O sa cegu."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Na liga ni dauvolitaki: {cards}",
+    "community_cards": " iVola ni Veivukei: {cards}",
+    "player_best": "🎴 Ligadra na lima vinaka duadua ni Vakalotu: {name} ({cards})",
+    "dealer_best": "🎴 Ligadra na lima vinaka duadua ni Vakalotu ni Dila: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (sa basuki)",
+    "blind_lost_folded": " BET BLIND LOST! -${blind} (vouti)",
+    "ante_won": "✅ NA QITO E VINAKI! +${amount}",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} vakasukai mai",
+    "ante_lost": " ERA SEGA NI LAUTA NA TOGO! -${ante}",
+    "blind_won": "✅ WIN na bet ni mataboko! +${amount}",
+    "blind_pushed": " BET BLIND PUSHED! ${blind} vakasukai mai",
+    "blind_lost": " E RAWA na kila ni mataboko! -${blind}",
+    "play_won": "✅ PLAY bet WON! +${amount} na nomu kila e dua tale ga na ilavo.",
+    "play_pushed": " PLAY bet PUSHED! ${play} vakasukai mai",
+    "play_lost": " E SEGA ni QITO na bet! -${play}",
+    "net_gain": "🎉 Raundi {round} sa tamusuka! Net gain: +${net}",
+    "net_loss": "💸 Raundi {round} sa tamusuka! Net loss: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 SA OCA! {max_turns} rauni sa oti. O tiko ${chips} na cipisi - O QAQA!",
+    "game_over_lose": "Sa oti na nomu chips, sa qaqa o koya e solia!",
+    "reward_win": "Player e tamusuka {winner_rounds} raundi ka sa ${chips} chips",
+    "reward_lose": "Na dauqito e sega ni tiko na chips ena raundi {round}",
+    "reward_win_max": "Player e tamusuka {max_turns} raundi ka sa ${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "Na Royal Flush",
+    "straight_flush": "Na Tokatoka ni Waqa e Donu",
+    "four_of_a_kind": "E Va na iVakatakarakara ni Kalou e Dua ga",
+    "full_house": "Vakacavara na Vale!",
+    "flush": "Vakasavasavataki na yagomu.",
+    "straight": "Donu tu ga.",
+    "three_of_a_kind": "Tolu na mataqali manumanu oqo e sega ni tautauvata kei ira tale eso.",
+    "two_pair": "Rua na Pair",
+    "one_pair": "Dua na Rua",
+    "high_card": "Na Kadi Levu Duadua",
+    "unknown": "Sega ni Kilai na Liga"
+  }
+}

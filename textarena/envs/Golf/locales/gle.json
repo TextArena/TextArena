@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Tá tú ag imirt Golf (Cluiche Cárta) - Imreoir {player_id}.\nSprioc: Faigh an scór iomlán is lú sa bhbabhta amháin seo. Má roinntear colúin na gcéanna, déanfar iad a shuimiú mar 0.\nLuachanna Cárta: A=1, 2-10=luach aghaidh, J/Q=10, K=0\n\nGníomhartha (úsáid brácáidí cruinne):\n- '[draw]' - Tarraing ón gcruinne\n- '[take]' - Tóg ó phíle diúlta\n- '[swap X Y]' - Malartaigh cárta tarraingthe le suíomh X (rialtach) Y (colún)\n- '[discard]' - Diúltú don chárta tarraingthe"
+  },
+  "board": {
+    "drew": "Táirgeadh: {card}\nNí mór duit [swap X Y] nó [discard] a dhéanamh air.",
+    "took": "Tógtha: {card} as píle diúlta\nNí mór duit [swap X Y] a dhéanamh leis (níl sé in ann diúltú).",
+    "peeked": "Chonaic tú ag suíomh ({row},{col}): {card}",
+    "turn_view": "Do lámh:\n{hand}\nPíle diúlta: {discard}\n{options}",
+    "none": "Gan aon cheann acu."
+  },
+  "options": {
+    "final_turns": "Babhtaí deiridh! Na roghanna atá agat: [draw], [take], [peek X Y]",
+    "draw": "Na roghanna atá agat: [draw], [take]",
+    "must_swap": "Ní mór duit: [swap X Y] (ní féidir cártaí a dhiúscairt ó charnadh diúscaireachta)",
+    "swap_or_discard": "Ní mór duit: [swap X Y] nó [discard] a dhéanamh"
+  },
+  "hand": {
+    "no_cards": "Gan cártaí.",
+    "header": "Col: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Imreoir {pid} malartaithe {new} le {old} ag suíomh ({row},{col})",
+    "discarded": "Imreoir {pid} diúltaigh {card}"
+  },
+  "message": {
+    "deck_empty": "Tá an deic folamh! Críochnaíonn an cluiche láithreach.",
+    "knocked": "Imreoir {pid} claonta! Faigheann gach imreoir eile cas amháin níos mó.",
+    "final_round": "Imreoir {pid} {reason}! Faigheann gach imreoir eile ceann amháin eile de thuras."
+  },
+  "reason": {
+    "all_revealed": "tá na cártaí go léir nochtaithe aige"
+  },
+  "invalid": {
+    "wrong_action": "Úsáid aon ghníomh brácaithe amháin: [draw], [take], [swap X Y], [discard], [knock], nó [peek X Y]",
+    "discard_empty": "Tá an stailc scartha folamh!",
+    "must_draw_first": "Ní mór duit [draw], [take], [knock], nó [peek X Y] a dhéanamh ar dtús",
+    "cannot_discard_taken": "Ní féidir leat cárta a thógtar ón gcarr scartha a dhiúscairt. Caithfidh tú é a mhalartú.",
+    "have_drawn_card": "Tá tú cárta tarraingthe. Ní mór duit [swap X Y] nó [discard] é.",
+    "need_drawn_swap": "Ní mór duit cárta tarraingthe a mhalartú.",
+    "need_drawn_discard": "Ní mór duit cárta tarraingthe a dhiúscairt.",
+    "out_of_bounds": "Suíomh taobh amuigh de theorainneacha. Úsáid rialtach 1-{max_row}, colún 1-{max_col}",
+    "knock_with_card": "Ní féidir leat a bhualadh le cárta tarraingthe. Críochnú do thuras ar dtús.",
+    "already_knocked": "Tá duine éigin buailte cheana féin an babhta seo.",
+    "already_revealed": "Tá an cárta sin nochtadh cheana féin!"
+  },
+  "summary": {
+    "full": "Cluiche Críoch! Buannaíonn imreoir {winner} le scór de {score} pointe!\n\nScóir dheiridh:\n{scores}",
+    "line": "Imreoir {pid}: {score} pointe\n"
+  },
+  "board_str": {
+    "title": "=== GÓLF GAIMH===",
+    "discard": "Cúlchiste: {card}",
+    "knocked": "Tá an t-imreoir {pid} tar éis bualadh!",
+    "player_header": "Imreoir {pid} (Scór: {score}):"
+  }
+}

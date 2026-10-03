@@ -64,7 +64,7 @@ class SurroundEnv(ta.Env):
         self.pending_actions = {pid: None for pid in range(num_players)}
         # initial board broadcast
         game_state["board_state"] = self._ascii_board(game_state["board"], players)
-        self.state.add_observation(f"Current Board:\n{game_state['board_state']}", observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(self.m("board", "current", board=game_state['board_state']), observation_type=ta.ObservationType.GAME_BOARD)
 
     def _generate_spawn_positions(self, k: int) -> List[Tuple[int, int]]:
         candidates = [(x, y) for x in range(1, self.width - 1) for y in range(1, self.height - 1)]
@@ -78,11 +78,7 @@ class SurroundEnv(ta.Env):
         return spawns
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"{self.state.num_players}-Player Surround on a {self.width}x{self.height} grid.\n"
-            f"You are player {player_id}. Valid moves: '[up]' '[down]' '[left]' '[right]' or w/s/a/d.\n"
-            f"Objective: outlive everyone else. Trails are deadly; wall hits kill; head-on crashes kill both."
-        )
+        return self.m("player_prompt", "intro", num_players=self.state.num_players, width=self.width, height=self.height, player_id=player_id)
 
     def step(self, action: str):
         pid = self.state.current_player_id
@@ -95,7 +91,7 @@ class SurroundEnv(ta.Env):
             if pl.alive:
                 pl.alive, pl.death_reason = False, "invalid move"
                 self.state.game_state["death_turn"][pid] = self.state.turn
-                self.state.add_observation(f"Player {pid} died due to invalid move.", observation_type=ta.ObservationType.GAME_ADMIN)
+                self.state.add_observation(self.m("game_action", "invalid_death", player_id=pid), observation_type=ta.ObservationType.GAME_ADMIN)
             self.pending_actions[pid] = None
         else:
             self.pending_actions[pid] = action
@@ -166,25 +162,25 @@ class SurroundEnv(ta.Env):
         # ── end-of-game checks ──
         alive = [pid for pid, pl in players.items() if pl.alive]
         if len(alive) <= 1:
-            if alive: self._finalise_rewards(f"Player {alive[0]} survived; all others crashed.")
-            else: self._finalise_rewards("All players crashed simultaneously.")
+            if alive: self._finalise_rewards(self.m("outcome", "survived_win", player_id=alive[0]))
+            else: self._finalise_rewards(self.m("outcome", "all_crashed"))
             self.state.step(rotate_player=False)   # make terminal transition
             return
 
         # broadcast board every normal turn
         gs["board_state"] = self._ascii_board(board, players)
-        self.state.add_observation(f"Board after simultaneous moves:\n{gs['board_state']}", observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(self.m("board", "after_moves", board=gs['board_state']), observation_type=ta.ObservationType.GAME_BOARD)
 
     def _rotate_players(self):
         if self.state.done: return
         alive = {pid for pid, pl in self.state.game_state["players"].items() if pl.alive}
-        if len(alive) <= 1: self._finalise_rewards("Player outlived all others." if alive else "All players dead."); return
+        if len(alive) <= 1: self._finalise_rewards(self.m("outcome", "outlived") if alive else self.m("outcome", "all_dead")); return
         nxt = (self.state.current_player_id + 1) % self.state.num_players
         while nxt not in alive: nxt = (nxt + 1) % self.state.num_players
         self.state.manually_set_current_player_id(nxt)
 
     def _check_turn_limit(self):
-        if not self.state.done and self.state.turn >= self.state.max_turns: self._finalise_rewards("Turn limit reached - longest survivor wins.")
+        if not self.state.done and self.state.turn >= self.state.max_turns: self._finalise_rewards(self.m("outcome", "turn_limit"))
 
     def _finalise_rewards(self, reason: str):
         survival_turn = {pid: (self.state.turn + 1) if pl.alive else self.state.game_state["death_turn"].get(pid, -1) for pid, pl in self.state.game_state["players"].items()}
@@ -202,4 +198,4 @@ class SurroundEnv(ta.Env):
             for g_idx, grp in enumerate(reversed(groups)): # best group first
                 r = 1.0 - 2.0 * g_idx / (G - 1)
                 for pid in grp: reward[pid] = r
-        self.state.set_game_outcome(reward_dict=reward, reason=f"{reason} Final ranking groups (best→worst): {list(reversed(groups))}")
+        self.state.set_game_outcome(reward_dict=reward, reason=self.m("outcome", "ranking", reason=reason, groups=list(reversed(groups))))

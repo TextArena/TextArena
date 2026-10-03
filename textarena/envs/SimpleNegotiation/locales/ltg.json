@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēletājs {player_id} Sarunāšanās spēlē.\nJums ir daži resursi, un jūsu uzdevums ir veikt tirdzniecību tā, lai jūsu resursu kopējā vērtība palielinātos.\nResursi un saistītās vērtības, kuras jums pašlaik ir, ir:\n\t+ {resource_value_list}\nKatrā gājienā jūs varat runāt ar savu oponentu un izteikt tirdzniecības piedāvājumu.\nIzmantojiet sekojošos speciālos simbolus darbībām:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': Lai apstiprinātu ienākošo piedāvājumu.\n  - '[Deny]': Lai noraidītu ienākošo piedāvājumu (noklusēti).\nSpēle ilgst {max_turns} gājienus kopumā."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Spālātuojs raudzeja pījimt tierdznīceibu, jam nabeja vajadzeigūs resursus.",
+    "out_of_range": "Spēlētājs {player_id}, Nederīga darbība. Kolonna {col} ir ārpus robežām.",
+    "already_full": "Spēlētājs {player_id}, Nederīga darbība. Kolonna {col} ir pilna.",
+    "proposing_with_no_resource": "Spālātuojs {player_id} raudzeja pīduovuot tiergu, jam nabeja vajadzeigūs resursus.",
+    "incorrect_offer_format": "Spālātuojs {player_id} īdeve napareizu formatu tierdznīceibys pīduovuojumu.",
+    "no_new_offer": "Spālātuojs {player_id} naizdeve nivīnu jaunu tierdznīceibys pīduovuojumu."
+  },
+  "offers": {
+    "reject": "Spālātuojs {player_id} nūraideja puorsavieršonys pīduovuojumu.",
+    "accept": "Spēlētājs {acceptor_id} pieņēma tirdzniecības piedāvājumu no Spēlētāja {proposer_id}.",
+    "proposal": "Spēlētājs {player_id} izteica sekojošu piedāvājumu Spēlētājam {opponent_id}: Piedāvātie priekšmeti: {offered} -> Pieprasītie priekšmeti: {requested}"
+  },
+  "outcome": {
+    "win": "Spālātuojs {winner_id} uzvarēja, jamūt leluoku īguodu inventarvītu vierteibā.",
+    "draw": "Vysi dalinīki dabuos vīnu i tū pošu izmainis."
+  }
+}

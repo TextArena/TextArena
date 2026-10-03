@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} ({piece}). Der Gegner ist ({opp}). Gib Züge als '[b1 c3]' ein (von → nach). Alle Figuren ziehen wie Schachspringer.\nJedes Schlagen bringt {score_per_capture} Punkt. Das Spiel endet nach {max_moves} Zügen oder wenn ein Spieler keinen legalen Zug / keine Figuren mehr hat. Die höhere Punktzahl gewinnt."
+  },
+  "board": {
+    "current_board": "Zug #{move_count}\n\n{board}\n\nVerfügbare Züge: {moves}"
+  },
+  "invalid_move": {
+    "bad_format": "Falsches Format. Verwende '[b1 c3]'.",
+    "unknown_square": "Unbekanntes Feld.",
+    "not_your_piece": "Auf dem Ausgangsfeld steht nicht deine Figur.",
+    "own_piece": "Du kannst nicht auf einer eigenen Figur landen.",
+    "not_knight": "Kein Springerzug."
+  },
+  "game_action": {
+    "moved": "Spieler {player_id} bewegte seine Figur von {frm} nach {to}.",
+    "capture": "{observation} Eine Figur wurde geschlagen! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Spieler {player_id} hat keine Figuren mehr.",
+    "cannot_move": "Spieler {player_id} kann nicht ziehen.",
+    "higher_score": "Höhere Schlagpunktzahl.",
+    "move_limit": "Das Zuglimit wurde erreicht."
+  }
+}

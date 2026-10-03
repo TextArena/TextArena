@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Tu sês Zuiadôr {player_id} in un zûc di Liar's Dice cun {num_players} zuiadôrs.\nRegulis:\n- Tal to turn, tu puedis o:\n  1) Fâ une gnove oferte cun une quantitât plui alte o un valôr de face plui alt (o dutis e doi) de oferte atuâl; vâl a dî '[Bid: 3, 4]',\n  2) Clamâ l'ultime oferte scrivint '[Call]'.\n\nSe tu clamas:\n  - Se il numar reâl di dâts cun chê face al è mancul de oferte, l'ultin ofertant al piert un dât.\n  - Altrimenti, il clamadôr al piert un dât.\nUn zuiadôr che al rive a 0 dâts al è eliminât. L'ultin zuiadôr restant al vinç."
+  },
+  "board": {
+    "per_player": "\tZogador {p}: {d}",
+    "new_round": "\nGnovis tornadis - Dais rimasti: {dice_summary}\nI dais che tu âs adesso a son: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Zuiadôr {current_player_id} al clame! Il numar reâl di facis {face_value} al è {count}, che al è MANCUL di {quantity}.\nZuiadôr {loser_id} (l'ultin ofertant) al piert un dât.",
+    "caller_loses": "Il zugador {current_player_id} clame! Il numar reâl di numars {face_value} al è {count}, che al è >= {quantity}.\nIl zugador {loser_id} (chel che à clamât) al piert un dado."
+  },
+  "action": {
+    "bid_announce": "Zogador {player_id} fevele {quantity} di facce {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "La clamade e je stade fate cence une ufierte.",
+    "invalid_bid": "Oferte no valide: {reason}",
+    "not_recognized": "Azion no ricognossude come '[Bid: X, Y]' o '[Call]' valide. Azion presentade: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "La gnove quantitât {new_quantity} e je plui basse di cheste atuâl {current_quantity}.",
+    "face_lower": "Il gnûf valôr di facce {new_face_value} al è plui bas di chei atuâl {current_face_value}.",
+    "identical": "L'acuardi al è identic a chel atuâl.",
+    "face_range": "Il valôr dal numâr al à di jessi tra 1 e 6."
+  },
+  "message": {
+    "eliminated_invalid": "Il zuiadôr {player_id} al è stât eliminât par mosse invalide."
+  },
+  "outcome": {
+    "win": "Zogador {winner} al vinç! Classifiche finâl: {final_ranking}"
+  }
+}

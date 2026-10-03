@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "เกมเริ่มต้นแล้ว ดอกตัด: {trump_suit} (ไพ่ตัด: {trump_str}).",
+    "no_trump_card": "ไม่มี"
+  },
+  "player_prompt": {
+    "intro": "คุณคือผู้เล่นหมายเลข {player_id} ในเกม German Whist.\n{phase_info}\nคุณถือไพ่ {hand_size} ใบ\nเล่นไพ่ด้วย '[play N]' โดย N คือตำแหน่งของไพ่ในมือของคุณ (ตัวอย่าง '[play 3]').",
+    "phase_learning": "PHASE การเรียนรู้: ผู้ชนะแต่ละรอบจะได้ไพ่ที่หงายขึ้น และผู้แพ้จะจั่วไพ่ถัดไปจากสำรับ รอบที่ชนะในระยะนี้ไม่นับเป็นชัยชนะ",
+    "phase_playing": "PHASE การเล่น: สำรับไพ่หมดแล้ว ทุกรอบจากนี้เป็นต้นไปจะนับเป็นชัยชนะ"
+  },
+  "next_card": {
+    "playing_phase": "ไม่มีไพ่ให้เลือก - ระยะการเล่นได้เริ่มต้นแล้ว.",
+    "deck_empty": "สำรับไพ่ว่าง - ไม่มีไพ่ให้เลือก.",
+    "available": "ไพ่ที่ให้เลือก: {card}",
+    "available_trump": "ไพ่ที่ให้เลือก: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "รูปแบบการเคลื่อนไหวไม่ถูกต้อง ใช้ '[play N]' เพื่อเล่นไพ่ที่ตำแหน่ง N ในมือของคุณ.",
+    "bad_position": "ตำแหน่งไพ่นั้นไม่มีอยู่ คุณถือไพ่ {hand_size} ใบ",
+    "must_follow_suit": "คุณต้องตามดอกและเล่นไพ่ {lead_suit}",
+    "invalid_play": "ไพ่นั้นไม่สามารถเล่นได้"
+  },
+  "game_action": {
+    "played": "ผู้เล่น {player_id} เล่นไพ่ {card}."
+  },
+  "trick": {
+    "won": "ผู้เล่น {winner_id} ชนะรอบนี้ด้วยไพ่ {card}.",
+    "won_learning": "ผู้เล่น {winner_id} ชนะรอบนี้ด้วยไพ่ {card} และได้ไพ่ที่หงายขึ้น"
+  },
+  "phase": {
+    "learning_complete": "สำรับไพ่หมดแล้ว ระยะการเรียนรู้สิ้นสุดลง - ทุกรอบที่เหลือจะนับเป็นชัยชนะ"
+  },
+  "draw": {
+    "winner_received": "คุณชนะรอบนี้และได้รับไพ่ {card}.",
+    "loser_received": "คุณแพ้รอบนี้และจั่วไพ่ {card} จากสำรับ.",
+    "winner_preview": "ไพ่ถัดไปที่ให้เลือกคือ {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "รอบที่ชนะแล้ว - ผู้เล่น 0: {tricks0}, ผู้เล่น 1: {tricks1}",
+    "scores_playing": "รอบที่นับคะแนน - ผู้เล่น 0: {tricks0}, ผู้เล่น 1: {tricks1}",
+    "phase": "ระยะ: {phase}",
+    "phase_learning": "ระยะ: {phase} ({remaining_cards} ใบเหลืออยู่ในสำรับ)"
+  },
+  "hand": {
+    "no_cards": "ไม่มีไพ่",
+    "no_cards_in_hand": "ไม่มีไพ่ในมือ",
+    "header": "มือของคุณ:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "ยังไม่มีไพ่ถูกเล่นในรอบนี้.",
+    "header": "รอบปัจจุบัน:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  ผู้เล่น {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "เกมยังไม่เริ่ม",
+    "header": "=== เกม GERMAN WHIST ===",
+    "phase": "{observation}\nระยะ: {phase}",
+    "trump_suit": "{observation}\nดอกตัด: {trump_suit}",
+    "trump_card": "{observation}\nไพ่ตัด: {card}",
+    "cards_left": "{observation}\nไพ่ที่เหลืออยู่ในสำรับ: {count}",
+    "next_card": "{observation}\nไพ่ถัดไปสำหรับผู้ชนะ: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nรอบปัจจุบัน:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  ผู้เล่น {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nผู้เล่น {player_id}: {scoring} รอบที่นับคะแนน ({tricks} รอบทั้งหมด), {hand_size} ใบในมือ"
+  },
+  "outcome": {
+    "summary": "ระยะการเรียนรู้ - ผู้เล่น 0: {l0}, ผู้เล่น 1: {l1}. ระยะการเล่น - ผู้เล่น 0: {p0}, ผู้เล่น 1: {p1}. ผู้เล่น {winner_id} ชนะด้วย {winner_tricks} รอบที่นับคะแนน!"
+  }
+}

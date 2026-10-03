@@ -1,0 +1,34 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} und spielst in einer Partie Othello mit {colour} ({piece}).\nDein Ziel ist es, am Ende des Spiels mehr Spielsteine deiner Farbe auf dem Brett zu haben.\nSetze in deinem Zug einen Spielstein so, dass er einen oder mehrere gegnerische Spielsteine in beliebiger Richtung, horizontal, vertikal oder diagonal, zwischen deinem neuen Spielstein und einem deiner bereits vorhandenen Spielsteine einschließt. Alle eingeschlossenen gegnerischen Spielsteine werden auf deine Farbe umgedreht.\nGib deinen Zug im Format '[row, col]' an."
+  },
+
+  "board": {
+    "game_board": "Spielbrett:\n{board}",
+    "valid_moves": "{observation}\nGültige Züge: {moves}",
+    "no_valid_moves_reset": "{observation}\nKeine gültigen Züge - möglicherweise musst du aussetzen.",
+    "no_valid_moves_step": "{observation}\nKeine gültigen Züge – möglicherweise musst du aussetzen.",
+    "scores_reset": "{observation}\nAktueller Punktestand - Schwarz: {black_count}, Weiß: {white_count}\n",
+    "scores_step": "{observation}\nPunktestand - Schwarz: {black_count}, Weiß: {white_count}\n"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Der Zug muss das Format [row, col] haben.",
+    "illegal": "Ungültiger Zug. Gültige Züge: {valid}"
+  },
+
+  "game_action": {
+    "skipped": "Spieler {pid} musste seinen Zug aussetzen",
+    "played": "Spieler {pid} ({piece}) setzte auf [{r}, {c}] und drehte {flipped} Spielstein(e) um"
+  },
+
+  "game_message": {
+    "must_skip": "Spieler {pid} ({piece}) hat keine gültigen Züge und muss aussetzen."
+  },
+
+  "outcome": {
+    "black_wins": "Schwarz gewinnt {black_count}-{white_count}.",
+    "white_wins": "Weiß gewinnt {white_count}-{black_count}.",
+    "draw": "Unentschieden {black_count}-{white_count}."
+  }
+}

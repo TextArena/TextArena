@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} v Connect Four.\nVáš symbol disku: {symbol}.\nHerní deska má {num_rows} řádků a {num_cols} sloupců.\nHráči se střídají v pouštění svých disků do jednoho ze sloupců (0 až {end_col}).\nPrvní, kdo spojí (své vlastní) čtyři disky svisle, vodorovně nebo diagonálně, vyhrává.\nVe svém tahu zadejte číslo sloupce v hranatých závorkách, aby jste provedli tah.\nPříklad: '[col 4]' nebo '[col 1]'."
+  },
+  "board": {
+    "board_visible_state": "Stav desky:\n{board_visual}",
+    "board_notvisible_state": "Herní deska není pro hráče viditelná."
+  },
+  "invalid_move": {
+    "wrong_format": "Hráč {player_id}, neplatný formát akce. Očekávaný formát: '[col x]'.",
+    "out_of_range": "Hráč {player_id}, neplatná akce. Sloupec {col} je mimo rozsah.",
+    "already_full": "Hráč {player_id}, neplatná akce. Sloupec {col} je plný."
+  },
+  "action": {
+    "dropped_disk": "Hráč {player_id} spustil svůj disk ({player_symbol}) do sloupce {col}."
+  },
+  "outcome": {
+    "win": "Hráč {player_id} vyhrává spojením čtyř!",
+    "draw": "Hra skončila remízou."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Tshimanu tshia manaya: {board}",
+    "valid_moves": "{observation}\nNzila zya makasi: {moves}",
+    "no_valid_moves_reset": "{observation} Kakuena manaya mimpe to - udi mua kupangila.",
+    "no_valid_moves_step": "{observation} Kakuena manaya mimpe to. Udi mua kupangila bua kuya mu tshisumbu tshia banene ba mbulamatadi.",
+    "scores_reset": "{observation}\nMakasi apona - Ekle: {black_count}, Mputu: {white_count}\n",
+    "scores_step": "{observation}\nMakasi - Ekle: {black_count}, Mputu: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Tshikondo tshia kufila bintu ebi tshidi ne bua kuikala mu mushindu wa [row, col].",
+    "illegal": "Dienza dia tshianana: {valid}"
+  },
+  "game_action": {
+    "skipped": "Muena manaya {pid} uvua ne bua kulengulula mudimu wabu.",
+    "played": "Mwana {pid} ({piece}) alicheza [{r}, {c}] akibadilisha {flipped} bata"
+  },
+  "game_message": {
+    "must_skip": "Mwana {pid} ({piece}) hana mipindi inayoruhusiwa na lazima acheleweshe."
+  },
+  "outcome": {
+    "black_wins": "Mnyama udi utshimuna {black_count}-{white_count}.",
+    "white_wins": "Mindele mmutshimune {white_count}-{black_count}.",
+    "draw": "Fuma {black_count}-{white_count}."
+  }
+}

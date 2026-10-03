@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "O wena Mmoki {player_id}, o dulang {num_rounds} dithulaganyo tsa Iterated Ultimatum Game.\nO na le ${pool} go akaretsa mo lefelong leno la round kwa wena le Mmoki {other_id}.\n\nMmopi:\n  - Dirisa seabe: [Offer: $X] (0 <= X <= pool)\n  - Ika seabe se a amogelwa → Wena o iponelela $(pool - X), mmoki wa gape o iponelela $X\n  - Ika seabe se ka se amogelwe → Ba babedi ba iponelela $0\n  - Senao: [Offer: $3]  kgotsa  'Ke ikutlwa ke go siame. [Offer: $5]'\n\nKarabo wa Mmoki:\n  - Tshwanetse go dira seabe ka [Accept] kgotsa [Reject]\n  - Senao: 'Go bonala go siame. [Accept]'\n            'Go feta bokgopo. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Round {round_number} e simolola! ---\nMmoki {proposer_id} ke mmopi, Mmoki {responder_id} ke mmoki wa karabo.",
+    "offer": "Round {round_number}: Mmoki {proposer_id} o dirisa ${offer} ho Mmoki {responder_id} (a tsamaya le ${keep}).",
+    "accepted": "Mmoki {responder_id} o amogele! Round {round_number} o iponetse: Mmoki {proposer_id} +${proposer_gain}, Mmoki {responder_id} +${responder_gain}. Diponetse tsa gale: Mmoki 0: ${total_0}, Mmoki 1: ${total_1}.",
+    "rejected": "Mmoki {responder_id} o tlogetse seabe! Round {round_number} o iponetse: Ba babedi ba iponetse +$0. Diponetse di tsile: Mmoki 0: ${total_0}, Mmoki 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Motlhami o tshwanetse go dira kopo a dirisa fomete ya [Offer: $X].",
+    "bad_integer": "Madi a o a neelwang e tshwanetse go nna palo ya nnete.",
+    "out_of_range": "Thekiso e tshwanetse go nna magareng ga $0 le ${pool}.",
+    "no_current_offer": "Ga go na sepe se re ka se dirang gone jaanong.",
+    "accept_or_reject": "Mojaki wa karabo o swanetse go [Accept] kgotsa [Reject] seabe."
+  },
+  "outcome": {
+    "win": "Mmoki {winner} o ile a fenya le ${winner_total} yotlhe kgatlhanong le Mmoki {loser} ${loser_total}.",
+    "draw": "Go ne ga nna le go sa tshwane! Badiri ka bobedi ba feletse ka ${total} palogotlhe."
+  }
+}

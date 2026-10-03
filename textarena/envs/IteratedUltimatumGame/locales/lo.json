@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "ທ່ານເປັນຜູ້ຫຼິ້ນ {player_id}, ຫຼິ້ນ {num_rounds} ຮອບຂອງເກມ Ultimatum Iterated. ທ່ານມີ ${pool} ເພື່ອແບ່ງຮອບນີ້ລະຫວ່າງທ່ານແລະຜູ້ຫຼິ້ນ {other_id}. ຜູ້ສະ ເຫນີ: - ສະ ເຫນີ: [Offer: $X] (0 <= X <= pool) - ຖ້າຖືກຍອມຮັບ → ທ່ານໄດ້ຮັບ $ ((pool - X), ຜູ້ນອື່ນໄດ້ຮັບ $ X - ຖ້າຖືກປະຕິເສດ → ທັງສອງໄດ້ຮັບ $ 0 - ຕົວຢ່າງ: [Offer: $3] ຫຼື 'ຂ້ອຍຄິດວ່າມັນເປັນການຍຸຕິ ທໍາ. [Offer: $5]' ຜູ້ຕອບ: - ຕັດສິນໃຈກ່ຽວກັບຂໍ້ສະ ເຫນີ ດ້ວຍ [Accept] ຫຼື [Reject] - ຕົວຢ່າງ: 'ມັນເບິ່ງຄືວ່າເປັນເຫດຜົນ. [Accept]' 'ບໍ່ຍຸຕິ ທໍາ ຫຼາຍ. [Reject]'"
+  },
+  "round": {
+    "begins": "--- ຮອບ {round_number} ເລີ່ມຕົ້ນ! --- ຜູ້ນ {proposer_id} ແມ່ນຜູ້ສະເຫນີ, ຜູ້ນ {responder_id} ແມ່ນຜູ້ຕອບ.",
+    "offer": "ຮອບ {round_number}: ຜູ້ນ {proposer_id} ສະ ເຫນີ ${offer} ໃຫ້ຜູ້ນ {responder_id} (ຮັກສາ ${keep}).",
+    "accepted": "ຜູ້ນ {responder_id} ຮັບ! ຮອບ {round_number} ຜົນໄດ້: ຜູ້ນ {proposer_id} + ${proposer_gain}, ຜູ້ນ {responder_id} + ${responder_gain}. ລວມໃຫມ່: ຜູ້ນ 0: ${total_0}, ຜູ້ນ 1: ${total_1}.",
+    "rejected": "ນັກເຕະ {responder_id} ປະຕິເສດຂໍ້ສະ ເຫນີ! ຮອບ {round_number} ຜົນໄດ້: ທັງສອງນັກເຕະ + $ 0. ລວມຍັງຄົງມີ: ນັກເຕະ 0: ${total_0}, ນັກເຕະ 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "ຜູ້ສະເຫນີຕ້ອງເຮັດຂໍ້ສະເຫນີໂດຍໃຊ້ຮູບແບບ [Offer: $X].",
+    "bad_integer": "ຈໍານວນຂໍ້ສະເຫນີຕ້ອງເປັນຕົວເລກເຕັມທີ່ຖືກຕ້ອງ.",
+    "out_of_range": "ການສະເຫນີຕ້ອງຢູ່ລະຫວ່າງ $0 ແລະ ${pool}.",
+    "no_current_offer": "ບໍ່ມີຂໍ້ສະເຫນີໃນປັດຈຸບັນທີ່ຈະຕອບສະຫນອງ.",
+    "accept_or_reject": "ຜູ້ຕອບຕ້ອງໄດ້ [Accept] ຫຼື [Reject] ຂໍ້ສະ ເຫນີ."
+  },
+  "outcome": {
+    "win": "ຜູ້ນ {winner} ຊະນະດ້ວຍ ${winner_total} ລວມ vs ຜູ້ນ {loser} ຂອງ ${loser_total}.",
+    "draw": "ສະເຫມີ! ທັງສອງຜູ້ຫຼິ້ນໄດ້ສໍາເລັດດ້ວຍ ${total} ລວມ."
+  }
+}

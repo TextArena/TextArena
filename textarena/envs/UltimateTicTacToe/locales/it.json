@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in **Ultimate Tic Tac Toe**.\nInvia la tua mossa come **[macro  micro]** (due numeri 0-8):\n• *macro*  = quale mini-tavola giochi\n• *micro* = quale quadrato all'interno di quella mini-tavola\nEsempio `[7 8]` ➜ posiziona il tuo segno nella mini-tavola 7, quadrato 8, e\ncostringi il tuo avversario a giocare nella mini-tavola 8 successiva.\n\nSei `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Tavola attuale:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "La mossa deve essere nel formato [macro micro] con numeri 0-8.",
+    "out_of_range": "Gli indici devono essere tra 0 e 8.",
+    "index_out_of_range": "La mini-tavola, la riga o la colonna è fuori portata.",
+    "cell_occupied": "La cella è già occupata.",
+    "wrong_micro_board": "Il giocatore deve giocare nella prossima mini-tavola.",
+    "micro_board_won": "La mini-tavola è già stata vinta."
+  },
+  "next_board": {
+    "any": "qualsiasi mini-tavola",
+    "specific": "mini-tavola {nxt}"
+  },
+  "game_action": {
+    "played": "Il Giocatore {player_id} ha giocato nella mini-tavola {macro_idx}, cella {micro_idx} (riga {row}, colonna {col}). Il Giocatore {opponent_id} deve ora giocare in {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Il Giocatore {player_id} vince Ultimate Tic Tac Toe!",
+    "draw": "La partita è finita in parità!"
+  }
+}

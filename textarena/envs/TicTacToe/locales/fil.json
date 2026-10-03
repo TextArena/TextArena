@@ -1,0 +1,27 @@
+{
+  "_comment": "TicTacToe file ng lokasyon. HUWAG isalin ang mga susi (kaliwang bahagi). Isalin lamang ang mga halaga (kanang bahagi).",
+  "_slots": {
+    "{player_id}": "Ang numero ng manlalaro, hal. 0 o 1",
+    "{symbol}": "Ang marka ng manlalaro, X o O",
+    "{opponent_symbol}": "Ang marka ng kalaban, X o O",
+    "{cell}": "Isang numero ng cell sa board na nasa pagitan ng 0 at 8"
+  },
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa Tic Tac Toe.\nAng iyong layunin ay manalo ng tatlo sa isang hanay (pahalang, patayo, o diagonal) sa board.\nSa iyong pagkakataon, dapat mong piliin ang numero ng parisukat (0-8) kung saan mo nais ilagay ang iyong marka sa susunod.\nHalimbawa, '[4]' ay naglalagay ng iyong marka sa gitnang cell ng board.\nBilang Player {player_id}, ikaw ay '{symbol}', habang ang iyong kalaban ay '{opponent_symbol}'."
+  },
+  "board": {
+    "current_board": "Kasalukuyang Board:\n\n{board}\n\nMga Pagkilos na Magagamit: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ang isinumiteng pagkilos ay hindi sumusunod sa wastong format.",
+    "out_of_range": "{cell} ay hindi isang wastong cell. Dapat ay nasa pagitan ng 0 at 8.",
+    "already_occupied": "Ang cell {cell} ay nakuha na."
+  },
+  "game_action": {
+    "placed": "Ang Player {player_id} ay naglagay ng kanilang simbolo ({symbol}) sa cell {cell}."
+  },
+  "outcome": {
+    "win": "Ang Player {player_id} ay nanalo!",
+    "draw": "Ang laro ay isang tabla!"
+  }
+}

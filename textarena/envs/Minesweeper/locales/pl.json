@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Grając w grę Saper, Twoim celem jest odkrycie wszystkich komórek, które nie zawierają min.\nAby wykonać ruch, po prostu podaj współrzędne wiersza i kolumny, które chcesz odkryć, używając formatu:\n- `[wiersz kolumna]`: Odkryj komórkę w określonym wierszu i kolumnie.\nNa przykład:\n- `[3 2]`, aby odkryć komórkę w wierszu 3, kolumnie 2.\n- `[5 6]`, aby odkryć komórkę w wierszu 5, kolumnie 6.\nPodczas pierwszego ruchu odkryjesz obszar wokół wybranej komórki, aby zapewnić bezpieczny start.\nAktualny układ planszy jest pokazany poniżej. Komórki, które nie są odkryte, są reprezentowane przez kropkę ('.'), odkryte liczby pokazują liczbę sąsiednich min.\nUważaj, aby nie wybierać już odkrytych komórek.\nOto aktualny układ planszy:\n"
+  },
+  "board": {
+    "game_board": "Plansza gry:\n\n{board}",
+    "current_board": "Aktualna plansza:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nie odpowiedziałeś prawidłowymi współrzędnymi w nawiasach kwadratowych.",
+    "out_of_bounds": "Określone współrzędne wiersza i kolumny są poza granicami.",
+    "already_revealed": "Komórka w ({row}, {col}) już została odkryta.",
+    "hit_mine": "Trafiono minę w ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Odkryłeś komórkę w ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Gratulacje! Pomyślnie wyczyściłeś planszę Saper.",
+    "turn_limit": "Osiągnięto limit tur. Pomyślnie odkryłeś {percent}% bezpiecznych komórek."
+  }
+}

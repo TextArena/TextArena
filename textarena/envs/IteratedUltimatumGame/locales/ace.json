@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Kamoe Pemain {player_id}, main {num_rounds} ronde Iterated Ultimatum Game.\nKamoe na ${pool} untuk bebagaan ronde nyoe antara droe ngon Pemain {other_id}.\n\nPembuat Tawaran:\n  - Buat tawaran: [Offer: $X] (0 <= X <= pool)\n  - Jika diterima → Kamoe meupulang $(pool - X), pemain laen meupulang $X\n  - Jika ditolak → Dua-dua meupulang $0\n  - Contoh: [Offer: $3]  atawa  'Kamoe anggap nyoe adil. [Offer: $5]'\n\nPenerima Tawaran:\n  - Putuskeun tawaran ngon [Accept] atawa [Reject]\n  - Contoh: 'Nyoe nampak masuk akal. [Accept]'\n            'Terlalu tidak adil. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Ronde {round_number} dimulai! ---\nPemain {proposer_id} adalah pembuat tawaran, Pemain {responder_id} adalah penerima tawaran.",
+    "offer": "Ronde {round_number}: Pemain {proposer_id} menawarkan ${offer} kepada Pemain {responder_id} (menyimpan ${keep}).",
+    "accepted": "Pemain {responder_id} menerima! Ronde {round_number} untung: Pemain {proposer_id} +${proposer_gain}, Pemain {responder_id} +${responder_gain}. Total baru: Pemain 0: ${total_0}, Pemain 1: ${total_1}.",
+    "rejected": "Pemain {responder_id} menolak tawaran! Ronde {round_number} untung: Kedua pemain +$0. Total tetap: Pemain 0: ${total_0}, Pemain 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Peunula harus peuget tawaran deungen format [Offer: $X].",
+    "bad_integer": "Jumlah tawaran harus merupakan bilangan bulat yeng valid.",
+    "out_of_range": "Peunayoe harus antara $0 dan ${pool}.",
+    "no_current_offer": "Hana tawaran saat nyoe untuk di respon.",
+    "accept_or_reject": "Responder wajib [Accept] atawa [Reject] tawaran."
+  },
+  "outcome": {
+    "win": "Pemain {winner} meungang dengan ${winner_total} total lawan Pemain {loser} se ${loser_total}.",
+    "draw": "Draw! Mandua peumeuén meupeuseuleusoe deungen ${total} total."
+  }
+}

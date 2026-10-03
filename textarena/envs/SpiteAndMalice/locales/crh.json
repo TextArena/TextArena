@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Siz Spite and Malice oyununıñ eki oyuncusından {player_id} oyuncusısınız. Maqsadınız, ödeme qarasıñızdan ilkin boşatmaqtır.\n\n### Oyun Nazarýeti:\n- Maqsat, merkeziy qaralardan kart oýnamaknen ödeme qaranızı boşatmaqtır.\n- Siz üç menbadan kart oýnap bilersiz:\n  1. **El** (siz her turda 5 kartnen başlañız).\n  2. **Ödeme qaranıznıñ yuqarı kartı**.\n  3. **Atqan qaralardan biriniñ yuqarı kartı**.\n\n### Oýnamak Qaydaları:\n- Siz merkeziy qaralardan birine kart oýnap bilersiz, eger bu kart o qarada yuqarı karttan **bir derece yuqarı** bolsa (merkeziy qaralar Ace-den başlap Queen-ge qadar gediler; Korol-lar erkin - olar er angi kart üzünde oýnalsa da, derece tertibini deñiştirmezler. Bu, 4-den soñ Korol-lar 5-ci derece ve soñraki kart 6-cı derece bolsa demektir).\n- Eger siz daha kart oýnay almasañız, turuñızı bitirmek içün bir kartı **atqan qaralardan birine atmaq** mecburiyetindesiz.\n- Eger merkeziy qara Queen-ge yetse, avtomatikmen boşatılacaq.\n- Derece tertibi: A=1, 2=2, ..., 9=9, J=10, Q=11, K erkin.\n\n### Areketler:\n1. **Çek**: Turuñız başlağanda, eliñizde 5 kartqa qadar kart çekmek içün **[draw]** kirsetiñiz.\n2. **Kart oýnamak**: Kart oýnamak içün, kart ve merkeziy qara indeksini kirsetiñiz: **[play A♠ 0]** (bu yerde 'A♠' kart ve '0' merkeziy qara indeksidir).\n3. **Atmaq**: Eger siz daha kart oýnay almasañız, turuñızı bitirmek içün eliñizden kartı atqan qaralardan birine atıñız. **[discard A♠ 1]** kirsetiñiz (bu yerde 'A♠' kart ve '1' atqan qara indeksidir). Ödeme qarasından kart atıla bilmey.\n\n"
+  },
+  "board": {
+    "current_board": "Cari tahtа:\n\n{board}\nMümkün hamleler: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Merkeziy Qamçıqlar -- ",
+    "pile": "{observation}Yığın {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Oyuncu {player_id}'in Görünümü ---\n",
+    "payoff": "{observation}Ödemeniz Yığını (Üst Kart): {top_card}, Ödemeniz Yığını Uzunluğu: {payoff_length}\n",
+    "hand": "{observation}Eliniz: {hand}\n",
+    "discard": "{observation}Atma Yığınları: {discard}\n",
+    "empty": "Boş olğan."
+  },
+  "game_message": {
+    "no_cards_left": "Daha kart çekmek içün kart qalmadı. Unutmayın ki siz kartlarnı şu menbalardan oynayabilirsiniz:\n  1. **El**.\n  2. **Ödenecek qarşılıq qarşılıqnıñ üst kartı**.\n  3. **Sizniñ çöpe atqan qarşılıqlarınıñ üst kartı**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Ucuz areket şekli. {player_id} oyuncısı, kvadrat qavğalarda doğru bir adımnen cevap bermedi.",
+    "invalid_play": "Geçersiz oynama. Oyuncu {player_id}, {card} kartını merkez yığını {index}'ye oynamaya çalıştı.",
+    "discard_from_payoff": "Saqlanmağan atış. {player_id} oyuncısı, qazanç yığınından bir kartnı taşlamağa tırıştı.",
+    "discard_not_in_hand": "Saqlanmağan atış. Oynayıcı {player_id} qolunda olmağan kartnı taşlamağa tırıştı.",
+    "wrong_move_type": "Ucuz areket çeşiti. {player_id} oyuncısı uquzuv usulınen cevap bermedi."
+  },
+  "game_action": {
+    "you_drew": "Kartlarnı çektiñiz.",
+    "opponent_drew": "Oyuncı {player_id} kartlarnı çekti.",
+    "you_played": "Siz {card} kartını merkez yığını {index}'ye oynadınız.",
+    "opponent_played": "Oyuncu {player_id}, {card} kartını merkez yığını {index}'ye oynadı.",
+    "you_discarded": "Siz {card} kartını çöpe atqan qarşılıq {index}ga attıñız, bu da turunuzuñ soñuna ketirir. Bundan soñ sizniñ turunuzda daha bir harekat yapılmaz. Oyuncu {next_player_id} turuna keçir.",
+    "opponent_discarded": "Oyuncu {player_id} {card} kartını {index} atıq yığınına attı, bu da oña bu turda işiñni bitirdi demektir. Oyuncu {player_id}nıñ bu turdaki başqa areketleri sayılmaycaq. Oyuncu {next_player_id}, sizge sıradaki tur kelişinde. Lütfen [action card center_index] formatında areketiñizni kirsetiñiz."
+  },
+  "outcome": {
+    "payoff_cleared": "Oyuncu {current_player}, ödemesi yığınından kurtuldu! Oyuncu {current_player} kazandı!",
+    "deadlock_player_0": "Çıkmaz durumuna ulaşıldı! Oyuncu 0, {player_0_payoff} kartı kalmasıyla Oyuncu 1'in {player_1_payoff} kartına karşı kazandı.",
+    "deadlock_player_1": "Çıkmaz durumuna ulaşıldı! Oyuncu 1, {player_1_payoff} kartı kalmasıyla Oyuncu 0'ın {player_0_payoff} kartına karşı kazandı.",
+    "deadlock_tie": "Deadlockqa yetildi, lakin berabere! İkki oyuncuda {player_0_payoff} kart qaldı. Oyuncu {current_player} vaqıf qazandı."
+  }
+}

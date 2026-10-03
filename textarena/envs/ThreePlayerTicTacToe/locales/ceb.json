@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Ikaw ang Player {player_id} sa Three-Player Tic Tac Toe.\nAng imong simbolo mao '{symbol}'.\nIkaw molihok sa pagbutang sa imong simbolo sa 5x5 board aron makahimo og linya sa upat.\nAng mga linya mahimong horizontal, vertical, o diagonal.\nIsumite ang imong paglihok gamit ang format '[4]' aron markahan ang cell 4."
+  },
+  "board": {
+    "current_board": "Kasamtangang Board:\n\n{board}\n\nMga Gilayon nga Paglihok: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Dili balido nga format sa pagbalhin. Gamita ang \"[cell]\" diin cell mao 0-{max_cell} .",
+    "out_of_range": "Dili balido nga numero sa selda: {cell}. Kinahanglan tali 0 ug {max_cell}.",
+    "already_occupied": "Ang selda {cell} napuno.",
+    "made_invalid": "Player {player_id} naghimo sa usa ka dili balido nga paglihok"
+  },
+  "game_action": {
+    "placed": "Ang Player {player_id} nagbutang sa ilang simbolo ({symbol}) sa campo ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Ang Player {player_id} ({symbol}) midaog!",
+    "draw": "Ang dula maoy draw!"
+  }
+}

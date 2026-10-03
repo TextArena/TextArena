@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Oli Mchezaji {player_id} katika mchezo wa wachezaji wawili wa Spite na Malice. Lengo lako ni kuwa wa kwanza kupunguza kundi la malipo yako.\n\n### Muktadha wa Mchezo:\n- Lengo ni kusafisha kundi la malipo yako kwa kucheza kadi kwenye makundi ya katikati.\n- Unaweza kucheza kadi kutoka kwa vyanzo vitatu:\n  1. **Mkono wako** (unapoanza kila zamu na hadi kadi 5 mkononi).\n  2. **Kadi ya juu ya kundi la malipo yako**.\n  3. **Kadi ya juu ya mojawapo ya makundi yako ya kuchupa**.\n\n### Kanuni za Kucheza:\n- Unaweza kucheza kadi kwenye kundi la katikati ikiwa ni **cheo kimoja juu** kuliko kadi ya juu kwenye kundi hilo (makundi ya katikati huanza na Ace na kuendelea hadi Queen; Wafalme ni wanyama wa kufugwa - wanaweza kucheza kwenye kadi yoyote lakini hawabadilishi mlolongo wa cheo. Hii ina maana ikiwa Mfalme anatumiwa baada ya 4, basi Mfalme huyo ana cheo cha 5 na kadi inayofuata lazima iwe 6).\n- Ikiwa huwezi kucheza kadi zaidi, lazima **uchupe kadi** kwenye mojawapo ya makundi yako ya kuchupa ili kumaliza zamu yako.\n- Ikiwa kundi la katikati linafikia Queen, litasafishwa kiotomatiki.\n- Mpangilio wa cheo ni: A=1, 2=2, ..., 9=9, J=10, Q=11, K kama wanyama wa kufugwa.\n\n### Vitendo:\n1. **Chora**: Kuanzia mwanzo wa zamu yako, chora kadi ili kujaza mkono wako hadi kadi 5. Ingia **[draw]** ili kuanza.\n2. **Cheza Kadi**: Ili kucheza kadi, taja kadi na kundi la katikati kama hii: **[play A♠ 0]** (ambapo 'A♠' ni kadi na '0' ni kundi la katikati la nambari).\n3. **Chupa**: Ikiwa huwezi kucheza kadi zaidi, chupa kadi kutoka kwa mkono wako hadi kundi la kuchupa ili kumaliza zamu yako. Ingia **[discard A♠ 1]** (ambapo 'A♠' ni kadi na '1' ni nambari ya kundi la kuchupa). Kumbuka kwamba huwezi kuchupa kadi yoyote kutoka kwa kundi la malipo. Unaweza tu kuchupa kadi kutoka kwa mkono wako.\n\n"
+  },
+  "board": {
+    "current_board": "Tata ya Sasa:\n\n{board}\nMikono Inayopatikana: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Biteni ya katikati (centre) -- ",
+    "pile": "{observation}Kifurushi {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Muonekano wa Mchezaji {player_id} ---\n",
+    "payoff": "{observation}Kifurushi cha Malipo (Kadi ya Juu): {top_card}, Urefu wa Kifurushi cha Malipo: {payoff_length}\n",
+    "hand": "{observation}Mkono: {hand}\n",
+    "discard": "{observation}Vifurushi vya Kufuta: {discard}\n",
+    "empty": "Mosolo ezali te."
+  },
+  "game_message": {
+    "no_cards_left": "Hakuna kadi zaidi za kuchora. Kumbuka kwamba unaweza kucheza kadi kutoka kwa vyanzo hivi:\n  1. Mkono wako.\n  2. Kadi ya juu ya kundi lako la kulipwa.\n  3. Kadi ya juu ya kundi lolote la kutupa lako.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Molɔngɔ́ ya mobémbo oyo ebongi te. Mosani {player_id} ayanolaki na kobénga libóngó moko malamu kati na bilembo bitangoli-makolo (parenthèse carrée).",
+    "invalid_play": "Kucheza kisicho sahihi. Player {player_id} alijaribu kucheza {card} kwenye safu ya kati {index}.",
+    "discard_from_payoff": "Kutupa kisicho sahihi. Player {player_id} alijaribu kutupa kadi kutoka kwenye safu ya malipo.",
+    "discard_not_in_hand": "Moto oyo azali na lisano {player_id} alukaki kobwaka karte moko oyo azalaki na yango te.",
+    "wrong_move_type": "Moyembi {player_id} ayanolaki na lolenge ya lisungi te."
+  },
+  "game_action": {
+    "you_drew": "Ozalaki kobɛta na bakarte.",
+    "opponent_drew": "Mosani {player_id} abimisaki bakarte.",
+    "you_played": "Ozalaki kobɛta {card} na liboke ya katikati {index}.",
+    "opponent_played": "Mchezaji {player_id} alicheza kadi {card} kwenye kundi la katikati {index}.",
+    "you_discarded": "Umetupa kadi {card} kwenye kundi la kutupa {index}, ambayo pia ina maana kwamba umemaliza zamu yako. Hakutakuwa na hatua zaidi zako zinazozingatiwa kwa zamu hii. Mchezaji {next_player_id} atakwenda kisha.",
+    "opponent_discarded": "Mokili {player_id} asukamaki {card} kwa libaku lya kusukama {index}, eza pia ekoma michezo yake. Mokili {player_id} akoki kuzingatiwa kwa michezo yake. Mokili {next_player_id}, oyo wewe akoki kuleka. Suka michezo yako kwa fomu [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mokili {current_player} amalaki libaku lya malamu! Mokili {current_player} abeti!",
+    "deadlock_player_0": "Kufikia kizuizi! Mchezaji 0 anashinda na kadi {player_0_payoff} zilizobaki dhidi ya kadi {player_1_payoff} za Mchezaji 1.",
+    "deadlock_player_1": "Kufikia kizuizi! Mchezaji 1 anashinda na kadi {player_1_payoff} zilizobaki dhidi ya kadi {player_0_payoff} za Mchezaji 0.",
+    "deadlock_tie": "Kufikia kizuizi kwa usawa! Wachezaji wote wawili wana kadi {player_0_payoff} zilizobaki. Mchezaji {current_player} anashinda kwa kawaida."
+  }
+}

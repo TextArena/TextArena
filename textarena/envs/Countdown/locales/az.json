@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Siz Countdown rəqəmlər oyununu oynuyursunuz!\nHədəf: +, -, *, / əməliyyatlarından istifadə edərək rəqəmləri birləşdirib hədəfə çatmaq.\nHərəkət formatı: [i j op] burada i,j indekslər, op isə əməliyyatdır.\nMəsələn: [0 2 *] 0-cı indeksdəki rəqəmi 2-ci indeksdəki rəqəmlə vurur.\nBölmə yalnız tam rəqəmlə nəticələnməlidir."
+  },
+  "board": {
+    "header": "HƏDƏF: {target}\n\nMövcud rəqəmlər:\n{numbers}",
+    "best": "{observation}\n\nƏn yaxşısı: {best_value} (məsafə: {distance})\nƏn yaxşı ifadə: {best_expression}",
+    "history": "{observation}\n\nHərəkət tarixçəsi:\n{moves}",
+    "progress": "{observation}\nCari irəliləyiş balı: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Yanlış hərəkət formatı. `[i j op]` formatını istifadə edin, burada i,j indekslər, op isə +,-,*,/ əməliyyatlarından biridir.",
+    "invalid_indices": "Yanlış indekslər. Fərqli və 0-{max_index} aralığında olmalıdır.",
+    "invalid_operation": "Yanlış əməliyyat (sifirə bölmə və ya qeyri-tam nəticə)"
+  },
+  "outcome": {
+    "win": "Əla! Dəqiq hədəf tapıldı: {target}",
+    "no_moves": "Daha hərəkət yoxdur. Ən yaxşı nəticə: {best_value} (hədəf: {target})",
+    "turn_limit": "Növbə limiti çatdı. Ən yaxşı nəticə: {best_value} (hədəf: {target})"
+  }
+}

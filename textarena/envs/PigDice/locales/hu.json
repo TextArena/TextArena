@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a Pig Dice játékban.\n\nSzabályok:\n- A köre során '[roll]' vagy '[hold]' lehetőségek közül választhat\n- 2-6-os dobás: Adja hozzá a kör összegéhez\n- 1-es dobás: Veszítse el a kör összegét és fejezze be a kört\n- Hold: Adja hozzá a kör összegét a pontszámához és fejezze be a kört\n- Az első {winning_score} pontot elérő játékos nyer\n\nAmikor Önön a sor, láthatja az aktuális pontszámokat és a kör összegét.\nVálaszoljon '[roll]' paranccsal a kockadobáshoz vagy '[hold]' paranccsal a pontok bankba helyezéséhez."
+  },
+  "invalid_move": {
+    "invalid_action": "Érvénytelen művelet formátum. Használja a '[roll]' vagy '[hold]' parancsot."
+  },
+  "actions": {
+    "player_busted": "{player_id}. játékos kiesett, elveszítve {turn_total} pontot!",
+    "player_hold": "{player_id}. játékos tartja és bankba helyezi {turn_total} pontját."
+  },
+  "board": {
+    "player": "0. játékos: '{score_0}'; 1. játékos: '{score_1}'",
+    "current_total_scores": "Aktuális összpontszámok: {scores}\nA kör aktuális összege: {turn_total}.",
+    "roll_history": "{observation}\nA kör dobási előzményei: {roll_history}",
+    "first_roll": "{observation}\nEz a kör első dobása.",
+    "available_actions": "{observation}\nElérhető műveletek: '[roll]' vagy '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "{winner_id}. játékos nyert, mivel magasabb pontszámmal rendelkezett a kör határidejénél ({scores})",
+    "winner_by_score": "{winner_id}. játékos nyert, mivel elérte a {winning_score} cél pontszámot!",
+    "draw": "A kör határideje lejárt, és minden játékos azonos pontszámmal rendelkezik: {scores}"
+  }
+}

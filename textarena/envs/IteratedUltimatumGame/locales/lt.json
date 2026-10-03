@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame lokalės failas. NERVERSIKITE raktažodžių (kairė pusė). Vertėkite tik reikšmes (dešinė pusė). Palikite kiekvieną {placeholder} lygiai taip, kaip yra; nerversikite veiksmų žetonų [Offer: $X] / [Accept] / [Reject]. Palikite '$' valiutos simbolį ir visas skaičius taip, kaip yra.",
+  "_slots": {
+    "{player_id}": "Žaidėjo numeris, 0 arba 1",
+    "{other_id}": "Kito žaidėjo numeris, 1 arba 0",
+    "{num_rounds}": "Viso raundų skaičius",
+    "{pool}": "Pinigų suma, prieinama kiekvienam raundui (skaičius)",
+    "{round_number}": "Dabartinis raundo numeris",
+    "{proposer_id}": "Pasiūlytojo žaidėjo numeris, 0 arba 1",
+    "{responder_id}": "Atsakytojo žaidėjo numeris, 0 arba 1",
+    "{offer}": "Pasiūlyta suma (skaičius)",
+    "{keep}": "Suma, kurią pasiūlytojas pasilieka (skaičius)",
+    "{proposer_gain}": "Pinigai, kuriuos pasiūlytojas gavo šiame raunde (skaičius)",
+    "{responder_gain}": "Pinigai, kuriuos atsakytojas gavo šiame raunde (skaičius)",
+    "{total_0}": "Žaidėjo 0 kaupiama suma (skaičius)",
+    "{total_1}": "Žaidėjo 1 kaupiama suma (skaičius)",
+    "{winner}": "Laimėjusio žaidėjo numeris",
+    "{loser}": "Pralaimėjusio žaidėjo numeris",
+    "{winner_total}": "Laimėjusio žaidėjo visų pinigų suma (skaičius)",
+    "{loser_total}": "Pralaimėjusio žaidėjo visų pinigų suma (skaičius)",
+    "{total}": "Kiekvieno žaidėjo lygių galutinių sumų (skaičius)"
+  },
+  "player_prompt": {
+    "intro": "Jūs esate Žaidėjas {player_id}, žaidžiantis {num_rounds} raundų Iterated Ultimatum Žaidimą.\nJūs turite ${pool} pinigų, kuriuos galite pasidalinti šiame raunde tarp savęs ir Žaidėjo {other_id}.\n\nPasiūlytojas:\n  - Pateikite pasiūlymą: [Offer: $X] (0 <= X <= pool)\n  - Jei priimta → Jūs gaunate $(pool - X), kitas žaidėjas gauna $X\n  - Jei atmesta → Abu gaunate $0\n  - Pavyzdys: [Offer: $3]  arba  'Manau, tai yra sąžininga. [Offer: $5]'\n\nAtsakytojas:\n  - Nuspręskite dėl pasiūlymo naudodami [Accept] arba [Reject]\n  - Pavyzdys: 'Tai atrodo sąžininga. [Accept]'\n            'Per daug nesąžininga. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- {round_number} raundas prasideda! ---\nŽaidėjas {proposer_id} yra pasiūlytojas, Žaidėjas {responder_id} yra atsakytojas.",
+    "offer": "{round_number} raundas: Žaidėjas {proposer_id} pasiūlo ${offer} Žaidėjui {responder_id} (palikdamas ${keep}).",
+    "accepted": "Žaidėjas {responder_id} priėmė! {round_number} raundo pelnas: Žaidėjas {proposer_id} +${proposer_gain}, Žaidėjas {responder_id} +${responder_gain}. Naujos sumos: Žaidėjas 0: ${total_0}, Žaidėjas 1: ${total_1}.",
+    "rejected": "Žaidėjas {responder_id} atmetė pasiūlymą! {round_number} raundo pelnas: Abu žaidėjai +$0. Sumos lieka: Žaidėjas 0: ${total_0}, Žaidėjas 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Pasiūlytojas privalo pateikti pasiūlymą naudodamas formatą [Offer: $X].",
+    "bad_integer": "Pasiūlymo suma privalo būti teisingas skaičius.",
+    "out_of_range": "Pasiūlymas privalo būti tarp $0 ir ${pool}.",
+    "no_current_offer": "Nėra dabartinio pasiūlymo, į kurį reikėtų atsakyti.",
+    "accept_or_reject": "Atsakytojas privalo arba [Accept] arba [Reject] pasiūlymą."
+  },
+  "outcome": {
+    "win": "Žaidėjas {winner} laimėjo su ${winner_total} visų pinigų suma prieš Žaidėją {loser} su ${loser_total}.",
+    "draw": "Lygiosios! Abu žaidėjai baigė su ${total} visų pinigų suma."
+  }
+}

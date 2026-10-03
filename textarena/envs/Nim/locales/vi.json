@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong trò Nim.\nMục tiêu của bạn là lấy vật cuối cùng còn lại.\nTrong mỗi lượt, hãy chọn chính xác một đống và loại bỏ một hoặc nhiều vật từ đống đó.\nSử dụng định dạng '[pile quantity]', trong đó pile là chỉ số của đống và quantity là số lượng vật cần loại bỏ.\nVí dụ, '[0 3]' loại bỏ 3 vật từ đống 0."
+  },
+  "state": {
+    "current_pile": "Đống hiện tại:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Không tìm thấy định dạng nước đi hợp lệ. Sử dụng '[pile quantity]'.",
+    "correct_format_wrong_fields": "Người chơi {player_id}, Hành động không hợp lệ. Cột {col} nằm ngoài giới hạn.",
+    "out_of_range": "Chỉ số đống {pile_index} nằm ngoài phạm vi.",
+    "non_positive": "Phải loại bỏ ít nhất 1 vật.",
+    "exceeds_pile": "Không thể loại bỏ {quantity} vật từ đống {pile_index} (chỉ còn {pile_count} vật)."
+  },
+  "observation": {
+    "removed_from_piles": "Người chơi {player_id} đã thực hiện [{pile_index} {quantity}], loại bỏ {quantity} vật từ đống {pile_index}."
+  },
+  "outcome": {
+    "win": "Người chơi {player_id} đã lấy được vật cuối cùng!"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Oyun başlıyor. Koz renk: {trump_suit} (koz kartı: {trump_str}).",
+    "no_trump_card": "yok"
+  },
+  "player_prompt": {
+    "intro": "Alman Vist oyununda Oyuncu {player_id}'siniz.\n{phase_info}\nElinizde {hand_size} kart var.\nBir kart oynamak için '[play N]' yazın, burada N elinizdeki kartın pozisyonudur (örneğin '[play 3]').",
+    "phase_learning": "ÖĞRENME AŞAMASI: her turun kazananı yüz üstü kartı alır ve kaybeden desteden bir sonraki kartı çeker. Bu aşamada kazanılan turlar zafer için sayılmaz.",
+    "phase_playing": "OYUN AŞAMASI: deste bitti. Bundan sonra kazanılan her tur zafer için sayılır."
+  },
+  "next_card": {
+    "playing_phase": "Sunulan kart yok - oyun aşaması başladı.",
+    "deck_empty": "Deste boş - sunulan kart yok.",
+    "available": "Sunulan kart: {card}",
+    "available_trump": "Sunulan kart: {card} (KOZ)"
+  },
+  "invalid_move": {
+    "wrong_format": "Geçersiz hamle formatı. Elinizdeki N. kartı oynamak için '[play N]' yazın.",
+    "bad_position": "Bu kart pozisyonu yok. Elinizde {hand_size} kart var.",
+    "must_follow_suit": "Renk uyumu sağlamalısınız ve bir {lead_suit} kartı oynamalısınız.",
+    "invalid_play": "Bu kart oynanamaz."
+  },
+  "game_action": {
+    "played": "Oyuncu {player_id} {card} kartını oynadı."
+  },
+  "trick": {
+    "won": "Oyuncu {winner_id} {card} kartıyla turu kazandı.",
+    "won_learning": "Oyuncu {winner_id} {card} kartıyla turu kazandı ve yüz üstü kartı aldı."
+  },
+  "phase": {
+    "learning_complete": "Deste bitti. Öğrenme aşaması sona erdi - kalan her tur zafer için sayılır."
+  },
+  "draw": {
+    "winner_received": "Turu kazandınız ve {card} kartını aldınız.",
+    "loser_received": "Turu kaybettiniz ve desteden {card} kartını çektiniz.",
+    "winner_preview": "Bir sonraki sunulan kart {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Şimdiye kadar kazanılan turlar - Oyuncu 0: {tricks0}, Oyuncu 1: {tricks1}",
+    "scores_playing": "Puanlanan turlar - Oyuncu 0: {tricks0}, Oyuncu 1: {tricks1}",
+    "phase": "Aşama: {phase}",
+    "phase_learning": "Aşama: {phase} (destede {remaining_cards} kart kaldı)"
+  },
+  "hand": {
+    "no_cards": "Kart yok",
+    "no_cards_in_hand": "Elinizde kart yok",
+    "header": "Eliniz:",
+    "trump_indicator": " (KOZ)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Bu turda henüz kart oynanmadı.",
+    "header": "Mevcut tur:",
+    "trump_indicator": " (KOZ)",
+    "card_line": "{observation}\n  Oyuncu {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Oyun başlamadı",
+    "header": "=== ALMAN VİST OYUNU ===",
+    "phase": "{observation}\nAşama: {phase}",
+    "trump_suit": "{observation}\nKoz renk: {trump_suit}",
+    "trump_card": "{observation}\nKoz kartı: {card}",
+    "cards_left": "{observation}\nDestede kalan kartlar: {count}",
+    "next_card": "{observation}\nBir sonraki kart: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nMevcut tur:",
+    "trump_indicator": " (KOZ)",
+    "trick_line": "{observation}\n  Oyuncu {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nOyuncu {player_id}: {scoring} puanlanan turlar ({tricks} toplam), elinde {hand_size} kart"
+  },
+  "outcome": {
+    "summary": "Öğrenme aşaması - Oyuncu 0: {l0}, Oyuncu 1: {l1}. Oyun aşaması - Oyuncu 0: {p0}, Oyuncu 1: {p1}. Oyuncu {winner_id} {winner_tricks} puanlanan tur ile kazandı!"
+  }
+}

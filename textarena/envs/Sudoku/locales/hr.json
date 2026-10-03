@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id}. Igrate Sudoku.\nOvdje je trenutno stanje Sudokua. Svaki redak je označen brojem od 1 do 9, a svaka kolona je također označena brojem od 1 do 9.\nPrazne ćelije su označene znakom '.', a unaprijed ispunjene ćelije sadrže znamenke od 1 do 9.\n\nTrenutna Sudoku mreža:\nVaš cilj je ispuniti prazne ćelije u 9x9 mreži znamenkama od 1 do 9 tako da:\n1. Svaki redak sadrži sve znamenke od 1 do 9 bez ponavljanja.\n2. Svaka kolona sadrži sve znamenke od 1 do 9 bez ponavljanja.\n3. Svaka od devet 3x3 podmreža sadrži sve znamenke od 1 do 9 bez ponavljanja.\n\nPravila i upute:\n1. **Nemojte prepisivati** početne brojeve koji su već dati u mreži.\n2. **Samo ispunite** prazne ćelije označene znakom '.'.\n3. Možete odgovoriti na bilo koji način koji preferirate, ali se pobrinite da vaš odgovor sadrži format '[redak kolona broj]'.\n4. **Pobrinite se** da vaš potez ne krši Sudoku pravila. Nevaljani potezi će rezultirati kaznama.\nPrimjeri:\n- **Valjani potez**:\n  - Isječak mreže prije poteza:\n  \n  - Potez: `[5 3 7]`\n  - Objašnjenje: Stavljanje broja 7 u redak 5, kolonu 3 ne krši nijedno Sudoku pravilo.\n\n- **Nevaljani potez** (Prepisivanje unaprijed ispunjene ćelije):\n  - Isječak mreže prije poteza:\n  \n  - Potez: `[1 1 9]`\n  - Objašnjenje: Ćelija (1,1) je već ispunjena brojem 5. Ne možete ju prepisati.\n\n- **Nevaljani potez** (Kršenje Sudoku pravila):\n  - Isječak mreže prije poteza:\n  \n  - Potez: `[1 3 5]`\n  - Objašnjenje: Stavljanje broja 5 u redak 1, kolonu 3 krši pravilo jer broj 5 već postoji u redu 1.\n\nPovijest vaših poteza i misli će biti dodana kako igrate više rundi. Koristite povijest vaših poteza da poboljšate vaše odlučivanje izbjegavajući poteze koje ste već pokušali. Sretno!\n\n"
+  },
+  "board": {
+    "game_board": "Igračka ploča:\n{board}",
+    "board_state": "Stanje ploče: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nevaljani format poteza. Igrač {player_id} nije odgovorio s valjanim 'redak kolona broj'.",
+    "out_of_bounds": "Nevaljani potez. Igrač {player_id} je pokušao staviti {num} na ({row}, {col}), što je izvan granica.",
+    "overwrite": "Nevaljani potez. Igrač {player_id} je pokušao prepisati unaprijed ispunjenu ćeliju ({row}, {col}).",
+    "violates_rules": "Nevaljani potez. Igrač {player_id} je pokušao staviti {num} na ({row}, {col}), što krši Sudoku pravila."
+  },
+  "outcome": {
+    "win": "Čestitamo! Igrač {player_id} je završio Sudoku slagalicu.",
+    "turn_limit": "Dosegnut je ograničenje poteza. Ispravno ste ispunili {percent}% praznih ćelija."
+  }
+}

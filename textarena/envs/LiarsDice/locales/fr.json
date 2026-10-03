@@ -1,0 +1,63 @@
+{
+  "_comment": "Textes visibles par le joueur pour Liar's Dice. Les jetons d'action entre crochets ('[Bid: X, Y]', '[Call]'), les identifiants de joueur, les valeurs de faces des dés, les quantités et les décomptes sont des espaces réservés neutres et ne doivent jamais être traduits.",
+  "_slots": {
+    "player_id": "indice du joueur (entier)",
+    "num_players": "nombre de joueurs dans la partie (entier)",
+    "dice_summary": "décompte des dés restants par joueur déjà assemblé avec '; '",
+    "your_dice": "liste déjà générée, séparée par des virgules, des valeurs des dés de ce joueur",
+    "p": "indice du joueur (entier)",
+    "d": "nombre de dés restants de ce joueur (entier)",
+    "current_player_id": "indice du joueur qui a contesté (entier)",
+    "face_value": "valeur de face du dé comptée (1-6)",
+    "count": "nombre réel de dés correspondants (entier)",
+    "quantity": "quantité de l'enchère (entier)",
+    "loser_id": "indice du joueur qui perd un dé (entier)",
+    "new_quantity": "quantité de l'enchère qui vient d'être soumise (entier)",
+    "current_quantity": "quantité de l'enchère actuelle (entier)",
+    "new_face_value": "valeur de face de l'enchère qui vient d'être soumise (entier)",
+    "current_face_value": "valeur de face de l'enchère actuelle (entier)",
+    "action": "la chaîne d'action brute soumise par le joueur",
+    "reason": "un motif de rejet d'enchère imbriqué",
+    "winner": "indice du joueur qui gagne (entier)",
+    "final_ranking": "liste des indices de joueurs, du premier éliminé au gagnant"
+  },
+
+  "player_prompt": {
+    "intro": "Vous êtes le Joueur {player_id} dans une partie de Liar's Dice à {num_players} joueurs.\nRègles :\n- À votre tour, vous pouvez soit :\n  1) Faire une nouvelle enchère avec une quantité plus élevée ou une face plus élevée (ou les deux) que l'enchère actuelle ; c.-à-d. '[Bid: 3, 4]',\n  2) Contester la dernière enchère en tapant '[Call]'.\n\nSi vous contestez :\n  - Si le décompte réel de cette valeur de face parmi tous les dés est inférieur à l'enchère, le dernier enchérisseur perd un dé.\n  - Sinon, le contestataire perd un dé.\nUn joueur qui atteint 0 dé est éliminé. Le dernier joueur restant gagne."
+  },
+
+  "board": {
+    "per_player":       "\tJoueur {p} : {d}",
+    "new_round":        "\nNouvelle manche - Dés restants : {dice_summary}\nVos dés actuels sont : {your_dice}"
+  },
+
+  "call": {
+    "bidder_loses":     "Le Joueur {current_player_id} conteste ! Le décompte réel de la face {face_value} est {count}, ce qui est MOINS que {quantity}.\nLe Joueur {loser_id} (le dernier enchérisseur) perd un dé.",
+    "caller_loses":     "Le Joueur {current_player_id} conteste ! Le décompte réel de la face {face_value} est {count}, ce qui est >= {quantity}.\nLe Joueur {loser_id} (le contestataire) perd un dé."
+  },
+
+  "action": {
+    "bid_announce":     "Le Joueur {player_id} enchérit {quantity} de la face {face_value}."
+  },
+
+  "invalid_move": {
+    "call_no_bid":      "Contestation faite sans enchère préalable.",
+    "invalid_bid":      "Enchère invalide : {reason}",
+    "not_recognized":   "Action non reconnue comme un '[Bid: X, Y]' ou un '[Call]' valide. Action soumise : {action}"
+  },
+
+  "bid_reason": {
+    "quantity_lower":   "La nouvelle quantité {new_quantity} est inférieure à l'actuelle {current_quantity}.",
+    "face_lower":       "La nouvelle valeur de face {new_face_value} est inférieure à l'actuelle {current_face_value}.",
+    "identical":        "L'enchère est identique à l'enchère actuelle.",
+    "face_range":       "La valeur de face doit être comprise entre 1 et 6."
+  },
+
+  "message": {
+    "eliminated_invalid": "Le Joueur {player_id} a été éliminé pour coup invalide."
+  },
+
+  "outcome": {
+    "win":              "Le Joueur {winner} gagne ! Classement final : {final_ranking}"
+  }
+}

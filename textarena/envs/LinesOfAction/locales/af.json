@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction-lokaalleêr. MAAK NIE sleutels (linkerkant) oor nie. Vertaal net waardes (regterkant).",
+  "_slots": {
+    "{player_id}": "Die speler se nommer, óf 0 óf 1",
+    "{side}": "Die speler se stuk-letter, óf O óf X",
+    "{other}": "Die teenstander se stuk-letter, óf O óf X",
+    "{board}": "Die ASCII-weergawe van die bord; hou as-is",
+    "{coord}": " 'n Bord-koördinaat soos b1 of a3",
+    "{from}": "Die bron-koördinaat van 'n skuif, soos b1",
+    "{to}": "Die bestemming-koördinaat van 'n skuif, soos b3"
+  },
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in 'n spel van LinesOfAction.\nJou stukke is '{side}', teenstander-stukke is '{other}'.\nSkuif-formaat: `[b1b3]` (van-koördinaat na-koördinaat). 'n Wettige skuif beweeg horisontaal, vertikaal, of diagonaal 'n aantal vierkante gelyk aan die totale stukke (enige kleur) in daardie lyn. Jy mag oor jou eie stukke spring, maar nie oor teenstander-stukke nie; land op 'n teenstander vang dit. Wen wanneer al jou stukke 8-buur-verbonden is."
+  },
+  "board": {
+    "current_board": "Bord:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formaat moet e2e4 wees (van,na koördinate).",
+    "no_piece": "Geen {side} stuk op {coord}.",
+    "identical": "Bron en bestemming identies.",
+    "not_straight_or_diagonal": "Skuif moet reguit of diagonaal wees.",
+    "wrong_distance": "Moet skuif-afstand gelyk aan stukke in lyn.",
+    "enemy_blocks": "Teenstander-stuk blokkeer die pad.",
+    "destination_own": "Bestemming beset deur eie stuk."
+  },
+  "game_action": {
+    "moved": "Speler {player_id} het {from} -> {to} geskuif",
+    "captured_suffix": "Speler {player_id} het {from} -> {to} geskuif en 'n teenstander gevange geneem."
+  },
+  "outcome": {
+    "win": "Alle stukke is verbind.",
+    "draw_no_capture": "60 skuifte sonder vangs.",
+    "draw_repetition": "Posisie herhaal drie keer."
+  }
+}

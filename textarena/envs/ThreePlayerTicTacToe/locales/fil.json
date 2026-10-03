@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe file ng lokasyon. HUWAG isalin ang mga susi (kaliwang bahagi). Isalin lamang ang mga halaga (kanang bahagi).",
+  "_slots": {
+    "{player_id}": "Ang numero ng manlalaro, hal. 0, 1 o 2",
+    "{symbol}": "Ang marka ng manlalaro, isa sa A, B o C",
+    "{cell}": "Isang numero ng cell sa board",
+    "{max_cell}": "Ang pinakamataas na wastong numero ng cell (board_size^2 - 1)",
+    "{row}": "Ang index ng hanay ng board kung saan inilagay ang marka",
+    "{col}": "Ang index ng kolumn ng board kung saan inilagay ang marka",
+    "{board}": "Ang rendered na ASCII board (huwag isalin)",
+    "{moves}": "Ang listahan ng mga magagamit na pagkilos na token na tulad ng '[4]' (huwag isalin)"
+  },
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa Three-Player Tic Tac Toe.\nAng iyong simbolo ay '{symbol}'.\nIkaw ay nagpapalit ng paglagay ng iyong simbolo sa isang 5x5 board upang bumuo ng isang linya ng apat.\nAng mga linya ay maaaring pahalang, patayo, o diagonal.\nIsabmit ang iyong pagkilos gamit ang format '[4]' upang markahan ang cell 4."
+  },
+  "board": {
+    "current_board": "Kasalukuyang Board:\n\n{board}\n\nMga Pagkilos na Magagamit: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hindi wastong format ng pagkilos. Gamitin ang '[cell]' kung saan ang cell ay 0-{max_cell}.",
+    "out_of_range": "Hindi wastong numero ng cell: {cell}. Dapat ay nasa pagitan ng 0 at {max_cell}.",
+    "already_occupied": "Ang cell {cell} ay nakuha na.",
+    "made_invalid": "Ang Player {player_id} ay gumawa ng hindi wastong pagkilos"
+  },
+  "game_action": {
+    "placed": "Ang Player {player_id} ay naglagay ng kanilang simbolo ({symbol}) sa larangan ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Ang Player {player_id} ({symbol}) ay nanalo!",
+    "draw": "Ang laro ay isang tabla!"
+  }
+}

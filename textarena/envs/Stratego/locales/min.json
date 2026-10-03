@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Inyo adolah Pamain {player_id} di Stratego.\nTujuan inyo adolah manangkap Banderang lawan atau mamusnahkan sadonyo bidak lawan nan dapek digarakkan.\nPasukan inyo alah ditempatkan di papan, tamasuak Banderang, Bom, jo bidak lainnyo nan bervariasi pangkat.\n\n### Instruksi Patampuran\n1. **Aturan Garak:**\n   - Pado giliran inyo, inyo dapek manggarakkan ciek bidak saciek langkah ka petak tangga (ateh, bawah, kiri, atau kanan) nan alah diisi jo bidak inyo.\n   - Contoh: Bidak dapek digarakkan dari A1 ka B1 atau A1 ka A2 jika B1 jo A2 indak diisi jo bidak inyo surang.\n   - Jiko bidak nan dipiliah adolah Bom atau Banderang, bidak tasabuik indak dapek digarakkan.\n2. **Patampuran:**\n   - Jiko inyo manggarakkan bidak ka petak nan diisi jo bidak lawan, mako patampuran akan tarjadi:\n     - Bidak nan punyo pangkat tinggi manang jo mamusnahkan bidak lawan.\n     - Jiko pangkatnyo samo, kaduo bidak kalua dari papan.\n     - **Kasus Istimewa:**\n       - Bom mamusnahkan bidak panarang kecuali Penambang, nan dapek manetralisir Bom.\n       - Mata-mata dapek manang lawan Marsose jiko Mata-mata nan panarang partamo tapi kalah lawan bidak lainnyo.\n3. **Tujuan Strategis:**\n   - Identifikasi bidak lawan melalui garak jo patampuran.\n   - Lindungi Banderang inyo sambari mencubo manangkap Banderang lawan.\n   - Gunakan Pengintai sacaro strategis untuak mandapekan informasi tentang bidak lawan jo manarang bidak nan lemah.\n\n### Bagaimano Mambuek Garak:\n1. Spesifikasi koordinat bidak nan inyo kehendaki untuak digarakkan jo tujuannyo.\n2. Gunakan format: [A0 B0], di mano A0 adolah posisi sumber, jo B0 adolah tujuan.\n   - Contoh: Untuak manggarakkan bidak dari baris 0, kolom 0 ka baris 1, kolom 0, masukkan [A0 B0].\n3. Pastikan tujuan adolah valid manuruik aturan garak di ateh.\n\n### Catatan Panting:\n- Papan akan manampilkan bidak inyo jo posisinyo, contohnyo MN, MS.\n- Papan akan manampilkan posisi bidak lawan nan dikatahui tanpa manyebukan pangkatnyo, contohnyo ?.\n- Grid nan ditandoi jo ~ adolah danau jo indak dapek digarakkan.\n- Saran, mulai patampuran inyo dengan manggarakkan bidak nan barado di garis muko untuak mandapekan informasi tentang bidak lawan. Garis muko pamain 0 jo pamain 1 adolah baris D jo G.\n\nIko adolah keadaan papan saikung:"
+  },
+  "board": {
+    "current_board": "Papan Saikung:\n\n{board}\nGerakan Tersedia: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format aksi indak sah. Pamain {player_id} indak mamasuak-an langkah dalam format [A0 B0] .",
+    "invalid_coordinates": "Format aksi indak sah. Pamain {player_id} indak mamasuak-an koordinat nan valid.",
+    "not_own_piece": "Format aksi indak sah. Pamain {player_id} musti manggaruak salah satu buah tangannyo surang.",
+    "scout_through_pieces": "Format aksi indak sah. Pamain {player_id} indak dapek mamindahkan panjagai malalui bagian-bagian lain.",
+    "scout_diagonal": "Format aksi indak sah. Pamain {player_id} indak dapek manggaruang surang pramuka sacaro diagonal.",
+    "non_scout_multi_square": "Format aksi indak sah. Pica, salain dari para pramuka, hanyo dapek manggerak ciek kotak pado suatu wakatu.",
+    "move_into_lake": "Format aksi indak sah. Pamain {player_id} indak dapek pindah ka danau.",
+    "move_onto_own_piece": "Format aksi indak sah. Pamain {player_id} indak dapek mamindah ka bagian inyo surang.",
+    "move_bomb_or_flag": "Format aksi indak sah. Pamain {player_id} indak dapek manggaruang bom atau bendera."
+  },
+  "game_action": {
+    "you_moved": "Awak alah mamindahkan bagian awak dari {source} ka {dest}.",
+    "opponent_moved": "Pamain {player_id} alah mamindahkan ciek buah dari {source} ka {dest}.",
+    "you_equal_ranks": "Inyo alah manggarakkan bidaknyo dari {source} ka {dest}. Bidak panarangan adolah {attacking_rank} jo bidak tujuan adolah {target_rank}. Karano pangkatnyo samo, kaduo bidak kalua.",
+    "opponent_equal_ranks": "Pamain {player_id} alah manggarakkan bidak dari {source} ka {dest}. Bidak panarangan adolah {attacking_rank} jo bidak tujuan adolah {target_rank}. Karano pangkatnyo samo, kaduo bidak kalua.",
+    "you_miner_defused": "Inyo alah manggarakkan bidaknyo dari {source} ka {dest}. Bidak panarangan adolah {attacking_rank} jo bidak tujuan adolah {target_rank}. Karano penambang dapek manetralisir bom, inyo manang patampuran.",
+    "opponent_miner_defused": "Pemain {player_id} alah mangarak pion dari {source} ka {dest}. Pion nan manyarang adolah {attacking_rank} jo pion tujuan adolah {target_rank}. Karano Miner dapek menonaktifkan Bom, Anda kalah pertempuran.",
+    "you_bomb_lost": "Inyo alah manggarakkan bidaknyo dari {source} ka {dest}. Bidak panarangan adolah {attacking_rank} jo bidak tujuan adolah {target_rank}. Karano panarang indak marupoan penambang, inyo kalah patampuran.",
+    "opponent_bomb_won": "Pamain {player_id} alah manggarakkan bidak dari {source} ka {dest}. Bidak panarangan adolah {attacking_rank} jo bidak tujuan adolah {target_rank}. Karano panarang indak marupoan penambang, inyo manang patampuran.",
+    "you_spy_won": "Inyo alah manggarakkan bidaknyo dari {source} ka {dest}. Bidak panarangan adolah {attacking_rank} jo bidak tujuan adolah {target_rank}. Karano panarang adolah mata-mata jo tujuan adolah marsose, inyo manang patampuran.",
+    "opponent_spy_lost": "Pamain {player_id} alah manggarakkan bidak dari {source} ka {dest}. Bidak panarangan adolah {attacking_rank} jo bidak tujuan adolah {target_rank}. Karano panarang adolah mata-mata jo tujuan adolah marsose, inyo kalah patampuran.",
+    "you_higher_won": "Inyo alah manggarakkan bidaknyo dari {source} ka {dest}. Bidak panarangan adolah {attacking_rank} jo bidak tujuan adolah {target_rank}. Karano panarang adolah pangkat tinggi dari tujuan, inyo manang patampuran.",
+    "opponent_higher_lost": "Pamain {player_id} alah manggarakkan bidak dari {source} ka {dest}. Bidak panarangan adolah {attacking_rank} jo bidak tujuan adolah {target_rank}. Karano panarang adolah pangkat tinggi dari tujuan, inyo kalah patampuran.",
+    "you_lower_lost": "Inyo alah manggarakkan bidaknyo dari {source} ka {dest}. Bidak panarangan adolah {attacking_rank} jo bidak tujuan adolah {target_rank}. Karano panarang adolah pangkat randah dari tujuan, inyo kalah patampuran.",
+    "opponent_lower_won": "Pamain {player_id} alah manggarakkan bidak dari {source} ka {dest}. Bidak panarangan adolah {attacking_rank} jo bidak tujuan adolah {target_rank}. Karano panarang adolah pangkat randah dari tujuan, inyo manang patampuran."
+  },
+  "outcome": {
+    "flag_captured": "Pamain {player_id} alah manangkok panji lawannyo!",
+    "no_movable_pieces": "Pamain {winner_id} manang! Pamain {loser_id} indak punyo bidak nan dapek digarakkan."
+  }
+}

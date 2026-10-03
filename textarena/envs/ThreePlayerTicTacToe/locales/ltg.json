@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Jūs esat spēlētājs {player_id} trīs spēlētāju Tik Tac Tō. \nJūsu simbols ir '{symbol}'. \nJūs veicat soļus, ievietojot savu simbolu 5x5 tabulā, lai veidotu četru rindu līniju. \nLīnijas var būt horizontālas, vertikālas vai diagonālas. \nIesniegiet savu soļu, izmantojot formātu '[4]', lai atzīmētu šūnu 4."
+  },
+  "board": {
+    "current_board": "Pašreizējais galdiņš:\n\n{board}\n\nPieejamie gājieni: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Navaleigs puorvītuošonys formats. Izmontuot \"[cell]\", kur šyuna ir 0-{max_cell}.",
+    "out_of_range": "Nederīgs šūnas numurs: {cell}. Jābūt starp 0 un {max_cell}.",
+    "already_occupied": "Šūnys {cell} ir jau īmests.",
+    "made_invalid": "Spālātuojs {player_id} izdareja naatspiejeigu kusteibu."
+  },
+  "game_action": {
+    "placed": "Spēlētājs {player_id} ievieto savu simbolu ({symbol}) laukumā ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Spēlētājs {player_id} ({symbol}) uzvar!",
+    "draw": "Spēle ir bez rezultata!"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id}. Jy speel die Geheue-speletjie.\nJou doel is om meer pare kaarte op die bord te pas as jou teenstander.\nOp jou beurt, kies twee kaarte om om te draai deur die ry- en kolomnommers van die eerste en tweede kaart onderskeidelik in te voer soos '[0 1 1 0]', waar die eerste kaart in ry 0 en kolom 1 is, en die tweede kaart in ry 1 en kolom 0 is.\nAs die twee kaarte pas, kry jy 'n punt en die kaarte bly omgedraai. As hulle nie pas nie, word die kaarte terug omgedraai, bv. '.'.\nDie spel eindig wanneer alle pare gekoppel is."
+  },
+  "board": {
+    "current_board": "Huidige bord:\n{board}",
+    "current_game_board": "Huidige Spelbord:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldige skuif-formaat. Speler {player_id} het nie met 'n geldige rigting in vierkante hakies geantwoord nie.",
+    "out_of_bounds": "Ongeldige skuif. Speler {player_id} het 'n posisie buite die grense gekies.",
+    "same_card_twice": "Ongeldige skuif. Speler {player_id} het dieselfde kaart twee keer gekies.",
+    "already_matched": "Ongeldige skuif. Speler {player_id} het een of albei kaarte gekies wat reeds gekoppel is."
+  },
+  "game_message": {
+    "cards_match": "Die kaarte wat Speler {player_id} by posisies [{r1} {c1}] en [{r2} {c2}] gekies het, pas!",
+    "cards_no_match": "Die kaarte wat Speler {player_id} gekies het, pas nie. Kaarte by posisies [{r1} {c1}] en [{r2} {c2}] is {pos1} en {pos2} onderskeidelik."
+  },
+  "outcome": {
+    "draw": "Albei spelers het dieselfde aantal pare kaarte gekoppel.",
+    "win": "Speler {winner_id} het gewen!",
+    "turn_limit": "Die beurtgrens is bereik. Die spel is verby. Speler 0 het {score_0} punte aangeteken, Speler 1 het {score_1} punte aangeteken.",
+    "turn_limit_win": "{reason} Speler {winner_id} het gewen!"
+  }
+}

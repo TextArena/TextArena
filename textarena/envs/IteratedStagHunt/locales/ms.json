@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam permainan Iterated Stag Hunt sebanyak {num_rounds} pusingan.\n\nStruktur Permainan:\n- Permainan ini terdiri daripada {decision_rounds} pusingan keputusan\n- Sebelum setiap keputusan, anda mempunyai {conversation_rounds} giliran untuk berkomunikasi\n- Selepas komunikasi, kedua-dua pemain memilih secara serentak untuk memburu rusa atau arnab\n\nGanjaran:\n- Ganjaran yang berkaitan dengan pemburuan rusa dan arnab mungkin berbeza antara pusingan\n- Ganjaran akan dipaparkan pada permulaan setiap pusingan\n\nCara Bermain:\n- Semasa komunikasi: Taip sahaja mesej anda\n- Semasa fasa keputusan: Gunakan '[Stag]' atau '[Hare]'\nAnda boleh menyertakan teks tambahan sebelum atau selepas token ini.\n"
+  },
+
+  "round": {
+    "payoff_matrix": "Pusingan {round} bermula dengan matriks ganjaran berikut:\n- Kedua-duanya memburu rusa: Kedua-duanya menerima {mutual_stag} mata\n- Kedua-duanya memburu arnab: Kedua-duanya menerima {mutual_hare} mata\n- Seorang memburu arnab dan seorang lagi memburu rusa: Pemburu arnab menerima {single_hare} mata, manakala pemburu rusa menerima {single_stag} mata\nAnda boleh berkomunikasi secara bebas dengan lawan anda selama {conversation_rounds} pusingan sebelum membuat keputusan.",
+    "decision_phase": "Fasa keputusan untuk pusingan {round} telah bermula. Sila balas dengan '[stag]' atau '[hare]'.",
+    "results": "Pusingan {round} selesai. Keputusan:\n\tPemain 0 memilih '{decision0}' (ganjaran: {payoff0}; jumlah: {total0})\n\tPemain 1 memilih '{decision1}' (ganjaran: {payoff1}; jumlah: {total1})"
+  },
+
+  "outcome": {
+    "win": "Mata akhir: Pemain 0: {p0}, Pemain 1: {p1}\nPemain {winner_id} menang!",
+    "draw": "Mata akhir: Pemain 0: {p0}, Pemain 1: {p1}\nSeri!"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "توهان هڪ Iterated Prisoner's Dilemma ۾ Player {player_id} آهيو جيڪو {num_rounds} رائونڊ تي پکڙيل آهي. راند جو جوڙجڪ: - هر فيصلي کان اڳ توهان کي {total_conversation_rounds} آزادي سان گفتگو ڪرڻ لاءِ موڙيو. - ان کان پوءِ ، ٻئي رانديگر هڪ ئي وقت تعاون يا نقص جو انتخاب ڪندا آهن. پيلي ميٽرڪس (هر رائونڊ مقرر ٿيل): - Both Cooperate ➜ each {cooperate_reward} - Both Defect ➜ each {mutual_defect_reward} - One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward} ڪيئن کيڏجي: - گفتگو دوران: ڪنهن به متن کي ٽائيپ ڪريو جيڪو توهان چاهيو ٿا. - فيصلي جي مرحلي دوران: '[Cooperate] يا '[Defect] (ڪيس-حساس) شامل ڪريو. توهان ٽوڪن کان اڳ / بعد اضافي متن شامل ڪري سگهو ٿا."
+  },
+  "phases": {
+    "conversation_finished": "گڏالو گالھ ٻارھي مڪمل ٿي چڪو آھي رائونڊ لاء {round}. برائے مھرباني '[Cooperate]' يا '[Defect]' جو جواب \\boxed{{}} اندر ڏيو.",
+    "starting_round": "--- شروعاتي گول {round} ---",
+    "round_summary": "گول {round} جا نتيجا: {outcome} پليئر 0 ڪمايو {r0} (ڪل {score_0}) ، پليئر 1 ڪمايو {r1} (ڪل {score_1})."
+  },
+  "outcome": {
+    "winner": "پليئر {winner} کٽي ٿو {win_score} - {lose_score}.",
+    "draw": "ڊرا! ٻنهي رانديگرن کي گول ڪيو {s0}.",
+    "round_both_cooperate": "ٻنهي رانديگرن تعاون ڪيو.",
+    "round_both_defect": "ٻنهي رانديگرن ڀڄي ويا.",
+    "round_p0_cooperates_p1_defects": "پليئر 0 تعاون ڪيو، پليئر 1 ڀڄي ويو.",
+    "round_p0_defects_p1_cooperates": "پليئر 0 ڀڄي ويو، پليئر 1 تعاون ڪيو."
+  }
+}

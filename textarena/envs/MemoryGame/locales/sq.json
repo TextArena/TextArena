@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id}. Ju po luani Lojën e Kujtesës.\nQëllimi juaj është të përputhni më shumë çifte kartash në bord, sesa kundërshtari juaj.\nNë radhën tuaj, zgjidhni dy karta për t'i kthyer duke futur numrat e rreshtit dhe të kolonës së kartës së parë dhe të dytë përkatësisht si '[0 1 1 0]', ku karta e parë është në rreshtin 0 dhe kolonën 1, dhe karta e dytë është në rreshtin 1 dhe kolonën 0.\nNëse dy kartat përputhen, ju fitoni një pikë dhe kartat mbeten me fytyrën lart. Nëse ato nuk përputhen, kartat kthehen me fytyrën poshtë, p.sh. '.'.\nLoja mbaron kur të gjitha çiftet janë përputhur."
+  },
+  "board": {
+    "current_board": "Bordi aktual:\n{board}",
+    "current_game_board": "Bordi aktual i lojës:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format i lëvizjes së gabuar. Lojtari {player_id} nuk u përgjigj me një drejtim të vlefshëm në kllapa katrore.",
+    "out_of_bounds": "Lëvizje e pavlefshme. Lojtari {player_id} zgjodhi një pozicion jashtë kufijve.",
+    "same_card_twice": "Lëvizje e pavlefshme. Lojtari {player_id} zgjodhi të njëjtën kartë dy herë.",
+    "already_matched": "Lëvizje e pavlefshme. Lojtari {player_id} zgjodhi njërën ose të dy kartat që janë përputhur tashmë."
+  },
+  "game_message": {
+    "cards_match": "Kartat e zgjedhura nga Lojtari {player_id} në pozicionet [{r1} {c1}] dhe [{r2} {c2}] përputhen!",
+    "cards_no_match": "Kartat e zgjedhura nga Lojtari {player_id} nuk përputhen. Kartat në pozicionet [{r1} {c1}] dhe [{r2} {c2}] janë {pos1} dhe {pos2} përkatësisht."
+  },
+  "outcome": {
+    "draw": "Të dy lojtarët përputhën të njëjtin numër çifte kartash.",
+    "win": "Lojtari {winner_id} ka fituar!",
+    "turn_limit": "Limiti i radhëve është arritur. Loja është mbaruar. Lojtari 0 shënoi {score_0} pikë, Lojtari 1 shënoi {score_1} pikë.",
+    "turn_limit_win": "{reason} Lojtari {winner_id} ka fituar!"
+  }
+}

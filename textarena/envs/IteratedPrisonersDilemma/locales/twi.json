@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Wo ne Player {player_id} wɔ Iterated Prisoner's Dilemma a ɛtrɛw {num_rounds} round.\n\nAgyinamoa:\n- Ansana woahyɛ biribiara no, wo wɔ {total_conversation_rounds} turns sɛ wo bɛtumi akasa pɛpɛɛpɛ.\n- Akyiri yi, Player baanu no nyinaa bɛhyɛ sɛ wɔ bɛyɛ biako anaa wɔ bɛgyae.\n\nPayoff Matrix (ɛyɛ koko da round):\n- Player baanu no nyinaa yɛ biako ➜ obiara {cooperate_reward}\n- Player baanu no nyinaa gyae ➜ obiara {mutual_defect_reward}\n- Obi gyae, obi yɛ biako ➜ Gyani no {defect_reward}, Obi yɛ biako no {sucker_reward}\n\nSɛnea wo bɛyɛ:\n- Sɛ wɔre kasamu: to nkyerɛwee biara wo pɛ.\n- Sɛ wɔre yɛ biribi: fa '[Cooperate]' anaa '[Defect]' ka ho (ɛnsɛ sɛ wo hwɛ kɛseɛ). Wo betumi aka nkyerɛwee bi ka ho ansana anaa akyiri."
+  },
+  "phases": {
+    "conversation_finished": "nsn kyer afe round {round}. Ka biribiara '[Cooperate]' anaa '[Defect]' n n boxei {{}}.",
+    "starting_round": "--- Ahyɛaseɛ Mmere {round} ---",
+    "round_summary": "Nsn afe {round} nsm:\n{outcome}\nPlayer 0 te byin {r0} (bpia {score_0}), Player 1 te byin {r1} (bpia {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} dii nkunim {win_score} - {lose_score}.",
+    "draw": "Wɔbɔɔ agoru! Asani biara bɔɔ {s0}.",
+    "round_both_cooperate": "Asɔfokuw abien no nyinaa yɛɛ biako.",
+    "round_both_defect": "Asɔfokuw abien no nyinaa guanee.",
+    "round_p0_cooperates_p1_defects": "Ɔpanyin 0 yɛɛ adwuma, na ɔpanin 1 guanee.",
+    "round_p0_defects_p1_cooperates": "Ɔpanyin 0 guan fii kuw no mu, na ɔpanin 1 yɛɛ adwuma."
+  }
+}

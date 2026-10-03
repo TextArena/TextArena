@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "你是反向井字棋中的玩家 {player_id}。你的符号是 '{symbol}'。\n目标是避免形成一条由三个符号组成的直线，无论是水平、垂直还是对角线方向。\n如果你形成了一条三连线，你就输了。\n请使用 '[4]' 格式提交移动，将你的符号放置在格子 4 中。\n作为玩家 {player_id}，你的符号是 '{symbol}'，对手的符号是 '{opponent_symbol}'。"
+  },
+
+  "board": {
+    "current_board": "当前棋盘：\n\n{board}\n\n可用移动：{moves}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "移动格式无效。请使用 '[cell]'。",
+    "invalid_cell": "格子索引无效。",
+    "already_occupied": "格子 {cell} 已被占用。"
+  },
+
+  "game_action": {
+    "placed": "玩家 {player_id} 将其符号（{symbol}）放置在格子 {cell} 中。"
+  },
+
+  "outcome": {
+    "loss": "玩家 {player_id} 因完成一条直线而失败！",
+    "draw": "平局！没有人输。"
+  }
+}

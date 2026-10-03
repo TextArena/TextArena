@@ -1,0 +1,41 @@
+{
+  "_comment": "LinesOfAction 简体中文语言文件。请勿翻译键（左侧），只翻译值。切勿翻译棋盘坐标（a-h、1-8）、棋子字母（O、X）、走法格式标记或 {board} ASCII 棋盘。",
+  "_slots": {
+    "{player_id}": "玩家编号，0 或 1",
+    "{side}": "该玩家的棋子字母，O 或 X",
+    "{other}": "对手的棋子字母，O 或 X",
+    "{board}": "棋盘的 ASCII 渲染；保持原样",
+    "{coord}": "棋盘坐标，例如 b1 或 a3",
+    "{from}": "走法的起点坐标，例如 b1",
+    "{to}": "走法的终点坐标，例如 b3"
+  },
+
+  "player_prompt": {
+    "intro": "你是 LinesOfAction 对局中的玩家 {player_id}。\n你的棋子是 '{side}'，对手的棋子是 '{other}'。\n走法格式：`[b1b3]`（起点坐标到终点坐标）。合法的走法沿水平、垂直或对角方向移动，移动的格数等于该线上棋子（任意颜色）的总数。你可以越过自己的棋子，但不能越过对手的棋子；落在对手棋子上会将其吃掉。  当你所有的棋子都以八邻域相连时获胜。"
+  },
+
+  "board": {
+    "current_board": "棋盘：\n\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "格式必须为 e2e4（起点、终点坐标）。",
+    "no_piece": "{coord} 上没有 {side} 棋子。",
+    "identical": "起点和终点相同。",
+    "not_straight_or_diagonal": "走法必须为直线或对角线。",
+    "wrong_distance": "移动距离必须等于该线上的棋子数。",
+    "enemy_blocks": "对手棋子挡住了路径。",
+    "destination_own": "终点被自己的棋子占据。"
+  },
+
+  "game_action": {
+    "moved": "玩家 {player_id} 移动 {from} -> {to}",
+    "captured_suffix": "玩家 {player_id} 移动 {from} -> {to} 并吃掉了一个对手棋子。"
+  },
+
+  "outcome": {
+    "win": "所有棋子已相连。",
+    "draw_no_capture": "60 步内无吃子。",
+    "draw_repetition": "局面重复三次。"
+  }
+}

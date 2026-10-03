@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id}. Anda sedang memainkan permainan Battleship.\nTujuan Anda adalah menenggelamkan semua kapal lawan sebelum mereka menenggelamkan kapal Anda.\nPada giliran Anda, Anda dapat menembakkan rudal ke koordinat tertentu dengan format berikut: '[a4]'. Jika rudal mengenai kapal, akan ditandai dengan 'X'. Jika meleset, akan ditandai dengan 'O'. Dalam kedua skenario, lingkungan permainan akan memberi tahu Anda tentang tembakan Anda. Jika Anda telah menenggelamkan sebuah kapal, lingkungan permainan akan memberi tahu Anda!\nPermainan berakhir ketika semua kapal salah satu pemain telah tenggelam.\nPapan awal Anda akan menunjukkan semua kapal Anda yang telah ditempatkan dan tembakan lawan ke Anda, serta tembakan dan kegagalan Anda ke papan lawan tanpa menunjukkan kapal lawan Anda.\nBerikut adalah papan awal:\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Pemain tidak merespons dengan koordinat yang valid dalam tanda kurung siku.",
+    "out_of_board": "Koordinat {coord} berada di luar papan.",
+    "already_fired": "Koordinat {coord} telah ditembakkan sebelumnya."
+  },
+  "game_action": {
+    "you_sunk": "Tenggelam! Anda menenggelamkan kapal di {coord}! Papan Anda yang diperbarui:\n{view}",
+    "opp_sunk": "Lawan menenggelamkan kapal Anda di {coord}! Papan Anda yang diperbarui:\n{view}",
+    "you_hit": "Mengenai! Anda mengenai kapal di {coord}! Papan Anda yang diperbarui:\n{view}",
+    "opp_hit": "Lawan mengenai kapal Anda di {coord}! Papan Anda yang diperbarui:\n{view}",
+    "you_miss": "Meleset! Anda meleset dari kapal di {coord}! Papan Anda yang diperbarui:\n{view}",
+    "opp_miss": "Lawan meleset dari kapal di {coord}! Papan Anda yang diperbarui:\n{view}"
+  },
+  "outcome": {
+    "win": "Pemain {player_id} telah menenggelamkan semua kapal lawan mereka!"
+  }
+}

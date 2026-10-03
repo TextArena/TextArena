@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa isang laro ng HighSociety (bersyon para sa 2 manlalaro).\nDaloy ng laro: Sampung prestige card ang na-auction isa pagkatapos ng isa.\nPaghaharap: Sa bawat auction, piliin nang lihim ang isang money card na 1-11 at ipakita.\n            • Mas mataas na bid ang nanalo ng prestige card at itinatapon ang money card na iyon.\n            • Mas mababang bid ang nagpapanatili ng kanilang money card.\n            • Tie -> parehong bid ay ibinalik at ang parehong prestige card ay na-auction muli.\nPagsusuri: Pagkatapos ng lahat ng sampung auction, idagdag **natitirang pera + prestige puntos**.\n            Mas mataas na *net-worth* ang nanalo (eksaktong tie -> tabla).\n\n**Sintaks ng pagkilos**  →  mag-bid ng isang solong card tulad ng '[7]' o '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Auction {round}/10  |  Prestige card: {prize}"
+  },
+  "board": {
+    "money_cards": "Ang iyong natitirang money cards: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Dapat isama ang eksaktong isang [X] money card.",
+    "card_not_held": "Wala ka nang money card na iyon."
+  },
+  "message": {
+    "tie": "Tabla - ang mga bid ay ibinalik. Mag-bid muli!",
+    "auction_result": "P0 bid {bid0}, P1 bid {bid1}. Ang Player {winner} ay nanalo ng prestige {prize} (kabuuang {total})."
+  },
+  "outcome": {
+    "p0_wins": "Net-worth {nw0} > {nw1}",
+    "p1_wins": "Net-worth {nw1} > {nw0}",
+    "draw": "Parehong net-worth {nw0} – eksaktong tabla."
+  }
+}

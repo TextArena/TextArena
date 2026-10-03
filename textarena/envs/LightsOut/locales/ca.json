@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Benvingut a Lights Out! Tens una quadrícula de {size}x{size} llums.\nEl teu objectiu és apagar TOTES les llums (representades per '.').\nQuan premes una llum, s'activa ella mateixa i els seus veïns adjacents (amunt/avall/esquerra/dreta).\nEscriu [fila columna] per prémer una llum (indexat a 0, de manera que el rang vàlid és 0-{max_index}).\nTens fins a {max_turns} moviments per resoldre el trencaclosques.\nLlegenda: 'O' = llum ENCESA, '.' = llum APAGADA"
+  },
+  "board": {
+    "current_state": "Estat actual de la quadrícula (Moviment {moves_made}, {moves_left} moviments restants, {completion}% complet):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'acció ha de ser en format [fila columna] on fila i columna són números enters de 0 a {max_index}.",
+    "out_of_range": "Les coordenades han de ser entre 0 i {max_index}. Has introduït [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Felicitats! Has resolt el trencaclosques en {moves_used} moviments!",
+    "loss": "Joc acabat! Has utilitzat tots els {max_turns} moviments sense resoldre el trencaclosques. Completació final: {completion}%\nEstat final:\n{grid}"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Вы гулец {player_id} у Трохігровым Тік-Так-Тое.\nВаш сімвал - '{symbol}'.\nВы чаргуеце пастановкі вашага сімвала на дошцы 5х5, каб утварыць раду з чатырох.\nРады могуць быць гарызантальнымі, вертыкальнымі ці дыяганальнымі.\nПадаўце свой ход у фармаце '[4]', каб адзначыць клетку 4."
+  },
+  "board": {
+    "current_board": "Цяперашні савет: {board} Даступныя ходы: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Несапраўдны фармат перамяшчэння. Выкарыстоўвайце \"[cell]\", дзе вочка 0-{max_cell}.",
+    "out_of_range": "Несапраўдны нумар клеткі: {cell}. Павінна быць паміж 0 і {max_cell}.",
+    "already_occupied": "Клетка {cell} ужо занятая.",
+    "made_invalid": "Гулец {player_id} зрабіў несапраўдны ход"
+  },
+  "game_action": {
+    "placed": "Гулец {player_id} ставіць свой сімвал ({symbol}) у поле ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Гулец {player_id} ({symbol}) выйграе!",
+    "draw": "Гульня была нічыя!"
+  }
+}

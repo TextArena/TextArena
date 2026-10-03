@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em datoteka s lokalizacijom. NE PREVODITE ključeve (lijeva strana). Samo prevodite vrijednosti (desna strana). Zadržite svaki {placeholder} točno kao što je.",
+  "_slots": {
+    "{start_chips}": "Početni broj čipova, npr. 1000",
+    "{ante}": "Iznos obveznog uloga, npr. 25",
+    "{ante4}": "Četiri puta veći iznos obveznog uloga, npr. 100",
+    "{ante2}": "Dva puta veći iznos obveznog uloga, npr. 50",
+    "{round}": "Trenutni broj runde",
+    "{chips}": "Trenutni broj čipova igrača",
+    "{hand}": "Popis karata igrača, npr. 'A♠, K♥', ili lokalizirani tekst bez karata",
+    "{phase}": "Trenutna faza igre (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Popis dostupnih akcija, npr. '[play_bet_4x], [check]'",
+    "{available}": "Popis trenutno dostupnih akcija",
+    "{blind}": "Iznos obveznog uloga koji se ne vidi",
+    "{play}": "Iznos uloga koji se odabire",
+    "{cards}": "Popis karata, npr. 'Q♣, 7♦, 2♠'",
+    "{name}": "Lokalizirano ime ruke, umetnuto doslovno",
+    "{amount}": "Iznos čipova",
+    "{net}": "Neto promjena čipova u rundi (može biti negativna)",
+    "{max_turns}": "Maksimalni broj rundi",
+    "{winner_rounds}": "Broj rundi koje je igrač završio"
+  },
+  "player_prompt": {
+    "no_cards": "Još nema karata",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Igrač protiv dealera\n\n📖 PREGLED IGRE:\n• Igrač počinje s {start_chips} čipova\n• Jedan špil od 52 karte (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Igrač igra protiv dealera (kuće)\n• Svaka runda slijedi strukturu Ultimate Texas Hold'ema: igrač postavlja ANTE i BLIND uloge, prima 2 karte, odlučuje o opcionalnim PLAY ulozima tijekom faza klađenja, zatim otkriva zajedničke karte i uspoređuje svoju najbolju ruku od 5 karata s dealerovom.\n• Cilj igrača je maksimizirati dobitak (kada ima bolju ruku), a minimizirati gubitak (kada ima lošiju ruku).\n• Igra završava kada igrač ostane bez čipova ili ispod na početku runde (PORAZ) ili kada završi 1000 rundi s čipovima (POBJEDA)\n\n💰 STRUKTURA KLAĐENJA:\n• ANTE: Obvezni ulog od ${ante} svake runde\n• BLIND: Obvezni ulog od ${ante} svake runde\n• PLAY: Opcionalni ulog tijekom igre. Kroz rundu, igrač može odabrati SAMO JEDNU od sljedećih: (${ante4} ako se odabere u PRE-FLOP-u, ${ante2} ako se odabere u FLOP-u ili ${ante} ako se odabere u RIVER-u. Također se može odustati u RIVER-u, odustajući od ruke i ne stavljajući ulog.)\n\n🎴 DIJELJENJE KARATA:\n• Igrač prima 2 karte licem gore (svoje dvije karte)\n• Dealer prima 2 karte licem dolje (sakrivene od igrača)\n• 5 zajedničkih karata se dijeli licem dolje na početku\n• Zajedničke karte se postupno otkrivaju kroz faze igre\n\n🏆 KVALIFIKACIJA DEALERA:\n• Dealer mora imati barem PAR (dvije karte iste vrijednosti) da bi se kvalificirao, koristeći 2 karte u svojoj ruci i 5 zajedničkih karata.\n• Kvalifikacija dealera utječe na ishode klađenja, kao što će biti objašnjeno kasnije.\n\n🎮 FAZE IGRE I AKCIJE:\n📋 PRE-FLOP:\n  • Akcije: [4x] (${ante4}) ili [check]\n  • [4x]: Postavi ${ante4} PLAY ulog, otkriva prve 3 zajedničke karte\n  • [check]: Bez dodatnog uloga, otkriva prve 3 zajedničke karte\n\n📋 FLOP:\n  • Ako je postavljen 4x ulog: Samo [skip] dostupno (automatski otkriva zadnje 2 zajedničke karte)\n  • Ako nije postavljen 4x ulog: [2x] (${ante2}) ili [check]\n  • [2x]: Postavi ${ante2} PLAY ulog, otkriva zadnje 2 zajedničke karte\n  • [check]: Bez dodatnog uloga, otkriva zadnje 2 zajedničke karte\n\n📋 RIVER:\n  • Ako je postavljen 4x ili 2x ulog: Samo [skip] dostupno (automatski nastavlja na showdown)\n  • Ako nije postavljen PLAY ulog: [1x] (${ante}) ili [fold]\n  • [1x]: Postavi ${ante} PLAY ulog, nastavlja na showdown\n  • [fold]: Odustani od ruke, izgubi ANTE i BLIND uloge\n\n📋 SHOWDOWN:\n  • Sve karte se otkrivaju i ocjenjuju\n  • Najbolja 5-kartna kombinacija od 7 karata (2 u ruci + 5 zajedničkih)\n  • Ulozi se plaćaju prema pravilima isplate\n\n💎 ISPLATE:\n📊 ANTE UL OG:\n  • Dealer se ne kvalificira: PUSH (ulog se vraća)\n  • Dealer se kvalificira i igrač pobjeđuje: 1:1 isplata (ulog + dobitak)\n  • Dealer se kvalificira i igrač gubi: Ulog izgubljen\n  • Neriješeno: PUSH (ulog se vraća)\n\n📊 BLIND UL OG:\n  • Neovisno o kvalifikaciji dealera\n  • Igrač pobjeđuje: Ulog se vraća i dodatna isplata temeljena na jačini ruke\n  • Igrač gubi: Ulog izgubljen\n  • Neriješeno: PUSH (ulog se vraća)\n\n📊 BLIND UL OG PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Manje od Straight: Bez dodatne isplate\n\n📊 PLAY UL OG:\n  • Neovisno o kvalifikaciji dealera\n  • Direktno uspoređivanje: Igračeva najbolja ruka protiv dealerove najbolje ruke\n  • Igrač pobjeđuje: 1:1 isplata (ulog + dobitak)\n  • Igrač gubi: Ulog izgubljen\n  • Neriješeno: PUSH (ulog se vraća)\n\n🎯 RANGIRANJE RUKA (Najbolje prema najgore):\n  1. Royal Flush: A-K-Q-J-10 iste boje\n  2. Straight Flush: 5 uzastopnih karata iste boje\n  3. Four of a Kind: 4 karte iste vrijednosti\n  4. Full House: 3 karte iste vrijednosti + 2 karte iste vrijednosti\n  5. Flush: 5 karata iste boje\n  6. Straight: 5 uzastopnih karata\n  7. Three of a Kind: 3 karte iste vrijednosti\n  8. Two Pair: 2 para različite vrijednosti\n  9. One Pair: 2 karte iste vrijednosti\n  10. High Card: Najviša karta pobjeđuje\n\n⌨️  KOMANDE AKCIJA:\n• [4x] ili [play bet 4x]: Postavi ${{self.ante_amount*4}} PLAY ulog\n• [2x] ili [play bet 2x]: Postavi ${{self.ante_amount*2}} PLAY ulog\n• [1x] ili [play bet 1x]: Postavi ${{self.ante_amount*1}} PLAY ulog\n• [check] ili [c]: Check (bez dodatnog uloga)\n• [fold] ili [f]: Fold (odustani od ruke)\n• [skip] ili [s]: Preskoči na sljedeću fazu (kada nije potrebna akcija)\n\n💡 SAVJETI ZA STRATEGIJU:\n• Jaka početna ruka (parovi, visoke karte) često opravdava 4x ulog\n• Razmotrite kvalifikaciju dealera - slabe ruke mogu biti neriješene ako se dealer ne kvalificira\n• BLIND ulog može biti vrlo profitabilan s jakim rukama (Royal Flush = 500:1!)\n• Pripazite na svoj čip stek! Ako pada ispod 0 ili na početku runde, izgubili ste.\n\n⚠️  VAŽNE NAPOMENE:\n• ANTE i BLIND ulozi su obvezni svake runde\n• PLAY ulozi su opcionalni i strateški\n• Pripazite da unesete ispravnu akciju, i samo jednu akciju odjednom.\n\n",
+    "state": "🎯 Runda {round}\n💰 Čipovi: {chips}\n🎴 Vaša ruka: {hand}\n📊 Trenutni ulozi: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Faza: {phase}\n🎯 Dostupne akcije: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Runda {round} počela! Ulozi: ANTE ${ante}, BLIND ${blind}. Imate {chips} čipova preostalih.",
+    "your_hand": "🎴 Vaša ruka: {hand}",
+    "flop_revealed": "🃏 FLOP otkriven: {cards}",
+    "river_revealed": "🃏 RIVER otkriven: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Nevažeća akcija za trenutnu fazu. Dostupne akcije: {available}",
+    "message": "❌ Nevažeća akcija! Dostupne akcije: {available}"
+  },
+  "action": {
+    "folded": "🃏 Odustali ste."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Dealerova ruka: {cards}",
+    "community_cards": "🃏 Zajedničke karte: {cards}",
+    "player_best": "🎴 Igračeva najbolja ruka: {name} ({cards})",
+    "dealer_best": "🎴 Dealerova najbolja ruka: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE ulog IZGUBLJEN! -${ante} (odustali)",
+    "blind_lost_folded": "❌ BLIND ulog IZGUBLJEN! -${blind} (odustali)",
+    "ante_won": "✅ ANTE ulog POBJEDNIK! +${amount}",
+    "ante_pushed": "🔄 ANTE ulog VRACEN! ${ante} vraćen",
+    "ante_lost": "❌ ANTE ulog IZGUBLJEN! -${ante}",
+    "blind_won": "✅ BLIND ulog POBJEDNIK! +${amount}",
+    "blind_pushed": "🔄 BLIND ulog VRACEN! ${blind} vraćen",
+    "blind_lost": "❌ BLIND ulog IZGUBLJEN! -${blind}",
+    "play_won": "✅ PLAY ulog POBJEDNIK! +${amount}",
+    "play_pushed": "🔄 PLAY ulog VRACEN! ${play} vraćen",
+    "play_lost": "❌ PLAY ulog IZGUBLJEN! -${play}",
+    "net_gain": "🎉 Runda {round} završena! Neto dobitak: +${net}",
+    "net_loss": "💸 Runda {round} završena! Neto gubitak: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 IGRA ZAVRŠENA! {max_turns} rundi završeno. Imate ${chips} čipova - POBJEDA!",
+    "game_over_lose": "🏁 IGRA ZAVRŠENA! Ostali ste bez čipova. Dealer pobjeđuje!",
+    "reward_win": "Igrač završio {winner_rounds} rundi s ${chips} čipova",
+    "reward_lose": "Igrač ostao bez čipova u rundi {round}",
+    "reward_win_max": "Igrač završio {max_turns} rundi s ${chips} čipova"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Četiri iste",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Tri iste",
+    "two_pair": "Dva para",
+    "one_pair": "Jedan par",
+    "high_card": "Najviša karta",
+    "unknown": "Nepoznata ruka"
+  }
+}

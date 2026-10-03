@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Sètz lo jogaire {player_id} dins un jòc de LinesOfAction.\nVòstras pèças son '{side}', las pèças de l'adversari son '{other}'.\nFormat de movement: `[b1b3]` (coordenada de partida - coordenada d'arribada). Un movement legal viatja orizontalament, verticalament o diagonalament un nombre de cases egal al nombre total de pèças (de quina que siá color) dins aquela linha. Podètz sautar vòstras pròpias pèças, mas pas las pèças de l'adversari; aterrar sus una pèça de l'adversari la captura.  Ganhatz quand totas vòstras pèças son connectadas en 8 direccions."
+  },
+  "board": {
+    "current_board": "Conselh: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Lo format deu èsser e2e4 (de,a las coordenadas).",
+    "no_piece": "Pas de {side} pèça sus {coord}.",
+    "identical": "Origina e destinacion identicas.",
+    "not_straight_or_diagonal": "Lo movement deu èsser drech o diagonal.",
+    "wrong_distance": "Deu se desplaçar a una distància egala a las pèças en linha.",
+    "enemy_blocks": "La pèça enemiga bloca lo camin.",
+    "destination_own": "Destinacion ocupada per sa pròpria pèça."
+  },
+  "game_action": {
+    "moved": "Jogador {player_id} desplacèt {from} -> {to}",
+    "captured_suffix": "Jogador {player_id} desplacèt {from} -> {to} capturant un enemic."
+  },
+  "outcome": {
+    "win": "Totas las pèças connectadas.",
+    "draw_no_capture": "60 movements sens captura.",
+    "draw_repetition": "Posicion repetida tres còps."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Bu é Player {player_id} na un djogo di Spite i Malice di dos djogadores. Bu objetivu é di sé es priméru ki ta kaba bu monti di pagamentu.\n\n### Panorama Geral di Djogo:\n- O objetivu é di limpa bu monti di pagamentu djogando kartas pa os montis di sentru.\n- Bu pode djoga kartas di tres oríjens:\n  1. Bu **mán** (bu kuminsa kada tornu ku até 5 kartas na mán).\n  2. A **karta di riba di bu monti di pagamentu**.\n  3. A **karta di riba di nenhum di bu montis di kartas rejeitadas**.\n\n### Regras di Djogo:\n- Bu pode djoga un karta pa un monti di sentru si é **un gradu asima** di karta di riba di kel monti (os montis di sentru kuminsan ku Ás i van até Rainha; os Reis são kartas koringa - eles podem sé djogados pa kwalquer karta, mas não mudan a sekuença di gradu. Isu signifika si un Rei é usadu después di 4, anton kel Rei é gradu 5 i a próxima karta deve sé un 6).\n- Si bu ka pode djoga mais kartas, bu debe **rejeita un karta** pa un di bu montis di kartas rejeitadas pa termina bu tornu.\n- Si un monti di sentru alkansa Rainha, é limpadu outomaticamente.\n- A sekuença di gradu é: Ás=1, 2=2, ..., 9=9, J=10, Q=11, K koringa.\n\n### Aksões:\n1. **Pega**: Na kuminsu di bu tornu, pega kartas pa enkera bu mán até 5 kartas. Introduz **[draw]** pa kuminsa.\n2. **Djoga un Karta**: Pa djoga un karta, spesifika a karta i o monti di sentru assim: **[play A♠ 0]** (onde 'A♠' é a karta i '0' é o índise di monti di sentru).\n3. **Rejeita**: Si bu ka pode djoga mais kartas, rejeita un karta di bu mán pa un monti di kartas rejeitadas pa termina bu tornu. Introduz **[discard A♠ 1]** (onde 'A♠' é a karta i '1' é o índise di monti di kartas rejeitadas). Nota ki bu ka pode rejeita nenhum karta di monti di pagamentu. Bu pode rejeita kartas di bu mán.\n\n"
+  },
+  "board": {
+    "current_board": "Tabuleiru Atual:\n\n{board}\nMovimentus Disponíveis: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pilon di Sentru --- ",
+    "pile": "{observation}Monte {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Visão di Player {player_id} ---\n",
+    "payoff": "{observation}Monti di Pagamentu (Karta di Riba): {top_card}, Komprimentu di Monti di Pagamentu: {payoff_length}\n",
+    "hand": "{observation}Mão: {hand}\n",
+    "discard": "{observation}Montis di Descarta: {discard}\n",
+    "empty": "N ka ten nada."
+  },
+  "game_message": {
+    "no_cards_left": "N'ta kartu mas pa tira. Lembra ku bo pode joga kartu di sas fonti:\n  1. Di **bo mão**.\n  2. Di **kartu di sima di bo pilha di pagamentu**.\n  3. Di **kartu di sima di algin di bo pilha di dixarda**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatu di jugada invalidu. Jogu {player_id} ka responde ku un jogadu válidu na kuréntis kuadradus.",
+    "invalid_play": "Djoga inválido. Player {player_id} tentou djoga {card} pa monti di sentru {index}.",
+    "discard_from_payoff": "Dixarda inválida. Jogador {player_id} tentou dixarda un karta di pilha di paga.",
+    "discard_not_in_hand": "Un jugador {player_id} tenta bota un karta ki ka sta na mô.",
+    "wrong_move_type": "Tipu di jugada invalidu. Jogu {player_id} ka responde ku un tipu di jogadu válidu."
+  },
+  "game_action": {
+    "you_drew": "Bu traze karton.",
+    "opponent_drew": "Jogu {player_id} dizenha karta.",
+    "you_played": "Bu juga {card} na pila di meiu {index}.",
+    "opponent_played": "Player {player_id} djogou {card} pa monti di sentru {index}.",
+    "you_discarded": "Bu descartou {card} pa monti di descarta {index}, ki também significa ki bu terminou bu vez. Nenhum aksão di bu é konsideradu pa kes vez. Player {next_player_id} irá djoga agora.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Jogador {current_player} esvaziou seu monte de pagamento! Jogador {current_player} vence!",
+    "deadlock_player_0": "Impasse alcançado! Jogador 0 vence com {player_0_payoff} cartas restantes vs {player_1_payoff} cartas do Jogador 1.",
+    "deadlock_player_1": "Impasse alcançado! Jogador 1 vence com {player_1_payoff} cartas restantes vs {player_0_payoff} cartas do Jogador 0.",
+    "deadlock_tie": "Empate alcançadu ku empate! Ambus djogadores têm {player_0_payoff} kartas restantes. Player {current_player} ganhou por defeito."
+  }
+}

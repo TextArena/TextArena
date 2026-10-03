@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (kaardimäng) keelefail. ÄRGE tõlgige võtmeid (vasak pool). Tõlgige ainult väärtused (parem pool).",
+  "_slots": {
+    "{player_id}": "Mängija number, näiteks 0 või 1",
+    "{pid}": "Mängija number, näiteks 0 või 1",
+    "{winner}": "Mängija number, kellel on madalaim skoor",
+    "{score}": "Numbriline punktisumma",
+    "{card}": "Kaardi silt, näiteks A, 10, K või Q",
+    "{new}": "Kaardi silt, mis paigutati ruudustikku",
+    "{old}": "Kaardi silt, mis eemaldati ruudustikust",
+    "{row}": "Rida number",
+    "{col}": "Veerg number",
+    "{max_row}": "Suurim kehtiv rida number",
+    "{max_col}": "Suurim kehtiv veerg number",
+    "{reason}": "Eelrenderitud fraas, mis kirjeldab, miks algas viimane voor",
+    "{n}": "Rida number, mis kuvatakse ruudustiku rea alguses",
+    "{cards}": "Eelrenderitud, paigutusega ruudustiku rida",
+    "{hand}": "Eelrenderitud mängija ruudustikuplokk",
+    "{discard}": "Kaardi silt, mis on viska hunniku tipus, või sõna 'tühi'",
+    "{options}": "Eelrenderitud rida, mis loetleb saadaolevaid tegevusi",
+    "{scores}": "Eelrenderitud mängijate lõppskooride loend"
+  },
+  "player_prompt": {
+    "intro": "Sa mängid Golfi (Kaardimäng) - Mängija {player_id}.\nEesmärk: Saada madalaim koguskoor selles ühes voorus. Kui veerud jagavad sama väärtuse, siis need liidetakse 0-na.\nKaartide väärtused: A=1, 2-10=tegelik väärtus, J/Q=10, K=0\n\nTegevused (kasuta täpselt sulgusid):\n- '[draw]' - Tõmba kaart pakist\n- '[take]' - Võta kaart viska hunnikust\n- '[swap X Y]' - Vaheta tõmmatud kaart positsiooniga X (rida) Y (veerg)\n- '[discard]' - Viska tõmmatud kaart ära\n"
+  },
+  "board": {
+    "drew": "Sa tõmbasid: {card}\nNüüd pead kas [swap X Y] või [discard] seda.",
+    "took": "Sa võtsid: {card} viska hunnikust\nSa pead [swap X Y] selleks (ei saa visata).",
+    "peeked": "Sa piidasid positsioonil ({row},{col}): {card}",
+    "turn_view": "Sinu käsi:\n{hand}\nViska hunnik: {discard}\n{options}",
+    "none": "Tühi"
+  },
+  "options": {
+    "final_turns": "Viimased voorud! Sinu võimalused: [draw], [take], [peek X Y]",
+    "draw": "Sinu võimalused: [draw], [take]",
+    "must_swap": "Sa pead: [swap X Y] (ei saa visata kaarte viska hunnikust)",
+    "swap_or_discard": "Sa pead: [swap X Y] või [discard]"
+  },
+  "hand": {
+    "no_cards": "Ei ole kaarte",
+    "header": "  Veerg:   1    2    3",
+    "row": "Rida {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Mängija {pid} vahetas {new} {old} positsioonil ({row},{col})",
+    "discarded": "Mängija {pid} viskas {card}"
+  },
+  "message": {
+    "deck_empty": "Pakist on kaardid otsas! Mäng lõpeb kohe.",
+    "knocked": "Mängija {pid} koputas! Iga teine mängija saab veel ühe vooru.",
+    "final_round": "Mängija {pid} {reason}! Iga teine mängija saab veel ühe vooru."
+  },
+  "reason": {
+    "all_revealed": "on kõik kaardid avatud"
+  },
+  "invalid": {
+    "wrong_action": "Kasuta täpselt ÜHT sulgus tegevust: [draw], [take], [swap X Y], [discard], [knock], või [peek X Y]",
+    "discard_empty": "Viska hunnik on tühi!",
+    "must_draw_first": "Sa pead esmalt [draw], [take], [knock], või [peek X Y]",
+    "cannot_discard_taken": "Sa ei saa visata kaarti, mis on võetud viska hunnikust. Sa pead selle vahetama.",
+    "have_drawn_card": "Sul on tõmmatud kaart. Sa pead [swap X Y] või [discard] seda.",
+    "need_drawn_swap": "Sul on vaja tõmmatud kaarti vahetada.",
+    "need_drawn_discard": "Sul on vaja tõmmatud kaarti visata.",
+    "out_of_bounds": "Positsioon on väljaspool piire. Kasuta rida 1-{max_row}, veerg 1-{max_col}",
+    "knock_with_card": "Sa ei saa koputada tõmmatud kaardiga. Täida oma voor esmalt.",
+    "already_knocked": "Keegi on juba koputanud sel voorul.",
+    "already_revealed": "See kaart on juba avatud!"
+  },
+  "summary": {
+    "full": "Mäng läbi! Mängija {winner} võitis skooriga {score} punkti!\n\nLõppskoorid:\n{scores}",
+    "line": "Mängija {pid}: {score} punkti\n"
+  },
+  "board_str": {
+    "title": "=== GOLFI MÄNG ===",
+    "discard": "Viska hunnik: {card}",
+    "knocked": "Mängija {pid} on koputanud!",
+    "player_header": "Mängija {pid} (Skoor: {score}):"
+  }
+}

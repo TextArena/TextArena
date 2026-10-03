@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Tic Tac Toe ya Quantum.\nChapa yako ni '{symbol}', na nambari za harakati zako zote ni {parity} (kwa mfano, X1, X3 au O2, O4).\n\nLengo: Shinda kwa kuunda mstari wa alama tatu za kitamaduni (zilizowekwa kutoka kwa hali ya juu).\n\nJinsi ya Kucheza:\n- Kila wakati, weka alama ya kutisha katika miraba miwili tofauti tupu kwa kutumia muundo '[a,b]'.\n- Alama hizi zimeunganishwa, na zimepewa lebo kama 'X1 / X1' au 'O4 / O4'.\n- Huwezi kuweka alama za kutisha katika mraba ambao tayari umekuwa (umewekwa).\n\nKanuni ya Kuanguka:\n- Ikiwa harakati yako huunda mzunguko katika grafu ya kuunganisha, huanguka kiotomatiki.\n- Kila alama ya kutisha katika mzunguko inabadilika kuwa alama ya kitamaduni katika mojawapo ya nafasi zake mbili.\n- Alama zozote zinazotegemea pia huanguka.\n\nUshindi:\n- Mchezo huisha wakati mchezaji ana alama tatu za kitamaduni mfululizo.\n- Ikiwa wachezaji wote wawili wanapata mstari wakati wa kuanguka kwa wakati mmoja, yule aliye na nambari ya juu ya harakati ya chini ashinda.\n\nMfano wa harakati: '[0,4]' huweka alama ya kutisha katika seli 0 na 4."
+  },
+  "board": {
+    "current_board": "Bodi ya Tic Tac Toe ya Quantum:\n\n{board}\n\nWasilisha harakati yako kama '[a,b]' ili kuweka alama ya quantum katika maeneo mawili."
+  },
+  "invalid_move": {
+    "wrong_format": "Muundo haufai. Tumia '[a,b]'.",
+    "invalid_cells": "Vitengo vya seli batili au vinavyorudiwa.",
+    "already_solidified": "Celi kamwe imekuwa tayari imeimarishwa."
+  },
+  "game_action": {
+    "placed": "Mchezaji {player_id} aliweka chapa yake katika hali ya juu kati ya seli {pos_a} na {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Hali ya juu inayotegemea imetatuliwa. Seli ({r}, {c}) sasa ni {symbol}.",
+    "last_cell_resolved": "Hali ya juu ya seli ya mwisho imetatuliwa. Seli ({r}, {c}) sasa ni {symbol}.",
+    "superposition_resolved": "Hali ya juu imetatuliwa. Seli ({r}, {c}) sasa ni {symbol}."
+  },
+  "outcome": {
+    "win": "Mchezaji {player_id} ashinda kwa alama zilizowekwa!",
+    "draw": "Mchezo ni sare!"
+  }
+}

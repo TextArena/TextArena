@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "קראַנט פּילע: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "קיין גילטיקע מאַך פֿאָרמאַט געפונען. ניצן \"[pile quantity]\".",
+    "correct_format_wrong_fields": "שפּילער {player_id}, אומגולטיקע אַקציע. קאָלאָנע {col} איז אַרויס פֿון גרענעצן.",
+    "out_of_range": "פּייל אינדעקס {pile_index} איז אויסער די קייט.",
+    "non_positive": "מוז אַראָפּנעמען לפּחות איין אָבדזשעקץ.",
+    "exceeds_pile": "מען קען נישט אַראָפּנעמען {quantity} פֿון קאָלאָנע {pile_index} (נאָר {pile_count} איבעריג)."
+  },
+  "observation": {
+    "removed_from_piles": "שפילער {player_id} האט געשפילט [{pile_index} {quantity}], ענטפערנדיק {quantity} אביעקט(ן) פון קופע {pile_index}."
+  },
+  "outcome": {
+    "win": "שפּילער {player_id} האָט גענומען דעם לעצטן כייפעץ!"
+  }
+}

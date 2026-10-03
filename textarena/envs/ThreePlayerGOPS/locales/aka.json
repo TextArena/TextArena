@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Woyɛ Odwumayɛni {player_id} wɔ Three-Player GOPS.\n- Wokura nsa 13, A-K (obiara baako pɛ).\n- Round biara no, prize biara no bɛba. Fa kaart baako te sɛ `[Q]`, `[10]`, `[2]` …\n- Kaart a ɛkorɔn sen biara no dii nkonim wɔ prize no mu (+ ne pot a ɛrekɔ so). Sɛ wɔkaa noa, prize no kɔ pot no mu.\n- Round 13 akyi, odwumayɛni a ɔkorɔn sen biara no dii nkonim. Nsɛm a ɛnyɛ papa = wɔyii odwumayɛni no fii mu."
+  },
+  "round": {
+    "header": "### Prɛko {round}/13 - Abasobɔdeɛ: {prize} (a ɛyɛ {worth})",
+    "hand": "Wo nsa a aka no: {hand}"
+  },
+  "reveal": {
+    "win": "Nkɔmmɔ  {bids} - Agorɔfoɔ {winner} di nkonim {pot}.",
+    "tie": "Nkɔmmɔ  {bids} - tie, pot now {pot}.",
+    "scores": "Nkɔmmɔ mu nkontaabu → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "Ɛho hia sɛ wɔde krataa a ɛwɔ bracket mu te sε \"[Q]\" di dwuma.",
+    "bad_card": "krataa a wɔadi dwuma dada anaa enni mu"
+  },
+  "elimination": {
+    "player": "Ɔbɔadeɛ {pid} a wɔayi no afi agodie mu esiane sɛ wadi akɔneaba bɔne bi nti."
+  },
+  "outcome": {
+    "auto_win": "Sɛ woyi agumadifo baanu fi adi a, na wɔadi nkonim.",
+    "final": "Nkrataa a etwa to: {scores}"
+  }
+}

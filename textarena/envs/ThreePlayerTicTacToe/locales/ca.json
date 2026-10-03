@@ -1,0 +1,32 @@
+{
+  "_comment": "Fitxer de localització de ThreePlayerTicTacToe. NO tradueixis les claus (costat esquerre). Només tradueix els valors (costat dret).",
+  "_slots": {
+    "{player_id}": "El número del jugador, per exemple 0, 1 o 2",
+    "{symbol}": "La marca del jugador, una de les següents: A, B o C",
+    "{cell}": "Un número de cel·la del tauler",
+    "{max_cell}": "El número de cel·la vàlid més alt (mida_del_tauler^2 - 1)",
+    "{row}": "L'índex de fila del tauler on s'ha col·locat la marca",
+    "{col}": "L'índex de columna del tauler on s'ha col·locat la marca",
+    "{board}": "El tauler ASCII renderitzat (no tradueixis)",
+    "{moves}": "La llista de moviments disponibles separats per comes, com '[4]' (no tradueixis)"
+  },
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} al Tic Tac Toe de tres jugadors.\nLa teva marca és '{symbol}'.\nJuges per torns col·locant la teva marca en un tauler de 5x5 per formar una línia de quatre.\nLes línies poden ser horitzontals, verticals o diagonals.\nEnvia el teu moviment utilitzant el format '[4]' per marcar la cel·la 4."
+  },
+  "board": {
+    "current_board": "Tauler actual:\n\n{board}\n\nMoviments disponibles: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de moviment invàlid. Utilitza '[cell]' on cell és 0-{max_cell}.",
+    "out_of_range": "Número de cel·la invàlid: {cell}. Ha de ser entre 0 i {max_cell}.",
+    "already_occupied": "La cel·la {cell} ja està ocupada.",
+    "made_invalid": "El Jugador {player_id} ha fet un moviment invàlid"
+  },
+  "game_action": {
+    "placed": "El Jugador {player_id} col·loca la seva marca ({symbol}) al camp ({row}, {col})."
+  },
+  "outcome": {
+    "win": "El Jugador {player_id} ({symbol}) guanya!",
+    "draw": "El joc és un empat!"
+  }
+}

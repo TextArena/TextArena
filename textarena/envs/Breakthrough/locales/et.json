@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Sa mängid {color} läbimurde mängus. Sa liigud {direction} {board_size}x{board_size} laual.\nOma käigu ajal saad liigutada ühte tükki ühe sammu edasi või diagonaalselt edasi.\nTükk võib liikuda diagonaalselt ainult siis, kui vastase tükk on seal, ja ainult liikuda sellisesse eelhõivatud ruutu diagonaalse sammu abil.\nKui astud ruutu, kus on vastase tükk, siis sa võidad selle ja vastase tükk eemaldatakse laualt alatiseks.\nKasuta UCI-sarnast notatsiooni sulgudes, näiteks [a2a3], et liikuda a2-st a3-sse.\n* 'a' vastab vasakpoolseimale veerule, '1' on alumine rida (valge vaates).\n* Musta kodu rida on ülemine rida (rida 8 8x8 laual). Valge kodu rida on alumine rida (rida 1 8x8 laual).\nEsimene mängija, kelle tükk jõuab vastase kodu ridade, võidab. Kui su tükid on kõik võidetud, siis kaotad."
+  },
+  "invalid_move": {
+    "wrong_format": "Palun kasuta sulgudes algebraic notationit, näiteks [a2a3].",
+    "out_of_bounds": "Liikumine on väljaspool laua piire.",
+    "illegal": "See liikumine ei järgi läbimurde reegleid või ei ole sinu tükk."
+  },
+  "game_action": {
+    "moved": "Mängija {player_id} liigutab {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Valge jõudis musta kodu ridade.",
+    "black_reached": "Must jõudis valge kodu ridade.",
+    "white_captured": "Kõik valged tükid võideti.",
+    "black_captured": "Kõik mustad tükid võideti.",
+    "no_moves": "Mängijal {player_id} pole enam liikumisi."
+  }
+}

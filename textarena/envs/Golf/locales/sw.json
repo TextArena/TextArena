@@ -1,0 +1,79 @@
+{
+  "_comment": "Faili ya lugha ya Golf (mchezo wa kadi). USITAFSIRI funguo (upande wa kushoto). Tafsiri maadili tu (upande wa kulia).",
+  "_slots": {
+    "{player_id}": "Nambari ya mchezaji, mfano 0 au 1",
+    "{pid}": "Nambari ya mchezaji, mfano 0 au 1",
+    "{winner}": "Nambari ya mchezaji aliye na alama ndogo zaidi",
+    "{score}": "Jumla ya alama",
+    "{card}": "Lebo ya kadi kama vile A♠, 10♥, K♦ au Q♣",
+    "{new}": "Lebo ya kadi iliyowekwa kwenye gridi",
+    "{old}": "Lebo ya kadi iliyotolewa kutoka kwenye gridi",
+    "{row}": "Nambari ya safu",
+    "{col}": "Nambari ya safu wima",
+    "{max_row}": "Nambari kubwa zaidi ya safu halali",
+    "{max_col}": "Nambari kubwa zaidi ya safu wima halali",
+    "{reason}": "Neno lililowekwa tayari linaloelezea kwa nini raundi ya mwisho ilianza",
+    "{n}": "Nambari ya safu inayoonyeshwa mwanzoni mwa safu ya gridi",
+    "{cards}": "Sel za gridi zilizowekwa tayari, zinazohusiana na mpangilio",
+    "{hand}": "Blok ya gridi ya mchezaji iliyowekwa tayari",
+    "{discard}": "Lebo ya kadi iliyo juu ya kundi la kadi zilizotupwa, au neno 'hakuna'",
+    "{options}": "Mstari uliowekwa tayari unaorodhesha vitendo vinavyopatikana",
+    "{scores}": "Orodha iliyowekwa tayari ya alama za mwisho kwa kila mchezaji"
+  },
+  "player_prompt": {
+    "intro": "Unacheza Golf (Mchezo wa Kadi) - Mchezaji {player_id}.\nLengo: Pata jumla ya alama ndogo zaidi katika raundi hii moja. Ikiwa safu wima zina thamani sawa, zinaongezwa kama 0.\nThamani za Kadi: A=1, 2-10=thamani halisi, J/Q=10, K=0\n\nVitendo (tumia mabano sahihi):\n- '[draw]' - Chora kutoka kwenye sitaha\n- '[take]' - Chukua kutoka kwenye kundi la kadi zilizotupwa\n- '[swap X Y]' - Badilisha kadi iliyochorwa na nafasi X (safu) Y (safu wima)\n- '[discard]' - Tupwa kadi iliyochorwa\n"
+  },
+  "board": {
+    "drew": "Uliweka: {card}\nSasa lazima [swap X Y] au [discard] it.",
+    "took": "Ulichukua: {card} kutoka kwenye kundi la kadi zilizotupwa\nLazima [swap X Y] nayo (huwezi kutupwa).",
+    "peeked": "Ulionekana nafasi ({row},{col}): {card}",
+    "turn_view": "Mkono wako:\n{hand}\nKundi la kadi zilizotupwa: {discard}\n{options}",
+    "none": "Hakuna"
+  },
+  "options": {
+    "final_turns": "Zamu za mwisho! Chaguo zako: [draw], [take], [peek X Y]",
+    "draw": "Chaguo zako: [draw], [take]",
+    "must_swap": "Lazima: [swap X Y] (huwezi kutupwa kadi kutoka kwenye kundi la kadi zilizotupwa)",
+    "swap_or_discard": "Lazima: [swap X Y] au [discard]"
+  },
+  "hand": {
+    "no_cards": "Hakuna kadi",
+    "header": "  Safu wima:   1    2    3",
+    "row": "Safu {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Mchezaji {pid} alibadilisha {new} na {old} katika nafasi ({row},{col})",
+    "discarded": "Mchezaji {pid} alitupwa {card}"
+  },
+  "message": {
+    "deck_empty": "Sitaha imekwisha! Mchezo unakoma mara moja.",
+    "knocked": "Mchezaji {pid} aligonga! Kila mchezaji mwingine anapata zamu moja zaidi.",
+    "final_round": "Mchezaji {pid} {reason}! Kila mchezaji mwingine anapata zamu moja zaidi."
+  },
+  "reason": {
+    "all_revealed": "ana kadi zote zilizofichuliwa"
+  },
+  "invalid": {
+    "wrong_action": "Tumia kitendo kimoja tu kilichowekwa mabano: [draw], [take], [swap X Y], [discard], [knock], au [peek X Y]",
+    "discard_empty": "Kundi la kadi zilizotupwa limekwisha!",
+    "must_draw_first": "Lazima kwanza [draw], [take], [knock], au [peek X Y]",
+    "cannot_discard_taken": "Huwezi kutupwa kadi iliyochukuliwa kutoka kwenye kundi la kadi zilizotupwa. Lazima ubadilishe.",
+    "have_drawn_card": "Una kadi iliyochorwa. Lazima [swap X Y] au [discard] it.",
+    "need_drawn_swap": "Unahitaji kadi iliyochorwa ili kubadilisha.",
+    "need_drawn_discard": "Unahitaji kadi iliyochorwa ili kutupwa.",
+    "out_of_bounds": "Nafasi haijapatikana. Tumia safu 1-{max_row}, safu wima 1-{max_col}",
+    "knock_with_card": "Huwezi kugonga na kadi iliyochorwa. Kamilisha zamu yako kwanza.",
+    "already_knocked": "Mtu ameshagonga raundi hii.",
+    "already_revealed": "Kadi hiyo tayari imefichuliwa!"
+  },
+  "summary": {
+    "full": "Mchezo Umekoma! Mchezaji {winner} anashinda na alama {score}!\n\nAlama za Mwisho:\n{scores}",
+    "line": "Mchezaji {pid}: {score} pointi\n"
+  },
+  "board_str": {
+    "title": "=== MCHEZO WA GOLF ===",
+    "discard": "Kundi la kadi zilizotupwa: {card}",
+    "knocked": "Mchezaji {pid} amegonga!",
+    "player_header": "Mchezaji {pid} (Alama: {score}):"
+  }
+}

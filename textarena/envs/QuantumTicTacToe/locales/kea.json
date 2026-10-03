@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Bo é Jogadôr {player_id} nha Tic Tac Toe Quântico.\nSimbólu bo é '{symbol}', i númru di movimentu bo semper {parity} (p. ex., X1, X3 ó O2, O4).\n\nObjetivu: Ganhá formando linha di três marcas klasiku (solidifikadu di superposisión).\n\nKumo Joga:\n- Na kada turnu, meti marca assustadô nha duz kwadradu vaziu uzando formatu '[a,b]'.\n- Markus assustadus está entrelaçadu, i rotuladu komo 'X1 / X1' ó 'O4 / O4'.\n- Bo ka meti marcas assustadus nha kwadradu ki já kollapsu (solidifikadu).\n\nRegru di Kollapsu:\n- Si movimentu bo cria siklu nha grafu di entrelaçamentu, elu kollapsa outomatikamente.\n- Kada marca assustadô nha siklu vira marca klasiku nha un di suz duz pozisión.\n- Markus assustadus dependente tambe kollapsa.\n\nVitória:\n- Jógu akaba kuandu jogadôr tin três marcas klasiku nha linha.\n- Si dju jogadôr sere linha duranti kollapsu mesmu, es di movimentu máksimu menôr ganha.\n\nEzemplu di movimentu: '[0,4]' meti marca assustadô nha célula 0 i 4."
+  },
+  "board": {
+    "current_board": "Tabuleiro de Tic Tac Toe Quântico:\n\n{board}\n\nManda ti movimentu komo '[a,b]' para meti marca quântica nha duz locaisões."
+  },
+  "invalid_move": {
+    "wrong_format": "Formatu invalidu. Uza '[a,b]'.",
+    "invalid_cells": "Índiz di pilon invalidu ô duplikadu.",
+    "already_solidified": "Un di kes selula dja sta fórti."
+  },
+  "game_action": {
+    "placed": "Jogadôr {player_id} meti simbólu nha superposisión entre célula {pos_a} i {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposisión dependente resolvidu. Célula ({r}, {c}) agora é {symbol}.",
+    "last_cell_resolved": "Superposisión di últimu célula resolvidu. Célula ({r}, {c}) agora é {symbol}.",
+    "superposition_resolved": "Superposisión resolvidu. Célula ({r}, {c}) agora é {symbol}."
+  },
+  "outcome": {
+    "win": "Jogu {player_id} ta ganha ku marka solidifikadu!",
+    "draw": "Es jogo é na igualdadi!"
+  }
+}

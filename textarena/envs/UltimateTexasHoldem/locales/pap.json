@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "No tin karchi ainda.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Hungador Solo vs Dealer\n\n📖 RESUMEN DI JUEGO:\n• Bo start cu {start_chips} ficha\n• Baraha solo di 52 carta (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Bo hunga contra dealer (casa)\n• Cada rond sigui e estructura di Ultimate Texas Hold'em: bo pone apuestan ANTE y BLIND, ricibi 2 carta di bucho, decidi sobre apuestan PLAY opcional durante e fase di apuestan, y luego revela carta di comunidad y compara bo man di 5 carta mejor contra e di dealer. Bo meta ta maximiza bo ganancia (cuando bo tin e man mejor), mientras bo minimiza bo perdida (cuando bo tin e man peor).\n• Juego ta termina cuando bo alcanza 0 ficha o menos na start di rond (PERDIDA) o completa 1000 rond cu ficha (GANA)\n\n💰 ESTRUCTURA DI APUESTAN:\n• ANTE: Apuestan obligatorio di ${ante} cada rond\n• BLIND: Apuestan obligatorio di ${ante} cada rond\n• PLAY: Apuestan opcional durante juego. Durante rond, bo por escoge SOLO UN di e siguiente: (${ante4} si bo haci na PRE-FLOP, ${ante2} si bo haci na FLOP, o ${ante} si bo haci na RIVER. Bo tambe por dobla na river, dandon bo man, y no haci apuestan.)\n\n🎴 REPARTICION DI CARTA:\n• Bo ricibi 2 carta di bucho (bo carta di bucho)\n• Dealer ricibi 2 carta di bucho (sekreto pa bo)\n• 5 carta di comunidad ta reparti na principio\n• Carta di comunidad ta revela progresivamente durante e fase di juego\n\n🏆 CALIFICACION DI DEALER:\n• Dealer mester tin al menos UN PAR (2 carta di mesun rango) pa califica, usando e 2 carta na su man y e 5 carta di comunidad.\n• Calificacion di dealer ta afecta e resultado di apuestan, como lo ta explica mas adelante.\n\n🎮 FASE DI JUEGO & ACCION:\n📋 PRE-FLOP:\n  • Accion: [4x] (${ante4}) o [check]\n  • [4x]: Pone apuestan PLAY di ${ante4}, revela e prome 3 carta di comunidad\n  • [check]: No apuestan adicional, revela e prome 3 carta di comunidad\n\n📋 FLOP:\n  • Si apuestan di 4x ta poni: SOLO [skip] ta disponibel (auto-revela e ultimo 2 carta di comunidad)\n  • Si no apuestan di 4x: [2x] (${ante2}) o [check]\n  • [2x]: Pone apuestan PLAY di ${ante2}, revela e ultimo 2 carta di comunidad\n  • [check]: No apuestan adicional, revela e ultimo 2 carta di comunidad\n\n📋 RIVER:\n  • Si apuestan di 4x o 2x ta poni: SOLO [skip] ta disponibel (auto-procede na confrontacion)\n  • Si no apuestan PLAY anterior: [1x] (${ante}) o [fold]\n  • [1x]: Pone apuestan PLAY di ${ante}, procede na confrontacion\n  • [fold]: Dandon bo man, perde apuestan ANTE y BLIND\n\n📋 CONFRONTACION:\n  • Tur carta ta revela y evalua\n  • Mehor man di 5 carta di 7 carta (2 di bucho + 5 di comunidad)\n  • Apuestan ta paga segun regla di pago\n\n💎 PAGO DI APUESTAN:\n📊 APUESTAN ANTE:\n  • Dealer no califica: EMPATE (apuestan ta regresa)\n  • Dealer califica y bo gana: Pago di 1:1 (apuestan + ganancia)\n  • Dealer califica y bo perde: Apuestan ta perdi\n  • Empate: EMPATE (apuestan ta regresa)\n\n📊 APUESTAN BLIND:\n  • No ta afeta pa calificacion di dealer\n  • Bo gana: Apuestan ta regresa y pago adicional basa na fuersa di bo man\n  • Bo perde: Apuestan ta perdi\n  • Empate: EMPATE (apuestan ta regresa)\n\n📊 TABLA DI PAGO DI APUESTAN BLIND:\n  • FLUSH REAL: 500:1 (${{self.ante_amount * 500}})\n  • FLUSH DI SEGUIDO: 50:1 (${{self.ante_amount * 50}})\n  • CUATRO DI UN MISMO: 10:1 (${{self.ante_amount * 10}})\n  • CASA LLENA: 3:1 (${{self.ante_amount * 3}})\n  • FLUSH: 3:1 (${{self.ante_amount * 3}})\n  • SEGUIDO: 1:1 (${{self.ante_amount * 1}})\n  • MENOS DI SEGUIDO: No pago adicional\n\n📊 APUESTAN PLAY:\n  • No ta afeta pa calificacion di dealer\n  • Comparacion directo: Boh man mejor contra e di dealer\n  • Bo gana: Pago di 1:1 (apuestan + ganancia)\n  • Bo perde: Apuestan ta perdi\n  • Empate: EMPATE (apuestan ta regresa)\n\n🎯 RANGO DI MAN DI POKER (Di mehor pa peor):\n  1. FLUSH REAL: A-K-Q-J-10 di mesun palo\n  2. FLUSH DI SEGUIDO: 5 carta di seguido di mesun palo\n  3. CUATRO DI UN MISMO: 4 carta di mesun rango\n  4. CASA LLENA: 3 di un mismo + 2 di un mismo\n  5. FLUSH: 5 carta di mesun palo\n  6. SEGUIDO: 5 carta di seguido\n  7. TRES DI UN MISMO: 3 carta di mesun rango\n  8. DOS PAR: 2 par di rango diferente\n  9. UN PAR: 2 carta di mesun rango\n  10. CARTA ALTA: Carta mas alto gana\n\n⌨️ COMANDO DI ACCION:\n• [4x] o [play bet 4x]: Pone apuestan PLAY di ${{self.ante_amount*4}}\n• [2x] o [play bet 2x]: Pone apuestan PLAY di ${{self.ante_amount*2}}\n• [1x] o [play bet 1x]: Pone apuestan PLAY di ${{self.ante_amount*1}}\n• [check] o [c]: Verifica (no apuestan adicional)\n• [fold] o [f]: Dobla (dandon bo man)\n• [skip] o [s]: Salta na fase siguiente (cuando no tin accion necesario)\n\n💡 CONSEJO DI ESTRATEGIA:\n• Man di start fuerte (par, carta alto) a menudo hustifica apuestan di 4x\n• Considera calificacion di dealer - man debil por empata si dealer no califica\n• Apuestan BLIND por ta muy profitable cu man fuerte (FLUSH REAL = 500:1!)\n• Warda bo pila di ficha! Si e bai na 0 o menos na start di rond, bo perde.\n\n⚠️ NOTA IMPORTANTE:\n• Apuestan ANTE y BLIND ta obligatorio cada rond\n• Apuestan PLAY ta opcional y estrategico\n• Asegura bo di input e accion correcto, y solo un accion na vez.\n\n",
+    "state": "🎯 ROND {round}\n💰 Ficha: {chips}\n🎴 Bo man: {hand}\n📊 Apuestan actual: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fase: {phase}\n🎯 Accion disponibel: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Rond {round} a start! Apuestan: ANTE ${ante}, BLIND ${blind}. Bo tin {chips} ficha restante.",
+    "your_hand": " Bo man: {hand}",
+    "flop_revealed": " FLOP revelá: {cards}",
+    "river_revealed": " RIVER revelá: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Akshon invalido pa e fase aktual. {available}",
+    "message": " Akshon invalido! Aksyon disponibel: {available}"
+  },
+  "action": {
+    "folded": "Bo a fold."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Man di e dealer: {cards}",
+    "community_cards": " Karchi komunitario: {cards}",
+    "player_best": "🎴 Mehor man di hungador: {name} ({cards})",
+    "dealer_best": "🎴 Mehor man di dealer: {name} ({cards})",
+    "ante_lost_folded": " ANTE BET LOST! -${ante} (dobel)",
+    "blind_lost_folded": " BET BLIND LOST! -${blind} (dobel)",
+    "ante_won": "✅ ANTE apuesta GANÁ! +${amount}",
+    "ante_pushed": " ANTE BET PUSHED! ${ante} a bolbe",
+    "ante_lost": " ANTE BET LOST! -${ante}",
+    "blind_won": "✅ BET WIN! +${amount}",
+    "blind_pushed": " BET BLIND PUSHED! ${blind} returná",
+    "blind_lost": " BET BLIND PERDE! -${blind}",
+    "play_won": "✅ PLAY apuesta GANÁ! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} returná",
+    "play_lost": " PLAY bet LOST! -${play}",
+    "net_gain": "🎉 Rond {round} a completa! Ganancia neto: +${net}",
+    "net_loss": "💸 Rond {round} a completa! Perdida neto: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 JUEGO TERMINADO! {max_turns} rond nan a completa. Bo tin ${chips} ficha - BO GANA!",
+    "game_over_lose": "Bo no tin mas ficha, e dealer ta gana!",
+    "reward_win": "Hungador a completa {winner_rounds} rond cu ${chips} ficha",
+    "reward_lose": "E hungadó a keda sin chip den e ronde {round}.",
+    "reward_win_max": "Hungador a completa {max_turns} rond cu ${chips} ficha"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush (Flash di Rei)",
+    "straight_flush": "Straight Flush (Flash di Kòrsou)",
+    "four_of_a_kind": "Cuater di un Sorto",
+    "full_house": "Un Casa Completa",
+    "flush": "Flush (Flash)",
+    "straight": "Husto",
+    "three_of_a_kind": "Tres di un Manera",
+    "two_pair": "Dos Par di Hende",
+    "one_pair": "Un Par di Hende",
+    "high_card": "Karta di mas haltu",
+    "unknown": "Man Deskonosí"
+  }
+}

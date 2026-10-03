@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "あなたは交渉ゲームのプレイヤー {player_id} です。\nあなたにはいくつかのリソースがあり、その総価値を増やすことがあなたの任務です。\n現在持っているリソースとその価値は次のとおりです:\n\t+ {resource_value_list}\n各ターンでは、相手と話し合い、取引の申し出をすることができます。\n次の特別なトークンを使用して行動します:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: 提出リソース -> 要求リソース]\n  - '[Accept]': 受け入れる\n  - '[Deny]': 拒否する（デフォルト）\nゲームは合計 {max_turns} ターン続きます。"
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "プレイヤーが必要なリソースを持たずに取引を受け入れようとしました。",
+    "out_of_range": "プレイヤー {player_id}、無効な行動。列 {col} は範囲外です。",
+    "already_full": "プレイヤー {player_id}、無効な行動。列 {col} は満杯です。",
+    "proposing_with_no_resource": "プレイヤー {player_id} が必要なリソースを持たずに取引の申し出をしようとしました。",
+    "incorrect_offer_format": "プレイヤー {player_id} が不正な形式で取引の申し出をしました。",
+    "no_new_offer": "プレイヤー {player_id} が新しい取引の申し出をしませんでした。"
+  },
+  "offers": {
+    "reject": "プレイヤー {player_id} が取引の申し出を拒否しました。",
+    "accept": "プレイヤー {acceptor_id} がプレイヤー {proposer_id} からの取引の申し出を受け入れました。",
+    "proposal": "プレイヤー {player_id} がプレイヤー {opponent_id} に対して次の申し出をしました: 提出アイテム: {offered} -> 要求アイテム: {requested}"
+  },
+  "outcome": {
+    "win": "プレイヤー {winner_id} が在庫価値の増加分が大きいため勝利しました。",
+    "draw": "すべてのプレイヤーの在庫価値の変化が同じです。引き分けです。"
+  }
+}

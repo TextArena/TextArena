@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Wena ungumdlali {player_id} ku-Three-Player Tic Tac Toe. Isimboli yakho ngu-'{symbol}'. Uphenduka ubeka uphawu lwakho ebhodini le-5x5 ukuze wakhe umugqa wamane. Imigqa ingaba ngokwendawo, ngokuma, noma ngokuphambene. Thumela isinyathelo sakho usebenzisa ifomethi '[4]' ukumaka iseli 4."
+  },
+  "board": {
+    "current_board": "Ibhodi yamanje: {board} Ukuhamba okukhona: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ifomethi yokuthutha engalungile. Sebenzisa u-'[cell]' lapho iseli lingu-0-{max_cell}.",
+    "out_of_range": "Inombolo yekheli engekho emthethweni: {cell}. Kumele ibe phakathi kuka-0 no {max_cell}.",
+    "already_occupied": "Iseli {cell} selivele lihlala.",
+    "made_invalid": "Umdlali {player_id} wenze isinyathelo esingekho emthethweni"
+  },
+  "game_action": {
+    "placed": "Umdlali {player_id} ubeka uphawu lwakhe ({symbol}) enkundleni ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Umdlali {player_id} ({symbol}) uyaphumelela!",
+    "draw": "Umdlalo awunamphumela!"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "Current Pile: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hnawhchhuah format dik a awm lo. '[pile quantity]' hmang rawh.",
+    "correct_format_wrong_fields": "Player {player_id}, Thil tel lo va, Column {col} hi boundary chhung ah a ni lo.",
+    "out_of_range": "Pile index {pile_index} chu a tlâk lo.",
+    "non_positive": "Thil pakhat tal chu a lâk bo tûr a ni.",
+    "exceeds_pile": "Cannot remove {quantity} from pile {pile_index} (only {pile_count} left)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "Player {player_id} chuan object hnuhnung ber chu a la ta!"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Tervetuloa Lights Out -peliin! Sinulla on {size}x{size} valojen ruudukko.\nTavoitteesi on sammuttaa KAIKKI valot (joita edustaa '.').\nKun painat valoa, se vaihtaa itsensä JA viereiset naapurinsa (ylös/alas/vasemmalle/oikealle).\nKirjoita [rivi sarake] painamaan valoa (0-indeksoitu, joten kelvollinen alue on 0-{max_index}).\nSinulla on enintään {max_turns} siirtoa aikaa ratkaista arvoitus.\nSelite: 'O' = valo PÄÄLLÄ, '.' = valo POIS PÄÄLTÄ"
+  },
+  "board": {
+    "current_state": "Nykyinen ruudukon tila (Siirto {moves_made}, {moves_left} siirtoa jäljellä, {completion}% valmis):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Toiminnon on oltava muodossa [rivi sarake], jossa rivi ja sarake ovat kokonaislukuja välillä 0 ja {max_index}.",
+    "out_of_range": "Koordinaattien on oltava välillä 0 ja {max_index}. Syötit [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Onneksi olkoon! Ratkaisit arvoituksen {moves_used} siirrossa!",
+    "loss": "Peli ohi! Käytit kaikki {max_turns} siirrot ilman, että ratkaisit arvoitusta. Lopullinen valmiusaste: {completion}%\nLopullinen tila:\n{grid}"
+  }
+}

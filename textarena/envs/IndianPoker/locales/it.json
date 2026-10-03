@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in una partita di Indian Poker.\n- Mazzo da 52 carte; vedi solo la carta dell'avversario.\n- Ante {ante} gettoni ogni round, {max_rounds} round totali.\n- Mosse valide: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X è un intero positivo ≤ il tuo numero di gettoni.)\n- La carta nascosta più alta vince il piatto allo showdown.\n"
+  },
+  "round": {
+    "announce": "### Round {current_round}/{max_rounds}\nLa carta dell'avversario è: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Fornisci esattamente UN'azione tra parentesi, ad esempio '[check]', '[bet 2]', '[call]', '[raise 3]' o '[fold]'.",
+    "cannot_check": "Non puoi [check] - stai affrontando una scommessa.",
+    "amount_min": "L'importo della scommessa / rilancio deve essere ≥ 1.",
+    "cannot_bet": "Non puoi [bet] - devi [call] / [raise] / [fold].",
+    "nothing_to_call": "Niente da chiamare; puoi [check] invece.",
+    "no_bet_to_raise": "Usa [bet X] per aprire; non c'è una scommessa da rilanciare.",
+    "insufficient": "Gettoni insufficienti per quella azione."
+  },
+  "game_action": {
+    "action": "Giocatore {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (costo {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Le tue azioni possibili: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Piatto {pot} → Giocatore {winner}. (Banche P0:{p0}, P1:{p1})",
+    "folded": "Il Giocatore {player_id} si è ritirato.",
+    "showdown_win": "Showdown: {card_win} batte {card_lose}.",
+    "showdown_tie": "Parità allo showdown: entrambi {card}. Piatto diviso - ognuno riceve {split}."
+  },
+  "outcome": {
+    "p0_wins": "Il Giocatore 0 vince ({bank0} > {bank1})",
+    "p1_wins": "Il Giocatore 1 vince ({bank1} > {bank0})",
+    "draw": "Gettoni uguali dopo tutti i round"
+  }
+}

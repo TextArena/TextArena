@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Ju po luani lojën e numrave Countdown!\nQëllimi: Kombinoni numrat duke përdorur +, -, *, / për të arritur në shënjën.\nFormati i veprimit: [i j op] ku i,j janë indekset dhe op është operacioni.\nShembull: [0 2 *] shumëzon numrin në indeksin 0 me numrin në indeksin 2.\nPjesëtja duhet të rezultojë vetëm në numra të plotë."
+  },
+  "board": {
+    "header": "SHËNJA: {target}\n\nNumrat e disponueshëm:\n{numbers}",
+    "best": "{observation}\n\nMë i miri deri tani: {best_value} (distanca: {distance})\nShprehja më e mirë: {best_expression}",
+    "history": "{observation}\n\nHistoria e lëvizjeve:\n{moves}",
+    "progress": "{observation}\nPikët aktuale të progresit: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format i gabuar i veprimit. Përdorni `[i j op]` ku i,j janë indekset dhe op është +,-,*,/",
+    "invalid_indices": "Indekset e gabuara. Duhet të jenë të ndryshme dhe në rangun 0-{max_index}",
+    "invalid_operation": "Operacion i gabuar (pjesëtje me zero ose rezultat jo i plotë)"
+  },
+  "outcome": {
+    "win": "I përkryer! Gjetët shënjën e saktë: {target}",
+    "no_moves": "Nuk ka më lëvizje. Rezultati më i mirë: {best_value} (shënjë: {target})",
+    "turn_limit": "Kufiri i radhës është arritur. Rezultati më i mirë: {best_value} (shënjë: {target})"
+  }
+}

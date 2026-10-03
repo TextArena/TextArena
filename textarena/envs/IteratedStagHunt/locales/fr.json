@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le joueur {player_id} dans une partie d'Iterated Stag Hunt en {num_rounds} manches.\n\nStructure du jeu :\n- La partie comprend {decision_rounds} manches de décision\n- Avant chaque décision, vous disposez de {conversation_rounds} tours pour communiquer\n- Après la communication, les deux joueurs choisissent simultanément de chasser un cerf ou un lièvre\n\nRécompenses :\n- Les récompenses associées à la chasse aux cerfs et aux lièvres peuvent varier d'une manche à l'autre\n- Les récompenses sont présentées au début de chaque manche\n\nComment jouer :\n- Pendant la communication : saisissez simplement votre message\n- Pendant la phase de décision : utilisez '[Stag]' ou '[Hare]'\nVous pouvez inclure du texte supplémentaire avant ou après ces symboles.\n"
+  },
+
+  "round": {
+    "payoff_matrix": "Début de la manche {round} avec la matrice des gains suivante :\n- Les deux chassent un cerf : chacun reçoit {mutual_stag} points\n- Les deux chassent un lièvre : chacun reçoit {mutual_hare} points\n- L'un chasse un lièvre et l'autre un cerf : le chasseur de lièvre reçoit {single_hare} points et le chasseur de cerf reçoit {single_stag} points\nVous pouvez communiquer librement avec votre adversaire pendant {conversation_rounds} tours avant de prendre une décision.",
+    "decision_phase": "La phase de décision de la manche {round} a commencé. Veuillez répondre avec '[stag]' ou '[hare]'.",
+    "results": "La manche {round} est terminée. Résultats :\n\tLe joueur 0 a choisi '{decision0}' (gain : {payoff0} ; total : {total0})\n\tLe joueur 1 a choisi '{decision1}' (gain : {payoff1} ; total : {total1})"
+  },
+
+  "outcome": {
+    "win": "Scores finaux : joueur 0 : {p0}, joueur 1 : {p1}\nLe joueur {winner_id} a gagné !",
+    "draw": "Scores finaux : joueur 0 : {p0}, joueur 1 : {p1}\nÉgalité !"
+  }
+}

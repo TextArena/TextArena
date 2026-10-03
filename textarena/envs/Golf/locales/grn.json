@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Oiko Golf (Joguái ka'arupi) - Jogador {player_id}.\nTendáre: Oguereko upe tenda michĩvéva pe joguáipe.\nKa'arupi tenda: A=1, 2-10= tenda, J/Q=10, K=0\n\nJehasa (eikuaa ipype):\n- '[draw]' - Oguahẽ ka'arupi\n- '[take]' - Oguahẽ tendáre ogahauséva\n- '[swap X Y]' - Ho'añetéi ka'arupi oguahẽva X (pochy) Y (tenda)\n- '[discard]' - Ogahauséi ka'arupi"
+  },
+  "board": {
+    "drew": "Ogahauséi: {card}\nKo'ágã oñembojevy [swap X Y] térã [discard]",
+    "took": "Ere rei: {card} umi ka'arãi pyrũgui\nEre va'erã [swap X Y] ndive (ndikatúi reka'arãi).",
+    "peeked": "Oiko pe tendáre ({row},{col}): {card}",
+    "turn_view": "Ne po:\n{hand}\nKa'arãi pyrũ: {discard}\n{options}",
+    "none": "Ndaipóri"
+  },
+  "options": {
+    "final_turns": "Joguái guasu! Nde rejapo: [draw], [take], [peek X Y]",
+    "draw": "Ñande rekove: [draw], [take]",
+    "must_swap": "Rejapova'erã: [swap X Y] (ndikatúi emboyke tarjeta umi mba'e ojehejáva)",
+    "swap_or_discard": "Oñembojevy: [swap X Y] térã [discard]"
+  },
+  "hand": {
+    "no_cards": "Ndaipóri tarjeta.",
+    "header": "Col: 1 2 3 Ojekuaauka hag̃ua mba'éichapa ojeporu.",
+    "row": "Pochy {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Jogador {pid} ho'añetéi {new} ndive {old} ápe pe tendáre ({row},{col})",
+    "discarded": "Jugador {pid} reka'arãi {card}"
+  },
+  "message": {
+    "deck_empty": "Kuatiañe'ẽ ogue! Ñande ára opaite.",
+    "knocked": "Jokuaihára {pid} ojeity! Mayma ambue jokuaihápe oñeme'ẽ peteĩ jey.",
+    "final_round": "Jogador {pid} {reason}! Ápe oiko peteĩ joguái guasu"
+  },
+  "reason": {
+    "all_revealed": "ha'e ohechauka opaite kuatia."
+  },
+  "invalid": {
+    "wrong_action": "Eikuaa peteĩ jehe'a ipype: [draw], [take], [swap X Y], [discard], [knock], térã [peek X Y]",
+    "discard_empty": "Kuatiañe'ẽ ogue ndaipori!",
+    "must_draw_first": "Oñembojevy oiko peteĩ ka'arupi, [draw], [take], [knock], térã [peek X Y]",
+    "cannot_discard_taken": "Ndaikatúi emboyke peteĩ tarjeta ojehupytýva pila de descarte-gui. Oñeñembohasava'erã chupe.",
+    "have_drawn_card": "Erekópa kárta ojejapóva. Ekatu eipe'a [swap X Y] térã [discard].",
+    "need_drawn_swap": "Reikotevẽ peteĩ tarhéta ojehaíva oñemyengovia hag̃ua.",
+    "need_drawn_discard": "Reikotevẽ peteĩ tarhéta ojepe'a hag̃ua.",
+    "out_of_bounds": "Tendáre oĩ ipype. Eikuaa pochy 1-{max_row}, tenda 1-{max_col}",
+    "knock_with_card": "Ndaikatúi emboty peteĩ tarjeta ojepe'a rire. Embohupa tenonderã ne turno.",
+    "already_knocked": "Oĩma oitypáva ko ronda.",
+    "already_revealed": "Ko tarhéta ojehechaukava'ekue!"
+  },
+  "summary": {
+    "full": "Joguái oiko! Jogador {winner} oĩ tendáre {score} puntos!\n\nTendáre guasu:\n{scores}",
+    "line": "Jogador {pid}: {score} puntos\n"
+  },
+  "board_str": {
+    "title": "=== Ñembosarái GOLF rehegua===",
+    "discard": "Ñemboguejy yty: {card}",
+    "knocked": "¡Oñembo'y pe jugador {pid}!",
+    "player_header": "Jogador {pid} (Puntos: {score}):"
+  }
+}

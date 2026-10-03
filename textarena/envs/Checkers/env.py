@@ -16,38 +16,43 @@ class CheckersEnv(ta.Env):
     def reset(self, num_players: int, seed: Optional[int] = None):
         self.state = ta.TwoPlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
         self.state.reset(game_state={"board": self._initialize_board()}, player_prompt_function=self._prompt, role_mapping={0:"Red", 1:"Black"})
-        self.state.add_observation(message=f"Current board:\n{self._render_board()}", observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(message=self.m("board", "current_board", board=self._render_board()), observation_type=ta.ObservationType.GAME_BOARD)
 
     def _initialize_board(self) -> List[List[str]]: return [['b' if row < 3 and (row + col) % 2 == 1 else 'r' if row > 4 and (row + col) % 2 == 1 else '.' for col in range(8)] for row in range(8)]
     def _render_board(self) -> str:
-        header = "\n     " + "  ".join(str(col) for col in range(8)) + "\n"
+        header = "\n     " + "  ".join(chr(ord('a') + col) for col in range(8)) + "\n"
         divider = "   +" + "-" * 25 + "\n"
         rows = "\n".join(f" {row} |" + "".join(f" {self.state.game_state['board'][row][col]} " for col in range(8)) for row in range(8))
         return header + divider + rows + "\n"
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are Player {player_id} playing a game of Checkers as {'Red' if player_id==0 else 'Black'}.\n"
-            "Make your move in the format [rowFrom colFrom rowTo colTo], e.g. '[2 1 3 2]'.\nBasic rules:\n"
-            "  • Move diagonally forward by 1 if empty.\n"
-            "  • Capture by jumping over an opponent piece.\n"
-            "  • A piece is Kinged if it reaches the opposite end.\n"
-        )
+        color = 'Red' if player_id==0 else 'Black'
+        return self.m("player_prompt", "intro", player_id=player_id, color=color)
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
         self._execute_player_move(action)
         self._check_gameover()
-        self.state.add_observation(message=f"Current board:\n{self._render_board()}", observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(message=self.m("board", "current_board", board=self._render_board()), observation_type=ta.ObservationType.GAME_BOARD)
         return self.state.step()
 
     def _execute_player_move(self, action: str):
-        """ Parse the action to find the requested move. If valid, make the move, otherwise set it as an invalid move """
-        match = re.compile(r"\[\s*(\d)\s+(\d)\s+(\d)\s+(\d)\s*\]").search(action.strip())
-        if not match: self.state.set_invalid_move(reason="No valid move format found."); return
-        row_from, col_from, row_to, col_to = map(int, match.groups()) # Extract coordinates
-        if self._is_valid_move(self.state.current_player_id, row_from, col_from, row_to, col_to): self._move_piece(self.state.current_player_id, row_from, col_from, row_to, col_to)
-        else: self.state.set_invalid_move(reason=f"Move [{row_from} {col_from} {row_to} {col_to}] is illegal.")
+        """ Parse a chess-style action like [a1b2]. If valid, make the move; otherwise mark it invalid. """
+        match = re.compile(r"\[\s*([a-h])\s*([0-7])\s*([a-h])\s*([0-7])\s*\]", re.IGNORECASE).search(action.strip())
+        if not match:
+            self.state.set_invalid_move(reason=self.m("invalid_move", "wrong_format")); return
+        col_from = ord(match.group(1).lower()) - ord('a')
+        row_from = int(match.group(2))
+        col_to   = ord(match.group(3).lower()) - ord('a')
+        row_to   = int(match.group(4))
+        if self._is_valid_move(self.state.current_player_id, row_from, col_from, row_to, col_to):
+            self._move_piece(self.state.current_player_id, row_from, col_from, row_to, col_to)
+        else:
+            self.state.set_invalid_move(reason=self.m("invalid_move", "illegal",
+                                        move=self._to_notation(row_from, col_from, row_to, col_to)))
+
+    def _to_notation(self, r1: int, c1: int, r2: int, c2: int) -> str:
+        return f"{chr(ord('a')+c1)}{r1}{chr(ord('a')+c2)}{r2}"
 
     def _is_valid_move(self, player_id: int, r1: int, c1: int, r2: int, c2: int) -> bool:
         """Check if a move is valid under simplified Checkers rules. TODO: This does not handle forced captures or multi-jumps """
@@ -58,7 +63,7 @@ class CheckersEnv(ta.Env):
             if piece not in ['r', 'R']: return False # Player 0 -> must move 'r' or 'R'
         else:
             if piece not in ['b', 'B']: return False # Player 1 -> must move 'b' or 'B'
-        
+
         if target != '.': return False   # destination must be empty
         # Simple move logic (no forced capture / multi-jump):
         dr = r2 - r1; dc = abs(c2 - c1)
@@ -95,19 +100,19 @@ class CheckersEnv(ta.Env):
         # Check for kinging
         if piece == 'r' and r2 == 0:    self.state.game_state["board"][r2][c2] = 'R'  # Red becomes King
         elif piece == 'b' and r2 == 7:  self.state.game_state["board"][r2][c2] = 'B'  # Black becomes King
-        self.state.add_observation(message=f"Player {player_id} moved ({r1},{c1}) -> ({r2},{c2}).", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION) # Send a summary message
+        self.state.add_observation(message=self.m("game_action", "moved", player_id=player_id, move=self._to_notation(r1, c1, r2, c2)), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION) # Send a summary message
 
     def _check_gameover(self):
         red_pieces = sum(cell.lower() == 'r' for row in self.state.game_state["board"] for cell in row)
         black_pieces = sum(cell.lower() == 'b' for row in self.state.game_state["board"] for cell in row)
-        if red_pieces == 0: self.state.set_winner(player_id=1, reason="Red has no pieces left. Black wins!"); return
-        if black_pieces == 0: self.state.set_winner(player_id=0, reason="Black has no pieces left. Red wins!"); return
+        if red_pieces == 0: self.state.set_winner(player_id=1, reason=self.m("outcome", "red_no_pieces")); return
+        if black_pieces == 0: self.state.set_winner(player_id=0, reason=self.m("outcome", "black_no_pieces")); return
         # If either player has no legal moves, that player loses.
         if not self._has_legal_move(1 - self.state.current_player_id): # The other player wins
-            self.state.set_winner(player_id=self.state.current_player_id, reason=f"Player {1 - self.state.current_player_id} has no moves left."); return
+            self.state.set_winner(player_id=self.state.current_player_id, reason=self.m("outcome", "no_moves", player_id=1 - self.state.current_player_id)); return
         if not self._has_legal_move(self.state.current_player_id): # The other player wins
-            self.state.set_winner(player_id=1-self.state.current_player_id, reason=f"Player {self.state.current_player_id} has no moves left."); return
-        if self.state.check_turn_limit(): self.state.set_draw(reason="The turn limit has been reached.")
+            self.state.set_winner(player_id=1-self.state.current_player_id, reason=self.m("outcome", "no_moves", player_id=self.state.current_player_id)); return
+        if self.state.check_turn_limit(): self.state.set_draw(reason=self.m("outcome", "draw"))
 
     def _has_legal_move(self, player_id: int) -> bool:
         for r in range(8):

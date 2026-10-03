@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "U bent {role} in Colonel Blotto.\nUw doel is om meer rondes te winnen dan uw tegenstander.\nIn elke ronde, verdeel precies {num_total_units} eenheden over de velden {field_names}.\nDe speler die meer eenheden toewijst aan een veld, wint dat veld, en de speler die meer velden wint, wint de ronde.\nBijvoorbeeld, '[A7 B7 C6]' wijst 7 eenheden toe aan A, 7 aan B en 6 aan C.",
+    "commander_alpha": "Commandant Alpha",
+    "commander_beta": "Commandant Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Ronde {current_round}/{num_rounds} ===\nGewonnen rondes - Commandant Alpha: {alpha_score}, Commandant Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRonde {current_round}\nCommandant Alpha heeft toegewezen: {p0_allocations}\nCommandant Beta heeft toegewezen: {p1_allocations}\n",
+    "winner_alpha": "{message}Winnaar: Commandant Alpha",
+    "winner_beta": "{message}Winnaar: Commandant Beta",
+    "tie": "{message}Gelijkspel!"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldig invoerformaat. Gebruik: A:5, B:10, C:5",
+    "invalid_field": "Ongeldige veldnaam(en). Geldige velden: {field_names}",
+    "wrong_allocation_value": "Alle toewijzingen moeten niet-negatieve gehele getallen zijn.",
+    "incorrect_total_units": "U moet precies {num_total_units} eenheden toewijzen. Huidige som: {current_sum}",
+    "good_allocations": "Toewijzing is goed."
+  },
+  "outcome": {
+    "winner_alpha": "Commandant Alpha wint {score_0}-{score_1} na {num_rounds} rondes!",
+    "winner_beta": "Commandant Beta wint {score_1}-{score_0} na {num_rounds} rondes!",
+    "draw": "Spel eindigt in een {score_0}-{score_1} gelijkspel na {num_rounds} rondes!",
+    "early_winner_alpha": "Commandant Alpha wint {scores_0}-{scores_1} (meerderheid behaald)!",
+    "early_winner_beta": "Commandant Beta wint {scores_1}-{scores_0} (meerderheid behaald)!"
+  }
+}

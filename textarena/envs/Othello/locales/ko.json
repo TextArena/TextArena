@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "당신은 {colour} ({piece})을/를 사용하는 오델로의 플레이어 {player_id}입니다.\n당신의 목표는 게임이 끝날 때 보드에 더 많은 당신의 색깔의 말을 두는 것입니다.\n당신의 차례에는 상대방의 말을 하나 이상 포위할 수 있도록 말을 놓아야 합니다. 포위된 상대방의 말은 모두 당신의 색깔로 뒤집힙니다. (가로, 세로, 대각선 방향 모두 가능)\n수를 '[row, col]' 형식으로 제공하세요."
+  },
+  "board": {
+    "game_board": "게임 보드:\n{board}",
+    "valid_moves": "{observation}\n유효한 수: {moves}",
+    "no_valid_moves_reset": "{observation}\n유효한 수가 없습니다 - 차례를 건너뛰어야 할 수도 있습니다.",
+    "no_valid_moves_step": "{observation}\n유효한 수가 없습니다 – 차례를 건너뛰어야 할 수도 있습니다.",
+    "scores_reset": "{observation}\n현재 점수 - 검은색: {black_count}, 흰색: {white_count}\n",
+    "scores_step": "{observation}\n점수 - 검은색: {black_count}, 흰색: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "수는 '[row, col]' 형식이어야 합니다.",
+    "illegal": "부정확한 수입니다. 유효한 수: {valid}"
+  },
+  "game_action": {
+    "skipped": "플레이어 {pid}는 차례를 건너뛰어야 했습니다",
+    "played": "플레이어 {pid} ({piece})가 [{r}, {c}]에 말을 두어 {flipped} 개의 말을 뒤집었습니다"
+  },
+  "game_message": {
+    "must_skip": "플레이어 {pid} ({piece})는 유효한 수가 없어 차례를 건너뛰어야 합니다."
+  },
+  "outcome": {
+    "black_wins": "검은색이 {black_count}-{white_count}로 이겼습니다.",
+    "white_wins": "흰색이 {white_count}-{black_count}로 이겼습니다.",
+    "draw": "무승부 {black_count}-{white_count}."
+  }
+}

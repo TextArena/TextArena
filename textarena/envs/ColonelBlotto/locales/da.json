@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Du er {role} i Colonel Blotto.\nDit mål er at vinde flere runder end din modstander.\nI hver runde skal du allokere nøjagtigt {num_total_units} enheder på tværs af felterne {field_names}.\nSpilleren, der allokere flere enheder til et felt, vinder det felt, og spilleren, der vinder flere felter, vinder runden.\nFor eksempel allokere '[A7 B7 C6]' 7 enheder til A, 7 til B og 6 til C.",
+    "commander_alpha": "Kommandør Alpha",
+    "commander_beta": "Kommandør Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Runde {current_round}/{num_rounds} ===\nRunder vundet - Kommandør Alpha: {alpha_score}, Kommandør Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRunde {current_round}\nKommandør Alpha allokere: {p0_allocations}\nKommandør Beta allokere: {p1_allocations}\n",
+    "winner_alpha": "{message}Vinder: Kommandør Alpha",
+    "winner_beta": "{message}Vinder: Kommandør Beta",
+    "tie": "{message}Uafgjort!"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldigt inputformat. Brug: A:5, B:10, C:5",
+    "invalid_field": "Ugyldigt felt navn(e). Gyldige felter: {field_names}",
+    "wrong_allocation_value": "Alle allokeringer skal være ikke-negative heltal.",
+    "incorrect_total_units": "Du skal allokere nøjagtigt {num_total_units} enheder. Aktuel sum: {current_sum}",
+    "good_allocations": "Allokering er god."
+  },
+  "outcome": {
+    "winner_alpha": "Kommandør Alpha vinder {score_0}-{score_1} efter {num_rounds} runder!",
+    "winner_beta": "Kommandør Beta vinder {score_1}-{score_0} efter {num_rounds} runder!",
+    "draw": "Spillet ender i en {score_0}-{score_1} uafgjort efter {num_rounds} runder!",
+    "early_winner_alpha": "Kommandør Alpha vinder {scores_0}-{scores_1} (flertal opnået)!",
+    "early_winner_beta": "Kommandør Beta vinder {scores_1}-{scores_0} (flertal opnået)!"
+  }
+}

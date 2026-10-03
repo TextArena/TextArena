@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "I {player_id} Player i ni. Sudoku i khelh dawn.\nSudoku grid dinhmun tunlai hi hetah hian a awm. Row tin 1 atanga 9 thleng number a ni, column tin 1 atanga 9 thleng number a ni bawk.\nCell khawih loh chu '.' in a awm, cell khawih sa chu 1 atanga 9 thleng digit a ni.\n\nSudoku Grid tunlai:\nI tum chu 9x9 grid a cell khawih loh te 1 atanga 9 thleng digit in khawih tur a ni, a chunga:\n1. Row tin 1 atanga 9 thleng digit zawng zawng a awm tur a ni, repeat lovin.\n2. Column tin 1 atanga 9 thleng digit zawng zawng a awm tur a ni, repeat lovin.\n3. 3x3 subgrid 9 zinga tin 1 atanga 9 thleng digit zawng zawng a awm tur a ni, repeat lovin.\n\nDan leh Hriattur:\n1. **Khawih loh** grid a number sa te chu khawih loh tur a ni.\n2. **Khawih** cell khawih loh te chu '.' in a awm te khawih tur a ni.\n3. I duh dan in i chhang thei, mahse i chhang ah '[row column number]' format a awm tur a ni.\n4. **Hriat** i move in Sudoku dan a bawhchhia loh tur a ni. Move bawhchhia chu hrem tur a ni.\nExamples:\n- **Move dik**:\n  - Grid Snippet Hma Move:\n  \n  - Move: `[5 3 7]`\n  - Explanation: 7 chu row 5, column 3 ah khawih a ni, Sudoku dan a bawhchhia lo.\n\n- **Move bawhchhia** (Cell khawih sa khawih leh):\n  - Grid Snippet Hma Move:\n  \n  - Move: `[1 1 9]`\n  - Explanation: Cell (1,1) ah 5 a awm tawh, i khawih leh thei lo.\n\n- **Move bawhchhia** (Sudoku dan bawhchhia):\n  - Grid Snippet Hma Move:\n  \n  - Move: `[1 3 5]`\n  - Explanation: 5 chu row 1, column 3 ah khawih a ni, Sudoku dan a bawhchhia.\n\nI move leh i ngaihdan chanchin chu i khelh zui zel ah a belh tur a ni. I move chanchin i hmang in i thutlukna siam that tur a ni, i lo tum tawh loh tur a ni. Chhia leh!\n\n"
+  },
+  "board": {
+    "game_board": "Game Board:\n{board}",
+    "board_state": "Board dinhmun: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "A move format a diklo. Player {player_id} chuan 'row column number' (thlang leh khulh zat) chu a chhang lo va.",
+    "out_of_bounds": "Move dik lo. Player {player_id} in {num} chu ({row}, {col}) ah khawih a tum, a chhung a chhuak.",
+    "overwrite": "Move dik lo. Player {player_id} in cell khawih sa ({row}, {col}) a khawih leh a tum.",
+    "violates_rules": "Move dik lo. Player {player_id} in {num} chu ({row}, {col}) ah khawih a tum, Sudoku dan a bawhchhia."
+  },
+  "outcome": {
+    "win": "Ka lawm e! Player {player_id} chuan Sudoku puzzle a siam zawh ta.",
+    "turn_limit": "Turn limit a tawp tawh. I in cell khawih loh {percent}% a khawih fel."
+  }
+}

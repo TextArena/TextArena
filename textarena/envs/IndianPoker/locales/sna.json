@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Iwe ndiwe Mchezaji {player_id} michezo ya Indian Poker.\n- Dheki ya kadi 52; unona kadi ya mupinzani chete.\n- Ante {ante} chip(s) kila raundi, {max_rounds} raundi(s) kwa jumla.\n- Zvitendo zvinokubalika: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ndiyo nambari chanya isiyozidi kiasi chako cha chip.)\n- Kadi yenye thamani yakanyanya inoshinda poti pa kupambwa.\n"
+  },
+  "round": {
+    "announce": "### Raundi {current_round}/{max_rounds}\nKadi ya mupinzani wako ndi: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Pesa moja chete action yenziwa kuboka, kubva '[check]', '[bet 2]', '[call]', '[raise 3]', kana '[fold]'.",
+    "cannot_check": "Haugoni [check] - uri kutarisana nokubheja.",
+    "amount_min": "Mari yekubheja / kukwidza inofanira kuva ≥ 1.",
+    "cannot_bet": "Hauna kukwesha [bet] - wakange wakweshe [call] / [raise] / [fold].",
+    "nothing_to_call": "Hapana chokudana; unogona [check] panzvimbo.",
+    "no_bet_to_raise": "Shandisa [bet X] kuvhura; hapana bheji rekusimudza.",
+    "insufficient": "Chips dzisina kukwana nokuda kwechiito ichocho."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (gona {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Zviito zvako zvingangoitwa: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Mwari {winner}. (Mabanki P0:{p0}, P1:{p1})",
+    "folded": "Mutambi {player_id} akakanda.",
+    "showdown_win": "Kuongorora: {card_win} inorova {card_lose}.",
+    "showdown_tie": "Showdown tie: zvose {card}. Pot split  mumwe nomumwe anogamuchira {split}."
+  },
+  "outcome": {
+    "p0_wins": "Mwari 0 anotsva ({bank0} > {bank1})",
+    "p1_wins": "Mwari 1 anotsva ({bank1} > {bank0})",
+    "draw": "Chips dzakaenzana pashure pemitambo yose"
+  }
+}

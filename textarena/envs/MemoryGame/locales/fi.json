@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id}. Pelit Muistipeliä.\nTavoitteesi on löytää enemmän korttipareja pelilaudalta kuin vastustajasi.\nVuorollasi valitse kaksi korttia kääntämällä rivin ja sarakkeen numerot ensimmäiselle ja toiselle kortille vastaavasti, esimerkiksi '[0 1 1 0]', jossa ensimmäinen kortti on rivillä 0 ja sarakkeessa 1, ja toinen kortti on rivillä 1 ja sarakkeessa 0.\nJos kaksi korttia täsmäävät, saat pisteen ja kortit pysyvät kuvapuoli ylöspäin. Jos ne eivät täsmää, kortit kääntyvät takaisin kuvapuoli alaspäin, esim. '.'.\nPeli päättyy, kun kaikki parit on löydetty."
+  },
+  "board": {
+    "current_board": "Nykyinen pelilauta:\n{board}",
+    "current_game_board": "Nykyinen pelilauta:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Virheellinen siirtomuoto. Pelaaja {player_id} ei vastannut kelvollisella suunnalla hakasulkeissa.",
+    "out_of_bounds": "Virheellinen siirto. Pelaaja {player_id} valitsi sijainnin, joka on pelilaudan ulkopuolella.",
+    "same_card_twice": "Virheellinen siirto. Pelaaja {player_id} valitsi saman kortin kahdesti.",
+    "already_matched": "Virheellinen siirto. Pelaaja {player_id} valitsi yhden tai molemmat kortit, jotka on jo löydetty."
+  },
+  "game_message": {
+    "cards_match": "Pelaaja {player_id} valitsi kortit, jotka täsmäävät sijainneissa [{r1} {c1}] ja [{r2} {c2}]!",
+    "cards_no_match": "Pelaaja {player_id} valitsi kortit, jotka eivät täsmää. Kortit sijainneissa [{r1} {c1}] ja [{r2} {c2}] ovat {pos1} ja {pos2} vastaavasti."
+  },
+  "outcome": {
+    "draw": "Molemmat pelaajat löysivät saman määrän korttipareja.",
+    "win": "Pelaaja {winner_id} on voittanut!",
+    "turn_limit": "Vuororaja on saavutettu. Peli on päättynyt. Pelaaja 0 sai {score_0} pistettä, Pelaaja 1 sai {score_1} pistettä.",
+    "turn_limit_win": "{reason} Pelaaja {winner_id} on voittanut!"
+  }
+}

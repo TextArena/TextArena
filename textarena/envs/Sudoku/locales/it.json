@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id}. Stai giocando a Sudoku.\nEcco lo stato attuale della griglia di Sudoku. Ogni riga è numerata da 1 a 9 e ogni colonna è anch'essa numerata da 1 a 9.\nLe celle vuote sono rappresentate da '.', mentre le celle precompilate contengono cifre da 1 a 9.\n\nGriglia di Sudoku attuale:\nIl tuo obiettivo è riempire le celle vuote della griglia 9x9 con cifre da 1 a 9 in modo che:\n1. Ogni riga contenga tutte le cifre da 1 a 9 senza ripetizioni.\n2. Ogni colonna contenga tutte le cifre da 1 a 9 senza ripetizioni.\n3. Ognuna delle nove sottogriglie 3x3 contenga tutte le cifre da 1 a 9 senza ripetizioni.\n\nRegole e istruzioni:\n1. **Non sovrascrivere** i numeri iniziali forniti nella griglia.\n2. **Riempi solo** le celle vuote rappresentate da '.'.\n3. Puoi rispondere in qualsiasi modo preferisci, ma assicurati che la tua risposta includa il formato '[riga colonna numero]'.\n4. **Assicurati** che la tua mossa non violi le regole del Sudoku. Le mosse non valide comporteranno penalità.\nEsempi:\n- **Mossa valida**:\n  - Frammento di griglia prima della mossa:\n  \n  - Mossa: `[5 3 7]`\n  - Spiegazione: Collocare 7 alla riga 5, colonna 3 non viola alcuna regola del Sudoku.\n\n- **Mossa non valida** (Sovrascrivere una cella precompilata):\n  - Frammento di griglia prima della mossa:\n  \n  - Mossa: `[1 1 9]`\n  - Spiegazione: La cella (1,1) è già riempita con 5. Non puoi sovrascriverla.\n\n- **Mossa non valida** (Violare le regole del Sudoku):\n  - Frammento di griglia prima della mossa:\n  \n  - Mossa: `[1 3 5]`\n  - Spiegazione: Collocare 5 alla riga 1, colonna 3 viola la regola poiché 5 esiste già nella riga 1.\n\nLa cronologia delle tue mosse e pensieri sarà aggiunta man mano che giocherai più turni. Utilizza la cronologia delle tue mosse per migliorare la tua capacità di decisione evitando le mosse che hai già provato. Buona fortuna!\n\n"
+  },
+  "board": {
+    "game_board": "Tabellone di gioco:\n{board}",
+    "board_state": "Stato del tabellone: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato di mossa non valido. Il giocatore {player_id} non ha risposto con un valido 'riga colonna numero'.",
+    "out_of_bounds": "Mossa non valida. Il giocatore {player_id} ha tentato di collocare {num} a ({row}, {col}), che è fuori dai limiti.",
+    "overwrite": "Mossa non valida. Il giocatore {player_id} ha tentato di sovrascrivere una cella precompilata ({row}, {col}).",
+    "violates_rules": "Mossa non valida. Il giocatore {player_id} ha tentato di collocare {num} a ({row}, {col}), che viola le regole del Sudoku."
+  },
+  "outcome": {
+    "win": "Congratulazioni! Il giocatore {player_id} ha completato il puzzle di Sudoku.",
+    "turn_limit": "È stato raggiunto il limite di turni. Hai riempito correttamente {percent}% delle celle vuote."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id}. Você está jogando Sudoku.\nAqui está o estado atual da grade de Sudoku. Cada linha é numerada de 1 a 9, e cada coluna também é numerada de 1 a 9.\nCélulas vazias são representadas por '.', e células preenchidas contêm dígitos de 1 a 9.\n\nGrade de Sudoku Atual:\nSeu objetivo é preencher as células vazias na grade 9x9 com dígitos de 1 a 9 de tal forma que:\n1. Cada linha contenha todos os dígitos de 1 a 9 sem repetição.\n2. Cada coluna contenha todos os dígitos de 1 a 9 sem repetição.\n3. Cada uma das nove subgrades 3x3 contenha todos os dígitos de 1 a 9 sem repetição.\n\nRegras e Instruções:\n1. **Não sobrescreva** os números iniciais fornecidos na grade.\n2. **Apenas preencha** células vazias representadas por '.'.\n3. Você pode responder de qualquer maneira que preferir, mas certifique-se de que sua resposta inclua o formato de '[row column number]'.\n4. **Certifique-se** de que sua jogada não viole as regras do Sudoku. Jogadas inválidas resultarão em penalidades.\nExemplos:\n- **Jogada Válida**:\n  - Trecho da Grade Antes da Jogada:\n  \n  - Jogada: `[5 3 7]`\n  - Explicação: Colocar 7 na linha 5, coluna 3 não viola nenhuma regra do Sudoku.\n\n- **Jogada Inválida** (Sobrescrevendo uma célula preenchida):\n  - Trecho da Grade Antes da Jogada:\n  \n  - Jogada: `[1 1 9]`\n  - Explicação: A célula (1,1) já está preenchida com 5. Você não pode sobrescrevê-la.\n\n- **Jogada Inválida** (Violando as regras do Sudoku):\n  - Trecho da Grade Antes da Jogada:\n  \n  - Jogada: `[1 3 5]`\n  - Explicação: Colocar 5 na linha 1, coluna 3 viola a regra, pois 5 já existe na linha 1.\n\nO histórico de suas jogadas e pensamentos será anexado à medida que você joga mais rodadas. Use o histórico de suas jogadas para melhorar sua tomada de decisões, evitando as jogadas que você já tentou. Boa sorte!\n\n"
+  },
+  "board": {
+    "game_board": "Tabuleiro do Jogo:\n{board}",
+    "board_state": "Estado do Tabuleiro: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de jogada inválido. O Jogador {player_id} não respondeu com 'linha coluna número' válido.",
+    "out_of_bounds": "Jogada inválida. O Jogador {player_id} tentou colocar {num} em ({row}, {col}), que está fora dos limites.",
+    "overwrite": "Jogada inválida. O Jogador {player_id} tentou sobrescrever uma célula preenchida ({row}, {col}).",
+    "violates_rules": "Jogada inválida. O Jogador {player_id} tentou colocar {num} em ({row}, {col}), o que viola as regras do Sudoku."
+  },
+  "outcome": {
+    "win": "Parabéns! O Jogador {player_id} completou o quebra-cabeça do Sudoku.",
+    "turn_limit": "O limite de rodadas foi alcançado. Você preencheu corretamente {percent}% das células vazias."
+  }
+}

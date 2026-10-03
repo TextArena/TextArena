@@ -1,0 +1,32 @@
+{
+  "_comment": "Plik językowy ThreePlayerTicTacToe. NIE TŁUMACZ kluczy (lewa strona). Tłumacz tylko wartości (prawa strona).",
+  "_slots": {
+    "{player_id}": "Numer gracza, np. 0, 1 lub 2",
+    "{symbol}": "Znak gracza, jeden z A, B lub C",
+    "{cell}": "Numer komórki planszy",
+    "{max_cell}": "Najwyższy ważny numer komórki (rozmiar_planszy^2 - 1)",
+    "{row}": "Indeks wiersza planszy umieszczonego znaku",
+    "{col}": "Indeks kolumny planszy umieszczonego znaku",
+    "{board}": "Wyrenderowana plansza ASCII (nie tłumacz)",
+    "{moves}": "Rozdzielona przecinkami lista dostępnych tokenów ruchów, takich jak '[4]' (nie tłumacz)"
+  },
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w Trzyosobowym Tic Tac Toe.\nTwój znak to '{symbol}'.\nKolejno umieszczasz swój znak na planszy 5x5, aby utworzyć linię z czterech.\nLinie mogą być poziome, pionowe lub ukośne.\nPrześlij swój ruch w formacie '[4]', aby oznaczyć komórkę 4."
+  },
+  "board": {
+    "current_board": "Aktualna plansza:\n\n{board}\n\nDostępne ruchy: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nieprawidłowy format ruchu. Użyj '[komórka]', gdzie komórka to 0-{max_cell}.",
+    "out_of_range": "Nieprawidłowy numer komórki: {cell}. Musi być między 0 a {max_cell}.",
+    "already_occupied": "Komórka {cell} jest już zajęta.",
+    "made_invalid": "Gracz {player_id} wykonał nieprawidłowy ruch"
+  },
+  "game_action": {
+    "placed": "Gracz {player_id} umieszcza swój symbol ({symbol}) w polu ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Gracz {player_id} ({symbol}) wygrywa!",
+    "draw": "Gra kończy się remisem!"
+  }
+}

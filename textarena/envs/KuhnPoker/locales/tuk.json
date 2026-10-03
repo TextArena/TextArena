@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Siz Player {player_id} Kuhn Poker oýunynyň {max_rounds} raundunda oýnuyorsyňyz.\nOýun ýörelgeleri:\n- Kuhn Poker 3 kartlyk destany ulanýar J, Q, K (J iň pes, K iň ýokary)\n- Her oýunçy {ante} çipini öňünden töleýär we her raundda 1 kart alýar (kartlar täzeden paýlanýanlygy sebäpli, siz raýatdaşyňyz bilen bir kartda bolup bilmeýärsiňiz).\n- Oýun {max_rounds} raundlar boýunça dowam edýär\n- Ähli raundlardan soň iň köp çipi bolan oýunçy ýeňýär\nHereket ýörelgeleri:\n- '[check]': Bahysyz geçmek (diňe bahysyz bolsa)\n- '[bet]': 1 çipi potta goşmak (diňe bahysyz bolsa)\n- '[call]': Raýatdaşyň bahysyny 1 çip goşup deňlemek\n- '[fold]': Eliňizi boýun egmek we raýatdaşyňyza potty ýeňmegine ýol bermek"
+  },
+  "init_round": {
+    "round_start": "### {current_round}-njy round başlaýar, {max_rounds} rounddan. Şu kart bar: '{player_card}'",
+    "available_actions": "Siziň elýeterli hereketleriňiz: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hereket [Check], [Bet], [Call], ýa [Fold] bolmaly.",
+    "not_legal": "Edilmeli hereket {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Oýunçy {player_id}, hereketi ýerine ýetirdi: '[{move}]'.",
+    "valid_actions": "Siziň elýeterli hereketleriňiz: {legal_actions}.",
+    "round_summary": "{reason} Häzirki ballyk: Oýunçy 0: '{player_0_chips}'; Oýunçy 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Göni ýeňiş: Oýunçy {winner}'iň {winner_card} kartı Oýunçy {loser}'iň {loser_card} kartyna garanda ýokary. Oýunçy {winner} {pot_value} çiplik potty ýeňdi."
+  },
+  "outcome": {
+    "draw": "{max_rounds} turlaryň soňunda, her iki oýunçynyň hem çipleriniň sany bir meňzeş bolýar.",
+    "round_win": "Oýunçy {player_id} ýykyldy.",
+    "winner_player0": "Oýunçy 0 her {max_rounds} turyň soňunda köp çipleri bilen ýeňiş gazandy.",
+    "winner_player1": "1-nji oýunçy, ähli {max_rounds} turlaryň soňunda köp çipleri bolan halda ýeňiş gazandy."
+  }
+}

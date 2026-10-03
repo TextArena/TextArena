@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Pelaat {color}ia Breakthrough-pelissä. Liikut {direction} {board_size}x{board_size} kokoisella pelilaudalla.\nVuorollasi voit siirtää yhtä nappulaa yhden askeleen eteenpäin tai diagonaalisesti eteenpäin.\nNappula voi liikkua diagonaalisesti vain, jos vastustajan nappula on siinä ruudussa, ja vain siirtyä tällaiseen varattuun ruutuun diagonaalisessa askeleessa.\nKun astut ruutuun, jossa on vastustajan nappula, otat sen kiinni ja vastustajan nappula poistetaan pysyvästi pelilaudalta.\nKäytä UCI-tyylistä merkintää hakasulkeissa, esim. [a2a3] siirtääksesi nappulan a2-ruudusta a3-ruutuun.\n* 'a' vastaa vasemmanpuoleisinta saraketta, '1' on alin rivi (Valkoisen näkökulmasta).\n* Mustan kotirivi on ylin rivi (rivi 8 8x8-laudalla). Valkoisen kotirivi on alin rivi (rivi 1 8x8-laudalla).\nEnsimmäinen pelaaja, jonka nappula saavuttaa vastustajan kotirivin, voittaa. Jos kaikki nappulasi ovat kiinni, häviät."
+  },
+  "invalid_move": {
+    "wrong_format": "Käytä hakasulkeissa olevaa algebrallista merkintää, kuten [a2a3].",
+    "out_of_bounds": "Siirto on pelilaudan ulkopuolella.",
+    "illegal": "Tämä siirto ei noudata Breakthrough-pelin sääntöjä tai ei ole sinun nappulasi."
+  },
+  "game_action": {
+    "moved": "Pelaaja {player_id} siirtää {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Valkoinen saavutti Mustan kotirivin.",
+    "black_reached": "Musta saavutti Valkoisen kotirivin.",
+    "white_captured": "Kaikki Valkoisen nappulat on otettu kiinni.",
+    "black_captured": "Kaikki Mustan nappulat on otettu kiinni.",
+    "no_moves": "Pelaajalla {player_id} ei ole enää siirtoja."
+  }
+}

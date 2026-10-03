@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ami Player {player_id} aabon Spite ar Malice khelna. Tomar lakshya ami payoff pile khali kora.\n\n### Khelna Overview:\n- Lakshya ami payoff pile khali kora center piles khelna.\n- Tomar khelna ami teen jagah theke:\n  1. Tomar **hand** (tomar turn shuru ami up to 5 cards hand).\n  2. **Tomar payoff pile er top card**.\n  3. **Tomar discard piles er top card**.\n\n### Khelna Rules:\n- Tomar ami card khelna center pile ami **ek rank uncha** ami top card ami pile (center piles shuru ami Ace ar jaan up to Queen; Kings ami wild - ami khelna jaan card but ami rank sequence badal na. Ei maane ami King use kora 4 er pore, ami King ranked 5 ar ami next card ami 6).\n- Jodi tomar khelna na jaan cards, tomar **discard ami card** ami tomar discard piles ami turn shesh kora.\n- Jodi center pile paoa Queen, ami automatically khali kora.\n- Rank order ami: A=1, 2=2, ..., 9=9, J=10, Q=11, K ami wild.\n\n### Actions:\n1. **Draw**: Tomar turn shuru ami, draw cards ami tomar hand up to 5 cards. Enter **[draw]** ami shuru.\n2. **Play a Card**: Ami card khelna, specify ami card ar center pile ami: **[play A♠ 0]** (jahan 'A♠' ami card ar '0' ami center pile index).\n3. **Discard**: Jodi tomar khelna na jaan cards, discard ami card ami tomar hand ami discard pile ami turn shesh kora. Enter **[discard A♠ 1]** (jahan 'A♠' ami card ar '1' ami discard pile index). Note ami tomar discard na jaan card ami payoff pile. Tomar ami discard ami cards ami hand.\n\n"
+  },
+  "board": {
+    "current_board": "ᱱᱤᱛᱚᱜ ᱯᱷᱚᱞᱚᱠ:\n\n{board}\nᱵᱮᱵᱷᱟᱨ ᱜᱟᱱᱟᱜ ᱪᱟᱞᱟᱣ: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- ᱥᱮᱸᱴᱟᱨ ᱯᱟᱭᱤᱞᱥ -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Player {player_id} er View ---\n",
+    "payoff": "{observation}Payoff Pile (Top Card): {top_card}, Payoff Pile Length: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "ᱵᱟᱱᱩᱜ-ᱟ"
+  },
+  "game_message": {
+    "no_cards_left": "ᱟᱢᱟᱜ ᱠᱟᱨᱰ ᱠᱚ ᱚᱞ ᱦᱚᱪᱚ ᱞᱟᱹᱜᱤᱫ ᱟᱨᱦᱚᱸ ᱡᱟᱦᱟᱸᱱ ᱠᱟᱛᱷᱟ ᱵᱟᱝ ᱛᱟᱦᱮᱸᱱᱟ ᱾ ᱱᱚᱶᱟ ᱫᱚ ᱚᱱᱠᱟ ᱜᱮ ᱢᱮᱱᱮᱜ-ᱟ: 1. ᱟᱢᱟᱜ ** ᱦᱮᱸᱫᱽᱨᱟᱹ** 2. ᱟᱢᱟᱜ ᱯᱟᱭᱤᱯᱷ ᱛᱚᱞ ᱨᱮᱭᱟᱜ ᱪᱮᱛᱟᱱ ᱟᱠᱟᱱ ᱠᱟᱴ (top card) 3. ᱟᱢᱟᱜ ᱮᱢᱦᱮᱱ ᱞᱮᱠᱷᱟᱱ ᱵᱮᱵᱷᱟᱨᱚᱜ ᱠᱟᱱ ᱢᱩᱬᱩᱛ ᱠᱟᱴ."
+  },
+  "invalid_move": {
+    "wrong_format": "ᱵᱟᱹᱞᱤ ᱪᱟᱞᱟᱣ ᱥᱟᱯᱲᱟᱣ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱥᱠᱮᱨᱟᱨ ᱠᱨᱮᱴ ᱨᱮ ᱢᱤᱫ ᱞᱟᱦᱟᱱᱛᱤ ᱪᱟᱞᱟᱜ ᱛᱮ ᱨᱩᱣᱟᱹᱨ ᱵᱟᱭ ᱮᱢ ᱟᱠᱟᱫᱟ᱾",
+    "invalid_play": "ᱵᱟᱹᱲᱤᱡ ᱪᱟᱞᱟᱣ. ᱠᱷᱮᱞᱚᱸᱰᱤ {player_id} ᱫᱚ ᱛᱟᱞᱟ ᱯᱷᱚᱞᱚᱠ {index} ᱨᱮ {card} ᱪᱟᱞᱟᱣ ᱞᱟᱹᱜᱤᱫ ᱛᱮᱭ ᱨᱤᱠᱟᱹ ᱞᱮᱫᱼᱟ.",
+    "discard_from_payoff": "ᱵᱟᱹᱞᱤ ᱟᱫᱮᱨ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱯᱟᱭᱩᱴ ᱰᱟᱠ ᱠᱷᱚᱱ ᱢᱤᱫ ᱠᱟᱨᱰ ᱵᱟᱧᱪᱟᱣ ᱞᱟᱹᱜᱤᱫ ᱮ ᱜᱚᱲᱦᱚᱱ ᱞᱮᱱᱟ᱾",
+    "discard_not_in_hand": "ᱵᱟᱹᱞᱤ ᱟᱫᱮᱨ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱢᱤᱫ ᱠᱟᱨᱰ ᱵᱟᱭ ᱚᱪᱚᱜ ᱞᱟᱹᱜᱤᱫ ᱮ ᱯᱚᱨᱚᱢᱟᱣ ᱞᱮᱱᱟ ᱡᱟᱦᱟᱸ ᱫᱚ ᱟᱡᱟᱜ ᱦᱟᱛᱟᱝ ᱨᱮ ᱵᱟᱝ ᱛᱟᱦᱮᱸ ᱠᱟᱱᱟ᱾",
+    "wrong_move_type": "ᱵᱟᱹᱞᱤ ᱪᱟᱞᱟᱜ ᱛᱷᱚᱠ ᱾ ᱠᱷᱮᱞᱚᱱᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱢᱤᱫ ᱥᱟᱹᱨᱤᱭᱟᱜ ᱪᱟᱞᱟᱣ ᱟᱱᱟᱜ ᱴᱷᱟᱶ ᱛᱮᱭ ᱨᱚᱲᱼᱮᱫᱟ ᱵᱟᱝ᱾"
+  },
+  "game_action": {
+    "you_drew": "ᱟᱢ ᱠᱟᱨᱰ ᱠᱚᱨᱟᱣ ᱟᱠᱟᱫ ᱢᱮᱭᱟ ᱾",
+    "opponent_drew": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱠᱟᱨᱰ ᱠᱚ ᱪᱮᱛᱟᱱ ᱨᱮ ᱦᱟ.",
+    "you_played": "Am ạrạ {card} ᱠᱷᱮᱞ ᱟᱠᱟᱫᱟᱭ ᱛᱟᱞᱟ ᱯᱟᱭᱞ {index} ᱨᱮ.",
+    "opponent_played": "ᱠᱷᱮᱞᱚᱸᱰᱤ {player_id} ᱫᱚ ᱛᱟᱞᱟ ᱯᱷᱚᱞᱚᱠ {index} ᱨᱮ {card} ᱪᱟᱞᱟᱣ ᱞᱮᱫᱼᱟ.",
+    "you_discarded": "ᱟᱢᱮ ᱯᱷᱚᱞᱚᱠ {index} ᱨᱮ {card} ᱵᱟᱹᱜᱤ ᱞᱮᱫᱼᱟ, ᱡᱟᱦᱟᱸ ᱨᱮᱦᱚᱸ ᱟᱢ ᱟᱢᱟᱜ ᱪᱟᱞᱟᱣ ᱢᱩᱪᱟᱹᱫ ᱞᱮᱫᱼᱟ. ᱟᱢᱟᱜ ᱟᱨ ᱦᱚᱸ ᱪᱟᱞᱟᱣ ᱵᱤᱪᱟᱹᱨᱚᱜ ᱵᱟᱹᱱᱩᱜᱼᱟ. ᱠᱷᱮᱞᱚᱸᱰᱤ {next_player_id} ᱫᱚ ᱛᱟᱭᱚᱢ ᱪᱟᱞᱟᱣ ᱞᱮᱱᱟ.",
+    "opponent_discarded": "ᱠᱷᱮᱞᱚᱸᱰᱤ {player_id} ᱫᱟᱨᱟ {card} ᱫᱤᱥᱠᱟᱨᱰ ᱯᱟᱭᱤᱞ {index} ᱨᱮ ᱫᱤᱥᱠᱟᱨᱰ ᱠᱮᱫᱟ, ᱡᱟᱦᱟᱸ ᱨᱮᱱᱟᱜ ᱢᱮᱱᱮᱛ ᱦᱩᱭᱩᱜ ᱠᱟᱱᱟ ᱩᱱᱠᱩ ᱟᱠᱚᱣᱟᱜ ᱴᱚᱨᱱ ᱯᱩᱨᱟᱹᱣ ᱠᱮᱫᱟ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤ {player_id} ᱟᱜ ᱟᱨ ᱠᱳᱱᱳ ᱠᱟᱹᱢᱤ ᱫᱚ ᱱᱚᱣᱟ ᱴᱚᱨᱱ ᱞᱟᱹᱜᱤᱫ ᱵᱟᱝ ᱦᱩᱭᱩᱜᱼᱟ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤ {next_player_id}, ᱟᱢ ᱮᱱᱠᱷᱟᱱ ᱠᱷᱮᱞᱚᱵ᱾ ᱟᱢᱟᱜ ᱠᱟᱹᱢᱤ [action card center_index] ᱨᱮᱱᱟᱜ ᱯᱷᱚᱨᱢᱮᱴ ᱨᱮ ᱟᱲᱟᱜ ᱢᱮ᱾"
+  },
+  "outcome": {
+    "payoff_cleared": "ᱠᱷᱮᱞᱚᱸᱰᱤ {current_player} ᱫᱚ ᱟᱡᱟᱜ ᱯᱮᱭᱚᱯᱷ ᱯᱷᱚᱞᱚᱠ ᱢᱩᱪᱟᱹᱫ ᱞᱮᱫᱼᱟ! ᱠᱷᱮᱞᱚᱸᱰᱤ {current_player} ᱫᱚ ᱡᱤᱛᱠᱟᱹᱨ ᱞᱮᱱᱟ!",
+    "deadlock_player_0": "ᱵᱟᱹᱲᱛᱤ ᱪᱟᱞᱟᱣ ᱵᱟᱹᱱᱩᱜᱼᱟ! ᱠᱷᱮᱞᱚᱸᱰᱤ ᱐ ᱫᱚ {player_0_payoff} ᱠᱟᱨᱰ ᱥᱟᱨᱮᱡ ᱠᱟᱛᱮ ᱠᱷᱮᱞᱚᱸᱰᱤ ᱑ ᱨᱮᱭᱟᱜ {player_1_payoff} ᱠᱟᱨᱰ ᱛᱮ ᱡᱤᱛᱠᱟᱹᱨ ᱞᱮᱱᱟ.",
+    "deadlock_player_1": "ᱵᱟᱹᱲᱛᱤ ᱪᱟᱞᱟᱣ ᱵᱟᱹᱱᱩᱜᱼᱟ! ᱠᱷᱮᱞᱚᱸᱰᱤ ᱑ ᱫᱚ {player_1_payoff} ᱠᱟᱨᱰ ᱥᱟᱨᱮᱡ ᱠᱟᱛᱮ ᱠᱷᱮᱞᱚᱸᱰᱤ ᱐ ᱨᱮᱭᱟᱜ {player_0_payoff} ᱠᱟᱨᱰ ᱛᱮ ᱡᱤᱛᱠᱟᱹᱨ ᱞᱮᱱᱟ.",
+    "deadlock_tie": "ᱵᱟᱹᱲᱛᱤ ᱪᱟᱞᱟᱣ ᱵᱟᱹᱱᱩᱜᱼᱟ! ᱵᱟᱱᱟᱨ ᱠᱷᱮᱞᱚᱸᱰᱤ {player_0_payoff} ᱠᱟᱨᱰ ᱥᱟᱨᱮᱡ ᱠᱟᱛᱮ ᱢᱮᱱᱟᱜ ᱠᱚᱣᱟ. ᱠᱷᱮᱞᱚᱸᱰᱤ {current_player} ᱫᱚ ᱡᱤᱛᱠᱟᱹᱨ ᱞᱮᱱᱟ."
+  }
+}

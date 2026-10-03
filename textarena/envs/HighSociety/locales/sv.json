@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Du är spelare {player_id} i ett spel av HighSociety (2-spelarversion).\nSpelets gång: Tio prestigekort auktioneras ut ett efter ett.\nBudgivning: Vid varje auktion väljer du i hemlighet ett pengakort 1-11 och avslöjar det.\n            • Högre bud vinner prestigekortet och kastar bort det pengakortet.\n            • Lägre bud behåller sitt pengakort.\n            • Oavgjort -> båda bud returneras och samma prestigekort auktioneras ut igen.\nPoängberäkning: Efter alla tio auktioner adderas **återstående kontanter + prestigepoäng**.\n            Högre *nettoförmögenhet* vinner (exakt oavgjort -> oavgjort).\n\n**Åtgärdssyntax**  →  lägg ett enda bud som '[7]' eller '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Auktion {round}/10  |  Prestigekort: {prize}"
+  },
+  "board": {
+    "money_cards": "Dina återstående pengakort: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Måste innehålla exakt ett [X] pengakort.",
+    "card_not_held": "Du har inte längre det pengakortet."
+  },
+  "message": {
+    "tie": "Oavgjort - bud returnerade. Lägg bud igen!",
+    "auction_result": "P0 la bud {bid0}, P1 la bud {bid1}. Spelare {winner} vinner prestige {prize} (totalt {total})."
+  },
+  "outcome": {
+    "p0_wins": "Nettoförmögenhet {nw0} > {nw1}",
+    "p1_wins": "Nettoförmögenhet {nw1} > {nw0}",
+    "draw": "Båda nettoförmögenheter {nw0} – exakt oavgjort."
+  }
+}

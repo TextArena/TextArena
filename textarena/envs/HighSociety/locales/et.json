@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Oled Mängija {player_id} HighSociety mängus (2-mängija versioon).\nMängu kulgu: Kümme prestiižikaarti on müügil üksteise järel.\nPakkumine: Iga müük, salaja vali raha kaart 1-11 ja avalda.\n            • Kõrgem pakkumine võidab prestiižikaardi ja heidab selle raha kaardi ära.\n            • Madalam pakkumine hoiab oma raha kaardi.\n            • Viik -> mõlemad pakkumised tagastatakse ja sama prestiižikaart müüakse uuesti.\nPunktide arvestus: Pärast kõiki kümme müüki, lisa **järelejäänud sularaha + prestiižipunktid**.\n            Kõrgem *netoväärtus* võidab (täpne viik -> viik).\n\n**Tegevuse süntaks**  →  paku üks kaart nagu '[7]' või '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Müük {round}/10  |  Prestiižikaart: {prize}"
+  },
+  "board": {
+    "money_cards": "Sinu järelejäänud raha kaardid: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Peab sisaldama täpselt ühte [X] raha kaarti.",
+    "card_not_held": "Sul pole enam seda raha kaarti."
+  },
+  "message": {
+    "tie": "Viik - pakkumised tagastatud. Paku uuesti!",
+    "auction_result": "P0 pakkus {bid0}, P1 pakkus {bid1}. Mängija {winner} võitis prestiiži {prize} (kokku {total})."
+  },
+  "outcome": {
+    "p0_wins": "Netoväärtus {nw0} > {nw1}",
+    "p1_wins": "Netoväärtus {nw1} > {nw0}",
+    "draw": "Mõlema netoväärtus {nw0} – täpne viik."
+  }
+}

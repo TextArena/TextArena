@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Mutlangi u ringete ku amukela ntirho handle ko va ni mali leyi lavekaka.",
+    "out_of_range": "Player {player_id}, Nguvo leri ringanisiwa. Koloni {col} i ngana nikati.",
+    "already_full": "Player {player_id}, Nguvo leri ringanisiwa. Koloni {col} i manene.",
+    "proposing_with_no_resource": "Mutlangi {player_id} u ringete ku endla xiringanyeto xa bindzu handle ko va ni switirhisiwa leswi lavekaka.",
+    "incorrect_offer_format": "Mutlangi {player_id} u endle xiringanyeto xo cinca hi ndlela leyi hoxeke.",
+    "no_new_offer": "Mutlangi {player_id} a nga endlanga xiringanyeto xin'wana xa ku cincana."
+  },
+  "offers": {
+    "reject": "Mutlangi {player_id} u ale ku cincisana.",
+    "accept": "Mutlangi {acceptor_id} u amukele nyiko ya mutlangi wa le handle {proposer_id}.",
+    "proposal": "Mukhahlela {player_id} u endle xiprofeto lexi landzelaka eka Mukhahlela {opponent_id}: Switirhisiwana leswi Ofiriwaka: {offered} -> Switirhisiwana leswi Swi Lavaka: {requested}"
+  },
+  "outcome": {
+    "win": "Mutlangi {winner_id} u hlurile hi ku va na mbuyelo lowukulu eka nxavo wa nhundzu.",
+    "draw": "Ku cinca loku fanaka eka nkoka wa nhundzu ya vatlangi hinkwavo."
+  }
+}

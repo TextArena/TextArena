@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Du bass Spiller {player_id} an Three-Player GOPS.\n- Du hues 13 Kaarten A-K (jiddwer genee eemol).\n- An all Rond gëtt e Präis gewisen. Gitt ENG Kaart wéi `[Q]`, `[10]`, `[2]` …\n- Déi héchst Kaart gewënnt de Präis (+ all iwwerdroe Pot). Gläichspill rollt de Präis an déi nächst Rond.\n- No 13 Ronden, gewënnt déi héchst Gesamtpunktzuel. Ongülteg Zich = Eliminatioun."
+  },
+  "round": {
+    "header": "### Ronn {round}/13 - Präis: {prize} (wäert {worth})",
+    "hand": "Är Rescht Hand: {hand}"
+  },
+  "reveal": {
+    "win": "Bieder  {bids} - Spiller {winner} gewënnt {pot}.",
+    "tie": "Bieder  {bids} - Krawatz, Pot elo {pot}.",
+    "scores": "Scores → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "D'Aktioun brauch eng Klammerkaart wéi \"[Q]\"",
+    "bad_card": "Kaart scho benotzt oder ongülteg"
+  },
+  "elimination": {
+    "player": "Spiller {pid} eliminéiert no widderholl ongülteg Bewegungen."
+  },
+  "outcome": {
+    "auto_win": "Zwee Spiller eliminéiert - automatesch Gewënn.",
+    "final": "Finale Punkte: {scores}"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Estás jugando a Mastermind.\nDebes encontrar el código de {code_length} dígitos, donde cada dígito está entre 1 y {num_numbers}, {repeats}.\nEn tu respuesta, puedes enviar tu intento con el siguiente formato: '[2 1 4 5]'.\nDespués de cada intento, recibirás información en forma de clavijas negras y blancas.\nUna clavija negra indica un dígito correcto en la posición correcta, mientras que una clavija blanca indica un dígito correcto en la posición incorrecta.\nTienes {max_turns} turnos para adivinar el código.\n",
+    "with_repeats": "con posibles repeticiones",
+    "no_duplicates": "sin dígitos repetidos"
+  },
+  "invalid_move": {
+    "wrong_format": "No respondiste con una lista de números separados por espacios y encerrada entre corchetes.",
+    "not_integers": "Todas las entradas deben ser números enteros válidos.",
+    "wrong_length": "El intento debe contener exactamente {code_length} números.",
+    "out_of_range": "Todos los números deben estar entre 1 y {num_numbers}.",
+    "duplicates_not_allowed": "No se permiten números duplicados.",
+    "repeated_guess": "Ya intentaste {guess}. Prueba con un intento diferente."
+  },
+  "game_action": {
+    "feedback": "Se envió [{guess}]. Resultado: {black_pegs} clavija(s) negra(s), {white_pegs} clavija(s) blanca(s)."
+  },
+  "outcome": {
+    "win": "Has descifrado el código y acertado correctamente {black_pegs} de {code_length} clavijas",
+    "turn_limit": "Se alcanzó el límite de turnos. Adivinaste correctamente el {percent} por ciento de los números."
+  }
+}

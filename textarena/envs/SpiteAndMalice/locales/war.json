@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw an Manggarana {player_id} ha duha-ka-manggarana nga karera han Spite and Malice. An imo panguna nga katuyoan amo an maging an syahan nga makawarak han imo payoff pile.\n\n### Pangkagawas han Karera:\n- An katuyoan amo an pagwarak han imo payoff pile pinaagi han pagganar han mga baraha ha mga center piles.\n- Pwede ka magganar han mga baraha ha talo nga mga ginagamit:\n  1. An imo **kamot** (ikaw nagsasabi han tagsa turno nga mayda hangto 5 ka mga baraha ha kamot).\n  2. An **ibabaw nga baraha han imo payoff pile**.\n  3. An **ibabaw nga baraha han imo discard pile**.\n\n### Mga Pamaagi han Pagganar:\n- Pwede ka magganar han baraha ha center pile kon ito amo an **usa ka rank nga harayo** han ibabaw nga baraha ha pile (an mga center piles nagsasabi han Ace ngan nag-agi ha Queen; an mga Hadi amo an wild - pwede ini maganar ha bisan ano nga baraha pero diri nagbubulag han rank sequence. Ini nga kun an Hadi ginpakig-an han 4, kun diin an Hadi amo an rank 5 ngan an sunod nga baraha amo an 6).\n- Kon diri ka makaganar han bisan ano nga baraha, kinahanglan ka **mag-discard han baraha** ha imo discard pile para matapos an imo turno.\n- Kon an center pile nakaratan han Queen, ini amo an awtomatikong gin-warak.\n- An rank order amo an: A=1, 2=2, ..., 9=9, J=10, Q=11, K komo an wild.\n\n### Mga Aksyon:\n1. **Draw**: Ha syahan han imo turno, draw an mga baraha para mapuno an imo kamot hangto 5 ka mga baraha. Enter **[draw]** para magsabi.\n2. **Ganari an Baraha**: Para maganar han baraha, ispesipika an baraha ngan an center pile komo ini: **[play A♠ 0]** (kun diin an 'A♠' amo an baraha ngan an '0' amo an center pile index).\n3. **Discard**: Kon diri ka makaganar han bisan ano nga baraha, discard an baraha ha imo kamot ha discard pile para matapos an imo turno. Enter **[discard A♠ 1]** (kun diin an 'A♠' amo an baraha ngan an '1' amo an discard pile index). Ha nota, diri ka pwede mag-discard han bisan ano nga baraha ha payoff pile. Pwede ka la mag-discard han mga baraha ha imo kamot.\n\n"
+  },
+  "board": {
+    "current_board": "Karuhaan nga Bangga:\n\n{board}\nMga Baraan nga Mugna: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Mga Pilo ha Butnga nga Sentro -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- An View han Manggarana {player_id} ---\n",
+    "payoff": "{observation}Payoff Pile (Ibabaw nga Baraha): {top_card}, Payoff Pile Length: {payoff_length}\n",
+    "hand": "{observation}Kamot: {hand}\n",
+    "discard": "{observation}Mga Discard Pile: {discard}\n",
+    "empty": "Waray sulod."
+  },
+  "game_message": {
+    "no_cards_left": "Waray na mga kard nga puydi mo kuhaon. Hinumdumi nga mahimo ka mag-play hin cards tikang hini nga mga surok: 1. An imo kamot 2. An top card han imo payoff pile 3. An topcard ha bisan ano han imo discard piles "
+  },
+  "invalid_move": {
+    "wrong_format": "Sayop nga format han liwat. An Player {player_id} diri naghatag hin usa ka balido nga liwat ha kwadrado nga mga braket.",
+    "invalid_play": "Sayop nga pagmulay. An Player {player_id} nagtikang magmulay hin {card} ha butnga nga pile {index}.",
+    "discard_from_payoff": "An player {player_id} in nag-ihahatag hin pagbulag han iya card tikang ha payback pile.",
+    "discard_not_in_hand": "An player {player_id} in nag-ihahatag hin card nga diri aada ha iya kamot.",
+    "wrong_move_type": "Sayop nga tipo han liwat. An Player {player_id} diri naghatag hin usa ka balido nga tipo han liwat."
+  },
+  "game_action": {
+    "you_drew": "Nagkuhai ka hin mga karta.",
+    "opponent_drew": "An manlalaro {player_id} nag-iibot hin mga kard.",
+    "you_played": "Nagdudula ka {card} ha butnga nga pila {index}.",
+    "opponent_played": "An manlalaro {player_id} nag-iirog hin {card} ha butnga nga pila {index}.",
+    "you_discarded": "Nag-discard ka han {card} ha discard pile {index}, nga kun diin nakuha mo an imo turno. Waray pa la nga mga aksyon an imo nga igin-gawas para han turno nga ini. An Manggarana {next_player_id} an sunod nga mugna.",
+    "opponent_discarded": "An Manggarana {player_id} nag-discard han {card} ha discard pile {index}, nga kun diin nakuha niya an iya turno. Waray pa la nga mga aksyon an Manggarana {player_id} nga igin-gawas para han turno nga ini. Manggarana {next_player_id}, ikaw an sunod nga mugna. Paki-enter an imo aksyon ha format nga [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "An Manggarana {current_player} nakatapos han iya payoff pile! An Manggarana {current_player} an nanalo!",
+    "deadlock_player_0": "Nakaratan han deadlock! An Manggarana 0 an nanalo nga mayda {player_0_payoff} ka mga baraha nga natitira kontra han Manggarana 1 nga mayda {player_1_payoff} ka mga baraha.",
+    "deadlock_player_1": "Nakaratan han deadlock! An Manggarana 1 an nanalo nga mayda {player_1_payoff} ka mga baraha nga natitira kontra han Manggarana 0 nga mayda {player_0_payoff} ka mga baraha.",
+    "deadlock_tie": "Nakaratan han deadlock nga may tie! An mga manggarana mayda {player_0_payoff} ka mga baraha nga natitira. An Manggarana {current_player} an nanalo pinaagi han default."
+  }
+}

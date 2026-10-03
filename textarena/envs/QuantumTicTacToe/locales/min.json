@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Anda adolah Pemain {player_id} dalam Quantum Tic Tac Toe.\nSimbol Anda adolah '{symbol}', dan nomor giliran Anda selalu {parity} (misalnyo, X1, X3 atau O2, O4).\n\nTujuan: Manang jo mambantuak garis tigo tando klasik (dipadatkan dari superposisi).\n\nCara Main:\n- Pado satiok giliran, tampekkan tando mengerikan pado duo kotak kosong nan babeda manggunoan format '[a,b]'.\n- Tando-tando iko kusut, dan dilabeli sarupo 'X1 / X1' atau 'O4 / O4'.\n- Anda indak dapek tampekkan tando mengerikan pado kotak nan alah runtuh (dipadatkan).\n\nAturan Runtuh:\n- Jiko giliran Anda mambuek siklus dalam grafik kusut, inyo runtuh sacaro otomatis.\n- Satu tando mengerikan pado siklus barubah manjadi tando klasik pado salah satu posisinyo.\n- Tando mengerikan nan tagantuang juo runtuh.\n\nKamanangan:\n- Pemain barakhia katiko pemain mamiliki tigo tando klasik baris.\n- Jiko kaduo pemain mandapek garis pado runtuh nan samo, nan mamiliki nomor giliran max labiah randah manang.\n\nContoh giliran: '[0,4]' tampekkan tando mengerikan pado sel 0 dan 4."
+  },
+  "board": {
+    "current_board": "Papan Tic Tac Toe Kuantum:\n\n{board}\n\nKirimkan langkah Anda sebagai '[a,b]' untuk meletakkan tanda kuantum di dua lokasi."
+  },
+  "invalid_move": {
+    "wrong_format": "Format indak sah. Gunakannyo \"[a,b]\".",
+    "invalid_cells": "Indeks sel indak sah atau nan diduplikasi.",
+    "already_solidified": "Salah satu selnyo lah mati."
+  },
+  "game_action": {
+    "placed": "Pemain {player_id} meletakkan simbol mereka dalam superposisi antara sel {pos_a} dan {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposisi tergantung telah terpecahkan. Sel ({r}, {c}) sekarang {symbol}.",
+    "last_cell_resolved": "Superposisi untuk sel terakhir telah terpecahkan. Sel ({r}, {c}) sekarang {symbol}.",
+    "superposition_resolved": "Superposisi telah terpecahkan. Sel ({r}, {c}) sekarang {symbol}."
+  },
+  "outcome": {
+    "win": "Pamain {player_id} manang jo nilai nan lah mantap!",
+    "draw": "Pertandingan ko adolah undian seri!"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Você está jogando com a cor {color} em um jogo de Breakthrough. Você se move {direction} em um tabuleiro de {board_size}x{board_size}.\nEm sua vez, você pode mover uma única peça um passo para frente ou diagonalmente para frente.\nUma peça só pode se mover diagonalmente se houver uma peça do oponente lá, e só pode se mover para essa casa pré-ocupada em um passo diagonal.\nAo entrar em uma casa com uma peça do oponente, você a captura e a peça do oponente é removida permanentemente do tabuleiro.\nUse notação UCI em colchetes, por exemplo, [a2a3] para mover de a2 para a3.\n* 'a' corresponde à coluna mais à esquerda, '1' é a linha inferior (da perspectiva do Branco).\n* A linha de casa do Preto é a linha superior (linha 8 para um 8x8). A linha de casa do Branco é a linha inferior (linha 1 para um 8x8).\nO primeiro jogador cuja peça alcança a linha de casa do oponente vence. Se todas as suas peças forem capturadas, você perde."
+  },
+  "invalid_move": {
+    "wrong_format": "Por favor, use notação algébrica em colchetes, como [a2a3].",
+    "out_of_bounds": "O movimento está fora dos limites do tabuleiro.",
+    "illegal": "Esse movimento não segue as regras do Breakthrough ou não é sua peça."
+  },
+  "game_action": {
+    "moved": "O Jogador {player_id} move {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "O Branco alcançou a linha de casa do Preto.",
+    "black_reached": "O Preto alcançou a linha de casa do Branco.",
+    "white_captured": "Todas as peças do Branco foram capturadas.",
+    "black_captured": "Todas as peças do Preto foram capturadas.",
+    "no_moves": "O Jogador {player_id} não tem mais movimentos."
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Ũrang'ania Golf (Mchezo wa Karata) - Mchezaji {player_id}.\nLengo: Pata alama ndogo zaidi katika mzunguko huu mmoja. Ikiwa safu wana thamani sawa, zinaongezwa kama 0.\nThamani za Karata: A=1, 2-10=thamani ya uso, J/Q=10, K=0\n\nVitendo (tumia mabano kamili):\n- '[draw]' - Chora kutoka kwenye sitaha\n- '[take]' - Chukua kutoka kwenye mchanga wa karata zilizotupwa\n- '[swap X Y]' - Badilisha karata iliyochorwa na nafasi X (safu) Y (safu wima)\n- '[discard]' - Tupwa karata iliyochorwa\n"
+  },
+  "board": {
+    "drew": "Ũchora: {card}\nSasa lazima u[swap X Y] au [discard] iyo.",
+    "took": "Ũchukua: {card} kutoka kwenye mchanga wa karata zilizotupwa\nLazima u[swap X Y] nayo (huwezi kuitupa).",
+    "peeked": "Umeangalia nafasi ({row},{col}): {card}",
+    "turn_view": "Mkono wako:\n{hand}\nKundi la kadi zilizotupwa: {discard}\n{options}",
+    "none": "Gũtirĩ."
+  },
+  "options": {
+    "final_turns": "Mizunguko ya mwisho! Chaguo zako: [draw], [take], [peek X Y]",
+    "draw": "Chaguo zako: [draw], [take]",
+    "must_swap": "No mũhaka: [swap X Y] (ndũngĩhota gũteithũra kaarĩki kuuma gĩthũri-inĩ gĩa kũrehera)",
+    "swap_or_discard": "Unahitaji: [swap X Y] au [discard]"
+  },
+  "hand": {
+    "no_cards": "Gũtirĩ kaarĩ.",
+    "header": "Gĩkũyũ: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Mchezaji {pid} alibadilisha {new} na {old} katika nafasi ({row},{col})",
+    "discarded": "Mchezaji {pid} alitupa {card}"
+  },
+  "message": {
+    "deck_empty": "Gĩikaro nĩ gĩtheru, na mũbira ũrarĩkia o rĩu.",
+    "knocked": "Mchezaji {pid} aligonga! Kila mchezaji mwingine anapata zamu moja zaidi.",
+    "final_round": "Mchezaji {pid} {reason}! Kila mchezaji mwingine anapata zamu moja zaidi."
+  },
+  "reason": {
+    "all_revealed": "hihi karati ciothe nĩ cionekete?"
+  },
+  "invalid": {
+    "wrong_action": "Tumia hatua moja iliyo na mabano: [draw], [take], [swap X Y], [discard], [knock], au [peek X Y]",
+    "discard_empty": "Kĩgathĩ kĩa indo iria itarĩ bata nĩ gĩtarĩ na kĩndũ!",
+    "must_draw_first": "Unahitaji kwanza [draw], [take], [knock], au [peek X Y]",
+    "cannot_discard_taken": "Ndũngĩhota kũruta kadi kuuma harĩ iria ingĩ, no mũhaka ũcinyanĩre.",
+    "have_drawn_card": "Ũna karata iliyochorwa. Lazima u[swap X Y] au [discard] iyo.",
+    "need_drawn_swap": "Nĩ ũbataraga kũhũthĩra kadi ya gũcũhia nĩguo ũtwarane.",
+    "need_drawn_discard": "Nĩ ũbataraga karati ya kũgucia nĩguo wĩte.",
+    "out_of_bounds": "Nafasi nje ya mipaka. Tumia safu 1-{max_row}, safu wima 1-{max_col}",
+    "knock_with_card": "Ndũngĩhũũra mũrango ũrĩ na kaarĩ gacoketio. Wambe ũhingie ithaa rĩaku rĩa mbere.",
+    "already_knocked": "Mũndũ ũmwe nĩ aakoretwo akĩhũũra mũbira ũyũ.",
+    "already_revealed": "Kaarĩ kau nĩ karĩkĩtie kuoneka!"
+  },
+  "summary": {
+    "full": "Mchezo Umeisha! Mchezaji {winner} anashinda na alama {score}!\n\nAlama za Mwisho:\n{scores}",
+    "line": "Mchezaji {pid}: alama {score}\n"
+  },
+  "board_str": {
+    "title": "=== GĨTŨMBO KYA GOLF===",
+    "discard": "Kũruta mũbira: {card}",
+    "knocked": "Mũthaaki {pid} nĩ ahũrũkire!",
+    "player_header": "Mwathani {pid} (Alama: {score}):"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Plik językowy ThreeCardMonte. NIE TŁUMACZ kluczy (lewa strona). Tłumacz tylko wartości (prawa strona).",
+  "_slots": {
+    "{line}": "Wyrenderowany rząd kubków",
+    "{step}": "Aktualny numer kroku tasowania",
+    "{steps}": "Całkowita liczba kroków tasowania",
+    "{i}": "Pierwszy indeks kubka biorącego udział w zamianie",
+    "{j}": "Drugi indeks kubka biorącego udział w zamianie",
+    "{prompt}": "Zlokalizowany fragment monitu dołączony po kubkach",
+    "{max_index}": "Najwyższy ważny indeks kubka, tj. num_cups-1",
+    "{ball_pos}": "Indeks kubka, pod którym znajduje się piłka"
+  },
+  "player_prompt": {
+    "intro": "Śledź ukrytą piłkę 'X', gdy kubki są tasowane.\nPo tasowaniu odgadnij jej lokalizację za pomocą `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Początek piłki: {line}",
+    "shuffle": "Tasowanie {step}/{steps}: zamieniono kubki {i} i {j}.",
+    "cups": "Kubki: {line}  {prompt}",
+    "guess_now": "(Zgadnij TERAZ!)",
+    "reveal": "(Odsłonięcie: piłka pod {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Zła akcja. Użyj `[k]`.",
+    "out_of_range": "Indeks poza zakresem 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Poprawnie! Znaleziono piłkę.",
+    "lose": "Źle — piłka była pod kubkiem {ball_pos}."
+  }
+}

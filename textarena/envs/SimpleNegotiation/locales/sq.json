@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në Lojën e Negocimit.\nJu keni disa burime dhe detyra juaj është të tregtoni në mënyrë që vlera totale e burimeve tuaja të rritet.\nBurimet dhe vlerat përkatëse që aktualisht keni janë:\n\t+ {resource_value_list}\nNë çdo radhë, mund të flisni me kundërshtarin tuaj dhe të bëni një ofertë tregtie.\nPërdorni tokenat e veçantë të mëposhtëm për veprime:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Burimet e Ofruara -> Burimet e Kërkuara]\n  - '[Accept]': Për të pranuar një ofertë të ardhshme.\n  - '[Deny]': Për të refuzuar një ofertë të ardhshme (parazgjedhje).\nLoja zgjat për {max_turns} radhë në total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Lojtari u përpoq të pranojë një tregti pa pasur burimet e nevojshme.",
+    "out_of_range": "Lojtari {player_id}, Veprim i pavlefshëm. Kolona {col} është jashtë kufijve.",
+    "already_full": "Lojtari {player_id}, Veprim i pavlefshëm. Kolona {col} është e plotë.",
+    "proposing_with_no_resource": "Lojtari {player_id} u përpoq të bëjë një ofertë tregtie pa pasur burimet e nevojshme.",
+    "incorrect_offer_format": "Lojtari {player_id} bëri një ofertë tregtie në një format të gabuar.",
+    "no_new_offer": "Lojtari {player_id} nuk bëri asnjë ofertë tregtie të re."
+  },
+  "offers": {
+    "reject": "Lojtari {player_id} refuzoi ofertën e tregtisë.",
+    "accept": "Lojtari {acceptor_id} pranoi ofertën e tregtisë nga Lojtari {proposer_id}.",
+    "proposal": "Lojtari {player_id} bëri ofertën e mëposhtme për Lojtarin {opponent_id}: Artikuj të ofruar: {offered} -> Artikuj të kërkuar: {requested}"
+  },
+  "outcome": {
+    "win": "Lojtari {winner_id} fitoi duke pasur një përfitim më të madh në vlerën e inventarit.",
+    "draw": "Ndryshim i njëjtë në vlerën e inventarit për të gjithë lojtarët. Barazim."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ti seet Giugador {player_id} in Tic Tac Toe Quantistich.\nEl tò simbol l'è '{symbol}', e i numer de la tò mossa hinn semper {parity} (per esempi, X1, X3 o O2, O4).\n\nObietiv: Vinci formand una linea de tri march classich (solidificaa da superposizion).\n\nComa Giugà:\n- A ogni gir, mett una marca spaventosa in du quadrati divers e voeui doprà el format '[a,b]'.\n- Quest march hinn intrecciaa, e etichettaa 'me 'X1 / X1' o 'O4 / O4'.\n- Ti podet minga mett march spaventos in d'un quadrat che l'è giamò collapsaa (solidificaa).\n\nRegola de Collaps:\n- Se la tò mossa la crea un cicli in del graf de l'intrecci, la collapsa in automatic.\n- Ogni marca spaventosa in del cicli la se trasforma in d'una marca classica in vuna di sò du posizion.\n- I march spaventos dipendent collapsen anca lor.\n\nVittoria:\n- El giugh el finiss quand un giugador el gh'ha tri march classich in fila.\n- Se tucc du giugador ciapen una linea in del collaps istess, el vincitor l'è quell con el numer de mossa pussee bass.\n\nEsempi de mossa: '[0,4]' el mett una marca spaventosa in di cel 0 e 4."
+  },
+  "board": {
+    "current_board": "Tavola de Tic Tac Toe Quantistich:\n\n{board}\n\nMandà la tò mossa 'me '[a,b]' per mett una marca quantistica in du posizion."
+  },
+  "invalid_move": {
+    "wrong_format": "Format minga valid. Dopra '[a,b]'.",
+    "invalid_cells": "Indici de cel minga valid o doppii.",
+    "already_solidified": "Una de le cellule l'è già solidificàda."
+  },
+  "game_action": {
+    "placed": "El Giugador {player_id} l'ha mettuu el sò simbol in d'una superposizion tra i cel {pos_a} e {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposizion dipendenta resolta. La cel ({r}, {c}) l'è adess {symbol}.",
+    "last_cell_resolved": "Superposizion per l'ultima cel resolta. La cel ({r}, {c}) l'è adess {symbol}.",
+    "superposition_resolved": "Superposizion resolta. La cel ({r}, {c}) l'è adess {symbol}."
+  },
+  "outcome": {
+    "win": "Gioca {player_id} vince con i segni solidificà!",
+    "draw": "La partìa l'è pareggia!"
+  }
+}

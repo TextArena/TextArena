@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} a **Ultimate Tic Tac Toe**.\nEnvia el teu moviment com **[macro  micro]** (dos números 0-8):\n• *macro*  = en quin mini-tauler jugues\n• *micro* = en quin quadrat dins d'aquest mini-tauler\nExemple `[7 8]` ➜ col·loca la teva marca al mini-tauler 7, quadrat 8, i\nobliga el teu oponent a jugar al mini-tauler 8 següent.\n\nEts `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Tauler actual:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "El moviment ha de ser en el format [macro micro] amb números 0-8.",
+    "out_of_range": "Els índexs han de ser entre 0 i 8.",
+    "index_out_of_range": "El mini-tauler, fila o columna és fora de rang.",
+    "cell_occupied": "La cel·la ja està ocupada.",
+    "wrong_micro_board": "El jugador ha de jugar al següent mini-tauler.",
+    "micro_board_won": "El mini-tauler ja està guanyat."
+  },
+  "next_board": {
+    "any": "qualsevol mini-tauler",
+    "specific": "mini-tauler {nxt}"
+  },
+  "game_action": {
+    "played": "El Jugador {player_id} ha jugat al mini-tauler {macro_idx}, cel·la {micro_idx} (fila {row}, columna {col}). El Jugador {opponent_id} ha de jugar ara a {nxt_txt}."
+  },
+  "outcome": {
+    "win": "El Jugador {player_id} guanya Ultimate Tic Tac Toe!",
+    "draw": "El joc és un empat!"
+  }
+}

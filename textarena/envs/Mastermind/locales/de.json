@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Du spielst Mastermind.\nDu musst den Code finden, der {code_length} Ziffern lang ist. Jede Ziffer liegt zwischen 1 und {num_numbers}, {repeats}.\nIn deiner Antwort kannst du deinen Tipp im folgenden Format abgeben: '[2 1 4 5]'.\nNach jedem Tipp erhältst du eine Rückmeldung in Form schwarzer und weißer Stifte.\nEin schwarzer Stift steht für eine richtige Ziffer an der richtigen Position, während ein weißer Stift für eine richtige Ziffer an der falschen Position steht.\nDu hast {max_turns} Züge, um den Code zu erraten.\n",
+    "with_repeats": "wobei Wiederholungen möglich sind",
+    "no_duplicates": "ohne doppelte Ziffern"
+  },
+  "invalid_move": {
+    "wrong_format": "Du hast nicht mit einer durch Leerzeichen getrennten Zahlenliste in eckigen Klammern geantwortet.",
+    "not_integers": "Alle Einträge müssen gültige ganze Zahlen sein.",
+    "wrong_length": "Der Tipp muss genau {code_length} Zahlen enthalten.",
+    "out_of_range": "Alle Zahlen müssen zwischen 1 und {num_numbers} liegen.",
+    "duplicates_not_allowed": "Doppelte Zahlen sind nicht erlaubt.",
+    "repeated_guess": "Du hast {guess} bereits geraten. Bitte versuche einen anderen Tipp."
+  },
+  "game_action": {
+    "feedback": "[{guess}] abgegeben. Rückmeldung: {black_pegs} schwarze(r) Stift(e), {white_pegs} weiße(r) Stift(e)."
+  },
+  "outcome": {
+    "win": "Du hast den Code geknackt und {black_pegs} von {code_length} Stiften korrekt gelöst",
+    "turn_limit": "Das Zuglimit wurde erreicht. Du hast {percent} Prozent der Zahlen richtig erraten."
+  }
+}

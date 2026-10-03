@@ -1,0 +1,55 @@
+{
+  "_comment": "Användarorienterade strängar för Liar's Dice. Parenteserade åtgärdstoken ('[Bud: X, Y]', '[Anropa]'), spelar-id, tärningsvärden, kvantiteter och räkningar är neutrala platser och får aldrig översättas.",
+  "_slots": {
+    "player_id": "spelarindex (heltal)",
+    "num_players": "antal spelare i spelet (heltal)",
+    "dice_summary": "förrenderad '; '-sammansatt lista över varje spelares återstående tärningsantal",
+    "your_dice": "förrenderad komma-sammansatt lista över denna spelares tärningsvärden",
+    "p": "spelarindex (heltal)",
+    "d": "återstående tärningsantal för den spelaren (heltal)",
+    "current_player_id": "spelarindex som anropade (heltal)",
+    "face_value": "tärningsvärde som räknas (1-6)",
+    "count": "faktiskt antal matchande tärningar (heltal)",
+    "quantity": "budkvantitet (heltal)",
+    "loser_id": "spelarindex som förlorar en tärning (heltal)",
+    "new_quantity": "ny budkvantitet som just skickats in (heltal)",
+    "current_quantity": "nuvarande budkvantitet (heltal)",
+    "new_face_value": "nytt tärningsvärde som just skickats in (heltal)",
+    "current_face_value": "nuvarande tärningsvärde (heltal)",
+    "action": "den råa åtgärdssträngen som spelaren skickade in",
+    "reason": "en kapslad budavvisningsorsak",
+    "winner": "spelarindex som vinner (heltal)",
+    "final_ranking": "lista över spelarindex från första eliminerade till vinnare"
+  },
+  "player_prompt": {
+    "intro": "Du är Spelare {player_id} i ett {num_players}-spelarspel av Liar's Dice.\nRegler:\n- På din tur kan du antingen:\n  1) Gör ett nytt bud med en högre kvantitet eller högre tärningsvärde (eller båda) än det nuvarande budet; dvs. '[Bid: 3, 4]',\n  2) Anropa det sista budet genom att skriva '[Call]'.\n\nOm du anropar:\n  - Om det faktiska antalet av det tärningsvärdet bland alla tärningar är mindre än budet, förlorar den sista budgivaren en tärning.\n  - Annars förlorar anroparen en tärning.\nEn spelare som når 0 tärningar elimineras. Den sista återstående spelaren vinner."
+  },
+  "board": {
+    "per_player": "\tSpelare {p}: {d}",
+    "new_round": "\nNy runda - Återstående tärningar: {dice_summary}\nDina nuvarande tärningar är: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Spelare {current_player_id} anropar! Det faktiska antalet av tärningsvärde {face_value} är {count}, vilket är MINDRE än {quantity}.\nSpelare {loser_id} (den sista budgivaren) förlorar en tärning.",
+    "caller_loses": "Spelare {current_player_id} anropar! Det faktiska antalet av tärningsvärde {face_value} är {count}, vilket är >= {quantity}.\nSpelare {loser_id} (anroparen) förlorar en tärning."
+  },
+  "action": {
+    "bid_announce": "Spelare {player_id} budar {quantity} av tärningsvärde {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Anrop gjordes utan föregående bud.",
+    "invalid_bid": "Ogiltigt bud: {reason}",
+    "not_recognized": "Åtgärd känns inte igen som antingen ett giltigt '[Bid: X, Y]' eller '[Call]'. Inskickad åtgärd: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Ny kvantitet {new_quantity} är lägre än nuvarande {current_quantity}.",
+    "face_lower": "Nytt tärningsvärde {new_face_value} är lägre än nuvarande {current_face_value}.",
+    "identical": "Budet är identiskt med det nuvarande budet.",
+    "face_range": "Tärningsvärde måste vara mellan 1 och 6."
+  },
+  "message": {
+    "eliminated_invalid": "Spelare {player_id} eliminerades av ogiltig åtgärd."
+  },
+  "outcome": {
+    "win": "Spelare {winner} vinner! Slutlig ranking: {final_ranking}"
+  }
+}

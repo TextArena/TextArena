@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Žaidžiate {color} žaidime Breakthrough. Judate {direction} ant {board_size}x{board_size} lentos.\nSavo ėjime galite pajudėti vieną figūrą vienu žingsniu į priekį arba įstrižai į priekį.\nFigūra gali judėti įstrižai tik jei ten yra priešininko figūra, ir tik į tokią užimtą langelį įstrižu žingsniu.\nŽengdami į langelį su priešininko figūra, ją užgaunate, o priešininko figūra pašalinama nuolat iš lentos.\nNaudokite UCI panašią notaciją skliaustuose, pvz. [a2a3] pajudėti iš a2 į a3.\n* 'a' atitinka kairiausią stulpelį, '1' yra apačioje esanti eilutė (iš Baltųjų perspektyvos).\n* Juodųjų namų eilutė yra viršutinė eilutė (eilutė 8 ant 8x8 lentos). Baltųjų namų eilutė yra apačioje esanti eilutė (eilutė 1 ant 8x8 lentos).\nPirmasis žaidėjas, kurio figūra pasiekia priešininko namų eilutę, laimi. Jei visos jūsų figūros yra užgautos, pralaimite."
+  },
+  "invalid_move": {
+    "wrong_format": "Prašome naudoti skliaustuose algebraišką notaciją, pvz. [a2a3].",
+    "out_of_bounds": "Ėjimas yra už lentos ribų.",
+    "illegal": "Šis ėjimas nepaklūsta Breakthrough taisyklėms arba tai ne jūsų figūra."
+  },
+  "game_action": {
+    "moved": "Žaidėjas {player_id} pajudėjo {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Baltieji pasiekė Juodųjų namų eilutę.",
+    "black_reached": "Juodieji pasiekė Baltųjų namų eilutę.",
+    "white_captured": "Visos Baltųjų figūros užgautos.",
+    "black_captured": "Visos Juodųjų figūros užgautos.",
+    "no_moves": "Žaidėjas {player_id} nebeturi ėjimų."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} ({piece}). Der Gegner ist ({opp}).\nGib Züge im Format '[a2 a3]' ein (von → nach).\n- Ein normaler Zug ist ein Schritt vorwärts zu einem benachbarten freien Knoten.\n- Ein Schlag ist ein Sprung über einen benachbarten gegnerischen Spielstein auf den freien Knoten dahinter.\nJeder Schlag bringt {score_per_capture} Punkte.\nDas Spiel endet nach {max_moves} Zügen oder wenn ein Spieler keinen legalen Zug mehr hat."
+  },
+  "board": {
+    "current_board": "Zug Nr. {move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "Ungültiges Format. Verwende '[a2 a3]'.",
+    "unknown_square": "Unbekanntes Feld.",
+    "not_your_piece": "Auf dem Ausgangsfeld befindet sich nicht dein Spielstein.",
+    "dest_not_empty": "Das Zielfeld ist nicht leer.",
+    "illegal": "Ungültiger Zug."
+  },
+  "game_action": {
+    "captured": "Spieler {player_id} hat einen Spielstein geschlagen! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Spieler {player_id} hat keine Spielsteine mehr.",
+    "cannot_move": "Spieler {player_id} kann keinen Zug ausführen.",
+    "higher_score": "Höhere Schlagpunktzahl.",
+    "move_limit": "Das Zuglimit wurde erreicht."
+  }
+}

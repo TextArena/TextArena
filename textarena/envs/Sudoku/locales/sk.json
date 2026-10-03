@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id}. Hrajete Sudoku.\nTu je aktuálny stav Sudoku mriežky. Každý riadok je očíslovaný od 1 do 9 a každý stĺpec je tiež očíslovaný od 1 do 9.\nPrázdne bunky sú reprezentované znakom '.', a predvyplnené bunky obsahujú čísla od 1 do 9.\n\nAktuálna Sudoku mriežka:\nVáš cieľ je vyplniť prázdne bunky v 9x9 mriežke číslami od 1 do 9 tak, aby:\n1. Každý riadok obsahoval všetky čísla od 1 do 9 bez opakovania.\n2. Každý stĺpec obsahoval všetky čísla od 1 do 9 bez opakovania.\n3. Každá z deviatich 3x3 podmriežok obsahovala všetky čísla od 1 do 9 bez opakovania.\n\nPravidlá a inštrukcie:\n1. **Neprepisujte** pôvodné čísla uvedené v mriežke.\n2. **Vyplňte iba** prázdne bunky reprezentované znakom '.'.\n3. Môžete odpovedať ľubovoľným spôsobom, ale uistite sa, že váša odpoveď obsahuje formát '[riadok stĺpec číslo]'.\n4. **Zabezpečte**, aby váš ťah neporušil pravidlá Sudoku. Neplatné ťahy budú mať za následok penalizáciu.\nPríklady:\n- **Platný Ťah**:\n  - Výňatek mriežky pred ťahom:\n  \n  - Ťah: `[5 3 7]`\n  - Vysvetlenie: Umiesťovanie čísla 7 na riadok 5, stĺpec 3 neporušuje žiadne pravidlá Sudoku.\n\n- **Neplatný Ťah** (Prepísanie predvyplnenej bunky):\n  - Výňatek mriežky pred ťahom:\n  \n  - Ťah: `[1 1 9]`\n  - Vysvetlenie: Bunka (1,1) je už vyplnená číslom 5. Nemôžete ju prepísať.\n\n- **Neplatný Ťah** (Porušenie pravidiel Sudoku):\n  - Výňatek mriežky pred ťahom:\n  \n  - Ťah: `[1 3 5]`\n  - Vysvetlenie: Umiesťovanie čísla 5 na riadok 1, stĺpec 3 porušuje pravidlo, pretože číslo 5 už existuje na riadku 1.\n\nHistória vašich ťahov a myšlienok bude pripojená ako budete hrať ďalšie kolo. Použite históriu vašich ťahov na zlepšenie rozhodovania tým, že sa vyhnete ťahom, ktoré ste už skúsili. Veľa šťastia!\n\n"
+  },
+  "board": {
+    "game_board": "Herná doska:\n{board}",
+    "board_state": "Stav dosky: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát ťahu. Hráč {player_id} neodpovedal s platným 'riadok stĺpec číslo'.",
+    "out_of_bounds": "Neplatný ťah. Hráč {player_id} sa pokúsil umiestniť číslo {num} na pozíciu ({row}, {col}), ktorá je mimo hraníc.",
+    "overwrite": "Neplatný ťah. Hráč {player_id} sa pokúsil prepísať predvyplnenú bunku ({row}, {col}).",
+    "violates_rules": "Neplatný ťah. Hráč {player_id} sa pokúsil umiestniť číslo {num} na pozíciu ({row}, {col}), čo porušuje pravidlá Sudoku."
+  },
+  "outcome": {
+    "win": "Gratulujeme! Hráč {player_id} dokončil Sudoku hádanku.",
+    "turn_limit": "Bol dosiahnutý limit ťahov. Správne ste vyplnili {percent}% prázdnych buniek."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i en 3-spiller Iterert Fangens Dilemma. Kampen varer {num_rounds} runder.\nRunde-struktur:\n• {conv_rounds} fri-chat-runder\n• 1 beslutningsrunde - send inn én token per motstander: '[<opp-id> cooperate]' eller '[<opp-id> defect]' (dvs. '[1 defect] [2 cooperate]'; standard er 'samarbeid'). \nParvis utbetalingsmatrise (brukt på hver uordnet par):\n  - Begge samarbeider  ->  {reward}\n  - Begge sviker     ->  {punishment}\n  - Du sviker, de samarbeider -> {temptation}\n  - Du samarbeider, de sviker -> {sucker}\nSpilleren(e) med den høyeste poengsummen ved slutten av alle runder vinner."
+  },
+  "round": {
+    "start": "─── Runde {round} starter ───\tDu kan samtale fritt i de neste {conv_rounds} rundene.",
+    "chat_finished": "Chat er ferdig for runde {round}. Send inn dine beslutninger, én token per motstander: `[pid cooperate]` eller `[pid defect]`."
+  },
+  "results": {
+    "header": "### Runde {round} - Resultater:",
+    "pair_line": "{observation}\n\t Spiller {i} vs Spiller {j} valgte å {choice_i} og {choice_j} respektivt (Spiller {i} fikk {gain_i}, Spiller {j} fikk {gain_j})",
+    "scores_open": "{observation}\n-> Nåværende poengsummer: ",
+    "score_first": "{observation}Spiller {player_id} ({score})",
+    "score_next": "{observation}; Spiller {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Endelige poengsummer: {scores}.  Rangeringsgrupper (dårligst→best): {groups}"
+  }
+}

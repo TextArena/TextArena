@@ -1,0 +1,30 @@
+{
+  "_comment": "Ficheiro de localización de Surround. NON traduzas as claves (lado esquerdo). Só traduce os valores (lado dereito). Mantén cada {placeholder} exactamente como está.",
+  "_slots": {
+    "{num_players}": "Número de xogadores na partida",
+    "{width}": "Ancho do taboleiro en celas",
+    "{height}": "Alto do taboleiro en celas",
+    "{player_id}": "Número do xogador (baseado en 0)",
+    "{board}": "A grella ASCII renderizada; mantén neutral, nunca traduzas os seus caracteres",
+    "{reason}": "A frase de razón de fin de xogo renderizada",
+    "{groups}": "Datos de clasificación neutrais (unha lista de grupos de ID de xogador, do mellor ao peor); non traduzas"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Xogadores Surround nunha grella de {width}x{height}.\nEres o xogador {player_id}. Movementos válidos: '[up]' '[down]' '[left]' '[right]' ou w/s/a/d.\nObxectivo: sobrevivir a todos os demais. Os rastros son mortais; os golpes na parede matan; os choques frontais matan a ambos."
+  },
+  "board": {
+    "current": "Taboleiro actual:\n{board}",
+    "after_moves": "Taboleiro despois de movementos simultáneos:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "O xogador {player_id} morreu debido a un movemento inválido."
+  },
+  "outcome": {
+    "survived_win": "O xogador {player_id} sobreviviu; todos os demais chocaron.",
+    "all_crashed": "Todos os xogadores chocaron simultaneamente.",
+    "outlived": "O xogador sobreviviu a todos os demais.",
+    "all_dead": "Todos os xogadores están mortos.",
+    "turn_limit": "Límite de quendas alcanzado - gaña o supervivente máis longo.",
+    "ranking": "{reason} Grupos de clasificación finais (do mellor ao peor): {groups}"
+  }
+}

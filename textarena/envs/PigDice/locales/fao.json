@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Tú ert Leikari {player_id}, ið spælir ein leik av Pig Dice.\n\nReglur:\n- Á tínum, kunnu tú '[roll]' eller '[hold]'\n- Kast 2-6: Legg til tína stig í tíðarskeiði\n- Kast 1: Tap tína stig í tíðarskeiði og enda tíðarskeiði\n- Halda: Legg tína stig í tíðarskeiði til tína stig og enda tíðarskeiði\n- Fyrsti til {winning_score} stig vinnur\n\nTá tað er tíð á tínum, síggur tú núverandi stig og stig í tíðarskeiði.\nSvar við '[roll]' at kasta terningin eller '[hold]' at seta tína stig."
+  },
+  "invalid_move": {
+    "invalid_action": "Ógild formát á aðgerð. Nýt '[roll]' eller '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Leikari {player_id} fekk bust, og tapir {turn_total} stig!",
+    "player_hold": "Leikari {player_id} heldur og setir {turn_total} stig."
+  },
+  "board": {
+    "player": "Leikari 0: '{score_0}'; Leikari 1: '{score_1}'",
+    "current_total_scores": "Núverandi Samtals Stig: {scores}\nTín núverandi stig í tíðarskeiði eru {turn_total}.",
+    "roll_history": "{observation}\nTín ferðasøga í hesum tíðarskeiði: {roll_history}",
+    "first_roll": "{observation} Hetta er fyrsta rull í tínari røð.",
+    "available_actions": "{observation}\nNøkur aðgerðir eru: '[roll]' eller '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Leikari {winner_id} vann við at hava hægri stig í enda á tíðarskeiði ({scores})",
+    "winner_by_score": "Leikari {winner_id} vann við at ná málstigi á {winning_score}!",
+    "draw": "Umrættarmarkið er roknað og allir leikararnir hava sama stigatal: {scores}"
+  }
+}

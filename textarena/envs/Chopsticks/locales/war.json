@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw an Player {player_id} ha Chopsticks. Ha imo turno, pili hin usa ha:\n  + Atake:  '[attack M O]'  kun diin M=imo kamot (0 o 1), O=kaatbang kamot (0 o 1).\n    - An kaatbang kamot nga bilang tinataas han imo kamot; kun >=5, ini nagiging 0.\n  + Bulag:   '[split L R]'  ngadto ha pagbalik ha imo total nga tudlo ha L ngan R (L+R = imo total).\nSumulong ha usa la nga han mga komando."
+  },
+  "board": {
+    "current_board": "Kasalukuyan nga Board:\nParagmudang 0: {hands_0}\nParagmudang 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "An imo kamot {my_idx} patay na.",
+    "opp_hand_dead": "An kamot han kontra {opp_idx} patay na.",
+    "split_sum": "An split kinahanglan mag-sum ngadto ha {total}.",
+    "split_no_change": "An Split kinahanglan magbag-o han imo pagkayana ha kamot.",
+    "invalid_command": "Diri maupay nga kilos. Gamita “[attack M O]” o “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} nag-atake ha kamot ni P{opp_id} nga {opp_idx}: tikang ha {opp_val} ngadto ha {new_val}.",
+    "split": "Si P{player_id} nagbulag ngadto ha [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "An duha nga kamot han kaaway patay.",
+    "draw": "Naabot na an limitasyon han pagliso."
+  }
+}

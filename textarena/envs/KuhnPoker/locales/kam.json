@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Wee ni Mchezaji {player_id} katika mchezo wa Kuhn Poker wa mizunguko {max_rounds}.\nSheria za Mchezo:\n- Kuhn Poker hutumia sitaha ya kadi 3 yenye J, Q, K (J ndio ya chini zaidi, K ndio ya juu zaidi)\n- Kila mchezaji hutoa {ante} chip na kupokea kadi 1 kila mzunguko (kumbuka kuwa kadi zinagawanywa bila kubadilishwa, kwa hivyo huwezi kuwa na kadi sawa na mpinzani wako).\n- Mchezo unaendelea kwa mizunguko {max_rounds}\n- Mchezaji aliye na chips nyingi zaidi baada ya mizunguko yote anashinda\nSheria za Hatua:\n- '[check]': Pita bila kubeti (tu ikiwa hakuna beti kwenye meza)\n- '[bet]': Ongeza chip 1 kwenye poti (tu ikiwa hakuna beti kwenye meza)\n- '[call]': Linganisha beti ya mpinzani kwa kuongeza chip 1 kwenye poti\n- '[fold]': Achilia mkono wako na uruhusu mpinzani wako ashinde poti"
+  },
+  "init_round": {
+    "round_start": "### Kuanza raundi {current_round} kati ya {max_rounds} raundi. Kadi yako ni: '{player_card}'",
+    "available_actions": "Maũndũ ala ũtonya kwĩka nĩ aa: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hatua lazima iwe [Check], [Bet], [Call], au [Fold].",
+    "not_legal": "Ĩtambya yĩla woosa nĩ {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Mchezaji {player_id}, alitoa hatua: '[{move}]'.",
+    "valid_actions": "Maũndũ ala ũtonya kwĩka nĩ aa: {legal_actions}.",
+    "round_summary": "{reason} Alama za sasa: Mchezaji 0: '{player_0_chips}'; Mchezaji 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Mwisho: Kadi ya Mchezaji {winner} {winner_card} inashinda kadi ya Mchezaji {loser} {loser_card}. Mchezaji {winner} anashinda poti ya {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Mwishoni mwa mizunguko {max_rounds}, wachezaji wote wawili walikuwa na idadi sawa ya chips.",
+    "round_win": "Mchezaji {player_id} ameachilia mkono.",
+    "winner_player0": "Mchezaji 0 alishinda kwa kuwa na chips nyingi zaidi mwishoni mwa mizunguko yote {max_rounds}.",
+    "winner_player1": "Mchezaji 1 alishinda kwa kuwa na chips nyingi zaidi mwishoni mwa mizunguko yote {max_rounds}."
+  }
+}

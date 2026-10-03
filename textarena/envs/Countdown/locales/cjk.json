@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Cjk: You are playing Countdown numbers game! Goal: Combine number using +, -, *, / to reach the target. Action format: [i j op] where i, j is indices and op is the operation. Example:[0 2 *] multiplies number at index 0 with number at Index 2. Division must result in whole numbers only."
+  },
+  "board": {
+    "header": "TARGET: {target}\n\nAvailable numbers:\n{numbers}",
+    "best": "{observation}\n\nBest so far: {best_value} (distance: {distance})\nBest expression: {best_expression}",
+    "history": "{observation}\n\nMove history:\n{moves}",
+    "progress": "{observation}\nCurrent progress score: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/",
+    "invalid_indices": "Invalid indices. Must be different and in range 0-{max_index}",
+    "invalid_operation": "Kutendeka kwa kuti (kugawanya na sufuri au matokeo ya kuto kuwa nambari kamili)"
+  },
+  "outcome": {
+    "win": "Perfect! Found exact target: {target}",
+    "no_moves": "No more moves. Best result: {best_value} (target: {target})",
+    "turn_limit": "Turn limit reached. Best result: {best_value} (target: {target})"
+  }
+}

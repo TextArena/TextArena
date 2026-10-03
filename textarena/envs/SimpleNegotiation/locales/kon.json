@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Muntu yina vandaka kusala bansaka yango ndimaka na kusoba, kansi yandi kondaka mbongo ya kufwana.",
+    "out_of_range": "Mfumu {player_id}, Kikendo kibaya. Kizunga {col} kiko nje ya mbanza.",
+    "already_full": "Mfumu {player_id}, Kikendo kibaya. Kizunga {col} kimezwi.",
+    "proposing_with_no_resource": "Muntu yina kebula {player_id} sosaka kusala mumbongo kukonda kuzwa mbongo ya kufwana.",
+    "incorrect_offer_format": "Muntu yina kebula {player_id} pesaka mbongo na yandi ya kusumba sambu bo soba yo, kansi mutindu ya kupesa kele mbote ve.",
+    "no_new_offer": "Muntu yina kebula {player_id} pesaka ve mbongo ya nkaka."
+  },
+  "offers": {
+    "reject": "Muntu yina kebula {player_id} buyaka kusoba.",
+    "accept": "Mwana {acceptor_id} akoyoka makopo ya bandika ya Mwana {proposer_id}.",
+    "proposal": "Mwana {player_id} akoyoka makopo ya koyokela Mwana {opponent_id}: Makopo ya koyoka: {offered} -> Makopo ya koyokela: {requested}"
+  },
+  "outcome": {
+    "win": "Muntu yina ke bulaka na {winner_id} me nunga sambu yandi kele ti bima mingi ya ntalu.",
+    "draw": "Bima yonso ya bo vandaka na yo kusobaka kaka mutindu mosi."
+  }
+}

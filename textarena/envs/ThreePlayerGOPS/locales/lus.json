@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "I Player {player_id} ni Three-Player GOPS-ah.\n- Card 13 A-K (each exactly once) i nei.\n- Round tinah prize reveal a ni. Card pakhat submit angin `[Q]`, `[10]`, `[2]` …\n- Card sang chak prize (+ pot carry-over) a ni. Tie-ah prize next round-ah roll a ni.\n- Round 13 hnuah total sang chak a ni. Invalid move = elimination."
+  },
+  "round": {
+    "header": "### Round {round}/13 - Prize: {prize} (man {worth})",
+    "hand": "I kut awm chhun: {hand}"
+  },
+  "reveal": {
+    "win": "Bids  {bids} - Player {winner} chuan a hneh ta {pot}.",
+    "tie": "Bids » {bids} - tie, pot tunah {pot}.",
+    "scores": "Scores → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "action chuan bracketed card a ngai ang, '[Q]' tih angin.",
+    "bad_card": "card hman tawh emaw, a dik lo emaw"
+  },
+  "elimination": {
+    "player": "Player {pid} chu a vawi tam tak khel diklo hnuah an ban ta."
+  },
+  "outcome": {
+    "auto_win": "Player pahnih an tlân bo chuan a hneh ngei mai.",
+    "final": "Point tawp: {scores}"
+  }
+}

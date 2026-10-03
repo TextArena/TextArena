@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "تاسو په نیم کې لوبغاړی {player_id} یاست. ستاسو هدف دا دی چې وروستی پاتې شی واخلئ. په هر وار کې ، په سمه توګه یو کڅوړه غوره کړئ او یو یا ډیر توکي له هغې څخه لرې کړئ. د '[pile quantity]' ب formatه وکاروئ ، چیرې چې کڅوړه د کڅوړې شاخص دی او مقدار د لرې کولو لپاره د توکو شمیر دی. د مثال په توګه ، '[0 3]' له کڅوړې 0 څخه 3 توکي لرې کوي."
+  },
+  "state": {
+    "current_pile": "اوسنی پایل: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "د حرکت لپاره کوم سم بڼه نه ده موندل شوې. د \"[pile quantity]\" کار واخلئ.",
+    "correct_format_wrong_fields": "لوبغاړی {player_id}، غیرقانوني عمل. کالم {col} د حد څخه بهر دی.",
+    "out_of_range": "د پایل شاخص {pile_index} له حد څخه بهر دی.",
+    "non_positive": "باید لږ تر لږه یو شی لرې کړي.",
+    "exceeds_pile": "نه شي کولای {quantity} له {pile_index} ډنډ څخه لرې کړي (یوازې {pile_count} پاتې دی)."
+  },
+  "observation": {
+    "removed_from_piles": "لوبغاړی {player_id} د [{pile_index} {quantity}] لوبه وکړه، {quantity} شی(یان) له ډیرې {pile_index} څخه لیرې کړل."
+  },
+  "outcome": {
+    "win": "لوبغاړي {player_id} وروستی شی واخیست (((s)!"
+  }
+}

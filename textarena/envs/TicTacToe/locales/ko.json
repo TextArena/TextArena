@@ -1,0 +1,27 @@
+{
+  "_comment": "틱택토 지역화 파일. 키(왼쪽)는 번역하지 마세요. 값(오른쪽)만 번역하세요.",
+  "_slots": {
+    "{player_id}": "플레이어 번호, 예: 0 또는 1",
+    "{symbol}": "플레이어의 표시, X 또는 O",
+    "{opponent_symbol}": "상대방의 표시, X 또는 O",
+    "{cell}": "0에서 8 사이의 보드 셀 번호"
+  },
+  "player_prompt": {
+    "intro": "당신은 틱택토의 플레이어 {player_id}입니다.\n당신의 목표는 보드에서 세 개를 가로, 세로 또는 대각선으로 이어 이기는 것입니다.\n당신의 차례에는 다음에 표시를 놓을 정사각형 번호(0-8)를 선택해야 합니다.\n예를 들어, '[4]'는 보드의 중앙 셀에 표시를 놓습니다.\n플레이어 {player_id}로서 당신은 '{symbol}'이 되며, 상대방은 '{opponent_symbol}'입니다."
+  },
+  "board": {
+    "current_board": "현재 보드:\n\n{board}\n\n가능한 수: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "제출된 수가 올바른 형식을 따르지 않습니다.",
+    "out_of_range": "{cell}은 유효한 셀이 아닙니다. 0과 8 사이여야 합니다.",
+    "already_occupied": "셀 {cell}은 이미 차지되어 있습니다."
+  },
+  "game_action": {
+    "placed": "플레이어 {player_id}가 셀 {cell}에 표시({symbol})를 놓았습니다."
+  },
+  "outcome": {
+    "win": "플레이어 {player_id}가 이겼습니다!",
+    "draw": "게임이 무승부입니다!"
+  }
+}

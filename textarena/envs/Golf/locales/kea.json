@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Bo ta joga Golf (Jogu di Kartu) - Jogadör {player_id}.\nMeta: Bo ten ki pontu total máis baixo na rodada singela. Si kolónna komparti mesmu balor, eli somadu komu 0.\nBalor di Kartu: A=1, 2-10=balor di fas, J/Q=10, K=0\n\nAkseyon (usa braketadu eksatu):\n- '[draw]' - Tira di baraha\n- '[take]' - Tira di monti di desisti\n- '[swap X Y]' - Troka kartu di drew ku pozison X (linha) Y (kolónna)\n- '[discard]' - Desisti di kartu di drew"
+  },
+  "board": {
+    "drew": "Bu tiru: {card}\nAgora bu é obrigadu [swap X Y] ou [discard] el.",
+    "took": "Bo tira: {card} di monti di desisti\nBo ten ki [swap X Y] ku el (no pódé desisti)",
+    "peeked": "Bo espió na pozison ({row},{col}): {card}",
+    "turn_view": "Bo mão:\n{hand}\nMonti di desisti: {discard}\n{options}",
+    "none": "Nenhun di es ka ten."
+  },
+  "options": {
+    "final_turns": "Turnu final! Bo opsió: [draw], [take], [peek X Y]",
+    "draw": "Bo opsió: [draw], [take]",
+    "must_swap": "Bu debe: [swap X Y] (ka pode skese di kartas ki sta na pila)",
+    "swap_or_discard": "Bo ten ki: [swap X Y] o [discard]"
+  },
+  "hand": {
+    "no_cards": "Ka ten karton.",
+    "header": "Kol: 1 2 3 N ta atxa ma el é más midjór.",
+    "row": "Linha {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Jogadör {pid} troka {new} ku {old} na pozison ({row},{col})",
+    "discarded": "Jogadör {pid} desisti di {card}"
+  },
+  "message": {
+    "deck_empty": "Baralhu sta vaziu! Jogo ta kaba li d'imediatu.",
+    "knocked": "Jogadör {pid} knock! Kada jogadör outru ten un turnu máis",
+    "final_round": "Jogadör {pid} {reason}! Kada jogadör outru ten un turnu máis"
+  },
+  "reason": {
+    "all_revealed": "teni kartas tudas abertas"
+  },
+  "invalid": {
+    "wrong_action": "Usa akseyon ku braketadu: [draw], [take], [swap X Y], [discard], [knock], o [peek X Y]",
+    "discard_empty": "Kel monti di kuza ki bu ka ta uza sta tudu skravu!",
+    "must_draw_first": "Bo ten ki priméu [draw], [take], [knock], o [peek X Y]",
+    "cannot_discard_taken": "Bu ka pode skese di un karta ki bu toma na monti, má el ten ki ser troka.",
+    "have_drawn_card": "Bo ten kartu di drew. Bo ten ki [swap X Y] o [discard]",
+    "need_drawn_swap": "Bu meste un karta di sorteu pa bo pode troca.",
+    "need_drawn_discard": "Bu meste di un karta ki bu traze pa bo ka odja-l.",
+    "out_of_bounds": "Pozison fora di limiti. Usa linha 1-{max_row}, kolónna 1-{max_col}",
+    "knock_with_card": "Bu ka pode fra ku un karta ki bu tra. Kumpradu primeru kel turno li.",
+    "already_knocked": "Un algen dja faze kel ronda li.",
+    "already_revealed": "Kel karta dja sta na papel!"
+  },
+  "summary": {
+    "full": "Jogu terminá! Jogadör {winner} gana ku pontu di {score} puntus!\n\nPontu final:\n{scores}",
+    "line": "Jogadör {pid}: {score} puntus\n"
+  },
+  "board_str": {
+    "title": "=== Jogu di golfu===",
+    "discard": "Bu ta bota-l na txon: {card}",
+    "knocked": "Jogador {pid} dja bati!",
+    "player_header": "Jogadör {pid} (Pontu: {score}):"
+  }
+}

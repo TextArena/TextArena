@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Әлегә карталар юк .",
+    "rules": "🎯 УЛЬТИМАТ ТЕХАС ХОЛД'ЭМ - Бер Уенчы vs Сатучы\n\n📖 УЕН ТАСВИРЛАМАСЫ:\n• Сез {start_chips} фишка белән башлыйсыз\n• 52 карталы бер төп (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Сез сатучыга (йорт) каршы уйныйсыз\n• Һәр раунд Ultimate Texas Hold'em төзелешенә иярә: сез ANTE һәм BLIND ставкаларын урнаштырысыз, 2 тишек картасы аласыз, уенның төрле фазаларында PLAY ставкаларын сайлый аласыз, аннары җәмәгать карталарын ачыгыз һәм сатучының иң яхшы 5-карталы кулы белән чагыштырасыз. Сезнең максатыгыз - отышларыгызны (сезнең кулыгыз яхшырак булганда) максимизацияләү, ә югалышларыгызны (сезнең кулыгыз начаррак булганда) минимизацияләү.\n• Уен 0 фишка яки аның астына җиткән вакытта (ЮГАЛЫШ) яки 1000 раундны тәмамлаганда (ҖИҢҮ) тәмамлана\n\n💰 СТАВКАЛАР ТӨЗЕЛЕШЕ:\n• ANTE: Һәр раундта мәҗбүри ${ante} ставкасы\n• BLIND: Һәр раундта мәҗбүри ${ante} ставкасы\n• PLAY: Уен вакытында сайлау ставкасы. Раунд дәвамында, сез түбәндәге ставкаларның берсен генә сайлый аласыз: (${ante4} PRE-FLOPта, ${ante2} FLOPта, яки ${ante} RIVERда. Шулай ук, RIVERда кулны биреп, ставка ясамыйча, fold та ясый аласыз.)\n\n🎴 КАРТАЛАР БҮЛЕҮ:\n• Сез 2 ачык картаны (сезнең тишек карталарыгыз) аласыз\n• Сатучы 2 ябык картаны (сезгә күренми) ала\n• 5 җәмәгать картасы башта ябык итеп бүленә\n• Җәмәгать карталары уен фазалары дәвамында прогрессив рәвештә ачыла\n\n🏆 САТУЧЫ КВАЛИФИКАЦИЯСЕ:\n• Сатучы кулында кимендә бер пар (бер үк рангта ике карт) булырга тиеш, аның 2 картасын һәм 5 җәмәгать картасын кулланып.\n• Сатучы квалификациясе ставка нәтиҗәләренә йогынты ясый, аны соңрак аңлатырбыз.\n\n🎮 УЕН ФАЗАЛАРЫ ҺӘМ ГӘМӘЛӘР:\n📋 PRE-FLOP:\n  • Гәмәлләр: [4x] (${ante4}) яки [check]\n  • [4x]: ${ante4} PLAY ставкасын урнаштыру, беренче 3 җәмәгать картасын ачу\n  • [check]: Өстәмә ставка ясамыйча, беренче 3 җәмәгать картасын ачу\n\n📋 FLOP:\n  • Әгәр 4x ставка урнаштырылса: Тик [skip] генә мөмкин (соңгы 2 җәмәгать картасын автоматик рәвештә ачу)\n  • Әгәр 4x ставка урнаштырылмаса: [2x] (${ante2}) яки [check]\n  • [2x]: ${ante2} PLAY ставкасын урнаштыру, соңгы 2 җәмәгать картасын ачу\n  • [check]: Өстәмә ставка ясамыйча, соңгы 2 җәмәгать картасын ачу\n\n📋 RIVER:\n  • Әгәр 4x яки 2x ставка урнаштырылса: Тик [skip] генә мөмкин (автоматик рәвештә шоудаунга күчү)\n  • Әгәр PLAY ставка урнаштырылмаса: [1x] (${ante}) яки [fold]\n  • [1x]: ${ante} PLAY ставкасын урнаштыру, шоудаунга күчү\n  • [fold]: Кулны бирү, ANTE һәм BLIND ставкаларын югалту\n\n📋 SHOWDOWN:\n  • Барлык карталар ачыла һәм бәяләнә\n  • 7 картадан (2 тишек + 5 җәмәгать) иң яхшы 5-карталы кул\n  • Ставкалар пейаут кагыйдәләре буенча хәл ителә\n\n💎 СТАВКА ПЕЙАУТЛАРЫ:\n📊 ANTE СТАВКАСЫ:\n  • Сатучы квалификациясе булмаса: PUSH (ставка кайтарыла)\n  • Сатучы квалификациясе булса һәм сез җиңсәгез: 1:1 пейаут (ставка + отыш)\n  • Сатучы квалификациясе булса һәм сез җиңелсәгез: Ставка югалтыла\n  • Тигезлек: PUSH (ставка кайтарыла)\n\n📊 BLIND СТАВКАСЫ:\n  • Сатучы квалификациясенә бәйле түгел\n  • Сез җиңсәгез: Ставка кайтарыла һәм кул көченә нигезләнгән өстәмә пейаут\n  • Сез җиңелсәгез: Ставка югалтыла\n  • Тигезлек: PUSH (ставка кайтарыла)\n\n📊 BLIND СТАВКАСЫ ПЕЙ ТӘБЕЛӘСЕ:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Өстәмә пейаут юк\n\n📊 PLAY СТАВКАСЫ:\n  • Сатучы квалификациясенә бәйле түгел\n  • Туры көнәшмә: Сезнең иң яхшы кулыгыз vs Сатучының иң яхшы кулы\n  • Сез җиңсәгез: 1:1 пейаут (ставка + отыш)\n  • Сез җиңелсәгез: Ставка югалтыла\n  • Тигезлек: PUSH (ставка кайтарыла)\n\n🎯 ПОКЕР КУЛЫ РЕЙТИНГЫ (Иң яхшыдан иң начарына кадәр):\n  1. Royal Flush: A-K-Q-J-10 бер үк төстә\n  2. Straight Flush: 5 бер-бер артлы карталар бер үк төстә\n  3. Four of a Kind: 4 бер үк рангта карталар\n  4. Full House: 3 бер үк рангта карталар + 2 бер үк рангта карталар\n  5. Flush: 5 бер үк төстә карталар\n  6. Straight: 5 бер-бер артлы карталар\n  7. Three of a Kind: 3 бер үк рангта карталар\n  8. Two Pair: 2 бер үк рангта карталар + 2 бер үк рангта карталар\n  9. One Pair: 2 бер үк рангта карталар\n  10. High Card: Иң югары карта җиңә\n\n⌨️  ГӘМӘЛ КОМАНДАЛАРЫ:\n• [4x] яки [play bet 4x]: ${{self.ante_amount*4}} PLAY ставкасын урнаштыру\n• [2x] яки [play bet 2x]: ${{self.ante_amount*2}} PLAY ставкасын урнаштыру\n• [1x] яки [play bet 1x]: ${{self.ante_amount*1}} PLAY ставкасын урнаштыру\n• [check] яки [c]: Чек (өстәмә ставка ясамыйча)\n• [fold] яки [f]: Фолд (кулны биреп, ставка ясамыйча)\n• [skip] яки [s]: Киләсе фазага күчү (гәмәл кирәк булмаганда)\n\n💡 СТРАТЕГИЯ КӘҮШӘЛӘРЕ:\n• Көчле башлангыч куллар (парлар, югары карталар) еш кына 4x ставкаларын аңлата\n• Сатучы квалификациясенә игътибар итегез - көчсез куллар сатучы квалификациясе булмаса пуш булырга мөмкин\n• BLIND ставкасы көчле куллар белән бик отышлы була ала (Royal Flush = 500:1!)\n• Чип стэкыгызны күзәтегез! Әгәр ул 0 яки аның астына җитсә, сез җиңеләсез.\n\n⚠️  МӨҺИМ ИШАРӘЛӘР:\n• ANTE һәм BLIND ставкалары һәр раундта мәҗбүри\n• PLAY ставкалары сайлау һәм стратегик\n• Дөрес гәмәл кертегез, һәм тик бер гәмәл генә бер вакытта.",
+    "state": "🎯 РАУНД {round}\n💰 Фишкалар: {chips}\n🎴 Сезнең кулы: {hand}\n📊 Хәзерге ставкалар: Анте ${ante}, Блайнд ${blind}, Плей ${play}\n📋 Фаза: {phase}\n🎯 Мөмкин булган гамәлләр: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 РАУНД {round} башланды! Ставкалар: АНТЕ ${ante}, БЛАЙНД ${blind}. Сезнең {chips} фишкалар калды.",
+    "your_hand": " Синең кулың: {hand}",
+    "flop_revealed": " ФЛОП ачыкланган: {cards}",
+    "river_revealed": " RIVER ачыклады: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Агымдагы этапта гамәлдә булмаган чаралар. Булдырырга мөмкин булган эшләр: {available}",
+    "message": " Гаделсез гамәл! Булдырырлык эшләр: {available}"
+  },
+  "action": {
+    "folded": " Син үз эшеңне калдырдың."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 ШОУДАУН! Дилерның кулы: {cards}",
+    "community_cards": " Берләшмә карталары: {cards}",
+    "player_best": "🎴 Уенчының иң яхшы кулы: {name} ({cards})",
+    "dealer_best": "🎴 Дилерның иң яхшы кулы: {name} ({cards})",
+    "ante_lost_folded": " Бетү өчен акчаны югалту! -${ante} (икегә бүленә)",
+    "blind_lost_folded": " БЛИНД ставкасы ЮК! -${blind} (икеләтелгән)",
+    "ante_won": "✅ Беткәнче җиң! +${amount}",
+    "ante_pushed": " БЕЗНӘГЕ ставка КАЧЫЛД! ${ante} кире кайтарылды.",
+    "ante_lost": " Бетүләр алда! -${ante}",
+    "blind_won": "✅ БЛИНД ставкасы җиңде! +${amount}",
+    "blind_pushed": " БЛИНД ставкасы КАЧЫРТЫН! ${blind} кире кайтарылды.",
+    "blind_lost": " БЛИНД ставкасы ЮК! -${blind}",
+    "play_won": "✅ УЙНАУ БЕГӘЛҮ! +${amount}",
+    "play_pushed": " PLAY ставкасы PUSHED! ${play} кире кайтарылды.",
+    "play_lost": " Уенга куелган ставка югалтылды! -${play}",
+    "net_gain": "🎉 РАУНД {round} тәмамланды! Нетто җиңү: +${net}",
+    "net_loss": "💸 РАУНД {round} тәмамланды! Нетто югалту: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 УЕН ТӘМАМ! {max_turns} раундлар тәмамланды. Сезнең ${chips} фишкалар калды - СЕЗ ҖИҢДЕГЕЗ!",
+    "game_over_lose": "Уен тәмам! Чипларыгыз бетте. Бүләгеч җиңде!",
+    "reward_win": "Уенчы {winner_rounds} раундларны тәмамлады ${chips} фишкалар белән",
+    "reward_lose": "Уенчының чиплары түгелеп бетте {round} раундында.",
+    "reward_win_max": "Уенчы {max_turns} раундларны тәмамлады ${chips} фишкалар белән"
+  },
+  "hand_names": {
+    "royal_flush": "Патша флешы",
+    "straight_flush": "Түз сулар агызу",
+    "four_of_a_kind": "Дүрт төрле кеше .",
+    "full_house": "Тулы зал .",
+    "flush": "Суны агызу",
+    "straight": "Турыдан-туры .",
+    "three_of_a_kind": "Өч төрле кеше",
+    "two_pair": "Ике пар .",
+    "one_pair": "Бер пар .",
+    "high_card": "Югары карта",
+    "unknown": "Билгесез куллар"
+  }
+}

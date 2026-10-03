@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "আপুনি খেলুৱৈ {player_id}, ইটাৰেটেড আলটিমেটাম গেমৰ {num_rounds} ৰাউণ্ড খেলি আছে। আপোনাৰ আৰু খেলুৱৈ {other_id}ৰ মাজত এই ৰাউণ্ড ভাগ কৰিবলৈ ${pool} আছে। প্ৰস্তাৱকঃ - এটা অফাৰ কৰকঃ [Offer: $X] (0 <= X <= পুল) - যদি গ্ৰহণ কৰা হয় → আপুনি $( পুল - X পায়, আন খেলুৱৈয়ে $X পায় - যদি প্ৰত্যাখ্যান কৰা হয় → দুয়োজনে $0 পায় - উদাহৰণঃ [Offer: $3] বা 'মই ভাবো এইটো ন্যায্য। [Offer: $5]' উত্তৰদাতাঃ - অফাৰৰ বিষয়ে সিদ্ধান্ত লওক [Accept] বা [Reject] - উদাহৰণঃ 'এয়া যুক্তিসংগত যেন লাগে। [Accept]' 'অতি অন্যায়'। [Reject]"
+  },
+  "round": {
+    "begins": "--- ৰাউণ্ড {round_number} আৰম্ভ হয়! --- প্লেয়াৰ {proposer_id} হৈছে প্ৰস্তাৱক, প্লেয়াৰ {responder_id} হৈছে উত্তৰদাতা।",
+    "offer": "ৰাউণ্ড {round_number}: খেলুৱৈ {proposer_id}য়ে খেলুৱৈ {responder_id}ক ${offer} প্ৰদান কৰে (যি খেলুৱৈয়ে ${keep} ৰাখে) ।",
+    "accepted": "খেলুৱৈ {responder_id} গ্ৰহণ কৰা হৈছে! ৰাউণ্ড {round_number} লাভঃ খেলুৱৈ {proposer_id} + ${proposer_gain}, খেলুৱৈ {responder_id} + ${responder_gain}। নতুন মুঠঃ খেলুৱৈ ০ঃ ${total_0}, খেলুৱৈ ১ঃ ${total_1}।",
+    "rejected": "খেলুৱৈ {responder_id}য়ে প্ৰস্তাৱটো প্ৰত্যাখ্যান কৰে! ৰাউণ্ড {round_number}ৰ লাভঃ দুয়োটা খেলুৱৈ +$0. মুঠ ৰৈ যায়ঃ খেলুৱৈ ০ঃ ${total_0}, খেলুৱৈ ১ঃ ${total_1}।"
+  },
+  "invalid_move": {
+    "no_offer_format": "প্ৰস্তাৱকসকলে [Offer: $X] প্ৰকাৰৰ ফৰ্মেট ব্যৱহাৰ কৰি এটা অফাৰ কৰিব লাগিব।",
+    "bad_integer": "অফাৰ পৰিমাণ এটা বৈধ পূৰ্ণ সংখ্যা হ'ব লাগিব।",
+    "out_of_range": "অফাৰটো $0 আৰু ${pool}ৰ মাজত থাকিব লাগিব।",
+    "no_current_offer": "বৰ্তমানে কোনো প্ৰস্তাৱ নাই যাক প্ৰতিক্ৰিয়া জানাব।",
+    "accept_or_reject": "উত্তৰদাতাই [Accept] বা [Reject] প্ৰস্তাৱটো দিব লাগিব।"
+  },
+  "outcome": {
+    "win": "খেলুৱৈ {winner}ৰ ${winner_total}ৰ সৈতে জয়ী হৈছে খেলুৱৈ {loser}ৰ ${loser_total}ৰ বিৰুদ্ধে।",
+    "draw": "ড্ৰ! দুয়োটা খেলুৱৈয়ে ${total} মুঠৰ সৈতে সমাপ্ত কৰে।"
+  }
+}

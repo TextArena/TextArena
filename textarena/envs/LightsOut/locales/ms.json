@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Selamat datang ke Lights Out! Anda mempunyai grid lampu bersaiz {size}×{size}.\nMatlamat anda adalah untuk MEMADAMKAN semua lampu (diwakili oleh '.').\nApabila anda menekan sesuatu lampu, keadaan lampu itu DAN lampu bersebelahannya akan bertukar (atas/bawah/kiri/kanan).\nTaip [row col] untuk menekan lampu (indeks bermula pada 0, jadi julat yang sah ialah 0-{max_index}).\nAnda mempunyai sehingga {max_turns} langkah untuk menyelesaikan teka-teki.\nPetunjuk: 'O' = lampu MENYALA, '.' = lampu PADAM"
+  },
+  "board": {
+    "current_state": "Keadaan grid semasa (Langkah {moves_made}, {moves_left} langkah berbaki, {completion}% selesai):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Tindakan mestilah dalam format [row col], dengan row dan col ialah integer dari 0 hingga {max_index}.",
+    "out_of_range": "Koordinat mestilah antara 0 dan {max_index}. Anda memasukkan [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Tahniah! Anda menyelesaikan teka-teki dalam {moves_used} langkah!",
+    "loss": "Permainan tamat! Anda telah menggunakan kesemua {max_turns} langkah tanpa menyelesaikan teka-teki. Penyelesaian akhir: {completion}%\nKeadaan akhir:\n{grid}"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Estàs jugant al joc de números Countdown!\nObjectiu: Combina números utilitzant +, -, *, / per arribar a l'objectiu.\nFormat d'acció: [i j op] on i,j són índexs i op és l'operació.\nExemple: [0 2 *] multiplica el número a l'índex 0 amb el número a l'índex 2.\nLa divisió només pot donar resultats en nombres sencers."
+  },
+  "board": {
+    "header": "OBJECTIU: {target}\n\nNúmeros disponibles:\n{numbers}",
+    "best": "{observation}\n\nMillor fins ara: {best_value} (distància: {distance})\nMillor expressió: {best_expression}",
+    "history": "{observation}\n\nHistòria de moviments:\n{moves}",
+    "progress": "{observation}\nPuntuació de progrés actual: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format d'acció invàlid. Utilitza `[i j op]` on i,j són índexs i op és +,-,*,/",
+    "invalid_indices": "Índexs invàlids. Han de ser diferents i dins del rang 0-{max_index}",
+    "invalid_operation": "Operació invàlida (divisió per zero o resultat no enter)"
+  },
+  "outcome": {
+    "win": "Perfecte! S'ha trobat l'objectiu exacte: {target}",
+    "no_moves": "No queden moviments. Millor resultat: {best_value} (objectiu: {target})",
+    "turn_limit": "S'ha assolit el límit de torns. Millor resultat: {best_value} (objectiu: {target})"
+  }
+}

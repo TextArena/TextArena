@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Keddi Player {player_id} i ɛmɛnayen 3 n imɛnayen n Iterated Prisoner's Dilemma. Asalɛmɛn {num_rounds} isɛlɛn.\nTasɛlt n isɛlɛn:\n• {conv_rounds} isɛlɛn n imɛzriyen\n• 1 asɛlt n asenti - ɛsker yiwen token i kullu abɛzzi: '[<opp-id> cooperate]' neɣ '[<opp-id> defect]' (i.e. '[1 defect] [2 cooperate]'; default 'cooperate'). \nTasɛlt n imɛzriyen n payoffs (ɛzɛntɛn i kullu azɛnti):\n  - Kullu cooperate  ->  {reward}\n  - Kullu defect     ->  {punishment}\n  - Keddi defect, abɛzzi cooperate -> {temptation}\n  - Keddi cooperate, abɛzzi defect -> {sucker}\nAqeddac (ɛn) i yesɛan asɛntel n yisɛlɛn iɛɛlen i taggara n isɛlɛn akk iɛɛlen."
+  },
+  "round": {
+    "start": "─── Tasɛlt n isɛlt {round} ───\tTzemreḍ ad tedduɣ ɛmɛzriyen i {conv_rounds} isɛlɛn.",
+    "chat_finished": "Imɛzriyen iɛɛlen i isɛlt {round}. ɛsker yiwen token i kullu abɛzzi: `[pid cooperate]` neɣ `[pid defect]`."
+  },
+  "results": {
+    "header": "### ⴰⴱⴰⵔⴰ {round} - ⵜⵉⵢⴰⴼⵓⵜⵉⵏ:",
+    "pair_line": "{observation}\n\t Aqeddac {i} akked Aqeddac {j} ɛznen ad {choice_i} akked {choice_j} (Aqeddac {i} iɛɛla {gain_i}, Aqeddac {j} iɛɛla {gain_j})",
+    "scores_open": "{observation} -> ⵜⵉⴼⵉⵔⴰⵙ ⵏ ⴷⵖⴰ: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Asɛntel n yisɛlɛn iɛɛlen: {scores}.  Imɛzriyen n ranking (ɛḍɛyan→iɛɛlen): {groups}"
+  }
+}

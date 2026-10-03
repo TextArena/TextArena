@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Te seet Giugador {player_id} in d'on Dilemma del Prisonee Iteraa che 'l dura {num_rounds} gir.\n\nStruttura del Giugh:\n- Prima de ogni decision, te gh'heet {total_conversation_rounds} turn per comunicà in manera libera.\n- Dopo, tutt e duu i giugador scernissen de cooperà o de tradì in manera simultanea.\n\nMatris di Pagament (fixada ogni gir):\n- Tutt e duu cooperen ➜ ognun {cooperate_reward}\n- Tutti e duu tradissen ➜ ognun {mutual_defect_reward}\n- Vun el tradiss, vun el cooperen ➜ Traditor {defect_reward}, Cooperador {sucker_reward}\n\nCome giugà:\n- Duranta la conversazion: scriv qualsessia test che te vaga.\n- Duranta la fase de decision: mett denter '[Cooperate]' o '[Defect]' (insensibol a la cas). Te poeet mett anca del test extra prima/dopo del token."
+  },
+  "phases": {
+    "conversation_finished": "Conversazion finida per gir {round}. Per favur, respund con '[Cooperate]' o '[Defect]' dent de \\boxed{{}}.",
+    "starting_round": "--- Rondì d' inizià {round} ---",
+    "round_summary": "Resultaa del gir {round}:\n{outcome}\nGiugador 0 ha guadagnaa {r0} (total {score_0}), Giugador 1 ha guadagnaa {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Giugador {winner} venc {win_score} - {lose_score}.",
+    "draw": "D'un pari! Tüt i du giugador g'han segnà {s0}.",
+    "round_both_cooperate": "Tüt i duu giugador a l'han cooperà.",
+    "round_both_defect": "Tüt i du giugador a l'han disert.",
+    "round_p0_cooperates_p1_defects": "Al giugador 0 l'ha cooperà, al giugadore 1 el s'è disertàt.",
+    "round_p0_defects_p1_cooperates": "Giocatore 0 ha disertato, giucatore 1 ha cooperato."
+  }
+}

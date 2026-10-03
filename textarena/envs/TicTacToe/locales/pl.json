@@ -1,0 +1,27 @@
+{
+  "_comment": "Plik językowy TicTacToe. NIE TŁUMACZ kluczy (lewa strona). Tłumacz tylko wartości (prawa strona).",
+  "_slots": {
+    "{player_id}": "Numer gracza, np. 0 lub 1",
+    "{symbol}": "Znak gracza, X lub O",
+    "{opponent_symbol}": "Znak przeciwnika, X lub O",
+    "{cell}": "Numer komórki planszy między 0 a 8"
+  },
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w Tic Tac Toe.\nTwoim celem jest wygranie trzech w rzędzie (poziomo, pionowo lub ukośnie) na planszy.\nW swojej turze powinieneś wybrać numer kwadratu (0-8), w którym chcesz umieścić swój znak.\nNa przykład, '[4]' umieszcza twój znak w środkowej komórce planszy.\nJako Gracz {player_id}, będziesz '{symbol}', podczas gdy twój przeciwnik będzie '{opponent_symbol}'."
+  },
+  "board": {
+    "current_board": "Aktualna plansza:\n\n{board}\n\nDostępne ruchy: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Przesłany ruch nie ma poprawnego formatu.",
+    "out_of_range": "{cell} nie jest ważną komórką. Musi być między 0 a 8.",
+    "already_occupied": "Komórka {cell} jest już zajęta."
+  },
+  "game_action": {
+    "placed": "Gracz {player_id} umieścił swój symbol ({symbol}) w komórce {cell}."
+  },
+  "outcome": {
+    "win": "Gracz {player_id} wygrał!",
+    "draw": "Gra zakończyła się remisem!"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Lights Out ki yaamna da! Nang bu {size}x{size} aaba light aangba.\nNang gi thabal aaba light OFF (.) aangba.\nNang light aaba tapna da, aaba light amasung aaba adjacent neighbors (up/down/left/right) aaba toggle aangba.\nType [row col] aaba light aaba tapna da (0-indexed, aaba valid range aaba 0-{max_index}).\nNang bu {max_turns} aaba move aangba puzzle aaba solve aangba.\nLegend: 'O' = light ON, '.' = light OFF"
+  },
+  "board": {
+    "current_state": "বর্তমান গ্রিড অবস্থা (গতি {moves_made}, {moves_left} গতি অবশিষ্ট, {completion}% সম্পূর্ণ):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action aaba format [row col] aaba ngak aangba, aaba row amasung col aaba integer aaba 0 aaba {max_index} aangba.",
+    "out_of_range": "Coordinate aaba 0 aaba {max_index} aangba. Nang aaba [{row},{col}] aangba."
+  },
+  "outcome": {
+    "win": "অভিনন্দন! আপনা পাজলটি {moves_used} গতিতে সমাধান করেছেন!",
+    "loss": "Game over! Nang aaba {max_turns} aaba move aangba use aangba, puzzle aaba solve aangba. Final completion: {completion}%\nFinal state:\n{grid}"
+  }
+}

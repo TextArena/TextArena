@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Вие сте {role} во Полковник Блото.\nВашата цел е да победите повеќе рунди од вашиот противник.\nНа секоја рунда, доделете точно {num_total_units} единици преку полињата {field_names}.\nИграчот кој доделува повеќе единици на едно поле го освојува тоа поле, а играчот кој освојува повеќе полиња го освојува кругот.\nНа пример, '[A7 B7 C6]' доделува 7 единици на A, 7 на B и 6 на C.",
+    "commander_alpha": "Командант Алфа",
+    "commander_beta": "Командант Бета"
+  },
+  "game_state": {
+    "header_round": "=== ПОЛКОВНИК БЛОТО - Рунда {current_round}/{num_rounds} ===\nРунди освоени - Командант Алфа: {alpha_score}, Командант Бета: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nРунда {current_round}\nКомандант Алфа доделил: {p0_allocations}\nКомандант Бета доделил: {p1_allocations}\n",
+    "winner_alpha": "{message}Победник: Командант Алфа",
+    "winner_beta": "{message}Победник: Командант Бета",
+    "tie": "{message}Нерешено!"
+  },
+  "invalid_move": {
+    "wrong_format": "Невалиден формат на влез. Користете: A:5, B:10, C:5",
+    "invalid_field": "Невалидно име на поле. Валидни полиња: {field_names}",
+    "wrong_allocation_value": "Сите доделувања мора да бидат не-негативни цели броеви.",
+    "incorrect_total_units": "Мора да доделите точно {num_total_units} единици. Тековна сума: {current_sum}",
+    "good_allocations": "Доделувањето е добро."
+  },
+  "outcome": {
+    "winner_alpha": "Командант Алфа победи {score_0}-{score_1} по {num_rounds} рунди!",
+    "winner_beta": "Командант Бета победи {score_1}-{score_0} по {num_rounds} рунди!",
+    "draw": "Играта заврши со {score_0}-{score_1} нерешено по {num_rounds} рунди!",
+    "early_winner_alpha": "Командант Алфа победи {scores_0}-{scores_1} (постигната мнозинка)!",
+    "early_winner_beta": "Командант Бета победи {scores_1}-{scores_0} (постигната мнозинка)!"
+  }
+}

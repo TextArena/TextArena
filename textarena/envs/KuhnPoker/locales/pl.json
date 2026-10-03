@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w {max_rounds}-rundowej grze w Pokera Kuhna.\nZasady Gry:\n- Poker Kuhna używa 3-kartowego talii z J, Q, K (J najniższa, K najwyższa)\n- Każdy gracz stawia {ante} żetonów i otrzymuje 1 kartę w każdej rundzie (należy zauważyć, że karty są rozdawane bez zastąpienia, więc nie możesz mieć tej samej karty co twój przeciwnik).\n- Gra trwa przez {max_rounds} rund\n- Gracz z największą ilością żetonów po wszystkich rundach wygrywa\nZasady Działania:\n- '[check]': Przejdź bez obstawiania (tylko jeśli nie ma zakładu na stole)\n- '[bet]': Dodaj 1 żeton do puli (tylko jeśli nie ma zakładu na stole)\n- '[call]': Zrównaj zakład przeciwnika, dodając 1 żeton do puli\n- '[fold]': Poddaj swoją rękę i pozwól przeciwnikowi wygrać pulę"
+  },
+  "init_round": {
+    "round_start": "### Rozpoczęcie rundy {current_round} z {max_rounds} rund. Twoja karta to: '{player_card}'",
+    "available_actions": "Twoje dostępne działania to: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Działanie musi być [Check], [Bet], [Call] lub [Fold].",
+    "not_legal": "Działanie musi być {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Gracz {player_id} złożył ruch: '[{move}]'.",
+    "valid_actions": "Twoje dostępne działania to: {legal_actions}.",
+    "round_summary": "{reason} Aktualne wyniki: Gracz 0: '{player_0_chips}'; Gracz 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Pokazanie kart: Karta gracza {winner} ({winner_card}) bije kartę gracza {loser} ({loser_card}). Gracz {winner} wygrywa pulę {pot_value} żetonów."
+  },
+  "outcome": {
+    "draw": "Po {max_rounds} rundach obaj gracze mieli taką samą ilość żetonów.",
+    "round_win": "Gracz {player_id} złożył rękę.",
+    "winner_player0": "Gracz 0 wygrał, mając więcej żetonów na koniec wszystkich {max_rounds} rund.",
+    "winner_player1": "Gracz 1 wygrał, mając więcej żetonów na koniec wszystkich {max_rounds} rund."
+  }
+}

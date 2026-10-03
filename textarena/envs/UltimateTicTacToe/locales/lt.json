@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} **Ultimate Tic Tac Toe** žaidime.\nPateikite savo ėjimą kaip **[macro  micro]** (du skaičiai 0-8):\n• *macro*  = kuriame mini-lentoje žaidžiate\n• *micro* = kurioje tos mini-lentos kvadratėje\nPavyzdys `[7 8]` ➜ uždėkite savo ženklą mini-lentoje 7, kvadratėje 8, ir\npriverstite savo varžovą žaisti mini-lentoje 8 kitą kartą.\n\nJūs esate `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Dabartinė lenta:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ėjimas turi būti formato [macro micro] su skaičiais 0-8.",
+    "out_of_range": "Indeksai turi būti tarp 0 ir 8.",
+    "index_out_of_range": "Micro_lenta, eilė arba stulpelis yra už ribų.",
+    "cell_occupied": "Kvadratė jau yra užimta.",
+    "wrong_micro_board": "Žaidėjas turi žaisti kitoje mini-lentoje.",
+    "micro_board_won": "Mini-lenta jau yra laimėta."
+  },
+  "next_board": {
+    "any": "bet kuri mini-lenta",
+    "specific": "mini-lenta {nxt}"
+  },
+  "game_action": {
+    "played": "Žaidėjas {player_id} žaidė mini-lentoje {macro_idx}, kvadratėje {micro_idx} (eilė {row}, stulpelis {col}). Žaidėjas {opponent_id} dabar turi žaisti {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Žaidėjas {player_id} laimėjo Ultimate Tic Tac Toe!",
+    "draw": "Žaidimas yra lygus!"
+  }
+}

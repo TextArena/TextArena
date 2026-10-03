@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "U n'wi {player_id} eka michezo ya Indian Poker.\n- Deki ya 52 khadi; u vona khadi ya muphikisi ntsena.\n- Ante {ante} chip(s) hi ku ringana, {max_rounds} ringana(s) hinkwato.\n- Mipheto yo pfumeleka: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X i nambari ya nkoka <= ku hundzuka kwa chip ya wena.)\n- Khadi ya le henhla i winile pot eka ku kombisa.\n"
+  },
+  "round": {
+    "announce": "### Mpikwa {current_round}/{max_rounds}\nKhadi ya muphikisi wako i: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Nika hi action ya kubracketed emoyeni, k.b. '[check]', '[bet 2]', '[call]', '[raise 3]', kuya '[fold]'.",
+    "cannot_check": "A swi nge endleki [check] - u langutane ni ku beja.",
+    "amount_min": "Ntsengo wa ku beja / wo tlakusa mali wu fanele wu ri ≥ 1.",
+    "cannot_bet": "Awi karhi ngi [bet] - swi fanele ngi [call] / [raise] / [fold].",
+    "nothing_to_call": "A ku na lexi u nga xi vitanaka; ematshan'weni ya sweswo, [check].",
+    "no_bet_to_raise": "Tirhisa [bet X] ku pfula; a ka ha ri na mali yo tlakusa.",
+    "insufficient": "A ku na tichipisi leti eneleke eka xiendlo xexo."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Leswi u nga swi endlaka: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Mlweli {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Mutlangi {player_id} u tlurile.",
+    "showdown_win": "Ku kombisa ku vilela: {card_win} yi tlula {card_lose}.",
+    "showdown_tie": "Kuhlanganisa: {card} yin'we. Mphikwa wa mphikwa – un'wana na un'wana u kuma {split}."
+  },
+  "outcome": {
+    "p0_wins": "Mlweli 0 a winga ({bank0} > {bank1})",
+    "p1_wins": "Mlweli 1 a winga ({bank1} > {bank0})",
+    "draw": "Swiphemu leswi ringanaka endzhaku ka minxaxamelo hinkwayo"
+  }
+}

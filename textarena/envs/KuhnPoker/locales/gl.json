@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} nun xogo de {max_rounds} rondas de Kuhn Poker.\nRegras do xogo:\n- O Kuhn Poker utiliza unha baralla de 3 cartas con J, Q, K (J a máis baixa, K a máis alta)\n- Cada xogador aposta {ante} ficha e recibe 1 carta cada ronda (ten en conta que as cartas se reparten sen reposición, polo que non podes ter a mesma carta que o teu opoñente).\n- O xogo continúa durante {max_rounds} rondas\n- O xogador con máis fichas despois de todas as rondas gaña\nRegras de acción:\n- '[check]': Pasa sen apostar (só se non hai aposta na mesa)\n- '[bet]': Engade 1 ficha ao bote (só se non hai aposta na mesa)\n- '[call]': Coincide coa aposta do opoñente engadindo 1 ficha ao bote\n- '[fold]': Rende a túa man e deixa que o teu opoñente gañe o bote"
+  },
+  "init_round": {
+    "round_start": "### Comezando ronda {current_round} de {max_rounds} rondas. A túa carta é: '{player_card}'",
+    "available_actions": "As túas accións dispoñibles son: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "A acción debe ser [Check], [Bet], [Call] ou [Fold].",
+    "not_legal": "A acción debe ser {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Xogador {player_id}, move enviada: '[{move}]'.",
+    "valid_actions": "As túas accións dispoñibles son: {legal_actions}.",
+    "round_summary": "{reason} Puntuacións actuais: Xogador 0: '{player_0_chips}'; Xogador 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Enfrontamento: A carta {winner_card} do Xogador {winner} supera a carta {loser_card} do Xogador {loser}. O Xogador {winner} gaña o bote de {pot_value} fichas."
+  },
+  "outcome": {
+    "draw": "Ao final de {max_rounds} rondas, ambos xogadores tiñan o mesmo número de fichas.",
+    "round_win": "O Xogador {player_id} rendeu.",
+    "winner_player0": "O Xogador 0 gañou por ter máis fichas ao final de todas as {max_rounds} rondas.",
+    "winner_player1": "O Xogador 1 gañou por ter máis fichas ao final de todas as {max_rounds} rondas."
+  }
+}

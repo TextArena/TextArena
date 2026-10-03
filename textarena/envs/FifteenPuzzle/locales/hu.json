@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a 15-ös kirakós játékban.\nA játék célja, hogy a számozott csempéket emelkedő sorrendben, 1-től 15-ig rendezze el, az üres helyet pedig a jobb alsó sarokba helyezze.\nLépés megtétele érdekében egy csempét az üres helyre (amelyet két aláhúzás jelöl, pl. __) csúsztathat az alábbi parancsok egyikével:\n- 'up': Mozgassa az üres hely alatti csempét felfelé.\n- 'down': Mozgassa az üres hely feletti csempét lefelé.\n- 'left': Mozgassa az üres hely jobb oldalán lévő csempét balra.\n- 'right': Mozgassa az üres hely bal oldalán lévő csempét jobbra.\nA lépés elküldéséhez írja be az irányt (pl. 'up', 'down', 'left' vagy 'right') szögletes zárójelek között, pl. [up].\nAz aktuális tábla elrendezése alább látható. Használja az információt a kirakós megoldásához.\n"
+  },
+  "board": {
+    "current_board": "Aktuális tábla:\n\n{board}\nElérhető lépések: {moves}",
+    "game_board": "Játéktábla:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Érvénytelen lépésformátum. A {player_id}. játékos nem válaszolt érvényes iránnyal szögletes zárójelek között.",
+    "illegal_move": "Érvénytelen lépés. A csempét nem lehet az adott irányba mozgatni."
+  },
+  "outcome": {
+    "win": "Gratulálunk! A {player_id}. játékos sikeresen megoldotta a 15-ös kirakóst.",
+    "turn_limit": "A lépésszám korlátja elérésre került. A modell a kirakós {percent} százalékát fejezte be"
+  }
+}

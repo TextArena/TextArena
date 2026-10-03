@@ -1,0 +1,31 @@
+{
+  "_comment": "Ngôn ngữ tiếng Anh cho Hangman. Các khóa (bên trái) là cố định; chỉ dịch các giá trị (bên phải). Giữ nguyên mọi {placeholder}. Không dịch các token trung lập: định dạng '[L]' / '[LIGHT]', chữ cái đoán {letter}, các tiêu đề cột (C00, C01, ...) và dấu gạch ngang '_' trong {board}.",
+  "_slots": {
+    "{board}": "Bảng trung lập đã được hiển thị (tiêu đề cột C00/C01, chữ cái đã được tiết lộ, dấu gạch ngang '_'); không dịch",
+    "{tries_left}": "Số lần đoán sai còn lại (số nguyên)",
+    "{guessed}": "Danh sách các chữ cái đã đoán, cách nhau bằng dấu phẩy",
+    "{letter}": "Chữ cái hoặc từ đầy đủ đã đoán (giữ nguyên như đã nhập)",
+    "{pct}": "Phần trăm ký tự đoán đúng, định dạng đến 2 chữ số thập phân",
+    "{target_word}": "Từ cần đoán"
+  },
+  "prompt": {
+    "intro": "Bạn đang chơi Hangman. Mục tiêu của trò chơi là đoán từ bằng cách cung cấp các chữ cái hoặc từ đầy đủ.\nMỗi cột được đánh số. Các ô cần được điền bằng chữ cái được biểu diễn bằng '_'.\n\nCó hai cách để bạn trả lời. Bạn có thể cung cấp các chữ cái trong định dạng '[L]', hoặc đoán từ đầy đủ trong định dạng '[LIGHT]'.\nNếu chữ cái bạn đoán có trong từ, nó sẽ được tiết lộ trên bảng.\nNếu từ bạn đoán đúng, bạn thắng.\nTrong quá trình chơi, lịch sử các lựa chọn của bạn sẽ được thêm vào bên dưới. Sử dụng thông tin này để đoán từ và thắng.\nBạn có 6 lần đoán sai trước khi trò chơi kết thúc.\n\n"
+  },
+  "board": {
+    "status": "Bảng hiện tại:\n{board}\nBạn còn {tries_left} lần đoán.\nChữ cái đã đoán: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Định dạng nước đi không hợp lệ. Bạn không trả lời bằng một chữ cái hoặc từ hợp lệ.",
+    "already_guessed": "Bạn đã đoán chữ cái '{letter}' mà đã được đoán trước đó."
+  },
+  "message": {
+    "wrong_word": "Đoán của bạn '{letter}' không phải là từ cần đoán.",
+    "letter_in": "Đoán của bạn {letter} có trong từ",
+    "letter_not_in": "Đoán của bạn {letter} không có trong từ. Bạn còn {tries_left} lần đoán."
+  },
+  "outcome": {
+    "win_word": "Chúc mừng! Bạn đã hoàn thành câu đố Hangman.",
+    "win_board": "Chúc mừng! Bạn đã hoàn thành câu đố Hangman.",
+    "out_of_tries": "Bạn đã hết lần đoán. Bạn đã đoán đúng {pct} phần trăm các ký tự. Từ cần đoán là: {target_word}"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Ozali komona Klondike Solitaire. Limbisi ya yo ezali kobebisa kadi zote kwenda libaya ya ntina.\n\nMikano ya Komona:\n- Libaya ya ntina (F1-F4): Kozua kutoka Asu kwenda Mokonzi na libula\n- Libaya ya mokili (T1-T7): Kozua kasi na kulungana bwa libula (mokili nyonso na mokili ndombe, mokili ndombe na mokili nyonso)\n- Libaya: Zua kadi kwenda libaku\n- Libaku (W): Kadi ya libele ezali na kati ya komona\n\nMikano:\n- 'draw' - Zua kadi kutoka libaya kwenda libaku\n- 'move <source> <destination> [count]' - Bebisa kadi kati ya libaya\n  Nkano: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count ekoki kozala 'all', ekopesa bebisa kadi zote za libele.\n- 'forfeit' - Komona ekoki kozala na kati ya ntina ya sika\n- Nkoma ya libaya: W (libaku), F1-F4 (libaya ya ntina), T1-T7 (libaya ya mokili)\n\nOkoki komona misala mingi na ntango moko kwa kozungisa na virgule:\n  Nkano: 'draw, move W T1, move T2 F1'\n\nMokonzi nde akoki kozala na libaya ya mokili ya libele.\nMisala ekoki kozala na ntango - soki mosala moko ekoki kozala na kati, misala iliyobaki ekoki kozala na kati.\nTika 'forfeit' soki ozali komona ekoki kozala na kati ya ntina."
+  },
+  "format_error": {
+    "no_brackets": "Lolenge ya misala oyo ezali na ntina te. Misala esengeli ezala kati na bilembo (parenthèse).",
+    "no_closing_bracket": "Formate ya action eza na valeur te. Brakeli ya suka ezangi ']'",
+    "empty_command": "Komandi ya libele. Tika 'draw' to 'move <source> <destination> [count]'",
+    "empty_action": "Kosalisa ya libala",
+    "move_needs_args": "Komanda ya kobalusa esengi esika mpe suka. Kosalela: 'move <source> <destination> [count]'",
+    "count_positive": "Komona ya bileti ekoki kozala chanya to 'all'",
+    "count_invalid": "Komona ya bileti ya libanda. Tia numero to 'all'",
+    "unknown_command": "Komanda ya makasi '{cmd}'. Sonda 'draw', 'move <source> <destination> [count]', or 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Misala {n} oyo esalemi liboso ya kokwea.",
+    "failed": "Ekomelo {n} ekoki te: {msg}"
+  },
+  "move_result": {
+    "drew": "Nazua kadi kutoka libaya kwenda libaku.",
+    "cannot_draw": "Tokoki te kobimisa yango, biloko nyonso ezali na kati mpe ezangi.",
+    "invalid_pile": "Nkombo ya liboke ezalí na ndingisa te. Salela W, F1-F4, to T1-T7",
+    "foundation_one_card": "Ekoki kaka komema karte moko na fondasio",
+    "waste_to_foundation_ok": "Karte oyo eutaki na bosɔtɔ ekendeki epai ya fondation F{dst}",
+    "waste_to_foundation_bad": "Ekoki te ko kitisa ba carte ya bosoto na liboke wana ya fondation (fondations)",
+    "tableau_to_foundation_ok": "Lilobaki kwa kadi kuna tableau T{src} ku foundation F{dst}",
+    "tableau_to_foundation_bad": "Ekoki te ko kitisa carte tableau na pile ya fondation wana",
+    "foundation_to_foundation": "Ekoki te kokende na fondation mosusu.",
+    "waste_to_tableau_one_card": "Ekoki kaka ko kitisa carte moko na ba déchets kino tableau",
+    "waste_to_tableau_ok": "Karte oyo ekendeki na tableau T{dst} longwa na biloko ya bosɔtɔ",
+    "waste_to_tableau_bad": "Ekoki te kotia karte ya bosɔtɔ na molɔngɔ́ wana ya tableau (tableau)",
+    "no_face_up": "Ba karte oyo ezali na elongi ya polele te mpo na kotombola yango.",
+    "tableau_to_tableau_ok": "Lilobaki kwa {count} kadi kuna tableau T{src} ku T{dst}",
+    "tableau_to_tableau_bad": "Oweyi kukoba {count} kadi kuna T{src} ku T{dst}",
+    "foundation_to_tableau_one_card": "Ekoki kaka ko kitisa carte moko na fondation kino tableau",
+    "foundation_empty": "Fondation F{src} ezali na eloko te.",
+    "foundation_to_tableau_ok": "Lilobaki kwa kadi kuna foundation F{src} ku tableau T{dst}",
+    "foundation_to_tableau_bad": "Ekoki te kotia carte ya fondation na tableau T{dst}",
+    "to_waste_or_stock": "Ekoki te kotindama na esika ya bosɔtɔ to biloko oyo ezali kuna."
+  },
+  "outcome": {
+    "forfeit": "Lisano ya nsuka: {score} bakarte na bafondasio.",
+    "won": "Matɔndi, obimi na masano ya Klondike Solitaire!",
+    "turn_limit": "Mibu ya mokolo! Ozwaki na mokolo {max_turns}. Alama: {score} kadi kuna foundation."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== Nazali na mposa ya kosunga yo.",
+    "turn": "Mokolo: {turn}/{max_turns}",
+    "stock": "Biloko: {stock} bakarte ya kartɔ",
+    "waste": "Mosolo (W): {waste}",
+    "foundations_header": "Bafondasyo:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau: (Ezali na lokasa 10)",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

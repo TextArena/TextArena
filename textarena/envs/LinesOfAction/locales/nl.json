@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction-localebestand. Vertaal GEEN sleutels (linkerkant). Vertaal alleen waarden (rechterkant).",
+  "_slots": {
+    "{player_id}": "Het nummer van de speler, 0 of 1",
+    "{side}": "Het teken van de speler, O of X",
+    "{other}": "Het teken van de tegenstander, O of X",
+    "{board}": "De ASCII-weergave van het bord; houd ongewijzigd",
+    "{coord}": "Een coördinaat op het bord, zoals b1 of a3",
+    "{from}": "De broncoördinaat van een zet, zoals b1",
+    "{to}": "De bestemmingcoördinaat van een zet, zoals b3"
+  },
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in het spel LinesOfAction.\nUw stukken zijn '{side}', tegenstanderstukken zijn '{other}'.\nZetformaat: `[b1b3]` (van-coördinaat naar-coördinaat). Een geldige zet verplaatst zich horizontaal, verticaal of diagonaal een aantal vierkanten gelijk aan het totale aantal stukken (van elke kleur) in die lijn. U kunt over uw eigen stukken springen, maar niet over tegenstanderstukken; landen op een tegenstander betekent dat u deze neemt. Win wanneer al uw stukken 8-buren-verbonden zijn."
+  },
+  "board": {
+    "current_board": "Bord:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formaat moet e2e4 zijn (van,naar coördinaten).",
+    "no_piece": "Geen {side}-stuk op {coord}.",
+    "identical": "Bron en bestemming zijn identiek.",
+    "not_straight_or_diagonal": "Zet moet recht of diagonaal zijn.",
+    "wrong_distance": "Moet een afstand verplaatsen gelijk aan het aantal stukken in de lijn.",
+    "enemy_blocks": "Tegenstanderstuk blokkeert het pad.",
+    "destination_own": "Bestemming bezet door eigen stuk."
+  },
+  "game_action": {
+    "moved": "Speler {player_id} verplaatste {from} -> {to}",
+    "captured_suffix": "Speler {player_id} verplaatste {from} -> {to} en nam een tegenstander."
+  },
+  "outcome": {
+    "win": "Alle stukken zijn verbonden.",
+    "draw_no_capture": "60 zetten zonder een tegenstander te nemen.",
+    "draw_repetition": "Positie herhaald drie keer."
+  }
+}

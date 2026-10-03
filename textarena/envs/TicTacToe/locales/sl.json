@@ -1,0 +1,27 @@
+{
+  "_comment": "Datoteka s prevodom za TicTacToe. NE PREVADIJ ključev (levo), samo vrednosti (desno).",
+  "_slots": {
+    "{player_id}": "Številka igralca, npr. 0 ali 1",
+    "{symbol}": "Znak igralca, X ali O",
+    "{opponent_symbol}": "Znak nasprotnika, X ali O",
+    "{cell}": "Številka celice na plošči med 0 in 8"
+  },
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v Tic Tac Toe.\nVaš cilj je zmagati trikrat zaporedoma (vodoravno, navpično ali diagonalo) na plošči.\nNa vašo vrsto morate izbrati številko kvadrata (0-8), kamor želite postaviti svoj znak.\nNa primer, '[4]' postavi vaš znak v središču plošče.\nKot Igralec {player_id} boste '{symbol}', medtem ko je vaš nasprotnik '{opponent_symbol}'."
+  },
+  "board": {
+    "current_board": "Trenutna plošča:\n\n{board}\n\nRazpoložljive poteze: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Oddana poteza ne sledi pravilnemu formatu.",
+    "out_of_range": "{cell} ni veljavna celica. Morajo biti med 0 in 8.",
+    "already_occupied": "Celica {cell} je že zasedena."
+  },
+  "game_action": {
+    "placed": "Igralec {player_id} je postavil svoj znak ({symbol}) v celico {cell}."
+  },
+  "outcome": {
+    "win": "Igralec {player_id} je zmagal!",
+    "draw": "Igra je neodločena!"
+  }
+}

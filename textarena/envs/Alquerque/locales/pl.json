@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} ({piece}). Przeciwnik jest ({opp}).\nPodaj ruchy w formacie '[a2 a3]' (z → do).\n- Normalny ruch to jeden krok do przodu na sąsiedni pusty wierzchołek.\n- Zdobycie to skok przez sąsiednią figurę przeciwnika na pusty węzeł za nią.\nKażde zdobycie przynosi {score_per_capture} punktów.\nGra kończy się po {max_moves} ruchach lub gdy gracz nie ma żadnego legalnego ruchu."
+  },
+  "board": {
+    "current_board": "Ruch #{move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "Zły format. Użyj '[a2 a3]'.",
+    "unknown_square": "Nieznany kwadrat.",
+    "not_your_piece": "Źródło nie jest twoją figurą.",
+    "dest_not_empty": "Cel nie jest pusty.",
+    "illegal": "Niedozwolony ruch."
+  },
+  "game_action": {
+    "captured": "Gracz {player_id} zdobył figurę! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Gracz {player_id} nie ma już figur.",
+    "cannot_move": "Gracz {player_id} nie może się ruszyć.",
+    "higher_score": "Wyższy wynik zdobycia.",
+    "move_limit": "Osiągnięto limit ruchów."
+  }
+}

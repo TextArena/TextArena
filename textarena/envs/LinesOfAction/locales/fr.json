@@ -1,0 +1,41 @@
+{
+  "_comment": "Fichier de langue LinesOfAction en français. NE traduisez PAS les clés, seulement les valeurs. Ne traduisez jamais les coordonnées du plateau (a-h, 1-8), les lettres des pièces (O, X), le jeton du format de coup ni la grille ASCII {board}.",
+  "_slots": {
+    "{player_id}": "Le numéro du joueur, 0 ou 1",
+    "{side}": "La lettre de la pièce du joueur, O ou X",
+    "{other}": "La lettre de la pièce de l'adversaire, O ou X",
+    "{board}": "Le rendu ASCII du plateau ; à laisser tel quel",
+    "{coord}": "Une coordonnée du plateau comme b1 ou a3",
+    "{from}": "La coordonnée de départ d'un coup, comme b1",
+    "{to}": "La coordonnée d'arrivée d'un coup, comme b3"
+  },
+
+  "player_prompt": {
+    "intro": "Vous êtes le Joueur {player_id} dans la partie de LinesOfAction.\nVos pièces sont '{side}', les pièces de l'adversaire sont '{other}'.\nFormat du coup : `[b1b3]` (coordonnée de départ, coordonnée d'arrivée). Un coup légal se déplace horizontalement, verticalement ou en diagonale d'un nombre de cases égal au total des pièces (toutes couleurs) sur cette ligne. Vous pouvez sauter par-dessus vos propres pièces, mais pas celles de l'adversaire ; atterrir sur une pièce adverse la capture.  Vous gagnez lorsque toutes vos pièces sont connectées par leurs 8 voisines."
+  },
+
+  "board": {
+    "current_board": "Plateau :\n\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Le format doit être e2e4 (coordonnées de départ, d'arrivée).",
+    "no_piece": "Aucune pièce {side} sur {coord}.",
+    "identical": "Départ et arrivée identiques.",
+    "not_straight_or_diagonal": "Le coup doit être droit ou diagonal.",
+    "wrong_distance": "Vous devez parcourir une distance égale aux pièces sur la ligne.",
+    "enemy_blocks": "Une pièce ennemie bloque le chemin.",
+    "destination_own": "Arrivée occupée par une de vos pièces."
+  },
+
+  "game_action": {
+    "moved": "Le Joueur {player_id} a joué {from} -> {to}",
+    "captured_suffix": "Le Joueur {player_id} a joué {from} -> {to} en capturant une pièce ennemie."
+  },
+
+  "outcome": {
+    "win": "Toutes les pièces connectées.",
+    "draw_no_capture": "60 coups sans capture.",
+    "draw_repetition": "Position répétée trois fois."
+  }
+}

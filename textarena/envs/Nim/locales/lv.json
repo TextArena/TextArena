@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} Nim spēlē.\nJūsu mērķis ir paņemt pēdējo atlikušo objektu.\nKatru reizi, kad jūs izdarāt gājienu, izvēlieties tieši vienu kaudzi un noņemiet no tās vienu vai vairākus objektus.\nIzmantojiet formātu '[kaudze daudzums]', kur kaudze ir kaudzes indekss, un daudzums ir objektu skaits, ko noņemt.\nPiemeņu, '[0 3]' noņem 3 objektus no kaudzes 0."
+  },
+  "state": {
+    "current_pile": "Pašreizējā kaudze:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nav atrasts derīgs gājiena formāts. Izmantojiet '[kaudze daudzums]'.",
+    "correct_format_wrong_fields": "Spēlētājs {player_id}, Nederīga darbība. Kolonna {col} ir ārpus robežām.",
+    "out_of_range": "Kaudzes indekss {pile_index} ir ārpus diapazona.",
+    "non_positive": "Jānoņem vismaz 1 objekts.",
+    "exceeds_pile": "Nevar noņemt {quantity} no kaudzes {pile_index} (ir tikai {pile_count} atlikušie)."
+  },
+  "observation": {
+    "removed_from_piles": "Spēlētājs {player_id} spēlēja [{pile_index} {quantity}], noņemot {quantity} objektu(s) no kaudzes {pile_index}."
+  },
+  "outcome": {
+    "win": "Spēlētājs {player_id} paņēma pēdējo objektu(s)!"
+  }
+}

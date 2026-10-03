@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} v SimpleTak.\nNa doske sa vaše kamene zobrazujú ako '{player_stone}' a kamene vášho súpera sa zobrazujú ako '{opponent_stone}'.\n\nPočas svojej ťahy vyberte jednu prázdnu bunku (podľa jej číslovaného indexu) a umiestnite tam svoj kameň.\nNapríklad, '[12]' umiestňuje váš kameň do bunky 12.\n\nVašim cieľom je vytvoriť nepretržitú cestu z vašich kameňov, ktorá spája dve opačné hrany dosky (zhora-dolu alebo zľava-doprava)."
+  },
+  "invalid_move": {
+    "invalid_move_format": "Neplatný formát ťahu",
+    "cell_out_of_range": "Neplatné číslo bunky {cell_num}. Musí byť medzi 0 a {max_board_num}.",
+    "cell_already_occupied": "Bunka {cell_num} je už obsadená. Vyberte prázdnu bunku."
+  },
+  "board": {
+    "current_state": "Aktuálna doska:\n\n{rendered_board}\nDostupné ťahy: {available_moves}"
+  },
+  "action": {
+    "placement": "Hráč {current_player_id} umiestnil svoju značku ({symbol}) do bunky {cell_num}."
+  },
+  "outcome": {
+    "winner": "Hráč {current_player_id} ('{symbol}') spojil dve opačné hrany!",
+    "draw": "Doska je plná. Je to remíza!"
+  }
+}

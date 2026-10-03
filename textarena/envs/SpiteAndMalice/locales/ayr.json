@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Jumakamaxa Player {player_id} mayni Spite and Malice pukllaypi. Q'umachayniyki ukhamawa: Payoff pile q'alaña.\n\n### Pukllay T'aqi:\n- Q'umachayniyki ukhamawa: Payoff pile q'alaña, kartakunata center piles ukhupi pukllay.\n- Kartakunata kimsa q'illq'ankunamanta pukllay:\n  1. **Makikuna** (qallta turniykikunapi 5 kartakunakama makikunapi).\n  2. **Payoff pile q'umanta**.\n  3. **Discard piles q'umanta**.\n\n### Pukllay Q'awa:\n- Kartakunata center piles ukhupi pukllay, ukha kartakunata **mayni rank ukha** q'umanta (center piles Ace ukhamanta Queen kama; Kings wild ukhanku - kartakunata pukllay ukha kartakunata q'umanta, rank q'awa ukhanchu. Ukha 4 ukhanta King pukllay ukha, King 5 ukhanchu, q'alaña kartakuna 6 ukhanchu).\n- Kartakunata pukllay ukhanchu, **kartakuna q'alaña** discard piles ukhupi turniykikunata q'alaña.\n- Center piles Queen ukhanchu, q'alaña automatikukama.\n- Rank q'awa: A=1, 2=2, ..., 9=9, J=10, Q=11, K wild ukhanku.\n\n### Pukllay Q'umakuna:\n1. **Draw**: Turniykikunapi, kartakunata makikunapi 5 kartakunakama q'alaña. **[draw]** ukhanta q'allay.\n2. **Kartakuna Pukllay**: Kartakunata pukllay, kartakunata center piles ukhanta q'umanta: **[play A♠ 0]** (ukha 'A♠' kartakunata, '0' center piles q'umanta).\n3. **Kartakuna Q'alaña**: Kartakunata pukllay ukhanchu, kartakunata makikunapi discard piles ukhupi turniykikunata q'alaña. **[discard A♠ 1]** ukhanta q'allay (ukha 'A♠' kartakunata, '1' discard piles q'umanta). Payoff pile ukhanta kartakunata q'alañanchu, makikunapi kartakunata q'alañanku.\n\n"
+  },
+  "board": {
+    "current_board": "Taqi P'iqi:\n\n{board}\nAka Aruni: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pilanaka taypi lurata -- ",
+    "pile": "{observation}P'iqi {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- P'iqi {player_id}'s View ---\n",
+    "payoff": "{observation}Payoff P'iqi (Top Card): {top_card}, Payoff P'iqi Length: {payoff_length}\n",
+    "hand": "{observation} Amparampi: {hand} ",
+    "discard": "{observation}Discard P'iqinakaxa: {discard}\n",
+    "empty": "Jan kunani."
+  },
+  "game_message": {
+    "no_cards_left": "Janiw juk'ampi cartas utjxiti. Amtasipxam, aka jakawimpis atipt'apxasma: 1. amparam 2. Qullqi katuqañ tarjetanakan p'iqinchata 3. Jalthapiñ tarjeta ukanakatxa maynitipini. "
+  },
+  "invalid_move": {
+    "wrong_format": "Jani wali wakichata. {player_id} anatirixa janiw mä aski lurawimpix jayskanti, aka taypi paréntesis ukankiwa.",
+    "invalid_play": "Jan wali play. P'iqi {player_id} p'iqiriniraki {card} center p'iqi {index}.",
+    "discard_from_payoff": "Jani chiqapa jaqsuña. {player_id} anatirixa payllawi qutuchata mä tarjeta jaqsuñwa yant'i.",
+    "discard_not_in_hand": "Jani chiqapa jaqsuña. {player_id} anatirixa janiwa amparapanki uka carta jaqsuñ munkataynati.",
+    "wrong_move_type": "Jani wali wakichata. {player_id} anatirixa janiwa aski wakichäwimpi jayskiti."
+  },
+  "game_action": {
+    "you_drew": "Jumax cartas jaqukipt'taxa.",
+    "opponent_drew": "{player_id} anatirix cartanakwa apsuwayi.",
+    "you_played": "Jumaxa {card} t'ikxatasiñäni centro t'ikxatasiñäni {index} ukaxa.",
+    "opponent_played": "Player {player_id} {card} kartakunata center piles {index} ukhanta pukllanki.",
+    "you_discarded": "{card} kartakunata discard piles {index} ukhanta q'alañanki, turniykikunata q'alañanki. Player {next_player_id} q'umakunapi.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "P'iqi {current_player} payoff p'iqinakaxa! P'iqi {current_player} wakiskiraki!",
+    "deadlock_player_0": "Q'ara q'awanakapxi! Jiliri 0 q'awapxi {player_0_payoff} kartanakampi vs Jiliri 1 q'awan {player_1_payoff} kartanakampi.",
+    "deadlock_player_1": "Q'ara q'awanakapxi! Jiliri 1 q'awapxi {player_1_payoff} kartanakampi vs Jiliri 0 q'awan {player_0_payoff} kartanakampi.",
+    "deadlock_tie": "Q'umakunapi q'alañanchu tie! Kimsa player {player_0_payoff} kartakunata q'alañanki. Player {current_player} q'umakunapi default ukhanta."
+  }
+}

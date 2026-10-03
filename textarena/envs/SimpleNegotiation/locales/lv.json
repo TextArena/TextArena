@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} Sarunu Spēlē.\nJums ir daži resursi, un jūsu uzdevums ir veikt tirdzniecību tādā veidā, lai jūsu resursu kopējā vērtība palielinātos.\nResursi un saistītās vērtības, ko jūs pašlaik pārvaldāt, ir:\n\t+ {resource_value_list}\nKatru gājienu jūs varat sarunāties ar savu pretinieku un izteikt tirdzniecības piedāvājumu.\nIzmantojiet šādus speciālus žetonus darbībām:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Piedāvātie resursi -> Pieprasītie resursi]\n  - '[Accept]': Lai pieņemtu ienākošo piedāvājumu.\n  - '[Deny]': Lai noraidītu ienākošo piedāvājumu (noklusējums).\nSpēle ilgst {max_turns} gājienus kopumā."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Spēlētājs mēģināja pieņemt tirdzniecību bez nepieciešamajiem resursiem.",
+    "out_of_range": "Spēlētājs {player_id}, Nederīga darbība. Kolonna {col} ir ārpus robežām.",
+    "already_full": "Spēlētājs {player_id}, Nederīga darbība. Kolonna {col} ir pilna.",
+    "proposing_with_no_resource": "Spēlētājs {player_id} mēģināja izteikt tirdzniecības piedāvājumu bez nepieciešamajiem resursiem.",
+    "incorrect_offer_format": "Spēlētājs {player_id} izteica tirdzniecības piedāvājumu nepareizā formātā.",
+    "no_new_offer": "Spēlētājs {player_id} neizteica jaunu tirdzniecības piedāvājumu."
+  },
+  "offers": {
+    "reject": "Spēlētājs {player_id} noraidīja tirdzniecības piedāvājumu.",
+    "accept": "Spēlētājs {acceptor_id} pieņēma tirdzniecības piedāvājumu no Spēlētāja {proposer_id}.",
+    "proposal": "Spēlētājs {player_id} izteica šādu piedāvājumu Spēlētājam {opponent_id}: Piedāvātie priekšmeti: {offered} -> Pieprasītie priekšmeti: {requested}"
+  },
+  "outcome": {
+    "win": "Spēlētājs {winner_id} uzvarēja, jo viņa inventāra vērtība palielinājās vairāk.",
+    "draw": "Visiem spēlētājiem inventāra vērtības izmaiņas ir vienādas. Neizšķirts."
+  }
+}

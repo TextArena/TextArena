@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola lokalizācijas fails. NEtulkojiet atslēgas (kreisā puse). Tulkojiet tikai vērtības (labā puse).",
+  "_slots": {
+    "{player_id}": "Spēlētāja numurs, piemēram, 0 vai 1",
+    "{trump_suit}": "Kārava zīme (♠♥♦♣) - netulkojiet",
+    "{trump_card}": "Kārava kārts nosaukums, piemēram, '7♠' - netulkojiet",
+    "{card}": "Kārts nosaukums, piemēram, 'A♥' - netulkojiet",
+    "{trump_mark}": "Iepriekš sagatavotais '(KĀRAVA)' marķieris, vai tukšs",
+    "{max_pos}": "Augstākā legālā kārts pozīcija spēlētāja rokā",
+    "{count}": "Kāršu skaits, ko spēlētājs tur",
+    "{pos}": "Kārts pozīcijas numurs rokā",
+    "{points}": "Punktu skaits (kārts vērtība vai uzkrātais rezultāts)",
+    "{hand}": "Iepriekš sagatavotais, daudzrindu saraksts ar rokā esošajām kārtīm",
+    "{trick}": "Iepriekš sagatavotais pašreizējās viltības saraksts",
+    "{scores}": "Iepriekš sagatavotais rezultātu rindiņš, vai gala rezultātu bloks katrai spēlētājam",
+    "{trump_info}": "Iepriekš sagatavotais kāravas zīmes / kāršu skaits kārtīs rindiņš",
+    "{winner}": "Spēlētāja numurs, kurš uzvarēja viltībā vai spēlē",
+    "{tricks}": "Viltību skaits, ko spēlētājs ir uzvarējis",
+    "{deck_count}": "Kāršu skaits, kas palicis kārtīs"
+  },
+  "game": {
+    "start": "Briscola spēle sākta! Kārava zīme: {trump_suit} (Kārava kārts: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Jūs spēlējat Briscola - Spēlētājs {player_id}.\nMērķis: Uzvarēt viltības un savākt visvairāk punktu (120 punkti kopā kārtīs).\nKārts punkti: A=11, 3=10, K=4, Q=3, J=2, citi=0\nKārts spēks: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKāravas kārtis uzvar citu zīmju kārtis neatkarīgi no spēka.\n\nDarbība: '[play X]' kur X ir kārts pozīcija (1-{max_pos}) jūsu rokā\n"
+  },
+  "hand": {
+    "none": "Nav kāršu",
+    "empty": "Nav kāršu rokā",
+    "header": "Jūsu roka:",
+    "card_line": "  {pos}. {card} [{points} punkti]{trump_mark}",
+    "trump_mark": " (KĀRAVA)"
+  },
+  "trick": {
+    "empty": "Šajā viltībā vēl nav spēlēts nekas.",
+    "header": "Pašreizējā viltība:",
+    "line": "  Spēlētājs {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Spēlētājs {player_id}: {points} punkti",
+    "trump_info": "Kārava zīme: {trump_suit}",
+    "trump_info_deck": "Kārava zīme: {trump_suit} | Kāršu skaits kārtīs: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nRezultāti: {scores}\n{trump_info}\n\nSpēlējiet kārti izmantojot [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Izmantojiet [play X] kur X ir kārts pozīcija (1, 2, 3, utt.)",
+    "out_of_range": "Nederīga kārts pozīcija. Jums ir {count} kārtis (1-{count})"
+  },
+  "action": {
+    "played": "Spēlētājs {player_id} spēlēja {card}",
+    "trick_win": "Spēlētājs {winner} uzvarēja viltībā ar {card} un ieguva {points} punktus!"
+  },
+  "outcome": {
+    "head": "Spēle beigusies! Spēlētājs {winner} uzvarēja ar {points} punktiem!\n\nGala rezultāti:\n{scores}",
+    "player_line": "Spēlētājs {player_id}: {points} punkti ({tricks} viltības)\n"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "คุณคือผู้เล่นหมายเลข {player_id} ที่เล่นด้วยสี {colour} ({piece}) ในเกม Othello.\nเป้าหมายของคุณคือการมีชิ้นส่วนสีของคุณมากกว่าคู่แข่งบนกระดานเมื่อจบเกม.\nเมื่อถึงตาของคุณ วางชิ้นส่วนในตำแหน่งที่ทำให้ชิ้นส่วนของคู่แข่งถูกขนาบข้างด้วยชิ้นส่วนใหม่ของคุณและชิ้นส่วนที่มีอยู่ของคุณในทิศทางใดก็ได้ (แนวนอน แนวตั้ง หรือแนวเฉียง) ชิ้นส่วนของคู่แข่งที่ถูกขนาบข้างจะถูกพลิกเป็นสีของคุณ.\nให้การเคลื่อนไหวของคุณในรูปแบบ '[row, col]'."
+  },
+  "board": {
+    "game_board": "กระดานเกม:\n{board}",
+    "valid_moves": "{observation}\nการเคลื่อนไหวที่สามารถทำได้: {moves}",
+    "no_valid_moves_reset": "{observation}\nไม่มีการเคลื่อนไหวที่สามารถทำได้ - คุณอาจต้องข้ามตา",
+    "no_valid_moves_step": "{observation}\nไม่มีการเคลื่อนไหวที่สามารถทำได้ - คุณอาจต้องข้ามตา",
+    "scores_reset": "{observation}\nคะแนนปัจจุบัน - ดำ: {black_count}, ขาว: {white_count}\n",
+    "scores_step": "{observation}\nคะแนน - ดำ: {black_count}, ขาว: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "การเคลื่อนไหวต้องอยู่ในรูปแบบ [row, col].",
+    "illegal": "การเคลื่อนไหวผิดกติกา. การเคลื่อนไหวที่สามารถทำได้: {valid}"
+  },
+  "game_action": {
+    "skipped": "ผู้เล่น {pid} ต้องข้ามตาของตนเอง",
+    "played": "ผู้เล่น {pid} ({piece}) ได้วาง [{r}, {c}] และพลิกชิ้นส่วน {flipped} ชิ้น"
+  },
+  "game_message": {
+    "must_skip": "ผู้เล่น {pid} ({piece}) ไม่มีการเคลื่อนไหวที่สามารถทำได้และต้องข้ามตา"
+  },
+  "outcome": {
+    "black_wins": "ดำชนะ {black_count}-{white_count}.",
+    "white_wins": "ขาวชนะ {white_count}-{black_count}.",
+    "draw": "เสมอ {black_count}-{white_count}."
+  }
+}

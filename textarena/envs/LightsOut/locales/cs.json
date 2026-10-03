@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Vítejte ve hře Lights Out! Máte mřížku světel {size}x{size}.\nVaším cílem je vypnout VŠECHNA světla (zobrazená jako '.').\nKdyž stisknete světlo, přepne se samo i jeho sousedé (nahoru/dolů/doleva/doprava).\nZadejte [řádek sloupec], abyste stiskli světlo (0-indexováno, takže platný rozsah je 0-{max_index}).\nMáte až {max_turns} tahů k vyřešení hádanky.\nLegenda: 'O' = světlo ZAPNUTO, '.' = světlo VYPNUTO"
+  },
+  "board": {
+    "current_state": "Aktuální stav mřížky (Tah {moves_made}, {moves_left} tahů zbývá, {completion}% dokončeno):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Akce musí být ve formátu [řádek sloupec], kde řádek a sloupec jsou celá čísla od 0 do {max_index}.",
+    "out_of_range": "Souřadnice musí být mezi 0 a {max_index}. Zadali jste [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Gratulujeme! Vyřešili jste hádanku v {moves_used} tazích!",
+    "loss": "Hra skončila! Použili jste všechny {max_turns} tahy bez vyřešení hádanky. Konečné dokončení: {completion}%\nKonečný stav:\n{grid}"
+  }
+}

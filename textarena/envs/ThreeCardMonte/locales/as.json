@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte locale file. DO NOT translate keys (left side). Only translate values (right side).",
+  "_slots": {
+    "{line}": "The rendered row of cups",
+    "{step}": "The current shuffle step number",
+    "{steps}": "The total number of shuffle steps",
+    "{i}": "The first cup index involved in a swap",
+    "{j}": "The second cup index involved in a swap",
+    "{prompt}": "The localized prompt fragment appended after the cups",
+    "{max_index}": "The highest valid cup index, i.e. num_cups-1",
+    "{ball_pos}": "The cup index the ball is under"
+  },
+  "player_prompt": {
+    "intro": "কাপগুলি শাফল করার সময় 'X' লুকানো বলটি ট্র্যাক করুন।\nশাফল করার পরে, `[k]` দিয়ে এর অবস্থান অনুমান করুন।"
+  },
+  "game_message": {
+    "ball_starts": "বল আৰম্ভ হয়ঃ {line}",
+    "shuffle": "শ্বেফেল {step}/{steps}: বিনিময় কৰা কাপ {i} আৰু {j}।",
+    "cups": "কাপঃ {line} {prompt}",
+    "guess_now": "(এতিয়া অনুমান কৰক!",
+    "reveal": "(প্ৰকাশঃ {ball_pos}ৰ তলত বল)"
+  },
+  "invalid_move": {
+    "wrong_format": "ভুল ক্রিয়া। `[k]` ব্যবহার করুন।",
+    "out_of_range": "সূচক 0-{max_index} ৰ বাহিৰত।"
+  },
+  "outcome": {
+    "win": "ঠিক আছে, আপুনি বলটো বিচাৰি পালে।",
+    "lose": "ভুল  বলটো কাপৰ তলত আছিল {ball_pos}।"
+  }
+}

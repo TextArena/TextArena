@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Anjeun nyaéta Pamaén {player_id} dina Iterated Prisoner's Dilemma anu ngawengku {num_rounds} puteran.\n\nStruktur Kaulinan:\n- Saméméh ngagawé keputusan anjeun boga {total_conversation_rounds} giliran pikeun komunikasi bébas.\n- Sanggeus éta, dua pamaén sacara simultan milih pikeun cooperasi atawa defect.\n\nMatriks Payoff (tetep unggal puteran):\n- Duaanana Cooperasi ➜ unggal {cooperate_reward}\n- Duaanana Defect ➜ unggal {mutual_defect_reward}\n- Salah sahiji Defect, salah sahiji Cooperasi ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nGumun pikeun Maén:\n- Saat pembicaraan: ketikkeun teks anu anjeun hayang.\n- Saat fase keputusan: asupkeun '[Cooperate]' atawa '[Defect]' (henteu sensitif kasus). Anjeun bisa nambihan teks tambahan saméméh/sanggeus token."
+  },
+  "phases": {
+    "conversation_finished": "Pembicaraan réngsé pikeun puteran {round}. Mangga balas jeung '[Cooperate]' atawa '[Defect]' dina \\boxed{{}}.",
+    "starting_round": "--- Ngawitan Babak {round} ---",
+    "round_summary": "Hasil puteran {round}:\n{outcome}\nPamaén 0 meunang {r0} (total {score_0}), Pamaén 1 meunang {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} meunang {win_score} - {lose_score}.",
+    "draw": "Draw! Kadua pamaén nyetak {s0}.",
+    "round_both_cooperate": "Kadua pamaén gawé bareng.",
+    "round_both_defect": "Duanana pamaén nyimpang.",
+    "round_p0_cooperates_p1_defects": "Pamaén 0 gawé bareng, pamaén 1 murtad.",
+    "round_p0_defects_p1_cooperates": "Pamaén 0 murtad, pamaén 1 gawé bareng."
+  }
+}

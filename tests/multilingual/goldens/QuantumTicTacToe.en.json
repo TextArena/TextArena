@@ -1,0 +1,1662 @@
+{
+  "already_solid": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 1
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Quantum Tic Tac Toe.\nYour symbol is 'O', and your move numbers are always even (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0,1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in Quantum Tic Tac Toe.\nYour symbol is 'X', and your move numbers are always odd (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0,1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 0) and (0, 1).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A        0A              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1,2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0,1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 0) and (0, 1).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A        0A              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[1,2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 1) and (0, 2).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B      1B    \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2,0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1,2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 1) and (0, 2).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B      1B    \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[2,0]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 2) and (0, 0).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 0) is now O.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 1) is now X.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 2) is now O.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n     O         X         O    \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0,4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0,4]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 attempted an invalid move. Reason: One of the cells is already solidified. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 1,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n     O         X         O    \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "bad_indices": {
+    "game_info": {
+      "0": {
+        "invalid_move": true,
+        "reason": "Invalid or duplicate cell indices.",
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Invalid or duplicate cell indices.",
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Quantum Tic Tac Toe.\nYour symbol is 'O', and your move numbers are always even (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[3,3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[3,3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid or duplicate cell indices. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[9,0]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[9,0]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": -1,
+      "1": 1
+    }
+  },
+  "cycle_collapse": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 1
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Quantum Tic Tac Toe.\nYour symbol is 'O', and your move numbers are always even (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0,1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in Quantum Tic Tac Toe.\nYour symbol is 'X', and your move numbers are always odd (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0,1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 0) and (0, 1).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A        0A              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1,2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0,1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 0) and (0, 1).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A        0A              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[1,2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 1) and (0, 2).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B      1B    \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2,0]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1,2]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 1) and (0, 2).",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B      1B    \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[2,0]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 2) and (0, 0).",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 0) is now O.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 1) is now X.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 2) is now O.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n     O         X         O    \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "dependent_collapse": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 4
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 3
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Quantum Tic Tac Toe.\nYour symbol is 'O', and your move numbers are always even (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0,8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in Quantum Tic Tac Toe.\nYour symbol is 'X', and your move numbers are always odd (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0,8]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 0) and (2, 2).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A                        \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        0A    \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0,2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0,8]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 0) and (2, 2).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A                        \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        0A    \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[0,2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 0) and (0, 2).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n 0A / 1B                1B    \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        0A    \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2,5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0,2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 0) and (0, 2).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n 0A / 1B                1B    \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        0A    \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[2,5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 2) and (1, 2).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n 0A / 1B             1B / 2A  \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                        2A    \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        0A    \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2,3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2,5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 2) and (1, 2).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n 0A / 1B             1B / 2A  \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                        2A    \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        0A    \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[2,3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 2) and (1, 0).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n 0A / 1B             1B / 2A  \n                        3B    \n---+----------+----------+---\n   [3]       [4]       [5]    \n    3B                  2A    \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        0A    \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1,8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[2,3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 2) and (1, 0).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n 0A / 1B             1B / 2A  \n                        3B    \n---+----------+----------+---\n   [3]       [4]       [5]    \n    3B                  2A    \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        0A    \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[1,8]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 1) and (2, 2).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n 0A / 1B      4A     1B / 2A  \n                        3B    \n---+----------+----------+---\n   [3]       [4]       [5]    \n    3B                  2A    \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                     0A / 4A  \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1,2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1,8]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 1) and (2, 2).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n 0A / 1B      4A     1B / 2A  \n                        3B    \n---+----------+----------+---\n   [3]       [4]       [5]    \n    3B                  2A    \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                     0A / 4A  \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[1,2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 1) and (0, 2).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 0) is now O.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 1) is now O.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 2) is now X.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Dependent superposition resolved. Cell (1, 2) is now O.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Dependent superposition resolved. Cell (1, 0) is now X.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n     O         O         X    \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n     X                   O    \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0,7]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0,7]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: One of the cells is already solidified. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n     O         O         X    \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n     X                   O    \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[6,8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1,2]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 1) and (0, 2).",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 0) is now O.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 1) is now O.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 2) is now X.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Dependent superposition resolved. Cell (1, 2) is now O.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Dependent superposition resolved. Cell (1, 0) is now X.",
+        "trailing_to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n     O         O         X    \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n     X                   O    \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0,7]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n     O         O         X    \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n     X                   O    \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[6,8]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (2, 0) and (2, 2).",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n     O         O         X    \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n     X                   O    \n---+----------+----------+---\n   [6]       [7]       [8]    \n    6A                  6A    \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "draw_last_cell": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "The game is a draw!",
+        "role": "Player 0",
+        "turn_count": 5
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "The game is a draw!",
+        "role": "Player 1",
+        "turn_count": 4
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Quantum Tic Tac Toe.\nYour symbol is 'O', and your move numbers are always even (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0,1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in Quantum Tic Tac Toe.\nYour symbol is 'X', and your move numbers are always odd (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0,1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 0) and (0, 1).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A        0A              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1,2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0,1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 0) and (0, 1).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A        0A              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[1,2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 1) and (0, 2).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B      1B    \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2,5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1,2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 1) and (0, 2).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B      1B    \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[2,5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 2) and (1, 2).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B   1B / 2A  \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                        2A    \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[5,8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2,5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 2) and (1, 2).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B   1B / 2A  \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                        2A    \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[5,8]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (1, 2) and (2, 2).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B   1B / 2A  \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                     2A / 3B  \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        3B    \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[7,8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[5,8]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (1, 2) and (2, 2).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B   1B / 2A  \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                     2A / 3B  \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        3B    \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[7,8]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (2, 1) and (2, 2).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B   1B / 2A  \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                     2A / 3B  \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n              4A     3B / 4A  \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[6,7]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[7,8]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (2, 1) and (2, 2).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B   1B / 2A  \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                     2A / 3B  \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n              4A     3B / 4A  \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[6,7]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (2, 0) and (2, 1).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B   1B / 2A  \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                     2A / 3B  \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n    5B     4A / 5B   3B / 4A  \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[3,6]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[6,7]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (2, 0) and (2, 1).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B   1B / 2A  \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                     2A / 3B  \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n    5B     4A / 5B   3B / 4A  \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[3,6]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (1, 0) and (2, 0).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B   1B / 2A  \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n    6A               2A / 3B  \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n 5B / 6A   4A / 5B   3B / 4A  \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[3,4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[3,6]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (1, 0) and (2, 0).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B   1B / 2A  \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n    6A               2A / 3B  \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n 5B / 6A   4A / 5B   3B / 4A  \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[3,4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (1, 0) and (1, 1).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    0A     0A / 1B   1B / 2A  \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n 6A / 7B      7B     2A / 3B  \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n 5B / 6A   4A / 5B   3B / 4A  \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0,4]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0,4]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 0) and (1, 1).",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 0) is now O.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 1) is now X.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 2) is now O.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (1, 2) is now X.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (2, 1) is now O.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (2, 0) is now X.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (1, 0) is now O.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (1, 1) is now X.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition for last cell resolved. Cell (2, 2) is now X.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n     O         X         O    \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n     O         X         X    \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n     X         O         X    \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": 0,
+      "1": 0
+    }
+  },
+  "win": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 wins with solidified marks!",
+        "role": "Player 0",
+        "turn_count": 4
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 wins with solidified marks!",
+        "role": "Player 1",
+        "turn_count": 3
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Quantum Tic Tac Toe.\nYour symbol is 'O', and your move numbers are always even (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1,6]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in Quantum Tic Tac Toe.\nYour symbol is 'X', and your move numbers are always odd (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[1,6]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 1) and (2, 0).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n              0A              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n    0A                        \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1,6]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[1,6]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 1) and (2, 0).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n              0A              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n    0A                        \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[1,6]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 1) and (2, 0).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 1) is now O.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (2, 0) is now X.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n               O              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n     X                        \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2,8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1,6]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 1) and (2, 0).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 1) is now O.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (2, 0) is now X.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n               O              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n     X                        \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[2,8]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 2) and (2, 2).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                        2A    \n               O              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        2A    \n     X                        \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0,2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2,8]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 2) and (2, 2).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                        2A    \n               O              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        2A    \n     X                        \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[0,2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 0) and (0, 2).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    3B               2A / 3B  \n               O              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        2A    \n     X                        \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0,4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[0,2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 0) and (0, 2).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n    3B               2A / 3B  \n               O              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        2A    \n     X                        \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[0,4]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 0) and (1, 1).",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n 3B / 4A             2A / 3B  \n               O              \n---+----------+----------+---\n   [3]       [4]       [5]    \n              4A              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        2A    \n     X                        \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[0,7]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[0,4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (0, 0) and (1, 1).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n 3B / 4A             2A / 3B  \n               O              \n---+----------+----------+---\n   [3]       [4]       [5]    \n              4A              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                        2A    \n     X                        \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[0,7]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 placed their symbol in a superposition between cells (0, 0) and (2, 1).",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n 3B / 4A             2A / 3B  \n    5B         O              \n---+----------+----------+---\n   [3]       [4]       [5]    \n              4A              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n              5B        2A    \n     X                        \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[4,8]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[4,8]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 placed their symbol in a superposition between cells (1, 1) and (2, 2).",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 2) is now O.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (1, 1) is now O.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Superposition resolved. Cell (0, 0) is now O.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Dependent superposition resolved. Cell (2, 1) is now X.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n     O         O         O    \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n               O              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n     X         X              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": 1,
+      "1": -1
+    }
+  },
+  "wrong_format": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 0
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in Quantum Tic Tac Toe.\nYour symbol is 'O', and your move numbers are always even (e.g., X1, X3 or O2, O4).\n\nGoal: Win by forming a line of three classical marks (solidified from superpositions).\n\nHow to Play:\n- On each turn, place a spooky mark in two different empty squares using the format '[a,b]'.\n- These marks are entangled, and labeled like 'X1 / X1' or 'O4 / O4'.\n- You cannot place spooky marks in a square that has already collapsed (solidified).\n\nCollapse Rule:\n- If your move creates a cycle in the entanglement graph, it collapses automatically.\n- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n- Any dependent spooky marks also collapse.\n\nVictory:\n- The game ends when a player has three classical marks in a row.\n- If both players get a line during the same collapse, the one with the lower max move number wins.\n\nExample move: '[0,4]' places a spooky mark in cells 0 and 4.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "hello",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "hello",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid format. Use '[a,b]'. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "trailing_to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "from": -1,
+        "text": "Quantum Tic Tac Toe Board:\n\n\n\n   [0]       [1]       [2]    \n                              \n                              \n---+----------+----------+---\n   [3]       [4]       [5]    \n                              \n                              \n---+----------+----------+---\n   [6]       [7]       [8]    \n                              \n                              \n\n\nSubmit your move as '[a,b]' to place a quantum mark in two locations.",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  }
+}

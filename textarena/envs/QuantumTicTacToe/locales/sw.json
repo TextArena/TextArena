@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Tic Tac Toe ya Kuantamu.\nAlama yako ni '{symbol}', na nambari za hatua zako huwa {parity} kila wakati (kwa mfano, X1, X3 au O2, O4).\n\nLengo: Shinda kwa kuunda mstari wa alama tatu za kitamaduni (zilizokamilika kutoka kwa hali ya juu).\n\nJinsi ya Kucheza:\n- Katika kila zamu, weka alama ya kutisha katika miraba miwili tofauti tupu kwa kutumia muundo '[a,b]'.\n- Alama hizi zimeunganishwa, na zimepewa lebo kama 'X1 / X1' au 'O4 / O4'.\n- Huwezi kuweka alama za kutisha katika mraba ambao tayari umekamilika (umekamilika).\n\nKanuni ya Kukamilika:\n- Ikiwa hatua yako huunda mzunguko katika grafu ya kuunganisha, inakamilika kiotomatiki.\n- Kila alama ya kutisha katika mzunguko inabadilika kuwa alama ya kitamaduni katika moja ya nafasi zake mbili.\n- Alama zozote za kutisha zinazotegemea pia hukamilika.\n\nUshindi:\n- Mchezo unamalizika wakati mchezaji ana alama tatu za kitamaduni mfululizo.\n- Ikiwa wachezaji wote wawili wanapata mstari wakati wa kukamilika kwa wakati mmoja, yule aliye na nambari ya chini ya juu ya hatua ndiye anayeshinda.\n\nMfano wa hatua: '[0,4]' huweka alama ya kutisha katika seli 0 na 4."
+  },
+  "board": {
+    "current_board": "Ubao wa Tic Tac Toe ya Kuantamu:\n\n{board}\n\nWasilisha hatua yako kama '[a,b]' ili kuweka alama ya kuantamu katika maeneo mawili."
+  },
+  "invalid_move": {
+    "wrong_format": "Muundo usio sahihi. Tumia '[a,b]'.",
+    "invalid_cells": "Vitengo vya seli visivyo sahihi au vinavyojirudia.",
+    "already_solidified": "Moja ya seli tayari imekamilika."
+  },
+  "game_action": {
+    "placed": "Mchezaji {player_id} aliweka alama yake katika hali ya juu kati ya seli {pos_a} na {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Hali ya juu inayotegemea imekamilika. Seli ({r}, {c}) sasa ni {symbol}.",
+    "last_cell_resolved": "Hali ya juu ya seli ya mwisho imekamilika. Seli ({r}, {c}) sasa ni {symbol}.",
+    "superposition_resolved": "Hali ya juu imekamilika. Seli ({r}, {c}) sasa ni {symbol}."
+  },
+  "outcome": {
+    "win": "Mchezaji {player_id} anashinda kwa alama zilizokamilika!",
+    "draw": "Mchezo ni sare!"
+  }
+}
