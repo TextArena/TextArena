@@ -466,6 +466,10 @@ register_with_versions(id="SecretMafia-v0", entry_point="textarena.envs.SecretMa
 # WinAsMuchAsYouCanEnv [4 Players]
 register_with_versions(id="WinAsMuchAsYouCan-v0", entry_point="textarena.envs.WinAsMuchAsYouCan.env:WinAsMuchAsYouCanEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
 
+# NegotiateToSurvive [5 Players] - Resource trading survival game
+register_with_versions(id="NegotiateToSurvive-v0-distributive", entry_point="textarena.envs.NegotiateToSurvive.env:NegotiateToSurviveEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": DEFAULT_WRAPPERS}, game_variant="distributive", max_rounds=100, starting_coins=50)
+register_with_versions(id="NegotiateToSurvive-v0-integrative",  entry_point="textarena.envs.NegotiateToSurvive.env:NegotiateToSurviveEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": DEFAULT_WRAPPERS}, game_variant="integrative", max_rounds=100, starting_coins=50)
+
 # # Negotiation (2-15 players)
 # register(id="Negotiation-v0", entry_point="textarena.envs.Negotiation.env:NegotiationEnv", default_wrappers=[LLMObservationWrapper], turn_multiple=8)
 
