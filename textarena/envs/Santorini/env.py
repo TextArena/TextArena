@@ -96,7 +96,7 @@ class SantoriniBaseFixedWorkerEnv(ta.Env):
             prompt += self.t("player_prompt", "board_state", board=create_board_str(self.board), _pid=player_id)
 
         if self.show_valid:
-            prompt += self.t("player_prompt", "valid_moves", valid_moves=game_state['valid_moves'], _pid=player_id)
+            prompt += self.t("player_prompt", "valid_moves", valid_moves=self._get_valid_moves(player_id), _pid=player_id)
 
         return prompt
 
